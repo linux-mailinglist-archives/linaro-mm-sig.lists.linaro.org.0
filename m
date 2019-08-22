@@ -2,72 +2,108 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3DC699472
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Aug 2019 15:05:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AD6FE99586
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Aug 2019 15:54:32 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7C75A61778
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Aug 2019 13:05:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E37D860956
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Aug 2019 13:54:31 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 709F361836; Thu, 22 Aug 2019 13:05:54 +0000 (UTC)
+	id D395660AFD; Thu, 22 Aug 2019 13:54:31 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on
 	ip-10-150-125-211.ec2.internal
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_NONE autolearn=disabled version=3.4.2
+	RCVD_IN_DNSWL_NONE,SPF_HELO_PASS autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CC2F76186A;
-	Thu, 22 Aug 2019 13:04:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E3E3A60961;
+	Thu, 22 Aug 2019 13:54:02 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 4EE646186A
- for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Aug 2019 13:04:24 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 49734608ED
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Aug 2019 13:54:00 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 4099161875; Thu, 22 Aug 2019 13:04:24 +0000 (UTC)
-Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com
- [209.85.208.68])
- by lists.linaro.org (Postfix) with ESMTPS id 1810A6187F
- for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Aug 2019 13:02:56 +0000 (UTC)
-Received: by mail-ed1-f68.google.com with SMTP id p28so7858507edi.3
- for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Aug 2019 06:02:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
- :references:mime-version:content-disposition
- :content-transfer-encoding:in-reply-to:user-agent;
- bh=bEFie1V4YsBEnCBAlHqq7MFKWHgQ85EhvEaFWOkyQHo=;
- b=dx78Efb6REKTPPSpgSG3SDcgmWiAXSWgzvp6eUYX3pJv7byF0AZJMBrst13t3D8c1E
- RMz84zEOOXl/EsFWpXoC2h8RcOTWTlP37LLu0Pyq4yUSrEDcSqGL5VaheiL4sqBAWR1K
- bqSnIiueIMrkStEl56d4SWB5sE9xyPM9Jo9c9sN/p9CMvAoomTOKa8y10goEVtsT4J9W
- k8jt3FxtzCSqnwHuhu9ZeY/3SUzvfWHHo95XqOxraTFFNyY8sWsqnxG/J2G1ZYFL2RQq
- QpjkU7S5kBJc+IPFrmRD06URMcHdsWrc1+5ocfhj+ZliwCgdSG0bTgyIOduHOZyqSDXG
- evnA==
-X-Gm-Message-State: APjAAAUtIBK8ztwJyO79/jg1Q6sGACZg8u3MNZ8cqxNyIyFmUlYVIXhj
- 3fepIGreGdQEkj+mUXDD2rS8IQ==
-X-Google-Smtp-Source: APXvYqzVizM+IhVvZ/KDzjJkM0D3bX0ibIr5zP64xbY4bQ0J9bsHBAipHCk0eVnBmhuRecD8ZiCGtQ==
-X-Received: by 2002:aa7:d58d:: with SMTP id r13mr41129002edq.118.1566478975166; 
- Thu, 22 Aug 2019 06:02:55 -0700 (PDT)
-Received: from phenom.ffwll.local (212-51-149-96.fiber7.init7.net.
- [212.51.149.96])
- by smtp.gmail.com with ESMTPSA id b3sm2273200ejl.55.2019.08.22.06.02.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 22 Aug 2019 06:02:54 -0700 (PDT)
-Date: Thu, 22 Aug 2019 15:02:51 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: christian.koenig@amd.com
-Message-ID: <20190822130251.GT11147@phenom.ffwll.local>
+ id 305F760961; Thu, 22 Aug 2019 13:54:00 +0000 (UTC)
+Received: from NAM05-CO1-obe.outbound.protection.outlook.com
+ (mail-eopbgr720047.outbound.protection.outlook.com [40.107.72.47])
+ by lists.linaro.org (Postfix) with ESMTPS id C013A608ED
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Aug 2019 13:53:58 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=oW5of8pMrv0YKiEkhdejci1JR9gsvj6TYEPtEYXMO7IP64rplz9RTqdHTQEf4ajpEobmtemxu06p//++F16r1+G/SlI4Oxtf4oj7KXsDZnAu0OT782P3Zg8RP3+STwc1GD/tSbhTaK6HBmQNXA4YNJ/vITvryGFgrFhfdc1EtSwsuUt93ocDeF33MWvIVMQ2tSxnIVuXHvs1W14x2FWycJLuqUOliAl08QmIbnMhyI1z1n+JxUHF1gCPPLhg7/4WhcBowDzRYYtFxA4u8EXRcmWmFiRE/yl53mFh+9qKQJid6Y4TqoMsczOumowAaYOpUxfxMBiA85exnh+vDeus/g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xBhenMMRKDdN4yqfS+nOyyP8YygNMDkgSt/Fg1vdA80=;
+ b=QQi2gu1YTEY1w33jDRbNgqJGxNx6ao7NK6tMv4kA/VVoFpKewdaHBi+poQj3slLd+3ndLn7PEJMB5u04zxWtR7pTV4uNpuVY2YzHIQu1PeWNABRB1ZFKN1c7HzAEVLg1udPpKU7nSl734vvIcmlvMMxocXUOCgPVl5nx48c3y6gsYG2twzEtl60V+x7F6GwGWvyuTipf+wme1P5esZwu5EiOBIfpnl2OIuJcS5BT/uipytnFMYFPtBKyQPAs7iD7NUMp+zIgzn9jxEEpUkRtQYFiPn3+dZq/DfiJN63GeiAfQjcJgck3KxbaMlcAm0uKooWUoqS14D8OBScXezudGA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+Received: from DM5PR12MB1705.namprd12.prod.outlook.com (10.175.88.22) by
+ DM5PR12MB1849.namprd12.prod.outlook.com (10.175.85.151) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2178.18; Thu, 22 Aug 2019 13:53:56 +0000
+Received: from DM5PR12MB1705.namprd12.prod.outlook.com
+ ([fe80::a129:1f1a:52a9:4ac3]) by DM5PR12MB1705.namprd12.prod.outlook.com
+ ([fe80::a129:1f1a:52a9:4ac3%5]) with mapi id 15.20.2178.020; Thu, 22 Aug 2019
+ 13:53:56 +0000
+From: "Koenig, Christian" <Christian.Koenig@amd.com>
+To: Daniel Vetter <daniel@ffwll.ch>
+Thread-Topic: [PATCH 07/10] dma-buf/resv: add new fences container
+ implementation
+Thread-Index: AQHVWOnsnK9vb7rQEEyLLTQVrv3By6cHMDiA
+Date: Thu, 22 Aug 2019 13:53:56 +0000
+Message-ID: <63a0f99f-f90c-4697-dc7f-be7d596b73e7@amd.com>
 References: <20190821123147.110736-1-christian.koenig@amd.com>
  <20190821123147.110736-8-christian.koenig@amd.com>
  <20190821160454.GN11147@phenom.ffwll.local>
  <c1ff88ef-0e49-fd7a-6317-de432a04ddf2@gmail.com>
+ <20190822130251.GT11147@phenom.ffwll.local>
+In-Reply-To: <20190822130251.GT11147@phenom.ffwll.local>
+Accept-Language: de-DE, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
+x-originating-ip: [2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
+x-clientproxiedby: PR0P264CA0101.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:100:19::17) To DM5PR12MB1705.namprd12.prod.outlook.com
+ (2603:10b6:3:10c::22)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: d7d765a3-f7b0-491c-3fc5-08d727082ca5
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+ RULEID:(2390118)(7020095)(4652040)(8989299)(5600166)(711020)(4605104)(1401327)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7193020);
+ SRVR:DM5PR12MB1849; 
+x-ms-traffictypediagnostic: DM5PR12MB1849:
+x-microsoft-antispam-prvs: <DM5PR12MB1849B9835F93800D5D24BFD383A50@DM5PR12MB1849.namprd12.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:7219;
+x-forefront-prvs: 01371B902F
+x-forefront-antispam-report: SFV:NSPM;
+ SFS:(10009020)(4636009)(136003)(376002)(39860400002)(366004)(346002)(396003)(189003)(199004)(8936002)(316002)(4326008)(8676002)(52116002)(81156014)(81166006)(2616005)(186003)(66574012)(7736002)(14454004)(386003)(6506007)(305945005)(446003)(102836004)(11346002)(476003)(86362001)(25786009)(2906002)(478600001)(99286004)(36756003)(65956001)(5660300002)(31696002)(31686004)(65806001)(53936002)(256004)(6116002)(6246003)(46003)(486006)(6512007)(64756008)(66556008)(6486002)(6436002)(229853002)(6916009)(76176011)(66446008)(66946007)(66476007)(54906003)(58126008)(71200400001)(71190400001);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:DM5PR12MB1849;
+ H:DM5PR12MB1705.namprd12.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: amd.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: oNASpIz4uTU5cQpebnhYekyj6Rl9EBDL5t75nskDWkkJA6JiA81Y0yynZW3yt2QzCv38NOvzdJhIT5YdnW/aoN9nnEsfsmwuAH6ixsdqph40Koy7d2O2OBhQKw8BCMteCQFInP7l2dLrXOolbHAee/T9oKn9bAZ3YLhb8SMdmh1E7hDBzuGY9+933WkLxeMUmfgHDF+hpDizJiRRS0vLhEbztWbs9BLs47HHF4VUxn/BP3gOVR/NdciDVmHOXKdmTBpxgAw4FCcldFdf5JqGfODxswo6a2OFlJ1OlPO9xblEd/BJa1kaJgg7jXGpTOpct5q00LLy/8LZZCxgh8pp4guaLQNJvLqWFjednGTWSeI7YUlGFwg2wsH5sFHYENh7nU4Qv2sYKYr8y4LMIwQimVyXl4GySozLuPSbh/LbBgE=
+x-ms-exchange-transport-forked: True
+Content-ID: <FF507413CA0754459994DA6C9D03564E@namprd12.prod.outlook.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <c1ff88ef-0e49-fd7a-6317-de432a04ddf2@gmail.com>
-X-Operating-System: Linux phenom 5.2.0-2-amd64 
-User-Agent: Mutt/1.10.1 (2018-07-13)
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d7d765a3-f7b0-491c-3fc5-08d727082ca5
+X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Aug 2019 13:53:56.1472 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: LGKFeKRXV/gzP4u5HTn0OOK0Acub/geZxX+WSjiU1sGpCGcTcV35imLxThtocG5/
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR12MB1849
 X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- Daniel Vetter <daniel@ffwll.ch>, linux-media@vger.kernel.org
+Cc: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+ "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>,
+ "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>
 Subject: Re: [Linaro-mm-sig] [PATCH 07/10] dma-buf/resv: add new fences
  container implementation
 X-BeenThere: linaro-mm-sig@lists.linaro.org
@@ -88,30 +124,33 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gVGh1LCBBdWcgMjIsIDIwMTkgYXQgMTA6MjM6MjlBTSArMDIwMCwgQ2hyaXN0aWFuIEvDtm5p
-ZyB3cm90ZToKPiBBbSAyMS4wOC4xOSB1bSAxODowNCBzY2hyaWViIERhbmllbCBWZXR0ZXI6Cj4g
-PiBPbiBXZWQsIEF1ZyAyMSwgMjAxOSBhdCAwMjozMTo0NFBNICswMjAwLCBDaHJpc3RpYW4gS8O2
-bmlnIHdyb3RlOgo+ID4gPiBbU05JUF0KPiA+ID4gKwkvKiBUcnkgdG8gZHJvcCB0aGUgbGFzdCBy
-ZWZlcmVuY2UgKi8KPiA+ID4gKwlpZiAoIWRtYV9mZW5jZV9hcnJheV9yZWN5Y2xlKHN0YWdlZCkp
-Cj4gPiBXaXRob3V0IGFuIHJjdSBiYXJyaWVyIGhlcmUgeW91J3JlIG5vdCBzeW5jaW5nIHRvIG5l
-dyBjbGllbnRzIGF0IGFsbC4KPiA+IEkgZG9uJ3QgdGhpbmsgdGhpcyB3b3JrcywgYW5kIEkgZXhw
-ZWN0IHRoYXQgb25jZSB5b3UndmUgcmVhZGRlZCBhbGwgdGhlCj4gPiBiYXJyaWVycyBhbmQgcmV0
-cnkgbG9vcHMgd2UncmUgYmFjayB0byBzZXFsb2Nrcy4KPiAKPiBUaGUga2V5IGRpZmZlcmVuY2Ug
-aXMgdGhhdCBSQ1UgdXNlcnMgbm93IHVzZSBkbWFfZmVuY2VfZ2V0X3JjdV9zYWZlKCkgdG8KPiBn
-cmFiIGEgcmVmZXJlbmNlIHRvIHRoZSBjdXJyZW50IHNldCBvZiBmZW5jZXMuCj4gCj4gSW4gb3Ro
+QW0gMjIuMDguMTkgdW0gMTU6MDIgc2NocmllYiBEYW5pZWwgVmV0dGVyOg0KPiBPbiBUaHUsIEF1
+ZyAyMiwgMjAxOSBhdCAxMDoyMzoyOUFNICswMjAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0K
+Pj4gQW0gMjEuMDguMTkgdW0gMTg6MDQgc2NocmllYiBEYW5pZWwgVmV0dGVyOg0KPj4+IE9uIFdl
+ZCwgQXVnIDIxLCAyMDE5IGF0IDAyOjMxOjQ0UE0gKzAyMDAsIENocmlzdGlhbiBLw7ZuaWcgd3Jv
+dGU6DQo+Pj4+IFtTTklQXQ0KPj4+PiArCS8qIFRyeSB0byBkcm9wIHRoZSBsYXN0IHJlZmVyZW5j
+ZSAqLw0KPj4+PiArCWlmICghZG1hX2ZlbmNlX2FycmF5X3JlY3ljbGUoc3RhZ2VkKSkNCj4+PiBX
+aXRob3V0IGFuIHJjdSBiYXJyaWVyIGhlcmUgeW91J3JlIG5vdCBzeW5jaW5nIHRvIG5ldyBjbGll
+bnRzIGF0IGFsbC4NCj4+PiBJIGRvbid0IHRoaW5rIHRoaXMgd29ya3MsIGFuZCBJIGV4cGVjdCB0
+aGF0IG9uY2UgeW91J3ZlIHJlYWRkZWQgYWxsIHRoZQ0KPj4+IGJhcnJpZXJzIGFuZCByZXRyeSBs
+b29wcyB3ZSdyZSBiYWNrIHRvIHNlcWxvY2tzLg0KPj4gVGhlIGtleSBkaWZmZXJlbmNlIGlzIHRo
+YXQgUkNVIHVzZXJzIG5vdyB1c2UgZG1hX2ZlbmNlX2dldF9yY3Vfc2FmZSgpIHRvDQo+PiBncmFi
+IGEgcmVmZXJlbmNlIHRvIHRoZSBjdXJyZW50IHNldCBvZiBmZW5jZXMuDQo+Pg0KPj4gSW4gb3Ro
 ZXIgd29yZHMgdGhlIHdob2xlIGFycmF5IGlzIHJlZmVyZW5jZSBjb3VudGVkIGFuZCBSQ1UgcHJv
-dGVjdGVkCj4gaW5zdGVhZCBvZiBlYWNoIGluZGl2aWR1YWwgZW50cnkgaW4gdGhlIGFycmF5Lgo+
-IAo+IFRoaXMgd2F5IHlvdSBkb24ndCBuZWVkIHRoZSBzZXF1ZW5jZSBjb3VudCBhbnkgbW9yZSBi
-ZWNhdXNlIHlvdSBncmFiIGEKPiByZWZlcmVuY2UgdG8gYWxsIG9mIHRoZW0gYXQgb25jZSBhbmQg
-dGhlbiBjYW4gYmUgc3VyZSB0aGF0IHRoZXkgZG9uJ3QKPiBjaGFuZ2UuCgpIbSB5ZWFoIC4uLiBJ
-IHRoaW5rIHRoZXJlJ3Mgc3RpbGwgc29tZSB1c2VycyBsZWZ0IHRoYXQgaGF2ZSBhbiBvcGVuLWNv
-ZGVkCnJjdSBzZWN0aW9uIHRob3VnaC4gQnV0IHllYWggaWYgeW91IGNhbiBjb25jaW5jZSBDaHJp
-cyB0aGF0IHRoaXMgaXMgb2sgSQp0aGluayBpdCBtYWtlcyBzZW5zZSBhcyBhbiBvdmVyYWxsIGNs
-ZWFudXAgb2YgdGhlIGhhbmQtcm9sbGVkIGZlbmNlcyBhcnJheQp3ZSBoYXZlIGZvciBzaGFyZWQg
-ZmVuY2VzLiBCdXQgSSdkIHJlYWxseSBsaWtlIHRvIHVudGFuZ2xlIGl0IGZyb20gdGhlCmVudGly
-ZSBzZW1hbnRpY3MgZGlzY3Vzc2lvbiwgc2luY2UgdGhhdCBzZWVtcyBlbnRpcmVseSB1bnJlbGF0
-ZWQuCi1EYW5pZWwKLS0gCkRhbmllbCBWZXR0ZXIKU29mdHdhcmUgRW5naW5lZXIsIEludGVsIENv
-cnBvcmF0aW9uCmh0dHA6Ly9ibG9nLmZmd2xsLmNoCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0CkxpbmFyby1t
-bS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9s
-aXN0aW5mby9saW5hcm8tbW0tc2lnCg==
+dGVjdGVkDQo+PiBpbnN0ZWFkIG9mIGVhY2ggaW5kaXZpZHVhbCBlbnRyeSBpbiB0aGUgYXJyYXku
+DQo+Pg0KPj4gVGhpcyB3YXkgeW91IGRvbid0IG5lZWQgdGhlIHNlcXVlbmNlIGNvdW50IGFueSBt
+b3JlIGJlY2F1c2UgeW91IGdyYWIgYQ0KPj4gcmVmZXJlbmNlIHRvIGFsbCBvZiB0aGVtIGF0IG9u
+Y2UgYW5kIHRoZW4gY2FuIGJlIHN1cmUgdGhhdCB0aGV5IGRvbid0DQo+PiBjaGFuZ2UuDQo+IEht
+IHllYWggLi4uIEkgdGhpbmsgdGhlcmUncyBzdGlsbCBzb21lIHVzZXJzIGxlZnQgdGhhdCBoYXZl
+IGFuIG9wZW4tY29kZWQNCj4gcmN1IHNlY3Rpb24gdGhvdWdoLiBCdXQgeWVhaCBpZiB5b3UgY2Fu
+IGNvbmNpbmNlIENocmlzIHRoYXQgdGhpcyBpcyBvayBJDQo+IHRoaW5rIGl0IG1ha2VzIHNlbnNl
+IGFzIGFuIG92ZXJhbGwgY2xlYW51cCBvZiB0aGUgaGFuZC1yb2xsZWQgZmVuY2VzIGFycmF5DQo+
+IHdlIGhhdmUgZm9yIHNoYXJlZCBmZW5jZXMuIEJ1dCBJJ2QgcmVhbGx5IGxpa2UgdG8gdW50YW5n
+bGUgaXQgZnJvbSB0aGUNCj4gZW50aXJlIHNlbWFudGljcyBkaXNjdXNzaW9uLCBzaW5jZSB0aGF0
+IHNlZW1zIGVudGlyZWx5IHVucmVsYXRlZC4NCg0KWWVhaCwgYWdyZWUuIFRvIHVudGFuZ2xlIHRo
+YXQgaXMgYSByZWFsbHkgZ29vZCBpZGVhLg0KDQpHb2luZyB0byBzZW5kIG91dCB0aGUgZG1hX2Zl
+bmNlX2FycmF5IGFzIGEgcmVwbGFjZW1lbnQgZm9yIHNoYXJlZCBmZW5jZXMgDQpzZXBhcmF0ZWx5
+IGZpcnN0Lg0KDQpDaHJpc3RpYW4uDQoNCj4gLURhbmllbA0KDQpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApM
+aW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21h
+aWxtYW4vbGlzdGluZm8vbGluYXJvLW1tLXNpZwo=
