@@ -2,81 +2,51 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 248D9E8F55
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Oct 2019 19:32:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0359FE9E44
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Oct 2019 16:03:31 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 427946196E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Oct 2019 18:32:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BC923618C2
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Oct 2019 15:03:29 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 35F746196F; Tue, 29 Oct 2019 18:32:29 +0000 (UTC)
+	id B06DF6196E; Wed, 30 Oct 2019 15:03:29 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.2 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SUBJ_OBFU_PUNCT_FEW,
-	SUBJ_OBFU_PUNCT_MANY,UNPARSEABLE_RELAY autolearn=disabled version=3.4.2
+X-Spam-Status: No, score=-7.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
+	RCVD_IN_DNSWL_HI,SPF_HELO_NONE autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CF0666196C;
-	Tue, 29 Oct 2019 18:32:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C2CA9618EE;
+	Wed, 30 Oct 2019 15:03:04 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 61CCC61967
- for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Oct 2019 18:32:02 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 4EAE860BEA
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 30 Oct 2019 15:03:02 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 4DD936196C; Tue, 29 Oct 2019 18:32:02 +0000 (UTC)
-Received: from aserp2120.oracle.com (aserp2120.oracle.com [141.146.126.78])
- by lists.linaro.org (Postfix) with ESMTPS id 5056E6196B
- for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Oct 2019 18:32:01 +0000 (UTC)
-Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
- by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x9TIOwfb171648;
- Tue, 29 Oct 2019 18:31:55 GMT
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
- by aserp2120.oracle.com with ESMTP id 2vve3qb4ae-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 29 Oct 2019 18:31:54 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
- by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x9TISme2036943;
- Tue, 29 Oct 2019 18:29:54 GMT
-Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
- by aserp3020.oracle.com with ESMTP id 2vxpfdh4tj-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 29 Oct 2019 18:29:54 +0000
-Received: from abhmp0018.oracle.com (abhmp0018.oracle.com [141.146.116.24])
- by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x9TITq3g015039;
- Tue, 29 Oct 2019 18:29:52 GMT
-Received: from mwanda (/41.57.98.10) by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Tue, 29 Oct 2019 11:29:51 -0700
-Date: Tue, 29 Oct 2019 21:29:43 +0300
-From: Dan Carpenter <dan.carpenter@oracle.com>
-To: Sumit Semwal <sumit.semwal@linaro.org>,
- John Stultz <john.stultz@linaro.org>
-Message-ID: <20191029182943.GD17569@mwanda>
+ id 38104618EE; Wed, 30 Oct 2019 15:03:02 +0000 (UTC)
+Received: from youngberry.canonical.com (youngberry.canonical.com
+ [91.189.89.112])
+ by lists.linaro.org (Postfix) with ESMTPS id 44DD160BEA
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 30 Oct 2019 15:03:01 +0000 (UTC)
+Received: from 1.general.cking.uk.vpn ([10.172.193.212] helo=localhost)
+ by youngberry.canonical.com with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
+ (envelope-from <colin.king@canonical.com>)
+ id 1iPpUs-0001GN-AJ; Wed, 30 Oct 2019 15:02:54 +0000
+From: Colin King <colin.king@canonical.com>
+To: Sumit Semwal <sumit.semwal@linaro.org>, "Andrew F . Davis" <afd@ti.com>,
+ Benjamin Gaignard <benjamin.gaignard@linaro.org>,
+ Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>,
+ Brian Starkey <brian.starkey@arm.com>,
+ John Stultz <john.stultz@linaro.org>, linux-media@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Date: Wed, 30 Oct 2019 15:02:53 +0000
+Message-Id: <20191030150253.10596-1-colin.king@canonical.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9425
- signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1908290000 definitions=main-1910290161
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9425
- signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1908290000
- definitions=main-1910290161
 X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
- Liam Mark <lmark@codeaurora.org>, linaro-mm-sig@lists.linaro.org,
- dri-devel@lists.freedesktop.org, Brian Starkey <Brian.Starkey@arm.com>,
- linux-media@vger.kernel.org
-Subject: [Linaro-mm-sig] [PATCH] dma-buf: Fix a warning message in
-	dma_heap_buffer_destroy()
+Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [Linaro-mm-sig] [PATCH][next] dma-buf: heaps: remove redundant
+	assignment to variable ret
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
 Precedence: list
@@ -95,22 +65,25 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-VGhlIGZpcnN0IGFyZ3VtZW50IG9mIFdBUk4oKSBpcyBhIGNvbmRpdGlvbiBzbyB0aGlzIHdpbGwg
-anVzdCBwcmludCB0aGUKZnVuY3Rpb24gbmFtZSBpbnN0ZWFkIG9mIHRoZSB3aG9sZSB3YXJuaW5n
-IG1lc3NhZ2UuCgpGaXhlczogN2I4N2VhNzA0ZmQ5ICgiZG1hLWJ1ZjogaGVhcHM6IEFkZCBoZWFw
-IGhlbHBlcnMiKQpTaWduZWQtb2ZmLWJ5OiBEYW4gQ2FycGVudGVyIDxkYW4uY2FycGVudGVyQG9y
-YWNsZS5jb20+Ci0tLQogZHJpdmVycy9kbWEtYnVmL2hlYXBzL2hlYXAtaGVscGVycy5jIHwgMiAr
-LQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0t
-Z2l0IGEvZHJpdmVycy9kbWEtYnVmL2hlYXBzL2hlYXAtaGVscGVycy5jIGIvZHJpdmVycy9kbWEt
-YnVmL2hlYXBzL2hlYXAtaGVscGVycy5jCmluZGV4IDc1MGJlZjRlOTAyZC4uYTMxNjg0YzBkNWIy
-IDEwMDY0NAotLS0gYS9kcml2ZXJzL2RtYS1idWYvaGVhcHMvaGVhcC1oZWxwZXJzLmMKKysrIGIv
-ZHJpdmVycy9kbWEtYnVmL2hlYXBzL2hlYXAtaGVscGVycy5jCkBAIC01Miw3ICs1Miw3IEBAIHN0
-YXRpYyB2b2lkICpkbWFfaGVhcF9tYXBfa2VybmVsKHN0cnVjdCBoZWFwX2hlbHBlcl9idWZmZXIg
-KmJ1ZmZlcikKIHN0YXRpYyB2b2lkIGRtYV9oZWFwX2J1ZmZlcl9kZXN0cm95KHN0cnVjdCBoZWFw
-X2hlbHBlcl9idWZmZXIgKmJ1ZmZlcikKIHsKIAlpZiAoYnVmZmVyLT52bWFwX2NudCA+IDApIHsK
-LQkJV0FSTigiJXM6IGJ1ZmZlciBzdGlsbCBtYXBwZWQgaW4gdGhlIGtlcm5lbFxuIiwgX19mdW5j
-X18pOworCQlXQVJOKDEsICIlczogYnVmZmVyIHN0aWxsIG1hcHBlZCBpbiB0aGUga2VybmVsXG4i
-LCBfX2Z1bmNfXyk7CiAJCXZ1bm1hcChidWZmZXItPnZhZGRyKTsKIAl9CiAKLS0gCjIuMjAuMQoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
-LXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8v
-bGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+RnJvbTogQ29saW4gSWFuIEtpbmcgPGNvbGluLmtpbmdAY2Fub25pY2FsLmNvbT4KClRoZSB2YXJp
+YWJsZSByZXQgaXMgYmVpbmcgYXNzaWduZWQgd2l0aCBhIHZhbHVlIHRoYXQgaXMgbmV2ZXIKcmVh
+ZCwgaXQgaXMgYmVpbmcgcmUtYXNzaWduZWQgdGhlIHNhbWUgdmFsdWUgb24gdGhlIGVycjAgZXhp
+dApwYXRoLiBUaGUgYXNzaWdubWVudCBpcyByZWR1bmRhbnQgYW5kIGhlbmNlIGNhbiBiZSByZW1v
+dmVkLgoKQWRkcmVzc2VzLUNvdmVyaXR5OiAoIlVudXNlZCB2YWx1ZSIpCkZpeGVzOiA0N2EzMmY5
+YzEyMjYgKCJkbWEtYnVmOiBoZWFwczogQWRkIHN5c3RlbSBoZWFwIHRvIGRtYWJ1ZiBoZWFwcyIp
+ClNpZ25lZC1vZmYtYnk6IENvbGluIElhbiBLaW5nIDxjb2xpbi5raW5nQGNhbm9uaWNhbC5jb20+
+Ci0tLQogZHJpdmVycy9kbWEtYnVmL2hlYXBzL3N5c3RlbV9oZWFwLmMgfCA0ICstLS0KIDEgZmls
+ZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9k
+cml2ZXJzL2RtYS1idWYvaGVhcHMvc3lzdGVtX2hlYXAuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9oZWFw
+cy9zeXN0ZW1faGVhcC5jCmluZGV4IDQ1NTc4MmVmYmIzMi4uODE3YTE2NjdiZDU3IDEwMDY0NAot
+LS0gYS9kcml2ZXJzL2RtYS1idWYvaGVhcHMvc3lzdGVtX2hlYXAuYworKysgYi9kcml2ZXJzL2Rt
+YS1idWYvaGVhcHMvc3lzdGVtX2hlYXAuYwpAQCAtNTUsMTAgKzU1LDggQEAgc3RhdGljIGludCBz
+eXN0ZW1faGVhcF9hbGxvY2F0ZShzdHJ1Y3QgZG1hX2hlYXAgKmhlYXAsCiAJaGVscGVyX2J1ZmZl
+ci0+cGFnZXMgPSBrbWFsbG9jX2FycmF5KGhlbHBlcl9idWZmZXItPnBhZ2Vjb3VudCwKIAkJCQkJ
+ICAgICBzaXplb2YoKmhlbHBlcl9idWZmZXItPnBhZ2VzKSwKIAkJCQkJICAgICBHRlBfS0VSTkVM
+KTsKLQlpZiAoIWhlbHBlcl9idWZmZXItPnBhZ2VzKSB7Ci0JCXJldCA9IC1FTk9NRU07CisJaWYg
+KCFoZWxwZXJfYnVmZmVyLT5wYWdlcykKIAkJZ290byBlcnIwOwotCX0KIAogCWZvciAocGcgPSAw
+OyBwZyA8IGhlbHBlcl9idWZmZXItPnBhZ2Vjb3VudDsgcGcrKykgewogCQkvKgotLSAKMi4yMC4x
+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8t
+bW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKaHR0cHM6
+Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4vbGlzdGluZm8vbGluYXJvLW1tLXNpZwo=
