@@ -2,75 +2,62 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FFDBEAE71
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 31 Oct 2019 12:08:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B2AB4EC916
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  1 Nov 2019 20:32:33 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8AD066196F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 31 Oct 2019 11:08:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5D0336196B
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  1 Nov 2019 19:32:32 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 7C97A6197A; Thu, 31 Oct 2019 11:08:16 +0000 (UTC)
+	id 4C67461973; Fri,  1 Nov 2019 19:32:32 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=BAYES_00,BIGNUM_EMAILS,
-	MAILING_LIST_MULTI,RCVD_IN_DNSWL_MED,SPF_HELO_PASS,UNPARSEABLE_RELAY
-	autolearn=disabled version=3.4.2
+X-Spam-Status: No, score=-0.1 required=5.0 tests=BAYES_00,BIGNUM_EMAILS,
+	MAILING_LIST_MULTI,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,
+	RCVD_IN_MSPIKE_WL,SPF_HELO_NONE autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C803861970;
-	Thu, 31 Oct 2019 11:07:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1672B6196F;
+	Fri,  1 Nov 2019 19:32:09 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 05F8D60E80
- for <linaro-mm-sig@lists.linaro.org>; Thu, 31 Oct 2019 11:07:49 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 61C7A61966
+ for <linaro-mm-sig@lists.linaro.org>; Fri,  1 Nov 2019 19:32:06 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id EED5861973; Thu, 31 Oct 2019 11:07:48 +0000 (UTC)
-Received: from userp2130.oracle.com (userp2130.oracle.com [156.151.31.86])
- by lists.linaro.org (Postfix) with ESMTPS id E380660E80
- for <linaro-mm-sig@lists.linaro.org>; Thu, 31 Oct 2019 11:07:47 +0000 (UTC)
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x9VB3cfj005331;
- Thu, 31 Oct 2019 11:07:44 GMT
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
- by userp2130.oracle.com with ESMTP id 2vxwhfte6j-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 31 Oct 2019 11:07:44 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
- by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x9VB2Xkh072748;
- Thu, 31 Oct 2019 11:07:43 GMT
-Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
- by userp3030.oracle.com with ESMTP id 2vyqpdw6bp-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 31 Oct 2019 11:07:43 +0000
-Received: from abhmp0019.oracle.com (abhmp0019.oracle.com [141.146.116.25])
- by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x9VB7gn7012134;
- Thu, 31 Oct 2019 11:07:42 GMT
-Received: from mwanda (/41.57.98.10) by default (Oracle Beehive Gateway v4.0)
- with ESMTP ; Thu, 31 Oct 2019 04:07:42 -0700
-Date: Thu, 31 Oct 2019 14:07:36 +0300
-From: Dan Carpenter <dan.carpenter@oracle.com>
-To: john.stultz@linaro.org
-Message-ID: <20191031110736.GD26612@mwanda>
+ id 414876196F; Fri,  1 Nov 2019 19:32:06 +0000 (UTC)
+Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com
+ [209.85.210.65])
+ by lists.linaro.org (Postfix) with ESMTPS id 1CE0461966
+ for <linaro-mm-sig@lists.linaro.org>; Fri,  1 Nov 2019 19:32:05 +0000 (UTC)
+Received: by mail-ot1-f65.google.com with SMTP id v24so4001240otp.5
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 01 Nov 2019 12:32:05 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=Xga0s6dMP01gptMlxj5T3WD/q3JgkmmpoSrSoRKCVTo=;
+ b=piGuBa3UBqq1AL3KER8pylShOWcmj1brIdKVGAuW7A2Q3trOomfeonVsMQRJhMj1G1
+ vXWGJV38Fm4PRqu8zgjCdcSM2A24wnDnTitQiCR5M8I4sm9n20dmt/ri4vJVDb1shHU+
+ RrMJin++5Fg7rb/kRz54sdkjxNE/Uuc31LQIlT75taeK7UtPZHrwsSS3p5dcHb3INgIU
+ Xl6MAbGDXm3CXAmVI9YEwx6YNoCYuyNfMxWlGbTLSaEf89GS1vgGAKvp09/nY8yA7bdM
+ /B7xqUBq8xk/ySIYH+TP1utPL4kE+ReYpNvMO3TqT9/nqJoVU6TedtdHCwt3HkRPViw/
+ qoJg==
+X-Gm-Message-State: APjAAAXhb7N+myOHuiLAuTVOJjcIgnyfD0Npm0lB2TjWXbeLIdDiL7P+
+ dpvMS97ElTOf+qnA5Mzxg8UamTUtnzc7RocqKnuvSlHG
+X-Google-Smtp-Source: APXvYqwcZFGOOUlvfBAU9/xpQJ5SSF84qCl7+6EAszgXMaxKapGh7e27oRBCUBYwmnaVXSNAvFFMJtauaQj68ndvTds=
+X-Received: by 2002:a05:6830:ca:: with SMTP id
+ x10mr9263008oto.221.1572636724497; 
+ Fri, 01 Nov 2019 12:32:04 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9426
- signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=1
- malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=788
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1908290000 definitions=main-1910310113
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9426
- signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
- priorityscore=1501 malwarescore=0
- suspectscore=1 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=870 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1908290000
- definitions=main-1910310113
+References: <20191031110736.GD26612@mwanda>
+In-Reply-To: <20191031110736.GD26612@mwanda>
+From: John Stultz <john.stultz@linaro.org>
+Date: Fri, 1 Nov 2019 12:31:53 -0700
+Message-ID: <CALAqxLUtnZsw0q_5JFtyVjbnxeMUTND=Vt8XgS44iQ_n391XFQ@mail.gmail.com>
+To: Dan Carpenter <dan.carpenter@oracle.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org
-Subject: [Linaro-mm-sig] [bug report] dma-buf: heaps: Add heap helpers
+Cc: "moderated list:DMA BUFFER SHARING FRAMEWORK"
+ <linaro-mm-sig@lists.linaro.org>, dri-devel <dri-devel@lists.freedesktop.org>
+Subject: Re: [Linaro-mm-sig] [bug report] dma-buf: heaps: Add heap helpers
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
 Precedence: list
@@ -89,24 +76,26 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-SGVsbG8gSm9obiBTdHVsdHosCgpUaGUgcGF0Y2ggN2I4N2VhNzA0ZmQ5OiAiZG1hLWJ1ZjogaGVh
-cHM6IEFkZCBoZWFwIGhlbHBlcnMiIGZyb20gT2N0CjIxLCAyMDE5LCBsZWFkcyB0byB0aGUgZm9s
-bG93aW5nIHN0YXRpYyBjaGVja2VyIHdhcm5pbmc6CgoJZHJpdmVycy9kbWEtYnVmL2hlYXBzL2hl
-YXAtaGVscGVycy5jOjE2NSBkbWFfaGVhcF92bV9mYXVsdCgpCgl3YXJuOiB1bmNhcHBlZCB1c2Vy
-IGluZGV4ICdidWZmZXItPnBhZ2VzW3ZtZi0+cGdvZmZdJwoKZHJpdmVycy9kbWEtYnVmL2hlYXBz
-L2hlYXAtaGVscGVycy5jCiAgIDE2MCAgc3RhdGljIHZtX2ZhdWx0X3QgZG1hX2hlYXBfdm1fZmF1
-bHQoc3RydWN0IHZtX2ZhdWx0ICp2bWYpCiAgIDE2MSAgewogICAxNjIgICAgICAgICAgc3RydWN0
-IHZtX2FyZWFfc3RydWN0ICp2bWEgPSB2bWYtPnZtYTsKICAgMTYzICAgICAgICAgIHN0cnVjdCBo
-ZWFwX2hlbHBlcl9idWZmZXIgKmJ1ZmZlciA9IHZtYS0+dm1fcHJpdmF0ZV9kYXRhOwogICAxNjQg
-IAogICAxNjUgICAgICAgICAgdm1mLT5wYWdlID0gYnVmZmVyLT5wYWdlc1t2bWYtPnBnb2ZmXTsK
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXl5eXl5eXl5eXgpTbWF0
-Y2ggZm9yIHNvbWUgcmVhc29uIHRoaW5rcyB0aGlzIG5lZWRzIHRvIGJlIGNoZWNrZWQuICBTbWF0
-Y2ggYWxzbwpnZXRzIGNvbmZ1c2VkIGJ5IHRoZXNlIGZhdWx0IGhhbmRsZXJzIGFuZCB0aGlua3Mg
-dGhlcmUgaXMgc29tZSByZWN1cnNpb24KaW52b2x2ZWQuLi4KCiAgIDE2NiAgICAgICAgICBnZXRf
-cGFnZSh2bWYtPnBhZ2UpOwogICAxNjcgIAogICAxNjggICAgICAgICAgcmV0dXJuIDA7CiAgIDE2
-OSAgfQogICAxNzAgIAogICAxNzEgIHN0YXRpYyBjb25zdCBzdHJ1Y3Qgdm1fb3BlcmF0aW9uc19z
-dHJ1Y3QgZG1hX2hlYXBfdm1fb3BzID0gewogICAxNzIgICAgICAgICAgLmZhdWx0ID0gZG1hX2hl
-YXBfdm1fZmF1bHQsCiAgIDE3MyAgfTsKICAgMTc0ICAKCnJlZ2FyZHMsCmRhbiBjYXJwZW50ZXIK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
-LXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8v
-bGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+T24gVGh1LCBPY3QgMzEsIDIwMTkgYXQgNDowNyBBTSBEYW4gQ2FycGVudGVyIDxkYW4uY2FycGVu
+dGVyQG9yYWNsZS5jb20+IHdyb3RlOgo+IFRoZSBwYXRjaCA3Yjg3ZWE3MDRmZDk6ICJkbWEtYnVm
+OiBoZWFwczogQWRkIGhlYXAgaGVscGVycyIgZnJvbSBPY3QKPiAyMSwgMjAxOSwgbGVhZHMgdG8g
+dGhlIGZvbGxvd2luZyBzdGF0aWMgY2hlY2tlciB3YXJuaW5nOgo+Cj4gICAgICAgICBkcml2ZXJz
+L2RtYS1idWYvaGVhcHMvaGVhcC1oZWxwZXJzLmM6MTY1IGRtYV9oZWFwX3ZtX2ZhdWx0KCkKPiAg
+ICAgICAgIHdhcm46IHVuY2FwcGVkIHVzZXIgaW5kZXggJ2J1ZmZlci0+cGFnZXNbdm1mLT5wZ29m
+Zl0nCj4KPiBkcml2ZXJzL2RtYS1idWYvaGVhcHMvaGVhcC1oZWxwZXJzLmMKPiAgICAxNjAgIHN0
+YXRpYyB2bV9mYXVsdF90IGRtYV9oZWFwX3ZtX2ZhdWx0KHN0cnVjdCB2bV9mYXVsdCAqdm1mKQo+
+ICAgIDE2MSAgewo+ICAgIDE2MiAgICAgICAgICBzdHJ1Y3Qgdm1fYXJlYV9zdHJ1Y3QgKnZtYSA9
+IHZtZi0+dm1hOwo+ICAgIDE2MyAgICAgICAgICBzdHJ1Y3QgaGVhcF9oZWxwZXJfYnVmZmVyICpi
+dWZmZXIgPSB2bWEtPnZtX3ByaXZhdGVfZGF0YTsKPiAgICAxNjQKPiAgICAxNjUgICAgICAgICAg
+dm1mLT5wYWdlID0gYnVmZmVyLT5wYWdlc1t2bWYtPnBnb2ZmXTsKPiAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBeXl5eXl5eXl5eCj4gU21hdGNoIGZvciBzb21lIHJl
+YXNvbiB0aGlua3MgdGhpcyBuZWVkcyB0byBiZSBjaGVja2VkLiAgU21hdGNoIGFsc28KPiBnZXRz
+IGNvbmZ1c2VkIGJ5IHRoZXNlIGZhdWx0IGhhbmRsZXJzIGFuZCB0aGlua3MgdGhlcmUgaXMgc29t
+ZSByZWN1cnNpb24KPiBpbnZvbHZlZC4uLgoKSHJtLCBJJ20gbm90IHRvdGFsbHkgc3VyZSBJIGdy
+b2sgd2hhdCBpdCdzIGxvb2tpbmcgZm9yLCBidXQgSSdtCmd1ZXNzaW5nIGl0J3Mgc3VnZ2VzdGlu
+ZyB3ZSBjaGVjayB0aGF0IHBnb2ZmIGlzbid0IGxhcmdlciB0aGVuIHRoZQpwYWdlY291bnQ/Ckkn
+bGwgYWRkIHRoYXQgY2hlY2sgaW4sIGJ1dCBsZXQgbWUga25vdyBpZiBJJ3ZlIG1pc3VuZGVyc3Rv
+b2QuCgpUaGFua3MgZm9yIHRoZSByZXBvcnQhCi1qb2huCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0CkxpbmFy
+by1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1h
+bi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
