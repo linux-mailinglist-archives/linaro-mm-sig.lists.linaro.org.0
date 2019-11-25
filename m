@@ -2,51 +2,77 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A83A104C69
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Nov 2019 08:26:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 760A1108ABB
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 Nov 2019 10:23:07 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B950A6184D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Nov 2019 07:26:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1E60661885
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 25 Nov 2019 09:23:06 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id A856461990; Thu, 21 Nov 2019 07:26:49 +0000 (UTC)
+	id 1389D61963; Mon, 25 Nov 2019 09:23:06 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,FORGED_SPF_HELO,
-	MAILING_LIST_MULTI,RCVD_IN_DNSWL_NONE,SPF_HELO_PASS autolearn=disabled
-	version=3.4.2
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
+	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE,SUBJ_OBFU_PUNCT_FEW
+	autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4FB7860854;
-	Thu, 21 Nov 2019 07:26:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1478561951;
+	Mon, 25 Nov 2019 09:22:38 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id B0D5F60683
- for <linaro-mm-sig@lists.linaro.org>; Thu, 21 Nov 2019 07:26:22 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 3AA97609C3
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 25 Nov 2019 09:22:35 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id A35D060854; Thu, 21 Nov 2019 07:26:22 +0000 (UTC)
-Received: from fireflyinternet.com (mail.fireflyinternet.com [109.228.58.192])
- by lists.linaro.org (Postfix) with ESMTPS id A44B460683
- for <linaro-mm-sig@lists.linaro.org>; Thu, 21 Nov 2019 07:26:20 +0000 (UTC)
-X-Default-Received-SPF: pass (skip=forwardok (res=PASS))
- x-ip-name=78.156.65.138; 
-Received: from localhost (unverified [78.156.65.138]) 
- by fireflyinternet.com (Firefly Internet (M1)) with ESMTP (TLS) id
- 19280906-1500050 for multiple; Thu, 21 Nov 2019 07:26:09 +0000
-MIME-Version: 1.0
-To: kernel test robot <lkp@intel.com>
-From: Chris Wilson <chris@chris-wilson.co.uk>
-In-Reply-To: <5dd63a8f.BFdOlqs/XZAJHDfR%lkp@intel.com>
-References: <5dd63a8f.BFdOlqs/XZAJHDfR%lkp@intel.com>
-Message-ID: <157432116576.24852.2065478066028556019@skylake-alporthouse-com>
-User-Agent: alot/0.6
-Date: Thu, 21 Nov 2019 07:26:05 +0000
-X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: philip.li@intel.com, linux-kernel@vger.kernel.org,
+ id 2D2E861951; Mon, 25 Nov 2019 09:22:35 +0000 (UTC)
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+ [209.85.221.67])
+ by lists.linaro.org (Postfix) with ESMTPS id F3FAE609C3
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 25 Nov 2019 09:22:33 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id b18so16980140wrj.8
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 25 Nov 2019 01:22:33 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to:user-agent;
+ bh=QiRSkNH09nDsKaV88CvJJn/s44TY85sod7XlDRyFXvQ=;
+ b=rxAHRPDgpsBAm4txx91nv5NE0v4Yr4TBQ5QCaakJGqFKq0LxH0FV0BwbL8aG3lJdJG
+ DlZsNzUnqhKGKFp7I1pIWm8EokJAcvQvGWukN6Hlsa04hM00oWwoNIhPNiTttGxiul6J
+ GSgAwSAcXBkP3NXMZ6hjgaTs6Sncd3rqMtOwK6SIMd/62kjbJog8G1pDb6suSawbTb8T
+ GoKRbFDqahhDnmiQ2cl3LfjYLLLoJGI96RToaPZz30S8aEk9ZEyrlQJPANw1+aM4VSSv
+ XIAgD92UsvC2Giqp6jFsKWCtDRJvGSdyAKOYrwUxifb0C1j/0kmIy2WGstN1QcZDq2/F
+ IHLg==
+X-Gm-Message-State: APjAAAUBwJ5Tseqom9wfxevwPn49EI7iFOTGisFrKwIBiHyKRrA4F38l
+ 3I2OM6mqD9hPJOhaLsUs5RmdxA==
+X-Google-Smtp-Source: APXvYqz5j9Sk1KwP87Rie41BfxNaFxInLur5nJHL6zE3OzpkLJ4XRYQBBQiJWf93BsiUzqYndQdomA==
+X-Received: by 2002:adf:da52:: with SMTP id r18mr30554159wrl.167.1574673752986; 
+ Mon, 25 Nov 2019 01:22:32 -0800 (PST)
+Received: from phenom.ffwll.local (212-51-149-96.fiber7.init7.net.
+ [212.51.149.96])
+ by smtp.gmail.com with ESMTPSA id l4sm7659664wme.4.2019.11.25.01.22.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Nov 2019 01:22:32 -0800 (PST)
+Date: Mon, 25 Nov 2019 10:22:30 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Navid Emamdoost <navid.emamdoost@gmail.com>
+Message-ID: <20191125092230.GJ29965@phenom.ffwll.local>
+Mail-Followup-To: Navid Emamdoost <navid.emamdoost@gmail.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Gustavo Padovan <gustavo@padovan.org>, linux-media@vger.kernel.org,
  dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- LKP <lkp@lists.01.org>, linux-media@vger.kernel.org
-Subject: Re: [Linaro-mm-sig] 2989f64510 ("dma-buf: Add selftests for
- dma-fence"): WARNING: CPU: 0 PID: 1 at lib/debugobjects.c:524
- __debug_object_init
+ linux-kernel@vger.kernel.org, emamd001@umn.edu
+References: <20191122220957.30427-1-navid.emamdoost@gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20191122220957.30427-1-navid.emamdoost@gmail.com>
+X-Operating-System: Linux phenom 5.3.0-2-amd64 
+User-Agent: Mutt/1.12.2 (2019-09-21)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Cc: Gustavo Padovan <gustavo@padovan.org>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+ emamd001@umn.edu, linux-media@vger.kernel.org
+Subject: Re: [Linaro-mm-sig] [PATCH] dma-buf: Fix memory leak in
+	sync_file_merge()
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
 Precedence: list
@@ -65,19 +91,29 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-UXVvdGluZyBrZXJuZWwgdGVzdCByb2JvdCAoMjAxOS0xMS0yMSAwNzoxOTo0MykKPiBHcmVldGlu
-Z3MsCj4gCj4gMGRheSBrZXJuZWwgdGVzdGluZyByb2JvdCBnb3QgdGhlIGJlbG93IGRtZXNnIGFu
-ZCB0aGUgZmlyc3QgYmFkIGNvbW1pdCBpcwo+IAo+IGh0dHBzOi8vZ2l0Lmtlcm5lbC5vcmcvcHVi
-L3NjbS9saW51eC9rZXJuZWwvZ2l0L3RvcnZhbGRzL2xpbnV4LmdpdCBtYXN0ZXIKPiAKPiBjb21t
-aXQgMjk4OWY2NDUxMDg0YWVkM2Y4Y2M5OTkyNDc3ZjdhOWJmNTdhMzcxNgo+IEF1dGhvcjogICAg
-IENocmlzIFdpbHNvbiA8Y2hyaXNAY2hyaXMtd2lsc29uLmNvLnVrPgo+IEF1dGhvckRhdGU6IE1v
-biBBdWcgMTkgMTA6NTk6MjcgMjAxOSArMDEwMAo+IENvbW1pdDogICAgIENocmlzIFdpbHNvbiA8
-Y2hyaXNAY2hyaXMtd2lsc29uLmNvLnVrPgo+IENvbW1pdERhdGU6IE1vbiBBdWcgMTkgMTg6MDk6
-NDYgMjAxOSArMDEwMAoKVGhhdCdzIGEgYmVsYXRlZCByZXBvcnQsIGZpeGVkIGJ5Cgpjb21taXQg
-NmFjM2EwZWJmY2MyZjBjNzVjYTBjYTY5NzQzODljZTQyMWFhNWNiZApBdXRob3I6IENocmlzIFdp
-bHNvbiA8Y2hyaXNAY2hyaXMtd2lsc29uLmNvLnVrPgpEYXRlOiAgIFR1ZSBBdWcgMjAgMTM6MjE6
-MTggMjAxOSArMDEwMAoKCWRtYWJ1ZjogTWFyayB1cCBvbnN0YWNrIHRpbWVyIGZvciBzZWxmdGVz
-dHMKCk5vPwotQ2hyaXMKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5h
-cm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1t
-bS1zaWcK
+T24gRnJpLCBOb3YgMjIsIDIwMTkgYXQgMDQ6MDk6NTVQTSAtMDYwMCwgTmF2aWQgRW1hbWRvb3N0
+IHdyb3RlOgo+IEluIHRoZSBpbXBsZW1lbnRhdGlvbiBvZiBzeW5jX2ZpbGVfbWVyZ2UoKSB0aGUg
+YWxsb2NhdGVkIHN5bmNfZmlsZSBpcwo+IGxlYWtlZCBpZiBudW1iZXIgb2YgZmVuY2VzIG92ZXJm
+bG93cy4gUmVsZWFzZSBzeW5jX2ZpbGUgYnkgZ290byBlcnIuCj4gCj4gRml4ZXM6IGEwMmI5ZGM5
+MGQ4NCAoImRtYS1idWYvc3luY19maWxlOiByZWZhY3RvciBmZW5jZSBzdG9yYWdlIGluIHN0cnVj
+dCBzeW5jX2ZpbGUiKQo+IFNpZ25lZC1vZmYtYnk6IE5hdmlkIEVtYW1kb29zdCA8bmF2aWQuZW1h
+bWRvb3N0QGdtYWlsLmNvbT4KClRoYW5rcyBmb3IgeW91ciBwYXRjaCwgYXBwbGllZCB3aXRoIGEg
+Y2M6c3RhYmxlLgotRGFuaWVsCgo+IC0tLQo+ICBkcml2ZXJzL2RtYS1idWYvc3luY19maWxlLmMg
+fCAyICstCj4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+
+IAo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvc3luY19maWxlLmMgYi9kcml2ZXJzL2Rt
+YS1idWYvc3luY19maWxlLmMKPiBpbmRleCAyNWM1YzA3MTY0NWIuLjkxMTg1ZGI5YTk1MiAxMDA2
+NDQKPiAtLS0gYS9kcml2ZXJzL2RtYS1idWYvc3luY19maWxlLmMKPiArKysgYi9kcml2ZXJzL2Rt
+YS1idWYvc3luY19maWxlLmMKPiBAQCAtMjIxLDcgKzIyMSw3IEBAIHN0YXRpYyBzdHJ1Y3Qgc3lu
+Y19maWxlICpzeW5jX2ZpbGVfbWVyZ2UoY29uc3QgY2hhciAqbmFtZSwgc3RydWN0IHN5bmNfZmls
+ZSAqYSwKPiAgCWFfZmVuY2VzID0gZ2V0X2ZlbmNlcyhhLCAmYV9udW1fZmVuY2VzKTsKPiAgCWJf
+ZmVuY2VzID0gZ2V0X2ZlbmNlcyhiLCAmYl9udW1fZmVuY2VzKTsKPiAgCWlmIChhX251bV9mZW5j
+ZXMgPiBJTlRfTUFYIC0gYl9udW1fZmVuY2VzKQo+IC0JCXJldHVybiBOVUxMOwo+ICsJCWdvdG8g
+ZXJyOwo+ICAKPiAgCW51bV9mZW5jZXMgPSBhX251bV9mZW5jZXMgKyBiX251bV9mZW5jZXM7Cj4g
+IAo+IC0tIAo+IDIuMTcuMQo+IAo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fCj4gZHJpLWRldmVsIG1haWxpbmcgbGlzdAo+IGRyaS1kZXZlbEBsaXN0cy5m
+cmVlZGVza3RvcC5vcmcKPiBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xp
+c3RpbmZvL2RyaS1kZXZlbAoKLS0gCkRhbmllbCBWZXR0ZXIKU29mdHdhcmUgRW5naW5lZXIsIElu
+dGVsIENvcnBvcmF0aW9uCmh0dHA6Ly9ibG9nLmZmd2xsLmNoCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0Ckxp
+bmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFp
+bG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
