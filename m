@@ -2,73 +2,66 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 05D22160E7C
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 17 Feb 2020 10:28:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7598616168F
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 17 Feb 2020 16:45:54 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AFE65617B6
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 17 Feb 2020 09:28:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9871560428
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 17 Feb 2020 15:45:53 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id A2249618DF; Mon, 17 Feb 2020 09:28:27 +0000 (UTC)
+	id 8A700619A8; Mon, 17 Feb 2020 15:45:53 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE autolearn=disabled
-	version=3.4.2
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
+	FREEMAIL_FROM,MAILING_LIST_MULTI,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,
+	SPF_HELO_NONE,SPOOFED_FREEMAIL autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 80B41617B9;
-	Mon, 17 Feb 2020 09:27:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 08C62619AF;
+	Mon, 17 Feb 2020 15:45:19 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id B8B0B60F55
- for <linaro-mm-sig@lists.linaro.org>; Mon, 17 Feb 2020 09:27:56 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id E599D60F43
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 17 Feb 2020 15:45:14 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 9AD1D617B9; Mon, 17 Feb 2020 09:27:56 +0000 (UTC)
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
- [209.85.128.68])
- by lists.linaro.org (Postfix) with ESMTPS id 874CE60F55
- for <linaro-mm-sig@lists.linaro.org>; Mon, 17 Feb 2020 09:27:55 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id p9so16362438wmc.2
- for <linaro-mm-sig@lists.linaro.org>; Mon, 17 Feb 2020 01:27:55 -0800 (PST)
+ id D8902618CA; Mon, 17 Feb 2020 15:45:14 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
+ [209.85.128.46])
+ by lists.linaro.org (Postfix) with ESMTPS id 9205F60F43
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 17 Feb 2020 15:45:13 +0000 (UTC)
+Received: by mail-wm1-f46.google.com with SMTP id q9so17605284wmj.5
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 17 Feb 2020 07:45:13 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=W3cuPNWL6G9Mkzazr5aYw69mCYySh4JxTzpizFSnP50=;
- b=Hfbnk8aF/to/B5YI4oZCVURxSJr2d73K3aHmciqkIGCROKPTy4w7YOeubguH27V0Lm
- dJXW04mToloIzrqPhlmCWYyhj2cPBXC7NzHCGZKxwOZRyk0J043m6ZNUrpPkpN+5KflN
- fqP5MWjJCBsjk0R0tNP3LpQdG1NNNmCYeU+SNmcU6LOYgGglGuKPnK8sY6ZgCgYIssmI
- z55Y/WA9J7jntIk/KIS7G9So3CDTnclefHALjdFB22OUxKlT+LKssfGjx9n9s9KLs6VL
- 7fuk1arMl7ftCpB1HLj0kEx3ZI1og0cSfty9B95Spsds9TpUVd8FLBEBpk/0QVhJwIc5
- kl7g==
-X-Gm-Message-State: APjAAAVm69DMjF/V8Zcszt0xf868pmUABrLv67VDffmY2odTbjmq+gP7
- mqm+mMxuN/+Ah7kge2pXezO7oQ==
-X-Google-Smtp-Source: APXvYqwubPOPLq30URt7q/mmbsEDobFNeewy4T855nPo/3eKy/wiWdgXW1I99+bIl4JyIDmgOWUVgA==
-X-Received: by 2002:a7b:cb91:: with SMTP id m17mr19977570wmi.146.1581931674639; 
- Mon, 17 Feb 2020 01:27:54 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id v15sm114015wrf.7.2020.02.17.01.27.53
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=bk8Dl3EQzDBZc3sM1wqRJRPyzqsxBh5vDspKM3eX+so=;
+ b=Do2inrNBRacM1CS3dYd4u+Q3qK4E5inE3K1ukCDFs2lkwbhSjGUOI2lOYxBfR8LhHF
+ wSLTOCo2veDUhtbkBk9lrTzRHPyDsBxq63R1vl9J8JETZgNJCe5N1s1pBVoKn/0meOgx
+ pd1Ay2+mgk6fVR1mu1gF/OBvAcJqNFszyjYADP6RCBjtfeF51jSl1PDb+I8iLQWcKW5l
+ PEDM1cE5KoF6JrMr4lI7611LjfMmLqaFycUa/ZyapViPEBC5SKem9ggcAITX83Pzz+y2
+ aJlotBC/Rv3H+IogJ6sxRacKMO3maa0mRekMoEuI5shs6kidN2jTP6u5Nkl6YkkWXJVT
+ AHbQ==
+X-Gm-Message-State: APjAAAWgD4J0uJTz8AXADAll7y9xJZvNjMGtRTZP0AiZPvL1pq0mBP2+
+ NOcenRd9FvA/uRxmtQjL1O4=
+X-Google-Smtp-Source: APXvYqxsNPkGShSg1gX/ncCQ6dLNr0YQg7ZPft5wm9SohggaPkW0AhZe8qWm+XdqGRvs6lUVE4JxwQ==
+X-Received: by 2002:a1c:4008:: with SMTP id n8mr22840668wma.121.1581954312699; 
+ Mon, 17 Feb 2020 07:45:12 -0800 (PST)
+Received: from abel.fritz.box ([2a02:908:1252:fb60:180d:d2d6:6ff9:a6cb])
+ by smtp.gmail.com with ESMTPSA id r6sm1372658wrq.92.2020.02.17.07.45.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2020 01:27:53 -0800 (PST)
-Date: Mon, 17 Feb 2020 10:27:52 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
-Message-ID: <20200217092752.GF2363188@phenom.ffwll.local>
-Mail-Followup-To: Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- sumit.semwal@linaro.org, kernel-janitors@vger.kernel.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
-References: <20200216114708.20583-1-christophe.jaillet@wanadoo.fr>
+ Mon, 17 Feb 2020 07:45:12 -0800 (PST)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
+ <christian.koenig@amd.com>
+To: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+ linux-media@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ daniel@ffwll.ch
+Date: Mon, 17 Feb 2020 16:45:04 +0100
+Message-Id: <20200217154509.2265-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200216114708.20583-1-christophe.jaillet@wanadoo.fr>
-X-Operating-System: Linux phenom 5.3.0-3-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- linux-media@vger.kernel.org
-Subject: Re: [Linaro-mm-sig] [PATCH] dma-buf: Fix a typo in Kconfig
+Subject: [Linaro-mm-sig] RFC: Unpinned DMA-buf handling
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
 Precedence: list
@@ -87,27 +80,13 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gU3VuLCBGZWIgMTYsIDIwMjAgYXQgMTI6NDc6MDhQTSArMDEwMCwgQ2hyaXN0b3BoZSBKQUlM
-TEVUIHdyb3RlOgo+IEEgJ2gnIGlzbWlzc2luZyBpbicgc3luY3Jvbml6YXRpb24nCj4gCj4gU2ln
-bmVkLW9mZi1ieTogQ2hyaXN0b3BoZSBKQUlMTEVUIDxjaHJpc3RvcGhlLmphaWxsZXRAd2FuYWRv
-by5mcj4KCkFwcGxpZWQsIHRoYW5rcyBmb3IgeW91ciBwYXRjaC4KLURhbmllbAoKPiAtLS0KPiAg
-ZHJpdmVycy9kbWEtYnVmL0tjb25maWcgfCAyICstCj4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2Vy
-dGlvbigrKSwgMSBkZWxldGlvbigtKQo+IAo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYv
-S2NvbmZpZyBiL2RyaXZlcnMvZG1hLWJ1Zi9LY29uZmlnCj4gaW5kZXggMDYxM2JiNzc3MGY1Li5l
-N2Q4MjBjZTA3MjQgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL0tjb25maWcKPiArKysg
-Yi9kcml2ZXJzL2RtYS1idWYvS2NvbmZpZwo+IEBAIC02LDcgKzYsNyBAQCBjb25maWcgU1lOQ19G
-SUxFCj4gIAlkZWZhdWx0IG4KPiAgCXNlbGVjdCBETUFfU0hBUkVEX0JVRkZFUgo+ICAJLS0taGVs
-cC0tLQo+IC0JICBUaGUgU3luYyBGaWxlIEZyYW1ld29yayBhZGRzIGV4cGxpY2l0IHN5bmNyb25p
-emF0aW9uIHZpYQo+ICsJICBUaGUgU3luYyBGaWxlIEZyYW1ld29yayBhZGRzIGV4cGxpY2l0IHN5
-bmNocm9uaXphdGlvbiB2aWEKPiAgCSAgdXNlcnNwYWNlLiBJdCBlbmFibGVzIHNlbmQvcmVjZWl2
-ZSAnc3RydWN0IGRtYV9mZW5jZScgb2JqZWN0cyB0by9mcm9tCj4gIAkgIHVzZXJzcGFjZSB2aWEg
-U3luYyBGaWxlIGZkcyBmb3Igc3luY2hyb25pemF0aW9uIGJldHdlZW4gZHJpdmVycyB2aWEKPiAg
-CSAgdXNlcnNwYWNlIGNvbXBvbmVudHMuIEl0IGhhcyBiZWVuIHBvcnRlZCBmcm9tIEFuZHJvaWQu
-Cj4gLS0gCj4gMi4yMC4xCj4gCj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KPiBkcmktZGV2ZWwgbWFpbGluZyBsaXN0Cj4gZHJpLWRldmVsQGxpc3RzLmZy
-ZWVkZXNrdG9wLm9yZwo+IGh0dHBzOi8vbGlzdHMuZnJlZWRlc2t0b3Aub3JnL21haWxtYW4vbGlz
-dGluZm8vZHJpLWRldmVsCgotLSAKRGFuaWVsIFZldHRlcgpTb2Z0d2FyZSBFbmdpbmVlciwgSW50
-ZWwgQ29ycG9yYXRpb24KaHR0cDovL2Jsb2cuZmZ3bGwuY2gKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGlu
-YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWls
-bWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+SGkgZXZlcnlvbmUsCgpob3BlZnVsbHkgdGhlIGxhc3QgaXRlcmF0aW9uIG9mIHRob3NlIHBhdGNo
+ZXMuCgpGb3Igbm93IEkndmUgYWRkcmVzc2VkIHRoZSBpc3N1ZSBvZiB1bm1hcHBpbmcgaW1wb3J0
+ZWQgQk9zIGZyb20gdGhlIGFtZGdwdSBwYWdlIHRhYmxlcyBpbW1lZGlhdGVseSBieSBsb2NraW5n
+IHRoZSBwYWdlIHRhYmxlcyBpbiBwbGFjZS4KCkZvciBITU0gaGFuZGxpbmcgd2UgYXJlIGdldHRp
+bmcgdGhlIGFiaWxpdHkgdG8gaW52YWxpZGF0ZSBCT3Mgd2l0aG91dCBsb2NraW5nIHRoZSBWTSBh
+bnl3YXksIHNvIHRoaXMgbGFzdCBUT0RPIHdpbGwgcHJvYmFibHkgZ28gYXdheSByYXRoZXIgc29v
+bi4KClBsYWNlIGNvbW1lbnQsCkNocmlzdGlhbi4KCgpfX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8t
+bW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4v
+bGlzdGluZm8vbGluYXJvLW1tLXNpZwo=
