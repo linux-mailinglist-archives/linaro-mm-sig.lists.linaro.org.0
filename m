@@ -2,58 +2,109 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C96318672E
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Mar 2020 09:57:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 053BC186817
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Mar 2020 10:42:29 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 39B6261816
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Mar 2020 08:57:33 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 28A8960B64
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Mar 2020 09:42:28 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 2DA476182C; Mon, 16 Mar 2020 08:57:33 +0000 (UTC)
+	id 1A706615EF; Mon, 16 Mar 2020 09:42:28 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE autolearn=disabled version=3.4.2
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,FORGED_SPF_HELO,
+	MAILING_LIST_MULTI,MSGID_FROM_MTA_HEADER,RCVD_IN_DNSWL_BLOCKED,
+	SPF_HELO_PASS autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 392C26176E;
-	Mon, 16 Mar 2020 08:56:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 17DF96176E;
+	Mon, 16 Mar 2020 09:41:55 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 543E460961
- for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Mar 2020 08:56:48 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id DF06C60B64
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Mar 2020 09:41:52 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 44C54615EF; Mon, 16 Mar 2020 08:56:48 +0000 (UTC)
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [198.137.202.133])
- by lists.linaro.org (Postfix) with ESMTPS id 34DEC60961
- for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Mar 2020 08:56:46 +0000 (UTC)
-Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red
- Hat Linux)) id 1jDlYB-0004si-0O; Mon, 16 Mar 2020 08:56:43 +0000
-Date: Mon, 16 Mar 2020 01:56:42 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Jason Gunthorpe <jgg@ziepe.ca>
-Message-ID: <20200316085642.GC1831@infradead.org>
+ id CCF946176E; Mon, 16 Mar 2020 09:41:52 +0000 (UTC)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on2059.outbound.protection.outlook.com [40.107.244.59])
+ by lists.linaro.org (Postfix) with ESMTPS id 2108660B64
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Mar 2020 09:41:51 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=J3BWMDmUQNSZYM0FNTzsfYX9g9INCvUuA5V+1llH1TrUyGDeHVJaJq4LaGRbpHTb+5dXo235wIebeFnSAQg+ZbIniLmVEnBYfJp2amBSGR9akgZ2ZUWpT1f7KxE9IhweHYayIO+TdIRJ8tvx+rdK0hfta+SAsuWkru/3VNXQqSr2zww52pyLaNQp2R3Q81Po27xppeMzMwM6sSGzwNRuoAIy02SgkDcAE4BmzMF47Lca7JTvGYd5LiuL7sh3AQ/jIsOXO/4pLFTvIh/RP7OBUxSnNzN1ufGHoMtxhPwsqFAzejAvbbubwYRYVxB58TWQXwKF5fBsUbwNL7pXwZe9qA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tE/ehu1roYRqkIQBrMNoQ+RZ2LuRlp/+thwnapVYCeg=;
+ b=Zb9KIfEYn9CIeDpcM3xl5edi4QRKZsYMXzz+7qrSvOOHR5ZOUI2lIQYGWPpamNJbjtSSORUhrBAoxGjVNDdLHLG/Zf/j33CIKrJwzWu4+xDVPJ+2HfmdaazDOIYPTlBosDyzm1dFDczVrKrq9z1MIlqRm4K5aAX3QR0c/JvSuqWzaGm3+3mjI+Tm/zkSEgBtG6uEYfyBBLzvYHdLoeGylMBdq0HmP9iXpOwqOL5ODabLlHKF8dmACVvtcBE1Xp8Vrta9ayUj3eD4cZqM+hfSk91EJJ+C/a6qEz/aqGBfy2iJgDLEjCXNDVRSyU2hTy3alHVnKCoIeOQBqfVVNHREQQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+Received: from DM5PR12MB1578.namprd12.prod.outlook.com (2603:10b6:4:e::7) by
+ DM5PR12MB1593.namprd12.prod.outlook.com (2603:10b6:4:10::11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2814.13; Mon, 16 Mar 2020 09:41:48 +0000
+Received: from DM5PR12MB1578.namprd12.prod.outlook.com
+ ([fe80::50f0:a148:4f52:701f]) by DM5PR12MB1578.namprd12.prod.outlook.com
+ ([fe80::50f0:a148:4f52:701f%11]) with mapi id 15.20.2814.021; Mon, 16 Mar
+ 2020 09:41:48 +0000
+To: Christoph Hellwig <hch@infradead.org>, Jason Gunthorpe <jgg@ziepe.ca>
 References: <20200311135158.3310-1-christian.koenig@amd.com>
  <20200311135158.3310-2-christian.koenig@amd.com>
  <20200311152838.GA24280@infradead.org>
  <f2b46f49-a8d0-9d43-3120-e1ed36fc3a80@gmail.com>
  <20200312101943.GA14618@infradead.org>
  <b5db44eb-1dde-1671-feb0-9e47d120f172@amd.com>
- <20200312104729.GA26031@infradead.org>
- <20200312141928.GK31668@ziepe.ca>
- <20200313112139.GA4913@infradead.org>
- <20200313121742.GZ31668@ziepe.ca>
+ <20200312104729.GA26031@infradead.org> <20200312141928.GK31668@ziepe.ca>
+ <20200313112139.GA4913@infradead.org> <20200313121742.GZ31668@ziepe.ca>
+ <20200316085642.GC1831@infradead.org>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+Message-ID: <eb567569-426a-0845-b443-a20155897705@amd.com>
+Date: Mon, 16 Mar 2020 10:41:42 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
+In-Reply-To: <20200316085642.GC1831@infradead.org>
+Content-Language: en-US
+X-ClientProxiedBy: AM4PR07CA0031.eurprd07.prod.outlook.com
+ (2603:10a6:205:1::44) To DM5PR12MB1578.namprd12.prod.outlook.com
+ (2603:10b6:4:e::7)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200313121742.GZ31668@ziepe.ca>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
+ (2a02:908:1252:fb60:be8a:bd56:1f94:86e7) by
+ AM4PR07CA0031.eurprd07.prod.outlook.com (2603:10a6:205:1::44) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2835.12 via Frontend Transport; Mon, 16 Mar 2020 09:41:46 +0000
+X-Originating-IP: [2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: d3f1327c-a7c8-4225-4309-08d7c98e3f56
+X-MS-TrafficTypeDiagnostic: DM5PR12MB1593:|DM5PR12MB1593:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM5PR12MB15933899057C5EF833D5E53D83F90@DM5PR12MB1593.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
+X-Forefront-PRVS: 03449D5DD1
+X-Forefront-Antispam-Report: SFV:NSPM;
+ SFS:(10009020)(4636009)(396003)(366004)(136003)(39860400002)(346002)(376002)(199004)(2616005)(110136005)(5660300002)(4326008)(31686004)(2906002)(52116002)(186003)(16526019)(316002)(36756003)(6666004)(478600001)(8936002)(31696002)(81166006)(66476007)(81156014)(8676002)(86362001)(66946007)(6486002)(66556008);
+ DIR:OUT; SFP:1101; SCL:1; SRVR:DM5PR12MB1593;
+ H:DM5PR12MB1578.namprd12.prod.outlook.com; FPR:; SPF:None; LANG:en;
+ PTR:InfoNoRecords; A:1; 
+Received-SPF: None (protection.outlook.com: amd.com does not designate
+ permitted sender hosts)
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 4CuLZSlaTdMeSayUaDNpWYMGYQ4Koo8AMZ7G8vkTDQYFW8J/jFj6Qa5uVCRBYcEfNr+AJJ8xtw3OJNvgUrQlHYVVU8BRu7D+pQnkekGwlkhDj03sucbyWZzktGQ/ktENFiQmMVmIJNYZsD6936fG91Rmn45Ue69b0kNPsY0f8B07u1LglZTF625blOIyh5M3DXIgDoY6b52GiZxqW0gFAKM6/+yMGu4EgVIYbNlix5riWy8k306ORIuaC9JnYJp3x8px7utAWRsi8LKl+gvBBFXaFwc39SZLrwyErfla5QLL2IpMu3MGIxlWM6ToAuBwVLj91EH6mbiOyGYDXSLucK+VJr2zwIG+TRuafwmLp7yLeXxBoiqao68cp3itedkYfJsMwNd6WQ3C0rk3QpxZRYnzi90LlZh0LbxrZYwB8WjEgtigQVJKmgL0Td2CxRKm
+X-MS-Exchange-AntiSpam-MessageData: D3I2axjs0aokLlh64gy5DIOCMwyZld//r8xbziSbaBLahNsWmG2sy4jel3uOJ8qk5OBCYkgut+CDCmb4fpvsQcwcm9ABgfoVhGQNRQFLUP6Ed2I4PU3fw5nGou+O/w7pDF4fobSVL9vuoUdP3NoO/aLz2wUnxKZ62+3TVRMyt/qd+m12x0vU/75g9TvZNCAbGmQY1jsC9S5c8dnb4l1hGQ==
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d3f1327c-a7c8-4225-4309-08d7c98e3f56
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Mar 2020 09:41:48.5949 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: sSzmZQjxDdLhuiMuSaU4W38H3Kh7ZveDP5R3q9shkPYhMIHo6IxQ/bAqRoRjRUGg
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR12MB1593
 X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: David1.Zhou@amd.com, Logan Gunthorpe <logang@deltatee.com>,
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- Christoph Hellwig <hch@infradead.org>, daniel@ffwll.ch,
- linaro-mm-sig@lists.linaro.org,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+Cc: David1.Zhou@amd.com, intel-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+ daniel@ffwll.ch, Logan Gunthorpe <logang@deltatee.com>,
  linux-media@vger.kernel.org
 Subject: Re: [Linaro-mm-sig] [PATCH 1/6] lib/scatterlist: add
 	sg_set_dma_addr() function
@@ -69,36 +120,42 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gRnJpLCBNYXIgMTMsIDIwMjAgYXQgMDk6MTc6NDJBTSAtMDMwMCwgSmFzb24gR3VudGhvcnBl
-IHdyb3RlOgo+IE9uIEZyaSwgTWFyIDEzLCAyMDIwIGF0IDA0OjIxOjM5QU0gLTA3MDAsIENocmlz
-dG9waCBIZWxsd2lnIHdyb3RlOgo+ID4gT24gVGh1LCBNYXIgMTIsIDIwMjAgYXQgMTE6MTk6MjhB
-TSAtMDMwMCwgSmFzb24gR3VudGhvcnBlIHdyb3RlOgo+ID4gPiBUaGUgbm9uLXBhZ2Ugc2NhdHRl
-cmxpc3QgaXMgYWxzbyBhIGJpZyBjb25jZXJuIGZvciBSRE1BIGFzIHdlIGhhdmUKPiA+ID4gZHJp
-dmVycyB0aGF0IHdhbnQgdGhlIHBhZ2UgbGlzdCwgc28gZXZlbiBpZiB3ZSBkaWQgYXMgdGhpcyBz
-ZXJpZXMKPiA+ID4gY29udGVtcGxhdGVzIEknZCBoYXZlIHN0aWxsIGhhdmUgdG8gc3BsaXQgdGhl
-IGRyaXZlcnMgYW5kIGNyZWF0ZSB0aGUKPiA+ID4gbm90aW9uIG9mIGEgZG1hLW9ubHkgU0dMLgo+
-ID4gCj4gPiBUaGUgZHJpdmVycyBJIGxvb2tlZCBhdCB3YW50IGEgbGlzdCBvZiBJT1ZBIGFkZHJl
-c3MsIGFsaWduZWQgdG8gdGhlCj4gPiBkZXZpY2UgInBhZ2Ugc2l6ZSIuICBXaGF0IG90aGVyIGRh
-dGEgZG8gZHJpdmVycyB3YW50PyAgRXhlY2VwdCBmb3IgdGhlCj4gPiBzb2Z0d2FyZSBwcm90b2Nv
-bCBzdGFjayBkcml2ZXJzLCB3aGljaCBvZiBjb3VzZSBuZWVkIHBhZ2VzIGZvciB0aGUKPiA+IHN0
-YWNrIGZ1dGhlciBkb3duLgo+IAo+IEluIHByaW5jaXBsZSBpdCBpcyBwb3NzaWJsZSB0byBoYXZl
-IGp1c3QgYW4gYWxpZ25lZCBwYWdlIGxpc3QgLQo+IGhvd2V2ZXIgdGhlIHBhZ2Ugc2l6ZSBpcyB2
-YXJpYWJsZSwgZm9sbG93aW5nIGNlcnRhaW4gcnVsZXMsIGFuZCB0b2RheQo+IHRoZSBkcml2ZXJz
-IHN0aWxsIGRldGVybWluZSB0aGUgY29ycmVjdCBwYWdlIHNpemUgbGFyZ2VseSBvbiB0aGVpcgo+
-IG93bi4gIAo+IAo+IFNvbWUgcHJvZ3Jlc3Mgd2FzIG1hZGUgcmVjZW50bHkgdG8gY29uc29saWRh
-dGUgdGhpcywgYnV0IG1vcmUgaXMKPiBuZWVkZWQuCj4gCj4gSWYgdGhlIGNvbW1vbiBjb2RlIGRv
-ZXNuJ3Qga25vdyB0aGUgZGV2aWNlIHBhZ2Ugc2l6ZSBpbiBhZHZhbmNlIHRoZW4KPiB0b2RheSdz
-IGFwcHJvYWNoIG9mIHNlbmRpbmcgbGFyZ2VzdCBwb3NzaWJsZSBkbWEgbWFwcGVkIFNHTHMgaW50
-byB0aGUKPiBkZXZpY2UgZHJpdmVyIGlzIGJlc3QuIFRoZSBkcml2ZXIgb25seSBoYXMgdG8gZG8g
-c3BsaXR0aW5nLgoKVGhlIHBvaW50IHdhcyB0aGF0IGRyaXZlcnMgZG9uJ3QgbmVlZCBwYWdlcywg
-ZHJpdmVycyBuZWVkIElPVkFzLiAgSW4Kd2hhdCBmb3JtIHRoZXkgYXJlIHN0dWZmZWQgaW50byB0
-aGUgaGFyZHdhcmUgaXMgdGhlIGRyaXZlcnMgcHJvYmxlbS4KX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGlu
-YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWls
-bWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+QW0gMTYuMDMuMjAgdW0gMDk6NTYgc2NocmllYiBDaHJpc3RvcGggSGVsbHdpZzoKPiBPbiBGcmks
+IE1hciAxMywgMjAyMCBhdCAwOToxNzo0MkFNIC0wMzAwLCBKYXNvbiBHdW50aG9ycGUgd3JvdGU6
+Cj4+IE9uIEZyaSwgTWFyIDEzLCAyMDIwIGF0IDA0OjIxOjM5QU0gLTA3MDAsIENocmlzdG9waCBI
+ZWxsd2lnIHdyb3RlOgo+Pj4gT24gVGh1LCBNYXIgMTIsIDIwMjAgYXQgMTE6MTk6MjhBTSAtMDMw
+MCwgSmFzb24gR3VudGhvcnBlIHdyb3RlOgo+Pj4+IFRoZSBub24tcGFnZSBzY2F0dGVybGlzdCBp
+cyBhbHNvIGEgYmlnIGNvbmNlcm4gZm9yIFJETUEgYXMgd2UgaGF2ZQo+Pj4+IGRyaXZlcnMgdGhh
+dCB3YW50IHRoZSBwYWdlIGxpc3QsIHNvIGV2ZW4gaWYgd2UgZGlkIGFzIHRoaXMgc2VyaWVzCj4+
+Pj4gY29udGVtcGxhdGVzIEknZCBoYXZlIHN0aWxsIGhhdmUgdG8gc3BsaXQgdGhlIGRyaXZlcnMg
+YW5kIGNyZWF0ZSB0aGUKPj4+PiBub3Rpb24gb2YgYSBkbWEtb25seSBTR0wuCj4+PiBUaGUgZHJp
+dmVycyBJIGxvb2tlZCBhdCB3YW50IGEgbGlzdCBvZiBJT1ZBIGFkZHJlc3MsIGFsaWduZWQgdG8g
+dGhlCj4+PiBkZXZpY2UgInBhZ2Ugc2l6ZSIuICBXaGF0IG90aGVyIGRhdGEgZG8gZHJpdmVycyB3
+YW50PyAgRXhlY2VwdCBmb3IgdGhlCj4+PiBzb2Z0d2FyZSBwcm90b2NvbCBzdGFjayBkcml2ZXJz
+LCB3aGljaCBvZiBjb3VzZSBuZWVkIHBhZ2VzIGZvciB0aGUKPj4+IHN0YWNrIGZ1dGhlciBkb3du
+Lgo+PiBJbiBwcmluY2lwbGUgaXQgaXMgcG9zc2libGUgdG8gaGF2ZSBqdXN0IGFuIGFsaWduZWQg
+cGFnZSBsaXN0IC0KPj4gaG93ZXZlciB0aGUgcGFnZSBzaXplIGlzIHZhcmlhYmxlLCBmb2xsb3dp
+bmcgY2VydGFpbiBydWxlcywgYW5kIHRvZGF5Cj4+IHRoZSBkcml2ZXJzIHN0aWxsIGRldGVybWlu
+ZSB0aGUgY29ycmVjdCBwYWdlIHNpemUgbGFyZ2VseSBvbiB0aGVpcgo+PiBvd24uCj4+Cj4+IFNv
+bWUgcHJvZ3Jlc3Mgd2FzIG1hZGUgcmVjZW50bHkgdG8gY29uc29saWRhdGUgdGhpcywgYnV0IG1v
+cmUgaXMKPj4gbmVlZGVkLgo+Pgo+PiBJZiB0aGUgY29tbW9uIGNvZGUgZG9lc24ndCBrbm93IHRo
+ZSBkZXZpY2UgcGFnZSBzaXplIGluIGFkdmFuY2UgdGhlbgo+PiB0b2RheSdzIGFwcHJvYWNoIG9m
+IHNlbmRpbmcgbGFyZ2VzdCBwb3NzaWJsZSBkbWEgbWFwcGVkIFNHTHMgaW50byB0aGUKPj4gZGV2
+aWNlIGRyaXZlciBpcyBiZXN0LiBUaGUgZHJpdmVyIG9ubHkgaGFzIHRvIGRvIHNwbGl0dGluZy4K
+PiBUaGUgcG9pbnQgd2FzIHRoYXQgZHJpdmVycyBkb24ndCBuZWVkIHBhZ2VzLCBkcml2ZXJzIG5l
+ZWQgSU9WQXMuICBJbgo+IHdoYXQgZm9ybSB0aGV5IGFyZSBzdHVmZmVkIGludG8gdGhlIGhhcmR3
+YXJlIGlzIHRoZSBkcml2ZXJzIHByb2JsZW0uCgpXZWxsIEkgd291bGQgcHJlZmVyIGlmIHRoZSBk
+cml2ZXJzIGNhbiBzb21laG93IGV4cHJlc3MgdGhlaXIgCnJlcXVpcmVtZW50cyBhbmQgZ2V0IElP
+VkEgc3RydWN0dXJlcyBhbHJlYWR5IGluIHRoZSBmb3JtIHRoZXkgbmVlZC4KCkNvbnZlcnRpbmcg
+dGhlIElPVkEgZGF0YSBmcm9tIG9uZSBmb3JtIHRvIGFub3RoZXIgaXMgc29tZXRpbWVzIHF1aXRl
+IApjb3N0bHkuIEVzcGVjaWFsbHkgd2hlbiBpdCBpcyBvbmx5IHRlbXBvcmFyaWx5IG5lZWRlZC4K
+ClJlZ2FyZHMsCkNocmlzdGlhbi4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0
+cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xp
+bmFyby1tbS1zaWcK
