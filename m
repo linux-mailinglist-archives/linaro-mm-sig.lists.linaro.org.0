@@ -2,57 +2,58 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id D842C1B6D30
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2020 07:30:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7CCB1B6D31
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2020 07:31:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 011EF6670E
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2020 05:30:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 05089666F8
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2020 05:31:16 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id E5A0966710; Fri, 24 Apr 2020 05:30:37 +0000 (UTC)
+	id EDBD76670E; Fri, 24 Apr 2020 05:31:15 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
 	FREEMAIL_FROM,MAILING_LIST_MULTI,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,
 	RCVD_IN_MSPIKE_WL,SPF_HELO_NONE autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 20692619C1;
-	Fri, 24 Apr 2020 05:29:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 45523619CF;
+	Fri, 24 Apr 2020 05:29:42 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 5EDC965FCE
- for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Apr 2020 01:23:49 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 2B7D665FCE
+ for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Apr 2020 01:25:22 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 3FF6A65FE5; Thu,  2 Apr 2020 01:23:49 +0000 (UTC)
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
- [209.85.214.193])
- by lists.linaro.org (Postfix) with ESMTPS id 4C96165FCE
- for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Apr 2020 01:23:48 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id d24so708337pll.8
- for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Apr 2020 18:23:48 -0700 (PDT)
+ id 1ECBD65FE5; Thu,  2 Apr 2020 01:25:22 +0000 (UTC)
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
+ [209.85.216.68])
+ by lists.linaro.org (Postfix) with ESMTPS id 3AD2865FCE
+ for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Apr 2020 01:25:21 +0000 (UTC)
+Received: by mail-pj1-f68.google.com with SMTP id fh8so872170pjb.5
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Apr 2020 18:25:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
  bh=ECaKk1XEhaLeQWM1QY7b2cbJfc2H+NtdzI3cEs6W3bc=;
- b=sStRNiSMvaKHP+dej8LkkirWuQxGt0/+Xo1rc80IX6GpHnbui9YQC6FY/vD2ylpR+y
- vpVY0wUMbGAPAgD6yzhlXAivtw6AGXJP0itcpq6bcINtU3Fs+e4ttd4bEPj2jpq6jWDp
- tDZvIEATYAkm8mL9+zA+AiEUR5sAG8+yyEmObI0GSwquGhS9mXvdkCZy9bNRATkEp6bA
- V8clW3xbu/R8feJtCx7bAQj4fmYbYnE3o8y+7YmSzfaZM0UaWCBjGKuuHkG2U/3EMThm
- 6DkQRpLDTqJPFnDvDJvTTHxjPyLU7bC12PFak/Nf15yhwTibgxSKcXl3iRMTCYGqcjbL
- dI3g==
-X-Gm-Message-State: AGi0PuYBJMzImhGEq7qYPxh08dGq44rfNZ0pzoSQclUxZlDP5bn1F789
- G77ldx1refbEq8ThJ825pDU=
-X-Google-Smtp-Source: APiQypKphdtygtFszPZHfDmC+v0cOhFzs1P9x5/bGH+iexQPlMgBXonWT55xdU1Z9qFQawYE5bgI5Q==
-X-Received: by 2002:a17:90a:a602:: with SMTP id
- c2mr931092pjq.135.1585790627416; 
- Wed, 01 Apr 2020 18:23:47 -0700 (PDT)
+ b=QhYziMCNEoU01qQU8niYfCSsqgCN7o7MH/cvqSfhcEvSz0DSUx17f4IHGszIEafJVG
+ vsyvzh1FSN0hFQxDO0zxOtJt0dBjIKr6J5tAN3a9RxzTJuPHQrtlptCLF6kJxGzuxew6
+ Yb7T0FyPg6Rp5/OhgQ4c8csP9Iu1tCjIVd1T+3mQ7V6txXXP9UKsx4XKuD9A6GJs7BN6
+ Qiy35GKRwfYD5M+42l0rN/9rs2ZdjF6vB6Spizv3GQ9cabnaf/TuP49XDC8HVkO68693
+ wbMCldul+RYue+X/dFvriSGqiKgtDoTVpt6EYfHkxTAGC4aRYbqbeHwGKAiEMop0iOTw
+ gcCw==
+X-Gm-Message-State: AGi0PuYkxZlPWR6ovF1p4DhrZBJGNrgVZR5qUI0twANzybkM19nKnC4i
+ EoIsoVxfIXsEtu3htSZMdmM=
+X-Google-Smtp-Source: APiQypLOFU9FlGJw8iOOANTLu4h97F20JAA88jZyZ5O8imCDYlYaifG5zMltxu9kuj6+J1fWyc7dAQ==
+X-Received: by 2002:a17:90a:36c7:: with SMTP id
+ t65mr946992pjb.182.1585790720459; 
+ Wed, 01 Apr 2020 18:25:20 -0700 (PDT)
 Received: from OptiPlexFedora.fios-router.home ([47.144.161.84])
- by smtp.gmail.com with ESMTPSA id x71sm2424587pfd.129.2020.04.01.18.23.45
+ by smtp.gmail.com with ESMTPSA id q71sm2516633pfc.92.2020.04.01.18.25.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Apr 2020 18:23:46 -0700 (PDT)
+ Wed, 01 Apr 2020 18:25:19 -0700 (PDT)
 From: "John B. Wyatt IV" <jbwyatt4@gmail.com>
-To: Laura Abbott <labbott@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>,
+To: outreachy-kernel@googlegroups.com, Laura Abbott <labbott@redhat.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  =?UTF-8?q?Arve=20Hj=C3=B8nnev=C3=A5g?= <arve@android.com>,
  Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>,
@@ -60,8 +61,8 @@ To: Laura Abbott <labbott@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>,
  Christian Brauner <christian@brauner.io>, devel@driverdev.osuosl.org,
  dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
  linux-kernel@vger.kernel.org
-Date: Wed,  1 Apr 2020 18:23:15 -0700
-Message-Id: <20200402012315.429064-1-jbwyatt4@gmail.com>
+Date: Wed,  1 Apr 2020 18:25:15 -0700
+Message-Id: <20200402012515.429329-1-jbwyatt4@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 X-Virus-Scanned: ClamAV using ClamSMTP
