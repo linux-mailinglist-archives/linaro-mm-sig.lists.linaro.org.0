@@ -2,55 +2,65 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 412201B6D9C
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2020 07:56:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB9611A26B3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Apr 2020 18:04:59 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 71AAF619C1
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2020 05:56:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DFB8C665C6
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Apr 2020 16:04:58 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 625BE66033; Fri, 24 Apr 2020 05:56:08 +0000 (UTC)
+	id C245666627; Wed,  8 Apr 2020 16:04:58 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.4 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_HI,SPF_HELO_NONE,SUBJ_OBFU_PUNCT_FEW autolearn=disabled
-	version=3.4.2
+X-Spam-Status: No, score=-5.2 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
+	RCVD_IN_DNSWL_MED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE
+	autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8BCA866592;
-	Fri, 24 Apr 2020 05:30:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E36E7665FF;
+	Wed,  8 Apr 2020 16:04:30 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 86F7560F23
- for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2020 15:40:38 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 4E550665BE
+ for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2020 16:04:28 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 6DF88665FF; Wed,  8 Apr 2020 15:40:38 +0000 (UTC)
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by lists.linaro.org (Postfix) with ESMTPS id 8034A60F23
- for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2020 15:40:37 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 0BEE968C65; Wed,  8 Apr 2020 17:40:34 +0200 (CEST)
-Date: Wed, 8 Apr 2020 17:40:33 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Hillf Danton <hdanton@sina.com>
-Message-ID: <20200408154033.GA28499@lst.de>
+ id 3A1E2665FF; Wed,  8 Apr 2020 16:04:28 +0000 (UTC)
+Received: from pandora.armlinux.org.uk (pandora.armlinux.org.uk [78.32.30.218])
+ by lists.linaro.org (Postfix) with ESMTPS id A338F665BE
+ for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2020 16:04:26 +0000 (UTC)
+Received: from shell.armlinux.org.uk
+ ([2001:4d48:ad52:3201:5054:ff:fe00:4ec]:35708)
+ by pandora.armlinux.org.uk with esmtpsa
+ (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.90_1)
+ (envelope-from <linux@armlinux.org.uk>)
+ id 1jMDAr-00075w-Kb; Wed, 08 Apr 2020 17:03:33 +0100
+Received: from linux by shell.armlinux.org.uk with local (Exim 4.92)
+ (envelope-from <linux@shell.armlinux.org.uk>)
+ id 1jMDAi-0001wo-US; Wed, 08 Apr 2020 17:03:24 +0100
+Date: Wed, 8 Apr 2020 17:03:24 +0100
+From: Russell King - ARM Linux admin <linux@armlinux.org.uk>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <20200408160324.GS25745@shell.armlinux.org.uk>
 References: <20200408115926.1467567-1-hch@lst.de>
- <20200408124833.13032-1-hdanton@sina.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200408124833.13032-1-hdanton@sina.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+In-Reply-To: <20200408115926.1467567-1-hch@lst.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Virus-Scanned: ClamAV using ClamSMTP
-X-Mailman-Approved-At: Fri, 24 Apr 2020 05:29:38 +0000
-Cc: Christophe Leroy <christophe.leroy@c-s.fr>, linux-arch@vger.kernel.org,
- linux-hyperv@vger.kernel.org, linux-s390@vger.kernel.org,
- Peter Zijlstra <peterz@infradead.org>, syzkaller-bugs@googlegroups.com,
- bpf@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
- linux-mm@kvack.org, iommu@lists.linux-foundation.org,
- Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
- Christoph Hellwig <hch@lst.de>, linux-arm-kernel@lists.infradead.org
-Subject: Re: [Linaro-mm-sig] [PATCH 02/28] staging: android: ion: use vmap
- instead of vm_map_ram
+Cc: linux-hyperv@vger.kernel.org, David Airlie <airlied@linux.ie>,
+ dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+ "K. Y. Srinivasan" <kys@microsoft.com>, linux-arch@vger.kernel.org,
+ linux-s390@vger.kernel.org, Wei Liu <wei.liu@kernel.org>,
+ Stephen Hemminger <sthemmin@microsoft.com>, x86@kernel.org,
+ Peter Zijlstra <peterz@infradead.org>, Nitin Gupta <ngupta@vflare.org>,
+ Daniel Vetter <daniel@ffwll.ch>, Haiyang Zhang <haiyangz@microsoft.com>,
+ linaro-mm-sig@lists.linaro.org, bpf@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org,
+ Christophe Leroy <christophe.leroy@c-s.fr>,
+ Robin Murphy <robin.murphy@arm.com>, linux-kernel@vger.kernel.org,
+ Minchan Kim <minchan@kernel.org>, iommu@lists.linux-foundation.org,
+ Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org
+Subject: Re: [Linaro-mm-sig] decruft the vmalloc API
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
 Precedence: list
@@ -69,13 +79,20 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gV2VkLCBBcHIgMDgsIDIwMjAgYXQgMDg6NDg6MzNQTSArMDgwMCwgSGlsbGYgRGFudG9uIHdy
-b3RlOgo+ID4gLQl2b2lkICphZGRyID0gdm1fbWFwX3JhbShwYWdlcywgbnVtLCAtMSwgcGdwcm90
-KTsKPiA+ICsJdm9pZCAqYWRkciA9IHZtYXAocGFnZXMsIG51bSwgVk1fTUFQKTsKPiAKPiBBIG1l
-cmdlIGdsaXRjaD8KPiAKPiB2b2lkICp2bWFwKHN0cnVjdCBwYWdlICoqcGFnZXMsIHVuc2lnbmVk
-IGludCBjb3VudCwKPiAJICAgdW5zaWduZWQgbG9uZyBmbGFncywgcGdwcm90X3QgcHJvdCkKClll
-cywgdGhhbmtzIGZvciB0aGUgaGVhZHN1cCwgeW91IHdlcmUgYXMgZmFzdCBhcyB0aGUgYnVpbGQg
-Ym90IDopCgpGaXhlZCBub3cuCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlzdHMu
-bGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9saXN0aW5mby9saW5h
-cm8tbW0tc2lnCg==
+T24gV2VkLCBBcHIgMDgsIDIwMjAgYXQgMDE6NTg6NThQTSArMDIwMCwgQ2hyaXN0b3BoIEhlbGx3
+aWcgd3JvdGU6Cj4gSGkgYWxsLAo+IAo+IFBldGVyIG5vdGljZWQgdGhhdCB3aXRoIHNvbWUgZHVt
+YiBsdWNrIHlvdSBjYW4gdG9hc3QgdGhlIGtlcm5lbCBhZGRyZXNzCj4gc3BhY2Ugd2l0aCBleHBv
+cnRlZCB2bWFsbG9jIHN5bWJvbHMuCj4gCj4gSSB1c2VkIHRoaXMgYXMgYW4gb3Bwb3J0dW5pdHkg
+dG8gZGVjcnVmdCB0aGUgdm1hbGxvYy5jIEFQSSBhbmQgbWFrZSBpdAo+IG11Y2ggbW9yZSBzeXN0
+ZW1hdGljLiAgVGhpcyBhbHNvIHJlbW92ZXMgYW55IGNoYW5jZSB0byBjcmVhdGUgdm1hbGxvYwo+
+IG1hcHBpbmdzIG91dHNpZGUgdGhlIGRlc2lnbmF0ZWQgYXJlYXMgb3IgdXNpbmcgZXhlY3V0YWJs
+ZSBwZXJtaXNzaW9ucwo+IGZyb20gbW9kdWxlcy4gIEJlc2lkZXMgdGhhdCBpdCByZW1vdmVzIG1v
+cmUgdGhhbiAzMDAgbGluZXMgb2YgY29kZS4KCkkgaGF2ZW4ndCByZWFkIGFsbCB5b3VyIHBhdGNo
+ZXMgeWV0LgoKSGF2ZSB5b3UgdGVzdGVkIGl0IG9uIDMyLWJpdCBBUk0sIHdoZXJlIHRoZSBtb2R1
+bGUgYXJlYSBpcyBsb2NhdGVkCl9iZWxvd18gUEFHRV9PRkZTRVQgYW5kIG91dHNpZGUgb2YgdGhl
+IHZtYWxsb2MgYXJlYT8KCi0tIApSTUsncyBQYXRjaCBzeXN0ZW06IGh0dHBzOi8vd3d3LmFybWxp
+bnV4Lm9yZy51ay9kZXZlbG9wZXIvcGF0Y2hlcy8KRlRUQyBicm9hZGJhbmQgZm9yIDAuOG1pbGUg
+bGluZSBpbiBzdWJ1cmJpYTogc3luYyBhdCAxMC4yTWJwcyBkb3duIDU4N2ticHMgdXAKX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBt
+YWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMu
+bGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
