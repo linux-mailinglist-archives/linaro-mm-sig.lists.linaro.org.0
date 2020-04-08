@@ -2,61 +2,55 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F2B71A21D4
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Apr 2020 14:21:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 327E41B6D91
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2020 07:54:38 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6AA506660D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Apr 2020 12:21:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 551B2619C1
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2020 05:54:37 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 596846661F; Wed,  8 Apr 2020 12:21:53 +0000 (UTC)
+	id 45F10619CF; Fri, 24 Apr 2020 05:54:37 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_HI,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE
+X-Spam-Status: No, score=-2.4 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
+	RCVD_IN_DNSWL_NONE,SPF_HELO_NONE,SUBJ_OBFU_PUNCT_FEW
 	autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2EFB066596;
-	Wed,  8 Apr 2020 12:21:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AEE3A66576;
+	Fri, 24 Apr 2020 05:30:06 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id DFA8460389
- for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2020 12:21:26 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 528D766626
+ for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2020 12:24:03 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id D042466596; Wed,  8 Apr 2020 12:21:26 +0000 (UTC)
-Received: from merlin.infradead.org (merlin.infradead.org [205.233.59.134])
- by lists.linaro.org (Postfix) with ESMTPS id EEA9660389
- for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2020 12:21:25 +0000 (UTC)
-Received: from j217100.upc-j.chello.nl ([24.132.217.100]
- helo=noisy.programming.kicks-ass.net)
- by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
- id 1jM9hd-0001dI-4e; Wed, 08 Apr 2020 12:21:09 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id CE886307972;
- Wed,  8 Apr 2020 14:21:04 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id B4EEE2B2354E8; Wed,  8 Apr 2020 14:21:04 +0200 (CEST)
-Date: Wed, 8 Apr 2020 14:21:04 +0200
-From: Peter Zijlstra <peterz@infradead.org>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20200408122104.GZ20713@hirez.programming.kicks-ass.net>
+ id 374EA66631; Wed,  8 Apr 2020 12:24:03 +0000 (UTC)
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by lists.linaro.org (Postfix) with ESMTPS id 1D5AD66626
+ for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2020 12:24:02 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 450A868C4E; Wed,  8 Apr 2020 14:23:57 +0200 (CEST)
+Date: Wed, 8 Apr 2020 14:23:56 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Peter Zijlstra <peterz@infradead.org>
+Message-ID: <20200408122356.GA13282@lst.de>
 References: <20200408115926.1467567-1-hch@lst.de>
  <20200408115926.1467567-18-hch@lst.de>
+ <20200408122104.GZ20713@hirez.programming.kicks-ass.net>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20200408115926.1467567-18-hch@lst.de>
+In-Reply-To: <20200408122104.GZ20713@hirez.programming.kicks-ass.net>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Virus-Scanned: ClamAV using ClamSMTP
+X-Mailman-Approved-At: Fri, 24 Apr 2020 05:29:38 +0000
 Cc: linux-hyperv@vger.kernel.org, David Airlie <airlied@linux.ie>,
  dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
  "K. Y. Srinivasan" <kys@microsoft.com>, linux-arch@vger.kernel.org,
  linux-s390@vger.kernel.org, Wei Liu <wei.liu@kernel.org>,
  Stephen Hemminger <sthemmin@microsoft.com>, x86@kernel.org,
- Nitin Gupta <ngupta@vflare.org>, Daniel Vetter <daniel@ffwll.ch>,
- Haiyang Zhang <haiyangz@microsoft.com>, linaro-mm-sig@lists.linaro.org,
- bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ Christoph Hellwig <hch@lst.de>, Nitin Gupta <ngupta@vflare.org>,
+ Daniel Vetter <daniel@ffwll.ch>, Haiyang Zhang <haiyangz@microsoft.com>,
+ linaro-mm-sig@lists.linaro.org, bpf@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org,
  Christophe Leroy <christophe.leroy@c-s.fr>,
  Robin Murphy <robin.murphy@arm.com>, linux-kernel@vger.kernel.org,
  Minchan Kim <minchan@kernel.org>, iommu@lists.linux-foundation.org,
@@ -82,12 +76,12 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gV2VkLCBBcHIgMDgsIDIwMjAgYXQgMDE6NTk6MTVQTSArMDIwMCwgQ2hyaXN0b3BoIEhlbGx3
-aWcgd3JvdGU6Cj4gVGhpcyBpcyBhbHdheXMgR0ZQX0tFUk5FTCAtIGZvciBsb25nIHRlcm0gbWFw
-cGluZ3Mgd2l0aCBvdGhlciBwcm9wZXJ0aWVzCj4gdm1hcCBzaG91bGQgYmUgdXNlZC4KCiBQQUdF
-X0tFUk5FTCAhPSBHRlBfS0VSTkVMIDotKQoKPiAtCXJldHVybiB2bV9tYXBfcmFtKG1vY2stPnBh
-Z2VzLCBtb2NrLT5ucGFnZXMsIDAsIFBBR0VfS0VSTkVMKTsKPiArCXJldHVybiB2bV9tYXBfcmFt
-KG1vY2stPnBhZ2VzLCBtb2NrLT5ucGFnZXMsIDApOwpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8t
-bW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4v
-bGlzdGluZm8vbGluYXJvLW1tLXNpZwo=
+T24gV2VkLCBBcHIgMDgsIDIwMjAgYXQgMDI6MjE6MDRQTSArMDIwMCwgUGV0ZXIgWmlqbHN0cmEg
+d3JvdGU6Cj4gT24gV2VkLCBBcHIgMDgsIDIwMjAgYXQgMDE6NTk6MTVQTSArMDIwMCwgQ2hyaXN0
+b3BoIEhlbGx3aWcgd3JvdGU6Cj4gPiBUaGlzIGlzIGFsd2F5cyBHRlBfS0VSTkVMIC0gZm9yIGxv
+bmcgdGVybSBtYXBwaW5ncyB3aXRoIG90aGVyIHByb3BlcnRpZXMKPiA+IHZtYXAgc2hvdWxkIGJl
+IHVzZWQuCj4gCj4gIFBBR0VfS0VSTkVMICE9IEdGUF9LRVJORUwgOi0pCgpZZXAuICBUaGUgY29t
+cGlsZXIgY29tcGxhaW5lZCBhYm91dCB0aGF0IGEgZmV3IHRpbWVzIDopCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBs
+aXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5v
+cmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
