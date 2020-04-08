@@ -2,63 +2,63 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 68DFC1B6DD4
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2020 08:13:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D6601A2486
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Apr 2020 17:01:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8753A619E9
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Apr 2020 06:13:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7938A666E0
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Apr 2020 15:01:29 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 7742666038; Fri, 24 Apr 2020 06:13:45 +0000 (UTC)
+	id 6BC17666E5; Wed,  8 Apr 2020 15:01:29 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_HI,SPF_HELO_NONE autolearn=disabled version=3.4.2
+X-Spam-Status: No, score=-5.2 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
+	RCVD_IN_DNSWL_MED,SPF_HELO_NONE autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1BDF2666E1;
-	Fri, 24 Apr 2020 05:30:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7C141666D4;
+	Wed,  8 Apr 2020 15:01:02 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 34EC266627
- for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2020 13:27:19 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 44674666C8
+ for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2020 15:00:59 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 1211566635; Wed,  8 Apr 2020 13:27:19 +0000 (UTC)
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by lists.linaro.org (Postfix) with ESMTPS id 17AC166627
- for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2020 13:27:18 +0000 (UTC)
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
- [83.86.89.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id CE58E2072A;
- Wed,  8 Apr 2020 13:27:16 +0000 (UTC)
-Date: Wed, 8 Apr 2020 15:27:13 +0200
-From: Greg KH <greg@kroah.com>
-To: Christoph Hellwig <hch@lst.de>
-Message-ID: <20200408132713.GA1248058@kroah.com>
+ id 2EB2C666D4; Wed,  8 Apr 2020 15:00:59 +0000 (UTC)
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [198.137.202.133])
+ by lists.linaro.org (Postfix) with ESMTPS id 68AFB666C8
+ for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Apr 2020 15:00:54 +0000 (UTC)
+Received: from [2601:1c0:6280:3f0::19c2]
+ by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+ id 1jMCC9-0006TO-7r; Wed, 08 Apr 2020 15:00:49 +0000
+To: Christoph Hellwig <hch@lst.de>, Andrew Morton
+ <akpm@linux-foundation.org>, "K. Y. Srinivasan" <kys@microsoft.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>,
+ Stephen Hemminger <sthemmin@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
+ x86@kernel.org, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>, Laura Abbott <labbott@redhat.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Sakari Ailus <sakari.ailus@linux.intel.com>, Minchan Kim
+ <minchan@kernel.org>, Nitin Gupta <ngupta@vflare.org>
 References: <20200408115926.1467567-1-hch@lst.de>
- <20200408115926.1467567-3-hch@lst.de>
+ <20200408115926.1467567-10-hch@lst.de>
+From: Randy Dunlap <rdunlap@infradead.org>
+Message-ID: <b0c35646-208e-d49f-72d9-06fb2b7b8869@infradead.org>
+Date: Wed, 8 Apr 2020 08:00:46 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20200408115926.1467567-3-hch@lst.de>
+In-Reply-To: <20200408115926.1467567-10-hch@lst.de>
+Content-Language: en-US
 X-Virus-Scanned: ClamAV using ClamSMTP
-X-Mailman-Approved-At: Fri, 24 Apr 2020 05:29:38 +0000
-Cc: linux-hyperv@vger.kernel.org, David Airlie <airlied@linux.ie>,
- dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
- "K. Y. Srinivasan" <kys@microsoft.com>, linux-arch@vger.kernel.org,
- linux-s390@vger.kernel.org, Wei Liu <wei.liu@kernel.org>,
- Stephen Hemminger <sthemmin@microsoft.com>, x86@kernel.org,
- Peter Zijlstra <peterz@infradead.org>, Nitin Gupta <ngupta@vflare.org>,
- Daniel Vetter <daniel@ffwll.ch>, Haiyang Zhang <haiyangz@microsoft.com>,
- linaro-mm-sig@lists.linaro.org, bpf@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org,
- Christophe Leroy <christophe.leroy@c-s.fr>,
- Robin Murphy <robin.murphy@arm.com>, linux-kernel@vger.kernel.org,
- Minchan Kim <minchan@kernel.org>, iommu@lists.linux-foundation.org,
- Sakari Ailus <sakari.ailus@linux.intel.com>,
- Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org
-Subject: Re: [Linaro-mm-sig] [PATCH 02/28] staging: android: ion: use vmap
- instead of vm_map_ram
+Cc: Christophe Leroy <christophe.leroy@c-s.fr>, linux-arch@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, linux-s390@vger.kernel.org,
+ Peter Zijlstra <peterz@infradead.org>, linuxppc-dev@lists.ozlabs.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org,
+ iommu@lists.linux-foundation.org, bpf@vger.kernel.org,
+ Robin Murphy <robin.murphy@arm.com>, linux-arm-kernel@lists.infradead.org
+Subject: Re: [Linaro-mm-sig] [PATCH 09/28] mm: rename CONFIG_PGTABLE_MAPPING
+ to CONFIG_ZSMALLOC_PGTABLE_MAPPING
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
 Precedence: list
@@ -77,12 +77,15 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gV2VkLCBBcHIgMDgsIDIwMjAgYXQgMDE6NTk6MDBQTSArMDIwMCwgQ2hyaXN0b3BoIEhlbGx3
-aWcgd3JvdGU6Cj4gdm1fbWFwX3JhbSBjYW4ga2VlcCBtYXBwaW5ncyBhcm91bmQgYWZ0ZXIgdGhl
-IHZtX3VubWFwX3JhbS4gIFVzaW5nIHRoYXQKPiB3aXRoIG5vbi1QQUdFX0tFUk5FTCBtYXBwaW5n
-cyBjYW4gbGVhZCB0byBhbGwga2luZHMgb2YgYWxpYXNpbmcgaXNzdWVzLgo+IAo+IFNpZ25lZC1v
-ZmYtYnk6IENocmlzdG9waCBIZWxsd2lnIDxoY2hAbHN0LmRlPgoKQWNrZWQtYnk6IEdyZWcgS3Jv
-YWgtSGFydG1hbiA8Z3JlZ2toQGxpbnV4Zm91bmRhdGlvbi5vcmc+Cl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0
-CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcv
-bWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
+T24gNC84LzIwIDQ6NTkgQU0sIENocmlzdG9waCBIZWxsd2lnIHdyb3RlOgo+IFJlbmFtZSB0aGUg
+S2NvbmZpZyB2YXJpYWJsZSB0byBjbGFyaWZ5IHRoZSBzY29wZS4KPiAKPiBTaWduZWQtb2ZmLWJ5
+OiBDaHJpc3RvcGggSGVsbHdpZyA8aGNoQGxzdC5kZT4KPiAtLS0KPiAgYXJjaC9hcm0vY29uZmln
+cy9vbWFwMnBsdXNfZGVmY29uZmlnIHwgMiArLQo+ICBpbmNsdWRlL2xpbnV4L3pzbWFsbG9jLmgg
+ICAgICAgICAgICAgfCAyICstCj4gIG1tL0tjb25maWcgICAgICAgICAgICAgICAgICAgICAgICAg
+ICB8IDIgKy0KPiAgbW0venNtYWxsb2MuYyAgICAgICAgICAgICAgICAgICAgICAgIHwgOCArKysr
+LS0tLQo+ICA0IGZpbGVzIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKSwgNyBkZWxldGlvbnMoLSkK
+PiAKCkxvb2tzIGdvb2QuIFRoYW5rcy4KCkFja2VkLWJ5OiBSYW5keSBEdW5sYXAgPHJkdW5sYXBA
+aW5mcmFkZWFkLm9yZz4KCgotLSAKflJhbmR5CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8tbW0t
+c2lnQGxpc3RzLmxpbmFyby5vcmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4vbGlz
+dGluZm8vbGluYXJvLW1tLXNpZwo=
