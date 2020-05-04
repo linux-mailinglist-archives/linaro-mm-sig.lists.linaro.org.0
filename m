@@ -2,44 +2,46 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4A3F1C443B
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2020 20:06:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BDA271C4402
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2020 20:03:33 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EA9A366464
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2020 18:06:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EB48166227
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 May 2020 18:03:32 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id D772C66218; Mon,  4 May 2020 18:06:17 +0000 (UTC)
+	id DBD0166240; Mon,  4 May 2020 18:03:32 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_BLOCKED,SPF_HELO_NONE autolearn=disabled version=3.4.2
+X-Spam-Status: No, score=-7.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
+	RCVD_IN_DNSWL_HI,SPF_HELO_NONE autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 072A26607B;
-	Mon,  4 May 2020 18:05:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7F95B6607B;
+	Mon,  4 May 2020 18:02:51 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id B0F9A66075
- for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2020 18:05:36 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 7C25166075
+ for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2020 18:02:46 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 9D0AE6607B; Mon,  4 May 2020 18:05:36 +0000 (UTC)
+ id 6DE0D66079; Mon,  4 May 2020 18:02:46 +0000 (UTC)
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by lists.linaro.org (Postfix) with ESMTPS id 2848F66079
- for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2020 18:05:34 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTPS id 4B6CF66075
+ for <linaro-mm-sig@lists.linaro.org>; Mon,  4 May 2020 18:02:45 +0000 (UTC)
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl
  [83.86.89.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 04E9B206B8;
- Mon,  4 May 2020 18:05:33 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 2C16020721;
+ Mon,  4 May 2020 18:02:44 +0000 (UTC)
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
 Date: Mon,  4 May 2020 19:57:05 +0200
-Message-Id: <20200504165502.155875888@linuxfoundation.org>
+Message-Id: <20200504165456.862815638@linuxfoundation.org>
 X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200504165501.781878940@linuxfoundation.org>
-References: <20200504165501.781878940@linuxfoundation.org>
+In-Reply-To: <20200504165456.783676004@linuxfoundation.org>
+References: <20200504165456.783676004@linuxfoundation.org>
 User-Agent: quilt/0.66
+X-stable: review
+X-Patchwork-Hint: ignore
 MIME-Version: 1.0
 X-Virus-Scanned: ClamAV using ClamSMTP
 Cc: Daniel Vetter <daniel.vetter@intel.com>, Chenbo Feng <fengc@google.com>,
@@ -48,7 +50,7 @@ Cc: Daniel Vetter <daniel.vetter@intel.com>, Chenbo Feng <fengc@google.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Martin Liu <liumartin@google.com>, surenb@google.com,
  linux-media@vger.kernel.org
-Subject: [Linaro-mm-sig] [PATCH 5.6 02/73] dma-buf: Fix SET_NAME ioctl uapi
+Subject: [Linaro-mm-sig] [PATCH 5.4 01/57] dma-buf: Fix SET_NAME ioctl uapi
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
 Precedence: list
