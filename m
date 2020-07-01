@@ -2,60 +2,62 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id A726E210A8B
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jul 2020 13:51:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5AA76210AA8
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jul 2020 13:59:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B9B36618D4
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jul 2020 11:51:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7BB0A66561
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jul 2020 11:59:54 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id AF0D06654F; Wed,  1 Jul 2020 11:51:26 +0000 (UTC)
+	id 6C25D66587; Wed,  1 Jul 2020 11:59:54 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE
-	autolearn=disabled version=3.4.2
+X-Spam-Status: No, score=-7.9 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MAILING_LIST_MULTI,RCVD_IN_DNSWL_HI,RCVD_IN_MSPIKE_H3,
+	RCVD_IN_MSPIKE_WL,SPF_HELO_NONE autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 446B26653E;
-	Wed,  1 Jul 2020 11:50:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3403A66566;
+	Wed,  1 Jul 2020 11:59:18 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 9F5EA618D4
- for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jul 2020 11:50:54 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id C65CC66553
+ for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jul 2020 11:59:15 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 8B31F6653E; Wed,  1 Jul 2020 11:50:54 +0000 (UTC)
-Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
- [209.85.210.68])
- by lists.linaro.org (Postfix) with ESMTPS id 6D4DD618D4
- for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jul 2020 11:50:53 +0000 (UTC)
-Received: by mail-ot1-f68.google.com with SMTP id 18so21157866otv.6
- for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Jul 2020 04:50:53 -0700 (PDT)
+ id B325466566; Wed,  1 Jul 2020 11:59:15 +0000 (UTC)
+Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
+ [209.85.210.66])
+ by lists.linaro.org (Postfix) with ESMTPS id B269B66553
+ for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jul 2020 11:59:14 +0000 (UTC)
+Received: by mail-ot1-f66.google.com with SMTP id c25so3574018otf.7
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Jul 2020 04:59:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=NVob0ht+U8pNgfjDQrHBX34FcQW437wfU3ZeV7D0RuA=;
- b=bWMzBq4ueC8ZAusLtZrr3uEVKeGaMfy7SepANjZWPos2lGeaE5mguQNygvjYYCi/nT
- J4CVyUOSTpmwYJlkQHan7ky9/yKrhwDAQ7FOo/CqFOi8Ii5K7vNBbd1XYwqojxrErHJw
- uFdy4Yc+90a/AdIjaXjuqUo8kWSBF3X+RaPkdEMLkdw9dTCUW/EOSFXjpUgG7UV7AT13
- q6cKhfAjTRn6vnrlRRf7IDIJdyUsltitO+VDWTNLE2EtMCQjQmS+ZPs/V7HsXtds3Y/I
- Oc/CmsGHkyN5A4Iyr+M1OHTK0lqATF+OnWOPWwgag9BqPv9QOXuohM0ZLzey0NnGIgPa
- wbBQ==
-X-Gm-Message-State: AOAM531GFDHNYCmSC7u7lj2f2gdJUJWtzMiElQchPW8+QI+CuiuUc0he
- rlekoXKhoD/c5S2pmaGlqVR0wKGg740lDnxQdckSBg==
-X-Google-Smtp-Source: ABdhPJzuhUYDGzoVqw7VfT6QA2g0y9nFhCw6PsVYMQvjENJx18Q3x1ONVY7LMMFKkczWIhYx3VaIrBiizht+fmKEFm8=
-X-Received: by 2002:a9d:d55:: with SMTP id 79mr22087629oti.281.1593604252854; 
- Wed, 01 Jul 2020 04:50:52 -0700 (PDT)
+ :message-id:subject:to:cc;
+ bh=Gxl3lfKFFa5tO2EgfognG9ijCcu9AhbS5i22kiQaKjo=;
+ b=QLOGaqR8skpxf9jdYZup83VjV7Tmsz79SIP+Qqd6B5tjq1+1iJ8RCkjH6LR7ViwTDk
+ FoyODi8UH5SrQk7LA2iUC86HjG4ONLZRBI6/0noqsY1FylPwCYwhM9RXdKsG8WXvaA1O
+ 9XNI6AYurmmJica3TQarhfW0HJsxsO9nfeJ65RRbB9Pv610kczbX66NtJvtgNAENC2i2
+ DSQFbI+0ac63z/6CQbFEB9vifY4flo/O95FkTKVJ5xPx2JyBwmZ7MnBD1VjogbQQjgY9
+ Mh8HhCgg6buceKkywZQQc0bNantC0KN+5HW3Pcw28zyTCPNrY9ZfzHIq+LacRlIl7FmK
+ +m1w==
+X-Gm-Message-State: AOAM532aa2KDT45BiXQqsUldvdHneIqoBdbfjd32oRTPjYxQ3T+Mx0tq
+ yyKGnT4NV6l0yWU+y3mVvWle4AwRTPmN+vNL1mYBIDrz
+X-Google-Smtp-Source: ABdhPJyxqfsGvU0ZTX2fGv+npKJmkZe28dpAQSBhjdlsqn3wwFxafYEfz6yBdoaMuv4RmfFNcxArMAePU6WjmwwoJSo=
+X-Received: by 2002:a9d:7c98:: with SMTP id q24mr12273455otn.164.1593604754152; 
+ Wed, 01 Jul 2020 04:59:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200701112559.22669-1-christian.koenig@amd.com>
-In-Reply-To: <20200701112559.22669-1-christian.koenig@amd.com>
-From: Daniel Vetter <daniel@ffwll.ch>
-Date: Wed, 1 Jul 2020 13:50:41 +0200
-Message-ID: <CAKMK7uHqNaQPwATQf=Jfs6oQ=YEemHSHTEtC2=VqvNf+bMh_sQ@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
+ <CAKMK7uHqNaQPwATQf=Jfs6oQ=YEemHSHTEtC2=VqvNf+bMh_sQ@mail.gmail.com>
+In-Reply-To: <CAKMK7uHqNaQPwATQf=Jfs6oQ=YEemHSHTEtC2=VqvNf+bMh_sQ@mail.gmail.com>
+From: Sumit Semwal <sumit.semwal@linaro.org>
+Date: Wed, 1 Jul 2020 17:29:00 +0530
+Message-ID: <CAO_48GEXg=P-giE5YF=1Z0XS-Nd+-enQv7QZcz6YMvYBgmRB6A@mail.gmail.com>
+To: Daniel Vetter <daniel@ffwll.ch>
 X-Virus-Scanned: ClamAV using ClamSMTP
 Cc: "moderated list:DMA BUFFER SHARING FRAMEWORK"
  <linaro-mm-sig@lists.linaro.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  dri-devel <dri-devel@lists.freedesktop.org>,
  "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
@@ -73,30 +75,129 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6214893689246467823=="
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gV2VkLCBKdWwgMSwgMjAyMCBhdCAxOjI2IFBNIENocmlzdGlhbiBLw7ZuaWcKPGNrb2VuaWcu
-bGVpY2h0enVtZXJrZW5AZ21haWwuY29tPiB3cm90ZToKPgo+IEFzIGRpc2N1c3NlZCBvbiB0aGUg
-bGlzdC4KPgo+IFNpZ25lZC1vZmYtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2Vu
-aWdAYW1kLmNvbT4KCkFja2VkLWJ5OiBEYW5pZWwgVmV0dGVyIDxkYW5pZWwudmV0dGVyQGZmd2xs
-LmNoPgo+IC0tLQo+ICBNQUlOVEFJTkVSUyB8IDEgKwo+ICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNl
-cnRpb24oKykKPgo+IGRpZmYgLS1naXQgYS9NQUlOVEFJTkVSUyBiL01BSU5UQUlORVJTCj4gaW5k
-ZXggNDA0NzQ5ODJhMjFkLi41ZDcxMzBmOGQzNDIgMTAwNjQ0Cj4gLS0tIGEvTUFJTlRBSU5FUlMK
-PiArKysgYi9NQUlOVEFJTkVSUwo+IEBAIC01MDg5LDYgKzUwODksNyBAQCBGOiAgICAgICAgZnMv
-ZGxtLwo+Cj4gIERNQSBCVUZGRVIgU0hBUklORyBGUkFNRVdPUksKPiAgTTogICAgIFN1bWl0IFNl
-bXdhbCA8c3VtaXQuc2Vtd2FsQGxpbmFyby5vcmc+Cj4gK006ICAgICBDaHJpc3RpYW4gS8O2bmln
-IDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+Cj4gIEw6ICAgICBsaW51eC1tZWRpYUB2Z2VyLmtl
-cm5lbC5vcmcKPiAgTDogICAgIGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcKPiAgTDog
-ICAgIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZyAobW9kZXJhdGVkIGZvciBub24tc3Vi
-c2NyaWJlcnMpCj4gLS0KPiAyLjIwLjEKPgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCj4gZHJpLWRldmVsIG1haWxpbmcgbGlzdAo+IGRyaS1kZXZlbEBs
-aXN0cy5mcmVlZGVza3RvcC5vcmcKPiBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWls
-bWFuL2xpc3RpbmZvL2RyaS1kZXZlbAoKCgotLSAKRGFuaWVsIFZldHRlcgpTb2Z0d2FyZSBFbmdp
-bmVlciwgSW50ZWwgQ29ycG9yYXRpb24KaHR0cDovL2Jsb2cuZmZ3bGwuY2gKX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5n
-IGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJv
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+--===============6214893689246467823==
+Content-Type: multipart/alternative; boundary="00000000000048b7b405a960053c"
+
+--00000000000048b7b405a960053c
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+Thanks for all the good work here, Christian!
+
+On Wed, 1 Jul 2020, 17:20 Daniel Vetter, <daniel@ffwll.ch> wrote:
+
+> On Wed, Jul 1, 2020 at 1:26 PM Christian K=C3=B6nig
+> <ckoenig.leichtzumerken@gmail.com> wrote:
+> >
+> > As discussed on the list.
+> >
+> > Signed-off-by: Christian K=C3=B6nig <christian.koenig@amd.com>
+>
+> Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+>
+
+Acked-by: Sumit Semwal <sumit.semwal@linaro.org>
+
+> ---
+> >  MAINTAINERS | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/MAINTAINERS b/MAINTAINERS
+> > index 40474982a21d..5d7130f8d342 100644
+> > --- a/MAINTAINERS
+> > +++ b/MAINTAINERS
+> > @@ -5089,6 +5089,7 @@ F:        fs/dlm/
+> >
+> >  DMA BUFFER SHARING FRAMEWORK
+> >  M:     Sumit Semwal <sumit.semwal@linaro.org>
+> > +M:     Christian K=C3=B6nig <christian.koenig@amd.com>
+> >  L:     linux-media@vger.kernel.org
+> >  L:     dri-devel@lists.freedesktop.org
+> >  L:     linaro-mm-sig@lists.linaro.org (moderated for non-subscribers)
+> > --
+> > 2.20.1
+> >
+>
+Best,
+Sumit.
+
+>
+
+--00000000000048b7b405a960053c
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"><div>Thanks for all the good work here, Christian!</div><=
+div dir=3D"auto"><br><div class=3D"gmail_quote" dir=3D"auto"><div dir=3D"lt=
+r" class=3D"gmail_attr">On Wed, 1 Jul 2020, 17:20 Daniel Vetter, &lt;<a hre=
+f=3D"mailto:daniel@ffwll.ch">daniel@ffwll.ch</a>&gt; wrote:<br></div><block=
+quote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc=
+ solid;padding-left:1ex">On Wed, Jul 1, 2020 at 1:26 PM Christian K=C3=B6ni=
+g<br>
+&lt;<a href=3D"mailto:ckoenig.leichtzumerken@gmail.com" target=3D"_blank" r=
+el=3D"noreferrer">ckoenig.leichtzumerken@gmail.com</a>&gt; wrote:<br>
+&gt;<br>
+&gt; As discussed on the list.<br>
+&gt;<br>
+&gt; Signed-off-by: Christian K=C3=B6nig &lt;<a href=3D"mailto:christian.ko=
+enig@amd.com" target=3D"_blank" rel=3D"noreferrer">christian.koenig@amd.com=
+</a>&gt;<br>
+<br>
+Acked-by: Daniel Vetter &lt;<a href=3D"mailto:daniel.vetter@ffwll.ch" targe=
+t=3D"_blank" rel=3D"noreferrer">daniel.vetter@ffwll.ch</a>&gt;<br></blockqu=
+ote></div></div><div dir=3D"auto"><br></div><div dir=3D"auto">Acked-by: Sum=
+it Semwal &lt;<a href=3D"mailto:sumit.semwal@linaro.org">sumit.semwal@linar=
+o.org</a>&gt;</div><div dir=3D"auto"><br></div><div dir=3D"auto"><div class=
+=3D"gmail_quote"><blockquote class=3D"gmail_quote" style=3D"margin:0 0 0 .8=
+ex;border-left:1px #ccc solid;padding-left:1ex">
+&gt; ---<br>
+&gt;=C2=A0 MAINTAINERS | 1 +<br>
+&gt;=C2=A0 1 file changed, 1 insertion(+)<br>
+&gt;<br>
+&gt; diff --git a/MAINTAINERS b/MAINTAINERS<br>
+&gt; index 40474982a21d..5d7130f8d342 100644<br>
+&gt; --- a/MAINTAINERS<br>
+&gt; +++ b/MAINTAINERS<br>
+&gt; @@ -5089,6 +5089,7 @@ F:=C2=A0 =C2=A0 =C2=A0 =C2=A0 fs/dlm/<br>
+&gt;<br>
+&gt;=C2=A0 DMA BUFFER SHARING FRAMEWORK<br>
+&gt;=C2=A0 M:=C2=A0 =C2=A0 =C2=A0Sumit Semwal &lt;<a href=3D"mailto:sumit.s=
+emwal@linaro.org" target=3D"_blank" rel=3D"noreferrer">sumit.semwal@linaro.=
+org</a>&gt;<br>
+&gt; +M:=C2=A0 =C2=A0 =C2=A0Christian K=C3=B6nig &lt;<a href=3D"mailto:chri=
+stian.koenig@amd.com" target=3D"_blank" rel=3D"noreferrer">christian.koenig=
+@amd.com</a>&gt;<br>
+&gt;=C2=A0 L:=C2=A0 =C2=A0 =C2=A0<a href=3D"mailto:linux-media@vger.kernel.=
+org" target=3D"_blank" rel=3D"noreferrer">linux-media@vger.kernel.org</a><b=
+r>
+&gt;=C2=A0 L:=C2=A0 =C2=A0 =C2=A0<a href=3D"mailto:dri-devel@lists.freedesk=
+top.org" target=3D"_blank" rel=3D"noreferrer">dri-devel@lists.freedesktop.o=
+rg</a><br>
+&gt;=C2=A0 L:=C2=A0 =C2=A0 =C2=A0<a href=3D"mailto:linaro-mm-sig@lists.lina=
+ro.org" target=3D"_blank" rel=3D"noreferrer">linaro-mm-sig@lists.linaro.org=
+</a> (moderated for non-subscribers)<br>
+&gt; --<br>
+&gt; 2.20.1<br>
+&gt;<br></blockquote></div></div><div dir=3D"auto">Best,</div><div dir=3D"a=
+uto">Sumit.</div><div dir=3D"auto"><div class=3D"gmail_quote"><blockquote c=
+lass=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;=
+padding-left:1ex"></blockquote></div></div></div>
+
+--00000000000048b7b405a960053c--
+
+--===============6214893689246467823==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
+LXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8v
+bGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+
+--===============6214893689246467823==--
