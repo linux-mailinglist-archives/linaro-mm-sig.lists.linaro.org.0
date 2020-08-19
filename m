@@ -2,119 +2,151 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7E992493AE
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Aug 2020 05:54:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6DCB249F8F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Aug 2020 15:23:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1769065F83
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Aug 2020 03:54:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DFC7866572
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Aug 2020 13:23:08 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 051C565FD7; Wed, 19 Aug 2020 03:54:48 +0000 (UTC)
+	id D2A8F665AA; Wed, 19 Aug 2020 13:23:08 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
-	SPF_HELO_PASS autolearn=disabled version=3.4.2
+X-Spam-Status: No, score=-1.8 required=5.0 tests=BAYES_00,FORGED_SPF_HELO,
+	MAILING_LIST_MULTI,MSGID_FROM_MTA_HEADER,RCVD_IN_DNSWL_NONE,
+	RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,UNPARSEABLE_RELAY autolearn=disabled
+	version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5312365F75;
-	Wed, 19 Aug 2020 03:54:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D3FB4619D7;
+	Wed, 19 Aug 2020 13:22:24 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id E5AB961718
- for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Aug 2020 03:54:05 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 0D67660BD9
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Aug 2020 13:22:21 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id CEA8E65F75; Wed, 19 Aug 2020 03:54:05 +0000 (UTC)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
- by lists.linaro.org (Postfix) with ESMTPS id D575A61718
- for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Aug 2020 03:54:03 +0000 (UTC)
-Received: from epcas2p2.samsung.com (unknown [182.195.41.54])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20200819035400epoutp030ddcc1bb571b58ea35a81701b266d2ed~sjwoCddzw0574105741epoutp03p
- for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Aug 2020 03:54:00 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20200819035400epoutp030ddcc1bb571b58ea35a81701b266d2ed~sjwoCddzw0574105741epoutp03p
-Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
- epcas2p1.samsung.com (KnoxPortal) with ESMTP id
- 20200819035359epcas2p1d07fa5ac07155cbde39ec139311ac897~sjwnFdAJ02461124611epcas2p1X;
- Wed, 19 Aug 2020 03:53:59 +0000 (GMT)
-Received: from epsmges2p4.samsung.com (unknown [182.195.40.183]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4BWYmj4q7PzMqYlt; Wed, 19 Aug
- 2020 03:53:57 +0000 (GMT)
-Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
- epsmges2p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- AC.5E.27013.552AC3F5; Wed, 19 Aug 2020 12:53:57 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas2p4.samsung.com (KnoxPortal) with ESMTPA id
- 20200819035356epcas2p4bf6e672c27e14d4e0f728aae9a5f43fb~sjwjf74Jn2934829348epcas2p40;
- Wed, 19 Aug 2020 03:53:56 +0000 (GMT)
-Received: from epsmgms1p2.samsung.com (unknown [182.195.42.42]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20200819035356epsmtrp2add31132847dd79bcb8bff3a29704536~sjwje1X0n0355803558epsmtrp2E;
- Wed, 19 Aug 2020 03:53:56 +0000 (GMT)
-X-AuditID: b6c32a48-d35ff70000006985-2b-5f3ca2551cd4
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p2.samsung.com (Symantec Messaging Gateway) with SMTP id
- 71.85.08303.352AC3F5; Wed, 19 Aug 2020 12:53:55 +0900 (KST)
-Received: from KEI (unknown [12.36.155.227]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20200819035355epsmtip2ae445ec6236a53184e2ae990b7dada13~sjwjNPcQf0530505305epsmtip2C;
- Wed, 19 Aug 2020 03:53:55 +0000 (GMT)
-Date: Wed, 19 Aug 2020 12:46:26 +0900
-From: Cho KyongHo <pullip.cho@samsung.com>
-To: Brian Starkey <brian.starkey@arm.com>
-Message-ID: <20200819034626.GB70898@KEI>
-MIME-Version: 1.0
-In-Reply-To: <20200818105557.svky5c7gdvk6khzu@DESKTOP-E1NTVVP.localdomain>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-Brightmail-Tracker: H4sIAAAAAAAAA02TbUxTZxTH8/S29xZm5VKhPgMyuztnhI2X8vqIMM2m5kYdAcn2gei6rr0D
- Yim15U2zBNiGIBW0wBhiXTuGY1YWHDJEkG20GASBMMBiYIMBZnMwXkYByQi4lisJ337nn/M/
- 5znn5OFjQgPhxU9WpTEalUxJ4a7cRqsv8n+vKkoa9P1/YjTXpSeQoa4WR59aunA00dUH0MxY
- Cw8Z23t5aHBpDkdrF/p46IbuMxw9M01gqHvVH924t8JBi4PjHDTQbMDRxVs/8tBo7XMequy0
- cdC3S3ME6q65iKG81nYCdf1uJ1BpvwlHV3OLwcGddF7/Gk7XflUL6IHiIg5tqk+n680XcLp+
- oYSgC2cGOfRvtns4/aBilUuP6To49Mj6JEbP/fQIp4sbzIDuNrUTdMfjOxzaXv9KLJmgjEpi
- ZApGI2ZU8lRFsioxmjoWL31HGhYeJPGX7EMRlFglS2GiqUPHY/2PJCsdu6DEGTJlukOKlWm1
- VOBbUZrU9DRGnJSqTYumGLVCqZZI1AFaWYo2XZUYIE9NiZQEBQWHOTI/VCa13f4FqKu8s2ar
- h7g5YF5UCFz4kAyFZcN/EIXAlS8kmwC059Ry2WABwEclxTw2sAO4XKF3BPwNi3U6kNWbAayb
- /wZ3lhKS4wCO/8U4mUu+Di8NGzAn46QfvHmtAzi9HqQvzDVInV6MvMaF/+TrNrw7yAhoNRdw
- nSwg98I6/QLGsjvsvPJkQ3chj0Jd/ZONOp7kbjjVlu2sA0mrC5yZKAfsOIeg0cy+B5I74FRH
- A8GyF7TPtuKs4UsAZ42WF0m3HZO1uLMcAiv/zN8ohJFJcGJlEGMHfg22D3NZeTsssK4RrCyA
- BeeFrHM3vPuFjbvZqrj18Qum4fXGzR32ALjUbOBcBrsqt4xWuaUby29CU8sCXulogZHesGad
- z6IvrGsONAGeGYgYtTYlkdEGq0O33roebHwTP7oJXJ2ZD7AADh9YAORjlIegqHW/VChQyM6e
- YzSpUk26ktFaQJjjTnrMy1Oe6vhnqjSpJCw4PDxoXxgKCw9G1E7BbGTfB0IyUZbGnGYYNaPZ
- 9HH4Ll45nPKJ8mrNHkLOnXZpe1jW9Xy0aNkWEvf3nu0d6Tq7DjTqa0oOiJTvFtsIS/K/Fl3H
- yOmKKl/tylhb1rapIUN8v72352TpD43TYttL1kVh89HD1JjPKPSJEW07+XZc3rJxlQqpfVBG
- 9XI97mYUTRrDVyw9cdLCTDeflEL3p1duGT/q14wYnh72fvnMpZt3GuSLkYKFUyc+X03McyuS
- iVxDGpqWE459nen5ScLHTa+eG1Kcz7Z0Th4ZcF0xG90kB3/dFUNH5N4P9iFjsxd16+sFzzJP
- vV96lpkVVQeeeSht0b8ReiBfbK3Jqiw/IQm8rzg+mTG/F7uu+E60v4+I+VkgV8ZTXG2STOKH
- abSy/wFXMz7nrwQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrAIsWRmVeSWpSXmKPExsWy7bCSvG7wIpt4gycXLCzen5rIbjFn/Ro2
- i6ZDp9gsHp26wGjx9v5uVov5R86xWlz5+p7N4m/nBVaLld3NbBbfFzxitjjzW9di5Z4fTBZf
- rjxksri8aw6bRc+GrawW99b8Z7WYdfIak8Wyr+/ZLc4s72G2aN17hN3i1N3P7BaTLy1gs5jd
- 2MfoIO7Reukvm8eaeWsYPS739TJ5LNhU6rFpVSebx6ZPk9g9ut5eYfK4c20Pm8eJGb9ZPO53
- H2fyuP3vMbPH+31X2Tz6tqxi9Diz4Ai7x/Eb25k8Pm+SCxCI4rJJSc3JLEst0rdL4Mp48UGj
- 4JFERd/NP2wNjCdFuhg5OCQETCQOv9bvYuTiEBLYwShx6tEl9i5GTqC4lMS87rVMELawxP2W
- I6wQRfcZJTrPX2IFSbAIqEr035rDDGKzCWhJrJ57nBFkqIiApkTjnHiQemaBhSwSV2ctYwOp
- ERYwlzi8qoMFxOYV0JBYP/ETM8TQs4wSs45/YodICEqcnPkErIgZaOiNfy+ZQIYyC0hLLP/H
- ARLmFPCS6N70BGyXqICKxKuD9RMYBWchaZ6FpHkWQvMCRuZVjJKpBcW56bnFhgVGeanlesWJ
- ucWleel6yfm5mxjBiUBLawfjnlUf9A4xMnEwHmKU4GBWEuHt3WsdL8SbklhZlVqUH19UmpNa
- fIhRmoNFSZz366yFcUIC6YklqdmpqQWpRTBZJg5OqQamDvHtZ96YTP+kLjh1fs6bpW2/X+w7
- ZPbir2/3Ma6/P4uv3VRoVNb3eMN5zK/UW9aY224zp8e/h0eEtl4MsilT3ZXz4pjYhj7lEO8X
- Ai8UN3TG6DfwcT2Ka2ixrfz7ZKn7LJPGZr3j8ac0niZPki2/symt5RaL9ZJ5rdWiP+rPXNNf
- vW1u/HcR1XmrOP2awzg4jSMm/7xQ4CjTl8Hd/udSzX055vPLPFZc0NKZPq02/G/fvA/PNdwD
- bJZN1G9Lf8druSD9nRvj7sDzIQ91FTJLN1hc323KX9i3aEtl1yLPiMulImp3ltz5+ummaVxO
- TtREpxTXHzcuf5ny5oitcCjvB2M+qdWR7ytc81jOlxcrsRRnJBpqMRcVJwIAVw1au3MDAAA=
-X-CMS-MailID: 20200819035356epcas2p4bf6e672c27e14d4e0f728aae9a5f43fb
-X-Msg-Generator: CA
-Content-Type: multipart/mixed;
- boundary="----wn.C777VfLFf0j4dI6teQ5O7yZ9hP4.it_WB71vmM7CNsG.7=_322d9_"
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20200818074547epcas2p21e0c2442873d03800c7bc2c3e76405d6
+ id F29B960865; Wed, 19 Aug 2020 13:22:20 +0000 (UTC)
+Received: from EUR02-VE1-obe.outbound.protection.outlook.com
+ (mail-eopbgr20077.outbound.protection.outlook.com [40.107.2.77])
+ by lists.linaro.org (Postfix) with ESMTPS id 82FFD60865
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Aug 2020 13:22:18 +0000 (UTC)
+Received: from AM5PR0701CA0056.eurprd07.prod.outlook.com (2603:10a6:203:2::18)
+ by VI1PR08MB4511.eurprd08.prod.outlook.com (2603:10a6:803:f9::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3283.15; Wed, 19 Aug
+ 2020 13:22:16 +0000
+Received: from AM5EUR03FT033.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:203:2:cafe::f0) by AM5PR0701CA0056.outlook.office365.com
+ (2603:10a6:203:2::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3305.16 via Frontend
+ Transport; Wed, 19 Aug 2020 13:22:16 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; lists.linaro.org; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;lists.linaro.org; dmarc=bestguesspass
+ action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ AM5EUR03FT033.mail.protection.outlook.com (10.152.16.99) with
+ Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3305.24 via Frontend Transport; Wed, 19 Aug 2020 13:22:16 +0000
+Received: ("Tessian outbound bac899b43a54:v64");
+ Wed, 19 Aug 2020 13:22:16 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 40791383dc47070f
+X-CR-MTA-TID: 64aa7808
+Received: from 97e241cfc2a8.1
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com id
+ 087D9188-85A5-4C3E-828F-89BF29CDC413.1; 
+ Wed, 19 Aug 2020 13:22:10 +0000
+Received: from EUR01-HE1-obe.outbound.protection.outlook.com
+ by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 97e241cfc2a8.1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+ Wed, 19 Aug 2020 13:22:10 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=fL4aHVkLNMOo0UZtdpsHIq1kdbDbkjuDZy4FUuYPvAY1sEP0hjPWnowxR9duC0CmU1Ei0N9XM6yXmylkNPtfTm1z/Y+MzMU0ff9eWl7InvEofje03pIcxngL30evD63isyMOGhX/0sMxq2UVDID7OlxZL0LBCOTVl5MDpZU9SWe2vGEYnpQcZQYr8x/Q4hMhH15otbFxxFqWh3Ifgyy/pQ+bQ0jYFPyBZ0iEhK3AnKRVo6xZ/2vGuwx0qiW0D8yOEHELCzXZy4ICNQg4ZrFzQklqIIW0QeK+H146jZa74tX6qDU+3RQjogzNhMSIuCnsOSOqg6BQVOHBY56xt0eVgg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ths1yTPKkYGM0/8Qcc1BcQ4a98FqWjFSwIkDNIvTLmg=;
+ b=n5TirmjnvExDxul/+djRWmnJmfnczO+InB0pZuC1hTftntGM50XseLkmx7aRfGQQjgl8v3BIXsWMP7k/IS8ZVeOePlJ2NxXjaPgkBoK60jB6+QtQkpvK9UQBIJKspVdUt0YMrjMC92pzew+6DLeEI/wQ7dvbTdU12/zoG2uQmWbDZO+ouUVquANTBXAVQEGuvleP56fLHBCQ7Snqu5xF51gtAa2/HB2Ru5pvYNTdkL2E7XLKx8QqRqJ8WpxZcPykoCb7rCb7b7X8RIk6l2jj7TsZ/vmaI1URc33nptA/L4KSCBZpuu5uq3yLBHqNfJesvF0Zh8W/39NoIxbAH5hvaQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+Authentication-Results-Original: samsung.com; dkim=none (message not signed)
+ header.d=none;samsung.com; dmarc=none action=none header.from=arm.com;
+Received: from HE1PR08MB2890.eurprd08.prod.outlook.com (2603:10a6:7:36::11) by
+ HE1PR0801MB1900.eurprd08.prod.outlook.com (2603:10a6:3:4d::9) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3305.25; Wed, 19 Aug 2020 13:22:07 +0000
+Received: from HE1PR08MB2890.eurprd08.prod.outlook.com
+ ([fe80::14f5:cc22:9381:1d13]) by HE1PR08MB2890.eurprd08.prod.outlook.com
+ ([fe80::14f5:cc22:9381:1d13%6]) with mapi id 15.20.3283.028; Wed, 19 Aug 2020
+ 13:22:07 +0000
+Date: Wed, 19 Aug 2020 14:22:04 +0100
+From: Brian Starkey <brian.starkey@arm.com>
+To: Cho KyongHo <pullip.cho@samsung.com>
+Message-ID: <20200819132204.2rki3xsczdy2cpsk@DESKTOP-E1NTVVP.localdomain>
 References: <CGME20200818074547epcas2p21e0c2442873d03800c7bc2c3e76405d6@epcas2p2.samsung.com>
  <20200818080415.7531-1-hyesoo.yu@samsung.com>
  <20200818105557.svky5c7gdvk6khzu@DESKTOP-E1NTVVP.localdomain>
+ <20200819034626.GB70898@KEI>
+Content-Disposition: inline
+In-Reply-To: <20200819034626.GB70898@KEI>
+User-Agent: NeoMutt/20180716-849-147d51-dirty
+X-ClientProxiedBy: LO2P265CA0008.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:62::20) To HE1PR08MB2890.eurprd08.prod.outlook.com
+ (2603:10a6:7:36::11)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from DESKTOP-E1NTVVP.localdomain (217.140.99.251) by
+ LO2P265CA0008.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:62::20) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3305.24 via Frontend Transport; Wed, 19 Aug 2020 13:22:05 +0000
+X-Originating-IP: [217.140.99.251]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 779cbe6c-957b-491a-0b55-08d84442e485
+X-MS-TrafficTypeDiagnostic: HE1PR0801MB1900:|VI1PR08MB4511:
+X-Microsoft-Antispam-PRVS: <VI1PR08MB451131D21B8B345543F81A13F05D0@VI1PR08MB4511.eurprd08.prod.outlook.com>
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Oob-TLC-OOBClassifiers: OLM:8882;OLM:8882;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: KWAvcn/YZlaHthP1aDV1SJeSKsHaopkxTtPekL7fwKHP0DuVS4QHS/IcTEeDL5EAfRN9Wxv/wJZy/VT+fgaTPWPb82DyeXCsya5+Lo5LUNI/bT7IsARgfySDZ5F2Hm7TEAvMiOS5jjv1Sqvw4TXolDNyQYw1DIF87LNOcZEgZWJCghS5IDk6DXTCG3SED8wr80TbZzS/0rab5XgYEKO2cLH3K+hb8eoYY/X1OkBBSPKKAUEoP+hfLOaZegTEwWRmT1V3HH1xkR/KIf+eXW04zYyAWgrxSLzPTpsM4BMzd5HsfJeNnKBoxVErXBIXFE5XBgmcH90tg5Q8HwdmaQwJLg==
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:HE1PR08MB2890.eurprd08.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(4636009)(39860400002)(376002)(346002)(366004)(396003)(136003)(186003)(2906002)(8676002)(9686003)(16526019)(6916009)(316002)(26005)(83380400001)(44832011)(8936002)(6506007)(55016002)(52116002)(7696005)(956004)(478600001)(86362001)(5660300002)(4326008)(66556008)(66476007)(7416002)(66946007)(1076003);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData: pJTU1/fUz7pKiHECRoVxyqLso/mKrvZYGvwrJCskOD4cF/mwSOmUwKpN++lsxSJ61U8uRF09dA279FfE9n7rbA0ThKxiovEtn+/C3+tGayjMtmZmIdoLCgKcXY66fDtXOhpxWCsxTyUaD7wqqh1mfSNTm0PU6sMCSNyUXhQ6nYbJYZSnRJ8n9T8dl0i/VpmW0CSUgfX2WwOi9Z4le6/pTq6gTfQXsZPkZK5xz2IKyiNZ661Cwv5NOFaHg9zxbpueTehyG3qN8+E4GUB/HTFxs2cKKCRUklbbdsPIgtlqhHEVpWn22YRQ7dspQ+C+TJhgePomlJ6rEUP3dmU0e/8xW2d3Q8DF9xeiSaoRnvXSPrsaol2T2C4o+JpsOH3OdpjKg2ousqWGYuDQ3HSLrKIEbr8NqqQvETp8LoVMkTKxUAcvBxJ1/uy9dpWp7321IxIpOHRgDn5H1e4MOfa/ioDvwwsPEyvJjO9FaD8NSrz3B+qunlBj8C35GHIOd1MS73rkEdCsLfIw/VqbY4WY2uk+u3urgYxKmJZU1n5cMYgAbnVB4tOHDDZ++VFiYh4UCrQKXz7BwkHVZPNV0t5TkTbZ3BqK8Vxumq3nrCHUhGZ9QTnGE/npUpXi6N5NGCFwa5dL8jNCUSkIkcFIbFftIGLNuQ==
+X-MS-Exchange-Transport-Forked: True
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0801MB1900
+Original-Authentication-Results: samsung.com; dkim=none (message not signed)
+ header.d=none;samsung.com; dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM5EUR03FT033.eop-EUR03.prod.protection.outlook.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs: c4451903-a581-4239-3669-08d84442ded8
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: RHnXh8R2707A13synxuZfo5+07u68DwwvMcNmAH1qgB2FHiDgXcl4mA8Zqb98Tldo7LDlVRIQ/pupSi0tmAmnccRcvF0JCmMJWYZgJd/Td64Jhq+Z3aY8Trk6gdU7f7UBDIfQ7G1RvDa+HDRTJ1yIOL9uuoddNI4lk1ttUtUZCgz0m2xO/vlV5UYPgmr2Uw8BcwXnxaBchK44pu/VNPTSDbanLS1b8Y3g9jmynNuwplfkaKJJ4KSNSEZM7vHUNJMjLtNiVw5JZTsOKj19gymeBzzzIF+4K6D80Ycyb2narc7RFT6d+btdHgBtuGqBo6ENxuC5ojfU0XaRPa9+wYM1c+Ey8fiRY1kbnkM0vrRaw5f1zGezCgbqCoJ2oxlG77m5/1N3pH1BMmoYxsqO/8T/w==
+X-Forefront-Antispam-Report: CIP:63.35.35.123; CTRY:IE; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:64aa7808-outbound-1.mta.getcheckrecipient.com;
+ PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com; CAT:NONE;
+ SFS:(4636009)(346002)(136003)(376002)(396003)(39860400002)(46966005)(47076004)(26005)(478600001)(36906005)(316002)(2906002)(6862004)(6506007)(7696005)(16526019)(186003)(356005)(4326008)(82310400002)(81166007)(83380400001)(82740400003)(55016002)(1076003)(44832011)(70586007)(70206006)(336012)(956004)(9686003)(8936002)(5660300002)(8676002)(86362001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Aug 2020 13:22:16.4660 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 779cbe6c-957b-491a-0b55-08d84442e485
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d; Ip=[63.35.35.123];
+ Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM5EUR03FT033.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB4511
 X-Virus-Scanned: ClamAV using ClamSMTP
 Cc: dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
  benjamin.gaignard@linaro.org, Hyesoo Yu <hyesoo.yu@samsung.com>,
@@ -136,88 +168,36 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-------wn.C777VfLFf0j4dI6teQ5O7yZ9hP4.it_WB71vmM7CNsG.7=_322d9_
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-
-On Tue, Aug 18, 2020 at 11:55:57AM +0100, Brian Starkey wrote:
-> Hi,
-> 
-> On Tue, Aug 18, 2020 at 05:04:12PM +0900, Hyesoo Yu wrote:
-> > These patch series to introduce a new dma heap, chunk heap.
-> > That heap is needed for special HW that requires bulk allocation of
-> > fixed high order pages. For example, 64MB dma-buf pages are made up
-> > to fixed order-4 pages * 1024.
-> > 
-> > The chunk heap uses alloc_pages_bulk to allocate high order page.
-> > https://lore.kernel.org/linux-mm/20200814173131.2803002-1-minchan@kernel.org
-> > 
-> > The chunk heap is registered by device tree with alignment and memory node
-> > of contiguous memory allocator(CMA). Alignment defines chunk page size.
-> > For example, alignment 0x1_0000 means chunk page size is 64KB.
-> > The phandle to memory node indicates contiguous memory allocator(CMA).
-> > If device node doesn't have cma, the registration of chunk heap fails.
-> 
-> This reminds me of an ion heap developed at Arm several years ago:
-> https://protect2.fireeye.com/v1/url?k=aceed8af-f122140a-acef53e0-0cc47a30d446-0980fa451deb2df6&q=1&e=a58a9bb0-a837-4fc5-970e-907089bfe25e&u=https%3A%2F%2Fgit.linaro.org%2Flanding-teams%2Fworking%2Farm%2Fkernel.git%2Ftree%2Fdrivers%2Fstaging%2Fandroid%2Fion%2Fion_compound_page.c
-> 
-> Some more descriptive text here:
-> https://protect2.fireeye.com/v1/url?k=83dc3e8b-de10f22e-83ddb5c4-0cc47a30d446-a406aa201ca7dddc&q=1&e=a58a9bb0-a837-4fc5-970e-907089bfe25e&u=https%3A%2F%2Fgithub.com%2FARM-software%2FCPA
-> 
-> It maintains a pool of high-order pages with a worker thread to
-> attempt compaction and allocation to keep the pool filled, with high
-> and low watermarks to trigger freeing/allocating of chunks.
-> It implements a shrinker to allow the system to reclaim the pool under
-> high memory pressure.
-> 
-> Is maintaining a pool something you considered? From the
-> alloc_pages_bulk thread it sounds like you want to allocate 300M at a
-> time, so I expect if you tuned the pool size to match that it could
-> work quite well.
-> 
-> That implementation isn't using a CMA region, but a similar approach
-> could definitely be applied.
-> 
-I have seriously considered CPA in our product but we developed our own
-because of the pool in CPA.
-The high-order pages are required by some specific users like Netflix
-app. Moreover required number of bytes are dramatically increasing
-because of high resolution videos and displays in these days.
-
-Gathering lots of free high-order pages in the background during
-run-time means reserving that amount of pages from the entier available
-system memory. Moreover the gathered pages are soon reclaimed whenever
-the system is sufferring from memory pressure (i.e. camera recording,
-heavy games). So we had to consider allocating hundreds of megabytes at
-at time. Of course we don't allocate all buffers by a single call to
-alloc_pages_bulk(). But still a buffer is very large.
-A single frame of 8K HDR video needs 95MB (7680*4320*2*1.5). Even a
-single frame of HDR 4K video needs 24MB and 4K HDR is now popular in
-Netflix, YouTube and Google Play video.
-
-> Thanks,
-> -Brian
-
-Thank you!
-
-KyongHo
-
-------wn.C777VfLFf0j4dI6teQ5O7yZ9hP4.it_WB71vmM7CNsG.7=_322d9_
-Content-Type: text/plain; charset="utf-8"
-
-
-------wn.C777VfLFf0j4dI6teQ5O7yZ9hP4.it_WB71vmM7CNsG.7=_322d9_
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
-LXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8v
-bGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
-
-------wn.C777VfLFf0j4dI6teQ5O7yZ9hP4.it_WB71vmM7CNsG.7=_322d9_--
+SGkgS3lvbmdIbywKCk9uIFdlZCwgQXVnIDE5LCAyMDIwIGF0IDEyOjQ2OjI2UE0gKzA5MDAsIENo
+byBLeW9uZ0hvIHdyb3RlOgo+IEkgaGF2ZSBzZXJpb3VzbHkgY29uc2lkZXJlZCBDUEEgaW4gb3Vy
+IHByb2R1Y3QgYnV0IHdlIGRldmVsb3BlZCBvdXIgb3duCj4gYmVjYXVzZSBvZiB0aGUgcG9vbCBp
+biBDUEEuCgpPaCBnb29kLCBJJ20gZ2xhZCB5b3UgY29uc2lkZXJlZCBpdCA6LSkKCj4gVGhlIGhp
+Z2gtb3JkZXIgcGFnZXMgYXJlIHJlcXVpcmVkIGJ5IHNvbWUgc3BlY2lmaWMgdXNlcnMgbGlrZSBO
+ZXRmbGl4Cj4gYXBwLiBNb3Jlb3ZlciByZXF1aXJlZCBudW1iZXIgb2YgYnl0ZXMgYXJlIGRyYW1h
+dGljYWxseSBpbmNyZWFzaW5nCj4gYmVjYXVzZSBvZiBoaWdoIHJlc29sdXRpb24gdmlkZW9zIGFu
+ZCBkaXNwbGF5cyBpbiB0aGVzZSBkYXlzLgo+IAo+IEdhdGhlcmluZyBsb3RzIG9mIGZyZWUgaGln
+aC1vcmRlciBwYWdlcyBpbiB0aGUgYmFja2dyb3VuZCBkdXJpbmcKPiBydW4tdGltZSBtZWFucyBy
+ZXNlcnZpbmcgdGhhdCBhbW91bnQgb2YgcGFnZXMgZnJvbSB0aGUgZW50aWVyIGF2YWlsYWJsZQo+
+IHN5c3RlbSBtZW1vcnkuIE1vcmVvdmVyIHRoZSBnYXRoZXJlZCBwYWdlcyBhcmUgc29vbiByZWNs
+YWltZWQgd2hlbmV2ZXIKPiB0aGUgc3lzdGVtIGlzIHN1ZmZlcnJpbmcgZnJvbSBtZW1vcnkgcHJl
+c3N1cmUgKGkuZS4gY2FtZXJhIHJlY29yZGluZywKPiBoZWF2eSBnYW1lcykuCgpBcmVuJ3QgdGhl
+c2UgdHdvIHRoaW5ncyBpbiBjb250cmFkaWN0aW9uPyBJZiB0aGV5J3JlIGVhc2lseSByZWNsYWlt
+ZWQKdGhlbiB0aGV5IGFyZW4ndCAicmVzZXJ2ZWQiIGluIGFueSBkZXRyaW1lbnRhbCB3YXkuIEFu
+ZCBpZiB5b3UgZG9uJ3QKd2FudCB0aGVtIHRvIGJlIHJlY2xhaW1lZCwgdGhlbiB5b3UgbmVlZCB0
+aGVtIHRvIGJlIHJlc2VydmVkLi4uCgpUaGUgYXBwcm9hY2ggeW91IGhhdmUgaGVyZSBhc3NpZ25z
+IHRoZSBjaHVuayBvZiBtZW1vcnkgYXMgYSByZXNlcnZlZApDTUEgcmVnaW9uIHdoaWNoIHRoZSBr
+ZXJuZWwgaXMgZ29pbmcgdG8gdHJ5IG5vdCB0byB1c2UgdG9vIC0gc2ltaWxhcgp0byB0aGUgQ1BB
+IHBvb2wuCgpJIHN1cHBvc2UgaXQncyBhIGJhbGFuY2UgZGVwZW5kaW5nIG9uIGhvdyBtdWNoIHlv
+dSdyZSB3aWxsaW5nIHRvIHdhaXQKZm9yIG1pZ3JhdGlvbiBvbiB0aGUgYWxsb2NhdGlvbiBwYXRo
+LiBDUEEgaGFzIHRoZSBwb3RlbnRpYWwgdG8gZ2V0IHlvdQpmYXN0ZXIgYWxsb2NhdGlvbnMsIGJ1
+dCB0aGUgZG93bnNpZGUgaXMgeW91IG5lZWQgdG8gbWFrZSBpdCBhIGxpdHRsZQptb3JlICJncmVl
+ZHkiLgoKQ2hlZXJzLAotQnJpYW4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0
+cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xp
+bmFyby1tbS1zaWcK
