@@ -2,71 +2,127 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E61E248FBF
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Aug 2020 22:56:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7E992493AE
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Aug 2020 05:54:49 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 637AB605DA
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Aug 2020 20:56:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1769065F83
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Aug 2020 03:54:49 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 4F1736162C; Tue, 18 Aug 2020 20:56:49 +0000 (UTC)
+	id 051C565FD7; Wed, 19 Aug 2020 03:54:48 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE autolearn=disabled
-	version=3.4.2
+	RCVD_IN_DNSWL_BLOCKED,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,
+	SPF_HELO_PASS autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0C22561718;
-	Tue, 18 Aug 2020 20:56:15 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5312365F75;
+	Wed, 19 Aug 2020 03:54:09 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 07089605D8
- for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Aug 2020 20:56:12 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id E5AB961718
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Aug 2020 03:54:05 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id E23466162C; Tue, 18 Aug 2020 20:56:11 +0000 (UTC)
-Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com
- [209.85.167.196])
- by lists.linaro.org (Postfix) with ESMTPS id B4C6D605D8
- for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Aug 2020 20:56:10 +0000 (UTC)
-Received: by mail-oi1-f196.google.com with SMTP id o21so19126002oie.12
- for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Aug 2020 13:56:10 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=WVlaqaJEkLaogLxHkb59x+3913QcwhMo1tlZOm9AT0s=;
- b=ubZl5syeiCeQ/IDVuub8vxu9NGMVcwe1gCy7W+wPDGTbUoUA51ApiGXytsTp4q1rYL
- xDW+CiTzkkpkRiKJ+2H0XCMXO4QtZdVUAK/NePHVsT2GqNu3Idru2WhjNs4FxzokcBJT
- dk+kyBYEeP0KH0kD9lkq7I9iUJFggkENiLr7Wic3Tx1CBczW7ajJIilqrpa7vOyZhII/
- u7ourb1e95lwPb3iSc2JM2m4EOo9q+sDxJ4ZPmTJYlO5zjWenx6RN1gZsXJu55zD1/eo
- LQgQSJyu0OOcvyBlVXXchQeGJvVwXbWK7UXSVTAlpDxy5+jnLDTLRCyuYGlJFkfpSvoO
- tBxw==
-X-Gm-Message-State: AOAM531QQsyloBJqwa5vtM3IJ97IEo7LzMnCxBOoLjMjj5ppPKdrEl4/
- ODvhZnYbitTwUqozomEgYKyZSoKy9TnH18XRhNQvdmrs
-X-Google-Smtp-Source: ABdhPJwbu8MfbO3BaVc7WQtY8gCaYLyN64siinjCbEFyrvhEdhXeVpE86gO8wO6noTbeRWOhZomU5kKcgOZGItaZTUA=
-X-Received: by 2002:aca:1117:: with SMTP id 23mr1367198oir.97.1597784170084;
- Tue, 18 Aug 2020 13:56:10 -0700 (PDT)
+ id CEA8E65F75; Wed, 19 Aug 2020 03:54:05 +0000 (UTC)
+Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
+ by lists.linaro.org (Postfix) with ESMTPS id D575A61718
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Aug 2020 03:54:03 +0000 (UTC)
+Received: from epcas2p2.samsung.com (unknown [182.195.41.54])
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20200819035400epoutp030ddcc1bb571b58ea35a81701b266d2ed~sjwoCddzw0574105741epoutp03p
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Aug 2020 03:54:00 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
+ 20200819035400epoutp030ddcc1bb571b58ea35a81701b266d2ed~sjwoCddzw0574105741epoutp03p
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas2p1.samsung.com (KnoxPortal) with ESMTP id
+ 20200819035359epcas2p1d07fa5ac07155cbde39ec139311ac897~sjwnFdAJ02461124611epcas2p1X;
+ Wed, 19 Aug 2020 03:53:59 +0000 (GMT)
+Received: from epsmges2p4.samsung.com (unknown [182.195.40.183]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4BWYmj4q7PzMqYlt; Wed, 19 Aug
+ 2020 03:53:57 +0000 (GMT)
+Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
+ epsmges2p4.samsung.com (Symantec Messaging Gateway) with SMTP id
+ AC.5E.27013.552AC3F5; Wed, 19 Aug 2020 12:53:57 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas2p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20200819035356epcas2p4bf6e672c27e14d4e0f728aae9a5f43fb~sjwjf74Jn2934829348epcas2p40;
+ Wed, 19 Aug 2020 03:53:56 +0000 (GMT)
+Received: from epsmgms1p2.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20200819035356epsmtrp2add31132847dd79bcb8bff3a29704536~sjwje1X0n0355803558epsmtrp2E;
+ Wed, 19 Aug 2020 03:53:56 +0000 (GMT)
+X-AuditID: b6c32a48-d35ff70000006985-2b-5f3ca2551cd4
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgms1p2.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 71.85.08303.352AC3F5; Wed, 19 Aug 2020 12:53:55 +0900 (KST)
+Received: from KEI (unknown [12.36.155.227]) by epsmtip2.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20200819035355epsmtip2ae445ec6236a53184e2ae990b7dada13~sjwjNPcQf0530505305epsmtip2C;
+ Wed, 19 Aug 2020 03:53:55 +0000 (GMT)
+Date: Wed, 19 Aug 2020 12:46:26 +0900
+From: Cho KyongHo <pullip.cho@samsung.com>
+To: Brian Starkey <brian.starkey@arm.com>
+Message-ID: <20200819034626.GB70898@KEI>
 MIME-Version: 1.0
+In-Reply-To: <20200818105557.svky5c7gdvk6khzu@DESKTOP-E1NTVVP.localdomain>
+User-Agent: Mutt/1.5.24 (2015-08-30)
+X-Brightmail-Tracker: H4sIAAAAAAAAA02TbUxTZxTH8/S29xZm5VKhPgMyuztnhI2X8vqIMM2m5kYdAcn2gei6rr0D
+ Yim15U2zBNiGIBW0wBhiXTuGY1YWHDJEkG20GASBMMBiYIMBZnMwXkYByQi4lisJ337nn/M/
+ 5znn5OFjQgPhxU9WpTEalUxJ4a7cRqsv8n+vKkoa9P1/YjTXpSeQoa4WR59aunA00dUH0MxY
+ Cw8Z23t5aHBpDkdrF/p46IbuMxw9M01gqHvVH924t8JBi4PjHDTQbMDRxVs/8tBo7XMequy0
+ cdC3S3ME6q65iKG81nYCdf1uJ1BpvwlHV3OLwcGddF7/Gk7XflUL6IHiIg5tqk+n680XcLp+
+ oYSgC2cGOfRvtns4/aBilUuP6To49Mj6JEbP/fQIp4sbzIDuNrUTdMfjOxzaXv9KLJmgjEpi
+ ZApGI2ZU8lRFsioxmjoWL31HGhYeJPGX7EMRlFglS2GiqUPHY/2PJCsdu6DEGTJlukOKlWm1
+ VOBbUZrU9DRGnJSqTYumGLVCqZZI1AFaWYo2XZUYIE9NiZQEBQWHOTI/VCa13f4FqKu8s2ar
+ h7g5YF5UCFz4kAyFZcN/EIXAlS8kmwC059Ry2WABwEclxTw2sAO4XKF3BPwNi3U6kNWbAayb
+ /wZ3lhKS4wCO/8U4mUu+Di8NGzAn46QfvHmtAzi9HqQvzDVInV6MvMaF/+TrNrw7yAhoNRdw
+ nSwg98I6/QLGsjvsvPJkQ3chj0Jd/ZONOp7kbjjVlu2sA0mrC5yZKAfsOIeg0cy+B5I74FRH
+ A8GyF7TPtuKs4UsAZ42WF0m3HZO1uLMcAiv/zN8ohJFJcGJlEGMHfg22D3NZeTsssK4RrCyA
+ BeeFrHM3vPuFjbvZqrj18Qum4fXGzR32ALjUbOBcBrsqt4xWuaUby29CU8sCXulogZHesGad
+ z6IvrGsONAGeGYgYtTYlkdEGq0O33roebHwTP7oJXJ2ZD7AADh9YAORjlIegqHW/VChQyM6e
+ YzSpUk26ktFaQJjjTnrMy1Oe6vhnqjSpJCw4PDxoXxgKCw9G1E7BbGTfB0IyUZbGnGYYNaPZ
+ 9HH4Ll45nPKJ8mrNHkLOnXZpe1jW9Xy0aNkWEvf3nu0d6Tq7DjTqa0oOiJTvFtsIS/K/Fl3H
+ yOmKKl/tylhb1rapIUN8v72352TpD43TYttL1kVh89HD1JjPKPSJEW07+XZc3rJxlQqpfVBG
+ 9XI97mYUTRrDVyw9cdLCTDeflEL3p1duGT/q14wYnh72fvnMpZt3GuSLkYKFUyc+X03McyuS
+ iVxDGpqWE459nen5ScLHTa+eG1Kcz7Z0Th4ZcF0xG90kB3/dFUNH5N4P9iFjsxd16+sFzzJP
+ vV96lpkVVQeeeSht0b8ReiBfbK3Jqiw/IQm8rzg+mTG/F7uu+E60v4+I+VkgV8ZTXG2STOKH
+ abSy/wFXMz7nrwQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrAIsWRmVeSWpSXmKPExsWy7bCSvG7wIpt4gycXLCzen5rIbjFn/Ro2
+ i6ZDp9gsHp26wGjx9v5uVov5R86xWlz5+p7N4m/nBVaLld3NbBbfFzxitjjzW9di5Z4fTBZf
+ rjxksri8aw6bRc+GrawW99b8Z7WYdfIak8Wyr+/ZLc4s72G2aN17hN3i1N3P7BaTLy1gs5jd
+ 2MfoIO7Reukvm8eaeWsYPS739TJ5LNhU6rFpVSebx6ZPk9g9ut5eYfK4c20Pm8eJGb9ZPO53
+ H2fyuP3vMbPH+31X2Tz6tqxi9Diz4Ai7x/Eb25k8Pm+SCxCI4rJJSc3JLEst0rdL4Mp48UGj
+ 4JFERd/NP2wNjCdFuhg5OCQETCQOv9bvYuTiEBLYwShx6tEl9i5GTqC4lMS87rVMELawxP2W
+ I6wQRfcZJTrPX2IFSbAIqEr035rDDGKzCWhJrJ57nBFkqIiApkTjnHiQemaBhSwSV2ctYwOp
+ ERYwlzi8qoMFxOYV0JBYP/ETM8TQs4wSs45/YodICEqcnPkErIgZaOiNfy+ZQIYyC0hLLP/H
+ ARLmFPCS6N70BGyXqICKxKuD9RMYBWchaZ6FpHkWQvMCRuZVjJKpBcW56bnFhgVGeanlesWJ
+ ucWleel6yfm5mxjBiUBLawfjnlUf9A4xMnEwHmKU4GBWEuHt3WsdL8SbklhZlVqUH19UmpNa
+ fIhRmoNFSZz366yFcUIC6YklqdmpqQWpRTBZJg5OqQamDvHtZ96YTP+kLjh1fs6bpW2/X+w7
+ ZPbir2/3Ma6/P4uv3VRoVNb3eMN5zK/UW9aY224zp8e/h0eEtl4MsilT3ZXz4pjYhj7lEO8X
+ Ai8UN3TG6DfwcT2Ka2ixrfz7ZKn7LJPGZr3j8ac0niZPki2/symt5RaL9ZJ5rdWiP+rPXNNf
+ vW1u/HcR1XmrOP2awzg4jSMm/7xQ4CjTl8Hd/udSzX055vPLPFZc0NKZPq02/G/fvA/PNdwD
+ bJZN1G9Lf8druSD9nRvj7sDzIQ91FTJLN1hc323KX9i3aEtl1yLPiMulImp3ltz5+ummaVxO
+ TtREpxTXHzcuf5ny5oitcCjvB2M+qdWR7ytc81jOlxcrsRRnJBpqMRcVJwIAVw1au3MDAAA=
+X-CMS-MailID: 20200819035356epcas2p4bf6e672c27e14d4e0f728aae9a5f43fb
+X-Msg-Generator: CA
+Content-Type: multipart/mixed;
+ boundary="----wn.C777VfLFf0j4dI6teQ5O7yZ9hP4.it_WB71vmM7CNsG.7=_322d9_"
+X-Sendblock-Type: AUTO_CONFIDENTIAL
+CMS-TYPE: 102P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20200818074547epcas2p21e0c2442873d03800c7bc2c3e76405d6
 References: <CGME20200818074547epcas2p21e0c2442873d03800c7bc2c3e76405d6@epcas2p2.samsung.com>
  <20200818080415.7531-1-hyesoo.yu@samsung.com>
-In-Reply-To: <20200818080415.7531-1-hyesoo.yu@samsung.com>
-From: John Stultz <john.stultz@linaro.org>
-Date: Tue, 18 Aug 2020 13:55:59 -0700
-Message-ID: <CALAqxLWRLOqNrhhpjfqfztsWTib8SQQgeX3jJM+_ij_CvC6hiw@mail.gmail.com>
-To: Hyesoo Yu <hyesoo.yu@samsung.com>
+ <20200818105557.svky5c7gdvk6khzu@DESKTOP-E1NTVVP.localdomain>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS"
- <devicetree@vger.kernel.org>, linux-media <linux-media@vger.kernel.org>,
- Minchan Kim <minchan@kernel.org>, lkml <linux-kernel@vger.kernel.org>,
- Christian Koenig <christian.koenig@amd.com>, Liam Mark <lmark@codeaurora.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- linux-mm <linux-mm@kvack.org>, Rob Herring <robh+dt@kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- "\(Exiting\) Benjamin Gaignard" <benjamin.gaignard@linaro.org>,
- joaodias@google.com, iamjoonsoo.kim@lge.com,
- Andrew Morton <akpm@linux-foundation.org>,
- KyongHo Cho <pullip.cho@samsung.com>, Suren Baghdasaryan <surenb@google.com>,
- vbabka@suse.cz, Brian Starkey <Brian.Starkey@arm.com>
+Cc: dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+ benjamin.gaignard@linaro.org, Hyesoo Yu <hyesoo.yu@samsung.com>,
+ linux-media@vger.kernel.org, devicetree@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org, robh+dt@kernel.org, john.stultz@linaro.org,
+ nd@arm.com, surenb@google.com, akpm@linux-foundation.org, vbabka@suse.cz,
+ linux-kernel@vger.kernel.org, lmark@codeaurora.org, minchan@kernel.org,
+ joaodias@google.com, iamjoonsoo.kim@lge.com, christian.koenig@amd.com
 Subject: Re: [Linaro-mm-sig] [PATCH 0/3] Chunk Heap Support on DMA-HEAP
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
@@ -80,60 +136,88 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gVHVlLCBBdWcgMTgsIDIwMjAgYXQgMTI6NDUgQU0gSHllc29vIFl1IDxoeWVzb28ueXVAc2Ft
-c3VuZy5jb20+IHdyb3RlOgo+Cj4gVGhlc2UgcGF0Y2ggc2VyaWVzIHRvIGludHJvZHVjZSBhIG5l
-dyBkbWEgaGVhcCwgY2h1bmsgaGVhcC4KPiBUaGF0IGhlYXAgaXMgbmVlZGVkIGZvciBzcGVjaWFs
-IEhXIHRoYXQgcmVxdWlyZXMgYnVsayBhbGxvY2F0aW9uIG9mCj4gZml4ZWQgaGlnaCBvcmRlciBw
-YWdlcy4gRm9yIGV4YW1wbGUsIDY0TUIgZG1hLWJ1ZiBwYWdlcyBhcmUgbWFkZSB1cAo+IHRvIGZp
-eGVkIG9yZGVyLTQgcGFnZXMgKiAxMDI0Lgo+Cj4gVGhlIGNodW5rIGhlYXAgdXNlcyBhbGxvY19w
-YWdlc19idWxrIHRvIGFsbG9jYXRlIGhpZ2ggb3JkZXIgcGFnZS4KPiBodHRwczovL2xvcmUua2Vy
-bmVsLm9yZy9saW51eC1tbS8yMDIwMDgxNDE3MzEzMS4yODAzMDAyLTEtbWluY2hhbkBrZXJuZWwu
-b3JnCj4KPiBUaGUgY2h1bmsgaGVhcCBpcyByZWdpc3RlcmVkIGJ5IGRldmljZSB0cmVlIHdpdGgg
-YWxpZ25tZW50IGFuZCBtZW1vcnkgbm9kZQo+IG9mIGNvbnRpZ3VvdXMgbWVtb3J5IGFsbG9jYXRv
-cihDTUEpLiBBbGlnbm1lbnQgZGVmaW5lcyBjaHVuayBwYWdlIHNpemUuCj4gRm9yIGV4YW1wbGUs
-IGFsaWdubWVudCAweDFfMDAwMCBtZWFucyBjaHVuayBwYWdlIHNpemUgaXMgNjRLQi4KPiBUaGUg
-cGhhbmRsZSB0byBtZW1vcnkgbm9kZSBpbmRpY2F0ZXMgY29udGlndW91cyBtZW1vcnkgYWxsb2Nh
-dG9yKENNQSkuCj4gSWYgZGV2aWNlIG5vZGUgZG9lc24ndCBoYXZlIGNtYSwgdGhlIHJlZ2lzdHJh
-dGlvbiBvZiBjaHVuayBoZWFwIGZhaWxzLgo+Cj4gVGhlIHBhdGNoc2V0IGluY2x1ZGVzIHRoZSBm
-b2xsb3dpbmc6Cj4gIC0gZXhwb3J0IGRtYS1oZWFwIEFQSSB0byByZWdpc3RlciBrZXJuZWwgbW9k
-dWxlIGRtYSBoZWFwLgo+ICAtIGFkZCBjaHVuayBoZWFwIGltcGxlbWVudGF0aW9uLgo+ICAtIGRv
-Y3VtZW50IG9mIGRldmljZSB0cmVlIHRvIHJlZ2lzdGVyIGNodW5rIGhlYXAKPgo+IEh5ZXNvbyBZ
-dSAoMyk6Cj4gICBkbWEtYnVmOiBhZGQgbWlzc2luZyBFWFBPUlRfU1lNQk9MX0dQTCgpIGZvciBk
-bWEgaGVhcHMKPiAgIGRtYS1idWY6IGhlYXBzOiBhZGQgY2h1bmsgaGVhcCB0byBkbWFidWYgaGVh
-cHMKPiAgIGRtYS1oZWFwOiBEZXZpY2V0cmVlIGJpbmRpbmcgZm9yIGNodW5rIGhlYXAKCkhleSEg
-VGhhbmtzIHNvIG11Y2ggZm9yIHNlbmRpbmcgdGhpcyBvdXQhIEknbSByZWFsbHkgZXhjaXRlZCB0
-byBzZWUKdGhlc2UgaGVhcHMgYmUgc3VibWl0dGVkIGFuZCByZXZpZXdlZCBvbiB0aGUgbGlzdCEK
-ClRoZSBmaXJzdCBnZW5lcmFsIGNvbmNlcm4gSSBoYXZlIHdpdGggeW91ciBzZXJpZXMgaXMgdGhh
-dCBpdCBhZGRzIGEgZHQKYmluZGluZyBmb3IgdGhlIGNodW5rIGhlYXAsIHdoaWNoIHdlJ3ZlIGdv
-dHRlbiBhIGZhaXIgYW1vdW50IG9mCnB1c2hiYWNrIG9uLgoKQSBwb3NzaWJsZSBhbHRlcm5hdGl2
-ZSBtaWdodCBiZSBzb21ldGhpbmcgbGlrZSB3aGF0IEt1bmloaWtvIEhheWFzaGkKcHJvcG9zZWQg
-Zm9yIG5vbi1kZWZhdWx0IENNQSBoZWFwczoKICBodHRwczovL2xvcmUua2VybmVsLm9yZy9sa21s
-LzE1OTQ5NDgyMDgtNDczOS0xLWdpdC1zZW5kLWVtYWlsLWhheWFzaGkua3VuaWhpa29Ac29jaW9u
-ZXh0LmNvbS8KClRoaXMgYXBwcm9hY2ggd291bGQgaW5zdGVhbCBhbGxvdyBhIGRyaXZlciB0byBy
-ZWdpc3RlciBhIENNQSBhcmVhIHdpdGgKdGhlIGNodW5rIGhlYXAgaW1wbGVtZW50YXRpb24uCgpI
-b3dldmVyLCAoYW5kIHRoaXMgd2FzIHRoZSBjYXRjaCBLdW5paGlrbyBIYXlhc2hpJ3MgcGF0Y2gp
-IHRoaXMKcmVxdWlyZXMgdGhhdCB0aGUgZHJpdmVyIGFsc28gYmUgdXBzdHJlYW0sIGFzIHdlIG5l
-ZWQgYW4gaW4tdHJlZSB1c2VyCm9mIHN1Y2ggY29kZS4KCkFsc28sIGl0IG1pZ2h0IGJlIGdvb2Qg
-dG8gcHJvdmlkZSBzb21lIGZ1cnRoZXIgcmF0aW9uYWxlIG9uIHdoeSB0aGlzCmhlYXAgaXMgYmVu
-ZWZpY2lhbCBvdmVyIHRoZSBleGlzdGluZyBDTUEgaGVhcD8gIEluIGdlbmVyYWwgZm9jdXNpbmcK
-dGhlIGNvbW1pdCBtZXNzYWdlcyBtb3JlIG9uIHRoZSB3aHkgd2UgbWlnaHQgd2FudCB0aGUgcGF0
-Y2gsIHJhdGhlcgp0aGFuIHdoYXQgdGhlIHBhdGNoIGRvZXMsIGlzIGhlbHBmdWwuCgoiU3BlY2lh
-bCBoYXJkd2FyZSIgdGhhdCBkb2Vzbid0IGhhdmUgdXBzdHJlYW0gZHJpdmVycyBpc24ndCB2ZXJ5
-CmNvbXBlbGxpbmcgZm9yIG1vc3QgbWFpbnRhaW5lcnMuCgpUaGF0IHNhaWQsIEknbSB2ZXJ5IGV4
-Y2l0ZWQgdG8gc2VlIHRoZXNlIHNvcnRzIG9mIHN1Ym1pc3Npb25zLCBhcyBJCmtub3cgbG90cyBv
-ZiB2ZW5kb3JzIGhhdmUgaGlzdG9yaWNhbGx5IGhhZCB2ZXJ5IGN1c3RvbSBvdXQgb2YgdHJlZSBJ
-T04KaGVhcHMsIGFuZCBJIHRoaW5rIGl0IHdvdWxkIGJlIGEgZ3JlYXQgYmVuZWZpdCB0byB0aGUg
-Y29tbXVuaXR5IHRvCmJldHRlciB1bmRlcnN0YW5kIHRoZSBleHBlcmllbmNlIHZlbmRvcnMgaGF2
-ZSBpbiBvcHRpbWl6aW5nCnBlcmZvcm1hbmNlIG9uIHRoZWlyIGRldmljZXMsIHNvIHdlIGNhbiBj
-cmVhdGUgZ29vZCBjb21tb24gc29sdXRpb25zCnVwc3RyZWFtLiBTbyBJIGxvb2sgZm9yd2FyZCB0
-byB5b3VyIGluc2lnaHRzIG9uIGZ1dHVyZSByZXZpc2lvbnMgb2YKdGhpcyBwYXRjaCBzZXJpZXMh
-Cgp0aGFua3MKLWpvaG4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5h
-cm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1t
-bS1zaWcK
+------wn.C777VfLFf0j4dI6teQ5O7yZ9hP4.it_WB71vmM7CNsG.7=_322d9_
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+
+On Tue, Aug 18, 2020 at 11:55:57AM +0100, Brian Starkey wrote:
+> Hi,
+> 
+> On Tue, Aug 18, 2020 at 05:04:12PM +0900, Hyesoo Yu wrote:
+> > These patch series to introduce a new dma heap, chunk heap.
+> > That heap is needed for special HW that requires bulk allocation of
+> > fixed high order pages. For example, 64MB dma-buf pages are made up
+> > to fixed order-4 pages * 1024.
+> > 
+> > The chunk heap uses alloc_pages_bulk to allocate high order page.
+> > https://lore.kernel.org/linux-mm/20200814173131.2803002-1-minchan@kernel.org
+> > 
+> > The chunk heap is registered by device tree with alignment and memory node
+> > of contiguous memory allocator(CMA). Alignment defines chunk page size.
+> > For example, alignment 0x1_0000 means chunk page size is 64KB.
+> > The phandle to memory node indicates contiguous memory allocator(CMA).
+> > If device node doesn't have cma, the registration of chunk heap fails.
+> 
+> This reminds me of an ion heap developed at Arm several years ago:
+> https://protect2.fireeye.com/v1/url?k=aceed8af-f122140a-acef53e0-0cc47a30d446-0980fa451deb2df6&q=1&e=a58a9bb0-a837-4fc5-970e-907089bfe25e&u=https%3A%2F%2Fgit.linaro.org%2Flanding-teams%2Fworking%2Farm%2Fkernel.git%2Ftree%2Fdrivers%2Fstaging%2Fandroid%2Fion%2Fion_compound_page.c
+> 
+> Some more descriptive text here:
+> https://protect2.fireeye.com/v1/url?k=83dc3e8b-de10f22e-83ddb5c4-0cc47a30d446-a406aa201ca7dddc&q=1&e=a58a9bb0-a837-4fc5-970e-907089bfe25e&u=https%3A%2F%2Fgithub.com%2FARM-software%2FCPA
+> 
+> It maintains a pool of high-order pages with a worker thread to
+> attempt compaction and allocation to keep the pool filled, with high
+> and low watermarks to trigger freeing/allocating of chunks.
+> It implements a shrinker to allow the system to reclaim the pool under
+> high memory pressure.
+> 
+> Is maintaining a pool something you considered? From the
+> alloc_pages_bulk thread it sounds like you want to allocate 300M at a
+> time, so I expect if you tuned the pool size to match that it could
+> work quite well.
+> 
+> That implementation isn't using a CMA region, but a similar approach
+> could definitely be applied.
+> 
+I have seriously considered CPA in our product but we developed our own
+because of the pool in CPA.
+The high-order pages are required by some specific users like Netflix
+app. Moreover required number of bytes are dramatically increasing
+because of high resolution videos and displays in these days.
+
+Gathering lots of free high-order pages in the background during
+run-time means reserving that amount of pages from the entier available
+system memory. Moreover the gathered pages are soon reclaimed whenever
+the system is sufferring from memory pressure (i.e. camera recording,
+heavy games). So we had to consider allocating hundreds of megabytes at
+at time. Of course we don't allocate all buffers by a single call to
+alloc_pages_bulk(). But still a buffer is very large.
+A single frame of 8K HDR video needs 95MB (7680*4320*2*1.5). Even a
+single frame of HDR 4K video needs 24MB and 4K HDR is now popular in
+Netflix, YouTube and Google Play video.
+
+> Thanks,
+> -Brian
+
+Thank you!
+
+KyongHo
+
+------wn.C777VfLFf0j4dI6teQ5O7yZ9hP4.it_WB71vmM7CNsG.7=_322d9_
+Content-Type: text/plain; charset="utf-8"
+
+
+------wn.C777VfLFf0j4dI6teQ5O7yZ9hP4.it_WB71vmM7CNsG.7=_322d9_
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
+LXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8v
+bGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+
+------wn.C777VfLFf0j4dI6teQ5O7yZ9hP4.it_WB71vmM7CNsG.7=_322d9_--
