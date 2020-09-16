@@ -2,104 +2,70 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EF5D26C240
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Sep 2020 13:46:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 906DA26C2DF
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Sep 2020 14:42:37 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8843F6038C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Sep 2020 11:46:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C24FB666D3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Sep 2020 12:42:36 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 7961361873; Wed, 16 Sep 2020 11:46:32 +0000 (UTC)
+	id B6C95666D7; Wed, 16 Sep 2020 12:42:36 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.8 required=5.0 tests=BAYES_00,FORGED_SPF_HELO,
-	HTML_MESSAGE,MAILING_LIST_MULTI,MSGID_FROM_MTA_HEADER,RCVD_IN_DNSWL_HI,
-	RCVD_IN_MSPIKE_H2,SPF_HELO_PASS autolearn=disabled version=3.4.2
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
+	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE autolearn=disabled
+	version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BA944614FE;
-	Wed, 16 Sep 2020 11:45:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0DFDC616DE;
+	Wed, 16 Sep 2020 12:42:07 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id B36D060695
- for <linaro-mm-sig@lists.linaro.org>; Wed, 16 Sep 2020 11:45:52 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 283EE60F5B
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 16 Sep 2020 12:42:04 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id A6A5B614FE; Wed, 16 Sep 2020 11:45:52 +0000 (UTC)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2049.outbound.protection.outlook.com [40.107.223.49])
- by lists.linaro.org (Postfix) with ESMTPS id BB5A560695
- for <linaro-mm-sig@lists.linaro.org>; Wed, 16 Sep 2020 11:45:50 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=J/+FjNZiQJM0rlNJddUkQla7ZnsCWho2KNtHLhQdjll940d23sdAmzK3bbj1YqQ2UKMMWAZBtzVuiiPuKw5oPdpK4OeQq75pnn+YPmRE4I1Hl2UJGGmkCWh5S04g6gXiiLs1j/pg70iDZGpz+g0bjLFW/N4PBJMOKMl0ckOE8rNPfr9RGDyjmGPIcPe5NxxoKEN83ykZ6Lx9ZxldfvqnXL1Xxwobs5FLsfwpBGQxFHXKz+PDgjM/Z+iA3VkWGJ+1PolXV6qTD5HQM0P4x8NqFfy7uCh94FcnlARcTqym0WtZgUSgqBhU/iOrgt/aoyeIBgmRMZGBtOj7R348+ucg2Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=nD2z0U9zhqGGl+pqb8FU/UwSN/HGGEoGlL4m2hFoaHc=;
- b=UILw2P//v6+35FFx3nt0Sjev0Vjjqc16h3yFnvMKZhbj70cAiYH8gn+F2htxUMmU29n2eJt8AI5QBdBkQALudRDCWlMFMBrkNnj7hJi/uDVrvlRlA0djNbkOqLnlgJRQIvvqDH4VUnWJX/g1q1ZF/n7jdi214FrlswVx7FsT8YyEC+3539HfCxgXwtpq1C9QNF1cp9eVKpjElRNarS2qfMN66skcz+PKPW8X/dqaKT5aS2qNsD/JyqwHEvwD2xHW5uxsHXk7P3/WjQflo7WD7W3hW+IQBmYMvqV+3Sc0GlI8/0hHVVyP68YRZEc+RIvcyaqz53n2TtMuJdQ+daiYKw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
- by MN2PR12MB4551.namprd12.prod.outlook.com (2603:10b6:208:263::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3370.17; Wed, 16 Sep
- 2020 11:45:48 +0000
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::f8f7:7403:1c92:3a60]) by MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::f8f7:7403:1c92:3a60%6]) with mapi id 15.20.3391.014; Wed, 16 Sep 2020
- 11:45:48 +0000
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-To: Jason Gunthorpe <jgg@ziepe.ca>, akpm@linux-foundation.org,
- sumit.semwal@linaro.org, linux-media@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org
+ id 1BACB616DE; Wed, 16 Sep 2020 12:42:04 +0000 (UTC)
+Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
+ [209.85.167.194])
+ by lists.linaro.org (Postfix) with ESMTPS id E4F2C60F5B
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 16 Sep 2020 12:42:02 +0000 (UTC)
+Received: by mail-oi1-f194.google.com with SMTP id w16so7968467oia.2
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 16 Sep 2020 05:42:02 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=czd653EAQqRd9y6KWSclqvh0oWs0wM7+eL3iGSU/nsI=;
+ b=biPyDU9Qj8pD4h/djnCQI27h80vYQ91QFsOJ5Lp0xRjLjZw+aPtGKj23MVHCBtNxi0
+ 3CtCbz5iVzW/118LgwKTJUzg37u1katv20/wOnXmzSsGR/JXu9BX24ZKRBCsfzTAe4WY
+ de0GoHqLO33mqpgcbOXv8WqHeomCwExIo/Q0sUZDhDjGGMPMX4353AS96xSfpjf2AvK4
+ GgwW/IfKjSHkm/TSHsAlLpFDknUKk9jllQ67CE1ur14by7V2Ayty5EPWg543GQRC+9yJ
+ YBrO5Z7tElWbdWIQC9Xfg1xUCbO0mlJIkTtSS6yTPL4lbQGSvoVri9jN9OEUvgZsTwzo
+ yGYw==
+X-Gm-Message-State: AOAM532aLWvg6OnBytmaL7B3b70I10p3miHIGqFANtj3AYdj4PwKGPWq
+ i4gnJwgBNzbWMAORZgKJ+pfNb8wTY4fuKeZV0zCZog==
+X-Google-Smtp-Source: ABdhPJwB+2iScSnSRjswx0wBN3crEjmROMPJs/KcyWAFLMOIPP9Nlf6b8MzVFM61WOlkTuWWi8Wacl+i3PJJq3k7BoM=
+X-Received: by 2002:aca:6083:: with SMTP id u125mr3033440oib.14.1600260122457; 
+ Wed, 16 Sep 2020 05:42:02 -0700 (PDT)
+MIME-Version: 1.0
 References: <20200914132920.59183-1-christian.koenig@amd.com>
  <40cd26ae-b855-4627-5a13-4dcea5d622f6@gmail.com>
  <20200914140632.GD1221970@ziepe.ca>
  <9302e4e0-0ff0-8b00-ada1-85feefb49e88@gmail.com>
  <20200916095359.GD438822@phenom.ffwll.local>
  <fc8f2af7-9fc2-cb55-3065-75a4060b7c82@amd.com>
-Message-ID: <b621db68-30b9-cc3f-c2c0-237a7fe4db09@amd.com>
-Date: Wed, 16 Sep 2020 13:45:43 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-In-Reply-To: <fc8f2af7-9fc2-cb55-3065-75a4060b7c82@amd.com>
-Content-Language: en-US
-X-ClientProxiedBy: FR2P281CA0010.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a::20) To MN2PR12MB3775.namprd12.prod.outlook.com
- (2603:10b6:208:159::19)
-MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
- (2a02:908:1252:fb60:be8a:bd56:1f94:86e7) by
- FR2P281CA0010.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:a::20) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.3391.8 via Frontend Transport; Wed, 16 Sep 2020 11:45:46 +0000
-X-Originating-IP: [2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: e1e0fbf2-9772-4108-496f-08d85a360ddf
-X-MS-TrafficTypeDiagnostic: MN2PR12MB4551:
-X-Microsoft-Antispam-PRVS: <MN2PR12MB4551CF0E841B7EF50CD8122783210@MN2PR12MB4551.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 5tbWN+MhlQR6WeOX88/hSS2tHGQcFcCX5jB3CloJdSP+fAEQAB2L+tY02m2R9LbaFYoL+o7wFh79GCw9/Bo+JXX+N89puPrr32C8oAKX7gBlTAUbLEEdZwr4lK4XQruotDFBRyZrUywVkn7zx0m+/YEFOCNWriDubBLuabOsu+0DVbVKMa8uSb7GeyVc8QuRzYsqH4Z2/TVWjVZv1J70AdW7E8lbih4OFotqjkpRVLJE1JqFz+iAZnOac3XLIGzKh3ZgJi4QxKyiKdMvgZTqzhhaG8RJwIRTyCp8B4Ci8Q6IpIVlaQ3+7p29Ydh6Xg7hbb+bnUCKXWlT9g5c/hY4BQnTq6aMkMVBK45W3wfnUHMykP7lXAp1xvbA0nvj0ZrtqMDDCe0ICAoFoSvStyYzUzTNL9Lz+QiYlbvLsFDzJAZEKujtN5bDqkqhE40CW3BaiHIDLmVhxleKvT/9Bmjmdw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(346002)(136003)(396003)(376002)(366004)(39860400002)(36756003)(166002)(16526019)(5660300002)(83380400001)(86362001)(6486002)(2906002)(31686004)(31696002)(8676002)(8936002)(2616005)(6666004)(316002)(66946007)(186003)(478600001)(66556008)(52116002)(33964004)(66476007)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: U8FWlzKBBH75Xxb1FdkIBYMG3dRVSYtG5OKvpJYaNcdy0YUDUTSl0+/jo7NA00BBrVPQxqAn/jckFoXWjeF3xFWZlFVlI8DF339kCJYQHmcFrcyBZbvw/l6Z3qWbC/sSE4EAkUemoJZVqYVx1vAJm0ZwZfJdjQWmMt+LYGkXLNIO529YrxMiUhkNR151vhtInfLsd1Wkg04ZPoVackWSukG0QVlONDvqNY/D8kerfWjq4zlX+nQIig6O3hyTmgqJiIfuyZy2OCrgcGBh7tfbZ2fxfdlppA7H2DSsDEPcVyuOeC/9HqebaODXTcw9C+6H1DU7TR5SR7plaKeFxXLTg8Ck0lxn+59qEISziQT3qz9/L1dqUCe08szYxpIiZqRUOoHDqRUszfXRTG7YeQf44vlyac+OkHPYF6qlHo1bxcqZRH/isVF7msQ8rBI6cj2sMH5pom9djFJt0SBdVGoON759wK+9wSetOL6MFHMawwVZBSW7WVdW6toAst1Q3yzLf2SwrJ+CRQjXkX730eGOl6mQTJrvf8AREuH6Y+dJMBV6xGHEC8P9kyAJS9apJpCahD0u++90WxR9leNw3HKr8wTWwYrfj7s06Ua5h3EhdH8qdkTWklCKSgRrS29bx0KQD61NOHuKAcki13mtSJrmYzD8fFMMPmDkeRCUiZYXNiwc6+R5kTzufUlOzVpQpPkryWA86GQ7Dkc5pN3o/5Vd3A==
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e1e0fbf2-9772-4108-496f-08d85a360ddf
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2020 11:45:48.3524 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5JVrwkz5BEPRRzhr+9PnAQYfBj5erpLpbHUhxwv8vlGlpszUEMRXOT+uQn4/bZCw
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4551
+ <b621db68-30b9-cc3f-c2c0-237a7fe4db09@amd.com>
+In-Reply-To: <b621db68-30b9-cc3f-c2c0-237a7fe4db09@amd.com>
+From: Daniel Vetter <daniel@ffwll.ch>
+Date: Wed, 16 Sep 2020 14:41:51 +0200
+Message-ID: <CAKMK7uGJVMj6Sb1nDTBoY8SsXc55y2ypUEsGhNLOkbbjFLuYfw@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
+Cc: Linux MM <linux-mm@kvack.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Andrew Morton <akpm@linux-foundation.org>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
 Subject: Re: [Linaro-mm-sig] Changing vma->vm_file in dma_buf_mmap()
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
@@ -113,109 +79,41 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============1569153693008594696=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
---===============1569153693008594696==
-Content-Type: multipart/alternative;
- boundary="------------2482CD56258F6ED3C81B0494"
-Content-Language: en-US
-
---------------2482CD56258F6ED3C81B0494
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-[SNIP]
-> But Jason pointed me to the right piece of code. See this comment in 
-> in mmap_region():
->
->> 		/* ->mmap() can change vma->vm_file, but must guarantee that
->> * vma_link() below can deny write-access if VM_DENYWRITE is set
->> * and map writably if VM_SHARED is set. This usually means the
->> * new file must not have been exposed to user-space, yet.
->> */
->> 		vma <https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/vma>->vm_file 
->> <https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/vm_file>  =  get_file 
->> <https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/get_file>(file 
->> <https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/file>);
->> 		error  =  call_mmap 
->> <https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/call_mmap>(file 
->> <https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/file>,  vma <https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/vma>);
->
-> So changing vma->vm_file is allowed at least under certain circumstances.
->
-> Only the "file must not have been exposed to user-space, yet" part 
-> still needs double checking. Currently working on that.
-
-Ok, I think we can guarantee for all DMA-bufs what is required here.
-
-While searching the code I've found that at least vgem_prime_mmap() and 
-i915_gem_dmabuf_mmap() are doing the same thing of modifying vma->vm_file.
-
-So I'm leaning towards that this works as expected and we should just 
-document this properly.
-
-Daniel and Jason what do you think?
-
-Christian.
-
---------------2482CD56258F6ED3C81B0494
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    [SNIP]<br>
-    <blockquote type="cite" cite="mid:fc8f2af7-9fc2-cb55-3065-75a4060b7c82@amd.com"> But Jason
-      pointed me to the right piece of code. See this comment in in
-      mmap_region():<br>
-      <br>
-      <blockquote type="cite">
-        <pre>		<span class="cm">/* -&gt;mmap() can change vma-&gt;vm_file, but must guarantee that</span>
-<span class="cm">		 * vma_link() below can deny write-access if VM_DENYWRITE is set</span>
-<span class="cm">		 * and map writably if VM_SHARED is set. This usually means the</span>
-<span class="cm">		 * new file must not have been exposed to user-space, yet.</span>
-<span class="cm">		 */</span>
-		<span class="n"><a href="https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/vma" moz-do-not-send="true">vma</a></span><span class="o">-&gt;</span><span class="n"><a href="https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/vm_file" moz-do-not-send="true">vm_file</a></span> <span class="o">=</span> <span class="n"><a href="https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/get_file" moz-do-not-send="true">get_file</a></span><span class="p">(</span><span class="n"><a href="https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/file" moz-do-not-send="true">file</a></span><span class="p">);</span>
-		<span class="n">error</span> <span class="o">=</span> <span class="n"><a href="https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/call_mmap" moz-do-not-send="true">call_mmap</a></span><span class="p">(</span><span class="n"><a href="https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/file" moz-do-not-send="true">file</a></span><span class="p">,</span> <span class="n"><a href="https://elixir.bootlin.com/linux/v5.9-rc5/C/ident/vma" moz-do-not-send="true">vma</a></span><span class="p">);</span></pre>
-      </blockquote>
-      <br>
-      So changing vma-&gt;vm_file is allowed at least under certain
-      circumstances.<br>
-      <br>
-      Only the &quot;file must not have been exposed to user-space, yet&quot; part
-      still needs double checking. Currently working on that.<br>
-    </blockquote>
-    <br>
-    Ok, I think we can guarantee for all DMA-bufs what is required here.<br>
-    <br>
-    While searching the code I've found that at least vgem_prime_mmap()
-    and i915_gem_dmabuf_mmap() are doing the same thing of modifying
-    vma-&gt;vm_file.<br>
-    <br>
-    So I'm leaning towards that this works as expected and we should
-    just document this properly.<br>
-    <br>
-    Daniel and Jason what do you think?<br>
-    <br>
-    Christian.<br>
-  </body>
-</html>
-
---------------2482CD56258F6ED3C81B0494--
-
---===============1569153693008594696==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
-LXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8v
-bGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
-
---===============1569153693008594696==--
+T24gV2VkLCBTZXAgMTYsIDIwMjAgYXQgMTo0NSBQTSBDaHJpc3RpYW4gS8O2bmlnCjxjaHJpc3Rp
+YW4ua29lbmlnQGFtZC5jb20+IHdyb3RlOgo+Cj4gW1NOSVBdCj4KPiBCdXQgSmFzb24gcG9pbnRl
+ZCBtZSB0byB0aGUgcmlnaHQgcGllY2Ugb2YgY29kZS4gU2VlIHRoaXMgY29tbWVudCBpbiBpbiBt
+bWFwX3JlZ2lvbigpOgo+Cj4gLyogLT5tbWFwKCkgY2FuIGNoYW5nZSB2bWEtPnZtX2ZpbGUsIGJ1
+dCBtdXN0IGd1YXJhbnRlZSB0aGF0Cj4gKiB2bWFfbGluaygpIGJlbG93IGNhbiBkZW55IHdyaXRl
+LWFjY2VzcyBpZiBWTV9ERU5ZV1JJVEUgaXMgc2V0Cj4gKiBhbmQgbWFwIHdyaXRhYmx5IGlmIFZN
+X1NIQVJFRCBpcyBzZXQuIFRoaXMgdXN1YWxseSBtZWFucyB0aGUKPiAqIG5ldyBmaWxlIG11c3Qg
+bm90IGhhdmUgYmVlbiBleHBvc2VkIHRvIHVzZXItc3BhY2UsIHlldC4KPiAqLwo+IHZtYS0+dm1f
+ZmlsZSA9IGdldF9maWxlKGZpbGUpOwo+IGVycm9yID0gY2FsbF9tbWFwKGZpbGUsIHZtYSk7Cj4K
+Pgo+IFNvIGNoYW5naW5nIHZtYS0+dm1fZmlsZSBpcyBhbGxvd2VkIGF0IGxlYXN0IHVuZGVyIGNl
+cnRhaW4gY2lyY3Vtc3RhbmNlcy4KPgo+IE9ubHkgdGhlICJmaWxlIG11c3Qgbm90IGhhdmUgYmVl
+biBleHBvc2VkIHRvIHVzZXItc3BhY2UsIHlldCIgcGFydCBzdGlsbCBuZWVkcyBkb3VibGUgY2hl
+Y2tpbmcuIEN1cnJlbnRseSB3b3JraW5nIG9uIHRoYXQuCj4KPgo+IE9rLCBJIHRoaW5rIHdlIGNh
+biBndWFyYW50ZWUgZm9yIGFsbCBETUEtYnVmcyB3aGF0IGlzIHJlcXVpcmVkIGhlcmUuCj4KPiBX
+aGlsZSBzZWFyY2hpbmcgdGhlIGNvZGUgSSd2ZSBmb3VuZCB0aGF0IGF0IGxlYXN0IHZnZW1fcHJp
+bWVfbW1hcCgpIGFuZCBpOTE1X2dlbV9kbWFidWZfbW1hcCgpIGFyZSBkb2luZyB0aGUgc2FtZSB0
+aGluZyBvZiBtb2RpZnlpbmcgdm1hLT52bV9maWxlLgo+Cj4gU28gSSdtIGxlYW5pbmcgdG93YXJk
+cyB0aGF0IHRoaXMgd29ya3MgYXMgZXhwZWN0ZWQgYW5kIHdlIHNob3VsZCBqdXN0IGRvY3VtZW50
+IHRoaXMgcHJvcGVybHkuCj4KPiBEYW5pZWwgYW5kIEphc29uIHdoYXQgZG8geW91IHRoaW5rPwoK
+V2VsbCBJIGNhbiBjbGFpbSBJIHN0YXJ0ZWQgdGhpcywgc28gSSBzdGFydGVkIG91dCB3aXRoIG5h
+aXZlbHkKYXNzdW1pbmcgdGhhdCBpdCBKdXN0IFdvcmtzIDotKQoKSSB0aGluayB3ZSBhbHJlYWR5
+IGhhdmUgdmdlbS9pOTE1IHByaW1lIHRlc3RjYXNlcyBpbiBpZ3Qgd2hpY2ggdHJ5IHRvCmV4Y2Vy
+Y2lzZSB0aGlzIG1tYXAgZm9yd2FyZGluZywgaW5jbHVkaW5nIHByb3Zva2luZyBwdGUgc2hvb3Qt
+ZG93bnMuClNvIEkgdGhpbmsgYmVzdCB3b3VsZCBiZSBpZiB5b3UgY291bGQgYWxzbyBhZGQgYSB2
+YXJpYW50IGZvciBhbWRncHUsCnRvIG1ha2Ugc3VyZSB0aGlzIHJlYWxseSB3b3JrcyBhbmQga2Vl
+cHMgd29ya2luZy4KClBsdXMgb2ZjIHRoZSBkb2N1bWVudGF0aW9uIHBhdGNoIHNvIHRoYXQgY29y
+ZSBtbSBmb2xrcyBjYW4gb2ZmaWNpYWxseQphY2sgdGhpcyBhcyBsZWdpdC4KLURhbmllbAotLSAK
+RGFuaWVsIFZldHRlcgpTb2Z0d2FyZSBFbmdpbmVlciwgSW50ZWwgQ29ycG9yYXRpb24KaHR0cDov
+L2Jsb2cuZmZ3bGwuY2gKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5h
+cm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1t
+bS1zaWcK
