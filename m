@@ -2,44 +2,44 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 179FF26EAEC
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 18 Sep 2020 04:02:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EEF226EBBF
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 18 Sep 2020 04:10:17 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3FA0E666F3
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 18 Sep 2020 02:02:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 98894666FB
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 18 Sep 2020 02:10:16 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 322DB666F4; Fri, 18 Sep 2020 02:02:13 +0000 (UTC)
+	id 81062666FD; Fri, 18 Sep 2020 02:10:16 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
 X-Spam-Status: No, score=-7.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
 	RCVD_IN_DNSWL_HI,SPF_HELO_NONE autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8FC28666EA;
-	Fri, 18 Sep 2020 02:01:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C16F0666EA;
+	Fri, 18 Sep 2020 02:08:33 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id AFF1F666E1
- for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Sep 2020 02:01:25 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 9A606666E9
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Sep 2020 02:08:10 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id A4FD2666ED; Fri, 18 Sep 2020 02:01:25 +0000 (UTC)
+ id 785F5666ED; Fri, 18 Sep 2020 02:08:10 +0000 (UTC)
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by lists.linaro.org (Postfix) with ESMTPS id 9411E666E1
- for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Sep 2020 02:01:23 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTPS id 29C3C666E9
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Sep 2020 02:08:08 +0000 (UTC)
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net
  [73.47.72.35])
  (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id E192A21973;
- Fri, 18 Sep 2020 02:01:21 +0000 (UTC)
+ by mail.kernel.org (Postfix) with ESMTPSA id 85424238E3;
+ Fri, 18 Sep 2020 02:08:06 +0000 (UTC)
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu, 17 Sep 2020 21:55:49 -0400
-Message-Id: <20200918020110.2063155-9-sashal@kernel.org>
+Date: Thu, 17 Sep 2020 22:04:39 -0400
+Message-Id: <20200918020802.2065198-3-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200918020110.2063155-1-sashal@kernel.org>
-References: <20200918020110.2063155-1-sashal@kernel.org>
+In-Reply-To: <20200918020802.2065198-1-sashal@kernel.org>
+References: <20200918020802.2065198-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -47,7 +47,7 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 Cc: Sasha Levin <sashal@kernel.org>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>,
  dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
  linux-media@vger.kernel.org
-Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.4 009/330] dma-fence: Serialise
+Subject: [Linaro-mm-sig] [PATCH AUTOSEL 4.19 003/206] dma-fence: Serialise
 	signal enabling (dma_fence_enable_sw_signaling)
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
@@ -88,9 +88,9 @@ LmNvLnVrClNpZ25lZC1vZmYtYnk6IFNhc2hhIExldmluIDxzYXNoYWxAa2VybmVsLm9yZz4KLS0t
 CiBkcml2ZXJzL2RtYS1idWYvZG1hLWZlbmNlLmMgfCA3OCArKysrKysrKysrKysrKysrKy0tLS0t
 LS0tLS0tLS0tLS0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgMzUgaW5zZXJ0aW9ucygrKSwgNDMgZGVs
 ZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jIGIvZHJp
-dmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jCmluZGV4IDJjMTM2YWVlM2U3OTQuLjA1MmE0MWUyNDUx
-YzEgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYworKysgYi9kcml2ZXJz
-L2RtYS1idWYvZG1hLWZlbmNlLmMKQEAgLTI3Myw2ICsyNzMsMzAgQEAgdm9pZCBkbWFfZmVuY2Vf
+dmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jCmluZGV4IDE1NTFjYTdkZjM5NDEuLjg1ODZjYzA1ZGVm
+MTcgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYworKysgYi9kcml2ZXJz
+L2RtYS1idWYvZG1hLWZlbmNlLmMKQEAgLTI0NCw2ICsyNDQsMzAgQEAgdm9pZCBkbWFfZmVuY2Vf
 ZnJlZShzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSkKIH0KIEVYUE9SVF9TWU1CT0woZG1hX2ZlbmNl
 X2ZyZWUpOwogCitzdGF0aWMgYm9vbCBfX2RtYV9mZW5jZV9lbmFibGVfc2lnbmFsaW5nKHN0cnVj
 dCBkbWFfZmVuY2UgKmZlbmNlKQoreworCWJvb2wgd2FzX3NldDsKKworCWxvY2tkZXBfYXNzZXJ0
@@ -103,7 +103,7 @@ CWlmICghZmVuY2UtPm9wcy0+ZW5hYmxlX3NpZ25hbGluZyhmZW5jZSkpIHsKKwkJCWRtYV9mZW5j
 ZV9zaWduYWxfbG9ja2VkKGZlbmNlKTsKKwkJCXJldHVybiBmYWxzZTsKKwkJfQorCX0KKworCXJl
 dHVybiB0cnVlOworfQorCiAvKioKICAqIGRtYV9mZW5jZV9lbmFibGVfc3dfc2lnbmFsaW5nIC0g
 ZW5hYmxlIHNpZ25hbGluZyBvbiBmZW5jZQogICogQGZlbmNlOiB0aGUgZmVuY2UgdG8gZW5hYmxl
-CkBAIC0yODUsMTkgKzMwOSwxMiBAQCB2b2lkIGRtYV9mZW5jZV9lbmFibGVfc3dfc2lnbmFsaW5n
+CkBAIC0yNTYsMTkgKzI4MCwxMiBAQCB2b2lkIGRtYV9mZW5jZV9lbmFibGVfc3dfc2lnbmFsaW5n
 KHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlKQogewogCXVuc2lnbmVkIGxvbmcgZmxhZ3M7CiAKLQlp
 ZiAoIXRlc3RfYW5kX3NldF9iaXQoRE1BX0ZFTkNFX0ZMQUdfRU5BQkxFX1NJR05BTF9CSVQsCi0J
 CQkgICAgICAmZmVuY2UtPmZsYWdzKSAmJgotCSAgICAhdGVzdF9iaXQoRE1BX0ZFTkNFX0ZMQUdf
@@ -116,11 +116,11 @@ bmNlLT5mbGFncykpCisJCXJldHVybjsKIAotCQlzcGluX3VubG9ja19pcnFyZXN0b3JlKGZlbmNl
 LT5sb2NrLCBmbGFncyk7Ci0JfQorCXNwaW5fbG9ja19pcnFzYXZlKGZlbmNlLT5sb2NrLCBmbGFn
 cyk7CisJX19kbWFfZmVuY2VfZW5hYmxlX3NpZ25hbGluZyhmZW5jZSk7CisJc3Bpbl91bmxvY2tf
 aXJxcmVzdG9yZShmZW5jZS0+bG9jaywgZmxhZ3MpOwogfQogRVhQT1JUX1NZTUJPTChkbWFfZmVu
-Y2VfZW5hYmxlX3N3X3NpZ25hbGluZyk7CiAKQEAgLTMzMSw3ICszNDgsNiBAQCBpbnQgZG1hX2Zl
+Y2VfZW5hYmxlX3N3X3NpZ25hbGluZyk7CiAKQEAgLTMwMiw3ICszMTksNiBAQCBpbnQgZG1hX2Zl
 bmNlX2FkZF9jYWxsYmFjayhzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSwgc3RydWN0IGRtYV9mZW5j
 ZV9jYiAqY2IsCiB7CiAJdW5zaWduZWQgbG9uZyBmbGFnczsKIAlpbnQgcmV0ID0gMDsKLQlib29s
 IHdhc19zZXQ7CiAKIAlpZiAoV0FSTl9PTighZmVuY2UgfHwgIWZ1bmMpKQogCQlyZXR1cm4gLUVJ
-TlZBTDsKQEAgLTM0MywyNSArMzU5LDE0IEBAIGludCBkbWFfZmVuY2VfYWRkX2NhbGxiYWNrKHN0
+TlZBTDsKQEAgLTMxNCwyNSArMzMwLDE0IEBAIGludCBkbWFfZmVuY2VfYWRkX2NhbGxiYWNrKHN0
 cnVjdCBkbWFfZmVuY2UgKmZlbmNlLCBzdHJ1Y3QgZG1hX2ZlbmNlX2NiICpjYiwKIAogCXNwaW5f
 bG9ja19pcnFzYXZlKGZlbmNlLT5sb2NrLCBmbGFncyk7CiAKLQl3YXNfc2V0ID0gdGVzdF9hbmRf
 c2V0X2JpdChETUFfRkVOQ0VfRkxBR19FTkFCTEVfU0lHTkFMX0JJVCwKLQkJCQkgICAmZmVuY2Ut
@@ -133,13 +133,13 @@ TlQ7Ci0JCX0KLQl9Ci0KLQlpZiAoIXJldCkgeworCWlmIChfX2RtYV9mZW5jZV9lbmFibGVfc2ln
 bmFsaW5nKGZlbmNlKSkgewogCQljYi0+ZnVuYyA9IGZ1bmM7CiAJCWxpc3RfYWRkX3RhaWwoJmNi
 LT5ub2RlLCAmZmVuY2UtPmNiX2xpc3QpOwotCX0gZWxzZQorCX0gZWxzZSB7CiAJCUlOSVRfTElT
 VF9IRUFEKCZjYi0+bm9kZSk7CisJCXJldCA9IC1FTk9FTlQ7CisJfQorCiAJc3Bpbl91bmxvY2tf
-aXJxcmVzdG9yZShmZW5jZS0+bG9jaywgZmxhZ3MpOwogCiAJcmV0dXJuIHJldDsKQEAgLTQ2MSw3
-ICs0NjYsNiBAQCBkbWFfZmVuY2VfZGVmYXVsdF93YWl0KHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNl
+aXJxcmVzdG9yZShmZW5jZS0+bG9jaywgZmxhZ3MpOwogCiAJcmV0dXJuIHJldDsKQEAgLTQzMiw3
+ICs0MzcsNiBAQCBkbWFfZmVuY2VfZGVmYXVsdF93YWl0KHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNl
 LCBib29sIGludHIsIHNpZ25lZCBsb25nIHRpbWVvdXQpCiAJc3RydWN0IGRlZmF1bHRfd2FpdF9j
 YiBjYjsKIAl1bnNpZ25lZCBsb25nIGZsYWdzOwogCXNpZ25lZCBsb25nIHJldCA9IHRpbWVvdXQg
 PyB0aW1lb3V0IDogMTsKLQlib29sIHdhc19zZXQ7CiAKIAlpZiAodGVzdF9iaXQoRE1BX0ZFTkNF
-X0ZMQUdfU0lHTkFMRURfQklULCAmZmVuY2UtPmZsYWdzKSkKIAkJcmV0dXJuIHJldDsKQEAgLTQ3
-MywyMSArNDc3LDkgQEAgZG1hX2ZlbmNlX2RlZmF1bHRfd2FpdChzdHJ1Y3QgZG1hX2ZlbmNlICpm
+X0ZMQUdfU0lHTkFMRURfQklULCAmZmVuY2UtPmZsYWdzKSkKIAkJcmV0dXJuIHJldDsKQEAgLTQ0
+NCwyMSArNDQ4LDkgQEAgZG1hX2ZlbmNlX2RlZmF1bHRfd2FpdChzdHJ1Y3QgZG1hX2ZlbmNlICpm
 ZW5jZSwgYm9vbCBpbnRyLCBzaWduZWQgbG9uZyB0aW1lb3V0KQogCQlnb3RvIG91dDsKIAl9CiAK
 LQl3YXNfc2V0ID0gdGVzdF9hbmRfc2V0X2JpdChETUFfRkVOQ0VfRkxBR19FTkFCTEVfU0lHTkFM
 X0JJVCwKLQkJCQkgICAmZmVuY2UtPmZsYWdzKTsKLQotCWlmICh0ZXN0X2JpdChETUFfRkVOQ0Vf
