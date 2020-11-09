@@ -2,63 +2,58 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 34E3E2AA7A1
-	for <lists+linaro-mm-sig@lfdr.de>; Sat,  7 Nov 2020 20:29:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id ADA5B2ABFC8
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 Nov 2020 16:26:07 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5C39060850
-	for <lists+linaro-mm-sig@lfdr.de>; Sat,  7 Nov 2020 19:29:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D6050665F2
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 Nov 2020 15:26:06 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 4D2A0608BA; Sat,  7 Nov 2020 19:29:55 +0000 (UTC)
+	id C1E4966635; Mon,  9 Nov 2020 15:26:06 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_HI,SPF_HELO_NONE autolearn=disabled version=3.4.2
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
+	SPF_HELO_NONE autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5785F6088F;
-	Sat,  7 Nov 2020 19:29:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CB9BD665B5;
+	Mon,  9 Nov 2020 15:25:42 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 92FAA60649
- for <linaro-mm-sig@lists.linaro.org>; Sat,  7 Nov 2020 19:29:28 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id D4970665A5
+ for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Nov 2020 15:25:39 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 7DA056088F; Sat,  7 Nov 2020 19:29:28 +0000 (UTC)
+ id C8BCF6621A; Mon,  9 Nov 2020 15:25:39 +0000 (UTC)
 Received: from asavdk4.altibox.net (asavdk4.altibox.net [109.247.116.15])
- by lists.linaro.org (Postfix) with ESMTPS id 43B6860649
- for <linaro-mm-sig@lists.linaro.org>; Sat,  7 Nov 2020 19:29:27 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTPS id 89E7A6621A
+ for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Nov 2020 15:25:38 +0000 (UTC)
 Received: from ravnborg.org (unknown [188.228.123.71])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by asavdk4.altibox.net (Postfix) with ESMTPS id 8498E8052E;
- Sat,  7 Nov 2020 20:29:24 +0100 (CET)
-Date: Sat, 7 Nov 2020 20:29:22 +0100
+ by asavdk4.altibox.net (Postfix) with ESMTPS id C30C58053A;
+ Mon,  9 Nov 2020 16:25:32 +0100 (CET)
+Date: Mon, 9 Nov 2020 16:25:30 +0100
 From: Sam Ravnborg <sam@ravnborg.org>
 To: Lee Jones <lee.jones@linaro.org>
-Message-ID: <20201107192922.GA1039949@ravnborg.org>
+Message-ID: <20201109152530.GA1888045@ravnborg.org>
 References: <20201106214949.2042120-1-lee.jones@linaro.org>
- <9d4be6a4-4f39-b908-4086-2b6adb695465@amd.com>
- <20201107173406.GA1030984@ravnborg.org>
- <20201107184138.GS2063125@dell>
+ <20201106214949.2042120-11-lee.jones@linaro.org>
+ <20201107142651.GA1014611@ravnborg.org>
+ <20201109110603.GV2063125@dell>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20201107184138.GS2063125@dell>
+In-Reply-To: <20201109110603.GV2063125@dell>
 X-CMAE-Score: 0
 X-CMAE-Analysis: v=2.3 cv=VafZwmh9 c=1 sm=1 tr=0
  a=S6zTFyMACwkrwXSdXUNehg==:117 a=S6zTFyMACwkrwXSdXUNehg==:17
- a=kj9zAlcOel0A:10 a=z3vUUUWfv_O9Fg17TOIA:9 a=CjuIK1q_8ugA:10
+ a=IkcTkHD0fZMA:10 a=0bRNquZ1QDSsZ4hO3z4A:9 a=QEXdDO2ut3YA:10
 X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: Faith <faith@valinux.com>, Alex Deucher <alexander.deucher@amd.com>,
- Andy Gross <andy.gross@ti.com>, David Airlie <airlied@linux.ie>,
- Tomi Valkeinen <tomi.valkeinen@ti.com>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Rob Clark <rob.clark@linaro.org>,
- linaro-mm-sig@lists.linaro.org, Leo Li <sunpeng.li@amd.com>,
- Huang Rui <ray.huang@amd.com>, amd-gfx@lists.freedesktop.org,
- Keith Whitwell <keith@tungstengraphics.com>,
- Jeff Hartmann <jhartmann@valinux.com>, Rob Clark <rob@ti.com>,
- Gareth Hughes <gareth@valinux.com>,
+Cc: David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+ amd-gfx@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
  Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- by <jhartmann@precisioninsight.com>, linux-media@vger.kernel.org
-Subject: Re: [Linaro-mm-sig] [PATCH 00/19] [Set 2] Rid W=1 warnings from GPU
+ linux-media@vger.kernel.org
+Subject: Re: [Linaro-mm-sig] [PATCH 10/19] drm/radeon/radeon: Move prototype
+ into shared header
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
 Precedence: list
@@ -77,13 +72,20 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gU2F0LCBOb3YgMDcsIDIwMjAgYXQgMDY6NDE6MzhQTSArMDAwMCwgTGVlIEpvbmVzIHdyb3Rl
-Ogo+IE9uIFNhdCwgMDcgTm92IDIwMjAsIFNhbSBSYXZuYm9yZyB3cm90ZToKPiAKPiA+IEhpIENo
-cmlzdGlhbi4KPiA+IAo+ID4gPiBJJ20gbm90IHN1cmUgaWYgd2Ugd2FudCB0byBkbyBzb21lIG9m
-IHRoZSBzdWdnZXN0ZWQgY2hhbmdlcyB0byByYWRlb24uCj4gPiAKPiA+IEFsbCBwYXRjaGVzIGZv
-ciByYWRlb24gbG9va3MgZ29vZCB0byBtZSBleGNlcHQgImRybS9yYWRlb24vcmFkZW9uOiBNb3Zl
-Cj4gPiBwcm90b3R5cGUgaW50byBzaGFyZWQgaGVhZGVyIi4KPiAKPiBXYXMgdGhhdCB0aGUgb25l
-IHdoZXJlIHRoZSBwcm90b3R5cGUgbmVlZHMgbW92aW5nIHRvIHJhZGVvbi5oPwpZZXMsCgoJU2Ft
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1t
-bS1zaWcgbWFpbGluZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczov
-L2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
+SGkgTGVlLAo+ID4gCj4gPiBPdGhlciBwdWJsaWMgZnVuY3Rpb25zIGluIHJhZGVvbl9kZXZpY2Uu
+YyBoYXZlIHRoZWlyIHByb3RvdHlwZSBpbgo+ID4gcmFkZW9uLmggLSBmb3IgZXhhbXBsZSByYWRl
+b25faXNfcHgoKQo+ID4gCj4gPiBBZGQgcmFkZW9uX2RldmljZV9pc192aXJ0dWFsKCkgdGhlcmUg
+c28gd2UgYXZvaWlkIHRoaXMgbmV3IGhlYWRlci4KPiAKPiBPaCB5ZXMsIEkgcmVtZW1iZXIgd2h5
+IHRoaXMgd2Fzbid0IGEgc3VpdGFibGUgc29sdXRpb24gbm93Ogo+IAo+IFRoZSBtYWNybyAicmFk
+ZW9uX2luaXQiIGluIHJhZGVvbi5oIGNsYXNoZXMgd2l0aCB0aGUgaW5pdCBmdW5jdGlvbiBvZgo+
+IHRoZSBzYW1lIG5hbWUgaW4gcmFkZW9uX2Rydi5jOgo+IAo+ICAgSW4gZmlsZSBpbmNsdWRlZCBm
+cm9tIGRyaXZlcnMvZ3B1L2RybS9yYWRlb24vcmFkZW9uX2Rydi5jOjUzOgo+ICAgZHJpdmVycy9n
+cHUvZHJtL3JhZGVvbi9yYWRlb25fZHJ2LmM6NjIwOjMxOiBlcnJvcjogZXhwZWN0ZWQgaWRlbnRp
+ZmllciBvciDigJgo4oCZIGJlZm9yZSDigJh2b2lk4oCZCj4gICA2MjAgfCBzdGF0aWMgaW50IF9f
+aW5pdCByYWRlb25faW5pdCh2b2lkKQouLi4KPiAKPiBIb3cgd291bGQgeW91IGxpa2UgbWUgdG8g
+bW92ZSBmb3J3YXJkPwoKRml4IHRoZSB0aG91c2FuZCBvZiB3YXJuaW5ncyBpbiBvdGhlciBwbGFj
+ZXMgOi0pCkkgd2lsbCB0YWtlIGEgbG9vayBhdCByYWRlb24gYW5kIHBvc3QgYSBuZXcgc2VyaWVz
+IGJhc2VkIG9uIHlvdXIgd29yawp3aXRoIGFsbCBXPTEgd2FybmluZ3MgZml4ZWQuCgoJU2FtCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1z
+aWcgbWFpbGluZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xp
+c3RzLmxpbmFyby5vcmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
