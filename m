@@ -2,136 +2,123 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28C1F2B8BBD
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Nov 2020 07:39:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DB332BA436
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 Nov 2020 09:02:23 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4E4F7666E0
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Nov 2020 06:39:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D6FBF666FB
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 Nov 2020 08:02:21 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 40D29666F0; Thu, 19 Nov 2020 06:39:01 +0000 (UTC)
+	id C537F666FD; Fri, 20 Nov 2020 08:02:21 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_HI,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_PASS
-	autolearn=disabled version=3.4.2
+X-Spam-Status: No, score=-0.2 required=5.0 tests=BAYES_00,DATE_IN_PAST_06_12,
+	FORGED_SPF_HELO,MAILING_LIST_MULTI,MSGID_FROM_MTA_HEADER,
+	RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS autolearn=disabled
+	version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 922E2666E5;
-	Thu, 19 Nov 2020 06:38:18 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7123E666F6;
+	Fri, 20 Nov 2020 08:01:52 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 7F2A466596
- for <linaro-mm-sig@lists.linaro.org>; Thu, 19 Nov 2020 06:38:14 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id E6EBB61992
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 20 Nov 2020 08:01:45 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 66E98666E5; Thu, 19 Nov 2020 06:38:14 +0000 (UTC)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
- by lists.linaro.org (Postfix) with ESMTPS id 72DF166596
- for <linaro-mm-sig@lists.linaro.org>; Thu, 19 Nov 2020 06:38:12 +0000 (UTC)
-Received: from epcas2p3.samsung.com (unknown [182.195.41.55])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20201119063810epoutp0186289777d1063caeddcc84d443f2e835~I1WNlDOE11225812258epoutp01F
- for <linaro-mm-sig@lists.linaro.org>; Thu, 19 Nov 2020 06:38:10 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20201119063810epoutp0186289777d1063caeddcc84d443f2e835~I1WNlDOE11225812258epoutp01F
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas2p2.samsung.com (KnoxPortal) with ESMTP id
- 20201119063809epcas2p251ba7ac82ec0bf918e3e674a94941bc3~I1WM7zndc2277022770epcas2p2e;
- Thu, 19 Nov 2020 06:38:09 +0000 (GMT)
-Received: from epsmges2p1.samsung.com (unknown [182.195.40.191]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4Cc93f62ZWzMqYkn; Thu, 19 Nov
- 2020 06:38:06 +0000 (GMT)
-Received: from epcas2p4.samsung.com ( [182.195.41.56]) by
- epsmges2p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 66.FD.10621.DC216BF5; Thu, 19 Nov 2020 15:38:05 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas2p3.samsung.com (KnoxPortal) with ESMTPA id
- 20201119063804epcas2p332bfc6812c9ebd23f8a32cffbd27e5b0~I1WI4583j1139811398epcas2p3T;
- Thu, 19 Nov 2020 06:38:04 +0000 (GMT)
-Received: from epsmgms1p2.samsung.com (unknown [182.195.42.42]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20201119063804epsmtrp1fc6f137774ee739ff958d7ed0cf68a98~I1WI346Wz1167611676epsmtrp1l;
- Thu, 19 Nov 2020 06:38:04 +0000 (GMT)
-X-AuditID: b6c32a45-8dc16a800001297d-82-5fb612cd67b1
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p2.samsung.com (Symantec Messaging Gateway) with SMTP id
- 98.92.08745.CC216BF5; Thu, 19 Nov 2020 15:38:04 +0900 (KST)
-Received: from KEI (unknown [12.36.155.227]) by epsmtip1.samsung.com
- (KnoxPortal) with ESMTPA id
- 20201119063804epsmtip122631202bd7d2f49ea967b57d3a790ea~I1WImDP2S1939319393epsmtip1G;
- Thu, 19 Nov 2020 06:38:04 +0000 (GMT)
-Date: Thu, 19 Nov 2020 15:30:30 +0900
-From: Hyesoo Yu <hyesoo.yu@samsung.com>
-To: John Stultz <john.stultz@linaro.org>
-Message-ID: <20201119063030.GC136599@KEI>
+ id CEA4F666F6; Fri, 20 Nov 2020 08:01:45 +0000 (UTC)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2083.outbound.protection.outlook.com [40.107.93.83])
+ by lists.linaro.org (Postfix) with ESMTPS id A31BD61992
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 20 Nov 2020 08:01:44 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=bidqKMfKZ1hWfjTrLrga0/N96S/XhQSqGgxEcVftpUd10d3SVG8gQugnfbIRMB+5IUM83PPZ8AwjYRwxdbpqtCRE09wRuC91XAoFjRnHnvFWGeFjSJrmvhhdBh1ZZrZFcr+9Cki7kjLI2Z0MGy6FQQW/XnanRH8kqCJUvXpoJ+w2xaT1HuhxrT935C5F+7GYQQ9l/9x7/88xZ0EZGCIiKQysDqCrWsBBhs81Swevz2A8sjBKe8eJNodxAsgheJzdjix9C6mBkVjzxHHvwWNE6eXpcDjZ9a/iNcb0fZGgHLmf71GZabj0zZki3uqvcjbvPTAC2yI3EOfUKW7O81h1ng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=slZdSZId28huXdLG+blOKEou52m84PqKYC6WmPyFrRY=;
+ b=VlSYfx/Z8Ici7Kmuh0RNerl9Og/w7lpVhGsW+baRG1/k8XVwmpFPeLUxKLyx9SaFNtPSjDkfuLzwckxFpRT1ahxHxu9+yPxr8tX3jT2CTrAFmI5/xkiTOFG4YK05rgCj8vL8/5ngLUn4SVsFRC7kjxZI3jFrCqB8hfHqSfbpNosSZWHjB67WUC5J/v2E2FgjPcjo4415D64SxsaTjZCKEPsJDT+qOe0hK+4OzcOylWfRzS++Yky7EkWNG1OF3DWlGi3yNX6m54e35tO8OyPsj3EP64D1aHjwImGraaQMTlAZJFMub9C5mj02f3uGVeIZrBj3+yazywhWlS7udrW2oA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
+ by BL0PR12MB4660.namprd12.prod.outlook.com (2603:10b6:207:34::30)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3564.28; Fri, 20 Nov
+ 2020 08:01:42 +0000
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::1ccc:8a9a:45d3:dd31]) by MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::1ccc:8a9a:45d3:dd31%7]) with mapi id 15.20.3589.022; Fri, 20 Nov 2020
+ 08:01:42 +0000
+To: Tian Tao <tiantao6@hisilicon.com>, bskeggs@redhat.com, airlied@linux.ie,
+ daniel@ffwll.ch, sumit.semwal@linaro.org
+References: <1605854993-50218-1-git-send-email-tiantao6@hisilicon.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+Message-ID: <b01b7e6a-eb79-296e-7f65-2015f020b56d@amd.com>
+Date: Thu, 19 Nov 2020 21:18:43 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+In-Reply-To: <1605854993-50218-1-git-send-email-tiantao6@hisilicon.com>
+Content-Language: en-US
+X-Originating-IP: [2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
+X-ClientProxiedBy: AM0PR06CA0103.eurprd06.prod.outlook.com
+ (2603:10a6:208:fa::44) To MN2PR12MB3775.namprd12.prod.outlook.com
+ (2603:10b6:208:159::19)
 MIME-Version: 1.0
-In-Reply-To: <CALAqxLV=r-V6u8hq2fTmxq855nT7QPkkjyAYdPeZRkYPBi_CKg@mail.gmail.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
-X-Brightmail-Tracker: H4sIAAAAAAAAA02Te1BUVRzHOXt37+4yrlxWjBMEbquMwvDYpRaPBk4joNehGbCy0KbWlb2x
- xL7aR0pNkxryfhlguSJuDYNCMNQKDM+UR4IEVCBRPERWA6UhkI2CeNjuXpvhv8/v8f09zm8O
- B+OfZXtxktQGSqeWKYW4K7O+wx8F9fHrpaL+QV9UUlOFI2vPTwDNTjSz0GLNvxi60tnPQvNn
- rjFQRfanOPrHbMVQ70oQ+uvOJAMNNpXgKOebOha6W/WEhcoX59hoPbcNoCctDWzUM25jo8IB
- M44unckDaGWpBH/Zgzw3sIaTVaVVgDRbjOT1awGkpTITJy0Ln7HJrNk7DHLslxac7P5ihUmO
- rt/HyLnvhnAyr7YSkL3mTjZps/jGbT6mDFdQMjmlE1DqBI08SZ0YIYx5TRoplYSJxEHiPWi3
- UKCWqagIYdQrcUEHkpT2jYWCD2RKo90VJ9PrhSH7wnUao4ESKDR6Q4SQ0sqVWrFYG6yXqfRG
- dWJwgka1VywShUrsmceVipbfsoF2xO9U2UAXfhoU+2YBLgcSL8Lh+hxWFnDl8IkGAFcvtWG0
- sQDg7IQJ0IYNwOHSOXsaxynJfORH+5sALM2dZzpK8YlJALNsux3MJPzgwmOHmMvBiZ2wu7bc
- yR7ELvhl2RDDIcaIXBw2tFoxR2ALEQWri23OJB7hDy3mtKfsDm9ffOBswCUOw4LLU7hjiK3E
- DjjT9omjDiQKubB0ehHQw0XBr6Z86NW2wJmuWjbNXvBRftpTPgn7Uq0sWpsK4M8XhnA68AI0
- TaU7+2JEEhxuLGfSNbfDzhEm7d4MMzrW2LSbBzPS+LRyO7xRXsqk+VlorU5n0UzC7PYcJv1W
- fzBg5/LvWAHYZtqwmWlDN5oDobl5ATfZW2CEN7y6zqHRH9Y0hZgBqxI8Q2n1qkRKH6oVb7y1
- BTg/Q0B0AyicnQ9uBwwOaAeQgwk9eNX+dVI+Ty5L+ZDSaaQ6o5LStwOJ/U7nMa+tCRr7b1Ib
- pGJJaFiYaI8EScJCkdCTd6QiT8onEmUGKpmitJTufx2Dw/U6zQg8GiIYS1nm6ur2+8b8aD7Y
- xn8vfHky7mbF4VQ8eeJWeUNqNnFizNMgD3ys99A+fMnouun5i4XJ41+/GlncOvPD98dd9u0I
- ZRiuuocvXfi2uO7hsdGT8SOU94nVyxmfTxX0NiqsETd2FlyvMfmvY6/Hr92MHgiIDacyP45k
- Mtku1ugEV+a5pts9p94XPXdo11jnNHe/tT3/nu3IFbePzBZVPKepzOfX1qquJcVeNPfndMDZ
- nE1vtaK45sHY2ltTmtq37/e9UdRxSNzfwRfwiw6OPuDNv3lXjkX4vLOa1hh57+iqKN3Pz61o
- m27cM8aomu6mYt/t0rrHuHm7nE/zDPk7P5+TImTqFTJxAKbTy/4DPi1zC5UEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA02Re0hTYRjG+845OzuurOPU+mw1aN0HM0vLrwsV5R8fFHQlQiVdeZiVm3PT
- 7CLpum9WlBbmMl2QtYaSTItVa+WUyhTJmRVajUpWJqK17OJy1WZR//14nucHL7wMKWykJjLb
- VdmcRiXPkNAC6kaDRCxrEd5IiXF2zENl16po9ObRY4D63Ld5aPDaEIkqGlt5aEBnJtDVwoM0
- +mp6Q6IWnwx9fvKaQO23ymh0vOY6D72q+slDlwf7+ch/oh6gn3YbHz166eWjYpeJRud1JwHy
- fSujl0fgw65hGleVVwFssubgWrMUWy16Gls/FfGxoe8JgV88tdP44Tkfhbv8b0nc7+ig8ck6
- C8AtpkY+9lrFa8cmCpakcRnbd3GaOUtTBekv7SJ1ydTdbYUZBaBXZAAMA9k4qO+ZbgACRsja
- ALSeLiEMIOR3HgWN3qY/HA7dhxp5IyM3gJ06PwgUFDsdfvpoDDLNzoQP6y4HOYKdBS9e6gjK
- JFtCw+4zmwMczibA6rPe4CaUnQ2tpiNBFrK9BGwYGD+Sh8Gm0m5qxJXC5/4eInAoyYrgFT8T
- iEPYdfDUBQ8diCPZafBDff4pEGb8Tzb+Jxv/ySZAWkAUp9YqFUrtXPU8FZcbrZUrtTkqRfS2
- TKUVBB8tldqA3TIQ7QQEA5wAMqQkIrR69vUUYWiafM9eTpOZosnJ4LROIGIoyYTQQePFLUJW
- Ic/mdnKcmtP8bQkmZGIBkWme5RCK9kb+WHY6VTwmjCnqim2PK9qc1xCPPZWxx17sU8oerPZ2
- u4vm04MHJjnaszRbPwxdsY3qTq8Ej4dikp2OxR6wqXUF+aykemNhXNKRHVMjxfqE1NSdsK9i
- kcXVdqic8mfp59xqYROPjTv6Dq/6MtysW62452vSg+KbbWvvw/G+LD7+Pu79QlvE6MrkNBVb
- v7g6/25p8/Hhe4lMhcJemcSfXLC/yy0zqj13ljTX55n3N2SvOZiQvKm8S6eNdD2lcjvNNRQz
- o8eRvyC3ttMQO2WDY2VU3tkd0Xfjwnv7O2JK4wV94vg9ret9KzzWCc6jk77ob5fiqCGXLFZC
- adPlc6WkRiv/BTMwmoFXAwAA
-X-CMS-MailID: 20201119063804epcas2p332bfc6812c9ebd23f8a32cffbd27e5b0
-X-Msg-Generator: CA
-Content-Type: multipart/mixed;
- boundary="----zeZHP-Gc2C_QEpEYXTEDGPRNV_-gQnEmBA0pzIEDiErY02VX=_162cf7_"
-X-Sendblock-Type: AUTO_CONFIDENTIAL
-CMS-TYPE: 102P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20201118030110epcas2p1105a09711ea2c123f19f413b32372764
-References: <20201117181935.3613581-1-minchan@kernel.org>
- <20201117181935.3613581-5-minchan@kernel.org>
- <CGME20201118030110epcas2p1105a09711ea2c123f19f413b32372764@epcas2p1.samsung.com>
- <CALAqxLWqDLHpOHNEayvhDjJeXjEk_uneH2=d9fy8M87EjKfReA@mail.gmail.com>
- <20201119011431.GA136599@KEI>
- <CALAqxLV=r-V6u8hq2fTmxq855nT7QPkkjyAYdPeZRkYPBi_CKg@mail.gmail.com>
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
+ (2a02:908:1252:fb60:be8a:bd56:1f94:86e7) by
+ AM0PR06CA0103.eurprd06.prod.outlook.com (2603:10a6:208:fa::44) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3589.20 via Frontend Transport; Fri, 20 Nov 2020 08:01:39 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 53e3935f-01b3-4331-4243-08d88d2a83b1
+X-MS-TrafficTypeDiagnostic: BL0PR12MB4660:
+X-Microsoft-Antispam-PRVS: <BL0PR12MB4660DEB72304ABEEED70FC2183FF0@BL0PR12MB4660.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:3276;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: uYhq1YZG8pHDvrrzJxec/q2lsEpZphfrGwVBpNOzBXz6wbMLWZaHPc12Lhc2R8CLN1JjjoTpDk4PmUYy5zPPfu5TIWKjx11I9elTC5DTEjJeISapRlp+eQiMhej4Z1F70YpfqVqQvZGI7zm+gjt5F8d3mvhlXWXDfeH2bz1e+94LAYm5cmM1dGxORRFkilmPbJ/TnX2K0YlNR/2xvhQk/F9OWi7FnwzC/bAjl72abmL1vzoV5H0YwgJUi1P+B2jXPZpLdGxs/KSOGDVdKYZqvQGOq5ckkQVupyRcM4S8YGQiMzEwx13f9ja3maSwbewYT+dZr+rSG39AjQJHbzY0aTmi3e1OUgMLaJmfVdzV7PQ/ytwdnVQmoJQOvsinRrb7
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(39860400002)(396003)(346002)(376002)(136003)(366004)(6486002)(7416002)(16526019)(83380400001)(316002)(36756003)(186003)(31696002)(66946007)(31686004)(8676002)(8936002)(4326008)(6666004)(5660300002)(66556008)(52116002)(66476007)(2906002)(86362001)(66574015)(478600001)(2616005)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?K3R0VlhEb21UelBHdlM1Z3lmMnA2T2FEZUhvR1ZMRi9pQTJNcERuK0d6Vk5U?=
+ =?utf-8?B?MkNNSTcxb2EvNjRoTGlXTTdwZFAyL0FwRFZQOGlHNmdzMm9ySnA3VFVHRlFO?=
+ =?utf-8?B?SEJRUFZpUjY5aE5DWGV4cXVsakVEZXl5ODFVQzFoUythWVJOQk84bUNnbElx?=
+ =?utf-8?B?TllOdnA3UjRRQ0RvZ3oxL0N4ZmtBS3Q0M2Vlb3RDcFp6aUN5UHdxWEFVWk9Y?=
+ =?utf-8?B?UDBCeGtUNXRlL2NsdHYva3RjemhpRWtSRGhuajkwVUw0Z1RJeWVPVm9PQUh0?=
+ =?utf-8?B?M1llbHBveGFPdUJpMExwR0tjaDFHcU5CQlRmejh5eG41RTRXMEdRbnZpajAw?=
+ =?utf-8?B?bThYWUxKbkl2dm9HWUZTaTNLVi9saGZOL2xOSWhLTFcvejg4bXE1QllrTjhn?=
+ =?utf-8?B?dXJGTEV3YlFFM2UvbGRjc2h2NWt4V1g1YjB5OHZRb0hMaHBOTEtwT0NyVXkx?=
+ =?utf-8?B?WjlHdWRXMFh2ZTBTeEdYb1VhWU82STZ0U2pMcEk0KzJmVTViZXJHQ01QdURB?=
+ =?utf-8?B?QWEwMnA0Wld1UVRZOTFBWU5vQ2JGeVJVelVjaUE5RUp4K1lsSVJhZjNubXFh?=
+ =?utf-8?B?bUpuUlh3RVhPZC8yMDV1RDZVbnNpUGpmdGtsR2ROaTZBU2hYNXRvRnMwTDk1?=
+ =?utf-8?B?UzF5TTZzVVJwQmkyQjY4TEVaVkw2a0hkOEZib1FOS2ozRDBFNW1lMnVJbHZD?=
+ =?utf-8?B?Rnp6UEFqNTlacS9VT0E3OHRuTnJad0V3RWNtRk1ZUUIrYzFQMmZmTGkvdmFQ?=
+ =?utf-8?B?NSsrUmRkbGpEeS9jZ3JoYWMwRmdhQ01EU2EyeXpUVkI2cUtPT1JCc3pPbFlL?=
+ =?utf-8?B?anhjS0VpYkZLSVh3YVRaTjhHVy9TYTV5UHdNK3d2M292ZWFtN0I4enlRdDRY?=
+ =?utf-8?B?RnhQVC9pSkFhQW9hUEw2THZ0SWNqMHlxTnphNmY2RXNTelQ3Rm5JcEdMdFp0?=
+ =?utf-8?B?VCs0ZFovQjMrYmUvOXNFQ3c0UGJtSEM0b3RFRXUxdTVwenNoeVpnSDNscDdW?=
+ =?utf-8?B?SjNzWGRVcDc0WlJTRy9jSU1LdVVJSS92MjlieitsRXZwbnlXRG9sdEl0TGxu?=
+ =?utf-8?B?NmxOOS90L2s3UThRVkFNK214RjFqUkdyblhGODE3K1JJdVIzNkx1bmFFQ3lK?=
+ =?utf-8?B?eHVBYXRVL0s4VTl4aU4yVXY2M0VIT21Wa0RPaHFObE1vSUVUcWNOeUlJOFJE?=
+ =?utf-8?B?NHlEQlY3dU1XSjNDSjZPZ2lXQy9FamJobnJJbFlhRjFkRnlpcU1rNkJiWC9K?=
+ =?utf-8?B?TnhTcWNEVzJ0UzhKV3J2NmxBRW1IQzI2eTlBL25CYkVvelNTQT09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 53e3935f-01b3-4331-4243-08d88d2a83b1
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Nov 2020 08:01:42.0984 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1lQ1C/WwxCior8HHMz1Xl5RdEXoBy1nawGq4qMZpHQft++uR3U6ySt5C9XtPrXLH
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB4660
 X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: Rob Herring <robh@kernel.org>, "open list:OPEN FIRMWARE AND
- FLATTENED DEVICE TREE BINDINGS" <devicetree@vger.kernel.org>,
- Brian Starkey <Brian.Starkey@arm.com>, david@redhat.com,
- LKML <linux-kernel@vger.kernel.org>, Matthew Wilcox <willy@infradead.org>,
- linux-mm <linux-mm@kvack.org>, Minchan Kim <minchan@kernel.org>, "moderated
- list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Christian Koenig <christian.koenig@amd.com>, John Dias <joaodias@google.com>,
- Hridya Valsaraju <hridya@google.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- KyongHo Cho <pullip.cho@samsung.com>, Suren Baghdasaryan <surenb@google.com>,
- iamjoonsoo.kim@lge.com, vbabka@suse.cz,
- linux-media <linux-media@vger.kernel.org>
-Subject: Re: [Linaro-mm-sig] [PATCH 4/4] dma-heap: Devicetree binding for
-	chunk heap
+Cc: linaro-mm-sig@lists.linaro.org, nouveau@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-media@vger.kernel.org
+Subject: Re: [Linaro-mm-sig] [PATCH] drm/ttm: remove unused varibles
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
 Precedence: list
@@ -144,122 +131,35 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-------zeZHP-Gc2C_QEpEYXTEDGPRNV_-gQnEmBA0pzIEDiErY02VX=_162cf7_
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-
-On Wed, Nov 18, 2020 at 07:19:07PM -0800, John Stultz wrote:
-> On Wed, Nov 18, 2020 at 5:22 PM Hyesoo Yu <hyesoo.yu@samsung.com> wrote:
-> >
-> > On Tue, Nov 17, 2020 at 07:00:54PM -0800, John Stultz wrote:
-> > > So I suspect Rob will push back on this as he has for other dt
-> > > bindings related to ion/dmabuf heaps (I tried to push a similar
-> > > solution to exporting multiple CMA areas via dmabuf heaps).
-> > >
-> > > The proposal he seemed to like best was having an in-kernel function
-> > > that a driver would call to initialize the heap (associated with the
-> > > CMA region the driver is interested in). Similar to Kunihiko Hayashi's
-> > > patch here:
-> > >   - https://lore.kernel.org/lkml/1594948208-4739-1-git-send-email-hayashi.kunihiko@socionext.com/
-> > >
-> > > The one sticking point for that patch (which I think is a good one),
-> > > is that we don't have any in-tree users, so it couldn't be merged yet.
-> > >
-> > > A similar approach might be good here, but again we probably need to
-> > > have at least one in-tree user which could call such a registration
-> > > function.
-> >
-> > Thanks for your review.
-> >
-> > The chunk heap is not considered for device-specific reserved memory and specific driver.
-> > It is similar to system heap, but it only collects high-order pages by using specific cma-area for performance.
-> 
-> So, yes I agree, the chunk heap isn't device specific. It's just that
-> the CMA regions usually are tied to devices.
-> 
-> The main objection to this style of solution has been due to the fact
-> that the DTS is supposed to describe the physical hardware (in an OS
-> agnostic way), rather than define configuration info for Linux
-> software drivers.
-> 
-> Obviously this can be quibbled about, as the normal way of tying
-> devices to CMA has some assumptions of what the driver will use that
-> region for, rather than somehow representing a physical tie between a
-> memory reservation and a device. Nonetheless, Rob has been hesitant to
-> take any sort of ION/DmaBuf Heap DT devices, and has been more
-> interested in some device having the memory reservation reference and
-> the driver for that doing the registration.
-> 
-> > It is strange that there is in-tree user who registers chunk heap.
-> > (Wouldn't it be strange for some users to register the system heap?)
-> 
-> Well, as there's no reservation/configuration needed, the system heap
-> can register itself.
-> 
-> The CMA heap currently only registers the default CMA heap, as we
-> didn't want to expose all CMA regions and there's otherwise no way to
-> pick and choose.
-> 
-> > Is there a reason to use dma-heap framework to add cma-area for specific device ?
-> >
-> > Even if some in-tree users register dma-heap with cma-area, the buffers could be allocated in user-land and these could be shared among other devices.
-> > For exclusive access, I guess, the device don't need to register dma-heap for cma area.
-> >
-> 
-> It's not really about exclusive access. More just that if you want to
-> bind a memory reservation/region (cma or otherwise), at least for DTS,
-> it needs to bind with some device in DT.
-> 
-> Then the device driver can register that region with a heap driver.
-> This avoids adding new Linux-specific software bindings to DT. It
-> becomes a driver implementation detail instead. The primary user of
-> the heap type would probably be a practical pick (ie the display or
-> isp driver).
-> 
-> The other potential solution Rob has suggested is that we create some
-> tag for the memory reservation (ie: like we do with cma: "reusable"),
-> which can be used to register the region to a heap. But this has the
-> problem that each tag has to be well defined and map to a known heap.
-> 
-> thanks
-> -john
->
-
-Thanks for the detailed reply.
-
-I understood what you mean exactly.
-I agree with your opinion that avoids software bindings to DT.
-
-The way to register the heap by specific device driver, makes dependency
-between heap and some device drivers that we pick practically.
-If that device driver changed or removed whenever H/W changed,
-the chunk heap is affected regardless of our intentions.
-
-As you said, the other solution that add tags need to be well defined.
-I guess, that will be a long-term solution.
-
-First of all, we just want to register chunk heap to allocate high-order pages.
-I'm going to change to a simple solution that uses default cma like cma heap, not using DT.
-
-Thanks.
-Regards.
-
-------zeZHP-Gc2C_QEpEYXTEDGPRNV_-gQnEmBA0pzIEDiErY02VX=_162cf7_
-Content-Type: text/plain; charset="utf-8"
-
-
-------zeZHP-Gc2C_QEpEYXTEDGPRNV_-gQnEmBA0pzIEDiErY02VX=_162cf7_
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
+QW0gMjAuMTEuMjAgdW0gMDc6NDkgc2NocmllYiBUaWFuIFRhbzoKPiBmaXhlZCB0aGUgZm9sbG93
+aW5nIHdhcm5pbmdzCj4gZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jOjEyMjc6
+MTc6IHdhcm5pbmc6IHZhcmlhYmxlIOKAmGRlduKAmQo+IHNldCBidXQgbm90IHVzZWQgWy1XdW51
+c2VkLWJ1dC1zZXQtdmFyaWFibGVdCj4gZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9i
+by5jOjEyNTE6MTc6IHdhcm5pbmc6IHZhcmlhYmxlIOKAmGRlduKAmQo+IHNldCBidXQgbm90IHVz
+ZWQgWy1XdW51c2VkLWJ1dC1zZXQtdmFyaWFibGVdCj4KPiBTaWduZWQtb2ZmLWJ5OiBUaWFuIFRh
+byA8dGlhbnRhbzZAaGlzaWxpY29uLmNvbT4KClRoZSBzdWJqZWN0IHNob3VsZCByZWFkIGRybS9u
+b3V2ZWF1IGluc3RlYWQgb2YgZHJtL3R0bSwgYnV0IGFwYXJ0IGZyb20gCnRoYXQgdGhlIHBhdGNo
+IGlzIEFja2VkLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+
+Cgo+IC0tLQo+ICAgZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jIHwgMiAtLQo+
+ICAgMSBmaWxlIGNoYW5nZWQsIDIgZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVy
+cy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jIGIvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUv
+bm91dmVhdV9iby5jCj4gaW5kZXggN2FhNDI4Ni4uOTQ2NWY1NiAxMDA2NDQKPiAtLS0gYS9kcml2
+ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0v
+bm91dmVhdS9ub3V2ZWF1X2JvLmMKPiBAQCAtMTIyOCw3ICsxMjI4LDYgQEAgbm91dmVhdV90dG1f
+dHRfcG9wdWxhdGUoc3RydWN0IHR0bV9ib19kZXZpY2UgKmJkZXYsCj4gICB7Cj4gICAJc3RydWN0
+IHR0bV90dCAqdHRtX2RtYSA9ICh2b2lkICopdHRtOwo+ICAgCXN0cnVjdCBub3V2ZWF1X2RybSAq
+ZHJtOwo+IC0Jc3RydWN0IGRldmljZSAqZGV2Owo+ICAgCWJvb2wgc2xhdmUgPSAhISh0dG0tPnBh
+Z2VfZmxhZ3MgJiBUVE1fUEFHRV9GTEFHX1NHKTsKPiAgIAo+ICAgCWlmICh0dG1fdHRfaXNfcG9w
+dWxhdGVkKHR0bSkpCj4gQEAgLTEyNDIsNyArMTI0MSw2IEBAIG5vdXZlYXVfdHRtX3R0X3BvcHVs
+YXRlKHN0cnVjdCB0dG1fYm9fZGV2aWNlICpiZGV2LAo+ICAgCX0KPiAgIAo+ICAgCWRybSA9IG5v
+dXZlYXVfYmRldihiZGV2KTsKPiAtCWRldiA9IGRybS0+ZGV2LT5kZXY7Cj4gICAKPiAgIAlyZXR1
+cm4gdHRtX3Bvb2xfYWxsb2MoJmRybS0+dHRtLmJkZXYucG9vbCwgdHRtLCBjdHgpOwo+ICAgfQoK
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
 LXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8v
 bGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
-
-------zeZHP-Gc2C_QEpEYXTEDGPRNV_-gQnEmBA0pzIEDiErY02VX=_162cf7_--
