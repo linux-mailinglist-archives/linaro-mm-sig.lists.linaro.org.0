@@ -2,80 +2,76 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id C130B337393
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Mar 2021 14:18:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 991DC3378DD
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Mar 2021 17:11:59 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id ED5926676D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Mar 2021 13:18:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AF48861725
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Mar 2021 16:11:58 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id DEBFB66797; Thu, 11 Mar 2021 13:18:24 +0000 (UTC)
+	id A060B66799; Thu, 11 Mar 2021 16:11:58 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-7.9 required=5.0 tests=BAYES_00,MAILING_LIST_MULTI,
-	RCVD_IN_DNSWL_HI,RCVD_IN_MSPIKE_H3,RCVD_IN_MSPIKE_WL,SPF_HELO_NONE
-	autolearn=disabled version=3.4.2
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
+	FREEMAIL_FROM,MAILING_LIST_MULTI,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H3,
+	RCVD_IN_MSPIKE_WL,SPF_HELO_NONE autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C8B1166795;
-	Thu, 11 Mar 2021 13:17:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BE6FB66013;
+	Thu, 11 Mar 2021 16:10:53 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 97368609A8
- for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Mar 2021 13:17:27 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id CEA5F60F44
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Mar 2021 16:10:49 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 8A51466795; Thu, 11 Mar 2021 13:17:27 +0000 (UTC)
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com
- [209.85.210.47])
- by lists.linaro.org (Postfix) with ESMTPS id C0769609A8
- for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Mar 2021 13:17:25 +0000 (UTC)
-Received: by mail-ot1-f47.google.com with SMTP id p24so1403383ota.11
- for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Mar 2021 05:17:25 -0800 (PST)
+ id BC22766013; Thu, 11 Mar 2021 16:10:49 +0000 (UTC)
+Received: from mail-oo1-f52.google.com (mail-oo1-f52.google.com
+ [209.85.161.52])
+ by lists.linaro.org (Postfix) with ESMTPS id 7011160F44
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Mar 2021 16:10:47 +0000 (UTC)
+Received: by mail-oo1-f52.google.com with SMTP id
+ x187-20020a4a41c40000b02901b664cf3220so799959ooa.10
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Mar 2021 08:10:47 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=bKAvvOczb1CSflZNXffhAXafwD51ZVGwg+Gu9WS8Pc4=;
- b=dWOdExvEP72QkMchzhEi/Q1Vec5WAfj6scAtcZb2BGhtsHL46Rs95qfqup324ZaTTH
- QQT8oJG1ncKJz2H3bSu51dikPpCNXHobZOegimDpt4zA63a2b50caN+L2wTapyitk8C0
- sSw1Y4UjE20ELyb4Uado/eS5RmOwi+qdvSze6fLU3tih+34AfyoNv/VTTF5Pt2OecC24
- A2lHevYJBR1SJdWqROdGNw3m5zT54fmNM2aJ1ZOpLCzV1er+uwa3exgd7YMUn9mASiAI
- PaYGSaikseeOrFmbdNetvr4z648uDKSpxWaaIcFpzCVwoOmJl6PdKBWjg3I/plV6P/Ny
- zsvA==
-X-Gm-Message-State: AOAM533FvOJuPSKgK7qNNp3WzNh1MDf0mPWhOl3XtHDGW2U/5Izs2RCS
- +weoxdanWZRO6Kqy/E+Hq64BwRv61CScSZUD9ylG3w==
-X-Google-Smtp-Source: ABdhPJwd4ak1KIS8TV9epC3TsEBTX+WwoMHOG//pHBqfatuhwFAyhTu3lphRgW2AIHLOIFPrDzlcsh9ELmfwiD8l2OA=
-X-Received: by 2002:a9d:648f:: with SMTP id g15mr6709694otl.188.1615468645194; 
- Thu, 11 Mar 2021 05:17:25 -0800 (PST)
+ :message-id:subject:to:cc;
+ bh=dsVj1tbMCQQY03XaaBJkVTgd3uxndiFFvZTsqGrWJds=;
+ b=twa8Kd8DKs+7/9dkLiGUcHquwLeNk0RvqsLorkhgInvZAc2V04UI2jvfviqg6GGU9e
+ Fnkr6xDPS+pxD5mEX260Nkef5W5tvwNzBuCp3xKYRhysdKAJUtfoV7KcocsqWJ9l82wA
+ ib6QvHqAwD+fPju4kPVPeYbUQgDBfMf+ErN36i8sj9CWkpD+8q5SYIzjH2J6I8fx30fr
+ VDJsz6Hx1oV59wRXJOEQYZvjELTd6WtgkHJCh4asgtKhUKBq4ht7pxe+oqacYgS8qOyd
+ rF2217qxPAuoKcRB6xdyeBPblfCQLbSO/6AxxxwPXEafqhAGYQwRyAqMnhE9HutU8fUf
+ jsbg==
+X-Gm-Message-State: AOAM531xARM5JM/01KPULuwdiyq/Wp6woezqucvWSNDcsVust38wwr7g
+ 9C49CniRtgRsfZNlmLDJPJmTp1hcZPKhDI5z34Y=
+X-Google-Smtp-Source: ABdhPJwF0lsHg0qgdaj8xAkw+D6+F+6KIHiQw8Nu0sMADNXDuNEuvyAZ0XcwCaPpWCS6uzTAImMkzmPYy5ubrFajraU=
+X-Received: by 2002:a4a:8961:: with SMTP id g30mr5266790ooi.72.1615479046676; 
+ Thu, 11 Mar 2021 08:10:46 -0800 (PST)
 MIME-Version: 1.0
-References: <61c5c371-debe-4ca0-a067-ce306e51ef88@shipmail.org>
- <CAKMK7uFUiJyMP0E5JUzMOx=NyMW+ZObGsaFOh409x0LOvGbnzg@mail.gmail.com>
- <0d69bd00-e673-17cf-c9e3-ccbcd52649a6@shipmail.org>
- <CAKMK7uE=8+hj-MUFXHFoG_hAbz_Obi8a99+DE5_d1K+KZaG+tQ@mail.gmail.com>
- <b367b7e8-f202-4d23-d672-a5c9bc7fcec1@shipmail.org>
- <YDyuYk8x5QeX83s6@phenom.ffwll.local>
- <be8f2503-ffcb-eb58-83be-26fa0fc1837a@shipmail.org>
- <648556e6-2d99-950d-c940-706eb5a8f6cc@amd.com>
- <CAKMK7uHOe=LacUkvGC75dyWAt9TRm7ce8vgxasXOXn-6wJTVnA@mail.gmail.com>
- <9d608c61-c64c-dcde-c719-59a970144404@shipmail.org>
- <YEoUZe8BtvQdv3TG@phenom.ffwll.local>
- <0e15ae7a-58d3-c75e-9a6c-e397e11750a7@shipmail.org>
-In-Reply-To: <0e15ae7a-58d3-c75e-9a6c-e397e11750a7@shipmail.org>
-From: Daniel Vetter <daniel@ffwll.ch>
-Date: Thu, 11 Mar 2021 14:17:14 +0100
-Message-ID: <CAKMK7uEzGKUc27xdWTv7KPESsyg1kCYCmVxP3b-HrzNCNO5x7g@mail.gmail.com>
-To: =?UTF-8?Q?Thomas_Hellstr=C3=B6m_=28Intel=29?= <thomas_os@shipmail.org>
+References: <20210310163655.2591893-1-daniel@qtec.com>
+ <CADnq5_PmbXBaziCEqRODb_DvtKaw9ucXXjkdmdj9N_R8P-9Jcw@mail.gmail.com>
+ <CAH1Ww+T4WwLzg_nnF=1sjm9LW9wCjFb0X9c=qmuubvMqJdW4PA@mail.gmail.com>
+ <CAH1Ww+QiAyfQL_bf1u=zLiT=ayKFWA0Fr2n5sBHUxfpzxcPbrg@mail.gmail.com>
+ <CAN22YZcnMzefgHu9FVPGEf73SKjar2tLJO-jvpYAqNJSH4F_qA@mail.gmail.com>
+In-Reply-To: <CAN22YZcnMzefgHu9FVPGEf73SKjar2tLJO-jvpYAqNJSH4F_qA@mail.gmail.com>
+From: Alex Deucher <alexdeucher@gmail.com>
+Date: Thu, 11 Mar 2021 11:10:35 -0500
+Message-ID: <CADnq5_N0vvZZU9sNrfKSocXNzdMn8+PpVGNiPcE2XC6OkmJmwA@mail.gmail.com>
+To: Alexandre Desnoyers <alex@qtec.com>
+Content-Type: multipart/mixed; boundary="000000000000b83e0205bd45069a"
 X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Matthew Wilcox <willy@infradead.org>,
+Cc: Evan Quan <evan.quan@amd.com>, linux-media <linux-media@vger.kernel.org>,
+ Guchun Chen <guchun.chen@amd.com>, David Airlie <airlied@linux.ie>,
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
+ Nirmoy Das <nirmoy.das@amd.com>, LKML <linux-kernel@vger.kernel.org>,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>,
  "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Jason Gunthorpe <jgg@ziepe.ca>, John Stultz <john.stultz@linaro.org>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- Daniel Vetter <daniel.vetter@intel.com>,
- Suren Baghdasaryan <surenb@google.com>,
+ Huang Rui <ray.huang@amd.com>, Monk Liu <Monk.Liu@amd.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
+ Daniel Gomez <daniel@qtec.com>, Yintian Tao <yttao@amd.com>,
  =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Subject: Re: [Linaro-mm-sig] [PATCH 1/2] dma-buf: Require VM_PFNMAP vma for
-	mmap
+ Dennis Li <Dennis.Li@amd.com>, Hawking Zhang <Hawking.Zhang@amd.com>
+Subject: Re: [Linaro-mm-sig] [PATCH]] drm/amdgpu/gfx9: add gfxoff quirk
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
 Precedence: list
@@ -88,181 +84,248 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gVGh1LCBNYXIgMTEsIDIwMjEgYXQgMjoxMiBQTSBUaG9tYXMgSGVsbHN0csO2bSAoSW50ZWwp
-Cjx0aG9tYXNfb3NAc2hpcG1haWwub3JnPiB3cm90ZToKPgo+IEhpIQo+Cj4gT24gMy8xMS8yMSAy
-OjAwIFBNLCBEYW5pZWwgVmV0dGVyIHdyb3RlOgo+ID4gT24gVGh1LCBNYXIgMTEsIDIwMjEgYXQg
-MTE6MjI6MDZBTSArMDEwMCwgVGhvbWFzIEhlbGxzdHLDtm0gKEludGVsKSB3cm90ZToKPiA+PiBP
-biAzLzEvMjEgMzowOSBQTSwgRGFuaWVsIFZldHRlciB3cm90ZToKPiA+Pj4gT24gTW9uLCBNYXIg
-MSwgMjAyMSBhdCAxMToxNyBBTSBDaHJpc3RpYW4gS8O2bmlnCj4gPj4+IDxjaHJpc3RpYW4ua29l
-bmlnQGFtZC5jb20+IHdyb3RlOgo+ID4+Pj4KPiA+Pj4+IEFtIDAxLjAzLjIxIHVtIDEwOjIxIHNj
-aHJpZWIgVGhvbWFzIEhlbGxzdHLDtm0gKEludGVsKToKPiA+Pj4+PiBPbiAzLzEvMjEgMTA6MDUg
-QU0sIERhbmllbCBWZXR0ZXIgd3JvdGU6Cj4gPj4+Pj4+IE9uIE1vbiwgTWFyIDAxLCAyMDIxIGF0
-IDA5OjM5OjUzQU0gKzAxMDAsIFRob21hcyBIZWxsc3Ryw7ZtIChJbnRlbCkKPiA+Pj4+Pj4gd3Jv
-dGU6Cj4gPj4+Pj4+PiBIaSwKPiA+Pj4+Pj4+Cj4gPj4+Pj4+PiBPbiAzLzEvMjEgOToyOCBBTSwg
-RGFuaWVsIFZldHRlciB3cm90ZToKPiA+Pj4+Pj4+PiBPbiBTYXQsIEZlYiAyNywgMjAyMSBhdCA5
-OjA2IEFNIFRob21hcyBIZWxsc3Ryw7ZtIChJbnRlbCkKPiA+Pj4+Pj4+PiA8dGhvbWFzX29zQHNo
-aXBtYWlsLm9yZz4gd3JvdGU6Cj4gPj4+Pj4+Pj4+IE9uIDIvMjYvMjEgMjoyOCBQTSwgRGFuaWVs
-IFZldHRlciB3cm90ZToKPiA+Pj4+Pj4+Pj4+IFNvIEkgdGhpbmsgaXQgc3RvcHMgZ3VwLiBCdXQg
-SSBoYXZlbid0IHZlcmlmaWVkIGF0IGFsbC4gV291bGQgYmUKPiA+Pj4+Pj4+Pj4+IGdvb2QKPiA+
-Pj4+Pj4+Pj4+IGlmIENocmlzdGlhbiBjYW4gY2hlY2sgdGhpcyB3aXRoIHNvbWUgZGlyZWN0IGlv
-IHRvIGEgYnVmZmVyIGluCj4gPj4+Pj4+Pj4+PiBzeXN0ZW0KPiA+Pj4+Pj4+Pj4+IG1lbW9yeS4K
-PiA+Pj4+Pj4+Pj4gSG1tLAo+ID4+Pj4+Pj4+Pgo+ID4+Pj4+Pj4+PiBEb2NzIChhZ2FpbiB2bV9u
-b3JtYWxfcGFnZSgpIHNheSkKPiA+Pj4+Pj4+Pj4KPiA+Pj4+Pj4+Pj4gICAgICAgKiBWTV9NSVhF
-RE1BUCBtYXBwaW5ncyBjYW4gbGlrZXdpc2UgY29udGFpbiBtZW1vcnkgd2l0aCBvcgo+ID4+Pj4+
-Pj4+PiB3aXRob3V0ICJzdHJ1Y3QKPiA+Pj4+Pj4+Pj4gICAgICAgKiBwYWdlIiBiYWNraW5nLCBo
-b3dldmVyIHRoZSBkaWZmZXJlbmNlIGlzIHRoYXQgX2FsbF8gcGFnZXMKPiA+Pj4+Pj4+Pj4gd2l0
-aCBhIHN0cnVjdAo+ID4+Pj4+Pj4+PiAgICAgICAqIHBhZ2UgKHRoYXQgaXMsIHRob3NlIHdoZXJl
-IHBmbl92YWxpZCBpcyB0cnVlKSBhcmUgcmVmY291bnRlZAo+ID4+Pj4+Pj4+PiBhbmQKPiA+Pj4+
-Pj4+Pj4gY29uc2lkZXJlZAo+ID4+Pj4+Pj4+PiAgICAgICAqIG5vcm1hbCBwYWdlcyBieSB0aGUg
-Vk0uIFRoZSBkaXNhZHZhbnRhZ2UgaXMgdGhhdCBwYWdlcyBhcmUKPiA+Pj4+Pj4+Pj4gcmVmY291
-bnRlZAo+ID4+Pj4+Pj4+PiAgICAgICAqICh3aGljaCBjYW4gYmUgc2xvd2VyIGFuZCBzaW1wbHkg
-bm90IGFuIG9wdGlvbiBmb3Igc29tZSBQRk5NQVAKPiA+Pj4+Pj4+Pj4gdXNlcnMpLiBUaGUKPiA+
-Pj4+Pj4+Pj4gICAgICAgKiBhZHZhbnRhZ2UgaXMgdGhhdCB3ZSBkb24ndCBoYXZlIHRvIGZvbGxv
-dyB0aGUgc3RyaWN0Cj4gPj4+Pj4+Pj4+IGxpbmVhcml0eSBydWxlIG9mCj4gPj4+Pj4+Pj4+ICAg
-ICAgICogUEZOTUFQIG1hcHBpbmdzIGluIG9yZGVyIHRvIHN1cHBvcnQgQ09XYWJsZSBtYXBwaW5n
-cy4KPiA+Pj4+Pj4+Pj4KPiA+Pj4+Pj4+Pj4gYnV0IGl0J3MgdHJ1ZSBfX3ZtX2luc2VydF9taXhl
-ZCgpIGVuZHMgdXAgaW4gdGhlIGluc2VydF9wZm4oKQo+ID4+Pj4+Pj4+PiBwYXRoLCBzbwo+ID4+
-Pj4+Pj4+PiB0aGUgYWJvdmUgaXNuJ3QgcmVhbGx5IHRydWUsIHdoaWNoIG1ha2VzIG1lIHdvbmRl
-ciBpZiBhbmQgaW4gdGhhdAo+ID4+Pj4+Pj4+PiBjYXNlCj4gPj4+Pj4+Pj4+IHdoeSB0aGVyZSBj
-b3VsZCBhbnkgbG9uZ2VyIGV2ZXIgYmUgYSBzaWduaWZpY2FudCBwZXJmb3JtYW5jZQo+ID4+Pj4+
-Pj4+PiBkaWZmZXJlbmNlCj4gPj4+Pj4+Pj4+IGJldHdlZW4gTUlYRURNQVAgYW5kIFBGTk1BUC4K
-PiA+Pj4+Pj4+PiBZZWFoIGl0J3MgZGVmaW5pdGVseSBjb25mdXNpbmcuIEkgZ3Vlc3MgSSdsbCBo
-YWNrIHVwIGEgcGF0Y2ggYW5kIHNlZQo+ID4+Pj4+Pj4+IHdoYXQgc3RpY2tzLgo+ID4+Pj4+Pj4+
-Cj4gPj4+Pj4+Pj4+IEJUVyByZWdhcmRpbmcgdGhlIFRUTSBodWdlcHRlcywgSSBkb24ndCB0aGlu
-ayB3ZSBldmVyIGxhbmRlZCB0aGF0Cj4gPj4+Pj4+Pj4+IGRldm1hcAo+ID4+Pj4+Pj4+PiBoYWNr
-LCBzbyB0aGV5IGFyZSAoZm9yIHRoZSBub24tZ3VwIGNhc2UpIHJlbHlpbmcgb24KPiA+Pj4+Pj4+
-Pj4gdm1hX2lzX3NwZWNpYWxfaHVnZSgpLiBGb3IgdGhlIGd1cCBjYXNlLCBJIHRoaW5rIHRoZSBi
-dWcgaXMgc3RpbGwKPiA+Pj4+Pj4+Pj4gdGhlcmUuCj4gPj4+Pj4+Pj4gTWF5YmUgdGhlcmUncyBh
-bm90aGVyIGRldm1hcCBoYWNrLCBidXQgdGhlIHR0bV92bV9pbnNlcnQgZnVuY3Rpb25zIGRvCj4g
-Pj4+Pj4+Pj4gdXNlIFBGTl9ERVYgYW5kIGFsbCB0aGF0LiBBbmQgSSB0aGluayB0aGF0IHN0b3Bz
-IGd1cF9mYXN0IGZyb20gdHJ5aW5nCj4gPj4+Pj4+Pj4gdG8gZmluZCB0aGUgdW5kZXJseWluZyBw
-YWdlLgo+ID4+Pj4+Pj4+IC1EYW5pZWwKPiA+Pj4+Pj4+IEhtbSBwZXJoYXBzIGl0IG1pZ2h0LCBi
-dXQgSSBkb24ndCB0aGluayBzby4gVGhlIGZpeCBJIHRyaWVkIG91dCB3YXMKPiA+Pj4+Pj4+IHRv
-IHNldAo+ID4+Pj4+Pj4KPiA+Pj4+Pj4+IFBGTl9ERVYgfCBQRk5fTUFQIGZvciBodWdlIFBURXMg
-d2hpY2ggY2F1c2VzIHBmbl9kZXZtYXAoKSB0byBiZQo+ID4+Pj4+Pj4gdHJ1ZSwgYW5kCj4gPj4+
-Pj4+PiB0aGVuCj4gPj4+Pj4+Pgo+ID4+Pj4+Pj4gZm9sbG93X2Rldm1hcF9wbWQoKS0+Z2V0X2Rl
-dl9wYWdlbWFwKCkgd2hpY2ggcmV0dXJucyBOVUxMIGFuZAo+ID4+Pj4+Pj4gZ3VwX2Zhc3QoKQo+
-ID4+Pj4+Pj4gYmFja3Mgb2ZmLAo+ID4+Pj4+Pj4KPiA+Pj4+Pj4+IGluIHRoZSBlbmQgdGhhdCB3
-b3VsZCBtZWFuIHNldHRpbmcgaW4gc3RvbmUgdGhhdCAiaWYgdGhlcmUgaXMgYSBodWdlCj4gPj4+
-Pj4+PiBkZXZtYXAKPiA+Pj4+Pj4+IHBhZ2UgdGFibGUgZW50cnkgZm9yIHdoaWNoIHdlIGhhdmVu
-J3QgcmVnaXN0ZXJlZCBhbnkgZGV2bWFwIHN0cnVjdAo+ID4+Pj4+Pj4gcGFnZXMKPiA+Pj4+Pj4+
-IChnZXRfZGV2X3BhZ2VtYXAgcmV0dXJucyBOVUxMKSwgd2Ugc2hvdWxkIHRyZWF0IHRoYXQgYXMg
-YSAic3BlY2lhbCIKPiA+Pj4+Pj4+IGh1Z2UKPiA+Pj4+Pj4+IHBhZ2UgdGFibGUgZW50cnkiLgo+
-ID4+Pj4+Pj4KPiA+Pj4+Pj4+ICAgIEZyb20gd2hhdCBJIGNhbiB0ZWxsLCBhbGwgY29kZSBjYWxs
-aW5nIGdldF9kZXZfcGFnZW1hcCgpIGFscmVhZHkKPiA+Pj4+Pj4+IGRvZXMgdGhhdCwKPiA+Pj4+
-Pj4+IGl0J3MganVzdCBhIHF1ZXN0aW9uIG9mIGdldHRpbmcgaXQgYWNjZXB0ZWQgYW5kIGZvcm1h
-bGl6aW5nIGl0Lgo+ID4+Pj4+PiBPaCBJIHRob3VnaHQgdGhhdCdzIGFscmVhZHkgaG93IGl0IHdv
-cmtzLCBzaW5jZSBJIGRpZG4ndCBzcG90IGFueXRoaW5nCj4gPj4+Pj4+IGVsc2UgdGhhdCB3b3Vs
-ZCBibG9jayBndXBfZmFzdCBmcm9tIGZhbGxpbmcgb3Zlci4gSSBndWVzcyByZWFsbHkgd291bGQK
-PiA+Pj4+Pj4gbmVlZCBzb21lIHRlc3RjYXNlcyB0byBtYWtlIHN1cmUgZGlyZWN0IGkvbyAodGhh
-dCdzIHRoZSBlYXNpZXN0IHRvIHRlc3QpCj4gPj4+Pj4+IGZhaWxzIGxpa2Ugd2UgZXhwZWN0Lgo+
-ID4+Pj4+IFllYWgsIElJUkMgdGhlICJ8IFBGTl9NQVAiIGlzIHRoZSBtaXNzaW5nIHBpZWNlIGZv
-ciBUVE0gaHVnZSBwdGVzLgo+ID4+Pj4+IE90aGVyd2lzZSBwbWRfZGV2bWFwKCkgd2lsbCBub3Qg
-cmV0dXJuIHRydWUgYW5kIHNpbmNlIHRoZXJlIGlzIG5vCj4gPj4+Pj4gcG1kX3NwZWNpYWwoKSB0
-aGluZ3MgYnJlYWsuCj4gPj4+PiBJcyB0aGF0IG1heWJlIHRoZSBpc3N1ZSB3ZSBoYXZlIHNlZW4g
-d2l0aCBhbWRncHUgYW5kIGh1Z2UgcGFnZXM/Cj4gPj4+IFllYWgsIGVzc2VudGlhbGx5IHdoZW4g
-eW91IGhhdmUgYSBodWdlcHRlIGluc2VydGVkIGJ5IHR0bSwgYW5kIGl0Cj4gPj4+IGhhcHBlbnMg
-dG8gcG9pbnQgYXQgc3lzdGVtIG1lbW9yeSwgdGhlbiBndXAgd2lsbCB3b3JrIG9uIHRoYXQuIEFu
-ZAo+ID4+PiBjcmVhdGUgYWxsIGtpbmRzIG9mIGhhdm9jLgo+ID4+Pgo+ID4+Pj4gQXBhcnQgZnJv
-bSB0aGF0IEknbSBsb3N0IGd1eXMsIHRoYXQgZGV2bWFwIGFuZCBndXAgc3R1ZmYgaXMgbm90Cj4g
-Pj4+PiBzb21ldGhpbmcgSSBoYXZlIGEgZ29vZCBrbm93bGVkZ2Ugb2YgYXBhcnQgZnJvbSBhIG9u
-ZSBtaWxlIGhpZ2ggdmlldy4KPiA+Pj4gSSdtIG5vdCByZWFsbHkgYmV0dGVyLCBoZW5jZSB3b3Vs
-ZCBiZSBnb29kIHRvIGRvIGEgdGVzdGNhc2UgYW5kIHNlZS4KPiA+Pj4gVGhpcyBzaG91bGQgcHJv
-dm9rZSBpdDoKPiA+Pj4gLSBhbGxvY2F0ZSBuaWNlbHkgYWxpZ25lZCBibyBpbiBzeXN0ZW0gbWVt
-b3J5Cj4gPj4+IC0gbW1hcCwgYWdhaW4gbmljZWx5IGFsaWduZWQgdG8gMk0KPiA+Pj4gLSBkbyBz
-b21lIGRpcmVjdCBpbyBmcm9tIGEgZmlsZXN5c3RlbSBpbnRvIHRoYXQgbW1hcCwgdGhhdCBzaG91
-bGQgdHJpZ2dlciBndXAKPiA+Pj4gLSBiZWZvcmUgdGhlIGd1cCBjb21wbGV0ZXMgZnJlZSB0aGUg
-bW1hcCBhbmQgYm8gc28gdGhhdCB0dG0gcmVjeWNsZXMKPiA+Pj4gdGhlIHBhZ2VzLCB3aGljaCBz
-aG91bGQgdHJpcCB1cCBvbiB0aGUgZWxldmF0ZWQgcmVmY291bnQuIElmIHlvdSB3YWl0Cj4gPj4+
-IHVudGlsIHRoZSBkaXJlY3QgaW8gaXMgY29tcGxldGVseSwgdGhlbiBJIHRoaW5rIG5vdGhpbmcg
-YmFkIGNhbiBiZQo+ID4+PiBvYnNlcnZlZC4KPiA+Pj4KPiA+Pj4gT2ZjIGlmIHlvdXIgYW1kZ3B1
-K2h1Z2VwdGUgaXNzdWUgaXMgc29tZXRoaW5nIGVsc2UsIHRoZW4gbWF5YmUgd2UgaGF2ZQo+ID4+
-PiBhbm90aGVyIGlzc3VlLgo+ID4+Pgo+ID4+PiBBbHNvIHVzdWFsIGNhdmVhdDogSSdtIG5vdCBh
-biBtbSBoYWNrZXIgZWl0aGVyLCBzbyBtaWdodCBiZSBjb21wbGV0ZWx5IHdyb25nLgo+ID4+PiAt
-RGFuaWVsCj4gPj4gU28gSSBkaWQgdGhlIGZvbGxvd2luZyBxdWljayBleHBlcmltZW50IG9uIHZt
-d2dmeCwgYW5kIGl0IHR1cm5zIG91dCB0aGF0Cj4gPj4gd2l0aCBpdCwKPiA+PiBmYXN0IGd1cCBu
-ZXZlciBzdWNjZWVkcy4gV2l0aG91dCB0aGUgInwgUEZOX01BUCIsIGl0IHR5cGljYWxseSBzdWNj
-ZWVkcwo+ID4+Cj4gPj4gSSBzaG91bGQgcHJvYmFibHkgY3JhZnQgYW4gUkZDIGZvcm1hbGl6aW5n
-IHRoaXMuCj4gPiBZZWFoIEkgdGhpbmsgdGhhdCB3b3VsZCBiZSBnb29kLiBNYXliZSBldmVuIG1v
-cmUgZm9ybWFsaXplZCBpZiB3ZSBhbHNvCj4gPiBzd2l0Y2ggb3ZlciB0byBWTV9QRk5NQVAsIHNp
-bmNlIGFmYWl1aSB0aGVzZSBwdGUgZmxhZ3MgaGVyZSBvbmx5IHN0b3AgdGhlCj4gPiBmYXN0IGd1
-cCBwYXRoLiBBbmQgc2xvdyBndXAgY2FuIHN0aWxsIHBlYWsgdGhyb3VnaCBWTV9NSVhFRE1BUC4g
-T3IKPiA+IHNvbWV0aGluZyBsaWtlIHRoYXQuCj4gPgo+ID4gT3RvaCB5b3VyIGRlc2NyaXB0aW9u
-IG9mIHdoZW4gaXQgb25seSBzb21ldGltZXMgc3VjY2VlZHMgd291bGQgaW5kaWNhdGUgbXkKPiA+
-IHVuZGVyc3RhbmRpbmcgb2YgVk1fUEZOTUFQIHZzIFZNX01JWEVETUFQIGlzIHdyb25nIGhlcmUu
-Cj4KPiBNeSB1bmRlcnN0YW5kaW5nIGZyb20gcmVhZGluZyB0aGUgdm1mX2luc2VydF9taXhlZCgp
-IGNvZGUgaXMgdGhhdCBpZmYKPiB0aGUgYXJjaCBoYXMgcHRlX3NwZWNpYWwoKSwgVk1fTUlYRURN
-QVAgc2hvdWxkIGJlIGhhcm1sZXNzLiBCdXQgdGhhdCdzCj4gbm90IGNvbnNpc3RlbnQgd2l0aCB0
-aGUgdm1fbm9ybWFsX3BhZ2UoKSBkb2MuIEZvciBhcmNoaXRlY3R1cmVzIHdpdGhvdXQKPiBwdGVf
-c3BlY2lhbCwgVk1fUEZOTUFQIG11c3QgYmUgdXNlZCwgYW5kIHRoZW4gd2UgbXVzdCBhbHNvIGJs
-b2NrIENPVwo+IG1hcHBpbmdzLgo+Cj4gSWYgd2UgY2FuIGdldCBzb21lb25lIGNhbiBjb21taXQg
-dG8gdmVyaWZ5IHRoYXQgdGhlIHBvdGVudGlhbCBQQVQgV0MKPiBwZXJmb3JtYW5jZSBpc3N1ZSBp
-cyBnb25lIHdpdGggUEZOTUFQLCBJIGNhbiBwdXQgdG9nZXRoZXIgYSBzZXJpZXMgd2l0aAo+IHRo
-YXQgaW5jbHVkZWQuCgpJaXJjIHdoZW4gSSBjaGVja2VkIHRoZXJlJ3Mgbm90IG11Y2ggYXJjaHMg
-d2l0aG91dCBwdGVfc3BlY2lhbCwgc28gSQpndWVzcyB0aGF0J3Mgd2h5IHdlIGx1Y2sgb3V0LiBI
-b3BlZnVsbHkuCgo+IEFzIGZvciBleGlzdGluZyB1c2Vyc3BhY2UgdXNpbmcgQ09XIFRUTSBtYXBw
-aW5ncywgSSBvbmNlIGhhZCBhIGNvdXBsZSBvZgo+IHRlc3QgY2FzZXMgdG8gdmVyaWZ5IHRoYXQg
-aXQgYWN0dWFsbHkgd29ya2VkLCBpbiBwYXJ0aWN1bGFyIHRvZ2V0aGVyCj4gd2l0aCBodWdlIFBN
-RHMgYW5kIFBVRHMgd2hlcmUgYnJlYWtpbmcgQ09XIHdvdWxkIGltcGx5IHNwbGl0dGluZyB0aG9z
-ZSwKPiBidXQgSSBjYW4ndCB0aGluayBvZiBhbnl0aGluZyBlbHNlIGFjdHVhbGx5IHdhbnRpbmcg
-dG8gZG8gdGhhdCBvdGhlcgo+IHRoYW4gYnkgbWlzdGFrZS4KClllYWggZGlzYWxsb3dpbmcgTUFQ
-X1BSSVZBVEUgbWFwcGluZ3Mgd291bGQgYmUgYW5vdGhlciBnb29kIHRoaW5nIHRvCmxvY2sgZG93
-bi4gUmVhbGx5IGRvZXNuJ3QgbWFrZSBtdWNoIHNlbnNlLgotRGFuaWVsCgo+IC9UaG9tYXMKPgo+
-Cj4gPgo+ID4gQ2hyaXN0aWFuLCB3aGF0J3MgeW91ciB0YWtlPwo+ID4gLURhbmllbAo+ID4KPiA+
-PiAvVGhvbWFzCj4gPj4KPiA+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3R0bS90dG1f
-Ym9fdm0uYwo+ID4+IGIvZHJpdmVycy9ncHUvZHJtL3R0bS90dG1fYm9fdm0uYwo+ID4+IGluZGV4
-IDZkYzk2Y2Y2Njc0NC4uNzJiNmZiMTdjOTg0IDEwMDY0NAo+ID4+IC0tLSBhL2RyaXZlcnMvZ3B1
-L2RybS90dG0vdHRtX2JvX3ZtLmMKPiA+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV9i
-b192bS5jCj4gPj4gQEAgLTE5NSw2ICsxOTUsNyBAQCBzdGF0aWMgdm1fZmF1bHRfdCB0dG1fYm9f
-dm1faW5zZXJ0X2h1Z2Uoc3RydWN0IHZtX2ZhdWx0Cj4gPj4gKnZtZiwKPiA+PiAgICAgICAgICBw
-Zm5fdCBwZm50Owo+ID4+ICAgICAgICAgIHN0cnVjdCB0dG1fdHQgKnR0bSA9IGJvLT50dG07Cj4g
-Pj4gICAgICAgICAgYm9vbCB3cml0ZSA9IHZtZi0+ZmxhZ3MgJiBGQVVMVF9GTEFHX1dSSVRFOwo+
-ID4+ICsgICAgICAgc3RydWN0IGRldl9wYWdlbWFwICpwYWdlbWFwOwo+ID4+Cj4gPj4gICAgICAg
-ICAgLyogRmF1bHQgc2hvdWxkIG5vdCBjcm9zcyBibyBib3VuZGFyeS4gKi8KPiA+PiAgICAgICAg
-ICBwYWdlX29mZnNldCAmPSB+KGZhdWx0X3BhZ2Vfc2l6ZSAtIDEpOwo+ID4+IEBAIC0yMTAsNiAr
-MjExLDE3IEBAIHN0YXRpYyB2bV9mYXVsdF90IHR0bV9ib192bV9pbnNlcnRfaHVnZShzdHJ1Y3Qg
-dm1fZmF1bHQKPiA+PiAqdm1mLAo+ID4+ICAgICAgICAgIGlmICgocGZuICYgKGZhdWx0X3BhZ2Vf
-c2l6ZSAtIDEpKSAhPSAwKQo+ID4+ICAgICAgICAgICAgICAgICAgZ290byBvdXRfZmFsbGJhY2s7
-Cj4gPj4KPiA+PiArICAgICAgIC8qCj4gPj4gKyAgICAgICAgKiBIdWdlIGVudHJpZXMgbXVzdCBi
-ZSBzcGVjaWFsLCB0aGF0IGlzIG1hcmtpbmcgdGhlbSBhcyBkZXZtYXAKPiA+PiArICAgICAgICAq
-IHdpdGggbm8gYmFja2luZyBkZXZpY2UgbWFwIHJhbmdlLiBJZiB0aGVyZSBpcyBhIGJhY2tpbmcK
-PiA+PiArICAgICAgICAqIHJhbmdlLCBEb24ndCBpbnNlcnQgYSBodWdlIGVudHJ5Lgo+ID4+ICsg
-ICAgICAgICovCj4gPj4gKyAgICAgICBwYWdlbWFwID0gZ2V0X2Rldl9wYWdlbWFwKHBmbiwgTlVM
-TCk7Cj4gPj4gKyAgICAgICBpZiAocGFnZW1hcCkgewo+ID4+ICsgICAgICAgICAgICAgICBwdXRf
-ZGV2X3BhZ2VtYXAocGFnZW1hcCk7Cj4gPj4gKyAgICAgICAgICAgICAgIGdvdG8gb3V0X2ZhbGxi
-YWNrOwo+ID4+ICsgICAgICAgfQo+ID4+ICsKPiA+PiAgICAgICAgICAvKiBDaGVjayB0aGF0IG1l
-bW9yeSBpcyBjb250aWd1b3VzLiAqLwo+ID4+ICAgICAgICAgIGlmICghYm8tPm1lbS5idXMuaXNf
-aW9tZW0pIHsKPiA+PiAgICAgICAgICAgICAgICAgIGZvciAoaSA9IDE7IGkgPCBmYXVsdF9wYWdl
-X3NpemU7ICsraSkgewo+ID4+IEBAIC0yMjMsNyArMjM1LDcgQEAgc3RhdGljIHZtX2ZhdWx0X3Qg
-dHRtX2JvX3ZtX2luc2VydF9odWdlKHN0cnVjdCB2bV9mYXVsdAo+ID4+ICp2bWYsCj4gPj4gICAg
-ICAgICAgICAgICAgICB9Cj4gPj4gICAgICAgICAgfQo+ID4+Cj4gPj4gLSAgICAgICBwZm50ID0g
-X19wZm5fdG9fcGZuX3QocGZuLCBQRk5fREVWKTsKPiA+PiArICAgICAgIHBmbnQgPSBfX3Bmbl90
-b19wZm5fdChwZm4sIFBGTl9ERVYgfCBQRk5fTUFQKTsKPiA+PiAgICAgICAgICBpZiAoZmF1bHRf
-cGFnZV9zaXplID09IChIUEFHRV9QTURfU0laRSA+PiBQQUdFX1NISUZUKSkKPiA+PiAgICAgICAg
-ICAgICAgICAgIHJldCA9IHZtZl9pbnNlcnRfcGZuX3BtZF9wcm90KHZtZiwgcGZudCwgcGdwcm90
-LCB3cml0ZSk7Cj4gPj4gICAjaWZkZWYgQ09ORklHX0hBVkVfQVJDSF9UUkFOU1BBUkVOVF9IVUdF
-UEFHRV9QVUQKPiA+PiBAQCAtMjM2LDYgKzI0OCwyMSBAQCBzdGF0aWMgdm1fZmF1bHRfdCB0dG1f
-Ym9fdm1faW5zZXJ0X2h1Z2Uoc3RydWN0IHZtX2ZhdWx0Cj4gPj4gKnZtZiwKPiA+PiAgICAgICAg
-ICBpZiAocmV0ICE9IFZNX0ZBVUxUX05PUEFHRSkKPiA+PiAgICAgICAgICAgICAgICAgIGdvdG8g
-b3V0X2ZhbGxiYWNrOwo+ID4+Cj4gPj4gKyNpZiAxCj4gPj4gKyAgICAgICB7Cj4gPj4gKyAgICAg
-ICAgICAgICAgIGludCBucGFnZXM7Cj4gPj4gKyAgICAgICAgICAgICAgIHN0cnVjdCBwYWdlICpw
-YWdlOwo+ID4+ICsKPiA+PiArICAgICAgICAgICAgICAgbnBhZ2VzID0gZ2V0X3VzZXJfcGFnZXNf
-ZmFzdF9vbmx5KHZtZi0+YWRkcmVzcywgMSwgMCwKPiA+PiAmcGFnZSk7Cj4gPj4gKyAgICAgICAg
-ICAgICAgIGlmIChucGFnZXMgPT0gMSkgewo+ID4+ICsgICAgICAgICAgICAgICAgICAgICAgIERS
-TV9XQVJOKCJGYXN0IGd1cCBzdWNjZWVkZWQuIEJhZC5cbiIpOwo+ID4+ICsgICAgICAgICAgICAg
-ICAgICAgICAgIHB1dF9wYWdlKHBhZ2UpOwo+ID4+ICsgICAgICAgICAgICAgICB9IGVsc2Ugewo+
-ID4+ICsgICAgICAgICAgICAgICAgICAgICAgIERSTV9JTkZPKCJGYXN0IGd1cCBmYWlsZWQuIEdv
-b2QuXG4iKTsKPiA+PiArICAgICAgICAgICAgICAgfQo+ID4+ICsgICAgICAgfQo+ID4+ICsjZW5k
-aWYKPiA+PiArCj4gPj4gICAgICAgICAgcmV0dXJuIFZNX0ZBVUxUX05PUEFHRTsKPiA+PiAgIG91
-dF9mYWxsYmFjazoKPiA+PiAgICAgICAgICBjb3VudF92bV9ldmVudChUSFBfRkFVTFRfRkFMTEJB
-Q0spOwo+ID4+Cj4gPj4KPiA+Pgo+ID4+Cj4gPj4KCgoKLS0gCkRhbmllbCBWZXR0ZXIKU29mdHdh
-cmUgRW5naW5lZXIsIEludGVsIENvcnBvcmF0aW9uCmh0dHA6Ly9ibG9nLmZmd2xsLmNoCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcg
-bWFpbGluZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3Rz
-LmxpbmFyby5vcmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
+--000000000000b83e0205bd45069a
+Content-Type: text/plain; charset="UTF-8"
+
+On Thu, Mar 11, 2021 at 10:02 AM Alexandre Desnoyers <alex@qtec.com> wrote:
+>
+> On Thu, Mar 11, 2021 at 2:49 PM Daniel Gomez <daniel@qtec.com> wrote:
+> >
+> > On Thu, 11 Mar 2021 at 10:09, Daniel Gomez <daniel@qtec.com> wrote:
+> > >
+> > > On Wed, 10 Mar 2021 at 18:06, Alex Deucher <alexdeucher@gmail.com> wrote:
+> > > >
+> > > > On Wed, Mar 10, 2021 at 11:37 AM Daniel Gomez <daniel@qtec.com> wrote:
+> > > > >
+> > > > > Disabling GFXOFF via the quirk list fixes a hardware lockup in
+> > > > > Ryzen V1605B, RAVEN 0x1002:0x15DD rev 0x83.
+> > > > >
+> > > > > Signed-off-by: Daniel Gomez <daniel@qtec.com>
+> > > > > ---
+> > > > >
+> > > > > This patch is a continuation of the work here:
+> > > > > https://lkml.org/lkml/2021/2/3/122 where a hardware lockup was discussed and
+> > > > > a dma_fence deadlock was provoke as a side effect. To reproduce the issue
+> > > > > please refer to the above link.
+> > > > >
+> > > > > The hardware lockup was introduced in 5.6-rc1 for our particular revision as it
+> > > > > wasn't part of the new blacklist. Before that, in kernel v5.5, this hardware was
+> > > > > working fine without any hardware lock because the GFXOFF was actually disabled
+> > > > > by the if condition for the CHIP_RAVEN case. So this patch, adds the 'Radeon
+> > > > > Vega Mobile Series [1002:15dd] (rev 83)' to the blacklist to disable the GFXOFF.
+> > > > >
+> > > > > But besides the fix, I'd like to ask from where this revision comes from. Is it
+> > > > > an ASIC revision or is it hardcoded in the VBIOS from our vendor? From what I
+> > > > > can see, it comes from the ASIC and I wonder if somehow we can get an APU in the
+> > > > > future, 'not blacklisted', with the same problem. Then, should this table only
+> > > > > filter for the vendor and device and not the revision? Do you know if there are
+> > > > > any revisions for the 1002:15dd validated, tested and functional?
+> > > >
+> > > > The pci revision id (RID) is used to specify the specific SKU within a
+> > > > family.  GFXOFF is supposed to be working on all raven variants.  It
+> > > > was tested and functional on all reference platforms and any OEM
+> > > > platforms that launched with Linux support.  There are a lot of
+> > > > dependencies on sbios in the early raven variants (0x15dd), so it's
+> > > > likely more of a specific platform issue, but there is not a good way
+> > > > to detect this so we use the DID/SSID/RID as a proxy.  The newer raven
+> > > > variants (0x15d8) have much better GFXOFF support since they all
+> > > > shipped with newer firmware and sbios.
+> > >
+> > > We took one of the first reference platform boards to design our
+> > > custom board based on the V1605B and I assume it has one of the early 'unstable'
+> > > raven variants with RID 0x83. Also, as OEM we are in control of the bios
+> > > (provided by insyde) but I wasn't sure about the RID so, thanks for the
+> > > clarification. Is there anything we can do with the bios to have the GFXOFF
+> > > enabled and 'stable' for this particular revision? Otherwise we'd need to add
+> > > the 0x83 RID to the table. Also, there is an extra ']' in the patch
+> > > subject. Sorry
+> > > for that. Would you need a new patch in case you accept it with the ']' removed?
+> > >
+> > > Good to hear that the newer raven versions have better GFXOFF support.
+> >
+> > Adding Alex Desnoyer to the loop as he is the electronic/hardware and
+> > bios responsible so, he can
+> > provide more information about this.
+>
+> Hello everyone,
+>
+> We, Qtechnology, are the OEM of the hardware platform where we
+> originally discovered the bug.  Our platform is based on the AMD
+> Dibbler V-1000 reference design, with the latest Insyde BIOS release
+> available for the (now unsupported) Dibbler platform.  We have the
+> Insyde BIOS source code internally, so we can make some modifications
+> as needed.
+>
+> The last test that Daniel and myself performed was on a standard
+> Dibbler PCB rev.B1 motherboard (NOT our platform), and using the
+> corresponding latest AMD released BIOS "RDB1109GA".  As Daniel wrote,
+> the hardware lockup can be reproduced on the Dibbler, even if it has a
+> different RID that our V1605B APU.
+>
+> We also have a Neousys Technology POC-515 embedded computer (V-1000,
+> V1605B) in our office.  The Neousys PC also uses Insyde BIOS.  This
+> computer is also locking-up in the test.
+> https://www.neousys-tech.com/en/product/application/rugged-embedded/poc-500-amd-ryzen-ultra-compact-embedded-computer
+>
+>
+> Digging into the BIOS source code, the only reference to GFXOFF is in
+> the SMU and PSP firmware release notes, where some bug fixes have been
+> mentioned for previous SMU/PSP releases.  After a quick "git grep -i
+> gfx | grep -i off", there seems to be no mention of GFXOFF in the
+> Insyde UEFI (inluding AMD PI) code base.  I would appreciate any
+> information regarding BIOS modification needed to make the GFXOFF
+> feature stable.  As you (Alex Deucher) mentionned, it should be
+> functional on all AMD Raven reference platforms.
+>
+
+It's handled by the firmwares carried by the sbios.  I'm not sure what
+versions off hand.  Probably want to make sure you have the latest
+ones.  Do you have an AMD partner contact?  It might be best to bring
+this up with them.
+
+Regarding the issues you are seeing is this a general issue with all
+workloads that use the GFX shader cores?  Or just specific workloads?
+If it's just compute workloads, you might try this patch.  It may fix
+the issue for you.
+
+Alex
+
+
+>
+> Regards,
+>
+> Alexandre Desnoyers
+>
+>
+> >
+> > I've now done a test on the reference platform (dibbler) with the
+> > latest bios available
+> > and the hw lockup can be also reproduced with the same steps.
+> >
+> > For reference, I'm using mainline kernel 5.12-rc2.
+> >
+> > [    5.938544] [drm] initializing kernel modesetting (RAVEN
+> > 0x1002:0x15DD 0x1002:0x15DD 0xC1).
+> > [    5.939942] amdgpu: ATOM BIOS: 113-RAVEN-11
+> >
+> > As in the previous cases, the clocks go to 100% of usage when the hang occurs.
+> >
+> > However, when the gpu hangs, dmesg output displays the following:
+> >
+> > [ 1568.279847] [drm:amdgpu_job_timedout [amdgpu]] *ERROR* ring gfx
+> > timeout, signaled seq=188, emitted seq=191
+> > [ 1568.434084] [drm:amdgpu_job_timedout [amdgpu]] *ERROR* Process
+> > information: process Xorg pid 311 thread Xorg:cs0 pid 312
+> > [ 1568.279847] [drm:amdgpu_job_timedout [amdgpu]] *ERROR* ring gfx
+> > timeout, signaled seq=188, emitted seq=191
+> > [ 1568.434084] [drm:amdgpu_job_timedout [amdgpu]] *ERROR* Process
+> > information: process Xorg pid 311 thread Xorg:cs0 pid 312
+> > [ 1568.507000] amdgpu 0000:01:00.0: amdgpu: GPU reset begin!
+> > [ 1628.491882] rcu: INFO: rcu_sched self-detected stall on CPU
+> > [ 1628.491882] rcu:     3-...!: (665 ticks this GP)
+> > idle=f9a/1/0x4000000000000000 softirq=188533/188533 fqs=15
+> > [ 1628.491882] rcu: rcu_sched kthread timer wakeup didn't happen for
+> > 58497 jiffies! g726761 f0x0 RCU_GP_WAIT_FQS(5) ->state=0x402
+> > [ 1628.491882] rcu:     Possible timer handling issue on cpu=2
+> > timer-softirq=55225
+> > [ 1628.491882] rcu: rcu_sched kthread starved for 58500 jiffies!
+> > g726761 f0x0 RCU_GP_WAIT_FQS(5) ->state=0x402 ->cpu=2
+> > [ 1628.491882] rcu:     Unless rcu_sched kthread gets sufficient CPU
+> > time, OOM is now expected behavior.
+> > [ 1628.491882] rcu: RCU grace-period kthread stack dump:
+> > [ 1628.491882] rcu: Stack dump where RCU GP kthread last ran:
+> > [ 1808.518445] rcu: INFO: rcu_sched self-detected stall on CPU
+> > [ 1808.518445] rcu:     3-...!: (2643 ticks this GP)
+> > idle=f9a/1/0x4000000000000000 softirq=188533/188533 fqs=15
+> > [ 1808.518445] rcu: rcu_sched kthread starved for 238526 jiffies!
+> > g726761 f0x0 RCU_GP_WAIT_FQS(5) ->state=0x0 ->cpu=2
+> > [ 1808.518445] rcu:     Unless rcu_sched kthread gets sufficient CPU
+> > time, OOM is now expected behavior.
+> > [ 1808.518445] rcu: RCU grace-period kthread stack dump:
+> > [ 1808.518445] rcu: Stack dump where RCU GP kthread last ran:
+> >
+> > >
+> > > Daniel
+> > >
+> > > >
+> > > > Alex
+> > > >
+> > > >
+> > > > >
+> > > > > Logs:
+> > > > > [   27.708348] [drm] initializing kernel modesetting (RAVEN
+> > > > > 0x1002:0x15DD 0x1002:0x15DD 0x83).
+> > > > > [   27.789156] amdgpu: ATOM BIOS: 113-RAVEN-115
+> > > > >
+> > > > > Thanks in advance,
+> > > > > Daniel
+> > > > >
+> > > > >  drivers/gpu/drm/amd/amdgpu/gfx_v9_0.c | 2 ++
+> > > > >  1 file changed, 2 insertions(+)
+> > > > >
+> > > > > diff --git a/drivers/gpu/drm/amd/amdgpu/gfx_v9_0.c b/drivers/gpu/drm/amd/amdgpu/gfx_v9_0.c
+> > > > > index 65db88bb6cbc..319d4b99aec8 100644
+> > > > > --- a/drivers/gpu/drm/amd/amdgpu/gfx_v9_0.c
+> > > > > +++ b/drivers/gpu/drm/amd/amdgpu/gfx_v9_0.c
+> > > > > @@ -1243,6 +1243,8 @@ static const struct amdgpu_gfxoff_quirk amdgpu_gfxoff_quirk_list[] = {
+> > > > >         { 0x1002, 0x15dd, 0x103c, 0x83e7, 0xd3 },
+> > > > >         /* GFXOFF is unstable on C6 parts with a VBIOS 113-RAVEN-114 */
+> > > > >         { 0x1002, 0x15dd, 0x1002, 0x15dd, 0xc6 },
+> > > > > +       /* GFXOFF provokes a hw lockup on 83 parts with a VBIOS 113-RAVEN-115 */
+> > > > > +       { 0x1002, 0x15dd, 0x1002, 0x15dd, 0x83 },
+> > > > >         { 0, 0, 0, 0, 0 },
+> > > > >  };
+> > > > >
+> > > > > --
+> > > > > 2.30.1
+> > > > >
+> > > > > _______________________________________________
+> > > > > dri-devel mailing list
+> > > > > dri-devel@lists.freedesktop.org
+> > > > > https://lists.freedesktop.org/mailman/listinfo/dri-devel
+
+--000000000000b83e0205bd45069a
+Content-Type: text/x-patch; charset="US-ASCII"; 
+	name="0001-drm-amdgpu-disable-gfxoff-for-ROCm-workloads-on-Rave.patch"
+Content-Disposition: attachment; 
+	filename="0001-drm-amdgpu-disable-gfxoff-for-ROCm-workloads-on-Rave.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_km52gtq70>
+X-Attachment-Id: f_km52gtq70
+
+RnJvbSA5ZmMxZWM5YTFhZGRhMmEzMzNhNGVjYTEyMGEwZjU2MTk5ZWE4MGRlIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBBbGV4IERldWNoZXIgPGFsZXhhbmRlci5kZXVjaGVyQGFtZC5j
+b20+CkRhdGU6IFRodSwgMTEgTWFyIDIwMjEgMTE6MDI6NTEgLTA1MDAKU3ViamVjdDogW1BBVENI
+XSBkcm0vYW1kZ3B1OiBkaXNhYmxlIGdmeG9mZiBmb3IgUk9DbSB3b3JrbG9hZHMgb24gUmF2ZW4x
+CgpDYXVzZXMgaGFuZ3MuCgpTaWduZWQtb2ZmLWJ5OiBBbGV4IERldWNoZXIgPGFsZXhhbmRlci5k
+ZXVjaGVyQGFtZC5jb20+Ci0tLQogZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2Ft
+ZGtmZC5jIHwgNCArKystCiAxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspLCAxIGRlbGV0
+aW9uKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2Ft
+ZGtmZC5jIGIvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2FtZGtmZC5jCmluZGV4
+IGZhMjcyNjJiNWMyYS4uODk0MjE1Y2UzNDZhIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0v
+YW1kL2FtZGdwdS9hbWRncHVfYW1ka2ZkLmMKKysrIGIvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRn
+cHUvYW1kZ3B1X2FtZGtmZC5jCkBAIC02NDIsNyArNjQyLDkgQEAgdm9pZCBhbWRncHVfYW1ka2Zk
+X3NldF9jb21wdXRlX2lkbGUoc3RydWN0IGtnZF9kZXYgKmtnZCwgYm9vbCBpZGxlKQogCS8qIFRl
+bXAgd29ya2Fyb3VuZCB0byBmaXggdGhlIHNvZnQgaGFuZyBvYnNlcnZlZCBpbiBjZXJ0YWluIGNv
+bXB1dGUKIAkgKiBhcHBsaWNhdGlvbnMgaWYgR0ZYT0ZGIGlzIGVuYWJsZWQuCiAJICovCi0JaWYg
+KGFkZXYtPmFzaWNfdHlwZSA9PSBDSElQX1NJRU5OQV9DSUNITElEKSB7CisJaWYgKChhZGV2LT5h
+c2ljX3R5cGUgPT0gQ0hJUF9TSUVOTkFfQ0lDSExJRCkgfHwKKwkgICAgKChhZGV2LT5hc2ljX3R5
+cGUgPT0gQ0hJUF9SQVZFTikgJiYKKwkgICAgIChhZGV2LT5hcHVfZmxhZ3MgJkFNRF9BUFVfSVNf
+UkFWRU4pKSkgewogCQlwcl9kZWJ1ZygiR0ZYT0ZGIGlzICVzXG4iLCBpZGxlID8gImVuYWJsZWQi
+IDogImRpc2FibGVkIik7CiAJCWFtZGdwdV9nZnhfb2ZmX2N0cmwoYWRldiwgaWRsZSk7CiAJfQot
+LSAKMi4yOS4yCgo=
+--000000000000b83e0205bd45069a
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
+LXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8v
+bGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+
+--000000000000b83e0205bd45069a--
