@@ -2,75 +2,68 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 731A1365B72
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Apr 2021 16:49:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B8217366199
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Apr 2021 23:27:53 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 93B546683D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Apr 2021 14:49:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7FB8F66838
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Apr 2021 21:27:52 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 82CB36683F; Tue, 20 Apr 2021 14:49:49 +0000 (UTC)
+	id 715A966850; Tue, 20 Apr 2021 21:27:52 +0000 (UTC)
 X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on lists.linaro.org
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	MAILING_LIST_MULTI,RCVD_IN_DNSWL_NONE,RCVD_IN_MSPIKE_H2,SPF_HELO_NONE
-	autolearn=disabled version=3.4.2
+X-Spam-Status: No, score=-7.9 required=5.0 tests=BAYES_00,DKIM_ADSP_CUSTOM_MED,
+	FREEMAIL_FROM,MAILING_LIST_MULTI,RCVD_IN_DNSWL_HI,RCVD_IN_MSPIKE_H3,
+	RCVD_IN_MSPIKE_WL,SPF_HELO_NONE autolearn=disabled version=3.4.2
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EB21A6683E;
-	Tue, 20 Apr 2021 14:49:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9AF4A6684E;
+	Tue, 20 Apr 2021 21:27:19 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 1F8DC6683C
- for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Apr 2021 14:49:11 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id C0AF1667A9
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Apr 2021 21:27:16 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 0AEBF6683E; Tue, 20 Apr 2021 14:49:11 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
- by lists.linaro.org (Postfix) with ESMTPS id 965EB6683C
- for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Apr 2021 14:49:09 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id e7so28937493wrs.11
- for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Apr 2021 07:49:09 -0700 (PDT)
+ id AFD586684E; Tue, 20 Apr 2021 21:27:16 +0000 (UTC)
+Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com
+ [209.85.210.54])
+ by lists.linaro.org (Postfix) with ESMTPS id 90AD6667A9
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Apr 2021 21:27:15 +0000 (UTC)
+Received: by mail-ot1-f54.google.com with SMTP id
+ 35-20020a9d05260000b029029c82502d7bso5719228otw.2
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Apr 2021 14:27:15 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=cdVh8MgJ3hW4eH9NelsGjOWmRUKen6Ny2zYwNZtusm0=;
- b=t/EuUE8Igxp6HfsulbivomgsdHyjolS+jamWH2WviITcmAz7iDKpyMHENg07bAT1cQ
- 9boXgwTel1hj5kbBzUx3a9jvOS0GDxZvffThjfIPfl/HgR2u6JGuhE6yymctyMGg9oYe
- dWrZYZPT/jtN9Z5+cQojNWq1JBFirLTikXD9vG/Ci+NrnTbM+q5fPm7BTwXgc4TKM+vg
- Tva1z0UKmGD/MrY3eZ7zPCeQ5h0A+jwP4Kas00kNUww+OFFvdeLVDfh7A2tv3BUjdwU5
- ipM++nhv+h6NCPnFYx/h8kab+YGrEVfh8Vn6LbOYqJItgjx8WJgnQZTqiU9Z3NwsPtF+
- +edg==
-X-Gm-Message-State: AOAM532Wk1HeOpBsGp26sIuU2bgoqa1JotTptiGpRNQOT2k1mzgdOzFH
- yKTE/Dqk3PuMS9n3ejjkXhktbtd61xk5eeeKqF/CmQ==
-X-Google-Smtp-Source: ABdhPJzE4R91MpVGkN6iAOo5Axe07ZxsvgnvjbpeOJkCKLR5/LAD17zPHniT6BPdeCwP2Y05zVvzi7vUeydgGNH/YA8=
-X-Received: by 2002:adf:eb0a:: with SMTP id s10mr21372540wrn.6.1618930148537; 
- Tue, 20 Apr 2021 07:49:08 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=30FxQx6+h/DPZfAuYkCh0ZYoDk/KVeqAfInmZT+LL3E=;
+ b=OY3nSIXgzLRAtvA/ng21snTXm3upK0Kuonn4cGTjLJDWHAslZ38ENROGDZ3O4y47Iu
+ 5ccEL7wQBeZ+bTwdbjHgxRQFcOrdZfGjDvDOr6jU9p9F2aOe1r87hGhy8uC4SBLC4I82
+ uEdbQ/s8zCAiv4MUiJdFDucIOToyjBfPBX8qJbmpDR6XAQvFUZq3MPbRtchi2iF5Izhj
+ ud8gicD+lKvG28HQBywapeYguy7bx6MHsgileWwDpAYeamVGbcYw966g4dTeZJfMsMoK
+ UyM+ttTD878feI6EoM2tepYf73F14VyulEdZJyTSa6n2WoSqXL2xjgPb4nIxdP5OJ3j3
+ 9cXQ==
+X-Gm-Message-State: AOAM5328eIzAcfhWENzpG61jnV/3p3v1Z/CUC6DpBZvQ9uS645Raz+yS
+ UPOniLzQvBYgiNWbH1iRotsqdjG3Yl2IGw8gknc=
+X-Google-Smtp-Source: ABdhPJzyHli5TQG29616h8SoL5wezkFSsDA4ukcNLXQQEbIAs43KGcKjYGIETR2Kb01xcJ3OxH/pNSr2v18uh+7dFEc=
+X-Received: by 2002:a9d:75c4:: with SMTP id c4mr18676343otl.311.1618954035087; 
+ Tue, 20 Apr 2021 14:27:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210416123352.10747-1-peter.enderborg@sony.com>
- <CAPj87rM9gaPS5SOHo3CKUU=5H0PDaG28r8BXimhVp-wmCbMvWA@mail.gmail.com>
- <9d4b7f7d-1a7d-0899-bf33-49fac1847bbe@sony.com>
-In-Reply-To: <9d4b7f7d-1a7d-0899-bf33-49fac1847bbe@sony.com>
-From: Daniel Stone <daniel@fooishbar.org>
-Date: Tue, 20 Apr 2021 15:48:21 +0100
-Message-ID: <CAPj87rNo2WS8A0BUoncZhZg4gMOcBrjOF5gxiAWrbpO6z1Rnqg@mail.gmail.com>
-To: Peter Enderborg <Peter.Enderborg@sony.com>
+References: <20210416143725.2769053-1-lee.jones@linaro.org>
+ <20210416143725.2769053-24-lee.jones@linaro.org>
+ <5035dd00-45a9-80c0-7bcc-8035167a8e0d@amd.com>
+In-Reply-To: <5035dd00-45a9-80c0-7bcc-8035167a8e0d@amd.com>
+From: Alex Deucher <alexdeucher@gmail.com>
+Date: Tue, 20 Apr 2021 17:27:04 -0400
+Message-ID: <CADnq5_Os8LjPoj7_fim2x2RqMhySSUT0BRFdMfd8AFdAjGkhTA@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Cc: Michal Hocko <mhocko@suse.com>, Matthew Wilcox <willy@infradead.org>,
- NeilBrown <neilb@suse.de>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Alexey Dobriyan <adobriyan@gmail.com>,
+Cc: David Airlie <airlied@linux.ie>, LKML <linux-kernel@vger.kernel.org>,
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
  "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Shakeel Butt <shakeelb@google.com>, Mike Rapoport <rppt@kernel.org>,
- Sami Tolvanen <samitolvanen@google.com>,
- Muchun Song <songmuchun@bytedance.com>, linux-fsdevel@vger.kernel.org,
- Andrew Morton <akpm@linux-foundation.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Roman Gushchin <guro@fb.com>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Subject: Re: [Linaro-mm-sig] [PATCH v2] dma-buf: Add DmaBufTotal counter in
-	meminfo
+ Huang Rui <ray.huang@amd.com>, Lee Jones <lee.jones@linaro.org>,
+ linux-media <linux-media@vger.kernel.org>
+Subject: Re: [Linaro-mm-sig] [PATCH 23/40] drm/ttm/ttm_bo: Fix incorrectly
+	documented function 'ttm_bo_cleanup_refs'
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.16
 Precedence: list
@@ -83,98 +76,41 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2475675597077026977=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
---===============2475675597077026977==
-Content-Type: multipart/alternative; boundary="0000000000006b8c7805c0688c24"
-
---0000000000006b8c7805c0688c24
-Content-Type: text/plain; charset="UTF-8"
-
-On Tue, 20 Apr 2021 at 14:46, <Peter.Enderborg@sony.com> wrote:
-
-> On 4/20/21 3:34 PM, Daniel Stone wrote:
-> > On Fri, 16 Apr 2021 at 13:34, Peter Enderborg <peter.enderborg@sony.com
-> <mailto:peter.enderborg@sony.com>> wrote:
-> >     This adds a total used dma-buf memory. Details
-> >     can be found in debugfs, however it is not for everyone
-> >     and not always available. dma-buf are indirect allocated by
-> >     userspace. So with this value we can monitor and detect
-> >     userspace applications that have problems.
-> >
-> >
-> > FWIW, this won't work super well for Android where gralloc is
-> implemented as a system service, so all graphics usage will instantly be
-> accounted to it.
->
-> This resource allocation is a big part of why we need it. Why should it
-> not work?
->
-
-Sorry, I'd somehow completely misread that as being locally rather than
-globally accounted. Given that, it's more correct, just also not super
-useful.
-
-Some drivers export allocation tracepoints which you could use if you have
-a decent userspace tracing infrastructure. Short of that, many drivers
-export this kind of thing through debugfs already. I think a better
-long-term direction is probably getting accounting from dma-heaps rather
-than extending core dmabuf itself.
-
-Cheers,
-Daniel
-
---0000000000006b8c7805c0688c24
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-<div dir=3D"ltr"><div dir=3D"ltr"><span style=3D"">On Tue, 20 Apr 2021 at 1=
-4:46, &lt;<a href=3D"mailto:Peter.Enderborg@sony.com">Peter.Enderborg@sony.=
-com</a>&gt; wrote:</span><br></div><div class=3D"gmail_quote"><blockquote c=
-lass=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px soli=
-d rgb(204,204,204);padding-left:1ex">On 4/20/21 3:34 PM, Daniel Stone wrote=
-:<br>&gt; On Fri, 16 Apr 2021 at 13:34, Peter Enderborg &lt;<a href=3D"mail=
-to:peter.enderborg@sony.com" target=3D"_blank">peter.enderborg@sony.com</a>=
- &lt;mailto:<a href=3D"mailto:peter.enderborg@sony.com" target=3D"_blank">p=
-eter.enderborg@sony.com</a>&gt;&gt; wrote:<br>&gt;=C2=A0 =C2=A0 =C2=A0This =
-adds a total used dma-buf memory. Details<br>
-&gt;=C2=A0 =C2=A0 =C2=A0can be found in debugfs, however it is not for ever=
-yone<br>
-&gt;=C2=A0 =C2=A0 =C2=A0and not always available. dma-buf are indirect allo=
-cated by<br>
-&gt;=C2=A0 =C2=A0 =C2=A0userspace. So with this value we can monitor and de=
-tect<br>
-&gt;=C2=A0 =C2=A0 =C2=A0userspace applications that have problems.<br>
-&gt;<br>
-&gt;<br>
-&gt; FWIW, this won&#39;t work super well for Android where gralloc is impl=
-emented as a system service, so all graphics usage will instantly be accoun=
-ted to it.<br><br>
-This resource allocation is a big part of why we need it. Why should it not=
- work?<br></blockquote><div><br></div><div>Sorry, I&#39;d somehow completel=
-y misread that as being locally rather than globally accounted. Given that,=
- it&#39;s more correct, just also not super useful.</div><div><span style=
-=3D""><br></span></div><div><span style=3D"">Some drivers export allocation=
- tracepoints which you could use if you have a decent userspace tracing inf=
-rastructure. Short of that, many drivers export this kind of thing through =
-debugfs already. I think a better long-term direction is probably getting a=
-ccounting from dma-heaps rather than extending core dmabuf itself.</span></=
-div><div><span style=3D""><br></span></div><div><span style=3D"">Cheers,</s=
-pan></div><div><span style=3D"">Daniel=C2=A0</span></div></div></div>
-
---0000000000006b8c7805c0688c24--
-
---===============2475675597077026977==
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-Content-Disposition: inline
-
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
-LXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8v
-bGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
-
---===============2475675597077026977==--
+T24gRnJpLCBBcHIgMTYsIDIwMjEgYXQgMTE6MzIgQU0gQ2hyaXN0aWFuIEvDtm5pZwo8Y2hyaXN0
+aWFuLmtvZW5pZ0BhbWQuY29tPiB3cm90ZToKPgo+IEFtIDE2LjA0LjIxIHVtIDE2OjM3IHNjaHJp
+ZWIgTGVlIEpvbmVzOgo+ID4gRml4ZXMgdGhlIGZvbGxvd2luZyBXPTEga2VybmVsIGJ1aWxkIHdh
+cm5pbmcocyk6Cj4gPgo+ID4gICBkcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV9iby5jOjI5Mzogd2Fy
+bmluZzogZXhwZWN0aW5nIHByb3RvdHlwZSBmb3IgZnVuY3Rpb24gdHRtX2JvX2NsZWFudXBfcmVm
+cygpLiBQcm90b3R5cGUgd2FzIGZvciB0dG1fYm9fY2xlYW51cF9yZWZzKCkgaW5zdGVhZAo+ID4K
+PiA+IENjOiBDaHJpc3RpYW4gS29lbmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+Cj4gPiBD
+YzogSHVhbmcgUnVpIDxyYXkuaHVhbmdAYW1kLmNvbT4KPiA+IENjOiBEYXZpZCBBaXJsaWUgPGFp
+cmxpZWRAbGludXguaWU+Cj4gPiBDYzogRGFuaWVsIFZldHRlciA8ZGFuaWVsQGZmd2xsLmNoPgo+
+ID4gQ2M6IFN1bWl0IFNlbXdhbCA8c3VtaXQuc2Vtd2FsQGxpbmFyby5vcmc+Cj4gPiBDYzogZHJp
+LWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+ID4gQ2M6IGxpbnV4LW1lZGlhQHZnZXIua2Vy
+bmVsLm9yZwo+ID4gQ2M6IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwo+ID4gU2lnbmVk
+LW9mZi1ieTogTGVlIEpvbmVzIDxsZWUuam9uZXNAbGluYXJvLm9yZz4KPgo+IFJldmlld2VkLWJ5
+OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+CgpDYW4geW91IHB1
+c2ggdGhlIHR0bSBhbmQgc2NoZWQgZml4ZXMgdG8gZHJtLW1pc2M/CgpBbGV4CgoKPgo+ID4gLS0t
+Cj4gPiAgIGRyaXZlcnMvZ3B1L2RybS90dG0vdHRtX2JvLmMgfCAyICstCj4gPiAgIDEgZmlsZSBj
+aGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQo+ID4KPiA+IGRpZmYgLS1naXQg
+YS9kcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV9iby5jIGIvZHJpdmVycy9ncHUvZHJtL3R0bS90dG1f
+Ym8uYwo+ID4gaW5kZXggY2ZkMGI5MjkyMzk3My4uZGVmZWM5NDg3ZTFkZSAxMDA2NDQKPiA+IC0t
+LSBhL2RyaXZlcnMvZ3B1L2RybS90dG0vdHRtX2JvLmMKPiA+ICsrKyBiL2RyaXZlcnMvZ3B1L2Ry
+bS90dG0vdHRtX2JvLmMKPiA+IEBAIC0yNzQsNyArMjc0LDcgQEAgc3RhdGljIHZvaWQgdHRtX2Jv
+X2ZsdXNoX2FsbF9mZW5jZXMoc3RydWN0IHR0bV9idWZmZXJfb2JqZWN0ICpibykKPiA+ICAgfQo+
+ID4KPiA+ICAgLyoqCj4gPiAtICogZnVuY3Rpb24gdHRtX2JvX2NsZWFudXBfcmVmcwo+ID4gKyAq
+IHR0bV9ib19jbGVhbnVwX3JlZnMKPiA+ICAgICogSWYgYm8gaWRsZSwgcmVtb3ZlIGZyb20gbHJ1
+IGxpc3RzLCBhbmQgdW5yZWYuCj4gPiAgICAqIElmIG5vdCBpZGxlLCBibG9jayBpZiBwb3NzaWJs
+ZS4KPiA+ICAgICoKPgo+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fCj4gZHJpLWRldmVsIG1haWxpbmcgbGlzdAo+IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVz
+a3RvcC5vcmcKPiBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZv
+L2RyaS1kZXZlbApfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5v
+cmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4vbGlzdGluZm8vbGluYXJvLW1tLXNp
+Zwo=
