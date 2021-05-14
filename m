@@ -2,69 +2,69 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E1383919D1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 16:19:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 725683919E7
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 16:20:21 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 63DCB6143A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 14:19:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 89D5E613F3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 14:20:19 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 42C1D6116F; Wed, 26 May 2021 14:18:53 +0000 (UTC)
+	id 352ED6157A; Wed, 26 May 2021 14:20:09 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2776B6050C;
-	Wed, 26 May 2021 14:18:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E8A6C61535;
+	Wed, 26 May 2021 14:20:05 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id E64AC60B83
- for <linaro-mm-sig@lists.linaro.org>; Wed, 28 Apr 2021 12:28:08 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 97F776049D
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 14 May 2021 11:02:40 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id DBED160B8E; Wed, 28 Apr 2021 12:28:08 +0000 (UTC)
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
- [209.85.210.170])
- by lists.linaro.org (Postfix) with ESMTPS id CDA4E60B83
- for <linaro-mm-sig@lists.linaro.org>; Wed, 28 Apr 2021 12:28:06 +0000 (UTC)
-Received: by mail-pf1-f170.google.com with SMTP id 10so1082270pfl.1
- for <linaro-mm-sig@lists.linaro.org>; Wed, 28 Apr 2021 05:28:06 -0700 (PDT)
+ id 9406E60A9F; Fri, 14 May 2021 11:02:40 +0000 (UTC)
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+ [209.85.215.171])
+ by lists.linaro.org (Postfix) with ESMTPS id 8A04C6049D
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 14 May 2021 11:02:38 +0000 (UTC)
+Received: by mail-pg1-f171.google.com with SMTP id m190so23905759pga.2
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 14 May 2021 04:02:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=date:from:to:cc:subject:message-id:mime-version:content-disposition
- :user-agent; bh=FCc5BZu5iRztXIUiSt2+3FhaGtDlfucfxXcqT01eExc=;
- b=s1ybdI7WecLYnVPXzIG8r2ufsshTyUG6UBIgf5iZ9rQliaO9QErsrYXIa/i4JeqNQF
- NTu9m1+eajP/7Ozit9TFqR+4pw8P2Ja2s3PWyb+f91pWvvAARcpkSa+HnfVT/C/YVfvh
- n1crgTzs3K/MEAN/PW2chwCa1hS4loARDIabSVxomFETp3p/GHQ6A7vKf+mCo2pRHjPk
- iP54a/IAcobV9YjClrPOCz7bYoxN5yAG9KY9zz4dLEAwBwpm4yB+RkP4st+duj5Hhhcm
- mIXNDw134CsfCAfh/20N4PNaO70pYYZV7Z7MtExQtmJLlziHJgb6W+q0lVqgn0RcmV85
- /Olg==
+ h=from:to:cc:subject:date:message-id;
+ bh=g7DkEbR2JcQCbOxkMhdC26BeBE1YwkunloMTb/SDIZc=;
+ b=TPBiLWV/NQn/o4Os0P4M/SsGh0ZuidyhHWzGQieQPX0qaKdDvntKEKGuI2k+UWP9UV
+ 0JFkGypQMuPK9kdymjMT64VZofeIz/FLcvpZCvW+PhnPxq1r4pWFKWwjKZ45IqUlKIqI
+ xnRQgvBUQOvQCunnoMxY32zrpKwgT9WQ0PAbnwPaFGvjoGBlsTaTnBi8sp2dFyd+FcWM
+ a7cOOgn+mMaTwe2xrA11UcqPbOPVi8xMo/BtDOIt73434TAsPV5ngVnQFTWLVl9ixZfV
+ Efmz2Rji/0z1brCmNAums5zhFOO+uLGKXDgUTMsDJwBi/KnhY+lqIew0SINYzuNVSfzS
+ zw0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
- :content-disposition:user-agent;
- bh=FCc5BZu5iRztXIUiSt2+3FhaGtDlfucfxXcqT01eExc=;
- b=q2Yfaj1h0LgJS4347s2WrWz9zT6dCh+xG7NNhXQOPh5A0e9IYEKs6EwSKY6wn7yBTP
- tq6k+JkxNMm9MJ9J7Q7VTSfMZPm/8CCWX9LLpi9TxsjS/qfExGfDyKyjn82v6k40lUGu
- fZDwnjuutlR1Q1YulBIW1vz9BDsObjY9Z4laDZ4yUhYUEbW9Ee0RT9nZEaUx8eTtIkgy
- eaCrByLrDIY2EixHyer2asuZlJ6NoC64KLv73Lzoj3V/QBdcHRM9gNPXkyD/lWRRkBYx
- PRzrlNSl3VT7atKUx/UArZFOxtJrskNlM3KNwjDKYYqKLJgKzPXFvyxK4oC18mpjn7PR
- iB5A==
-X-Gm-Message-State: AOAM531JXDMjZKAaKKEGIFmNvdfXYe0VsZtYcl6wwWsh0PbZP/GmQ/0K
- yXd0AoD1BWIFWt4COZhZzVg=
-X-Google-Smtp-Source: ABdhPJzFwvuMniv8ai0SvEHoZynqHjurs4c0D6rOCMpJ54ptB8lK6dKuU/popa6Id15ZLDpegNO2ww==
-X-Received: by 2002:a65:6085:: with SMTP id t5mr26835510pgu.201.1619612884496; 
- Wed, 28 Apr 2021 05:28:04 -0700 (PDT)
-Received: from localhost ([157.45.56.196])
- by smtp.gmail.com with ESMTPSA id l3sm4868719pju.44.2021.04.28.05.28.02
- (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
- Wed, 28 Apr 2021 05:28:03 -0700 (PDT)
-Date: Wed, 28 Apr 2021 17:57:55 +0530
-From: Shubhankar Kuranagatti <shubhankarvk@gmail.com>
-To: wsa@kernel.org
-Message-ID: <20210428122755.2s56uotb225rezcw@kewl-virtual-machine>
-MIME-Version: 1.0
-Content-Disposition: inline
-User-Agent: NeoMutt/20171215
+ h=x-gm-message-state:from:to:cc:subject:date:message-id;
+ bh=g7DkEbR2JcQCbOxkMhdC26BeBE1YwkunloMTb/SDIZc=;
+ b=M+oU8hSirdzzqAgUAHi02dr5vA4jb9czmFYV7X34W86wxb4bPLrc6hqYu5VR28+Jmw
+ pWWwFBMEzxf0MRy2L1dEpU5k/x+WM0gw6OrLkNQ3SG188/UwkKpxbKsr5SPwX38pQmGm
+ /By02U83kXhUICTAaLZGeKc1e6iISUfkQkNWnYShL+DjwBAx2UEuTLyM89+p+XW8URyB
+ 2EFxS4GeOU4oZyDlcAIlDEeZcX4g2tNCC5HdXi+R4mWnnTt9rH1l11bXHsFD861gg855
+ uZuvoJAQauWNxCx2j38XHEKacyqD+M5idoRfzsOVpLrx0cGF8rUcI7jOOADRX5u6vz+6
+ UDvw==
+X-Gm-Message-State: AOAM533GwsHxhfl8m2//EMyFbkUNSAAlz3WUWIqjvAbeuIwrTq7y+0+9
+ VHTvx3b9fM1bHijzS6+IAKg=
+X-Google-Smtp-Source: ABdhPJzI0fGVTZCZdc30Z3TaVpb0GVm4cmbsGmevnEN/twwgl1TCynmfAE+pe70r417S9GkSp3vXSA==
+X-Received: by 2002:a63:465f:: with SMTP id v31mr13437876pgk.6.1620990157678; 
+ Fri, 14 May 2021 04:02:37 -0700 (PDT)
+Received: from fmin-OptiPlex-7060.nreal.work ([137.59.103.165])
+ by smtp.gmail.com with ESMTPSA id 202sm4193402pgg.59.2021.05.14.04.02.33
+ (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+ Fri, 14 May 2021 04:02:37 -0700 (PDT)
+From: dillon.minfei@gmail.com
+To: patrice.chotard@foss.st.com, pierre-yves.mordret@foss.st.com,
+ alain.volmat@foss.st.com, mcoquelin.stm32@gmail.com,
+ alexandre.torgue@foss.st.com, sumit.semwal@linaro.org,
+ christian.koenig@amd.com, mturquette@baylibre.com
+Date: Fri, 14 May 2021 19:02:28 +0800
+Message-Id: <1620990152-19255-1-git-send-email-dillon.minfei@gmail.com>
+X-Mailer: git-send-email 2.7.4
 X-Virus-Scanned: ClamAV using ClamSMTP
 X-Mailman-Approved-At: Wed, 26 May 2021 14:18:46 +0000
-Subject: [Linaro-mm-sig] [PATCH] drivers: i2c: i2c-core-smbus.c: Fix
- alignment of comment
+Subject: [Linaro-mm-sig] [PATCH 0/4] Fix the i2c/clk bug of stm32 mcu
+ platform
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -77,76 +77,114 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- christian.koenig@amd.com, linaro-mm-sig@lists.linaro.org,
- linux-i2c@vger.kernel.org, linux-media@vger.kernel.org
+Cc: sboyd@kernel.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-clk@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org, linux-i2c@vger.kernel.org,
+ Dillon Min <dillon.minfei@gmail.com>, linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Multi line comment have been aligned starting with a *
-The closing */ has been shifted to a new line.
-Single space replaced with tab space
-This is done to maintain code uniformity.
+From: Dillon Min <dillon.minfei@gmail.com>
 
-Signed-off-by: Shubhankar Kuranagatti <shubhankarvk@gmail.com>
----
- drivers/i2c/i2c-core-smbus.c | 17 ++++++++++-------
- 1 file changed, 10 insertions(+), 7 deletions(-)
+This seriese fix three i2c/clk bug for stm32 f4/f7
+- kernel runing in sdram, i2c driver get data timeout
+- ltdc clk turn off after kernel console active
+- kernel hang in set ltdc clock rate
 
-diff --git a/drivers/i2c/i2c-core-smbus.c b/drivers/i2c/i2c-core-smbus.c
-index d2d32c0fd8c3..205750518c21 100644
---- a/drivers/i2c/i2c-core-smbus.c
-+++ b/drivers/i2c/i2c-core-smbus.c
-@@ -66,10 +66,11 @@ static inline void i2c_smbus_add_pec(struct i2c_msg *msg)
- }
- 
- /* Return <0 on CRC error
--   If there was a write before this read (most cases) we need to take the
--   partial CRC from the write part into account.
--   Note that this function does modify the message (we need to decrease the
--   message length to hide the CRC byte from the caller). */
-+ * If there was a write before this read (most cases) we need to take the
-+ * partial CRC from the write part into account.
-+ * Note that this function does modify the message (we need to decrease the
-+ * message length to hide the CRC byte from the caller).
-+ */
- static int i2c_smbus_check_pec(u8 cpec, struct i2c_msg *msg)
- {
- 	u8 rpec = msg->buf[--msg->len];
-@@ -113,7 +114,7 @@ EXPORT_SYMBOL(i2c_smbus_read_byte);
- s32 i2c_smbus_write_byte(const struct i2c_client *client, u8 value)
- {
- 	return i2c_smbus_xfer(client->adapter, client->addr, client->flags,
--	                      I2C_SMBUS_WRITE, value, I2C_SMBUS_BYTE, NULL);
-+			I2C_SMBUS_WRITE, value, I2C_SMBUS_BYTE, NULL);
- }
- EXPORT_SYMBOL(i2c_smbus_write_byte);
- 
-@@ -387,7 +388,8 @@ static s32 i2c_smbus_xfer_emulated(struct i2c_adapter *adapter, u16 addr,
- 		if (read_write == I2C_SMBUS_READ) {
- 			msg[1].flags |= I2C_M_RECV_LEN;
- 			msg[1].len = 1; /* block length will be added by
--					   the underlying bus driver */
-+					 * the underlying bus driver
-+					 */
- 			i2c_smbus_try_get_dmabuf(&msg[1], 0);
- 		} else {
- 			msg[0].len = data->block[0] + 2;
-@@ -418,7 +420,8 @@ static s32 i2c_smbus_xfer_emulated(struct i2c_adapter *adapter, u16 addr,
- 
- 		msg[1].flags |= I2C_M_RECV_LEN;
- 		msg[1].len = 1; /* block length will be added by
--				   the underlying bus driver */
-+				 * the underlying bus driver
-+				 */
- 		i2c_smbus_try_get_dmabuf(&msg[1], 0);
- 		break;
- 	case I2C_SMBUS_I2C_BLOCK_DATA:
+clk bug found on stm32f429/f469-disco board
+
+Hi Patrice:
+below is the guide to verify the patch:
+
+setup test env with following files(link at below 'files link'):
+[1] u-boot-dtb.bin
+[2] rootfs zip file (used in kernel initramfs)
+[3] u-boot's mkimage to create itb file
+[4] kernel config file
+[5] my itb with-or-without i2c patch
+
+This patch based on kernel commit:
+88b06399c9c766c283e070b022b5ceafa4f63f19
+
+Note:
+panel-ilitek-ili9341.c is the driver which was submitted last year, but not
+get accepted. it's used to setup touch screen calibration, then test i2c.
+
+create itb file(please correct path of 'data'):
+./mkimage -f stm32.its stm32.itb
+
+HW setup:
+console:
+       PA9, PA10
+       usart0
+       serial@40011000
+       115200 8n1
+
+-- flash u-boot.bin to stm32f429-disco on PC
+$ sudo openocd -f board/stm32f429discovery.cfg -c \
+  '{PATH-TO-YOUR-UBOOT}/u-boot-dtb.bin 0x08000000 exit reset'
+
+-- setup kernel load bootargs at u-boot
+U-Boot > setenv bootargs 'console=tty0 console=ttySTM0,115200
+                    root=/dev/ram rdinit=/linuxrc loglevel=8 fbcon=rotate:2'
+U-Boot > loady;bootm
+(download stm32.dtb or your kernel with itb format, or download zImage, dtb)
+
+-- setup ts_calibrate running env on stm32f429-disco
+/ # export TSLIB_CONFFILE=/etc/ts.conf
+/ # export TSLIB_TSDEVICE=/dev/input/event0
+/ # export TSLIB_CONSOLEDEVICE=none
+/ # export TSLIB_FBDEVICE=/dev/fb0
+
+-- clear screen
+/ # ./fb
+
+-- run ts_calibrate 
+/ # ts_calibrate
+(you can calibrate touchscreen now, and get below errors)
+
+[  113.942087] stmpe-i2c0-0041: failed to read regs 0x52: -110
+[  114.063598] stmpe-i2c 0-0041: failed to read reg 0x4b: -16
+[  114.185629] stmpe-i2c 0-0041: failed to read reg 0x40: -16
+[  114.307257] stmpe-i2c 0-0041: failed to write reg 0xb: -16
+
+...
+with i2c patch applied, you will find below logs:
+
+RAW---------------------> 3164 908 183 118.110884
+TS_READ_RAW----> x = 3164, y =908, pressure = 183
+RAW---------------------> 3166 922 126 118.138946
+TS_READ_RAW----> x = 3166, y = 922, pressure = 126
+....
+
+files link:
+https://drive.google.com/drive/folders/1qNbjChcB6UGtKzne2F5x9_WG_sZFyo3o?usp=sharing
+
+
+
+
+Dillon Min (4):
+  drm/panel: Add ilitek ili9341 panel driver
+  i2c: stm32f4: Fix stmpe811 get xyz data timeout issue
+  clk: stm32: Fix stm32f429's ltdc driver hang in set clock rate
+  clk: stm32: Fix ltdc's clock turn off by clk_disable_unused() after
+    kernel startup
+
+ drivers/clk/clk-stm32f4.c                    |   10 +-
+ drivers/gpu/drm/panel/Kconfig                |   12 +
+ drivers/gpu/drm/panel/Makefile               |    1 +
+ drivers/gpu/drm/panel/panel-ilitek-ili9341.c | 1285 ++++++++++++++++++++++++++
+ drivers/i2c/busses/i2c-stm32f4.c             |   12 +-
+ 5 files changed, 1310 insertions(+), 10 deletions(-)
+ create mode 100755 drivers/gpu/drm/panel/panel-ilitek-ili9341.c
+
 -- 
-2.17.1
+2.7.4
 
 _______________________________________________
 Linaro-mm-sig mailing list
