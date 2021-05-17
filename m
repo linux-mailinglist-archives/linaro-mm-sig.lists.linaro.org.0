@@ -2,66 +2,71 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id F264236ED64
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Apr 2021 17:27:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ACE6F382F25
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 17 May 2021 16:13:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 641EE6116E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Apr 2021 15:26:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4EC4360BF0
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 17 May 2021 14:13:07 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 95FDB6117B; Thu, 29 Apr 2021 15:26:56 +0000 (UTC)
+	id CC0A560E15; Mon, 17 May 2021 14:12:59 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4F39E61117;
-	Thu, 29 Apr 2021 15:26:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E8D41608ED;
+	Mon, 17 May 2021 14:12:54 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 73608610C3
- for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Apr 2021 15:26:52 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 0EF76607C8
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 17 May 2021 14:11:35 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 711EE61117; Thu, 29 Apr 2021 15:26:52 +0000 (UTC)
-Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com
- [209.85.210.45])
- by lists.linaro.org (Postfix) with ESMTPS id 6C2DA610C3
- for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Apr 2021 15:26:50 +0000 (UTC)
-Received: by mail-ot1-f45.google.com with SMTP id
- d3-20020a9d29030000b029027e8019067fso59812436otb.13
- for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Apr 2021 08:26:50 -0700 (PDT)
+ id 0A8AD60B82; Mon, 17 May 2021 14:11:35 +0000 (UTC)
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com
+ [209.85.208.54])
+ by lists.linaro.org (Postfix) with ESMTPS id E147B607C8
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 17 May 2021 14:11:32 +0000 (UTC)
+Received: by mail-ed1-f54.google.com with SMTP id df21so7092415edb.3
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 17 May 2021 07:11:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=vbo4pKW3eCIThjMyIy6wsscOAdK3OJqwzPMbrwiTzTg=;
- b=Srmr0fVOgjkykvlE3qdpkc3N3K5sktCMj6v1OgxqDJL0bljoIWUSciurSzygMcC6+n
- Kvfe48eZrFMI4Vezxk+6d1SmAwUj3O8KStWxJ7C6QQj643wUL1pTlFt1cIl+3EPJlog8
- Wjz7r5pur/St1BB4WjvL2c+1TRfSExFtimoriLOUN5bhVZxRQ7ceQ7l6u1U35bjVvgYO
- G+U3UQmd+zdqnS/9c59d2vTHPjnfybGBOMlKvgo2G6yt/3QwDjhtTZtb/DN7njCxMlfl
- Z+5BoYbOdcY8gHWg1rB52LVWnrX7HAjpecCdA5JJdAmydYP8GXTBu8hDuNRA/byDUNS0
- rQAg==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=/uYIsc2htyUAohYH85H3sbQHCzRV4AhZ3J/6S4v6z08=;
+ b=ZMT+aN3bQ36dHjsVPAejG43SAmkoEd0Qm9eqOZuzBt7yR5uCEVWzOqx/OXgsulQXh1
+ lkRtb0S20RgS6RH2JUwXvd5y72dPEEdat+U1H0ZhncSQdAfMIrGzSRdP5o/RJsy2Urhs
+ yehbdjSxyIVROcrPeOIsuxdbE/Cnl9MHvJIf/4KVngUFJ+joRN7alAxBFNNQpqDjv+fO
+ gt8jbwVHADfczaJmHLijeKnD10c3seDVPiNPGDZUll6w2r+fEtKxOn2SuHTdhufd1L4T
+ asi6ghZVtMLMR17OAPV5w9e6TX1iU/aqtjSs9Ry/3+gZCuN5ML4254TRO33pdEJ1U0Jj
+ ZlIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=vbo4pKW3eCIThjMyIy6wsscOAdK3OJqwzPMbrwiTzTg=;
- b=eVjN8JIZAOCvXjxOip6VP+Imqp9GrRwf4q7xFbuwjULlb17XvIubHlzdu4orR4+iTX
- 8TxrLSuL5VlXk6uSLq+GggHpteNvYrzQdKJtwqF2s2GCcyNhav+65Zx7F7/8GMaH3x71
- 0h8TxUdyvNC1bb63LNhQSrKhuGZQMX6RxeURZkjKdM9oV09ISqaeFr2vPK/O2YkXJv9T
- /7O3+IIl3P7VJG49KVgHLnL/jUcZqoQjysUDehFyfb0Rl1aBIEo2GMOBUjjYDgI/RH6E
- EjGSjf6PA3ktS4vJSNKeGD0pLVY3te2mKRu2qvXrJ+X7wTdpAHxIWdJ5Miq9cuSHA+BP
- isYQ==
-X-Gm-Message-State: AOAM5300y2irM7CdJi+ucalIzPXl172fMEJnbxZgPtuR04ehJ4cZcDsA
- xYin3xloCklE1ke4b2CYT8y7FAiNPvzliExKPDE=
-X-Google-Smtp-Source: ABdhPJx/VF42MwLva6s4z6QCvKeFfwbdS1g8a6UEzyk0r2NtvE1jU5KzdNDQMYGiG9P9g6IxZOwxNN7a3OAYwulPFs8=
-X-Received: by 2002:a9d:63d1:: with SMTP id e17mr1296573otl.311.1619710009654; 
- Thu, 29 Apr 2021 08:26:49 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=/uYIsc2htyUAohYH85H3sbQHCzRV4AhZ3J/6S4v6z08=;
+ b=mw3OhUnKmERB6HORJ3BpJ5EDZ4lVMCSWgar5j18forpqQ/tBHNMKvSnpivx8O+qB8r
+ MmJwigR3RQ5Rq57/ycDglzJ+YcYh+wqorw+VDSSa266NQwTeJWXWl7QKEpwF7wgFRRDJ
+ SEQJdVwJXjGR81OGJz0NP2FxI3Pf4rRxP1Z1ICmaTS01ylnQGfIbu5HjL+CGJPkTfr0i
+ xWCp/qmbXUsZEk3g33CeyaH85ooTaNwWqEoZ/UadHxZpm4CMHObOmL0BBJsjDFv9VkYf
+ WSHswldZueTPGIuIm7ElNUlu8MHSnYTCBHoFS9rETCBSoV94fY2UxB1+buWuXVjGfWDS
+ a1BQ==
+X-Gm-Message-State: AOAM533z2JeqXfoOhrdlV2IzHhhUlWHBmEddz0y3SpB/kvUFZIWsP8AU
+ 2oUjd39DWwR3/6h715nOpIY=
+X-Google-Smtp-Source: ABdhPJwTKKSzjbWvrXVZRu1jfVInDY6a4RxjqvP6I4PFceoNd/UnGgKIZD2ZP1lKx3/D20/pWDdrkw==
+X-Received: by 2002:a05:6402:2682:: with SMTP id
+ w2mr235852edd.101.1621260692091; 
+ Mon, 17 May 2021 07:11:32 -0700 (PDT)
+Received: from abel.fritz.box ([2a02:908:1252:fb60:1df4:c5b6:b8fd:3c4b])
+ by smtp.gmail.com with ESMTPSA id b9sm2419624edt.71.2021.05.17.07.11.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 May 2021 07:11:31 -0700 (PDT)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
+ <christian.koenig@amd.com>
+To: dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org
+Date: Mon, 17 May 2021 16:11:18 +0200
+Message-Id: <20210517141129.2225-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20210427112738.15869-1-fmdefrancesco@gmail.com>
- <ef0a9c9d-4a7e-b1ce-05ef-29dca0c020a7@amd.com>
-In-Reply-To: <ef0a9c9d-4a7e-b1ce-05ef-29dca0c020a7@amd.com>
-From: Alex Deucher <alexdeucher@gmail.com>
-Date: Thu, 29 Apr 2021 11:26:38 -0400
-Message-ID: <CADnq5_NGxHweFv_Cqwn1em5erGeUH_WJ_6KugJ+iKEUsKtuaYg@mail.gmail.com>
-To: Felix Kuehling <felix.kuehling@amd.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v2] drm/amd/amdgpu: Fix errors in
- documentation of function parameters
+Subject: [Linaro-mm-sig] [RFC] Add DMA_RESV_USAGE flags
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,178 +79,27 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- "open list:AMD KFD" <amd-gfx@lists.freedesktop.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>,
- Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
- "Fabio M. De Francesco" <fmdefrancesco@gmail.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+Cc: daniel@ffwll.ch
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Thu, Apr 29, 2021 at 2:44 AM Felix Kuehling <felix.kuehling@amd.com> wrote:
->
-> On 2021-04-27 7:27, Fabio M. De Francesco wrote:
-> > In the documentation of functions, removed excess parameters, described
-> > undocumented ones, and fixed syntax errors.
-> >
-> > Signed-off-by: Fabio M. De Francesco <fmdefrancesco@gmail.com>
-> > ---
-> >
-> > Changes from v1: Cc'ed all the maintainers.
->
-> Looks like Alex already applied V1. So this one doesn't apply. "git am
-> -3" tells me:
+We had a long outstanding problem in amdgpu that buffers exported to user drivers by DMA-buf serialize all command submissions using them.
 
-Ah sorry, I didn't see the v2 patch.
+In other words we can't compose the buffer with different engines and then send it to another driver for display further processing.
 
-Alex
+This was added to work around the fact that i915 didn't wanted to wait for shared fences in the dma_resv objects before displaying a buffer.
+
+Since this problem is now causing issues with Vulkan we need to find a better solution for that.
+
+The patch set here tries to do this by adding an usage flag to the shared fences noting when and how they should participate in implicit synchronization.
+
+Please review and/or comment,
+Christian.
 
 
->
-> Applying: drm/amd/amdgpu: Fix errors in documentation of function parameters
-> Using index info to reconstruct a base tree...
-> M       drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c
-> M       drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_fence.c
-> M       drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gfx_v9.c
-> Falling back to patching base and 3-way merge...
-> No changes -- Patch already applied.
->
-> Regards,
->    Felix
->
->
-> >
-> >   drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c          | 12 ++++++------
-> >   drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_fence.c  |  4 +++-
-> >   drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gfx_v9.c |  8 ++++----
-> >   3 files changed, 13 insertions(+), 11 deletions(-)
-> >
-> > diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c
-> > index 2e9b16fb3fcd..bf2939b6eb43 100644
-> > --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c
-> > +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_acpi.c
-> > @@ -76,7 +76,7 @@ struct amdgpu_atif {
-> >   /**
-> >    * amdgpu_atif_call - call an ATIF method
-> >    *
-> > - * @handle: acpi handle
-> > + * @atif: acpi handle
-> >    * @function: the ATIF function to execute
-> >    * @params: ATIF function params
-> >    *
-> > @@ -166,7 +166,6 @@ static void amdgpu_atif_parse_functions(struct amdgpu_atif_functions *f, u32 mas
-> >   /**
-> >    * amdgpu_atif_verify_interface - verify ATIF
-> >    *
-> > - * @handle: acpi handle
-> >    * @atif: amdgpu atif struct
-> >    *
-> >    * Execute the ATIF_FUNCTION_VERIFY_INTERFACE ATIF function
-> > @@ -240,8 +239,7 @@ static acpi_handle amdgpu_atif_probe_handle(acpi_handle dhandle)
-> >   /**
-> >    * amdgpu_atif_get_notification_params - determine notify configuration
-> >    *
-> > - * @handle: acpi handle
-> > - * @n: atif notification configuration struct
-> > + * @atif: acpi handle
-> >    *
-> >    * Execute the ATIF_FUNCTION_GET_SYSTEM_PARAMETERS ATIF function
-> >    * to determine if a notifier is used and if so which one
-> > @@ -304,7 +302,7 @@ static int amdgpu_atif_get_notification_params(struct amdgpu_atif *atif)
-> >   /**
-> >    * amdgpu_atif_query_backlight_caps - get min and max backlight input signal
-> >    *
-> > - * @handle: acpi handle
-> > + * @atif: acpi handle
-> >    *
-> >    * Execute the QUERY_BRIGHTNESS_TRANSFER_CHARACTERISTICS ATIF function
-> >    * to determine the acceptable range of backlight values
-> > @@ -363,7 +361,7 @@ static int amdgpu_atif_query_backlight_caps(struct amdgpu_atif *atif)
-> >   /**
-> >    * amdgpu_atif_get_sbios_requests - get requested sbios event
-> >    *
-> > - * @handle: acpi handle
-> > + * @atif: acpi handle
-> >    * @req: atif sbios request struct
-> >    *
-> >    * Execute the ATIF_FUNCTION_GET_SYSTEM_BIOS_REQUESTS ATIF function
-> > @@ -899,6 +897,8 @@ void amdgpu_acpi_fini(struct amdgpu_device *adev)
-> >   /**
-> >    * amdgpu_acpi_is_s0ix_supported
-> >    *
-> > + * @adev: amdgpu_device_pointer
-> > + *
-> >    * returns true if supported, false if not.
-> >    */
-> >   bool amdgpu_acpi_is_s0ix_supported(struct amdgpu_device *adev)
-> > diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_fence.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_fence.c
-> > index 5af464933976..98d31ebad9ce 100644
-> > --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_fence.c
-> > +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_fence.c
-> > @@ -111,6 +111,8 @@ static const char *amdkfd_fence_get_timeline_name(struct dma_fence *f)
-> >    *  a KFD BO and schedules a job to move the BO.
-> >    *  If fence is already signaled return true.
-> >    *  If fence is not signaled schedule a evict KFD process work item.
-> > + *
-> > + *  @f: dma_fence
-> >    */
-> >   static bool amdkfd_fence_enable_signaling(struct dma_fence *f)
-> >   {
-> > @@ -131,7 +133,7 @@ static bool amdkfd_fence_enable_signaling(struct dma_fence *f)
-> >   /**
-> >    * amdkfd_fence_release - callback that fence can be freed
-> >    *
-> > - * @fence: fence
-> > + * @f: dma_fence
-> >    *
-> >    * This function is called when the reference count becomes zero.
-> >    * Drops the mm_struct reference and RCU schedules freeing up the fence.
-> > diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gfx_v9.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gfx_v9.c
-> > index b43e68fc1378..ed3014fbb563 100644
-> > --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gfx_v9.c
-> > +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gfx_v9.c
-> > @@ -719,7 +719,7 @@ static void unlock_spi_csq_mutexes(struct amdgpu_device *adev)
-> >   }
-> >
-> >   /**
-> > - * @get_wave_count: Read device registers to get number of waves in flight for
-> > + * get_wave_count: Read device registers to get number of waves in flight for
-> >    * a particular queue. The method also returns the VMID associated with the
-> >    * queue.
-> >    *
-> > @@ -755,19 +755,19 @@ static void get_wave_count(struct amdgpu_device *adev, int queue_idx,
-> >   }
-> >
-> >   /**
-> > - * @kgd_gfx_v9_get_cu_occupancy: Reads relevant registers associated with each
-> > + * kgd_gfx_v9_get_cu_occupancy: Reads relevant registers associated with each
-> >    * shader engine and aggregates the number of waves that are in flight for the
-> >    * process whose pasid is provided as a parameter. The process could have ZERO
-> >    * or more queues running and submitting waves to compute units.
-> >    *
-> >    * @kgd: Handle of device from which to get number of waves in flight
-> >    * @pasid: Identifies the process for which this query call is invoked
-> > - * @wave_cnt: Output parameter updated with number of waves in flight that
-> > + * @pasid_wave_cnt: Output parameter updated with number of waves in flight that
-> >    * belong to process with given pasid
-> >    * @max_waves_per_cu: Output parameter updated with maximum number of waves
-> >    * possible per Compute Unit
-> >    *
-> > - * @note: It's possible that the device has too many queues (oversubscription)
-> > + * Note: It's possible that the device has too many queues (oversubscription)
-> >    * in which case a VMID could be remapped to a different PASID. This could lead
-> >    * to an iaccurate wave count. Following is a high-level sequence:
-> >    *    Time T1: vmid = getVmid(); vmid is associated with Pasid P1
-> _______________________________________________
-> amd-gfx mailing list
-> amd-gfx@lists.freedesktop.org
-> https://lists.freedesktop.org/mailman/listinfo/amd-gfx
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
