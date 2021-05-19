@@ -2,63 +2,57 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BBEA388D26
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 May 2021 13:44:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B128389275
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 May 2021 17:22:01 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4B7616118F
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 May 2021 11:44:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AE6EA61160
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 May 2021 15:21:59 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id E186561181; Wed, 19 May 2021 11:44:06 +0000 (UTC)
+	id 6E1266117B; Wed, 19 May 2021 15:21:58 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E60E3610F9;
-	Wed, 19 May 2021 11:44:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EA35C61148;
+	Wed, 19 May 2021 15:21:55 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 1E01060A6B
- for <linaro-mm-sig@lists.linaro.org>; Wed, 19 May 2021 11:44:01 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id B11F361145
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 19 May 2021 15:21:53 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 19D77610F9; Wed, 19 May 2021 11:44:01 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com
- [209.85.208.46])
- by lists.linaro.org (Postfix) with ESMTPS id 0E21160A6B
- for <linaro-mm-sig@lists.linaro.org>; Wed, 19 May 2021 11:43:59 +0000 (UTC)
-Received: by mail-ed1-f46.google.com with SMTP id t3so14978859edc.7
- for <linaro-mm-sig@lists.linaro.org>; Wed, 19 May 2021 04:43:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=a+xs7gpgFG84sVsyJ8w8M4m/W+0WFDGnzuSDF+jSX1s=;
- b=gKTWZNSZrtwwmwgnHVkMOHIa6MjfOEqMRREbxcDwYsGzTy+8e/zdJOWdc20C45NkbK
- LAmqq/YX56tTVNhIxs4qGkElzgJrXQnIpLtt3GNAsqIuUZPGKS9+ZJVT3RT/Z3Y2mnqY
- NCRee6c8msVvucgtiTGtTgGcwJBiGXYi4Gn8n1UjC89StlOF0rkcAyOrlUdC9zXc+BSu
- G2CHOEavCVZNqN19CMgt0b/4ESPlU8LqHZcatYuTNqaknRshT3D8NuyKVuMBOYsTKHma
- I3zLlFVKKobuX8qxJqgqAe23ArGLW3Jna9iU5vR7mpVu6o+Y4aaUeR92XOB5PfSGt7jf
- wTHw==
+ id AF02C61148; Wed, 19 May 2021 15:21:53 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com
+ [209.85.208.42])
+ by lists.linaro.org (Postfix) with ESMTPS id A5EEA61145
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 19 May 2021 15:21:51 +0000 (UTC)
+Received: by mail-ed1-f42.google.com with SMTP id t15so15825523edr.11
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 19 May 2021 08:21:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=jlekstrand-net.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=WA9qUoEBtVJsSKCDyoyq7382SpsW/20hQVldJ/7BtjA=;
+ b=lJO6FtIMwBIsId6pGxGOKybO14svkp2qQEXNPqHKUhNInXZBFlhnfhfHoqjmE/6wlI
+ AmmYjAf7xqcoL7Fh9le1tn7OQvyzU+m/rKLcSgqUYE6U0o8qCSYCxAZcX5AX+kQkrXQh
+ ELOFis5/y4miNV6dH2cOe0+0dXyuY9gMko5Eyn4p6RxavW/vHXl8uPOuwU3wGdJihdMy
+ 2M3nC0F6DiwFlDVScdU2VpEP3Z4+Qbj1xIYAJfTd6wXPxLB0+QaqGPseSEhPnjodZJ1L
+ unLXGdlwWjf3IZmNgF+KmEcHKtC5bF1PJZSJ5mJEoYW2cgS0mEK9CNXWcemrieNpWPsJ
+ LW7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=a+xs7gpgFG84sVsyJ8w8M4m/W+0WFDGnzuSDF+jSX1s=;
- b=OynGT6EktyLCnxofoIjBR8FPEs5Ndkuf753Xl2fxQBR5ze5Octy9hou/1EienGjxlT
- E4ghEK1mUmfeHmzEYSSo97kr21waWJZ03mJu+enJsEEAtDMU6Xs6Ec8y8mMQYvg2mnaK
- cHC7fzrNuMhheX/XVTIbpp0oZfwY81Zf0xfG95ILik0gBxm0/HDaItlISvBfKtAtGMCL
- Ss+hA5TSI+yhU7XhN0/O31P3KGgdPsWN8SfM9NLUWBMWqqWu9zSQGy4sTXxoMd2G2VlI
- PE1lpb0mFStOKPQ4w1eyVlmnSafLl3teGiQjx/UMxrYqQ5PMFof+KrRm4f1alX3ljOU6
- ykVA==
-X-Gm-Message-State: AOAM533dIGMmV2Ryr6oQ7JW8BgICnc3QdGParlvX6/TyFgJtmVPZcVta
- x/SvYm1NAG3+QmfUIDPvhXTIM08etmw=
-X-Google-Smtp-Source: ABdhPJysgroPTJTctedbEW2ZxzU5IBQo1KpZz9VoA65KzXYVktBHZqd+i/eBtoI+jdI7MambQbHZYA==
-X-Received: by 2002:a05:6402:337:: with SMTP id
- q23mr13651748edw.215.1621424638125; 
- Wed, 19 May 2021 04:43:58 -0700 (PDT)
-Received: from ?IPv6:2a02:908:1252:fb60:8e28:1d3:41f3:e15a?
- ([2a02:908:1252:fb60:8e28:1d3:41f3:e15a])
- by smtp.gmail.com with ESMTPSA id me15sm12384980ejb.71.2021.05.19.04.43.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 May 2021 04:43:57 -0700 (PDT)
-To: Jason Ekstrand <jason@jlekstrand.net>, Daniel Vetter <daniel@ffwll.ch>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=WA9qUoEBtVJsSKCDyoyq7382SpsW/20hQVldJ/7BtjA=;
+ b=KvzjlbWx/mNoF9crcaml9HobY31wwigOPvG7r/9J1AT0bJylZmZ820dZY/GHgdRfmr
+ TKVS9E9x+zgiSAK1MhozXgIOZXoy1svPsXB/mMqugOlSfMutGlsMNSGihNyCFw4Vkxfu
+ zaOKhbBvtUawzD8G8UEYCFzmSj4VcpgcPAK2sdfkgtaHsuf56hBC8YlskKv7xnPV4BIn
+ uRmDdjmyqmLD4MmcZx7tmaItjOGxuYvztonig5ART9/Sm74CMKVql2FKV9BeCVmhG2Se
+ Y7xBpYKPuCU4DKKYow6E9ngpHcNHL7tEh/B8lu8QRcw4wAwisQ7w5T7PCUcd1qDu2abL
+ jWqQ==
+X-Gm-Message-State: AOAM532QV+7ubp22XR+U0JAGvDRb+cVGiEOJnkjdTAt/HqrFcLew+iHs
+ R61OhYn0KOu/bUnWApNgfX3j7YUapOxmlhToh3aKm3Z31vc=
+X-Google-Smtp-Source: ABdhPJzZDU9fo9UgdKEp/g6+yKErjdnaaHCHRCl5FwP646Eu7psLZJ7F298i7dQuLNjWIbip6h5ATmnc/4nYvQpX5sE=
+X-Received: by 2002:aa7:db93:: with SMTP id u19mr15068398edt.227.1621437710623; 
+ Wed, 19 May 2021 08:21:50 -0700 (PDT)
+MIME-Version: 1.0
 References: <20210517141129.2225-1-christian.koenig@amd.com>
  <YKKF4jOvM4gJT6a4@phenom.ffwll.local>
  <5a3e9500-9d6b-a865-5385-fde43da2bf66@gmail.com>
@@ -70,14 +64,12 @@ References: <20210517141129.2225-1-christian.koenig@amd.com>
  <f2eb6751-2f82-9b23-f57e-548de5b729de@gmail.com>
  <CAKMK7uHdsGjADQ9zwgrYsuhHdxFGkuH--DdOsaqej6OD1AbX-w@mail.gmail.com>
  <CAOFGe97FDc7Y9APymQQZZMApDXsJkbcS0N5jh+3s-w-Ligipug@mail.gmail.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <d305f41f-263d-5612-9f37-5a1442a60649@gmail.com>
-Date: Wed, 19 May 2021 13:43:56 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
-MIME-Version: 1.0
-In-Reply-To: <CAOFGe97FDc7Y9APymQQZZMApDXsJkbcS0N5jh+3s-w-Ligipug@mail.gmail.com>
-Content-Language: en-US
+ <14524566-8854-4bc0-9f70-b7219c9fccfc@daenzer.net>
+In-Reply-To: <14524566-8854-4bc0-9f70-b7219c9fccfc@daenzer.net>
+From: Jason Ekstrand <jason@jlekstrand.net>
+Date: Wed, 19 May 2021 10:21:39 -0500
+Message-ID: <CAOFGe96VttW2VzAnx13ZXLBGcEDJMehGuOFifcr+pcbEOa-Brw@mail.gmail.com>
+To: =?UTF-8?Q?Michel_D=C3=A4nzer?= <michel@daenzer.net>
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [RFC] Add DMA_RESV_USAGE flags
 X-BeenThere: linaro-mm-sig@lists.linaro.org
@@ -93,179 +85,63 @@ List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: "moderated list:DMA BUFFER SHARING FRAMEWORK"
- <linaro-mm-sig@lists.linaro.org>, dri-devel <dri-devel@lists.freedesktop.org>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+ <linaro-mm-sig@lists.linaro.org>, dri-devel <dri-devel@lists.freedesktop.org>,
+ Daniel Vetter <daniel@ffwll.ch>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Am 19.05.21 um 00:06 schrieb Jason Ekstrand:
-> [SNIP]
->>> E.g. we can't add a fence which doesn't wait for the exclusive one as
->>> shared.
->> Ok I think that's a real problem, and  guess it's also related to all
->> the ttm privatization tricks and all that. So essentially we'd need
->> the opposite of ttm_bo->moving, as in you can't ignore it, but
->> otherwise it completely ignores all the userspace implicit fence
->> stuff.
-> Would you mind explaining it to the rest of the class?  I get the need
-> to do a TLB flush after a BO is removed from the processes address
-> space and I get that it may be super-heavy and that it has to be
-> delayed.  I also get that the driver needs to hold a reference to the
-> underlying pages until that TLB flush is done.  What I don't get is
-> what this has to do with the exclusive fence.  Why can't the driver
-> just gather up all the dma_resv fences on the current object (or,
-> better yet, just the ones from the current amdgpu process) and wait on
-> them all?  Why does it need to insert an exclusive fence that then
-> clogs up the whole works?
-
-Because we have mixed up resource management with implicit syncing.
-
-When I sum up all fences in (for example) a dma_fence_array container 
-and add that as explicit fence to the dma_resv object resource 
-management will do what I want and wait for everything to finish before 
-moving or freeing the buffer. But implicit sync will just horrible over 
-sync and wait for stuff it shouldn't wait for in the first place.
-
-When I add the fence as shared fence I can run into the problem the the 
-TLB flush might finish before the exclusive fence. Which is not allowed 
-according to the DMA-buf fencing rules.
-
-We currently have some rather crude workarounds to make use cases like 
-this work as expected. E.g. by using a 
-dma_fence_chain()/dma_fence_array() and/or adding the explusive fence to 
-the shared fences etc etc...
-
->>>>>>> Let's say that you have a buffer which is shared between two drivers A
->>>>>>> and B and let's say driver A has thrown a fence on it just to ensure
->>>>>>> that the BO doesn't get swapped out to disk until it's at a good
->>>>>>> stopping point.  Then driver B comes along and wants to throw a
->>>>>>> write-fence on it.  Suddenly, your memory fence from driver A causes
->>>>>>> driver B to have to stall waiting for a "good" time to throw in a
->>>>>>> fence.  It sounds like this is the sort of scenario that Christian is
->>>>>>> running into.  And, yes, with certain Vulkan drivers being a bit
->>>>>>> sloppy about exactly when they throw in write fences, I could see it
->>>>>>> being a real problem.
->>>>>> Yes this is a potential problem, and on the i915 side we need to do
->>>>>> some shuffling here most likely. Especially due to discrete, but the
->>>>>> problem is pre-existing. tbh I forgot about the implications here
->>>>>> until I pondered this again yesterday evening.
->>>>>>
->>>>>> But afaiui the amdgpu code and winsys in mesa, this isn't (yet) the
->>>>>> problem amd vk drivers have. The issue is that with amdgpu, all you
->>>>>> supply are the following bits at CS time:
->>>>>> - list of always mapped private buffers, which is implicit and O(1) in
->>>>>> the kernel fastpath
->>>>>> - additional list of shared buffers that are used by the current CS
->>>>>>
->>>>>> I didn't check how exactly that works wrt winsys buffer ownership, but
->>>>>> the thing is that on the kernel side _any_ buffer in there is treated
->>>>>> as a implicit sync'ed write. Which means if you render your winsys
->>>>>> with a bunch of command submission split over 3d and compute pipes,
->>>>>> you end up with horrendous amounts of oversync.
->>>>> What are you talking about? We have no sync at all for submissions from
->>>>> the same client.
->>>> Yes. Except when the buffer is shared with another driver, at which
->>>> point you sync a _lot_ and feel the pain.
->>> Yes, exactly that's the problem.
->>>
->>> We basically don't know during CS if a BO is shared or not.
->>>
->>> We do know that during importing or exporting the BO thought.
->> No you don't. Or at least that's massively awkward, see Jason's reply.
-> Please.  In Vulkan, we know explicitly whether or not any BO will ever
-> be shared and, if a BO is ever flagged as shared even though it's not,
-> that's the app being stupid and they can eat the perf hit.
-
-Yeah, that's not a problem at all. We already have the per BO flag in 
-amdgpu for this as well.
-
-> In GL, things are more wishy-washy but GL has so many stupid cases where we
-> have to throw a buffer away and re-allocate that one more isn't going
-> to be all that bad.  Even there, you could do something where you add
-> an in-fence to the BO export operation so that the driver knows when
-> to switch from the shared internal dma_resv to the external one
-> without having to create a new BO and copy.
-
-Hui what? What do you mean with in-fence here?
-
-> [SNIP]
->> Yeah but why does your userspace not know when a bo is used?
-> We always know when a BO is exported because we're the ones doing the
-> export call.  Always.  Of course, we don't know if that BO is shared
-> with another driver or re-imported back into the same one but is that
-> really the case we're optimizing for?
-
-Yes, unfortunately. Exactly that's one of the reasons we couldn't go 
-with the per CS per BO flag if it should be shared or exclusive.
-
->> Or very bluntly, why cant radv do what anv does (or amdvlk if you care
->> more about that, it's the same)? What's missing with lots of blantant
->> lying?
-> I'm also not buying this.  You keep claiming that userspace doesn't
-> know but GL definitely does know and Vulkan knows well enough.  You
-> say that it's motivated by Vulkan and use RADV as an example but the
-> only reason why the RADV guys haven't followed the ANV design is to
-> work around limitations in amdgpu.  We shouldn't then use RADV to
-> justify why this is the right uAPI and why i915 is wrong.
-
-Well, I never said that this is because of RADV. The main motivation we 
-had is because of MM engines, e.g. VA-API, VDPAU and OpenMax.
-
-And when we expose a BO with the DMA-buf functions we simply doesn't 
-know in userspace if that is then re-imported into VA-API or send to a 
-different process.
-
->>> [SNIP]
->>> Yeah, and that is exactly the reason why I will NAK this uAPI change.
->>>
->>> This doesn't works for amdgpu at all for the reasons outlined above.
->> Uh that's really not how uapi works. "my driver is right, everyone
->> else is wrong" is not how cross driver contracts are defined. If that
->> means a perf impact until you've fixed your rules, that's on you.
->>
->> Also you're a few years too late with nacking this, it's already uapi
->> in the form of the dma-buf poll() support.
-> ^^  My fancy new ioctl doesn't expose anything that isn't already
-> there.  It just lets you take a snap-shot of a wait instead of doing
-> an active wait which might end up with more fences added depending on
-> interrupts and retries.  The dma-buf poll waits on all fences for
-> POLLOUT and only the exclusive fence for POLLIN.  It's already uAPI.
-
-Well that's not the stuff I'm concerned about. But rather that you want 
-to add that as exclusive fence from the shared ones once more.
-
-This prevents the TLB flush case I've outlined from working correctly.
-
->>>> So the way I see things right now:
->>>> - exclusive fence slot is for implicit sync. kmd should only set it
->>>> when userspace indicates, otherwise you will suffer. Explicit syncing
->>>> userspace needs to tell the kernel with a flag in the CS ioctl when it
->>>> should sync against this exclusive fence and when it should ignore it,
->>>> otherwise you'll suffer badly once more.
->>> That is not sufficient. The explicit sync slot is for kernel internal
->>> memory management.
->> Then we need to split it. But what I discussed with Thomas Hellstrom
->> is that at least for anything except p2p dma-buf ttm_bo->moving should
->> be enough.
-> This is starting to sound like maybe roughly the right direction to me
-> but I'm still unclear on exactly what problem we're trying to solve
-> for TLB invalidates.  I'd like to understand that better before giving
-> strong opinions.  I'm also not super-familiar with ttm_bo->moving but
-> it sounds like we need some third category of fence somewhere.
-
-Well I would rather say that we should separate the use cases.
-
-E.g. clear APIs for resource management vs. implicit sync.
-
-Christian.
-
->
-> --Jason
->
-
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+T24gV2VkLCBNYXkgMTksIDIwMjEgYXQgNTo1MiBBTSBNaWNoZWwgRMOkbnplciA8bWljaGVsQGRh
+ZW56ZXIubmV0PiB3cm90ZToKPgo+IE9uIDIwMjEtMDUtMTkgMTI6MDYgYS5tLiwgSmFzb24gRWtz
+dHJhbmQgd3JvdGU6Cj4gPiBPbiBUdWUsIE1heSAxOCwgMjAyMSBhdCA0OjE3IFBNIERhbmllbCBW
+ZXR0ZXIgPGRhbmllbEBmZndsbC5jaD4gd3JvdGU6Cj4gPj4KPiA+PiBPbiBUdWUsIE1heSAxOCwg
+MjAyMSBhdCA3OjQwIFBNIENocmlzdGlhbiBLw7ZuaWcKPiA+PiA8Y2tvZW5pZy5sZWljaHR6dW1l
+cmtlbkBnbWFpbC5jb20+IHdyb3RlOgo+ID4+Pgo+ID4+PiBBbSAxOC4wNS4yMSB1bSAxODo0OCBz
+Y2hyaWViIERhbmllbCBWZXR0ZXI6Cj4gPj4+PiBPbiBUdWUsIE1heSAxOCwgMjAyMSBhdCAyOjQ5
+IFBNIENocmlzdGlhbiBLw7ZuaWcKPiA+Pj4+IDxja29lbmlnLmxlaWNodHp1bWVya2VuQGdtYWls
+LmNvbT4gd3JvdGU6Cj4gPj4+Pgo+ID4+Pj4+IEFuZCBhcyBsb25nIGFzIHdlIGFyZSBhbGwgaW5z
+aWRlIGFtZGdwdSB3ZSBhbHNvIGRvbid0IGhhdmUgYW55IG92ZXJzeW5jLAo+ID4+Pj4+IHRoZSBp
+c3N1ZSBvbmx5IGhhcHBlbnMgd2hlbiB3ZSBzaGFyZSBkbWEtYnVmcyB3aXRoIGk5MTUgKHJhZGVv
+biBhbmQKPiA+Pj4+PiBBRkFJSyBub3V2ZWF1IGRvZXMgdGhlIHJpZ2h0IHRoaW5nIGFzIHdlbGwp
+Lgo+ID4+Pj4gWWVhaCBiZWNhdXNlIHRoZW4geW91IGNhbid0IHVzZSB0aGUgYW1kZ3B1IGRtYV9y
+ZXN2IG1vZGVsIGFueW1vcmUgYW5kCj4gPj4+PiBoYXZlIHRvIHVzZSB0aGUgb25lIGF0b21pYyBo
+ZWxwZXJzIHVzZS4gV2hpY2ggaXMgYWxzbyB0aGUgb25lIHRoYXQKPiA+Pj4+IGUuZy4gSmFzb24g
+aXMgdGhyZWF0aGVuaW5nIHRvIGJha2UgaW4gYXMgdWFwaSB3aXRoIGhpcyBkbWFfYnVmIGlvY3Rs
+LAo+ID4+Pj4gc28gYXMgc29vbiBhcyB0aGF0IGxhbmRzIGFuZCBzb21lb25lIHN0YXJ0cyB1c2lu
+ZyBpdCwgc29tZXRoaW5nIGhhcyB0bwo+ID4+Pj4gYWRhcHQgX2FueXRpbWVfIHlvdSBoYXZlIGEg
+ZG1hLWJ1ZiBoYW5naW5nIGFyb3VuZC4gTm90IGp1c3Qgd2hlbiBpdCdzCj4gPj4+PiBzaGFyZWQg
+d2l0aCBhbm90aGVyIGRldmljZS4KPiA+Pj4KPiA+Pj4gWWVhaCwgYW5kIHRoYXQgaXMgZXhhY3Rs
+eSB0aGUgcmVhc29uIHdoeSBJIHdpbGwgTkFLIHRoaXMgdUFQSSBjaGFuZ2UuCj4gPj4+Cj4gPj4+
+IFRoaXMgZG9lc24ndCB3b3JrcyBmb3IgYW1kZ3B1IGF0IGFsbCBmb3IgdGhlIHJlYXNvbnMgb3V0
+bGluZWQgYWJvdmUuCj4gPj4KPiA+PiBVaCB0aGF0J3MgcmVhbGx5IG5vdCBob3cgdWFwaSB3b3Jr
+cy4gIm15IGRyaXZlciBpcyByaWdodCwgZXZlcnlvbmUKPiA+PiBlbHNlIGlzIHdyb25nIiBpcyBu
+b3QgaG93IGNyb3NzIGRyaXZlciBjb250cmFjdHMgYXJlIGRlZmluZWQuIElmIHRoYXQKPiA+PiBt
+ZWFucyBhIHBlcmYgaW1wYWN0IHVudGlsIHlvdSd2ZSBmaXhlZCB5b3VyIHJ1bGVzLCB0aGF0J3Mg
+b24geW91Lgo+ID4+Cj4gPj4gQWxzbyB5b3UncmUgYSBmZXcgeWVhcnMgdG9vIGxhdGUgd2l0aCBu
+YWNraW5nIHRoaXMsIGl0J3MgYWxyZWFkeSB1YXBpCj4gPj4gaW4gdGhlIGZvcm0gb2YgdGhlIGRt
+YS1idWYgcG9sbCgpIHN1cHBvcnQuCj4gPgo+ID4gXl4gIE15IGZhbmN5IG5ldyBpb2N0bCBkb2Vz
+bid0IGV4cG9zZSBhbnl0aGluZyB0aGF0IGlzbid0IGFscmVhZHkKPiA+IHRoZXJlLiAgSXQganVz
+dCBsZXRzIHlvdSB0YWtlIGEgc25hcC1zaG90IG9mIGEgd2FpdCBpbnN0ZWFkIG9mIGRvaW5nCj4g
+PiBhbiBhY3RpdmUgd2FpdCB3aGljaCBtaWdodCBlbmQgdXAgd2l0aCBtb3JlIGZlbmNlcyBhZGRl
+ZCBkZXBlbmRpbmcgb24KPiA+IGludGVycnVwdHMgYW5kIHJldHJpZXMuICBUaGUgZG1hLWJ1ZiBw
+b2xsIHdhaXRzIG9uIGFsbCBmZW5jZXMgZm9yCj4gPiBQT0xMT1VUIGFuZCBvbmx5IHRoZSBleGNs
+dXNpdmUgZmVuY2UgZm9yIFBPTExJTi4gIEl0J3MgYWxyZWFkeSB1QVBJLgo+Cj4gTm90ZSB0aGF0
+IHRoZSBkbWEtYnVmIHBvbGwgc3VwcG9ydCBjb3VsZCBiZSB1c2VmdWwgdG8gV2F5bGFuZCBjb21w
+b3NpdG9ycyBmb3IgdGhlIHNhbWUgcHVycG9zZSBhcyBKYXNvbidzIG5ldyBpb2N0bCAob25seSB1
+c2luZyBjbGllbnQgYnVmZmVycyB3aGljaCBoYXZlIGZpbmlzaGVkIGRyYXdpbmcgZm9yIGFuIG91
+dHB1dCBmcmFtZSwgdG8gYXZvaWQgbWlzc2luZyBhIHJlZnJlc2ggY3ljbGUgZHVlIHRvIGNsaWVu
+dCBkcmF3aW5nKSwgKmlmKiBpdCBkaWRuJ3Qgd29yayBkaWZmZXJlbnRseSB3aXRoIGFtZGdwdS4K
+Pgo+IEFtIEkgdW5kZXJzdGFuZGluZyBjb3JyZWN0bHkgdGhhdCBKYXNvbidzIG5ldyBpb2N0bCB3
+b3VsZCBhbHNvIHdvcmsgZGlmZmVyZW50bHkgd2l0aCBhbWRncHUgYXMgdGhpbmdzIHN0YW5kIGN1
+cnJlbnRseT8gSWYgc28sIHRoYXQgd291bGQgYmUgYSByZWFsIGJ1bW1lciBhbmQgbWlnaHQgaGlu
+ZGVyIGFkb3B0aW9uIG9mIHRoZSBpb2N0bCBieSBXYXlsYW5kIGNvbXBvc2l0b3JzLgoKTXkgbmV3
+IGlvY3RsIGhhcyBpZGVudGljYWwgc2VtYW50aWNzIHRvIHBvbGwoKS4gIEl0IGp1c3QgbGV0cyB5
+b3UgdGFrZQphIHNuYXBzaG90IGluIHRpbWUgdG8gd2FpdCBvbiBsYXRlciBpbnN0ZWFkIG9mIHdh
+aXRpbmcgb24gd2hhdGV2ZXIKaGFwcGVucyB0byBiZSBzZXQgcmlnaHQgbm93LiAgSU1PLCBoYXZp
+bmcgaWRlbnRpY2FsIHNlbWFudGljcyB0bwpwb2xsKCkgaXNuJ3Qgc29tZXRoaW5nIHdlIHdhbnQg
+dG8gY2hhbmdlLgoKLS1KYXNvbgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8tbW0tc2lnQGxpc3Rz
+LmxpbmFyby5vcmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4vbGlzdGluZm8vbGlu
+YXJvLW1tLXNpZwo=
