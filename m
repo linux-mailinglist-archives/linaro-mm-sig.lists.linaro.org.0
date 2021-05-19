@@ -2,63 +2,63 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC78C388CBC
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 May 2021 13:25:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BBEA388D26
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 May 2021 13:44:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7F2DE61146
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 May 2021 11:24:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4B7616118F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 May 2021 11:44:07 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 5E1C961151; Wed, 19 May 2021 11:24:56 +0000 (UTC)
+	id E186561181; Wed, 19 May 2021 11:44:06 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BDDB961101;
-	Wed, 19 May 2021 11:24:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E60E3610F9;
+	Wed, 19 May 2021 11:44:02 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 6D6CD610EC
- for <linaro-mm-sig@lists.linaro.org>; Wed, 19 May 2021 11:24:51 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 1E01060A6B
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 19 May 2021 11:44:01 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 6B54961101; Wed, 19 May 2021 11:24:51 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com
- [209.85.218.50])
- by lists.linaro.org (Postfix) with ESMTPS id 604EB610EC
- for <linaro-mm-sig@lists.linaro.org>; Wed, 19 May 2021 11:24:49 +0000 (UTC)
-Received: by mail-ej1-f50.google.com with SMTP id k14so15952872eji.2
- for <linaro-mm-sig@lists.linaro.org>; Wed, 19 May 2021 04:24:49 -0700 (PDT)
+ id 19D77610F9; Wed, 19 May 2021 11:44:01 +0000 (UTC)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com
+ [209.85.208.46])
+ by lists.linaro.org (Postfix) with ESMTPS id 0E21160A6B
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 19 May 2021 11:43:59 +0000 (UTC)
+Received: by mail-ed1-f46.google.com with SMTP id t3so14978859edc.7
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 19 May 2021 04:43:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=subject:to:cc:references:from:message-id:date:user-agent
  :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=bAIjjTcjY6NHtBvXiyPhNsWfJKyzQSNib/VM0tXVPlE=;
- b=I8hZT/YAkNPghsd/6fzorAUuDd7A81NZ/p7+W30eE58MDR/reAdaAkHccDDJjQ1G57
- ymPp/8LSOInjA58s41fqIGaEIk67tRDKkOzvSU+boJ2uJuYoLbQFJhWKLA51oYqdhXqi
- +2AHWACJ0CQ4wFBp4HiV3KkwimTOp3/5k18xQb09TiGDGNx9qa0hnbHuyL3KGS6sbhtI
- 2XVRoK5Fq41eh/x4rgLIRC+0mbouOel/sH7hcg4pLkZR0QEbdynjEAq2TtlPdJxg3SAe
- KgRlyAuxIWcHOolOJLqGAHe3NfQ6aWvSCSLBngay5QXnaOesiNbOAtTLxNGlapS6TmTH
- j2lg==
+ bh=a+xs7gpgFG84sVsyJ8w8M4m/W+0WFDGnzuSDF+jSX1s=;
+ b=gKTWZNSZrtwwmwgnHVkMOHIa6MjfOEqMRREbxcDwYsGzTy+8e/zdJOWdc20C45NkbK
+ LAmqq/YX56tTVNhIxs4qGkElzgJrXQnIpLtt3GNAsqIuUZPGKS9+ZJVT3RT/Z3Y2mnqY
+ NCRee6c8msVvucgtiTGtTgGcwJBiGXYi4Gn8n1UjC89StlOF0rkcAyOrlUdC9zXc+BSu
+ G2CHOEavCVZNqN19CMgt0b/4ESPlU8LqHZcatYuTNqaknRshT3D8NuyKVuMBOYsTKHma
+ I3zLlFVKKobuX8qxJqgqAe23ArGLW3Jna9iU5vR7mpVu6o+Y4aaUeR92XOB5PfSGt7jf
+ wTHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:message-id:date
  :user-agent:mime-version:in-reply-to:content-transfer-encoding
  :content-language;
- bh=bAIjjTcjY6NHtBvXiyPhNsWfJKyzQSNib/VM0tXVPlE=;
- b=Nb3XlQbFdztEa5DYO1Tl15ejo1Ha8ZbwCELy3J1AnLMELaZkB90WlOO37WglfDZbKf
- J08Gp5hyvJhkAsfLBkGWVaurwUDyI7JA9v0yBl0WhnPBCITPzfQMASkU0aHtJky6yaaj
- E0mNstsIgKzRlQWtTYu3XFWuCWN975uBMkLboCN1PcjUUNHIr0SBW0YSfTOREwT9XNOU
- RUQXblZErByATiUvqyxzlAJ4LvlYMj6sOF9ss9hG+esIxNkUDqecQy70PSxLTQxuf8hA
- U/+xvVZqk6YJPl6KchqvthWaFMMNTSROuLY+br2GiV6DvjhNVHSGx3pACNbi5gZBDhIz
- SJvg==
-X-Gm-Message-State: AOAM530DEqv12aVIxEdA1ZJtFCu6RLhhFVpeo0PpiBkuChaqUs01UBgp
- 1jWIhc64yS7utT7aXdlFL3E=
-X-Google-Smtp-Source: ABdhPJythZaLlfIbc+UrePH0mfxa23hOuJ74xpe1gKEMBA5UNqGf5jDkTXuZFjhj0sbGgFKgjpLYVA==
-X-Received: by 2002:a17:906:4a81:: with SMTP id
- x1mr11840812eju.508.1621423488482; 
- Wed, 19 May 2021 04:24:48 -0700 (PDT)
+ bh=a+xs7gpgFG84sVsyJ8w8M4m/W+0WFDGnzuSDF+jSX1s=;
+ b=OynGT6EktyLCnxofoIjBR8FPEs5Ndkuf753Xl2fxQBR5ze5Octy9hou/1EienGjxlT
+ E4ghEK1mUmfeHmzEYSSo97kr21waWJZ03mJu+enJsEEAtDMU6Xs6Ec8y8mMQYvg2mnaK
+ cHC7fzrNuMhheX/XVTIbpp0oZfwY81Zf0xfG95ILik0gBxm0/HDaItlISvBfKtAtGMCL
+ Ss+hA5TSI+yhU7XhN0/O31P3KGgdPsWN8SfM9NLUWBMWqqWu9zSQGy4sTXxoMd2G2VlI
+ PE1lpb0mFStOKPQ4w1eyVlmnSafLl3teGiQjx/UMxrYqQ5PMFof+KrRm4f1alX3ljOU6
+ ykVA==
+X-Gm-Message-State: AOAM533dIGMmV2Ryr6oQ7JW8BgICnc3QdGParlvX6/TyFgJtmVPZcVta
+ x/SvYm1NAG3+QmfUIDPvhXTIM08etmw=
+X-Google-Smtp-Source: ABdhPJysgroPTJTctedbEW2ZxzU5IBQo1KpZz9VoA65KzXYVktBHZqd+i/eBtoI+jdI7MambQbHZYA==
+X-Received: by 2002:a05:6402:337:: with SMTP id
+ q23mr13651748edw.215.1621424638125; 
+ Wed, 19 May 2021 04:43:58 -0700 (PDT)
 Received: from ?IPv6:2a02:908:1252:fb60:8e28:1d3:41f3:e15a?
  ([2a02:908:1252:fb60:8e28:1d3:41f3:e15a])
- by smtp.gmail.com with ESMTPSA id h9sm15357782edt.18.2021.05.19.04.24.47
+ by smtp.gmail.com with ESMTPSA id me15sm12384980ejb.71.2021.05.19.04.43.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 May 2021 04:24:48 -0700 (PDT)
-To: Daniel Vetter <daniel@ffwll.ch>
+ Wed, 19 May 2021 04:43:57 -0700 (PDT)
+To: Jason Ekstrand <jason@jlekstrand.net>, Daniel Vetter <daniel@ffwll.ch>
 References: <20210517141129.2225-1-christian.koenig@amd.com>
  <YKKF4jOvM4gJT6a4@phenom.ffwll.local>
  <5a3e9500-9d6b-a865-5385-fde43da2bf66@gmail.com>
@@ -69,13 +69,14 @@ References: <20210517141129.2225-1-christian.koenig@amd.com>
  <CAKMK7uHLipx_oH-s5PB6pUUZ_JXCyciaY7sDLfK__-2fvSPCKA@mail.gmail.com>
  <f2eb6751-2f82-9b23-f57e-548de5b729de@gmail.com>
  <CAKMK7uHdsGjADQ9zwgrYsuhHdxFGkuH--DdOsaqej6OD1AbX-w@mail.gmail.com>
+ <CAOFGe97FDc7Y9APymQQZZMApDXsJkbcS0N5jh+3s-w-Ligipug@mail.gmail.com>
 From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <ee36b7f8-070b-39da-48f5-d546f2c0ceb8@gmail.com>
-Date: Wed, 19 May 2021 13:24:47 +0200
+Message-ID: <d305f41f-263d-5612-9f37-5a1442a60649@gmail.com>
+Date: Wed, 19 May 2021 13:43:56 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <CAKMK7uHdsGjADQ9zwgrYsuhHdxFGkuH--DdOsaqej6OD1AbX-w@mail.gmail.com>
+In-Reply-To: <CAOFGe97FDc7Y9APymQQZZMApDXsJkbcS0N5jh+3s-w-Ligipug@mail.gmail.com>
 Content-Language: en-US
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [RFC] Add DMA_RESV_USAGE flags
@@ -92,191 +93,176 @@ List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: "moderated list:DMA BUFFER SHARING FRAMEWORK"
- <linaro-mm-sig@lists.linaro.org>, dri-devel <dri-devel@lists.freedesktop.org>,
- Jason Ekstrand <jason@jlekstrand.net>
+ <linaro-mm-sig@lists.linaro.org>, dri-devel <dri-devel@lists.freedesktop.org>
 Content-Transfer-Encoding: 7bit
 Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Am 18.05.21 um 23:17 schrieb Daniel Vetter:
+Am 19.05.21 um 00:06 schrieb Jason Ekstrand:
 > [SNIP]
->> The problem in this case is not starting a new CS, but synchronizing to
->> the existing ones.
+>>> E.g. we can't add a fence which doesn't wait for the exclusive one as
+>>> shared.
+>> Ok I think that's a real problem, and  guess it's also related to all
+>> the ttm privatization tricks and all that. So essentially we'd need
+>> the opposite of ttm_bo->moving, as in you can't ignore it, but
+>> otherwise it completely ignores all the userspace implicit fence
+>> stuff.
+> Would you mind explaining it to the rest of the class?  I get the need
+> to do a TLB flush after a BO is removed from the processes address
+> space and I get that it may be super-heavy and that it has to be
+> delayed.  I also get that the driver needs to hold a reference to the
+> underlying pages until that TLB flush is done.  What I don't get is
+> what this has to do with the exclusive fence.  Why can't the driver
+> just gather up all the dma_resv fences on the current object (or,
+> better yet, just the ones from the current amdgpu process) and wait on
+> them all?  Why does it need to insert an exclusive fence that then
+> clogs up the whole works?
+
+Because we have mixed up resource management with implicit syncing.
+
+When I sum up all fences in (for example) a dma_fence_array container 
+and add that as explicit fence to the dma_resv object resource 
+management will do what I want and wait for everything to finish before 
+moving or freeing the buffer. But implicit sync will just horrible over 
+sync and wait for stuff it shouldn't wait for in the first place.
+
+When I add the fence as shared fence I can run into the problem the the 
+TLB flush might finish before the exclusive fence. Which is not allowed 
+according to the DMA-buf fencing rules.
+
+We currently have some rather crude workarounds to make use cases like 
+this work as expected. E.g. by using a 
+dma_fence_chain()/dma_fence_array() and/or adding the explusive fence to 
+the shared fences etc etc...
+
+>>>>>>> Let's say that you have a buffer which is shared between two drivers A
+>>>>>>> and B and let's say driver A has thrown a fence on it just to ensure
+>>>>>>> that the BO doesn't get swapped out to disk until it's at a good
+>>>>>>> stopping point.  Then driver B comes along and wants to throw a
+>>>>>>> write-fence on it.  Suddenly, your memory fence from driver A causes
+>>>>>>> driver B to have to stall waiting for a "good" time to throw in a
+>>>>>>> fence.  It sounds like this is the sort of scenario that Christian is
+>>>>>>> running into.  And, yes, with certain Vulkan drivers being a bit
+>>>>>>> sloppy about exactly when they throw in write fences, I could see it
+>>>>>>> being a real problem.
+>>>>>> Yes this is a potential problem, and on the i915 side we need to do
+>>>>>> some shuffling here most likely. Especially due to discrete, but the
+>>>>>> problem is pre-existing. tbh I forgot about the implications here
+>>>>>> until I pondered this again yesterday evening.
+>>>>>>
+>>>>>> But afaiui the amdgpu code and winsys in mesa, this isn't (yet) the
+>>>>>> problem amd vk drivers have. The issue is that with amdgpu, all you
+>>>>>> supply are the following bits at CS time:
+>>>>>> - list of always mapped private buffers, which is implicit and O(1) in
+>>>>>> the kernel fastpath
+>>>>>> - additional list of shared buffers that are used by the current CS
+>>>>>>
+>>>>>> I didn't check how exactly that works wrt winsys buffer ownership, but
+>>>>>> the thing is that on the kernel side _any_ buffer in there is treated
+>>>>>> as a implicit sync'ed write. Which means if you render your winsys
+>>>>>> with a bunch of command submission split over 3d and compute pipes,
+>>>>>> you end up with horrendous amounts of oversync.
+>>>>> What are you talking about? We have no sync at all for submissions from
+>>>>> the same client.
+>>>> Yes. Except when the buffer is shared with another driver, at which
+>>>> point you sync a _lot_ and feel the pain.
+>>> Yes, exactly that's the problem.
+>>>
+>>> We basically don't know during CS if a BO is shared or not.
+>>>
+>>> We do know that during importing or exporting the BO thought.
+>> No you don't. Or at least that's massively awkward, see Jason's reply.
+> Please.  In Vulkan, we know explicitly whether or not any BO will ever
+> be shared and, if a BO is ever flagged as shared even though it's not,
+> that's the app being stupid and they can eat the perf hit.
+
+Yeah, that's not a problem at all. We already have the per BO flag in 
+amdgpu for this as well.
+
+> In GL, things are more wishy-washy but GL has so many stupid cases where we
+> have to throw a buffer away and re-allocate that one more isn't going
+> to be all that bad.  Even there, you could do something where you add
+> an in-fence to the BO export operation so that the driver knows when
+> to switch from the shared internal dma_resv to the external one
+> without having to create a new BO and copy.
+
+Hui what? What do you mean with in-fence here?
+
+> [SNIP]
+>> Yeah but why does your userspace not know when a bo is used?
+> We always know when a BO is exported because we're the ones doing the
+> export call.  Always.  Of course, we don't know if that BO is shared
+> with another driver or re-imported back into the same one but is that
+> really the case we're optimizing for?
+
+Yes, unfortunately. Exactly that's one of the reasons we couldn't go 
+with the per CS per BO flag if it should be shared or exclusive.
+
+>> Or very bluntly, why cant radv do what anv does (or amdvlk if you care
+>> more about that, it's the same)? What's missing with lots of blantant
+>> lying?
+> I'm also not buying this.  You keep claiming that userspace doesn't
+> know but GL definitely does know and Vulkan knows well enough.  You
+> say that it's motivated by Vulkan and use RADV as an example but the
+> only reason why the RADV guys haven't followed the ANV design is to
+> work around limitations in amdgpu.  We shouldn't then use RADV to
+> justify why this is the right uAPI and why i915 is wrong.
+
+Well, I never said that this is because of RADV. The main motivation we 
+had is because of MM engines, e.g. VA-API, VDPAU and OpenMax.
+
+And when we expose a BO with the DMA-buf functions we simply doesn't 
+know in userspace if that is then re-imported into VA-API or send to a 
+different process.
+
+>>> [SNIP]
+>>> Yeah, and that is exactly the reason why I will NAK this uAPI change.
+>>>
+>>> This doesn't works for amdgpu at all for the reasons outlined above.
+>> Uh that's really not how uapi works. "my driver is right, everyone
+>> else is wrong" is not how cross driver contracts are defined. If that
+>> means a perf impact until you've fixed your rules, that's on you.
 >>
->> See a heavy TLB flush is made completely out of sync. E.g. it doesn't
->> want to wait for any previous operation.
->>
->> In other words imagine the following example:
->> 1. Both process A and B have a BO mapped.
->> 2. Process A is heavily using the BO and doing all kind of rendering.
->> 3. Process B is unmapping the BO.
->>
->> Now that process B unmaps the BO needs to trigger page table updates and
->> a heavy TLB flush, but since this can take really long we want to do it
->> asynchronously on the hardware.
->>
->> With the current approach you basically can't do that because you can't
->> note that a fence should not participate in synchronization at all.
->>
->> E.g. we can't add a fence which doesn't wait for the exclusive one as
->> shared.
-> Ok I think that's a real problem, and  guess it's also related to all
-> the ttm privatization tricks and all that. So essentially we'd need
-> the opposite of ttm_bo->moving, as in you can't ignore it, but
-> otherwise it completely ignores all the userspace implicit fence
-> stuff.
+>> Also you're a few years too late with nacking this, it's already uapi
+>> in the form of the dma-buf poll() support.
+> ^^  My fancy new ioctl doesn't expose anything that isn't already
+> there.  It just lets you take a snap-shot of a wait instead of doing
+> an active wait which might end up with more fences added depending on
+> interrupts and retries.  The dma-buf poll waits on all fences for
+> POLLOUT and only the exclusive fence for POLLIN.  It's already uAPI.
 
-It goes into that direction, but doesn't sounds like the full solution 
-either.
+Well that's not the stuff I'm concerned about. But rather that you want 
+to add that as exclusive fence from the shared ones once more.
 
-[SNIP]
-> Can we please stop with the "amdgpu is right, everyone else is wrong" approach?
+This prevents the TLB flush case I've outlined from working correctly.
 
-Well the approach I do here is not "amdgpu is right, everyone else is 
-wrong". But rather we had DRM uAPI for i915, nouveau and radeon and 
-unfortunately leaked that into DMA-buf without much thinking about it.
+>>>> So the way I see things right now:
+>>>> - exclusive fence slot is for implicit sync. kmd should only set it
+>>>> when userspace indicates, otherwise you will suffer. Explicit syncing
+>>>> userspace needs to tell the kernel with a flag in the CS ioctl when it
+>>>> should sync against this exclusive fence and when it should ignore it,
+>>>> otherwise you'll suffer badly once more.
+>>> That is not sufficient. The explicit sync slot is for kernel internal
+>>> memory management.
+>> Then we need to split it. But what I discussed with Thomas Hellstrom
+>> is that at least for anything except p2p dma-buf ttm_bo->moving should
+>> be enough.
+> This is starting to sound like maybe roughly the right direction to me
+> but I'm still unclear on exactly what problem we're trying to solve
+> for TLB invalidates.  I'd like to understand that better before giving
+> strong opinions.  I'm also not super-familiar with ttm_bo->moving but
+> it sounds like we need some third category of fence somewhere.
 
-I'm also not saying that the approach amdgpu is right. It's just what 
-amdgpu needs in it's CS interface.
+Well I would rather say that we should separate the use cases.
 
-What I'm saying is that DMA-buf is a device driver independent subsystem 
-and we shouldn't make any assumption which come from just a handful of 
-DRM driver on it's implicit sync implementation.
+E.g. clear APIs for resource management vs. implicit sync.
 
-> Like I'm pretty much going to type up the patch that does a full drm
-> subsytem audit of everything and whack amdgpu into compliance. Perf
-> hit be damned, you had a few years to fix this with better uapi. Or I
-> find out that there's a giant inconsistent mess, but at least we'd
-> gain some clarity about where exactly we are here and maybe what to do
-> next.
-
-Ok to let us move forward please take a look at the first patches of the 
-set. It cleans up quite a bunch of the mess we have in there before even 
-coming to adding flags to the shared slots.
-
-I think you will agree on that we should do is cleaning up the use cases 
-further and separate implicit sync from resource management.
-
-In other words we forbid touching the exclusive and shared fences 
-directly and have separate APIs for resource management and implicit sync.
-
-This makes sense anyway, no matter what implicit synchronization 
-framework we will install underneath.
-
-Regards,
 Christian.
 
-> -Daniel
 >
->> Regards,
->> Christian.
->>
->>> After that I think we can look at what exact oversync issue remains
->>> and why and solve it, but until we have this this just feels like
->>> another rehash of "amgpu insist its own dma_resv interpration is the
->>> right one and everyone else should move one over".
->>>
->>> Or maybe I've just become real garbage at reading random driver code,
->>> wouldn't be the first time :-)
->>>
->>> Cheers, Daniel
->>>
->>>> Regards,
->>>> Christian.
->>>>
->>>>> Cheers, Daniel
->>>>>
->>>>>> --Jason
->>>>>>
->>>>>>
->>>>>>>> That's also the reason the Valve guys came up with a solution where each
->>>>>>>> BO gets a flag for explicit sync, but that only works for exports and
->>>>>>>> not for imports.
->>>>>>>>
->>>>>>>>> I915 and iirc msm has explicit flags for this, panfrost was designed to
->>>>>>>>> support this correctly from the start (also with flags I think). That's at
->>>>>>>>> least what I remember from all the discussions at XDC and #dri-devel, but
->>>>>>>>> didn't check the code again to give you the list of uapi flags you need
->>>>>>>>> for each driver.
->>>>>>>>>
->>>>>>>>> The other piece is making sure you're only picking up implicit fences when
->>>>>>>>> you should, and not any later ones, for which Jason has a solution:
->>>>>>>>>
->>>>>>>>> https://lore.kernel.org/dri-devel/20210317221940.2146688-1-jason@jlekstrand.net/
->>>>>>>> Yes, I helped with that as well. But I think that this is just another
->>>>>>>> workaround without really addressing the underlying problem.
->>>>>>>>
->>>>>>>>> If amdgpu isn't using those, then you will suffer from
->>>>>>>>> over-synchronization in vulkan and pay a price. The entire point of vulkan
->>>>>>>>> is that you pick up sync points very explicitly, and we also need to have
->>>>>>>>> very explicit uapi for userspace to pick up/set the implicit fences.
->>>>>>>>>
->>>>>>>>> Trying to paper over this with more implicit magic is imo just wrong, and
->>>>>>>>> definitely not the long term explicit sync model we want.
->>>>>>>> I completely disagree.
->>>>>>>>
->>>>>>>> In my opinion the implicit sync model we have for dma_resv currently is
->>>>>>>> just not well designed at all, since it always requires cooperation from
->>>>>>>> userspace.
->>>>>>>>
->>>>>>>> In other words you need to know when to enable implicit sync in
->>>>>>>> userspace and that information is simply not present all of the time.
->>>>>>>>
->>>>>>>> What we have done here is just keeping the old reader/writer flags i915,
->>>>>>>> radeon and nouveau once had and pushed that out to everybody else making
->>>>>>>> the assumption that everybody would follow that without documenting the
->>>>>>>> actual rules of engagement you need to follow here.
->>>>>>>>
->>>>>>>> That was a really big mistake and we should try to fix that sooner or
->>>>>>>> later. The only other clean alternative I see is to use a flag on the
->>>>>>>> exporter to tell the importer if it should sync to shared fences or not.
->>>>>>>>
->>>>>>>> Additional to that I'm perfectly fine with implicit sync. Explicit sync
->>>>>>>> certainly has some use cases as well, but I don't see it as an absolute
->>>>>>>> advantage over the implicit model.
->>>>>>> Ok this stops making sense. Somehow you claim userspace doesn't know
->>>>>>> when to sync, but somehow the kernel does? By guessing, and getting it
->>>>>>> wrong mostly, except for the one case that you benchmarked?
->>>>>>>
->>>>>>> Aside from silly userspace which exports a buffer to a dma-buf, but
->>>>>>> then never imports it anywhere else, there isn't a case I know of
->>>>>>> where the kernel actually knows more than userspace. But there's lots
->>>>>>> of cases where the kernel definitely knows less, especially if
->>>>>>> userspace doesn't tell it about what's going on with each rendering
->>>>>>> and buffer.
->>>>>>>
->>>>>>> So here's the 2 things you need to make this work like every other driver:
->>>>>>>
->>>>>>> 1. A way to set the explicit fence on a buffer. CS ioctl is perfectly
->>>>>>> fine, but also can be seperate. Userspace uses this only on a) shared
->>>>>>> buffers b) when there's a flush/swap on that shared buffer. Not when
->>>>>>> rendering any of the interim stuff, that only leads to oversync.
->>>>>>> Anything non-shared is handled explicitly in userspace (at least for
->>>>>>> modern-ish drivers). This is the only thing that ever sets an
->>>>>>> exclusive fence (aside from ttm moving buffers around ofc).
->>>>>>>
->>>>>>> 2. A way to sync with the implicit fences, either all of them (for
->>>>>>> upcoming write access) or just the write fence (for read access). At
->>>>>>> first we thought it's good enough to do this in the CS ioctl, but
->>>>>>> that's a wee bit too late, hence the patches from Jason. My
->>>>>>> understanding is that vulkan converts this into an vk syncobj/fence of
->>>>>>> some sorts, so really can't make this more explicit and intentional
->>>>>>> than that.
->>>>>>>
->>>>>>> None of this is something the kernel has the slightest idea about when
->>>>>>> it happens, so you have to have explicit uapi for it. Trying to fake
->>>>>>> it in the kernel just doesn't work.
->>>>>>> -Daniel
->>>>>>> --
->>>>>>> Daniel Vetter
->>>>>>> Software Engineer, Intel Corporation
->>>>>>> http://blog.ffwll.ch
->>>>> --
->>>>> Daniel Vetter
->>>>> Software Engineer, Intel Corporation
->>>>> http://blog.ffwll.ch
+> --Jason
 >
 
 _______________________________________________
