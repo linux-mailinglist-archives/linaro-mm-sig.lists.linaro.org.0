@@ -2,66 +2,62 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE92438C999
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 May 2021 16:58:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 640EE38C994
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 May 2021 16:55:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C60F961868
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 May 2021 14:58:22 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9271061876
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 May 2021 14:55:23 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 5190961872; Fri, 21 May 2021 14:58:22 +0000 (UTC)
+	id 8400C618F4; Fri, 21 May 2021 14:55:21 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AD61D6182C;
-	Fri, 21 May 2021 14:58:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3122D614C6;
+	Fri, 21 May 2021 14:55:19 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 7E19C61191
- for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 14:58:17 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 6CD8261191
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 14:55:17 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 7A3C16182C; Fri, 21 May 2021 14:58:17 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
- [209.85.128.49])
- by lists.linaro.org (Postfix) with ESMTPS id 72CA761191
- for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 14:58:15 +0000 (UTC)
-Received: by mail-wm1-f49.google.com with SMTP id b7so10703997wmh.5
- for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 07:58:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=BiK6ojG15Q48bs8KPm2ciWDK5dida/2NExdceiLW9xs=;
- b=GnbCU1Zb/WGwtpwgOW16Ti2RNuEZvLW9Rti4H/yJBwqqskLBxsPyvl8tXzKefb+d/c
- HssifkAyFYUDax/ggJt/htI4c9IjIOou/xzYUeTPFM2IgpsFKnBHCW1wD91MntrMijKj
- EpVj3vBtZt50HZoD1NUavmic2L9kOuzvGJkvM=
+ id 617F2614C6; Fri, 21 May 2021 14:55:17 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
+ [209.85.128.52])
+ by lists.linaro.org (Postfix) with ESMTPS id 56BA061191
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 14:55:15 +0000 (UTC)
+Received: by mail-wm1-f52.google.com with SMTP id
+ u5-20020a7bc0450000b02901480e40338bso6923997wmc.1
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 07:55:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=RYm2q8UlxbFEyevcAFjmNarmhsddkGFIu0T8r1FdCck=;
+ b=SymXLzgp4IQCswr8nsXU0X0/7HB/CMRTojNo+8E/X3EzCFEgqKvnvI4j0vxSMpDMoH
+ 0ykFKfqAWM8KhxpFKLAoDeKUugvn+8Q/i1myjddSpyLEi+81vid4JrQvF9QfT2H3lAMT
+ XQaNj9Y2jcOkvNfywqUMuQY1rxsIYpbEGMnkmKbWw98VHMwxWJvUk/wfvhve3AZVAX0r
+ chqT7z9GyNWR1lMw59ptfC2KKojDBEnL4f3wYWppSXwrVqwYvl/RckSwLoQbHFoQTvpK
+ as5yPdvPZYCBuBojQqK2IzMS09xmglmVXSJYuw5NMuyn5JUcRpeozxRlN1uu5k518Gak
+ JKtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=BiK6ojG15Q48bs8KPm2ciWDK5dida/2NExdceiLW9xs=;
- b=m7Lw1Ds4LT0B5LJ9XBgt81wyZIL/pcoHxwsvFj/atHgxsdBqxV2ta7KUqn6NY322V4
- OuevIWFFekY0ciSkon3EHpIIKigQFbV7C0CUro+d3dpwFqrMzuLr2A5nAW7ly8f+Pvq1
- ZWq8wq1fd5XP7UbXboyh9LgCKKvR9737IQF2EABZH25+Ry7DNBtMqeiVoNIEOla3k6Ww
- l7MY1KHPofgp7YnqJDUJ4eNCngX2KU9Q7s4lP5/v0LR8jbqHqUjVj5lBC+8J0P1Cy1hw
- mwoGn6trtwM+dNf2ospJ9mCEIjtkgz1Ql4LJUp3LvkLmXUAHo3v7ZmMkM5q5st/sWbRw
- oV9g==
-X-Gm-Message-State: AOAM533eWeYJ1PWvOYnhmYwH1QRuAjt1ht2n0xIj9IRBtlo4C0Vg3pd3
- pYWuwxe+srUoN/JvUqZMGjgWAg==
-X-Google-Smtp-Source: ABdhPJy7m2eER2QhlBmQf/mqn9lHvRk+9Xh0PWE4vRD+EmsuXm/j3SyyStuVbvbNR6ut4dFXmid5dg==
-X-Received: by 2002:a1c:66c6:: with SMTP id a189mr9464911wmc.60.1621609094607; 
- Fri, 21 May 2021 07:58:14 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id o8sm2374239wrs.60.2021.05.21.07.58.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 May 2021 07:58:14 -0700 (PDT)
-Date: Fri, 21 May 2021 16:58:12 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Rob Clark <robdclark@gmail.com>
-Message-ID: <YKfKhMIRxBybyYrx@phenom.ffwll.local>
-References: <20210521090959.1663703-1-daniel.vetter@ffwll.ch>
- <CAF6AEGvr_CWDGgKFTNGQTiApbg=kyOn=uBrRM_H3DO8UBq-W5g@mail.gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=RYm2q8UlxbFEyevcAFjmNarmhsddkGFIu0T8r1FdCck=;
+ b=cAUfyHiX8wSVQJBJxVGaLStvMrfWEu/K29MMmpx8GlnZ3cD3VwBeuBQuO+AzbS9r7D
+ rQNbKZZyudhUhLx2dCTUFeFP1PrQ0b7kX9btIj2Pc/85tPfbjJevr8I48qR7Roi+NsNQ
+ b4gIv9yDPsCudJ1lkHdqvYkVgyvp0FuHVtYIJM0ZtgAqs2mCteVmEgYrBQBKEyj9mOWF
+ 6E1Te6iSVSXhMwIHSwitGGqA5xewS/WNj9HjI+spZX1mr2yJFIEUOqL61+TeASzuwu1x
+ vHP3K9051y8mxm/9ksHwgnkFm1o0xR9B9qeYflF89eC1mlwGL0w7uf77bHVDo6Db5QZM
+ qKCw==
+X-Gm-Message-State: AOAM5333rOO2uhTSesEBgxQnhr2kfV8rGXxliQGU4Yjv01tcfCkRz56m
+ BbuXIwzhFU1+X9C8Q9MyMK3h5cBt+wWWCfQFSUU=
+X-Google-Smtp-Source: ABdhPJytIJvOZWC7oQH8/K1lNQPn/h96jaDr9y5XKzz81AIZ6s8SfY9QtqLtNWTqGIG3qOGTyk/E/jCqV6kODPPAwfk=
+X-Received: by 2002:a7b:ce95:: with SMTP id q21mr9838413wmj.49.1621608914380; 
+ Fri, 21 May 2021 07:55:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAF6AEGvr_CWDGgKFTNGQTiApbg=kyOn=uBrRM_H3DO8UBq-W5g@mail.gmail.com>
-X-Operating-System: Linux phenom 5.10.32scarlett+ 
+References: <20210521090959.1663703-1-daniel.vetter@ffwll.ch>
+In-Reply-To: <20210521090959.1663703-1-daniel.vetter@ffwll.ch>
+From: Rob Clark <robdclark@gmail.com>
+Date: Fri, 21 May 2021 07:58:57 -0700
+Message-ID: <CAF6AEGvr_CWDGgKFTNGQTiApbg=kyOn=uBrRM_H3DO8UBq-W5g@mail.gmail.com>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [Mesa-dev] [PATCH 01/11] drm/amdgpu: Comply
  with implicit fencing rules
@@ -78,7 +74,7 @@ List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: Rob Clark <robdclark@chromium.org>, Daniel Stone <daniels@collabora.com>,
- Michel =?iso-8859-1?Q?D=E4nzer?= <michel@daenzer.net>,
+ =?UTF-8?Q?Michel_D=C3=A4nzer?= <michel@daenzer.net>,
  Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
  Kevin Wang <kevin1.wang@amd.com>,
  DRI Development <dri-devel@lists.freedesktop.org>,
@@ -88,7 +84,7 @@ Cc: Rob Clark <robdclark@chromium.org>, Daniel Stone <daniels@collabora.com>,
  Chen Li <chenli@uniontech.com>, ML mesa-dev <mesa-dev@lists.freedesktop.org>,
  Alex Deucher <alexander.deucher@amd.com>,
  Daniel Vetter <daniel.vetter@intel.com>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  Dennis Li <Dennis.Li@amd.com>, Deepak R Varma <mh12gx2825@gmail.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -96,43 +92,30 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Fri, May 21, 2021 at 07:58:57AM -0700, Rob Clark wrote:
-> On Fri, May 21, 2021 at 2:10 AM Daniel Vetter <daniel.vetter@ffwll.ch> wrote:
-> >
-> > - msm is mildly entertaining. It also supports MSM_SUBMIT_NO_IMPLICIT,
-> >   but because it doesn't use the drm/scheduler it handles fences from
-> >   the wrong context with a synchronous dma_fence_wait. See
-> >   submit_fence_sync() leading to msm_gem_sync_object(). Investing into
-> >   a scheduler might be a good idea.
-> 
-> Yeah, drm/scheduler is (along with a lot of other things) on the TODO
-> list.  But this isn't quite as bad as it sounds because userspace uses
-> a u_queue thread to call the submit ioctl rather than blocking the
-> driver.  (It also offloads some other work from the driver thread,
-> like submit merging to reduce # of ioctls.  Coincidentally that
-> arrangement was a step towards preparing userspace for some
-> hypothetical non-ioctl uapi ;-))
+On Fri, May 21, 2021 at 2:10 AM Daniel Vetter <daniel.vetter@ffwll.ch> wrote:
+>
+> - msm is mildly entertaining. It also supports MSM_SUBMIT_NO_IMPLICIT,
+>   but because it doesn't use the drm/scheduler it handles fences from
+>   the wrong context with a synchronous dma_fence_wait. See
+>   submit_fence_sync() leading to msm_gem_sync_object(). Investing into
+>   a scheduler might be a good idea.
 
-You're also holding a pile of locks, which I expect latest with
-multi-engine buffer sharing will be pain. If you push this to the
-scheduler then the locks aren't held. Or maybe I've misread the flow, it's
-become all a bit a blurr after all these drivers :-)
+Yeah, drm/scheduler is (along with a lot of other things) on the TODO
+list.  But this isn't quite as bad as it sounds because userspace uses
+a u_queue thread to call the submit ioctl rather than blocking the
+driver.  (It also offloads some other work from the driver thread,
+like submit merging to reduce # of ioctls.  Coincidentally that
+arrangement was a step towards preparing userspace for some
+hypothetical non-ioctl uapi ;-))
 
-> OTOH it would be good to move blocking until the system can free
-> enough pages to repin bo's out of the ioctl path to better handle some
-> memory pressure corner cases without having to be interruptable over a
-> lot more of the submit path..  Running chrome+android on devices
-> without a lot of memory is fun..
+OTOH it would be good to move blocking until the system can free
+enough pages to repin bo's out of the ioctl path to better handle some
+memory pressure corner cases without having to be interruptable over a
+lot more of the submit path..  Running chrome+android on devices
+without a lot of memory is fun..
 
-Uh that one needs the userspace thread. Or entirely different semantics of
-your ioctl, because you're not allowed to allocate memory once any
-dma_fence is visible. So offloading the entire pinning to a submit thread
-is no-go.
--Daniel
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+BR,
+-R
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
