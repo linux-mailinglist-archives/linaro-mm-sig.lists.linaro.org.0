@@ -2,67 +2,88 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B18038B793
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 20 May 2021 21:28:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E808B38C0AE
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 May 2021 09:24:28 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7538361448
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 20 May 2021 19:28:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 99288616C0
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 May 2021 07:24:26 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 5245D61407; Thu, 20 May 2021 19:28:08 +0000 (UTC)
+	id 6B2476167E; Fri, 21 May 2021 07:24:25 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 558456137F;
-	Thu, 20 May 2021 19:28:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B227E6167E;
+	Fri, 21 May 2021 07:24:22 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id CD8BB61376
- for <linaro-mm-sig@lists.linaro.org>; Thu, 20 May 2021 19:28:04 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 35CDD612A5
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 07:24:21 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id CB4196137F; Thu, 20 May 2021 19:28:04 +0000 (UTC)
-Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com
- [209.85.161.43])
- by lists.linaro.org (Postfix) with ESMTPS id C38E661376
- for <linaro-mm-sig@lists.linaro.org>; Thu, 20 May 2021 19:28:02 +0000 (UTC)
-Received: by mail-oo1-f43.google.com with SMTP id
- i8-20020a4aa1080000b0290201edd785e7so4038886ool.1
- for <linaro-mm-sig@lists.linaro.org>; Thu, 20 May 2021 12:28:02 -0700 (PDT)
+ id 2BDBA6167E; Fri, 21 May 2021 07:24:21 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
+ [209.85.208.49])
+ by lists.linaro.org (Postfix) with ESMTPS id 25FC5612A5
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 07:24:19 +0000 (UTC)
+Received: by mail-ed1-f49.google.com with SMTP id w12so14457396edx.1
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 00:24:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=4k80R92raKX44try8NOlI5SNEciXr8tCWt15U235ZOY=;
- b=u5HMyC2dzOhRwetk6bFz5gxLMOhluu4CAuFx5YJ9V3fbc/xw/CgL5YRqYjhGiyTW5n
- 3AqF3gy2HlXhnwJ0kZfowlu0bDBzz2toiJdGn95DqPqVNTsAq0ZvJ8Q+HfHXnQFAJuEF
- B+gCJPmEySu7ANm9VWs7g6r1aM2vci0dafOoH+ksiVn0CwsVL6/mH8ppdwz8MJ+DT1dH
- cN2WQhb020RIVtBZqgNHNS43F6T9b8ou7Tw2j7gfAgwHfcUZzHUmMxfsECPsBFofyL2r
- nzo8wZzOG+rq6dVItNbWteQlyBTRaS5mpPUPrcawglZWe15fu50Our5mUlnK1SJ8Yxdo
- NrVw==
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-transfer-encoding:content-language;
+ bh=ACvlHFTs+pnWmbLCIR6auAWY0hoVd55RrmqxedgDsDs=;
+ b=bxHCgFMqmRRZJVOOcFX1I1IjyVWQTWwHpYpLarHly5Q+x0Zu1bPlPj3fQtvixHraZu
+ 3rmygYJtKDWONA101oxM8/8uVjKkj4sYEQKCltO3Jrl+9v6FTSGrMdHgMk5bdICy5RQd
+ FZvgadYhhbsOA8XODT1QC5/jfeZiameVlW08fsAZuge17iuDUy7IFIXTTTqXrlDJSTKI
+ aaWWVM+CzcDz1KsizIuH/YstO1U0DmwU5PsCL0ONnGfFzyiyznDViB6u5c6FRoS26Ezu
+ n8CFGe5rigejc9fMDwbwqE31AiZ6t62Y0HU9pEHd4JOyNARlBd68KFA00CE4GGa7sZgy
+ Le+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=4k80R92raKX44try8NOlI5SNEciXr8tCWt15U235ZOY=;
- b=e+fIchguxbJb8CtCxvozJZANh5ht7ONhoflYyz9rZE+/1xDaTUc5w6kNDTr9NGc4H+
- Cqj+MjzS0lEoD9jNsf3Px6BzBVUhW8XhwyUy/GG/tkDy0CuBmLirANarN/kxHkLsMGyZ
- TEgaBLbpGGpSXMjXEiygPuicue9lcDz2AuDyk3SK/1zvAsTNsJuVnBd7HJEokFYI5DQz
- suY8hWdqG51VIRoFQ0BPOEPRacmhBdGDMLOrV2q1R+XKYQIyQXeJryN/3hza/lnwCnWd
- Vf2QQZXG+fKPVbzWKA3UFqQSo/F4OF23+RrR1EgQFyWd8g/Cup6JKG/lGQ8EHeblncTf
- hhUg==
-X-Gm-Message-State: AOAM5334oFe84Gsr7iXLZkjMreBDI7/s77aIGMOcOVr6/sbEaC/+HQIw
- q2xIl7CgUJS92HYW9au9ddGqR92rCgdvGmDI2fw=
-X-Google-Smtp-Source: ABdhPJw/G1SAe+q/1vmFaWI1wZ9doKKFcivmwBNweNkYvrpMqu9DHVkQfhze30Eo9Oia8iZcUi5SWEhoaNXsk7+gfII=
-X-Received: by 2002:a4a:d085:: with SMTP id i5mr4993114oor.61.1621538882348;
- Thu, 20 May 2021 12:28:02 -0700 (PDT)
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-transfer-encoding
+ :content-language;
+ bh=ACvlHFTs+pnWmbLCIR6auAWY0hoVd55RrmqxedgDsDs=;
+ b=hyE0BPjnuH0J6t6BePtzobfgdnmaR7/S9uXpyxerDaek1j/7bldXXeey4IX8bO+Kjc
+ ndjGMNaIYNfk7VTqihLu4n392kRaki3teXfk1xaKZisvineUCBBGgCcIg1sc9uV1l/PY
+ YR+oMjQ+T9CCRz3pRHGmAjHv5Wz8/qz6mVzPHSUmBUI/FIAhhGr5a7hOZdi1siPF9qOK
+ +6Uj6yZJ7A9uh7AnGdxYN6hIswoE8TUOsCS5Li3Btb2ydw+UwqRbrD8hSGSGM/2nvBb4
+ FCufu8vCM/XdOVQ3Lmyh1Fg+O65sIHVjkAM+oKayi6etG5H7Kp6tEX9lcTmp8UjKhbfh
+ nKhg==
+X-Gm-Message-State: AOAM532E04T5iRqUNyAcDzOMBFZSTUC3wNtk7HPgcvLRk6VbOKMZ9Vst
+ fn3bouXJO2TLwE59XsF+ouE=
+X-Google-Smtp-Source: ABdhPJySQmqcU3R5mwOmpRQiinM2Qqi7hzmIWgEVe9tGN8hIqlukh4EU19rBRxauRDWFRgtPN7TDIw==
+X-Received: by 2002:aa7:c54a:: with SMTP id s10mr9430900edr.132.1621581858246; 
+ Fri, 21 May 2021 00:24:18 -0700 (PDT)
+Received: from ?IPv6:2a02:908:1252:fb60:b48f:ff97:fb4c:5b1d?
+ ([2a02:908:1252:fb60:b48f:ff97:fb4c:5b1d])
+ by smtp.gmail.com with ESMTPSA id q16sm3257252edw.87.2021.05.21.00.24.17
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 21 May 2021 00:24:17 -0700 (PDT)
+To: Jason Ekstrand <jason@jlekstrand.net>
+References: <20210517141129.2225-1-christian.koenig@amd.com>
+ <5a3e9500-9d6b-a865-5385-fde43da2bf66@gmail.com>
+ <CAKMK7uF=y44e9-0-4MBj3jRBdCqMaLgKutTMeBWCbySRnPR4KQ@mail.gmail.com>
+ <CAOFGe960UMe4=Xxcoha9R2Y74ma3Pp4Z0DF6PM+SJ2sjq2DBXg@mail.gmail.com>
+ <CAKMK7uGtTT+59hRi3PB1WHPES3YJAPYBvbT74vo9PApNE0i7MQ@mail.gmail.com>
+ <fee06c2d-27fb-1af4-6222-8f277b36c951@gmail.com>
+ <CAKMK7uHLipx_oH-s5PB6pUUZ_JXCyciaY7sDLfK__-2fvSPCKA@mail.gmail.com>
+ <f2eb6751-2f82-9b23-f57e-548de5b729de@gmail.com>
+ <CAKMK7uHdsGjADQ9zwgrYsuhHdxFGkuH--DdOsaqej6OD1AbX-w@mail.gmail.com>
+ <CAOFGe97FDc7Y9APymQQZZMApDXsJkbcS0N5jh+3s-w-Ligipug@mail.gmail.com>
+ <14524566-8854-4bc0-9f70-b7219c9fccfc@daenzer.net>
+ <CAOFGe96VttW2VzAnx13ZXLBGcEDJMehGuOFifcr+pcbEOa-Brw@mail.gmail.com>
+ <6f3e2628-7b39-417c-3bd2-c837c5367458@daenzer.net>
+ <CAKMK7uFMQGth19OjWmeNGTeVFoAqxK2tYXYrvme+NuCSNLxLUQ@mail.gmail.com>
+ <a8d0acd9-6a0e-58bb-1f2d-e85f00ad9677@gmail.com>
+ <CAOFGe96tzhp+=NX8TdPmGpq8L+FrQcOzgPUDdtog4MQ72RJv2w@mail.gmail.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <a1925038-5c3c-0193-1870-27488caa2577@gmail.com>
+Date: Fri, 21 May 2021 09:24:16 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-References: <20210520120248.3464013-1-lee.jones@linaro.org>
- <20210520120248.3464013-35-lee.jones@linaro.org>
-In-Reply-To: <20210520120248.3464013-35-lee.jones@linaro.org>
-From: Alex Deucher <alexdeucher@gmail.com>
-Date: Thu, 20 May 2021 15:27:51 -0400
-Message-ID: <CADnq5_NqMsveaWdJGzGzx4OZ3wkHso=3T+r2RXwYBAbsFSLSOg@mail.gmail.com>
-To: Lee Jones <lee.jones@linaro.org>
+In-Reply-To: <CAOFGe96tzhp+=NX8TdPmGpq8L+FrQcOzgPUDdtog4MQ72RJv2w@mail.gmail.com>
+Content-Language: en-US
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 34/38] drm/amd/amdgpu/amdgpu_vce: Fix a
- few incorrectly named functions
+Subject: Re: [Linaro-mm-sig] [RFC] Add DMA_RESV_USAGE flags
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,77 +96,106 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: David Airlie <airlied@linux.ie>, LKML <linux-kernel@vger.kernel.org>,
- Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- amd-gfx list <amd-gfx@lists.freedesktop.org>,
- Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- linux-media <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: "moderated list:DMA BUFFER SHARING FRAMEWORK"
+ <linaro-mm-sig@lists.linaro.org>,
+ =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Daniel Vetter <daniel@ffwll.ch>
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-QXBwbGllZC4gIFRoYW5rcyEKCk9uIFRodSwgTWF5IDIwLCAyMDIxIGF0IDg6MDQgQU0gTGVlIEpv
-bmVzIDxsZWUuam9uZXNAbGluYXJvLm9yZz4gd3JvdGU6Cj4KPiBGaXhlcyB0aGUgZm9sbG93aW5n
-IFc9MSBrZXJuZWwgYnVpbGQgd2FybmluZyhzKToKPgo+ICBkcml2ZXJzL2dwdS9kcm0vYW1kL2Ft
-ZGdwdS9hbWRncHVfdmNlLmM6OTg6IHdhcm5pbmc6IGV4cGVjdGluZyBwcm90b3R5cGUgZm9yIGFt
-ZGdwdV92Y2VfaW5pdCgpLiBQcm90b3R5cGUgd2FzIGZvciBhbWRncHVfdmNlX3N3X2luaXQoKSBp
-bnN0ZWFkCj4gIGRyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV92Y2UuYzoyMTQ6IHdh
-cm5pbmc6IGV4cGVjdGluZyBwcm90b3R5cGUgZm9yIGFtZGdwdV92Y2VfZmluaSgpLiBQcm90b3R5
-cGUgd2FzIGZvciBhbWRncHVfdmNlX3N3X2ZpbmkoKSBpbnN0ZWFkCj4gIGRyaXZlcnMvZ3B1L2Ry
-bS9hbWQvYW1kZ3B1L2FtZGdwdV92Y2UuYzo1OTA6IHdhcm5pbmc6IGV4cGVjdGluZyBwcm90b3R5
-cGUgZm9yIGFtZGdwdV92Y2VfY3NfdmFsaWRhdGVfYm8oKS4gUHJvdG90eXBlIHdhcyBmb3IgYW1k
-Z3B1X3ZjZV92YWxpZGF0ZV9ibygpIGluc3RlYWQKPiAgZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRn
-cHUvYW1kZ3B1X3ZjZS5jOjcyNDogd2FybmluZzogZXhwZWN0aW5nIHByb3RvdHlwZSBmb3IgYW1k
-Z3B1X3ZjZV9jc19wYXJzZSgpLiBQcm90b3R5cGUgd2FzIGZvciBhbWRncHVfdmNlX3JpbmdfcGFy
-c2VfY3MoKSBpbnN0ZWFkCj4gIGRyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV92Y2Uu
-Yzo5NjA6IHdhcm5pbmc6IGV4cGVjdGluZyBwcm90b3R5cGUgZm9yIGFtZGdwdV92Y2VfY3NfcGFy
-c2Vfdm0oKS4gUHJvdG90eXBlIHdhcyBmb3IgYW1kZ3B1X3ZjZV9yaW5nX3BhcnNlX2NzX3ZtKCkg
-aW5zdGVhZAo+Cj4gQ2M6IEFsZXggRGV1Y2hlciA8YWxleGFuZGVyLmRldWNoZXJAYW1kLmNvbT4K
-PiBDYzogIkNocmlzdGlhbiBLw7ZuaWciIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+Cj4gQ2M6
-IERhdmlkIEFpcmxpZSA8YWlybGllZEBsaW51eC5pZT4KPiBDYzogRGFuaWVsIFZldHRlciA8ZGFu
-aWVsQGZmd2xsLmNoPgo+IENjOiBTdW1pdCBTZW13YWwgPHN1bWl0LnNlbXdhbEBsaW5hcm8ub3Jn
-Pgo+IENjOiBhbWQtZ2Z4QGxpc3RzLmZyZWVkZXNrdG9wLm9yZwo+IENjOiBkcmktZGV2ZWxAbGlz
-dHMuZnJlZWRlc2t0b3Aub3JnCj4gQ2M6IGxpbnV4LW1lZGlhQHZnZXIua2VybmVsLm9yZwo+IENj
-OiBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKPiBTaWduZWQtb2ZmLWJ5OiBMZWUgSm9u
-ZXMgPGxlZS5qb25lc0BsaW5hcm8ub3JnPgo+IC0tLQo+ICBkcml2ZXJzL2dwdS9kcm0vYW1kL2Ft
-ZGdwdS9hbWRncHVfdmNlLmMgfCAxMCArKysrKy0tLS0tCj4gIDEgZmlsZSBjaGFuZ2VkLCA1IGlu
-c2VydGlvbnMoKyksIDUgZGVsZXRpb25zKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUv
-ZHJtL2FtZC9hbWRncHUvYW1kZ3B1X3ZjZS5jIGIvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUv
-YW1kZ3B1X3ZjZS5jCj4gaW5kZXggZWE2YTYyZjY3ZTM4MC4uN2FkODNkYTYxM2VkZCAxMDA2NDQK
-PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfdmNlLmMKPiArKysgYi9k
-cml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfdmNlLmMKPiBAQCAtODcsNyArODcsNyBA
-QCBzdGF0aWMgaW50IGFtZGdwdV92Y2VfZ2V0X2Rlc3Ryb3lfbXNnKHN0cnVjdCBhbWRncHVfcmlu
-ZyAqcmluZywgdWludDMyX3QgaGFuZGxlLAo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgYm9vbCBkaXJlY3QsIHN0cnVjdCBkbWFfZmVuY2UgKipmZW5jZSk7Cj4KPiAgLyoq
-Cj4gLSAqIGFtZGdwdV92Y2VfaW5pdCAtIGFsbG9jYXRlIG1lbW9yeSwgbG9hZCB2Y2UgZmlybXdh
-cmUKPiArICogYW1kZ3B1X3ZjZV9zd19pbml0IC0gYWxsb2NhdGUgbWVtb3J5LCBsb2FkIHZjZSBm
-aXJtd2FyZQo+ICAgKgo+ICAgKiBAYWRldjogYW1kZ3B1X2RldmljZSBwb2ludGVyCj4gICAqIEBz
-aXplOiBzaXplIGZvciB0aGUgbmV3IEJPCj4gQEAgLTIwNCw3ICsyMDQsNyBAQCBpbnQgYW1kZ3B1
-X3ZjZV9zd19pbml0KHN0cnVjdCBhbWRncHVfZGV2aWNlICphZGV2LCB1bnNpZ25lZCBsb25nIHNp
-emUpCj4gIH0KPgo+ICAvKioKPiAtICogYW1kZ3B1X3ZjZV9maW5pIC0gZnJlZSBtZW1vcnkKPiAr
-ICogYW1kZ3B1X3ZjZV9zd19maW5pIC0gZnJlZSBtZW1vcnkKPiAgICoKPiAgICogQGFkZXY6IGFt
-ZGdwdV9kZXZpY2UgcG9pbnRlcgo+ICAgKgo+IEBAIC01NzQsNyArNTc0LDcgQEAgc3RhdGljIGlu
-dCBhbWRncHVfdmNlX2dldF9kZXN0cm95X21zZyhzdHJ1Y3QgYW1kZ3B1X3JpbmcgKnJpbmcsIHVp
-bnQzMl90IGhhbmRsZSwKPiAgfQo+Cj4gIC8qKgo+IC0gKiBhbWRncHVfdmNlX2NzX3ZhbGlkYXRl
-X2JvIC0gbWFrZSBzdXJlIG5vdCB0byBjcm9zcyA0R0IgYm91bmRhcnkKPiArICogYW1kZ3B1X3Zj
-ZV92YWxpZGF0ZV9ibyAtIG1ha2Ugc3VyZSBub3QgdG8gY3Jvc3MgNEdCIGJvdW5kYXJ5Cj4gICAq
-Cj4gICAqIEBwOiBwYXJzZXIgY29udGV4dAo+ICAgKiBAaWJfaWR4OiBpbmRpcmVjdCBidWZmZXIg
-dG8gdXNlCj4gQEAgLTcxNSw3ICs3MTUsNyBAQCBzdGF0aWMgaW50IGFtZGdwdV92Y2VfdmFsaWRh
-dGVfaGFuZGxlKHN0cnVjdCBhbWRncHVfY3NfcGFyc2VyICpwLAo+ICB9Cj4KPiAgLyoqCj4gLSAq
-IGFtZGdwdV92Y2VfY3NfcGFyc2UgLSBwYXJzZSBhbmQgdmFsaWRhdGUgdGhlIGNvbW1hbmQgc3Ry
-ZWFtCj4gKyAqIGFtZGdwdV92Y2VfcmluZ19wYXJzZV9jcyAtIHBhcnNlIGFuZCB2YWxpZGF0ZSB0
-aGUgY29tbWFuZCBzdHJlYW0KPiAgICoKPiAgICogQHA6IHBhcnNlciBjb250ZXh0Cj4gICAqIEBp
-Yl9pZHg6IGluZGlyZWN0IGJ1ZmZlciB0byB1c2UKPiBAQCAtOTUxLDcgKzk1MSw3IEBAIGludCBh
-bWRncHVfdmNlX3JpbmdfcGFyc2VfY3Moc3RydWN0IGFtZGdwdV9jc19wYXJzZXIgKnAsIHVpbnQz
-Ml90IGliX2lkeCkKPiAgfQo+Cj4gIC8qKgo+IC0gKiBhbWRncHVfdmNlX2NzX3BhcnNlX3ZtIC0g
-cGFyc2UgdGhlIGNvbW1hbmQgc3RyZWFtIGluIFZNIG1vZGUKPiArICogYW1kZ3B1X3ZjZV9yaW5n
-X3BhcnNlX2NzX3ZtIC0gcGFyc2UgdGhlIGNvbW1hbmQgc3RyZWFtIGluIFZNIG1vZGUKPiAgICoK
-PiAgICogQHA6IHBhcnNlciBjb250ZXh0Cj4gICAqIEBpYl9pZHg6IGluZGlyZWN0IGJ1ZmZlciB0
-byB1c2UKPiAtLQo+IDIuMzEuMQo+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlz
-dHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9saXN0aW5mby9s
-aW5hcm8tbW0tc2lnCg==
+
+Am 20.05.21 um 19:23 schrieb Jason Ekstrand:
+> [SNIP]
+>>>> I'd argue then that making amdgpu poll semantics match those of other drivers is a pre-requisite for the new ioctl, otherwise it seems unlikely that the ioctl will be widely adopted.
+>>> This seems backwards, because that means useful improvements in all
+>>> other drivers are stalled until amdgpu is fixed.
+>> Well there is nothing to fix in amdgpu, what we need to is to come up
+>> with an DMA-buf implicit syncing model which works for everyone.
+>>
+>> I've pointed this problem out at FOSDEM roughly 6 years ago, before
+>> DMA-buf was even merged upstream and way before amdgpu even existed. And
+>> the response was yeah, maybe we need to look at this as well.
+>>
+>> Over the years I've mentioned now at least 5 times that this isn't going
+>> to work in some situations and came up with different approaches how to
+>> fix it.
+>>
+>> And you still have the nerves to tell me that this isn't a problem and
+>> we should fix amdgpu instead? Sorry, but I'm really running out of ideas
+>> how to explain why this isn't working for everybody.
+> I'm trying really hard to not fuel a flame war here but I tend to lean
+> Daniel's direction on this.  Stepping back from the individual needs
+> of amdgpu and looking at things from the PoV of Linux as a whole, AMD
+> being a special snowflake here is bad.  I think we have two problems:
+> amdgpu doesn't play by the established rules, and the rules don't work
+> well for amdgpu.  We need to solve BOTH problems.  Does that mean we
+> need to smash something into amdgpu to force it into the dma-buf model
+> today?  Maybe not; stuff's working well enough, I guess.  But we can't
+> just rewrite all the rules and break everyone else either.
+
+Totally agree. Key point is I think I really expressed why some of the 
+rules needs some changes and that at least requires an audit of 
+everything currently using the dma_resv object.
+
+>> That amdgpu wants to be special is true, but it is a fundamental problem
+>> that we have designed the implicit sync in DMA-buf only around the needs
+>> of DRM drivers at that time instead of going a step back and saying hey
+>> what would be an approach which works for everyone.
+> How else was it supposed to be designed?  Based on the needs of
+> non-existent future drivers?  That's just not fair.  We (Intel) are
+> being burned by various aspects of dma-buf these days too.  It does no
+> good to blame past developers or our past selves for not knowing the
+> future.  It sucks but it's what we have.  And, to move forward, we
+> need to fix it.  Let's do that.
+
+Yeah, coming up with a design which also works for future needs is 
+always hard.
+
+But what annoys me is that I've noted those problems way before DMA-buf 
+was merged or amdgpu even existed. I could really kick my own ass to not 
+have pushed back on this harder.
+
+> My concern with the flags approach as I'm beginning to digest it is
+> that it's a bit too much of an attempt to rewrite history for my
+> liking.  What do I mean by that?  I mean that any solution we come up
+> with needs ensure that legacy drivers and modern drivers can play
+> nicely together.  Either that or we need to modernize all the users of
+> dma-buf implicit sync.  I really don't like the "as long as AMD+Intel
+> works, we're good" approach.
+
+Seconded. That's why I'm saying that we need to take a step back and 
+look at what would be a good design for drivers in general.
+
+After sleeping a night over it I think what Daniel noted to have 
+something similar to the moving fence of TTM inside the dma_resv object 
+is a really good step into the right direction.
+
+When we combine that with an ability to add fences which should never 
+play with implicit sync and only resource management I think we could 
+solve this.
+
+This essentially untangles resource management from implicit sync and 
+results in the following four categories:
+
+1. A moving fence used by resource management only. Userspace can't in 
+any way mess with that one.
+2. The existing exclusive fence which is set by CS and/or your new IOCTL.
+3. The existing shared fences which can be added by CS.
+4. A new group of fences which don't participate in resource management, 
+but not in implicit sync.
+
+Number 1 requires an audit of all places which currently do CS or page flip.
+
+Number 4 requires an audit of all places which do resource management.
+
+I can tackle those and I'm perfectly aware that it might take some time.
+
+Regards,
+Christian.
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
