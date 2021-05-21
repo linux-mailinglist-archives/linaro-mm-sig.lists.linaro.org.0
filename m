@@ -2,77 +2,65 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D40E38CCEF
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 May 2021 20:08:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CB4C38CD7A
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 May 2021 20:31:40 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BE9EC61A29
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 May 2021 18:08:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5EF6F607E0
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 21 May 2021 18:31:38 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id B1A426189E; Fri, 21 May 2021 18:08:13 +0000 (UTC)
+	id 25C0E61A37; Fri, 21 May 2021 18:31:36 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id ECB71607E0;
-	Fri, 21 May 2021 18:08:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0E54A61876;
+	Fri, 21 May 2021 18:31:34 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 37A0860574
- for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 18:08:10 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 25E71607E0
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 18:31:32 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 35355607E0; Fri, 21 May 2021 18:08:10 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com
- [209.85.218.45])
- by lists.linaro.org (Postfix) with ESMTPS id 2B08760574
- for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 18:08:08 +0000 (UTC)
-Received: by mail-ej1-f45.google.com with SMTP id lg14so31733437ejb.9
- for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 11:08:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=c4sxkXq0hSnbuKanuNWzIU4L193Mti8XvH1mHdvMK7Q=;
- b=bCyVjPryc5TmKTitR0jVcY39JoRb7sP0qgPfRWLRBDXxsvtu/Fa2YPzkzHaOfMj/kf
- j/uUJiOxAIz7qT5HZWZyB3mELi1k6/RP8BOtuCpLW2xenAIZdd4SbMgH1cSmS6HY6mQe
- oX+K6QyJQZhKf0il0fPIRI5pIRicOzvX7X4jmWa31ZDADYKBaqdTySfFGNhtD4w9copm
- qgypnqaCpTN6vVPjyZS8V7ep7Lxb2sKORVFH5PvGy7BBFxgy9VWklDqQr2dPFR9e0iZh
- c243oHRrdDZiHEPOxBn1W23N5Qk1SAUsW7YqdBpUCpmS74CPn52GULRkfZbHdvYgMPVq
- sCBw==
+ id 238CF61876; Fri, 21 May 2021 18:31:32 +0000 (UTC)
+Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com
+ [209.85.210.54])
+ by lists.linaro.org (Postfix) with ESMTPS id 1D9F9607E0
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 18:31:30 +0000 (UTC)
+Received: by mail-ot1-f54.google.com with SMTP id
+ i23-20020a9d68d70000b02902dc19ed4c15so18931125oto.0
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 21 May 2021 11:31:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=ssQbWaPKNXku5OPbuQHoPwspEJ/tPkBoh9sAADSrhpE=;
+ b=Uu9hQaJ8bKy4+fr0LTNS3umKVdn2pBLHZTC89+aOZqisuEDloE2AHdKVFw/L4GscOe
+ 7QcjqpKQBCMOwKXyjfLKRblL5u2LxNv4W3W0bb2NsOkl6qO+W61qzrL2bwCO/GtDdLKF
+ V9Z8g06gg5IAQ1e9Fy1CG3HrP7gBiT27yp15o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=c4sxkXq0hSnbuKanuNWzIU4L193Mti8XvH1mHdvMK7Q=;
- b=OanGazQFQsfObnRiMxPhxPksnRH5cp3mXG6Rz9jlyGONp3tHh/sV1zonrppazoAY3E
- 3KrlfXtk07EW94MzyO9YaxGG9g5wBD8XZWGcWE0ysjNdqEdKZPtAXfyk09dKBw7ZENhI
- jqfbdVlG2JeOwyogys+7A6birZQbZBnUB7oDahHb4FJjxziMq/Yq4jgwJp1MAdN3lhdj
- vYBct3/yqbOUZjayZoMoosYtPcGEXRNYXX12V0V863HCeNZDWi0Q/E8fssVsvbPTsXWC
- P8yXGMRL0uef5lUwpDsluv7gjCEOvGd8KXdqPK4gFB+/E5hzys5+U1KO9PpDejYIofk7
- 377g==
-X-Gm-Message-State: AOAM530S9mhhY/mu/soDuVWL3jx0UapaAF7wV7tLhkQBZmtqaRzQnBCY
- lHOWsuHQR8wMdSVBHLeFLCI=
-X-Google-Smtp-Source: ABdhPJw0mnGs+FTRgEO15fPaN8uOT9yRBc2vOL7A3CMc3y5I9FJODYjlDunANc/h9IkPveTUZs7b8g==
-X-Received: by 2002:a17:906:11d3:: with SMTP id
- o19mr11511488eja.387.1621620487273; 
- Fri, 21 May 2021 11:08:07 -0700 (PDT)
-Received: from ?IPv6:2a02:908:1252:fb60:8496:ee5:88c2:a2c4?
- ([2a02:908:1252:fb60:8496:ee5:88c2:a2c4])
- by smtp.gmail.com with ESMTPSA id n8sm3922455ejl.0.2021.05.21.11.08.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 21 May 2021 11:08:06 -0700 (PDT)
-To: Daniel Vetter <daniel@ffwll.ch>,
- Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=ssQbWaPKNXku5OPbuQHoPwspEJ/tPkBoh9sAADSrhpE=;
+ b=hyqdPNUXMv0/jTKJGpqWiZvk7b7AX+dgDUbnJvkZFydH0Sm2vcHwm7Q+eIgOHUFw7Z
+ kA90VSUywW5ra4PRY9cUu6c7NvtFCoZU5VvXuaYTTbmEb2je1ePohj2ANML8thO3P8NB
+ NnodgvOaBKCiuH00OFljirgad6VRghGf921F0IqG+Ex62vgRaJ+aAUPmh6aHSXK50Gmq
+ OE9z3dxjZ1cp0XxZ/MlCjM6WKTQAtIaI6x44FTq1O9T4bGxF78nCp/nVsvzXOaDvpbob
+ Dka0OBvcVuOScTdkCXkd+oKTLyfoWLaQSTf1HFhYYbRntd7EfoHelA2d2lRpXoioeI5u
+ ntOg==
+X-Gm-Message-State: AOAM532YtV6YfPamAx8vvfJbxzneXFmyR/4Vir5fN08icJKMsk4LNGYh
+ 7stBhbwAJUCmVRiNlIjaPGWQW4sgWgs/zWgAngyWzw==
+X-Google-Smtp-Source: ABdhPJzhfhr27C49nXr2j3YFwIcmfU6rMWfQl0gg9HCxKinGNWcpaTBpO3xe8YnDGQ5ZqRzBbnoGYtfER8u6/HY6jLY=
+X-Received: by 2002:a9d:8ce:: with SMTP id 72mr9332384otf.188.1621621889460;
+ Fri, 21 May 2021 11:31:29 -0700 (PDT)
+MIME-Version: 1.0
 References: <20210521090959.1663703-1-daniel.vetter@ffwll.ch>
  <CAP+8YyEhRwgz2hCri3K7Kv1OusVa_LGEuKZqQEx5jv+NiDKZrA@mail.gmail.com>
  <YKfFqrlLrikGMn4K@phenom.ffwll.local>
  <CAP+8YyG0o58dQt_tvnJ2ESbeqo02xxvFdifpMwnhz2VYNk8HUw@mail.gmail.com>
  <YKfOymXrB7O4cYVb@phenom.ffwll.local>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <31467363-e936-879b-8b0d-5a2a92644221@gmail.com>
-Date: Fri, 21 May 2021 20:08:05 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
-MIME-Version: 1.0
-In-Reply-To: <YKfOymXrB7O4cYVb@phenom.ffwll.local>
-Content-Language: en-US
+ <31467363-e936-879b-8b0d-5a2a92644221@gmail.com>
+In-Reply-To: <31467363-e936-879b-8b0d-5a2a92644221@gmail.com>
+From: Daniel Vetter <daniel@ffwll.ch>
+Date: Fri, 21 May 2021 20:31:18 +0200
+Message-ID: <CAKMK7uFswfc96hS40uc0Lug=doYAcf-yC-eu96iWqNJnM65MJQ@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [Mesa-dev] [PATCH 01/11] drm/amdgpu: Comply
  with implicit fencing rules
@@ -89,107 +77,122 @@ List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: Rob Clark <robdclark@chromium.org>, Daniel Stone <daniels@collabora.com>,
- =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>,
+ =?UTF-8?Q?Michel_D=C3=A4nzer?= <michel@daenzer.net>,
  Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
  Kevin Wang <kevin1.wang@amd.com>,
  DRI Development <dri-devel@lists.freedesktop.org>,
  "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
  Luben Tuikov <luben.tuikov@amd.com>,
  "Kristian H . Kristensen" <hoegsberg@google.com>,
- Chen Li <chenli@uniontech.com>, mesa-dev <mesa-dev@lists.freedesktop.org>,
+ Chen Li <chenli@uniontech.com>, Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>,
  Alex Deucher <alexander.deucher@amd.com>,
  Daniel Vetter <daniel.vetter@intel.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ mesa-dev <mesa-dev@lists.freedesktop.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  Dennis Li <Dennis.Li@amd.com>, Deepak R Varma <mh12gx2825@gmail.com>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Am 21.05.21 um 17:16 schrieb Daniel Vetter:
-> On Fri, May 21, 2021 at 05:00:46PM +0200, Bas Nieuwenhuizen wrote:
->> On Fri, May 21, 2021 at 4:37 PM Daniel Vetter <daniel@ffwll.ch> wrote:
->>> On Fri, May 21, 2021 at 11:46:23AM +0200, Bas Nieuwenhuizen wrote:
->>>> On Fri, May 21, 2021 at 11:10 AM Daniel Vetter <daniel.vetter@ffwll.ch> wrote:
->>>>> ---
->>>>>   drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c | 4 ++--
->>>>>   1 file changed, 2 insertions(+), 2 deletions(-)
->>>>>
->>>>> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c
->>>>> index 88a24a0b5691..cc8426e1e8a8 100644
->>>>> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c
->>>>> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c
->>>>> @@ -617,8 +617,8 @@ static int amdgpu_cs_parser_bos(struct amdgpu_cs_parser *p,
->>>>>          amdgpu_bo_list_for_each_entry(e, p->bo_list) {
->>>>>                  struct amdgpu_bo *bo = ttm_to_amdgpu_bo(e->tv.bo);
->>>>>
->>>>> -               /* Make sure we use the exclusive slot for shared BOs */
->>>>> -               if (bo->prime_shared_count)
->>>>> +               /* Make sure we use the exclusive slot for all potentially shared BOs */
->>>>> +               if (!(bo->flags & AMDGPU_GEM_CREATE_VM_ALWAYS_VALID))
->>>>>                          e->tv.num_shared = 0;
->>>> I think it also makes sense to skip this with
->>>> AMDGPU_GEM_CREATE_EXPLICIT_SYNC? It can be shared but I don't think
->>>> anyone expects implicit sync to happen with those.
->>> Ah yes, I missed this entirely. So the "no implicit flag" is already
->>> there, and the _only_ thing that's missing really is a way to fish out the
->>> implicit fences, and set them.
->>>
->>> https://lore.kernel.org/dri-devel/20210520190007.534046-1-jason@jlekstrand.net/
->>>
->>> So I think all that's really needed in radv is not setting
->>> RADEON_FLAG_IMPLICIT_SYNC for winsys buffers when Jason's dma-buf ioctl
->>> are present (means you need to do some import/export and keep the fd
->>> around for winsys buffers, but shouldn't be too bad), and then control the
->>> implicit fences entirely explicitly like vk expects.
->> That is the part I'm less sure about. This is a BO wide flag so we are
->> also disabling implicit sync in the compositor. If the compositor does
->> only do read stuff that is ok, as the inserted exclusive fence will
->> work for that. But as I learned recently the app provided buffer may
->> end up being written to by the X server which open a whole can of
->> potential problems if implicit sync gets disabled between Xserver
->> operations on the app provided buffer. Hence setting that on the WSI
->> buffer is a whole new can of potential problems and hence I've said a
->> submission based flag would be preferred.
->>
->> I can certainly try it out though.
-> Hm yeah that's the wrong flag. We need a flag on the drm_file which the
-> explicit userspace sets. And which is valid only for itself.
->
-> There's a nice flags field when creating a ctx, but it's not validated and
-> there's already a comment that we have to filter out garbage priority, so
-> that's not use. I'll whip up something entirely untested just as a draft.
-
-We could provide an IOCTL for the BO to change the flag.
-
-But could we first figure out the semantics we want to use here?
-
-Cause I'm pretty sure we don't actually need those changes at all and as 
-said before I'm certainly NAKing things which break existing use cases.
-
-Regards,
-Christian.
-
-> -Daniel
->
->
->
->>> Are you bored enough to type this up for radv? I'll give Jason's kernel
->>> stuff another review meanwhile.
->>> -Daniel
->>>
->>>>>                  e->bo_va = amdgpu_vm_bo_find(vm, bo);
->>>>>          }
->>>>> --
->>>>> 2.31.0
->>>>>
->>> --
->>> Daniel Vetter
->>> Software Engineer, Intel Corporation
->>> http://blog.ffwll.ch
-
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+T24gRnJpLCBNYXkgMjEsIDIwMjEgYXQgODowOCBQTSBDaHJpc3RpYW4gS8O2bmlnCjxja29lbmln
+LmxlaWNodHp1bWVya2VuQGdtYWlsLmNvbT4gd3JvdGU6Cj4KPiBBbSAyMS4wNS4yMSB1bSAxNzox
+NiBzY2hyaWViIERhbmllbCBWZXR0ZXI6Cj4gPiBPbiBGcmksIE1heSAyMSwgMjAyMSBhdCAwNTow
+MDo0NlBNICswMjAwLCBCYXMgTmlldXdlbmh1aXplbiB3cm90ZToKPiA+PiBPbiBGcmksIE1heSAy
+MSwgMjAyMSBhdCA0OjM3IFBNIERhbmllbCBWZXR0ZXIgPGRhbmllbEBmZndsbC5jaD4gd3JvdGU6
+Cj4gPj4+IE9uIEZyaSwgTWF5IDIxLCAyMDIxIGF0IDExOjQ2OjIzQU0gKzAyMDAsIEJhcyBOaWV1
+d2VuaHVpemVuIHdyb3RlOgo+ID4+Pj4gT24gRnJpLCBNYXkgMjEsIDIwMjEgYXQgMTE6MTAgQU0g
+RGFuaWVsIFZldHRlciA8ZGFuaWVsLnZldHRlckBmZndsbC5jaD4gd3JvdGU6Cj4gPj4+Pj4gLS0t
+Cj4gPj4+Pj4gICBkcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfY3MuYyB8IDQgKyst
+LQo+ID4+Pj4+ICAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMo
+LSkKPiA+Pj4+Pgo+ID4+Pj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdw
+dS9hbWRncHVfY3MuYyBiL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9jcy5jCj4g
+Pj4+Pj4gaW5kZXggODhhMjRhMGI1NjkxLi5jYzg0MjZlMWU4YTggMTAwNjQ0Cj4gPj4+Pj4gLS0t
+IGEvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2NzLmMKPiA+Pj4+PiArKysgYi9k
+cml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfY3MuYwo+ID4+Pj4+IEBAIC02MTcsOCAr
+NjE3LDggQEAgc3RhdGljIGludCBhbWRncHVfY3NfcGFyc2VyX2JvcyhzdHJ1Y3QgYW1kZ3B1X2Nz
+X3BhcnNlciAqcCwKPiA+Pj4+PiAgICAgICAgICBhbWRncHVfYm9fbGlzdF9mb3JfZWFjaF9lbnRy
+eShlLCBwLT5ib19saXN0KSB7Cj4gPj4+Pj4gICAgICAgICAgICAgICAgICBzdHJ1Y3QgYW1kZ3B1
+X2JvICpibyA9IHR0bV90b19hbWRncHVfYm8oZS0+dHYuYm8pOwo+ID4+Pj4+Cj4gPj4+Pj4gLSAg
+ICAgICAgICAgICAgIC8qIE1ha2Ugc3VyZSB3ZSB1c2UgdGhlIGV4Y2x1c2l2ZSBzbG90IGZvciBz
+aGFyZWQgQk9zICovCj4gPj4+Pj4gLSAgICAgICAgICAgICAgIGlmIChiby0+cHJpbWVfc2hhcmVk
+X2NvdW50KQo+ID4+Pj4+ICsgICAgICAgICAgICAgICAvKiBNYWtlIHN1cmUgd2UgdXNlIHRoZSBl
+eGNsdXNpdmUgc2xvdCBmb3IgYWxsIHBvdGVudGlhbGx5IHNoYXJlZCBCT3MgKi8KPiA+Pj4+PiAr
+ICAgICAgICAgICAgICAgaWYgKCEoYm8tPmZsYWdzICYgQU1ER1BVX0dFTV9DUkVBVEVfVk1fQUxX
+QVlTX1ZBTElEKSkKPiA+Pj4+PiAgICAgICAgICAgICAgICAgICAgICAgICAgZS0+dHYubnVtX3No
+YXJlZCA9IDA7Cj4gPj4+PiBJIHRoaW5rIGl0IGFsc28gbWFrZXMgc2Vuc2UgdG8gc2tpcCB0aGlz
+IHdpdGgKPiA+Pj4+IEFNREdQVV9HRU1fQ1JFQVRFX0VYUExJQ0lUX1NZTkM/IEl0IGNhbiBiZSBz
+aGFyZWQgYnV0IEkgZG9uJ3QgdGhpbmsKPiA+Pj4+IGFueW9uZSBleHBlY3RzIGltcGxpY2l0IHN5
+bmMgdG8gaGFwcGVuIHdpdGggdGhvc2UuCj4gPj4+IEFoIHllcywgSSBtaXNzZWQgdGhpcyBlbnRp
+cmVseS4gU28gdGhlICJubyBpbXBsaWNpdCBmbGFnIiBpcyBhbHJlYWR5Cj4gPj4+IHRoZXJlLCBh
+bmQgdGhlIF9vbmx5XyB0aGluZyB0aGF0J3MgbWlzc2luZyByZWFsbHkgaXMgYSB3YXkgdG8gZmlz
+aCBvdXQgdGhlCj4gPj4+IGltcGxpY2l0IGZlbmNlcywgYW5kIHNldCB0aGVtLgo+ID4+Pgo+ID4+
+PiBodHRwczovL2xvcmUua2VybmVsLm9yZy9kcmktZGV2ZWwvMjAyMTA1MjAxOTAwMDcuNTM0MDQ2
+LTEtamFzb25Aamxla3N0cmFuZC5uZXQvCj4gPj4+Cj4gPj4+IFNvIEkgdGhpbmsgYWxsIHRoYXQn
+cyByZWFsbHkgbmVlZGVkIGluIHJhZHYgaXMgbm90IHNldHRpbmcKPiA+Pj4gUkFERU9OX0ZMQUdf
+SU1QTElDSVRfU1lOQyBmb3Igd2luc3lzIGJ1ZmZlcnMgd2hlbiBKYXNvbidzIGRtYS1idWYgaW9j
+dGwKPiA+Pj4gYXJlIHByZXNlbnQgKG1lYW5zIHlvdSBuZWVkIHRvIGRvIHNvbWUgaW1wb3J0L2V4
+cG9ydCBhbmQga2VlcCB0aGUgZmQKPiA+Pj4gYXJvdW5kIGZvciB3aW5zeXMgYnVmZmVycywgYnV0
+IHNob3VsZG4ndCBiZSB0b28gYmFkKSwgYW5kIHRoZW4gY29udHJvbCB0aGUKPiA+Pj4gaW1wbGlj
+aXQgZmVuY2VzIGVudGlyZWx5IGV4cGxpY2l0bHkgbGlrZSB2ayBleHBlY3RzLgo+ID4+IFRoYXQg
+aXMgdGhlIHBhcnQgSSdtIGxlc3Mgc3VyZSBhYm91dC4gVGhpcyBpcyBhIEJPIHdpZGUgZmxhZyBz
+byB3ZSBhcmUKPiA+PiBhbHNvIGRpc2FibGluZyBpbXBsaWNpdCBzeW5jIGluIHRoZSBjb21wb3Np
+dG9yLiBJZiB0aGUgY29tcG9zaXRvciBkb2VzCj4gPj4gb25seSBkbyByZWFkIHN0dWZmIHRoYXQg
+aXMgb2ssIGFzIHRoZSBpbnNlcnRlZCBleGNsdXNpdmUgZmVuY2Ugd2lsbAo+ID4+IHdvcmsgZm9y
+IHRoYXQuIEJ1dCBhcyBJIGxlYXJuZWQgcmVjZW50bHkgdGhlIGFwcCBwcm92aWRlZCBidWZmZXIg
+bWF5Cj4gPj4gZW5kIHVwIGJlaW5nIHdyaXR0ZW4gdG8gYnkgdGhlIFggc2VydmVyIHdoaWNoIG9w
+ZW4gYSB3aG9sZSBjYW4gb2YKPiA+PiBwb3RlbnRpYWwgcHJvYmxlbXMgaWYgaW1wbGljaXQgc3lu
+YyBnZXRzIGRpc2FibGVkIGJldHdlZW4gWHNlcnZlcgo+ID4+IG9wZXJhdGlvbnMgb24gdGhlIGFw
+cCBwcm92aWRlZCBidWZmZXIuIEhlbmNlIHNldHRpbmcgdGhhdCBvbiB0aGUgV1NJCj4gPj4gYnVm
+ZmVyIGlzIGEgd2hvbGUgbmV3IGNhbiBvZiBwb3RlbnRpYWwgcHJvYmxlbXMgYW5kIGhlbmNlIEkn
+dmUgc2FpZCBhCj4gPj4gc3VibWlzc2lvbiBiYXNlZCBmbGFnIHdvdWxkIGJlIHByZWZlcnJlZC4K
+PiA+Pgo+ID4+IEkgY2FuIGNlcnRhaW5seSB0cnkgaXQgb3V0IHRob3VnaC4KPiA+IEhtIHllYWgg
+dGhhdCdzIHRoZSB3cm9uZyBmbGFnLiBXZSBuZWVkIGEgZmxhZyBvbiB0aGUgZHJtX2ZpbGUgd2hp
+Y2ggdGhlCj4gPiBleHBsaWNpdCB1c2Vyc3BhY2Ugc2V0cy4gQW5kIHdoaWNoIGlzIHZhbGlkIG9u
+bHkgZm9yIGl0c2VsZi4KPiA+Cj4gPiBUaGVyZSdzIGEgbmljZSBmbGFncyBmaWVsZCB3aGVuIGNy
+ZWF0aW5nIGEgY3R4LCBidXQgaXQncyBub3QgdmFsaWRhdGVkIGFuZAo+ID4gdGhlcmUncyBhbHJl
+YWR5IGEgY29tbWVudCB0aGF0IHdlIGhhdmUgdG8gZmlsdGVyIG91dCBnYXJiYWdlIHByaW9yaXR5
+LCBzbwo+ID4gdGhhdCdzIG5vdCB1c2UuIEknbGwgd2hpcCB1cCBzb21ldGhpbmcgZW50aXJlbHkg
+dW50ZXN0ZWQganVzdCBhcyBhIGRyYWZ0Lgo+Cj4gV2UgY291bGQgcHJvdmlkZSBhbiBJT0NUTCBm
+b3IgdGhlIEJPIHRvIGNoYW5nZSB0aGUgZmxhZy4KClRoYXQncyBub3QgdGhlIHNlbWFudGljcyB3
+ZSBuZWVkLgoKPiBCdXQgY291bGQgd2UgZmlyc3QgZmlndXJlIG91dCB0aGUgc2VtYW50aWNzIHdl
+IHdhbnQgdG8gdXNlIGhlcmU/Cj4KPiBDYXVzZSBJJ20gcHJldHR5IHN1cmUgd2UgZG9uJ3QgYWN0
+dWFsbHkgbmVlZCB0aG9zZSBjaGFuZ2VzIGF0IGFsbCBhbmQgYXMKPiBzYWlkIGJlZm9yZSBJJ20g
+Y2VydGFpbmx5IE5BS2luZyB0aGluZ3Mgd2hpY2ggYnJlYWsgZXhpc3RpbmcgdXNlIGNhc2VzLgoK
+UGxlYXNlIHJlYWQgaG93IG90aGVyIGRyaXZlcnMgZG8gdGhpcyBhbmQgYXQgbGVhc3QgX3RyeV8g
+dG8gdW5kZXJzdGFuZAppdC4gSSdtIHJlYWxseSBsb29zaW5nIG15IHBhdGllbmNlIGhlcmUgd2l0
+aCB5b3UgTkFLaW5nIHBhdGNoZXMgeW91J3JlCm5vdCBldmVuIHVuZGVyc3RhbmRpbmcgKG9yIGRp
+ZCB5b3UgYWN0dWFsbHkgcmVhZCBhbmQgZnVsbHkgdW5kZXJzdGFuZAp0aGUgZW50aXJlIHN0b3J5
+IEkgdHlwZWQgdXAgaGVyZSwgYW5kIHlvdXIgTkFLIGlzIG9uIHRoZSBlbnRpcmUKdGhpbmc/KS4g
+VGhlcmUncyBub3QgbXVjaCB1c2VmdWwgY29udmVyc2F0aW9uIHRvIGJlIGhhZCB3aXRoIHRoYXQK
+YXBwcm9hY2guIEFuZCB3aXRoIGRyaXZlcnMgSSBtZWFuIGtlcm5lbCArIHVzZXJzcGFjZSBoZXJl
+LgoKVGhhdCdzIHRoZSBvdGhlciBmcnVzdHJhdGlvbiBwYXJ0OiBZb3UncmUgdHJ5aW5nIHRvIGZp
+eCB0aGlzIHB1cmVseSBpbgp0aGUga2VybmVsLiBUaGlzIGlzIGV4YWN0bHkgb25lIG9mIHRoZXNl
+IGlzc3VlcyB3aHkgd2UgcmVxdWlyZSBvcGVuCnNvdXJjZSB1c2Vyc3BhY2UsIHNvIHRoYXQgd2Ug
+Y2FuIGZpeCB0aGUgaXNzdWVzIGNvcnJlY3RseSBhY3Jvc3MgdGhlCmVudGlyZSBzdGFjay4gQW5k
+IG1lYW53aGlsZSB5b3UncmUgc3RlYWRmYXN0aWx5IHJlZnVzaW5nIHRvIGV2ZW4gbG9vawphdCB0
+aGF0IHRoZSB1c2Vyc3BhY2Ugc2lkZSBvZiB0aGUgcGljdHVyZS4KCkFsc28gSSB0aG91Z2h0IHRo
+cm91Z2ggeW91ciB0bGIgaXNzdWUsIHdoeSBhcmUgeW91IGV2ZW4gcHV0dGluZyB0aGVzZQp0bGIg
+Zmx1c2ggZmVuY2VzIGludG8gdGhlIHNoYXJkIGRtYV9yZXN2IHNsb3RzPyBJZiB5b3Ugc3RvcmUg
+dGhlbQpzb21ld2hlcmUgZWxzZSBpbiB0aGUgYW1kZ3B1IHByaXZhdGUgcGFydCwgdGhlIG92ZXJz
+eW5jIGlzc3VlcyBnb2VzCmF3YXkKLSBpbiB5b3VyIHR0bSBibyBtb3ZlIGNhbGxiYWNrLCB5b3Ug
+Y2FuIGp1c3QgbWFrZSB5b3VyIGJvIGNvcHkgam9iCmRlcGVuZCBvbiB0aGVtIHRvbyAoeW91IGhh
+dmUgdG8gYW55d2F5KQotIGV2ZW4gZm9yIHAycCB0aGVyZSdzIG5vdCBhbiBpc3N1ZSBoZXJlLCBi
+ZWNhdXNlIHlvdSBoYXZlIHRoZQotPm1vdmVfbm90aWZ5IGNhbGxiYWNrLCBhbmQgY2FuIHRoZW4g
+bGlmdCB0aGUgdGxiIGZsdXNoIGZlbmNlcyBmcm9tCnlvdXIgcHJpdmF0ZSBwbGFjZSB0byB0aGUg
+c2hhcmVkIHNsb3RzIHNvIHRoZSBleHBvcnRlciBjYW4gc2VlIHRoZW0uCgpUaGUga2VybmVsIG1v
+dmUgZmVuY2VzIG90b2ggYXJlIGEgYml0IG1vcmUgbmFzdHkgdG8gd3JpbmcgdGhyb3VnaCB0aGUK
+cDJwIGRtYS1idWYgaW50ZXJmYWNlLiBUaGF0IG9uZSBwcm9iYWJseSBuZWVkcyBzb21ldGhpbmcg
+bmV3LgotRGFuaWVsCgo+Cj4gUmVnYXJkcywKPiBDaHJpc3RpYW4uCj4KPiA+IC1EYW5pZWwKPiA+
+Cj4gPgo+ID4KPiA+Pj4gQXJlIHlvdSBib3JlZCBlbm91Z2ggdG8gdHlwZSB0aGlzIHVwIGZvciBy
+YWR2PyBJJ2xsIGdpdmUgSmFzb24ncyBrZXJuZWwKPiA+Pj4gc3R1ZmYgYW5vdGhlciByZXZpZXcg
+bWVhbndoaWxlLgo+ID4+PiAtRGFuaWVsCj4gPj4+Cj4gPj4+Pj4gICAgICAgICAgICAgICAgICBl
+LT5ib192YSA9IGFtZGdwdV92bV9ib19maW5kKHZtLCBibyk7Cj4gPj4+Pj4gICAgICAgICAgfQo+
+ID4+Pj4+IC0tCj4gPj4+Pj4gMi4zMS4wCj4gPj4+Pj4KPiA+Pj4gLS0KPiA+Pj4gRGFuaWVsIFZl
+dHRlcgo+ID4+PiBTb2Z0d2FyZSBFbmdpbmVlciwgSW50ZWwgQ29ycG9yYXRpb24KPiA+Pj4gaHR0
+cDovL2Jsb2cuZmZ3bGwuY2gKPgoKCi0tIApEYW5pZWwgVmV0dGVyClNvZnR3YXJlIEVuZ2luZWVy
+LCBJbnRlbCBDb3Jwb3JhdGlvbgpodHRwOi8vYmxvZy5mZndsbC5jaApfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlz
+dApMaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3Jn
+L21haWxtYW4vbGlzdGluZm8vbGluYXJvLW1tLXNpZwo=
