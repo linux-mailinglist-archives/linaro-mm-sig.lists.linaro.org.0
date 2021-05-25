@@ -2,55 +2,43 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38E3B391A07
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 16:21:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA499391A00
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 16:21:42 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3EA506144C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 14:21:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 07DB26145F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 14:21:42 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 2DCC6613E6; Wed, 26 May 2021 14:21:06 +0000 (UTC)
+	id E402A61455; Wed, 26 May 2021 14:21:08 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DCE2461615;
-	Wed, 26 May 2021 14:21:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 954C66146A;
+	Wed, 26 May 2021 14:21:04 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 46F926140A
- for <linaro-mm-sig@lists.linaro.org>; Tue, 25 May 2021 08:15:46 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 235486088F
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 25 May 2021 10:40:48 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 42D1561419; Tue, 25 May 2021 08:15:46 +0000 (UTC)
-Received: from szxga07-in.huawei.com (szxga07-in.huawei.com [45.249.212.35])
- by lists.linaro.org (Postfix) with ESMTPS id 04EA86140A
- for <linaro-mm-sig@lists.linaro.org>; Tue, 25 May 2021 08:15:43 +0000 (UTC)
-Received: from dggems705-chm.china.huawei.com (unknown [172.30.72.58])
- by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4Fq6Jd56pgzBwRf;
- Tue, 25 May 2021 16:12:49 +0800 (CST)
-Received: from dggpeml500020.china.huawei.com (7.185.36.88) by
- dggems705-chm.china.huawei.com (10.3.19.182) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.2; Tue, 25 May 2021 16:15:41 +0800
-Received: from huawei.com (10.175.127.227) by dggpeml500020.china.huawei.com
- (7.185.36.88) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2176.2; Tue, 25 May
- 2021 16:15:40 +0800
-From: Baokun Li <libaokun1@huawei.com>
-To: <bskeggs@redhat.com>, <airlied@linux.ie>, <daniel@ffwll.ch>,
- <sumit.semwal@linaro.org>, <christian.koenig@amd.com>,
- <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
- <linux-kernel@vger.kernel.org>, <linux-media@vger.kernel.org>,
- <linaro-mm-sig@lists.linaro.org>
-Date: Tue, 25 May 2021 16:25:11 +0800
-Message-ID: <20210525082511.580068-1-libaokun1@huawei.com>
-X-Mailer: git-send-email 2.25.4
-MIME-Version: 1.0
-X-Originating-IP: [10.175.127.227]
-X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
- dggpeml500020.china.huawei.com (7.185.36.88)
-X-CFilter-Loop: Reflected
+ id 20FF7610D0; Tue, 25 May 2021 10:40:48 +0000 (UTC)
+Received: from out30-132.freemail.mail.aliyun.com
+ (out30-132.freemail.mail.aliyun.com [115.124.30.132])
+ by lists.linaro.org (Postfix) with ESMTPS id A0F316088F
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 25 May 2021 10:40:45 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R881e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04423;
+ MF=jiapeng.chong@linux.alibaba.com; NM=1; PH=DS; RN=12; SR=0;
+ TI=SMTPD_---0Ua47xFf_1621939218; 
+Received: from
+ j63c13417.sqa.eu95.tbsite.net(mailfrom:jiapeng.chong@linux.alibaba.com
+ fp:SMTPD_---0Ua47xFf_1621939218) by smtp.aliyun-inc.com(127.0.0.1);
+ Tue, 25 May 2021 18:40:42 +0800
+From: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
+To: alexander.deucher@amd.com
+Date: Tue, 25 May 2021 18:40:14 +0800
+Message-Id: <1621939214-57004-1-git-send-email-jiapeng.chong@linux.alibaba.com>
+X-Mailer: git-send-email 1.8.3.1
 X-Virus-Scanned: ClamAV using ClamSMTP
 X-Mailman-Approved-At: Wed, 26 May 2021 14:18:46 +0000
-Subject: [Linaro-mm-sig] [PATCH -next] drm/nouveau: Remove set but not used
- variable 'dev'
+Subject: [Linaro-mm-sig] [PATCH v2] amdgpu: remove unreachable code
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -63,43 +51,52 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: yuehaibing@huawei.com, libaokun1@huawei.com, weiyongjun1@huawei.com,
- yukuai3@huawei.com, yangjihong1@huawei.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>, airlied@linux.ie,
+ Xinhui.Pan@amd.com, linux-kernel@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+ dri-devel@lists.freedesktop.org, daniel@ffwll.ch, christian.koenig@amd.com,
+ linux-media@vger.kernel.org
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Rml4ZXMgZ2NjICctV3VudXNlZC1idXQtc2V0LXZhcmlhYmxlJyB3YXJuaW5nOgoKZHJpdmVycy9n
-cHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jOiBJbiBmdW5jdGlvbiAnbm91dmVhdV90dG1fdHRf
-cG9wdWxhdGUnOgpkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmM6MTI1ODoxNzog
-d2FybmluZzoKIHZhcmlhYmxlIOKAmGRlduKAmSBzZXQgYnV0IG5vdCB1c2VkIFstV3VudXNlZC1i
-dXQtc2V0LXZhcmlhYmxlXQoKZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jOiBJ
-biBmdW5jdGlvbiAnbm91dmVhdV90dG1fdHRfdW5wb3B1bGF0ZSc6CmRyaXZlcnMvZ3B1L2RybS9u
-b3V2ZWF1L25vdXZlYXVfYm8uYzoxMjgxOjE3OiB3YXJuaW5nOgogdmFyaWFibGUg4oCYZGV24oCZ
-IHNldCBidXQgbm90IHVzZWQgWy1XdW51c2VkLWJ1dC1zZXQtdmFyaWFibGVdCgpJdCBuZXZlciB1
-c2VkIHNpbmNlIGludHJvZHVjdGlvbi4KClNpZ25lZC1vZmYtYnk6IEJhb2t1biBMaSA8bGliYW9r
-dW4xQGh1YXdlaS5jb20+Ci0tLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5j
-IHwgNCAtLS0tCiAxIGZpbGUgY2hhbmdlZCwgNCBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9k
-cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91
-dmVhdS9ub3V2ZWF1X2JvLmMKaW5kZXggN2EyNjI0YzBiYTRjLi41MWY5YTJlNjUzMmUgMTAwNjQ0
-Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYm8uYworKysgYi9kcml2ZXJz
-L2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMKQEAgLTEyNTQsNyArMTI1NCw2IEBAIG5vdXZl
-YXVfdHRtX3R0X3BvcHVsYXRlKHN0cnVjdCB0dG1fZGV2aWNlICpiZGV2LAogewogCXN0cnVjdCB0
-dG1fdHQgKnR0bV9kbWEgPSAodm9pZCAqKXR0bTsKIAlzdHJ1Y3Qgbm91dmVhdV9kcm0gKmRybTsK
-LQlzdHJ1Y3QgZGV2aWNlICpkZXY7CiAJYm9vbCBzbGF2ZSA9ICEhKHR0bS0+cGFnZV9mbGFncyAm
-IFRUTV9QQUdFX0ZMQUdfU0cpOwogCiAJaWYgKHR0bV90dF9pc19wb3B1bGF0ZWQodHRtKSkKQEAg
-LTEyNjcsNyArMTI2Niw2IEBAIG5vdXZlYXVfdHRtX3R0X3BvcHVsYXRlKHN0cnVjdCB0dG1fZGV2
-aWNlICpiZGV2LAogCX0KIAogCWRybSA9IG5vdXZlYXVfYmRldihiZGV2KTsKLQlkZXYgPSBkcm0t
-PmRldi0+ZGV2OwogCiAJcmV0dXJuIHR0bV9wb29sX2FsbG9jKCZkcm0tPnR0bS5iZGV2LnBvb2ws
-IHR0bSwgY3R4KTsKIH0KQEAgLTEyNzcsMTQgKzEyNzUsMTIgQEAgbm91dmVhdV90dG1fdHRfdW5w
-b3B1bGF0ZShzdHJ1Y3QgdHRtX2RldmljZSAqYmRldiwKIAkJCSAgc3RydWN0IHR0bV90dCAqdHRt
-KQogewogCXN0cnVjdCBub3V2ZWF1X2RybSAqZHJtOwotCXN0cnVjdCBkZXZpY2UgKmRldjsKIAli
-b29sIHNsYXZlID0gISEodHRtLT5wYWdlX2ZsYWdzICYgVFRNX1BBR0VfRkxBR19TRyk7CiAKIAlp
-ZiAoc2xhdmUpCiAJCXJldHVybjsKIAogCWRybSA9IG5vdXZlYXVfYmRldihiZGV2KTsKLQlkZXYg
-PSBkcm0tPmRldi0+ZGV2OwogCiAJcmV0dXJuIHR0bV9wb29sX2ZyZWUoJmRybS0+dHRtLmJkZXYu
-cG9vbCwgdHRtKTsKIH0KLS0gCjIuMjUuNAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNp
-Z0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL2xpbmFyby1tbS1zaWcK
+In the function amdgpu_uvd_cs_msg(), every branch in the switch
+statement will have a return, so the code below the switch statement
+will not be executed.
+
+Eliminate the follow smatch warning:
+
+drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c:845 amdgpu_uvd_cs_msg() warn:
+ignoring unreachable code.
+
+Reported-by: Abaci Robot <abaci@linux.alibaba.com>
+Signed-off-by: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
+---
+Changes in v2:
+  -For the follow advice: https://lore.kernel.org/patchwork/patch/1435074/
+
+ drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c
+index 82f0542..b32ed85 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c
+@@ -840,7 +840,6 @@ static int amdgpu_uvd_cs_msg(struct amdgpu_uvd_cs_ctx *ctx,
+ 
+ 	default:
+ 		DRM_ERROR("Illegal UVD message type (%d)!\n", msg_type);
+-		return -EINVAL;
+ 	}
+ 	BUG();
+ 	return -EINVAL;
+-- 
+1.8.3.1
+
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
