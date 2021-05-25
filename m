@@ -2,129 +2,55 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B1DF38FB46
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 May 2021 08:53:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 38E3B391A07
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 16:21:48 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 866056145E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 May 2021 06:53:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3EA506144C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 14:21:47 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 6DFCD6144F; Tue, 25 May 2021 06:53:31 +0000 (UTC)
+	id 2DCC6613E6; Wed, 26 May 2021 14:21:06 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9D92A61407;
-	Tue, 25 May 2021 06:53:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DCE2461615;
+	Wed, 26 May 2021 14:21:02 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 76F30612A6
- for <linaro-mm-sig@lists.linaro.org>; Tue, 25 May 2021 06:53:26 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 46F926140A
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 25 May 2021 08:15:46 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 74C5861407; Tue, 25 May 2021 06:53:26 +0000 (UTC)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2062.outbound.protection.outlook.com [40.107.93.62])
- by lists.linaro.org (Postfix) with ESMTPS id 619CE612A6
- for <linaro-mm-sig@lists.linaro.org>; Tue, 25 May 2021 06:53:24 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GlmXCRu8vwS5QAm+eskedBKKunjU8+XmPIcoWo37qfnc2Ll14Pc4dJIsl6EDokuaUNhBDbpc///GfCDYnasZYWP64XTIypDtB9SESnIdGEtdwzMlgRc1UQ/RAkdF3sNcR/9G0baCCaOjktU86Ff+whrQhCnZs0vBHsqZgRHgUwkT3bbmfTU080b9hg8jQ68Idn3QGPWhD7culnwjqFhUlP+sCtmcbR0VYfvPqC0l+wWq7v+VArqPwRUpTjiwh3Od6UpenGqyW1A2A6uEFDLvMdW+KPhUDatSjxlecyleu4y0Y+nVvPTCyKwvcYZR/MoTmvVGao8WXk11D4rm85Sfgg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FM4yajRXzYSYrq0WA2JhOhA+GALoic+M0wXZsV1eJG8=;
- b=RcgtghqDhuRe6I1NdUTsAN0S1AqsqBoZTjL7fQmRPUoO6FiZq15PmTKxwlIh9YOvBI+U4oPUKKsZBCGZPyXoy9Sv5or6R9bwoOCj2Hf9RD923yyXTROmWEApjwommvVVi7pVnEOjysUg5aRfGuaHIDtV699MG9NlC+U5f+D69iP4nWN2pyk7pj4/sn3AlZpgfDoM9NMyjUys4gLUJZ+IURGO3ndBZhEpX7oHDqmNglAlzhE2a1HnwIzPywjQ1N06tvE7gG9QRxFsmHtEVFL94+in/CXsLoEkcV78XsyQKMWdfSL7t/A+MLx4wLhFzbSKjR0h/wy/gwqUr1YaJDm/aA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FM4yajRXzYSYrq0WA2JhOhA+GALoic+M0wXZsV1eJG8=;
- b=Wh7lgZQ9HOe7G3CVcXSxMV2k3Jn5zPfmUY8PJg0gUw/tStGmpRYYY693aMniHvVJltJsM9G7I7J05IZ5+GsKKquqhYfrFDVxNKhS/RAme4WPGEewLk62Dicrm140ngTzem1jhGx3RRUzdds4wDEwrzfx8DST29nXa2kN/7+Ig/M=
-Authentication-Results: lists.linaro.org; dkim=none (message not signed)
- header.d=none;lists.linaro.org; dmarc=none action=none header.from=amd.com;
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
- by BL0PR12MB2353.namprd12.prod.outlook.com (2603:10b6:207:4c::31)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4150.27; Tue, 25 May
- 2021 06:53:22 +0000
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::6d4d:4674:1cf6:8d34]) by MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::6d4d:4674:1cf6:8d34%6]) with mapi id 15.20.4150.027; Tue, 25 May 2021
- 06:53:22 +0000
-To: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>, alexander.deucher@amd.com
-References: <1621853213-55876-1-git-send-email-jiapeng.chong@linux.alibaba.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-Message-ID: <7e330d33-b104-a006-c5a6-0bd3ada80b6e@amd.com>
-Date: Tue, 25 May 2021 08:53:16 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
-In-Reply-To: <1621853213-55876-1-git-send-email-jiapeng.chong@linux.alibaba.com>
-Content-Language: en-US
-X-Originating-IP: [2a02:908:1252:fb60:d67f:bd9a:6dbf:33b1]
-X-ClientProxiedBy: PR0P264CA0146.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:100:1b::14) To MN2PR12MB3775.namprd12.prod.outlook.com
- (2603:10b6:208:159::19)
+ id 42D1561419; Tue, 25 May 2021 08:15:46 +0000 (UTC)
+Received: from szxga07-in.huawei.com (szxga07-in.huawei.com [45.249.212.35])
+ by lists.linaro.org (Postfix) with ESMTPS id 04EA86140A
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 25 May 2021 08:15:43 +0000 (UTC)
+Received: from dggems705-chm.china.huawei.com (unknown [172.30.72.58])
+ by szxga07-in.huawei.com (SkyGuard) with ESMTP id 4Fq6Jd56pgzBwRf;
+ Tue, 25 May 2021 16:12:49 +0800 (CST)
+Received: from dggpeml500020.china.huawei.com (7.185.36.88) by
+ dggems705-chm.china.huawei.com (10.3.19.182) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.2; Tue, 25 May 2021 16:15:41 +0800
+Received: from huawei.com (10.175.127.227) by dggpeml500020.china.huawei.com
+ (7.185.36.88) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2176.2; Tue, 25 May
+ 2021 16:15:40 +0800
+From: Baokun Li <libaokun1@huawei.com>
+To: <bskeggs@redhat.com>, <airlied@linux.ie>, <daniel@ffwll.ch>,
+ <sumit.semwal@linaro.org>, <christian.koenig@amd.com>,
+ <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
+ <linux-kernel@vger.kernel.org>, <linux-media@vger.kernel.org>,
+ <linaro-mm-sig@lists.linaro.org>
+Date: Tue, 25 May 2021 16:25:11 +0800
+Message-ID: <20210525082511.580068-1-libaokun1@huawei.com>
+X-Mailer: git-send-email 2.25.4
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [IPv6:2a02:908:1252:fb60:d67f:bd9a:6dbf:33b1]
- (2a02:908:1252:fb60:d67f:bd9a:6dbf:33b1) by
- PR0P264CA0146.FRAP264.PROD.OUTLOOK.COM (2603:10a6:100:1b::14) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4173.20 via Frontend Transport; Tue, 25 May 2021 06:53:21 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 990018a5-9a14-4e51-594b-08d91f49c988
-X-MS-TrafficTypeDiagnostic: BL0PR12MB2353:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <BL0PR12MB2353247CF0F4F9502F4AF0E083259@BL0PR12MB2353.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: cM2RdUg+kABk5HCyG2HXK6u2E5YF+PSio2yZEKJsopBPpMiEPlcx59UOuwvdGQYh3WPfn9S+ZCyi6A5hKTJ0Dw7gXACyMO610VbtjY/i3SNI/Tr/DZ6KCYwSVMc+DuKD2Sp87MMYjm1uVkMR5FFQzH6t1/5yvCzsIQCmgAPTYeY8PZNQJo8Hl879z0pbn46qVQ+9FV2+luZj7hQoqSUwexIYuwhafNa7qw1mJtkrM16WRYXIOgtiPu36qloKRUJ7KYQS3QStqsB7CW/OAYGqsuic0DE5OpBzs0avBvJit459d+kTCZlfDKLkdT1o6NvZFCTNrj/W7IExHTP6wQlP9/3dcFoZDvVEP3VIcCu/Z4LEsRTV3/1qWyTIiWN/+wWjXce08hb3TwOFLqNU5yzyNR4wKYOjnWfVxZ6FHsXnrIg/FB2RDlkX2NAmf1vRefKIWYxFJoxRYcMcUJs9ZDAXmUVybV72Iwa7vNSW8R3FBj0YaU0C90ojjcid496W2fLCVFCDWzQarD6TZ5NAcXkNh5BlAdcNtDZLnAfICHR6XC+Ai6QsFDSvh+SNHcWV6MdXV55F2O8fCVQUAUN0HYiNwaEfBBsolJxlIcyD5yVai/CVnvAtI9A+fWE6WSexLX8Agj/TqIZp7psi8va9hZ8xAtqPHsYcDAtGVGN+n9petfUMHt8EUUnt59Mh0VZWY+d6
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(376002)(39860400002)(136003)(346002)(366004)(396003)(36756003)(31686004)(6486002)(316002)(83380400001)(478600001)(2616005)(2906002)(8936002)(16526019)(52116002)(186003)(4326008)(66556008)(66476007)(66946007)(8676002)(38100700002)(5660300002)(86362001)(31696002)(6666004)(6636002)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?SFdGUTNzbXlobXlMUGI2RUlOeFRveDF3cmxKZWFzM1o0VUJDVXZzb08zQWVn?=
- =?utf-8?B?dEY0N3lITE55WUdXdFE4MnZOcGIrWkVocHNTS043RitlQUp5RWxsT0ZoSUpM?=
- =?utf-8?B?c2p3bzJxeHhORkVPK0ZadkhGT2dON01nNXc1Kzd5dnN5YkphZ0JIcnBZSng2?=
- =?utf-8?B?ZVdoV0tLSTgvRWVqRmtaVEQ4S2htL0VuZ3lqWXdyVm9xV3hVMkdwakFySWhx?=
- =?utf-8?B?RGZObjRHb2FneXJUTUtvT3BrQVc0UWRyaHFLMi9UUTI3Y2ZVN0RheDNMUDdF?=
- =?utf-8?B?NEczUE01M2RMSlVQTXhZVGgrcDM2ZklpaXFpUVRGR0pwZkhMMVJITmx1WFAy?=
- =?utf-8?B?WVE5S2trK2xXVjNxdWwyZGl6MDlYOHhNeDcrY1dnRVhSYXIwTVE1NzhrN1gz?=
- =?utf-8?B?RGJBVSthTWV5aU15WGM5aVN2UHRZS0llQklLdGNrVFlxc0xjRnVTQzZCUGNk?=
- =?utf-8?B?MVphNFFuZkRtWkpvOGh6REZ2MC9Ha0k3Y01LTDVwVWNYSFVaU1pYbzVtSWJu?=
- =?utf-8?B?M1F3OE4zZnp2RVBLSlR2SnBPN0d0Nld3YTNSZlg3TmpZbWxaTU5JUzFLb3JN?=
- =?utf-8?B?dmxYcHNxMnROWW1NcVJmSU4rZnp1ZkFrTWpFVjNVRVNDUHA2RG1STkhrejBI?=
- =?utf-8?B?SFdtbkRMNWs3REg1NDVIU1RyV2x0U21lQVE5SnRjbFUzcVg3NjFWd1BsbXZp?=
- =?utf-8?B?QjU2cUhHa2szbXhsdlZWZFN2b290bDREbkduOEdhc3VPdVpYMkcwSXBhendZ?=
- =?utf-8?B?MC9xdlhvcFplcHRBWDNVQzhOcFE2dnprUVhzZ0pyNEhJcmFscFhyK1krYnVW?=
- =?utf-8?B?SkJPazJkSE14eXcvaDhyM3Z6VW9GVjRpWWcza21kMy84d0pIeHRhMDgxakVu?=
- =?utf-8?B?MHhRbnErQ0lIamFWdUtlMnIxQTdCelppR0ZibTloQmlwQlFNT3k0aUU1V2Ri?=
- =?utf-8?B?NHY3eTBYZnFzc0Z3MEh0eWR6V0V1NjhweThPa1RlNW96ZWpRd3FYbnFNOWpY?=
- =?utf-8?B?YnoyOFhubTdjR3RDTWFYckhaN3VteUdMeUpBQnAvbjV6UnFVYU0xQTQ1VjIz?=
- =?utf-8?B?NEhSSHJZaXJuMjYrbEY3T09sS2tlQ2pCRlFxcEZFeHRVc3RLd1pjWnlQM1FU?=
- =?utf-8?B?ZnR3STlVeGxLRzVobjVGT1lTZDM5ME1tckFMRkQ4bkxUSW9EbE1mOE9Db0k3?=
- =?utf-8?B?aXRYaHhuQjk0L215S2JRWHBBb0c5cDR1NVhGVVR5dVpEV0NQUm5uV1gyVU1Z?=
- =?utf-8?B?dUtPS01NbWk3TUVGWm00MkUwQTMrcVdhdGxscWYzL0lIL3pBbGV0ZnY1MGZ2?=
- =?utf-8?B?UGxWMTdIMXljcWY5SVFEL1BrZ0pOVG9jN2loV3U1dFh1T1VwNCs1YTUwVzcx?=
- =?utf-8?B?TDYrWUwzTFdmQzg3OHA2TklTcm9ESjhWOWxBNFp0M3NnRHhkaTM1emtpK2ZV?=
- =?utf-8?B?ckw5Q21ia0o0eU1mdFY4Qk5zcjVsWnliYmlqcDlVZkpZaGYwUmRkWWRlZTFn?=
- =?utf-8?B?QnBhWExZRGx0SlRJSnBWTStFT1NDc2FLTWhKVHJ2cEZnQ0VQZGo4bk5Gc29s?=
- =?utf-8?B?UHd0VVFZdlRzMTFodmVTRGhZb1BPM3k4QWZHMjdjRzh0MVd2dnRROTE0Nmdy?=
- =?utf-8?B?TmUxaXdmaEovWmNyYkVJQVZSSnNPRzV6UnYyWFAzMGVtcEJmY0lrd2dLV1dm?=
- =?utf-8?B?UUhTTUVkQW14WU4vOStPTGRvTjc5anNJbkprZlAycDByRlE3aTMycTlnSGJn?=
- =?utf-8?B?bjlHWDhyNzdJOEo1UjFBWkxVdmZ4VzE5cHRUeVBLKzVmWVUrWEJkRXBkNHBL?=
- =?utf-8?B?TXVRRnlXQjRTSGI1WWR3NHltcUFUTkREUjFianVQd0tPUkIyOFhpemxWajI5?=
- =?utf-8?Q?Isejud5kL9lLg?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 990018a5-9a14-4e51-594b-08d91f49c988
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 May 2021 06:53:22.6334 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DPwDaB/nYSWPkkmCrfclpfQ4XVfSQIcAaKOGJFq89ZupvqDm+Svzn03dKy94jdEz
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB2353
+X-Originating-IP: [10.175.127.227]
+X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
+ dggpeml500020.china.huawei.com (7.185.36.88)
+X-CFilter-Loop: Reflected
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH] drm/amdgpu: remove unreachable code
+X-Mailman-Approved-At: Wed, 26 May 2021 14:18:46 +0000
+Subject: [Linaro-mm-sig] [PATCH -next] drm/nouveau: Remove set but not used
+ variable 'dev'
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -137,56 +63,43 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: airlied@linux.ie, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- amd-gfx@lists.freedesktop.org, daniel@ffwll.ch, linux-media@vger.kernel.org
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: yuehaibing@huawei.com, libaokun1@huawei.com, weiyongjun1@huawei.com,
+ yukuai3@huawei.com, yangjihong1@huawei.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Am 24.05.21 um 12:46 schrieb Jiapeng Chong:
-> In the function amdgpu_uvd_cs_msg(), every branch in the switch
-> statement will have a return, so the code below the switch statement
-> will not be executed.
->
-> Eliminate the follow smatch warning:
->
-> drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c:845 amdgpu_uvd_cs_msg() warn:
-> ignoring unreachable code.
-
-Mhm, that is a NAK. IIRC we explicitely added that code because some 
-compiler versions complained that we don't return a value at the end of 
-the function.
-
-I suggest to drop the return from the default case and the BUG() instead.
-
-Regards,
-Christian.
-
->
-> Reported-by: Abaci Robot <abaci@linux.alibaba.com>
-> Signed-off-by: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
-> ---
->   drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c | 2 --
->   1 file changed, 2 deletions(-)
->
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c
-> index 82f0542..375b346 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_uvd.c
-> @@ -842,8 +842,6 @@ static int amdgpu_uvd_cs_msg(struct amdgpu_uvd_cs_ctx *ctx,
->   		DRM_ERROR("Illegal UVD message type (%d)!\n", msg_type);
->   		return -EINVAL;
->   	}
-> -	BUG();
-> -	return -EINVAL;
->   }
->   
->   /**
-
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+Rml4ZXMgZ2NjICctV3VudXNlZC1idXQtc2V0LXZhcmlhYmxlJyB3YXJuaW5nOgoKZHJpdmVycy9n
+cHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jOiBJbiBmdW5jdGlvbiAnbm91dmVhdV90dG1fdHRf
+cG9wdWxhdGUnOgpkcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmM6MTI1ODoxNzog
+d2FybmluZzoKIHZhcmlhYmxlIOKAmGRlduKAmSBzZXQgYnV0IG5vdCB1c2VkIFstV3VudXNlZC1i
+dXQtc2V0LXZhcmlhYmxlXQoKZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jOiBJ
+biBmdW5jdGlvbiAnbm91dmVhdV90dG1fdHRfdW5wb3B1bGF0ZSc6CmRyaXZlcnMvZ3B1L2RybS9u
+b3V2ZWF1L25vdXZlYXVfYm8uYzoxMjgxOjE3OiB3YXJuaW5nOgogdmFyaWFibGUg4oCYZGV24oCZ
+IHNldCBidXQgbm90IHVzZWQgWy1XdW51c2VkLWJ1dC1zZXQtdmFyaWFibGVdCgpJdCBuZXZlciB1
+c2VkIHNpbmNlIGludHJvZHVjdGlvbi4KClNpZ25lZC1vZmYtYnk6IEJhb2t1biBMaSA8bGliYW9r
+dW4xQGh1YXdlaS5jb20+Ci0tLQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5j
+IHwgNCAtLS0tCiAxIGZpbGUgY2hhbmdlZCwgNCBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9k
+cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91
+dmVhdS9ub3V2ZWF1X2JvLmMKaW5kZXggN2EyNjI0YzBiYTRjLi41MWY5YTJlNjUzMmUgMTAwNjQ0
+Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYm8uYworKysgYi9kcml2ZXJz
+L2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2JvLmMKQEAgLTEyNTQsNyArMTI1NCw2IEBAIG5vdXZl
+YXVfdHRtX3R0X3BvcHVsYXRlKHN0cnVjdCB0dG1fZGV2aWNlICpiZGV2LAogewogCXN0cnVjdCB0
+dG1fdHQgKnR0bV9kbWEgPSAodm9pZCAqKXR0bTsKIAlzdHJ1Y3Qgbm91dmVhdV9kcm0gKmRybTsK
+LQlzdHJ1Y3QgZGV2aWNlICpkZXY7CiAJYm9vbCBzbGF2ZSA9ICEhKHR0bS0+cGFnZV9mbGFncyAm
+IFRUTV9QQUdFX0ZMQUdfU0cpOwogCiAJaWYgKHR0bV90dF9pc19wb3B1bGF0ZWQodHRtKSkKQEAg
+LTEyNjcsNyArMTI2Niw2IEBAIG5vdXZlYXVfdHRtX3R0X3BvcHVsYXRlKHN0cnVjdCB0dG1fZGV2
+aWNlICpiZGV2LAogCX0KIAogCWRybSA9IG5vdXZlYXVfYmRldihiZGV2KTsKLQlkZXYgPSBkcm0t
+PmRldi0+ZGV2OwogCiAJcmV0dXJuIHR0bV9wb29sX2FsbG9jKCZkcm0tPnR0bS5iZGV2LnBvb2ws
+IHR0bSwgY3R4KTsKIH0KQEAgLTEyNzcsMTQgKzEyNzUsMTIgQEAgbm91dmVhdV90dG1fdHRfdW5w
+b3B1bGF0ZShzdHJ1Y3QgdHRtX2RldmljZSAqYmRldiwKIAkJCSAgc3RydWN0IHR0bV90dCAqdHRt
+KQogewogCXN0cnVjdCBub3V2ZWF1X2RybSAqZHJtOwotCXN0cnVjdCBkZXZpY2UgKmRldjsKIAli
+b29sIHNsYXZlID0gISEodHRtLT5wYWdlX2ZsYWdzICYgVFRNX1BBR0VfRkxBR19TRyk7CiAKIAlp
+ZiAoc2xhdmUpCiAJCXJldHVybjsKIAogCWRybSA9IG5vdXZlYXVfYmRldihiZGV2KTsKLQlkZXYg
+PSBkcm0tPmRldi0+ZGV2OwogCiAJcmV0dXJuIHR0bV9wb29sX2ZyZWUoJmRybS0+dHRtLmJkZXYu
+cG9vbCwgdHRtKTsKIH0KLS0gCjIuMjUuNAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNp
+Z0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL2xpbmFyby1tbS1zaWcK
