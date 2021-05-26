@@ -2,78 +2,85 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC49039188E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 15:10:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6D7F3918EA
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 15:33:02 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2CA5261446
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 13:10:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5A8CD6139F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 May 2021 13:33:01 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 1C09361435; Wed, 26 May 2021 13:10:26 +0000 (UTC)
+	id 4BF6860EC3; Wed, 26 May 2021 13:33:00 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 68A1460EA2;
-	Wed, 26 May 2021 13:10:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8478960EE4;
+	Wed, 26 May 2021 13:32:57 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 76A7360B3E
- for <linaro-mm-sig@lists.linaro.org>; Wed, 26 May 2021 13:10:21 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id AB9CD60E9C
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 26 May 2021 13:32:55 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 6A67260EA2; Wed, 26 May 2021 13:10:21 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com
- [209.85.218.47])
- by lists.linaro.org (Postfix) with ESMTPS id 5ED6C60B3E
- for <linaro-mm-sig@lists.linaro.org>; Wed, 26 May 2021 13:10:19 +0000 (UTC)
-Received: by mail-ej1-f47.google.com with SMTP id s22so2334740ejv.12
- for <linaro-mm-sig@lists.linaro.org>; Wed, 26 May 2021 06:10:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to; bh=AUsJLuID9e1pol3RiOS0EQTXGuh7p/LFKL5pMET/qdM=;
- b=k8NO22C2JVeN3oYYB8/wYFehRe8VyAND1XHAGRWMTU5Mn52IfMEUo4TKhcziTjSiol
- ajMle9cmfQkn5UtI0zuJQKEg7T0BR53wh8MTYQevUGRY0oLgw8tgB9THtAkw/d71ByPA
- k5CQUTjOSd0eCD/aUy0PznHO9215g4bfZeixU=
+ id A649F60EC3; Wed, 26 May 2021 13:32:55 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+ [209.85.128.45])
+ by lists.linaro.org (Postfix) with ESMTPS id 9689760E9C
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 26 May 2021 13:32:53 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id
+ n5-20020a1c72050000b0290192e1f9a7e1so524625wmc.2
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 26 May 2021 06:32:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-transfer-encoding:content-language;
+ bh=YlBMJFk9IU7XFpKBGAdwLecZ23BlfUXVTyQ5htgnqds=;
+ b=gHerwUijsmKZTx4DCmhcXuTnIFvyweNastBkn9ZahCah3iPkN6qssuhEnZPYikpTXk
+ RX22AZNSYo0f9LnQxB+tGHPW7EicBzlz0paibGwJqll459D9GranIBqGDnHUX0cYZncx
+ nZpVupWUHabYgH0UBi7gLLfMRyGCyvETRi0K2w2FEUMDDLvwMI7s21+tKrDI9eeUQ+bu
+ q2ZJ+Vwea2gEB1SOlH0SoO6nRY0IUHfDLbHJpOg0chTfNAgj+6bpACfIzjyNl9xXIZ9w
+ XkKPZvSXQik3WBxDBewoVhH93liltdQM/tFv8G3wAqtIEZXhH07TJdL3qZYWortdJcxX
+ E2HA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :content-transfer-encoding:in-reply-to;
- bh=AUsJLuID9e1pol3RiOS0EQTXGuh7p/LFKL5pMET/qdM=;
- b=l7QNYvIMXEfWDroaWv6NHMS38yk6mePCvav8URJpiZrqekic9uBzQFU4ad8ZYFoG0u
- mtyLnqR96vELUMPjotNvjf/b87pcQGRd/9rWzJadyrbMqfsKi27JZhZK63qPGynbGHcS
- vbIPne9oXSu8M7HkZAv1kKMD6TuQ15e9yQQqi3WQ1Sae+KQntx6KuQZrbtEF7uTQvwtf
- rvbe8hE0iFU1Umt4P6w8nsc3go18UKm5vKBX8/oGUVDADsN5LhJJI432I2bzxW+WhI3f
- 7aZsQzE4qZv3ZfG3wVOUcd1K3DgrseHRDnw1U0vmZS0R2kfExqXGoSRHA7th0pxjg3Zr
- dPDA==
-X-Gm-Message-State: AOAM532pPDTXxGdTL/K3oPWK5Kr5EX6OBW/ELw4alri08jihtpCEp7vy
- K1Rlg/cGOM6rxCRhVaRcHsRmxA==
-X-Google-Smtp-Source: ABdhPJwmdkY+oqxRRVXVQLIVhW6ISfuuutzmkODEclidb9s6n/KAGKJYcmP63SeNqDK4yFSFc1wLbQ==
-X-Received: by 2002:a17:907:9612:: with SMTP id
- gb18mr7857293ejc.408.1622034618327; 
- Wed, 26 May 2021 06:10:18 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id j17sm484768ejb.123.2021.05.26.06.10.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 May 2021 06:10:17 -0700 (PDT)
-Date: Wed, 26 May 2021 15:10:16 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Lee Jones <lee.jones@linaro.org>
-Message-ID: <YK5IuNcHtPySAfoz@phenom.ffwll.local>
-Mail-Followup-To: Lee Jones <lee.jones@linaro.org>,
- linux-kernel@vger.kernel.org, David Airlie <airlied@linux.ie>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Adam Jackson <ajax@redhat.com>, Ben Widawsky <ben@bwidawsk.net>,
- dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org
-References: <20210526084726.552052-1-lee.jones@linaro.org>
- <20210526084726.552052-31-lee.jones@linaro.org>
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-transfer-encoding
+ :content-language;
+ bh=YlBMJFk9IU7XFpKBGAdwLecZ23BlfUXVTyQ5htgnqds=;
+ b=JTiUG4xmGyQqdVjZ6bF13CndWsAZnd9wQnInYamBE59Ay2u8uwyBas9jL7fvKpvpgH
+ awN4fJ3fj2pEsQ6yqIdNQCQAWmm9PUZDanvLcs5aMDgnJl0JGYwryqol5z3P+bdmQPxL
+ VTQN1F6DoThG5qBXkHNACPdJeKmRC9Wtlr4W+0IQwCAOk5lAlxbcLYDWBmLiHKnDVnre
+ 08eAk8XRhxJUJ4/W0o9PTz5+kMMxH8QC/e8EZWTXwutRGDpHymNeU/52OPeDbzhWBQoc
+ +3YLOJTrcuWWFtFOFiO+GoDDtSHhbztmuklH+RjO0/RVjovx0OT2XqUMS/+VgzcVjJAw
+ ve+w==
+X-Gm-Message-State: AOAM531fZ/HUOAatwIpgsG95w6jwyZo2yw+Sn7AexDi0zUjZrO8S/ObM
+ yRnIryaz8NUc6k5Vk0/1XDA=
+X-Google-Smtp-Source: ABdhPJyaNjBH9aRtWN83y51VC2QaShd89a7j4j98DGf1DzeCXlHUlJkhEhO3F6fRhbwIb39lhclevg==
+X-Received: by 2002:a7b:cbc4:: with SMTP id n4mr3577903wmi.153.1622035972705; 
+ Wed, 26 May 2021 06:32:52 -0700 (PDT)
+Received: from ?IPv6:2a02:908:1252:fb60:1950:35e:cae9:5bed?
+ ([2a02:908:1252:fb60:1950:35e:cae9:5bed])
+ by smtp.gmail.com with ESMTPSA id x24sm6561252wmi.13.2021.05.26.06.32.51
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 26 May 2021 06:32:52 -0700 (PDT)
+To: Daniel Vetter <daniel@ffwll.ch>
+References: <20210521090959.1663703-1-daniel.vetter@ffwll.ch>
+ <CAP+8YyEhRwgz2hCri3K7Kv1OusVa_LGEuKZqQEx5jv+NiDKZrA@mail.gmail.com>
+ <YKfFqrlLrikGMn4K@phenom.ffwll.local>
+ <CAP+8YyG0o58dQt_tvnJ2ESbeqo02xxvFdifpMwnhz2VYNk8HUw@mail.gmail.com>
+ <YKfOymXrB7O4cYVb@phenom.ffwll.local>
+ <31467363-e936-879b-8b0d-5a2a92644221@gmail.com>
+ <CAKMK7uFswfc96hS40uc0Lug=doYAcf-yC-eu96iWqNJnM65MJQ@mail.gmail.com>
+ <ae13093e-c364-7b90-1f91-39de42594cd6@amd.com>
+ <YKz2KVppVoYMxB5u@phenom.ffwll.local>
+ <312b183f-8eb2-d9e2-24ad-b429b74c886c@gmail.com>
+ <CAKMK7uG-JYieYvnc0R-FXJJDrCZfypvstYw2NrLPRt+J9=oe1g@mail.gmail.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <fe633922-53a4-2409-8697-d815650c65ac@gmail.com>
+Date: Wed, 26 May 2021 15:32:50 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210526084726.552052-31-lee.jones@linaro.org>
-X-Operating-System: Linux phenom 5.10.32scarlett+ 
+In-Reply-To: <CAKMK7uG-JYieYvnc0R-FXJJDrCZfypvstYw2NrLPRt+J9=oe1g@mail.gmail.com>
+Content-Language: en-US
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 30/34] drm/vgem/vgem_drv: Standard
- comment blocks should not use kernel-doc format
+Subject: Re: [Linaro-mm-sig] [Mesa-dev] [PATCH 01/11] drm/amdgpu: Comply
+ with implicit fencing rules
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,72 +93,83 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Ben Widawsky <ben@bwidawsk.net>, David Airlie <airlied@linux.ie>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linaro-mm-sig@lists.linaro.org, Adam Jackson <ajax@redhat.com>,
- Daniel Vetter <daniel@ffwll.ch>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- linux-media@vger.kernel.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: Rob Clark <robdclark@chromium.org>, Daniel Stone <daniels@collabora.com>,
+ =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ Kevin Wang <kevin1.wang@amd.com>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Luben Tuikov <luben.tuikov@amd.com>,
+ "Kristian H . Kristensen" <hoegsberg@google.com>,
+ Chen Li <chenli@uniontech.com>, Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Daniel Vetter <daniel.vetter@intel.com>,
+ mesa-dev <mesa-dev@lists.freedesktop.org>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Dennis Li <Dennis.Li@amd.com>, Deepak R Varma <mh12gx2825@gmail.com>
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Wed, May 26, 2021 at 09:47:22AM +0100, Lee Jones wrote:
-> Fixes the following W=3D1 kernel build warning(s):
-> =
-
->  drivers/gpu/drm/vgem/vgem_drv.c:47: warning: expecting prototype for Thi=
-s is vgem, a (non-hardware(). Prototype was for DRIVER_NAME() instead
-> =
-
-> Cc: David Airlie <airlied@linux.ie>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: Sumit Semwal <sumit.semwal@linaro.org>
-> Cc: "Christian K=F6nig" <christian.koenig@amd.com>
-> Cc: Adam Jackson <ajax@redhat.com>
-> Cc: Ben Widawsky <ben@bwidawsk.net>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: linux-media@vger.kernel.org
-> Cc: linaro-mm-sig@lists.linaro.org
-> Signed-off-by: Lee Jones <lee.jones@linaro.org>
-
-Merged this one to drm-misc-next, thanks!
--Daniel
-> ---
->  drivers/gpu/drm/vgem/vgem_drv.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> =
-
-> diff --git a/drivers/gpu/drm/vgem/vgem_drv.c b/drivers/gpu/drm/vgem/vgem_=
-drv.c
-> index a0e75f1d5d016..bf38a7e319d14 100644
-> --- a/drivers/gpu/drm/vgem/vgem_drv.c
-> +++ b/drivers/gpu/drm/vgem/vgem_drv.c
-> @@ -25,7 +25,7 @@
->   *	Ben Widawsky <ben@bwidawsk.net>
->   */
->  =
-
-> -/**
-> +/*
->   * This is vgem, a (non-hardware-backed) GEM service.  This is used by M=
-esa's
->   * software renderer and the X server for efficient buffer sharing.
->   */
-> -- =
-
-> 2.31.1
-> =
-
-
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+QW0gMjUuMDUuMjEgdW0gMTc6MjMgc2NocmllYiBEYW5pZWwgVmV0dGVyOgo+IE9uIFR1ZSwgTWF5
+IDI1LCAyMDIxIGF0IDU6MDUgUE0gQ2hyaXN0aWFuIEvDtm5pZwo+IDxja29lbmlnLmxlaWNodHp1
+bWVya2VuQGdtYWlsLmNvbT4gd3JvdGU6Cj4+IEhpIERhbmllbCwKPj4KPj4gQW0gMjUuMDUuMjEg
+dW0gMTU6MDUgc2NocmllYiBEYW5pZWwgVmV0dGVyOgo+Pj4gSGkgQ2hyaXN0aWFuLAo+Pj4KPj4+
+IE9uIFNhdCwgTWF5IDIyLCAyMDIxIGF0IDEwOjMwOjE5QU0gKzAyMDAsIENocmlzdGlhbiBLw7Zu
+aWcgd3JvdGU6Cj4+Pj4gQW0gMjEuMDUuMjEgdW0gMjA6MzEgc2NocmllYiBEYW5pZWwgVmV0dGVy
+Ogo+Pj4+IFRoaXMgd29ya3MgYnkgYWRkaW5nIHRoZSBmZW5jZSBvZiB0aGUgbGFzdCBldmljdGlv
+biBETUEgb3BlcmF0aW9uIHRvIEJPcwo+Pj4+IHdoZW4gdGhlaXIgYmFja2luZyBzdG9yZSBpcyBu
+ZXdseSBhbGxvY2F0ZWQuIFRoYXQncyB3aGF0IHRoZQo+Pj4+IHR0bV9ib19hZGRfbW92ZV9mZW5j
+ZSgpIGZ1bmN0aW9uIHlvdSBzdHVtYmxlZCBvdmVyIGlzIGdvb2QgZm9yOiBodHRwczovL2VsaXhp
+ci5ib290bGluLmNvbS9saW51eC92NS4xMy1yYzIvc291cmNlL2RyaXZlcnMvZ3B1L2RybS90dG0v
+dHRtX2JvLmMjTDY5Mgo+Pj4+Cj4+Pj4gTm93IHRoZSBwcm9ibGVtIGlzIGl0IGlzIHBvc3NpYmxl
+IHRoYXQgdGhlIGFwcGxpY2F0aW9uIGlzIHRlcm1pbmF0ZWQgYmVmb3JlCj4+Pj4gaXQgY2FuIGNv
+bXBsZXRlIGl0J3MgY29tbWFuZCBzdWJtaXNzaW9uLiBCdXQgc2luY2UgcmVzb3VyY2UgbWFuYWdl
+bWVudCBvbmx5Cj4+Pj4gd2FpdHMgZm9yIHRoZSBzaGFyZWQgZmVuY2VzIHdoZW4gdGhlcmUgYXJl
+IHNvbWUgdGhlcmUgaXMgYSBjaGFuY2UgdGhhdCB3ZQo+Pj4+IGZyZWUgdXAgbWVtb3J5IHdoaWxl
+IGl0IGlzIHN0aWxsIGluIHVzZS4KPj4+IEhtIHdoZXJlIGlzIHRoaXMgY29kZT8gV291bGQgaGVs
+cCBpbiBteSBhdWRpdCB0aGF0IEkgd2FudGVkIHRvIGRvIHRoaXMKPj4+IHdlZWs/IElmIHlvdSBs
+b29rIGF0IG1vc3Qgb3RoZXIgcGxhY2VzIGxpa2UKPj4+IGRybV9nZW1fZmVuY2VfYXJyYXlfYWRk
+X2ltcGxpY2l0KCkgSSBtZW50aW9uZWQgZWFybGllciwgdGhlbiB3ZSBkb24ndAo+Pj4gdHJlYXQg
+dGhlIHNoYXJlZCBmZW5jZXMgc3BlY2lhbCBhbmQgYWx3YXlzIGFsc28gaW5jbHVkZSB0aGUgZXhj
+bHVzaXZlIG9uZS4KPj4gU2VlIGFtZGdwdV9nZW1fb2JqZWN0X2Nsb3NlKCk6Cj4+Cj4+IC4uLgo+
+PiAgICAgICAgICAgZmVuY2UgPSBkbWFfcmVzdl9nZXRfZXhjbChiby0+dGJvLmJhc2UucmVzdik7
+Cj4+ICAgICAgICAgICBpZiAoZmVuY2UpIHsKPj4gICAgICAgICAgICAgICAgICAgYW1kZ3B1X2Jv
+X2ZlbmNlKGJvLCBmZW5jZSwgdHJ1ZSk7Cj4+ICAgICAgICAgICAgICAgICAgIGZlbmNlID0gTlVM
+TDsKPj4gICAgICAgICAgIH0KPj4gLi4uCj4+Cj4+IFdlIGV4cGxpY2l0bHkgYWRkZWQgdGhhdCBi
+ZWNhdXNlIHJlc291cmNlIG1hbmFnZW1lbnQgb2Ygc29tZSBvdGhlcgo+PiBkcml2ZXIgd2FzIGdv
+aW5nIHRvdGFsbHkgYmFuYW5hcyB3aXRob3V0IHRoYXQuCj4+Cj4+IEJ1dCBJJ20gbm90IHN1cmUg
+d2hpY2ggb25lIHRoYXQgd2FzLiBNYXliZSBkaWcgYSBiaXQgaW4gdGhlIGdpdCBhbmQKPj4gbWFp
+bGluZyBoaXN0b3J5IG9mIHRoYXQuCj4gSG0gSSBsb29rZWQgYW5kIGl0J3MKPgo+IGNvbW1pdCA4
+MmM0MTZiMTNjYjdkMjJiOTZlYzA4ODhiMjk2YTQ4ZGZmOGEwOWViCj4gQXV0aG9yOiBDaHJpc3Rp
+YW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+Cj4gRGF0ZTogICBUaHUgTWFyIDEy
+IDEyOjAzOjM0IDIwMjAgKzAxMDAKPgo+ICAgICBkcm0vYW1kZ3B1OiBmaXggYW5kIGNsZWFudXAg
+YW1kZ3B1X2dlbV9vYmplY3RfY2xvc2UgdjQKPgo+IFRoYXQgc291bmRlZCBtb3JlIGxpa2UgYW1k
+Z3B1IGl0c2VsZiBuZWVkaW5nIHRoaXMsIG5vdCBhbm90aGVyIGRyaXZlcj8KCk5vLCB0aGF0IHBh
+dGNoIHdhcyBqdXN0IGEgZm9sbG93IHVwIG1vdmluZyB0aGUgZnVuY3Rpb25hbGl0eSBhcm91bmQu
+Cgo+IEJ1dCBsb29raW5nIGF0IGFtZGdwdV92bV9ib191cGRhdGVfbWFwcGluZygpIGl0IHNlZW1z
+IHRvIHBpY2sgdGhlCj4gcmlnaHQgZmVuY2luZyBtb2RlIGZvciBncHUgcHRlIGNsZWFyaW5nLCBz
+byBJJ20gcmVhbGx5IG5vdCBzdXJlIHdoYXQKPiB0aGUgYnVnIHdhcyB0aGF0IHlvdSB3b3JrZWQg
+YXJvdW5kIGhlcmU/VGhlIGltcGxlbWVudGF0aW9uIGJvaWxzIGRvd24KPiB0byBhbWRncHVfc3lu
+Y19yZXN2KCkgd2hpY2ggc3luY3MgZm9yIHRoZSBleGNsdXNpdmUgZmVuY2UsIGFsd2F5cy4gQW5k
+Cj4gdGhlcmUncyBub3RoaW5nIGVsc2UgdGhhdCBJIGNvdWxkIGZpbmQgaW4gcHVibGljIGhpc3Rv
+cnkgYXQgbGVhc3QsIG5vCj4gcmVmZXJlbmNlcyB0byBidWcgcmVwb3J0cyBvciBhbnl0aGluZy4g
+SSB0aGluayB5b3UgbmVlZCB0byBkaWcKPiBpbnRlcm5hbGx5LCBiZWNhdXNlIGFzLWlzIEknbSBu
+b3Qgc2VlaW5nIHRoZSBwcm9ibGVtIGhlcmUuCj4KPiBPciBhbSBJIG1pc3Npbmcgc29tZXRoaW5n
+IGhlcmU/CgpTZWUgdGhlIGNvZGUgaGVyZSBmb3IgZXhhbXBsZTogCmh0dHBzOi8vZWxpeGlyLmJv
+b3RsaW4uY29tL2xpbnV4L2xhdGVzdC9zb3VyY2UvZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91
+dmVhdV9mZW5jZS5jI0wzNjEKCk5vdXZlYXUgYXNzdW1lcyB0aGF0IHdoZW4gYSBzaGFyZWQgZmVu
+Y2UgaXMgcHJlc2VudCBpdCBkb2Vzbid0IG5lZWQgdG8gCndhaXQgZm9yIHRoZSBleGNsdXNpdmUg
+b25lIGJlY2F1c2UgdGhlIHNoYXJlZCBhcmUgYWx3YXlzIHN1cHBvc2VkIHRvIApmaW5pc2ggYWZ0
+ZXIgdGhlIGV4Y2x1c2l2ZSBvbmUuCgpCdXQgZm9yIHBhZ2UgdGFibGUgdW5tYXAgZmVuY2VzIHRo
+YXQgaXNuJ3QgdHJ1ZSBhbmQgd2UgcmFuIGludG8gYSByZWFsbHkgCm5hc3R5IGFuZCBoYXJkIHRv
+IHJlcHJvZHVjZSBidWcgYmVjYXVzZSBvZiB0aGlzLgoKSSB0aGluayBpdCB3b3VsZCBiZSBtdWNo
+IG1vcmUgZGVmZW5zaXZlIGlmIHdlIGNvdWxkIHNheSB0aGF0IHdlIGFsd2F5cyAKd2FpdCBmb3Ig
+dGhlIGV4Y2x1c2l2ZSBmZW5jZSBhbmQgZml4IHRoZSB1c2UgY2FzZSBpbiBub3V2ZWF1IGFuZCBk
+b3VibGUgCmNoZWNrIGlmIHNvbWVib2R5IGVsc2UgZG9lcyBzdHVmZiBsaWtlIHRoYXQgYXMgd2Vs
+bC4KCkNocmlzdGlhbi4KCj4gLURhbmllbAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNp
+Z0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL2xpbmFyby1tbS1zaWcK
