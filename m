@@ -2,67 +2,69 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2ABAF393089
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 May 2021 16:13:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E52B4393CD8
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 May 2021 08:02:23 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4126160AEE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 May 2021 14:13:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6C9CC60D42
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 May 2021 06:02:22 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id F29186079C; Thu, 27 May 2021 14:13:52 +0000 (UTC)
+	id 60B2860B67; Fri, 28 May 2021 06:02:19 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1996260A9E;
-	Thu, 27 May 2021 14:13:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0263560B3A;
+	Fri, 28 May 2021 06:02:17 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 23D9460707
- for <linaro-mm-sig@lists.linaro.org>; Thu, 27 May 2021 14:13:47 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id EEDAA60B2E
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 28 May 2021 06:02:14 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 2187560A9E; Thu, 27 May 2021 14:13:47 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
- [209.85.128.52])
- by lists.linaro.org (Postfix) with ESMTPS id 1995F60707
- for <linaro-mm-sig@lists.linaro.org>; Thu, 27 May 2021 14:13:45 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id
- n17-20020a7bc5d10000b0290169edfadac9so2710254wmk.1
- for <linaro-mm-sig@lists.linaro.org>; Thu, 27 May 2021 07:13:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=2pe98/RoIUXzCDVRxl/xmCe1bCIiBUSFO5AAZsF4X4c=;
- b=alPZpF7SeTpWeSbpc0ZPPsk5l/suic7NEUHpp/IXuPKsjiE7TAj7JKR0jXmPuCRpq5
- tf3Kb/XwFGPzanNdyylcNmsjcAikDvoHO1li9hoBcWerRJb+o++v8EVJ1amNiZyuM2tc
- EdkR7VvgdQL0e/ZLGzrvdEQWTe8ZswqhAPXQI=
+ id EC87560B3A; Fri, 28 May 2021 06:02:14 +0000 (UTC)
+Received: from mail-io1-f51.google.com (mail-io1-f51.google.com
+ [209.85.166.51])
+ by lists.linaro.org (Postfix) with ESMTPS id E422A60B2E
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 28 May 2021 06:02:12 +0000 (UTC)
+Received: by mail-io1-f51.google.com with SMTP id b25so3035922iot.5
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 27 May 2021 23:02:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=ZIKsiA6+DMLHlkOcLKlnyxoQnxJIdOFeXeN3ppix/L4=;
+ b=WcOyuZpLp8/NgLIQ4nqwWd4KXdbL259MTJbeb0eyFD28gXEt0DV0eLYwdeHVCAgWvH
+ nRVo97cISue8EqqhlnBKbpNgJpGyOp4gf01JHA16SSh3N3JoOEPEndI+HqFebcviwWuY
+ 1VV9DdhXOX7KL7JxIB4w9dK2lE0hxy8rGheT7f79pgZiPFGabXJIorvUGBvllltH2GQp
+ MBDig6CjzxpaFpQ4Ry6cy12cEz4Ix37wmmoiAEVV8gjzQdQgxB8SAHC2zklJO/CHWihE
+ dv7PxsqNMdICYLWr2hG69BvuuUwxzUJbsv6G1nRnhoDjMIVadgFY7kzeUevyej7rNUHz
+ Htmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=2pe98/RoIUXzCDVRxl/xmCe1bCIiBUSFO5AAZsF4X4c=;
- b=ZCUgx6hQUIco3S/W5N2fndyNSoc+k/6KaaXmBcA0GOM6TgoxG0N3kVG5/C2B0jRGOd
- ypWWuGKE2FNeXOVxMXhCX/6n8EO2iOTx+7NEm9HiQ5FLkZIqdoLNrhja9eCuBOQhdmKT
- 2yCB7FC4tx4ye3m9ahoMdKy1qC2R49Ix3WHmVf/cttp1JhDb5W+IQEnNSS7HtkE3sZZq
- iZrQ1MgOUjcni515COJnreJXpNpxdwgDnB7bCavad0l56DUbZgZOrwwKcdOL54L6bnB4
- H+MQE0+WlrCSNFzH3Zk31CiG8PCaGab98Vx6VYlTh7S61vQDNLLOj0pXeghYFRAcbhGk
- R1Xg==
-X-Gm-Message-State: AOAM532oX2pNt8AiTYws0jgkhRsrPqOZBQqFY5a1PleKgy47IRes5E9V
- 9R467Z8U4UdRKlnD+u8XPVOtGg==
-X-Google-Smtp-Source: ABdhPJzBO2UICZkAwLu/Rqqoi7NON5gruwxwEPx5K5AazVNBcswTvcRJR6t/GItpOQYQtf7nDo/w1g==
-X-Received: by 2002:a1c:8016:: with SMTP id b22mr3674409wmd.43.1622124824100; 
- Thu, 27 May 2021 07:13:44 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id x10sm3381136wrt.65.2021.05.27.07.13.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 May 2021 07:13:43 -0700 (PDT)
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-To: Intel Graphics Development <intel-gfx@lists.freedesktop.org>
-Date: Thu, 27 May 2021 16:13:34 +0200
-Message-Id: <20210527141337.3857901-2-daniel.vetter@ffwll.ch>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <20210527141337.3857901-1-daniel.vetter@ffwll.ch>
-References: <20210527141337.3857901-1-daniel.vetter@ffwll.ch>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=ZIKsiA6+DMLHlkOcLKlnyxoQnxJIdOFeXeN3ppix/L4=;
+ b=OmdUUF7MFlXhxNbrjkt8lCIH6Q32NTLqzOV/Wj4hWPIifztSAdbNbD1h0fbe1mXU+Z
+ /hoMedHQr1KvKFOoeFWir7URV8eyObcYNb94e3IcMBovgzsR0ivimW8zVPm4aFUi02tK
+ FQ6bYfHA7v4rktoiZ7FPFOTJB3FjYtTG8JxT/rF+/EAvseTjALg4ZEqMd8Eb7WaqUxh+
+ XPdZAfbaP9jp+s981UgmENaQyW4ufoHetMRPtzHw3YXb7ZCfy65Fx2JjCTuA/IEn4H5D
+ mN3zMxjOHtSnAtw5TT150z3HYKIFVt5xvuTIrWKASQPHO54C3JU69BU1HTk0r8eByICN
+ VZkA==
+X-Gm-Message-State: AOAM531DciT4HrkCa68wCjTC7VC1dGwh9H3xKs7xsXZNzqt/6AQXrV/w
+ Y9B0Uw/4QnEDJ1n0GKUVdrVZqS6jDoZMnQPHytY=
+X-Google-Smtp-Source: ABdhPJy/7qLyDzEHIvmiA1LxjfP77NXexXSqCA9JNBvDQXHSEFhVrZZWFXtqlefcsUWQ7Go6TECwG6uKcRQzudBsD6g=
+X-Received: by 2002:a5d:9e0b:: with SMTP id h11mr5844650ioh.60.1622181732336; 
+ Thu, 27 May 2021 23:02:12 -0700 (PDT)
 MIME-Version: 1.0
+References: <1620990152-19255-1-git-send-email-dillon.minfei@gmail.com>
+In-Reply-To: <1620990152-19255-1-git-send-email-dillon.minfei@gmail.com>
+From: Dillon Min <dillon.minfei@gmail.com>
+Date: Fri, 28 May 2021 14:01:36 +0800
+Message-ID: <CAL9mu0KUwTiVqSymL-8MLTOMe2OuOBNtLecKaJt=EJfUY_drqw@mail.gmail.com>
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>,
+ pierre-yves.mordret@foss.st.com, 
+ alain.volmat@foss.st.com, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+ Alexandre TORGUE <alexandre.torgue@foss.st.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>, 
+ christian.koenig@amd.com, Michael Turquette <mturquette@baylibre.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH 1/4] dma-buf: Require VM_PFNMAP vma for mmap
+Subject: Re: [Linaro-mm-sig] [PATCH 0/4] Fix the i2c/clk bug of stm32 mcu
+ platform
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -75,85 +77,144 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Matthew Wilcox <willy@infradead.org>, linaro-mm-sig@lists.linaro.org,
- Jason Gunthorpe <jgg@ziepe.ca>, John Stultz <john.stultz@linaro.org>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- Daniel Vetter <daniel.vetter@intel.com>,
- Suren Baghdasaryan <surenb@google.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- linux-media@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Wolfram Sang <wsa@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ "open list:DRM PANEL DRIVERS" <dri-devel@lists.freedesktop.org>,
+ linux-clk <linux-clk@vger.kernel.org>, linaro-mm-sig@lists.linaro.org,
+ linux-i2c@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>,
+ linux-media <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-dGxkcjsgRE1BIGJ1ZmZlcnMgYXJlbid0IG5vcm1hbCBtZW1vcnksIGV4cGVjdGluZyB0aGF0IHlv
-dSBjYW4gdXNlCnRoZW0gbGlrZSB0aGF0IChsaWtlIGNhbGxpbmcgZ2V0X3VzZXJfcGFnZXMgd29y
-a3MsIG9yIHRoYXQgdGhleSdyZQphY2NvdW50aW5nIGxpa2UgYW55IG90aGVyIG5vcm1hbCBtZW1v
-cnkpIGNhbm5vdCBiZSBndWFyYW50ZWVkLgoKU2luY2Ugc29tZSB1c2Vyc3BhY2Ugb25seSBydW5z
-IG9uIGludGVncmF0ZWQgZGV2aWNlcywgd2hlcmUgYWxsCmJ1ZmZlcnMgYXJlIGFjdHVhbGx5IGFs
-bCByZXNpZGVudCBzeXN0ZW0gbWVtb3J5LCB0aGVyZSdzIGEgaHVnZQp0ZW1wdGF0aW9uIHRvIGFz
-c3VtZSB0aGF0IGEgc3RydWN0IHBhZ2UgaXMgYWx3YXlzIHByZXNlbnQgYW5kIHVzZWFibGUKbGlr
-ZSBmb3IgYW55IG1vcmUgcGFnZWNhY2hlIGJhY2tlZCBtbWFwLiBUaGlzIGhhcyB0aGUgcG90ZW50
-aWFsIHRvCnJlc3VsdCBpbiBhIHVhcGkgbmlnaHRtYXJlLgoKVG8gc3RvcCB0aGlzIGdhcCByZXF1
-aXJlIHRoYXQgRE1BIGJ1ZmZlciBtbWFwcyBhcmUgVk1fUEZOTUFQLCB3aGljaApibG9ja3MgZ2V0
-X3VzZXJfcGFnZXMgYW5kIGFsbCB0aGUgb3RoZXIgc3RydWN0IHBhZ2UgYmFzZWQKaW5mcmFzdHJ1
-Y3R1cmUgZm9yIGV2ZXJ5b25lLiBJbiBzcGlyaXQgdGhpcyBpcyB0aGUgdWFwaSBjb3VudGVycGFy
-dCB0bwp0aGUga2VybmVsLWludGVybmFsIENPTkZJR19ETUFCVUZfREVCVUcuCgpNb3RpdmF0ZWQg
-YnkgYSByZWNlbnQgcGF0Y2ggd2hpY2ggd2FudGVkIHRvIHN3aWNoIHRoZSBzeXN0ZW0gZG1hLWJ1
-ZgpoZWFwIHRvIHZtX2luc2VydF9wYWdlIGluc3RlYWQgb2Ygdm1faW5zZXJ0X3Bmbi4KCnYyOgoK
-SmFzb24gYnJvdWdodCB1cCB0aGF0IHdlIGFsc28gd2FudCB0byBndWFyYW50ZWUgdGhhdCBhbGwg
-cHRlcyBoYXZlIHRoZQpwdGVfc3BlY2lhbCBmbGFnIHNldCwgdG8gY2F0Y2ggZmFzdCBnZXRfdXNl
-cl9wYWdlcyAob24gYXJjaGl0ZWN0dXJlcwp0aGF0IHN1cHBvcnQgdGhpcykuIEFsbG93aW5nIFZN
-X01JWEVETUFQIChsaWtlIFZNX1NQRUNJQUwgZG9lcykgd291bGQKc3RpbGwgYWxsb3cgdm1faW5z
-ZXJ0X3BhZ2UsIGJ1dCBsaW1pdGluZyB0byBWTV9QRk5NQVAgd2lsbCBjYXRjaCB0aGF0LgoKRnJv
-bSBhdWRpdGluZyB0aGUgdmFyaW91cyBmdW5jdGlvbnMgdG8gaW5zZXJ0IHBmbiBwdGUgZW50aXJl
-cwoodm1faW5zZXJ0X3Bmbl9wcm90LCByZW1hcF9wZm5fcmFuZ2UgYW5kIGFsbCBpdCdzIGNhbGxl
-cnMgbGlrZQpkbWFfbW1hcF93YykgaXQgbG9va3MgbGlrZSBWTV9QRk5NQVAgaXMgYWxyZWFkeSBy
-ZXF1aXJlZCBhbnl3YXksIHNvCnRoaXMgc2hvdWxkIGJlIHRoZSBjb3JyZWN0IGZsYWcgdG8gY2hl
-Y2sgZm9yLgoKUmVmZXJlbmNlczogaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGttbC9DQUtNSzd1
-SGkrbUcwejBIVW1OdDEzUUNDdnV0dVJWanBjUjBOalJMMTJrLVdiV3prUmdAbWFpbC5nbWFpbC5j
-b20vCkFja2VkLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+
-CkNjOiBKYXNvbiBHdW50aG9ycGUgPGpnZ0B6aWVwZS5jYT4KQ2M6IFN1cmVuIEJhZ2hkYXNhcnlh
-biA8c3VyZW5iQGdvb2dsZS5jb20+CkNjOiBNYXR0aGV3IFdpbGNveCA8d2lsbHlAaW5mcmFkZWFk
-Lm9yZz4KQ2M6IEpvaG4gU3R1bHR6IDxqb2huLnN0dWx0ekBsaW5hcm8ub3JnPgpTaWduZWQtb2Zm
-LWJ5OiBEYW5pZWwgVmV0dGVyIDxkYW5pZWwudmV0dGVyQGludGVsLmNvbT4KQ2M6IFN1bWl0IFNl
-bXdhbCA8c3VtaXQuc2Vtd2FsQGxpbmFyby5vcmc+CkNjOiAiQ2hyaXN0aWFuIEvDtm5pZyIgPGNo
-cmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4KQ2M6IGxpbnV4LW1lZGlhQHZnZXIua2VybmVsLm9yZwpD
-YzogbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCi0tClJlc2VuZGluZyB0aGlzIHNvIEkg
-Y2FuIHRlc3QgdGhlIG5leHQgdHdvIHBhdGNoZXMgZm9yIHZnZW0vc2htZW0gaW4KaW50ZWwtZ2Z4
-LWNpLiBMYXN0IHJvdW5kIGZhaWxlZCBzb21laG93LCBidXQgSSBjYW4ndCByZXBybyB0aGF0IGF0
-IGFsbApsb2NhbGx5IGhlcmUuCgpObyBpbW1lZGlhdGUgcGxhbnMgdG8gbWVyZ2UgdGhpcyBwYXRj
-aCBoZXJlIHNpbmNlIHR0bSBpc24ndCBhZGRyZXNzZWQKeWV0IChhbmQgdGhlcmUgd2UgaGF2ZSB0
-aGUgaHVnZXB0ZSBpc3N1ZSwgZm9yIHdoaWNoIEkgZG9uJ3QgdGhpbmsgd2UKaGF2ZSBhIGNsZWFy
-IGNvbnNlbnN1cyB5ZXQpLgotRGFuaWVsCi0tLQogZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYyB8
-IDE1ICsrKysrKysrKysrKystLQogMSBmaWxlIGNoYW5nZWQsIDEzIGluc2VydGlvbnMoKyksIDIg
-ZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYyBiL2Ry
-aXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMKaW5kZXggZWFkZDFlYWEyZmI1Li5kZGE1ODNmYjFmMDMg
-MTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMKKysrIGIvZHJpdmVycy9kbWEt
-YnVmL2RtYS1idWYuYwpAQCAtMTI3LDYgKzEyNyw3IEBAIHN0YXRpYyBzdHJ1Y3QgZmlsZV9zeXN0
-ZW1fdHlwZSBkbWFfYnVmX2ZzX3R5cGUgPSB7CiBzdGF0aWMgaW50IGRtYV9idWZfbW1hcF9pbnRl
-cm5hbChzdHJ1Y3QgZmlsZSAqZmlsZSwgc3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEpCiB7CiAJ
-c3RydWN0IGRtYV9idWYgKmRtYWJ1ZjsKKwlpbnQgcmV0OwogCiAJaWYgKCFpc19kbWFfYnVmX2Zp
-bGUoZmlsZSkpCiAJCXJldHVybiAtRUlOVkFMOwpAQCAtMTQyLDcgKzE0MywxMSBAQCBzdGF0aWMg
-aW50IGRtYV9idWZfbW1hcF9pbnRlcm5hbChzdHJ1Y3QgZmlsZSAqZmlsZSwgc3RydWN0IHZtX2Fy
-ZWFfc3RydWN0ICp2bWEpCiAJICAgIGRtYWJ1Zi0+c2l6ZSA+PiBQQUdFX1NISUZUKQogCQlyZXR1
-cm4gLUVJTlZBTDsKIAotCXJldHVybiBkbWFidWYtPm9wcy0+bW1hcChkbWFidWYsIHZtYSk7CisJ
-cmV0ID0gZG1hYnVmLT5vcHMtPm1tYXAoZG1hYnVmLCB2bWEpOworCisJV0FSTl9PTighKHZtYS0+
-dm1fZmxhZ3MgJiBWTV9QRk5NQVApKTsKKworCXJldHVybiByZXQ7CiB9CiAKIHN0YXRpYyBsb2Zm
-X3QgZG1hX2J1Zl9sbHNlZWsoc3RydWN0IGZpbGUgKmZpbGUsIGxvZmZfdCBvZmZzZXQsIGludCB3
-aGVuY2UpCkBAIC0xMjQ0LDYgKzEyNDksOCBAQCBFWFBPUlRfU1lNQk9MX0dQTChkbWFfYnVmX2Vu
-ZF9jcHVfYWNjZXNzKTsKIGludCBkbWFfYnVmX21tYXAoc3RydWN0IGRtYV9idWYgKmRtYWJ1Ziwg
-c3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEsCiAJCSB1bnNpZ25lZCBsb25nIHBnb2ZmKQogewor
-CWludCByZXQ7CisKIAlpZiAoV0FSTl9PTighZG1hYnVmIHx8ICF2bWEpKQogCQlyZXR1cm4gLUVJ
-TlZBTDsKIApAQCAtMTI2NCw3ICsxMjcxLDExIEBAIGludCBkbWFfYnVmX21tYXAoc3RydWN0IGRt
-YV9idWYgKmRtYWJ1Ziwgc3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEsCiAJdm1hX3NldF9maWxl
-KHZtYSwgZG1hYnVmLT5maWxlKTsKIAl2bWEtPnZtX3Bnb2ZmID0gcGdvZmY7CiAKLQlyZXR1cm4g
-ZG1hYnVmLT5vcHMtPm1tYXAoZG1hYnVmLCB2bWEpOworCXJldCA9IGRtYWJ1Zi0+b3BzLT5tbWFw
-KGRtYWJ1Ziwgdm1hKTsKKworCVdBUk5fT04oISh2bWEtPnZtX2ZsYWdzICYgVk1fUEZOTUFQKSk7
-CisKKwlyZXR1cm4gcmV0OwogfQogRVhQT1JUX1NZTUJPTF9HUEwoZG1hX2J1Zl9tbWFwKTsKIAot
-LSAKMi4zMS4wCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5v
-cmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4vbGlzdGluZm8vbGluYXJvLW1tLXNp
-Zwo=
+Hi Patrice, Alain,
+
+Could you help to take a look at this patchset, thanks.
+
+This series is the rebase to the newest kernel commit:
+88b06399c9c766c283e070b022b5ceafa4f63f19
+
+according to the request from:
+https://lore.kernel.org/lkml/ff2bc09d-1a17-50d4-d3ee-16fd3a86d7f1@foss.st.com/
+
+The clk bug affects the kernel bootup on stm32f469-disco board
+in case display config(CONFIG_DRM_STM, CONFIG_DRM_STM_DSI,
+DRM_PANEL_ORISETECH_OTM8009A)
+enabled.
+
+If you want to test clk patch on stm32f429-disco board, the
+panel-ilitek-ili9341.c can be
+used for that purpose (CONFIG_DRM_STM, DRM_PANEL_ILITEK_ILI9341)
+
+i2c driver patch intent to fix the touch panel driver get data through
+i2c bus timeout issue.
+
+Best regards.
+Dillon
+
+On Fri, May 14, 2021 at 7:02 PM <dillon.minfei@gmail.com> wrote:
+>
+> From: Dillon Min <dillon.minfei@gmail.com>
+>
+> This seriese fix three i2c/clk bug for stm32 f4/f7
+> - kernel runing in sdram, i2c driver get data timeout
+> - ltdc clk turn off after kernel console active
+> - kernel hang in set ltdc clock rate
+>
+> clk bug found on stm32f429/f469-disco board
+>
+> Hi Patrice:
+> below is the guide to verify the patch:
+>
+> setup test env with following files(link at below 'files link'):
+> [1] u-boot-dtb.bin
+> [2] rootfs zip file (used in kernel initramfs)
+> [3] u-boot's mkimage to create itb file
+> [4] kernel config file
+> [5] my itb with-or-without i2c patch
+>
+> This patch based on kernel commit:
+> 88b06399c9c766c283e070b022b5ceafa4f63f19
+>
+> Note:
+> panel-ilitek-ili9341.c is the driver which was submitted last year, but not
+> get accepted. it's used to setup touch screen calibration, then test i2c.
+>
+> create itb file(please correct path of 'data'):
+> ./mkimage -f stm32.its stm32.itb
+>
+> HW setup:
+> console:
+>        PA9, PA10
+>        usart0
+>        serial@40011000
+>        115200 8n1
+>
+> -- flash u-boot.bin to stm32f429-disco on PC
+> $ sudo openocd -f board/stm32f429discovery.cfg -c \
+>   '{PATH-TO-YOUR-UBOOT}/u-boot-dtb.bin 0x08000000 exit reset'
+>
+> -- setup kernel load bootargs at u-boot
+> U-Boot > setenv bootargs 'console=tty0 console=ttySTM0,115200
+>                     root=/dev/ram rdinit=/linuxrc loglevel=8 fbcon=rotate:2'
+> U-Boot > loady;bootm
+> (download stm32.dtb or your kernel with itb format, or download zImage, dtb)
+>
+> -- setup ts_calibrate running env on stm32f429-disco
+> / # export TSLIB_CONFFILE=/etc/ts.conf
+> / # export TSLIB_TSDEVICE=/dev/input/event0
+> / # export TSLIB_CONSOLEDEVICE=none
+> / # export TSLIB_FBDEVICE=/dev/fb0
+>
+> -- clear screen
+> / # ./fb
+>
+> -- run ts_calibrate
+> / # ts_calibrate
+> (you can calibrate touchscreen now, and get below errors)
+>
+> [  113.942087] stmpe-i2c0-0041: failed to read regs 0x52: -110
+> [  114.063598] stmpe-i2c 0-0041: failed to read reg 0x4b: -16
+> [  114.185629] stmpe-i2c 0-0041: failed to read reg 0x40: -16
+> [  114.307257] stmpe-i2c 0-0041: failed to write reg 0xb: -16
+>
+> ...
+> with i2c patch applied, you will find below logs:
+>
+> RAW---------------------> 3164 908 183 118.110884
+> TS_READ_RAW----> x = 3164, y =908, pressure = 183
+> RAW---------------------> 3166 922 126 118.138946
+> TS_READ_RAW----> x = 3166, y = 922, pressure = 126
+> ....
+>
+> files link:
+> https://drive.google.com/drive/folders/1qNbjChcB6UGtKzne2F5x9_WG_sZFyo3o?usp=sharing
+>
+>
+>
+>
+> Dillon Min (4):
+>   drm/panel: Add ilitek ili9341 panel driver
+>   i2c: stm32f4: Fix stmpe811 get xyz data timeout issue
+>   clk: stm32: Fix stm32f429's ltdc driver hang in set clock rate
+>   clk: stm32: Fix ltdc's clock turn off by clk_disable_unused() after
+>     kernel startup
+>
+>  drivers/clk/clk-stm32f4.c                    |   10 +-
+>  drivers/gpu/drm/panel/Kconfig                |   12 +
+>  drivers/gpu/drm/panel/Makefile               |    1 +
+>  drivers/gpu/drm/panel/panel-ilitek-ili9341.c | 1285 ++++++++++++++++++++++++++
+>  drivers/i2c/busses/i2c-stm32f4.c             |   12 +-
+>  5 files changed, 1310 insertions(+), 10 deletions(-)
+>  create mode 100755 drivers/gpu/drm/panel/panel-ilitek-ili9341.c
+>
+> --
+> 2.7.4
+>
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
