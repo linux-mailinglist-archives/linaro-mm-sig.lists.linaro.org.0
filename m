@@ -2,53 +2,48 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC3E33A0DA0
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  9 Jun 2021 09:19:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 92D0B3A5142
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 13 Jun 2021 01:11:20 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A72656123A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  9 Jun 2021 07:19:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C205C60B3C
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 12 Jun 2021 23:11:18 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 7CFC7612A9; Wed,  9 Jun 2021 07:19:40 +0000 (UTC)
+	id 626C86130F; Sat, 12 Jun 2021 23:11:16 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E7A6560AF2;
-	Wed,  9 Jun 2021 07:19:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CEEDD61158;
+	Sat, 12 Jun 2021 23:11:13 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 6AF1160A9F
- for <linaro-mm-sig@lists.linaro.org>; Wed,  9 Jun 2021 07:19:35 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 686A160B1F
+ for <linaro-mm-sig@lists.linaro.org>; Sat, 12 Jun 2021 23:11:12 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 5EAC860AF2; Wed,  9 Jun 2021 07:19:35 +0000 (UTC)
-Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
- by lists.linaro.org (Postfix) with ESMTPS id 2313A60A9F
- for <linaro-mm-sig@lists.linaro.org>; Wed,  9 Jun 2021 07:19:33 +0000 (UTC)
-Received: from dggemv711-chm.china.huawei.com (unknown [172.30.72.56])
- by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4G0JKk74MWz6ttj;
- Wed,  9 Jun 2021 15:15:38 +0800 (CST)
-Received: from dggpeml500020.china.huawei.com (7.185.36.88) by
- dggemv711-chm.china.huawei.com (10.1.198.66) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2176.2; Wed, 9 Jun 2021 15:19:30 +0800
-Received: from huawei.com (10.175.127.227) by dggpeml500020.china.huawei.com
- (7.185.36.88) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2176.2; Wed, 9 Jun 2021
- 15:19:29 +0800
-From: Baokun Li <libaokun1@huawei.com>
-To: <linux-kernel@vger.kernel.org>, Rob Clark <robdclark@gmail.com>, Sean Paul
- <sean@poorly.run>, David Airlie <airlied@linux.ie>, Daniel Vetter
- <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Date: Wed, 9 Jun 2021 15:28:38 +0800
-Message-ID: <20210609072838.1369371-1-libaokun1@huawei.com>
-X-Mailer: git-send-email 2.31.1
+ id 5DE6061158; Sat, 12 Jun 2021 23:11:12 +0000 (UTC)
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by lists.linaro.org (Postfix) with ESMTPS id 4455960B1F
+ for <linaro-mm-sig@lists.linaro.org>; Sat, 12 Jun 2021 23:11:10 +0000 (UTC)
+Received: from rorschach.local.home (cpe-66-24-58-225.stny.res.rr.com
+ [66.24.58.225])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.kernel.org (Postfix) with ESMTPSA id 57A66610C8;
+ Sat, 12 Jun 2021 23:11:08 +0000 (UTC)
+Date: Sat, 12 Jun 2021 19:11:07 -0400
+From: Steven Rostedt <rostedt@goodmis.org>
+To: Joe Perches <joe@perches.com>
+Message-ID: <20210612191107.24c1bfbb@rorschach.local.home>
+In-Reply-To: <48a056adabd8f70444475352f617914cef504a45.camel@perches.com>
+References: <cover.1621024265.git.bristot@redhat.com>
+ <2c59beee3b36b15592bfbb9f26dee7f8b55fd814.1621024265.git.bristot@redhat.com>
+ <20210603172902.41648183@gandalf.local.home>
+ <1e068d21106bb6db05b735b4916bb420e6c9842a.camel@perches.com>
+ <20210604122128.0d348960@oasis.local.home>
+ <48a056adabd8f70444475352f617914cef504a45.camel@perches.com>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-Originating-IP: [10.175.127.227]
-X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
- dggpeml500020.china.huawei.com (7.185.36.88)
-X-CFilter-Loop: Reflected
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH -next v2] drm/msm: Use list_move_tail
- instead of list_del/list_add_tail in msm_gem.c
+Subject: Re: [Linaro-mm-sig] [PATCH V2] treewide: Add missing semicolons to
+ __assign_str uses
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,44 +56,39 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: kernel-janitors@vger.kernel.org, Hulk
- Robot <hulkci@huawei.com>, linux-arm-msm@vger.kernel.org, yuehaibing@huawei.com,
+Cc: linux-nfs@vger.kernel.org, lima@lists.freedesktop.org,
+ linux-rdma@vger.kernel.org, netdev@vger.kernel.org, linux-usb@vger.kernel.org,
+ linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- yangjihong1@huawei.com, libaokun1@huawei.com, yukuai3@huawei.com,
- weiyongjun1@huawei.com, freedreno@lists.freedesktop.org,
- linux-media@vger.kernel.org
+ amd-gfx@lists.freedesktop.org, linux-media@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Using list_move_tail() instead of list_del() + list_add_tail() in msm_gem.c.
+On Sat, 12 Jun 2021 08:42:27 -0700
+Joe Perches <joe@perches.com> wrote:
 
-Reported-by: Hulk Robot <hulkci@huawei.com>
-Signed-off-by: Baokun Li <libaokun1@huawei.com>
----
-V1->V2:
-	CC mailist
+> The __assign_str macro has an unusual ending semicolon but the vast
+> majority of uses of the macro already have semicolon termination.
+> 
+> $ git grep -P '\b__assign_str\b' | wc -l
+> 551
+> $ git grep -P '\b__assign_str\b.*;' | wc -l
+> 480
+> 
+> Add semicolons to the __assign_str() uses without semicolon termination
+> and all the other uses without semicolon termination via additional defines
+> that are equivalent to __assign_str() with the eventual goal of removing
+> the semicolon from the __assign_str() macro definition.
+> 
+> Link: https://lore.kernel.org/lkml/1e068d21106bb6db05b735b4916bb420e6c9842a.camel@perches.com/
 
- drivers/gpu/drm/msm/msm_gem.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+FYI, please send new patches as new threads. Otherwise it is likely to
+be missed.
 
-diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c
-index 1865919368f2..5b7d63d3750a 100644
---- a/drivers/gpu/drm/msm/msm_gem.c
-+++ b/drivers/gpu/drm/msm/msm_gem.c
-@@ -854,8 +854,7 @@ void msm_gem_active_get(struct drm_gem_object *obj, struct msm_gpu *gpu)
- 		mutex_lock(&priv->mm_lock);
- 		if (msm_obj->evictable)
- 			mark_unevictable(msm_obj);
--		list_del(&msm_obj->mm_list);
--		list_add_tail(&msm_obj->mm_list, &gpu->active_list);
-+		list_move_tail(&msm_obj->mm_list, &gpu->active_list);
- 		mutex_unlock(&priv->mm_lock);
- 	}
- }
-
+-- Steve
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
