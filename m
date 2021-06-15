@@ -2,48 +2,57 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92D0B3A5142
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 13 Jun 2021 01:11:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04CCA3A7385
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Jun 2021 03:58:37 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C205C60B3C
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 12 Jun 2021 23:11:18 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 57A34612E5
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Jun 2021 01:58:35 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 626C86130F; Sat, 12 Jun 2021 23:11:16 +0000 (UTC)
+	id A068F6131F; Tue, 15 Jun 2021 01:58:34 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CEEDD61158;
-	Sat, 12 Jun 2021 23:11:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 42485612A4;
+	Tue, 15 Jun 2021 01:58:31 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 686A160B1F
- for <linaro-mm-sig@lists.linaro.org>; Sat, 12 Jun 2021 23:11:12 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id D09B860E5F
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 15 Jun 2021 01:58:28 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 5DE6061158; Sat, 12 Jun 2021 23:11:12 +0000 (UTC)
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by lists.linaro.org (Postfix) with ESMTPS id 4455960B1F
- for <linaro-mm-sig@lists.linaro.org>; Sat, 12 Jun 2021 23:11:10 +0000 (UTC)
-Received: from rorschach.local.home (cpe-66-24-58-225.stny.res.rr.com
- [66.24.58.225])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mail.kernel.org (Postfix) with ESMTPSA id 57A66610C8;
- Sat, 12 Jun 2021 23:11:08 +0000 (UTC)
-Date: Sat, 12 Jun 2021 19:11:07 -0400
-From: Steven Rostedt <rostedt@goodmis.org>
-To: Joe Perches <joe@perches.com>
-Message-ID: <20210612191107.24c1bfbb@rorschach.local.home>
-In-Reply-To: <48a056adabd8f70444475352f617914cef504a45.camel@perches.com>
-References: <cover.1621024265.git.bristot@redhat.com>
- <2c59beee3b36b15592bfbb9f26dee7f8b55fd814.1621024265.git.bristot@redhat.com>
- <20210603172902.41648183@gandalf.local.home>
- <1e068d21106bb6db05b735b4916bb420e6c9842a.camel@perches.com>
- <20210604122128.0d348960@oasis.local.home>
- <48a056adabd8f70444475352f617914cef504a45.camel@perches.com>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ id C6436612A4; Tue, 15 Jun 2021 01:58:28 +0000 (UTC)
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+ by lists.linaro.org (Postfix) with ESMTPS id 8806760E5F
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 15 Jun 2021 01:58:26 +0000 (UTC)
+Received: from dggemv704-chm.china.huawei.com (unknown [172.30.72.54])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4G3rxH3x8kz6yrs;
+ Tue, 15 Jun 2021 09:55:15 +0800 (CST)
+Received: from dggpeml500020.china.huawei.com (7.185.36.88) by
+ dggemv704-chm.china.huawei.com (10.3.19.47) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.2; Tue, 15 Jun 2021 09:58:24 +0800
+Received: from [10.174.177.174] (10.174.177.174) by
+ dggpeml500020.china.huawei.com (7.185.36.88) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2176.2; Tue, 15 Jun 2021 09:58:23 +0800
+To: <bskeggs@redhat.com>, <airlied@linux.ie>, <daniel@ffwll.ch>,
+ <sumit.semwal@linaro.org>, <christian.koenig@amd.com>,
+ <dri-devel@lists.freedesktop.org>, <nouveau@lists.freedesktop.org>,
+ <linux-kernel@vger.kernel.org>, <linux-media@vger.kernel.org>,
+ <linaro-mm-sig@lists.linaro.org>
+References: <20210525082511.580068-1-libaokun1@huawei.com>
+From: "libaokun (A)" <libaokun1@huawei.com>
+Message-ID: <cee44d34-81c1-4972-e68b-e6b193598763@huawei.com>
+Date: Tue, 15 Jun 2021 09:58:23 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.9.0
 MIME-Version: 1.0
+In-Reply-To: <20210525082511.580068-1-libaokun1@huawei.com>
+X-Originating-IP: [10.174.177.174]
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ dggpeml500020.china.huawei.com (7.185.36.88)
+X-CFilter-Loop: Reflected
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH V2] treewide: Add missing semicolons to
- __assign_str uses
+Subject: Re: [Linaro-mm-sig] [PATCH -next] drm/nouveau: Remove set but not
+ used variable 'dev'
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -56,40 +65,46 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: linux-nfs@vger.kernel.org, lima@lists.freedesktop.org,
- linux-rdma@vger.kernel.org, netdev@vger.kernel.org, linux-usb@vger.kernel.org,
- linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- amd-gfx@lists.freedesktop.org, linux-media@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: yuehaibing@huawei.com, weiyongjun1@huawei.com, yukuai3@huawei.com,
+ yangjihong1@huawei.com
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Sat, 12 Jun 2021 08:42:27 -0700
-Joe Perches <joe@perches.com> wrote:
-
-> The __assign_str macro has an unusual ending semicolon but the vast
-> majority of uses of the macro already have semicolon termination.
-> 
-> $ git grep -P '\b__assign_str\b' | wc -l
-> 551
-> $ git grep -P '\b__assign_str\b.*;' | wc -l
-> 480
-> 
-> Add semicolons to the __assign_str() uses without semicolon termination
-> and all the other uses without semicolon termination via additional defines
-> that are equivalent to __assign_str() with the eventual goal of removing
-> the semicolon from the __assign_str() macro definition.
-> 
-> Link: https://lore.kernel.org/lkml/1e068d21106bb6db05b735b4916bb420e6c9842a.camel@perches.com/
-
-FYI, please send new patches as new threads. Otherwise it is likely to
-be missed.
-
--- Steve
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+cGluZwoK5ZyoIDIwMjEvNS8yNSAxNjoyNSwgQmFva3VuIExpIOWGmemBkzoKPiBGaXhlcyBnY2Mg
+Jy1XdW51c2VkLWJ1dC1zZXQtdmFyaWFibGUnIHdhcm5pbmc6Cj4KPiBkcml2ZXJzL2dwdS9kcm0v
+bm91dmVhdS9ub3V2ZWF1X2JvLmM6IEluIGZ1bmN0aW9uICdub3V2ZWF1X3R0bV90dF9wb3B1bGF0
+ZSc6Cj4gZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVhdV9iby5jOjEyNTg6MTc6IHdhcm5p
+bmc6Cj4gICB2YXJpYWJsZSDigJhkZXbigJkgc2V0IGJ1dCBub3QgdXNlZCBbLVd1bnVzZWQtYnV0
+LXNldC12YXJpYWJsZV0KPgo+IGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYm8uYzog
+SW4gZnVuY3Rpb24gJ25vdXZlYXVfdHRtX3R0X3VucG9wdWxhdGUnOgo+IGRyaXZlcnMvZ3B1L2Ry
+bS9ub3V2ZWF1L25vdXZlYXVfYm8uYzoxMjgxOjE3OiB3YXJuaW5nOgo+ICAgdmFyaWFibGUg4oCY
+ZGV24oCZIHNldCBidXQgbm90IHVzZWQgWy1XdW51c2VkLWJ1dC1zZXQtdmFyaWFibGVdCj4KPiBJ
+dCBuZXZlciB1c2VkIHNpbmNlIGludHJvZHVjdGlvbi4KPgo+IFNpZ25lZC1vZmYtYnk6IEJhb2t1
+biBMaSA8bGliYW9rdW4xQGh1YXdlaS5jb20+Cj4gLS0tCj4gICBkcml2ZXJzL2dwdS9kcm0vbm91
+dmVhdS9ub3V2ZWF1X2JvLmMgfCA0IC0tLS0KPiAgIDEgZmlsZSBjaGFuZ2VkLCA0IGRlbGV0aW9u
+cygtKQo+Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYm8u
+YyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYm8uYwo+IGluZGV4IDdhMjYyNGMw
+YmE0Yy4uNTFmOWEyZTY1MzJlIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
+L25vdXZlYXVfYm8uYwo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfYm8u
+Ywo+IEBAIC0xMjU0LDcgKzEyNTQsNiBAQCBub3V2ZWF1X3R0bV90dF9wb3B1bGF0ZShzdHJ1Y3Qg
+dHRtX2RldmljZSAqYmRldiwKPiAgIHsKPiAgIAlzdHJ1Y3QgdHRtX3R0ICp0dG1fZG1hID0gKHZv
+aWQgKil0dG07Cj4gICAJc3RydWN0IG5vdXZlYXVfZHJtICpkcm07Cj4gLQlzdHJ1Y3QgZGV2aWNl
+ICpkZXY7Cj4gICAJYm9vbCBzbGF2ZSA9ICEhKHR0bS0+cGFnZV9mbGFncyAmIFRUTV9QQUdFX0ZM
+QUdfU0cpOwo+ICAgCj4gICAJaWYgKHR0bV90dF9pc19wb3B1bGF0ZWQodHRtKSkKPiBAQCAtMTI2
+Nyw3ICsxMjY2LDYgQEAgbm91dmVhdV90dG1fdHRfcG9wdWxhdGUoc3RydWN0IHR0bV9kZXZpY2Ug
+KmJkZXYsCj4gICAJfQo+ICAgCj4gICAJZHJtID0gbm91dmVhdV9iZGV2KGJkZXYpOwo+IC0JZGV2
+ID0gZHJtLT5kZXYtPmRldjsKPiAgIAo+ICAgCXJldHVybiB0dG1fcG9vbF9hbGxvYygmZHJtLT50
+dG0uYmRldi5wb29sLCB0dG0sIGN0eCk7Cj4gICB9Cj4gQEAgLTEyNzcsMTQgKzEyNzUsMTIgQEAg
+bm91dmVhdV90dG1fdHRfdW5wb3B1bGF0ZShzdHJ1Y3QgdHRtX2RldmljZSAqYmRldiwKPiAgIAkJ
+CSAgc3RydWN0IHR0bV90dCAqdHRtKQo+ICAgewo+ICAgCXN0cnVjdCBub3V2ZWF1X2RybSAqZHJt
+Owo+IC0Jc3RydWN0IGRldmljZSAqZGV2Owo+ICAgCWJvb2wgc2xhdmUgPSAhISh0dG0tPnBhZ2Vf
+ZmxhZ3MgJiBUVE1fUEFHRV9GTEFHX1NHKTsKPiAgIAo+ICAgCWlmIChzbGF2ZSkKPiAgIAkJcmV0
+dXJuOwo+ICAgCj4gICAJZHJtID0gbm91dmVhdV9iZGV2KGJkZXYpOwo+IC0JZGV2ID0gZHJtLT5k
+ZXYtPmRldjsKPiAgIAo+ICAgCXJldHVybiB0dG1fcG9vbF9mcmVlKCZkcm0tPnR0bS5iZGV2LnBv
+b2wsIHR0bSk7Cj4gICB9Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGlu
+YXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8t
+bW0tc2lnCg==
