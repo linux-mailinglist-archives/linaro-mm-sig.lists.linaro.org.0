@@ -2,75 +2,72 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45DD73A9502
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Jun 2021 10:27:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71D913AB23D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Jun 2021 13:16:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E8DF1634F3
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Jun 2021 08:27:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A058E6350E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Jun 2021 11:16:19 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 84D5E634FD; Wed, 16 Jun 2021 08:27:35 +0000 (UTC)
+	id 40E4C6354D; Thu, 17 Jun 2021 11:16:15 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 54F20666F3;
-	Wed, 16 Jun 2021 08:27:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7ED4C61A2A;
+	Thu, 17 Jun 2021 11:16:10 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 6F9736600D
- for <linaro-mm-sig@lists.linaro.org>; Wed, 16 Jun 2021 08:27:13 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 5E0E261145
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Jun 2021 11:16:04 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 61FCF63512; Wed, 16 Jun 2021 08:27:08 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com
- [209.85.208.54])
- by lists.linaro.org (Postfix) with ESMTPS id B45EB61A4D
- for <linaro-mm-sig@lists.linaro.org>; Wed, 16 Jun 2021 08:27:05 +0000 (UTC)
-Received: by mail-ed1-f54.google.com with SMTP id r7so1520395edv.12
- for <linaro-mm-sig@lists.linaro.org>; Wed, 16 Jun 2021 01:27:05 -0700 (PDT)
+ id 5901061A4D; Thu, 17 Jun 2021 11:16:04 +0000 (UTC)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com
+ [209.85.208.47])
+ by lists.linaro.org (Postfix) with ESMTPS id 4EB6F61145
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Jun 2021 11:16:02 +0000 (UTC)
+Received: by mail-ed1-f47.google.com with SMTP id u24so3422973edy.11
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Jun 2021 04:16:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+ h=from:to:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=IVTqokzmJtH8YP62XhkCvu3HVJ/rLNfsAlMIAEY59CE=;
- b=EwEYNY4o/LxWqe7QhW3a60rhBvw/kRELesY+OsHJ+XaBjf0r6WAzYlVTjcdo3Q+M0B
- hlXIM9gJRkjGWtrSWXsIB1Y9niKXfnaCOZUVlw3phEEKG7nQDYXmmmN2Ucu9vqaHWEV7
- tWJ4gJwUSDTwiOoG/dQUHjc4hOFVi7cJ2h9TTcKLtXsUbxKE+zsrWj7tUT6UhK727GP9
- 28UoI8wNQKRUSJQQm7gGpOGysujbsiyWzIbMJ3p5hqBn6Q9UK6gdq2tnSP0kBgNjwGRM
- jGN5xHkwvWTZXFhTHC3ye6Skxz67KYEhWjyqNJA1inGuvlzJo5C7CyopuppTDQvFj9ZZ
- skuw==
+ bh=eRoeVaaXjTUDEXCwT0O7O9+YvstCRV3pUx1vTDqRgQg=;
+ b=G4wBwRp0IjZh+y0I9yhNcfOxHF+Za8sU6/ookQRfC8i1TVCIFcg3TQ9kveDi300x6q
+ gdQqx77sfv0OtlGiYtOgajzGlUHIS1Ia/W/aJWKCQ9a22UKHP2FyRfZprVG/OBAzkY3r
+ /oQEo33n5soAsdloWhelH3zPTiKwFVEXJdTg7+kNxpexB7bvOfGWCkqhoNsXos2Qua4q
+ 0uDo+1LSIVQk9PS4881xGdI2pDiJQBpPaVudCP+DShbmVho+BW4rNeeyZ6H5XSrhRXpS
+ IzjNMQuKPBEF2K4zX91ZSpyEQnniQmfmIildKcuwkCYmDArJk1HvAxgf0IvMGBI/XwKW
+ dUOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=IVTqokzmJtH8YP62XhkCvu3HVJ/rLNfsAlMIAEY59CE=;
- b=El0+SolppMd3Y5yqy6hn98XYENfQQ/V+7tC7TkykSz2PFXPp3ZCq9B40Ok/hfS/ZPt
- hi7YWuGtRffh/csdJwxM8/YPGYeG1trdLgURV26+zhtM1n+3CiDnspMyMx6R6voRUpLg
- WrVmMQ+IDcg5K0DgzyGv1P4VyiinU+yGmDNGPHnpliVymv1nNJ+pryj2gQtFRr1Jd8IH
- n+jqDxe96DDrN+IxVzqKyz6kF+JJrKzpKUNER42XzTw5eqj5TTSKOpAxLeS2TNN2XRRC
- ms0nfuwyO23Gzso6qNllWASrVKegFXz9oKYKWp9gL7BmzhS4L7eIU78qRizIYUPchw2e
- aTWQ==
-X-Gm-Message-State: AOAM531ZZImSOA2ByL0/rE7vryUY6kIaePc0Cq5mnFSAyKJVZZC4WREd
- Gm0j5q7KzTgfZFOCodGouY4=
-X-Google-Smtp-Source: ABdhPJx4sV239SQRT2vcbJ7VyXdlQJ8tWQ82/GMk1JT2JyYbq5iZo7gKx4+Rw7i+3JlO3ydX9xlE6w==
-X-Received: by 2002:a05:6402:1644:: with SMTP id
- s4mr2774807edx.190.1623832024719; 
- Wed, 16 Jun 2021 01:27:04 -0700 (PDT)
-Received: from abel.fritz.box ([2a02:908:1252:fb60:8b88:17a4:582b:121f])
- by smtp.gmail.com with ESMTPSA id v7sm1152639edx.38.2021.06.16.01.27.03
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=eRoeVaaXjTUDEXCwT0O7O9+YvstCRV3pUx1vTDqRgQg=;
+ b=lpsKFnpPbKQMUoWIU0Vvv2uBohNzpsr5EwZxlvWju23PbXk4TDIc0WVbq7I7jkRzMc
+ GE35HBBZjMSwqhYHiSAZIwGca8Zc86XrmiL+i3FZKCzkqW4OaVKADlgDu2IgKpshpmju
+ WrxCyAykPEdIdKcvYkeT01K67PYmPENazAUZywPTf9sCHwpcNEcn2z+6Xj4ZykCn9xgu
+ e5OrJRaWTJmYhOYRb6ij4weVSAfBvyu/h4T2JdJUSlFSHKWTdHYxyELObj2Kjv7LWBpB
+ PeFhyMwdXRRL7YcKBmW0wc3LBcyKGNhA2iqh0GyulbsxGJ+mOX1wDGyS/oqVHb+WEVwM
+ 3pNg==
+X-Gm-Message-State: AOAM533QX+KjiIchvG35vrNRssjzXAUmWFtmoJ+hkGYAUzmHBg4WI2aX
+ 3XPbofKYymmNrEhqR8xkS3I=
+X-Google-Smtp-Source: ABdhPJytH6yVvyCmyeiBB7rLMSWtt83HkP7MUpXyrNkBfXBgFQ2Z867Cw4vlh/L4I8F8GBSaCTnRyg==
+X-Received: by 2002:a05:6402:543:: with SMTP id
+ i3mr5777204edx.173.1623928561443; 
+ Thu, 17 Jun 2021 04:16:01 -0700 (PDT)
+Received: from abel.fritz.box ([2a02:908:1252:fb60:8534:5e76:1ee5:f3ad])
+ by smtp.gmail.com with ESMTPSA id y10sm3531353ejm.76.2021.06.17.04.16.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 16 Jun 2021 01:27:04 -0700 (PDT)
+ Thu, 17 Jun 2021 04:16:00 -0700 (PDT)
 From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
 X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
  <christian.koenig@amd.com>
-To: daniel@ffwll.ch, dri-devel@lists.freedesktop.org,
- linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org,
- sumit.semwal@linaro.org
-Date: Wed, 16 Jun 2021 10:26:55 +0200
-Message-Id: <20210616082655.111001-8-christian.koenig@amd.com>
+To: daniel@ffwll.ch, sumit.semwal@linaro.org, dri-devel@lists.freedesktop.org,
+ linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
+Date: Thu, 17 Jun 2021 13:15:42 +0200
+Message-Id: <20210617111558.28486-1-christian.koenig@amd.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210616082655.111001-1-christian.koenig@amd.com>
-References: <20210616082655.111001-1-christian.koenig@amd.com>
 MIME-Version: 1.0
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH 7/7] drm/amdgpu: drop CS workaround adding
- the shared manually
+Subject: [Linaro-mm-sig] Introduce fence iterators to abstract dma_resv RCU
+ handling
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,31 +80,29 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-RHJvcCB0aGUgd29ya2Fyb3VuZCBhZGRpbmcgdGhlIHNoYXJlZCBmZW5jZSBtYW51YWxseSBpbiB0
-aGUgQ1MuCgpTaWduZWQtb2ZmLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmln
-QGFtZC5jb20+Ci0tLQogZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2NzLmMgfCA2
-ICstLS0tLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCA1IGRlbGV0aW9ucygtKQoK
-ZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9jcy5jIGIvZHJp
-dmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2NzLmMKaW5kZXggMjU2NTU0MTRlOWMwLi5h
-ZjhmNWZmNWYxMmMgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdw
-dV9jcy5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9jcy5jCkBAIC0x
-MjczLDE0ICsxMjczLDEwIEBAIHN0YXRpYyBpbnQgYW1kZ3B1X2NzX3N1Ym1pdChzdHJ1Y3QgYW1k
-Z3B1X2NzX3BhcnNlciAqcCwKIAkJLyoKIAkJICogV29yayBhcm91bmQgZG1hX3Jlc3Ygc2hvcnRj
-b21taW5ncyBieSB3cmFwcGluZyB1cCB0aGUKIAkJICogc3VibWlzc2lvbiBpbiBhIGRtYV9mZW5j
-ZV9jaGFpbiBhbmQgYWRkIGl0IGFzIGV4Y2x1c2l2ZQotCQkgKiBmZW5jZSwgYnV0IGZpcnN0IGFk
-ZCB0aGUgc3VibWlzc2lvbiBhcyBzaGFyZWQgZmVuY2UgdG8gbWFrZQotCQkgKiBzdXJlIHRoYXQg
-c2hhcmVkIGZlbmNlcyBuZXZlciBzaWduYWwgYmVmb3JlIHRoZSBleGNsdXNpdmUKLQkJICogb25l
-LgorCQkgKiBmZW5jZS4KIAkJICovCiAJCWRtYV9mZW5jZV9jaGFpbl9pbml0KGNoYWluLCBkbWFf
-cmVzdl9leGNsX2ZlbmNlKHJlc3YpLAogCQkJCSAgICAgZG1hX2ZlbmNlX2dldChwLT5mZW5jZSks
-IDEpOwotCi0JCWRtYV9yZXN2X2FkZF9zaGFyZWRfZmVuY2UocmVzdiwgcC0+ZmVuY2UpOwogCQly
-Y3VfYXNzaWduX3BvaW50ZXIocmVzdi0+ZmVuY2VfZXhjbCwgJmNoYWluLT5iYXNlKTsKIAkJZS0+
-Y2hhaW4gPSBOVUxMOwogCX0KLS0gCjIuMjUuMQoKX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1t
-LXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xp
-c3RpbmZvL2xpbmFyby1tbS1zaWcK
+Hi guys,
+
+during the recent discussion about SLAB_TYPESAFE_BY_RCU, dma_fence_get_rcu and dma_fence_get_rcu_safe we found that the RCU handling for dma_resv objects was implemented multiple times.
+
+Unfortunately a lot of those implementations get the rather complicated dance with RCU and the sequence number handling wrong.
+
+So this patch set aims to audit and unify this by providing an iterator which automatically restarts when a modification to the dma_resv object is detected.
+
+The result is pretty impressive I think since this not only mean that we got rid of all those incorrect dma_fence_get_rcu() cases, but also reduce the overall loc count quite a bit.
+
+Please review and/or comment.
+
+Cheers,
+Christian.
+
+
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
