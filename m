@@ -2,74 +2,70 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 659CC3AB25C
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Jun 2021 13:17:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BD1C3ABCAB
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Jun 2021 21:26:20 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 470C663576
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Jun 2021 11:17:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B179863524
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Jun 2021 19:26:18 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id E9FBF6350B; Thu, 17 Jun 2021 11:17:34 +0000 (UTC)
+	id C8AFC63538; Thu, 17 Jun 2021 19:26:16 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C12C763514;
-	Thu, 17 Jun 2021 11:17:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BE4B663500;
+	Thu, 17 Jun 2021 19:26:13 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 4077A63547
- for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Jun 2021 11:16:20 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 19883634F3
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Jun 2021 19:26:12 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 5A79E63511; Thu, 17 Jun 2021 11:16:18 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com
- [209.85.218.42])
- by lists.linaro.org (Postfix) with ESMTPS id 3D6006350D
- for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Jun 2021 11:16:13 +0000 (UTC)
-Received: by mail-ej1-f42.google.com with SMTP id gt18so9186953ejc.11
- for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Jun 2021 04:16:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:subject:date:message-id:in-reply-to:references:mime-version
- :content-transfer-encoding;
- bh=R6hl7Kj0yqQ18nUKlg1tjNnt1DaG6v6UQcKSpcEHFSE=;
- b=JGK01UuNZMIEIDibVS0nyIINaWe1LD8WZSd2MzqqM2c1KEb2oA3W9tigP/K49EqQW8
- HZxCrrioSf1JPwkEFtuGmZZRBoArktZT6ohdSForRUjBj23LLhDX3yQPRXYyLMozPX7e
- l/t6i/bxYWFoVNcLTK5HgX2RtfTcooCVtxNCp2D/9SEn52xJiDUO84QtRapdt+IJlEok
- CJ/lmWyy/U6dbXa2Wniz6V7zBH0SdBaNv+4HPtws7b0i6j4yuu/SCwo2rT0oVh2DOaju
- TJzNFPmCQnAbO6g6e6nPuoZt4kam7XNW4A0fqhl+bNthPPPtHRZpXfuD5m1sNVTOBZlL
- O/PQ==
+ id 0B8A463500; Thu, 17 Jun 2021 19:26:12 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+ [209.85.221.42])
+ by lists.linaro.org (Postfix) with ESMTPS id F422F634F3
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Jun 2021 19:26:09 +0000 (UTC)
+Received: by mail-wr1-f42.google.com with SMTP id a11so7985873wrt.13
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Jun 2021 12:26:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=uOCbhZ/ibkRBObHTOgKs1UFBQ9qhD4uIcfjgRg2K5Rs=;
+ b=IH1EtHRcSfinmclrpIc4Ng6Z7QMgqeen5j6b9qDw9LlX3wUMNyz7FR5R2CPO52LkTf
+ QD+gv9wIv5pC6wI/j5ngc570YTPSoQC2HVxc+/PgCaUlG19XD4VHTKEeFdM63kxC4KXb
+ RWLz1Vo9kZ1DZtt0ovCaSIdBs4XA0bFdD5FjA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=R6hl7Kj0yqQ18nUKlg1tjNnt1DaG6v6UQcKSpcEHFSE=;
- b=bQ9B46kL9F+rU7B+KGIQDfnn63FQ+EJFi3cfEvWkDOu0mvo6EF4d0LjecA6VyWQCq0
- vMmXV8yK7+2e51mub/UeAMRKXxb+EuExIfy9LMuqOl6SgA6qijXJAlK0wCECUMaFQXBt
- 3DrjyBeoqG3zxRW6IQXYTcZz/mQcVjRmNvDESyjnaHYotTXmCNuXOxi/SIJIjLHU3RWn
- hfewieBY1AW5uJXbWhggtTYR4TlQYW/JvXzx+G2RgqBg98bsm7jiwtFkODlN3sbzVh6E
- LLrufUYB2oWLQlGzV8ORmB5CqkOJjFNlsWrPAJvfhoB+PDDVf2rt+fR5e//E8cVJG+Pf
- edNw==
-X-Gm-Message-State: AOAM530XzhLNGWiux60PzjAVgRd7TIsggDSqI1dS4fOHsG1SNC2IEP3N
- UwBZOHYQ5eGcflAYEXRk8Aw5mVRvRxU=
-X-Google-Smtp-Source: ABdhPJzM+36tYqZqJ/QN7yQ4BXU4PIysQ1XlwHkj9hQ3HC1RgavOExt7bDD1K7FT+NqCLwr8YaMZWQ==
-X-Received: by 2002:a17:907:20ee:: with SMTP id
- rh14mr4645376ejb.461.1623928572354; 
- Thu, 17 Jun 2021 04:16:12 -0700 (PDT)
-Received: from abel.fritz.box ([2a02:908:1252:fb60:8534:5e76:1ee5:f3ad])
- by smtp.gmail.com with ESMTPSA id y10sm3531353ejm.76.2021.06.17.04.16.11
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=uOCbhZ/ibkRBObHTOgKs1UFBQ9qhD4uIcfjgRg2K5Rs=;
+ b=uNxRpVWfl4amZZCzCW5shHSCNp6CJhJnuptRxr2NNDbiXh5veg/61g4BUJA92pmCnH
+ OZWtn6vQeZhpil1nxmHsnvC1aQS3AfDYK6pnDhINwa43vGe+qSzyEYxMlhsZ9WHzdNKN
+ TlKAFBpCopZAhbS8vaT21TQ9E9bu51fdNMmJYSeTawDs82Jva/sY1EK8QqplWGpPUbHm
+ DCvMtJax7bQNAw34/G/9vQAkzvUIoOTpdq3XjTALiSNi4YM5oGogc77ykA1NPSQ1tct1
+ bdzkRcMdturZtw04c3AKXnemssvkwjMOnJroaPq4DnQpmlpuValrZutGjMczeIq+deHt
+ o0sg==
+X-Gm-Message-State: AOAM533ZxXqhRUYCDIELQr3Ck5VD9klJ+UhwNwrHRA0mwPmQCDccrRLI
+ mOKwHyPRVzQuKifhJawyxdmrYg==
+X-Google-Smtp-Source: ABdhPJyFfhTApY3wh24dH1FBegs1U/7U9Tg5s0DawhN6NGiIRg2uLHMj8Cb4gBd6mBJpG1xllNPadg==
+X-Received: by 2002:adf:e80c:: with SMTP id o12mr4048275wrm.425.1623957969045; 
+ Thu, 17 Jun 2021 12:26:09 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id r6sm6181038wrz.91.2021.06.17.12.26.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 17 Jun 2021 04:16:12 -0700 (PDT)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
- <christian.koenig@amd.com>
-To: daniel@ffwll.ch, sumit.semwal@linaro.org, dri-devel@lists.freedesktop.org,
- linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
-Date: Thu, 17 Jun 2021 13:15:58 +0200
-Message-Id: <20210617111558.28486-17-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210617111558.28486-1-christian.koenig@amd.com>
-References: <20210617111558.28486-1-christian.koenig@amd.com>
+ Thu, 17 Jun 2021 12:26:08 -0700 (PDT)
+Date: Thu, 17 Jun 2021 21:26:06 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <YMuhzpyiNMSz3Nx+@phenom.ffwll.local>
+References: <20210616082655.111001-1-christian.koenig@amd.com>
+ <20210616082655.111001-2-christian.koenig@amd.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20210616082655.111001-2-christian.koenig@amd.com>
+X-Operating-System: Linux phenom 5.10.0-7-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH 16/16] drm/radeon: use new iterator in
- radeon_sync_resv
+Subject: Re: [Linaro-mm-sig] [PATCH 1/7] dma-buf: add some more kerneldoc to
+ dma_resv_add_shared_fence
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,37 +78,75 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
+ daniel@ffwll.ch, linux-media@vger.kernel.org
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-U2ltcGxpZnlpbmcgdGhlIGNvZGUgYSBiaXQuCgpTaWduZWQtb2ZmLWJ5OiBDaHJpc3RpYW4gS8O2
-bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+Ci0tLQogZHJpdmVycy9ncHUvZHJtL3JhZGVv
-bi9yYWRlb25fc3luYy5jIHwgMjIgKysrLS0tLS0tLS0tLS0tLS0tLS0tLQogMSBmaWxlIGNoYW5n
-ZWQsIDMgaW5zZXJ0aW9ucygrKSwgMTkgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvZHJpdmVy
-cy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fc3luYy5jIGIvZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9y
-YWRlb25fc3luYy5jCmluZGV4IDkyNTdiNjAxNDRjNC4uMTRhNGQ4MTM1YmFkIDEwMDY0NAotLS0g
-YS9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9zeW5jLmMKKysrIGIvZHJpdmVycy9ncHUv
-ZHJtL3JhZGVvbi9yYWRlb25fc3luYy5jCkBAIC05MSwzMyArOTEsMTcgQEAgaW50IHJhZGVvbl9z
-eW5jX3Jlc3Yoc3RydWN0IHJhZGVvbl9kZXZpY2UgKnJkZXYsCiAJCSAgICAgc3RydWN0IGRtYV9y
-ZXN2ICpyZXN2LAogCQkgICAgIGJvb2wgc2hhcmVkKQogewotCXN0cnVjdCBkbWFfcmVzdl9saXN0
-ICpmbGlzdDsKLQlzdHJ1Y3QgZG1hX2ZlbmNlICpmOworCXN0cnVjdCBkbWFfcmVzdl9jdXJzb3Ig
-Y3Vyc29yOwogCXN0cnVjdCByYWRlb25fZmVuY2UgKmZlbmNlOwotCXVuc2lnbmVkIGk7CisJc3Ry
-dWN0IGRtYV9mZW5jZSAqZjsKIAlpbnQgciA9IDA7CiAKLQkvKiBhbHdheXMgc3luYyB0byB0aGUg
-ZXhjbHVzaXZlIGZlbmNlICovCi0JZiA9IGRtYV9yZXN2X2V4Y2xfZmVuY2UocmVzdik7Ci0JZmVu
-Y2UgPSBmID8gdG9fcmFkZW9uX2ZlbmNlKGYpIDogTlVMTDsKLQlpZiAoZmVuY2UgJiYgZmVuY2Ut
-PnJkZXYgPT0gcmRldikKLQkJcmFkZW9uX3N5bmNfZmVuY2Uoc3luYywgZmVuY2UpOwotCWVsc2Ug
-aWYgKGYpCi0JCXIgPSBkbWFfZmVuY2Vfd2FpdChmLCB0cnVlKTsKLQotCWZsaXN0ID0gZG1hX3Jl
-c3Zfc2hhcmVkX2xpc3QocmVzdik7Ci0JaWYgKHNoYXJlZCB8fCAhZmxpc3QgfHwgcikKLQkJcmV0
-dXJuIHI7Ci0KLQlmb3IgKGkgPSAwOyBpIDwgZmxpc3QtPnNoYXJlZF9jb3VudDsgKytpKSB7Ci0J
-CWYgPSByY3VfZGVyZWZlcmVuY2VfcHJvdGVjdGVkKGZsaXN0LT5zaGFyZWRbaV0sCi0JCQkJCSAg
-ICAgIGRtYV9yZXN2X2hlbGQocmVzdikpOworCWRtYV9yZXN2X2Zvcl9lYWNoX2ZlbmNlKHJlc3Ys
-ICZjdXJzb3IsIHNoYXJlZCwgZikgewogCQlmZW5jZSA9IHRvX3JhZGVvbl9mZW5jZShmKTsKIAkJ
-aWYgKGZlbmNlICYmIGZlbmNlLT5yZGV2ID09IHJkZXYpCiAJCQlyYWRlb25fc3luY19mZW5jZShz
-eW5jLCBmZW5jZSk7CiAJCWVsc2UKIAkJCXIgPSBkbWFfZmVuY2Vfd2FpdChmLCB0cnVlKTsKLQog
-CQlpZiAocikKIAkJCWJyZWFrOwogCX0KLS0gCjIuMjUuMQoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGlu
-YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWls
-bWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+On Wed, Jun 16, 2021 at 10:26:49AM +0200, Christian K=F6nig wrote:
+> Explicitly document that code can't assume that shared fences
+> signal after the exclusive fence.
+> =
+
+> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+> ---
+>  drivers/dma-buf/dma-resv.c | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
+> =
+
+> diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/dma-resv.c
+> index f26c71747d43..4ab02b6c387a 100644
+> --- a/drivers/dma-buf/dma-resv.c
+> +++ b/drivers/dma-buf/dma-resv.c
+> @@ -235,7 +235,10 @@ EXPORT_SYMBOL(dma_resv_reset_shared_max);
+>   * @fence: the shared fence to add
+>   *
+>   * Add a fence to a shared slot, obj->lock must be held, and
+> - * dma_resv_reserve_shared() has been called.
+> + * dma_resv_reserve_shared() has been called. The shared fences can sign=
+al in
+> + * any order and there is especially no guarantee that shared fences sig=
+nal
+> + * after the exclusive one. Code relying on any signaling order is broke=
+n and
+> + * needs to be fixed.
+
+So I agree this are reasonable semantics, but you need to audit drivers
+first. Because currently that's not how at least a bunch of them work.
+There's way more drivers than the handful you've looked at.
+
+Imo gold standard here is what I've tried doing for the "how do we set
+fences" side, which is going through all of them. The trouble is that this
+is a bit nastier, because a) drivers play much more tricks here and b)
+understand each driver's scheduling logic is more work than how they set
+fences for a request/cs.
+
+Unfortunately I haven't gotten around to doing that yet, because it means
+a few days of uninterrupted time crawling through way too much code. I
+haven't even found time to respin my old series to make the fence setting
+more consistent (since I find a few more issues there than just the amdgpu
+one that sparked it all).
+-Daniel
+
+>   */
+>  void dma_resv_add_shared_fence(struct dma_resv *obj, struct dma_fence *f=
+ence)
+>  {
+> -- =
+
+> 2.25.1
+> =
+
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
