@@ -2,51 +2,64 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9B4BC3B0D5E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Jun 2021 21:01:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B251C3B0D91
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Jun 2021 21:20:12 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B4DEE631B4
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Jun 2021 19:01:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DADF8634FB
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Jun 2021 19:20:10 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 99E6663290; Tue, 22 Jun 2021 19:01:50 +0000 (UTC)
+	id D5E476339F; Tue, 22 Jun 2021 19:20:10 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 54D6D631B5;
-	Tue, 22 Jun 2021 19:01:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 335FE60F1E;
+	Tue, 22 Jun 2021 19:20:08 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 2B46D631B3
- for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Jun 2021 19:01:45 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id E2C1860B90
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Jun 2021 19:20:06 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 2704F631B5; Tue, 22 Jun 2021 19:01:45 +0000 (UTC)
-Received: from mx1.smtp.larsendata.com (mx1.smtp.larsendata.com
- [91.221.196.215])
- by lists.linaro.org (Postfix) with ESMTPS id E9C8C631B3
- for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Jun 2021 19:01:42 +0000 (UTC)
-Received: from mail01.mxhotel.dk (mail01.mxhotel.dk [91.221.196.236])
- by mx1.smtp.larsendata.com (Halon) with ESMTPS
- id 51921ad5-d38c-11eb-960d-0050568c148b;
- Tue, 22 Jun 2021 19:01:58 +0000 (UTC)
-Received: from ravnborg.org (80-162-45-141-cable.dk.customer.tdc.net
- [80.162.45.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- (Authenticated sender: sam@ravnborg.org)
- by mail01.mxhotel.dk (Postfix) with ESMTPSA id 5EA9B194B05;
- Tue, 22 Jun 2021 21:01:45 +0200 (CEST)
-Date: Tue, 22 Jun 2021 21:01:37 +0200
-X-Report-Abuse-To: abuse@mxhotel.dk
-From: Sam Ravnborg <sam@ravnborg.org>
-To: Daniel Vetter <daniel.vetter@ffwll.ch>
-Message-ID: <YNIzkSg5kwp9gdCR@ravnborg.org>
-References: <20210622165511.3169559-1-daniel.vetter@ffwll.ch>
- <20210622165511.3169559-3-daniel.vetter@ffwll.ch>
+ id DDB7C631D2; Tue, 22 Jun 2021 19:20:06 +0000 (UTC)
+Received: from mail-oo1-f47.google.com (mail-oo1-f47.google.com
+ [209.85.161.47])
+ by lists.linaro.org (Postfix) with ESMTPS id D2A7D60B90
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Jun 2021 19:20:04 +0000 (UTC)
+Received: by mail-oo1-f47.google.com with SMTP id
+ b24-20020a4a34180000b029024b199e7d4dso129141ooa.4
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Jun 2021 12:20:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=IXTyvMzccD44HreGd+lTW6UPC/c6n0CNj/56dlhspnE=;
+ b=jnrGKCc5k+rj2MWFkDqYwdwLo96z0bMl1L8GBzaSBanYW5s9QkrSoWIBy0C8sqBpiE
+ sJp0+r8NksBdwWhFF0jipEeTILNVYlU4GGWVUekaNY/wa/lXH+zpc8tYd9r6p58jVT/q
+ Y5HpOmjHxg7Zv+LdXx+OztqFobp4mnwzmSb0w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=IXTyvMzccD44HreGd+lTW6UPC/c6n0CNj/56dlhspnE=;
+ b=I5o716qrZOd700+msYKgELl+FdsvPriFng7Uiw/85LbcIrD/Q2KVoA7STiRXmo8n3b
+ 27jrWiNnG/YoeIFzNJ+p+1Fn9Fd7iTVut/IJWaMbggP0tqwitDcX3G5REJoqwYR4zcnW
+ ZhcPeR3OyBoAzbSD/OmuzehJwH1JhAqOeZzfgWh6LgX1+RVQCau2JPI+Udq56tM0hlAy
+ VFjDI687BZiBY5OnbC1AXSUTP+heYXYNrzbMKg0xBaLn5xLw+Tbp574Kv0eBBumM8/wN
+ qvFc1pJZS3kzjlhDg+NptKBo4gpIERBwS0JM2e4ybFMV3QzlQ+lJy6m1BI8UIeGJY9wf
+ BN+g==
+X-Gm-Message-State: AOAM530ZnoidX4mjKMvnUmBNGeko6nSbJhGOx2SsYq4jmi12bUskqdXa
+ LYDZZUKC5SrveYUzMmHqPENdJfNMLiy3qPODYyHp/g==
+X-Google-Smtp-Source: ABdhPJymCc3vHixvjSqTi5/BbnUPvRWX6NdnjghdlEx76K/WySHKdsKsTkAYb3Xk7+ky8kEKHa35K21lsy/Je7GeXFo=
+X-Received: by 2002:a4a:9b99:: with SMTP id x25mr4621885ooj.85.1624389604204; 
+ Tue, 22 Jun 2021 12:20:04 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210622165511.3169559-3-daniel.vetter@ffwll.ch>
+References: <20210622165511.3169559-1-daniel.vetter@ffwll.ch>
+ <20210622165511.3169559-2-daniel.vetter@ffwll.ch>
+ <YNIw1g5HVCzvmKzP@ravnborg.org>
+In-Reply-To: <YNIw1g5HVCzvmKzP@ravnborg.org>
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+Date: Tue, 22 Jun 2021 21:19:53 +0200
+Message-ID: <CAKMK7uE-c7evbXhNs9htsJ2wKWSMVcS=HHauvQ19-+9BT8NwSw@mail.gmail.com>
+To: Sam Ravnborg <sam@ravnborg.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 02/15] dma-buf: Switch to inline
- kerneldoc
+Subject: Re: [Linaro-mm-sig] [PATCH 01/15] dma-resv: Fix kerneldoc
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,94 +72,48 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Deepak R Varma <mh12gx2825@gmail.com>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Kevin Wang <kevin1.wang@amd.com>,
+Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
  DRI Development <dri-devel@lists.freedesktop.org>,
- linaro-mm-sig@lists.linaro.org, Nirmoy Das <nirmoy.das@amd.com>,
- Chen Li <chenli@uniontech.com>, Daniel Vetter <daniel.vetter@intel.com>,
- Alex Deucher <alexander.deucher@amd.com>, Dave Airlie <airlied@redhat.com>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- linux-media@vger.kernel.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Daniel Vetter <daniel.vetter@intel.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Hi Daniel.
-
-On Tue, Jun 22, 2021 at 06:54:58PM +0200, Daniel Vetter wrote:
-> Also review & update everything while we're at it.
-> =
-
-> This is prep work to smash a ton of stuff into the kerneldoc for
-> @resv.
-> =
-
-> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-> Cc: Sumit Semwal <sumit.semwal@linaro.org>
-> Cc: "Christian K=F6nig" <christian.koenig@amd.com>
-> Cc: Alex Deucher <alexander.deucher@amd.com>
-> Cc: Daniel Vetter <daniel.vetter@ffwll.ch>
-> Cc: Dave Airlie <airlied@redhat.com>
-> Cc: Nirmoy Das <nirmoy.das@amd.com>
-> Cc: Deepak R Varma <mh12gx2825@gmail.com>
-> Cc: Chen Li <chenli@uniontech.com>
-> Cc: Kevin Wang <kevin1.wang@amd.com>
-> Cc: linux-media@vger.kernel.org
-> Cc: linaro-mm-sig@lists.linaro.org
-> ---
->  include/linux/dma-buf.h | 107 +++++++++++++++++++++++++++++++---------
->  1 file changed, 83 insertions(+), 24 deletions(-)
-> =
-
-> diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
-> index 92eec38a03aa..6d18b9e448b9 100644
-> --- a/include/linux/dma-buf.h
-> +++ b/include/linux/dma-buf.h
-> @@ -289,28 +289,6 @@ struct dma_buf_ops {
->  =
-
->  /**
->   * struct dma_buf - shared buffer object
-> - * @size: size of the buffer; invariant over the lifetime of the buffer.
-> - * @file: file pointer used for sharing buffers across, and for refcount=
-ing.
-> - * @attachments: list of dma_buf_attachment that denotes all devices att=
-ached,
-> - *               protected by dma_resv lock.
-> - * @ops: dma_buf_ops associated with this buffer object.
-> - * @lock: used internally to serialize list manipulation, attach/detach =
-and
-> - *        vmap/unmap
-> - * @vmapping_counter: used internally to refcnt the vmaps
-> - * @vmap_ptr: the current vmap ptr if vmapping_counter > 0
-> - * @exp_name: name of the exporter; useful for debugging.
-> - * @name: userspace-provided name; useful for accounting and debugging,
-> - *        protected by @resv.
-> - * @name_lock: spinlock to protect name access
-> - * @owner: pointer to exporter module; used for refcounting when exporte=
-r is a
-> - *         kernel module.
-> - * @list_node: node for dma_buf accounting and debugging.
-> - * @priv: exporter specific private data for this buffer object.
-> - * @resv: reservation object linked to this dma-buf
-> - * @poll: for userspace poll support
-> - * @cb_excl: for userspace poll support
-> - * @cb_shared: for userspace poll support
-> - * @sysfs_entry: for exposing information about this buffer in sysfs.
-
-This sentence
->   * The attachment_uid member of @sysfs_entry is protected by dma_resv lo=
-ck
->   * and is incremented on each attach.
-belongs to the paragraph describing sysfs_entry and should be moved too.
-Or maybe reworded and then document all fields in dma_buf_sysfs_entry?
-
-With this fixed:
-Acked-by: Sam Ravnborg <sam@ravnborg.org>
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+T24gVHVlLCBKdW4gMjIsIDIwMjEgYXQgODo1MCBQTSBTYW0gUmF2bmJvcmcgPHNhbUByYXZuYm9y
+Zy5vcmc+IHdyb3RlOgo+Cj4gSGkgRGFuaWVsLAo+Cj4gT24gVHVlLCBKdW4gMjIsIDIwMjEgYXQg
+MDY6NTQ6NTdQTSArMDIwMCwgRGFuaWVsIFZldHRlciB3cm90ZToKPiA+IE92ZXJzaWdodCBmcm9t
+Cj4gPgo+ID4gY29tbWl0IDZlZGJkNmFiYjc4M2Q1NGY2YWM0YzNlZDVjZDllNTBjZmY2YzE1ZTkK
+PiA+IEF1dGhvcjogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPgo+
+ID4gRGF0ZTogICBNb24gTWF5IDEwIDE2OjE0OjA5IDIwMjEgKzAyMDAKPgo+IHRoaXMgaXMgd2hh
+dCB3ZSB1c2VzIEZpeGVzOiAuLi4gZm9yLgo+Cj4gSXQgbG9va3Mgd3JvbmcgdG8gaGlkZSBpdCBp
+biB0aGUgZGVzY3JpcHRpb24uCgpJJ3ZlIGhvbmVzdGx5IGJlY29tZSBhIGJpdCB2YXJ5IG9mIHVz
+aW5nIEZpeGVzOiBmb3IgZG9jcy9jb21tZW50cwpiZWNhdXNlIHRoZSBzdGFibGUgYXV0b3NlbGVj
+dCBib3RzIGFyZSBfcmVhbGx5XyBrZWVuIG9uIHBpY2tpbmcgdXAKYW55dGhpbmcgd2l0aCBhIEZp
+eGVzOiBsaW5lIGluIGl0LiBBbmQgdGhhdCBmZWVscyBhIGJpdCBsaWtlIG5vbnNlbnNlLgotRGFu
+aWVsCgo+Cj4gICAgICAgICBTYW0KPgo+ID4KPiA+ICAgICBkbWEtYnVmOiByZW5hbWUgYW5kIGNs
+ZWFudXAgZG1hX3Jlc3ZfZ2V0X2V4Y2wgdjMKPiA+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBEYW5pZWwg
+VmV0dGVyIDxkYW5pZWwudmV0dGVyQGludGVsLmNvbT4KPiA+IENjOiBTdW1pdCBTZW13YWwgPHN1
+bWl0LnNlbXdhbEBsaW5hcm8ub3JnPgo+ID4gQ2M6ICJDaHJpc3RpYW4gS8O2bmlnIiA8Y2hyaXN0
+aWFuLmtvZW5pZ0BhbWQuY29tPgo+ID4gQ2M6IGxpbnV4LW1lZGlhQHZnZXIua2VybmVsLm9yZwo+
+ID4gQ2M6IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwo+ID4gLS0tCj4gPiAgaW5jbHVk
+ZS9saW51eC9kbWEtcmVzdi5oIHwgMiArLQo+ID4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlv
+bigrKSwgMSBkZWxldGlvbigtKQo+ID4KPiA+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L2Rt
+YS1yZXN2LmggYi9pbmNsdWRlL2xpbnV4L2RtYS1yZXN2LmgKPiA+IGluZGV4IDU2MmI4ODVjZjlj
+My4uZTFjYTIwODBhMWZmIDEwMDY0NAo+ID4gLS0tIGEvaW5jbHVkZS9saW51eC9kbWEtcmVzdi5o
+Cj4gPiArKysgYi9pbmNsdWRlL2xpbnV4L2RtYS1yZXN2LmgKPiA+IEBAIC0yMTIsNyArMjEyLDcg
+QEAgc3RhdGljIGlubGluZSB2b2lkIGRtYV9yZXN2X3VubG9jayhzdHJ1Y3QgZG1hX3Jlc3YgKm9i
+aikKPiA+ICB9Cj4gPgo+ID4gIC8qKgo+ID4gLSAqIGRtYV9yZXN2X2V4Y2x1c2l2ZSAtIHJldHVy
+biB0aGUgb2JqZWN0J3MgZXhjbHVzaXZlIGZlbmNlCj4gPiArICogZG1hX3Jlc3ZfZXhjbF9mZW5j
+ZSAtIHJldHVybiB0aGUgb2JqZWN0J3MgZXhjbHVzaXZlIGZlbmNlCj4gPiAgICogQG9iajogdGhl
+IHJlc2VydmF0aW9uIG9iamVjdAo+ID4gICAqCj4gPiAgICogUmV0dXJucyB0aGUgZXhjbHVzaXZl
+IGZlbmNlIChpZiBhbnkpLiBDYWxsZXIgbXVzdCBlaXRoZXIgaG9sZCB0aGUgb2JqZWN0cwo+ID4g
+LS0KPiA+IDIuMzIuMC5yYzIKCgoKLS0gCkRhbmllbCBWZXR0ZXIKU29mdHdhcmUgRW5naW5lZXIs
+IEludGVsIENvcnBvcmF0aW9uCmh0dHA6Ly9ibG9nLmZmd2xsLmNoCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0
+CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcv
+bWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
