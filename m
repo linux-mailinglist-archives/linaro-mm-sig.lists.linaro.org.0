@@ -2,64 +2,131 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 807043B1509
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Jun 2021 09:44:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BC5C33B15E6
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Jun 2021 10:31:35 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B224F63523
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Jun 2021 07:44:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 83AB06354D
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Jun 2021 08:31:34 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 8433163520; Wed, 23 Jun 2021 07:43:58 +0000 (UTC)
+	id B969D63CA0; Wed, 23 Jun 2021 08:31:33 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 382DC61A3A;
-	Wed, 23 Jun 2021 07:43:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0FC8862D53;
+	Wed, 23 Jun 2021 08:31:30 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id AB69B60AC6
- for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Jun 2021 07:43:54 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 1236861A4D
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Jun 2021 08:31:28 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id A0FD561A3A; Wed, 23 Jun 2021 07:43:54 +0000 (UTC)
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com
- [209.85.210.47])
- by lists.linaro.org (Postfix) with ESMTPS id 95B6260AC6
- for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Jun 2021 07:43:52 +0000 (UTC)
-Received: by mail-ot1-f47.google.com with SMTP id
- f3-20020a0568301c23b029044ce5da4794so1041588ote.11
- for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Jun 2021 00:43:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=cWzvtRTbDifdl+PxaGCuS2g5VXsz2HZV7fjfjiuvl1s=;
- b=MwPZIV8ivWfiDYeNv72T0B+TQPZZrJ03iZ4rRoU2dOZH5hIhooeh4E9s44iqSXCJga
- rLhAfs3qLh5yoXMJcT0SlHUVp9mhu3ulY2L3UIReEZwzMCwACBeBALYnuoHv4l2iNsTi
- GPNyV/KpMzRb/s3TAd2ysZR4QjPPytSEIPRro=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=cWzvtRTbDifdl+PxaGCuS2g5VXsz2HZV7fjfjiuvl1s=;
- b=hleP0Z1DMI5kjcVcbCctl6yA8FtDKlnsXDttXILxXPQU/hbVXruBvdlCVwcc/miXmv
- AFNDPydmTCFXQvmS6kagddJLB1O13gQmoVfxduZozTvtORpGYMepwLhDNWP8/zmghzhu
- 20mPu/nU8od59wEp4PSmKtY3Rc0sINB5LhbaFsjyrLX4kh2R9xCozpUl+rZ6Dn2PDrl2
- 1zBAiaauQaTdNb3Wmp0V5sy5a6UuX/tZ65NhGvgUpa6SwajowpL3XCS8pBUt7YfyYkIj
- N+r51T0ewtxcN6vVxdBnT/Ytq0H6Y6oKTl9sqV+3zsW3e6SdJ1G5wPgEkjGFsjk0NAKl
- y7yw==
-X-Gm-Message-State: AOAM533pobudvmVlINR9u43BmH9DkY0kMwMZopL+8csFcsWygz4yzSHT
- 05VJedhVJAUHJ0Mg/YHNzOVH81J8x+/vAlPkpHIghw==
-X-Google-Smtp-Source: ABdhPJwFpV7dlXUDEnB4E9Qw7A63kO4THfzJY0ME2w2Az3FtLmVWlU6ptDgsAet4iMbRa20uvHGl6WIJBc9CZdE8dbM=
-X-Received: by 2002:a9d:27a4:: with SMTP id c33mr6705525otb.281.1624434231910; 
- Wed, 23 Jun 2021 00:43:51 -0700 (PDT)
+ id 06E8E62D53; Wed, 23 Jun 2021 08:31:28 +0000 (UTC)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2086.outbound.protection.outlook.com [40.107.223.86])
+ by lists.linaro.org (Postfix) with ESMTPS id E916661A4D
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Jun 2021 08:31:25 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=mdXeO4l14+scon0W0CgT/xY5nP5Z0bFgWIVscrS5kttGhRv64nVIWIpoPkMa2R6JbTLVV+IR6xT/GUTsG5s6XWRPi0THet/q3UllZmrT/xHqvlt9iVtEH7Dj0vXGwJQyLsCBqGNZ5c+gala0ScmnSqxtvPMymJk5xtiFn7OKnKLbefE/aJAh2u0wVQejmGH0K75qKoNRJKPtDbs5H9/7gp47rZpnJDjV+88GPQfmHjde++rlK3mjPUk7PrvdS9Gs3FFxycY6ALINRYUCaQIr0NOS5YKK3/t2QjmH0OZCQiTyU7X13CEdpPhBQK8XKYKN41SlfNWEwE3OfZalTU4bEg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fmDm4vZf/BRPSTLKEmz8gq8XAOrwNVDoEmcRZxNyVxg=;
+ b=mGmJrM4fsb/y8wgZ2ndDGjwB0+qbdOIA/kGs8lIYTDxQF3He8s8QYNcRSL/rxM+6ejKa2VJAZlEYXL/ZyFJQC3TpIQWvoPh61FvmHUyS8+F9K3vjjQHiYB5kbU2Qzr8wD4mqlqhxm10iDk68cOWpGgAJMUGGhX6fN8QYkG8LyEE/g1MbLD4NJ8tBqhjG4qviwAdtxvGHW6R5mn5nJOmbUKdexytkVZ3iYxOzGmlmWb20uU2fqzgnUYdABiYCxO5cmKNbU5tNAy0wGbHVIRZenqjVfA8ypF30R8HlECLB4W96zX2beUinHMvGlD/pEcH/+1fr8eljk7oD7fSHZ4Fw2g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fmDm4vZf/BRPSTLKEmz8gq8XAOrwNVDoEmcRZxNyVxg=;
+ b=ZgKkk+/tGWyH5owTfLX47gg64kex+4wLf9oWqeHAcm9HXNEwTZVBf1oLG1FDVWGWMxlTis17dxHn5N6AcveSHBf13TAIgWvAZq7LLF5bqdIQ+HQTNkbyTCRYGSlKwOUsLwYdZew0Bz1LYtWT01gU9ENF7c6Io8ezguxOH1KGST0=
+Authentication-Results: lists.linaro.org; dkim=none (message not signed)
+ header.d=none;lists.linaro.org; dmarc=none action=none header.from=amd.com;
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
+ by MN2PR12MB4206.namprd12.prod.outlook.com (2603:10b6:208:1d5::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.18; Wed, 23 Jun
+ 2021 08:31:24 +0000
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::6c9e:1e08:7617:f756]) by MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::6c9e:1e08:7617:f756%5]) with mapi id 15.20.4242.024; Wed, 23 Jun 2021
+ 08:31:24 +0000
+To: Daniel Vetter <daniel.vetter@ffwll.ch>,
+ DRI Development <dri-devel@lists.freedesktop.org>
+References: <20210622165511.3169559-1-daniel.vetter@ffwll.ch>
+ <20210622165511.3169559-2-daniel.vetter@ffwll.ch>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+Message-ID: <87f6529c-caf0-6e4b-6506-b0e2d1a0f9e0@amd.com>
+Date: Wed, 23 Jun 2021 10:31:18 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+In-Reply-To: <20210622165511.3169559-2-daniel.vetter@ffwll.ch>
+Content-Language: en-US
+X-Originating-IP: [2a02:908:1252:fb60:69e4:a619:aa86:4e9c]
+X-ClientProxiedBy: PR1P264CA0029.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:102:19f::16) To MN2PR12MB3775.namprd12.prod.outlook.com
+ (2603:10b6:208:159::19)
 MIME-Version: 1.0
-References: <20210620110327.4964-1-desmondcheongzx@gmail.com>
- <20210620110327.4964-2-desmondcheongzx@gmail.com>
- <YNChRvGjIz6++jnd@phenom.ffwll.local>
-In-Reply-To: <YNChRvGjIz6++jnd@phenom.ffwll.local>
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-Date: Wed, 23 Jun 2021 09:43:41 +0200
-Message-ID: <CAKMK7uGPo=iFffph=fRYeuE=RoGJ1JahukPAwszY7Rsu5rb=5Q@mail.gmail.com>
-To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [IPv6:2a02:908:1252:fb60:69e4:a619:aa86:4e9c]
+ (2a02:908:1252:fb60:69e4:a619:aa86:4e9c) by
+ PR1P264CA0029.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:19f::16) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4264.18 via Frontend Transport; Wed, 23 Jun 2021 08:31:22 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: fdb3b35e-8249-4034-34b9-08d936214954
+X-MS-TrafficTypeDiagnostic: MN2PR12MB4206:
+X-Microsoft-Antispam-PRVS: <MN2PR12MB4206899FA7969C83A0A070FE83089@MN2PR12MB4206.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:182;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Mf2jgdQOV77uxHz+PFxGzk5Q6R+sx+sTENWLSM7BbmNT7M+uMeofG9VJ4OGIu2/fyLlHZC2cbIhdIwhS+UgGnTvESCS2Y1k0lOxhWo51cLhS+oKquc3CKOJ8uOaiRnVEWMn94QR6g5ukBS8QUrdnxnzhb1rexReWU7li4syjBEHNqacPvUU+Eyd1HvSKvDeLLLrvaffmMcp38aHTFoIVSI4XjhId0/Ao+TiicZVIPPWnFBIHRxLy82Fi7pK5h4+00TIyaqS05HFqd/4CsPMgs9R/3JXxWF0L6wIFf97lzhVITvpvUzYFTbr4wfHrZWD98/jqVrjGq1RxjW5gnF11v4OF/nwzXxAKbr35T+PaqHI3xWp9hdgeYd/StR+UFZ3LHOwy+mtGr1tnC/uOgHWna78YMq6ZUvQjJwRs5Ma4Gx2AxZAWgr3rTlRUyXOhljAt9XZBcRl+9e/WM9H4MQCQf1kJ3y823OKyTwB+NfJR1dXLG92OxIlhPu7qN4NvYlVqrJ+ziNy9fkD4Oo/jnZBFTBMgjdmysppGx1dQ1dw4L+4G0Qj8vTckQxAX0irLdcjO5u+8bzt1m/0JisneCy1SBtDTOutVQLcQF1kYQSgAvdS7BV45piVnkkM6Ya/NiebqlwzReAqfccMCtN0gCd6caZlDxgHjAoqCgD0uD+MXKfeP3jahYlWCz5nxduJfnDyG
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(39860400002)(136003)(396003)(346002)(366004)(376002)(2906002)(2616005)(86362001)(83380400001)(8676002)(6666004)(478600001)(4326008)(66574015)(186003)(16526019)(316002)(31686004)(5660300002)(38100700002)(66946007)(66476007)(8936002)(6486002)(66556008)(36756003)(31696002)(54906003)(110136005)(45980500001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dUJrY1FXbE1YL1Z3S1N4Q2pDNHFIankwLytsdU5haW5za0U3TDlZUUVGemJ5?=
+ =?utf-8?B?ZWRqSE1MMHNwckdqRXlqd1UvVXJTRGhHZkpBYXNUZ0RRTGhSMEV3cEN3YTY4?=
+ =?utf-8?B?ZEYrZE1uamVCRGR3T2hqRm00ZDhOWk9GTHVYY0dNZDBJV3Y5V2dFWmxWbFVD?=
+ =?utf-8?B?V1dtN3N3aHNtTCtQRHJtclRCZWFBRlJNQnMrcG0vMHF6cnlCZENzUTNpZ0dy?=
+ =?utf-8?B?V2l2VGNKQzB2Lzgzb00zZzFlRy9lRWFZL3ZNT2t2TVI4YTJIVVlUNzZ5VFY5?=
+ =?utf-8?B?QXZQZEt4eHh4NHI4R1NHTnZJLzBtVnBXWHh5SmlMZnNaNWt2T0xwOVRkN2tx?=
+ =?utf-8?B?NnJjNVRaODFyWG9xS0VScFA1QjJRNHp5SW56Q0ttNGNXM2dScktyeGxlcWds?=
+ =?utf-8?B?NWJSd3QybnFteVM4OERpUnBoNngwV1hiSEF6STJrTUg4TVo3RGRzbWZ5eThH?=
+ =?utf-8?B?dVd5dmRldm4xSGlyWW16MGVWYVJaWUthaWtFOHhpbG1VMHZSTG9YRHE1NGpu?=
+ =?utf-8?B?WUJQN2crYWtEZk9MdnZKUjBWVE9VRGFSVHpTbFcrY3VNVnRhdkRPOFdtNk5F?=
+ =?utf-8?B?QTljVDhQdDZrZWwyc0dhRmpRUi9CMXJraExSM1k0MjVWS2JrSlZmNlVKcWhu?=
+ =?utf-8?B?UG5mYS82cE9JR0gxMmNES2p6RTloQkhINlUwSUQyN01PdXJaUDNPZXRIMzFE?=
+ =?utf-8?B?WmVNdVc1MXJEaVZTQ0hVbVVxUVdsRGppVkxTSXVJTmxOck01Vi9FbFlJZlQ0?=
+ =?utf-8?B?dVpGczZaci9nb3VYNGxGdWQ4VHJyZW9MeVFSUW1BM2p4SWhwOXpWdnIzajEx?=
+ =?utf-8?B?Y2ptcFJxVGlmQkxGdWxBeHg1QmdYTkIwU2hNTHZiQllVZVJJZ1NBY0xxYno5?=
+ =?utf-8?B?TXZpRmtmRi9yNnR5cXpuajJnUWdwZVE4OURXN1RPeWZCUzFYdmZQWVZLOHFC?=
+ =?utf-8?B?R3dVT0xmYnNUNHk5b2x6MDdwc1BlMWlBMStoaVpta1VTOUIxbG1FVFYvbW5H?=
+ =?utf-8?B?YzgrQ3c4ZzBGUU1MbXI3T1hsZWZ1Z0s0QVFCTlVzTVhDbHRNNlhycVorU1pV?=
+ =?utf-8?B?ZlFLZlllai9WYmZtWE9teXFmU3drS1FQRGcyZjM3Wm94dHJmYlFrZjhrTE9m?=
+ =?utf-8?B?bUJrT2k2KytXSFBuT2ZTTndYMzZzRXJDbjUvNEx4c0Q1QXIxd2hPSHN5S2ND?=
+ =?utf-8?B?djM2MWlBd2doQ3VBZWc2ajRrMzRLZkFYWnVmUXArdVIxbWxVZC9LZ2E5ei9M?=
+ =?utf-8?B?TFNkb0FnMFFIa0M3NVhKK1hocllLZ3Ywc1pXQXV4NHJ5aTlFUm1Md295eDZk?=
+ =?utf-8?B?aDQ0N2dPclRLeUMzNGZNWVRiSm0wb0htWVlBZmtqcElxZUh0NVRDeUxiZlU2?=
+ =?utf-8?B?V0UvcmdNV0J2UVA4eDNjK09TZUtId2pHVTF6VHJhQzZkT0hYVXdmdEN1dm1V?=
+ =?utf-8?B?Q1lGWk9RL1hJanAyU1ltMGhSbExGUm1KcVZ5QmdmRHNaUlo5UVNBY01ya1Zp?=
+ =?utf-8?B?U3dIc2Q5WC9aYTVERjlMQVozSEVhRG84Uk5FRDZDV3NyNjBVRWxteisxUVhE?=
+ =?utf-8?B?dmo0RldGaXZ3bzkwQUM1OEkvRlQ1ck1TRVE0b2JMcnprOXRBQ0NEY0Yrd1BC?=
+ =?utf-8?B?dksybnhBSkNIMkhPRU1OYVhrb2w2UzZMd0tJYlZwdWREYUVld2dYQnZCZWNO?=
+ =?utf-8?B?eDNWRXhTTThrYnYrUGxQempYOFRVaVNIY1RGZmxobzJ0Uk5acURrU2NZZWxz?=
+ =?utf-8?B?RXZBdnVwZ3dzYjNvNG5aOEFUUWdveFJ0WUtSN0N3cmk5dm9XdTBNQkdKbUdO?=
+ =?utf-8?B?V3NnOWFOSlZLNEwrTC95Vkw2YnNOOVBCdFVnNWtPNjVRNWgxNEI5bkFTaU03?=
+ =?utf-8?Q?zwdaOddiz9oru?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fdb3b35e-8249-4034-34b9-08d936214954
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2021 08:31:24.3500 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: q6wuOL8z8Y3ZDyaXIdkEqCDA007o09QqNmLsUWImaumIXhwAHP/yyRXJgXySsAAQ
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4206
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v3 1/2] drm: add a locked version of
- drm_is_current_master
+Subject: Re: [Linaro-mm-sig] [PATCH 01/15] dma-resv: Fix kerneldoc
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -72,169 +139,36 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Dave Airlie <airlied@linux.ie>, Greg KH <gregkh@linuxfoundation.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Maxime Ripard <mripard@kernel.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Emil Velikov <emil.l.velikov@gmail.com>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Shuah Khan <skhan@linuxfoundation.org>,
- linux-kernel-mentees@lists.linuxfoundation.org,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linaro-mm-sig@lists.linaro.org, Daniel Vetter <daniel.vetter@intel.com>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ linux-media@vger.kernel.org
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Mon, Jun 21, 2021 at 4:25 PM Daniel Vetter <daniel@ffwll.ch> wrote:
->
-> On Sun, Jun 20, 2021 at 07:03:26PM +0800, Desmond Cheong Zhi Xi wrote:
-> > While checking the master status of the DRM file in
-> > drm_is_current_master(), the device's master mutex should be
-> > held. Without the mutex, the pointer fpriv->master may be freed
-> > concurrently by another process calling drm_setmaster_ioctl(). This
-> > could lead to use-after-free errors when the pointer is subsequently
-> > dereferenced in drm_lease_owner().
-> >
-> > The callers of drm_is_current_master() from drm_auth.c hold the
-> > device's master mutex, but external callers do not. Hence, we implement
-> > drm_is_current_master_locked() to be used within drm_auth.c, and
-> > modify drm_is_current_master() to grab the device's master mutex
-> > before checking the master status.
-> >
-> > Reported-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-> > Signed-off-by: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
-> > Reviewed-by: Emil Velikov <emil.l.velikov@gmail.com>
->
-> Merged to drm-misc-fixes, thanks for your patch.
-
-Cc'ed you on the revert, but this blew up in intel-gfx CI. Please cc:
-intel-gfx@lists.freedesktop.org for the next round so CI can pick it
-up (it doesn't read dri-devel here).
-
-I'm not exactly sure how we can best fix that issue in general, maybe
-there's more. But for the specific lockdep splat around getconnector I
-think just pulling the call to drm_is_current_master out from the
-connector mutex should avoid the issue (just store it locally and then
-still have the if() condition under the connector mutex ofc).
--Daniel
-
-> -Daniel
->
-> > ---
-> >  drivers/gpu/drm/drm_auth.c | 51 ++++++++++++++++++++++++--------------
-> >  1 file changed, 32 insertions(+), 19 deletions(-)
-> >
-> > diff --git a/drivers/gpu/drm/drm_auth.c b/drivers/gpu/drm/drm_auth.c
-> > index 232abbba3686..86d4b72e95cb 100644
-> > --- a/drivers/gpu/drm/drm_auth.c
-> > +++ b/drivers/gpu/drm/drm_auth.c
-> > @@ -61,6 +61,35 @@
-> >   * trusted clients.
-> >   */
-> >
-> > +static bool drm_is_current_master_locked(struct drm_file *fpriv)
-> > +{
-> > +     lockdep_assert_held_once(&fpriv->master->dev->master_mutex);
-> > +
-> > +     return fpriv->is_master && drm_lease_owner(fpriv->master) == fpriv->minor->dev->master;
-> > +}
-> > +
-> > +/**
-> > + * drm_is_current_master - checks whether @priv is the current master
-> > + * @fpriv: DRM file private
-> > + *
-> > + * Checks whether @fpriv is current master on its device. This decides whether a
-> > + * client is allowed to run DRM_MASTER IOCTLs.
-> > + *
-> > + * Most of the modern IOCTL which require DRM_MASTER are for kernel modesetting
-> > + * - the current master is assumed to own the non-shareable display hardware.
-> > + */
-> > +bool drm_is_current_master(struct drm_file *fpriv)
-> > +{
-> > +     bool ret;
-> > +
-> > +     mutex_lock(&fpriv->master->dev->master_mutex);
-> > +     ret = drm_is_current_master_locked(fpriv);
-> > +     mutex_unlock(&fpriv->master->dev->master_mutex);
-> > +
-> > +     return ret;
-> > +}
-> > +EXPORT_SYMBOL(drm_is_current_master);
-> > +
-> >  int drm_getmagic(struct drm_device *dev, void *data, struct drm_file *file_priv)
-> >  {
-> >       struct drm_auth *auth = data;
-> > @@ -223,7 +252,7 @@ int drm_setmaster_ioctl(struct drm_device *dev, void *data,
-> >       if (ret)
-> >               goto out_unlock;
-> >
-> > -     if (drm_is_current_master(file_priv))
-> > +     if (drm_is_current_master_locked(file_priv))
-> >               goto out_unlock;
-> >
-> >       if (dev->master) {
-> > @@ -272,7 +301,7 @@ int drm_dropmaster_ioctl(struct drm_device *dev, void *data,
-> >       if (ret)
-> >               goto out_unlock;
-> >
-> > -     if (!drm_is_current_master(file_priv)) {
-> > +     if (!drm_is_current_master_locked(file_priv)) {
-> >               ret = -EINVAL;
-> >               goto out_unlock;
-> >       }
-> > @@ -321,7 +350,7 @@ void drm_master_release(struct drm_file *file_priv)
-> >       if (file_priv->magic)
-> >               idr_remove(&file_priv->master->magic_map, file_priv->magic);
-> >
-> > -     if (!drm_is_current_master(file_priv))
-> > +     if (!drm_is_current_master_locked(file_priv))
-> >               goto out;
-> >
-> >       drm_legacy_lock_master_cleanup(dev, master);
-> > @@ -342,22 +371,6 @@ void drm_master_release(struct drm_file *file_priv)
-> >       mutex_unlock(&dev->master_mutex);
-> >  }
-> >
-> > -/**
-> > - * drm_is_current_master - checks whether @priv is the current master
-> > - * @fpriv: DRM file private
-> > - *
-> > - * Checks whether @fpriv is current master on its device. This decides whether a
-> > - * client is allowed to run DRM_MASTER IOCTLs.
-> > - *
-> > - * Most of the modern IOCTL which require DRM_MASTER are for kernel modesetting
-> > - * - the current master is assumed to own the non-shareable display hardware.
-> > - */
-> > -bool drm_is_current_master(struct drm_file *fpriv)
-> > -{
-> > -     return fpriv->is_master && drm_lease_owner(fpriv->master) == fpriv->minor->dev->master;
-> > -}
-> > -EXPORT_SYMBOL(drm_is_current_master);
-> > -
-> >  /**
-> >   * drm_master_get - reference a master pointer
-> >   * @master: &struct drm_master
-> > --
-> > 2.25.1
-> >
->
-> --
-> Daniel Vetter
-> Software Engineer, Intel Corporation
-> http://blog.ffwll.ch
-
-
-
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+QW0gMjIuMDYuMjEgdW0gMTg6NTQgc2NocmllYiBEYW5pZWwgVmV0dGVyOgo+IE92ZXJzaWdodCBm
+cm9tCj4KPiBjb21taXQgNmVkYmQ2YWJiNzgzZDU0ZjZhYzRjM2VkNWNkOWU1MGNmZjZjMTVlOQo+
+IEF1dGhvcjogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPgo+IERh
+dGU6ICAgTW9uIE1heSAxMCAxNjoxNDowOSAyMDIxICswMjAwCj4KPiAgICAgIGRtYS1idWY6IHJl
+bmFtZSBhbmQgY2xlYW51cCBkbWFfcmVzdl9nZXRfZXhjbCB2Mwo+Cj4gU2lnbmVkLW9mZi1ieTog
+RGFuaWVsIFZldHRlciA8ZGFuaWVsLnZldHRlckBpbnRlbC5jb20+Cj4gQ2M6IFN1bWl0IFNlbXdh
+bCA8c3VtaXQuc2Vtd2FsQGxpbmFyby5vcmc+Cj4gQ2M6ICJDaHJpc3RpYW4gS8O2bmlnIiA8Y2hy
+aXN0aWFuLmtvZW5pZ0BhbWQuY29tPgo+IENjOiBsaW51eC1tZWRpYUB2Z2VyLmtlcm5lbC5vcmcK
+PiBDYzogbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCgpSZXZpZXdlZC1ieTogQ2hyaXN0
+aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPgoKPiAtLS0KPiAgIGluY2x1ZGUv
+bGludXgvZG1hLXJlc3YuaCB8IDIgKy0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigr
+KSwgMSBkZWxldGlvbigtKQo+Cj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvZG1hLXJlc3Yu
+aCBiL2luY2x1ZGUvbGludXgvZG1hLXJlc3YuaAo+IGluZGV4IDU2MmI4ODVjZjljMy4uZTFjYTIw
+ODBhMWZmIDEwMDY0NAo+IC0tLSBhL2luY2x1ZGUvbGludXgvZG1hLXJlc3YuaAo+ICsrKyBiL2lu
+Y2x1ZGUvbGludXgvZG1hLXJlc3YuaAo+IEBAIC0yMTIsNyArMjEyLDcgQEAgc3RhdGljIGlubGlu
+ZSB2b2lkIGRtYV9yZXN2X3VubG9jayhzdHJ1Y3QgZG1hX3Jlc3YgKm9iaikKPiAgIH0KPiAgIAo+
+ICAgLyoqCj4gLSAqIGRtYV9yZXN2X2V4Y2x1c2l2ZSAtIHJldHVybiB0aGUgb2JqZWN0J3MgZXhj
+bHVzaXZlIGZlbmNlCj4gKyAqIGRtYV9yZXN2X2V4Y2xfZmVuY2UgLSByZXR1cm4gdGhlIG9iamVj
+dCdzIGV4Y2x1c2l2ZSBmZW5jZQo+ICAgICogQG9iajogdGhlIHJlc2VydmF0aW9uIG9iamVjdAo+
+ICAgICoKPiAgICAqIFJldHVybnMgdGhlIGV4Y2x1c2l2ZSBmZW5jZSAoaWYgYW55KS4gQ2FsbGVy
+IG11c3QgZWl0aGVyIGhvbGQgdGhlIG9iamVjdHMKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0CkxpbmFyby1t
+bS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9s
+aXN0aW5mby9saW5hcm8tbW0tc2lnCg==
