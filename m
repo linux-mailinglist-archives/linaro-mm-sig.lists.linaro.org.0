@@ -2,60 +2,62 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id A08E23B2F59
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Jun 2021 14:48:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4E8A3B2F6B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Jun 2021 14:53:02 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0875063523
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Jun 2021 12:48:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 95F2A66008
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Jun 2021 12:53:00 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id B74826350E; Thu, 24 Jun 2021 12:48:33 +0000 (UTC)
+	id 00AB063576; Thu, 24 Jun 2021 12:52:58 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 462F361156;
-	Thu, 24 Jun 2021 12:48:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 29B3861156;
+	Thu, 24 Jun 2021 12:52:56 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id A961D60B02
- for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Jun 2021 12:48:29 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id E9AE360B02
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Jun 2021 12:52:54 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 9DE3561156; Thu, 24 Jun 2021 12:48:29 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
- [209.85.221.49])
- by lists.linaro.org (Postfix) with ESMTPS id 95AFE60B02
- for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Jun 2021 12:48:27 +0000 (UTC)
-Received: by mail-wr1-f49.google.com with SMTP id i94so6542889wri.4
- for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Jun 2021 05:48:27 -0700 (PDT)
+ id E758B61156; Thu, 24 Jun 2021 12:52:54 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
+ [209.85.128.47])
+ by lists.linaro.org (Postfix) with ESMTPS id D9CEA60B02
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Jun 2021 12:52:52 +0000 (UTC)
+Received: by mail-wm1-f47.google.com with SMTP id
+ j11-20020a05600c1c0bb02901e23d4c0977so5550941wms.0
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Jun 2021 05:52:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
  bh=cJYcfg79JZa0zBzQtB20LCA3OLE/cQ7YCWcHuaHNjRE=;
- b=BA3DXTDEByvlquMAm4ByLtI0GbwDjaALz9kXOqafzkCf6y5ReSqs0CQl1QfbsKCcDY
- 4GZUGwwPO2MaO4GCvIG3VoXATZNgD3Hs+r/JaL966GzDl3sQW/bQUST6F65faOVeH5MN
- EqBmlPY7BwJW+bkjeErbEytXqVTBT7F9gTZLI=
+ b=KHIhK/KD4HIAtQ6yuBkegur6bXuL6jaFPNyhP9/rPyM2ny2KJNA6MtH1AgFpjw1TsX
+ opTvn+wok0L3k8CACuc4PSrxV6PfYJZNS4czJnuwHbeXSEnwH59Qr8/ez4PUHB51PibE
+ jKb+vXgZjvLwqVQaTrZW8imH/UovBz2kzfwGw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
  bh=cJYcfg79JZa0zBzQtB20LCA3OLE/cQ7YCWcHuaHNjRE=;
- b=aspzRteA3x5Gf0yk/q9pjUNVK1Xj0gOWdramFMSz/d4hS9vSj8l6swVAY4sVx0x583
- TTQHtvfCghCzmnj0WUbEOuWaqLdxWote1NHL3+N/o6YgtJD2AFk09G99a54TngZUul3U
- ZMIISUL4Tjkwg6DpfVcCAdCSllarfUJAkRSgGTy89HMGNcgpRHzfH+XJueRbxhRf9Mqk
- Fyu78KfGrxX7BVGifpFpDD6waDG6K3eDbMNYS684UDtXTv/27HveEPcI247+i/ZbETOz
- RkiyYGYkL+2Ahxp8IcWCuS22vLBaxYxM27f72hOG6YTGpHY9m2wuNE+V8mILaeSyGiI9
- WDng==
-X-Gm-Message-State: AOAM5325FtvD4y/GrjeVxFE8X/0BnAC2catG4kp7qwxiupiWW6zdFCDy
- ZPj8YJ025PnZyI2rgEUpm6M19w==
-X-Google-Smtp-Source: ABdhPJxDQpaY6Cvw+UY+kXzBXkq2hyEACzg3WpTuYqGZyPWtSE9PUyYsB4R06bxSTutvdgsB3tSy+A==
-X-Received: by 2002:a5d:6841:: with SMTP id o1mr4229454wrw.265.1624538906467; 
- Thu, 24 Jun 2021 05:48:26 -0700 (PDT)
+ b=I1K1he+bjzj2VsYQAAz/0+usOiF1aqSKbqylxwsp/StQWtPf62yveuMR4UhFjeqRdO
+ Wj6VHIg/sow3BXMSjEb3yUJo55MRyRmXqxpB7AguYanWksfjOUo3B7skrMOuuwCfG2yZ
+ TuQf/SPHjn/Vx7bYggJJVW2irucvEwEFIG+RA3NoOFesa9siNLLD/8pTnhl6hxlkhnM1
+ DfspKjAdMxjzNBRAWzJv/2BHXkcyJFkNmM6C7liC5gawBVndSkiqCfVzZuAiTEPC1Qf/
+ +kOqgR1TKyN7OyVAS4xlFhkRGwX+mObYsrMZC2n6u6/1p6B+IvbE9J68S+x+aS+PewfX
+ 2TRg==
+X-Gm-Message-State: AOAM531ZXe5xfeOqq4rd1SBhB+k4lmZL1mK2CR9sQudkg5F3Cxb6on7K
+ lszxgRQvydcMJhocJ+een6Wquw==
+X-Google-Smtp-Source: ABdhPJyJOiJqhuww+e8lPgzaYUwVimKYzyVnIk7fFDM0vjCykXqjK68FmlIoTH2hajUUTZ3QOLtAkw==
+X-Received: by 2002:a05:600c:2482:: with SMTP id
+ 2mr4087467wms.67.1624539171723; 
+ Thu, 24 Jun 2021 05:52:51 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id d3sm3200732wrx.28.2021.06.24.05.48.25
+ by smtp.gmail.com with ESMTPSA id b7sm3200649wrw.20.2021.06.24.05.52.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 24 Jun 2021 05:48:25 -0700 (PDT)
+ Thu, 24 Jun 2021 05:52:51 -0700 (PDT)
 From: Daniel Vetter <daniel.vetter@ffwll.ch>
 To: DRI Development <dri-devel@lists.freedesktop.org>
-Date: Thu, 24 Jun 2021 14:48:20 +0200
-Message-Id: <20210624124820.162873-1-daniel.vetter@ffwll.ch>
+Date: Thu, 24 Jun 2021 14:52:46 +0200
+Message-Id: <20210624125246.166721-1-daniel.vetter@ffwll.ch>
 X-Mailer: git-send-email 2.32.0.rc2
 In-Reply-To: <20210623161955.3371466-1-daniel.vetter@ffwll.ch>
 References: <20210623161955.3371466-1-daniel.vetter@ffwll.ch>
