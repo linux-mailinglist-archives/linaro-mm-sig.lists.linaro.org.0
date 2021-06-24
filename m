@@ -2,142 +2,66 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id AFB2B3B2BD8
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Jun 2021 11:53:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 168B03B2D3E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Jun 2021 13:08:36 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A72706350A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Jun 2021 09:53:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 11C526354F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Jun 2021 11:08:35 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 0AC7463538; Thu, 24 Jun 2021 09:53:08 +0000 (UTC)
+	id F3F9D62D53; Thu, 24 Jun 2021 11:08:33 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3958360EA2;
-	Thu, 24 Jun 2021 09:53:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 09AED61F0D;
+	Thu, 24 Jun 2021 11:08:30 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id D2BF160428
- for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Jun 2021 09:53:03 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id BE64E60847
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Jun 2021 11:08:27 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id D059460EA2; Thu, 24 Jun 2021 09:53:03 +0000 (UTC)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2062.outbound.protection.outlook.com [40.107.237.62])
- by lists.linaro.org (Postfix) with ESMTPS id C5E0660428
- for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Jun 2021 09:53:01 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GMSovInSeqscmIjdZl28v8EUHc3qIrlIIvBsJmBLGpMdEAMPFwbsAari0+Xt12brATJPqYKkFNbXHAzfPLjK0kIvDgywOAnxFrWSuKrAOuZi73/iUETcRniJGiw9hyYl3xDC6SqbQ/3oK0FzIj6YGmTK328ET72GtnWPY67lvNdqZoN+ABJ4ZPxWpU5XAJxPs2Y8sr4WTochbh4QjpUh5MSgoaQ73CwcivTutDXQr2p9Zy2OqpK87cpCQELabRJSJFJE5vgcRqNWYErWyIeCPAvs1r6Qv92LyxVwq/Rewi7e34rQ4EQIEPUjbNTbJKuV70Li9OGr5bSXAu+K2iie8A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hl6R0JiV5EtAwY4px38KP0cu53RquT2zE0HH5fII+WQ=;
- b=Q4Y3EA7SFApvOvISdk4uHq+pZtQy+RNckw36hqjCOe/lzbiy/AaPM/fc3pO9SK7MjVVIUWgsjovU1oUrMZrBNDQ3gQGcbkEl8Y5VdrSjbVmQ9x9EfnN1TOamoN8wTLPB9+gkEC3dOJshaa9UHt6I7AgUkC6p+XVykPVF3Wc98F16mzjmqBhLw7KrjS5Qqy4HCd6G3QVaknUMU+gbCTVai9Lq6JhZ5jYz/IAFCjo5yO3Mjy/Y0ZyM4dEd7Exg1K5/qY4Yla+WMx6/0bZhEy0Zk2t7T31Wbcce76m8USZrm8xKhzmhPrMdnsc2YfPAGc/EAIdagOo4A1CvJUHCBKBSZg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hl6R0JiV5EtAwY4px38KP0cu53RquT2zE0HH5fII+WQ=;
- b=ty2Euy2V3IDUd8hkjda4Jr5FvpIuZJsXBUCczn6mh6GXlZKXUY1KowRRnRLyRDF13Y13ex1LTf9mwJEsqQSNIW2shAvpPDythgXpbONB1pG91r7G0NvseBU80I0ctFiAQJAprPLgjcKRvOSZDQDd+2V+ZrgHOODtCE64MvLqKJo=
-Authentication-Results: vger.kernel.org; dkim=none (message not signed)
- header.d=none;vger.kernel.org; dmarc=none action=none header.from=amd.com;
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
- by MN2PR12MB4549.namprd12.prod.outlook.com (2603:10b6:208:268::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4264.18; Thu, 24 Jun
- 2021 09:53:00 +0000
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::6c9e:1e08:7617:f756]) by MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::6c9e:1e08:7617:f756%5]) with mapi id 15.20.4264.020; Thu, 24 Jun 2021
- 09:53:00 +0000
-To: Christoph Hellwig <hch@lst.de>
-References: <20210622154027.GS1096940@ziepe.ca>
- <09df4a03-d99c-3949-05b2-8b49c71a109e@amd.com>
- <20210622160538.GT1096940@ziepe.ca>
- <d600a638-9e55-6249-b574-0986cd5cea1e@gmail.com>
- <20210623182435.GX1096940@ziepe.ca>
- <CAFCwf111O0_YB_tixzEUmaKpGAHMNvMaOes2AfMD4x68Am4Yyg@mail.gmail.com>
- <20210623185045.GY1096940@ziepe.ca>
- <CAFCwf12tW_WawFfAfrC8bgVhTRnDA7DuM+0V8w3JsUZpA2j84w@mail.gmail.com>
- <20210624053421.GA25165@lst.de>
- <9571ac7c-3a58-b013-b849-e26c3727e9b2@amd.com>
- <20210624081237.GA30289@lst.de>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-Message-ID: <899fe0ce-b6d7-c138-04b6-4b12405f8d93@amd.com>
-Date: Thu, 24 Jun 2021 11:52:47 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
-In-Reply-To: <20210624081237.GA30289@lst.de>
-Content-Language: en-US
-X-Originating-IP: [2a02:908:1252:fb60:1b1b:b0cf:e32b:2813]
-X-ClientProxiedBy: AM0PR10CA0018.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:208:17c::28) To MN2PR12MB3775.namprd12.prod.outlook.com
- (2603:10b6:208:159::19)
+ id B2B5261F0D; Thu, 24 Jun 2021 11:08:27 +0000 (UTC)
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
+ [209.85.221.49])
+ by lists.linaro.org (Postfix) with ESMTPS id AADA360847
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Jun 2021 11:08:25 +0000 (UTC)
+Received: by mail-wr1-f49.google.com with SMTP id i94so6195103wri.4
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Jun 2021 04:08:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=fooishbar-org.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=QIhYwuUZh1E/gonAIS7dcnqcARAdk59HgVxHGkujk1w=;
+ b=KYg6sCUgU5Bqq9lAHCwCyNk4iI8OOFRlW6guSXIP6LW87QwTsKYBYg3RnfRmt9k40Q
+ mAp7Ad15MW5TVGrFh3HBAkqdPtc66Y3aMeWBrxtNnrw5qt8Oowa9wVcsYAlRfzrPWhZk
+ rSfe9CqA4jUh2Iba07CNWbJByS6WmOvmSIaUc0CdCAVGyB7kBssEDVHwnwe0Hkaf4ZDk
+ syGZAHp2spHeo7I1VkNl2ClSeQWeQhHBx5ltlruReLfOemdneSModtJiMAbs2cNJgCwR
+ UEozWtd6Cbxre5SJsIle1RzEnYLkopuJHt9C9jX8RkiTEfNFAFH0C6U3RUZ6VEMOQND3
+ 4Ocg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=QIhYwuUZh1E/gonAIS7dcnqcARAdk59HgVxHGkujk1w=;
+ b=XlBRvahW1O0W3i7LAMhOzhtToPR0moF7rWb2YUYy4Ljc93FryrVKEY+Akp8T23wHrb
+ Mh4BULDGRJ9PPJMltItRkMVpbARfI0jvjjetMrwKNASRsqyuE5tlFqtkwhHoove39Tji
+ y2QzzYNHbsNBc5wy1YUqQ10rNL86VNsC0D9xlC0KWMuSui49vllez7SDkd4OvdH6RZRS
+ qHGYkIXAF29y3duiB2+pPdwWxYi6u42DII3i4JqPDGCxuZGTSH8oOr2ljZe4eTT+BA+0
+ uzczbYJvPEJwhAOTXfqAFm84FA2mPOLl2Rk2pXVAjHjo85EK8icgk13Yd4UjH0E5UbAV
+ PYhA==
+X-Gm-Message-State: AOAM5304kPvNfyeRMCDW1VGGLnkTagf9M72TmQN/I7JCf0q7Y/T+oOV/
+ fRLLOtFj8B35dY2eQleENs+7bBJG9oy4yRod+wnN9Q==
+X-Google-Smtp-Source: ABdhPJxZoRSMXwTUmNasGUwFhckdvqD70ZR4JKM/20OMS3RCLqJgbufNanpEClxPKCBbMcnvj83uF/kwgAhx/e5SHjs=
+X-Received: by 2002:a5d:47cf:: with SMTP id o15mr3920624wrc.6.1624532904531;
+ Thu, 24 Jun 2021 04:08:24 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [IPv6:2a02:908:1252:fb60:1b1b:b0cf:e32b:2813]
- (2a02:908:1252:fb60:1b1b:b0cf:e32b:2813) by
- AM0PR10CA0018.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:208:17c::28) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4264.20 via Frontend
- Transport; Thu, 24 Jun 2021 09:52:57 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 00420f8a-7e8e-4ff8-76ba-08d936f5d9d5
-X-MS-TrafficTypeDiagnostic: MN2PR12MB4549:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <MN2PR12MB45495924BF568FB930F5736583079@MN2PR12MB4549.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:6430;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: fCp8qYv+ofxlyEP4O7XheNassrSOq6sm1rN/jE4dIgMHbtNxuYnkmK7fJAgKCfOCvICEba5ICiPyVRXn0Gql7H55OB5CLvLRcsGcVJm93sbdmWnNnBKRGl2loci3xZJj8QxP5ZlOZTioRjrrEbz0MfqqvX3QLqnFOvp5EkVo66FxGftaASvS/isJmfeeW98f3KK5hShjHi4IKUYkgppvhPp6STUHVJTldjYYn6HUEKt9a5AisURd5PzGRwwZLS82wXT+8O3A8SbnvUupClk3D2NxPfzKFdKicf5BHaV1iU0JoRAi62armlkwHj3UBmFAeCNwtTg2EkaQAfuSQ19jhyMOjw54N9YLfU7YbxEqsrbYU40IIpTxu0im491UON7PKePow61A7huJTKz28XceqXLqJamjgcwK1SNUhkFr2WfEUNZiIP9zPmjC9qZmsW0n6EOL+3qRjpNWUKdblh+ZlTihAKSVp79jn5MGVt7DJqMMutQW1nPLWf121KQHVG1omcc3ImNeg34VA7CJ5XEjXzNXyagjI3Fs3XDemhCKx/rHfLTg5MflesP+ziE3AE+zJuxVXn4Ywkb0E/UkCexfCPFCbbQHHXAQxqeiRvVszC91B2YG4eLRDPjyyPFXJoJ/OU0McFs94FaWmCppVW3mg68AfsV+MvKzwvxjo5D8JAzgmdwwFwjOOBoBQ6WCmLi+c8DTxsGnR1gFNREQT67qnSxXJrCr6uSWuVhcDzTgGpltTqGjPWcRLCy/jbuSNAyj
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(346002)(396003)(366004)(136003)(39860400002)(376002)(36756003)(86362001)(66476007)(66556008)(66946007)(6666004)(5660300002)(38100700002)(31696002)(6486002)(83380400001)(16526019)(186003)(4326008)(6916009)(478600001)(54906003)(7416002)(2906002)(8676002)(316002)(31686004)(8936002)(2616005)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dkdVbEZDRmUyTkNQemd2c0VGbDdrdVpnanpGZ292VWgzVU11b1RxSDJuMWtz?=
- =?utf-8?B?UW1kRWtVYjdSSFU5ZXBCWG1XeWhESWI3UTZVQkxXbXJwNHdmWlp3bHAvWXVM?=
- =?utf-8?B?ekYrUjZqUUx3RHBwRmp2SkFtQ28wckxkT1NNT3hudnFQWWVCSzR4R2ZzSDMx?=
- =?utf-8?B?NEJEcFUrSytFMTRnL2pOQ0ROTFpMSTVBczkrQXVycitSaEsvai80T3RjOTRR?=
- =?utf-8?B?TzZMa0Y5ZHNXZDNCQW8xbjBqUFFjZ3B4cEQ2elJFMlBVajR4bE9Cby9hT3c0?=
- =?utf-8?B?RXlkOWMwU2lEdHVYZkJqRzF0b2ltNXVvejdWRnpVb0p2dnl0cHB6NmlnQnVG?=
- =?utf-8?B?R1k4eXFMZDliNW9aK2FWM283Y3gxbGhNMXpzb0laMDRaN2lyMjh4MVVPRmRS?=
- =?utf-8?B?MXJuUFJNc3laR1hRQmtJOG40NU5Sd2hrS0dMMks4T3ZOYTFpSDlPdHZXYTFQ?=
- =?utf-8?B?aXZVQU5CRXVpS0t3Uk1LR1VPaHR6UDJ3TXdTaTg3YXVvSjVuV3gvTEZyMVBk?=
- =?utf-8?B?SmpRQ3RjSGQvZUtENjN6VGFhS1daSkM5TGZNMElQWnhYMFpsbGt5S1g2UGdi?=
- =?utf-8?B?U0FvNE1KVnpuUmRPUFRzUmpKd3ZUOW1RY2k1alBqY1VGdUlqWEsvYnhRNURj?=
- =?utf-8?B?aU9OTnNkM2hVYkplcHpCQXp0cDlLdWU5WHdDMXJkZVBmendndFd5b1g4aDVB?=
- =?utf-8?B?dHNiUXJhYnMydWMrU0xhWEpIditQcm5odHFUTDNydGRkTUNleWJGT1RUV0kw?=
- =?utf-8?B?RjlBUE81RndGTUJuUDFNUTJrS0xzeVZJWWVDYzhrb3dOTk9LQXU1Y2w0MVBV?=
- =?utf-8?B?Q3BWMnNLQ3VTb05xZ1MzZGxwWGM4M20zUjdYdFhOaFY2NTlid1d0dGZtWGtS?=
- =?utf-8?B?Q3lvWlYwb0RWY1l2ZFM4VFpHMDdCTkNoSFQ5TmROanBDTEptRmlaU2JUejJm?=
- =?utf-8?B?aHZkRVdUREd4MEpUQlo3bmptK3FqQ0Z5SEVRMFR3eTFWemk3UmdlL3dpdVNX?=
- =?utf-8?B?dmNSVHY5RHdrcURpbEJBM0JQVUJaSnhEN0x6dEMwS25abEZiU3N2dmpPL0ZT?=
- =?utf-8?B?OVZwQjlzWGNDQlBJRlZZOUhuMFordTl4d1BCbDNsNFI4U3M4OHhkaEdtWTI3?=
- =?utf-8?B?Y3JCNk55YTgwS1d1NVJZVXZXWk10ZldiVEVDY2svR2I5RVZxOHJTdGpZNFVk?=
- =?utf-8?B?ZDJwUnhFQmFJZVVxQWVLam1XSHU0VThyMGZTdytrWmFsRG1lRVB4cGY3OXYx?=
- =?utf-8?B?TkNXOVdCSjhwY0hwcVlVdHhsaHBIYVlDenExR2RIQ1NYcWJOc2xlVE5uVk1u?=
- =?utf-8?B?U0srbUl3TFd1NmlzTEdjK215WFVhRyt4RGhzQ0FBMHhrbFlFa1N3clBqaXBv?=
- =?utf-8?B?a2dIM0RlZWxsYjAyZ0liNURUU1FGZTZtVTJmS3VvYVF2TWQzSWdwVjF4NENI?=
- =?utf-8?B?WmwzbGw1c05OcUVIMzF5cGJaTnI4UWdrRzJ5WUo3VjhSZTdSNWdrMm1MeUpk?=
- =?utf-8?B?eFpxWmdxNWdQT3J0SmlTcjc3NVlRd0c2NitiZ3dQdUlWeHZwTnZZK3VSMFVu?=
- =?utf-8?B?Vmo2OHVvRVZ5UkxPSE5iTllJWlJ2eGVrRGx6aVVjOUJTMktNc3VpZFpNMURa?=
- =?utf-8?B?ZGxxenA2OEpZV0RUWDRuK2d2b3lERU9HblJocXVyR2d4T0FQbVN0S2xEdlBF?=
- =?utf-8?B?ODZUQlJuek1KNVdZWXNxanNOQ0VRbllYazJ6RHBtZW40azdVUUJmRWVoNUpM?=
- =?utf-8?B?czBScFFsZ2hLOVVueVVIYndqaG1zdFJ0NlJSN3NFR2VwV2wrWURFWHJ3Vk9D?=
- =?utf-8?B?WFZTZi82dUtMSVlKeEttOWExSm9lVCtiTDJVeGk5ZTZLZi9Ia3lWUWxjc0VW?=
- =?utf-8?Q?/zNPVxfG09YwW?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 00420f8a-7e8e-4ff8-76ba-08d936f5d9d5
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jun 2021 09:53:00.1787 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: mUyJEDjLX7nbe1UPsvdZTDgdodSnK7LA0BfKYd3jI6fecl5gWzqhZFW8Jtz25Q0j
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4549
+References: <20210622165511.3169559-4-daniel.vetter@ffwll.ch>
+ <20210623161955.3371466-1-daniel.vetter@ffwll.ch>
+In-Reply-To: <20210623161955.3371466-1-daniel.vetter@ffwll.ch>
+From: Daniel Stone <daniel@fooishbar.org>
+Date: Thu, 24 Jun 2021 12:08:11 +0100
+Message-ID: <CAPj87rN_P7u5JGWBOHc5BEXiz1Znek6fDTyj-uVr2nwEcGX_XA@mail.gmail.com>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v3 1/2] habanalabs: define uAPI to
- export FD for DMA-BUF
+Subject: Re: [Linaro-mm-sig] [Mesa-dev] [PATCH] dma-buf: Document dma-buf
+ implicit fencing/resv fencing rules
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -150,50 +74,128 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: linux-rdma <linux-rdma@vger.kernel.org>, sleybo@amazon.com,
- Gal Pressman <galpress@amazon.com>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+Cc: Rob Clark <robdclark@chromium.org>, Daniel Stone <daniels@collabora.com>,
+ =?UTF-8?Q?Michel_D=C3=A4nzer?= <michel@daenzer.net>,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ Kevin Wang <kevin1.wang@amd.com>,
+ DRI Development <dri-devel@lists.freedesktop.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Jason Gunthorpe <jgg@ziepe.ca>, Doug Ledford <dledford@redhat.com>,
- Tomer Tayar <ttayar@habana.ai>, amd-gfx list <amd-gfx@lists.freedesktop.org>,
- Greg KH <gregkh@linuxfoundation.org>, Alex Deucher <alexander.deucher@amd.com>,
- Leon Romanovsky <leonro@nvidia.com>, Oded Gabbay <ogabbay@kernel.org>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+ Luben Tuikov <luben.tuikov@amd.com>,
+ "Kristian H . Kristensen" <hoegsberg@google.com>,
+ Chen Li <chenli@uniontech.com>, ML mesa-dev <mesa-dev@lists.freedesktop.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Daniel Vetter <daniel.vetter@intel.com>, Dennis Li <Dennis.Li@amd.com>,
+ Deepak R Varma <mh12gx2825@gmail.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-QW0gMjQuMDYuMjEgdW0gMTA6MTIgc2NocmllYiBDaHJpc3RvcGggSGVsbHdpZzoKPiBPbiBUaHUs
-IEp1biAyNCwgMjAyMSBhdCAxMDowNzoxNEFNICswMjAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3Rl
-Ogo+PiBUaGUga2V5IHBvaW50IGlzIHRoYXQgYWNjZXNzaW5nIHRoZSB1bmRlcmx5aW5nIHBhZ2Vz
-IGV2ZW4gd2hlbiBETUEtYnVmcyBhcmUKPj4gYmFja2VkIGJ5IHN5c3RlbSBtZW1vcnkgaXMgaWxs
-ZWdhbC4gRGFuaWVsIGV2ZW4gY3JlYXRlZCBhIHBhdGNoIHdoaWNoCj4+IG1hbmdsZXMgdGhlIHBh
-Z2UgcG9pbnRlcnMgaW4gc2dfdGFibGVzIHVzZWQgYnkgRE1BLWJ1ZiB0byBtYWtlIHN1cmUgdGhh
-dAo+PiBwZW9wbGUgZG9uJ3QgdHJ5IHRvIHVzZSB0aGVtLgo+IFdoaWNoIGlzIGFub3RoZXIgZ29k
-ZGFtbiBsYXllcmluZyB2aW9sYXRpb24gb2YgYSBzdWJzeXN0ZW0gdGhhdCBoYXMgbm8KPiBidXNp
-bmVzcyBhdCBhbGwgcG9raW5nIGludG8gdGhlIHNjYXR0ZXJsaXN0IHN0cnVjdHVyZSwgeWVzLgoK
-Q29tcGxldGVseSBhZ3JlZSwgYnV0IGl0IGlzIGFsc28gdGhlIGVhc2llc3Qgd2F5IHRvIGdldCBh
-d2F5IGZyb20gdGhlIApzY2F0dGVybGlzdCBhcyB0cmFzbnBvcnQgdmVoaWNsZSBmb3IgdGhlIGRt
-YV9hZGRyZXNzZXMuCgpbU05JUF0KCj4+IE15IGJlc3QgcGxhbiB0byBnZXQgb3V0IG9mIHRoaXMg
-bWVzcyBpcyB0aGF0IHdlIGNoYW5nZSB0aGUgRE1BLWJ1Zgo+PiBpbnRlcmZhY2UgdG8gdXNlIGFu
-IGFycmF5IG9mIGRtYV9hZGRyZXNzZXMgaW5zdGVhZCBvZiB0aGUgc2dfdGFibGUgb2JqZWN0Cj4+
-IGFuZCBJIGhhdmUgYWxyZWFkeSBiZWVuIHdvcmtpbmcgb24gdGhpcyBhY3RpdmVseSB0aGUgbGFz
-dCBmZXcgbW9udGguCj4gQXdlc29tZSEgIEkgaGF2ZSBhIGJpdCBvZiByZWxhdGVkIHdvcmsgb24g
-dGhlIERNQSBtYXBwaW5nIHN1YnN5c3RlbXMsIHNvCj4gbGV0J3Mgc3luYyB1cCBhcyBzb29uIGFz
-IHlvdSBoYXZlIHNvbWUgZmlyc3Qgc2tldGNoZXMuCgpEb24ndCBzdGFydCBjaGVlcmluZyB0byBm
-YXN0LgoKSSd2ZSBhbHJlYWR5IGNvbnZlcnRlZCBhIGJ1bmNoIG9mIHRoZSBHUFUgZHJpdmVycywg
-YnV0IHRoZXJlIGFyZSBhdCAKbGVhc3QgNiBHUFUgc3RpbGwgbmVlZGluZyB0byBiZSBmaXhlZCBh
-bmQgb24gdG9wIG9mIHRoYXQgY29tZXMgVkEtQVBJIAphbmQgYSBmZXcgb3RoZXJzLgoKV2hhdCBh
-cmUgeW91ciBwbGFucyBmb3IgdGhlIERNQSBtYXBwaW5nIHN1YnN5c3RlbT8KCj4gQnR3LCBvbmUg
-dGhpbmcgSSBub3RpY2VkIHdoZW4gbG9va2luZyBvdmVyIHRoZSBkbWEtYnVmIGluc3RhbmNlcyBp
-cyB0aGF0Cj4gdGhlcmUgaXMgYSBsb3Qgb2YgZHVwbGljYXRlZCBjb2RlIGZvciBjcmVhdGluZyBh
-IHNnX3RhYmxlIGZyb20gcGFnZXMsCj4gYW5kIHRoZW4gbWFwcGluZyBpdC4gIEl0IHdvdWxkIGJl
-IGdvb2QgaWYgd2UgY291bGQgbW92ZSB0b3dhcmQgY29tbW9uCj4gaGVscGVycyBpbnN0ZWFkIG9m
-IGR1cGxpY2F0aW5nIHRoYXQgYWxsIG92ZXIgYWdhaW4uCgpDYW4geW91IGdpdmUgYW4gZXhhbXBs
-ZT8KClRoYW5rcywKQ2hyaXN0aWFuLgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8tbW0tc2lnQGxp
-c3RzLmxpbmFyby5vcmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4vbGlzdGluZm8v
-bGluYXJvLW1tLXNpZwo=
+Hi,
+
+On Wed, 23 Jun 2021 at 17:20, Daniel Vetter <daniel.vetter@ffwll.ch> wrote:
+> +        *
+> +        * IMPLICIT SYNCHRONIZATION RULES:
+> +        *
+> +        * Drivers which support implicit synchronization of buffer access as
+> +        * e.g. exposed in `Implicit Fence Poll Support`_ should follow the
+> +        * below rules.
+
+'Should' ... ? Must.
+
+> +        * - Drivers should add a shared fence through
+> +        *   dma_resv_add_shared_fence() for anything the userspace API
+> +        *   considers a read access. This highly depends upon the API and
+> +        *   window system: E.g. OpenGL is generally implicitly synchronized on
+> +        *   Linux, but explicitly synchronized on Android. Whereas Vulkan is
+> +        *   generally explicitly synchronized for everything, and window system
+> +        *   buffers have explicit API calls (which then need to make sure the
+> +        *   implicit fences store here in @resv are updated correctly).
+> +        *
+> +        * - [...]
+
+Mmm, I think this is all right, but it could be worded much more
+clearly. Right now it's a bunch of points all smashed into one, and
+there's a lot of room for misinterpretation.
+
+Here's a strawman, starting with most basic and restrictive, working
+through to when you're allowed to wriggle your way out:
+
+Rule 1: Drivers must add a shared fence through
+dma_resv_add_shared_fence() for any read accesses against that buffer.
+This appends a fence to the shared array, ensuring that any future
+non-read access will be synchronised against this operation to only
+begin after it has completed.
+
+Rule 2: Drivers must add an exclusive fence through
+dma_resv_add_excl_fence() for any write accesses against that buffer.
+This replaces the exclusive fence with the new operation, ensuring
+that all future access will be synchronised against this operation to
+only begin after it has completed.
+
+Rule 3: Drivers must synchronise all accesses to buffers against
+existing implicit fences. Read accesses must synchronise against the
+exclusive fence (read-after-write), and write accesses must
+synchronise against both the exclusive (write-after-write) and shared
+(write-after-read) fences.
+
+Note 1: Users like OpenGL and window systems on non-Android userspace
+are generally implicitly synchronised. An implicitly-synchronised
+userspace is unaware of fences from prior operations, so the kernel
+mediates scheduling to create the illusion that GPU work is FIFO. For
+example, an application will flush and schedule GPU write work to
+render its image, then immediately tell the window system to display
+that image; the window system may immediately flush and schedule GPU
+read work to display that image, with neither waiting for the write to
+have completed. The kernel provides coherence by synchronising the
+read access against the write fence in the exclusive slot, so that the
+image displayed is correct.
+
+Note 2: Users like Vulkan and Android window system are generally
+explicitly synchronised. An explicitly-synchronised userspace is
+responsible for tracking its own read and write access and providing
+the kernel with synchronisation barriers. For instance, a Vulkan
+application rendering to a buffer and subsequently using it as a read
+texture, must annotate the read operation with a read-after-write
+synchronisation barrier.
+
+Note 3: Implicit and explicit userspace can coexist. For instance, an
+explicitly-synchronised Vulkan application may be running as a client
+of an implicitly-synchronised window system which uses OpenGL for
+composition; an implicitly-synchronised OpenGL application may be
+running as a client of a window system which uses Vulkan for
+composition.
+
+Note 4: Some subsystems, for example V4L2, do not pipeline operations,
+and instead only return to userspace when the scheduled work against a
+buffer has fully retired.
+
+Exemption 1: Fully self-coherent userspace may skip implicit
+synchronisation barriers. For instance, accesses between two
+Vulkan-internal buffers allocated by a single application do not need
+to synchronise against each other's implicit fences, as the client is
+responsible for explicitly providing barriers for access. A
+self-contained OpenGL userspace also has no need to implicitly
+synchronise its access if the driver instead tracks all access and
+inserts the appropriate synchronisation barriers.
+
+Exemption 2: When implicit and explicit userspace coexist, the
+explicit side may skip intermediate synchronisation, and only place
+synchronisation barriers at transition points. For example, a Vulkan
+compositor displaying a buffer from an OpenGL application would need
+to synchronise its first access against the fence placed in the
+exclusive implicit-synchronisation slot. Once this read has fully
+retired, the compositor has no need to participate in implicit
+synchronisation until it is ready to return the buffer to the
+application, at which point it must insert all its non-retired
+accesses into the shared slot, which the application will then
+synchronise future write accesses against.
+
+Cheers,
+Daniel
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
