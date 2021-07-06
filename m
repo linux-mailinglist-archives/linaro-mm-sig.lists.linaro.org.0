@@ -2,75 +2,65 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C0253BDA20
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 17:25:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EB14A3BDA80
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 17:49:23 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 33B1866940
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 15:25:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 901A366921
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 15:49:22 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 203C566941; Tue,  6 Jul 2021 15:25:53 +0000 (UTC)
+	id 386DE66949; Tue,  6 Jul 2021 15:49:20 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6E05460CA7;
-	Tue,  6 Jul 2021 15:25:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3E85261A49;
+	Tue,  6 Jul 2021 15:49:17 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 6E9856062F
- for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 15:25:48 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 9861760851
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 15:49:15 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 6302C60CA7; Tue,  6 Jul 2021 15:25:48 +0000 (UTC)
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
- [209.85.214.177])
- by lists.linaro.org (Postfix) with ESMTPS id 56EA56062F
- for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 15:25:46 +0000 (UTC)
-Received: by mail-pl1-f177.google.com with SMTP id x3so3733983pll.5
- for <linaro-mm-sig@lists.linaro.org>; Tue, 06 Jul 2021 08:25:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=kBvoTSBcOt78f+hoOE9oCqUZer2JVIUIWKm+LE7tBB8=;
- b=X163Xk+G02T/FYeziNGDwCPOc6BLNJpmRANJZemVrSobPquSFvpYvLg7I+/xXol03F
- kgToG/GWqTW22vdfS86rrDbHG+VIoJpV7F3ia6ZGlrrWTBFKBlA1qJfDU2QYjFMxw9bn
- 18zM+SC3OK5PBTSWnVn9GnFtpVk1NhRB4WRRd6zVs3M5rR6QpNocNXBiV7EL2h8le3Ow
- jvZU/A0iyEbkwxC5Yua5tblx9J0ejeZ7v4lloFM8eg/sgExGmReJOD+eEQ6g9p7ckBea
- AQnNsdBTVeckFCBTYdf84UR54cEJl3YU8s6gAghdvxWN3OAHAx/OxyzWsnveJxZQA+4F
- K0qg==
+ id 8D79E61A49; Tue,  6 Jul 2021 15:49:15 +0000 (UTC)
+Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com
+ [209.85.210.47])
+ by lists.linaro.org (Postfix) with ESMTPS id 8255B60851
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 15:49:13 +0000 (UTC)
+Received: by mail-ot1-f47.google.com with SMTP id
+ h24-20020a9d64180000b029036edcf8f9a6so22020061otl.3
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 06 Jul 2021 08:49:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=9Lz1C2Jg0D1JZ1ELvAKDI4J04OIYXO0SeOh8EZaA3Mg=;
+ b=VdDtwm/D83TJXUbV95JXQXWh8E3k45oG2fRtUIaudvPnJl1nn8ZENseETR2AfGF7Fh
+ Z9CYBStDvLuPedqiTHMmfMEOpCaLTnt3AubNp7t+mogVZyL5uLbWqkXnmu2IapAEZw/A
+ e7NU/V4E0AoVg9zPdo1692x8C9W8o3OhPR6UQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=kBvoTSBcOt78f+hoOE9oCqUZer2JVIUIWKm+LE7tBB8=;
- b=uael0PtKeE0jelUV4oyYOGUELnYTn/QcqK6KzHNcD8FHMr5TztFrp2wLXUIKcxSgYo
- giomaruiTK9jwSQZkm+racbxJ3RknJdQTQ5uF3EYb+zWGC+YqphxejJWFCLKO2ZkIq9A
- gaLikER8y9y5/e+ZMKrDq4xMiceJ22CJdWuhsBOC/Lq6KbWzMFsuU/KhEGpcZbBwGDpG
- bQTkc3+KXNX0eQ3fDO1PYgpji/fhAgf2wCdVUDcmGJ0ymLnpbQH7j4DuYJreo37LyoXj
- ZP2N/28JBh2kuBIF8M4nMvDDWp3mFK3UNpSWfcu27DehQchLtgfpxa28rXyw+R4ZkVCV
- QzyQ==
-X-Gm-Message-State: AOAM5338vDz/qLIKPUxa5zfe540umGapBL6WoFTeXyghLhJh9t3xzzX0
- YUnDJQKRd/SxqCmein6H2ZO7UA==
-X-Google-Smtp-Source: ABdhPJxrcXwOAFPmP3ClDrDAEt0u9Z/9YZvGne/AXypBqtfhopbFKVCe78sZDR5N+5fl5a1I4tI3yA==
-X-Received: by 2002:a17:90a:8417:: with SMTP id
- j23mr1072739pjn.210.1625585145462; 
- Tue, 06 Jul 2021 08:25:45 -0700 (PDT)
-Received: from ziepe.ca ([206.223.160.26])
- by smtp.gmail.com with ESMTPSA id m18sm17872288pff.88.2021.07.06.08.25.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jul 2021 08:25:44 -0700 (PDT)
-Received: from jgg by mlx with local (Exim 4.94) (envelope-from <jgg@ziepe.ca>)
- id 1m0mxC-004SbX-Ps; Tue, 06 Jul 2021 12:25:42 -0300
-Date: Tue, 6 Jul 2021 12:25:42 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Daniel Vetter <daniel.vetter@ffwll.ch>
-Message-ID: <20210706152542.GP4604@ziepe.ca>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=9Lz1C2Jg0D1JZ1ELvAKDI4J04OIYXO0SeOh8EZaA3Mg=;
+ b=DbnH6TFlTJ2R/eyTasGc8iVYR9GwnBak7YwfuJrTdwm8wuEKGXYZk9mgBYIuEFgtkH
+ xsqPzFub7M+QQ8KOouOd7c8qLE2oPHY99BTPyfJuaOlDf7ixN2bMUKOODjD/cEjoSbdq
+ qx29UTfwlhYuWJW9FlATTP/3BYLy/Vv/UQcadzZhpVG8CN6kNDWQGw//mw3UoGzm+W2Z
+ MQy0kIjC9gCOHUtUSqv5u02is4i1mUhIkjVF7JIl1O8FwWlvVY6MRrESuDua/Rbasho1
+ /75NMWvndjOMy6By4nfQSJiT0m/fJw31mAc4QVJmAqfX3astryOq21V7J3ZsLNDYvnxP
+ 7yMA==
+X-Gm-Message-State: AOAM5317UZWA+qbo7llxgamw6wooGmSOtTolsuvLsEbtNMnpBqBRMsF6
+ SUZa+CIvZYnL8ihWRxMJznFSsdh4HcEQRXqI/BiXrQ==
+X-Google-Smtp-Source: ABdhPJyL0zpOk57gvxAoXPVwnOIH61HfNC4Ne6EU1r5lEUqaZg7uANzEfYAF67zrYyTHpZfkojmnHOlqQHemdgOPDZw=
+X-Received: by 2002:a9d:27a4:: with SMTP id c33mr15781208otb.281.1625586552803; 
+ Tue, 06 Jul 2021 08:49:12 -0700 (PDT)
+MIME-Version: 1.0
 References: <20210705130314.11519-1-ogabbay@kernel.org>
  <YOQXBWpo3whVjOyh@phenom.ffwll.local>
  <CAFCwf10_rTYL2Fy6tCRVAUCf4-6_TtcWCv5gEEkGnQ0KxqMUBg@mail.gmail.com>
  <CAKMK7uEAJZUHNLreBB839BZOfnTGNU4rCx-0k55+67Nbxtdx3A@mail.gmail.com>
  <20210706142357.GN4604@ziepe.ca>
  <CAKMK7uELNzwUe+hhVWRg=Pk5Wt_vOOX922H48Kd6dTyO2PeBbg@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAKMK7uELNzwUe+hhVWRg=Pk5Wt_vOOX922H48Kd6dTyO2PeBbg@mail.gmail.com>
+ <20210706152542.GP4604@ziepe.ca>
+In-Reply-To: <20210706152542.GP4604@ziepe.ca>
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+Date: Tue, 6 Jul 2021 17:49:01 +0200
+Message-ID: <CAKMK7uH7Ar6+uAOU_Sj-mf89V9WCru+66CV5bO9h-WAAv7Mgdg@mail.gmail.com>
+To: Jason Gunthorpe <jgg@ziepe.ca>
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [PATCH v4 0/2] Add p2p via dmabuf to habanalabs
 X-BeenThere: linaro-mm-sig@lists.linaro.org
@@ -95,7 +85,7 @@ Cc: Gal Pressman <galpress@amazon.com>, sleybo@amazon.com,
  Doug Ledford <dledford@redhat.com>, Christoph Hellwig <hch@lst.de>,
  amd-gfx list <amd-gfx@lists.freedesktop.org>,
  Alex Deucher <alexander.deucher@amd.com>,
- Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  Leon Romanovsky <leonro@nvidia.com>,
  Linux Media Mailing List <linux-media@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
@@ -104,71 +94,134 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Tue, Jul 06, 2021 at 04:39:19PM +0200, Daniel Vetter wrote:
-> On Tue, Jul 6, 2021 at 4:23 PM Jason Gunthorpe <jgg@ziepe.ca> wrote:
+On Tue, Jul 6, 2021 at 5:25 PM Jason Gunthorpe <jgg@ziepe.ca> wrote:
+> On Tue, Jul 06, 2021 at 04:39:19PM +0200, Daniel Vetter wrote:
+> > On Tue, Jul 6, 2021 at 4:23 PM Jason Gunthorpe <jgg@ziepe.ca> wrote:
+> > >
+> > > On Tue, Jul 06, 2021 at 12:36:51PM +0200, Daniel Vetter wrote:
+> > >
+> > > > If that means AI companies don't want to open our their hw specs
+> > > > enough to allow that, so be it - all you get in that case is
+> > > > offloading the kernel side  of the stack for convenience, with zero
+> > > > long term prospects to ever make this into a cross vendor subsystem
+> > > > stack that does something useful.
+> > >
+> > > I don't think this is true at all - nouveau is probably the best
+> > > example.
+> > >
+> > > nouveau reverse engineered a userspace stack for one of these devices.
+> > >
+> > > How much further ahead would they have been by now if they had a
+> > > vendor supported, fully featured, open kernel driver to build the
+> > > userspace upon?
 > >
-> > On Tue, Jul 06, 2021 at 12:36:51PM +0200, Daniel Vetter wrote:
-> >
-> > > If that means AI companies don't want to open our their hw specs
-> > > enough to allow that, so be it - all you get in that case is
-> > > offloading the kernel side  of the stack for convenience, with zero
-> > > long term prospects to ever make this into a cross vendor subsystem
-> > > stack that does something useful.
-> >
-> > I don't think this is true at all - nouveau is probably the best
-> > example.
-> >
-> > nouveau reverse engineered a userspace stack for one of these devices.
-> >
-> > How much further ahead would they have been by now if they had a
-> > vendor supported, fully featured, open kernel driver to build the
-> > userspace upon?
-> 
-> There is actually tons of example here, most of the arm socs have
-> fully open kernel drivers, supported by the vendor (out of tree).
+> > There is actually tons of example here, most of the arm socs have
+> > fully open kernel drivers, supported by the vendor (out of tree).
+>
+> I choose nouveau because of this:
+>
+> $ git ls-files drivers/gpu/drm/arm/ | xargs wc -l
+>  15039 total
+> $ git ls-files drivers/gpu/drm/nouveau/ | xargs wc -l
+>  204198 total
 
-I choose nouveau because of this:
+drm/arm is the arm display driver, which isn't actually shipping
+anywhere afaik. Also it's not including the hdmi/dp output drivers,
+those are generally external on socs, but integrated in discrete gpu.
 
-$ git ls-files drivers/gpu/drm/arm/ | xargs wc -l
- 15039 total
-$ git ls-files drivers/gpu/drm/nouveau/ | xargs wc -l
- 204198 total
+The other thing to keep in mind is that one of these drivers supports
+25 years of product generations, and the other one doesn't. So I think
+adding it all up it's not that much different. Last time I looked if
+you look at just command submission and rendering/compute, and not
+include display, which heavily skews the stats, it's about 10% kernel,
+90% userspace driver parts. Not including anything that's shared,
+which is most of it (compiler frontend, intermediate optimizer, entire
+runtime/state tracker and all the integration and glue pieces
+largely).
 
-At 13x the size of mali this is not just some easy to wire up memory
-manager and command submission. And after all that typing it still
-isn't very good. The fully supported AMD vendor driver is over 3
-million lines, so nouveau probably needs to grow several times.
+> At 13x the size of mali this is not just some easy to wire up memory
+> manager and command submission. And after all that typing it still
+> isn't very good. The fully supported AMD vendor driver is over 3
+> million lines, so nouveau probably needs to grow several times.
 
-My argument is that an in-tree open kernel driver is a big help to
-reverse engineering an open userspace. Having the vendors
-collaboration to build that monstrous thing can only help the end goal
-of an end to end open stack.
+AMD is 3 million lines the size because it includes per-generation
+generated header files.
 
-For instance a vendor with an in-tree driver has a strong incentive to
-sort out their FW licensing issues so it can be redistributed.
+And of course once you throw an entire vendor team at a driver all
+those engineers will produce something, and there's the usual that the
+last 10% of features produce about 90% of the complexity and code
+problem. E.g. the kbase driver for arm mali gpu is 20x the size of the
+in-tree panfrost driver - they need to keep typing to justify their
+continued employement, or something like that. Usually it's because
+they reinvent the world.
 
-I'm not sure about this all or nothing approach. AFAIK DRM has the
-worst problems with out of tree drivers right now.
+> My argument is that an in-tree open kernel driver is a big help to
+> reverse engineering an open userspace. Having the vendors
+> collaboration to build that monstrous thing can only help the end goal
+> of an end to end open stack.
 
-> Where it would have helped is if this open driver would come with
-> redistributable firmware, because that is right now the thing making
-> nouveau reverse-engineering painful enough to be non-feasible. Well
-> not the reverse-engineering, but the "shipping the result as a working
-> driver stack".
+Not sure where this got lost, but we're totally fine with vendors
+using the upstream driver together with their closed stack. And most
+of the drivers we do have in upstream are actually, at least in parts,
+supported by the vendor. E.g. if you'd have looked the drm/arm driver
+you picked is actually 100% written by ARM engineers. So kinda
+unfitting example.
 
-I don't think much of the out of tree but open drivers. The goal must
-be to get vendors in tree.
+> For instance a vendor with an in-tree driver has a strong incentive to
+> sort out their FW licensing issues so it can be redistributed.
 
-I would applaud Habana for getting an intree driver at least, even if
-the userspace is not what we'd all want to see.
+Nvidia has been claiming to try and sort out the FW problem for years.
+They even managed to release a few things, but I think the last one is
+2-3 years late now. Partially the reason is that there don't have a
+stable api between the firmware and driver, it's all internal from the
+same source tree, and they don't really want to change that.
 
-> I don't think the facts on the ground support your claim here, aside
-> from the practical problem that nvidia is unwilling to even create an
-> open driver to begin with. So there isn't anything to merge.
+> I'm not sure about this all or nothing approach. AFAIK DRM has the
+> worst problems with out of tree drivers right now.
 
-The internet tells me there is nvgpu, it doesn't seem to have helped.
+Well I guess someone could stand up a drivers/totally-not-gpu and just
+let the flood in. Even duplicated drivers and everything included,
+because the vendor drivers are better. Worth a shot, we've practically
+started this already, I'm just not going to help with the cleanup.
 
-Jason
+> > Where it would have helped is if this open driver would come with
+> > redistributable firmware, because that is right now the thing making
+> > nouveau reverse-engineering painful enough to be non-feasible. Well
+> > not the reverse-engineering, but the "shipping the result as a working
+> > driver stack".
+>
+> I don't think much of the out of tree but open drivers. The goal must
+> be to get vendors in tree.
+
+Agreed. We actually got them in-tree largely. Nvidia even contributes
+the oddball thing, and I think the tegra line is still fully supported
+in upstream with the upstream driver.
+
+I'm not sure the bleak picture you're drawing is reality, aside from
+the fact that Nvidia discrete gpu drivers being a disaster with no
+redistributable firmware, no open kernel driver that works, and
+nothing else really either.
+
+> I would applaud Habana for getting an intree driver at least, even if
+> the userspace is not what we'd all want to see.
+>
+> > I don't think the facts on the ground support your claim here, aside
+> > from the practical problem that nvidia is unwilling to even create an
+> > open driver to begin with. So there isn't anything to merge.
+>
+> The internet tells me there is nvgpu, it doesn't seem to have helped.
+
+Not sure which one you mean, but every once in a while they open up a
+few headers, or a few programming specs, or a small driver somewhere
+for a very specific thing, and then it dies again or gets obfuscated
+for the next platform, or just never updated. I've never seen anything
+that comes remotely to something complete, aside from tegra socs,
+which are fully supported in upstream afaik.
+-Daniel
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
