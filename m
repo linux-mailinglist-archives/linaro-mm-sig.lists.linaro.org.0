@@ -2,44 +2,39 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id A990F3BD5A4
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 14:21:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ADB503BD5A6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 14:23:14 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 983FD6693A
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 12:21:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 49B2261236
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 12:23:13 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 5889266946; Tue,  6 Jul 2021 12:21:27 +0000 (UTC)
+	id 2B1046693F; Tue,  6 Jul 2021 12:23:12 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1F20760B27;
-	Tue,  6 Jul 2021 12:21:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AF32B60B27;
+	Tue,  6 Jul 2021 12:23:09 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 1543D604F9
- for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 12:21:22 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 6F7A9604F9
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 12:23:08 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 112CC60B27; Tue,  6 Jul 2021 12:21:22 +0000 (UTC)
+ id 6B18A60B27; Tue,  6 Jul 2021 12:23:08 +0000 (UTC)
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by lists.linaro.org (Postfix) with ESMTPS id DDE75604F9
- for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 12:21:19 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTPS id 4E0D8604F9
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 12:23:06 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 9F9BF68C7B; Tue,  6 Jul 2021 14:21:11 +0200 (CEST)
-Date: Tue, 6 Jul 2021 14:21:10 +0200
+ id E648F68BEB; Tue,  6 Jul 2021 14:23:03 +0200 (CEST)
+Date: Tue, 6 Jul 2021 14:23:03 +0200
 From: Christoph Hellwig <hch@lst.de>
-To: Oded Gabbay <ogabbay@kernel.org>, linux-kernel@vger.kernel.org,
- gregkh@linuxfoundation.org, sumit.semwal@linaro.org,
- christian.koenig@amd.com, galpress@amazon.com, sleybo@amazon.com,
- dri-devel@lists.freedesktop.org, jgg@ziepe.ca,
- linux-rdma@vger.kernel.org, linux-media@vger.kernel.org,
- dledford@redhat.com, airlied@gmail.com, alexander.deucher@amd.com,
- leonro@nvidia.com, hch@lst.de, amd-gfx@lists.freedesktop.org,
- linaro-mm-sig@lists.linaro.org
-Message-ID: <20210706122110.GA18273@lst.de>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+Message-ID: <20210706122303.GB18273@lst.de>
 References: <20210705130314.11519-1-ogabbay@kernel.org>
  <YOQXBWpo3whVjOyh@phenom.ffwll.local>
+ <CAFCwf10_rTYL2Fy6tCRVAUCf4-6_TtcWCv5gEEkGnQ0KxqMUBg@mail.gmail.com>
+ <CAKMK7uEAJZUHNLreBB839BZOfnTGNU4rCx-0k55+67Nbxtdx3A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <YOQXBWpo3whVjOyh@phenom.ffwll.local>
+In-Reply-To: <CAKMK7uEAJZUHNLreBB839BZOfnTGNU4rCx-0k55+67Nbxtdx3A@mail.gmail.com>
 User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [PATCH v4 0/2] Add p2p via dmabuf to habanalabs
@@ -55,36 +50,33 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
+Cc: Gal Pressman <galpress@amazon.com>, sleybo@amazon.com,
+ linux-rdma <linux-rdma@vger.kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Oded Gabbay <ogabbay@kernel.org>,
+ "Linux-Kernel@Vger. Kernel. Org" <linux-kernel@vger.kernel.org>,
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Doug Ledford <dledford@redhat.com>,
+ Christoph Hellwig <hch@lst.de>, amd-gfx list <amd-gfx@lists.freedesktop.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Leon Romanovsky <leonro@nvidia.com>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Tue, Jul 06, 2021 at 10:40:37AM +0200, Daniel Vetter wrote:
-> > Greg, I hope this will be good enough for you to merge this code.
-> 
-> So we're officially going to use dri-devel for technical details review
-> and then Greg for merging so we don't have to deal with other merge
-> criteria dri-devel folks have?
-> 
-> I don't expect anything less by now, but it does make the original claim
-> that drivers/misc will not step all over accelerators folks a complete
-> farce under the totally-not-a-gpu banner.
-> 
-> This essentially means that for any other accelerator stack that doesn't
-> fit the dri-devel merge criteria, even if it's acting like a gpu and uses
-> other gpu driver stuff, you can just send it to Greg and it's good to go.
-> 
-> There's quite a lot of these floating around actually (and many do have
-> semi-open runtimes, like habanalabs have now too, just not open enough to
-> be actually useful). It's going to be absolutely lovely having to explain
-> to these companies in background chats why habanalabs gets away with their
-> stack and they don't.
+On Tue, Jul 06, 2021 at 12:36:51PM +0200, Daniel Vetter wrote:
+> Afaik linux cpu arch ports are also not accepted if there's no open
+> gcc or llvm port around, because without that the overall stack just
+> becomes useless.
 
-FYI, I fully agree with Daniel here.  Habanlabs needs to open up their
-runtime if they want to push any additional feature in the kernel.
-The current situation is not sustainable.
+Yes.  And the one architecture that has an open but not upstream
+compiler already is more than enough of a pain to not repeat that
+mistake ever again.
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
