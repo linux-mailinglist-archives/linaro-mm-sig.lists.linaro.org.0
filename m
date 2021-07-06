@@ -2,51 +2,51 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id D5DEB3BCCD7
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 13:19:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 005243BCE0A
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 13:22:49 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 946B26694B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 11:19:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9289F607C7
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 11:22:48 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 89A9566941; Tue,  6 Jul 2021 11:19:18 +0000 (UTC)
+	id 6C47966946; Tue,  6 Jul 2021 11:22:48 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3ABA760BC6;
-	Tue,  6 Jul 2021 11:19:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 117A6607F1;
+	Tue,  6 Jul 2021 11:22:45 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 76FE8607C7
- for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 11:19:12 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id E90FF604FE
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 11:22:43 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 6BE3A60BC6; Tue,  6 Jul 2021 11:19:12 +0000 (UTC)
+ id E6CED607F1; Tue,  6 Jul 2021 11:22:43 +0000 (UTC)
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by lists.linaro.org (Postfix) with ESMTPS id 4F349607C7
- for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 11:19:10 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 98F2261C79;
- Tue,  6 Jul 2021 11:19:08 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTPS id CE474604FE
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 11:22:41 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 3E19961D09;
+ Tue,  6 Jul 2021 11:22:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1625570349;
- bh=ntt+QbwwZjDylx63TgbvU9XSa74tzKkwq5pUAK4TrhE=;
+ s=k20201202; t=1625570561;
+ bh=tDh2Cp3vkwg7dQBXk2Kji+t3Rds+JbYMkspX8Brzr7g=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gLGIviZT+mFxvSFun0mmPy4mZeZu8hmUxqkyE9qCDNJyuA8Ho+sph70bEdU8TqnFR
- iXwScehYLGdgx+D+YQG+fhLewjqP2HIF9PiAB5GzpQdFhiXYJil+7l/Tb9P5WVOBv9
- 6IOAbTSGOJMmW7L/s8pzaveGgTiLT7uB8QFwLUaQgAMFh25FEUNroDnw9422rPnxiK
- 1+1eEbQ+WtBjGtP/Ic89asCe/qpUT/wd9EbDCm/3a5G5oTiLxOK0eO2dX1vQ2iQaxE
- Zk52omqnz6D7POmAm579N30J/n0k57CtgrBRu0T0VWMITaHH0LqSRenGigMot8a/je
- tOHg8kPjL4Hxg==
+ b=HynczCAMlh1fAuXjmEE9EUVZU0KcCIw0LNq7ovRZn2VGyWIVWGnaCroE5nKWgTPcc
+ PkboI15L0jFuGBYugRGrrhQYdTvZQTbFL9hjm7TpWjXvVLDbXRFd78VBkX1/izE8vZ
+ kNQQw2Azimwu6jZyHkfiyJPOuQM+BedywGFkqVILYkRR8cpEtRGksYRS7rCdrpiuao
+ QPKN6vH/MG3uKCcB+4ng5IL0VXvgHyMoXt2Zyzczw4fi9woWMU+9edhc9VzPtJcdCh
+ mRgMrdE38KXoj8xXnnXFS2+8t9TXZ2AIfgtMPmRSHoUm5/1KoAdgqeoedWw2mqggZD
+ RM/mfR8UXb+dw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Tue,  6 Jul 2021 07:16:17 -0400
-Message-Id: <20210706111827.2060499-31-sashal@kernel.org>
+Date: Tue,  6 Jul 2021 07:20:14 -0400
+Message-Id: <20210706112203.2062605-28-sashal@kernel.org>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210706111827.2060499-1-sashal@kernel.org>
-References: <20210706111827.2060499-1-sashal@kernel.org>
+In-Reply-To: <20210706112203.2062605-1-sashal@kernel.org>
+References: <20210706112203.2062605-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.12 031/160] drm/sched: Avoid data
+Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.10 028/137] drm/sched: Avoid data
  corruptions
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
@@ -82,10 +82,10 @@ LTEtYW5kcmV5Lmdyb2R6b3Zza3lAYW1kLmNvbQpTaWduZWQtb2ZmLWJ5OiBTYXNoYSBMZXZpbiA8
 c2FzaGFsQGtlcm5lbC5vcmc+Ci0tLQogZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxlci9zY2hlZF9l
 bnRpdHkuYyB8IDUgKysrKysKIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKykKCmRpZmYg
 LS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vc2NoZWR1bGVyL3NjaGVkX2VudGl0eS5jIGIvZHJpdmVy
-cy9ncHUvZHJtL3NjaGVkdWxlci9zY2hlZF9lbnRpdHkuYwppbmRleCA3MmMzOTYwODIzNmIuLjFi
-MmZkZjdmM2NjZCAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxlci9zY2hlZF9l
+cy9ncHUvZHJtL3NjaGVkdWxlci9zY2hlZF9lbnRpdHkuYwppbmRleCAyMDA2Y2MwNTdmOTkuLjNm
+N2Y3NjFkZjRjZCAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxlci9zY2hlZF9l
 bnRpdHkuYworKysgYi9kcml2ZXJzL2dwdS9kcm0vc2NoZWR1bGVyL3NjaGVkX2VudGl0eS5jCkBA
-IC0yMjIsMTEgKzIyMiwxNiBAQCBzdGF0aWMgdm9pZCBkcm1fc2NoZWRfZW50aXR5X2tpbGxfam9i
+IC0yMTksMTEgKzIxOSwxNiBAQCBzdGF0aWMgdm9pZCBkcm1fc2NoZWRfZW50aXR5X2tpbGxfam9i
 c19jYihzdHJ1Y3QgZG1hX2ZlbmNlICpmLAogc3RhdGljIHZvaWQgZHJtX3NjaGVkX2VudGl0eV9r
 aWxsX2pvYnMoc3RydWN0IGRybV9zY2hlZF9lbnRpdHkgKmVudGl0eSkKIHsKIAlzdHJ1Y3QgZHJt
 X3NjaGVkX2pvYiAqam9iOworCXN0cnVjdCBkbWFfZmVuY2UgKmY7CiAJaW50IHI7CiAKIAl3aGls
