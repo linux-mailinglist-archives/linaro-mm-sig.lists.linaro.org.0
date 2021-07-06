@@ -2,63 +2,76 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 82A8D3BD87E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 16:39:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33D6E3BD928
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 16:56:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 76E056694C
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 14:39:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6EEB666950
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 14:56:28 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 36C5266945; Tue,  6 Jul 2021 14:39:38 +0000 (UTC)
+	id B40626693C; Tue,  6 Jul 2021 14:56:26 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1AFF461459;
-	Tue,  6 Jul 2021 14:39:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D11CA60C0C;
+	Tue,  6 Jul 2021 14:56:23 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 619A860B82
- for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 14:39:33 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 0CEFD607FB
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 14:56:22 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 56D0561459; Tue,  6 Jul 2021 14:39:33 +0000 (UTC)
-Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com
- [209.85.210.51])
- by lists.linaro.org (Postfix) with ESMTPS id 4DD6160B82
- for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 14:39:31 +0000 (UTC)
-Received: by mail-ot1-f51.google.com with SMTP id
- x22-20020a9d6d960000b0290474a76f8bd4so20151901otp.5
- for <linaro-mm-sig@lists.linaro.org>; Tue, 06 Jul 2021 07:39:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=zm0DaryDqZq3vejGZ3jPeBiO1tR+wTWZk5xnShXCnO4=;
- b=G30UzRcjxEx6Xt1b6aM3vMaunEynpsORVhKQH6x0woz09DwXifJzfkCwSyC/RCtJF6
- 0dlH0FE/N9kBHKK6ACyKzCL9AAOx7O6sYOnj6Loko6p9DlXanIsMowNmzYBNl9TxrrVf
- GOw2Y2m6AMmOya+oUGFCdCcJKjukWk6zcmTM4=
+ id 0A95660C0C; Tue,  6 Jul 2021 14:56:22 +0000 (UTC)
+Received: from mail-il1-f172.google.com (mail-il1-f172.google.com
+ [209.85.166.172])
+ by lists.linaro.org (Postfix) with ESMTPS id 0246D607FB
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 14:56:20 +0000 (UTC)
+Received: by mail-il1-f172.google.com with SMTP id i13so21017507ilu.4
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 06 Jul 2021 07:56:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to;
+ bh=a8/qLLqO6eL91stH3wL0KRpl9T08Ic+NpnQGQ6x06VA=;
+ b=j2sPe5/YeFhkbk8Ao1wBoSJI3mHjTKeYtGS/ylikxffAh4pjlXAic9iDxRv5Mv0c88
+ o5b7lMNG7FTsdoBh7D7HFqLBpXx4OWDvWQolA2AYbIKyYGFb/BJCIZ86BrUQNsb/C3Zk
+ XsAk6eIa1iX7IreWpvN3CU6N8yZIaUepsXSqCVxrBMKOSQwVo+4QlVdlIX3ICQnCZ+RN
+ LgJrLxii8/f54h0waeGuOrMJGYXgQlD5kGp/v5vw+plNVj3amj0GPy79B+VVJnzMwf0X
+ slP6aAspIJPeReLpfjtTCTHLR7t2wU8m1oRA1naFZ3fVxAxznodtagNFx7SXVX3ixwEZ
+ eBuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=zm0DaryDqZq3vejGZ3jPeBiO1tR+wTWZk5xnShXCnO4=;
- b=IgAnqFTwPs5fQmdmdchMPmbNV99D5IJdivIAYp/2YwZuQ/Yl9QK3SxfuVI+hqkbVrn
- CcRYDYcpsZcahVtFxoDNgp7D1RBhZ7U0qcI5Tu9NCUrVXFjEuPYIHMzabNFPDo57j8NZ
- Sthlm8FPKakdcAaCG3QTlBBba19mYe0Nu0Y6BnsT5YnzMmCxV1IOxzPJIQhZ+xbfQI1A
- hvDT9NBbxjET1+cQJifPbDGb9l2tlOVHfCUB4tfxxnouu36wGg+p48fAAwR+KHQ6XSkb
- cHXUXCw+R/43RAjPf3mYOgxKUGxOMhui2jxsAjf5irfyQ2neRzxgLOKpoyy3AcEMch3J
- s81A==
-X-Gm-Message-State: AOAM530q/dhwb6aBD9grLC+iiCmif7CevaRpE1m1Ezn5kFr4bxRvZ2Al
- 2fwV8w1vGcnb5fAMiHRC8eGIFcLitNAYBHoPDPr/pg==
-X-Google-Smtp-Source: ABdhPJzgkWaB0S4HP/SYLFWoigqz0+uVa0qbfzt618JpPtslruMLA86ntCgmp9G7+R8uc+hgYBv5HiSGfZAE493M7OE=
-X-Received: by 2002:a9d:27a4:: with SMTP id c33mr15519363otb.281.1625582370636; 
- Tue, 06 Jul 2021 07:39:30 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=a8/qLLqO6eL91stH3wL0KRpl9T08Ic+NpnQGQ6x06VA=;
+ b=TVQXGfmmvbpDkbPvCGqCEBb/MX+qOaxuy0TcYIZFo4rkci8WJzCBDW1c9spx0iuFqx
+ nA7y1b5dyWuh8jdk7Qtr9pcI4/31Y9/coDCPDDIlc8n8YPWRC9VoUxMsba/vf0tDIzzx
+ lklJ/cxWOHzBe68X64VuJZlkG2W5/O94mBMdmbT56ic82CXDxo44dJvG/Ok0S6l0aUf1
+ n1JutSQFFpBq/uUtGR7Fj40rQMWdcDULKJGWmqYIQPhkZOC416vy4NMYllmpObbdXwjz
+ KPeH1ghyi0M/272rMBrCDvOulUhSrXXkpQ+JEe8EbCAIwwtJwopnKN/eXbD2QsEYJ5Mk
+ Rybg==
+X-Gm-Message-State: AOAM530eptdI/s5GJvjDN1o9a0j+NakMZHSrQcHdgcYYVzDl4CZEva66
+ k0wwXJXa1uPpMJlZcN/gjRzxfg==
+X-Google-Smtp-Source: ABdhPJwog3epP3zDyPdL9Dn1Mv3QQbO1xKAP/j5dh3/z+a/bJ15P6+dhr9KB3Du7HHV3+Ab4fMGLOg==
+X-Received: by 2002:a92:dd05:: with SMTP id n5mr14308230ilm.72.1625583379441; 
+ Tue, 06 Jul 2021 07:56:19 -0700 (PDT)
+Received: from ziepe.ca ([206.223.160.26])
+ by smtp.gmail.com with ESMTPSA id l18sm8626632ilo.64.2021.07.06.07.56.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Jul 2021 07:56:19 -0700 (PDT)
+Received: from jgg by mlx with local (Exim 4.94) (envelope-from <jgg@ziepe.ca>)
+ id 1m0mUj-004Rth-V9; Tue, 06 Jul 2021 11:56:17 -0300
+Date: Tue, 6 Jul 2021 11:56:17 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+Message-ID: <20210706145617.GO4604@ziepe.ca>
 References: <20210705130314.11519-1-ogabbay@kernel.org>
  <YOQXBWpo3whVjOyh@phenom.ffwll.local>
  <CAFCwf10_rTYL2Fy6tCRVAUCf4-6_TtcWCv5gEEkGnQ0KxqMUBg@mail.gmail.com>
  <CAKMK7uEAJZUHNLreBB839BZOfnTGNU4rCx-0k55+67Nbxtdx3A@mail.gmail.com>
- <20210706142357.GN4604@ziepe.ca>
-In-Reply-To: <20210706142357.GN4604@ziepe.ca>
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-Date: Tue, 6 Jul 2021 16:39:19 +0200
-Message-ID: <CAKMK7uELNzwUe+hhVWRg=Pk5Wt_vOOX922H48Kd6dTyO2PeBbg@mail.gmail.com>
-To: Jason Gunthorpe <jgg@ziepe.ca>
+ <CAKMK7uHpKFVm55O_NB=WYCsv0iUt92ZUn6eCzifH=unbhe3J8g@mail.gmail.com>
+ <CAKMK7uFGr=ugyKj0H3ctbh28Jnr25vAgXPBaDBMmfErCxYVo3w@mail.gmail.com>
+ <20210706134430.GL4604@ziepe.ca>
+ <CAKMK7uFEZjp2_WBhtkVxSNQ-1WcBSr3NDotY0fjz0iLRw8Barw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAKMK7uFEZjp2_WBhtkVxSNQ-1WcBSr3NDotY0fjz0iLRw8Barw@mail.gmail.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [PATCH v4 0/2] Add p2p via dmabuf to habanalabs
 X-BeenThere: linaro-mm-sig@lists.linaro.org
@@ -83,7 +96,7 @@ Cc: Gal Pressman <galpress@amazon.com>, sleybo@amazon.com,
  Doug Ledford <dledford@redhat.com>, Christoph Hellwig <hch@lst.de>,
  amd-gfx list <amd-gfx@lists.freedesktop.org>,
  Alex Deucher <alexander.deucher@amd.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
  Leon Romanovsky <leonro@nvidia.com>,
  Linux Media Mailing List <linux-media@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
@@ -92,82 +105,52 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Tue, Jul 6, 2021 at 4:23 PM Jason Gunthorpe <jgg@ziepe.ca> wrote:
->
-> On Tue, Jul 06, 2021 at 12:36:51PM +0200, Daniel Vetter wrote:
->
-> > If that means AI companies don't want to open our their hw specs
-> > enough to allow that, so be it - all you get in that case is
-> > offloading the kernel side  of the stack for convenience, with zero
-> > long term prospects to ever make this into a cross vendor subsystem
-> > stack that does something useful.
->
-> I don't think this is true at all - nouveau is probably the best
-> example.
->
-> nouveau reverse engineered a userspace stack for one of these devices.
->
-> How much further ahead would they have been by now if they had a
-> vendor supported, fully featured, open kernel driver to build the
-> userspace upon?
+On Tue, Jul 06, 2021 at 04:09:25PM +0200, Daniel Vetter wrote:
+> Anyway, for anything that works like a gpu accelerator, like 3d accel,
+> or parallel compute accel (aka gpgpu) or spatial compute accel (aka
+> NN/AI) or maybe even fpga accel most of the magic to use the hardware
+> is in this backend compiler, which translates from an IR into whatever
+> your accelerator consumes. That's the part we really care about for
+> modern accelerators because without that defacto the hardware is
+> useless. Generally these chips have full-blown, if special purpose
+> ISA, with register files, spilling, branches, loops and other control
+> flow (sometimes only execution masks on simpler hw).
 
-There is actually tons of example here, most of the arm socs have
-fully open kernel drivers, supported by the vendor (out of tree).
+I don't know if I see it so clearly as you do - at the end of the day
+the user keys in the program in some proprietary (or open!) language
+and and wack of propritary magic transforms it to "make it work".
 
-The hard part is the userspace driver and all the things you're
-submitting to it. We've had open kernel drivers for mail/qualcomm/...
-years before any believable open implementation started existing.
-Typing up the memory manager and hw submission queue handling is
-comparitively trivial. Generally the kernel driver is also done last,
-you bring up the userspace first, often by just directly programming
-the hw from userspace. Kernel driver only gets in the way with this
-stuff (nouveau is entirely developed as a userspace driver, as the
-most extreme example).
+There are many barriers that prevent someone without the secret
+knowledge from duplicating the end result of a working program. An
+accelerator ISA is certainly one example, but I wouldn't overly focus
+on it as the only blocker.
 
-This is a bit different for the display side, but nowadays those
-drivers are fully in-kernel so they're all open. Well except the
-nvidia one, and I've not heard of nvidia working on even an
-out-of-tree open display driver, so that won't help the in-tree effort
-at all.
+Like you said below the NVIDIA GPU ISA seems known but the HW is still
+not really useful for other reasons.
 
-Where it would have helped is if this open driver would come with
-redistributable firmware, because that is right now the thing making
-nouveau reverse-engineering painful enough to be non-feasible. Well
-not the reverse-engineering, but the "shipping the result as a working
-driver stack".
+Habana seems to have gone the other way, the HW is fully useful but we
+don't have the ISA transformation and other details.
 
-I don't think the facts on the ground support your claim here, aside
-from the practical problem that nvidia is unwilling to even create an
-open driver to begin with. So there isn't anything to merge.
+Both cases seem to have ended up with something useless, and I have a
+hard time saying nouveau has more right to be in the kernel tree than
+Habana does.
 
-> > open up your hw enough for that, I really don't see the point in
-> > merging such a driver, it'll be an unmaintainable stack by anyone else
-> > who's not having access to those NDA covered specs and patents and
-> > everything.
->
-> My perspective from RDMA is that the drivers are black boxes. I can
-> hack around the interface layers but there is a lot of wild stuff in
-> there that can't be understood without access to the HW documentation.
+> > Honestly, I think GPU is approaching this backwards. Wayland should
+> > have been designed to prevent proprietary userspace stacks.
+> 
+> That's not possible without some serious cans of worms though. Wayland
+> is a protocol, and you can't forbid people from implementing it.
+> Otherwise all the compatible open implementations of closed protocols
+> wouldn't be possible either.
 
-There's shipping gpu drivers with entirely reverse-engineered stacks.
-And I don't mean "shipping in fedora" but "shipping in Chrome tablets
-sold by OEM partners of Google". So it's very much possible, even if
-the vendor is maximally stubborn about things.
+Well, in many ways so is Linux, but nobody would seriously
+re-implement Linux just to produce a driver.
 
-> I think only HW that has open specs, like say NVMe, can really be
-> properly community oriented. Otherwise we have to work in a community
-> partnership with the vendor.
+> So I'm not clear what you're suggesting here we should do different.
 
-Well sure that's the ideal case, but most vendors in the accel space
-arent interested actual partnership with the wider community. It's
-"merge this kernel driver and have no further demands about anything
-else". Well there are some who are on board, but it does take pretty
-enormous amounts of coercion.
--Daniel
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Not enabling proprietary stacks as above would be a good start.
+
+Jason
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
