@@ -2,75 +2,78 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 913D73BC1D1
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  5 Jul 2021 18:52:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3848C3BC807
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 10:40:50 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AF99866936
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  5 Jul 2021 16:52:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D115B66940
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 08:40:48 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 552FA6693C; Mon,  5 Jul 2021 16:52:35 +0000 (UTC)
+	id A5A9466789; Tue,  6 Jul 2021 08:40:47 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 144B063576;
-	Mon,  5 Jul 2021 16:52:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E095C61298;
+	Tue,  6 Jul 2021 08:40:44 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 1D4B861022
- for <linaro-mm-sig@lists.linaro.org>; Mon,  5 Jul 2021 16:52:30 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 5C7656118B
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 08:40:43 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 1AECD63576; Mon,  5 Jul 2021 16:52:30 +0000 (UTC)
-Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com
- [209.85.219.45])
- by lists.linaro.org (Postfix) with ESMTPS id 13B8A61022
- for <linaro-mm-sig@lists.linaro.org>; Mon,  5 Jul 2021 16:52:28 +0000 (UTC)
-Received: by mail-qv1-f45.google.com with SMTP id h18so8526797qve.1
- for <linaro-mm-sig@lists.linaro.org>; Mon, 05 Jul 2021 09:52:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=TRW2liv0KvxRpEn1sZgxByQ6WPmBTh1GhCnSHVjnwbg=;
- b=jBFIqWpkHJUwhFRIEXpavqYg2lOBnFUgtfMCAa51Keo5p1e7uaLLRwx5ShUDeIlhdM
- 2If2zjmjcfC5T6RoGkkweicUk3Qsx+2vRdseYI/0mJ+ciw96iBmUkpkVkiJE+86t8cyr
- 2oJc7CwvfA5oUIWZzMzGPAFug62Z67fj3p3Z3WgSBFHsqz4/BWGoOCucw+iLuagpvAH1
- PpbSwCitf8MOcMx6/0YLotNGXe8rFb+KOw2NMKF5n5y/HAuQN75chVqThR99yPOEQKYA
- xDWvGJSbbwBNR2Hg29azK+xEHKNYDfvZIIv02WRktmpruBPJPenBbq+963N6aPphnsv4
- Bn7A==
+ id 4F09661298; Tue,  6 Jul 2021 08:40:43 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+ [209.85.221.45])
+ by lists.linaro.org (Postfix) with ESMTPS id 46D636118B
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 08:40:41 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id f17so482157wrt.6
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 06 Jul 2021 01:40:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=JLlTuAeFJ55bKl70feqPAdDJNogiM+fpe/R9P7DcSms=;
+ b=LRnsqjRbV1SjBgROJlBIakdBOYICsTI8ulzfPsgIQuMlSJ8mh2dRGC7U1wsehHvWvI
+ IyKsCEPEE7aj2cDyk/ASRk28e+xTY39qV9bf/70BQD/NFfB3eA0zVAekYrESOuCPHLQL
+ fqnRDhDxHDjGgI1GsURpOfaynvOOqUO2t/nUg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=TRW2liv0KvxRpEn1sZgxByQ6WPmBTh1GhCnSHVjnwbg=;
- b=QyAli2Rykctb0Mk83wEM7ivHBCWRObp/GM4s4AXAgKjKD8K+d6MU3rw+KSwGo6uSMf
- 7Y3vF+mROq/jdDN/6rTL4/p6OLARUbdtWFR58vmU4x4OPgFsl2TB9XLE4zJovUsi0MY0
- eLX9A47vD+nH9AqN6aAiTxmQDZuZypc4WVhxcS6SPmu/UUpXwhmsoYFFAg72Qk6ZFC67
- yAMotBabqjXBax38n8yUcsWvZ/ZHTYg5D6pRvNaEmHYGCXvPXoFbuKJ+lTYK5yaiaOjm
- XEAlMQyz7JnEMxILqhbMjXbsfBl507BzHbIxGAydNUx+1UsJCwKDJGvmxdkyLahotsYC
- xI9A==
-X-Gm-Message-State: AOAM530McKX8GPerSAuf3p930f9YcPB07op/XCu0lR4F9O7QP3J9Wnws
- feivmbd9PQpzM1e6eC0+wQbcbg==
-X-Google-Smtp-Source: ABdhPJw/xzr3myWPCDkP4OYKH+JUqyzPcaaW7tJ0//CdDzso+M0bp2m0674/I/B/gC+TTQwFiqkSng==
-X-Received: by 2002:a0c:ef51:: with SMTP id t17mr13560008qvs.14.1625503947734; 
- Mon, 05 Jul 2021 09:52:27 -0700 (PDT)
-Received: from ziepe.ca
- (hlfxns017vw-47-55-113-94.dhcp-dynamic.fibreop.ns.bellaliant.net.
- [47.55.113.94])
- by smtp.gmail.com with ESMTPSA id 82sm5694070qke.63.2021.07.05.09.52.27
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=JLlTuAeFJ55bKl70feqPAdDJNogiM+fpe/R9P7DcSms=;
+ b=rnj5zlgDvP8u9gBAd1q+DHRXDdh6+mbomtKyCGeRbQ1Yck3PQovW6FCW6EJJQnjaNR
+ agIx5/5M0Qkw1KnLE/ZEv0DtJIM7LG76WqqaB8IlAfY8xaiHG9KORL38QDQ29eSJpk7+
+ EKq0MjDZsFw4fm3s0lA5wXZXP4/4uUVAWGSrKw7Gb3DOhKW3UIWkdWMUWC20I0eFJTAB
+ J/UvcSdkKCc7zU88MMV1zSvStNxIvIG5JAFkhoOdNTPaisvl4PSKxzPBc4sT09b0qJBo
+ erJ6bDnCXsMQmvYE9ThPjPJ525LQ7krY8hkiuy1Skub/DrvJDqoFzN4Q5IcE1pSgBOfw
+ 4K5A==
+X-Gm-Message-State: AOAM531oWcDodw1xU/aDXL/hFID4QzqLySl3wlLq9Fpi8u00jc0w/CF1
+ W2GQz4OQYFTLcJXfwYismJ4f2Q==
+X-Google-Smtp-Source: ABdhPJw0uQEuhFtLZ/yp2rlntAi8MREzCiqyFoKyRYiByd6f3gcRZqvzyCKHQD5Nm2De5YPjEiQssQ==
+X-Received: by 2002:a05:6000:18c8:: with SMTP id
+ w8mr12110209wrq.90.1625560840330; 
+ Tue, 06 Jul 2021 01:40:40 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id b8sm2176254wmb.20.2021.07.06.01.40.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 05 Jul 2021 09:52:27 -0700 (PDT)
-Received: from jgg by mlx with local (Exim 4.94) (envelope-from <jgg@ziepe.ca>)
- id 1m0Rpa-003sCS-IC; Mon, 05 Jul 2021 13:52:26 -0300
-Date: Mon, 5 Jul 2021 13:52:26 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
+ Tue, 06 Jul 2021 01:40:39 -0700 (PDT)
+Date: Tue, 6 Jul 2021 10:40:37 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
 To: Oded Gabbay <ogabbay@kernel.org>
-Message-ID: <20210705165226.GJ4604@ziepe.ca>
+Message-ID: <YOQXBWpo3whVjOyh@phenom.ffwll.local>
+Mail-Followup-To: Oded Gabbay <ogabbay@kernel.org>,
+ linux-kernel@vger.kernel.org, gregkh@linuxfoundation.org,
+ sumit.semwal@linaro.org, christian.koenig@amd.com,
+ galpress@amazon.com, sleybo@amazon.com,
+ dri-devel@lists.freedesktop.org, jgg@ziepe.ca,
+ linux-rdma@vger.kernel.org, linux-media@vger.kernel.org,
+ dledford@redhat.com, airlied@gmail.com, alexander.deucher@amd.com,
+ leonro@nvidia.com, hch@lst.de, amd-gfx@lists.freedesktop.org,
+ linaro-mm-sig@lists.linaro.org
 References: <20210705130314.11519-1-ogabbay@kernel.org>
- <20210705130314.11519-3-ogabbay@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210705130314.11519-3-ogabbay@kernel.org>
+In-Reply-To: <20210705130314.11519-1-ogabbay@kernel.org>
+X-Operating-System: Linux phenom 5.10.0-7-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v4 2/2] habanalabs: add support for
- dma-buf exporter
+Subject: Re: [Linaro-mm-sig] [PATCH v4 0/2] Add p2p via dmabuf to habanalabs
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,59 +88,89 @@ List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: linux-rdma@vger.kernel.org, sleybo@amazon.com, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, galpress@amazon.com,
- linaro-mm-sig@lists.linaro.org, dledford@redhat.com, hch@lst.de,
+ linaro-mm-sig@lists.linaro.org, jgg@ziepe.ca, dledford@redhat.com, hch@lst.de,
  amd-gfx@lists.freedesktop.org, gregkh@linuxfoundation.org,
- alexander.deucher@amd.com, Tomer Tayar <ttayar@habana.ai>,
- christian.koenig@amd.com, leonro@nvidia.com, linux-media@vger.kernel.org
+ alexander.deucher@amd.com, christian.koenig@amd.com, leonro@nvidia.com,
+ linux-media@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Mon, Jul 05, 2021 at 04:03:14PM +0300, Oded Gabbay wrote:
+On Mon, Jul 05, 2021 at 04:03:12PM +0300, Oded Gabbay wrote:
+> Hi,
+> I'm sending v4 of this patch-set following the long email thread.
+> I want to thank Jason for reviewing v3 and pointing out the errors, saving
+> us time later to debug it :)
+> 
+> I consulted with Christian on how to fix patch 2 (the implementation) and
+> at the end of the day I shamelessly copied the relevant content from
+> amdgpu_vram_mgr_alloc_sgt() and amdgpu_dma_buf_attach(), regarding the
+> usage of dma_map_resource() and pci_p2pdma_distance_many(), respectively.
+> 
+> I also made a few improvements after looking at the relevant code in amdgpu.
+> The details are in the changelog of patch 2.
+> 
+> I took the time to write an import code into the driver, allowing me to
+> check real P2P with two Gaudi devices, one as exporter and the other as
+> importer. I'm not going to include the import code in the product, it was
+> just for testing purposes (although I can share it if anyone wants).
+> 
+> I run it on a bare-metal environment with IOMMU enabled, on a sky-lake CPU
+> with a white-listed PCIe bridge (to make the pci_p2pdma_distance_many happy).
+> 
+> Greg, I hope this will be good enough for you to merge this code.
 
-> +	rc = sg_alloc_table(*sgt, nents, GFP_KERNEL | __GFP_ZERO);
-> +	if (rc)
-> +		goto error_free;
+So we're officially going to use dri-devel for technical details review
+and then Greg for merging so we don't have to deal with other merge
+criteria dri-devel folks have?
 
-If you are not going to include a CPU list then I suggest setting
-sg_table->orig_nents == 0
+I don't expect anything less by now, but it does make the original claim
+that drivers/misc will not step all over accelerators folks a complete
+farce under the totally-not-a-gpu banner.
 
-And using only the nents which is the length of the DMA list.
+This essentially means that for any other accelerator stack that doesn't
+fit the dri-devel merge criteria, even if it's acting like a gpu and uses
+other gpu driver stuff, you can just send it to Greg and it's good to go.
 
-At least it gives some hope that other parts of the system could
-detect this.
+There's quite a lot of these floating around actually (and many do have
+semi-open runtimes, like habanalabs have now too, just not open enough to
+be actually useful). It's going to be absolutely lovely having to explain
+to these companies in background chats why habanalabs gets away with their
+stack and they don't.
 
-> +
-> +	/* Merge pages and put them into the scatterlist */
-> +	cur_page = 0;
-> +	for_each_sgtable_sg((*sgt), sg, i) {
+Or maybe we should just merge them all and give up on the idea of having
+open cross-vendor driver stacks for these accelerators.
 
-for_each_sgtable_sg should never be used when working with
-sg_dma_address() type stuff, here and everywhere else. The DMA list
-should be iterated using the for_each_sgtable_dma_sg() macro.
+Thanks, Daniel
 
-> +	/* In case we got a large memory area to export, we need to divide it
-> +	 * to smaller areas because each entry in the dmabuf sgt can only
-> +	 * describe unsigned int.
-> +	 */
+> 
+> Thanks,
+> Oded
+> 
+> Oded Gabbay (1):
+>   habanalabs: define uAPI to export FD for DMA-BUF
+> 
+> Tomer Tayar (1):
+>   habanalabs: add support for dma-buf exporter
+> 
+>  drivers/misc/habanalabs/Kconfig             |   1 +
+>  drivers/misc/habanalabs/common/habanalabs.h |  26 ++
+>  drivers/misc/habanalabs/common/memory.c     | 480 +++++++++++++++++++-
+>  drivers/misc/habanalabs/gaudi/gaudi.c       |   1 +
+>  drivers/misc/habanalabs/goya/goya.c         |   1 +
+>  include/uapi/misc/habanalabs.h              |  28 +-
+>  6 files changed, 532 insertions(+), 5 deletions(-)
+> 
+> -- 
+> 2.25.1
+> 
 
-Huh? This is forming a SGL, it should follow the SGL rules which means
-you have to fragment based on the dma_get_max_seg_size() of the
-importer device.
-
-> +	hl_dmabuf->pages = kcalloc(hl_dmabuf->npages, sizeof(*hl_dmabuf->pages),
-> +								GFP_KERNEL);
-> +	if (!hl_dmabuf->pages) {
-> +		rc = -ENOMEM;
-> +		goto err_free_dmabuf_wrapper;
-> +	}
-
-Why not just create the SGL directly? Is there a reason it needs to
-make a page list?
-
-Jason
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
