@@ -2,65 +2,65 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 014B83BDB5D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 18:30:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D7BF3BDC48
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 19:28:38 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 28AEA6694D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 16:30:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C101566942
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Jul 2021 17:28:36 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 88BF366946; Tue,  6 Jul 2021 16:30:01 +0000 (UTC)
+	id 4B3A666945; Tue,  6 Jul 2021 17:28:35 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A205260A79;
-	Tue,  6 Jul 2021 16:29:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 42FB763575;
+	Tue,  6 Jul 2021 17:28:33 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 025F5603B1
- for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 16:29:58 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 1881263113
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 17:28:32 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id EB93E60A79; Tue,  6 Jul 2021 16:29:57 +0000 (UTC)
-Received: from mail-il1-f170.google.com (mail-il1-f170.google.com
- [209.85.166.170])
- by lists.linaro.org (Postfix) with ESMTPS id E19C0603B1
- for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 16:29:55 +0000 (UTC)
-Received: by mail-il1-f170.google.com with SMTP id j12so10443751ils.5
- for <linaro-mm-sig@lists.linaro.org>; Tue, 06 Jul 2021 09:29:55 -0700 (PDT)
+ id 0DCE363575; Tue,  6 Jul 2021 17:28:32 +0000 (UTC)
+Received: from mail-qv1-f45.google.com (mail-qv1-f45.google.com
+ [209.85.219.45])
+ by lists.linaro.org (Postfix) with ESMTPS id F3B6D63113
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Jul 2021 17:28:29 +0000 (UTC)
+Received: by mail-qv1-f45.google.com with SMTP id cz7so6555626qvb.9
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 06 Jul 2021 10:28:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ziepe.ca; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=etYc22i2Gl0Nevaba6RCpVnI4CJLkrAbQx/tp++WzW4=;
- b=QT4qJl6Njzuv/rc+EW47j005Go9tPi24idYG9F2hf6+7AESajcYJswCFXElQ8kFMby
- 3vxITIhL6oD5OvTn6ePN1zoUacBrQ5ffu1dB4JcTCI57bv9vthhfZgYhhhNqU+ePgyil
- 0oVjqkgbSnNJaSikDXvfN1uGA2r2rilepOECvDPAFz+i4YUySzo8ix4MsE7aC86tV60X
- iOE8CYqdzDybuCrmVxoL7WfhOPJx1E5WRlC0HlQ7DGrGnVNsT3Zk+Wbe3rSxO2v/33RX
- olRWd/DC6AGXPPFAvSitPnP8EShIrJOMYVTSz6I/9NOxcUk33s+sqTV1aJkNsz27Dc/v
- M/dA==
+ bh=px11FX2o2NfOVHHhqnYnIhPQRFcjzs1+EmS0dsyOJPw=;
+ b=NF9XyW3fJY3iSvOKRIQQV+C9O8LDLzSL5nLvOmxEd2aIXF2R2INnN2ppJQUbhi6DTV
+ bkLZ9RPPT44Eqt9TFVlwTbLNxtdPmHz8R3OsArM3R4sQi8ODLHQSjGR3OgBwMKyXtHNF
+ K9ejcbRJRLCLTPyFEbwQzuBzfEgTPnMj6hMROdxPpkzmYY6xp0eWqzR8mSjb/sLAqfbB
+ lSEkuCODAJl2x64EYiUVYfnC8YDK58ifVoE9B2fQ6/omp+mfhARrfLpa+fypn8XD9z9S
+ kyOUZYLc41KEvRUUGGnMouFoGD5+qIuQ+IqsTll4iXp+lukaxhYtEoRakxbU44SzNWt/
+ gwjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=etYc22i2Gl0Nevaba6RCpVnI4CJLkrAbQx/tp++WzW4=;
- b=q0nkdHCb6bWJLwcKOE9jiZyX78cUG0CCyWJzKnfwHp633I2gEmxel5x2O0NKUE1EdX
- 8cwJRLzmi3LU4UQHhsl0M6xly6W590q6dU6MH4vHeq7bfigNivUTgAY9ljRLRKQLerXA
- NHCS3vG7wWo3wfL8UZR6ntoo3jtllMahIW/f/eWrVMhSsEmqYogcbuX4g7XeEQFcBeHw
- uuWM1CUTxJm18+Defh9SsfA3eThwrq9UfhJ8IrlmDS/wjwDw5/PZbjpnPUucfr3DBlNm
- 3lULKYc2TeTzFamtPX21lUjWjIYdzv1i/Pr4/ZdEc96IRuEiE5oIfdXUZqrubazd50QR
- m3eQ==
-X-Gm-Message-State: AOAM5311GpQ032KeHtue4ZExnpkaD02jU6mn+sbQtu/yMICqQho2JBG4
- FnjL5R6y2Tid6prmIomn19GEQQ==
-X-Google-Smtp-Source: ABdhPJz6bo5skYn6n6IU9DPSu+uSaHq70zWMOCxNpyUILydINIqb1PzqfwTHtoG8Ps83diFXVzV6Rw==
-X-Received: by 2002:a92:7f07:: with SMTP id a7mr14607133ild.202.1625588995298; 
- Tue, 06 Jul 2021 09:29:55 -0700 (PDT)
+ bh=px11FX2o2NfOVHHhqnYnIhPQRFcjzs1+EmS0dsyOJPw=;
+ b=af4azwxdk8muMR82IwKAhjHYRTpy6sz1xfHs0Kv1Q1+HEQ21RRCJGV0umSCHzJw2yp
+ 69OU10RccY8zWYnyRWTiMRxEWq6T/r1IZKiRmBHDpFPSs1yi+bx/7npjIlRUrGJmzXGX
+ C4GbjrsiZyrPkrjOWIrdyNhtVt3rp/m6QWdbj55gV+JCWK1GuP5qH9Qx5Z6Z29HJ35QL
+ DBceeofyN41SaEoYiHyxCWSMhGPGVM4MSHjbPuKwUWykK4ZgBj2GDYAVTSV9cugaKfNn
+ HSJfP1/K+ePPmQcDynHjgkoRKpAhKzlUQmJ/+BmaZXH5f5Tj1PytU29CPXvpBlIA6bwN
+ BVMA==
+X-Gm-Message-State: AOAM5318M9Epi5F2LS90UU8qDO27w4qSqZYtTnuRWi7ldMCwFd16K2y6
+ WEAaRVg095S1CJRKWJfloKc6Ew==
+X-Google-Smtp-Source: ABdhPJy+jZYEROJ3qIspffgyVpxmDj4ZiVgCcQDd9MnAGWHJKAq+GyoBJWW0gIXqY5aoWofm1iZXqA==
+X-Received: by 2002:a0c:eb8f:: with SMTP id x15mr19333838qvo.42.1625592509542; 
+ Tue, 06 Jul 2021 10:28:29 -0700 (PDT)
 Received: from ziepe.ca ([206.223.160.26])
- by smtp.gmail.com with ESMTPSA id r16sm8512490ilj.4.2021.07.06.09.29.54
+ by smtp.gmail.com with ESMTPSA id g13sm5694745qtx.96.2021.07.06.10.28.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 06 Jul 2021 09:29:54 -0700 (PDT)
+ Tue, 06 Jul 2021 10:28:29 -0700 (PDT)
 Received: from jgg by mlx with local (Exim 4.94) (envelope-from <jgg@ziepe.ca>)
- id 1m0nxJ-004TiJ-I6; Tue, 06 Jul 2021 13:29:53 -0300
-Date: Tue, 6 Jul 2021 13:29:53 -0300
+ id 1m0os0-004V5Z-2n; Tue, 06 Jul 2021 14:28:28 -0300
+Date: Tue, 6 Jul 2021 14:28:28 -0300
 From: Jason Gunthorpe <jgg@ziepe.ca>
 To: Daniel Vetter <daniel.vetter@ffwll.ch>
-Message-ID: <20210706162953.GQ4604@ziepe.ca>
+Message-ID: <20210706172828.GR4604@ziepe.ca>
 References: <20210705130314.11519-1-ogabbay@kernel.org>
  <YOQXBWpo3whVjOyh@phenom.ffwll.local>
  <CAFCwf10_rTYL2Fy6tCRVAUCf4-6_TtcWCv5gEEkGnQ0KxqMUBg@mail.gmail.com>
@@ -69,9 +69,10 @@ References: <20210705130314.11519-1-ogabbay@kernel.org>
  <CAKMK7uELNzwUe+hhVWRg=Pk5Wt_vOOX922H48Kd6dTyO2PeBbg@mail.gmail.com>
  <20210706152542.GP4604@ziepe.ca>
  <CAKMK7uH7Ar6+uAOU_Sj-mf89V9WCru+66CV5bO9h-WAAv7Mgdg@mail.gmail.com>
+ <CAKMK7uGvO0h7iZ3vKGe8GouESkr79y1gP1JXbfV82sRiaT-d1A@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAKMK7uH7Ar6+uAOU_Sj-mf89V9WCru+66CV5bO9h-WAAv7Mgdg@mail.gmail.com>
+In-Reply-To: <CAKMK7uGvO0h7iZ3vKGe8GouESkr79y1gP1JXbfV82sRiaT-d1A@mail.gmail.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [PATCH v4 0/2] Add p2p via dmabuf to habanalabs
 X-BeenThere: linaro-mm-sig@lists.linaro.org
@@ -105,62 +106,41 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Tue, Jul 06, 2021 at 05:49:01PM +0200, Daniel Vetter wrote:
+On Tue, Jul 06, 2021 at 06:07:17PM +0200, Daniel Vetter wrote:
 
-> The other thing to keep in mind is that one of these drivers supports
-> 25 years of product generations, and the other one doesn't. 
+> Also on your claim that drivers/gpu is a non-upstream disaster: I've
+> also learned that that for drivers/rdma there's the upstream driver,
+> and then there's the out-of-tree hackjob the vendor actually
+> supports.
 
-Sure, but that is the point, isn't it? To have an actually useful
-thing you need all of this mess
+In the enterprise world everyone has their out of tree backport
+drivers. It varies on the vendor how much deviation there is from the
+upstream driver and what commercial support relationship the vendor
+has with the enterprise distros.
 
-> > My argument is that an in-tree open kernel driver is a big help to
-> > reverse engineering an open userspace. Having the vendors
-> > collaboration to build that monstrous thing can only help the end goal
-> > of an end to end open stack.
-> 
-> Not sure where this got lost, but we're totally fine with vendors
-> using the upstream driver together with their closed stack. And most
-> of the drivers we do have in upstream are actually, at least in parts,
-> supported by the vendor. E.g. if you'd have looked the drm/arm driver
-> you picked is actually 100% written by ARM engineers. So kinda
-> unfitting example.
+> So seems to be about the same level of screwed up, if you ask the
+> vendor they tell you the upstream driver isn't a thing they care about
+> and it's just done for a bit of goodwill. 
 
-So the argument with Habana really boils down to how much do they need
-to show in the open source space to get a kernel driver? You want to
-see the ISA or compiler at least?
+Sounds like you should get a new RDMA supplier :)
 
-That at least doesn't seem "extreme" to me.
+To be fair Intel is getting better, they got their new RDMA HW support
+merged into v5.14 after about 2 years in the out of tree world. Though
+it is still incomplete compared to their out of tree driver, the gap
+is much smaller now.
 
-> > For instance a vendor with an in-tree driver has a strong incentive to
-> > sort out their FW licensing issues so it can be redistributed.
-> 
-> Nvidia has been claiming to try and sort out the FW problem for years.
-> They even managed to release a few things, but I think the last one is
-> 2-3 years late now. Partially the reason is that there don't have a
-> stable api between the firmware and driver, it's all internal from the
-> same source tree, and they don't really want to change that.
+> amounts of volume, then suddenly it's an option ... Minus the fw issue
+> for nvidia, upstream does support all the gpus you can buy right now
+> and that can run on linux with some vendor driver (aka excluding apple
+> M1 and ofc upcoming products from most vendors).
 
-Right, companies have no incentive to work in a sane way if they have
-their own parallel world. I think drawing them part by part into the
-standard open workflows and expectations is actually helpful to
-everyone.
+I would look at how many actual commercial systems are running the
+upstream/inbox stack. I personally know of quite a few sites with big
+HPC RDMA deployments running pure inbox kernels, no add on kernel
+modules, with full commercial support.
 
-> > > I don't think the facts on the ground support your claim here, aside
-> > > from the practical problem that nvidia is unwilling to even create an
-> > > open driver to begin with. So there isn't anything to merge.
-> >
-> > The internet tells me there is nvgpu, it doesn't seem to have helped.
-> 
-> Not sure which one you mean, but every once in a while they open up a
-> few headers, or a few programming specs, or a small driver somewhere
-> for a very specific thing, and then it dies again or gets obfuscated
-> for the next platform, or just never updated. I've never seen anything
-> that comes remotely to something complete, aside from tegra socs,
-> which are fully supported in upstream afaik.
-
-I understand nvgpu is the tegra driver that people actualy
-use. nouveau may have good tegra support but is it used in any actual
-commercial product?
+If you can say that kind of arrangment is also common place in the GPU
+world then I will happily be wrong.
 
 Jason
 _______________________________________________
