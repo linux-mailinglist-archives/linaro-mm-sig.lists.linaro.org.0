@@ -2,68 +2,72 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB3483C1870
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  8 Jul 2021 19:38:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E9EC33C32F5
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 10 Jul 2021 07:10:54 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B2E7D66961
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  8 Jul 2021 17:38:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9598C66971
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 10 Jul 2021 05:10:52 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id AA5BF6695E; Thu,  8 Jul 2021 17:38:45 +0000 (UTC)
+	id 01EAE6697D; Sat, 10 Jul 2021 05:10:51 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A55866354F;
-	Thu,  8 Jul 2021 17:38:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EFE2260FF8;
+	Sat, 10 Jul 2021 05:10:48 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 6749466967
- for <linaro-mm-sig@lists.linaro.org>; Thu,  8 Jul 2021 17:38:38 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 02FEB60B27
+ for <linaro-mm-sig@lists.linaro.org>; Sat, 10 Jul 2021 05:10:48 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 5E8B26691B; Thu,  8 Jul 2021 17:38:31 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
- [209.85.128.53])
- by lists.linaro.org (Postfix) with ESMTPS id 8FA8366953
- for <linaro-mm-sig@lists.linaro.org>; Thu,  8 Jul 2021 17:38:29 +0000 (UTC)
-Received: by mail-wm1-f53.google.com with SMTP id
- h18-20020a05600c3512b029020e4ceb9588so7353417wmq.5
- for <linaro-mm-sig@lists.linaro.org>; Thu, 08 Jul 2021 10:38:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=2ZhKyW2iXAQnZB65HuPkrPJPq0kH1huhhVBcvQ5De2U=;
- b=LHatzWvSbADBpiEA60FUUoMCtMvyXCOO28RppY4XXcC5auDMB/2eJZraPfm2U9lb+V
- mv9LlVNKbTezQoIpN9BEemLw+d8ejGze2bBr4t+4XJyJk9p4RXklJsloIz3qX9iVe7PG
- uMaK+LE/T5tR3Y2Kwconjw0AKsvkTRXrj3o8Q=
+ id EC40B60FF8; Sat, 10 Jul 2021 05:10:47 +0000 (UTC)
+Received: from mail-yb1-f201.google.com (mail-yb1-f201.google.com
+ [209.85.219.201])
+ by lists.linaro.org (Postfix) with ESMTPS id E15FE60B27
+ for <linaro-mm-sig@lists.linaro.org>; Sat, 10 Jul 2021 05:10:45 +0000 (UTC)
+Received: by mail-yb1-f201.google.com with SMTP id
+ x84-20020a2531570000b029055d47682463so12789114ybx.5
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 09 Jul 2021 22:10:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+ h=date:message-id:mime-version:subject:from:to:cc;
+ bh=6tW4U4W+M5Q9a7hEOvLNXBNqiO2VzjTmy/E0pzjtni8=;
+ b=izsa5rVePDMRnv9gXUgJM5JDfwEKUTFqTkWClk7ibQkEoVgCSi3grTzQ3hkxlKirBq
+ bZJwCOSvqc38fxkFlG6VcLsNfP49/E+6kcvpDpHxY/u3ON7tuV+BTczgroEsVVbzmfMT
+ wkRse6Dowc8JEluc0DeZFcRMFhYMkgpjzSHT4C/YTFSyO9RT9o9++dm82LsKpfnN/xub
+ JvTvEsjUnBkDIodCVnkCM/yanR172guDb5wDxy3XCpBGPOJ6P+1eMcehkQhreuMx8Ahj
+ ufLjuF+wvYwIDDr3+F9eaV47/Oa2/cCihY0qe4hK8HZC6620nLZK4DcpdXA69R4lriUS
+ XfJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=2ZhKyW2iXAQnZB65HuPkrPJPq0kH1huhhVBcvQ5De2U=;
- b=pAV7XCRW613WVXps9mxbX9hveHxX3r+BVjOmC35rQ6osUUwRYZpkPWlrg4K7rjKWH1
- JmVXVGCoVb00wza9gyCErgou4dYoMhwCt/UmSMmbyQ2yAPw9EZU+B7EA4rJ2XQXCBj7S
- qx/AUgL3iumkg7lU3Gga7xeX9Vi7SatWjFLMTMXa8h2noq3QRjPVBgHHLEaWLFwmaNGI
- tVIqdr2u5LHhJv7JMvnwm32Th0vBOlqPiCuNe9tq4s2Dc6vxi/OhZ27kFq8ovYrXgS74
- IMzZFo9WvZlZJW3QoYACc+n1AK1j2zvRla4ibvdvLQWM7C4Hge62nJkbQjwYgt/03kf9
- RGyQ==
-X-Gm-Message-State: AOAM531/u5Js74YoH4/QRv3UzyiOJv8A/28940gkAJ631dnXsgmT3Tle
- JMs+0MZ5CXJToQ8uTui0lz2/tg==
-X-Google-Smtp-Source: ABdhPJwxGV84X2b9ACK5a53uTXue40qCMinFJKOGDBNVRPXtiiqGSwbmCe2H2iUru49EJes1mbdX1w==
-X-Received: by 2002:a05:600c:1d23:: with SMTP id
- l35mr6748551wms.134.1625765908475; 
- Thu, 08 Jul 2021 10:38:28 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id l4sm2521853wme.26.2021.07.08.10.38.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 08 Jul 2021 10:38:28 -0700 (PDT)
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-To: DRI Development <dri-devel@lists.freedesktop.org>
-Date: Thu,  8 Jul 2021 19:37:54 +0200
-Message-Id: <20210708173754.3877540-21-daniel.vetter@ffwll.ch>
-X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20210708173754.3877540-1-daniel.vetter@ffwll.ch>
-References: <20210708173754.3877540-1-daniel.vetter@ffwll.ch>
-MIME-Version: 1.0
+ h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+ bh=6tW4U4W+M5Q9a7hEOvLNXBNqiO2VzjTmy/E0pzjtni8=;
+ b=Vpz9c//LbHOFUtuOJH4GAmqjfzHvfOeZhtD3tzWsdMViL5GTlzv1c39yXGM+uCoeE6
+ d7QGR7My7YSSoKQ9y2CJ357p8Szoi+VYhXVfHpVusYKKbKK85StbSI9VqK+J6Q4udZBz
+ SJdEX2sTL0fG0R6wSA0aZr18OgKz5/fCKIZY3x9Hg9h+BWO2SLrtKZtfPdOupjbLL0Sk
+ LfTKEYozjDsxO7HhgNZuNe92EmAPs9pruf17Z2hfen4KbZ35v2hoI5enfzX3jD5Pp/Oi
+ 4Ce0kkNoVE31Q2wljeaZaZk/DdPTJQTh8y6z84UfswewSJGj9H5yRCg2uwd+vPi5nVz2
+ bE2Q==
+X-Gm-Message-State: AOAM530IsNfQ1QymHx4JlV/3uoTxyjmpJEra1Ndjq8LmDwwfs37WDnN8
+ g4gUz/AUYddkusUiSbrW4IinpjGrIsU=
+X-Google-Smtp-Source: ABdhPJyJrczkRmhH/qXGrgt/Sk2CsDUTJN9iO7OAgXi5y504LUYz/G0g6KzCyzyU24u66S2nQAnAjDPvxx8=
+X-Received: from hridya.mtv.corp.google.com
+ ([2620:15c:211:200:6d15:d8fd:a01e:e439])
+ (user=hridya job=sendgmr) by 2002:a25:3b86:: with SMTP id
+ i128mr51665265yba.363.1625893841864; 
+ Fri, 09 Jul 2021 22:10:41 -0700 (PDT)
+Date: Fri,  9 Jul 2021 22:10:24 -0700
+Message-Id: <20210710051027.42828-1-hridya@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.32.0.93.g670b81a890-goog
+From: Hridya Valsaraju <hridya@google.com>
+To: daniel@ffwll.ch, Sumit Semwal <sumit.semwal@linaro.org>, 
+ "=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>,
+ Hridya Valsaraju <hridya@google.com>, 
+ Daniel Vetter <daniel.vetter@ffwll.ch>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, 
+ dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH v3 20/20] dma-resv: Give the docs a do-over
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: Delete the DMA-BUF attachment
+ sysfs statistics
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,220 +80,441 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- linaro-mm-sig@lists.linaro.org, Matthew Auld <matthew.auld@intel.com>,
- Jason Ekstrand <jason@jlekstrand.net>, Daniel Vetter <daniel.vetter@intel.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- linux-media@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: surenb@google.com, john.stultz@linaro.org, kernel-team@android.com
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-U3BlY2lmaWNhbGx5IGRvY3VtZW50IHRoZSBuZXcvY2xhcmlmaWVkIHJ1bGVzIGFyb3VuZCBob3cg
-dGhlIHNoYXJlZApmZW5jZXMgZG8gbm90IGhhdmUgYW55IG9yZGVyaW5nIHJlcXVpcmVtZW50cyBh
-Z2FpbnN0IHRoZSBleGNsdXNpdmUKZmVuY2UuCgpCdXQgYWxzbyBkb2N1bWVudCBhbGwgdGhlIHRo
-aW5ncyBhIGJpdCBiZXR0ZXIsIGdpdmVuIGhvdyBjZW50cmFsCnN0cnVjdCBkbWFfcmVzdiB0byBk
-eW5hbWljIGJ1ZmZlciBtYW5hZ2VtZW50IHRoZSBkb2NzIGhhdmUgYmVlbiB2ZXJ5CmluYWRlcXVh
-dC4KCi0gTG90cyBtb3JlIGxpbmtzIHRvIG90aGVyIHBpZWNlcyBvZiB0aGUgcHV6emxlLiBVbmZv
-cnR1bmF0ZWx5CiAgdHRtX2J1ZmZlcl9vYmplY3QgaGFzIG5vIGRvY3MsIHNvIG5vIGxpbmtzIDot
-KAoKLSBFeHBsYWluL2NvbXBsYWluIGEgYml0IGFib3V0IGRtYV9yZXN2X2xvY2tpbmdfY3R4KCku
-IEkgc3RpbGwgZG9uJ3QKICBsaWtlIHRoYXQgb25lLCBidXQgZml4aW5nIHRoZSB0dG0gY2FsbCBj
-aGFpbnMgaXMgZ29pbmcgdG8gYmUKICBob3JyaWJsZS4gUGx1cyB3ZSB3YW50IHRvIHBsdWcgaW4g
-cmVhbCBzbG93cGF0aCBsb2NraW5nIHdoZW4gd2UgZG8KICB0aGF0IGFueXdheS4KCi0gTWFpbiBw
-YXJ0IG9mIHRoZSBwYXRjaCBpcyBzb21lIGFjdHVhbCBkb2NzIGZvciBzdHJ1Y3QgZG1hX3Jlc3Yu
-CgpPdmVyYWxsIEkgdGhpbmsgd2Ugc3RpbGwgaGF2ZSBhIGxvdCBvZiBiYWQgbmFtaW5nIGluIHRo
-aXMgYXJlYSAoZS5nLgpkbWFfcmVzdi5mZW5jZSBpcyBzaW5ndWxhciwgYnV0IGNvbnRhaW5zIHRo
-ZSBtdWx0aXBsZSBzaGFyZWQgZmVuY2VzKSwKYnV0IEkgdGhpbmsgdGhhdCdzIG1vcmUgaW5kaWNh
-dGl2ZSBvZiBob3cgdGhlIHNlbWFudGljcyBhbmQgcnVsZXMgYXJlCmp1c3Qgbm90IGdyZWF0LgoK
-QW5vdGhlciB0aGluZyB0aGF0J3MgcmVhbCBhd2thcmQgaXMgaG93IGNoYWluaW5nIGV4Y2x1c2l2
-ZSBmZW5jZXMKcmlnaHQgbm93IG1lYW5zIGRpcmVjdCBkbWFfcmVzdi5leGNsdXNpdmVfZmVuY2Ug
-cG9pbnRlciBhY2Nlc3Mgd2l0aCBhbgpyY3VfYXNzaWduX3BvaW50ZXIuIE5vdCBzbyBncmVhdCBl
-aXRoZXIuCgp2MjoKLSBGaXggYSBwaWxlIG9mIHR5cG9zIChNYXR0LCBKYXNvbikKLSBIYW1tZXIg
-aXQgaW4gdGhhdCBicmVha2luZyB0aGUgcnVsZXMgbGVhZHMgdG8gdXNlLWFmdGVyLWZyZWUgaXNz
-dWVzCiAgYXJvdW5kIGRtYS1idWYgc2hhcmluZyAoQ2hyaXN0aWFuKQoKUmV2aWV3ZWQtYnk6IENo
-cmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4KQ2M6IEphc29uIEVrc3Ry
-YW5kIDxqYXNvbkBqbGVrc3RyYW5kLm5ldD4KQ2M6IE1hdHRoZXcgQXVsZCA8bWF0dGhldy5hdWxk
-QGludGVsLmNvbT4KUmV2aWV3ZWQtYnk6IE1hdHRoZXcgQXVsZCA8bWF0dGhldy5hdWxkQGludGVs
-LmNvbT4KU2lnbmVkLW9mZi1ieTogRGFuaWVsIFZldHRlciA8ZGFuaWVsLnZldHRlckBpbnRlbC5j
-b20+CkNjOiBTdW1pdCBTZW13YWwgPHN1bWl0LnNlbXdhbEBsaW5hcm8ub3JnPgpDYzogIkNocmlz
-dGlhbiBLw7ZuaWciIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+CkNjOiBsaW51eC1tZWRpYUB2
-Z2VyLmtlcm5lbC5vcmcKQ2M6IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwotLS0KIGRy
-aXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jIHwgIDI0ICsrKysrKy0tLQogaW5jbHVkZS9saW51eC9k
-bWEtYnVmLmggICAgfCAgIDcgKysrCiBpbmNsdWRlL2xpbnV4L2RtYS1yZXN2LmggICB8IDEwNCAr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0tCiAzIGZpbGVzIGNoYW5nZWQsIDEy
-NCBpbnNlcnRpb25zKCspLCAxMSBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kcml2ZXJzL2Rt
-YS1idWYvZG1hLXJlc3YuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jCmluZGV4IGYyNmM3
-MTc0N2Q0My4uYTNhY2I2NDc5ZGRmIDEwMDY0NAotLS0gYS9kcml2ZXJzL2RtYS1idWYvZG1hLXJl
-c3YuYworKysgYi9kcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYwpAQCAtNDgsNiArNDgsOCBAQAog
-ICogd3JpdGUgb3BlcmF0aW9ucykgb3IgTiBzaGFyZWQgZmVuY2VzIChyZWFkIG9wZXJhdGlvbnMp
-LiAgVGhlIFJDVQogICogbWVjaGFuaXNtIGlzIHVzZWQgdG8gcHJvdGVjdCByZWFkIGFjY2VzcyB0
-byBmZW5jZXMgZnJvbSBsb2NrZWQKICAqIHdyaXRlLXNpZGUgdXBkYXRlcy4KKyAqCisgKiBTZWUg
-c3RydWN0IGRtYV9yZXN2IGZvciBtb3JlIGRldGFpbHMuCiAgKi8KIAogREVGSU5FX1dEX0NMQVNT
-KHJlc2VydmF0aW9uX3d3X2NsYXNzKTsKQEAgLTEzNyw3ICsxMzksMTEgQEAgRVhQT1JUX1NZTUJP
-TChkbWFfcmVzdl9maW5pKTsKICAqIEBudW1fZmVuY2VzOiBudW1iZXIgb2YgZmVuY2VzIHdlIHdh
-bnQgdG8gYWRkCiAgKgogICogU2hvdWxkIGJlIGNhbGxlZCBiZWZvcmUgZG1hX3Jlc3ZfYWRkX3No
-YXJlZF9mZW5jZSgpLiAgTXVzdAotICogYmUgY2FsbGVkIHdpdGggb2JqLT5sb2NrIGhlbGQuCisg
-KiBiZSBjYWxsZWQgd2l0aCBAb2JqIGxvY2tlZCB0aHJvdWdoIGRtYV9yZXN2X2xvY2soKS4KKyAq
-CisgKiBOb3RlIHRoYXQgdGhlIHByZWFsbG9jYXRlZCBzbG90cyBuZWVkIHRvIGJlIHJlLXJlc2Vy
-dmVkIGlmIEBvYmogaXMgdW5sb2NrZWQKKyAqIGF0IGFueSB0aW1lIGJlZm9yZSBjYWxsaW5nIGRt
-YV9yZXN2X2FkZF9zaGFyZWRfZmVuY2UoKS4gVGhpcyBpcyB2YWxpZGF0ZWQKKyAqIHdoZW4gQ09O
-RklHX0RFQlVHX01VVEVYRVMgaXMgZW5hYmxlZC4KICAqCiAgKiBSRVRVUk5TCiAgKiBaZXJvIGZv
-ciBzdWNjZXNzLCBvciAtZXJybm8KQEAgLTIzNCw4ICsyNDAsMTAgQEAgRVhQT1JUX1NZTUJPTChk
-bWFfcmVzdl9yZXNldF9zaGFyZWRfbWF4KTsKICAqIEBvYmo6IHRoZSByZXNlcnZhdGlvbiBvYmpl
-Y3QKICAqIEBmZW5jZTogdGhlIHNoYXJlZCBmZW5jZSB0byBhZGQKICAqCi0gKiBBZGQgYSBmZW5j
-ZSB0byBhIHNoYXJlZCBzbG90LCBvYmotPmxvY2sgbXVzdCBiZSBoZWxkLCBhbmQKKyAqIEFkZCBh
-IGZlbmNlIHRvIGEgc2hhcmVkIHNsb3QsIEBvYmogbXVzdCBiZSBsb2NrZWQgd2l0aCBkbWFfcmVz
-dl9sb2NrKCksIGFuZAogICogZG1hX3Jlc3ZfcmVzZXJ2ZV9zaGFyZWQoKSBoYXMgYmVlbiBjYWxs
-ZWQuCisgKgorICogU2VlIGFsc28gJmRtYV9yZXN2LmZlbmNlIGZvciBhIGRpc2N1c3Npb24gb2Yg
-dGhlIHNlbWFudGljcy4KICAqLwogdm9pZCBkbWFfcmVzdl9hZGRfc2hhcmVkX2ZlbmNlKHN0cnVj
-dCBkbWFfcmVzdiAqb2JqLCBzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSkKIHsKQEAgLTI3OCw5ICsy
-ODYsMTEgQEAgRVhQT1JUX1NZTUJPTChkbWFfcmVzdl9hZGRfc2hhcmVkX2ZlbmNlKTsKIC8qKgog
-ICogZG1hX3Jlc3ZfYWRkX2V4Y2xfZmVuY2UgLSBBZGQgYW4gZXhjbHVzaXZlIGZlbmNlLgogICog
-QG9iajogdGhlIHJlc2VydmF0aW9uIG9iamVjdAotICogQGZlbmNlOiB0aGUgc2hhcmVkIGZlbmNl
-IHRvIGFkZAorICogQGZlbmNlOiB0aGUgZXhjbHVzaXZlIGZlbmNlIHRvIGFkZAogICoKLSAqIEFk
-ZCBhIGZlbmNlIHRvIHRoZSBleGNsdXNpdmUgc2xvdC4gIFRoZSBvYmotPmxvY2sgbXVzdCBiZSBo
-ZWxkLgorICogQWRkIGEgZmVuY2UgdG8gdGhlIGV4Y2x1c2l2ZSBzbG90LiBAb2JqIG11c3QgYmUg
-bG9ja2VkIHdpdGggZG1hX3Jlc3ZfbG9jaygpLgorICogTm90ZSB0aGF0IHRoaXMgZnVuY3Rpb24g
-cmVwbGFjZXMgYWxsIGZlbmNlcyBhdHRhY2hlZCB0byBAb2JqLCBzZWUgYWxzbworICogJmRtYV9y
-ZXN2LmZlbmNlX2V4Y2wgZm9yIGEgZGlzY3Vzc2lvbiBvZiB0aGUgc2VtYW50aWNzLgogICovCiB2
-b2lkIGRtYV9yZXN2X2FkZF9leGNsX2ZlbmNlKHN0cnVjdCBkbWFfcmVzdiAqb2JqLCBzdHJ1Y3Qg
-ZG1hX2ZlbmNlICpmZW5jZSkKIHsKQEAgLTYwOSw5ICs2MTksMTEgQEAgc3RhdGljIGlubGluZSBp
-bnQgZG1hX3Jlc3ZfdGVzdF9zaWduYWxlZF9zaW5nbGUoc3RydWN0IGRtYV9mZW5jZSAqcGFzc2Vk
-X2ZlbmNlKQogICogZmVuY2UKICAqCiAgKiBDYWxsZXJzIGFyZSBub3QgcmVxdWlyZWQgdG8gaG9s
-ZCBzcGVjaWZpYyBsb2NrcywgYnV0IG1heWJlIGhvbGQKLSAqIGRtYV9yZXN2X2xvY2soKSBhbHJl
-YWR5CisgKiBkbWFfcmVzdl9sb2NrKCkgYWxyZWFkeS4KKyAqCiAgKiBSRVRVUk5TCi0gKiB0cnVl
-IGlmIGFsbCBmZW5jZXMgc2lnbmFsZWQsIGVsc2UgZmFsc2UKKyAqCisgKiBUcnVlIGlmIGFsbCBm
-ZW5jZXMgc2lnbmFsZWQsIGVsc2UgZmFsc2UuCiAgKi8KIGJvb2wgZG1hX3Jlc3ZfdGVzdF9zaWdu
-YWxlZChzdHJ1Y3QgZG1hX3Jlc3YgKm9iaiwgYm9vbCB0ZXN0X2FsbCkKIHsKZGlmZiAtLWdpdCBh
-L2luY2x1ZGUvbGludXgvZG1hLWJ1Zi5oIGIvaW5jbHVkZS9saW51eC9kbWEtYnVmLmgKaW5kZXgg
-MmI4MTRmZGUwZDExLi44Y2MwYzU1ODc3YTYgMTAwNjQ0Ci0tLSBhL2luY2x1ZGUvbGludXgvZG1h
-LWJ1Zi5oCisrKyBiL2luY2x1ZGUvbGludXgvZG1hLWJ1Zi5oCkBAIC00MjAsNiArNDIwLDEzIEBA
-IHN0cnVjdCBkbWFfYnVmIHsKIAkgKiAtIER5bmFtaWMgaW1wb3J0ZXJzIHNob3VsZCBzZXQgZmVu
-Y2VzIGZvciBhbnkgYWNjZXNzIHRoYXQgdGhleSBjYW4ndAogCSAqICAgZGlzYWJsZSBpbW1lZGlh
-dGVseSBmcm9tIHRoZWlyICZkbWFfYnVmX2F0dGFjaF9vcHMubW92ZV9ub3RpZnkKIAkgKiAgIGNh
-bGxiYWNrLgorCSAqCisJICogSU1QT1JUQU5UOgorCSAqCisJICogQWxsIGRyaXZlcnMgbXVzdCBv
-YmV5IHRoZSBzdHJ1Y3QgZG1hX3Jlc3YgcnVsZXMsIHNwZWNpZmljYWxseSB0aGUKKwkgKiBydWxl
-cyBmb3IgdXBkYXRpbmcgZmVuY2VzLCBzZWUgJmRtYV9yZXN2LmZlbmNlX2V4Y2wgYW5kCisJICog
-JmRtYV9yZXN2LmZlbmNlLiBJZiB0aGVzZSBkZXBlbmRlbmN5IHJ1bGVzIGFyZSBicm9rZW4gYWNj
-ZXNzIHRyYWNraW5nCisJICogY2FuIGJlIGxvc3QgcmVzdWx0aW5nIGluIHVzZSBhZnRlciBmcmVl
-IGlzc3Vlcy4KIAkgKi8KIAlzdHJ1Y3QgZG1hX3Jlc3YgKnJlc3Y7CiAKZGlmZiAtLWdpdCBhL2lu
-Y2x1ZGUvbGludXgvZG1hLXJlc3YuaCBiL2luY2x1ZGUvbGludXgvZG1hLXJlc3YuaAppbmRleCBl
-MWNhMjA4MGExZmYuLjkxMDBkZDNkYzIxZiAxMDA2NDQKLS0tIGEvaW5jbHVkZS9saW51eC9kbWEt
-cmVzdi5oCisrKyBiL2luY2x1ZGUvbGludXgvZG1hLXJlc3YuaApAQCAtNjIsMTYgKzYyLDkwIEBA
-IHN0cnVjdCBkbWFfcmVzdl9saXN0IHsKIAogLyoqCiAgKiBzdHJ1Y3QgZG1hX3Jlc3YgLSBhIHJl
-c2VydmF0aW9uIG9iamVjdCBtYW5hZ2VzIGZlbmNlcyBmb3IgYSBidWZmZXIKLSAqIEBsb2NrOiB1
-cGRhdGUgc2lkZSBsb2NrCi0gKiBAc2VxOiBzZXF1ZW5jZSBjb3VudCBmb3IgbWFuYWdpbmcgUkNV
-IHJlYWQtc2lkZSBzeW5jaHJvbml6YXRpb24KLSAqIEBmZW5jZV9leGNsOiB0aGUgZXhjbHVzaXZl
-IGZlbmNlLCBpZiB0aGVyZSBpcyBvbmUgY3VycmVudGx5Ci0gKiBAZmVuY2U6IGxpc3Qgb2YgY3Vy
-cmVudCBzaGFyZWQgZmVuY2VzCisgKgorICogVGhlcmUgYXJlIG11bHRpcGxlIHVzZXMgZm9yIHRo
-aXMsIHdpdGggc29tZXRpbWVzIHNsaWdodGx5IGRpZmZlcmVudCBydWxlcyBpbgorICogaG93IHRo
-ZSBmZW5jZSBzbG90cyBhcmUgdXNlZC4KKyAqCisgKiBPbmUgdXNlIGlzIHRvIHN5bmNocm9uaXpl
-IGNyb3NzLWRyaXZlciBhY2Nlc3MgdG8gYSBzdHJ1Y3QgZG1hX2J1ZiwgZWl0aGVyIGZvcgorICog
-ZHluYW1pYyBidWZmZXIgbWFuYWdlbWVudCBvciBqdXN0IHRvIGhhbmRsZSBpbXBsaWNpdCBzeW5j
-aHJvbml6YXRpb24gYmV0d2VlbgorICogZGlmZmVyZW50IHVzZXJzIG9mIHRoZSBidWZmZXIgaW4g
-dXNlcnNwYWNlLiBTZWUgJmRtYV9idWYucmVzdiBmb3IgYSBtb3JlCisgKiBpbi1kZXB0aCBkaXNj
-dXNzaW9uLgorICoKKyAqIFRoZSBvdGhlciBtYWpvciB1c2UgaXMgdG8gbWFuYWdlIGFjY2VzcyBh
-bmQgbG9ja2luZyB3aXRoaW4gYSBkcml2ZXIgaW4gYQorICogYnVmZmVyIGJhc2VkIG1lbW9yeSBt
-YW5hZ2VyLiBzdHJ1Y3QgdHRtX2J1ZmZlcl9vYmplY3QgaXMgdGhlIGNhbm9uaWNhbAorICogZXhh
-bXBsZSBoZXJlLCBzaW5jZSB0aGlzIGlzIHdoZXJlIHJlc2VydmF0aW9uIG9iamVjdHMgb3JpZ2lu
-YXRlZCBmcm9tLiBCdXQKKyAqIHVzZSBpbiBkcml2ZXJzIGlzIHNwcmVhZGluZyBhbmQgc29tZSBk
-cml2ZXJzIGFsc28gbWFuYWdlIHN0cnVjdAorICogZHJtX2dlbV9vYmplY3Qgd2l0aCB0aGUgc2Ft
-ZSBzY2hlbWUuCiAgKi8KIHN0cnVjdCBkbWFfcmVzdiB7CisJLyoqCisJICogQGxvY2s6CisJICoK
-KwkgKiBVcGRhdGUgc2lkZSBsb2NrLiBEb24ndCB1c2UgZGlyZWN0bHksIGluc3RlYWQgdXNlIHRo
-ZSB3cmFwcGVyCisJICogZnVuY3Rpb25zIGxpa2UgZG1hX3Jlc3ZfbG9jaygpIGFuZCBkbWFfcmVz
-dl91bmxvY2soKS4KKwkgKgorCSAqIERyaXZlcnMgd2hpY2ggdXNlIHRoZSByZXNlcnZhdGlvbiBv
-YmplY3QgdG8gbWFuYWdlIG1lbW9yeSBkeW5hbWljYWxseQorCSAqIGFsc28gdXNlIHRoaXMgbG9j
-ayB0byBwcm90ZWN0IGJ1ZmZlciBvYmplY3Qgc3RhdGUgbGlrZSBwbGFjZW1lbnQsCisJICogYWxs
-b2NhdGlvbiBwb2xpY2llcyBvciB0aHJvdWdob3V0IGNvbW1hbmQgc3VibWlzc2lvbi4KKwkgKi8K
-IAlzdHJ1Y3Qgd3dfbXV0ZXggbG9jazsKKworCS8qKgorCSAqIEBzZXE6CisJICoKKwkgKiBTZXF1
-ZW5jZSBjb3VudCBmb3IgbWFuYWdpbmcgUkNVIHJlYWQtc2lkZSBzeW5jaHJvbml6YXRpb24sIGFs
-bG93cworCSAqIHJlYWQtb25seSBhY2Nlc3MgdG8gQGZlbmNlX2V4Y2wgYW5kIEBmZW5jZSB3aGls
-ZSBlbnN1cmluZyB3ZSB0YWtlIGEKKwkgKiBjb25zaXN0ZW50IHNuYXBzaG90LgorCSAqLwogCXNl
-cWNvdW50X3d3X211dGV4X3Qgc2VxOwogCisJLyoqCisJICogQGZlbmNlX2V4Y2w6CisJICoKKwkg
-KiBUaGUgZXhjbHVzaXZlIGZlbmNlLCBpZiB0aGVyZSBpcyBvbmUgY3VycmVudGx5LgorCSAqCisJ
-ICogVGhlcmUgYXJlIHR3byB3YXlzIHRvIHVwZGF0ZSB0aGlzIGZlbmNlOgorCSAqCisJICogLSBG
-aXJzdCBieSBjYWxsaW5nIGRtYV9yZXN2X2FkZF9leGNsX2ZlbmNlKCksIHdoaWNoIHJlcGxhY2Vz
-IGFsbAorCSAqICAgZmVuY2VzIGF0dGFjaGVkIHRvIHRoZSByZXNlcnZhdGlvbiBvYmplY3QuIFRv
-IGd1YXJhbnRlZSB0aGF0IG5vCisJICogICBmZW5jZXMgYXJlIGxvc3QsIHRoaXMgbmV3IGZlbmNl
-IG11c3Qgc2lnbmFsIG9ubHkgYWZ0ZXIgYWxsIHByZXZpb3VzCisJICogICBmZW5jZXMsIGJvdGgg
-c2hhcmVkIGFuZCBleGNsdXNpdmUsIGhhdmUgc2lnbmFsbGVkLiBJbiBzb21lIGNhc2VzIGl0CisJ
-ICogICBpcyBjb252ZW5pZW50IHRvIGFjaGlldmUgdGhhdCBieSBhdHRhY2hpbmcgYSBzdHJ1Y3Qg
-ZG1hX2ZlbmNlX2FycmF5CisJICogICB3aXRoIGFsbCB0aGUgbmV3IGFuZCBvbGQgZmVuY2VzLgor
-CSAqCisJICogLSBBbHRlcm5hdGl2ZWx5IHRoZSBmZW5jZSBjYW4gYmUgc2V0IGRpcmVjdGx5LCB3
-aGljaCBsZWF2ZXMgdGhlCisJICogICBzaGFyZWQgZmVuY2VzIHVuY2hhbmdlZC4gVG8gZ3VhcmFu
-dGVlIHRoYXQgbm8gZmVuY2VzIGFyZSBsb3N0LCB0aGlzCisJICogICBuZXcgZmVuY2UgbXVzdCBz
-aWduYWwgb25seSBhZnRlciB0aGUgcHJldmlvdXMgZXhjbHVzaXZlIGZlbmNlIGhhcworCSAqICAg
-c2lnbmFsbGVkLiBTaW5jZSB0aGUgc2hhcmVkIGZlbmNlcyBhcmUgc3RheWluZyBpbnRhY3QsIGl0
-IGlzIG5vdAorCSAqICAgbmVjZXNzYXJ5IHRvIG1haW50YWluIGFueSBvcmRlcmluZyBhZ2FpbnN0
-IHRob3NlLiBJZiBzZW1hbnRpY2FsbHkKKwkgKiAgIG9ubHkgYSBuZXcgYWNjZXNzIGlzIGFkZGVk
-IHdpdGhvdXQgYWN0dWFsbHkgdHJlYXRpbmcgdGhlIHByZXZpb3VzCisJICogICBvbmUgYXMgYSBk
-ZXBlbmRlbmN5IHRoZSBleGNsdXNpdmUgZmVuY2VzIGNhbiBiZSBzdHJ1bmcgdG9nZXRoZXIKKwkg
-KiAgIHVzaW5nIHN0cnVjdCBkbWFfZmVuY2VfY2hhaW4uCisJICoKKwkgKiBOb3RlIHRoYXQgYWN0
-dWFsIHNlbWFudGljcyBvZiB3aGF0IGFuIGV4Y2x1c2l2ZSBvciBzaGFyZWQgZmVuY2UgbWVhbgor
-CSAqIGlzIGRlZmluZWQgYnkgdGhlIHVzZXIsIGZvciByZXNlcnZhdGlvbiBvYmplY3RzIHNoYXJl
-ZCBhY3Jvc3MgZHJpdmVycworCSAqIHNlZSAmZG1hX2J1Zi5yZXN2LgorCSAqLwogCXN0cnVjdCBk
-bWFfZmVuY2UgX19yY3UgKmZlbmNlX2V4Y2w7CisKKwkvKioKKwkgKiBAZmVuY2U6CisJICoKKwkg
-KiBMaXN0IG9mIGN1cnJlbnQgc2hhcmVkIGZlbmNlcy4KKwkgKgorCSAqIFRoZXJlIGFyZSBubyBv
-cmRlcmluZyBjb25zdHJhaW50cyBvZiBzaGFyZWQgZmVuY2VzIGFnYWluc3QgdGhlCisJICogZXhj
-bHVzaXZlIGZlbmNlIHNsb3QuIElmIGEgd2FpdGVyIG5lZWRzIHRvIHdhaXQgZm9yIGFsbCBhY2Nl
-c3MsIGl0CisJICogaGFzIHRvIHdhaXQgZm9yIGJvdGggc2V0cyBvZiBmZW5jZXMgdG8gc2lnbmFs
-LgorCSAqCisJICogQSBuZXcgZmVuY2UgaXMgYWRkZWQgYnkgY2FsbGluZyBkbWFfcmVzdl9hZGRf
-c2hhcmVkX2ZlbmNlKCkuIFNpbmNlCisJICogdGhpcyBvZnRlbiBuZWVkcyB0byBiZSBkb25lIHBh
-c3QgdGhlIHBvaW50IG9mIG5vIHJldHVybiBpbiBjb21tYW5kCisJICogc3VibWlzc2lvbiBpdCBj
-YW5ub3QgZmFpbCwgYW5kIHRoZXJlZm9yZSBzdWZmaWNpZW50IHNsb3RzIG5lZWQgdG8gYmUKKwkg
-KiByZXNlcnZlZCBieSBjYWxsaW5nIGRtYV9yZXN2X3Jlc2VydmVfc2hhcmVkKCkuCisJICoKKwkg
-KiBOb3RlIHRoYXQgYWN0dWFsIHNlbWFudGljcyBvZiB3aGF0IGFuIGV4Y2x1c2l2ZSBvciBzaGFy
-ZWQgZmVuY2UgbWVhbgorCSAqIGlzIGRlZmluZWQgYnkgdGhlIHVzZXIsIGZvciByZXNlcnZhdGlv
-biBvYmplY3RzIHNoYXJlZCBhY3Jvc3MgZHJpdmVycworCSAqIHNlZSAmZG1hX2J1Zi5yZXN2Lgor
-CSAqLwogCXN0cnVjdCBkbWFfcmVzdl9saXN0IF9fcmN1ICpmZW5jZTsKIH07CiAKQEAgLTk4LDYg
-KzE3MiwxMyBAQCBzdGF0aWMgaW5saW5lIHZvaWQgZG1hX3Jlc3ZfcmVzZXRfc2hhcmVkX21heChz
-dHJ1Y3QgZG1hX3Jlc3YgKm9iaikge30KICAqIHVuZGVmaW5lZCBvcmRlciwgYSAjd3dfYWNxdWly
-ZV9jdHggaXMgcGFzc2VkIHRvIHVud2luZCBpZiBhIGN5Y2xlCiAgKiBpcyBkZXRlY3RlZC4gU2Vl
-IHd3X211dGV4X2xvY2soKSBhbmQgd3dfYWNxdWlyZV9pbml0KCkuIEEgcmVzZXJ2YXRpb24KICAq
-IG9iamVjdCBtYXkgYmUgbG9ja2VkIGJ5IGl0c2VsZiBieSBwYXNzaW5nIE5VTEwgYXMgQGN0eC4K
-KyAqCisgKiBXaGVuIGEgZGllIHNpdHVhdGlvbiBpcyBpbmRpY2F0ZWQgYnkgcmV0dXJuaW5nIC1F
-REVBRExLIGFsbCBsb2NrcyBoZWxkIGJ5CisgKiBAY3R4IG11c3QgYmUgdW5sb2NrZWQgYW5kIHRo
-ZW4gZG1hX3Jlc3ZfbG9ja19zbG93KCkgY2FsbGVkIG9uIEBvYmouCisgKgorICogVW5sb2NrZWQg
-YnkgY2FsbGluZyBkbWFfcmVzdl91bmxvY2soKS4KKyAqCisgKiBTZWUgYWxzbyBkbWFfcmVzdl9s
-b2NrX2ludGVycnVwdGlibGUoKSBmb3IgdGhlIGludGVycnVwdGlibGUgdmFyaWFudC4KICAqLwog
-c3RhdGljIGlubGluZSBpbnQgZG1hX3Jlc3ZfbG9jayhzdHJ1Y3QgZG1hX3Jlc3YgKm9iaiwKIAkJ
-CQlzdHJ1Y3Qgd3dfYWNxdWlyZV9jdHggKmN0eCkKQEAgLTExOSw2ICsyMDAsMTIgQEAgc3RhdGlj
-IGlubGluZSBpbnQgZG1hX3Jlc3ZfbG9jayhzdHJ1Y3QgZG1hX3Jlc3YgKm9iaiwKICAqIHVuZGVm
-aW5lZCBvcmRlciwgYSAjd3dfYWNxdWlyZV9jdHggaXMgcGFzc2VkIHRvIHVud2luZCBpZiBhIGN5
-Y2xlCiAgKiBpcyBkZXRlY3RlZC4gU2VlIHd3X211dGV4X2xvY2soKSBhbmQgd3dfYWNxdWlyZV9p
-bml0KCkuIEEgcmVzZXJ2YXRpb24KICAqIG9iamVjdCBtYXkgYmUgbG9ja2VkIGJ5IGl0c2VsZiBi
-eSBwYXNzaW5nIE5VTEwgYXMgQGN0eC4KKyAqCisgKiBXaGVuIGEgZGllIHNpdHVhdGlvbiBpcyBp
-bmRpY2F0ZWQgYnkgcmV0dXJuaW5nIC1FREVBRExLIGFsbCBsb2NrcyBoZWxkIGJ5CisgKiBAY3R4
-IG11c3QgYmUgdW5sb2NrZWQgYW5kIHRoZW4gZG1hX3Jlc3ZfbG9ja19zbG93X2ludGVycnVwdGli
-bGUoKSBjYWxsZWQgb24KKyAqIEBvYmouCisgKgorICogVW5sb2NrZWQgYnkgY2FsbGluZyBkbWFf
-cmVzdl91bmxvY2soKS4KICAqLwogc3RhdGljIGlubGluZSBpbnQgZG1hX3Jlc3ZfbG9ja19pbnRl
-cnJ1cHRpYmxlKHN0cnVjdCBkbWFfcmVzdiAqb2JqLAogCQkJCQkgICAgICBzdHJ1Y3Qgd3dfYWNx
-dWlyZV9jdHggKmN0eCkKQEAgLTEzNCw2ICsyMjEsOCBAQCBzdGF0aWMgaW5saW5lIGludCBkbWFf
-cmVzdl9sb2NrX2ludGVycnVwdGlibGUoc3RydWN0IGRtYV9yZXN2ICpvYmosCiAgKiBBY3F1aXJl
-cyB0aGUgcmVzZXJ2YXRpb24gb2JqZWN0IGFmdGVyIGEgZGllIGNhc2UuIFRoaXMgZnVuY3Rpb24K
-ICAqIHdpbGwgc2xlZXAgdW50aWwgdGhlIGxvY2sgYmVjb21lcyBhdmFpbGFibGUuIFNlZSBkbWFf
-cmVzdl9sb2NrKCkgYXMKICAqIHdlbGwuCisgKgorICogU2VlIGFsc28gZG1hX3Jlc3ZfbG9ja19z
-bG93X2ludGVycnVwdGlibGUoKSBmb3IgdGhlIGludGVycnVwdGlibGUgdmFyaWFudC4KICAqLwog
-c3RhdGljIGlubGluZSB2b2lkIGRtYV9yZXN2X2xvY2tfc2xvdyhzdHJ1Y3QgZG1hX3Jlc3YgKm9i
-aiwKIAkJCQkgICAgICBzdHJ1Y3Qgd3dfYWNxdWlyZV9jdHggKmN0eCkKQEAgLTE2Nyw3ICsyNTYs
-NyBAQCBzdGF0aWMgaW5saW5lIGludCBkbWFfcmVzdl9sb2NrX3Nsb3dfaW50ZXJydXB0aWJsZShz
-dHJ1Y3QgZG1hX3Jlc3YgKm9iaiwKICAqIGlmIHRoZXkgb3ZlcmxhcCB3aXRoIGEgd3JpdGVyLgog
-ICoKICAqIEFsc28gbm90ZSB0aGF0IHNpbmNlIG5vIGNvbnRleHQgaXMgcHJvdmlkZWQsIG5vIGRl
-YWRsb2NrIHByb3RlY3Rpb24gaXMKLSAqIHBvc3NpYmxlLgorICogcG9zc2libGUsIHdoaWNoIGlz
-IGFsc28gbm90IG5lZWRlZCBmb3IgYSB0cnlsb2NrLgogICoKICAqIFJldHVybnMgdHJ1ZSBpZiB0
-aGUgbG9jayB3YXMgYWNxdWlyZWQsIGZhbHNlIG90aGVyd2lzZS4KICAqLwpAQCAtMTkzLDYgKzI4
-MiwxMSBAQCBzdGF0aWMgaW5saW5lIGJvb2wgZG1hX3Jlc3ZfaXNfbG9ja2VkKHN0cnVjdCBkbWFf
-cmVzdiAqb2JqKQogICoKICAqIFJldHVybnMgdGhlIGNvbnRleHQgdXNlZCB0byBsb2NrIGEgcmVz
-ZXJ2YXRpb24gb2JqZWN0IG9yIE5VTEwgaWYgbm8gY29udGV4dAogICogd2FzIHVzZWQgb3IgdGhl
-IG9iamVjdCBpcyBub3QgbG9ja2VkIGF0IGFsbC4KKyAqCisgKiBXQVJOSU5HOiBUaGlzIGludGVy
-ZmFjZSBpcyBwcmV0dHkgaG9ycmlibGUsIGJ1dCBUVE0gbmVlZHMgaXQgYmVjYXVzZSBpdAorICog
-ZG9lc24ndCBwYXNzIHRoZSBzdHJ1Y3Qgd3dfYWNxdWlyZV9jdHggYXJvdW5kIGluIHNvbWUgdmVy
-eSBsb25nIGNhbGxjaGFpbnMuCisgKiBFdmVyeW9uZSBlbHNlIGp1c3QgdXNlcyBpdCB0byBjaGVj
-ayB3aGV0aGVyIHRoZXkncmUgaG9sZGluZyBhIHJlc2VydmF0aW9uIG9yCisgKiBub3QuCiAgKi8K
-IHN0YXRpYyBpbmxpbmUgc3RydWN0IHd3X2FjcXVpcmVfY3R4ICpkbWFfcmVzdl9sb2NraW5nX2N0
-eChzdHJ1Y3QgZG1hX3Jlc3YgKm9iaikKIHsKLS0gCjIuMzIuMAoKX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QK
-TGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+The DMA-BUF attachment statistics form a subset of the DMA-BUF
+sysfs statistics that recently merged to the drm-misc tree.
+Since there has been a reported a performance regression due to the
+overhead of sysfs directory creation/teardown during
+dma_buf_attach()/dma_buf_detach(), this patch deletes the DMA-BUF
+attachment statistics from sysfs.
+
+Fixes: bdb8d06dfefd (dmabuf: Add the capability to expose DMA-BUF stats
+in sysfs)
+Signed-off-by: Hridya Valsaraju <hridya@google.com>
+---
+
+Hello all,
+
+One of our partners recently reported a perf regression in a driver
+which was being caused due to the overhead of setup/teardown of the
+sysfs attachment statistics in the dma_buf_attach()/dma_buf_detach()
+invocations. Since the driver's latency requirements were of the order
+of microseconds(~100us), the overhead was significant.
+Since this indicates that the solution might not work well for
+all DMA-BUF importers, I think the right thing to do might be to delete
+the same before it reaches upstream and becomes ABI :( I apologize for
+the inconvenience.
+
+This patch is based on the drm-misc-next branch. Please feel free to
+let me know if you would prefer that I send a full revert and new patch that
+adds the rest of the statistics.
+
+Regards,
+Hridya
+
+ .../ABI/testing/sysfs-kernel-dmabuf-buffers   |  28 ----
+ drivers/dma-buf/dma-buf-sysfs-stats.c         | 140 +-----------------
+ drivers/dma-buf/dma-buf-sysfs-stats.h         |  27 ----
+ drivers/dma-buf/dma-buf.c                     |  16 --
+ include/linux/dma-buf.h                       |  17 ---
+ 5 files changed, 4 insertions(+), 224 deletions(-)
+
+diff --git a/Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers b/Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers
+index a243984ed420..5d3bc997dc64 100644
+--- a/Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers
++++ b/Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers
+@@ -22,31 +22,3 @@ KernelVersion:	v5.13
+ Contact:	Hridya Valsaraju <hridya@google.com>
+ Description:	This file is read-only and specifies the size of the DMA-BUF in
+ 		bytes.
+-
+-What:		/sys/kernel/dmabuf/buffers/<inode_number>/attachments
+-Date:		May 2021
+-KernelVersion:	v5.13
+-Contact:	Hridya Valsaraju <hridya@google.com>
+-Description:	This directory will contain subdirectories representing every
+-		attachment of the DMA-BUF.
+-
+-What:		/sys/kernel/dmabuf/buffers/<inode_number>/attachments/<attachment_uid>
+-Date:		May 2021
+-KernelVersion:	v5.13
+-Contact:	Hridya Valsaraju <hridya@google.com>
+-Description:	This directory will contain information on the attached device
+-		and the number of current distinct device mappings.
+-
+-What:		/sys/kernel/dmabuf/buffers/<inode_number>/attachments/<attachment_uid>/device
+-Date:		May 2021
+-KernelVersion:	v5.13
+-Contact:	Hridya Valsaraju <hridya@google.com>
+-Description:	This file is read-only and is a symlink to the attached device's
+-		sysfs entry.
+-
+-What:		/sys/kernel/dmabuf/buffers/<inode_number>/attachments/<attachment_uid>/map_counter
+-Date:		May 2021
+-KernelVersion:	v5.13
+-Contact:	Hridya Valsaraju <hridya@google.com>
+-Description:	This file is read-only and contains a map_counter indicating the
+-		number of distinct device mappings of the attachment.
+diff --git a/drivers/dma-buf/dma-buf-sysfs-stats.c b/drivers/dma-buf/dma-buf-sysfs-stats.c
+index a2638e84199c..053baadcada9 100644
+--- a/drivers/dma-buf/dma-buf-sysfs-stats.c
++++ b/drivers/dma-buf/dma-buf-sysfs-stats.c
+@@ -40,14 +40,11 @@
+  *
+  * * ``/sys/kernel/dmabuf/buffers/<inode_number>/exporter_name``
+  * * ``/sys/kernel/dmabuf/buffers/<inode_number>/size``
+- * * ``/sys/kernel/dmabuf/buffers/<inode_number>/attachments/<attach_uid>/device``
+- * * ``/sys/kernel/dmabuf/buffers/<inode_number>/attachments/<attach_uid>/map_counter``
+  *
+- * The information in the interface can also be used to derive per-exporter and
+- * per-device usage statistics. The data from the interface can be gathered
+- * on error conditions or other important events to provide a snapshot of
+- * DMA-BUF usage. It can also be collected periodically by telemetry to monitor
+- * various metrics.
++ * The information in the interface can also be used to derive per-exporter
++ * statistics. The data from the interface can be gathered on error conditions
++ * or other important events to provide a snapshot of DMA-BUF usage.
++ * It can also be collected periodically by telemetry to monitor various metrics.
+  *
+  * Detailed documentation about the interface is present in
+  * Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers.
+@@ -121,120 +118,6 @@ static struct kobj_type dma_buf_ktype = {
+ 	.default_groups = dma_buf_stats_default_groups,
+ };
+ 
+-#define to_dma_buf_attach_entry_from_kobj(x) container_of(x, struct dma_buf_attach_sysfs_entry, kobj)
+-
+-struct dma_buf_attach_stats_attribute {
+-	struct attribute attr;
+-	ssize_t (*show)(struct dma_buf_attach_sysfs_entry *sysfs_entry,
+-			struct dma_buf_attach_stats_attribute *attr, char *buf);
+-};
+-#define to_dma_buf_attach_stats_attr(x) container_of(x, struct dma_buf_attach_stats_attribute, attr)
+-
+-static ssize_t dma_buf_attach_stats_attribute_show(struct kobject *kobj,
+-						   struct attribute *attr,
+-						   char *buf)
+-{
+-	struct dma_buf_attach_stats_attribute *attribute;
+-	struct dma_buf_attach_sysfs_entry *sysfs_entry;
+-
+-	attribute = to_dma_buf_attach_stats_attr(attr);
+-	sysfs_entry = to_dma_buf_attach_entry_from_kobj(kobj);
+-
+-	if (!attribute->show)
+-		return -EIO;
+-
+-	return attribute->show(sysfs_entry, attribute, buf);
+-}
+-
+-static const struct sysfs_ops dma_buf_attach_stats_sysfs_ops = {
+-	.show = dma_buf_attach_stats_attribute_show,
+-};
+-
+-static ssize_t map_counter_show(struct dma_buf_attach_sysfs_entry *sysfs_entry,
+-				struct dma_buf_attach_stats_attribute *attr,
+-				char *buf)
+-{
+-	return sysfs_emit(buf, "%u\n", sysfs_entry->map_counter);
+-}
+-
+-static struct dma_buf_attach_stats_attribute map_counter_attribute =
+-	__ATTR_RO(map_counter);
+-
+-static struct attribute *dma_buf_attach_stats_default_attrs[] = {
+-	&map_counter_attribute.attr,
+-	NULL,
+-};
+-ATTRIBUTE_GROUPS(dma_buf_attach_stats_default);
+-
+-static void dma_buf_attach_sysfs_release(struct kobject *kobj)
+-{
+-	struct dma_buf_attach_sysfs_entry *sysfs_entry;
+-
+-	sysfs_entry = to_dma_buf_attach_entry_from_kobj(kobj);
+-	kfree(sysfs_entry);
+-}
+-
+-static struct kobj_type dma_buf_attach_ktype = {
+-	.sysfs_ops = &dma_buf_attach_stats_sysfs_ops,
+-	.release = dma_buf_attach_sysfs_release,
+-	.default_groups = dma_buf_attach_stats_default_groups,
+-};
+-
+-void dma_buf_attach_stats_teardown(struct dma_buf_attachment *attach)
+-{
+-	struct dma_buf_attach_sysfs_entry *sysfs_entry;
+-
+-	sysfs_entry = attach->sysfs_entry;
+-	if (!sysfs_entry)
+-		return;
+-
+-	sysfs_delete_link(&sysfs_entry->kobj, &attach->dev->kobj, "device");
+-
+-	kobject_del(&sysfs_entry->kobj);
+-	kobject_put(&sysfs_entry->kobj);
+-}
+-
+-int dma_buf_attach_stats_setup(struct dma_buf_attachment *attach,
+-			       unsigned int uid)
+-{
+-	struct dma_buf_attach_sysfs_entry *sysfs_entry;
+-	int ret;
+-	struct dma_buf *dmabuf;
+-
+-	if (!attach)
+-		return -EINVAL;
+-
+-	dmabuf = attach->dmabuf;
+-
+-	sysfs_entry = kzalloc(sizeof(struct dma_buf_attach_sysfs_entry),
+-			      GFP_KERNEL);
+-	if (!sysfs_entry)
+-		return -ENOMEM;
+-
+-	sysfs_entry->kobj.kset = dmabuf->sysfs_entry->attach_stats_kset;
+-
+-	attach->sysfs_entry = sysfs_entry;
+-
+-	ret = kobject_init_and_add(&sysfs_entry->kobj, &dma_buf_attach_ktype,
+-				   NULL, "%u", uid);
+-	if (ret)
+-		goto kobj_err;
+-
+-	ret = sysfs_create_link(&sysfs_entry->kobj, &attach->dev->kobj,
+-				"device");
+-	if (ret)
+-		goto link_err;
+-
+-	return 0;
+-
+-link_err:
+-	kobject_del(&sysfs_entry->kobj);
+-kobj_err:
+-	kobject_put(&sysfs_entry->kobj);
+-	attach->sysfs_entry = NULL;
+-
+-	return ret;
+-}
+ void dma_buf_stats_teardown(struct dma_buf *dmabuf)
+ {
+ 	struct dma_buf_sysfs_entry *sysfs_entry;
+@@ -243,7 +126,6 @@ void dma_buf_stats_teardown(struct dma_buf *dmabuf)
+ 	if (!sysfs_entry)
+ 		return;
+ 
+-	kset_unregister(sysfs_entry->attach_stats_kset);
+ 	kobject_del(&sysfs_entry->kobj);
+ 	kobject_put(&sysfs_entry->kobj);
+ }
+@@ -290,7 +172,6 @@ int dma_buf_stats_setup(struct dma_buf *dmabuf)
+ {
+ 	struct dma_buf_sysfs_entry *sysfs_entry;
+ 	int ret;
+-	struct kset *attach_stats_kset;
+ 
+ 	if (!dmabuf || !dmabuf->file)
+ 		return -EINVAL;
+@@ -315,21 +196,8 @@ int dma_buf_stats_setup(struct dma_buf *dmabuf)
+ 	if (ret)
+ 		goto err_sysfs_dmabuf;
+ 
+-	/* create the directory for attachment stats */
+-	attach_stats_kset = kset_create_and_add("attachments",
+-						&dmabuf_sysfs_no_uevent_ops,
+-						&sysfs_entry->kobj);
+-	if (!attach_stats_kset) {
+-		ret = -ENOMEM;
+-		goto err_sysfs_attach;
+-	}
+-
+-	sysfs_entry->attach_stats_kset = attach_stats_kset;
+-
+ 	return 0;
+ 
+-err_sysfs_attach:
+-	kobject_del(&sysfs_entry->kobj);
+ err_sysfs_dmabuf:
+ 	kobject_put(&sysfs_entry->kobj);
+ 	dmabuf->sysfs_entry = NULL;
+diff --git a/drivers/dma-buf/dma-buf-sysfs-stats.h b/drivers/dma-buf/dma-buf-sysfs-stats.h
+index 5f4703249117..a49c6e2650cc 100644
+--- a/drivers/dma-buf/dma-buf-sysfs-stats.h
++++ b/drivers/dma-buf/dma-buf-sysfs-stats.h
+@@ -14,23 +14,8 @@ int dma_buf_init_sysfs_statistics(void);
+ void dma_buf_uninit_sysfs_statistics(void);
+ 
+ int dma_buf_stats_setup(struct dma_buf *dmabuf);
+-int dma_buf_attach_stats_setup(struct dma_buf_attachment *attach,
+-			       unsigned int uid);
+-static inline void dma_buf_update_attachment_map_count(struct dma_buf_attachment *attach,
+-						       int delta)
+-{
+-	struct dma_buf_attach_sysfs_entry *entry = attach->sysfs_entry;
+ 
+-	entry->map_counter += delta;
+-}
+ void dma_buf_stats_teardown(struct dma_buf *dmabuf);
+-void dma_buf_attach_stats_teardown(struct dma_buf_attachment *attach);
+-static inline unsigned int dma_buf_update_attach_uid(struct dma_buf *dmabuf)
+-{
+-	struct dma_buf_sysfs_entry *entry = dmabuf->sysfs_entry;
+-
+-	return entry->attachment_uid++;
+-}
+ #else
+ 
+ static inline int dma_buf_init_sysfs_statistics(void)
+@@ -44,19 +29,7 @@ static inline int dma_buf_stats_setup(struct dma_buf *dmabuf)
+ {
+ 	return 0;
+ }
+-static inline int dma_buf_attach_stats_setup(struct dma_buf_attachment *attach,
+-					     unsigned int uid)
+-{
+-	return 0;
+-}
+ 
+ static inline void dma_buf_stats_teardown(struct dma_buf *dmabuf) {}
+-static inline void dma_buf_attach_stats_teardown(struct dma_buf_attachment *attach) {}
+-static inline void dma_buf_update_attachment_map_count(struct dma_buf_attachment *attach,
+-						       int delta) {}
+-static inline unsigned int dma_buf_update_attach_uid(struct dma_buf *dmabuf)
+-{
+-	return 0;
+-}
+ #endif
+ #endif // _DMA_BUF_SYSFS_STATS_H
+diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+index 510b42771974..b1a6db71c656 100644
+--- a/drivers/dma-buf/dma-buf.c
++++ b/drivers/dma-buf/dma-buf.c
+@@ -738,7 +738,6 @@ dma_buf_dynamic_attach(struct dma_buf *dmabuf, struct device *dev,
+ {
+ 	struct dma_buf_attachment *attach;
+ 	int ret;
+-	unsigned int attach_uid;
+ 
+ 	if (WARN_ON(!dmabuf || !dev))
+ 		return ERR_PTR(-EINVAL);
+@@ -764,13 +763,8 @@ dma_buf_dynamic_attach(struct dma_buf *dmabuf, struct device *dev,
+ 	}
+ 	dma_resv_lock(dmabuf->resv, NULL);
+ 	list_add(&attach->node, &dmabuf->attachments);
+-	attach_uid = dma_buf_update_attach_uid(dmabuf);
+ 	dma_resv_unlock(dmabuf->resv);
+ 
+-	ret = dma_buf_attach_stats_setup(attach, attach_uid);
+-	if (ret)
+-		goto err_sysfs;
+-
+ 	/* When either the importer or the exporter can't handle dynamic
+ 	 * mappings we cache the mapping here to avoid issues with the
+ 	 * reservation object lock.
+@@ -797,7 +791,6 @@ dma_buf_dynamic_attach(struct dma_buf *dmabuf, struct device *dev,
+ 			dma_resv_unlock(attach->dmabuf->resv);
+ 		attach->sgt = sgt;
+ 		attach->dir = DMA_BIDIRECTIONAL;
+-		dma_buf_update_attachment_map_count(attach, 1 /* delta */);
+ 	}
+ 
+ 	return attach;
+@@ -814,7 +807,6 @@ dma_buf_dynamic_attach(struct dma_buf *dmabuf, struct device *dev,
+ 	if (dma_buf_is_dynamic(attach->dmabuf))
+ 		dma_resv_unlock(attach->dmabuf->resv);
+ 
+-err_sysfs:
+ 	dma_buf_detach(dmabuf, attach);
+ 	return ERR_PTR(ret);
+ }
+@@ -864,7 +856,6 @@ void dma_buf_detach(struct dma_buf *dmabuf, struct dma_buf_attachment *attach)
+ 			dma_resv_lock(attach->dmabuf->resv, NULL);
+ 
+ 		__unmap_dma_buf(attach, attach->sgt, attach->dir);
+-		dma_buf_update_attachment_map_count(attach, -1 /* delta */);
+ 
+ 		if (dma_buf_is_dynamic(attach->dmabuf)) {
+ 			dmabuf->ops->unpin(attach);
+@@ -878,7 +869,6 @@ void dma_buf_detach(struct dma_buf *dmabuf, struct dma_buf_attachment *attach)
+ 	if (dmabuf->ops->detach)
+ 		dmabuf->ops->detach(dmabuf, attach);
+ 
+-	dma_buf_attach_stats_teardown(attach);
+ 	kfree(attach);
+ }
+ EXPORT_SYMBOL_GPL(dma_buf_detach);
+@@ -1020,10 +1010,6 @@ struct sg_table *dma_buf_map_attachment(struct dma_buf_attachment *attach,
+ 		}
+ 	}
+ #endif /* CONFIG_DMA_API_DEBUG */
+-
+-	if (!IS_ERR(sg_table))
+-		dma_buf_update_attachment_map_count(attach, 1 /* delta */);
+-
+ 	return sg_table;
+ }
+ EXPORT_SYMBOL_GPL(dma_buf_map_attachment);
+@@ -1061,8 +1047,6 @@ void dma_buf_unmap_attachment(struct dma_buf_attachment *attach,
+ 	if (dma_buf_is_dynamic(attach->dmabuf) &&
+ 	    !IS_ENABLED(CONFIG_DMABUF_MOVE_NOTIFY))
+ 		dma_buf_unpin(attach);
+-
+-	dma_buf_update_attachment_map_count(attach, -1 /* delta */);
+ }
+ EXPORT_SYMBOL_GPL(dma_buf_unmap_attachment);
+ 
+diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
+index 2b814fde0d11..678b2006be78 100644
+--- a/include/linux/dma-buf.h
++++ b/include/linux/dma-buf.h
+@@ -444,15 +444,6 @@ struct dma_buf {
+ 	struct dma_buf_sysfs_entry {
+ 		struct kobject kobj;
+ 		struct dma_buf *dmabuf;
+-
+-		/**
+-		 * @sysfs_entry.attachment_uid:
+-		 *
+-		 * This is protected by the dma_resv_lock() on @resv and is
+-		 * incremented on each attach.
+-		 */
+-		unsigned int attachment_uid;
+-		struct kset *attach_stats_kset;
+ 	} *sysfs_entry;
+ #endif
+ };
+@@ -504,7 +495,6 @@ struct dma_buf_attach_ops {
+  * @importer_ops: importer operations for this attachment, if provided
+  * dma_buf_map/unmap_attachment() must be called with the dma_resv lock held.
+  * @importer_priv: importer specific attachment data.
+- * @sysfs_entry: For exposing information about this attachment in sysfs.
+  *
+  * This structure holds the attachment information between the dma_buf buffer
+  * and its user device(s). The list contains one attachment struct per device
+@@ -525,13 +515,6 @@ struct dma_buf_attachment {
+ 	const struct dma_buf_attach_ops *importer_ops;
+ 	void *importer_priv;
+ 	void *priv;
+-#ifdef CONFIG_DMABUF_SYSFS_STATS
+-	/* for sysfs stats */
+-	struct dma_buf_attach_sysfs_entry {
+-		struct kobject kobj;
+-		unsigned int map_counter;
+-	} *sysfs_entry;
+-#endif
+ };
+ 
+ /**
+-- 
+2.32.0.93.g670b81a890-goog
+
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
