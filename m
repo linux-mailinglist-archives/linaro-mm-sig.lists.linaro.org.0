@@ -2,79 +2,65 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5DEF3D0192
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jul 2021 20:24:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED5FC3D0197
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jul 2021 20:26:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 13C4061945
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jul 2021 18:24:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A6ADD61A48
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jul 2021 18:26:54 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 6A5326216E; Tue, 20 Jul 2021 18:24:43 +0000 (UTC)
+	id BB1E762171; Tue, 20 Jul 2021 18:26:52 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 71EF061434;
-	Tue, 20 Jul 2021 18:24:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0517061434;
+	Tue, 20 Jul 2021 18:26:50 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 7BA7460C0C
- for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 18:24:39 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id EF71060C0C
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 18:26:47 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 7731861434; Tue, 20 Jul 2021 18:24:39 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
- [209.85.128.43])
- by lists.linaro.org (Postfix) with ESMTPS id 6C65260C0C
- for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 18:24:37 +0000 (UTC)
-Received: by mail-wm1-f43.google.com with SMTP id n4so12811528wms.1
- for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 11:24:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=fZortMfUJ6sP9V4mv+JXrwjkFsuKqC8sCrT1IfxE2IQ=;
- b=XUVux13s5c4XE3la6sNsDVnV5wsJPDf/esKROaTiOV8tSVRTmYXOJTY8JKuikYyZZy
- XNq6hOye5f5dgGbDzB+YonO8zlet92Ln7TuqPcypBNArxSXUeL0ON7mgBEcnbSwB8z+o
- Y/YfhB3M9AvmOGssbFid8ROltS8CDgfGo1RHw=
+ id E4E3761434; Tue, 20 Jul 2021 18:26:47 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+ [209.85.128.44])
+ by lists.linaro.org (Postfix) with ESMTPS id DCB9260C0C
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 18:26:45 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id g12so12787914wme.2
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 11:26:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc:content-transfer-encoding;
+ bh=6pTsiDANPzE+73zIk+e131AENTpGYx6/K/T08KfKqSY=;
+ b=rJHFVliEPX28A8ivueoovRHJCaPLx1JYakGI+Kltutr3lDY7jcMM0dlibAXtgsSlxx
+ VNidQjxvWhTQSDem0TW46RIHJTCJfMcnIl9KgO77f4doAJuLSdJvRwR/MUaV8YWwZVJt
+ Ntl1JK05U8LhxeQJwa07Deb0fyazNlHhgcjf5dyF2QMjMCrY7Elo9n+ZhP6ppBwqHrDP
+ ByTvSHCMrXuF7YmWynnI2hl+1drw8/QUP2yjRR4bXZW9WschJmd3ggESfnAPMMaWShLh
+ DWkp6xdJoV31GVjmyCNVYfiNAsmk2J2H14dSuoRLWqAXw4amZ1f9aE+uSocks9ogetOa
+ ndug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=fZortMfUJ6sP9V4mv+JXrwjkFsuKqC8sCrT1IfxE2IQ=;
- b=bqxmcgkk30CBVx+w1MZBnZtQOJwYohtQ36rRDY4r0g76+87u30ylj2+JpDPMobdxk7
- V+4Z4Bf/sxAoolIiHUTwzDzfmAQKX8EVaRVlcRgFFa59FiSZv8jbFV/A0zFhq/QB9Agh
- ScTuFGryW74cS+om9++MQ0jWQhE8XPKU0BjKN5DsZROvZuqI7r2hXOw4kzFm2Exbyo0l
- Q9jjbOkBeHCiSG1Y7Qop2j3CDQwUGy28vT4yYmoXyx8a7BFZrcZJCYOCc+kPjE/7P5ra
- VGZ8AEXTA1p9HK82a6XAR94oNVaMfI8Bu7+J9gnbOTkymNT/XvFyNWxgKIKQQWkO8aWz
- kv9w==
-X-Gm-Message-State: AOAM533BvsuZzM4AJLK8hqrynO7vPIICEJH9aBN5thfWY/snQTr6rnCk
- PlXqCQ2HRQ8IOWzFHXHUkxDGIA==
-X-Google-Smtp-Source: ABdhPJxJxuXAAbG2g8VfRjxtITgkDdi2Iec/QZfgBKKrqV+PIsMHUm2HQjbGOW/zVNRBi991fnD58w==
-X-Received: by 2002:a05:600c:2f1a:: with SMTP id
- r26mr38841077wmn.41.1626805476463; 
- Tue, 20 Jul 2021 11:24:36 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id q19sm2943917wmq.38.2021.07.20.11.24.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Jul 2021 11:24:33 -0700 (PDT)
-Date: Tue, 20 Jul 2021 20:24:31 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
-Message-ID: <YPcU3wJK7kC5b7kv@phenom.ffwll.local>
-Mail-Followup-To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, airlied@linux.ie, sumit.semwal@linaro.org,
- christian.koenig@amd.com, dri-devel@lists.freedesktop.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
- skhan@linuxfoundation.org, gregkh@linuxfoundation.org,
- linux-kernel-mentees@lists.linuxfoundation.org,
- emil.l.velikov@gmail.com
-References: <20210712043508.11584-1-desmondcheongzx@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=6pTsiDANPzE+73zIk+e131AENTpGYx6/K/T08KfKqSY=;
+ b=q14JFGsGaFhkVXADp8ikHp8RbfxRFvTGR3Vxqi/HkDqNnDyf0VWyox32HI56wknoNS
+ x3QDS+tbIauTnCKiKohWS5slO12cGMxFlzWz+mxvfW8y2xKwyX+Xncysx7lemHLVIeZ7
+ ZmZUM1KYiWBWXuMMPTlY4rV0+bYTIHJ/e2fyKswtJzXccAEIV+P7pbYMct2Uz5VhE8VD
+ eyPnTRCB0wz7cCVVEc8krm/mvClUlm/xfzCFNLgt+LwEPgi3YvbzZ1eF1eDQ4BT+E5NH
+ TQ74CBwVroKEQLPQdPq/s6pRLvYOVJON15A/RIONOuOyBlbXCBDWDoC+Trvq31W46ARt
+ SWUw==
+X-Gm-Message-State: AOAM530R0bcjf+QoQFzG9zSArxhbYBOT+U4xscKPCGS+43w/2HRyW32Z
+ mgZLRgEFbHtxJAtEaUHN3h5exNJb7QdGtg8d+YU=
+X-Google-Smtp-Source: ABdhPJy1XY32wnst0FtwN54MJ1oMF78e5Su0jyufLkmfk9sQSnHd9sq8CidwadgCIEKN1YZgSPzBhcVIfLMz1Nyg8fU=
+X-Received: by 2002:a1c:7c05:: with SMTP id x5mr39566638wmc.123.1626805604844; 
+ Tue, 20 Jul 2021 11:26:44 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210712043508.11584-1-desmondcheongzx@gmail.com>
-X-Operating-System: Linux phenom 5.10.0-7-amd64 
+References: <20210720150716.1213775-1-robdclark@gmail.com>
+ <60ffb6f3-e932-d9af-3b90-81adf0c15250@gmail.com>
+In-Reply-To: <60ffb6f3-e932-d9af-3b90-81adf0c15250@gmail.com>
+From: Rob Clark <robdclark@gmail.com>
+Date: Tue, 20 Jul 2021 11:30:53 -0700
+Message-ID: <CAF6AEGtOW3EjZWo36ij8U1om=gAqvg8CSkJJq2GkyHFGWUH4kQ@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v8 0/5] drm: address potential UAF bugs
- with drm_master ptrs
+Subject: Re: [Linaro-mm-sig] [PATCH] drm/msm: Add fence->wait() op
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,110 +73,108 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: tzimmermann@suse.de, airlied@linux.ie, gregkh@linuxfoundation.org,
- intel-gfx@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
- linux-kernel@vger.kernel.org, mripard@kernel.org, christian.koenig@amd.com,
- linaro-mm-sig@lists.linaro.org, emil.l.velikov@gmail.com,
- dri-devel@lists.freedesktop.org, daniel@ffwll.ch, skhan@linuxfoundation.org,
- linux-kernel-mentees@lists.linuxfoundation.org, linux-media@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: Rob Clark <robdclark@chromium.org>, David Airlie <airlied@linux.ie>,
+ "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
+ open list <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Sean Paul <sean@poorly.run>, Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Mon, Jul 12, 2021 at 12:35:03PM +0800, Desmond Cheong Zhi Xi wrote:
-> Hi,
-> 
-> In the previous thread on this series we decided to remove a patch that was violating a lockdep requirement in drm_lease. In addition to this change, I took a closer look at the CI logs for the Basic Acceptance Tests and noticed that another regression was introduced. The new patch 2 is a response to this.
-> 
-> Overall, this series addresses potential use-after-free errors when dereferencing pointers to struct drm_master. These were identified after one such bug was caught by Syzbot in drm_getunique():
-> https://syzkaller.appspot.com/bug?id=148d2f1dfac64af52ffd27b661981a540724f803
-> 
-> The series is broken up into five patches:
-> 
-> 1. Move a call to drm_is_current_master() out from a section locked by &dev->mode_config.mutex in drm_mode_getconnector(). This patch does not apply to stable.
-> 
-> 2. Move a call to drm_is_current_master() out from the RCU read-side critical section in drm_clients_info().
-> 
-> 3. Implement a locked version of drm_is_current_master() function that's used within drm_auth.c.
-> 
-> 4. Serialize drm_file.master by introducing a new spinlock that's held whenever the value of drm_file.master changes.
-> 
-> 5. Identify areas in drm_lease.c where pointers to struct drm_master are dereferenced, and ensure that the master pointers are not freed during use.
-> 
-> v7 -> v8:
-> - Remove the patch that moves the call to _drm_lease_held out from the section locked by &dev->mode_config.idr_mutex in __drm_mode_object_find. This patch violated an existing lockdep requirement as reported by the intel-gfx CI.
-> - Added a new patch that moves a call to drm_is_current_master out from the RCU critical section in drm_clients_info. This was reported by the intel-gfx CI.
-> 
-> v6 -> v7:
-> - Modify code alignment as suggested by the intel-gfx CI.
-> - Add a new patch to the series that adds a new lock to serialize drm_file.master, in response to the lockdep splat by the intel-gfx CI.
-> - Update drm_file_get_master to use the new drm_file.master_lock instead of drm_device.master_mutex, in response to the lockdep splat by the intel-gfx CI.
-> 
-> v5 -> v6:
-> - Add a new patch to the series that moves the call to _drm_lease_held out from the section locked by &dev->mode_config.idr_mutex in __drm_mode_object_find.
-> - Clarify the kerneldoc for dereferencing drm_file.master, as suggested by Daniel Vetter.
-> - Refactor error paths with goto labels so that each function only has a single drm_master_put(), as suggested by Emil Velikov.
-> - Modify comparisons to NULL into "!master", as suggested by the intel-gfx CI.
-> 
-> v4 -> v5:
-> - Add a new patch to the series that moves the call to drm_is_current_master in drm_mode_getconnector out from the section locked by &dev->mode_config.mutex.
-> - Additionally, added a missing semicolon to the patch, caught by the intel-gfx CI.
-> 
-> v3 -> v4:
-> - Move the call to drm_is_current_master in drm_mode_getconnector out from the section locked by &dev->mode_config.mutex. As suggested by Daniel Vetter. This avoids a circular lock lock dependency as reported here https://patchwork.freedesktop.org/patch/440406/
-> - Inside drm_is_current_master, instead of grabbing &fpriv->master->dev->master_mutex, we grab &fpriv->minor->dev->master_mutex to avoid dereferencing a null ptr if fpriv->master is not set.
-> - Modify kerneldoc formatting for drm_file.master, as suggested by Daniel Vetter.
-> - Additionally, add a file_priv->master NULL check inside drm_file_get_master, and handle the NULL result accordingly in drm_lease.c. As suggested by Daniel Vetter.
-> 
-> v2 -> v3:
-> - Move the definition of drm_is_current_master and the _locked version higher up in drm_auth.c to avoid needing a forward declaration of drm_is_current_master_locked. As suggested by Daniel Vetter.
-> - Instead of leaking drm_device.master_mutex into drm_lease.c to protect drm_master pointers, add a new drm_file_get_master() function that returns drm_file->master while increasing its reference count, to prevent drm_file->master from being freed. As suggested by Daniel Vetter.
-> 
-> v1 -> v2:
-> - Move the lock and assignment before the DRM_DEBUG_LEASE in drm_mode_get_lease_ioctl, as suggested by Emil Velikov.
-
-Apologies for the delay, I missed your series. Maybe just ping next time
-around there's silence.
-
-Looks all great, merged to drm-misc-next. Given how complex this was I'm
-vary of just pushing this to -fixes without some solid testing.
-
-One thing I noticed is that drm_is_current_master could just use the
-spinlock, since it's only doing a read access. Care to type up that patch?
-
-Also, do you plan to look into that idea we've discussed to flush pending
-access when we revoke a master or a lease? I think that would be really
-nice improvement here.
--Daniel
-
-> 
-> Desmond Cheong Zhi Xi (5):
->   drm: avoid circular locks in drm_mode_getconnector
->   drm: avoid blocking in drm_clients_info's rcu section
->   drm: add a locked version of drm_is_current_master
->   drm: serialize drm_file.master with a new spinlock
->   drm: protect drm_master pointers in drm_lease.c
-> 
->  drivers/gpu/drm/drm_auth.c      | 93 ++++++++++++++++++++++++---------
->  drivers/gpu/drm/drm_connector.c |  5 +-
->  drivers/gpu/drm/drm_debugfs.c   |  3 +-
->  drivers/gpu/drm/drm_file.c      |  1 +
->  drivers/gpu/drm/drm_lease.c     | 81 +++++++++++++++++++++-------
->  include/drm/drm_auth.h          |  1 +
->  include/drm/drm_file.h          | 18 +++++--
->  7 files changed, 152 insertions(+), 50 deletions(-)
-> 
-> -- 
-> 2.25.1
-> 
-
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+T24gVHVlLCBKdWwgMjAsIDIwMjEgYXQgMTE6MDMgQU0gQ2hyaXN0aWFuIEvDtm5pZwo8Y2tvZW5p
+Zy5sZWljaHR6dW1lcmtlbkBnbWFpbC5jb20+IHdyb3RlOgo+Cj4gSGkgUm9iLAo+Cj4gQW0gMjAu
+MDcuMjEgdW0gMTc6MDcgc2NocmllYiBSb2IgQ2xhcms6Cj4gPiBGcm9tOiBSb2IgQ2xhcmsgPHJv
+YmRjbGFya0BjaHJvbWl1bS5vcmc+Cj4gPgo+ID4gU29tZWhvdyB3ZSBoYWQgbmVpdGhlciAtPndh
+aXQoKSBub3IgZG1hX2ZlbmNlX3NpZ25hbCgpIGNhbGxzLCBhbmQgbm8KPiA+IG9uZSBub3RpY2Vk
+LiAgT29wcy4KPgo+Cj4gSSdtIG5vdCBzdXJlIGlmIHRoYXQgaXMgYSBnb29kIGlkZWEuCj4KPiBU
+aGUgZG1hX2ZlbmNlLT53YWl0KCkgY2FsbGJhY2sgaXMgcHJldHR5IG11Y2ggZGVwcmVjYXRlZCBh
+bmQgc2hvdWxkIG5vdAo+IGJlIHVzZWQgYW55IG1vcmUuCj4KPiBXaGF0IGV4YWN0bHkgZG8geW91
+IG5lZWQgdGhhdCBmb3I/CgpXZWxsLCB0aGUgYWx0ZXJuYXRpdmUgaXMgdG8gdHJhY2sgdGhlIHNl
+dCBvZiBmZW5jZXMgd2hpY2ggaGF2ZQpzaWduYWxsaW5nIGVuYWJsZWQsIGFuZCB0aGVuIGZpZ3Vy
+ZSBvdXQgd2hpY2ggb25lcyB0byBzaWduYWwsIHdoaWNoCnNlZW1zIGxpa2UgYSBsb3QgbW9yZSB3
+b3JrLCB2cyBqdXN0IHJlLXB1cnBvc2luZyB0aGUgd2FpdAppbXBsZW1lbnRhdGlvbiB3ZSBhbHJl
+YWR5IGhhdmUgZm9yIG5vbi1kbWFfZmVuY2UgY2FzZXMgOy0pCgpXaHkgaXMgdGhlIC0+d2FpdCgp
+IGNhbGxiYWNrIChwcmV0dHkgbXVjaCkgZGVwcmVjYXRlZD8KCkJSLAotUgoKPiBSZWdhcmRzLAo+
+IENocmlzdGlhbi4KPgo+ID4KPiA+IE5vdGUgdGhhdCB0aGlzIHJlbW92ZXMgdGhlICF0aW1lb3V0
+IGNhc2UsIHdoaWNoIGhhcyBub3QgYmVlbiB1c2VkIGluCj4gPiBhIGxvbmcgdGltZS4KPgo+Cj4g
+Pgo+ID4gU2lnbmVkLW9mZi1ieTogUm9iIENsYXJrIDxyb2JkY2xhcmtAY2hyb21pdW0ub3JnPgo+
+ID4gLS0tCj4gPiAgIGRyaXZlcnMvZ3B1L2RybS9tc20vbXNtX2ZlbmNlLmMgfCA1OSArKysrKysr
+KysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0KPiA+ICAgMSBmaWxlIGNoYW5nZWQsIDM0IGluc2Vy
+dGlvbnMoKyksIDI1IGRlbGV0aW9ucygtKQo+ID4KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dw
+dS9kcm0vbXNtL21zbV9mZW5jZS5jIGIvZHJpdmVycy9ncHUvZHJtL21zbS9tc21fZmVuY2UuYwo+
+ID4gaW5kZXggY2Q1OWE1OTE4MDM4Li44ZWU5NmI5MGRlZDYgMTAwNjQ0Cj4gPiAtLS0gYS9kcml2
+ZXJzL2dwdS9kcm0vbXNtL21zbV9mZW5jZS5jCj4gPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbXNt
+L21zbV9mZW5jZS5jCj4gPiBAQCAtMzgsMTEgKzM4LDEwIEBAIHN0YXRpYyBpbmxpbmUgYm9vbCBm
+ZW5jZV9jb21wbGV0ZWQoc3RydWN0IG1zbV9mZW5jZV9jb250ZXh0ICpmY3R4LCB1aW50MzJfdCBm
+ZW5jCj4gPiAgICAgICByZXR1cm4gKGludDMyX3QpKGZjdHgtPmNvbXBsZXRlZF9mZW5jZSAtIGZl
+bmNlKSA+PSAwOwo+ID4gICB9Cj4gPgo+ID4gLS8qIGxlZ2FjeSBwYXRoIGZvciBXQUlUX0ZFTkNF
+IGlvY3RsOiAqLwo+ID4gLWludCBtc21fd2FpdF9mZW5jZShzdHJ1Y3QgbXNtX2ZlbmNlX2NvbnRl
+eHQgKmZjdHgsIHVpbnQzMl90IGZlbmNlLAo+ID4gLSAgICAgICAgICAgICBrdGltZV90ICp0aW1l
+b3V0LCBib29sIGludGVycnVwdGlibGUpCj4gPiArc3RhdGljIHNpZ25lZCBsb25nIHdhaXRfZmVu
+Y2Uoc3RydWN0IG1zbV9mZW5jZV9jb250ZXh0ICpmY3R4LCB1aW50MzJfdCBmZW5jZSwKPiA+ICsg
+ICAgICAgICAgICAgc2lnbmVkIGxvbmcgcmVtYWluaW5nX2ppZmZpZXMsIGJvb2wgaW50ZXJydXB0
+aWJsZSkKPiA+ICAgewo+ID4gLSAgICAgaW50IHJldDsKPiA+ICsgICAgIHNpZ25lZCBsb25nIHJl
+dDsKPiA+Cj4gPiAgICAgICBpZiAoZmVuY2UgPiBmY3R4LT5sYXN0X2ZlbmNlKSB7Cj4gPiAgICAg
+ICAgICAgICAgIERSTV9FUlJPUl9SQVRFTElNSVRFRCgiJXM6IHdhaXRpbmcgb24gaW52YWxpZCBm
+ZW5jZTogJXUgKG9mICV1KVxuIiwKPiA+IEBAIC01MCwzMyArNDksMzQgQEAgaW50IG1zbV93YWl0
+X2ZlbmNlKHN0cnVjdCBtc21fZmVuY2VfY29udGV4dCAqZmN0eCwgdWludDMyX3QgZmVuY2UsCj4g
+PiAgICAgICAgICAgICAgIHJldHVybiAtRUlOVkFMOwo+ID4gICAgICAgfQo+ID4KPiA+IC0gICAg
+IGlmICghdGltZW91dCkgewo+ID4gLSAgICAgICAgICAgICAvKiBuby13YWl0OiAqLwo+ID4gLSAg
+ICAgICAgICAgICByZXQgPSBmZW5jZV9jb21wbGV0ZWQoZmN0eCwgZmVuY2UpID8gMCA6IC1FQlVT
+WTsKPiA+ICsgICAgIGlmIChpbnRlcnJ1cHRpYmxlKSB7Cj4gPiArICAgICAgICAgICAgIHJldCA9
+IHdhaXRfZXZlbnRfaW50ZXJydXB0aWJsZV90aW1lb3V0KGZjdHgtPmV2ZW50LAo+ID4gKyAgICAg
+ICAgICAgICAgICAgICAgIGZlbmNlX2NvbXBsZXRlZChmY3R4LCBmZW5jZSksCj4gPiArICAgICAg
+ICAgICAgICAgICAgICAgcmVtYWluaW5nX2ppZmZpZXMpOwo+ID4gICAgICAgfSBlbHNlIHsKPiA+
+IC0gICAgICAgICAgICAgdW5zaWduZWQgbG9uZyByZW1haW5pbmdfamlmZmllcyA9IHRpbWVvdXRf
+dG9famlmZmllcyh0aW1lb3V0KTsKPiA+IC0KPiA+IC0gICAgICAgICAgICAgaWYgKGludGVycnVw
+dGlibGUpCj4gPiAtICAgICAgICAgICAgICAgICAgICAgcmV0ID0gd2FpdF9ldmVudF9pbnRlcnJ1
+cHRpYmxlX3RpbWVvdXQoZmN0eC0+ZXZlbnQsCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBmZW5jZV9jb21wbGV0ZWQoZmN0eCwgZmVuY2UpLAo+ID4gLSAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgcmVtYWluaW5nX2ppZmZpZXMpOwo+ID4gLSAgICAgICAgICAgICBlbHNlCj4g
+PiAtICAgICAgICAgICAgICAgICAgICAgcmV0ID0gd2FpdF9ldmVudF90aW1lb3V0KGZjdHgtPmV2
+ZW50LAo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmVuY2VfY29tcGxldGVkKGZj
+dHgsIGZlbmNlKSwKPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlbWFpbmluZ19q
+aWZmaWVzKTsKPiA+IC0KPiA+IC0gICAgICAgICAgICAgaWYgKHJldCA9PSAwKSB7Cj4gPiAtICAg
+ICAgICAgICAgICAgICAgICAgREJHKCJ0aW1lb3V0IHdhaXRpbmcgZm9yIGZlbmNlOiAldSAoY29t
+cGxldGVkOiAldSkiLAo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBm
+ZW5jZSwgZmN0eC0+Y29tcGxldGVkX2ZlbmNlKTsKPiA+IC0gICAgICAgICAgICAgICAgICAgICBy
+ZXQgPSAtRVRJTUVET1VUOwo+ID4gLSAgICAgICAgICAgICB9IGVsc2UgaWYgKHJldCAhPSAtRVJF
+U1RBUlRTWVMpIHsKPiA+IC0gICAgICAgICAgICAgICAgICAgICByZXQgPSAwOwo+ID4gLSAgICAg
+ICAgICAgICB9Cj4gPiArICAgICAgICAgICAgIHJldCA9IHdhaXRfZXZlbnRfdGltZW91dChmY3R4
+LT5ldmVudCwKPiA+ICsgICAgICAgICAgICAgICAgICAgICBmZW5jZV9jb21wbGV0ZWQoZmN0eCwg
+ZmVuY2UpLAo+ID4gKyAgICAgICAgICAgICAgICAgICAgIHJlbWFpbmluZ19qaWZmaWVzKTsKPiA+
+ICsgICAgIH0KPiA+ICsKPiA+ICsgICAgIGlmIChyZXQgPT0gMCkgewo+ID4gKyAgICAgICAgICAg
+ICBEQkcoInRpbWVvdXQgd2FpdGluZyBmb3IgZmVuY2U6ICV1IChjb21wbGV0ZWQ6ICV1KSIsCj4g
+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmZW5jZSwgZmN0eC0+Y29tcGxldGVkX2Zl
+bmNlKTsKPiA+ICsgICAgICAgICAgICAgcmV0ID0gLUVUSU1FRE9VVDsKPiA+ICsgICAgIH0gZWxz
+ZSBpZiAocmV0ICE9IC1FUkVTVEFSVFNZUykgewo+ID4gKyAgICAgICAgICAgICByZXQgPSAwOwo+
+ID4gICAgICAgfQo+ID4KPiA+ICAgICAgIHJldHVybiByZXQ7Cj4gPiAgIH0KPiA+Cj4gPiArLyog
+bGVnYWN5IHBhdGggZm9yIFdBSVRfRkVOQ0UgaW9jdGw6ICovCj4gPiAraW50IG1zbV93YWl0X2Zl
+bmNlKHN0cnVjdCBtc21fZmVuY2VfY29udGV4dCAqZmN0eCwgdWludDMyX3QgZmVuY2UsCj4gPiAr
+ICAgICAgICAgICAgIGt0aW1lX3QgKnRpbWVvdXQsIGJvb2wgaW50ZXJydXB0aWJsZSkKPiA+ICt7
+Cj4gPiArICAgICByZXR1cm4gd2FpdF9mZW5jZShmY3R4LCBmZW5jZSwgdGltZW91dF90b19qaWZm
+aWVzKHRpbWVvdXQpLCBpbnRlcnJ1cHRpYmxlKTsKPiA+ICt9Cj4gPiArCj4gPiAgIC8qIGNhbGxl
+ZCBmcm9tIHdvcmtxdWV1ZSAqLwo+ID4gICB2b2lkIG1zbV91cGRhdGVfZmVuY2Uoc3RydWN0IG1z
+bV9mZW5jZV9jb250ZXh0ICpmY3R4LCB1aW50MzJfdCBmZW5jZSkKPiA+ICAgewo+ID4gQEAgLTEx
+NCwxMCArMTE0LDE5IEBAIHN0YXRpYyBib29sIG1zbV9mZW5jZV9zaWduYWxlZChzdHJ1Y3QgZG1h
+X2ZlbmNlICpmZW5jZSkKPiA+ICAgICAgIHJldHVybiBmZW5jZV9jb21wbGV0ZWQoZi0+ZmN0eCwg
+Zi0+YmFzZS5zZXFubyk7Cj4gPiAgIH0KPiA+Cj4gPiArc3RhdGljIHNpZ25lZCBsb25nIG1zbV9m
+ZW5jZV93YWl0KHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlLCBib29sIGludHIsCj4gPiArICAgICAg
+ICAgICAgIHNpZ25lZCBsb25nIHRpbWVvdXQpCj4gPiArewo+ID4gKyAgICAgc3RydWN0IG1zbV9m
+ZW5jZSAqZiA9IHRvX21zbV9mZW5jZShmZW5jZSk7Cj4gPiArCj4gPiArICAgICByZXR1cm4gd2Fp
+dF9mZW5jZShmLT5mY3R4LCBmZW5jZS0+c2Vxbm8sIHRpbWVvdXQsIGludHIpOwo+ID4gK30KPiA+
+ICsKPiA+ICAgc3RhdGljIGNvbnN0IHN0cnVjdCBkbWFfZmVuY2Vfb3BzIG1zbV9mZW5jZV9vcHMg
+PSB7Cj4gPiAgICAgICAuZ2V0X2RyaXZlcl9uYW1lID0gbXNtX2ZlbmNlX2dldF9kcml2ZXJfbmFt
+ZSwKPiA+ICAgICAgIC5nZXRfdGltZWxpbmVfbmFtZSA9IG1zbV9mZW5jZV9nZXRfdGltZWxpbmVf
+bmFtZSwKPiA+ICAgICAgIC5zaWduYWxlZCA9IG1zbV9mZW5jZV9zaWduYWxlZCwKPiA+ICsgICAg
+IC53YWl0ID0gbXNtX2ZlbmNlX3dhaXQsCj4gPiAgIH07Cj4gPgo+ID4gICBzdHJ1Y3QgZG1hX2Zl
+bmNlICoKPgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpM
+aW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcK
+aHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4vbGlzdGluZm8vbGluYXJvLW1tLXNpZwo=
