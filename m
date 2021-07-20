@@ -2,131 +2,91 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id A69273CF884
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jul 2021 13:01:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EAB23CFB92
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jul 2021 16:07:39 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1FCB2611EB
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jul 2021 11:01:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E807962175
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jul 2021 14:07:37 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id DFD2C612A6; Tue, 20 Jul 2021 11:01:01 +0000 (UTC)
+	id 7DF80619C8; Tue, 20 Jul 2021 14:07:35 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EA374610DB;
-	Tue, 20 Jul 2021 11:00:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A0696617EF;
+	Tue, 20 Jul 2021 14:07:32 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id CF1E8604FE
- for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 11:00:56 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 4C47C617D8
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 14:07:31 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id C3E5D610DB; Tue, 20 Jul 2021 11:00:56 +0000 (UTC)
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam08on2089.outbound.protection.outlook.com [40.107.102.89])
- by lists.linaro.org (Postfix) with ESMTPS id A9E4C604FE
- for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 11:00:54 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HrIim88j1tuepynqupZvAXB0P+0UpaDyWK6VoQG3W8GknjlcqPLRcMrr0iF66kNz89w2EhD2uLdi0XvwWLl5Um+Yw/ADn6TIcFE8TjYfgPOmZOEgOIgV5pZyQ8hPumUzM44k0Npb20swye9hrv921hVFeyZxDoYXbRykTwYBrjIco6YA552vn0b2b881BbahyTC+rWEL0186xSJCB6I8QRbOL5NoGXqY7un3uDLQQImqJ0+xC3NWDdUv9tYA8FdaNPLKFoOYYOrKGgg0GkXLVHlSLwxPY6f0WtmSODhI11aGAD1Q7ijBeUZXwSNtPXOl3zHYd195vf7xlsZxuofoIw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PvaE8AtmHGcKjsyBBUGafXkOuJRv4aBKMcqGzECqITY=;
- b=fx6rw7GifFdK5Q8sxkfF2WXrB4Jv31W45J+ag/gFWYXfTzvCxNaTmh571svXRnWNVk8Pz8wii/8OGYq2sieTF6A4W3Vo2zrV3UijxvLJEtLStYRIC/WIMN4umqA1dNcPIF8/iEk0uqLlr2TB36QyjYaCtXoSkRW3aljtx5vBFAap+45enDjLAmwDww2fMk8iIaFaFAMam7VYE7lqyWF9lwIJJsxkKR8qvuJmmdqEAm9iyicOPym0rUQVhmpdt8BEHCiO12UOMFV5V2xntnPIhBW16AhXUvEvCjLZv3cGRFh/4nUfxDukdWBg5kHb+jhwWIRtnQ4l3xR+20I0D97+Bg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PvaE8AtmHGcKjsyBBUGafXkOuJRv4aBKMcqGzECqITY=;
- b=0gfxrXBh5PnYOaIB7d+MKhnK3LUcvPpoN6E6vCIGK9AG60iitW+gc/0hXWGssDueNkOAget9BsMpiXn6ruvSWdrSQDoAAJK6w2BHMlBIzXI0srys+XohSU8eF4zwT7vnX3JHKIGpsx8Fj2QmtOMfNLiyarNPeY2X/tuZnB/ks5E=
-Authentication-Results: mediatek.com; dkim=none (message not signed)
- header.d=none;mediatek.com; dmarc=none action=none header.from=amd.com;
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
- by MN2PR12MB3902.namprd12.prod.outlook.com (2603:10b6:208:169::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4331.23; Tue, 20 Jul
- 2021 11:00:51 +0000
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::6c9e:1e08:7617:f756]) by MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::6c9e:1e08:7617:f756%5]) with mapi id 15.20.4331.034; Tue, 20 Jul 2021
- 11:00:50 +0000
-To: guangming.cao@mediatek.com
-References: <8d7dfc78-aa85-48b5-2828-21ec6b463ac3@amd.com>
- <20210720103158.83439-1-guangming.cao@mediatek.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-Message-ID: <a12fc0c7-ed60-0724-fa56-097cb9a694ee@amd.com>
-Date: Tue, 20 Jul 2021 13:00:37 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
-In-Reply-To: <20210720103158.83439-1-guangming.cao@mediatek.com>
-Content-Language: en-US
-X-ClientProxiedBy: PR0P264CA0238.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:100:1e::34) To MN2PR12MB3775.namprd12.prod.outlook.com
- (2603:10b6:208:159::19)
+ id 4724F617EF; Tue, 20 Jul 2021 14:07:31 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
+ [209.85.128.49])
+ by lists.linaro.org (Postfix) with ESMTPS id 3E298617D8
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 14:07:29 +0000 (UTC)
+Received: by mail-wm1-f49.google.com with SMTP id g12so12345734wme.2
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 07:07:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to; bh=NhiaQkSCHPQx+ne2ETdlu6yODY4PxPdrO6TLTCHDEvo=;
+ b=AbV7T8HvSTYfx7yF5o/wHZ6AbP9cbbnHR6simTxT5F2QgalLEh3Zv7zaCsj+iLKyB+
+ Pj86CpN7A4sNSRwvVjPdfaX8QWev0o9Y3SuETieOM3yAYO1hPR17h/6YHdLKCBfpYqOq
+ 0xanI2HXzwfifg0mxPZDCYmHVwhR3CiSIXtXU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :content-transfer-encoding:in-reply-to;
+ bh=NhiaQkSCHPQx+ne2ETdlu6yODY4PxPdrO6TLTCHDEvo=;
+ b=NlTOIoN+Jksv41tMFDeLJLm0Y20F3WzXn0VqBvHNnHdWMSihyNUMP7SXpjiNUcL17x
+ bU+NlDqzrMTr3qOa8DWii/YYlTXxRTMTIimhZRazmmN/N/uKgtoXOL7rufunRqCI2hh+
+ +1ChLu80kqyPUYljV73o8TLTog2BWG+n5F+GUZ7zDJCK3RGgN2qP2X04wlyi2CX4jk5C
+ i+G/maU1X8u+CrI3g3sE1amFcz0byDrJV1rLGY5ee8GeMT4oR4UWI4RId7agN4arGz1N
+ R37ixcbW3j0xfW2YRTXE0oksBJ5oZ2WiA8ZOCnC+zbbBfPJKp2OxikOnR/OgPtw1PyBh
+ BAYg==
+X-Gm-Message-State: AOAM530MU2fUcqq6bJAfpdlzCbiuBnkp7m157TxOXri0GG/y8iJwnybr
+ SB6VwzD7lw0uDqWrjPFXGoOX0g==
+X-Google-Smtp-Source: ABdhPJympAVWx+89WOJs70xZyzGidYkvS7+zE+nPVH5Jqu38ByIK/jJxawzGearAHIs1mQR4Vm9qng==
+X-Received: by 2002:a05:600c:20b:: with SMTP id
+ 11mr39063501wmi.112.1626790048280; 
+ Tue, 20 Jul 2021 07:07:28 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id s17sm24408502wrv.2.2021.07.20.07.07.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Jul 2021 07:07:26 -0700 (PDT)
+Date: Tue, 20 Jul 2021 16:07:24 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <YPbYnLBin9N4weiC@phenom.ffwll.local>
+Mail-Followup-To: Christian =?iso-8859-1?Q?K=F6nig?=
+ <ckoenig.leichtzumerken@gmail.com>, 
+ Rob Clark <robdclark@gmail.com>, dri-devel@lists.freedesktop.org,
+ Rob Clark <robdclark@chromium.org>, freedreno@lists.freedesktop.org,
+ Sai Prakash Ranjan <saiprakash.ranjan@codeaurora.org>,
+ open list <linux-kernel@vger.kernel.org>,
+ Jonathan Marek <jonathan@marek.ca>, Emma Anholt <emma@anholt.net>,
+ Bernard Zhao <bernard@vivo.com>,
+ Sharat Masetty <smasetty@codeaurora.org>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@somainline.org>,
+ Konrad Dybcio <konrad.dybcio@somainline.org>,
+ Akhil P Oommen <akhilpo@codeaurora.org>,
+ Douglas Anderson <dianders@chromium.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Zhenzhong Duan <zhenzhong.duan@gmail.com>,
+ "Kristian H. Kristensen" <hoegsberg@google.com>,
+ "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Lee Jones <lee.jones@linaro.org>, Dave Airlie <airlied@redhat.com>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+References: <20210717202924.987514-1-robdclark@gmail.com>
+ <582b8869-f370-3803-60a8-df31088f8088@gmail.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [IPv6:2a02:908:1252:fb60:8651:5b5e:8648:2fd0]
- (2a02:908:1252:fb60:8651:5b5e:8648:2fd0) by
- PR0P264CA0238.FRAP264.PROD.OUTLOOK.COM (2603:10a6:100:1e::34) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4331.23 via Frontend Transport; Tue, 20 Jul 2021 11:00:44 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3769e975-0835-47ec-af06-08d94b6da2a0
-X-MS-TrafficTypeDiagnostic: MN2PR12MB3902:
-X-Microsoft-Antispam-PRVS: <MN2PR12MB390202C74762B2AF6D2F8EBE83E29@MN2PR12MB3902.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4502;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: MWS337TOR35i1gKd05DkAsSvzaE+7nsunCre3xgmLBHuka6WFh/4N+ac3ymqcY82I+qGWXCmoIz1b3/dcJjnpOXl7y2/a0InZnN03SoesbRom+dfkkG+PLInmbWEej3FGpsxwKKlAIHk/WdWLv2edLbMdgL9QcDgYVhRVaqX4rD3Rnq/w67h/HHfCtiU3AeLWCIJ5EOMMWIYtOnnd865acEEU0Ve0KGNntEiSHjLrG0ZzTlz/LgQ/3xKVJdCE9OfUXg4f5vcZ8C/rtLuxqbcnFLUM0o78R53AfK+TV36eHZKKPy1XoWzvvNL3JdT+5JKOvqQ2ngx9nKgMnD8+w4qRAS9XGDaprfo3QjOiV4HOumMrXmN9kb8Qq3XgletmX66zcJdyHwFDcnDBdkyGCKgBltMooBUjXjUsPc5Jeph8vB1V8r0LaXPwQu5vr87VM9pr2hGuL4DQljwySpRdWzG9f+VP8OYxs5lTDQ42vzvcEGXUqOXY3fb5xDvqh+hNX0oys7bxF5KsGK0guljqNh1FaG+XGfpiQ/eWdyoNfcebW9zTN3jh3Iiw0+aghcqsv9DXqNIfz0TAzs+xTHCjRreP8EECCpOGimDen7DGS8oFV9yALq3GcrBbd8ehXhdYoYxiwUrWoU/ZMhRXxcw0GMir7q2cKtqfIZEDLswwKn6lib88wmd/JKDFzRJKAK7lL4KDRnAhKdt7U5VAS9MV2bTALXxG5Mv9fNO6YbbWxqb87I6irMG2FtjLYFbgFwtl6nE
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(31686004)(6486002)(31696002)(36756003)(5660300002)(86362001)(508600001)(83380400001)(8936002)(2906002)(6916009)(6666004)(2616005)(66556008)(4326008)(66476007)(8676002)(66946007)(38100700002)(7416002)(186003)(316002)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cnRmK254azhVaklWMHJKTkQzOUcwS2ErVXNuVlo3YkxkTzNGZmRsSGpTQjNR?=
- =?utf-8?B?UE1rZU1xa25nT2R6ak1aeGY5NGdvVFJ4eHExM25ENjFsenBsc2g3NW5UTVg4?=
- =?utf-8?B?djZTazhYRnozbm4yU3pIYmtKUnlTZHFOYkZKMTloU2p5YksvU3dvM0dZQXhn?=
- =?utf-8?B?dFROWTJXNFcvWFlyblB0SFFnZ2p2S2VtSUl4WDdmaFpHTlIyTXlOL3JIU0w0?=
- =?utf-8?B?dmRZWjA2RFByeW1EOURrNjNwbmVIWmhGVGlDYWtDcHpjWDl5WEVNdVAyYkt3?=
- =?utf-8?B?OUNnNGtPRTlBcHh1bEpqcThveGFtdnBCdzZXWWJ2Mk92bysxak9YNGQ0cFNk?=
- =?utf-8?B?N2p1ckdZaEUrTTB1MU5VWHRoMGFjcmMyK0RYTEY3Z0tPMVFGSE1yckY2bkJu?=
- =?utf-8?B?OFRWWmdtNFlVdWhrWDhWWGsvd0dFMUdQbW9IUmdqL3NBZnFIS0lWeWRyVTZq?=
- =?utf-8?B?WmN3cmVFVkhQOGlleXk0WXhjWGhYRUFaMEdwNjNOa1h4bDJWN0l2QUQrTGxz?=
- =?utf-8?B?clRRV3FnWUhvcmFHUUdvdUc4SklYSTNKQ3pPbitSOUpSN2gzQ1Rvbmw1dzBQ?=
- =?utf-8?B?ZkIrR0ZONjJiTmluWnRMUDVjbzdnc2orNGJDUEhaKzNJMExOTjd3ZVNjSHlZ?=
- =?utf-8?B?TTVEV01rMTNIK2VVYTdCOXhiR1grTVAyTmhISVhmMHZCMnlrSzQ5NVVPbWl6?=
- =?utf-8?B?bGlhQ2gxNmFxejJOWmttMUlLRDRuNXdmZ2w0SlBOaHhRMU9wM1gzcldKd3hF?=
- =?utf-8?B?aUhZTzBIQWk3di95WmllblNBa3czOHg1Tyt1Q1U0MDQzYTJkdWVUSUFzWGF6?=
- =?utf-8?B?S2F2QXN2NGd0dlpncTRMUVZaWlVLaHplMWttTzMxanFTVFZ0dzJSc2FlaVFH?=
- =?utf-8?B?cTBIQ1lYUnU4Rml0OFg0RVZrTlVwS1A2T09sRUIwSkpsN0R6V3VWOW0xbFJo?=
- =?utf-8?B?OVA4cUovMkpIZjF1ZDBkNEU1VUJLK2Z5ZlJtOFRlMmpWc2FCQWh2S21VYjNq?=
- =?utf-8?B?c3VYbmo1eHErWldmQm1TOGhKZGdXL2taV3k1RDdYblhFSGFXdWFrNU5lT2tO?=
- =?utf-8?B?eG0rSTUzKzVYc2dJc0JjQnBSUkZCNzBWMjJUVUY5dWtDdXQ5eGFwbDR5TVBX?=
- =?utf-8?B?OXRqSWNpTVI3U1Fjb1hZcEl0c3pjZ1M5dEpnTmxpNW15b1RET3FBRzdQM0U5?=
- =?utf-8?B?Y3FEUDhwUVFPbWR6RnBpNktIdFdrOTA4Tit3RUJVSE02WnJHSlZFdUlBRkcx?=
- =?utf-8?B?VVl6bXh3YW95QWtkM21SZm5wWFRhYVA4M1RtMVhxTnpsc25vYTVDRW5FQ3BR?=
- =?utf-8?B?UU50ZjRSV3kzYzJuYzF0bDZ6UXhLa01HR3RqQ1MvZjJZZmZ2ZzQ0TEs3MENR?=
- =?utf-8?B?ZUdEaXdQNWxpTUdGYXlTaWN0WDFmKzh1S2ZvY251MjVPOEg1Qkh1Yi9DYjBW?=
- =?utf-8?B?bjQ3L2xaZ1AzTU85NjFMT0E2R2E5QzZwM2RKeHFML2lQVVY0Wll3Z0ZXc0xx?=
- =?utf-8?B?RzZraGhwelpoa0F4UXNYc2N6VzlTTkpNN2hvYyszVW1QY3FHbVA1WG5ubFRB?=
- =?utf-8?B?THZUVTB1NG9GLzB0SU1sZm0rYU9XdVZkQllVeUhCOU1iUXYwYkNpdUVLNXR1?=
- =?utf-8?B?bU1yQTZCVVFSeEpZYnpjZk5VMmlnVmpEcjFXTkVyKzQzVjhJVVBXTTk3V1RI?=
- =?utf-8?B?U1hXeDNXRmxPZGxuVEgyQ0VDT29NOXpSYlNCTDM5WGd2Y0dnK1V3NWlnYjF2?=
- =?utf-8?B?ZVIrbnRBUUtQVGtIOG1HQ3ArQTdMYWZnSnZiTHB2ZUJtUGc5anQ3ek1mNWJI?=
- =?utf-8?B?QUNuUjFoeW92dE5Nb3p2QlRoWDdOZ3FQWE5oaDQxaGZzZ3doVEJxYWNvd1Fu?=
- =?utf-8?Q?gmGJnlbc3bSry?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3769e975-0835-47ec-af06-08d94b6da2a0
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Jul 2021 11:00:50.8749 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: j1T3tPMMO0eankp8XxZQOepBzbmmKhlVGdxrVHa3JV+WclUpGlEGz4f53ZPyJqHJ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB3902
+Content-Disposition: inline
+In-Reply-To: <582b8869-f370-3803-60a8-df31088f8088@gmail.com>
+X-Operating-System: Linux phenom 5.10.0-7-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v2] dma_buf: remove dmabuf sysfs
- teardown before release
+Subject: Re: [Linaro-mm-sig] [PATCH 00/11] drm/msm: drm scheduler conversion
+ and cleanups
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -139,53 +99,112 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: wsd_upstream@mediatek.com, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- linux-mediatek@lists.infradead.org, matthias.bgg@gmail.com,
- linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: Emma Anholt <emma@anholt.net>, Konrad Dybcio <konrad.dybcio@somainline.org>,
+ Akhil P Oommen <akhilpo@codeaurora.org>, dri-devel@lists.freedesktop.org,
+ open list <linux-kernel@vger.kernel.org>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@somainline.org>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Lee Jones <lee.jones@linaro.org>, Rob Clark <robdclark@chromium.org>,
+ Sai Prakash Ranjan <saiprakash.ranjan@codeaurora.org>,
+ Jonathan Marek <jonathan@marek.ca>, Bernard Zhao <bernard@vivo.com>,
+ Zhenzhong Duan <zhenzhong.duan@gmail.com>, Dave Airlie <airlied@redhat.com>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>,
+ "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
+ Sharat Masetty <smasetty@codeaurora.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Douglas Anderson <dianders@chromium.org>, Rob Clark <robdclark@gmail.com>,
+ "Kristian H. Kristensen" <hoegsberg@google.com>,
+ freedreno@lists.freedesktop.org
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Am 20.07.21 um 12:31 schrieb guangming.cao@mediatek.com:
-> From: Guangming Cao <Guangming.Cao@mediatek.com>
->
-> Dmabuf sysfs stat is used for dmabuf info track.
-> But these file maybe still in use after buffer released,
-> should clear it before buffer release.
->
-> Signed-off-by: Guangming Cao <Guangming.Cao@mediatek.com>
+On Mon, Jul 19, 2021 at 10:40:57AM +0200, Christian K=F6nig wrote:
+> Am 17.07.21 um 22:29 schrieb Rob Clark:
+> > From: Rob Clark <robdclark@chromium.org>
+> > =
 
-Reviewed and pushed to drm-misc-next.
+> > Conversion to gpu_scheduler, and bonus removal of
+> > drm_gem_object_put_locked()
+> =
 
-Thanks,
-Christian.
+> Oh yes please!
+> =
 
-> ---
->   drivers/dma-buf/dma-buf.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-> index b1a6db71c656..63d32261b63f 100644
-> --- a/drivers/dma-buf/dma-buf.c
-> +++ b/drivers/dma-buf/dma-buf.c
-> @@ -76,12 +76,12 @@ static void dma_buf_release(struct dentry *dentry)
->   	 */
->   	BUG_ON(dmabuf->cb_shared.active || dmabuf->cb_excl.active);
->   
-> +	dma_buf_stats_teardown(dmabuf);
->   	dmabuf->ops->release(dmabuf);
->   
->   	if (dmabuf->resv == (struct dma_resv *)&dmabuf[1])
->   		dma_resv_fini(dmabuf->resv);
->   
-> -	dma_buf_stats_teardown(dmabuf);
->   	module_put(dmabuf->owner);
->   	kfree(dmabuf->name);
->   	kfree(dmabuf);
+> If I'm not completely mistaken that was the last puzzle piece missing to
+> unify TTMs and GEMs refcount of objects.
 
+Why does drm/msm, a driver not using ttm at all, block ttm refactorings?
+We can just check whether the TTM using driver is potentially using locked
+final unref and have a special version of
+drm_gem_object_put_guaranteed_unlocked or whatever the bikeshed will look
+like, which doesn't have the migth_lock.
+
+Anyway, deed is done now :-)
+-Daniel
+
+> =
+
+> Only problem is that I only see patch 7 and 9 in my inbox. Where is the
+> rest?
+> =
+
+> Thanks,
+> Christian.
+> =
+
+> > =
+
+> > Rob Clark (11):
+> >    drm/msm: Docs and misc cleanup
+> >    drm/msm: Small submitqueue creation cleanup
+> >    drm/msm: drop drm_gem_object_put_locked()
+> >    drm: Drop drm_gem_object_put_locked()
+> >    drm/msm/submit: Simplify out-fence-fd handling
+> >    drm/msm: Consolidate submit bo state
+> >    drm/msm: Track "seqno" fences by idr
+> >    drm/msm: Return ERR_PTR() from submit_create()
+> >    drm/msm: Conversion to drm scheduler
+> >    drm/msm: Drop struct_mutex in submit path
+> >    drm/msm: Utilize gpu scheduler priorities
+> > =
+
+> >   drivers/gpu/drm/drm_gem.c                   |  22 --
+> >   drivers/gpu/drm/msm/Kconfig                 |   1 +
+> >   drivers/gpu/drm/msm/adreno/a5xx_debugfs.c   |   4 +-
+> >   drivers/gpu/drm/msm/adreno/a5xx_gpu.c       |   6 +-
+> >   drivers/gpu/drm/msm/adreno/a5xx_power.c     |   2 +-
+> >   drivers/gpu/drm/msm/adreno/a5xx_preempt.c   |   7 +-
+> >   drivers/gpu/drm/msm/adreno/a6xx_gmu.c       |  12 +-
+> >   drivers/gpu/drm/msm/adreno/a6xx_gpu.c       |   2 +-
+> >   drivers/gpu/drm/msm/adreno/a6xx_gpu_state.c |   4 +-
+> >   drivers/gpu/drm/msm/adreno/adreno_gpu.c     |   6 +-
+> >   drivers/gpu/drm/msm/msm_drv.c               |  30 +-
+> >   drivers/gpu/drm/msm/msm_fence.c             |  39 ---
+> >   drivers/gpu/drm/msm/msm_fence.h             |   2 -
+> >   drivers/gpu/drm/msm/msm_gem.c               |  91 +-----
+> >   drivers/gpu/drm/msm/msm_gem.h               |  37 ++-
+> >   drivers/gpu/drm/msm/msm_gem_submit.c        | 300 ++++++++++++--------
+> >   drivers/gpu/drm/msm/msm_gpu.c               |  50 +---
+> >   drivers/gpu/drm/msm/msm_gpu.h               |  41 ++-
+> >   drivers/gpu/drm/msm/msm_ringbuffer.c        |  70 ++++-
+> >   drivers/gpu/drm/msm/msm_ringbuffer.h        |  12 +
+> >   drivers/gpu/drm/msm/msm_submitqueue.c       |  49 +++-
+> >   include/drm/drm_gem.h                       |   2 -
+> >   include/uapi/drm/msm_drm.h                  |  10 +-
+> >   23 files changed, 440 insertions(+), 359 deletions(-)
+> > =
+
+> =
+
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
