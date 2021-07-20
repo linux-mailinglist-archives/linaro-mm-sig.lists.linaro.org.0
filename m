@@ -2,75 +2,79 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24E873D012B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jul 2021 20:03:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5DEF3D0192
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jul 2021 20:24:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3F48B623DB
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jul 2021 18:03:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 13C4061945
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Jul 2021 18:24:45 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id DBC9961945; Tue, 20 Jul 2021 18:03:29 +0000 (UTC)
+	id 6A5326216E; Tue, 20 Jul 2021 18:24:43 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8C04B61945;
-	Tue, 20 Jul 2021 18:03:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 71EF061434;
+	Tue, 20 Jul 2021 18:24:40 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id DE8E361434
- for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 18:03:24 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 7BA7460C0C
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 18:24:39 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id D13AD61945; Tue, 20 Jul 2021 18:03:24 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
- [209.85.128.51])
- by lists.linaro.org (Postfix) with ESMTPS id C885561434
- for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 18:03:22 +0000 (UTC)
-Received: by mail-wm1-f51.google.com with SMTP id
- q18-20020a1ce9120000b02901f259f3a250so69755wmc.2
- for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 11:03:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=gWH1mqA4+vapOJIXzh/ykRjP5f+XZ2ZAp8SGuGSrQSI=;
- b=fVfUKBzrPupAmTZp1bqSebRkyIgFdKXx9/pqIavRXBzhAn0V5x0o60tiKSvXoozN90
- mIAYHPwb9Q9IfKUH/hJj87newNyhE7k5Xp3q+LIg1IpN+he1gaZJ8fLWQcFBRdKtWVR4
- yyPzodXkeISl3ZE1KrbhPisNXHTOtaiBkRuUpjdmMajXlwR/U20GYkg1a28q6JmFu4WM
- 5uO0dAF0c8Qv5fwGSzC0ouWb/N4HaYGXjyyp9HvfxNAeM7pCTVnURWy1xBDDi7vEbgTC
- GoG4rL79j6Z9PcJvqUiHNPIpvVOh08rzub/xzFnogc9BPtNkZR1APlVlgVoIn+yXtcud
- AdKg==
+ id 7731861434; Tue, 20 Jul 2021 18:24:39 +0000 (UTC)
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
+ [209.85.128.43])
+ by lists.linaro.org (Postfix) with ESMTPS id 6C65260C0C
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 18:24:37 +0000 (UTC)
+Received: by mail-wm1-f43.google.com with SMTP id n4so12811528wms.1
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Jul 2021 11:24:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=fZortMfUJ6sP9V4mv+JXrwjkFsuKqC8sCrT1IfxE2IQ=;
+ b=XUVux13s5c4XE3la6sNsDVnV5wsJPDf/esKROaTiOV8tSVRTmYXOJTY8JKuikYyZZy
+ XNq6hOye5f5dgGbDzB+YonO8zlet92Ln7TuqPcypBNArxSXUeL0ON7mgBEcnbSwB8z+o
+ Y/YfhB3M9AvmOGssbFid8ROltS8CDgfGo1RHw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=gWH1mqA4+vapOJIXzh/ykRjP5f+XZ2ZAp8SGuGSrQSI=;
- b=fn1GdzOWOqu/RF25jkGzQDNFjuoDnzQUntYCln/voTjehcWo1mhfOR7xgmZYu190B2
- avxrTNindJIG0aBEC6UN6/oR0GxMRjY2fZWHaLjGlkPwVQNM12cmGvNvTAUfpJ8tHg+P
- wHuBY/hj7FkARACUq67DR6NPP0Xe4Oda8m6roy9FpZHss15nPtvBvRiJ5lvmypWfE480
- /JsglV9q5meGlDulP8YVnurAYUIFJWAJWqODN+LIjHbjQOKQgriy3tU7mzr8Za1ro4cN
- pbpORUzAN8GhsMxjPjLqAwahVrPpnlHYKEF+twz07SAJixbd2J8utBij8WBbj0NwGQne
- k66w==
-X-Gm-Message-State: AOAM533wiB3OxB4eHwsCO9tc54bwRdN7TqcUsU065StKPZUAfFltOssa
- g60g1KZY8Awo3jgJoKBdvtk=
-X-Google-Smtp-Source: ABdhPJyn538Zosr+FfzjT/kpmsbXqWyORu74lS4tsG67xejxgZsAjrudUjsp+rUcHYDJqQOdWK3Nbg==
-X-Received: by 2002:a05:600c:a04:: with SMTP id
- z4mr32311002wmp.103.1626804201842; 
- Tue, 20 Jul 2021 11:03:21 -0700 (PDT)
-Received: from ?IPv6:2a02:908:1252:fb60:2b66:b2d1:7649:7bbf?
- ([2a02:908:1252:fb60:2b66:b2d1:7649:7bbf])
- by smtp.gmail.com with ESMTPSA id v11sm23924357wrs.4.2021.07.20.11.03.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 20 Jul 2021 11:03:21 -0700 (PDT)
-To: Rob Clark <robdclark@gmail.com>, dri-devel@lists.freedesktop.org
-References: <20210720150716.1213775-1-robdclark@gmail.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <60ffb6f3-e932-d9af-3b90-81adf0c15250@gmail.com>
-Date: Tue, 20 Jul 2021 20:03:20 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=fZortMfUJ6sP9V4mv+JXrwjkFsuKqC8sCrT1IfxE2IQ=;
+ b=bqxmcgkk30CBVx+w1MZBnZtQOJwYohtQ36rRDY4r0g76+87u30ylj2+JpDPMobdxk7
+ V+4Z4Bf/sxAoolIiHUTwzDzfmAQKX8EVaRVlcRgFFa59FiSZv8jbFV/A0zFhq/QB9Agh
+ ScTuFGryW74cS+om9++MQ0jWQhE8XPKU0BjKN5DsZROvZuqI7r2hXOw4kzFm2Exbyo0l
+ Q9jjbOkBeHCiSG1Y7Qop2j3CDQwUGy28vT4yYmoXyx8a7BFZrcZJCYOCc+kPjE/7P5ra
+ VGZ8AEXTA1p9HK82a6XAR94oNVaMfI8Bu7+J9gnbOTkymNT/XvFyNWxgKIKQQWkO8aWz
+ kv9w==
+X-Gm-Message-State: AOAM533BvsuZzM4AJLK8hqrynO7vPIICEJH9aBN5thfWY/snQTr6rnCk
+ PlXqCQ2HRQ8IOWzFHXHUkxDGIA==
+X-Google-Smtp-Source: ABdhPJxJxuXAAbG2g8VfRjxtITgkDdi2Iec/QZfgBKKrqV+PIsMHUm2HQjbGOW/zVNRBi991fnD58w==
+X-Received: by 2002:a05:600c:2f1a:: with SMTP id
+ r26mr38841077wmn.41.1626805476463; 
+ Tue, 20 Jul 2021 11:24:36 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id q19sm2943917wmq.38.2021.07.20.11.24.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Jul 2021 11:24:33 -0700 (PDT)
+Date: Tue, 20 Jul 2021 20:24:31 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
+Message-ID: <YPcU3wJK7kC5b7kv@phenom.ffwll.local>
+Mail-Followup-To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ tzimmermann@suse.de, airlied@linux.ie, sumit.semwal@linaro.org,
+ christian.koenig@amd.com, dri-devel@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
+ skhan@linuxfoundation.org, gregkh@linuxfoundation.org,
+ linux-kernel-mentees@lists.linuxfoundation.org,
+ emil.l.velikov@gmail.com
+References: <20210712043508.11584-1-desmondcheongzx@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20210720150716.1213775-1-robdclark@gmail.com>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <20210712043508.11584-1-desmondcheongzx@gmail.com>
+X-Operating-System: Linux phenom 5.10.0-7-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH] drm/msm: Add fence->wait() op
+Subject: Re: [Linaro-mm-sig] [PATCH v8 0/5] drm: address potential UAF bugs
+ with drm_master ptrs
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,146 +87,109 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Rob Clark <robdclark@chromium.org>, David Airlie <airlied@linux.ie>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
- open list <linux-kernel@vger.kernel.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Sean Paul <sean@poorly.run>, Daniel Vetter <daniel@ffwll.ch>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+Cc: tzimmermann@suse.de, airlied@linux.ie, gregkh@linuxfoundation.org,
+ intel-gfx@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
+ linux-kernel@vger.kernel.org, mripard@kernel.org, christian.koenig@amd.com,
+ linaro-mm-sig@lists.linaro.org, emil.l.velikov@gmail.com,
+ dri-devel@lists.freedesktop.org, daniel@ffwll.ch, skhan@linuxfoundation.org,
+ linux-kernel-mentees@lists.linuxfoundation.org, linux-media@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Hi Rob,
+On Mon, Jul 12, 2021 at 12:35:03PM +0800, Desmond Cheong Zhi Xi wrote:
+> Hi,
+> 
+> In the previous thread on this series we decided to remove a patch that was violating a lockdep requirement in drm_lease. In addition to this change, I took a closer look at the CI logs for the Basic Acceptance Tests and noticed that another regression was introduced. The new patch 2 is a response to this.
+> 
+> Overall, this series addresses potential use-after-free errors when dereferencing pointers to struct drm_master. These were identified after one such bug was caught by Syzbot in drm_getunique():
+> https://syzkaller.appspot.com/bug?id=148d2f1dfac64af52ffd27b661981a540724f803
+> 
+> The series is broken up into five patches:
+> 
+> 1. Move a call to drm_is_current_master() out from a section locked by &dev->mode_config.mutex in drm_mode_getconnector(). This patch does not apply to stable.
+> 
+> 2. Move a call to drm_is_current_master() out from the RCU read-side critical section in drm_clients_info().
+> 
+> 3. Implement a locked version of drm_is_current_master() function that's used within drm_auth.c.
+> 
+> 4. Serialize drm_file.master by introducing a new spinlock that's held whenever the value of drm_file.master changes.
+> 
+> 5. Identify areas in drm_lease.c where pointers to struct drm_master are dereferenced, and ensure that the master pointers are not freed during use.
+> 
+> v7 -> v8:
+> - Remove the patch that moves the call to _drm_lease_held out from the section locked by &dev->mode_config.idr_mutex in __drm_mode_object_find. This patch violated an existing lockdep requirement as reported by the intel-gfx CI.
+> - Added a new patch that moves a call to drm_is_current_master out from the RCU critical section in drm_clients_info. This was reported by the intel-gfx CI.
+> 
+> v6 -> v7:
+> - Modify code alignment as suggested by the intel-gfx CI.
+> - Add a new patch to the series that adds a new lock to serialize drm_file.master, in response to the lockdep splat by the intel-gfx CI.
+> - Update drm_file_get_master to use the new drm_file.master_lock instead of drm_device.master_mutex, in response to the lockdep splat by the intel-gfx CI.
+> 
+> v5 -> v6:
+> - Add a new patch to the series that moves the call to _drm_lease_held out from the section locked by &dev->mode_config.idr_mutex in __drm_mode_object_find.
+> - Clarify the kerneldoc for dereferencing drm_file.master, as suggested by Daniel Vetter.
+> - Refactor error paths with goto labels so that each function only has a single drm_master_put(), as suggested by Emil Velikov.
+> - Modify comparisons to NULL into "!master", as suggested by the intel-gfx CI.
+> 
+> v4 -> v5:
+> - Add a new patch to the series that moves the call to drm_is_current_master in drm_mode_getconnector out from the section locked by &dev->mode_config.mutex.
+> - Additionally, added a missing semicolon to the patch, caught by the intel-gfx CI.
+> 
+> v3 -> v4:
+> - Move the call to drm_is_current_master in drm_mode_getconnector out from the section locked by &dev->mode_config.mutex. As suggested by Daniel Vetter. This avoids a circular lock lock dependency as reported here https://patchwork.freedesktop.org/patch/440406/
+> - Inside drm_is_current_master, instead of grabbing &fpriv->master->dev->master_mutex, we grab &fpriv->minor->dev->master_mutex to avoid dereferencing a null ptr if fpriv->master is not set.
+> - Modify kerneldoc formatting for drm_file.master, as suggested by Daniel Vetter.
+> - Additionally, add a file_priv->master NULL check inside drm_file_get_master, and handle the NULL result accordingly in drm_lease.c. As suggested by Daniel Vetter.
+> 
+> v2 -> v3:
+> - Move the definition of drm_is_current_master and the _locked version higher up in drm_auth.c to avoid needing a forward declaration of drm_is_current_master_locked. As suggested by Daniel Vetter.
+> - Instead of leaking drm_device.master_mutex into drm_lease.c to protect drm_master pointers, add a new drm_file_get_master() function that returns drm_file->master while increasing its reference count, to prevent drm_file->master from being freed. As suggested by Daniel Vetter.
+> 
+> v1 -> v2:
+> - Move the lock and assignment before the DRM_DEBUG_LEASE in drm_mode_get_lease_ioctl, as suggested by Emil Velikov.
 
-Am 20.07.21 um 17:07 schrieb Rob Clark:
-> From: Rob Clark <robdclark@chromium.org>
->
-> Somehow we had neither ->wait() nor dma_fence_signal() calls, and no
-> one noticed.  Oops.
+Apologies for the delay, I missed your series. Maybe just ping next time
+around there's silence.
 
+Looks all great, merged to drm-misc-next. Given how complex this was I'm
+vary of just pushing this to -fixes without some solid testing.
 
-I'm not sure if that is a good idea.
+One thing I noticed is that drm_is_current_master could just use the
+spinlock, since it's only doing a read access. Care to type up that patch?
 
-The dma_fence->wait() callback is pretty much deprecated and should not 
-be used any more.
+Also, do you plan to look into that idea we've discussed to flush pending
+access when we revoke a master or a lease? I think that would be really
+nice improvement here.
+-Daniel
 
-What exactly do you need that for?
+> 
+> Desmond Cheong Zhi Xi (5):
+>   drm: avoid circular locks in drm_mode_getconnector
+>   drm: avoid blocking in drm_clients_info's rcu section
+>   drm: add a locked version of drm_is_current_master
+>   drm: serialize drm_file.master with a new spinlock
+>   drm: protect drm_master pointers in drm_lease.c
+> 
+>  drivers/gpu/drm/drm_auth.c      | 93 ++++++++++++++++++++++++---------
+>  drivers/gpu/drm/drm_connector.c |  5 +-
+>  drivers/gpu/drm/drm_debugfs.c   |  3 +-
+>  drivers/gpu/drm/drm_file.c      |  1 +
+>  drivers/gpu/drm/drm_lease.c     | 81 +++++++++++++++++++++-------
+>  include/drm/drm_auth.h          |  1 +
+>  include/drm/drm_file.h          | 18 +++++--
+>  7 files changed, 152 insertions(+), 50 deletions(-)
+> 
+> -- 
+> 2.25.1
+> 
 
-Regards,
-Christian.
-
->
-> Note that this removes the !timeout case, which has not been used in
-> a long time.
-
-
->
-> Signed-off-by: Rob Clark <robdclark@chromium.org>
-> ---
->   drivers/gpu/drm/msm/msm_fence.c | 59 +++++++++++++++++++--------------
->   1 file changed, 34 insertions(+), 25 deletions(-)
->
-> diff --git a/drivers/gpu/drm/msm/msm_fence.c b/drivers/gpu/drm/msm/msm_fence.c
-> index cd59a5918038..8ee96b90ded6 100644
-> --- a/drivers/gpu/drm/msm/msm_fence.c
-> +++ b/drivers/gpu/drm/msm/msm_fence.c
-> @@ -38,11 +38,10 @@ static inline bool fence_completed(struct msm_fence_context *fctx, uint32_t fenc
->   	return (int32_t)(fctx->completed_fence - fence) >= 0;
->   }
->   
-> -/* legacy path for WAIT_FENCE ioctl: */
-> -int msm_wait_fence(struct msm_fence_context *fctx, uint32_t fence,
-> -		ktime_t *timeout, bool interruptible)
-> +static signed long wait_fence(struct msm_fence_context *fctx, uint32_t fence,
-> +		signed long remaining_jiffies, bool interruptible)
->   {
-> -	int ret;
-> +	signed long ret;
->   
->   	if (fence > fctx->last_fence) {
->   		DRM_ERROR_RATELIMITED("%s: waiting on invalid fence: %u (of %u)\n",
-> @@ -50,33 +49,34 @@ int msm_wait_fence(struct msm_fence_context *fctx, uint32_t fence,
->   		return -EINVAL;
->   	}
->   
-> -	if (!timeout) {
-> -		/* no-wait: */
-> -		ret = fence_completed(fctx, fence) ? 0 : -EBUSY;
-> +	if (interruptible) {
-> +		ret = wait_event_interruptible_timeout(fctx->event,
-> +			fence_completed(fctx, fence),
-> +			remaining_jiffies);
->   	} else {
-> -		unsigned long remaining_jiffies = timeout_to_jiffies(timeout);
-> -
-> -		if (interruptible)
-> -			ret = wait_event_interruptible_timeout(fctx->event,
-> -				fence_completed(fctx, fence),
-> -				remaining_jiffies);
-> -		else
-> -			ret = wait_event_timeout(fctx->event,
-> -				fence_completed(fctx, fence),
-> -				remaining_jiffies);
-> -
-> -		if (ret == 0) {
-> -			DBG("timeout waiting for fence: %u (completed: %u)",
-> -					fence, fctx->completed_fence);
-> -			ret = -ETIMEDOUT;
-> -		} else if (ret != -ERESTARTSYS) {
-> -			ret = 0;
-> -		}
-> +		ret = wait_event_timeout(fctx->event,
-> +			fence_completed(fctx, fence),
-> +			remaining_jiffies);
-> +	}
-> +
-> +	if (ret == 0) {
-> +		DBG("timeout waiting for fence: %u (completed: %u)",
-> +				fence, fctx->completed_fence);
-> +		ret = -ETIMEDOUT;
-> +	} else if (ret != -ERESTARTSYS) {
-> +		ret = 0;
->   	}
->   
->   	return ret;
->   }
->   
-> +/* legacy path for WAIT_FENCE ioctl: */
-> +int msm_wait_fence(struct msm_fence_context *fctx, uint32_t fence,
-> +		ktime_t *timeout, bool interruptible)
-> +{
-> +	return wait_fence(fctx, fence, timeout_to_jiffies(timeout), interruptible);
-> +}
-> +
->   /* called from workqueue */
->   void msm_update_fence(struct msm_fence_context *fctx, uint32_t fence)
->   {
-> @@ -114,10 +114,19 @@ static bool msm_fence_signaled(struct dma_fence *fence)
->   	return fence_completed(f->fctx, f->base.seqno);
->   }
->   
-> +static signed long msm_fence_wait(struct dma_fence *fence, bool intr,
-> +		signed long timeout)
-> +{
-> +	struct msm_fence *f = to_msm_fence(fence);
-> +
-> +	return wait_fence(f->fctx, fence->seqno, timeout, intr);
-> +}
-> +
->   static const struct dma_fence_ops msm_fence_ops = {
->   	.get_driver_name = msm_fence_get_driver_name,
->   	.get_timeline_name = msm_fence_get_timeline_name,
->   	.signaled = msm_fence_signaled,
-> +	.wait = msm_fence_wait,
->   };
->   
->   struct dma_fence *
-
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
