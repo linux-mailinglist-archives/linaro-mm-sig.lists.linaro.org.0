@@ -2,66 +2,66 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC2113D0A2B
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jul 2021 09:59:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D2DD73D0C6B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jul 2021 12:29:26 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D647D61A3E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jul 2021 07:59:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5070662175
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jul 2021 10:29:24 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 6E09D60AA0; Wed, 21 Jul 2021 07:59:38 +0000 (UTC)
+	id 4A2C861A47; Wed, 21 Jul 2021 10:29:23 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 984A8617DE;
-	Wed, 21 Jul 2021 07:59:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EC577617DE;
+	Wed, 21 Jul 2021 10:29:19 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 97CD960749
- for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jul 2021 07:59:33 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 8300460E96
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jul 2021 10:29:18 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 95734617DE; Wed, 21 Jul 2021 07:59:33 +0000 (UTC)
-Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com
- [209.85.210.41])
- by lists.linaro.org (Postfix) with ESMTPS id 8F92860749
- for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jul 2021 07:59:31 +0000 (UTC)
-Received: by mail-ot1-f41.google.com with SMTP id
- 59-20020a9d0ac10000b0290462f0ab0800so1281716otq.11
- for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jul 2021 00:59:31 -0700 (PDT)
+ id 75FFA617DE; Wed, 21 Jul 2021 10:29:18 +0000 (UTC)
+Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com
+ [209.85.210.42])
+ by lists.linaro.org (Postfix) with ESMTPS id 6D85E60E96
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jul 2021 10:29:16 +0000 (UTC)
+Received: by mail-ot1-f42.google.com with SMTP id
+ j1-20020a0568302701b02904d1f8b9db81so1576292otu.12
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jul 2021 03:29:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
  :cc:content-transfer-encoding;
- bh=i1uzYLmR5eIDsH2uz91oXJvOO8JLzGZfgbFg19OYUOg=;
- b=iIIO8uiPJd8ABtw13Umn0Qzy4qd108xTqg9zeHtryzTqn1f23VsT6sj+Xdy7fw5pB0
- JXSSOKWxIHPm+DTThfW4L7RTzyfLxc59rBMx365YGzyk7XQRM47pp7v+T9hNYttlfAKv
- plx0mOufPHR8h5iNXoImM0LMpyzeJIirrUpPY=
+ bh=h417+5Nn2Pgd6WA/rkzrOB7f5qZl0K/oFZRySnon6fM=;
+ b=dP5y0SRwrB1hjw/MVYi14vnTeaxW3RWgNT4XKLVwLQTSLYGNhUM8B/5tUKn/AjmG/e
+ 87Dgni6usuZj0Gwd26LtGaiVnfb+Nb3LcfIks58zLNCluPjUgZ07/vDQPpH5UsVcLJnm
+ DUBHIuwtqCITyO6+jd9Nl3a1Uz9J2CkocvlKU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc:content-transfer-encoding;
- bh=i1uzYLmR5eIDsH2uz91oXJvOO8JLzGZfgbFg19OYUOg=;
- b=k2Z41WlEGPyIjV1OXEd7Q/LorRYoa3f8eA3LO0aKTTxLVxNb8KlDIM4j1NIhm8/6Dv
- awPg+BgCy9dFb2y2zgk8liXOQBXQfCaycb4Noq/Op/J/5kYwl0C/pEY1PrBpyCyjSdeJ
- 652ugC99w8zC1Yly0wTc57dVOtz2iMbfAUKFsnsF+U3rXHjXZ9YlpjlAkEHlGx+6djLA
- e0tbZW1hcnYh3+6hqtP1lUinSh8Hq8s5umo1XHwFb8lzysKUFW8QDhI4vwGzbPhQwOUN
- Fku0NVEbwmcJY4wxqKC6NwYhY6pX7mBPeT5yc3BnmaCsDJSjpGVgj9kDbhGnyvfejzTU
- wjUA==
-X-Gm-Message-State: AOAM532nWuYS869HxGGJGpk5rwulm+4uRujJJ2tpQVF1OiU/VpDnAYa4
- WVCSRm8VMcp+3Ga5sesJAW/RdEcHrwkCb4aw612Emg==
-X-Google-Smtp-Source: ABdhPJzlBV2SpVcZvVFa40w7afLAaXHdHt5EO5vd/HzIEfGT9t2nEOfXFCaT4JwjLsT9zv7LjEY872P7lUIno55+qlo=
-X-Received: by 2002:a9d:6d86:: with SMTP id x6mr11443606otp.188.1626854370953; 
- Wed, 21 Jul 2021 00:59:30 -0700 (PDT)
+ bh=h417+5Nn2Pgd6WA/rkzrOB7f5qZl0K/oFZRySnon6fM=;
+ b=WxQJ8LhVrtXApTyENt88sGid88xzg+JGngHD25dzCp+II6lMCiFXPLHGdhxwsicRxJ
+ nm+6JIy6tK3Y/Mkw9+4K1zVnrYBd+7euRvYPDkGlKR/T/uxN2a9wIN8DAkH0fwkGSMiV
+ l7PTxtSdNAVYQkLosYeg5M64j2JdeBpzpRDuYdYY5USJdzTf86WvOo+Y0u/ufLLeoqqO
+ Miu0AI8/qThQBkxT0+IQ7DrLVgWldh13fGf4TKaqcrOHX0Sq036EhuEnVxJMPtSAPMd+
+ DVaQVmqXIwcnc2p2aep7waGFruw8ROxonmfeCAnsaYhjEm4w8buf49hB+dDzIPqI+xZT
+ 1Ltw==
+X-Gm-Message-State: AOAM530IGRDcfemN9NeA4Kw4aDe3X9E2fjdAmdEpbSoeM0Y/IMsVxV8X
+ YoqUskrZrkRTB187tZ/36EIoXPg/mpLGok7ojhaq/A==
+X-Google-Smtp-Source: ABdhPJxnsfA3n87/jWpR0qUhPsWBSfRhmjyGwC0ANDR9tMSbPA64GLPwtsPMaBOTIwvd+I7FHsCQ2NOVZZiPWLN/Uko=
+X-Received: by 2002:a05:6830:2802:: with SMTP id
+ w2mr24416395otu.303.1626863355405; 
+ Wed, 21 Jul 2021 03:29:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210720150716.1213775-1-robdclark@gmail.com>
- <60ffb6f3-e932-d9af-3b90-81adf0c15250@gmail.com>
- <CAF6AEGtOW3EjZWo36ij8U1om=gAqvg8CSkJJq2GkyHFGWUH4kQ@mail.gmail.com>
- <CAKMK7uF1=Y6_9znGoWG8GrteXBBRmyW8C3bFE+eJQqOj0A1buA@mail.gmail.com>
- <CAF6AEGsOVPdMkXwU9C+nDfQpPThveJ2A0jbXi43RRkkJKtnz3w@mail.gmail.com>
-In-Reply-To: <CAF6AEGsOVPdMkXwU9C+nDfQpPThveJ2A0jbXi43RRkkJKtnz3w@mail.gmail.com>
+References: <20210712043508.11584-1-desmondcheongzx@gmail.com>
+ <YPcU3wJK7kC5b7kv@phenom.ffwll.local>
+ <50c5582b-c674-4ef8-585f-7a3d78a49f85@gmail.com>
+In-Reply-To: <50c5582b-c674-4ef8-585f-7a3d78a49f85@gmail.com>
 From: Daniel Vetter <daniel@ffwll.ch>
-Date: Wed, 21 Jul 2021 09:59:20 +0200
-Message-ID: <CAKMK7uHMXFqic=9APJrSf6totB8nGZTDe4x8+sv-drmV4Q+4Bg@mail.gmail.com>
-To: Rob Clark <robdclark@gmail.com>
+Date: Wed, 21 Jul 2021 12:29:04 +0200
+Message-ID: <CAKMK7uGvb3O9Ypd73xZf6bdMcXJyGJw4C7GXGprkZLpN9Gx7qQ@mail.gmail.com>
+To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH] drm/msm: Add fence->wait() op
+Subject: Re: [Linaro-mm-sig] [PATCH v8 0/5] drm: address potential UAF bugs
+ with drm_master ptrs
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -74,154 +74,159 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Rob Clark <robdclark@chromium.org>, David Airlie <airlied@linux.ie>,
- open list <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
+Cc: Dave Airlie <airlied@linux.ie>, Greg KH <gregkh@linuxfoundation.org>,
+ intel-gfx <intel-gfx@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ Maxime Ripard <mripard@kernel.org>,
  "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Sean Paul <sean@poorly.run>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
+ Emil Velikov <emil.l.velikov@gmail.com>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Shuah Khan <skhan@linuxfoundation.org>,
+ linux-kernel-mentees@lists.linuxfoundation.org,
  =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gV2VkLCBKdWwgMjEsIDIwMjEgYXQgMTI6MzIgQU0gUm9iIENsYXJrIDxyb2JkY2xhcmtAZ21h
-aWwuY29tPiB3cm90ZToKPgo+IE9uIFR1ZSwgSnVsIDIwLCAyMDIxIGF0IDE6NTUgUE0gRGFuaWVs
-IFZldHRlciA8ZGFuaWVsQGZmd2xsLmNoPiB3cm90ZToKPiA+Cj4gPiBPbiBUdWUsIEp1bCAyMCwg
-MjAyMSBhdCA4OjI2IFBNIFJvYiBDbGFyayA8cm9iZGNsYXJrQGdtYWlsLmNvbT4gd3JvdGU6Cj4g
-PiA+Cj4gPiA+IE9uIFR1ZSwgSnVsIDIwLCAyMDIxIGF0IDExOjAzIEFNIENocmlzdGlhbiBLw7Zu
-aWcKPiA+ID4gPGNrb2VuaWcubGVpY2h0enVtZXJrZW5AZ21haWwuY29tPiB3cm90ZToKPiA+ID4g
-Pgo+ID4gPiA+IEhpIFJvYiwKPiA+ID4gPgo+ID4gPiA+IEFtIDIwLjA3LjIxIHVtIDE3OjA3IHNj
-aHJpZWIgUm9iIENsYXJrOgo+ID4gPiA+ID4gRnJvbTogUm9iIENsYXJrIDxyb2JkY2xhcmtAY2hy
-b21pdW0ub3JnPgo+ID4gPiA+ID4KPiA+ID4gPiA+IFNvbWVob3cgd2UgaGFkIG5laXRoZXIgLT53
-YWl0KCkgbm9yIGRtYV9mZW5jZV9zaWduYWwoKSBjYWxscywgYW5kIG5vCj4gPiA+ID4gPiBvbmUg
-bm90aWNlZC4gIE9vcHMuCj4gPiA+ID4KPiA+ID4gPgo+ID4gPiA+IEknbSBub3Qgc3VyZSBpZiB0
-aGF0IGlzIGEgZ29vZCBpZGVhLgo+ID4gPiA+Cj4gPiA+ID4gVGhlIGRtYV9mZW5jZS0+d2FpdCgp
-IGNhbGxiYWNrIGlzIHByZXR0eSBtdWNoIGRlcHJlY2F0ZWQgYW5kIHNob3VsZCBub3QKPiA+ID4g
-PiBiZSB1c2VkIGFueSBtb3JlLgo+ID4gPiA+Cj4gPiA+ID4gV2hhdCBleGFjdGx5IGRvIHlvdSBu
-ZWVkIHRoYXQgZm9yPwo+ID4gPgo+ID4gPiBXZWxsLCB0aGUgYWx0ZXJuYXRpdmUgaXMgdG8gdHJh
-Y2sgdGhlIHNldCBvZiBmZW5jZXMgd2hpY2ggaGF2ZQo+ID4gPiBzaWduYWxsaW5nIGVuYWJsZWQs
-IGFuZCB0aGVuIGZpZ3VyZSBvdXQgd2hpY2ggb25lcyB0byBzaWduYWwsIHdoaWNoCj4gPiA+IHNl
-ZW1zIGxpa2UgYSBsb3QgbW9yZSB3b3JrLCB2cyBqdXN0IHJlLXB1cnBvc2luZyB0aGUgd2FpdAo+
-ID4gPiBpbXBsZW1lbnRhdGlvbiB3ZSBhbHJlYWR5IGhhdmUgZm9yIG5vbi1kbWFfZmVuY2UgY2Fz
-ZXMgOy0pCj4gPiA+Cj4gPiA+IFdoeSBpcyB0aGUgLT53YWl0KCkgY2FsbGJhY2sgKHByZXR0eSBt
-dWNoKSBkZXByZWNhdGVkPwo+ID4KPiA+IEJlY2F1c2UgaWYgeW91IG5lZWQgaXQgdGhhdCBtZWFu
-cyBmb3IgeW91ciBkcml2ZXIgZG1hX2ZlbmNlX2FkZF9jYiBpcwo+ID4gYnJva2VuLCB3aGljaCBt
-ZWFucyBhIF9sb3RfIG9mIHRoaW5ncyBkb24ndCB3b3JrLiBMaWtlIGRtYV9idWYgcG9sbAo+ID4g
-KGNvbXBvc2l0b3JzIGhhdmUgcGF0Y2hlcyB0byBzdGFydCB1c2luZyB0aGF0KSwgYW5kIEkgdGhp
-bmsKPiA+IGRybS9zY2hlZHVsZXIgYWxzbyBiZWNvbWVzIHJhdGhlciB1bmhhcHB5Lgo+Cj4gSSdt
-IHN0YXJ0aW5nIHRvIHBhZ2UgYmFjayBpbiBob3cgdGhpcyB3b3Jrcy4uIGZlbmNlIGNiJ3MgYXJl
-bid0IGJyb2tlbgo+ICh3aGljaCBpcyBhbHNvIHdoeSBkbWFfZmVuY2Vfd2FpdCgpIHdhcyBub3Qg
-Y29tcGxldGVseSBicm9rZW4pLAo+IGJlY2F1c2UgaW4gcmV0aXJlX3N1Ym1pdHMoKSB3ZSBjYWxs
-Cj4gZG1hX2ZlbmNlX2lzX3NpZ25hbGVkKHN1Ym1pdC0+aHdfZmVuY2UpLgo+Cj4gQnV0IHRoZSBy
-ZWFzb24gdGhhdCB0aGUgY3VzdG9tIHdhaXQgZnVuY3Rpb24gY2xlYW5zIHVwIGEgdGlueSBiaXQg
-b2YKPiBqYW5rIGlzIHRoYXQgdGhlIHdhaXRfcXVldWVfaGVhZF90IGdldHMgc2lnbmFsZWQgZWFy
-bGllciwgYmVmb3JlIHdlCj4gc3RhcnQgaXRlcmF0aW5nIHRoZSBzdWJtaXRzIGFuZCBkb2luZyBh
-bGwgdGhhdCByZXRpcmVfc3VibWl0KCkgc3R1ZmYKPiAodW5waW4vdW5yZWYgYm8ncywgZXRjKS4g
-IEkgc3VwcG9zZSBJIGNvdWxkIGp1c3Qgc3BsaXQgdGhpbmdzIHVwIHRvCj4gY2FsbCBkbWFfZmVu
-Y2Vfc2lnbmFsKCkgZWFybGllciwgYW5kICp0aGVuKiBkbyB0aGUgcmV0aXJlX3N1Ym1pdHMoKQo+
-IHN0dWZmLgoKWWVhaCByZWR1Y2luZyB0aGUgbGF0ZW5jeSB0aGVyZSBzb3VuZHMgbGlrZSBhIGdv
-b2QgaWRlYS4KLURhbmllbAoKPgo+IEJSLAo+IC1SCj4KPiA+IEl0IGVzc2VudGlhbGx5IGV4aXN0
-cyBvbmx5IGZvciBvbGQgZHJpdmVycyB3aGVyZSAtPmVuYWJsZV9zaWduYWxsaW5nCj4gPiBpcyB1
-bnJlbGlhYmxlIGFuZCB3ZSBwYXBlciBvdmVyIHRoYXQgd2l0aCBhIHJldHJ5IGxvb3AgaW4gLT53
-YWl0IGFuZAo+ID4gcHJheSBubyBvbmUgbm90aWNlcyB0aGF0IGl0J3MgdG9vIGJ1dGNoZXJlZC4g
-VGhlIHByb3BlciBmaXggaXMgdG8gaGF2ZQo+ID4gYSBkcml2ZXIgdGhyZWFkIHRvIGd1YXJhbnRl
-ZSB0aGF0IC0+ZW5hYmxlX3NpZ25hbGxpbmcgd29ya3MgcmVsaWFibGUsCj4gPiBzbyB5b3UgZG9u
-J3QgbmVlZCBhIC0+d2FpdC4KPiA+Cj4gPiBDYW4geW91IHR5cGUgdXAgYSBrZXJuZWxkb2MgcGF0
-Y2ggZm9yIGRtYV9mZW5jZV9vcHMtPndhaXQgdG8gaGFtbWVyCj4gPiB0aGlzIGluIHBsZWFzZT8K
-PiA+IC1EYW5pZWwKPiA+Cj4gPiA+Cj4gPiA+IEJSLAo+ID4gPiAtUgo+ID4gPgo+ID4gPiA+IFJl
-Z2FyZHMsCj4gPiA+ID4gQ2hyaXN0aWFuLgo+ID4gPiA+Cj4gPiA+ID4gPgo+ID4gPiA+ID4gTm90
-ZSB0aGF0IHRoaXMgcmVtb3ZlcyB0aGUgIXRpbWVvdXQgY2FzZSwgd2hpY2ggaGFzIG5vdCBiZWVu
-IHVzZWQgaW4KPiA+ID4gPiA+IGEgbG9uZyB0aW1lLgo+ID4gPiA+Cj4gPiA+ID4KPiA+ID4gPiA+
-Cj4gPiA+ID4gPiBTaWduZWQtb2ZmLWJ5OiBSb2IgQ2xhcmsgPHJvYmRjbGFya0BjaHJvbWl1bS5v
-cmc+Cj4gPiA+ID4gPiAtLS0KPiA+ID4gPiA+ICAgZHJpdmVycy9ncHUvZHJtL21zbS9tc21fZmVu
-Y2UuYyB8IDU5ICsrKysrKysrKysrKysrKysrKystLS0tLS0tLS0tLS0tLQo+ID4gPiA+ID4gICAx
-IGZpbGUgY2hhbmdlZCwgMzQgaW5zZXJ0aW9ucygrKSwgMjUgZGVsZXRpb25zKC0pCj4gPiA+ID4g
-Pgo+ID4gPiA+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9tc20vbXNtX2ZlbmNlLmMg
-Yi9kcml2ZXJzL2dwdS9kcm0vbXNtL21zbV9mZW5jZS5jCj4gPiA+ID4gPiBpbmRleCBjZDU5YTU5
-MTgwMzguLjhlZTk2YjkwZGVkNiAxMDA2NDQKPiA+ID4gPiA+IC0tLSBhL2RyaXZlcnMvZ3B1L2Ry
-bS9tc20vbXNtX2ZlbmNlLmMKPiA+ID4gPiA+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9tc20vbXNt
-X2ZlbmNlLmMKPiA+ID4gPiA+IEBAIC0zOCwxMSArMzgsMTAgQEAgc3RhdGljIGlubGluZSBib29s
-IGZlbmNlX2NvbXBsZXRlZChzdHJ1Y3QgbXNtX2ZlbmNlX2NvbnRleHQgKmZjdHgsIHVpbnQzMl90
-IGZlbmMKPiA+ID4gPiA+ICAgICAgIHJldHVybiAoaW50MzJfdCkoZmN0eC0+Y29tcGxldGVkX2Zl
-bmNlIC0gZmVuY2UpID49IDA7Cj4gPiA+ID4gPiAgIH0KPiA+ID4gPiA+Cj4gPiA+ID4gPiAtLyog
-bGVnYWN5IHBhdGggZm9yIFdBSVRfRkVOQ0UgaW9jdGw6ICovCj4gPiA+ID4gPiAtaW50IG1zbV93
-YWl0X2ZlbmNlKHN0cnVjdCBtc21fZmVuY2VfY29udGV4dCAqZmN0eCwgdWludDMyX3QgZmVuY2Us
-Cj4gPiA+ID4gPiAtICAgICAgICAgICAgIGt0aW1lX3QgKnRpbWVvdXQsIGJvb2wgaW50ZXJydXB0
-aWJsZSkKPiA+ID4gPiA+ICtzdGF0aWMgc2lnbmVkIGxvbmcgd2FpdF9mZW5jZShzdHJ1Y3QgbXNt
-X2ZlbmNlX2NvbnRleHQgKmZjdHgsIHVpbnQzMl90IGZlbmNlLAo+ID4gPiA+ID4gKyAgICAgICAg
-ICAgICBzaWduZWQgbG9uZyByZW1haW5pbmdfamlmZmllcywgYm9vbCBpbnRlcnJ1cHRpYmxlKQo+
-ID4gPiA+ID4gICB7Cj4gPiA+ID4gPiAtICAgICBpbnQgcmV0Owo+ID4gPiA+ID4gKyAgICAgc2ln
-bmVkIGxvbmcgcmV0Owo+ID4gPiA+ID4KPiA+ID4gPiA+ICAgICAgIGlmIChmZW5jZSA+IGZjdHgt
-Pmxhc3RfZmVuY2UpIHsKPiA+ID4gPiA+ICAgICAgICAgICAgICAgRFJNX0VSUk9SX1JBVEVMSU1J
-VEVEKCIlczogd2FpdGluZyBvbiBpbnZhbGlkIGZlbmNlOiAldSAob2YgJXUpXG4iLAo+ID4gPiA+
-ID4gQEAgLTUwLDMzICs0OSwzNCBAQCBpbnQgbXNtX3dhaXRfZmVuY2Uoc3RydWN0IG1zbV9mZW5j
-ZV9jb250ZXh0ICpmY3R4LCB1aW50MzJfdCBmZW5jZSwKPiA+ID4gPiA+ICAgICAgICAgICAgICAg
-cmV0dXJuIC1FSU5WQUw7Cj4gPiA+ID4gPiAgICAgICB9Cj4gPiA+ID4gPgo+ID4gPiA+ID4gLSAg
-ICAgaWYgKCF0aW1lb3V0KSB7Cj4gPiA+ID4gPiAtICAgICAgICAgICAgIC8qIG5vLXdhaXQ6ICov
-Cj4gPiA+ID4gPiAtICAgICAgICAgICAgIHJldCA9IGZlbmNlX2NvbXBsZXRlZChmY3R4LCBmZW5j
-ZSkgPyAwIDogLUVCVVNZOwo+ID4gPiA+ID4gKyAgICAgaWYgKGludGVycnVwdGlibGUpIHsKPiA+
-ID4gPiA+ICsgICAgICAgICAgICAgcmV0ID0gd2FpdF9ldmVudF9pbnRlcnJ1cHRpYmxlX3RpbWVv
-dXQoZmN0eC0+ZXZlbnQsCj4gPiA+ID4gPiArICAgICAgICAgICAgICAgICAgICAgZmVuY2VfY29t
-cGxldGVkKGZjdHgsIGZlbmNlKSwKPiA+ID4gPiA+ICsgICAgICAgICAgICAgICAgICAgICByZW1h
-aW5pbmdfamlmZmllcyk7Cj4gPiA+ID4gPiAgICAgICB9IGVsc2Ugewo+ID4gPiA+ID4gLSAgICAg
-ICAgICAgICB1bnNpZ25lZCBsb25nIHJlbWFpbmluZ19qaWZmaWVzID0gdGltZW91dF90b19qaWZm
-aWVzKHRpbWVvdXQpOwo+ID4gPiA+ID4gLQo+ID4gPiA+ID4gLSAgICAgICAgICAgICBpZiAoaW50
-ZXJydXB0aWJsZSkKPiA+ID4gPiA+IC0gICAgICAgICAgICAgICAgICAgICByZXQgPSB3YWl0X2V2
-ZW50X2ludGVycnVwdGlibGVfdGltZW91dChmY3R4LT5ldmVudCwKPiA+ID4gPiA+IC0gICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgIGZlbmNlX2NvbXBsZXRlZChmY3R4LCBmZW5jZSksCj4gPiA+
-ID4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZW1haW5pbmdfamlmZmllcyk7Cj4g
-PiA+ID4gPiAtICAgICAgICAgICAgIGVsc2UKPiA+ID4gPiA+IC0gICAgICAgICAgICAgICAgICAg
-ICByZXQgPSB3YWl0X2V2ZW50X3RpbWVvdXQoZmN0eC0+ZXZlbnQsCj4gPiA+ID4gPiAtICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBmZW5jZV9jb21wbGV0ZWQoZmN0eCwgZmVuY2UpLAo+ID4g
-PiA+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmVtYWluaW5nX2ppZmZpZXMpOwo+
-ID4gPiA+ID4gLQo+ID4gPiA+ID4gLSAgICAgICAgICAgICBpZiAocmV0ID09IDApIHsKPiA+ID4g
-PiA+IC0gICAgICAgICAgICAgICAgICAgICBEQkcoInRpbWVvdXQgd2FpdGluZyBmb3IgZmVuY2U6
-ICV1IChjb21wbGV0ZWQ6ICV1KSIsCj4gPiA+ID4gPiAtICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIGZlbmNlLCBmY3R4LT5jb21wbGV0ZWRfZmVuY2UpOwo+ID4gPiA+ID4gLSAg
-ICAgICAgICAgICAgICAgICAgIHJldCA9IC1FVElNRURPVVQ7Cj4gPiA+ID4gPiAtICAgICAgICAg
-ICAgIH0gZWxzZSBpZiAocmV0ICE9IC1FUkVTVEFSVFNZUykgewo+ID4gPiA+ID4gLSAgICAgICAg
-ICAgICAgICAgICAgIHJldCA9IDA7Cj4gPiA+ID4gPiAtICAgICAgICAgICAgIH0KPiA+ID4gPiA+
-ICsgICAgICAgICAgICAgcmV0ID0gd2FpdF9ldmVudF90aW1lb3V0KGZjdHgtPmV2ZW50LAo+ID4g
-PiA+ID4gKyAgICAgICAgICAgICAgICAgICAgIGZlbmNlX2NvbXBsZXRlZChmY3R4LCBmZW5jZSks
-Cj4gPiA+ID4gPiArICAgICAgICAgICAgICAgICAgICAgcmVtYWluaW5nX2ppZmZpZXMpOwo+ID4g
-PiA+ID4gKyAgICAgfQo+ID4gPiA+ID4gKwo+ID4gPiA+ID4gKyAgICAgaWYgKHJldCA9PSAwKSB7
-Cj4gPiA+ID4gPiArICAgICAgICAgICAgIERCRygidGltZW91dCB3YWl0aW5nIGZvciBmZW5jZTog
-JXUgKGNvbXBsZXRlZDogJXUpIiwKPiA+ID4gPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGZlbmNlLCBmY3R4LT5jb21wbGV0ZWRfZmVuY2UpOwo+ID4gPiA+ID4gKyAgICAgICAgICAg
-ICByZXQgPSAtRVRJTUVET1VUOwo+ID4gPiA+ID4gKyAgICAgfSBlbHNlIGlmIChyZXQgIT0gLUVS
-RVNUQVJUU1lTKSB7Cj4gPiA+ID4gPiArICAgICAgICAgICAgIHJldCA9IDA7Cj4gPiA+ID4gPiAg
-ICAgICB9Cj4gPiA+ID4gPgo+ID4gPiA+ID4gICAgICAgcmV0dXJuIHJldDsKPiA+ID4gPiA+ICAg
-fQo+ID4gPiA+ID4KPiA+ID4gPiA+ICsvKiBsZWdhY3kgcGF0aCBmb3IgV0FJVF9GRU5DRSBpb2N0
-bDogKi8KPiA+ID4gPiA+ICtpbnQgbXNtX3dhaXRfZmVuY2Uoc3RydWN0IG1zbV9mZW5jZV9jb250
-ZXh0ICpmY3R4LCB1aW50MzJfdCBmZW5jZSwKPiA+ID4gPiA+ICsgICAgICAgICAgICAga3RpbWVf
-dCAqdGltZW91dCwgYm9vbCBpbnRlcnJ1cHRpYmxlKQo+ID4gPiA+ID4gK3sKPiA+ID4gPiA+ICsg
-ICAgIHJldHVybiB3YWl0X2ZlbmNlKGZjdHgsIGZlbmNlLCB0aW1lb3V0X3RvX2ppZmZpZXModGlt
-ZW91dCksIGludGVycnVwdGlibGUpOwo+ID4gPiA+ID4gK30KPiA+ID4gPiA+ICsKPiA+ID4gPiA+
-ICAgLyogY2FsbGVkIGZyb20gd29ya3F1ZXVlICovCj4gPiA+ID4gPiAgIHZvaWQgbXNtX3VwZGF0
-ZV9mZW5jZShzdHJ1Y3QgbXNtX2ZlbmNlX2NvbnRleHQgKmZjdHgsIHVpbnQzMl90IGZlbmNlKQo+
-ID4gPiA+ID4gICB7Cj4gPiA+ID4gPiBAQCAtMTE0LDEwICsxMTQsMTkgQEAgc3RhdGljIGJvb2wg
-bXNtX2ZlbmNlX3NpZ25hbGVkKHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlKQo+ID4gPiA+ID4gICAg
-ICAgcmV0dXJuIGZlbmNlX2NvbXBsZXRlZChmLT5mY3R4LCBmLT5iYXNlLnNlcW5vKTsKPiA+ID4g
-PiA+ICAgfQo+ID4gPiA+ID4KPiA+ID4gPiA+ICtzdGF0aWMgc2lnbmVkIGxvbmcgbXNtX2ZlbmNl
-X3dhaXQoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UsIGJvb2wgaW50ciwKPiA+ID4gPiA+ICsgICAg
-ICAgICAgICAgc2lnbmVkIGxvbmcgdGltZW91dCkKPiA+ID4gPiA+ICt7Cj4gPiA+ID4gPiArICAg
-ICBzdHJ1Y3QgbXNtX2ZlbmNlICpmID0gdG9fbXNtX2ZlbmNlKGZlbmNlKTsKPiA+ID4gPiA+ICsK
-PiA+ID4gPiA+ICsgICAgIHJldHVybiB3YWl0X2ZlbmNlKGYtPmZjdHgsIGZlbmNlLT5zZXFubywg
-dGltZW91dCwgaW50cik7Cj4gPiA+ID4gPiArfQo+ID4gPiA+ID4gKwo+ID4gPiA+ID4gICBzdGF0
-aWMgY29uc3Qgc3RydWN0IGRtYV9mZW5jZV9vcHMgbXNtX2ZlbmNlX29wcyA9IHsKPiA+ID4gPiA+
-ICAgICAgIC5nZXRfZHJpdmVyX25hbWUgPSBtc21fZmVuY2VfZ2V0X2RyaXZlcl9uYW1lLAo+ID4g
-PiA+ID4gICAgICAgLmdldF90aW1lbGluZV9uYW1lID0gbXNtX2ZlbmNlX2dldF90aW1lbGluZV9u
-YW1lLAo+ID4gPiA+ID4gICAgICAgLnNpZ25hbGVkID0gbXNtX2ZlbmNlX3NpZ25hbGVkLAo+ID4g
-PiA+ID4gKyAgICAgLndhaXQgPSBtc21fZmVuY2Vfd2FpdCwKPiA+ID4gPiA+ICAgfTsKPiA+ID4g
-PiA+Cj4gPiA+ID4gPiAgIHN0cnVjdCBkbWFfZmVuY2UgKgo+ID4gPiA+Cj4gPgo+ID4KPiA+Cj4g
-PiAtLQo+ID4gRGFuaWVsIFZldHRlcgo+ID4gU29mdHdhcmUgRW5naW5lZXIsIEludGVsIENvcnBv
-cmF0aW9uCj4gPiBodHRwOi8vYmxvZy5mZndsbC5jaAoKCgotLSAKRGFuaWVsIFZldHRlcgpTb2Z0
-d2FyZSBFbmdpbmVlciwgSW50ZWwgQ29ycG9yYXRpb24KaHR0cDovL2Jsb2cuZmZ3bGwuY2gKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNp
-ZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlz
-dHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+On Wed, Jul 21, 2021 at 6:12 AM Desmond Cheong Zhi Xi
+<desmondcheongzx@gmail.com> wrote:
+> On 21/7/21 2:24 am, Daniel Vetter wrote:
+> > On Mon, Jul 12, 2021 at 12:35:03PM +0800, Desmond Cheong Zhi Xi wrote:
+> >> Hi,
+> >>
+> >> In the previous thread on this series we decided to remove a patch that was violating a lockdep requirement in drm_lease. In addition to this change, I took a closer look at the CI logs for the Basic Acceptance Tests and noticed that another regression was introduced. The new patch 2 is a response to this.
+> >>
+> >> Overall, this series addresses potential use-after-free errors when dereferencing pointers to struct drm_master. These were identified after one such bug was caught by Syzbot in drm_getunique():
+> >> https://syzkaller.appspot.com/bug?id=148d2f1dfac64af52ffd27b661981a540724f803
+> >>
+> >> The series is broken up into five patches:
+> >>
+> >> 1. Move a call to drm_is_current_master() out from a section locked by &dev->mode_config.mutex in drm_mode_getconnector(). This patch does not apply to stable.
+> >>
+> >> 2. Move a call to drm_is_current_master() out from the RCU read-side critical section in drm_clients_info().
+> >>
+> >> 3. Implement a locked version of drm_is_current_master() function that's used within drm_auth.c.
+> >>
+> >> 4. Serialize drm_file.master by introducing a new spinlock that's held whenever the value of drm_file.master changes.
+> >>
+> >> 5. Identify areas in drm_lease.c where pointers to struct drm_master are dereferenced, and ensure that the master pointers are not freed during use.
+> >>
+> >> v7 -> v8:
+> >> - Remove the patch that moves the call to _drm_lease_held out from the section locked by &dev->mode_config.idr_mutex in __drm_mode_object_find. This patch violated an existing lockdep requirement as reported by the intel-gfx CI.
+> >> - Added a new patch that moves a call to drm_is_current_master out from the RCU critical section in drm_clients_info. This was reported by the intel-gfx CI.
+> >>
+> >> v6 -> v7:
+> >> - Modify code alignment as suggested by the intel-gfx CI.
+> >> - Add a new patch to the series that adds a new lock to serialize drm_file.master, in response to the lockdep splat by the intel-gfx CI.
+> >> - Update drm_file_get_master to use the new drm_file.master_lock instead of drm_device.master_mutex, in response to the lockdep splat by the intel-gfx CI.
+> >>
+> >> v5 -> v6:
+> >> - Add a new patch to the series that moves the call to _drm_lease_held out from the section locked by &dev->mode_config.idr_mutex in __drm_mode_object_find.
+> >> - Clarify the kerneldoc for dereferencing drm_file.master, as suggested by Daniel Vetter.
+> >> - Refactor error paths with goto labels so that each function only has a single drm_master_put(), as suggested by Emil Velikov.
+> >> - Modify comparisons to NULL into "!master", as suggested by the intel-gfx CI.
+> >>
+> >> v4 -> v5:
+> >> - Add a new patch to the series that moves the call to drm_is_current_master in drm_mode_getconnector out from the section locked by &dev->mode_config.mutex.
+> >> - Additionally, added a missing semicolon to the patch, caught by the intel-gfx CI.
+> >>
+> >> v3 -> v4:
+> >> - Move the call to drm_is_current_master in drm_mode_getconnector out from the section locked by &dev->mode_config.mutex. As suggested by Daniel Vetter. This avoids a circular lock lock dependency as reported here https://patchwork.freedesktop.org/patch/440406/
+> >> - Inside drm_is_current_master, instead of grabbing &fpriv->master->dev->master_mutex, we grab &fpriv->minor->dev->master_mutex to avoid dereferencing a null ptr if fpriv->master is not set.
+> >> - Modify kerneldoc formatting for drm_file.master, as suggested by Daniel Vetter.
+> >> - Additionally, add a file_priv->master NULL check inside drm_file_get_master, and handle the NULL result accordingly in drm_lease.c. As suggested by Daniel Vetter.
+> >>
+> >> v2 -> v3:
+> >> - Move the definition of drm_is_current_master and the _locked version higher up in drm_auth.c to avoid needing a forward declaration of drm_is_current_master_locked. As suggested by Daniel Vetter.
+> >> - Instead of leaking drm_device.master_mutex into drm_lease.c to protect drm_master pointers, add a new drm_file_get_master() function that returns drm_file->master while increasing its reference count, to prevent drm_file->master from being freed. As suggested by Daniel Vetter.
+> >>
+> >> v1 -> v2:
+> >> - Move the lock and assignment before the DRM_DEBUG_LEASE in drm_mode_get_lease_ioctl, as suggested by Emil Velikov.
+> >
+> > Apologies for the delay, I missed your series. Maybe just ping next time
+> > around there's silence.
+> >
+> > Looks all great, merged to drm-misc-next. Given how complex this was I'm
+> > vary of just pushing this to -fixes without some solid testing.
+> >
+>
+> Hi Daniel,
+>
+> Thanks for merging, more testing definitely sounds good to me.
+>
+> > One thing I noticed is that drm_is_current_master could just use the
+> > spinlock, since it's only doing a read access. Care to type up that patch?
+> >
+>
+> I thought about this too, but I'm not sure if that's the best solution.
+>
+> drm_is_current_master calls drm_lease_owner which then walks up the tree
+> of master lessors. The spinlock protects the master of the current drm
+> file, but subsequent lessors aren't protected without holding the
+> device's master mutex.
+
+But this isn't a fpriv->master pointer, but a master->lessor pointer.
+Which should never ever be able to change (we'd have tons of uaf bugs
+around drm_lease_owner otherwise). So I don't think there's anything
+that dev->master_lock protects here that fpriv->master_lookup_lock
+doesn't protect already?
+
+Or am I missing something?
+
+The comment in the struct drm_master says it's protected by
+mode_config.idr_mutex, but that only applies to the idrs and lists I
+think.
+
+> > Also, do you plan to look into that idea we've discussed to flush pending
+> > access when we revoke a master or a lease? I think that would be really
+> > nice improvement here.
+> > -Daniel
+> >
+>
+> Yup, now that the potential UAFs are addressed (hopefully), I'll take a
+> closer look and propose a patch for this.
+
+Thanks a lot.
+-Daniel
+
+>
+> Best wishes,
+> Desmond
+>
+> >>
+> >> Desmond Cheong Zhi Xi (5):
+> >>    drm: avoid circular locks in drm_mode_getconnector
+> >>    drm: avoid blocking in drm_clients_info's rcu section
+> >>    drm: add a locked version of drm_is_current_master
+> >>    drm: serialize drm_file.master with a new spinlock
+> >>    drm: protect drm_master pointers in drm_lease.c
+> >>
+> >>   drivers/gpu/drm/drm_auth.c      | 93 ++++++++++++++++++++++++---------
+> >>   drivers/gpu/drm/drm_connector.c |  5 +-
+> >>   drivers/gpu/drm/drm_debugfs.c   |  3 +-
+> >>   drivers/gpu/drm/drm_file.c      |  1 +
+> >>   drivers/gpu/drm/drm_lease.c     | 81 +++++++++++++++++++++-------
+> >>   include/drm/drm_auth.h          |  1 +
+> >>   include/drm/drm_file.h          | 18 +++++--
+> >>   7 files changed, 152 insertions(+), 50 deletions(-)
+> >>
+> >> --
+> >> 2.25.1
+> >>
+> >
+>
+
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
