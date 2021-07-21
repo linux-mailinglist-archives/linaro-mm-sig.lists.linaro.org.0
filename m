@@ -2,67 +2,85 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3845F3D143F
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jul 2021 18:30:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E71A13D16DD
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jul 2021 21:03:37 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5A36162EA6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jul 2021 16:30:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id ABFA6623DB
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 21 Jul 2021 19:03:36 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 187556319C; Wed, 21 Jul 2021 16:30:43 +0000 (UTC)
+	id 71A6562171; Wed, 21 Jul 2021 19:03:33 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9EED961A3E;
-	Wed, 21 Jul 2021 16:30:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9D60261A40;
+	Wed, 21 Jul 2021 19:03:30 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id F014661951
- for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jul 2021 16:30:38 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 218F4619C8
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jul 2021 19:03:28 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id EDAAC61A3E; Wed, 21 Jul 2021 16:30:38 +0000 (UTC)
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
- [209.85.221.44])
- by lists.linaro.org (Postfix) with ESMTPS id D8C6161951
- for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jul 2021 16:30:36 +0000 (UTC)
-Received: by mail-wr1-f44.google.com with SMTP id d2so2892989wrn.0
- for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jul 2021 09:30:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=695MrDT0K9k+DPPQVTnkggC9g+99Gebdftp/V5WcV7E=;
- b=tE2zlnUNHozA9P+a1k4lJpYerJo4F9LNDK32HUnwTz1qs0wNomMFs9f/Pshlq/v7nd
- 9mPRqllJS2yP58SJP/ixoCNTTeH1FKPTpRGtfKuSGVbv8GPStt6JtfABdp1oa53CMRds
- /YcCsSB6ARAKEs+r8XOaa8nU5DFlOodpM2XLmFAE4SudMNpAowoj/XXskrK1K2ElJkF9
- yzLeLFxuKDBIC11Pmm94FtMiCNApnXGTWY+6kIusmXhyGz5xwj/jl3ovmuco5JwzQMok
- ZB/owN9Hawj7xa5cr/ObrNSzhLTt80uv+ENdsYxBzHk9AX38hSjEB32IVK7SVHpeiyQ5
- xdxA==
+ id 16E2461A40; Wed, 21 Jul 2021 19:03:28 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com
+ [209.85.218.47])
+ by lists.linaro.org (Postfix) with ESMTPS id 0D0E9619C8
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jul 2021 19:03:25 +0000 (UTC)
+Received: by mail-ej1-f47.google.com with SMTP id dt7so4737160ejc.12
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Jul 2021 12:03:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to; bh=++tgyshRvxlgbKnxZVEXxedsZvd2u9+anyBU9UM8Xho=;
+ b=B+ZMCYMEBA7TCugxdS96PT2yzHfPnFBenpQsw1uxTHDSE0amhbipWWAm1DENubb1HB
+ qmn2VFdZsXfDzOWjfW7eFldgAPNzGL4PYnCaOIDSYc68GjATwHGyAP45fTM343lcNnOH
+ Qbxxx+aJbRGccoyxoUWcn+tnKkNKJriyFU2XA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=695MrDT0K9k+DPPQVTnkggC9g+99Gebdftp/V5WcV7E=;
- b=hPEHizd5o4xqwaCk9QnNlrqqE7HPkCPmbwwjCLndHS2keRdfK7UAmviNEP5uJZX49i
- iezWHeqgG9SZngkgsXcWFDg2QHUA9Jwr8hLb+ZsucNJAIPq75EQ8/Tlcjt3xI3qC4mY9
- oIDQRpyY86O5RbAALkYs8X4vY/ZTsi3FAAaxHwRWB69F9gwWSa5ysyWnXT8TVMnGywzH
- x1QsaxyuTIjwflslq8aNG5IcCPUIZU05csd6A0O45TpkqRFmszQTEdLTYsVGntoyR1GS
- 9/6vIeprl0//UHrPusv8KRm7HwhM9zjuv9jGMji5sZ7cyq05vaxcvNyeveVhYkZSrS5c
- GxTA==
-X-Gm-Message-State: AOAM531nVoxAmgqJuVYHjZ49rB1QabVCbk9SL70KdJ5oG63Gy4FMNa0E
- 4tj+wVmplMJ9MkVdMaFHovZ6zfFs56/8fsF9dXY=
-X-Google-Smtp-Source: ABdhPJwk21KU1klLs4pYnPOPgpXaJSial8OghcGwbfJeYDt/kG3Xb2Lx+UxjaPcp7ecwerwAvAc8mh0D3usKG8EzVoQ=
-X-Received: by 2002:adf:eb43:: with SMTP id u3mr43883874wrn.83.1626885035777; 
- Wed, 21 Jul 2021 09:30:35 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :content-transfer-encoding:in-reply-to;
+ bh=++tgyshRvxlgbKnxZVEXxedsZvd2u9+anyBU9UM8Xho=;
+ b=kKZYf62CdDgkyzbvrbYW/X4R682PmiARRtE1pUZaAZmCy/RZmN0gmHXiYVaunSgKoj
+ /WQLiz9yl8S1QbeVPjqPwi4ebelKQ4QUAhjrnxfV+VSE3tC36IGM4Mlx+y0GPppY/t+V
+ jjT2UCNokUJN9kQxh2w3u4gtKuTWoYm0EcTBrqMpgbIs7ak3ngZNci4I/4OzwjnmEBnO
+ c1pTiRQjtdQoCiKNRrK95P2HScD5Wo5fiMnH57C0YBxM6lK0zYz+b38u8+YmJWY9rR1G
+ 0UqKyHoeH3n/rj3wHZf+QI59d15rDxcZeu/dSQBYjZ0SR/aTLpZnZDooL9+HFkoFa9MC
+ gU9Q==
+X-Gm-Message-State: AOAM530BhQ7+NA7GOT2EAPD3TmXdnZOEiYW8Cp+TZ0BO0D5fi5CpavSY
+ jznQd4XdG/Hmb7pG6c78EataGQ==
+X-Google-Smtp-Source: ABdhPJzRzeP4RRoslhkL+sfcipP2tBusBU19nwhsPrBS8Te754Ug8WzWQs0xJeUdghEQbKoPAJh0vQ==
+X-Received: by 2002:a17:906:e51:: with SMTP id
+ q17mr40233574eji.140.1626894204918; 
+ Wed, 21 Jul 2021 12:03:24 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id k1sm8648459eji.84.2021.07.21.12.03.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Jul 2021 12:03:24 -0700 (PDT)
+Date: Wed, 21 Jul 2021 21:03:22 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Rob Clark <robdclark@gmail.com>
+Message-ID: <YPhvein5e8do2AR+@phenom.ffwll.local>
+Mail-Followup-To: Rob Clark <robdclark@gmail.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Rob Clark <robdclark@chromium.org>,
+ "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
+ David Airlie <airlied@linux.ie>,
+ "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
+ open list <linux-kernel@vger.kernel.org>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Sean Paul <sean@poorly.run>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
 References: <20210720150716.1213775-1-robdclark@gmail.com>
  <60ffb6f3-e932-d9af-3b90-81adf0c15250@gmail.com>
  <CAF6AEGtOW3EjZWo36ij8U1om=gAqvg8CSkJJq2GkyHFGWUH4kQ@mail.gmail.com>
  <CAKMK7uF1=Y6_9znGoWG8GrteXBBRmyW8C3bFE+eJQqOj0A1buA@mail.gmail.com>
  <CAF6AEGsOVPdMkXwU9C+nDfQpPThveJ2A0jbXi43RRkkJKtnz3w@mail.gmail.com>
  <CAKMK7uHMXFqic=9APJrSf6totB8nGZTDe4x8+sv-drmV4Q+4Bg@mail.gmail.com>
-In-Reply-To: <CAKMK7uHMXFqic=9APJrSf6totB8nGZTDe4x8+sv-drmV4Q+4Bg@mail.gmail.com>
-From: Rob Clark <robdclark@gmail.com>
-Date: Wed, 21 Jul 2021 09:34:43 -0700
-Message-ID: <CAF6AEGsKoucxt4a2pcdQM9+L0+YU-6TcAt8eF=3ur169646Jhw@mail.gmail.com>
-To: Daniel Vetter <daniel@ffwll.ch>
+ <CAF6AEGsKoucxt4a2pcdQM9+L0+YU-6TcAt8eF=3ur169646Jhw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAF6AEGsKoucxt4a2pcdQM9+L0+YU-6TcAt8eF=3ur169646Jhw@mail.gmail.com>
+X-Operating-System: Linux phenom 5.10.0-7-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [PATCH] drm/msm: Add fence->wait() op
 X-BeenThere: linaro-mm-sig@lists.linaro.org
@@ -81,169 +99,278 @@ Cc: Rob Clark <robdclark@chromium.org>, David Airlie <airlied@linux.ie>,
  open list <linux-kernel@vger.kernel.org>,
  dri-devel <dri-devel@lists.freedesktop.org>,
  "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Sean Paul <sean@poorly.run>,
+ Sean Paul <sean@poorly.run>, Daniel Vetter <daniel@ffwll.ch>,
  "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
  "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
  "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gV2VkLCBKdWwgMjEsIDIwMjEgYXQgMTI6NTkgQU0gRGFuaWVsIFZldHRlciA8ZGFuaWVsQGZm
-d2xsLmNoPiB3cm90ZToKPgo+IE9uIFdlZCwgSnVsIDIxLCAyMDIxIGF0IDEyOjMyIEFNIFJvYiBD
-bGFyayA8cm9iZGNsYXJrQGdtYWlsLmNvbT4gd3JvdGU6Cj4gPgo+ID4gT24gVHVlLCBKdWwgMjAs
-IDIwMjEgYXQgMTo1NSBQTSBEYW5pZWwgVmV0dGVyIDxkYW5pZWxAZmZ3bGwuY2g+IHdyb3RlOgo+
-ID4gPgo+ID4gPiBPbiBUdWUsIEp1bCAyMCwgMjAyMSBhdCA4OjI2IFBNIFJvYiBDbGFyayA8cm9i
-ZGNsYXJrQGdtYWlsLmNvbT4gd3JvdGU6Cj4gPiA+ID4KPiA+ID4gPiBPbiBUdWUsIEp1bCAyMCwg
-MjAyMSBhdCAxMTowMyBBTSBDaHJpc3RpYW4gS8O2bmlnCj4gPiA+ID4gPGNrb2VuaWcubGVpY2h0
-enVtZXJrZW5AZ21haWwuY29tPiB3cm90ZToKPiA+ID4gPiA+Cj4gPiA+ID4gPiBIaSBSb2IsCj4g
-PiA+ID4gPgo+ID4gPiA+ID4gQW0gMjAuMDcuMjEgdW0gMTc6MDcgc2NocmllYiBSb2IgQ2xhcms6
-Cj4gPiA+ID4gPiA+IEZyb206IFJvYiBDbGFyayA8cm9iZGNsYXJrQGNocm9taXVtLm9yZz4KPiA+
-ID4gPiA+ID4KPiA+ID4gPiA+ID4gU29tZWhvdyB3ZSBoYWQgbmVpdGhlciAtPndhaXQoKSBub3Ig
-ZG1hX2ZlbmNlX3NpZ25hbCgpIGNhbGxzLCBhbmQgbm8KPiA+ID4gPiA+ID4gb25lIG5vdGljZWQu
-ICBPb3BzLgo+ID4gPiA+ID4KPiA+ID4gPiA+Cj4gPiA+ID4gPiBJJ20gbm90IHN1cmUgaWYgdGhh
-dCBpcyBhIGdvb2QgaWRlYS4KPiA+ID4gPiA+Cj4gPiA+ID4gPiBUaGUgZG1hX2ZlbmNlLT53YWl0
-KCkgY2FsbGJhY2sgaXMgcHJldHR5IG11Y2ggZGVwcmVjYXRlZCBhbmQgc2hvdWxkIG5vdAo+ID4g
-PiA+ID4gYmUgdXNlZCBhbnkgbW9yZS4KPiA+ID4gPiA+Cj4gPiA+ID4gPiBXaGF0IGV4YWN0bHkg
-ZG8geW91IG5lZWQgdGhhdCBmb3I/Cj4gPiA+ID4KPiA+ID4gPiBXZWxsLCB0aGUgYWx0ZXJuYXRp
-dmUgaXMgdG8gdHJhY2sgdGhlIHNldCBvZiBmZW5jZXMgd2hpY2ggaGF2ZQo+ID4gPiA+IHNpZ25h
-bGxpbmcgZW5hYmxlZCwgYW5kIHRoZW4gZmlndXJlIG91dCB3aGljaCBvbmVzIHRvIHNpZ25hbCwg
-d2hpY2gKPiA+ID4gPiBzZWVtcyBsaWtlIGEgbG90IG1vcmUgd29yaywgdnMganVzdCByZS1wdXJw
-b3NpbmcgdGhlIHdhaXQKPiA+ID4gPiBpbXBsZW1lbnRhdGlvbiB3ZSBhbHJlYWR5IGhhdmUgZm9y
-IG5vbi1kbWFfZmVuY2UgY2FzZXMgOy0pCj4gPiA+ID4KPiA+ID4gPiBXaHkgaXMgdGhlIC0+d2Fp
-dCgpIGNhbGxiYWNrIChwcmV0dHkgbXVjaCkgZGVwcmVjYXRlZD8KPiA+ID4KPiA+ID4gQmVjYXVz
-ZSBpZiB5b3UgbmVlZCBpdCB0aGF0IG1lYW5zIGZvciB5b3VyIGRyaXZlciBkbWFfZmVuY2VfYWRk
-X2NiIGlzCj4gPiA+IGJyb2tlbiwgd2hpY2ggbWVhbnMgYSBfbG90XyBvZiB0aGluZ3MgZG9uJ3Qg
-d29yay4gTGlrZSBkbWFfYnVmIHBvbGwKPiA+ID4gKGNvbXBvc2l0b3JzIGhhdmUgcGF0Y2hlcyB0
-byBzdGFydCB1c2luZyB0aGF0KSwgYW5kIEkgdGhpbmsKPiA+ID4gZHJtL3NjaGVkdWxlciBhbHNv
-IGJlY29tZXMgcmF0aGVyIHVuaGFwcHkuCj4gPgo+ID4gSSdtIHN0YXJ0aW5nIHRvIHBhZ2UgYmFj
-ayBpbiBob3cgdGhpcyB3b3Jrcy4uIGZlbmNlIGNiJ3MgYXJlbid0IGJyb2tlbgo+ID4gKHdoaWNo
-IGlzIGFsc28gd2h5IGRtYV9mZW5jZV93YWl0KCkgd2FzIG5vdCBjb21wbGV0ZWx5IGJyb2tlbiks
-Cj4gPiBiZWNhdXNlIGluIHJldGlyZV9zdWJtaXRzKCkgd2UgY2FsbAo+ID4gZG1hX2ZlbmNlX2lz
-X3NpZ25hbGVkKHN1Ym1pdC0+aHdfZmVuY2UpLgo+ID4KPiA+IEJ1dCB0aGUgcmVhc29uIHRoYXQg
-dGhlIGN1c3RvbSB3YWl0IGZ1bmN0aW9uIGNsZWFucyB1cCBhIHRpbnkgYml0IG9mCj4gPiBqYW5r
-IGlzIHRoYXQgdGhlIHdhaXRfcXVldWVfaGVhZF90IGdldHMgc2lnbmFsZWQgZWFybGllciwgYmVm
-b3JlIHdlCj4gPiBzdGFydCBpdGVyYXRpbmcgdGhlIHN1Ym1pdHMgYW5kIGRvaW5nIGFsbCB0aGF0
-IHJldGlyZV9zdWJtaXQoKSBzdHVmZgo+ID4gKHVucGluL3VucmVmIGJvJ3MsIGV0YykuICBJIHN1
-cHBvc2UgSSBjb3VsZCBqdXN0IHNwbGl0IHRoaW5ncyB1cCB0bwo+ID4gY2FsbCBkbWFfZmVuY2Vf
-c2lnbmFsKCkgZWFybGllciwgYW5kICp0aGVuKiBkbyB0aGUgcmV0aXJlX3N1Ym1pdHMoKQo+ID4g
-c3R1ZmYuCj4KPiBZZWFoIHJlZHVjaW5nIHRoZSBsYXRlbmN5IHRoZXJlIHNvdW5kcyBsaWtlIGEg
-Z29vZCBpZGVhLgo+IC1EYW5pZWwKPgoKSG1tLCBubywgdHVybnMgb3V0IHRoYXQgaXNuJ3QgdGhl
-IHByb2JsZW0uLiBvciwgd2VsbCwgaXQgaXMgcHJvYmFibHkgYQpnb29kIGlkZWEgdG8gY2FsbCBk
-cm1fZmVuY2Vfc2lnbmFsKCkgZWFybGllci4gIEJ1dCBpdCBzZWVtcyBsaWtlCndha2luZyB1cCBm
-cm9tIHdhaXRfZXZlbnRfKiBpcyBmYXN0ZXIgdGhhbiB3YWtlX3VwX3N0YXRlKHdhaXQtPnRhc2ss
-ClRBU0tfTk9STUFMKS4gIEkgc3VwcG9zZSB0aGUgd2FrZV91cF9zdGF0ZSgpIGFwcHJvYWNoIHN0
-aWxsIG5lZWRzIGZvcgp0aGUgc2NoZWR1bGVyIHRvIGdldCBhcm91bmQgdG8gc2NoZWR1bGUgdGhl
-IHJ1bm5hYmxlIHRhc2suCgpTbyBmb3Igbm93LCBJJ20gZ29pbmcgYmFjayB0byBteSBvd24gd2Fp
-dCBmdW5jdGlvbiAocGx1cyBlYXJsaWVyCmRybV9mZW5jZV9zaWduYWwoKSkKCkJlZm9yZSByZW1v
-dmluZyBkbWFfZmVuY2Vfb3Bwczo6d2FpdCgpLCBJIGd1ZXNzIHdlIHdhbnQgdG8gcmUtdGhpbmsK
-ZG1hX2ZlbmNlX2RlZmF1bHRfd2FpdCgpLi4gYnV0IEkgdGhpbmsgdGhhdCB3b3VsZCByZXF1aXJl
-IGEKZG1hX2ZlbmNlX2NvbnRleHQgYmFzZSBjbGFzcyAocmF0aGVyIHRoYW4ganVzdCBhIHJhdyBp
-bnRlZ2VyKS4KCkJSLAotUgoKPiA+Cj4gPiBCUiwKPiA+IC1SCj4gPgo+ID4gPiBJdCBlc3NlbnRp
-YWxseSBleGlzdHMgb25seSBmb3Igb2xkIGRyaXZlcnMgd2hlcmUgLT5lbmFibGVfc2lnbmFsbGlu
-Zwo+ID4gPiBpcyB1bnJlbGlhYmxlIGFuZCB3ZSBwYXBlciBvdmVyIHRoYXQgd2l0aCBhIHJldHJ5
-IGxvb3AgaW4gLT53YWl0IGFuZAo+ID4gPiBwcmF5IG5vIG9uZSBub3RpY2VzIHRoYXQgaXQncyB0
-b28gYnV0Y2hlcmVkLiBUaGUgcHJvcGVyIGZpeCBpcyB0byBoYXZlCj4gPiA+IGEgZHJpdmVyIHRo
-cmVhZCB0byBndWFyYW50ZWUgdGhhdCAtPmVuYWJsZV9zaWduYWxsaW5nIHdvcmtzIHJlbGlhYmxl
-LAo+ID4gPiBzbyB5b3UgZG9uJ3QgbmVlZCBhIC0+d2FpdC4KPiA+ID4KPiA+ID4gQ2FuIHlvdSB0
-eXBlIHVwIGEga2VybmVsZG9jIHBhdGNoIGZvciBkbWFfZmVuY2Vfb3BzLT53YWl0IHRvIGhhbW1l
-cgo+ID4gPiB0aGlzIGluIHBsZWFzZT8KPiA+ID4gLURhbmllbAo+ID4gPgo+ID4gPiA+Cj4gPiA+
-ID4gQlIsCj4gPiA+ID4gLVIKPiA+ID4gPgo+ID4gPiA+ID4gUmVnYXJkcywKPiA+ID4gPiA+IENo
-cmlzdGlhbi4KPiA+ID4gPiA+Cj4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+IE5vdGUgdGhhdCB0aGlz
-IHJlbW92ZXMgdGhlICF0aW1lb3V0IGNhc2UsIHdoaWNoIGhhcyBub3QgYmVlbiB1c2VkIGluCj4g
-PiA+ID4gPiA+IGEgbG9uZyB0aW1lLgo+ID4gPiA+ID4KPiA+ID4gPiA+Cj4gPiA+ID4gPiA+Cj4g
-PiA+ID4gPiA+IFNpZ25lZC1vZmYtYnk6IFJvYiBDbGFyayA8cm9iZGNsYXJrQGNocm9taXVtLm9y
-Zz4KPiA+ID4gPiA+ID4gLS0tCj4gPiA+ID4gPiA+ICAgZHJpdmVycy9ncHUvZHJtL21zbS9tc21f
-ZmVuY2UuYyB8IDU5ICsrKysrKysrKysrKysrKysrKystLS0tLS0tLS0tLS0tLQo+ID4gPiA+ID4g
-PiAgIDEgZmlsZSBjaGFuZ2VkLCAzNCBpbnNlcnRpb25zKCspLCAyNSBkZWxldGlvbnMoLSkKPiA+
-ID4gPiA+ID4KPiA+ID4gPiA+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9tc20vbXNt
-X2ZlbmNlLmMgYi9kcml2ZXJzL2dwdS9kcm0vbXNtL21zbV9mZW5jZS5jCj4gPiA+ID4gPiA+IGlu
-ZGV4IGNkNTlhNTkxODAzOC4uOGVlOTZiOTBkZWQ2IDEwMDY0NAo+ID4gPiA+ID4gPiAtLS0gYS9k
-cml2ZXJzL2dwdS9kcm0vbXNtL21zbV9mZW5jZS5jCj4gPiA+ID4gPiA+ICsrKyBiL2RyaXZlcnMv
-Z3B1L2RybS9tc20vbXNtX2ZlbmNlLmMKPiA+ID4gPiA+ID4gQEAgLTM4LDExICszOCwxMCBAQCBz
-dGF0aWMgaW5saW5lIGJvb2wgZmVuY2VfY29tcGxldGVkKHN0cnVjdCBtc21fZmVuY2VfY29udGV4
-dCAqZmN0eCwgdWludDMyX3QgZmVuYwo+ID4gPiA+ID4gPiAgICAgICByZXR1cm4gKGludDMyX3Qp
-KGZjdHgtPmNvbXBsZXRlZF9mZW5jZSAtIGZlbmNlKSA+PSAwOwo+ID4gPiA+ID4gPiAgIH0KPiA+
-ID4gPiA+ID4KPiA+ID4gPiA+ID4gLS8qIGxlZ2FjeSBwYXRoIGZvciBXQUlUX0ZFTkNFIGlvY3Rs
-OiAqLwo+ID4gPiA+ID4gPiAtaW50IG1zbV93YWl0X2ZlbmNlKHN0cnVjdCBtc21fZmVuY2VfY29u
-dGV4dCAqZmN0eCwgdWludDMyX3QgZmVuY2UsCj4gPiA+ID4gPiA+IC0gICAgICAgICAgICAga3Rp
-bWVfdCAqdGltZW91dCwgYm9vbCBpbnRlcnJ1cHRpYmxlKQo+ID4gPiA+ID4gPiArc3RhdGljIHNp
-Z25lZCBsb25nIHdhaXRfZmVuY2Uoc3RydWN0IG1zbV9mZW5jZV9jb250ZXh0ICpmY3R4LCB1aW50
-MzJfdCBmZW5jZSwKPiA+ID4gPiA+ID4gKyAgICAgICAgICAgICBzaWduZWQgbG9uZyByZW1haW5p
-bmdfamlmZmllcywgYm9vbCBpbnRlcnJ1cHRpYmxlKQo+ID4gPiA+ID4gPiAgIHsKPiA+ID4gPiA+
-ID4gLSAgICAgaW50IHJldDsKPiA+ID4gPiA+ID4gKyAgICAgc2lnbmVkIGxvbmcgcmV0Owo+ID4g
-PiA+ID4gPgo+ID4gPiA+ID4gPiAgICAgICBpZiAoZmVuY2UgPiBmY3R4LT5sYXN0X2ZlbmNlKSB7
-Cj4gPiA+ID4gPiA+ICAgICAgICAgICAgICAgRFJNX0VSUk9SX1JBVEVMSU1JVEVEKCIlczogd2Fp
-dGluZyBvbiBpbnZhbGlkIGZlbmNlOiAldSAob2YgJXUpXG4iLAo+ID4gPiA+ID4gPiBAQCAtNTAs
-MzMgKzQ5LDM0IEBAIGludCBtc21fd2FpdF9mZW5jZShzdHJ1Y3QgbXNtX2ZlbmNlX2NvbnRleHQg
-KmZjdHgsIHVpbnQzMl90IGZlbmNlLAo+ID4gPiA+ID4gPiAgICAgICAgICAgICAgIHJldHVybiAt
-RUlOVkFMOwo+ID4gPiA+ID4gPiAgICAgICB9Cj4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+IC0gICAg
-IGlmICghdGltZW91dCkgewo+ID4gPiA+ID4gPiAtICAgICAgICAgICAgIC8qIG5vLXdhaXQ6ICov
-Cj4gPiA+ID4gPiA+IC0gICAgICAgICAgICAgcmV0ID0gZmVuY2VfY29tcGxldGVkKGZjdHgsIGZl
-bmNlKSA/IDAgOiAtRUJVU1k7Cj4gPiA+ID4gPiA+ICsgICAgIGlmIChpbnRlcnJ1cHRpYmxlKSB7
-Cj4gPiA+ID4gPiA+ICsgICAgICAgICAgICAgcmV0ID0gd2FpdF9ldmVudF9pbnRlcnJ1cHRpYmxl
-X3RpbWVvdXQoZmN0eC0+ZXZlbnQsCj4gPiA+ID4gPiA+ICsgICAgICAgICAgICAgICAgICAgICBm
-ZW5jZV9jb21wbGV0ZWQoZmN0eCwgZmVuY2UpLAo+ID4gPiA+ID4gPiArICAgICAgICAgICAgICAg
-ICAgICAgcmVtYWluaW5nX2ppZmZpZXMpOwo+ID4gPiA+ID4gPiAgICAgICB9IGVsc2Ugewo+ID4g
-PiA+ID4gPiAtICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgcmVtYWluaW5nX2ppZmZpZXMgPSB0
-aW1lb3V0X3RvX2ppZmZpZXModGltZW91dCk7Cj4gPiA+ID4gPiA+IC0KPiA+ID4gPiA+ID4gLSAg
-ICAgICAgICAgICBpZiAoaW50ZXJydXB0aWJsZSkKPiA+ID4gPiA+ID4gLSAgICAgICAgICAgICAg
-ICAgICAgIHJldCA9IHdhaXRfZXZlbnRfaW50ZXJydXB0aWJsZV90aW1lb3V0KGZjdHgtPmV2ZW50
-LAo+ID4gPiA+ID4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmZW5jZV9jb21wbGV0
-ZWQoZmN0eCwgZmVuY2UpLAo+ID4gPiA+ID4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICByZW1haW5pbmdfamlmZmllcyk7Cj4gPiA+ID4gPiA+IC0gICAgICAgICAgICAgZWxzZQo+ID4g
-PiA+ID4gPiAtICAgICAgICAgICAgICAgICAgICAgcmV0ID0gd2FpdF9ldmVudF90aW1lb3V0KGZj
-dHgtPmV2ZW50LAo+ID4gPiA+ID4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmZW5j
-ZV9jb21wbGV0ZWQoZmN0eCwgZmVuY2UpLAo+ID4gPiA+ID4gPiAtICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICByZW1haW5pbmdfamlmZmllcyk7Cj4gPiA+ID4gPiA+IC0KPiA+ID4gPiA+ID4g
-LSAgICAgICAgICAgICBpZiAocmV0ID09IDApIHsKPiA+ID4gPiA+ID4gLSAgICAgICAgICAgICAg
-ICAgICAgIERCRygidGltZW91dCB3YWl0aW5nIGZvciBmZW5jZTogJXUgKGNvbXBsZXRlZDogJXUp
-IiwKPiA+ID4gPiA+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBmZW5j
-ZSwgZmN0eC0+Y29tcGxldGVkX2ZlbmNlKTsKPiA+ID4gPiA+ID4gLSAgICAgICAgICAgICAgICAg
-ICAgIHJldCA9IC1FVElNRURPVVQ7Cj4gPiA+ID4gPiA+IC0gICAgICAgICAgICAgfSBlbHNlIGlm
-IChyZXQgIT0gLUVSRVNUQVJUU1lTKSB7Cj4gPiA+ID4gPiA+IC0gICAgICAgICAgICAgICAgICAg
-ICByZXQgPSAwOwo+ID4gPiA+ID4gPiAtICAgICAgICAgICAgIH0KPiA+ID4gPiA+ID4gKyAgICAg
-ICAgICAgICByZXQgPSB3YWl0X2V2ZW50X3RpbWVvdXQoZmN0eC0+ZXZlbnQsCj4gPiA+ID4gPiA+
-ICsgICAgICAgICAgICAgICAgICAgICBmZW5jZV9jb21wbGV0ZWQoZmN0eCwgZmVuY2UpLAo+ID4g
-PiA+ID4gPiArICAgICAgICAgICAgICAgICAgICAgcmVtYWluaW5nX2ppZmZpZXMpOwo+ID4gPiA+
-ID4gPiArICAgICB9Cj4gPiA+ID4gPiA+ICsKPiA+ID4gPiA+ID4gKyAgICAgaWYgKHJldCA9PSAw
-KSB7Cj4gPiA+ID4gPiA+ICsgICAgICAgICAgICAgREJHKCJ0aW1lb3V0IHdhaXRpbmcgZm9yIGZl
-bmNlOiAldSAoY29tcGxldGVkOiAldSkiLAo+ID4gPiA+ID4gPiArICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICBmZW5jZSwgZmN0eC0+Y29tcGxldGVkX2ZlbmNlKTsKPiA+ID4gPiA+ID4gKyAg
-ICAgICAgICAgICByZXQgPSAtRVRJTUVET1VUOwo+ID4gPiA+ID4gPiArICAgICB9IGVsc2UgaWYg
-KHJldCAhPSAtRVJFU1RBUlRTWVMpIHsKPiA+ID4gPiA+ID4gKyAgICAgICAgICAgICByZXQgPSAw
-Owo+ID4gPiA+ID4gPiAgICAgICB9Cj4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+ICAgICAgIHJldHVy
-biByZXQ7Cj4gPiA+ID4gPiA+ICAgfQo+ID4gPiA+ID4gPgo+ID4gPiA+ID4gPiArLyogbGVnYWN5
-IHBhdGggZm9yIFdBSVRfRkVOQ0UgaW9jdGw6ICovCj4gPiA+ID4gPiA+ICtpbnQgbXNtX3dhaXRf
-ZmVuY2Uoc3RydWN0IG1zbV9mZW5jZV9jb250ZXh0ICpmY3R4LCB1aW50MzJfdCBmZW5jZSwKPiA+
-ID4gPiA+ID4gKyAgICAgICAgICAgICBrdGltZV90ICp0aW1lb3V0LCBib29sIGludGVycnVwdGli
-bGUpCj4gPiA+ID4gPiA+ICt7Cj4gPiA+ID4gPiA+ICsgICAgIHJldHVybiB3YWl0X2ZlbmNlKGZj
-dHgsIGZlbmNlLCB0aW1lb3V0X3RvX2ppZmZpZXModGltZW91dCksIGludGVycnVwdGlibGUpOwo+
-ID4gPiA+ID4gPiArfQo+ID4gPiA+ID4gPiArCj4gPiA+ID4gPiA+ICAgLyogY2FsbGVkIGZyb20g
-d29ya3F1ZXVlICovCj4gPiA+ID4gPiA+ICAgdm9pZCBtc21fdXBkYXRlX2ZlbmNlKHN0cnVjdCBt
-c21fZmVuY2VfY29udGV4dCAqZmN0eCwgdWludDMyX3QgZmVuY2UpCj4gPiA+ID4gPiA+ICAgewo+
-ID4gPiA+ID4gPiBAQCAtMTE0LDEwICsxMTQsMTkgQEAgc3RhdGljIGJvb2wgbXNtX2ZlbmNlX3Np
-Z25hbGVkKHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlKQo+ID4gPiA+ID4gPiAgICAgICByZXR1cm4g
-ZmVuY2VfY29tcGxldGVkKGYtPmZjdHgsIGYtPmJhc2Uuc2Vxbm8pOwo+ID4gPiA+ID4gPiAgIH0K
-PiA+ID4gPiA+ID4KPiA+ID4gPiA+ID4gK3N0YXRpYyBzaWduZWQgbG9uZyBtc21fZmVuY2Vfd2Fp
-dChzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSwgYm9vbCBpbnRyLAo+ID4gPiA+ID4gPiArICAgICAg
-ICAgICAgIHNpZ25lZCBsb25nIHRpbWVvdXQpCj4gPiA+ID4gPiA+ICt7Cj4gPiA+ID4gPiA+ICsg
-ICAgIHN0cnVjdCBtc21fZmVuY2UgKmYgPSB0b19tc21fZmVuY2UoZmVuY2UpOwo+ID4gPiA+ID4g
-PiArCj4gPiA+ID4gPiA+ICsgICAgIHJldHVybiB3YWl0X2ZlbmNlKGYtPmZjdHgsIGZlbmNlLT5z
-ZXFubywgdGltZW91dCwgaW50cik7Cj4gPiA+ID4gPiA+ICt9Cj4gPiA+ID4gPiA+ICsKPiA+ID4g
-PiA+ID4gICBzdGF0aWMgY29uc3Qgc3RydWN0IGRtYV9mZW5jZV9vcHMgbXNtX2ZlbmNlX29wcyA9
-IHsKPiA+ID4gPiA+ID4gICAgICAgLmdldF9kcml2ZXJfbmFtZSA9IG1zbV9mZW5jZV9nZXRfZHJp
-dmVyX25hbWUsCj4gPiA+ID4gPiA+ICAgICAgIC5nZXRfdGltZWxpbmVfbmFtZSA9IG1zbV9mZW5j
-ZV9nZXRfdGltZWxpbmVfbmFtZSwKPiA+ID4gPiA+ID4gICAgICAgLnNpZ25hbGVkID0gbXNtX2Zl
-bmNlX3NpZ25hbGVkLAo+ID4gPiA+ID4gPiArICAgICAud2FpdCA9IG1zbV9mZW5jZV93YWl0LAo+
-ID4gPiA+ID4gPiAgIH07Cj4gPiA+ID4gPiA+Cj4gPiA+ID4gPiA+ICAgc3RydWN0IGRtYV9mZW5j
-ZSAqCj4gPiA+ID4gPgo+ID4gPgo+ID4gPgo+ID4gPgo+ID4gPiAtLQo+ID4gPiBEYW5pZWwgVmV0
-dGVyCj4gPiA+IFNvZnR3YXJlIEVuZ2luZWVyLCBJbnRlbCBDb3Jwb3JhdGlvbgo+ID4gPiBodHRw
-Oi8vYmxvZy5mZndsbC5jaAo+Cj4KPgo+IC0tCj4gRGFuaWVsIFZldHRlcgo+IFNvZnR3YXJlIEVu
-Z2luZWVyLCBJbnRlbCBDb3Jwb3JhdGlvbgo+IGh0dHA6Ly9ibG9nLmZmd2xsLmNoCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFp
-bGluZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxp
-bmFyby5vcmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
+On Wed, Jul 21, 2021 at 09:34:43AM -0700, Rob Clark wrote:
+> On Wed, Jul 21, 2021 at 12:59 AM Daniel Vetter <daniel@ffwll.ch> wrote:
+> >
+> > On Wed, Jul 21, 2021 at 12:32 AM Rob Clark <robdclark@gmail.com> wrote:
+> > >
+> > > On Tue, Jul 20, 2021 at 1:55 PM Daniel Vetter <daniel@ffwll.ch> wrote:
+> > > >
+> > > > On Tue, Jul 20, 2021 at 8:26 PM Rob Clark <robdclark@gmail.com> wro=
+te:
+> > > > >
+> > > > > On Tue, Jul 20, 2021 at 11:03 AM Christian K=F6nig
+> > > > > <ckoenig.leichtzumerken@gmail.com> wrote:
+> > > > > >
+> > > > > > Hi Rob,
+> > > > > >
+> > > > > > Am 20.07.21 um 17:07 schrieb Rob Clark:
+> > > > > > > From: Rob Clark <robdclark@chromium.org>
+> > > > > > >
+> > > > > > > Somehow we had neither ->wait() nor dma_fence_signal() calls,=
+ and no
+> > > > > > > one noticed.  Oops.
+> > > > > >
+> > > > > >
+> > > > > > I'm not sure if that is a good idea.
+> > > > > >
+> > > > > > The dma_fence->wait() callback is pretty much deprecated and sh=
+ould not
+> > > > > > be used any more.
+> > > > > >
+> > > > > > What exactly do you need that for?
+> > > > >
+> > > > > Well, the alternative is to track the set of fences which have
+> > > > > signalling enabled, and then figure out which ones to signal, whi=
+ch
+> > > > > seems like a lot more work, vs just re-purposing the wait
+> > > > > implementation we already have for non-dma_fence cases ;-)
+> > > > >
+> > > > > Why is the ->wait() callback (pretty much) deprecated?
+> > > >
+> > > > Because if you need it that means for your driver dma_fence_add_cb =
+is
+> > > > broken, which means a _lot_ of things don't work. Like dma_buf poll
+> > > > (compositors have patches to start using that), and I think
+> > > > drm/scheduler also becomes rather unhappy.
+> > >
+> > > I'm starting to page back in how this works.. fence cb's aren't broken
+> > > (which is also why dma_fence_wait() was not completely broken),
+> > > because in retire_submits() we call
+> > > dma_fence_is_signaled(submit->hw_fence).
+> > >
+> > > But the reason that the custom wait function cleans up a tiny bit of
+> > > jank is that the wait_queue_head_t gets signaled earlier, before we
+> > > start iterating the submits and doing all that retire_submit() stuff
+> > > (unpin/unref bo's, etc).  I suppose I could just split things up to
+> > > call dma_fence_signal() earlier, and *then* do the retire_submits()
+> > > stuff.
+> >
+> > Yeah reducing the latency there sounds like a good idea.
+> > -Daniel
+> >
+> =
+
+> Hmm, no, turns out that isn't the problem.. or, well, it is probably a
+> good idea to call drm_fence_signal() earlier.  But it seems like
+> waking up from wait_event_* is faster than wake_up_state(wait->task,
+> TASK_NORMAL).  I suppose the wake_up_state() approach still needs for
+> the scheduler to get around to schedule the runnable task.
+> =
+
+> So for now, I'm going back to my own wait function (plus earlier
+> drm_fence_signal())
+> =
+
+> Before removing dma_fence_opps::wait(), I guess we want to re-think
+> dma_fence_default_wait().. but I think that would require a
+> dma_fence_context base class (rather than just a raw integer).
+
+Uh that's not great ... can't we fix this instead of papering over it in
+drivers? Aside from maybe different wakeup flags it all is supposed to
+work exactly the same underneath, and whether using a wait queue or not
+really shouldn't matter.
+-Daniel
+
+> =
+
+> BR,
+> -R
+> =
+
+> > >
+> > > BR,
+> > > -R
+> > >
+> > > > It essentially exists only for old drivers where ->enable_signalling
+> > > > is unreliable and we paper over that with a retry loop in ->wait and
+> > > > pray no one notices that it's too butchered. The proper fix is to h=
+ave
+> > > > a driver thread to guarantee that ->enable_signalling works reliabl=
+e,
+> > > > so you don't need a ->wait.
+> > > >
+> > > > Can you type up a kerneldoc patch for dma_fence_ops->wait to hammer
+> > > > this in please?
+> > > > -Daniel
+> > > >
+> > > > >
+> > > > > BR,
+> > > > > -R
+> > > > >
+> > > > > > Regards,
+> > > > > > Christian.
+> > > > > >
+> > > > > > >
+> > > > > > > Note that this removes the !timeout case, which has not been =
+used in
+> > > > > > > a long time.
+> > > > > >
+> > > > > >
+> > > > > > >
+> > > > > > > Signed-off-by: Rob Clark <robdclark@chromium.org>
+> > > > > > > ---
+> > > > > > >   drivers/gpu/drm/msm/msm_fence.c | 59 +++++++++++++++++++---=
+-----------
+> > > > > > >   1 file changed, 34 insertions(+), 25 deletions(-)
+> > > > > > >
+> > > > > > > diff --git a/drivers/gpu/drm/msm/msm_fence.c b/drivers/gpu/dr=
+m/msm/msm_fence.c
+> > > > > > > index cd59a5918038..8ee96b90ded6 100644
+> > > > > > > --- a/drivers/gpu/drm/msm/msm_fence.c
+> > > > > > > +++ b/drivers/gpu/drm/msm/msm_fence.c
+> > > > > > > @@ -38,11 +38,10 @@ static inline bool fence_completed(struct=
+ msm_fence_context *fctx, uint32_t fenc
+> > > > > > >       return (int32_t)(fctx->completed_fence - fence) >=3D 0;
+> > > > > > >   }
+> > > > > > >
+> > > > > > > -/* legacy path for WAIT_FENCE ioctl: */
+> > > > > > > -int msm_wait_fence(struct msm_fence_context *fctx, uint32_t =
+fence,
+> > > > > > > -             ktime_t *timeout, bool interruptible)
+> > > > > > > +static signed long wait_fence(struct msm_fence_context *fctx=
+, uint32_t fence,
+> > > > > > > +             signed long remaining_jiffies, bool interruptib=
+le)
+> > > > > > >   {
+> > > > > > > -     int ret;
+> > > > > > > +     signed long ret;
+> > > > > > >
+> > > > > > >       if (fence > fctx->last_fence) {
+> > > > > > >               DRM_ERROR_RATELIMITED("%s: waiting on invalid f=
+ence: %u (of %u)\n",
+> > > > > > > @@ -50,33 +49,34 @@ int msm_wait_fence(struct msm_fence_conte=
+xt *fctx, uint32_t fence,
+> > > > > > >               return -EINVAL;
+> > > > > > >       }
+> > > > > > >
+> > > > > > > -     if (!timeout) {
+> > > > > > > -             /* no-wait: */
+> > > > > > > -             ret =3D fence_completed(fctx, fence) ? 0 : -EBU=
+SY;
+> > > > > > > +     if (interruptible) {
+> > > > > > > +             ret =3D wait_event_interruptible_timeout(fctx->=
+event,
+> > > > > > > +                     fence_completed(fctx, fence),
+> > > > > > > +                     remaining_jiffies);
+> > > > > > >       } else {
+> > > > > > > -             unsigned long remaining_jiffies =3D timeout_to_=
+jiffies(timeout);
+> > > > > > > -
+> > > > > > > -             if (interruptible)
+> > > > > > > -                     ret =3D wait_event_interruptible_timeou=
+t(fctx->event,
+> > > > > > > -                             fence_completed(fctx, fence),
+> > > > > > > -                             remaining_jiffies);
+> > > > > > > -             else
+> > > > > > > -                     ret =3D wait_event_timeout(fctx->event,
+> > > > > > > -                             fence_completed(fctx, fence),
+> > > > > > > -                             remaining_jiffies);
+> > > > > > > -
+> > > > > > > -             if (ret =3D=3D 0) {
+> > > > > > > -                     DBG("timeout waiting for fence: %u (com=
+pleted: %u)",
+> > > > > > > -                                     fence, fctx->completed_=
+fence);
+> > > > > > > -                     ret =3D -ETIMEDOUT;
+> > > > > > > -             } else if (ret !=3D -ERESTARTSYS) {
+> > > > > > > -                     ret =3D 0;
+> > > > > > > -             }
+> > > > > > > +             ret =3D wait_event_timeout(fctx->event,
+> > > > > > > +                     fence_completed(fctx, fence),
+> > > > > > > +                     remaining_jiffies);
+> > > > > > > +     }
+> > > > > > > +
+> > > > > > > +     if (ret =3D=3D 0) {
+> > > > > > > +             DBG("timeout waiting for fence: %u (completed: =
+%u)",
+> > > > > > > +                             fence, fctx->completed_fence);
+> > > > > > > +             ret =3D -ETIMEDOUT;
+> > > > > > > +     } else if (ret !=3D -ERESTARTSYS) {
+> > > > > > > +             ret =3D 0;
+> > > > > > >       }
+> > > > > > >
+> > > > > > >       return ret;
+> > > > > > >   }
+> > > > > > >
+> > > > > > > +/* legacy path for WAIT_FENCE ioctl: */
+> > > > > > > +int msm_wait_fence(struct msm_fence_context *fctx, uint32_t =
+fence,
+> > > > > > > +             ktime_t *timeout, bool interruptible)
+> > > > > > > +{
+> > > > > > > +     return wait_fence(fctx, fence, timeout_to_jiffies(timeo=
+ut), interruptible);
+> > > > > > > +}
+> > > > > > > +
+> > > > > > >   /* called from workqueue */
+> > > > > > >   void msm_update_fence(struct msm_fence_context *fctx, uint3=
+2_t fence)
+> > > > > > >   {
+> > > > > > > @@ -114,10 +114,19 @@ static bool msm_fence_signaled(struct d=
+ma_fence *fence)
+> > > > > > >       return fence_completed(f->fctx, f->base.seqno);
+> > > > > > >   }
+> > > > > > >
+> > > > > > > +static signed long msm_fence_wait(struct dma_fence *fence, b=
+ool intr,
+> > > > > > > +             signed long timeout)
+> > > > > > > +{
+> > > > > > > +     struct msm_fence *f =3D to_msm_fence(fence);
+> > > > > > > +
+> > > > > > > +     return wait_fence(f->fctx, fence->seqno, timeout, intr);
+> > > > > > > +}
+> > > > > > > +
+> > > > > > >   static const struct dma_fence_ops msm_fence_ops =3D {
+> > > > > > >       .get_driver_name =3D msm_fence_get_driver_name,
+> > > > > > >       .get_timeline_name =3D msm_fence_get_timeline_name,
+> > > > > > >       .signaled =3D msm_fence_signaled,
+> > > > > > > +     .wait =3D msm_fence_wait,
+> > > > > > >   };
+> > > > > > >
+> > > > > > >   struct dma_fence *
+> > > > > >
+> > > >
+> > > >
+> > > >
+> > > > --
+> > > > Daniel Vetter
+> > > > Software Engineer, Intel Corporation
+> > > > http://blog.ffwll.ch
+> >
+> >
+> >
+> > --
+> > Daniel Vetter
+> > Software Engineer, Intel Corporation
+> > http://blog.ffwll.ch
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
