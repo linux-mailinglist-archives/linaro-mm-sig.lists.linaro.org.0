@@ -2,56 +2,68 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C6F23D3768
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 23 Jul 2021 11:11:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 291843D3A43
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 23 Jul 2021 14:32:12 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A7701631CC
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 23 Jul 2021 09:11:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B40C9632DE
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 23 Jul 2021 12:32:06 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 2E996631AA; Fri, 23 Jul 2021 09:11:37 +0000 (UTC)
+	id 4DC15632CB; Fri, 23 Jul 2021 12:32:03 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4A8D360961;
-	Fri, 23 Jul 2021 09:11:34 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D824662EA6;
+	Fri, 23 Jul 2021 12:32:00 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id D2C336085A
- for <linaro-mm-sig@lists.linaro.org>; Fri, 23 Jul 2021 09:11:32 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 1C56F604C3
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 23 Jul 2021 12:32:00 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id CEA1060961; Fri, 23 Jul 2021 09:11:32 +0000 (UTC)
-Received: from netline-mail3.netline.ch (mail.netline.ch [148.251.143.180])
- by lists.linaro.org (Postfix) with ESMTP id B163F6085A
- for <linaro-mm-sig@lists.linaro.org>; Fri, 23 Jul 2021 09:11:30 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by netline-mail3.netline.ch (Postfix) with ESMTP id 2CEB120201B;
- Fri, 23 Jul 2021 11:11:30 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at netline-mail3.netline.ch
-Received: from netline-mail3.netline.ch ([127.0.0.1])
- by localhost (netline-mail3.netline.ch [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id kxQLFzKYo8nX; Fri, 23 Jul 2021 11:11:29 +0200 (CEST)
-Received: from thor (24.99.2.85.dynamic.wline.res.cust.swisscom.ch
- [85.2.99.24])
- by netline-mail3.netline.ch (Postfix) with ESMTPA id BF6A920201A;
- Fri, 23 Jul 2021 11:11:29 +0200 (CEST)
-Received: from localhost ([::1]) by thor with esmtp (Exim 4.94.2)
- (envelope-from <michel@daenzer.net>)
- id 1m6rDM-000Bg4-UO; Fri, 23 Jul 2021 11:11:28 +0200
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-References: <20210723075857.4065-1-michel@daenzer.net>
- <f5f37693-bfe2-e52f-172b-00f4aa94dbd9@amd.com>
- <4cf94f59-f953-f5d7-9901-cfe5fd63bfbc@daenzer.net>
- <YPqFiPftjTUV4361@phenom.ffwll.local>
-From: =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>
-Message-ID: <babe4878-d99b-2ae4-2389-8139477783db@daenzer.net>
-Date: Fri, 23 Jul 2021 11:11:28 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.12.0
-MIME-Version: 1.0
-In-Reply-To: <YPqFiPftjTUV4361@phenom.ffwll.local>
-Content-Language: en-CA
+ id 1833262EA6; Fri, 23 Jul 2021 12:32:00 +0000 (UTC)
+Received: from m43-7.mailgun.net (m43-7.mailgun.net [69.72.43.7])
+ by lists.linaro.org (Postfix) with ESMTPS id B085D604C3
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 23 Jul 2021 12:31:48 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org;
+ q=dns/txt; 
+ s=smtp; t=1627043517; h=Message-Id: Date: Subject: Cc: To: From:
+ Sender; bh=wysabhsQt0sSAqX5dRirGa+wnwar64nTD29qqOFcFoM=;
+ b=DKvJt3rIYINtt8Te7Qb4eOOQYqZp7WPDaO2mDpgVEyH66ZA688J/SVlgiFeeaPSMd6DjfOxT
+ uPPfq+jREIcUf0DbI6yKQbSkOgVkCR8L6k9gh7A5OrAbx3t9rVnI3pvaeAVsEcQzSEsNu+XX
+ qUo7TyYKzNGfGu0wcuAW1n9LGuM=
+X-Mailgun-Sending-Ip: 69.72.43.7
+X-Mailgun-Sid: WyJjNDlhNSIsICJsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmciLCAiYmU5ZTRhIl0=
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
+ smtp-out-n06.prod.us-east-1.postgun.com with SMTP id
+ 60fab6974815712f3a6324f8 (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Fri, 23 Jul 2021 12:31:19
+ GMT
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+ id 93238C433F1; Fri, 23 Jul 2021 12:31:18 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+ aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=2.0 tests=ALL_TRUSTED, BAYES_00,
+ SPF_FAIL, 
+ URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+Received: from hu-charante-hyd.qualcomm.com (unknown [202.46.22.19])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: charante)
+ by smtp.codeaurora.org (Postfix) with ESMTPSA id 5A739C433F1;
+ Fri, 23 Jul 2021 12:31:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 5A739C433F1
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org;
+ spf=fail smtp.mailfrom=charante@codeaurora.org
+From: Charan Teja Reddy <charante@codeaurora.org>
+To: sumit.semwal@linaro.org,
+	christian.koenig@amd.com
+Date: Fri, 23 Jul 2021 18:01:08 +0530
+Message-Id: <1627043468-16381-1-git-send-email-charante@codeaurora.org>
+X-Mailer: git-send-email 2.7.4
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH] dma-buf/poll: Get a file reference for
- outstanding fence callbacks
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: WARN on dmabuf release with
+ pending attachments
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -64,34 +76,58 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linaro-mm-sig@lists.linaro.org, vinmenon@codeaurora.org,
+ Charan Teja Reddy <charante@codeaurora.org>, linux-media@vger.kernel.org
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gMjAyMS0wNy0yMyAxMTowMiBhLm0uLCBEYW5pZWwgVmV0dGVyIHdyb3RlOgo+IE9uIEZyaSwg
-SnVsIDIzLCAyMDIxIGF0IDEwOjE5OjQ5QU0gKzAyMDAsIE1pY2hlbCBEw6RuemVyIHdyb3RlOgo+
-PiBPbiAyMDIxLTA3LTIzIDEwOjA0IGEubS4sIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6Cj4+PiBB
-bSAyMy4wNy4yMSB1bSAwOTo1OCBzY2hyaWViIE1pY2hlbCBEw6RuemVyOgo+Pj4+IEZyb206IE1p
-Y2hlbCBEw6RuemVyIDxtZGFlbnplckByZWRoYXQuY29tPgo+Pj4+Cj4+Pj4gVGhpcyBtYWtlcyBz
-dXJlIHdlIGRvbid0IGhpdCB0aGUKPj4+Pgo+Pj4+IMKgwqDCoMKgQlVHX09OKGRtYWJ1Zi0+Y2Jf
-aW4uYWN0aXZlIHx8IGRtYWJ1Zi0+Y2Jfb3V0LmFjdGl2ZSk7Cj4+Pj4KPj4+PiBpbiBkbWFfYnVm
-X3JlbGVhc2UsIHdoaWNoIGNvdWxkIGJlIHRyaWdnZXJlZCBieSB1c2VyIHNwYWNlIGNsb3Npbmcg
-dGhlCj4+Pj4gZG1hLWJ1ZiBmaWxlIGRlc2NyaXB0aW9uIHdoaWxlIHRoZXJlIGFyZSBvdXRzdGFu
-ZGluZyBmZW5jZSBjYWxsYmFja3MKPj4+PiBmcm9tIGRtYV9idWZfcG9sbC4KPj4+Cj4+PiBJIHdh
-cyBhbHNvIHdvbmRlcmluZyB0aGUgc2FtZSB0aGluZyB3aGlsZSB3b3JraW5nIG9uIHRoaXMsIGJ1
-dCB0aGVuIHRob3VnaHQgdGhhdCB0aGUgcG9sbCBpbnRlcmZhY2Ugd291bGQgdGFrZSBjYXJlIG9m
-IHRoaXMuCj4+Cj4+IEkgd2FzIGFibGUgdG8gaGl0IHRoZSBCVUdfT04gd2l0aCBodHRwczovL2dp
-dGxhYi5nbm9tZS5vcmcvR05PTUUvbXV0dGVyLy0vbWVyZ2VfcmVxdWVzdHMvMTg4MCAuCj4gCj4g
-aWd0IHRlc3Qgd291bGQgYmUgcmVhbGx5IGxvdmVseS4gTWF5YmUgYmFzZSBzb21ldGhpbmcgb2Zm
-IHRoZQo+IGltcG9ydC9leHBvcnQgaWd0cyBmcm9tIEphc29uPwoKSSdsbCBzZWUgd2hhdCBJIGNh
-biBkbywgYnVzeSB3aXRoIG90aGVyIHN0dWZmIHJpZ2h0IG5vdyB0aG91Z2guCgoKLS0gCkVhcnRo
-bGluZyBNaWNoZWwgRMOkbnplciAgICAgICAgICAgICAgIHwgICAgICAgICAgICAgICBodHRwczov
-L3JlZGhhdC5jb20KTGlicmUgc29mdHdhcmUgZW50aHVzaWFzdCAgICAgICAgICAgICB8ICAgICAg
-ICAgICAgIE1lc2EgYW5kIFggZGV2ZWxvcGVyCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0CkxpbmFyby1tbS1z
-aWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9saXN0
-aW5mby9saW5hcm8tbW0tc2lnCg==
+It is expected from the clients to follow the below steps on an imported
+dmabuf fd:
+a) dmabuf = dma_buf_get(fd) // Get the dmabuf from fd
+b) dma_buf_attach(dmabuf); // Clients attach to the dmabuf
+   o Here the kernel does some slab allocations, say for
+dma_buf_attachment and may be some other slab allocation in the
+dmabuf->ops->attach().
+c) Client may need to do dma_buf_map_attachment().
+d) Accordingly dma_buf_unmap_attachment() should be called.
+e) dma_buf_detach () // Clients detach to the dmabuf.
+   o Here the slab allocations made in b) are freed.
+f) dma_buf_put(dmabuf) // Can free the dmabuf if it is the last
+reference.
+
+Now say an erroneous client failed at step c) above thus it directly
+called dma_buf_put(), step f) above. Considering that it may be the last
+reference to the dmabuf, buffer will be freed with pending attachments
+left to the dmabuf which can show up as the 'memory leak'. This should
+at least be reported as the WARN().
+
+Signed-off-by: Charan Teja Reddy <charante@codeaurora.org>
+---
+ drivers/dma-buf/dma-buf.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+index 511fe0d..733c8b1 100644
+--- a/drivers/dma-buf/dma-buf.c
++++ b/drivers/dma-buf/dma-buf.c
+@@ -79,6 +79,7 @@ static void dma_buf_release(struct dentry *dentry)
+ 	if (dmabuf->resv == (struct dma_resv *)&dmabuf[1])
+ 		dma_resv_fini(dmabuf->resv);
+ 
++	WARN_ON(!list_empty(&dmabuf->attachments));
+ 	module_put(dmabuf->owner);
+ 	kfree(dmabuf->name);
+ 	kfree(dmabuf);
+-- 
+QUALCOMM INDIA, on behalf of Qualcomm Innovation Center, Inc. is a
+member of the Code Aurora Forum, hosted by The Linux Foundation
+
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
