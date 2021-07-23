@@ -2,74 +2,49 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id E39D73D2C6B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Jul 2021 21:08:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 802BA3D35C9
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 23 Jul 2021 09:59:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8F98163148
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Jul 2021 19:08:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2BC14631B3
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 23 Jul 2021 07:59:08 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 54F3C631CC; Thu, 22 Jul 2021 19:08:05 +0000 (UTC)
+	id E46476314A; Fri, 23 Jul 2021 07:59:07 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C0A3060B99;
-	Thu, 22 Jul 2021 19:08:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 661D7606A3;
+	Fri, 23 Jul 2021 07:59:04 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 4C428608C6
- for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Jul 2021 19:08:00 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 2EE656057D
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 23 Jul 2021 07:59:02 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 40C7760B99; Thu, 22 Jul 2021 19:08:00 +0000 (UTC)
-Received: from mail-yb1-f201.google.com (mail-yb1-f201.google.com
- [209.85.219.201])
- by lists.linaro.org (Postfix) with ESMTPS id 3937E608C6
- for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Jul 2021 19:07:58 +0000 (UTC)
-Received: by mail-yb1-f201.google.com with SMTP id
- q10-20020a056902150ab02905592911c932so8612727ybu.15
- for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Jul 2021 12:07:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
- h=date:message-id:mime-version:subject:from:to:cc;
- bh=Y+4Q1LkGSotu1XfmzHQ6ryO/eeqhw4mJ1FyIbndgjZg=;
- b=TqWxnT/Z73qrMHnDvvmdUmHFCBG2MowDGm9qbSkEGL5dCyrUWFCjRlmaCwPnwOV+vE
- felNomI4J14yW6cG4cK8/fe5EmLr6cUafKEfxaLZtrN+y4CuWRbV/1MgW8Oe6G1oUXYe
- U5/snPPITJfuRauEaIlN2IvmysFsXc4W/reebG3h71BcT4s14CNHFwziy8vhd3JaNZVt
- vSNZwIv97aznzS4Lk6SBEfxWNAH0IGp4XobMfkNcfnErx0N0/srvH32mvyN9DTsAGx3Z
- FmvNLWsFRkpdPxysCstLgzcENMdmM//CzmYiJbMaBjzRUoMw5jvq0sqmc91ET7vecjor
- H7cQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
- bh=Y+4Q1LkGSotu1XfmzHQ6ryO/eeqhw4mJ1FyIbndgjZg=;
- b=BFmINsdpRIp/YawLEuQj6eL60WJl8Z7SgCwMy1dtxZe5fb+RJQhntkXxrcsLcAGxyo
- BVDAYB3UJPEqawIoShD6HXTqrr53F40up4h6mBNxws/N+tZ9kardBk+O6WYMAQzax+Bo
- zGEyoGt7g8JqoI+vJ6hYzMIYA9GYW7DFbxudt0hdOVOlp+aokoV2iyZPJm393JtDK5Ij
- 1W7++MhUaq2ULcnPdzLPm9kOnCelHY3M/0z1VAWiw9wKvRnVHrooAEL+NsHP+2f0HaoQ
- diO4gDfGKGequdqpgxlBDM0d3dtXgSYHvI0bDAF7CxtKpikCcnIyg57zCjgZ2agGJDPY
- K/3w==
-X-Gm-Message-State: AOAM5316y/wJMYMwZasCRG4+wIlObnv2BtbRSq7bUsIcSLvMoSK/F9h9
- C4F+AdgqijI0bjSfnTDXZbrbttg7aUU=
-X-Google-Smtp-Source: ABdhPJyN1TtBAly+n7sAFHUMK7tG6nh3fqZuhlgbAzUczufLDXVA9cjmsxqDsLqVj7oNjCMvjWh3qW/7kdU=
-X-Received: from hridya.mtv.corp.google.com
- ([2620:15c:211:200:233e:4a37:d5d6:55d7])
- (user=hridya job=sendgmr) by 2002:a25:2589:: with SMTP id
- l131mr1337963ybl.451.1626980877695; 
- Thu, 22 Jul 2021 12:07:57 -0700 (PDT)
-Date: Thu, 22 Jul 2021 12:07:46 -0700
-Message-Id: <20210722190747.1986614-1-hridya@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.32.0.432.gabb21c7263-goog
-From: Hridya Valsaraju <hridya@google.com>
-To: Sumit Semwal <sumit.semwal@linaro.org>, 
- Benjamin Gaignard <benjamin.gaignard@linaro.org>,
- Liam Mark <lmark@codeaurora.org>, 
- Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, 
- John Stultz <john.stultz@linaro.org>, 
- "=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>,
- linux-media@vger.kernel.org, 
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, 
- linux-kernel@vger.kernel.org
+ id 21845606A3; Fri, 23 Jul 2021 07:59:02 +0000 (UTC)
+Received: from netline-mail3.netline.ch (mail.netline.ch [148.251.143.180])
+ by lists.linaro.org (Postfix) with ESMTP id D5ECE6057D
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 23 Jul 2021 07:58:59 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by netline-mail3.netline.ch (Postfix) with ESMTP id B409920201B;
+ Fri, 23 Jul 2021 09:58:58 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at netline-mail3.netline.ch
+Received: from netline-mail3.netline.ch ([127.0.0.1])
+ by localhost (netline-mail3.netline.ch [127.0.0.1]) (amavisd-new, port 10024)
+ with LMTP id QA7ph4I77QHY; Fri, 23 Jul 2021 09:58:58 +0200 (CEST)
+Received: from kaveri (24.99.2.85.dynamic.wline.res.cust.swisscom.ch
+ [85.2.99.24])
+ by netline-mail3.netline.ch (Postfix) with ESMTPA id 6202F20201A;
+ Fri, 23 Jul 2021 09:58:58 +0200 (CEST)
+Received: from daenzer by kaveri with local (Exim 4.94.2)
+ (envelope-from <michel@daenzer.net>)
+ id 1m6q5B-00014N-F3; Fri, 23 Jul 2021 09:58:57 +0200
+From: =?UTF-8?q?Michel=20D=C3=A4nzer?= <michel@daenzer.net>
+To: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Date: Fri, 23 Jul 2021 09:58:57 +0200
+Message-Id: <20210723075857.4065-1-michel@daenzer.net>
+X-Mailer: git-send-email 2.32.0
+MIME-Version: 1.0
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH] dma-buf: heaps: Set allocation limit for
- system heap
+Subject: [Linaro-mm-sig] [PATCH] dma-buf/poll: Get a file reference for
+ outstanding fence callbacks
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,48 +57,64 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Hridya Valsaraju <hridya@google.com>, gregkh@linuxfoundation.org,
- kernel-team@android.com
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-This patch limits the size of total memory that can be requested in a
-single allocation from the system heap. This would prevent a
-buggy/malicious client from depleting system memory by requesting for an
-extremely large allocation which might destabilize the system.
-
-The limit is set to half the size of the device's total RAM which is the
-same as what was set by the deprecated ION system heap.
-
-Signed-off-by: Hridya Valsaraju <hridya@google.com>
----
- drivers/dma-buf/heaps/system_heap.c | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/heaps/system_heap.c
-index b7fbce66bcc0..099f5a8304b4 100644
---- a/drivers/dma-buf/heaps/system_heap.c
-+++ b/drivers/dma-buf/heaps/system_heap.c
-@@ -371,6 +371,12 @@ static struct dma_buf *system_heap_do_allocate(struct dma_heap *heap,
- 	struct page *page, *tmp_page;
- 	int i, ret = -ENOMEM;
- 
-+	if (len / PAGE_SIZE > totalram_pages() / 2) {
-+		pr_err("pid %d requested too large an allocation(size %lu) from system heap\n",
-+		       current->pid, len);
-+		return ERR_PTR(ret);
-+	}
-+
- 	buffer = kzalloc(sizeof(*buffer), GFP_KERNEL);
- 	if (!buffer)
- 		return ERR_PTR(-ENOMEM);
--- 
-2.32.0.432.gabb21c7263-goog
-
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+RnJvbTogTWljaGVsIETDpG56ZXIgPG1kYWVuemVyQHJlZGhhdC5jb20+CgpUaGlzIG1ha2VzIHN1
+cmUgd2UgZG9uJ3QgaGl0IHRoZQoKCUJVR19PTihkbWFidWYtPmNiX2luLmFjdGl2ZSB8fCBkbWFi
+dWYtPmNiX291dC5hY3RpdmUpOwoKaW4gZG1hX2J1Zl9yZWxlYXNlLCB3aGljaCBjb3VsZCBiZSB0
+cmlnZ2VyZWQgYnkgdXNlciBzcGFjZSBjbG9zaW5nIHRoZQpkbWEtYnVmIGZpbGUgZGVzY3JpcHRp
+b24gd2hpbGUgdGhlcmUgYXJlIG91dHN0YW5kaW5nIGZlbmNlIGNhbGxiYWNrcwpmcm9tIGRtYV9i
+dWZfcG9sbC4KCkNjOiBzdGFibGVAdmdlci5rZXJuZWwub3JnClNpZ25lZC1vZmYtYnk6IE1pY2hl
+bCBEw6RuemVyIDxtZGFlbnplckByZWRoYXQuY29tPgotLS0KIGRyaXZlcnMvZG1hLWJ1Zi9kbWEt
+YnVmLmMgfCAxOCArKysrKysrKysrKystLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAxMiBpbnNlcnRp
+b25zKCspLCA2IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEt
+YnVmLmMgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jCmluZGV4IDZjNTIwYzliZDkzYy4uZWMy
+NTQ5OGE5NzFmIDEwMDY0NAotLS0gYS9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jCisrKyBiL2Ry
+aXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMKQEAgLTY1LDEyICs2NSw5IEBAIHN0YXRpYyB2b2lkIGRt
+YV9idWZfcmVsZWFzZShzdHJ1Y3QgZGVudHJ5ICpkZW50cnkpCiAJQlVHX09OKGRtYWJ1Zi0+dm1h
+cHBpbmdfY291bnRlcik7CiAKIAkvKgotCSAqIEFueSBmZW5jZXMgdGhhdCBhIGRtYS1idWYgcG9s
+bCBjYW4gd2FpdCBvbiBzaG91bGQgYmUgc2lnbmFsZWQKLQkgKiBiZWZvcmUgcmVsZWFzaW5nIGRt
+YS1idWYuIFRoaXMgaXMgdGhlIHJlc3BvbnNpYmlsaXR5IG9mIGVhY2gKLQkgKiBkcml2ZXIgdGhh
+dCB1c2VzIHRoZSByZXNlcnZhdGlvbiBvYmplY3RzLgotCSAqCi0JICogSWYgeW91IGhpdCB0aGlz
+IEJVRygpIGl0IG1lYW5zIHNvbWVvbmUgZHJvcHBlZCB0aGVpciByZWYgdG8gdGhlCi0JICogZG1h
+LWJ1ZiB3aGlsZSBzdGlsbCBoYXZpbmcgcGVuZGluZyBvcGVyYXRpb24gdG8gdGhlIGJ1ZmZlci4K
+KwkgKiBJZiB5b3UgaGl0IHRoaXMgQlVHKCkgaXQgY291bGQgbWVhbjoKKwkgKiAqIFRoZXJlJ3Mg
+YSBmaWxlIHJlZmVyZW5jZSBpbWJhbGFuY2UgaW4gZG1hX2J1Zl9wb2xsIC8gZG1hX2J1Zl9wb2xs
+X2NiIG9yIHNvbWV3aGVyZSBlbHNlCisJICogKiBkbWFidWYtPmNiX2luL291dC5hY3RpdmUgYXJl
+IG5vbi0wIGRlc3BpdGUgbm8gcGVuZGluZyBmZW5jZSBjYWxsYmFjawogCSAqLwogCUJVR19PTihk
+bWFidWYtPmNiX2luLmFjdGl2ZSB8fCBkbWFidWYtPmNiX291dC5hY3RpdmUpOwogCkBAIC0xOTYs
+NiArMTkzLDcgQEAgc3RhdGljIGxvZmZfdCBkbWFfYnVmX2xsc2VlayhzdHJ1Y3QgZmlsZSAqZmls
+ZSwgbG9mZl90IG9mZnNldCwgaW50IHdoZW5jZSkKIHN0YXRpYyB2b2lkIGRtYV9idWZfcG9sbF9j
+YihzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSwgc3RydWN0IGRtYV9mZW5jZV9jYiAqY2IpCiB7CiAJ
+c3RydWN0IGRtYV9idWZfcG9sbF9jYl90ICpkY2IgPSAoc3RydWN0IGRtYV9idWZfcG9sbF9jYl90
+ICopY2I7CisJc3RydWN0IGRtYV9idWYgKmRtYWJ1ZiA9IGNvbnRhaW5lcl9vZihkY2ItPnBvbGws
+IHN0cnVjdCBkbWFfYnVmLCBwb2xsKTsKIAl1bnNpZ25lZCBsb25nIGZsYWdzOwogCiAJc3Bpbl9s
+b2NrX2lycXNhdmUoJmRjYi0+cG9sbC0+bG9jaywgZmxhZ3MpOwpAQCAtMjAzLDYgKzIwMSw4IEBA
+IHN0YXRpYyB2b2lkIGRtYV9idWZfcG9sbF9jYihzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSwgc3Ry
+dWN0IGRtYV9mZW5jZV9jYiAqY2IpCiAJZGNiLT5hY3RpdmUgPSAwOwogCXNwaW5fdW5sb2NrX2ly
+cXJlc3RvcmUoJmRjYi0+cG9sbC0+bG9jaywgZmxhZ3MpOwogCWRtYV9mZW5jZV9wdXQoZmVuY2Up
+OworCS8qIFBhaXJlZCB3aXRoIGdldF9maWxlIGluIGRtYV9idWZfcG9sbCAqLworCWZwdXQoZG1h
+YnVmLT5maWxlKTsKIH0KIAogc3RhdGljIGJvb2wgZG1hX2J1Zl9wb2xsX3NoYXJlZChzdHJ1Y3Qg
+ZG1hX3Jlc3YgKnJlc3YsCkBAIC0yNzgsNiArMjc4LDkgQEAgc3RhdGljIF9fcG9sbF90IGRtYV9i
+dWZfcG9sbChzdHJ1Y3QgZmlsZSAqZmlsZSwgcG9sbF90YWJsZSAqcG9sbCkKIAkJc3Bpbl91bmxv
+Y2tfaXJxKCZkbWFidWYtPnBvbGwubG9jayk7CiAKIAkJaWYgKGV2ZW50cyAmIEVQT0xMT1VUKSB7
+CisJCQkvKiBQYWlyZWQgd2l0aCBmcHV0IGluIGRtYV9idWZfcG9sbF9jYiAqLworCQkJZ2V0X2Zp
+bGUoZG1hYnVmLT5maWxlKTsKKwogCQkJaWYgKCFkbWFfYnVmX3BvbGxfc2hhcmVkKHJlc3YsIGRj
+YikgJiYKIAkJCSAgICAhZG1hX2J1Zl9wb2xsX2V4Y2wocmVzdiwgZGNiKSkKIAkJCQkvKiBObyBj
+YWxsYmFjayBxdWV1ZWQsIHdha2UgdXAgYW55IG90aGVyIHdhaXRlcnMgKi8KQEAgLTI5OSw2ICsz
+MDIsOSBAQCBzdGF0aWMgX19wb2xsX3QgZG1hX2J1Zl9wb2xsKHN0cnVjdCBmaWxlICpmaWxlLCBw
+b2xsX3RhYmxlICpwb2xsKQogCQlzcGluX3VubG9ja19pcnEoJmRtYWJ1Zi0+cG9sbC5sb2NrKTsK
+IAogCQlpZiAoZXZlbnRzICYgRVBPTExJTikgeworCQkJLyogUGFpcmVkIHdpdGggZnB1dCBpbiBk
+bWFfYnVmX3BvbGxfY2IgKi8KKwkJCWdldF9maWxlKGRtYWJ1Zi0+ZmlsZSk7CisKIAkJCWlmICgh
+ZG1hX2J1Zl9wb2xsX2V4Y2wocmVzdiwgZGNiKSkKIAkJCQkvKiBObyBjYWxsYmFjayBxdWV1ZWQs
+IHdha2UgdXAgYW55IG90aGVyIHdhaXRlcnMgKi8KIAkJCQlkbWFfYnVmX3BvbGxfY2IoTlVMTCwg
+JmRjYi0+Y2IpOwotLSAKMi4zMi4wCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8tbW0tc2lnQGxp
+c3RzLmxpbmFyby5vcmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4vbGlzdGluZm8v
+bGluYXJvLW1tLXNpZwo=
