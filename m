@@ -2,70 +2,63 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E5AD3D6A49
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Jul 2021 01:35:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5656F3D6A63
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Jul 2021 01:52:07 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0E7C2634D2
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Jul 2021 23:35:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B1A52634DD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Jul 2021 23:52:04 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id BF3E86049D; Mon, 26 Jul 2021 23:35:18 +0000 (UTC)
+	id 1E246634DE; Mon, 26 Jul 2021 23:52:03 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 818356339C;
-	Mon, 26 Jul 2021 23:35:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8DEC86339A;
+	Mon, 26 Jul 2021 23:52:00 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 37579634E1
- for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jul 2021 23:35:06 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 352BD60570
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jul 2021 23:51:58 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id AEB9E63E52; Mon, 26 Jul 2021 23:35:00 +0000 (UTC)
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
- [209.85.216.43])
- by lists.linaro.org (Postfix) with ESMTPS id 5A3506350F
- for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jul 2021 23:34:57 +0000 (UTC)
-Received: by mail-pj1-f43.google.com with SMTP id
- m10-20020a17090a34cab0290176b52c60ddso2308894pjf.4
- for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jul 2021 16:34:57 -0700 (PDT)
+ id 29DCD6339A; Mon, 26 Jul 2021 23:51:58 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+ [209.85.221.45])
+ by lists.linaro.org (Postfix) with ESMTPS id 21CF960570
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jul 2021 23:51:56 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id l18so5337880wrv.5
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jul 2021 16:51:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=oOCwRi9hxpNHgxPfLImA8XjRn0qGzkVI05nd0NTq6uk=;
- b=UMdDGkO5sH4beFwSPlOOtv6JRzN+gpzELhacSFi7vvaQQ1PwmNbkfYf44YSJQaBLpr
- vVV0beEQqJV0NuTrh3WVluml5kosYKXPr9U5iyNbGEHEnWPREtu7FUB2q7w+oJTefR1N
- nxhrxUsL/yhwl8fKcflbrIpY5obQR2TALxuMCayo8c8wDQO0eaI6GFbUCJf3pr8RanC3
- lpKxIhzu44oKfzHbedvRslZeVPkbiBMj0MBXvllJzc/2Ok4djmZsXBK3c9DbPUgVz+GT
- Ad5XrI/AMY80dotYjiTUCM0Zb4DP3NOJpJAs9lA+0Yu8rBP+Sisqs25ugYEbBPneZq4S
- A5ng==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=tUIoigUs94bMHsltrSbpLlzLTuAd1wjaaiV0ZjEm+Bw=;
+ b=j58O9/6iZBkX0FFFlPgMkDK17SR61mX0DAyRiuYxpvuZFTHbcm/MTFGcdmaNwJibhb
+ uTBhqmJYjJWGv3MyOqx4xGwogGAmoI+UZVtAMpFcK+OEYendJwBziq0Rns+3kkBW+O8a
+ 3fJfm/C9J5jTTrEmg7CJEPy11Aum7gesrmioD5HoVl+4eD4eTMyYZc47HKhJ3Uw+eosu
+ BmEcneHHIdMBgGcBFYCW+ZgCUWOHNPGJYJo0tXoR4hy4Rw1pYz5ckBE+OcWVH3jbNzEg
+ RWvyOS8MC+EsozfKlizD4TvLFlcl49EUSDdLZf2FM4jYQbglxMxoTmu1AA7WHGTuix5c
+ 5QLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=oOCwRi9hxpNHgxPfLImA8XjRn0qGzkVI05nd0NTq6uk=;
- b=B4PpPQYuIsjckUr2+YVlUpb7itPmZjLFoWEaO2ZE8wH2oiV9w5x1TxAFE6kfNG8GKl
- l0J9SNNz9AsdS/2cK1hx7oT+y68JbUaoYNEATxOskg9givrGoB82poGfot5kGW6v7O0v
- D7DZALa9J6BVQBsOpx3hanDpqdQlT2V7Uc7Yek0h/ONsnQzcpJc4+7ob+Mw45WuofL6M
- 1LPvPbqsWr1L6fEzjRHjshCO12GjSgLx9+LvPQJheMQsX1rzvL1mH4pZaTPJqKuq+b9/
- DCzkiYRjF9+dSYpjNjXrukVnlx1dSSSSJ6ZjfPKq4LAiJ/9oc6bOXHBjYsDcNM1VL1ej
- b9+A==
-X-Gm-Message-State: AOAM5322U6i5c5bP7RqD168O2PJX9okWk/ZA1GmiJAdrkS6KuE8q9fkS
- yKUjgN7av47kcYmykVVgG60=
-X-Google-Smtp-Source: ABdhPJyKNvvOsVEx6SQdxLRvjXmblFnYyDE+d88dd2vCChknqQFuJLEJg/rykB5kBwIJAy520O/kiQ==
-X-Received: by 2002:a63:3445:: with SMTP id b66mr20626420pga.141.1627342496218; 
- Mon, 26 Jul 2021 16:34:56 -0700 (PDT)
-Received: from localhost ([2601:1c0:5200:a6:307:a401:7b76:c6e5])
- by smtp.gmail.com with ESMTPSA id t205sm1171971pfc.32.2021.07.26.16.34.54
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jul 2021 16:34:55 -0700 (PDT)
-From: Rob Clark <robdclark@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Date: Mon, 26 Jul 2021 16:38:51 -0700
-Message-Id: <20210726233854.2453899-5-robdclark@gmail.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210726233854.2453899-1-robdclark@gmail.com>
-References: <20210726233854.2453899-1-robdclark@gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=tUIoigUs94bMHsltrSbpLlzLTuAd1wjaaiV0ZjEm+Bw=;
+ b=fScybLVsxNLspiCIOrp9fYmZgPqIyAd9Hi6NJc7wMrXJhtB6YlgwtTBAwlNTSJL1jy
+ E1saV1Q4V6lqO+YCX6H8n37+n8LBiajSiDl6GSy0euvsLvbbJmW4P/DoJy5CJkPznh+H
+ lqDBXOvT/ytGeXj4X8meCH121nESPu2+R64xO9L2xZLLIB1IcqitIdbxjBpjZSHO3Lbs
+ y866Az5pJ+Z30x7XLyqZAhPr1qhPBpMxUe1ptXlcAddvO1EHfas8c0aSOCxlu9tetyxe
+ Ld+YALcHoJAa6rLyAs8MIXPV94lAs0sJ+jdTjQSqg3C7oRRBrrBlpD2DH7jJzu+vJV4p
+ 4zWg==
+X-Gm-Message-State: AOAM5307O0IrK44EiO0LafuVNEKs6GVpzgeGeZPQfNK9G9KGnACUzovA
+ 1MgEjgs1YrT1ErpxuZCVssdbd5+2tvP0txK9kJ4=
+X-Google-Smtp-Source: ABdhPJwXAzbNGuHdLOISfs3BtoWByAYqTqS3hd9v8tdZ2marIa37ZhMgm41g7p2rWzPxRDI2ZgF9Ns/85zSqMuv0bRc=
+X-Received: by 2002:a5d:4348:: with SMTP id u8mr18590399wrr.28.1627343515010; 
+ Mon, 26 Jul 2021 16:51:55 -0700 (PDT)
 MIME-Version: 1.0
+References: <20210726233854.2453899-1-robdclark@gmail.com>
+In-Reply-To: <20210726233854.2453899-1-robdclark@gmail.com>
+From: Rob Clark <robdclark@gmail.com>
+Date: Mon, 26 Jul 2021 16:51:43 -0700
+Message-ID: <CAF6AEGtm4NdQfqo6wGFBM-EBzW9E8twpDuS7GTXf2iHiHZYL1g@mail.gmail.com>
+To: dri-devel <dri-devel@lists.freedesktop.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [RFC 4/4] drm/scheduler: Add fence deadline support
+Subject: Re: [Linaro-mm-sig] [RFC 0/4] dma-fence: Deadline awareness
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,16 +72,16 @@ List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: Matthew Brost <matthew.brost@intel.com>, Rob Clark <robdclark@chromium.org>,
- Jack Zhang <Jack.Zhang1@amd.com>,
- Andrey Grodzovsky <andrey.grodzovsky@amd.com>, David Airlie <airlied@linux.ie>,
+ Jack Zhang <Jack.Zhang1@amd.com>, Roy Sun <Roy.Sun@amd.com>,
+ Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  open list <linux-kernel@vger.kernel.org>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
  "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Luben Tuikov <luben.tuikov@amd.com>,
- Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
- Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
- Tian Tao <tiantao6@hisilicon.com>,
+ Luben Tuikov <luben.tuikov@amd.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Gustavo Padovan <gustavo@padovan.org>,
+ Alex Deucher <alexander.deucher@amd.com>, Tian Tao <tiantao6@hisilicon.com>,
+ Lee Jones <lee.jones@linaro.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
@@ -96,64 +89,63 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-From: Rob Clark <robdclark@chromium.org>
+On Mon, Jul 26, 2021 at 4:34 PM Rob Clark <robdclark@gmail.com> wrote:
+>
+> From: Rob Clark <robdclark@chromium.org>
+>
+> Based on discussion from a previous series[1] to add a "boost" mechanism
+> when, for example, vblank deadlines are missed.  Instead of a boost
+> callback, this approach adds a way to set a deadline on the fence, by
+> which the waiter would like to see the fence signalled.
+>
+> I've not yet had a chance to re-work the drm/msm part of this, but
+> wanted to send this out as an RFC in case I don't have a chance to
+> finish the drm/msm part this week.
 
-As the finished fence is the one that is exposed to userspace, and
-therefore the one that other operations, like atomic update, would
-block on, we need to propagate the deadline from from the finished
-fence to the actual hw fence.
+Fwiw, what I'm thinking for the drm/msm part is a timer set to expire
+a bit (couple ms?) before the deadline, which boosts if the timer
+expires before the fence is signaled.
 
-Signed-off-by: Rob Clark <robdclark@chromium.org>
----
- drivers/gpu/drm/scheduler/sched_fence.c | 10 ++++++++++
- drivers/gpu/drm/scheduler/sched_main.c  |  3 +++
- 2 files changed, 13 insertions(+)
+Assuming this is roughly in line with what other drivers would do,
+possibly there is some room to build this timer into dma-fence itself?
 
-diff --git a/drivers/gpu/drm/scheduler/sched_fence.c b/drivers/gpu/drm/scheduler/sched_fence.c
-index 69de2c76731f..3aa6351d2101 100644
---- a/drivers/gpu/drm/scheduler/sched_fence.c
-+++ b/drivers/gpu/drm/scheduler/sched_fence.c
-@@ -128,6 +128,15 @@ static void drm_sched_fence_release_finished(struct dma_fence *f)
- 	dma_fence_put(&fence->scheduled);
- }
- 
-+static void drm_sched_fence_set_deadline_finished(struct dma_fence *f,
-+						  ktime_t deadline)
-+{
-+	struct drm_sched_fence *fence = to_drm_sched_fence(f);
-+
-+	if (fence->parent)
-+		dma_fence_set_deadline(fence->parent, deadline);
-+}
-+
- static const struct dma_fence_ops drm_sched_fence_ops_scheduled = {
- 	.get_driver_name = drm_sched_fence_get_driver_name,
- 	.get_timeline_name = drm_sched_fence_get_timeline_name,
-@@ -138,6 +147,7 @@ static const struct dma_fence_ops drm_sched_fence_ops_finished = {
- 	.get_driver_name = drm_sched_fence_get_driver_name,
- 	.get_timeline_name = drm_sched_fence_get_timeline_name,
- 	.release = drm_sched_fence_release_finished,
-+	.set_deadline = drm_sched_fence_set_deadline_finished,
- };
- 
- struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f)
-diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
-index a2a953693b45..fcc601962e92 100644
---- a/drivers/gpu/drm/scheduler/sched_main.c
-+++ b/drivers/gpu/drm/scheduler/sched_main.c
-@@ -818,6 +818,9 @@ static int drm_sched_main(void *param)
- 
- 		if (!IS_ERR_OR_NULL(fence)) {
- 			s_fence->parent = dma_fence_get(fence);
-+			if (test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT,
-+				     &s_fence->finished.flags))
-+				dma_fence_set_deadline(fence, s_fence->finished.deadline);
- 			r = dma_fence_add_callback(fence, &sched_job->cb,
- 						   drm_sched_job_done_cb);
- 			if (r == -ENOENT)
--- 
-2.31.1
+BR,
+-R
 
+>
+> Original description:
+>
+> In some cases, like double-buffered rendering, missing vblanks can
+> trick the GPU into running at a lower frequence, when really we
+> want to be running at a higher frequency to not miss the vblanks
+> in the first place.
+>
+> This is partially inspired by a trick i915 does, but implemented
+> via dma-fence for a couple of reasons:
+>
+> 1) To continue to be able to use the atomic helpers
+> 2) To support cases where display and gpu are different drivers
+>
+> [1] https://patchwork.freedesktop.org/series/90331/
+>
+> Rob Clark (4):
+>   dma-fence: Add deadline awareness
+>   drm/vblank: Add helper to get next vblank time
+>   drm/atomic-helper: Set fence deadline for vblank
+>   drm/scheduler: Add fence deadline support
+>
+>  drivers/dma-buf/dma-fence.c             | 39 +++++++++++++++++++++++++
+>  drivers/gpu/drm/drm_atomic_helper.c     | 36 +++++++++++++++++++++++
+>  drivers/gpu/drm/drm_vblank.c            | 31 ++++++++++++++++++++
+>  drivers/gpu/drm/scheduler/sched_fence.c | 10 +++++++
+>  drivers/gpu/drm/scheduler/sched_main.c  |  3 ++
+>  include/drm/drm_vblank.h                |  1 +
+>  include/linux/dma-fence.h               | 17 +++++++++++
+>  7 files changed, 137 insertions(+)
+>
+> --
+> 2.31.1
+>
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
