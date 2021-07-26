@@ -2,72 +2,69 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE0EB3D5BEA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Jul 2021 16:40:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C6623D5C4A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Jul 2021 16:56:35 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 953BC63525
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Jul 2021 14:40:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0FA3A634FD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Jul 2021 14:56:34 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 87732634D4; Mon, 26 Jul 2021 14:39:59 +0000 (UTC)
+	id CE061634D2; Mon, 26 Jul 2021 14:56:32 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D8C7E634D5;
-	Mon, 26 Jul 2021 14:39:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7F050634C4;
+	Mon, 26 Jul 2021 14:56:29 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 94B2F6339C
- for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jul 2021 14:39:54 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 439726339C
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jul 2021 14:56:28 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 90926634D0; Mon, 26 Jul 2021 14:39:54 +0000 (UTC)
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
- [209.85.216.42])
- by lists.linaro.org (Postfix) with ESMTPS id 7F0DE6339C
- for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jul 2021 14:39:52 +0000 (UTC)
-Received: by mail-pj1-f42.google.com with SMTP id
- u9-20020a17090a1f09b029017554809f35so20037377pja.5
- for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jul 2021 07:39:52 -0700 (PDT)
+ id 3F2EC60570; Mon, 26 Jul 2021 14:56:28 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
+ [209.85.216.48])
+ by lists.linaro.org (Postfix) with ESMTPS id 32C4A60570
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jul 2021 14:56:26 +0000 (UTC)
+Received: by mail-pj1-f48.google.com with SMTP id j1so13217270pjv.3
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jul 2021 07:56:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=ekwflhj473tLPM4o66HmQDg1eO85NFT85HSvncxpjEk=;
- b=neKWOI+Dh/7A+2hLuVLh7sTV/IeaMcSKIgZ45a7rDfkn0gRuRqisg9dEL8OVRT2m9l
- 9Q20V3okQFhysBuuEPmE4/jXtwhjE8XBZSfSJV6p9hRC9/qlBTNIaRQAbJ6H1Y2hV0xV
- Kdtc3keCi9jcL2bZKz86cFl7pR8urIkZTbloKKZc+hghK1TOXGGWrBBtR2j+NE8YO4RP
- ZJSAFavCoFYMy5Zoq+Rs7zVUfUHJOgyB2uopZcG7jUMtHeXl/XJfx2Z6Co2jpVm9IxRM
- 1shePO8vsQ0hVOuenANTj9rTeGP1/rsVJ4gU5pfXSXoVFeYB5fT7aSByIsCby/l4LqH0
- W9oA==
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=4kiMiLKKdf74B8SbPL3dRDmnPHR8lzRMp7RHSQmrGNw=;
+ b=jI1j/NgDo5hs4g+F/KPwBAM+MOzWrSm17BUPFpmgS+r7lkXmGUXQyhqz+hNF7GRKNx
+ YYdlgQ9QLIfqyzRXe3rC5M4gstvciuqgcrV255x0Vxqhw7eL5DloVQhMdzEUbUS0j5hy
+ qJOEGjd7GJ8RWFVPOyIRnu7H96draFn/HNd/c+M2AqULKQLshZ17TLnXoPmqxn2bN6AV
+ u6ORrEl3fyvVFrZx3ZkKJxZhaU29xzgJVNObiE/bAsFPXX84rwqeTQiIUzveLeotHELk
+ XJnGUQTodmB3X2vAoLHL/gEW0aLo/m0ovZFT8XxhChsFH59k+DitsaHWPt04F84Tr63U
+ eB2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=ekwflhj473tLPM4o66HmQDg1eO85NFT85HSvncxpjEk=;
- b=ssxqlGecR0QPUWIslyer3EOoSm5YLQcdQXlFjJJJqIlAlxLbsMXa0aKdM2i4/mQ7od
- uJkqOtSRaxk27xw+7YJxadUxF0o4e90fjKF9Ciurxlz9RS4CzmXXXCEAoiFFhtR3qf+5
- x9VuomYIkeASkLNHPzHMZOEPD7uEEMemZh9PO7XpvIzQrWqamtZVwj1NOdqmnDQoYBXR
- tWyotsHVPRgj+YflcCkZPKrd+YhB6c5i+JpBuFCEPFXLqbyJ24r6TGTiX2cP7KcE4swX
- c1Ptk4KK8OLN9utcVEBdRXYRJ5FWpnn1RWqniW0Fz5LhSqAwjkJyerR/AW2HvFVIhDz/
- rhzQ==
-X-Gm-Message-State: AOAM533PXxc+DJrdv9OFhMzIuKG0jpeZU8+JISVGuOIeYuDi9wrVa4bL
- d2m6g6p/JOb1g2rHpr59dHk=
-X-Google-Smtp-Source: ABdhPJwVNoI9TSjltGtPcuwa7z7ZMWNEHSmfqGQrY8pwIfaxziRPGaSoaLtZTEDhY5xgBcvvc0B7sQ==
-X-Received: by 2002:aa7:8154:0:b029:310:70d:a516 with SMTP id
- d20-20020aa781540000b0290310070da516mr18664766pfn.63.1627310391600; 
- Mon, 26 Jul 2021 07:39:51 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=4kiMiLKKdf74B8SbPL3dRDmnPHR8lzRMp7RHSQmrGNw=;
+ b=jsi5DXrcTNiMmN6UgV23JbEFW77GMSNAAMCBG/87HVoywabLbYEPRbukqm9tfvq8yP
+ dfy0z/u2168Ym7wT622ULEPBvLS6jteGorpCQ7I0p/nna1kg8P/3K1fcwtrSxdzUE9fr
+ Ft72EdS37yWafFGnri1yWxKpLhtococBi5tt0gR+/35b3Wf/SoywLWBbvgKIHPwNpVIs
+ YWtbO8cQmLyQb7p/QHRElbm1u7s+cFA6J1ChIdO7I/g5sfFOrGln6hmNIi8w/lNMg6my
+ 1Gaepu7dWhSGx1iCnkPSbIygQ7Wbsk1w4eZ4fPLxmpgjPaxqlwJ1qBzIdGWaeAbVE3mu
+ 43PQ==
+X-Gm-Message-State: AOAM530NMowOKAn//PyrKp/WdTFxQE6BnkJh/5Ogo7HwOunicVMY4Jcl
+ ARy9KXYxO2XNZkQrMkOCcFI=
+X-Google-Smtp-Source: ABdhPJxCzSPaN6g5q60cPg019AFRxemj39UE/GdRQyt7U07FdFkZJldm6g5LHorArCTP21RfR8lbHw==
+X-Received: by 2002:a17:902:a710:b029:12b:9b9f:c461 with SMTP id
+ w16-20020a170902a710b029012b9b9fc461mr14548619plq.59.1627311385190; 
+ Mon, 26 Jul 2021 07:56:25 -0700 (PDT)
 Received: from localhost ([2601:1c0:5200:a6:307:a401:7b76:c6e5])
- by smtp.gmail.com with ESMTPSA id 85sm221234pfz.76.2021.07.26.07.39.50
+ by smtp.gmail.com with ESMTPSA id x6sm3034152pjk.24.2021.07.26.07.56.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Jul 2021 07:39:50 -0700 (PDT)
+ Mon, 26 Jul 2021 07:56:24 -0700 (PDT)
 From: Rob Clark <robdclark@gmail.com>
 To: dri-devel@lists.freedesktop.org
-Date: Mon, 26 Jul 2021 07:43:57 -0700
-Message-Id: <20210726144359.2179302-2-robdclark@gmail.com>
+Date: Mon, 26 Jul 2021 08:00:14 -0700
+Message-Id: <20210726150038.2187631-1-robdclark@gmail.com>
 X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210726144359.2179302-1-robdclark@gmail.com>
-References: <20210726144359.2179302-1-robdclark@gmail.com>
 MIME-Version: 1.0
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH 1/2] drm/msm: Let fences read directly from
- memptrs
+Subject: [Linaro-mm-sig] [PATCH v2 00/12] drm/msm: drm scheduler conversion
+ and cleanups
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,16 +77,24 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Rob Clark <robdclark@chromium.org>,
- "open list:DRM DRIVER FOR MSM ADRENO GPU"
- <freedreno@lists.freedesktop.org>, David Airlie <airlied@linux.ie>,
+Cc: Emma Anholt <emma@anholt.net>, Konrad Dybcio <konrad.dybcio@somainline.org>,
+ Akhil P Oommen <akhilpo@codeaurora.org>,
+ Bjorn Andersson <bjorn.andersson@linaro.org>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@somainline.org>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Lee Jones <lee.jones@linaro.org>, Rob Clark <robdclark@chromium.org>,
+ Sai Prakash Ranjan <saiprakash.ranjan@codeaurora.org>,
+ Jonathan Marek <jonathan@marek.ca>, Bernard Zhao <bernard@vivo.com>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>,
  "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>,
- open list <linux-kernel@vger.kernel.org>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ Sharat Masetty <smasetty@codeaurora.org>,
  "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Rob Clark <robdclark@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Sean Paul <sean@poorly.run>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+ Douglas Anderson <dianders@chromium.org>,
+ open list <linux-kernel@vger.kernel.org>,
+ Zhenzhong Duan <zhenzhong.duan@gmail.com>,
+ "Kristian H. Kristensen" <hoegsberg@google.com>,
+ "open list:DRM DRIVER FOR MSM ADRENO GPU" <freedreno@lists.freedesktop.org>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
@@ -98,129 +103,59 @@ X-Virus-Scanned: ClamAV using ClamSMTP
 
 From: Rob Clark <robdclark@chromium.org>
 
-Let dma_fence::signaled, etc, read directly from the address that the hw
-is writing with updated completed fence seqno, so we can potentially
-notice that the fence is signaled sooner.
+Conversion to gpu_scheduler, and bonus removal of
+drm_gem_object_put_locked()
 
-Plus add some docs.
+v2: Fix priority mixup (msm UAPI has lower numeric priority value as
+    higher priority, inverse of drm/scheduler) and add some comments
+    in the UAPI header to clarify.
 
-Signed-off-by: Rob Clark <robdclark@chromium.org>
----
- drivers/gpu/drm/msm/msm_fence.c      | 11 ++++++--
- drivers/gpu/drm/msm/msm_fence.h      | 41 +++++++++++++++++++++++++---
- drivers/gpu/drm/msm/msm_ringbuffer.c |  2 +-
- 3 files changed, 47 insertions(+), 7 deletions(-)
+    Now that we move active refcnt get into msm_gem_submit, add a
+    patch to mark all bos busy before pinning, to avoid evicting bos
+    used in same batch.
 
-diff --git a/drivers/gpu/drm/msm/msm_fence.c b/drivers/gpu/drm/msm/msm_fence.c
-index cd59a5918038..b92a9091a1e2 100644
---- a/drivers/gpu/drm/msm/msm_fence.c
-+++ b/drivers/gpu/drm/msm/msm_fence.c
-@@ -11,7 +11,8 @@
- 
- 
- struct msm_fence_context *
--msm_fence_context_alloc(struct drm_device *dev, const char *name)
-+msm_fence_context_alloc(struct drm_device *dev, volatile uint32_t *fenceptr,
-+		const char *name)
- {
- 	struct msm_fence_context *fctx;
- 
-@@ -22,6 +23,7 @@ msm_fence_context_alloc(struct drm_device *dev, const char *name)
- 	fctx->dev = dev;
- 	strncpy(fctx->name, name, sizeof(fctx->name));
- 	fctx->context = dma_fence_context_alloc(1);
-+	fctx->fenceptr = fenceptr;
- 	init_waitqueue_head(&fctx->event);
- 	spin_lock_init(&fctx->spinlock);
- 
-@@ -35,7 +37,12 @@ void msm_fence_context_free(struct msm_fence_context *fctx)
- 
- static inline bool fence_completed(struct msm_fence_context *fctx, uint32_t fence)
- {
--	return (int32_t)(fctx->completed_fence - fence) >= 0;
-+	/*
-+	 * Note: Check completed_fence first, as fenceptr is in a write-combine
-+	 * mapping, so it will be more expensive to read.
-+	 */
-+	return (int32_t)(fctx->completed_fence - fence) >= 0 ||
-+		(int32_t)(*fctx->fenceptr - fence) >= 0;
- }
- 
- /* legacy path for WAIT_FENCE ioctl: */
-diff --git a/drivers/gpu/drm/msm/msm_fence.h b/drivers/gpu/drm/msm/msm_fence.h
-index 2d9af66dcca5..6ab97062ff1a 100644
---- a/drivers/gpu/drm/msm/msm_fence.h
-+++ b/drivers/gpu/drm/msm/msm_fence.h
-@@ -9,19 +9,52 @@
- 
- #include "msm_drv.h"
- 
-+/**
-+ * struct msm_fence_context - fence context for gpu
-+ *
-+ * Each ringbuffer has a single fence context, with the GPU writing an
-+ * incrementing fence seqno at the end of each submit
-+ */
- struct msm_fence_context {
- 	struct drm_device *dev;
-+	/** name: human readable name for fence timeline */
- 	char name[32];
-+	/** context: see dma_fence_context_alloc() */
- 	unsigned context;
--	/* last_fence == completed_fence --> no pending work */
--	uint32_t last_fence;          /* last assigned fence */
--	uint32_t completed_fence;     /* last completed fence */
-+
-+	/**
-+	 * last_fence:
-+	 *
-+	 * Last assigned fence, incremented each time a fence is created
-+	 * on this fence context.  If last_fence == completed_fence,
-+	 * there is no remaining pending work
-+	 */
-+	uint32_t last_fence;
-+
-+	/**
-+	 * completed_fence:
-+	 *
-+	 * The last completed fence, updated from the CPU after interrupt
-+	 * from GPU
-+	 */
-+	uint32_t completed_fence;
-+
-+	/**
-+	 * fenceptr:
-+	 *
-+	 * The address that the GPU directly writes with completed fence
-+	 * seqno.  This can be ahead of completed_fence.  We can peek at
-+	 * this to see if a fence has already signaled but the CPU hasn't
-+	 * gotten around to handling the irq and updating completed_fence
-+	 */
-+	volatile uint32_t *fenceptr;
-+
- 	wait_queue_head_t event;
- 	spinlock_t spinlock;
- };
- 
- struct msm_fence_context * msm_fence_context_alloc(struct drm_device *dev,
--		const char *name);
-+		volatile uint32_t *fenceptr, const char *name);
- void msm_fence_context_free(struct msm_fence_context *fctx);
- 
- int msm_wait_fence(struct msm_fence_context *fctx, uint32_t fence,
-diff --git a/drivers/gpu/drm/msm/msm_ringbuffer.c b/drivers/gpu/drm/msm/msm_ringbuffer.c
-index 4d2a2a4abef8..7e92d9532454 100644
---- a/drivers/gpu/drm/msm/msm_ringbuffer.c
-+++ b/drivers/gpu/drm/msm/msm_ringbuffer.c
-@@ -51,7 +51,7 @@ struct msm_ringbuffer *msm_ringbuffer_new(struct msm_gpu *gpu, int id,
- 
- 	snprintf(name, sizeof(name), "gpu-ring-%d", ring->id);
- 
--	ring->fctx = msm_fence_context_alloc(gpu->dev, name);
-+	ring->fctx = msm_fence_context_alloc(gpu->dev, &ring->memptrs->fence, name);
- 
- 	return ring;
- 
+    Fix bo locking for cmdstream dumping ($debugfs/n/{rd,hangrd})
+
+Rob Clark (12):
+  drm/msm: Docs and misc cleanup
+  drm/msm: Small submitqueue creation cleanup
+  drm/msm: drop drm_gem_object_put_locked()
+  drm: Drop drm_gem_object_put_locked()
+  drm/msm/submit: Simplify out-fence-fd handling
+  drm/msm: Consolidate submit bo state
+  drm/msm: Track "seqno" fences by idr
+  drm/msm: Return ERR_PTR() from submit_create()
+  drm/msm: Conversion to drm scheduler
+  drm/msm: Drop struct_mutex in submit path
+  drm/msm: Utilize gpu scheduler priorities
+  drm/msm/gem: Mark active before pinning
+
+ drivers/gpu/drm/drm_gem.c                   |  22 --
+ drivers/gpu/drm/msm/Kconfig                 |   1 +
+ drivers/gpu/drm/msm/adreno/a5xx_debugfs.c   |   4 +-
+ drivers/gpu/drm/msm/adreno/a5xx_gpu.c       |   6 +-
+ drivers/gpu/drm/msm/adreno/a5xx_power.c     |   2 +-
+ drivers/gpu/drm/msm/adreno/a5xx_preempt.c   |   7 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gmu.c       |  12 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gpu.c       |   2 +-
+ drivers/gpu/drm/msm/adreno/a6xx_gpu_state.c |   4 +-
+ drivers/gpu/drm/msm/adreno/adreno_gpu.c     |   6 +-
+ drivers/gpu/drm/msm/msm_drv.c               |  30 +-
+ drivers/gpu/drm/msm/msm_fence.c             |  39 ---
+ drivers/gpu/drm/msm/msm_fence.h             |   2 -
+ drivers/gpu/drm/msm/msm_gem.c               |  93 +-----
+ drivers/gpu/drm/msm/msm_gem.h               |  39 ++-
+ drivers/gpu/drm/msm/msm_gem_submit.c        | 316 ++++++++++++--------
+ drivers/gpu/drm/msm/msm_gpu.c               |  46 +--
+ drivers/gpu/drm/msm/msm_gpu.h               |  78 ++++-
+ drivers/gpu/drm/msm/msm_rd.c                |   6 +-
+ drivers/gpu/drm/msm/msm_ringbuffer.c        |  70 ++++-
+ drivers/gpu/drm/msm/msm_ringbuffer.h        |  12 +
+ drivers/gpu/drm/msm/msm_submitqueue.c       |  53 +++-
+ include/drm/drm_gem.h                       |   2 -
+ include/uapi/drm/msm_drm.h                  |  14 +-
+ 24 files changed, 503 insertions(+), 363 deletions(-)
+
 -- 
 2.31.1
 
