@@ -2,77 +2,74 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B7223DA027
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 11:15:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 12FD63DA059
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 11:37:49 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 14E6363568
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 09:15:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B46506350F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 09:37:46 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 702B964819; Thu, 29 Jul 2021 09:15:54 +0000 (UTC)
+	id 9EC34647F4; Thu, 29 Jul 2021 09:37:45 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2AB716350A;
-	Thu, 29 Jul 2021 09:15:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A2C9C6350A;
+	Thu, 29 Jul 2021 09:37:41 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 0EF8160A96
- for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 09:15:49 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id AD3D160865
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 09:37:39 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 0C90C6350A; Thu, 29 Jul 2021 09:15:49 +0000 (UTC)
-Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com
- [209.85.167.49])
- by lists.linaro.org (Postfix) with ESMTPS id 015D560A96
- for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 09:15:47 +0000 (UTC)
-Received: by mail-lf1-f49.google.com with SMTP id r17so9736363lfe.2
- for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 02:15:46 -0700 (PDT)
+ id A2E576350A; Thu, 29 Jul 2021 09:37:39 +0000 (UTC)
+Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com
+ [209.85.167.54])
+ by lists.linaro.org (Postfix) with ESMTPS id 9872060865
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 09:37:37 +0000 (UTC)
+Received: by mail-lf1-f54.google.com with SMTP id r17so9836157lfe.2
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 02:37:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
  h=date:from:to:cc:subject:message-id:in-reply-to:references
- :mime-version; bh=S2WOhbKtnksCXQrfbao+yG0WrUawlgDIizHpSnBnnf0=;
- b=D1AbJjVfa4UVIhgpkG/gleRi/WBc+YSAmXO7N6VAI/6EsbHZDUntTRkVR7HTdTNYyR
- l4f2aekCso1BFLDzAzoT3tjfZ9aNNDBv8HBGK3IurM5h/q+7XfMtPyvu4LoPBZdILign
- bweFkU3RXmi6pjX/iQDcJ/vZ/kOznl6/JiEimo7YH1ukGFdZmC8QXdoxgUBULvmQ8A0n
- CFHV9T2g4WvkpBhXNvC4LgoPnNcRnUlFIQESXY77jnDNIpLxZUKf4WMuHq0YA/OLDmgw
- Z/yVj9jztRqGhabEHmJVKlWbOzVDx/GMvDC8m7Rud46PvUKAPMayTE4HwcIWCR2mPgrh
- 7Xbw==
+ :mime-version; bh=6xYM4GghZ+EWYpy/lB2lIDcHjit5HTkWG+vusYrCG34=;
+ b=fKd2NfmDRuGgsfANpWiZ8LPYBSckk7wlLspAL3Q3oeZo6tQXztKf/eJKik7rQZdQbs
+ BfO8wDXQkh4KrCCWaN+JvKgiB5RuajD6hHij6m9uskz8Ehy0LCeLO5MO6R60DjncTQig
+ Hx7BgOWCSggEzWGWK/Ro6cRN4+KKlRXxxHR/7hltEmX+VtUJTXolbAIQopapG4tAzkQG
+ ZyD9Y5uufCjYME2JfE9et3hw4/+qN0nduqibrZv3hK+M+y97S1hyD1fL0ydaSvKZNjuw
+ MoCJypeyLsw4wH4FqgPumTj6e1FIABQPUHkPf139CULzllA71LyNecilC307IrsPqGAa
+ CRow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
  :references:mime-version;
- bh=S2WOhbKtnksCXQrfbao+yG0WrUawlgDIizHpSnBnnf0=;
- b=bXzRS9TjVv/OiuqO56HtJ0QwgVVw8rPG/dbFA+OnRTQXrljbm4Xu+q+LUcY6yBJir3
- Ay5Tb1TzXmg1qgIdkJQ/GJVZ+TY/qmooYiNpVtYwPzHgojUI74FlSLXG5mHOW/CxJMSz
- 08RdQnM9H0aZlyUlZ9RhFZqCtHrydukf3CQ5OHy614Se4F1c9greKWGliAOreUkPsN2V
- B+NdVqm0N/KAGRNb0IssOniwT8dNGkBYrfVljB7O7nsLMXiHmY+fRduWYvHVlFbJ1xL0
- m/4d0q3l0nhl9n8CDclBZB+ZRRkzfbrLnglSy2X3+OzxIoFnSI5itgyaAZ971mmErJ1O
- XgXg==
-X-Gm-Message-State: AOAM530GBdDeOmQ2GlmjI4DM+YWpsCcGx7tSLMcyCrUWXdxIStjp/UwR
- 9TA4F4bhL48665rL3q3Xa68=
-X-Google-Smtp-Source: ABdhPJxTojV5Vf7auhwpvtT6+k/6OqxJ3aPn3ow4yXkZOCokj3Y2M8c+/CsdBCoUUkBNcyQBvK1Cmg==
-X-Received: by 2002:a19:4341:: with SMTP id m1mr2942235lfj.443.1627550145755; 
- Thu, 29 Jul 2021 02:15:45 -0700 (PDT)
+ bh=6xYM4GghZ+EWYpy/lB2lIDcHjit5HTkWG+vusYrCG34=;
+ b=G0+BAtPkjOWL0b2Pu+b+dKuvIftN8QjfzezBJbcOkNMLTzpuEqB78W9q/xtx4oJjTn
+ cpfFv5SdtTB6kujOt7vqcFcIwzg4eWTMXLjtMQj1bioxHyLGzeDHkt0CGktH0fY3RVVy
+ phJkd4bU3qe6+0TrDCnjsPbB05neBC0lgngrLu8yXUXW5X/CAc3CBlAseJ/vpVN6uHYq
+ TCjYe6JoJQOSN/iO+Qi96KxUmNW83RT8qXVPeMnXygDFMsOVB3GgdRJTOgEqx0rhZcbs
+ 77ET/OQElgcVr712EJDfqCj4u5nVKmdvi6x7sfW9f4v3XxLmNZHjFNDEAkrHvfGtkPJl
+ 6Qfg==
+X-Gm-Message-State: AOAM533P3jvTV6jKDQb4WAcZXc4C8DVgEnVVMwJoNxcDPxkjZnVqOxCw
+ DodVqRFWa+HDvk76aVTJo+0=
+X-Google-Smtp-Source: ABdhPJxCs8NcaPvaP0Xjj6sO4ElOk0rtGYSxBdIazOQL9C2hrydCXH9csX65rJ6/A1hqof5/sGVZhQ==
+X-Received: by 2002:ac2:5939:: with SMTP id v25mr1991239lfi.543.1627551456305; 
+ Thu, 29 Jul 2021 02:37:36 -0700 (PDT)
 Received: from eldfell ([194.136.85.206])
- by smtp.gmail.com with ESMTPSA id a13sm247194lfl.206.2021.07.29.02.15.44
+ by smtp.gmail.com with ESMTPSA id f20sm128775lfv.236.2021.07.29.02.37.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 29 Jul 2021 02:15:45 -0700 (PDT)
-Date: Thu, 29 Jul 2021 12:15:42 +0300
+ Thu, 29 Jul 2021 02:37:36 -0700 (PDT)
+Date: Thu, 29 Jul 2021 12:37:32 +0300
 From: Pekka Paalanen <ppaalanen@gmail.com>
-To: Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>
-Message-ID: <20210729121542.27d9b1cc@eldfell>
-In-Reply-To: <3675d530-c9fc-7ec9-e157-b6abeeec7c2a@amd.com>
-References: <20210726233854.2453899-1-robdclark@gmail.com>
- <28ca4167-4a65-0ccc-36be-5fb017f6f49d@daenzer.net>
- <CAF6AEGuhQ2=DSDaGGVwBz5O+FoZEjpgoVJOcFecpd--a9yDY1w@mail.gmail.com>
+To: Daniel Vetter <daniel@ffwll.ch>
+Message-ID: <20210729123732.3259a9bf@eldfell>
+In-Reply-To: <YQJu6AqKn7bdT1li@phenom.ffwll.local>
+References: <CAF6AEGuhQ2=DSDaGGVwBz5O+FoZEjpgoVJOcFecpd--a9yDY1w@mail.gmail.com>
  <99984703-c3ca-6aae-5888-5997d7046112@daenzer.net>
  <CAJs_Fx4O4w5djx3-q5zja51-ko_nQ0X2nEk3qoZB_axpBVSrKA@mail.gmail.com>
  <f6d73ec5-85f9-1b18-f2d2-a5f3b7333efa@gmail.com>
  <c9ee242e-542e-e189-a1ec-c1be34d66c93@daenzer.net>
  <04d44873-d8e6-6ae7-f0f9-17bcb484d697@amd.com>
  <9d5f4415-d470-3bc1-7d52-61ba739706ae@daenzer.net>
- <eedfdc75-72f8-9150-584b-c5e9d16db180@amd.com>
- <20210728165700.38c39cf8@eldfell>
- <74e310fa-e544-889f-2389-5abe06f80eb8@amd.com>
- <20210729112358.237651ff@eldfell>
- <3675d530-c9fc-7ec9-e157-b6abeeec7c2a@amd.com>
+ <CAF6AEGu409eY9xznTAaBf2ZDcV_AaDELUzN2afWgiHwB_uBwqg@mail.gmail.com>
+ <YQJUKXgf/Q957fmy@phenom.ffwll.local>
+ <ff394f2b-b555-e80f-b685-d0d59e2bbe67@daenzer.net>
+ <YQJu6AqKn7bdT1li@phenom.ffwll.local>
 X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 X-Virus-Scanned: ClamAV using ClamSMTP
@@ -90,7 +87,6 @@ List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: Rob Clark <robdclark@chromium.org>, Matthew Brost <matthew.brost@intel.com>,
- Jack Zhang <Jack.Zhang1@amd.com>,
  Michel =?UTF-8?B?RMOkbnplcg==?= <michel@daenzer.net>,
  open list <linux-kernel@vger.kernel.org>,
  dri-devel <dri-devel@lists.freedesktop.org>,
@@ -100,152 +96,159 @@ Cc: Rob Clark <robdclark@chromium.org>, Matthew Brost <matthew.brost@intel.com>,
  Gustavo Padovan <gustavo@padovan.org>,
  Alex Deucher <alexander.deucher@amd.com>, Tian Tao <tiantao6@hisilicon.com>,
  Lee Jones <lee.jones@linaro.org>,
+ Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
  "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Content-Type: multipart/mixed; boundary="===============4580564215178975836=="
+Content-Type: multipart/mixed; boundary="===============8212248108908587206=="
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
---===============4580564215178975836==
-Content-Type: multipart/signed; boundary="Sig_/LoBVg6qhcuxdajU4QJB+N2E";
+--===============8212248108908587206==
+Content-Type: multipart/signed; boundary="Sig_/C/IUA+I6gnX4XYpXMYZQgHZ";
  protocol="application/pgp-signature"; micalg=pgp-sha256
 
---Sig_/LoBVg6qhcuxdajU4QJB+N2E
+--Sig_/C/IUA+I6gnX4XYpXMYZQgHZ
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, 29 Jul 2021 10:43:16 +0200
-Christian K=C3=B6nig <christian.koenig@amd.com> wrote:
+On Thu, 29 Jul 2021 11:03:36 +0200
+Daniel Vetter <daniel@ffwll.ch> wrote:
 
-> Am 29.07.21 um 10:23 schrieb Pekka Paalanen:
-> > On Wed, 28 Jul 2021 16:30:13 +0200
-> > Christian K=C3=B6nig <christian.koenig@amd.com> wrote:
-> > =20
-> >> Am 28.07.21 um 15:57 schrieb Pekka Paalanen: =20
-> >>> On Wed, 28 Jul 2021 15:31:41 +0200
-> >>> Christian K=C3=B6nig <christian.koenig@amd.com> wrote:
-> >>>    =20
-> >>>> Am 28.07.21 um 15:24 schrieb Michel D=C3=A4nzer: =20
-> >>>>> On 2021-07-28 3:13 p.m., Christian K=C3=B6nig wrote: =20
-> >>>>>> Am 28.07.21 um 15:08 schrieb Michel D=C3=A4nzer: =20
-> >>>>>>> On 2021-07-28 1:36 p.m., Christian K=C3=B6nig wrote: =20
-> >>>>>>>> At least AMD hardware is already capable of flipping frames on G=
-PU events like finishing rendering (or uploading etc).
-> >>>>>>>>
-> >>>>>>>> By waiting in userspace on the CPU before send the frame to the =
-hardware you are completely killing of such features.
-> >>>>>>>>
-> >>>>>>>> For composing use cases that makes sense, but certainly not for =
-full screen applications as far as I can see. =20
-> >>>>>>> Even for fullscreen, the current KMS API only allows queuing a si=
-ngle page flip per CRTC, with no way to cancel or otherwise modify it. Ther=
-efore, a Wayland compositor has to set a deadline for the next refresh cycl=
-e, and when the deadline passes, it has to select the best buffer available=
- for the fullscreen surface. To make sure the flip will not miss the next r=
-efresh cycle, the compositor has to pick an idle buffer. If it picks a non-=
-idle buffer, and the pending rendering does not finish in time for vertical=
- blank, the flip will be delayed by at least one refresh cycle, which resul=
-ts in visible stuttering.
-> >>>>>>>
-> >>>>>>> (Until the deadline passes, the Wayland compositor can't even kno=
-w if a previously fullscreen surface will still be fullscreen for the next =
-refresh cycle) =20
-> >>>>>> Well then let's extend the KMS API instead of hacking together wor=
-karounds in userspace. =20
-> >>>>> That's indeed a possible solution for the fullscreen / direct scano=
-ut case.
-> >>>>>
-> >>>>> Not for the general compositing case though, since a compositor doe=
-s not want to composite multiple output frames per display refresh cycle, s=
-o it has to make sure the one frame hits the target. =20
-> >>>> Yeah, that's true as well.
-> >>>>
-> >>>> At least as long as nobody invents a mechanism to do this decision on
-> >>>> the GPU instead. =20
-> >>> That would mean putting the whole window manager into the GPU. =20
-> >> Not really. You only need to decide if you want to use the new backing
-> >> store or the old one based on if the new surface is ready or not. =20
-> > Except that a window content update in Wayland must be synchronised with
-> > all the possible and arbitrary other window system state changes, that
-> > will affect how and where other windows will get drawn *this frame*,
-> > how input events are routed, and more.
-> >
-> > But, if the window manager made sure that *only* window contents are
-> > about to change and *all* other state remains as it was, then it would
-> > be possible to let the GPU decide which frame it uses. As long as it
-> > also tells back which one it actually did, so that presentation
-> > feedback etc. can trigger the right Wayland events.
-> >
-> > Wayland has "atomic commits" to windows, and arbitrary protocol
-> > extensions can add arbitrary state to be tracked with it. A bit like KMS
-> > properties. Even atomic commits affecting multiple windows together are
-> > a thing, and they must be latched either all or none.
-> >
-> > So it's quite a lot of work to determine if one can allow the GPU to
-> > choose the buffer it will texture from, or not. =20
+> On Thu, Jul 29, 2021 at 10:17:43AM +0200, Michel D=C3=A4nzer wrote:
+> > On 2021-07-29 9:09 a.m., Daniel Vetter wrote: =20
+> > > On Wed, Jul 28, 2021 at 08:34:13AM -0700, Rob Clark wrote: =20
+> > >> On Wed, Jul 28, 2021 at 6:24 AM Michel D=C3=A4nzer <michel@daenzer.n=
+et> wrote: =20
+> > >>> On 2021-07-28 3:13 p.m., Christian K=C3=B6nig wrote: =20
+> > >>>> Am 28.07.21 um 15:08 schrieb Michel D=C3=A4nzer: =20
+> > >>>>> On 2021-07-28 1:36 p.m., Christian K=C3=B6nig wrote: =20
+> > >>>>>> Am 27.07.21 um 17:37 schrieb Rob Clark: =20
+> > >>>>>>> On Tue, Jul 27, 2021 at 8:19 AM Michel D=C3=A4nzer <michel@daen=
+zer.net> wrote: =20
+> > >>>>>>>> On 2021-07-27 5:12 p.m., Rob Clark wrote: =20
+> > >>>>>>>>> On Tue, Jul 27, 2021 at 7:50 AM Michel D=C3=A4nzer <michel@da=
+enzer.net> wrote: =20
+> > >>>>>>>>>> On 2021-07-27 1:38 a.m., Rob Clark wrote: =20
+> > >>>>>>>>>>> From: Rob Clark <robdclark@chromium.org>
+> > >>>>>>>>>>>
+> > >>>>>>>>>>> Based on discussion from a previous series[1] to add a "boo=
+st" mechanism
+> > >>>>>>>>>>> when, for example, vblank deadlines are missed.  Instead of=
+ a boost
+> > >>>>>>>>>>> callback, this approach adds a way to set a deadline on the=
+ fence, by
+> > >>>>>>>>>>> which the waiter would like to see the fence signalled.
+
+...
+
+> > I'm not questioning that this approach helps when there's a direct
+> > chain of fences from the client to the page flip. I'm pointing out
+> > there will not always be such a chain.
+> >=20
+> >  =20
+> > >> But maybe the solution to make this also useful for mutter =20
+> >=20
+> > It's not just mutter BTW. I understand gamescope has been doing
+> > this for some time already. And there seems to be consensus among
+> > developers of Wayland compositors that this is needed, so I expect
+> > at least all the major compositors to do this longer term.
+> >=20
+> >  =20
+> > >> is to, once we have deadline support, extend it with an ioctl to
+> > >> the dma-fence fd so userspace can be the one setting the
+> > >> deadline. =20
+> >=20
+> > I was thinking in a similar direction.
+> >  =20
+> > > atomic ioctl with TEST_ONLY and SET_DEADLINES? Still gives mutter
+> > > the option to bail out with an old frame if it's too late? =20
+> >=20
+> > This is a bit cryptic though, can you elaborate? =20
 >=20
-> But how does it then help to wait on the CPU instead?
+> So essentially when the mutter compositor guesstimator is fairly
+> confident about the next frame's composition (recall you're keeping
+> track of clients to estimate their usual latency or something like
+> that), then it does a TEST_ONLY commit to check it all works and prep
+> the rendering, but _not_ yet fire it off.
+>=20
+> Instead it waits until all buffers complete, and if some don't, pick
+> the previous one. Which I guess in an extreme case would mean you
+> need a different window tree configuration and maybe different
+> TEST_ONLY check and all that, not sure how you solve that.
+>=20
+> Anyway, in that TEST_ONLY commit my idea is that you'd also supply
+> all the in-fences you expect to depend upon (maybe we need an
+> additional list of in-fences for your rendering job), plus a deadline
+> when you want to have them done (so that there's enough time for your
+> render job still). And the kernel then calls dma_fence_set_deadline
+> on all of them.
+>=20
+> Pondering this more, maybe a separate ioctl is simpler where you just
+> supply a list of in-fences and deadlines.
+>=20
+> The real reason I want to tie this to atomic is for priviledge
+> checking reasons. I don't think normal userspace should have the
+> power to set arbitrary deadlines like this - at least on i915 it will
+> also give you a slight priority boost and stuff like that, to make
+> sure your rendering for the current frame goes in ahead of the next
+> frame's prep work.
+>=20
+> So maybe just a new ioctl that does this which is limited to the
+> current kms owner (aka drm_master)?
 
-A compositor does not "wait" literally. It would only check which state
-set is ready to be used, and uses the most recent set that is ready. Any
-state sets that are not ready are ignored and reconsidered the next
-time the compositor updates the screen.
+Yeah.
 
-Depending on which state sets are selected for a screen update, the
-global window manager state may be updated accordingly, before the
-drawing commands for the composition can be created.
+Why not have a Wayland compositor *always* "set the deadlines" for the
+next screen update as soon as it gets the wl_surface.commit with the
+new buffer and fences (a simplified description of what is actually
+necessary to take a new window state set into use)?
 
-> See what I'm proposing is to either render the next state of the window=20
-> or compose from the old state (including all atomic properties).
+The Wayland client posted the frame to the compositor, so surely it
+wants it ready and displayed ASAP. If we happen to have a Wayland frame
+queuing extension, then also take that into account when setting the
+deadline.
 
-Yes, that's exactly how it would work. It's just that state for a
-window is not an independent thing, it can affect how unrelated windows
-are managed.
+Then, *independently* of that, the compositor will choose which frames
+it will actually use in its composition when the time comes.
 
-A simplified example would be two windows side by side where the
-resizing of one causes the other to move. You can't resize the window
-or move the other until the buffer with the new size is ready. Until
-then the compositor uses the old state.
+No need for any KMS atomic commit fiddling, userspace just explicitly
+sets the deadline on the fence and that's it. You could tie the
+privilege of setting deadlines to simply holding DRM master on whatever
+device? So the ioctl would need both the fence and any DRM device fd.
 
-> E.g. what do you do if you timeout and can't have the new window content=
-=20
-> on time? What's the fallback here?
-
-As there is no wait, there is no timeout either.
-
-If the app happens to be frozen (e.g. some weird bug in fence handling
-to make it never ready, or maybe it's just bugged itself and never
-drawing again), then the app is frozen, and all the rest of the desktop
-continues running normally without a glitch.
+A rogue application opening a DRM device and becoming DRM master on it
+just to be able to abuse deadlines feels both unlikely and with
+insignificant consequences. It stops the obvious abuse, and if someone
+actually goes the extra effort, then so what.
 
 
 Thanks,
 pq
 
---Sig_/LoBVg6qhcuxdajU4QJB+N2E
+--Sig_/C/IUA+I6gnX4XYpXMYZQgHZ
 Content-Type: application/pgp-signature
 Content-Description: OpenPGP digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmECcb4ACgkQI1/ltBGq
-qqevgw/+MKmK6sPuVfhHb1eCWriLQnS4+VWN8qCqZDOxWoelMi9ZdBxvJGnMvt9u
-5xf6Mq90XuckM1me48ElO6KuuVcMO3V8J4ee8sJRuG/WdPEHzWDHqxF2kTmdH0lM
-7ZBG/trWGr5JSJ+JT8qPMgBauz0LwHS+WY2o2NhgF5KaoqcVljZpbQRdfbyWYqfs
-Hz4luuGorQ46AYy1imRh/LfwZiG2IzRJ2wuBFAaziW+UjkMxnQ7RJKFC/06guzDy
-B+86dERQCrls9PTZJfECHMmOvi/+d6KS6NvlhGUzcp+v0+HDJmiPI5pLEOe2UOCH
-Y0pqXjgZkbNlwEz+ofgQlfkOZHt95nVta61wK1d06oacKVtZHQOrCZjCIKpphpka
-7snCgUzZ3jyPuHVIa7WzduTzDXrraqbKSYpbztsQ7hEZ9asHKMiC4Qq9X0iyuUGy
-U5IHaiGsWsH08R8kRM8ccVZ4orvKxQyKUGR51tEDrmi4W1U7yr5//dj5Zdd8no9R
-AN2YrUzOrvjPq7jza3xkkFCiKzU10n/aiwqjEcMHSk4qASlGu56283zeSqjGm5of
-jVIr+TmgYwoZi43wqgnURWTK3FM6m9RoBrD/D76t7SeyBkY1M7WbXekfrFq0D3oz
-vhkP49LVKt9I2HceIN/5dzKASb8jk9VWbvWIuq4XQIwUcv+gGqU=
-=vcqV
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmECdtwACgkQI1/ltBGq
+qqd+/Q//ZYD8WK6x/5Agqh3t65cNNGvUOOxWmEt+OuP3R7ZxCK/EAgUACoWBeY9l
+5oMQhlI9VfKhLnTgyRFAc/aODza8MAMaKhDtvOeoD5Z5zRWomlqvST+RQ0dF5oB3
+ElRWxP1GTfZSs2VV+ocLmSDSmufV8wyWO3tQbmbRtnKmggNHNDA7DsWhnCHsjxKb
+KNgaSZ1jIXeZpaML03y/oTDVNj9P11hJFYctECQyTtSIQPv5W9A5axRYKnZ518H3
+NaH+IrOOINWDRGy1IqhL800IscxQLnkc5obo6FpADzS0MUBTvbC76EEtCRBOyhAr
+sAQhev4E+RVutRWDdhr0vAWlNLXOD4lnWofIG/x0QWp2TBOQ+B9KZXYc3nQlDF6i
+sQzrA1jRrmB1NsKqJ2c0ulX8ZMSYGmuuOUciNf6MwTQwJe72bKQw4c43DMFFpTFs
+d4tPG9CCELezI7vR7xZgCrJHrI4RLimOhEaJUhruRyUwIjiWt09YOHsFrmI/3GxL
+FDKPwcj35C/4vgx6aO/e4GZD3OCWbZ7ubjgfJ20kN+g2qukZ5L1cU1pOeLeUjzUh
+IUA2+sXRRapyrSnZXAQl0t3MpB+u2ImaXw4Vf0O5QXbBKO3/n1MWqNUZJmcGNwYc
+Mbae8E5OSG6SaWgC1j4DGmFPwuRnrql//VeIvP4dnvhCW3BLH3Y=
+=xPrl
 -----END PGP SIGNATURE-----
 
---Sig_/LoBVg6qhcuxdajU4QJB+N2E--
+--Sig_/C/IUA+I6gnX4XYpXMYZQgHZ--
 
---===============4580564215178975836==
+--===============8212248108908587206==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -256,4 +259,4 @@ Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
 https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
 
---===============4580564215178975836==--
+--===============8212248108908587206==--
