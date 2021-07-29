@@ -2,43 +2,63 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F7B33DA10E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 12:29:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 984823DA1AF
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 13:00:52 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0F24E648FE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 10:29:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 21EB163E52
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 11:00:45 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id E6A6C63523; Thu, 29 Jul 2021 10:29:47 +0000 (UTC)
+	id 7725C63523; Thu, 29 Jul 2021 11:00:43 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4224A6350E;
-	Thu, 29 Jul 2021 10:29:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0CD6C6350B;
+	Thu, 29 Jul 2021 11:00:41 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 120DA6350B
- for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 10:29:44 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id AEB7E60B90
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 11:00:38 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id ED2BC6350E; Thu, 29 Jul 2021 10:29:43 +0000 (UTC)
-Received: from netline-mail3.netline.ch (mail.netline.ch [148.251.143.180])
- by lists.linaro.org (Postfix) with ESMTP id ACC2B6350B
- for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 10:29:41 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by netline-mail3.netline.ch (Postfix) with ESMTP id E66A520201A;
- Thu, 29 Jul 2021 12:29:40 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at netline-mail3.netline.ch
-Received: from netline-mail3.netline.ch ([127.0.0.1])
- by localhost (netline-mail3.netline.ch [127.0.0.1]) (amavisd-new, port 10024)
- with LMTP id 1L6nuNw0PY7d; Thu, 29 Jul 2021 12:28:38 +0200 (CEST)
-Received: from thor (24.99.2.85.dynamic.wline.res.cust.swisscom.ch
- [85.2.99.24])
- by netline-mail3.netline.ch (Postfix) with ESMTPA id B4F5F20201B;
- Thu, 29 Jul 2021 12:28:37 +0200 (CEST)
-Received: from [::1] by thor with esmtp (Exim 4.94.2)
- (envelope-from <michel@daenzer.net>)
- id 1m93HI-001Kjn-Oa; Thu, 29 Jul 2021 12:28:36 +0200
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Pekka Paalanen <ppaalanen@gmail.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+ id A3ED66350B; Thu, 29 Jul 2021 11:00:38 +0000 (UTC)
+Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com
+ [209.85.208.169])
+ by lists.linaro.org (Postfix) with ESMTPS id 94A5A60B90
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 11:00:36 +0000 (UTC)
+Received: by mail-lj1-f169.google.com with SMTP id l4so7022742ljq.4
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 04:00:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:in-reply-to:references
+ :mime-version; bh=j6N7G5MRcha3Fj5Bk0os/bPVbYvLiNuDMePdv4Mv6jU=;
+ b=KPirDI5m+4uNpkEbctbgBuyocz43s1tPSGc30ZLUQUsZo38yKPJv50JidR3cfAiaKX
+ C972dvCYaH368cOsfkpMw4M6i9Ife8L2kO2kNsQyBKoj0hWjJnDXHyERLN39A5l5Sc3g
+ LZhTAu1k4ae2EpxrgLp7lwSSUJv82dQDof61EaCC7Oa7z9Ubq9sfPbj5b0S+Ta7BnXbr
+ U4oDrWftF2/mB2VtuxLTEtFpmEonKKHahBi0oQH+2kVzNo1rdtRxa6SpiCq10g11SscG
+ dBM5p2IXUFzw1TouMkLpaSk1avDbk5Z5Px4wZ7HQ+jVDIE87b+kMz0LTrQglj0XYrB4B
+ pQjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+ :references:mime-version;
+ bh=j6N7G5MRcha3Fj5Bk0os/bPVbYvLiNuDMePdv4Mv6jU=;
+ b=Ee14EYY/mi+qBrmPP5KSRRYOPJcZ+HXaZaaslvImecewA3i9KuhkfLutCJk+IDD12K
+ XX76ljn6ldLalERkMIkueh6td8HwMW/mCRR0oIQxcfJ9361SOtWsRScFArLMiBOasj7y
+ KzSks5corW/DNLHHwe0EF1S+2izcW5rac1dNBG50ypVcc934HCD6Dkoyaeuo6S7SFWgR
+ maqTR7Bw5yGfIMm2KbChcDJzpgAOwRHzdJbdMQ3wUgJ7bxKz7j74YQ02PkCurJKAfJ/y
+ ZyXCxZPJC/I12zfbprefSSMVW08ofMd/y2WNpvCswYmyigsev4dNsWV3+jMEadr21Nkv
+ tXBA==
+X-Gm-Message-State: AOAM533Q1NG9XrWRkOvXu0uwGWYlsN5RPuOokUmhMMiriCqSFOgWU9xx
+ 9k7s/brlRZzH0d8053PJA6Q=
+X-Google-Smtp-Source: ABdhPJwLz7bJjWzYeAq3Qel86CAVhEJVusnGZC4yM2zfYbw+RWExMrbfcwjdw2/3iJt3keAAM+vAxw==
+X-Received: by 2002:a2e:9911:: with SMTP id v17mr2511244lji.392.1627556435355; 
+ Thu, 29 Jul 2021 04:00:35 -0700 (PDT)
+Received: from eldfell ([194.136.85.206])
+ by smtp.gmail.com with ESMTPSA id c6sm269954lfp.196.2021.07.29.04.00.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Jul 2021 04:00:34 -0700 (PDT)
+Date: Thu, 29 Jul 2021 14:00:24 +0300
+From: Pekka Paalanen <ppaalanen@gmail.com>
+To: Christian =?UTF-8?B?S8O2bmln?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <20210729140024.6a635be4@eldfell>
+In-Reply-To: <15cf73a8-eda4-3559-561a-a05a14f445d0@gmail.com>
 References: <20210726233854.2453899-1-robdclark@gmail.com>
  <28ca4167-4a65-0ccc-36be-5fb017f6f49d@daenzer.net>
  <CAF6AEGuhQ2=DSDaGGVwBz5O+FoZEjpgoVJOcFecpd--a9yDY1w@mail.gmail.com>
@@ -55,14 +75,8 @@ References: <20210726233854.2453899-1-robdclark@gmail.com>
  <3675d530-c9fc-7ec9-e157-b6abeeec7c2a@amd.com>
  <20210729121542.27d9b1cc@eldfell>
  <15cf73a8-eda4-3559-561a-a05a14f445d0@gmail.com>
-From: =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>
-Message-ID: <4def9567-f88d-3b7c-5ed2-d1686a25fbb3@daenzer.net>
-Date: Thu, 29 Jul 2021 12:28:36 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.12.0
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-In-Reply-To: <15cf73a8-eda4-3559-561a-a05a14f445d0@gmail.com>
-Content-Language: en-CA
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [RFC 0/4] dma-fence: Deadline awareness
 X-BeenThere: linaro-mm-sig@lists.linaro.org
@@ -79,67 +93,109 @@ List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: Rob Clark <robdclark@chromium.org>, Matthew Brost <matthew.brost@intel.com>,
  Jack Zhang <Jack.Zhang1@amd.com>, Gustavo Padovan <gustavo@padovan.org>,
+ Michel =?UTF-8?B?RMOkbnplcg==?= <michel@daenzer.net>,
  open list <linux-kernel@vger.kernel.org>,
  dri-devel <dri-devel@lists.freedesktop.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ "moderated list:DMA BUFFER SHARING
+ FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
  Luben Tuikov <luben.tuikov@amd.com>, Roy Sun <Roy.Sun@amd.com>,
  Alex Deucher <alexander.deucher@amd.com>, Tian Tao <tiantao6@hisilicon.com>,
  Lee Jones <lee.jones@linaro.org>,
+ Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
  "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============9214987999979029631=="
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gMjAyMS0wNy0yOSAxMjoxNCBwLm0uLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOgo+IEFtIDI5
-LjA3LjIxIHVtIDExOjE1IHNjaHJpZWIgUGVra2EgUGFhbGFuZW46Cj4+IFtTTklQXQo+Pj4gQnV0
-IGhvdyBkb2VzIGl0IHRoZW4gaGVscCB0byB3YWl0IG9uIHRoZSBDUFUgaW5zdGVhZD8KPj4gQSBj
-b21wb3NpdG9yIGRvZXMgbm90ICJ3YWl0IiBsaXRlcmFsbHkuIEl0IHdvdWxkIG9ubHkgY2hlY2sg
-d2hpY2ggc3RhdGUKPj4gc2V0IGlzIHJlYWR5IHRvIGJlIHVzZWQsIGFuZCB1c2VzIHRoZSBtb3N0
-IHJlY2VudCBzZXQgdGhhdCBpcyByZWFkeS4gQW55Cj4+IHN0YXRlIHNldHMgdGhhdCBhcmUgbm90
-IHJlYWR5IGFyZSBpZ25vcmVkIGFuZCByZWNvbnNpZGVyZWQgdGhlIG5leHQKPj4gdGltZSB0aGUg
-Y29tcG9zaXRvciB1cGRhdGVzIHRoZSBzY3JlZW4uCj4gCj4gTWhtLCB0aGVuIEknbSBub3QgdW5k
-ZXJzdGFuZGluZyB3aGF0IE1pY2hlbCdzIGNoYW5nZXMgYXJlIGFjdHVhbGx5IGRvaW5nLgoKSW4g
-YSBudXRzaGVsbCwgbXkgbXV0dGVyIE1SIGhvbGRzIGJhY2sgYWxsIFdheWxhbmQgc3RhdGUgY2hh
-bmdlcyB3aGljaCB3ZXJlIGNvbW1pdHRlZCB0b2dldGhlciB3aXRoIGEgbmV3IGJ1ZmZlciAoYW5k
-IGRlcGVuZGVudCBsYXRlciBvbmVzKSB1bnRpbCB0aGUgZG1hLWJ1ZiBmaWxlIGRlc2NyaXB0b3Jz
-IGZvciB0aGF0IGJ1ZmZlciBoYXZlIGJlY29tZSByZWFkYWJsZS4gVGhpcyBpcyBhY2hpZXZlZCBi
-eSBhZGRpbmcgdGhlIGZkcyB0byB0aGUgbWFpbiBldmVudCBsb29wIChpZiB0aGV5IGFyZW4ndCBy
-ZWFkYWJsZSBhbHJlYWR5IHdoZW4gdGhlIGJ1ZmZlciBpcyBjb21taXR0ZWQpLCBhbmQgd2hlbiB0
-aGV5IGJlY29tZSByZWFkYWJsZSwgYWxsIGNvcnJlc3BvbmRpbmcgc3RhdGUgY2hhbmdlcyBhcmUg
-cHJvcGFnYXRlZCBzdWNoIHRoYXQgdGhleSB3aWxsIGJlIHRha2VuIGludG8gYWNjb3VudCBmb3Ig
-ZHJhd2luZyB0aGUgbmV4dCBmcmFtZS4KCgo+PiBEZXBlbmRpbmcgb24gd2hpY2ggc3RhdGUgc2V0
-cyBhcmUgc2VsZWN0ZWQgZm9yIGEgc2NyZWVuIHVwZGF0ZSwgdGhlCj4+IGdsb2JhbCB3aW5kb3cg
-bWFuYWdlciBzdGF0ZSBtYXkgYmUgdXBkYXRlZCBhY2NvcmRpbmdseSwgYmVmb3JlIHRoZQo+PiBk
-cmF3aW5nIGNvbW1hbmRzIGZvciB0aGUgY29tcG9zaXRpb24gY2FuIGJlIGNyZWF0ZWQuCj4+Cj4+
-PiBTZWUgd2hhdCBJJ20gcHJvcG9zaW5nIGlzIHRvIGVpdGhlciByZW5kZXIgdGhlIG5leHQgc3Rh
-dGUgb2YgdGhlIHdpbmRvdwo+Pj4gb3IgY29tcG9zZSBmcm9tIHRoZSBvbGQgc3RhdGUgKGluY2x1
-ZGluZyBhbGwgYXRvbWljIHByb3BlcnRpZXMpLgo+PiBZZXMsIHRoYXQncyBleGFjdGx5IGhvdyBp
-dCB3b3VsZCB3b3JrLiBJdCdzIGp1c3QgdGhhdCBzdGF0ZSBmb3IgYQo+PiB3aW5kb3cgaXMgbm90
-IGFuIGluZGVwZW5kZW50IHRoaW5nLCBpdCBjYW4gYWZmZWN0IGhvdyB1bnJlbGF0ZWQgd2luZG93
-cwo+PiBhcmUgbWFuYWdlZC4KPj4KPj4gQSBzaW1wbGlmaWVkIGV4YW1wbGUgd291bGQgYmUgdHdv
-IHdpbmRvd3Mgc2lkZSBieSBzaWRlIHdoZXJlIHRoZQo+PiByZXNpemluZyBvZiBvbmUgY2F1c2Vz
-IHRoZSBvdGhlciB0byBtb3ZlLiBZb3UgY2FuJ3QgcmVzaXplIHRoZSB3aW5kb3cKPj4gb3IgbW92
-ZSB0aGUgb3RoZXIgdW50aWwgdGhlIGJ1ZmZlciB3aXRoIHRoZSBuZXcgc2l6ZSBpcyByZWFkeS4g
-VW50aWwKPj4gdGhlbiB0aGUgY29tcG9zaXRvciB1c2VzIHRoZSBvbGQgc3RhdGUuCj4+Cj4+PiBF
-LmcuIHdoYXQgZG8geW91IGRvIGlmIHlvdSB0aW1lb3V0IGFuZCBjYW4ndCBoYXZlIHRoZSBuZXcg
-d2luZG93IGNvbnRlbnQKPj4+IG9uIHRpbWU/IFdoYXQncyB0aGUgZmFsbGJhY2sgaGVyZT8KPj4g
-QXMgdGhlcmUgaXMgbm8gd2FpdCwgdGhlcmUgaXMgbm8gdGltZW91dCBlaXRoZXIuCj4+Cj4+IElm
-IHRoZSBhcHAgaGFwcGVucyB0byBiZSBmcm96ZW4gKGUuZy4gc29tZSB3ZWlyZCBidWcgaW4gZmVu
-Y2UgaGFuZGxpbmcKPj4gdG8gbWFrZSBpdCBuZXZlciByZWFkeSwgb3IgbWF5YmUgaXQncyBqdXN0
-IGJ1Z2dlZCBpdHNlbGYgYW5kIG5ldmVyCj4+IGRyYXdpbmcgYWdhaW4pLCB0aGVuIHRoZSBhcHAg
-aXMgZnJvemVuLCBhbmQgYWxsIHRoZSByZXN0IG9mIHRoZSBkZXNrdG9wCj4+IGNvbnRpbnVlcyBy
-dW5uaW5nIG5vcm1hbGx5IHdpdGhvdXQgYSBnbGl0Y2guCj4gCj4gQnV0IHRoYXQgaXMgaW4gY29u
-dHJhZGljdCB0byB3aGF0IHlvdSB0b2xkIG1lIGJlZm9yZS4KPiAKPiBTZWUgd2hlbiB0aGUgd2lu
-ZG93IHNob3VsZCBtb3ZlIGJ1dCBmYWlscyB0byBkcmF3IGl0J3MgbmV3IGNvbnRlbnQgd2hhdCBo
-YXBwZW5zPwo+IAo+IEFyZSB0aGUgb3RoZXIgd2luZG93cyB3aGljaCB3b3VsZCBiZSBhZmZlY3Rl
-ZCBieSB0aGUgbW92ZSBub3QgZHJhd24gYXMgd2VsbD8KCkJhc2ljYWxseSwgdGhlIGNvbXBvc2l0
-b3IgZHJhd3MgaXRzIG91dHB1dCBhcyBpZiB0aGUgbmV3IGJ1ZmZlciBhbmQgYWxsIGNvbm5lY3Rl
-ZCBXYXlsYW5kIHN0YXRlIGNoYW5nZXMgaGFkIG5vdCBiZWVuIGNvbW1pdHRlZCB5ZXQuCgoKLS0g
-CkVhcnRobGluZyBNaWNoZWwgRMOkbnplciAgICAgICAgICAgICAgIHwgICAgICAgICAgICAgICBo
-dHRwczovL3JlZGhhdC5jb20KTGlicmUgc29mdHdhcmUgZW50aHVzaWFzdCAgICAgICAgICAgICB8
-ICAgICAgICAgICAgIE1lc2EgYW5kIFggZGV2ZWxvcGVyCl9fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0CkxpbmFy
-by1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1h
-bi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
+--===============9214987999979029631==
+Content-Type: multipart/signed; boundary="Sig_/SgW_5szpi5zzf=zDE.O9N/Y";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
+
+--Sig_/SgW_5szpi5zzf=zDE.O9N/Y
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 29 Jul 2021 12:14:18 +0200
+Christian K=C3=B6nig <ckoenig.leichtzumerken@gmail.com> wrote:
+
+> Am 29.07.21 um 11:15 schrieb Pekka Paalanen:
+> >
+> > If the app happens to be frozen (e.g. some weird bug in fence handling
+> > to make it never ready, or maybe it's just bugged itself and never
+> > drawing again), then the app is frozen, and all the rest of the desktop
+> > continues running normally without a glitch. =20
+>=20
+> But that is in contradict to what you told me before.
+>=20
+> See when the window should move but fails to draw it's new content what=20
+> happens?
+>=20
+> Are the other windows which would be affected by the move not drawn as we=
+ll?
+
+No, all the other windows will continue behaving normally just like
+they always did. It's just that one frozen window there that won't
+update; it won't resize, so there is no reason to move that other
+window either.
+
+Everything continues as if the frozen window never even sent anything
+to the compositor after its last good update.
+
+We have a principle in Wayland: the compositor cannot afford to wait
+for clients, the desktop as a whole must remain responsive. So there is
+always a backup plan even for cases where the compositor expects the
+client to change something. For resizes, in a floating-window manager
+it's easy: just let things continue as they are; in a tiling window
+manager they may have a timeout after which... whatever is appropriate.
+
+Another example: If a compositor decides to make a window maximized, it
+tells the client the new size and state it must have. Until the client
+acks that specific state change, the compositor will continue managing
+that window as if nothing changed. Given the asynchronous nature of
+Wayland, the client might even continue submitting updates
+non-maximized for a while, and that will go through as if the
+compositor didn't ask for maximized. But at some point the client acks
+the window state change, and from that point on if it doesn't behave
+like maximized state requires, it will get a protocol error and be
+disconnected.
+
+
+Thanks,
+pq
+
+--Sig_/SgW_5szpi5zzf=zDE.O9N/Y
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmECikgACgkQI1/ltBGq
+qqdSag/8C5fOmZEzDR5htlo5q1ltdK6TzHREtqM2DS7vnN1oSHAyVpBFk3K3r1dL
+cYihzRRzkSzKaG2sNTUBoT2LXR9Xu+nrEU5UbRaEPepPXpBgzDMXVb/KZR1XlsNU
+XigotpFNhwJ9vAyT6WV0FDa/gLP9hlPDPztcrYafxJCcy/MyJByUEz/RtLWOppV3
+BWFjB3SHKwolqP0+R8HwtWeaf5CpUkcrMqfXZBoUO8FNrPnjobsBuwlxOlP+Eihi
+8TkwRGcauMDGBQXSBpdIldWcNtf4VLsVNtuFpyRfb9lGMCh2LvKfjCD858sltLaB
+g72XS3b9GAXJrXhKxRuURCIfnrvYWXkx+WbBpHP12JuqHLrEK+YFRSHUdIox9K5P
+1PE2BhAeybsV9od8RDBDYCwM4eRsKp7Z6DESU/xVH0kGiFWp3r+naa/ahMTNe2p4
+5The58A5VQSHuW+MlUxkYfepuX3C707/Y1EB8yBU+V/y4AZPDDGCngB9RemDIeAl
+HPBOGfQIfmihVHBPFBfaX2T04BLXKUekjCiwMMKv0DC4+gvzajggVnkXbNntLniC
+92qfMWCIAPQS4yu2+9y+ziz8t6DUwVS9fVz7IFWqa/bjrL/btMPHjcj4Fa2cHM6S
+ox8gBlsF+XnBxYYbXXgbM8cMA+DPSKVxdeAeByLKegvT/9VyIJA=
+=HvfU
+-----END PGP SIGNATURE-----
+
+--Sig_/SgW_5szpi5zzf=zDE.O9N/Y--
+
+--===============9214987999979029631==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+
+--===============9214987999979029631==--
