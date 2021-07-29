@@ -2,68 +2,86 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id A90243DA59B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 16:07:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 09E453DA5EB
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 16:10:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4EF0863586
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 14:07:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E3B0B64823
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 14:10:54 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id C718864903; Thu, 29 Jul 2021 14:07:25 +0000 (UTC)
+	id A797C6356E; Thu, 29 Jul 2021 14:10:52 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9FE3F6354F;
-	Thu, 29 Jul 2021 14:07:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C47BD6350A;
+	Thu, 29 Jul 2021 14:10:48 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 6E41660B90
- for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 14:06:07 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id BD84D62EA6
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 14:10:24 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 6260D6350A; Thu, 29 Jul 2021 14:06:07 +0000 (UTC)
-Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com
- [209.85.167.181])
- by lists.linaro.org (Postfix) with ESMTPS id 4AB3F62EA6
- for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 14:06:05 +0000 (UTC)
-Received: by mail-oi1-f181.google.com with SMTP id t14so8680365oiw.0
- for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 07:06:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc:content-transfer-encoding;
- bh=ERFue+oHCOjcFjpKybCHGm8Nf73ebXktzSux0cMnuM0=;
- b=RvIXERV7oStEjYkk/BrebgVpiq6/8GMBlhwGRXTlJXtmQD0+0FSp6vKd3U3rx72vnb
- Dskbh9JEQHgZzaz14qnJiRv0Z85Z8/nI+jSd2GcG3uZQGbUV7HY1dYkpF40rHuOH/tOy
- t++dhn7XmaIjhp7fKjyA8LkXn0d40y+ELabsU=
+ id ABCB86350A; Thu, 29 Jul 2021 14:10:24 +0000 (UTC)
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com
+ [209.85.167.42])
+ by lists.linaro.org (Postfix) with ESMTPS id 7214562EA6
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 14:10:22 +0000 (UTC)
+Received: by mail-lf1-f42.google.com with SMTP id g13so11241372lfj.12
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 07:10:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=date:from:to:cc:subject:message-id:in-reply-to:references
+ :mime-version; bh=KVeYIfkluOzJAUxQ6fjcXqXMAp11NPT9x26kXkIM9wM=;
+ b=SibX58LSiD/u9dKbhKcen8rE9n01FSntjvE2TxKqEcW2rFX9Rt6nvzAE8k8r99xb/V
+ oqjW9FKWnW+lx3snEEYci0yJvw9NfhxPihfbS9MuqVXkrq2HlDaN1aOXxhmoT0gdVsF6
+ b246hzmGTC1ofMmgBlZNmBT2pRLY0QDOL9Q/h3JPMHK7Z6x9QYGPESqlUjYgh9NlIvTQ
+ Xf6Lkpo6Qj5aIuq1/vb6gUtF6VidmI1x8Kp15X3GfjnvQOGKE5P21wO/o1C8KeSGRf81
+ g+ODBffQ5zbZ7qCz6jX7YvyI72ca9iRlBEHZW18WX55fc1VWGecNq5xh8cRCJ5YMshXr
+ nPJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc:content-transfer-encoding;
- bh=ERFue+oHCOjcFjpKybCHGm8Nf73ebXktzSux0cMnuM0=;
- b=KT659/bUNrdsOleZcO979yRS5o6wHP/QVwXiR30/byMXp+slsp/c7cjV9Df/Er7pUN
- pcDhjwyO4lDhSZs5U73qMRzY1HJNzgJtEy2u0yKtBbtS179BQ5ATLZoW/+Gn1qXrFi7h
- 3JCm0mTQN98MNtyussVQlot+rZnj9zrD6QriQdeNhK+cTdy1t0kM+4SaihbDweoMcS6C
- SFTWgEy7LL4xv5OtYqs2QAzFFA8b2NRQl0bZtavYRCtY9yu+kqdzOeVyjzXoJom9bFpn
- VqROhzHuhVrQSBi8NSzHlgeCXKVFcIFjRB3N8nK8xAsNbmExdPkhHsTLDnIYAycB1kYa
- gHtg==
-X-Gm-Message-State: AOAM532c1ovWkE9iuz8rOB/3zkVaWHp7iNCyhzy3UAIOvXrSxZnaJL7c
- G6OBsRju0AjAmBDWLYRhTagB9sk8VmAQoG4/Ct0c0A==
-X-Google-Smtp-Source: ABdhPJxwHe8UR04yoFZoPSRg5yexYy7LIXZIIj5YSvpYgpfw3k7PwllaAKSr1vBFepIW+UHzpPn0HMznlj122DeDwuw=
-X-Received: by 2002:aca:d682:: with SMTP id n124mr3260319oig.128.1627567564541; 
- Thu, 29 Jul 2021 07:06:04 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAJs_Fx4O4w5djx3-q5zja51-ko_nQ0X2nEk3qoZB_axpBVSrKA@mail.gmail.com>
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+ :references:mime-version;
+ bh=KVeYIfkluOzJAUxQ6fjcXqXMAp11NPT9x26kXkIM9wM=;
+ b=cIYk6t4nxoZAQT1X3SkQtG0XAje+CV1qH6W3q1N4bWASlMdBnzmck1ysYjY99qK2pR
+ CWmYRmyolCJE0+vh1XxAD+LMeaOqNXzmmSyHNN3jeuH8zh7ieG3yd8oYsmgmJUU6+iud
+ qfqC6+klSB+KN9ZxTGQTuEkcNLuoxjZ0zC2ilBEGJ3q0FruCMhZ5Ohpi/3XCfNrU5irj
+ CY2KCMGx/NgAhwQglG7X1rm6UyTw3RMS1lvoxyTPMaOZkevmntXJ3ISs/hD8i/0/klMm
+ 8I7Mxwb6dQw85O9d2ydCaujK8cPhk5/9DTI0CBMcWBqPAtCH1SbXoA24+cfTSucYNlDj
+ ouog==
+X-Gm-Message-State: AOAM532ORafE9MxONeaZyXaR5aDn0U5208Zo2JuFld9wPeijsk/MUUJU
+ zX8yAL4RA1H8lTgBuJiD+Q8=
+X-Google-Smtp-Source: ABdhPJz9Eq4IckwXHS1EzovDJ5oWEjCbWpskXZEWqWPysT2uNlbZuJPI2mO19uvMvjAZbLjG37InoA==
+X-Received: by 2002:a05:6512:511:: with SMTP id
+ o17mr3919872lfb.396.1627567821084; 
+ Thu, 29 Jul 2021 07:10:21 -0700 (PDT)
+Received: from eldfell ([194.136.85.206])
+ by smtp.gmail.com with ESMTPSA id f14sm170210ljj.116.2021.07.29.07.10.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Jul 2021 07:10:20 -0700 (PDT)
+Date: Thu, 29 Jul 2021 17:10:17 +0300
+From: Pekka Paalanen <ppaalanen@gmail.com>
+To: Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>
+Message-ID: <20210729171017.25441c00@eldfell>
+In-Reply-To: <11692377-acae-696a-bbeb-9921a6f5d905@amd.com>
+References: <20210726233854.2453899-1-robdclark@gmail.com>
+ <28ca4167-4a65-0ccc-36be-5fb017f6f49d@daenzer.net>
+ <CAF6AEGuhQ2=DSDaGGVwBz5O+FoZEjpgoVJOcFecpd--a9yDY1w@mail.gmail.com>
+ <99984703-c3ca-6aae-5888-5997d7046112@daenzer.net>
+ <CAJs_Fx4O4w5djx3-q5zja51-ko_nQ0X2nEk3qoZB_axpBVSrKA@mail.gmail.com>
  <f6d73ec5-85f9-1b18-f2d2-a5f3b7333efa@gmail.com>
  <c9ee242e-542e-e189-a1ec-c1be34d66c93@daenzer.net>
  <04d44873-d8e6-6ae7-f0f9-17bcb484d697@amd.com>
  <9d5f4415-d470-3bc1-7d52-61ba739706ae@daenzer.net>
- <CAF6AEGu409eY9xznTAaBf2ZDcV_AaDELUzN2afWgiHwB_uBwqg@mail.gmail.com>
- <YQJUKXgf/Q957fmy@phenom.ffwll.local>
- <ff394f2b-b555-e80f-b685-d0d59e2bbe67@daenzer.net>
- <YQJu6AqKn7bdT1li@phenom.ffwll.local> <20210729123732.3259a9bf@eldfell>
- <YQKclVvL+QeeL6cP@phenom.ffwll.local> <20210729155959.665fc1a6@eldfell>
-In-Reply-To: <20210729155959.665fc1a6@eldfell>
-From: Daniel Vetter <daniel@ffwll.ch>
-Date: Thu, 29 Jul 2021 16:05:53 +0200
-Message-ID: <CAKMK7uG=UtTjtGCxTQm9wnm44QqTK2=ZCSM2MS0wVwpTL7DEkw@mail.gmail.com>
-To: Pekka Paalanen <ppaalanen@gmail.com>
+ <eedfdc75-72f8-9150-584b-c5e9d16db180@amd.com>
+ <20210728165700.38c39cf8@eldfell>
+ <74e310fa-e544-889f-2389-5abe06f80eb8@amd.com>
+ <20210729112358.237651ff@eldfell>
+ <3675d530-c9fc-7ec9-e157-b6abeeec7c2a@amd.com>
+ <20210729121542.27d9b1cc@eldfell>
+ <15cf73a8-eda4-3559-561a-a05a14f445d0@gmail.com>
+ <20210729140024.6a635be4@eldfell>
+ <c090d320-7f2c-3858-d978-7a6f6e8001c0@amd.com>
+ <20210729154917.5e664b24@eldfell>
+ <11692377-acae-696a-bbeb-9921a6f5d905@amd.com>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [RFC 0/4] dma-fence: Deadline awareness
 X-BeenThere: linaro-mm-sig@lists.linaro.org
@@ -79,156 +97,291 @@ List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: Rob Clark <robdclark@chromium.org>, Matthew Brost <matthew.brost@intel.com>,
- Simon Ser <contact@emersion.fr>,
- =?UTF-8?Q?Michel_D=C3=A4nzer?= <michel@daenzer.net>,
+ Jack Zhang <Jack.Zhang1@amd.com>,
+ Michel =?UTF-8?B?RMOkbnplcg==?= <michel@daenzer.net>,
  open list <linux-kernel@vger.kernel.org>,
  dri-devel <dri-devel@lists.freedesktop.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Alex Deucher <alexander.deucher@amd.com>, Luben Tuikov <luben.tuikov@amd.com>,
- Roy Sun <Roy.Sun@amd.com>, Gustavo Padovan <gustavo@padovan.org>,
- Tian Tao <tiantao6@hisilicon.com>, Lee Jones <lee.jones@linaro.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ "moderated list:DMA BUFFER SHARING
+ FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Luben Tuikov <luben.tuikov@amd.com>, Roy Sun <Roy.Sun@amd.com>,
+ Gustavo Padovan <gustavo@padovan.org>,
+ Alex Deucher <alexander.deucher@amd.com>, Tian Tao <tiantao6@hisilicon.com>,
+ Lee Jones <lee.jones@linaro.org>,
  "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============1942133207443575621=="
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gVGh1LCBKdWwgMjksIDIwMjEgYXQgMzowMCBQTSBQZWtrYSBQYWFsYW5lbiA8cHBhYWxhbmVu
-QGdtYWlsLmNvbT4gd3JvdGU6Cj4gT24gVGh1LCAyOSBKdWwgMjAyMSAxNDoxODoyOSArMDIwMAo+
-IERhbmllbCBWZXR0ZXIgPGRhbmllbEBmZndsbC5jaD4gd3JvdGU6Cj4KPiA+IE9uIFRodSwgSnVs
-IDI5LCAyMDIxIGF0IDEyOjM3OjMyUE0gKzAzMDAsIFBla2thIFBhYWxhbmVuIHdyb3RlOgo+ID4g
-PiBPbiBUaHUsIDI5IEp1bCAyMDIxIDExOjAzOjM2ICswMjAwCj4gPiA+IERhbmllbCBWZXR0ZXIg
-PGRhbmllbEBmZndsbC5jaD4gd3JvdGU6Cj4gPiA+Cj4gPiA+ID4gT24gVGh1LCBKdWwgMjksIDIw
-MjEgYXQgMTA6MTc6NDNBTSArMDIwMCwgTWljaGVsIETDpG56ZXIgd3JvdGU6Cj4gPiA+ID4gPiBP
-biAyMDIxLTA3LTI5IDk6MDkgYS5tLiwgRGFuaWVsIFZldHRlciB3cm90ZToKPiA+ID4gPiA+ID4g
-T24gV2VkLCBKdWwgMjgsIDIwMjEgYXQgMDg6MzQ6MTNBTSAtMDcwMCwgUm9iIENsYXJrIHdyb3Rl
-Ogo+ID4gPiA+ID4gPj4gT24gV2VkLCBKdWwgMjgsIDIwMjEgYXQgNjoyNCBBTSBNaWNoZWwgRMOk
-bnplciA8bWljaGVsQGRhZW56ZXIubmV0PiB3cm90ZToKPiA+ID4gPiA+ID4+PiBPbiAyMDIxLTA3
-LTI4IDM6MTMgcC5tLiwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToKPiA+ID4gPiA+ID4+Pj4gQW0g
-MjguMDcuMjEgdW0gMTU6MDggc2NocmllYiBNaWNoZWwgRMOkbnplcjoKPiA+ID4gPiA+ID4+Pj4+
-IE9uIDIwMjEtMDctMjggMTozNiBwLm0uLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOgo+ID4gPiA+
-ID4gPj4+Pj4+IEFtIDI3LjA3LjIxIHVtIDE3OjM3IHNjaHJpZWIgUm9iIENsYXJrOgo+ID4gPiA+
-ID4gPj4+Pj4+PiBPbiBUdWUsIEp1bCAyNywgMjAyMSBhdCA4OjE5IEFNIE1pY2hlbCBEw6RuemVy
-IDxtaWNoZWxAZGFlbnplci5uZXQ+IHdyb3RlOgo+ID4gPiA+ID4gPj4+Pj4+Pj4gT24gMjAyMS0w
-Ny0yNyA1OjEyIHAubS4sIFJvYiBDbGFyayB3cm90ZToKPiA+ID4gPiA+ID4+Pj4+Pj4+PiBPbiBU
-dWUsIEp1bCAyNywgMjAyMSBhdCA3OjUwIEFNIE1pY2hlbCBEw6RuemVyIDxtaWNoZWxAZGFlbnpl
-ci5uZXQ+IHdyb3RlOgo+ID4gPiA+ID4gPj4+Pj4+Pj4+PiBPbiAyMDIxLTA3LTI3IDE6MzggYS5t
-LiwgUm9iIENsYXJrIHdyb3RlOgo+ID4gPiA+ID4gPj4+Pj4+Pj4+Pj4gRnJvbTogUm9iIENsYXJr
-IDxyb2JkY2xhcmtAY2hyb21pdW0ub3JnPgo+ID4gPiA+ID4gPj4+Pj4+Pj4+Pj4KPiA+ID4gPiA+
-ID4+Pj4+Pj4+Pj4+IEJhc2VkIG9uIGRpc2N1c3Npb24gZnJvbSBhIHByZXZpb3VzIHNlcmllc1sx
-XSB0byBhZGQgYSAiYm9vc3QiIG1lY2hhbmlzbQo+ID4gPiA+ID4gPj4+Pj4+Pj4+Pj4gd2hlbiwg
-Zm9yIGV4YW1wbGUsIHZibGFuayBkZWFkbGluZXMgYXJlIG1pc3NlZC4gIEluc3RlYWQgb2YgYSBi
-b29zdAo+ID4gPiA+ID4gPj4+Pj4+Pj4+Pj4gY2FsbGJhY2ssIHRoaXMgYXBwcm9hY2ggYWRkcyBh
-IHdheSB0byBzZXQgYSBkZWFkbGluZSBvbiB0aGUgZmVuY2UsIGJ5Cj4gPiA+ID4gPiA+Pj4+Pj4+
-Pj4+PiB3aGljaCB0aGUgd2FpdGVyIHdvdWxkIGxpa2UgdG8gc2VlIHRoZSBmZW5jZSBzaWduYWxs
-ZWQuCj4gPiA+Cj4gPiA+IC4uLgo+ID4gPgo+ID4gPiA+ID4gSSdtIG5vdCBxdWVzdGlvbmluZyB0
-aGF0IHRoaXMgYXBwcm9hY2ggaGVscHMgd2hlbiB0aGVyZSdzIGEgZGlyZWN0Cj4gPiA+ID4gPiBj
-aGFpbiBvZiBmZW5jZXMgZnJvbSB0aGUgY2xpZW50IHRvIHRoZSBwYWdlIGZsaXAuIEknbSBwb2lu
-dGluZyBvdXQKPiA+ID4gPiA+IHRoZXJlIHdpbGwgbm90IGFsd2F5cyBiZSBzdWNoIGEgY2hhaW4u
-Cj4gPiA+ID4gPgo+ID4gPiA+ID4KPiA+ID4gPiA+ID4+IEJ1dCBtYXliZSB0aGUgc29sdXRpb24g
-dG8gbWFrZSB0aGlzIGFsc28gdXNlZnVsIGZvciBtdXR0ZXIKPiA+ID4gPiA+Cj4gPiA+ID4gPiBJ
-dCdzIG5vdCBqdXN0IG11dHRlciBCVFcuIEkgdW5kZXJzdGFuZCBnYW1lc2NvcGUgaGFzIGJlZW4g
-ZG9pbmcKPiA+ID4gPiA+IHRoaXMgZm9yIHNvbWUgdGltZSBhbHJlYWR5LiBBbmQgdGhlcmUgc2Vl
-bXMgdG8gYmUgY29uc2Vuc3VzIGFtb25nCj4gPiA+ID4gPiBkZXZlbG9wZXJzIG9mIFdheWxhbmQg
-Y29tcG9zaXRvcnMgdGhhdCB0aGlzIGlzIG5lZWRlZCwgc28gSSBleHBlY3QKPiA+ID4gPiA+IGF0
-IGxlYXN0IGFsbCB0aGUgbWFqb3IgY29tcG9zaXRvcnMgdG8gZG8gdGhpcyBsb25nZXIgdGVybS4K
-PiA+ID4gPiA+Cj4gPiA+ID4gPgo+ID4gPiA+ID4gPj4gaXMgdG8sIG9uY2Ugd2UgaGF2ZSBkZWFk
-bGluZSBzdXBwb3J0LCBleHRlbmQgaXQgd2l0aCBhbiBpb2N0bCB0bwo+ID4gPiA+ID4gPj4gdGhl
-IGRtYS1mZW5jZSBmZCBzbyB1c2Vyc3BhY2UgY2FuIGJlIHRoZSBvbmUgc2V0dGluZyB0aGUKPiA+
-ID4gPiA+ID4+IGRlYWRsaW5lLgo+ID4gPiA+ID4KPiA+ID4gPiA+IEkgd2FzIHRoaW5raW5nIGlu
-IGEgc2ltaWxhciBkaXJlY3Rpb24uCj4gPiA+ID4gPgo+ID4gPiA+ID4gPiBhdG9taWMgaW9jdGwg
-d2l0aCBURVNUX09OTFkgYW5kIFNFVF9ERUFETElORVM/IFN0aWxsIGdpdmVzIG11dHRlcgo+ID4g
-PiA+ID4gPiB0aGUgb3B0aW9uIHRvIGJhaWwgb3V0IHdpdGggYW4gb2xkIGZyYW1lIGlmIGl0J3Mg
-dG9vIGxhdGU/Cj4gPiA+ID4gPgo+ID4gPiA+ID4gVGhpcyBpcyBhIGJpdCBjcnlwdGljIHRob3Vn
-aCwgY2FuIHlvdSBlbGFib3JhdGU/Cj4gPiA+ID4KPiA+ID4gPiBTbyBlc3NlbnRpYWxseSB3aGVu
-IHRoZSBtdXR0ZXIgY29tcG9zaXRvciBndWVzc3RpbWF0b3IgaXMgZmFpcmx5Cj4gPiA+ID4gY29u
-ZmlkZW50IGFib3V0IHRoZSBuZXh0IGZyYW1lJ3MgY29tcG9zaXRpb24gKHJlY2FsbCB5b3UncmUg
-a2VlcGluZwo+ID4gPiA+IHRyYWNrIG9mIGNsaWVudHMgdG8gZXN0aW1hdGUgdGhlaXIgdXN1YWwg
-bGF0ZW5jeSBvciBzb21ldGhpbmcgbGlrZQo+ID4gPiA+IHRoYXQpLCB0aGVuIGl0IGRvZXMgYSBU
-RVNUX09OTFkgY29tbWl0IHRvIGNoZWNrIGl0IGFsbCB3b3JrcyBhbmQgcHJlcAo+ID4gPiA+IHRo
-ZSByZW5kZXJpbmcsIGJ1dCBfbm90XyB5ZXQgZmlyZSBpdCBvZmYuCj4gPiA+ID4KPiA+ID4gPiBJ
-bnN0ZWFkIGl0IHdhaXRzIHVudGlsIGFsbCBidWZmZXJzIGNvbXBsZXRlLCBhbmQgaWYgc29tZSBk
-b24ndCwgcGljawo+ID4gPiA+IHRoZSBwcmV2aW91cyBvbmUuIFdoaWNoIEkgZ3Vlc3MgaW4gYW4g
-ZXh0cmVtZSBjYXNlIHdvdWxkIG1lYW4geW91Cj4gPiA+ID4gbmVlZCBhIGRpZmZlcmVudCB3aW5k
-b3cgdHJlZSBjb25maWd1cmF0aW9uIGFuZCBtYXliZSBkaWZmZXJlbnQKPiA+ID4gPiBURVNUX09O
-TFkgY2hlY2sgYW5kIGFsbCB0aGF0LCBub3Qgc3VyZSBob3cgeW91IHNvbHZlIHRoYXQuCj4gPiA+
-ID4KPiA+ID4gPiBBbnl3YXksIGluIHRoYXQgVEVTVF9PTkxZIGNvbW1pdCBteSBpZGVhIGlzIHRo
-YXQgeW91J2QgYWxzbyBzdXBwbHkKPiA+ID4gPiBhbGwgdGhlIGluLWZlbmNlcyB5b3UgZXhwZWN0
-IHRvIGRlcGVuZCB1cG9uIChtYXliZSB3ZSBuZWVkIGFuCj4gPiA+ID4gYWRkaXRpb25hbCBsaXN0
-IG9mIGluLWZlbmNlcyBmb3IgeW91ciByZW5kZXJpbmcgam9iKSwgcGx1cyBhIGRlYWRsaW5lCj4g
-PiA+ID4gd2hlbiB5b3Ugd2FudCB0byBoYXZlIHRoZW0gZG9uZSAoc28gdGhhdCB0aGVyZSdzIGVu
-b3VnaCB0aW1lIGZvciB5b3VyCj4gPiA+ID4gcmVuZGVyIGpvYiBzdGlsbCkuIEFuZCB0aGUga2Vy
-bmVsIHRoZW4gY2FsbHMgZG1hX2ZlbmNlX3NldF9kZWFkbGluZQo+ID4gPiA+IG9uIGFsbCBvZiB0
-aGVtLgo+ID4gPiA+Cj4gPiA+ID4gUG9uZGVyaW5nIHRoaXMgbW9yZSwgbWF5YmUgYSBzZXBhcmF0
-ZSBpb2N0bCBpcyBzaW1wbGVyIHdoZXJlIHlvdSBqdXN0Cj4gPiA+ID4gc3VwcGx5IGEgbGlzdCBv
-ZiBpbi1mZW5jZXMgYW5kIGRlYWRsaW5lcy4KPiA+ID4gPgo+ID4gPiA+IFRoZSByZWFsIHJlYXNv
-biBJIHdhbnQgdG8gdGllIHRoaXMgdG8gYXRvbWljIGlzIGZvciBwcml2aWxlZGdlCj4gPiA+ID4g
-Y2hlY2tpbmcgcmVhc29ucy4gSSBkb24ndCB0aGluayBub3JtYWwgdXNlcnNwYWNlIHNob3VsZCBo
-YXZlIHRoZQo+ID4gPiA+IHBvd2VyIHRvIHNldCBhcmJpdHJhcnkgZGVhZGxpbmVzIGxpa2UgdGhp
-cyAtIGF0IGxlYXN0IG9uIGk5MTUgaXQgd2lsbAo+ID4gPiA+IGFsc28gZ2l2ZSB5b3UgYSBzbGln
-aHQgcHJpb3JpdHkgYm9vc3QgYW5kIHN0dWZmIGxpa2UgdGhhdCwgdG8gbWFrZQo+ID4gPiA+IHN1
-cmUgeW91ciByZW5kZXJpbmcgZm9yIHRoZSBjdXJyZW50IGZyYW1lIGdvZXMgaW4gYWhlYWQgb2Yg
-dGhlIG5leHQKPiA+ID4gPiBmcmFtZSdzIHByZXAgd29yay4KPiA+ID4gPgo+ID4gPiA+IFNvIG1h
-eWJlIGp1c3QgYSBuZXcgaW9jdGwgdGhhdCBkb2VzIHRoaXMgd2hpY2ggaXMgbGltaXRlZCB0byB0
-aGUKPiA+ID4gPiBjdXJyZW50IGttcyBvd25lciAoYWthIGRybV9tYXN0ZXIpPwo+ID4gPgo+ID4g
-PiBZZWFoLgo+ID4gPgo+ID4gPiBXaHkgbm90IGhhdmUgYSBXYXlsYW5kIGNvbXBvc2l0b3IgKmFs
-d2F5cyogInNldCB0aGUgZGVhZGxpbmVzIiBmb3IgdGhlCj4gPiA+IG5leHQgc2NyZWVuIHVwZGF0
-ZSBhcyBzb29uIGFzIGl0IGdldHMgdGhlIHdsX3N1cmZhY2UuY29tbWl0IHdpdGggdGhlCj4gPiA+
-IG5ldyBidWZmZXIgYW5kIGZlbmNlcyAoYSBzaW1wbGlmaWVkIGRlc2NyaXB0aW9uIG9mIHdoYXQg
-aXMgYWN0dWFsbHkKPiA+ID4gbmVjZXNzYXJ5IHRvIHRha2UgYSBuZXcgd2luZG93IHN0YXRlIHNl
-dCBpbnRvIHVzZSk/Cj4gPgo+ID4gWWVhaCB0YWh0J3MgcHJvYmFibHkgYmVzdC4gQW5kIGlmIHRo
-ZSBmcmFtZSBpcyBzY2hlZHVsZWQgKHZpZGVvIGF0IDI0ZnBzCj4gPiBvciB3aGF0ZXZlcikgeW91
-IGNhbiBhbHNvIGltbWVkaWF0ZWx5IHNldCB0aGUgZGVhZGxpbmUgZm9yIHRoYXQgdG9vLCBqdXN0
-Cj4gPiBhIGZldyBmcmFtZXMgbGF0ZXIuIEFsd2F5cyBtaW51cyBjb21wb3NpdG9yIGJ1ZGdldCB0
-YWtlbiBpbnRvIGFjY291bnQuCj4gPgo+ID4gPiBUaGUgV2F5bGFuZCBjbGllbnQgcG9zdGVkIHRo
-ZSBmcmFtZSB0byB0aGUgY29tcG9zaXRvciwgc28gc3VyZWx5IGl0Cj4gPiA+IHdhbnRzIGl0IHJl
-YWR5IGFuZCBkaXNwbGF5ZWQgQVNBUC4gSWYgd2UgaGFwcGVuIHRvIGhhdmUgYSBXYXlsYW5kIGZy
-YW1lCj4gPiA+IHF1ZXVpbmcgZXh0ZW5zaW9uLCB0aGVuIGFsc28gdGFrZSB0aGF0IGludG8gYWNj
-b3VudCB3aGVuIHNldHRpbmcgdGhlCj4gPiA+IGRlYWRsaW5lLgo+ID4gPgo+ID4gPiBUaGVuLCAq
-aW5kZXBlbmRlbnRseSogb2YgdGhhdCwgdGhlIGNvbXBvc2l0b3Igd2lsbCBjaG9vc2Ugd2hpY2gg
-ZnJhbWVzCj4gPiA+IGl0IHdpbGwgYWN0dWFsbHkgdXNlIGluIGl0cyBjb21wb3NpdGlvbiB3aGVu
-IHRoZSB0aW1lIGNvbWVzLgo+ID4gPgo+ID4gPiBObyBuZWVkIGZvciBhbnkgS01TIGF0b21pYyBj
-b21taXQgZmlkZGxpbmcsIHVzZXJzcGFjZSBqdXN0IGV4cGxpY2l0bHkKPiA+ID4gc2V0cyB0aGUg
-ZGVhZGxpbmUgb24gdGhlIGZlbmNlIGFuZCB0aGF0J3MgaXQuIFlvdSBjb3VsZCB0aWUgdGhlCj4g
-PiA+IHByaXZpbGVnZSBvZiBzZXR0aW5nIGRlYWRsaW5lcyB0byBzaW1wbHkgaG9sZGluZyBEUk0g
-bWFzdGVyIG9uIHdoYXRldmVyCj4gPiA+IGRldmljZT8gU28gdGhlIGlvY3RsIHdvdWxkIG5lZWQg
-Ym90aCB0aGUgZmVuY2UgYW5kIGFueSBEUk0gZGV2aWNlIGZkLgo+ID4KPiA+IFllYWggdHlpbmcg
-dGhhdCB1cCB3aXRoIGF0b21pYyBkb2Vzbid0IG1ha2Ugc2Vuc2UuCj4gPgo+ID4gPiBBIHJvZ3Vl
-IGFwcGxpY2F0aW9uIG9wZW5pbmcgYSBEUk0gZGV2aWNlIGFuZCBiZWNvbWluZyBEUk0gbWFzdGVy
-IG9uIGl0Cj4gPiA+IGp1c3QgdG8gYmUgYWJsZSB0byBhYnVzZSBkZWFkbGluZXMgZmVlbHMgYm90
-aCB1bmxpa2VseSBhbmQgd2l0aAo+ID4gPiBpbnNpZ25pZmljYW50IGNvbnNlcXVlbmNlcy4gSXQg
-c3RvcHMgdGhlIG9idmlvdXMgYWJ1c2UsIGFuZCBpZiBzb21lb25lCj4gPiA+IGFjdHVhbGx5IGdv
-ZXMgdGhlIGV4dHJhIGVmZm9ydCwgdGhlbiBzbyB3aGF0Lgo+ID4KPiA+IFdpdGggbG9naW5kIHlv
-dSBjYW4ndCBiZWNvbWUgZHJtIG1hc3RlciBqdXN0IGZvciBsb2x6IGFueW1vcmUsIHNvIEknbSBu
-b3QKPiA+IHdvcnJpZWQgYWJvdXQgdGhhdC4gT24gc3VjaCBzeXN0ZW1zIG9ubHkgbG9naW5kIGhh
-cyB0aGUgcmlnaHRzIHRvIGFjY2Vzcwo+ID4gdGhlIHByaW1hcnkgbm9kZSwgZXZlcnlvbmUgZG9p
-bmcgaGVhZGxlc3MgZ29lcyB0aHJvdWdoIHRoZSByZW5kZXIgbm9kZS4KPgo+IE1tLCBJIGhvcGUg
-dGhlIERSTSBsZWFzaW5nIHByb3RvY29scyBkb24ndCByZWx5IG9uIGNsaWVudHMgYmVpbmcgYWJs
-ZQo+IHRvIG9wZW4gS01TIG5vZGVzIGFueW1vcmUuLi4gdGhleSB1c2VkIHRvIGF0IHNvbWUgcG9p
-bnQsIEkgdGhpbmssIGZvcgo+IHRoZSBpbml0aWFsIHJlc291cmNlIGRpc2NvdmVyeSBiZWZvcmUg
-YWN0dWFsbHkgbGVhc2luZyBhbnl0aGluZy4KClllYWggSSB0aG91Z2h0IHRoYXQgd2FzIGZpeGVk
-IHdpdGggYWRkaXRpb25hbCB4cmFuZHIvd2F5bGFuZCBkaXNjb3ZlcnkKcHJvdG9jb2xzLiBJdCBk
-b2Vzbid0IHdvcmsgYW55b25lIG9uIHN5c3RlbXMgd2l0aCBkaXNwbGF5L3JlbmRlcgpzcGxpdC4g
-SSB0aGluayB0aGF0IHdhcyBqdXN0IHRvIGdldCBpdCBhbGwgZ29pbmcuCgo+ICJvbmx5IGxvZ2lu
-ZCBoYXMgcmlnaHRzIiBtaWdodCBiZSBhIGJpdCBvZmYgc3RpbGwuCj4KPiA+IFNvIGp1c3QgbGlt
-aXRpbmcgdGhlIGRlYWRsaW5lIGlvY3RsIHRvIGN1cnJlbnQga21zIG93bmVyIGlzIGltbyBwZXJm
-ZWN0bHkKPiA+IGdvb2QgZW5vdWdoIGZvciBhIHNlY3VyaXR5IG1vZGVsLgo+Cj4gVGhlcmUgY291
-bGQgYmUgbXVsdGlwbGUgRFJNIGRldmljZXMuIEluY2x1ZGluZyBWS01TLiBTb21lIG9mIHRoZW0g
-bm90Cj4gdXNlZC4gVGhlIGRlYWRsaW5lIHNldHRpbmcgaW9jdGwgY2FuJ3QgZ3VhcmFudGVlIHRo
-ZSBmZW5jZWQgYnVmZmVyIGlzCj4gZ29pbmcgdG8gYmUgdXNlZCBvbiB0aGUgc2FtZSBEUk0gZGV2
-aWNlIHRoZSBpb2N0bCB3YXMgY2FsbGVkIHdpdGguIE9yCj4gdXNlZCBhdCBhbGwgd2l0aCBLTVMu
-CgpUaGF0J3Mgbm90IGEgcHJvYmxlbSwgZmVuY2UgZGVhZGxpbmUgaW50ZXJmYWNlIGlzIGNyb3Nz
-LWRyaXZlci4KCj4gQW55d2F5LCBldmVuIGlmIHRoYXQgaXMgbm90IGNvbXBsZXRlbHkgc2VjdXJl
-LCBJIHdvdWxkbid0IHRoaW5rIHRoYXQKPiBzZXR0aW5nIGRlYWRsaW5lcyBjYW4gZG8gbW9yZSB0
-aGFuIGNoYW5nZSBHUFUgam9iIHByaW9yaXRpZXMgYW5kIHBvd2VyCj4gY29uc3VtcHRpb24sIHdo
-aWNoIHNlZW0gcXVpdGUgYmVuaWduLiBJdCdzIGVub3VnaCBob29wcyB0byBqdW1wIHRocm91Z2gK
-PiB0aGF0IEkgdGhpbmsgaXQgc3RvcHMgZXZlcnl0aGluZyB3ZSBjYXJlIHRvIHN0b3AuCgpZZWFo
-LiBQbHVzIHdpdGggdGhpcyBwYXRjaCBzZXQgeW91IGNhbiBkbyB0aGlzIGFscmVhZHksIGp1c3Qg
-bmVlZCB0bwpzZW5kIG91dCBhbiBhdG9taWMgZmxpcCB3aXRoIGFsbCB0aGUgZmVuY2VzIG1lcmdl
-ZCB0b2dldGhlciBpbnRvIHlvdXIKaW4tZmVuY2Ugc2xvdHMuCi1EYW5pZWwKLS0gCkRhbmllbCBW
-ZXR0ZXIKU29mdHdhcmUgRW5naW5lZXIsIEludGVsIENvcnBvcmF0aW9uCmh0dHA6Ly9ibG9nLmZm
-d2xsLmNoCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxp
-bmFyby1tbS1zaWcgbWFpbGluZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpo
-dHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
+--===============1942133207443575621==
+Content-Type: multipart/signed; boundary="Sig_/N=FJlttKm+gC6bUtDikG7jt";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
+
+--Sig_/N=FJlttKm+gC6bUtDikG7jt
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 29 Jul 2021 15:41:09 +0200
+Christian K=C3=B6nig <christian.koenig@amd.com> wrote:
+
+> Am 29.07.21 um 14:49 schrieb Pekka Paalanen:
+> > On Thu, 29 Jul 2021 13:43:20 +0200
+> > Christian K=C3=B6nig <christian.koenig@amd.com> wrote:
+> > =20
+> >> Am 29.07.21 um 13:00 schrieb Pekka Paalanen: =20
+> >>> On Thu, 29 Jul 2021 12:14:18 +0200
+> >>> Christian K=C3=B6nig <ckoenig.leichtzumerken@gmail.com> wrote:
+> >>>    =20
+> >>>> Am 29.07.21 um 11:15 schrieb Pekka Paalanen: =20
+> >>>>> If the app happens to be frozen (e.g. some weird bug in fence handl=
+ing
+> >>>>> to make it never ready, or maybe it's just bugged itself and never
+> >>>>> drawing again), then the app is frozen, and all the rest of the des=
+ktop
+> >>>>> continues running normally without a glitch. =20
+> >>>> But that is in contradict to what you told me before.
+> >>>>
+> >>>> See when the window should move but fails to draw it's new content w=
+hat
+> >>>> happens?
+> >>>>
+> >>>> Are the other windows which would be affected by the move not drawn =
+as well? =20
+> >>> No, all the other windows will continue behaving normally just like
+> >>> they always did. It's just that one frozen window there that won't
+> >>> update; it won't resize, so there is no reason to move that other
+> >>> window either.
+> >>>
+> >>> Everything continues as if the frozen window never even sent anything
+> >>> to the compositor after its last good update.
+> >>>
+> >>> We have a principle in Wayland: the compositor cannot afford to wait
+> >>> for clients, the desktop as a whole must remain responsive. So there =
+is
+> >>> always a backup plan even for cases where the compositor expects the
+> >>> client to change something. For resizes, in a floating-window manager
+> >>> it's easy: just let things continue as they are; in a tiling window
+> >>> manager they may have a timeout after which... whatever is appropriat=
+e.
+> >>>
+> >>> Another example: If a compositor decides to make a window maximized, =
+it
+> >>> tells the client the new size and state it must have. Until the client
+> >>> acks that specific state change, the compositor will continue managing
+> >>> that window as if nothing changed. Given the asynchronous nature of
+> >>> Wayland, the client might even continue submitting updates
+> >>> non-maximized for a while, and that will go through as if the
+> >>> compositor didn't ask for maximized. But at some point the client acks
+> >>> the window state change, and from that point on if it doesn't behave
+> >>> like maximized state requires, it will get a protocol error and be
+> >>> disconnected. =20
+> >> Yeah and all of this totally makes sense.
+> >>
+> >> The problem is that not forwarding the state changes to the hardware
+> >> adds a CPU round trip which is rather bad for the driver design,
+> >> especially power management.
+> >>
+> >> E.g. when you submit the work only after everybody becomes available t=
+he
+> >> GPU becomes idle in between and might think it is a good idea to reduce
+> >> clocks etc... =20
+> > Everybody does not need to be available. The compositor can submit its
+> > work anyway, it just uses old state for some of the windows.
+> >
+> > But if everybody happens to be ready before the compositor repaints,
+> > then the GPU will be idle anyway, whether the compositor looked at the
+> > buffer readyness at all or not. =20
+>=20
+> Ok good point.
+>=20
+> > Given that Wayland clients are not expected (but can if they want) to
+> > draw again until the frame callback which ensures that their previous
+> > frame is definitely going to be used on screen, this idling of GPU
+> > might happen regularly with well-behaved clients I guess? =20
+>=20
+> Maybe I wasn't clear what the problem is: That the GPU goes idle is=20
+> expected, but it should it should just not go idle multiple times.
+>=20
+> > The aim is that co-operative clients never draw a frame that will only
+> > get discarded.
+> > =20
+> >> How about doing this instead:
+> >>
+> >> 1. As soon as at least one window has new committed state you submit t=
+he
+> >> rendering.
+> >>   =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 As far as I understand it that=
+ is already the case anyway. =20
+> > At least Weston does not work like that. Doing that means that the
+> > first client to send a new frame will lock all other client updates out
+> > of that update cycle.
+> >
+> > Hence, a compositor usually waits until some point before the target
+> > vblank before it starts the repaint, which locks the window state in
+> > place for the frame. =20
+>=20
+> Uff, that means we have lost this game anyway.
+>=20
+> See you get the best energy utilization if the hardware wakes up as few=20
+> as possible and still get everything done.
+>=20
+> So what happens in the case you describes is that the hardware comes out=
+=20
+> of sleep at least twice, once for the client and once for the server=20
+> which is rather sub optimal.
+
+I can see the point, but what do we know about its significance?
+
+If the alternative is the first-to-win and everyone else gets postponed
+by another full refresh cycle, isn't that worse? It could even cause
+jitter rather than just "high" latency to screen.
+
+Is there any approach that would not have either disadvantage?
+
+Here is an analysis of why Weston does what it does right now (the new
+algorithm):
+https://ppaalanen.blogspot.com/2015/02/weston-repaint-scheduling.html
+
+
+Are we talking about desktops in general, or games, or fullscreen use
+case?
+
+It's not unthinkable to have a different compositor scheduling policy
+for outputs that happen have only one fullscreen window.
+
+> > Any client update could contain window state changes that prevents the
+> > GPU from choosing the content buffer to use.
+> > =20
+> >> 2. Before starting rendering the hardware driver waits with a timeout
+> >> for all the window content to become ready.
+> >>   =C2=A0=C2=A0=C2=A0 =C2=A0=C2=A0=C2=A0 The timeout is picked in a way=
+ so that we at least reach a
+> >> reasonable fps. Making that depending on the maximum refresh rate of t=
+he
+> >> display device sounds reasonable to me.
+> >>
+> >> 3a. If all windows become ready on time we draw the frame as expected.
+> >> 3b. If a timeout occurs the compositor is noted of this and goes on a
+> >> fallback path rendering only the content known to be ready. =20
+> > Sounds like the fallback path, where the compositor's rendering is
+> > already late, would need to re-do all the rendering with an extremely
+> > tight schedule just before the KMS submission deadline. IOW, when
+> > you're not going to make it in time, you have to do even more work and
+> > ping-pong even more between CPU and GPU after being a bit late already.
+> > Is that really a good idea? =20
+>=20
+> My idea is that both the fallback path and the normal rendering are=20
+> submitted at the same time, just with a big if/then/else around it. E.g.=
+=20
+> the timeout happens on the GPU hardware and not on the CPU.
+
+So for every refresh, the compositor needs to prepare a combinatorial
+explosion number of possible compositions to be rendered?
+
+Or do we have the assumption that everything we talk about here is
+conditional to not having any window state changes other than content
+change?
+
+Remember the example where one window is pending a resize, and if/when
+that happens another window needs to move.
+
+> But I think that stuff is just to complicated to implement.
+>=20
+> I want to describe once more what the ideal configuration would be:
+> 1. When you render a frame one or more clients submit jobs to the hardwar=
+e.
+> 2. Those jobs then execute on the hardware asynchronously to the CPU.
+> 3. At the same time the CPU prepares a composition job which takes all=20
+> the window content from clients and renders a new frame.
+> 4. This new frame gets submitted to the hardware driver as new content=20
+> on the screen.
+> 5. The hardware driver waits for all the rendering to be completed and=20
+> flips the screen.
+
+I believe this is what happens right now, when compositors do not take
+into account that client buffers might not be ready, with the problem
+that any client GPU job that takes ages will stall the whole desktop's
+refresh.
+
+>=20
+> The idea is that you have only one block of activity on the hardware,=20
+> e.g. something like this:
+> _------------_______flip_-------------_____flip.....
+>=20
+>=20
+> But what happens with Wayland currently is that you end up with:
+> _--------_______-__flip_------------___-__flip.....
+>=20
+>=20
+> Or even worse when you have multiple clients rendering at random times:
+> _---_---_---____-__flip_---_---_---___-__flip.....
+>=20
+>=20
+> I'm actually not that of a power management guy, but it is rather=20
+> obvious that this is not optimal.
+
+Possibly, but I haven't seen anyone come up with a better plan given the
+constraints that Wayland window state management raises.
+
+Seems like it all boils down to the fundamental trade-off between
+latency and throughput, or latency and power efficiency.
+
+
+Thanks,
+pq
+
+>=20
+> Regards,
+> Christian.
+>=20
+>=20
+> > It also means the compositor cannot submit the KMS atomic commit until
+> > the GPU is done or timed out the compositing job, which is another
+> > GPU-CPU ping-pong.
+> > =20
+> >> 4. Repeat.
+> >>
+> >> This way we should be able to handle all use cases gracefully, e.g. the
+> >> hanging client won't cause the server to block and when everything
+> >> becomes ready on time we just render as expected. =20
+> >
+> > Thanks,
+> > pq =20
+>=20
+
+
+--Sig_/N=FJlttKm+gC6bUtDikG7jt
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmECtskACgkQI1/ltBGq
+qqeyCxAAqLOHHDzFwFh3JAIeQEv/9ke1qU3yRiT/1w17VwnHKJCG0HAWyyAGUFy2
+ggW++JIjPye1ZT6LbdDJcLNbDsOXuhnwdxjy4lRLcjHVVMT78lsH+ATQ05UZU9bF
+8x/yzj0YV6LYRGpNB6unqs3nu+/B41TyNB9fVRjW0XwfRUdEnC7JYpJFdJd7GeTI
+QOLsoGSk0rqMhKX5lF/n01qhofipb+hLNAuo4sgiuqRbKXmhTcmKRh4/CqC4NsPc
+SIUG3tjNeIkmo6+OEhCXgCTjSC3pd5LUY/Gqt+Zuny/+CD4eFilOqo1huKhIbk66
+gCCCeOxhoAOLGsJi0VG4GxIChIKWj38ORpMWS4ZTh1GUlzXNdyErhNnxyZt7Okr/
+ukhuHFMH/TYr+8N+EkhvMzuuHke2YeJU9b8FsuW7PGPnBbUDOLytVZlVLapOEofc
+LvCO5d5LQaVAd7piW8Fc4P194w+98FgmEmL435QUtdI+6/Y5GyWCvBaUKC+3IiSn
+LAAMtAGEuxuVDBKjbjhlNOu8pRhhHI8w44weaB2geYR47+3pGQq1S9F0FOd0vFTR
+tjrtLl0uW6tDDtsqSKhPTtdpGNrUyvLJ+13NO3uXyxMblIbMo1Sn4CswsA/y+Qaa
+KSscxUDPqHMC//8kiQSGnIghhsLMP8aSdLCfsv5YSMQ4RaBdmaE=
+=itZY
+-----END PGP SIGNATURE-----
+
+--Sig_/N=FJlttKm+gC6bUtDikG7jt--
+
+--===============1942133207443575621==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+
+--===============1942133207443575621==--
