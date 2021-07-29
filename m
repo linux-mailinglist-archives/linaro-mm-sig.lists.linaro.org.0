@@ -2,140 +2,88 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4592A3D9FC7
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 10:43:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 877933DA003
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 11:03:51 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C99306354D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 08:43:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E6AEB63E76
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Jul 2021 09:03:49 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id A9D686350F; Thu, 29 Jul 2021 08:43:43 +0000 (UTC)
+	id D0FF563570; Thu, 29 Jul 2021 09:03:47 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 038C06350A;
-	Thu, 29 Jul 2021 08:43:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DE5396350A;
+	Thu, 29 Jul 2021 09:03:44 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 9885B603AB
- for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 08:43:38 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 483EB60A96
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 09:03:43 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 8D2066350A; Thu, 29 Jul 2021 08:43:38 +0000 (UTC)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2068.outbound.protection.outlook.com [40.107.92.68])
- by lists.linaro.org (Postfix) with ESMTPS id 76829603AB
- for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 08:43:36 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ODz9ibhulbCrKlHoDgrPmF0ob7ZS6jzNUXDtCg1b8CkQwU7Wrw4+xUqP6LUdTwoLaY0XMxrSTWBr7FyX4akJe4zd5Ac1wXA+YQUeBSA5zSd4/5uYbpYZjy54ldEujdts5m6ufho5SVo2bInS5RN9NIhWMjnckTLfCfRD69iw7M0tOkRvaVve7muVPqheuGsm16P0/q19W6duvDogUkAhQKv9pDsp9q3LUU08BbpiNT5B7+VqVMCfx7bq8NrWA4zT5j22W+EvfxD5fyrj0Y23W1+uLj4r4yHmDydi/0lIDG6mFFbg0moLqh0uJxgZhWqz5BIX/gaGpt8pktEuJAki0w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wN4jFALw7xgibT7SY6MP8qoVWR2GlybbLVfVTmZCRK0=;
- b=kBOhFm1N0H0kvy1q68XxiZlxLjBlciV1ERCoUvx79FCREL8XfkObmHYHLQT2l3Rgvf+2kq6HF8QS9nn0n1MT6yXdqk0WyuVeODnluCfra8cpOucAbVGYn2hw+A4zLdMR68nAARVemFhwKqUK/M7XL6S4YK/J7xTLB3IXLA4OHCq48gB+FoM0bGn5anJW9NlWuG5ZAIwQtQ99Ke04mXznZJXz+6Gb3doIe+fRquP8qbVrFD3lxepVDFLJau0KL4JxIll64sbYJH0hPhmyQeQtQCKwAj4WU9pcw9gT8LY+F2o4BuBqwSQNUcoGBNgq2aaU5CS3zTNkkIzyLLceomzehA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wN4jFALw7xgibT7SY6MP8qoVWR2GlybbLVfVTmZCRK0=;
- b=i26wraluJEygr7z7/XRnYxiAA3aVG8Jg5DgucD5tDsOCGyNnjQTuNpwcejdOhkg6zefhA4LMb5Ry02S5De89SluDg4mvG1HN+kLMkKd/0YD69r8DedFOIBwp9SEo5XefxtTBQ3gpuNcL7+Nn6tGCzM4mw8qtc17mW35HDUvZNvc=
-Authentication-Results: vger.kernel.org; dkim=none (message not signed)
- header.d=none;vger.kernel.org; dmarc=none action=none header.from=amd.com;
-Received: from BY5PR12MB3764.namprd12.prod.outlook.com (2603:10b6:a03:1ac::17)
- by BYAPR12MB2888.namprd12.prod.outlook.com (2603:10b6:a03:137::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4373.18; Thu, 29 Jul
- 2021 08:43:31 +0000
-Received: from BY5PR12MB3764.namprd12.prod.outlook.com
- ([fe80::6c58:1598:e768:d45e]) by BY5PR12MB3764.namprd12.prod.outlook.com
- ([fe80::6c58:1598:e768:d45e%7]) with mapi id 15.20.4373.021; Thu, 29 Jul 2021
- 08:43:30 +0000
-To: Pekka Paalanen <ppaalanen@gmail.com>
-References: <20210726233854.2453899-1-robdclark@gmail.com>
- <28ca4167-4a65-0ccc-36be-5fb017f6f49d@daenzer.net>
- <CAF6AEGuhQ2=DSDaGGVwBz5O+FoZEjpgoVJOcFecpd--a9yDY1w@mail.gmail.com>
+ id 2EB7D6350A; Thu, 29 Jul 2021 09:03:43 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+ [209.85.128.54])
+ by lists.linaro.org (Postfix) with ESMTPS id 24DEF60A96
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 09:03:41 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id b128so3222567wmb.4
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Jul 2021 02:03:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to; bh=tZq9WBpGzGj/xoxWMyN/SX4ni6yk9168UnPyM/0Pu34=;
+ b=AgOpHAsmJFKpCTa9G83TzE3YLhb8hw1/WLLX5GEYl2dIt3c2XVR6jRyNGjmQrL0mzc
+ 9U0aqmLUNviZcK2p32T3jg7YnfWrHZ163m/SBQcIqMqQk+V2FiDxmnrxyimUBMwhFxCl
+ hCAY9AmZwakr7XF570Xd7LOvwQekMkugfc8mw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :content-transfer-encoding:in-reply-to;
+ bh=tZq9WBpGzGj/xoxWMyN/SX4ni6yk9168UnPyM/0Pu34=;
+ b=Cf0bAHCYYgi87whnSvPrpTFchOPvlWwAX5smUAvtdEuerhztODAqFb0p2K0+8yGlCm
+ vHJTR48sjkf1MPCMHbyw0lIA5gCfypAzGFRASxpAtjagcYBA5eax85zjC1jnO/jbabjA
+ eUSSX3tG+g78FrbdxGETx60y49XwDwqgLGObVwnMjnvqVQrf6d4Q2Srhz6fGF/zsOnGV
+ jEntsGxTJtSDbIgOQI17VFVVtzPmfQCHT2FNpt+Q3GQqtsBpk0Tyiqis1oYLIWujCyOH
+ 1MrYXAt0L86LQ23NbcP6aCbyY1obHDo4ifm7TwOaT08jgiiH9LOd28ppGq5oZai+nOq9
+ ebew==
+X-Gm-Message-State: AOAM532zWS4NrNzojKoZHsLG/r7OJ9rm5dRc7adqMkL89A5zQicoP4AP
+ 06W03t9FPCxIAqnSkqijfWIDXQ==
+X-Google-Smtp-Source: ABdhPJxkrH/kywcVb0qmeLSL3TvP5lRMh3WKdA7FI/99yJ/devreqqfI/qopWniyN+YUr05awdgGLQ==
+X-Received: by 2002:a1c:19c6:: with SMTP id 189mr1261855wmz.174.1627549420023; 
+ Thu, 29 Jul 2021 02:03:40 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id p15sm2435632wmi.29.2021.07.29.02.03.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 29 Jul 2021 02:03:39 -0700 (PDT)
+Date: Thu, 29 Jul 2021 11:03:36 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Michel =?iso-8859-1?Q?D=E4nzer?= <michel@daenzer.net>
+Message-ID: <YQJu6AqKn7bdT1li@phenom.ffwll.local>
+Mail-Followup-To: Michel =?iso-8859-1?Q?D=E4nzer?= <michel@daenzer.net>,
+ Rob Clark <robdclark@gmail.com>, Rob Clark <robdclark@chromium.org>,
+ Matthew Brost <matthew.brost@intel.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ open list <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Luben Tuikov <luben.tuikov@amd.com>, Roy Sun <Roy.Sun@amd.com>,
+ Gustavo Padovan <gustavo@padovan.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Tian Tao <tiantao6@hisilicon.com>, Lee Jones <lee.jones@linaro.org>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+References: <CAF6AEGuhQ2=DSDaGGVwBz5O+FoZEjpgoVJOcFecpd--a9yDY1w@mail.gmail.com>
  <99984703-c3ca-6aae-5888-5997d7046112@daenzer.net>
  <CAJs_Fx4O4w5djx3-q5zja51-ko_nQ0X2nEk3qoZB_axpBVSrKA@mail.gmail.com>
  <f6d73ec5-85f9-1b18-f2d2-a5f3b7333efa@gmail.com>
  <c9ee242e-542e-e189-a1ec-c1be34d66c93@daenzer.net>
  <04d44873-d8e6-6ae7-f0f9-17bcb484d697@amd.com>
  <9d5f4415-d470-3bc1-7d52-61ba739706ae@daenzer.net>
- <eedfdc75-72f8-9150-584b-c5e9d16db180@amd.com>
- <20210728165700.38c39cf8@eldfell>
- <74e310fa-e544-889f-2389-5abe06f80eb8@amd.com>
- <20210729112358.237651ff@eldfell>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-Message-ID: <3675d530-c9fc-7ec9-e157-b6abeeec7c2a@amd.com>
-Date: Thu, 29 Jul 2021 10:43:16 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
-In-Reply-To: <20210729112358.237651ff@eldfell>
-Content-Language: en-US
-X-ClientProxiedBy: PR3P191CA0040.EURP191.PROD.OUTLOOK.COM
- (2603:10a6:102:55::15) To BY5PR12MB3764.namprd12.prod.outlook.com
- (2603:10b6:a03:1ac::17)
+ <CAF6AEGu409eY9xznTAaBf2ZDcV_AaDELUzN2afWgiHwB_uBwqg@mail.gmail.com>
+ <YQJUKXgf/Q957fmy@phenom.ffwll.local>
+ <ff394f2b-b555-e80f-b685-d0d59e2bbe67@daenzer.net>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [IPv6:2a02:908:1252:fb60:4b10:6e80:f619:9837]
- (2a02:908:1252:fb60:4b10:6e80:f619:9837) by
- PR3P191CA0040.EURP191.PROD.OUTLOOK.COM (2603:10a6:102:55::15) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4308.23 via Frontend Transport; Thu, 29 Jul 2021 08:43:22 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2dc70b4c-ef44-4f79-69a1-08d9526cf0fa
-X-MS-TrafficTypeDiagnostic: BYAPR12MB2888:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <BYAPR12MB288816D95FFE4B7E1C809F5883EB9@BYAPR12MB2888.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: n9pe2bhXPaPVpAgkr7dlt7J1AQN9kHsZqmjwtQr3dskT+e1wYMsVQMoSXMhIH/qiOeBthdYBsJywWpTK0JgEFgwSgy/n9cuYN8voBE8tLMgm/rpKSZeHGATyvg2+c2xbUhOOmeSrc1yLa2pc8OC70NcfIrNeXn4C3g1YhkwUsooJxjQ2E+SOnKPLq/Mjqijm8vI7yTsLMBqZ4UqtbLvp5KDQFV9Eei83/GJqyPQFdyf75NC8c7r4FRKxjKHKW8b06poLN75hAYFlUuUDn6/mkBkKHsYv9T+m5wGTUnweIqcqbnWJRHbfNE/IaTvoVsw06OzbmiuKxmXrchuuf8r4wb1pJrCQCEv4GGniXmISGSk0WPP3MRCk8kjKQQoPePSKSOme4ThPRd++4ERIs4i4O94Vr4LURJ6CVWTyEtk21ipOLOSPgjg74qxceGzGpNPd8jAkPRIIzYv4l101a8E3uOBBaNkNfvLfP2zVGfqrC/Kj3r7Ep6QtPTj406UR6rRvd7iistqLpI3qA/ggRZOwETVbswMYadJAgyPDUVMzOGbDRdU5qnRQBRF0N/qVlRITvn81rYZ8lEHf8S5JNl1A0KWlLt1IQUmPNzkjhGTqT9QJkMh7uw8SNBrWATLDeFD1g5n+IJFOqXOBFxQrEbC4lBXL2HQl+Paffxm6vu+o8vTmcCbuqAB1HYVgeaYmkeM7B6A5QdIGGZXmvU0Uz+QimUUQDEGh+UdQjtOUEtcr3TX4H0aVI/2Xsadt0xWU364b
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BY5PR12MB3764.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(39860400002)(366004)(136003)(396003)(346002)(376002)(54906003)(53546011)(8936002)(7416002)(86362001)(5660300002)(31696002)(8676002)(6916009)(83380400001)(66574015)(66946007)(316002)(38100700002)(6486002)(186003)(66476007)(36756003)(2616005)(66556008)(6666004)(31686004)(4326008)(478600001)(2906002)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dWZ3ODR2SWJNbDg2YnBLOU1idkV4MlNxU2ovS0hjYkN1SkYzNDZnUGordUFu?=
- =?utf-8?B?YjdwaEg3WU1oR21rcXk4eDVHTjFkcUkzYUI3V01sU21XZ05tdU4xNlZVMGdw?=
- =?utf-8?B?MTlqdXh5K3NTVUp0QmJCWklQa083UzRtdHJMYXczNEZueHY3S3dHUHFTUVBN?=
- =?utf-8?B?ZGtBczlBR25YdWdsK2RuM3ZCYzEvU29KOXBqSG84c1BBTVJFemoxMTNjYUNQ?=
- =?utf-8?B?ekwyaDJVT2ZkSUZ4MGZMVkt6VHJ4K1lxZGc1bzZWQzN1VkowdkpCNUlhNWk0?=
- =?utf-8?B?Z25DK3o0Rjk2dS9MWHYwbWNBM0kxa1FIZUd0WFRDK0xnQjZPV24vZ0VYcDdt?=
- =?utf-8?B?RFdTbGdvdXdMNTNMNTdMUXd5TDdqK3o3eTZKYkdQTkMrdSttUE0rdjRoOFU1?=
- =?utf-8?B?MDVpQXM4OGN3dmIydzl4RWhWZitacU5Ea1JRaDJRQkRQWkI3VkozcmNXTE9C?=
- =?utf-8?B?UnpQOGpQbEl6eS9STndZZXN4WUhFeEZMR01uZGJhaHJqWGZSOUM2V3Z3aHNW?=
- =?utf-8?B?cm9wNjVWZkJuQ0hZVVlEQnMveFlQaTlLbStsSW02em9HSjlYaW81ZDNSeWZG?=
- =?utf-8?B?cHRCOVVzQlJoMkZndUJoYXlhZ2E2VUtDWk5OeGtVS3RwcTdmempQdmJqaTlO?=
- =?utf-8?B?Y3hURGVMYkdCUldqb2F1cTVNcFdneGM1UDFQV0x0TCtQK1BqVk4vRVkyQ1Zw?=
- =?utf-8?B?MC9RbTF3QjErSFVFOWV6OHVCZ01XNzNZT2hRbnUxUkdLWjl4K2xYbCtvaW8z?=
- =?utf-8?B?akxaUExHRHBKYnRwa05teS9Ud0RMTUd0dHhvd3FQLzV4YVEzZ1B6SE9vb2RD?=
- =?utf-8?B?enBDT1VaZU5EelRpcjlveW1lb2dpbVl4SXpGdmVKaGhBeU5nZnBJU2ZnUFph?=
- =?utf-8?B?SDhvaE4xN0JGcjBSVWdYS0RreFczRUFXbVNnVXJZdGhqNFdLMVpsVVNzVG1S?=
- =?utf-8?B?cG4xTkxodC9SZzNjZ2FPUk5raXRKbklvN0cxUEtTZUZ4bWdNazlzQ1Z2eEtk?=
- =?utf-8?B?R0F1NVF1SGxzRlNBM2ZpVWJQNzg3Ry9pdC9VUzhiRlZCaTVvSUhwaWVkd011?=
- =?utf-8?B?T3JXcnc4L3gwY3RGY3VJNWVSM3RRcFMrNnNJRjBtUjdPdWxETDJrWWJaeGxh?=
- =?utf-8?B?ZmtOcEJMRHZ2WnhpUkZZVEhmQ1EwSitka3hMU1BocWZQNy80aWVzcFppUmty?=
- =?utf-8?B?c0h5bnFqM2VZcFlnSEtxYjdKOWRaVU04d3NHUXRLOHZuSzVCcFNEWTVvVkVQ?=
- =?utf-8?B?eVUzNTNSaHVDalEzM2NSMUlOZENtVllCbkZ5eTJMSXVWN2I2T2tFdUgxNjQz?=
- =?utf-8?B?V2VRRW5hRlpPcng2bi8zMHk2dDFmZm14c3hZSEFkUDNzUmlKbXhwQzRCdG4y?=
- =?utf-8?B?SkwrQkRmZXh2V0hZbDBGeG9yNUF5YnFFWWRremlFZjFNWGY3M081RmNkbC9u?=
- =?utf-8?B?SS8zR3lHam1XbXVHRHR0SVo1Zlc2UTkwbjJpa3hBVU5XR2w2K2Q3d2ZGZ3Zy?=
- =?utf-8?B?WTExZkdmY0ptZ3pFUEYzc0dMVDBSKzFqSlo4ZW1sUHUrTThZMGxpSnN5ZkN3?=
- =?utf-8?B?bXNhaFhKNTRVbUxkRGcrSmZkTEhzZ25qYUFzZUtUbnNjWHM3dHFJczhIb3dU?=
- =?utf-8?B?eHB4T25qQzc4OW1EbzRmZXIyWGw3bzRIVXQwZTBCNkFUK2RWazl0QXFNL3lw?=
- =?utf-8?B?NFY3SjkvenpLbnB5VTdvTkxqeVpMNDRJbUJEbXNRWlFSWk0rd21LUVl2Tkk1?=
- =?utf-8?B?L1hRNmY0M1dySk9ZazY4TktKMHVPQ2ZoZlE4TTV4a2M5dmdHQW1JdXhObE5Q?=
- =?utf-8?B?YWhVUStMeDhpWE1nT1dCQ0QxaVpMY3duNUgrd1U4N09maFFOT1Z4dUM0dTdo?=
- =?utf-8?Q?ve697MRONYXbI?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2dc70b4c-ef44-4f79-69a1-08d9526cf0fa
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR12MB3764.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jul 2021 08:43:30.5922 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: UJOwJyg2ELIru++ps3q8fMk9tJsn5PUNeEyxMicJFp6HG5TUAutdgLoNsSZB1zVT
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR12MB2888
+Content-Disposition: inline
+In-Reply-To: <ff394f2b-b555-e80f-b685-d0d59e2bbe67@daenzer.net>
+X-Operating-System: Linux phenom 5.10.0-7-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [RFC 0/4] dma-fence: Deadline awareness
 X-BeenThere: linaro-mm-sig@lists.linaro.org
@@ -151,88 +99,260 @@ List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: Rob Clark <robdclark@chromium.org>, Matthew Brost <matthew.brost@intel.com>,
- Jack Zhang <Jack.Zhang1@amd.com>,
- =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>,
- open list <linux-kernel@vger.kernel.org>,
+ Roy Sun <Roy.Sun@amd.com>, open list <linux-kernel@vger.kernel.org>,
  dri-devel <dri-devel@lists.freedesktop.org>,
  "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Luben Tuikov <luben.tuikov@amd.com>, Roy Sun <Roy.Sun@amd.com>,
- Gustavo Padovan <gustavo@padovan.org>,
+ Rob Clark <robdclark@gmail.com>, Luben Tuikov <luben.tuikov@amd.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Gustavo Padovan <gustavo@padovan.org>,
  Alex Deucher <alexander.deucher@amd.com>, Tian Tao <tiantao6@hisilicon.com>,
  Lee Jones <lee.jones@linaro.org>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
  "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-QW0gMjkuMDcuMjEgdW0gMTA6MjMgc2NocmllYiBQZWtrYSBQYWFsYW5lbjoKPiBPbiBXZWQsIDI4
-IEp1bCAyMDIxIDE2OjMwOjEzICswMjAwCj4gQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtv
-ZW5pZ0BhbWQuY29tPiB3cm90ZToKPgo+PiBBbSAyOC4wNy4yMSB1bSAxNTo1NyBzY2hyaWViIFBl
-a2thIFBhYWxhbmVuOgo+Pj4gT24gV2VkLCAyOCBKdWwgMjAyMSAxNTozMTo0MSArMDIwMAo+Pj4g
-Q2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPiB3cm90ZToKPj4+ICAg
-Cj4+Pj4gQW0gMjguMDcuMjEgdW0gMTU6MjQgc2NocmllYiBNaWNoZWwgRMOkbnplcjoKPj4+Pj4g
-T24gMjAyMS0wNy0yOCAzOjEzIHAubS4sIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6Cj4+Pj4+PiBB
-bSAyOC4wNy4yMSB1bSAxNTowOCBzY2hyaWViIE1pY2hlbCBEw6RuemVyOgo+Pj4+Pj4+IE9uIDIw
-MjEtMDctMjggMTozNiBwLm0uLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOgo+Pj4+Pj4+PiBBdCBs
-ZWFzdCBBTUQgaGFyZHdhcmUgaXMgYWxyZWFkeSBjYXBhYmxlIG9mIGZsaXBwaW5nIGZyYW1lcyBv
-biBHUFUgZXZlbnRzIGxpa2UgZmluaXNoaW5nIHJlbmRlcmluZyAob3IgdXBsb2FkaW5nIGV0Yyku
-Cj4+Pj4+Pj4+Cj4+Pj4+Pj4+IEJ5IHdhaXRpbmcgaW4gdXNlcnNwYWNlIG9uIHRoZSBDUFUgYmVm
-b3JlIHNlbmQgdGhlIGZyYW1lIHRvIHRoZSBoYXJkd2FyZSB5b3UgYXJlIGNvbXBsZXRlbHkga2ls
-bGluZyBvZiBzdWNoIGZlYXR1cmVzLgo+Pj4+Pj4+Pgo+Pj4+Pj4+PiBGb3IgY29tcG9zaW5nIHVz
-ZSBjYXNlcyB0aGF0IG1ha2VzIHNlbnNlLCBidXQgY2VydGFpbmx5IG5vdCBmb3IgZnVsbCBzY3Jl
-ZW4gYXBwbGljYXRpb25zIGFzIGZhciBhcyBJIGNhbiBzZWUuCj4+Pj4+Pj4gRXZlbiBmb3IgZnVs
-bHNjcmVlbiwgdGhlIGN1cnJlbnQgS01TIEFQSSBvbmx5IGFsbG93cyBxdWV1aW5nIGEgc2luZ2xl
-IHBhZ2UgZmxpcCBwZXIgQ1JUQywgd2l0aCBubyB3YXkgdG8gY2FuY2VsIG9yIG90aGVyd2lzZSBt
-b2RpZnkgaXQuIFRoZXJlZm9yZSwgYSBXYXlsYW5kIGNvbXBvc2l0b3IgaGFzIHRvIHNldCBhIGRl
-YWRsaW5lIGZvciB0aGUgbmV4dCByZWZyZXNoIGN5Y2xlLCBhbmQgd2hlbiB0aGUgZGVhZGxpbmUg
-cGFzc2VzLCBpdCBoYXMgdG8gc2VsZWN0IHRoZSBiZXN0IGJ1ZmZlciBhdmFpbGFibGUgZm9yIHRo
-ZSBmdWxsc2NyZWVuIHN1cmZhY2UuIFRvIG1ha2Ugc3VyZSB0aGUgZmxpcCB3aWxsIG5vdCBtaXNz
-IHRoZSBuZXh0IHJlZnJlc2ggY3ljbGUsIHRoZSBjb21wb3NpdG9yIGhhcyB0byBwaWNrIGFuIGlk
-bGUgYnVmZmVyLiBJZiBpdCBwaWNrcyBhIG5vbi1pZGxlIGJ1ZmZlciwgYW5kIHRoZSBwZW5kaW5n
-IHJlbmRlcmluZyBkb2VzIG5vdCBmaW5pc2ggaW4gdGltZSBmb3IgdmVydGljYWwgYmxhbmssIHRo
-ZSBmbGlwIHdpbGwgYmUgZGVsYXllZCBieSBhdCBsZWFzdCBvbmUgcmVmcmVzaCBjeWNsZSwgd2hp
-Y2ggcmVzdWx0cyBpbiB2aXNpYmxlIHN0dXR0ZXJpbmcuCj4+Pj4+Pj4KPj4+Pj4+PiAoVW50aWwg
-dGhlIGRlYWRsaW5lIHBhc3NlcywgdGhlIFdheWxhbmQgY29tcG9zaXRvciBjYW4ndCBldmVuIGtu
-b3cgaWYgYSBwcmV2aW91c2x5IGZ1bGxzY3JlZW4gc3VyZmFjZSB3aWxsIHN0aWxsIGJlIGZ1bGxz
-Y3JlZW4gZm9yIHRoZSBuZXh0IHJlZnJlc2ggY3ljbGUpCj4+Pj4+PiBXZWxsIHRoZW4gbGV0J3Mg
-ZXh0ZW5kIHRoZSBLTVMgQVBJIGluc3RlYWQgb2YgaGFja2luZyB0b2dldGhlciB3b3JrYXJvdW5k
-cyBpbiB1c2Vyc3BhY2UuCj4+Pj4+IFRoYXQncyBpbmRlZWQgYSBwb3NzaWJsZSBzb2x1dGlvbiBm
-b3IgdGhlIGZ1bGxzY3JlZW4gLyBkaXJlY3Qgc2Nhbm91dCBjYXNlLgo+Pj4+Pgo+Pj4+PiBOb3Qg
-Zm9yIHRoZSBnZW5lcmFsIGNvbXBvc2l0aW5nIGNhc2UgdGhvdWdoLCBzaW5jZSBhIGNvbXBvc2l0
-b3IgZG9lcyBub3Qgd2FudCB0byBjb21wb3NpdGUgbXVsdGlwbGUgb3V0cHV0IGZyYW1lcyBwZXIg
-ZGlzcGxheSByZWZyZXNoIGN5Y2xlLCBzbyBpdCBoYXMgdG8gbWFrZSBzdXJlIHRoZSBvbmUgZnJh
-bWUgaGl0cyB0aGUgdGFyZ2V0Lgo+Pj4+IFllYWgsIHRoYXQncyB0cnVlIGFzIHdlbGwuCj4+Pj4K
-Pj4+PiBBdCBsZWFzdCBhcyBsb25nIGFzIG5vYm9keSBpbnZlbnRzIGEgbWVjaGFuaXNtIHRvIGRv
-IHRoaXMgZGVjaXNpb24gb24KPj4+PiB0aGUgR1BVIGluc3RlYWQuCj4+PiBUaGF0IHdvdWxkIG1l
-YW4gcHV0dGluZyB0aGUgd2hvbGUgd2luZG93IG1hbmFnZXIgaW50byB0aGUgR1BVLgo+PiBOb3Qg
-cmVhbGx5LiBZb3Ugb25seSBuZWVkIHRvIGRlY2lkZSBpZiB5b3Ugd2FudCB0byB1c2UgdGhlIG5l
-dyBiYWNraW5nCj4+IHN0b3JlIG9yIHRoZSBvbGQgb25lIGJhc2VkIG9uIGlmIHRoZSBuZXcgc3Vy
-ZmFjZSBpcyByZWFkeSBvciBub3QuCj4gRXhjZXB0IHRoYXQgYSB3aW5kb3cgY29udGVudCB1cGRh
-dGUgaW4gV2F5bGFuZCBtdXN0IGJlIHN5bmNocm9uaXNlZCB3aXRoCj4gYWxsIHRoZSBwb3NzaWJs
-ZSBhbmQgYXJiaXRyYXJ5IG90aGVyIHdpbmRvdyBzeXN0ZW0gc3RhdGUgY2hhbmdlcywgdGhhdAo+
-IHdpbGwgYWZmZWN0IGhvdyBhbmQgd2hlcmUgb3RoZXIgd2luZG93cyB3aWxsIGdldCBkcmF3biAq
-dGhpcyBmcmFtZSosCj4gaG93IGlucHV0IGV2ZW50cyBhcmUgcm91dGVkLCBhbmQgbW9yZS4KPgo+
-IEJ1dCwgaWYgdGhlIHdpbmRvdyBtYW5hZ2VyIG1hZGUgc3VyZSB0aGF0ICpvbmx5KiB3aW5kb3cg
-Y29udGVudHMgYXJlCj4gYWJvdXQgdG8gY2hhbmdlIGFuZCAqYWxsKiBvdGhlciBzdGF0ZSByZW1h
-aW5zIGFzIGl0IHdhcywgdGhlbiBpdCB3b3VsZAo+IGJlIHBvc3NpYmxlIHRvIGxldCB0aGUgR1BV
-IGRlY2lkZSB3aGljaCBmcmFtZSBpdCB1c2VzLiBBcyBsb25nIGFzIGl0Cj4gYWxzbyB0ZWxscyBi
-YWNrIHdoaWNoIG9uZSBpdCBhY3R1YWxseSBkaWQsIHNvIHRoYXQgcHJlc2VudGF0aW9uCj4gZmVl
-ZGJhY2sgZXRjLiBjYW4gdHJpZ2dlciB0aGUgcmlnaHQgV2F5bGFuZCBldmVudHMuCj4KPiBXYXls
-YW5kIGhhcyAiYXRvbWljIGNvbW1pdHMiIHRvIHdpbmRvd3MsIGFuZCBhcmJpdHJhcnkgcHJvdG9j
-b2wKPiBleHRlbnNpb25zIGNhbiBhZGQgYXJiaXRyYXJ5IHN0YXRlIHRvIGJlIHRyYWNrZWQgd2l0
-aCBpdC4gQSBiaXQgbGlrZSBLTVMKPiBwcm9wZXJ0aWVzLiBFdmVuIGF0b21pYyBjb21taXRzIGFm
-ZmVjdGluZyBtdWx0aXBsZSB3aW5kb3dzIHRvZ2V0aGVyIGFyZQo+IGEgdGhpbmcsIGFuZCB0aGV5
-IG11c3QgYmUgbGF0Y2hlZCBlaXRoZXIgYWxsIG9yIG5vbmUuCj4KPiBTbyBpdCdzIHF1aXRlIGEg
-bG90IG9mIHdvcmsgdG8gZGV0ZXJtaW5lIGlmIG9uZSBjYW4gYWxsb3cgdGhlIEdQVSB0bwo+IGNo
-b29zZSB0aGUgYnVmZmVyIGl0IHdpbGwgdGV4dHVyZSBmcm9tLCBvciBub3QuCgpCdXQgaG93IGRv
-ZXMgaXQgdGhlbiBoZWxwIHRvIHdhaXQgb24gdGhlIENQVSBpbnN0ZWFkPwoKU2VlIHdoYXQgSSdt
-IHByb3Bvc2luZyBpcyB0byBlaXRoZXIgcmVuZGVyIHRoZSBuZXh0IHN0YXRlIG9mIHRoZSB3aW5k
-b3cgCm9yIGNvbXBvc2UgZnJvbSB0aGUgb2xkIHN0YXRlIChpbmNsdWRpbmcgYWxsIGF0b21pYyBw
-cm9wZXJ0aWVzKS4KCkUuZy4gd2hhdCBkbyB5b3UgZG8gaWYgeW91IHRpbWVvdXQgYW5kIGNhbid0
-IGhhdmUgdGhlIG5ldyB3aW5kb3cgY29udGVudCAKb24gdGltZT8gV2hhdCdzIHRoZSBmYWxsYmFj
-ayBoZXJlPwoKUmVnYXJkcywKQ2hyaXN0aWFuLgoKPgo+Cj4gVGhhbmtzLAo+IHBxCgpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1h
-aWxpbmcgbGlzdApMaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKaHR0cHM6Ly9saXN0cy5s
-aW5hcm8ub3JnL21haWxtYW4vbGlzdGluZm8vbGluYXJvLW1tLXNpZwo=
+On Thu, Jul 29, 2021 at 10:17:43AM +0200, Michel D=E4nzer wrote:
+> On 2021-07-29 9:09 a.m., Daniel Vetter wrote:
+> > On Wed, Jul 28, 2021 at 08:34:13AM -0700, Rob Clark wrote:
+> >> On Wed, Jul 28, 2021 at 6:24 AM Michel D=E4nzer <michel@daenzer.net> w=
+rote:
+> >>> On 2021-07-28 3:13 p.m., Christian K=F6nig wrote:
+> >>>> Am 28.07.21 um 15:08 schrieb Michel D=E4nzer:
+> >>>>> On 2021-07-28 1:36 p.m., Christian K=F6nig wrote:
+> >>>>>> Am 27.07.21 um 17:37 schrieb Rob Clark:
+> >>>>>>> On Tue, Jul 27, 2021 at 8:19 AM Michel D=E4nzer <michel@daenzer.n=
+et> wrote:
+> >>>>>>>> On 2021-07-27 5:12 p.m., Rob Clark wrote:
+> >>>>>>>>> On Tue, Jul 27, 2021 at 7:50 AM Michel D=E4nzer <michel@daenzer=
+.net> wrote:
+> >>>>>>>>>> On 2021-07-27 1:38 a.m., Rob Clark wrote:
+> >>>>>>>>>>> From: Rob Clark <robdclark@chromium.org>
+> >>>>>>>>>>>
+> >>>>>>>>>>> Based on discussion from a previous series[1] to add a "boost=
+" mechanism
+> >>>>>>>>>>> when, for example, vblank deadlines are missed.  Instead of a=
+ boost
+> >>>>>>>>>>> callback, this approach adds a way to set a deadline on the f=
+ence, by
+> >>>>>>>>>>> which the waiter would like to see the fence signalled.
+> >>>>>>>>>>>
+> >>>>>>>>>>> I've not yet had a chance to re-work the drm/msm part of this=
+, but
+> >>>>>>>>>>> wanted to send this out as an RFC in case I don't have a chan=
+ce to
+> >>>>>>>>>>> finish the drm/msm part this week.
+> >>>>>>>>>>>
+> >>>>>>>>>>> Original description:
+> >>>>>>>>>>>
+> >>>>>>>>>>> In some cases, like double-buffered rendering, missing vblank=
+s can
+> >>>>>>>>>>> trick the GPU into running at a lower frequence, when really =
+we
+> >>>>>>>>>>> want to be running at a higher frequency to not miss the vbla=
+nks
+> >>>>>>>>>>> in the first place.
+> >>>>>>>>>>>
+> >>>>>>>>>>> This is partially inspired by a trick i915 does, but implemen=
+ted
+> >>>>>>>>>>> via dma-fence for a couple of reasons:
+> >>>>>>>>>>>
+> >>>>>>>>>>> 1) To continue to be able to use the atomic helpers
+> >>>>>>>>>>> 2) To support cases where display and gpu are different drive=
+rs
+> >>>>>>>>>>>
+> >>>>>>>>>>> [1] https://nam11.safelinks.protection.outlook.com/?url=3Dhtt=
+ps%3A%2F%2Fpatchwork.freedesktop.org%2Fseries%2F90331%2F&amp;data=3D04%7C01=
+%7Cchristian.koenig%40amd.com%7C269b2df3e1dc4f0b856d08d951c8c768%7C3dd8961f=
+e4884e608e11a82d994e183d%7C0%7C0%7C637630745091538563%7CUnknown%7CTWFpbGZsb=
+3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C100=
+0&amp;sdata=3DeYaSOSS5wOngNAd9wufp5eWCx5GtAwo6GkultJgrjmA%3D&amp;reserved=
+=3D0
+> >>>>>>>>>> Unfortunately, none of these approaches will have the full int=
+ended effect once Wayland compositors start waiting for client buffers to b=
+ecome idle before using them for an output frame (to prevent output frames =
+from getting delayed by client work). See https://nam11.safelinks.protectio=
+n.outlook.com/?url=3Dhttps%3A%2F%2Fgitlab.gnome.org%2FGNOME%2Fmutter%2F-%2F=
+merge_requests%2F1880&amp;data=3D04%7C01%7Cchristian.koenig%40amd.com%7C269=
+b2df3e1dc4f0b856d08d951c8c768%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C=
+637630745091538563%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2lu=
+MzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=3D1ZkOzLqbiKSyCixGZ0u7H=
+d%2Fc1YnUZub%2F%2Fx7RuEclFKg%3D&amp;reserved=3D0 (shameless plug :) for a p=
+roof of concept of this for mutter. The boost will only affect the composit=
+or's own GPU work, not the client work (which means no effect at all for fu=
+llscreen apps where the compositor can scan out the client buffers directly=
+).
+> >>>>>>>>>>
+> >>>>>>>>> I guess you mean "no effect at all *except* for fullscreen..."?
+> >>>>>>>> I meant what I wrote: The compositor will wait for the next buff=
+er to become idle, so there's no boost from this mechanism for the client d=
+rawing to that buffer. And since the compositor does no drawing of its own =
+in this case, there's no boost from that either.
+> >>>>>>>>
+> >>>>>>>>
+> >>>>>>>>> I'd perhaps recommend that wayland compositors, in cases where =
+only a
+> >>>>>>>>> single layer is changing, not try to be clever and just push the
+> >>>>>>>>> update down to the kernel.
+> >>>>>>>> Even just for the fullscreen direct scanout case, that would req=
+uire some kind of atomic KMS API extension to allow queuing multiple page f=
+lips for the same CRTC.
+> >>>>>>>>
+> >>>>>>>> For other cases, this would also require a mechanism to cancel a=
+ pending atomic commit, for when another surface update comes in before the=
+ compositor's deadline, which affects the previously single updating surfac=
+e as well.
+> >>>>>>>>
+> >>>>>>> Well, in the end, there is more than one compositor out there.. a=
+nd if
+> >>>>>>> some wayland compositors are going this route, they can also impl=
+ement
+> >>>>>>> the same mechanism in userspace using the sysfs that devfreq expo=
+rts.
+> >>>>>>>
+> >>>>>>> But it sounds simpler to me for the compositor to have a sort of =
+"game
+> >>>>>>> mode" for fullscreen games.. I'm less worried about UI interactive
+> >>>>>>> workloads, boosting the GPU freq upon sudden activity after a per=
+iod
+> >>>>>>> of inactivity seems to work reasonably well there.
+> >>>>>> At least AMD hardware is already capable of flipping frames on GPU=
+ events like finishing rendering (or uploading etc).
+> >>>>>>
+> >>>>>> By waiting in userspace on the CPU before send the frame to the ha=
+rdware you are completely killing of such features.
+> >>>>>>
+> >>>>>> For composing use cases that makes sense, but certainly not for fu=
+ll screen applications as far as I can see.
+> >>>>> Even for fullscreen, the current KMS API only allows queuing a sing=
+le page flip per CRTC, with no way to cancel or otherwise modify it. Theref=
+ore, a Wayland compositor has to set a deadline for the next refresh cycle,=
+ and when the deadline passes, it has to select the best buffer available f=
+or the fullscreen surface. To make sure the flip will not miss the next ref=
+resh cycle, the compositor has to pick an idle buffer. If it picks a non-id=
+le buffer, and the pending rendering does not finish in time for vertical b=
+lank, the flip will be delayed by at least one refresh cycle, which results=
+ in visible stuttering.
+> >>>>>
+> >>>>> (Until the deadline passes, the Wayland compositor can't even know =
+if a previously fullscreen surface will still be fullscreen for the next re=
+fresh cycle)
+> >>>>
+> >>>> Well then let's extend the KMS API instead of hacking together worka=
+rounds in userspace.
+> >>>
+> >>> That's indeed a possible solution for the fullscreen / direct scanout=
+ case.
+> >>>
+> >>> Not for the general compositing case though, since a compositor does =
+not want to composite multiple output frames per display refresh cycle, so =
+it has to make sure the one frame hits the target.
+> >>
+> >> I think solving the fullscreen game case is sufficient enough forward
+> >> progress to be useful.  And the results I'm seeing[1] are sufficiently
+> >> positive to convince me that dma-fence deadline support is the right
+> >> thing to do.
+> =
+
+> I'm not questioning that this approach helps when there's a direct chain =
+of fences from the client to the page flip. I'm pointing out there will not=
+ always be such a chain.
+> =
+
+> =
+
+> >> But maybe the solution to make this also useful for mutter
+> =
+
+> It's not just mutter BTW. I understand gamescope has been doing this for =
+some time already. And there seems to be consensus among developers of Wayl=
+and compositors that this is needed, so I expect at least all the major com=
+positors to do this longer term.
+> =
+
+> =
+
+> >> is to, once we have deadline support, extend it with an ioctl to the
+> >> dma-fence fd so userspace can be the one setting the deadline.
+> =
+
+> I was thinking in a similar direction.
+> =
+
+> > atomic ioctl with TEST_ONLY and SET_DEADLINES? Still gives mutter the
+> > option to bail out with an old frame if it's too late?
+> =
+
+> This is a bit cryptic though, can you elaborate?
+
+So essentially when the mutter compositor guesstimator is fairly confident
+about the next frame's composition (recall you're keeping track of clients
+to estimate their usual latency or something like that), then it does a
+TEST_ONLY commit to check it all works and prep the rendering, but _not_
+yet fire it off.
+
+Instead it waits until all buffers complete, and if some don't, pick the
+previous one. Which I guess in an extreme case would mean you need a
+different window tree configuration and maybe different TEST_ONLY check
+and all that, not sure how you solve that.
+
+Anyway, in that TEST_ONLY commit my idea is that you'd also supply all the
+in-fences you expect to depend upon (maybe we need an additional list of
+in-fences for your rendering job), plus a deadline when you want to have
+them done (so that there's enough time for your render job still). And the
+kernel then calls dma_fence_set_deadline on all of them.
+
+Pondering this more, maybe a separate ioctl is simpler where you just
+supply a list of in-fences and deadlines.
+
+The real reason I want to tie this to atomic is for priviledge checking
+reasons. I don't think normal userspace should have the power to set
+arbitrary deadlines like this - at least on i915 it will also give you a
+slight priority boost and stuff like that, to make sure your rendering for
+the current frame goes in ahead of the next frame's prep work.
+
+So maybe just a new ioctl that does this which is limited to the current
+kms owner (aka drm_master)?
+
+In i915 we also do a mild boost for when userspace waits on a buffer
+(assuming it's blocking the cpu), but that boost has a pretty sharp
+decay/cooldown to prevent abuse and keeping the gpu artificially
+upclocked. That really is just meant to avoid the tailspin when you have a
+ping-pong workload between gpu and cpu and both downclock in turn because
+the other side is too slow and the gpu/cpu aren't really busy enough.
+Until you're crawling at idle clocks getting nothing done.
+
+I think on the windows side they "fix" this by making the clock
+adjustments extremely conservative and slow (except when they detect that
+it's a game/benchmark). Good enough for battery tests, not so great in
+reality.
+-Daniel
+
+> > Also mutter would need to supply the deadline, because we need to fit t=
+he
+> > rendering in still before the actual flip. So gets a bit quirky maybe .=
+..
+> =
+
+> That should be fine. mutter is already keeping track of how long its rend=
+ering takes.
+> =
+
+> =
+
+> -- =
+
+> Earthling Michel D=E4nzer               |               https://redhat.com
+> Libre software enthusiast             |             Mesa and X developer
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
