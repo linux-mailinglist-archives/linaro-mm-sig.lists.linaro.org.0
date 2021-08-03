@@ -2,61 +2,63 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA2CB3DE44D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  3 Aug 2021 04:18:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93A0F3DF6FB
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  3 Aug 2021 23:40:07 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 06BBA66050
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  3 Aug 2021 02:18:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 22A4161624
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  3 Aug 2021 21:40:06 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id EDC6C66008; Tue,  3 Aug 2021 02:18:29 +0000 (UTC)
+	id EF146634D9; Tue,  3 Aug 2021 21:40:03 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AE02560B43;
-	Tue,  3 Aug 2021 02:18:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9F63D611B1;
+	Tue,  3 Aug 2021 21:40:00 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id BF2F460AC6
- for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Aug 2021 02:18:24 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 1C20A6085A
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Aug 2021 21:39:58 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id BCDD060B43; Tue,  3 Aug 2021 02:18:24 +0000 (UTC)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com
- [209.85.167.51])
- by lists.linaro.org (Postfix) with ESMTPS id B580460AC6
- for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Aug 2021 02:18:22 +0000 (UTC)
-Received: by mail-lf1-f51.google.com with SMTP id a26so37095451lfr.11
- for <linaro-mm-sig@lists.linaro.org>; Mon, 02 Aug 2021 19:18:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ id 0B22E611B1; Tue,  3 Aug 2021 21:39:58 +0000 (UTC)
+Received: from mail-yb1-f181.google.com (mail-yb1-f181.google.com
+ [209.85.219.181])
+ by lists.linaro.org (Postfix) with ESMTPS id EFEB96085A
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Aug 2021 21:39:55 +0000 (UTC)
+Received: by mail-yb1-f181.google.com with SMTP id z128so917313ybc.10
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 03 Aug 2021 14:39:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=p0Rg8uoQAdCMqNvWG4KJ4Lml0OYquOl0PzeY+NghgIs=;
- b=rJeSRXesNgqD/ctsEcHci3GJIr+ZkXbWSPIKY0cGUASov47tyDQAO5lBimd0asmIsL
- +4rmPRHpsXvlmc0U/W2TuK9bg1MhTeOs7bo8xF8pbSMAURvWUezdYoi0kluk8bQwRucC
- sVI0o4Nkcozxs0qQcniS007Mw17HutvMJYPWo5XFmdPmurdTI4nsoUb6cEW5QHA4gsJ4
- MY2BCxRTcVYUddEibbqdE6MT3YsNNPvMNUJ4G0z+qJSPoRFIEO4PXKaGHgQ81CJhLojN
- HoAJQ0Sf6F0cfaImhnZg544kzLmUxPDV3XS8Ilm6pjvOYyzbU5onvpQy6uTTI+FiM5Jk
- 1R8g==
+ :cc; bh=eH7F2c4Hn9egywDlY45TqR5QW7h6BJhJpVKajFn/Dvg=;
+ b=frGpZAuU0TNGycNOUwSntnWTwUNXJjKhM/djmFxpOw4RLjxj4ZIMH/kWc6KmsJtmzd
+ 5DZZF1XvLkwEjfV0d1g/+qd7fYu4p3IcXqxRh2+j2cEJmx1zwJZD59Hk+1HpT49HtK7X
+ Uqge3z5MMAj3GqdriP0bGY+4uxvfDwPHI/8AUaTv/dYUqCfItsy4CzgGG4YcVxQ2W+3k
+ 8yFws8bfEWrZyIXSyrNOM13JM5LbYjDmUdpWEgK5q3XHMwmDZUH16Fn3Lcmdkk1kJ+tR
+ 5f+ICl8eIJ74PX6+7FzayWfSiwsOc3t/1lDkBGqzyqADZbXQ5H4FBtmOqjk757mpLOmy
+ DCGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=p0Rg8uoQAdCMqNvWG4KJ4Lml0OYquOl0PzeY+NghgIs=;
- b=je4SEelur7evJIaEr9oSLNcrkta0LFL44u2f2/sMQ80B6Qa+qXNE/BB60H81N/603J
- dnNP6W24MA3AeIVtVQiS9b2+JGogguC9SO9YIDNyvrP2lYSpopV3ePYsol+OXaUSDTSI
- iuxvbPVRCgtjV6sjWMFI1Ip0YpFDzYxD8CFTGUOaYADlK2W8VRyENco2BneH/HjthbiU
- XVq6R2rniGDUWPUPxQt9TeyQAaWkEukoUJehXQ1+C0ZG47uxL1U2xzK4jPyqo7wLQ7RZ
- RueHGq6lqEeC8LvCFuSV9GmdD0Cv0l8rRmdtzmlBDf5TSZVxb/CXYOS0RwTkkUPSkV7Y
- bKdA==
-X-Gm-Message-State: AOAM530YQbM5arvYfe4AFp/qzRc/KtkeBB4ueihPCYgfgaAmAC8XpkNN
- RDEZRFsLxg1beqJAxB9G9wecYuPc+JrTDzpsa/cv0Un2
-X-Google-Smtp-Source: ABdhPJwB8Bh43O7mdPYun1vDdLefZZTbI63nsPtzVedjyUVpk4FUL0NZ+QI6+2qAksUHe2ZBeqUpGQ1yETx3aQ9XVsw=
-X-Received: by 2002:a19:c10a:: with SMTP id r10mr14608548lff.508.1627957101180; 
- Mon, 02 Aug 2021 19:18:21 -0700 (PDT)
+ bh=eH7F2c4Hn9egywDlY45TqR5QW7h6BJhJpVKajFn/Dvg=;
+ b=gu58E2FQijfr/TT5Bc3u74Nb4VTt3W3lEXCgFxv4jpjCHwPDiLLlE8Tj/S8UIBmqaK
+ KvGUltoDApxW2n2rL6oN6nDytaijoD2eLyVjczzpS+Lqwx9QsX5/xCKIB8ljVxjzQ5gI
+ ZfRrhLR6vrjeq1V7pDTXXIRsSroSPiaoO36MUGo6K6wk3o0DgMdn00rsRgtYB8dLDBaf
+ 0SGaKNqSt/lW5VMRwBrj+aONkX86D6knt7Bd5UoYA/9P5nOYKCo50dDApWZBGbleKLDJ
+ BM10Pulq6yf6FzbKj3gzoqxw+P4elpIKFpAoQ9zVkEtqxjlVyNpw3MylyW/NA8g/UOhD
+ gJ1Q==
+X-Gm-Message-State: AOAM533OLMBWCjiYkuQ6EYd1nXXfe2HOhhPQcFheFbc7e/Fj3vwn6Lvz
+ GF/YMiNE4LX0UzBTTFOxzrsqI+TRYZUuNP1TFTrtmQ==
+X-Google-Smtp-Source: ABdhPJynfd6Tp5fx5X/8PoqmW8udIcLQViQbJXvKzToG91Bonke+UV5rO2Ua9gr8hn4ZJodP/4n3mFpQcnCzz5bXHoo=
+X-Received: by 2002:a25:cac7:: with SMTP id
+ a190mr14975276ybg.290.1628026795438; 
+ Tue, 03 Aug 2021 14:39:55 -0700 (PDT)
 MIME-Version: 1.0
 References: <20210722190747.1986614-1-hridya@google.com>
-In-Reply-To: <20210722190747.1986614-1-hridya@google.com>
-From: John Stultz <john.stultz@linaro.org>
-Date: Mon, 2 Aug 2021 19:18:09 -0700
-Message-ID: <CALAqxLVLMt7rbJBQtFBw-ikBAjKrVgfS8=Nu6NFQbp_gq1m22Q@mail.gmail.com>
-To: Hridya Valsaraju <hridya@google.com>
+ <CALAqxLVLMt7rbJBQtFBw-ikBAjKrVgfS8=Nu6NFQbp_gq1m22Q@mail.gmail.com>
+In-Reply-To: <CALAqxLVLMt7rbJBQtFBw-ikBAjKrVgfS8=Nu6NFQbp_gq1m22Q@mail.gmail.com>
+From: Hridya Valsaraju <hridya@google.com>
+Date: Tue, 3 Aug 2021 14:39:19 -0700
+Message-ID: <CA+wgaPOQmY4H9n302YspKuLk9iq9vBzdWBTu19EUUsiQYTUOzQ@mail.gmail.com>
+To: John Stultz <john.stultz@linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [PATCH] dma-buf: heaps: Set allocation limit
  for system heap
@@ -88,23 +90,31 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Thu, Jul 22, 2021 at 12:07 PM Hridya Valsaraju <hridya@google.com> wrote:
-> This patch limits the size of total memory that can be requested in a
-> single allocation from the system heap. This would prevent a
-> buggy/malicious client from depleting system memory by requesting for an
-> extremely large allocation which might destabilize the system.
+On Mon, Aug 2, 2021 at 7:18 PM John Stultz <john.stultz@linaro.org> wrote:
 >
-> The limit is set to half the size of the device's total RAM which is the
-> same as what was set by the deprecated ION system heap.
+> On Thu, Jul 22, 2021 at 12:07 PM Hridya Valsaraju <hridya@google.com> wrote:
+> > This patch limits the size of total memory that can be requested in a
+> > single allocation from the system heap. This would prevent a
+> > buggy/malicious client from depleting system memory by requesting for an
+> > extremely large allocation which might destabilize the system.
+> >
+> > The limit is set to half the size of the device's total RAM which is the
+> > same as what was set by the deprecated ION system heap.
+> >
+> > Signed-off-by: Hridya Valsaraju <hridya@google.com>
 >
-> Signed-off-by: Hridya Valsaraju <hridya@google.com>
+> Seems sane to me, unless folks have better suggestions for allocation limits.
+>
+> Reviewed-by: John Stultz <john.stultz@linaro.org>
 
-Seems sane to me, unless folks have better suggestions for allocation limits.
+Thank you for taking a look John!
 
-Reviewed-by: John Stultz <john.stultz@linaro.org>
+Regards,
+Hridya
 
-thanks
--john
+>
+> thanks
+> -john
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
