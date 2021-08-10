@@ -2,53 +2,66 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id D66493E493D
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 Aug 2021 17:51:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6554B3E550A
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Aug 2021 10:25:06 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C977366009
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 Aug 2021 15:51:18 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B265361456
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Aug 2021 08:25:04 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 436BE66018; Mon,  9 Aug 2021 15:51:17 +0000 (UTC)
+	id 3BFEF6354D; Tue, 10 Aug 2021 08:25:03 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7D5B16141A;
-	Mon,  9 Aug 2021 15:51:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EF7AD612E7;
+	Tue, 10 Aug 2021 08:24:59 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 8959C605DA
- for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Aug 2021 15:51:12 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id B9A20609A7
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Aug 2021 08:24:57 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 7CC8D6141A; Mon,  9 Aug 2021 15:51:12 +0000 (UTC)
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
- by lists.linaro.org (Postfix) with ESMTPS id 75007605DA
- for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Aug 2021 15:51:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
- In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
- :Reply-To:Content-ID:Content-Description;
- bh=DZUnWySGeUahJi5WC6HpQoyS/LjeB2Nf/wPJVD05awU=; b=dS4JB/VHV7AOUvXo3n3AmTbWMi
- frNw7ESZbqMf2lzFA8r2/8zeHQjcHq7dOK4PXu00WROKva7SmQquk9UigeKw+aCsOTHxf1McqRjxm
- yDD+6zvdnOQdKBM6Zldm4AwqaHciriLZcglV13+AMc+XCCNevcfuZnFQmGa9Cae/M6tOaJ/q6Uz2c
- +kLwvLWjNu++fZHYw36p6/ww8dIieI6VsIBApNx0plDXSdamfnA2fgg2N7yk/iVYGnJDl025aWqNu
- 7CThxcg/CJsa4ttAZm6yStWe5EswTWKOOgKji1F8mQClqRjBUBdY/140kbamC7ruUQ0r5Nju2FYyt
- 9D2LGkDg==;
-Received: from [2601:1c0:6280:3f0::aa0b]
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1mD7Wj-00B8zg-F5; Mon, 09 Aug 2021 15:49:43 +0000
-To: Gal Pressman <galpress@amazon.com>, Sumit Semwal
- <sumit.semwal@linaro.org>, christian.koenig@amd.com
-References: <20210809122247.15869-1-galpress@amazon.com>
-From: Randy Dunlap <rdunlap@infradead.org>
-Message-ID: <b8c08a61-63bc-aa34-6045-ccfdc3983e6a@infradead.org>
-Date: Mon, 9 Aug 2021 08:49:16 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.12.0
+ id AF30B612E7; Tue, 10 Aug 2021 08:24:57 +0000 (UTC)
+Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com
+ [209.85.167.51])
+ by lists.linaro.org (Postfix) with ESMTPS id A7061609A7
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Aug 2021 08:24:55 +0000 (UTC)
+Received: by mail-lf1-f51.google.com with SMTP id b6so23510843lff.10
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Aug 2021 01:24:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=4UPAxW5MIbAqUBt0Q38y09xWmSlUCzjYCvtZtpiSSvw=;
+ b=xnsCLqDlaE1iroWceRCX/zrxILZnYE3ziQNSQAa2yeEz7vKTCXQ5wHeB86ezjmdRce
+ dyXzF66M7vo8TJ1T0GNOSqS3cKjL1iczioeKEBTYM3BTSgaKtBd+A2b09W1SWr+8A/bo
+ xkZBNqbicSw2ekKk8dWjPsqH4gMxqvawxiRFcSTz4P9xZTqwGSRuP7Sen2TkIt/7LKOG
+ qx7DAgYer2IqWBWSotil94om9sJ9dRCdlLK/kQWvHRzyIeM2PvL5T5qZNzSOxeBAwPMW
+ aEmMuPbBuKQDvDwRNOPsdpKUCI+nBP+rH3mehNvsPXNvyZSI1cclbyE4NdwjS5ZfWRwd
+ jCEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=4UPAxW5MIbAqUBt0Q38y09xWmSlUCzjYCvtZtpiSSvw=;
+ b=WiX/ed2aC1o0AhJY2Hgc77S8jaO6K0HO0yAGjldjBe6RHQoV2d+TgPRbzaLJfeUKNv
+ 4ku/z74tnKLu4RclqBTN3so2Oc9n8mKFd24u/7GrNpHds/zSzxzvaaDgFjbaoR1hQC54
+ IwLGcc41zDnf+z0HzegUtHdlYtWsAiT1DCBMbZuVBNIpOAui/5QBClGhlbAUFj/QQF51
+ Udr35QLp2Oyb/AJSQkPUOPikuxBmReLRRWed1z6livrzIzckhUssOj4hdYIt8Xjc3Rw9
+ RewryiAk5BG1ZaQRm0c2OeSK4EWs3QWQ8DfDVN5Bd/b/tMDW7t9hT+Yqigaq7cei1ZPU
+ EVvg==
+X-Gm-Message-State: AOAM530H0NNK456NTtsZVn25fG+ehJDQ0PmpHp3ilTa9WVHHioQ2NH33
+ dmnYfeKakxNb+cCi/lCD2CguTRgKOp4+RObhm72jSTD3
+X-Google-Smtp-Source: ABdhPJxcBXYgZKNkiAp2ugSNzy7vnaoigI/Mj+RRoR287jRmW4SJZCQNaA/zmjIz3YAfl38ZMm59l6Ifd69f0nbwFXY=
+X-Received: by 2002:ac2:50c6:: with SMTP id h6mr3256787lfm.343.1628583892636; 
+ Tue, 10 Aug 2021 01:24:52 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20210809122247.15869-1-galpress@amazon.com>
-Content-Language: en-US
+References: <20210722190747.1986614-1-hridya@google.com>
+ <CALAqxLVLMt7rbJBQtFBw-ikBAjKrVgfS8=Nu6NFQbp_gq1m22Q@mail.gmail.com>
+ <CA+wgaPOQmY4H9n302YspKuLk9iq9vBzdWBTu19EUUsiQYTUOzQ@mail.gmail.com>
+In-Reply-To: <CA+wgaPOQmY4H9n302YspKuLk9iq9vBzdWBTu19EUUsiQYTUOzQ@mail.gmail.com>
+From: Sumit Semwal <sumit.semwal@linaro.org>
+Date: Tue, 10 Aug 2021 13:54:41 +0530
+Message-ID: <CAO_48GFS5SsdNCwOp6Jb+nmZJ+SdNkQkq628VhxXRGSLVeP0Yg@mail.gmail.com>
+To: Hridya Valsaraju <hridya@google.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH] dma-buf: Fix a few typos in dma-buf
- documentation
+Subject: Re: [Linaro-mm-sig] [PATCH] dma-buf: heaps: Set allocation limit
+ for system heap
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -61,88 +74,144 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ lkml <linux-kernel@vger.kernel.org>, Liam Mark <lmark@codeaurora.org>,
+ Brian Starkey <Brian.Starkey@arm.com>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ John Stultz <john.stultz@linaro.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Benjamin Gaignard <benjamin.gaignard@linaro.org>,
+ Laura Abbott <labbott@redhat.com>,
+ Android Kernel Team <kernel-team@android.com>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ linux-media <linux-media@vger.kernel.org>
+Content-Type: multipart/mixed; boundary="===============2420063177185075264=="
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On 8/9/21 5:22 AM, Gal Pressman wrote:
-> Fix a few typos in the documentation:
-> - Remove an extraneous 'or'
-> - 'unpins' -> 'unpin'
-> - 'braket' -> 'bracket'
-> - 'mappinsg' -> 'mappings'
-> - 'fullfills' -> 'fulfills'
-> 
-> Signed-off-by: Gal Pressman <galpress@amazon.com>
+--===============2420063177185075264==
+Content-Type: multipart/alternative; boundary="00000000000068671c05c9303ce5"
 
-Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
+--00000000000068671c05c9303ce5
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Thanks.
+Hi Hridya,
 
-> ---
->   include/linux/dma-buf.h | 10 +++++-----
->   1 file changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
-> index efdc56b9d95f..772403352767 100644
-> --- a/include/linux/dma-buf.h
-> +++ b/include/linux/dma-buf.h
-> @@ -54,7 +54,7 @@ struct dma_buf_ops {
->   	 * device), and otherwise need to fail the attach operation.
->   	 *
->   	 * The exporter should also in general check whether the current
-> -	 * allocation fullfills the DMA constraints of the new device. If this
-> +	 * allocation fulfills the DMA constraints of the new device. If this
->   	 * is not the case, and the allocation cannot be moved, it should also
->   	 * fail the attach operation.
->   	 *
-> @@ -146,7 +146,7 @@ struct dma_buf_ops {
->   	 *
->   	 * Returns:
->   	 *
-> -	 * A &sg_table scatter list of or the backing storage of the DMA buffer,
-> +	 * A &sg_table scatter list of the backing storage of the DMA buffer,
->   	 * already mapped into the device address space of the &device attached
->   	 * with the provided &dma_buf_attachment. The addresses and lengths in
->   	 * the scatter list are PAGE_SIZE aligned.
-> @@ -168,7 +168,7 @@ struct dma_buf_ops {
->   	 *
->   	 * This is called by dma_buf_unmap_attachment() and should unmap and
->   	 * release the &sg_table allocated in @map_dma_buf, and it is mandatory.
-> -	 * For static dma_buf handling this might also unpins the backing
-> +	 * For static dma_buf handling this might also unpin the backing
->   	 * storage if this is the last mapping of the DMA buffer.
->   	 */
->   	void (*unmap_dma_buf)(struct dma_buf_attachment *,
-> @@ -237,7 +237,7 @@ struct dma_buf_ops {
->   	 * This callback is used by the dma_buf_mmap() function
->   	 *
->   	 * Note that the mapping needs to be incoherent, userspace is expected
-> -	 * to braket CPU access using the DMA_BUF_IOCTL_SYNC interface.
-> +	 * to bracket CPU access using the DMA_BUF_IOCTL_SYNC interface.
->   	 *
->   	 * Because dma-buf buffers have invariant size over their lifetime, the
->   	 * dma-buf core checks whether a vma is too large and rejects such
-> @@ -464,7 +464,7 @@ static inline bool dma_buf_is_dynamic(struct dma_buf *dmabuf)
->   
->   /**
->    * dma_buf_attachment_is_dynamic - check if a DMA-buf attachment uses dynamic
-> - * mappinsg
-> + * mappings
->    * @attach: the DMA-buf attachment to check
->    *
->    * Returns true if a DMA-buf importer wants to call the map/unmap functions with
-> 
+Apologies for the delay in responding.
+
+On Wed, 4 Aug 2021 at 03:09, Hridya Valsaraju <hridya@google.com> wrote:
+
+> On Mon, Aug 2, 2021 at 7:18 PM John Stultz <john.stultz@linaro.org> wrote=
+:
+> >
+> > On Thu, Jul 22, 2021 at 12:07 PM Hridya Valsaraju <hridya@google.com>
+> wrote:
+> > > This patch limits the size of total memory that can be requested in a
+> > > single allocation from the system heap. This would prevent a
+> > > buggy/malicious client from depleting system memory by requesting for
+> an
+> > > extremely large allocation which might destabilize the system.
+> > >
+> > > The limit is set to half the size of the device's total RAM which is
+> the
+> > > same as what was set by the deprecated ION system heap.
+> > >
+> > > Signed-off-by: Hridya Valsaraju <hridya@google.com>
+> >
+> > Seems sane to me, unless folks have better suggestions for allocation
+> limits.
+> >
+> > Reviewed-by: John Stultz <john.stultz@linaro.org>
+>
+> Thank you for taking a look John!
+>
+Looks good to me; I will apply it to drm-misc today.
 
 
--- 
-~Randy
+>
+> Regards,
+> Hridya
+>
+> >
+> > thanks
+> > -john
+>
+Best,
+Sumit.
+
+--=20
+Thanks and regards,
+
+Sumit Semwal (he / him)
+Tech Lead - LCG, Vertical Technologies
+Linaro.org =E2=94=82 Open source software for ARM SoCs
+
+--00000000000068671c05c9303ce5
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div dir=3D"ltr">Hi Hridya,<div><br></div><div>Apologies f=
+or the delay in responding.</div></div><br><div class=3D"gmail_quote"><div =
+dir=3D"ltr" class=3D"gmail_attr">On Wed, 4 Aug 2021 at 03:09, Hridya Valsar=
+aju &lt;<a href=3D"mailto:hridya@google.com">hridya@google.com</a>&gt; wrot=
+e:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0=
+.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">On Mon, Aug 2=
+, 2021 at 7:18 PM John Stultz &lt;<a href=3D"mailto:john.stultz@linaro.org"=
+ target=3D"_blank">john.stultz@linaro.org</a>&gt; wrote:<br>
+&gt;<br>
+&gt; On Thu, Jul 22, 2021 at 12:07 PM Hridya Valsaraju &lt;<a href=3D"mailt=
+o:hridya@google.com" target=3D"_blank">hridya@google.com</a>&gt; wrote:<br>
+&gt; &gt; This patch limits the size of total memory that can be requested =
+in a<br>
+&gt; &gt; single allocation from the system heap. This would prevent a<br>
+&gt; &gt; buggy/malicious client from depleting system memory by requesting=
+ for an<br>
+&gt; &gt; extremely large allocation which might destabilize the system.<br=
+>
+&gt; &gt;<br>
+&gt; &gt; The limit is set to half the size of the device&#39;s total RAM w=
+hich is the<br>
+&gt; &gt; same as what was set by the deprecated ION system heap.<br>
+&gt; &gt;<br>
+&gt; &gt; Signed-off-by: Hridya Valsaraju &lt;<a href=3D"mailto:hridya@goog=
+le.com" target=3D"_blank">hridya@google.com</a>&gt;<br>
+&gt;<br>
+&gt; Seems sane to me, unless folks have better suggestions for allocation =
+limits.<br>
+&gt;<br>
+&gt; Reviewed-by: John Stultz &lt;<a href=3D"mailto:john.stultz@linaro.org"=
+ target=3D"_blank">john.stultz@linaro.org</a>&gt;<br>
+<br>
+Thank you for taking a look John!<br></blockquote><div>Looks good to me; I =
+will apply it to drm-misc today.</div><div>=C2=A0</div><blockquote class=3D=
+"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(2=
+04,204,204);padding-left:1ex">
+<br>
+Regards,<br>
+Hridya<br>
+<br>
+&gt;<br>
+&gt; thanks<br>
+&gt; -john<br>
+</blockquote></div>Best,<div>Sumit.<br><div><div><br></div>-- <br><div dir=
+=3D"ltr" class=3D"gmail_signature"><div dir=3D"ltr">Thanks and regards,<br>=
+<br>Sumit Semwal (he / him)<br>Tech Lead - LCG, Vertical Technologies<br>Li=
+naro.org =E2=94=82 Open source software for ARM SoCs</div></div></div></div=
+></div>
+
+--00000000000068671c05c9303ce5--
+
+--===============2420063177185075264==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
 https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+
+--===============2420063177185075264==--
