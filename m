@@ -2,70 +2,71 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EA493EAAF5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 12 Aug 2021 21:28:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 731733EAAFB
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 12 Aug 2021 21:28:48 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D38EF61A3D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 12 Aug 2021 19:28:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 62FA762EA6
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 12 Aug 2021 19:28:47 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 5995561A47; Thu, 12 Aug 2021 19:28:21 +0000 (UTC)
+	id 40BDB62175; Thu, 12 Aug 2021 19:28:46 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 35FF461234;
-	Thu, 12 Aug 2021 19:28:18 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 85E6D61234;
+	Thu, 12 Aug 2021 19:28:43 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 6BF3360B19
- for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 19:28:16 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 4CAD060B19
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 19:28:42 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 5F33361234; Thu, 12 Aug 2021 19:28:16 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
- by lists.linaro.org (Postfix) with ESMTPS id 556F760E41
- for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 19:28:14 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id q11so9807163wrr.9
- for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 12:28:14 -0700 (PDT)
+ id 4A6F061234; Thu, 12 Aug 2021 19:28:42 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
+ [209.85.128.52])
+ by lists.linaro.org (Postfix) with ESMTPS id 32DB660B19
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 19:28:40 +0000 (UTC)
+Received: by mail-wm1-f52.google.com with SMTP id
+ o1-20020a05600c5101b02902e676fe1f04so6398212wms.1
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 12:28:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:content-transfer-encoding:in-reply-to;
- bh=zQc5Xq0ndIRpgKH8ghD8CcpcMwMivDHL9fVBcQMh8YI=;
- b=Txj5PMLCQzEaiL5VP9XFbfZEfGFW8a92aEJuMiuEBU16ocYEhp1opugyO9eDpFciIE
- ZlL/jggYQqHWMqdaHm2q06oI1LJmx56SytQogrQlnD1sdIh+OEwstRRmRWV4O4gjPQLA
- Hk65sdIdfJPtAqTBVj7k2YpFIoJ0TCkwkquqs=
+ bh=lnDjGVrTJig6oMk/Uu8cElo+iuZYLzFE03srUAys6aw=;
+ b=UKDJAffVGWXXsMEAFlk47uXz3LRy4Dxiv+pk+Ng4Ys7LoHAUsrjK6LxCLmsQl9oLre
+ aQx2m/AkDziG5GtPPG9N9N2Pd2F9bktI+FqwcCo1RvYX0ZvVdo4mcCxgNGvP+B/t3o9y
+ iD8PpxqsqHmE4DM/Ck1LKL8Akhhdh/u3dX4f0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:content-transfer-encoding
  :in-reply-to;
- bh=zQc5Xq0ndIRpgKH8ghD8CcpcMwMivDHL9fVBcQMh8YI=;
- b=uFlcb3+nbdY7PCopB4orxdFAPkxbYWXWkO4NW1JQNxCpoq+Jw1OyPwVZ2RKnAa3uri
- pMLPFqHnPyl4FvD9CHfM++I6tiyTUsQiXTLRGmrWzgr4R06Au/zIhLmYKF6KXJH+pAUV
- 7/ybZPwPDg/ZvYKb/d8XaiZ9K8xyYrrBZjG8YgrIS3Q8MLgcssRs3nd01aI09Pk8/jAT
- XBGwCmlDb7+5qBHGXfywmDhnUe/Lq38N1ppXQNegz5XrllSQN1XtUqaY6yQ4sr+6Yr2F
- EQaDCGBF914XlQzOFVTEJhf3qfhokrCf4DKCVl13nr4gBUWb26YwkuvH3/BFi0k0aebw
- OtyA==
-X-Gm-Message-State: AOAM533efQ3ZZycMCRVHbGhZ6nGeklKrbVewfJ3MYgKxCzxUvuK1LkQe
- v4mIK80xLGZVf8J3emFSgpsUSGf4w0pOzg==
-X-Google-Smtp-Source: ABdhPJxbk6lUfPYBtitJTGKWp+uNV4BEkm19ABgyYmwl3SPKqhTtE8vs0geO51IqJ6EU7krY5z5aXQ==
-X-Received: by 2002:adf:ef85:: with SMTP id d5mr5725537wro.372.1628796493353; 
- Thu, 12 Aug 2021 12:28:13 -0700 (PDT)
+ bh=lnDjGVrTJig6oMk/Uu8cElo+iuZYLzFE03srUAys6aw=;
+ b=KvSoXhehwhzPfUmOtrC5YA1ZrD56nXV4EbyRQP3B5CYU14ETLkc3CBBjnDwbr7W+qS
+ g3tQLO+hCbowBInqFYOw1IeXBHeGIi+pTsZ0gvN9GXnEyUZ/8WucoAxyC5Mv2Ior4TeV
+ iqOIeSlH6hb9gShq/73+wcVduX/mRx1h0W3hBO3SiV30hwicnarup4/9UPaFUdlBLo0Q
+ BuoZ6GrrdK/20OaFd57FoHP+qgHwfJtj7zr+4pCBfHWFDlFs+VZ1nSgtYmUG6pskErCo
+ U4auCCTD1PA42whG6QbQEsBRNuaoK9Y0gE3g2P3JeISz4ckCSDvV7ScMXu5Y5o8Oigvd
+ xjBQ==
+X-Gm-Message-State: AOAM530mqdf640e8CAodnsANK5q7OiCRgpvM/aU31QdL+s0EFyMLsdE3
+ zQrHs774ARfIAuuBaapOVftfzg==
+X-Google-Smtp-Source: ABdhPJxvzmf9exzkACVRR5FiHfZ2LA+GfRl4q4/tMc16tesaNdS9nvLLH4cbG4juaeG1F4BPxdoarA==
+X-Received: by 2002:a1c:6a07:: with SMTP id f7mr96980wmc.15.1628796519096;
+ Thu, 12 Aug 2021 12:28:39 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id y3sm3822669wma.32.2021.08.12.12.28.12
+ by smtp.gmail.com with ESMTPSA id e2sm1652034wrq.56.2021.08.12.12.28.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Aug 2021 12:28:12 -0700 (PDT)
-Date: Thu, 12 Aug 2021 21:28:11 +0200
+ Thu, 12 Aug 2021 12:28:38 -0700 (PDT)
+Date: Thu, 12 Aug 2021 21:28:36 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
 To: DRI Development <dri-devel@lists.freedesktop.org>
-Message-ID: <YRV2ShnIbOyaHG8X@phenom.ffwll.local>
+Message-ID: <YRV2ZOT546+HYpJP@phenom.ffwll.local>
 References: <20210805104705.862416-1-daniel.vetter@ffwll.ch>
- <20210805104705.862416-9-daniel.vetter@ffwll.ch>
+ <20210805104705.862416-12-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210805104705.862416-9-daniel.vetter@ffwll.ch>
+In-Reply-To: <20210805104705.862416-12-daniel.vetter@ffwll.ch>
 X-Operating-System: Linux phenom 5.10.0-7-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v5 08/20] drm/lima: use scheduler
- dependency tracking
+Subject: Re: [Linaro-mm-sig] [PATCH v5 11/20] drm/etnaviv: Use scheduler
+ dependency handling
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,10 +79,12 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: lima@lists.freedesktop.org,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ etnaviv@lists.freedesktop.org,
  Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- linaro-mm-sig@lists.linaro.org, Qiang Yu <yuq825@gmail.com>,
+ linaro-mm-sig@lists.linaro.org,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Russell King <linux+etnaviv@armlinux.org.uk>,
  Daniel Vetter <daniel.vetter@intel.com>, linux-media@vger.kernel.org
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -89,151 +92,352 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Thu, Aug 05, 2021 at 12:46:53PM +0200, Daniel Vetter wrote:
-> Nothing special going on here.
+On Thu, Aug 05, 2021 at 12:46:56PM +0200, Daniel Vetter wrote:
+> We need to pull the drm_sched_job_init much earlier, but that's very
+> minor surgery.
 > =
 
-> Aside reviewing the code, it seems like drm_sched_job_arm() should be
-> moved into lima_sched_context_queue_task and put under some mutex
-> together with drm_sched_push_job(). See the kerneldoc for
-> drm_sched_push_job().
+> v2: Actually fix up cleanup paths by calling drm_sched_job_init, which
+> I wanted to to in the previous round (and did, for all other drivers).
+> Spotted by Lucas.
 > =
 
-> v2: Rebase over renamed functions to add dependencies.
+> v3: Rebase over renamed functions to add dependencies.
 > =
 
 > Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-> Cc: Qiang Yu <yuq825@gmail.com>
+> Cc: Lucas Stach <l.stach@pengutronix.de>
+> Cc: Russell King <linux+etnaviv@armlinux.org.uk>
+> Cc: Christian Gmeiner <christian.gmeiner@gmail.com>
 > Cc: Sumit Semwal <sumit.semwal@linaro.org>
 > Cc: "Christian K=F6nig" <christian.koenig@amd.com>
-> Cc: lima@lists.freedesktop.org
+> Cc: etnaviv@lists.freedesktop.org
 > Cc: linux-media@vger.kernel.org
 > Cc: linaro-mm-sig@lists.linaro.org
 
-Ping for an ack here please. Testing would be even better ofc.
+Ping for an ack&testing please.
 -Daniel
 
 > ---
->  drivers/gpu/drm/lima/lima_gem.c   |  6 ++++--
->  drivers/gpu/drm/lima/lima_sched.c | 21 ---------------------
->  drivers/gpu/drm/lima/lima_sched.h |  3 ---
->  3 files changed, 4 insertions(+), 26 deletions(-)
+>  drivers/gpu/drm/etnaviv/etnaviv_gem.h        |  5 +-
+>  drivers/gpu/drm/etnaviv/etnaviv_gem_submit.c | 60 ++++++++++---------
+>  drivers/gpu/drm/etnaviv/etnaviv_sched.c      | 63 +-------------------
+>  drivers/gpu/drm/etnaviv/etnaviv_sched.h      |  3 +-
+>  4 files changed, 37 insertions(+), 94 deletions(-)
 > =
 
-> diff --git a/drivers/gpu/drm/lima/lima_gem.c b/drivers/gpu/drm/lima/lima_=
-gem.c
-> index c528f40981bb..640acc060467 100644
-> --- a/drivers/gpu/drm/lima/lima_gem.c
-> +++ b/drivers/gpu/drm/lima/lima_gem.c
-> @@ -267,7 +267,9 @@ static int lima_gem_sync_bo(struct lima_sched_task *t=
-ask, struct lima_bo *bo,
->  	if (explicit)
->  		return 0;
+> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.h b/drivers/gpu/drm/etna=
+viv/etnaviv_gem.h
+> index 98e60df882b6..63688e6e4580 100644
+> --- a/drivers/gpu/drm/etnaviv/etnaviv_gem.h
+> +++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.h
+> @@ -80,9 +80,6 @@ struct etnaviv_gem_submit_bo {
+>  	u64 va;
+>  	struct etnaviv_gem_object *obj;
+>  	struct etnaviv_vram_mapping *mapping;
+> -	struct dma_fence *excl;
+> -	unsigned int nr_shared;
+> -	struct dma_fence **shared;
+>  };
 >  =
 
-> -	return drm_gem_fence_array_add_implicit(&task->deps, &bo->base.base, wr=
-ite);
-> +	return drm_sched_job_add_implicit_dependencies(&task->base,
-> +						       &bo->base.base,
-> +						       write);
->  }
+>  /* Created per submit-ioctl, to track bo's and cmdstream bufs, etc,
+> @@ -95,7 +92,7 @@ struct etnaviv_gem_submit {
+>  	struct etnaviv_file_private *ctx;
+>  	struct etnaviv_gpu *gpu;
+>  	struct etnaviv_iommu_context *mmu_context, *prev_mmu_context;
+> -	struct dma_fence *out_fence, *in_fence;
+> +	struct dma_fence *out_fence;
+>  	int out_fence_id;
+>  	struct list_head node; /* GPU active submit list */
+>  	struct etnaviv_cmdbuf cmdbuf;
+> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem_submit.c b/drivers/gpu/d=
+rm/etnaviv/etnaviv_gem_submit.c
+> index 4dd7d9d541c0..e3d43678eb09 100644
+> --- a/drivers/gpu/drm/etnaviv/etnaviv_gem_submit.c
+> +++ b/drivers/gpu/drm/etnaviv/etnaviv_gem_submit.c
+> @@ -188,16 +188,11 @@ static int submit_fence_sync(struct etnaviv_gem_sub=
+mit *submit)
+>  		if (submit->flags & ETNA_SUBMIT_NO_IMPLICIT)
+>  			continue;
 >  =
 
->  static int lima_gem_add_deps(struct drm_file *file, struct lima_submit *=
-submit)
-> @@ -285,7 +287,7 @@ static int lima_gem_add_deps(struct drm_file *file, s=
-truct lima_submit *submit)
->  		if (err)
->  			return err;
->  =
-
-> -		err =3D drm_gem_fence_array_add(&submit->task->deps, fence);
-> +		err =3D drm_sched_job_add_dependency(&submit->task->base, fence);
->  		if (err) {
->  			dma_fence_put(fence);
->  			return err;
-> diff --git a/drivers/gpu/drm/lima/lima_sched.c b/drivers/gpu/drm/lima/lim=
-a_sched.c
-> index e968b5a8f0b0..99d5f6f1a882 100644
-> --- a/drivers/gpu/drm/lima/lima_sched.c
-> +++ b/drivers/gpu/drm/lima/lima_sched.c
-> @@ -134,24 +134,15 @@ int lima_sched_task_init(struct lima_sched_task *ta=
-sk,
->  	task->num_bos =3D num_bos;
->  	task->vm =3D lima_vm_get(vm);
->  =
-
-> -	xa_init_flags(&task->deps, XA_FLAGS_ALLOC);
+> -		if (bo->flags & ETNA_SUBMIT_BO_WRITE) {
+> -			ret =3D dma_resv_get_fences(robj, &bo->excl,
+> -						  &bo->nr_shared,
+> -						  &bo->shared);
+> -			if (ret)
+> -				return ret;
+> -		} else {
+> -			bo->excl =3D dma_resv_get_excl_unlocked(robj);
+> -		}
 > -
->  	return 0;
->  }
+> +		ret =3D drm_sched_job_add_implicit_dependencies(&submit->sched_job,
+> +							      &bo->obj->base,
+> +							      bo->flags & ETNA_SUBMIT_BO_WRITE);
+> +		if (ret)
+> +			return ret;
+>  	}
 >  =
 
->  void lima_sched_task_fini(struct lima_sched_task *task)
->  {
+>  	return ret;
+> @@ -403,8 +398,6 @@ static void submit_cleanup(struct kref *kref)
+>  =
+
+>  	wake_up_all(&submit->gpu->fence_event);
+>  =
+
+> -	if (submit->in_fence)
+> -		dma_fence_put(submit->in_fence);
+>  	if (submit->out_fence) {
+>  		/* first remove from IDR, so fence can not be found anymore */
+>  		mutex_lock(&submit->gpu->fence_lock);
+> @@ -529,7 +522,7 @@ int etnaviv_ioctl_gem_submit(struct drm_device *dev, =
+void *data,
+>  	ret =3D etnaviv_cmdbuf_init(priv->cmdbuf_suballoc, &submit->cmdbuf,
+>  				  ALIGN(args->stream_size, 8) + 8);
+>  	if (ret)
+> -		goto err_submit_objects;
+> +		goto err_submit_put;
+>  =
+
+>  	submit->ctx =3D file->driver_priv;
+>  	etnaviv_iommu_context_get(submit->ctx->mmu);
+> @@ -537,51 +530,62 @@ int etnaviv_ioctl_gem_submit(struct drm_device *dev=
+, void *data,
+>  	submit->exec_state =3D args->exec_state;
+>  	submit->flags =3D args->flags;
+>  =
+
+> +	ret =3D drm_sched_job_init(&submit->sched_job,
+> +				 &ctx->sched_entity[args->pipe],
+> +				 submit->ctx);
+> +	if (ret)
+> +		goto err_submit_put;
+> +
+>  	ret =3D submit_lookup_objects(submit, file, bos, args->nr_bos);
+>  	if (ret)
+> -		goto err_submit_objects;
+> +		goto err_submit_job;
+>  =
+
+>  	if ((priv->mmu_global->version !=3D ETNAVIV_IOMMU_V2) &&
+>  	    !etnaviv_cmd_validate_one(gpu, stream, args->stream_size / 4,
+>  				      relocs, args->nr_relocs)) {
+>  		ret =3D -EINVAL;
+> -		goto err_submit_objects;
+> +		goto err_submit_job;
+>  	}
+>  =
+
+>  	if (args->flags & ETNA_SUBMIT_FENCE_FD_IN) {
+> -		submit->in_fence =3D sync_file_get_fence(args->fence_fd);
+> -		if (!submit->in_fence) {
+> +		struct dma_fence *in_fence =3D sync_file_get_fence(args->fence_fd);
+> +		if (!in_fence) {
+>  			ret =3D -EINVAL;
+> -			goto err_submit_objects;
+> +			goto err_submit_job;
+>  		}
+> +
+> +		ret =3D drm_sched_job_add_dependency(&submit->sched_job,
+> +						   in_fence);
+> +		if (ret)
+> +			goto err_submit_job;
+>  	}
+>  =
+
+>  	ret =3D submit_pin_objects(submit);
+>  	if (ret)
+> -		goto err_submit_objects;
+> +		goto err_submit_job;
+>  =
+
+>  	ret =3D submit_reloc(submit, stream, args->stream_size / 4,
+>  			   relocs, args->nr_relocs);
+>  	if (ret)
+> -		goto err_submit_objects;
+> +		goto err_submit_job;
+>  =
+
+>  	ret =3D submit_perfmon_validate(submit, args->exec_state, pmrs);
+>  	if (ret)
+> -		goto err_submit_objects;
+> +		goto err_submit_job;
+>  =
+
+>  	memcpy(submit->cmdbuf.vaddr, stream, args->stream_size);
+>  =
+
+>  	ret =3D submit_lock_objects(submit, &ticket);
+>  	if (ret)
+> -		goto err_submit_objects;
+> +		goto err_submit_job;
+>  =
+
+>  	ret =3D submit_fence_sync(submit);
+>  	if (ret)
+> -		goto err_submit_objects;
+> +		goto err_submit_job;
+>  =
+
+> -	ret =3D etnaviv_sched_push_job(&ctx->sched_entity[args->pipe], submit);
+> +	ret =3D etnaviv_sched_push_job(submit);
+>  	if (ret)
+> -		goto err_submit_objects;
+> +		goto err_submit_job;
+>  =
+
+>  	submit_attach_object_fences(submit);
+>  =
+
+> @@ -595,7 +599,7 @@ int etnaviv_ioctl_gem_submit(struct drm_device *dev, =
+void *data,
+>  		sync_file =3D sync_file_create(submit->out_fence);
+>  		if (!sync_file) {
+>  			ret =3D -ENOMEM;
+> -			goto err_submit_objects;
+> +			goto err_submit_job;
+>  		}
+>  		fd_install(out_fence_fd, sync_file->file);
+>  	}
+> @@ -603,7 +607,9 @@ int etnaviv_ioctl_gem_submit(struct drm_device *dev, =
+void *data,
+>  	args->fence_fd =3D out_fence_fd;
+>  	args->fence =3D submit->out_fence_id;
+>  =
+
+> -err_submit_objects:
+> +err_submit_job:
+> +	drm_sched_job_cleanup(&submit->sched_job);
+> +err_submit_put:
+>  	etnaviv_submit_put(submit);
+>  =
+
+>  err_submit_ww_acquire:
+> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_sched.c b/drivers/gpu/drm/et=
+naviv/etnaviv_sched.c
+> index 180bb633d5c5..2bbbd6ccc95e 100644
+> --- a/drivers/gpu/drm/etnaviv/etnaviv_sched.c
+> +++ b/drivers/gpu/drm/etnaviv/etnaviv_sched.c
+> @@ -17,58 +17,6 @@ module_param_named(job_hang_limit, etnaviv_job_hang_li=
+mit, int , 0444);
+>  static int etnaviv_hw_jobs_limit =3D 4;
+>  module_param_named(hw_job_limit, etnaviv_hw_jobs_limit, int , 0444);
+>  =
+
+> -static struct dma_fence *
+> -etnaviv_sched_dependency(struct drm_sched_job *sched_job,
+> -			 struct drm_sched_entity *entity)
+> -{
+> -	struct etnaviv_gem_submit *submit =3D to_etnaviv_submit(sched_job);
 > -	struct dma_fence *fence;
-> -	unsigned long index;
->  	int i;
->  =
-
->  	drm_sched_job_cleanup(&task->base);
->  =
-
-> -	xa_for_each(&task->deps, index, fence) {
+> -	int i;
+> -
+> -	if (unlikely(submit->in_fence)) {
+> -		fence =3D submit->in_fence;
+> -		submit->in_fence =3D NULL;
+> -
+> -		if (!dma_fence_is_signaled(fence))
+> -			return fence;
+> -
 > -		dma_fence_put(fence);
 > -	}
-> -	xa_destroy(&task->deps);
 > -
->  	if (task->bos) {
->  		for (i =3D 0; i < task->num_bos; i++)
->  			drm_gem_object_put(&task->bos[i]->base.base);
-> @@ -186,17 +177,6 @@ struct dma_fence *lima_sched_context_queue_task(stru=
-ct lima_sched_task *task)
->  	return fence;
->  }
->  =
-
-> -static struct dma_fence *lima_sched_dependency(struct drm_sched_job *job,
-> -					       struct drm_sched_entity *entity)
-> -{
-> -	struct lima_sched_task *task =3D to_lima_task(job);
+> -	for (i =3D 0; i < submit->nr_bos; i++) {
+> -		struct etnaviv_gem_submit_bo *bo =3D &submit->bos[i];
+> -		int j;
 > -
-> -	if (!xa_empty(&task->deps))
-> -		return xa_erase(&task->deps, task->last_dep++);
+> -		if (bo->excl) {
+> -			fence =3D bo->excl;
+> -			bo->excl =3D NULL;
+> -
+> -			if (!dma_fence_is_signaled(fence))
+> -				return fence;
+> -
+> -			dma_fence_put(fence);
+> -		}
+> -
+> -		for (j =3D 0; j < bo->nr_shared; j++) {
+> -			if (!bo->shared[j])
+> -				continue;
+> -
+> -			fence =3D bo->shared[j];
+> -			bo->shared[j] =3D NULL;
+> -
+> -			if (!dma_fence_is_signaled(fence))
+> -				return fence;
+> -
+> -			dma_fence_put(fence);
+> -		}
+> -		kfree(bo->shared);
+> -		bo->nr_shared =3D 0;
+> -		bo->shared =3D NULL;
+> -	}
 > -
 > -	return NULL;
 > -}
 > -
->  static int lima_pm_busy(struct lima_device *ldev)
+>  static struct dma_fence *etnaviv_sched_run_job(struct drm_sched_job *sch=
+ed_job)
 >  {
->  	int ret;
-> @@ -472,7 +452,6 @@ static void lima_sched_free_job(struct drm_sched_job =
-*job)
+>  	struct etnaviv_gem_submit *submit =3D to_etnaviv_submit(sched_job);
+> @@ -140,29 +88,22 @@ static void etnaviv_sched_free_job(struct drm_sched_=
+job *sched_job)
 >  }
 >  =
 
->  static const struct drm_sched_backend_ops lima_sched_ops =3D {
-> -	.dependency =3D lima_sched_dependency,
->  	.run_job =3D lima_sched_run_job,
->  	.timedout_job =3D lima_sched_timedout_job,
->  	.free_job =3D lima_sched_free_job,
-> diff --git a/drivers/gpu/drm/lima/lima_sched.h b/drivers/gpu/drm/lima/lim=
-a_sched.h
-> index ac70006b0e26..6a11764d87b3 100644
-> --- a/drivers/gpu/drm/lima/lima_sched.h
-> +++ b/drivers/gpu/drm/lima/lima_sched.h
-> @@ -23,9 +23,6 @@ struct lima_sched_task {
->  	struct lima_vm *vm;
->  	void *frame;
+>  static const struct drm_sched_backend_ops etnaviv_sched_ops =3D {
+> -	.dependency =3D etnaviv_sched_dependency,
+>  	.run_job =3D etnaviv_sched_run_job,
+>  	.timedout_job =3D etnaviv_sched_timedout_job,
+>  	.free_job =3D etnaviv_sched_free_job,
+>  };
 >  =
 
-> -	struct xarray deps;
-> -	unsigned long last_dep;
+> -int etnaviv_sched_push_job(struct drm_sched_entity *sched_entity,
+> -			   struct etnaviv_gem_submit *submit)
+> +int etnaviv_sched_push_job(struct etnaviv_gem_submit *submit)
+>  {
+>  	int ret =3D 0;
+>  =
+
+>  	/*
+>  	 * Hold the fence lock across the whole operation to avoid jobs being
+>  	 * pushed out of order with regard to their sched fence seqnos as
+> -	 * allocated in drm_sched_job_init.
+> +	 * allocated in drm_sched_job_arm.
+>  	 */
+>  	mutex_lock(&submit->gpu->fence_lock);
+>  =
+
+> -	ret =3D drm_sched_job_init(&submit->sched_job, sched_entity,
+> -				 submit->ctx);
+> -	if (ret)
+> -		goto out_unlock;
 > -
->  	struct lima_bo **bos;
->  	int num_bos;
+>  	drm_sched_job_arm(&submit->sched_job);
 >  =
 
+>  	submit->out_fence =3D dma_fence_get(&submit->sched_job.s_fence->finishe=
+d);
+> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_sched.h b/drivers/gpu/drm/et=
+naviv/etnaviv_sched.h
+> index c0a6796e22c9..baebfa069afc 100644
+> --- a/drivers/gpu/drm/etnaviv/etnaviv_sched.h
+> +++ b/drivers/gpu/drm/etnaviv/etnaviv_sched.h
+> @@ -18,7 +18,6 @@ struct etnaviv_gem_submit *to_etnaviv_submit(struct drm=
+_sched_job *sched_job)
+>  =
+
+>  int etnaviv_sched_init(struct etnaviv_gpu *gpu);
+>  void etnaviv_sched_fini(struct etnaviv_gpu *gpu);
+> -int etnaviv_sched_push_job(struct drm_sched_entity *sched_entity,
+> -			   struct etnaviv_gem_submit *submit);
+> +int etnaviv_sched_push_job(struct etnaviv_gem_submit *submit);
+>  =
+
+>  #endif /* __ETNAVIV_SCHED_H__ */
 > -- =
 
 > 2.32.0
