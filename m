@@ -2,65 +2,70 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 832253EA548
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 12 Aug 2021 15:14:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EA493EAAF5
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 12 Aug 2021 21:28:23 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 45306623DC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 12 Aug 2021 13:14:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D38EF61A3D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 12 Aug 2021 19:28:21 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 2022F61A47; Thu, 12 Aug 2021 13:14:28 +0000 (UTC)
+	id 5995561A47; Thu, 12 Aug 2021 19:28:21 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 91D0761100;
-	Thu, 12 Aug 2021 13:14:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 35FF461234;
+	Thu, 12 Aug 2021 19:28:18 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 4A7AB60D70
- for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 13:14:22 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 6BF3360B19
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 19:28:16 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 3EB6F61100; Thu, 12 Aug 2021 13:14:22 +0000 (UTC)
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
- [209.85.128.48])
- by lists.linaro.org (Postfix) with ESMTPS id 34B2C60D70
- for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 13:14:20 +0000 (UTC)
-Received: by mail-wm1-f48.google.com with SMTP id
- k5-20020a05600c1c85b02902e699a4d20cso4547797wms.2
- for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 06:14:20 -0700 (PDT)
+ id 5F33361234; Thu, 12 Aug 2021 19:28:16 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+ [209.85.221.51])
+ by lists.linaro.org (Postfix) with ESMTPS id 556F760E41
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 19:28:14 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id q11so9807163wrr.9
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 12:28:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=dmErGBV7VXck18Gc2qFrnojMPrzyI2EPrDXNv3U1XmY=;
- b=CYOg+LUjp256t2um90jzwNbIMAWQqkmOEyFN5EaBp2h4O1nKvX8H8o+CpGJVu0cvra
- Bi59H593zFqTO0Tjipd0y7gxXb6Ue/uv7MOnvMvMSbigvqtdo3oKpION6K2wkaAQM/Ot
- psaWaQkhb4+YONaercPJtRtGxTcp9kDY4zUv0=
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=zQc5Xq0ndIRpgKH8ghD8CcpcMwMivDHL9fVBcQMh8YI=;
+ b=Txj5PMLCQzEaiL5VP9XFbfZEfGFW8a92aEJuMiuEBU16ocYEhp1opugyO9eDpFciIE
+ ZlL/jggYQqHWMqdaHm2q06oI1LJmx56SytQogrQlnD1sdIh+OEwstRRmRWV4O4gjPQLA
+ Hk65sdIdfJPtAqTBVj7k2YpFIoJ0TCkwkquqs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=dmErGBV7VXck18Gc2qFrnojMPrzyI2EPrDXNv3U1XmY=;
- b=snNlGgukuAbkoBkZiwtyZ6y4CKUmFlXqj6VV1oQIpyiec5Wj2FjbdJrC70urTId+TC
- h+JzuDnSPlY3xF5cotH2b4EsogbcsyP0PzNsnebKIeZ7rT3XcvmLsHotCD41be5J2Vrt
- Ji4jtDR9PxWyq/mz35saTNTKl1JI5NDRyvXyVXQNYtkQXy3EzzGE8rreVPN+wBtBQW1y
- 388n+pO2GYJ5ky6Q0Ce562lKu5SjI4yi68gT5YFRSCPuQf5MYPmoejHyDetF0/cJjJ0o
- ZXjTHAjhfmKwbyRbpMyZ7YSO/VReOu4mpnPJmRozMpC9d0eJupUOB2QCygQUO0vYx2Tz
- I3JA==
-X-Gm-Message-State: AOAM5300dkOr6xHjmdgPbvQvIZj5lp15h+iTrT1xIh0Km4NaEJlmKaCB
- PcRCyVuijULREzElcVt+/I892Q==
-X-Google-Smtp-Source: ABdhPJwkvxrgUNLDCUG2WS460z2SKSCQl05C+7mRo54qZ58QNtO0XiYEVEgB1vN4eNSqQUwqOsYJGA==
-X-Received: by 2002:a1c:4e02:: with SMTP id g2mr15899917wmh.150.1628774059127; 
- Thu, 12 Aug 2021 06:14:19 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=zQc5Xq0ndIRpgKH8ghD8CcpcMwMivDHL9fVBcQMh8YI=;
+ b=uFlcb3+nbdY7PCopB4orxdFAPkxbYWXWkO4NW1JQNxCpoq+Jw1OyPwVZ2RKnAa3uri
+ pMLPFqHnPyl4FvD9CHfM++I6tiyTUsQiXTLRGmrWzgr4R06Au/zIhLmYKF6KXJH+pAUV
+ 7/ybZPwPDg/ZvYKb/d8XaiZ9K8xyYrrBZjG8YgrIS3Q8MLgcssRs3nd01aI09Pk8/jAT
+ XBGwCmlDb7+5qBHGXfywmDhnUe/Lq38N1ppXQNegz5XrllSQN1XtUqaY6yQ4sr+6Yr2F
+ EQaDCGBF914XlQzOFVTEJhf3qfhokrCf4DKCVl13nr4gBUWb26YwkuvH3/BFi0k0aebw
+ OtyA==
+X-Gm-Message-State: AOAM533efQ3ZZycMCRVHbGhZ6nGeklKrbVewfJ3MYgKxCzxUvuK1LkQe
+ v4mIK80xLGZVf8J3emFSgpsUSGf4w0pOzg==
+X-Google-Smtp-Source: ABdhPJxbk6lUfPYBtitJTGKWp+uNV4BEkm19ABgyYmwl3SPKqhTtE8vs0geO51IqJ6EU7krY5z5aXQ==
+X-Received: by 2002:adf:ef85:: with SMTP id d5mr5725537wro.372.1628796493353; 
+ Thu, 12 Aug 2021 12:28:13 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id h4sm2914957wru.2.2021.08.12.06.14.18
+ by smtp.gmail.com with ESMTPSA id y3sm3822669wma.32.2021.08.12.12.28.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Aug 2021 06:14:18 -0700 (PDT)
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
+ Thu, 12 Aug 2021 12:28:12 -0700 (PDT)
+Date: Thu, 12 Aug 2021 21:28:11 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
 To: DRI Development <dri-devel@lists.freedesktop.org>
-Date: Thu, 12 Aug 2021 15:14:09 +0200
-Message-Id: <20210812131412.2487363-1-daniel.vetter@ffwll.ch>
-X-Mailer: git-send-email 2.32.0
+Message-ID: <YRV2ShnIbOyaHG8X@phenom.ffwll.local>
+References: <20210805104705.862416-1-daniel.vetter@ffwll.ch>
+ <20210805104705.862416-9-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20210805104705.862416-9-daniel.vetter@ffwll.ch>
+X-Operating-System: Linux phenom 5.10.0-7-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH 1/4] dma-buf: Require VM_PFNMAP vma for mmap
+Subject: Re: [Linaro-mm-sig] [PATCH v5 08/20] drm/lima: use scheduler
+ dependency tracking
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,87 +78,174 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Matthew Wilcox <willy@infradead.org>, linaro-mm-sig@lists.linaro.org,
- Jason Gunthorpe <jgg@ziepe.ca>, John Stultz <john.stultz@linaro.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Daniel Vetter <daniel.vetter@intel.com>,
- Suren Baghdasaryan <surenb@google.com>,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- linux-media@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: lima@lists.freedesktop.org,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ linaro-mm-sig@lists.linaro.org, Qiang Yu <yuq825@gmail.com>,
+ Daniel Vetter <daniel.vetter@intel.com>, linux-media@vger.kernel.org
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-dGxkcjsgRE1BIGJ1ZmZlcnMgYXJlbid0IG5vcm1hbCBtZW1vcnksIGV4cGVjdGluZyB0aGF0IHlv
-dSBjYW4gdXNlCnRoZW0gbGlrZSB0aGF0IChsaWtlIGNhbGxpbmcgZ2V0X3VzZXJfcGFnZXMgd29y
-a3MsIG9yIHRoYXQgdGhleSdyZQphY2NvdW50aW5nIGxpa2UgYW55IG90aGVyIG5vcm1hbCBtZW1v
-cnkpIGNhbm5vdCBiZSBndWFyYW50ZWVkLgoKU2luY2Ugc29tZSB1c2Vyc3BhY2Ugb25seSBydW5z
-IG9uIGludGVncmF0ZWQgZGV2aWNlcywgd2hlcmUgYWxsCmJ1ZmZlcnMgYXJlIGFjdHVhbGx5IGFs
-bCByZXNpZGVudCBzeXN0ZW0gbWVtb3J5LCB0aGVyZSdzIGEgaHVnZQp0ZW1wdGF0aW9uIHRvIGFz
-c3VtZSB0aGF0IGEgc3RydWN0IHBhZ2UgaXMgYWx3YXlzIHByZXNlbnQgYW5kIHVzZWFibGUKbGlr
-ZSBmb3IgYW55IG1vcmUgcGFnZWNhY2hlIGJhY2tlZCBtbWFwLiBUaGlzIGhhcyB0aGUgcG90ZW50
-aWFsIHRvCnJlc3VsdCBpbiBhIHVhcGkgbmlnaHRtYXJlLgoKVG8gc3RvcCB0aGlzIGdhcCByZXF1
-aXJlIHRoYXQgRE1BIGJ1ZmZlciBtbWFwcyBhcmUgVk1fUEZOTUFQLCB3aGljaApibG9ja3MgZ2V0
-X3VzZXJfcGFnZXMgYW5kIGFsbCB0aGUgb3RoZXIgc3RydWN0IHBhZ2UgYmFzZWQKaW5mcmFzdHJ1
-Y3R1cmUgZm9yIGV2ZXJ5b25lLiBJbiBzcGlyaXQgdGhpcyBpcyB0aGUgdWFwaSBjb3VudGVycGFy
-dCB0bwp0aGUga2VybmVsLWludGVybmFsIENPTkZJR19ETUFCVUZfREVCVUcuCgpNb3RpdmF0ZWQg
-YnkgYSByZWNlbnQgcGF0Y2ggd2hpY2ggd2FudGVkIHRvIHN3aWNoIHRoZSBzeXN0ZW0gZG1hLWJ1
-ZgpoZWFwIHRvIHZtX2luc2VydF9wYWdlIGluc3RlYWQgb2Ygdm1faW5zZXJ0X3Bmbi4KCnYyOgoK
-SmFzb24gYnJvdWdodCB1cCB0aGF0IHdlIGFsc28gd2FudCB0byBndWFyYW50ZWUgdGhhdCBhbGwg
-cHRlcyBoYXZlIHRoZQpwdGVfc3BlY2lhbCBmbGFnIHNldCwgdG8gY2F0Y2ggZmFzdCBnZXRfdXNl
-cl9wYWdlcyAob24gYXJjaGl0ZWN0dXJlcwp0aGF0IHN1cHBvcnQgdGhpcykuIEFsbG93aW5nIFZN
-X01JWEVETUFQIChsaWtlIFZNX1NQRUNJQUwgZG9lcykgd291bGQKc3RpbGwgYWxsb3cgdm1faW5z
-ZXJ0X3BhZ2UsIGJ1dCBsaW1pdGluZyB0byBWTV9QRk5NQVAgd2lsbCBjYXRjaCB0aGF0LgoKRnJv
-bSBhdWRpdGluZyB0aGUgdmFyaW91cyBmdW5jdGlvbnMgdG8gaW5zZXJ0IHBmbiBwdGUgZW50aXJl
-cwoodm1faW5zZXJ0X3Bmbl9wcm90LCByZW1hcF9wZm5fcmFuZ2UgYW5kIGFsbCBpdCdzIGNhbGxl
-cnMgbGlrZQpkbWFfbW1hcF93YykgaXQgbG9va3MgbGlrZSBWTV9QRk5NQVAgaXMgYWxyZWFkeSBy
-ZXF1aXJlZCBhbnl3YXksIHNvCnRoaXMgc2hvdWxkIGJlIHRoZSBjb3JyZWN0IGZsYWcgdG8gY2hl
-Y2sgZm9yLgoKdjM6IENoYW5nZSB0byBXQVJOX09OX09OQ0UgKFRob21hcyBaaW1tZXJtYW5uKQoK
-UmVmZXJlbmNlczogaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGttbC9DQUtNSzd1SGkrbUcwejBI
-VW1OdDEzUUNDdnV0dVJWanBjUjBOalJMMTJrLVdiV3prUmdAbWFpbC5nbWFpbC5jb20vCkFja2Vk
-LWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+CkFja2VkLWJ5
-OiBUaG9tYXMgWmltbWVybWFubiA8dHppbW1lcm1hbm5Ac3VzZS5kZT4KQ2M6IFRob21hcyBaaW1t
-ZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPgpDYzogSmFzb24gR3VudGhvcnBlIDxqZ2dAemll
-cGUuY2E+CkNjOiBTdXJlbiBCYWdoZGFzYXJ5YW4gPHN1cmVuYkBnb29nbGUuY29tPgpDYzogTWF0
-dGhldyBXaWxjb3ggPHdpbGx5QGluZnJhZGVhZC5vcmc+CkNjOiBKb2huIFN0dWx0eiA8am9obi5z
-dHVsdHpAbGluYXJvLm9yZz4KU2lnbmVkLW9mZi1ieTogRGFuaWVsIFZldHRlciA8ZGFuaWVsLnZl
-dHRlckBpbnRlbC5jb20+CkNjOiBTdW1pdCBTZW13YWwgPHN1bWl0LnNlbXdhbEBsaW5hcm8ub3Jn
-PgpDYzogIkNocmlzdGlhbiBLw7ZuaWciIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+CkNjOiBs
-aW51eC1tZWRpYUB2Z2VyLmtlcm5lbC5vcmcKQ2M6IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJv
-Lm9yZwotLQpSZXNlbmRpbmcgdGhpcyBzbyBJIGNhbiB0ZXN0IHRoZSBuZXh0IHBhdGNoZXMgZm9y
-IHZnZW0vc2htZW0gaW4KaW50ZWwtZ2Z4LWNpLgoKTm8gaW1tZWRpYXRlIHBsYW5zIHRvIG1lcmdl
-IHRoaXMgcGF0Y2ggaGVyZSBzaW5jZSB0dG0gaXNuJ3QgYWRkcmVzc2VkCnlldCAoYW5kIHRoZXJl
-IHdlIGhhdmUgdGhlIGh1Z2VwdGUgaXNzdWUsIGZvciB3aGljaCBJIGRvbid0IHRoaW5rIHdlCmhh
-dmUgYSBjbGVhciBjb25zZW5zdXMgeWV0KS4KLURhbmllbAotLS0KIGRyaXZlcnMvZG1hLWJ1Zi9k
-bWEtYnVmLmMgfCAxNSArKysrKysrKysrKysrLS0KIDEgZmlsZSBjaGFuZ2VkLCAxMyBpbnNlcnRp
-b25zKCspLCAyIGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEt
-YnVmLmMgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jCmluZGV4IDYzZDMyMjYxYjYzZi4uZDE5
-YjFjZjZjMzRmIDEwMDY0NAotLS0gYS9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jCisrKyBiL2Ry
-aXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMKQEAgLTEzMCw2ICsxMzAsNyBAQCBzdGF0aWMgc3RydWN0
-IGZpbGVfc3lzdGVtX3R5cGUgZG1hX2J1Zl9mc190eXBlID0gewogc3RhdGljIGludCBkbWFfYnVm
-X21tYXBfaW50ZXJuYWwoc3RydWN0IGZpbGUgKmZpbGUsIHN0cnVjdCB2bV9hcmVhX3N0cnVjdCAq
-dm1hKQogewogCXN0cnVjdCBkbWFfYnVmICpkbWFidWY7CisJaW50IHJldDsKIAogCWlmICghaXNf
-ZG1hX2J1Zl9maWxlKGZpbGUpKQogCQlyZXR1cm4gLUVJTlZBTDsKQEAgLTE0NSw3ICsxNDYsMTEg
-QEAgc3RhdGljIGludCBkbWFfYnVmX21tYXBfaW50ZXJuYWwoc3RydWN0IGZpbGUgKmZpbGUsIHN0
-cnVjdCB2bV9hcmVhX3N0cnVjdCAqdm1hKQogCSAgICBkbWFidWYtPnNpemUgPj4gUEFHRV9TSElG
-VCkKIAkJcmV0dXJuIC1FSU5WQUw7CiAKLQlyZXR1cm4gZG1hYnVmLT5vcHMtPm1tYXAoZG1hYnVm
-LCB2bWEpOworCXJldCA9IGRtYWJ1Zi0+b3BzLT5tbWFwKGRtYWJ1Ziwgdm1hKTsKKworCVdBUk5f
-T05fT05DRSghKHZtYS0+dm1fZmxhZ3MgJiBWTV9QRk5NQVApKTsKKworCXJldHVybiByZXQ7CiB9
-CiAKIHN0YXRpYyBsb2ZmX3QgZG1hX2J1Zl9sbHNlZWsoc3RydWN0IGZpbGUgKmZpbGUsIGxvZmZf
-dCBvZmZzZXQsIGludCB3aGVuY2UpCkBAIC0xMjYwLDYgKzEyNjUsOCBAQCBFWFBPUlRfU1lNQk9M
-X0dQTChkbWFfYnVmX2VuZF9jcHVfYWNjZXNzKTsKIGludCBkbWFfYnVmX21tYXAoc3RydWN0IGRt
-YV9idWYgKmRtYWJ1Ziwgc3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEsCiAJCSB1bnNpZ25lZCBs
-b25nIHBnb2ZmKQogeworCWludCByZXQ7CisKIAlpZiAoV0FSTl9PTighZG1hYnVmIHx8ICF2bWEp
-KQogCQlyZXR1cm4gLUVJTlZBTDsKIApAQCAtMTI4MCw3ICsxMjg3LDExIEBAIGludCBkbWFfYnVm
-X21tYXAoc3RydWN0IGRtYV9idWYgKmRtYWJ1Ziwgc3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEs
-CiAJdm1hX3NldF9maWxlKHZtYSwgZG1hYnVmLT5maWxlKTsKIAl2bWEtPnZtX3Bnb2ZmID0gcGdv
-ZmY7CiAKLQlyZXR1cm4gZG1hYnVmLT5vcHMtPm1tYXAoZG1hYnVmLCB2bWEpOworCXJldCA9IGRt
-YWJ1Zi0+b3BzLT5tbWFwKGRtYWJ1Ziwgdm1hKTsKKworCVdBUk5fT05fT05DRSghKHZtYS0+dm1f
-ZmxhZ3MgJiBWTV9QRk5NQVApKTsKKworCXJldHVybiByZXQ7CiB9CiBFWFBPUlRfU1lNQk9MX0dQ
-TChkbWFfYnVmX21tYXApOwogCi0tIAoyLjMyLjAKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0CkxpbmFyby1t
-bS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9s
-aXN0aW5mby9saW5hcm8tbW0tc2lnCg==
+On Thu, Aug 05, 2021 at 12:46:53PM +0200, Daniel Vetter wrote:
+> Nothing special going on here.
+> =
+
+> Aside reviewing the code, it seems like drm_sched_job_arm() should be
+> moved into lima_sched_context_queue_task and put under some mutex
+> together with drm_sched_push_job(). See the kerneldoc for
+> drm_sched_push_job().
+> =
+
+> v2: Rebase over renamed functions to add dependencies.
+> =
+
+> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+> Cc: Qiang Yu <yuq825@gmail.com>
+> Cc: Sumit Semwal <sumit.semwal@linaro.org>
+> Cc: "Christian K=F6nig" <christian.koenig@amd.com>
+> Cc: lima@lists.freedesktop.org
+> Cc: linux-media@vger.kernel.org
+> Cc: linaro-mm-sig@lists.linaro.org
+
+Ping for an ack here please. Testing would be even better ofc.
+-Daniel
+
+> ---
+>  drivers/gpu/drm/lima/lima_gem.c   |  6 ++++--
+>  drivers/gpu/drm/lima/lima_sched.c | 21 ---------------------
+>  drivers/gpu/drm/lima/lima_sched.h |  3 ---
+>  3 files changed, 4 insertions(+), 26 deletions(-)
+> =
+
+> diff --git a/drivers/gpu/drm/lima/lima_gem.c b/drivers/gpu/drm/lima/lima_=
+gem.c
+> index c528f40981bb..640acc060467 100644
+> --- a/drivers/gpu/drm/lima/lima_gem.c
+> +++ b/drivers/gpu/drm/lima/lima_gem.c
+> @@ -267,7 +267,9 @@ static int lima_gem_sync_bo(struct lima_sched_task *t=
+ask, struct lima_bo *bo,
+>  	if (explicit)
+>  		return 0;
+>  =
+
+> -	return drm_gem_fence_array_add_implicit(&task->deps, &bo->base.base, wr=
+ite);
+> +	return drm_sched_job_add_implicit_dependencies(&task->base,
+> +						       &bo->base.base,
+> +						       write);
+>  }
+>  =
+
+>  static int lima_gem_add_deps(struct drm_file *file, struct lima_submit *=
+submit)
+> @@ -285,7 +287,7 @@ static int lima_gem_add_deps(struct drm_file *file, s=
+truct lima_submit *submit)
+>  		if (err)
+>  			return err;
+>  =
+
+> -		err =3D drm_gem_fence_array_add(&submit->task->deps, fence);
+> +		err =3D drm_sched_job_add_dependency(&submit->task->base, fence);
+>  		if (err) {
+>  			dma_fence_put(fence);
+>  			return err;
+> diff --git a/drivers/gpu/drm/lima/lima_sched.c b/drivers/gpu/drm/lima/lim=
+a_sched.c
+> index e968b5a8f0b0..99d5f6f1a882 100644
+> --- a/drivers/gpu/drm/lima/lima_sched.c
+> +++ b/drivers/gpu/drm/lima/lima_sched.c
+> @@ -134,24 +134,15 @@ int lima_sched_task_init(struct lima_sched_task *ta=
+sk,
+>  	task->num_bos =3D num_bos;
+>  	task->vm =3D lima_vm_get(vm);
+>  =
+
+> -	xa_init_flags(&task->deps, XA_FLAGS_ALLOC);
+> -
+>  	return 0;
+>  }
+>  =
+
+>  void lima_sched_task_fini(struct lima_sched_task *task)
+>  {
+> -	struct dma_fence *fence;
+> -	unsigned long index;
+>  	int i;
+>  =
+
+>  	drm_sched_job_cleanup(&task->base);
+>  =
+
+> -	xa_for_each(&task->deps, index, fence) {
+> -		dma_fence_put(fence);
+> -	}
+> -	xa_destroy(&task->deps);
+> -
+>  	if (task->bos) {
+>  		for (i =3D 0; i < task->num_bos; i++)
+>  			drm_gem_object_put(&task->bos[i]->base.base);
+> @@ -186,17 +177,6 @@ struct dma_fence *lima_sched_context_queue_task(stru=
+ct lima_sched_task *task)
+>  	return fence;
+>  }
+>  =
+
+> -static struct dma_fence *lima_sched_dependency(struct drm_sched_job *job,
+> -					       struct drm_sched_entity *entity)
+> -{
+> -	struct lima_sched_task *task =3D to_lima_task(job);
+> -
+> -	if (!xa_empty(&task->deps))
+> -		return xa_erase(&task->deps, task->last_dep++);
+> -
+> -	return NULL;
+> -}
+> -
+>  static int lima_pm_busy(struct lima_device *ldev)
+>  {
+>  	int ret;
+> @@ -472,7 +452,6 @@ static void lima_sched_free_job(struct drm_sched_job =
+*job)
+>  }
+>  =
+
+>  static const struct drm_sched_backend_ops lima_sched_ops =3D {
+> -	.dependency =3D lima_sched_dependency,
+>  	.run_job =3D lima_sched_run_job,
+>  	.timedout_job =3D lima_sched_timedout_job,
+>  	.free_job =3D lima_sched_free_job,
+> diff --git a/drivers/gpu/drm/lima/lima_sched.h b/drivers/gpu/drm/lima/lim=
+a_sched.h
+> index ac70006b0e26..6a11764d87b3 100644
+> --- a/drivers/gpu/drm/lima/lima_sched.h
+> +++ b/drivers/gpu/drm/lima/lima_sched.h
+> @@ -23,9 +23,6 @@ struct lima_sched_task {
+>  	struct lima_vm *vm;
+>  	void *frame;
+>  =
+
+> -	struct xarray deps;
+> -	unsigned long last_dep;
+> -
+>  	struct lima_bo **bos;
+>  	int num_bos;
+>  =
+
+> -- =
+
+> 2.32.0
+> =
+
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
