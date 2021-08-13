@@ -2,70 +2,79 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6178E3EAB04
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 12 Aug 2021 21:29:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8BE543EB97E
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 Aug 2021 17:49:29 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 82F2662166
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 12 Aug 2021 19:29:33 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7C41B634DA
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 Aug 2021 15:49:27 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 76E4160B19; Thu, 12 Aug 2021 19:29:32 +0000 (UTC)
+	id 5D0766339C; Fri, 13 Aug 2021 15:49:25 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5D58A61234;
-	Thu, 12 Aug 2021 19:29:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 967DB60AC6;
+	Fri, 13 Aug 2021 15:49:22 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 7C37F60B19
- for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 19:29:27 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id E8100608C6
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 13 Aug 2021 15:49:20 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 79D0C61234; Thu, 12 Aug 2021 19:29:27 +0000 (UTC)
+ id E55A160AC6; Fri, 13 Aug 2021 15:49:20 +0000 (UTC)
 Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
  [209.85.128.42])
- by lists.linaro.org (Postfix) with ESMTPS id 7096960B19
- for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 19:29:25 +0000 (UTC)
-Received: by mail-wm1-f42.google.com with SMTP id g138so5288107wmg.4
- for <linaro-mm-sig@lists.linaro.org>; Thu, 12 Aug 2021 12:29:25 -0700 (PDT)
+ by lists.linaro.org (Postfix) with ESMTPS id C6901608C6
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 13 Aug 2021 15:49:18 +0000 (UTC)
+Received: by mail-wm1-f42.google.com with SMTP id
+ q11-20020a7bce8b0000b02902e6880d0accso10005974wmj.0
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 13 Aug 2021 08:49:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=PwnarB9Hsk8rWLa1EFppI8N3ZwQbA79XO0sGP5n+o4s=;
- b=EQWz/z0WbgSIqJOdreuC2j9GpACsC/fidpu4zh3rmKelAUnrJtNvISKSCDnFMFkB/3
- ZG1CpvXl6JpEZJGzqNCWlzeMoVX0WvtvyhPZtKLYB6bwCWQUqB+aO4pYd/MMQiIrxpEa
- YtGOgnRWSiLhvP6Ixjplj6glIRYt/vCrSJ0/0=
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=ztLJ/Z+w/7lJ5b/Gbdd/xzcgAKq8QbJW4xzGVnxKtmU=;
+ b=VLZcmBZFpeecdhW43NS93mX0TUmD4RRZFXTte21P4ljJ+Z7SqAEHsmih2/viWCa1GP
+ XVqRC/eooDWii6hMe82zSBMDH6wlIfLabTRJlHlFKI61nAn+zF70v7+G5m/naoRvhdK+
+ 5gFnIMW2IYCWa7XmwgHY22kW4jd9UYnpwT7M0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
  :in-reply-to;
- bh=PwnarB9Hsk8rWLa1EFppI8N3ZwQbA79XO0sGP5n+o4s=;
- b=E81LhaqsSCGU7jZFzNjr0ZooV2UBJYfpZu+kOSi9In8QfaRgckX7It2jSosYG4REjJ
- ohNun71CGVj+8qRh4UW12pkJE9j7aQYm2WPoWmFW7wVdqo3n10Xx+2by+S6FKPgW0ISX
- bkgioYehecWVGdkKfHwbbjzwe9NoLcsD+Ls8IcUN+OgcaiQ7OKbvjZsOdnChKrIlfCBg
- hjut3EKxj7G9dIExGxwUgfuMdCeCywLvhlxOKxgR/i3i65/ySHGmsu5HpUO7h5wN9BeA
- aqjGFl+E5Odv+4hTM2AiMkBdksk2RSfqBwJeTr0ugU5ModYZZZPqRfAElAQtax568Cdc
- zktQ==
-X-Gm-Message-State: AOAM530EE+bbd9Hu6sg2iyH1s9qrcJdu4PD0qL9pAlch5K0EEupCc+dl
- TUGgVb8QorSbaTLmFHwO7eJlTA==
-X-Google-Smtp-Source: ABdhPJzFa0sPdX8nnl+3cilN+tka6w0zCwZ32CKFR4AhNGnNzC9nxs9m6cRvPlNkytR2CeqyZxpdnA==
-X-Received: by 2002:a7b:c112:: with SMTP id w18mr121651wmi.60.1628796564531;
- Thu, 12 Aug 2021 12:29:24 -0700 (PDT)
+ bh=ztLJ/Z+w/7lJ5b/Gbdd/xzcgAKq8QbJW4xzGVnxKtmU=;
+ b=LwdKPEBU9ZHfg2F1RlgreCiorM2h67SShPeAkH/brxj1L4h5X5ysDwBJpkEi4tfKa9
+ uZJOUFj98mtRpFbUHraSCR2JMSpmB+xfXhQUBSK38x8Gbjis92ShHHDuJkkylnMg9RHv
+ O+czUJlbWhwmVXv+W64wj7FK5XgSR8+CmHM4oICSFBUqB2nM7/1Cf22cjgRSb2VZ7JY+
+ 0+VBRy7Yu5MM1qVjg/OvqadZuj9bA6Lggpf+xUOyuJ91QtHiufDH2EqDGljT5qN66yTo
+ Dvq12Z99/9oIymTPINNL6cBkcbG3tCCB3usqmzQrscYrFK7Z9+7Oiwd/YVHk2sa5X4TU
+ H+ow==
+X-Gm-Message-State: AOAM530c30xJmxrb8U0SVpePvceFdUZZVXSLJvifmbTJRuRVnDOO2b9I
+ ofyUXTNmr4osVUljV+mPljCfaw==
+X-Google-Smtp-Source: ABdhPJxgv00YCCMnsEDstzGiimNG6Hq0UjsyzTqm4ij09dB+S3kQni5KbAi2iQDrwWKxyWK0S6/YUA==
+X-Received: by 2002:a1c:27c2:: with SMTP id n185mr3213014wmn.20.1628869757778; 
+ Fri, 13 Aug 2021 08:49:17 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id i8sm6403254wma.7.2021.08.12.12.29.23
+ by smtp.gmail.com with ESMTPSA id l38sm1699851wmp.15.2021.08.13.08.49.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Aug 2021 12:29:24 -0700 (PDT)
-Date: Thu, 12 Aug 2021 21:29:22 +0200
+ Fri, 13 Aug 2021 08:49:16 -0700 (PDT)
+Date: Fri, 13 Aug 2021 17:49:14 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
-To: DRI Development <dri-devel@lists.freedesktop.org>
-Message-ID: <YRV2ki1DbxwKqGFt@phenom.ffwll.local>
-References: <20210805104705.862416-1-daniel.vetter@ffwll.ch>
- <20210805104705.862416-14-daniel.vetter@ffwll.ch>
+To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
+Message-ID: <YRaUetPzT5EKaZkf@phenom.ffwll.local>
+Mail-Followup-To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ tzimmermann@suse.de, airlied@linux.ie, sumit.semwal@linaro.org,
+ christian.koenig@amd.com, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org,
+ skhan@linuxfoundation.org, gregkh@linuxfoundation.org,
+ linux-kernel-mentees@lists.linuxfoundation.org
+References: <20210813085450.32494-1-desmondcheongzx@gmail.com>
+ <20210813085450.32494-2-desmondcheongzx@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210805104705.862416-14-daniel.vetter@ffwll.ch>
+In-Reply-To: <20210813085450.32494-2-desmondcheongzx@gmail.com>
 X-Operating-System: Linux phenom 5.10.0-7-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v5 13/20] drm/gem: Delete gem array
- fencing helpers
+Subject: Re: [Linaro-mm-sig] [PATCH 1/2] drm: avoid races with modesetting
+ rights
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,181 +87,438 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@linux.ie>,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- linaro-mm-sig@lists.linaro.org, Thomas Zimmermann <tzimmermann@suse.de>,
- Daniel Vetter <daniel.vetter@intel.com>, linux-media@vger.kernel.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: tzimmermann@suse.de, airlied@linux.ie, gregkh@linuxfoundation.org,
+ intel-gfx@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
+ linux-kernel@vger.kernel.org, mripard@kernel.org, christian.koenig@amd.com,
+ linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
+ daniel@ffwll.ch, skhan@linuxfoundation.org,
+ linux-kernel-mentees@lists.linuxfoundation.org, linux-media@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Thu, Aug 05, 2021 at 12:46:58PM +0200, Daniel Vetter wrote:
-> Integrated into the scheduler now and all users converted over.
-> =
+On Fri, Aug 13, 2021 at 04:54:49PM +0800, Desmond Cheong Zhi Xi wrote:
+> In drm_client_modeset.c and drm_fb_helper.c,
+> drm_master_internal_{acquire,release} are used to avoid races with DRM
+> userspace. These functions hold onto drm_device.master_mutex while
+> committing, and bail if there's already a master.
+> 
+> However, ioctls can still race between themselves. A
+> time-of-check-to-time-of-use error can occur if an ioctl that changes
+> the modeset has its rights revoked after it validates its permissions,
+> but before it completes.
+> 
+> There are three ioctls that can affect modesetting permissions:
+> 
+> - DROP_MASTER ioctl removes rights for a master and its leases
+> 
+> - REVOKE_LEASE ioctl revokes rights for a specific lease
+> 
+> - SET_MASTER ioctl sets the device master if the master role hasn't
+> been acquired yet
+> 
+> All these races can be avoided by introducing an SRCU that acts as a
+> barrier for ioctls that can change modesetting permissions. Processes
+> that perform modesetting should hold a read lock on the new
+> drm_device.master_barrier_srcu, and ioctls that change these
+> permissions should call synchronize_srcu before returning.
+> 
+> This ensures that any process that might have seen old permissions are
+> flushed out before DROP_MASTER/REVOKE_LEASE/SET_MASTER ioctls return
+> to userspace.
+> 
+> Reported-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+> Signed-off-by: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
 
-> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-> Cc: Maxime Ripard <mripard@kernel.org>
-> Cc: Thomas Zimmermann <tzimmermann@suse.de>
-> Cc: David Airlie <airlied@linux.ie>
-> Cc: Daniel Vetter <daniel@ffwll.ch>
-> Cc: Sumit Semwal <sumit.semwal@linaro.org>
-> Cc: "Christian K=F6nig" <christian.koenig@amd.com>
-> Cc: linux-media@vger.kernel.org
-> Cc: linaro-mm-sig@lists.linaro.org
+This looks pretty solid, but I think there's one gap where we can still
+race. Scenario.
 
-Some acks would be great here.
+Process A has a drm fd with master rights and two threads:
+- thread 1 does a long-running display operation (like a modeset or
+  whatever)
+- thread 2 does a drop-master
+
+Then we start a new process B, which acquires master in drm_open (there is
+no other one left). This is like setmaster ioctl, but your
+DRM_MASTER_FLUSH bit doesn't work there.
+
+The other thing is that for modeset stuff (which this all is) srcu is
+probably massive overkill, and a simple rwsem should be good enough too.
+Maybe even better, since the rwsem guarantees that no new reader can start
+once you try to acquire the write side.
+
+Finally, and this is a bit a bikeshed: I don't like much how
+DRM_MASTER_FLUSH leaks the need of these very few places into the very
+core drm_ioctl function. One idea I had was to use task_work in a special
+function, roughly
+
+void master_flush()
+{
+	down_write(master_rwsem);
+	up_write(master_rwms);
+}
+void drm_master_flush()
+{
+	init_task_work(fpriv->master_flush_work, master_flush)
+	task_work_add(fpriv->master_flush_work);
+	/* if task_work_add fails we're exiting, at which point the lack
+	 * of master flush doesn't matter);
+}
+
+And maybe put a comment above the function explaining why and how this
+works.
+
+We could even do a drm_master_unlock_and_flush helper, since that's really
+what everyone wants, and it would make it very clear which master state
+changes need this flush. Instead of setting a flag bit in an ioctl table
+very far away ...
+
+Thoughts?
 -Daniel
 
 > ---
->  drivers/gpu/drm/drm_gem.c | 96 ---------------------------------------
->  include/drm/drm_gem.h     |  5 --
->  2 files changed, 101 deletions(-)
-> =
-
-> diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-> index 09c820045859..37e2e2820f08 100644
-> --- a/drivers/gpu/drm/drm_gem.c
-> +++ b/drivers/gpu/drm/drm_gem.c
-> @@ -1272,99 +1272,3 @@ drm_gem_unlock_reservations(struct drm_gem_object =
-**objs, int count,
->  	ww_acquire_fini(acquire_ctx);
+>  drivers/gpu/drm/drm_auth.c           | 17 ++++++++++++++---
+>  drivers/gpu/drm/drm_client_modeset.c | 10 ++++++----
+>  drivers/gpu/drm/drm_drv.c            |  2 ++
+>  drivers/gpu/drm/drm_fb_helper.c      | 20 ++++++++++++--------
+>  drivers/gpu/drm/drm_internal.h       |  5 +++--
+>  drivers/gpu/drm/drm_ioctl.c          | 25 +++++++++++++++++++++----
+>  include/drm/drm_device.h             | 11 +++++++++++
+>  include/drm/drm_ioctl.h              |  7 +++++++
+>  8 files changed, 76 insertions(+), 21 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/drm_auth.c b/drivers/gpu/drm/drm_auth.c
+> index 60a6b21474b1..004506608e76 100644
+> --- a/drivers/gpu/drm/drm_auth.c
+> +++ b/drivers/gpu/drm/drm_auth.c
+> @@ -29,6 +29,7 @@
+>   */
+>  
+>  #include <linux/slab.h>
+> +#include <linux/srcu.h>
+>  
+>  #include <drm/drm_auth.h>
+>  #include <drm/drm_drv.h>
+> @@ -448,21 +449,31 @@ void drm_master_put(struct drm_master **master)
+>  EXPORT_SYMBOL(drm_master_put);
+>  
+>  /* Used by drm_client and drm_fb_helper */
+> -bool drm_master_internal_acquire(struct drm_device *dev)
+> +bool drm_master_internal_acquire(struct drm_device *dev, int *idx)
+>  {
+> +	*idx = srcu_read_lock(&dev->master_barrier_srcu);
+> +
+>  	mutex_lock(&dev->master_mutex);
+>  	if (dev->master) {
+>  		mutex_unlock(&dev->master_mutex);
+> +		srcu_read_unlock(&dev->master_barrier_srcu, *idx);
+>  		return false;
+>  	}
+> +	mutex_unlock(&dev->master_mutex);
+>  
+>  	return true;
 >  }
->  EXPORT_SYMBOL(drm_gem_unlock_reservations);
-> -
-> -/**
-> - * drm_gem_fence_array_add - Adds the fence to an array of fences to be
-> - * waited on, deduplicating fences from the same context.
-> - *
-> - * @fence_array: array of dma_fence * for the job to block on.
-> - * @fence: the dma_fence to add to the list of dependencies.
-> - *
-> - * This functions consumes the reference for @fence both on success and =
-error
-> - * cases.
-> - *
-> - * Returns:
-> - * 0 on success, or an error on failing to expand the array.
-> - */
-> -int drm_gem_fence_array_add(struct xarray *fence_array,
-> -			    struct dma_fence *fence)
-> -{
-> -	struct dma_fence *entry;
-> -	unsigned long index;
-> -	u32 id =3D 0;
-> -	int ret;
-> -
-> -	if (!fence)
-> -		return 0;
-> -
-> -	/* Deduplicate if we already depend on a fence from the same context.
-> -	 * This lets the size of the array of deps scale with the number of
-> -	 * engines involved, rather than the number of BOs.
-> -	 */
-> -	xa_for_each(fence_array, index, entry) {
-> -		if (entry->context !=3D fence->context)
-> -			continue;
-> -
-> -		if (dma_fence_is_later(fence, entry)) {
-> -			dma_fence_put(entry);
-> -			xa_store(fence_array, index, fence, GFP_KERNEL);
-> -		} else {
-> -			dma_fence_put(fence);
-> -		}
-> -		return 0;
-> -	}
-> -
-> -	ret =3D xa_alloc(fence_array, &id, fence, xa_limit_32b, GFP_KERNEL);
-> -	if (ret !=3D 0)
-> -		dma_fence_put(fence);
-> -
-> -	return ret;
-> -}
-> -EXPORT_SYMBOL(drm_gem_fence_array_add);
-> -
-> -/**
-> - * drm_gem_fence_array_add_implicit - Adds the implicit dependencies tra=
-cked
-> - * in the GEM object's reservation object to an array of dma_fences for =
-use in
-> - * scheduling a rendering job.
-> - *
-> - * This should be called after drm_gem_lock_reservations() on your array=
- of
-> - * GEM objects used in the job but before updating the reservations with=
- your
-> - * own fences.
-> - *
-> - * @fence_array: array of dma_fence * for the job to block on.
-> - * @obj: the gem object to add new dependencies from.
-> - * @write: whether the job might write the object (so we need to depend =
-on
-> - * shared fences in the reservation object).
-> - */
-> -int drm_gem_fence_array_add_implicit(struct xarray *fence_array,
-> -				     struct drm_gem_object *obj,
-> -				     bool write)
-> -{
-> -	int ret;
-> -	struct dma_fence **fences;
-> -	unsigned int i, fence_count;
-> -
-> -	if (!write) {
-> -		struct dma_fence *fence =3D
-> -			dma_resv_get_excl_unlocked(obj->resv);
-> -
-> -		return drm_gem_fence_array_add(fence_array, fence);
-> -	}
-> -
-> -	ret =3D dma_resv_get_fences(obj->resv, NULL,
-> -						&fence_count, &fences);
-> -	if (ret || !fence_count)
-> -		return ret;
-> -
-> -	for (i =3D 0; i < fence_count; i++) {
-> -		ret =3D drm_gem_fence_array_add(fence_array, fences[i]);
-> -		if (ret)
-> -			break;
-> -	}
-> -
-> -	for (; i < fence_count; i++)
-> -		dma_fence_put(fences[i]);
-> -	kfree(fences);
-> -	return ret;
-> -}
-> -EXPORT_SYMBOL(drm_gem_fence_array_add_implicit);
-> diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
-> index 35e7f44c2a75..e55a767188af 100644
-> --- a/include/drm/drm_gem.h
-> +++ b/include/drm/drm_gem.h
-> @@ -407,11 +407,6 @@ int drm_gem_lock_reservations(struct drm_gem_object =
-**objs, int count,
->  			      struct ww_acquire_ctx *acquire_ctx);
->  void drm_gem_unlock_reservations(struct drm_gem_object **objs, int count,
->  				 struct ww_acquire_ctx *acquire_ctx);
-> -int drm_gem_fence_array_add(struct xarray *fence_array,
-> -			    struct dma_fence *fence);
-> -int drm_gem_fence_array_add_implicit(struct xarray *fence_array,
-> -				     struct drm_gem_object *obj,
-> -				     bool write);
->  int drm_gem_dumb_map_offset(struct drm_file *file, struct drm_device *de=
-v,
->  			    u32 handle, u64 *offset);
->  =
+>  EXPORT_SYMBOL(drm_master_internal_acquire);
+>  
+>  /* Used by drm_client and drm_fb_helper */
+> -void drm_master_internal_release(struct drm_device *dev)
+> +void drm_master_internal_release(struct drm_device *dev, int idx)
+>  {
+> -	mutex_unlock(&dev->master_mutex);
+> +	srcu_read_unlock(&dev->master_barrier_srcu, idx);
+>  }
+>  EXPORT_SYMBOL(drm_master_internal_release);
+> +
+> +/* Used by drm_ioctl */
+> +void drm_master_flush(struct drm_device *dev)
+> +{
+> +	synchronize_srcu(&dev->master_barrier_srcu);
+> +}
+> diff --git a/drivers/gpu/drm/drm_client_modeset.c b/drivers/gpu/drm/drm_client_modeset.c
+> index ced09c7c06f9..9885f36f71b7 100644
+> --- a/drivers/gpu/drm/drm_client_modeset.c
+> +++ b/drivers/gpu/drm/drm_client_modeset.c
+> @@ -1165,13 +1165,14 @@ int drm_client_modeset_commit(struct drm_client_dev *client)
+>  {
+>  	struct drm_device *dev = client->dev;
+>  	int ret;
+> +	int idx;
+>  
+> -	if (!drm_master_internal_acquire(dev))
+> +	if (!drm_master_internal_acquire(dev, &idx))
+>  		return -EBUSY;
+>  
+>  	ret = drm_client_modeset_commit_locked(client);
+>  
+> -	drm_master_internal_release(dev);
+> +	drm_master_internal_release(dev, idx);
+>  
+>  	return ret;
+>  }
+> @@ -1215,8 +1216,9 @@ int drm_client_modeset_dpms(struct drm_client_dev *client, int mode)
+>  {
+>  	struct drm_device *dev = client->dev;
+>  	int ret = 0;
+> +	int idx;
+>  
+> -	if (!drm_master_internal_acquire(dev))
+> +	if (!drm_master_internal_acquire(dev, &idx))
+>  		return -EBUSY;
+>  
+>  	mutex_lock(&client->modeset_mutex);
+> @@ -1226,7 +1228,7 @@ int drm_client_modeset_dpms(struct drm_client_dev *client, int mode)
+>  		drm_client_modeset_dpms_legacy(client, mode);
+>  	mutex_unlock(&client->modeset_mutex);
+>  
+> -	drm_master_internal_release(dev);
+> +	drm_master_internal_release(dev, idx);
+>  
+>  	return ret;
+>  }
+> diff --git a/drivers/gpu/drm/drm_drv.c b/drivers/gpu/drm/drm_drv.c
+> index 7a5097467ba5..c313f0674db3 100644
+> --- a/drivers/gpu/drm/drm_drv.c
+> +++ b/drivers/gpu/drm/drm_drv.c
+> @@ -574,6 +574,7 @@ static void drm_dev_init_release(struct drm_device *dev, void *res)
+>  	mutex_destroy(&dev->clientlist_mutex);
+>  	mutex_destroy(&dev->filelist_mutex);
+>  	mutex_destroy(&dev->struct_mutex);
+> +	cleanup_srcu_struct(&dev->master_barrier_srcu);
+>  	drm_legacy_destroy_members(dev);
+>  }
+>  
+> @@ -612,6 +613,7 @@ static int drm_dev_init(struct drm_device *dev,
+>  	mutex_init(&dev->filelist_mutex);
+>  	mutex_init(&dev->clientlist_mutex);
+>  	mutex_init(&dev->master_mutex);
+> +	init_srcu_struct(&dev->master_barrier_srcu);
+>  
+>  	ret = drmm_add_action(dev, drm_dev_init_release, NULL);
+>  	if (ret)
+> diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
+> index 3ab078321045..0d594bc15f18 100644
+> --- a/drivers/gpu/drm/drm_fb_helper.c
+> +++ b/drivers/gpu/drm/drm_fb_helper.c
+> @@ -1116,13 +1116,14 @@ int drm_fb_helper_setcmap(struct fb_cmap *cmap, struct fb_info *info)
+>  	struct drm_fb_helper *fb_helper = info->par;
+>  	struct drm_device *dev = fb_helper->dev;
+>  	int ret;
+> +	int idx;
+>  
+>  	if (oops_in_progress)
+>  		return -EBUSY;
+>  
+>  	mutex_lock(&fb_helper->lock);
+>  
+> -	if (!drm_master_internal_acquire(dev)) {
+> +	if (!drm_master_internal_acquire(dev, &idx)) {
+>  		ret = -EBUSY;
+>  		goto unlock;
+>  	}
+> @@ -1136,7 +1137,7 @@ int drm_fb_helper_setcmap(struct fb_cmap *cmap, struct fb_info *info)
+>  		ret = setcmap_legacy(cmap, info);
+>  	mutex_unlock(&fb_helper->client.modeset_mutex);
+>  
+> -	drm_master_internal_release(dev);
+> +	drm_master_internal_release(dev, idx);
+>  unlock:
+>  	mutex_unlock(&fb_helper->lock);
+>  
+> @@ -1160,9 +1161,10 @@ int drm_fb_helper_ioctl(struct fb_info *info, unsigned int cmd,
+>  	struct drm_device *dev = fb_helper->dev;
+>  	struct drm_crtc *crtc;
+>  	int ret = 0;
+> +	int idx;
+>  
+>  	mutex_lock(&fb_helper->lock);
+> -	if (!drm_master_internal_acquire(dev)) {
+> +	if (!drm_master_internal_acquire(dev, &idx)) {
+>  		ret = -EBUSY;
+>  		goto unlock;
+>  	}
+> @@ -1204,7 +1206,7 @@ int drm_fb_helper_ioctl(struct fb_info *info, unsigned int cmd,
+>  		ret = -ENOTTY;
+>  	}
+>  
+> -	drm_master_internal_release(dev);
+> +	drm_master_internal_release(dev, idx);
+>  unlock:
+>  	mutex_unlock(&fb_helper->lock);
+>  	return ret;
+> @@ -1474,12 +1476,13 @@ int drm_fb_helper_pan_display(struct fb_var_screeninfo *var,
+>  	struct drm_fb_helper *fb_helper = info->par;
+>  	struct drm_device *dev = fb_helper->dev;
+>  	int ret;
+> +	int idx;
+>  
+>  	if (oops_in_progress)
+>  		return -EBUSY;
+>  
+>  	mutex_lock(&fb_helper->lock);
+> -	if (!drm_master_internal_acquire(dev)) {
+> +	if (!drm_master_internal_acquire(dev, &idx)) {
+>  		ret = -EBUSY;
+>  		goto unlock;
+>  	}
+> @@ -1489,7 +1492,7 @@ int drm_fb_helper_pan_display(struct fb_var_screeninfo *var,
+>  	else
+>  		ret = pan_display_legacy(var, info);
+>  
+> -	drm_master_internal_release(dev);
+> +	drm_master_internal_release(dev, idx);
+>  unlock:
+>  	mutex_unlock(&fb_helper->lock);
+>  
+> @@ -1948,6 +1951,7 @@ EXPORT_SYMBOL(drm_fb_helper_initial_config);
+>  int drm_fb_helper_hotplug_event(struct drm_fb_helper *fb_helper)
+>  {
+>  	int err = 0;
+> +	int idx;
+>  
+>  	if (!drm_fbdev_emulation || !fb_helper)
+>  		return 0;
+> @@ -1959,13 +1963,13 @@ int drm_fb_helper_hotplug_event(struct drm_fb_helper *fb_helper)
+>  		return err;
+>  	}
+>  
+> -	if (!fb_helper->fb || !drm_master_internal_acquire(fb_helper->dev)) {
+> +	if (!fb_helper->fb || !drm_master_internal_acquire(fb_helper->dev, &idx)) {
+>  		fb_helper->delayed_hotplug = true;
+>  		mutex_unlock(&fb_helper->lock);
+>  		return err;
+>  	}
+>  
+> -	drm_master_internal_release(fb_helper->dev);
+> +	drm_master_internal_release(fb_helper->dev, idx);
+>  
+>  	drm_dbg_kms(fb_helper->dev, "\n");
+>  
+> diff --git a/drivers/gpu/drm/drm_internal.h b/drivers/gpu/drm/drm_internal.h
+> index 17f3548c8ed2..578fd2769913 100644
+> --- a/drivers/gpu/drm/drm_internal.h
+> +++ b/drivers/gpu/drm/drm_internal.h
+> @@ -142,8 +142,9 @@ int drm_dropmaster_ioctl(struct drm_device *dev, void *data,
+>  			 struct drm_file *file_priv);
+>  int drm_master_open(struct drm_file *file_priv);
+>  void drm_master_release(struct drm_file *file_priv);
+> -bool drm_master_internal_acquire(struct drm_device *dev);
+> -void drm_master_internal_release(struct drm_device *dev);
+> +bool drm_master_internal_acquire(struct drm_device *dev, int *idx);
+> +void drm_master_internal_release(struct drm_device *dev, int idx);
+> +void drm_master_flush(struct drm_device *dev);
+>  
+>  /* drm_sysfs.c */
+>  extern struct class *drm_class;
+> diff --git a/drivers/gpu/drm/drm_ioctl.c b/drivers/gpu/drm/drm_ioctl.c
+> index be4a52dc4d6f..eb4ec3fab7d1 100644
+> --- a/drivers/gpu/drm/drm_ioctl.c
+> +++ b/drivers/gpu/drm/drm_ioctl.c
+> @@ -600,8 +600,10 @@ static const struct drm_ioctl_desc drm_ioctls[] = {
+>  	DRM_LEGACY_IOCTL_DEF(DRM_IOCTL_SET_SAREA_CTX, drm_legacy_setsareactx, DRM_AUTH|DRM_MASTER|DRM_ROOT_ONLY),
+>  	DRM_LEGACY_IOCTL_DEF(DRM_IOCTL_GET_SAREA_CTX, drm_legacy_getsareactx, DRM_AUTH),
+>  
+> -	DRM_IOCTL_DEF(DRM_IOCTL_SET_MASTER, drm_setmaster_ioctl, 0),
+> -	DRM_IOCTL_DEF(DRM_IOCTL_DROP_MASTER, drm_dropmaster_ioctl, 0),
+> +	DRM_IOCTL_DEF(DRM_IOCTL_SET_MASTER, drm_setmaster_ioctl,
+> +		      DRM_MASTER_FLUSH),
+> +	DRM_IOCTL_DEF(DRM_IOCTL_DROP_MASTER, drm_dropmaster_ioctl,
+> +		      DRM_MASTER_FLUSH),
+>  
+>  	DRM_LEGACY_IOCTL_DEF(DRM_IOCTL_ADD_CTX, drm_legacy_addctx, DRM_AUTH|DRM_ROOT_ONLY),
+>  	DRM_LEGACY_IOCTL_DEF(DRM_IOCTL_RM_CTX, drm_legacy_rmctx, DRM_AUTH|DRM_MASTER|DRM_ROOT_ONLY),
+> @@ -722,7 +724,8 @@ static const struct drm_ioctl_desc drm_ioctls[] = {
+>  	DRM_IOCTL_DEF(DRM_IOCTL_MODE_CREATE_LEASE, drm_mode_create_lease_ioctl, DRM_MASTER),
+>  	DRM_IOCTL_DEF(DRM_IOCTL_MODE_LIST_LESSEES, drm_mode_list_lessees_ioctl, DRM_MASTER),
+>  	DRM_IOCTL_DEF(DRM_IOCTL_MODE_GET_LEASE, drm_mode_get_lease_ioctl, DRM_MASTER),
+> -	DRM_IOCTL_DEF(DRM_IOCTL_MODE_REVOKE_LEASE, drm_mode_revoke_lease_ioctl, DRM_MASTER),
+> +	DRM_IOCTL_DEF(DRM_IOCTL_MODE_REVOKE_LEASE, drm_mode_revoke_lease_ioctl,
+> +		      DRM_MASTER | DRM_MASTER_FLUSH),
+>  };
+>  
+>  #define DRM_CORE_IOCTL_COUNT	ARRAY_SIZE( drm_ioctls )
+> @@ -781,13 +784,17 @@ long drm_ioctl_kernel(struct file *file, drm_ioctl_t *func, void *kdata,
+>  	struct drm_file *file_priv = file->private_data;
+>  	struct drm_device *dev = file_priv->minor->dev;
+>  	int retcode;
+> +	int idx;
+>  
+>  	if (drm_dev_is_unplugged(dev))
+>  		return -ENODEV;
+>  
+> +	if (unlikely(flags & DRM_MASTER))
+> +		idx = srcu_read_lock(&dev->master_barrier_srcu);
+> +
+>  	retcode = drm_ioctl_permit(flags, file_priv);
+>  	if (unlikely(retcode))
+> -		return retcode;
+> +		goto release_master;
+>  
+>  	/* Enforce sane locking for modern driver ioctls. */
+>  	if (likely(!drm_core_check_feature(dev, DRIVER_LEGACY)) ||
+> @@ -798,6 +805,16 @@ long drm_ioctl_kernel(struct file *file, drm_ioctl_t *func, void *kdata,
+>  		retcode = func(dev, kdata, file_priv);
+>  		mutex_unlock(&drm_global_mutex);
+>  	}
+> +
+> +release_master:
+> +	if (unlikely(flags & DRM_MASTER))
+> +		srcu_read_unlock(&dev->master_barrier_srcu, idx);
+> +	/* After flushing, processes are guaranteed to see the new master/lease
+> +	 * permissions, and any process which might have seen the old
+> +	 * permissions is guaranteed to have finished.
+> +	 */
+> +	if (unlikely(flags & DRM_MASTER_FLUSH))
+> +		drm_master_flush(dev);
+>  	return retcode;
+>  }
+>  EXPORT_SYMBOL(drm_ioctl_kernel);
+> diff --git a/include/drm/drm_device.h b/include/drm/drm_device.h
+> index 604b1d1b2d72..0ac5fdb375f8 100644
+> --- a/include/drm/drm_device.h
+> +++ b/include/drm/drm_device.h
+> @@ -111,6 +111,17 @@ struct drm_device {
+>  	 */
+>  	struct drm_master *master;
+>  
+> +	/**
+> +	 * @master_barrier_srcu:
+> +	 *
+> +	 * Used to synchronize modesetting rights between multiple users. Users
+> +	 * that can change the modeset or display state must hold an
+> +	 * srcu_read_lock() on @master_barrier_srcu, and ioctls that can change
+> +	 * modesetting rights should call synchronize_srcu() before returning
+> +	 * to userspace.
+> +	 */
+> +	struct srcu_struct master_barrier_srcu;
+> +
+>  	/**
+>  	 * @driver_features: per-device driver features
+>  	 *
+> diff --git a/include/drm/drm_ioctl.h b/include/drm/drm_ioctl.h
+> index afb27cb6a7bd..13a68cdcea36 100644
+> --- a/include/drm/drm_ioctl.h
+> +++ b/include/drm/drm_ioctl.h
+> @@ -130,6 +130,13 @@ enum drm_ioctl_flags {
+>  	 * not set DRM_AUTH because they do not require authentication.
+>  	 */
+>  	DRM_RENDER_ALLOW	= BIT(5),
+> +	/**
+> +	 * @DRM_MASTER_FLUSH:
+> +	 *
+> +	 * This must be set for any ioctl which can change the modesetting
+> +	 * permissions for DRM users.
+> +	 */
+> +	DRM_MASTER_FLUSH	= BIT(6),
+>  };
+>  
+>  /**
+> -- 
+> 2.25.1
+> 
 
-> -- =
-
-> 2.32.0
-> =
-
-
--- =
-
+-- 
 Daniel Vetter
 Software Engineer, Intel Corporation
 http://blog.ffwll.ch
