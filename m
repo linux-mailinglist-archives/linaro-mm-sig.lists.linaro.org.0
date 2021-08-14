@@ -2,77 +2,39 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBCA23EB988
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 Aug 2021 17:51:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B6AC43EC12B
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 14 Aug 2021 09:30:34 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9AB3A6339F
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 Aug 2021 15:51:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AAD0D62EA0
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 14 Aug 2021 07:30:32 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 69C0760A9B; Fri, 13 Aug 2021 15:51:19 +0000 (UTC)
+	id 517C3634D5; Sat, 14 Aug 2021 07:30:31 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 48B7160AC6;
-	Fri, 13 Aug 2021 15:51:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DF8B3612A3;
+	Sat, 14 Aug 2021 07:30:27 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 40CD3608C6
- for <linaro-mm-sig@lists.linaro.org>; Fri, 13 Aug 2021 15:51:14 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 478A460FFB
+ for <linaro-mm-sig@lists.linaro.org>; Sat, 14 Aug 2021 07:30:26 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 3416E60AC6; Fri, 13 Aug 2021 15:51:14 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
- [209.85.221.48])
- by lists.linaro.org (Postfix) with ESMTPS id 2BC12608C6
- for <linaro-mm-sig@lists.linaro.org>; Fri, 13 Aug 2021 15:51:12 +0000 (UTC)
-Received: by mail-wr1-f48.google.com with SMTP id r7so13994592wrs.0
- for <linaro-mm-sig@lists.linaro.org>; Fri, 13 Aug 2021 08:51:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=chmAAuuu9/imXcL05QrcQEYuvIcsA2PuEr2bsNmWeMk=;
- b=YXNQ1jJxmMfb4W6F0Ii5J6L9JrznTqUjOcuFAqOOrX6uBrOVpgkK22QocovoZ8l10V
- qau/1XGthmja7EiXttRCYcn6dncQJxnTAlO0kX6joAsSq5pqJchTi7vuTc8ezgGzlkG9
- 1rPG2lPmD4puppEecPzIS3+snUwBW4xNT4PhM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=chmAAuuu9/imXcL05QrcQEYuvIcsA2PuEr2bsNmWeMk=;
- b=eSYw6/bFQkGmr9LCDbfHvwrBtCEWABwzzg5y/1wXmk2tjBdjPaOQTlqUQABk0yxViI
- VGR4tCZEraFMzu4m7edtobEjDlW6jXq6EhokXnNlKJyG0ZZAzZDrZFDmoN9kUJexzyB9
- H7sB87q/a+paj2miRM9rzFP0DYr2CkSL9UHzUC2It2bbp1HT42zLL52d0KaxiEtM155u
- hjWvFDtsj60krB9PEOR8V1qL9CSRsb57ccxjLrV22erhoycXh2Lbh8tP2Jjum+U35GVL
- IGtePqupTBYY7bJliGaEMqARIl8yC14C6t/bcE+3mwAoLiAnQ+EaePENBcph6iGdiHvm
- ZhQw==
-X-Gm-Message-State: AOAM531gGp0OrZRQ8s37TuedmupnYzQwaHyretE3k7OJIYaiYxUFOMxM
- QP2XJib2TrrwHYcR1GWko9Qj3g==
-X-Google-Smtp-Source: ABdhPJxmL/0BdkkgG1cfg0Kb8lawu3ocVEXGdInJyWEC5vjU11a4bxLVspErgkAcGWROUTwh6G7ozg==
-X-Received: by 2002:a5d:66d1:: with SMTP id k17mr3944388wrw.102.1628869871300; 
- Fri, 13 Aug 2021 08:51:11 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id z13sm1942615wrs.71.2021.08.13.08.51.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Aug 2021 08:51:10 -0700 (PDT)
-Date: Fri, 13 Aug 2021 17:51:08 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
-Message-ID: <YRaU7EB5shTUMZZ7@phenom.ffwll.local>
-Mail-Followup-To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, airlied@linux.ie, sumit.semwal@linaro.org,
- christian.koenig@amd.com, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org,
- skhan@linuxfoundation.org, gregkh@linuxfoundation.org,
- linux-kernel-mentees@lists.linuxfoundation.org
-References: <20210813085450.32494-1-desmondcheongzx@gmail.com>
- <20210813085450.32494-3-desmondcheongzx@gmail.com>
+ id 453D6612A3; Sat, 14 Aug 2021 07:30:26 +0000 (UTC)
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by lists.linaro.org (Postfix) with ESMTPS id 29CC660FFB
+ for <linaro-mm-sig@lists.linaro.org>; Sat, 14 Aug 2021 07:30:24 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id DBFA567373; Sat, 14 Aug 2021 09:30:19 +0200 (CEST)
+Date: Sat, 14 Aug 2021 09:30:19 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Paul Cercueil <paul@crapouillou.net>
+Message-ID: <20210814073019.GC21175@lst.de>
+References: <2H0SXQ.2KIK2PBVRFWH2@crapouillou.net>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210813085450.32494-3-desmondcheongzx@gmail.com>
-X-Operating-System: Linux phenom 5.10.0-7-amd64 
+In-Reply-To: <2H0SXQ.2KIK2PBVRFWH2@crapouillou.net>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 2/2] drm: unexport drm_ioctl_permit
+Subject: Re: [Linaro-mm-sig] IIO, dmabuf, io_uring
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,86 +47,70 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: tzimmermann@suse.de, airlied@linux.ie, gregkh@linuxfoundation.org,
- intel-gfx@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
- linux-kernel@vger.kernel.org, mripard@kernel.org, christian.koenig@amd.com,
- linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
- daniel@ffwll.ch, skhan@linuxfoundation.org,
- linux-kernel-mentees@lists.linuxfoundation.org, linux-media@vger.kernel.org
+Cc: Michael Hennerich <Michael.Hennerich@analog.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, Christoph Hellwig <hch@lst.de>,
+ linaro-mm-sig@lists.linaro.org, Alexandru Ardelean <ardeleanalex@gmail.com>,
+ io-uring@vger.kernel.org, Jonathan Cameron <jic23@kernel.org>,
+ linux-media@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Fri, Aug 13, 2021 at 04:54:50PM +0800, Desmond Cheong Zhi Xi wrote:
-> Since the last user of drm_ioctl_permit was removed, and it's now only
-> used in drm_ioctl.c, unexport the symbol.
-> 
-> Reported-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-> Signed-off-by: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
+On Fri, Aug 13, 2021 at 01:41:26PM +0200, Paul Cercueil wrote:
+> Hi,
+>
+> A few months ago we (ADI) tried to upstream the interface we use with our 
+> high-speed ADCs and DACs. It is a system with custom ioctls on the iio 
+> device node to dequeue and enqueue buffers (allocated with 
+> dma_alloc_coherent), that can then be mmap'd by userspace applications. 
+> Anyway, it was ultimately denied entry [1]; this API was okay in ~2014 when 
+> it was designed but it feels like re-inventing the wheel in 2021.
+>
+> Back to the drawing table, and we'd like to design something that we can 
+> actually upstream. This high-speed interface looks awfully similar to 
+> DMABUF, so we may try to implement a DMABUF interface for IIO, unless 
+> someone has a better idea.
 
-Applied to drm-misc-next for 5.16, thanks for your patch.
--Daniel
+To me this does sound a lot like a dma buf use case.  The interesting
+question to me is how to signal arrival of new data, or readyness to
+consume more data.  I suspect that people that are actually using
+dmabuf heavily at the moment (dri/media folks) might be able to chime
+in a little more on that.
 
-> ---
->  drivers/gpu/drm/drm_ioctl.c | 15 +--------------
->  include/drm/drm_ioctl.h     |  1 -
->  2 files changed, 1 insertion(+), 15 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/drm_ioctl.c b/drivers/gpu/drm/drm_ioctl.c
-> index eb4ec3fab7d1..fe271f6f96ab 100644
-> --- a/drivers/gpu/drm/drm_ioctl.c
-> +++ b/drivers/gpu/drm/drm_ioctl.c
-> @@ -522,19 +522,7 @@ int drm_version(struct drm_device *dev, void *data,
->  	return err;
->  }
->  
-> -/**
-> - * drm_ioctl_permit - Check ioctl permissions against caller
-> - *
-> - * @flags: ioctl permission flags.
-> - * @file_priv: Pointer to struct drm_file identifying the caller.
-> - *
-> - * Checks whether the caller is allowed to run an ioctl with the
-> - * indicated permissions.
-> - *
-> - * Returns:
-> - * Zero if allowed, -EACCES otherwise.
-> - */
-> -int drm_ioctl_permit(u32 flags, struct drm_file *file_priv)
-> +static int drm_ioctl_permit(u32 flags, struct drm_file *file_priv)
->  {
->  	/* ROOT_ONLY is only for CAP_SYS_ADMIN */
->  	if (unlikely((flags & DRM_ROOT_ONLY) && !capable(CAP_SYS_ADMIN)))
-> @@ -557,7 +545,6 @@ int drm_ioctl_permit(u32 flags, struct drm_file *file_priv)
->  
->  	return 0;
->  }
-> -EXPORT_SYMBOL(drm_ioctl_permit);
->  
->  #define DRM_IOCTL_DEF(ioctl, _func, _flags)	\
->  	[DRM_IOCTL_NR(ioctl)] = {		\
-> diff --git a/include/drm/drm_ioctl.h b/include/drm/drm_ioctl.h
-> index 13a68cdcea36..fd29842127e5 100644
-> --- a/include/drm/drm_ioctl.h
-> +++ b/include/drm/drm_ioctl.h
-> @@ -174,7 +174,6 @@ struct drm_ioctl_desc {
->  		.name = #ioctl						\
->  	}
->  
-> -int drm_ioctl_permit(u32 flags, struct drm_file *file_priv);
->  long drm_ioctl(struct file *filp, unsigned int cmd, unsigned long arg);
->  long drm_ioctl_kernel(struct file *, drm_ioctl_t, void *, u32);
->  #ifdef CONFIG_COMPAT
-> -- 
-> 2.25.1
-> 
+> Our first usecase is, we want userspace applications to be able to dequeue 
+> buffers of samples (from ADCs), and/or enqueue buffers of samples (for 
+> DACs), and to be able to manipulate them (mmapped buffers). With a DMABUF 
+> interface, I guess the userspace application would dequeue a dma buffer 
+> from the driver, mmap it, read/write the data, unmap it, then enqueue it to 
+> the IIO driver again so that it can be disposed of. Does that sound sane?
+>
+> Our second usecase is - and that's where things get tricky - to be able to 
+> stream the samples to another computer for processing, over Ethernet or 
+> USB. Our typical setup is a high-speed ADC/DAC on a dev board with a FPGA 
+> and a weak soft-core or low-power CPU; processing the data in-situ is not 
+> an option. Copying the data from one buffer to another is not an option 
+> either (way too slow), so we absolutely want zero-copy.
+>
+> Usual userspace zero-copy techniques (vmsplice+splice, MSG_ZEROCOPY etc) 
+> don't really work with mmapped kernel buffers allocated for DMA [2] and/or 
+> have a huge overhead, so the way I see it, we would also need DMABUF 
+> support in both the Ethernet stack and USB (functionfs) stack. However, as 
+> far as I understood, DMABUF is mostly a DRM/V4L2 thing, so I am really not 
+> sure we have the right idea here.
+>
+> And finally, there is the new kid in town, io_uring. I am not very literate 
+> about the topic, but it does not seem to be able to handle DMA buffers 
+> (yet?). The idea that we could dequeue a buffer of samples from the IIO 
+> device and send it over the network in one single syscall is appealing, 
+> though.
 
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+Think of io_uring really just as an async syscall layer.  It doesn't
+replace DMA buffers, but can be used as a different and for some
+workloads more efficient way to dispatch syscalls.
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
