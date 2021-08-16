@@ -2,130 +2,80 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C6503ED1CE
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Aug 2021 12:17:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8183E3ED965
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Aug 2021 17:01:51 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BBD1761174
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Aug 2021 10:17:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 99C3160AEB
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Aug 2021 15:01:50 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 74EA960A67; Mon, 16 Aug 2021 10:17:23 +0000 (UTC)
+	id 872EA608D5; Mon, 16 Aug 2021 15:01:50 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5D0FE6098B;
-	Mon, 16 Aug 2021 10:17:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 950F3608D5;
+	Mon, 16 Aug 2021 15:01:47 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 892FB608D5
- for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Aug 2021 10:17:18 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 4FCF36085A
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Aug 2021 15:01:46 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 84A206098B; Mon, 16 Aug 2021 10:17:18 +0000 (UTC)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2054.outbound.protection.outlook.com [40.107.93.54])
- by lists.linaro.org (Postfix) with ESMTPS id 6C44F608D5
- for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Aug 2021 10:17:16 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IxiMWRAX7lE8ZNsn427H5bfAfwSrVYEfcT8kY4Yqsqi/rg/14imVd0yRiVdb7kvjTDiAms0+kMwqAM6B+n4iYlitBJVV/HnLGr8F4UBjKufvsQvGSpQMISh4Bx3mmJmwvSaMIb4ldd/UCv7X6yQZvUK/j7awrL1ET1lBLUv1qSafeuBX5n2sYmaWloHJmgRf4S9Xxg5VYOF47ITnvlVQLWcI8QGOJJZCWYB4r8dzniwXzH2AWUdxBH3sUlFy9+Gdm6xNF3RSa9zwUGhMVgqM8D+UbrZpyesjD5p42Yl0ZBu5gjUnhOGmiSBmbhqZ/CbYCJ4ySiwhtQNsoCC9bTEtaw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PXEBcwLpf7AdK9XcvKlAl+Ehs0UK96h11hVkC+RRWjk=;
- b=kML67Fkqd2MDHEkfllBAYE2zRPZnsfAK6vxB+k8RLtVx8HetmGXft8xblXaJ4xDh7JyqwF2Hi4gMIHSrFLIMM6XZRsvEpXfu3jUTkFzl5FoTps+711o8Lw56Kn1/1RVKY+ynDIRzaOkZ3F61Ro8uhkSd6EQfAAVZ8zuDrMTYmdRHo03ArDCWIXWcAriBPo4ZHgVnbwlS0CubjQQbvLbeEx7sLjWanxr1ZlvXwU/29RVM2b2oMNlgFyZj2gASpy0cGQYLG4Q6hkASZgZu18zItgISaIVe+zpIgTQB+nk9SEiM84yEC2XgiCcpg6mgzqLLkh+MtR607+eNfbDRiCtNaA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PXEBcwLpf7AdK9XcvKlAl+Ehs0UK96h11hVkC+RRWjk=;
- b=j/M5DxgCGVpqGzaq5083xpbWqd8CrZfXThFNm5J9opkGE0rXkn0UN4KohvnxdHmSDXZCu0YaYMJFu4EhJ8/AwOcYRRFHkLfbDBDPk+Y5Ja7WEOsmTlrLR+DRR9Dcml0QGMbBVg96A6zhDa2Dd0KxvlXD0JDAvtOk/TNJzsenaSk=
-Authentication-Results: hisilicon.com; dkim=none (message not signed)
- header.d=none;hisilicon.com; dmarc=none action=none header.from=amd.com;
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
- by MN2PR12MB4535.namprd12.prod.outlook.com (2603:10b6:208:267::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4415.17; Mon, 16 Aug
- 2021 10:17:03 +0000
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::dce2:96e5:aba2:66fe]) by MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::dce2:96e5:aba2:66fe%6]) with mapi id 15.20.4415.023; Mon, 16 Aug 2021
- 10:17:03 +0000
-To: Rob Clark <robdclark@gmail.com>, dri-devel@lists.freedesktop.org
-References: <20210807183804.459850-1-robdclark@gmail.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-Message-ID: <9a7bdcb5-4f6f-539b-060e-d69ec15da874@amd.com>
-Date: Mon, 16 Aug 2021 12:16:54 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
-In-Reply-To: <20210807183804.459850-1-robdclark@gmail.com>
-Content-Language: en-US
-X-ClientProxiedBy: PR0P264CA0268.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:100:1::16) To MN2PR12MB3775.namprd12.prod.outlook.com
- (2603:10b6:208:159::19)
+ id 4B6E4608D5; Mon, 16 Aug 2021 15:01:46 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
+ [209.85.128.53])
+ by lists.linaro.org (Postfix) with ESMTPS id 438E060865
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Aug 2021 15:01:44 +0000 (UTC)
+Received: by mail-wm1-f53.google.com with SMTP id
+ q11-20020a7bce8b0000b02902e6880d0accso15309669wmj.0
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Aug 2021 08:01:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=EIvyFOw8mvTuFM5hQZVVCU0qrPNdbh5I2Bj4X1kA7WQ=;
+ b=gaIEOtqqYuS833blYihl+7Iw8shk8qt6AL+mzGViyi8f8QC+lwDDgt2IPH0q/+dU1H
+ 7bt+Sommo3MR9FY/VLoTpOo31XeUdpFogGaA5qZ+DqMM99khdni6FgnfyUVd+TFjIo38
+ JMiVpBCDkbCHGobEnCzL8wiQge+z3+GJsAPmo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=EIvyFOw8mvTuFM5hQZVVCU0qrPNdbh5I2Bj4X1kA7WQ=;
+ b=HRdImnYL7GL4lUX1t2M88FrZ4lxOpWRkrnynVFSv4E0LXMcSDKRtr/c4DUTkIaByRx
+ ZUmVK6UAWZGXQoHG5QAWe3FNy9zfWHU2jzMxJ4Ngiln7mDAD/BqTwn9ZpOLeXddePrtp
+ e5KJk48TjhA8tU0D5zmgPPRRBNzyuMMudo22ZbqsVYBUKgiaCP+tbAOn2mEzXgbjtXMt
+ rkiaV932MUj7MGlnm2A2B25nUk+HDrUmDKmcZTCZttvczKXu9W7ng8U2PmOzFlXZRs1h
+ aM9Fhz8STA87Y3NST5MTZPZXsg3n5wnWs6jMBGKunPbk8CjqoSGnevWFCb/LyqkMTguo
+ mCUQ==
+X-Gm-Message-State: AOAM530X5vDyIT1UR8TJ+PQ2xd6/vu06VwACbgd2QvJ02CyBTQfWFGxF
+ nbNqSqGAaRAuTwuF+r+YAjzTwA==
+X-Google-Smtp-Source: ABdhPJzDF9KrfED8TEN39f2b9tbP/JkFe6bbQZq2+vcczHGvaS+YoEUQW9Mj8qPAjLla1rzX+sS+zA==
+X-Received: by 2002:a1c:9ace:: with SMTP id
+ c197mr15858085wme.170.1629126103289; 
+ Mon, 16 Aug 2021 08:01:43 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id y3sm11936525wma.32.2021.08.16.08.01.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 16 Aug 2021 08:01:42 -0700 (PDT)
+Date: Mon, 16 Aug 2021 17:01:40 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christoph Hellwig <hch@lst.de>
+Message-ID: <YRp91OUTpjpw7rnE@phenom.ffwll.local>
+Mail-Followup-To: Christoph Hellwig <hch@lst.de>,
+ Paul Cercueil <paul@crapouillou.net>,
+ Michael Hennerich <Michael.Hennerich@analog.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+ Alexandru Ardelean <ardeleanalex@gmail.com>,
+ io-uring@vger.kernel.org, Jonathan Cameron <jic23@kernel.org>,
+ linux-media@vger.kernel.org
+References: <2H0SXQ.2KIK2PBVRFWH2@crapouillou.net>
+ <20210814073019.GC21175@lst.de>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [IPv6:2a02:908:1252:fb60:7d83:fd8:eb16:8605]
- (2a02:908:1252:fb60:7d83:fd8:eb16:8605) by
- PR0P264CA0268.FRAP264.PROD.OUTLOOK.COM (2603:10a6:100:1::16) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4415.13 via Frontend Transport; Mon, 16 Aug 2021 10:16:59 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 491ff605-d02c-491a-78a9-08d9609efd91
-X-MS-TrafficTypeDiagnostic: MN2PR12MB4535:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <MN2PR12MB4535F89108ADFCB9D7A13AAC83FD9@MN2PR12MB4535.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: X/mVBiHA8kBV7ZDw8obLGQvZI6KKlf7P0LIyCSeeYw7Efr1Y3i9e3ldfNcorreWhfgHIfAuzAKTXffvcHDbdz/4H0KChnrZVE9TanEcz/zD2iYf3Q1JWKj4GGIcxh9vqkfLhk1n45sagKysfvuOvYronQTnlCf2khWz7x3R30X3AU3GGe/7dbxGHsqD1H/jwZcQgvIw2cvyIsRF7Esr5fd38OJ87ngCUn7IfDb/s5Isb9q+7oLF0Yr+PM5SObRz1Yw6VTG5AxjRxH9GHzf4OOCleDTxtXkbGzNf8obhUnqqDOZUmi4CXDq/PNk0QQlQUcN3ZcfbqLych7YE5cxdmToXp4+oeKSGw9qopJuV2IjRQ/qz5ra4CsyXu0i6GvPHaUdNd0138o3y0kN4eOB15ZfXOgYXnWhFvVajk1svr2BcLdOtOMZ/g4lWtgFfcMcjigBmJ5qSoMPhQDxTZiAmobyovnDW8BeQuaLXW+G4Yo7LlS5yR2A7yI2vACYCvZOisdjDEMWXJUXuYkU7kbFevZLttzXYc6VN1nXeaXd6N5s2oNVKgGaaECKBIw/ZTLcWHNple1+/eQRjitJ4+tbmiJeXmbPa1yRmi0j13990LLq5rYy4gqTQpt/QtrjKCKKMseH4dNKV0u3o9dQYlD933Bvdazidlo3ZLSvwE9PSyNH9jBOZbxoHVT4MSPYkxYODoVcbz6uTa+qDSjIX7cZIJ0G3W5HiGR9Ky+SpMTLhKK2eqv5XSyug75vLH8BI3Y+nI
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(39860400002)(396003)(346002)(366004)(136003)(376002)(86362001)(54906003)(2906002)(31686004)(6486002)(966005)(5660300002)(66556008)(66476007)(2616005)(66946007)(31696002)(316002)(478600001)(36756003)(186003)(8936002)(6666004)(38100700002)(4326008)(7416002)(8676002)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aW9CR0hBN2hQRTVpL0tIenVyMFhDL0VqUE9DMExTbjNqYmpEVmxGR051TUUz?=
- =?utf-8?B?c1lEcnl4K21SemQxMTNnU3lJMEJwZlpoSXB3NDNTSFlnbEpiZ1B1SWhnM3Fk?=
- =?utf-8?B?TGdqZm5xYnRQdDBPcEpGZ2dHWjVWRHpNVUJ2VWdEeEttYmNUOUtCRlNVMVFB?=
- =?utf-8?B?YU94U3lMS0UvR0Qwc1JTUG4vR3p0bWpPZVN0b1c0dENRTG84SzIyaGd4UFR5?=
- =?utf-8?B?aWhKQVdBWlp3b01nT0xjK2ozNUR3R0YzaUo3QjhIVnp1ejRoWEdaN2M3bEpk?=
- =?utf-8?B?bktuN2F1R1gxdnc0Q1I4YzFhVmtWOUdtNTdzQ3lvMWVwSURmMDRYSWxFbzRN?=
- =?utf-8?B?SnQ1Tm1meVBldVVaVUlsVHc0UjhEQTlDS2JQNE5aUEtaZGVWdFIzZ1RDMjRj?=
- =?utf-8?B?RDBROWp0WDc2WXFTUXFyaTFZZlVWU1pCR0tVSzhKUXBqY3RkOS9YZ25EL2ta?=
- =?utf-8?B?NUh1ZEpZbDZmay8xaVgwbU9jZ3Qyc2NzRHVTK0UyUXBOd3YwbjZuclZaelZt?=
- =?utf-8?B?TG5KR3JBa2tqZTJxeVBJN29tb29KY2xiblpURm9OTmc3dmwwbDdnVlc3cTdu?=
- =?utf-8?B?WkFZV0ZMWTB1eUQ1bDJOSWppZnl6V0lNYitDVHd2cG1TT2gxNEFHRTZiMkRN?=
- =?utf-8?B?ekNMT2t2eEpNRlpHZnBWcUZTMHdjeGx0dnU4MjNTVU5KR0dRTjhmNVV2WGZU?=
- =?utf-8?B?M0grdUZSejY0VitiOEplT2JJWTRaajJYcGVmUjZCS1A2c3RLbnB6SURYNjcz?=
- =?utf-8?B?REhVbFJNMkJqU3ZkRnFDV2IrWDNSV2lrd3luaW96bEhJaTZSNzF3dlA4NWZj?=
- =?utf-8?B?azdua2picmZhVkFOZXdES1pFSVBYMDRkY083ei9JRjdIdXQwN3NTMThyVU5E?=
- =?utf-8?B?bTBTRUxDcXdxRHFoeWd4b2MzSkpXNVBHbmFRWmhTZ1JZU2lqWThlcjJCakhv?=
- =?utf-8?B?bm9IWmMrME9FSE1xb291TDVGYmFkcnhvcWhnMTV3WURvbmtZTytuUHloS3Z4?=
- =?utf-8?B?Q0tEd04wdmVueWtNYTVBd1Zac08vMkNzaUdoSjNUTXNhTWE5dm1rbXBYUXdP?=
- =?utf-8?B?d1pIMTNNNnJOYzlrRm8xWjhiWU4yL0x5d0JCMTZiUjBTcDFZWUlySVIvU3ds?=
- =?utf-8?B?N1MvVzVmUmFBZ0dWZWdQUC94RkRTZjNaaEhCMmg2Ukk2UjFkL1FKTXd3akZK?=
- =?utf-8?B?ZzVSemkxQUJuaHpFNzVpTWlza2hnZDdBYXhIZnlIMUluSEpQTlVpTnZXV3li?=
- =?utf-8?B?a0tLZTMyNTBDOTVWMWVOMDJkaHZqY2lhRTlFSlZobllQYjdWN0Z3c1kxa0RG?=
- =?utf-8?B?Si95QVBMR21TSXZidnozMlZWNVVkY0N6cVVURE5CNnBnS2d6aUZqdjR4Q1Bi?=
- =?utf-8?B?eFlmMkFXN21XdG1vQ1dvdXg0UEZCQjUyZVFFTHZOWEU4NzA3WVB4bHp1QTNv?=
- =?utf-8?B?Rnh3Yjl1OVNXbGZJYU1uVmR4ZDQrZVZrZysxVEtVZUN5ZW94cFNtWk5QWXRC?=
- =?utf-8?B?alI2VjU1RWF4S1oyV2RvQWNVMllGaTFLZms2enk5RmVSVWxsY2tnem1RdVVD?=
- =?utf-8?B?amk1TmlUWXR5Y3plbHlYWTZlYmZ6TjRudWNFQ3g2dnJ1cGVuRFR0N3J4Z3l2?=
- =?utf-8?B?aDdwd0ZJZmZqS1FqNTgxZjdsUDJPUGFVTytXYmtLZHp3SnFFVnQzVWxSVzNU?=
- =?utf-8?B?UG1KcjFpSlhBMWpjSnorUmlUWUdmYXhiRk11WkJ0cjVNZnB4TGRlOS9CNFFC?=
- =?utf-8?B?MENQUlgvZGNEQiswaS9Wb3ozU3JsRFRDdkpISHlzYUEyS1BEaUVNNHJ3bDda?=
- =?utf-8?B?ZlpLaGN4OFRFUFZpVTVURy9uNnZSNVhxeXNxWG9VQTBneHdKNjNJYUJKRUNT?=
- =?utf-8?Q?eU/UJDR7KJuqs?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 491ff605-d02c-491a-78a9-08d9609efd91
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Aug 2021 10:17:03.1110 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tVkrkTOemsZ/SC2oZhzPDIui9FKVAA7HpVVtKe7KvEOupLL08/pKHkGzkY7HK2Dm
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4535
+Content-Disposition: inline
+In-Reply-To: <20210814073019.GC21175@lst.de>
+X-Operating-System: Linux phenom 5.10.0-7-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v2 0/5] dma-fence: Deadline awareness
+Subject: Re: [Linaro-mm-sig] IIO, dmabuf, io_uring
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -138,83 +88,102 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Rob Clark <robdclark@chromium.org>,
- Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
- Gustavo Padovan <gustavo@padovan.org>, linux-arm-msm@vger.kernel.org,
- Jack Zhang <Jack.Zhang1@amd.com>, open list <linux-kernel@vger.kernel.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Luben Tuikov <luben.tuikov@amd.com>, Daniel Vetter <daniel@ffwll.ch>,
- Alex Deucher <alexander.deucher@amd.com>, Tian Tao <tiantao6@hisilicon.com>,
- Lee Jones <lee.jones@linaro.org>, Steven Price <steven.price@arm.com>,
- freedreno@lists.freedesktop.org,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+Cc: linaro-mm-sig@lists.linaro.org,
+ Michael Hennerich <Michael.Hennerich@analog.com>, linux-iio@vger.kernel.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ io-uring@vger.kernel.org, Paul Cercueil <paul@crapouillou.net>,
+ Alexandru Ardelean <ardeleanalex@gmail.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Jonathan Cameron <jic23@kernel.org>, linux-media@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-The general approach seems to make sense now I think.
+On Sat, Aug 14, 2021 at 09:30:19AM +0200, Christoph Hellwig wrote:
+> On Fri, Aug 13, 2021 at 01:41:26PM +0200, Paul Cercueil wrote:
+> > Hi,
+> >
+> > A few months ago we (ADI) tried to upstream the interface we use with our 
+> > high-speed ADCs and DACs. It is a system with custom ioctls on the iio 
+> > device node to dequeue and enqueue buffers (allocated with 
+> > dma_alloc_coherent), that can then be mmap'd by userspace applications. 
+> > Anyway, it was ultimately denied entry [1]; this API was okay in ~2014 when 
+> > it was designed but it feels like re-inventing the wheel in 2021.
+> >
+> > Back to the drawing table, and we'd like to design something that we can 
+> > actually upstream. This high-speed interface looks awfully similar to 
+> > DMABUF, so we may try to implement a DMABUF interface for IIO, unless 
+> > someone has a better idea.
+> 
+> To me this does sound a lot like a dma buf use case.  The interesting
+> question to me is how to signal arrival of new data, or readyness to
+> consume more data.  I suspect that people that are actually using
+> dmabuf heavily at the moment (dri/media folks) might be able to chime
+> in a little more on that.
 
-One minor thing which I'm missing is adding support for this to the 
-dma_fence_array and dma_fence_chain containers.
+One option is to just block in userspace (on poll, or an ioctl, or
+whatever) and then latch the next stage in the pipeline. That's what media
+does right now (because the dma-fence proposal never got anywhere).
 
-Regards,
-Christian.
+In drm we use dma_fences to tie up the stages, and the current
+recommendation for uapi is to use the drm_syncobj container (not the
+sync_file container, that was a bit an awkward iteration on that problem).
+With that you can tie together all the pipeline stages within the kernel
+(and at least sometimes directly in hw).
 
-Am 07.08.21 um 20:37 schrieb Rob Clark:
-> From: Rob Clark <robdclark@chromium.org>
->
-> Based on discussion from a previous series[1] to add a "boost" mechanism
-> when, for example, vblank deadlines are missed.  Instead of a boost
-> callback, this approach adds a way to set a deadline on the fence, by
-> which the waiter would like to see the fence signalled.
->
-> I've not yet had a chance to re-work the drm/msm part of this, but
-> wanted to send this out as an RFC in case I don't have a chance to
-> finish the drm/msm part this week.
->
-> Original description:
->
-> In some cases, like double-buffered rendering, missing vblanks can
-> trick the GPU into running at a lower frequence, when really we
-> want to be running at a higher frequency to not miss the vblanks
-> in the first place.
->
-> This is partially inspired by a trick i915 does, but implemented
-> via dma-fence for a couple of reasons:
->
-> 1) To continue to be able to use the atomic helpers
-> 2) To support cases where display and gpu are different drivers
->
-> [1] https://patchwork.freedesktop.org/series/90331/
->
-> v1: https://patchwork.freedesktop.org/series/93035/
-> v2: Move filtering out of later deadlines to fence implementation
->      to avoid increasing the size of dma_fence
->
-> Rob Clark (5):
->    dma-fence: Add deadline awareness
->    drm/vblank: Add helper to get next vblank time
->    drm/atomic-helper: Set fence deadline for vblank
->    drm/scheduler: Add fence deadline support
->    drm/msm: Add deadline based boost support
->
->   drivers/dma-buf/dma-fence.c             | 20 +++++++
->   drivers/gpu/drm/drm_atomic_helper.c     | 36 ++++++++++++
->   drivers/gpu/drm/drm_vblank.c            | 31 ++++++++++
->   drivers/gpu/drm/msm/msm_fence.c         | 76 +++++++++++++++++++++++++
->   drivers/gpu/drm/msm/msm_fence.h         | 20 +++++++
->   drivers/gpu/drm/msm/msm_gpu.h           |  1 +
->   drivers/gpu/drm/msm/msm_gpu_devfreq.c   | 20 +++++++
->   drivers/gpu/drm/scheduler/sched_fence.c | 25 ++++++++
->   drivers/gpu/drm/scheduler/sched_main.c  |  3 +
->   include/drm/drm_vblank.h                |  1 +
->   include/drm/gpu_scheduler.h             |  6 ++
->   include/linux/dma-fence.h               | 16 ++++++
->   12 files changed, 255 insertions(+)
->
+The downside is (well imo it's not a downside, but some people see it as
+hta) that once you use dma-fence dri-devel folks really consider your
+stuff a gpu driver and expect all the gpu driver review/merge criteria to
+be fulfilled. Specifically about the userspace side too:
 
+https://dri.freedesktop.org/docs/drm/gpu/drm-uapi.html#open-source-userspace-requirements
+
+At least one driver is trying to play some very clever games here and
+that's not a solid way to make friends ...
+-Daniel
+
+> 
+> > Our first usecase is, we want userspace applications to be able to dequeue 
+> > buffers of samples (from ADCs), and/or enqueue buffers of samples (for 
+> > DACs), and to be able to manipulate them (mmapped buffers). With a DMABUF 
+> > interface, I guess the userspace application would dequeue a dma buffer 
+> > from the driver, mmap it, read/write the data, unmap it, then enqueue it to 
+> > the IIO driver again so that it can be disposed of. Does that sound sane?
+> >
+> > Our second usecase is - and that's where things get tricky - to be able to 
+> > stream the samples to another computer for processing, over Ethernet or 
+> > USB. Our typical setup is a high-speed ADC/DAC on a dev board with a FPGA 
+> > and a weak soft-core or low-power CPU; processing the data in-situ is not 
+> > an option. Copying the data from one buffer to another is not an option 
+> > either (way too slow), so we absolutely want zero-copy.
+> >
+> > Usual userspace zero-copy techniques (vmsplice+splice, MSG_ZEROCOPY etc) 
+> > don't really work with mmapped kernel buffers allocated for DMA [2] and/or 
+> > have a huge overhead, so the way I see it, we would also need DMABUF 
+> > support in both the Ethernet stack and USB (functionfs) stack. However, as 
+> > far as I understood, DMABUF is mostly a DRM/V4L2 thing, so I am really not 
+> > sure we have the right idea here.
+> >
+> > And finally, there is the new kid in town, io_uring. I am not very literate 
+> > about the topic, but it does not seem to be able to handle DMA buffers 
+> > (yet?). The idea that we could dequeue a buffer of samples from the IIO 
+> > device and send it over the network in one single syscall is appealing, 
+> > though.
+> 
+> Think of io_uring really just as an async syscall layer.  It doesn't
+> replace DMA buffers, but can be used as a different and for some
+> workloads more efficient way to dispatch syscalls.
+> _______________________________________________
+> Linaro-mm-sig mailing list
+> Linaro-mm-sig@lists.linaro.org
+> https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
