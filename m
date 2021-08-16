@@ -2,74 +2,130 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 043163ED1C5
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Aug 2021 12:15:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C6503ED1CE
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Aug 2021 12:17:26 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2C88060ECA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Aug 2021 10:15:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BBD1761174
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 Aug 2021 10:17:24 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 2624060A52; Mon, 16 Aug 2021 10:15:45 +0000 (UTC)
+	id 74EA960A67; Mon, 16 Aug 2021 10:17:23 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 161696098B;
-	Mon, 16 Aug 2021 10:15:43 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5D0FE6098B;
+	Mon, 16 Aug 2021 10:17:20 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 72948608D5
- for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Aug 2021 10:15:41 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 892FB608D5
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Aug 2021 10:17:18 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 702236098B; Mon, 16 Aug 2021 10:15:41 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
- by lists.linaro.org (Postfix) with ESMTPS id 6877C608D5
- for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Aug 2021 10:15:39 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id k29so22762195wrd.7
- for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Aug 2021 03:15:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=nDZLANJ3zjlg8qcpDpXtNW0+CSx2CqBvgsXtfDv7fxs=;
- b=a/F/Vq9X+EDkGfRQYvnolgy0ATVt0DQj+nTWLadLpXs9i9dRONlzYsbyUR3LE4RUne
- 0XjJgfQxs6WiHfEe00FVZv5ejpNnrx8Fq9DltiIcn/3eTZSzMQt9PKOUFroGjXpdpCI9
- yHs4QgFtS1hlhcRaW2k1L5QJLI2LIzm2zP6b4s/4lRytVjdr6J3VXtraDSxE2l8VYFWP
- pcS6L4s7k7yf2HB2wnvsn4J3k/FyQHkSDPubs8HZpDP9ez9fS2k6YEER52bK9+YKKFiI
- LhPQTj82/BAjxQ/7nwMX2ns0GSYvEJT5HOmPyRFpZmi0o8YZ+0U94FqhxHh37fvklflL
- n19g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=nDZLANJ3zjlg8qcpDpXtNW0+CSx2CqBvgsXtfDv7fxs=;
- b=VK4eWWBYjmADVjwhUFUT+nZ2CBCEpRKKcTBlad5ctlZXnZJ3XUX6anzoF00N8U2bq1
- KgyQD1mnpyXeYKc2xdj0hIfpnHVe47WAItmHEzgxWiePwadwr6vVoJVKvztlsbWXGr3c
- SAeHFPt/u4DPEHywx0ndZBbTHD6ugmZAO7SOtomPgOWahKMa/dp6qqQfVA7+Me1xEPKL
- vgXPfB2RuGuTu2O+wphKcmI+O8hwQ5BRcf6rECLLRCECkP0Xy/XCL3SAOyyINM2x2Eyr
- MZlVoRw2FqnfRAu6rRR7EhhJdbmtf46bga0cAtQiSlamw6iNUjNT4a1mkQzbvTQg9/jw
- ZUXA==
-X-Gm-Message-State: AOAM532wo7tiydyKW0UDXPp+dCQQvpugoa34Kioe29HGQCzCT7EZofOP
- Son+h8KzsG8RlrcaaYgcg5A=
-X-Google-Smtp-Source: ABdhPJwqpYeHZyOoy+wLcE4jxrRof3XjuC8nnDGcK+VlCLMybiY6T7Z/PRxoS5A46oIm810V65WsCg==
-X-Received: by 2002:adf:fb44:: with SMTP id c4mr17047849wrs.179.1629108938443; 
- Mon, 16 Aug 2021 03:15:38 -0700 (PDT)
-Received: from ?IPv6:2a02:908:1252:fb60:7d83:fd8:eb16:8605?
- ([2a02:908:1252:fb60:7d83:fd8:eb16:8605])
- by smtp.gmail.com with ESMTPSA id a18sm9498664wmg.43.2021.08.16.03.15.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 16 Aug 2021 03:15:38 -0700 (PDT)
+ id 84A206098B; Mon, 16 Aug 2021 10:17:18 +0000 (UTC)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2054.outbound.protection.outlook.com [40.107.93.54])
+ by lists.linaro.org (Postfix) with ESMTPS id 6C44F608D5
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 16 Aug 2021 10:17:16 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IxiMWRAX7lE8ZNsn427H5bfAfwSrVYEfcT8kY4Yqsqi/rg/14imVd0yRiVdb7kvjTDiAms0+kMwqAM6B+n4iYlitBJVV/HnLGr8F4UBjKufvsQvGSpQMISh4Bx3mmJmwvSaMIb4ldd/UCv7X6yQZvUK/j7awrL1ET1lBLUv1qSafeuBX5n2sYmaWloHJmgRf4S9Xxg5VYOF47ITnvlVQLWcI8QGOJJZCWYB4r8dzniwXzH2AWUdxBH3sUlFy9+Gdm6xNF3RSa9zwUGhMVgqM8D+UbrZpyesjD5p42Yl0ZBu5gjUnhOGmiSBmbhqZ/CbYCJ4ySiwhtQNsoCC9bTEtaw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PXEBcwLpf7AdK9XcvKlAl+Ehs0UK96h11hVkC+RRWjk=;
+ b=kML67Fkqd2MDHEkfllBAYE2zRPZnsfAK6vxB+k8RLtVx8HetmGXft8xblXaJ4xDh7JyqwF2Hi4gMIHSrFLIMM6XZRsvEpXfu3jUTkFzl5FoTps+711o8Lw56Kn1/1RVKY+ynDIRzaOkZ3F61Ro8uhkSd6EQfAAVZ8zuDrMTYmdRHo03ArDCWIXWcAriBPo4ZHgVnbwlS0CubjQQbvLbeEx7sLjWanxr1ZlvXwU/29RVM2b2oMNlgFyZj2gASpy0cGQYLG4Q6hkASZgZu18zItgISaIVe+zpIgTQB+nk9SEiM84yEC2XgiCcpg6mgzqLLkh+MtR607+eNfbDRiCtNaA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PXEBcwLpf7AdK9XcvKlAl+Ehs0UK96h11hVkC+RRWjk=;
+ b=j/M5DxgCGVpqGzaq5083xpbWqd8CrZfXThFNm5J9opkGE0rXkn0UN4KohvnxdHmSDXZCu0YaYMJFu4EhJ8/AwOcYRRFHkLfbDBDPk+Y5Ja7WEOsmTlrLR+DRR9Dcml0QGMbBVg96A6zhDa2Dd0KxvlXD0JDAvtOk/TNJzsenaSk=
+Authentication-Results: hisilicon.com; dkim=none (message not signed)
+ header.d=none;hisilicon.com; dmarc=none action=none header.from=amd.com;
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
+ by MN2PR12MB4535.namprd12.prod.outlook.com (2603:10b6:208:267::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4415.17; Mon, 16 Aug
+ 2021 10:17:03 +0000
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::dce2:96e5:aba2:66fe]) by MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::dce2:96e5:aba2:66fe%6]) with mapi id 15.20.4415.023; Mon, 16 Aug 2021
+ 10:17:03 +0000
 To: Rob Clark <robdclark@gmail.com>, dri-devel@lists.freedesktop.org
 References: <20210807183804.459850-1-robdclark@gmail.com>
- <20210807183804.459850-2-robdclark@gmail.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <354a3118-c7ce-c1ff-60eb-788f3fa4b48d@gmail.com>
-Date: Mon, 16 Aug 2021 12:15:37 +0200
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+Message-ID: <9a7bdcb5-4f6f-539b-060e-d69ec15da874@amd.com>
+Date: Mon, 16 Aug 2021 12:16:54 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.11.0
-MIME-Version: 1.0
-In-Reply-To: <20210807183804.459850-2-robdclark@gmail.com>
+In-Reply-To: <20210807183804.459850-1-robdclark@gmail.com>
 Content-Language: en-US
+X-ClientProxiedBy: PR0P264CA0268.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:100:1::16) To MN2PR12MB3775.namprd12.prod.outlook.com
+ (2603:10b6:208:159::19)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [IPv6:2a02:908:1252:fb60:7d83:fd8:eb16:8605]
+ (2a02:908:1252:fb60:7d83:fd8:eb16:8605) by
+ PR0P264CA0268.FRAP264.PROD.OUTLOOK.COM (2603:10a6:100:1::16) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4415.13 via Frontend Transport; Mon, 16 Aug 2021 10:16:59 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 491ff605-d02c-491a-78a9-08d9609efd91
+X-MS-TrafficTypeDiagnostic: MN2PR12MB4535:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <MN2PR12MB4535F89108ADFCB9D7A13AAC83FD9@MN2PR12MB4535.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: X/mVBiHA8kBV7ZDw8obLGQvZI6KKlf7P0LIyCSeeYw7Efr1Y3i9e3ldfNcorreWhfgHIfAuzAKTXffvcHDbdz/4H0KChnrZVE9TanEcz/zD2iYf3Q1JWKj4GGIcxh9vqkfLhk1n45sagKysfvuOvYronQTnlCf2khWz7x3R30X3AU3GGe/7dbxGHsqD1H/jwZcQgvIw2cvyIsRF7Esr5fd38OJ87ngCUn7IfDb/s5Isb9q+7oLF0Yr+PM5SObRz1Yw6VTG5AxjRxH9GHzf4OOCleDTxtXkbGzNf8obhUnqqDOZUmi4CXDq/PNk0QQlQUcN3ZcfbqLych7YE5cxdmToXp4+oeKSGw9qopJuV2IjRQ/qz5ra4CsyXu0i6GvPHaUdNd0138o3y0kN4eOB15ZfXOgYXnWhFvVajk1svr2BcLdOtOMZ/g4lWtgFfcMcjigBmJ5qSoMPhQDxTZiAmobyovnDW8BeQuaLXW+G4Yo7LlS5yR2A7yI2vACYCvZOisdjDEMWXJUXuYkU7kbFevZLttzXYc6VN1nXeaXd6N5s2oNVKgGaaECKBIw/ZTLcWHNple1+/eQRjitJ4+tbmiJeXmbPa1yRmi0j13990LLq5rYy4gqTQpt/QtrjKCKKMseH4dNKV0u3o9dQYlD933Bvdazidlo3ZLSvwE9PSyNH9jBOZbxoHVT4MSPYkxYODoVcbz6uTa+qDSjIX7cZIJ0G3W5HiGR9Ky+SpMTLhKK2eqv5XSyug75vLH8BI3Y+nI
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(39860400002)(396003)(346002)(366004)(136003)(376002)(86362001)(54906003)(2906002)(31686004)(6486002)(966005)(5660300002)(66556008)(66476007)(2616005)(66946007)(31696002)(316002)(478600001)(36756003)(186003)(8936002)(6666004)(38100700002)(4326008)(7416002)(8676002)(43740500002)(45980500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aW9CR0hBN2hQRTVpL0tIenVyMFhDL0VqUE9DMExTbjNqYmpEVmxGR051TUUz?=
+ =?utf-8?B?c1lEcnl4K21SemQxMTNnU3lJMEJwZlpoSXB3NDNTSFlnbEpiZ1B1SWhnM3Fk?=
+ =?utf-8?B?TGdqZm5xYnRQdDBPcEpGZ2dHWjVWRHpNVUJ2VWdEeEttYmNUOUtCRlNVMVFB?=
+ =?utf-8?B?YU94U3lMS0UvR0Qwc1JTUG4vR3p0bWpPZVN0b1c0dENRTG84SzIyaGd4UFR5?=
+ =?utf-8?B?aWhKQVdBWlp3b01nT0xjK2ozNUR3R0YzaUo3QjhIVnp1ejRoWEdaN2M3bEpk?=
+ =?utf-8?B?bktuN2F1R1gxdnc0Q1I4YzFhVmtWOUdtNTdzQ3lvMWVwSURmMDRYSWxFbzRN?=
+ =?utf-8?B?SnQ1Tm1meVBldVVaVUlsVHc0UjhEQTlDS2JQNE5aUEtaZGVWdFIzZ1RDMjRj?=
+ =?utf-8?B?RDBROWp0WDc2WXFTUXFyaTFZZlVWU1pCR0tVSzhKUXBqY3RkOS9YZ25EL2ta?=
+ =?utf-8?B?NUh1ZEpZbDZmay8xaVgwbU9jZ3Qyc2NzRHVTK0UyUXBOd3YwbjZuclZaelZt?=
+ =?utf-8?B?TG5KR3JBa2tqZTJxeVBJN29tb29KY2xiblpURm9OTmc3dmwwbDdnVlc3cTdu?=
+ =?utf-8?B?WkFZV0ZMWTB1eUQ1bDJOSWppZnl6V0lNYitDVHd2cG1TT2gxNEFHRTZiMkRN?=
+ =?utf-8?B?ekNMT2t2eEpNRlpHZnBWcUZTMHdjeGx0dnU4MjNTVU5KR0dRTjhmNVV2WGZU?=
+ =?utf-8?B?M0grdUZSejY0VitiOEplT2JJWTRaajJYcGVmUjZCS1A2c3RLbnB6SURYNjcz?=
+ =?utf-8?B?REhVbFJNMkJqU3ZkRnFDV2IrWDNSV2lrd3luaW96bEhJaTZSNzF3dlA4NWZj?=
+ =?utf-8?B?azdua2picmZhVkFOZXdES1pFSVBYMDRkY083ei9JRjdIdXQwN3NTMThyVU5E?=
+ =?utf-8?B?bTBTRUxDcXdxRHFoeWd4b2MzSkpXNVBHbmFRWmhTZ1JZU2lqWThlcjJCakhv?=
+ =?utf-8?B?bm9IWmMrME9FSE1xb291TDVGYmFkcnhvcWhnMTV3WURvbmtZTytuUHloS3Z4?=
+ =?utf-8?B?Q0tEd04wdmVueWtNYTVBd1Zac08vMkNzaUdoSjNUTXNhTWE5dm1rbXBYUXdP?=
+ =?utf-8?B?d1pIMTNNNnJOYzlrRm8xWjhiWU4yL0x5d0JCMTZiUjBTcDFZWUlySVIvU3ds?=
+ =?utf-8?B?N1MvVzVmUmFBZ0dWZWdQUC94RkRTZjNaaEhCMmg2Ukk2UjFkL1FKTXd3akZK?=
+ =?utf-8?B?ZzVSemkxQUJuaHpFNzVpTWlza2hnZDdBYXhIZnlIMUluSEpQTlVpTnZXV3li?=
+ =?utf-8?B?a0tLZTMyNTBDOTVWMWVOMDJkaHZqY2lhRTlFSlZobllQYjdWN0Z3c1kxa0RG?=
+ =?utf-8?B?Si95QVBMR21TSXZidnozMlZWNVVkY0N6cVVURE5CNnBnS2d6aUZqdjR4Q1Bi?=
+ =?utf-8?B?eFlmMkFXN21XdG1vQ1dvdXg0UEZCQjUyZVFFTHZOWEU4NzA3WVB4bHp1QTNv?=
+ =?utf-8?B?Rnh3Yjl1OVNXbGZJYU1uVmR4ZDQrZVZrZysxVEtVZUN5ZW94cFNtWk5QWXRC?=
+ =?utf-8?B?alI2VjU1RWF4S1oyV2RvQWNVMllGaTFLZms2enk5RmVSVWxsY2tnem1RdVVD?=
+ =?utf-8?B?amk1TmlUWXR5Y3plbHlYWTZlYmZ6TjRudWNFQ3g2dnJ1cGVuRFR0N3J4Z3l2?=
+ =?utf-8?B?aDdwd0ZJZmZqS1FqNTgxZjdsUDJPUGFVTytXYmtLZHp3SnFFVnQzVWxSVzNU?=
+ =?utf-8?B?UG1KcjFpSlhBMWpjSnorUmlUWUdmYXhiRk11WkJ0cjVNZnB4TGRlOS9CNFFC?=
+ =?utf-8?B?MENQUlgvZGNEQiswaS9Wb3ozU3JsRFRDdkpISHlzYUEyS1BEaUVNNHJ3bDda?=
+ =?utf-8?B?ZlpLaGN4OFRFUFZpVTVURy9uNnZSNVhxeXNxWG9VQTBneHdKNjNJYUJKRUNT?=
+ =?utf-8?Q?eU/UJDR7KJuqs?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 491ff605-d02c-491a-78a9-08d9609efd91
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Aug 2021 10:17:03.1110 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: tVkrkTOemsZ/SC2oZhzPDIui9FKVAA7HpVVtKe7KvEOupLL08/pKHkGzkY7HK2Dm
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4535
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v2 1/5] dma-fence: Add deadline awareness
+Subject: Re: [Linaro-mm-sig] [PATCH v2 0/5] dma-fence: Deadline awareness
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,86 +138,84 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Rob Clark <robdclark@chromium.org>, linux-arm-msm@vger.kernel.org,
- open list <linux-kernel@vger.kernel.org>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+Cc: Rob Clark <robdclark@chromium.org>,
+ Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
+ Gustavo Padovan <gustavo@padovan.org>, linux-arm-msm@vger.kernel.org,
+ Jack Zhang <Jack.Zhang1@amd.com>, open list <linux-kernel@vger.kernel.org>,
  "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Daniel Vetter <daniel@ffwll.ch>, Gustavo Padovan <gustavo@padovan.org>,
+ Luben Tuikov <luben.tuikov@amd.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Alex Deucher <alexander.deucher@amd.com>, Tian Tao <tiantao6@hisilicon.com>,
+ Lee Jones <lee.jones@linaro.org>, Steven Price <steven.price@arm.com>,
  freedreno@lists.freedesktop.org,
- "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-QW0gMDcuMDguMjEgdW0gMjA6Mzcgc2NocmllYiBSb2IgQ2xhcms6Cj4gRnJvbTogUm9iIENsYXJr
-IDxyb2JkY2xhcmtAY2hyb21pdW0ub3JnPgo+Cj4gQWRkIGEgd2F5IHRvIGhpbnQgdG8gdGhlIGZl
-bmNlIHNpZ25hbGVyIG9mIGFuIHVwY29taW5nIGRlYWRsaW5lLCBzdWNoIGFzCj4gdmJsYW5rLCB3
-aGljaCB0aGUgZmVuY2Ugd2FpdGVyIHdvdWxkIHByZWZlciBub3QgdG8gbWlzcy4gIFRoaXMgaXMg
-dG8gYWlkCj4gdGhlIGZlbmNlIHNpZ25hbGVyIGluIG1ha2luZyBwb3dlciBtYW5hZ2VtZW50IGRl
-Y2lzaW9ucywgbGlrZSBib29zdGluZwo+IGZyZXF1ZW5jeSBhcyB0aGUgZGVhZGxpbmUgYXBwcm9h
-Y2hlcyBhbmQgYXdhcmVuZXNzIG9mIG1pc3NpbmcgZGVhZGxpbmVzCj4gc28gdGhhdCBjYW4gYmUg
-ZmFjdG9yZWQgaW4gdG8gdGhlIGZyZXF1ZW5jeSBzY2FsaW5nLgo+Cj4gdjI6IERyb3AgZG1hX2Zl
-bmNlOjpkZWFkbGluZSBhbmQgcmVsYXRlZCBsb2dpYyB0byBmaWx0ZXIgZHVwbGljYXRlCj4gICAg
-ICBkZWFkbGluZXMsIHRvIGF2b2lkIGluY3JlYXNpbmcgZG1hX2ZlbmNlIHNpemUuICBUaGUgZmVu
-Y2UtY29udGV4dAo+ICAgICAgaW1wbGVtZW50YXRpb24gd2lsbCBuZWVkIHNpbWlsYXIgbG9naWMg
-dG8gdHJhY2sgZGVhZGxpbmVzIG9mIGFsbAo+ICAgICAgdGhlIGZlbmNlcyBvbiB0aGUgc2FtZSB0
-aW1lbGluZS4gIFtja29lbmlnXQo+Cj4gU2lnbmVkLW9mZi1ieTogUm9iIENsYXJrIDxyb2JkY2xh
-cmtAY2hyb21pdW0ub3JnPgoKUmV2aWV3ZWQtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlh
-bi5rb2VuaWdAYW1kLmNvbT4KCj4gLS0tCj4gICBkcml2ZXJzL2RtYS1idWYvZG1hLWZlbmNlLmMg
-fCAyMCArKysrKysrKysrKysrKysrKysrKwo+ICAgaW5jbHVkZS9saW51eC9kbWEtZmVuY2UuaCAg
-IHwgMTYgKysrKysrKysrKysrKysrKwo+ICAgMiBmaWxlcyBjaGFuZ2VkLCAzNiBpbnNlcnRpb25z
-KCspCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jIGIvZHJpdmVy
-cy9kbWEtYnVmL2RtYS1mZW5jZS5jCj4gaW5kZXggY2UwZjVlZmY1NzVkLi4xZjQ0NDg2M2I5NGQg
-MTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jCj4gKysrIGIvZHJpdmVy
-cy9kbWEtYnVmL2RtYS1mZW5jZS5jCj4gQEAgLTkxMCw2ICs5MTAsMjYgQEAgZG1hX2ZlbmNlX3dh
-aXRfYW55X3RpbWVvdXQoc3RydWN0IGRtYV9mZW5jZSAqKmZlbmNlcywgdWludDMyX3QgY291bnQs
-Cj4gICB9Cj4gICBFWFBPUlRfU1lNQk9MKGRtYV9mZW5jZV93YWl0X2FueV90aW1lb3V0KTsKPiAg
-IAo+ICsKPiArLyoqCj4gKyAqIGRtYV9mZW5jZV9zZXRfZGVhZGxpbmUgLSBzZXQgZGVzaXJlZCBm
-ZW5jZS13YWl0IGRlYWRsaW5lCj4gKyAqIEBmZW5jZTogICAgdGhlIGZlbmNlIHRoYXQgaXMgdG8g
-YmUgd2FpdGVkIG9uCj4gKyAqIEBkZWFkbGluZTogdGhlIHRpbWUgYnkgd2hpY2ggdGhlIHdhaXRl
-ciBob3BlcyBmb3IgdGhlIGZlbmNlIHRvIGJlCj4gKyAqICAgICAgICAgICAgc2lnbmFsZWQKPiAr
-ICoKPiArICogSW5mb3JtIHRoZSBmZW5jZSBzaWduYWxlciBvZiBhbiB1cGNvbWluZyBkZWFkbGlu
-ZSwgc3VjaCBhcyB2YmxhbmssIGJ5Cj4gKyAqIHdoaWNoIHBvaW50IHRoZSB3YWl0ZXIgd291bGQg
-cHJlZmVyIHRoZSBmZW5jZSB0byBiZSBzaWduYWxlZCBieS4gIFRoaXMKPiArICogaXMgaW50ZW5k
-ZWQgdG8gZ2l2ZSBmZWVkYmFjayB0byB0aGUgZmVuY2Ugc2lnbmFsZXIgdG8gYWlkIGluIHBvd2Vy
-Cj4gKyAqIG1hbmFnZW1lbnQgZGVjaXNpb25zLCBzdWNoIGFzIGJvb3N0aW5nIEdQVSBmcmVxdWVu
-Y3kgaWYgYSBwZXJpb2RpYwo+ICsgKiB2YmxhbmsgZGVhZGxpbmUgaXMgYXBwcm9hY2hpbmcuCj4g
-KyAqLwo+ICt2b2lkIGRtYV9mZW5jZV9zZXRfZGVhZGxpbmUoc3RydWN0IGRtYV9mZW5jZSAqZmVu
-Y2UsIGt0aW1lX3QgZGVhZGxpbmUpCj4gK3sKPiArCWlmIChmZW5jZS0+b3BzLT5zZXRfZGVhZGxp
-bmUgJiYgIWRtYV9mZW5jZV9pc19zaWduYWxlZChmZW5jZSkpCj4gKwkJZmVuY2UtPm9wcy0+c2V0
-X2RlYWRsaW5lKGZlbmNlLCBkZWFkbGluZSk7Cj4gK30KPiArRVhQT1JUX1NZTUJPTChkbWFfZmVu
-Y2Vfc2V0X2RlYWRsaW5lKTsKPiArCj4gICAvKioKPiAgICAqIGRtYV9mZW5jZV9pbml0IC0gSW5p
-dGlhbGl6ZSBhIGN1c3RvbSBmZW5jZS4KPiAgICAqIEBmZW5jZTogdGhlIGZlbmNlIHRvIGluaXRp
-YWxpemUKPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC9kbWEtZmVuY2UuaCBiL2luY2x1ZGUv
-bGludXgvZG1hLWZlbmNlLmgKPiBpbmRleCA2ZmZiNGIyYzYzNzEuLjljODA5ZjBkNWQwYSAxMDA2
-NDQKPiAtLS0gYS9pbmNsdWRlL2xpbnV4L2RtYS1mZW5jZS5oCj4gKysrIGIvaW5jbHVkZS9saW51
-eC9kbWEtZmVuY2UuaAo+IEBAIC05OSw2ICs5OSw3IEBAIGVudW0gZG1hX2ZlbmNlX2ZsYWdfYml0
-cyB7Cj4gICAJRE1BX0ZFTkNFX0ZMQUdfU0lHTkFMRURfQklULAo+ICAgCURNQV9GRU5DRV9GTEFH
-X1RJTUVTVEFNUF9CSVQsCj4gICAJRE1BX0ZFTkNFX0ZMQUdfRU5BQkxFX1NJR05BTF9CSVQsCj4g
-KwlETUFfRkVOQ0VfRkxBR19IQVNfREVBRExJTkVfQklULAo+ICAgCURNQV9GRU5DRV9GTEFHX1VT
-RVJfQklUUywgLyogbXVzdCBhbHdheXMgYmUgbGFzdCBtZW1iZXIgKi8KPiAgIH07Cj4gICAKPiBA
-QCAtMjYxLDYgKzI2MiwxOSBAQCBzdHJ1Y3QgZG1hX2ZlbmNlX29wcyB7Cj4gICAJICovCj4gICAJ
-dm9pZCAoKnRpbWVsaW5lX3ZhbHVlX3N0cikoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UsCj4gICAJ
-CQkJICAgY2hhciAqc3RyLCBpbnQgc2l6ZSk7Cj4gKwo+ICsJLyoqCj4gKwkgKiBAc2V0X2RlYWRs
-aW5lOgo+ICsJICoKPiArCSAqIENhbGxiYWNrIHRvIGFsbG93IGEgZmVuY2Ugd2FpdGVyIHRvIGlu
-Zm9ybSB0aGUgZmVuY2Ugc2lnbmFsZXIgb2YgYW4KPiArCSAqIHVwY29taW5nIGRlYWRsaW5lLCBz
-dWNoIGFzIHZibGFuaywgYnkgd2hpY2ggcG9pbnQgdGhlIHdhaXRlciB3b3VsZAo+ICsJICogcHJl
-ZmVyIHRoZSBmZW5jZSB0byBiZSBzaWduYWxlZCBieS4gIFRoaXMgaXMgaW50ZW5kZWQgdG8gZ2l2
-ZSBmZWVkYmFjawo+ICsJICogdG8gdGhlIGZlbmNlIHNpZ25hbGVyIHRvIGFpZCBpbiBwb3dlciBt
-YW5hZ2VtZW50IGRlY2lzaW9ucywgc3VjaCBhcwo+ICsJICogYm9vc3RpbmcgR1BVIGZyZXF1ZW5j
-eS4KPiArCSAqCj4gKwkgKiBUaGlzIGNhbGxiYWNrIGlzIG9wdGlvbmFsLgo+ICsJICovCj4gKwl2
-b2lkICgqc2V0X2RlYWRsaW5lKShzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSwga3RpbWVfdCBkZWFk
-bGluZSk7Cj4gICB9Owo+ICAgCj4gICB2b2lkIGRtYV9mZW5jZV9pbml0KHN0cnVjdCBkbWFfZmVu
-Y2UgKmZlbmNlLCBjb25zdCBzdHJ1Y3QgZG1hX2ZlbmNlX29wcyAqb3BzLAo+IEBAIC01ODYsNiAr
-NjAwLDggQEAgc3RhdGljIGlubGluZSBzaWduZWQgbG9uZyBkbWFfZmVuY2Vfd2FpdChzdHJ1Y3Qg
-ZG1hX2ZlbmNlICpmZW5jZSwgYm9vbCBpbnRyKQo+ICAgCXJldHVybiByZXQgPCAwID8gcmV0IDog
-MDsKPiAgIH0KPiAgIAo+ICt2b2lkIGRtYV9mZW5jZV9zZXRfZGVhZGxpbmUoc3RydWN0IGRtYV9m
-ZW5jZSAqZmVuY2UsIGt0aW1lX3QgZGVhZGxpbmUpOwo+ICsKPiAgIHN0cnVjdCBkbWFfZmVuY2Ug
-KmRtYV9mZW5jZV9nZXRfc3R1Yih2b2lkKTsKPiAgIHN0cnVjdCBkbWFfZmVuY2UgKmRtYV9mZW5j
-ZV9hbGxvY2F0ZV9wcml2YXRlX3N0dWIodm9pZCk7Cj4gICB1NjQgZG1hX2ZlbmNlX2NvbnRleHRf
-YWxsb2ModW5zaWduZWQgbnVtKTsKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlz
-dHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9saXN0aW5mby9s
-aW5hcm8tbW0tc2lnCg==
+The general approach seems to make sense now I think.
+
+One minor thing which I'm missing is adding support for this to the 
+dma_fence_array and dma_fence_chain containers.
+
+Regards,
+Christian.
+
+Am 07.08.21 um 20:37 schrieb Rob Clark:
+> From: Rob Clark <robdclark@chromium.org>
+>
+> Based on discussion from a previous series[1] to add a "boost" mechanism
+> when, for example, vblank deadlines are missed.  Instead of a boost
+> callback, this approach adds a way to set a deadline on the fence, by
+> which the waiter would like to see the fence signalled.
+>
+> I've not yet had a chance to re-work the drm/msm part of this, but
+> wanted to send this out as an RFC in case I don't have a chance to
+> finish the drm/msm part this week.
+>
+> Original description:
+>
+> In some cases, like double-buffered rendering, missing vblanks can
+> trick the GPU into running at a lower frequence, when really we
+> want to be running at a higher frequency to not miss the vblanks
+> in the first place.
+>
+> This is partially inspired by a trick i915 does, but implemented
+> via dma-fence for a couple of reasons:
+>
+> 1) To continue to be able to use the atomic helpers
+> 2) To support cases where display and gpu are different drivers
+>
+> [1] https://patchwork.freedesktop.org/series/90331/
+>
+> v1: https://patchwork.freedesktop.org/series/93035/
+> v2: Move filtering out of later deadlines to fence implementation
+>      to avoid increasing the size of dma_fence
+>
+> Rob Clark (5):
+>    dma-fence: Add deadline awareness
+>    drm/vblank: Add helper to get next vblank time
+>    drm/atomic-helper: Set fence deadline for vblank
+>    drm/scheduler: Add fence deadline support
+>    drm/msm: Add deadline based boost support
+>
+>   drivers/dma-buf/dma-fence.c             | 20 +++++++
+>   drivers/gpu/drm/drm_atomic_helper.c     | 36 ++++++++++++
+>   drivers/gpu/drm/drm_vblank.c            | 31 ++++++++++
+>   drivers/gpu/drm/msm/msm_fence.c         | 76 +++++++++++++++++++++++++
+>   drivers/gpu/drm/msm/msm_fence.h         | 20 +++++++
+>   drivers/gpu/drm/msm/msm_gpu.h           |  1 +
+>   drivers/gpu/drm/msm/msm_gpu_devfreq.c   | 20 +++++++
+>   drivers/gpu/drm/scheduler/sched_fence.c | 25 ++++++++
+>   drivers/gpu/drm/scheduler/sched_main.c  |  3 +
+>   include/drm/drm_vblank.h                |  1 +
+>   include/drm/gpu_scheduler.h             |  6 ++
+>   include/linux/dma-fence.h               | 16 ++++++
+>   12 files changed, 255 insertions(+)
+>
+
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
