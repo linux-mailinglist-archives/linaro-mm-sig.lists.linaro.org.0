@@ -2,91 +2,81 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id A26D03EE915
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Aug 2021 11:04:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 20E053F0130
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Aug 2021 12:04:23 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CE2D660C2C
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 17 Aug 2021 09:04:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D5D4861081
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Aug 2021 10:04:20 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id A6A90611AF; Tue, 17 Aug 2021 09:04:28 +0000 (UTC)
+	id C93986102D; Wed, 18 Aug 2021 10:04:18 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0C44F6075B;
-	Tue, 17 Aug 2021 09:04:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8D45B60F1F;
+	Wed, 18 Aug 2021 10:04:14 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 891166065A
- for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Aug 2021 09:04:22 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 1565760EC3
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 10:04:12 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 861296075B; Tue, 17 Aug 2021 09:04:22 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
- [209.85.221.48])
- by lists.linaro.org (Postfix) with ESMTPS id 7D0F76065A
- for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Aug 2021 09:04:20 +0000 (UTC)
-Received: by mail-wr1-f48.google.com with SMTP id z9so27395066wrh.10
- for <linaro-mm-sig@lists.linaro.org>; Tue, 17 Aug 2021 02:04:20 -0700 (PDT)
+ id 00A7760F1F; Wed, 18 Aug 2021 10:04:11 +0000 (UTC)
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com
+ [209.85.208.43])
+ by lists.linaro.org (Postfix) with ESMTPS id EA1D060EC3
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 10:04:09 +0000 (UTC)
+Received: by mail-ed1-f43.google.com with SMTP id r19so2215943eds.13
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 03:04:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to; bh=j4i/x9tyzc/3LgdLRFqgQgxEO4pmJgQLsrj80WtwhVI=;
- b=KxIpxVtWjns4F7qLg1rRcmYAW3SH1eBW9sxDxCEB/2uN9a/FcASQ4t2WjsOxmPgxmd
- fgz5X/LnvStc/dmaZypl8I2CLhvMTPQvq6+5wSjEtiUMwMdBFl0TqJEk7e7klYUpDrkI
- 1ao2oorbeN2dN+umv0mr5W2gM8/ZhXk0b3GGM=
+ :mime-version:content-disposition:in-reply-to;
+ bh=aMU29SN6YoovEcOrsusWnZbE8h+1MpQpJA0/wZfLGeE=;
+ b=VuWlpnTGk6pLgRyLxLDnxv4NkP9nRhdxy0N90/5pUe8bPs6Uj9DlrqMj6WsvKlpXXI
+ 111QEnOZPfJS/mHK8sfTzq5rrN40iXdDm7HI7rmq/xmBL8FDwz+BFyPzr5yB3ovwv8zV
+ 0GGNgLYV0nqj01x2rcDXp61Hl2zl/sKi6V54I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id
  :mail-followup-to:references:mime-version:content-disposition
- :content-transfer-encoding:in-reply-to;
- bh=j4i/x9tyzc/3LgdLRFqgQgxEO4pmJgQLsrj80WtwhVI=;
- b=scGcihNZCWGu7Ckya0VCHb0VtO1lH+s+NdU20Su0vVHy8UIOVEHWbc/Z7Q2w7Dr4JE
- OLfZloMWLVxohipWMhXv1HaICapUhIYkUOLEA/9VR4zRxriEngUiRCkVVMoLqEpb/cLu
- Dtg3JKuvHTj+Ac4xSDtX0qexFP8mN7HPR7i4Ln24/d7eRjrbjAdrWJw4nT68pnrtHq8A
- Soah6ptJyjnpWP8jns4CdOpiY0KNB04VRBlhETu4Y1huNtlxJ3kjCjgUTqGWHa34ECxu
- MdVHpehw8f2cCehRoizNSP6nS1DFWsIC4ixcxmCul35Nwef9Uki0sgjxr8XqVG4u5ytf
- b4Pg==
-X-Gm-Message-State: AOAM5309vwlITDSG4zalLRMDggOfiPyKljhzqzeuZIzJxzSmn5coOYws
- cB6bvNK5LSnFG2FJXxcfqmBn2A==
-X-Google-Smtp-Source: ABdhPJy/Dl1NsISUcWJ7CU+4M3hb5C4YhyxhHFqeiJF0/2LxZzlK7v8qd5PIxfPQBoJAIj1gqztDvw==
-X-Received: by 2002:a05:6000:1043:: with SMTP id
- c3mr2732415wrx.144.1629191059584; 
- Tue, 17 Aug 2021 02:04:19 -0700 (PDT)
+ :in-reply-to;
+ bh=aMU29SN6YoovEcOrsusWnZbE8h+1MpQpJA0/wZfLGeE=;
+ b=j2tlTXzrBMs7Np6kbDvMXnRzcsfLqYeu3rihf3rpLJkQkbHC/uELOBrri1MeXHBv2K
+ ueBApVRb7b1TSDKQOPQ5NrpRO1NHYv9p+H4g9OHilbzRrr2fjDs1lbf6faSt3hBVuh4v
+ M99R6y7xpjmO1zMJmz9ylHC33p+/vavhbVExS6jUq9vqO/xye6gd86RaovHCfIpG/Rph
+ wqIG6zwi6bMlI3k6ZzAgmvcxoa+vFtmsWJCIAaSL4XjwZeixBSDunLz6BCV/wOlmwNVM
+ mLW/45GL4sWdqy/+QSrfTyIfU7xCu/zdP6dX/aFpy2wMeMoG+Pzp/JaC/LWhI32mjv17
+ e3yQ==
+X-Gm-Message-State: AOAM530Ki0PLUsctdGmYiUTWZh67yZ/1MP6lAmnBC7Afa3wPP12mbv3u
+ 7zB7ZLmIbKzH4NUJAN54Mv43OQ==
+X-Google-Smtp-Source: ABdhPJzQXPwY+sWxgn3k6s9LT4/gWaw0MMn3Os6faeWcHmmeyRNaM7zRWGLx0tEfvU1T3JleVgbcdA==
+X-Received: by 2002:a05:6402:14d9:: with SMTP id
+ f25mr9279034edx.343.1629281048926; 
+ Wed, 18 Aug 2021 03:04:08 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id e17sm1625963wrs.78.2021.08.17.02.04.18
+ by smtp.gmail.com with ESMTPSA id d16sm2384140edu.8.2021.08.18.03.04.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Aug 2021 02:04:19 -0700 (PDT)
-Date: Tue, 17 Aug 2021 11:04:17 +0200
+ Wed, 18 Aug 2021 03:04:08 -0700 (PDT)
+Date: Wed, 18 Aug 2021 12:04:06 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
-To: Rob Clark <robdclark@gmail.com>
-Message-ID: <YRt7ka8TZrjdxy/6@phenom.ffwll.local>
-Mail-Followup-To: Rob Clark <robdclark@gmail.com>,
- Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- linux-arm-msm <linux-arm-msm@vger.kernel.org>,
- freedreno <freedreno@lists.freedesktop.org>,
- Rob Clark <robdclark@chromium.org>, David Airlie <airlied@linux.ie>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Tian Tao <tiantao6@hisilicon.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- Luben Tuikov <luben.tuikov@amd.com>,
- Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
- Steven Price <steven.price@arm.com>, Roy Sun <Roy.Sun@amd.com>,
- Lee Jones <lee.jones@linaro.org>, Jack Zhang <Jack.Zhang1@amd.com>,
- open list <linux-kernel@vger.kernel.org>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
-References: <20210807183804.459850-1-robdclark@gmail.com>
- <20210807183804.459850-5-robdclark@gmail.com>
- <e28020c5-3da3-c721-96df-9a115f105bf7@gmail.com>
- <YRqGazgGJ2NAIzg2@phenom.ffwll.local>
- <CAF6AEGtyA2ovPcsP_3wbD-KfJFZosc=qf=SMkE2BVMq5+=cxWw@mail.gmail.com>
+To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
+Message-ID: <YRzbFnkricE65Hn5@phenom.ffwll.local>
+Mail-Followup-To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>,
+ maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+ tzimmermann@suse.de, airlied@linux.ie, sumit.semwal@linaro.org,
+ christian.koenig@amd.com, axboe@kernel.dk, oleg@redhat.com,
+ tglx@linutronix.de, dvyukov@google.com, walter-zh.wu@mediatek.com,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, linux-media@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org, skhan@linuxfoundation.org,
+ gregkh@linuxfoundation.org,
+ linux-kernel-mentees@lists.linuxfoundation.org
+References: <20210818073824.1560124-1-desmondcheongzx@gmail.com>
+ <20210818073824.1560124-4-desmondcheongzx@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAF6AEGtyA2ovPcsP_3wbD-KfJFZosc=qf=SMkE2BVMq5+=cxWw@mail.gmail.com>
+In-Reply-To: <20210818073824.1560124-4-desmondcheongzx@gmail.com>
 X-Operating-System: Linux phenom 5.10.0-7-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v2 4/5] drm/scheduler: Add fence
- deadline support
+Subject: Re: [Linaro-mm-sig] [PATCH v3 3/9] drm: check for null master in
+ drm_is_current_master_locked
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -99,183 +89,64 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Rob Clark <robdclark@chromium.org>,
- Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
- Jack Zhang <Jack.Zhang1@amd.com>, Daniel Vetter <daniel@ffwll.ch>,
- David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Luben Tuikov <luben.tuikov@amd.com>, Roy Sun <Roy.Sun@amd.com>,
- linux-arm-msm <linux-arm-msm@vger.kernel.org>,
- Alex Deucher <alexander.deucher@amd.com>, Tian Tao <tiantao6@hisilicon.com>,
- Lee Jones <lee.jones@linaro.org>, Steven Price <steven.price@arm.com>,
- freedreno <freedreno@lists.freedesktop.org>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: axboe@kernel.dk, walter-zh.wu@mediatek.com, tzimmermann@suse.de,
+ gregkh@linuxfoundation.org, airlied@linux.ie, linux-kernel@vger.kernel.org,
+ intel-gfx@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
+ oleg@redhat.com, mripard@kernel.org, christian.koenig@amd.com,
+ linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
+ daniel@ffwll.ch, skhan@linuxfoundation.org, tglx@linutronix.de,
+ linux-kernel-mentees@lists.linuxfoundation.org, dvyukov@google.com,
+ linux-media@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Mon, Aug 16, 2021 at 03:25:20PM -0700, Rob Clark wrote:
-> On Mon, Aug 16, 2021 at 8:38 AM Daniel Vetter <daniel@ffwll.ch> wrote:
-> >
-> > On Mon, Aug 16, 2021 at 12:14:35PM +0200, Christian K=F6nig wrote:
-> > > Am 07.08.21 um 20:37 schrieb Rob Clark:
-> > > > From: Rob Clark <robdclark@chromium.org>
-> > > >
-> > > > As the finished fence is the one that is exposed to userspace, and
-> > > > therefore the one that other operations, like atomic update, would
-> > > > block on, we need to propagate the deadline from from the finished
-> > > > fence to the actual hw fence.
-> > > >
-> > > > Signed-off-by: Rob Clark <robdclark@chromium.org>
-> >
-> > I guess you're already letting the compositor run at a higher gpu prior=
-ity
-> > so that your deadline'd drm_sched_job isn't stuck behind the app render=
-ing
-> > the next frame?
-> =
+On Wed, Aug 18, 2021 at 03:38:18PM +0800, Desmond Cheong Zhi Xi wrote:
+> There is a window after calling drm_master_release, and before a file
+> is freed, where drm_file can have is_master set to true, but both the
+> drm_file and drm_device have no master.
+> 
+> This could result in wrongly approving permissions in
+> drm_is_current_master_locked. Add a check that fpriv->master is
+> non-NULl to guard against this scenario.
+> 
+> Signed-off-by: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
 
-> With the scheduler conversion we do have multiple priorities (provided
-> by scheduler) for all generations.. but not yet preemption for all
-> generations.
-> =
+This should be impossible, drm_master_release is only called when the
+struct file is released, which means all ioctls and anything else have
+finished (they hold a temporary reference).
 
-> But the most common use-case where we need this ends up being display
-> composition (either fullscreen app/game or foreground app/game
-> composited via overlay) so I haven't thought too much about the next
-> step of boosting job priority.  I might leave that to someone who
-> already has preemption wired up ;-)
-
-Atm no-one, drm/sched isn't really aware that's a concept. I was more
-thinking of just boosting that request as a first step. Maybe within the
-same priority class we pick jobs with deadlines first, or something like
-that.
-
-Preempting is an entire can of worms on top.
+fpriv->master can change (if the drm_file becomes newly minted master and
+wasnt one before through the setmaster ioctl), but it cannot become NULL
+before it's completely gone from the system.
 -Daniel
 
-> =
 
-> BR,
-> -R
-> =
+> ---
+>  drivers/gpu/drm/drm_auth.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/drm_auth.c b/drivers/gpu/drm/drm_auth.c
+> index 8c0e0dba1611..f9267b21556e 100644
+> --- a/drivers/gpu/drm/drm_auth.c
+> +++ b/drivers/gpu/drm/drm_auth.c
+> @@ -66,7 +66,8 @@ static bool drm_is_current_master_locked(struct drm_file *fpriv)
+>  	lockdep_assert_once(lockdep_is_held(&fpriv->minor->dev->master_lookup_lock) ||
+>  			    lockdep_is_held(&fpriv->minor->dev->master_mutex));
+>  
+> -	return fpriv->is_master && drm_lease_owner(fpriv->master) == fpriv->minor->dev->master;
+> +	return (fpriv->is_master && fpriv->master &&
+> +		drm_lease_owner(fpriv->master) == fpriv->minor->dev->master);
+>  }
+>  
+>  /**
+> -- 
+> 2.25.1
+> 
 
-> > I'm not sure whether you wire that one up as part of the conversion to
-> > drm/sched. Without that I think we might need to ponder how we can do a
-> > prio-boost for these, e.g. within a scheduling class we pick the jobs w=
-ith
-> > the nearest deadline first, before we pick others.
-> > -Daniel
-> >
-> > > > ---
-> > > >   drivers/gpu/drm/scheduler/sched_fence.c | 25 ++++++++++++++++++++=
-+++++
-> > > >   drivers/gpu/drm/scheduler/sched_main.c  |  3 +++
-> > > >   include/drm/gpu_scheduler.h             |  6 ++++++
-> > > >   3 files changed, 34 insertions(+)
-> > > >
-> > > > diff --git a/drivers/gpu/drm/scheduler/sched_fence.c b/drivers/gpu/=
-drm/scheduler/sched_fence.c
-> > > > index 69de2c76731f..f389dca44185 100644
-> > > > --- a/drivers/gpu/drm/scheduler/sched_fence.c
-> > > > +++ b/drivers/gpu/drm/scheduler/sched_fence.c
-> > > > @@ -128,6 +128,30 @@ static void drm_sched_fence_release_finished(s=
-truct dma_fence *f)
-> > > >     dma_fence_put(&fence->scheduled);
-> > > >   }
-> > > > +static void drm_sched_fence_set_deadline_finished(struct dma_fence=
- *f,
-> > > > +                                             ktime_t deadline)
-> > > > +{
-> > > > +   struct drm_sched_fence *fence =3D to_drm_sched_fence(f);
-> > > > +   unsigned long flags;
-> > > > +
-> > > > +   spin_lock_irqsave(&fence->lock, flags);
-> > > > +
-> > > > +   /* If we already have an earlier deadline, keep it: */
-> > > > +   if (test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT, &f->flags) &&
-> > > > +       ktime_before(fence->deadline, deadline)) {
-> > > > +           spin_unlock_irqrestore(&fence->lock, flags);
-> > > > +           return;
-> > > > +   }
-> > > > +
-> > > > +   fence->deadline =3D deadline;
-> > > > +   set_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT, &f->flags);
-> > > > +
-> > > > +   spin_unlock_irqrestore(&fence->lock, flags);
-> > > > +
-> > > > +   if (fence->parent)
-> > > > +           dma_fence_set_deadline(fence->parent, deadline);
-> > > > +}
-> > > > +
-> > > >   static const struct dma_fence_ops drm_sched_fence_ops_scheduled =
-=3D {
-> > > >     .get_driver_name =3D drm_sched_fence_get_driver_name,
-> > > >     .get_timeline_name =3D drm_sched_fence_get_timeline_name,
-> > > > @@ -138,6 +162,7 @@ static const struct dma_fence_ops drm_sched_fen=
-ce_ops_finished =3D {
-> > > >     .get_driver_name =3D drm_sched_fence_get_driver_name,
-> > > >     .get_timeline_name =3D drm_sched_fence_get_timeline_name,
-> > > >     .release =3D drm_sched_fence_release_finished,
-> > > > +   .set_deadline =3D drm_sched_fence_set_deadline_finished,
-> > > >   };
-> > > >   struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f)
-> > > > diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/d=
-rm/scheduler/sched_main.c
-> > > > index a2a953693b45..3ab0900d3596 100644
-> > > > --- a/drivers/gpu/drm/scheduler/sched_main.c
-> > > > +++ b/drivers/gpu/drm/scheduler/sched_main.c
-> > > > @@ -818,6 +818,9 @@ static int drm_sched_main(void *param)
-> > > >             if (!IS_ERR_OR_NULL(fence)) {
-> > > >                     s_fence->parent =3D dma_fence_get(fence);
-> > > > +                   if (test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT,
-> > > > +                                &s_fence->finished.flags))
-> > > > +                           dma_fence_set_deadline(fence, s_fence->=
-deadline);
-> > >
-> > > Maybe move this into a dma_sched_fence_set_parent() function.
-> > >
-> > > Apart from that looks good to me.
-> > >
-> > > Regards,
-> > > Christian.
-> > >
-> > > >                     r =3D dma_fence_add_callback(fence, &sched_job-=
->cb,
-> > > >                                                drm_sched_job_done_c=
-b);
-> > > >                     if (r =3D=3D -ENOENT)
-> > > > diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_schedule=
-r.h
-> > > > index d18af49fd009..0f08ade614ae 100644
-> > > > --- a/include/drm/gpu_scheduler.h
-> > > > +++ b/include/drm/gpu_scheduler.h
-> > > > @@ -144,6 +144,12 @@ struct drm_sched_fence {
-> > > >            */
-> > > >     struct dma_fence                finished;
-> > > > +   /**
-> > > > +    * @deadline: deadline set on &drm_sched_fence.finished which
-> > > > +    * potentially needs to be propagated to &drm_sched_fence.parent
-> > > > +    */
-> > > > +   ktime_t                         deadline;
-> > > > +
-> > > >           /**
-> > > >            * @parent: the fence returned by &drm_sched_backend_ops.=
-run_job
-> > > >            * when scheduling the job on hardware. We signal the
-> > >
-> >
-> > --
-> > Daniel Vetter
-> > Software Engineer, Intel Corporation
-> > http://blog.ffwll.ch
-
--- =
-
+-- 
 Daniel Vetter
 Software Engineer, Intel Corporation
 http://blog.ffwll.ch
