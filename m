@@ -2,78 +2,65 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9EC283F05B6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Aug 2021 16:07:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E6823F092C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Aug 2021 18:33:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 33FF0617DA
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Aug 2021 14:07:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0D59B61174
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Aug 2021 16:33:45 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id BD8BE61145; Wed, 18 Aug 2021 14:07:18 +0000 (UTC)
+	id A3E2F61945; Wed, 18 Aug 2021 16:33:43 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4E1E36102D;
-	Wed, 18 Aug 2021 14:07:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B172061145;
+	Wed, 18 Aug 2021 16:33:40 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id BCE916100C
- for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 14:07:14 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 6ACF761017
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 16:33:38 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id BA66A6102D; Wed, 18 Aug 2021 14:07:14 +0000 (UTC)
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com
- [209.85.218.52])
- by lists.linaro.org (Postfix) with ESMTPS id B06536100C
- for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 14:07:12 +0000 (UTC)
-Received: by mail-ej1-f52.google.com with SMTP id b10so5256588eju.9
- for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 07:07:12 -0700 (PDT)
+ id 6871361145; Wed, 18 Aug 2021 16:33:38 +0000 (UTC)
+Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com
+ [209.85.210.52])
+ by lists.linaro.org (Postfix) with ESMTPS id 5B27A61017
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 16:33:36 +0000 (UTC)
+Received: by mail-ot1-f52.google.com with SMTP id
+ r38-20020a05683044a600b0051a2c6dd421so4813406otv.3
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 09:33:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to; bh=64zifREinBHAwmFxgrDBcSqFtKr4jlCZS5WKAwKoAXg=;
- b=Dqv70yX93zXZr6jzmhvMeWNIKTnXuLw0MEEK7GV3TiU2x5BvM11uG8NZWDKBrQ8KFf
- Uod5IWznhUW0T4R7w/UCTcOGE+TI0Bz76CA3wlCkzsNkXqm7X8Esf7ozHWvrYptriVmT
- 0QXozwG4Q6j7K+YdY16ETjLy6mMCgA7F1hAs0=
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=eCXA2zyPQAHS4vo82QVOH0nIRnuHikfTX6KZzHmuKg8=;
+ b=QjC5m39FFqS5LCTw1JjDcl5B6GEqE4J6pQQCAqHO0dIZPp0kFChKdVrcqgX4J7k2iN
+ 0W461aQvEEZJ/77xOGhMtNPK37ArAb6nSZnXdeFen/mBS7y8blIxPeDo6/iH9Jv7dxjG
+ XYx0/mcOxznQU7DqJ23C8B9nlMbTUOgVqLoX4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :content-transfer-encoding:in-reply-to;
- bh=64zifREinBHAwmFxgrDBcSqFtKr4jlCZS5WKAwKoAXg=;
- b=HEiYo20cgpwpGj7fxabJKjabJdrEVW/aHgC4wVS1ermlLN3RGeejDpbUDw73HbWTJl
- 392bCWipT73ih81Q9CSRHbW6hiRE/9Vmm8KG6uyxSPZNHHenofdl/wz4wTr6Yfx1nXQJ
- g5C38/WYCXYwIwe+i/52PLzisnCJ2YJj+oHzlx8l2aOss9HMw+XMTvdUumVQExIBbrAr
- Qw9dNtltibr6Fs+/6E9G+evKQ4pOjD2TU34rGKb1zCR0rvCFfwDIkLO118WfH5qFVBsD
- 4Z5knsE1baKwy6f7mo/tPikb+evDVAsqieADp/hIRaFpw9a70cPA9U4rixhY2D1Yxkww
- W4yQ==
-X-Gm-Message-State: AOAM533WyHrv84rt9EJ5WsI7z4XpcM1cZPR3RaHA9QqcTHpFiuHgxdR1
- qeD2MX53KNzRdNQpVnS3TT9gfQ==
-X-Google-Smtp-Source: ABdhPJxqqKOBz+of90XjDMG6gzll1zUAgspFw9u1WR+Axp7BK9MoT+c8eS8ZPFhua2tvp7B7/05Hfg==
-X-Received: by 2002:a17:906:8444:: with SMTP id
- e4mr10116391ejy.516.1629295631579; 
- Wed, 18 Aug 2021 07:07:11 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id m6sm40070edc.82.2021.08.18.07.07.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Aug 2021 07:07:11 -0700 (PDT)
-Date: Wed, 18 Aug 2021 16:07:09 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <YR0UDT9G4G37hHtL@phenom.ffwll.local>
-Mail-Followup-To: Christian =?iso-8859-1?Q?K=F6nig?=
- <christian.koenig@amd.com>, 
- Wentao_Liang <Wentao_Liang_g@163.com>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, airlied@linux.ie, sumit.semwal@linaro.org,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
-References: <20210818130231.3484-1-Wentao_Liang_g@163.com>
- <14aa6dfe-faba-8632-01a4-8119f199005c@amd.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=eCXA2zyPQAHS4vo82QVOH0nIRnuHikfTX6KZzHmuKg8=;
+ b=jIk9YRz+kV8N+tWgIZcfSxcvEdMjathNZs04ejCE2wSOvsP1gWP6YVDhlXVgmfQuQK
+ Tip1G7M0Qyq8nhkOVnMBOsBnc9N0poh2oVWg7uJbDcZVSOzn2O97qIrWABY7Ma7aBdOa
+ jg+1f2ZW6uwCgFyOj9tM46YqnB+Urgq7RHOMgub0P8O667my+qkUu2Al2tcx8VjAlX3H
+ u6wmpcFeRB+T8tKVVeh0syhYNcbU213tO2vSXVpo+2Pghy0bDncI1yt4YXTUNaUnG8LJ
+ nbnJ/d9PgkHZFnep5Iv3bmSjpjz39tHDPTUBT5e+QueGLmrY4t9Dlhv3GQknP0/rLPu1
+ AR1A==
+X-Gm-Message-State: AOAM532rxp3is3dHyQqV1GvDqLXhrPaE9JZ9G8HoCCbKTwc50fX3Qpiz
+ Eg9yb2Yc+18z+1qbuQmobaVzSl6TH1c3JzUTZpys2A==
+X-Google-Smtp-Source: ABdhPJxWStQd2lhV6/8pAdrwTDTsMPhhFVB2e1gL192lZFqb5+22njoozSqbDmc46xhVjO9OiXZ5h3OsAHALgZyXtck=
+X-Received: by 2002:a9d:4785:: with SMTP id b5mr7756337otf.188.1629304415812; 
+ Wed, 18 Aug 2021 09:33:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <14aa6dfe-faba-8632-01a4-8119f199005c@amd.com>
-X-Operating-System: Linux phenom 5.10.0-7-amd64 
+References: <20210818073824.1560124-1-desmondcheongzx@gmail.com>
+ <20210818073824.1560124-5-desmondcheongzx@gmail.com>
+ <YRzcuiQrLFsWowas@phenom.ffwll.local>
+ <53a63ac8-f2de-91f7-4e0f-20b0f3f61d52@gmail.com>
+In-Reply-To: <53a63ac8-f2de-91f7-4e0f-20b0f3f61d52@gmail.com>
+From: Daniel Vetter <daniel@ffwll.ch>
+Date: Wed, 18 Aug 2021 18:33:24 +0200
+Message-ID: <CAKMK7uG+nqnkNd56WPhze3V=e1ioL0PTLQxveBofQT3gNPB9HA@mail.gmail.com>
+To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH] drm/prime: fix a potential double put
- (release) bug
+Subject: Re: [Linaro-mm-sig] [Intel-gfx] [PATCH v3 4/9] drm: fix potential
+ null ptr dereferences in drm_{auth, ioctl}
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,148 +73,167 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: daniel@ffwll.ch, airlied@linux.ie, maarten.lankhorst@linux.intel.com,
- linux-kernel@vger.kernel.org, mripard@kernel.org,
- linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
- tzimmermann@suse.de, linux-media@vger.kernel.org,
- Wentao_Liang <Wentao_Liang_g@163.com>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: Jens Axboe <axboe@kernel.dk>, walter-zh.wu@mediatek.com,
+ Greg KH <gregkh@linuxfoundation.org>, Dave Airlie <airlied@linux.ie>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ intel-gfx <intel-gfx@lists.freedesktop.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Oleg Nesterov <oleg@redhat.com>, Maxime Ripard <mripard@kernel.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Shuah Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@linutronix.de>,
+ linux-kernel-mentees@lists.linuxfoundation.org,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Dmitry Vyukov <dvyukov@google.com>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Wed, Aug 18, 2021 at 03:25:59PM +0200, Christian K=F6nig wrote:
-> Am 18.08.21 um 15:02 schrieb Wentao_Liang:
-> > In line 317 (#1), drm_gem_prime_import() is called, it will call
-> > drm_gem_prime_import_dev(). At the end of the function
-> > drm_gem_prime_import_dev() (line 956, #2), "dma_buf_put(dma_buf);" puts
-> > dma_buf->file and may cause it to be released. However, after
-> > drm_gem_prime_import() returning, the dma_buf may be put again by the
-> > same put function in lines 342, 351 and 358 (#3, #4, #5). Putting the
-> > dma_buf improperly more than once can lead to an incorrect dma_buf-
-> > > file put.
-> > We believe that the put of the dma_buf in the function
-> > drm_gem_prime_import() is unnecessary (#2). We can fix the above bug by
-> > removing the redundant "dma_buf_put(dma_buf);" in line 956.
-> =
+On Wed, Aug 18, 2021 at 5:37 PM Desmond Cheong Zhi Xi
+<desmondcheongzx@gmail.com> wrote:
+>
+> On 18/8/21 6:11 pm, Daniel Vetter wrote:
+> > On Wed, Aug 18, 2021 at 03:38:19PM +0800, Desmond Cheong Zhi Xi wrote:
+> >> There are three areas where we dereference struct drm_master without
+> >> checking if the pointer is non-NULL.
+> >>
+> >> 1. drm_getmagic is called from the ioctl_handler. Since
+> >> DRM_IOCTL_GET_MAGIC has no ioctl flags, drm_getmagic is run without
+> >> any check that drm_file.master has been set.
+> >>
+> >> 2. Similarly, drm_getunique is called from the ioctl_handler, but
+> >> DRM_IOCTL_GET_UNIQUE has no ioctl flags. So there is no guarantee that
+> >> drm_file.master has been set.
+> >
+> > I think the above two are impossible, due to the refcounting rules for
+> > struct file.
+> >
+>
+> Right, will drop those two parts from the patch.
+>
+> >> 3. drm_master_release can also be called without having a
+> >> drm_file.master set. Here is one error path:
+> >>    drm_open():
+> >>      drm_open_helper():
+> >>        drm_master_open():
+> >>          drm_new_set_master(); <--- returns -ENOMEM,
+> >>                                     drm_file.master not set
+> >>        drm_file_free():
+> >>          drm_master_release(); <--- NULL ptr dereference
+> >>                                     (file_priv->master->magic_map)
+> >>
+> >> Fix these by checking if the master pointers are NULL before use.
+> >>
+> >> Signed-off-by: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
+> >> ---
+> >>   drivers/gpu/drm/drm_auth.c  | 16 ++++++++++++++--
+> >>   drivers/gpu/drm/drm_ioctl.c |  5 +++++
+> >>   2 files changed, 19 insertions(+), 2 deletions(-)
+> >>
+> >> diff --git a/drivers/gpu/drm/drm_auth.c b/drivers/gpu/drm/drm_auth.c
+> >> index f9267b21556e..b7230604496b 100644
+> >> --- a/drivers/gpu/drm/drm_auth.c
+> >> +++ b/drivers/gpu/drm/drm_auth.c
+> >> @@ -95,11 +95,18 @@ EXPORT_SYMBOL(drm_is_current_master);
+> >>   int drm_getmagic(struct drm_device *dev, void *data, struct drm_file *file_priv)
+> >>   {
+> >>      struct drm_auth *auth = data;
+> >> +    struct drm_master *master;
+> >>      int ret = 0;
+> >>
+> >>      mutex_lock(&dev->master_mutex);
+> >> +    master = file_priv->master;
+> >> +    if (!master) {
+> >> +            mutex_unlock(&dev->master_mutex);
+> >> +            return -EINVAL;
+> >> +    }
+> >> +
+> >>      if (!file_priv->magic) {
+> >> -            ret = idr_alloc(&file_priv->master->magic_map, file_priv,
+> >> +            ret = idr_alloc(&master->magic_map, file_priv,
+> >>                              1, 0, GFP_KERNEL);
+> >>              if (ret >= 0)
+> >>                      file_priv->magic = ret;
+> >> @@ -355,8 +362,12 @@ void drm_master_release(struct drm_file *file_priv)
+> >>
+> >>      mutex_lock(&dev->master_mutex);
+> >>      master = file_priv->master;
+> >> +
+> >> +    if (!master)
+> >> +            goto unlock;
+> >
+> > This is a bit convoluted, since we're in the single-threaded release path
+> > we don't need any locking for file_priv related things. Therefore we can
+> > pull the master check out and just directly return.
+> >
+> > But since it's a bit surprising maybe a comment that this can happen when
+> > drm_master_open in drm_open_helper fails?
+> >
+>
+> Sounds good. This can actually also happen in the failure path of
+> mock_drm_getfile if anon_inode_getfile fails. I'll leave a short note
+> about both of them.
+>
+> > Another option, and maybe cleaner, would be to move the drm_master_release
+> > from drm_file_free into drm_close_helper. That would be fully symmetrical
+> > and should also fix the bug here?
+> > -Daniel
+> >
+> Hmmm maybe the first option to move the check out of the lock might be
+> better. If I'm not wrong, we would otherwise also need to move
+> drm_master_release into drm_client_close.
 
-> Guys I'm getting tired of NAKing those incorrect reference count analysis.
-> =
+Do we have to?
 
-> The dma_buf_put() in the error handling of drm_gem_prime_import_dev()
-> function is balanced with the get_dma_buf() in the same function directly
-> above.
-> =
-
-> This is for the creating a GEM object for a DMA-buf imported from other
-> device use case and certainly correct.
-> =
-
-> The various dma_buf_put() in drm_gem_prime_fd_to_handle() is balanced with
-> the dma_buf_get(prime_fd) at the beginning of the function.
-> =
-
-> This is for extracting the DMA-buf from the file descriptor and keeping a
-> reference to it while we are busy importing it (e.g. to prevent a race wh=
-en
-> somebody changes the fd at the same time).
-> =
-
-> As far as I can see this is correct as well.
-
-Yeah the analysis is just high-grade nonsense. The current code looks
-correct, the analysis presented here, not.
+If I haven't missed anything, the drm_client stuff only calls
+drm_file_alloc and doesn't set up a master. So this should work?
 -Daniel
 
-
-> =
-
-> Regards,
-> Christian.
-> =
-
-> > =
-
-> >   314     if (dev->driver->gem_prime_import)
-> >   315         obj =3D dev->driver->gem_prime_import(dev, dma_buf);
-> >   316     else
-> >   317         obj =3D drm_gem_prime_import(dev, dma_buf);
-> >   				//#1 call to drm_gem_prime_import
-> > 				//   ->drm_gem_prime_import_dev
-> > 				//   ->dma_buf_put
-> >   ...
-> > =
-
-> >   336     ret =3D drm_prime_add_buf_handle(&file_priv->prime,
-> >   337             dma_buf, *handle);
-> > =
-
-> >   ...
-> > =
-
-> >   342     dma_buf_put(dma_buf);  //#3 put again
-> >   343
-> >   344     return 0;
-> >   345
-> >   346 fail:
-> > =
-
-> >   351     dma_buf_put(dma_buf); //#4 put again
-> >   352     return ret;
-> > =
-
-> >   356 out_put:
-> >   357     mutex_unlock(&file_priv->prime.lock);
-> >   358     dma_buf_put(dma_buf);  //#5 put again
-> >   359     return ret;
-> >   360 }
-> > =
-
-> >   905 struct drm_gem_object *drm_gem_prime_import_dev
-> >   							(struct drm_device *dev,
-> >   906                         struct dma_buf *dma_buf,
-> >   907                         struct device *attach_dev)
-> >   908 {
-> > =
-
-> >   ...
-> > =
-
-> >   952 fail_unmap:
-> >   953     dma_buf_unmap_attachment(attach, sgt, DMA_BIDIRECTIONAL);
-> >   954 fail_detach:
-> >   955     dma_buf_detach(dma_buf, attach);
-> >   956     dma_buf_put(dma_buf);  //#2 the first put of dma_buf
-> > 								//	 (unnecessary)
-> >   957
-> >   958     return ERR_PTR(ret);
-> >   959 }
-> > =
-
-> > Signed-off-by: Wentao_Liang <Wentao_Liang_g@163.com>
-> > ---
-> >   drivers/gpu/drm/drm_prime.c | 1 -
-> >   1 file changed, 1 deletion(-)
-> > =
-
-> > diff --git a/drivers/gpu/drm/drm_prime.c b/drivers/gpu/drm/drm_prime.c
-> > index 2a54f86856af..cef03ad0d5cd 100644
-> > --- a/drivers/gpu/drm/drm_prime.c
-> > +++ b/drivers/gpu/drm/drm_prime.c
-> > @@ -953,7 +953,6 @@ struct drm_gem_object *drm_gem_prime_import_dev(str=
-uct drm_device *dev,
-> >   	dma_buf_unmap_attachment(attach, sgt, DMA_BIDIRECTIONAL);
-> >   fail_detach:
-> >   	dma_buf_detach(dma_buf, attach);
-> > -	dma_buf_put(dma_buf);
-> >   	return ERR_PTR(ret);
-> >   }
-> =
+>
+> >
+> >> +
+> >>      if (file_priv->magic)
+> >> -            idr_remove(&file_priv->master->magic_map, file_priv->magic);
+> >> +            idr_remove(&master->magic_map, file_priv->magic);
+> >>
+> >>      if (!drm_is_current_master_locked(file_priv))
+> >>              goto out;
+> >> @@ -379,6 +390,7 @@ void drm_master_release(struct drm_file *file_priv)
+> >>              drm_master_put(&file_priv->master);
+> >>              spin_unlock(&dev->master_lookup_lock);
+> >>      }
+> >> +unlock:
+> >>      mutex_unlock(&dev->master_mutex);
+> >>   }
+> >>
+> >> diff --git a/drivers/gpu/drm/drm_ioctl.c b/drivers/gpu/drm/drm_ioctl.c
+> >> index 26f3a9ede8fe..4d029d3061d9 100644
+> >> --- a/drivers/gpu/drm/drm_ioctl.c
+> >> +++ b/drivers/gpu/drm/drm_ioctl.c
+> >> @@ -121,6 +121,11 @@ int drm_getunique(struct drm_device *dev, void *data,
+> >>
+> >>      mutex_lock(&dev->master_mutex);
+> >>      master = file_priv->master;
+> >> +    if (!master) {
+> >> +            mutex_unlock(&dev->master_mutex);
+> >> +            return -EINVAL;
+> >> +    }
+> >> +
+> >>      if (u->unique_len >= master->unique_len) {
+> >>              if (copy_to_user(u->unique, master->unique, master->unique_len)) {
+> >>                      mutex_unlock(&dev->master_mutex);
+> >> --
+> >> 2.25.1
+> >>
+> >
+>
 
 
--- =
-
+-- 
 Daniel Vetter
 Software Engineer, Intel Corporation
 http://blog.ffwll.ch
