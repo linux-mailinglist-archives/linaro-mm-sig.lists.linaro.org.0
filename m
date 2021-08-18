@@ -2,81 +2,75 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6918D3F01F6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Aug 2021 12:44:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9AB893F020B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Aug 2021 12:54:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BDCAC61805
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Aug 2021 10:43:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5EE5B61456
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 Aug 2021 10:54:54 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 40297618D1; Wed, 18 Aug 2021 10:43:59 +0000 (UTC)
+	id 07981612A6; Wed, 18 Aug 2021 10:54:53 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9BDCB61081;
-	Wed, 18 Aug 2021 10:43:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B05BE6055D;
+	Wed, 18 Aug 2021 10:54:50 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 5E9DD6102D
- for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 10:43:52 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id F17F26055D
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 10:54:48 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 501C961081; Wed, 18 Aug 2021 10:43:52 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
- [209.85.221.45])
- by lists.linaro.org (Postfix) with ESMTPS id 497246102D
- for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 10:43:50 +0000 (UTC)
-Received: by mail-wr1-f45.google.com with SMTP id x12so2727233wrr.11
- for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 03:43:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=N8rQWm3ZF/mcELR9LAmNZOvgjRRDsTH5ajAZC1IBXNQ=;
- b=WzmYl5nKcFWK7r0irlC1OMzWbB+JXXitKPtEBcJkSXxT535KszNly9W9PeNU2AwuBu
- 95uQPdRFraErnEgzStdTwvVHeoouORlt5jJ+pTXAxjjvd1lUHFOD/KMkoXK/bmzj3dq4
- igsH43mTLkjWM44YdvHDEthVcCZH2vCTj1L30=
+ id E3662610C6; Wed, 18 Aug 2021 10:54:48 +0000 (UTC)
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+ [209.85.128.67])
+ by lists.linaro.org (Postfix) with ESMTPS id D6B606055D
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 10:54:46 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id
+ h24-20020a1ccc180000b029022e0571d1a0so1481281wmb.5
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 18 Aug 2021 03:54:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=pHFamtKgylcj73W8jHv3qksrTuCKhhIMmt3KIXV0ys4=;
+ b=YNb7GvS3waY+ZWtK7uUZD3xYg30HRi+zJxPP34tGTIoaMGWz40BkouEVKNKZL339zb
+ pL5CuIQcx4hxktmaJ4cUDje+HSobtn5DzVYZWy1zyWA6OZEwY9IGITh3w/sgFnrPSwVR
+ sPepjzCp3yjYGvsJ2ATjydsRpt72R7+LFZHjhBlXGKKEtFkTGiEYoB3wZPQxEj81VALx
+ f3q1NIguviVcDpMQIrzhPMC4hftmj3yNutxQRE2xZ7Jc50clBI/JO+pTQqFK2jEmJE05
+ lbH/dn5fazJjYH3kP4FbLX+Nikgzx7es++nItaJB+amKrZCxMLzstbp78vQr+xDz0Cg+
+ td3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=N8rQWm3ZF/mcELR9LAmNZOvgjRRDsTH5ajAZC1IBXNQ=;
- b=KGPO31n6Ut+7dqpNoeZvcy74setxrXDKLs9KykaCU6ZL6sb1Oyhs2GAUbJTJySd89h
- EVHKVBf6TbA8TvNbSsA7oQg897aKmpMqy2MTXoO/aRPTD6SUyBeR9oj3hMHH2Wcd6zas
- NVgKRrJra5cBWlykt0XX0MWERpNpX0l622bmdtcYCGco2nS8mrGV/B0hKPpOYzrdu8Pa
- Tozj4ej9qkh0SwQrVTSv1RN/NBjI+eXuD1kkL1Cem7dsYkE/qorzfm3opa3XKspqui8g
- PHLvupAtTrZLAAPoLCzyQjSJh6SJADKNTMv3GLUejZadJ2EvyWjZX1e9WT7OEglaRkZo
- bf/Q==
-X-Gm-Message-State: AOAM53026y97/hBruNS/sNgbNP0w/AtdgCtaboNnPwkkRuedIVhuCzVp
- zzaOocqqob6fXC6QTTfwierAYQ==
-X-Google-Smtp-Source: ABdhPJzL26D2Xlf6x9Qn1216x8lsoF11MQEMcnhU8xpHFbqaQ2u4AZ7DwheabZAVQ+Ui1z6n9CKfKg==
-X-Received: by 2002:a05:6000:128e:: with SMTP id
- f14mr9685601wrx.167.1629283429079; 
- Wed, 18 Aug 2021 03:43:49 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id c9sm5451125wrm.43.2021.08.18.03.43.47
+ h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=pHFamtKgylcj73W8jHv3qksrTuCKhhIMmt3KIXV0ys4=;
+ b=HvHogUkfvA3RHd3HQenqJjZGIVreS/KBS5KG/tE/e04LEXDgt1vmMS4ww4NignNkVE
+ p7QjTj/BR4mpCew1hBwjtFjyJeJ6nAS0GiaK5QnwsC3c9++GOtBghj+SuvlDZWphi9NA
+ E2hixWY1Pmsjuf8Wr60F4jWgTgQvdPqe5kKFSuQ3ndG336eCfhNnC2FAGkCzrN21BzsB
+ 1oHuz2RSCye/bZ6bAwwYNYfSaZTZu8scDQAxS3pRdz6ziV0qScJZouKtECK7q4IGG2P6
+ HRvEE/rMBLN4SNb/UnGgkvfupyvjTowJR2ldPFtKe4c5/L9c8Rahb/r0SS68Q8VPafDl
+ 7NzQ==
+X-Gm-Message-State: AOAM533opnRluKYJ8FtPJAh4njJ3AHNitTaJ0CSzsNSyvcETa9ORsCYe
+ AJWvMxG9BsncJgkDRT17MtY=
+X-Google-Smtp-Source: ABdhPJyiPYFVWfW4gUkMCxblWsPF0UruC4teV5FQ2TU4ys+xSOw/sB0K7/cJWwBn4R27xmAp1DhTAQ==
+X-Received: by 2002:a05:600c:1d01:: with SMTP id
+ l1mr7814922wms.178.1629284085819; 
+ Wed, 18 Aug 2021 03:54:45 -0700 (PDT)
+Received: from abel.fritz.box (p5b0ea1b5.dip0.t-ipconnect.de. [91.14.161.181])
+ by smtp.gmail.com with ESMTPSA id
+ y4sm4646352wmi.22.2021.08.18.03.54.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Aug 2021 03:43:48 -0700 (PDT)
-Date: Wed, 18 Aug 2021 12:43:46 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
-Message-ID: <YRzkYlcDDgrwDT81@phenom.ffwll.local>
-Mail-Followup-To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de, airlied@linux.ie, sumit.semwal@linaro.org,
- christian.koenig@amd.com, axboe@kernel.dk, oleg@redhat.com,
- tglx@linutronix.de, dvyukov@google.com, walter-zh.wu@mediatek.com,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- intel-gfx@lists.freedesktop.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org, skhan@linuxfoundation.org,
- gregkh@linuxfoundation.org,
- linux-kernel-mentees@lists.linuxfoundation.org
-References: <20210818073824.1560124-1-desmondcheongzx@gmail.com>
- <20210818073824.1560124-6-desmondcheongzx@gmail.com>
+ Wed, 18 Aug 2021 03:54:45 -0700 (PDT)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
+ <christian.koenig@amd.com>
+To: hridya@google.com, john.stultz@linaro.org, dri-devel@lists.freedesktop.org,
+ linaro-mm-sig@lists.linaro.org, gustavo@padovan.org,
+ linux-media@vger.kernel.org, adelva@google.com, sspatil@google.com,
+ daniel@ffwll.ch
+Date: Wed, 18 Aug 2021 12:54:42 +0200
+Message-Id: <20210818105443.1578-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210818073824.1560124-6-desmondcheongzx@gmail.com>
-X-Operating-System: Linux phenom 5.10.0-7-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v3 5/9] drm: protect magic_map,
- unique{_len} with master_lookup_lock
+Subject: [Linaro-mm-sig] [PATCH 1/2] dma-buf: nuke DMA_FENCE_TRACE macros v2
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -89,209 +83,115 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: axboe@kernel.dk, walter-zh.wu@mediatek.com, tzimmermann@suse.de,
- gregkh@linuxfoundation.org, airlied@linux.ie, linux-kernel@vger.kernel.org,
- intel-gfx@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
- oleg@redhat.com, mripard@kernel.org, christian.koenig@amd.com,
- linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
- daniel@ffwll.ch, skhan@linuxfoundation.org, tglx@linutronix.de,
- linux-kernel-mentees@lists.linuxfoundation.org, dvyukov@google.com,
- linux-media@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Wed, Aug 18, 2021 at 03:38:20PM +0800, Desmond Cheong Zhi Xi wrote:
-> Currently, drm_device.master_mutex is used to serialize writes to the
-> drm_master.magic_map idr and to protect drm_master.unique{_len}.
-> 
-> In preparation for converting drm_device.master_mutex into an outer
-> rwsem that might be read locked before entering some of these
-> functions, we can instead serialize access to drm_master.magic_map and
-> drm_master.unique{_len} using drm_device.master_lookup_lock which is
-> an inner lock.
-> 
-> Signed-off-by: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
-> ---
->  drivers/gpu/drm/drm_auth.c  | 12 +++++++-----
->  drivers/gpu/drm/drm_ioctl.c | 10 ++++++----
->  include/drm/drm_auth.h      |  6 +++---
->  include/drm/drm_device.h    |  7 ++++++-
->  4 files changed, 22 insertions(+), 13 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/drm_auth.c b/drivers/gpu/drm/drm_auth.c
-> index b7230604496b..0acb444fbbac 100644
-> --- a/drivers/gpu/drm/drm_auth.c
-> +++ b/drivers/gpu/drm/drm_auth.c
-> @@ -98,10 +98,10 @@ int drm_getmagic(struct drm_device *dev, void *data, struct drm_file *file_priv)
->  	struct drm_master *master;
->  	int ret = 0;
->  
-> -	mutex_lock(&dev->master_mutex);
-> +	spin_lock(&dev->master_lookup_lock);
->  	master = file_priv->master;
->  	if (!master) {
-> -		mutex_unlock(&dev->master_mutex);
-> +		spin_unlock(&dev->master_lookup_lock);
->  		return -EINVAL;
->  	}
->  
-> @@ -112,7 +112,7 @@ int drm_getmagic(struct drm_device *dev, void *data, struct drm_file *file_priv)
->  			file_priv->magic = ret;
->  	}
->  	auth->magic = file_priv->magic;
-> -	mutex_unlock(&dev->master_mutex);
-> +	spin_unlock(&dev->master_lookup_lock);
->  
->  	DRM_DEBUG("%u\n", auth->magic);
->  
-> @@ -127,13 +127,13 @@ int drm_authmagic(struct drm_device *dev, void *data,
->  
->  	DRM_DEBUG("%u\n", auth->magic);
->  
-> -	mutex_lock(&dev->master_mutex);
-> +	spin_lock(&dev->master_lookup_lock);
->  	file = idr_find(&file_priv->master->magic_map, auth->magic);
->  	if (file) {
->  		file->authenticated = 1;
->  		idr_replace(&file_priv->master->magic_map, NULL, auth->magic);
->  	}
-> -	mutex_unlock(&dev->master_mutex);
-> +	spin_unlock(&dev->master_lookup_lock);
->  
->  	return file ? 0 : -EINVAL;
->  }
-> @@ -366,8 +366,10 @@ void drm_master_release(struct drm_file *file_priv)
->  	if (!master)
->  		goto unlock;
->  
-> +	spin_lock(&dev->master_lookup_lock);
->  	if (file_priv->magic)
->  		idr_remove(&master->magic_map, file_priv->magic);
-> +	spin_unlock(&dev->master_lookup_lock);
->  
->  	if (!drm_is_current_master_locked(file_priv))
->  		goto out;
-> diff --git a/drivers/gpu/drm/drm_ioctl.c b/drivers/gpu/drm/drm_ioctl.c
-> index 4d029d3061d9..e5c3845b6e62 100644
-> --- a/drivers/gpu/drm/drm_ioctl.c
-> +++ b/drivers/gpu/drm/drm_ioctl.c
-> @@ -119,21 +119,21 @@ int drm_getunique(struct drm_device *dev, void *data,
->  	struct drm_unique *u = data;
->  	struct drm_master *master;
->  
-> -	mutex_lock(&dev->master_mutex);
-> +	spin_lock(&dev->master_lookup_lock);
->  	master = file_priv->master;
->  	if (!master) {
-> -		mutex_unlock(&dev->master_mutex);
-> +		spin_unlock(&dev->master_lookup_lock);
->  		return -EINVAL;
->  	}
->  
->  	if (u->unique_len >= master->unique_len) {
->  		if (copy_to_user(u->unique, master->unique, master->unique_len)) {
-> -			mutex_unlock(&dev->master_mutex);
-> +			spin_unlock(&dev->master_lookup_lock);
-
-copy_to_user while holding a spinlock isn't going to work well, at least
-when we take a fault. The might_fault() annotations (if enabled) should
-catch that.
-
-Which is really annoying, because it kinda puts a wrench into this neat
-plan here :-/
-
->  			return -EFAULT;
->  		}
->  	}
->  	u->unique_len = master->unique_len;
-> -	mutex_unlock(&dev->master_mutex);
-> +	spin_unlock(&dev->master_lookup_lock);
->  
->  	return 0;
->  }
-> @@ -405,7 +405,9 @@ static int drm_setversion(struct drm_device *dev, void *data, struct drm_file *f
->  			 * Version 1.1 includes tying of DRM to specific device
->  			 * Version 1.4 has proper PCI domain support
->  			 */
-> +			spin_lock(&dev->master_lookup_lock);
->  			retcode = drm_set_busid(dev, file_priv);
-> +			spin_unlock(&dev->master_lookup_lock);
-
-Similar issue with drm_set_busid, calling kmalloc under a spinlock isn't a
-good idea. This one here is at least much easier to fix by pushing the
-locking down a lot.
-
-I'm wondering a bit whether a better fix for these ioctls wouldn't be to
-- drop the DRM_MASTER flag from the ioctl table
-- take the rwsem in write mode (which would replace our current
-  dev->master_lock) and check for master status while holding that lock
-
-I think that would result in simpler locking or am I missing something?
-Maybe this could even work as a replacment for the lookup spinlock, since
-we're untangling the nesting quite a bit?
-
-Really just tossing ideas around since I feel like we don't have the best
-one yet ...
--Daniel
-
->  			if (retcode)
->  				goto done;
->  		}
-> diff --git a/include/drm/drm_auth.h b/include/drm/drm_auth.h
-> index ba248ca8866f..f5be73153798 100644
-> --- a/include/drm/drm_auth.h
-> +++ b/include/drm/drm_auth.h
-> @@ -67,17 +67,17 @@ struct drm_master {
->  	struct drm_device *dev;
->  	/**
->  	 * @unique: Unique identifier: e.g. busid. Protected by
-> -	 * &drm_device.master_mutex.
-> +	 * &drm_device.master_lookup_lock.
->  	 */
->  	char *unique;
->  	/**
->  	 * @unique_len: Length of unique field. Protected by
-> -	 * &drm_device.master_mutex.
-> +	 * &drm_device.master_lookup_lock.
->  	 */
->  	int unique_len;
->  	/**
->  	 * @magic_map: Map of used authentication tokens. Protected by
-> -	 * &drm_device.master_mutex.
-> +	 * &drm_device.master_lookup_lock.
->  	 */
->  	struct idr magic_map;
->  	void *driver_priv;
-> diff --git a/include/drm/drm_device.h b/include/drm/drm_device.h
-> index 506eb2784819..cf5d15aeb25f 100644
-> --- a/include/drm/drm_device.h
-> +++ b/include/drm/drm_device.h
-> @@ -152,7 +152,12 @@ struct drm_device {
->  	 */
->  	struct mutex master_mutex;
->  
-> -	/** @master_lookup_lock: Serializes &drm_file.master. */
-> +	/**
-> +	 * @master_lookup_lock:
-> +	 *
-> +	 * Serializes &drm_file.master, &drm_master.magic_map,
-> +	 * &drm_master.unique, and &drm_master.unique_len.
-> +	 */
->  	spinlock_t master_lookup_lock;
->  
->  	/**
-> -- 
-> 2.25.1
-> 
-
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+T25seSB0aGUgRFJNIEdQVSBzY2hlZHVsZXIsIHJhZGVvbiBhbmQgYW1kZ3B1IHdoZXJlIHVzaW5n
+IHRoZW0gYW5kIHRoZXkgZGVwZW5kCm9uIGEgbm9uIGV4aXN0aW5nIGNvbmZpZyBvcHRpb24gdG8g
+YWN0dWFsbHkgZW1pdCBzb21lIGNvZGUuCgp2Mjoga2VlcCB0aGUgc2lnbmFsIHBhdGggYXMgaXMg
+Zm9yIG5vdwoKU2lnbmVkLW9mZi1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5p
+Z0BhbWQuY29tPgotLS0KIGRyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9mZW5jZS5j
+IHwgMTAgKy0tLS0tLS0tLQogZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fZmVuY2UuYyAg
+ICAgfCAyNCArKysrLS0tLS0tLS0tLS0tLS0tLS0tLQogZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxl
+ci9zY2hlZF9mZW5jZS5jICAgfCAxOCArKy0tLS0tLS0tLS0tLS0tLQogaW5jbHVkZS9saW51eC9k
+bWEtZmVuY2UuaCAgICAgICAgICAgICAgICAgfCAyMiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0KIDQg
+ZmlsZXMgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCspLCA2NyBkZWxldGlvbnMoLSkKCmRpZmYgLS1n
+aXQgYS9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfZmVuY2UuYyBiL2RyaXZlcnMv
+Z3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9mZW5jZS5jCmluZGV4IDBiMWM0ODU5MGM0My4uYzY1
+OTk0ZTM4MmJkIDEwMDY0NAotLS0gYS9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVf
+ZmVuY2UuYworKysgYi9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfZmVuY2UuYwpA
+QCAtMjQ2LDcgKzI0Niw2IEBAIGJvb2wgYW1kZ3B1X2ZlbmNlX3Byb2Nlc3Moc3RydWN0IGFtZGdw
+dV9yaW5nICpyaW5nKQogCXN0cnVjdCBhbWRncHVfZmVuY2VfZHJpdmVyICpkcnYgPSAmcmluZy0+
+ZmVuY2VfZHJ2OwogCXN0cnVjdCBhbWRncHVfZGV2aWNlICphZGV2ID0gcmluZy0+YWRldjsKIAl1
+aW50MzJfdCBzZXEsIGxhc3Rfc2VxOwotCWludCByOwogCiAJZG8gewogCQlsYXN0X3NlcSA9IGF0
+b21pY19yZWFkKCZyaW5nLT5mZW5jZV9kcnYubGFzdF9zZXEpOwpAQCAtMjc4LDEyICsyNzcsNyBA
+QCBib29sIGFtZGdwdV9mZW5jZV9wcm9jZXNzKHN0cnVjdCBhbWRncHVfcmluZyAqcmluZykKIAkJ
+aWYgKCFmZW5jZSkKIAkJCWNvbnRpbnVlOwogCi0JCXIgPSBkbWFfZmVuY2Vfc2lnbmFsKGZlbmNl
+KTsKLQkJaWYgKCFyKQotCQkJRE1BX0ZFTkNFX1RSQUNFKGZlbmNlLCAic2lnbmFsZWQgZnJvbSBp
+cnEgY29udGV4dFxuIik7Ci0JCWVsc2UKLQkJCUJVRygpOwotCisJCWRtYV9mZW5jZV9zaWduYWwo
+ZmVuY2UpOwogCQlkbWFfZmVuY2VfcHV0KGZlbmNlKTsKIAkJcG1fcnVudGltZV9tYXJrX2xhc3Rf
+YnVzeShhZGV2X3RvX2RybShhZGV2KS0+ZGV2KTsKIAkJcG1fcnVudGltZV9wdXRfYXV0b3N1c3Bl
+bmQoYWRldl90b19kcm0oYWRldiktPmRldik7CkBAIC02MzksOCArNjMzLDYgQEAgc3RhdGljIGJv
+b2wgYW1kZ3B1X2ZlbmNlX2VuYWJsZV9zaWduYWxpbmcoc3RydWN0IGRtYV9mZW5jZSAqZikKIAlp
+ZiAoIXRpbWVyX3BlbmRpbmcoJnJpbmctPmZlbmNlX2Rydi5mYWxsYmFja190aW1lcikpCiAJCWFt
+ZGdwdV9mZW5jZV9zY2hlZHVsZV9mYWxsYmFjayhyaW5nKTsKIAotCURNQV9GRU5DRV9UUkFDRSgm
+ZmVuY2UtPmJhc2UsICJhcm1lZCBvbiByaW5nICVpIVxuIiwgcmluZy0+aWR4KTsKLQogCXJldHVy
+biB0cnVlOwogfQogCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9m
+ZW5jZS5jIGIvZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fZmVuY2UuYwppbmRleCAxOGYy
+YzJlMGRmYjMuLjNmMzUxZDIyMmNiYiAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL3JhZGVv
+bi9yYWRlb25fZmVuY2UuYworKysgYi9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9mZW5j
+ZS5jCkBAIC0xNzYsMTggKzE3NiwxMSBAQCBzdGF0aWMgaW50IHJhZGVvbl9mZW5jZV9jaGVja19z
+aWduYWxlZCh3YWl0X3F1ZXVlX2VudHJ5X3QgKndhaXQsIHVuc2lnbmVkIG1vZGUsCiAJICovCiAJ
+c2VxID0gYXRvbWljNjRfcmVhZCgmZmVuY2UtPnJkZXYtPmZlbmNlX2RydltmZW5jZS0+cmluZ10u
+bGFzdF9zZXEpOwogCWlmIChzZXEgPj0gZmVuY2UtPnNlcSkgewotCQlpbnQgcmV0ID0gZG1hX2Zl
+bmNlX3NpZ25hbF9sb2NrZWQoJmZlbmNlLT5iYXNlKTsKLQotCQlpZiAoIXJldCkKLQkJCURNQV9G
+RU5DRV9UUkFDRSgmZmVuY2UtPmJhc2UsICJzaWduYWxlZCBmcm9tIGlycSBjb250ZXh0XG4iKTsK
+LQkJZWxzZQotCQkJRE1BX0ZFTkNFX1RSQUNFKCZmZW5jZS0+YmFzZSwgIndhcyBhbHJlYWR5IHNp
+Z25hbGVkXG4iKTsKLQorCQlkbWFfZmVuY2Vfc2lnbmFsX2xvY2tlZCgmZmVuY2UtPmJhc2UpOwog
+CQlyYWRlb25faXJxX2ttc19zd19pcnFfcHV0KGZlbmNlLT5yZGV2LCBmZW5jZS0+cmluZyk7CiAJ
+CV9fcmVtb3ZlX3dhaXRfcXVldWUoJmZlbmNlLT5yZGV2LT5mZW5jZV9xdWV1ZSwgJmZlbmNlLT5m
+ZW5jZV93YWtlKTsKIAkJZG1hX2ZlbmNlX3B1dCgmZmVuY2UtPmJhc2UpOwotCX0gZWxzZQotCQlE
+TUFfRkVOQ0VfVFJBQ0UoJmZlbmNlLT5iYXNlLCAicGVuZGluZ1xuIik7CisJfQogCXJldHVybiAw
+OwogfQogCkBAIC00MjIsOCArNDE1LDYgQEAgc3RhdGljIGJvb2wgcmFkZW9uX2ZlbmNlX2VuYWJs
+ZV9zaWduYWxpbmcoc3RydWN0IGRtYV9mZW5jZSAqZikKIAlmZW5jZS0+ZmVuY2Vfd2FrZS5mdW5j
+ID0gcmFkZW9uX2ZlbmNlX2NoZWNrX3NpZ25hbGVkOwogCV9fYWRkX3dhaXRfcXVldWUoJnJkZXYt
+PmZlbmNlX3F1ZXVlLCAmZmVuY2UtPmZlbmNlX3dha2UpOwogCWRtYV9mZW5jZV9nZXQoZik7Ci0K
+LQlETUFfRkVOQ0VfVFJBQ0UoJmZlbmNlLT5iYXNlLCAiYXJtZWQgb24gcmluZyAlaSFcbiIsIGZl
+bmNlLT5yaW5nKTsKIAlyZXR1cm4gdHJ1ZTsKIH0KIApAQCAtNDQxLDExICs0MzIsNyBAQCBib29s
+IHJhZGVvbl9mZW5jZV9zaWduYWxlZChzdHJ1Y3QgcmFkZW9uX2ZlbmNlICpmZW5jZSkKIAkJcmV0
+dXJuIHRydWU7CiAKIAlpZiAocmFkZW9uX2ZlbmNlX3NlcV9zaWduYWxlZChmZW5jZS0+cmRldiwg
+ZmVuY2UtPnNlcSwgZmVuY2UtPnJpbmcpKSB7Ci0JCWludCByZXQ7Ci0KLQkJcmV0ID0gZG1hX2Zl
+bmNlX3NpZ25hbCgmZmVuY2UtPmJhc2UpOwotCQlpZiAoIXJldCkKLQkJCURNQV9GRU5DRV9UUkFD
+RSgmZmVuY2UtPmJhc2UsICJzaWduYWxlZCBmcm9tIHJhZGVvbl9mZW5jZV9zaWduYWxlZFxuIik7
+CisJCWRtYV9mZW5jZV9zaWduYWwoJmZlbmNlLT5iYXNlKTsKIAkJcmV0dXJuIHRydWU7CiAJfQog
+CXJldHVybiBmYWxzZTsKQEAgLTU1MCw3ICs1MzcsNiBAQCBsb25nIHJhZGVvbl9mZW5jZV93YWl0
+X3RpbWVvdXQoc3RydWN0IHJhZGVvbl9mZW5jZSAqZmVuY2UsIGJvb2wgaW50ciwgbG9uZyB0aW1l
+bwogewogCXVpbnQ2NF90IHNlcVtSQURFT05fTlVNX1JJTkdTXSA9IHt9OwogCWxvbmcgcjsKLQlp
+bnQgcl9zaWc7CiAKIAkvKgogCSAqIFRoaXMgZnVuY3Rpb24gc2hvdWxkIG5vdCBiZSBjYWxsZWQg
+b24gIXJhZGVvbiBmZW5jZXMuCkBAIC01NjcsOSArNTUzLDcgQEAgbG9uZyByYWRlb25fZmVuY2Vf
+d2FpdF90aW1lb3V0KHN0cnVjdCByYWRlb25fZmVuY2UgKmZlbmNlLCBib29sIGludHIsIGxvbmcg
+dGltZW8KIAkJcmV0dXJuIHI7CiAJfQogCi0Jcl9zaWcgPSBkbWFfZmVuY2Vfc2lnbmFsKCZmZW5j
+ZS0+YmFzZSk7Ci0JaWYgKCFyX3NpZykKLQkJRE1BX0ZFTkNFX1RSQUNFKCZmZW5jZS0+YmFzZSwg
+InNpZ25hbGVkIGZyb20gZmVuY2Vfd2FpdFxuIik7CisJZG1hX2ZlbmNlX3NpZ25hbCgmZmVuY2Ut
+PmJhc2UpOwogCXJldHVybiByOwogfQogCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vc2No
+ZWR1bGVyL3NjaGVkX2ZlbmNlLmMgYi9kcml2ZXJzL2dwdS9kcm0vc2NoZWR1bGVyL3NjaGVkX2Zl
+bmNlLmMKaW5kZXggNjlkZTJjNzY3MzFmLi4zNzM2NzQ2YzQ3YmQgMTAwNjQ0Ci0tLSBhL2RyaXZl
+cnMvZ3B1L2RybS9zY2hlZHVsZXIvc2NoZWRfZmVuY2UuYworKysgYi9kcml2ZXJzL2dwdS9kcm0v
+c2NoZWR1bGVyL3NjaGVkX2ZlbmNlLmMKQEAgLTUwLDI2ICs1MCwxMiBAQCBzdGF0aWMgdm9pZCBf
+X2V4aXQgZHJtX3NjaGVkX2ZlbmNlX3NsYWJfZmluaSh2b2lkKQogCiB2b2lkIGRybV9zY2hlZF9m
+ZW5jZV9zY2hlZHVsZWQoc3RydWN0IGRybV9zY2hlZF9mZW5jZSAqZmVuY2UpCiB7Ci0JaW50IHJl
+dCA9IGRtYV9mZW5jZV9zaWduYWwoJmZlbmNlLT5zY2hlZHVsZWQpOwotCi0JaWYgKCFyZXQpCi0J
+CURNQV9GRU5DRV9UUkFDRSgmZmVuY2UtPnNjaGVkdWxlZCwKLQkJCQkic2lnbmFsZWQgZnJvbSBp
+cnEgY29udGV4dFxuIik7Ci0JZWxzZQotCQlETUFfRkVOQ0VfVFJBQ0UoJmZlbmNlLT5zY2hlZHVs
+ZWQsCi0JCQkJIndhcyBhbHJlYWR5IHNpZ25hbGVkXG4iKTsKKwlkbWFfZmVuY2Vfc2lnbmFsKCZm
+ZW5jZS0+c2NoZWR1bGVkKTsKIH0KIAogdm9pZCBkcm1fc2NoZWRfZmVuY2VfZmluaXNoZWQoc3Ry
+dWN0IGRybV9zY2hlZF9mZW5jZSAqZmVuY2UpCiB7Ci0JaW50IHJldCA9IGRtYV9mZW5jZV9zaWdu
+YWwoJmZlbmNlLT5maW5pc2hlZCk7Ci0KLQlpZiAoIXJldCkKLQkJRE1BX0ZFTkNFX1RSQUNFKCZm
+ZW5jZS0+ZmluaXNoZWQsCi0JCQkJInNpZ25hbGVkIGZyb20gaXJxIGNvbnRleHRcbiIpOwotCWVs
+c2UKLQkJRE1BX0ZFTkNFX1RSQUNFKCZmZW5jZS0+ZmluaXNoZWQsCi0JCQkJIndhcyBhbHJlYWR5
+IHNpZ25hbGVkXG4iKTsKKwlkbWFfZmVuY2Vfc2lnbmFsKCZmZW5jZS0+ZmluaXNoZWQpOwogfQog
+CiBzdGF0aWMgY29uc3QgY2hhciAqZHJtX3NjaGVkX2ZlbmNlX2dldF9kcml2ZXJfbmFtZShzdHJ1
+Y3QgZG1hX2ZlbmNlICpmZW5jZSkKZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvZG1hLWZlbmNl
+LmggYi9pbmNsdWRlL2xpbnV4L2RtYS1mZW5jZS5oCmluZGV4IDZmZmI0YjJjNjM3MS4uNGNjMTE5
+YWIyNzJmIDEwMDY0NAotLS0gYS9pbmNsdWRlL2xpbnV4L2RtYS1mZW5jZS5oCisrKyBiL2luY2x1
+ZGUvbGludXgvZG1hLWZlbmNlLmgKQEAgLTU5MCwyNiArNTkwLDQgQEAgc3RydWN0IGRtYV9mZW5j
+ZSAqZG1hX2ZlbmNlX2dldF9zdHViKHZvaWQpOwogc3RydWN0IGRtYV9mZW5jZSAqZG1hX2ZlbmNl
+X2FsbG9jYXRlX3ByaXZhdGVfc3R1Yih2b2lkKTsKIHU2NCBkbWFfZmVuY2VfY29udGV4dF9hbGxv
+Yyh1bnNpZ25lZCBudW0pOwogCi0jZGVmaW5lIERNQV9GRU5DRV9UUkFDRShmLCBmbXQsIGFyZ3Mu
+Li4pIFwKLQlkbyB7CQkJCQkJCQlcCi0JCXN0cnVjdCBkbWFfZmVuY2UgKl9fZmYgPSAoZik7CQkJ
+CVwKLQkJaWYgKElTX0VOQUJMRUQoQ09ORklHX0RNQV9GRU5DRV9UUkFDRSkpCQkJXAotCQkJcHJf
+aW5mbygiZiAlbGx1IyVsbHU6ICIgZm10LAkJCVwKLQkJCQlfX2ZmLT5jb250ZXh0LCBfX2ZmLT5z
+ZXFubywgIyNhcmdzKTsJXAotCX0gd2hpbGUgKDApCi0KLSNkZWZpbmUgRE1BX0ZFTkNFX1dBUk4o
+ZiwgZm10LCBhcmdzLi4uKSBcCi0JZG8gewkJCQkJCQkJXAotCQlzdHJ1Y3QgZG1hX2ZlbmNlICpf
+X2ZmID0gKGYpOwkJCQlcCi0JCXByX3dhcm4oImYgJWxsdSMlbGx1OiAiIGZtdCwgX19mZi0+Y29u
+dGV4dCwgX19mZi0+c2Vxbm8sXAotCQkJICMjYXJncyk7CQkJCQlcCi0JfSB3aGlsZSAoMCkKLQot
+I2RlZmluZSBETUFfRkVOQ0VfRVJSKGYsIGZtdCwgYXJncy4uLikgXAotCWRvIHsJCQkJCQkJCVwK
+LQkJc3RydWN0IGRtYV9mZW5jZSAqX19mZiA9IChmKTsJCQkJXAotCQlwcl9lcnIoImYgJWxsdSMl
+bGx1OiAiIGZtdCwgX19mZi0+Y29udGV4dCwgX19mZi0+c2Vxbm8sCVwKLQkJCSMjYXJncyk7CQkJ
+CQlcCi0JfSB3aGlsZSAoMCkKLQogI2VuZGlmIC8qIF9fTElOVVhfRE1BX0ZFTkNFX0ggKi8KLS0g
+CjIuMjUuMQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+TGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3Jn
+Cmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
