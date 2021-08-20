@@ -2,65 +2,63 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF3173F1813
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Aug 2021 13:21:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 71CF73F34AF
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 Aug 2021 21:33:43 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8EFC861145
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Aug 2021 11:21:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 12A496171E
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 Aug 2021 19:33:40 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 6067C60B0B; Thu, 19 Aug 2021 11:21:44 +0000 (UTC)
+	id AAC82611B2; Fri, 20 Aug 2021 19:33:37 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 030D060949;
-	Thu, 19 Aug 2021 11:21:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0486A611AF;
+	Fri, 20 Aug 2021 19:33:34 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 54AEE6073C
- for <linaro-mm-sig@lists.linaro.org>; Thu, 19 Aug 2021 11:21:39 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 560BD6117A
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 20 Aug 2021 19:33:30 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 521DF60949; Thu, 19 Aug 2021 11:21:39 +0000 (UTC)
-Received: from mail-oi1-f171.google.com (mail-oi1-f171.google.com
- [209.85.167.171])
- by lists.linaro.org (Postfix) with ESMTPS id 4871F607C3
- for <linaro-mm-sig@lists.linaro.org>; Thu, 19 Aug 2021 11:21:37 +0000 (UTC)
-Received: by mail-oi1-f171.google.com with SMTP id o20so8015020oiw.12
- for <linaro-mm-sig@lists.linaro.org>; Thu, 19 Aug 2021 04:21:37 -0700 (PDT)
+ id 469E3611AF; Fri, 20 Aug 2021 19:33:30 +0000 (UTC)
+Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com
+ [209.85.210.42])
+ by lists.linaro.org (Postfix) with ESMTPS id 1E613604FF
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 20 Aug 2021 19:33:28 +0000 (UTC)
+Received: by mail-ot1-f42.google.com with SMTP id
+ r17-20020a0568302371b0290504f3f418fbso16238893oth.12
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 20 Aug 2021 12:33:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=5V4EkvTCAcoyHRtI9p7nrcPmOq00QEe5BDHLkcyC+bI=;
- b=MHx9L1f9aUQpGZR4O8Wa3DHkMk/eeODMndr53EH8lUDZ5AIHMH6g5+clLdRTbN+5dh
- 28F1i8/ujg5fYetnujOO0TLEV0lnAhHQKY1lqrsxcBimNr265e8WzMjkD27nbWIYK6F/
- osmjd79VCKBjvRG86lXmcZXgWWUQiERFlDxxw=
+ :cc:content-transfer-encoding;
+ bh=vpEpEAnRO5OhbDhkoFuR51uK3vu5AmUud1jH9OOxpC4=;
+ b=GdDYWfb10COlYODDXcc0zylWkXc2rxMun8JAXaoC/ZrxQjCl2w+3RaF9krZBDUudon
+ NWHT1EP3L6XT4ApBhRzsNvjs2FJLEUg3Hep98S2hqZGTVlEWPyKdahlV2gFJBRILjyRZ
+ +forMwtXQIq08jbAsbIQx+KENLPuElcgrxWn8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=5V4EkvTCAcoyHRtI9p7nrcPmOq00QEe5BDHLkcyC+bI=;
- b=SYXbRT4qjpAgUSDCVgF5hKqbOQa5fbUHm/KftlHkY3WUEr2TFAluZSg3YK+zOq1dqU
- zzuMj/OBMg/B4IWn2c1Q0biJeUBpXNekccA9cZmoxGDi7ugCwwQysJhreVkuM5I0Ze78
- 1ZIH+lORMhUf0D+MfZXljjlkLOWMU2BWP5zkIWIK3eb85ZoEa0hBzdegZBSYRv0Li080
- n50JbvkXn+ZMA4uzLnptpPPDM7fpbcUKlpuP6VYxBRhU1grg9gRCTMb+Rqxyr3v9RSD1
- WX1XfEOKXB3inxcrgdQAClkQx+lNyzxshcMUjrpAoQQTLVLT1NxDc747hq+m+CLaMg3q
- TTcw==
-X-Gm-Message-State: AOAM530DsS1h2OgZ0+aAXnIT4WdzG4ni+IB9Zzv8fmF8H8lEy6YFoKay
- 2rc55Z+cXObtuH+d2Scy8cLJTnNxXflBl4cYJ0+L+A==
-X-Google-Smtp-Source: ABdhPJwx62MGDoINd1O19JhHVZvovw7Sn9QfHN8LAQ8Xky8Qo8b79o6BKKSNXgJgQDQUu1Grk1Pjzzrrg4YCPljvl+4=
-X-Received: by 2002:a05:6808:2109:: with SMTP id
- r9mr2255300oiw.101.1629372096380; 
- Thu, 19 Aug 2021 04:21:36 -0700 (PDT)
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=vpEpEAnRO5OhbDhkoFuR51uK3vu5AmUud1jH9OOxpC4=;
+ b=RtU6T21wsvTbrXTpfjCBr8mk+AvxFNpuun9NZTRKCOTY+jnJTt7yiygMqCQRXXJXDv
+ OTQ40xXuHyv1ZhYk/JbW/L1a8wFKlKB9f70OoRxkSYzeoSkPZxP3NM/goJC88RSJkrf0
+ jIcucbl9m+rYKaPgpYEiScWHohNgiV1Wi2zHcijZiFLKDxLDOPlIvIzllRkomBY5jeMv
+ 3gMGDTQy4e96C7f3lOyGiT1rCrD6BwTCxKJ8AUmcj+Md2aCzecGOWv2jjFLj5ukXycGf
+ C5WkO8gVfHsj9oIRpPHREykhkM0pyGk1CS+PKjeE6x48jo970RmDWr/UZlxab9kWJ5+/
+ yutg==
+X-Gm-Message-State: AOAM530t3h9ijTQ6oxFyXX3VZhTWrGGdvI9uLiuURPsjbAByZ7yHKfsJ
+ NoSy6UPL1fkildWkpSBQna/fp4pMPcWH7WI6k8MeCg==
+X-Google-Smtp-Source: ABdhPJxrwulEjRlwLSovn0Rx4m5+J2jGaVIAi94Nt/8kUQLzom6zkQ6NxRZ6Vd4KvrH/lkIt6Ef06XBgfLgVRzw432w=
+X-Received: by 2002:a9d:65da:: with SMTP id z26mr17825398oth.303.1629488007383; 
+ Fri, 20 Aug 2021 12:33:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210818073824.1560124-1-desmondcheongzx@gmail.com>
- <20210818073824.1560124-8-desmondcheongzx@gmail.com>
- <YRzo4PJ/XRS3O199@phenom.ffwll.local>
- <874c94a4-1c33-c83a-ac3a-04b761013d40@gmail.com>
-In-Reply-To: <874c94a4-1c33-c83a-ac3a-04b761013d40@gmail.com>
-From: Daniel Vetter <daniel@ffwll.ch>
-Date: Thu, 19 Aug 2021 13:21:25 +0200
-Message-ID: <CAKMK7uFHHCtJasWmjkMm8ZrBkOqJKswwyteWF77Gga=PuY7Kcg@mail.gmail.com>
-To: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
+References: <00000000000047b52b05c9ff8d0b@google.com>
+ <dc7ca5ae-afc1-f840-8dfc-3f2361cd4360@suse.de>
+In-Reply-To: <dc7ca5ae-afc1-f840-8dfc-3f2361cd4360@suse.de>
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+Date: Fri, 20 Aug 2021 21:33:16 +0200
+Message-ID: <CAKMK7uEP_PNr1uDV_FeH2-Q9oGGsr3ux2rpkXHrJpPG=hOaf=Q@mail.gmail.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [Intel-gfx] [PATCH v3 7/9] drm: update global
- mutex lock in the ioctl handler
+Subject: Re: [Linaro-mm-sig] [syzbot] WARNING in drm_gem_shmem_vm_open
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -73,345 +71,59 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Jens Axboe <axboe@kernel.dk>, walter-zh.wu@mediatek.com,
- Greg KH <gregkh@linuxfoundation.org>, Dave Airlie <airlied@linux.ie>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- intel-gfx <intel-gfx@lists.freedesktop.org>,
+Cc: syzbot <syzbot+91525b2bd4b5dff71619@syzkaller.appspotmail.com>,
+ Melissa Wen <melissa.srw@gmail.com>, linaro-mm-sig-owner@lists.linaro.org,
+ Dave Airlie <airlied@linux.ie>,
+ syzkaller-bugs <syzkaller-bugs@googlegroups.com>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Oleg Nesterov <oleg@redhat.com>, Maxime Ripard <mripard@kernel.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
  dri-devel <dri-devel@lists.freedesktop.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Shuah Khan <skhan@linuxfoundation.org>, Thomas Gleixner <tglx@linutronix.de>,
- linux-kernel-mentees@lists.linuxfoundation.org,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Maxime Ripard <mripard@kernel.org>, Daniel Vetter <daniel.vetter@intel.com>,
  =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Dmitry Vyukov <dvyukov@google.com>,
  "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Thu, Aug 19, 2021 at 12:53 PM Desmond Cheong Zhi Xi
-<desmondcheongzx@gmail.com> wrote:
->
-> On 18/8/21 7:02 pm, Daniel Vetter wrote:
-> > On Wed, Aug 18, 2021 at 03:38:22PM +0800, Desmond Cheong Zhi Xi wrote:
-> >> In a future patch, a read lock on drm_device.master_rwsem is
-> >> held in the ioctl handler before the check for ioctl
-> >> permissions. However, this produces the following lockdep splat:
-> >>
-> >> ======================================================
-> >> WARNING: possible circular locking dependency detected
-> >> 5.14.0-rc6-CI-Patchwork_20831+ #1 Tainted: G     U
-> >> ------------------------------------------------------
-> >> kms_lease/1752 is trying to acquire lock:
-> >> ffffffff827bad88 (drm_global_mutex){+.+.}-{3:3}, at: drm_open+0x64/0x280
-> >>
-> >> but task is already holding lock:
-> >> ffff88812e350108 (&dev->master_rwsem){++++}-{3:3}, at:
-> >> drm_ioctl_kernel+0xfb/0x1a0
-> >>
-> >> which lock already depends on the new lock.
-> >>
-> >> the existing dependency chain (in reverse order) is:
-> >>
-> >> -> #2 (&dev->master_rwsem){++++}-{3:3}:
-> >>         lock_acquire+0xd3/0x310
-> >>         down_read+0x3b/0x140
-> >>         drm_master_internal_acquire+0x1d/0x60
-> >>         drm_client_modeset_commit+0x10/0x40
-> >>         __drm_fb_helper_restore_fbdev_mode_unlocked+0x88/0xb0
-> >>         drm_fb_helper_set_par+0x34/0x40
-> >>         intel_fbdev_set_par+0x11/0x40 [i915]
-> >>         fbcon_init+0x270/0x4f0
-> >>         visual_init+0xc6/0x130
-> >>         do_bind_con_driver+0x1de/0x2c0
-> >>         do_take_over_console+0x10e/0x180
-> >>         do_fbcon_takeover+0x53/0xb0
-> >>         register_framebuffer+0x22d/0x310
-> >>         __drm_fb_helper_initial_config_and_unlock+0x36c/0x540
-> >>         intel_fbdev_initial_config+0xf/0x20 [i915]
-> >>         async_run_entry_fn+0x28/0x130
-> >>         process_one_work+0x26d/0x5c0
-> >>         worker_thread+0x37/0x390
-> >>         kthread+0x13b/0x170
-> >>         ret_from_fork+0x1f/0x30
-> >>
-> >> -> #1 (&helper->lock){+.+.}-{3:3}:
-> >>         lock_acquire+0xd3/0x310
-> >>         __mutex_lock+0xa8/0x930
-> >>         __drm_fb_helper_restore_fbdev_mode_unlocked+0x44/0xb0
-> >>         intel_fbdev_restore_mode+0x2b/0x50 [i915]
-> >>         drm_lastclose+0x27/0x50
-> >>         drm_release_noglobal+0x42/0x60
-> >>         __fput+0x9e/0x250
-> >>         task_work_run+0x6b/0xb0
-> >>         exit_to_user_mode_prepare+0x1c5/0x1d0
-> >>         syscall_exit_to_user_mode+0x19/0x50
-> >>         do_syscall_64+0x46/0xb0
-> >>         entry_SYSCALL_64_after_hwframe+0x44/0xae
-> >>
-> >> -> #0 (drm_global_mutex){+.+.}-{3:3}:
-> >>         validate_chain+0xb39/0x1e70
-> >>         __lock_acquire+0x5a1/0xb70
-> >>         lock_acquire+0xd3/0x310
-> >>         __mutex_lock+0xa8/0x930
-> >>         drm_open+0x64/0x280
-> >>         drm_stub_open+0x9f/0x100
-> >>         chrdev_open+0x9f/0x1d0
-> >>         do_dentry_open+0x14a/0x3a0
-> >>         dentry_open+0x53/0x70
-> >>         drm_mode_create_lease_ioctl+0x3cb/0x970
-> >>         drm_ioctl_kernel+0xc9/0x1a0
-> >>         drm_ioctl+0x201/0x3d0
-> >>         __x64_sys_ioctl+0x6a/0xa0
-> >>         do_syscall_64+0x37/0xb0
-> >>         entry_SYSCALL_64_after_hwframe+0x44/0xae
-> >>
-> >> other info that might help us debug this:
-> >> Chain exists of:
-> >>    drm_global_mutex --> &helper->lock --> &dev->master_rwsem
-> >>   Possible unsafe locking scenario:
-> >>         CPU0                    CPU1
-> >>         ----                    ----
-> >>    lock(&dev->master_rwsem);
-> >>                                 lock(&helper->lock);
-> >>                                 lock(&dev->master_rwsem);
-> >>    lock(drm_global_mutex);
-> >>
-> >>   *** DEADLOCK ***
-> >>
-> >> The lock hierarchy inversion happens because we grab the
-> >> drm_global_mutex while already holding on to master_rwsem. To avoid
-> >> this, we do some prep work to grab the drm_global_mutex before
-> >> checking for ioctl permissions.
-> >>
-> >> At the same time, we update the check for the global mutex to use the
-> >> drm_dev_needs_global_mutex helper function.
-> >
-> > This is intentional, essentially we force all non-legacy drivers to have
-> > unlocked ioctl (otherwise everyone forgets to set that flag).
-> >
-> > For non-legacy drivers the global lock only ensures ordering between
-> > drm_open and lastclose (I think at least), and between
-> > drm_dev_register/unregister and the backwards ->load/unload callbacks
-> > (which are called in the wrong place, but we cannot fix that for legacy
-> > drivers).
-> >
-> > ->load/unload should be completely unused (maybe radeon still uses it),
-> > and ->lastclose is also on the decline.
-> >
->
-> Ah ok got it, I'll change the check back to
-> drm_core_check_feature(dev, DRIVER_LEGACY) then.
->
-> > Maybe we should update the comment of drm_global_mutex to explain what it
-> > protects and why.
-> >
->
-> The comments in drm_dev_needs_global_mutex make sense I think, I just
-> didn't read the code closely enough.
->
-> > I'm also confused how this patch connects to the splat, since for i915 we
->
-> Right, my bad, this is a separate instance of circular locking. I was
-> too hasty when I saw that for legacy drivers we might grab master_rwsem
-> then drm_global_mutex in the ioctl handler.
->
-> > shouldn't be taking the drm_global_lock here at all. The problem seems to
-> > be the drm_open_helper when we create a new lease, which is an entirely
-> > different can of worms.
-> >
-> > I'm honestly not sure how to best do that, but we should be able to create
-> > a file and then call drm_open_helper directly, or well a version of that
-> > which never takes the drm_global_mutex. Because that is not needed for
-> > nested drm_file opening:
-> > - legacy drivers never go down this path because leases are only supported
-> >    with modesetting, and modesetting is only supported for non-legacy
-> >    drivers
-> > - the races against dev->open_count due to last_close or ->load callbacks
-> >    don't matter, because for the entire ioctl we already have an open
-> >    drm_file and that wont disappear.
-> >
-> > So this should work, but I'm not entirely sure how to make it work.
-> > -Daniel
-> >
->
-> One idea that comes to mind is to change the outcome of
-> drm_dev_needs_global_mutex while we're in the ioctl, but that requires
-> more locking which sounds like a bad idea.
->
-> Another idea, which is quite messy, but just for thoughts, uses the idea
-> of pushing the master_rwsem read lock down:
-
-Yeah I think that's cleaner, and I think that also should work a lot
-better for the other ioctls:
-- We don't have a need to flush readers anymore since we'll just take
-the rwsem in write mode
-- There's much less inversions, and maybe we could even get rid of the
-spinlock since at that point all readers should at least have the
-rwsem read-locked.
-
->
-> diff --git a/drivers/gpu/drm/drm_ioctl.c b/drivers/gpu/drm/drm_ioctl.c
-> index 7f523e1c5650..5d05e744b728 100644
-> --- a/drivers/gpu/drm/drm_ioctl.c
-> +++ b/drivers/gpu/drm/drm_ioctl.c
-> @@ -712,7 +712,7 @@ static const struct drm_ioctl_desc drm_ioctls[] = {
->                       DRM_RENDER_ALLOW),
->         DRM_IOCTL_DEF(DRM_IOCTL_CRTC_GET_SEQUENCE, drm_crtc_get_sequence_ioctl, 0),
->         DRM_IOCTL_DEF(DRM_IOCTL_CRTC_QUEUE_SEQUENCE, drm_crtc_queue_sequence_ioctl, 0),
-> -       DRM_IOCTL_DEF(DRM_IOCTL_MODE_CREATE_LEASE, drm_mode_create_lease_ioctl, DRM_MASTER),
-> +       DRM_IOCTL_DEF(DRM_IOCTL_MODE_CREATE_LEASE, drm_mode_create_lease_ioctl, 0),
->         DRM_IOCTL_DEF(DRM_IOCTL_MODE_LIST_LESSEES, drm_mode_list_lessees_ioctl, DRM_MASTER),
->         DRM_IOCTL_DEF(DRM_IOCTL_MODE_GET_LEASE, drm_mode_get_lease_ioctl, DRM_MASTER),
->         DRM_IOCTL_DEF(DRM_IOCTL_MODE_REVOKE_LEASE, drm_mode_revoke_lease_ioctl, DRM_MASTER),
-> diff --git a/drivers/gpu/drm/drm_lease.c b/drivers/gpu/drm/drm_lease.c
-> index 983701198ffd..a25bc69522b4 100644
-> --- a/drivers/gpu/drm/drm_lease.c
-> +++ b/drivers/gpu/drm/drm_lease.c
-> @@ -500,6 +500,19 @@ int drm_mode_create_lease_ioctl(struct drm_device *dev,
->                 return -EINVAL;
->         }
->
-> +       /* Clone the lessor file to create a new file for us */
-> +       DRM_DEBUG_LEASE("Allocating lease file\n");
-> +       lessee_file = file_clone_open(lessor_file);
-> +       if (IS_ERR(lessee_file))
-> +               return PTR_ERR(lessee_file);
-> +
-> +       down_read(&dev->master_rwsem);
-> +
-> +       if (!drm_is_current_master(lessor_priv)) {
-> +               ret = -EACCES;
-> +               goto out_file;
-> +       }
-> +
->         lessor = drm_file_get_master(lessor_priv);
->         /* Do not allow sub-leases */
->         if (lessor->lessor) {
-> @@ -547,14 +560,6 @@ int drm_mode_create_lease_ioctl(struct drm_device *dev,
->                 goto out_leases;
->         }
->
-> -       /* Clone the lessor file to create a new file for us */
-> -       DRM_DEBUG_LEASE("Allocating lease file\n");
-> -       lessee_file = file_clone_open(lessor_file);
-> -       if (IS_ERR(lessee_file)) {
-> -               ret = PTR_ERR(lessee_file);
-> -               goto out_lessee;
-> -       }
-> -
->         lessee_priv = lessee_file->private_data;
->         /* Change the file to a master one */
->         drm_master_put(&lessee_priv->master);
-> @@ -571,17 +576,19 @@ int drm_mode_create_lease_ioctl(struct drm_device *dev,
->         fd_install(fd, lessee_file);
->
->         drm_master_put(&lessor);
-> +       up_read(&dev->master_rwsem);
->         DRM_DEBUG_LEASE("drm_mode_create_lease_ioctl succeeded\n");
->         return 0;
->
-> -out_lessee:
-> -       drm_master_put(&lessee);
-> -
->   out_leases:
->         put_unused_fd(fd);
->
->   out_lessor:
->         drm_master_put(&lessor);
-> +
-> +out_file:
-> +       up_read(&dev->master_rwsem);
-> +       fput(lessee_file);
->         DRM_DEBUG_LEASE("drm_mode_create_lease_ioctl failed: %d\n", ret);
->         return ret;
->   }
->
->
-> Something like this would also address the other deadlock we'd hit in
-> drm_mode_create_lease_ioctl():
->
->    drm_ioctl_kernel():
->      down_read(&master_rwsem);               <--- down_read()
->      drm_mode_create_lease_ioctl():
->        drm_lease_create():
->          file_clone_open():
->            ...
->            drm_open():
->              drm_open_helper():
->                drm_master_open():
->                  down_write(&master_rwsem);  <--- down_write()
->
-> Overall, I think the suggestion to push master_rwsem write locks down
-> into ioctls would solve the nesting problem for those ioctls.
-
-Yup, my gut feeling agress. And the above is a nice solution without
-having to dig out all the code for creating a file directly (it's
-doable I think at least, we do it for dma-buf).
-
-> Although I'm still a little concerned that, just like here, there might
-> be deeply embedded nested locking, so locking becomes prone to breaking.
-> It does smell a bit to me.
-
-Yeah, that's pretty much the bane of locking cleanup/rework. You have
-to do it to figure out what goes boom :-/ Even with the most careful
-audit there's surprises left.
--Daniel
-
-> >> Signed-off-by: Desmond Cheong Zhi Xi <desmondcheongzx@gmail.com>
-> >> ---
-> >>   drivers/gpu/drm/drm_ioctl.c | 18 +++++++++---------
-> >>   1 file changed, 9 insertions(+), 9 deletions(-)
-> >>
-> >> diff --git a/drivers/gpu/drm/drm_ioctl.c b/drivers/gpu/drm/drm_ioctl.c
-> >> index 880fc565d599..2cb57378a787 100644
-> >> --- a/drivers/gpu/drm/drm_ioctl.c
-> >> +++ b/drivers/gpu/drm/drm_ioctl.c
-> >> @@ -779,19 +779,19 @@ long drm_ioctl_kernel(struct file *file, drm_ioctl_t *func, void *kdata,
-> >>      if (drm_dev_is_unplugged(dev))
-> >>              return -ENODEV;
-> >>
-> >> +    /* Enforce sane locking for modern driver ioctls. */
-> >> +    if (unlikely(drm_dev_needs_global_mutex(dev)) && !(flags & DRM_UNLOCKED))
-> >> +            mutex_lock(&drm_global_mutex);
-> >> +
-> >>      retcode = drm_ioctl_permit(flags, file_priv);
-> >>      if (unlikely(retcode))
-> >> -            return retcode;
-> >> +            goto out;
-> >>
-> >> -    /* Enforce sane locking for modern driver ioctls. */
-> >> -    if (likely(!drm_core_check_feature(dev, DRIVER_LEGACY)) ||
-> >> -        (flags & DRM_UNLOCKED))
-> >> -            retcode = func(dev, kdata, file_priv);
-> >> -    else {
-> >> -            mutex_lock(&drm_global_mutex);
-> >> -            retcode = func(dev, kdata, file_priv);
-> >> +    retcode = func(dev, kdata, file_priv);
-> >> +
-> >> +out:
-> >> +    if (unlikely(drm_dev_needs_global_mutex(dev)) && !(flags & DRM_UNLOCKED))
-> >>              mutex_unlock(&drm_global_mutex);
-> >> -    }
-> >>      return retcode;
-> >>   }
-> >>   EXPORT_SYMBOL(drm_ioctl_kernel);
-> >> --
-> >> 2.25.1
-> >>
-> >
->
-
-
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+T24gRnJpLCBBdWcgMjAsIDIwMjEgYXQgOToyMyBQTSBUaG9tYXMgWmltbWVybWFubiA8dHppbW1l
+cm1hbm5Ac3VzZS5kZT4gd3JvdGU6Cj4gSGkKPgo+IEFtIDIwLjA4LjIxIHVtIDE3OjQ1IHNjaHJp
+ZWIgc3l6Ym90Ogo+ID4gc3l6Ym90IGhhcyBiaXNlY3RlZCB0aGlzIGlzc3VlIHRvOgo+Cj4gR29v
+ZCBib3QhCj4KPiA+Cj4gPiBjb21taXQgZWE0MGQ3ODU3ZDUyNTBlNTQwMGYzOGM2OWVmOWUxNzMy
+MWU5YzRhMgo+ID4gQXV0aG9yOiBEYW5pZWwgVmV0dGVyIDxkYW5pZWwudmV0dGVyQGZmd2xsLmNo
+Pgo+ID4gRGF0ZTogICBGcmkgT2N0IDkgMjM6MjE6NTYgMjAyMCArMDAwMAo+ID4KPiA+ICAgICAg
+ZHJtL3ZrbXM6IGZiZGV2IGVtdWxhdGlvbiBzdXBwb3J0Cj4KPiBIZXJlJ3MgYSBndWVzcy4KPgo+
+IEdFTSBTSE1FTSArIGZiZGV2IGVtdWxhdGlvbiByZXF1aXJlcyB0aGF0Cj4gKGRybV9tb2RlX2Nv
+bmZpZy5wcmVmZXJfc2hhZG93X2ZiZGV2ID0gdHJ1ZSkuIE90aGVyd2lzZSwgZGVmZXJyZWQgSS9P
+Cj4gYW5kIFNITUVNIGNvbmZsaWN0IG92ZXIgdGhlIHVzZSBvZiBwYWdlIGZsYWdzIElJUkMuCgpC
+dXQgd2Ugc2hvdWxkIG9ubHkgc2V0IHVwIGRlZmlvIGlmIGZiLT5kaXJ0eSBpcyBzZXQsIHdoaWNo
+IHZrbXMKZG9lc24ndCBkby4gU28gdGhlcmUncyBzb21ldGhpbmcgZWxzZSBnb2luZyBvbj8gU28g
+dGhlcmUgbXVzdCBiZQpzb21ldGhpbmcgZWxzZSBmdW5ueSBnb2luZyBvbiBoZXJlIEkgdGhpbmsg
+Li4uIE5vIGlkZWEgd2hhdCdzIGdvaW5nIG9uCnJlYWxseS4KLURhbmllbAoKPiAgRnJvbSBhIHF1
+aWNrIGdyZXAsIHZrbXMgZG9lc24ndCBzZXQgcHJlZmVyX3NoYWRvd19mYmRldiBhbmQgYW4gYWxh
+cm1pbmcKPiBhbW91bnQgb2YgU0hNRU0tYmFzZWQgZHJpdmVycyBkb24ndCBkbyBlaXRoZXIuCj4K
+PiBCZXN0IHJlZ2FyZHMKPiBUaG9tYXMKPgo+ID4KPiA+IGJpc2VjdGlvbiBsb2c6ICBodHRwczov
+L3N5emthbGxlci5hcHBzcG90LmNvbS94L2Jpc2VjdC50eHQ/eD0xMWMzMWQ1NTMwMDAwMAo+ID4g
+c3RhcnQgY29tbWl0OiAgIDYxNGNiMjc1MWQzMSBNZXJnZSB0YWcgJ3RyYWNlLXY1LjE0LXJjNicg
+b2YgZ2l0Oi8vZ2l0Lmtlcm4uLgo+ID4gZ2l0IHRyZWU6ICAgICAgIHVwc3RyZWFtCj4gPiBmaW5h
+bCBvb3BzOiAgICAgaHR0cHM6Ly9zeXprYWxsZXIuYXBwc3BvdC5jb20veC9yZXBvcnQudHh0P3g9
+MTNjMzFkNTUzMDAwMDAKPiA+IGNvbnNvbGUgb3V0cHV0OiBodHRwczovL3N5emthbGxlci5hcHBz
+cG90LmNvbS94L2xvZy50eHQ/eD0xNWMzMWQ1NTMwMDAwMAo+ID4ga2VybmVsIGNvbmZpZzogIGh0
+dHBzOi8vc3l6a2FsbGVyLmFwcHNwb3QuY29tL3gvLmNvbmZpZz94PTk2ZjA2MDIyMDMyNTA3NTMK
+PiA+IGRhc2hib2FyZCBsaW5rOiBodHRwczovL3N5emthbGxlci5hcHBzcG90LmNvbS9idWc/ZXh0
+aWQ9OTE1MjViMmJkNGI1ZGZmNzE2MTkKPiA+IHN5eiByZXBybzogICAgICBodHRwczovL3N5emth
+bGxlci5hcHBzcG90LmNvbS94L3JlcHJvLnN5ej94PTEyMmJjZTBlMzAwMDAwCj4gPgo+ID4gUmVw
+b3J0ZWQtYnk6IHN5emJvdCs5MTUyNWIyYmQ0YjVkZmY3MTYxOUBzeXprYWxsZXIuYXBwc3BvdG1h
+aWwuY29tCj4gPiBGaXhlczogZWE0MGQ3ODU3ZDUyICgiZHJtL3ZrbXM6IGZiZGV2IGVtdWxhdGlv
+biBzdXBwb3J0IikKPiA+Cj4gPiBGb3IgaW5mb3JtYXRpb24gYWJvdXQgYmlzZWN0aW9uIHByb2Nl
+c3Mgc2VlOiBodHRwczovL2dvby5nbC90cHNtRUojYmlzZWN0aW9uCj4gPgo+Cj4gLS0KPiBUaG9t
+YXMgWmltbWVybWFubgo+IEdyYXBoaWNzIERyaXZlciBEZXZlbG9wZXIKPiBTVVNFIFNvZnR3YXJl
+IFNvbHV0aW9ucyBHZXJtYW55IEdtYkgKPiBNYXhmZWxkc3RyLiA1LCA5MDQwOSBOw7xybmJlcmcs
+IEdlcm1hbnkKPiAoSFJCIDM2ODA5LCBBRyBOw7xybmJlcmcpCj4gR2VzY2jDpGZ0c2bDvGhyZXI6
+IEZlbGl4IEltZW5kw7ZyZmZlcgo+CgoKLS0gCkRhbmllbCBWZXR0ZXIKU29mdHdhcmUgRW5naW5l
+ZXIsIEludGVsIENvcnBvcmF0aW9uCmh0dHA6Ly9ibG9nLmZmd2xsLmNoCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBs
+aXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5v
+cmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
