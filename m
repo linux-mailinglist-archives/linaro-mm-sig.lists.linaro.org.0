@@ -2,70 +2,69 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9ABDE3F83FE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Aug 2021 10:55:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C8703F84A0
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Aug 2021 11:33:51 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3CC3063221
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Aug 2021 08:55:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C3AD961C3D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 26 Aug 2021 09:33:49 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id EBDE661840; Thu, 26 Aug 2021 08:55:55 +0000 (UTC)
+	id B631F61F0E; Thu, 26 Aug 2021 09:33:48 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3527A604EE;
-	Thu, 26 Aug 2021 08:55:52 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 299496050C;
+	Thu, 26 Aug 2021 09:33:45 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 020F360B27
- for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Aug 2021 08:55:51 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 2FF88603EB
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Aug 2021 09:33:43 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id F16076102D; Thu, 26 Aug 2021 08:55:50 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
- [209.85.221.43])
- by lists.linaro.org (Postfix) with ESMTPS id E7DD460B27
- for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Aug 2021 08:55:48 +0000 (UTC)
-Received: by mail-wr1-f43.google.com with SMTP id n5so3763010wro.12
- for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Aug 2021 01:55:48 -0700 (PDT)
+ id 2DAD16050C; Thu, 26 Aug 2021 09:33:43 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+ [209.85.128.45])
+ by lists.linaro.org (Postfix) with ESMTPS id 252FE603EB
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Aug 2021 09:33:41 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id
+ 79-20020a1c0452000000b002e6cf79e572so6419745wme.1
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 26 Aug 2021 02:33:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=uvYP2dCmI1ZUBL+P6N9qqPEMMyNG7Xmed98Q3LoPhRc=;
- b=jv4Bz0Zaxnsu8hjawyPrPAoUn4/jYp4IFJUqRDi9BdtuLq5Df/VFFwla0qeWUTWgen
- AISCTl0BLkfMkjZpzCyfK6k2i22j38ulsJH7Ho90nLj7EP8tF6q7Cwmr5Dmc/vSmMPqV
- WecCQ5NY8yfZ7sG/GerTWaZivj8Dz28n99H7I=
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=JJwF0PYPmqolDQLzp/yyP0Yq0kNRDALRe2iRCTul0qQ=;
+ b=SH0mRD4lFXjf5zfnArdRmdr/H92IkTiRG83+lu46nthRk6g7hsBLFtgm+PlV987nZb
+ 8qS0NSbfSQEVvJHrd9UuRQQZyRYMk9Om3DXftZgrjCWaMM58LLL7moZvaOPhHV2P6OQY
+ zlQ0dHofnwILHwlhcoYEc4vFcvIjxdR6txsQc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=uvYP2dCmI1ZUBL+P6N9qqPEMMyNG7Xmed98Q3LoPhRc=;
- b=CFHrLK1/tstwiN5YsADzGUfbSk3cQyRaoJeePfreb84w4KKDbZXonb96kyn50YCXCL
- 7fvT8U4LjZtGf0G4WCLinXIhK6hAIMQbfG28uLDhwnZbgr4frPjsm1n5nCnJoN1679JV
- H2tP8Gfjp3W12YAjapFyJ5jew+bHEPwlGI7QjyXTk0fCiMnqhtC0trdAHa5YP3ZjbW4B
- 7foqiMktPjAx68JVtplAJdSOYmuURwkm1yl6QUCXG8vJKjqS9cUdAiTRjgTOja4uyvED
- FMXyPzhU1Eq+td43IvepedfKpj7kD/04Y0q+eevi/OlJZijlYQaFFqdOV+Ta0nhZL7gJ
- 3maA==
-X-Gm-Message-State: AOAM531QB0oY+cEYWKaC2Hp4iAGF4d0tHFWKwjJ0eEPy+aewmV+uLmwf
- LiSg2XKNsY7Iq9DAxsDcikXjvQ==
-X-Google-Smtp-Source: ABdhPJzocerqJcZsWtTMJhS3BxNMKI6t/XE2uaviKPeY5HpRKnKDaqdKUEnvXnYbV1H3JH0+Q+V4zQ==
-X-Received: by 2002:a5d:5983:: with SMTP id n3mr2548866wri.227.1629968147888; 
- Thu, 26 Aug 2021 01:55:47 -0700 (PDT)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=JJwF0PYPmqolDQLzp/yyP0Yq0kNRDALRe2iRCTul0qQ=;
+ b=O0URvMF3L9E/hSKaF1Rc/xlUJSvon62Uox1lHLCYMq82DEyzMUVzh8WtrA9Fc5e3jE
+ YXUNkmafeOgHijcUD4o3gdRWCi++hZF2/2Llx2BprjjkqSVeoUebyWfIQua7U0rWZSAC
+ NM3/1E7Q+u0tFgL1xk+vkAFyx8rZLzI+287BMn+ShgjYFKFPD0qH/DTFFnKnHTlskNYA
+ 0uSbkD0AXHAemQdlJKEM33vlDkZarOV+F3B07m6xYF4ELy5VqGJLo47ACuMIaa+uFz2u
+ +F7FfFbjkEWB/p8LlKwqDUa9slxcxC6uMXhuFCWEseTchbFyoziw+wUQ5zOiyhQsdPM6
+ L+Fg==
+X-Gm-Message-State: AOAM531mRaWzC56vpuvb/0SBdYo1cY2iSsFdhOGZiGsH8jylItLyLYbW
+ vk3D7AK9I+bNhZ888lUTPQdo9Q==
+X-Google-Smtp-Source: ABdhPJzc23DuJoTC8nNJ25VQNbiKhhUYQ5XEsHa4ESe0XB/c1un0JqfR7O83A2HYXCq/etCBggdOqg==
+X-Received: by 2002:a05:600c:1d27:: with SMTP id
+ l39mr2677127wms.146.1629970420205; 
+ Thu, 26 Aug 2021 02:33:40 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id v21sm2608329wra.92.2021.08.26.01.55.46
+ by smtp.gmail.com with ESMTPSA id z6sm2088220wmp.1.2021.08.26.02.33.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 26 Aug 2021 01:55:47 -0700 (PDT)
-Date: Thu, 26 Aug 2021 10:55:45 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YSdXEaBDpijEBx/6@phenom.ffwll.local>
-References: <20210818105443.1578-1-christian.koenig@amd.com>
- <015fd5ed-9255-9c28-44f3-3c8dde90ebad@gmail.com>
+ Thu, 26 Aug 2021 02:33:39 -0700 (PDT)
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: DRI Development <dri-devel@lists.freedesktop.org>
+Date: Thu, 26 Aug 2021 11:33:34 +0200
+Message-Id: <20210826093334.1117944-1-daniel.vetter@ffwll.ch>
+X-Mailer: git-send-email 2.32.0
+In-Reply-To: <20210817085308.3557257-1-daniel.vetter@ffwll.ch>
+References: <20210817085308.3557257-1-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <015fd5ed-9255-9c28-44f3-3c8dde90ebad@gmail.com>
-X-Operating-System: Linux phenom 5.10.0-7-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 1/2] dma-buf: nuke DMA_FENCE_TRACE
- macros v2
+Subject: [Linaro-mm-sig] [PATCH] drm/msm: Improve drm/sched point of no
+ return rules
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,228 +77,63 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: adelva@google.com, sspatil@google.com, gustavo@padovan.org,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- john.stultz@linaro.org, daniel@ffwll.ch, hridya@google.com,
- linux-media@vger.kernel.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: Rob Clark <robdclark@chromium.org>, freedreno@lists.freedesktop.org,
+ Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ linaro-mm-sig@lists.linaro.org, Rob Clark <robdclark@gmail.com>,
+ linux-arm-msm@vger.kernel.org, Daniel Vetter <daniel.vetter@intel.com>,
+ Sean Paul <sean@poorly.run>, linux-media@vger.kernel.org
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Tue, Aug 24, 2021 at 10:12:24AM +0200, Christian K=F6nig wrote:
-> Just a gentle ping. Daniel any more comments on this?
-
-Still haven't seen a patch set to nuke the sw_sync igt tests. Otherwise
-this is just going to cause fails and reboots in our ci (we reboot on
-taints).
-
-> I'm not sure if the second patch will cause trouble with any unit test, b=
-ut
-> I'm willing to try it. We can always trivial revert it.
-
-See above, remove the igts and we should be fine I think. I don't think
-there's any selftests or kselftests, but checking that should be a quick
-grep at most.
--Daniel
-
-> =
-
-> Thanks,
-> Christian.
-> =
-
-> Am 18.08.21 um 12:54 schrieb Christian K=F6nig:
-> > Only the DRM GPU scheduler, radeon and amdgpu where using them and they=
- depend
-> > on a non existing config option to actually emit some code.
-> > =
-
-> > v2: keep the signal path as is for now
-> > =
-
-> > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
-> > ---
-> >   drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c | 10 +---------
-> >   drivers/gpu/drm/radeon/radeon_fence.c     | 24 ++++-------------------
-> >   drivers/gpu/drm/scheduler/sched_fence.c   | 18 ++---------------
-> >   include/linux/dma-fence.h                 | 22 ---------------------
-> >   4 files changed, 7 insertions(+), 67 deletions(-)
-> > =
-
-> > diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c b/drivers/gpu/dr=
-m/amd/amdgpu/amdgpu_fence.c
-> > index 0b1c48590c43..c65994e382bd 100644
-> > --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c
-> > +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c
-> > @@ -246,7 +246,6 @@ bool amdgpu_fence_process(struct amdgpu_ring *ring)
-> >   	struct amdgpu_fence_driver *drv =3D &ring->fence_drv;
-> >   	struct amdgpu_device *adev =3D ring->adev;
-> >   	uint32_t seq, last_seq;
-> > -	int r;
-> >   	do {
-> >   		last_seq =3D atomic_read(&ring->fence_drv.last_seq);
-> > @@ -278,12 +277,7 @@ bool amdgpu_fence_process(struct amdgpu_ring *ring)
-> >   		if (!fence)
-> >   			continue;
-> > -		r =3D dma_fence_signal(fence);
-> > -		if (!r)
-> > -			DMA_FENCE_TRACE(fence, "signaled from irq context\n");
-> > -		else
-> > -			BUG();
-> > -
-> > +		dma_fence_signal(fence);
-> >   		dma_fence_put(fence);
-> >   		pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
-> >   		pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
-> > @@ -639,8 +633,6 @@ static bool amdgpu_fence_enable_signaling(struct dm=
-a_fence *f)
-> >   	if (!timer_pending(&ring->fence_drv.fallback_timer))
-> >   		amdgpu_fence_schedule_fallback(ring);
-> > -	DMA_FENCE_TRACE(&fence->base, "armed on ring %i!\n", ring->idx);
-> > -
-> >   	return true;
-> >   }
-> > diff --git a/drivers/gpu/drm/radeon/radeon_fence.c b/drivers/gpu/drm/ra=
-deon/radeon_fence.c
-> > index 18f2c2e0dfb3..3f351d222cbb 100644
-> > --- a/drivers/gpu/drm/radeon/radeon_fence.c
-> > +++ b/drivers/gpu/drm/radeon/radeon_fence.c
-> > @@ -176,18 +176,11 @@ static int radeon_fence_check_signaled(wait_queue=
-_entry_t *wait, unsigned mode,
-> >   	 */
-> >   	seq =3D atomic64_read(&fence->rdev->fence_drv[fence->ring].last_seq);
-> >   	if (seq >=3D fence->seq) {
-> > -		int ret =3D dma_fence_signal_locked(&fence->base);
-> > -
-> > -		if (!ret)
-> > -			DMA_FENCE_TRACE(&fence->base, "signaled from irq context\n");
-> > -		else
-> > -			DMA_FENCE_TRACE(&fence->base, "was already signaled\n");
-> > -
-> > +		dma_fence_signal_locked(&fence->base);
-> >   		radeon_irq_kms_sw_irq_put(fence->rdev, fence->ring);
-> >   		__remove_wait_queue(&fence->rdev->fence_queue, &fence->fence_wake);
-> >   		dma_fence_put(&fence->base);
-> > -	} else
-> > -		DMA_FENCE_TRACE(&fence->base, "pending\n");
-> > +	}
-> >   	return 0;
-> >   }
-> > @@ -422,8 +415,6 @@ static bool radeon_fence_enable_signaling(struct dm=
-a_fence *f)
-> >   	fence->fence_wake.func =3D radeon_fence_check_signaled;
-> >   	__add_wait_queue(&rdev->fence_queue, &fence->fence_wake);
-> >   	dma_fence_get(f);
-> > -
-> > -	DMA_FENCE_TRACE(&fence->base, "armed on ring %i!\n", fence->ring);
-> >   	return true;
-> >   }
-> > @@ -441,11 +432,7 @@ bool radeon_fence_signaled(struct radeon_fence *fe=
-nce)
-> >   		return true;
-> >   	if (radeon_fence_seq_signaled(fence->rdev, fence->seq, fence->ring))=
- {
-> > -		int ret;
-> > -
-> > -		ret =3D dma_fence_signal(&fence->base);
-> > -		if (!ret)
-> > -			DMA_FENCE_TRACE(&fence->base, "signaled from radeon_fence_signaled\=
-n");
-> > +		dma_fence_signal(&fence->base);
-> >   		return true;
-> >   	}
-> >   	return false;
-> > @@ -550,7 +537,6 @@ long radeon_fence_wait_timeout(struct radeon_fence =
-*fence, bool intr, long timeo
-> >   {
-> >   	uint64_t seq[RADEON_NUM_RINGS] =3D {};
-> >   	long r;
-> > -	int r_sig;
-> >   	/*
-> >   	 * This function should not be called on !radeon fences.
-> > @@ -567,9 +553,7 @@ long radeon_fence_wait_timeout(struct radeon_fence =
-*fence, bool intr, long timeo
-> >   		return r;
-> >   	}
-> > -	r_sig =3D dma_fence_signal(&fence->base);
-> > -	if (!r_sig)
-> > -		DMA_FENCE_TRACE(&fence->base, "signaled from fence_wait\n");
-> > +	dma_fence_signal(&fence->base);
-> >   	return r;
-> >   }
-> > diff --git a/drivers/gpu/drm/scheduler/sched_fence.c b/drivers/gpu/drm/=
-scheduler/sched_fence.c
-> > index 69de2c76731f..3736746c47bd 100644
-> > --- a/drivers/gpu/drm/scheduler/sched_fence.c
-> > +++ b/drivers/gpu/drm/scheduler/sched_fence.c
-> > @@ -50,26 +50,12 @@ static void __exit drm_sched_fence_slab_fini(void)
-> >   void drm_sched_fence_scheduled(struct drm_sched_fence *fence)
-> >   {
-> > -	int ret =3D dma_fence_signal(&fence->scheduled);
-> > -
-> > -	if (!ret)
-> > -		DMA_FENCE_TRACE(&fence->scheduled,
-> > -				"signaled from irq context\n");
-> > -	else
-> > -		DMA_FENCE_TRACE(&fence->scheduled,
-> > -				"was already signaled\n");
-> > +	dma_fence_signal(&fence->scheduled);
-> >   }
-> >   void drm_sched_fence_finished(struct drm_sched_fence *fence)
-> >   {
-> > -	int ret =3D dma_fence_signal(&fence->finished);
-> > -
-> > -	if (!ret)
-> > -		DMA_FENCE_TRACE(&fence->finished,
-> > -				"signaled from irq context\n");
-> > -	else
-> > -		DMA_FENCE_TRACE(&fence->finished,
-> > -				"was already signaled\n");
-> > +	dma_fence_signal(&fence->finished);
-> >   }
-> >   static const char *drm_sched_fence_get_driver_name(struct dma_fence *=
-fence)
-> > diff --git a/include/linux/dma-fence.h b/include/linux/dma-fence.h
-> > index 6ffb4b2c6371..4cc119ab272f 100644
-> > --- a/include/linux/dma-fence.h
-> > +++ b/include/linux/dma-fence.h
-> > @@ -590,26 +590,4 @@ struct dma_fence *dma_fence_get_stub(void);
-> >   struct dma_fence *dma_fence_allocate_private_stub(void);
-> >   u64 dma_fence_context_alloc(unsigned num);
-> > -#define DMA_FENCE_TRACE(f, fmt, args...) \
-> > -	do {								\
-> > -		struct dma_fence *__ff =3D (f);				\
-> > -		if (IS_ENABLED(CONFIG_DMA_FENCE_TRACE))			\
-> > -			pr_info("f %llu#%llu: " fmt,			\
-> > -				__ff->context, __ff->seqno, ##args);	\
-> > -	} while (0)
-> > -
-> > -#define DMA_FENCE_WARN(f, fmt, args...) \
-> > -	do {								\
-> > -		struct dma_fence *__ff =3D (f);				\
-> > -		pr_warn("f %llu#%llu: " fmt, __ff->context, __ff->seqno,\
-> > -			 ##args);					\
-> > -	} while (0)
-> > -
-> > -#define DMA_FENCE_ERR(f, fmt, args...) \
-> > -	do {								\
-> > -		struct dma_fence *__ff =3D (f);				\
-> > -		pr_err("f %llu#%llu: " fmt, __ff->context, __ff->seqno,	\
-> > -			##args);					\
-> > -	} while (0)
-> > -
-> >   #endif /* __LINUX_DMA_FENCE_H */
-> =
-
-
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+T3JpZ2luYWxseSBkcm1fc2NoZWRfam9iX2luaXQgd2FzIHRoZSBwb2ludCBvZiBubyByZXR1cm4s
+IGFmdGVyIHdoaWNoCmRyaXZlcnMgcmVhbGx5IHNob3VsZCBzdWJtaXQgYSBqb2IuIEkndmUgc3Bs
+aXQgdGhhdCB1cCwgd2hpY2ggYWxsb3dzCnVzIHRvIGZpeCB0aGlzIGlzc3VlIHByZXR0eSBlYXNp
+bHkuCgpPbmx5IHRoaW5nIHdlIGhhdmUgdG8gdGFrZSBjYXJlIG9mIGlzIHRvIG5vdCBza2lwIHRv
+IGVycm9yIHBhdGhzIGFmdGVyCnRoYXQuIE90aGVyIGRyaXZlcnMgZG8gdGhpcyB0aGUgc2FtZSBm
+b3Igb3V0LWZlbmNlIGFuZCBzaW1pbGFyIHRoaW5ncy4KCnYyOiBJdCdzIG5vdCByZWFsbHkgYSBi
+dWdmaXgsIGp1c3QgYW4gaW1wcm92ZW1lbnQsIHNpbmNlIGFsbApkcm1fc2NoZWRfam9iX2FybSBk
+b2VzIGlzIHJlc2VydmUgdGhlIGZlbmNlIG51bWJlci4gQW5kIGdhcHMgc2hvdWxkIGJlCmZpbmUs
+IGFzIGxvbmcgYXMgdGhlIGRybV9zY2hlZF9qb2IgZG9lc24ndCBlc2NhcGUgYW55d2hlcmUgYXQg
+YWxsLgoKRm9yIHJvYnVzdG5lc3MgaXQncyBzdGlsbCBiZXR0ZXIgdG8gYWxpZ24gd2l0aCBvdGhl
+ciBkcml2ZXJzIGhlcmUgYW5kCm5vdCBiYWlsIG91dCBhZnRlciBqb2JfYXJtKCkuCgp2MzogSSBt
+aXNwbGFjZWQgZHJtX3NjaGVkX2pvYl9hcm0gYnkgX29uZV8gbGluZSEgVGhhbmtzIHRvIFJvYiBm
+b3IKdGVzdGluZyBhbmQgZGVidWcgaGVscC4KCkNjOiBSb2IgQ2xhcmsgPHJvYmRjbGFya0BjaHJv
+bWl1bS5vcmc+CkNjOiBSb2IgQ2xhcmsgPHJvYmRjbGFya0BnbWFpbC5jb20+CkNjOiBTZWFuIFBh
+dWwgPHNlYW5AcG9vcmx5LnJ1bj4KQ2M6IFN1bWl0IFNlbXdhbCA8c3VtaXQuc2Vtd2FsQGxpbmFy
+by5vcmc+CkNjOiAiQ2hyaXN0aWFuIEvDtm5pZyIgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4K
+Q2M6IGxpbnV4LWFybS1tc21Admdlci5rZXJuZWwub3JnCkNjOiBkcmktZGV2ZWxAbGlzdHMuZnJl
+ZWRlc2t0b3Aub3JnCkNjOiBmcmVlZHJlbm9AbGlzdHMuZnJlZWRlc2t0b3Aub3JnCkNjOiBsaW51
+eC1tZWRpYUB2Z2VyLmtlcm5lbC5vcmcKQ2M6IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9y
+ZwpTaWduZWQtb2ZmLWJ5OiBEYW5pZWwgVmV0dGVyIDxkYW5pZWwudmV0dGVyQGludGVsLmNvbT4K
+LS0tCiBkcml2ZXJzL2dwdS9kcm0vbXNtL21zbV9nZW1fc3VibWl0LmMgfCAxMyArKysrKystLS0t
+LS0tCiAxIGZpbGUgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCA3IGRlbGV0aW9ucygtKQoKZGlm
+ZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9tc20vbXNtX2dlbV9zdWJtaXQuYyBiL2RyaXZlcnMv
+Z3B1L2RybS9tc20vbXNtX2dlbV9zdWJtaXQuYwppbmRleCA0ZDFjNGQ1ZjZhMmEuLjcxYjhjOGY3
+NTJhMyAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL21zbS9tc21fZ2VtX3N1Ym1pdC5jCisr
+KyBiL2RyaXZlcnMvZ3B1L2RybS9tc20vbXNtX2dlbV9zdWJtaXQuYwpAQCAtNTIsOCArNTIsNiBA
+QCBzdGF0aWMgc3RydWN0IG1zbV9nZW1fc3VibWl0ICpzdWJtaXRfY3JlYXRlKHN0cnVjdCBkcm1f
+ZGV2aWNlICpkZXYsCiAJCXJldHVybiBFUlJfUFRSKHJldCk7CiAJfQogCi0JZHJtX3NjaGVkX2pv
+Yl9hcm0oJmpvYi0+YmFzZSk7Ci0KIAl4YV9pbml0X2ZsYWdzKCZzdWJtaXQtPmRlcHMsIFhBX0ZM
+QUdTX0FMTE9DKTsKIAogCWtyZWZfaW5pdCgmc3VibWl0LT5yZWYpOwpAQCAtODgwLDYgKzg3OCw4
+IEBAIGludCBtc21faW9jdGxfZ2VtX3N1Ym1pdChzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LCB2b2lk
+ICpkYXRhLAogCiAJc3VibWl0LT5ucl9jbWRzID0gaTsKIAorCWRybV9zY2hlZF9qb2JfYXJtKCZz
+dWJtaXQtPmJhc2UpOworCiAJc3VibWl0LT51c2VyX2ZlbmNlID0gZG1hX2ZlbmNlX2dldCgmc3Vi
+bWl0LT5iYXNlLnNfZmVuY2UtPmZpbmlzaGVkKTsKIAogCS8qCkBAIC04OTEsMTcgKzg5MSwxNiBA
+QCBpbnQgbXNtX2lvY3RsX2dlbV9zdWJtaXQoc3RydWN0IGRybV9kZXZpY2UgKmRldiwgdm9pZCAq
+ZGF0YSwKIAlpZiAoc3VibWl0LT5mZW5jZV9pZCA8IDApIHsKIAkJcmV0ID0gc3VibWl0LT5mZW5j
+ZV9pZCA9IDA7CiAJCXN1Ym1pdC0+ZmVuY2VfaWQgPSAwOwotCQlnb3RvIG91dDsKIAl9CiAKLQlp
+ZiAoYXJncy0+ZmxhZ3MgJiBNU01fU1VCTUlUX0ZFTkNFX0ZEX09VVCkgeworCWlmIChyZXQgPT0g
+MCAmJiBhcmdzLT5mbGFncyAmIE1TTV9TVUJNSVRfRkVOQ0VfRkRfT1VUKSB7CiAJCXN0cnVjdCBz
+eW5jX2ZpbGUgKnN5bmNfZmlsZSA9IHN5bmNfZmlsZV9jcmVhdGUoc3VibWl0LT51c2VyX2ZlbmNl
+KTsKIAkJaWYgKCFzeW5jX2ZpbGUpIHsKIAkJCXJldCA9IC1FTk9NRU07Ci0JCQlnb3RvIG91dDsK
+KwkJfSBlbHNlIHsKKwkJCWZkX2luc3RhbGwob3V0X2ZlbmNlX2ZkLCBzeW5jX2ZpbGUtPmZpbGUp
+OworCQkJYXJncy0+ZmVuY2VfZmQgPSBvdXRfZmVuY2VfZmQ7CiAJCX0KLQkJZmRfaW5zdGFsbChv
+dXRfZmVuY2VfZmQsIHN5bmNfZmlsZS0+ZmlsZSk7Ci0JCWFyZ3MtPmZlbmNlX2ZkID0gb3V0X2Zl
+bmNlX2ZkOwogCX0KIAogCXN1Ym1pdF9hdHRhY2hfb2JqZWN0X2ZlbmNlcyhzdWJtaXQpOwotLSAK
+Mi4zMi4wCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpM
+aW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcK
+aHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4vbGlzdGluZm8vbGluYXJvLW1tLXNpZwo=
