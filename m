@@ -2,139 +2,71 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id C63083FB3BD
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 Aug 2021 12:16:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 971EA3FBD02
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 Aug 2021 21:38:35 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 26C1162D35
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 Aug 2021 10:16:48 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0315362631
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 Aug 2021 19:38:29 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 2AB36606DA; Mon, 30 Aug 2021 10:16:45 +0000 (UTC)
+	id 385C86073C; Mon, 30 Aug 2021 19:38:28 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B81376073C;
-	Mon, 30 Aug 2021 10:16:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 690AE606DA;
+	Mon, 30 Aug 2021 19:38:25 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 3D4FA60497
- for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Aug 2021 10:16:41 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 38E9060418
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Aug 2021 19:38:24 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 391356073C; Mon, 30 Aug 2021 10:16:41 +0000 (UTC)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2045.outbound.protection.outlook.com [40.107.220.45])
- by lists.linaro.org (Postfix) with ESMTPS id 0D6FD60497
- for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Aug 2021 10:16:39 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LSVgZnOJJKJieA8t/0+WdeU9Tajva23vKpIL4DXqV63+X/upZofkxE0UleT3jRlJwlf3LpxzUKOKQmzqF1I1TqaI4c7GqQL9WTTsvUyeSPQlC8UcXnTfsIFsljKDPTBlf85ywhODSBRMX74famMmh4+FXjeU5n2JevNKdAAciYx2MNUo1DuOTcVRdTDo7E1eIz9I7d0wMYhUSIyYeifru1h/v/AJDmVv90LYhr5kYwdkjsytG5qbALAiT7+tf1i0wG+6KOULNOXBM3aKdQrtBeXPYvFuG0byIEjN0ncYLkwGx80H+J2ypbE2TuqnVfOjN1t8wnPTQ0EL1NYS/u3Ydg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MMUAx9ccDV07lV7BtPeDauhTLcqik+389hsBbqeNKR8=;
- b=dZGIVhMqq+KAEuuH0lZsHIG808fSqH98HK4ubjOJ4Qrnb3KQVkB7mdS6ehoImYMPl6e9u/ohg+/mYPWjamy+Kc5pNte5R+aQLVbdCC7P0Vdk05DAJ9pZ/koGZxqTk/Jxy2LrjzTrdCc5B9ZtbU8/Lgfla9pXS2fienjLPmj0Dcix1Vg2vPVzKvaoKOZ0fd+oswpHEs8vrZTwLsiFxxG0gqoTMtys7sqCW62NFMt7o3nQTeTQjgpmdMhLbYjQ3G3KPQBEj9ahtAmXhfN8XDpy3QgrNe1yV2GFTIkpEVEgw4mAY/N7ydCrJw8M9OBrbnzB5mcC6v2fW9i1bb4ZM9wU5A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MMUAx9ccDV07lV7BtPeDauhTLcqik+389hsBbqeNKR8=;
- b=B28muxSEla7cGXYnGTb8WODv+pU7OpYgj4d3xm9KtCkg+4abXi1oBQFwfQH8VsJQ2zpsBZQcrA0t5zJTZcmRKwjyXqvTd1w4/n3S7+ektFrqcWoN/beWYmNRhBajVka0FnzF+aPn5b+7KnNdFp1YWr53AH8a8tYFx1F7S3pVDWg=
-Authentication-Results: mediatek.com; dkim=none (message not signed)
- header.d=none;mediatek.com; dmarc=none action=none header.from=amd.com;
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
- by MN2PR12MB4392.namprd12.prod.outlook.com (2603:10b6:208:264::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4457.24; Mon, 30 Aug
- 2021 10:16:35 +0000
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::dce2:96e5:aba2:66fe]) by MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::dce2:96e5:aba2:66fe%6]) with mapi id 15.20.4457.024; Mon, 30 Aug 2021
- 10:16:35 +0000
-To: guangming.cao@mediatek.com, Sumit Semwal <sumit.semwal@linaro.org>,
- Benjamin Gaignard <benjamin.gaignard@linaro.org>,
- Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>,
- Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- "open list:DMA-BUF HEAPS FRAMEWORK" <linux-media@vger.kernel.org>,
- "open list:DMA-BUF HEAPS FRAMEWORK" <dri-devel@lists.freedesktop.org>,
- "moderated list:DMA-BUF HEAPS FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- open list <linux-kernel@vger.kernel.org>,
- "moderated list:ARM/Mediatek SoC support"
- <linux-arm-kernel@lists.infradead.org>,
- "moderated list:ARM/Mediatek SoC support"
- <linux-mediatek@lists.infradead.org>
-References: <20210830100139.15632-1-guangming.cao@mediatek.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-Message-ID: <dd5ba603-8c9d-f6a0-cbcc-dfb353fb6701@amd.com>
-Date: Mon, 30 Aug 2021 12:16:28 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
-In-Reply-To: <20210830100139.15632-1-guangming.cao@mediatek.com>
-Content-Language: en-US
-X-ClientProxiedBy: AM0PR04CA0144.eurprd04.prod.outlook.com
- (2603:10a6:208:55::49) To MN2PR12MB3775.namprd12.prod.outlook.com
- (2603:10b6:208:159::19)
+ id 3592C606DA; Mon, 30 Aug 2021 19:38:24 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
+ [209.85.128.48])
+ by lists.linaro.org (Postfix) with ESMTPS id 23A8260418
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Aug 2021 19:38:22 +0000 (UTC)
+Received: by mail-wm1-f48.google.com with SMTP id
+ c8-20020a7bc008000000b002e6e462e95fso235070wmb.2
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Aug 2021 12:38:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=WYoie9udrqWwx/mp6AADwkeCwHuZjaR6LVPeG2MtU0c=;
+ b=eUsCG3UoTTbLf8oN64rq+qHVKJNAZTgDpQp95Wj8G97Z0OYhNSUbMlALg3U68IELLQ
+ BuA0rIzmhfCqiPVV4FfuSF11hehkjZ6+Wn7KPYpNLpkYjrQzt88JUZYkex2fivK+m5VB
+ Dg6F5vpawI47dMlcwJwVwh6wFJGbyse8DxU8A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=WYoie9udrqWwx/mp6AADwkeCwHuZjaR6LVPeG2MtU0c=;
+ b=Slalkf7IuA5Bizmh3XkWR2aht5MIMYbt4ji+21D5YCW00np2G6cXaJDCAyWyceJdBY
+ EK28s6ff8AxOdpH4ngmNQ2D0qbJUBPbM+uaiT7wCSUcPoAgHlCPJOOPdYqnKkEMe2DCW
+ biSUgJsIdx3StYOch7KhXJzOQfKWiK1Si1VmB6xheZMxGBaI53gZDsZ/BPdQ9qDPqke1
+ vKzAf0d9yY1rtDeSr4B2dRH1h9PXS8HWFNyCCtN6ZzAikIxBNtxShtr1KT/EATFnkW6g
+ KsCwUK+GiXqTRPNE1BMV08siJapt+cGYCDHWAxISRrD6Z/Qinl9fHK3JVrFD8rxAKzpi
+ OFvQ==
+X-Gm-Message-State: AOAM533Un60EaO+R6XL2nQo3bUtfl4sXlFHyMLy+CLD/VjoQfNiQBQlj
+ FGknF9Le8spXpjnox9BH1NTiLw==
+X-Google-Smtp-Source: ABdhPJxT9vS5t7FdR+DG5dhgT1UxoKfs1uQRWSNfNzPr5Nupm0oJF8S1377i2Amlj9osfmrO8gSbZw==
+X-Received: by 2002:a1c:ed03:: with SMTP id l3mr612162wmh.56.1630352301109;
+ Mon, 30 Aug 2021 12:38:21 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id x11sm16429629wro.83.2021.08.30.12.38.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 30 Aug 2021 12:38:20 -0700 (PDT)
+Date: Mon, 30 Aug 2021 21:38:18 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: DRI Development <dri-devel@lists.freedesktop.org>
+Message-ID: <YS0zqk73eauG3rA/@phenom.ffwll.local>
+References: <20210805104705.862416-1-daniel.vetter@ffwll.ch>
+ <20210805104705.862416-21-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.178.21] (91.14.161.181) by
- AM0PR04CA0144.eurprd04.prod.outlook.com (2603:10a6:208:55::49) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4457.17 via Frontend Transport; Mon, 30 Aug 2021 10:16:33 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 14e4b5b5-f6df-4122-c2d3-08d96b9f3f42
-X-MS-TrafficTypeDiagnostic: MN2PR12MB4392:
-X-Microsoft-Antispam-PRVS: <MN2PR12MB43927CE07B10C47AC8F2919383CB9@MN2PR12MB4392.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:655;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: tfR00fALiHH9wxNxtB3LRLdO8q3k3F2VGP78g21te9IwYV0Zngxv8TanDOZxrAc+03MxahtFNjNYH7pYPjtsPRubvCqQut0ahnqWwwU0fObXdmv2imBPF62K2vL7hb90hXu+GOat0iI1nH+6z7X+1q8JjvjjMQTJO+FuVPdVszT3VEGt7BMOdX2A5JKf3eyyDJwEQKmIejlzz/qQsmJPtTwY8ibHKyTS7pChwi1TF7ipqb7FHe3mYICWT4/nZmhM6jcULxGG+MZRcdXmtk1NzCtoQvrsyMc9hlXnvWn1nBzwI98icL4c/bG6RqqTqWEB9nJ0VI8DERbp/WGplUXUw6Z2mIHcFjOconz8WMTLxuxNuviq+l93IpF881GKtc8/JfM1YwzF1orujrZtzWaVLZeiT7lDYXxgsaDMygrsrvQyCqcDJY4q5e/mCoH523uDY90h5mvT1UV+IYF/As3H7w1nMABg5r/5U/Qj9Y0ychqaAG1eNzcsUDKQL919BnijmHLfw0x4bpZmZ8U/Ri/4vgjRQFI4yLtkJ1emSWiifJiK7svCdIyizeBoxgtaLbn53DLLF6Fy9RE914m2umZToPPL1Gu7e2Pc+1ZPx39pF4QKMO55QUBVMbY/gkqnBHvBkVNeGyzDR+b7OU/tRPcRYNvt0BnsnGDYPk5Lvn3TuN3T7YIZjbxLGme17Xv0iIy07/IM8m4OqCdBooOjiHFF6v1eRLQrBLR3yd2HYt+30mHttf5Wz4lPN6Xzrp/dMT5Z
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(376002)(136003)(346002)(39860400002)(366004)(396003)(26005)(186003)(2906002)(956004)(83380400001)(38100700002)(31686004)(4326008)(31696002)(2616005)(66476007)(478600001)(6486002)(8676002)(110136005)(36756003)(16576012)(6666004)(66946007)(86362001)(66556008)(921005)(7416002)(316002)(8936002)(5660300002)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NDI3MUhZMW1URjVmN0hMeUdnVHpieGRWS1ZGcUp2dUMrSFBUODNsamdOMlB4?=
- =?utf-8?B?YkloemFXSWhMaHFFekZNS054RnJqTTlScXFRNGZpdEdQdWJSWk92SktWU3BL?=
- =?utf-8?B?ckNLRURvMWJraUQzdWowcTNKenZ2MVRaOVhBNDl5ZHJHRWREV3MxVzRENngx?=
- =?utf-8?B?cTgranBnNkFCWm53L1hQWjlpN3lza2t4M2xKREJHQUtZU0psVGJvaWVtVVcz?=
- =?utf-8?B?MFB2MXpod3dxVnF2VnZ6MnJ0WTFPZ2oydHU2bUNra0J3Q1poVGN2WlgxUjhB?=
- =?utf-8?B?Y05waVlpMmdtWjFieFNqN0RmNGE0bnRJQ2djRkE0cDVOWTJ6Skk0VXR5cXh1?=
- =?utf-8?B?YldxN05TenhpN01ob2FNWlhUbnpnaUM0L214MUlPY2JjSEtiaUxMWG1kK29v?=
- =?utf-8?B?ZkhUdFNTNUNQeUxCTUlQY1lQVmNuaDlMK2dHbVZZV2hibldCQ1dtNEdzaVht?=
- =?utf-8?B?OWhvMWZpRWEwcGRobXFxQWN0MGRueFl3UTd2QUJzallkTTVLSW1vc0R6UEVp?=
- =?utf-8?B?eExGMVZnM3dBSTJyMG1wYWZjZVBhU1ZVdlZYdy9VWDlvK3RmOW9KMEYwcVNi?=
- =?utf-8?B?OFREWXpiYVprRFFhK1hldmtiSkFOWDVqVlFlbVpiRDl5NHVvc0RhTlN5S3cv?=
- =?utf-8?B?c0ZUV1NOeFVlcEtlenlFeVdYUDQzVnBSV3hKRkswdXJWaFdvdVV4YTNaSTJN?=
- =?utf-8?B?K2UzR2M1K2ZsZDR4c2NaeW5wQlhzbFNoMGNwYms1UGczU2lWZmE3OE0vTzJM?=
- =?utf-8?B?S3pXdEFaUXNKenpQVW9jcEw2RmtheTNVM1RtWVltZ255ZE1TYk9sOExsWWVk?=
- =?utf-8?B?OWpYMURPb1lRMTIvaHBoTzI4dFhZc253S0F1aCtHSEsyWFZXUGQvZ05KVDZG?=
- =?utf-8?B?MEpCaXRIOHQ2SUN0WUIwWnlhMEMzNm9VL2tJY0NzenRTYzRmZHA4anVUN0wy?=
- =?utf-8?B?bFR1Tm5IZXVtbTVxZngzUFEwRTRNQWtvazFkN293NGp1eTBydXlMbDErbUU0?=
- =?utf-8?B?MkpDZDQ2Rjg1K2JEMVUvZHdpaCtBcTdVNFFONVk5M2ExTXJhZmN4OUpFY0Zl?=
- =?utf-8?B?c1ZpUjNqQVNQc3gzSDFoZy9Fczg2WW4wcXFOaHh6SDdrampGM2tTOTZxRHls?=
- =?utf-8?B?c21FeGdMS3ZmV1I3R09FdlV4TzFwbkhEWWRLRGdRM2QvTlJGSEsvQWwwYXJS?=
- =?utf-8?B?cGFrS0h4bUtGY29jY3ArL3o1a3pwZ0FyY29qSXNiRUVGRFlRV2VxK3kzeWdU?=
- =?utf-8?B?ekVlUzAvL0RVTjhnSjJ3K1JiejhXMFJNV2RPLytIc1kydVQ0NjF2OWdYaEpl?=
- =?utf-8?B?S2JIY3pUUlM1NkRpVHhKbE1NNXdZR1VxaXJBS0tDZEowNm1HR1lXZVJBNHlO?=
- =?utf-8?B?TGpBekNPQVh5TUZWQlBoNFR6NGMxSjBwVkZrUzFYV1BUVGQ3bHoxSGlZdytv?=
- =?utf-8?B?d2c0WG9mQ0VaSFN4dU9vMVk2SkgrV2pnQ2lMeUlpV2ljZWtZS2tIL2FLY0lh?=
- =?utf-8?B?aHFWN3lWUGI3NGlJVWhGQXdxNUMybE84bWxDTkI5MGFvc1hUNTYrRnVkalVa?=
- =?utf-8?B?dEkvOG1lSzVFTFlBRXgyK2l2b0xnSEIwYnNOOVlSZEJQQlhSeFk3bGZXZURT?=
- =?utf-8?B?THFPOWh1SXpjR3ZVcUlwNytlU0RBUThEUVRTZGJoMU9KLzR1dGs4clArVmpN?=
- =?utf-8?B?ZVo5SnVwdDRDY1VCYWxFSVNOKzRvNzg2andERUtidzNDL0wvMXFTQmMwK05y?=
- =?utf-8?Q?YKCQxxv6zcQ+cOGCuLBT1WV/KSJ8EpcGW7vGZVV?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 14e4b5b5-f6df-4122-c2d3-08d96b9f3f42
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Aug 2021 10:16:35.8166 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: EwLAbmhsQNiLtopzohB7x/Im8WXhUjC+sbGt0GIbp0jJ5EXLXtK0MdF+ZdgsbcST
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4392
+Content-Disposition: inline
+In-Reply-To: <20210805104705.862416-21-daniel.vetter@ffwll.ch>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH] dma-buf: heaps: remove duplicated cache
- sync
+Subject: Re: [Linaro-mm-sig] [PATCH v5 20/20] dma-resv: Give the docs a
+ do-over
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -147,69 +79,360 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: wsd_upstream@mediatek.com
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Cc: Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+ linaro-mm-sig@lists.linaro.org, Matthew Auld <matthew.auld@intel.com>,
+ Jason Ekstrand <jason@jlekstrand.net>, Daniel Vetter <daniel.vetter@intel.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ linux-media@vger.kernel.org
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Am 30.08.21 um 12:01 schrieb guangming.cao@mediatek.com:
-> From: Guangming Cao <Guangming.Cao@mediatek.com>
->
-> Current flow, one dmabuf maybe call cache sync many times if
-> it has beed mapped more than one time.
+On Thu, Aug 05, 2021 at 12:47:05PM +0200, Daniel Vetter wrote:
+> Specifically document the new/clarified rules around how the shared
+> fences do not have any ordering requirements against the exclusive
+> fence.
+> =
 
-Well I'm not an expert on DMA heaps, but this will most likely not work 
-correctly.
+> But also document all the things a bit better, given how central
+> struct dma_resv to dynamic buffer management the docs have been very
+> inadequat.
+> =
 
-> Is there any case that attachments of one dmabuf will points to
-> different memory? If not, seems do sync only one time is more better.
+> - Lots more links to other pieces of the puzzle. Unfortunately
+>   ttm_buffer_object has no docs, so no links :-(
+> =
 
-I think that this can happen, yes.
+> - Explain/complain a bit about dma_resv_locking_ctx(). I still don't
+>   like that one, but fixing the ttm call chains is going to be
+>   horrible. Plus we want to plug in real slowpath locking when we do
+>   that anyway.
+> =
 
-Christian.
+> - Main part of the patch is some actual docs for struct dma_resv.
+> =
 
+> Overall I think we still have a lot of bad naming in this area (e.g.
+> dma_resv.fence is singular, but contains the multiple shared fences),
+> but I think that's more indicative of how the semantics and rules are
+> just not great.
+> =
 
->
-> Signed-off-by: Guangming Cao <Guangming.Cao@mediatek.com>
+> Another thing that's real awkard is how chaining exclusive fences
+> right now means direct dma_resv.exclusive_fence pointer access with an
+> rcu_assign_pointer. Not so great either.
+> =
+
+> v2:
+> - Fix a pile of typos (Matt, Jason)
+> - Hammer it in that breaking the rules leads to use-after-free issues
+>   around dma-buf sharing (Christian)
+> =
+
+> Reviewed-by: Christian K=F6nig <christian.koenig@amd.com>
+> Cc: Jason Ekstrand <jason@jlekstrand.net>
+> Cc: Matthew Auld <matthew.auld@intel.com>
+> Reviewed-by: Matthew Auld <matthew.auld@intel.com>
+> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+> Cc: Sumit Semwal <sumit.semwal@linaro.org>
+> Cc: "Christian K=F6nig" <christian.koenig@amd.com>
+> Cc: linux-media@vger.kernel.org
+> Cc: linaro-mm-sig@lists.linaro.org
+
+Also pushed to drm-misc-next.
+-Daniel
+
 > ---
->   drivers/dma-buf/heaps/system_heap.c | 14 ++++++++------
->   1 file changed, 8 insertions(+), 6 deletions(-)
->
-> diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/heaps/system_heap.c
-> index 23a7e74ef966..909ef652a8c8 100644
-> --- a/drivers/dma-buf/heaps/system_heap.c
-> +++ b/drivers/dma-buf/heaps/system_heap.c
-> @@ -162,9 +162,10 @@ static int system_heap_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
->   		invalidate_kernel_vmap_range(buffer->vaddr, buffer->len);
->   
->   	list_for_each_entry(a, &buffer->attachments, list) {
-> -		if (!a->mapped)
-> -			continue;
-> -		dma_sync_sgtable_for_cpu(a->dev, a->table, direction);
-> +		if (a->mapped) {
-> +			dma_sync_sgtable_for_cpu(a->dev, a->table, direction);
-> +			break;
-> +		}
->   	}
->   	mutex_unlock(&buffer->lock);
->   
-> @@ -183,9 +184,10 @@ static int system_heap_dma_buf_end_cpu_access(struct dma_buf *dmabuf,
->   		flush_kernel_vmap_range(buffer->vaddr, buffer->len);
->   
->   	list_for_each_entry(a, &buffer->attachments, list) {
-> -		if (!a->mapped)
-> -			continue;
-> -		dma_sync_sgtable_for_device(a->dev, a->table, direction);
-> +		if (!a->mapped) {
-> +			dma_sync_sgtable_for_device(a->dev, a->table, direction);
-> +			break;
-> +		}
->   	}
->   	mutex_unlock(&buffer->lock);
->   
+>  drivers/dma-buf/dma-resv.c |  24 ++++++---
+>  include/linux/dma-buf.h    |   7 +++
+>  include/linux/dma-resv.h   | 104 +++++++++++++++++++++++++++++++++++--
+>  3 files changed, 124 insertions(+), 11 deletions(-)
+> =
 
+> diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/dma-resv.c
+> index e744fd87c63c..84fbe60629e3 100644
+> --- a/drivers/dma-buf/dma-resv.c
+> +++ b/drivers/dma-buf/dma-resv.c
+> @@ -48,6 +48,8 @@
+>   * write operations) or N shared fences (read operations).  The RCU
+>   * mechanism is used to protect read access to fences from locked
+>   * write-side updates.
+> + *
+> + * See struct dma_resv for more details.
+>   */
+>  =
+
+>  DEFINE_WD_CLASS(reservation_ww_class);
+> @@ -137,7 +139,11 @@ EXPORT_SYMBOL(dma_resv_fini);
+>   * @num_fences: number of fences we want to add
+>   *
+>   * Should be called before dma_resv_add_shared_fence().  Must
+> - * be called with obj->lock held.
+> + * be called with @obj locked through dma_resv_lock().
+> + *
+> + * Note that the preallocated slots need to be re-reserved if @obj is un=
+locked
+> + * at any time before calling dma_resv_add_shared_fence(). This is valid=
+ated
+> + * when CONFIG_DEBUG_MUTEXES is enabled.
+>   *
+>   * RETURNS
+>   * Zero for success, or -errno
+> @@ -234,8 +240,10 @@ EXPORT_SYMBOL(dma_resv_reset_shared_max);
+>   * @obj: the reservation object
+>   * @fence: the shared fence to add
+>   *
+> - * Add a fence to a shared slot, obj->lock must be held, and
+> + * Add a fence to a shared slot, @obj must be locked with dma_resv_lock(=
+), and
+>   * dma_resv_reserve_shared() has been called.
+> + *
+> + * See also &dma_resv.fence for a discussion of the semantics.
+>   */
+>  void dma_resv_add_shared_fence(struct dma_resv *obj, struct dma_fence *f=
+ence)
+>  {
+> @@ -278,9 +286,11 @@ EXPORT_SYMBOL(dma_resv_add_shared_fence);
+>  /**
+>   * dma_resv_add_excl_fence - Add an exclusive fence.
+>   * @obj: the reservation object
+> - * @fence: the shared fence to add
+> + * @fence: the exclusive fence to add
+>   *
+> - * Add a fence to the exclusive slot.  The obj->lock must be held.
+> + * Add a fence to the exclusive slot. @obj must be locked with dma_resv_=
+lock().
+> + * Note that this function replaces all fences attached to @obj, see also
+> + * &dma_resv.fence_excl for a discussion of the semantics.
+>   */
+>  void dma_resv_add_excl_fence(struct dma_resv *obj, struct dma_fence *fen=
+ce)
+>  {
+> @@ -609,9 +619,11 @@ static inline int dma_resv_test_signaled_single(stru=
+ct dma_fence *passed_fence)
+>   * fence
+>   *
+>   * Callers are not required to hold specific locks, but maybe hold
+> - * dma_resv_lock() already
+> + * dma_resv_lock() already.
+> + *
+>   * RETURNS
+> - * true if all fences signaled, else false
+> + *
+> + * True if all fences signaled, else false.
+>   */
+>  bool dma_resv_test_signaled(struct dma_resv *obj, bool test_all)
+>  {
+> diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
+> index 678b2006be78..fc62b5f9980c 100644
+> --- a/include/linux/dma-buf.h
+> +++ b/include/linux/dma-buf.h
+> @@ -420,6 +420,13 @@ struct dma_buf {
+>  	 * - Dynamic importers should set fences for any access that they can't
+>  	 *   disable immediately from their &dma_buf_attach_ops.move_notify
+>  	 *   callback.
+> +	 *
+> +	 * IMPORTANT:
+> +	 *
+> +	 * All drivers must obey the struct dma_resv rules, specifically the
+> +	 * rules for updating fences, see &dma_resv.fence_excl and
+> +	 * &dma_resv.fence. If these dependency rules are broken access tracking
+> +	 * can be lost resulting in use after free issues.
+>  	 */
+>  	struct dma_resv *resv;
+>  =
+
+> diff --git a/include/linux/dma-resv.h b/include/linux/dma-resv.h
+> index e1ca2080a1ff..9100dd3dc21f 100644
+> --- a/include/linux/dma-resv.h
+> +++ b/include/linux/dma-resv.h
+> @@ -62,16 +62,90 @@ struct dma_resv_list {
+>  =
+
+>  /**
+>   * struct dma_resv - a reservation object manages fences for a buffer
+> - * @lock: update side lock
+> - * @seq: sequence count for managing RCU read-side synchronization
+> - * @fence_excl: the exclusive fence, if there is one currently
+> - * @fence: list of current shared fences
+> + *
+> + * There are multiple uses for this, with sometimes slightly different r=
+ules in
+> + * how the fence slots are used.
+> + *
+> + * One use is to synchronize cross-driver access to a struct dma_buf, ei=
+ther for
+> + * dynamic buffer management or just to handle implicit synchronization =
+between
+> + * different users of the buffer in userspace. See &dma_buf.resv for a m=
+ore
+> + * in-depth discussion.
+> + *
+> + * The other major use is to manage access and locking within a driver i=
+n a
+> + * buffer based memory manager. struct ttm_buffer_object is the canonical
+> + * example here, since this is where reservation objects originated from=
+. But
+> + * use in drivers is spreading and some drivers also manage struct
+> + * drm_gem_object with the same scheme.
+>   */
+>  struct dma_resv {
+> +	/**
+> +	 * @lock:
+> +	 *
+> +	 * Update side lock. Don't use directly, instead use the wrapper
+> +	 * functions like dma_resv_lock() and dma_resv_unlock().
+> +	 *
+> +	 * Drivers which use the reservation object to manage memory dynamically
+> +	 * also use this lock to protect buffer object state like placement,
+> +	 * allocation policies or throughout command submission.
+> +	 */
+>  	struct ww_mutex lock;
+> +
+> +	/**
+> +	 * @seq:
+> +	 *
+> +	 * Sequence count for managing RCU read-side synchronization, allows
+> +	 * read-only access to @fence_excl and @fence while ensuring we take a
+> +	 * consistent snapshot.
+> +	 */
+>  	seqcount_ww_mutex_t seq;
+>  =
+
+> +	/**
+> +	 * @fence_excl:
+> +	 *
+> +	 * The exclusive fence, if there is one currently.
+> +	 *
+> +	 * There are two ways to update this fence:
+> +	 *
+> +	 * - First by calling dma_resv_add_excl_fence(), which replaces all
+> +	 *   fences attached to the reservation object. To guarantee that no
+> +	 *   fences are lost, this new fence must signal only after all previous
+> +	 *   fences, both shared and exclusive, have signalled. In some cases it
+> +	 *   is convenient to achieve that by attaching a struct dma_fence_array
+> +	 *   with all the new and old fences.
+> +	 *
+> +	 * - Alternatively the fence can be set directly, which leaves the
+> +	 *   shared fences unchanged. To guarantee that no fences are lost, this
+> +	 *   new fence must signal only after the previous exclusive fence has
+> +	 *   signalled. Since the shared fences are staying intact, it is not
+> +	 *   necessary to maintain any ordering against those. If semantically
+> +	 *   only a new access is added without actually treating the previous
+> +	 *   one as a dependency the exclusive fences can be strung together
+> +	 *   using struct dma_fence_chain.
+> +	 *
+> +	 * Note that actual semantics of what an exclusive or shared fence mean
+> +	 * is defined by the user, for reservation objects shared across drivers
+> +	 * see &dma_buf.resv.
+> +	 */
+>  	struct dma_fence __rcu *fence_excl;
+> +
+> +	/**
+> +	 * @fence:
+> +	 *
+> +	 * List of current shared fences.
+> +	 *
+> +	 * There are no ordering constraints of shared fences against the
+> +	 * exclusive fence slot. If a waiter needs to wait for all access, it
+> +	 * has to wait for both sets of fences to signal.
+> +	 *
+> +	 * A new fence is added by calling dma_resv_add_shared_fence(). Since
+> +	 * this often needs to be done past the point of no return in command
+> +	 * submission it cannot fail, and therefore sufficient slots need to be
+> +	 * reserved by calling dma_resv_reserve_shared().
+> +	 *
+> +	 * Note that actual semantics of what an exclusive or shared fence mean
+> +	 * is defined by the user, for reservation objects shared across drivers
+> +	 * see &dma_buf.resv.
+> +	 */
+>  	struct dma_resv_list __rcu *fence;
+>  };
+>  =
+
+> @@ -98,6 +172,13 @@ static inline void dma_resv_reset_shared_max(struct d=
+ma_resv *obj) {}
+>   * undefined order, a #ww_acquire_ctx is passed to unwind if a cycle
+>   * is detected. See ww_mutex_lock() and ww_acquire_init(). A reservation
+>   * object may be locked by itself by passing NULL as @ctx.
+> + *
+> + * When a die situation is indicated by returning -EDEADLK all locks hel=
+d by
+> + * @ctx must be unlocked and then dma_resv_lock_slow() called on @obj.
+> + *
+> + * Unlocked by calling dma_resv_unlock().
+> + *
+> + * See also dma_resv_lock_interruptible() for the interruptible variant.
+>   */
+>  static inline int dma_resv_lock(struct dma_resv *obj,
+>  				struct ww_acquire_ctx *ctx)
+> @@ -119,6 +200,12 @@ static inline int dma_resv_lock(struct dma_resv *obj,
+>   * undefined order, a #ww_acquire_ctx is passed to unwind if a cycle
+>   * is detected. See ww_mutex_lock() and ww_acquire_init(). A reservation
+>   * object may be locked by itself by passing NULL as @ctx.
+> + *
+> + * When a die situation is indicated by returning -EDEADLK all locks hel=
+d by
+> + * @ctx must be unlocked and then dma_resv_lock_slow_interruptible() cal=
+led on
+> + * @obj.
+> + *
+> + * Unlocked by calling dma_resv_unlock().
+>   */
+>  static inline int dma_resv_lock_interruptible(struct dma_resv *obj,
+>  					      struct ww_acquire_ctx *ctx)
+> @@ -134,6 +221,8 @@ static inline int dma_resv_lock_interruptible(struct =
+dma_resv *obj,
+>   * Acquires the reservation object after a die case. This function
+>   * will sleep until the lock becomes available. See dma_resv_lock() as
+>   * well.
+> + *
+> + * See also dma_resv_lock_slow_interruptible() for the interruptible var=
+iant.
+>   */
+>  static inline void dma_resv_lock_slow(struct dma_resv *obj,
+>  				      struct ww_acquire_ctx *ctx)
+> @@ -167,7 +256,7 @@ static inline int dma_resv_lock_slow_interruptible(st=
+ruct dma_resv *obj,
+>   * if they overlap with a writer.
+>   *
+>   * Also note that since no context is provided, no deadlock protection is
+> - * possible.
+> + * possible, which is also not needed for a trylock.
+>   *
+>   * Returns true if the lock was acquired, false otherwise.
+>   */
+> @@ -193,6 +282,11 @@ static inline bool dma_resv_is_locked(struct dma_res=
+v *obj)
+>   *
+>   * Returns the context used to lock a reservation object or NULL if no c=
+ontext
+>   * was used or the object is not locked at all.
+> + *
+> + * WARNING: This interface is pretty horrible, but TTM needs it because =
+it
+> + * doesn't pass the struct ww_acquire_ctx around in some very long callc=
+hains.
+> + * Everyone else just uses it to check whether they're holding a reserva=
+tion or
+> + * not.
+>   */
+>  static inline struct ww_acquire_ctx *dma_resv_locking_ctx(struct dma_res=
+v *obj)
+>  {
+> -- =
+
+> 2.32.0
+> =
+
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
