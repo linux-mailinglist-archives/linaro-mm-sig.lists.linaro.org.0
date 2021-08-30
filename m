@@ -2,71 +2,139 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED2373FB2D3
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 Aug 2021 11:02:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C63083FB3BD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 Aug 2021 12:16:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8D381605D7
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 Aug 2021 09:02:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 26C1162D35
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 Aug 2021 10:16:48 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 3549262CF6; Mon, 30 Aug 2021 09:02:00 +0000 (UTC)
+	id 2AB36606DA; Mon, 30 Aug 2021 10:16:45 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8AE676070C;
-	Mon, 30 Aug 2021 09:01:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B81376073C;
+	Mon, 30 Aug 2021 10:16:42 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 8CCE9605D7
- for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Aug 2021 09:01:54 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 3D4FA60497
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Aug 2021 10:16:41 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 816B36070C; Mon, 30 Aug 2021 09:01:54 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com
- [209.85.218.42])
- by lists.linaro.org (Postfix) with ESMTPS id 67EA6605D7
- for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Aug 2021 09:01:52 +0000 (UTC)
-Received: by mail-ej1-f42.google.com with SMTP id ia27so29578475ejc.10
- for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Aug 2021 02:01:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=6TxX20RG9vZKNb6s13O3Zgz2CFeRVUtXKUgw8R7voIM=;
- b=DE0IIXDcdI727XPGVqrtky2yQdWuMlMmMgSWIrTGscmSI542IIZjQr6ow8aeAoJp2C
- 2NTnYz2F03dI4OkBH+l2grUnqH4P58F5LPe2sdT79g0apRPMM8rtYgIexPiCfVxr/SUx
- oyTIzK4y0HsjaMyKMrEpgKc+7oP19WAme9/WU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=6TxX20RG9vZKNb6s13O3Zgz2CFeRVUtXKUgw8R7voIM=;
- b=t0/7LlxDtkQnrzRXqEbEh1mvCyT5nO9kT1hfw/XMCGcH0b/VzC+2QBKFO7S7a05LtQ
- n3yO2Sd3Adt8UMY4VSZPMBI3+/JRlJZBZYOm01hkSOQ5hBes8vQPA/O1SUlGHnic23Bn
- f3FpqNcVLhg6kZOuuEvOV7SAbidkL2cMVQsmnAzZclxk4d3NwKi7hGvixXrPG+uU1Vi8
- DxwP406+1tr9FbJbKU/w+15nbIVK2v6/NAI3VGsiNSCIM59MBoAVUz4lNmcNGHKoMkku
- D0wfuHvjekk1i7WqAmgWehDRruzOGx8j9R2TBNnWDw5mKZ3PE11NuQ7eRX8+g599cmFe
- T2Iw==
-X-Gm-Message-State: AOAM533QUZqo+8t/9N46WBdDjy3mi3+am1slKYQK/nMLo5JHZiJd09jt
- sJqInGq7/8xQOnmVa3vSBz1srw==
-X-Google-Smtp-Source: ABdhPJxB08ojJo6OGjtdEhKjXGnu9dMQoQyBwlcdnF+4nIzqbNcU7sKY3XjYnrjFGe6CGtKcNnl9hg==
-X-Received: by 2002:a17:906:1806:: with SMTP id
- v6mr23825047eje.420.1630314111091; 
- Mon, 30 Aug 2021 02:01:51 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id v10sm7269829edt.25.2021.08.30.02.01.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 30 Aug 2021 02:01:50 -0700 (PDT)
-Date: Mon, 30 Aug 2021 11:01:48 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: DRI Development <dri-devel@lists.freedesktop.org>
-Message-ID: <YSyefFUvvoeNJVTe@phenom.ffwll.local>
-References: <20210805104705.862416-1-daniel.vetter@ffwll.ch>
- <20210805104705.862416-13-daniel.vetter@ffwll.ch>
+ id 391356073C; Mon, 30 Aug 2021 10:16:41 +0000 (UTC)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2045.outbound.protection.outlook.com [40.107.220.45])
+ by lists.linaro.org (Postfix) with ESMTPS id 0D6FD60497
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 30 Aug 2021 10:16:39 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=LSVgZnOJJKJieA8t/0+WdeU9Tajva23vKpIL4DXqV63+X/upZofkxE0UleT3jRlJwlf3LpxzUKOKQmzqF1I1TqaI4c7GqQL9WTTsvUyeSPQlC8UcXnTfsIFsljKDPTBlf85ywhODSBRMX74famMmh4+FXjeU5n2JevNKdAAciYx2MNUo1DuOTcVRdTDo7E1eIz9I7d0wMYhUSIyYeifru1h/v/AJDmVv90LYhr5kYwdkjsytG5qbALAiT7+tf1i0wG+6KOULNOXBM3aKdQrtBeXPYvFuG0byIEjN0ncYLkwGx80H+J2ypbE2TuqnVfOjN1t8wnPTQ0EL1NYS/u3Ydg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MMUAx9ccDV07lV7BtPeDauhTLcqik+389hsBbqeNKR8=;
+ b=dZGIVhMqq+KAEuuH0lZsHIG808fSqH98HK4ubjOJ4Qrnb3KQVkB7mdS6ehoImYMPl6e9u/ohg+/mYPWjamy+Kc5pNte5R+aQLVbdCC7P0Vdk05DAJ9pZ/koGZxqTk/Jxy2LrjzTrdCc5B9ZtbU8/Lgfla9pXS2fienjLPmj0Dcix1Vg2vPVzKvaoKOZ0fd+oswpHEs8vrZTwLsiFxxG0gqoTMtys7sqCW62NFMt7o3nQTeTQjgpmdMhLbYjQ3G3KPQBEj9ahtAmXhfN8XDpy3QgrNe1yV2GFTIkpEVEgw4mAY/N7ydCrJw8M9OBrbnzB5mcC6v2fW9i1bb4ZM9wU5A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MMUAx9ccDV07lV7BtPeDauhTLcqik+389hsBbqeNKR8=;
+ b=B28muxSEla7cGXYnGTb8WODv+pU7OpYgj4d3xm9KtCkg+4abXi1oBQFwfQH8VsJQ2zpsBZQcrA0t5zJTZcmRKwjyXqvTd1w4/n3S7+ektFrqcWoN/beWYmNRhBajVka0FnzF+aPn5b+7KnNdFp1YWr53AH8a8tYFx1F7S3pVDWg=
+Authentication-Results: mediatek.com; dkim=none (message not signed)
+ header.d=none;mediatek.com; dmarc=none action=none header.from=amd.com;
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
+ by MN2PR12MB4392.namprd12.prod.outlook.com (2603:10b6:208:264::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4457.24; Mon, 30 Aug
+ 2021 10:16:35 +0000
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::dce2:96e5:aba2:66fe]) by MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::dce2:96e5:aba2:66fe%6]) with mapi id 15.20.4457.024; Mon, 30 Aug 2021
+ 10:16:35 +0000
+To: guangming.cao@mediatek.com, Sumit Semwal <sumit.semwal@linaro.org>,
+ Benjamin Gaignard <benjamin.gaignard@linaro.org>,
+ Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>,
+ Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>,
+ Matthias Brugger <matthias.bgg@gmail.com>,
+ "open list:DMA-BUF HEAPS FRAMEWORK" <linux-media@vger.kernel.org>,
+ "open list:DMA-BUF HEAPS FRAMEWORK" <dri-devel@lists.freedesktop.org>,
+ "moderated list:DMA-BUF HEAPS FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ open list <linux-kernel@vger.kernel.org>,
+ "moderated list:ARM/Mediatek SoC support"
+ <linux-arm-kernel@lists.infradead.org>,
+ "moderated list:ARM/Mediatek SoC support"
+ <linux-mediatek@lists.infradead.org>
+References: <20210830100139.15632-1-guangming.cao@mediatek.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+Message-ID: <dd5ba603-8c9d-f6a0-cbcc-dfb353fb6701@amd.com>
+Date: Mon, 30 Aug 2021 12:16:28 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.11.0
+In-Reply-To: <20210830100139.15632-1-guangming.cao@mediatek.com>
+Content-Language: en-US
+X-ClientProxiedBy: AM0PR04CA0144.eurprd04.prod.outlook.com
+ (2603:10a6:208:55::49) To MN2PR12MB3775.namprd12.prod.outlook.com
+ (2603:10b6:208:159::19)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210805104705.862416-13-daniel.vetter@ffwll.ch>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.178.21] (91.14.161.181) by
+ AM0PR04CA0144.eurprd04.prod.outlook.com (2603:10a6:208:55::49) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4457.17 via Frontend Transport; Mon, 30 Aug 2021 10:16:33 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 14e4b5b5-f6df-4122-c2d3-08d96b9f3f42
+X-MS-TrafficTypeDiagnostic: MN2PR12MB4392:
+X-Microsoft-Antispam-PRVS: <MN2PR12MB43927CE07B10C47AC8F2919383CB9@MN2PR12MB4392.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:655;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: tfR00fALiHH9wxNxtB3LRLdO8q3k3F2VGP78g21te9IwYV0Zngxv8TanDOZxrAc+03MxahtFNjNYH7pYPjtsPRubvCqQut0ahnqWwwU0fObXdmv2imBPF62K2vL7hb90hXu+GOat0iI1nH+6z7X+1q8JjvjjMQTJO+FuVPdVszT3VEGt7BMOdX2A5JKf3eyyDJwEQKmIejlzz/qQsmJPtTwY8ibHKyTS7pChwi1TF7ipqb7FHe3mYICWT4/nZmhM6jcULxGG+MZRcdXmtk1NzCtoQvrsyMc9hlXnvWn1nBzwI98icL4c/bG6RqqTqWEB9nJ0VI8DERbp/WGplUXUw6Z2mIHcFjOconz8WMTLxuxNuviq+l93IpF881GKtc8/JfM1YwzF1orujrZtzWaVLZeiT7lDYXxgsaDMygrsrvQyCqcDJY4q5e/mCoH523uDY90h5mvT1UV+IYF/As3H7w1nMABg5r/5U/Qj9Y0ychqaAG1eNzcsUDKQL919BnijmHLfw0x4bpZmZ8U/Ri/4vgjRQFI4yLtkJ1emSWiifJiK7svCdIyizeBoxgtaLbn53DLLF6Fy9RE914m2umZToPPL1Gu7e2Pc+1ZPx39pF4QKMO55QUBVMbY/gkqnBHvBkVNeGyzDR+b7OU/tRPcRYNvt0BnsnGDYPk5Lvn3TuN3T7YIZjbxLGme17Xv0iIy07/IM8m4OqCdBooOjiHFF6v1eRLQrBLR3yd2HYt+30mHttf5Wz4lPN6Xzrp/dMT5Z
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(376002)(136003)(346002)(39860400002)(366004)(396003)(26005)(186003)(2906002)(956004)(83380400001)(38100700002)(31686004)(4326008)(31696002)(2616005)(66476007)(478600001)(6486002)(8676002)(110136005)(36756003)(16576012)(6666004)(66946007)(86362001)(66556008)(921005)(7416002)(316002)(8936002)(5660300002)(45980500001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NDI3MUhZMW1URjVmN0hMeUdnVHpieGRWS1ZGcUp2dUMrSFBUODNsamdOMlB4?=
+ =?utf-8?B?YkloemFXSWhMaHFFekZNS054RnJqTTlScXFRNGZpdEdQdWJSWk92SktWU3BL?=
+ =?utf-8?B?ckNLRURvMWJraUQzdWowcTNKenZ2MVRaOVhBNDl5ZHJHRWREV3MxVzRENngx?=
+ =?utf-8?B?cTgranBnNkFCWm53L1hQWjlpN3lza2t4M2xKREJHQUtZU0psVGJvaWVtVVcz?=
+ =?utf-8?B?MFB2MXpod3dxVnF2VnZ6MnJ0WTFPZ2oydHU2bUNra0J3Q1poVGN2WlgxUjhB?=
+ =?utf-8?B?Y05waVlpMmdtWjFieFNqN0RmNGE0bnRJQ2djRkE0cDVOWTJ6Skk0VXR5cXh1?=
+ =?utf-8?B?YldxN05TenhpN01ob2FNWlhUbnpnaUM0L214MUlPY2JjSEtiaUxMWG1kK29v?=
+ =?utf-8?B?ZkhUdFNTNUNQeUxCTUlQY1lQVmNuaDlMK2dHbVZZV2hibldCQ1dtNEdzaVht?=
+ =?utf-8?B?OWhvMWZpRWEwcGRobXFxQWN0MGRueFl3UTd2QUJzallkTTVLSW1vc0R6UEVp?=
+ =?utf-8?B?eExGMVZnM3dBSTJyMG1wYWZjZVBhU1ZVdlZYdy9VWDlvK3RmOW9KMEYwcVNi?=
+ =?utf-8?B?OFREWXpiYVprRFFhK1hldmtiSkFOWDVqVlFlbVpiRDl5NHVvc0RhTlN5S3cv?=
+ =?utf-8?B?c0ZUV1NOeFVlcEtlenlFeVdYUDQzVnBSV3hKRkswdXJWaFdvdVV4YTNaSTJN?=
+ =?utf-8?B?K2UzR2M1K2ZsZDR4c2NaeW5wQlhzbFNoMGNwYms1UGczU2lWZmE3OE0vTzJM?=
+ =?utf-8?B?S3pXdEFaUXNKenpQVW9jcEw2RmtheTNVM1RtWVltZ255ZE1TYk9sOExsWWVk?=
+ =?utf-8?B?OWpYMURPb1lRMTIvaHBoTzI4dFhZc253S0F1aCtHSEsyWFZXUGQvZ05KVDZG?=
+ =?utf-8?B?MEpCaXRIOHQ2SUN0WUIwWnlhMEMzNm9VL2tJY0NzenRTYzRmZHA4anVUN0wy?=
+ =?utf-8?B?bFR1Tm5IZXVtbTVxZngzUFEwRTRNQWtvazFkN293NGp1eTBydXlMbDErbUU0?=
+ =?utf-8?B?MkpDZDQ2Rjg1K2JEMVUvZHdpaCtBcTdVNFFONVk5M2ExTXJhZmN4OUpFY0Zl?=
+ =?utf-8?B?c1ZpUjNqQVNQc3gzSDFoZy9Fczg2WW4wcXFOaHh6SDdrampGM2tTOTZxRHls?=
+ =?utf-8?B?c21FeGdMS3ZmV1I3R09FdlV4TzFwbkhEWWRLRGdRM2QvTlJGSEsvQWwwYXJS?=
+ =?utf-8?B?cGFrS0h4bUtGY29jY3ArL3o1a3pwZ0FyY29qSXNiRUVGRFlRV2VxK3kzeWdU?=
+ =?utf-8?B?ekVlUzAvL0RVTjhnSjJ3K1JiejhXMFJNV2RPLytIc1kydVQ0NjF2OWdYaEpl?=
+ =?utf-8?B?S2JIY3pUUlM1NkRpVHhKbE1NNXdZR1VxaXJBS0tDZEowNm1HR1lXZVJBNHlO?=
+ =?utf-8?B?TGpBekNPQVh5TUZWQlBoNFR6NGMxSjBwVkZrUzFYV1BUVGQ3bHoxSGlZdytv?=
+ =?utf-8?B?d2c0WG9mQ0VaSFN4dU9vMVk2SkgrV2pnQ2lMeUlpV2ljZWtZS2tIL2FLY0lh?=
+ =?utf-8?B?aHFWN3lWUGI3NGlJVWhGQXdxNUMybE84bWxDTkI5MGFvc1hUNTYrRnVkalVa?=
+ =?utf-8?B?dEkvOG1lSzVFTFlBRXgyK2l2b0xnSEIwYnNOOVlSZEJQQlhSeFk3bGZXZURT?=
+ =?utf-8?B?THFPOWh1SXpjR3ZVcUlwNytlU0RBUThEUVRTZGJoMU9KLzR1dGs4clArVmpN?=
+ =?utf-8?B?ZVo5SnVwdDRDY1VCYWxFSVNOKzRvNzg2andERUtidzNDL0wvMXFTQmMwK05y?=
+ =?utf-8?Q?YKCQxxv6zcQ+cOGCuLBT1WV/KSJ8EpcGW7vGZVV?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 14e4b5b5-f6df-4122-c2d3-08d96b9f3f42
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Aug 2021 10:16:35.8166 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: EwLAbmhsQNiLtopzohB7x/Im8WXhUjC+sbGt0GIbp0jJ5EXLXtK0MdF+ZdgsbcST
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4392
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v5 12/20] drm/msm: Use scheduler
- dependency handling
+Subject: Re: [Linaro-mm-sig] [PATCH] dma-buf: heaps: remove duplicated cache
+ sync
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,183 +147,69 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: freedreno@lists.freedesktop.org,
- Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- linaro-mm-sig@lists.linaro.org, Rob Clark <robdclark@gmail.com>,
- linux-arm-msm@vger.kernel.org, Daniel Vetter <daniel.vetter@intel.com>,
- Sean Paul <sean@poorly.run>, linux-media@vger.kernel.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: wsd_upstream@mediatek.com
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Thu, Aug 05, 2021 at 12:46:57PM +0200, Daniel Vetter wrote:
-> drm_sched_job_init is already at the right place, so this boils down
-> to deleting code.
-> =
+Am 30.08.21 um 12:01 schrieb guangming.cao@mediatek.com:
+> From: Guangming Cao <Guangming.Cao@mediatek.com>
+>
+> Current flow, one dmabuf maybe call cache sync many times if
+> it has beed mapped more than one time.
 
-> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
-> Cc: Rob Clark <robdclark@gmail.com>
-> Cc: Sean Paul <sean@poorly.run>
-> Cc: Sumit Semwal <sumit.semwal@linaro.org>
-> Cc: "Christian K=F6nig" <christian.koenig@amd.com>
-> Cc: linux-arm-msm@vger.kernel.org
-> Cc: freedreno@lists.freedesktop.org
-> Cc: linux-media@vger.kernel.org
-> Cc: linaro-mm-sig@lists.linaro.org
+Well I'm not an expert on DMA heaps, but this will most likely not work 
+correctly.
 
-Merged up to this patch, except for etnaviv.
--Daniel
+> Is there any case that attachments of one dmabuf will points to
+> different memory? If not, seems do sync only one time is more better.
 
+I think that this can happen, yes.
+
+Christian.
+
+
+>
+> Signed-off-by: Guangming Cao <Guangming.Cao@mediatek.com>
 > ---
->  drivers/gpu/drm/msm/msm_gem.h        |  5 -----
->  drivers/gpu/drm/msm/msm_gem_submit.c | 19 +++++--------------
->  drivers/gpu/drm/msm/msm_ringbuffer.c | 12 ------------
->  3 files changed, 5 insertions(+), 31 deletions(-)
-> =
+>   drivers/dma-buf/heaps/system_heap.c | 14 ++++++++------
+>   1 file changed, 8 insertions(+), 6 deletions(-)
+>
+> diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/heaps/system_heap.c
+> index 23a7e74ef966..909ef652a8c8 100644
+> --- a/drivers/dma-buf/heaps/system_heap.c
+> +++ b/drivers/dma-buf/heaps/system_heap.c
+> @@ -162,9 +162,10 @@ static int system_heap_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
+>   		invalidate_kernel_vmap_range(buffer->vaddr, buffer->len);
+>   
+>   	list_for_each_entry(a, &buffer->attachments, list) {
+> -		if (!a->mapped)
+> -			continue;
+> -		dma_sync_sgtable_for_cpu(a->dev, a->table, direction);
+> +		if (a->mapped) {
+> +			dma_sync_sgtable_for_cpu(a->dev, a->table, direction);
+> +			break;
+> +		}
+>   	}
+>   	mutex_unlock(&buffer->lock);
+>   
+> @@ -183,9 +184,10 @@ static int system_heap_dma_buf_end_cpu_access(struct dma_buf *dmabuf,
+>   		flush_kernel_vmap_range(buffer->vaddr, buffer->len);
+>   
+>   	list_for_each_entry(a, &buffer->attachments, list) {
+> -		if (!a->mapped)
+> -			continue;
+> -		dma_sync_sgtable_for_device(a->dev, a->table, direction);
+> +		if (!a->mapped) {
+> +			dma_sync_sgtable_for_device(a->dev, a->table, direction);
+> +			break;
+> +		}
+>   	}
+>   	mutex_unlock(&buffer->lock);
+>   
 
-> diff --git a/drivers/gpu/drm/msm/msm_gem.h b/drivers/gpu/drm/msm/msm_gem.h
-> index f9e3ffb2309a..8bf0ac707fd7 100644
-> --- a/drivers/gpu/drm/msm/msm_gem.h
-> +++ b/drivers/gpu/drm/msm/msm_gem.h
-> @@ -312,11 +312,6 @@ struct msm_gem_submit {
->  	struct ww_acquire_ctx ticket;
->  	uint32_t seqno;		/* Sequence number of the submit on the ring */
->  =
-
-> -	/* Array of struct dma_fence * to block on before submitting this job.
-> -	 */
-> -	struct xarray deps;
-> -	unsigned long last_dep;
-> -
->  	/* Hw fence, which is created when the scheduler executes the job, and
->  	 * is signaled when the hw finishes (via seqno write from cmdstream)
->  	 */
-> diff --git a/drivers/gpu/drm/msm/msm_gem_submit.c b/drivers/gpu/drm/msm/m=
-sm_gem_submit.c
-> index 96cea0ba4cfd..fb5a2eab27a2 100644
-> --- a/drivers/gpu/drm/msm/msm_gem_submit.c
-> +++ b/drivers/gpu/drm/msm/msm_gem_submit.c
-> @@ -52,8 +52,6 @@ static struct msm_gem_submit *submit_create(struct drm_=
-device *dev,
->  		return ERR_PTR(ret);
->  	}
->  =
-
-> -	xa_init_flags(&submit->deps, XA_FLAGS_ALLOC);
-> -
->  	kref_init(&submit->ref);
->  	submit->dev =3D dev;
->  	submit->aspace =3D queue->ctx->aspace;
-> @@ -72,8 +70,6 @@ void __msm_gem_submit_destroy(struct kref *kref)
->  {
->  	struct msm_gem_submit *submit =3D
->  			container_of(kref, struct msm_gem_submit, ref);
-> -	unsigned long index;
-> -	struct dma_fence *fence;
->  	unsigned i;
->  =
-
->  	if (submit->fence_id) {
-> @@ -82,12 +78,6 @@ void __msm_gem_submit_destroy(struct kref *kref)
->  		mutex_unlock(&submit->queue->lock);
->  	}
->  =
-
-> -	xa_for_each (&submit->deps, index, fence) {
-> -		dma_fence_put(fence);
-> -	}
-> -
-> -	xa_destroy(&submit->deps);
-> -
->  	dma_fence_put(submit->user_fence);
->  	dma_fence_put(submit->hw_fence);
->  =
-
-> @@ -343,8 +333,9 @@ static int submit_fence_sync(struct msm_gem_submit *s=
-ubmit, bool no_implicit)
->  		if (no_implicit)
->  			continue;
->  =
-
-> -		ret =3D drm_gem_fence_array_add_implicit(&submit->deps, obj,
-> -			write);
-> +		ret =3D drm_sched_job_add_implicit_dependencies(&submit->base,
-> +							      obj,
-> +							      write);
->  		if (ret)
->  			break;
->  	}
-> @@ -588,7 +579,7 @@ static struct drm_syncobj **msm_parse_deps(struct msm=
-_gem_submit *submit,
->  		if (ret)
->  			break;
->  =
-
-> -		ret =3D drm_gem_fence_array_add(&submit->deps, fence);
-> +		ret =3D drm_sched_job_add_dependency(&submit->base, fence);
->  		if (ret)
->  			break;
->  =
-
-> @@ -798,7 +789,7 @@ int msm_ioctl_gem_submit(struct drm_device *dev, void=
- *data,
->  			goto out_unlock;
->  		}
->  =
-
-> -		ret =3D drm_gem_fence_array_add(&submit->deps, in_fence);
-> +		ret =3D drm_sched_job_add_dependency(&submit->base, in_fence);
->  		if (ret)
->  			goto out_unlock;
->  	}
-> diff --git a/drivers/gpu/drm/msm/msm_ringbuffer.c b/drivers/gpu/drm/msm/m=
-sm_ringbuffer.c
-> index bd54c1412649..652b1dedd7c1 100644
-> --- a/drivers/gpu/drm/msm/msm_ringbuffer.c
-> +++ b/drivers/gpu/drm/msm/msm_ringbuffer.c
-> @@ -11,17 +11,6 @@ static uint num_hw_submissions =3D 8;
->  MODULE_PARM_DESC(num_hw_submissions, "The max # of jobs to write into ri=
-ngbuffer (default 8)");
->  module_param(num_hw_submissions, uint, 0600);
->  =
-
-> -static struct dma_fence *msm_job_dependency(struct drm_sched_job *job,
-> -		struct drm_sched_entity *s_entity)
-> -{
-> -	struct msm_gem_submit *submit =3D to_msm_submit(job);
-> -
-> -	if (!xa_empty(&submit->deps))
-> -		return xa_erase(&submit->deps, submit->last_dep++);
-> -
-> -	return NULL;
-> -}
-> -
->  static struct dma_fence *msm_job_run(struct drm_sched_job *job)
->  {
->  	struct msm_gem_submit *submit =3D to_msm_submit(job);
-> @@ -52,7 +41,6 @@ static void msm_job_free(struct drm_sched_job *job)
->  }
->  =
-
->  const struct drm_sched_backend_ops msm_sched_ops =3D {
-> -	.dependency =3D msm_job_dependency,
->  	.run_job =3D msm_job_run,
->  	.free_job =3D msm_job_free
->  };
-> -- =
-
-> 2.32.0
-> =
-
-
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
