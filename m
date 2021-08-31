@@ -2,77 +2,67 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 893B33FC76C
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 Aug 2021 14:39:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C99B03FC782
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 Aug 2021 14:44:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7598361081
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 Aug 2021 12:39:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EDA9F61179
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 Aug 2021 12:44:53 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 70CC061145; Tue, 31 Aug 2021 12:39:39 +0000 (UTC)
+	id B8A8062630; Tue, 31 Aug 2021 12:44:51 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 50A45608C3;
-	Tue, 31 Aug 2021 12:39:37 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 86EEB608C3;
+	Tue, 31 Aug 2021 12:44:48 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id C1E56603EF
- for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 12:39:35 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id B8C28603EF
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 12:44:46 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 9CC17608C3; Tue, 31 Aug 2021 12:39:35 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
- [209.85.221.53])
- by lists.linaro.org (Postfix) with ESMTPS id 90C93603EF
- for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 12:39:33 +0000 (UTC)
-Received: by mail-wr1-f53.google.com with SMTP id b6so27421669wrh.10
- for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 05:39:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=XqVnP2fWqmBvYXnrJLFFt5iNlUAQKQMrg2mpN7vlVm0=;
- b=kBSw5G2LmT74tiONoQs1NV79WDwDwFfXtW8xksWcnw+IOgce4CbFGe/vg1ms8Dh5jW
- N5mSg1YAxIruSK2WFmFLUUnV0flQKXL2i0fxOMuxHHjQ6AENN9DSmcYxZ6P84zZJIkZf
- r9i6GCd2wIo/H2G8pI6HaeyVMX/mkF7ZZk8QVmQJ2KfaNYbY7BX1jExsAV+IgzxGsBDW
- Szxk1TSXp469D0KXAwTvZ1XSrvMU4BAZwnrC4V39JeLHUpn5pwMBGmdrXX7KogXyufmO
- 9/eyEDghSJGH9v3RIIvDu2B1qzoTO5/oLktgBOVqKA49vqtEsbsc9/dyGknckXUFt/PC
- Fi0Q==
+ id AD65A608C3; Tue, 31 Aug 2021 12:44:46 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
+ [209.85.128.42])
+ by lists.linaro.org (Postfix) with ESMTPS id A6275603EF
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 12:44:44 +0000 (UTC)
+Received: by mail-wm1-f42.google.com with SMTP id
+ k20-20020a05600c0b5400b002e87ad6956eso2443488wmr.1
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 05:44:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=3lF/YGkjHdfMWZFM4uJQXZ5WbkLfubp1yE6urxdbpwE=;
+ b=C0YsUWMFy2LtGNz22J5d4dyYTj5DyRsxTUd6XcJEfS8POPS7XFk8BnB+JAowDtutw/
+ TEcuRc1Vvk9uuA1gFk2VnFP4vTvZ4hy9jA5/7kX7BjZswgCyXfTR1HkQKL74SbFO11dy
+ YeWldnXoUHALIj7ULOHZI7l8b6n3m0wlQVjTc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=XqVnP2fWqmBvYXnrJLFFt5iNlUAQKQMrg2mpN7vlVm0=;
- b=Bul7+ohAQbhzqjI2DVKy5fo7nFgeHAI6fdPFEEYDSkTubzAwgO0ztdXD0xz6LmQend
- 45Qq2LopnMfKjGjTa2ypygivkRJq++E8WV6362JsoA3pRQYLaCZjaEBj8aebfHAg2k4F
- 1Lyve7HrwtokWhuC5K0+WQm2ErycN9dH/I7IKFYRDfHySZ73APJeN0IfOTEQx87FUKuQ
- fN10OlSo+VGzkkQMcDjgTgOLvZGH/SHKsyp/f7jQhEMxtY24TiiS7KfHvxMsKmOGcfq9
- MHfkgDKY4K+eBUh3SFvWyboSYYUVr8NWKnYxfLvMhHAHxOvj2P04ymWRIApzgz+Gb5K4
- mLrA==
-X-Gm-Message-State: AOAM5327BOOjKUru+OvekLaa6D3tzFcmLC9puyEPaH8KbWU7Q38XWuEu
- ZStVEDYfW+Q7tg90uURoYH0=
-X-Google-Smtp-Source: ABdhPJzPC9sC6DmZWXfLMD6H7scVQ9h5zI9zYi+YoL29mhsdIY8onDoUqCwTB4a69gSzKokXyqZbbg==
-X-Received: by 2002:a5d:6085:: with SMTP id w5mr31631494wrt.104.1630413572639; 
- Tue, 31 Aug 2021 05:39:32 -0700 (PDT)
-Received: from [192.168.178.21] (p5b0ea1b5.dip0.t-ipconnect.de.
- [91.14.161.181])
- by smtp.gmail.com with ESMTPSA id b62sm2331777wmb.17.2021.08.31.05.39.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 31 Aug 2021 05:39:32 -0700 (PDT)
-To: Daniel Vetter <daniel@ffwll.ch>
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=3lF/YGkjHdfMWZFM4uJQXZ5WbkLfubp1yE6urxdbpwE=;
+ b=LpGfe7sN5EmOtfrktIJZu3mRkSZBRXR/wUofiMsnGRSkbB4mIfbaoy9LINBzF0lICf
+ z51IXdVZqRl+kSYFu8aMgZ5uOuoCYXHeaNM5ISbWSNMSA7ILl9Oj8e/yk9/YyOmq1Tgu
+ jWO5d7YlgomraJ8nY4H//8Sw+vFv5CfzeAvJRu7Cln/L7bDlhln/7jWzaBBTrQi8GTUS
+ 0JcgzKlaJMTKa5g5nt7zZ8FRlDZzaKlUo8+YU9VvIUsC16TI0WHSuxmEvIE2K5pPwQtz
+ w97ZiFmC0zOw9lSjSbzYk+4bsWq9arOei5yGCZCB7ofg6FUICEukCB1IYNYQC8MJ/Fjr
+ rWsA==
+X-Gm-Message-State: AOAM530gowUKWHuJgESl6d/F0Lql6a+h/SW1iuuB4Ars0wWpAerE1NuN
+ eNT887s6cHiwOlFGrGkxjjrY+A==
+X-Google-Smtp-Source: ABdhPJyCKyTE84UnS3cDbx+VhpSKBWWjMCSkG6G2cPi4OR6gmNCJZonYLRByEOG+0fXDamC8nNBjoA==
+X-Received: by 2002:a1c:9d8f:: with SMTP id g137mr4088050wme.187.1630413883714; 
+ Tue, 31 Aug 2021 05:44:43 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id q13sm18136066wrv.79.2021.08.31.05.44.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 31 Aug 2021 05:44:43 -0700 (PDT)
+Date: Tue, 31 Aug 2021 14:44:41 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <YS4kOY85qk3IhRZ7@phenom.ffwll.local>
 References: <20210818105443.1578-1-christian.koenig@amd.com>
- <015fd5ed-9255-9c28-44f3-3c8dde90ebad@gmail.com>
- <YSdXEaBDpijEBx/6@phenom.ffwll.local>
- <0c150724-032f-b566-4f61-b4771bafe7a8@gmail.com>
- <YSlJwX0lNBSdj880@phenom.ffwll.local>
- <d41b682d-f4ec-b050-8f45-78b9a9ce944d@gmail.com>
- <YS4hAhVPlyAWdX/n@phenom.ffwll.local>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <8ab2702e-3f5c-2c78-cb61-730aa3b04b18@gmail.com>
-Date: Tue, 31 Aug 2021 14:39:29 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
 MIME-Version: 1.0
-In-Reply-To: <YS4hAhVPlyAWdX/n@phenom.ffwll.local>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <20210818105443.1578-1-christian.koenig@amd.com>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [PATCH 1/2] dma-buf: nuke DMA_FENCE_TRACE
  macros v2
@@ -90,188 +80,237 @@ List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: adelva@google.com, sspatil@google.com, gustavo@padovan.org,
  dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- john.stultz@linaro.org, hridya@google.com, linux-media@vger.kernel.org
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+ john.stultz@linaro.org, daniel@ffwll.ch, hridya@google.com,
+ linux-media@vger.kernel.org
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-QW0gMzEuMDguMjEgdW0gMTQ6MzAgc2NocmllYiBEYW5pZWwgVmV0dGVyOgo+IE9uIE1vbiwgQXVn
-IDMwLCAyMDIxIGF0IDA4OjI4OjQ5QU0gKzAyMDAsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6Cj4+
-IEFtIDI3LjA4LjIxIHVtIDIyOjIzIHNjaHJpZWIgRGFuaWVsIFZldHRlcjoKPj4+IE9uIEZyaSwg
-QXVnIDI3LCAyMDIxIGF0IDExOjA3OjU4QU0gKzAyMDAsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6
-Cj4+Pj4gQW0gMjYuMDguMjEgdW0gMTA6NTUgc2NocmllYiBEYW5pZWwgVmV0dGVyOgo+Pj4+PiBP
-biBUdWUsIEF1ZyAyNCwgMjAyMSBhdCAxMDoxMjoyNEFNICswMjAwLCBDaHJpc3RpYW4gS8O2bmln
-IHdyb3RlOgo+Pj4+Pj4gSnVzdCBhIGdlbnRsZSBwaW5nLiBEYW5pZWwgYW55IG1vcmUgY29tbWVu
-dHMgb24gdGhpcz8KPj4+Pj4gU3RpbGwgaGF2ZW4ndCBzZWVuIGEgcGF0Y2ggc2V0IHRvIG51a2Ug
-dGhlIHN3X3N5bmMgaWd0IHRlc3RzLiBPdGhlcndpc2UKPj4+Pj4gdGhpcyBpcyBqdXN0IGdvaW5n
-IHRvIGNhdXNlIGZhaWxzIGFuZCByZWJvb3RzIGluIG91ciBjaSAod2UgcmVib290IG9uCj4+Pj4+
-IHRhaW50cykuCj4+Pj4gKnNpZ2gqIGNhbiBJIGF0IGxlYXN0IHByaW50IGEgd2FybmluZyB3aXRo
-b3V0IGJyZWFraW5nIHRoZSBpZ3QgdGVzdHM/Cj4+PiBDSSB3YXRjaGVzIGRtZXNnIHRvbyAuLi4g
-aXQganVzdCBkb2Vzbid0IGZvcmNlIGEgcmVib290ICh3aGljaCBodXJ0cyBydW4KPj4+IHJhdGUg
-cmVhbGx5IGJhZGx5KS4KPj4+Cj4+Pj4+PiBJJ20gbm90IHN1cmUgaWYgdGhlIHNlY29uZCBwYXRj
-aCB3aWxsIGNhdXNlIHRyb3VibGUgd2l0aCBhbnkgdW5pdCB0ZXN0LCBidXQKPj4+Pj4+IEknbSB3
-aWxsaW5nIHRvIHRyeSBpdC4gV2UgY2FuIGFsd2F5cyB0cml2aWFsIHJldmVydCBpdC4KPj4+Pj4g
-U2VlIGFib3ZlLCByZW1vdmUgdGhlIGlndHMgYW5kIHdlIHNob3VsZCBiZSBmaW5lIEkgdGhpbmsu
-IEkgZG9uJ3QgdGhpbmsKPj4+Pj4gdGhlcmUncyBhbnkgc2VsZnRlc3RzIG9yIGtzZWxmdGVzdHMs
-IGJ1dCBjaGVja2luZyB0aGF0IHNob3VsZCBiZSBhIHF1aWNrCj4+Pj4+IGdyZXAgYXQgbW9zdC4K
-Pj4+PiBZZWFoLCB3ZSBkb24ndCBoYXZlIGFueSBzZWxmdGVzdHMgYXMgZmFyIGFzIEkgY2FuIHNl
-ZSBidXQgdGhpcyBzdHVmZiBpcyBzbwo+Pj4+IGludGVyd2VhdmVkIHdpdGggaWd0IHRoYXQgaXQg
-d2lsbCBiZSBoYXJkIHRvIHJlbW92ZSBJIHRoaW5rLgo+Pj4+Cj4+Pj4gQSBnb29kIGJ1bmNoIG9m
-IHRoZSBpZ3QgY29kZSBzZWVtcyB0byBoYXZlIGJlZW4gbW92ZWQgdG8gdXNpbmcgVkdFTSBpbnN0
-ZWFkLAo+Pj4+IGJ1dCBhcyBmYXIgYXMgSSBjYW4gc2VlIHRoZXJlIGlzIHN0aWxsIHBsZW50eSBs
-ZWZ0IHJlbHlpbmcgb24gdGhpcy4KPj4+Pgo+Pj4+IEFsdGVybmF0aXZlbHkgY291bGQgd2UgbWFr
-ZSB0aGUgY29uZmlnIG9wdGlvbiBkZXBlbmQgb24gQ09ORklHX0RFQlVHPwo+Pj4gSG0gSSB0aG91
-Z2h0IGl0IHdhcyBqdXN0IGRvd24gdG8gc3dfc3luYyBpZ3QgdGVzdGNhc2UsIGFuZCBldmVyeXRo
-aW5nIGVsc2UKPj4+IGlzIG1vdmVkIHRvIHZnZW0uIERvIHdlIGhhdmUgbW9yZSwgb3IgaGFzIG1v
-cmUgbGFuZGVkIHNpbmNlIEkgbG9va2VkIGEKPj4+IHdoaWxlIGFnbz8KPj4gVGhlIGNvZGUgdW5k
-ZXIgbGliL3N3X3N5bmMuYyB1c2VzIHRoaXMgYW5kIGJhc2VkIG9uIHRoYXQgbGliL2lndF9kdW1t
-eWxvYWQuYwo+PiBkZWZpbmVzIGFuIElHVF9DT1JLX0ZFTkNFIHdoaWNoIGlzIHRoZW4gdXNlZCBi
-eSBhdCBsZWFzdDoKPj4KPj4gdGVzdHMvaTkxNS9nZW1fZXhlY19mZW5jZS5jCj4+IHRlc3RzL2k5
-MTUvZ2VtX2Vpby5jCj4+IHRlc3RzL2k5MTUvZ2VtX2V4ZWNfc2NoZWR1bGUuYwo+PiB0ZXN0cy9p
-OTE1L2dlbV9leGVjX2JhbGFuY2VyLmMKPj4gdGVzdHMvaTkxNS9nZW1fY3R4X3NoYXJlZC5jCj4+
-IHRlc3RzL2ttc19idXN5LmMKPj4KPj4gQWZ0ZXIgdGhhdCBJJ3ZlIHN0b3BlZCBsb29raW5nIGRl
-ZXBlciBpbnRvIGl0Lgo+IFVoIGNyYXAsIEkgdG90YWxseSBtaXNzZWQgdGhpcy4gVGhpcyBpcyBh
-IHJhdGhlciBtZXNzeSBhcmVhIG9mIGlndCB3aXRoIGEKPiBwaWxlIG9mIHF1ZXN0aW9uYWJsZSB0
-ZXN0cyBhbmQgc3R1ZmYgLi4uIE5vIGlkZWEgd2hlbiB3ZSdsbCBnZXQgYXJvdW5kIHRvCj4gY2xl
-YW5pbmcgdGhhdCB1cCB3aXRoIGFsbCB0aGUgb3RoZXIgZmlyZXMgZ29pbmcgb24gOi0oCgpPayBp
-biB0aGlzIGNhc2UgcGxlYXNlIGp1c3QgZ2l2ZSBtZSBhbiBhY2tlZC1ieSBvciByYiBvbiB0aGUg
-Zmlyc3QgcGF0Y2ggCmFuZCBJIHdpbGwgcHV0IHRoZSBzZWNvbmQgb24gaG9sZCB1bnRpbCB3ZSBo
-YXZlIGNsZWFuZWQgdGhhdCB1cC4KClRoYW5rcywKQ2hyaXN0aWFuLgoKPiAtRGFuaWVsCj4KPj4g
-Q2hyaXN0aWFuLgo+Pgo+Pj4gLURhbmllbAo+Pj4KPj4+PiBDaHJpc3RpYW4uCj4+Pj4KPj4+Pj4g
-LURhbmllbAo+Pj4+Pgo+Pj4+Pj4gVGhhbmtzLAo+Pj4+Pj4gQ2hyaXN0aWFuLgo+Pj4+Pj4KPj4+
-Pj4+IEFtIDE4LjA4LjIxIHVtIDEyOjU0IHNjaHJpZWIgQ2hyaXN0aWFuIEvDtm5pZzoKPj4+Pj4+
-PiBPbmx5IHRoZSBEUk0gR1BVIHNjaGVkdWxlciwgcmFkZW9uIGFuZCBhbWRncHUgd2hlcmUgdXNp
-bmcgdGhlbSBhbmQgdGhleSBkZXBlbmQKPj4+Pj4+PiBvbiBhIG5vbiBleGlzdGluZyBjb25maWcg
-b3B0aW9uIHRvIGFjdHVhbGx5IGVtaXQgc29tZSBjb2RlLgo+Pj4+Pj4+Cj4+Pj4+Pj4gdjI6IGtl
-ZXAgdGhlIHNpZ25hbCBwYXRoIGFzIGlzIGZvciBub3cKPj4+Pj4+Pgo+Pj4+Pj4+IFNpZ25lZC1v
-ZmYtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4KPj4+Pj4+
-PiAtLS0KPj4+Pj4+PiAgICAgIGRyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9mZW5j
-ZS5jIHwgMTAgKy0tLS0tLS0tLQo+Pj4+Pj4+ICAgICAgZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9y
-YWRlb25fZmVuY2UuYyAgICAgfCAyNCArKysrLS0tLS0tLS0tLS0tLS0tLS0tLQo+Pj4+Pj4+ICAg
-ICAgZHJpdmVycy9ncHUvZHJtL3NjaGVkdWxlci9zY2hlZF9mZW5jZS5jICAgfCAxOCArKy0tLS0t
-LS0tLS0tLS0tLQo+Pj4+Pj4+ICAgICAgaW5jbHVkZS9saW51eC9kbWEtZmVuY2UuaCAgICAgICAg
-ICAgICAgICAgfCAyMiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0KPj4+Pj4+PiAgICAgIDQgZmlsZXMg
-Y2hhbmdlZCwgNyBpbnNlcnRpb25zKCspLCA2NyBkZWxldGlvbnMoLSkKPj4+Pj4+Pgo+Pj4+Pj4+
-IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfZmVuY2UuYyBi
-L2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9mZW5jZS5jCj4+Pj4+Pj4gaW5kZXgg
-MGIxYzQ4NTkwYzQzLi5jNjU5OTRlMzgyYmQgMTAwNjQ0Cj4+Pj4+Pj4gLS0tIGEvZHJpdmVycy9n
-cHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2ZlbmNlLmMKPj4+Pj4+PiArKysgYi9kcml2ZXJzL2dw
-dS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfZmVuY2UuYwo+Pj4+Pj4+IEBAIC0yNDYsNyArMjQ2LDYg
-QEAgYm9vbCBhbWRncHVfZmVuY2VfcHJvY2VzcyhzdHJ1Y3QgYW1kZ3B1X3JpbmcgKnJpbmcpCj4+
-Pj4+Pj4gICAgICAJc3RydWN0IGFtZGdwdV9mZW5jZV9kcml2ZXIgKmRydiA9ICZyaW5nLT5mZW5j
-ZV9kcnY7Cj4+Pj4+Pj4gICAgICAJc3RydWN0IGFtZGdwdV9kZXZpY2UgKmFkZXYgPSByaW5nLT5h
-ZGV2Owo+Pj4+Pj4+ICAgICAgCXVpbnQzMl90IHNlcSwgbGFzdF9zZXE7Cj4+Pj4+Pj4gLQlpbnQg
-cjsKPj4+Pj4+PiAgICAgIAlkbyB7Cj4+Pj4+Pj4gICAgICAJCWxhc3Rfc2VxID0gYXRvbWljX3Jl
-YWQoJnJpbmctPmZlbmNlX2Rydi5sYXN0X3NlcSk7Cj4+Pj4+Pj4gQEAgLTI3OCwxMiArMjc3LDcg
-QEAgYm9vbCBhbWRncHVfZmVuY2VfcHJvY2VzcyhzdHJ1Y3QgYW1kZ3B1X3JpbmcgKnJpbmcpCj4+
-Pj4+Pj4gICAgICAJCWlmICghZmVuY2UpCj4+Pj4+Pj4gICAgICAJCQljb250aW51ZTsKPj4+Pj4+
-PiAtCQlyID0gZG1hX2ZlbmNlX3NpZ25hbChmZW5jZSk7Cj4+Pj4+Pj4gLQkJaWYgKCFyKQo+Pj4+
-Pj4+IC0JCQlETUFfRkVOQ0VfVFJBQ0UoZmVuY2UsICJzaWduYWxlZCBmcm9tIGlycSBjb250ZXh0
-XG4iKTsKPj4+Pj4+PiAtCQllbHNlCj4+Pj4+Pj4gLQkJCUJVRygpOwo+Pj4+Pj4+IC0KPj4+Pj4+
-PiArCQlkbWFfZmVuY2Vfc2lnbmFsKGZlbmNlKTsKPj4+Pj4+PiAgICAgIAkJZG1hX2ZlbmNlX3B1
-dChmZW5jZSk7Cj4+Pj4+Pj4gICAgICAJCXBtX3J1bnRpbWVfbWFya19sYXN0X2J1c3koYWRldl90
-b19kcm0oYWRldiktPmRldik7Cj4+Pj4+Pj4gICAgICAJCXBtX3J1bnRpbWVfcHV0X2F1dG9zdXNw
-ZW5kKGFkZXZfdG9fZHJtKGFkZXYpLT5kZXYpOwo+Pj4+Pj4+IEBAIC02MzksOCArNjMzLDYgQEAg
-c3RhdGljIGJvb2wgYW1kZ3B1X2ZlbmNlX2VuYWJsZV9zaWduYWxpbmcoc3RydWN0IGRtYV9mZW5j
-ZSAqZikKPj4+Pj4+PiAgICAgIAlpZiAoIXRpbWVyX3BlbmRpbmcoJnJpbmctPmZlbmNlX2Rydi5m
-YWxsYmFja190aW1lcikpCj4+Pj4+Pj4gICAgICAJCWFtZGdwdV9mZW5jZV9zY2hlZHVsZV9mYWxs
-YmFjayhyaW5nKTsKPj4+Pj4+PiAtCURNQV9GRU5DRV9UUkFDRSgmZmVuY2UtPmJhc2UsICJhcm1l
-ZCBvbiByaW5nICVpIVxuIiwgcmluZy0+aWR4KTsKPj4+Pj4+PiAtCj4+Pj4+Pj4gICAgICAJcmV0
-dXJuIHRydWU7Cj4+Pj4+Pj4gICAgICB9Cj4+Pj4+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1
-L2RybS9yYWRlb24vcmFkZW9uX2ZlbmNlLmMgYi9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVv
-bl9mZW5jZS5jCj4+Pj4+Pj4gaW5kZXggMThmMmMyZTBkZmIzLi4zZjM1MWQyMjJjYmIgMTAwNjQ0
-Cj4+Pj4+Pj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fZmVuY2UuYwo+Pj4+
-Pj4+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9yYWRlb24vcmFkZW9uX2ZlbmNlLmMKPj4+Pj4+PiBA
-QCAtMTc2LDE4ICsxNzYsMTEgQEAgc3RhdGljIGludCByYWRlb25fZmVuY2VfY2hlY2tfc2lnbmFs
-ZWQod2FpdF9xdWV1ZV9lbnRyeV90ICp3YWl0LCB1bnNpZ25lZCBtb2RlLAo+Pj4+Pj4+ICAgICAg
-CSAqLwo+Pj4+Pj4+ICAgICAgCXNlcSA9IGF0b21pYzY0X3JlYWQoJmZlbmNlLT5yZGV2LT5mZW5j
-ZV9kcnZbZmVuY2UtPnJpbmddLmxhc3Rfc2VxKTsKPj4+Pj4+PiAgICAgIAlpZiAoc2VxID49IGZl
-bmNlLT5zZXEpIHsKPj4+Pj4+PiAtCQlpbnQgcmV0ID0gZG1hX2ZlbmNlX3NpZ25hbF9sb2NrZWQo
-JmZlbmNlLT5iYXNlKTsKPj4+Pj4+PiAtCj4+Pj4+Pj4gLQkJaWYgKCFyZXQpCj4+Pj4+Pj4gLQkJ
-CURNQV9GRU5DRV9UUkFDRSgmZmVuY2UtPmJhc2UsICJzaWduYWxlZCBmcm9tIGlycSBjb250ZXh0
-XG4iKTsKPj4+Pj4+PiAtCQllbHNlCj4+Pj4+Pj4gLQkJCURNQV9GRU5DRV9UUkFDRSgmZmVuY2Ut
-PmJhc2UsICJ3YXMgYWxyZWFkeSBzaWduYWxlZFxuIik7Cj4+Pj4+Pj4gLQo+Pj4+Pj4+ICsJCWRt
-YV9mZW5jZV9zaWduYWxfbG9ja2VkKCZmZW5jZS0+YmFzZSk7Cj4+Pj4+Pj4gICAgICAJCXJhZGVv
-bl9pcnFfa21zX3N3X2lycV9wdXQoZmVuY2UtPnJkZXYsIGZlbmNlLT5yaW5nKTsKPj4+Pj4+PiAg
-ICAgIAkJX19yZW1vdmVfd2FpdF9xdWV1ZSgmZmVuY2UtPnJkZXYtPmZlbmNlX3F1ZXVlLCAmZmVu
-Y2UtPmZlbmNlX3dha2UpOwo+Pj4+Pj4+ICAgICAgCQlkbWFfZmVuY2VfcHV0KCZmZW5jZS0+YmFz
-ZSk7Cj4+Pj4+Pj4gLQl9IGVsc2UKPj4+Pj4+PiAtCQlETUFfRkVOQ0VfVFJBQ0UoJmZlbmNlLT5i
-YXNlLCAicGVuZGluZ1xuIik7Cj4+Pj4+Pj4gKwl9Cj4+Pj4+Pj4gICAgICAJcmV0dXJuIDA7Cj4+
-Pj4+Pj4gICAgICB9Cj4+Pj4+Pj4gQEAgLTQyMiw4ICs0MTUsNiBAQCBzdGF0aWMgYm9vbCByYWRl
-b25fZmVuY2VfZW5hYmxlX3NpZ25hbGluZyhzdHJ1Y3QgZG1hX2ZlbmNlICpmKQo+Pj4+Pj4+ICAg
-ICAgCWZlbmNlLT5mZW5jZV93YWtlLmZ1bmMgPSByYWRlb25fZmVuY2VfY2hlY2tfc2lnbmFsZWQ7
-Cj4+Pj4+Pj4gICAgICAJX19hZGRfd2FpdF9xdWV1ZSgmcmRldi0+ZmVuY2VfcXVldWUsICZmZW5j
-ZS0+ZmVuY2Vfd2FrZSk7Cj4+Pj4+Pj4gICAgICAJZG1hX2ZlbmNlX2dldChmKTsKPj4+Pj4+PiAt
-Cj4+Pj4+Pj4gLQlETUFfRkVOQ0VfVFJBQ0UoJmZlbmNlLT5iYXNlLCAiYXJtZWQgb24gcmluZyAl
-aSFcbiIsIGZlbmNlLT5yaW5nKTsKPj4+Pj4+PiAgICAgIAlyZXR1cm4gdHJ1ZTsKPj4+Pj4+PiAg
-ICAgIH0KPj4+Pj4+PiBAQCAtNDQxLDExICs0MzIsNyBAQCBib29sIHJhZGVvbl9mZW5jZV9zaWdu
-YWxlZChzdHJ1Y3QgcmFkZW9uX2ZlbmNlICpmZW5jZSkKPj4+Pj4+PiAgICAgIAkJcmV0dXJuIHRy
-dWU7Cj4+Pj4+Pj4gICAgICAJaWYgKHJhZGVvbl9mZW5jZV9zZXFfc2lnbmFsZWQoZmVuY2UtPnJk
-ZXYsIGZlbmNlLT5zZXEsIGZlbmNlLT5yaW5nKSkgewo+Pj4+Pj4+IC0JCWludCByZXQ7Cj4+Pj4+
-Pj4gLQo+Pj4+Pj4+IC0JCXJldCA9IGRtYV9mZW5jZV9zaWduYWwoJmZlbmNlLT5iYXNlKTsKPj4+
-Pj4+PiAtCQlpZiAoIXJldCkKPj4+Pj4+PiAtCQkJRE1BX0ZFTkNFX1RSQUNFKCZmZW5jZS0+YmFz
-ZSwgInNpZ25hbGVkIGZyb20gcmFkZW9uX2ZlbmNlX3NpZ25hbGVkXG4iKTsKPj4+Pj4+PiArCQlk
-bWFfZmVuY2Vfc2lnbmFsKCZmZW5jZS0+YmFzZSk7Cj4+Pj4+Pj4gICAgICAJCXJldHVybiB0cnVl
-Owo+Pj4+Pj4+ICAgICAgCX0KPj4+Pj4+PiAgICAgIAlyZXR1cm4gZmFsc2U7Cj4+Pj4+Pj4gQEAg
-LTU1MCw3ICs1MzcsNiBAQCBsb25nIHJhZGVvbl9mZW5jZV93YWl0X3RpbWVvdXQoc3RydWN0IHJh
-ZGVvbl9mZW5jZSAqZmVuY2UsIGJvb2wgaW50ciwgbG9uZyB0aW1lbwo+Pj4+Pj4+ICAgICAgewo+
-Pj4+Pj4+ICAgICAgCXVpbnQ2NF90IHNlcVtSQURFT05fTlVNX1JJTkdTXSA9IHt9Owo+Pj4+Pj4+
-ICAgICAgCWxvbmcgcjsKPj4+Pj4+PiAtCWludCByX3NpZzsKPj4+Pj4+PiAgICAgIAkvKgo+Pj4+
-Pj4+ICAgICAgCSAqIFRoaXMgZnVuY3Rpb24gc2hvdWxkIG5vdCBiZSBjYWxsZWQgb24gIXJhZGVv
-biBmZW5jZXMuCj4+Pj4+Pj4gQEAgLTU2Nyw5ICs1NTMsNyBAQCBsb25nIHJhZGVvbl9mZW5jZV93
-YWl0X3RpbWVvdXQoc3RydWN0IHJhZGVvbl9mZW5jZSAqZmVuY2UsIGJvb2wgaW50ciwgbG9uZyB0
-aW1lbwo+Pj4+Pj4+ICAgICAgCQlyZXR1cm4gcjsKPj4+Pj4+PiAgICAgIAl9Cj4+Pj4+Pj4gLQly
-X3NpZyA9IGRtYV9mZW5jZV9zaWduYWwoJmZlbmNlLT5iYXNlKTsKPj4+Pj4+PiAtCWlmICghcl9z
-aWcpCj4+Pj4+Pj4gLQkJRE1BX0ZFTkNFX1RSQUNFKCZmZW5jZS0+YmFzZSwgInNpZ25hbGVkIGZy
-b20gZmVuY2Vfd2FpdFxuIik7Cj4+Pj4+Pj4gKwlkbWFfZmVuY2Vfc2lnbmFsKCZmZW5jZS0+YmFz
-ZSk7Cj4+Pj4+Pj4gICAgICAJcmV0dXJuIHI7Cj4+Pj4+Pj4gICAgICB9Cj4+Pj4+Pj4gZGlmZiAt
-LWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9zY2hlZHVsZXIvc2NoZWRfZmVuY2UuYyBiL2RyaXZlcnMv
-Z3B1L2RybS9zY2hlZHVsZXIvc2NoZWRfZmVuY2UuYwo+Pj4+Pj4+IGluZGV4IDY5ZGUyYzc2NzMx
-Zi4uMzczNjc0NmM0N2JkIDEwMDY0NAo+Pj4+Pj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9zY2hl
-ZHVsZXIvc2NoZWRfZmVuY2UuYwo+Pj4+Pj4+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9zY2hlZHVs
-ZXIvc2NoZWRfZmVuY2UuYwo+Pj4+Pj4+IEBAIC01MCwyNiArNTAsMTIgQEAgc3RhdGljIHZvaWQg
-X19leGl0IGRybV9zY2hlZF9mZW5jZV9zbGFiX2Zpbmkodm9pZCkKPj4+Pj4+PiAgICAgIHZvaWQg
-ZHJtX3NjaGVkX2ZlbmNlX3NjaGVkdWxlZChzdHJ1Y3QgZHJtX3NjaGVkX2ZlbmNlICpmZW5jZSkK
-Pj4+Pj4+PiAgICAgIHsKPj4+Pj4+PiAtCWludCByZXQgPSBkbWFfZmVuY2Vfc2lnbmFsKCZmZW5j
-ZS0+c2NoZWR1bGVkKTsKPj4+Pj4+PiAtCj4+Pj4+Pj4gLQlpZiAoIXJldCkKPj4+Pj4+PiAtCQlE
-TUFfRkVOQ0VfVFJBQ0UoJmZlbmNlLT5zY2hlZHVsZWQsCj4+Pj4+Pj4gLQkJCQkic2lnbmFsZWQg
-ZnJvbSBpcnEgY29udGV4dFxuIik7Cj4+Pj4+Pj4gLQllbHNlCj4+Pj4+Pj4gLQkJRE1BX0ZFTkNF
-X1RSQUNFKCZmZW5jZS0+c2NoZWR1bGVkLAo+Pj4+Pj4+IC0JCQkJIndhcyBhbHJlYWR5IHNpZ25h
-bGVkXG4iKTsKPj4+Pj4+PiArCWRtYV9mZW5jZV9zaWduYWwoJmZlbmNlLT5zY2hlZHVsZWQpOwo+
-Pj4+Pj4+ICAgICAgfQo+Pj4+Pj4+ICAgICAgdm9pZCBkcm1fc2NoZWRfZmVuY2VfZmluaXNoZWQo
-c3RydWN0IGRybV9zY2hlZF9mZW5jZSAqZmVuY2UpCj4+Pj4+Pj4gICAgICB7Cj4+Pj4+Pj4gLQlp
-bnQgcmV0ID0gZG1hX2ZlbmNlX3NpZ25hbCgmZmVuY2UtPmZpbmlzaGVkKTsKPj4+Pj4+PiAtCj4+
-Pj4+Pj4gLQlpZiAoIXJldCkKPj4+Pj4+PiAtCQlETUFfRkVOQ0VfVFJBQ0UoJmZlbmNlLT5maW5p
-c2hlZCwKPj4+Pj4+PiAtCQkJCSJzaWduYWxlZCBmcm9tIGlycSBjb250ZXh0XG4iKTsKPj4+Pj4+
-PiAtCWVsc2UKPj4+Pj4+PiAtCQlETUFfRkVOQ0VfVFJBQ0UoJmZlbmNlLT5maW5pc2hlZCwKPj4+
-Pj4+PiAtCQkJCSJ3YXMgYWxyZWFkeSBzaWduYWxlZFxuIik7Cj4+Pj4+Pj4gKwlkbWFfZmVuY2Vf
-c2lnbmFsKCZmZW5jZS0+ZmluaXNoZWQpOwo+Pj4+Pj4+ICAgICAgfQo+Pj4+Pj4+ICAgICAgc3Rh
-dGljIGNvbnN0IGNoYXIgKmRybV9zY2hlZF9mZW5jZV9nZXRfZHJpdmVyX25hbWUoc3RydWN0IGRt
-YV9mZW5jZSAqZmVuY2UpCj4+Pj4+Pj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvZG1hLWZl
-bmNlLmggYi9pbmNsdWRlL2xpbnV4L2RtYS1mZW5jZS5oCj4+Pj4+Pj4gaW5kZXggNmZmYjRiMmM2
-MzcxLi40Y2MxMTlhYjI3MmYgMTAwNjQ0Cj4+Pj4+Pj4gLS0tIGEvaW5jbHVkZS9saW51eC9kbWEt
-ZmVuY2UuaAo+Pj4+Pj4+ICsrKyBiL2luY2x1ZGUvbGludXgvZG1hLWZlbmNlLmgKPj4+Pj4+PiBA
-QCAtNTkwLDI2ICs1OTAsNCBAQCBzdHJ1Y3QgZG1hX2ZlbmNlICpkbWFfZmVuY2VfZ2V0X3N0dWIo
-dm9pZCk7Cj4+Pj4+Pj4gICAgICBzdHJ1Y3QgZG1hX2ZlbmNlICpkbWFfZmVuY2VfYWxsb2NhdGVf
-cHJpdmF0ZV9zdHViKHZvaWQpOwo+Pj4+Pj4+ICAgICAgdTY0IGRtYV9mZW5jZV9jb250ZXh0X2Fs
-bG9jKHVuc2lnbmVkIG51bSk7Cj4+Pj4+Pj4gLSNkZWZpbmUgRE1BX0ZFTkNFX1RSQUNFKGYsIGZt
-dCwgYXJncy4uLikgXAo+Pj4+Pj4+IC0JZG8gewkJCQkJCQkJXAo+Pj4+Pj4+IC0JCXN0cnVjdCBk
-bWFfZmVuY2UgKl9fZmYgPSAoZik7CQkJCVwKPj4+Pj4+PiAtCQlpZiAoSVNfRU5BQkxFRChDT05G
-SUdfRE1BX0ZFTkNFX1RSQUNFKSkJCQlcCj4+Pj4+Pj4gLQkJCXByX2luZm8oImYgJWxsdSMlbGx1
-OiAiIGZtdCwJCQlcCj4+Pj4+Pj4gLQkJCQlfX2ZmLT5jb250ZXh0LCBfX2ZmLT5zZXFubywgIyNh
-cmdzKTsJXAo+Pj4+Pj4+IC0JfSB3aGlsZSAoMCkKPj4+Pj4+PiAtCj4+Pj4+Pj4gLSNkZWZpbmUg
-RE1BX0ZFTkNFX1dBUk4oZiwgZm10LCBhcmdzLi4uKSBcCj4+Pj4+Pj4gLQlkbyB7CQkJCQkJCQlc
-Cj4+Pj4+Pj4gLQkJc3RydWN0IGRtYV9mZW5jZSAqX19mZiA9IChmKTsJCQkJXAo+Pj4+Pj4+IC0J
-CXByX3dhcm4oImYgJWxsdSMlbGx1OiAiIGZtdCwgX19mZi0+Y29udGV4dCwgX19mZi0+c2Vxbm8s
-XAo+Pj4+Pj4+IC0JCQkgIyNhcmdzKTsJCQkJCVwKPj4+Pj4+PiAtCX0gd2hpbGUgKDApCj4+Pj4+
-Pj4gLQo+Pj4+Pj4+IC0jZGVmaW5lIERNQV9GRU5DRV9FUlIoZiwgZm10LCBhcmdzLi4uKSBcCj4+
-Pj4+Pj4gLQlkbyB7CQkJCQkJCQlcCj4+Pj4+Pj4gLQkJc3RydWN0IGRtYV9mZW5jZSAqX19mZiA9
-IChmKTsJCQkJXAo+Pj4+Pj4+IC0JCXByX2VycigiZiAlbGx1IyVsbHU6ICIgZm10LCBfX2ZmLT5j
-b250ZXh0LCBfX2ZmLT5zZXFubywJXAo+Pj4+Pj4+IC0JCQkjI2FyZ3MpOwkJCQkJXAo+Pj4+Pj4+
-IC0JfSB3aGlsZSAoMCkKPj4+Pj4+PiAtCj4+Pj4+Pj4gICAgICAjZW5kaWYgLyogX19MSU5VWF9E
-TUFfRkVOQ0VfSCAqLwoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5h
-cm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1t
-bS1zaWcK
+On Wed, Aug 18, 2021 at 12:54:42PM +0200, Christian K=F6nig wrote:
+> Only the DRM GPU scheduler, radeon and amdgpu where using them and they d=
+epend
+> on a non existing config option to actually emit some code.
+> =
+
+> v2: keep the signal path as is for now
+> =
+
+> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+
+Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+
+> ---
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c | 10 +---------
+>  drivers/gpu/drm/radeon/radeon_fence.c     | 24 ++++-------------------
+>  drivers/gpu/drm/scheduler/sched_fence.c   | 18 ++---------------
+>  include/linux/dma-fence.h                 | 22 ---------------------
+>  4 files changed, 7 insertions(+), 67 deletions(-)
+> =
+
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c b/drivers/gpu/drm/=
+amd/amdgpu/amdgpu_fence.c
+> index 0b1c48590c43..c65994e382bd 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c
+> @@ -246,7 +246,6 @@ bool amdgpu_fence_process(struct amdgpu_ring *ring)
+>  	struct amdgpu_fence_driver *drv =3D &ring->fence_drv;
+>  	struct amdgpu_device *adev =3D ring->adev;
+>  	uint32_t seq, last_seq;
+> -	int r;
+>  =
+
+>  	do {
+>  		last_seq =3D atomic_read(&ring->fence_drv.last_seq);
+> @@ -278,12 +277,7 @@ bool amdgpu_fence_process(struct amdgpu_ring *ring)
+>  		if (!fence)
+>  			continue;
+>  =
+
+> -		r =3D dma_fence_signal(fence);
+> -		if (!r)
+> -			DMA_FENCE_TRACE(fence, "signaled from irq context\n");
+> -		else
+> -			BUG();
+> -
+> +		dma_fence_signal(fence);
+>  		dma_fence_put(fence);
+>  		pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+>  		pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+> @@ -639,8 +633,6 @@ static bool amdgpu_fence_enable_signaling(struct dma_=
+fence *f)
+>  	if (!timer_pending(&ring->fence_drv.fallback_timer))
+>  		amdgpu_fence_schedule_fallback(ring);
+>  =
+
+> -	DMA_FENCE_TRACE(&fence->base, "armed on ring %i!\n", ring->idx);
+> -
+>  	return true;
+>  }
+>  =
+
+> diff --git a/drivers/gpu/drm/radeon/radeon_fence.c b/drivers/gpu/drm/rade=
+on/radeon_fence.c
+> index 18f2c2e0dfb3..3f351d222cbb 100644
+> --- a/drivers/gpu/drm/radeon/radeon_fence.c
+> +++ b/drivers/gpu/drm/radeon/radeon_fence.c
+> @@ -176,18 +176,11 @@ static int radeon_fence_check_signaled(wait_queue_e=
+ntry_t *wait, unsigned mode,
+>  	 */
+>  	seq =3D atomic64_read(&fence->rdev->fence_drv[fence->ring].last_seq);
+>  	if (seq >=3D fence->seq) {
+> -		int ret =3D dma_fence_signal_locked(&fence->base);
+> -
+> -		if (!ret)
+> -			DMA_FENCE_TRACE(&fence->base, "signaled from irq context\n");
+> -		else
+> -			DMA_FENCE_TRACE(&fence->base, "was already signaled\n");
+> -
+> +		dma_fence_signal_locked(&fence->base);
+>  		radeon_irq_kms_sw_irq_put(fence->rdev, fence->ring);
+>  		__remove_wait_queue(&fence->rdev->fence_queue, &fence->fence_wake);
+>  		dma_fence_put(&fence->base);
+> -	} else
+> -		DMA_FENCE_TRACE(&fence->base, "pending\n");
+> +	}
+>  	return 0;
+>  }
+>  =
+
+> @@ -422,8 +415,6 @@ static bool radeon_fence_enable_signaling(struct dma_=
+fence *f)
+>  	fence->fence_wake.func =3D radeon_fence_check_signaled;
+>  	__add_wait_queue(&rdev->fence_queue, &fence->fence_wake);
+>  	dma_fence_get(f);
+> -
+> -	DMA_FENCE_TRACE(&fence->base, "armed on ring %i!\n", fence->ring);
+>  	return true;
+>  }
+>  =
+
+> @@ -441,11 +432,7 @@ bool radeon_fence_signaled(struct radeon_fence *fenc=
+e)
+>  		return true;
+>  =
+
+>  	if (radeon_fence_seq_signaled(fence->rdev, fence->seq, fence->ring)) {
+> -		int ret;
+> -
+> -		ret =3D dma_fence_signal(&fence->base);
+> -		if (!ret)
+> -			DMA_FENCE_TRACE(&fence->base, "signaled from radeon_fence_signaled\n"=
+);
+> +		dma_fence_signal(&fence->base);
+>  		return true;
+>  	}
+>  	return false;
+> @@ -550,7 +537,6 @@ long radeon_fence_wait_timeout(struct radeon_fence *f=
+ence, bool intr, long timeo
+>  {
+>  	uint64_t seq[RADEON_NUM_RINGS] =3D {};
+>  	long r;
+> -	int r_sig;
+>  =
+
+>  	/*
+>  	 * This function should not be called on !radeon fences.
+> @@ -567,9 +553,7 @@ long radeon_fence_wait_timeout(struct radeon_fence *f=
+ence, bool intr, long timeo
+>  		return r;
+>  	}
+>  =
+
+> -	r_sig =3D dma_fence_signal(&fence->base);
+> -	if (!r_sig)
+> -		DMA_FENCE_TRACE(&fence->base, "signaled from fence_wait\n");
+> +	dma_fence_signal(&fence->base);
+>  	return r;
+>  }
+>  =
+
+> diff --git a/drivers/gpu/drm/scheduler/sched_fence.c b/drivers/gpu/drm/sc=
+heduler/sched_fence.c
+> index 69de2c76731f..3736746c47bd 100644
+> --- a/drivers/gpu/drm/scheduler/sched_fence.c
+> +++ b/drivers/gpu/drm/scheduler/sched_fence.c
+> @@ -50,26 +50,12 @@ static void __exit drm_sched_fence_slab_fini(void)
+>  =
+
+>  void drm_sched_fence_scheduled(struct drm_sched_fence *fence)
+>  {
+> -	int ret =3D dma_fence_signal(&fence->scheduled);
+> -
+> -	if (!ret)
+> -		DMA_FENCE_TRACE(&fence->scheduled,
+> -				"signaled from irq context\n");
+> -	else
+> -		DMA_FENCE_TRACE(&fence->scheduled,
+> -				"was already signaled\n");
+> +	dma_fence_signal(&fence->scheduled);
+>  }
+>  =
+
+>  void drm_sched_fence_finished(struct drm_sched_fence *fence)
+>  {
+> -	int ret =3D dma_fence_signal(&fence->finished);
+> -
+> -	if (!ret)
+> -		DMA_FENCE_TRACE(&fence->finished,
+> -				"signaled from irq context\n");
+> -	else
+> -		DMA_FENCE_TRACE(&fence->finished,
+> -				"was already signaled\n");
+> +	dma_fence_signal(&fence->finished);
+>  }
+>  =
+
+>  static const char *drm_sched_fence_get_driver_name(struct dma_fence *fen=
+ce)
+> diff --git a/include/linux/dma-fence.h b/include/linux/dma-fence.h
+> index 6ffb4b2c6371..4cc119ab272f 100644
+> --- a/include/linux/dma-fence.h
+> +++ b/include/linux/dma-fence.h
+> @@ -590,26 +590,4 @@ struct dma_fence *dma_fence_get_stub(void);
+>  struct dma_fence *dma_fence_allocate_private_stub(void);
+>  u64 dma_fence_context_alloc(unsigned num);
+>  =
+
+> -#define DMA_FENCE_TRACE(f, fmt, args...) \
+> -	do {								\
+> -		struct dma_fence *__ff =3D (f);				\
+> -		if (IS_ENABLED(CONFIG_DMA_FENCE_TRACE))			\
+> -			pr_info("f %llu#%llu: " fmt,			\
+> -				__ff->context, __ff->seqno, ##args);	\
+> -	} while (0)
+> -
+> -#define DMA_FENCE_WARN(f, fmt, args...) \
+> -	do {								\
+> -		struct dma_fence *__ff =3D (f);				\
+> -		pr_warn("f %llu#%llu: " fmt, __ff->context, __ff->seqno,\
+> -			 ##args);					\
+> -	} while (0)
+> -
+> -#define DMA_FENCE_ERR(f, fmt, args...) \
+> -	do {								\
+> -		struct dma_fence *__ff =3D (f);				\
+> -		pr_err("f %llu#%llu: " fmt, __ff->context, __ff->seqno,	\
+> -			##args);					\
+> -	} while (0)
+> -
+>  #endif /* __LINUX_DMA_FENCE_H */
+> -- =
+
+> 2.25.1
+> =
+
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
