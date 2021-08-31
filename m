@@ -2,129 +2,74 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50D183FC2B0
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 Aug 2021 08:31:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 238643FC747
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 Aug 2021 14:31:13 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 32C9761B00
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 Aug 2021 06:31:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AE4E560520
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 Aug 2021 12:31:11 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 2D0DB6116E; Tue, 31 Aug 2021 06:31:39 +0000 (UTC)
+	id 020A4623DC; Tue, 31 Aug 2021 12:31:09 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AD341608C3;
-	Tue, 31 Aug 2021 06:31:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A4504608C3;
+	Tue, 31 Aug 2021 12:31:06 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id ACFF4604FD
- for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 06:31:34 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 12926603EF
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 12:31:05 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id AA919608C3; Tue, 31 Aug 2021 06:31:34 +0000 (UTC)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2068.outbound.protection.outlook.com [40.107.223.68])
- by lists.linaro.org (Postfix) with ESMTPS id 8F8AF604FD
- for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 06:31:32 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hx94KWhkUN2o3QMnYmfCKT1ry96j8+gBWeoQvkoGyfpF3z9iI16Zk1Rbx06cCLLK679p84qcQ4jDxUJlJd+Mc04bRzrDDT8PPMZZGwsBm6iUJQ0qrQkXMrcleCcwjYWHm2r+fxGdPpMbKsgImrsOFYl7g7WjbMDHiWMVClfpX/7vCrOuKvgE9SzypIMi497WbbbgZoI736wYEeeRBtoXgLSYnyZ/Sy0uz8vlobtK03Lp1Hs2AjBzvgraIbmL5xdvatAjEvJFIZGyO92BhyqekXJg7hG9td1dgk7XfbLJA621UxYMID3J2GuOnFaDyI/40qw2/AA2W5uR2Bha3XsGlQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FzSNFFZs4c99WXVPwgImMnSgH3KfmFLUi53AAFh/hK0=;
- b=ACM7FJDmAZnId45ttItYSAzXxb/sK4DC2HCboHqw1lPbExPjmdlbp7aO3zztRHik+60WOmLg4GrPuhFlGFnf/lkg3aBt8LlxP03Pn2ifMYGwu+SWmW00g0ufGRm66l2UXHsNynJwChZAplKnNjyGA3wq0oxaHcjOnFX7FCUDgAflVwEmoh5O9FmETrllmyNDUKEotaSYrWoWH4Bq2x5UJXN55wndETmW76WoOm8kt8zhkXMnt0fh22g/3H2x4rVmTST5PRcdEuWt4VlDCXflo6vk1HHNy3aWFbGFz1SrbBztvpbtJqw6puRnQMVPYPWrjf53k6urxIFcZI4wXlI5bw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FzSNFFZs4c99WXVPwgImMnSgH3KfmFLUi53AAFh/hK0=;
- b=im3KkEjY9Z5GHGHZpYjaQ2N9H/Ukdhg2ee4Fn67m9Fr1kPHXIcFUZuALkxO/tQBR6eSyUazr57BoQ94+vN8r5y9vNLTJDwvkPWJxNQYzgf8ELJ2GuaOi/V6cSYnJM7hnERTM+aqaNKgcD6EmFEAmua6CVgH1HMjP+QssCsHp5Yk=
-Authentication-Results: mediatek.com; dkim=none (message not signed)
- header.d=none;mediatek.com; dmarc=none action=none header.from=amd.com;
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
- by MN2PR12MB3903.namprd12.prod.outlook.com (2603:10b6:208:15a::26)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4457.24; Tue, 31 Aug
- 2021 06:31:29 +0000
-Received: from MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::dce2:96e5:aba2:66fe]) by MN2PR12MB3775.namprd12.prod.outlook.com
- ([fe80::dce2:96e5:aba2:66fe%6]) with mapi id 15.20.4457.024; Tue, 31 Aug 2021
- 06:31:29 +0000
-To: guangming.cao@mediatek.com
-References: <dd5ba603-8c9d-f6a0-cbcc-dfb353fb6701@amd.com>
- <20210831034405.41916-1-guangming.cao@mediatek.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-Message-ID: <0b48df29-a20f-65f6-bc4c-6c0a7522ecd7@amd.com>
-Date: Tue, 31 Aug 2021 08:31:22 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
-In-Reply-To: <20210831034405.41916-1-guangming.cao@mediatek.com>
-Content-Language: en-US
-X-ClientProxiedBy: AM0PR02CA0181.eurprd02.prod.outlook.com
- (2603:10a6:20b:28e::18) To MN2PR12MB3775.namprd12.prod.outlook.com
- (2603:10b6:208:159::19)
+ id 102FD608C3; Tue, 31 Aug 2021 12:31:05 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+ [209.85.221.47])
+ by lists.linaro.org (Postfix) with ESMTPS id 04B0660520
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 12:31:03 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id g18so19914385wrc.11
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 05:31:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=dPwVBmG2R68kYDTd5e1DRAQ5mYgkRgUgo/flpsQBqBA=;
+ b=EjJ4fYuZiKjFmDYK2CU/cTC6uLVhZ45TGNl2Er7x9+OcW1v6Mz3g1l9KWbKKdqE/c2
+ Ic3nvWiGGSCihpL/g+6Hs7LtrDLSn45G+nDiBnd3k/FetQSSkc0W1KKXD09I6Hv+6a18
+ xPqMYcJmziEYmh+4wHQ3u5BB7JoHXJMllzyL0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=dPwVBmG2R68kYDTd5e1DRAQ5mYgkRgUgo/flpsQBqBA=;
+ b=XE6HzAwmloW19EX1fjhsg2cma2fgvCuoQ0brCldhhDilQExFvYKbUruElj3Q2jUzRZ
+ Bk7kB3GGvfWaEt6ojNU0JUbjk8zP/I33XxK5x1+US2miKeR1Zdq5L74u+E6w2PZ/YTq1
+ 28xo3T+IGvi5Nng7bSaeHrqJO+OtFCvR4yxN5CUvLYkmQhLzrO4sxczGOVuhPtNMdUnz
+ RxY/cfqDMGxbZdYLbJRLTDO7VXWQT/tvV4uRQO4Osbz5DeleFHl6ZdkuQkxV+qVQbyD3
+ CDSZ63TkFVD4fhQdM3wtiXp4Ki3AJrBZZnOKbd3InwQx7xAg2gu6FdfOZryhNocQGVAL
+ LGXw==
+X-Gm-Message-State: AOAM5316mmxvLOcHQeoHU9fRl3ptX3hDhfgh/1sxtdN59e/g8MBz0iXE
+ i/zGagAAt8XKB4ejBGi3yNr0IA==
+X-Google-Smtp-Source: ABdhPJxPSiHNW7YrPxrI+TKBRL1m2i726z6KB5RhokOwT56lUrRbv2OjxbIw3/vuoRigSASfnIv65w==
+X-Received: by 2002:a5d:440d:: with SMTP id z13mr30931640wrq.216.1630413061982; 
+ Tue, 31 Aug 2021 05:31:01 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id m4sm2387901wml.28.2021.08.31.05.30.59
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 31 Aug 2021 05:31:00 -0700 (PDT)
+Date: Tue, 31 Aug 2021 14:30:58 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <YS4hAhVPlyAWdX/n@phenom.ffwll.local>
+References: <20210818105443.1578-1-christian.koenig@amd.com>
+ <015fd5ed-9255-9c28-44f3-3c8dde90ebad@gmail.com>
+ <YSdXEaBDpijEBx/6@phenom.ffwll.local>
+ <0c150724-032f-b566-4f61-b4771bafe7a8@gmail.com>
+ <YSlJwX0lNBSdj880@phenom.ffwll.local>
+ <d41b682d-f4ec-b050-8f45-78b9a9ce944d@gmail.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [192.168.178.21] (91.14.161.181) by
- AM0PR02CA0181.eurprd02.prod.outlook.com (2603:10a6:20b:28e::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4457.21 via Frontend
- Transport; Tue, 31 Aug 2021 06:31:26 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 6205f434-79cc-466d-18da-08d96c48f705
-X-MS-TrafficTypeDiagnostic: MN2PR12MB3903:
-X-Microsoft-Antispam-PRVS: <MN2PR12MB3903F9AF510AEB4E2E88CBF083CC9@MN2PR12MB3903.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 8salqPox4/I0Ive1XqPQ7ftCdr1TP1CDhvMk+ZSxTMq972c5/tyO5/+GXa8Z81VjK8z8liawVHRvNka40xMkU8h5y98PRyZGfg+SZKj8oCNrwlry/xYtJh/ESxaWDSYD/WqR4usFzqF82ZVUWKXt8gSN9hIPTtXHPe+FBfNL7I6j/r5PUD8FwAPzB4fj6ukdIHeSAzeU2NTxlrjS0moJRq3kW6eHv0VQLLQJ1VlmtOuYjLZnSCvu5zXC431J033/xOFN0+4xXWro4Jv+KNi8Abi8KyziVkFvfID//OpHNKalQ4Sdtw56i61fS+RIBqRH9eA64ijyfJ8LliVYtLNVQsp4pDt1fsjIn6FthZ2nwjgy+pfX2gxJq2ke5yrQFmNmfKpRxgXfRjqfx4bYbOLWX/2eWI8xOo9hzLPzxjsfSk8F2lXHe9zdIMRdIdBTXyYrVQv04Dad1aBfNTKCiwmBSb+N3E/RVe4tls+JGj4vP6MSC1MKQ9nOf53gWUlAO05V5TIzg2XXc8mopwL2pR1aqbvyCJIPTacp1LJUydQUgeGw3pBktT18z7QOHrUrLGBFdVFj9ynJy3IGi4qUJaobaIXZgaFeQNABeOFKZ6X/YwLn+8WK3AvkIEE2w8UU0rrEYsi2ZR3QGMFWLbE/rsWvFe4ts0Fk1MjCY4TFcMKdDPqMRU/QGupV+N99nC2A8sOf2XEQciPyE6diScGwda/TNbuh+cs1yghXkycCDchbDRQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MN2PR12MB3775.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(396003)(136003)(366004)(346002)(39860400002)(376002)(4326008)(6666004)(6916009)(86362001)(83380400001)(66556008)(66946007)(6486002)(5660300002)(66476007)(36756003)(2906002)(16576012)(31686004)(478600001)(38100700002)(2616005)(316002)(26005)(8936002)(31696002)(8676002)(956004)(7416002)(186003)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TmhoQXlpSU9mUlByNmw3d0tKSUk1cFZ3a2xKY1RPVjY1TTZNeGpRcU5pWWJh?=
- =?utf-8?B?ckFYMWtIZnphYW1rUGpHci9EM09mbFdpWW1rYXp6aXgvaDd1SGYvOEwzZFVv?=
- =?utf-8?B?UzFvd2hTdEx3a2d2RnhzZ0NuemZWWUIxN2NCR1JEMkZDVGdBYVdHRFZJRGZr?=
- =?utf-8?B?WHhIWlNUNHJzbTBUSmFDQUNuWHVMazFoTC9GT2FmTmpRTmJQOVUwZExjUHFp?=
- =?utf-8?B?TXRsV2RVaE4zbW1TZnUvZzdJZWM4bUxNMDhIb3p1SEp3SzZhSjVJUTl5VHAv?=
- =?utf-8?B?QnVqQWR1SUEvcGtvTlc2bUQzNVAxVnBwcmJlTWlHWW9JdUpreDJVT0I0RWhq?=
- =?utf-8?B?RTB2aGtRR2dWTU1NNjVaNWh2R05uVG91REFHaUZ1U0dZU2JkZlhrVmd5R3o2?=
- =?utf-8?B?c3VuZE1mc2JKMjl0LzdncHA4eEFna1BZSFNVb2VOVm1iY094R2U2ckJYMnEw?=
- =?utf-8?B?ZlBhVnlxc3FleHhvUXIxTDdCZ3FreDZvbkxBNml6ZTZ6dXFrNVFWZldId29x?=
- =?utf-8?B?b01nWkcrWXFlY04yNjlzMWtTdVBXTDU3N2VGVjZ0UFJrMnp1ZDNOMTZFZG1i?=
- =?utf-8?B?Zi94bU5DaW1oeWoyeW4zVjQzaUY3bWxmN3BCb3hLbWV5NkR3ditDVmdnQmdU?=
- =?utf-8?B?c2dhT0VyU2JJbk94TUFYNFRaTEQxZkd6S3Z2U3BoOVlpUk95QkNVbjNKbjhr?=
- =?utf-8?B?QVJLTVhyZ0luVXYvK3lZUTIyMm9kd3A5cHNXZTVTdkoxdkZ0Y0w5cUVyN2U3?=
- =?utf-8?B?bHBEVlBxcUZzbCt1YUN3K2tvWGtEWXNCRFVaT1J5VVNJZ1ZPRDhMQ085RUd2?=
- =?utf-8?B?eVJpZ0NmRkYzZFJ6MlU0b2NKeS9LMzR3ZG5DaXRFRXdpbkZhK2I0aTFPWk8x?=
- =?utf-8?B?ckwwWEhoaktpZGI5YnNKMWhkZXJKMnczNlFOYVB6OFhQYkxTOVJrTkNYc1RG?=
- =?utf-8?B?aXN6RTF2WmVMVkY2d2k2S2x5dC9VRE96OFZBQ0FtR2Y1YUN1VkpLWkg5R0ts?=
- =?utf-8?B?NmpvUlNteWxubFpqWWtvSDdXOGRSY2l1ZGw2MzJSOHFFSHdidnBnNjI2RnVH?=
- =?utf-8?B?a2VEek82WnFsbHNOY200b0g4c25CS3lzSEpjRzVicXN1MFJ5TEk1TTlRY1RU?=
- =?utf-8?B?MkJHMS96Y0F1bHFpQ1paY2lBN05uODROckZxaVNzVmUva2RaYVdEamVPYWVz?=
- =?utf-8?B?Z0JMQnlBellPZStkdUxmSmN2T1ZPZHRoVVZjMlVwckhrQzI2ZDFPMkZjcVov?=
- =?utf-8?B?cEV5SisyK3VEdXhTZ0pXc3RycStUbFV3UkI1VFJmV3Q2b2RienZ2UkprenVG?=
- =?utf-8?B?eVUrRWx5aGRPTm5teCthb0E0aCs2N2JkUE1ucmVYZHlOaTRYMjRldTNGblVK?=
- =?utf-8?B?WkFKaUZLc0p0TEJxQ3dON29scmhOa3Z5eUlYV2V1T1RnN3JYUm1lOGU2ekln?=
- =?utf-8?B?V0FGaDQrK1ZaaTV4OXNENGF5Rk8ycWJWM1A0YjVHMzAycnAyY2gwU0dGOWlp?=
- =?utf-8?B?WWZHdlVXU1pWaHZWb3BXU3B3SkR1MW1uSUNScjFTemY3czJIVkhudkRYc3da?=
- =?utf-8?B?V1Jhd1p0S2dwZzNZeTdCUDN4MVhUbFM3WG1QR05KdktLZnhPbGtBZHJJYmcx?=
- =?utf-8?B?SlUwbkR4dEpYeFlueVdlR1I4bGlESU52NUpBenVjb3NBRGRYV1VRVEIxUnhX?=
- =?utf-8?B?dHNOdWpHak9VVUpibEs5UGdkL3FBKzc0TkIzbjQxQWFwSVB3eC9HUUFlcndq?=
- =?utf-8?Q?UgwkTAq+AKtr8dnGoQ/LBZ5tJcDnMaAgC+Zz/At?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6205f434-79cc-466d-18da-08d96c48f705
-X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Aug 2021 06:31:29.7341 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qte71PpFY1gxU8vMv8x0qnu6OwUUq0AvQ9HlP8BiczGzU3JwZY6upp6ixCef9jv0
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB3903
+Content-Disposition: inline
+In-Reply-To: <d41b682d-f4ec-b050-8f45-78b9a9ce944d@gmail.com>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH] dma-buf: heaps: remove duplicated cache
- sync
+Subject: Re: [Linaro-mm-sig] [PATCH 1/2] dma-buf: nuke DMA_FENCE_TRACE
+ macros v2
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -137,91 +82,297 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: wsd_upstream@mediatek.com, linux-kernel@vger.kernel.org,
+Cc: adelva@google.com, sspatil@google.com, gustavo@padovan.org,
  dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- john.stultz@linaro.org, lmark@codeaurora.org, benjamin.gaignard@linaro.org,
- matthias.bgg@gmail.com, linux-mediatek@lists.infradead.org, labbott@redhat.com,
- Brian.Starkey@arm.com, linux-arm-kernel@lists.infradead.org,
+ john.stultz@linaro.org, Daniel Vetter <daniel@ffwll.ch>, hridya@google.com,
  linux-media@vger.kernel.org
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Am 31.08.21 um 05:44 schrieb guangming.cao@mediatek.com:
-> From: Guangming Cao <Guangming.Cao@mediatek.com>
->
->> Am 30.08.21 um 12:01 schrieb guangming.cao@mediatek.com:
->>> From: Guangming Cao <Guangming.Cao@mediatek.com>
->>>
->>> Current flow, one dmabuf maybe call cache sync many times if
->>> it has beed mapped more than one time.
->> Well I'm not an expert on DMA heaps, but this will most likely not work
->> correctly.
->>
-> All attachments of one dmabuf will add into a list, I think it means dmabuf
-> supports map more than one time. Could you tell me more about it?
+On Mon, Aug 30, 2021 at 08:28:49AM +0200, Christian K=F6nig wrote:
+> Am 27.08.21 um 22:23 schrieb Daniel Vetter:
+> > On Fri, Aug 27, 2021 at 11:07:58AM +0200, Christian K=F6nig wrote:
+> > > Am 26.08.21 um 10:55 schrieb Daniel Vetter:
+> > > > On Tue, Aug 24, 2021 at 10:12:24AM +0200, Christian K=F6nig wrote:
+> > > > > Just a gentle ping. Daniel any more comments on this?
+> > > > Still haven't seen a patch set to nuke the sw_sync igt tests. Other=
+wise
+> > > > this is just going to cause fails and reboots in our ci (we reboot =
+on
+> > > > taints).
+> > > *sigh* can I at least print a warning without breaking the igt tests?
+> > CI watches dmesg too ... it just doesn't force a reboot (which hurts run
+> > rate really badly).
+> > =
 
-Yes, that's correct and all of those needs to be synced as far as I know.
+> > > > > I'm not sure if the second patch will cause trouble with any unit=
+ test, but
+> > > > > I'm willing to try it. We can always trivial revert it.
+> > > > See above, remove the igts and we should be fine I think. I don't t=
+hink
+> > > > there's any selftests or kselftests, but checking that should be a =
+quick
+> > > > grep at most.
+> > > Yeah, we don't have any selftests as far as I can see but this stuff =
+is so
+> > > interweaved with igt that it will be hard to remove I think.
+> > > =
 
-See the dma_sync_sgtable_for_cpu() is intentionally for each SG table 
-given out.
+> > > A good bunch of the igt code seems to have been moved to using VGEM i=
+nstead,
+> > > but as far as I can see there is still plenty left relying on this.
+> > > =
 
->>> Is there any case that attachments of one dmabuf will points to
->>> different memory? If not, seems do sync only one time is more better.
->> I think that this can happen, yes.
->>
->> Christian.
->>
-> Seems it's a very special case on Android, if you don't mind, could you
-> tell me more about it?
+> > > Alternatively could we make the config option depend on CONFIG_DEBUG?
+> > Hm I thought it was just down to sw_sync igt testcase, and everything e=
+lse
+> > is moved to vgem. Do we have more, or has more landed since I looked a
+> > while ago?
+> =
 
-That might be the case, nevertheless this change here is illegal from 
-the DMA API point of view as far as I can see.
+> The code under lib/sw_sync.c uses this and based on that lib/igt_dummyloa=
+d.c
+> defines an IGT_CORK_FENCE which is then used by at least:
+> =
 
-Regards,
-Christian.
+> tests/i915/gem_exec_fence.c
+> tests/i915/gem_eio.c
+> tests/i915/gem_exec_schedule.c
+> tests/i915/gem_exec_balancer.c
+> tests/i915/gem_ctx_shared.c
+> tests/kms_busy.c
+> =
 
->
->>> Signed-off-by: Guangming Cao <Guangming.Cao@mediatek.com>
->>> ---
->>>    drivers/dma-buf/heaps/system_heap.c | 14 ++++++++------
->>>    1 file changed, 8 insertions(+), 6 deletions(-)
->>>
->>> diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/heaps/system_heap.c
->>> index 23a7e74ef966..909ef652a8c8 100644
->>> --- a/drivers/dma-buf/heaps/system_heap.c
->>> +++ b/drivers/dma-buf/heaps/system_heap.c
->>> @@ -162,9 +162,10 @@ static int system_heap_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
->>>    		invalidate_kernel_vmap_range(buffer->vaddr, buffer->len);
->>>    
->>>    	list_for_each_entry(a, &buffer->attachments, list) {
->>> -		if (!a->mapped)
->>> -			continue;
->>> -		dma_sync_sgtable_for_cpu(a->dev, a->table, direction);
->>> +		if (a->mapped) {
->>> +			dma_sync_sgtable_for_cpu(a->dev, a->table, direction);
->>> +			break;
->>> +		}
->>>    	}
->>>    	mutex_unlock(&buffer->lock);
->>>    
->>> @@ -183,9 +184,10 @@ static int system_heap_dma_buf_end_cpu_access(struct dma_buf *dmabuf,
->>>    		flush_kernel_vmap_range(buffer->vaddr, buffer->len);
->>>    
->>>    	list_for_each_entry(a, &buffer->attachments, list) {
->>> -		if (!a->mapped)
->>> -			continue;
->>> -		dma_sync_sgtable_for_device(a->dev, a->table, direction);
->>> +		if (!a->mapped) {
->>> +			dma_sync_sgtable_for_device(a->dev, a->table, direction);
->>> +			break;
->>> +		}
->>>    	}
->>>    	mutex_unlock(&buffer->lock);
->>>    
+> After that I've stoped looking deeper into it.
 
+Uh crap, I totally missed this. This is a rather messy area of igt with a
+pile of questionable tests and stuff ... No idea when we'll get around to
+cleaning that up with all the other fires going on :-(
+-Daniel
+
+> =
+
+> Christian.
+> =
+
+> > -Daniel
+> > =
+
+> > > Christian.
+> > > =
+
+> > > > -Daniel
+> > > > =
+
+> > > > > Thanks,
+> > > > > Christian.
+> > > > > =
+
+> > > > > Am 18.08.21 um 12:54 schrieb Christian K=F6nig:
+> > > > > > Only the DRM GPU scheduler, radeon and amdgpu where using them =
+and they depend
+> > > > > > on a non existing config option to actually emit some code.
+> > > > > > =
+
+> > > > > > v2: keep the signal path as is for now
+> > > > > > =
+
+> > > > > > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+> > > > > > ---
+> > > > > >     drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c | 10 +---------
+> > > > > >     drivers/gpu/drm/radeon/radeon_fence.c     | 24 ++++--------=
+-----------
+> > > > > >     drivers/gpu/drm/scheduler/sched_fence.c   | 18 ++----------=
+-----
+> > > > > >     include/linux/dma-fence.h                 | 22 ------------=
+---------
+> > > > > >     4 files changed, 7 insertions(+), 67 deletions(-)
+> > > > > > =
+
+> > > > > > diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c b/driver=
+s/gpu/drm/amd/amdgpu/amdgpu_fence.c
+> > > > > > index 0b1c48590c43..c65994e382bd 100644
+> > > > > > --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c
+> > > > > > +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_fence.c
+> > > > > > @@ -246,7 +246,6 @@ bool amdgpu_fence_process(struct amdgpu_rin=
+g *ring)
+> > > > > >     	struct amdgpu_fence_driver *drv =3D &ring->fence_drv;
+> > > > > >     	struct amdgpu_device *adev =3D ring->adev;
+> > > > > >     	uint32_t seq, last_seq;
+> > > > > > -	int r;
+> > > > > >     	do {
+> > > > > >     		last_seq =3D atomic_read(&ring->fence_drv.last_seq);
+> > > > > > @@ -278,12 +277,7 @@ bool amdgpu_fence_process(struct amdgpu_ri=
+ng *ring)
+> > > > > >     		if (!fence)
+> > > > > >     			continue;
+> > > > > > -		r =3D dma_fence_signal(fence);
+> > > > > > -		if (!r)
+> > > > > > -			DMA_FENCE_TRACE(fence, "signaled from irq context\n");
+> > > > > > -		else
+> > > > > > -			BUG();
+> > > > > > -
+> > > > > > +		dma_fence_signal(fence);
+> > > > > >     		dma_fence_put(fence);
+> > > > > >     		pm_runtime_mark_last_busy(adev_to_drm(adev)->dev);
+> > > > > >     		pm_runtime_put_autosuspend(adev_to_drm(adev)->dev);
+> > > > > > @@ -639,8 +633,6 @@ static bool amdgpu_fence_enable_signaling(s=
+truct dma_fence *f)
+> > > > > >     	if (!timer_pending(&ring->fence_drv.fallback_timer))
+> > > > > >     		amdgpu_fence_schedule_fallback(ring);
+> > > > > > -	DMA_FENCE_TRACE(&fence->base, "armed on ring %i!\n", ring->id=
+x);
+> > > > > > -
+> > > > > >     	return true;
+> > > > > >     }
+> > > > > > diff --git a/drivers/gpu/drm/radeon/radeon_fence.c b/drivers/gp=
+u/drm/radeon/radeon_fence.c
+> > > > > > index 18f2c2e0dfb3..3f351d222cbb 100644
+> > > > > > --- a/drivers/gpu/drm/radeon/radeon_fence.c
+> > > > > > +++ b/drivers/gpu/drm/radeon/radeon_fence.c
+> > > > > > @@ -176,18 +176,11 @@ static int radeon_fence_check_signaled(wa=
+it_queue_entry_t *wait, unsigned mode,
+> > > > > >     	 */
+> > > > > >     	seq =3D atomic64_read(&fence->rdev->fence_drv[fence->ring]=
+.last_seq);
+> > > > > >     	if (seq >=3D fence->seq) {
+> > > > > > -		int ret =3D dma_fence_signal_locked(&fence->base);
+> > > > > > -
+> > > > > > -		if (!ret)
+> > > > > > -			DMA_FENCE_TRACE(&fence->base, "signaled from irq context\n"=
+);
+> > > > > > -		else
+> > > > > > -			DMA_FENCE_TRACE(&fence->base, "was already signaled\n");
+> > > > > > -
+> > > > > > +		dma_fence_signal_locked(&fence->base);
+> > > > > >     		radeon_irq_kms_sw_irq_put(fence->rdev, fence->ring);
+> > > > > >     		__remove_wait_queue(&fence->rdev->fence_queue, &fence->fe=
+nce_wake);
+> > > > > >     		dma_fence_put(&fence->base);
+> > > > > > -	} else
+> > > > > > -		DMA_FENCE_TRACE(&fence->base, "pending\n");
+> > > > > > +	}
+> > > > > >     	return 0;
+> > > > > >     }
+> > > > > > @@ -422,8 +415,6 @@ static bool radeon_fence_enable_signaling(s=
+truct dma_fence *f)
+> > > > > >     	fence->fence_wake.func =3D radeon_fence_check_signaled;
+> > > > > >     	__add_wait_queue(&rdev->fence_queue, &fence->fence_wake);
+> > > > > >     	dma_fence_get(f);
+> > > > > > -
+> > > > > > -	DMA_FENCE_TRACE(&fence->base, "armed on ring %i!\n", fence->r=
+ing);
+> > > > > >     	return true;
+> > > > > >     }
+> > > > > > @@ -441,11 +432,7 @@ bool radeon_fence_signaled(struct radeon_f=
+ence *fence)
+> > > > > >     		return true;
+> > > > > >     	if (radeon_fence_seq_signaled(fence->rdev, fence->seq, fen=
+ce->ring)) {
+> > > > > > -		int ret;
+> > > > > > -
+> > > > > > -		ret =3D dma_fence_signal(&fence->base);
+> > > > > > -		if (!ret)
+> > > > > > -			DMA_FENCE_TRACE(&fence->base, "signaled from radeon_fence_s=
+ignaled\n");
+> > > > > > +		dma_fence_signal(&fence->base);
+> > > > > >     		return true;
+> > > > > >     	}
+> > > > > >     	return false;
+> > > > > > @@ -550,7 +537,6 @@ long radeon_fence_wait_timeout(struct radeo=
+n_fence *fence, bool intr, long timeo
+> > > > > >     {
+> > > > > >     	uint64_t seq[RADEON_NUM_RINGS] =3D {};
+> > > > > >     	long r;
+> > > > > > -	int r_sig;
+> > > > > >     	/*
+> > > > > >     	 * This function should not be called on !radeon fences.
+> > > > > > @@ -567,9 +553,7 @@ long radeon_fence_wait_timeout(struct radeo=
+n_fence *fence, bool intr, long timeo
+> > > > > >     		return r;
+> > > > > >     	}
+> > > > > > -	r_sig =3D dma_fence_signal(&fence->base);
+> > > > > > -	if (!r_sig)
+> > > > > > -		DMA_FENCE_TRACE(&fence->base, "signaled from fence_wait\n");
+> > > > > > +	dma_fence_signal(&fence->base);
+> > > > > >     	return r;
+> > > > > >     }
+> > > > > > diff --git a/drivers/gpu/drm/scheduler/sched_fence.c b/drivers/=
+gpu/drm/scheduler/sched_fence.c
+> > > > > > index 69de2c76731f..3736746c47bd 100644
+> > > > > > --- a/drivers/gpu/drm/scheduler/sched_fence.c
+> > > > > > +++ b/drivers/gpu/drm/scheduler/sched_fence.c
+> > > > > > @@ -50,26 +50,12 @@ static void __exit drm_sched_fence_slab_fin=
+i(void)
+> > > > > >     void drm_sched_fence_scheduled(struct drm_sched_fence *fenc=
+e)
+> > > > > >     {
+> > > > > > -	int ret =3D dma_fence_signal(&fence->scheduled);
+> > > > > > -
+> > > > > > -	if (!ret)
+> > > > > > -		DMA_FENCE_TRACE(&fence->scheduled,
+> > > > > > -				"signaled from irq context\n");
+> > > > > > -	else
+> > > > > > -		DMA_FENCE_TRACE(&fence->scheduled,
+> > > > > > -				"was already signaled\n");
+> > > > > > +	dma_fence_signal(&fence->scheduled);
+> > > > > >     }
+> > > > > >     void drm_sched_fence_finished(struct drm_sched_fence *fence)
+> > > > > >     {
+> > > > > > -	int ret =3D dma_fence_signal(&fence->finished);
+> > > > > > -
+> > > > > > -	if (!ret)
+> > > > > > -		DMA_FENCE_TRACE(&fence->finished,
+> > > > > > -				"signaled from irq context\n");
+> > > > > > -	else
+> > > > > > -		DMA_FENCE_TRACE(&fence->finished,
+> > > > > > -				"was already signaled\n");
+> > > > > > +	dma_fence_signal(&fence->finished);
+> > > > > >     }
+> > > > > >     static const char *drm_sched_fence_get_driver_name(struct d=
+ma_fence *fence)
+> > > > > > diff --git a/include/linux/dma-fence.h b/include/linux/dma-fenc=
+e.h
+> > > > > > index 6ffb4b2c6371..4cc119ab272f 100644
+> > > > > > --- a/include/linux/dma-fence.h
+> > > > > > +++ b/include/linux/dma-fence.h
+> > > > > > @@ -590,26 +590,4 @@ struct dma_fence *dma_fence_get_stub(void);
+> > > > > >     struct dma_fence *dma_fence_allocate_private_stub(void);
+> > > > > >     u64 dma_fence_context_alloc(unsigned num);
+> > > > > > -#define DMA_FENCE_TRACE(f, fmt, args...) \
+> > > > > > -	do {								\
+> > > > > > -		struct dma_fence *__ff =3D (f);				\
+> > > > > > -		if (IS_ENABLED(CONFIG_DMA_FENCE_TRACE))			\
+> > > > > > -			pr_info("f %llu#%llu: " fmt,			\
+> > > > > > -				__ff->context, __ff->seqno, ##args);	\
+> > > > > > -	} while (0)
+> > > > > > -
+> > > > > > -#define DMA_FENCE_WARN(f, fmt, args...) \
+> > > > > > -	do {								\
+> > > > > > -		struct dma_fence *__ff =3D (f);				\
+> > > > > > -		pr_warn("f %llu#%llu: " fmt, __ff->context, __ff->seqno,\
+> > > > > > -			 ##args);					\
+> > > > > > -	} while (0)
+> > > > > > -
+> > > > > > -#define DMA_FENCE_ERR(f, fmt, args...) \
+> > > > > > -	do {								\
+> > > > > > -		struct dma_fence *__ff =3D (f);				\
+> > > > > > -		pr_err("f %llu#%llu: " fmt, __ff->context, __ff->seqno,	\
+> > > > > > -			##args);					\
+> > > > > > -	} while (0)
+> > > > > > -
+> > > > > >     #endif /* __LINUX_DMA_FENCE_H */
+> =
+
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
