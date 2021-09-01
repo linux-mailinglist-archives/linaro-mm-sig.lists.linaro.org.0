@@ -2,86 +2,70 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id A5D543FC78E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 Aug 2021 14:47:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 094393FD92D
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Sep 2021 14:03:05 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7454E61033
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 Aug 2021 12:47:15 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5D518619AA
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Sep 2021 12:03:00 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 37161603EF; Tue, 31 Aug 2021 12:47:14 +0000 (UTC)
+	id 0434B61017; Wed,  1 Sep 2021 12:02:55 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 635F8608C3;
-	Tue, 31 Aug 2021 12:47:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8612B60F1F;
+	Wed,  1 Sep 2021 12:02:51 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 41B8E603EF
- for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 12:47:09 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 19E006056F
+ for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Sep 2021 12:02:49 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 33718608C3; Tue, 31 Aug 2021 12:47:09 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
- [209.85.221.50])
- by lists.linaro.org (Postfix) with ESMTPS id 2B31B603EF
- for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 12:47:07 +0000 (UTC)
-Received: by mail-wr1-f50.google.com with SMTP id u9so27456565wrg.8
- for <linaro-mm-sig@lists.linaro.org>; Tue, 31 Aug 2021 05:47:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:in-reply-to;
- bh=lqW6r2QxBjf3naPSK7ElejDN0miJGNk4JeUrWNu5dFo=;
- b=P7GUI4rzpcJORZdrR45U9tZBVNt+YutkUgaZAyUSoo0hNOv5YFYj2LVa3BDKBVLlEZ
- 8P09RZ77gdJ/9bmvIGELMImn15ss9sRZV4C/seGIidibDM6yqDjkjA6TuRj46kpJciNn
- Jh7pnUHhLdusLFGeigWIF2NedtczE/Aou9GJw=
+ id 15DD86100C; Wed,  1 Sep 2021 12:02:49 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+ [209.85.221.48])
+ by lists.linaro.org (Postfix) with ESMTPS id 106426056F
+ for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Sep 2021 12:02:47 +0000 (UTC)
+Received: by mail-wr1-f48.google.com with SMTP id n5so4068474wro.12
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Sep 2021 05:02:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=uNWyDCJRg5z+YdrGcz6ue9XUC2vcsZfH2SlJlbhPC2Y=;
+ b=AwP8q6IrhVvt2OCuxNZ/CQ4Mh1qUju3OY1uhxDDlpjAUg60KvC5+b7vLsLmr99gHAk
+ MBTR4BANx4JWZEv1QTzkOClDEc0JuQJmM197nifSno8nN2fCH7ttK2FdPByOADQu+MFN
+ VAbXFQFhuy7Z4D6AD2vg53f/l9edv7gFVjFQ9k/Eg73EFwDsv8GGZAI6t2sty6wo3uE8
+ xMwbYQIMWT6gAKNASr08ZvriQwt9PUfmMuwB17kqOEkS89reM28JOoRDQROztjY4s90Q
+ vQV7f4yMl94jJY9kgRDxpb+PCslEMi6l3555vaalpX+iS81+VA9t+XzU1O5Ukyb0LeRe
+ Wg3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :in-reply-to;
- bh=lqW6r2QxBjf3naPSK7ElejDN0miJGNk4JeUrWNu5dFo=;
- b=KlJsDTT9BIb2juj+C92l+vJiMoIzQSe1AiBRcZq8jBXrHuuA58WwsAtIAORZQXUnz/
- 5pntisH38dcSCiOwLYegEZSkNXApX0hsLyjX3ICqUSmVQ7hnQY0ZMBWKSetLtkjRWuKF
- oEiixxJOax8V1wWLl2wLi5AgVRXwGyJt6j6tkim4t103i1aCyAvDLyyruorbaQ1wQdHJ
- m4flC346cP0riJoHgXgddYO6Kb7xRFz6EU3jC+TDNnjmSIbUAE5WT/xW+S3TWcAIXu5i
- K78T1DHV/k6+5jdMS8cQ1GJJOS6XaXkUPykcAWaJGMW4WhJsU4l9lL12DzaEcdPyYXqm
- qodQ==
-X-Gm-Message-State: AOAM530n2QagYSzbL5kiJdcQsHJ36pEsfBVVNbyoxNCN+biiDpIPRvRw
- /m4VSsLIw3r/+pmYAwaTT08YSw==
-X-Google-Smtp-Source: ABdhPJxwoD0EiQFf+7rgqTumGOUaiOiYizQOADtUbwoy+P/jmw6DFg/J4Q4QffVcbtqcMVqvU1avQw==
-X-Received: by 2002:adf:c40d:: with SMTP id v13mr29016331wrf.388.1630414026094; 
- Tue, 31 Aug 2021 05:47:06 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id q14sm11701297wrc.31.2021.08.31.05.47.05
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=uNWyDCJRg5z+YdrGcz6ue9XUC2vcsZfH2SlJlbhPC2Y=;
+ b=KGid8xcpDUBakrdNXcY0WPabZXGyv5MLMvCMBZx2D8X7CMH/bOr3cjHkTSBCj0tEj5
+ V7J7CIW5A2Y2dDYgQPSctKRunMTUfh7CkR4ZxmjU/wgJ9ApiFB1xPlF4+mBtuzHlyjYt
+ ZjvA+TQycnC5OX0PpRy+6nKYR9Mu/Krj/jZzSsL1WleyaRcFpSFjagOtZsK5WrAdKFMP
+ vdS/z5f5F0xoKXwzSN/B6FI+cSORg8qmgz4/VMo4tLmtIM7oAE+QTUt11bh2t6Iy2Mg9
+ qKD2NnMia4zOPcEWAOHYuv7ujPgq8FD1iFohjV0fn8LFwC35RKE/QcmlJlkYBzz8hkFZ
+ PLvg==
+X-Gm-Message-State: AOAM530Qdbj50rn0Q8sB7CrEB00DTgpH/AFU0hQ/qJVQOgKLmsu/WUYy
+ 21qsfc3RgAaoxCn7IWNNkAjOwNM3BmZcVG+W
+X-Google-Smtp-Source: ABdhPJwW/P17cLcvURrVKCOBQEktzDGC95e0OV9bMzMpRbkF9G1qN1z/I0VT8R05Fg8+WL7oGKrbKQ==
+X-Received: by 2002:adf:b745:: with SMTP id n5mr38295873wre.338.1630497766169; 
+ Wed, 01 Sep 2021 05:02:46 -0700 (PDT)
+Received: from abel.fritz.box (p5b0ea1b5.dip0.t-ipconnect.de. [91.14.161.181])
+ by smtp.gmail.com with ESMTPSA id
+ l7sm5641336wmj.9.2021.09.01.05.02.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 31 Aug 2021 05:47:05 -0700 (PDT)
-Date: Tue, 31 Aug 2021 14:47:03 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: guangming.cao@mediatek.com
-Message-ID: <YS4kx3thdJOu3uHX@phenom.ffwll.local>
-Mail-Followup-To: guangming.cao@mediatek.com,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Benjamin Gaignard <benjamin.gaignard@linaro.org>,
- Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>,
- Brian Starkey <Brian.Starkey@arm.com>,
- John Stultz <john.stultz@linaro.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- "open list:DMA-BUF HEAPS FRAMEWORK" <linux-media@vger.kernel.org>,
- "open list:DMA-BUF HEAPS FRAMEWORK" <dri-devel@lists.freedesktop.org>,
- "moderated list:DMA-BUF HEAPS FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- open list <linux-kernel@vger.kernel.org>,
- "moderated list:ARM/Mediatek SoC support"
- <linux-arm-kernel@lists.infradead.org>, 
- "moderated list:ARM/Mediatek SoC support" <linux-mediatek@lists.infradead.org>,
- wsd_upstream@mediatek.com, isaacm@codeaurora.org,
- sspatil@google.com, hridya@google.com
-References: <20210830023911.4410-1-guangming.cao@mediatek.com>
+ Wed, 01 Sep 2021 05:02:45 -0700 (PDT)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
+ <christian.koenig@amd.com>
+To: dri-devel@lists.freedesktop.org
+Date: Wed,  1 Sep 2021 14:02:38 +0200
+Message-Id: <20210901120240.7339-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210830023911.4410-1-guangming.cao@mediatek.com>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH] dma-buf: Add support for mapping
- buffers with DMA attributes
+Subject: [Linaro-mm-sig] Harden the dma-fence documentation a bit more
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,137 +78,24 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: isaacm@codeaurora.org, sspatil@google.com, wsd_upstream@mediatek.com,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- open list <linux-kernel@vger.kernel.org>, Liam Mark <lmark@codeaurora.org>,
- Brian Starkey <Brian.Starkey@arm.com>,
- "moderated list:DMA-BUF HEAPS FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- hridya@google.com, John Stultz <john.stultz@linaro.org>,
- "open list:DMA-BUF HEAPS FRAMEWORK" <dri-devel@lists.freedesktop.org>,
- Benjamin Gaignard <benjamin.gaignard@linaro.org>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- "moderated list:ARM/Mediatek SoC support" <linux-mediatek@lists.infradead.org>,
- Laura Abbott <labbott@redhat.com>,
- "moderated list:ARM/Mediatek SoC support"
- <linux-arm-kernel@lists.infradead.org>,
- "open list:DMA-BUF HEAPS FRAMEWORK" <linux-media@vger.kernel.org>
+Cc: linaro-mm-sig@lists.linaro.org, daniel@ffwll.ch,
+ linux-media@vger.kernel.org
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Mon, Aug 30, 2021 at 10:39:11AM +0800, guangming.cao@mediatek.com wrote:
-> From: Guangming Cao <Guangming.Cao@mediatek.com>
-> 
-> When mapping the memory represented by a dma-buf into a device's
-> address space, it might be desireable to map the memory with
-> certain DMA attributes. Thus, introduce the dma_mapping_attrs
-> field in the dma_buf_attachment structure so that when
-> the memory is mapped with dma_buf_map_attachment, it is mapped
-> with the desired DMA attributes.
-> 
-> Signed-off-by: Isaac J. Manjarres <isaacm@codeaurora.org>
-> Signed-off-by: Sandeep Patil <sspatil@google.com>
-> Signed-off-by: Guangming Cao <Guangming.Cao@mediatek.com>
+Hi guys,
 
-Can you pls include the code that's going to use this here too?
+while it is in most cases technically possible to not have a reference to the dma_fence when adding a callback it is usually a good idea to make sure to always have a reference anyway.
 
-At a glance all the attributes you might want to set are supposed to be
-under the control of the exporter, not the importer.
--Daniel
+Otherwise we can indeed see cases where this doesn't really work as intended like for example in the now fixed EPOLL code.
 
-> ---
->  drivers/dma-buf/heaps/cma_heap.c    | 6 ++++--
->  drivers/dma-buf/heaps/system_heap.c | 6 ++++--
->  include/linux/dma-buf.h             | 3 +++
->  3 files changed, 11 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma_heap.c
-> index 0c05b79870f9..2c9feb3bfc3e 100644
-> --- a/drivers/dma-buf/heaps/cma_heap.c
-> +++ b/drivers/dma-buf/heaps/cma_heap.c
-> @@ -99,9 +99,10 @@ static struct sg_table *cma_heap_map_dma_buf(struct dma_buf_attachment *attachme
->  {
->  	struct dma_heap_attachment *a = attachment->priv;
->  	struct sg_table *table = &a->table;
-> +	int attrs = attachment->dma_map_attrs;
->  	int ret;
->  
-> -	ret = dma_map_sgtable(attachment->dev, table, direction, 0);
-> +	ret = dma_map_sgtable(attachment->dev, table, direction, attrs);
->  	if (ret)
->  		return ERR_PTR(-ENOMEM);
->  	a->mapped = true;
-> @@ -113,9 +114,10 @@ static void cma_heap_unmap_dma_buf(struct dma_buf_attachment *attachment,
->  				   enum dma_data_direction direction)
->  {
->  	struct dma_heap_attachment *a = attachment->priv;
-> +	int attrs = attachment->dma_map_attrs;
->  
->  	a->mapped = false;
-> -	dma_unmap_sgtable(attachment->dev, table, direction, 0);
-> +	dma_unmap_sgtable(attachment->dev, table, direction, attrs);
->  }
->  
->  static int cma_heap_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
-> diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/heaps/system_heap.c
-> index 23a7e74ef966..fc7b1e02988e 100644
-> --- a/drivers/dma-buf/heaps/system_heap.c
-> +++ b/drivers/dma-buf/heaps/system_heap.c
-> @@ -130,9 +130,10 @@ static struct sg_table *system_heap_map_dma_buf(struct dma_buf_attachment *attac
->  {
->  	struct dma_heap_attachment *a = attachment->priv;
->  	struct sg_table *table = a->table;
-> +	int attrs = attachment->dma_map_attrs;
->  	int ret;
->  
-> -	ret = dma_map_sgtable(attachment->dev, table, direction, 0);
-> +	ret = dma_map_sgtable(attachment->dev, table, direction, attrs);
->  	if (ret)
->  		return ERR_PTR(ret);
->  
-> @@ -145,9 +146,10 @@ static void system_heap_unmap_dma_buf(struct dma_buf_attachment *attachment,
->  				      enum dma_data_direction direction)
->  {
->  	struct dma_heap_attachment *a = attachment->priv;
-> +	int attrs = attachment->dma_map_attrs;
->  
->  	a->mapped = false;
-> -	dma_unmap_sgtable(attachment->dev, table, direction, 0);
-> +	dma_unmap_sgtable(attachment->dev, table, direction, attrs);
->  }
->  
->  static int system_heap_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
-> diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
-> index efdc56b9d95f..4d650731766e 100644
-> --- a/include/linux/dma-buf.h
-> +++ b/include/linux/dma-buf.h
-> @@ -379,6 +379,8 @@ struct dma_buf_attach_ops {
->   * @importer_ops: importer operations for this attachment, if provided
->   * dma_buf_map/unmap_attachment() must be called with the dma_resv lock held.
->   * @importer_priv: importer specific attachment data.
-> + * @dma_map_attrs: DMA attributes to be used when the exporter maps the buffer
-> + * through dma_buf_map_attachment.
->   *
->   * This structure holds the attachment information between the dma_buf buffer
->   * and its user device(s). The list contains one attachment struct per device
-> @@ -399,6 +401,7 @@ struct dma_buf_attachment {
->  	const struct dma_buf_attach_ops *importer_ops;
->  	void *importer_priv;
->  	void *priv;
-> +	unsigned long dma_map_attrs;
->  };
->  
->  /**
-> -- 
-> 2.17.1
-> 
+Regards,
+Christian.
 
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
