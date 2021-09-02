@@ -2,73 +2,70 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4910B3FD92E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Sep 2021 14:03:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B34973FEF8B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Sep 2021 16:37:26 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BB95063629
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Sep 2021 12:03:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 865B461017
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Sep 2021 14:37:24 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id AB10F63538; Wed,  1 Sep 2021 12:02:58 +0000 (UTC)
+	id 99C7261A44; Thu,  2 Sep 2021 14:37:22 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B11EA61081;
-	Wed,  1 Sep 2021 12:02:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1BE1E60B8D;
+	Thu,  2 Sep 2021 14:37:19 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id EADDB60A59
- for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Sep 2021 12:02:50 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 568FA60A8C
+ for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Sep 2021 14:37:17 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id D869560F1F; Wed,  1 Sep 2021 12:02:50 +0000 (UTC)
+ id 54A5560B2E; Thu,  2 Sep 2021 14:37:17 +0000 (UTC)
 Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
  [209.85.221.47])
- by lists.linaro.org (Postfix) with ESMTPS id BD4B860F1F
- for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Sep 2021 12:02:48 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id b6so4085535wrh.10
- for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Sep 2021 05:02:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=t19VNYD7z90zjqfUtw8wZympFk0WCxWbJcimp6O0h0E=;
- b=G6ETOEwW1DPJao3SNyHPhkWySxellpwcrOanOx+H/U7C60K1lguHGdZmCJRhXBf3wf
- DBTcqxD2TEZNZSpFgA2EDgdJQU2E86xO5+toACv95jPAd5le/2TG6Vy1WGZJs+gH8kGh
- ek7/eCwhfvaygdmXw+kUt35t/X6Dr8xxXyg2RzH7xXSvxXi0kVpusUS2v3NW6rkMmgU/
- bxMvFO6cbDpiMe6jPWR5ZjG2TRrT2r+PxeAK2jBwsBILg+CM2IZ2sBusluOmYs83rD6f
- s4WH4X2oNm2nxupCldljLiylGJhtgBKgqjCKSXoVB2x7OIsXE+gh0TYAGmA3VVA42Ft1
- o4Mg==
+ by lists.linaro.org (Postfix) with ESMTPS id 49FED60B57
+ for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Sep 2021 14:37:15 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id i6so3317890wrv.2
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 02 Sep 2021 07:37:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=CT4LAspdSBwDkfapAAwxnh3D14vFcnZ3QM8rnn3hC1E=;
+ b=hccyw/Ba5hg0YsYFQ1hC6F4QOU6QYLFs/YLEPT/bx5DPd9gLmKg7nBFjrR74RwDtdb
+ xCoyWUJGIRQ5y5KsnR6a19WJV6B1JqA3VXG55x3t1SiI6rqGUB1DZOgJy9XCYj9E4vx3
+ htOiY2t7CjVWRQ2JzzOz2Y8bSfc8qkd5XU2SA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=t19VNYD7z90zjqfUtw8wZympFk0WCxWbJcimp6O0h0E=;
- b=msKS3VA95AAUclCaKBY/axztrAszqoA86HhZjHD2l7Bk4vOrpcecUPJ7Xlc4f+iWjv
- UldR10VjmgH7vn+bcSQz1KFOtH0yxuWzul9g8KA2TBQ6TOwC6mPNeDTSi039ByRZH86S
- UhsjhtQhB3kdc/X1oKgrGRKU+7hDU/lsF+8OQTqKwU8vr4+vGZoZjA8YibpAxdPNlOng
- mkIdIBgOpOnDMomrbjvBS0qtLdqJRxOFnIJ09163XJUE6DhS3bdGevFmY3LYTbFMOMD3
- dRUHxaOsbFwR5t3IjokB5vkhdRMsYj178wV5eslokfQlg++Wxv877bm9hk+VOy5+C4Jq
- 9E0A==
-X-Gm-Message-State: AOAM530aAUbu/NP7KahnHwkDx9m1fQCaUe+sUSjPYtudba2j57eKv+Xa
- /iNkpXDc1nTlpbquka1GGJQ=
-X-Google-Smtp-Source: ABdhPJwwDwe3tgn7MblJIyLmFJyjf2zJInaWT7+HVsxQIqE9k+Ba7sN30IGAwqd20tWoBoVKXpyneA==
-X-Received: by 2002:adf:90d0:: with SMTP id i74mr36369414wri.185.1630497767938; 
- Wed, 01 Sep 2021 05:02:47 -0700 (PDT)
-Received: from abel.fritz.box (p5b0ea1b5.dip0.t-ipconnect.de. [91.14.161.181])
- by smtp.gmail.com with ESMTPSA id
- l7sm5641336wmj.9.2021.09.01.05.02.47
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=CT4LAspdSBwDkfapAAwxnh3D14vFcnZ3QM8rnn3hC1E=;
+ b=C9ZNGP+khB+ZHNYFy8JI0//Gzarex6F25EhoOZTwBLnFrrgAB0o4e7QFghXXkLoAwN
+ +eLv7VcOnqINnj30kwQLOQZN3gsL6U8ssyDFAQ0+mx0Ebpdl0mHkYzAPQwsu/MpQWJFv
+ i7thSGJPaG3UzMy7RfRW7qo288On70q8rjdb8gkoxhNFOwnwf+ek8Klw8itiml6xiYDQ
+ +Hto83RnEf2XSSzBxNcVRIBFiJbvUh3RfDAlvxNuEmG+aGcoiqWvumgAdF0eL5t11UnB
+ XMf8+qiGxGCL0SZq8RUpjeja4wFBGt/iZ4r3rrLDEh8cwP9fJCkYmtIP87PAtHr+K0Y0
+ 5u5g==
+X-Gm-Message-State: AOAM530J5nX04Zc9hINwAOYQNt9gd9VmHJmnCKlQaY4aSsZDMKRr10Y3
+ hfqxtuSQiFd4MKgfXNdsjRA4ng==
+X-Google-Smtp-Source: ABdhPJw3CeDkQUgOa1ZqnOlCigj/LcT6+bjut2s4XIt/vXZTFskefL6mrH1JT9ZeSEabF6naeFODww==
+X-Received: by 2002:adf:c508:: with SMTP id q8mr4287862wrf.260.1630593434296; 
+ Thu, 02 Sep 2021 07:37:14 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id t14sm2035337wrw.59.2021.09.02.07.37.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 Sep 2021 05:02:47 -0700 (PDT)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
- <christian.koenig@amd.com>
-To: dri-devel@lists.freedesktop.org
-Date: Wed,  1 Sep 2021 14:02:40 +0200
-Message-Id: <20210901120240.7339-3-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210901120240.7339-1-christian.koenig@amd.com>
+ Thu, 02 Sep 2021 07:37:13 -0700 (PDT)
+Date: Thu, 2 Sep 2021 16:37:12 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <YTDhmM6jWp/k8UEa@phenom.ffwll.local>
 References: <20210901120240.7339-1-christian.koenig@amd.com>
+ <20210901120240.7339-2-christian.koenig@amd.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20210901120240.7339-2-christian.koenig@amd.com>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH 2/2] dma-buf: clarify dma_fence_add_callback
- documentation
+Subject: Re: [Linaro-mm-sig] [PATCH 1/2] dma-buf: clarify
+ dma_fence_ops->wait documentation
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -82,47 +79,75 @@ List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: linaro-mm-sig@lists.linaro.org, daniel@ffwll.ch,
- linux-media@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-VGhhdCB0aGUgY2FsbGVyIGRvZXNuJ3QgbmVlZCB0byBrZWVwIGEgcmVmZXJlbmNlIGlzIHJhdGhl
-cgpyaXNreSBhbmQgbm90IGRlZmVuc2l2ZSBhdCBhbGwuCgpFc3BlY2lhbGx5IGRtYV9idWZfcG9s
-bCBnb3QgdGhhdCBob3JyaWJsZSB3cm9uZywgc28gYmV0dGVyCnJlbW92ZSB0aGF0IHNlbnRlbmNl
-IGFuZCBhbHNvIGNsYXJpZnkgdGhhdCB0aGUgY2FsbGJhY2sKbWlnaHQgYmUgY2FsbGVkIGluIGF0
-b21pYyBvciBpbnRlcnJ1cHQgY29udGV4dC4KClNpZ25lZC1vZmYtYnk6IENocmlzdGlhbiBLw7Zu
-aWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4KLS0tCiBkcml2ZXJzL2RtYS1idWYvZG1hLWZl
-bmNlLmMgfCAxMyArKysrKy0tLS0tLS0tCiAxIGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCsp
-LCA4IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2Uu
-YyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYwppbmRleCBjZTBmNWVmZjU3NWQuLjFlODJl
-Y2Q0NDNmYSAxMDA2NDQKLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jCisrKyBiL2Ry
-aXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYwpAQCAtNjE2LDIwICs2MTYsMTcgQEAgRVhQT1JUX1NZ
-TUJPTChkbWFfZmVuY2VfZW5hYmxlX3N3X3NpZ25hbGluZyk7CiAgKiBAY2I6IHRoZSBjYWxsYmFj
-ayB0byByZWdpc3RlcgogICogQGZ1bmM6IHRoZSBmdW5jdGlvbiB0byBjYWxsCiAgKgorICogQWRk
-IGEgc29mdHdhcmUgY2FsbGJhY2sgdG8gdGhlIGZlbmNlLiBUaGUgY2FsbGVyIHNob3VsZCBrZWVw
-IGEgcmVmZXJlbmNlIHRvCisgKiB0aGUgZmVuY2UuCisgKgogICogQGNiIHdpbGwgYmUgaW5pdGlh
-bGl6ZWQgYnkgZG1hX2ZlbmNlX2FkZF9jYWxsYmFjaygpLCBubyBpbml0aWFsaXphdGlvbgogICog
-YnkgdGhlIGNhbGxlciBpcyByZXF1aXJlZC4gQW55IG51bWJlciBvZiBjYWxsYmFja3MgY2FuIGJl
-IHJlZ2lzdGVyZWQKICAqIHRvIGEgZmVuY2UsIGJ1dCBhIGNhbGxiYWNrIGNhbiBvbmx5IGJlIHJl
-Z2lzdGVyZWQgdG8gb25lIGZlbmNlIGF0IGEgdGltZS4KICAqCi0gKiBOb3RlIHRoYXQgdGhlIGNh
-bGxiYWNrIGNhbiBiZSBjYWxsZWQgZnJvbSBhbiBhdG9taWMgY29udGV4dC4gIElmCi0gKiBmZW5j
-ZSBpcyBhbHJlYWR5IHNpZ25hbGVkLCB0aGlzIGZ1bmN0aW9uIHdpbGwgcmV0dXJuIC1FTk9FTlQg
-KGFuZAorICogSWYgZmVuY2UgaXMgYWxyZWFkeSBzaWduYWxlZCwgdGhpcyBmdW5jdGlvbiB3aWxs
-IHJldHVybiAtRU5PRU5UIChhbmQKICAqICpub3QqIGNhbGwgdGhlIGNhbGxiYWNrKS4KICAqCi0g
-KiBBZGQgYSBzb2Z0d2FyZSBjYWxsYmFjayB0byB0aGUgZmVuY2UuIFNhbWUgcmVzdHJpY3Rpb25z
-IGFwcGx5IHRvCi0gKiByZWZjb3VudCBhcyBpdCBkb2VzIHRvIGRtYV9mZW5jZV93YWl0KCksIGhv
-d2V2ZXIgdGhlIGNhbGxlciBkb2Vzbid0IG5lZWQgdG8KLSAqIGtlZXAgYSByZWZjb3VudCB0byBm
-ZW5jZSBhZnRlcndhcmQgZG1hX2ZlbmNlX2FkZF9jYWxsYmFjaygpIGhhcyByZXR1cm5lZDoKLSAq
-IHdoZW4gc29mdHdhcmUgYWNjZXNzIGlzIGVuYWJsZWQsIHRoZSBjcmVhdG9yIG9mIHRoZSBmZW5j
-ZSBpcyByZXF1aXJlZCB0byBrZWVwCi0gKiB0aGUgZmVuY2UgYWxpdmUgdW50aWwgYWZ0ZXIgaXQg
-c2lnbmFscyB3aXRoIGRtYV9mZW5jZV9zaWduYWwoKS4gVGhlIGNhbGxiYWNrCi0gKiBpdHNlbGYg
-Y2FuIGJlIGNhbGxlZCBmcm9tIGlycSBjb250ZXh0LgorICogTm90ZSB0aGF0IHRoZSBjYWxsYmFj
-ayBjYW4gYmUgY2FsbGVkIGZyb20gYW4gYXRvbWljIGNvbnRleHQgb3IgaXJxIGNvbnRleHQuCiAg
-KgogICogUmV0dXJucyAwIGluIGNhc2Ugb2Ygc3VjY2VzcywgLUVOT0VOVCBpZiB0aGUgZmVuY2Ug
-aXMgYWxyZWFkeSBzaWduYWxlZAogICogYW5kIC1FSU5WQUwgaW4gY2FzZSBvZiBlcnJvci4KLS0g
-CjIuMjUuMQoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-TGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3Jn
-Cmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+On Wed, Sep 01, 2021 at 02:02:39PM +0200, Christian K=F6nig wrote:
+> This callback is pretty much deprecated and should not be used by new imp=
+lementations.
+> =
+
+> Clarify that in the documentation as well.
+> =
+
+> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+
+
+> ---
+>  include/linux/dma-fence.h | 10 +++-------
+>  1 file changed, 3 insertions(+), 7 deletions(-)
+> =
+
+> diff --git a/include/linux/dma-fence.h b/include/linux/dma-fence.h
+> index 6ffb4b2c6371..a44e42b86c2a 100644
+> --- a/include/linux/dma-fence.h
+> +++ b/include/linux/dma-fence.h
+> @@ -214,19 +214,15 @@ struct dma_fence_ops {
+>  	 * Custom wait implementation, defaults to dma_fence_default_wait() if
+>  	 * not set.
+>  	 *
+> -	 * The dma_fence_default_wait implementation should work for any fence,=
+ as long
+> -	 * as @enable_signaling works correctly. This hook allows drivers to
+> -	 * have an optimized version for the case where a process context is
+> -	 * already available, e.g. if @enable_signaling for the general case
+> -	 * needs to set up a worker thread.
+> +	 * Deprecated and should not be used by new implementations. Only used
+> +	 * by existing implementations which need special handling for their
+> +	 * hardware reset procedure.
+>  	 *
+>  	 * Must return -ERESTARTSYS if the wait is intr =3D true and the wait w=
+as
+>  	 * interrupted, and remaining jiffies if fence has signaled, or 0 if wa=
+it
+>  	 * timed out. Can also return other error values on custom implementati=
+ons,
+>  	 * which should be treated as if the fence is signaled. For example a h=
+ardware
+>  	 * lockup could be reported like that.
+> -	 *
+> -	 * This callback is optional.
+>  	 */
+>  	signed long (*wait)(struct dma_fence *fence,
+>  			    bool intr, signed long timeout);
+> -- =
+
+> 2.25.1
+> =
+
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
