@@ -2,52 +2,64 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5AE7740499F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  9 Sep 2021 13:41:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D325A405AEA
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  9 Sep 2021 18:31:12 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 789326338E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  9 Sep 2021 11:41:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B319D63523
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  9 Sep 2021 16:31:11 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 0319661021; Thu,  9 Sep 2021 11:41:48 +0000 (UTC)
+	id 1E3D56325F; Thu,  9 Sep 2021 16:31:11 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 32FCF6081B;
-	Thu,  9 Sep 2021 11:41:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6EB6960B91;
+	Thu,  9 Sep 2021 16:31:08 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 445186088A
- for <linaro-mm-sig@lists.linaro.org>; Thu,  9 Sep 2021 11:41:24 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 1EFA16055B
+ for <linaro-mm-sig@lists.linaro.org>; Thu,  9 Sep 2021 16:31:07 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 14848610CB; Thu,  9 Sep 2021 11:41:24 +0000 (UTC)
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by lists.linaro.org (Postfix) with ESMTPS id BB9F86081B
- for <linaro-mm-sig@lists.linaro.org>; Thu,  9 Sep 2021 11:41:21 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 920C361186;
- Thu,  9 Sep 2021 11:41:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1631187680;
- bh=sQlpCIQOIZc/1gWnMmczeaTUI9JHZ8cwU8Uv5hxetBk=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=YCS3GE+/i3ZMLCH/8H6Pu8OXrp/U6Bk86aMJ+Mw+q0xj6UeUurpsAxT9GCTaWqywN
- JOH25THMcnqHISenY8eJmt/7aKj48sxzusMbnHUjA31oVK8gVyoZbskXlyDNN6WKjU
- O5OqCZHVVWVCLhsgXhkYcDiGOYxjB1lBKqByaU+YoguIJoUMywQniOSyr+JBkryMrH
- jeAJBVGivRelE93h+fH7e2G5lVNNBAZeZCK8mbJF+Kq5Pyj+aCvRQoFS6tWN+yDL/i
- TYhpIRGkLjQdxzaLe4jz08N28t+ZNLzbHG40wCcXLZcehxmMICKmw35u7eHvYwasHr
- Gna7XmHxTzHHA==
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Thu,  9 Sep 2021 07:37:04 -0400
-Message-Id: <20210909114106.141462-10-sashal@kernel.org>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210909114106.141462-1-sashal@kernel.org>
-References: <20210909114106.141462-1-sashal@kernel.org>
+ id 13CB160B91; Thu,  9 Sep 2021 16:31:07 +0000 (UTC)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+ [209.85.221.54])
+ by lists.linaro.org (Postfix) with ESMTPS id 0926F6055B
+ for <linaro-mm-sig@lists.linaro.org>; Thu,  9 Sep 2021 16:31:05 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id d6so3409413wrc.11
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 09 Sep 2021 09:31:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=u+0jFX+c9As4mGNIOMW4VKBlVBkjOIBw3KEyFedYOaI=;
+ b=bbFcCygdOWBh3I3p1p2h3+WeDK8qco4C6NmJcfldjivlawaHz7aMOiMt8tR6Ty5xYr
+ vFIMdU+u7QOzp2X6Z7EGAQ/SFyr7BKtd5WYfUkWSQ2Ava5SM/tHdgE5fRjgJJxib5ke4
+ 9QTWO2YtVY+iq1ykq9E9y12HG20+qdvptEv8mRNmSerDF70CMHafid7rHTLd9JDZOZXB
+ 6poQ3PgFmrZnaIbAes1l1NiiSYSNzbSLSNRwGPZXLcF4SeIH/Gfp1VUnBYI1HTlW9398
+ R1Bc3c3BGH3fmESVlZvXOO+9UdyQJ6Kh+pj1aettYb/7OahVLOuhR2ooRP2zky/oQLsZ
+ TotA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=u+0jFX+c9As4mGNIOMW4VKBlVBkjOIBw3KEyFedYOaI=;
+ b=ENqvfGfYP7rlHSCO26MePYbPKGEHdM1eNFKsz7EofDFEeqApGcZ7f3bXorUQcTOjJY
+ b9xsI/xyeGOtJjGU3p8hptSuAx3VDe6SglnyGufRFKUWnJYNxiVPR8n0BSYMkrzMXCA0
+ Huqtty5cSeYgWODO6bbKivbXmFIwK+LsUxYmhYBflXA4zOfA0LB/UImp/51Lxovw6Xfa
+ sfpbIYRWoeXJZ5AIvdLt0yvz8cLKoOVFL1UpLgbSVnRJyFqzbAqPFkdklEj7OZJqc46v
+ Vf2wuuRyk7OI9bFMRE9YWeAAkKCNUX9Wry7DVlx3aXewe6OpZlHyWpsXU74yqfquYxUT
+ 1t1Q==
+X-Gm-Message-State: AOAM532Zm4pYLbVPYy4ninPPb1PbvT8mlqtLbL6atueb8RD8T6A9U+40
+ kZf+mBwo8PLv970SUO7DbgBfEprXqvncvkr/jFA=
+X-Google-Smtp-Source: ABdhPJziNKyewTTtSu5pziJeaODH5nE8F9cT5n7HbZ3pWAcwqx9wKwmPdZrhzS9wqwHAw5W+ht5QMcC2TK8ie1veLgk=
+X-Received: by 2002:a5d:4488:: with SMTP id j8mr4732581wrq.260.1631205063988; 
+ Thu, 09 Sep 2021 09:31:03 -0700 (PDT)
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
+References: <20210903184806.1680887-1-robdclark@gmail.com>
+ <i-XmBd_5J3_d8cdm-IT6Ery2kHN0FPZCX968aU5idvxQxNlvDJguLLThtF2NF15LF8gGsH4uI2w0s0CL_39KGpzoGpuCgcz2_-4Wjf3AYEM=@emersion.fr>
+In-Reply-To: <i-XmBd_5J3_d8cdm-IT6Ery2kHN0FPZCX968aU5idvxQxNlvDJguLLThtF2NF15LF8gGsH4uI2w0s0CL_39KGpzoGpuCgcz2_-4Wjf3AYEM=@emersion.fr>
+From: Rob Clark <robdclark@gmail.com>
+Date: Thu, 9 Sep 2021 09:35:31 -0700
+Message-ID: <CAF6AEGuD2bnFpmSWtGxU5+AFj1HVKtnOZmLKRr-pDVbLn0nPVw@mail.gmail.com>
+To: Simon Ser <contact@emersion.fr>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.14 010/252] dma-buf: fix
- dma_resv_test_signaled test_all handling v2
+Subject: Re: [Linaro-mm-sig] [PATCH v3 0/9] dma-fence: Deadline awareness
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,57 +72,48 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Sasha Levin <sashal@kernel.org>, dri-devel@lists.freedesktop.org,
- linaro-mm-sig@lists.linaro.org,
- =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
- linux-media@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: Rob Clark <robdclark@chromium.org>,
+ Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
+ Gustavo Padovan <gustavo@padovan.org>, Luben Tuikov <luben.tuikov@amd.com>,
+ =?UTF-8?Q?Michel_D=C3=A4nzer?= <michel@daenzer.net>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ Steven Price <steven.price@arm.com>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Pekka Paalanen <ppaalanen@gmail.com>,
+ Boris Brezillon <boris.brezillon@collabora.com>, Melissa Wen <mwen@igalia.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Alex Deucher <alexander.deucher@amd.com>,
+ Tian Tao <tiantao6@hisilicon.com>, freedreno <freedreno@lists.freedesktop.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ linux-arm-msm <linux-arm-msm@vger.kernel.org>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-RnJvbTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPgoKWyBVcHN0
-cmVhbSBjb21taXQgOWQzODgxNGQxZTM0NmVhMzdhNTFjYmYzMWY0NDI0YzlkMDU5NDU5ZSBdCgpB
-cyB0aGUgbmFtZSBpbXBsaWVzIGlmIHRlc3RpbmcgYWxsIGZlbmNlcyBpcyByZXF1ZXN0ZWQgd2UK
-c2hvdWxkIGluZGVlZCB0ZXN0IGFsbCBmZW5jZXMgYW5kIG5vdCBza2lwIHRoZSBleGNsdXNpdmUK
-b25lIGJlY2F1c2Ugd2Ugc2VlIHNoYXJlZCBvbmVzLgoKdjI6IGZpeCBsb2dpYyBvbmNlIG1vcmUK
-ClNpZ25lZC1vZmYtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNv
-bT4KUmV2aWV3ZWQtYnk6IERhbmllbCBWZXR0ZXIgPGRhbmllbC52ZXR0ZXJAZmZ3bGwuY2g+Ckxp
-bms6IGh0dHBzOi8vcGF0Y2h3b3JrLmZyZWVkZXNrdG9wLm9yZy9wYXRjaC9tc2dpZC8yMDIxMDcw
-MjExMTY0Mi4xNzI1OS0zLWNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbQpTaWduZWQtb2ZmLWJ5OiBT
-YXNoYSBMZXZpbiA8c2FzaGFsQGtlcm5lbC5vcmc+Ci0tLQogZHJpdmVycy9kbWEtYnVmL2RtYS1y
-ZXN2LmMgfCAzMyArKysrKysrKysrKystLS0tLS0tLS0tLS0tLS0tLS0tLS0KIDEgZmlsZSBjaGFu
-Z2VkLCAxMiBpbnNlcnRpb25zKCspLCAyMSBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kcml2
-ZXJzL2RtYS1idWYvZG1hLXJlc3YuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jCmluZGV4
-IGYyNmM3MTc0N2Q0My4uZTc0NGZkODdjNjNjIDEwMDY0NAotLS0gYS9kcml2ZXJzL2RtYS1idWYv
-ZG1hLXJlc3YuYworKysgYi9kcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYwpAQCAtNjE1LDI1ICs2
-MTUsMjEgQEAgc3RhdGljIGlubGluZSBpbnQgZG1hX3Jlc3ZfdGVzdF9zaWduYWxlZF9zaW5nbGUo
-c3RydWN0IGRtYV9mZW5jZSAqcGFzc2VkX2ZlbmNlKQogICovCiBib29sIGRtYV9yZXN2X3Rlc3Rf
-c2lnbmFsZWQoc3RydWN0IGRtYV9yZXN2ICpvYmosIGJvb2wgdGVzdF9hbGwpCiB7Ci0JdW5zaWdu
-ZWQgaW50IHNlcSwgc2hhcmVkX2NvdW50OworCXN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlOworCXVu
-c2lnbmVkIGludCBzZXE7CiAJaW50IHJldDsKIAogCXJjdV9yZWFkX2xvY2soKTsKIHJldHJ5Ogog
-CXJldCA9IHRydWU7Ci0Jc2hhcmVkX2NvdW50ID0gMDsKIAlzZXEgPSByZWFkX3NlcWNvdW50X2Jl
-Z2luKCZvYmotPnNlcSk7CiAKIAlpZiAodGVzdF9hbGwpIHsKIAkJc3RydWN0IGRtYV9yZXN2X2xp
-c3QgKmZvYmogPSBkbWFfcmVzdl9zaGFyZWRfbGlzdChvYmopOwotCQl1bnNpZ25lZCBpbnQgaTsK
-LQotCQlpZiAoZm9iaikKLQkJCXNoYXJlZF9jb3VudCA9IGZvYmotPnNoYXJlZF9jb3VudDsKKwkJ
-dW5zaWduZWQgaW50IGksIHNoYXJlZF9jb3VudDsKIAorCQlzaGFyZWRfY291bnQgPSBmb2JqID8g
-Zm9iai0+c2hhcmVkX2NvdW50IDogMDsKIAkJZm9yIChpID0gMDsgaSA8IHNoYXJlZF9jb3VudDsg
-KytpKSB7Ci0JCQlzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZTsKLQogCQkJZmVuY2UgPSByY3VfZGVy
-ZWZlcmVuY2UoZm9iai0+c2hhcmVkW2ldKTsKIAkJCXJldCA9IGRtYV9yZXN2X3Rlc3Rfc2lnbmFs
-ZWRfc2luZ2xlKGZlbmNlKTsKIAkJCWlmIChyZXQgPCAwKQpAQCAtNjQxLDI0ICs2MzcsMTkgQEAg
-Ym9vbCBkbWFfcmVzdl90ZXN0X3NpZ25hbGVkKHN0cnVjdCBkbWFfcmVzdiAqb2JqLCBib29sIHRl
-c3RfYWxsKQogCQkJZWxzZSBpZiAoIXJldCkKIAkJCQlicmVhazsKIAkJfQotCi0JCWlmIChyZWFk
-X3NlcWNvdW50X3JldHJ5KCZvYmotPnNlcSwgc2VxKSkKLQkJCWdvdG8gcmV0cnk7CiAJfQogCi0J
-aWYgKCFzaGFyZWRfY291bnQpIHsKLQkJc3RydWN0IGRtYV9mZW5jZSAqZmVuY2VfZXhjbCA9IGRt
-YV9yZXN2X2V4Y2xfZmVuY2Uob2JqKTsKLQotCQlpZiAoZmVuY2VfZXhjbCkgewotCQkJcmV0ID0g
-ZG1hX3Jlc3ZfdGVzdF9zaWduYWxlZF9zaW5nbGUoZmVuY2VfZXhjbCk7Ci0JCQlpZiAocmV0IDwg
-MCkKLQkJCQlnb3RvIHJldHJ5OworCWZlbmNlID0gZG1hX3Jlc3ZfZXhjbF9mZW5jZShvYmopOwor
-CWlmIChyZXQgJiYgZmVuY2UpIHsKKwkJcmV0ID0gZG1hX3Jlc3ZfdGVzdF9zaWduYWxlZF9zaW5n
-bGUoZmVuY2UpOworCQlpZiAocmV0IDwgMCkKKwkJCWdvdG8gcmV0cnk7CiAKLQkJCWlmIChyZWFk
-X3NlcWNvdW50X3JldHJ5KCZvYmotPnNlcSwgc2VxKSkKLQkJCQlnb3RvIHJldHJ5OwotCQl9CiAJ
-fQogCisJaWYgKHJlYWRfc2VxY291bnRfcmV0cnkoJm9iai0+c2VxLCBzZXEpKQorCQlnb3RvIHJl
-dHJ5OworCiAJcmN1X3JlYWRfdW5sb2NrKCk7CiAJcmV0dXJuIHJldDsKIH0KLS0gCjIuMzAuMgoK
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
-LXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8v
-bGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+On Thu, Sep 9, 2021 at 9:16 AM Simon Ser <contact@emersion.fr> wrote:
+>
+> Out of curiosity, would it be reasonable to allow user-space (more
+> precisely, the compositor) to set the deadline via an IOCTL without
+> actually performing an atomic commit with the FB?
+>
+> Some compositors might want to wait themselves for FB fence completions
+> to ensure a client doesn't block the whole desktop (by submitting a
+> very costly rendering job). In this case it would make sense for the
+> compositor to indicate that it intends to display the buffer on next
+> vblank if it's ready by that point, without queueing a page-flip yet.
+
+Yes, I think it would.. and "dma-buf/sync_file: Add SET_DEADLINE
+ioctl" adds such an ioctl.. just for the benefit of igt tests at this
+point, but the thought was it would be also used by compositors that
+are doing such frame scheduling.  Ofc danvet is a bit grumpy that
+there isn't a more real (than igt) userspace for the ioctl yet ;-)
+
+BR,
+-R
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
