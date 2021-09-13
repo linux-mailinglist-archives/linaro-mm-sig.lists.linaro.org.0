@@ -2,52 +2,71 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE74540769D
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Sep 2021 14:55:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ACD1A408C45
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Sep 2021 15:17:26 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 757E9623DB
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Sep 2021 12:55:12 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EAA7B61F3E
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Sep 2021 13:17:24 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 55B2C63258; Sat, 11 Sep 2021 12:55:11 +0000 (UTC)
+	id 7CAD5623DC; Mon, 13 Sep 2021 13:17:20 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C9A75608C3;
-	Sat, 11 Sep 2021 12:55:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C1AE661016;
+	Mon, 13 Sep 2021 13:17:15 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id A3E6C60619
- for <linaro-mm-sig@lists.linaro.org>; Sat, 11 Sep 2021 12:55:06 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 5CE3460591
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Sep 2021 13:17:14 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 974E460A49; Sat, 11 Sep 2021 12:55:06 +0000 (UTC)
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
- by lists.linaro.org (Postfix) with ESMTPS id 5903660619
- for <linaro-mm-sig@lists.linaro.org>; Sat, 11 Sep 2021 12:55:04 +0000 (UTC)
-X-IronPort-AV: E=McAfee;i="6200,9189,10103"; a="221333059"
-X-IronPort-AV: E=Sophos;i="5.85,285,1624345200"; d="scan'208";a="221333059"
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
- by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 11 Sep 2021 05:55:02 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.85,285,1624345200"; d="scan'208";a="470958122"
-Received: from lkp-server01.sh.intel.com (HELO 730d49888f40) ([10.239.97.150])
- by orsmga007.jf.intel.com with ESMTP; 11 Sep 2021 05:55:00 -0700
-Received: from kbuild by 730d49888f40 with local (Exim 4.92)
- (envelope-from <lkp@intel.com>)
- id 1mP2X6-0005Ro-1X; Sat, 11 Sep 2021 12:55:00 +0000
-Date: Sat, 11 Sep 2021 20:54:18 +0800
-From: kernel test robot <lkp@intel.com>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
- linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
+ id 5AAE460F13; Mon, 13 Sep 2021 13:17:14 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+ [209.85.221.41])
+ by lists.linaro.org (Postfix) with ESMTPS id 528C860591
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Sep 2021 13:17:12 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id u15so8599156wru.6
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Sep 2021 06:17:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ZdomM/e/zSdALEInWCh/AvZjZ5yHPc4saWmSbkGx8Dc=;
+ b=ouCR+3aNsA1DiTowvBNcV8DKE3ifr2meLpymuJYbnE0iyPBxH3K2CRGIogq0MrDrRd
+ Ah1C/sRwYxZoygqorAHIuOyDajlC5xLvlNs/P+aq4En6ifOF1IaRUtwN/DPE7u0t289Q
+ BkzADtUG7taEXdtKsr9cZEPU2cggQoh7zrxMN1S6yUHPn0qYMQr246TdMCeTUJWI6B5C
+ hX7gGoP5jEq04DtHwdWuSCAVJEIKnvaH1LaTNVMsRzD1qScXKm8R3xxpd+dtekJmHpjr
+ 90+O9aUK5BlBYMY/H4cT3mg98HMNCHS9z0/dSn3DbSxoBFYcQEOB5XD5A3HgQ4xhmzi/
+ +v2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=ZdomM/e/zSdALEInWCh/AvZjZ5yHPc4saWmSbkGx8Dc=;
+ b=vAVmlxO2NRmguOUvZxmgTSBe02FuYIV1+lvL1oD+TxOKOUX0V/MtCsrUnCbk8HIP1o
+ lclRaZ0O+E2B2NxR0EgachzIbJbCXmAjbQzycRR2RNmmdNnGU/vmkBIzQAdR+jOeCNW7
+ zGh+RDQFxJsPJGLXwlXd/QLPiNRavajxPkPwgev/LyqFLiw8/H7XxgT5WA997O4RfYZ+
+ lCVp2Ua4fvJ5l9mvQS6NggsECzIFM0JdJaPhNivfdSpdyS4u9kREOjCaH+Au5jWlGd1k
+ mKunvWT2sf7useWBojtGkMt7f22ygny+fGvaqkB7lipN8STgplfJgX1agnDYTuf6cbP5
+ 0UUg==
+X-Gm-Message-State: AOAM5308lzLS1TshAdWzuFuaRJ2uPznswVv3jBUZd18fPrZbrvS4JM0n
+ Z/moe4ruKcf6Hg5SPADyQmtFj3vTP+ly6vwR
+X-Google-Smtp-Source: ABdhPJwqVroUXWf2cq8qtCQb/MmqMUlY4BONTjLjBugzEnJvbKfR5QsL1Vb0BBVo//Fn92ciq/iymg==
+X-Received: by 2002:a5d:4b50:: with SMTP id w16mr12486672wrs.71.1631539031462; 
+ Mon, 13 Sep 2021 06:17:11 -0700 (PDT)
+Received: from abel.fritz.box (p5b0ea1b5.dip0.t-ipconnect.de. [91.14.161.181])
+ by smtp.gmail.com with ESMTPSA id
+ h18sm7602834wrb.33.2021.09.13.06.17.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Sep 2021 06:17:10 -0700 (PDT)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
+ <christian.koenig@amd.com>
+To: linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
  linux-media@vger.kernel.org
-Message-ID: <20210911125418.GA43370@6494e1c1ac26>
-References: <20210910082655.82168-4-christian.koenig@amd.com>
+Date: Mon, 13 Sep 2021 15:16:41 +0200
+Message-Id: <20210913131707.45639-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210910082655.82168-4-christian.koenig@amd.com>
-X-Patchwork-Hint: ignore
-User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH] dma-buf: fix noderef.cocci warnings
+Subject: [Linaro-mm-sig] Deploying new iterator interface for dma-buf
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -60,48 +79,32 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: kbuild-all@lists.01.org, daniel@ffwll.ch
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: intel-gfx@lists.freedesktop.org, daniel@ffwll.ch
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-From: kernel test robot <lkp@intel.com>
+Hi everybody,
 
-drivers/dma-buf/dma-resv.c:525:7-13: ERROR: application of sizeof to pointer
+we recently found that a good bunch of the RCU accesses to the dma_resv object are actually not correctly protected.
 
- sizeof when applied to a pointer typed expression gives the size of
- the pointer
+Those where fixed by either dropping the RCU approach and taking appropriate locks or using a central function to return the current fences as array and then work with that snapshot.
 
-Generated by: scripts/coccinelle/misc/noderef.cocci
+This set now tries to prevent adding any new broken code by rolling out two new interfaces to access the fences in a dma_resv object:
 
-CC: Christian K=F6nig <ckoenig.leichtzumerken@gmail.com>
-Reported-by: kernel test robot <lkp@intel.com>
-Signed-off-by: kernel test robot <lkp@intel.com>
----
+dma_resv_for_each_fence() - Iterator which should be used while holding the reservation lock.
+dma_resv_for_each_fence_unlocked() - Iterator based on RCU which can be used without holding the reservation lock and automatic restart on concurrent modification.
 
-url:    https://github.com/0day-ci/linux/commits/Christian-K-nig/dma-buf-ad=
-d-dma_resv_for_each_fence_unlocked/20210910-163040
-base:   git://anongit.freedesktop.org/drm-intel for-linux-next
-:::::: branch date: 28 hours ago
-:::::: commit date: 28 hours ago
+While doing this we also move the decision which fences to use for write and read accesses into the dma_resv object which results in a quite nice code de-duplication and simplification.
 
- dma-resv.c |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The only two remaining users of the RCU shared fence interface are removing shared fences in amdkfd and debugfs code in qxl which will both be addresses in the next patch set.
 
---- a/drivers/dma-buf/dma-resv.c
-+++ b/drivers/dma-buf/dma-resv.c
-@@ -522,7 +522,7 @@ int dma_resv_get_fences(struct dma_resv
- =
+Please review and/or comment,
+Christian.
 
- 			/* Eventually re-allocate the array */
- 			*shared =3D krealloc_array(*shared, count,
--						 sizeof(*shared),
-+						 sizeof(**shared),
- 						 GFP_KERNEL);
- 			if (count && !*shared)
- 				return -ENOMEM;
+
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
