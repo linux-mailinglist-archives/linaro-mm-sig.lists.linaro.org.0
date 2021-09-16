@@ -2,75 +2,70 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F08140D8E2
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Sep 2021 13:32:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2DE740D998
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Sep 2021 14:15:18 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B05C46323D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Sep 2021 11:32:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 57A4A6328C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Sep 2021 12:15:16 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 8738762DEF; Thu, 16 Sep 2021 11:32:51 +0000 (UTC)
+	id 0C38963239; Thu, 16 Sep 2021 12:15:13 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7A17C63631;
-	Thu, 16 Sep 2021 11:32:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 73C8660833;
+	Thu, 16 Sep 2021 12:15:10 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id EFDDF69D05
- for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 11:31:29 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 803DD604C3
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 12:15:01 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 8651F69CDA; Thu, 16 Sep 2021 11:31:13 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
- [209.85.221.43])
- by lists.linaro.org (Postfix) with ESMTPS id D090066BF0
- for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 11:31:09 +0000 (UTC)
-Received: by mail-wr1-f43.google.com with SMTP id t8so1935469wri.1
- for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 04:31:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=OelJOhuMSDpOCxseF7sOKocHejnff6bn9jvwNAWVN9c=;
- b=Iijq6Cm9Ej0SprjX1K9K5PvirqlrIaG6Y4k5CZcUa44rtXLi6ZhPbe1PQH4VWAwTmW
- mib7IISdNwrwpqo8C4wGcU/OMCxOvG/zhYKQJM0K2d0Zzt7nWqP05N9nIWatWhkwqmeN
- CtIs15zkBdLQJp/UlpAEIO9ouCgJueWdcdvkl9IT2Wl9OmUNmdyZlmJ7OJX8yzD5bk6O
- WNs98qv8SfYCauWiPIDihMRyKawOTr5Dbvv2RGaUb+m+9Z1zwliJC/vzOTCEtATuIBel
- DYYFKeUefV0Dv8y7Pr47mBHjXFVFfa9diSyRU77nnAD9beIqDCJ/VI3Nbg20SKqxdniu
- wRmA==
+ id 7BAF460833; Thu, 16 Sep 2021 12:15:01 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+ [209.85.221.47])
+ by lists.linaro.org (Postfix) with ESMTPS id 6736E604C3
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 12:14:59 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id u15so9131724wru.6
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 05:14:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=znKvV+wMYzwJzivHZeSRGbwcFkGN1isG8B1aYJDEKOc=;
+ b=edHhXGg2ms3x8O2CM6zo1PkXWHf6mIfDaAp1Zrg6G76PhbkhEevQr0aEhFs++5DzwX
+ YNvdmEA1ZZUkExWW3QFS9luWaxScKNlEm6petJUXKOpppOsyY04YZ0XR0SoJFzpJVeqr
+ j2J+c8iJuHunujXgaTc8xW0rnhBxhygSxOJ4o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=OelJOhuMSDpOCxseF7sOKocHejnff6bn9jvwNAWVN9c=;
- b=bDDjDmKYSonf0uJ4d1fufCAM55GNbS0rVFeJ3reCgYbiD7IgL12nw1r0upzGYAuei7
- BPvS2HnVqMr8RPZRNMtteHtIp5194BNouy9FTECjXvJXqoSoniuIUFPJwJfjQjx1+Vfy
- c2L3NntF0bXIEFBm8SQk66rGlcXxnTpw3Ej9VyL3BTJ4izUBTgc9ulD6uw+HPHdMT/md
- USSiHUG94aHYZFf6Z6/NsfJI/B3zYu1bhR1e5CeCtdJcYuERDYeaXLQ0z8/E6BYG68YF
- nvCZAUS562SBI78QB6I/8YzvTF11K3Fb9vL4nHRt/bvw21iOiBFNBxghhxeWofVFaQAA
- YAVw==
-X-Gm-Message-State: AOAM531NdFZcBGgeeMgfTiAXZf3gIjwc9chJuTn4AzzVutMK4MaFLNcb
- 09XQuGeV6KaP61HBDgBQ4WF17B7VHHIbxsNb
-X-Google-Smtp-Source: ABdhPJyyjNUHgeRlxAAv+2S4iFRKdiR8A03xaRO6uw/CnwGHfvRgcRffoM7u+ZLJtG1P/cJT31/PRA==
-X-Received: by 2002:a05:6000:184e:: with SMTP id
- c14mr3236805wri.301.1631791868953; 
- Thu, 16 Sep 2021 04:31:08 -0700 (PDT)
-Received: from abel.fritz.box (p5b0ea1b5.dip0.t-ipconnect.de. [91.14.161.181])
- by smtp.gmail.com with ESMTPSA id
- c17sm3803674wrn.54.2021.09.16.04.31.08
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=znKvV+wMYzwJzivHZeSRGbwcFkGN1isG8B1aYJDEKOc=;
+ b=0KPnbDm7emTOBCSri5ssZFNWGtH3cUbKn7OLn5yMvYh2Abk/RfvzNz90yhMSY0eO1W
+ 4c/8O+9vmk+HmTOAFd2NI4VAIyG37Z855LBb8iKe65HN0bBLb4MisYWVcOifqOp+9d2e
+ Ev7d0XBeRWXR8r3KG76K3dxIap+jlmQBxwiv8JRjHR5c8R5IgGq+bknbFCmfORHIO74t
+ MM1yAxriO6yz9KTAoT+vkeclw71Nwniby2aLgII7tfT6xvgWMPaB93Iuhyc66j7RMcdi
+ /CfVW3TSNKKyWhtoMh8VTACj3kOQXs6ukwT2XWxT+vvv73LaPOlHvMUXoLn/MAx7kqaV
+ zuuQ==
+X-Gm-Message-State: AOAM5302uoTtz3ChGXFqKO+vDGjN1x96uSz4bzW6ie5BJkVuiCwxlVX+
+ 1sz3QFRsAa/TacykFwXlb/cGvQM8G6O9/g==
+X-Google-Smtp-Source: ABdhPJy9hYJkcTb8XbolX8wK7gJquBAihhMpemwlBEeXjXvgz8/dQ5SdkZqOu6h1Dxy83r2Z26ZcKQ==
+X-Received: by 2002:a5d:444a:: with SMTP id x10mr5717231wrr.360.1631794498356; 
+ Thu, 16 Sep 2021 05:14:58 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id i5sm3105995wrc.86.2021.09.16.05.14.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Sep 2021 04:31:08 -0700 (PDT)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
- <christian.koenig@amd.com>
-To: linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
- linux-media@vger.kernel.org, intel-gfx@lists.freedesktop.org
-Date: Thu, 16 Sep 2021 13:30:42 +0200
-Message-Id: <20210916113042.3631-27-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210916113042.3631-1-christian.koenig@amd.com>
-References: <20210916113042.3631-1-christian.koenig@amd.com>
+ Thu, 16 Sep 2021 05:14:57 -0700 (PDT)
+Date: Thu, 16 Sep 2021 14:14:55 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <CAKMK7uFcU-Dh8kMDrfY1rigVf0J-_R8GJ-d+C-iYNmOWx57W7Q@mail.gmail.com>
+References: <20210910082655.82168-1-christian.koenig@amd.com>
+ <YUDWHw19iUMfFr7K@phenom.ffwll.local>
+ <26f766c9-9a3c-3894-9256-e07090655dc2@gmail.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <26f766c9-9a3c-3894-9256-e07090655dc2@gmail.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH 26/26] dma-buf: nuke
- dma_resv_get_excl_unlocked
+Subject: Re: [Linaro-mm-sig] [PATCH 01/14] dma-buf: add
+ dma_resv_for_each_fence_unlocked
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -83,35 +78,269 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: tvrtko.ursulin@linux.intel.com, daniel@ffwll.ch
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: "moderated list:DMA BUFFER SHARING FRAMEWORK"
+ <linaro-mm-sig@lists.linaro.org>, dri-devel <dri-devel@lists.freedesktop.org>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-SGV1cmVrYSwgdGhhdCdzIGZpbmFsbHkgbm90IHVzZWQgYW55IG1vcmUuCgpTaWduZWQtb2ZmLWJ5
-OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+Ci0tLQogaW5jbHVk
-ZS9saW51eC9kbWEtcmVzdi5oIHwgMjYgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIDEgZmls
-ZSBjaGFuZ2VkLCAyNiBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L2Rt
-YS1yZXN2LmggYi9pbmNsdWRlL2xpbnV4L2RtYS1yZXN2LmgKaW5kZXggNjc2MTUxMmJhNjYyLi4z
-ZTZmZmJhMGFmNzAgMTAwNjQ0Ci0tLSBhL2luY2x1ZGUvbGludXgvZG1hLXJlc3YuaAorKysgYi9p
-bmNsdWRlL2xpbnV4L2RtYS1yZXN2LmgKQEAgLTM4NCwzMiArMzg0LDYgQEAgZG1hX3Jlc3ZfZXhj
-bF9mZW5jZShzdHJ1Y3QgZG1hX3Jlc3YgKm9iaikKIAlyZXR1cm4gcmN1X2RlcmVmZXJlbmNlX2No
-ZWNrKG9iai0+ZmVuY2VfZXhjbCwgZG1hX3Jlc3ZfaGVsZChvYmopKTsKIH0KIAotLyoqCi0gKiBk
-bWFfcmVzdl9nZXRfZXhjbF91bmxvY2tlZCAtIGdldCB0aGUgcmVzZXJ2YXRpb24gb2JqZWN0J3MK
-LSAqIGV4Y2x1c2l2ZSBmZW5jZSwgd2l0aG91dCBsb2NrIGhlbGQuCi0gKiBAb2JqOiB0aGUgcmVz
-ZXJ2YXRpb24gb2JqZWN0Ci0gKgotICogSWYgdGhlcmUgaXMgYW4gZXhjbHVzaXZlIGZlbmNlLCB0
-aGlzIGF0b21pY2FsbHkgaW5jcmVtZW50cyBpdCdzCi0gKiByZWZlcmVuY2UgY291bnQgYW5kIHJl
-dHVybnMgaXQuCi0gKgotICogUkVUVVJOUwotICogVGhlIGV4Y2x1c2l2ZSBmZW5jZSBvciBOVUxM
-IGlmIG5vbmUKLSAqLwotc3RhdGljIGlubGluZSBzdHJ1Y3QgZG1hX2ZlbmNlICoKLWRtYV9yZXN2
-X2dldF9leGNsX3VubG9ja2VkKHN0cnVjdCBkbWFfcmVzdiAqb2JqKQotewotCXN0cnVjdCBkbWFf
-ZmVuY2UgKmZlbmNlOwotCi0JaWYgKCFyY3VfYWNjZXNzX3BvaW50ZXIob2JqLT5mZW5jZV9leGNs
-KSkKLQkJcmV0dXJuIE5VTEw7Ci0KLQlyY3VfcmVhZF9sb2NrKCk7Ci0JZmVuY2UgPSBkbWFfZmVu
-Y2VfZ2V0X3JjdV9zYWZlKCZvYmotPmZlbmNlX2V4Y2wpOwotCXJjdV9yZWFkX3VubG9jaygpOwot
-Ci0JcmV0dXJuIGZlbmNlOwotfQotCiAvKioKICAqIGRtYV9yZXN2X3NoYXJlZF9saXN0IC0gZ2V0
-IHRoZSByZXNlcnZhdGlvbiBvYmplY3QncyBzaGFyZWQgZmVuY2UgbGlzdAogICogQG9iajogdGhl
-IHJlc2VydmF0aW9uIG9iamVjdAotLSAKMi4yNS4xCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8t
-bW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4v
-bGlzdGluZm8vbGluYXJvLW1tLXNpZwo=
+On Thu, Sep 16, 2021 at 10:50 AM Christian K=F6nig <ckoenig.leichtzumerken@=
+gmail.com> wrote:
+> Am 14.09.21 um 19:04 schrieb Daniel Vetter:
+> > On Fri, Sep 10, 2021 at 10:26:42AM +0200, Christian K=F6nig wrote:
+> >> Abstract the complexity of iterating over all the fences
+> >> in a dma_resv object.
+> >>
+> >> The new loop handles the whole RCU and retry dance and
+> >> returns only fences where we can be sure we grabbed the
+> >> right one.
+> >>
+> >> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+> >> ---
+> >>   drivers/dma-buf/dma-resv.c | 63 ++++++++++++++++++++++++++++++++++++=
+++
+> >>   include/linux/dma-resv.h   | 36 ++++++++++++++++++++++
+> >>   2 files changed, 99 insertions(+)
+> >>
+> >> diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/dma-resv.c
+> >> index 84fbe60629e3..213a9b7251ca 100644
+> >> --- a/drivers/dma-buf/dma-resv.c
+> >> +++ b/drivers/dma-buf/dma-resv.c
+> >> @@ -323,6 +323,69 @@ void dma_resv_add_excl_fence(struct dma_resv *obj=
+, struct dma_fence *fence)
+> >>   }
+> >>   EXPORT_SYMBOL(dma_resv_add_excl_fence);
+> >>  =
+
+> >> +/**
+> >> + * dma_resv_walk_unlocked - walk over fences in a dma_resv obj
+> >> + * @obj: the dma_resv object
+> >> + * @cursor: cursor to record the current position
+> >> + * @all_fences: true returns also the shared fences
+> >> + * @first: if we should start over
+> >> + *
+> >> + * Return all the fences in the dma_resv object which are not yet sig=
+naled.
+> >> + * The returned fence has an extra local reference so will stay alive.
+> >> + * If a concurrent modify is detected the whole iterator is started o=
+ver again.
+> >> + */
+> >> +struct dma_fence *dma_resv_walk_unlocked(struct dma_resv *obj,
+> >> +                                     struct dma_resv_cursor *cursor,
+> >> +                                     bool all_fences, bool first)
+> >> +{
+> >> +    struct dma_fence *fence =3D NULL;
+> >> +
+> >> +    do {
+> >> +            /* Drop the reference from the previous round */
+> >> +            dma_fence_put(fence);
+> >> +
+> >> +            cursor->is_first =3D first;
+> >> +            if (first) {
+> >> +                    cursor->seq =3D read_seqcount_begin(&obj->seq);
+> >> +                    cursor->index =3D -1;
+> >> +                    cursor->fences =3D dma_resv_shared_list(obj);
+> >> +                    cursor->is_exclusive =3D true;
+> >> +
+> >> +                    fence =3D dma_resv_excl_fence(obj);
+> >> +                    if (fence && test_bit(DMA_FENCE_FLAG_SIGNALED_BIT,
+> >> +                                          &fence->flags))
+> >> +                            fence =3D NULL;
+> >> +            } else {
+> >> +                    fence =3D NULL;
+> >> +            }
+> >> +
+> >> +            if (fence) {
+> >> +                    fence =3D dma_fence_get_rcu(fence);
+> >> +            } else if (all_fences && cursor->fences) {
+> >> +                    struct dma_resv_list *fences =3D cursor->fences;
+> >> +
+> >> +                    cursor->is_exclusive =3D false;
+> >> +                    while (++cursor->index < fences->shared_count) {
+> >> +                            fence =3D rcu_dereference(fences->shared[
+> >> +                                                    cursor->index]);
+> >> +                            if (!test_bit(DMA_FENCE_FLAG_SIGNALED_BIT,
+> >> +                                          &fence->flags))
+> >> +                                    break;
+> >> +                    }
+> >> +                    if (cursor->index < fences->shared_count)
+> >> +                            fence =3D dma_fence_get_rcu(fence);
+> >> +                    else
+> >> +                            fence =3D NULL;
+> >> +            }
+> >> +
+> >> +            /* For the eventually next round */
+> >> +            first =3D true;
+> >> +    } while (read_seqcount_retry(&obj->seq, cursor->seq));
+> >> +
+> >> +    return fence;
+> >> +}
+> >> +EXPORT_SYMBOL_GPL(dma_resv_walk_unlocked);
+> >> +
+> >>   /**
+> >>    * dma_resv_copy_fences - Copy all fences from src to dst.
+> >>    * @dst: the destination reservation object
+> >> diff --git a/include/linux/dma-resv.h b/include/linux/dma-resv.h
+> >> index 9100dd3dc21f..f5b91c292ee0 100644
+> >> --- a/include/linux/dma-resv.h
+> >> +++ b/include/linux/dma-resv.h
+> >> @@ -149,6 +149,39 @@ struct dma_resv {
+> >>      struct dma_resv_list __rcu *fence;
+> >>   };
+> >>  =
+
+> >> +/**
+> >> + * struct dma_resv_cursor - current position into the dma_resv fences
+> >> + * @seq: sequence number to check
+> >> + * @index: index into the shared fences
+> >> + * @shared: the shared fences
+> >> + * @is_first: true if this is the first returned fence
+> >> + * @is_exclusive: if the current fence is the exclusive one
+> >> + */
+> >> +struct dma_resv_cursor {
+> >> +    unsigned int seq;
+> >> +    unsigned int index;
+> >> +    struct dma_resv_list *fences;
+> >> +    bool is_first;
+> >> +    bool is_exclusive;
+> >> +};
+> > A bit a bikeshed, but I think I'd be nice to align this with the other
+> > iterators we have, e.g. for the drm_connector list.
+> >
+> > So struct dma_resv_fence_iter, dma_resv_fence_iter_begin/next/end().
+>
+> I've renamed the structure to dma_resv_iter.
+>
+> > Also I think the for_each macro must not include begin/end calls. If we
+> > include that then it saves 2 lines of code at the cost of a pile of
+> > awkward bugs because people break; out of the loop or return early  (on=
+ly
+> > continue is safe) and we leak a fence. Or worse.
+> >
+> > Explicit begin/end is much more robust at a very marginal cost imo.
+>
+> The key point is that this makes it quite a bunch more complicated to
+> implement. See those functions are easiest when you centralize them and
+> try to not spread the functionality into begin/end.
+>
+> The only thing I could see in the end function would be to drop the
+> reference for the dma_fence and that is not really something I would
+> like to do because we actually need to keep that reference in a bunch of
+> cases.
+
+Yeah but it's extremely fragile. See with drm_connector_iter we also have
+the need to grab a reference to that connector in a few place, and I do
+think that open-code that is much clearer instead of inheriting a
+reference that the for_each macro acquired for you, and which you cleverly
+leaked through a break; Compare
+
+for_each_fence(fence) {
+	if (fence) {
+		found_fence =3D fence;
+		break;
+	}
+}
+
+/* do some itneresting stuff with found_fence */
+
+dma_fence_put(found_fence); /* wtf, where is this fence reference from */
+
+Versus what I'm proposing:
+
+fence_iter_init(&fence_iter)
+for_each_fence(fence, &fence_iter) {
+	if (fence) {
+		found_fence =3D fence;
+		dma_fence_get(found_fence);
+		break;
+	}
+}
+fence_iter_end(&fence_iter)
+
+/* do some itneresting stuff with found_fence */
+
+dma_fence_put(found_fence); /* 100% clear which reference we're putting her=
+e */
+
+One of these patterns is maintainable and clear, at the cost of 3 more
+lines. The other one is frankly just clever but fragile nonsense.
+
+So yeah I really think we need the iter_init/end/next triple of functions
+here. Too clever is no good at all. And yes that version means you have an
+additional kref_get/put in there for the found fence, but I really don't
+think that matters in any of these paths here.
+
+Cheers, Daniel
+
+>
+> Regards,
+> Christian.
+>
+> >
+> > Otherwise I think this fence iterator is a solid concept that yeah we
+> > should roll out everywhere.
+> > -Daniel
+> >
+> >> +
+> >> +/**
+> >> + * dma_resv_for_each_fence_unlocked - fence iterator
+> >> + * @obj: a dma_resv object pointer
+> >> + * @cursor: a struct dma_resv_cursor pointer
+> >> + * @all_fences: true if all fences should be returned
+> >> + * @fence: the current fence
+> >> + *
+> >> + * Iterate over the fences in a struct dma_resv object without holdin=
+g the
+> >> + * dma_resv::lock. The RCU read side lock must be hold when using thi=
+s, but can
+> >> + * be dropped and re-taken as necessary inside the loop. @all_fences =
+controls
+> >> + * if the shared fences are returned as well.
+> >> + */
+> >> +#define dma_resv_for_each_fence_unlocked(obj, cursor, all_fences, fen=
+ce)    \
+> >> +    for (fence =3D dma_resv_walk_unlocked(obj, cursor, all_fences, tr=
+ue); \
+> >> +         fence; dma_fence_put(fence),                                =
+   \
+> >> +         fence =3D dma_resv_walk_unlocked(obj, cursor, all_fences, fa=
+lse))
+> >> +
+> >>   #define dma_resv_held(obj) lockdep_is_held(&(obj)->lock.base)
+> >>   #define dma_resv_assert_held(obj) lockdep_assert_held(&(obj)->lock.b=
+ase)
+> >>  =
+
+> >> @@ -366,6 +399,9 @@ void dma_resv_fini(struct dma_resv *obj);
+> >>   int dma_resv_reserve_shared(struct dma_resv *obj, unsigned int num_f=
+ences);
+> >>   void dma_resv_add_shared_fence(struct dma_resv *obj, struct dma_fenc=
+e *fence);
+> >>   void dma_resv_add_excl_fence(struct dma_resv *obj, struct dma_fence =
+*fence);
+> >> +struct dma_fence *dma_resv_walk_unlocked(struct dma_resv *obj,
+> >> +                                     struct dma_resv_cursor *cursor,
+> >> +                                     bool first, bool all_fences);
+> >>   int dma_resv_get_fences(struct dma_resv *obj, struct dma_fence **pfe=
+nce_excl,
+> >>                      unsigned *pshared_count, struct dma_fence ***psha=
+red);
+> >>   int dma_resv_copy_fences(struct dma_resv *dst, struct dma_resv *src);
+> >> --
+> >> 2.25.1
+> >>
+>
+
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
