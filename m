@@ -2,71 +2,86 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C5DC40D9A3
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Sep 2021 14:15:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D87BA40D9F5
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Sep 2021 14:31:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2108663421
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Sep 2021 12:15:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4F21860833
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Sep 2021 12:31:45 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 1BA4F62EA6; Thu, 16 Sep 2021 12:15:56 +0000 (UTC)
+	id 378EA62CF6; Thu, 16 Sep 2021 12:31:44 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 19B0760833;
-	Thu, 16 Sep 2021 12:15:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5EEF36242B;
+	Thu, 16 Sep 2021 12:31:41 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 0EC63604C3
- for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 12:15:51 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 6E64B6073E
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 12:31:40 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 0A83760833; Thu, 16 Sep 2021 12:15:51 +0000 (UTC)
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
- [209.85.128.41])
- by lists.linaro.org (Postfix) with ESMTPS id E2B7D604C3
- for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 12:15:48 +0000 (UTC)
-Received: by mail-wm1-f41.google.com with SMTP id
- v20-20020a1cf714000000b002e71f4d2026so5664666wmh.1
- for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 05:15:48 -0700 (PDT)
+ id 6BBDE6242B; Thu, 16 Sep 2021 12:31:40 +0000 (UTC)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
+ [209.85.221.52])
+ by lists.linaro.org (Postfix) with ESMTPS id 5B2CE6073E
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 12:31:38 +0000 (UTC)
+Received: by mail-wr1-f52.google.com with SMTP id g16so9226824wrb.3
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 05:31:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=IRRs5XneX2vo2Gm7yuvudORdb1lagFg+pbee5Tr6lgg=;
- b=DtkJ/8rzTreJI6XHSbC7+rydW84FqEJvZc+Qkw3kqbSN0EPOpQF7G+oAjoI5orQOsi
- 87cMsjfobWQEK+I6pzNzcv+DxCNEdFpDg2KIqKoTN5WAy8ef2WZTKpQbG+vXNtLZb/b7
- Uj5sq8zvpBkDyR7v4Km/YZLWrmwmRsgLJLPUQ=
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=yVn4bOUftTP0XsVCYOhP2MVjOD5RXLBjZ2je0UhYRc0=;
+ b=UllxjW1pQN4AmYZEbLg7VrErGUqD+1ja2ihP7bNIWt/uTZGlmL71/XP9jjO6KhmKY0
+ fiRtXpVcCH1hQKOY2jdfchmwYGS0XP4lfMRLycLsW6+OfxpIvDESU51aAUOmrcst/rON
+ qWFSoQtqfz711rHCKql1DqY94oNcjEZ2J6WVI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
  :in-reply-to;
- bh=IRRs5XneX2vo2Gm7yuvudORdb1lagFg+pbee5Tr6lgg=;
- b=M37woBMlXKyDbdIU84qKYLg9J0kkIZc1QiH3s+/S479LEgfK0sxYAJTQFQySlkqdGQ
- XmFqubLByndxAp3uGqjfnZX+DBdSomlBNpyWwdQxaJyphjDQMXcrbUP2+3oV0LYBBJCd
- QU7dIZ9W4dw1Dq6oxykHVW+WNxyar49isIt7eHEr679YL+ilX0R863gbuSq41NmJydZb
- aIcoy9CrSD4QGgfHHzkAg+Ph4tuBrFx6yHPgJN2oNVhBphfPQj/c9meDYNGzdk9o+WLh
- DrT1ZrqaPintXalEFG92ecpzUo+i10C93o+SgmovVmr8ESS4dMJmfeRYCDPgetj1fMQC
- iSMg==
-X-Gm-Message-State: AOAM530AGHiDHJZuBw9zESpzeLnkhGpiJZvcNdZb95JN3UwEosAmyOaW
- mztL7umR0OYoxb47L0qeKdFEkQ==
-X-Google-Smtp-Source: ABdhPJxW1rIOmeDct5A4v6mCkBGYPjWqfoCdG963K5HHIFyuGzPWLCEVF9AqCiqTuD6U9Gvl6w1V+Q==
-X-Received: by 2002:a1c:e915:: with SMTP id q21mr9796894wmc.180.1631794547927; 
- Thu, 16 Sep 2021 05:15:47 -0700 (PDT)
+ bh=yVn4bOUftTP0XsVCYOhP2MVjOD5RXLBjZ2je0UhYRc0=;
+ b=rfD8anj7EVIfzw9j0UBczeop6D8gP1uqJolodIWVpkDdOFoVEO+HZYO+jAtTPPlPHV
+ XBM3eS4AWam4XNwHGqmJ/FEVSIOFNAjt7WrMWpJCgdx//7fcev5uQ7gVieN4nhJlboto
+ wPW2tndm8ALWdvay/zDcGT0AfmzcAIuiQuOWl0Yb1IOf+PRbJDHCUlRrA2Ncf8YHXM6O
+ oYzaCmkYb4xn76mXs9M+ObaLDsavIqKMMv83RHnBPNb0lf5/bH2Sf0/8nPB35DJyNig6
+ Z7Q6RqEyrcHrUFnQka27SRVDMPeMcbixwphRGXCr29mcOG1ee48/cdy4jZdHtUMykaqQ
+ gVIA==
+X-Gm-Message-State: AOAM531dmDyQ2uOJ0rjygDK5TkfmJ7k7f6DPvnWrJ13LOdSvtrkXvHbn
+ 2WR1OZ+6AdSmhD0bd8YczA4gow==
+X-Google-Smtp-Source: ABdhPJyNeVVi6f4gVXn8CFkrZVMl66WAIJsG4jZYF2OG8FsFOYQQOCNHITS4sqBQA+1lZuWg++BXfA==
+X-Received: by 2002:a5d:6da9:: with SMTP id u9mr5766027wrs.155.1631795497459; 
+ Thu, 16 Sep 2021 05:31:37 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id a25sm7376193wmj.34.2021.09.16.05.15.46
+ by smtp.gmail.com with ESMTPSA id g5sm3285526wrq.80.2021.09.16.05.31.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Sep 2021 05:15:47 -0700 (PDT)
-Date: Thu, 16 Sep 2021 14:15:45 +0200
+ Thu, 16 Sep 2021 05:31:36 -0700 (PDT)
+Date: Thu, 16 Sep 2021 14:31:34 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YUM1cY5HKixNUnQn@phenom.ffwll.local>
-References: <20210916113042.3631-1-christian.koenig@amd.com>
- <20210916113042.3631-2-christian.koenig@amd.com>
+To: Oded Gabbay <ogabbay@kernel.org>
+Message-ID: <YUM5JoMMK7gceuKZ@phenom.ffwll.local>
+Mail-Followup-To: Oded Gabbay <ogabbay@kernel.org>,
+ Jason Gunthorpe <jgg@ziepe.ca>,
+ "Linux-Kernel@Vger. Kernel. Org" <linux-kernel@vger.kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Gal Pressman <galpress@amazon.com>,
+ Yossi Leybovich <sleybo@amazon.com>,
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
+ linux-rdma <linux-rdma@vger.kernel.org>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>,
+ Doug Ledford <dledford@redhat.com>, Dave Airlie <airlied@gmail.com>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Leon Romanovsky <leonro@nvidia.com>, Christoph Hellwig <hch@lst.de>,
+ amd-gfx list <amd-gfx@lists.freedesktop.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
+References: <20210912165309.98695-1-ogabbay@kernel.org>
+ <YUCvNzpyC091KeaJ@phenom.ffwll.local>
+ <20210914161218.GF3544071@ziepe.ca>
+ <CAFCwf13322953Txr3Afa_MomuD148vnfpEog0xzW7FPWH9=6fg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210916113042.3631-2-christian.koenig@amd.com>
+In-Reply-To: <CAFCwf13322953Txr3Afa_MomuD148vnfpEog0xzW7FPWH9=6fg@mail.gmail.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 01/26] dma-buf: add
- dma_resv_for_each_fence_unlocked v2
+Subject: Re: [Linaro-mm-sig] [PATCH v6 0/2] Add p2p via dmabuf to habanalabs
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -79,209 +94,101 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: tvrtko.ursulin@linux.intel.com, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- daniel@ffwll.ch, linux-media@vger.kernel.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: linux-rdma <linux-rdma@vger.kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Yossi Leybovich <sleybo@amazon.com>,
+ "Linux-Kernel@Vger. Kernel. Org" <linux-kernel@vger.kernel.org>,
+ Maling list - DRI developers <dri-devel@lists.freedesktop.org>,
+ Gal Pressman <galpress@amazon.com>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Doug Ledford <dledford@redhat.com>,
+ Christoph Hellwig <hch@lst.de>, amd-gfx list <amd-gfx@lists.freedesktop.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Leon Romanovsky <leonro@nvidia.com>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Thu, Sep 16, 2021 at 01:30:17PM +0200, Christian K=F6nig wrote:
-> Abstract the complexity of iterating over all the fences
-> in a dma_resv object.
-> =
+On Wed, Sep 15, 2021 at 10:45:36AM +0300, Oded Gabbay wrote:
+> On Tue, Sep 14, 2021 at 7:12 PM Jason Gunthorpe <jgg@ziepe.ca> wrote:
+> >
+> > On Tue, Sep 14, 2021 at 04:18:31PM +0200, Daniel Vetter wrote:
+> > > On Sun, Sep 12, 2021 at 07:53:07PM +0300, Oded Gabbay wrote:
+> > > > Hi,
+> > > > Re-sending this patch-set following the release of our user-space TPC
+> > > > compiler and runtime library.
+> > > >
+> > > > I would appreciate a review on this.
+> > >
+> > > I think the big open we have is the entire revoke discussions. Having the
+> > > option to let dma-buf hang around which map to random local memory ranges,
+> > > without clear ownership link and a way to kill it sounds bad to me.
+> > >
+> > > I think there's a few options:
+> > > - We require revoke support. But I've heard rdma really doesn't like that,
+> > >   I guess because taking out an MR while holding the dma_resv_lock would
+> > >   be an inversion, so can't be done. Jason, can you recap what exactly the
+> > >   hold-up was again that makes this a no-go?
+> >
+> > RDMA HW can't do revoke.
 
-> The new loop handles the whole RCU and retry dance and
-> returns only fences where we can be sure we grabbed the
-> right one.
-> =
+Like why? I'm assuming when the final open handle or whatever for that MR
+is closed, you do clean up everything? Or does that MR still stick around
+forever too?
 
-> v2: fix accessing the shared fences while they might be freed,
->     improve kerneldoc, rename _cursor to _iter, add
->     dma_resv_iter_is_exclusive
-> =
+> > So we have to exclude almost all the HW and several interesting use
+> > cases to enable a revoke operation.
+> >
+> > >   - For non-revokable things like these dma-buf we'd keep a drm_master
+> > >     reference around. This would prevent the next open to acquire
+> > >     ownership rights, which at least prevents all the nasty potential
+> > >     problems.
+> >
+> > This is what I generally would expect, the DMABUF FD and its DMA
+> > memory just floats about until the unrevokable user releases it, which
+> > happens when the FD that is driving the import eventually gets closed.
+> This is exactly what we are doing in the driver. We make sure
+> everything is valid until the unrevokable user releases it and that
+> happens only when the dmabuf fd gets closed.
+> And the user can't close it's fd of the device until he performs the
+> above, so there is no leakage between users.
 
-> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+Maybe I got the device security model all wrong, but I thought Guadi is
+single user, and the only thing it protects is the system against the
+Gaudi device trhough iommu/device gart. So roughly the following can
+happen:
 
-Replied in the other thread with the fully typed out example, this really
-needs iter_init/next/end here. Or it's just way too fragile and tricky for
-a generic helper that we roll out everywhere.
+1. User A opens gaudi device, sets up dma-buf export
+
+2. User A registers that with RDMA, or anything else that doesn't support
+revoke.
+
+3. User A closes gaudi device
+
+4. User B opens gaudi device, assumes that it has full control over the
+device and uploads some secrets, which happen to end up in the dma-buf
+region user A set up
+
+5. User B extracts secrets.
+
+> > I still don't think any of the complexity is needed, pinnable memory
+> > is a thing in Linux, just account for it in mlocked and that is
+> > enough.
+
+It's not mlocked memory, it's mlocked memory and I can exfiltrate it.
+Mlock is fine, exfiltration not so much. It's mlock, but a global pool and
+if you didn't munlock then the next mlock from a completely different user
+will alias with your stuff.
+
+Or is there something that prevents that? Oded at least explain that gaudi
+works like a gpu from 20 years ago, single user, no security at all within
+the device.
 -Daniel
-
-> ---
->  drivers/dma-buf/dma-resv.c | 62 ++++++++++++++++++++++++++++++++++++++
->  include/linux/dma-resv.h   | 50 ++++++++++++++++++++++++++++++
->  2 files changed, 112 insertions(+)
-> =
-
-> diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/dma-resv.c
-> index 84fbe60629e3..77083170ec3b 100644
-> --- a/drivers/dma-buf/dma-resv.c
-> +++ b/drivers/dma-buf/dma-resv.c
-> @@ -323,6 +323,68 @@ void dma_resv_add_excl_fence(struct dma_resv *obj, s=
-truct dma_fence *fence)
->  }
->  EXPORT_SYMBOL(dma_resv_add_excl_fence);
->  =
-
-> +/**
-> + * dma_resv_walk_unlocked - walk over fences in a dma_resv obj
-> + * @obj: the dma_resv object
-> + * @cursor: cursor to record the current position
-> + * @all_fences: true returns also the shared fences
-> + * @first: if we should start over
-> + *
-> + * Return all the fences in the dma_resv object which are not yet signal=
-ed.
-> + * The returned fence has an extra local reference so will stay alive.
-> + * If a concurrent modify is detected the whole iterator is started over=
- again.
-> + */
-> +struct dma_fence *dma_resv_walk_unlocked(struct dma_resv *obj,
-> +					 struct dma_resv_iter *cursor,
-> +					 bool all_fences, bool first)
-> +{
-> +	struct dma_fence *fence =3D NULL;
-> +
-> +	first |=3D read_seqcount_retry(&obj->seq, cursor->seq);
-> +	do {
-> +		/* Drop the reference from the previous round */
-> +		dma_fence_put(fence);
-> +
-> +		cursor->is_first =3D first;
-> +		if (first) {
-> +			cursor->seq =3D read_seqcount_begin(&obj->seq);
-> +			cursor->index =3D -1;
-> +			cursor->fences =3D dma_resv_shared_list(obj);
-> +
-> +			fence =3D dma_resv_excl_fence(obj);
-> +			if (fence && test_bit(DMA_FENCE_FLAG_SIGNALED_BIT,
-> +					      &fence->flags))
-> +				fence =3D NULL;
-> +		} else {
-> +			fence =3D NULL;
-> +		}
-> +
-> +		if (fence) {
-> +			fence =3D dma_fence_get_rcu(fence);
-> +		} else if (all_fences && cursor->fences) {
-> +			struct dma_resv_list *fences =3D cursor->fences;
-> +
-> +			while (++cursor->index < fences->shared_count) {
-> +				fence =3D rcu_dereference(
-> +					fences->shared[cursor->index]);
-> +				if (!test_bit(DMA_FENCE_FLAG_SIGNALED_BIT,
-> +					      &fence->flags))
-> +					break;
-> +			}
-> +			if (cursor->index < fences->shared_count)
-> +				fence =3D dma_fence_get_rcu(fence);
-> +			else
-> +				fence =3D NULL;
-> +		}
-> +
-> +		/* For the eventually next round */
-> +		first =3D true;
-> +	} while (read_seqcount_retry(&obj->seq, cursor->seq));
-> +
-> +	return fence;
-> +}
-> +EXPORT_SYMBOL_GPL(dma_resv_walk_unlocked);
-> +
->  /**
->   * dma_resv_copy_fences - Copy all fences from src to dst.
->   * @dst: the destination reservation object
-> diff --git a/include/linux/dma-resv.h b/include/linux/dma-resv.h
-> index 9100dd3dc21f..1cd686384c71 100644
-> --- a/include/linux/dma-resv.h
-> +++ b/include/linux/dma-resv.h
-> @@ -149,6 +149,53 @@ struct dma_resv {
->  	struct dma_resv_list __rcu *fence;
->  };
->  =
-
-> +/**
-> + * struct dma_resv_iter - current position into the dma_resv fences
-> + *
-> + * Don't touch this directly in the driver, use the accessor function in=
-stead.
-> + */
-> +struct dma_resv_iter {
-> +	/** @seq: sequence number to check for modifications */
-> +	unsigned int seq;
-> +
-> +	/** @index: index into the shared fences */
-> +	unsigned int index;
-> +
-> +	/** @fences: the shared fences */
-> +	struct dma_resv_list *fences;
-> +
-> +	/** @is_first: true if this is the first returned fence */
-> +	bool is_first;
-> +};
-> +
-> +/**
-> + * dma_resv_for_each_fence_unlocked - fence iterator
-> + * @obj: a dma_resv object pointer
-> + * @cursor: a struct dma_resv_iter pointer
-> + * @all_fences: true if all fences should be returned
-> + * @fence: the current fence
-> + *
-> + * Iterate over the fences in a struct dma_resv object without holding t=
-he
-> + * dma_resv::lock. The RCU read side lock must be hold when using this, =
-but can
-> + * be dropped and re-taken as necessary inside the loop. @all_fences con=
-trols
-> + * if the shared fences are returned as well.
-> + */
-> +#define dma_resv_for_each_fence_unlocked(obj, cursor, all_fences, fence)=
-    \
-> +	for (fence =3D dma_resv_walk_unlocked(obj, cursor, all_fences, true); \
-> +	     fence; dma_fence_put(fence),				    \
-> +	     fence =3D dma_resv_walk_unlocked(obj, cursor, all_fences, false))
-> +
-> +/**
-> + * dma_resv_iter_is_exclusive - test if the current fence is the exclusi=
-ve one
-> + * @cursor: the cursor of the current position
-> + *
-> + * Returns true if the currently returned fence is the exclusive one.
-> + */
-> +static inline bool dma_resv_iter_is_exclusive(struct dma_resv_iter *curs=
-or)
-> +{
-> +	return cursor->index =3D=3D -1;
-> +}
-> +
->  #define dma_resv_held(obj) lockdep_is_held(&(obj)->lock.base)
->  #define dma_resv_assert_held(obj) lockdep_assert_held(&(obj)->lock.base)
->  =
-
-> @@ -366,6 +413,9 @@ void dma_resv_fini(struct dma_resv *obj);
->  int dma_resv_reserve_shared(struct dma_resv *obj, unsigned int num_fence=
-s);
->  void dma_resv_add_shared_fence(struct dma_resv *obj, struct dma_fence *f=
-ence);
->  void dma_resv_add_excl_fence(struct dma_resv *obj, struct dma_fence *fen=
-ce);
-> +struct dma_fence *dma_resv_walk_unlocked(struct dma_resv *obj,
-> +					 struct dma_resv_iter *cursor,
-> +					 bool first, bool all_fences);
->  int dma_resv_get_fences(struct dma_resv *obj, struct dma_fence **pfence_=
-excl,
->  			unsigned *pshared_count, struct dma_fence ***pshared);
->  int dma_resv_copy_fences(struct dma_resv *dst, struct dma_resv *src);
-> -- =
-
-> 2.25.1
-> =
-
-
--- =
-
+-- 
 Daniel Vetter
 Software Engineer, Intel Corporation
 http://blog.ffwll.ch
