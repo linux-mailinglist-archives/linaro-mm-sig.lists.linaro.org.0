@@ -2,70 +2,71 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D62D40FA67
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Sep 2021 16:39:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CE6840FA9A
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Sep 2021 16:43:33 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 839AB6328C
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Sep 2021 14:39:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5687C6341F
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Sep 2021 14:43:32 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 537B6666F6; Fri, 17 Sep 2021 14:39:42 +0000 (UTC)
+	id A8E9C666F6; Fri, 17 Sep 2021 14:43:30 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CFB7E6341D;
-	Fri, 17 Sep 2021 14:39:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DACDD6341D;
+	Fri, 17 Sep 2021 14:43:27 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id C772D6328C
- for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Sep 2021 14:39:36 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 645F56323F
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Sep 2021 14:43:26 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id BD27F6341D; Fri, 17 Sep 2021 14:39:36 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
- [209.85.221.43])
- by lists.linaro.org (Postfix) with ESMTPS id B633B6328C
- for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Sep 2021 14:39:34 +0000 (UTC)
-Received: by mail-wr1-f43.google.com with SMTP id w29so15559781wra.8
- for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Sep 2021 07:39:34 -0700 (PDT)
+ id 600946341D; Fri, 17 Sep 2021 14:43:26 +0000 (UTC)
+Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com
+ [209.85.208.48])
+ by lists.linaro.org (Postfix) with ESMTPS id 47C546323F
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Sep 2021 14:43:24 +0000 (UTC)
+Received: by mail-ed1-f48.google.com with SMTP id h17so30979567edj.6
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Sep 2021 07:43:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:content-transfer-encoding:in-reply-to;
- bh=rONnp94F7a6Lw/Ny2EjsCmoV0di2gM6/LbUVHOGlfd0=;
- b=dUD1I07v914rFkrFMs+i+NhM+PtyoilHyl1bXVlNPKlJlZE1YCIxEAexHS9ldrzcDL
- tDJJKkLod8QwkTfCiRQwoaZVNBOS3CA7WkvI4INkGYPkfEIcqoYEaOEx8ljrI3EMWx+c
- Jb2l9UHXbXp4ROUXna5KCWojZDZiW+APlIETI=
+ bh=l3KbKSGPjgb2NQ1xQIuBnrBhc4uBXqtRTi8wbPC0ga0=;
+ b=HrmJwuQJWlLgUqqIYXW5uFcRxT3fwUlDFOeKT5h+YmE4hgSUbgngIgakGyqza0Ak/E
+ N4WcCcZSbwU0I41a3Ee2uCq5lKNlsfxQlS4bk5jnbz8Uc8/WLP7VJVhqqPU7+DDR27nr
+ bHZcaJvnM2c/q5KiP8xgBisXFCU0o+BPQMbXg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:content-transfer-encoding
  :in-reply-to;
- bh=rONnp94F7a6Lw/Ny2EjsCmoV0di2gM6/LbUVHOGlfd0=;
- b=InsGV4Eld4wwE1rPpAMMWOVNFebwFmdSZoaJIRMh6zTBoggU0LxB0C5oJTFgrdhWj+
- mUPkmSiKFfhz2DHwPXV0dFkWBR5Rw7vSGzSnCipVgjBwjudLUCFICNmgfcKF4T7C7/vs
- 2hv9xfXERi+985LSZvHeWSb+IwI9s7bxUQLcuTdaDhiqbvdA1KbNaIn7GV0lD+hYwlJO
- KYC4WnfG1VjzUPDlvu8MOI86XEC3egDC8MoaN7zN1eo71bdH7JhHlf3W9XvdkNCKS7ml
- 9HugZNbJkGAIS/03CfgS6bypdHH1tPG3KJkv62LErTnXgjW7zUI1SC2OeO5TXED5s0yq
- NZTQ==
-X-Gm-Message-State: AOAM533pdvxJojDuSdFMfLTM0PJtGh+Y/2Zq2as8omVuMbFgA/OUEDVI
- 2tf9845EJpQVmaM7XvFrPnOtTA==
-X-Google-Smtp-Source: ABdhPJyF4RuufOYUUPIfCz/Wk2FC3WxYXmSstOWulS9PiJ/VeoLBGIGhCGokxOI6E13WRoA7PQ+u1Q==
-X-Received: by 2002:adf:fe0e:: with SMTP id n14mr12680874wrr.236.1631889573748; 
- Fri, 17 Sep 2021 07:39:33 -0700 (PDT)
+ bh=l3KbKSGPjgb2NQ1xQIuBnrBhc4uBXqtRTi8wbPC0ga0=;
+ b=0Q9EORfrvKx/5DwKqSH/ER4HfAlkUR80bc1ra9anyMPkeT1htXyhK2mazod+DSDcdP
+ mksMcvHK4mtVlUdNIPX05zVdjRU7ssN52DH5dVhM9b6umQjRoQKmxHyq7MEcOiFbXFCg
+ 3RgVDoCEpuT8ywen8rec0PWaBxUitgPVppSB4xi8m5bUroNAvUWMP+Nv1iwSQlsH+B5U
+ DMAOw28nDqadJ0tU91YKq7uoGggf47DZBrjQUtrTAChbvo0RuDMKmNX/MiXbEUas9lbN
+ zOd0DyHNLLTom+pTVWJ1sr9aU992B/qkIp5S0y/b7uCNRCaF8HnNWWl/ag9YFnel7deN
+ oSQQ==
+X-Gm-Message-State: AOAM530aK+TwZBmKHJf1MO69JStw/2vluFnUGV4Lx4eXN7JYFtpxAbNp
+ FPX+l/y3YgnYGh5KhFATlDB0Iw==
+X-Google-Smtp-Source: ABdhPJxVPzhZbOficXc6bDadxPa26AhAtQKrydrKlHVpMgqpF2mtB0UweCcZ1SJVG9txF/t6ofoM/g==
+X-Received: by 2002:a17:906:9ad0:: with SMTP id
+ ah16mr13185322ejc.43.1631889802760; 
+ Fri, 17 Sep 2021 07:43:22 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id r27sm6948211wrr.70.2021.09.17.07.39.32
+ by smtp.gmail.com with ESMTPSA id f2sm2273109eje.109.2021.09.17.07.43.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 17 Sep 2021 07:39:33 -0700 (PDT)
-Date: Fri, 17 Sep 2021 16:39:31 +0200
+ Fri, 17 Sep 2021 07:43:22 -0700 (PDT)
+Date: Fri, 17 Sep 2021 16:43:20 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YUSoo3Vrl9BrEEhV@phenom.ffwll.local>
+Message-ID: <YUSpiHK7Dd1pF/Mq@phenom.ffwll.local>
 References: <20210917123513.1106-1-christian.koenig@amd.com>
- <20210917123513.1106-5-christian.koenig@amd.com>
+ <20210917123513.1106-6-christian.koenig@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210917123513.1106-5-christian.koenig@amd.com>
+In-Reply-To: <20210917123513.1106-6-christian.koenig@amd.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 04/26] dma-buf: use new iterator in
- dma_resv_get_fences v2
+Subject: Re: [Linaro-mm-sig] [PATCH 05/26] dma-buf: use new iterator in
+ dma_resv_wait_timeout
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,197 +87,128 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Fri, Sep 17, 2021 at 02:34:51PM +0200, Christian K=F6nig wrote:
+On Fri, Sep 17, 2021 at 02:34:52PM +0200, Christian K=F6nig wrote:
 > This makes the function much simpler since the complex
 > retry logic is now handled elsewhere.
 > =
 
-> v2: use sizeof(void*) instead
-> =
-
 > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
 > ---
->  drivers/dma-buf/dma-resv.c | 112 +++++++++++++------------------------
->  1 file changed, 40 insertions(+), 72 deletions(-)
+>  drivers/dma-buf/dma-resv.c | 68 ++++++--------------------------------
+>  1 file changed, 10 insertions(+), 58 deletions(-)
 > =
 
 > diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/dma-resv.c
-> index 406150dea5e4..9b90bd9ac018 100644
+> index 9b90bd9ac018..c7db553ab115 100644
 > --- a/drivers/dma-buf/dma-resv.c
 > +++ b/drivers/dma-buf/dma-resv.c
-> @@ -487,99 +487,67 @@ EXPORT_SYMBOL(dma_resv_copy_fences);
->   * dma_resv_get_fences - Get an object's shared and exclusive
->   * fences without update side lock held
->   * @obj: the reservation object
-> - * @pfence_excl: the returned exclusive fence (or NULL)
-> - * @pshared_count: the number of shared fences returned
-> - * @pshared: the array of shared fence ptrs returned (array is krealloc'=
-d to
-> + * @fence_excl: the returned exclusive fence (or NULL)
-> + * @shared_count: the number of shared fences returned
-> + * @shared: the array of shared fence ptrs returned (array is krealloc'd=
- to
->   * the required size, and must be freed by caller)
->   *
->   * Retrieve all fences from the reservation object. If the pointer for t=
-he
->   * exclusive fence is not specified the fence is put into the array of t=
-he
->   * shared fences as well. Returns either zero or -ENOMEM.
->   */
-> -int dma_resv_get_fences(struct dma_resv *obj, struct dma_fence **pfence_=
-excl,
-> -			unsigned int *pshared_count,
-> -			struct dma_fence ***pshared)
-> +int dma_resv_get_fences(struct dma_resv *obj, struct dma_fence **fence_e=
-xcl,
-> +			unsigned int *shared_count, struct dma_fence ***shared)
+> @@ -569,74 +569,26 @@ long dma_resv_wait_timeout(struct dma_resv *obj, bo=
+ol wait_all, bool intr,
+>  			   unsigned long timeout)
 >  {
-> -	struct dma_fence **shared =3D NULL;
-> -	struct dma_fence *fence_excl;
-> -	unsigned int shared_count;
-> -	int ret =3D 1;
-> -
-> -	do {
-> -		struct dma_resv_list *fobj;
-> -		unsigned int i, seq;
-> -		size_t sz =3D 0;
-> -
-> -		shared_count =3D i =3D 0;
-> -
-> -		rcu_read_lock();
-> -		seq =3D read_seqcount_begin(&obj->seq);
+>  	long ret =3D timeout ? timeout : 1;
+> -	unsigned int seq, shared_count;
 > +	struct dma_resv_iter cursor;
-> +	struct dma_fence *fence;
+>  	struct dma_fence *fence;
+> -	int i;
 >  =
 
-> -		fence_excl =3D dma_resv_excl_fence(obj);
-> -		if (fence_excl && !dma_fence_get_rcu(fence_excl))
-> -			goto unlock;
-> +	*shared_count =3D 0;
-> +	*shared =3D NULL;
->  =
+> -retry:
+> -	shared_count =3D 0;
+> -	seq =3D read_seqcount_begin(&obj->seq);
+>  	rcu_read_lock();
 
-> -		fobj =3D dma_resv_shared_list(obj);
-> -		if (fobj)
-> -			sz +=3D sizeof(*shared) * fobj->shared_max;
-> +	if (fence_excl)
-> +		*fence_excl =3D NULL;
->  =
+I missed this in my previous conversion reviews, but pls move the
+rcu_read_lock into the iterator. That should simplify the flow in all of
+these quite a bit more, and since the iter_next_unlocked grabs a full
+reference for the iteration body we really don't need that protected by
+rcu.
 
-> -		if (!pfence_excl && fence_excl)
-> -			sz +=3D sizeof(*shared);
-> +	rcu_read_lock();
-> +	dma_resv_iter_begin(&cursor, obj, true);
+We can't toss rcu protection for dma_resv anytime soon (if ever), but we
+can at least make it an implementation detail.
+
+> -	i =3D -1;
+> -
+> -	fence =3D dma_resv_excl_fence(obj);
+> -	if (fence && !test_bit(DMA_FENCE_FLAG_SIGNALED_BIT, &fence->flags)) {
+> -		if (!dma_fence_get_rcu(fence))
+> -			goto unlock_retry;
+> +	dma_resv_iter_begin(&cursor, obj, wait_all);
 > +	dma_resv_for_each_fence_unlocked(&cursor, fence) {
+> +		rcu_read_unlock();
 >  =
 
-> -		if (sz) {
-> -			struct dma_fence **nshared;
-> +		if (cursor.is_first) {
-
-Yeah with the second one here I definitely think we need a
-dma_resv_iter_is_restart() helper. I'm not sure whether that should have
-is_first or restart_only semantics, but I guess gcc wont see through the
-maze anyway, and hence initializing everything to NULL/0 is required.
-
-Also is_first is a bit confusing naming imo. You mean "is this the first
-fence" but readers could equally read this as "is this the first time
-we're in the loop", which is rather confusing. Hence why I think an
-iter_is_restart() or maybe iter_restarted() naming is a notch clearer.
-
-
-> +			unsigned int count;
->  =
-
-> -			nshared =3D krealloc(shared, sz,
-> -					   GFP_NOWAIT | __GFP_NOWARN);
-> -			if (!nshared) {
-> -				rcu_read_unlock();
-> +			while (*shared_count)
-> +				dma_fence_put((*shared)[--(*shared_count)]);
->  =
-
-> -				dma_fence_put(fence_excl);
-> -				fence_excl =3D NULL;
-> +			if (fence_excl)
-> +				dma_fence_put(*fence_excl);
->  =
-
-> -				nshared =3D krealloc(shared, sz, GFP_KERNEL);
-> -				if (nshared) {
-> -					shared =3D nshared;
-> -					continue;
-> -				}
-> +			count =3D cursor.fences ? cursor.fences->shared_count : 0;
-> +			count +=3D fence_excl ? 0 : 1;
-> +			rcu_read_unlock();
->  =
-
-> -				ret =3D -ENOMEM;
-> -				break;
-> -			}
-> -			shared =3D nshared;
-> -			shared_count =3D fobj ? fobj->shared_count : 0;
-> -			for (i =3D 0; i < shared_count; ++i) {
-> -				shared[i] =3D rcu_dereference(fobj->shared[i]);
-> -				if (!dma_fence_get_rcu(shared[i]))
-> -					break;
-> +			/* Eventually re-allocate the array */
-> +			*shared =3D krealloc_array(*shared, count,
-> +						 sizeof(void *),
-> +						 GFP_KERNEL);
-> +			if (count && !*shared) {
-> +				dma_resv_iter_end(&cursor);
-> +				return -ENOMEM;
->  			}
-> +			rcu_read_lock();
+> -		if (dma_fence_is_signaled(fence)) {
+> -			dma_fence_put(fence);
+> -			fence =3D NULL;
+> +		ret =3D dma_fence_wait_timeout(fence, intr, ret);
+> +		if (ret <=3D 0) {
+> +			dma_resv_iter_end(&cursor);
+> +			return ret;
 >  		}
 >  =
 
-> -		if (i !=3D shared_count || read_seqcount_retry(&obj->seq, seq)) {
-> -			while (i--)
-> -				dma_fence_put(shared[i]);
-> -			dma_fence_put(fence_excl);
-> -			goto unlock;
+> -	} else {
+> -		fence =3D NULL;
+> -	}
+> -
+> -	if (wait_all) {
+> -		struct dma_resv_list *fobj =3D dma_resv_shared_list(obj);
+> -
+> -		if (fobj)
+> -			shared_count =3D fobj->shared_count;
+> -
+> -		for (i =3D 0; !fence && i < shared_count; ++i) {
+> -			struct dma_fence *lfence;
+> -
+> -			lfence =3D rcu_dereference(fobj->shared[i]);
+> -			if (test_bit(DMA_FENCE_FLAG_SIGNALED_BIT,
+> -				     &lfence->flags))
+> -				continue;
+> -
+> -			if (!dma_fence_get_rcu(lfence))
+> -				goto unlock_retry;
+> -
+> -			if (dma_fence_is_signaled(lfence)) {
+> -				dma_fence_put(lfence);
+> -				continue;
+> -			}
+> -
+> -			fence =3D lfence;
+> -			break;
 > -		}
-> -
-> -		ret =3D 0;
-> -unlock:
-> -		rcu_read_unlock();
-> -	} while (ret);
-> -
-> -	if (pfence_excl)
-> -		*pfence_excl =3D fence_excl;
-> -	else if (fence_excl)
-> -		shared[shared_count++] =3D fence_excl;
-> +		if (dma_resv_iter_is_exclusive(&cursor) && fence_excl)
-> +			*fence_excl =3D fence;
-> +		else
-> +			(*shared)[(*shared_count)++] =3D fence;
->  =
-
-> -	if (!shared_count) {
-> -		kfree(shared);
-> -		shared =3D NULL;
-> +		/* Don't drop the reference */
-> +		fence =3D NULL;
+> +		rcu_read_lock();
 >  	}
+> -
 > +	dma_resv_iter_end(&cursor);
-> +	rcu_read_unlock();
+>  	rcu_read_unlock();
+> -	if (fence) {
+> -		if (read_seqcount_retry(&obj->seq, seq)) {
+> -			dma_fence_put(fence);
+> -			goto retry;
+> -		}
 >  =
 
-> -	*pshared_count =3D shared_count;
-> -	*pshared =3D shared;
-> -	return ret;
-> +	return 0;
->  }
->  EXPORT_SYMBOL_GPL(dma_resv_get_fences);
+> -		ret =3D dma_fence_wait_timeout(fence, intr, ret);
+> -		dma_fence_put(fence);
+> -		if (ret > 0 && wait_all && (i + 1 < shared_count))
+> -			goto retry;
+> -	}
+>  	return ret;
+> -
+> -unlock_retry:
+> -	rcu_read_unlock();
+> -	goto retry;
 
-With the wrapper I'd like to have:
+I think we still have the same semantics, and it's so much tidier.
+
+With the rcu_read_unlock stuff into iterators (also applies to previous
+two patches):
 
 Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 
+>  }
+>  EXPORT_SYMBOL_GPL(dma_resv_wait_timeout);
 >  =
 
 > -- =
