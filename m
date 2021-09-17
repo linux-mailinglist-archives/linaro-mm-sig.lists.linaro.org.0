@@ -2,70 +2,76 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id E634540DC76
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Sep 2021 16:09:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A82ED40F25B
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Sep 2021 08:33:03 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9D03C63525
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Sep 2021 14:09:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EA12963421
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Sep 2021 06:33:01 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 58D506341D; Thu, 16 Sep 2021 14:09:53 +0000 (UTC)
+	id C330F63639; Fri, 17 Sep 2021 06:33:00 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6B4A862D34;
-	Thu, 16 Sep 2021 14:09:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C760D6323F;
+	Fri, 17 Sep 2021 06:32:56 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 2B4DB62630
- for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 14:09:49 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 8942863239
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Sep 2021 06:32:54 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 28F4B62D34; Thu, 16 Sep 2021 14:09:49 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
- [209.85.221.49])
- by lists.linaro.org (Postfix) with ESMTPS id 1E9D262630
- for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 14:09:47 +0000 (UTC)
-Received: by mail-wr1-f49.google.com with SMTP id u15so9707468wru.6
- for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 07:09:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=HrRcPXrdDEH+H9e0C9TOoQvv4OnY9zUNEsCvg2s6SaY=;
- b=QEfPh+t0Fyz152s9QK8pRF14bJscnPwLuf3SuUh4P+mt/UqYPpNhZI/0eOGLnMqGft
- I4o4Cfu28/irbZ7hwKIsgixuzI5Et8OeQ3V0hmXuLdzDM+C1UCN6TA40ttMSo7PK96dp
- 7RrGutrZP0o1c5RCjNCirVCYH2SPWwWgkxZgc=
+ id 8633B6323F; Fri, 17 Sep 2021 06:32:54 +0000 (UTC)
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+ [209.85.221.47])
+ by lists.linaro.org (Postfix) with ESMTPS id 7693163239
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Sep 2021 06:32:52 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id u15so13338223wru.6
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Sep 2021 23:32:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-transfer-encoding:content-language;
+ bh=DYacMBCZ5vJCp8ZHnptSvRYNq1rxGxZ0iwYDnR+lSRM=;
+ b=AvJElUxr8Ju42g+bWG4wkdvLTtU2gxraw1tJ0OEBgj32irZu+E48FSTWF/YCEf5Gxg
+ Rz/PcjG2e6iphOW6BMjtWoBTat8otZqtXk0I32be+7COtdVqUqgGZKCh+SCynNrYGsbw
+ zGZSkiMYiYrWl96ZGNkdaDs+oOOSuOFC1AQ140ZX2IRBGmeTEcnAuUdrtcNQDJsHNPw3
+ iCZhXIKKhKAxwCyq/brkCkVoe8CcWP+ns7Mimu813h3DwZzV47BZdNDvSaNIY8AjOdBg
+ mPsiZp2GKhNZd266ra7tNBnlhZ2TCCJWLrHIXbG0kVTgwbXI0xp6TGRrz8+uR8pFpgjN
+ lcZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=HrRcPXrdDEH+H9e0C9TOoQvv4OnY9zUNEsCvg2s6SaY=;
- b=Km7PKxTOdvjkvgRAfVby/FVR0rfOhMxzztIAVcqINMxebd+gcCGqGcsA9hi4nyJWYw
- WsSOn8PuSf/lXSfLcmZ2hTFTOyqB1Gba/s5J4tFfY65RUH5FmkeJQjUb6VXcsYAJQ055
- ugK/LOCRc5nI5WcCZ5/KZqJaMVE8bsDBtwWARz/c8HjQsLlGUmbhjCi8LdJe5i75mxFC
- Wt3LAknn3JQK5J9UJToY+gDse54eyl847syhpaMCeSVBZwbFB/zeJ2/GCQdUffE/tuLW
- b6WNDfo7EhbrTooOiVWSTDBd90ya0s+ptenYmPUNWF2WmX0+E2TmY0DqreJd3rqw0Uwd
- J4yA==
-X-Gm-Message-State: AOAM532RJUmNkJOBnaC85Wq/3B0jjzzfIwAGfhXDGuBwKu/56epN9boB
- DAVV+Bw4SWJ7VouGhG0HXvUQ0w==
-X-Google-Smtp-Source: ABdhPJztpwtq5xDHGdrqxZVYyy5VO4TkSgk8kpPRppCqPm2HmIXpd08/XBiAvSoJ/+sIeWbyu/KYrg==
-X-Received: by 2002:a5d:6741:: with SMTP id l1mr6387370wrw.289.1631801386120; 
- Thu, 16 Sep 2021 07:09:46 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id j2sm3568539wrq.35.2021.09.16.07.09.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 16 Sep 2021 07:09:44 -0700 (PDT)
-Date: Thu, 16 Sep 2021 16:09:42 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YUNQJlSwzoKNRYIk@phenom.ffwll.local>
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-transfer-encoding
+ :content-language;
+ bh=DYacMBCZ5vJCp8ZHnptSvRYNq1rxGxZ0iwYDnR+lSRM=;
+ b=SQtSOHGhEgiSF3mvTzsxKKJ2wbGHVtbRQmAvDazU1mB0zMvmrsyJ75ioy7Q99msu0i
+ 1IUGiWjt6/cWm+qNtnnEt/si3bOPzD/A9r/WXEgpusPtZcWV4f4+L6Kprek7fBD7kXLs
+ LrW1CcESN0tRKQDCa0UORUURw/8AZX3Nu3g2GtKwxN1HoNMmtdMdqqUolmjpW6i33vgo
+ NBjjtnWL6alIn8x1SlkPKTdaO9f4JV84ogViXol6WfQJa73M4QPG+8K97DAMkfEH1Ogn
+ IXVXMIkjNxVJfNcQm2yTHvfRYFFOW2yPR8jNR4FwdUB9LSDGG5q11Gjl3QbnypLa5Ny9
+ 309g==
+X-Gm-Message-State: AOAM531bMgFPiF3nrhAuwSa1jm8CoZ68L+XOOtK9OqT5K+QJXhElERy7
+ yd9/Q05QRcyQ2S419gR4oaQ=
+X-Google-Smtp-Source: ABdhPJzxww/qB5IkRPFUnTHhPZ5Eof2VFGaFU3PmY7gTkpOJJM05MaCj9qyGSIVq17lrG33fW4WuGQ==
+X-Received: by 2002:adf:f2c5:: with SMTP id d5mr9711493wrp.223.1631860371006; 
+ Thu, 16 Sep 2021 23:32:51 -0700 (PDT)
+Received: from [192.168.178.21] (p5b0ea1b5.dip0.t-ipconnect.de.
+ [91.14.161.181])
+ by smtp.gmail.com with ESMTPSA id m18sm5635825wrn.85.2021.09.16.23.32.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 16 Sep 2021 23:32:50 -0700 (PDT)
+To: Daniel Vetter <daniel@ffwll.ch>
 References: <20210910082655.82168-1-christian.koenig@amd.com>
  <YUDWHw19iUMfFr7K@phenom.ffwll.local>
  <26f766c9-9a3c-3894-9256-e07090655dc2@gmail.com>
  <CAKMK7uFcU-Dh8kMDrfY1rigVf0J-_R8GJ-d+C-iYNmOWx57W7Q@mail.gmail.com>
  <0bc024c5-a54c-eb3c-4c88-3eb7fbf77261@gmail.com>
+ <YUNQJlSwzoKNRYIk@phenom.ffwll.local>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <604fd887-10ce-0841-bb29-b756bd08d9ab@gmail.com>
+Date: Fri, 17 Sep 2021 08:32:49 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <0bc024c5-a54c-eb3c-4c88-3eb7fbf77261@gmail.com>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
+In-Reply-To: <YUNQJlSwzoKNRYIk@phenom.ffwll.local>
+Content-Language: en-US
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [PATCH 01/14] dma-buf: add
  dma_resv_for_each_fence_unlocked
@@ -83,338 +89,216 @@ List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: "moderated list:DMA BUFFER SHARING FRAMEWORK"
  <linaro-mm-sig@lists.linaro.org>, dri-devel <dri-devel@lists.freedesktop.org>,
- Daniel Vetter <daniel@ffwll.ch>,
  "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Thu, Sep 16, 2021 at 02:49:26PM +0200, Christian K=F6nig wrote:
-> Am 16.09.21 um 14:14 schrieb Daniel Vetter:
-> > On Thu, Sep 16, 2021 at 10:50 AM Christian K=F6nig <ckoenig.leichtzumer=
-ken@gmail.com> wrote:
-> > > Am 14.09.21 um 19:04 schrieb Daniel Vetter:
-> > > > On Fri, Sep 10, 2021 at 10:26:42AM +0200, Christian K=F6nig wrote:
-> > > > > Abstract the complexity of iterating over all the fences
-> > > > > in a dma_resv object.
-> > > > > =
-
-> > > > > The new loop handles the whole RCU and retry dance and
-> > > > > returns only fences where we can be sure we grabbed the
-> > > > > right one.
-> > > > > =
-
-> > > > > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
-> > > > > ---
-> > > > >    drivers/dma-buf/dma-resv.c | 63 ++++++++++++++++++++++++++++++=
-++++++++
-> > > > >    include/linux/dma-resv.h   | 36 ++++++++++++++++++++++
-> > > > >    2 files changed, 99 insertions(+)
-> > > > > =
-
-> > > > > diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/dma-res=
-v.c
-> > > > > index 84fbe60629e3..213a9b7251ca 100644
-> > > > > --- a/drivers/dma-buf/dma-resv.c
-> > > > > +++ b/drivers/dma-buf/dma-resv.c
-> > > > > @@ -323,6 +323,69 @@ void dma_resv_add_excl_fence(struct dma_resv=
- *obj, struct dma_fence *fence)
-> > > > >    }
-> > > > >    EXPORT_SYMBOL(dma_resv_add_excl_fence);
-> > > > > +/**
-> > > > > + * dma_resv_walk_unlocked - walk over fences in a dma_resv obj
-> > > > > + * @obj: the dma_resv object
-> > > > > + * @cursor: cursor to record the current position
-> > > > > + * @all_fences: true returns also the shared fences
-> > > > > + * @first: if we should start over
-> > > > > + *
-> > > > > + * Return all the fences in the dma_resv object which are not ye=
-t signaled.
-> > > > > + * The returned fence has an extra local reference so will stay =
-alive.
-> > > > > + * If a concurrent modify is detected the whole iterator is star=
-ted over again.
-> > > > > + */
-> > > > > +struct dma_fence *dma_resv_walk_unlocked(struct dma_resv *obj,
-> > > > > +                                     struct dma_resv_cursor *cur=
-sor,
-> > > > > +                                     bool all_fences, bool first)
-> > > > > +{
-> > > > > +    struct dma_fence *fence =3D NULL;
-> > > > > +
-> > > > > +    do {
-> > > > > +            /* Drop the reference from the previous round */
-> > > > > +            dma_fence_put(fence);
-> > > > > +
-> > > > > +            cursor->is_first =3D first;
-> > > > > +            if (first) {
-> > > > > +                    cursor->seq =3D read_seqcount_begin(&obj->se=
-q);
-> > > > > +                    cursor->index =3D -1;
-> > > > > +                    cursor->fences =3D dma_resv_shared_list(obj);
-> > > > > +                    cursor->is_exclusive =3D true;
-> > > > > +
-> > > > > +                    fence =3D dma_resv_excl_fence(obj);
-> > > > > +                    if (fence && test_bit(DMA_FENCE_FLAG_SIGNALE=
-D_BIT,
-> > > > > +                                          &fence->flags))
-> > > > > +                            fence =3D NULL;
-> > > > > +            } else {
-> > > > > +                    fence =3D NULL;
-> > > > > +            }
-> > > > > +
-> > > > > +            if (fence) {
-> > > > > +                    fence =3D dma_fence_get_rcu(fence);
-> > > > > +            } else if (all_fences && cursor->fences) {
-> > > > > +                    struct dma_resv_list *fences =3D cursor->fen=
-ces;
-> > > > > +
-> > > > > +                    cursor->is_exclusive =3D false;
-> > > > > +                    while (++cursor->index < fences->shared_coun=
-t) {
-> > > > > +                            fence =3D rcu_dereference(fences->sh=
-ared[
-> > > > > +                                                    cursor->inde=
-x]);
-> > > > > +                            if (!test_bit(DMA_FENCE_FLAG_SIGNALE=
-D_BIT,
-> > > > > +                                          &fence->flags))
-> > > > > +                                    break;
-> > > > > +                    }
-> > > > > +                    if (cursor->index < fences->shared_count)
-> > > > > +                            fence =3D dma_fence_get_rcu(fence);
-> > > > > +                    else
-> > > > > +                            fence =3D NULL;
-> > > > > +            }
-> > > > > +
-> > > > > +            /* For the eventually next round */
-> > > > > +            first =3D true;
-> > > > > +    } while (read_seqcount_retry(&obj->seq, cursor->seq));
-> > > > > +
-> > > > > +    return fence;
-> > > > > +}
-> > > > > +EXPORT_SYMBOL_GPL(dma_resv_walk_unlocked);
-> > > > > +
-> > > > >    /**
-> > > > >     * dma_resv_copy_fences - Copy all fences from src to dst.
-> > > > >     * @dst: the destination reservation object
-> > > > > diff --git a/include/linux/dma-resv.h b/include/linux/dma-resv.h
-> > > > > index 9100dd3dc21f..f5b91c292ee0 100644
-> > > > > --- a/include/linux/dma-resv.h
-> > > > > +++ b/include/linux/dma-resv.h
-> > > > > @@ -149,6 +149,39 @@ struct dma_resv {
-> > > > >       struct dma_resv_list __rcu *fence;
-> > > > >    };
-> > > > > +/**
-> > > > > + * struct dma_resv_cursor - current position into the dma_resv f=
-ences
-> > > > > + * @seq: sequence number to check
-> > > > > + * @index: index into the shared fences
-> > > > > + * @shared: the shared fences
-> > > > > + * @is_first: true if this is the first returned fence
-> > > > > + * @is_exclusive: if the current fence is the exclusive one
-> > > > > + */
-> > > > > +struct dma_resv_cursor {
-> > > > > +    unsigned int seq;
-> > > > > +    unsigned int index;
-> > > > > +    struct dma_resv_list *fences;
-> > > > > +    bool is_first;
-> > > > > +    bool is_exclusive;
-> > > > > +};
-> > > > A bit a bikeshed, but I think I'd be nice to align this with the ot=
-her
-> > > > iterators we have, e.g. for the drm_connector list.
-> > > > =
-
-> > > > So struct dma_resv_fence_iter, dma_resv_fence_iter_begin/next/end().
-> > > I've renamed the structure to dma_resv_iter.
-> > > =
-
-> > > > Also I think the for_each macro must not include begin/end calls. I=
-f we
-> > > > include that then it saves 2 lines of code at the cost of a pile of
-> > > > awkward bugs because people break; out of the loop or return early =
- (only
-> > > > continue is safe) and we leak a fence. Or worse.
-> > > > =
-
-> > > > Explicit begin/end is much more robust at a very marginal cost imo.
-> > > The key point is that this makes it quite a bunch more complicated to
-> > > implement. See those functions are easiest when you centralize them a=
-nd
-> > > try to not spread the functionality into begin/end.
-> > > =
-
-> > > The only thing I could see in the end function would be to drop the
-> > > reference for the dma_fence and that is not really something I would
-> > > like to do because we actually need to keep that reference in a bunch=
- of
-> > > cases.
-> > Yeah but it's extremely fragile. See with drm_connector_iter we also ha=
-ve
-> > the need to grab a reference to that connector in a few place, and I do
-> > think that open-code that is much clearer instead of inheriting a
-> > reference that the for_each macro acquired for you, and which you cleve=
-rly
-> > leaked through a break; Compare
-> > =
-
-> > for_each_fence(fence) {
-> > 	if (fence) {
-> > 		found_fence =3D fence;
-> > 		break;
-> > 	}
-> > }
-> > =
-
-> > /* do some itneresting stuff with found_fence */
-> > =
-
-> > dma_fence_put(found_fence); /* wtf, where is this fence reference from =
-*/
-> > =
-
-> > Versus what I'm proposing:
-> > =
-
-> > fence_iter_init(&fence_iter)
-> > for_each_fence(fence, &fence_iter) {
-> > 	if (fence) {
-> > 		found_fence =3D fence;
-> > 		dma_fence_get(found_fence);
-> > 		break;
-> > 	}
-> > }
-> > fence_iter_end(&fence_iter)
-> > =
-
-> > /* do some itneresting stuff with found_fence */
-> > =
-
-> > dma_fence_put(found_fence); /* 100% clear which reference we're putting=
- here */
-> > =
-
-> > One of these patterns is maintainable and clear, at the cost of 3 more
-> > lines. The other one is frankly just clever but fragile nonsense.
-> > =
-
-> > So yeah I really think we need the iter_init/end/next triple of functio=
-ns
-> > here. Too clever is no good at all. And yes that version means you have=
- an
-> > additional kref_get/put in there for the found fence, but I really don't
-> > think that matters in any of these paths here.
-> =
-
-> Yeah, that's what I've pondered on as well but I thought that avoiding the
-> extra get/put dance would be more important to avoid.
-
-Yeah, but if that shows up in a benchmark/profile, we can fix it with some
-fence_iter_get_fence() or so wrapper which explicitly hands the reference
-over to you (by clearing the pointer in the iter or wherever so the
-_next() or _end() do not call dma_fence_put anymore). So if necessary, we
-can have clarity and speed here.
-
-> Anyway, going to change that to make clear what happens here.
-> =
-
-> But question is can you go over the patch set and see if we can replace s=
-ome
-> more dma_fence_for_each_fence_unlock() with dma_fence_for_each_fence()
-> because the lock is either held or can be taken? I would have a much bett=
-er
-> feeling to avoid the unlocked access in the first place.
-
-Yeah fully agreed, I think we should aim as much for fully locked. Btw on
-that did you see my other reply where I toss around an idea for the
-dma_resv unsharing problem?
--Daniel
-
-> =
-
-> Thanks,
-> Christian.
-> =
-
-> > =
-
-> > Cheers, Daniel
-> > =
-
-> > > Regards,
-> > > Christian.
-> > > =
-
-> > > > Otherwise I think this fence iterator is a solid concept that yeah =
-we
-> > > > should roll out everywhere.
-> > > > -Daniel
-> > > > =
-
-> > > > > +
-> > > > > +/**
-> > > > > + * dma_resv_for_each_fence_unlocked - fence iterator
-> > > > > + * @obj: a dma_resv object pointer
-> > > > > + * @cursor: a struct dma_resv_cursor pointer
-> > > > > + * @all_fences: true if all fences should be returned
-> > > > > + * @fence: the current fence
-> > > > > + *
-> > > > > + * Iterate over the fences in a struct dma_resv object without h=
-olding the
-> > > > > + * dma_resv::lock. The RCU read side lock must be hold when usin=
-g this, but can
-> > > > > + * be dropped and re-taken as necessary inside the loop. @all_fe=
-nces controls
-> > > > > + * if the shared fences are returned as well.
-> > > > > + */
-> > > > > +#define dma_resv_for_each_fence_unlocked(obj, cursor, all_fences=
-, fence)    \
-> > > > > +    for (fence =3D dma_resv_walk_unlocked(obj, cursor, all_fence=
-s, true); \
-> > > > > +         fence; dma_fence_put(fence),                           =
-        \
-> > > > > +         fence =3D dma_resv_walk_unlocked(obj, cursor, all_fence=
-s, false))
-> > > > > +
-> > > > >    #define dma_resv_held(obj) lockdep_is_held(&(obj)->lock.base)
-> > > > >    #define dma_resv_assert_held(obj) lockdep_assert_held(&(obj)->=
-lock.base)
-> > > > > @@ -366,6 +399,9 @@ void dma_resv_fini(struct dma_resv *obj);
-> > > > >    int dma_resv_reserve_shared(struct dma_resv *obj, unsigned int=
- num_fences);
-> > > > >    void dma_resv_add_shared_fence(struct dma_resv *obj, struct dm=
-a_fence *fence);
-> > > > >    void dma_resv_add_excl_fence(struct dma_resv *obj, struct dma_=
-fence *fence);
-> > > > > +struct dma_fence *dma_resv_walk_unlocked(struct dma_resv *obj,
-> > > > > +                                     struct dma_resv_cursor *cur=
-sor,
-> > > > > +                                     bool first, bool all_fences=
-);
-> > > > >    int dma_resv_get_fences(struct dma_resv *obj, struct dma_fence=
- **pfence_excl,
-> > > > >                       unsigned *pshared_count, struct dma_fence *=
-**pshared);
-> > > > >    int dma_resv_copy_fences(struct dma_resv *dst, struct dma_resv=
- *src);
-> > > > > --
-> > > > > 2.25.1
-> > > > > =
-
-> > =
-
-> =
-
-
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+QW0gMTYuMDkuMjEgdW0gMTY6MDkgc2NocmllYiBEYW5pZWwgVmV0dGVyOgo+IE9uIFRodSwgU2Vw
+IDE2LCAyMDIxIGF0IDAyOjQ5OjI2UE0gKzAyMDAsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6Cj4+
+IEFtIDE2LjA5LjIxIHVtIDE0OjE0IHNjaHJpZWIgRGFuaWVsIFZldHRlcjoKPj4+IE9uIFRodSwg
+U2VwIDE2LCAyMDIxIGF0IDEwOjUwIEFNIENocmlzdGlhbiBLw7ZuaWcgPGNrb2VuaWcubGVpY2h0
+enVtZXJrZW5AZ21haWwuY29tPiB3cm90ZToKPj4+PiBBbSAxNC4wOS4yMSB1bSAxOTowNCBzY2hy
+aWViIERhbmllbCBWZXR0ZXI6Cj4+Pj4+IE9uIEZyaSwgU2VwIDEwLCAyMDIxIGF0IDEwOjI2OjQy
+QU0gKzAyMDAsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6Cj4+Pj4+PiBBYnN0cmFjdCB0aGUgY29t
+cGxleGl0eSBvZiBpdGVyYXRpbmcgb3ZlciBhbGwgdGhlIGZlbmNlcwo+Pj4+Pj4gaW4gYSBkbWFf
+cmVzdiBvYmplY3QuCj4+Pj4+Pgo+Pj4+Pj4gVGhlIG5ldyBsb29wIGhhbmRsZXMgdGhlIHdob2xl
+IFJDVSBhbmQgcmV0cnkgZGFuY2UgYW5kCj4+Pj4+PiByZXR1cm5zIG9ubHkgZmVuY2VzIHdoZXJl
+IHdlIGNhbiBiZSBzdXJlIHdlIGdyYWJiZWQgdGhlCj4+Pj4+PiByaWdodCBvbmUuCj4+Pj4+Pgo+
+Pj4+Pj4gU2lnbmVkLW9mZi1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0Bh
+bWQuY29tPgo+Pj4+Pj4gLS0tCj4+Pj4+PiAgICAgZHJpdmVycy9kbWEtYnVmL2RtYS1yZXN2LmMg
+fCA2MyArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKwo+Pj4+Pj4gICAgIGlu
+Y2x1ZGUvbGludXgvZG1hLXJlc3YuaCAgIHwgMzYgKysrKysrKysrKysrKysrKysrKysrKwo+Pj4+
+Pj4gICAgIDIgZmlsZXMgY2hhbmdlZCwgOTkgaW5zZXJ0aW9ucygrKQo+Pj4+Pj4KPj4+Pj4+IGRp
+ZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9k
+bWEtcmVzdi5jCj4+Pj4+PiBpbmRleCA4NGZiZTYwNjI5ZTMuLjIxM2E5YjcyNTFjYSAxMDA2NDQK
+Pj4+Pj4+IC0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jCj4+Pj4+PiArKysgYi9kcml2
+ZXJzL2RtYS1idWYvZG1hLXJlc3YuYwo+Pj4+Pj4gQEAgLTMyMyw2ICszMjMsNjkgQEAgdm9pZCBk
+bWFfcmVzdl9hZGRfZXhjbF9mZW5jZShzdHJ1Y3QgZG1hX3Jlc3YgKm9iaiwgc3RydWN0IGRtYV9m
+ZW5jZSAqZmVuY2UpCj4+Pj4+PiAgICAgfQo+Pj4+Pj4gICAgIEVYUE9SVF9TWU1CT0woZG1hX3Jl
+c3ZfYWRkX2V4Y2xfZmVuY2UpOwo+Pj4+Pj4gKy8qKgo+Pj4+Pj4gKyAqIGRtYV9yZXN2X3dhbGtf
+dW5sb2NrZWQgLSB3YWxrIG92ZXIgZmVuY2VzIGluIGEgZG1hX3Jlc3Ygb2JqCj4+Pj4+PiArICog
+QG9iajogdGhlIGRtYV9yZXN2IG9iamVjdAo+Pj4+Pj4gKyAqIEBjdXJzb3I6IGN1cnNvciB0byBy
+ZWNvcmQgdGhlIGN1cnJlbnQgcG9zaXRpb24KPj4+Pj4+ICsgKiBAYWxsX2ZlbmNlczogdHJ1ZSBy
+ZXR1cm5zIGFsc28gdGhlIHNoYXJlZCBmZW5jZXMKPj4+Pj4+ICsgKiBAZmlyc3Q6IGlmIHdlIHNo
+b3VsZCBzdGFydCBvdmVyCj4+Pj4+PiArICoKPj4+Pj4+ICsgKiBSZXR1cm4gYWxsIHRoZSBmZW5j
+ZXMgaW4gdGhlIGRtYV9yZXN2IG9iamVjdCB3aGljaCBhcmUgbm90IHlldCBzaWduYWxlZC4KPj4+
+Pj4+ICsgKiBUaGUgcmV0dXJuZWQgZmVuY2UgaGFzIGFuIGV4dHJhIGxvY2FsIHJlZmVyZW5jZSBz
+byB3aWxsIHN0YXkgYWxpdmUuCj4+Pj4+PiArICogSWYgYSBjb25jdXJyZW50IG1vZGlmeSBpcyBk
+ZXRlY3RlZCB0aGUgd2hvbGUgaXRlcmF0b3IgaXMgc3RhcnRlZCBvdmVyIGFnYWluLgo+Pj4+Pj4g
+KyAqLwo+Pj4+Pj4gK3N0cnVjdCBkbWFfZmVuY2UgKmRtYV9yZXN2X3dhbGtfdW5sb2NrZWQoc3Ry
+dWN0IGRtYV9yZXN2ICpvYmosCj4+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHN0cnVjdCBkbWFfcmVzdl9jdXJzb3IgKmN1cnNvciwKPj4+Pj4+ICsgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgYm9vbCBhbGxfZmVuY2VzLCBib29sIGZpcnN0KQo+
+Pj4+Pj4gK3sKPj4+Pj4+ICsgICAgc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UgPSBOVUxMOwo+Pj4+
+Pj4gKwo+Pj4+Pj4gKyAgICBkbyB7Cj4+Pj4+PiArICAgICAgICAgICAgLyogRHJvcCB0aGUgcmVm
+ZXJlbmNlIGZyb20gdGhlIHByZXZpb3VzIHJvdW5kICovCj4+Pj4+PiArICAgICAgICAgICAgZG1h
+X2ZlbmNlX3B1dChmZW5jZSk7Cj4+Pj4+PiArCj4+Pj4+PiArICAgICAgICAgICAgY3Vyc29yLT5p
+c19maXJzdCA9IGZpcnN0Owo+Pj4+Pj4gKyAgICAgICAgICAgIGlmIChmaXJzdCkgewo+Pj4+Pj4g
+KyAgICAgICAgICAgICAgICAgICAgY3Vyc29yLT5zZXEgPSByZWFkX3NlcWNvdW50X2JlZ2luKCZv
+YmotPnNlcSk7Cj4+Pj4+PiArICAgICAgICAgICAgICAgICAgICBjdXJzb3ItPmluZGV4ID0gLTE7
+Cj4+Pj4+PiArICAgICAgICAgICAgICAgICAgICBjdXJzb3ItPmZlbmNlcyA9IGRtYV9yZXN2X3No
+YXJlZF9saXN0KG9iaik7Cj4+Pj4+PiArICAgICAgICAgICAgICAgICAgICBjdXJzb3ItPmlzX2V4
+Y2x1c2l2ZSA9IHRydWU7Cj4+Pj4+PiArCj4+Pj4+PiArICAgICAgICAgICAgICAgICAgICBmZW5j
+ZSA9IGRtYV9yZXN2X2V4Y2xfZmVuY2Uob2JqKTsKPj4+Pj4+ICsgICAgICAgICAgICAgICAgICAg
+IGlmIChmZW5jZSAmJiB0ZXN0X2JpdChETUFfRkVOQ0VfRkxBR19TSUdOQUxFRF9CSVQsCj4+Pj4+
+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJmZlbmNlLT5mbGFn
+cykpCj4+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZlbmNlID0gTlVMTDsKPj4+
+Pj4+ICsgICAgICAgICAgICB9IGVsc2Ugewo+Pj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgZmVu
+Y2UgPSBOVUxMOwo+Pj4+Pj4gKyAgICAgICAgICAgIH0KPj4+Pj4+ICsKPj4+Pj4+ICsgICAgICAg
+ICAgICBpZiAoZmVuY2UpIHsKPj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgIGZlbmNlID0gZG1h
+X2ZlbmNlX2dldF9yY3UoZmVuY2UpOwo+Pj4+Pj4gKyAgICAgICAgICAgIH0gZWxzZSBpZiAoYWxs
+X2ZlbmNlcyAmJiBjdXJzb3ItPmZlbmNlcykgewo+Pj4+Pj4gKyAgICAgICAgICAgICAgICAgICAg
+c3RydWN0IGRtYV9yZXN2X2xpc3QgKmZlbmNlcyA9IGN1cnNvci0+ZmVuY2VzOwo+Pj4+Pj4gKwo+
+Pj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgY3Vyc29yLT5pc19leGNsdXNpdmUgPSBmYWxzZTsK
+Pj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgIHdoaWxlICgrK2N1cnNvci0+aW5kZXggPCBmZW5j
+ZXMtPnNoYXJlZF9jb3VudCkgewo+Pj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICBm
+ZW5jZSA9IHJjdV9kZXJlZmVyZW5jZShmZW5jZXMtPnNoYXJlZFsKPj4+Pj4+ICsgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY3Vyc29yLT5pbmRleF0p
+Owo+Pj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAoIXRlc3RfYml0KERNQV9G
+RU5DRV9GTEFHX1NJR05BTEVEX0JJVCwKPj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAmZmVuY2UtPmZsYWdzKSkKPj4+Pj4+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBicmVhazsKPj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgIH0K
+Pj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgIGlmIChjdXJzb3ItPmluZGV4IDwgZmVuY2VzLT5z
+aGFyZWRfY291bnQpCj4+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZlbmNlID0g
+ZG1hX2ZlbmNlX2dldF9yY3UoZmVuY2UpOwo+Pj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgZWxz
+ZQo+Pj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICBmZW5jZSA9IE5VTEw7Cj4+Pj4+
+PiArICAgICAgICAgICAgfQo+Pj4+Pj4gKwo+Pj4+Pj4gKyAgICAgICAgICAgIC8qIEZvciB0aGUg
+ZXZlbnR1YWxseSBuZXh0IHJvdW5kICovCj4+Pj4+PiArICAgICAgICAgICAgZmlyc3QgPSB0cnVl
+Owo+Pj4+Pj4gKyAgICB9IHdoaWxlIChyZWFkX3NlcWNvdW50X3JldHJ5KCZvYmotPnNlcSwgY3Vy
+c29yLT5zZXEpKTsKPj4+Pj4+ICsKPj4+Pj4+ICsgICAgcmV0dXJuIGZlbmNlOwo+Pj4+Pj4gK30K
+Pj4+Pj4+ICtFWFBPUlRfU1lNQk9MX0dQTChkbWFfcmVzdl93YWxrX3VubG9ja2VkKTsKPj4+Pj4+
+ICsKPj4+Pj4+ICAgICAvKioKPj4+Pj4+ICAgICAgKiBkbWFfcmVzdl9jb3B5X2ZlbmNlcyAtIENv
+cHkgYWxsIGZlbmNlcyBmcm9tIHNyYyB0byBkc3QuCj4+Pj4+PiAgICAgICogQGRzdDogdGhlIGRl
+c3RpbmF0aW9uIHJlc2VydmF0aW9uIG9iamVjdAo+Pj4+Pj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUv
+bGludXgvZG1hLXJlc3YuaCBiL2luY2x1ZGUvbGludXgvZG1hLXJlc3YuaAo+Pj4+Pj4gaW5kZXgg
+OTEwMGRkM2RjMjFmLi5mNWI5MWMyOTJlZTAgMTAwNjQ0Cj4+Pj4+PiAtLS0gYS9pbmNsdWRlL2xp
+bnV4L2RtYS1yZXN2LmgKPj4+Pj4+ICsrKyBiL2luY2x1ZGUvbGludXgvZG1hLXJlc3YuaAo+Pj4+
+Pj4gQEAgLTE0OSw2ICsxNDksMzkgQEAgc3RydWN0IGRtYV9yZXN2IHsKPj4+Pj4+ICAgICAgICBz
+dHJ1Y3QgZG1hX3Jlc3ZfbGlzdCBfX3JjdSAqZmVuY2U7Cj4+Pj4+PiAgICAgfTsKPj4+Pj4+ICsv
+KioKPj4+Pj4+ICsgKiBzdHJ1Y3QgZG1hX3Jlc3ZfY3Vyc29yIC0gY3VycmVudCBwb3NpdGlvbiBp
+bnRvIHRoZSBkbWFfcmVzdiBmZW5jZXMKPj4+Pj4+ICsgKiBAc2VxOiBzZXF1ZW5jZSBudW1iZXIg
+dG8gY2hlY2sKPj4+Pj4+ICsgKiBAaW5kZXg6IGluZGV4IGludG8gdGhlIHNoYXJlZCBmZW5jZXMK
+Pj4+Pj4+ICsgKiBAc2hhcmVkOiB0aGUgc2hhcmVkIGZlbmNlcwo+Pj4+Pj4gKyAqIEBpc19maXJz
+dDogdHJ1ZSBpZiB0aGlzIGlzIHRoZSBmaXJzdCByZXR1cm5lZCBmZW5jZQo+Pj4+Pj4gKyAqIEBp
+c19leGNsdXNpdmU6IGlmIHRoZSBjdXJyZW50IGZlbmNlIGlzIHRoZSBleGNsdXNpdmUgb25lCj4+
+Pj4+PiArICovCj4+Pj4+PiArc3RydWN0IGRtYV9yZXN2X2N1cnNvciB7Cj4+Pj4+PiArICAgIHVu
+c2lnbmVkIGludCBzZXE7Cj4+Pj4+PiArICAgIHVuc2lnbmVkIGludCBpbmRleDsKPj4+Pj4+ICsg
+ICAgc3RydWN0IGRtYV9yZXN2X2xpc3QgKmZlbmNlczsKPj4+Pj4+ICsgICAgYm9vbCBpc19maXJz
+dDsKPj4+Pj4+ICsgICAgYm9vbCBpc19leGNsdXNpdmU7Cj4+Pj4+PiArfTsKPj4+Pj4gQSBiaXQg
+YSBiaWtlc2hlZCwgYnV0IEkgdGhpbmsgSSdkIGJlIG5pY2UgdG8gYWxpZ24gdGhpcyB3aXRoIHRo
+ZSBvdGhlcgo+Pj4+PiBpdGVyYXRvcnMgd2UgaGF2ZSwgZS5nLiBmb3IgdGhlIGRybV9jb25uZWN0
+b3IgbGlzdC4KPj4+Pj4KPj4+Pj4gU28gc3RydWN0IGRtYV9yZXN2X2ZlbmNlX2l0ZXIsIGRtYV9y
+ZXN2X2ZlbmNlX2l0ZXJfYmVnaW4vbmV4dC9lbmQoKS4KPj4+PiBJJ3ZlIHJlbmFtZWQgdGhlIHN0
+cnVjdHVyZSB0byBkbWFfcmVzdl9pdGVyLgo+Pj4+Cj4+Pj4+IEFsc28gSSB0aGluayB0aGUgZm9y
+X2VhY2ggbWFjcm8gbXVzdCBub3QgaW5jbHVkZSBiZWdpbi9lbmQgY2FsbHMuIElmIHdlCj4+Pj4+
+IGluY2x1ZGUgdGhhdCB0aGVuIGl0IHNhdmVzIDIgbGluZXMgb2YgY29kZSBhdCB0aGUgY29zdCBv
+ZiBhIHBpbGUgb2YKPj4+Pj4gYXdrd2FyZCBidWdzIGJlY2F1c2UgcGVvcGxlIGJyZWFrOyBvdXQg
+b2YgdGhlIGxvb3Agb3IgcmV0dXJuIGVhcmx5ICAob25seQo+Pj4+PiBjb250aW51ZSBpcyBzYWZl
+KSBhbmQgd2UgbGVhayBhIGZlbmNlLiBPciB3b3JzZS4KPj4+Pj4KPj4+Pj4gRXhwbGljaXQgYmVn
+aW4vZW5kIGlzIG11Y2ggbW9yZSByb2J1c3QgYXQgYSB2ZXJ5IG1hcmdpbmFsIGNvc3QgaW1vLgo+
+Pj4+IFRoZSBrZXkgcG9pbnQgaXMgdGhhdCB0aGlzIG1ha2VzIGl0IHF1aXRlIGEgYnVuY2ggbW9y
+ZSBjb21wbGljYXRlZCB0bwo+Pj4+IGltcGxlbWVudC4gU2VlIHRob3NlIGZ1bmN0aW9ucyBhcmUg
+ZWFzaWVzdCB3aGVuIHlvdSBjZW50cmFsaXplIHRoZW0gYW5kCj4+Pj4gdHJ5IHRvIG5vdCBzcHJl
+YWQgdGhlIGZ1bmN0aW9uYWxpdHkgaW50byBiZWdpbi9lbmQuCj4+Pj4KPj4+PiBUaGUgb25seSB0
+aGluZyBJIGNvdWxkIHNlZSBpbiB0aGUgZW5kIGZ1bmN0aW9uIHdvdWxkIGJlIHRvIGRyb3AgdGhl
+Cj4+Pj4gcmVmZXJlbmNlIGZvciB0aGUgZG1hX2ZlbmNlIGFuZCB0aGF0IGlzIG5vdCByZWFsbHkg
+c29tZXRoaW5nIEkgd291bGQKPj4+PiBsaWtlIHRvIGRvIGJlY2F1c2Ugd2UgYWN0dWFsbHkgbmVl
+ZCB0byBrZWVwIHRoYXQgcmVmZXJlbmNlIGluIGEgYnVuY2ggb2YKPj4+PiBjYXNlcy4KPj4+IFll
+YWggYnV0IGl0J3MgZXh0cmVtZWx5IGZyYWdpbGUuIFNlZSB3aXRoIGRybV9jb25uZWN0b3JfaXRl
+ciB3ZSBhbHNvIGhhdmUKPj4+IHRoZSBuZWVkIHRvIGdyYWIgYSByZWZlcmVuY2UgdG8gdGhhdCBj
+b25uZWN0b3IgaW4gYSBmZXcgcGxhY2UsIGFuZCBJIGRvCj4+PiB0aGluayB0aGF0IG9wZW4tY29k
+ZSB0aGF0IGlzIG11Y2ggY2xlYXJlciBpbnN0ZWFkIG9mIGluaGVyaXRpbmcgYQo+Pj4gcmVmZXJl
+bmNlIHRoYXQgdGhlIGZvcl9lYWNoIG1hY3JvIGFjcXVpcmVkIGZvciB5b3UsIGFuZCB3aGljaCB5
+b3UgY2xldmVybHkKPj4+IGxlYWtlZCB0aHJvdWdoIGEgYnJlYWs7IENvbXBhcmUKPj4+Cj4+PiBm
+b3JfZWFjaF9mZW5jZShmZW5jZSkgewo+Pj4gCWlmIChmZW5jZSkgewo+Pj4gCQlmb3VuZF9mZW5j
+ZSA9IGZlbmNlOwo+Pj4gCQlicmVhazsKPj4+IAl9Cj4+PiB9Cj4+Pgo+Pj4gLyogZG8gc29tZSBp
+dG5lcmVzdGluZyBzdHVmZiB3aXRoIGZvdW5kX2ZlbmNlICovCj4+Pgo+Pj4gZG1hX2ZlbmNlX3B1
+dChmb3VuZF9mZW5jZSk7IC8qIHd0Ziwgd2hlcmUgaXMgdGhpcyBmZW5jZSByZWZlcmVuY2UgZnJv
+bSAqLwo+Pj4KPj4+IFZlcnN1cyB3aGF0IEknbSBwcm9wb3Npbmc6Cj4+Pgo+Pj4gZmVuY2VfaXRl
+cl9pbml0KCZmZW5jZV9pdGVyKQo+Pj4gZm9yX2VhY2hfZmVuY2UoZmVuY2UsICZmZW5jZV9pdGVy
+KSB7Cj4+PiAJaWYgKGZlbmNlKSB7Cj4+PiAJCWZvdW5kX2ZlbmNlID0gZmVuY2U7Cj4+PiAJCWRt
+YV9mZW5jZV9nZXQoZm91bmRfZmVuY2UpOwo+Pj4gCQlicmVhazsKPj4+IAl9Cj4+PiB9Cj4+PiBm
+ZW5jZV9pdGVyX2VuZCgmZmVuY2VfaXRlcikKPj4+Cj4+PiAvKiBkbyBzb21lIGl0bmVyZXN0aW5n
+IHN0dWZmIHdpdGggZm91bmRfZmVuY2UgKi8KPj4+Cj4+PiBkbWFfZmVuY2VfcHV0KGZvdW5kX2Zl
+bmNlKTsgLyogMTAwJSBjbGVhciB3aGljaCByZWZlcmVuY2Ugd2UncmUgcHV0dGluZyBoZXJlICov
+Cj4+Pgo+Pj4gT25lIG9mIHRoZXNlIHBhdHRlcm5zIGlzIG1haW50YWluYWJsZSBhbmQgY2xlYXIs
+IGF0IHRoZSBjb3N0IG9mIDMgbW9yZQo+Pj4gbGluZXMuIFRoZSBvdGhlciBvbmUgaXMgZnJhbmts
+eSBqdXN0IGNsZXZlciBidXQgZnJhZ2lsZSBub25zZW5zZS4KPj4+Cj4+PiBTbyB5ZWFoIEkgcmVh
+bGx5IHRoaW5rIHdlIG5lZWQgdGhlIGl0ZXJfaW5pdC9lbmQvbmV4dCB0cmlwbGUgb2YgZnVuY3Rp
+b25zCj4+PiBoZXJlLiBUb28gY2xldmVyIGlzIG5vIGdvb2QgYXQgYWxsLiBBbmQgeWVzIHRoYXQg
+dmVyc2lvbiBtZWFucyB5b3UgaGF2ZSBhbgo+Pj4gYWRkaXRpb25hbCBrcmVmX2dldC9wdXQgaW4g
+dGhlcmUgZm9yIHRoZSBmb3VuZCBmZW5jZSwgYnV0IEkgcmVhbGx5IGRvbid0Cj4+PiB0aGluayB0
+aGF0IG1hdHRlcnMgaW4gYW55IG9mIHRoZXNlIHBhdGhzIGhlcmUuCj4+IFllYWgsIHRoYXQncyB3
+aGF0IEkndmUgcG9uZGVyZWQgb24gYXMgd2VsbCBidXQgSSB0aG91Z2h0IHRoYXQgYXZvaWRpbmcg
+dGhlCj4+IGV4dHJhIGdldC9wdXQgZGFuY2Ugd291bGQgYmUgbW9yZSBpbXBvcnRhbnQgdG8gYXZv
+aWQuCj4gWWVhaCwgYnV0IGlmIHRoYXQgc2hvd3MgdXAgaW4gYSBiZW5jaG1hcmsvcHJvZmlsZSwg
+d2UgY2FuIGZpeCBpdCB3aXRoIHNvbWUKPiBmZW5jZV9pdGVyX2dldF9mZW5jZSgpIG9yIHNvIHdy
+YXBwZXIgd2hpY2ggZXhwbGljaXRseSBoYW5kcyB0aGUgcmVmZXJlbmNlCj4gb3ZlciB0byB5b3Ug
+KGJ5IGNsZWFyaW5nIHRoZSBwb2ludGVyIGluIHRoZSBpdGVyIG9yIHdoZXJldmVyIHNvIHRoZQo+
+IF9uZXh0KCkgb3IgX2VuZCgpIGRvIG5vdCBjYWxsIGRtYV9mZW5jZV9wdXQgYW55bW9yZSkuIFNv
+IGlmIG5lY2Vzc2FyeSwgd2UKPiBjYW4gaGF2ZSBjbGFyaXR5IGFuZCBzcGVlZCBoZXJlLgoKT2sg
+ZmluZSB3aXRoIG1lLCBnb2luZyB0byByZXdvcmsgdGhlIGNvZGUuCgo+Cj4+IEFueXdheSwgZ29p
+bmcgdG8gY2hhbmdlIHRoYXQgdG8gbWFrZSBjbGVhciB3aGF0IGhhcHBlbnMgaGVyZS4KPj4KPj4g
+QnV0IHF1ZXN0aW9uIGlzIGNhbiB5b3UgZ28gb3ZlciB0aGUgcGF0Y2ggc2V0IGFuZCBzZWUgaWYg
+d2UgY2FuIHJlcGxhY2Ugc29tZQo+PiBtb3JlIGRtYV9mZW5jZV9mb3JfZWFjaF9mZW5jZV91bmxv
+Y2soKSB3aXRoIGRtYV9mZW5jZV9mb3JfZWFjaF9mZW5jZSgpCj4+IGJlY2F1c2UgdGhlIGxvY2sg
+aXMgZWl0aGVyIGhlbGQgb3IgY2FuIGJlIHRha2VuPyBJIHdvdWxkIGhhdmUgYSBtdWNoIGJldHRl
+cgo+PiBmZWVsaW5nIHRvIGF2b2lkIHRoZSB1bmxvY2tlZCBhY2Nlc3MgaW4gdGhlIGZpcnN0IHBs
+YWNlLgo+IFllYWggZnVsbHkgYWdyZWVkLCBJIHRoaW5rIHdlIHNob3VsZCBhaW0gYXMgbXVjaCBm
+b3IgZnVsbHkgbG9ja2VkLgoKVGhlIHByb2JsZW0gaXMgdGhhdCBJIGNhbid0IHJlYWxseSBzYXkg
+Zm9yIGEgbG90IG9mIGNvZGUgaWYgd2Ugc2hvdWxkIAp1c2UgdGhlIGxvY2tlZCBvciB1bmxvY2tl
+ZCB2YXJpYW50LgoKRm9yIGV4YW1wbGUgVHZydGtvIHN1Z2dlc3RlZCB0byB1c2UgdGhlIGxvY2tl
+ZCB2YXJpYW50IGluIAppOTE1X3JlcXVlc3RfYXdhaXRfb2JqZWN0KCkgYW5kIEkgbWl4ZWQgdGhh
+dCB1cCB3aXRoIAppOTE1X3N3X2ZlbmNlX2F3YWl0X3Jlc2VydmF0aW9uKCkuIEVuZCByZXN1bHQg
+aXMgdGhhdCB0aGUgQ0kgc3lzdGVtIGJsZXcgCnVwIGltbWVkaWF0ZWx5LgoKR29vZCB0aGF0IHRo
+ZSBDSSBzeXN0ZW0gY2F1Z2h0IHRoYXQsIGJ1dCBJIHdpbGwgY2VydGFpbmx5IG9ubHkgbW92ZSB0
+byAKdGhlIGxvY2tlZCB2YXJpYW50IGlmIHNvbWVib2R5IGV4cGxpY2l0bHkgY29uZmlybSB0byBt
+ZSB0aGF0IHdlIGNhbiBkbyAKdGhhdCBmb3IgYW4gdXNlIGNhc2UuCgo+IEJ0dyBvbiB0aGF0IGRp
+ZCB5b3Ugc2VlIG15IG90aGVyIHJlcGx5IHdoZXJlIEkgdG9zcyBhcm91bmQgYW4gaWRlYSBmb3Ig
+dGhlCj4gZG1hX3Jlc3YgdW5zaGFyaW5nIHByb2JsZW0/CgpBdCBsZWFzdCBJIGRvbid0IGtub3cg
+d2hhdCB5b3UgYXJlIHRhbGtpbmcgYWJvdXQuIFNvIG5vIEkgcHJvYmFibHkgCnNvbWVob3cgbWlz
+c2VkIHRoYXQuCgpDaHJpc3RpYW4uCgoKPiAtRGFuaWVsCj4KPj4gVGhhbmtzLAo+PiBDaHJpc3Rp
+YW4uCj4+Cj4+PiBDaGVlcnMsIERhbmllbAo+Pj4KPj4+PiBSZWdhcmRzLAo+Pj4+IENocmlzdGlh
+bi4KPj4+Pgo+Pj4+PiBPdGhlcndpc2UgSSB0aGluayB0aGlzIGZlbmNlIGl0ZXJhdG9yIGlzIGEg
+c29saWQgY29uY2VwdCB0aGF0IHllYWggd2UKPj4+Pj4gc2hvdWxkIHJvbGwgb3V0IGV2ZXJ5d2hl
+cmUuCj4+Pj4+IC1EYW5pZWwKPj4+Pj4KPj4+Pj4+ICsKPj4+Pj4+ICsvKioKPj4+Pj4+ICsgKiBk
+bWFfcmVzdl9mb3JfZWFjaF9mZW5jZV91bmxvY2tlZCAtIGZlbmNlIGl0ZXJhdG9yCj4+Pj4+PiAr
+ICogQG9iajogYSBkbWFfcmVzdiBvYmplY3QgcG9pbnRlcgo+Pj4+Pj4gKyAqIEBjdXJzb3I6IGEg
+c3RydWN0IGRtYV9yZXN2X2N1cnNvciBwb2ludGVyCj4+Pj4+PiArICogQGFsbF9mZW5jZXM6IHRy
+dWUgaWYgYWxsIGZlbmNlcyBzaG91bGQgYmUgcmV0dXJuZWQKPj4+Pj4+ICsgKiBAZmVuY2U6IHRo
+ZSBjdXJyZW50IGZlbmNlCj4+Pj4+PiArICoKPj4+Pj4+ICsgKiBJdGVyYXRlIG92ZXIgdGhlIGZl
+bmNlcyBpbiBhIHN0cnVjdCBkbWFfcmVzdiBvYmplY3Qgd2l0aG91dCBob2xkaW5nIHRoZQo+Pj4+
+Pj4gKyAqIGRtYV9yZXN2Ojpsb2NrLiBUaGUgUkNVIHJlYWQgc2lkZSBsb2NrIG11c3QgYmUgaG9s
+ZCB3aGVuIHVzaW5nIHRoaXMsIGJ1dCBjYW4KPj4+Pj4+ICsgKiBiZSBkcm9wcGVkIGFuZCByZS10
+YWtlbiBhcyBuZWNlc3NhcnkgaW5zaWRlIHRoZSBsb29wLiBAYWxsX2ZlbmNlcyBjb250cm9scwo+
+Pj4+Pj4gKyAqIGlmIHRoZSBzaGFyZWQgZmVuY2VzIGFyZSByZXR1cm5lZCBhcyB3ZWxsLgo+Pj4+
+Pj4gKyAqLwo+Pj4+Pj4gKyNkZWZpbmUgZG1hX3Jlc3ZfZm9yX2VhY2hfZmVuY2VfdW5sb2NrZWQo
+b2JqLCBjdXJzb3IsIGFsbF9mZW5jZXMsIGZlbmNlKSAgICBcCj4+Pj4+PiArICAgIGZvciAoZmVu
+Y2UgPSBkbWFfcmVzdl93YWxrX3VubG9ja2VkKG9iaiwgY3Vyc29yLCBhbGxfZmVuY2VzLCB0cnVl
+KTsgXAo+Pj4+Pj4gKyAgICAgICAgIGZlbmNlOyBkbWFfZmVuY2VfcHV0KGZlbmNlKSwgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgIFwKPj4+Pj4+ICsgICAgICAgICBmZW5jZSA9IGRt
+YV9yZXN2X3dhbGtfdW5sb2NrZWQob2JqLCBjdXJzb3IsIGFsbF9mZW5jZXMsIGZhbHNlKSkKPj4+
+Pj4+ICsKPj4+Pj4+ICAgICAjZGVmaW5lIGRtYV9yZXN2X2hlbGQob2JqKSBsb2NrZGVwX2lzX2hl
+bGQoJihvYmopLT5sb2NrLmJhc2UpCj4+Pj4+PiAgICAgI2RlZmluZSBkbWFfcmVzdl9hc3NlcnRf
+aGVsZChvYmopIGxvY2tkZXBfYXNzZXJ0X2hlbGQoJihvYmopLT5sb2NrLmJhc2UpCj4+Pj4+PiBA
+QCAtMzY2LDYgKzM5OSw5IEBAIHZvaWQgZG1hX3Jlc3ZfZmluaShzdHJ1Y3QgZG1hX3Jlc3YgKm9i
+aik7Cj4+Pj4+PiAgICAgaW50IGRtYV9yZXN2X3Jlc2VydmVfc2hhcmVkKHN0cnVjdCBkbWFfcmVz
+diAqb2JqLCB1bnNpZ25lZCBpbnQgbnVtX2ZlbmNlcyk7Cj4+Pj4+PiAgICAgdm9pZCBkbWFfcmVz
+dl9hZGRfc2hhcmVkX2ZlbmNlKHN0cnVjdCBkbWFfcmVzdiAqb2JqLCBzdHJ1Y3QgZG1hX2ZlbmNl
+ICpmZW5jZSk7Cj4+Pj4+PiAgICAgdm9pZCBkbWFfcmVzdl9hZGRfZXhjbF9mZW5jZShzdHJ1Y3Qg
+ZG1hX3Jlc3YgKm9iaiwgc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UpOwo+Pj4+Pj4gK3N0cnVjdCBk
+bWFfZmVuY2UgKmRtYV9yZXN2X3dhbGtfdW5sb2NrZWQoc3RydWN0IGRtYV9yZXN2ICpvYmosCj4+
+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCBkbWFfcmVz
+dl9jdXJzb3IgKmN1cnNvciwKPj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgYm9vbCBmaXJzdCwgYm9vbCBhbGxfZmVuY2VzKTsKPj4+Pj4+ICAgICBpbnQgZG1hX3Jl
+c3ZfZ2V0X2ZlbmNlcyhzdHJ1Y3QgZG1hX3Jlc3YgKm9iaiwgc3RydWN0IGRtYV9mZW5jZSAqKnBm
+ZW5jZV9leGNsLAo+Pj4+Pj4gICAgICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCAqcHNoYXJl
+ZF9jb3VudCwgc3RydWN0IGRtYV9mZW5jZSAqKipwc2hhcmVkKTsKPj4+Pj4+ICAgICBpbnQgZG1h
+X3Jlc3ZfY29weV9mZW5jZXMoc3RydWN0IGRtYV9yZXN2ICpkc3QsIHN0cnVjdCBkbWFfcmVzdiAq
+c3JjKTsKPj4+Pj4+IC0tCj4+Pj4+PiAyLjI1LjEKPj4+Pj4+CgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApM
+aW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21h
+aWxtYW4vbGlzdGluZm8vbGluYXJvLW1tLXNpZwo=
