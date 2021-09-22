@@ -2,70 +2,55 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4D27414C8A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Sep 2021 16:57:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 120C1414CBB
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Sep 2021 17:09:39 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 87CC1618B8
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Sep 2021 14:57:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 39C5661E96
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Sep 2021 15:09:37 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id B4CC561A28; Wed, 22 Sep 2021 14:57:33 +0000 (UTC)
+	id DBE9561A47; Wed, 22 Sep 2021 15:09:36 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A15C261793;
-	Wed, 22 Sep 2021 14:57:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8C210617B3;
+	Wed, 22 Sep 2021 15:09:33 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id D6FCD60A81
- for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Sep 2021 14:57:27 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 9B78B61754
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Sep 2021 15:09:31 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id CE47161793; Wed, 22 Sep 2021 14:57:27 +0000 (UTC)
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
- [209.85.221.50])
- by lists.linaro.org (Postfix) with ESMTPS id BB3E860A81
- for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Sep 2021 14:57:25 +0000 (UTC)
-Received: by mail-wr1-f50.google.com with SMTP id u18so7731266wrg.5
- for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Sep 2021 07:57:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=BrU/KsrCEnifMc+fy3DgWiIyWg8Bqog2sCDUUAiwOq4=;
- b=pFK/z94pbsqPKqXftTspz6cdl9kTpye5aG9h63sOO5OCVqKp0oAj5WjkRnN6oErpzp
- Zvb/gHO6hrShuU/n6NFhj2Bq+XubYYw3/Xwy+IF5YfehWGN238+FlAxJQcSRk+qvaJcX
- uDLQEXVKrcm3/TnQGNhmZp7hk2pO52aiVxIOs3jFsy9A6RwEJaQycuSuxIPV0lo/tpO1
- yNG3RaTVAxPn8xnv5N9eeVRJUI5uYnVPjN0AMnPGXIL39wFl3aJ5gENyCJgMQv5K/9Yr
- theFALwkEnNf2Axwg8zkhuPykBTZuTzCxbX+YHVOMlmfCWtoGOIZVWH5e7A2KjzON0qk
- JEfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=BrU/KsrCEnifMc+fy3DgWiIyWg8Bqog2sCDUUAiwOq4=;
- b=OTBsthmMaPCaqdpUXiBrcy+id06QxAdVI4w41HuJKY9eDtQZp1PZQa7/jRqYpuH181
- xD4is53UODWu/JUIBjliv20PaLCRdDb542ICZTgfObkHZ9WYbZs92ykCvngDWE8PhhRx
- NpYvMdRyHO8ZXZp1rqYoPq/bEz0bXtkLLap9I7xxwWluXkxLiYcg++E67L2QmeZpbaBR
- FODRZxdGzGj0Fya1J1zW2ANdZJEoFsn6qf2p+D12S3Y5BxEVt2CN8sTjpDxe8/taXr84
- yPB0Suyf0ql+pn/h0T6mfhSrozdH8rlYlyQGIlLkirSboqXF1nqP9oVx1xyhnMg4XCq/
- KhtQ==
-X-Gm-Message-State: AOAM531HKZiHNr/rtSICAtn7nrzGeHFEdSRi8Gl9nvAPuQ/UdPTSSDtc
- T67dsHo9jQVMaSsrFzpMyKvmqkEj3HxEKf3RT0o=
-X-Google-Smtp-Source: ABdhPJwuUrAfr0zttIsQhsaA7GxT4cjOgCwVQnnFYRFomGp8ouc6Lm6m5E4rJ+r2I7Aip0AsqQ7bIS2fSuqhJ0m50Hw=
-X-Received: by 2002:a1c:2b04:: with SMTP id r4mr10845312wmr.168.1632322644676; 
- Wed, 22 Sep 2021 07:57:24 -0700 (PDT)
+ id 90324617B3; Wed, 22 Sep 2021 15:09:31 +0000 (UTC)
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+ by lists.linaro.org (Postfix) with ESMTPS id 3C10B61754
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Sep 2021 15:09:29 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10115"; a="210852640"
+X-IronPort-AV: E=Sophos;i="5.85,314,1624345200"; d="scan'208";a="210852640"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+ by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 22 Sep 2021 08:09:26 -0700
+X-IronPort-AV: E=Sophos;i="5.85,314,1624345200"; d="scan'208";a="704054443"
+Received: from bbrowne-mobl.ger.corp.intel.com (HELO [10.213.200.151])
+ ([10.213.200.151])
+ by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 22 Sep 2021 08:09:23 -0700
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
+ linux-media@vger.kernel.org, intel-gfx@lists.freedesktop.org
+References: <20210922091044.2612-1-christian.koenig@amd.com>
+ <20210922091044.2612-2-christian.koenig@amd.com>
+ <093432d2-de8e-9684-03aa-7cb4842ea755@linux.intel.com>
+ <347e66cf-fd85-da15-6a00-cecab25c2d49@gmail.com>
+From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+Organization: Intel Corporation UK Plc
+Message-ID: <3ea25ac4-19f9-530e-8961-cb5b1822a11b@linux.intel.com>
+Date: Wed, 22 Sep 2021 16:09:21 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-References: <20210903184806.1680887-1-robdclark@gmail.com>
- <20210903184806.1680887-5-robdclark@gmail.com>
- <101628ea-23c9-4bc0-5abc-a5b71b0fccc1@amd.com>
- <CAF6AEGt+jiJLaTDVnnVrZm-766OhPfj9wESJxP-FrX3S_c67gQ@mail.gmail.com>
- <d8f43401-c673-b9ce-d5ca-090fec2cb4c3@amd.com>
- <CAF6AEGsnN8sEeXuefB--pDApXeWYR2RVss=jUnz0ORh68SBP1A@mail.gmail.com>
- <ff396c19-c6ed-5f25-32df-c404bc8ea661@amd.com>
-In-Reply-To: <ff396c19-c6ed-5f25-32df-c404bc8ea661@amd.com>
-From: Rob Clark <robdclark@gmail.com>
-Date: Wed, 22 Sep 2021 08:01:56 -0700
-Message-ID: <CAF6AEGupLaG2GuSvY0qerWD7sB6JAzDgyx_XP2eHYqy+Of5f0w@mail.gmail.com>
-To: Andrey Grodzovsky <andrey.grodzovsky@amd.com>
+In-Reply-To: <347e66cf-fd85-da15-6a00-cecab25c2d49@gmail.com>
+Content-Language: en-US
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v3 4/9] drm/scheduler: Add fence
- deadline support
+Subject: Re: [Linaro-mm-sig] [PATCH 01/26] dma-buf: add
+ dma_resv_for_each_fence_unlocked v4
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -78,211 +63,58 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Rob Clark <robdclark@chromium.org>, Melissa Wen <mwen@igalia.com>,
- Jack Zhang <Jack.Zhang1@amd.com>, David Airlie <airlied@linux.ie>,
- =?UTF-8?Q?Michel_D=C3=A4nzer?= <michel@daenzer.net>,
- open list <linux-kernel@vger.kernel.org>,
- dri-devel <dri-devel@lists.freedesktop.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- Pekka Paalanen <ppaalanen@gmail.com>, Luben Tuikov <luben.tuikov@amd.com>,
- Daniel Vetter <daniel@ffwll.ch>,
- Boris Brezillon <boris.brezillon@collabora.com>,
- Tian Tao <tiantao6@hisilicon.com>, Steven Price <steven.price@arm.com>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: daniel@ffwll.ch
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Wed, Sep 22, 2021 at 7:31 AM Andrey Grodzovsky
-<andrey.grodzovsky@amd.com> wrote:
->
->
-> On 2021-09-21 11:32 p.m., Rob Clark wrote:
-> > On Tue, Sep 21, 2021 at 7:18 PM Andrey Grodzovsky
-> > <andrey.grodzovsky@amd.com> wrote:
-> >>
-> >> On 2021-09-21 4:47 p.m., Rob Clark wrote:
-> >>> On Tue, Sep 21, 2021 at 1:09 PM Andrey Grodzovsky
-> >>> <andrey.grodzovsky@amd.com> wrote:
-> >>>> On 2021-09-03 2:47 p.m., Rob Clark wrote:
-> >>>>
-> >>>>> From: Rob Clark <robdclark@chromium.org>
-> >>>>>
-> >>>>> As the finished fence is the one that is exposed to userspace, and
-> >>>>> therefore the one that other operations, like atomic update, would
-> >>>>> block on, we need to propagate the deadline from from the finished
-> >>>>> fence to the actual hw fence.
-> >>>>>
-> >>>>> v2: Split into drm_sched_fence_set_parent() (ckoenig)
-> >>>>>
-> >>>>> Signed-off-by: Rob Clark <robdclark@chromium.org>
-> >>>>> ---
-> >>>>>     drivers/gpu/drm/scheduler/sched_fence.c | 34 +++++++++++++++++++++++++
-> >>>>>     drivers/gpu/drm/scheduler/sched_main.c  |  2 +-
-> >>>>>     include/drm/gpu_scheduler.h             |  8 ++++++
-> >>>>>     3 files changed, 43 insertions(+), 1 deletion(-)
-> >>>>>
-> >>>>> diff --git a/drivers/gpu/drm/scheduler/sched_fence.c b/drivers/gpu/drm/scheduler/sched_fence.c
-> >>>>> index bcea035cf4c6..4fc41a71d1c7 100644
-> >>>>> --- a/drivers/gpu/drm/scheduler/sched_fence.c
-> >>>>> +++ b/drivers/gpu/drm/scheduler/sched_fence.c
-> >>>>> @@ -128,6 +128,30 @@ static void drm_sched_fence_release_finished(struct dma_fence *f)
-> >>>>>         dma_fence_put(&fence->scheduled);
-> >>>>>     }
-> >>>>>
-> >>>>> +static void drm_sched_fence_set_deadline_finished(struct dma_fence *f,
-> >>>>> +                                               ktime_t deadline)
-> >>>>> +{
-> >>>>> +     struct drm_sched_fence *fence = to_drm_sched_fence(f);
-> >>>>> +     unsigned long flags;
-> >>>>> +
-> >>>>> +     spin_lock_irqsave(&fence->lock, flags);
-> >>>>> +
-> >>>>> +     /* If we already have an earlier deadline, keep it: */
-> >>>>> +     if (test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT, &f->flags) &&
-> >>>>> +         ktime_before(fence->deadline, deadline)) {
-> >>>>> +             spin_unlock_irqrestore(&fence->lock, flags);
-> >>>>> +             return;
-> >>>>> +     }
-> >>>>> +
-> >>>>> +     fence->deadline = deadline;
-> >>>>> +     set_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT, &f->flags);
-> >>>>> +
-> >>>>> +     spin_unlock_irqrestore(&fence->lock, flags);
-> >>>>> +
-> >>>>> +     if (fence->parent)
-> >>>>> +             dma_fence_set_deadline(fence->parent, deadline);
-> >>>>> +}
-> >>>>> +
-> >>>>>     static const struct dma_fence_ops drm_sched_fence_ops_scheduled = {
-> >>>>>         .get_driver_name = drm_sched_fence_get_driver_name,
-> >>>>>         .get_timeline_name = drm_sched_fence_get_timeline_name,
-> >>>>> @@ -138,6 +162,7 @@ static const struct dma_fence_ops drm_sched_fence_ops_finished = {
-> >>>>>         .get_driver_name = drm_sched_fence_get_driver_name,
-> >>>>>         .get_timeline_name = drm_sched_fence_get_timeline_name,
-> >>>>>         .release = drm_sched_fence_release_finished,
-> >>>>> +     .set_deadline = drm_sched_fence_set_deadline_finished,
-> >>>>>     };
-> >>>>>
-> >>>>>     struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f)
-> >>>>> @@ -152,6 +177,15 @@ struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f)
-> >>>>>     }
-> >>>>>     EXPORT_SYMBOL(to_drm_sched_fence);
-> >>>>>
-> >>>>> +void drm_sched_fence_set_parent(struct drm_sched_fence *s_fence,
-> >>>>> +                             struct dma_fence *fence)
-> >>>>> +{
-> >>>>> +     s_fence->parent = dma_fence_get(fence);
-> >>>>> +     if (test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT,
-> >>>>> +                  &s_fence->finished.flags))
-> >>>>> +             dma_fence_set_deadline(fence, s_fence->deadline);
-> >>>> I believe above you should pass be s_fence->finished to
-> >>>> dma_fence_set_deadline
-> >>>> instead it fence which is the HW fence itself.
-> >>> Hmm, unless this has changed recently with some patches I don't have,
-> >>> s_fence->parent is the one signalled by hw, so it is the one we want
-> >>> to set the deadline on
-> >>>
-> >>> BR,
-> >>> -R
-> >>
-> >> No it didn't change. But then when exactly will
-> >> drm_sched_fence_set_deadline_finished
-> >> execute such that fence->parent != NULL ? In other words, I am not clear
-> >> how propagation
-> >> happens otherwise - if dma_fence_set_deadline is called with the HW
-> >> fence then the assumption
-> >> here is that driver provided driver specific
-> >> dma_fence_ops.dma_fence_set_deadline callback executes
-> >> but I was under impression that drm_sched_fence_set_deadline_finished is
-> >> the one that propagates
-> >> the deadline to the HW fence's callback and for it to execute
-> >> dma_fence_set_deadline needs to be called
-> >> with s_fence->finished.
-> > Assuming I didn't screw up drm/msm conversion to scheduler,
-> > &s_fence->finished is the one that will be returned to userspace.. and
-> > later passed back to kernel for atomic commit (or to the compositor).
-> > So it is the one that fence->set_deadline() will be called on.  But
-> > s_fence->parent is the actual hw fence that needs to know about the
-> > deadline.  Depending on whether or not the job has been written into
-> > hw ringbuffer or not, there are two cases:
-> >
-> > 1) not scheduled yet, s_fence will store the deadline and propagate it
-> > later once s_fence->parent is known
->
->
-> And by later you mean the call to drm_sched_fence_set_parent
-> after HW fence is returned  ? If yes I think i get it now.
-
-Yup :-)
-
-BR,
--R
-
-> Andrey
->
->
-> > 2) already scheduled, in which case s_fence->finished.set_deadline
-> > will propagate it directly to the real fence
-> >
-> > BR,
-> > -R
-> >
-> >> Andrey
-> >>
-> >>
-> >>
-> >>>> Andrey
-> >>>>
-> >>>>
-> >>>>> +}
-> >>>>> +
-> >>>>>     struct drm_sched_fence *drm_sched_fence_alloc(struct drm_sched_entity *entity,
-> >>>>>                                               void *owner)
-> >>>>>     {
-> >>>>> diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
-> >>>>> index 595e47ff7d06..27bf0ac0625f 100644
-> >>>>> --- a/drivers/gpu/drm/scheduler/sched_main.c
-> >>>>> +++ b/drivers/gpu/drm/scheduler/sched_main.c
-> >>>>> @@ -978,7 +978,7 @@ static int drm_sched_main(void *param)
-> >>>>>                 drm_sched_fence_scheduled(s_fence);
-> >>>>>
-> >>>>>                 if (!IS_ERR_OR_NULL(fence)) {
-> >>>>> -                     s_fence->parent = dma_fence_get(fence);
-> >>>>> +                     drm_sched_fence_set_parent(s_fence, fence);
-> >>>>>                         r = dma_fence_add_callback(fence, &sched_job->cb,
-> >>>>>                                                    drm_sched_job_done_cb);
-> >>>>>                         if (r == -ENOENT)
-> >>>>> diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
-> >>>>> index 7f77a455722c..158ddd662469 100644
-> >>>>> --- a/include/drm/gpu_scheduler.h
-> >>>>> +++ b/include/drm/gpu_scheduler.h
-> >>>>> @@ -238,6 +238,12 @@ struct drm_sched_fence {
-> >>>>>              */
-> >>>>>         struct dma_fence                finished;
-> >>>>>
-> >>>>> +     /**
-> >>>>> +      * @deadline: deadline set on &drm_sched_fence.finished which
-> >>>>> +      * potentially needs to be propagated to &drm_sched_fence.parent
-> >>>>> +      */
-> >>>>> +     ktime_t                         deadline;
-> >>>>> +
-> >>>>>             /**
-> >>>>>              * @parent: the fence returned by &drm_sched_backend_ops.run_job
-> >>>>>              * when scheduling the job on hardware. We signal the
-> >>>>> @@ -505,6 +511,8 @@ void drm_sched_entity_set_priority(struct drm_sched_entity *entity,
-> >>>>>                                    enum drm_sched_priority priority);
-> >>>>>     bool drm_sched_entity_is_ready(struct drm_sched_entity *entity);
-> >>>>>
-> >>>>> +void drm_sched_fence_set_parent(struct drm_sched_fence *s_fence,
-> >>>>> +                             struct dma_fence *fence);
-> >>>>>     struct drm_sched_fence *drm_sched_fence_alloc(
-> >>>>>         struct drm_sched_entity *s_entity, void *owner);
-> >>>>>     void drm_sched_fence_init(struct drm_sched_fence *fence,
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+Ck9uIDIyLzA5LzIwMjEgMTU6NTAsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6Cj4gQW0gMjIuMDku
+MjEgdW0gMTY6MzYgc2NocmllYiBUdnJ0a28gVXJzdWxpbjoKPj4+ICsKPj4+ICsvKioKPj4+ICsg
+KiBkbWFfcmVzdl9pdGVyX2ZpcnN0X3VubG9ja2VkIC0gZmlyc3QgZmVuY2UgaW4gYW4gdW5sb2Nr
+ZWQgCj4+PiBkbWFfcmVzdiBvYmouCj4+PiArICogQGN1cnNvcjogdGhlIGN1cnNvciB3aXRoIHRo
+ZSBjdXJyZW50IHBvc2l0aW9uCj4+PiArICoKPj4+ICsgKiBSZXR1cm5zIHRoZSBmaXJzdCBmZW5j
+ZSBmcm9tIGFuIHVubG9ja2VkIGRtYV9yZXN2IG9iai4KPj4+ICsgKi8KPj4+ICtzdHJ1Y3QgZG1h
+X2ZlbmNlICpkbWFfcmVzdl9pdGVyX2ZpcnN0X3VubG9ja2VkKHN0cnVjdCBkbWFfcmVzdl9pdGVy
+IAo+Pj4gKmN1cnNvcikKPj4+ICt7Cj4+PiArwqDCoMKgIHJjdV9yZWFkX2xvY2soKTsKPj4+ICvC
+oMKgwqAgZG8gewo+Pj4gK8KgwqDCoMKgwqDCoMKgIGRtYV9yZXN2X2l0ZXJfcmVzdGFydF91bmxv
+Y2tlZChjdXJzb3IpOwo+Pj4gK8KgwqDCoMKgwqDCoMKgIGRtYV9yZXN2X2l0ZXJfd2Fsa191bmxv
+Y2tlZChjdXJzb3IpOwo+Pj4gK8KgwqDCoCB9IHdoaWxlIChyZWFkX3NlcWNvdW50X3JldHJ5KCZj
+dXJzb3ItPm9iai0+c2VxLCBjdXJzb3ItPnNlcSkpOwo+Pj4gK8KgwqDCoCByY3VfcmVhZF91bmxv
+Y2soKTsKPj4+ICsKPj4+ICvCoMKgwqAgcmV0dXJuIGN1cnNvci0+ZmVuY2U7Cj4+PiArfQo+Pj4g
+K0VYUE9SVF9TWU1CT0woZG1hX3Jlc3ZfaXRlcl9maXJzdF91bmxvY2tlZCk7Cj4+Cj4+IFdoeSBp
+cyB0aGlzIG9uZSBzcGxpdCBmcm9tIGRtYV9yZXN2X2l0ZXJfYmVnaW4gYW5kIGV2ZW4gZXhwb3J0
+ZWQ/Cj4gCj4gSSd2ZSBzcGxpdCBpdCB0byBiZSBhYmxlIHRvIHVzZSBkbWFfcmVzdl9pdGVyX2Jl
+Z2luIGluIGJvdGggdGhlIHVubG9ja2VkIAo+IGFuZCBsb2NrZWQgaXRlcmF0b3IuCgpPay4KCj4g
+Cj4+IEkgY291bGRuJ3QgZmluZCBhbnkgdXNlcnMgaW4gdGhlIHNlcmllcy4KPiAKPiBUaGlzIGlz
+IHVzZWQgaW4gdGhlIGRtYV9yZXN2X2Zvcl9lYWNoX2ZlbmNlX3VubG9ja2VkKCkgbWFjcm8gdG8g
+cmV0dXJuIAo+IHRoZSBmaXJzdCBmZW5jZS4KCkRvaCEKCj4+PiArCj4+PiArLyoqCj4+PiArICog
+ZG1hX3Jlc3ZfaXRlcl9uZXh0X3VubG9ja2VkIC0gbmV4dCBmZW5jZSBpbiBhbiB1bmxvY2tlZCBk
+bWFfcmVzdiAKPj4+IG9iai4KPj4+ICsgKiBAY3Vyc29yOiB0aGUgY3Vyc29yIHdpdGggdGhlIGN1
+cnJlbnQgcG9zaXRpb24KPj4+ICsgKgo+Pj4gKyAqIFJldHVybnMgdGhlIG5leHQgZmVuY2UgZnJv
+bSBhbiB1bmxvY2tlZCBkbWFfcmVzdiBvYmouCj4+PiArICovCj4+PiArc3RydWN0IGRtYV9mZW5j
+ZSAqZG1hX3Jlc3ZfaXRlcl9uZXh0X3VubG9ja2VkKHN0cnVjdCBkbWFfcmVzdl9pdGVyIAo+Pj4g
+KmN1cnNvcikKPj4+ICt7Cj4+PiArwqDCoMKgIGJvb2wgcmVzdGFydDsKPj4+ICsKPj4+ICvCoMKg
+wqAgcmN1X3JlYWRfbG9jaygpOwo+Pj4gK8KgwqDCoCBjdXJzb3ItPmlzX3Jlc3RhcnRlZCA9IGZh
+bHNlOwo+Pj4gK8KgwqDCoCByZXN0YXJ0ID0gcmVhZF9zZXFjb3VudF9yZXRyeSgmY3Vyc29yLT5v
+YmotPnNlcSwgY3Vyc29yLT5zZXEpOwo+Pj4gK8KgwqDCoCBkbyB7Cj4+PiArwqDCoMKgwqDCoMKg
+wqAgaWYgKHJlc3RhcnQpCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBkbWFfcmVzdl9pdGVy
+X3Jlc3RhcnRfdW5sb2NrZWQoY3Vyc29yKTsKPj4+ICvCoMKgwqDCoMKgwqDCoCBkbWFfcmVzdl9p
+dGVyX3dhbGtfdW5sb2NrZWQoY3Vyc29yKTsKPj4+ICvCoMKgwqDCoMKgwqDCoCByZXN0YXJ0ID0g
+dHJ1ZTsKPj4+ICvCoMKgwqAgfSB3aGlsZSAocmVhZF9zZXFjb3VudF9yZXRyeSgmY3Vyc29yLT5v
+YmotPnNlcSwgY3Vyc29yLT5zZXEpKTsKPj4+ICvCoMKgwqAgcmN1X3JlYWRfdW5sb2NrKCk7Cj4+
+PiArCj4+PiArwqDCoMKgIHJldHVybiBjdXJzb3ItPmZlbmNlOwo+Pj4gK30KPj4+ICtFWFBPUlRf
+U1lNQk9MKGRtYV9yZXN2X2l0ZXJfbmV4dF91bmxvY2tlZCk7Cj4+Cj4+IENvdWxkbid0IGRtYV9y
+ZXN2X2l0ZXJfZmlyc3RfdW5sb2NrZWQgYW5kIGRtYV9yZXN2X2l0ZXJfbmV4dF91bmxvY2tlZCAK
+Pj4gc2hhcmUgdGhlIHNhbWUgaW1wbGVtZW50YXRpb24/IEVzcGVjaWFsbHkgaWYgeW91IGFyZSBh
+YmxlIHRvIHJlcGxhY2UgCj4+IGN1cnNvci0+aXNfcmVzdGFydGVkIHdpdGggY3Vyc29yLT5pbmRl
+eCA9PSAtMS4KPiAKPiBUaGF0J3Mgd2hhdCBJIGhhZCBpbml0aWFsbHksIGJ1dCBEYW5pZWwgZGlz
+bGlrZWQgaXQgZm9yIHNvbWUgcmVhc29uLiBZb3UgCj4gdGhlbiBuZWVkIGEgY2VudHJhbGl6ZWQg
+d2FsayBmdW5jdGlvbiBpbnN0ZWFkIG9mIGZpcnN0L25leHQuCgpJIGhhZCBzb21lIGlkZWFzIHRv
+IG9ubHkgY29uc29saWRhdGUgImZpcnN0IiBhbmQgIm5leHQiIGhlbHBlcnMgYnV0IG5ldmVyIG1p
+bmQsIHlvdXJzIGlzIGZpbmUgYXMgd2VsbC4KClJlZ2FyZHMsCgpUdnJ0a28KCj4gCj4gVGhhbmtz
+LAo+IENocmlzdGlhbi4KPiAKPj4gUmVnYXJkcywKPj4KPj4gVHZydGtvCj4gCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGlu
+ZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFy
+by5vcmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
