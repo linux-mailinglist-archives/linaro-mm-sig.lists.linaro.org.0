@@ -2,78 +2,70 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id EBDBF414C71
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Sep 2021 16:50:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4D27414C8A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Sep 2021 16:57:38 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0502A61805
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Sep 2021 14:50:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 87CC1618B8
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Sep 2021 14:57:36 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 243C361978; Wed, 22 Sep 2021 14:50:21 +0000 (UTC)
+	id B4CC561A28; Wed, 22 Sep 2021 14:57:33 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BA9F561793;
-	Wed, 22 Sep 2021 14:50:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A15C261793;
+	Wed, 22 Sep 2021 14:57:29 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id D470E60A81
- for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Sep 2021 14:50:15 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id D6FCD60A81
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Sep 2021 14:57:27 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id C73CB61793; Wed, 22 Sep 2021 14:50:15 +0000 (UTC)
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
- [209.85.221.45])
- by lists.linaro.org (Postfix) with ESMTPS id B448660A81
- for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Sep 2021 14:50:13 +0000 (UTC)
-Received: by mail-wr1-f45.google.com with SMTP id d21so7508138wra.12
- for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Sep 2021 07:50:13 -0700 (PDT)
+ id CE47161793; Wed, 22 Sep 2021 14:57:27 +0000 (UTC)
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
+ [209.85.221.50])
+ by lists.linaro.org (Postfix) with ESMTPS id BB3E860A81
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Sep 2021 14:57:25 +0000 (UTC)
+Received: by mail-wr1-f50.google.com with SMTP id u18so7731266wrg.5
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Sep 2021 07:57:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=Eao9BWrz4ZEpvjvPekZB5G5ZtGhlHSk/4Hlz/e8xCbA=;
- b=e+iQRrJaGNbhRYtfaer7tRDjfOMBybl7ZXrqAH1QAnYMPxjDEsed1HOTKoTfA9wlBz
- Nk/GCELMVvKzS3YpsCrlOrVbUVWxT7myvqYLCgGYczzldw7a7khAMhnQ9iN/GE+0+1eg
- c3Y01VkDWhGW1N0i6WASoRgCYIuQbKESS8NKQGxCtno38nZrcD9FGmvCstZ4I1g19v1d
- 8tvdmmumAU8c7iLSiHv2HW3CHOWGWp3P3g7Vx2AFgPw2duSDVml5uQIoKmt5WPSAjEnK
- lgTFLLKBAztPQnL7wOA787+nElODI4f2ewGSfA8Z3dh6ejBFv9egrEgED273XTAZzJ7h
- yFVg==
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=BrU/KsrCEnifMc+fy3DgWiIyWg8Bqog2sCDUUAiwOq4=;
+ b=pFK/z94pbsqPKqXftTspz6cdl9kTpye5aG9h63sOO5OCVqKp0oAj5WjkRnN6oErpzp
+ Zvb/gHO6hrShuU/n6NFhj2Bq+XubYYw3/Xwy+IF5YfehWGN238+FlAxJQcSRk+qvaJcX
+ uDLQEXVKrcm3/TnQGNhmZp7hk2pO52aiVxIOs3jFsy9A6RwEJaQycuSuxIPV0lo/tpO1
+ yNG3RaTVAxPn8xnv5N9eeVRJUI5uYnVPjN0AMnPGXIL39wFl3aJ5gENyCJgMQv5K/9Yr
+ theFALwkEnNf2Axwg8zkhuPykBTZuTzCxbX+YHVOMlmfCWtoGOIZVWH5e7A2KjzON0qk
+ JEfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=Eao9BWrz4ZEpvjvPekZB5G5ZtGhlHSk/4Hlz/e8xCbA=;
- b=bfctzenhvwgb00NY4gmTI8tiobVW6B4kfmx6hEMybI1w+GFdGTCR6dOVLY93fNg5W8
- ggpeWEjBZ/YDK7HVIL13FoyAJR+2APlTPHk9Tal3pwX2Rlijbwo55FRfrdNvCP1nWrOd
- luueQIbE8sESxZgEK8QiQepKQPEAFqYDo4RIIxssTjxFv1hML+Sx6wpt1ju8gxULqd2A
- q5STtX0Ophvd23lckwdkrTtcUIa/PzUDarbR9S2QVxjW2rx1Q0EN+Ze7tTn33pWnkYgY
- Baupaku1+dAbwL22HgT5JLz7FhAPxEy8yIVdTzE3M9ks1tIESd/nqQwMme3mRDtHLpP1
- yHpw==
-X-Gm-Message-State: AOAM531MVAw8+VBHk98mm9B4V6/KVqT5U520pPpHOqpHjsJl3nlbTs2+
- DFTQokVvZ+UxUBBt4Ax2Mus=
-X-Google-Smtp-Source: ABdhPJzgMi5c914so+rNIjQe9Fsfeoxy5GyiIbiDLGWPeuJJ5n9tKlohnCYczRNFHB7P3snLhByBag==
-X-Received: by 2002:a1c:2b04:: with SMTP id r4mr11111516wmr.89.1632322212730; 
- Wed, 22 Sep 2021 07:50:12 -0700 (PDT)
-Received: from [192.168.158.115] (ip-178-202-40-91.hsi09.unitymediagroup.de.
- [178.202.40.91])
- by smtp.gmail.com with ESMTPSA id c7sm2474917wmq.13.2021.09.22.07.50.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 22 Sep 2021 07:50:12 -0700 (PDT)
-To: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
- linux-media@vger.kernel.org, intel-gfx@lists.freedesktop.org
-References: <20210922091044.2612-1-christian.koenig@amd.com>
- <20210922091044.2612-2-christian.koenig@amd.com>
- <093432d2-de8e-9684-03aa-7cb4842ea755@linux.intel.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <347e66cf-fd85-da15-6a00-cecab25c2d49@gmail.com>
-Date: Wed, 22 Sep 2021 16:50:10 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=BrU/KsrCEnifMc+fy3DgWiIyWg8Bqog2sCDUUAiwOq4=;
+ b=OTBsthmMaPCaqdpUXiBrcy+id06QxAdVI4w41HuJKY9eDtQZp1PZQa7/jRqYpuH181
+ xD4is53UODWu/JUIBjliv20PaLCRdDb542ICZTgfObkHZ9WYbZs92ykCvngDWE8PhhRx
+ NpYvMdRyHO8ZXZp1rqYoPq/bEz0bXtkLLap9I7xxwWluXkxLiYcg++E67L2QmeZpbaBR
+ FODRZxdGzGj0Fya1J1zW2ANdZJEoFsn6qf2p+D12S3Y5BxEVt2CN8sTjpDxe8/taXr84
+ yPB0Suyf0ql+pn/h0T6mfhSrozdH8rlYlyQGIlLkirSboqXF1nqP9oVx1xyhnMg4XCq/
+ KhtQ==
+X-Gm-Message-State: AOAM531HKZiHNr/rtSICAtn7nrzGeHFEdSRi8Gl9nvAPuQ/UdPTSSDtc
+ T67dsHo9jQVMaSsrFzpMyKvmqkEj3HxEKf3RT0o=
+X-Google-Smtp-Source: ABdhPJwuUrAfr0zttIsQhsaA7GxT4cjOgCwVQnnFYRFomGp8ouc6Lm6m5E4rJ+r2I7Aip0AsqQ7bIS2fSuqhJ0m50Hw=
+X-Received: by 2002:a1c:2b04:: with SMTP id r4mr10845312wmr.168.1632322644676; 
+ Wed, 22 Sep 2021 07:57:24 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <093432d2-de8e-9684-03aa-7cb4842ea755@linux.intel.com>
-Content-Language: en-US
+References: <20210903184806.1680887-1-robdclark@gmail.com>
+ <20210903184806.1680887-5-robdclark@gmail.com>
+ <101628ea-23c9-4bc0-5abc-a5b71b0fccc1@amd.com>
+ <CAF6AEGt+jiJLaTDVnnVrZm-766OhPfj9wESJxP-FrX3S_c67gQ@mail.gmail.com>
+ <d8f43401-c673-b9ce-d5ca-090fec2cb4c3@amd.com>
+ <CAF6AEGsnN8sEeXuefB--pDApXeWYR2RVss=jUnz0ORh68SBP1A@mail.gmail.com>
+ <ff396c19-c6ed-5f25-32df-c404bc8ea661@amd.com>
+In-Reply-To: <ff396c19-c6ed-5f25-32df-c404bc8ea661@amd.com>
+From: Rob Clark <robdclark@gmail.com>
+Date: Wed, 22 Sep 2021 08:01:56 -0700
+Message-ID: <CAF6AEGupLaG2GuSvY0qerWD7sB6JAzDgyx_XP2eHYqy+Of5f0w@mail.gmail.com>
+To: Andrey Grodzovsky <andrey.grodzovsky@amd.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 01/26] dma-buf: add
- dma_resv_for_each_fence_unlocked v4
+Subject: Re: [Linaro-mm-sig] [PATCH v3 4/9] drm/scheduler: Add fence
+ deadline support
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -86,53 +78,211 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: daniel@ffwll.ch
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: Rob Clark <robdclark@chromium.org>, Melissa Wen <mwen@igalia.com>,
+ Jack Zhang <Jack.Zhang1@amd.com>, David Airlie <airlied@linux.ie>,
+ =?UTF-8?Q?Michel_D=C3=A4nzer?= <michel@daenzer.net>,
+ open list <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Pekka Paalanen <ppaalanen@gmail.com>, Luben Tuikov <luben.tuikov@amd.com>,
+ Daniel Vetter <daniel@ffwll.ch>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Tian Tao <tiantao6@hisilicon.com>, Steven Price <steven.price@arm.com>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-QW0gMjIuMDkuMjEgdW0gMTY6MzYgc2NocmllYiBUdnJ0a28gVXJzdWxpbjoKPj4gKwo+PiArLyoq
-Cj4+ICsgKiBkbWFfcmVzdl9pdGVyX2ZpcnN0X3VubG9ja2VkIC0gZmlyc3QgZmVuY2UgaW4gYW4g
-dW5sb2NrZWQgCj4+IGRtYV9yZXN2IG9iai4KPj4gKyAqIEBjdXJzb3I6IHRoZSBjdXJzb3Igd2l0
-aCB0aGUgY3VycmVudCBwb3NpdGlvbgo+PiArICoKPj4gKyAqIFJldHVybnMgdGhlIGZpcnN0IGZl
-bmNlIGZyb20gYW4gdW5sb2NrZWQgZG1hX3Jlc3Ygb2JqLgo+PiArICovCj4+ICtzdHJ1Y3QgZG1h
-X2ZlbmNlICpkbWFfcmVzdl9pdGVyX2ZpcnN0X3VubG9ja2VkKHN0cnVjdCBkbWFfcmVzdl9pdGVy
-IAo+PiAqY3Vyc29yKQo+PiArewo+PiArwqDCoMKgIHJjdV9yZWFkX2xvY2soKTsKPj4gK8KgwqDC
-oCBkbyB7Cj4+ICvCoMKgwqDCoMKgwqDCoCBkbWFfcmVzdl9pdGVyX3Jlc3RhcnRfdW5sb2NrZWQo
-Y3Vyc29yKTsKPj4gK8KgwqDCoMKgwqDCoMKgIGRtYV9yZXN2X2l0ZXJfd2Fsa191bmxvY2tlZChj
-dXJzb3IpOwo+PiArwqDCoMKgIH0gd2hpbGUgKHJlYWRfc2VxY291bnRfcmV0cnkoJmN1cnNvci0+
-b2JqLT5zZXEsIGN1cnNvci0+c2VxKSk7Cj4+ICvCoMKgwqAgcmN1X3JlYWRfdW5sb2NrKCk7Cj4+
-ICsKPj4gK8KgwqDCoCByZXR1cm4gY3Vyc29yLT5mZW5jZTsKPj4gK30KPj4gK0VYUE9SVF9TWU1C
-T0woZG1hX3Jlc3ZfaXRlcl9maXJzdF91bmxvY2tlZCk7Cj4KPiBXaHkgaXMgdGhpcyBvbmUgc3Bs
-aXQgZnJvbSBkbWFfcmVzdl9pdGVyX2JlZ2luIGFuZCBldmVuIGV4cG9ydGVkPwoKSSd2ZSBzcGxp
-dCBpdCB0byBiZSBhYmxlIHRvIHVzZSBkbWFfcmVzdl9pdGVyX2JlZ2luIGluIGJvdGggdGhlIHVu
-bG9ja2VkIAphbmQgbG9ja2VkIGl0ZXJhdG9yLgoKPiBJIGNvdWxkbid0IGZpbmQgYW55IHVzZXJz
-IGluIHRoZSBzZXJpZXMuCgpUaGlzIGlzIHVzZWQgaW4gdGhlIGRtYV9yZXN2X2Zvcl9lYWNoX2Zl
-bmNlX3VubG9ja2VkKCkgbWFjcm8gdG8gcmV0dXJuIAp0aGUgZmlyc3QgZmVuY2UuCgo+Cj4+ICsK
-Pj4gKy8qKgo+PiArICogZG1hX3Jlc3ZfaXRlcl9uZXh0X3VubG9ja2VkIC0gbmV4dCBmZW5jZSBp
-biBhbiB1bmxvY2tlZCBkbWFfcmVzdiAKPj4gb2JqLgo+PiArICogQGN1cnNvcjogdGhlIGN1cnNv
-ciB3aXRoIHRoZSBjdXJyZW50IHBvc2l0aW9uCj4+ICsgKgo+PiArICogUmV0dXJucyB0aGUgbmV4
-dCBmZW5jZSBmcm9tIGFuIHVubG9ja2VkIGRtYV9yZXN2IG9iai4KPj4gKyAqLwo+PiArc3RydWN0
-IGRtYV9mZW5jZSAqZG1hX3Jlc3ZfaXRlcl9uZXh0X3VubG9ja2VkKHN0cnVjdCBkbWFfcmVzdl9p
-dGVyIAo+PiAqY3Vyc29yKQo+PiArewo+PiArwqDCoMKgIGJvb2wgcmVzdGFydDsKPj4gKwo+PiAr
-wqDCoMKgIHJjdV9yZWFkX2xvY2soKTsKPj4gK8KgwqDCoCBjdXJzb3ItPmlzX3Jlc3RhcnRlZCA9
-IGZhbHNlOwo+PiArwqDCoMKgIHJlc3RhcnQgPSByZWFkX3NlcWNvdW50X3JldHJ5KCZjdXJzb3It
-Pm9iai0+c2VxLCBjdXJzb3ItPnNlcSk7Cj4+ICvCoMKgwqAgZG8gewo+PiArwqDCoMKgwqDCoMKg
-wqAgaWYgKHJlc3RhcnQpCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGRtYV9yZXN2X2l0ZXJf
-cmVzdGFydF91bmxvY2tlZChjdXJzb3IpOwo+PiArwqDCoMKgwqDCoMKgwqAgZG1hX3Jlc3ZfaXRl
-cl93YWxrX3VubG9ja2VkKGN1cnNvcik7Cj4+ICvCoMKgwqDCoMKgwqDCoCByZXN0YXJ0ID0gdHJ1
-ZTsKPj4gK8KgwqDCoCB9IHdoaWxlIChyZWFkX3NlcWNvdW50X3JldHJ5KCZjdXJzb3ItPm9iai0+
-c2VxLCBjdXJzb3ItPnNlcSkpOwo+PiArwqDCoMKgIHJjdV9yZWFkX3VubG9jaygpOwo+PiArCj4+
-ICvCoMKgwqAgcmV0dXJuIGN1cnNvci0+ZmVuY2U7Cj4+ICt9Cj4+ICtFWFBPUlRfU1lNQk9MKGRt
-YV9yZXN2X2l0ZXJfbmV4dF91bmxvY2tlZCk7Cj4KPiBDb3VsZG4ndCBkbWFfcmVzdl9pdGVyX2Zp
-cnN0X3VubG9ja2VkIGFuZCBkbWFfcmVzdl9pdGVyX25leHRfdW5sb2NrZWQgCj4gc2hhcmUgdGhl
-IHNhbWUgaW1wbGVtZW50YXRpb24/IEVzcGVjaWFsbHkgaWYgeW91IGFyZSBhYmxlIHRvIHJlcGxh
-Y2UgCj4gY3Vyc29yLT5pc19yZXN0YXJ0ZWQgd2l0aCBjdXJzb3ItPmluZGV4ID09IC0xLgoKVGhh
-dCdzIHdoYXQgSSBoYWQgaW5pdGlhbGx5LCBidXQgRGFuaWVsIGRpc2xpa2VkIGl0IGZvciBzb21l
-IHJlYXNvbi4gWW91IAp0aGVuIG5lZWQgYSBjZW50cmFsaXplZCB3YWxrIGZ1bmN0aW9uIGluc3Rl
-YWQgb2YgZmlyc3QvbmV4dC4KClRoYW5rcywKQ2hyaXN0aWFuLgoKPiBSZWdhcmRzLAo+Cj4gVHZy
-dGtvCgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5h
-cm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKaHR0
-cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4vbGlzdGluZm8vbGluYXJvLW1tLXNpZwo=
+On Wed, Sep 22, 2021 at 7:31 AM Andrey Grodzovsky
+<andrey.grodzovsky@amd.com> wrote:
+>
+>
+> On 2021-09-21 11:32 p.m., Rob Clark wrote:
+> > On Tue, Sep 21, 2021 at 7:18 PM Andrey Grodzovsky
+> > <andrey.grodzovsky@amd.com> wrote:
+> >>
+> >> On 2021-09-21 4:47 p.m., Rob Clark wrote:
+> >>> On Tue, Sep 21, 2021 at 1:09 PM Andrey Grodzovsky
+> >>> <andrey.grodzovsky@amd.com> wrote:
+> >>>> On 2021-09-03 2:47 p.m., Rob Clark wrote:
+> >>>>
+> >>>>> From: Rob Clark <robdclark@chromium.org>
+> >>>>>
+> >>>>> As the finished fence is the one that is exposed to userspace, and
+> >>>>> therefore the one that other operations, like atomic update, would
+> >>>>> block on, we need to propagate the deadline from from the finished
+> >>>>> fence to the actual hw fence.
+> >>>>>
+> >>>>> v2: Split into drm_sched_fence_set_parent() (ckoenig)
+> >>>>>
+> >>>>> Signed-off-by: Rob Clark <robdclark@chromium.org>
+> >>>>> ---
+> >>>>>     drivers/gpu/drm/scheduler/sched_fence.c | 34 +++++++++++++++++++++++++
+> >>>>>     drivers/gpu/drm/scheduler/sched_main.c  |  2 +-
+> >>>>>     include/drm/gpu_scheduler.h             |  8 ++++++
+> >>>>>     3 files changed, 43 insertions(+), 1 deletion(-)
+> >>>>>
+> >>>>> diff --git a/drivers/gpu/drm/scheduler/sched_fence.c b/drivers/gpu/drm/scheduler/sched_fence.c
+> >>>>> index bcea035cf4c6..4fc41a71d1c7 100644
+> >>>>> --- a/drivers/gpu/drm/scheduler/sched_fence.c
+> >>>>> +++ b/drivers/gpu/drm/scheduler/sched_fence.c
+> >>>>> @@ -128,6 +128,30 @@ static void drm_sched_fence_release_finished(struct dma_fence *f)
+> >>>>>         dma_fence_put(&fence->scheduled);
+> >>>>>     }
+> >>>>>
+> >>>>> +static void drm_sched_fence_set_deadline_finished(struct dma_fence *f,
+> >>>>> +                                               ktime_t deadline)
+> >>>>> +{
+> >>>>> +     struct drm_sched_fence *fence = to_drm_sched_fence(f);
+> >>>>> +     unsigned long flags;
+> >>>>> +
+> >>>>> +     spin_lock_irqsave(&fence->lock, flags);
+> >>>>> +
+> >>>>> +     /* If we already have an earlier deadline, keep it: */
+> >>>>> +     if (test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT, &f->flags) &&
+> >>>>> +         ktime_before(fence->deadline, deadline)) {
+> >>>>> +             spin_unlock_irqrestore(&fence->lock, flags);
+> >>>>> +             return;
+> >>>>> +     }
+> >>>>> +
+> >>>>> +     fence->deadline = deadline;
+> >>>>> +     set_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT, &f->flags);
+> >>>>> +
+> >>>>> +     spin_unlock_irqrestore(&fence->lock, flags);
+> >>>>> +
+> >>>>> +     if (fence->parent)
+> >>>>> +             dma_fence_set_deadline(fence->parent, deadline);
+> >>>>> +}
+> >>>>> +
+> >>>>>     static const struct dma_fence_ops drm_sched_fence_ops_scheduled = {
+> >>>>>         .get_driver_name = drm_sched_fence_get_driver_name,
+> >>>>>         .get_timeline_name = drm_sched_fence_get_timeline_name,
+> >>>>> @@ -138,6 +162,7 @@ static const struct dma_fence_ops drm_sched_fence_ops_finished = {
+> >>>>>         .get_driver_name = drm_sched_fence_get_driver_name,
+> >>>>>         .get_timeline_name = drm_sched_fence_get_timeline_name,
+> >>>>>         .release = drm_sched_fence_release_finished,
+> >>>>> +     .set_deadline = drm_sched_fence_set_deadline_finished,
+> >>>>>     };
+> >>>>>
+> >>>>>     struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f)
+> >>>>> @@ -152,6 +177,15 @@ struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f)
+> >>>>>     }
+> >>>>>     EXPORT_SYMBOL(to_drm_sched_fence);
+> >>>>>
+> >>>>> +void drm_sched_fence_set_parent(struct drm_sched_fence *s_fence,
+> >>>>> +                             struct dma_fence *fence)
+> >>>>> +{
+> >>>>> +     s_fence->parent = dma_fence_get(fence);
+> >>>>> +     if (test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT,
+> >>>>> +                  &s_fence->finished.flags))
+> >>>>> +             dma_fence_set_deadline(fence, s_fence->deadline);
+> >>>> I believe above you should pass be s_fence->finished to
+> >>>> dma_fence_set_deadline
+> >>>> instead it fence which is the HW fence itself.
+> >>> Hmm, unless this has changed recently with some patches I don't have,
+> >>> s_fence->parent is the one signalled by hw, so it is the one we want
+> >>> to set the deadline on
+> >>>
+> >>> BR,
+> >>> -R
+> >>
+> >> No it didn't change. But then when exactly will
+> >> drm_sched_fence_set_deadline_finished
+> >> execute such that fence->parent != NULL ? In other words, I am not clear
+> >> how propagation
+> >> happens otherwise - if dma_fence_set_deadline is called with the HW
+> >> fence then the assumption
+> >> here is that driver provided driver specific
+> >> dma_fence_ops.dma_fence_set_deadline callback executes
+> >> but I was under impression that drm_sched_fence_set_deadline_finished is
+> >> the one that propagates
+> >> the deadline to the HW fence's callback and for it to execute
+> >> dma_fence_set_deadline needs to be called
+> >> with s_fence->finished.
+> > Assuming I didn't screw up drm/msm conversion to scheduler,
+> > &s_fence->finished is the one that will be returned to userspace.. and
+> > later passed back to kernel for atomic commit (or to the compositor).
+> > So it is the one that fence->set_deadline() will be called on.  But
+> > s_fence->parent is the actual hw fence that needs to know about the
+> > deadline.  Depending on whether or not the job has been written into
+> > hw ringbuffer or not, there are two cases:
+> >
+> > 1) not scheduled yet, s_fence will store the deadline and propagate it
+> > later once s_fence->parent is known
+>
+>
+> And by later you mean the call to drm_sched_fence_set_parent
+> after HW fence is returned  ? If yes I think i get it now.
+
+Yup :-)
+
+BR,
+-R
+
+> Andrey
+>
+>
+> > 2) already scheduled, in which case s_fence->finished.set_deadline
+> > will propagate it directly to the real fence
+> >
+> > BR,
+> > -R
+> >
+> >> Andrey
+> >>
+> >>
+> >>
+> >>>> Andrey
+> >>>>
+> >>>>
+> >>>>> +}
+> >>>>> +
+> >>>>>     struct drm_sched_fence *drm_sched_fence_alloc(struct drm_sched_entity *entity,
+> >>>>>                                               void *owner)
+> >>>>>     {
+> >>>>> diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
+> >>>>> index 595e47ff7d06..27bf0ac0625f 100644
+> >>>>> --- a/drivers/gpu/drm/scheduler/sched_main.c
+> >>>>> +++ b/drivers/gpu/drm/scheduler/sched_main.c
+> >>>>> @@ -978,7 +978,7 @@ static int drm_sched_main(void *param)
+> >>>>>                 drm_sched_fence_scheduled(s_fence);
+> >>>>>
+> >>>>>                 if (!IS_ERR_OR_NULL(fence)) {
+> >>>>> -                     s_fence->parent = dma_fence_get(fence);
+> >>>>> +                     drm_sched_fence_set_parent(s_fence, fence);
+> >>>>>                         r = dma_fence_add_callback(fence, &sched_job->cb,
+> >>>>>                                                    drm_sched_job_done_cb);
+> >>>>>                         if (r == -ENOENT)
+> >>>>> diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
+> >>>>> index 7f77a455722c..158ddd662469 100644
+> >>>>> --- a/include/drm/gpu_scheduler.h
+> >>>>> +++ b/include/drm/gpu_scheduler.h
+> >>>>> @@ -238,6 +238,12 @@ struct drm_sched_fence {
+> >>>>>              */
+> >>>>>         struct dma_fence                finished;
+> >>>>>
+> >>>>> +     /**
+> >>>>> +      * @deadline: deadline set on &drm_sched_fence.finished which
+> >>>>> +      * potentially needs to be propagated to &drm_sched_fence.parent
+> >>>>> +      */
+> >>>>> +     ktime_t                         deadline;
+> >>>>> +
+> >>>>>             /**
+> >>>>>              * @parent: the fence returned by &drm_sched_backend_ops.run_job
+> >>>>>              * when scheduling the job on hardware. We signal the
+> >>>>> @@ -505,6 +511,8 @@ void drm_sched_entity_set_priority(struct drm_sched_entity *entity,
+> >>>>>                                    enum drm_sched_priority priority);
+> >>>>>     bool drm_sched_entity_is_ready(struct drm_sched_entity *entity);
+> >>>>>
+> >>>>> +void drm_sched_fence_set_parent(struct drm_sched_fence *s_fence,
+> >>>>> +                             struct dma_fence *fence);
+> >>>>>     struct drm_sched_fence *drm_sched_fence_alloc(
+> >>>>>         struct drm_sched_entity *s_entity, void *owner);
+> >>>>>     void drm_sched_fence_init(struct drm_sched_fence *fence,
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
