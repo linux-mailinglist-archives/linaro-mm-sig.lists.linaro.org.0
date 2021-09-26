@@ -2,63 +2,51 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1AF74184E5
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 26 Sep 2021 00:16:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A7A4A418938
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 26 Sep 2021 15:59:07 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8C8C262079
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 25 Sep 2021 22:16:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 028536216E
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 26 Sep 2021 13:59:05 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 6BE2C62072; Sat, 25 Sep 2021 22:16:40 +0000 (UTC)
+	id CD1CC623A8; Sun, 26 Sep 2021 13:59:02 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DE65C60AC5;
-	Sat, 25 Sep 2021 22:16:37 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3C6E761016;
+	Sun, 26 Sep 2021 13:59:00 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 00BC66062F
- for <linaro-mm-sig@lists.linaro.org>; Sat, 25 Sep 2021 22:16:36 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id ABBD360D3D
+ for <linaro-mm-sig@lists.linaro.org>; Sun, 26 Sep 2021 13:58:58 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id F272F60AC5; Sat, 25 Sep 2021 22:16:35 +0000 (UTC)
-Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com
- [209.85.167.176])
- by lists.linaro.org (Postfix) with ESMTPS id ECEA46062F
- for <linaro-mm-sig@lists.linaro.org>; Sat, 25 Sep 2021 22:16:33 +0000 (UTC)
-Received: by mail-oi1-f176.google.com with SMTP id v10so19815593oic.12
- for <linaro-mm-sig@lists.linaro.org>; Sat, 25 Sep 2021 15:16:33 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:in-reply-to:references:subject:date
- :message-id;
- bh=4zZa0pNx5SO7y8XUgl4L6wylE3A2MDP8EXBjRieRoGg=;
- b=yOo1zATjYRWRT8E9LJrmf3jGX+jVsG20JsndvvEZmhXIH9p2DIC7QxWjMA6oDRHScp
- vryqQQdHFH3UcB8m8sgQ2S/ZGmlwvNbsuTVLONxGOxIctVorrHuEZGYwoz3J+Znwqqva
- OE6AYjOPUGGU4EY5RjLHLmj1P3KhHfQAWpzNx5tBtorL6tinXhw3uLkwB5eqQsnwXsnq
- Wh1g3iV0+rbdYrNRHbtk19ObfXkg5kwnJ2jQlnxHOTNKaJ0GcfAbSKs7C2qC/ePvQ2WL
- bYqI8uMMrk/O/oSm79K2JqtDTVgMjvA8EROf0svVg7h3fOnfORgZcuqVCtfqibWA7iy/
- Scuw==
-X-Gm-Message-State: AOAM531n0NuUNXRekCDyWnlyPHAV5TnfuWV0nuy1u3PNidl+yG3iwrkV
- LeS5RHC/wEcn75zjpeVgTA==
-X-Google-Smtp-Source: ABdhPJyxrl+MLrGaVMhZlIuZKpsBWIPx8RYrEaa/BgmMRqDJoT3O8C2TV3JX6WZQqreUbBZ5fKjhtQ==
-X-Received: by 2002:a05:6808:1a04:: with SMTP id
- bk4mr6680603oib.85.1632608193387; 
- Sat, 25 Sep 2021 15:16:33 -0700 (PDT)
-Received: from robh.at.kernel.org (66-90-148-213.dyn.grandenetworks.net.
- [66.90.148.213])
- by smtp.gmail.com with ESMTPSA id z17sm2305434ooz.38.2021.09.25.15.16.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 25 Sep 2021 15:16:32 -0700 (PDT)
-Received: (nullmailer pid 3839363 invoked by uid 1000);
- Sat, 25 Sep 2021 22:16:30 -0000
-From: Rob Herring <robh@kernel.org>
-To: Justin Chen <justinpopo6@gmail.com>
-In-Reply-To: <1632519891-26510-2-git-send-email-justinpopo6@gmail.com>
+ id A0BE461016; Sun, 26 Sep 2021 13:58:58 +0000 (UTC)
+Received: from vps0.lunn.ch (vps0.lunn.ch [185.16.172.187])
+ by lists.linaro.org (Postfix) with ESMTPS id 9A48960D3D
+ for <linaro-mm-sig@lists.linaro.org>; Sun, 26 Sep 2021 13:58:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+ s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+ Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+ bh=HjivBkUchm6JkPW5fbVo3EwXigbe6lkdP6wwmdWVHlI=; b=RwGCs+IqoHQ39s/L8ivaNLfIMT
+ szIKmvdRaeuZmcGYEVS/T7r3RAVDntYMkasIMgVELoebCQc01I7zlSvI7e+6JGibBAevDlt1h6lw8
+ vCS3GkxRFw04ADKyfK0xGeJ6xtZ/Yra4aG/GusMl7QEXan93UFq0qWmcricQr0NDH5oA=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+ (envelope-from <andrew@lunn.ch>)
+ id 1mUUfZ-008Jwy-P3; Sun, 26 Sep 2021 15:58:17 +0200
+Date: Sun, 26 Sep 2021 15:58:17 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Florian Fainelli <f.fainelli@gmail.com>
+Message-ID: <YVB8ef3aMpJTEvgF@lunn.ch>
 References: <1632519891-26510-1-git-send-email-justinpopo6@gmail.com>
- <1632519891-26510-2-git-send-email-justinpopo6@gmail.com>
-Date: Sat, 25 Sep 2021 17:16:30 -0500
-Message-Id: <1632608190.772021.3839362.nullmailer@robh.at.kernel.org>
+ <1632519891-26510-4-git-send-email-justinpopo6@gmail.com>
+ <YU9SHpn4ZJrjqNuF@lunn.ch>
+ <c66c8bd1-940a-bf9d-ce33-5a39635e9f5b@gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <c66c8bd1-940a-bf9d-ce33-5a39635e9f5b@gmail.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH net-next 1/5] dt-bindings: net: Brcm ASP
- 2.0 Ethernet controller
+Subject: Re: [Linaro-mm-sig] [PATCH net-next 3/5] net: bcmasp: Add support
+ for ASP2.0 Ethernet controller
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,66 +59,83 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Andrew Lunn <andrew@lunn.ch>, Geert Uytterhoeven <geert+renesas@glider.be>,
- dri-devel@lists.freedesktop.org,
- =?utf-8?b?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>,
- Florian Fainelli <f.fainelli@gmail.com>, Russell King <linux@armlinux.org.uk>,
- bcm-kernel-feedback-list@broadcom.com, Jakub Kicinski <kuba@kernel.org>,
- linux-media@vger.kernel.org, devicetree@vger.kernel.org,
- Arnd Bergmann <arnd@arndb.de>, linaro-mm-sig@lists.linaro.org,
- Doug Berger <opendmb@gmail.com>, Michael Chan <michael.chan@broadcom.com>,
+Cc: "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS"
+ <devicetree@vger.kernel.org>, Doug Berger <opendmb@gmail.com>,
+ Geert Uytterhoeven <geert+renesas@glider.be>, Arnd Bergmann <arnd@arndb.de>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
  netdev@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
- linux-kernel@vger.kernel.org,
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Rob Herring <robh+dt@kernel.org>, "David S. Miller" <davem@davemloft.net>,
+ Russell King <linux@armlinux.org.uk>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <dri-devel@lists.freedesktop.org>,
+ "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+ Rob Herring <robh+dt@kernel.org>, bcm-kernel-feedback-list@broadcom.com,
+ Justin Chen <justinpopo6@gmail.com>,
+ =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>,
+ Jakub Kicinski <kuba@kernel.org>, Michael Chan <michael.chan@broadcom.com>,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>,
+ "David S. Miller" <davem@davemloft.net>,
+ open list <linux-kernel@vger.kernel.org>,
  Heiner Kallweit <hkallweit1@gmail.com>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Fri, 24 Sep 2021 14:44:47 -0700, Justin Chen wrote:
-> From: Florian Fainelli <f.fainelli@gmail.com>
+> > > +static int bcmasp_set_priv_flags(struct net_device *dev, u32 flags)
+> > > +{
+> > > +	struct bcmasp_intf *intf = netdev_priv(dev);
+> > > +
+> > > +	intf->wol_keep_rx_en = flags & BCMASP_WOL_KEEP_RX_EN ? 1 : 0;
+> > > +
+> > > +	return 0;
+> > 
+> > Please could you explain this some more. How can you disable RX and
+> > still have WoL working?
 > 
-> Add a binding document for the Broadcom ASP 2.0 Ethernet controller.
+> Wake-on-LAN using Magic Packets and network filters requires keeping the
+> UniMAC's receiver turned on, and then the packets feed into the Magic Packet
+> Detector (MPD) block or the network filter block. In that mode DRAM is in
+> self refresh and there is local matching of frames into a tiny FIFO however
+> in the case of magic packets the packets leading to a wake-up are dropped as
+> there is nowhere to store them. In the case of a network filter match (e.g.:
+> matching a multicast IP address plus protocol, plus source/destination
+> ports) the packets are also discarded because the receive DMA was shut down.
 > 
-> Signed-off-by: Florian Fainelli <f.fainelli@gmail.com>
-> Signed-off-by: Justin Chen <justinpopo6@gmail.com>
-> ---
->  .../devicetree/bindings/net/brcm,asp-v2.0.yaml     | 147 +++++++++++++++++++++
->  1 file changed, 147 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/net/brcm,asp-v2.0.yaml
+> When the wol_keep_rx_en flag is set, the above happens but we also allow the
+> packets that did match a network filter to reach the small FIFO (Justin
+> would know how many entries are there) that is used to push the packets to
+> DRAM. The packet contents are held in there until the system wakes up which
+> is usually just a few hundreds of micro seconds after we received a packet
+> that triggered a wake-up. Once we overflow the receive DMA FIFO capacity
+> subsequent packets get dropped which is fine since we are usually talking
+> about very low bit rates, and we only try to push to DRAM the packets of
+> interest, that is those for which we have a network filter.
 > 
+> This is convenient in scenarios where you want to wake-up from multicast DNS
+> (e.g.: wake on Googlecast, Bonjour etc.) because then the packet that
+> resulted in the system wake-up is not discarded but is then delivered to the
+> network stack.
 
-My bot found errors running 'make DT_CHECKER_FLAGS=-m dt_binding_check'
-on your patch (DT_CHECKER_FLAGS is new in v5.13):
+Thanks for the explanation. It would be easier for the user if you
+automate this. Enable is by default for WoL types which have user
+content?
 
-yamllint warnings/errors:
-./Documentation/devicetree/bindings/net/brcm,asp-v2.0.yaml:79:10: [warning] wrong indentation: expected 10 but found 9 (indentation)
+> > > +	/* Per ch */
+> > > +	intf->tx_spb_dma = priv->base + TX_SPB_DMA_OFFSET(intf);
+> > > +	intf->res.tx_spb_ctrl = priv->base + TX_SPB_CTRL_OFFSET(intf);
+> > > +	/*
+> > > +	 * Stop gap solution. This should be removed when 72165a0 is
+> > > +	 * deprecated
+> > > +	 */
+> > 
+> > Is that an internal commit?
+> 
+> Yes this is a revision of the silicon that is not meant to see the light of
+> day.
 
-dtschema/dtc warnings/errors:
-/builds/robherring/linux-dt-review/Documentation/devicetree/bindings/net/brcm,asp-v2.0.example.dt.yaml: asp@9c00000: 'mdio@c614', 'mdio@ce14' do not match any of the regexes: 'pinctrl-[0-9]+'
-	From schema: /builds/robherring/linux-dt-review/Documentation/devicetree/bindings/net/brcm,asp-v2.0.yaml
-Documentation/devicetree/bindings/net/brcm,asp-v2.0.example.dt.yaml:0:0: /example-0/asp@9c00000/mdio@c614: failed to match any schema with compatible: ['brcm,asp-v2.0-mdio']
-Documentation/devicetree/bindings/net/brcm,asp-v2.0.example.dt.yaml:0:0: /example-0/asp@9c00000/mdio@ce14: failed to match any schema with compatible: ['brcm,asp-v2.0-mdio']
+So this can all be removed?
 
-doc reference errors (make refcheckdocs):
-
-See https://patchwork.ozlabs.org/patch/1532528
-
-This check can fail if there are any dependencies. The base for a patch
-series is generally the most recent rc1.
-
-If you already ran 'make dt_binding_check' and didn't see the above
-error(s), then make sure 'yamllint' is installed and dt-schema is up to
-date:
-
-pip3 install dtschema --upgrade
-
-Please check and re-submit.
-
+   Andrew
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
