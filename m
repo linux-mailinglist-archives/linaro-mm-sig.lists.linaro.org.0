@@ -2,76 +2,70 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1501941D7EA
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 30 Sep 2021 12:38:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 89FDC41D7BA
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 30 Sep 2021 12:29:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7B87262175
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 30 Sep 2021 10:38:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 13312619C8
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 30 Sep 2021 10:29:55 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 7A11961170; Thu, 30 Sep 2021 10:38:16 +0000 (UTC)
+	id 78F0D6242A; Thu, 30 Sep 2021 10:29:53 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5A7A86141A;
-	Thu, 30 Sep 2021 10:38:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EEC3B61014;
+	Thu, 30 Sep 2021 10:29:49 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id C4F18603E6
- for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Sep 2021 10:25:42 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 751B761A4B
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Sep 2021 10:21:36 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 592236322E; Mon, 27 Sep 2021 07:35:00 +0000 (UTC)
-Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com
- [209.85.208.50])
- by lists.linaro.org (Postfix) with ESMTPS id 50738630F1
- for <linaro-mm-sig@lists.linaro.org>; Mon, 27 Sep 2021 07:34:58 +0000 (UTC)
-Received: by mail-ed1-f50.google.com with SMTP id bd28so3891202edb.9
- for <linaro-mm-sig@lists.linaro.org>; Mon, 27 Sep 2021 00:34:58 -0700 (PDT)
+ id 790926A9B0; Mon, 27 Sep 2021 08:42:14 +0000 (UTC)
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com
+ [209.85.167.47])
+ by lists.linaro.org (Postfix) with ESMTPS id 633916A967
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 27 Sep 2021 08:42:12 +0000 (UTC)
+Received: by mail-lf1-f47.google.com with SMTP id i25so74438922lfg.6
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 27 Sep 2021 01:42:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=subject:from:to:cc:references:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=zQB26B5eWUnzl+964mpUpFb8aQd6/nGrTcRgYihaeWc=;
- b=hhkZKKfmY6xHACewDTWjOFBz4xjAdw6xepF6ktK90NO/v63YVfo3bclcJjktmyxKd9
- Z/c4igoFBRypdKeRup7kuFoUmC/X1Ve6oHCvfGuhIPEsLfcEPQw33+GPKhEzsaTZc8AB
- FRO4bjD10C8Oh8tk8cVFMIHRCrcV/nFhAVuQJwEXZYxXtzHVZWPwpH6WwM4X58xMxD3G
- ANTPz2NS8tzJLST011L1Ub4nsekD7rgLMNy021dE0rsoWx/yWUahwOlLMkjDzbTjLZyQ
- gg06B5E6Oq2eJ6mqcnpBhkZzaI05ZMPzkrFUOtTv6WPupPyIVVbHmiOWBJUuvTNXTRaP
- 2vyA==
+ h=date:from:to:cc:subject:message-id:in-reply-to:references
+ :mime-version; bh=1BG0A7psUXeGAUQUvHgRgao8dcZIRyXeRNw4ym7V7hQ=;
+ b=YUkw8+PzjqCIs3sdkd0kJKxzjL53C40Ukx8I5yuZZPCkVvKLn/Nq8tvO+VpJy4+noU
+ Y7aNcUkEHDjA+8NCOHX5tS9F59FkKqaUmnO6M9c0V5LLVCDJ420UfA0kw9g8+x6ZBcvP
+ O2DLhwYba4pe5bZLLuhzKcRu4rfojLvcGdHWSX0ybYwlLFJnjKG9qj0GBAwhPvWFBK8J
+ HZcPHBJU5LnxF6Sp4dM47l0PxoTKzzHU0VIcj145UDhpKXBCGjRd2FyHsGhoDoRqQLAW
+ F+Cb3oqtlf7Rxn0VjMiObE/sBZAOLzmnU/7ajAEuwLOCtuUpWvffiLF8lsml2VKY19Wj
+ di1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:from:to:cc:references:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=zQB26B5eWUnzl+964mpUpFb8aQd6/nGrTcRgYihaeWc=;
- b=XwdM8pxEFcS3Scy8cFVqfpV0XDO4XWpAeOkgo8DhUuR2OlhzgGKZdARgeAIHI5ZwTq
- BRxDsc0Ga9AUjy/fWEx1AB+SQvujJzPz6r26FJTviPO9tu3WSPAQHqxi4NVFbTFZkjzY
- pdfDOihMfbLaotfS4wRIms6cheviF0M5p62VoydGXEMHtN9ATcL6/OBoDThmNkI1QrOM
- E/rq6ByV1NvDdjtGtgk6i8l8HARzulqyJwj26RNh0lSi4mUfldhF781ygKyOw1yVMRTZ
- EiuqgZYUmfPI2T59MMxkAo/SrTAQE94o/BQdfih9/+0I7owySfDLuw19PkZlTrs30fj2
- fiNw==
-X-Gm-Message-State: AOAM530Fe+tSjU1PQCVvHMqIA6pXNNZAPIhYhrIqGMtcJG0a89oKf1vU
- h6NSWHDJrg71JLU8LEmdxwpgV5OD/r4=
-X-Google-Smtp-Source: ABdhPJyKxcFSxLyjYTbrEPilQCvwXzB/i+kykltwhE6uBKLPaKa7c1AQMv9DtFoICMHeA7Ce1DlXbg==
-X-Received: by 2002:a5d:6a08:: with SMTP id m8mr25303052wru.336.1632726080941; 
- Mon, 27 Sep 2021 00:01:20 -0700 (PDT)
-Received: from [192.168.178.21] (p5b0ea1b5.dip0.t-ipconnect.de.
- [91.14.161.181])
- by smtp.gmail.com with ESMTPSA id w21sm2167288wmk.15.2021.09.27.00.01.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 27 Sep 2021 00:01:20 -0700 (PDT)
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-To: dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org,
- linaro-mm-sig@lists.linaro.org, etnaviv@lists.freedesktop.org,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org
-References: <20210924071759.22659-1-christian.koenig@amd.com>
- <20210924071759.22659-2-christian.koenig@amd.com>
-Message-ID: <dbf6b324-511e-45d4-3316-f41f076c4f82@gmail.com>
-Date: Mon, 27 Sep 2021 09:01:18 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+ :references:mime-version;
+ bh=1BG0A7psUXeGAUQUvHgRgao8dcZIRyXeRNw4ym7V7hQ=;
+ b=Pz9WCNXpi9X+sExSc6iZiBj5I1R8c7jxttZZZcaoc7fUtmxTnmxBoA+SO9e3o9jp6n
+ MtY9VP1a7kfLFsFn76L6fXsSYmsWxvyKRGCaDiFW5j+QutHUBYrygKJCMsa7pWPn85h7
+ gZtdEZ7kS4VIi8RKbaZBgsM471kf/ve4oGbogTBOyso01DgIdcfcYDiQuqeDATzskwnC
+ IoD3eE0K3lq4CY4ij3m3UYhdFUGYd0IGxLj5YSH+yZevMRY4Y3WVOXKOpbx16lnCdplb
+ qn94ivaODPE9obR8M5ZHfWtCPkSGXD61yoilaJKZsuwz+ZFSiiHsiAyNHsrU+EUSfpPT
+ cqVQ==
+X-Gm-Message-State: AOAM53037TDqJupfnwb4hLVQptVdpJo5YacrFBYni2oLsAk0mBMMZhM9
+ 81mxbr8m/iyMp4J7EiZYVEY=
+X-Google-Smtp-Source: ABdhPJz9IEdgS3tt3ObWODiNcVsXRujmPf+tYf3g2mh+Z4t7iY4w5zOjn9nOjTj61PF93sYD/eTBmg==
+X-Received: by 2002:ac2:4c52:: with SMTP id o18mr22119107lfk.108.1632732131214; 
+ Mon, 27 Sep 2021 01:42:11 -0700 (PDT)
+Received: from eldfell ([194.136.85.206])
+ by smtp.gmail.com with ESMTPSA id v1sm1529371lfp.215.2021.09.27.01.42.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 27 Sep 2021 01:42:10 -0700 (PDT)
+Date: Mon, 27 Sep 2021 11:42:01 +0300
+From: Pekka Paalanen <ppaalanen@gmail.com>
+To: Rob Clark <robdclark@gmail.com>
+Message-ID: <20210927114201.1f8fdc17@eldfell>
+In-Reply-To: <20210903184806.1680887-9-robdclark@gmail.com>
+References: <20210903184806.1680887-1-robdclark@gmail.com>
+ <20210903184806.1680887-9-robdclark@gmail.com>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-In-Reply-To: <20210924071759.22659-2-christian.koenig@amd.com>
-Content-Language: en-US
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 2/4] drm/msm: allow compile_test on !ARM
+Subject: Re: [Linaro-mm-sig] [PATCH v3 8/9] dma-buf/sync_file: Add
+ SET_DEADLINE ioctl
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -84,66 +78,171 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: christian.gmeiner@gmail.com, linux+etnaviv@armlinux.org.uk, sean@poorly.run,
- robdclark@gmail.com
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: Rob Clark <robdclark@chromium.org>,
+ Michel =?UTF-8?B?RMOkbnplcg==?= <michel@daenzer.net>,
+ open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
+ Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+ linaro-mm-sig@lists.linaro.org, Daniel Vetter <daniel@ffwll.ch>,
+ Gustavo Padovan <gustavo@padovan.org>,
+ "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>
+Content-Type: multipart/mixed; boundary="===============0359925614865525873=="
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-QXMgbG9uZyBhcyBub2JvZHkgb2JqZWN0cyBJJ20gZ29pbmcgdG8gcHVzaCB0aGlzIG9uZSBoZXJl
-IHRvIApkcm0tbWlzYy1uZXh0IHdpdGggUm9iJ3MgcmIuCgpUaGUgb3RoZXIgcGF0Y2hlcyBzdGls
-bCBuZWVkIGEgYml0IG1vcmUgd29yaywgYnV0IGJlaW5nIGFibGUgdG8gYXQgbGVhc3QgCmNvbXBp
-bGUgdGVzdCBNU00gb24geDg2IGlzIHJlYWxseSBoZWxwZnVsLgoKQ2hyaXN0aWFuLgoKQW0gMjQu
-MDkuMjEgdW0gMDk6MTcgc2NocmllYiBDaHJpc3RpYW4gS8O2bmlnOgo+IE1TTSBpcyBvbmUgb2Yg
-dGhlIGZldyBkcml2ZXJzIHdoaWNoIHdvbid0IGV2ZW4gY29tcGlsZQo+IHRlc3Qgb24gIUFSTSBw
-bGF0Zm9ybXMuCj4KPiBMb29raW5nIGludG8gdGhpcyBhIGJpdCBtb3JlIGl0IHR1cm5lZCBvdXQg
-dGhhdCB0aGVyZSBpcwo+IGFjdHVhbGx5IG5vdCB0aGF0IG11Y2ggbWlzc2luZyB0byBhdCBsZWFz
-dCBsZXQgdGhlIGRyaXZlcgo+IGNvbXBpbGUgb24geDg2IGFzIHdlbGwuCj4KPiBTbyB0aGlzIHBh
-dGNoIHJlcGxhY2VzIHRoZSB1c2Ugb2YgcGh5c190b19wYWdlKCkgd2l0aCB0aGUKPiBvcGVuIGNv
-ZGVkIHZlcnNpb24gYW5kIHByb3ZpZGVzIGEgZHVtbXkgZm9yIG9mX2RybV9maW5kX2JyaWRnZSgp
-Lgo+Cj4gU2lnbmVkLW9mZi1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0Bh
-bWQuY29tPgo+IC0tLQo+ICAgZHJpdmVycy9ncHUvZHJtL21zbS9LY29uZmlnICAgfCAgNCArKy0t
-Cj4gICBkcml2ZXJzL2dwdS9kcm0vbXNtL21zbV9nZW0uYyB8ICAyICstCj4gICBpbmNsdWRlL2Ry
-bS9kcm1fYnJpZGdlLmggICAgICB8IDEwICsrKysrKysrKy0KPiAgIDMgZmlsZXMgY2hhbmdlZCwg
-MTIgaW5zZXJ0aW9ucygrKSwgNCBkZWxldGlvbnMoLSkKPgo+IGRpZmYgLS1naXQgYS9kcml2ZXJz
-L2dwdS9kcm0vbXNtL0tjb25maWcgYi9kcml2ZXJzL2dwdS9kcm0vbXNtL0tjb25maWcKPiBpbmRl
-eCBlOWM2YWY3OGIxZDcuLjU4NzlmNjdiYzg4YyAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL2dwdS9k
-cm0vbXNtL0tjb25maWcKPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbXNtL0tjb25maWcKPiBAQCAt
-Myw5ICszLDkgQEAKPiAgIGNvbmZpZyBEUk1fTVNNCj4gICAJdHJpc3RhdGUgIk1TTSBEUk0iCj4g
-ICAJZGVwZW5kcyBvbiBEUk0KPiAtCWRlcGVuZHMgb24gQVJDSF9RQ09NIHx8IFNPQ19JTVg1IHx8
-IChBUk0gJiYgQ09NUElMRV9URVNUKQo+ICsJZGVwZW5kcyBvbiBBUkNIX1FDT00gfHwgU09DX0lN
-WDUgfHwgQ09NUElMRV9URVNUCj4gICAJZGVwZW5kcyBvbiBJT01NVV9TVVBQT1JUCj4gLQlkZXBl
-bmRzIG9uIE9GICYmIENPTU1PTl9DTEsKPiArCWRlcGVuZHMgb24gKE9GICYmIENPTU1PTl9DTEsp
-IHx8IENPTVBJTEVfVEVTVAo+ICAgCWRlcGVuZHMgb24gUUNPTV9PQ01FTSB8fCBRQ09NX09DTUVN
-PW4KPiAgIAlkZXBlbmRzIG9uIFFDT01fTExDQyB8fCBRQ09NX0xMQ0M9bgo+ICAgCWRlcGVuZHMg
-b24gUUNPTV9DT01NQU5EX0RCIHx8IFFDT01fQ09NTUFORF9EQj1uCj4gZGlmZiAtLWdpdCBhL2Ry
-aXZlcnMvZ3B1L2RybS9tc20vbXNtX2dlbS5jIGIvZHJpdmVycy9ncHUvZHJtL21zbS9tc21fZ2Vt
-LmMKPiBpbmRleCAxNDkwNzYyMjc2OWYuLjViZDUxMWYwN2MwNyAxMDA2NDQKPiAtLS0gYS9kcml2
-ZXJzL2dwdS9kcm0vbXNtL21zbV9nZW0uYwo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9tc20vbXNt
-X2dlbS5jCj4gQEAgLTg1LDcgKzg1LDcgQEAgc3RhdGljIHN0cnVjdCBwYWdlICoqZ2V0X3BhZ2Vz
-X3ZyYW0oc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmosIGludCBucGFnZXMpCj4gICAKPiAgIAlw
-YWRkciA9IHBoeXNhZGRyKG9iaik7Cj4gICAJZm9yIChpID0gMDsgaSA8IG5wYWdlczsgaSsrKSB7
-Cj4gLQkJcFtpXSA9IHBoeXNfdG9fcGFnZShwYWRkcik7Cj4gKwkJcFtpXSA9IHBmbl90b19wYWdl
-KF9fcGh5c190b19wZm4ocGFkZHIpKTsKPiAgIAkJcGFkZHIgKz0gUEFHRV9TSVpFOwo+ICAgCX0K
-PiAgIAo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2RybS9kcm1fYnJpZGdlLmggYi9pbmNsdWRlL2Ry
-bS9kcm1fYnJpZGdlLmgKPiBpbmRleCA5Y2RiZDIwOTM4OGUuLmE0NDUyOThlMWMyNSAxMDA2NDQK
-PiAtLS0gYS9pbmNsdWRlL2RybS9kcm1fYnJpZGdlLmgKPiArKysgYi9pbmNsdWRlL2RybS9kcm1f
-YnJpZGdlLmgKPiBAQCAtNzkwLDExICs3OTAsMTkgQEAgZHJtX3ByaXZfdG9fYnJpZGdlKHN0cnVj
-dCBkcm1fcHJpdmF0ZV9vYmogKnByaXYpCj4gICAKPiAgIHZvaWQgZHJtX2JyaWRnZV9hZGQoc3Ry
-dWN0IGRybV9icmlkZ2UgKmJyaWRnZSk7Cj4gICB2b2lkIGRybV9icmlkZ2VfcmVtb3ZlKHN0cnVj
-dCBkcm1fYnJpZGdlICpicmlkZ2UpOwo+IC1zdHJ1Y3QgZHJtX2JyaWRnZSAqb2ZfZHJtX2ZpbmRf
-YnJpZGdlKHN0cnVjdCBkZXZpY2Vfbm9kZSAqbnApOwo+ICAgaW50IGRybV9icmlkZ2VfYXR0YWNo
-KHN0cnVjdCBkcm1fZW5jb2RlciAqZW5jb2Rlciwgc3RydWN0IGRybV9icmlkZ2UgKmJyaWRnZSwK
-PiAgIAkJICAgICAgc3RydWN0IGRybV9icmlkZ2UgKnByZXZpb3VzLAo+ICAgCQkgICAgICBlbnVt
-IGRybV9icmlkZ2VfYXR0YWNoX2ZsYWdzIGZsYWdzKTsKPiAgIAo+ICsjaWZkZWYgQ09ORklHX09G
-Cj4gK3N0cnVjdCBkcm1fYnJpZGdlICpvZl9kcm1fZmluZF9icmlkZ2Uoc3RydWN0IGRldmljZV9u
-b2RlICpucCk7Cj4gKyNlbHNlCj4gK3N0YXRpYyBpbmxpbmUgc3RydWN0IGRybV9icmlkZ2UgKm9m
-X2RybV9maW5kX2JyaWRnZShzdHJ1Y3QgZGV2aWNlX25vZGUgKm5wKQo+ICt7Cj4gKwlyZXR1cm4g
-TlVMTDsKPiArfQo+ICsjZW5kaWYKPiArCj4gICAvKioKPiAgICAqIGRybV9icmlkZ2VfZ2V0X25l
-eHRfYnJpZGdlKCkgLSBHZXQgdGhlIG5leHQgYnJpZGdlIGluIHRoZSBjaGFpbgo+ICAgICogQGJy
-aWRnZTogYnJpZGdlIG9iamVjdAoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0
-cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xp
-bmFyby1tbS1zaWcK
+--===============0359925614865525873==
+Content-Type: multipart/signed; boundary="Sig_/Ae3zq/xxfd0mOmS+IV/YXES";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
+
+--Sig_/Ae3zq/xxfd0mOmS+IV/YXES
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+On Fri,  3 Sep 2021 11:47:59 -0700
+Rob Clark <robdclark@gmail.com> wrote:
+
+> From: Rob Clark <robdclark@chromium.org>
+>=20
+> The initial purpose is for igt tests, but this would also be useful for
+> compositors that wait until close to vblank deadline to make decisions
+> about which frame to show.
+>=20
+> Signed-off-by: Rob Clark <robdclark@chromium.org>
+> ---
+>  drivers/dma-buf/sync_file.c    | 19 +++++++++++++++++++
+>  include/uapi/linux/sync_file.h | 20 ++++++++++++++++++++
+>  2 files changed, 39 insertions(+)
+>=20
+> diff --git a/drivers/dma-buf/sync_file.c b/drivers/dma-buf/sync_file.c
+> index 394e6e1e9686..f295772d5169 100644
+> --- a/drivers/dma-buf/sync_file.c
+> +++ b/drivers/dma-buf/sync_file.c
+> @@ -459,6 +459,22 @@ static long sync_file_ioctl_fence_info(struct sync_f=
+ile *sync_file,
+>  	return ret;
+>  }
+> =20
+> +static int sync_file_ioctl_set_deadline(struct sync_file *sync_file,
+> +					unsigned long arg)
+> +{
+> +	struct sync_set_deadline ts;
+> +
+> +	if (copy_from_user(&ts, (void __user *)arg, sizeof(ts)))
+> +		return -EFAULT;
+> +
+> +	if (ts.pad)
+> +		return -EINVAL;
+> +
+> +	dma_fence_set_deadline(sync_file->fence, ktime_set(ts.tv_sec, ts.tv_nse=
+c));
+> +
+> +	return 0;
+> +}
+> +
+>  static long sync_file_ioctl(struct file *file, unsigned int cmd,
+>  			    unsigned long arg)
+>  {
+> @@ -471,6 +487,9 @@ static long sync_file_ioctl(struct file *file, unsign=
+ed int cmd,
+>  	case SYNC_IOC_FILE_INFO:
+>  		return sync_file_ioctl_fence_info(sync_file, arg);
+> =20
+> +	case SYNC_IOC_SET_DEADLINE:
+> +		return sync_file_ioctl_set_deadline(sync_file, arg);
+> +
+>  	default:
+>  		return -ENOTTY;
+>  	}
+> diff --git a/include/uapi/linux/sync_file.h b/include/uapi/linux/sync_fil=
+e.h
+> index ee2dcfb3d660..f67d4ffe7566 100644
+> --- a/include/uapi/linux/sync_file.h
+> +++ b/include/uapi/linux/sync_file.h
+> @@ -67,6 +67,18 @@ struct sync_file_info {
+>  	__u64	sync_fence_info;
+>  };
+> =20
+> +/**
+> + * struct sync_set_deadline - set a deadline on a fence
+> + * @tv_sec:	seconds elapsed since epoch
+> + * @tv_nsec:	nanoseconds elapsed since the time given by the tv_sec
+> + * @pad:	must be zero
+
+Hi Rob,
+
+I think you need to specify which clock this timestamp must be in.
+
+Which epoch? Sounds a bit like CLOCK_REALTIME to me which would not
+make sense.
+
+Also I cannot guess how a compositor should be using this, so
+explaining the expected usage would be really good, with reasons for
+why should userspace bother.
+
+
+Thanks,
+pq
+
+> + */
+> +struct sync_set_deadline {
+> +	__s64	tv_sec;
+> +	__s32	tv_nsec;
+> +	__u32	pad;
+> +};
+> +
+>  #define SYNC_IOC_MAGIC		'>'
+> =20
+>  /**
+> @@ -95,4 +107,12 @@ struct sync_file_info {
+>   */
+>  #define SYNC_IOC_FILE_INFO	_IOWR(SYNC_IOC_MAGIC, 4, struct sync_file_inf=
+o)
+> =20
+> +
+> +/**
+> + * DOC: SYNC_IOC_SET_DEADLINE - set a deadline on a fence
+> + *
+> + * Allows userspace to set a deadline on a fence, see dma_fence_set_dead=
+line()
+> + */
+> +#define SYNC_IOC_SET_DEADLINE	_IOW(SYNC_IOC_MAGIC, 5, struct sync_set_de=
+adline)
+> +
+>  #endif /* _UAPI_LINUX_SYNC_H */
+
+
+--Sig_/Ae3zq/xxfd0mOmS+IV/YXES
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmFRg9kACgkQI1/ltBGq
+qqerWg//URIwzyumTcB8NXNy0zbIi4YZDXfe6dn9jZvFT+6n4Gdze1shYvrcxMli
+32IX5GxFXHhKZcjH4ugvlN3PJ+yn1IwuxJ7W2eCkj/IRPHWe8xvgvzzv/VWKhriW
+g9tYOOkEtD4z31Gl2pBV9c3I9wSot2mpToMHQcx2Df0QZmyXqol5QbX6SkcZsIL8
+tCsuYY9tpe2v91NpMEFZtJEmIuDezKh6JEy3djZ+Jd3LB0aFCRuH3ewKYaxpRH+9
+f9qrpzIe/1r1bu2t/y/YQSg/HhaX38TKcNme7hyc60k2b31RJU/LkyCrjBYt7wua
+qXCr/7ZYJF4kELTuDKAkhdeX4dtI8ijD9VVjlqsm22pPiNlzIulMtkrTXwGGHaA1
+QqiunoZOzdXO3PDA6ogOkEnjjWQJPLIiQC7DJ1F9fffy0AnbHvyOAREt1ETlZ+lE
+GDufS931n4Cwv4TXpoMNeDeKrVjd/VMfP+cvG/gyitBDqKH5L75boTdJKXGFUZmW
+I2SrhTkQ36n4eoeujHr6ed5E2WAye3rhCZbwkMIE39RE2x8FIHm954DXI4Jj9if1
+MHmbrWR5/btLEJt1yldy07+zfFSr3xQiCEAA8q1ZXULRPzbXwa2JuWrjsOHuUjQv
+bDi20VmhLKrjDNUBtg8Su1s+u+fpv9iDhsIoCBLIEMAFbe2b+70=
+=jyP1
+-----END PGP SIGNATURE-----
+
+--Sig_/Ae3zq/xxfd0mOmS+IV/YXES--
+
+--===============0359925614865525873==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+
+--===============0359925614865525873==--
