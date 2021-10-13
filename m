@@ -2,71 +2,70 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C68242C321
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Oct 2021 16:27:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DF6D42C32F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Oct 2021 16:29:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F0D0A6197F
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Oct 2021 14:27:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AF82D619B0
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Oct 2021 14:29:55 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id E69FA617DA; Wed, 13 Oct 2021 14:27:55 +0000 (UTC)
+	id 5685461456; Wed, 13 Oct 2021 14:29:54 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8C6B461451;
-	Wed, 13 Oct 2021 14:27:52 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D72336141E;
+	Wed, 13 Oct 2021 14:29:50 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 85426607FD
- for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 14:27:51 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 1C035607FD
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 14:29:49 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 8147761451; Wed, 13 Oct 2021 14:27:51 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
- by lists.linaro.org (Postfix) with ESMTPS id 7ABEF607FD
- for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 14:27:49 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id e3so8913147wrc.11
- for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 07:27:49 -0700 (PDT)
+ id 0F29D6141E; Wed, 13 Oct 2021 14:29:49 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
+ [209.85.221.53])
+ by lists.linaro.org (Postfix) with ESMTPS id 08D52607FD
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 14:29:47 +0000 (UTC)
+Received: by mail-wr1-f53.google.com with SMTP id y3so9161166wrl.1
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 07:29:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:content-transfer-encoding:in-reply-to;
- bh=PqWjk4ivgfgdmUTbUdhe8qKxTDFjMlzX5VtUne0kt9E=;
- b=MJO5DikINvlvxLDHZftSGsOfXYEtFQp5DFnLpJnWfwcehW3HSp/831g0ISMfNXuD7y
- EMdnTZHalFFzCw7XSg0hyLGN47MaVS0sM/Ke4a3SZ0ujhM5I/cpTvz90dOpmNp9PG0x6
- vz7VP07sh1yuIocTbqoAIxY52bOObOxD+1Yuo=
+ bh=57KdpWjM6FQj1/ZWMB9uRAMFCr8+sc1UKZVxLCrKqQA=;
+ b=fuUKOCG6VKrPu+jFf/OspZpPDw9h7as1LUinC2Id+eX3+6EfH1KxoH8pGPh/zChA4b
+ Nz4LNmIua30JsScEBiilD8mppPkM0Lc4IrZvN4bniJaijXGMcQNP5WkabQW2YagFugWI
+ Qfln8O6zRTkNHiT6wsElGKTzoV/rv+ML9PSVk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:content-transfer-encoding
  :in-reply-to;
- bh=PqWjk4ivgfgdmUTbUdhe8qKxTDFjMlzX5VtUne0kt9E=;
- b=RwMIqdtofmL4aLZ8GaAsOpnJUFT4PGTWEls2ovb3aDsVH0X5fhKb4X3HpGt5H8R4no
- Y0inH6VBGRBTEPn4XFAWqSEz1J4RPwZJiUSpizIbHj+fUfjt50/bFCjdmomHkpBYiioZ
- +ZU2OXmOajCnQGR072dygAMRhGpWQrEiBeQSGf0ydQOmf39l+XHfTVA3htlL3+h1oY2U
- DSw/ItdT3jWPLMA0BCa2lHdKksy/C2iwfLomwjjK1HuUf+/9c+YUyvjfZwSNLB2UDbse
- CqFrv+2zhmQwnU5+BNwXMYxUKzzMjUZD7wQg84aOzajxt0pQTyZ3BIyxMTTK/yBzDw2S
- C30Q==
-X-Gm-Message-State: AOAM5321FijDqOTdX+gqLnvm6R8Q43Y1vcWc2+VoI1blOAaykHmhWA+1
- og9XrDBEiemdbgiErJYIjycvZw==
-X-Google-Smtp-Source: ABdhPJx8QN6s6cVcK+URTSep+/bLRlSC2lp2+Mkp8t5DSQIxj3ntebiDoxR19oO22ez7dxmZpk0p0w==
-X-Received: by 2002:a05:6000:1541:: with SMTP id
- 1mr38961887wry.273.1634135268480; 
- Wed, 13 Oct 2021 07:27:48 -0700 (PDT)
+ bh=57KdpWjM6FQj1/ZWMB9uRAMFCr8+sc1UKZVxLCrKqQA=;
+ b=nrfC5KWzTGNwR4TPQsbjjkOPagnuCTM4vWUSwmQN89MoPKX1Mly4YoTPjsJ6Qf2lE8
+ /ulFZ238QdndqQW6h2RUTjrFzb+NLHPffgjLw6zmLJuvGtTWqNFDmpjH8fS7QnR6P+GZ
+ Yywf1cRbmBNfWSmkXOJaag4wuXrCi5BhN7PwLGGI7Qn8rWhLhQq03piQf+xYht332K+m
+ 9vMh1Z1tPt0d5H47AsIXQ3Jz3kp0J37DB2SrRG6Qj/yAxp2b/bJd1lUACj+qDsxqHMBn
+ mRo+svXEqh5iaJmxgAHrt6AWzVTgdqFq+NHECBE7VB4tKSaTUPzfHcbXf9MVGOfKEQ2Q
+ d02Q==
+X-Gm-Message-State: AOAM532+3qMrr5sA16k/ssKcl7O0pCYwERlu5YBpe5t3KxD0hY29K220
+ HdljD3dcfwSgO7YmemfYx7il1Q==
+X-Google-Smtp-Source: ABdhPJwZvEFu8uN46XH+qqDJB9CUkoPNMzMIIZQcakbI7uBahduwwJFhFv/Vfy0iH9bKYacrjDePVg==
+X-Received: by 2002:adf:b1c7:: with SMTP id r7mr40626710wra.392.1634135386079; 
+ Wed, 13 Oct 2021 07:29:46 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id u5sm5291752wmm.39.2021.10.13.07.27.47
+ by smtp.gmail.com with ESMTPSA id p25sm5369066wma.2.2021.10.13.07.29.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Oct 2021 07:27:48 -0700 (PDT)
-Date: Wed, 13 Oct 2021 16:27:46 +0200
+ Wed, 13 Oct 2021 07:29:45 -0700 (PDT)
+Date: Wed, 13 Oct 2021 16:29:43 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YWbs4iA1oWq9xN5n@phenom.ffwll.local>
+Message-ID: <YWbtV2ZVHg7n1xpm@phenom.ffwll.local>
 References: <20211005113742.1101-1-christian.koenig@amd.com>
- <20211005113742.1101-26-christian.koenig@amd.com>
+ <20211005113742.1101-27-christian.koenig@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20211005113742.1101-26-christian.koenig@amd.com>
+In-Reply-To: <20211005113742.1101-27-christian.koenig@amd.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 25/28] drm/nouveau: use the new iterator
- in nouveau_fence_sync
+Subject: Re: [Linaro-mm-sig] [PATCH 26/28] drm/nouveau: use the new
+ interator in nv50_wndw_prepare_fb
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -88,126 +87,60 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Tue, Oct 05, 2021 at 01:37:39PM +0200, Christian K=F6nig wrote:
-> Simplifying the code a bit.
+On Tue, Oct 05, 2021 at 01:37:40PM +0200, Christian K=F6nig wrote:
+> Makes the handling a bit more complex, but avoids the use of
+> dma_resv_get_excl_unlocked().
 > =
 
 > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
-
-A bit a trick conversion since the previous code was clever with the ret
-handling in the loop, but looks correct.
-
-Please mention in the commit message that this code now also waits for all
-shared fences in all cases. Previously if we found an exclusive fence, we
-bailed out. That needs to be recorded in the commit message, together with
-an explainer that defacto too many other drivers have broken this rule
-already, and so you have to always iterate all fences.
-
-With that added:
-
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-
-
 > ---
->  drivers/gpu/drm/nouveau/nouveau_fence.c | 48 +++++++------------------
->  1 file changed, 12 insertions(+), 36 deletions(-)
+>  drivers/gpu/drm/nouveau/dispnv50/wndw.c | 10 +++++++++-
+>  1 file changed, 9 insertions(+), 1 deletion(-)
 > =
 
-> diff --git a/drivers/gpu/drm/nouveau/nouveau_fence.c b/drivers/gpu/drm/no=
-uveau/nouveau_fence.c
-> index 05d0b3eb3690..26f9299df881 100644
-> --- a/drivers/gpu/drm/nouveau/nouveau_fence.c
-> +++ b/drivers/gpu/drm/nouveau/nouveau_fence.c
-> @@ -339,14 +339,15 @@ nouveau_fence_wait(struct nouveau_fence *fence, boo=
-l lazy, bool intr)
->  }
->  =
-
->  int
-> -nouveau_fence_sync(struct nouveau_bo *nvbo, struct nouveau_channel *chan=
-, bool exclusive, bool intr)
-> +nouveau_fence_sync(struct nouveau_bo *nvbo, struct nouveau_channel *chan,
-> +		   bool exclusive, bool intr)
->  {
->  	struct nouveau_fence_chan *fctx =3D chan->fence;
-> -	struct dma_fence *fence;
->  	struct dma_resv *resv =3D nvbo->bo.base.resv;
-> -	struct dma_resv_list *fobj;
+> diff --git a/drivers/gpu/drm/nouveau/dispnv50/wndw.c b/drivers/gpu/drm/no=
+uveau/dispnv50/wndw.c
+> index 8d048bacd6f0..30712a681e2a 100644
+> --- a/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+> +++ b/drivers/gpu/drm/nouveau/dispnv50/wndw.c
+> @@ -539,6 +539,8 @@ nv50_wndw_prepare_fb(struct drm_plane *plane, struct =
+drm_plane_state *state)
+>  	struct nouveau_bo *nvbo;
+>  	struct nv50_head_atom *asyh;
+>  	struct nv50_wndw_ctxdma *ctxdma;
 > +	struct dma_resv_iter cursor;
 > +	struct dma_fence *fence;
->  	struct nouveau_fence *f;
-> -	int ret =3D 0, i;
-> +	int ret;
+>  	int ret;
 >  =
 
->  	if (!exclusive) {
->  		ret =3D dma_resv_reserve_shared(resv, 1);
-> @@ -355,10 +356,7 @@ nouveau_fence_sync(struct nouveau_bo *nvbo, struct n=
-ouveau_channel *chan, bool e
->  			return ret;
+>  	NV_ATOMIC(drm, "%s prepare: %p\n", plane->name, fb);
+> @@ -561,7 +563,13 @@ nv50_wndw_prepare_fb(struct drm_plane *plane, struct=
+ drm_plane_state *state)
+>  			asyw->image.handle[0] =3D ctxdma->object.handle;
 >  	}
 >  =
 
-> -	fobj =3D dma_resv_shared_list(resv);
-> -	fence =3D dma_resv_excl_fence(resv);
-> -
-> -	if (fence) {
-> +	dma_resv_for_each_fence(&cursor, resv, exclusive, fence) {
->  		struct nouveau_channel *prev =3D NULL;
->  		bool must_wait =3D true;
+> -	asyw->state.fence =3D dma_resv_get_excl_unlocked(nvbo->bo.base.resv);
+> +	dma_resv_iter_begin(&cursor, nvbo->bo.base.resv, false);
+> +	dma_resv_for_each_fence_unlocked(&cursor, fence) {
+> +		/* TODO: We only use the first writer here */
+
+Same thing as with the atomic core helper. This is actually broken,
+because for atomic we really do _not_ want to wait for any shared fences.
+Which this will do, if there's no exclusive fence attached.
+
+So upgrading my general concern on this and the atomic helper patch to a
+reject, since I think it's broken.
+-Daniel
+
+> +		asyw->state.fence =3D dma_fence_get(fence);
+> +		break;
+> +	}
+> +	dma_resv_iter_end(&cursor);
+>  	asyw->image.offset[0] =3D nvbo->offset;
 >  =
 
-> @@ -366,41 +364,19 @@ nouveau_fence_sync(struct nouveau_bo *nvbo, struct =
-nouveau_channel *chan, bool e
->  		if (f) {
->  			rcu_read_lock();
->  			prev =3D rcu_dereference(f->channel);
-> -			if (prev && (prev =3D=3D chan || fctx->sync(f, prev, chan) =3D=3D 0))
-> +			if (prev && (prev =3D=3D chan ||
-> +				     fctx->sync(f, prev, chan) =3D=3D 0))
->  				must_wait =3D false;
->  			rcu_read_unlock();
->  		}
->  =
-
-> -		if (must_wait)
-> +		if (must_wait) {
->  			ret =3D dma_fence_wait(fence, intr);
-> -
-> -		return ret;
-> -	}
-> -
-> -	if (!exclusive || !fobj)
-> -		return ret;
-> -
-> -	for (i =3D 0; i < fobj->shared_count && !ret; ++i) {
-> -		struct nouveau_channel *prev =3D NULL;
-> -		bool must_wait =3D true;
-> -
-> -		fence =3D rcu_dereference_protected(fobj->shared[i],
-> -						dma_resv_held(resv));
-> -
-> -		f =3D nouveau_local_fence(fence, chan->drm);
-> -		if (f) {
-> -			rcu_read_lock();
-> -			prev =3D rcu_dereference(f->channel);
-> -			if (prev && (prev =3D=3D chan || fctx->sync(f, prev, chan) =3D=3D 0))
-> -				must_wait =3D false;
-> -			rcu_read_unlock();
-> +			if (ret)
-> +				return ret;
->  		}
-> -
-> -		if (must_wait)
-> -			ret =3D dma_fence_wait(fence, intr);
->  	}
-> -
-> -	return ret;
-> +	return 0;
->  }
->  =
-
->  void
+>  	if (wndw->func->prepare) {
 > -- =
 
 > 2.25.1
