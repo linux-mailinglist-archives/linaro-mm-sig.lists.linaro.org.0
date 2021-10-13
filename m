@@ -2,70 +2,70 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id F07A242C216
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Oct 2021 16:06:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B00C542C227
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Oct 2021 16:07:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DC15D619D7
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Oct 2021 14:06:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9781961A44
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Oct 2021 14:07:55 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id C4BF661751; Wed, 13 Oct 2021 14:06:21 +0000 (UTC)
+	id 8CADB619B0; Wed, 13 Oct 2021 14:07:55 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DDC6E6141E;
-	Wed, 13 Oct 2021 14:06:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BBFBF6141E;
+	Wed, 13 Oct 2021 14:07:52 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id EEF7B607FD
- for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 14:06:15 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 299C7607FD
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 14:07:51 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id EC7696141E; Wed, 13 Oct 2021 14:06:15 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
- [209.85.221.47])
- by lists.linaro.org (Postfix) with ESMTPS id E248B607FD
- for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 14:06:13 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id v17so8773284wrv.9
- for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 07:06:13 -0700 (PDT)
+ id 2752A6141E; Wed, 13 Oct 2021 14:07:51 +0000 (UTC)
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+ [209.85.221.54])
+ by lists.linaro.org (Postfix) with ESMTPS id 1E587607FD
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 14:07:49 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id g25so8894304wrb.2
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 07:07:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:content-transfer-encoding:in-reply-to;
- bh=cIG68W/tQJNgWN+jsVPFh0cg8v247trbObwIJoHes/8=;
- b=HEbyI7lPjO/SeLtFv2N47Myw4+qpe2RXDpO6C1fJpiGMP64+S8rRjTdQr/nN9d9NXo
- xiNpscMX/s53q1YD3kWt5GT/kePPKjZRRrSh5fJYmpjvk/kGhEF0ekf5a2uG+AhQNEhy
- vr6CeyNj14gersIusRRdOLU0D9Vw18z/uenPA=
+ bh=MKxaZc1pgApmzpCUtsxcB625bqKcDpcD1a7kgFDuO2c=;
+ b=L+k3W2pOKne4quT1JwDLgoYvBTDNcQO7CjmuZjq7JfRe+vfeIKBrKVplAhVpXWwuUa
+ m50PhxWJ3zjFv8h5BW7Pe5vIfesh4gLNQbXQK1J+KKywDFrwP3zogV7U0QcHa2smoOZh
+ bXCL/2qqYIwY+IrEwP/CBh9IGsi0ka4uPf54A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:content-transfer-encoding
  :in-reply-to;
- bh=cIG68W/tQJNgWN+jsVPFh0cg8v247trbObwIJoHes/8=;
- b=CRWbFDiJ3NMGg1X2H14L4VqR9qY3l/zlmDoN5v7x6j6vNv9r3oOtUcCL79V67OUYHj
- iEYr68eokRLG7eIteTJ2JyrUXQGY8eYGQCGe0vXem4F/XFKBGIAw6EIrGsxNjipAJPFE
- Fwvn8saJMMUmDmZePKSkJXGd+OQC231/6g5bkS6M5m6JX8abxVn07Snzww3RC6UxLWci
- tOG03LhD7V/vStG2YvSEPuq7n1stXVG0nqmUTQRNuUCZ/CQGsqI8pUnpdLZWzBT61x4L
- 7h/nhPyKd4Yub91jkSMdQyv9AVfXAhXD+XeKwlrRbR1oLRE2tk1nOKnxcvZYGOoWpz1B
- JLzg==
-X-Gm-Message-State: AOAM532nzKrIo6Js4h5QUKT25gu+V567dOTvzY1Jg4YOXmThDX3G5TFy
- 5Yc0g0UQBGhi6AK72RqHI/lPvA==
-X-Google-Smtp-Source: ABdhPJwjgQ0DiXTrs41jVl5BYH6DQcXR5MUd9Sxq+V+NNJmQjSNclYZi7GSa7EEkZ0U+lattZFKFBQ==
-X-Received: by 2002:adf:a183:: with SMTP id u3mr40196310wru.330.1634133972353; 
- Wed, 13 Oct 2021 07:06:12 -0700 (PDT)
+ bh=MKxaZc1pgApmzpCUtsxcB625bqKcDpcD1a7kgFDuO2c=;
+ b=4/WhiK8pIsAub4Kzo0BYwoAT5aLX6t8rpg8HVsZLfF067TyA33fl1RRWCUMC4cy9Nx
+ OOvYb4N8rQrX5vF7pgDr7JHiz3u8tp3l5o1ET88Dr1LeJfqjFwl1M7vlpIUQs8yz+FPf
+ DpWJk5q+TR69R1rytKah1iv2MXjP3zRT/kYLnOVctMBLm5Ms9KGKzgAkizAjgjCerMad
+ nXwqVgupyZWQb6MHmNW3grRtE2b5eXCaaBE26NkeGUuW5Ju/wo2vScLaNxY2OiRIiAcS
+ hh2PhiAAhpobhFMqc7jTfIEVUU56C0IZoWx/8oFPzuRWoXP+bA1WjWpVWORi7a95rUJP
+ /NhQ==
+X-Gm-Message-State: AOAM533mmXdOfOZW/7+i4uprl7pUIbPDMWZ9UbPQjAPHKEup1gdkXE6P
+ jw9tnbQmaO0L8gMXUOs7n8jv4g==
+X-Google-Smtp-Source: ABdhPJwpY3GMpSXEeLezpKBdLRdIlDqC60mIwmphTOUCOalzhlFSIcORR+wr7zU2kxe9TM1Th2J1mg==
+X-Received: by 2002:a1c:f302:: with SMTP id q2mr13407345wmq.56.1634134068132; 
+ Wed, 13 Oct 2021 07:07:48 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id e16sm11711795wrw.17.2021.10.13.07.06.11
+ by smtp.gmail.com with ESMTPSA id r27sm13404433wrr.70.2021.10.13.07.07.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Oct 2021 07:06:11 -0700 (PDT)
-Date: Wed, 13 Oct 2021 16:06:10 +0200
+ Wed, 13 Oct 2021 07:07:47 -0700 (PDT)
+Date: Wed, 13 Oct 2021 16:07:45 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YWbn0hZQgYAohsrz@phenom.ffwll.local>
+Message-ID: <YWboMfLOIjl1l7tF@phenom.ffwll.local>
 References: <20211005113742.1101-1-christian.koenig@amd.com>
- <20211005113742.1101-12-christian.koenig@amd.com>
+ <20211005113742.1101-13-christian.koenig@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20211005113742.1101-12-christian.koenig@amd.com>
+In-Reply-To: <20211005113742.1101-13-christian.koenig@amd.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 11/28] drm/amdgpu: use the new iterator
- in amdgpu_sync_resv
+Subject: Re: [Linaro-mm-sig] [PATCH 12/28] drm/amdgpu: use new iterator in
+ amdgpu_ttm_bo_eviction_valuable
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -87,86 +87,61 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Tue, Oct 05, 2021 at 01:37:25PM +0200, Christian K=F6nig wrote:
+On Tue, Oct 05, 2021 at 01:37:26PM +0200, Christian K=F6nig wrote:
 > Simplifying the code a bit.
 > =
 
 > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
-
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-
-Yeah these iterators rock :-)
--Daniel
-
 > ---
->  drivers/gpu/drm/amd/amdgpu/amdgpu_sync.c | 44 ++++++++----------------
->  1 file changed, 14 insertions(+), 30 deletions(-)
+>  drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c | 14 ++++----------
+>  1 file changed, 4 insertions(+), 10 deletions(-)
 > =
 
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_sync.c b/drivers/gpu/drm/a=
-md/amdgpu/amdgpu_sync.c
-> index 862eb3c1c4c5..f7d8487799b2 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_sync.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_sync.c
-> @@ -252,41 +252,25 @@ int amdgpu_sync_resv(struct amdgpu_device *adev, st=
-ruct amdgpu_sync *sync,
->  		     struct dma_resv *resv, enum amdgpu_sync_mode mode,
->  		     void *owner)
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/am=
+d/amdgpu/amdgpu_ttm.c
+> index e8d70b6e6737..722e3c9e8882 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> @@ -1345,10 +1345,9 @@ static bool amdgpu_ttm_bo_eviction_valuable(struct=
+ ttm_buffer_object *bo,
+>  					    const struct ttm_place *place)
 >  {
+>  	unsigned long num_pages =3D bo->resource->num_pages;
+> +	struct dma_resv_iter resv_cursor;
+>  	struct amdgpu_res_cursor cursor;
 > -	struct dma_resv_list *flist;
-> +	struct dma_resv_iter cursor;
 >  	struct dma_fence *f;
-> -	unsigned i;
-> -	int r =3D 0;
-> +	int r;
+> -	int i;
 >  =
 
->  	if (resv =3D=3D NULL)
->  		return -EINVAL;
->  =
-
-> -	/* always sync to the exclusive fence */
-> -	f =3D dma_resv_excl_fence(resv);
-> -	dma_fence_chain_for_each(f, f) {
-> -		struct dma_fence_chain *chain =3D to_dma_fence_chain(f);
-> -
-> -		if (amdgpu_sync_test_fence(adev, mode, owner, chain ?
-> -					   chain->fence : f)) {
-> -			r =3D amdgpu_sync_fence(sync, f);
-> -			dma_fence_put(f);
-> -			if (r)
-> -				return r;
-> -			break;
+>  	/* Swapout? */
+>  	if (bo->resource->mem_type =3D=3D TTM_PL_SYSTEM)
+> @@ -1362,14 +1361,9 @@ static bool amdgpu_ttm_bo_eviction_valuable(struct=
+ ttm_buffer_object *bo,
+>  	 * If true, then return false as any KFD process needs all its BOs to
+>  	 * be resident to run successfully
+>  	 */
+> -	flist =3D dma_resv_shared_list(bo->base.resv);
+> -	if (flist) {
+> -		for (i =3D 0; i < flist->shared_count; ++i) {
+> -			f =3D rcu_dereference_protected(flist->shared[i],
+> -				dma_resv_held(bo->base.resv));
+> -			if (amdkfd_fence_check_mm(f, current->mm))
+> -				return false;
 > -		}
-> -	}
-> -
-> -	flist =3D dma_resv_shared_list(resv);
-> -	if (!flist)
-> -		return 0;
-> -
-> -	for (i =3D 0; i < flist->shared_count; ++i) {
-> -		f =3D rcu_dereference_protected(flist->shared[i],
-> -					      dma_resv_held(resv));
-> -
-> -		if (amdgpu_sync_test_fence(adev, mode, owner, f)) {
-> -			r =3D amdgpu_sync_fence(sync, f);
-> -			if (r)
-> -				return r;
-> +	dma_resv_for_each_fence(&cursor, resv, true, f) {
-> +		dma_fence_chain_for_each(f, f) {
-> +			struct dma_fence_chain *chain =3D to_dma_fence_chain(f);
-> +
-> +			if (amdgpu_sync_test_fence(adev, mode, owner, chain ?
-> +						   chain->fence : f)) {
-> +				r =3D amdgpu_sync_fence(sync, f);
-> +				dma_fence_put(f);
-> +				if (r)
-> +					return r;
-> +				break;
-> +			}
->  		}
+> +	dma_resv_for_each_fence(&resv_cursor, bo->base.resv, true, f) {
+
+							    ^false?
+
+At least I'm not seeing the code look at the exclusive fence here.
+-Daniel
+
+> +		if (amdkfd_fence_check_mm(f, current->mm))
+> +			return false;
 >  	}
->  	return 0;
+>  =
+
+>  	switch (bo->resource->mem_type) {
 > -- =
 
 > 2.25.1
