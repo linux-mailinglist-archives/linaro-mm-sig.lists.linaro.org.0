@@ -2,86 +2,131 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09CB442BF1A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Oct 2021 13:42:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1D77B42BFC9
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Oct 2021 14:21:17 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 74A70618C3
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Oct 2021 11:42:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 839DE61971
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Oct 2021 12:21:14 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 64ABA612A5; Wed, 13 Oct 2021 11:42:24 +0000 (UTC)
+	id 1E9F6617B3; Wed, 13 Oct 2021 12:21:11 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 184DD6118F;
-	Wed, 13 Oct 2021 11:42:22 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 892D1611AF;
+	Wed, 13 Oct 2021 12:21:08 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id A9F65603EF
- for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 11:42:20 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 6BE53610F9
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 12:21:06 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id A53116118F; Wed, 13 Oct 2021 11:42:20 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
- by lists.linaro.org (Postfix) with ESMTPS id 97CBD603EF
- for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 11:42:18 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id r18so7333143wrg.6
- for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 04:42:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to; bh=eDEZPOoYhgNdY0W+bckD5ycsSF3eiL9qBGkEwyK/NGU=;
- b=iVkiDefQPc+vMfsz/o+C7Aysi1GjzuTelnULer8vNHMGpDmnFC5uEFwmCTWhfCCgbc
- 5JwepXtDywX4gGNXXXm2MSyIpWHLmzPFZEBa+OGzHZbkLOrLG35xpTSSLoHrX2COsYqK
- BXOHjBtR5rbTdKORf3o2B/igUpbyGfxCCgfI0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :content-transfer-encoding:in-reply-to;
- bh=eDEZPOoYhgNdY0W+bckD5ycsSF3eiL9qBGkEwyK/NGU=;
- b=vSnE0euVJc2q4Zxsg4DjSXaBZLy2pMX2BhJvgc4KgURd++N0GPVF85APhw2Grljkyy
- cFpjI8ijnMdKyUhRzdxC9VdZLEdBn8hlurRbYkC5iY/NuUXgF7tv8GO4h0PdtcQZEdBK
- ojDTaOBrjnbAmE4EuDq/bgCPV8kAWAxOwNr5tUQ3rxl19xASGfCVN53fs8Z4flmd6xRQ
- s7iOG9Ptc16AG3Buq3AX0+QjQJJ1KpJDcnptr793zHjSDhmdryuhj3VFF3RdwjYpy6Uv
- z0jCjdqMm7S9Xsfgzq4bSRuDdhJN3h8msuXGMMdrJ95sTXum83cqd1KJ3rv1npFk3yBC
- GKtw==
-X-Gm-Message-State: AOAM533ywclcqzQ8Q8bVU6TY5HnNUxginW+LAeLUIaAiq35pLZNpqtGL
- AfGGuP3DAcdyyj76ZN2wrlX/jw==
-X-Google-Smtp-Source: ABdhPJweynnRqFq59hOzQwrRfFURETZnA2yZQYOzLoAR09kFqa75YtsU8w+pbsxg2Jj0LgPpIiyHNw==
-X-Received: by 2002:a5d:64a6:: with SMTP id m6mr39870595wrp.282.1634125337597; 
- Wed, 13 Oct 2021 04:42:17 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id j14sm7674901wrw.12.2021.10.13.04.42.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 13 Oct 2021 04:42:16 -0700 (PDT)
-Date: Wed, 13 Oct 2021 13:42:14 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Shunsuke Mie <mie@igel.co.jp>
-Message-ID: <YWbGFkzkFRHmBcpa@phenom.ffwll.local>
-Mail-Followup-To: Shunsuke Mie <mie@igel.co.jp>,
- Zhu Yanjun <zyjzyj2000@gmail.com>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Alex Deucher <alexander.deucher@amd.com>,
- Doug Ledford <dledford@redhat.com>, Jason Gunthorpe <jgg@ziepe.ca>,
- Jianxin Xiong <jianxin.xiong@intel.com>,
- Leon Romanovsky <leon@kernel.org>, Maor Gottlieb <maorg@nvidia.com>,
- Sean Hefty <sean.hefty@intel.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- linux-media@vger.kernel.org,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- linux-rdma <linux-rdma@vger.kernel.org>,
- Damian Hobson-Garcia <dhobsong@igel.co.jp>,
- Takanari Hayama <taki@igel.co.jp>, Tomohito Esaki <etom@igel.co.jp>
-References: <20210929041905.126454-1-mie@igel.co.jp>
- <20210929041905.126454-3-mie@igel.co.jp>
- <YVXMkSDXybju88TU@phenom.ffwll.local>
- <CANXvt5rD82Lvvag_k9k+XE-Sj1S6Qwp5uf+-feUTvez1-t4xUA@mail.gmail.com>
+ id 57927611AF; Wed, 13 Oct 2021 12:21:06 +0000 (UTC)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2044.outbound.protection.outlook.com [40.107.223.44])
+ by lists.linaro.org (Postfix) with ESMTPS id 34ED5610F9
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Oct 2021 12:21:04 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=d7+RRLe7jHT08K+FsVTAeQELdhwshh2uqqk1cN89tFDWMXhzUcwGMBfc4EbICEe1a+aDw1NyKf4tv2jrD0U4ewR2mUv9q0GGhNlzbS/f/kcLtufu7sxozDzeGRjY16Bv9Hns/je70DaTekTlTdxIREWpdOXILxypkiCWTZ8w7KP3GytuRHJczFUv85jo7HDFX/JP/KYcaKCCV9l7Cnm6H3ykvKslnNK4Sb0LvQRxPI9IA6/eJkp6kTEb6l57AES2IQeVVz3HmqDMMh/vX5Pbisba8xbxzIK0+XAnnkpUDn5WNeFOSYhLx+bZkUC6xr16bkCjXs3BoPVEGZq+ZnR91w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TpEHdPKsB947F6Wh7nc1DZSwY+uT1CzjkvVhxRBcpD4=;
+ b=CewSzEt0c3gh8A89+W63ya3OBf32tpTKXcRmIoSHdH06MEEK7hBF+lFecNxw2nUdqtk/9ErzOjg+UunIoNSOxuan5zLxploKvgsk6gSF1XmURdbixnaVz8++eNF7mEdRTRA8m1iGw8v3tupnfMSeq/XG0a5ybRQK77Mdx+7AVP1xQv09a+YnfrGj85NBdsBll/uHNyKavlvmkqs5NvILtu+jcLRSqN0RgIy7QVY4AjbTO3Na2bfoLpK28tLzrrHKQMHdpTM88ATF28mtJHuxGAbxgDNiqICUXJHCK6jjnGd1hnDE6S898LNvf9qhh0wJlRBNrZUOheYzFAKiDfBRFA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TpEHdPKsB947F6Wh7nc1DZSwY+uT1CzjkvVhxRBcpD4=;
+ b=IO+M/oE5ga2wbBDZEyyuNtIwjvjuMj7SW3+HoVqdBAMlLjHwJIRCEqUHpAp+xjFPSZ3yvAi1Bag3bsM6hI0A18/RpHYOYyWgioQNHyOy8+G1NKfai19HCLD+wjMjIMEiMsLs27A9NyVZy16eAELYNRrP+I19mCpuZq/SkMAXJD0=
+Authentication-Results: mediatek.com; dkim=none (message not signed)
+ header.d=none;mediatek.com; dmarc=none action=none header.from=amd.com;
+Received: from CY4PR1201MB0181.namprd12.prod.outlook.com
+ (2603:10b6:910:1f::11) by CY4PR12MB1158.namprd12.prod.outlook.com
+ (2603:10b6:903:40::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4587.22; Wed, 13 Oct
+ 2021 12:21:01 +0000
+Received: from CY4PR1201MB0181.namprd12.prod.outlook.com
+ ([fe80::f109:9a58:2e94:2e84]) by CY4PR1201MB0181.namprd12.prod.outlook.com
+ ([fe80::f109:9a58:2e94:2e84%11]) with mapi id 15.20.4587.025; Wed, 13 Oct
+ 2021 12:21:01 +0000
+To: Sumit Semwal <sumit.semwal@linaro.org>, guangming.cao@mediatek.com
+References: <eba79a76-413b-570c-aec0-899a5f918d38@amd.com>
+ <20211012084109.176542-1-guangming.cao@mediatek.com>
+ <CAO_48GE_jCWY4waK-+FqVw5sbuoHddt4kWpnkpvyLDRC__yE+g@mail.gmail.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+Message-ID: <236a6cf9-3eb7-9315-4dd9-c1522be56c7e@amd.com>
+Date: Wed, 13 Oct 2021 14:20:53 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
+In-Reply-To: <CAO_48GE_jCWY4waK-+FqVw5sbuoHddt4kWpnkpvyLDRC__yE+g@mail.gmail.com>
+Content-Language: en-US
+X-ClientProxiedBy: AM6P192CA0002.EURP192.PROD.OUTLOOK.COM
+ (2603:10a6:209:83::15) To CY4PR1201MB0181.namprd12.prod.outlook.com
+ (2603:10b6:910:1f::11)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CANXvt5rD82Lvvag_k9k+XE-Sj1S6Qwp5uf+-feUTvez1-t4xUA@mail.gmail.com>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
+Received: from [IPv6:2a02:8109:333f:edd8:2287:c687:8512:6662]
+ (2a02:8109:333f:edd8:2287:c687:8512:6662) by
+ AM6P192CA0002.EURP192.PROD.OUTLOOK.COM (2603:10a6:209:83::15) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4608.16 via Frontend Transport; Wed, 13 Oct 2021 12:20:58 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: ca156e90-eaea-40a2-f3c0-08d98e43eb44
+X-MS-TrafficTypeDiagnostic: CY4PR12MB1158:
+X-Microsoft-Antispam-PRVS: <CY4PR12MB115870201BB5230FAEE1F5B683B79@CY4PR12MB1158.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6108;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: x3zAbTMagENlHTMRFKdWjg9KY67qEBMVnPA3dCf1LmweJBCO3MMjkaxej8P9uTWNVK4ews2G3G+gNzY8hjb6bOsTBejxWv3mWY8u3k0TOqQOPS6tq1M5xI2pg0F9F2Epe+ZYVckat/KBYZ3IgUWu8FfG4K1yKWkdGXGuRSO082amQUW897zELqGmFSZDsjeaH0YYFh332NuUQp8JmigoTC4ApVmJMakK47d6V13iD7/0kRrPC7zJGqCfEwvATDA7zq7h10gY2zKPrMZxvnWVxoZ9or7voT+T1Ik1oVnbbPvanQXjvbCAEw6mWExvkdktpGdnv/jc0jisj2R9P3ABTxo7Fb5EKNlBmCWS6E2mpze3/M4WhcoWBji3Y1g6oR1Kvo3aL+Ws276oR7GZ5etRE6z/kzW9OsPeBPArvR6n69Iyz04q0po5eUvjqqonYiRETFhcxqakAgtyzlaahGaRTgcUhEqrqZqYc+pY2CUyWatiA1jAZRkf6PipJh5ovwQOiShGRoQb8vvgYuqEYnOA90JrCPfgeDdIFgokia8nCKeBKD5ROWfpWLnK2ro0pblxEuNEjz1q0hrqZYyn6HczxakCo6S5zmexYJQQxUaAkQH1voFw22/4Ypc5ky32MXZNEIopAU8wHt83AxUdjf5VI3rkx7vdXrKaOJKZNc1Z6wdmgsXsALrhw8nPuJ1cCv+1ND90dvZjOiCrusSvE8I02ZylpsfaHOvhd6Gq562DlHM=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:CY4PR1201MB0181.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(4636009)(366004)(6486002)(5660300002)(966005)(508600001)(4326008)(54906003)(2906002)(8676002)(316002)(186003)(45080400002)(8936002)(38100700002)(33964004)(31686004)(83380400001)(6666004)(7416002)(66556008)(66476007)(166002)(2616005)(31696002)(66946007)(36756003)(86362001)(43740500002)(45980500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NXorcnNrWGVrU1JmVy9tb2ZjK2N3bmhVc2hnVWUzM1B0b2prYWVuV1lidTJn?=
+ =?utf-8?B?Tzc3eW1CVlNmMFV2ZUluY3U0d0lDdTVUd0dZYmJSZWhpcm04UUVRV2kram12?=
+ =?utf-8?B?NUVCN1o5TC9DaWRsbng3S21IZ1dnL2lUOEVsb1QzbWRvMmVKc1ovK1pKdkRk?=
+ =?utf-8?B?TVVqcWJMK1RTRVg0bkFZcEtiWENNM2h5MHh5Qm9seXp4eVp5WEl2OVJ1eUJv?=
+ =?utf-8?B?TmVlTEtwaUl1ZTMyRjRxU0pOcHIxNTFYcFNTTDArRFZVY0tEblR2cnFicFEv?=
+ =?utf-8?B?MFd2a0tpcnZBR2hROXdXcjl4ck5kNVd3bHVtU2thaExlNFhSNGVYcTkwcEov?=
+ =?utf-8?B?Q1d6RkFqUDBOZnh5eEdGRWtRNGd2MitvWmVlWGN6N1ErM3l2dUIrVjA2cTFz?=
+ =?utf-8?B?OWUyd05rRUFwOVo4OS8yZ1Z5UjJ4MzhkTE00ekxwNTlGU2Vya3MvWWZOYnUv?=
+ =?utf-8?B?Nmh5aHprNTVQQmVoRUdHaVlWQXhzM2U0SVdna0puUTdRQ2o0aFh5M1JNWktH?=
+ =?utf-8?B?Y1dCQ1ZDNUZSanFPNTVuSlJETkdnWTR4VnZtbSsvSW1uMjhGUE1scmI5dHl4?=
+ =?utf-8?B?T0NyOFFIYWNsODdXa2ZLY2ZGbW4xc1ZqSTJ6VTgyU2hTeWtNbE9uNmlhb2NH?=
+ =?utf-8?B?L2NLNWdvT3EwWEtrRE5sS012WFRXNlBqa3lZU1UxUlV4T0xGc01pSlpQWmRT?=
+ =?utf-8?B?VE5wMGsrSi8zUU1nRjRkSytqSVREWUNOSCtKV2w4enA1SW12MVZxQzJGUTRx?=
+ =?utf-8?B?OG9Mank1c2hFTFJPT0pBVkJnMWpXbG1RTnVNTzh5VUFRTnZoaUZJUmJQZXY4?=
+ =?utf-8?B?Zm1MMTlGRnR6ZGlqUWN6aEpZY29kai96T1prdFRwS3BmRTJQQXNldHY5TkZZ?=
+ =?utf-8?B?RHdJUEZJSmdlcVRuaURtNmc5b2pXRlh4NUxWUVg5Zy82NjZPajJXYjg3YjVp?=
+ =?utf-8?B?bmhGQW1GMUdvYjVYSS9wQmhzN2cyQi9JYlJUOUc3bmZrcEZZNnpZM2YyTVFj?=
+ =?utf-8?B?aDNZdFV1enMzeStkbHV4VTV5ekdiR28vVkx3VHAvYlN1ZEFpU2FZRndZY05y?=
+ =?utf-8?B?TFJKRnRjZy9rTFN4cWV0SUw2ZG03T01zenVNa1pNNDl5Vm5VeXdKNzdwUmRv?=
+ =?utf-8?B?a2VLRTJqRFc4dU16K2szdlplUkFIbmJtVmUranBpZkVvMTRsL1pPWjVPNjhm?=
+ =?utf-8?B?Ums2UDIyOFozdmZpVWtUR056TWpnUk16eVh4Qnk3bHF1RG1FVGRPM0JCUVlh?=
+ =?utf-8?B?UmFWUU9ONG5zYWFJMVVOQUwyWTE4VmVEM2RlRjZJa2tQeEFlQlB4ZzMzNFIx?=
+ =?utf-8?B?TEJMUlpHSyt0eGl5S3JsMld1Z2VxWlNWd0hoSXVvZzhrUmVUOUl0VXNjMnlT?=
+ =?utf-8?B?dEFldDJ1ZUgyNjdhTHhNaWZsc2ZiOUhZcVljUWh0WGxweUc3UUNnRjl6YUpI?=
+ =?utf-8?B?OXRaOXFkaUhtRVhEL083Nm5ucUVUVDMvMWQ4ZDFydDROV203Y25UenhsZ2xr?=
+ =?utf-8?B?V004YldTOUpuZnBoOHBYaTcrLzQ3aXE3RWdKbnVKVEFoeU94eXZNWmtFdUxw?=
+ =?utf-8?B?YS84MmkwM1diSFRtekozdllzS3FrVFZVYUtrK0FkbVZzMTNBb1FPSUpVWWY2?=
+ =?utf-8?B?SmhaeVhsenh5K1BoWHdnOTU3MVdaVm5tdE83SkNpcEF4VVpWb2lEY2kwK3Bq?=
+ =?utf-8?B?OVhSNHFlSkRkNG9vWTMxSlE4ekF5SC91djlVRzg0ZitaMXVEMW1NZGRzM21V?=
+ =?utf-8?B?WiswMlF1bXY1cnRpQkpJSStocFV2OUpDZE1CK29rSTNhM2RXMmx5dVJCcjJx?=
+ =?utf-8?B?U2x6Ly9MM0FaQjR4VVgrU3hFZmZySHdwbitCRjVmZ0V6bzd4ajFjWExLVzVC?=
+ =?utf-8?Q?Q6MJgYenmVZqr?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ca156e90-eaea-40a2-f3c0-08d98e43eb44
+X-MS-Exchange-CrossTenant-AuthSource: CY4PR1201MB0181.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2021 12:21:01.3392 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: q/SN8DtVkYkFwSgj+Tq1G4UlyQyLFNd1BY4ZzBJTEjKQWyoO+Ysltl+Em+K7Y/Xn
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR12MB1158
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [RFC PATCH v2 2/2] RDMA/rxe: Add dma-buf support
+Subject: Re: [Linaro-mm-sig] [PATCH v2] dma-buf: remove restriction of
+ IOCTL:DMA_BUF_SET_NAME
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -94,199 +139,339 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Takanari Hayama <taki@igel.co.jp>, Leon Romanovsky <leon@kernel.org>,
- linux-rdma <linux-rdma@vger.kernel.org>,
- Damian Hobson-Garcia <dhobsong@igel.co.jp>, Tomohito Esaki <etom@igel.co.jp>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- Jason Gunthorpe <jgg@ziepe.ca>, Doug Ledford <dledford@redhat.com>,
- Zhu Yanjun <zyjzyj2000@gmail.com>, Alex Deucher <alexander.deucher@amd.com>,
- Sean Hefty <sean.hefty@intel.com>, Maor Gottlieb <maorg@nvidia.com>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Jianxin Xiong <jianxin.xiong@intel.com>, linux-media@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: wsd_upstream@mediatek.com, Randy Dunlap <rdunlap@infradead.org>,
+ LKML <linux-kernel@vger.kernel.org>,
+ DRI mailing list <dri-devel@lists.freedesktop.org>,
+ Linaro MM SIG <linaro-mm-sig@lists.linaro.org>,
+ linux-mediatek@lists.infradead.org, matthias.bgg@gmail.com,
+ linux-arm-kernel@lists.infradead.org,
+ "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+Content-Type: multipart/mixed; boundary="===============3872790386096115318=="
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gRnJpLCBPY3QgMDEsIDIwMjEgYXQgMTI6NTY6NDhQTSArMDkwMCwgU2h1bnN1a2UgTWllIHdy
-b3RlOgo+IDIwMjHlubQ55pyIMzDml6Uo5pyoKSAyMzo0MSBEYW5pZWwgVmV0dGVyIDxkYW5pZWxA
-ZmZ3bGwuY2g+Ogo+ID4KPiA+IE9uIFdlZCwgU2VwIDI5LCAyMDIxIGF0IDAxOjE5OjA1UE0gKzA5
-MDAsIFNodW5zdWtlIE1pZSB3cm90ZToKPiA+ID4gSW1wbGVtZW50IGEgaWIgZGV2aWNlIG9wZXJh
-dGlvbiDigJhyZWdfdXNlcl9tcl9kbWFidWbigJkuIEdlbmVyYXRlIGEKPiA+ID4gcnhlX21hcCBm
-cm9tIHRoZSBtZW1vcnkgc3BhY2UgbGlua2VkIHRoZSBwYXNzZWQgZG1hLWJ1Zi4KPiA+ID4KPiA+
-ID4gU2lnbmVkLW9mZi1ieTogU2h1bnN1a2UgTWllIDxtaWVAaWdlbC5jby5qcD4KPiA+ID4gLS0t
-Cj4gPiA+ICBkcml2ZXJzL2luZmluaWJhbmQvc3cvcnhlL3J4ZV9sb2MuaCAgIHwgICAyICsKPiA+
-ID4gIGRyaXZlcnMvaW5maW5pYmFuZC9zdy9yeGUvcnhlX21yLmMgICAgfCAxMTggKysrKysrKysr
-KysrKysrKysrKysrKysrKysKPiA+ID4gIGRyaXZlcnMvaW5maW5pYmFuZC9zdy9yeGUvcnhlX3Zl
-cmJzLmMgfCAgMzQgKysrKysrKysKPiA+ID4gIGRyaXZlcnMvaW5maW5pYmFuZC9zdy9yeGUvcnhl
-X3ZlcmJzLmggfCAgIDIgKwo+ID4gPiAgNCBmaWxlcyBjaGFuZ2VkLCAxNTYgaW5zZXJ0aW9ucygr
-KQo+ID4gPgo+ID4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9pbmZpbmliYW5kL3N3L3J4ZS9yeGVf
-bG9jLmggYi9kcml2ZXJzL2luZmluaWJhbmQvc3cvcnhlL3J4ZV9sb2MuaAo+ID4gPiBpbmRleCAx
-Y2E0M2I4NTlkODAuLjhiYzE5ZWExYTM3NiAxMDA2NDQKPiA+ID4gLS0tIGEvZHJpdmVycy9pbmZp
-bmliYW5kL3N3L3J4ZS9yeGVfbG9jLmgKPiA+ID4gKysrIGIvZHJpdmVycy9pbmZpbmliYW5kL3N3
-L3J4ZS9yeGVfbG9jLmgKPiA+ID4gQEAgLTc1LDYgKzc1LDggQEAgdTggcnhlX2dldF9uZXh0X2tl
-eSh1MzIgbGFzdF9rZXkpOwo+ID4gPiAgdm9pZCByeGVfbXJfaW5pdF9kbWEoc3RydWN0IHJ4ZV9w
-ZCAqcGQsIGludCBhY2Nlc3MsIHN0cnVjdCByeGVfbXIgKm1yKTsKPiA+ID4gIGludCByeGVfbXJf
-aW5pdF91c2VyKHN0cnVjdCByeGVfcGQgKnBkLCB1NjQgc3RhcnQsIHU2NCBsZW5ndGgsIHU2NCBp
-b3ZhLAo+ID4gPiAgICAgICAgICAgICAgICAgICAgaW50IGFjY2Vzcywgc3RydWN0IHJ4ZV9tciAq
-bXIpOwo+ID4gPiAraW50IHJ4ZV9tcl9kbWFidWZfaW5pdF91c2VyKHN0cnVjdCByeGVfcGQgKnBk
-LCBpbnQgZmQsIHU2NCBzdGFydCwgdTY0IGxlbmd0aCwKPiA+ID4gKyAgICAgICAgICAgICAgICAg
-ICAgICAgICB1NjQgaW92YSwgaW50IGFjY2Vzcywgc3RydWN0IHJ4ZV9tciAqbXIpOwo+ID4gPiAg
-aW50IHJ4ZV9tcl9pbml0X2Zhc3Qoc3RydWN0IHJ4ZV9wZCAqcGQsIGludCBtYXhfcGFnZXMsIHN0
-cnVjdCByeGVfbXIgKm1yKTsKPiA+ID4gIGludCByeGVfbXJfY29weShzdHJ1Y3QgcnhlX21yICpt
-ciwgdTY0IGlvdmEsIHZvaWQgKmFkZHIsIGludCBsZW5ndGgsCj4gPiA+ICAgICAgICAgICAgICAg
-ZW51bSByeGVfbXJfY29weV9kaXIgZGlyKTsKPiA+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvaW5m
-aW5pYmFuZC9zdy9yeGUvcnhlX21yLmMgYi9kcml2ZXJzL2luZmluaWJhbmQvc3cvcnhlL3J4ZV9t
-ci5jCj4gPiA+IGluZGV4IDUzMjcxZGYxMGU0Ny4uYWY2ZWY2NzFjM2E1IDEwMDY0NAo+ID4gPiAt
-LS0gYS9kcml2ZXJzL2luZmluaWJhbmQvc3cvcnhlL3J4ZV9tci5jCj4gPiA+ICsrKyBiL2RyaXZl
-cnMvaW5maW5pYmFuZC9zdy9yeGUvcnhlX21yLmMKPiA+ID4gQEAgLTQsNiArNCw3IEBACj4gPiA+
-ICAgKiBDb3B5cmlnaHQgKGMpIDIwMTUgU3lzdGVtIEZhYnJpYyBXb3JrcywgSW5jLiBBbGwgcmln
-aHRzIHJlc2VydmVkLgo+ID4gPiAgICovCj4gPiA+Cj4gPiA+ICsjaW5jbHVkZSA8bGludXgvZG1h
-LWJ1Zi5oPgo+ID4gPiAgI2luY2x1ZGUgInJ4ZS5oIgo+ID4gPiAgI2luY2x1ZGUgInJ4ZV9sb2Mu
-aCIKPiA+ID4KPiA+ID4gQEAgLTI0NSw2ICsyNDYsMTIwIEBAIGludCByeGVfbXJfaW5pdF91c2Vy
-KHN0cnVjdCByeGVfcGQgKnBkLCB1NjQgc3RhcnQsIHU2NCBsZW5ndGgsIHU2NCBpb3ZhLAo+ID4g
-PiAgICAgICByZXR1cm4gZXJyOwo+ID4gPiAgfQo+ID4gPgo+ID4gPiArc3RhdGljIGludCByeGVf
-bWFwX2RtYWJ1Zl9tcihzdHJ1Y3QgcnhlX21yICptciwKPiA+ID4gKyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgc3RydWN0IGliX3VtZW1fZG1hYnVmICp1bWVtX2RtYWJ1ZikKPiA+ID4gK3sKPiA+
-ID4gKyAgICAgc3RydWN0IHJ4ZV9tYXBfc2V0ICpzZXQ7Cj4gPiA+ICsgICAgIHN0cnVjdCByeGVf
-cGh5c19idWYgKmJ1ZiA9IE5VTEw7Cj4gPiA+ICsgICAgIHN0cnVjdCByeGVfbWFwICoqbWFwOwo+
-ID4gPiArICAgICB2b2lkICp2YWRkciwgKnZhZGRyX2VuZDsKPiA+ID4gKyAgICAgaW50IG51bV9i
-dWYgPSAwOwo+ID4gPiArICAgICBpbnQgZXJyOwo+ID4gPiArICAgICBzaXplX3QgcmVtYWluOwo+
-ID4gPiArCj4gPiA+ICsgICAgIG1yLT5kbWFidWZfbWFwID0ga3phbGxvYyhzaXplb2YgJm1yLT5k
-bWFidWZfbWFwLCBHRlBfS0VSTkVMKTsKPiA+Cj4gPiBkbWFidWZfbWFwcyBhcmUganVzdCB0YWdn
-ZWQgcG9pbnRlcnMgKGFuZCB3ZSBjb3VsZCBzaHJpbmsgdGhlbSB0byBhY3R1YWxseQo+ID4ganVz
-dCBhIHRhZ2dlZCBwb2ludGVyIGlmIGFueW9uZSBjYXJlcyBhYm91dCB0aGUgb3ZlcmhlYWQgb2Yg
-dGhlIHNlcGFyYXRlCj4gPiBib29sKSwgYWxsb2NhdGluZyB0aGVtIHNlcGVyYXRlbHkgaXMgb3Zl
-cmtpbGwuCj4gCj4gSSBhZ3JlZSB3aXRoIHlvdS4gSG93ZXZlciwgSSB0aGluayBpdCBpcyBuZWVk
-ZWQgdG8gdW5tYXAgYnkKPiBkbWFfYnVmX3Z1bm1hcCgpLiBJZiB0aGVyZSBpcyBhbm90aGVyIHNp
-bXBsZSB3YXkgdG8gdW5tYXAgaXQuIEl0IGlzIG5vdAo+IG5lZWRlZCBJIHRoaW5rLiBXaGF0IGRv
-IHlvdSB0aGluayBhYm91dCBpdD8KCmRtYV9idWZfdnVubWFwIGRvZXMgbm90IGtmcmVlIHRoZSBk
-bWFfYnVmX21hcCBhcmd1bWVudCwgc28gdGhhdCdzIG5vCnJlYXNvbiB0byBhbGxvY2F0ZSBpdCBz
-ZXBhcmF0ZWx5LiBPciBJJ20gY29uZnVzZWQuCgpBbHNvIGFwb2xvZ2llcywgSSdtIHdheSBiZWhp
-bmQgb24gbWFpbHMuCi1EYW5pZWwKCj4gCj4gPiA+ICsgICAgIGlmICghbXItPmRtYWJ1Zl9tYXAp
-IHsKPiA+ID4gKyAgICAgICAgICAgICBlcnIgPSAtRU5PTUVNOwo+ID4gPiArICAgICAgICAgICAg
-IGdvdG8gZXJyX291dDsKPiA+ID4gKyAgICAgfQo+ID4gPiArCj4gPiA+ICsgICAgIGVyciA9IGRt
-YV9idWZfdm1hcCh1bWVtX2RtYWJ1Zi0+ZG1hYnVmLCBtci0+ZG1hYnVmX21hcCk7Cj4gPiA+ICsg
-ICAgIGlmIChlcnIpCj4gPiA+ICsgICAgICAgICAgICAgZ290byBlcnJfZnJlZV9kbWFidWZfbWFw
-Owo+ID4gPiArCj4gPiA+ICsgICAgIHNldCA9IG1yLT5jdXJfbWFwX3NldDsKPiA+ID4gKyAgICAg
-c2V0LT5wYWdlX3NoaWZ0ID0gUEFHRV9TSElGVDsKPiA+ID4gKyAgICAgc2V0LT5wYWdlX21hc2sg
-PSBQQUdFX1NJWkUgLSAxOwo+ID4gPiArCj4gPiA+ICsgICAgIG1hcCA9IHNldC0+bWFwOwo+ID4g
-PiArICAgICBidWYgPSBtYXBbMF0tPmJ1ZjsKPiA+ID4gKwo+ID4gPiArICAgICB2YWRkciA9IG1y
-LT5kbWFidWZfbWFwLT52YWRkcjsKPiA+Cj4gPiBkbWFfYnVmX21hcCBjYW4gYmUgYW4gX19pb21l
-bSB0b28sIHlvdSBzaG91bGRuJ3QgZGlnIGFyb3VuZCBpbiB0aGlzLCBidXQKPiA+IHVzZSB0aGUg
-ZG1hLWJ1Zi1tYXAuaCBoZWxwZXJzIGluc3RlYWQuIE9uIHg4NiAoYW5kIEkgdGhpbmsgYWxzbyBv
-biBtb3N0Cj4gPiBhcm0pIGl0IGRvZXNuJ3QgbWF0dGVyLCBidXQgaXQncyBraW5kYSBub3QgdmVy
-eSBuaWNlIGluIGEgcHVyZSBzb2Z0d2FyZQo+ID4gZHJpdmVyLgo+ID4KPiA+IElmIGFueXRoaW5n
-IGlzIG1pc3NpbmcgaW4gZG1hLWJ1Zi1tYXAuaCB3cmFwcGVycyBqdXN0IGFkZCBtb3JlLgo+ID4K
-PiA+IE9yIGFsdGVybmF0aXZlbHkgeW91IG5lZWQgdG8gZmFpbCB0aGUgaW1wb3J0IGlmIHlvdSBj
-YW4ndCBoYW5kbGUgX19pb21lbS4KPiA+Cj4gPiBBc2lkZSBmcm9tIHRoZXNlIEkgdGhpbmsgdGhl
-IGRtYS1idWYgc2lkZSBoZXJlIGZvciBjcHUgYWNjZXNzIGxvb2tzCj4gPiByZWFzb25hYmxlIG5v
-dy4KPiA+IC1EYW5pZWwKPiBJJ2xsIHNlZSB0aGUgZG1hLWJ1Zi1tYXAuaCBhbmQgY29uc2lkZXIg
-dGhlIGVycm9yIGhhbmRsaW5nIHRoYXQgeW91IHN1Z2dlc3RlZC4KPiBJIGFwcHJlY2lhdGUgeW91
-ciBzdXBwb3J0Lgo+IAo+IFRoYW5rcyBhIGxvdCwKPiBTaHVuc3VrZS4KPiAKPiA+ID4gKyAgICAg
-dmFkZHJfZW5kID0gdmFkZHIgKyB1bWVtX2RtYWJ1Zi0+ZG1hYnVmLT5zaXplOwo+ID4gPiArICAg
-ICByZW1haW4gPSB1bWVtX2RtYWJ1Zi0+ZG1hYnVmLT5zaXplOwo+ID4gPiArCj4gPiA+ICsgICAg
-IGZvciAoOyByZW1haW47IHZhZGRyICs9IFBBR0VfU0laRSkgewo+ID4gPiArICAgICAgICAgICAg
-IGlmIChudW1fYnVmID49IFJYRV9CVUZfUEVSX01BUCkgewo+ID4gPiArICAgICAgICAgICAgICAg
-ICAgICAgbWFwKys7Cj4gPiA+ICsgICAgICAgICAgICAgICAgICAgICBidWYgPSBtYXBbMF0tPmJ1
-ZjsKPiA+ID4gKyAgICAgICAgICAgICAgICAgICAgIG51bV9idWYgPSAwOwo+ID4gPiArICAgICAg
-ICAgICAgIH0KPiA+ID4gKwo+ID4gPiArICAgICAgICAgICAgIGJ1Zi0+YWRkciA9ICh1aW50cHRy
-X3QpdmFkZHI7Cj4gPiA+ICsgICAgICAgICAgICAgaWYgKHJlbWFpbiA+PSBQQUdFX1NJWkUpCj4g
-PiA+ICsgICAgICAgICAgICAgICAgICAgICBidWYtPnNpemUgPSBQQUdFX1NJWkU7Cj4gPiA+ICsg
-ICAgICAgICAgICAgZWxzZQo+ID4gPiArICAgICAgICAgICAgICAgICAgICAgYnVmLT5zaXplID0g
-cmVtYWluOwo+ID4gPiArICAgICAgICAgICAgIHJlbWFpbiAtPSBidWYtPnNpemU7Cj4gPiA+ICsK
-PiA+ID4gKyAgICAgICAgICAgICBudW1fYnVmKys7Cj4gPiA+ICsgICAgICAgICAgICAgYnVmKys7
-Cj4gPiA+ICsgICAgIH0KPiA+ID4gKwo+ID4gPiArICAgICByZXR1cm4gMDsKPiA+ID4gKwo+ID4g
-PiArZXJyX2ZyZWVfZG1hYnVmX21hcDoKPiA+ID4gKyAgICAga2ZyZWUobXItPmRtYWJ1Zl9tYXAp
-Owo+ID4gPiArZXJyX291dDoKPiA+ID4gKyAgICAgcmV0dXJuIGVycjsKPiA+ID4gK30KPiA+ID4g
-Kwo+ID4gPiArc3RhdGljIHZvaWQgcnhlX3VubWFwX2RtYWJ1Zl9tcihzdHJ1Y3QgcnhlX21yICpt
-cikKPiA+ID4gK3sKPiA+ID4gKyAgICAgc3RydWN0IGliX3VtZW1fZG1hYnVmICp1bWVtX2RtYWJ1
-ZiA9IHRvX2liX3VtZW1fZG1hYnVmKG1yLT51bWVtKTsKPiA+ID4gKwo+ID4gPiArICAgICBkbWFf
-YnVmX3Z1bm1hcCh1bWVtX2RtYWJ1Zi0+ZG1hYnVmLCBtci0+ZG1hYnVmX21hcCk7Cj4gPiA+ICsg
-ICAgIGtmcmVlKG1yLT5kbWFidWZfbWFwKTsKPiA+ID4gK30KPiA+ID4gKwo+ID4gPiAraW50IHJ4
-ZV9tcl9kbWFidWZfaW5pdF91c2VyKHN0cnVjdCByeGVfcGQgKnBkLCBpbnQgZmQsIHU2NCBzdGFy
-dCwgdTY0IGxlbmd0aCwKPiA+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICB1NjQgaW92YSwg
-aW50IGFjY2Vzcywgc3RydWN0IHJ4ZV9tciAqbXIpCj4gPiA+ICt7Cj4gPiA+ICsgICAgIHN0cnVj
-dCBpYl91bWVtX2RtYWJ1ZiAqdW1lbV9kbWFidWY7Cj4gPiA+ICsgICAgIHN0cnVjdCByeGVfbWFw
-X3NldCAqc2V0Owo+ID4gPiArICAgICBpbnQgZXJyOwo+ID4gPiArCj4gPiA+ICsgICAgIHVtZW1f
-ZG1hYnVmID0gaWJfdW1lbV9kbWFidWZfZ2V0KHBkLT5pYnBkLmRldmljZSwgc3RhcnQsIGxlbmd0
-aCwgZmQsCj4gPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGFjY2Vz
-cywgTlVMTCk7Cj4gPiA+ICsgICAgIGlmIChJU19FUlIodW1lbV9kbWFidWYpKSB7Cj4gPiA+ICsg
-ICAgICAgICAgICAgZXJyID0gUFRSX0VSUih1bWVtX2RtYWJ1Zik7Cj4gPiA+ICsgICAgICAgICAg
-ICAgZ290byBlcnJfb3V0Owo+ID4gPiArICAgICB9Cj4gPiA+ICsKPiA+ID4gKyAgICAgcnhlX21y
-X2luaXQoYWNjZXNzLCBtcik7Cj4gPiA+ICsKPiA+ID4gKyAgICAgZXJyID0gcnhlX21yX2FsbG9j
-KG1yLCBpYl91bWVtX251bV9wYWdlcygmdW1lbV9kbWFidWYtPnVtZW0pLCAwKTsKPiA+ID4gKyAg
-ICAgaWYgKGVycikgewo+ID4gPiArICAgICAgICAgICAgIHByX3dhcm4oIiVzOiBVbmFibGUgdG8g
-YWxsb2NhdGUgbWVtb3J5IGZvciBtYXBcbiIsIF9fZnVuY19fKTsKPiA+ID4gKyAgICAgICAgICAg
-ICBnb3RvIGVycl9yZWxlYXNlX3VtZW07Cj4gPiA+ICsgICAgIH0KPiA+ID4gKwo+ID4gPiArICAg
-ICBtci0+aWJtci5wZCA9ICZwZC0+aWJwZDsKPiA+ID4gKyAgICAgbXItPnVtZW0gPSAmdW1lbV9k
-bWFidWYtPnVtZW07Cj4gPiA+ICsgICAgIG1yLT5hY2Nlc3MgPSBhY2Nlc3M7Cj4gPiA+ICsgICAg
-IG1yLT5zdGF0ZSA9IFJYRV9NUl9TVEFURV9WQUxJRDsKPiA+ID4gKyAgICAgbXItPnR5cGUgPSBJ
-Ql9NUl9UWVBFX1VTRVI7Cj4gPiA+ICsKPiA+ID4gKyAgICAgc2V0ID0gbXItPmN1cl9tYXBfc2V0
-Owo+ID4gPiArICAgICBzZXQtPmxlbmd0aCA9IGxlbmd0aDsKPiA+ID4gKyAgICAgc2V0LT5pb3Zh
-ID0gaW92YTsKPiA+ID4gKyAgICAgc2V0LT52YSA9IHN0YXJ0Owo+ID4gPiArICAgICBzZXQtPm9m
-ZnNldCA9IGliX3VtZW1fb2Zmc2V0KG1yLT51bWVtKTsKPiA+ID4gKwo+ID4gPiArICAgICBlcnIg
-PSByeGVfbWFwX2RtYWJ1Zl9tcihtciwgdW1lbV9kbWFidWYpOwo+ID4gPiArICAgICBpZiAoZXJy
-KQo+ID4gPiArICAgICAgICAgICAgIGdvdG8gZXJyX2ZyZWVfbWFwX3NldDsKPiA+ID4gKwo+ID4g
-PiArICAgICByZXR1cm4gMDsKPiA+ID4gKwo+ID4gPiArZXJyX2ZyZWVfbWFwX3NldDoKPiA+ID4g
-KyAgICAgcnhlX21yX2ZyZWVfbWFwX3NldChtci0+bnVtX21hcCwgbXItPmN1cl9tYXBfc2V0KTsK
-PiA+ID4gK2Vycl9yZWxlYXNlX3VtZW06Cj4gPiA+ICsgICAgIGliX3VtZW1fcmVsZWFzZSgmdW1l
-bV9kbWFidWYtPnVtZW0pOwo+ID4gPiArZXJyX291dDoKPiA+ID4gKyAgICAgcmV0dXJuIGVycjsK
-PiA+ID4gK30KPiA+ID4gKwo+ID4gPiAgaW50IHJ4ZV9tcl9pbml0X2Zhc3Qoc3RydWN0IHJ4ZV9w
-ZCAqcGQsIGludCBtYXhfcGFnZXMsIHN0cnVjdCByeGVfbXIgKm1yKQo+ID4gPiAgewo+ID4gPiAg
-ICAgICBpbnQgZXJyOwo+ID4gPiBAQCAtNzAzLDYgKzgxOCw5IEBAIHZvaWQgcnhlX21yX2NsZWFu
-dXAoc3RydWN0IHJ4ZV9wb29sX2VudHJ5ICphcmcpCj4gPiA+ICB7Cj4gPiA+ICAgICAgIHN0cnVj
-dCByeGVfbXIgKm1yID0gY29udGFpbmVyX29mKGFyZywgdHlwZW9mKCptciksIHBlbGVtKTsKPiA+
-ID4KPiA+ID4gKyAgICAgaWYgKG1yLT51bWVtICYmIG1yLT51bWVtLT5pc19kbWFidWYpCj4gPiA+
-ICsgICAgICAgICAgICAgcnhlX3VubWFwX2RtYWJ1Zl9tcihtcik7Cj4gPiA+ICsKPiA+ID4gICAg
-ICAgaWJfdW1lbV9yZWxlYXNlKG1yLT51bWVtKTsKPiA+ID4KPiA+ID4gICAgICAgaWYgKG1yLT5j
-dXJfbWFwX3NldCkKPiA+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvaW5maW5pYmFuZC9zdy9yeGUv
-cnhlX3ZlcmJzLmMgYi9kcml2ZXJzL2luZmluaWJhbmQvc3cvcnhlL3J4ZV92ZXJicy5jCj4gPiA+
-IGluZGV4IDlkMGJiOWFhNzUxNC4uNjE5MWJiNGY0MzRkIDEwMDY0NAo+ID4gPiAtLS0gYS9kcml2
-ZXJzL2luZmluaWJhbmQvc3cvcnhlL3J4ZV92ZXJicy5jCj4gPiA+ICsrKyBiL2RyaXZlcnMvaW5m
-aW5pYmFuZC9zdy9yeGUvcnhlX3ZlcmJzLmMKPiA+ID4gQEAgLTkxNiw2ICs5MTYsMzkgQEAgc3Rh
-dGljIHN0cnVjdCBpYl9tciAqcnhlX3JlZ191c2VyX21yKHN0cnVjdCBpYl9wZCAqaWJwZCwKPiA+
-ID4gICAgICAgcmV0dXJuIEVSUl9QVFIoZXJyKTsKPiA+ID4gIH0KPiA+ID4KPiA+ID4gK3N0YXRp
-YyBzdHJ1Y3QgaWJfbXIgKnJ4ZV9yZWdfdXNlcl9tcl9kbWFidWYoc3RydWN0IGliX3BkICppYnBk
-LCB1NjQgc3RhcnQsCj4gPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHU2NCBsZW5ndGgsIHU2NCBpb3ZhLCBpbnQgZmQsCj4gPiA+ICsgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIGludCBhY2Nlc3MsIHN0cnVjdCBpYl91ZGF0YSAqdWRh
-dGEpCj4gPiA+ICt7Cj4gPiA+ICsgICAgIGludCBlcnI7Cj4gPiA+ICsgICAgIHN0cnVjdCByeGVf
-ZGV2ICpyeGUgPSB0b19yZGV2KGlicGQtPmRldmljZSk7Cj4gPiA+ICsgICAgIHN0cnVjdCByeGVf
-cGQgKnBkID0gdG9fcnBkKGlicGQpOwo+ID4gPiArICAgICBzdHJ1Y3QgcnhlX21yICptcjsKPiA+
-ID4gKwo+ID4gPiArICAgICBtciA9IHJ4ZV9hbGxvYygmcnhlLT5tcl9wb29sKTsKPiA+ID4gKyAg
-ICAgaWYgKCFtcikgewo+ID4gPiArICAgICAgICAgICAgIGVyciA9IC1FTk9NRU07Cj4gPiA+ICsg
-ICAgICAgICAgICAgZ290byBlcnIyOwo+ID4gPiArICAgICB9Cj4gPiA+ICsKPiA+ID4gKyAgICAg
-cnhlX2FkZF9pbmRleChtcik7Cj4gPiA+ICsKPiA+ID4gKyAgICAgcnhlX2FkZF9yZWYocGQpOwo+
-ID4gPiArCj4gPiA+ICsgICAgIGVyciA9IHJ4ZV9tcl9kbWFidWZfaW5pdF91c2VyKHBkLCBmZCwg
-c3RhcnQsIGxlbmd0aCwgaW92YSwgYWNjZXNzLCBtcik7Cj4gPiA+ICsgICAgIGlmIChlcnIpCj4g
-PiA+ICsgICAgICAgICAgICAgZ290byBlcnIzOwo+ID4gPiArCj4gPiA+ICsgICAgIHJldHVybiAm
-bXItPmlibXI7Cj4gPiA+ICsKPiA+ID4gK2VycjM6Cj4gPiA+ICsgICAgIHJ4ZV9kcm9wX3JlZihw
-ZCk7Cj4gPiA+ICsgICAgIHJ4ZV9kcm9wX2luZGV4KG1yKTsKPiA+ID4gKyAgICAgcnhlX2Ryb3Bf
-cmVmKG1yKTsKPiA+ID4gK2VycjI6Cj4gPiA+ICsgICAgIHJldHVybiBFUlJfUFRSKGVycik7Cj4g
-PiA+ICt9Cj4gPiA+ICsKPiA+ID4gIHN0YXRpYyBzdHJ1Y3QgaWJfbXIgKnJ4ZV9hbGxvY19tcihz
-dHJ1Y3QgaWJfcGQgKmlicGQsIGVudW0gaWJfbXJfdHlwZSBtcl90eXBlLAo+ID4gPiAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHUzMiBtYXhfbnVtX3NnKQo+ID4gPiAgewo+ID4gPiBA
-QCAtMTA4MSw2ICsxMTE0LDcgQEAgc3RhdGljIGNvbnN0IHN0cnVjdCBpYl9kZXZpY2Vfb3BzIHJ4
-ZV9kZXZfb3BzID0gewo+ID4gPiAgICAgICAucXVlcnlfcXAgPSByeGVfcXVlcnlfcXAsCj4gPiA+
-ICAgICAgIC5xdWVyeV9zcnEgPSByeGVfcXVlcnlfc3JxLAo+ID4gPiAgICAgICAucmVnX3VzZXJf
-bXIgPSByeGVfcmVnX3VzZXJfbXIsCj4gPiA+ICsgICAgIC5yZWdfdXNlcl9tcl9kbWFidWYgPSBy
-eGVfcmVnX3VzZXJfbXJfZG1hYnVmLAo+ID4gPiAgICAgICAucmVxX25vdGlmeV9jcSA9IHJ4ZV9y
-ZXFfbm90aWZ5X2NxLAo+ID4gPiAgICAgICAucmVzaXplX2NxID0gcnhlX3Jlc2l6ZV9jcSwKPiA+
-ID4KPiA+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvaW5maW5pYmFuZC9zdy9yeGUvcnhlX3ZlcmJz
-LmggYi9kcml2ZXJzL2luZmluaWJhbmQvc3cvcnhlL3J4ZV92ZXJicy5oCj4gPiA+IGluZGV4IGM4
-MDc2Mzk0MzVlYi4uMGFhOTVhYjA2YjZlIDEwMDY0NAo+ID4gPiAtLS0gYS9kcml2ZXJzL2luZmlu
-aWJhbmQvc3cvcnhlL3J4ZV92ZXJicy5oCj4gPiA+ICsrKyBiL2RyaXZlcnMvaW5maW5pYmFuZC9z
-dy9yeGUvcnhlX3ZlcmJzLmgKPiA+ID4gQEAgLTMzNCw2ICszMzQsOCBAQCBzdHJ1Y3QgcnhlX21y
-IHsKPiA+ID4KPiA+ID4gICAgICAgc3RydWN0IHJ4ZV9tYXBfc2V0ICAgICAgKmN1cl9tYXBfc2V0
-Owo+ID4gPiAgICAgICBzdHJ1Y3QgcnhlX21hcF9zZXQgICAgICAqbmV4dF9tYXBfc2V0Owo+ID4g
-PiArCj4gPiA+ICsgICAgIHN0cnVjdCBkbWFfYnVmX21hcCAqZG1hYnVmX21hcDsKPiA+ID4gIH07
-Cj4gPiA+Cj4gPiA+ICBlbnVtIHJ4ZV9td19zdGF0ZSB7Cj4gPiA+IC0tCj4gPiA+IDIuMTcuMQo+
-ID4gPgo+ID4KPiA+IC0tCj4gPiBEYW5pZWwgVmV0dGVyCj4gPiBTb2Z0d2FyZSBFbmdpbmVlciwg
-SW50ZWwgQ29ycG9yYXRpb24KPiA+IGh0dHA6Ly9ibG9nLmZmd2xsLmNoCgotLSAKRGFuaWVsIFZl
-dHRlcgpTb2Z0d2FyZSBFbmdpbmVlciwgSW50ZWwgQ29ycG9yYXRpb24KaHR0cDovL2Jsb2cuZmZ3
-bGwuY2gKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGlu
-YXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0
-dHBzOi8vbGlzdHMubGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+--===============3872790386096115318==
+Content-Type: multipart/alternative;
+ boundary="------------8DD4785A6F11F592C0441375"
+Content-Language: en-US
+
+--------------8DD4785A6F11F592C0441375
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+
+Am 13.10.21 um 01:56 schrieb Sumit Semwal:
+> Hello Guangming, Christian,
+>
+>
+>
+> On Tue, 12 Oct 2021, 14:09 , <guangming.cao@mediatek.com 
+> <mailto:guangming.cao@mediatek.com>> wrote:
+>
+>     From: Guangming Cao <Guangming.Cao@mediatek.com
+>     <mailto:Guangming.Cao@mediatek.com>>
+>
+>     > Am 09.10.21 um 07:55 schrieb guangming.cao@mediatek.com
+>     <mailto:guangming.cao@mediatek.com>:
+>     > From: Guangming Cao <Guangming.Cao@mediatek.com
+>     <mailto:Guangming.Cao@mediatek.com>>
+>     > >
+>     > > If dma-buf don't want userspace users to touch the dmabuf buffer,
+>     > > it seems we should add this restriction into dma_buf_ops.mmap,
+>     > > not in this IOCTL:DMA_BUF_SET_NAME.
+>     > >
+>     > > With this restriction, we can only know the kernel users of
+>     the dmabuf
+>     > > by attachments.
+>     > > However, for many userspace users, such as userpsace users of
+>     dma_heap,
+>     > > they also need to mark the usage of dma-buf, and they don't
+>     care about
+>     > > who attached to this dmabuf, and seems it's no meaning to be
+>     waiting for
+>     > > IOCTL:DMA_BUF_SET_NAME rather than mmap.
+>     >
+>     > Sounds valid to me, but I have no idea why this restriction was
+>     added in
+>     > the first place.
+>     >
+>     > Can you double check the git history and maybe identify when
+>     that was
+>     > added? Mentioning this change in the commit message then might make
+>     > things a bit easier to understand.
+>     >
+>     > Thanks,
+>     > Christian.
+>     It was add in this patch:
+>     https://patchwork.freedesktop.org/patch/310349/
+>     <https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpatchwork.freedesktop.org%2Fpatch%2F310349%2F&data=04%7C01%7Cchristian.koenig%40amd.com%7C4149923e2b0646de82ce08d98ddbf2c2%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C637696798278342557%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=N49RVF4s%2BGQ4D%2Ft1MOwRsCnslFnwobSB3G86pvP9m7A%3D&reserved=0>.
+>     However, there is no illustration about it.
+>     I guess it wants users to set_name when no attachments on the dmabuf,
+>     for case with attachments, we can find owner by device in attachments.
+>     But just I said in commit message, this is might not a good idea.
+>
+>     Do you have any idea?
+>
+>
+> For the original series, the idea was that allowing name change 
+> mid-use could confuse the users about the dma-buf. However, the rest 
+> of the series also makes sure each dma-buf have a unique inode, and 
+> any accounting should probably use that, without relying on the name 
+> as much.
+> So I don't have an objection to this change.
+
+I suggest to add that explanation and the original commit id into the 
+commit message.
+
+With that changed the patch has my rb as well.
+
+Regards,
+Christian.
+
+>
+> Best,
+> Sumit.
+>
+>     >
+>     > >
+>     > > Signed-off-by: Guangming Cao <Guangming.Cao@mediatek.com
+>     <mailto:Guangming.Cao@mediatek.com>>
+>     > > ---
+>     > >   drivers/dma-buf/dma-buf.c | 14 ++------------
+>     > >   1 file changed, 2 insertions(+), 12 deletions(-)
+>     > >
+>     > > diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+>     > > index 511fe0d217a0..db2f4efdec32 100644
+>     > > --- a/drivers/dma-buf/dma-buf.c
+>     > > +++ b/drivers/dma-buf/dma-buf.c
+>     > > @@ -325,10 +325,8 @@ static __poll_t dma_buf_poll(struct file
+>     *file, poll_table *poll)
+>     > >
+>     > >   /**
+>     > >    * dma_buf_set_name - Set a name to a specific dma_buf to
+>     track the usage.
+>     > > - * The name of the dma-buf buffer can only be set when the
+>     dma-buf is not
+>     > > - * attached to any devices. It could theoritically support
+>     changing the
+>     > > - * name of the dma-buf if the same piece of memory is used
+>     for multiple
+>     > > - * purpose between different devices.
+>     > > + * It could theoretically support changing the name of the
+>     dma-buf if the same
+>     > > + * piece of memory is used for multiple purpose between
+>     different devices.
+>     > >    *
+>     > >    * @dmabuf: [in]     dmabuf buffer that will be renamed.
+>     > >    * @buf:    [in]     A piece of userspace memory that
+>     contains the name of
+>     > > @@ -346,19 +344,11 @@ static long dma_buf_set_name(struct
+>     dma_buf *dmabuf, const char __user *buf)
+>     > >     if (IS_ERR(name))
+>     > >             return PTR_ERR(name);
+>     > >
+>     > > -   dma_resv_lock(dmabuf->resv, NULL);
+>     > > -   if (!list_empty(&dmabuf->attachments)) {
+>     > > -           ret = -EBUSY;
+>     > > -           kfree(name);
+>     > > -           goto out_unlock;
+>     > > -   }
+>     > >     spin_lock(&dmabuf->name_lock);
+>     > >     kfree(dmabuf->name);
+>     > >     dmabuf->name = name;
+>     > >     spin_unlock(&dmabuf->name_lock);
+>     > >
+>     > > -out_unlock:
+>     > > -   dma_resv_unlock(dmabuf->resv);
+>     > >     return ret;
+>     > >   }
+>     > >
+>
+
+
+--------------8DD4785A6F11F592C0441375
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+    Am 13.10.21 um 01:56 schrieb Sumit Semwal:<br>
+    <blockquote type="cite" cite="mid:CAO_48GE_jCWY4waK-+FqVw5sbuoHddt4kWpnkpvyLDRC__yE+g@mail.gmail.com">
+      
+      <div dir="auto">
+        <div>Hello Guangming, Christian,
+          <div dir="auto"><br>
+          </div>
+          <br>
+          <br>
+          <div class="gmail_quote">
+            <div dir="ltr" class="gmail_attr">On Tue, 12 Oct 2021, 14:09
+              , &lt;<a href="mailto:guangming.cao@mediatek.com" rel="noreferrer noreferrer noreferrer" target="_blank" moz-do-not-send="true">guangming.cao@mediatek.com</a>&gt;
+              wrote:<br>
+            </div>
+            <blockquote class="gmail_quote" style="margin:0 0 0
+              .8ex;border-left:1px #ccc solid;padding-left:1ex">From:
+              Guangming Cao &lt;<a href="mailto:Guangming.Cao@mediatek.com" rel="noreferrer
+                noreferrer noreferrer noreferrer" target="_blank" moz-do-not-send="true">Guangming.Cao@mediatek.com</a>&gt;<br>
+              <br>
+              &gt; Am 09.10.21 um 07:55 schrieb <a href="mailto:guangming.cao@mediatek.com" rel="noreferrer
+                noreferrer noreferrer noreferrer" target="_blank" moz-do-not-send="true">guangming.cao@mediatek.com</a>:<br>
+              &gt; From: Guangming Cao &lt;<a href="mailto:Guangming.Cao@mediatek.com" rel="noreferrer
+                noreferrer noreferrer noreferrer" target="_blank" moz-do-not-send="true">Guangming.Cao@mediatek.com</a>&gt;<br>
+              &gt; &gt;<br>
+              &gt; &gt; If dma-buf don't want userspace users to touch
+              the dmabuf buffer,<br>
+              &gt; &gt; it seems we should add this restriction into
+              dma_buf_ops.mmap,<br>
+              &gt; &gt; not in this IOCTL:DMA_BUF_SET_NAME.<br>
+              &gt; &gt;<br>
+              &gt; &gt; With this restriction, we can only know the
+              kernel users of the dmabuf<br>
+              &gt; &gt; by attachments.<br>
+              &gt; &gt; However, for many userspace users, such as
+              userpsace users of dma_heap,<br>
+              &gt; &gt; they also need to mark the usage of dma-buf, and
+              they don't care about<br>
+              &gt; &gt; who attached to this dmabuf, and seems it's no
+              meaning to be waiting for<br>
+              &gt; &gt; IOCTL:DMA_BUF_SET_NAME rather than mmap.<br>
+              &gt; <br>
+              &gt; Sounds valid to me, but I have no idea why this
+              restriction was added in <br>
+              &gt; the first place.<br>
+              &gt; <br>
+              &gt; Can you double check the git history and maybe
+              identify when that was <br>
+              &gt; added? Mentioning this change in the commit message
+              then might make <br>
+              &gt; things a bit easier to understand.<br>
+              &gt; <br>
+              &gt; Thanks,<br>
+              &gt; Christian.<br>
+              It was add in this patch: <a href="https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Fpatchwork.freedesktop.org%2Fpatch%2F310349%2F&amp;data=04%7C01%7Cchristian.koenig%40amd.com%7C4149923e2b0646de82ce08d98ddbf2c2%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C637696798278342557%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&amp;sdata=N49RVF4s%2BGQ4D%2Ft1MOwRsCnslFnwobSB3G86pvP9m7A%3D&amp;reserved=0" originalsrc="https://patchwork.freedesktop.org/patch/310349/" shash="rrFLG2SGWwCOnevYntPkTBSLrAKC6N1Tqo0D7JcYApk3UgzLEy90FuuUiWQy2kK2oLh/dD822UVt+oxD14gkAVIoBSSXLllKMcWgzyFWLFnQz/hYTHy36ByjwT0X8rljdha1Zk9DL+tA28zkfSnmyWzn6ZU0mcMBBfX5Ak2SJ/A=" rel="noreferrer noreferrer noreferrer noreferrer
+                noreferrer" target="_blank" moz-do-not-send="true">https://patchwork.freedesktop.org/patch/310349/</a>.<br>
+              However, there is no illustration about it.<br>
+              I guess it wants users to set_name when no attachments on
+              the dmabuf,<br>
+              for case with attachments, we can find owner by device in
+              attachments.<br>
+              But just I said in commit message, this is might not a
+              good idea.<br>
+              <br>
+              Do you have any idea?<br>
+            </blockquote>
+          </div>
+        </div>
+        <div dir="auto"><br>
+        </div>
+        <div dir="auto">For the original series, the idea was that
+          allowing name change mid-use could confuse the users about the
+          dma-buf. However, the rest of the series also makes sure each
+          dma-buf have a unique inode, and any accounting should
+          probably use that, without relying on the name as much.</div>
+        <div dir="auto">So I don't have an objection to this change.</div>
+      </div>
+    </blockquote>
+    <br>
+    I suggest to add that explanation and the original commit id into
+    the commit message.<br>
+    <br>
+    With that changed the patch has my rb as well.<br>
+    <br>
+    Regards,<br>
+    Christian.<br>
+    <br>
+    <blockquote type="cite" cite="mid:CAO_48GE_jCWY4waK-+FqVw5sbuoHddt4kWpnkpvyLDRC__yE+g@mail.gmail.com">
+      <div dir="auto">
+        <div dir="auto"><br>
+        </div>
+        <div dir="auto">Best,</div>
+        <div dir="auto">Sumit.</div>
+        <div dir="auto">
+          <div class="gmail_quote">
+            <blockquote class="gmail_quote" style="margin:0 0 0
+              .8ex;border-left:1px #ccc solid;padding-left:1ex">
+              &gt; <br>
+              &gt; &gt;<br>
+              &gt; &gt; Signed-off-by: Guangming Cao &lt;<a href="mailto:Guangming.Cao@mediatek.com" rel="noreferrer
+                noreferrer noreferrer noreferrer" target="_blank" moz-do-not-send="true">Guangming.Cao@mediatek.com</a>&gt;<br>
+              &gt; &gt; ---<br>
+              &gt; &gt;&nbsp; &nbsp;drivers/dma-buf/dma-buf.c | 14 ++------------<br>
+              &gt; &gt;&nbsp; &nbsp;1 file changed, 2 insertions(+), 12
+              deletions(-)<br>
+              &gt; &gt;<br>
+              &gt; &gt; diff --git a/drivers/dma-buf/dma-buf.c
+              b/drivers/dma-buf/dma-buf.c<br>
+              &gt; &gt; index 511fe0d217a0..db2f4efdec32 100644<br>
+              &gt; &gt; --- a/drivers/dma-buf/dma-buf.c<br>
+              &gt; &gt; +++ b/drivers/dma-buf/dma-buf.c<br>
+              &gt; &gt; @@ -325,10 +325,8 @@ static __poll_t
+              dma_buf_poll(struct file *file, poll_table *poll)<br>
+              &gt; &gt;&nbsp; &nbsp;<br>
+              &gt; &gt;&nbsp; &nbsp;/**<br>
+              &gt; &gt;&nbsp; &nbsp; * dma_buf_set_name - Set a name to a specific
+              dma_buf to track the usage.<br>
+              &gt; &gt; - * The name of the dma-buf buffer can only be
+              set when the dma-buf is not<br>
+              &gt; &gt; - * attached to any devices. It could
+              theoritically support changing the<br>
+              &gt; &gt; - * name of the dma-buf if the same piece of
+              memory is used for multiple<br>
+              &gt; &gt; - * purpose between different devices.<br>
+              &gt; &gt; + * It could theoretically support changing the
+              name of the dma-buf if the same<br>
+              &gt; &gt; + * piece of memory is used for multiple purpose
+              between different devices.<br>
+              &gt; &gt;&nbsp; &nbsp; *<br>
+              &gt; &gt;&nbsp; &nbsp; * @dmabuf: [in]&nbsp; &nbsp; &nbsp;dmabuf buffer that will
+              be renamed.<br>
+              &gt; &gt;&nbsp; &nbsp; * @buf:&nbsp; &nbsp; [in]&nbsp; &nbsp; &nbsp;A piece of userspace
+              memory that contains the name of<br>
+              &gt; &gt; @@ -346,19 +344,11 @@ static long
+              dma_buf_set_name(struct dma_buf *dmabuf, const char __user
+              *buf)<br>
+              &gt; &gt;&nbsp; &nbsp; &nbsp;if (IS_ERR(name))<br>
+              &gt; &gt;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return PTR_ERR(name);<br>
+              &gt; &gt;&nbsp; &nbsp;<br>
+              &gt; &gt; -&nbsp; &nbsp;dma_resv_lock(dmabuf-&gt;resv, NULL);<br>
+              &gt; &gt; -&nbsp; &nbsp;if
+              (!list_empty(&amp;dmabuf-&gt;attachments)) {<br>
+              &gt; &gt; -&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ret = -EBUSY;<br>
+              &gt; &gt; -&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;kfree(name);<br>
+              &gt; &gt; -&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;goto out_unlock;<br>
+              &gt; &gt; -&nbsp; &nbsp;}<br>
+              &gt; &gt;&nbsp; &nbsp; &nbsp;spin_lock(&amp;dmabuf-&gt;name_lock);<br>
+              &gt; &gt;&nbsp; &nbsp; &nbsp;kfree(dmabuf-&gt;name);<br>
+              &gt; &gt;&nbsp; &nbsp; &nbsp;dmabuf-&gt;name = name;<br>
+              &gt; &gt;&nbsp; &nbsp; &nbsp;spin_unlock(&amp;dmabuf-&gt;name_lock);<br>
+              &gt; &gt;&nbsp; &nbsp;<br>
+              &gt; &gt; -out_unlock:<br>
+              &gt; &gt; -&nbsp; &nbsp;dma_resv_unlock(dmabuf-&gt;resv);<br>
+              &gt; &gt;&nbsp; &nbsp; &nbsp;return ret;<br>
+              &gt; &gt;&nbsp; &nbsp;}<br>
+              &gt; &gt;&nbsp; &nbsp;<br>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </blockquote>
+    <br>
+  </body>
+</html>
+
+--------------8DD4785A6F11F592C0441375--
+
+--===============3872790386096115318==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+
+--===============3872790386096115318==--
