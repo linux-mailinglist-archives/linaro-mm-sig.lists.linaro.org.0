@@ -2,73 +2,72 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF4AA4337F3
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 Oct 2021 16:00:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 659E343386B
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 Oct 2021 16:32:32 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 161A06073E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 Oct 2021 14:00:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D4B8C6075A
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 Oct 2021 14:32:30 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id C10216057D; Tue, 19 Oct 2021 14:00:52 +0000 (UTC)
+	id B564A60752; Tue, 19 Oct 2021 14:32:29 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9FC766057D;
-	Tue, 19 Oct 2021 14:00:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 852F96058D;
+	Tue, 19 Oct 2021 14:32:24 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 783B860503
- for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Oct 2021 14:00:47 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 6E0D560537
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Oct 2021 14:32:22 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 6E8246057D; Tue, 19 Oct 2021 14:00:47 +0000 (UTC)
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com
- [209.85.208.45])
- by lists.linaro.org (Postfix) with ESMTPS id 644B360503
- for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Oct 2021 14:00:45 +0000 (UTC)
-Received: by mail-ed1-f45.google.com with SMTP id a25so13233233edx.8
- for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Oct 2021 07:00:45 -0700 (PDT)
+ id 68E1F6058D; Tue, 19 Oct 2021 14:32:22 +0000 (UTC)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com
+ [209.85.208.46])
+ by lists.linaro.org (Postfix) with ESMTPS id 5910860537
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Oct 2021 14:32:20 +0000 (UTC)
+Received: by mail-ed1-f46.google.com with SMTP id z20so13680745edc.13
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Oct 2021 07:32:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:content-transfer-encoding:in-reply-to;
- bh=cWgLVIxPlB0EUk2RA+dnfGL3b+FWQ/k3Rt9YVL8+es0=;
- b=hJ0ux5wtmFWOMZz/2SKwcRPNzwKsJW+B9MJwj5Ck9iSM6SAXnilKiJhw098Q+Ryq44
- 4rSK+5FSV6PCBHh3IjzPi/Pa2n0PLuuuOPEnfb74Ls4ZWgafOv63rPfKDi6Dm5b4dfNN
- /ZvpoEk6ynGgAfhE5I/pWjkCqcVgOU2Kwu0Cs=
+ bh=RT2OWiu66UenIvORUGYG/GiRCyemF3VXNlRjAEErvao=;
+ b=a4VY42HJalA72DhnkXpd9tI69pDyiIL9oOJ7/ZH4b5qD7xnc30mssvRB3cjOZ9gpS1
+ S4WJsMv4GIlfvLpDJmm5CSlSUuZU3Ab0HJeX6j/UyfMmb1a4UFP9lNdy3jqax3O8rtp1
+ gqXRlNaj/65fRr3cpsscUBAHgVLoRLi0kcXiQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:content-transfer-encoding
  :in-reply-to;
- bh=cWgLVIxPlB0EUk2RA+dnfGL3b+FWQ/k3Rt9YVL8+es0=;
- b=Juqlxi8vVhy7w4ll9ia941+GRAN0uOoYlMprYY6ozTIKlUpvEYSW4gGj9RqDoCkp97
- DILUVd1/nx1deZQESLp7HCFJAWBbfrTTrZuUJnY+zV4RfPUsfyDVcpOdrAsMzrCdwr64
- mVRmN4cuLOVUYOt+CUsHtfrddadtuBrr/q51NJq3tugAa//BvB8ChIf1Sl9XknJ30oXJ
- kZ6vPSk+vgd4gGrGvnl9pYDWngjgMXqkfwkmssiWZ2rgKeitbM+FvQVReGeZBgF3VIUT
- 8tL3lotnxZTwrT0qkJ887HZ8FQrk/0PHrOFetLrv/g8recFtlKm8Qc5xtGhu4cx6goZQ
- s5og==
-X-Gm-Message-State: AOAM5324Eoo2LIKuKOc8WbEbqN9Ppa6AbT2ZdtndhN1NkDKflbrzG7uL
- BJAhtltYb5RdbLxDEVaRBQRYlA==
-X-Google-Smtp-Source: ABdhPJw5lOzn70N0JgxP4QgPQhpr3WdffMJoX5zXj62wwNiS8Jd781tdyIjXbT1pBntzl16Ze7UW3w==
-X-Received: by 2002:a17:907:d08:: with SMTP id
- gn8mr4523917ejc.395.1634651960977; 
- Tue, 19 Oct 2021 06:59:20 -0700 (PDT)
+ bh=RT2OWiu66UenIvORUGYG/GiRCyemF3VXNlRjAEErvao=;
+ b=sSRmhfVMWkSDHvVFXKTjZWLmYWWRpKqJsBevOU78p3fyjkG309RRvuGJ9nCU+SFkV+
+ oWm9PTHcdseQmqs8xNHIchPrQXkk15xiqEcqYW1GRbSDMfSklcriPAXICBi7z7VWoKHn
+ e6BSbFIdlWDexJFB06svOJ/p+fqyACteff6CS6y0uNnj8Grk3DmLM+GnqQ80W7kkFpCH
+ cFaC6mmvLlXMsiNztJlkzQekutge7oMseybVXo/AslmPcxL4Q4iseYiw/IyP8nO+a3HB
+ yZ+BrU5kVIg7vZWFppEp7c0sm3WNF11DKx1yFOR6l1vf8ZAFYoGIdopQmIb6cDNlSx2+
+ Cd1w==
+X-Gm-Message-State: AOAM530eywMZ/9rdH+QXrOaXxDCRlJJpV/bibroFxvoGe55yrxQMvZR9
+ WTvCW1MysMbsIhJyblzgMBXIdA==
+X-Google-Smtp-Source: ABdhPJyAM6JgxZkvD4lSzTHT1aiap2InBn5R1eowSjP+BYqEwXduZ8CcPEQ4r7OJ7dlznkvFTq09dw==
+X-Received: by 2002:a50:d8c2:: with SMTP id y2mr54011219edj.360.1634653851982; 
+ Tue, 19 Oct 2021 07:30:51 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id f22sm11268362edu.26.2021.10.19.06.59.20
+ by smtp.gmail.com with ESMTPSA id t6sm11675493edj.27.2021.10.19.07.30.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Oct 2021 06:59:20 -0700 (PDT)
-Date: Tue, 19 Oct 2021 15:59:18 +0200
+ Tue, 19 Oct 2021 07:30:51 -0700 (PDT)
+Date: Tue, 19 Oct 2021 16:30:49 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YW7PNr4Tk2DWOeIH@phenom.ffwll.local>
+Message-ID: <YW7WmU/GLzgJbDQc@phenom.ffwll.local>
 References: <20211005113742.1101-1-christian.koenig@amd.com>
- <20211005113742.1101-24-christian.koenig@amd.com>
- <YWbrb7xQfTWU15U1@phenom.ffwll.local>
- <71bf3523-7c18-dac7-de53-f7b20e737cc3@gmail.com>
+ <20211005113742.1101-25-christian.koenig@amd.com>
+ <YWbr0/ey1rCbb0Yi@phenom.ffwll.local>
+ <405b9df8-58fd-b8f2-cec2-acde69aa5633@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <71bf3523-7c18-dac7-de53-f7b20e737cc3@gmail.com>
+In-Reply-To: <405b9df8-58fd-b8f2-cec2-acde69aa5633@gmail.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 23/28] drm: use new iterator in
- drm_gem_fence_array_add_implicit v3
+Subject: Re: [Linaro-mm-sig] [PATCH 24/28] drm: use new iterator in
+ drm_gem_plane_helper_prepare_fb v2
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -90,35 +89,86 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Tue, Oct 19, 2021 at 02:54:04PM +0200, Christian K=F6nig wrote:
-> Am 13.10.21 um 16:21 schrieb Daniel Vetter:
-> > On Tue, Oct 05, 2021 at 01:37:37PM +0200, Christian K=F6nig wrote:
-> > > Simplifying the code a bit.
+On Tue, Oct 19, 2021 at 03:02:26PM +0200, Christian K=F6nig wrote:
+> Am 13.10.21 um 16:23 schrieb Daniel Vetter:
+> > On Tue, Oct 05, 2021 at 01:37:38PM +0200, Christian K=F6nig wrote:
+> > > Makes the handling a bit more complex, but avoids the use of
+> > > dma_resv_get_excl_unlocked().
 > > > =
 
-> > > v2: add missing rcu_read_lock()/unlock()
-> > > v3: switch to locked version
+> > > v2: improve coding and documentation
 > > > =
 
 > > > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
-> > > Reviewed-by: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
-> > Please make sure you also apply this to the new copy of this code in
-> > drm/sched. This one here is up for deletion, once I get all the driver
-> > conversions I have landed ...
+> > > ---
+> > >   drivers/gpu/drm/drm_gem_atomic_helper.c | 13 +++++++++++--
+> > >   1 file changed, 11 insertions(+), 2 deletions(-)
+> > > =
+
+> > > diff --git a/drivers/gpu/drm/drm_gem_atomic_helper.c b/drivers/gpu/dr=
+m/drm_gem_atomic_helper.c
+> > > index e570398abd78..8534f78d4d6d 100644
+> > > --- a/drivers/gpu/drm/drm_gem_atomic_helper.c
+> > > +++ b/drivers/gpu/drm/drm_gem_atomic_helper.c
+> > > @@ -143,6 +143,7 @@
+> > >    */
+> > >   int drm_gem_plane_helper_prepare_fb(struct drm_plane *plane, struct=
+ drm_plane_state *state)
+> > >   {
+> > > +	struct dma_resv_iter cursor;
+> > >   	struct drm_gem_object *obj;
+> > >   	struct dma_fence *fence;
+> > > @@ -150,9 +151,17 @@ int drm_gem_plane_helper_prepare_fb(struct drm_p=
+lane *plane, struct drm_plane_st
+> > >   		return 0;
+> > >   	obj =3D drm_gem_fb_get_obj(state->fb, 0);
+> > > -	fence =3D dma_resv_get_excl_unlocked(obj->resv);
+> > > -	drm_atomic_set_fence_for_plane(state, fence);
+> > > +	dma_resv_iter_begin(&cursor, obj->resv, false);
+> > > +	dma_resv_for_each_fence_unlocked(&cursor, fence) {
+> > > +		/* TODO: We only use the first write fence here and need to fix
+> > > +		 * the drm_atomic_set_fence_for_plane() API to accept more than
+> > > +		 * one. */
+> > I'm confused, right now there is only one write fence. So no need to
+> > iterate, and also no need to add a TODO. If/when we add more write fenc=
+es
+> > then I think this needs to be revisited, and ofc then we do need to upd=
+ate
+> > the set_fence helpers to carry an entire array of fences.
 > =
 
-> Yeah, I do have that. Only added this patch here for completeness so that=
- I
-> could at least consider dropping the old access functions.
+> Well could be that I misunderstood you, but in your last explanation it
+> sounded like the drm_atomic_set_fence_for_plane() function needs fixing
+> anyway because a plane could have multiple BOs.
 > =
 
-> Put I will hold it back, just ping me when the code in question is remove=
-d.
+> So in my understanding what we need is a
+> drm_atomic_add_dependency_for_plane() function which records that a certa=
+in
+> fence needs to be signaled before a flip.
 
-Imo go ahead and push this, the rebasing is trivial since I just delete
-code. That way I don't have to remember to do anything :-)
+Yeah that's another issue, but in practice there's no libva which decodes
+into planar yuv with different fences between the planes. So not a bug in
+practice.
+
+But this is entirely orthogonal to you picking up the wrong fence here if
+there's not exclusive fence set:
+
+- old code: Either pick the exclusive fence, or not fence if the exclusive
+  one is not set.
+
+- new code: Pick the exclusive fence or the first shared fence
+
+New behaviour is busted, because scanning out and reading from a buffer at
+the same time (for the next frame, e.g. to copy over damaged areas or some
+other tricks) is very much a supported thing. Atomic _only_ wants to look
+at the exclusive fence slot, which mean "there is an implicitly synced
+write to this buffers". Implicitly synced reads _must_ be ignored.
+
+Now amdgpu doesn't have this distinction in its uapi, but many drivers do.
 -Daniel
 
+> Support for more than one write fence then comes totally naturally.
 > =
 
 > Christian.
@@ -127,52 +177,14 @@ code. That way I don't have to remember to do anything :-)
 > > -Daniel
 > > =
 
-> > > ---
-> > >   drivers/gpu/drm/drm_gem.c | 26 +++++---------------------
-> > >   1 file changed, 5 insertions(+), 21 deletions(-)
-> > > =
-
-> > > diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-> > > index 09c820045859..4dcdec6487bb 100644
-> > > --- a/drivers/gpu/drm/drm_gem.c
-> > > +++ b/drivers/gpu/drm/drm_gem.c
-> > > @@ -1340,31 +1340,15 @@ int drm_gem_fence_array_add_implicit(struct x=
-array *fence_array,
-> > >   				     struct drm_gem_object *obj,
-> > >   				     bool write)
-> > >   {
-> > > -	int ret;
-> > > -	struct dma_fence **fences;
-> > > -	unsigned int i, fence_count;
-> > > -
-> > > -	if (!write) {
-> > > -		struct dma_fence *fence =3D
-> > > -			dma_resv_get_excl_unlocked(obj->resv);
-> > > -
-> > > -		return drm_gem_fence_array_add(fence_array, fence);
-> > > -	}
-> > > +	struct dma_resv_iter cursor;
-> > > +	struct dma_fence *fence;
-> > > +	int ret =3D 0;
-> > > -	ret =3D dma_resv_get_fences(obj->resv, NULL,
-> > > -						&fence_count, &fences);
-> > > -	if (ret || !fence_count)
-> > > -		return ret;
-> > > -
-> > > -	for (i =3D 0; i < fence_count; i++) {
-> > > -		ret =3D drm_gem_fence_array_add(fence_array, fences[i]);
-> > > +	dma_resv_for_each_fence(&cursor, obj->resv, write, fence) {
-> > > +		ret =3D drm_gem_fence_array_add(fence_array, fence);
-> > >   		if (ret)
-> > >   			break;
-> > >   	}
-> > > -
-> > > -	for (; i < fence_count; i++)
-> > > -		dma_fence_put(fences[i]);
-> > > -	kfree(fences);
-> > >   	return ret;
+> > > +		dma_fence_get(fence);
+> > > +		break;
+> > > +	}
+> > > +	dma_resv_iter_end(&cursor);
+> > > +	drm_atomic_set_fence_for_plane(state, fence);
+> > >   	return 0;
 > > >   }
-> > >   EXPORT_SYMBOL(drm_gem_fence_array_add_implicit);
+> > >   EXPORT_SYMBOL_GPL(drm_gem_plane_helper_prepare_fb);
 > > > -- =
 
 > > > 2.25.1
