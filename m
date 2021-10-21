@@ -2,85 +2,73 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9CE1C434039
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 Oct 2021 23:11:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E095243603F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Oct 2021 13:29:13 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 07BAD607C3
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 Oct 2021 21:11:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7BA6960C15
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Oct 2021 11:29:11 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 905BA60902; Tue, 19 Oct 2021 21:11:47 +0000 (UTC)
+	id CEC0960EA6; Thu, 21 Oct 2021 11:29:10 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8BEE2606BB;
-	Tue, 19 Oct 2021 21:11:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1E56E60AEB;
+	Thu, 21 Oct 2021 11:29:07 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id BF5766068A
- for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Oct 2021 21:11:42 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id A0AB760836
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 21 Oct 2021 11:29:05 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id A77E1606BB; Tue, 19 Oct 2021 21:11:42 +0000 (UTC)
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
- [209.85.208.49])
- by lists.linaro.org (Postfix) with ESMTPS id 9A4466068A
- for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Oct 2021 21:11:40 +0000 (UTC)
-Received: by mail-ed1-f49.google.com with SMTP id w19so18029309edd.2
- for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Oct 2021 14:11:40 -0700 (PDT)
+ id 9384060AEB; Thu, 21 Oct 2021 11:29:05 +0000 (UTC)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+ [209.85.221.42])
+ by lists.linaro.org (Postfix) with ESMTPS id 8B61160836
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 21 Oct 2021 11:29:03 +0000 (UTC)
+Received: by mail-wr1-f42.google.com with SMTP id o20so303665wro.3
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 21 Oct 2021 04:29:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:mail-followup-to:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to; bh=OwyRLUcszsyadBr824dsTniinvYZj7Tk0bJGgvItSRM=;
- b=UuFOxeYnA6bmCHsx6C3eM8RhW7dy8MiborwVIsDzXcWw30k69JKWDiVtNm6tzfQYNS
- jKiqu/iSWMz34Bs26vA6cuq5v9Mmweone0oANMssKmhBtWARTGXALWfHR+h8jbZ8pvcy
- 0krFAiUyPTdfBf/P4H/lPhWeu8aOt+4rtcYRs=
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=JwVQwN9/gn7CpBFk2zlaKtJsw/c4l/Vxfk//DWl20Kw=;
+ b=g1IXTAt2Sbj3Ocx5s6Gbrz/DhNbque9h9mzTj2GWa7phvsFWFdnjOZcxyq/0nKzoy7
+ i06OqRlnUVhqinhnf1CeXShdfB+WiRayuOxXA/1gnEwkiex6MT5L7kCy1JhFT0zhLExp
+ HN1MtCb9tWlmo+CGV46CIUzm3X3L4AlH2/UqA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id
- :mail-followup-to:references:mime-version:content-disposition
- :content-transfer-encoding:in-reply-to;
- bh=OwyRLUcszsyadBr824dsTniinvYZj7Tk0bJGgvItSRM=;
- b=UOlzUIx+1dPeWPteMs2nA+Gkg2LT8LXgDRPoZLRwQeOFh95g+7gpLvJvsc7JkY5pxQ
- uWucT298eXXxlsprrIJFZH+Vd2NqroJ1XItIlpQXkCsaL8QjDyGdHJhJBcZH037ikGsL
- pzIRMXd7rdtkH7U7qi8S7BbVbmwf/YhiIbpBoiE5EIzfH6tGWR2lc1SLxjd/kgBodMo5
- 6dyXfPz3cgA2ljfUBBWjc3EcNplCSAQVtuqLJ7KjlrH7LCBp/KsnyfeAsQDGnv2YYY6D
- 0oFDNtgeKnt02LU4i0NrGfihahDKjrRCTAC2szxym3ijCKAJ0jxtzexzEywAhb6ptLNf
- Xh2Q==
-X-Gm-Message-State: AOAM531YOyGRtFoxN3W7Sx0MOvdI4X+qcmeh7PWN1F52bq0G233r/PsS
- YzezJ0MVUhIVVDH/zZaZ2P3xcw==
-X-Google-Smtp-Source: ABdhPJxVcAFeCcFJ0BV5iO1FeaZa+XJFmc7PEYU7imdaPNyCQNJYbrUDecQv4qxDFiRydF4XQvCUaw==
-X-Received: by 2002:a05:6402:2787:: with SMTP id
- b7mr56873542ede.159.1634677899626; 
- Tue, 19 Oct 2021 14:11:39 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=JwVQwN9/gn7CpBFk2zlaKtJsw/c4l/Vxfk//DWl20Kw=;
+ b=B4EnhSDrSNQlBJPQ4X1z9nY7RdD1rR6kuFHfjQdGlJJlz335kOKU5HjoLPZTD5IIOt
+ 1h0Ds6ebj7ziNz10Mmyp6KIxyGYA60onZ7P13HXWswibh89sJ2xg5Kpol5CExZpL8m0T
+ MNZSW8TAhXQYMsuAsMnagnTQcLgF6jrBKcqsSYnrRfClcOiSwK7xojQgy2dl7WJfhdBB
+ C8+zM5RPZ6BpDSLkOxm9LfyX5mgm6HJk320u1RVKcPz9h5ZZMlOMnV97Q1ZHwwpq890h
+ eMFx0Z5OpWbkqT6nms9BEiP1a/Rz+9nHeW7LcO4XhHqrSl9FaB3h0L52m//0gq/nY9GD
+ K2HA==
+X-Gm-Message-State: AOAM533kBnZEY44nnZ/tps62P6r/rz5rO/gzuuYvphc/x/+mx15ZP0ea
+ MQvYuTyUSRUDv77gcTXavnR8Qg==
+X-Google-Smtp-Source: ABdhPJw0a/W9DjJ3g7NpCHaGmpBUykzh9wqe4oFQGoGy33wM0/oJepxE6tvHrEFlDAo2+HgkvkEAkg==
+X-Received: by 2002:adf:c78d:: with SMTP id l13mr6330185wrg.134.1634815742582; 
+ Thu, 21 Oct 2021 04:29:02 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id q14sm92905edj.42.2021.10.19.14.11.38
+ by smtp.gmail.com with ESMTPSA id k10sm7617128wmr.32.2021.10.21.04.29.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Oct 2021 14:11:39 -0700 (PDT)
-Date: Tue, 19 Oct 2021 23:11:37 +0200
+ Thu, 21 Oct 2021 04:29:02 -0700 (PDT)
+Date: Thu, 21 Oct 2021 13:29:00 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YW80iakRm5jWjIUp@phenom.ffwll.local>
-Mail-Followup-To: Christian =?iso-8859-1?Q?K=F6nig?=
- <ckoenig.leichtzumerken@gmail.com>, 
- guangming.cao@mediatek.com, Sumit Semwal <sumit.semwal@linaro.org>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <dri-devel@lists.freedesktop.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- open list <linux-kernel@vger.kernel.org>,
- "moderated list:ARM/Mediatek SoC support"
- <linux-arm-kernel@lists.infradead.org>, 
- "moderated list:ARM/Mediatek SoC support" <linux-mediatek@lists.infradead.org>,
- wsd_upstream@mediatek.com
-References: <20211019122345.160555-1-guangming.cao@mediatek.com>
- <YW686sIZie4xRUQO@phenom.ffwll.local>
- <8cca7188-6484-d3a5-2b87-400f6500e742@gmail.com>
+To: Felix Kuehling <felix.kuehling@amd.com>
+Message-ID: <YXFO/Dy1iH3q9snu@phenom.ffwll.local>
+References: <20211005113742.1101-1-christian.koenig@amd.com>
+ <20211005113742.1101-13-christian.koenig@amd.com>
+ <YWboMfLOIjl1l7tF@phenom.ffwll.local>
+ <a0a926a7-13d0-b996-5f32-36aa6d74165e@gmail.com>
+ <c18a4c91-93b4-79ed-0907-84adb29761d8@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <8cca7188-6484-d3a5-2b87-400f6500e742@gmail.com>
+In-Reply-To: <c18a4c91-93b4-79ed-0907-84adb29761d8@amd.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH] dma-buf: add attachments empty check
- for dma_buf_release
+Subject: Re: [Linaro-mm-sig] [PATCH 12/28] drm/amdgpu: use new iterator in
+ amdgpu_ttm_bo_eviction_valuable
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -93,135 +81,105 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: guangming.cao@mediatek.com, wsd_upstream@mediatek.com,
- open list <linux-kernel@vger.kernel.org>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <dri-devel@lists.freedesktop.org>,
- "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
- "moderated list:ARM/Mediatek SoC support" <linux-mediatek@lists.infradead.org>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- "moderated list:ARM/Mediatek SoC support"
- <linux-arm-kernel@lists.infradead.org>,
- "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+Cc: tvrtko.ursulin@linux.intel.com, intel-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+ Daniel Vetter <daniel@ffwll.ch>, linux-media@vger.kernel.org
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Tue, Oct 19, 2021 at 05:37:27PM +0200, Christian K=F6nig wrote:
+On Tue, Oct 19, 2021 at 12:30:40PM -0400, Felix Kuehling wrote:
+> Am 2021-10-19 um 7:36 a.m. schrieb Christian K=F6nig:
+> > Am 13.10.21 um 16:07 schrieb Daniel Vetter:
+> >> On Tue, Oct 05, 2021 at 01:37:26PM +0200, Christian K=F6nig wrote:
+> >>> Simplifying the code a bit.
+> >>>
+> >>> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+> >>> ---
+> >>> =A0 drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c | 14 ++++----------
+> >>> =A0 1 file changed, 4 insertions(+), 10 deletions(-)
+> >>>
+> >>> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> >>> b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> >>> index e8d70b6e6737..722e3c9e8882 100644
+> >>> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> >>> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> >>> @@ -1345,10 +1345,9 @@ static bool
+> >>> amdgpu_ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
+> >>> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0 const struct ttm_place *place)
+> >>> =A0 {
+> >>> =A0=A0=A0=A0=A0 unsigned long num_pages =3D bo->resource->num_pages;
+> >>> +=A0=A0=A0 struct dma_resv_iter resv_cursor;
+> >>> =A0=A0=A0=A0=A0 struct amdgpu_res_cursor cursor;
+> >>> -=A0=A0=A0 struct dma_resv_list *flist;
+> >>> =A0=A0=A0=A0=A0 struct dma_fence *f;
+> >>> -=A0=A0=A0 int i;
+> >>> =A0 =A0=A0=A0=A0=A0 /* Swapout? */
+> >>> =A0=A0=A0=A0=A0 if (bo->resource->mem_type =3D=3D TTM_PL_SYSTEM)
+> >>> @@ -1362,14 +1361,9 @@ static bool
+> >>> amdgpu_ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
+> >>> =A0=A0=A0=A0=A0=A0 * If true, then return false as any KFD process ne=
+eds all its
+> >>> BOs to
+> >>> =A0=A0=A0=A0=A0=A0 * be resident to run successfully
+> >>> =A0=A0=A0=A0=A0=A0 */
+> >>> -=A0=A0=A0 flist =3D dma_resv_shared_list(bo->base.resv);
+> >>> -=A0=A0=A0 if (flist) {
+> >>> -=A0=A0=A0=A0=A0=A0=A0 for (i =3D 0; i < flist->shared_count; ++i) {
+> >>> -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 f =3D rcu_dereference_protected(fl=
+ist->shared[i],
+> >>> -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 dma_resv_held(bo->base=
+.resv));
+> >>> -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (amdkfd_fence_check_mm(f, curre=
+nt->mm))
+> >>> -=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 return false;
+> >>> -=A0=A0=A0=A0=A0=A0=A0 }
+> >>> +=A0=A0=A0 dma_resv_for_each_fence(&resv_cursor, bo->base.resv, true,=
+ f) {
+> >> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0=A0=A0 ^false?
+> >>
+> >> At least I'm not seeing the code look at the exclusive fence here.
+> >
+> > Yes, but that's correct. We need to look at all potential fences.
+> =
+
+> amdkfd_fence_check_mm is only meaningful for KFD eviction fences, and
+> they are always added as shared fences. I think setting all_fences =3D
+> false would return only the exclusive fence.
+
+Hm yeah I got that wrong, which puts my entire review a bit in question
+:-)
+
+Anyway on the patch: Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+
+> =
+
+> Regards,
+> =A0 Felix
 > =
 
 > =
 
-> Am 19.10.21 um 14:41 schrieb Daniel Vetter:
-> > On Tue, Oct 19, 2021 at 08:23:45PM +0800, guangming.cao@mediatek.com wr=
-ote:
-> > > From: Guangming Cao <Guangming.Cao@mediatek.com>
-> > > =
-
-> > > Since there is no mandatory inspection for attachments in dma_buf_rel=
-ease.
-> > > There will be a case that dma_buf already released but attachment is =
-still
-> > > in use, which can points to the dmabuf, and it maybe cause
-> > > some unexpected issues.
-> > > =
-
-> > > With IOMMU, when this cases occurs, there will have IOMMU address
-> > > translation fault(s) followed by this warning,
-> > > I think it's useful for dma devices to debug issue.
-> > > =
-
-> > > Signed-off-by: Guangming Cao <Guangming.Cao@mediatek.com>
-> > This feels a lot like hand-rolling kobject debugging. If you want to do
-> > this then I think adding kobject debug support to
-> > dma_buf/dma_buf_attachment would be better than hand-rolling something
-> > bespoke here.
-> =
-
-> Well I would call that overkill.
-
-I think if done right the object debug stuff should be able to give you a
-backtrace. Which might be useful if you have a dma-buf heaps design where
-you really have no clue why a buffer was allocated/attached without some
-hints.
-
-> > Also on the patch itself: You don't need the trylock. For correctly
-> > working code non one else can get at the dma-buf, so no locking needed =
-to
-> > iterate through the attachment list. For incorrect code the kernel will=
- be
-> > on fire pretty soon anyway, trying to do locking won't help :-) And
-> > without the trylock we can catch more bugs (e.g. if you also forgot to
-> > unlock and not just forgot to detach).
-> =
-
-> You also don't need the WARN(!list_empty...) because a few line below we
-> already have a "WARN_ON(!list_empty(&dmabuf->attachments));".
-
-Yeah this patch here alone isn't really that useful I think. Maybe we
-could add the dmabuf->exp_name or so to that warning, but otherwise the
-info printed here isn't all that useful for debugging. Grabbing a
-backtrace of the allocator or attacher otoh should fairly immedialy point
-at the buggy code.
--Daniel
-
-> =
-
-> Christian.
-> =
-
-> > -Daniel
-> > =
-
-> > > ---
-> > >   drivers/dma-buf/dma-buf.c | 23 +++++++++++++++++++++++
-> > >   1 file changed, 23 insertions(+)
-> > > =
-
-> > > diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-> > > index 511fe0d217a0..672404857d6a 100644
-> > > --- a/drivers/dma-buf/dma-buf.c
-> > > +++ b/drivers/dma-buf/dma-buf.c
-> > > @@ -74,6 +74,29 @@ static void dma_buf_release(struct dentry *dentry)
-> > >   	 */
-> > >   	BUG_ON(dmabuf->cb_shared.active || dmabuf->cb_excl.active);
-> > > +	/* attachment check */
-> > > +	if (dma_resv_trylock(dmabuf->resv) && WARN(!list_empty(&dmabuf->att=
-achments),
-> > > +	    "%s err, inode:%08lu size:%08zu name:%s exp_name:%s flags:0x%08=
-x mode:0x%08x, %s\n",
-> > > +	    __func__, file_inode(dmabuf->file)->i_ino, dmabuf->size,
-> > > +	    dmabuf->name, dmabuf->exp_name,
-> > > +	    dmabuf->file->f_flags, dmabuf->file->f_mode,
-> > > +	    "Release dmabuf before detach all attachments, dump attach:\n")=
-) {
-> > > +		int attach_cnt =3D 0;
-> > > +		dma_addr_t dma_addr;
-> > > +		struct dma_buf_attachment *attach_obj;
-> > > +		/* dump all attachment info */
-> > > +		list_for_each_entry(attach_obj, &dmabuf->attachments, node) {
-> > > +			dma_addr =3D (dma_addr_t)0;
-> > > +			if (attach_obj->sgt)
-> > > +				dma_addr =3D sg_dma_address(attach_obj->sgt->sgl);
-> > > +			pr_err("attach[%d]: dev:%s dma_addr:0x%-12lx\n",
-> > > +			       attach_cnt, dev_name(attach_obj->dev), dma_addr);
-> > > +			attach_cnt++;
-> > > +		}
-> > > +		pr_err("Total %d devices attached\n\n", attach_cnt);
-> > > +		dma_resv_unlock(dmabuf->resv);
-> > > +	}
-> > > +
-> > >   	dmabuf->ops->release(dmabuf);
-> > >   	if (dmabuf->resv =3D=3D (struct dma_resv *)&dmabuf[1])
-> > > -- =
-
-> > > 2.17.1
-> > > =
-
-> =
-
+> >
+> > It's a design problem in KFD if you ask me, but that is a completely
+> > different topic.
+> >
+> > Christian.
+> >
+> >> -Daniel
+> >>
+> >>> +=A0=A0=A0=A0=A0=A0=A0 if (amdkfd_fence_check_mm(f, current->mm))
+> >>> +=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 return false;
+> >>> =A0=A0=A0=A0=A0 }
+> >>> =A0 =A0=A0=A0=A0=A0 switch (bo->resource->mem_type) {
+> >>> --=A0
+> >>> 2.25.1
+> >>>
+> >
 
 -- =
 
