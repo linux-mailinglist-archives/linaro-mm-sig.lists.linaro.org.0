@@ -2,72 +2,76 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25D6C436113
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Oct 2021 14:08:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3A7594377D0
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 22 Oct 2021 15:17:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6E0E760C3A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Oct 2021 12:08:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5BA2560BEC
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 22 Oct 2021 13:17:27 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 3350F60C29; Thu, 21 Oct 2021 12:08:30 +0000 (UTC)
+	id 4B20060BCA; Fri, 22 Oct 2021 13:17:26 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8C9C860A90;
-	Thu, 21 Oct 2021 12:08:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E1D8C60BCA;
+	Fri, 22 Oct 2021 13:17:23 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 9ED726066C
- for <linaro-mm-sig@lists.linaro.org>; Thu, 21 Oct 2021 12:08:25 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 71D9660BC0
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 22 Oct 2021 13:17:22 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 9AED660A90; Thu, 21 Oct 2021 12:08:25 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
- [209.85.221.48])
- by lists.linaro.org (Postfix) with ESMTPS id 943CE6066C
- for <linaro-mm-sig@lists.linaro.org>; Thu, 21 Oct 2021 12:08:23 +0000 (UTC)
-Received: by mail-wr1-f48.google.com with SMTP id m22so846433wrb.0
- for <linaro-mm-sig@lists.linaro.org>; Thu, 21 Oct 2021 05:08:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=djJOEt6biCNzIxqdTk62h+b491lKskY6U3yacyivLEw=;
- b=c5tSrGe3CHMZl7DvRDR4efrUSRgSfTbn1NK8z9SBLd2TeMvrHf674NXN87YTkG7zxV
- tsOHF3eTlZjBz7DKbYflzdjTdn0rT3RXAvFdmrwAkFPoH1tLHYp7sx1pDRAsTusXRq1a
- 4ndd2MIqdHYVqputO76fGvZJPD3oVqZopuOOw=
+ id 667C460BCA; Fri, 22 Oct 2021 13:17:22 +0000 (UTC)
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
+ [209.85.221.49])
+ by lists.linaro.org (Postfix) with ESMTPS id 5CF1460BC0
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 22 Oct 2021 13:17:20 +0000 (UTC)
+Received: by mail-wr1-f49.google.com with SMTP id m22so4115993wrb.0
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 22 Oct 2021 06:17:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-transfer-encoding:content-language;
+ bh=xzYyGlNbpTpvd6sNJdRWzkh7BYc81KJzN7aG/37+xnw=;
+ b=Wb0IMU0euio0jP04+Ag5kuxoh1MQufsfd2QRp3sI+Az4W30cmQtw3AWAzQ9kufl2u6
+ T86AdjyQRsKxL0Rcub27Y0pvseoX06QIabpUUcugftBPPSM1+G3HKXi3jxAVB3sxQlFt
+ W1vsR38o56VZW/+5lP81/Wf3mpI513KMR752iV2YyVphELCzOlCQE9+Aj3M51BR8tLed
+ xv4dgzu/VuEVzqrD2vZqfgrnRnCEfuCraK+xC+IQNEFburrJFRj1zZI7w16LzDJXKMxl
+ WnLkXpRDcn7OfkNHVwIMTI/9CfkObryOC6dmedqohvuRhKWAuH+ZnLdOVk+A0Gz8jMnc
+ FMUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=djJOEt6biCNzIxqdTk62h+b491lKskY6U3yacyivLEw=;
- b=GN7w8ntQTRcJFWWMYfvpdWDhyrZL2MASn9JyXncbxEfw8jjQsRUbHeeoL3W9wZ8Hlm
- TohiI4MC554NPkpyO5MZGO5PyX8MJT4wNPKseEAuj7OITliOAxe2PmnbNY3R265ojMew
- rF7c4Ael76Dwa/sLSZGXBsSSwmdWdjMbpmZQuc6VfkHk23Zv97l9cXrsrGlUeASfvHhu
- /nK6vLL0AhUaGghqbNXKD0lT5gj46ha2bYctlo0V8TFz6i0ZKq8coLE/WQtdzk0zE71F
- YVIeS3QLAjTVxl9LS5UOy9fxyAtAr8p9ts6soPTDU1jB7rcs+8A/ay1ONEz2Hjtr7UCC
- gLBA==
-X-Gm-Message-State: AOAM530MOYeGxPD04sNNltY87bosI1SEag5zD8DVBWz+R76rs7zSqD08
- 4Om0/UuK1LSVCa98U2hB8ztDvQ==
-X-Google-Smtp-Source: ABdhPJwk2ijMk01v1uJB5E7SqZ7tASKWbjKG/5T1dTuTmqKek02XQ4pRXTflPK6lzGUhXJQWb663yg==
-X-Received: by 2002:a5d:64c5:: with SMTP id f5mr6635604wri.321.1634818102689; 
- Thu, 21 Oct 2021 05:08:22 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id g33sm4267021wmp.45.2021.10.21.05.08.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Oct 2021 05:08:21 -0700 (PDT)
-Date: Thu, 21 Oct 2021 14:08:19 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YXFYM/15tbTF2bi2@phenom.ffwll.local>
-References: <20211015115720.79958-1-maarten.lankhorst@linux.intel.com>
- <20211015115720.79958-3-maarten.lankhorst@linux.intel.com>
- <ebf0714c-2f49-a0ad-1861-16394ade468d@amd.com>
- <9b7e43bb-e175-0aff-2cc1-cc10236fe8e5@linux.intel.com>
- <06fa85f5-3664-4da4-bde8-6d7d2f199251@gmail.com>
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-transfer-encoding
+ :content-language;
+ bh=xzYyGlNbpTpvd6sNJdRWzkh7BYc81KJzN7aG/37+xnw=;
+ b=qbYkVrrZHkqfjp5BpPfaueOfvqYPEO7s9Io1PJ5VuJau70h3UggdUOa/cm1C7R7Ka0
+ eGv4B1SWIHLEqcfytT61Kt/H4G+wFVOAVdZfB6JLz2XFGkictqNnFuhcO+3rjHdMXnDG
+ SlarVKwHK/0n4/hxLK9BCwLCEGYEpMHsMk/GOqoKVC4LisYXhHPFA9NswjpJw4EK2rTg
+ q6P0Nco+/BxqFycg+VY6qESsSaQnQbtlur12Wvb5yBAfhHm0UiYLrnu2IwUnI9l2AulE
+ fC6UVsOn9+gy5EixL+bESfK3OIetj4Yu2Xbu532CJY2hbE9WQrjpRRdtV4ccCtUnFpL0
+ NanQ==
+X-Gm-Message-State: AOAM5311CTIV6HbrpmZxpEvhPZpQHOlMGCauWGjFAzifzQjgkgvw9wyh
+ Z+SGCmJThi9sLf4HUmyu7bo=
+X-Google-Smtp-Source: ABdhPJz1bcP9pVdKxvZWKI3UICXsg+Jou2mv8pwgCLGrQkQRbz9ygCJr3KFv1jOtT9CfdADeNSXIRA==
+X-Received: by 2002:adf:ab1c:: with SMTP id q28mr15823427wrc.39.1634908639344; 
+ Fri, 22 Oct 2021 06:17:19 -0700 (PDT)
+Received: from ?IPv6:2a02:908:1252:fb60:a39f:d981:e7cb:e6dc?
+ ([2a02:908:1252:fb60:a39f:d981:e7cb:e6dc])
+ by smtp.gmail.com with ESMTPSA id e2sm3047986wrt.8.2021.10.22.06.17.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 22 Oct 2021 06:17:18 -0700 (PDT)
+To: Daniel Vetter <daniel@ffwll.ch>
+References: <20211005113742.1101-1-christian.koenig@amd.com>
+ <20211005113742.1101-27-christian.koenig@amd.com>
+ <YWbtV2ZVHg7n1xpm@phenom.ffwll.local>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <cca39a70-5820-18e2-8bda-a4a0d7ad2c31@gmail.com>
+Date: Fri, 22 Oct 2021 15:17:17 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.13.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <06fa85f5-3664-4da4-bde8-6d7d2f199251@gmail.com>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
+In-Reply-To: <YWbtV2ZVHg7n1xpm@phenom.ffwll.local>
+Content-Language: en-US
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 2/2] dma-buf: Fix dma_resv_test_signaled.
+Subject: Re: [Linaro-mm-sig] [PATCH 26/28] drm/nouveau: use the new
+ interator in nv50_wndw_prepare_fb
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,80 +84,51 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: intel-gfx@lists.freedesktop.org,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+Cc: linaro-mm-sig@lists.linaro.org, tvrtko.ursulin@linux.intel.com,
+ intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
  linux-media@vger.kernel.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Fri, Oct 15, 2021 at 02:56:59PM +0200, Christian K=F6nig wrote:
-> =
-
-> =
-
-> Am 15.10.21 um 14:52 schrieb Maarten Lankhorst:
-> > Op 15-10-2021 om 14:07 schreef Christian K=F6nig:
-> > > Am 15.10.21 um 13:57 schrieb Maarten Lankhorst:
-> > > > Commit 7fa828cb9265 ("dma-buf: use new iterator in dma_resv_test_si=
-gnaled")
-> > > > accidentally forgot to test whether the dma-buf is actually signale=
-d, breaking
-> > > > pretty much everything depending on it.
-> > > NAK, the dma_resv_for_each_fence_unlocked() returns only unsignaled f=
-ences. So the code is correct as it is.
-> > That seems like it might cause some unexpected behavior when that funct=
-ion is called with one of the fence locks held, if it calls dma_fence_signa=
-l().
-> > =
-
-> > Could it be changed to only test the signaled bit, in which case this p=
-atch would still be useful?
-> =
-
-> That's exactly what I suggested as well, but Daniel was against that beca=
-use
-> of concerns around barriers.
-
-I don't want open-coded bitmask tests, because the current code we have in
-dma-fence.c is missing barriers, and that doesn't get better if we spread
-that all around. But if you want this then wrap it in some static inline
-in dma-fence.h or so, that's fine. Just not open-coded outside of these
-files, like i915-gem code does a lot (which imo is just plain a disaster).
-
-> > Or at least add some lockdep annotations, that fence->lock might be tak=
-en. So any hangs would at least be easy to spot with lockdep.
-> =
-
-> That should be trivial doable.
-
-might_lock is trivial to add, but it's more complicated. The spinlock is
-provided by the fence code, which means there's lots of different lockdep
-classes. A might_lock on fence->lock is better than nothing, but maybe not
-good enough.
-
-What we might need are a few more pieces:
-- a fake dma-fence spinlock lockdep key, maybe call it dma_fence_lock_key
-  or so.
-- in dma_fence_init we lock dma_fence_lock_key, and then might_lock the
-  actual spinlock passed as an argument. This establishes dependencies
-  from that fake lock to all real fence spinlocks
-- anywhere we need a might lock we take dma_fence_lock_key instead
-
-The potential issue here is that this might result in lockdep splats in
-cases where fences somehow naturally nest (maybe drm/sched job fence vs hw
-fence). So perhaps too much.
--Daniel
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+QW0gMTMuMTAuMjEgdW0gMTY6Mjkgc2NocmllYiBEYW5pZWwgVmV0dGVyOgo+IE9uIFR1ZSwgT2N0
+IDA1LCAyMDIxIGF0IDAxOjM3OjQwUE0gKzAyMDAsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6Cj4+
+IE1ha2VzIHRoZSBoYW5kbGluZyBhIGJpdCBtb3JlIGNvbXBsZXgsIGJ1dCBhdm9pZHMgdGhlIHVz
+ZSBvZgo+PiBkbWFfcmVzdl9nZXRfZXhjbF91bmxvY2tlZCgpLgo+Pgo+PiBTaWduZWQtb2ZmLWJ5
+OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+Cj4+IC0tLQo+PiAg
+IGRyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1L2Rpc3BudjUwL3duZHcuYyB8IDEwICsrKysrKysrKy0K
+Pj4gICAxIGZpbGUgY2hhbmdlZCwgOSBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCj4+Cj4+
+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC93bmR3LmMgYi9k
+cml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1MC93bmR3LmMKPj4gaW5kZXggOGQwNDhiYWNk
+NmYwLi4zMDcxMmE2ODFlMmEgMTAwNjQ0Cj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9ub3V2ZWF1
+L2Rpc3BudjUwL3duZHcuYwo+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9kaXNwbnY1
+MC93bmR3LmMKPj4gQEAgLTUzOSw2ICs1MzksOCBAQCBudjUwX3duZHdfcHJlcGFyZV9mYihzdHJ1
+Y3QgZHJtX3BsYW5lICpwbGFuZSwgc3RydWN0IGRybV9wbGFuZV9zdGF0ZSAqc3RhdGUpCj4+ICAg
+CXN0cnVjdCBub3V2ZWF1X2JvICpudmJvOwo+PiAgIAlzdHJ1Y3QgbnY1MF9oZWFkX2F0b20gKmFz
+eWg7Cj4+ICAgCXN0cnVjdCBudjUwX3duZHdfY3R4ZG1hICpjdHhkbWE7Cj4+ICsJc3RydWN0IGRt
+YV9yZXN2X2l0ZXIgY3Vyc29yOwo+PiArCXN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlOwo+PiAgIAlp
+bnQgcmV0Owo+PiAgIAo+PiAgIAlOVl9BVE9NSUMoZHJtLCAiJXMgcHJlcGFyZTogJXBcbiIsIHBs
+YW5lLT5uYW1lLCBmYik7Cj4+IEBAIC01NjEsNyArNTYzLDEzIEBAIG52NTBfd25kd19wcmVwYXJl
+X2ZiKHN0cnVjdCBkcm1fcGxhbmUgKnBsYW5lLCBzdHJ1Y3QgZHJtX3BsYW5lX3N0YXRlICpzdGF0
+ZSkKPj4gICAJCQlhc3l3LT5pbWFnZS5oYW5kbGVbMF0gPSBjdHhkbWEtPm9iamVjdC5oYW5kbGU7
+Cj4+ICAgCX0KPj4gICAKPj4gLQlhc3l3LT5zdGF0ZS5mZW5jZSA9IGRtYV9yZXN2X2dldF9leGNs
+X3VubG9ja2VkKG52Ym8tPmJvLmJhc2UucmVzdik7Cj4+ICsJZG1hX3Jlc3ZfaXRlcl9iZWdpbigm
+Y3Vyc29yLCBudmJvLT5iby5iYXNlLnJlc3YsIGZhbHNlKTsKPj4gKwlkbWFfcmVzdl9mb3JfZWFj
+aF9mZW5jZV91bmxvY2tlZCgmY3Vyc29yLCBmZW5jZSkgewo+PiArCQkvKiBUT0RPOiBXZSBvbmx5
+IHVzZSB0aGUgZmlyc3Qgd3JpdGVyIGhlcmUgKi8KPiBTYW1lIHRoaW5nIGFzIHdpdGggdGhlIGF0
+b21pYyBjb3JlIGhlbHBlci4gVGhpcyBpcyBhY3R1YWxseSBicm9rZW4sCj4gYmVjYXVzZSBmb3Ig
+YXRvbWljIHdlIHJlYWxseSBkbyBfbm90XyB3YW50IHRvIHdhaXQgZm9yIGFueSBzaGFyZWQgZmVu
+Y2VzLgo+IFdoaWNoIHRoaXMgd2lsbCBkbywgaWYgdGhlcmUncyBubyBleGNsdXNpdmUgZmVuY2Ug
+YXR0YWNoZWQuCj4KPiBTbyB1cGdyYWRpbmcgbXkgZ2VuZXJhbCBjb25jZXJuIG9uIHRoaXMgYW5k
+IHRoZSBhdG9taWMgaGVscGVyIHBhdGNoIHRvIGEKPiByZWplY3QsIHNpbmNlIEkgdGhpbmsgaXQn
+cyBicm9rZW4uCgpTaW5jZSB3ZSBzaW1wbHkgaGFkIGEgbWlzdW5kZXJzdGFuZGluZyB3aXRoIHRo
+YXQgY291bGQgSSBnZXQgYW4gcmIgZm9yIAp0aGF0IG5vdz8KClRoYW5rcywKQ2hyaXN0aWFuLgoK
+PiAtRGFuaWVsCj4KPj4gKwkJYXN5dy0+c3RhdGUuZmVuY2UgPSBkbWFfZmVuY2VfZ2V0KGZlbmNl
+KTsKPj4gKwkJYnJlYWs7Cj4+ICsJfQo+PiArCWRtYV9yZXN2X2l0ZXJfZW5kKCZjdXJzb3IpOwo+
+PiAgIAlhc3l3LT5pbWFnZS5vZmZzZXRbMF0gPSBudmJvLT5vZmZzZXQ7Cj4+ICAgCj4+ICAgCWlm
+ICh3bmR3LT5mdW5jLT5wcmVwYXJlKSB7Cj4+IC0tIAo+PiAyLjI1LjEKPj4KCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGlu
+ZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFy
+by5vcmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
