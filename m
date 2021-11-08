@@ -2,50 +2,50 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F6A144A0CC
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Nov 2021 02:03:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D1A9144A10D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Nov 2021 02:04:37 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 55F9F60B3E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Nov 2021 01:03:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C251B60B8E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Nov 2021 01:04:36 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 4C1A560B69; Tue,  9 Nov 2021 01:03:29 +0000 (UTC)
+	id 387E260BCA; Tue,  9 Nov 2021 01:04:36 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DF1FB6070F;
-	Tue,  9 Nov 2021 01:03:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3B573606E1;
+	Tue,  9 Nov 2021 01:04:33 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 3B2FB60B65
- for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Nov 2021 01:03:23 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 8D6EE6037C
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Nov 2021 01:04:31 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 115D160B04; Tue,  9 Nov 2021 01:03:22 +0000 (UTC)
+ id 8B2B5606E1; Tue,  9 Nov 2021 01:04:31 +0000 (UTC)
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by lists.linaro.org (Postfix) with ESMTPS id 17FFC60B59
- for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Nov 2021 01:03:19 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 2018061452;
- Tue,  9 Nov 2021 01:03:17 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTPS id 70BB96037C
+ for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Nov 2021 01:04:29 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 062FF61A65;
+ Tue,  9 Nov 2021 01:04:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1636419798;
- bh=xbBnIUX/zyaJx7lBhF4iyaKWUIKp0gzgpFILNaZqnwY=;
+ s=k20201202; t=1636419867;
+ bh=EjAYMVikh+ar3WB5M1uox3DB/K28A+dIc56LbYZC5DM=;
  h=From:To:Cc:Subject:Date:From;
- b=mmy2IAwcmn0rf43MkV4cKBBHvUMY2P73K2MdK3BxGlQ3BiJnEjyTa8NLqPs3mPgDf
- s5sOhANzHx9H5GqH9bSySZU7bljZRSp9q5zX12g3X/goF2rRA1Q1MXjctYMJlshq1d
- xiqtRe/4cJw3JKwxyOQR4FAIvDpkNX6jgsvNALFZZR+VMWG9H1ATfT7eZTPxmjaXQW
- 3fVbyGmZkidGD5XvN1wYmbDmLsSoYjMGyWpHraq2GFqDUxL7eGE6nZ+XOAT/5fVB4L
- Y3xz9PYFqAr1VvhCMkP4FgnUFbiWAHKM4it9fvgasi94ChZc3xG/TnGweVtohsAcwT
- UjjyHyVqRRODg==
+ b=HOmHWeZwe/pmGdxGA/dPvGuYezpwn9XKxb6tBdJXWRLTX3Jw/ShH4W2Kwf1ps7Nn1
+ CWsPBn4nyEtCjOgPM7C9/QJs33PrM9Yx7LIw4AafS1tx/mXMP0QFA7sgJqYHqh6pjC
+ N+RAHYNzNo1Jj3EE+c4EDZpJ7jjttZIFNFaosyGHKN98KBFxAqq8MPvL1/l24AyI3F
+ y9d3dSS6AstJ26O2Fktx7cOPAFM7XeCmZ1XwqUjiOO4Urf1Brd0jIncZWzk/poQe7M
+ +uHlOOxDdKqMgRhIhej8tdr6ltUOnhxonICz0BImogAb1EFcxb5zD8Llfyp5oBNYL3
+ aROQucGEJwDmA==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Mon,  8 Nov 2021 12:46:51 -0500
-Message-Id: <20211108174832.1189312-1-sashal@kernel.org>
+Date: Mon,  8 Nov 2021 12:48:28 -0500
+Message-Id: <20211108174942.1189927-1-sashal@kernel.org>
 X-Mailer: git-send-email 2.33.0
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.10 001/101] dma-buf: WARN on
- dmabuf release with pending attachments
+Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.4 01/74] dma-buf: WARN on dmabuf
+ release with pending attachments
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -95,7 +95,7 @@ aHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+ClNpZ25lZC1vZmYtYnk6
 IFNhc2hhIExldmluIDxzYXNoYWxAa2VybmVsLm9yZz4KLS0tCiBkcml2ZXJzL2RtYS1idWYvZG1h
 LWJ1Zi5jIHwgMSArCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKykKCmRpZmYgLS1naXQg
 YS9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYwpp
-bmRleCA5MjI0MTZiM2FhY2ViLi45M2U5YmY3MzgyNTk1IDEwMDY0NAotLS0gYS9kcml2ZXJzL2Rt
+bmRleCA3NThkZTBlOWIyZGRjLi4xNmJiYzliYzllNmQxIDEwMDY0NAotLS0gYS9kcml2ZXJzL2Rt
 YS1idWYvZG1hLWJ1Zi5jCisrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMKQEAgLTc5LDYg
 Kzc5LDcgQEAgc3RhdGljIHZvaWQgZG1hX2J1Zl9yZWxlYXNlKHN0cnVjdCBkZW50cnkgKmRlbnRy
 eSkKIAlpZiAoZG1hYnVmLT5yZXN2ID09IChzdHJ1Y3QgZG1hX3Jlc3YgKikmZG1hYnVmWzFdKQog
