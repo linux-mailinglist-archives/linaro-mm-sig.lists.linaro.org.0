@@ -2,135 +2,78 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 562E84503B4
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Nov 2021 12:42:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AEBD5450735
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Nov 2021 15:37:30 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CBCEC60C36
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Nov 2021 11:42:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 42DEF60D3D
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Nov 2021 14:37:28 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 0CB1260BF7; Mon, 15 Nov 2021 11:42:29 +0000 (UTC)
+	id CDE4A60BF7; Mon, 15 Nov 2021 14:37:27 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5C15360A09;
-	Mon, 15 Nov 2021 11:42:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 63C6D60BD4;
+	Mon, 15 Nov 2021 14:37:24 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 4DA23606F5
- for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Nov 2021 11:42:25 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 61CBE605C8
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Nov 2021 14:37:22 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 41E8460A09; Mon, 15 Nov 2021 11:42:25 +0000 (UTC)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2065.outbound.protection.outlook.com [40.107.92.65])
- by lists.linaro.org (Postfix) with ESMTPS id 2727F606F5
- for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Nov 2021 11:42:23 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZYSFfhU+N5Fq39gpw5NCsolRnyvMmfKTA5cWgJx3l903N5tP6BK6x7pUqmtcQZvyCwwzQwonnQGCZqIx/M4qourfwzBBS0SVUSHvvU6Vn4nZRrd/wffjMaX24XwtUxIdQAQntPFWRi0SjIWpG+72E2TIxwcuyY3/5+qkQiF8s3iNnNXmY4zdZ9fx48I5MHFePTx+VAyZvxzedsyfjjAxGaaaPl2uZagHTH9TDFFaAg/rHvH6O2vq0RwQIaMOGxhA8DgCmsj9dMlSloko0iLt+p2s/WUQShbSQrZq13R3POIyU6aCBx32Zz+biTbwpcXQyXxwfQIi+2nIruJQvuvwSw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JkRdepoBhhvZgBl9zd4oG1PeOv+kPWSxKw1ORztFSv4=;
- b=hYGlnailNdl4CzgRcFMK/ZTAFR1Ipev9djYIyqc4j32m6sMsqyx1YxjcAPDo6Rnk3qtB+9sMag1rldkddxzJCBGDOLkgX7hQFl7AFRIQhpXLQsUek5IrCfbd0rGW4HpdbUxyGyRz70XnjFPSTGQFhlz7glYKDPeyHN/X3RtVBfrUG1ywFsVzjD6+I8Uc0O9jbG6Rw5S1/dydWeyovBOPcbUVYt1ZF0z7JDt4Tj90hAElD4cTmc/rfAt3eY3pB6pydnGu+nXJ5bKZIY/U7Wec+TwdXPNGU+ia5E4MN6xuL+kVLPNPa1G6h8qetsVTw5UYOkGtPZCxcR6pUKs0ocJTZg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JkRdepoBhhvZgBl9zd4oG1PeOv+kPWSxKw1ORztFSv4=;
- b=4zNaX2CfJHDxjaHlT7C84/jyXuQUhJVYoDhuLfWp/MO0v73QSPzoDc9EiD6G3taNwfNkwRBOMm5VIiF2wOMmVeJmV2JabQp0VPjTYkXDZL9xbtuoXkdCtQFx1+Fz1GJhOnpgaIMZrSQ+DugqAkbmKW5Jp6o8P3GT/ZDzIFBk4xk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from MWHPR1201MB0192.namprd12.prod.outlook.com
- (2603:10b6:301:5a::14) by MWHPR12MB1837.namprd12.prod.outlook.com
- (2603:10b6:300:113::20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4690.27; Mon, 15 Nov
- 2021 11:42:20 +0000
-Received: from MWHPR1201MB0192.namprd12.prod.outlook.com
- ([fe80::2d02:26e7:a2d0:3769]) by MWHPR1201MB0192.namprd12.prod.outlook.com
- ([fe80::2d02:26e7:a2d0:3769%5]) with mapi id 15.20.4690.027; Mon, 15 Nov 2021
- 11:42:20 +0000
-To: Jianqun Xu <jay.xu@rock-chips.com>, sumit.semwal@linaro.org
-References: <20211113062222.3743909-1-jay.xu@rock-chips.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-Message-ID: <1da5cdf0-ccb8-3740-cf96-794c4d5b2eb4@amd.com>
-Date: Mon, 15 Nov 2021 12:42:13 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
-In-Reply-To: <20211113062222.3743909-1-jay.xu@rock-chips.com>
-Content-Language: en-US
-X-ClientProxiedBy: AS9PR0301CA0041.eurprd03.prod.outlook.com
- (2603:10a6:20b:469::32) To MWHPR1201MB0192.namprd12.prod.outlook.com
- (2603:10b6:301:5a::14)
+ id 5724A60BD4; Mon, 15 Nov 2021 14:37:22 +0000 (UTC)
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com
+ [209.85.208.43])
+ by lists.linaro.org (Postfix) with ESMTPS id 4AA5C605C8
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Nov 2021 14:37:20 +0000 (UTC)
+Received: by mail-ed1-f43.google.com with SMTP id z5so12997697edd.3
+ for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Nov 2021 06:37:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:mail-followup-to:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=XiioWyqrq1D1dF9ZTugSJzsFvT/FPXCXiHcWrTggW1A=;
+ b=FLdgxwJMdDUlwR0XKZUGvkuM2MNDSQ4GskVPXHQWieDno5xyhAkQ/RY6avWmujJ9BR
+ OjFK/wuJ5u0TGea1y4NcILj+0ZBLckYJFooRvADUDIPpG12CBSoYlD1JXYloPbk/zK4c
+ OX1wlFQSE1qbbROjeihgOQJAJ/lfWJLFcbRGw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id
+ :mail-followup-to:references:mime-version:content-disposition
+ :in-reply-to;
+ bh=XiioWyqrq1D1dF9ZTugSJzsFvT/FPXCXiHcWrTggW1A=;
+ b=KRjgePjcRG9I4/T9lw5Ldr1mtgrbScCU6sCxruG1NsBUkKSgJ2LZdr3v3HbraJRffO
+ j+n9m6sKEJIVpAJF3rfJX6bJuhV/PbICDQ9e7/iQYAEMeglZSmOn6OXimufi1Nc/DjGQ
+ LaGVub5xHY2wPUGQZd9M8ToWoixtQhXhREOzxUSrIGVqHsf39131RyoiWD7THHkMyrl5
+ EGpsaZmqeDAbKD/CdxAhP7/j8aWSU6/U5tfzgLJBWLQv5DKNeedu77K6w3WT32SEqAF5
+ 8ykP3aRGOa92dj1hzsAonD1pwvVycaoIKfONznhXezdYJk9nFS5Si+dT0oK6RvpXW3en
+ cbVg==
+X-Gm-Message-State: AOAM531/VSAG6c4shw74lSBpIRjwtU6CmjNfce2Q0HpnrM6FggJUO90j
+ 1udHM2tOO/hAHtPRLmxKSnxHsw==
+X-Google-Smtp-Source: ABdhPJxXT/JTqH/P5/5MlVaHqEvS+WUgUgsUsgOfhK+nTHEXsPIZlCeVRsLARxXY95P+DTZWZPXr6g==
+X-Received: by 2002:aa7:c155:: with SMTP id r21mr21275479edp.124.1636987039311; 
+ Mon, 15 Nov 2021 06:37:19 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id kw10sm6507786ejc.71.2021.11.15.06.37.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Nov 2021 06:37:18 -0800 (PST)
+Date: Mon, 15 Nov 2021 15:37:16 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Paul Cercueil <paul@crapouillou.net>
+Message-ID: <YZJwnPbgCOdeKq6S@phenom.ffwll.local>
+Mail-Followup-To: Paul Cercueil <paul@crapouillou.net>,
+ Jonathan Cameron <jic23@kernel.org>,
+ Michael Hennerich <Michael.Hennerich@analog.com>,
+ linux-iio@vger.kernel.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ linaro-mm-sig@lists.linaro.org,
+ Alexandru Ardelean <ardeleanalex@gmail.com>,
+ linux-media@vger.kernel.org
+References: <20211115141925.60164-1-paul@crapouillou.net>
 MIME-Version: 1.0
-Received: from [IPv6:2a02:908:1252:fb60:bf0c:d52c:6ba0:cfc6]
- (2a02:908:1252:fb60:bf0c:d52c:6ba0:cfc6) by
- AS9PR0301CA0041.eurprd03.prod.outlook.com (2603:10a6:20b:469::32) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4690.26 via Frontend
- Transport; Mon, 15 Nov 2021 11:42:17 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 00ebe1d3-562c-44d3-ab7c-08d9a82cfb38
-X-MS-TrafficTypeDiagnostic: MWHPR12MB1837:
-X-Microsoft-Antispam-PRVS: <MWHPR12MB18370021933B2E90497B3E8C83989@MWHPR12MB1837.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: qnNpT+UDEdrvmTrphgUzQsrIExW/nJQjCEAt6/leQnM/+F75uQ4P/gIEmE2mfi+FLGZoBp+qpesYv6TE414JsgHBjmPsq9wqAxODHs5+tKntVesYVzi2T3a+bor5SPTdHrjOyz4Lv5il0Z00hyIMOsC898lxdXNK3DY8ClRa/X+z05ZLWWI9kbXDjVdrVqmD31Ciy9En6YG1TKIV+epuDLGRKEvYe8NhgoFs6tUkQ/bWmTBdRJgllNrqms9k2nXdSN5hRpvEjPb3R0jF3kat4c9/g+R9ZfNDU0z3Qo2VAfydWQzqA1BIV1A7EDnRTXmW5vnAV79Migw7l8P0CqzM1nBlO5bCjKtHXPj4OXseQUwQWFO5216Sj4yR6FeIQFVrAO7lW3pd3S4bncIRU17nSaQPkQnnNSdXm0OBFoDdrVzhxYO5g7CoHdrAh0S0Y4Q8vQFqy36ujVGByHPPFfX+aaKXQ/BWnlM6tghXuVYUcoYtqlV4AJpRnByfYBQrumA1ouTLedvwpUsQlCItufU36509QJHuQ9oa3NDqXos2SPnUS/F/6HsBJHw63Rq1Jcd0WGmqDrp9wFQaK959C6zotCP8LC+p2pB0gQYgRieAeifspuQuKmSFk46/7OZfmlwmv8i1rhIK65/inlDat2eDtJBEpqk15UW3bMvw1g5dv5Kr9RmOvFfjfRv5uYDkmxM4OcYG/KHnhd59tAKjoVDXcLgv4Z/rf5i8pgCG0D7SWcZI1XNcdbglDuWiigm3ihyx
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MWHPR1201MB0192.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(316002)(7416002)(2616005)(6486002)(8936002)(8676002)(186003)(31686004)(66556008)(66476007)(86362001)(66946007)(83380400001)(31696002)(6666004)(508600001)(38100700002)(5660300002)(2906002)(4326008)(36756003)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VmtQa3NIa1NhVm40N2lmZnBueGVQS3ZuTWpaWm4waU1IQ3kvYlFHSGI1ZllH?=
- =?utf-8?B?ek13MElkY3lWUlVuVWxJUkZPR0tlQ01FV0lCUnJrUWRSejg0WjZJWW5CTFdS?=
- =?utf-8?B?TDVMZTVHNitXaW9taUpweTFaL2pJS1NZbGJacnlDWVNyMFl3MjlkdGd3YTEr?=
- =?utf-8?B?MmRodnF3dnlzd0NKZEtZN1JaVFA2OTBJRGQ1WjZBUHROK0dhMlhMWWZkaUd3?=
- =?utf-8?B?RFlQd3NmNGRWZFZydFhXSVJyRmxQMEZDWlhxU3hMcDYzNUtJRGtHVzZtMmIx?=
- =?utf-8?B?NU5zT0VvNmI1MUE1WTRmQWRUZkM4aXFtYVBzK3ovM2E3dGFEQ2ZJZ1B5U2Vv?=
- =?utf-8?B?eWVQN0tEZUhFQi93ZG8zdFJaTjcwT2dUc3VzdTgzNzZsaVNuUHFOQjRFN2Nq?=
- =?utf-8?B?eGZJamhBMDhBbmhsRjhWUDY3dmFhODJKR0UwVWlFcW42TXR6Q2lRV0ZhQnJW?=
- =?utf-8?B?SVAvalMxUVpmSVNzWmxpR3Z1cWtYSTlXTHZOMUY4dExKMFJZcXl2UGZ5S2pZ?=
- =?utf-8?B?NVI2K0xOaFQ3QlMyYitGMDRxa2JCVHQrQW40VnpPUkJ4SDN2UjRnU29TeHFU?=
- =?utf-8?B?cUVVSjEzLzV1ZFFxcndBbkw0T2Q0MHo3YUtoOThVTlgxcm5odjlqVzBYUkV3?=
- =?utf-8?B?RzM1dmllc3pTSFIvS0xaNWVoVDNWVXQ3Q1NJc0NpcjAwWUY1VkR0eEFhZnRX?=
- =?utf-8?B?R3gyeEIyMjR3SGVDdDhUaGtmZWRJTnkyeWhuWkpIVVg2RHoxQWtrUEJtNjdv?=
- =?utf-8?B?YlNmbzI2ME1hQkcrVVBNQ1pFT1FWZFRZZFhyZE9OWWJzRUlDM29pQUJ0V24y?=
- =?utf-8?B?NjRQM2g0a0J4NzJVVGw1MDRqMXFndVBJellQazRvUnFVMHFLRlR2Q3lJMlpq?=
- =?utf-8?B?V1F3b1BwZFpUM2xyYUpvR0RTcDJEZ1dGZWdMdDVHYzd2eW5ZYnlwTXlrckpD?=
- =?utf-8?B?OTdGU0w1My9SUVRkdmk3L1VaWDJseUc3S2tjdFhEZ3dUeDZ1RVIrK2ZNUDkv?=
- =?utf-8?B?aU9NbkZqRFpPQzFvVFpOWHYzd2QxS256OTRKaVQrVlR3c29nNHdwcjVjVklD?=
- =?utf-8?B?cVp6dFN0TUpNMDd1SlFzRUx2SjlraVczakM3VmFJdExzVGJ5cXdmSGlKTTVx?=
- =?utf-8?B?dHNCaUFjVmRPZkRuVFp1RVhWTFB0L1FtNHI1TEZEcTFsQUFMNjdUMnIxaVZr?=
- =?utf-8?B?d09MaXhiSFlrMjhPOGxrcGFLVElSR1pOQkdMdG4wa1k1VktnVVRFTXU0QlJk?=
- =?utf-8?B?Z09uemlVVHJxUHNoY3d1UXIrOUxCMU85bHM1TlpYRzZGcHRRcndtbERtdU9s?=
- =?utf-8?B?VUZRaVY2Z3N2RnlFbk14L1lER2Jib0JSSVNyZkw3Wk1sVExYaDhnMXRDUkhv?=
- =?utf-8?B?Z0FyK0NmMDlEKzcxUTdUY3A5SFJBYUhCOEpIbFNTK3Vic2hxcXR5MWZUcFND?=
- =?utf-8?B?bDZlRnl0VkxWajFyeDF4SFpoQzJTbTNPU1U2c1c4TlhscWNQNXhRaWMxTG5G?=
- =?utf-8?B?emJtUURBZVlqT3cxR2hRdGFVZUh1akxuRHIwYlRPOWZZSnVKeXFvMCtlNTFT?=
- =?utf-8?B?Q3BvMGROdlZ2ZFJUNzYya3hvUVlHYmYzaGlSMHMyK1U0Nis1YksrWFZWc1JH?=
- =?utf-8?B?VHFoY0phcnNVdHNJN2Y4Z0lxRzhHRng0SWQ2NmJuZENWUE5uMktmZktpeTY2?=
- =?utf-8?B?dU15L0FOWDNobkJkN0x6RkdlY1BQalhSK3p0S2ZsTVpwUnFSN0l6S1RMcXJh?=
- =?utf-8?B?bnptcHlHc2VDVm50NW52MkRVK0FpbGpNb3JPektpc1pVM3BibGRhNklaMjVN?=
- =?utf-8?B?MTZxNFNOd2lTbDBhSk5XcFk0UTdZbXdsaW5BYm1kRzlGeThJOU4rMWNyL09l?=
- =?utf-8?B?N3ZTM1NSeUFraVMvVnJYcWhNRjFPOVZYNUhTRFUyWHo5QVpKZlhia05HQy9S?=
- =?utf-8?B?Uit6VG51RCtqWGJsNU4vRGlFVXhJdjh4Y1RhdWhEVVpVTUNpcGdMQUY2L005?=
- =?utf-8?B?WG9wejVLbEZjampPYVcxNDMySXNQelVEZEFGQWROZ2h4ZjFNOWR3c084SjFN?=
- =?utf-8?B?b2lMbThOZmdXQW84YWg4ekJyQW9mWStyZnMvV1JWd3lMajVEM2hTbFVUczNv?=
- =?utf-8?B?QmhyeVpQVVUrOUtyRWNjUXp2a1JhQUpsSnk0ZVlrSDdnaFFYaFVTdHpjM01O?=
- =?utf-8?Q?BO9RKUEVN4uMTDc9B3JQWSk=3D?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 00ebe1d3-562c-44d3-ab7c-08d9a82cfb38
-X-MS-Exchange-CrossTenant-AuthSource: MWHPR1201MB0192.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Nov 2021 11:42:19.8907 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cPSQhRvD4Dau5vTrINquy4Yo1A5DbJm3yOORz6qQDOx+umrhjPgdp0FqKASMDEeu
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR12MB1837
+Content-Disposition: inline
+In-Reply-To: <20211115141925.60164-1-paul@crapouillou.net>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH] dma-buf: add DMA_BUF_IOCTL_SYNC_PARTIAL
- support
+Subject: Re: [Linaro-mm-sig] [PATCH 00/15] iio: buffer-dma: write() and new
+ DMABUF based API
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -143,115 +86,114 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: pekka.paalanen@collabora.com, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- linux-rockchip@lists.infradead.org, jason@jlekstrand.net,
- linux-media@vger.kernel.org
+Cc: Michael Hennerich <Michael.Hennerich@analog.com>, linux-iio@vger.kernel.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linaro-mm-sig@lists.linaro.org, Alexandru Ardelean <ardeleanalex@gmail.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ Jonathan Cameron <jic23@kernel.org>, linux-media@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Am 13.11.21 um 07:22 schrieb Jianqun Xu:
-> Add DMA_BUF_IOCTL_SYNC_PARTIAL support for user to sync dma-buf with
-> offset and len.
+On Mon, Nov 15, 2021 at 02:19:10PM +0000, Paul Cercueil wrote:
+> Hi Jonathan,
+> 
+> This patchset introduces a new userspace interface based on DMABUF
+> objects, to complement the existing fileio based API.
+> 
+> The advantage of this DMABUF based interface vs. the fileio
+> interface, is that it avoids an extra copy of the data between the
+> kernel and userspace. This is particularly userful for high-speed
+> devices which produce several megabytes or even gigabytes of data per
+> second.
+> 
+> The first few patches [01/15] to [03/15] are not really related, but
+> allow to reduce the size of the patches that introduce the new API.
+> 
+> Patch [04/15] to [06/15] enables write() support to the buffer-dma
+> implementation of the buffer API, to continue the work done by
+> Mihail Chindris.
+> 
+> Patches [07/15] to [12/15] introduce the new DMABUF based API.
+> 
+> Patches [13/15] and [14/15] add support for cyclic buffers, only through
+> the new API. A cyclic buffer will be repeated on the output until the
+> buffer is disabled.
+> 
+> Patch [15/15] adds documentation about the new API.
+> 
+> For now, the API allows you to alloc DMABUF objects and mmap() them to
+> read or write the samples. It does not yet allow to import DMABUFs
+> parented to other subsystems, but that should eventually be possible
+> once it's wired.
+> 
+> This patchset is inspired by the "mmap interface" that was previously
+> submitted by Alexandru Ardelean and Lars-Peter Clausen, so it would be
+> great if I could get a review from you guys. Alexandru's commit was
+> signed with his @analog.com address but he doesn't work at ADI anymore,
+> so I believe I'll need him to sign with a new email.
 
-You have not given an use case for this so it is a bit hard to review. 
-And from the existing use cases I don't see why this should be necessary.
+Why dma-buf? dma-buf looks like something super generic and useful, until
+you realize that there's a metric ton of gpu/accelerator bagage piled in.
+So unless buffer sharing with a gpu/video/accel/whatever device is the
+goal here, and it's just for a convenient way to get at buffer handles,
+this doesn't sound like a good idea.
 
-Even worse from the existing backend implementation I don't even see how 
-drivers should be able to fulfill this semantics.
+Also if the idea is to this with gpus/accelerators then I'd really like to
+see the full thing, since most likely at that point you also want
+dma_fence. And once we talk dma_fence things get truly horrible from a
+locking pov :-( Or well, just highly constrained and I get to review what
+iio is doing with these buffers to make sure it all fits.
 
-Please explain further,
-Christian.
+Cheers, Daniel
 
->
-> Change-Id: I03d2d2e10e48d32aa83c31abade57e0931e1be49
-> Signed-off-by: Jianqun Xu <jay.xu@rock-chips.com>
-> ---
->   drivers/dma-buf/dma-buf.c    | 42 ++++++++++++++++++++++++++++++++++++
->   include/uapi/linux/dma-buf.h |  8 +++++++
->   2 files changed, 50 insertions(+)
->
-> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-> index d9948d58b3f4..78f37f7c3462 100644
-> --- a/drivers/dma-buf/dma-buf.c
-> +++ b/drivers/dma-buf/dma-buf.c
-> @@ -392,6 +392,7 @@ static long dma_buf_ioctl(struct file *file,
->   {
->   	struct dma_buf *dmabuf;
->   	struct dma_buf_sync sync;
-> +	struct dma_buf_sync_partial sync_p;
->   	enum dma_data_direction direction;
->   	int ret;
->   
-> @@ -430,6 +431,47 @@ static long dma_buf_ioctl(struct file *file,
->   	case DMA_BUF_SET_NAME_B:
->   		return dma_buf_set_name(dmabuf, (const char __user *)arg);
->   
-> +	case DMA_BUF_IOCTL_SYNC_PARTIAL:
-> +		if (copy_from_user(&sync_p, (void __user *) arg, sizeof(sync_p)))
-> +			return -EFAULT;
-> +
-> +		if (sync_p.len == 0)
-> +			return 0;
-> +
-> +		if ((sync_p.offset % cache_line_size()) || (sync_p.len % cache_line_size()))
-> +			return -EINVAL;
-> +
-> +		if (sync_p.len > dmabuf->size || sync_p.offset > dmabuf->size - sync_p.len)
-> +			return -EINVAL;
-> +
-> +		if (sync_p.flags & ~DMA_BUF_SYNC_VALID_FLAGS_MASK)
-> +			return -EINVAL;
-> +
-> +		switch (sync_p.flags & DMA_BUF_SYNC_RW) {
-> +		case DMA_BUF_SYNC_READ:
-> +			direction = DMA_FROM_DEVICE;
-> +			break;
-> +		case DMA_BUF_SYNC_WRITE:
-> +			direction = DMA_TO_DEVICE;
-> +			break;
-> +		case DMA_BUF_SYNC_RW:
-> +			direction = DMA_BIDIRECTIONAL;
-> +			break;
-> +		default:
-> +			return -EINVAL;
-> +		}
-> +
-> +		if (sync_p.flags & DMA_BUF_SYNC_END)
-> +			ret = dma_buf_end_cpu_access_partial(dmabuf, direction,
-> +							     sync_p.offset,
-> +							     sync_p.len);
-> +		else
-> +			ret = dma_buf_begin_cpu_access_partial(dmabuf, direction,
-> +							       sync_p.offset,
-> +							       sync_p.len);
-> +
-> +		return ret;
-> +
->   	default:
->   		return -ENOTTY;
->   	}
-> diff --git a/include/uapi/linux/dma-buf.h b/include/uapi/linux/dma-buf.h
-> index 7f30393b92c3..6236c644624d 100644
-> --- a/include/uapi/linux/dma-buf.h
-> +++ b/include/uapi/linux/dma-buf.h
-> @@ -47,4 +47,12 @@ struct dma_buf_sync {
->   #define DMA_BUF_SET_NAME_A	_IOW(DMA_BUF_BASE, 1, u32)
->   #define DMA_BUF_SET_NAME_B	_IOW(DMA_BUF_BASE, 1, u64)
->   
-> +struct dma_buf_sync_partial {
-> +	__u64 flags;
-> +	__u32 offset;
-> +	__u32 len;
-> +};
-> +
-> +#define DMA_BUF_IOCTL_SYNC_PARTIAL	_IOW(DMA_BUF_BASE, 2, struct dma_buf_sync_partial)
-> +
->   #endif
+> 
+> Cheers,
+> -Paul
+> 
+> Alexandru Ardelean (1):
+>   iio: buffer-dma: split iio_dma_buffer_fileio_free() function
+> 
+> Paul Cercueil (14):
+>   iio: buffer-dma: Get rid of incoming/outgoing queues
+>   iio: buffer-dma: Remove unused iio_buffer_block struct
+>   iio: buffer-dma: Use round_down() instead of rounddown()
+>   iio: buffer-dma: Enable buffer write support
+>   iio: buffer-dmaengine: Support specifying buffer direction
+>   iio: buffer-dmaengine: Enable write support
+>   iio: core: Add new DMABUF interface infrastructure
+>   iio: buffer-dma: Use DMABUFs instead of custom solution
+>   iio: buffer-dma: Implement new DMABUF based userspace API
+>   iio: buffer-dma: Boost performance using write-combine cache setting
+>   iio: buffer-dmaengine: Support new DMABUF based userspace API
+>   iio: core: Add support for cyclic buffers
+>   iio: buffer-dmaengine: Add support for cyclic buffers
+>   Documentation: iio: Document high-speed DMABUF based API
+> 
+>  Documentation/driver-api/dma-buf.rst          |   2 +
+>  Documentation/iio/dmabuf_api.rst              |  94 +++
+>  Documentation/iio/index.rst                   |   2 +
+>  drivers/iio/adc/adi-axi-adc.c                 |   3 +-
+>  drivers/iio/buffer/industrialio-buffer-dma.c  | 670 ++++++++++++++----
+>  .../buffer/industrialio-buffer-dmaengine.c    |  42 +-
+>  drivers/iio/industrialio-buffer.c             |  49 ++
+>  include/linux/iio/buffer-dma.h                |  43 +-
+>  include/linux/iio/buffer-dmaengine.h          |   5 +-
+>  include/linux/iio/buffer_impl.h               |   8 +
+>  include/uapi/linux/iio/buffer.h               |  30 +
+>  11 files changed, 783 insertions(+), 165 deletions(-)
+>  create mode 100644 Documentation/iio/dmabuf_api.rst
+> 
+> -- 
+> 2.33.0
+> 
 
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
