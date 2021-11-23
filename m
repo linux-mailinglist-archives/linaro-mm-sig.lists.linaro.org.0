@@ -2,70 +2,73 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4804645A53A
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Nov 2021 15:21:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9EB9945A548
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Nov 2021 15:21:44 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 345E662C9D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Nov 2021 14:21:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DB45E62C93
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Nov 2021 14:21:41 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 93BB560BE6; Tue, 23 Nov 2021 14:21:27 +0000 (UTC)
+	id BA34562D0A; Tue, 23 Nov 2021 14:21:38 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 077FC6216B;
-	Tue, 23 Nov 2021 14:21:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EB99660AB6;
+	Tue, 23 Nov 2021 14:21:32 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 1BF6A60AB6
- for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Nov 2021 14:21:20 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id ED4F762168
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Nov 2021 14:21:21 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 016B562168; Tue, 23 Nov 2021 14:21:19 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
- [209.85.221.46])
- by lists.linaro.org (Postfix) with ESMTPS id E739260AB6
- for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Nov 2021 14:21:17 +0000 (UTC)
-Received: by mail-wr1-f46.google.com with SMTP id b12so39257683wrh.4
- for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Nov 2021 06:21:17 -0800 (PST)
+ id B829C62072; Tue, 23 Nov 2021 14:21:21 +0000 (UTC)
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
+ [209.85.221.50])
+ by lists.linaro.org (Postfix) with ESMTPS id 9EF8C62072
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Nov 2021 14:21:19 +0000 (UTC)
+Received: by mail-wr1-f50.google.com with SMTP id u18so39283951wrg.5
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Nov 2021 06:21:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=L0WQbPMmu7q1niXukhiHRfwOhv7htBGMZaUFwRTW/pU=;
- b=E8AElN6+/bBVTPJB1wlzguxBOE6x6n5zrNRdHXJyNZHjIyGsuO3OLe0mqHRs57A4ag
- Gxm+UVD+N7+eEdkm4KMGQDOnsizFXwDSmUCwAMuJhl35KmUOiUlt89nZYwWqIv24f4fK
- gw9peW2/IQVheul8jqWHfHnu88Mz2kQtagB51z0aUC08V3+zhqli6xS18Anv//qBqp61
- fUmEdq6sDcP/ORG4jKSmRLGxXnwHqkiS9g0ApmyTQoHZ5b4kOebPVA3jfb8tae37FbcZ
- O9n1wH5rUrPaHhW3YJqf4yud61GFKVD0LU5iMX+P6ceS9fa6BfhgL7rmFUjhHjDrErBa
- axrA==
+ h=from:to:cc:subject:date:message-id:in-reply-to:references
+ :mime-version:content-transfer-encoding;
+ bh=7hlTa22QWarOC/D/GwKDXYcY+ynnKGNkNozyiGKICA8=;
+ b=FCdGllJcVHqCf8Mmrtx2o7c65xOYOBgWAvUxQotbylOv8rRvg/Bq+IgN1z+q3ft3PG
+ 6M53Gq3PXfQiwwptvIh7434kf2II0sG1H/89bI2FFMyTEBuHwBtoMnhc3MzehUMsPJyt
+ iez5pmeOKWR8S95xi4ThBz9xsuoLgfOSjHJmbbaTlV84X0YDkTjIz08b6sZlOhBymIAS
+ kB24R7Ap1E+ADonJbwkmN7X7hUAAXUUNqGw9yEQ4cUr4XqamE5tBXVAlfPfZ9kjtdKkp
+ pCf9WvPHz3qOgaa66apwZF2VTyjjoVrO1h25QN8PKOUrXgjWo76nWwIi1JzqYPhiWR7s
+ 5QqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
- :content-transfer-encoding;
- bh=L0WQbPMmu7q1niXukhiHRfwOhv7htBGMZaUFwRTW/pU=;
- b=Z3sjTpxsY1c7DslcyuG7RYMtevivP3d3vpKc+8xtn0RYsA/2Z2f5u/Kht177WvhS60
- KQadCs45MILaJqKgfZlXCYnng/88j06TRG8Ya/nX8gQEBsdbRT2TQDdIuc/X6qBEGa0L
- qhD6GGhzLPZnPQnzrofbqjBRJH18enhsPyngo8PvIx8CVXrSjH0GpwUTN841b9Bh2hs/
- kM0DvBj/vJMDJcPDkpgoO6oHe33R6J6LKvi0EUR86sja1FeBahXvsgdSleowkySYxCsX
- rhb7niuNU8vn2P27+XvwDu86enqQjZtR2jwIqFPQVaJyfgTjRFDN5OJJLad5YFnKLKxU
- XIgA==
-X-Gm-Message-State: AOAM531KXGJpw3kSCPr+JbaZermsUqjptnDE9ME/q7ARaAYj+/Q3+dzB
- Bm3SLNOJwseMhudCOIWEdrE=
-X-Google-Smtp-Source: ABdhPJxMp1wlSMUNWPTuyd4QDJB4bZkg86F/2VpDGO6xW6jlSNTQmog4E4SSMIMlxZX8BompHjcOSQ==
-X-Received: by 2002:a5d:6043:: with SMTP id j3mr7507583wrt.375.1637677276940; 
- Tue, 23 Nov 2021 06:21:16 -0800 (PST)
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+ :references:mime-version:content-transfer-encoding;
+ bh=7hlTa22QWarOC/D/GwKDXYcY+ynnKGNkNozyiGKICA8=;
+ b=wMHFoSenl/MDccI2bMbe9LeK3M4iI2NjyU0/dFmc/3T7bBfIPzPZ23yF+fbVd3IK53
+ XL8kvNCtkrHnWllOzZ3aEkUhfCsSIqJlyEAxLcC48wg1hOkO9qJAxafJBbYf0oMfWUsS
+ c8bCcWBvXngllF0ksaUFGer4nI2tVacWjnp23/g76xHyfPMNUjhWxQoGogB/lgfGyykF
+ SNDK9palz7S1nC5HJDMLnXyzuOK2z0FoYk8Bu9ZxxLg4FcYuNArDP0X+pf1VAlU6yKsr
+ fpYhJl0HExxkgureh3G64n8+Bz47qPAKoppn7DTJBn+IDCyToYvu+qVuhhGnvqlhxT3/
+ 0NDQ==
+X-Gm-Message-State: AOAM531mBFzARnOlquMH9955f13JnlrXl+ZVOI5w8kDoNIxQWiN7LwY4
+ rs5g9FcWucggSQD10CcxDvk=
+X-Google-Smtp-Source: ABdhPJwCq/sc20/U9XtjBTriweP61eqo5pPpAjSWR3OVyPxWa7Xtu5CDeOGg3nJ6y0Zp+4UlErbNFg==
+X-Received: by 2002:a5d:47a1:: with SMTP id 1mr7407992wrb.436.1637677278619;
+ Tue, 23 Nov 2021 06:21:18 -0800 (PST)
 Received: from abel.fritz.box (p57b0b77b.dip0.t-ipconnect.de. [87.176.183.123])
- by smtp.gmail.com with ESMTPSA id t8sm1645928wmq.32.2021.11.23.06.21.15
+ by smtp.gmail.com with ESMTPSA id t8sm1645928wmq.32.2021.11.23.06.21.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Nov 2021 06:21:16 -0800 (PST)
+ Tue, 23 Nov 2021 06:21:18 -0800 (PST)
 From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
 X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?=
  <christian.koenig@amd.com>
 To: sumit.semwal@linaro.org,
 	daniel@ffwll.ch
-Date: Tue, 23 Nov 2021 15:20:45 +0100
-Message-Id: <20211123142111.3885-1-christian.koenig@amd.com>
+Date: Tue, 23 Nov 2021 15:20:46 +0100
+Message-Id: <20211123142111.3885-2-christian.koenig@amd.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20211123142111.3885-1-christian.koenig@amd.com>
+References: <20211123142111.3885-1-christian.koenig@amd.com>
 MIME-Version: 1.0
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: [Linaro-mm-sig] completely rework the dma_resv semantic
+Subject: [Linaro-mm-sig] [PATCH 01/26] drm/amdgpu: partially revert "svm bo
+ enable_signal call condition"
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -80,65 +83,36 @@ List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
  linux-media@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Hi guys,
-
-as discussed before this set of patches completely rework the dma_resv semantic
-and spreads the new handling over all the existing drivers and users.
-
-First of all this drops the DAG approach because it requires that every single
-driver implements those relatively complicated rules correctly and any
-violation of that immediately leads to either corruption of freed memory or
-even more severe security problems.
-
-Instead we just keep all fences around all the time until they are signaled.
-Only fences with the same context are assumed to be signaled in the correct
-order since this is exercised elsewhere as well. Replacing fences is now only
-supported for hardware mechanism like VM page table updates where the hardware
-can guarantee that the resource can't be accessed any more.
-
-Then the concept of a single exclusive fence and multiple shared fences is
-dropped as well.
-
-Instead the dma_resv object is now just a container for dma_fence objects where
-each fence has associated usage flags. Those use flags describe how the
-operation represented by the dma_fence object is using the resource protected
-by the dma_resv object. This allows us to add multiple fences for each usage
-type.
-
-Additionally to the existing WRITE/READ usages this patch set also adds the new
-KERNEL and OTHER usages. The KERNEL usages is used in cases where the kernel
-needs to do some operation with the resource protected by the dma_resv object,
-like copies or clears. Those are mandatory to wait for when dynamic memory
-management is used.
-
-The OTHER usage is for cases where we don't want that the operation represented
-by the dma_fence object participate in any implicit sync but needs to be
-respected by the kernel memory management. Examples for those are VM page table
-updates and preemption fences.
-
-While doing this the new implementation cleans up existing workarounds all over
-the place, but especially amdgpu and TTM. Surprisingly I also found two use
-cases for the KERNEL/OTHER usage in i915 and Nouveau, those might need more
-thoughts.
-
-In general the existing functionality should been preserved, the only downside
-is that we now always need to reserve a slot before adding a fence. The newly
-added call to the reservation function can probably use some more cleanup.
-
-TODOs: Testing, testing, testing, doublechecking the newly added
-kerneldoc for any typos.
-
-Please review and/or comment,
-Christian.
-
-
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+UGFydGlhbGx5IHJldmVydCBjb21taXQgNWYzMTljNWMyMWI1OTA5YWJiNDNkOGFhZGM5MmE4YWE1
+NDllZTQ0My4KCkZpcnN0IG9mIGFsbCB0aGlzIGlzIGlsbGVnYWwgdXNlIG9mIFJDVSB0byBjYWxs
+IGRtYV9mZW5jZV9lbmFibGVfc3dfc2lnbmFsaW5nKCkKc2luY2Ugd2UgZG9uJ3QgaG9sZCBhIHJl
+ZmVyZW5jZSB0byB0aGUgZmVuY2UgaW4gcXVlc3Rpb24gYW5kIGNhbiBjcmFzaCBiYWRseS4KClRo
+ZW4gdGhlIGNvZGUgZG9lc24ndCBzZWVtIHRvIGhhdmUgdGhlIGludGVuZGVkIGVmZmVjdCBzaW5j
+ZSBvbmx5IHRoZQpleGNsdXNpdmUgZmVuY2UgaXMgaGFuZGxlZCwgYnV0IHRoZSBLRkQgZmVuY2Vz
+IGFyZSBhbHdheXMgYWRkZWQgYXMgc2hhcmVkIGZlbmNlLgoKT25seSBrZWVwIHRoZSBoYW5kbGlu
+ZyB0byB0aHJvdyBhd2F5IHRoZSBjb250ZW50IG9mIFNWTSBCT3MuCgpTaWduZWQtb2ZmLWJ5OiBD
+aHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+Ci0tLQogZHJpdmVycy9n
+cHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X3R0bS5jIHwgOSAtLS0tLS0tLS0KIDEgZmlsZSBjaGFu
+Z2VkLCA5IGRlbGV0aW9ucygtKQoKZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1k
+Z3B1L2FtZGdwdV90dG0uYyBiL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV90dG0u
+YwppbmRleCBlYWI0MzgwZjI4ZTUuLmMxNTY4N2NlNjdjNCAxMDA2NDQKLS0tIGEvZHJpdmVycy9n
+cHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X3R0bS5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9hbWQv
+YW1kZ3B1L2FtZGdwdV90dG0uYwpAQCAtMTE2LDE3ICsxMTYsOCBAQCBzdGF0aWMgdm9pZCBhbWRn
+cHVfZXZpY3RfZmxhZ3Moc3RydWN0IHR0bV9idWZmZXJfb2JqZWN0ICpibywKIAogCWFibyA9IHR0
+bV90b19hbWRncHVfYm8oYm8pOwogCWlmIChhYm8tPmZsYWdzICYgQU1ER1BVX0FNREtGRF9DUkVB
+VEVfU1ZNX0JPKSB7Ci0JCXN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlOwotCQlzdHJ1Y3QgZG1hX3Jl
+c3YgKnJlc3YgPSAmYm8tPmJhc2UuX3Jlc3Y7Ci0KLQkJcmN1X3JlYWRfbG9jaygpOwotCQlmZW5j
+ZSA9IHJjdV9kZXJlZmVyZW5jZShyZXN2LT5mZW5jZV9leGNsKTsKLQkJaWYgKGZlbmNlICYmICFm
+ZW5jZS0+b3BzLT5zaWduYWxlZCkKLQkJCWRtYV9mZW5jZV9lbmFibGVfc3dfc2lnbmFsaW5nKGZl
+bmNlKTsKLQogCQlwbGFjZW1lbnQtPm51bV9wbGFjZW1lbnQgPSAwOwogCQlwbGFjZW1lbnQtPm51
+bV9idXN5X3BsYWNlbWVudCA9IDA7Ci0JCXJjdV9yZWFkX3VubG9jaygpOwogCQlyZXR1cm47CiAJ
+fQogCi0tIAoyLjI1LjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGlu
+YXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8t
+bW0tc2lnCg==
