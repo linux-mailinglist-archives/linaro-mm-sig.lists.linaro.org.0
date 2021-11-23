@@ -2,68 +2,54 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07D1E45912D
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Nov 2021 16:18:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D70145A456
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Nov 2021 15:01:55 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8DF7462173
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Nov 2021 15:18:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 381DF6216B
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Nov 2021 14:01:53 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 2F3856216D; Mon, 22 Nov 2021 15:18:12 +0000 (UTC)
+	id DB21562CA0; Tue, 23 Nov 2021 14:01:52 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AA1FD60C6A;
-	Mon, 22 Nov 2021 15:18:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 492E062169;
+	Tue, 23 Nov 2021 14:01:49 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 2938F60714
- for <linaro-mm-sig@lists.linaro.org>; Mon, 22 Nov 2021 15:18:08 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 8996662169
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Nov 2021 14:01:46 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 26ADC60C6A; Mon, 22 Nov 2021 15:18:08 +0000 (UTC)
-Received: from www381.your-server.de (www381.your-server.de [78.46.137.84])
- by lists.linaro.org (Postfix) with ESMTPS id 20FC960714
- for <linaro-mm-sig@lists.linaro.org>; Mon, 22 Nov 2021 15:18:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=metafoo.de; 
- s=default2002;
- h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
- MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender:Reply-To:
- Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
- Resent-To:Resent-Cc:Resent-Message-ID;
- bh=Iz+FdhE+Nx+yB4wSTd3tzB2Vssfh3TskimAiedhv9NI=; b=gD4ezFIG8QLfTiha4MQJeryemC
- L+CDG/3AxR+Jz0IkxVKFTfRnhQK4wjK6OjQL+ge9f9D8Cy2F/F4ZrHU73gnkpTWpFMhW51P1W+Igt
- EPipxqpLphrl5GCtr9BzC5tMklv9sWl+x/Q8H5mxc9WkqZ27j0E3q4pEQijAx9WZmyD1PyiVoyHGQ
- HIVOVt+JDKWPlCb4/KVSDyyzN8buGG+U9WNJ9XdyAMVr97nKNd/q0L/XVCzB1LIBM7Jn6rZLtBrQO
- Y7EcXkiT4+J2sfXvFTm+kBP1PNhL5xKHxpw5LzsX1Tk6YCqXufqyMrguWuGGOSdJTsiehGUlfI0KV
- al+SOU+A==;
-Received: from sslproxy06.your-server.de ([78.46.172.3])
- by www381.your-server.de with esmtpsa (TLSv1.3:TLS_AES_256_GCM_SHA384:256)
- (Exim 4.92.3) (envelope-from <lars@metafoo.de>)
- id 1mpB4y-000E7R-0A; Mon, 22 Nov 2021 16:18:00 +0100
-Received: from [82.135.83.112] (helo=[192.168.178.20])
- by sslproxy06.your-server.de with esmtpsa (TLSv1.3:TLS_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <lars@metafoo.de>)
- id 1mpB4x-0006A2-NY; Mon, 22 Nov 2021 16:17:59 +0100
-To: Paul Cercueil <paul@crapouillou.net>
-References: <20211115141925.60164-1-paul@crapouillou.net>
- <20211115141925.60164-2-paul@crapouillou.net>
- <e2689f0d-dc16-2519-57df-d98caadb07b0@metafoo.de>
- <0COX2R.BSNX3NW8N48T@crapouillou.net>
- <332d001d-8b5a-bba2-c490-ed2e5efd0b1d@metafoo.de>
- <AMUX2R.XLGW1EZOMU9B2@crapouillou.net>
- <d542865e-2a0b-089f-e63c-b24d16c58ec6@metafoo.de>
- <UQBZ2R.HLXHH4QWJ0JS1@crapouillou.net>
-From: Lars-Peter Clausen <lars@metafoo.de>
-Message-ID: <a5a9a07c-5e71-196f-da48-aa424c7001b0@metafoo.de>
-Date: Mon, 22 Nov 2021 16:17:59 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ id 80B8C6216C; Tue, 23 Nov 2021 14:01:46 +0000 (UTC)
+Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
+ by lists.linaro.org (Postfix) with ESMTPS id 3031762169
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Nov 2021 14:01:44 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10176"; a="321256823"
+X-IronPort-AV: E=Sophos;i="5.87,257,1631602800"; d="scan'208";a="321256823"
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+ by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 23 Nov 2021 06:01:42 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.87,257,1631602800"; d="scan'208";a="571072733"
+Received: from lkp-server02.sh.intel.com (HELO 9e1e9f9b3bcb) ([10.239.97.151])
+ by fmsmga004.fm.intel.com with ESMTP; 23 Nov 2021 06:01:39 -0800
+Received: from kbuild by 9e1e9f9b3bcb with local (Exim 4.92)
+ (envelope-from <lkp@intel.com>)
+ id 1mpWMd-0001v2-3I; Tue, 23 Nov 2021 14:01:39 +0000
+Date: Tue, 23 Nov 2021 22:00:54 +0800
+From: kernel test robot <lkp@intel.com>
+To: Akhil R <akhilrajeev@nvidia.com>, andy.shevchenko@gmail.com,
+ christian.koenig@amd.com, digetx@gmail.com,
+ dri-devel@lists.freedesktop.org, jonathanh@nvidia.com,
+ ldewangan@nvidia.com, linaro-mm-sig@lists.linaro.org,
+ linux-i2c@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-media@vger.kernel.org
+Message-ID: <202111232153.mpoejDRV-lkp@intel.com>
+References: <1637651753-5067-1-git-send-email-akhilrajeev@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <UQBZ2R.HLXHH4QWJ0JS1@crapouillou.net>
-Content-Language: en-US
-X-Authenticated-Sender: lars@metafoo.de
-X-Virus-Scanned: Clear (ClamAV 0.103.3/26361/Mon Nov 22 10:19:53 2021)
+Content-Disposition: inline
+In-Reply-To: <1637651753-5067-1-git-send-email-akhilrajeev@nvidia.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 01/15] iio: buffer-dma: Get rid of
- incoming/outgoing queues
+Subject: Re: [Linaro-mm-sig] [PATCH v2] i2c: tegra: Add ACPI support
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,80 +62,166 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: Michael Hennerich <Michael.Hennerich@analog.com>, linux-iio@vger.kernel.org,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linaro-mm-sig@lists.linaro.org, Alexandru Ardelean <ardeleanalex@gmail.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Jonathan Cameron <jic23@kernel.org>, linux-media@vger.kernel.org
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Cc: kbuild-all@lists.01.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gMTEvMjIvMjEgNDoxNiBQTSwgUGF1bCBDZXJjdWVpbCB3cm90ZToKPiBIaSBMYXJzLAo+Cj4g
-TGUgbHVuLiwgbm92LiAyMiAyMDIxIGF0IDE2OjA4OjUxICswMTAwLCBMYXJzLVBldGVyIENsYXVz
-ZW4gCj4gPGxhcnNAbWV0YWZvby5kZT4gYSDDqWNyaXQgOgo+PiBPbiAxMS8yMS8yMSA5OjA4IFBN
-LCBQYXVsIENlcmN1ZWlsIHdyb3RlOgo+Pj4KPj4+Cj4+PiBMZSBkaW0uLCBub3YuIDIxIDIwMjEg
-YXQgMTk6NDk6MDMgKzAxMDAsIExhcnMtUGV0ZXIgQ2xhdXNlbiAKPj4+IH88bGFyc0BtZXRhZm9v
-LmRlPiBhIMOpY3JpdCA6Cj4+Pj4gT24gMTEvMjEvMjEgNjo1MiBQTSwgUGF1bCBDZXJjdWVpbCB3
-cm90ZToKPj4+Pj4gSGkgTGFycywKPj4+Pj4KPj4+Pj4gTGUgZGltLiwgbm92LiAyMSAyMDIxIGF0
-IDE3OjIzOjM1ICswMTAwLCBMYXJzLVBldGVyIENsYXVzZW4gCj4+Pj4+IH9/f388bGFyc0BtZXRh
-Zm9vLmRlPiBhIMOpY3JpdCA6Cj4+Pj4+PiBPbiAxMS8xNS8yMSAzOjE5IFBNLCBQYXVsIENlcmN1
-ZWlsIHdyb3RlOgo+Pj4+Pj4+IFRoZSBidWZmZXItZG1hIGNvZGUgd2FzIHVzaW5nIHR3byBxdWV1
-ZXMsIGluY29taW5nIGFuZCBvdXRnb2luZywgdG8KPj4+Pj4+PiBtYW5hZ2UgdGhlIHN0YXRlIG9m
-IHRoZSBibG9ja3MgaW4gdXNlLgo+Pj4+Pj4+Cj4+Pj4+Pj4gV2hpbGUgdGhpcyB0b3RhbGx5IHdv
-cmtzLCBpdCBhZGRzIHNvbWUgY29tcGxleGl0eSB0byB0aGUgY29kZSwKPj4+Pj4+PiBlc3BlY2lh
-bGx5IHNpbmNlIHRoZSBjb2RlIG9ubHkgbWFuYWdlcyAyIGJsb2Nrcy4gSXQgaXMgbXVjaCAKPj4+
-Pj4+PiBlYXNpZXIgdG8KPj4+Pj4+PiBqdXN0IGNoZWNrIGVhY2ggYmxvY2sncyBzdGF0ZSBtYW51
-YWxseSwgYW5kIGtlZXAgYSBjb3VudGVyIGZvciAKPj4+Pj4+PiB0aGUgf39/f39uZXh0Cj4+Pj4+
-Pj4gYmxvY2sgdG8gZGVxdWV1ZS4KPj4+Pj4+Pgo+Pj4+Pj4+IFNpbmNlIHRoZSBuZXcgRE1BQlVG
-IGJhc2VkIEFQSSB3b3VsZG4ndCB1c2UgdGhlc2UgaW5jb21pbmcgYW5kIAo+Pj4+Pj4+IH9/f39/
-b3V0Z29pbmcKPj4+Pj4+PiBxdWV1ZXMgYW55d2F5LCBnZXR0aW5nIHJpZCBvZiB0aGVtIG5vdyBt
-YWtlcyB0aGUgdXBjb21pbmcgY2hhbmdlcwo+Pj4+Pj4+IHNpbXBsZXIuCj4+Pj4+Pj4KPj4+Pj4+
-PiBTaWduZWQtb2ZmLWJ5OiBQYXVsIENlcmN1ZWlsIDxwYXVsQGNyYXBvdWlsbG91Lm5ldD4KPj4+
-Pj4+IFRoZSBvdXRnb2luZyBxdWV1ZSBpcyBnb2luZyB0byBiZSByZXBsYWNlZCBieSBmZW5jZXMs
-IGJ1dCBJIHRoaW5rIAo+Pj4+Pj4gf39/f3dlIH9/bmVlZCB0byBrZWVwIHRoZSBpbmNvbWluZyBx
-dWV1ZS4KPj4+Pj4KPj4+Pj4gQmxvY2tzIGFyZSBhbHdheXMgYWNjZXNzZWQgaW4gc2VxdWVudGlh
-bCBvcmRlciwgc28gd2Ugbm93IGhhdmUgYSAKPj4+Pj4gf39/fyJxdWV1ZS0+bmV4dF9kZXF1ZXVl
-IiB0aGF0IGN5Y2xlcyBiZXR3ZWVuIHRoZSBidWZmZXJzIAo+Pj4+PiBhbGxvY2F0ZWQgZm9yIH9/
-f39maWxlaW8uCj4+Pj4+Cj4+Pj4+Pj4gWy4uLl0KPj4+Pj4+PiBAQCAtNDQyLDI4ICs0MzUsMzMg
-QEAgRVhQT1JUX1NZTUJPTF9HUEwoaWlvX2RtYV9idWZmZXJfZGlzYWJsZSk7Cj4+Pj4+Pj4gwqAg
-c3RhdGljIHZvaWQgaWlvX2RtYV9idWZmZXJfZW5xdWV1ZShzdHJ1Y3QgaWlvX2RtYV9idWZmZXJf
-cXVldWUgCj4+Pj4+Pj4gf39/f39/f38qcXVldWUsCj4+Pj4+Pj4gwqDCoMKgwqDCoCBzdHJ1Y3Qg
-aWlvX2RtYV9idWZmZXJfYmxvY2sgKmJsb2NrKQo+Pj4+Pj4+IMKgIHsKPj4+Pj4+PiAtwqDCoMKg
-IGlmIChibG9jay0+c3RhdGUgPT0gSUlPX0JMT0NLX1NUQVRFX0RFQUQpIHsKPj4+Pj4+PiArwqDC
-oMKgIGlmIChibG9jay0+c3RhdGUgPT0gSUlPX0JMT0NLX1NUQVRFX0RFQUQpCj4+Pj4+Pj4gwqDC
-oMKgwqDCoMKgwqDCoMKgIGlpb19idWZmZXJfYmxvY2tfcHV0KGJsb2NrKTsKPj4+Pj4+PiAtwqDC
-oMKgIH0gZWxzZSBpZiAocXVldWUtPmFjdGl2ZSkgewo+Pj4+Pj4+ICvCoMKgwqAgZWxzZSBpZiAo
-cXVldWUtPmFjdGl2ZSkKPj4+Pj4+PiDCoMKgwqDCoMKgwqDCoMKgwqAgaWlvX2RtYV9idWZmZXJf
-c3VibWl0X2Jsb2NrKHF1ZXVlLCBibG9jayk7Cj4+Pj4+Pj4gLcKgwqDCoCB9IGVsc2Ugewo+Pj4+
-Pj4+ICvCoMKgwqAgZWxzZQo+Pj4+Pj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBibG9jay0+c3RhdGUg
-PSBJSU9fQkxPQ0tfU1RBVEVfUVVFVUVEOwo+Pj4+Pj4+IC3CoMKgwqDCoMKgwqDCoCBsaXN0X2Fk
-ZF90YWlsKCZibG9jay0+aGVhZCwgJnF1ZXVlLT5pbmNvbWluZyk7Cj4+Pj4+PiBJZiBpaW9fZG1h
-X2J1ZmZlcl9lbnF1ZXVlKCkgaXMgY2FsbGVkIHdpdGggYSBkbWFidWYgYW5kIHRoZSAKPj4+Pj4+
-IGJ1ZmZlciB/f39/aXMgf39ub3QgYWN0aXZlLCBpdCB3aWxsIGJlIG1hcmtlZCBhcyBxdWV1ZWQs
-IGJ1dCB3ZSAKPj4+Pj4+IGRvbid0IGFjdHVhbGx5IH9/f39rZWVwIGEgf39yZWZlcmVuY2UgdG8g
-aXQgYW55d2hlcmUuIEl0IHdpbGwgCj4+Pj4+PiBuZXZlciBiZSBzdWJtaXR0ZWQgdG8gf39/f3Ro
-ZSBETUEsIGFuZCB/f2l0IHdpbGwgbmV2ZXIgYmUgCj4+Pj4+PiBzaWduYWxlZCBhcyBjb21wbGV0
-ZWQuCj4+Pj4+Cj4+Pj4+IFdlIGRvIGtlZXAgYSByZWZlcmVuY2UgdG8gdGhlIGJ1ZmZlcnMsIGlu
-IHRoZSBxdWV1ZS0+ZmlsZWlvLmJsb2NrcyAKPj4+Pj4gf39/f2FycmF5LiBXaGVuIHRoZSBidWZm
-ZXIgaXMgZW5hYmxlZCwgYWxsIHRoZSBibG9ja3MgaW4gdGhhdCAKPj4+Pj4gYXJyYXkgf39/dGhh
-dCB/YXJlIGluIHRoZSAicXVldWVkIiBzdGF0ZSB3aWxsIGJlIHN1Ym1pdHRlZCB0byB0aGUgCj4+
-Pj4+IERNQS4KPj4+Pj4KPj4+PiBCdXQgbm90IHdoZW4gdXNlZCBpbiBjb21iaW5hdGlvbiB3aXRo
-IHRoZSBETUEgYnVmIGNoYW5nZXMgbGF0ZXIgaW4gCj4+Pj4gf390aGlzIHNlcmllcy4KPj4+Pgo+
-Pj4KPj4+IFRoYXQncyBzdGlsbCB0aGUgY2FzZSBhZnRlciB0aGUgRE1BQlVGIGNoYW5nZXMgb2Yg
-dGhlIHNlcmllcy4gT3IgY2FuIAo+Pj4gf3lvdSBwb2ludCBtZSBleGFjdGx5IHdoYXQgeW91IHRo
-aW5rIGlzIGJyb2tlbj8KPj4+Cj4+IFdoZW4geW91IGFsbG9jYXRlIGEgRE1BQlVGIHdpdGggdGhl
-IGFsbG9jYXRlIElPQ1RMIGFuZCB0aGVuIHN1Ym1pdCBpdCAKPj4gd2l0aCB0aGUgZW5xdWV1ZSBJ
-T0NUTCBiZWZvcmUgdGhlIGJ1ZmZlciBpcyBlbmFibGVkIGl0IHdpbGwgZW5kIHVwIAo+PiBtYXJr
-ZWQgYXMgcXVldWVkLCBidXQgbm90IGFjdHVhbGx5IGJlIHF1ZXVlZCBhbnl3aGVyZS4KPj4KPgo+
-IE9rLCBpdCB3b3JrcyBmb3IgbWUgYmVjYXVzZSBJIG5ldmVyIGVucXVldWUgYmxvY2tzIGJlZm9y
-ZSBlbmFibGluZyB0aGUgCj4gYnVmZmVyLiBJIGNhbiBhZGQgYSByZXF1aXJlbWVudCB0aGF0IGJs
-b2NrcyBtdXN0IGJlIGVucXVldWVkIG9ubHkgCj4gYWZ0ZXIgdGhlIGJ1ZmZlciBpcyBlbmFibGVk
-LgoKSSBkb24ndCB0aGluayB0aGF0IGlzIGEgZ29vZCBpZGVhLiBUaGlzIHdheSB5b3UgYXJlIGdv
-aW5nIHRvIHBvdGVudGlhbGx5IApkcm9wIGRhdGEgYXQgdGhlIGJlZ2luaW5nIG9mIHlvdXIgc3Ry
-ZWFtIHdoZW4gdGhlIERNQSBpc24ndCByZWFkeSB5ZXQuCgpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5h
-cm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxt
-YW4vbGlzdGluZm8vbGluYXJvLW1tLXNpZwo=
+Hi Akhil,
+
+Thank you for the patch! Yet something to improve:
+
+[auto build test ERROR on tegra/for-next]
+[also build test ERROR on v5.16-rc2 next-20211123]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch]
+
+url:    https://github.com/0day-ci/linux/commits/Akhil-R/i2c-tegra-Add-ACPI-support/20211123-151636
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/tegra/linux.git for-next
+config: m68k-randconfig-r011-20211123 (https://download.01.org/0day-ci/archive/20211123/202111232153.mpoejDRV-lkp@intel.com/config.gz)
+compiler: m68k-linux-gcc (GCC) 11.2.0
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/0day-ci/linux/commit/dec174be801f41a9e42f4381c59c2357c25e40fb
+        git remote add linux-review https://github.com/0day-ci/linux
+        git fetch --no-tags linux-review Akhil-R/i2c-tegra-Add-ACPI-support/20211123-151636
+        git checkout dec174be801f41a9e42f4381c59c2357c25e40fb
+        # save the config file to linux build tree
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.2.0 make.cross ARCH=m68k 
+
+If you fix the issue, kindly add following tag as appropriate
+Reported-by: kernel test robot <lkp@intel.com>
+
+All errors (new ones prefixed by >>):
+
+   drivers/i2c/busses/i2c-tegra.c: In function 'tegra_i2c_init':
+>> drivers/i2c/busses/i2c-tegra.c:623:23: error: implicit declaration of function 'acpi_has_method'; did you mean 'acpi_has_watchdog'? [-Werror=implicit-function-declaration]
+     623 |         if (handle && acpi_has_method(handle, "_RST"))
+         |                       ^~~~~~~~~~~~~~~
+         |                       acpi_has_watchdog
+   cc1: some warnings being treated as errors
+
+
+vim +623 drivers/i2c/busses/i2c-tegra.c
+
+   608	
+   609	static int tegra_i2c_init(struct tegra_i2c_dev *i2c_dev)
+   610	{
+   611		u32 val, clk_divisor, clk_multiplier, tsu_thd, tlow, thigh, non_hs_mode;
+   612		acpi_handle handle = ACPI_HANDLE(i2c_dev->dev);
+   613		int err;
+   614	
+   615		/*
+   616		 * The reset shouldn't ever fail in practice. The failure will be a
+   617		 * sign of a severe problem that needs to be resolved. Still we don't
+   618		 * want to fail the initialization completely because this may break
+   619		 * kernel boot up since voltage regulators use I2C. Hence, we will
+   620		 * emit a noisy warning on error, which won't stay unnoticed and
+   621		 * won't hose machine entirely.
+   622		 */
+ > 623		if (handle && acpi_has_method(handle, "_RST"))
+   624			err = (acpi_evaluate_object(handle, "_RST", NULL, NULL));
+   625		else
+   626			err = reset_control_reset(i2c_dev->rst);
+   627	
+   628		WARN_ON_ONCE(err);
+   629	
+   630		if (i2c_dev->is_dvc)
+   631			tegra_dvc_init(i2c_dev);
+   632	
+   633		val = I2C_CNFG_NEW_MASTER_FSM | I2C_CNFG_PACKET_MODE_EN |
+   634		      FIELD_PREP(I2C_CNFG_DEBOUNCE_CNT, 2);
+   635	
+   636		if (i2c_dev->hw->has_multi_master_mode)
+   637			val |= I2C_CNFG_MULTI_MASTER_MODE;
+   638	
+   639		i2c_writel(i2c_dev, val, I2C_CNFG);
+   640		i2c_writel(i2c_dev, 0, I2C_INT_MASK);
+   641	
+   642		if (i2c_dev->is_vi)
+   643			tegra_i2c_vi_init(i2c_dev);
+   644	
+   645		switch (i2c_dev->bus_clk_rate) {
+   646		case I2C_MAX_STANDARD_MODE_FREQ + 1 ... I2C_MAX_FAST_MODE_PLUS_FREQ:
+   647		default:
+   648			tlow = i2c_dev->hw->tlow_fast_fastplus_mode;
+   649			thigh = i2c_dev->hw->thigh_fast_fastplus_mode;
+   650			tsu_thd = i2c_dev->hw->setup_hold_time_fast_fast_plus_mode;
+   651	
+   652			if (i2c_dev->bus_clk_rate > I2C_MAX_FAST_MODE_FREQ)
+   653				non_hs_mode = i2c_dev->hw->clk_divisor_fast_plus_mode;
+   654			else
+   655				non_hs_mode = i2c_dev->hw->clk_divisor_fast_mode;
+   656			break;
+   657	
+   658		case 0 ... I2C_MAX_STANDARD_MODE_FREQ:
+   659			tlow = i2c_dev->hw->tlow_std_mode;
+   660			thigh = i2c_dev->hw->thigh_std_mode;
+   661			tsu_thd = i2c_dev->hw->setup_hold_time_std_mode;
+   662			non_hs_mode = i2c_dev->hw->clk_divisor_std_mode;
+   663			break;
+   664		}
+   665	
+   666		/* make sure clock divisor programmed correctly */
+   667		clk_divisor = FIELD_PREP(I2C_CLK_DIVISOR_HSMODE,
+   668					 i2c_dev->hw->clk_divisor_hs_mode) |
+   669			      FIELD_PREP(I2C_CLK_DIVISOR_STD_FAST_MODE, non_hs_mode);
+   670		i2c_writel(i2c_dev, clk_divisor, I2C_CLK_DIVISOR);
+   671	
+   672		if (i2c_dev->hw->has_interface_timing_reg) {
+   673			val = FIELD_PREP(I2C_INTERFACE_TIMING_THIGH, thigh) |
+   674			      FIELD_PREP(I2C_INTERFACE_TIMING_TLOW, tlow);
+   675			i2c_writel(i2c_dev, val, I2C_INTERFACE_TIMING_0);
+   676		}
+   677	
+   678		/*
+   679		 * Configure setup and hold times only when tsu_thd is non-zero.
+   680		 * Otherwise, preserve the chip default values.
+   681		 */
+   682		if (i2c_dev->hw->has_interface_timing_reg && tsu_thd)
+   683			i2c_writel(i2c_dev, tsu_thd, I2C_INTERFACE_TIMING_1);
+   684	
+   685		clk_multiplier = (tlow + thigh + 2) * (non_hs_mode + 1);
+   686	
+   687		err = clk_set_rate(i2c_dev->div_clk,
+   688				   i2c_dev->bus_clk_rate * clk_multiplier);
+   689		if (err) {
+   690			dev_err(i2c_dev->dev, "failed to set div-clk rate: %d\n", err);
+   691			return err;
+   692		}
+   693	
+   694		if (!i2c_dev->is_dvc && !i2c_dev->is_vi) {
+   695			u32 sl_cfg = i2c_readl(i2c_dev, I2C_SL_CNFG);
+   696	
+   697			sl_cfg |= I2C_SL_CNFG_NACK | I2C_SL_CNFG_NEWSL;
+   698			i2c_writel(i2c_dev, sl_cfg, I2C_SL_CNFG);
+   699			i2c_writel(i2c_dev, 0xfc, I2C_SL_ADDR1);
+   700			i2c_writel(i2c_dev, 0x00, I2C_SL_ADDR2);
+   701		}
+   702	
+   703		err = tegra_i2c_flush_fifos(i2c_dev);
+   704		if (err)
+   705			return err;
+   706	
+   707		if (i2c_dev->multimaster_mode && i2c_dev->hw->has_slcg_override_reg)
+   708			i2c_writel(i2c_dev, I2C_MST_CORE_CLKEN_OVR, I2C_CLKEN_OVERRIDE);
+   709	
+   710		err = tegra_i2c_wait_for_config_load(i2c_dev);
+   711		if (err)
+   712			return err;
+   713	
+   714		return 0;
+   715	}
+   716	
+
+---
+0-DAY CI Kernel Test Service, Intel Corporation
+https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
