@@ -2,69 +2,68 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80F9B45DE30
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Nov 2021 17:00:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1613E45DE43
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Nov 2021 17:04:15 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D9D8B6216C
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Nov 2021 16:00:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8491C60F1E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Nov 2021 16:04:13 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 8422861A4D; Thu, 25 Nov 2021 16:00:04 +0000 (UTC)
+	id F0C8762CA5; Thu, 25 Nov 2021 16:04:11 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0ABAB60BD0;
-	Thu, 25 Nov 2021 16:00:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0201C60F06;
+	Thu, 25 Nov 2021 16:04:07 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 16B196049C
- for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Nov 2021 15:59:59 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id C13286049C
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Nov 2021 16:04:06 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 1293160BD0; Thu, 25 Nov 2021 15:59:59 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
- [209.85.221.46])
- by lists.linaro.org (Postfix) with ESMTPS id 0913E6049C
- for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Nov 2021 15:59:57 +0000 (UTC)
-Received: by mail-wr1-f46.google.com with SMTP id s13so12683723wrb.3
- for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Nov 2021 07:59:56 -0800 (PST)
+ id AA69760F06; Thu, 25 Nov 2021 16:04:06 +0000 (UTC)
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+ [209.85.221.51])
+ by lists.linaro.org (Postfix) with ESMTPS id 917BF6049C
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Nov 2021 16:04:04 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id c4so12638394wrd.9
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Nov 2021 08:04:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:content-transfer-encoding:in-reply-to;
- bh=x0f7TyhCyQOlbMzxvokkT1IDB1t8o4k6EuBMauIRzMo=;
- b=ZNxhEKp36LI7WbqzSGWIjAxZYfSBP7NRppZw0kR7RrHAIZNkkoxA1AKdYHG4VsF3tQ
- nd/wYHSvH4K4EqETGKuQfgNJQMxUk3cNuZ9u/4ovaKYZHsUPTfwqfecDI+lLirPfSFat
- Xwaw3BiDMHk6vfmsAxCklSm8QgXJgkBVdmcuA=
+ bh=kHdSMAOwLSMX+m+Y3BVujwHChGV1VSEejUWtst4SuaY=;
+ b=AKCw6wouE5Z3sIR16JxmC3KMUy4mTCOLvi5FajeJyXFvcStcoSCYkJCVWjhg5LIRWy
+ 7i9uqmo6tkd6Gg7NMJ0133gyemWpm8PGYKqQmUBCjOG+VGHLBvcqtlmb2p8iWNaWcnce
+ G+glawUUTAXhYQpsJ5ygl55Yg7jH8LIfxLIOw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:content-transfer-encoding
  :in-reply-to;
- bh=x0f7TyhCyQOlbMzxvokkT1IDB1t8o4k6EuBMauIRzMo=;
- b=LK+VUvaPuZoWFn96pbsjhUD0p4cZ+sHS0ahvKzbsTnXZ6btopztMGlvMMSkTqjMyJn
- cLW/u3BE1V0hqBlCLqwvgPgKhZUKwcQwTI8XkctQo5YBiP4yKbqD5cDay4g3UbcAGxwK
- oZot2fOtKPi1/ies8sVWaH/VHb6XVwf+Pf+EW6rvlM5d9mChRp9cB+Yzw53gfulcWQ+y
- FF9SSvyC0uekVuZXZe3T/5NZBJu1VxAt4WAD91RqHdTcYx656jN7xzyT5aoGW/r+tcHS
- EpH8FoWFb+aNtxsARNPBe1NOoI6smfkxYlxIW1mUA+q3bnWziGxvOJQ4zmqcVYZLm2hF
- ZGig==
-X-Gm-Message-State: AOAM5337Win2+jfOBV2zUQ/RxHRx1CmVkpW8E0f+syjwnGE14Z0CoKRu
- iZ6wveH1Mr2+0FlKIs7Ur6FI+w==
-X-Google-Smtp-Source: ABdhPJytYFDJHPBsz8eB6XL8F7LOuQqnhmREZpGS6+MkDLsSQPsT/q95AG0UKtsOA3EDqk53fMjAxQ==
-X-Received: by 2002:a5d:6e85:: with SMTP id k5mr7684803wrz.545.1637855996036; 
- Thu, 25 Nov 2021 07:59:56 -0800 (PST)
+ bh=kHdSMAOwLSMX+m+Y3BVujwHChGV1VSEejUWtst4SuaY=;
+ b=DtlLjLj3UxsPncibdCr7r2gH3NHQC8J++n+U7OMXVo6xqxVTOkp5A/UFEKOzqIM8W8
+ pzqN3PPQ8mo6ianw6D5Q14oIVQ/L6bNOqHnEYuTHZHiS6er+NrEUfuZVd+uybcGEcdSv
+ 7yuMxY+Z2r8swg4Hhzbpmfvw1dnUDJdzfOTBtpa6hJS9o635iQ3RhbaGeoABCGhPooVA
+ LeGqbu+Npf3iNoV9cTylk4sMbeJ2UXdwvZeCu+2hXruyQM2I+EMJxsv8Ca1l157hTO0D
+ ue7Zqlwh00qGV0F4zaMYiLtg0w66GoRQC6i+dIiYWZbGq1sqrXszF1YFWKaq8a2neBg6
+ jidQ==
+X-Gm-Message-State: AOAM533M0OhkOPH4H/++Zicbr7v9A6ajKwD8FZDuBGHXZB0li1gFlLCp
+ fpfhnam1fLn3dgDSup+XHM6SQQ==
+X-Google-Smtp-Source: ABdhPJy4AgwwjRQfGqxNS+ef+eW9r6rG/MiHKLmp0lZkSO4suOBoZPpIGSFj0BEdfqIdWwabvq5I5A==
+X-Received: by 2002:a5d:6da9:: with SMTP id u9mr7656846wrs.237.1637856243644; 
+ Thu, 25 Nov 2021 08:04:03 -0800 (PST)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id z11sm3236854wrt.58.2021.11.25.07.59.55
+ by smtp.gmail.com with ESMTPSA id g4sm3158104wro.12.2021.11.25.08.04.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Nov 2021 07:59:55 -0800 (PST)
-Date: Thu, 25 Nov 2021 16:59:53 +0100
+ Thu, 25 Nov 2021 08:04:03 -0800 (PST)
+Date: Thu, 25 Nov 2021 17:04:01 +0100
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YZ+y+Uwo809qtvs5@phenom.ffwll.local>
+Message-ID: <YZ+z8VPjCGAWfpCT@phenom.ffwll.local>
 References: <20211123142111.3885-1-christian.koenig@amd.com>
- <20211123142111.3885-23-christian.koenig@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20211123142111.3885-23-christian.koenig@amd.com>
+In-Reply-To: <20211123142111.3885-1-christian.koenig@amd.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 22/26] dma-buf: add enum dma_resv_usage
+Subject: Re: [Linaro-mm-sig] completely rework the dma_resv semantic
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -85,241 +84,106 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Tue, Nov 23, 2021 at 03:21:07PM +0100, Christian K=F6nig wrote:
-> This change adds the dma_resv_usage enum and allows us to specify why a
-> dma_resv object is queried for its containing fences.
+On Tue, Nov 23, 2021 at 03:20:45PM +0100, Christian K=F6nig wrote:
+> Hi guys,
 > =
 
-> Additional to that a dma_resv_usage_rw() helper function is added to aid
-> retrieving the fences for a read or write userspace submission.
+> as discussed before this set of patches completely rework the dma_resv se=
+mantic
+> and spreads the new handling over all the existing drivers and users.
 > =
 
-> This is then deployed to the different query functions of the dma_resv
-> object and all of their users.
+> First of all this drops the DAG approach because it requires that every s=
+ingle
+> driver implements those relatively complicated rules correctly and any
+> violation of that immediately leads to either corruption of freed memory =
+or
+> even more severe security problems.
 > =
 
-> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+> Instead we just keep all fences around all the time until they are signal=
+ed.
+> Only fences with the same context are assumed to be signaled in the corre=
+ct
+> order since this is exercised elsewhere as well. Replacing fences is now =
+only
+> supported for hardware mechanism like VM page table updates where the har=
+dware
+> can guarantee that the resource can't be accessed any more.
+> =
 
-Just a few comments on the kenreldoc while I scroll through.
+> Then the concept of a single exclusive fence and multiple shared fences is
+> dropped as well.
+> =
 
->  EXPORT_SYMBOL(ib_umem_dmabuf_map_pages);
-> diff --git a/include/linux/dma-resv.h b/include/linux/dma-resv.h
-> index 062571c04bca..37552935bca6 100644
-> --- a/include/linux/dma-resv.h
-> +++ b/include/linux/dma-resv.h
-> @@ -49,6 +49,86 @@ extern struct ww_class reservation_ww_class;
->  =
+> Instead the dma_resv object is now just a container for dma_fence objects=
+ where
+> each fence has associated usage flags. Those use flags describe how the
+> operation represented by the dma_fence object is using the resource prote=
+cted
+> by the dma_resv object. This allows us to add multiple fences for each us=
+age
+> type.
+> =
 
->  struct dma_resv_list;
->  =
+> Additionally to the existing WRITE/READ usages this patch set also adds t=
+he new
+> KERNEL and OTHER usages. The KERNEL usages is used in cases where the ker=
+nel
+> needs to do some operation with the resource protected by the dma_resv ob=
+ject,
+> like copies or clears. Those are mandatory to wait for when dynamic memory
+> management is used.
+> =
 
-> +/**
-> + * enum dma_resv_usage - how the fences from a dma_resv obj are used
-> + *
-> + * This enum describes the different use cases for a dma_resv object and
-> + * controls which fences are returned when queried.
-> + *
-> + * An important fact is that there is the order KERNEL<WRITE<READ<OTHER =
-and
-> + * when the dma_resv object is asked for fences for one use case the fen=
-ces
-> + * for the lower use case are returned as well.
+> The OTHER usage is for cases where we don't want that the operation repre=
+sented
+> by the dma_fence object participate in any implicit sync but needs to be
+> respected by the kernel memory management. Examples for those are VM page=
+ table
+> updates and preemption fences.
+> =
 
-Might be good to replicate this to all functions that take a
-dma_resv_usage flag, and then also add a "See enum dma_resv_usage for more
-information." so we get a clickable hyperlink too.
+> While doing this the new implementation cleans up existing workarounds al=
+l over
+> the place, but especially amdgpu and TTM. Surprisingly I also found two u=
+se
+> cases for the KERNEL/OTHER usage in i915 and Nouveau, those might need mo=
+re
+> thoughts.
+> =
 
-> + *
-> + * For example when asking for WRITE fences then the KERNEL fences are r=
-eturned
-> + * as well. Similar when asked for READ fences then both WRITE and KERNEL
-> + * fences are returned as well.
-> + */
-> +enum dma_resv_usage {
-> +	/**
-> +	 * @DMA_RESV_USAGE_KERNEL: For in kernel memory management only.
-> +	 *
-> +	 * This should only be used for things like copying or clearing memory
-> +	 * with a DMA hardware engine for the purpose of kernel memory
-> +	 * management.
-> +	 *
-> +         * Drivers *always* need to wait for those fences before accessi=
-ng the
-> +	 * resource protected by the dma_resv object. The only exception for
-> +	 * that is when the resource is known to be locked down in place by
-> +	 * pinning it previously.
+> In general the existing functionality should been preserved, the only dow=
+nside
+> is that we now always need to reserve a slot before adding a fence. The n=
+ewly
+> added call to the reservation function can probably use some more cleanup.
+> =
 
-Should dma_buf_pin also do the wait for kernel fences? I think that would
-also ba e bit clearer semantics in the dma-buf patch which does these
-waits for us.
+> TODOs: Testing, testing, testing, doublechecking the newly added
+> kerneldoc for any typos.
+> =
 
-Or should dma_buf_pin be pipelined and it's up to callers to wait? For kms
-that's definitely the semantics we want, but it's a bit playing with fire
-situation, so maybe dma-buf should get the more idiot proof semantics?
+> Please review and/or comment,
 
-> +	 */
-> +	DMA_RESV_USAGE_KERNEL,
-> +
-> +	/**
-> +	 * @DMA_RESV_USAGE_WRITE: Implicit write synchronization.
-> +	 *
-> +	 * This should only be used for userspace command submissions which add
-> +	 * an implicit write dependency.
-> +	 */
-> +	DMA_RESV_USAGE_WRITE,
-> +
-> +	/**
-> +	 * @DMA_RESV_USAGE_READ: Implicit read synchronization.
-> +	 *
-> +	 * This should only be used for userspace command submissions which add
-> +	 * an implicit read dependency.
-> +	 */
-> +	DMA_RESV_USAGE_READ,
-> +
-> +	/**
-> +	 * @DMA_RESV_USAGE_OTHER: No implicit sync.
-> +	 *
-> +	 * This should be used for operations which don't want to add an
-> +	 * implicit dependency at all, but still have a dependency on memory
-> +	 * management.
-> +	 *
-> +	 * This might include things like preemption fences as well as device
-> +	 * page table updates or even userspace command submissions.
+I like.
 
-I think we should highlight a bit more that for explicitly synchronized
-userspace like vk OTHER is the normal case. So really not an exception.
-Ofc aside from amdkgf there's currently no driver doing this, but really
-we should have lots of them ...
+Unfortunately also massively burried, but I really like. I think the past
+few months (years?) of discussions and bikeshed have been worth it, this
+looks tidy and clear in semantics and in how drivers use it all.
 
+Ofc this will take some time to review/test in detail and land, but I
+think next steps would be to resurrect Jason's explicit dma-buf fence
+import/export series (should also clean up nicely I think), and then roll
+out the new fence semantics to a few vk/compute stacks? I think especially
+for vk what we want is that normal CS only ever uses OTHER, and any
+implicit sync that needs to happen for winsys buffers is done through the
+import/export ioctls. GL might need something slightly different, but
+normally there's not many shared buffers, so doing a pile of ioctl calls
+for implicit synced buffers seems fine. But perhaps GL does want a new CS
+ioctl flag.
 
-> +	 *
-> +	 * The kernel memory management *always* need to wait for those fences
-> +	 * before moving or freeing the resource protected by the dma_resv
-> +	 * object.
-> +	 */
-> +	DMA_RESV_USAGE_OTHER
-> +};
-> +
-> +/**
-> + * dma_resv_usage_rw - helper for implicit sync
-> + * @write: true if we create a new implicit sync write
-> + *
-> + * This returns the implicit synchronization usage for write or read acc=
-esses.
-
-Pls add "See enum dma_resv_usage for more details." or so. Never hurts to
-be plentiful with links :-)
-
-> + */
-> +static inline enum dma_resv_usage dma_resv_usage_rw(bool write)
-> +{
-> +	/* This looks confusing at first sight, but is indeed correct.
-> +	 *
-> +	 * The rational is that new write operations needs to wait for the
-> +	 * existing read and write operations to finish.
-> +	 * But a new read operation only needs to wait for the existing write
-> +	 * operations to finish.
-> +	 */
-> +	return write ? DMA_RESV_USAGE_READ : DMA_RESV_USAGE_WRITE;
-> +}
-> +
->  /**
->   * struct dma_resv - a reservation object manages fences for a buffer
->   *
-> @@ -147,8 +227,8 @@ struct dma_resv_iter {
->  	/** @obj: The dma_resv object we iterate over */
->  	struct dma_resv *obj;
->  =
-
-> -	/** @all_fences: If all fences should be returned */
-> -	bool all_fences;
-> +	/** @usage: Controls which fences are returned */
-> +	enum dma_resv_usage usage;
->  =
-
->  	/** @fence: the currently handled fence */
->  	struct dma_fence *fence;
-> @@ -178,14 +258,14 @@ struct dma_fence *dma_resv_iter_next(struct dma_res=
-v_iter *cursor);
->   * dma_resv_iter_begin - initialize a dma_resv_iter object
->   * @cursor: The dma_resv_iter object to initialize
->   * @obj: The dma_resv object which we want to iterate over
-> - * @all_fences: If all fences should be returned or just the exclusive o=
-ne
-> + * @usage: controls which fences to return
-
-Please add the blurb here I mentioned above. Maybe adjust the text to use
-the neatly highlighted @usage.
-
->   */
->  static inline void dma_resv_iter_begin(struct dma_resv_iter *cursor,
->  				       struct dma_resv *obj,
-> -				       bool all_fences)
-> +				       enum dma_resv_usage usage)
->  {
->  	cursor->obj =3D obj;
-> -	cursor->all_fences =3D all_fences;
-> +	cursor->usage =3D usage;
->  	cursor->fence =3D NULL;
->  }
->  =
-
-> @@ -242,7 +322,7 @@ static inline bool dma_resv_iter_is_restarted(struct =
-dma_resv_iter *cursor)
->   * dma_resv_for_each_fence - fence iterator
->   * @cursor: a struct dma_resv_iter pointer
->   * @obj: a dma_resv object pointer
-> - * @all_fences: true if all fences should be returned
-> + * @usage: controls which fences to return
->   * @fence: the current fence
->   *
-
-Same, another place that needs the @usage clarification.
-
->   * Iterate over the fences in a struct dma_resv object while holding the
-> @@ -251,8 +331,8 @@ static inline bool dma_resv_iter_is_restarted(struct =
-dma_resv_iter *cursor)
->   * valid as long as the lock is held and so no extra reference to the fe=
-nce is
->   * taken.
->   */
-> -#define dma_resv_for_each_fence(cursor, obj, all_fences, fence)	\
-> -	for (dma_resv_iter_begin(cursor, obj, all_fences),	\
-> +#define dma_resv_for_each_fence(cursor, obj, usage, fence)	\
-> +	for (dma_resv_iter_begin(cursor, obj, usage),	\
->  	     fence =3D dma_resv_iter_first(cursor); fence;	\
->  	     fence =3D dma_resv_iter_next(cursor))
->  =
-
-> @@ -421,14 +501,14 @@ void dma_resv_replace_fences(struct dma_resv *obj, =
-uint64_t context,
->  void dma_resv_add_excl_fence(struct dma_resv *obj, struct dma_fence *fen=
-ce);
->  void dma_resv_prune(struct dma_resv *obj);
->  void dma_resv_prune_unlocked(struct dma_resv *obj);
-> -int dma_resv_get_fences(struct dma_resv *obj, bool write,
-> +int dma_resv_get_fences(struct dma_resv *obj, enum dma_resv_usage usage,
->  			unsigned int *num_fences, struct dma_fence ***fences);
-> -int dma_resv_get_singleton(struct dma_resv *obj, bool write,
-> +int dma_resv_get_singleton(struct dma_resv *obj, enum dma_resv_usage usa=
-ge,
->  			   struct dma_fence **fence);
->  int dma_resv_copy_fences(struct dma_resv *dst, struct dma_resv *src);
-> -long dma_resv_wait_timeout(struct dma_resv *obj, bool wait_all, bool int=
-r,
-> -			   unsigned long timeout);
-> -bool dma_resv_test_signaled(struct dma_resv *obj, bool test_all);
-> +long dma_resv_wait_timeout(struct dma_resv *obj, enum dma_resv_usage usa=
-ge,
-> +			   bool intr, unsigned long timeout);
-> +bool dma_resv_test_signaled(struct dma_resv *obj, enum dma_resv_usage us=
-age);
->  void dma_resv_describe(struct dma_resv *obj, struct seq_file *seq);
-
-I took endless amounts of discussions, but I think we're arriving at
-something really neat and tiny here now finally. Both semantics, and how
-drivers use them.
--Daniel
+Cheers, Daniel
 -- =
 
 Daniel Vetter
