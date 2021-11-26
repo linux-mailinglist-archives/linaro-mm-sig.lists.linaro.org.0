@@ -2,68 +2,74 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1613E45DE43
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Nov 2021 17:04:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0667F45E3BD
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Nov 2021 01:37:48 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8491C60F1E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Nov 2021 16:04:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AFCF3622B0
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Nov 2021 00:37:45 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id F0C8762CA5; Thu, 25 Nov 2021 16:04:11 +0000 (UTC)
+	id 448ED62170; Fri, 26 Nov 2021 00:37:44 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0201C60F06;
-	Thu, 25 Nov 2021 16:04:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 08ED760E5F;
+	Fri, 26 Nov 2021 00:37:42 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id C13286049C
- for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Nov 2021 16:04:06 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id BE27060B03
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Nov 2021 00:37:40 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id AA69760F06; Thu, 25 Nov 2021 16:04:06 +0000 (UTC)
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
- [209.85.221.51])
- by lists.linaro.org (Postfix) with ESMTPS id 917BF6049C
- for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Nov 2021 16:04:04 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id c4so12638394wrd.9
- for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Nov 2021 08:04:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=kHdSMAOwLSMX+m+Y3BVujwHChGV1VSEejUWtst4SuaY=;
- b=AKCw6wouE5Z3sIR16JxmC3KMUy4mTCOLvi5FajeJyXFvcStcoSCYkJCVWjhg5LIRWy
- 7i9uqmo6tkd6Gg7NMJ0133gyemWpm8PGYKqQmUBCjOG+VGHLBvcqtlmb2p8iWNaWcnce
- G+glawUUTAXhYQpsJ5ygl55Yg7jH8LIfxLIOw=
+ id B199160E5F; Fri, 26 Nov 2021 00:37:40 +0000 (UTC)
+Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com
+ [209.85.208.173])
+ by lists.linaro.org (Postfix) with ESMTPS id A65DD60B03
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Nov 2021 00:37:38 +0000 (UTC)
+Received: by mail-lj1-f173.google.com with SMTP id k2so15469141lji.4
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Nov 2021 16:37:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=nMCkcNkVJHrUMMEDkKpjCXIAHsxHK0m1G/QamSr9K6g=;
+ b=UOqnunqsnMn5D9EP50S6+aOvQtPLUoltWmiTz6HxAhNzfbeySPSOPGeOl6o9gABXgU
+ R4ubclYHdlRX/BhMdfS1jWkG+fx/GwEjHYhLmMyhYRbVU5p2soAScnBgla+f61DspLaW
+ QvobT/wWL/czGrNtFt6a5rHvXebhv8swzGkNZJ6DFxe41OVxtfJs5md2N7rp0rN2Zdx8
+ wMILAGpUX4RVGbQ+122bfZuPENrC4mmZq/HHdW7BujRF/sVVeOFFYgRyChokKnOP9JlX
+ mBxaFOVisanu7dN4p6ozGotLMcmu+jTYYrUalnhR9hvpXuj3j0qijHE1mQwao6xSQv/B
+ xJ5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=kHdSMAOwLSMX+m+Y3BVujwHChGV1VSEejUWtst4SuaY=;
- b=DtlLjLj3UxsPncibdCr7r2gH3NHQC8J++n+U7OMXVo6xqxVTOkp5A/UFEKOzqIM8W8
- pzqN3PPQ8mo6ianw6D5Q14oIVQ/L6bNOqHnEYuTHZHiS6er+NrEUfuZVd+uybcGEcdSv
- 7yuMxY+Z2r8swg4Hhzbpmfvw1dnUDJdzfOTBtpa6hJS9o635iQ3RhbaGeoABCGhPooVA
- LeGqbu+Npf3iNoV9cTylk4sMbeJ2UXdwvZeCu+2hXruyQM2I+EMJxsv8Ca1l157hTO0D
- ue7Zqlwh00qGV0F4zaMYiLtg0w66GoRQC6i+dIiYWZbGq1sqrXszF1YFWKaq8a2neBg6
- jidQ==
-X-Gm-Message-State: AOAM533M0OhkOPH4H/++Zicbr7v9A6ajKwD8FZDuBGHXZB0li1gFlLCp
- fpfhnam1fLn3dgDSup+XHM6SQQ==
-X-Google-Smtp-Source: ABdhPJy4AgwwjRQfGqxNS+ef+eW9r6rG/MiHKLmp0lZkSO4suOBoZPpIGSFj0BEdfqIdWwabvq5I5A==
-X-Received: by 2002:a5d:6da9:: with SMTP id u9mr7656846wrs.237.1637856243644; 
- Thu, 25 Nov 2021 08:04:03 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id g4sm3158104wro.12.2021.11.25.08.04.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Nov 2021 08:04:03 -0800 (PST)
-Date: Thu, 25 Nov 2021 17:04:01 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YZ+z8VPjCGAWfpCT@phenom.ffwll.local>
-References: <20211123142111.3885-1-christian.koenig@amd.com>
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=nMCkcNkVJHrUMMEDkKpjCXIAHsxHK0m1G/QamSr9K6g=;
+ b=GeumhU/GDsEjFU+yKWL8pRglYnMIZYpeUl9FlCIDy9j7MW++rr6Yp9rsu26Kc7sx8V
+ tgw52FaBdEU7y8FlTD0Bs0F2zF9O4uUcAQrympntvYmidPXqgudxHV6B25OawaNlNC7i
+ lAeHCG63A1NOJ5sVNDt+STd3p926yXI4GFfeMllZoA8DN48xZYaQca+ujpxvU6pUmHX3
+ jJnd62wATomR/HSIpXC/6UX1ZzDP/mxXHAEn35eHbdWQKyMR44HwhxWX4J1XNqdsXaVE
+ pBeQpp5obAXE1mULc2DIWDSBwHbvhAzvjr7n9DFuuVPssnDLNqOuHdMqcKIwDfvdOtE5
+ CbYw==
+X-Gm-Message-State: AOAM5338JaoC1nQDy2cvcaqJXENscob026q4Q5rxZRAH/Uek+FlGcnnb
+ Ikb9fSH1QQnArGuCMxJRfkE=
+X-Google-Smtp-Source: ABdhPJyRX2L7hSbd3SNG4rggc/Cqlf6BaeolJPYAw1mQLBCAr4IT8k78ET/p4iE+e6YKJMpdWksvAg==
+X-Received: by 2002:a2e:a4ba:: with SMTP id g26mr28851298ljm.152.1637887057377; 
+ Thu, 25 Nov 2021 16:37:37 -0800 (PST)
+Received: from [192.168.2.145] (94-29-48-99.dynamic.spd-mgts.ru. [94.29.48.99])
+ by smtp.googlemail.com with ESMTPSA id e5sm377433lfs.51.2021.11.25.16.37.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 25 Nov 2021 16:37:36 -0800 (PST)
+To: Andy Shevchenko <andy.shevchenko@gmail.com>,
+ Akhil R <akhilrajeev@nvidia.com>
+References: <1637859224-5179-1-git-send-email-akhilrajeev@nvidia.com>
+ <CAHp75VfPPpTNCaM+GhcqZS53ts-20GBzm+4OWLAjND=z79pgxg@mail.gmail.com>
+From: Dmitry Osipenko <digetx@gmail.com>
+Message-ID: <aa63a45d-43a0-9aaf-cad3-2f4f66d707e7@gmail.com>
+Date: Fri, 26 Nov 2021 03:37:35 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20211123142111.3885-1-christian.koenig@amd.com>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
+In-Reply-To: <CAHp75VfPPpTNCaM+GhcqZS53ts-20GBzm+4OWLAjND=z79pgxg@mail.gmail.com>
+Content-Language: en-US
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] completely rework the dma_resv semantic
+Subject: Re: [Linaro-mm-sig] [PATCH v4] i2c: tegra: Add the ACPI support
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -76,120 +82,25 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
- daniel@ffwll.ch, linux-media@vger.kernel.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Cc: Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, Jon Hunter <jonathanh@nvidia.com>,
+ linaro-mm-sig@lists.linaro.org, Laxman Dewangan <ldewangan@nvidia.com>,
+ Thierry Reding <thierry.reding@gmail.com>,
+ linux-i2c <linux-i2c@vger.kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>,
+ linux-tegra <linux-tegra@vger.kernel.org>,
+ Christian Koenig <christian.koenig@amd.com>,
+ Linux Media Mailing List <linux-media@vger.kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Tue, Nov 23, 2021 at 03:20:45PM +0100, Christian K=F6nig wrote:
-> Hi guys,
-> =
-
-> as discussed before this set of patches completely rework the dma_resv se=
-mantic
-> and spreads the new handling over all the existing drivers and users.
-> =
-
-> First of all this drops the DAG approach because it requires that every s=
-ingle
-> driver implements those relatively complicated rules correctly and any
-> violation of that immediately leads to either corruption of freed memory =
-or
-> even more severe security problems.
-> =
-
-> Instead we just keep all fences around all the time until they are signal=
-ed.
-> Only fences with the same context are assumed to be signaled in the corre=
-ct
-> order since this is exercised elsewhere as well. Replacing fences is now =
-only
-> supported for hardware mechanism like VM page table updates where the har=
-dware
-> can guarantee that the resource can't be accessed any more.
-> =
-
-> Then the concept of a single exclusive fence and multiple shared fences is
-> dropped as well.
-> =
-
-> Instead the dma_resv object is now just a container for dma_fence objects=
- where
-> each fence has associated usage flags. Those use flags describe how the
-> operation represented by the dma_fence object is using the resource prote=
-cted
-> by the dma_resv object. This allows us to add multiple fences for each us=
-age
-> type.
-> =
-
-> Additionally to the existing WRITE/READ usages this patch set also adds t=
-he new
-> KERNEL and OTHER usages. The KERNEL usages is used in cases where the ker=
-nel
-> needs to do some operation with the resource protected by the dma_resv ob=
-ject,
-> like copies or clears. Those are mandatory to wait for when dynamic memory
-> management is used.
-> =
-
-> The OTHER usage is for cases where we don't want that the operation repre=
-sented
-> by the dma_fence object participate in any implicit sync but needs to be
-> respected by the kernel memory management. Examples for those are VM page=
- table
-> updates and preemption fences.
-> =
-
-> While doing this the new implementation cleans up existing workarounds al=
-l over
-> the place, but especially amdgpu and TTM. Surprisingly I also found two u=
-se
-> cases for the KERNEL/OTHER usage in i915 and Nouveau, those might need mo=
-re
-> thoughts.
-> =
-
-> In general the existing functionality should been preserved, the only dow=
-nside
-> is that we now always need to reserve a slot before adding a fence. The n=
-ewly
-> added call to the reservation function can probably use some more cleanup.
-> =
-
-> TODOs: Testing, testing, testing, doublechecking the newly added
-> kerneldoc for any typos.
-> =
-
-> Please review and/or comment,
-
-I like.
-
-Unfortunately also massively burried, but I really like. I think the past
-few months (years?) of discussions and bikeshed have been worth it, this
-looks tidy and clear in semantics and in how drivers use it all.
-
-Ofc this will take some time to review/test in detail and land, but I
-think next steps would be to resurrect Jason's explicit dma-buf fence
-import/export series (should also clean up nicely I think), and then roll
-out the new fence semantics to a few vk/compute stacks? I think especially
-for vk what we want is that normal CS only ever uses OTHER, and any
-implicit sync that needs to happen for winsys buffers is done through the
-import/export ioctls. GL might need something slightly different, but
-normally there's not many shared buffers, so doing a pile of ioctl calls
-for implicit synced buffers seems fine. But perhaps GL does want a new CS
-ioctl flag.
-
-Cheers, Daniel
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+MjUuMTEuMjAyMSAyMjoyOCwgQW5keSBTaGV2Y2hlbmtvINC/0LjRiNC10YI6Cj4+IC0gICAgICAg
+ZXJyID0gcmVzZXRfY29udHJvbF9yZXNldChpMmNfZGV2LT5yc3QpOwo+PiArICAgICAgIGlmICho
+YW5kbGUpCj4+ICsgICAgICAgICAgICAgICBlcnIgPSBhY3BpX2V2YWx1YXRlX29iamVjdChoYW5k
+bGUsICJfUlNUIiwgTlVMTCwgTlVMTCk7Cj4gRG9lcyBpdCBjb21waWxlIGZvciBDT05GSUdfQUNQ
+ST1uIGNhc2U/Cj4gCgpJdCBjb21waWxlcyBhbmQgd29ya3MgZmluZSB3aXRoIENPTkZJR19BQ1BJ
+PW4uCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFy
+by1tbS1zaWcgbWFpbGluZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRw
+czovL2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
