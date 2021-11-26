@@ -2,73 +2,82 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB32445E3DC
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Nov 2021 02:02:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E505E45E7D8
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Nov 2021 07:31:14 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8E44662174
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Nov 2021 01:02:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4EBE36195B
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Nov 2021 06:31:13 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 661D361F0D; Fri, 26 Nov 2021 01:02:49 +0000 (UTC)
+	id 11BFF6216F; Fri, 26 Nov 2021 06:31:12 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 28E7E60F1E;
-	Fri, 26 Nov 2021 01:02:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1209160F1F;
+	Fri, 26 Nov 2021 06:31:09 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 4DDCA60B03
- for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Nov 2021 01:02:45 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id BC40660A13
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Nov 2021 06:31:06 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 41ACB60F1E; Fri, 26 Nov 2021 01:02:45 +0000 (UTC)
-Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com
- [209.85.208.180])
- by lists.linaro.org (Postfix) with ESMTPS id 3B2F260B03
- for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Nov 2021 01:02:43 +0000 (UTC)
-Received: by mail-lj1-f180.google.com with SMTP id 207so15463927ljf.10
- for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Nov 2021 17:02:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=d5eybHUeaAVMy2um3rYiSgMu1qvMcc0ni9BDBOieeBo=;
- b=L+idWAu/GRgivG969p6gm/LH2qCEWB+i5m44beTgr6Uwa6hzdF2k4qBXhNZeLU6USE
- AChTYSdb57Vipf33dqjoqCKu1B+j/3EdyNxE5ANPzoyzy+oQH7DItcOOPiRN+nBk6eln
- 8vcYABfJvDkeBwWC3fOVs5RcaHdQB0We53YH82o2z1iLmpNx7s50b0+/P9aMv7k1uYBq
- g+l7gx5pk1mJEwMf+kGfYz4+xFF4dHaybX0F6HJASGO3/nx4QKR0vbOkxR5UTV1Eq56L
- 5L+D/+ft8wytUEy1smK5cMwSCidZTxDJ0slNHrk6jafsCTGdF1tbyrPZeqewO9cssL2x
- X6lQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=d5eybHUeaAVMy2um3rYiSgMu1qvMcc0ni9BDBOieeBo=;
- b=ew5jOT8DiT+WwiibAl4zlUCmp482cqWoS1gBo3PSUcp3Y/zQmVyJaSCyu3ciq5Jwq8
- ABCoHV2o4AxhiHM+H8zDEymkkyoAy2lop2t2JsSz9P5C83fEwO6r4cWfSpyk9u92g/Z+
- fL3PN9yarSdm62EWHzmLE3O1pejcgL7NYAWGrI89cQJ77wh1mbSLKWpvcGhQnSSCnWfN
- P2MDvDdWpbBeMmagvnsvIIgyHdxa/C0UiCx8qbEwRKU1lAQBkjE83ahmpeq3iqyHvxyN
- ZVfpbvdSid/I48SZES4HatW1nY8DAZUMTa/c4fWok8c3bBha6oIEurQ1CsIZ82cVE//3
- XxDw==
-X-Gm-Message-State: AOAM53264eYp5YGOU+gJkAnXldj9TNelYOIfo5p+OSqIBtbyPevISY+s
- wjLh+R8weLbdFbqL3j+7cAA=
-X-Google-Smtp-Source: ABdhPJwDlHo4lbJIQNIvxCxi52QGGUiKS4o/tEWhT6OWWbm2bP2UQs/NTgNq7wKFmXqO8NiR+HnQ9Q==
-X-Received: by 2002:a05:651c:238:: with SMTP id
- z24mr30440552ljn.84.1637888562022; 
- Thu, 25 Nov 2021 17:02:42 -0800 (PST)
-Received: from [192.168.2.145] (94-29-48-99.dynamic.spd-mgts.ru. [94.29.48.99])
- by smtp.googlemail.com with ESMTPSA id f6sm363021ljm.48.2021.11.25.17.02.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 25 Nov 2021 17:02:41 -0800 (PST)
-To: Akhil R <akhilrajeev@nvidia.com>
-References: <1637859224-5179-1-git-send-email-akhilrajeev@nvidia.com>
-From: Dmitry Osipenko <digetx@gmail.com>
-Message-ID: <08781b22-2d96-6605-06ea-6911a4837474@gmail.com>
-Date: Fri, 26 Nov 2021 04:02:40 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ id B80B860F1F; Fri, 26 Nov 2021 06:31:06 +0000 (UTC)
+Received: from new2-smtp.messagingengine.com (new2-smtp.messagingengine.com
+ [66.111.4.224])
+ by lists.linaro.org (Postfix) with ESMTPS id A5DC060A13
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Nov 2021 06:31:04 +0000 (UTC)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailnew.nyi.internal (Postfix) with ESMTP id 4911758030B;
+ Fri, 26 Nov 2021 01:31:04 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+ by compute5.internal (MEProxy); Fri, 26 Nov 2021 01:31:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kroah.com; h=
+ date:from:to:cc:subject:message-id:references:mime-version
+ :content-type:in-reply-to; s=fm2; bh=TQT7bhXqwH8akKiIgle7DOfwOzq
+ sXFgyjCJ+JSwVBvM=; b=UArY7GF/grHcjnLfBnXEUU1gwzqTyNaaOluwb+sg0Eo
+ pm+/1TsfpLJAebvBYApjuv3QnnnlEa3HKiaUw0P9fxcA8XHtXWdnrWB6sAwvLghr
+ LOvI9XUzjoetQ7FveDlUQAeKg8j8FYqbdK43JJXM+GiYg58cOSAI21yr+b4cxxoM
+ OszMI1XHTjBFRX7/Gu1lFy/6jg5XBUrEim4Fz5YGMOoe554GfMxmBrs72PDEP0xg
+ Twv/mANVLQoUrK8AtS7bFKIgj4+WdMrCyOSAqYbHBgb68AiUBTRs5wlU4U5MOAja
+ IawCmEDPlpOyGCwnyvoSkIwlNuxwVJTHw3clze+/mZA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to:x-me-proxy
+ :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=TQT7bh
+ XqwH8akKiIgle7DOfwOzqsXFgyjCJ+JSwVBvM=; b=ad7MUCGgy6GBCEqiy5C7uF
+ ENvuoMF/KjO9QrM9e+6Lfkql40q5ow+9hhnHEjNDZ0/v0R7eBG+dbTVPRg45BseY
+ l6gY4gC/yALZBstQklXQfqD4FBY+g2bFVHBCDHfB/MaI8gEciv4JrkQ6yhxBrKz1
+ CGbqK6u2RIS7vXeNUVfmhjyT7Tn+vfL90md6jHPu9Ueu8HrkWljf1niHkQCDocoW
+ CaUyH3Psf9Q7ARs3nafg+tDn4VnCCTVOknEiaYbfxiG7Fdv6imBrkTFyijuFmkaH
+ 1BDnujDlMfsYcznk3Zmu2vrST6xQ8S63AWa4KUxxZ5tTsz/Pu9c7qQdxIaygrzXw
+ ==
+X-ME-Sender: <xms:J3-gYbgcJ7yuOd9PxPF7z6PUzVcR_5VDdV8atw8k7Ay6OiR9EabrhQ>
+ <xme:J3-gYYCmCpJxWZh5GwcOX9abxzx6nWFs5JXay71t0m3W-qzumEF6ZXT_67GjD3Ksw
+ JVBrl8GJsYpPw>
+X-ME-Received: <xmr:J3-gYbE8gDUQBc2O0-GjvN0MDTqjRvWxBoOuptqQU9aRGWTCcZD6Ednqpvz5dH-YyVj0S47HffvL0d2035sbccQtgMwchpU5>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvuddrhedugdeliecutefuodetggdotefrodftvf
+ curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+ uegrihhlohhuthemuceftddtnecunecujfgurhepfffhvffukfhfgggtuggjsehttdertd
+ dttddvnecuhfhrohhmpefirhgvghcumffjuceoghhrvghgsehkrhhorghhrdgtohhmqeen
+ ucggtffrrghtthgvrhhnpeeuleeltdehkeeltefhleduuddvhfffuedvffduveegheekge
+ eiffevheegfeetgfenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgv
+ rhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepghhrvghgsehkrhhorghhrd
+ gtohhm
+X-ME-Proxy: <xmx:J3-gYYRJMLRkMk3wyBE0Iv5OCuMK6kiSI-TXUIV8c2nhFI-hcKra9w>
+ <xmx:J3-gYYypj5QB_CACUx3mkprwpqxZmTsm6Qj8en4BV4UyKs8jn2_aEQ>
+ <xmx:J3-gYe6UdYl0Eb_CsMSzKsj3799OfW3C_EshpDEE60S5X8eTugPQWw>
+ <xmx:KH-gYZT9W9xTQhOIPR-7TKNmuMW6_Ud9CatWFziCagno6socGADzTQ>
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 26 Nov 2021 01:31:02 -0500 (EST)
+Date: Fri, 26 Nov 2021 07:31:00 +0100
+From: Greg KH <greg@kroah.com>
+To: guangming.cao@mediatek.com
+Message-ID: <YaB/JHP/pMbgRJ1O@kroah.com>
+References: <eb6cc56d-cbe0-73d5-d4f5-0aa2b76272a4@arm.com>
+ <20211126031605.81436-1-guangming.cao@mediatek.com>
 MIME-Version: 1.0
-In-Reply-To: <1637859224-5179-1-git-send-email-akhilrajeev@nvidia.com>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <20211126031605.81436-1-guangming.cao@mediatek.com>
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH v4] i2c: tegra: Add the ACPI support
+Subject: Re: [Linaro-mm-sig] [PATCH v3] dma-buf: system_heap: Use
+ 'for_each_sgtable_sg' in pages free flow
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -81,35 +90,65 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- jonathanh@nvidia.com, linaro-mm-sig@lists.linaro.org,
- andy.shevchenko@gmail.com, ldewangan@nvidia.com, thierry.reding@gmail.com,
- linux-i2c@vger.kernel.org, p.zabel@pengutronix.de, linux-tegra@vger.kernel.org,
- christian.koenig@amd.com, linux-media@vger.kernel.org
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: wsd_upstream@mediatek.com, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, christian.koenig@amd.com,
+ linaro-mm-sig@lists.linaro.org, john.stultz@linaro.org, lmark@codeaurora.org,
+ benjamin.gaignard@linaro.org, matthias.bgg@gmail.com,
+ linux-mediatek@lists.infradead.org, stable@vger.kernel.org, labbott@redhat.com,
+ robin.murphy@arm.com, Brian.Starkey@arm.com,
+ linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-MjUuMTEuMjAyMSAxOTo1MywgQWtoaWwgUiDQv9C40YjQtdGCOgo+IEFkZCBzdXBwb3J0IGZvciB0
-aGUgQUNQSSBiYXNlZCBkZXZpY2UgcmVnaXN0cmF0aW9uIHNvIHRoYXQgdGhlIGRyaXZlcgo+IGNh
-biBiZSBhbHNvIGVuYWJsZWQgdGhyb3VnaCBBQ1BJIHRhYmxlLgo+IAo+IFRoaXMgZG9lcyBub3Qg
-aW5jbHVkZSB0aGUgQUNQSSBzdXBwb3J0IGZvciBUZWdyYSBWSSBhbmQgRFZDIEkyQy4KPiAKPiBT
-aWduZWQtb2ZmLWJ5OiBBa2hpbCBSIDxha2hpbHJhamVldkBudmlkaWEuY29tPgo+IC0tLQo+ICBk
-cml2ZXJzL2kyYy9idXNzZXMvaTJjLXRlZ3JhLmMgfCA1MiArKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKy0tLS0tLS0tLS0KPiAgMSBmaWxlIGNoYW5nZWQsIDQwIGluc2VydGlvbnMoKyks
-IDEyIGRlbGV0aW9ucygtKQo+IAo+IHY0IGNoYW5nZXM6Cj4gICAqIGNoYW5nZWQgaGFzX2FjcGlf
-Y29tcGFuaW9uIHRvIEFDUElfSEFORExFIGZvciBjb25zaXN0ZW5jeSBhY3Jvc3MgCj4gICAgIGFs
-bCBmdW5jdGlvbnMKPiB2MyAtIGh0dHBzOi8vbGttbC5vcmcvbGttbC8yMDIxLzExLzI1LzE3Mwo+
-IHYyIC0gaHR0cHM6Ly9sa21sLm9yZy9sa21sLzIwMjEvMTEvMjMvODIKPiB2MSAtIGh0dHBzOi8v
-bGttbC5vcmcvbGttbC8yMDIxLzExLzE5LzM5MwoKQW5keSBzdWdnZXN0ZWQgdG8gbWFrZSB2NSB3
-aXRoIGV4dHJhIHBhdGNoIHRoYXQgd2lsbCBtYWtlIHVzZSBvZiB0aGUKZ2VuZXJpYyBpMmNfdGlt
-aW5ncywgYnV0IGl0IHNob3VsZCBiZSBhIHNlcGFyYXRlIGNoYW5nZS4KClRoaXMgcGF0Y2ggaXMg
-Z29vZCB0byBtZS4gUGxlYXNlIHByb3ZpZGUgdGhlIGZ1bGwgY2hhbmdlbG9nIGZvciBlYWNoCnZl
-cnNpb24gbmV4dCB0aW1lLCBpbnN0ZWFkIG9mIHRoZSBsaW5rcy4gVGhhbmtzIQoKSWYgeW91J2xs
-IG1ha2UgdjUsIHRoZW4gZmVlbCBmcmVlIHRvIGFkZCBteSByLWI6CgpSZXZpZXdlZC1ieTogRG1p
-dHJ5IE9zaXBlbmtvIDxkaWdldHhAZ21haWwuY29tPgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdApMaW5hcm8t
-bW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKaHR0cHM6Ly9saXN0cy5saW5hcm8ub3JnL21haWxtYW4v
-bGlzdGluZm8vbGluYXJvLW1tLXNpZwo=
+On Fri, Nov 26, 2021 at 11:16:05AM +0800, guangming.cao@mediatek.com wrote:
+> From: Guangming <Guangming.Cao@mediatek.com>
+> 
+> For previous version, it uses 'sg_table.nent's to traverse sg_table in pages
+> free flow.
+> However, 'sg_table.nents' is reassigned in 'dma_map_sg', it means the number of
+> created entries in the DMA adderess space.
+> So, use 'sg_table.nents' in pages free flow will case some pages can't be freed.
+> 
+> Here we should use sg_table.orig_nents to free pages memory, but use the
+> sgtable helper 'for each_sgtable_sg'(, instead of the previous rather common
+> helper 'for_each_sg' which maybe cause memory leak) is much better.
+> 
+> Fixes: d963ab0f15fb0 ("dma-buf: system_heap: Allocate higher order pages if available")
+> 
+> Signed-off-by: Guangming <Guangming.Cao@mediatek.com>
+> ---
+>  drivers/dma-buf/heaps/system_heap.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/heaps/system_heap.c
+> index 23a7e74ef966..8660508f3684 100644
+> --- a/drivers/dma-buf/heaps/system_heap.c
+> +++ b/drivers/dma-buf/heaps/system_heap.c
+> @@ -289,7 +289,7 @@ static void system_heap_dma_buf_release(struct dma_buf *dmabuf)
+>  	int i;
+>  
+>  	table = &buffer->sg_table;
+> -	for_each_sg(table->sgl, sg, table->nents, i) {
+> +	for_each_sgtable_sg(table, sg, i) {
+>  		struct page *page = sg_page(sg);
+>  
+>  		__free_pages(page, compound_order(page));
+> -- 
+> 2.17.1
+> 
+
+<formletter>
+
+This is not the correct way to submit patches for inclusion in the
+stable kernel tree.  Please read:
+    https://www.kernel.org/doc/html/latest/process/stable-kernel-rules.html
+for how to do this properly.
+
+</formletter>
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
