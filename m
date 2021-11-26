@@ -2,75 +2,69 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id D761345EB9E
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Nov 2021 11:30:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 932C445F0D1
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Nov 2021 16:37:27 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3B11F62421
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Nov 2021 10:30:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CAE596216B
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 26 Nov 2021 15:37:25 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 2B08C61F0D; Fri, 26 Nov 2021 10:30:29 +0000 (UTC)
+	id 86FB662CA7; Fri, 26 Nov 2021 15:37:24 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 46D226195B;
-	Fri, 26 Nov 2021 10:30:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 69E8060F1F;
+	Fri, 26 Nov 2021 15:37:21 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 7454960E5F
- for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Nov 2021 10:30:24 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 4B91460ADB
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Nov 2021 15:37:20 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 704786195B; Fri, 26 Nov 2021 10:30:24 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
- [209.85.128.53])
- by lists.linaro.org (Postfix) with ESMTPS id 66C0960E5F
- for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Nov 2021 10:30:22 +0000 (UTC)
-Received: by mail-wm1-f53.google.com with SMTP id
- o19-20020a1c7513000000b0033a93202467so6473603wmc.2
- for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Nov 2021 02:30:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-transfer-encoding:content-language;
- bh=zTg0WacJr7kzwrsnQJsQDndFsSlk7FEd+90GUlUHgJI=;
- b=o6BgQc+l+C4RBDUwYZTioNATMY6ijtPxOhlL2eg6/yNMCiU6RhD6u2R4bMkx7dGIOJ
- M7Hi7pSKfDOppaNmI3xCaoQg+wN/d7k2Uaqz5rEFxykNt5tkzLvgR/iQszQaRxW+VUYn
- mkb5LJXmscDRFd10ZtW2Xmlygpt86CLq6Xac4qLHwhtiNw646RXheHzNmZGgxBC0tWBi
- wh1Plz8ot0Y4Oaf6YNkCZpz0jLHDvWcLiHpp5IHlOuNazGT6Urr3W8BNKSjAHq7O5l/E
- kPCD9h/UDZrYjsw9lk1EJGGVI681GwGDQbq0voKEzIG4EXVr2+JANPkGFXjYxnaP3F9c
- kLOg==
+ id 40F2060F1F; Fri, 26 Nov 2021 15:37:20 +0000 (UTC)
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
+ [209.85.221.50])
+ by lists.linaro.org (Postfix) with ESMTPS id 364C760ADB
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Nov 2021 15:37:18 +0000 (UTC)
+Received: by mail-wr1-f50.google.com with SMTP id t9so2524616wrx.7
+ for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Nov 2021 07:37:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=4FnyaLWyvOAQeJjC3Zb+4XuQuhsTMCYxjqdXSYoADFk=;
+ b=FPi53YagST9tqSejwT2pIZ23vOSDIA/5Cw8qme3DBlmpYictGDAMBZj6BmO7b3JXFB
+ f2WbPqsfa6wZgqecexgXNYzTjGRehDYay8bKuz5DHhnPPvljhGGwtibjMdxuhhv4Ifal
+ qRqB3wTFdL02O4CNjJqyNqI9QX6iu68VfKTc4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-transfer-encoding
- :content-language;
- bh=zTg0WacJr7kzwrsnQJsQDndFsSlk7FEd+90GUlUHgJI=;
- b=0LzQb44nUaXSIbQ6z9SvWRKM+xB7tdXI6eRtOGRC6hUv7iNNlFDb57iXbidKGU/q2X
- 3Pmq7HJOfvYWK2N8CskGfwLfqVx8Bvgp+FdPMn8keaVsdP50rMqadeiqyW9LCuzhk363
- PeH7omeGgS9BccdGjyTZ5O7OpnG0R7CyAb9d6cLA0Khn7cg9TQHf+/XqVONCGDNXVRI+
- Yygpw/RBLdjw0xMeFTZ8Ez8mNEUy+aR5hzljDiIxhX1RdguttquCU2oK1sM3QtwWfJCp
- zs/M9VDI71ZoXGZaBhWDFSLPWSeqhTwGrA1f4BQWLFYea+CE5ENIXmOvSMRDrGfj7eaC
- CB4A==
-X-Gm-Message-State: AOAM532tfJ6IUp0GO6a9+IHd2oN9rOEM4nZJPo5cOz/Uosk/Jql3nS5Z
- 8m+5yAmY84YL8HF/KGD1umZ8gMfum20=
-X-Google-Smtp-Source: ABdhPJzFenGp5brgkbj5MZQnP7FS6lJhdyGMVEwRhXdQZTcZJLb6MPZQPA33OW7GQm6nsgS0NHfbiA==
-X-Received: by 2002:a05:600c:364f:: with SMTP id
- y15mr13749998wmq.7.1637922621452; 
- Fri, 26 Nov 2021 02:30:21 -0800 (PST)
-Received: from ?IPv6:2a02:908:1252:fb60:108:c3ea:37df:ad4c?
- ([2a02:908:1252:fb60:108:c3ea:37df:ad4c])
- by smtp.gmail.com with ESMTPSA id o10sm6549508wri.15.2021.11.26.02.30.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Nov 2021 02:30:20 -0800 (PST)
-To: Daniel Vetter <daniel@ffwll.ch>
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=4FnyaLWyvOAQeJjC3Zb+4XuQuhsTMCYxjqdXSYoADFk=;
+ b=UOnXy7WE3qeQy4ctm4yNwG1HvY9usgsqYHnVX76YBpknElk/1Ybq6uW98MYWvyq0Qs
+ bqoDU38ds3kS3mBBg8eCGRN1ZnMnogVpPQoegycI1UGq0xHjBl6M2KcTVEAWTj66fA8g
+ 6W8NK/HuwAwP1PpcTKA2CbXASYTfX3RhSXsHjI96WLwj1hIuE+hpSQm8TDE+dciE6pJy
+ DPOaXBu2clcOwA8baBCYXs204h8BCQieIL/mm3FHs27S5ugh0OJ+iN0UdJ+P+Kaqtj80
+ sXdUVa6gNNP1rPsVHzVlrywoy+E7LWkCuNFS+IfErE2ZpscqWS35TH2Cqq6Pl0fyXhNT
+ nsiw==
+X-Gm-Message-State: AOAM532izXQz289pibfeu6sA61O02CsnKRMJVt5mWutrFNO9xUgeietc
+ Q+ykChawYZc5UEvjmc44DW6nzw==
+X-Google-Smtp-Source: ABdhPJy9NU89a6BqtlQNlnHKD+/fMzjk0BNrICOiirM/Q+4JDx+qY42SvDak49q035dxBZaGz1IxUw==
+X-Received: by 2002:a5d:6548:: with SMTP id z8mr15732064wrv.502.1637941037157; 
+ Fri, 26 Nov 2021 07:37:17 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id n7sm5752435wro.68.2021.11.26.07.37.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 26 Nov 2021 07:37:16 -0800 (PST)
+Date: Fri, 26 Nov 2021 16:37:14 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <YaD/Kq4xTZ6jWikq@phenom.ffwll.local>
 References: <20211123142111.3885-1-christian.koenig@amd.com>
  <20211123142111.3885-20-christian.koenig@amd.com>
  <YZ+wCxjFSI4EAIvx@phenom.ffwll.local>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <0a3f93f1-278e-c393-3e79-745a52694f3d@gmail.com>
-Date: Fri, 26 Nov 2021 11:30:19 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
+ <0a3f93f1-278e-c393-3e79-745a52694f3d@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <YZ+wCxjFSI4EAIvx@phenom.ffwll.local>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <0a3f93f1-278e-c393-3e79-745a52694f3d@gmail.com>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] [PATCH 19/26] drm: support more than one write
  fence in drm_gem_plane_helper_prepare_fb
@@ -87,56 +81,117 @@ List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
- linux-media@vger.kernel.org
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+ Daniel Vetter <daniel@ffwll.ch>, linux-media@vger.kernel.org
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-QW0gMjUuMTEuMjEgdW0gMTY6NDcgc2NocmllYiBEYW5pZWwgVmV0dGVyOgo+IE9uIFR1ZSwgTm92
-IDIzLCAyMDIxIGF0IDAzOjIxOjA0UE0gKzAxMDAsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6Cj4+
-IFVzZSBkbWFfcmVzdl9nZXRfc2luZ2xldG9uKCkgaGVyZSB0byBldmVudHVhbGx5IGdldCBtb3Jl
-IHRoYW4gb25lIHdyaXRlCj4+IGZlbmNlIGFzIHNpbmdsZSBmZW5jZS4KPiBZZWFoIHRoaXMgaXMg
-bmljZSwgYXRvbWljIGNvbW1pdCBoZWxwZXJzIG5vdCBzdXBwb3J0aW5nIG11bHRpcGxlIHdyaXRl
-Cj4gZmVuY2VzIHdhcyByZWFsbHkgbXkgbWFpbiB3b3JyeSBpbiB0aGlzIGVudGlyZSBlbmRlYXZv
-dXIuIE90aGVyd2lzZSBsb29rcwo+IGFsbCByYXRoZXIgcmVhc29uYWJsZS4KPgo+IEknbGwgdHJ5
-IHRvIGZpbmQgc29tZSByZXZpZXcgYmFuZHdpZHRoLCBidXQgd291bGQgYmUgcmVhbGx5IGlmIHlv
-dSBjYW4KPiB2b2x1bnRlZXIgb3RoZXJzIHRvbyAoZXNwZWNpYWxseSBtYWtpbmcgc3VyZSB0dG0g
-ZHJpdmVycyBzZXQgdGhlIEtFUk5FTAo+IGZlbmNlcyBjb3JyZWN0bHkgaW4gYWxsIGNhc2VzKS4K
-Ck1heWJlIEkgc2hvdWxkIHNwbGl0IHRoYXQgdXAgaW50byBzd2l0Y2hpbmcgb3ZlciB0byBhZGRp
-bmcgdGhlIGVudW0gYW5kIAp0aGVuIHN3aXRjaGluZyB0byBrZXJuZWwvYm9va2tlZXAocHJldmlv
-dXNseSBvdGhlcikgZm9yIHNvbWUgdXNlIGNhc2VzLgoKSXQgd291bGQgYmUgZ29vZCBpZiBJIGNv
-dWxkIGdldCBhbiByYiBvbiB0aGUgdHJpdmlhbCBkcml2ZXIgY2xlYW51cHMgCmZpcnN0LiBJIGNh
-biBzZW5kIHRob3NlIG91dCBpbmRpdmlkdWFsbHkgaWYgdGhhdCBoZWxwcy4KClRoYW5rcywKQ2hy
-aXN0aWFuLgoKPiAtRGFuaWVsCj4KPgo+PiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3RpYW4gS8O2bmln
-IDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+Cj4+IC0tLQo+PiAgIGRyaXZlcnMvZ3B1L2RybS9k
-cm1fZ2VtX2F0b21pY19oZWxwZXIuYyB8IDE4ICsrKysrKystLS0tLS0tLS0tLQo+PiAgIDEgZmls
-ZSBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKyksIDExIGRlbGV0aW9ucygtKQo+Pgo+PiBkaWZmIC0t
-Z2l0IGEvZHJpdmVycy9ncHUvZHJtL2RybV9nZW1fYXRvbWljX2hlbHBlci5jIGIvZHJpdmVycy9n
-cHUvZHJtL2RybV9nZW1fYXRvbWljX2hlbHBlci5jCj4+IGluZGV4IGMzMTg5YWZlMTBjYi4uOTMz
-OGRkYjdlZGZmIDEwMDY0NAo+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2dlbV9hdG9taWNf
-aGVscGVyLmMKPj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2RybV9nZW1fYXRvbWljX2hlbHBlci5j
-Cj4+IEBAIC0xNDMsMjUgKzE0MywyMSBAQAo+PiAgICAqLwo+PiAgIGludCBkcm1fZ2VtX3BsYW5l
-X2hlbHBlcl9wcmVwYXJlX2ZiKHN0cnVjdCBkcm1fcGxhbmUgKnBsYW5lLCBzdHJ1Y3QgZHJtX3Bs
-YW5lX3N0YXRlICpzdGF0ZSkKPj4gICB7Cj4+IC0Jc3RydWN0IGRtYV9yZXN2X2l0ZXIgY3Vyc29y
-Owo+PiAgIAlzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9iajsKPj4gICAJc3RydWN0IGRtYV9mZW5j
-ZSAqZmVuY2U7Cj4+ICsJaW50IHJldDsKPj4gICAKPj4gICAJaWYgKCFzdGF0ZS0+ZmIpCj4+ICAg
-CQlyZXR1cm4gMDsKPj4gICAKPj4gICAJb2JqID0gZHJtX2dlbV9mYl9nZXRfb2JqKHN0YXRlLT5m
-YiwgMCk7Cj4+IC0JZG1hX3Jlc3ZfaXRlcl9iZWdpbigmY3Vyc29yLCBvYmotPnJlc3YsIGZhbHNl
-KTsKPj4gLQlkbWFfcmVzdl9mb3JfZWFjaF9mZW5jZV91bmxvY2tlZCgmY3Vyc29yLCBmZW5jZSkg
-ewo+PiAtCQkvKiBUT0RPOiBDdXJyZW50bHkgdGhlcmUgc2hvdWxkIGJlIG9ubHkgb25lIHdyaXRl
-IGZlbmNlLCBzbyB0aGlzCj4+IC0JCSAqIGhlcmUgd29ya3MgZmluZS4gQnV0IGRybV9hdG9taWNf
-c2V0X2ZlbmNlX2Zvcl9wbGFuZSgpIHNob3VsZAo+PiAtCQkgKiBiZSBjaGFuZ2VkIHRvIGJlIGFi
-bGUgdG8gaGFuZGxlIG1vcmUgZmVuY2VzIGluIGdlbmVyYWwgZm9yCj4+IC0JCSAqIG11bHRpcGxl
-IEJPcyBwZXIgZmIgYW55d2F5LiAqLwo+PiAtCQlkbWFfZmVuY2VfZ2V0KGZlbmNlKTsKPj4gLQkJ
-YnJlYWs7Cj4+IC0JfQo+PiAtCWRtYV9yZXN2X2l0ZXJfZW5kKCZjdXJzb3IpOwo+PiArCXJldCA9
-IGRtYV9yZXN2X2dldF9zaW5nbGV0b24ob2JqLT5yZXN2LCBmYWxzZSwgJmZlbmNlKTsKPj4gKwlp
-ZiAocmV0KQo+PiArCQlyZXR1cm4gcmV0Owo+PiAgIAo+PiArCS8qIFRPRE86IGRybV9hdG9taWNf
-c2V0X2ZlbmNlX2Zvcl9wbGFuZSgpIHNob3VsZCBiZSBjaGFuZ2VkIHRvIGJlIGFibGUKPj4gKwkg
-KiB0byBoYW5kbGUgbW9yZSBmZW5jZXMgaW4gZ2VuZXJhbCBmb3IgbXVsdGlwbGUgQk9zIHBlciBm
-Yi4KPj4gKwkgKi8KPj4gICAJZHJtX2F0b21pY19zZXRfZmVuY2VfZm9yX3BsYW5lKHN0YXRlLCBm
-ZW5jZSk7Cj4+ICAgCXJldHVybiAwOwo+PiAgIH0KPj4gLS0gCj4+IDIuMjUuMQo+PgoKX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBt
-YWlsaW5nIGxpc3QKTGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCmh0dHBzOi8vbGlzdHMu
-bGluYXJvLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2xpbmFyby1tbS1zaWcK
+On Fri, Nov 26, 2021 at 11:30:19AM +0100, Christian K=F6nig wrote:
+> Am 25.11.21 um 16:47 schrieb Daniel Vetter:
+> > On Tue, Nov 23, 2021 at 03:21:04PM +0100, Christian K=F6nig wrote:
+> > > Use dma_resv_get_singleton() here to eventually get more than one wri=
+te
+> > > fence as single fence.
+> > Yeah this is nice, atomic commit helpers not supporting multiple write
+> > fences was really my main worry in this entire endeavour. Otherwise loo=
+ks
+> > all rather reasonable.
+> > =
+
+> > I'll try to find some review bandwidth, but would be really if you can
+> > volunteer others too (especially making sure ttm drivers set the KERNEL
+> > fences correctly in all cases).
+> =
+
+> Maybe I should split that up into switching over to adding the enum and t=
+hen
+> switching to kernel/bookkeep(previously other) for some use cases.
+> =
+
+> It would be good if I could get an rb on the trivial driver cleanups firs=
+t.
+> I can send those out individually if that helps.
+
+Yeah some of the conversion patches might make sense to be split a bit
+more. Especially when there's functional changes hiding, but I tought
+you've split them out? But didn't read them in detail.
+
+Either way for stuff like this I think it's always best to split the
+mechanical stuff from the concept intro/docs and functional changes,
+except when it's really very obvious what's going on and just as small
+patch.
+-Daniel
+
+> =
+
+> Thanks,
+> Christian.
+> =
+
+> > -Daniel
+> > =
+
+> > =
+
+> > > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+> > > ---
+> > >   drivers/gpu/drm/drm_gem_atomic_helper.c | 18 +++++++-----------
+> > >   1 file changed, 7 insertions(+), 11 deletions(-)
+> > > =
+
+> > > diff --git a/drivers/gpu/drm/drm_gem_atomic_helper.c b/drivers/gpu/dr=
+m/drm_gem_atomic_helper.c
+> > > index c3189afe10cb..9338ddb7edff 100644
+> > > --- a/drivers/gpu/drm/drm_gem_atomic_helper.c
+> > > +++ b/drivers/gpu/drm/drm_gem_atomic_helper.c
+> > > @@ -143,25 +143,21 @@
+> > >    */
+> > >   int drm_gem_plane_helper_prepare_fb(struct drm_plane *plane, struct=
+ drm_plane_state *state)
+> > >   {
+> > > -	struct dma_resv_iter cursor;
+> > >   	struct drm_gem_object *obj;
+> > >   	struct dma_fence *fence;
+> > > +	int ret;
+> > >   	if (!state->fb)
+> > >   		return 0;
+> > >   	obj =3D drm_gem_fb_get_obj(state->fb, 0);
+> > > -	dma_resv_iter_begin(&cursor, obj->resv, false);
+> > > -	dma_resv_for_each_fence_unlocked(&cursor, fence) {
+> > > -		/* TODO: Currently there should be only one write fence, so this
+> > > -		 * here works fine. But drm_atomic_set_fence_for_plane() should
+> > > -		 * be changed to be able to handle more fences in general for
+> > > -		 * multiple BOs per fb anyway. */
+> > > -		dma_fence_get(fence);
+> > > -		break;
+> > > -	}
+> > > -	dma_resv_iter_end(&cursor);
+> > > +	ret =3D dma_resv_get_singleton(obj->resv, false, &fence);
+> > > +	if (ret)
+> > > +		return ret;
+> > > +	/* TODO: drm_atomic_set_fence_for_plane() should be changed to be a=
+ble
+> > > +	 * to handle more fences in general for multiple BOs per fb.
+> > > +	 */
+> > >   	drm_atomic_set_fence_for_plane(state, fence);
+> > >   	return 0;
+> > >   }
+> > > -- =
+
+> > > 2.25.1
+> > > =
+
+> =
+
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
