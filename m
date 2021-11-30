@@ -2,51 +2,70 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE373463430
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Nov 2021 13:25:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E2B75463458
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Nov 2021 13:32:56 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D2C6A61A46
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Nov 2021 12:25:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 33B7B61A3D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Nov 2021 12:32:55 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 7442C615B3; Tue, 30 Nov 2021 12:25:23 +0000 (UTC)
+	id 1B54961A46; Tue, 30 Nov 2021 12:32:53 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 294D560B82;
-	Tue, 30 Nov 2021 12:25:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 28B5A60753;
+	Tue, 30 Nov 2021 12:32:50 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 91A3F60581
- for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Nov 2021 12:25:17 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 2232460581
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Nov 2021 12:32:48 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 8C54C60B82; Tue, 30 Nov 2021 12:25:17 +0000 (UTC)
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
- by lists.linaro.org (Postfix) with ESMTPS id 306E060581
- for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Nov 2021 12:25:15 +0000 (UTC)
-X-IronPort-AV: E=McAfee;i="6200,9189,10183"; a="297006708"
-X-IronPort-AV: E=Sophos;i="5.87,275,1631602800"; d="scan'208";a="297006708"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2021 04:25:13 -0800
-X-IronPort-AV: E=Sophos;i="5.87,275,1631602800"; d="scan'208";a="512153579"
-Received: from dcondura-mobl.ger.corp.intel.com (HELO [10.252.36.49])
- ([10.252.36.49])
- by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 30 Nov 2021 04:25:11 -0800
-Message-ID: <c7502701-e85c-39f0-c249-702d029faa9e@linux.intel.com>
-Date: Tue, 30 Nov 2021 13:25:08 +0100
+ id 1FBF660753; Tue, 30 Nov 2021 12:32:48 +0000 (UTC)
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
+ [209.85.208.53])
+ by lists.linaro.org (Postfix) with ESMTPS id 1724160581
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Nov 2021 12:32:46 +0000 (UTC)
+Received: by mail-ed1-f53.google.com with SMTP id r25so20716257edq.7
+ for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Nov 2021 04:32:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=d1Bn56NVWcvPf46Qrzjbzii821X2nvEc2fZCcd4IdUs=;
+ b=JqwJ/5aIUKtANy36PP4QBvvaXySnaIqe2pZot+4pWo0saNTu1KCsL1sQCTZ5OUYEQU
+ +a90+v5WZBxRA42BRECjDm2HUpE6XsO9/CelHgQQ4Zor21Mw5RWCV7/nEwAeHaHqD/A3
+ DdhDUBA5Tv8BH7aEbcofx9rXY8NIoQ1tRatjw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=d1Bn56NVWcvPf46Qrzjbzii821X2nvEc2fZCcd4IdUs=;
+ b=vBUGlceQ3WZRSEoO2Fes2sezwhvaTp3v0UL3/G0JJVxDsAhpKjRz26L/mKRKS+prWn
+ dZJG98XDru612TrfwIwKO+Re5Ul3vQ1n0Wy68DkHcMm5SYCta9PluNL2Hu277imEINIB
+ 0bR/zNKEPxobxdafF4qW8g1fp5HAqOAOMZ5wGQyYPF3iVE2cVdrCst8ORaUw9t6kcgqv
+ oQ3grpTA2ZyOsBMQGcPo59r76GMorhcgqL9BXU0dANCYfpKdl+Yv+qkoAhZynT8wyTrI
+ 0JulavwoRYgTspzBsGvt+oemgWOIzEAAt6VRdQ80LGSG9nrNiV+5WgVInRDdRzUPgSW3
+ 0wcw==
+X-Gm-Message-State: AOAM533zOVdFEPbW4DLJuBzQ/vipv7LgVB6uy5a6CjhMva3vFE10av+d
+ LrkuHOgS/npG8Xm/siSH1AOZ1g==
+X-Google-Smtp-Source: ABdhPJz5iF1qgSvyAyxGbOpVLyReEM5ZHyZeJfy6LZfs6T8ZBcNxCjhKk6F2zLtpziOgRJrcx0veFQ==
+X-Received: by 2002:a17:906:4787:: with SMTP id
+ cw7mr72199096ejc.311.1638275565133; 
+ Tue, 30 Nov 2021 04:32:45 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id sd28sm10007710ejc.37.2021.11.30.04.32.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Nov 2021 04:32:44 -0800 (PST)
+Date: Tue, 30 Nov 2021 13:32:42 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <YaYZ6ku36GgDoioN@phenom.ffwll.local>
+References: <20211130091609.1335915-1-daniel.vetter@ffwll.ch>
+ <02d35f5a-ad89-b78d-a31f-51ea1579b9cd@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Firefox/91.0 Thunderbird/91.3.2
-Content-Language: en-US
-To: =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>,
- intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org
-References: <20211130121936.586031-1-thomas.hellstrom@linux.intel.com>
- <20211130121936.586031-2-thomas.hellstrom@linux.intel.com>
-From: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-In-Reply-To: <20211130121936.586031-2-thomas.hellstrom@linux.intel.com>
+Content-Disposition: inline
+In-Reply-To: <02d35f5a-ad89-b78d-a31f-51ea1579b9cd@gmail.com>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [RFC PATCH 1/2] dma-fence: Avoid establishing a
- locking order between fence classes
+Subject: Re: [Linaro-mm-sig] [PATCH] dma-resv: some doc polish for iterators
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -59,113 +78,197 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: linaro-mm-sig@lists.linaro.org, matthew.auld@intel.com,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Cc: DRI Development <dri-devel@lists.freedesktop.org>,
+ linaro-mm-sig@lists.linaro.org, Daniel Vetter <daniel.vetter@intel.com>,
+ Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+ linux-media@vger.kernel.org
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-T24gMzAtMTEtMjAyMSAxMzoxOSwgVGhvbWFzIEhlbGxzdHLDtm0gd3JvdGU6Cj4gVGhlIGxvY2tp
-bmcgb3JkZXIgZm9yIHRha2luZyB0d28gZmVuY2UgbG9ja3MgaXMgaW1wbGljaXRseSBkZWZpbmVk
-IGluCj4gYXQgbGVhc3QgdHdvIHdheXMgaW4gdGhlIGNvZGU6Cj4KPiAxKSBGZW5jZSBjb250YWlu
-ZXJzIGZpcnN0IGFuZCBvdGhlciBmZW5jZXMgbmV4dCwgd2hpY2ggaXMgZGVmaW5lZCBieQo+IHRo
-ZSBlbmFibGVfc2lnbmFsaW5nKCkgY2FsbGJhY2tzIG9mIGRtYV9mZW5jZV9jaGFpbiBhbmQKPiBk
-bWFfZmVuY2VfYXJyYXkuCj4gMikgUmV2ZXJzZSBzaWduYWwgb3JkZXIsIHdoaWNoIGlzIHVzZWQg
-YnkgX19pOTE1X2FjdGl2ZV9mZW5jZV9zZXQoKS4KPgo+IE5vdyAxKSBpbXBsaWVzIDIpLCBleGNl
-cHQgZm9yIHRoZSBzaWduYWxfb25fYW55IG1vZGUgb2YgZG1hX2ZlbmNlX2FycmF5Cj4gYW5kIDIp
-IGRvZXMgbm90IGltcGx5IDEpLCBhbmQgYWxzbyAxKSBtYWtlcyBsb2NraW5nIG9yZGVyIGJldHdl
-ZW4KPiBkaWZmZXJlbnQgY29udGFpbmVycyBjb25mdXNpbmcuCj4KPiBFc3RhYmxpc2ggMikgYW5k
-IGZpeCB1cCB0aGUgc2lnbmFsX29uX2FueSBtb2RlIGJ5IGNhbGxpbmcKPiBlbmFibGVfc2lnbmFs
-aW5nKCkgb24gc3VjaCBmZW5jZXMgdW5sb2NrZWQgYXQgY3JlYXRpb24uCj4KPiBDYzogbGluYXJv
-LW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnCj4gQ2M6IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3Rv
-cC5vcmcKPiBDYzogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPgo+
-IFNpZ25lZC1vZmYtYnk6IFRob21hcyBIZWxsc3Ryw7ZtIDx0aG9tYXMuaGVsbHN0cm9tQGxpbnV4
-LmludGVsLmNvbT4KPiAtLS0KPiAgZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS1hcnJheS5jIHwg
-MTMgKysrLS0KPiAgZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS1jaGFpbi5jIHwgIDMgKy0KPiAg
-ZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jICAgICAgIHwgNzkgKysrKysrKysrKysrKysrKysr
-KysrLS0tLS0tLS0tLQo+ICBpbmNsdWRlL2xpbnV4L2RtYS1mZW5jZS5oICAgICAgICAgfCAgMyAr
-Kwo+ICA0IGZpbGVzIGNoYW5nZWQsIDY5IGluc2VydGlvbnMoKyksIDI5IGRlbGV0aW9ucygtKQo+
-Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UtYXJyYXkuYyBiL2RyaXZl
-cnMvZG1hLWJ1Zi9kbWEtZmVuY2UtYXJyYXkuYwo+IGluZGV4IDNlMDdmOTYxZTJmMy4uMDMyMmI5
-MjkwOWZlIDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UtYXJyYXkuYwo+
-ICsrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UtYXJyYXkuYwo+IEBAIC04NCw4ICs4NCw4
-IEBAIHN0YXRpYyBib29sIGRtYV9mZW5jZV9hcnJheV9lbmFibGVfc2lnbmFsaW5nKHN0cnVjdCBk
-bWFfZmVuY2UgKmZlbmNlKQo+ICAJCSAqIGluc3VmZmljaWVudCkuCj4gIAkJICovCj4gIAkJZG1h
-X2ZlbmNlX2dldCgmYXJyYXktPmJhc2UpOwo+IC0JCWlmIChkbWFfZmVuY2VfYWRkX2NhbGxiYWNr
-KGFycmF5LT5mZW5jZXNbaV0sICZjYltpXS5jYiwKPiAtCQkJCQkgICBkbWFfZmVuY2VfYXJyYXlf
-Y2JfZnVuYykpIHsKPiArCQlpZiAoZG1hX2ZlbmNlX2FkZF9jYWxsYmFja19uZXN0ZWQoYXJyYXkt
-PmZlbmNlc1tpXSwgJmNiW2ldLmNiLAo+ICsJCQkJCQkgIGRtYV9mZW5jZV9hcnJheV9jYl9mdW5j
-KSkgewo+ICAJCQlpbnQgZXJyb3IgPSBhcnJheS0+ZmVuY2VzW2ldLT5lcnJvcjsKPiAgCj4gIAkJ
-CWRtYV9mZW5jZV9hcnJheV9zZXRfcGVuZGluZ19lcnJvcihhcnJheSwgZXJyb3IpOwo+IEBAIC0x
-NTgsNiArMTU4LDcgQEAgc3RydWN0IGRtYV9mZW5jZV9hcnJheSAqZG1hX2ZlbmNlX2FycmF5X2Ny
-ZWF0ZShpbnQgbnVtX2ZlbmNlcywKPiAgewo+ICAJc3RydWN0IGRtYV9mZW5jZV9hcnJheSAqYXJy
-YXk7Cj4gIAlzaXplX3Qgc2l6ZSA9IHNpemVvZigqYXJyYXkpOwo+ICsJc3RydWN0IGRtYV9mZW5j
-ZSAqZmVuY2U7Cj4gIAo+ICAJLyogQWxsb2NhdGUgdGhlIGNhbGxiYWNrIHN0cnVjdHVyZXMgYmVo
-aW5kIHRoZSBhcnJheS4gKi8KPiAgCXNpemUgKz0gbnVtX2ZlbmNlcyAqIHNpemVvZihzdHJ1Y3Qg
-ZG1hX2ZlbmNlX2FycmF5X2NiKTsKPiBAQCAtMTY1LDggKzE2Niw5IEBAIHN0cnVjdCBkbWFfZmVu
-Y2VfYXJyYXkgKmRtYV9mZW5jZV9hcnJheV9jcmVhdGUoaW50IG51bV9mZW5jZXMsCj4gIAlpZiAo
-IWFycmF5KQo+ICAJCXJldHVybiBOVUxMOwo+ICAKPiArCWZlbmNlID0gJmFycmF5LT5iYXNlOwo+
-ICAJc3Bpbl9sb2NrX2luaXQoJmFycmF5LT5sb2NrKTsKPiAtCWRtYV9mZW5jZV9pbml0KCZhcnJh
-eS0+YmFzZSwgJmRtYV9mZW5jZV9hcnJheV9vcHMsICZhcnJheS0+bG9jaywKPiArCWRtYV9mZW5j
-ZV9pbml0KGZlbmNlLCAmZG1hX2ZlbmNlX2FycmF5X29wcywgJmFycmF5LT5sb2NrLAo+ICAJCSAg
-ICAgICBjb250ZXh0LCBzZXFubyk7Cj4gIAlpbml0X2lycV93b3JrKCZhcnJheS0+d29yaywgaXJx
-X2RtYV9mZW5jZV9hcnJheV93b3JrKTsKPiAgCj4gQEAgLTE3NCw3ICsxNzYsMTAgQEAgc3RydWN0
-IGRtYV9mZW5jZV9hcnJheSAqZG1hX2ZlbmNlX2FycmF5X2NyZWF0ZShpbnQgbnVtX2ZlbmNlcywK
-PiAgCWF0b21pY19zZXQoJmFycmF5LT5udW1fcGVuZGluZywgc2lnbmFsX29uX2FueSA/IDEgOiBu
-dW1fZmVuY2VzKTsKPiAgCWFycmF5LT5mZW5jZXMgPSBmZW5jZXM7Cj4gIAo+IC0JYXJyYXktPmJh
-c2UuZXJyb3IgPSBQRU5ESU5HX0VSUk9SOwo+ICsJZmVuY2UtPmVycm9yID0gUEVORElOR19FUlJP
-UjsKPiArCj4gKwlpZiAoc2lnbmFsX29uX2FueSkKPiArCQlkbWFfZmVuY2VfZW5hYmxlX3N3X3Np
-Z25hbGluZyhmZW5jZSk7Cj4gIAo+ICAJcmV0dXJuIGFycmF5Owo+ICB9Cj4gZGlmZiAtLWdpdCBh
-L2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UtY2hhaW4uYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEt
-ZmVuY2UtY2hhaW4uYwo+IGluZGV4IDFiNGNiM2U1Y2VjOS4uMDUxOGU1Mzg4MGY2IDEwMDY0NAo+
-IC0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UtY2hhaW4uYwo+ICsrKyBiL2RyaXZlcnMv
-ZG1hLWJ1Zi9kbWEtZmVuY2UtY2hhaW4uYwo+IEBAIC0xNTIsNyArMTUyLDggQEAgc3RhdGljIGJv
-b2wgZG1hX2ZlbmNlX2NoYWluX2VuYWJsZV9zaWduYWxpbmcoc3RydWN0IGRtYV9mZW5jZSAqZmVu
-Y2UpCj4gIAkJc3RydWN0IGRtYV9mZW5jZSAqZiA9IGNoYWluID8gY2hhaW4tPmZlbmNlIDogZmVu
-Y2U7Cj4gIAo+ICAJCWRtYV9mZW5jZV9nZXQoZik7Cj4gLQkJaWYgKCFkbWFfZmVuY2VfYWRkX2Nh
-bGxiYWNrKGYsICZoZWFkLT5jYiwgZG1hX2ZlbmNlX2NoYWluX2NiKSkgewo+ICsJCWlmICghZG1h
-X2ZlbmNlX2FkZF9jYWxsYmFja19uZXN0ZWQoZiwgJmhlYWQtPmNiLAo+ICsJCQkJCQkgICBkbWFf
-ZmVuY2VfY2hhaW5fY2IpKSB7Cj4gIAkJCWRtYV9mZW5jZV9wdXQoZmVuY2UpOwo+ICAJCQlyZXR1
-cm4gdHJ1ZTsKPiAgCQl9Cj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2Uu
-YyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYwo+IGluZGV4IDA2NjQwMGVkODg0MS4uOTBh
-M2Q1MTIxNzQ2IDEwMDY0NAo+IC0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYwo+ICsr
-KyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYwo+IEBAIC02MTAsNiArNjEwLDM3IEBAIHZv
-aWQgZG1hX2ZlbmNlX2VuYWJsZV9zd19zaWduYWxpbmcoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2Up
-Cj4gIH0KPiAgRVhQT1JUX1NZTUJPTChkbWFfZmVuY2VfZW5hYmxlX3N3X3NpZ25hbGluZyk7Cj4g
-IAo+ICtzdGF0aWMgaW50IF9fZG1hX2ZlbmNlX2FkZF9jYWxsYmFjayhzdHJ1Y3QgZG1hX2ZlbmNl
-ICpmZW5jZSwKPiArCQkJCSAgICBzdHJ1Y3QgZG1hX2ZlbmNlX2NiICpjYiwKPiArCQkJCSAgICBk
-bWFfZmVuY2VfZnVuY190IGZ1bmMsCj4gKwkJCQkgICAgaW50IG5lc3RfbGV2ZWwpCj4gK3sKPiAr
-CXVuc2lnbmVkIGxvbmcgZmxhZ3M7Cj4gKwlpbnQgcmV0ID0gMDsKPiArCj4gKwlpZiAoV0FSTl9P
-TighZmVuY2UgfHwgIWZ1bmMpKQo+ICsJCXJldHVybiAtRUlOVkFMOwo+ICsKPiArCWlmICh0ZXN0
-X2JpdChETUFfRkVOQ0VfRkxBR19TSUdOQUxFRF9CSVQsICZmZW5jZS0+ZmxhZ3MpKSB7Cj4gKwkJ
-SU5JVF9MSVNUX0hFQUQoJmNiLT5ub2RlKTsKPiArCQlyZXR1cm4gLUVOT0VOVDsKPiArCX0KPiAr
-Cj4gKwlzcGluX2xvY2tfaXJxc2F2ZV9uZXN0ZWQoZmVuY2UtPmxvY2ssIGZsYWdzLCAwKTsKRm9y
-Z290IHRvIGhvb2sgdXAgbmVzdF9sZXZlbCBoZXJlPwo+ICsKPiArCWlmIChfX2RtYV9mZW5jZV9l
-bmFibGVfc2lnbmFsaW5nKGZlbmNlKSkgewo+ICsJCWNiLT5mdW5jID0gZnVuYzsKPiArCQlsaXN0
-X2FkZF90YWlsKCZjYi0+bm9kZSwgJmZlbmNlLT5jYl9saXN0KTsKPiArCX0gZWxzZSB7Cj4gKwkJ
-SU5JVF9MSVNUX0hFQUQoJmNiLT5ub2RlKTsKPiArCQlyZXQgPSAtRU5PRU5UOwo+ICsJfQo+ICsK
-PiArCXNwaW5fdW5sb2NrX2lycXJlc3RvcmUoZmVuY2UtPmxvY2ssIGZsYWdzKTsKPiArCj4gKwly
-ZXR1cm4gcmV0Owo+ICt9Cj4gKwo+ICAvKioKPiAgICogZG1hX2ZlbmNlX2FkZF9jYWxsYmFjayAt
-IGFkZCBhIGNhbGxiYWNrIHRvIGJlIGNhbGxlZCB3aGVuIHRoZSBmZW5jZQo+ICAgKiBpcyBzaWdu
-YWxlZAo+IEBAIC02MzUsMzMgKzY2NiwzMyBAQCBFWFBPUlRfU1lNQk9MKGRtYV9mZW5jZV9lbmFi
-bGVfc3dfc2lnbmFsaW5nKTsKPiAgaW50IGRtYV9mZW5jZV9hZGRfY2FsbGJhY2soc3RydWN0IGRt
-YV9mZW5jZSAqZmVuY2UsIHN0cnVjdCBkbWFfZmVuY2VfY2IgKmNiLAo+ICAJCQkgICBkbWFfZmVu
-Y2VfZnVuY190IGZ1bmMpCj4gIHsKPiAtCXVuc2lnbmVkIGxvbmcgZmxhZ3M7Cj4gLQlpbnQgcmV0
-ID0gMDsKPiAtCj4gLQlpZiAoV0FSTl9PTighZmVuY2UgfHwgIWZ1bmMpKQo+IC0JCXJldHVybiAt
-RUlOVkFMOwo+IC0KPiAtCWlmICh0ZXN0X2JpdChETUFfRkVOQ0VfRkxBR19TSUdOQUxFRF9CSVQs
-ICZmZW5jZS0+ZmxhZ3MpKSB7Cj4gLQkJSU5JVF9MSVNUX0hFQUQoJmNiLT5ub2RlKTsKPiAtCQly
-ZXR1cm4gLUVOT0VOVDsKPiAtCX0KPiAtCj4gLQlzcGluX2xvY2tfaXJxc2F2ZShmZW5jZS0+bG9j
-aywgZmxhZ3MpOwo+IC0KPiAtCWlmIChfX2RtYV9mZW5jZV9lbmFibGVfc2lnbmFsaW5nKGZlbmNl
-KSkgewo+IC0JCWNiLT5mdW5jID0gZnVuYzsKPiAtCQlsaXN0X2FkZF90YWlsKCZjYi0+bm9kZSwg
-JmZlbmNlLT5jYl9saXN0KTsKPiAtCX0gZWxzZSB7Cj4gLQkJSU5JVF9MSVNUX0hFQUQoJmNiLT5u
-b2RlKTsKPiAtCQlyZXQgPSAtRU5PRU5UOwo+IC0JfQo+IC0KPiAtCXNwaW5fdW5sb2NrX2lycXJl
-c3RvcmUoZmVuY2UtPmxvY2ssIGZsYWdzKTsKPiAtCj4gLQlyZXR1cm4gcmV0Owo+ICsJcmV0dXJu
-IF9fZG1hX2ZlbmNlX2FkZF9jYWxsYmFjayhmZW5jZSwgY2IsIGZ1bmMsIDApOwo+ICB9Cj4gIEVY
-UE9SVF9TWU1CT0woZG1hX2ZlbmNlX2FkZF9jYWxsYmFjayk7Cj4gIAoKT3RoZXIgdGhhbiB0aGF0
-LCBJIGRpZG4ndCBpbnZlc3RpZ2F0ZSB0aGUgbmVzdGluZyBmYWlscyBlbm91Z2ggdG8gc2F5IEkg
-Y2FuIGFjY3VyYXRlbHkgcmV2aWV3IHRoaXMuIDopCgp+TWFhcnRlbgoKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBs
-aXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczovL2xpc3RzLmxpbmFyby5v
-cmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
+On Tue, Nov 30, 2021 at 11:04:11AM +0100, Christian K=F6nig wrote:
+> Am 30.11.21 um 10:16 schrieb Daniel Vetter:
+> > Hammer it a bit more in that iterators can be restarted and when that
+> > matters, plus suggest to prefer the locked version whenver.
+> > =
+
+> > Also delete the two leftover kerneldoc for static functions plus
+> > sprinkle some more links while at it.
+> > =
+
+> > Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+> > Cc: Sumit Semwal <sumit.semwal@linaro.org>
+> > Cc: "Christian K=F6nig" <christian.koenig@amd.com>
+> > Cc: linux-media@vger.kernel.org
+> > Cc: linaro-mm-sig@lists.linaro.org
+> > ---
+> >   drivers/dma-buf/dma-resv.c | 26 ++++++++++++--------------
+> >   include/linux/dma-resv.h   | 13 ++++++++++++-
+> >   2 files changed, 24 insertions(+), 15 deletions(-)
+> > =
+
+> > diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/dma-resv.c
+> > index 9eb2baa387d4..1453b664c405 100644
+> > --- a/drivers/dma-buf/dma-resv.c
+> > +++ b/drivers/dma-buf/dma-resv.c
+> > @@ -323,12 +323,6 @@ void dma_resv_add_excl_fence(struct dma_resv *obj,=
+ struct dma_fence *fence)
+> >   }
+> >   EXPORT_SYMBOL(dma_resv_add_excl_fence);
+> > -/**
+> > - * dma_resv_iter_restart_unlocked - restart the unlocked iterator
+> > - * @cursor: The dma_resv_iter object to restart
+> > - *
+> > - * Restart the unlocked iteration by initializing the cursor object.
+> > - */
+> =
+
+> Maybe instead of completely removing the documentation add a single line =
+of
+> what this is supposed to do and not to do.
+> =
+
+> E.g. "/* Restart the iterator by initializing all the necessary fields, b=
+ut
+> not the relation to the dma_resv object. */
+
+I figured the names are selfexplanatory enough, but makes sense to keep a
+bit more detail.
+-Daniel
+
+> =
+
+> >   static void dma_resv_iter_restart_unlocked(struct dma_resv_iter *curs=
+or)
+> >   {
+> >   	cursor->seq =3D read_seqcount_begin(&cursor->obj->seq);
+> > @@ -344,14 +338,6 @@ static void dma_resv_iter_restart_unlocked(struct =
+dma_resv_iter *cursor)
+> >   	cursor->is_restarted =3D true;
+> >   }
+> > -/**
+> > - * dma_resv_iter_walk_unlocked - walk over fences in a dma_resv obj
+> > - * @cursor: cursor to record the current position
+> > - *
+> > - * Return all the fences in the dma_resv object which are not yet sign=
+aled.
+> > - * The returned fence has an extra local reference so will stay alive.
+> > - * If a concurrent modify is detected the whole iteration is started o=
+ver again.
+> > - */
+> =
+
+> Same here, something /* Walk to the next not signaled fence and grab a
+> reference to it */.
+> =
+
+> Apart from that feel free add Reviewed-by: Christian K=F6nig
+> <christian.koenig@amd.com>
+> =
+
+> Regards,
+> Christian.
+> =
+
+> >   static void dma_resv_iter_walk_unlocked(struct dma_resv_iter *cursor)
+> >   {
+> >   	struct dma_resv *obj =3D cursor->obj;
+> > @@ -387,6 +373,12 @@ static void dma_resv_iter_walk_unlocked(struct dma=
+_resv_iter *cursor)
+> >    * dma_resv_iter_first_unlocked - first fence in an unlocked dma_resv=
+ obj.
+> >    * @cursor: the cursor with the current position
+> >    *
+> > + * Subsequent fences are iterated with dma_resv_iter_next_unlocked().
+> > + *
+> > + * Beware that the iterator can be restarted.  Code which accumulates =
+statistics
+> > + * or similar needs to check for this with dma_resv_iter_is_restarted(=
+). For
+> > + * this reason prefer the locked dma_resv_iter_first() whenver possibl=
+e.
+> > + *
+> >    * Returns the first fence from an unlocked dma_resv obj.
+> >    */
+> >   struct dma_fence *dma_resv_iter_first_unlocked(struct dma_resv_iter *=
+cursor)
+> > @@ -406,6 +398,10 @@ EXPORT_SYMBOL(dma_resv_iter_first_unlocked);
+> >    * dma_resv_iter_next_unlocked - next fence in an unlocked dma_resv o=
+bj.
+> >    * @cursor: the cursor with the current position
+> >    *
+> > + * Beware that the iterator can be restarted.  Code which accumulates =
+statistics
+> > + * or similar needs to check for this with dma_resv_iter_is_restarted(=
+). For
+> > + * this reason prefer the locked dma_resv_iter_next() whenver possible.
+> > + *
+> >    * Returns the next fence from an unlocked dma_resv obj.
+> >    */
+> >   struct dma_fence *dma_resv_iter_next_unlocked(struct dma_resv_iter *c=
+ursor)
+> > @@ -431,6 +427,8 @@ EXPORT_SYMBOL(dma_resv_iter_next_unlocked);
+> >    * dma_resv_iter_first - first fence from a locked dma_resv object
+> >    * @cursor: cursor to record the current position
+> >    *
+> > + * Subsequent fences are iterated with dma_resv_iter_next_unlocked().
+> > + *
+> >    * Return the first fence in the dma_resv object while holding the
+> >    * &dma_resv.lock.
+> >    */
+> > diff --git a/include/linux/dma-resv.h b/include/linux/dma-resv.h
+> > index dbd235ab447f..ebe908592ac3 100644
+> > --- a/include/linux/dma-resv.h
+> > +++ b/include/linux/dma-resv.h
+> > @@ -153,6 +153,13 @@ struct dma_resv {
+> >    * struct dma_resv_iter - current position into the dma_resv fences
+> >    *
+> >    * Don't touch this directly in the driver, use the accessor function=
+ instead.
+> > + *
+> > + * IMPORTANT
+> > + *
+> > + * When using the lockless iterators like dma_resv_iter_next_unlocked(=
+) or
+> > + * dma_resv_for_each_fence_unlocked() beware that the iterator can be =
+restarted.
+> > + * Code which accumulates statistics or similar needs to check for thi=
+s with
+> > + * dma_resv_iter_is_restarted().
+> >    */
+> >   struct dma_resv_iter {
+> >   	/** @obj: The dma_resv object we iterate over */
+> > @@ -243,7 +250,11 @@ static inline bool dma_resv_iter_is_restarted(stru=
+ct dma_resv_iter *cursor)
+> >    * &dma_resv.lock and using RCU instead. The cursor needs to be initi=
+alized
+> >    * with dma_resv_iter_begin() and cleaned up with dma_resv_iter_end()=
+. Inside
+> >    * the iterator a reference to the dma_fence is held and the RCU lock=
+ dropped.
+> > - * When the dma_resv is modified the iteration starts over again.
+> > + *
+> > + * Beware that the iterator can be restarted when the struct dma_resv =
+for
+> > + * @cursor is modified. Code which accumulates statistics or similar n=
+eeds to
+> > + * check for this with dma_resv_iter_is_restarted(). For this reason p=
+refer the
+> > + * lock iterator dma_resv_for_each_fence() whenever possible.
+> >    */
+> >   #define dma_resv_for_each_fence_unlocked(cursor, fence)			\
+> >   	for (fence =3D dma_resv_iter_first_unlocked(cursor);		\
+> =
+
+
+-- =
+
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list
+Linaro-mm-sig@lists.linaro.org
+https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
