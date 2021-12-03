@@ -2,39 +2,43 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87047465E77
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Dec 2021 07:55:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 316CB467421
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 Dec 2021 10:32:21 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EC9C16193B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Dec 2021 06:55:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C459561A36
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 Dec 2021 09:32:18 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 57ECC61A45; Thu,  2 Dec 2021 06:55:44 +0000 (UTC)
+	id C4BEA61A45; Fri,  3 Dec 2021 09:32:16 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 178E960B03;
-	Thu,  2 Dec 2021 06:55:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6530061A36;
+	Fri,  3 Dec 2021 09:32:13 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id D661E608C9
- for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Dec 2021 06:55:39 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 5A9216056A
+ for <linaro-mm-sig@lists.linaro.org>; Fri,  3 Dec 2021 09:32:11 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id C94A160AB6; Thu,  2 Dec 2021 06:55:39 +0000 (UTC)
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by lists.linaro.org (Postfix) with ESMTPS id 9163B608C9
- for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Dec 2021 06:55:37 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
- id 87B8268AFE; Thu,  2 Dec 2021 07:55:32 +0100 (CET)
-Date: Thu, 2 Dec 2021 07:55:32 +0100
-From: Christoph Hellwig <hch@lst.de>
-To: syzbot <syzbot+10e27961f4da37c443b2@syzkaller.appspotmail.com>
-Message-ID: <20211202065532.GA14627@lst.de>
-References: <000000000000f0196305d219b2fe@google.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <000000000000f0196305d219b2fe@google.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+ id 581D661A36; Fri,  3 Dec 2021 09:32:11 +0000 (UTC)
+Received: from out30-133.freemail.mail.aliyun.com
+ (out30-133.freemail.mail.aliyun.com [115.124.30.133])
+ by lists.linaro.org (Postfix) with ESMTPS id DDA516056A
+ for <linaro-mm-sig@lists.linaro.org>; Fri,  3 Dec 2021 09:32:08 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04400;
+ MF=jiapeng.chong@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
+ TI=SMTPD_---0UzGGkdh_1638523919; 
+Received: from
+ j63c13417.sqa.eu95.tbsite.net(mailfrom:jiapeng.chong@linux.alibaba.com
+ fp:SMTPD_---0UzGGkdh_1638523919) by smtp.aliyun-inc.com(127.0.0.1);
+ Fri, 03 Dec 2021 17:32:03 +0800
+From: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
+To: Felix.Kuehling@amd.com
+Date: Fri,  3 Dec 2021 17:31:53 +0800
+Message-Id: <1638523913-117827-1-git-send-email-jiapeng.chong@linux.alibaba.com>
+X-Mailer: git-send-email 1.8.3.1
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [syzbot] WARNING in __dma_map_sg_attrs
+Subject: [Linaro-mm-sig] [PATCH] drm/amdkfd: Use max() instead of doing it
+ manually
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -47,94 +51,45 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: syzkaller-bugs@googlegroups.com, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, hch@lst.de, linaro-mm-sig@lists.linaro.org,
- iommu@lists.linux-foundation.org, robin.murphy@arm.com,
+Cc: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>, airlied@linux.ie,
+ Xinhui.Pan@amd.com, linux-kernel@vger.kernel.org,
+ amd-gfx@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+ dri-devel@lists.freedesktop.org, daniel@ffwll.ch, alexander.deucher@amd.com,
  christian.koenig@amd.com, linux-media@vger.kernel.org
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-This means the virtgpu driver uses dma mapping helpers but has not set up
-a DMA mask (which most likely suggests it is some kind of virtual device).
+Fix following coccicheck warning:
 
-On Wed, Dec 01, 2021 at 10:18:21AM -0800, syzbot wrote:
-> Hello,
-> 
-> syzbot found the following issue on:
-> 
-> HEAD commit:    c5c17547b778 Merge tag 'net-5.16-rc3' of git://git.kernel...
-> git tree:       upstream
-> console output: https://syzkaller.appspot.com/x/log.txt?x=13a73609b00000
-> kernel config:  https://syzkaller.appspot.com/x/.config?x=bf85c53718a1e697
-> dashboard link: https://syzkaller.appspot.com/bug?extid=10e27961f4da37c443b2
-> compiler:       gcc (Debian 10.2.1-6) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2
-> 
-> Unfortunately, I don't have any reproducer for this issue yet.
-> 
-> IMPORTANT: if you fix the issue, please add the following tag to the commit:
-> Reported-by: syzbot+10e27961f4da37c443b2@syzkaller.appspotmail.com
-> 
-> ------------[ cut here ]------------
-> WARNING: CPU: 2 PID: 17169 at kernel/dma/mapping.c:188 __dma_map_sg_attrs+0x181/0x1f0 kernel/dma/mapping.c:188
-> Modules linked in:
-> CPU: 0 PID: 17169 Comm: syz-executor.3 Not tainted 5.16.0-rc2-syzkaller #0
-> Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.14.0-2 04/01/2014
-> RIP: 0010:__dma_map_sg_attrs+0x181/0x1f0 kernel/dma/mapping.c:188
-> Code: 00 00 00 00 00 fc ff df 48 c1 e8 03 80 3c 10 00 75 71 4c 8b 3d 70 6d b1 0d e9 db fe ff ff e8 86 ff 12 00 0f 0b e8 7f ff 12 00 <0f> 0b 45 31 e4 e9 54 ff ff ff e8 70 ff 12 00 49 8d 7f 50 48 b8 00
-> RSP: 0018:ffffc90002c0fb20 EFLAGS: 00010216
-> RAX: 0000000000013018 RBX: 0000000000000020 RCX: ffffc900037d4000
-> RDX: 0000000000040000 RSI: ffffffff8163d361 RDI: ffff8880182ae4d0
-> RBP: ffff8880182ae088 R08: 0000000000000002 R09: ffff888017ba054f
-> R10: ffffffff8163d242 R11: 000000000008808a R12: 0000000000000000
-> R13: ffff888024ca5700 R14: 0000000000000001 R15: 0000000000000000
-> FS:  00007fa269e34700(0000) GS:ffff88802cb00000(0000) knlGS:0000000000000000
-> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> CR2: 000000000040c120 CR3: 000000006c77c000 CR4: 0000000000150ee0
-> DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-> DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-> Call Trace:
->  <TASK>
->  dma_map_sgtable+0x70/0xf0 kernel/dma/mapping.c:264
->  drm_gem_map_dma_buf+0x12a/0x1e0 drivers/gpu/drm/drm_prime.c:633
->  __map_dma_buf drivers/dma-buf/dma-buf.c:675 [inline]
->  dma_buf_map_attachment+0x39a/0x5b0 drivers/dma-buf/dma-buf.c:954
->  drm_gem_prime_import_dev.part.0+0x85/0x220 drivers/gpu/drm/drm_prime.c:939
->  drm_gem_prime_import_dev drivers/gpu/drm/drm_prime.c:982 [inline]
->  drm_gem_prime_import+0xc8/0x200 drivers/gpu/drm/drm_prime.c:982
->  virtgpu_gem_prime_import+0x49/0x150 drivers/gpu/drm/virtio/virtgpu_prime.c:166
->  drm_gem_prime_fd_to_handle+0x21d/0x550 drivers/gpu/drm/drm_prime.c:318
->  drm_prime_fd_to_handle_ioctl+0x9b/0xd0 drivers/gpu/drm/drm_prime.c:374
->  drm_ioctl_kernel+0x27d/0x4e0 drivers/gpu/drm/drm_ioctl.c:782
->  drm_ioctl+0x51e/0x9d0 drivers/gpu/drm/drm_ioctl.c:885
->  vfs_ioctl fs/ioctl.c:51 [inline]
->  __do_sys_ioctl fs/ioctl.c:874 [inline]
->  __se_sys_ioctl fs/ioctl.c:860 [inline]
->  __x64_sys_ioctl+0x193/0x200 fs/ioctl.c:860
->  do_syscall_x64 arch/x86/entry/common.c:50 [inline]
->  do_syscall_64+0x35/0xb0 arch/x86/entry/common.c:80
->  entry_SYSCALL_64_after_hwframe+0x44/0xae
-> RIP: 0033:0x7fa26c8beae9
-> Code: ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 bc ff ff ff f7 d8 64 89 01 48
-> RSP: 002b:00007fa269e34188 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
-> RAX: ffffffffffffffda RBX: 00007fa26c9d1f60 RCX: 00007fa26c8beae9
-> RDX: 00000000200004c0 RSI: 00000000c00c642e RDI: 0000000000000005
-> RBP: 00007fa26c918f6d R08: 0000000000000000 R09: 0000000000000000
-> R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
-> R13: 00007ffc0019c51f R14: 00007fa269e34300 R15: 0000000000022000
->  </TASK>
-> 
-> 
-> ---
-> This report is generated by a bot. It may contain errors.
-> See https://goo.gl/tpsmEJ for more information about syzbot.
-> syzbot engineers can be reached at syzkaller@googlegroups.com.
-> 
-> syzbot will keep track of this issue. See:
-> https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
----end quoted text---
+./drivers/gpu/drm/amd/amdkfd/kfd_svm.c:2193:16-17: WARNING opportunity
+for max().
+
+Reported-by: Abaci Robot <abaci@linux.alibaba.com>
+Signed-off-by: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
+---
+ drivers/gpu/drm/amd/amdkfd/kfd_svm.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/amd/amdkfd/kfd_svm.c b/drivers/gpu/drm/amd/amdkfd/kfd_svm.c
+index f2db49c..4f7e7b1 100644
+--- a/drivers/gpu/drm/amd/amdkfd/kfd_svm.c
++++ b/drivers/gpu/drm/amd/amdkfd/kfd_svm.c
+@@ -2190,7 +2190,7 @@ void schedule_deferred_list_work(struct svm_range_list *svms)
+ 
+ 	start = mni->interval_tree.start;
+ 	last = mni->interval_tree.last;
+-	start = (start > range->start ? start : range->start) >> PAGE_SHIFT;
++	start = max(start, range->start) >> PAGE_SHIFT;
+ 	last = (last < (range->end - 1) ? last : range->end - 1) >> PAGE_SHIFT;
+ 	pr_debug("[0x%lx 0x%lx] range[0x%lx 0x%lx] notifier[0x%lx 0x%lx] %d\n",
+ 		 start, last, range->start >> PAGE_SHIFT,
+-- 
+1.8.3.1
+
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
