@@ -2,70 +2,70 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id C99A347D8B0
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Dec 2021 22:26:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BDF5447D8B6
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Dec 2021 22:27:03 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 12DAD60F21
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Dec 2021 21:26:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AA01C60F21
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Dec 2021 21:27:02 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id BA6DE6105D; Wed, 22 Dec 2021 21:26:20 +0000 (UTC)
+	id 7B51961033; Wed, 22 Dec 2021 21:27:02 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A031D60DA3;
-	Wed, 22 Dec 2021 21:26:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 50F0760DA3;
+	Wed, 22 Dec 2021 21:26:59 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id 71F39606D5
- for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Dec 2021 21:26:15 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 78C10606D5
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Dec 2021 21:26:57 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id 58CB960DA3; Wed, 22 Dec 2021 21:26:15 +0000 (UTC)
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com
- [209.85.208.48])
- by lists.linaro.org (Postfix) with ESMTPS id 42313606D5
- for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Dec 2021 21:26:13 +0000 (UTC)
-Received: by mail-ed1-f48.google.com with SMTP id bm14so13583501edb.5
- for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Dec 2021 13:26:13 -0800 (PST)
+ id 7477A60DA3; Wed, 22 Dec 2021 21:26:57 +0000 (UTC)
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com
+ [209.85.208.43])
+ by lists.linaro.org (Postfix) with ESMTPS id 6D954606D5
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Dec 2021 21:26:55 +0000 (UTC)
+Received: by mail-ed1-f43.google.com with SMTP id j6so13461127edw.12
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Dec 2021 13:26:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:content-transfer-encoding:in-reply-to;
- bh=6cVibGdO5hAUXCTCOcNwOdP47+qzwpAZ5IqmBGy0IdA=;
- b=jvi7yUGvvAdGFvf4Bl8V27vfWhNPGIszgKEXl+wjVce+XuhEwE+ah1muFRxuNGwvil
- vUhkCqoHzCCg+urmGcgO+kxnUuYYFAGOMgzuHGZY3tqRjWUaHt70frbuMquh1OpShNkn
- ak2Mo/yd1Nd9BVZir5M+H7eSbb93wbJs8PVAA=
+ bh=Yz9uOCBqf37QPt8riRSUwHZh5OXIzEuZG643lYUqqT0=;
+ b=AsZf00kNYJbXTi+o0VPiWrjucHLQCYKuMEtPaDmV+QlUkS9Tb8LnTvlYvRund4qRY/
+ 7Q1HL1ta8f11APqzxBEWRfPCt7VZCMXDNmVhYiXcaz6XH51yOF6rFiD4DdrZjc8jfy50
+ ZfF+QBYTKan2yCtlZviSJz2PTde73iCYmHhHI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:content-transfer-encoding
  :in-reply-to;
- bh=6cVibGdO5hAUXCTCOcNwOdP47+qzwpAZ5IqmBGy0IdA=;
- b=fcbZHv9jcXe713MLzoz5QMY+7Jt+1y9iHHgFOy14V498ugJpg+gOxpEs1cJvTM4BrG
- sTQaCPa/c7YTCe60gCg0Fp7rDrH78cTQX9qVtOQjD4uS0LWhp5M+2wJptAjeSqeqPP20
- K5nSEjOX8lHkqohdkP2MUGKedF0zxS8tln+xpqwSH9/1WlbRRmFRhRkVBf5/fXvDkX5z
- D+i2s6FvT0HaM0aRk2F9WkhFCzQ0SdbmVz+jfyHD2fHmKAWPQvmYBCxqa8W95wXr9/zP
- lAs2Dyff4Cw1N9FbQNQLW0k/cS5EKl2QNzqgw0UuiE8BQ3/q44z+XjZjyWTZx/GFaKCv
- 9TQg==
-X-Gm-Message-State: AOAM533iLS3SvVNS2xZGjNyZxOvwfANW3zGMuLcefRn5ztTa+DRMtYdy
- x0gYiHURij8AjVbi20hhadPu5VDiGZ+zeQ==
-X-Google-Smtp-Source: ABdhPJzimkUU7nhWNHF88UJ9LpVSHepK6xdcZRE7dyzOm7BKRhSMxLEKLpUABOmFA0mrLiC0wpacsw==
-X-Received: by 2002:a17:906:4f8c:: with SMTP id
- o12mr3930986eju.16.1640208372262; 
- Wed, 22 Dec 2021 13:26:12 -0800 (PST)
+ bh=Yz9uOCBqf37QPt8riRSUwHZh5OXIzEuZG643lYUqqT0=;
+ b=N4chfv9iH4smX/L0VKGPzlvPQ7QxcpvyCaMLtbNQqHdTYrKmAQALBq1v59YHTSFzYb
+ X9zeFUZPnuAN2vrsgLNQ1QEQ3xSekmSU3U24BxAJ+InmwUIWwwtMzBtZZNLXn04pSB4M
+ kxKRsRdbQiG4XvxfJhne9wwtzMD6m5p8SMrvMkSwh8xyPYC08PzRS6e70r9FHOYNmdu5
+ /KCw6u9BIzOyDuxIx1jTjBmGHWJhflthh6ZPTUJ4yZTbj0quOjiWifECv46khV90MTJC
+ BIsp6Z+4nl5wL3sNjOFzb3KO4guEn5uarrMJBQCCcAyzbVJ7rjQf3oKASo00yWFZscly
+ T14A==
+X-Gm-Message-State: AOAM531eqm9WDG+Xab8+/KHiZYWtKD8WaHs6tT16hv89EXHMuSzzjDpK
+ rVIvsdVtygIOooRFZrWignucgg==
+X-Google-Smtp-Source: ABdhPJwvq7qwcdZObxpBfJF3/nVSIH0D+E85X0+1f84I5+ccF1IFYv54iv16kHiZkbEGAehnLSlIww==
+X-Received: by 2002:a05:6402:350a:: with SMTP id
+ b10mr4520545edd.89.1640208414469; 
+ Wed, 22 Dec 2021 13:26:54 -0800 (PST)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id gn15sm1050425ejc.184.2021.12.22.13.26.11
+ by smtp.gmail.com with ESMTPSA id 16sm1051926ejd.204.2021.12.22.13.26.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Dec 2021 13:26:11 -0800 (PST)
-Date: Wed, 22 Dec 2021 22:26:10 +0100
+ Wed, 22 Dec 2021 13:26:54 -0800 (PST)
+Date: Wed, 22 Dec 2021 22:26:52 +0100
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YcOX8r8tMj4HD8o6@phenom.ffwll.local>
+Message-ID: <YcOYHNkiN3bZDbyH@phenom.ffwll.local>
 References: <20211207123411.167006-1-christian.koenig@amd.com>
- <20211207123411.167006-7-christian.koenig@amd.com>
+ <20211207123411.167006-8-christian.koenig@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20211207123411.167006-7-christian.koenig@amd.com>
+In-Reply-To: <20211207123411.167006-8-christian.koenig@amd.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH 06/24] drm/etnaviv: stop using
+Subject: Re: [Linaro-mm-sig] [PATCH 07/24] drm/nouveau: stop using
  dma_resv_excl_fence
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
@@ -87,100 +87,43 @@ Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Tue, Dec 07, 2021 at 01:33:53PM +0100, Christian K=F6nig wrote:
-> We can get the excl fence together with the shared ones as well.
+On Tue, Dec 07, 2021 at 01:33:54PM +0100, Christian K=F6nig wrote:
+> Instead use the new dma_resv_get_singleton function.
 > =
 
 > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
-
-Pls cc driver maintainers.
-
-dim add-missing-cc
-
-is your friend if you're lazy can even combine that with git rebase -x.
-Same for all the other driver patches, some acks/testing would be good to
-avoid fallout (we had a bit much of that with all these I think).
-
 > ---
->  drivers/gpu/drm/etnaviv/etnaviv_gem.h        |  1 -
->  drivers/gpu/drm/etnaviv/etnaviv_gem_submit.c | 14 +++++---------
->  drivers/gpu/drm/etnaviv/etnaviv_sched.c      | 10 ----------
->  3 files changed, 5 insertions(+), 20 deletions(-)
+>  drivers/gpu/drm/nouveau/nouveau_bo.c | 9 ++++++++-
+>  1 file changed, 8 insertions(+), 1 deletion(-)
 > =
 
-> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.h b/drivers/gpu/drm/etna=
-viv/etnaviv_gem.h
-> index 98e60df882b6..f596d743baa3 100644
-> --- a/drivers/gpu/drm/etnaviv/etnaviv_gem.h
-> +++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.h
-> @@ -80,7 +80,6 @@ struct etnaviv_gem_submit_bo {
->  	u64 va;
->  	struct etnaviv_gem_object *obj;
->  	struct etnaviv_vram_mapping *mapping;
-> -	struct dma_fence *excl;
->  	unsigned int nr_shared;
->  	struct dma_fence **shared;
->  };
-> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem_submit.c b/drivers/gpu/d=
-rm/etnaviv/etnaviv_gem_submit.c
-> index 64c90ff348f2..4286dc93fdaa 100644
-> --- a/drivers/gpu/drm/etnaviv/etnaviv_gem_submit.c
-> +++ b/drivers/gpu/drm/etnaviv/etnaviv_gem_submit.c
-> @@ -188,15 +188,11 @@ static int submit_fence_sync(struct etnaviv_gem_sub=
-mit *submit)
->  		if (submit->flags & ETNA_SUBMIT_NO_IMPLICIT)
->  			continue;
->  =
+> diff --git a/drivers/gpu/drm/nouveau/nouveau_bo.c b/drivers/gpu/drm/nouve=
+au/nouveau_bo.c
+> index fa73fe57f97b..74f8652d2bd3 100644
+> --- a/drivers/gpu/drm/nouveau/nouveau_bo.c
+> +++ b/drivers/gpu/drm/nouveau/nouveau_bo.c
+> @@ -959,7 +959,14 @@ nouveau_bo_vm_cleanup(struct ttm_buffer_object *bo,
+>  {
+>  	struct nouveau_drm *drm =3D nouveau_bdev(bo->bdev);
+>  	struct drm_device *dev =3D drm->dev;
+> -	struct dma_fence *fence =3D dma_resv_excl_fence(bo->base.resv);
+> +	struct dma_fence *fence;
+> +	int ret;
+> +
+> +	/* TODO: This is actually a memory management dependency */
+> +	ret =3D dma_resv_get_singleton(bo->base.resv, false, &fence);
+> +	if (ret)
+> +		dma_resv_wait_timeout(bo->base.resv, false, false,
+> +				      MAX_SCHEDULE_TIMEOUT);
 
-> -		if (bo->flags & ETNA_SUBMIT_BO_WRITE) {
-> -			ret =3D dma_resv_get_fences(robj, true, &bo->nr_shared,
-> -						  &bo->shared);
-> -			if (ret)
-> -				return ret;
-> -		} else {
-> -			bo->excl =3D dma_fence_get(dma_resv_excl_fence(robj));
-> -		}
-> -
-> +		ret =3D dma_resv_get_fences(robj,
-> +					  !!(bo->flags & ETNA_SUBMIT_BO_WRITE),
-
-Afaik the cast to bool !! here is overkill, compiler will do that for you
-or something like that. With that dropped:
+Needs ack from nouveau folks.
 
 Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 
-
-> +					  &bo->nr_shared, &bo->shared);
-> +		if (ret)
-> +			return ret;
->  	}
 >  =
 
->  	return ret;
-> diff --git a/drivers/gpu/drm/etnaviv/etnaviv_sched.c b/drivers/gpu/drm/et=
-naviv/etnaviv_sched.c
-> index 180bb633d5c5..8c038a363d15 100644
-> --- a/drivers/gpu/drm/etnaviv/etnaviv_sched.c
-> +++ b/drivers/gpu/drm/etnaviv/etnaviv_sched.c
-> @@ -39,16 +39,6 @@ etnaviv_sched_dependency(struct drm_sched_job *sched_j=
-ob,
->  		struct etnaviv_gem_submit_bo *bo =3D &submit->bos[i];
->  		int j;
->  =
-
-> -		if (bo->excl) {
-> -			fence =3D bo->excl;
-> -			bo->excl =3D NULL;
-> -
-> -			if (!dma_fence_is_signaled(fence))
-> -				return fence;
-> -
-> -			dma_fence_put(fence);
-> -		}
-> -
->  		for (j =3D 0; j < bo->nr_shared; j++) {
->  			if (!bo->shared[j])
->  				continue;
+>  	nv10_bo_put_tile_region(dev, *old_tile, fence);
+>  	*old_tile =3D new_tile;
 > -- =
 
 > 2.25.1
