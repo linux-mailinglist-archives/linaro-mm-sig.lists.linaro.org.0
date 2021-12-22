@@ -2,63 +2,71 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7E2347AB19
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Dec 2021 15:13:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63ED147D881
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Dec 2021 22:05:59 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E32486123A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Dec 2021 14:13:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 44E5861050
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Dec 2021 21:05:57 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id CD209610CB; Mon, 20 Dec 2021 14:13:37 +0000 (UTC)
+	id 1A621610D0; Wed, 22 Dec 2021 21:05:55 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B902F60FB5;
-	Mon, 20 Dec 2021 14:13:34 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2797460DA3;
+	Wed, 22 Dec 2021 21:05:53 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id E759C60FA4
- for <linaro-mm-sig@lists.linaro.org>; Mon, 20 Dec 2021 14:13:32 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id AFB4B608E6
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Dec 2021 21:05:50 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id E33CA60FB5; Mon, 20 Dec 2021 14:13:32 +0000 (UTC)
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
- by lists.linaro.org (Postfix) with ESMTPS id AA79F60FA4
- for <linaro-mm-sig@lists.linaro.org>; Mon, 20 Dec 2021 14:13:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1640009610; x=1671545610;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=5lfjwnzMCeNU5IlDDY2uRKlfRFO78fDP0a/50Y6zblE=;
- b=MN8CwHDZQbjEFKeW1uYySFnu4g2NzxlF5BqQn6TiFFP1hIWnVTaoWypU
- s9SXYqUdT2VOL/FcVEP/k4JQpFNFBQUPmgUfX+ShTosl/32yryIk9lnIv
- sm1gFGfREbbSVq9m4pRAVY4ztpYheSc3QGOLNLLbSxrDrdPKycL6EOMVV
- rE/yMHcrCO3xx+UB7fd7zX1Cpv+fEdaoiL9YQmCeEUCzWdKMmr6Bw3fbB
- dwt3JsIt7CNRQZkIgwd3iHw5BLXQEjINW6cSVqXsLCj2KerIjg2IcPRQY
- I0tnp16g/5cn6DWwDkbWRQyeJh8YpwSNd6ndqI/ez4rZcVF+xYz+JUNVP A==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10203"; a="238913834"
-X-IronPort-AV: E=Sophos;i="5.88,220,1635231600"; d="scan'208";a="238913834"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Dec 2021 06:07:10 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.88,220,1635231600"; d="scan'208";a="757299796"
-Received: from lkp-server02.sh.intel.com (HELO 9f38c0981d9f) ([10.239.97.151])
- by fmsmga005.fm.intel.com with ESMTP; 20 Dec 2021 06:07:08 -0800
-Received: from kbuild by 9f38c0981d9f with local (Exim 4.92)
- (envelope-from <lkp@intel.com>)
- id 1mzJJj-0007pg-OR; Mon, 20 Dec 2021 14:07:07 +0000
-Date: Mon, 20 Dec 2021 22:06:54 +0800
-From: kernel test robot <lkp@intel.com>
-To: Xianting Tian <xianting.tian@linux.alibaba.com>, kraxel@redhat.com,
- sumit.semwal@linaro.org, christian.koenig@amd.com
-Message-ID: <202112202101.tVpymGaH-lkp@intel.com>
-References: <20211220054333.3041893-1-xianting.tian@linux.alibaba.com>
+ id A465760DA3; Wed, 22 Dec 2021 21:05:50 +0000 (UTC)
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com
+ [209.85.208.53])
+ by lists.linaro.org (Postfix) with ESMTPS id 97DFA608E6
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Dec 2021 21:05:48 +0000 (UTC)
+Received: by mail-ed1-f53.google.com with SMTP id y13so13331576edd.13
+ for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Dec 2021 13:05:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:content-transfer-encoding:in-reply-to;
+ bh=IQ8ss5cLkN0OPC63IPdBeU3liG7P/Ww64z/LebsIY2w=;
+ b=jOAFEbuBAhj/reb9IQTIUNL+eVriPEapr96s9Pcjc8dBjFsapOITkfRryqtSr8GJqg
+ qW8h7sFiaY16oLLhjNKiIQKkSM/bI1XMZJ04Cie4CYLGobuvnju/nMu6cr7NI0Zmz7rk
+ 4ZK3+roGl3rxTOtfUcZcrgQ5ZAxykXjXUr4dE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=IQ8ss5cLkN0OPC63IPdBeU3liG7P/Ww64z/LebsIY2w=;
+ b=NuLPGAX/L3h+T0k2wuVRBbQMalQ/5ufUovPDRsFQ4gKJkvbcbifR4XIRbf3WSpAiUI
+ XTirvTnPut/6NP0D2uKrpUznN31K7kLH4gYTy01R0mQNtj/txArFZgPEkps6b4feNulO
+ W1fB83H2e+FFbQ3WI8jnVedN/bij/w9OVh/KcoqpXlQe7lo6iihNkJZoZE2l/x1pfffm
+ ko832ZmMiNQJw7npvk4PninplvuJAd9GDUlL/42oFpSU62THpasV/DwnA+e2Yz4+SO82
+ rtbV07p0yWvw75jLS8pDOoLyuq4+WLTkHas7p5LF/2nGCMrQQRQWVQ6gCHKbjADFP68p
+ 9c1Q==
+X-Gm-Message-State: AOAM533W7690BZDpcHxBHkrHcK6G52QtqQLD3a0AqE1uknvOslU41+mo
+ KXSS325qFsv9jOogkeKqpd9207M3by4y/w==
+X-Google-Smtp-Source: ABdhPJy16fia4p0Y93NWGi3JF1DLRQj6DXz7tKsGUA5K+83EAZceIlpmfFearrRDhArZk+srL2QzXg==
+X-Received: by 2002:a05:6402:518c:: with SMTP id
+ q12mr4542433edd.312.1640207147443; 
+ Wed, 22 Dec 2021 13:05:47 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+ by smtp.gmail.com with ESMTPSA id o1sm1274867edv.2.2021.12.22.13.05.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 22 Dec 2021 13:05:47 -0800 (PST)
+Date: Wed, 22 Dec 2021 22:05:45 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <YcOTKYkEcu7MG2sY@phenom.ffwll.local>
+References: <20211207123411.167006-1-christian.koenig@amd.com>
+ <20211207123411.167006-2-christian.koenig@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20211220054333.3041893-1-xianting.tian@linux.alibaba.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <20211207123411.167006-2-christian.koenig@amd.com>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
 X-Virus-Scanned: ClamAV using ClamSMTP
-Subject: Re: [Linaro-mm-sig] [PATCH] udmabuf: put dmabuf in case of get fd
- failed
+Subject: Re: [Linaro-mm-sig] [PATCH 01/24] dma-buf: add
+ dma_resv_replace_fences
 X-BeenThere: linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 2.1.29
 Precedence: list
@@ -71,212 +79,199 @@ List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
-Cc: kbuild-all@lists.01.org, Xianting Tian <xianting.tian@linux.alibaba.com>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Cc: linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
+ daniel@ffwll.ch, linux-media@vger.kernel.org
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-Hi Xianting,
+On Tue, Dec 07, 2021 at 01:33:48PM +0100, Christian K=F6nig wrote:
+> This function allows to replace fences from the shared fence list when
+> we can gurantee that the operation represented by the original fence has
+> finished or no accesses to the resources protected by the dma_resv
+> object any more when the new fence finishes.
+> =
 
-Thank you for the patch! Yet something to improve:
+> Then use this function in the amdkfd code when BOs are unmapped from the
+> process.
+> =
 
-[auto build test ERROR on linus/master]
-[also build test ERROR on v5.16-rc6 next-20211217]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch]
+> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+> ---
+>  drivers/dma-buf/dma-resv.c                    | 43 ++++++++++++++++
+>  .../gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c  | 49 +++----------------
+>  include/linux/dma-resv.h                      |  2 +
+>  3 files changed, 52 insertions(+), 42 deletions(-)
+> =
 
-url:    https://github.com/0day-ci/linux/commits/Xianting-Tian/udmabuf-put-dmabuf-in-case-of-get-fd-failed/20211220-134433
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git a7904a538933c525096ca2ccde1e60d0ee62c08e
-config: arc-randconfig-r043-20211220 (https://download.01.org/0day-ci/archive/20211220/202112202101.tVpymGaH-lkp@intel.com/config)
-compiler: arceb-elf-gcc (GCC) 11.2.0
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://github.com/0day-ci/linux/commit/322781a4da9de4a3057afd933108d23ca7f5282e
-        git remote add linux-review https://github.com/0day-ci/linux
-        git fetch --no-tags linux-review Xianting-Tian/udmabuf-put-dmabuf-in-case-of-get-fd-failed/20211220-134433
-        git checkout 322781a4da9de4a3057afd933108d23ca7f5282e
-        # save the config file to linux build tree
-        mkdir build_dir
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.2.0 make.cross O=build_dir ARCH=arc SHELL=/bin/bash drivers/dma-buf/
+> diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/dma-resv.c
+> index 4deea75c0b9c..a688dbded3d3 100644
+> --- a/drivers/dma-buf/dma-resv.c
+> +++ b/drivers/dma-buf/dma-resv.c
+> @@ -284,6 +284,49 @@ void dma_resv_add_shared_fence(struct dma_resv *obj,=
+ struct dma_fence *fence)
+>  }
+>  EXPORT_SYMBOL(dma_resv_add_shared_fence);
+>  =
 
-If you fix the issue, kindly add following tag as appropriate
-Reported-by: kernel test robot <lkp@intel.com>
+> +/**
+> + * dma_resv_replace_fences - replace fences in the dma_resv obj
+> + * @obj: the reservation object
+> + * @context: the context of the fences to replace
+> + * @replacement: the new fence to use instead
+> + *
+> + * Replace fences with a specified context with a new fence. Only valid =
+if the
+> + * operation represented by the original fences is completed or has no l=
+onger
+> + * access to the resources protected by the dma_resv object when the new=
+ fence
+> + * completes.
+> + */
+> +void dma_resv_replace_fences(struct dma_resv *obj, uint64_t context,
+> +			     struct dma_fence *replacement)
+> +{
+> +	struct dma_resv_list *list;
+> +	struct dma_fence *old;
+> +	unsigned int i;
+> +
+> +	dma_resv_assert_held(obj);
+> +
+> +	write_seqcount_begin(&obj->seq);
+> +
+> +	old =3D dma_resv_excl_fence(obj);
+> +	if (old->context =3D=3D context) {
+> +		RCU_INIT_POINTER(obj->fence_excl, dma_fence_get(replacement));
+> +		dma_fence_put(old);
+> +	}
+> +
+> +	list =3D dma_resv_shared_list(obj);
+> +	for (i =3D 0; list && i < list->shared_count; ++i) {
+> +		old =3D rcu_dereference_protected(list->shared[i],
+> +						dma_resv_held(obj));
+> +		if (old->context !=3D context)
+> +			continue;
+> +
+> +		rcu_assign_pointer(list->shared[i], dma_fence_get(replacement));
+> +		dma_fence_put(old);
 
-All error/warnings (new ones prefixed by >>):
+Since the fences are all guaranteed to be from the same context, maybe we
+should have a WARN_ON(__dma_fence_is_later()); here just to be safe?
 
-   drivers/dma-buf/udmabuf.c: In function 'udmabuf_create':
->> drivers/dma-buf/udmabuf.c:292:13: error: invalid storage class for function 'udmabuf_ioctl_create'
-     292 | static long udmabuf_ioctl_create(struct file *filp, unsigned long arg)
-         |             ^~~~~~~~~~~~~~~~~~~~
->> drivers/dma-buf/udmabuf.c:292:1: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
-     292 | static long udmabuf_ioctl_create(struct file *filp, unsigned long arg)
-         | ^~~~~~
->> drivers/dma-buf/udmabuf.c:311:13: error: invalid storage class for function 'udmabuf_ioctl_create_list'
-     311 | static long udmabuf_ioctl_create_list(struct file *filp, unsigned long arg)
-         |             ^~~~~~~~~~~~~~~~~~~~~~~~~
->> drivers/dma-buf/udmabuf.c:332:13: error: invalid storage class for function 'udmabuf_ioctl'
-     332 | static long udmabuf_ioctl(struct file *filp, unsigned int ioctl,
-         |             ^~~~~~~~~~~~~
->> drivers/dma-buf/udmabuf.c:353:27: error: initializer element is not constant
-     353 |         .unlocked_ioctl = udmabuf_ioctl,
-         |                           ^~~~~~~~~~~~~
-   drivers/dma-buf/udmabuf.c:353:27: note: (near initialization for 'udmabuf_fops.unlocked_ioctl')
->> drivers/dma-buf/udmabuf.c:365:19: error: invalid storage class for function 'udmabuf_dev_init'
-     365 | static int __init udmabuf_dev_init(void)
-         |                   ^~~~~~~~~~~~~~~~
->> drivers/dma-buf/udmabuf.c:370:20: error: invalid storage class for function 'udmabuf_dev_exit'
-     370 | static void __exit udmabuf_dev_exit(void)
-         |                    ^~~~~~~~~~~~~~~~
-   In file included from include/linux/cred.h:12,
-                    from drivers/dma-buf/udmabuf.c:2:
-   drivers/dma-buf/udmabuf.c:375:13: error: initializer element is not constant
-     375 | module_init(udmabuf_dev_init)
-         |             ^~~~~~~~~~~~~~~~
-   include/linux/init.h:250:55: note: in definition of macro '____define_initcall'
-     250 |                 __attribute__((__section__(__sec))) = fn;
-         |                                                       ^~
-   include/linux/init.h:260:9: note: in expansion of macro '__unique_initcall'
-     260 |         __unique_initcall(fn, id, __sec, __initcall_id(fn))
-         |         ^~~~~~~~~~~~~~~~~
-   include/linux/init.h:262:35: note: in expansion of macro '___define_initcall'
-     262 | #define __define_initcall(fn, id) ___define_initcall(fn, id, .initcall##id)
-         |                                   ^~~~~~~~~~~~~~~~~~
-   include/linux/init.h:291:41: note: in expansion of macro '__define_initcall'
-     291 | #define device_initcall(fn)             __define_initcall(fn, 6)
-         |                                         ^~~~~~~~~~~~~~~~~
-   include/linux/init.h:296:24: note: in expansion of macro 'device_initcall'
-     296 | #define __initcall(fn) device_initcall(fn)
-         |                        ^~~~~~~~~~~~~~~
-   include/linux/module.h:88:25: note: in expansion of macro '__initcall'
-      88 | #define module_init(x)  __initcall(x);
-         |                         ^~~~~~~~~~
-   drivers/dma-buf/udmabuf.c:375:1: note: in expansion of macro 'module_init'
-     375 | module_init(udmabuf_dev_init)
-         | ^~~~~~~~~~~
-   drivers/dma-buf/udmabuf.c:376:13: error: initializer element is not constant
-     376 | module_exit(udmabuf_dev_exit)
-         |             ^~~~~~~~~~~~~~~~
-   include/linux/init.h:299:57: note: in definition of macro '__exitcall'
-     299 |         static exitcall_t __exitcall_##fn __exit_call = fn
-         |                                                         ^~
-   drivers/dma-buf/udmabuf.c:376:1: note: in expansion of macro 'module_exit'
-     376 | module_exit(udmabuf_dev_exit)
-         | ^~~~~~~~~~~
->> include/linux/init.h:299:9: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
-     299 |         static exitcall_t __exitcall_##fn __exit_call = fn
-         |         ^~~~~~
-   include/linux/module.h:100:25: note: in expansion of macro '__exitcall'
-     100 | #define module_exit(x)  __exitcall(x);
-         |                         ^~~~~~~~~~
-   drivers/dma-buf/udmabuf.c:376:1: note: in expansion of macro 'module_exit'
-     376 | module_exit(udmabuf_dev_exit)
-         | ^~~~~~~~~~~
->> drivers/dma-buf/udmabuf.c:379:1: error: expected declaration or statement at end of input
-     379 | MODULE_LICENSE("GPL v2");
-         | ^~~~~~~~~~~~~~
+With that added:
+
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+
+> +	}
+> +
+> +	write_seqcount_end(&obj->seq);
+> +}
+> +EXPORT_SYMBOL(dma_resv_replace_fences);
+> +
+>  /**
+>   * dma_resv_add_excl_fence - Add an exclusive fence.
+>   * @obj: the reservation object
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c b/drivers/g=
+pu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c
+> index 71acd577803e..b558ef0f8c4a 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c
+> @@ -236,53 +236,18 @@ void amdgpu_amdkfd_release_notify(struct amdgpu_bo =
+*bo)
+>  static int amdgpu_amdkfd_remove_eviction_fence(struct amdgpu_bo *bo,
+>  					struct amdgpu_amdkfd_fence *ef)
+>  {
+> -	struct dma_resv *resv =3D bo->tbo.base.resv;
+> -	struct dma_resv_list *old, *new;
+> -	unsigned int i, j, k;
+> +	struct dma_fence *replacement;
+>  =
+
+>  	if (!ef)
+>  		return -EINVAL;
+>  =
+
+> -	old =3D dma_resv_shared_list(resv);
+> -	if (!old)
+> -		return 0;
+> -
+> -	new =3D kmalloc(struct_size(new, shared, old->shared_max), GFP_KERNEL);
+> -	if (!new)
+> -		return -ENOMEM;
+> -
+> -	/* Go through all the shared fences in the resevation object and sort
+> -	 * the interesting ones to the end of the list.
+> +	/* TODO: Instead of block before we should use the fence of the page
+> +	 * table update and TLB flush here directly.
+>  	 */
+> -	for (i =3D 0, j =3D old->shared_count, k =3D 0; i < old->shared_count; =
+++i) {
+> -		struct dma_fence *f;
+> -
+> -		f =3D rcu_dereference_protected(old->shared[i],
+> -					      dma_resv_held(resv));
+> -
+> -		if (f->context =3D=3D ef->base.context)
+> -			RCU_INIT_POINTER(new->shared[--j], f);
+> -		else
+> -			RCU_INIT_POINTER(new->shared[k++], f);
+> -	}
+> -	new->shared_max =3D old->shared_max;
+> -	new->shared_count =3D k;
+> -
+> -	/* Install the new fence list, seqcount provides the barriers */
+> -	write_seqcount_begin(&resv->seq);
+> -	RCU_INIT_POINTER(resv->fence, new);
+> -	write_seqcount_end(&resv->seq);
+> -
+> -	/* Drop the references to the removed fences or move them to ef_list */
+> -	for (i =3D j; i < old->shared_count; ++i) {
+> -		struct dma_fence *f;
+> -
+> -		f =3D rcu_dereference_protected(new->shared[i],
+> -					      dma_resv_held(resv));
+> -		dma_fence_put(f);
+> -	}
+> -	kfree_rcu(old, rcu);
+> -
+> +	replacement =3D dma_fence_get_stub();
+> +	dma_resv_replace_fences(bo->tbo.base.resv, ef->base.context,
+> +				replacement);
+> +	dma_fence_put(replacement);
+>  	return 0;
+>  }
+>  =
+
+> diff --git a/include/linux/dma-resv.h b/include/linux/dma-resv.h
+> index eebf04325b34..e0be34265eae 100644
+> --- a/include/linux/dma-resv.h
+> +++ b/include/linux/dma-resv.h
+> @@ -457,6 +457,8 @@ void dma_resv_init(struct dma_resv *obj);
+>  void dma_resv_fini(struct dma_resv *obj);
+>  int dma_resv_reserve_shared(struct dma_resv *obj, unsigned int num_fence=
+s);
+>  void dma_resv_add_shared_fence(struct dma_resv *obj, struct dma_fence *f=
+ence);
+> +void dma_resv_replace_fences(struct dma_resv *obj, uint64_t context,
+> +			     struct dma_fence *fence);
+>  void dma_resv_add_excl_fence(struct dma_resv *obj, struct dma_fence *fen=
+ce);
+>  int dma_resv_get_fences(struct dma_resv *obj, struct dma_fence **pfence_=
+excl,
+>  			unsigned *pshared_count, struct dma_fence ***pshared);
+> -- =
+
+> 2.25.1
+> =
 
 
-vim +/udmabuf_ioctl_create +292 drivers/dma-buf/udmabuf.c
+-- =
 
-fbb0de795078190 Gerd Hoffmann          2018-08-27  291  
-fbb0de795078190 Gerd Hoffmann          2018-08-27 @292  static long udmabuf_ioctl_create(struct file *filp, unsigned long arg)
-fbb0de795078190 Gerd Hoffmann          2018-08-27  293  {
-fbb0de795078190 Gerd Hoffmann          2018-08-27  294  	struct udmabuf_create create;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  295  	struct udmabuf_create_list head;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  296  	struct udmabuf_create_item list;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  297  
-fbb0de795078190 Gerd Hoffmann          2018-08-27  298  	if (copy_from_user(&create, (void __user *)arg,
-33f35429fc49c09 Gerd Hoffmann          2018-09-11  299  			   sizeof(create)))
-fbb0de795078190 Gerd Hoffmann          2018-08-27  300  		return -EFAULT;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  301  
-fbb0de795078190 Gerd Hoffmann          2018-08-27  302  	head.flags  = create.flags;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  303  	head.count  = 1;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  304  	list.memfd  = create.memfd;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  305  	list.offset = create.offset;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  306  	list.size   = create.size;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  307  
-c1bbed668997268 Gurchetan Singh        2019-12-02  308  	return udmabuf_create(filp->private_data, &head, &list);
-fbb0de795078190 Gerd Hoffmann          2018-08-27  309  }
-fbb0de795078190 Gerd Hoffmann          2018-08-27  310  
-fbb0de795078190 Gerd Hoffmann          2018-08-27 @311  static long udmabuf_ioctl_create_list(struct file *filp, unsigned long arg)
-fbb0de795078190 Gerd Hoffmann          2018-08-27  312  {
-fbb0de795078190 Gerd Hoffmann          2018-08-27  313  	struct udmabuf_create_list head;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  314  	struct udmabuf_create_item *list;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  315  	int ret = -EINVAL;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  316  	u32 lsize;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  317  
-fbb0de795078190 Gerd Hoffmann          2018-08-27  318  	if (copy_from_user(&head, (void __user *)arg, sizeof(head)))
-fbb0de795078190 Gerd Hoffmann          2018-08-27  319  		return -EFAULT;
-dc4716d75154b36 Gerd Hoffmann          2018-09-11  320  	if (head.count > list_limit)
-fbb0de795078190 Gerd Hoffmann          2018-08-27  321  		return -EINVAL;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  322  	lsize = sizeof(struct udmabuf_create_item) * head.count;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  323  	list = memdup_user((void __user *)(arg + sizeof(head)), lsize);
-fbb0de795078190 Gerd Hoffmann          2018-08-27  324  	if (IS_ERR(list))
-fbb0de795078190 Gerd Hoffmann          2018-08-27  325  		return PTR_ERR(list);
-fbb0de795078190 Gerd Hoffmann          2018-08-27  326  
-c1bbed668997268 Gurchetan Singh        2019-12-02  327  	ret = udmabuf_create(filp->private_data, &head, list);
-fbb0de795078190 Gerd Hoffmann          2018-08-27  328  	kfree(list);
-fbb0de795078190 Gerd Hoffmann          2018-08-27  329  	return ret;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  330  }
-fbb0de795078190 Gerd Hoffmann          2018-08-27  331  
-fbb0de795078190 Gerd Hoffmann          2018-08-27 @332  static long udmabuf_ioctl(struct file *filp, unsigned int ioctl,
-fbb0de795078190 Gerd Hoffmann          2018-08-27  333  			  unsigned long arg)
-fbb0de795078190 Gerd Hoffmann          2018-08-27  334  {
-fbb0de795078190 Gerd Hoffmann          2018-08-27  335  	long ret;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  336  
-fbb0de795078190 Gerd Hoffmann          2018-08-27  337  	switch (ioctl) {
-fbb0de795078190 Gerd Hoffmann          2018-08-27  338  	case UDMABUF_CREATE:
-fbb0de795078190 Gerd Hoffmann          2018-08-27  339  		ret = udmabuf_ioctl_create(filp, arg);
-fbb0de795078190 Gerd Hoffmann          2018-08-27  340  		break;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  341  	case UDMABUF_CREATE_LIST:
-fbb0de795078190 Gerd Hoffmann          2018-08-27  342  		ret = udmabuf_ioctl_create_list(filp, arg);
-fbb0de795078190 Gerd Hoffmann          2018-08-27  343  		break;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  344  	default:
-52499d9cdd88784 Gerd Hoffmann          2018-09-11  345  		ret = -ENOTTY;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  346  		break;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  347  	}
-fbb0de795078190 Gerd Hoffmann          2018-08-27  348  	return ret;
-fbb0de795078190 Gerd Hoffmann          2018-08-27  349  }
-fbb0de795078190 Gerd Hoffmann          2018-08-27  350  
-fbb0de795078190 Gerd Hoffmann          2018-08-27  351  static const struct file_operations udmabuf_fops = {
-fbb0de795078190 Gerd Hoffmann          2018-08-27  352  	.owner		= THIS_MODULE,
-fbb0de795078190 Gerd Hoffmann          2018-08-27 @353  	.unlocked_ioctl = udmabuf_ioctl,
-d4a197f4047e01d Kristian H. Kristensen 2020-09-03  354  #ifdef CONFIG_COMPAT
-d4a197f4047e01d Kristian H. Kristensen 2020-09-03  355  	.compat_ioctl   = udmabuf_ioctl,
-d4a197f4047e01d Kristian H. Kristensen 2020-09-03  356  #endif
-fbb0de795078190 Gerd Hoffmann          2018-08-27  357  };
-fbb0de795078190 Gerd Hoffmann          2018-08-27  358  
-fbb0de795078190 Gerd Hoffmann          2018-08-27  359  static struct miscdevice udmabuf_misc = {
-fbb0de795078190 Gerd Hoffmann          2018-08-27  360  	.minor          = MISC_DYNAMIC_MINOR,
-fbb0de795078190 Gerd Hoffmann          2018-08-27  361  	.name           = "udmabuf",
-fbb0de795078190 Gerd Hoffmann          2018-08-27  362  	.fops           = &udmabuf_fops,
-fbb0de795078190 Gerd Hoffmann          2018-08-27  363  };
-fbb0de795078190 Gerd Hoffmann          2018-08-27  364  
-fbb0de795078190 Gerd Hoffmann          2018-08-27 @365  static int __init udmabuf_dev_init(void)
-fbb0de795078190 Gerd Hoffmann          2018-08-27  366  {
-fbb0de795078190 Gerd Hoffmann          2018-08-27  367  	return misc_register(&udmabuf_misc);
-fbb0de795078190 Gerd Hoffmann          2018-08-27  368  }
-fbb0de795078190 Gerd Hoffmann          2018-08-27  369  
-fbb0de795078190 Gerd Hoffmann          2018-08-27 @370  static void __exit udmabuf_dev_exit(void)
-fbb0de795078190 Gerd Hoffmann          2018-08-27  371  {
-fbb0de795078190 Gerd Hoffmann          2018-08-27  372  	misc_deregister(&udmabuf_misc);
-fbb0de795078190 Gerd Hoffmann          2018-08-27  373  }
-fbb0de795078190 Gerd Hoffmann          2018-08-27  374  
-fbb0de795078190 Gerd Hoffmann          2018-08-27  375  module_init(udmabuf_dev_init)
-fbb0de795078190 Gerd Hoffmann          2018-08-27  376  module_exit(udmabuf_dev_exit)
-fbb0de795078190 Gerd Hoffmann          2018-08-27  377  
-fbb0de795078190 Gerd Hoffmann          2018-08-27  378  MODULE_AUTHOR("Gerd Hoffmann <kraxel@redhat.com>");
-fbb0de795078190 Gerd Hoffmann          2018-08-27 @379  MODULE_LICENSE("GPL v2");
-
----
-0-DAY CI Kernel Test Service, Intel Corporation
-https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list
 Linaro-mm-sig@lists.linaro.org
