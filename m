@@ -2,68 +2,74 @@ Return-Path: <linaro-mm-sig-bounces@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [107.22.173.205])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FFFB47D947
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Dec 2021 23:17:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 599E547E0BC
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Dec 2021 10:11:34 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5C98A6105D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Dec 2021 22:17:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C731461023
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Dec 2021 09:11:32 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
-	id 346AD60E1B; Wed, 22 Dec 2021 22:17:53 +0000 (UTC)
+	id A02E7610F1; Thu, 23 Dec 2021 09:11:31 +0000 (UTC)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 35B5D60DC1;
-	Wed, 22 Dec 2021 22:17:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E694861035;
+	Thu, 23 Dec 2021 09:11:27 +0000 (UTC)
 X-Original-To: linaro-mm-sig@lists.linaro.org
 Delivered-To: linaro-mm-sig@lists.linaro.org
 Received: from lists.linaro.org (localhost [127.0.0.1])
- by lists.linaro.org (Postfix) with ESMTP id A928A60B99
- for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Dec 2021 22:17:48 +0000 (UTC)
+ by lists.linaro.org (Postfix) with ESMTP id 2D57D6101D
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Dec 2021 09:11:26 +0000 (UTC)
 Received: by lists.linaro.org (Postfix, from userid 109)
- id A51C660DC1; Wed, 22 Dec 2021 22:17:48 +0000 (UTC)
-Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com
- [209.85.208.54])
- by lists.linaro.org (Postfix) with ESMTPS id 9C68560B99
- for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Dec 2021 22:17:46 +0000 (UTC)
-Received: by mail-ed1-f54.google.com with SMTP id bm14so13973977edb.5
- for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Dec 2021 14:17:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ffwll.ch; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:content-transfer-encoding:in-reply-to;
- bh=ofS9l2qebwP/4iVIsemnUHzvM6pKNrDlGzoJ6fIi4zg=;
- b=GnhmZe1h6FTTH2nJh32MPELKTW7ojgKXikumoF92vVm8XujNXZdnZN0/d4zrgpJj/l
- jcI54ELsP9vg3li/ZgE4WKFEzI71oupPrTMs0+vIDhUe0qCtfleux6ZM3z+21hzn7zQr
- zujEh5K11y9nfS2dzepGCDKqUaEAtPDC1R1+E=
+ id 2B32661035; Thu, 23 Dec 2021 09:11:26 +0000 (UTC)
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
+ [209.85.128.49])
+ by lists.linaro.org (Postfix) with ESMTPS id 233E06101D
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Dec 2021 09:11:24 +0000 (UTC)
+Received: by mail-wm1-f49.google.com with SMTP id
+ p1-20020a1c7401000000b00345c2d068bdso2743200wmc.3
+ for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Dec 2021 01:11:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-transfer-encoding:content-language;
+ bh=E8oqCDxQAAUPB0dz/BCO4AOd3xZwCZLLVDd5QYYb2Ac=;
+ b=IJrbSDmmwV9i4FGK8bAvQzi/bUWaAq1ASy2S7tx2Y4uYryn+dpBxqtzA6SSwkCRRP8
+ 5ktTkCtisSYvT/BZka6GG5eIUm71FfT90T90YRjMrWFgU3LJdm8Ga+KYEts+wQTbgpiO
+ 5RvIIB4yopIAO1U9auSTRhb1DsdKb08hz0DHKSEV9xBqC+g+JU1n5rzAkGCQVFNlTTTg
+ 8scnFPCWkrlXLY3SfFL/40lyUeETvLtlKAGUuML9bFUd6E1uppKaL3p15EFdF3Hj4i2a
+ drBmmIkw0xBXVYO/8WMLmI3w4vEi2d7HcclVDcoBIuAhi/B/MQJt0t7NPi+mU698k2f7
+ RvZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=ofS9l2qebwP/4iVIsemnUHzvM6pKNrDlGzoJ6fIi4zg=;
- b=V677XfNcyexRXfevlyDHj7aDIOQACOutLlt63MofmbwxaKh0NXR8xpWteiUp9KZ08o
- doBeMNYlIW1Lk9DzMWBkcnnviwq+T5VxX+WWQucgxkNTWOkWYA9KTK0c74w3A+QrTmMz
- UFkN1ClGtvu99Gn0/QyaWfEbdoelCVAgpS3Fq0mnhnZzLGDR/EPm542i60lZ6N5J7ybg
- wHTegkhfjvp66+kAAITH+3JCHEVO78oyH+UA4NoE3dnwDUr60UZZ0+Qgy32mdPaiLGlX
- yYfi3HPINzlDue/esKrAZeAtpUYt+GzZZ6RwDuxuGwd7PBr4ofj71BNHpKIb04McPNzB
- s3UA==
-X-Gm-Message-State: AOAM5339KYdYOqEQuts9n2pI7pMXhQ6EoZUyeE5uq8oaCL4u/BdAl7lS
- iHhPTBWvlQNIRYEy3qodf73XAQU/QBziPA==
-X-Google-Smtp-Source: ABdhPJyKQZiPqbmCmMmzckiH9gys1Mq4AY8wyy4rqynP1muKZHFdKlWttPT4i3NqFoj/nb0zYSrwYg==
-X-Received: by 2002:a17:906:580a:: with SMTP id
- m10mr3807993ejq.213.1640211465721; 
- Wed, 22 Dec 2021 14:17:45 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
- by smtp.gmail.com with ESMTPSA id i6sm1305577edx.46.2021.12.22.14.17.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 22 Dec 2021 14:17:45 -0800 (PST)
-Date: Wed, 22 Dec 2021 23:17:43 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YcOkB0Jlc5KsHnEN@phenom.ffwll.local>
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-transfer-encoding
+ :content-language;
+ bh=E8oqCDxQAAUPB0dz/BCO4AOd3xZwCZLLVDd5QYYb2Ac=;
+ b=F7lJBb7YvcJQzad0/IMmARlo1XwFBNK7jTUrv3pZMn5UbVAF7+YHk/qxIy3ZiS3l3r
+ 8u5IvIGUOC3xmbIqchWBjigu5QpdrEohMrP6akD6ws6BjsSDVD4sltEE6IdFmXYJhlAH
+ o0beq4NlbQPlGNuYH5izKEW80hwP5gwdaWWUUnSVHfJwj6qGWCxBAxAVzyeNh6hNeyzY
+ s8Hnpc6kAHv4t2/TXS2T+FyYqSr7OWUYGaB7g8+cesVHEeZtst62CBzkwAtMCWCkJjg/
+ T+XykBXqsKYieSZiQxNRydZkxfF8YoKn1eqNxne8THXdqBzbYCDFT0vTgEjRQAZuKJsU
+ Vwhg==
+X-Gm-Message-State: AOAM532CmFIk0eAQHFJCDa/4ycabvigoXupRSaggL+BgOjdInKkUivNs
+ iqWUXt/m1kS5nvU8qF4njrqWB85yIzE=
+X-Google-Smtp-Source: ABdhPJzGl/qU+hk5aBABASio9ZLh9n+ZQxW0Tjdu/bqiIhAdRejLvEY9REe3X/CnyCl9Z/6ZNjrVbA==
+X-Received: by 2002:a1c:23d2:: with SMTP id j201mr1118161wmj.76.1640250683229; 
+ Thu, 23 Dec 2021 01:11:23 -0800 (PST)
+Received: from [192.168.178.21] (p57b0bff8.dip0.t-ipconnect.de.
+ [87.176.191.248])
+ by smtp.gmail.com with ESMTPSA id k13sm4280339wri.6.2021.12.23.01.11.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 23 Dec 2021 01:11:22 -0800 (PST)
+To: Daniel Vetter <daniel@ffwll.ch>
 References: <20211207123411.167006-1-christian.koenig@amd.com>
  <e8c7284f-e18e-0dcc-f0a2-3a1ad6222fd4@gmail.com>
+ <YcOkB0Jlc5KsHnEN@phenom.ffwll.local>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <c63e62cc-e48e-2e81-571c-498e4d16fd21@gmail.com>
+Date: Thu, 23 Dec 2021 10:11:20 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <e8c7284f-e18e-0dcc-f0a2-3a1ad6222fd4@gmail.com>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
+In-Reply-To: <YcOkB0Jlc5KsHnEN@phenom.ffwll.local>
+Content-Language: en-US
 X-Virus-Scanned: ClamAV using ClamSMTP
 Subject: Re: [Linaro-mm-sig] completely rework the dma_resv semantic
 X-BeenThere: linaro-mm-sig@lists.linaro.org
@@ -79,61 +85,30 @@ List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Subscribe: <https://lists.linaro.org/mailman/listinfo/linaro-mm-sig>,
  <mailto:linaro-mm-sig-request@lists.linaro.org?subject=subscribe>
 Cc: linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org,
- daniel@ffwll.ch, linux-media@vger.kernel.org
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ linux-media@vger.kernel.org
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: linaro-mm-sig-bounces@lists.linaro.org
 Sender: "Linaro-mm-sig" <linaro-mm-sig-bounces@lists.linaro.org>
 X-Virus-Scanned: ClamAV using ClamSMTP
 
-On Fri, Dec 17, 2021 at 03:39:52PM +0100, Christian K=F6nig wrote:
-> Hi Daniel,
-> =
-
-> looks like this is going nowhere and you don't seem to have time to revie=
-w.
-> =
-
-> What can we do?
-
-cc more people, you didn't cc any of the driver folks :-)
-
-Also I did find some review before I disappeared, back on 10th Jan.
-
-Cheers, Daniel
-
-> =
-
-> Thanks,
-> Christian.
-> =
-
-> Am 07.12.21 um 13:33 schrieb Christian K=F6nig:
-> > Hi Daniel,
-> > =
-
-> > just a gentle ping that you wanted to take a look at this.
-> > =
-
-> > Not much changed compared to the last version, only a minor bugfix in
-> > the dma_resv_get_singleton error handling.
-> > =
-
-> > Regards,
-> > Christian.
-> > =
-
-> > =
-
-> =
-
-
--- =
-
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list
-Linaro-mm-sig@lists.linaro.org
-https://lists.linaro.org/mailman/listinfo/linaro-mm-sig
+QW0gMjIuMTIuMjEgdW0gMjM6MTcgc2NocmllYiBEYW5pZWwgVmV0dGVyOgo+IE9uIEZyaSwgRGVj
+IDE3LCAyMDIxIGF0IDAzOjM5OjUyUE0gKzAxMDAsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6Cj4+
+IEhpIERhbmllbCwKPj4KPj4gbG9va3MgbGlrZSB0aGlzIGlzIGdvaW5nIG5vd2hlcmUgYW5kIHlv
+dSBkb24ndCBzZWVtIHRvIGhhdmUgdGltZSB0byByZXZpZXcuCj4+Cj4+IFdoYXQgY2FuIHdlIGRv
+Pwo+IGNjIG1vcmUgcGVvcGxlLCB5b3UgZGlkbid0IGNjIGFueSBvZiB0aGUgZHJpdmVyIGZvbGtz
+IDotKQoKV2VsbCBJJ3ZlIENDZWQgbW9yZSBwZW9wbGUgYW5kIGxpc3RzIGFuZCB0aGUgZmlyc3Qg
+cm91bmQgb2YgdGhlIHBhdGNoZXMuIApKdXN0IHdhbnRlZCB0byBnZXQgc29tZSBtb3JlIGNvbW1l
+bnRzIGZyb20geW91IGZpcnN0IGJlZm9yZSB3aWRlbmluZyB0aGUgCmF1ZGllbmNlLgoKPiBBbHNv
+IEkgZGlkIGZpbmQgc29tZSByZXZpZXcgYmVmb3JlIEkgZGlzYXBwZWFyZWQsIGJhY2sgb24gMTB0
+aCBKYW4uCgpHb29kLCB0aGVuIEkgaGF2ZSBhdCBsZWFzdCBzb21ldGhpbmcgdG9kbyBmb3IgdGhl
+IGZpcnN0IHdlZWsgb24gSmFudWFyeS4KCkhhcHB5IGhvbGlkYXlzLApDaHJpc3RpYW4uCgo+Cj4g
+Q2hlZXJzLCBEYW5pZWwKPgo+PiBUaGFua3MsCj4+IENocmlzdGlhbi4KPj4KPj4gQW0gMDcuMTIu
+MjEgdW0gMTM6MzMgc2NocmllYiBDaHJpc3RpYW4gS8O2bmlnOgo+Pj4gSGkgRGFuaWVsLAo+Pj4K
+Pj4+IGp1c3QgYSBnZW50bGUgcGluZyB0aGF0IHlvdSB3YW50ZWQgdG8gdGFrZSBhIGxvb2sgYXQg
+dGhpcy4KPj4+Cj4+PiBOb3QgbXVjaCBjaGFuZ2VkIGNvbXBhcmVkIHRvIHRoZSBsYXN0IHZlcnNp
+b24sIG9ubHkgYSBtaW5vciBidWdmaXggaW4KPj4+IHRoZSBkbWFfcmVzdl9nZXRfc2luZ2xldG9u
+IGVycm9yIGhhbmRsaW5nLgo+Pj4KPj4+IFJlZ2FyZHMsCj4+PiBDaHJpc3RpYW4uCj4+Pgo+Pj4K
+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1t
+bS1zaWcgbWFpbGluZyBsaXN0CkxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpodHRwczov
+L2xpc3RzLmxpbmFyby5vcmcvbWFpbG1hbi9saXN0aW5mby9saW5hcm8tbW0tc2lnCg==
