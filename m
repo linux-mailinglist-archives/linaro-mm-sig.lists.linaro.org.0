@@ -2,60 +2,60 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C27B483747
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  3 Jan 2022 19:58:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D15F0483D20
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Jan 2022 08:43:23 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 079E63ED84
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  3 Jan 2022 18:58:00 +0000 (UTC)
-Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com [209.85.208.176])
-	by lists.linaro.org (Postfix) with ESMTPS id CB2AD3ED72
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  3 Jan 2022 18:57:43 +0000 (UTC)
-Received: by mail-lj1-f176.google.com with SMTP id t2so5440744ljo.6
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 03 Jan 2022 10:57:43 -0800 (PST)
+	by lists.linaro.org (Postfix) with ESMTP id A7B883ED8E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Jan 2022 07:43:22 +0000 (UTC)
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
+	by lists.linaro.org (Postfix) with ESMTPS id 3012F3EC9E
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  4 Jan 2022 07:43:09 +0000 (UTC)
+Received: by mail-lj1-f178.google.com with SMTP id q8so43564187ljp.9
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 03 Jan 2022 23:43:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=MMhWstZ09q6Cszqpd54WHd2qjsYduZF9Gp6qbEFoKEg=;
-        b=CYPX06mYYQ2+cOhSoLGgV/rWQWqKCDXJJ9Iw+5ssEOfXIYPGzUj7v+4rgZWAs1vh9q
-         5dxy3dqwPKsdPh8M3wwJtoHaqrBWQUbMh0A78AgqwE65oMtsmJWN3KeAWc/54E/cAKAr
-         Af4lQCwRkQcSkAYn+OL6rnmExbIWZFSFNvDj7/ZAPCsUj/Rz2SXUD2thJ9cfusFoDFQr
-         QGbuXD9mOwVVPjgcFZxbjvS/9OAAV9ib3h9azZpUnhYbKgMGsSu28tLpirCWUJjnPYR+
-         xzbw3RM5EoVWXwBcFP6EaXw9vEwmSo8tRcQaG21dwkUF+pAPRLaunXbEMhCn4sM7w1Y6
-         xpLA==
+        bh=fgKwWZIfcsw72ZHfRdvesZsrrJZ1f8dTTxjt4J+BNV4=;
+        b=X1ob57L7f7pUYK9slUoi/6n/KdzlJZAH8oS41+fUBZrebkN3Jnk2uaUo6PEJFCsaUx
+         zcPjGMq4Kp7cO3mAF8RhPxz3hDyy64IWH4viwJceKGUJZlgsF9B3sEJDeAKfMKIZiboU
+         6CpumNRlrBIBJG0KASIkN0/5UCUtgBpFO8+Xt16kpgHQM7cSI8PDNwSKBxGLM1FOz0qD
+         Y3nhvzScK/BTQb1cIrUde5TyCbBSCRqkLXhZ6QbnNyOn49n+c1Ss1yAizUgMpLKYZYns
+         +WIDARIMUXhTMkCfFwFme7n+TFF3gO93EtOBE6Sdcs3LU8YN7bpf5nct2QHtI71vKdrV
+         aPlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=MMhWstZ09q6Cszqpd54WHd2qjsYduZF9Gp6qbEFoKEg=;
-        b=KzI28PVAjWaNfVX8Z8MS7JPlzyc8f1ZWrEZlER0VFYcUFFSoX0MvIdFbF/diXsKscM
-         W/rTeZfenQNmCc/g8AX5xSIZeiIKctwQdUGWnQFAhxd3on/Y9qST6chFBiT1qoJYINxA
-         e8j6I00sAJpCy/aj9mwwvKl9NERdqksKRIZk1gpxwoIQjLwoXplClY/6k+ttmd9pj/+0
-         VIbGFoTqJGc0FkYt5BIbCQJ4jhh+ktrI67GoCzvp2amr6NTPHV6XdwnevfAeRBpZKed6
-         MYP+g4QqVeIZ7hBvlIkarpWsECLSOSATv1wfFlGZG04vNIFV2O2qEfCginKBbZYLpCjw
-         pBdA==
-X-Gm-Message-State: AOAM532zmnGntairvQ/TjegE0K6VzDRwAsyn1aTqRK7IQLNgnBCQIl5V
-	zAgF22aq9F93ZqrT4q/Y4XMNmcsSixTDAV1/9SHqw2y0
-X-Google-Smtp-Source: ABdhPJxESlTLF6vDjNiq9g3jYw19mn2gjb5KvscdlznFgTwwArdG339mJObBz8nFkUB+6pOx0s4aqg8oPJhp9SWaWGY=
-X-Received: by 2002:a2e:9b96:: with SMTP id z22mr37955720lji.427.1641236262660;
- Mon, 03 Jan 2022 10:57:42 -0800 (PST)
+        bh=fgKwWZIfcsw72ZHfRdvesZsrrJZ1f8dTTxjt4J+BNV4=;
+        b=JDfwMYrxDrEonz6/Jp4x0XdSeV3F0o+B8r0yM+LNTG3w/6m/+wxDdnQJegI01H6gwq
+         bTVXjL0TZ5FvErWmSTRgMlk+4AgJ6JhndE8bhkkuew7fdn1OlKthIdZFdrGqnRz/XNSG
+         CfHVDcz0et2HyLfhoF3ozQ+TmeXgEftF8DLCpdERpI7xXTvKFk9+0kaXgCILYter/1c4
+         1TYD3EDOd3dROh5ALJ1tVRYDrwmTbrRvzJjtSwn5dhrpkkFpBkR7jwcmMpP27QAyRD44
+         ccscfxvK2IqDw89zj4BIrQBR9jcshvE5Bz4E3nxkA6mcjvYS7IITiR9yiLcUORWfV23z
+         pA2g==
+X-Gm-Message-State: AOAM5321KtxqT4Q3q3wZY/a9e2VBb7cpMVjG1TJVjauiHGYgraNev31Q
+	IBR3sHCvHFiDNnwdr0NKUZJUvqBmC6RBUW2uTG2OpPUl
+X-Google-Smtp-Source: ABdhPJzTcr2rRRGYiX1ocR9ztRnmH4dD/4uUxGjd34ka6S9DtNKHuHT8CJGQDqdSwIr3ls+LKbpZ96lYXoI18cN1eoE=
+X-Received: by 2002:a2e:9901:: with SMTP id v1mr40463499lji.61.1641282187995;
+ Mon, 03 Jan 2022 23:43:07 -0800 (PST)
 MIME-Version: 1.0
-References: <20211217094104.24977-1-guangming.cao@mediatek.com> <20211227095102.6054-1-guangming.cao@mediatek.com>
-In-Reply-To: <20211227095102.6054-1-guangming.cao@mediatek.com>
+References: <20220104073545.124244-1-o451686892@gmail.com>
+In-Reply-To: <20220104073545.124244-1-o451686892@gmail.com>
 From: John Stultz <john.stultz@linaro.org>
-Date: Mon, 3 Jan 2022 10:57:30 -0800
-Message-ID: <CALAqxLVA4jUk-2o28RZobrPDUnuXfV1xN77Pt8Pu1o27V3aUQQ@mail.gmail.com>
-To: guangming.cao@mediatek.com
-Message-ID-Hash: OHX7P7XFDSCAKSMW42GGP3OE5CBWAUGL
-X-Message-ID-Hash: OHX7P7XFDSCAKSMW42GGP3OE5CBWAUGL
+Date: Mon, 3 Jan 2022 23:42:56 -0800
+Message-ID: <CALAqxLVSaZywOOnF=67X+gu9eo+ZmKQmW3wUOOKEM0rUZ4K5gg@mail.gmail.com>
+To: Weizhao Ouyang <o451686892@gmail.com>
+Message-ID-Hash: MMNSLSH25TM6JXZFVHHFZWA3HBO5BYOJ
+X-Message-ID-Hash: MMNSLSH25TM6JXZFVHHFZWA3HBO5BYOJ
 X-MailFrom: john.stultz@linaro.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Benjamin Gaignard <benjamin.gaignard@linaro.org>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Matthias Brugger <matthias.bgg@gmail.com>, "open list:DMA-BUF HEAPS FRAMEWORK" <linux-media@vger.kernel.org>, "open list:DMA-BUF HEAPS FRAMEWORK" <dri-devel@lists.freedesktop.org>, "moderated list:DMA-BUF HEAPS FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>, "moderated list:ARM/Mediatek SoC support" <linux-arm-kernel@lists.infradead.org>, "moderated list:ARM/Mediatek SoC support" <linux-mediatek@lists.infradead.org>, Bo Song <bo.song@mediatek.com>, Libo Kang <libo.kang@mediatek.com>, jianjiao zeng <jianjiao.zeng@mediatek.com>, mingyuan ma <mingyuan.ma@mediatek.com>, Yunfei Wang <yf.wang@mediatek.com>, wsd_upstream@mediatek.com
+CC: Benjamin Gaignard <benjamin.gaignard@collabora.com>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@kernel.org>, Brian Starkey <Brian.Starkey@arm.com>, christian.koenig@amd.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: dma-heap: Add a size check for allocation
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: cma_heap: Fix mutex locking section
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OHX7P7XFDSCAKSMW42GGP3OE5CBWAUGL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MMNSLSH25TM6JXZFVHHFZWA3HBO5BYOJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -65,51 +65,19 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon, Dec 27, 2021 at 1:52 AM <guangming.cao@mediatek.com> wrote:
+On Mon, Jan 3, 2022 at 11:36 PM Weizhao Ouyang <o451686892@gmail.com> wrote:
 >
-> From: Guangming <Guangming.Cao@mediatek.com>
+> Fix cma_heap_buffer mutex locking critical section to protect vmap_cnt
+> and vaddr.
 >
+> Fixes: a5d2d29e24be ("dma-buf: heaps: Move heap-helper logic into the cma_heap implementation")
+> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
 
-Thanks for submitting this!
+Looks good to me!  Thanks so much for sending this in!
 
-> Add a size check for allcation since the allocation size is
+Acked-by: John Stultz <john.stultz@linaro.org>
 
-nit: "allocation" above.
-
-> always less than the total DRAM size.
-
-In general, it might be good to add more context to the commit message
-to better answer *why* this change is needed rather than what the
-change is doing.  ie: What negative thing happens without this change?
-And so how does this change avoid or improve things?
-
-
-> Signed-off-by: Guangming <Guangming.Cao@mediatek.com>
-> Signed-off-by: jianjiao zeng <jianjiao.zeng@mediatek.com>
-> ---
-> v2: 1. update size limitation as total_dram page size.
->     2. update commit message
-> ---
->  drivers/dma-buf/dma-heap.c | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
-> index 56bf5ad01ad5..e39d2be98d69 100644
-> --- a/drivers/dma-buf/dma-heap.c
-> +++ b/drivers/dma-buf/dma-heap.c
-> @@ -55,6 +55,8 @@ static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
->         struct dma_buf *dmabuf;
->         int fd;
->
-> +       if (len / PAGE_SIZE > totalram_pages())
-> +               return -EINVAL;
-
-This seems sane. I know ION used to have some 1/2 of memory cap to
-avoid unnecessary memory pressure on crazy allocations.
-
-Could you send again with an improved commit message?
-
-thanks
+thanks again
 -john
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
