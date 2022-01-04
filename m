@@ -2,131 +2,570 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E9AF48443F
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Jan 2022 16:08:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 560F1484B5F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Jan 2022 00:52:19 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 589AA3ED7E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Jan 2022 15:08:36 +0000 (UTC)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
-	by lists.linaro.org (Postfix) with ESMTPS id AB9723ED7E
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  4 Jan 2022 15:08:22 +0000 (UTC)
-Received: by mail-wr1-f53.google.com with SMTP id d9so76876811wrb.0
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 04 Jan 2022 07:08:22 -0800 (PST)
+	by lists.linaro.org (Postfix) with ESMTP id 5FBC93ED77
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Jan 2022 23:52:18 +0000 (UTC)
+Received: from mail-yb1-f201.google.com (mail-yb1-f201.google.com [209.85.219.201])
+	by lists.linaro.org (Postfix) with ESMTPS id 296333ECFA
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  4 Jan 2022 23:52:09 +0000 (UTC)
+Received: by mail-yb1-f201.google.com with SMTP id n2-20020a255902000000b0060f9d75eafeso14171650ybb.1
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 04 Jan 2022 15:52:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=W9Bh3fUgumLp+/q/W4dvepebJC6o+IFE+HMv/nLlfio=;
-        b=EFPEi1FUlJs6XPlFFfpKYRwWHX4RTpssWRFTbpKn1N5Fyq3bqyz5XabLFJqNv62XfB
-         0cEqyJDxfBZmXXA0FEud20NLTAI1FoF7/xfAVYTaf5owDMGZU/9NWIkxGMxcsxnoKBfl
-         CfDgi/O6Aq/PXRly1pl4GWco5U5S0YfyOu4/AxagKflnFYxxsTPcwsYnP5ZPoeCRXEdY
-         k7HdbEy6lRrVcoXxVotVskERr6a3NLmnG+KeSVgIFDGqj+L+1TzGsTfAtYONWPnVYOKT
-         TExmhBJs4zSgcrs+GsvWxe1UgufFwfqlAVQtrCy4EJBNWnyKcYENh5hdUgx/f3fEpicj
-         TIsg==
+        d=google.com; s=20210112;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=JX8olF5TUQ9vnDN5cbK9TaFv+wfGJg61C44JuCzGwzo=;
+        b=ZI8K1ls0RCwTtHzbmHG9KppHIfMCSIX7Wc9JUfZXgAx60J750BFilD1TpmiN5wo2MY
+         N5tiHjghwFx8YY8r7QHv1XDQo3Scl3yK2uiCsKgzKTLxgPpjo2TJGYBQ7urSivWFrrZT
+         Py8xyP7vNyToHJO9I40IjmS/mE/4ewb8cOGC2FPs7eO0WAwZYgXhE/zWXd+Nh3UzLqCR
+         JfMW0WFfW0oLHu7AUA3UUpqWruXq8f36Utbe7DxgEWWlCsaUjAzZSYhtroRCdHVpeMCo
+         YgWq5F6oRaZc2Dj+J6rpbIZoPgtnni3+dbMinCFRs2UcnX7fBrhnLKSv3oLENSg4PHn6
+         SJOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=W9Bh3fUgumLp+/q/W4dvepebJC6o+IFE+HMv/nLlfio=;
-        b=ZLORyqOoxjklcQGLDHjNUv0IK9pk4XOAZlWu8Uve1JuSer3+PZ2YwVD7zjp2mhV2mI
-         yY66MM+L3v+vJB+SKEteoEc4B/8rf79WRbnKkzsJPTf84aghmrFTr72zxO4XBuiNLlFL
-         Afxd1MKPKG10GKAGdkqol+bG0L+5rnisMt/yK9HZDaqj8M3En9KB49hO7Eil3W9MHsXf
-         zlFlv7FNLRvBVJSDlEEKtFLqt2hV6kBWRsKDY3QNglpGVvG00DE0kjMixiQdhSqIBMgT
-         36+iyk9oUsB9IN7hwmyjomrtbAc0l2sIAZhKtZFKC2V2i3nF8kdL8qMEhRhxfDa9LHIc
-         Uimw==
-X-Gm-Message-State: AOAM5334s5SMqNmqJcTFGrq5UPvFIgocByr13wLjGmnCfzlrx4WbV/UI
-	+HEDaksu1w/ubXVVyY8Dok01aPxRCio=
-X-Google-Smtp-Source: ABdhPJwSMJ+2xGsiLFU6tc5hin8MGLy37GABx1tG7xE5ec2i5KTv5TLhulFWgyy/psXnhTyX6WVnnQ==
-X-Received: by 2002:adf:f945:: with SMTP id q5mr12916536wrr.115.1641308901773;
-        Tue, 04 Jan 2022 07:08:21 -0800 (PST)
-Received: from ?IPv6:2a02:908:1252:fb60:6d5e:a071:be8b:acf5? ([2a02:908:1252:fb60:6d5e:a071:be8b:acf5])
-        by smtp.gmail.com with ESMTPSA id g5sm42662265wrd.100.2022.01.04.07.08.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 04 Jan 2022 07:08:21 -0800 (PST)
-To: Daniel Vetter <daniel@ffwll.ch>
-References: <20211207123411.167006-1-christian.koenig@amd.com>
- <20211207123411.167006-14-christian.koenig@amd.com>
- <YcOcASxfAApIpbrf@phenom.ffwll.local>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <d1fe9e3b-3d58-2aa8-36ae-9052192a2f0d@gmail.com>
-Date: Tue, 4 Jan 2022 16:08:20 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
-MIME-Version: 1.0
-In-Reply-To: <YcOcASxfAApIpbrf@phenom.ffwll.local>
-Content-Language: en-US
-Message-ID-Hash: 5KUSMZ4ZL72FOUF5ZCEEKGMUSQJPHRE3
-X-Message-ID-Hash: 5KUSMZ4ZL72FOUF5ZCEEKGMUSQJPHRE3
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=JX8olF5TUQ9vnDN5cbK9TaFv+wfGJg61C44JuCzGwzo=;
+        b=48Qo624DXd1/cRp2x+gsCk5f4yul4col/dLXsZrdi4rHgMCH96b65Vtn07PVkiUPke
+         S5dMvVNXmOXa3yQpj2fF1RwpNuSJuclNO8i+CIzAkAPzu+WlJrlpxLTI3BSgLMizn72J
+         bYYCrrDBOFtLWXKrvHeoTg81lTogQ5bhcP05WuhPd4/ct7DIlb9L1/AhhuwAwClKr1X1
+         DYkFaHoLn1FivyIKoIltze2M1xDUbrGBm60Wn9/bZnZs7LNWqcX9TtJ1Z9e9X9OQYtLh
+         KytMzX/QpeaVksJvbvYP9Fcunw4f4lEdoUTbNWwK5p4ly1+qZGlsOmQqJV2D/4pfcND+
+         jM8g==
+X-Gm-Message-State: AOAM532fQdvrnibGXD2QrV4+P3C5obigd9jTcsC2XhPgWgOX1Cqp+LaK
+	F11UHUOlTrCs8zDT69tBCtRyy/Ttfzk=
+X-Google-Smtp-Source: ABdhPJyshMtGICB6WxiG+uk7lig5Keefv1fYaCOir+vpOyeO+c6wW1KcY80yCx9QrSUCZ8GqA3ZQDFKk3dA=
+X-Received: from hridya.mtv.corp.google.com ([2620:15c:211:200:bd30:cc7b:6a6d:9061])
+ (user=hridya job=sendgmr) by 2002:a05:6902:124f:: with SMTP id
+ t15mr74445021ybu.644.1641340328721; Tue, 04 Jan 2022 15:52:08 -0800 (PST)
+Date: Tue,  4 Jan 2022 15:51:48 -0800
+Message-Id: <20220104235148.21320-1-hridya@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.34.1.448.ga2b2bfdf31-goog
+From: Hridya Valsaraju <hridya@google.com>
+To: Sumit Semwal <sumit.semwal@linaro.org>,
+	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>, Hridya Valsaraju <hridya@google.com>,
+	Daniel Vetter <daniel.vetter@ffwll.ch>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+Message-ID-Hash: VD5FL5MYGRTRDQ5XHDR6YDU66TYU34UI
+X-Message-ID-Hash: VD5FL5MYGRTRDQ5XHDR6YDU66TYU34UI
+X-MailFrom: 3qN3UYQYKDcsy8zuFrx55x2v.t532z4r85-33-9zx2z9A9.2z4r85.58x@flex--hridya.bounces.google.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: john.stultz@linaro.org, surenb@google.com, kaleshsingh@google.com, tjmercier@google.com, keescook@google.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 13/24] dma-buf: drop the DAG approach for the dma_resv object
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: Move sysfs work out of DMA-BUF export/release path
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5KUSMZ4ZL72FOUF5ZCEEKGMUSQJPHRE3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VD5FL5MYGRTRDQ5XHDR6YDU66TYU34UI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-QW0gMjIuMTIuMjEgdW0gMjI6NDMgc2NocmllYiBEYW5pZWwgVmV0dGVyOg0KPiBPbiBUdWUsIERl
-YyAwNywgMjAyMSBhdCAwMTozNDowMFBNICswMTAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0K
-Pj4gU28gZmFyIHdlIGhhZCB0aGUgYXBwcm9hY2ggb2YgdXNpbmcgYSBkaXJlY3RlZCBhY3ljbGlj
-DQo+PiBncmFwaCB3aXRoIHRoZSBkbWFfcmVzdiBvYmouDQo+Pg0KPj4gVGhpcyB0dXJuZWQgb3V0
-IHRvIGhhdmUgbWFueSBkb3duc2lkZXMsIGVzcGVjaWFsbHkgaXQgbWVhbnMNCj4+IHRoYXQgZXZl
-cnkgc2luZ2xlIGRyaXZlciBhbmQgdXNlciBvZiB0aGlzIGludGVyZmFjZSBuZWVkcw0KPj4gdG8g
-YmUgYXdhcmUgb2YgdGhpcyByZXN0cmljdGlvbiB3aGVuIGFkZGluZyBmZW5jZXMuIElmIHRoZQ0K
-Pj4gcnVsZXMgZm9yIHRoZSBEQUcgYXJlIG5vdCBmb2xsb3dlZCB0aGVuIHdlIGVuZCB1cCB3aXRo
-DQo+PiBwb3RlbnRpYWwgaGFyZCB0byBkZWJ1ZyBtZW1vcnkgY29ycnVwdGlvbiwgaW5mb3JtYXRp
-b24NCj4+IGxlYWtzIG9yIGV2ZW4gZWxlcGhhbnQgYmlnIHNlY3VyaXR5IGhvbGVzIGJlY2F1c2Ug
-d2UgYWxsb3cNCj4+IHVzZXJzcGFjZSB0byBhY2Nlc3MgZnJlZWQgdXAgbWVtb3J5Lg0KPj4NCj4+
-IFNpbmNlIHdlIGFscmVhZHkgdG9vayBhIHN0ZXAgYmFjayBmcm9tIHRoYXQgYnkgYWx3YXlzDQo+
-PiBsb29raW5nIGF0IGFsbCBmZW5jZXMgd2Ugbm93IGdvIGEgc3RlcCBmdXJ0aGVyIGFuZCBzdG9w
-DQo+PiBkcm9wcGluZyB0aGUgc2hhcmVkIGZlbmNlcyB3aGVuIGEgbmV3IGV4Y2x1c2l2ZSBvbmUg
-aXMNCj4+IGFkZGVkLg0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNo
-cmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCj4+IC0tLQ0KPj4gICBkcml2ZXJzL2RtYS1idWYvZG1h
-LXJlc3YuYyB8IDEzIC0tLS0tLS0tLS0tLS0NCj4+ICAgMSBmaWxlIGNoYW5nZWQsIDEzIGRlbGV0
-aW9ucygtKQ0KPj4NCj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYyBi
-L2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jDQo+PiBpbmRleCA5YWNjZWFiYzkzOTkuLmVjYjJm
-ZjYwNmJhYyAxMDA2NDQNCj4+IC0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jDQo+PiAr
-KysgYi9kcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYw0KPiBObyBkb2MgdXBkYXRlIGF0IGFsbCEN
-Cg0KU2NyYXRjaGluZyBteSBoZWFkIEknbSBwcmV0dHkgc3VyZSBJJ3ZlIHVwZGF0ZWQgYXQgbGVh
-c3QgdGhlIGtlcm5lbGRvYyANCmZvciBkbWFfcmVzdl9hZGRfZXhjbF9mZW5jZSgpLiBNdXN0IGhh
-dmUgZ29uZSBsb3N0IGluIHNvbWUgcmViYXNlLg0KDQo+DQo+IEkgY2hlY2tlZCwgd2UncmUgbm90
-IHRoYXQgc2hpdHR5IHdpdGggZG9jcywNCg0KV2VsbCBJIHdvdWxkbid0IHNheSBzaGl0dHksIGJ1
-dCB0aGV5IGFyZSBub3QgcGVyZmVjdCBlaXRoZXIuDQoNCj4gICBNaW5pbWFsbHkgdGhlIERPQzog
-c2VjdGlvbg0KPiBoZWFkZXIgYW5kIGFsc28gdGhlIHN0cnVjdCBkbWFfcmVzdiBrZXJuZWxkb2Mu
-IEFsc28gdGhlcmUncyBtYXliZSBtb3JlDQo+IHJlZmVyZW5jZXMgYW5kIHN0dWZmIEkndmUgbWlz
-c2VkIG9uIGEgcXVpY2sgbG9vaywgcGxlYXNlIGNoZWNrIGZvciB0aGVtDQo+IChlLmcuIGRtYV9i
-dWYucmVzdiBrZXJuZWxkb2MgaXMgcmF0aGVyIGltcG9ydGFudCB0byBrZWVwIGNvcnJlY3QgdG9v
-KS4NCj4NCj4gQ29kZSBpdHNlbGYgZG9lcyB3aGF0IGl0IHNheXMgaW4gdGhlIGNvbW1pdCBtZXNz
-YWdlLCBidXQgd2UgcmVhbGx5IG5lZWQNCj4gdGhlIG1vc3QgYWNjdXJhdGUgZG9jcyB3ZSBjYW4g
-Z2V0IGZvciB0aGlzIHN0dWZmLCBvciB0aGUgY29uZnVzaW9uIHdpbGwNCj4gcGVyc2lzdCA6LS8N
-Cg0KWWVhaCBjb21wbGV0ZWx5IGFncmVlLCBnb2luZyB0byBmaXggdGhhdC4NCg0KVGhhbmtzLA0K
-Q2hyaXN0aWFuLg0KDQo+DQo+IENoZWVycywgRGFuaWVsDQo+DQo+PiBAQCAtMzgzLDI5ICszODMs
-MTYgQEAgRVhQT1JUX1NZTUJPTChkbWFfcmVzdl9yZXBsYWNlX2ZlbmNlcyk7DQo+PiAgIHZvaWQg
-ZG1hX3Jlc3ZfYWRkX2V4Y2xfZmVuY2Uoc3RydWN0IGRtYV9yZXN2ICpvYmosIHN0cnVjdCBkbWFf
-ZmVuY2UgKmZlbmNlKQ0KPj4gICB7DQo+PiAgIAlzdHJ1Y3QgZG1hX2ZlbmNlICpvbGRfZmVuY2Ug
-PSBkbWFfcmVzdl9leGNsX2ZlbmNlKG9iaik7DQo+PiAtCXN0cnVjdCBkbWFfcmVzdl9saXN0ICpv
-bGQ7DQo+PiAtCXUzMiBpID0gMDsNCj4+ICAgDQo+PiAgIAlkbWFfcmVzdl9hc3NlcnRfaGVsZChv
-YmopOw0KPj4gICANCj4+IC0Jb2xkID0gZG1hX3Jlc3Zfc2hhcmVkX2xpc3Qob2JqKTsNCj4+IC0J
-aWYgKG9sZCkNCj4+IC0JCWkgPSBvbGQtPnNoYXJlZF9jb3VudDsNCj4+IC0NCj4+ICAgCWRtYV9m
-ZW5jZV9nZXQoZmVuY2UpOw0KPj4gICANCj4+ICAgCXdyaXRlX3NlcWNvdW50X2JlZ2luKCZvYmot
-PnNlcSk7DQo+PiAgIAkvKiB3cml0ZV9zZXFjb3VudF9iZWdpbiBwcm92aWRlcyB0aGUgbmVjZXNz
-YXJ5IG1lbW9yeSBiYXJyaWVyICovDQo+PiAgIAlSQ1VfSU5JVF9QT0lOVEVSKG9iai0+ZmVuY2Vf
-ZXhjbCwgZmVuY2UpOw0KPj4gLQlpZiAob2xkKQ0KPj4gLQkJb2xkLT5zaGFyZWRfY291bnQgPSAw
-Ow0KPj4gICAJd3JpdGVfc2VxY291bnRfZW5kKCZvYmotPnNlcSk7DQo+PiAgIA0KPj4gLQkvKiBp
-bnBsYWNlIHVwZGF0ZSwgbm8gc2hhcmVkIGZlbmNlcyAqLw0KPj4gLQl3aGlsZSAoaS0tKQ0KPj4g
-LQkJZG1hX2ZlbmNlX3B1dChyY3VfZGVyZWZlcmVuY2VfcHJvdGVjdGVkKG9sZC0+c2hhcmVkW2ld
-LA0KPj4gLQkJCQkJCWRtYV9yZXN2X2hlbGQob2JqKSkpOw0KPj4gLQ0KPj4gICAJZG1hX2ZlbmNl
-X3B1dChvbGRfZmVuY2UpOw0KPj4gICB9DQo+PiAgIEVYUE9SVF9TWU1CT0woZG1hX3Jlc3ZfYWRk
-X2V4Y2xfZmVuY2UpOw0KPj4gLS0gDQo+PiAyLjI1LjENCj4+DQoNCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0
-IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFu
-IGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+Recently, we noticed an issue where a process went into direct reclaim
+while holding the kernfs rw semaphore for sysfs in write(exclusive)
+mode. This caused processes who were doing DMA-BUF exports and releases
+to go into uninterruptible sleep since they needed to acquire the same
+semaphore for the DMA-BUF sysfs entry creation/deletion. In order to avoid
+blocking DMA-BUF export/release for an indeterminate amount of time
+while another process is holding the sysfs rw semaphore in exclusive
+mode, this patch moves the per-buffer sysfs file creation/deleteion to
+a kthread.
+
+Fixes: bdb8d06dfefd ("dmabuf: Add the capability to expose DMA-BUF stats in sysfs")
+Signed-off-by: Hridya Valsaraju <hridya@google.com>
+---
+ drivers/dma-buf/dma-buf-sysfs-stats.c | 343 ++++++++++++++++++++++++--
+ include/linux/dma-buf.h               |  46 ++++
+ 2 files changed, 366 insertions(+), 23 deletions(-)
+
+diff --git a/drivers/dma-buf/dma-buf-sysfs-stats.c b/drivers/dma-buf/dma-buf-sysfs-stats.c
+index 053baadcada9..3251fdf2f05f 100644
+--- a/drivers/dma-buf/dma-buf-sysfs-stats.c
++++ b/drivers/dma-buf/dma-buf-sysfs-stats.c
+@@ -7,13 +7,39 @@
+ 
+ #include <linux/dma-buf.h>
+ #include <linux/dma-resv.h>
++#include <linux/freezer.h>
+ #include <linux/kobject.h>
++#include <linux/kthread.h>
++#include <linux/list.h>
+ #include <linux/printk.h>
++#include <linux/sched/signal.h>
+ #include <linux/slab.h>
+ #include <linux/sysfs.h>
+ 
+ #include "dma-buf-sysfs-stats.h"
+ 
++struct dmabuf_kobj_work {
++	struct list_head list;
++	struct dma_buf_sysfs_entry *sysfs_entry;
++	struct dma_buf_sysfs_entry_metadata *sysfs_metadata;
++	unsigned long uid;
++};
++
++/* Both kobject setup and teardown work gets queued on the list. */
++static LIST_HEAD(dmabuf_kobj_work_list);
++
++/* dmabuf_kobj_list_lock protects dmabuf_kobj_work_list. */
++static DEFINE_SPINLOCK(dmabuf_kobj_list_lock);
++
++/*
++ * dmabuf_sysfs_show_lock prevents a race between a DMA-BUF sysfs file being
++ * read and the DMA-BUF being freed by protecting sysfs_entry->dmabuf.
++ */
++static DEFINE_SPINLOCK(dmabuf_sysfs_show_lock);
++
++static struct task_struct *dmabuf_kobject_task;
++static wait_queue_head_t dmabuf_kobject_waitqueue;
++
+ #define to_dma_buf_entry_from_kobj(x) container_of(x, struct dma_buf_sysfs_entry, kobj)
+ 
+ /**
+@@ -64,15 +90,26 @@ static ssize_t dma_buf_stats_attribute_show(struct kobject *kobj,
+ 	struct dma_buf_stats_attribute *attribute;
+ 	struct dma_buf_sysfs_entry *sysfs_entry;
+ 	struct dma_buf *dmabuf;
++	int ret;
+ 
+ 	attribute = to_dma_buf_stats_attr(attr);
+ 	sysfs_entry = to_dma_buf_entry_from_kobj(kobj);
++
++	/*
++	 * acquire dmabuf_sysfs_show_lock to prevent a race with the DMA-BUF
++	 * being freed while sysfs_entry->dmabuf is being accessed.
++	 */
++	spin_lock(&dmabuf_sysfs_show_lock);
+ 	dmabuf = sysfs_entry->dmabuf;
+ 
+-	if (!dmabuf || !attribute->show)
++	if (!dmabuf || !attribute->show) {
++		spin_unlock(&dmabuf_sysfs_show_lock);
+ 		return -EIO;
++	}
+ 
+-	return attribute->show(dmabuf, attribute, buf);
++	ret = attribute->show(dmabuf, attribute, buf);
++	spin_unlock(&dmabuf_sysfs_show_lock);
++	return ret;
+ }
+ 
+ static const struct sysfs_ops dma_buf_stats_sysfs_ops = {
+@@ -118,33 +155,275 @@ static struct kobj_type dma_buf_ktype = {
+ 	.default_groups = dma_buf_stats_default_groups,
+ };
+ 
+-void dma_buf_stats_teardown(struct dma_buf *dmabuf)
++/* Statistics files do not need to send uevents. */
++static int dmabuf_sysfs_uevent_filter(struct kset *kset, struct kobject *kobj)
+ {
+-	struct dma_buf_sysfs_entry *sysfs_entry;
++	return 0;
++}
+ 
+-	sysfs_entry = dmabuf->sysfs_entry;
+-	if (!sysfs_entry)
+-		return;
++static const struct kset_uevent_ops dmabuf_sysfs_no_uevent_ops = {
++	.filter = dmabuf_sysfs_uevent_filter,
++};
++
++/* setup of sysfs entries done asynchronously in the worker thread. */
++static void dma_buf_sysfs_stats_setup_work(struct dmabuf_kobj_work *kobject_work)
++{
++	struct dma_buf_sysfs_entry *sysfs_entry = kobject_work->sysfs_entry;
++	struct dma_buf_sysfs_entry_metadata *sysfs_metadata =
++			kobject_work->sysfs_metadata;
++	bool free_metadata = false;
++
++	int ret = kobject_init_and_add(&sysfs_entry->kobj, &dma_buf_ktype, NULL,
++				       "%lu", kobject_work->uid);
++	if (ret) {
++		kobject_put(&sysfs_entry->kobj);
++
++		spin_lock(&sysfs_metadata->sysfs_entry_lock);
++		if (sysfs_metadata->status == SYSFS_ENTRY_INIT_ABORTED) {
++			/*
++			 * SYSFS_ENTRY_INIT_ABORTED means that the DMA-BUF has already
++			 * been freed. At this point, its safe to free the memory for
++			 * the sysfs_metadata;
++			 */
++			free_metadata = true;
++		} else {
++			/*
++			 * The DMA-BUF has not yet been freed, set the status to
++			 * sysfs_entry_error so that when the DMA-BUF gets
++			 * freed, we know there is no need to teardown the sysfs
++			 * entry.
++			 */
++			sysfs_metadata->status = SYSFS_ENTRY_ERROR;
++		}
++		goto unlock;
++	}
++
++	/*
++	 * If the DMA-BUF has not yet been released, status would still be
++	 * SYSFS_ENTRY_INIT_IN_PROGRESS. We set the status as initialized.
++	 */
++	spin_lock(&sysfs_metadata->sysfs_entry_lock);
++	if (sysfs_metadata->status == SYSFS_ENTRY_INIT_IN_PROGRESS) {
++		sysfs_metadata->status = SYSFS_ENTRY_INITIALIZED;
++		goto unlock;
++	}
+ 
++	/*
++	 * At this point the status is SYSFS_ENTRY_INIT_ABORTED which means
++	 * that the DMA-BUF has already been freed. Hence, we cleanup the
++	 * sysfs_entry and its metadata since neither of them are needed
++	 * anymore.
++	 */
++	free_metadata = true;
+ 	kobject_del(&sysfs_entry->kobj);
+ 	kobject_put(&sysfs_entry->kobj);
++
++unlock:
++	spin_unlock(&sysfs_metadata->sysfs_entry_lock);
++	if (free_metadata) {
++		kfree(kobject_work->sysfs_metadata);
++		kobject_work->sysfs_metadata = NULL;
++	}
+ }
+ 
++/* teardown of sysfs entries done asynchronously in the worker thread. */
++static void dma_buf_sysfs_stats_teardown_work(struct dmabuf_kobj_work *kobject_work)
++{
++	struct dma_buf_sysfs_entry *sysfs_entry = kobject_work->sysfs_entry;
+ 
+-/* Statistics files do not need to send uevents. */
+-static int dmabuf_sysfs_uevent_filter(struct kset *kset, struct kobject *kobj)
++	kobject_del(&sysfs_entry->kobj);
++	kobject_put(&sysfs_entry->kobj);
++
++	kfree(kobject_work->sysfs_metadata);
++	kobject_work->sysfs_metadata = NULL;
++}
++
++/* do setup or teardown of sysfs entries as required */
++static void do_kobject_work(struct dmabuf_kobj_work *kobject_work)
+ {
++	struct dma_buf_sysfs_entry_metadata *sysfs_metadata;
++	bool setup_needed = false;
++	bool teardown_needed = false;
++
++	sysfs_metadata = kobject_work->sysfs_metadata;
++	spin_lock(&sysfs_metadata->sysfs_entry_lock);
++	if (sysfs_metadata->status == SYSFS_ENTRY_UNINITIALIZED) {
++		setup_needed = true;
++		sysfs_metadata->status = SYSFS_ENTRY_INIT_IN_PROGRESS;
++	} else if (sysfs_metadata->status == SYSFS_ENTRY_INITIALIZED) {
++		teardown_needed = true;
++	}
++
++	/*
++	 * It is ok to release the sysfs_entry_lock here.
++	 *
++	 * If setup_needed is true, we check the status again after the kobject
++	 * initialization to see if it has been set to SYSFS_ENTRY_INIT_ABORTED
++	 * and if so teardown the kobject.
++	 *
++	 * If teardown_needed is true, there are no more changes expected to the
++	 * status.
++	 *
++	 * If neither setup_needed nor teardown needed are true, it
++	 * means the DMA-BUF was freed before we got around to setting up the
++	 * sysfs entry and hence we just need to release the metadata and
++	 * return.
++	 */
++	spin_unlock(&kobject_work->sysfs_metadata->sysfs_entry_lock);
++
++	if (setup_needed)
++		dma_buf_sysfs_stats_setup_work(kobject_work);
++	else if (teardown_needed)
++		dma_buf_sysfs_stats_teardown_work(kobject_work);
++	else
++		kfree(kobject_work->sysfs_metadata);
++
++	kfree(kobject_work);
++}
++
++static struct dmabuf_kobj_work *get_next_kobj_work(void)
++{
++	struct dmabuf_kobj_work *kobject_work;
++
++	spin_lock(&dmabuf_kobj_list_lock);
++	kobject_work = list_first_entry_or_null(&dmabuf_kobj_work_list,
++						struct dmabuf_kobj_work, list);
++	if (kobject_work)
++		list_del(&kobject_work->list);
++	spin_unlock(&dmabuf_kobj_list_lock);
++	return kobject_work;
++}
++
++static int kobject_work_thread(void *data)
++{
++	struct dmabuf_kobj_work *kobject_work;
++
++	while (1) {
++		wait_event_freezable(dmabuf_kobject_waitqueue,
++				     (kobject_work = get_next_kobj_work()));
++		do_kobject_work(kobject_work);
++	}
++
+ 	return 0;
+ }
+ 
+-static const struct kset_uevent_ops dmabuf_sysfs_no_uevent_ops = {
+-	.filter = dmabuf_sysfs_uevent_filter,
+-};
++static int kobject_worklist_init(void)
++{
++	init_waitqueue_head(&dmabuf_kobject_waitqueue);
++	dmabuf_kobject_task = kthread_run(kobject_work_thread, NULL,
++					  "%s", "dmabuf-kobject-worker");
++	if (IS_ERR(dmabuf_kobject_task)) {
++		pr_err("Creating thread for deferred sysfs entry creation/deletion failed\n");
++		return PTR_ERR(dmabuf_kobject_task);
++	}
++	sched_set_normal(dmabuf_kobject_task, MAX_NICE);
++
++	return 0;
++}
++
++static void deferred_kobject_create(struct dmabuf_kobj_work *kobject_work)
++{
++	INIT_LIST_HEAD(&kobject_work->list);
++
++	spin_lock(&dmabuf_kobj_list_lock);
++
++	list_add_tail(&kobject_work->list, &dmabuf_kobj_work_list);
++
++	spin_unlock(&dmabuf_kobj_list_lock);
++
++	wake_up(&dmabuf_kobject_waitqueue);
++}
++
++
++void dma_buf_stats_teardown(struct dma_buf *dmabuf)
++{
++	struct dma_buf_sysfs_entry *sysfs_entry;
++	struct dma_buf_sysfs_entry_metadata *sysfs_metadata;
++	struct dmabuf_kobj_work *kobj_work;
++
++	sysfs_entry = dmabuf->sysfs_entry;
++	if (!sysfs_entry)
++		return;
++
++	sysfs_metadata = dmabuf->sysfs_entry_metadata;
++	if (!sysfs_metadata)
++		return;
++
++	spin_lock(&sysfs_metadata->sysfs_entry_lock);
++
++	if (sysfs_metadata->status == SYSFS_ENTRY_UNINITIALIZED ||
++	    sysfs_metadata->status == SYSFS_ENTRY_INIT_IN_PROGRESS) {
++		/*
++		 * The sysfs entry for this buffer has not yet been initialized,
++		 * we set the status to SYSFS_ENTRY_INIT_ABORTED to abort the
++		 * initialization.
++		 */
++		sysfs_metadata->status = SYSFS_ENTRY_INIT_ABORTED;
++		spin_unlock(&sysfs_metadata->sysfs_entry_lock);
++
++		/*
++		 * In case kobject initialization completes right as we release
++		 * the sysfs_entry_lock, disable show() for the sysfs entry by
++		 * setting sysfs_entry->dmabuf to NULL to prevent a race.
++		 */
++		spin_lock(&dmabuf_sysfs_show_lock);
++		sysfs_entry->dmabuf = NULL;
++		spin_unlock(&dmabuf_sysfs_show_lock);
++
++		return;
++	}
++
++	if (sysfs_metadata->status == SYSFS_ENTRY_INITIALIZED) {
++		/*
++		 * queue teardown work only if sysfs_entry is fully inititalized.
++		 * It is ok to release the sysfs_entry_lock here since the
++		 * status can no longer change.
++		 */
++		spin_unlock(&sysfs_metadata->sysfs_entry_lock);
++
++		/*
++		 * Meanwhile disable show() for the sysfs entry to avoid a race
++		 * between teardown and show().
++		 */
++		spin_lock(&dmabuf_sysfs_show_lock);
++		sysfs_entry->dmabuf = NULL;
++		spin_unlock(&dmabuf_sysfs_show_lock);
++
++		kobj_work = kzalloc(sizeof(struct dmabuf_kobj_work), GFP_KERNEL);
++		if (!kobj_work) {
++			/* do the teardown immediately. */
++			kobject_del(&sysfs_entry->kobj);
++			kobject_put(&sysfs_entry->kobj);
++			kfree(sysfs_metadata);
++		} else {
++			/* queue teardown work. */
++			kobj_work->sysfs_entry = dmabuf->sysfs_entry;
++			kobj_work->sysfs_metadata = dmabuf->sysfs_entry_metadata;
++			deferred_kobject_create(kobj_work);
++		}
++
++		return;
++	}
++
++	/*
++	 * status is SYSFS_ENTRY_INIT_ERROR so we only need to free the
++	 * metadata.
++	 */
++	spin_unlock(&sysfs_metadata->sysfs_entry_lock);
++	kfree(dmabuf->sysfs_entry_metadata);
++	dmabuf->sysfs_entry_metadata = NULL;
++}
+ 
+ static struct kset *dma_buf_stats_kset;
+ static struct kset *dma_buf_per_buffer_stats_kset;
+ int dma_buf_init_sysfs_statistics(void)
+ {
++	int ret;
++
++	ret = kobject_worklist_init();
++	if (ret)
++		return ret;
++
+ 	dma_buf_stats_kset = kset_create_and_add("dmabuf",
+ 						 &dmabuf_sysfs_no_uevent_ops,
+ 						 kernel_kobj);
+@@ -171,7 +450,8 @@ void dma_buf_uninit_sysfs_statistics(void)
+ int dma_buf_stats_setup(struct dma_buf *dmabuf)
+ {
+ 	struct dma_buf_sysfs_entry *sysfs_entry;
+-	int ret;
++	struct dma_buf_sysfs_entry_metadata *sysfs_metadata;
++	struct dmabuf_kobj_work *kobj_work;
+ 
+ 	if (!dmabuf || !dmabuf->file)
+ 		return -EINVAL;
+@@ -188,18 +468,35 @@ int dma_buf_stats_setup(struct dma_buf *dmabuf)
+ 	sysfs_entry->kobj.kset = dma_buf_per_buffer_stats_kset;
+ 	sysfs_entry->dmabuf = dmabuf;
+ 
++	sysfs_metadata = kzalloc(sizeof(struct dma_buf_sysfs_entry_metadata),
++				 GFP_KERNEL);
++	if (!sysfs_metadata) {
++		kfree(sysfs_entry);
++		return -ENOMEM;
++	}
++
+ 	dmabuf->sysfs_entry = sysfs_entry;
+ 
+-	/* create the directory for buffer stats */
+-	ret = kobject_init_and_add(&sysfs_entry->kobj, &dma_buf_ktype, NULL,
+-				   "%lu", file_inode(dmabuf->file)->i_ino);
+-	if (ret)
+-		goto err_sysfs_dmabuf;
++	sysfs_metadata->status = SYSFS_ENTRY_UNINITIALIZED;
++	spin_lock_init(&sysfs_metadata->sysfs_entry_lock);
+ 
+-	return 0;
++	dmabuf->sysfs_entry_metadata = sysfs_metadata;
+ 
+-err_sysfs_dmabuf:
+-	kobject_put(&sysfs_entry->kobj);
+-	dmabuf->sysfs_entry = NULL;
+-	return ret;
++	kobj_work = kzalloc(sizeof(struct dmabuf_kobj_work), GFP_KERNEL);
++	if (!kobj_work) {
++		kfree(sysfs_entry);
++		kfree(sysfs_metadata);
++		return -ENOMEM;
++	}
++
++	kobj_work->sysfs_entry = dmabuf->sysfs_entry;
++	kobj_work->sysfs_metadata = dmabuf->sysfs_entry_metadata;
++	/*
++	 * stash the inode number in struct dmabuf_kobj_work since setup
++	 * might race with DMA-BUF teardown.
++	 */
++	kobj_work->uid = file_inode(dmabuf->file)->i_ino;
++
++	deferred_kobject_create(kobj_work);
++	return 0;
+ }
+diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
+index 7ab50076e7a6..0597690023a0 100644
+--- a/include/linux/dma-buf.h
++++ b/include/linux/dma-buf.h
+@@ -287,6 +287,50 @@ struct dma_buf_ops {
+ 	void (*vunmap)(struct dma_buf *dmabuf, struct dma_buf_map *map);
+ };
+ 
++#ifdef CONFIG_DMABUF_SYSFS_STATS
++enum sysfs_entry_status {
++	SYSFS_ENTRY_UNINITIALIZED,
++	SYSFS_ENTRY_INIT_IN_PROGRESS,
++	SYSFS_ENTRY_ERROR,
++	SYSFS_ENTRY_INIT_ABORTED,
++	SYSFS_ENTRY_INITIALIZED,
++};
++
++/*
++ * struct dma_buf_sysfs_entry_metadata - Holds the current status for the
++ * DMA-BUF sysfs entry.
++ *
++ * @status: holds the current status for the DMA-BUF sysfs entry. The status of
++ * the sysfs entry has the following path.
++ *
++ *			SYSFS_ENTRY_UNINITIALIZED
++ *		 __________________|____________________
++ *		|					|
++ *	  SYSFS_ENTRY_INIT_IN_PROGRESS	    SYSFS_ENTRY_INIT_ABORTED (DMA-BUF
++ *		|						      gets freed
++ *		|						      before
++ *		|						      init)
++ *	________|_____________________________________
++ *	|			  |		      |
++ * SYSFS_ENTRY_INITIALIZED	  |	  SYSFS_ENTRY_INIT_ABORTED
++ *				  |		  (DMA-BUF gets freed during kobject
++ *				  |		  init)
++ *				  |
++ *				  |
++ *		      SYSFS_ENTRY_ERROR
++ *		      (error during kobject init)
++ *
++ * @sysfs_entry_lock: protects access to @status.
++ */
++struct dma_buf_sysfs_entry_metadata {
++	enum sysfs_entry_status status;
++	/*
++	 * Protects sysfs_entry_metadata->status
++	 */
++	spinlock_t sysfs_entry_lock;
++};
++#endif
++
+ /**
+  * struct dma_buf - shared buffer object
+  *
+@@ -452,6 +496,8 @@ struct dma_buf {
+ 		struct kobject kobj;
+ 		struct dma_buf *dmabuf;
+ 	} *sysfs_entry;
++
++	struct dma_buf_sysfs_entry_metadata *sysfs_entry_metadata;
+ #endif
+ };
+ 
+-- 
+2.34.1.448.ga2b2bfdf31-goog
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
