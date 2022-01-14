@@ -2,67 +2,67 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0CF348EE2E
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 14 Jan 2022 17:33:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02E6748EE46
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 14 Jan 2022 17:35:33 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C98333ED7D
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 14 Jan 2022 16:33:40 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
-	by lists.linaro.org (Postfix) with ESMTPS id CD1E93ECAA
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 14 Jan 2022 16:33:11 +0000 (UTC)
-Received: by mail-wm1-f51.google.com with SMTP id o7-20020a05600c510700b00347e10f66d1so3845541wms.0
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 14 Jan 2022 08:33:11 -0800 (PST)
+	by lists.linaro.org (Postfix) with ESMTP id 6A0993EE02
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 14 Jan 2022 16:35:31 +0000 (UTC)
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+	by lists.linaro.org (Postfix) with ESMTPS id A112B3ECAA
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 14 Jan 2022 16:35:03 +0000 (UTC)
+Received: by mail-wm1-f42.google.com with SMTP id l4so7142680wmq.3
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 14 Jan 2022 08:35:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ffwll.ch; s=google;
         h=date:from:to:cc:subject:message-id:references:mime-version
          :content-disposition:content-transfer-encoding:in-reply-to;
-        bh=ZIIyOq9/oXrPizWbUUaL9+KeQVMy19MSltRLOnZI+Sg=;
-        b=Y+ju2lmpK9osLNH5uCV0xivjNzwGMiB+7AlMRCoDQ3Dvs6EDm5isq+QMWIIVYsIXzn
-         KsFSlhPnT6BCF1HkV9Xw+LHXf653f92IGvULe1IpjzXvsSg81x1BXSI++CLXNA3zQBc2
-         M6X113Wd5RFcBicbvpsSoT6juxGcqqbklg39A=
+        bh=zGlBq5g8ptXdKqtDPcUnhTEEW/MEdyIn3q+yGm9ho3g=;
+        b=ckXWl+PtxcOsT0oSIvB6y5mLpkZddQA/u3ayFbKYoRbW1fj6yKJ6DCV9Y3nGdmuuYw
+         lUwY6qhx2wx/nUfw61/7J3Q1EebwAmtRIa92UFg2MxoZZjMlswrP8NwJN+g1Le4ca09B
+         LWcsVXQzyXmD5eHETwtBpuXNQ2fadfoX0HTMA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:date:from:to:cc:subject:message-id:references
          :mime-version:content-disposition:content-transfer-encoding
          :in-reply-to;
-        bh=ZIIyOq9/oXrPizWbUUaL9+KeQVMy19MSltRLOnZI+Sg=;
-        b=hmP4QFpkIVYE/m/GtJOJdu2sXbIPaXLEmShXgv1H7N2rfheYlf/wdFkmML1N1jSNRZ
-         cnloKnutnUQ2RTwAdeJ49pBkA4MPfDMgiYJk+c1UwgfWDeJI4z+5pwMRb91GrfMnuxcU
-         WlpudpF+uMdmVHTIow7DzMGGSimHWey0iu15UZbrbbp/VPsKeqsYnKg2GfqjthHjE704
-         r8J3nHdyMq/OaqITOeYOVlUvkH5D58cVWAVd+MczyurNtcMO3sFIZZB1p5HS55KeqYjn
-         nCVmLNWu5ZQM7JzsP4uYJ7+GsFDh5QON8ZFe9nukX0ZvcUE69IxXn0O0m/pzfeLpxLP/
-         +2tA==
-X-Gm-Message-State: AOAM533BGHp2El0m+t2Cz0hm56TAgpnqiGQsN7F0Bl1wjPKpOh9lJ7Sy
-	+aQKbJHbENiul1O/LJO5ZHglV8Z+wzDIVg==
-X-Google-Smtp-Source: ABdhPJwfLCmpFijMbefgJqdiTPuqTbnvWB+jsxq4rh8TkULuZ1WAFfi4tHbaUEtg8G6KpOERmI3blA==
-X-Received: by 2002:a1c:4e1a:: with SMTP id g26mr8716623wmh.146.1642177990732;
-        Fri, 14 Jan 2022 08:33:10 -0800 (PST)
+        bh=zGlBq5g8ptXdKqtDPcUnhTEEW/MEdyIn3q+yGm9ho3g=;
+        b=1MANe5tE4xztDV3jv2z3ppvsLOu7LQRCmuMKtU6cYFLXNVItd2oCvouLrhraz2UjWO
+         Y/2dsCz+x4xLoVNd2c2sRe9BnpwQn6e1fymsCb2l9CvNJcGE5JEZg8oEsvZkcVLFXPGD
+         ESgoU0zIrGiFRNr83q2JPQCm4Scgbuvs8lPWm2jAWYH97vLlpli34l7OUivObsTISCaR
+         ogvfsQ2XJDuDw3mh61iCzIWZ3Mz3Dm+AD5hmj10MTsiuLMB4Qib8tDoQrv4kzBolLAnV
+         a1oTuSzXcsjm9s3HRdEpvNrxBAKkB1eKh+VGUr4Yjg5HZhdgWsRFQh9AkFZC4fKLTgEF
+         siXA==
+X-Gm-Message-State: AOAM530TGon+RfxJ8su6qRWJHCLNx0SZ9bA4agiz4bTMjxL9pt3KeMah
+	J/rFx3hxA7VXB01rgjcNW1r4IA==
+X-Google-Smtp-Source: ABdhPJyJ3GXKxktqyZcpdYltCojGpZn7yTTN1XfRK3SbwOwOd76JQriZwRXbLy+Jcv1d26j6z74Nnw==
+X-Received: by 2002:a05:600c:3b0e:: with SMTP id m14mr16041188wms.130.1642178102656;
+        Fri, 14 Jan 2022 08:35:02 -0800 (PST)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id l25sm5426250wmh.18.2022.01.14.08.33.09
+        by smtp.gmail.com with ESMTPSA id o38sm6350798wms.11.2022.01.14.08.35.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Jan 2022 08:33:10 -0800 (PST)
-Date: Fri, 14 Jan 2022 17:33:08 +0100
+        Fri, 14 Jan 2022 08:35:02 -0800 (PST)
+Date: Fri, 14 Jan 2022 17:35:00 +0100
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YeGlxJWNfFKIoT1W@phenom.ffwll.local>
+Message-ID: <YeGmNGuKtNDYNmsj@phenom.ffwll.local>
 References: <20211207123411.167006-1-christian.koenig@amd.com>
- <20211207123411.167006-14-christian.koenig@amd.com>
- <YcOcASxfAApIpbrf@phenom.ffwll.local>
- <d1fe9e3b-3d58-2aa8-36ae-9052192a2f0d@gmail.com>
+ <e8c7284f-e18e-0dcc-f0a2-3a1ad6222fd4@gmail.com>
+ <YcOkB0Jlc5KsHnEN@phenom.ffwll.local>
+ <c63e62cc-e48e-2e81-571c-498e4d16fd21@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <d1fe9e3b-3d58-2aa8-36ae-9052192a2f0d@gmail.com>
+In-Reply-To: <c63e62cc-e48e-2e81-571c-498e4d16fd21@gmail.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Message-ID-Hash: YOTLFINYTR33OAMC66534F4YXIYNWSAZ
-X-Message-ID-Hash: YOTLFINYTR33OAMC66534F4YXIYNWSAZ
+Message-ID-Hash: 2YJLMDDAFSWBCVNKI7MRB2EHFEVWBX4I
+X-Message-ID-Hash: 2YJLMDDAFSWBCVNKI7MRB2EHFEVWBX4I
 X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 13/24] dma-buf: drop the DAG approach for the dma_resv object
+Subject: [Linaro-mm-sig] Re: completely rework the dma_resv semantic
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YOTLFINYTR33OAMC66534F4YXIYNWSAZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2YJLMDDAFSWBCVNKI7MRB2EHFEVWBX4I/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -72,100 +72,56 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jan 04, 2022 at 04:08:20PM +0100, Christian K=F6nig wrote:
-> Am 22.12.21 um 22:43 schrieb Daniel Vetter:
-> > On Tue, Dec 07, 2021 at 01:34:00PM +0100, Christian K=F6nig wrote:
-> > > So far we had the approach of using a directed acyclic
-> > > graph with the dma_resv obj.
+On Thu, Dec 23, 2021 at 10:11:20AM +0100, Christian K=F6nig wrote:
+> Am 22.12.21 um 23:17 schrieb Daniel Vetter:
+> > On Fri, Dec 17, 2021 at 03:39:52PM +0100, Christian K=F6nig wrote:
+> > > Hi Daniel,
 > > >=20
-> > > This turned out to have many downsides, especially it means
-> > > that every single driver and user of this interface needs
-> > > to be aware of this restriction when adding fences. If the
-> > > rules for the DAG are not followed then we end up with
-> > > potential hard to debug memory corruption, information
-> > > leaks or even elephant big security holes because we allow
-> > > userspace to access freed up memory.
+> > > looks like this is going nowhere and you don't seem to have time to r=
+eview.
 > > >=20
-> > > Since we already took a step back from that by always
-> > > looking at all fences we now go a step further and stop
-> > > dropping the shared fences when a new exclusive one is
-> > > added.
-> > >=20
-> > > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
-> > > ---
-> > >   drivers/dma-buf/dma-resv.c | 13 -------------
-> > >   1 file changed, 13 deletions(-)
-> > >=20
-> > > diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/dma-resv.c
-> > > index 9acceabc9399..ecb2ff606bac 100644
-> > > --- a/drivers/dma-buf/dma-resv.c
-> > > +++ b/drivers/dma-buf/dma-resv.c
-> > No doc update at all!
+> > > What can we do?
+> > cc more people, you didn't cc any of the driver folks :-)
 >=20
-> Scratching my head I'm pretty sure I've updated at least the kerneldoc for
-> dma_resv_add_excl_fence(). Must have gone lost in some rebase.
+> Well I've CCed more people and lists and the first round of the patches.
+> Just wanted to get some more comments from you first before widening the
+> audience.
+
+Ime it's good to just always spam driver authors on big stuff like this,
+increases the odds more folks get involved. And in the end we need the
+entire subsystem to understand this (or at least not accidentally break
+the rules you roll out now like we've done in the past).
+
+Plus you'll get the driver acks faster that way :-)
+-Daniel
+
+
+> > Also I did find some review before I disappeared, back on 10th Jan.
 >=20
-> >=20
-> > I checked, we're not that shitty with docs,
+> Good, then I have at least something todo for the first week on January.
 >=20
-> Well I wouldn't say shitty, but they are not perfect either.
-
-This was sarcasm, I meant to say that despite the struggles the docs
-in-tree are pretty good nowadays. Email just sucks sometimes for
-communication.
-
-> >   Minimally the DOC: section
-> > header and also the struct dma_resv kerneldoc. Also there's maybe more
-> > references and stuff I've missed on a quick look, please check for them
-> > (e.g. dma_buf.resv kerneldoc is rather important to keep correct too).
-> >=20
-> > Code itself does what it says in the commit message, but we really need
-> > the most accurate docs we can get for this stuff, or the confusion will
-> > persist :-/
->=20
-> Yeah completely agree, going to fix that.
-
-Awesome!
-
-Cheers, Daniel
-
->=20
-> Thanks,
+> Happy holidays,
 > Christian.
 >=20
 > >=20
 > > Cheers, Daniel
 > >=20
-> > > @@ -383,29 +383,16 @@ EXPORT_SYMBOL(dma_resv_replace_fences);
-> > >   void dma_resv_add_excl_fence(struct dma_resv *obj, struct dma_fence=
- *fence)
-> > >   {
-> > >   	struct dma_fence *old_fence =3D dma_resv_excl_fence(obj);
-> > > -	struct dma_resv_list *old;
-> > > -	u32 i =3D 0;
-> > >   	dma_resv_assert_held(obj);
-> > > -	old =3D dma_resv_shared_list(obj);
-> > > -	if (old)
-> > > -		i =3D old->shared_count;
-> > > -
-> > >   	dma_fence_get(fence);
-> > >   	write_seqcount_begin(&obj->seq);
-> > >   	/* write_seqcount_begin provides the necessary memory barrier */
-> > >   	RCU_INIT_POINTER(obj->fence_excl, fence);
-> > > -	if (old)
-> > > -		old->shared_count =3D 0;
-> > >   	write_seqcount_end(&obj->seq);
-> > > -	/* inplace update, no shared fences */
-> > > -	while (i--)
-> > > -		dma_fence_put(rcu_dereference_protected(old->shared[i],
-> > > -						dma_resv_held(obj)));
-> > > -
-> > >   	dma_fence_put(old_fence);
-> > >   }
-> > >   EXPORT_SYMBOL(dma_resv_add_excl_fence);
-> > > --=20
-> > > 2.25.1
+> > > Thanks,
+> > > Christian.
 > > >=20
+> > > Am 07.12.21 um 13:33 schrieb Christian K=F6nig:
+> > > > Hi Daniel,
+> > > >=20
+> > > > just a gentle ping that you wanted to take a look at this.
+> > > >=20
+> > > > Not much changed compared to the last version, only a minor bugfix =
+in
+> > > > the dma_resv_get_singleton error handling.
+> > > >=20
+> > > > Regards,
+> > > > Christian.
+> > > >=20
+> > > >=20
 >=20
 
 --=20
