@@ -2,67 +2,67 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B53E48EE16
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 14 Jan 2022 17:29:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9324A48EE25
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 14 Jan 2022 17:32:16 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5BFE53EDFF
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 14 Jan 2022 16:29:11 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
-	by lists.linaro.org (Postfix) with ESMTPS id CA46D3ED23
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 14 Jan 2022 16:28:45 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id q8so16446874wra.12
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 14 Jan 2022 08:28:45 -0800 (PST)
+	by lists.linaro.org (Postfix) with ESMTP id 5C9113ED23
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 14 Jan 2022 16:32:15 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	by lists.linaro.org (Postfix) with ESMTPS id F17AC3ECD2
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 14 Jan 2022 16:31:44 +0000 (UTC)
+Received: by mail-wm1-f48.google.com with SMTP id p18so7131001wmg.4
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 14 Jan 2022 08:31:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ffwll.ch; s=google;
         h=date:from:to:cc:subject:message-id:references:mime-version
          :content-disposition:content-transfer-encoding:in-reply-to;
-        bh=tqGlTL36cL23P6if//t0psuJgzb2aZPNtB+QiYomoVg=;
-        b=LgpWF+8/GyAMPLlcUXnFR7OSBhD5cQb37DlVJe8MofNwk478gk314Ibb51K3jfRFWS
-         uTbfxNolynKt9W8MkttdcKIBj9sccmUaPINZYkduoDoQbsxg9oDqZoJwj0Eyy+yBaxAY
-         dz15ALfZP7IXwMliDFeq+N3hOA/Nhf0qCfywU=
+        bh=8ZqzIawu0QyaTiMFz27T67G+Yf8xefUPYq90QjjXlkQ=;
+        b=RMXS/avKKanTfnN7P3/KBZyTM1qCaUiQDcyxS20vaZzCOkrmDqVd40/8A5VZ+JR0GX
+         PJckM5E58bWjfjlY4Sps6GzXepLoa3k8zuSNL5dgYNk8i0pxBxbDpSVuFgUrZCqB5Rtn
+         4DyphykAmsb5ievTbXag0zZ1zP6tkqNbFfHR4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:date:from:to:cc:subject:message-id:references
          :mime-version:content-disposition:content-transfer-encoding
          :in-reply-to;
-        bh=tqGlTL36cL23P6if//t0psuJgzb2aZPNtB+QiYomoVg=;
-        b=wt/eFuAHsJU+2Jl5Bv6GA5mwhKIJKi9Y00A9g7Ca//B+HWM6RVZP33YB/zMYKeiwh6
-         2HPfHWTU3B0DpPjtO/vvjgeiwS4ZM7hLh5waNz123RfeeeuXsg/JfLwBPSQHFen8EgG5
-         37qeTqR/Ph/EmNCJXRvs0GXZOVUIwiaGn1Qy36ZaoPog3nT1YhwQ98pR1HRqLPQkPGfV
-         NQA5ZNX5A15DM04uBLMLcaDx+udoen7DTIHsTh4lChJdn+xO3cofrB6/yXjmnYjrtKth
-         M//tGDopaoTYDGiOS+0iqD9wKrAkO0PFqiAE0EgB6u+nK9PjKI4OjJNwjHWRyLU53RD9
-         Nmcw==
-X-Gm-Message-State: AOAM5331j6K8UHfv2iuzJRZg80NZSJgClyVdMlqFrQdQffEsbxGW+WqS
-	BJmeva7G2VOIsEkuA6cYDY4tqw==
-X-Google-Smtp-Source: ABdhPJx0wcQ+hXP/v3Kz3NXp+rvB8W5jykU7SHEfbGpdDnksWeXzQlF73fGFoh5Y0mdm8FxqnLA7bw==
-X-Received: by 2002:adf:fa85:: with SMTP id h5mr9104024wrr.681.1642177724728;
-        Fri, 14 Jan 2022 08:28:44 -0800 (PST)
+        bh=8ZqzIawu0QyaTiMFz27T67G+Yf8xefUPYq90QjjXlkQ=;
+        b=zjW+OChC6Jtkxw0SUM19fWN4Pd8D2B5iRp8gbIrAGL4ypQO4BzWkJpHl3L3TzMTqd0
+         JQLhEVEygOUwsU8F6qJudrOlPDWPwZRbbDXPcD+vT12CmsTrKFgh9mJLfcnlkKqB2ynI
+         taMEqZMr5ZjeSluJE63tz/adTSe1pqmck1mf5WwTKjvC3nnofq3g+nO0xxA/fliJAVNH
+         GeFQh3lwNTdb4VBh9FS0ryq50eBDZTwB1sJJmd1j5wZVvGlOQ92rg5DuvzE+tuAUMm2u
+         D6qRTfpqa8ncijpmRyEfuM1QOkXcSBuq/uYwBZ0YNY8OiukeRCuNxsWs//2vRSoRM01w
+         94Mw==
+X-Gm-Message-State: AOAM533ug48hVjAGo1pEwtKDo2Mbh4+lC5/I4Oi8AHlDxrslWM5gPZQy
+	nTFQtUIA/nXqxIuEA+FKtyHasw==
+X-Google-Smtp-Source: ABdhPJyyHOC2gTWNp2dP/f99Fv7JuO0mp0qBSLL0h6dWVFh9Z+dmCX1xElKKN+nZEeq+souOF2buQg==
+X-Received: by 2002:a05:600c:1c9f:: with SMTP id k31mr5262867wms.40.1642177903847;
+        Fri, 14 Jan 2022 08:31:43 -0800 (PST)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id i10sm7008866wmq.45.2022.01.14.08.28.43
+        by smtp.gmail.com with ESMTPSA id l4sm6892697wry.85.2022.01.14.08.31.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Jan 2022 08:28:44 -0800 (PST)
-Date: Fri, 14 Jan 2022 17:28:42 +0100
+        Fri, 14 Jan 2022 08:31:42 -0800 (PST)
+Date: Fri, 14 Jan 2022 17:31:40 +0100
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YeGkusRJNixihMfj@phenom.ffwll.local>
+Message-ID: <YeGlbLXXuUITZlQP@phenom.ffwll.local>
 References: <20211207123411.167006-1-christian.koenig@amd.com>
- <20211207123411.167006-2-christian.koenig@amd.com>
- <YcOTKYkEcu7MG2sY@phenom.ffwll.local>
- <b73ac88f-bb34-ed56-226f-6f3077365b75@gmail.com>
+ <20211207123411.167006-5-christian.koenig@amd.com>
+ <YcOWyHzY22ZCCvef@phenom.ffwll.local>
+ <95929048-b381-78d1-462c-e7b910c784b0@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <b73ac88f-bb34-ed56-226f-6f3077365b75@gmail.com>
+In-Reply-To: <95929048-b381-78d1-462c-e7b910c784b0@gmail.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Message-ID-Hash: KQGLSJVD5O2OIUHU7FHOREICTI757NJE
-X-Message-ID-Hash: KQGLSJVD5O2OIUHU7FHOREICTI757NJE
+Message-ID-Hash: UNH3TFYQXF3DMADKBCJN4BYWJ7WCYHTH
+X-Message-ID-Hash: UNH3TFYQXF3DMADKBCJN4BYWJ7WCYHTH
 X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Daniel Vetter <daniel@ffwll.ch>, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 01/24] dma-buf: add dma_resv_replace_fences
+Subject: [Linaro-mm-sig] Re: [PATCH 04/24] dma-buf: add dma_resv_get_singleton v2
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KQGLSJVD5O2OIUHU7FHOREICTI757NJE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UNH3TFYQXF3DMADKBCJN4BYWJ7WCYHTH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -72,220 +72,175 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 03, 2022 at 11:48:25AM +0100, Christian K=F6nig wrote:
-> Am 22.12.21 um 22:05 schrieb Daniel Vetter:
-> > On Tue, Dec 07, 2021 at 01:33:48PM +0100, Christian K=F6nig wrote:
-> > > This function allows to replace fences from the shared fence list when
-> > > we can gurantee that the operation represented by the original fence =
-has
-> > > finished or no accesses to the resources protected by the dma_resv
-> > > object any more when the new fence finishes.
+On Mon, Jan 03, 2022 at 12:13:41PM +0100, Christian K=F6nig wrote:
+> Am 22.12.21 um 22:21 schrieb Daniel Vetter:
+> > On Tue, Dec 07, 2021 at 01:33:51PM +0100, Christian K=F6nig wrote:
+> > > Add a function to simplify getting a single fence for all the fences =
+in
+> > > the dma_resv object.
 > > >=20
-> > > Then use this function in the amdkfd code when BOs are unmapped from =
-the
-> > > process.
+> > > v2: fix ref leak in error handling
 > > >=20
 > > > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
 > > > ---
-> > >   drivers/dma-buf/dma-resv.c                    | 43 ++++++++++++++++
-> > >   .../gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c  | 49 +++-------------=
----
-> > >   include/linux/dma-resv.h                      |  2 +
-> > >   3 files changed, 52 insertions(+), 42 deletions(-)
+> > >   drivers/dma-buf/dma-resv.c | 52 +++++++++++++++++++++++++++++++++++=
++++
+> > >   include/linux/dma-resv.h   |  2 ++
+> > >   2 files changed, 54 insertions(+)
 > > >=20
 > > > diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/dma-resv.c
-> > > index 4deea75c0b9c..a688dbded3d3 100644
+> > > index 480c305554a1..694716a3d66d 100644
 > > > --- a/drivers/dma-buf/dma-resv.c
 > > > +++ b/drivers/dma-buf/dma-resv.c
-> > > @@ -284,6 +284,49 @@ void dma_resv_add_shared_fence(struct dma_resv *=
-obj, struct dma_fence *fence)
+> > > @@ -34,6 +34,7 @@
+> > >    */
+> > >   #include <linux/dma-resv.h>
+> > > +#include <linux/dma-fence-array.h>
+> > >   #include <linux/export.h>
+> > >   #include <linux/mm.h>
+> > >   #include <linux/sched/mm.h>
+> > > @@ -657,6 +658,57 @@ int dma_resv_get_fences(struct dma_resv *obj, bo=
+ol write,
 > > >   }
-> > >   EXPORT_SYMBOL(dma_resv_add_shared_fence);
+> > >   EXPORT_SYMBOL_GPL(dma_resv_get_fences);
 > > > +/**
-> > > + * dma_resv_replace_fences - replace fences in the dma_resv obj
+> > > + * dma_resv_get_singleton - Get a single fence for all the fences
 > > > + * @obj: the reservation object
-> > > + * @context: the context of the fences to replace
-> > > + * @replacement: the new fence to use instead
+> > > + * @write: true if we should return all fences
+> > > + * @fence: the resulting fence
 > > > + *
-> > > + * Replace fences with a specified context with a new fence. Only va=
-lid if the
-> > > + * operation represented by the original fences is completed or has =
-no longer
-> > > + * access to the resources protected by the dma_resv object when the=
- new fence
-> > > + * completes.
-> > > + */
-> > > +void dma_resv_replace_fences(struct dma_resv *obj, uint64_t context,
-> > > +			     struct dma_fence *replacement)
-> > > +{
-> > > +	struct dma_resv_list *list;
-> > > +	struct dma_fence *old;
-> > > +	unsigned int i;
-> > > +
-> > > +	dma_resv_assert_held(obj);
-> > > +
-> > > +	write_seqcount_begin(&obj->seq);
-> > > +
-> > > +	old =3D dma_resv_excl_fence(obj);
-> > > +	if (old->context =3D=3D context) {
-> > > +		RCU_INIT_POINTER(obj->fence_excl, dma_fence_get(replacement));
-> > > +		dma_fence_put(old);
-> > > +	}
-> > > +
-> > > +	list =3D dma_resv_shared_list(obj);
-> > > +	for (i =3D 0; list && i < list->shared_count; ++i) {
-> > > +		old =3D rcu_dereference_protected(list->shared[i],
-> > > +						dma_resv_held(obj));
-> > > +		if (old->context !=3D context)
-> > > +			continue;
-> > > +
-> > > +		rcu_assign_pointer(list->shared[i], dma_fence_get(replacement));
-> > > +		dma_fence_put(old);
-> > Since the fences are all guaranteed to be from the same context, maybe =
-we
-> > should have a WARN_ON(__dma_fence_is_later()); here just to be safe?
+> > > + * Get a single fence representing all the fences inside the resv ob=
+ject.
+> > > + * Returns either 0 for success or -ENOMEM.
+> > > + *
+> > > + * Warning: This can't be used like this when adding the fence back =
+to the resv
+> > > + * object since that can lead to stack corruption when finalizing the
+> > > + * dma_fence_array.
+> > Uh I don't get this one? I thought the only problem with nested fences =
+is
+> > the signalling recursion, which we work around with the irq_work?
 >=20
-> First of all happy new year!
-
-Happy new year to you too!
-
-Also I'm only still catching up.
-
-> Then to answer your question, no :)
+> Nope, the main problem is finalizing the dma_fence_array.
 >=20
-> This here is the case where we replace an preemption fence with a VM page
-> table update fence. So both fences are not from the same context.
+> E.g. imagine that you build up a chain of dma_fence_array objects like th=
+is:
+> a<-b<-c<-d<-e<-f.....
 >=20
-> But since you ask that means that I somehow need to improve the
-> documentation.
+> With each one referencing the previous dma_fence_array and then you call
+> dma_fence_put() on the last one. That in turn will cause calling
+> dma_fence_put() on the previous one, which in turn will cause
+> dma_fence_put() one the one before the previous one etc....
+>=20
+> In other words you recurse because each dma_fence_array instance drops the
+> last reference of it's predecessor.
+>=20
+> What we could do is to delegate dropping the reference to the containing
+> fences in a dma_fence_array as well, but that would require some changes =
+to
+> the irq_work_run_list() function to be halve way efficient.o
+>=20
+> > Also if there's really an issue with dma_fence_array fences, then that
+> > warning should be on the dma_resv kerneldoc, not somewhere hidden like
+> > this. And finally I really don't see what can go wrong, sure we'll end =
+up
+> > with the same fence once in the dma_resv_list and then once more in the
+> > fence array. But they're all refcounted, so really shouldn't matter.
+> >=20
+> > The code itself looks correct, but me not understanding what even goes
+> > wrong here freaks me out a bit.
+>=20
+> Yeah, IIRC we already discussed that with Jason in length as well.
+>=20
+> Essentially what you can't do is to put a dma_fence_array into another
+> dma_fence_array without causing issues.
+>=20
+> So I think we should maybe just add a WARN_ON() into dma_fence_array_init=
+()
+> to make sure that this never happens.
 
-Hm yeah then I'm confused, since right above you have the context check.
-And I thought if the contexts are equal, then the fences must be ordered,
-and since you're adding a new one it must be a later fences.
+Yeah I think this would be much clearer instead of sprinkling half the
+story as a scary&confusing warning over all kinds of users which
+internally use dma fence arrays.
 
-But now you're saying this is to replace a fence with a totally different
-context one (which can totally make sense for the special fences compute
-mode contexts all need), but then I honestly don't get why you even check
-for the context.
+And then if it goes boom I guess we could fix it internally in
+dma_fence_array_init by flattening fences down again. But only if actually
+needed.
 
-Maybe more docs help explain what's going on, or maybe we should have the
-is_later check only if the new fences is from the same context. amdkfd
-might not benefit, but this is a new generic interface and other drivers
-might horrendously screw this up :-) Plus then a big comment that if it's
-a different fence timeline context the driver must guarantee that the new
-fence is guaranteed to signal after anything we're replacing here.
-
-I think it might also be good to just include the specific amdkfd use case
-with a short intro to wth are preempt-ctx and page table fences, to
-explain when this function is actually useful.
-
-It's definitely a very special case function, and I'm worried driver
-authors might come up with creative abuses for it that cause trouble.
+What confused me is why dma_resv is special, and from your reply it sounds
+like it really isn't.
 -Daniel
+
 
 >=20
 > Regards,
 > Christian.
 >=20
 > >=20
-> > With that added:
+> > I guess something to figure out next year, I kinda hoped I could squeez=
+e a
+> > review in before I disappear :-/
+> > -Daniel
 > >=20
-> > Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-> >=20
+> > > + */
+> > > +int dma_resv_get_singleton(struct dma_resv *obj, bool write,
+> > > +			   struct dma_fence **fence)
+> > > +{
+> > > +	struct dma_fence_array *array;
+> > > +	struct dma_fence **fences;
+> > > +	unsigned count;
+> > > +	int r;
+> > > +
+> > > +	r =3D dma_resv_get_fences(obj, write, &count, &fences);
+> > > +        if (r)
+> > > +		return r;
+> > > +
+> > > +	if (count =3D=3D 0) {
+> > > +		*fence =3D NULL;
+> > > +		return 0;
 > > > +	}
 > > > +
-> > > +	write_seqcount_end(&obj->seq);
+> > > +	if (count =3D=3D 1) {
+> > > +		*fence =3D fences[0];
+> > > +		kfree(fences);
+> > > +		return 0;
+> > > +	}
+> > > +
+> > > +	array =3D dma_fence_array_create(count, fences,
+> > > +				       dma_fence_context_alloc(1),
+> > > +				       1, false);
+> > > +	if (!array) {
+> > > +		while (count--)
+> > > +			dma_fence_put(fences[count]);
+> > > +		kfree(fences);
+> > > +		return -ENOMEM;
+> > > +	}
+> > > +
+> > > +	*fence =3D &array->base;
+> > > +	return 0;
 > > > +}
-> > > +EXPORT_SYMBOL(dma_resv_replace_fences);
+> > > +EXPORT_SYMBOL_GPL(dma_resv_get_singleton);
 > > > +
 > > >   /**
-> > >    * dma_resv_add_excl_fence - Add an exclusive fence.
-> > >    * @obj: the reservation object
-> > > diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c b/drive=
-rs/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c
-> > > index 71acd577803e..b558ef0f8c4a 100644
-> > > --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c
-> > > +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c
-> > > @@ -236,53 +236,18 @@ void amdgpu_amdkfd_release_notify(struct amdgpu=
-_bo *bo)
-> > >   static int amdgpu_amdkfd_remove_eviction_fence(struct amdgpu_bo *bo,
-> > >   					struct amdgpu_amdkfd_fence *ef)
-> > >   {
-> > > -	struct dma_resv *resv =3D bo->tbo.base.resv;
-> > > -	struct dma_resv_list *old, *new;
-> > > -	unsigned int i, j, k;
-> > > +	struct dma_fence *replacement;
-> > >   	if (!ef)
-> > >   		return -EINVAL;
-> > > -	old =3D dma_resv_shared_list(resv);
-> > > -	if (!old)
-> > > -		return 0;
-> > > -
-> > > -	new =3D kmalloc(struct_size(new, shared, old->shared_max), GFP_KERN=
-EL);
-> > > -	if (!new)
-> > > -		return -ENOMEM;
-> > > -
-> > > -	/* Go through all the shared fences in the resevation object and so=
-rt
-> > > -	 * the interesting ones to the end of the list.
-> > > +	/* TODO: Instead of block before we should use the fence of the page
-> > > +	 * table update and TLB flush here directly.
-> > >   	 */
-> > > -	for (i =3D 0, j =3D old->shared_count, k =3D 0; i < old->shared_cou=
-nt; ++i) {
-> > > -		struct dma_fence *f;
-> > > -
-> > > -		f =3D rcu_dereference_protected(old->shared[i],
-> > > -					      dma_resv_held(resv));
-> > > -
-> > > -		if (f->context =3D=3D ef->base.context)
-> > > -			RCU_INIT_POINTER(new->shared[--j], f);
-> > > -		else
-> > > -			RCU_INIT_POINTER(new->shared[k++], f);
-> > > -	}
-> > > -	new->shared_max =3D old->shared_max;
-> > > -	new->shared_count =3D k;
-> > > -
-> > > -	/* Install the new fence list, seqcount provides the barriers */
-> > > -	write_seqcount_begin(&resv->seq);
-> > > -	RCU_INIT_POINTER(resv->fence, new);
-> > > -	write_seqcount_end(&resv->seq);
-> > > -
-> > > -	/* Drop the references to the removed fences or move them to ef_lis=
-t */
-> > > -	for (i =3D j; i < old->shared_count; ++i) {
-> > > -		struct dma_fence *f;
-> > > -
-> > > -		f =3D rcu_dereference_protected(new->shared[i],
-> > > -					      dma_resv_held(resv));
-> > > -		dma_fence_put(f);
-> > > -	}
-> > > -	kfree_rcu(old, rcu);
-> > > -
-> > > +	replacement =3D dma_fence_get_stub();
-> > > +	dma_resv_replace_fences(bo->tbo.base.resv, ef->base.context,
-> > > +				replacement);
-> > > +	dma_fence_put(replacement);
-> > >   	return 0;
-> > >   }
+> > >    * dma_resv_wait_timeout - Wait on reservation's objects
+> > >    * shared and/or exclusive fences.
 > > > diff --git a/include/linux/dma-resv.h b/include/linux/dma-resv.h
-> > > index eebf04325b34..e0be34265eae 100644
+> > > index fa2002939b19..cdfbbda6f600 100644
 > > > --- a/include/linux/dma-resv.h
 > > > +++ b/include/linux/dma-resv.h
-> > > @@ -457,6 +457,8 @@ void dma_resv_init(struct dma_resv *obj);
-> > >   void dma_resv_fini(struct dma_resv *obj);
-> > >   int dma_resv_reserve_shared(struct dma_resv *obj, unsigned int num_=
-fences);
-> > >   void dma_resv_add_shared_fence(struct dma_resv *obj, struct dma_fen=
-ce *fence);
-> > > +void dma_resv_replace_fences(struct dma_resv *obj, uint64_t context,
-> > > +			     struct dma_fence *fence);
+> > > @@ -438,6 +438,8 @@ void dma_resv_replace_fences(struct dma_resv *obj=
+, uint64_t context,
 > > >   void dma_resv_add_excl_fence(struct dma_resv *obj, struct dma_fence=
  *fence);
-> > >   int dma_resv_get_fences(struct dma_resv *obj, struct dma_fence **pf=
-ence_excl,
-> > >   			unsigned *pshared_count, struct dma_fence ***pshared);
+> > >   int dma_resv_get_fences(struct dma_resv *obj, bool write,
+> > >   			unsigned int *num_fences, struct dma_fence ***fences);
+> > > +int dma_resv_get_singleton(struct dma_resv *obj, bool write,
+> > > +			   struct dma_fence **fence);
+> > >   int dma_resv_copy_fences(struct dma_resv *dst, struct dma_resv *src=
+);
+> > >   long dma_resv_wait_timeout(struct dma_resv *obj, bool wait_all, boo=
+l intr,
+> > >   			   unsigned long timeout);
 > > > --=20
 > > > 2.25.1
 > > >=20
