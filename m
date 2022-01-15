@@ -2,124 +2,144 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF2814B63FA
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 08:09:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E63C4B63FB
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 08:10:06 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F0424401D6
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 07:09:58 +0000 (UTC)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com [185.132.182.106])
-	by lists.linaro.org (Postfix) with ESMTPS id 2407C3EDB2
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 14 Jan 2022 10:41:50 +0000 (UTC)
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
-	by mx07-00178001.pphosted.com (8.16.1.2/8.16.1.2) with ESMTP id 20E9K1Y7028639;
-	Fri, 14 Jan 2022 11:41:10 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=selector1;
- bh=Db8QoLf2xpm+lVoXBntS8ts6R2As6iUdm19chCVqc50=;
- b=YnGikFqXTkWXyKKI6gP9Hdz6hNUbt8VIMw4oFehA6YMpaIGn5VhmHtKn79MMXAsFPSNW
- ++ywwrN9bYLBgipIHKnNNIdTEh6e3zbryXjbawXxOSng1j/7bb8fWEMg4g/3H0dDdg2p
- la50Lc+9ujAG6kr7kj7cBoNstHn6WZ76bsHCFzF5pcwMouAYa1HaTYWw2ZVoWUVrsP+z
- a46wuBZ/VEwvQtjGPM5XI/JoYtXy9kdqtDGplfFKe5w44RaAx1EbtU2NRJjyoajASj3v
- Ft9Hl9/UXGQRPSC14GLETN95FZQx0lv3Oqg+fVXbruPEKar8EAqawewUz7nNKNHVZV9l 2A==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
-	by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3dk6eygfch-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 14 Jan 2022 11:41:10 +0100
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E71BB100034;
-	Fri, 14 Jan 2022 11:41:09 +0100 (CET)
-Received: from Webmail-eu.st.com (sfhdag2node2.st.com [10.75.127.5])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DC5AA21231F;
-	Fri, 14 Jan 2022 11:41:09 +0100 (CET)
-Received: from lmecxl1137.lme.st.com (10.75.127.46) by SFHDAG2NODE2.st.com
- (10.75.127.5) with Microsoft SMTP Server (TLS) id 15.0.1497.26; Fri, 14 Jan
- 2022 11:41:08 +0100
-To: Philippe Cornu <philippe.cornu@foss.st.com>,
-        Yannick Fertre
-	<yannick.fertre@foss.st.com>,
-        David Airlie <airlied@linux.ie>, Daniel Vetter
-	<daniel@ffwll.ch>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-        Alexandre
- Torgue <alexandre.torgue@foss.st.com>,
-        Alain Volmat
-	<alain.volmat@foss.st.com>,
-        Hans Verkuil <hverkuil-cisco@xs4all.nl>,
-        Mauro
- Carvalho Chehab <mchehab@kernel.org>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        Benjamin Gaignard <benjamin.gaignard@collabora.com>,
-        Liam Mark
-	<lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>,
-        Brian Starkey
-	<Brian.Starkey@arm.com>,
-        John Stultz <john.stultz@linaro.org>,
-        Christian
- Konig <christian.koenig@amd.com>, <soc@kernel.org>
-References: <20220113171921.17466-1-philippe.cornu@foss.st.com>
- <20220113171921.17466-3-philippe.cornu@foss.st.com>
-From: Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>
-Message-ID: <7bd3229c-8b66-6a4f-4fed-cd1929f2c397@foss.st.com>
-Date: Fri, 14 Jan 2022 11:41:08 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.14.0
-MIME-Version: 1.0
-In-Reply-To: <20220113171921.17466-3-philippe.cornu@foss.st.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-X-Originating-IP: [10.75.127.46]
-X-ClientProxiedBy: SFHDAG2NODE2.st.com (10.75.127.5) To SFHDAG2NODE2.st.com
- (10.75.127.5)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.816,Hydra:6.0.425,FMLib:17.11.62.513
- definitions=2022-01-14_04,2022-01-14_01,2021-12-02_01
-X-MailFrom: prvs=701320b2d8=raphael.gallais-pou@foss.st.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 5LXGBUEZIPA2S6WLYWBBJE2SE2GBZRDG
-X-Message-ID-Hash: 5LXGBUEZIPA2S6WLYWBBJE2SE2GBZRDG
-X-Mailman-Approved-At: Tue, 15 Feb 2022 07:09:50 +0000
-CC: dri-devel@lists.freedesktop.org, linux-stm32@st-md-mailman.stormreply.com, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+	by lists.linaro.org (Postfix) with ESMTP id BF835401DE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 07:10:05 +0000 (UTC)
+Received: from mail-yb1-f202.google.com (mail-yb1-f202.google.com [209.85.219.202])
+	by lists.linaro.org (Postfix) with ESMTPS id 527223EBB6
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 15 Jan 2022 01:06:55 +0000 (UTC)
+Received: by mail-yb1-f202.google.com with SMTP id f12-20020a056902038c00b006116df1190aso21562659ybs.20
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 14 Jan 2022 17:06:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=wG/PbGVmKjgf1eOd11ftVQTDqJEywAnSirRvk8YQoEA=;
+        b=ra40WJSnTd+Sg9D3TIvHREEZJO5QmFxwXzwakhy95Pj15AdCn96Rg7F+gGkzzdoPHL
+         /LCXltr47kWOGGC4J/j+jKdN7xu6RyW7gUeuH5vavWrndAu7BzKurEIyahiOS6sTnazd
+         kjhutzh5GjtqfNnBjsMi1N1OKm+eTNmejUCgViGcOUkB/EFui5twnu1ZKaXi21WPA1C7
+         hDv3dAKWpj1mixAwX1dUro0zgPo6Npzf7sXOSvaZIstusYMToZmeNzSzidVL3FAMroY6
+         HrShrnaUArO3g2alaInh2tQWQ8dpEbE6FBLnde1xIXMV4W2bjw4NgeUFBmdKReIihG44
+         DGmQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=wG/PbGVmKjgf1eOd11ftVQTDqJEywAnSirRvk8YQoEA=;
+        b=shAqJH6M5yKcCusI6mflN+UrNgSZ5vWcshj28OzqPyyrCGSYVAMDIIJlVWiQalLpK5
+         h9Fczd65lRptlb5LveQAB6zVYQMjaZK3oWUw6iLMAKWNCvRMpRy4L63zMX+nhMgO+lo3
+         6PmhuQnoAtHk1jaf7Iy+wJ+Dg9um5hqsb76MawEc0+5Yp70VyHYopCJ13OqBXs9bKXk0
+         graWJ2xK8BU5wkalFl6L8rbkujBx9ri4WhU4ER0dgnMSwy3F4xlAjCeRUrobN10XIwPl
+         vUTLnDuuhLSJfFAvtXg58sRDZbATo0BmFs4N7CyyPFqCQtrpcQnkxVSNuB+INaORPcxo
+         6IjQ==
+X-Gm-Message-State: AOAM5336Rz8FqUseQz7O+EvbkMO5cMeFXnkDX239o94dRLM/ycYE5h+v
+	ivALTVnM658DKh8bROemlZD8zrdOGRU=
+X-Google-Smtp-Source: ABdhPJxSKZys321+eazB1Vl7zKy4uxTVihorRmwSE2zTWXqOqP6AasI2307MgWBIYRtdeCJygiVD+3F2pr8=
+X-Received: from hridya.mtv.corp.google.com ([2620:15c:211:200:5860:362a:3112:9d85])
+ (user=hridya job=sendgmr) by 2002:a25:874a:: with SMTP id e10mr15875623ybn.422.1642208814583;
+ Fri, 14 Jan 2022 17:06:54 -0800 (PST)
+Date: Fri, 14 Jan 2022 17:05:58 -0800
+Message-Id: <20220115010622.3185921-1-hridya@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.34.1.703.g22d0c6ccf7-goog
+From: Hridya Valsaraju <hridya@google.com>
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
+	Jonathan Corbet <corbet@lwn.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"=?UTF-8?q?Arve=20Hj=C3=B8nnev=C3=A5g?=" <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>,
+	Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <christian@brauner.io>,
+	Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@linaro.org>,
+	Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>,
+	Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>,
+	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>, Tejun Heo <tj@kernel.org>,
+	Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>,
+	Dave Airlie <airlied@redhat.com>, Matthew Brost <matthew.brost@intel.com>,
+	Kenneth Graunke <kenneth@whitecape.org>, Matthew Auld <matthew.auld@intel.com>,
+	Li Li <dualli@google.com>, Marco Ballesio <balejs@google.com>, Finn Behrens <me@kloenk.de>,
+	Hang Lu <hangl@codeaurora.org>, Wedson Almeida Filho <wedsonaf@google.com>,
+	Masahiro Yamada <masahiroy@kernel.org>, Andrew Morton <akpm@linux-foundation.org>,
+	Nathan Chancellor <nathan@kernel.org>, Kees Cook <keescook@chromium.org>,
+	Nick Desaulniers <ndesaulniers@google.com>, Miguel Ojeda <ojeda@kernel.org>,
+	Vipin Sharma <vipinsh@google.com>, Chris Down <chris@chrisdown.name>,
+	Daniel Borkmann <daniel@iogearbox.net>, Vlastimil Babka <vbabka@suse.cz>, Arnd Bergmann <arnd@arndb.de>,
+	dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+	linaro-mm-sig@lists.linaro.org, cgroups@vger.kernel.org
+X-MailFrom: 3Lh7iYQYKDQkq0rm7jpxxpun.lxvurwj0x-vv-1rpur121.urwj0x.x0p@flex--hridya.bounces.google.com
+X-Mailman-Rule-Hits: max-recipients
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-size; news-moderation; no-subject; digests; suspicious-header
+Message-ID-Hash: B47CYLQCOVGT5AZDD66MKVEYLBE6QLHM
+X-Message-ID-Hash: B47CYLQCOVGT5AZDD66MKVEYLBE6QLHM
+X-Mailman-Approved-At: Tue, 15 Feb 2022 07:09:52 +0000
+CC: Kenny.Ho@amd.com, daniels@collabora.com, kaleshsingh@google.com, tjmercier@google.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 2/2] MAINTAINERS: update drm/stm drm/sti and cec/sti maintainers
+Subject: [Linaro-mm-sig] [RFC 0/6] Proposal for a GPU cgroup controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5LXGBUEZIPA2S6WLYWBBJE2SE2GBZRDG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/B47CYLQCOVGT5AZDD66MKVEYLBE6QLHM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-DQpPbiAxLzEzLzIyIDY6MTkgUE0sIFBoaWxpcHBlIENvcm51IHdyb3RlOg0KPiBBZGQgQWxhaW4g
-YXMgc3RpIG1haW50YWluZXIgZm9yIGJvdGggZHJtL3N0aSAmIGNlYy9zdGkuDQo+IEFkZCBSYXBo
-YcOrbCBhcyBzdG0gbWFpbnRhaW5lciBmb3IgZHJtL3N0bS4NCj4NCj4gU2lnbmVkLW9mZi1ieTog
-UGhpbGlwcGUgQ29ybnUgPHBoaWxpcHBlLmNvcm51QGZvc3Muc3QuY29tPg0KPiAtLS0NCj4gIE1B
-SU5UQUlORVJTIHwgMyArKysNCj4gIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKykNCg0K
-DQpIaSBQaGlsaXBwZSwNCg0KDQpSZXZpZXdlZC1ieTogUmFwaGFlbCBHYWxsYWlzLVBvdSA8cmFw
-aGFlbC5nYWxsYWlzLXBvdUBmb3NzLnN0LmNvbT4NCg0KDQpUaGFuayB5b3UgISA6RA0KUmFwaGHD
-q2wNCg0KDQo+DQo+IGRpZmYgLS1naXQgYS9NQUlOVEFJTkVSUyBiL01BSU5UQUlORVJTDQo+IGlu
-ZGV4IDZiZWEwODBkMDE1OS4uNzA4ZjhjODZlNGM5IDEwMDY0NA0KPiAtLS0gYS9NQUlOVEFJTkVS
-Uw0KPiArKysgYi9NQUlOVEFJTkVSUw0KPiBAQCAtNjQyMyw2ICs2NDIzLDcgQEAgRjoJRG9jdW1l
-bnRhdGlvbi9kZXZpY2V0cmVlL2JpbmRpbmdzL2Rpc3BsYXkvcm9ja2NoaXAvDQo+ICBGOglkcml2
-ZXJzL2dwdS9kcm0vcm9ja2NoaXAvDQo+ICANCj4gIERSTSBEUklWRVJTIEZPUiBTVEkNCj4gK006
-CUFsYWluIFZvbG1hdCA8YWxhaW4udm9sbWF0QGZvc3Muc3QuY29tPg0KPiAgTDoJZHJpLWRldmVs
-QGxpc3RzLmZyZWVkZXNrdG9wLm9yZw0KPiAgUzoJTWFpbnRhaW5lZA0KPiAgVDoJZ2l0IGdpdDov
-L2Fub25naXQuZnJlZWRlc2t0b3Aub3JnL2RybS9kcm0tbWlzYw0KPiBAQCAtNjQzMSw2ICs2NDMy
-LDcgQEAgRjoJZHJpdmVycy9ncHUvZHJtL3N0aQ0KPiAgDQo+ICBEUk0gRFJJVkVSUyBGT1IgU1RN
-DQo+ICBNOglZYW5uaWNrIEZlcnRyZSA8eWFubmljay5mZXJ0cmVAZm9zcy5zdC5jb20+DQo+ICtN
-OglSYXBoYWVsIEdhbGxhaXMtUG91IDxyYXBoYWVsLmdhbGxhaXMtcG91QGZvc3Muc3QuY29tPg0K
-PiAgTToJUGhpbGlwcGUgQ29ybnUgPHBoaWxpcHBlLmNvcm51QGZvc3Muc3QuY29tPg0KPiAgTDoJ
-ZHJpLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZw0KPiAgUzoJTWFpbnRhaW5lZA0KPiBAQCAt
-MTgxNTIsNiArMTgxNTQsNyBAQCBGOglEb2N1bWVudGF0aW9uL2RldmljZXRyZWUvYmluZGluZ3Mv
-c291bmQvc3Qsc3RpLWFzb2MtY2FyZC50eHQNCj4gIEY6CXNvdW5kL3NvYy9zdGkvDQo+ICANCj4g
-IFNUSSBDRUMgRFJJVkVSDQo+ICtNOglBbGFpbiBWb2xtYXQgPGFsYWluLnZvbG1hdEBmb3NzLnN0
-LmNvbT4NCj4gIFM6CU1haW50YWluZWQNCj4gIEY6CURvY3VtZW50YXRpb24vZGV2aWNldHJlZS9i
-aW5kaW5ncy9tZWRpYS9zdGloLWNlYy50eHQNCj4gIEY6CWRyaXZlcnMvbWVkaWEvY2VjL3BsYXRm
-b3JtL3N0aS8NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-CkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJv
-Lm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVA
-bGlzdHMubGluYXJvLm9yZwo=
+This patch series revisits the proposal for a GPU cgroup controller to
+track and limit memory allocations by various device/allocator
+subsystems. The patch series also contains a simple prototype to
+illustrate how Android intends to implement DMA-BUF allocator
+attribution using the GPU cgroup controller. The prototype does not
+include resource limit enforcements.
+
+History of the GPU cgroup controller
+====================================
+The GPU/DRM cgroup controller came into being when a consensus[1]
+was reached that the resources it tracked were unsuitable to be integrated
+into memcg. Originally, the proposed controller was specific to the DRM
+subsystem and was intended to track GEM buffers and GPU-specific resources[2].
+In order to help establish a unified memory accounting model for all GPU and
+all related subsystems, Daniel Vetter put forth a suggestion to move it out of
+the DRM subsystem so that it can be used by other DMA-BUF exporters as well[3].
+This RFC proposes an interface that does the same.
+
+[1]: https://patchwork.kernel.org/project/dri-devel/cover/20190501140438.9506-1-brian.welty@intel.com/#22624705
+[2]: https://lore.kernel.org/amd-gfx/20210126214626.16260-1-brian.welty@intel.com/
+[3]: https://lore.kernel.org/amd-gfx/YCVOl8%2F87bqRSQei@phenom.ffwll.local/
+
+Hridya Valsaraju (6):
+  gpu: rfc: Proposal for a GPU cgroup controller
+  cgroup: gpu: Add a cgroup controller for allocator attribution of GPU
+    memory
+  dmabuf: heaps: Use the GPU cgroup charge/uncharge APIs
+  dma-buf: Add DMA-BUF exporter op to charge a DMA-BUF to a cgroup.
+  dmabuf: system_heap: implement dma-buf op for GPU cgroup charge
+    transfer
+  android: binder: Add a buffer flag to relinquish ownership of fds
+
+ Documentation/gpu/rfc/gpu-cgroup.rst | 192 +++++++++++++++++
+ Documentation/gpu/rfc/index.rst      |   4 +
+ drivers/android/binder.c             |  32 +++
+ drivers/dma-buf/dma-heap.c           |  27 +++
+ drivers/dma-buf/heaps/system_heap.c  |  68 ++++++
+ include/linux/cgroup_gpu.h           | 120 +++++++++++
+ include/linux/cgroup_subsys.h        |   4 +
+ include/linux/dma-buf.h              |  18 ++
+ include/linux/dma-heap.h             |  11 +
+ include/uapi/linux/android/binder.h  |   1 +
+ init/Kconfig                         |   7 +
+ kernel/cgroup/Makefile               |   1 +
+ kernel/cgroup/gpu.c                  | 305 +++++++++++++++++++++++++++
+ 13 files changed, 790 insertions(+)
+ create mode 100644 Documentation/gpu/rfc/gpu-cgroup.rst
+ create mode 100644 include/linux/cgroup_gpu.h
+ create mode 100644 kernel/cgroup/gpu.c
+
+-- 
+2.34.1.703.g22d0c6ccf7-goog
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
