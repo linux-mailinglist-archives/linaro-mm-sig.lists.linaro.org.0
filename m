@@ -2,92 +2,137 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10385493B53
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jan 2022 14:44:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E5511493C8B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jan 2022 16:05:25 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 33F833EE83
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jan 2022 13:44:11 +0000 (UTC)
-Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
-	by lists.linaro.org (Postfix) with ESMTPS id 59B123EE88
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jan 2022 13:43:45 +0000 (UTC)
-Received: by mail-ed1-f44.google.com with SMTP id j23so6661513edp.5
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jan 2022 05:43:45 -0800 (PST)
+	by lists.linaro.org (Postfix) with ESMTP id 0851A3EE89
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jan 2022 15:05:25 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+	by lists.linaro.org (Postfix) with ESMTPS id 47BD93ED41
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jan 2022 15:05:22 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id q141-20020a1ca793000000b00347b48dfb53so6155281wme.0
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jan 2022 07:05:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=B/RyGnK1GOVV7mP2i6NUyL8dXTOp5mSU0ausD8jObPM=;
-        b=pVinbeY9LHg95yEKahv8g20gbCh1BdN4nWVUNdHsg+Pi7vXMs7N2GB4+sLUsB4rsUg
-         y/+M947KC1OlC3mGcqiIs8LRAHHVwr98JEqW6NRQw2F6Vy/1KJi07x/DFBPsb2QC+n/V
-         V3FdSFUIqBfQNiY6aoimqXHksG39jj/AvaMF7Xt6hyubaqlKmNxlcVEvx3W2O6fT2q4X
-         QT5eoUkU/xpo21Wveo2E3YK2AWcVVWrEdXeSDL62ggUKkKSB+tpmWyRDIbdpwptp8mhP
-         NRrA0ef94fYDJRJgN5CHcL0SnLD/aNcyKCZFjdfLT2jkO146+Ty80EATuNp2RuHR81yF
-         sQjQ==
+        d=ffwll.ch; s=google;
+        h=date:from:to:cc:subject:message-id:mail-followup-to:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=0odyDD4qZWEyKf4dgk5bsg3tKYSY9CGvoUStfcevylA=;
+        b=KY4YCZwWueLtUID+/YuRziwAprnxroizrhhiLqgR+VJv0dvAqf6p/e/Z8+2hbD5td3
+         M1RXz2Ulz5/UO405poQs0LC2mWECerbCYmm6/PclkyYapoYCKVCVsrH7+qHMc7mD7DNG
+         yVv6KCpVaJQuyRwX173l73U/aTdl9LopqeRzs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=B/RyGnK1GOVV7mP2i6NUyL8dXTOp5mSU0ausD8jObPM=;
-        b=yMBbhpk+gQ51fgCv1TUemQoyLOygCyLJPa0virQ62sTaSIIAdtzDrNxM8nIVXIlxmm
-         ClJyAAKPA7qmoF8BNTQegAhIKHywc8DFcMXfsRXJ+hrw3gu7+EsXW7/4t7BKFUqji5AF
-         6T1h8jBDeFrjCZR+lwoMswrCY+XPMvrBxPJIrUrVZNd/ThYxmL41SQ4/9S86zyiYWWTn
-         9js/IaDttQ4CVlUvG9g8WdeFowYE/RbHMtAg2CJVbTJMgWbOwbl820XgUlOzNY4CByGl
-         v6Kwhr1HG7YMIaC69aLviWuueOPnM919Z8Mfo0/BRcNKAhiRa4ueuX6C2AsYWPjHNGjT
-         YJeg==
-X-Gm-Message-State: AOAM531vGVJg6DeB8ZU+7mRFefqJ6T23JqGK4B//u82M/tXXxGmAr1+F
-	wEgfEwCiCP7S1Pc5KrAVn+E=
-X-Google-Smtp-Source: ABdhPJyRkjh8/psx0CRmEPXxOUN/B1pOuBL36LxzwXxNBKNTIJUgRDrIKqquQcrZosFF3bO3uS8Y/A==
-X-Received: by 2002:a5d:64aa:: with SMTP id m10mr17658023wrp.295.1642599824450;
-        Wed, 19 Jan 2022 05:43:44 -0800 (PST)
-Received: from abel.fritz.box (p57b0bff8.dip0.t-ipconnect.de. [87.176.191.248])
-        by smtp.gmail.com with ESMTPSA id g15sm19733583wrm.2.2022.01.19.05.43.43
+        h=x-gm-message-state:date:from:to:cc:subject:message-id
+         :mail-followup-to:references:mime-version:content-disposition
+         :in-reply-to;
+        bh=0odyDD4qZWEyKf4dgk5bsg3tKYSY9CGvoUStfcevylA=;
+        b=b5BjTApKNsURyENHwoXCBCx3M0fgFyIYHlxWmDoh8OLn0TW/gXAzlGZcPld05Rr1sM
+         xqeIEblT16n5u1LWkiCjgXAzttzqIIZMm9aejvmK1Rh6H7NPMQphTsbgx7NPeUla5YkK
+         a/krAS5TYzMjOwW1jMh5rNm5ykcJdjiPIVos4I63ZAiCAS7UtB4fFnz2DY+FUxjIld80
+         kXaapTXdROrwnVqKyIKtdXWe/7o+H0N+l6w+xITgcO59GbW05YSv3iCEE5jYx7ad7WdT
+         E8XvV7F4TJekOF3pnzYKaJGSdTnqsjZjtTIuLYJEBFAqCAY7fygs1Ttt2oPkpGPQqgy1
+         6hvg==
+X-Gm-Message-State: AOAM533NXkl2fKAM6vqU9LbjwjhVRoyGw89K8FncMB0dndlYVmc78Wfg
+	R2s/Cj3BUNmT+8V93xpr5cho3g==
+X-Google-Smtp-Source: ABdhPJxqxOTFLl5T1cf1q2Ex/gbOeL3/4WLRyt3JAUtwMEe4sBmurRyS45VDAxAFnc6SDjv5q4TcRQ==
+X-Received: by 2002:adf:fec2:: with SMTP id q2mr29547534wrs.546.1642604721320;
+        Wed, 19 Jan 2022 07:05:21 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id g17sm7645503wmq.9.2022.01.19.07.05.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Jan 2022 05:43:43 -0800 (PST)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-To: sumit.semwal@linaro.org,
-	gustavo@padovan.org,
-	daniel.vetter@ffwll.ch
-Date: Wed, 19 Jan 2022 14:43:39 +0100
-Message-Id: <20220119134339.3102-4-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220119134339.3102-1-christian.koenig@amd.com>
-References: <20220119134339.3102-1-christian.koenig@amd.com>
+        Wed, 19 Jan 2022 07:05:20 -0800 (PST)
+Date: Wed, 19 Jan 2022 16:05:18 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Weizhao Ouyang <o451686892@gmail.com>
+Message-ID: <YegormDmEewox0MF@phenom.ffwll.local>
+Mail-Followup-To: Weizhao Ouyang <o451686892@gmail.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+	Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@kernel.org>,
+	Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <john.stultz@linaro.org>, christian.koenig@amd.com,
+	linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org
+References: <20220104073545.124244-1-o451686892@gmail.com>
 MIME-Version: 1.0
-Message-ID-Hash: DFMJJMKXDPWSEE3E5QSG4NZ6J6DWGQZE
-X-Message-ID-Hash: DFMJJMKXDPWSEE3E5QSG4NZ6J6DWGQZE
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
+Content-Disposition: inline
+In-Reply-To: <20220104073545.124244-1-o451686892@gmail.com>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
+Message-ID-Hash: FKPV3HL2QO4NKWJ4XQIBYZQTMRHOKLUM
+X-Message-ID-Hash: FKPV3HL2QO4NKWJ4XQIBYZQTMRHOKLUM
+X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Benjamin Gaignard <benjamin.gaignard@collabora.com>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@kernel.org>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>, christian.koenig@amd.com, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 4/4] dma-buf: warn about containers in dma_resv object
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: cma_heap: Fix mutex locking section
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DFMJJMKXDPWSEE3E5QSG4NZ6J6DWGQZE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FKPV3HL2QO4NKWJ4XQIBYZQTMRHOKLUM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-RHJpdmVycyBzaG91bGQgbm90IGFkZCBjb250YWluZXJzIGFzIHNoYXJlZCBmZW5jZXMgdG8gdGhl
-IGRtYV9yZXN2DQpvYmplY3QsIGluc3RlYWQgZWFjaCBmZW5jZSBzaG91bGQgYmUgYWRkZWQgaW5k
-aXZpZHVhbGx5Lg0KDQpTaWduZWQtb2ZmLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4u
-a29lbmlnQGFtZC5jb20+DQotLS0NCiBkcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYyB8IDUgKysr
-KysNCiAxIGZpbGUgY2hhbmdlZCwgNSBpbnNlcnRpb25zKCspDQoNCmRpZmYgLS1naXQgYS9kcml2
-ZXJzL2RtYS1idWYvZG1hLXJlc3YuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jDQppbmRl
-eCA2ZGQ5YTQwYjU1ZDQuLmU4YTBjMWQ1MWRhMiAxMDA2NDQNCi0tLSBhL2RyaXZlcnMvZG1hLWJ1
-Zi9kbWEtcmVzdi5jDQorKysgYi9kcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYw0KQEAgLTI1Niw2
-ICsyNTYsMTEgQEAgdm9pZCBkbWFfcmVzdl9hZGRfc2hhcmVkX2ZlbmNlKHN0cnVjdCBkbWFfcmVz
-diAqb2JqLCBzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSkNCiANCiAJZG1hX3Jlc3ZfYXNzZXJ0X2hl
-bGQob2JqKTsNCiANCisJLyogRHJpdmVycyBzaG91bGQgbm90IGFkZCBjb250YWluZXJzIGhlcmUs
-IGluc3RlYWQgYWRkIGVhY2ggZmVuY2UNCisJICogaW5kaXZpZHVhbGx5Lg0KKwkgKi8NCisJV0FS
-Tl9PTihkbWFfZmVuY2VfaXNfY29udGFpbmVyKGZlbmNlKSk7DQorDQogCWZvYmogPSBkbWFfcmVz
-dl9zaGFyZWRfbGlzdChvYmopOw0KIAljb3VudCA9IGZvYmotPnNoYXJlZF9jb3VudDsNCiANCi0t
-IA0KMi4yNS4xDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGlu
-YXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVh
-dmVAbGlzdHMubGluYXJvLm9yZwo=
+On Tue, Jan 04, 2022 at 03:35:45PM +0800, Weizhao Ouyang wrote:
+> Fix cma_heap_buffer mutex locking critical section to protect vmap_cnt
+> and vaddr.
+> 
+> Fixes: a5d2d29e24be ("dma-buf: heaps: Move heap-helper logic into the cma_heap implementation")
+> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+> ---
+>  drivers/dma-buf/heaps/cma_heap.c | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma_heap.c
+> index 0c05b79870f9..83f02bd51dda 100644
+> --- a/drivers/dma-buf/heaps/cma_heap.c
+> +++ b/drivers/dma-buf/heaps/cma_heap.c
+> @@ -124,10 +124,11 @@ static int cma_heap_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
+>  	struct cma_heap_buffer *buffer = dmabuf->priv;
+>  	struct dma_heap_attachment *a;
+>  
+> +	mutex_lock(&buffer->lock);
+> +
+>  	if (buffer->vmap_cnt)
+>  		invalidate_kernel_vmap_range(buffer->vaddr, buffer->len);
+
+Since this creates nesting with mm/, but optionally I think it'd be good
+to prime lockdep so it knows about this. See e.g. dma_resv_lockdep() in
+dma-resv.c, except I don't know offhand what the right lock for
+invalidate_kernel_vmap_range is.
+-Daniel
+
+
+>  
+> -	mutex_lock(&buffer->lock);
+>  	list_for_each_entry(a, &buffer->attachments, list) {
+>  		if (!a->mapped)
+>  			continue;
+> @@ -144,10 +145,11 @@ static int cma_heap_dma_buf_end_cpu_access(struct dma_buf *dmabuf,
+>  	struct cma_heap_buffer *buffer = dmabuf->priv;
+>  	struct dma_heap_attachment *a;
+>  
+> +	mutex_lock(&buffer->lock);
+> +
+>  	if (buffer->vmap_cnt)
+>  		flush_kernel_vmap_range(buffer->vaddr, buffer->len);
+>  
+> -	mutex_lock(&buffer->lock);
+>  	list_for_each_entry(a, &buffer->attachments, list) {
+>  		if (!a->mapped)
+>  			continue;
+> -- 
+> 2.32.0
+> 
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
