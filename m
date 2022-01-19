@@ -2,117 +2,140 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1127D493EEE
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jan 2022 18:20:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AFF714941E9
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jan 2022 21:37:45 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3B5553EE98
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jan 2022 17:20:06 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
-	by lists.linaro.org (Postfix) with ESMTPS id B0EB23ED6C
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jan 2022 17:20:02 +0000 (UTC)
-Received: by mail-wm1-f43.google.com with SMTP id l12-20020a7bc34c000000b003467c58cbdfso15751258wmj.2
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jan 2022 09:20:02 -0800 (PST)
+	by lists.linaro.org (Postfix) with ESMTP id 6D5CC3EE93
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jan 2022 20:37:44 +0000 (UTC)
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
+	by lists.linaro.org (Postfix) with ESMTPS id 9D9A73EE00
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jan 2022 20:37:40 +0000 (UTC)
+Received: by mail-lf1-f44.google.com with SMTP id x7so12983998lfu.8
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jan 2022 12:37:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:content-transfer-encoding:in-reply-to;
-        bh=x1K+9XuZnU2QXSiIOenVV/0BbioWKHd2vi7gWIUztz4=;
-        b=ZjDcbktQX1wrIfebPiKigKTZKneWJd4ErYnf1dt5pNy9Jtv+LToiiIVncgX0W4YBXJ
-         WHNrl6WoAOT5RHKyYTIRNkCY95mR+MSqAkbhxhgNxsoQ64IkTvrE4NpPR9/UJm4T40QM
-         Ib41oXpbBcJ34yd7Fu2m115MV2byinCv02T54=
+        d=linaro.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=SVNoxQMp637bgUGyLKUQMTT6jCUfGMhBKrAhjOzC1jA=;
+        b=Vw/hy5bg5C+CCYO+oJtgWYZCGRowuXfpuM1y/pli43kr+OiB3OWzkR6ZyW+nfXxt/s
+         VAn2AjX3mL+nlHsEF9z/pBhrlFgPcsEA0h1sAo1ZC4YcWsIWZ0jeb+wpDXa+U2omlUCF
+         pf/73OVbaBLU61/xMVSHktQI827IhnQn2hI4w8Tkbj/fmE8A6Xntpo4ktyfN/ATLaSyR
+         OmbGO1wuYpDN6JCPJ6apqXqpoeOCB/ZbqWFXSeJZIDyaqZ4S0vxFtOgFaUm3xw+cnlGx
+         I1oFnxocUDYadU9R73MgSd6PbQAJyeaWf6JpFnbLe1rT3w0y4YtI4EsZ5WHxq0hL/Blm
+         wwzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:content-transfer-encoding
-         :in-reply-to;
-        bh=x1K+9XuZnU2QXSiIOenVV/0BbioWKHd2vi7gWIUztz4=;
-        b=7yZ0/APEBZ4jH1UwbE4UsmiFQOj4endiHqauIXeMWKZClExtOQl9bsZ87kB5h8gjUR
-         jtfBPLW9E6rht0CGbkN2G5Zw1Wj1qUhebfH55dm6oeTP1DIWTXdaNJ9WvZhc6SUZYCzW
-         EGSizgC6HjKA2yYEnMNHV36ek/zLoie+TwTevpFs0nZMMB3Cn8j9hoEBq/Xj9Sgq/KFg
-         qHeJ1Vitq33GnJND0/IRavdhuvhIaMAf31hOnOe0SZ2Pp7t/7wyjiNnksGdx05Kc4vfH
-         UiuDmOAlNny5UktFpzwlDcC79TGG6GoBVTptSKcf85Qsg1hfMmjwsIuacW21hPow9oWC
-         w5Nw==
-X-Gm-Message-State: AOAM531rGY0SkGlbVHYdsbjxYqivqbyMnxUEIsDSFc1va3qBIyczzti/
-	qt8kv1fAiFqdobzPokREs6cTow==
-X-Google-Smtp-Source: ABdhPJwpJ/+gWlQUuTp3j3mXrLlbARjuqjVzw39wNQS0Ltl/R0eyrvLAkK+eazHap9QqPxuGOwVN3Q==
-X-Received: by 2002:a05:600c:2216:: with SMTP id z22mr4628205wml.119.1642612801812;
-        Wed, 19 Jan 2022 09:20:01 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id x13sm427589wru.28.2022.01.19.09.20.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Jan 2022 09:20:01 -0800 (PST)
-Date: Wed, 19 Jan 2022 18:19:59 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YehIP4zMfcO79Zrl@phenom.ffwll.local>
-References: <20220119134339.3102-1-christian.koenig@amd.com>
- <20220119134339.3102-4-christian.koenig@amd.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=SVNoxQMp637bgUGyLKUQMTT6jCUfGMhBKrAhjOzC1jA=;
+        b=x/0eKdxMPHpH2yZWxNRN6QPg9TDgBenxN4fXuCgilN/atEb4oCnX08cjk+dvmHYfGv
+         LgpFYJhpO7mahPMUoqEJ9OTQ/f7ndR4khYQ7IGnGCeh10R7L9/sXIfVmw+nIl2GKktdS
+         0xs8tFTLsaZJ0GAbmhiMc5+CZHiyqN461IWHqqKMkzRie5GyYr/mMD0GmgdXqwPllhX+
+         hzRogggpzWtkeyo298OSJCurk4Fhrnh5BmJfQZIc7ypgWmYF5RG2woPiD7Y/lmWuPzDa
+         rZps9K9sTIZq28TYRPd3rgRk98hehdxPpw12x1ilMzTCmI+UYuF19aV0xcHuC/MXYQyQ
+         0XWg==
+X-Gm-Message-State: AOAM531O4vocGFX9DeFJDcsx55/7aqnPmrnJvVYDfeLdadgwh3ZDLjdS
+	/j3u+zZEGamE/cL308JOmFbglOuJNHbrokKCJqm9mfm4
+X-Google-Smtp-Source: ABdhPJwjspQiMNHOBlTaaj+hdTY9hJrpsFobebo94UsQ78o3vrS70VesOp4vSiK9m1G+NqmP7oa+dvJBc2Sn675qSo0=
+X-Received: by 2002:a05:6512:329b:: with SMTP id p27mr30040874lfe.36.1642624659492;
+ Wed, 19 Jan 2022 12:37:39 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220119134339.3102-4-christian.koenig@amd.com>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Message-ID-Hash: EHRXGRC5Z3FSLR33IAHOM4434KFQS33L
-X-Message-ID-Hash: EHRXGRC5Z3FSLR33IAHOM4434KFQS33L
-X-MailFrom: daniel@ffwll.ch
+References: <CAO_48GF=ttKqSOm9GRoA3Mq+-RQOtRjWp449XPcz-wH=kjaTjw@mail.gmail.com>
+ <20220113123406.11520-1-guangming.cao@mediatek.com> <4f88205c1b344aea8608960e2f85b8f4@intel.com>
+ <e657f5257cbf4955817b0bbf037de9f9@intel.com> <24157767-dc29-bbdd-5428-d89ecc6b9606@amd.com>
+ <CALAqxLXRtYDNQ8y1efVGa4SwUH_oAaHviZFjsOVSNFmUHnCCeQ@mail.gmail.com>
+ <6b8182a1-7cdc-7369-5c34-e6d0c24efcca@amd.com> <82faa62f1bc946cf2f9ee2f7d15c567162238eab.camel@mediatek.com>
+ <CALAqxLUSjHoLpgFLcvqmDfv7Uip2VwHS5d_5x2nzw=P3rA2NDA@mail.gmail.com> <f09938519f1fcf51f20a0de5eb4063b0ff1a1e87.camel@mediatek.com>
+In-Reply-To: <f09938519f1fcf51f20a0de5eb4063b0ff1a1e87.camel@mediatek.com>
+From: John Stultz <john.stultz@linaro.org>
+Date: Wed, 19 Jan 2022 12:37:27 -0800
+Message-ID: <CALAqxLUtK8V9LgC-DY+tkzFYyWfzF+JhbrLZk6UhEG57HQBDSA@mail.gmail.com>
+To: "Guangming.Cao" <guangming.cao@mediatek.com>
+Message-ID-Hash: YFSBBTK746KSOIP7LKH2S7LCJ6KEAUL2
+X-Message-ID-Hash: YFSBBTK746KSOIP7LKH2S7LCJ6KEAUL2
+X-MailFrom: john.stultz@linaro.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: gustavo@padovan.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, "Ruhl, Michael J" <michael.j.ruhl@intel.com>, "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, "wsd_upstream@mediatek.com" <wsd_upstream@mediatek.com>, "libo.kang@mediatek.com" <libo.kang@mediatek.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "yf.wang@mediatek.com" <yf.wang@mediatek.com>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>, "lmark@codeaurora.org" <lmark@codeaurora.org>, "benjamin.gaignard@linaro.org" <benjamin.gaignard@linaro.org>, "bo.song@mediatek.com" <bo.song@mediatek.com>, "matthias.bgg@gmail.com" <matthias.bgg@gmail.com>, "labbott@redhat.com" <labbott@redhat.com>, "mingyuan.ma@mediatek.com" <mingyuan.ma@mediatek.com>, "jianjiao.zeng@mediatek.com" <jianjiao.zeng@mediatek.com>, "linux-media@v
+ ger.kernel.org" <linux-media@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 4/4] dma-buf: warn about containers in dma_resv object
+Subject: [Linaro-mm-sig] Re: [PATCH v3] dma-buf: dma-heap: Add a size check for allocation
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EHRXGRC5Z3FSLR33IAHOM4434KFQS33L/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YFSBBTK746KSOIP7LKH2S7LCJ6KEAUL2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jan 19, 2022 at 02:43:39PM +0100, Christian K=F6nig wrote:
-> Drivers should not add containers as shared fences to the dma_resv
-> object, instead each fence should be added individually.
->=20
-> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
-> ---
->  drivers/dma-buf/dma-resv.c | 5 +++++
->  1 file changed, 5 insertions(+)
->=20
-> diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/dma-resv.c
-> index 6dd9a40b55d4..e8a0c1d51da2 100644
-> --- a/drivers/dma-buf/dma-resv.c
-> +++ b/drivers/dma-buf/dma-resv.c
-> @@ -256,6 +256,11 @@ void dma_resv_add_shared_fence(struct dma_resv *obj,=
- struct dma_fence *fence)
-> =20
->  	dma_resv_assert_held(obj);
-> =20
-> +	/* Drivers should not add containers here, instead add each fence
-> +	 * individually.
-> +	 */
-> +	WARN_ON(dma_fence_is_container(fence));
+On Wed, Jan 19, 2022 at 1:58 AM Guangming.Cao
+<guangming.cao@mediatek.com> wrote:
+> On Fri, 2022-01-14 at 17:17 -0800, John Stultz wrote:
+> > If the max value is per-heap, why not enforce that value in the
+> > per-heap allocation function?
+> >
+> > Moving the check to the heap alloc to me seems simpler to me than
+> > adding complexity to the infrastructure to add a heap max_size
+> > callback. Is there some other use for the callback that you envision?
+> >
+>
+> If you think max the value is per-heap, why not add an optional
+> callback for dma-heap to solve this issue(prevent consuming too much
+> time for a doomed to fail allocation), if the dma-heap doesn't have a
+> special size check, just use the default value(totalram) in dma-heap
+> framework to do the size check.
 
-I'm honestly not sure whether this could go boom, so good if we push this
-asap and let it soak in linux-next for the entire release cycle.
+As the totalram default isn't correct for all heaps (or necessarily
+even most heaps), so those heaps would need to implement the callback.
 
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+I'm just not sure adding complexity to the framework to address this
+is useful. Instead of an additional check in the allocation function,
+heap implementers will need to assess if the default logic in a
+framework is correct, and then possibly implement the callback.
 
-On the change itself, we'll see what it brings.
--Daniel
+> Yes, for linux dma-heaps, only system-heap needs it, so adding it in
+> system heap is the simplest. However, there are many vendor dma-heaps
+> like system-heap which won't be uploaded to linux codebase, and maybe
+> have same limitation, all these heaps need to add the same limitation.
 
-> +
->  	fobj =3D dma_resv_shared_list(obj);
->  	count =3D fobj->shared_count;
-> =20
-> --=20
-> 2.25.1
->=20
+My worry is that without seeing these vendor heaps, this is a bit of a
+theoretical concern. We don't have the data on how common this is.
+I very much hope that vendors can start submitting their heaps
+upstream (along with drivers that benefit from the heaps). Then we can
+really assess what makes the most sense for the community maintained
+code.
 
---=20
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+
+> I just think it's boring. However, If you think discussing these absent
+> cases based on current linux code is meaningless, I also agree to it.
+
+So, as a rule, the upstream kernel doesn't create/maintain logic to
+accommodate out of tree code.
+
+Now, I agree there is the potential for some duplication in the checks
+in the allocation logic, but until it affects the upstream kernel,
+community maintainers can't really make an appropriate evaluation.
+
+As a contra-example, if the allocation is some extreme hotpath, adding
+an extra un-inlinable function pointer traversal for the size callback
+may actually have a negative impact. This isn't likely but again, if
+we cannot demonstrate it one way or the other against the upstream
+tree, we can't figure out what the best solution might be.
+
+
+> So, to summarize, if you still think adding it in system_heap.c is
+> better, I also agree and I will update the patch to add it in
+> system_heap.c
+
+I think this is the best solution for now. As this is not part of an
+userland ABI, we can always change it in the future once we see the
+need.
+
+thanks
+-john
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
