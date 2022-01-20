@@ -2,35 +2,68 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4341C494E92
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 20 Jan 2022 14:04:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EA83494EEA
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 20 Jan 2022 14:28:04 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6E4213EE99
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 20 Jan 2022 13:04:30 +0000 (UTC)
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
-	by lists.linaro.org (Postfix) with ESMTPS id 3C52A3ED26
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 20 Jan 2022 13:04:19 +0000 (UTC)
-Received: by verein.lst.de (Postfix, from userid 2407)
-	id A98F768BEB; Thu, 20 Jan 2022 14:04:15 +0100 (CET)
-Date: Thu, 20 Jan 2022 14:04:15 +0100
-From: Christoph Hellwig <hch@lst.de>
-To: syzbot <syzbot+d03b64357793677f0080@syzkaller.appspotmail.com>
-Message-ID: <20220120130415.GA10364@lst.de>
-References: <00000000000083ab5e05d6027f02@google.com>
+	by lists.linaro.org (Postfix) with ESMTP id 7742F3EEA2
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 20 Jan 2022 13:28:03 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 93B1F3ED26
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 20 Jan 2022 13:27:50 +0000 (UTC)
+Received: by mail-wm1-f48.google.com with SMTP id az27-20020a05600c601b00b0034d2956eb04so13672438wmb.5
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 20 Jan 2022 05:27:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=fg716y4MiLyyXQDO8h3nFRM6quSlb9x3KrUEMDa+vBM=;
+        b=URoTrhHmLIknwGRjipG8fwVJNbcTRTJNZg0brPQae0b5AtGytfOdXDEGKXYKgw6YJb
+         dpZdDFU0B0st4j0tKxMPpGMUddD3NXT1XopDR00DVxAAcesy+NmjQ7604W1EcW4Uv4oD
+         wJEQoEZAoXBeLsfuR18c/BRvQpHfi/+kHpjT3dgHucVA6JD+eE3Tbjl0hGweI0luVeWC
+         YcntrN8PyqFzxeg2Mb1/pWUfLWtPx+LBIC7aPXH3eJWuJ9WIWS04EixAJnR4Av5eCs3W
+         J9PM+sAUlcnunzmpN8bqbCrUfcETh/8AC9MvmkP4PWV3S3TJqPpS5C8qszIjFkELGm7q
+         /W6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=fg716y4MiLyyXQDO8h3nFRM6quSlb9x3KrUEMDa+vBM=;
+        b=Mt6SkznwbDqeoqtAUC0gfU8qlM44nxPGAHF2WxVRZnnJ6UY/KmnusFGavizi1WrOop
+         7zI86evqaODGowsAminPDdQlZy35GSop+lDNKnAeE8Cd5vSBkNdPdymzYefMhwIesPdp
+         ZcW+qBJ9OQAX7V/L0gMRq9MHiJuNj9a2ZM0r8G1fPLbzzgDPwY4KCY6OvfC4EhomHPNg
+         6WwFtb9PAKrc67dJaxOuyEHFJQ2c8RKMpNiLi3T3swFmnnLESOagyj/+Ck6SH+ksq5dD
+         QdOxXrmyMLWDobsUbg+ETixKuksxnbAAjww85HzQZvzCy93IrwIkEQxFntU5ftMV9BdU
+         euXw==
+X-Gm-Message-State: AOAM530R8e9KJ2DZCc8s5zlniFGoSrolKWxNV0N9gOsNW9i5MSbjt6ZN
+	7Di3mbQhwj4uFdyIrJ8gGV0=
+X-Google-Smtp-Source: ABdhPJyq3Wxk9a8Apw4i45euPrV9j5Rjus1JSRDx4JlL4eNcqp1z4o77N/YkC8RnngJeEmZhvwXtNg==
+X-Received: by 2002:a5d:64a3:: with SMTP id m3mr33769326wrp.36.1642685269640;
+        Thu, 20 Jan 2022 05:27:49 -0800 (PST)
+Received: from abel.fritz.box (p57b0bff8.dip0.t-ipconnect.de. [87.176.191.248])
+        by smtp.gmail.com with ESMTPSA id a9sm2658454wmm.32.2022.01.20.05.27.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Jan 2022 05:27:49 -0800 (PST)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+To: sumit.semwal@linaro.org,
+	gustavo@padovan.org,
+	daniel.vetter@ffwll.ch,
+	linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org
+Date: Thu, 20 Jan 2022 14:27:38 +0100
+Message-Id: <20220120132747.2348-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <00000000000083ab5e05d6027f02@google.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
-Message-ID-Hash: NZQHLAV6QMWLO5CGLJG4CFBKMYL7OB2C
-X-Message-ID-Hash: NZQHLAV6QMWLO5CGLJG4CFBKMYL7OB2C
-X-MailFrom: hch@lst.de
+Message-ID-Hash: IVBQY62D5RSU5RSNAMFXIIHILN4K43NQ
+X-Message-ID-Hash: IVBQY62D5RSU5RSNAMFXIIHILN4K43NQ
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: christian.koenig@amd.com, dri-devel@lists.freedesktop.org, hch@lst.de, iommu@lists.linux-foundation.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, robin.murphy@arm.com, syzkaller-bugs@googlegroups.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [syzbot] WARNING in dma_map_sgtable
+Subject: [Linaro-mm-sig] Enforce dma_fence container rules
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NZQHLAV6QMWLO5CGLJG4CFBKMYL7OB2C/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IVBQY62D5RSU5RSNAMFXIIHILN4K43NQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -40,77 +73,18 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-This means the DMA API is called on a not DMA capable device.  This
-needs fixing in the caller.
+Hi Daniel,
 
-On Thu, Jan 20, 2022 at 04:18:21AM -0800, syzbot wrote:
-> Hello,
-> 
-> syzbot found the following issue on:
-> 
-> HEAD commit:    e3a8b6a1e70c Merge tag 'slab-for-5.17-part2' of git://git...
-> git tree:       upstream
-> console output: https://syzkaller.appspot.com/x/log.txt?x=1507e01fb00000
-> kernel config:  https://syzkaller.appspot.com/x/.config?x=73c17fd2d4a060fe
-> dashboard link: https://syzkaller.appspot.com/bug?extid=d03b64357793677f0080
-> compiler:       Debian clang version 11.0.1-2, GNU ld (GNU Binutils for Debian) 2.35.2
-> 
-> Unfortunately, I don't have any reproducer for this issue yet.
-> 
-> IMPORTANT: if you fix the issue, please add the following tag to the commit:
-> Reported-by: syzbot+d03b64357793677f0080@syzkaller.appspotmail.com
-> 
-> ------------[ cut here ]------------
-> WARNING: CPU: 1 PID: 21150 at kernel/dma/mapping.c:188 __dma_map_sg_attrs kernel/dma/mapping.c:188 [inline]
-> WARNING: CPU: 1 PID: 21150 at kernel/dma/mapping.c:188 dma_map_sgtable+0x203/0x260 kernel/dma/mapping.c:264
-> Modules linked in:
-> CPU: 1 PID: 21150 Comm: syz-executor.5 Not tainted 5.16.0-syzkaller #0
-> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 01/01/2011
-> RIP: 0010:__dma_map_sg_attrs kernel/dma/mapping.c:188 [inline]
-> RIP: 0010:dma_map_sgtable+0x203/0x260 kernel/dma/mapping.c:264
-> Code: 75 15 e8 50 b2 13 00 eb cb e8 49 b2 13 00 eb c4 e8 42 b2 13 00 eb bd e8 3b b2 13 00 0f 0b bd fb ff ff ff eb af e8 2d b2 13 00 <0f> 0b 31 ed 48 bb 00 00 00 00 00 fc ff df e9 7b ff ff ff 89 e9 80
-> RSP: 0018:ffffc9000969fd20 EFLAGS: 00010287
-> RAX: ffffffff8171ee13 RBX: dffffc0000000000 RCX: 0000000000040000
-> RDX: ffffc900056f9000 RSI: 000000000000079b RDI: 000000000000079c
-> RBP: ffff888147437408 R08: ffffffff8171ece3 R09: ffffed100d4e6956
-> R10: ffffed100d4e6956 R11: 0000000000000000 R12: ffff888147437000
-> R13: ffff88806a734aa0 R14: 0000000000000000 R15: 0000000000000002
-> FS:  00007f009bbc7700(0000) GS:ffff8880b9b00000(0000) knlGS:0000000000000000
-> CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> CR2: 000055555641b108 CR3: 000000001901b000 CR4: 00000000003506e0
-> DR0: 0000000020000100 DR1: 0000000000000000 DR2: 0000000000000000
-> DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000600
-> Call Trace:
->  <TASK>
->  get_sg_table+0xfc/0x150 drivers/dma-buf/udmabuf.c:72
->  begin_cpu_udmabuf+0xf5/0x160 drivers/dma-buf/udmabuf.c:126
->  dma_buf_begin_cpu_access+0xd8/0x170 drivers/dma-buf/dma-buf.c:1164
->  dma_buf_ioctl+0x2a0/0x2f0 drivers/dma-buf/dma-buf.c:363
->  vfs_ioctl fs/ioctl.c:51 [inline]
->  __do_sys_ioctl fs/ioctl.c:874 [inline]
->  __se_sys_ioctl+0xfb/0x170 fs/ioctl.c:860
->  do_syscall_x64 arch/x86/entry/common.c:50 [inline]
->  do_syscall_64+0x44/0xd0 arch/x86/entry/common.c:80
->  entry_SYSCALL_64_after_hwframe+0x44/0xae
-> RIP: 0033:0x7f009d251fe9
-> Code: ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 bc ff ff ff f7 d8 64 89 01 48
-> RSP: 002b:00007f009bbc7168 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
-> RAX: ffffffffffffffda RBX: 00007f009d364f60 RCX: 00007f009d251fe9
-> RDX: 0000000020000040 RSI: 0000000040086200 RDI: 000000000000000b
-> RBP: 00007f009d2ac08d R08: 0000000000000000 R09: 0000000000000000
-> R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
-> R13: 00007ffc7751fd4f R14: 00007f009bbc7300 R15: 0000000000022000
->  </TASK>
-> 
-> 
-> ---
-> This report is generated by a bot. It may contain errors.
-> See https://goo.gl/tpsmEJ for more information about syzbot.
-> syzbot engineers can be reached at syzkaller@googlegroups.com.
-> 
-> syzbot will keep track of this issue. See:
-> https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
----end quoted text---
+second version of this set.
+
+I've kept the fence ops exported for now since there are indeed valid uses in the drm_syncobj implementation which needs a more wider rework.
+
+But quite a bunch of cases in i915, one in amdgpu and another one in vmwgfx are cleaned up at the end of this series now.
+
+Please review and comment,
+Christian.
+
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
