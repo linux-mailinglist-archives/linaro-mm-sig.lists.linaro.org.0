@@ -2,110 +2,97 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC3F54B6433
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 08:20:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 905D74B6434
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 08:20:49 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DDEE0401EB
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 07:20:43 +0000 (UTC)
-Received: from zg8tmtyylji0my4xnjeumjiw.icoremail.net (zg8tmtyylji0my4xnjeumjiw.icoremail.net [162.243.161.220])
-	by lists.linaro.org (Postfix) with SMTP id 267893EE0C
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 21 Jan 2022 05:33:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=fudan.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-Id:MIME-Version:Content-Transfer-Encoding; bh=HX9Za2e1JM
-	g4jxUgjH8Yl50bM6liwnW3gcJPuVFZ+TQ=; b=EaOuY7OHip6dQx9325GLcFKa/z
-	fXp9uZg3VSiAvRIYNR4vLl85GjZOvI4p/EIo5MBGHtsfJUdRMzHvx7KGzrexLh+5
-	oJQE4CDvA54Rs551iyD29eEd+ln9vEjVceHgFrYwGFVByKJVbTmROXq8quq6eKTB
-	oaIu+42ZblfYMDwP8=
-Received: from localhost.localdomain (unknown [111.192.165.103])
-	by app1 (Coremail) with SMTP id XAUFCgAXLsLVROphhGc_AA--.2130S4;
-	Fri, 21 Jan 2022 13:30:02 +0800 (CST)
-From: Xin Xiong <xiongx18@fudan.edu.cn>
-To: Alex Deucher <alexander.deucher@amd.com>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	"Pan, Xinhui" <Xinhui.Pan@amd.com>,
-	David Airlie <airlied@linux.ie>,
-	Daniel Vetter <daniel@ffwll.ch>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	amd-gfx@lists.freedesktop.org,
-	dri-devel@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org,
-	linux-media@vger.kernel.org,
-	linaro-mm-sig@lists.linaro.org
-Date: Fri, 21 Jan 2022 13:28:28 +0800
-Message-Id: <20220121052827.4384-1-xiongx18@fudan.edu.cn>
-X-Mailer: git-send-email 2.25.1
+	by lists.linaro.org (Postfix) with ESMTP id C8467402E3
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 07:20:48 +0000 (UTC)
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by lists.linaro.org (Postfix) with ESMTPS id 2C7903EE0C
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 21 Jan 2022 07:31:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1642750280; x=1674286280;
+  h=message-id:date:mime-version:subject:to:references:from:
+   in-reply-to:content-transfer-encoding;
+  bh=ASOROsILjd0PMR1PX1r+grUH0Atx+d5KkMA1O6KZxbA=;
+  b=f9KIFVLjq8/ZI48DdMeq8AyV2fPGlXlTtb8JyCNMo8kynbyyz8srLzBQ
+   DnJEQyiiEW/R88PGzKjnnP0no2XXnQHi2TrJU6HbB80bngVJ8hMC+kb7e
+   VY3tRbPrHWaZLW93EN+Xl+cYL59L8NCy4Pe7/jL27+VNoQCxPnOuAs8lc
+   G/EO1t+OaRfWZLzzs9n6EdqB1Sboys+KtRZdeZAZvtS989+0kij8SvvYW
+   8UcIUQZFTRfeIXKXu90wGOD6xL/UUnTBvfMD6UZjql09+vqAEYxqbqVqT
+   yELXI3DMey7GL7pOtyVD9sef9/t/S/2uWWGJ5CH8zLYtwlQoZLbK6rgmA
+   Q==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10233"; a="244407969"
+X-IronPort-AV: E=Sophos;i="5.88,304,1635231600";
+   d="scan'208";a="244407969"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jan 2022 23:31:17 -0800
+X-IronPort-AV: E=Sophos;i="5.88,304,1635231600";
+   d="scan'208";a="533167635"
+Received: from hekner-mobl5.ger.corp.intel.com (HELO [10.249.254.132]) ([10.249.254.132])
+  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jan 2022 23:31:15 -0800
+Message-ID: <be78e61c-992c-4fa6-7a2b-b9b93310a34d@linux.intel.com>
+Date: Fri, 21 Jan 2022 08:31:12 +0100
 MIME-Version: 1.0
-X-CM-TRANSID: XAUFCgAXLsLVROphhGc_AA--.2130S4
-X-Coremail-Antispam: 1UD129KBjvdXoWruw48Cr48Zr1kJr1fAry8AFb_yoWDCFb_Gr
-	W8XrnrXr1ayF1qqFnFvw4rZw1ayF43uF4kGr1Sq34Sqry2v3yUtryDXrnxWF1furs7GFyD
-	Zan8ur95Z3ZxKjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUIcSsGvfJTRUUUbfxFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
-	6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
-	A2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j
-	6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
-	Cq3wAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
-	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr
-	1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IE
-	rcIFxwACI402YVCY1x02628vn2kIc2xKxwCY02Avz4vE14v_GrWl42xK82IYc2Ij64vIr4
-	1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
-	67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
-	8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAv
-	wI8IcIk0rVWrZr1j6s0DMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxV
-	AFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JU94SOUUUUU=
-X-CM-SenderInfo: arytiiqsuqiimz6i3vldqovvfxof0/1tbiAhANEFKp2iYsDwAAsr
-X-MailFrom: xiongx18@fudan.edu.cn
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.0
+Content-Language: en-US
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ sumit.semwal@linaro.org, gustavo@padovan.org, daniel.vetter@ffwll.ch,
+ linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linaro-mm-sig@lists.linaro.org
+References: <20220120132747.2348-1-christian.koenig@amd.com>
+ <20220120132747.2348-3-christian.koenig@amd.com>
+From: =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>
+In-Reply-To: <20220120132747.2348-3-christian.koenig@amd.com>
+X-MailFrom: thomas.hellstrom@linux.intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: VWI332OJI6F77BNLWB2Z5JEHLEJPNPYL
-X-Message-ID-Hash: VWI332OJI6F77BNLWB2Z5JEHLEJPNPYL
-X-Mailman-Approved-At: Tue, 15 Feb 2022 07:20:16 +0000
-CC: yuanxzhang@fudan.edu.cn, Xin Xiong <xiongx18@fudan.edu.cn>, Xin Tan <tanxin.ctf@gmail.com>
+Message-ID-Hash: PFBNY5MF4I6YWQY5OKBD732F3IR5CTCK
+X-Message-ID-Hash: PFBNY5MF4I6YWQY5OKBD732F3IR5CTCK
+X-Mailman-Approved-At: Tue, 15 Feb 2022 07:20:18 +0000
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] drm/amd/amdgpu/amdgpu_cs: fix refcount leak of a dma_fence obj
+Subject: [Linaro-mm-sig] Re: [PATCH 2/9] dma-buf: warn about dma_fence_array container rules
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VWI332OJI6F77BNLWB2Z5JEHLEJPNPYL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PFBNY5MF4I6YWQY5OKBD732F3IR5CTCK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-This issue takes place in an error path in
-amdgpu_cs_fence_to_handle_ioctl(). When `info->in.what` falls into
-default case, the function simply returns -EINVAL, forgetting to
-decrement the reference count of a dma_fence obj, which is bumped
-earlier by amdgpu_cs_get_fence(). This may result in reference count
-leaks.
-
-Fix it by decreasing the refcount of specific object before returning
-the error code.
-
-Signed-off-by: Xin Xiong <xiongx18@fudan.edu.cn>
-Signed-off-by: Xin Tan <tanxin.ctf@gmail.com>
----
- drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c
-index 0311d799a..894869789 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c
-@@ -1510,6 +1510,7 @@ int amdgpu_cs_fence_to_handle_ioctl(struct drm_device *dev, void *data,
- 		return 0;
- 
- 	default:
-+		dma_fence_put(fence);
- 		return -EINVAL;
- 	}
- }
--- 
-2.25.1
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+DQpPbiAxLzIwLzIyIDE0OjI3LCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPiBJdCdzIG5vdCBh
+bGxvd2VkIHRvIG5lc3QgYW5vdGhlciBkbWFfZmVuY2UgY29udGFpbmVyIGludG8gYSBkbWFfZmVu
+Y2VfYXJyYXkNCj4gb3Igb3RoZXJ3aXNlIHdlIGNhbiBydW4gaW50byByZWN1cnNpb24uDQo+DQo+
+IFdhcm4gYWJvdXQgdGhhdCB3aGVuIHdlIGNyZWF0ZSBhIGRtYV9mZW5jZV9hcnJheS4NCj4NCj4g
+U2lnbmVkLW9mZi1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29t
+Pg0KPiBSZXZpZXdlZC1ieTogRGFuaWVsIFZldHRlciA8ZGFuaWVsLnZldHRlckBmZndsbC5jaD4N
+Cj4gLS0tDQo+ICAgZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS1hcnJheS5jIHwgMTMgKysrKysr
+KysrKysrKw0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAxMyBpbnNlcnRpb25zKCspDQo+DQo+IGRpZmYg
+LS1naXQgYS9kcml2ZXJzL2RtYS1idWYvZG1hLWZlbmNlLWFycmF5LmMgYi9kcml2ZXJzL2RtYS1i
+dWYvZG1hLWZlbmNlLWFycmF5LmMNCj4gaW5kZXggM2UwN2Y5NjFlMmYzLi40YmZiY2I4ODViYmMg
+MTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UtYXJyYXkuYw0KPiArKysg
+Yi9kcml2ZXJzL2RtYS1idWYvZG1hLWZlbmNlLWFycmF5LmMNCj4gQEAgLTE3Niw2ICsxNzYsMTkg
+QEAgc3RydWN0IGRtYV9mZW5jZV9hcnJheSAqZG1hX2ZlbmNlX2FycmF5X2NyZWF0ZShpbnQgbnVt
+X2ZlbmNlcywNCj4gICANCj4gICAJYXJyYXktPmJhc2UuZXJyb3IgPSBQRU5ESU5HX0VSUk9SOw0K
+PiAgIA0KPiArCS8qIGRtYV9mZW5jZV9hcnJheSBvYmplY3RzIHNob3VsZCBuZXZlciBjb250YWlu
+IGFueSBvdGhlciBmZW5jZQ0KTml0OiBGaXJzdCBjb21tZW50IGxpbmUgb2YgbXVsdGktbGluZSBj
+b21tZW50cyBzaG91bGRuJ3QgY29udGFpbiB0ZXh0Lg0KPiArCSAqIGNvbnRhaW5lcnMgb3Igb3Ro
+ZXJ3aXNlIHdlIHJ1biBpbnRvIHJlY3Vyc2lvbiBhbmQgcG90ZW50aWFsIGtlcm5lbA0KPiArCSAq
+IHN0YWNrIG92ZXJmbG93IG9uIG9wZXJhdGlvbnMgb24gdGhlIGRtYV9mZW5jZV9hcnJheS4NCj4g
+KwkgKg0KPiArCSAqIFRoZSBjb3JyZWN0IHdheSBvZiBoYW5kbGluZyB0aGlzIGlzIHRvIGZsYXR0
+ZW4gb3V0IHRoZSBhcnJheSBieSB0aGUNCj4gKwkgKiBjYWxsZXIgaW5zdGVhZC4NCj4gKwkgKg0K
+PiArCSAqIEVuZm9yY2UgdGhpcyBoZXJlIGJ5IGNoZWNraW5nIHRoYXQgd2UgZG9uJ3QgY3JlYXRl
+IGEgZG1hX2ZlbmNlX2FycmF5DQo+ICsJICogd2l0aCBhbnkgY29udGFpbmVyIGluc2lkZS4NCj4g
+KwkgKi8NCj4gKwl3aGlsZSAoc2Vxbm8tLSkNCj4gKwkJV0FSTl9PTihkbWFfZmVuY2VfaXNfY29u
+dGFpbmVyKGZlbmNlc1tzZXFub10pKTsNCj4gKw0KDQpzL3NlcW5vL251bV9mZW5jZXMvZyA/DQoN
+ClRoYW5rcywNCg0KVGhvbWFzDQoNCg0KDQo+ICAgCXJldHVybiBhcnJheTsNCj4gICB9DQo+ICAg
+RVhQT1JUX1NZTUJPTChkbWFfZmVuY2VfYXJyYXlfY3JlYXRlKTsNCg0KX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxp
+c3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQg
+YW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
