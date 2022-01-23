@@ -2,45 +2,45 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD040497246
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 23 Jan 2022 15:50:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25931497249
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 23 Jan 2022 15:53:57 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B5C4D401BF
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 23 Jan 2022 14:50:34 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 53E753EE40
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 23 Jan 2022 14:53:56 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 766193EB7E
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 23 Jan 2022 14:50:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id AB6543EB7E
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 23 Jan 2022 14:53:47 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id 0156E60DD9;
-	Sun, 23 Jan 2022 14:50:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3FBC0C340E2;
-	Sun, 23 Jan 2022 14:50:24 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 54BE260DEF;
+	Sun, 23 Jan 2022 14:53:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 143BFC340E5;
+	Sun, 23 Jan 2022 14:53:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1642949424;
-	bh=SFOfDmogPLPC2mCQZ716kZK8KpO86XnRwzUjDwZ/Grc=;
+	s=korg; t=1642949626;
+	bh=NlqeqdlzZkwmSO6UBqpoKdysTSPFuzO+t4FlaSqxRD4=;
 	h=Subject:To:Cc:From:Date:From;
-	b=OCXjr/crIizBk21iDcrBSa+iRdJnrWWIoAjU23dOxFdVReXBO8qJWfEil2OdEXhPw
-	 yWwI8YcZlg/mOKQQdWYPUw9EqZaqY+NXHXIKL4h0D+P9UVVxVy83cp66IJRVedvNBi
-	 LyfbIrm5ZzV/Gx58dBCJxaQaXYtOU5jNFWudSELQ=
+	b=Ytj8QrVHIIaNUmGpVcoNBt7kzBMDDP3T0iA6dV2J0JP/Q8MedZ4A9W1tzxawlC56t
+	 KpwU6AMAnvBiBzPPLT3i7FdxyVskOVCuk0G4sozyjZONpv72obqByGxqJsVcPp2hby
+	 fBg4kx/TpCfCnx2tgCzziHEv3/z1L/13iN3d5/1Y=
 To: chris@chris-wilson.co.uk,christian.koenig@amd.com,dri-devel@lists.freedesktop.org,gregkh@linuxfoundation.org,gustavo@padovan.org,linaro-mm-sig@lists.linaro.org,sumit.semwal@linaro.org,thomas.hellstrom@linux.intel.com
 From: <gregkh@linuxfoundation.org>
-Date: Sun, 23 Jan 2022 15:49:55 +0100
-Message-ID: <1642949395182235@kroah.com>
+Date: Sun, 23 Jan 2022 15:52:20 +0100
+Message-ID: <1642949540167146@kroah.com>
 MIME-Version: 1.0
 X-stable: commit
 X-Patchwork-Hint: ignore 
-Message-ID-Hash: NUGGBXA4ZECRB4BRVH5SLIPTR5IAJRFT
-X-Message-ID-Hash: NUGGBXA4ZECRB4BRVH5SLIPTR5IAJRFT
+Message-ID-Hash: TBYQG3NLI6TKJL5QGDVUAQIEATR5J5DO
+X-Message-ID-Hash: TBYQG3NLI6TKJL5QGDVUAQIEATR5J5DO
 X-MailFrom: gregkh@linuxfoundation.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: stable-commits@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Patch "dma_fence_array: Fix PENDING_ERROR leak in dma_fence_array_signaled()" has been added to the 5.15-stable tree
+Subject: [Linaro-mm-sig] Patch "dma_fence_array: Fix PENDING_ERROR leak in dma_fence_array_signaled()" has been added to the 5.16-stable tree
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NUGGBXA4ZECRB4BRVH5SLIPTR5IAJRFT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TBYQG3NLI6TKJL5QGDVUAQIEATR5J5DO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -52,12 +52,12 @@ Content-Transfer-Encoding: base64
 
 DQpUaGlzIGlzIGEgbm90ZSB0byBsZXQgeW91IGtub3cgdGhhdCBJJ3ZlIGp1c3QgYWRkZWQgdGhl
 IHBhdGNoIHRpdGxlZA0KDQogICAgZG1hX2ZlbmNlX2FycmF5OiBGaXggUEVORElOR19FUlJPUiBs
-ZWFrIGluIGRtYV9mZW5jZV9hcnJheV9zaWduYWxlZCgpDQoNCnRvIHRoZSA1LjE1LXN0YWJsZSB0
+ZWFrIGluIGRtYV9mZW5jZV9hcnJheV9zaWduYWxlZCgpDQoNCnRvIHRoZSA1LjE2LXN0YWJsZSB0
 cmVlIHdoaWNoIGNhbiBiZSBmb3VuZCBhdDoNCiAgICBodHRwOi8vd3d3Lmtlcm5lbC5vcmcvZ2l0
 Lz9wPWxpbnV4L2tlcm5lbC9naXQvc3RhYmxlL3N0YWJsZS1xdWV1ZS5naXQ7YT1zdW1tYXJ5DQoN
 ClRoZSBmaWxlbmFtZSBvZiB0aGUgcGF0Y2ggaXM6DQogICAgIGRtYV9mZW5jZV9hcnJheS1maXgt
 cGVuZGluZ19lcnJvci1sZWFrLWluLWRtYV9mZW5jZV9hcnJheV9zaWduYWxlZC5wYXRjaA0KYW5k
-IGl0IGNhbiBiZSBmb3VuZCBpbiB0aGUgcXVldWUtNS4xNSBzdWJkaXJlY3RvcnkuDQoNCklmIHlv
+IGl0IGNhbiBiZSBmb3VuZCBpbiB0aGUgcXVldWUtNS4xNiBzdWJkaXJlY3RvcnkuDQoNCklmIHlv
 dSwgb3IgYW55b25lIGVsc2UsIGZlZWxzIGl0IHNob3VsZCBub3QgYmUgYWRkZWQgdG8gdGhlIHN0
 YWJsZSB0cmVlLA0KcGxlYXNlIGxldCA8c3RhYmxlQHZnZXIua2VybmVsLm9yZz4ga25vdyBhYm91
 dCBpdC4NCg0KDQo+RnJvbSA5NWQzNTgzODg4MGZiMDQwY2NiOWZlNGE0ODgxNmJkMGM4YjYyZGY1
@@ -98,7 +98,7 @@ dXJuIGZhbHNlOw0KKw0KKwlkbWFfZmVuY2VfYXJyYXlfY2xlYXJfcGVuZGluZ19lcnJvcihhcnJh
 eSk7DQorCXJldHVybiB0cnVlOw0KIH0NCiANCiBzdGF0aWMgdm9pZCBkbWFfZmVuY2VfYXJyYXlf
 cmVsZWFzZShzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSkNCg0KDQpQYXRjaGVzIGN1cnJlbnRseSBp
 biBzdGFibGUtcXVldWUgd2hpY2ggbWlnaHQgYmUgZnJvbSB0aG9tYXMuaGVsbHN0cm9tQGxpbnV4
-LmludGVsLmNvbSBhcmUNCg0KcXVldWUtNS4xNS9kbWFfZmVuY2VfYXJyYXktZml4LXBlbmRpbmdf
+LmludGVsLmNvbSBhcmUNCg0KcXVldWUtNS4xNi9kbWFfZmVuY2VfYXJyYXktZml4LXBlbmRpbmdf
 ZXJyb3ItbGVhay1pbi1kbWFfZmVuY2VfYXJyYXlfc2lnbmFsZWQucGF0Y2gNCl9fX19fX19fX19f
 X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGlu
 ZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBz
