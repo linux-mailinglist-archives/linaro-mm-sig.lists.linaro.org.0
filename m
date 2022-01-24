@@ -2,69 +2,62 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 856F34B647D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 08:38:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16EF84B647E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 08:39:06 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B77283EEC6
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 07:38:58 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
-	by lists.linaro.org (Postfix) with ESMTPS id 8E79F3ED68
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Jan 2022 08:19:59 +0000 (UTC)
-Received: by mail-wm1-f49.google.com with SMTP id 204so85986wmc.4
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Jan 2022 00:19:59 -0800 (PST)
+	by lists.linaro.org (Postfix) with ESMTP id 49C28401CA
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 07:39:05 +0000 (UTC)
+Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com [209.85.210.54])
+	by lists.linaro.org (Postfix) with ESMTPS id A95AB3ED68
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Jan 2022 08:20:29 +0000 (UTC)
+Received: by mail-ot1-f54.google.com with SMTP id v8-20020a9d6048000000b005960952c694so21163421otj.12
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Jan 2022 00:20:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=c28QaxpAfuOEDq8LtprBB/owZVWinCLNDU++tnPYx8Y=;
-        b=TOc2vC6Sez7B1OJIVhWGrBW+xzr1cTbg1+AY2tKmzzXEd1JTBeTnU5ks/NAzREDOPK
-         m2OidHWrFQtHf/Lac6tDSZaqjyZUGQIwUuFaZ2RQpmJEcFPmUa/n+781xW0RWPX3ajqq
-         nrrHUGXRWWcHmZgBMgQZrLAwPB0yyrZq2YWqKm779yZVIF9bvQoy7zXx5FwZAu7odzlP
-         XM3Y2GfW53kSDAPompeMzMuUUYPZp+i29x+pwYqqvaLnbI6VaD1YGG1HaS/uwpso/aB3
-         EJX0+25VLxPnV8AOsR+ad7Ay7vRFKi+LrfFcMPtr+l7zswHWyc/U+1m2ayUrU7SrracZ
-         B1+g==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Fe4pubot63aeTTcTlbwPRtQDcLp34onKse+sfKBfh3g=;
+        b=hbC0p1HgxcZOO8c4bWIlLFPNxwvCGs6Ub4zMCdalps8HkcEOtggdMiekbyEPh6BfgO
+         4uobjusmvFQj9LeEIgWb+tK8VZzkTQbdJg3hP/g+iEXPHcjv4rIUhbYxt+fJCq/5S7Vi
+         oMuTLRyLsaqtbdEbkL0wBWIpQpgMJpvm+atEfWH+rpt50zQOIYrh/tU2xqe5t1nRbizp
+         og7jrskWPDy65dLCj3eWex6wpg5E3BNSuplfpblwi6mf8pP16hdD8yqbb+833/0D7xew
+         FQvVS34vXLTiIvNxMpFSFwhu5F9+m50cxLEn6saAs4oyrzq4K1VTO0PkpqRktNVzql6p
+         et5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=c28QaxpAfuOEDq8LtprBB/owZVWinCLNDU++tnPYx8Y=;
-        b=EW+xRCLNpuU2/I6FuF62RPMHdHqfmBCu9UVMec0O9hhOeR3kq9TIigLeltDvOjMQq8
-         GTSSYZLcttRbB4DGEpUKLpFJ7T9FJfYXyAYOYj2Zk0QDH+gXbrSGiBjjsusDfgnzLb3L
-         jTEiSOwqBTU6uv67qwiVFk59cWh/MYEJEQZEFtg0OGm0L4N6ZVgQ7eA/biH8rd/Hha+l
-         a0d9eMRIm7a/kR98yrCIeOCWLugu4zUbtChuTMiza7qLLbigmVI9QpgdV/iMDZFNk4tp
-         mfTI+P6TIGLwnSsLysFNgMVjkU91GAX6rPpWfL3Lh650O+7+O3K3Qa79U4lvKtEo+USY
-         J+Ow==
-X-Gm-Message-State: AOAM533IYIb5vdJfLozXnvrmQo2mQ6Y0JnCDABieyWCTc5HTvUzHMnQA
-	OqGKYvNKdTbpAZqqa30vVibplA==
-X-Google-Smtp-Source: ABdhPJx4Pm2pD/O9ccohPZOobd6EDqFPWxBIGeLe+BNc/cqIvHMM7/KeZIO+u+4h+Wqp6jGjKjUAWg==
-X-Received: by 2002:a1c:3b08:: with SMTP id i8mr768071wma.52.1643012398399;
-        Mon, 24 Jan 2022 00:19:58 -0800 (PST)
-Received: from elver.google.com ([2a00:79e0:15:13:810c:fb1:faa0:df2])
-        by smtp.gmail.com with ESMTPSA id m5sm2460444wrs.22.2022.01.24.00.19.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 24 Jan 2022 00:19:57 -0800 (PST)
-Date: Mon, 24 Jan 2022 09:19:52 +0100
-From: Marco Elver <elver@google.com>
-To: Peng Liu <liupeng256@huawei.com>
-Message-ID: <Ye5hKItk3j7arjaI@elver.google.com>
-References: <20220124025205.329752-1-liupeng256@huawei.com>
- <20220124025205.329752-2-liupeng256@huawei.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Fe4pubot63aeTTcTlbwPRtQDcLp34onKse+sfKBfh3g=;
+        b=jcfB2fPQXYi4RD5Ad69TGPxeOY5L3Dnm96mHTuZKqSlw+twZ1Us83OZFroM16X81Fg
+         Hjd5BojbZnKx2HeRr7AQfUovL0VzOkCGMncax5LQR3CUpwVsssoC4VzybwFtn2O04HWN
+         13WwPtWDYM/J137MW1lsI4xFNyxEcCbxH3jMJ5BpX/zMaHf7/sY6audzVGdahqk9vy3I
+         gBWZyZ5SzLt1GlnLxMAz3p338YBSLG6QDyaCfjwHdQR3kReLUHJc+Z7y+MOv1pMsuQz8
+         RlTIo8PMwHP7tWMJ/cNQ0eZRmVqqOtiVIoMUd2bQGdnDHD1RlIsQ4MXdGG+s8ENAaDxb
+         w7tA==
+X-Gm-Message-State: AOAM533FVE8oTtBkOwBN6ZH2K4CuA+RK7C+4qHrmBIsR1oJn4ID05eCi
+	535YRZdrRdARSVyEaT6wjNhWBp4GQxjPsfS3E0VcvQ==
+X-Google-Smtp-Source: ABdhPJwOSQbPzFSjnMIC0k8eXN8NZWLSv40CjBpajvpNz8+4iCNlxNVEC0V+MQKJlFwrUD/QSe/IcXsddnFctH+E070=
+X-Received: by 2002:a9d:7053:: with SMTP id x19mr10625205otj.196.1643012428642;
+ Mon, 24 Jan 2022 00:20:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220124025205.329752-2-liupeng256@huawei.com>
-User-Agent: Mutt/2.1.4 (2021-12-11)
+References: <20220124025205.329752-1-liupeng256@huawei.com> <20220124025205.329752-3-liupeng256@huawei.com>
+In-Reply-To: <20220124025205.329752-3-liupeng256@huawei.com>
+From: Marco Elver <elver@google.com>
+Date: Mon, 24 Jan 2022 09:20:17 +0100
+Message-ID: <CANpmjNNBt8LazZMLH2_6rFc8u3bVpPNNyetV0fqmanwB5DLZPQ@mail.gmail.com>
+To: Peng Liu <liupeng256@huawei.com>
 X-MailFrom: elver@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: F5VCITWCUYDHT6OE6QJM4D2JRBOPAGRH
-X-Message-ID-Hash: F5VCITWCUYDHT6OE6QJM4D2JRBOPAGRH
-X-Mailman-Approved-At: Tue, 15 Feb 2022 07:38:37 +0000
+Message-ID-Hash: UICOQHM3RUZ3VVND227MH3NJWO4OXKEX
+X-Message-ID-Hash: UICOQHM3RUZ3VVND227MH3NJWO4OXKEX
+X-Mailman-Approved-At: Tue, 15 Feb 2022 07:38:39 +0000
 CC: glider@google.com, dvyukov@google.com, corbet@lwn.net, christian.koenig@amd.com, akpm@linux-foundation.org, kasan-dev@googlegroups.com, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 1/3] kfence: Add a module parameter to adjust kfence objects
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 2/3] kfence: Optimize branches prediction when sample interval is zero
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/F5VCITWCUYDHT6OE6QJM4D2JRBOPAGRH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UICOQHM3RUZ3VVND227MH3NJWO4OXKEX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -74,138 +67,84 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon, Jan 24, 2022 at 02:52AM +0000, Peng Liu wrote:
-> KFENCE is designed to be enabled in production kernels, but it can
-> be also useful in some debug situations. For machines with limited
-> memory and CPU resources, KASAN is really hard to run. Fortunately,
+On Mon, 24 Jan 2022 at 03:37, Peng Liu <liupeng256@huawei.com> wrote:
+>
+> In order to release a uniform kernel with KFENCE, it is good to
+> compile it with CONFIG_KFENCE_SAMPLE_INTERVAL = 0. For a group of
+> produtions who don't want to use KFENCE, they can use kernel just
+> as original vesion without KFENCE. For KFENCE users, they can open
+> it by setting the kernel boot parameter kfence.sample_interval.
+> Hence, set KFENCE sample interval default to zero is convenient.
+>
+> The current KFENCE is supportted to adjust sample interval via the
+> kernel boot parameter. However, branches prediction in kfence_alloc
+> is not good for situation with CONFIG_KFENCE_SAMPLE_INTERVAL = 0
+> and boot parameter kfence.sample_interval != 0, which is because
+> the current kfence_alloc is likely to return NULL when
+> CONFIG_KFENCE_SAMPLE_INTERVAL = 0. To optimize branches prediction
+> in this situation, kfence_enabled will check firstly.
 
-If these are arm64 based machines, see if CONFIG_KASAN_SW_TAGS works for
-you. In future, we believe that CONFIG_KASAN_HW_TAGS will be suitable
-for a variety of scenarios, including debugging scenarios of resource
-constrained environments.
+This patch doesn't make any sense. You're adding an unconditional LOAD
+to the fast path.
 
-> KFENCE can be a suitable candidate. For KFENCE running on a single
-> machine, the possibility of discovering existed bugs will increase
-> as the increasing of KFENCE objects, but this will cost more memory.
-> In order to balance the possibility of discovering existed bugs and
-> memory cost, KFENCE objects need to be adjusted according to memory
-> resources for a compiled kernel Image. Add a module parameter to
-> adjust KFENCE objects will make kfence to use in different machines
-> with the same kernel Image.
-> 
-> In short, the following reasons motivate us to add this parameter.
-> 1) In some debug situations, this will make kfence flexible.
-> 2) For some production machines with different memory and CPU size,
-> this will reduce the kernel-Image-version burden.
-[...]
-> This patch (of 3):
+And the choice of static_branch_unlikely() if
+CONFIG_KFENCE_SAMPLE_INTERVAL == 0 is very much deliberate, as it
+generates code that is preferable in the common case (KFENCE is
+disabled).
 
-[ Note for future: No need to add "This patch (of X)" usually -- this is
-  added by maintainers if deemed appropriate, and usually includes the
-  cover letter. ]
+Please see include/linux/jump_label.h:430. But even then, CPUs are
+very good at dealing with unconditional branches, so the difference
+really is a wash.
 
-> The most important motivation of this patch series is to make
-> KFENCE easy-to-use in business situations.
-> 
+But that new LOAD is not acceptable.
+
+Sorry, but Nack.
+
 > Signed-off-by: Peng Liu <liupeng256@huawei.com>
 > ---
->  Documentation/dev-tools/kfence.rst |  14 ++--
->  include/linux/kfence.h             |   3 +-
->  mm/kfence/core.c                   | 108 ++++++++++++++++++++++++-----
->  mm/kfence/kfence.h                 |   2 +-
->  mm/kfence/kfence_test.c            |   2 +-
->  5 files changed, 103 insertions(+), 26 deletions(-)
-[...]  
+>  include/linux/kfence.h | 5 ++++-
+>  mm/kfence/core.c       | 2 +-
+>  2 files changed, 5 insertions(+), 2 deletions(-)
+>
 > diff --git a/include/linux/kfence.h b/include/linux/kfence.h
-> index 4b5e3679a72c..aec4f6b247b5 100644
+> index aec4f6b247b5..bf91b76b87ee 100644
 > --- a/include/linux/kfence.h
 > +++ b/include/linux/kfence.h
-> @@ -17,12 +17,13 @@
+> @@ -17,6 +17,7 @@
 >  #include <linux/atomic.h>
 >  #include <linux/static_key.h>
->  
-> +extern unsigned long kfence_num_objects;
+>
+> +extern bool kfence_enabled;
+>  extern unsigned long kfence_num_objects;
 >  /*
 >   * We allocate an even number of pages, as it simplifies calculations to map
->   * address to metadata indices; effectively, the very first page serves as an
->   * extended guard page, but otherwise has no special purpose.
+> @@ -115,7 +116,9 @@ void *__kfence_alloc(struct kmem_cache *s, size_t size, gfp_t flags);
 >   */
-> -#define KFENCE_POOL_SIZE ((CONFIG_KFENCE_NUM_OBJECTS + 1) * 2 * PAGE_SIZE)
-> +#define KFENCE_POOL_SIZE ((kfence_num_objects + 1) * 2 * PAGE_SIZE)
->  extern char *__kfence_pool;
-
-I appreciate the effort, but you could have gotten a quicker answer if
-you had first sent us an email to ask why adjustable number of objects
-hasn't been done before. Because if it was trivial, we would have
-already done it.
-
-What you've done is turned KFENCE_POOL_SIZE into a function instead of a
-constant (it still being ALL_CAPS is now also misleading).
-
-This is important here:
-
-	/**
-	 * is_kfence_address() - check if an address belongs to KFENCE pool
-	 * @addr: address to check
-	 *
-	 * Return: true or false depending on whether the address is within the KFENCE
-	 * object range.
-	 *
-	 * KFENCE objects live in a separate page range and are not to be intermixed
-	 * with regular heap objects (e.g. KFENCE objects must never be added to the
-	 * allocator freelists). Failing to do so may and will result in heap
-	 * corruptions, therefore is_kfence_address() must be used to check whether
-	 * an object requires specific handling.
-	 *
-	 * Note: This function may be used in fast-paths, and is performance critical.
-	 * Future changes should take this into account; for instance, we want to avoid
-	 * introducing another load and therefore need to keep KFENCE_POOL_SIZE a
-	 * constant (until immediate patching support is added to the kernel).
-	 */
-	static __always_inline bool is_kfence_address(const void *addr)
-	{
-		/*
-		 * The __kfence_pool != NULL check is required to deal with the case
-		 * where __kfence_pool == NULL && addr < KFENCE_POOL_SIZE. Keep it in
-		 * the slow-path after the range-check!
-		 */
-		return unlikely((unsigned long)((char *)addr - __kfence_pool) < KFENCE_POOL_SIZE && __kfence_pool);
-	}
-
-Unfortunately I think you missed the "Note".
-
-Which means that ultimately your patch adds another LOAD to the fast
-path, which is not an acceptable trade-off.
-
-This would mean your change would require benchmarking, but it'd also
-mean we and everyone else would have to re-benchmark _all_ systems where
-we've deployed KFENCE.
-
-I think the only reasonable way forward is if you add immediate patching
-support to the kernel as the "Note" suggests.
-
-In the meantime, while not a single kernel imagine, we've found that
-debug scenarios usually are best served with a custom debug kernel, as
-there are other debug features that are only Kconfig configurable. Thus,
-having a special debug kernel just configure KFENCE differently
-shouldn't be an issue in the majority of cases.
-
-Should this answer not be satisfying for you, the recently added feature
-skipping already covered allocations (configurable via
-kfence.skip_covered_thresh) alleviates some of the issue of a smaller
-pool with a very low sample interval (viz. high sample rate).
-
-The main thing to watch out for is KFENCE's actual sample rate vs
-intended sample rate (per kfence.sample_interval). If you monitor
-/sys/kernel/debug/kfence/stats, you can compute the actual sample rate.
-If the actual sample rate becomes significantly lower than the intended
-rate, only then does it make sense to increase the pool size. My
-suggestion for you is therefore to run some experiments, while adjusting
-kfence.sample_interval and kfence.skip_covered_thresh until you reach a
-sample rate that is close to intended.
-
-Thanks,
--- Marco
+>  static __always_inline void *kfence_alloc(struct kmem_cache *s, size_t size, gfp_t flags)
+>  {
+> -#if defined(CONFIG_KFENCE_STATIC_KEYS) || CONFIG_KFENCE_SAMPLE_INTERVAL == 0
+> +       if (!kfence_enabled)
+> +               return NULL;
+> +#if defined(CONFIG_KFENCE_STATIC_KEYS)
+>         if (!static_branch_unlikely(&kfence_allocation_key))
+>                 return NULL;
+>  #else
+> diff --git a/mm/kfence/core.c b/mm/kfence/core.c
+> index 4655bcc0306e..2301923182b8 100644
+> --- a/mm/kfence/core.c
+> +++ b/mm/kfence/core.c
+> @@ -48,7 +48,7 @@
+>
+>  /* === Data ================================================================= */
+>
+> -static bool kfence_enabled __read_mostly;
+> +bool kfence_enabled __read_mostly;
+>
+>  static unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
+>
+> --
+> 2.18.0.huawei.25
+>
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
