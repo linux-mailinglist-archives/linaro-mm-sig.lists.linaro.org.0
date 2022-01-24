@@ -2,62 +2,62 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16EF84B647E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 08:39:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E51924B647F
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 08:39:11 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 49C28401CA
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 07:39:05 +0000 (UTC)
-Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com [209.85.210.54])
-	by lists.linaro.org (Postfix) with ESMTPS id A95AB3ED68
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Jan 2022 08:20:29 +0000 (UTC)
-Received: by mail-ot1-f54.google.com with SMTP id v8-20020a9d6048000000b005960952c694so21163421otj.12
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Jan 2022 00:20:29 -0800 (PST)
+	by lists.linaro.org (Postfix) with ESMTP id 2A54B3EEAE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 07:39:11 +0000 (UTC)
+Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
+	by lists.linaro.org (Postfix) with ESMTPS id 10E4D3ED8B
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Jan 2022 08:25:49 +0000 (UTC)
+Received: by mail-oi1-f180.google.com with SMTP id x193so24451956oix.0
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Jan 2022 00:25:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=Fe4pubot63aeTTcTlbwPRtQDcLp34onKse+sfKBfh3g=;
-        b=hbC0p1HgxcZOO8c4bWIlLFPNxwvCGs6Ub4zMCdalps8HkcEOtggdMiekbyEPh6BfgO
-         4uobjusmvFQj9LeEIgWb+tK8VZzkTQbdJg3hP/g+iEXPHcjv4rIUhbYxt+fJCq/5S7Vi
-         oMuTLRyLsaqtbdEbkL0wBWIpQpgMJpvm+atEfWH+rpt50zQOIYrh/tU2xqe5t1nRbizp
-         og7jrskWPDy65dLCj3eWex6wpg5E3BNSuplfpblwi6mf8pP16hdD8yqbb+833/0D7xew
-         FQvVS34vXLTiIvNxMpFSFwhu5F9+m50cxLEn6saAs4oyrzq4K1VTO0PkpqRktNVzql6p
-         et5g==
+        bh=K5Kon1fyx96zs+S9bI+PC9J+wxhNv56hJEaz7FbSFSE=;
+        b=eazm9+k5NrSkysNa4r0Etw/X4kuNIAgY2x0kj7nlI9lFPb6h4Xs6BwKJDPGQ+z3Y9P
+         2XjCpVQ99nUVkdVvIR+f7P6/KjIpbVESJnVrtlGzipUn5sYQJg5O2foAbtHA2EjbElPi
+         9Sj6z+OszOIDJT247jEQPO9zI+nSzuL79xivSwW1VtJSEA99a/QdKzN7Pamgsk7qOHk7
+         HmVcTzATtNIn2RIRXLLegt4OYVIJTQn9aQTaSJMta+mraS7Rv7MJM84g6Og7EQa+WqOl
+         hriMvAi26Qz3zrY1+keHAYUowvfb2AJqsVj2ApjjqNycg8KtiK7q9CcyOzvTZ8AEbRg7
+         VlKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=Fe4pubot63aeTTcTlbwPRtQDcLp34onKse+sfKBfh3g=;
-        b=jcfB2fPQXYi4RD5Ad69TGPxeOY5L3Dnm96mHTuZKqSlw+twZ1Us83OZFroM16X81Fg
-         Hjd5BojbZnKx2HeRr7AQfUovL0VzOkCGMncax5LQR3CUpwVsssoC4VzybwFtn2O04HWN
-         13WwPtWDYM/J137MW1lsI4xFNyxEcCbxH3jMJ5BpX/zMaHf7/sY6audzVGdahqk9vy3I
-         gBWZyZ5SzLt1GlnLxMAz3p338YBSLG6QDyaCfjwHdQR3kReLUHJc+Z7y+MOv1pMsuQz8
-         RlTIo8PMwHP7tWMJ/cNQ0eZRmVqqOtiVIoMUd2bQGdnDHD1RlIsQ4MXdGG+s8ENAaDxb
-         w7tA==
-X-Gm-Message-State: AOAM533FVE8oTtBkOwBN6ZH2K4CuA+RK7C+4qHrmBIsR1oJn4ID05eCi
-	535YRZdrRdARSVyEaT6wjNhWBp4GQxjPsfS3E0VcvQ==
-X-Google-Smtp-Source: ABdhPJwOSQbPzFSjnMIC0k8eXN8NZWLSv40CjBpajvpNz8+4iCNlxNVEC0V+MQKJlFwrUD/QSe/IcXsddnFctH+E070=
-X-Received: by 2002:a9d:7053:: with SMTP id x19mr10625205otj.196.1643012428642;
- Mon, 24 Jan 2022 00:20:28 -0800 (PST)
+        bh=K5Kon1fyx96zs+S9bI+PC9J+wxhNv56hJEaz7FbSFSE=;
+        b=tcnxc3srcs+Q6b1TTzFnAe83NBUEohUprUEE4YZiwrgAyOg2KMBiAqX0VPgxBCk74m
+         +ldEKiWvfN6CeNVgSylLgXfQmopuRJk/v7ac5UqnS5pHhOrZVZjpUa3MxtrMiHosnh0l
+         BabwQ6HR9n/JMtOLu+tPk++iboipJCFVMYDtpNwDWVogtbtL2q+ASPheQFHYo7wjn9Hu
+         wcgw/A5eMSSt6G5Eu+q1dTU/6GFql164dmyk1r8itXqaFWoKMqqpchVwIOAc4YViyA62
+         ojjlMFPb0R32sm5JZjzeqLO7fd8xCUyc0PLjlUEwFQAFx8fToWTiHQV5vCDrSvtpxgIM
+         nFcg==
+X-Gm-Message-State: AOAM5339lkkCWjgQbU/D+Twk0ZqKwOigO0fcxGtuJWKc39kjOShfrmOC
+	0KFLaGAlKri/HXuFBhV58aO7mjVsvS9R+xYY+8mjNA==
+X-Google-Smtp-Source: ABdhPJy/mCoQ+yHuD/GHeBHQU6ztq1bT+RAtkGasd/wxL3uYVGLEuF1Vk0VGXgNWZnYdPvLrGxKFp1OI8pKW7eAq7Iw=
+X-Received: by 2002:a05:6808:a97:: with SMTP id q23mr606047oij.4.1643012748254;
+ Mon, 24 Jan 2022 00:25:48 -0800 (PST)
 MIME-Version: 1.0
-References: <20220124025205.329752-1-liupeng256@huawei.com> <20220124025205.329752-3-liupeng256@huawei.com>
-In-Reply-To: <20220124025205.329752-3-liupeng256@huawei.com>
+References: <20220124025205.329752-1-liupeng256@huawei.com> <20220124025205.329752-4-liupeng256@huawei.com>
+In-Reply-To: <20220124025205.329752-4-liupeng256@huawei.com>
 From: Marco Elver <elver@google.com>
-Date: Mon, 24 Jan 2022 09:20:17 +0100
-Message-ID: <CANpmjNNBt8LazZMLH2_6rFc8u3bVpPNNyetV0fqmanwB5DLZPQ@mail.gmail.com>
+Date: Mon, 24 Jan 2022 09:25:36 +0100
+Message-ID: <CANpmjNNYG=izN12sqaB3dYbGmM=2yQ8gK=8_BMHkuoaKWMmYPw@mail.gmail.com>
 To: Peng Liu <liupeng256@huawei.com>
 X-MailFrom: elver@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: UICOQHM3RUZ3VVND227MH3NJWO4OXKEX
-X-Message-ID-Hash: UICOQHM3RUZ3VVND227MH3NJWO4OXKEX
-X-Mailman-Approved-At: Tue, 15 Feb 2022 07:38:39 +0000
+Message-ID-Hash: CZZVUEQSYJFLKFD3RGJEO2XBPBHTODQW
+X-Message-ID-Hash: CZZVUEQSYJFLKFD3RGJEO2XBPBHTODQW
+X-Mailman-Approved-At: Tue, 15 Feb 2022 07:38:41 +0000
 CC: glider@google.com, dvyukov@google.com, corbet@lwn.net, christian.koenig@amd.com, akpm@linux-foundation.org, kasan-dev@googlegroups.com, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 2/3] kfence: Optimize branches prediction when sample interval is zero
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 3/3] kfence: Make test case compatible with run time set sample interval
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UICOQHM3RUZ3VVND227MH3NJWO4OXKEX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CZZVUEQSYJFLKFD3RGJEO2XBPBHTODQW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -67,84 +67,59 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon, 24 Jan 2022 at 03:37, Peng Liu <liupeng256@huawei.com> wrote:
+On Mon, 24 Jan 2022 at 03:37, 'Peng Liu' via kasan-dev
+<kasan-dev@googlegroups.com> wrote:
 >
-> In order to release a uniform kernel with KFENCE, it is good to
-> compile it with CONFIG_KFENCE_SAMPLE_INTERVAL = 0. For a group of
-> produtions who don't want to use KFENCE, they can use kernel just
-> as original vesion without KFENCE. For KFENCE users, they can open
-> it by setting the kernel boot parameter kfence.sample_interval.
-> Hence, set KFENCE sample interval default to zero is convenient.
+> The parameter kfence_sample_interval can be set via boot parameter
+> and late shell command. However, KFENCE test case just use compile
+> time CONFIG_KFENCE_SAMPLE_INTERVAL, this will make KFENCE test case
+> not run as user desired. This patch will make KFENCE test case
+> compatible with run-time-set sample interval.
 >
-> The current KFENCE is supportted to adjust sample interval via the
-> kernel boot parameter. However, branches prediction in kfence_alloc
-> is not good for situation with CONFIG_KFENCE_SAMPLE_INTERVAL = 0
-> and boot parameter kfence.sample_interval != 0, which is because
-> the current kfence_alloc is likely to return NULL when
-> CONFIG_KFENCE_SAMPLE_INTERVAL = 0. To optimize branches prediction
-> in this situation, kfence_enabled will check firstly.
-
-This patch doesn't make any sense. You're adding an unconditional LOAD
-to the fast path.
-
-And the choice of static_branch_unlikely() if
-CONFIG_KFENCE_SAMPLE_INTERVAL == 0 is very much deliberate, as it
-generates code that is preferable in the common case (KFENCE is
-disabled).
-
-Please see include/linux/jump_label.h:430. But even then, CPUs are
-very good at dealing with unconditional branches, so the difference
-really is a wash.
-
-But that new LOAD is not acceptable.
-
-Sorry, but Nack.
-
 > Signed-off-by: Peng Liu <liupeng256@huawei.com>
 > ---
->  include/linux/kfence.h | 5 ++++-
->  mm/kfence/core.c       | 2 +-
->  2 files changed, 5 insertions(+), 2 deletions(-)
+>  include/linux/kfence.h  | 2 ++
+>  mm/kfence/core.c        | 3 ++-
+>  mm/kfence/kfence_test.c | 8 ++++----
+>  3 files changed, 8 insertions(+), 5 deletions(-)
 >
 > diff --git a/include/linux/kfence.h b/include/linux/kfence.h
-> index aec4f6b247b5..bf91b76b87ee 100644
+> index bf91b76b87ee..0fc913a7f017 100644
 > --- a/include/linux/kfence.h
 > +++ b/include/linux/kfence.h
-> @@ -17,6 +17,7 @@
->  #include <linux/atomic.h>
->  #include <linux/static_key.h>
+> @@ -19,6 +19,8 @@
 >
-> +extern bool kfence_enabled;
+>  extern bool kfence_enabled;
 >  extern unsigned long kfence_num_objects;
+> +extern unsigned long kfence_sample_interval;
+> +
 >  /*
 >   * We allocate an even number of pages, as it simplifies calculations to map
-> @@ -115,7 +116,9 @@ void *__kfence_alloc(struct kmem_cache *s, size_t size, gfp_t flags);
->   */
->  static __always_inline void *kfence_alloc(struct kmem_cache *s, size_t size, gfp_t flags)
->  {
-> -#if defined(CONFIG_KFENCE_STATIC_KEYS) || CONFIG_KFENCE_SAMPLE_INTERVAL == 0
-> +       if (!kfence_enabled)
-> +               return NULL;
-> +#if defined(CONFIG_KFENCE_STATIC_KEYS)
->         if (!static_branch_unlikely(&kfence_allocation_key))
->                 return NULL;
->  #else
+>   * address to metadata indices; effectively, the very first page serves as an
 > diff --git a/mm/kfence/core.c b/mm/kfence/core.c
-> index 4655bcc0306e..2301923182b8 100644
+> index 2301923182b8..e2fcae34cc84 100644
 > --- a/mm/kfence/core.c
 > +++ b/mm/kfence/core.c
-> @@ -48,7 +48,7 @@
+> @@ -50,7 +50,8 @@
 >
->  /* === Data ================================================================= */
+>  bool kfence_enabled __read_mostly;
 >
-> -static bool kfence_enabled __read_mostly;
-> +bool kfence_enabled __read_mostly;
->
->  static unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
->
-> --
-> 2.18.0.huawei.25
->
+> -static unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
+> +unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
+> +EXPORT_SYMBOL(kfence_sample_interval); /* Export for test modules. */
+
+While it would make some situations more convenient, I've wanted to
+avoid exporting a new symbol just for the test. And in most cases it
+only makes sense to run the test on a custom debug kernel.
+
+Why do you need this?
+
+Should you really need this, I suggest at least using
+EXPORT_SYMBOL_GPL. Should you want it, you can resend this patch
+standalone detached from the rest.
+
+Thanks,
+-- Marco
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
