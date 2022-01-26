@@ -2,142 +2,142 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E1E04B6488
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 08:39:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D0204B6489
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 08:40:01 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 850DB3EE71
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 07:39:55 +0000 (UTC)
-Received: from szxga08-in.huawei.com (szxga08-in.huawei.com [45.249.212.255])
-	by lists.linaro.org (Postfix) with ESMTPS id DDD113ECC4
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Jan 2022 12:13:02 +0000 (UTC)
-Received: from kwepemi100008.china.huawei.com (unknown [172.30.72.53])
-	by szxga08-in.huawei.com (SkyGuard) with ESMTP id 4JkMvj3dtXz1FD5B;
-	Wed, 26 Jan 2022 20:09:05 +0800 (CST)
-Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
- kwepemi100008.china.huawei.com (7.221.188.57) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Wed, 26 Jan 2022 20:12:59 +0800
-Received: from [10.174.179.19] (10.174.179.19) by
- kwepemm600017.china.huawei.com (7.193.23.234) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Wed, 26 Jan 2022 20:12:58 +0800
-Message-ID: <4bb5e98f-83fe-4406-6a50-f3626af8cebb@huawei.com>
-Date: Wed, 26 Jan 2022 20:12:58 +0800
+	by lists.linaro.org (Postfix) with ESMTP id 6FC603ECF6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 07:40:00 +0000 (UTC)
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by lists.linaro.org (Postfix) with ESMTPS id 7DBA13EE15
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Jan 2022 20:36:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1643229403; x=1674765403;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=m6a7ksHqrFBRFuzuDvYBCJL8gq6YspyfPiiCWbUNdnw=;
+  b=jxCUvA0nhUyDg+VLOqzYhTW1kccHQGyH/Sf6174EfjNX8vqIHvmTrm2w
+   q0iHXcwm+pnleTqUSszegvaHQA8TKRyDdu/G4QLob3Y0H2MMRSwVJCjh5
+   1gK8m4e8wj938I0qhLPo68VHCVd4Amq74WupHz65Ed4j3rPjm5zYE15Kt
+   evGgF8aStChOZ4bu2FbERDZSkKuFL0SDuMfbRzNhTc5aUxUFxsHGjeQIG
+   q4bTogkrauLp3pacVLSrmaI3HyvJKqB8ktC77qUsmaShZ3DCz91tpfBqT
+   AAoBrcLnopB7YV2ioLPFy5mZwPy11rvCUwfQnTyfkTIL+tScTT/xdYNWk
+   g==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10239"; a="245480769"
+X-IronPort-AV: E=Sophos;i="5.88,319,1635231600";
+   d="scan'208";a="245480769"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Jan 2022 12:36:23 -0800
+X-IronPort-AV: E=Sophos;i="5.88,319,1635231600";
+   d="scan'208";a="581221487"
+Received: from lucas-s2600cw.jf.intel.com ([10.165.21.202])
+  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Jan 2022 12:36:21 -0800
+From: Lucas De Marchi <lucas.demarchi@intel.com>
+To: intel-gfx@lists.freedesktop.org
+Date: Wed, 26 Jan 2022 12:36:43 -0800
+Message-Id: <20220126203702.1784589-1-lucas.demarchi@intel.com>
+X-Mailer: git-send-email 2.35.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.3.2
-Content-Language: en-US
-To: Marco Elver <elver@google.com>
-References: <20220124025205.329752-1-liupeng256@huawei.com>
- <20220124025205.329752-4-liupeng256@huawei.com>
- <CANpmjNNYG=izN12sqaB3dYbGmM=2yQ8gK=8_BMHkuoaKWMmYPw@mail.gmail.com>
- <261a5287-af0d-424e-d209-db887d952a74@huawei.com>
- <CANpmjNNc6F7tRVn=UqLaW0WAgTr67XFm=CUu5X2D0Xbt3nKXwA@mail.gmail.com>
-From: "liupeng (DM)" <liupeng256@huawei.com>
-In-Reply-To: <CANpmjNNc6F7tRVn=UqLaW0WAgTr67XFm=CUu5X2D0Xbt3nKXwA@mail.gmail.com>
-X-Originating-IP: [10.174.179.19]
-X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
- kwepemm600017.china.huawei.com (7.193.23.234)
-X-CFilter-Loop: Reflected
-X-MailFrom: liupeng256@huawei.com
+X-MailFrom: lucas.demarchi@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: CJMVI3HKDGR3FCH24K3HEJ4QCOJBES2H
-X-Message-ID-Hash: CJMVI3HKDGR3FCH24K3HEJ4QCOJBES2H
-X-Mailman-Approved-At: Tue, 15 Feb 2022 07:38:58 +0000
-CC: glider@google.com, dvyukov@google.com, corbet@lwn.net, christian.koenig@amd.com, akpm@linux-foundation.org, kasan-dev@googlegroups.com, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
+Message-ID-Hash: GGU5EGDIEDIN2RB6SE75APVU2ZNMQZCD
+X-Message-ID-Hash: GGU5EGDIEDIN2RB6SE75APVU2ZNMQZCD
+X-Mailman-Approved-At: Tue, 15 Feb 2022 07:38:59 +0000
+CC: dri-devel@lists.freedesktop.org, Matt Roper <matthew.d.roper@intel.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Daniel Vetter <daniel@ffwll.ch>, Daniele Ceraolo Spurio <daniele.ceraolospurio@intel.com>, David Airlie <airlied@linux.ie>, John Harrison <John.C.Harrison@Intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Matthew Auld <matthew.auld@intel.com>, Matthew Brost <matthew.brost@intel.com>, =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 3/3] kfence: Make test case compatible with run time set sample interval
+Subject: [Linaro-mm-sig] [PATCH 00/19] drm/i915/guc: Refactor ADS access to use dma_buf_map
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CJMVI3HKDGR3FCH24K3HEJ4QCOJBES2H/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GGU5EGDIEDIN2RB6SE75APVU2ZNMQZCD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============6246310054284956404=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
---===============6246310054284956404==
-Content-Type: multipart/alternative;
-	boundary="------------2sE5CklAQW5Skk0e821jJkdX"
-Content-Language: en-US
-
---------------2sE5CklAQW5Skk0e821jJkdX
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-
-
-On 2022/1/24 20:21, Marco Elver wrote:
-> On Mon, 24 Jan 2022 at 13:19, liupeng (DM)<liupeng256@huawei.com>  wrote:
-> [...]
->> When KFENCE pool size can be adjusted by boot parameters(assumption),
->> automatically test and train KFENCE may be useful. So far, exporting
->> kfence.sample_interval is not necessary.
-> I'm not opposed to the patch (I've also run into this issue, but not
-> too frequently) - feel free to just send it with EXPORT_SYMBOL_GPL.
->
-> Thanks,
-> -- Marco
-> .
-
-Good, I will send a revised patch latter.
-
-Thanks,
--- Peng Liu
-.
-
---------------2sE5CklAQW5Skk0e821jJkdX
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <p><br>
-    </p>
-    <div class="moz-cite-prefix">On 2022/1/24 20:21, Marco Elver wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CANpmjNNc6F7tRVn=UqLaW0WAgTr67XFm=CUu5X2D0Xbt3nKXwA@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">On Mon, 24 Jan 2022 at 13:19, liupeng (DM) <a class="moz-txt-link-rfc2396E" href="mailto:liupeng256@huawei.com">&lt;liupeng256@huawei.com&gt;</a> wrote:
-[...]
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">When KFENCE pool size can be adjusted by boot parameters(assumption),
-automatically test and train KFENCE may be useful. So far, exporting
-kfence.sample_interval is not necessary.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-I'm not opposed to the patch (I've also run into this issue, but not
-too frequently) - feel free to just send it with EXPORT_SYMBOL_GPL.
-
-Thanks,
--- Marco
-.</pre>
-    </blockquote>
-    <pre>Good, I will send a revised patch latter.
-
-Thanks,
--- Peng Liu
-.
-</pre>
-  </body>
-</html>
---------------2sE5CklAQW5Skk0e821jJkdX--
-
---===============6246310054284956404==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============6246310054284956404==--
+V2hpbGUgcG9ydGluZyBpOTE1IHRvIGFybTY0IHdlIG5vdGljZWQgc29tZSBpc3N1ZXMgYWNjZXNz
+aW5nIGxtZW0uDQpTb21lIHdyaXRlcyB3ZXJlIGdldHRpbmcgY29ycnVwdGVkIGFuZCB0aGUgZmlu
+YWwgc3RhdGUgb2YgdGhlIGJ1ZmZlcg0KZGlkbid0IGhhdmUgZXhhY3RseSB3aGF0IHdlIHdyb3Rl
+LiBUaGlzIGJlY2FtZSBldmlkZW50IHdoZW4gZW5hYmxpbmcNCkd1QyBzdWJtaXNzaW9uOiBkZXBl
+bmRpbmcgb24gdGhlIG51bWJlciBvZiBlbmdpbmVzIHRoZSBBRFMgc3RydWN0IHdhcw0KYmVpbmcg
+Y29ycnVwdGVkIGFuZCBHdUMgd291bGQgcmVqZWN0IGl0LCByZWZ1c2luIHRvIGluaXRpYWxpemUu
+DQoNCj5Gcm9tIERvY3VtZW50YXRpb24vY29yZS1hcGkvYnVzLXZpcnQtcGh5cy1tYXBwaW5nLnJz
+dDoNCg0KCVRoaXMgbWVtb3J5IGlzIGNhbGxlZCAiUENJIG1lbW9yeSIgb3IgInNoYXJlZCBtZW1v
+cnkiIG9yICJJTyBtZW1vcnkiIG9yDQoJd2hhdGV2ZXIsIGFuZCB0aGVyZSBpcyBvbmx5IG9uZSB3
+YXkgdG8gYWNjZXNzIGl0OiB0aGUgcmVhZGIvd3JpdGViIGFuZA0KCXJlbGF0ZWQgZnVuY3Rpb25z
+LiBZb3Ugc2hvdWxkIG5ldmVyIHRha2UgdGhlIGFkZHJlc3Mgb2Ygc3VjaCBtZW1vcnksIGJlY2F1
+c2UNCgl0aGVyZSBpcyByZWFsbHkgbm90aGluZyB5b3UgY2FuIGRvIHdpdGggc3VjaCBhbiBhZGRy
+ZXNzOiBpdCdzIG5vdA0KCWNvbmNlcHR1YWxseSBpbiB0aGUgc2FtZSBtZW1vcnkgc3BhY2UgYXMg
+InJlYWwgbWVtb3J5IiBhdCBhbGwsIHNvIHlvdSBjYW5ub3QNCglqdXN0IGRlcmVmZXJlbmNlIGEg
+cG9pbnRlci4gKFNhZGx5LCBvbiB4ODYgaXQgKippcyoqIGluIHRoZSBzYW1lIG1lbW9yeSBzcGFj
+ZSwNCglzbyBvbiB4ODYgaXQgYWN0dWFsbHkgd29ya3MgdG8ganVzdCBkZWZlcmVuY2UgYSBwb2lu
+dGVyLCBidXQgaXQncyBub3QNCglwb3J0YWJsZSkuDQoNCldoZW4gcmVhZGluZyBvciB3cml0aW5n
+IHdvcmRzIGRpcmVjdGx5IHRvIElPIG1lbW9yeSwgaW4gb3JkZXIgdG8gYmUgcG9ydGFibGUNCnRo
+ZSBMaW51eCBrZXJuZWwgcHJvdmlkZXMgdGhlIGFic3RyYWN0aW9uIGRldGFpbGVkIGluIHNlY3Rp
+b24gIkRpZmZlcmVuY2VzDQpiZXR3ZWVuIEkvTyBhY2Nlc3MgZnVuY3Rpb25zIiBvZiBEb2N1bWVu
+dGF0aW9uL2RyaXZlci1hcGkvZGV2aWNlLWlvLnJzdC4NCg0KVGhpcyBsaW1pdHMgb3VyIGFiaWxp
+dHkgdG8gc2ltcGx5IG92ZXJsYXkgb3VyIHN0cnVjdHMgb24gdG9wIGEgYnVmZmVyDQphbmQgZGly
+ZWN0bHkgYWNjZXNzIGl0IHNpbmNlIHRoYXQgYnVmZmVyIG1heSBjb21lIGZyb20gSU8gbWVtb3J5
+IHJhdGhlciB0aGFuDQpzeXN0ZW0gbWVtb3J5LiBIZW5jZSB0aGUgYXBwcm9hY2ggdGFrZW4gaW4g
+aW50ZWxfZ3VjX2Fkcy5jIG5lZWRzIHRvIGJlDQpyZWZhY3RvcmVkLiBUaGlzIGlzIG5vdCB0aGUg
+b25seSBwbGFjZSBpbiBpOTE1IHRoYXQgbmVlZWQgdG8gYmUgY2hhbmdlZCwgYnV0DQp0aGUgb25l
+IGNhdXNpbmcgdGhlIG1vc3QgcHJvYmxlbXMsIHdpdGggYSByZWFsIHJlcHJvZHVjZXIuIFRoaXMg
+Zmlyc3Qgc2V0IG9mDQpwYXRjaCBmb2N1c2VzIG9uIGZpeGluZyB0aGUgZ2VtIG9iamVjdCB0byBw
+YXNzIHRoZSBBRFMNCg0KQWZ0ZXIgdGhlIGFkZGl0aW9uIG9mIGEgZmV3IGhlbHBlcnMgaW4gdGhl
+IGRtYV9idWZfbWFwIEFQSSwgbW9zdCBvZg0KaW50ZWxfZ3VjX2Fkcy5jIGNhbiBiZSBjb252ZXJ0
+ZWQgdG8gdXNlIGl0LiBUaGUgZXhjZXB0aW9uIGlzIHRoZSByZWdzZXQNCmluaXRpYWxpemF0aW9u
+OiB3ZSdkIGluY3VyIGludG8gYSBsb3Qgb2YgZXh0cmEgaW5kaXJlY3Rpb24gd2hlbg0KcmVhZGlu
+Zy93cml0dGluZyBlYWNoIHJlZ2lzdGVyLiBTbyB0aGUgcmVnc2V0IGlzIGNvbnZlcnRlZCB0byB1
+c2UgYQ0KdGVtcG9yYXJ5IGJ1ZmZlciBhbGxvY2F0ZWQgb24gcHJvYmUsIHdoaWNoIGlzIHRoZW4g
+Y29waWVkIHRvIGl0cw0KZmluYWwgbG9jYXRpb24gd2hlbiBmaW5pc2hpbmcgdGhlIGluaXRpYWxp
+emF0aW9uIG9yIG9uIGd0IHJlc2V0Lg0KDQpUZXN0aW5nIG9uIHNvbWUgZGlzY3JldGUgY2FyZHMs
+IGFmdGVyIHRoaXMgY2hhbmdlIHdlIGNhbiBjb3JyZWN0bHkgcGFzcyB0aGUNCkFEUyBzdHJ1Y3Qg
+dG8gR3VDIGFuZCBoYXZlIGl0IGluaXRpYWxpemVkIGNvcnJlY3RseS4NCg0KdGhhbmtzDQpMdWNh
+cyBEZSBNYXJjaGkNCg0KQ2M6IGxpbnV4LW1lZGlhQHZnZXIua2VybmVsLm9yZw0KQ2M6IGRyaS1k
+ZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcNCkNjOiBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFy
+by5vcmcNCkNjOiBsaW51eC1rZXJuZWxAdmdlci5rZXJuZWwub3JnDQpDYzogQ2hyaXN0aWFuIEvD
+tm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KQ2M6IERhbmllbCBWZXR0ZXIgPGRhbmll
+bEBmZndsbC5jaD4NCkNjOiBEYW5pZWxlIENlcmFvbG8gU3B1cmlvIDxkYW5pZWxlLmNlcmFvbG9z
+cHVyaW9AaW50ZWwuY29tPg0KQ2M6IERhdmlkIEFpcmxpZSA8YWlybGllZEBsaW51eC5pZT4NCkNj
+OiBKb2huIEhhcnJpc29uIDxKb2huLkMuSGFycmlzb25ASW50ZWwuY29tPg0KQ2M6IEpvb25hcyBM
+YWh0aW5lbiA8am9vbmFzLmxhaHRpbmVuQGxpbnV4LmludGVsLmNvbT4NCkNjOiBNYWFydGVuIExh
+bmtob3JzdCA8bWFhcnRlbi5sYW5raG9yc3RAbGludXguaW50ZWwuY29tPg0KQ2M6IE1hdHQgUm9w
+ZXIgPG1hdHRoZXcuZC5yb3BlckBpbnRlbC5jb20+DQpDYzogTWF0dGhldyBBdWxkIDxtYXR0aGV3
+LmF1bGRAaW50ZWwuY29tPg0KQ2M6IE1hdHRoZXcgQnJvc3QgPG1hdHRoZXcuYnJvc3RAaW50ZWwu
+Y29tPg0KQ2M6IFN1bWl0IFNlbXdhbCA8c3VtaXQuc2Vtd2FsQGxpbmFyby5vcmc+DQpDYzogVGhv
+bWFzIEhlbGxzdHLDtm0gPHRob21hcy5oZWxsc3Ryb21AbGludXguaW50ZWwuY29tPg0KQ2M6IFR2
+cnRrbyBVcnN1bGluIDx0dnJ0a28udXJzdWxpbkBsaW51eC5pbnRlbC5jb20+DQoNCkx1Y2FzIERl
+IE1hcmNoaSAoMTkpOg0KICBkbWEtYnVmLW1hcDogQWRkIHJlYWQvd3JpdGUgaGVscGVycw0KICBk
+bWEtYnVmLW1hcDogQWRkIGhlbHBlciB0byBpbml0aWFsaXplIHNlY29uZCBtYXANCiAgZHJtL2k5
+MTUvZ3Q6IEFkZCBoZWxwZXIgZm9yIHNobWVtIGNvcHkgdG8gZG1hX2J1Zl9tYXANCiAgZHJtL2k5
+MTUvZ3VjOiBLZWVwIGRtYV9idWZfbWFwIG9mIGFkc19ibG9iIGFyb3VuZA0KICBkcm0vaTkxNS9n
+dWM6IEFkZCByZWFkL3dyaXRlIGhlbHBlcnMgZm9yIEFEUyBibG9iDQogIGRybS9pOTE1L2d1Yzog
+Q29udmVydCBnb2xkZW4gY29udGV4dCBpbml0IHRvIGRtYV9idWZfbWFwDQogIGRybS9pOTE1L2d1
+YzogQ29udmVydCBwb2xpY2llcyB1cGRhdGUgdG8gZG1hX2J1Zl9tYXANCiAgZHJtL2k5MTUvZ3Vj
+OiBDb252ZXJ0IGVuZ2luZSByZWNvcmQgdG8gZG1hX2J1Zl9tYXANCiAgZG1hLWJ1Zi1tYXA6IEFk
+ZCB3cmFwcGVyIG92ZXIgbWVtc2V0DQogIGRybS9pOTE1L2d1YzogQ29udmVydCBndWNfYWRzX3By
+aXZhdGVfZGF0YV9yZXNldCB0byBkbWFfYnVmX21hcA0KICBkcm0vaTkxNS9ndWM6IENvbnZlcnQg
+Z29sZGVuIGNvbnRleHQgcHJlcCB0byBkbWFfYnVmX21hcA0KICBkcm0vaTkxNS9ndWM6IFJlcGxh
+Y2UgY2hlY2sgZm9yIGdvbGRlbiBjb250ZXh0IHNpemUNCiAgZHJtL2k5MTUvZ3VjOiBDb252ZXJ0
+IG1hcHBpbmcgdGFibGUgdG8gZG1hX2J1Zl9tYXANCiAgZHJtL2k5MTUvZ3VjOiBDb252ZXJ0IGNh
+cHR1cmUgbGlzdCB0byBkbWFfYnVmX21hcA0KICBkcm0vaTkxNS9ndWM6IFByZXBhcmUgZm9yIGVy
+cm9yIHByb3BhZ2F0aW9uDQogIGRybS9pOTE1L2d1YzogVXNlIGEgc2luZ2xlIHBhc3MgdG8gY2Fs
+Y3VsYXRlIHJlZ3NldA0KICBkcm0vaTkxNS9ndWM6IENvbnZlcnQgZ3VjX21taW9fcmVnX3N0YXRl
+X2luaXQgdG8gZG1hX2J1Zl9tYXANCiAgZHJtL2k5MTUvZ3VjOiBDb252ZXJ0IF9fZ3VjX2Fkc19p
+bml0IHRvIGRtYV9idWZfbWFwDQogIGRybS9pOTE1L2d1YzogUmVtb3ZlIHBsYWluIGFkc19ibG9i
+IHBvaW50ZXINCg0KIGRyaXZlcnMvZ3B1L2RybS9pOTE1L2d0L3NobWVtX3V0aWxzLmMgICAgICAg
+ICB8ICAzMiArKw0KIGRyaXZlcnMvZ3B1L2RybS9pOTE1L2d0L3NobWVtX3V0aWxzLmggICAgICAg
+ICB8ICAgMyArDQogZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3QvdWMvaW50ZWxfZ3VjLmggICAgICAg
+IHwgIDE0ICstDQogZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3QvdWMvaW50ZWxfZ3VjX2Fkcy5jICAg
+IHwgMzc0ICsrKysrKysrKysrLS0tLS0tLQ0KIGRyaXZlcnMvZ3B1L2RybS9pOTE1L2d0L3VjL2lu
+dGVsX2d1Y19hZHMuaCAgICB8ICAgMyArLQ0KIC4uLi9ncHUvZHJtL2k5MTUvZ3QvdWMvaW50ZWxf
+Z3VjX3N1Ym1pc3Npb24uYyB8ICAxMSArLQ0KIGluY2x1ZGUvbGludXgvZG1hLWJ1Zi1tYXAuaCAg
+ICAgICAgICAgICAgICAgICB8IDEyNyArKysrKysNCiA3IGZpbGVzIGNoYW5nZWQsIDQwNSBpbnNl
+cnRpb25zKCspLCAxNTkgZGVsZXRpb25zKC0pDQoNCi0tIA0KMi4zNS4wDQoNCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGlu
+ZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBz
+ZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
