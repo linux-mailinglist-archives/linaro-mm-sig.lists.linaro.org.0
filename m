@@ -2,63 +2,65 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0C664B6B05
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 12:33:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44E2E4B6B06
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 12:33:37 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 22FFB3EE71
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 11:33:30 +0000 (UTC)
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by lists.linaro.org (Postfix) with ESMTPS id 635BC401C5
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Jan 2022 09:13:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 76BCA40167
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 11:33:36 +0000 (UTC)
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by lists.linaro.org (Postfix) with ESMTPS id 4C2CF401C3
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Jan 2022 09:33:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1643274790; x=1674810790;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=ypHEOArCLQ9Lqljw8MluEpZa7igABREh5sdnYemF0aQ=;
-  b=nsK/cJmHRaCUgAbllhRv37CwAk6RTv5iyeR5MudXwGLjyGEBw0RHXDpn
-   mdA5pIirZgRqm3AMAXEZX5aNU6TysuNmg9NDhUdn2Xbs3Gpo51jbeQREk
-   aVGN6Wfb2F2nQUogImSpc7sYF7Pv8Rl6FHVp7EVlg5nPsBxk8IStf0eqq
-   4UBCn7ppxwnhmwbK+8tu5a6BsurZ12KTtN9F1RGn38/rDD365yNtFD5Ew
-   NY2Xwcd1nyGgbKDTwWexlRrjlXRopXc4koFwxfm3MhUOkTlXmUg8xDVbW
-   ZnUFb0ZaTdV9dFujpitcuGf67rJTAnsoz5xftfBtetcELgT+iZijKKZlE
-   Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10239"; a="333150850"
+  t=1643276014; x=1674812014;
+  h=date:from:to:subject:message-id:references:mime-version:
+   content-transfer-encoding:in-reply-to;
+  bh=70bvD9FchQOD0i4lLqg413fUh6fr+M8PLj6aT5wcP/A=;
+  b=Yep//h8gQivjJcqN+rzl0kTulNkCNgpCIwP03DBKLLBCt4UFqArvlAEh
+   TScKWxPNPqq6edUYefSykcZWt7o5cfXOACl0aLyBeN1U3f0sH3lGFWE4Z
+   pf5ZfR8caLdFWCfUHzn0pcQE86ZOIVc7461YMH2uCaDwyx9df9G/FwG0W
+   Ctkahkf4BfxsJ2BC2VyJuC6eMQMtQ7dFwRZ30ySy66TjcE47W/VmWMZ12
+   Obq/OAVu/SXrtCZq7ybqpnPsck8x/HVuiyo2GK3rvoQ+guTvUHSuGlsHa
+   sEHithKnj5SzSNRju28bCy9Xh421RRCmAXjtsatJRdEE3uy+HvebXw1vc
+   w==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10239"; a="307514804"
 X-IronPort-AV: E=Sophos;i="5.88,320,1635231600";
-   d="scan'208";a="333150850"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jan 2022 01:12:48 -0800
+   d="scan'208";a="307514804"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jan 2022 01:33:33 -0800
 X-IronPort-AV: E=Sophos;i="5.88,320,1635231600";
-   d="scan'208";a="581408612"
+   d="scan'208";a="480224705"
 Received: from anithaha-mobl.amr.corp.intel.com (HELO ldmartin-desk2) ([10.212.224.126])
-  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jan 2022 01:12:48 -0800
-Date: Thu, 27 Jan 2022 01:12:47 -0800
+  by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jan 2022 01:33:32 -0800
+Date: Thu, 27 Jan 2022 01:33:32 -0800
 From: Lucas De Marchi <lucas.demarchi@intel.com>
-To: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
-Message-ID: <20220127091247.3uqi5zhesqtecbsw@ldmartin-desk2>
+To: Daniel Vetter <daniel@ffwll.ch>,
+	Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+	linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	linux-media@vger.kernel.org
+Message-ID: <20220127093332.wnkd2qy4tvwg5i5l@ldmartin-desk2>
 X-Patchwork-Hint: comment
 References: <20220126203702.1784589-1-lucas.demarchi@intel.com>
  <20220126203702.1784589-3-lucas.demarchi@intel.com>
  <f0dbdcc0-13b5-c484-0bf3-a1f8c3e48954@amd.com>
  <20220127075728.ygwgorhnrwaocdqv@ldmartin-desk2>
  <3066c6a7-fc73-d34d-d209-a3ff6818dfb6@amd.com>
- <20220127081810.6zt6cyib4s7kpa6f@ldmartin-desk2>
- <3c6a9126-bf88-0f29-425f-36748271c179@amd.com>
+ <YfJedaoeJjE3grum@phenom.ffwll.local>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <3c6a9126-bf88-0f29-425f-36748271c179@amd.com>
+In-Reply-To: <YfJedaoeJjE3grum@phenom.ffwll.local>
 X-MailFrom: lucas.demarchi@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: CB3WJPQAI2TOSSALP6UKHWUXOKIFJOEL
-X-Message-ID-Hash: CB3WJPQAI2TOSSALP6UKHWUXOKIFJOEL
-X-Mailman-Approved-At: Tue, 15 Feb 2022 11:33:12 +0000
-CC: linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID-Hash: NDCJ7LFVCQQDGAT6OGVGSEAU3VQO5WBY
+X-Message-ID-Hash: NDCJ7LFVCQQDGAT6OGVGSEAU3VQO5WBY
+X-Mailman-Approved-At: Tue, 15 Feb 2022 11:33:14 +0000
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [Intel-gfx] [PATCH 02/19] dma-buf-map: Add helper to initialize second map
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CB3WJPQAI2TOSSALP6UKHWUXOKIFJOEL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NDCJ7LFVCQQDGAT6OGVGSEAU3VQO5WBY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -68,96 +70,125 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="iso-8859-1"; format="flowed"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 27, 2022 at 09:55:05AM +0100, Christian K=F6nig wrote:
->Am 27.01.22 um 09:18 schrieb Lucas De Marchi:
->>On Thu, Jan 27, 2022 at 09:02:54AM +0100, Christian K=F6nig wrote:
->>>Am 27.01.22 um 08:57 schrieb Lucas De Marchi:
->>>>On Thu, Jan 27, 2022 at 08:27:11AM +0100, Christian K=F6nig wrote:
->>>>>Am 26.01.22 um 21:36 schrieb Lucas De Marchi:
->>>>>>[SNIP]
->>>>humn... not sure if I was=A0 clear. There is no importer and=20
->>>>exporter here.
->>>
->>>Yeah, and exactly that's what I'm pointing out as problem here.
->>>
->>>You are using the inter driver framework for something internal to=20
->>>the driver. That is an absolutely clear NAK!
->>>
->>>We could discuss that, but you guys are just sending around=20
->>>patches to do this without any consensus that this is a good idea.
+On Thu, Jan 27, 2022 at 09:57:25AM +0100, Daniel Vetter wrote:
+>On Thu, Jan 27, 2022 at 09:02:54AM +0100, Christian K=F6nig wrote:
+>> Am 27.01.22 um 08:57 schrieb Lucas De Marchi:
+>> > On Thu, Jan 27, 2022 at 08:27:11AM +0100, Christian K=F6nig wrote:
+>> > > Am 26.01.22 um 21:36 schrieb Lucas De Marchi:
+>> > > > When dma_buf_map struct is passed around, it's useful to be able to
+>> > > > initialize a second map that takes care of reading/writing to an o=
+ffset
+>> > > > of the original map.
+>> > > >
+>> > > > Add a helper that copies the struct and add the offset to the prop=
+er
+>> > > > address.
+>> > >
+>> > > Well what you propose here can lead to all kind of problems and is
+>> > > rather bad design as far as I can see.
+>> > >
+>> > > The struct dma_buf_map is only to be filled in by the exporter and
+>> > > should not be modified in this way by the importer.
+>> >
+>> > humn... not sure if I was=A0 clear. There is no importer and exporter =
+here.
 >>
->>s/you guys/you/ if you have to blame anyone - I'm the only s-o-b in
->>these patches. I'm sending these to _build consensus_ on what may be=20
->>a good
->>use for it showing a real problem it's helping to fix.
->
->Well a cover letter would have been helpful, my impression was that=20
->you have a larger set and just want to upstream some minor DMA-buf=20
->changes necessary for it.
-
-I missed adding this sentence to the cover letter, as my impression was that
-dma-buf-map was already used outside inter-driver framework. But there
-is actually a cover letter:
-
-https://lore.kernel.org/all/20220126203702.1784589-1-lucas.demarchi@intel.c=
-om/
-
-And looking at it now, it seems I missed adding Thomas Zimmermann to Cc.
-
->
->Now I know why people are bugging me all the time to add cover letters=20
->to add more context to my sets.
->
+>> Yeah, and exactly that's what I'm pointing out as problem here.
 >>
->>From its documentation:
+>> You are using the inter driver framework for something internal to the
+>> driver. That is an absolutely clear NAK!
 >>
->>=A0* The type :c:type:`struct dma_buf_map <dma_buf_map>` and its=20
->>helpers are
->>=A0* actually independent from the dma-buf infrastructure. When=20
->>sharing buffers
->>=A0* among devices, drivers have to know the location of the memory to=20
->>access
->>=A0* the buffers in a safe way. :c:type:`struct dma_buf_map <dma_buf_map>`
->>=A0* solves this problem for dma-buf and its users. If other drivers or
->>=A0* sub-systems require similar functionality, the type could be=20
->>generalized
->>=A0* and moved to a more prominent header file.
->>
->>if there is no consensus and a better alternative, I'm perfectly fine in
->>throwing it out and using the better approach.
+>> We could discuss that, but you guys are just sending around patches to do
+>> this without any consensus that this is a good idea.
 >
->When Thomas Zimmermann upstreamed the dma_buf_map work we had a=20
->discussion if that shouldn't be independent of the DMA-buf framework.
+>Uh I suggested this, also we're already using dma_buf_map all over the
+>place as a convenient abstraction. So imo that's all fine, it should allow
+>drivers to simplify some code where on igpu it's in normal kernel memory
+>and on dgpu it's behind some pci bar.
 >
->The consensus was that as soon as we have more widely use for it this=20
->should be made independent. So basically that is what's happening now.
+>Maybe we should have a better name for that struct (and maybe also a
+>better place), but way back when we discussed that bikeshed I didn't come
+>up with anything better really.
+
+I suggest iosys_map since it abstracts access to IO and system memory.
+
 >
->I suggest the following approach:
->1. Find a funky name for this, something like iomem_, kiomap_ or similar.
+>> > There is a role delegation on filling out and reading a buffer when
+>> > that buffer represents a struct layout.
+>> >
+>> > struct bla {
+>> > =A0=A0=A0=A0int a;
+>> > =A0=A0=A0=A0int b;
+>> > =A0=A0=A0=A0int c;
+>> > =A0=A0=A0=A0struct foo foo;
+>> > =A0=A0=A0=A0struct bar bar;
+>> > =A0=A0=A0=A0int d;
+>> > }
+>> >
+>> >
+>> > This implementation allows you to have:
+>> >
+>> > =A0=A0=A0=A0fill_foo(struct dma_buf_map *bla_map) { ... }
+>> > =A0=A0=A0=A0fill_bar(struct dma_buf_map *bla_map) { ... }
+>> >
+>> > and the first thing these do is to make sure the map it's pointing to
+>> > is relative to the struct it's supposed to write/read. Otherwise you're
+>> > suggesting everything to be relative to struct bla, or to do the same
+>> > I'm doing it, but IMO more prone to error:
+>> >
+>> > =A0=A0=A0=A0struct dma_buf_map map =3D *bla_map;
+>> > =A0=A0=A0=A0dma_buf_map_incr(map, offsetof(...));
+>
+>Wrt the issue at hand I think the above is perfectly fine code. The idea
+>with dma_buf_map is really that it's just a special pointer, so writing
+>the code exactly as pointer code feels best. Unfortunately you cannot make
+>them typesafe (because of C), so the code sometimes looks a bit ugly.
+>Otherwise we could do stuff like container_of and all that with
+>typechecking in the macros.
 
-iosys_map?
+I had exactly this code above, but after writting quite a few patches
+using it, particularly with functions that have to write to 2 maps (see
+patch 6 for example), it felt much better to have something to
+initialize correctly from the start
 
->2. Separate this from all you driver dependent work and move the=20
->dma_buf_map structure out of DMA-buf into this new whatever_ prefix.
+	struct dma_buf_map other_map =3D *bla_map;
+	/* poor Lucas forgetting dma_buf_map_incr(map, offsetof(...)); */
 
-should this be a follow up to the driver work or a prerequisite?
+is error prone and hard to debug since you will be reading/writting
+from/to another location rather than exploding
 
-thanks
+While with the construct below
+
+	other_map;
+	...
+	other_map =3D INITIALIZER()
+
+I can rely on the compiler complaining about uninitialized var. And
+in most of the cases I can just have this single line in the beggining of t=
+he
+function when the offset is constant:
+
+	struct dma_buf_map other_map =3D INITIALIZER(bla_map, offsetof(..));
+
 Lucas De Marchi
 
->3. Ping Thomas, LKML, me and probably a couple of other core people if=20
->this is the right idea or not.
->4. Work on dropping the map parameter from dma_buf_vunmap(). This is=20
->basically why we can't modify the pointers returned from=20
->dma_buf_vmap() and has already cause a few problems with=20
->dma_buf_map_incr().
+>-Daniel
 >
->Regards,
->Christian.
->
+>> > IMO this construct is worse because at a point in time in the function
+>> > the map was pointing to the wrong thing the function was supposed to
+>> > read/write.
+>> >
+>> > It's also useful when the function has double duty, updating a global
+>> > part of the struct and a table inside it (see example in patch 6)
+>> >
+>> > thanks
+>> > Lucas De Marchi
 >>
->>Lucas De Marchi
 >
+>--=20
+>Daniel Vetter
+>Software Engineer, Intel Corporation
+>http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
