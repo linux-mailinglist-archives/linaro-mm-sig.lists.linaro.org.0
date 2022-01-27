@@ -2,60 +2,57 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25ED049E165
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Jan 2022 12:44:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9622249E1B6
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Jan 2022 12:57:01 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 50B09401D6
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Jan 2022 11:44:32 +0000 (UTC)
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
-	by lists.linaro.org (Postfix) with ESMTPS id 7EA153EE01
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Jan 2022 11:44:24 +0000 (UTC)
-Received: by mail-wr1-f54.google.com with SMTP id e8so4358792wrc.0
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Jan 2022 03:44:24 -0800 (PST)
+	by lists.linaro.org (Postfix) with ESMTP id CD3D3401DC
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Jan 2022 11:57:00 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+	by lists.linaro.org (Postfix) with ESMTPS id 2F952401C3
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Jan 2022 11:56:52 +0000 (UTC)
+Received: by mail-wm1-f46.google.com with SMTP id l35-20020a05600c1d2300b0034d477271c1so1685608wms.3
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Jan 2022 03:56:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:in-reply-to:content-transfer-encoding;
-        bh=LdvVnzVP+ambH9LK42MFqP+4gobIMIEV2AtnE2m4+4w=;
-        b=AO2Ubp21T4K3UXrE4ox8RrOuzjwwgrlPkeKckx6Grh9RDZ/sTc4sbmYVdr0jjAzpTw
-         QVQQPpq97aK2jW5XFd7bQnzTVqoBJJj6378shYn3d2cksVOP7/4zyAiwlP+kuExwEhDw
-         XZJrGcwnFl9NeV9+LhDnIPEtlKSJuAh2tjefqYKPD21aILv8pPHehPvOIQyGlgjdFsPj
-         oMzJiea1Io27zOiupzkuaNpJcLwNMgIk7MJ6504aaHlBk3VjA7u9dBrKb0HD/gWe/+pQ
-         RvbtkX3j16vPwnewh6iIwT26ia4TZVLMcK3m4cq6+CdyMByCBzP2UMRi0DkN5ke2sf1n
-         11WQ==
+        d=ffwll.ch; s=google;
+        h=date:from:to:cc:subject:message-id:mail-followup-to:references
+         :mime-version:content-disposition:content-transfer-encoding
+         :in-reply-to;
+        bh=fB9lBcu0GxVOEODBz8V+7rs0Bs5THwt6cZmanUr1lLo=;
+        b=NqMZEfn4GQJKjDjuddvBN2ejrANHFF06UyerRmcQ9LRioupQDDFQo9g2XLWuCRRgNq
+         gFqtReUSLgMwxkMCuPdmElzYEF5A8yjJXhaIKMWkB4gcx/EWbjCitsWU2MNDY/OnPTmZ
+         XMjwRw4P1Tow8fEn2f863II1OaaZWrB6Cne6Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=LdvVnzVP+ambH9LK42MFqP+4gobIMIEV2AtnE2m4+4w=;
-        b=1zBSWrASb8ElWr3GpyO/IBu276XOmXCHEg6lUkdCoJEEiTRgXbHH3cMqIaJLMIVd1K
-         nyDf84L9jzaQr73nkK0A0pnnmUwyF+VmQDuRvEDid7yD2GiH+6HLIfaCFOGTXFvVq9gP
-         8XPRzrjzGY5rsWnuLu7y40r1YLW+XoeapOlLKiru0mU6kPsCKca1gKRTo+OkZWjqLMc5
-         +lwRvvkG/SQYSf+Fdw28d3AomYBnj3MByNdhQU0sksaEB5QsAFVjgDoqjdUUDx6X71xy
-         uUDdYAV25toZSyQmH0f3SeCLohho/Z7NoVeKtsY46r+yhihbwIqBFYEl+ElR4r4LB87b
-         UVjw==
-X-Gm-Message-State: AOAM530K34tbvTDUMywGpf72XrQJS0IdtZ5Eug0MIPvZhQG13jYahMmO
-	iugkITLHTbr9LZ4sex+Pl24=
-X-Google-Smtp-Source: ABdhPJx/KQtwKWNuH/SNqZ6CP2qgfsi4lZk1rb4KUhwVnUiM+JCFI4ynUa/ZWR4g7iYh+f08Ls5ePQ==
-X-Received: by 2002:adf:a410:: with SMTP id d16mr2795659wra.517.1643283863392;
-        Thu, 27 Jan 2022 03:44:23 -0800 (PST)
-Received: from [192.168.178.21] (p57b0bff8.dip0.t-ipconnect.de. [87.176.191.248])
-        by smtp.gmail.com with ESMTPSA id a6sm1918382wrx.101.2022.01.27.03.44.22
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 27 Jan 2022 03:44:22 -0800 (PST)
-Message-ID: <50cf1f2f-3fb2-8abb-7497-dafcd97935f3@gmail.com>
-Date: Thu, 27 Jan 2022 12:44:21 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Lucas De Marchi <lucas.demarchi@intel.com>, linaro-mm-sig@lists.linaro.org,
- intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org
-References: <20220126203702.1784589-1-lucas.demarchi@intel.com>
- <20220126203702.1784589-3-lucas.demarchi@intel.com>
+        h=x-gm-message-state:date:from:to:cc:subject:message-id
+         :mail-followup-to:references:mime-version:content-disposition
+         :content-transfer-encoding:in-reply-to;
+        bh=fB9lBcu0GxVOEODBz8V+7rs0Bs5THwt6cZmanUr1lLo=;
+        b=o9Zp2VymUA4ACYpSLa6uC4oBWgeJBX9OMinKqYHPSkxg4To8NIV9MT7F5/yFzVWTqk
+         jcOAQMAYEBH18gto7tgxlUWZumomj+/DW89UawMvFYG0aGaynEkfyFi5EK82hU+N1XLz
+         3p3+MYBYSIwBVRoPaTgClj9zzOxe2Ar62f5TJ1Fmwoq3qXfszO77AO5pCCDF/KYw8yd2
+         DZdKvCGXab2LqK3r8PoMX9rNLlikgsvf6j4PaqqGCtB9D9K/ah1tA3Fsb4vRfQCYKQWm
+         T7zfv+YLzv+XVtDEy2GI58qAlK0jUSoZHXSs9Phx076YV1hawMBUCeXap9nCIG2uTlb4
+         MW3A==
+X-Gm-Message-State: AOAM532jZ+xf6IQIWjlKBShHeVOaSGFVW6IWsbLW/YBWZud6alYgP3Zy
+	9d8V1/evmwHY6Vl1ZnsbzZFXcQ==
+X-Google-Smtp-Source: ABdhPJwPzaOuD+XEtfNOGuZN5oIZf3keZN4SuV1dZfFtIedoBNSx8TeIh5FcxEUnPdwsMtYxom5HAw==
+X-Received: by 2002:a05:600c:2154:: with SMTP id v20mr11307893wml.34.1643284611118;
+        Thu, 27 Jan 2022 03:56:51 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id m12sm2394081wrp.61.2022.01.27.03.56.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 27 Jan 2022 03:56:50 -0800 (PST)
+Date: Thu, 27 Jan 2022 12:56:48 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <YfKIgLKyLbCDtl7B@phenom.ffwll.local>
+Mail-Followup-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Lucas De Marchi <lucas.demarchi@intel.com>,
+	linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	linux-media@vger.kernel.org
+References: <20220126203702.1784589-3-lucas.demarchi@intel.com>
  <f0dbdcc0-13b5-c484-0bf3-a1f8c3e48954@amd.com>
  <20220127075728.ygwgorhnrwaocdqv@ldmartin-desk2>
  <3066c6a7-fc73-d34d-d209-a3ff6818dfb6@amd.com>
@@ -64,162 +61,265 @@ References: <20220126203702.1784589-1-lucas.demarchi@intel.com>
  <YfJtLkdkh4yde20f@phenom.ffwll.local>
  <27aed6b1-b465-6a52-2b0a-d748c9798414@amd.com>
  <YfJ/DvhxaGGppGV6@phenom.ffwll.local>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <YfJ/DvhxaGGppGV6@phenom.ffwll.local>
-Message-ID-Hash: NBV4YXYYSFN26U3UKHHLIEKIA267INRL
-X-Message-ID-Hash: NBV4YXYYSFN26U3UKHHLIEKIA267INRL
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
+ <50cf1f2f-3fb2-8abb-7497-dafcd97935f3@gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <50cf1f2f-3fb2-8abb-7497-dafcd97935f3@gmail.com>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
+Message-ID-Hash: MYSYLMN54REA3BA3C3WO3SVJLPSQR5ZI
+X-Message-ID-Hash: MYSYLMN54REA3BA3C3WO3SVJLPSQR5ZI
+X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Lucas De Marchi <lucas.demarchi@intel.com>, linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [Intel-gfx] [PATCH 02/19] dma-buf-map: Add helper to initialize second map
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NBV4YXYYSFN26U3UKHHLIEKIA267INRL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MYSYLMN54REA3BA3C3WO3SVJLPSQR5ZI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-QW0gMjcuMDEuMjIgdW0gMTI6MTYgc2NocmllYiBEYW5pZWwgVmV0dGVyOg0KPiBPbiBUaHUsIEph
-biAyNywgMjAyMiBhdCAxMToyMToyMEFNICswMTAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0K
-Pj4gQW0gMjcuMDEuMjIgdW0gMTE6MDAgc2NocmllYiBEYW5pZWwgVmV0dGVyOg0KPj4+IE9uIFRo
-dSwgSmFuIDI3LCAyMDIyIGF0IDAxOjMzOjMyQU0gLTA4MDAsIEx1Y2FzIERlIE1hcmNoaSB3cm90
-ZToNCj4+Pj4gT24gVGh1LCBKYW4gMjcsIDIwMjIgYXQgMDk6NTc6MjVBTSArMDEwMCwgRGFuaWVs
-IFZldHRlciB3cm90ZToNCj4+Pj4+IE9uIFRodSwgSmFuIDI3LCAyMDIyIGF0IDA5OjAyOjU0QU0g
-KzAxMDAsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6DQo+Pj4+Pj4gQW0gMjcuMDEuMjIgdW0gMDg6
-NTcgc2NocmllYiBMdWNhcyBEZSBNYXJjaGk6DQo+Pj4+Pj4+IE9uIFRodSwgSmFuIDI3LCAyMDIy
-IGF0IDA4OjI3OjExQU0gKzAxMDAsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6DQo+Pj4+Pj4+PiBB
-bSAyNi4wMS4yMiB1bSAyMTozNiBzY2hyaWViIEx1Y2FzIERlIE1hcmNoaToNCj4+Pj4+Pj4+PiBX
-aGVuIGRtYV9idWZfbWFwIHN0cnVjdCBpcyBwYXNzZWQgYXJvdW5kLCBpdCdzIHVzZWZ1bCB0byBi
-ZSBhYmxlIHRvDQo+Pj4+Pj4+Pj4gaW5pdGlhbGl6ZSBhIHNlY29uZCBtYXAgdGhhdCB0YWtlcyBj
-YXJlIG9mIHJlYWRpbmcvd3JpdGluZyB0byBhbiBvZmZzZXQNCj4+Pj4+Pj4+PiBvZiB0aGUgb3Jp
-Z2luYWwgbWFwLg0KPj4+Pj4+Pj4+DQo+Pj4+Pj4+Pj4gQWRkIGEgaGVscGVyIHRoYXQgY29waWVz
-IHRoZSBzdHJ1Y3QgYW5kIGFkZCB0aGUgb2Zmc2V0IHRvIHRoZSBwcm9wZXINCj4+Pj4+Pj4+PiBh
-ZGRyZXNzLg0KPj4+Pj4+Pj4gV2VsbCB3aGF0IHlvdSBwcm9wb3NlIGhlcmUgY2FuIGxlYWQgdG8g
-YWxsIGtpbmQgb2YgcHJvYmxlbXMgYW5kIGlzDQo+Pj4+Pj4+PiByYXRoZXIgYmFkIGRlc2lnbiBh
-cyBmYXIgYXMgSSBjYW4gc2VlLg0KPj4+Pj4+Pj4NCj4+Pj4+Pj4+IFRoZSBzdHJ1Y3QgZG1hX2J1
-Zl9tYXAgaXMgb25seSB0byBiZSBmaWxsZWQgaW4gYnkgdGhlIGV4cG9ydGVyIGFuZA0KPj4+Pj4+
-Pj4gc2hvdWxkIG5vdCBiZSBtb2RpZmllZCBpbiB0aGlzIHdheSBieSB0aGUgaW1wb3J0ZXIuDQo+
-Pj4+Pj4+IGh1bW4uLi4gbm90IHN1cmUgaWYgSSB3YXPCoCBjbGVhci4gVGhlcmUgaXMgbm8gaW1w
-b3J0ZXIgYW5kIGV4cG9ydGVyIGhlcmUuDQo+Pj4+Pj4gWWVhaCwgYW5kIGV4YWN0bHkgdGhhdCdz
-IHdoYXQgSSdtIHBvaW50aW5nIG91dCBhcyBwcm9ibGVtIGhlcmUuDQo+Pj4+Pj4NCj4+Pj4+PiBZ
-b3UgYXJlIHVzaW5nIHRoZSBpbnRlciBkcml2ZXIgZnJhbWV3b3JrIGZvciBzb21ldGhpbmcgaW50
-ZXJuYWwgdG8gdGhlDQo+Pj4+Pj4gZHJpdmVyLiBUaGF0IGlzIGFuIGFic29sdXRlbHkgY2xlYXIg
-TkFLIQ0KPj4+Pj4+DQo+Pj4+Pj4gV2UgY291bGQgZGlzY3VzcyB0aGF0LCBidXQgeW91IGd1eXMg
-YXJlIGp1c3Qgc2VuZGluZyBhcm91bmQgcGF0Y2hlcyB0byBkbw0KPj4+Pj4+IHRoaXMgd2l0aG91
-dCBhbnkgY29uc2Vuc3VzIHRoYXQgdGhpcyBpcyBhIGdvb2QgaWRlYS4NCj4+Pj4+IFVoIEkgc3Vn
-Z2VzdGVkIHRoaXMsIGFsc28gd2UncmUgYWxyZWFkeSB1c2luZyBkbWFfYnVmX21hcCBhbGwgb3Zl
-ciB0aGUNCj4+Pj4+IHBsYWNlIGFzIGEgY29udmVuaWVudCBhYnN0cmFjdGlvbi4gU28gaW1vIHRo
-YXQncyBhbGwgZmluZSwgaXQgc2hvdWxkIGFsbG93DQo+Pj4+PiBkcml2ZXJzIHRvIHNpbXBsaWZ5
-IHNvbWUgY29kZSB3aGVyZSBvbiBpZ3B1IGl0J3MgaW4gbm9ybWFsIGtlcm5lbCBtZW1vcnkNCj4+
-Pj4+IGFuZCBvbiBkZ3B1IGl0J3MgYmVoaW5kIHNvbWUgcGNpIGJhci4NCj4+Pj4+DQo+Pj4+PiBN
-YXliZSB3ZSBzaG91bGQgaGF2ZSBhIGJldHRlciBuYW1lIGZvciB0aGF0IHN0cnVjdCAoYW5kIG1h
-eWJlIGFsc28gYQ0KPj4+Pj4gYmV0dGVyIHBsYWNlKSwgYnV0IHdheSBiYWNrIHdoZW4gd2UgZGlz
-Y3Vzc2VkIHRoYXQgYmlrZXNoZWQgSSBkaWRuJ3QgY29tZQ0KPj4+Pj4gdXAgd2l0aCBhbnl0aGlu
-ZyBiZXR0ZXIgcmVhbGx5Lg0KPj4+PiBJIHN1Z2dlc3QgaW9zeXNfbWFwIHNpbmNlIGl0IGFic3Ry
-YWN0cyBhY2Nlc3MgdG8gSU8gYW5kIHN5c3RlbSBtZW1vcnkuDQo+Pj4+DQo+Pj4+Pj4+IFRoZXJl
-IGlzIGEgcm9sZSBkZWxlZ2F0aW9uIG9uIGZpbGxpbmcgb3V0IGFuZCByZWFkaW5nIGEgYnVmZmVy
-IHdoZW4NCj4+Pj4+Pj4gdGhhdCBidWZmZXIgcmVwcmVzZW50cyBhIHN0cnVjdCBsYXlvdXQuDQo+
-Pj4+Pj4+DQo+Pj4+Pj4+IHN0cnVjdCBibGEgew0KPj4+Pj4+PiAgIMKgwqDCoMKgaW50IGE7DQo+
-Pj4+Pj4+ICAgwqDCoMKgwqBpbnQgYjsNCj4+Pj4+Pj4gICDCoMKgwqDCoGludCBjOw0KPj4+Pj4+
-PiAgIMKgwqDCoMKgc3RydWN0IGZvbyBmb287DQo+Pj4+Pj4+ICAgwqDCoMKgwqBzdHJ1Y3QgYmFy
-IGJhcjsNCj4+Pj4+Pj4gICDCoMKgwqDCoGludCBkOw0KPj4+Pj4+PiB9DQo+Pj4+Pj4+DQo+Pj4+
-Pj4+DQo+Pj4+Pj4+IFRoaXMgaW1wbGVtZW50YXRpb24gYWxsb3dzIHlvdSB0byBoYXZlOg0KPj4+
-Pj4+Pg0KPj4+Pj4+PiAgIMKgwqDCoMKgZmlsbF9mb28oc3RydWN0IGRtYV9idWZfbWFwICpibGFf
-bWFwKSB7IC4uLiB9DQo+Pj4+Pj4+ICAgwqDCoMKgwqBmaWxsX2JhcihzdHJ1Y3QgZG1hX2J1Zl9t
-YXAgKmJsYV9tYXApIHsgLi4uIH0NCj4+Pj4+Pj4NCj4+Pj4+Pj4gYW5kIHRoZSBmaXJzdCB0aGlu
-ZyB0aGVzZSBkbyBpcyB0byBtYWtlIHN1cmUgdGhlIG1hcCBpdCdzIHBvaW50aW5nIHRvDQo+Pj4+
-Pj4+IGlzIHJlbGF0aXZlIHRvIHRoZSBzdHJ1Y3QgaXQncyBzdXBwb3NlZCB0byB3cml0ZS9yZWFk
-LiBPdGhlcndpc2UgeW91J3JlDQo+Pj4+Pj4+IHN1Z2dlc3RpbmcgZXZlcnl0aGluZyB0byBiZSBy
-ZWxhdGl2ZSB0byBzdHJ1Y3QgYmxhLCBvciB0byBkbyB0aGUgc2FtZQ0KPj4+Pj4+PiBJJ20gZG9p
-bmcgaXQsIGJ1dCBJTU8gbW9yZSBwcm9uZSB0byBlcnJvcjoNCj4+Pj4+Pj4NCj4+Pj4+Pj4gICDC
-oMKgwqDCoHN0cnVjdCBkbWFfYnVmX21hcCBtYXAgPSAqYmxhX21hcDsNCj4+Pj4+Pj4gICDCoMKg
-wqDCoGRtYV9idWZfbWFwX2luY3IobWFwLCBvZmZzZXRvZiguLi4pKTsNCj4+Pj4+IFdydCB0aGUg
-aXNzdWUgYXQgaGFuZCBJIHRoaW5rIHRoZSBhYm92ZSBpcyBwZXJmZWN0bHkgZmluZSBjb2RlLiBU
-aGUgaWRlYQ0KPj4+Pj4gd2l0aCBkbWFfYnVmX21hcCBpcyByZWFsbHkgdGhhdCBpdCdzIGp1c3Qg
-YSBzcGVjaWFsIHBvaW50ZXIsIHNvIHdyaXRpbmcNCj4+Pj4+IHRoZSBjb2RlIGV4YWN0bHkgYXMg
-cG9pbnRlciBjb2RlIGZlZWxzIGJlc3QuIFVuZm9ydHVuYXRlbHkgeW91IGNhbm5vdCBtYWtlDQo+
-Pj4+PiB0aGVtIHR5cGVzYWZlIChiZWNhdXNlIG9mIEMpLCBzbyB0aGUgY29kZSBzb21ldGltZXMg
-bG9va3MgYSBiaXQgdWdseS4NCj4+Pj4+IE90aGVyd2lzZSB3ZSBjb3VsZCBkbyBzdHVmZiBsaWtl
-IGNvbnRhaW5lcl9vZiBhbmQgYWxsIHRoYXQgd2l0aA0KPj4+Pj4gdHlwZWNoZWNraW5nIGluIHRo
-ZSBtYWNyb3MuDQo+Pj4+IEkgaGFkIGV4YWN0bHkgdGhpcyBjb2RlIGFib3ZlLCBidXQgYWZ0ZXIg
-d3JpdHRpbmcgcXVpdGUgYSBmZXcgcGF0Y2hlcw0KPj4+PiB1c2luZyBpdCwgcGFydGljdWxhcmx5
-IHdpdGggZnVuY3Rpb25zIHRoYXQgaGF2ZSB0byB3cml0ZSB0byAyIG1hcHMgKHNlZQ0KPj4+PiBw
-YXRjaCA2IGZvciBleGFtcGxlKSwgaXQgZmVsdCBtdWNoIGJldHRlciB0byBoYXZlIHNvbWV0aGlu
-ZyB0bw0KPj4+PiBpbml0aWFsaXplIGNvcnJlY3RseSBmcm9tIHRoZSBzdGFydA0KPj4+Pg0KPj4+
-PiAJc3RydWN0IGRtYV9idWZfbWFwIG90aGVyX21hcCA9ICpibGFfbWFwOw0KPj4+PiAJLyogcG9v
-ciBMdWNhcyBmb3JnZXR0aW5nIGRtYV9idWZfbWFwX2luY3IobWFwLCBvZmZzZXRvZiguLi4pKTsg
-Ki8NCj4+Pj4NCj4+Pj4gaXMgZXJyb3IgcHJvbmUgYW5kIGhhcmQgdG8gZGVidWcgc2luY2UgeW91
-IHdpbGwgYmUgcmVhZGluZy93cml0dGluZw0KPj4+PiBmcm9tL3RvIGFub3RoZXIgbG9jYXRpb24g
-cmF0aGVyIHRoYW4gZXhwbG9kaW5nDQo+Pj4+DQo+Pj4+IFdoaWxlIHdpdGggdGhlIGNvbnN0cnVj
-dCBiZWxvdw0KPj4+Pg0KPj4+PiAJb3RoZXJfbWFwOw0KPj4+PiAJLi4uDQo+Pj4+IAlvdGhlcl9t
-YXAgPSBJTklUSUFMSVpFUigpDQo+Pj4+DQo+Pj4+IEkgY2FuIHJlbHkgb24gdGhlIGNvbXBpbGVy
-IGNvbXBsYWluaW5nIGFib3V0IHVuaW5pdGlhbGl6ZWQgdmFyLiBBbmQNCj4+Pj4gaW4gbW9zdCBv
-ZiB0aGUgY2FzZXMgSSBjYW4ganVzdCBoYXZlIHRoaXMgc2luZ2xlIGxpbmUgaW4gdGhlIGJlZ2dp
-bmluZyBvZiB0aGUNCj4+Pj4gZnVuY3Rpb24gd2hlbiB0aGUgb2Zmc2V0IGlzIGNvbnN0YW50Og0K
-Pj4+Pg0KPj4+PiAJc3RydWN0IGRtYV9idWZfbWFwIG90aGVyX21hcCA9IElOSVRJQUxJWkVSKGJs
-YV9tYXAsIG9mZnNldG9mKC4uKSk7DQo+Pj4gSG0geWVhaCB0aGF0J3MgYSBnb29kIHBvaW50IHRo
-YXQgdGhpcyBhbGxvd3MgdXMgdG8gcmVseSBvbiB0aGUgY29tcGlsZXIgdG8NCj4+PiBjaGVjayBm
-b3IgdW5pbml0aWFsaXplZCB2YXJpYWJsZXMuDQo+Pj4NCj4+PiBNYXliZSBpbmNsdWRlIHRoZSBh
-Ym92ZSAod2l0aCBlZGl0aW5nLCBidXQga2VlcGluZyB0aGUgZXhhbXBsZXMpIGluIHRoZQ0KPj4+
-IGtlcm5lbGRvYyB0byBleHBsYWluIHdoeS9ob3cgdG8gdXNlIHRoaXM/IFdpdGggdGhhdCB0aGUg
-Y29uY2VwdCBhdCBsZWFzdA0KPj4+IGhhcyBteQ0KPj4+DQo+Pj4gQWNrZWQtYnk6IERhbmllbCBW
-ZXR0ZXIgPGRhbmllbC52ZXR0ZXJAZmZ3bGwuY2g+DQo+Pj4NCj4+PiBJJ2xsIGxlYXZlIGl0IHVw
-IHRvIHlvdSAmIENocmlzdGlhbiB0byBmaW5kIGEgcHJldHRpZXIgY29sb3IgY2hvaWNlIGZvcg0K
-Pj4+IHRoZSBuYW1pbmcgYmlrZXNoZWQuDQo+PiBUaGVyZSBpcyBvbmUgbWFqb3IgaXNzdWUgcmVt
-YWluaW5nIHdpdGggdGhpcyBhbmQgdGhhdCBpcyBkbWFfYnVmX3Z1bm1hcCgpOg0KPj4NCj4+IHZv
-aWQgZG1hX2J1Zl92dW5tYXAoc3RydWN0IGRtYV9idWYgKmRtYWJ1Ziwgc3RydWN0IGRtYV9idWZf
-bWFwICptYXApOw0KPj4NCj4+IEhlcmUgd2UgZXhwZWN0IHRoZSBvcmlnaW5hbCBwb2ludGVyIGFz
-IHJldHVybmVkIGJ5IGRtYV9idWZfbWFwKCksIG90aGVyd2lzZQ0KPj4gd2UgdnVubWFwKCkgdGhl
-IHdyb25nIGFyZWEhDQo+Pg0KPj4gRm9yIGFsbCBUVE0gYmFzZWQgZHJpdmVyIHRoaXMgZG9lc24n
-dCBtYXR0ZXIgc2luY2Ugd2Uga2VlcCB0aGUgdm1hcCBiYXNlDQo+PiBzZXBhcmF0ZWx5IGluIHRo
-ZSBCTyBhbnl3YXkgKElJUkMpLCBidXQgd2UgaGFkIGF0IGxlYXN0IG9uZSBjYXNlIHdoZXJlIHRo
-aXMNCj4+IG1hZGUgYm9vbSBsYXN0IHllYXIuDQo+IFllYWggYnV0IGlzbid0IHRoYXQgdGhlIHNh
-bWUgaWYgaXQncyBqdXN0IGEgdm9pZCAqPw0KPg0KPiBJZiB5b3UgcGFzcyB0aGUgd3JvbmcgcG9p
-bnRlciB0byBhbiB1bm1hcCBmdW5jdGlvbiBhbmQgbm90IGV4YWN0bHkgd2hhdA0KPiB5b3UgZ28g
-ZnJvbSB0aGUgbWFwIGZ1bmN0aW9uLCB0aGVuIHRoaW5ncyBnbyBib29tLiBUaGlzIGlzIGxpa2UN
-Cj4gY29tcGxhaW5pbmcgdGhhdCB0aGUgZm9sbG93aW5nIGNvZGUgd29udCB3b3JrDQo+DQo+IAl1
-MzIgKnN0dWZmDQo+DQo+IAlzdHVmZiA9IGttYXBfbG9jYWwoc29tZV9wYWdlKTsNCj4gCSpzdHVm
-ZisrID0gMDsNCj4gCSpzdHVmZiA9IDE7DQo+IAlrdW5tYXBfbG9jYWsoc3R1ZmYpOw0KPg0KPiBJ
-dCdzIGp1c3QgLi4uIGRvbid0IGRvIHRoYXQgOi0pIEFsc28gc2luY2Ugd2UgcGFzcyBkbWFfYnVm
-X21hcCBieSB2YWx1ZQ0KPiBhbmQgbm90IGJ5IHBvaW50ZXIgYW55d2hlcmUsIHRoZSByaXNrIG9m
-IHRoaXMgaGFwcGVuaW5nIGlzIHByZXR0eSBsb3cNCj4gc2luY2UgeW91IHRlbmQgdG8gd29yayBv
-biBhIGNvcHkuIFNhbWUgd2l0aCB2b2lkICogcG9pbnRlcnMgcmVhbGx5Lg0KPg0KPiBOb3cgaWYg
-cGVvcGxlIHN0YXJ0IHRvIHBhc3MgYXJvdW5kIHN0cnVjdCBkbWFfYnVmX21hcCAqIGFzIHBvaW50
-ZXJzIGZvcg0KPiBhbnl0aGluZyBlbHNlIHRoYW4gb3V0IHBhcmFtZXRlcnMsIHRoZW4gd2UncmUg
-c2NyZXdlZC4gQnV0IHRoYXQncyBsaWtlDQo+IHBhc3NpbmcgYXJvdW5kIHZvaWQgKiogZm9yIGxv
-bHosIHdoaWNoIGlzIGp1c3Qgd3JvbmcgKGV4Y2VwdCB3aGVuIGl0J3MgYW4NCj4gb3V0IHBhcmFt
-ZXRlciBvciBhY3R1YWxseSBhbiBhcnJheSBvZiBwb2ludGVycyBvZmMpLg0KPg0KPiBPciBJIHJl
-YWxseSBkb24ndCBnZXQgeW91ciBjb25jZXJuIGFuZCB5b3UgbWVhbiBzb21ldGhpbmcgZWxzZT8N
-Cg0KTm8gdGhhdCdzIHByZXR0eSBtdWNoIGl0LiBJdCdzIGp1c3QgdGhhdCB3ZSBoaWRlIHRoZSBw
-b2ludGVyIGluc2lkZSBhIA0Kc3RydWN0dXJlIGFuZCBpdCBpcyBhYnNvbHV0ZWx5IG5vdCBvYnZp
-b3VzIHRvIGEgZHJpdmVyIGRldiB0aGF0IHlvdSANCmNhbid0IGRvOg0KDQpkbWFfYnVmX3ZtYXAo
-Li4sICZtYXApOw0KZG1hX2J1Zl9tYXBfaW5yKCZtYXAsIHgpOw0KZG1hX2J1Zl92dW5tYXAoLi4s
-ICZtYXApOw0KDQpBcyBiYXJlIG1pbmltdW0gSSBzdHJvbmdseSBzdWdnZXN0IHRoYXQgd2UgYWRk
-IHNvbWUgV0FSTl9PTnMgdG8gdGhlIA0KZnJhbWV3b3JrIHRvIGNoZWNrIHRoYXQgdGhlIHBvaW50
-ZXIgZ2l2ZW4gdG8gZG1hX2J1Zl92dW5tYXAoKSBpcyBhdCANCmxlYXN0IHBhZ2UgYWxpZ25lZC4N
-Cg0KQ2hyaXN0aWFuLg0KDQo+IC1EYW5pZWwNCj4NCj4NCj4+IENocmlzdGlhbi4NCj4+DQo+Pj4g
-LURhbmllbA0KPj4+DQo+Pj4+IEx1Y2FzIERlIE1hcmNoaQ0KPj4+Pg0KPj4+Pj4gLURhbmllbA0K
-Pj4+Pj4NCj4+Pj4+Pj4gSU1PIHRoaXMgY29uc3RydWN0IGlzIHdvcnNlIGJlY2F1c2UgYXQgYSBw
-b2ludCBpbiB0aW1lIGluIHRoZSBmdW5jdGlvbg0KPj4+Pj4+PiB0aGUgbWFwIHdhcyBwb2ludGlu
-ZyB0byB0aGUgd3JvbmcgdGhpbmcgdGhlIGZ1bmN0aW9uIHdhcyBzdXBwb3NlZCB0bw0KPj4+Pj4+
-PiByZWFkL3dyaXRlLg0KPj4+Pj4+Pg0KPj4+Pj4+PiBJdCdzIGFsc28gdXNlZnVsIHdoZW4gdGhl
-IGZ1bmN0aW9uIGhhcyBkb3VibGUgZHV0eSwgdXBkYXRpbmcgYSBnbG9iYWwNCj4+Pj4+Pj4gcGFy
-dCBvZiB0aGUgc3RydWN0IGFuZCBhIHRhYmxlIGluc2lkZSBpdCAoc2VlIGV4YW1wbGUgaW4gcGF0
-Y2ggNikNCj4+Pj4+Pj4NCj4+Pj4+Pj4gdGhhbmtzDQo+Pj4+Pj4+IEx1Y2FzIERlIE1hcmNoaQ0K
-Pj4+Pj4gLS0gDQo+Pj4+PiBEYW5pZWwgVmV0dGVyDQo+Pj4+PiBTb2Z0d2FyZSBFbmdpbmVlciwg
-SW50ZWwgQ29ycG9yYXRpb24NCj4+Pj4+IGh0dHBzOi8vbmFtMTEuc2FmZWxpbmtzLnByb3RlY3Rp
-b24ub3V0bG9vay5jb20vP3VybD1odHRwJTNBJTJGJTJGYmxvZy5mZndsbC5jaCUyRiZhbXA7ZGF0
-YT0wNCU3QzAxJTdDY2hyaXN0aWFuLmtvZW5pZyU0MGFtZC5jb20lN0MwNjU0YTE2ZWEzNDQ0Mjcx
-ZDdjMzA4ZDllMTdiZDM1ZCU3QzNkZDg5NjFmZTQ4ODRlNjA4ZTExYTgyZDk5NGUxODNkJTdDMCU3
-QzAlN0M2Mzc3ODg3NDQyMjY4MDg4NzQlN0NVbmtub3duJTdDVFdGcGJHWnNiM2Q4ZXlKV0lqb2lN
-QzR3TGpBd01EQWlMQ0pRSWpvaVYybHVNeklpTENKQlRpSTZJazFoYVd3aUxDSlhWQ0k2TW4wJTNE
-JTdDMzAwMCZhbXA7c2RhdGE9UTZzb2x1QmdsYVpMaExzemRhcGFXdVVWc3FNcTVxdkpPS2lKak8l
-MkI5QlRnJTNEJmFtcDtyZXNlcnZlZD0wDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1t
-bS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxp
-bmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On Thu, Jan 27, 2022 at 12:44:21PM +0100, Christian K=F6nig wrote:
+> Am 27.01.22 um 12:16 schrieb Daniel Vetter:
+> > On Thu, Jan 27, 2022 at 11:21:20AM +0100, Christian K=F6nig wrote:
+> > > Am 27.01.22 um 11:00 schrieb Daniel Vetter:
+> > > > On Thu, Jan 27, 2022 at 01:33:32AM -0800, Lucas De Marchi wrote:
+> > > > > On Thu, Jan 27, 2022 at 09:57:25AM +0100, Daniel Vetter wrote:
+> > > > > > On Thu, Jan 27, 2022 at 09:02:54AM +0100, Christian K=F6nig wro=
+te:
+> > > > > > > Am 27.01.22 um 08:57 schrieb Lucas De Marchi:
+> > > > > > > > On Thu, Jan 27, 2022 at 08:27:11AM +0100, Christian K=F6nig=
+ wrote:
+> > > > > > > > > Am 26.01.22 um 21:36 schrieb Lucas De Marchi:
+> > > > > > > > > > When dma_buf_map struct is passed around, it's useful t=
+o be able to
+> > > > > > > > > > initialize a second map that takes care of reading/writ=
+ing to an offset
+> > > > > > > > > > of the original map.
+> > > > > > > > > >=20
+> > > > > > > > > > Add a helper that copies the struct and add the offset =
+to the proper
+> > > > > > > > > > address.
+> > > > > > > > > Well what you propose here can lead to all kind of proble=
+ms and is
+> > > > > > > > > rather bad design as far as I can see.
+> > > > > > > > >=20
+> > > > > > > > > The struct dma_buf_map is only to be filled in by the exp=
+orter and
+> > > > > > > > > should not be modified in this way by the importer.
+> > > > > > > > humn... not sure if I was=A0 clear. There is no importer an=
+d exporter here.
+> > > > > > > Yeah, and exactly that's what I'm pointing out as problem her=
+e.
+> > > > > > >=20
+> > > > > > > You are using the inter driver framework for something intern=
+al to the
+> > > > > > > driver. That is an absolutely clear NAK!
+> > > > > > >=20
+> > > > > > > We could discuss that, but you guys are just sending around p=
+atches to do
+> > > > > > > this without any consensus that this is a good idea.
+> > > > > > Uh I suggested this, also we're already using dma_buf_map all o=
+ver the
+> > > > > > place as a convenient abstraction. So imo that's all fine, it s=
+hould allow
+> > > > > > drivers to simplify some code where on igpu it's in normal kern=
+el memory
+> > > > > > and on dgpu it's behind some pci bar.
+> > > > > >=20
+> > > > > > Maybe we should have a better name for that struct (and maybe a=
+lso a
+> > > > > > better place), but way back when we discussed that bikeshed I d=
+idn't come
+> > > > > > up with anything better really.
+> > > > > I suggest iosys_map since it abstracts access to IO and system me=
+mory.
+> > > > >=20
+> > > > > > > > There is a role delegation on filling out and reading a buf=
+fer when
+> > > > > > > > that buffer represents a struct layout.
+> > > > > > > >=20
+> > > > > > > > struct bla {
+> > > > > > > >   =A0=A0=A0=A0int a;
+> > > > > > > >   =A0=A0=A0=A0int b;
+> > > > > > > >   =A0=A0=A0=A0int c;
+> > > > > > > >   =A0=A0=A0=A0struct foo foo;
+> > > > > > > >   =A0=A0=A0=A0struct bar bar;
+> > > > > > > >   =A0=A0=A0=A0int d;
+> > > > > > > > }
+> > > > > > > >=20
+> > > > > > > >=20
+> > > > > > > > This implementation allows you to have:
+> > > > > > > >=20
+> > > > > > > >   =A0=A0=A0=A0fill_foo(struct dma_buf_map *bla_map) { ... }
+> > > > > > > >   =A0=A0=A0=A0fill_bar(struct dma_buf_map *bla_map) { ... }
+> > > > > > > >=20
+> > > > > > > > and the first thing these do is to make sure the map it's p=
+ointing to
+> > > > > > > > is relative to the struct it's supposed to write/read. Othe=
+rwise you're
+> > > > > > > > suggesting everything to be relative to struct bla, or to d=
+o the same
+> > > > > > > > I'm doing it, but IMO more prone to error:
+> > > > > > > >=20
+> > > > > > > >   =A0=A0=A0=A0struct dma_buf_map map =3D *bla_map;
+> > > > > > > >   =A0=A0=A0=A0dma_buf_map_incr(map, offsetof(...));
+> > > > > > Wrt the issue at hand I think the above is perfectly fine code.=
+ The idea
+> > > > > > with dma_buf_map is really that it's just a special pointer, so=
+ writing
+> > > > > > the code exactly as pointer code feels best. Unfortunately you =
+cannot make
+> > > > > > them typesafe (because of C), so the code sometimes looks a bit=
+ ugly.
+> > > > > > Otherwise we could do stuff like container_of and all that with
+> > > > > > typechecking in the macros.
+> > > > > I had exactly this code above, but after writting quite a few pat=
+ches
+> > > > > using it, particularly with functions that have to write to 2 map=
+s (see
+> > > > > patch 6 for example), it felt much better to have something to
+> > > > > initialize correctly from the start
+> > > > >=20
+> > > > > 	struct dma_buf_map other_map =3D *bla_map;
+> > > > > 	/* poor Lucas forgetting dma_buf_map_incr(map, offsetof(...)); */
+> > > > >=20
+> > > > > is error prone and hard to debug since you will be reading/writti=
+ng
+> > > > > from/to another location rather than exploding
+> > > > >=20
+> > > > > While with the construct below
+> > > > >=20
+> > > > > 	other_map;
+> > > > > 	...
+> > > > > 	other_map =3D INITIALIZER()
+> > > > >=20
+> > > > > I can rely on the compiler complaining about uninitialized var. A=
+nd
+> > > > > in most of the cases I can just have this single line in the begg=
+ining of the
+> > > > > function when the offset is constant:
+> > > > >=20
+> > > > > 	struct dma_buf_map other_map =3D INITIALIZER(bla_map, offsetof(.=
+.));
+> > > > Hm yeah that's a good point that this allows us to rely on the comp=
+iler to
+> > > > check for uninitialized variables.
+> > > >=20
+> > > > Maybe include the above (with editing, but keeping the examples) in=
+ the
+> > > > kerneldoc to explain why/how to use this? With that the concept at =
+least
+> > > > has my
+> > > >=20
+> > > > Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+> > > >=20
+> > > > I'll leave it up to you & Christian to find a prettier color choice=
+ for
+> > > > the naming bikeshed.
+> > > There is one major issue remaining with this and that is dma_buf_vunm=
+ap():
+> > >=20
+> > > void dma_buf_vunmap(struct dma_buf *dmabuf, struct dma_buf_map *map);
+> > >=20
+> > > Here we expect the original pointer as returned by dma_buf_map(), oth=
+erwise
+> > > we vunmap() the wrong area!
+> > >=20
+> > > For all TTM based driver this doesn't matter since we keep the vmap b=
+ase
+> > > separately in the BO anyway (IIRC), but we had at least one case wher=
+e this
+> > > made boom last year.
+> > Yeah but isn't that the same if it's just a void *?
+> >=20
+> > If you pass the wrong pointer to an unmap function and not exactly what
+> > you go from the map function, then things go boom. This is like
+> > complaining that the following code wont work
+> >=20
+> > 	u32 *stuff
+> >=20
+> > 	stuff =3D kmap_local(some_page);
+> > 	*stuff++ =3D 0;
+> > 	*stuff =3D 1;
+> > 	kunmap_locak(stuff);
+> >=20
+> > It's just ... don't do that :-) Also since we pass dma_buf_map by value
+> > and not by pointer anywhere, the risk of this happening is pretty low
+> > since you tend to work on a copy. Same with void * pointers really.
+> >=20
+> > Now if people start to pass around struct dma_buf_map * as pointers for
+> > anything else than out parameters, then we're screwed. But that's like
+> > passing around void ** for lolz, which is just wrong (except when it's =
+an
+> > out parameter or actually an array of pointers ofc).
+> >=20
+> > Or I really don't get your concern and you mean something else?
+>=20
+> No that's pretty much it. It's just that we hide the pointer inside a
+> structure and it is absolutely not obvious to a driver dev that you can't
+> do:
+>=20
+> dma_buf_vmap(.., &map);
+> dma_buf_map_inr(&map, x);
+> dma_buf_vunmap(.., &map);
+>=20
+> As bare minimum I strongly suggest that we add some WARN_ONs to the
+> framework to check that the pointer given to dma_buf_vunmap() is at least
+> page aligned.
+
+Yeah that might be a good idea. But then we also have to add that check to
+dma_buf_vmap, just in case a driver does something really funny :-)
+-Daniel
+
+>=20
+> Christian.
+>=20
+> > -Daniel
+> >=20
+> >=20
+> > > Christian.
+> > >=20
+> > > > -Daniel
+> > > >=20
+> > > > > Lucas De Marchi
+> > > > >=20
+> > > > > > -Daniel
+> > > > > >=20
+> > > > > > > > IMO this construct is worse because at a point in time in t=
+he function
+> > > > > > > > the map was pointing to the wrong thing the function was su=
+pposed to
+> > > > > > > > read/write.
+> > > > > > > >=20
+> > > > > > > > It's also useful when the function has double duty, updatin=
+g a global
+> > > > > > > > part of the struct and a table inside it (see example in pa=
+tch 6)
+> > > > > > > >=20
+> > > > > > > > thanks
+> > > > > > > > Lucas De Marchi
+> > > > > > --=20
+> > > > > > Daniel Vetter
+> > > > > > Software Engineer, Intel Corporation
+> > > > > > https://nam11.safelinks.protection.outlook.com/?url=3Dhttp%3A%2=
+F%2Fblog.ffwll.ch%2F&amp;data=3D04%7C01%7Cchristian.koenig%40amd.com%7C0654=
+a16ea3444271d7c308d9e17bd35d%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C6=
+37788744226808874%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luM=
+zIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&amp;sdata=3DQ6soluBglaZLhLszdapaWu=
+UVsqMq5qvJOKiJjO%2B9BTg%3D&amp;reserved=3D0
+>=20
+
+--=20
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
