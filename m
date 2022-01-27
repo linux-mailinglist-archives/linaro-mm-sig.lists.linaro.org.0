@@ -2,176 +2,140 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 99EC94B6B24
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 12:34:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A27FA4B6B25
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 12:34:05 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CBC713EECF
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 11:33:59 +0000 (UTC)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
-	by lists.linaro.org (Postfix) with ESMTPS id BEF79401C3
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Jan 2022 14:54:22 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id F04DC218DF;
-	Thu, 27 Jan 2022 14:54:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1643295261; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=v8fWXhbyoXcazfhZo3hv5O1RuBmr1XMNYj+pSAtIS1Q=;
-	b=BgYzEH4XlP9nGQv8GoiDP1R0T9x0TU5+PNYjxGsTuPXTOc0O/MCDbwVDHY1m18+mma9RC3
-	KCzUw6JuwXWyAwkdRqq8NyvfewUFS7+9eOmNp/hPsL4rAwBm7PhrAAn6tNvpqaedYWR+LH
-	u8i3/lyUwVdhDlro16DpS2lfGJWZfRI=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1643295261;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=v8fWXhbyoXcazfhZo3hv5O1RuBmr1XMNYj+pSAtIS1Q=;
-	b=ljw22gscG6ryGrzLVqc+LdSSJVRgkn0lrv1cKXmS5NEDQEZRo+Rzz9zGKUzU9qolDWbW5v
-	jCTRD/SYlTy66zDg==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id C4E3213C03;
-	Thu, 27 Jan 2022 14:54:21 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-	by imap2.suse-dmz.suse.de with ESMTPSA
-	id r00TLx2y8mFsUAAAMHmgww
-	(envelope-from <tzimmermann@suse.de>); Thu, 27 Jan 2022 14:54:21 +0000
-Message-ID: <7cb8a8a2-718d-6d5c-5de6-05bf990dd479@suse.de>
-Date: Thu, 27 Jan 2022 15:54:21 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Content-Language: en-US
-To: Lucas De Marchi <lucas.demarchi@intel.com>,
- intel-gfx@lists.freedesktop.org
+	by lists.linaro.org (Postfix) with ESMTP id D4477401D2
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 11:34:04 +0000 (UTC)
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by lists.linaro.org (Postfix) with ESMTPS id 56FCC401D7
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Jan 2022 15:38:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1643297921; x=1674833921;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=m6hvK8EvrQklv7boMPwOjx9XYUIbfEG+A3JROTW3WAY=;
+  b=eBIaoMN3zDidBVQQtdm26Vlq+WzJaosF6Y0xPeTB5JgvLSoQXW8K3rR6
+   4T3Ofxlfw8smbysgHIURq0sS9vUGbtnYS3zA7gggPC71XphCtnyCLEVoy
+   qVFzthv8R//RR+Rx5gmvNqr2jsdzr9oSprQRpJElvQCqLAIj7jIY8p5kG
+   X90U5nRSQWI4JK/JeGLWf3lwc67hVif7jf97iiviNGh1efKj3O96++uoj
+   tn7LYGImVCINnNJFdLD6Ielbb5yv4T/PwVG8ThmATy/hOC6xUZ+5mghwn
+   WbuJED2d0n3X2Tdeu5Hv3o9jMBZU7ktiezBjvtgHGb8iUjn9gJoV9CWyS
+   A==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10239"; a="247107659"
+X-IronPort-AV: E=Sophos;i="5.88,321,1635231600";
+   d="scan'208";a="247107659"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jan 2022 07:38:39 -0800
+X-IronPort-AV: E=Sophos;i="5.88,321,1635231600";
+   d="scan'208";a="767547488"
+Received: from anithaha-mobl.amr.corp.intel.com (HELO ldmartin-desk2) ([10.212.224.126])
+  by fmsmga006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jan 2022 07:38:39 -0800
+Date: Thu, 27 Jan 2022 07:38:38 -0800
+From: Lucas De Marchi <lucas.demarchi@intel.com>
+To: Thomas Zimmermann <tzimmermann@suse.de>
+Message-ID: <20220127153838.eefwiqkljdplyfd4@ldmartin-desk2>
+X-Patchwork-Hint: comment
 References: <20220126203702.1784589-1-lucas.demarchi@intel.com>
  <20220126203702.1784589-10-lucas.demarchi@intel.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-In-Reply-To: <20220126203702.1784589-10-lucas.demarchi@intel.com>
-X-MailFrom: tzimmermann@suse.de
+ <7cb8a8a2-718d-6d5c-5de6-05bf990dd479@suse.de>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <7cb8a8a2-718d-6d5c-5de6-05bf990dd479@suse.de>
+X-MailFrom: lucas.demarchi@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: WT5CHEHNV4427SJ42WZ3KEHAFXDA66WN
-X-Message-ID-Hash: WT5CHEHNV4427SJ42WZ3KEHAFXDA66WN
-X-Mailman-Approved-At: Tue, 15 Feb 2022 11:33:22 +0000
-CC: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
+Message-ID-Hash: RFWBW3QQKS5IFZNN4NZOZFCNT2DSVG5Z
+X-Message-ID-Hash: RFWBW3QQKS5IFZNN4NZOZFCNT2DSVG5Z
+X-Mailman-Approved-At: Tue, 15 Feb 2022 11:33:24 +0000
+CC: intel-gfx@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 09/19] dma-buf-map: Add wrapper over memset
+Subject: [Linaro-mm-sig] Re: [Intel-gfx] [PATCH 09/19] dma-buf-map: Add wrapper over memset
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WT5CHEHNV4427SJ42WZ3KEHAFXDA66WN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RFWBW3QQKS5IFZNN4NZOZFCNT2DSVG5Z/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============7479460591583276765=="
+Content-Type: text/plain; charset="iso-8859-1"; format="flowed"
+Content-Transfer-Encoding: quoted-printable
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============7479460591583276765==
-Content-Language: en-US
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------qRmQ02gbb1I86kFPwqzaVpbh"
+On Thu, Jan 27, 2022 at 03:54:21PM +0100, Thomas Zimmermann wrote:
+>Hi
+>
+>Am 26.01.22 um 21:36 schrieb Lucas De Marchi:
+>>Just like memcpy_toio(), there is also need to write a direct value to a
+>>memory block. Add dma_buf_map_memset() to abstract memset() vs memset_io()
+>>
+>>Cc: Matt Roper <matthew.d.roper@intel.com>
+>>Cc: Sumit Semwal <sumit.semwal@linaro.org>
+>>Cc: Christian K=F6nig <christian.koenig@amd.com>
+>>Cc: linux-media@vger.kernel.org
+>>Cc: dri-devel@lists.freedesktop.org
+>>Cc: linaro-mm-sig@lists.linaro.org
+>>Cc: linux-kernel@vger.kernel.org
+>>Signed-off-by: Lucas De Marchi <lucas.demarchi@intel.com>
+>>---
+>>  include/linux/dma-buf-map.h | 17 +++++++++++++++++
+>>  1 file changed, 17 insertions(+)
+>>
+>>diff --git a/include/linux/dma-buf-map.h b/include/linux/dma-buf-map.h
+>>index 3514a859f628..c9fb04264cd0 100644
+>>--- a/include/linux/dma-buf-map.h
+>>+++ b/include/linux/dma-buf-map.h
+>>@@ -317,6 +317,23 @@ static inline void dma_buf_map_memcpy_to(struct dma_=
+buf_map *dst, const void *sr
+>>  		memcpy(dst->vaddr, src, len);
+>>  }
+>>+/**
+>>+ * dma_buf_map_memset - Memset into dma-buf mapping
+>>+ * @dst:	The dma-buf mapping structure
+>>+ * @value:	The value to set
+>>+ * @len:	The number of bytes to set in dst
+>>+ *
+>>+ * Set value in dma-buf mapping. Depending on the buffer's location, the=
+ helper
+>>+ * picks the correct method of accessing the memory.
+>>+ */
+>>+static inline void dma_buf_map_memset(struct dma_buf_map *dst, int value=
+, size_t len)
+>>+{
+>>+	if (dst->is_iomem)
+>>+		memset_io(dst->vaddr_iomem, value, len);
+>>+	else
+>>+		memset(dst->vaddr, value, len);
+>>+}
+>
+>Maybe add an offset parameter here.
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------qRmQ02gbb1I86kFPwqzaVpbh
-Content-Type: multipart/mixed; boundary="------------nI0Yh6km02ArpMTUoS57PPJq";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Lucas De Marchi <lucas.demarchi@intel.com>,
- intel-gfx@lists.freedesktop.org
-Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
-Message-ID: <7cb8a8a2-718d-6d5c-5de6-05bf990dd479@suse.de>
-Subject: Re: [PATCH 09/19] dma-buf-map: Add wrapper over memset
-References: <20220126203702.1784589-1-lucas.demarchi@intel.com>
- <20220126203702.1784589-10-lucas.demarchi@intel.com>
-In-Reply-To: <20220126203702.1784589-10-lucas.demarchi@intel.com>
+yep, on v2 I will have 2 APIs, one with and one without offset.
 
---------------nI0Yh6km02ArpMTUoS57PPJq
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+thanks
+Lucas De Marchi
 
-SGkNCg0KQW0gMjYuMDEuMjIgdW0gMjE6MzYgc2NocmllYiBMdWNhcyBEZSBNYXJjaGk6DQo+
-IEp1c3QgbGlrZSBtZW1jcHlfdG9pbygpLCB0aGVyZSBpcyBhbHNvIG5lZWQgdG8gd3JpdGUg
-YSBkaXJlY3QgdmFsdWUgdG8gYQ0KPiBtZW1vcnkgYmxvY2suIEFkZCBkbWFfYnVmX21hcF9t
-ZW1zZXQoKSB0byBhYnN0cmFjdCBtZW1zZXQoKSB2cyBtZW1zZXRfaW8oKQ0KPiANCj4gQ2M6
-IE1hdHQgUm9wZXIgPG1hdHRoZXcuZC5yb3BlckBpbnRlbC5jb20+DQo+IENjOiBTdW1pdCBT
-ZW13YWwgPHN1bWl0LnNlbXdhbEBsaW5hcm8ub3JnPg0KPiBDYzogQ2hyaXN0aWFuIEvDtm5p
-ZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KPiBDYzogbGludXgtbWVkaWFAdmdlci5r
-ZXJuZWwub3JnDQo+IENjOiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnDQo+IENj
-OiBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcNCj4gQ2M6IGxpbnV4LWtlcm5lbEB2
-Z2VyLmtlcm5lbC5vcmcNCj4gU2lnbmVkLW9mZi1ieTogTHVjYXMgRGUgTWFyY2hpIDxsdWNh
-cy5kZW1hcmNoaUBpbnRlbC5jb20+DQo+IC0tLQ0KPiAgIGluY2x1ZGUvbGludXgvZG1hLWJ1
-Zi1tYXAuaCB8IDE3ICsrKysrKysrKysrKysrKysrDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDE3
-IGluc2VydGlvbnMoKykNCj4gDQo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L2RtYS1i
-dWYtbWFwLmggYi9pbmNsdWRlL2xpbnV4L2RtYS1idWYtbWFwLmgNCj4gaW5kZXggMzUxNGE4
-NTlmNjI4Li5jOWZiMDQyNjRjZDAgMTAwNjQ0DQo+IC0tLSBhL2luY2x1ZGUvbGludXgvZG1h
-LWJ1Zi1tYXAuaA0KPiArKysgYi9pbmNsdWRlL2xpbnV4L2RtYS1idWYtbWFwLmgNCj4gQEAg
-LTMxNyw2ICszMTcsMjMgQEAgc3RhdGljIGlubGluZSB2b2lkIGRtYV9idWZfbWFwX21lbWNw
-eV90byhzdHJ1Y3QgZG1hX2J1Zl9tYXAgKmRzdCwgY29uc3Qgdm9pZCAqc3INCj4gICAJCW1l
-bWNweShkc3QtPnZhZGRyLCBzcmMsIGxlbik7DQo+ICAgfQ0KPiAgIA0KPiArLyoqDQo+ICsg
-KiBkbWFfYnVmX21hcF9tZW1zZXQgLSBNZW1zZXQgaW50byBkbWEtYnVmIG1hcHBpbmcNCj4g
-KyAqIEBkc3Q6CVRoZSBkbWEtYnVmIG1hcHBpbmcgc3RydWN0dXJlDQo+ICsgKiBAdmFsdWU6
-CVRoZSB2YWx1ZSB0byBzZXQNCj4gKyAqIEBsZW46CVRoZSBudW1iZXIgb2YgYnl0ZXMgdG8g
-c2V0IGluIGRzdA0KPiArICoNCj4gKyAqIFNldCB2YWx1ZSBpbiBkbWEtYnVmIG1hcHBpbmcu
-IERlcGVuZGluZyBvbiB0aGUgYnVmZmVyJ3MgbG9jYXRpb24sIHRoZSBoZWxwZXINCj4gKyAq
-IHBpY2tzIHRoZSBjb3JyZWN0IG1ldGhvZCBvZiBhY2Nlc3NpbmcgdGhlIG1lbW9yeS4NCj4g
-KyAqLw0KPiArc3RhdGljIGlubGluZSB2b2lkIGRtYV9idWZfbWFwX21lbXNldChzdHJ1Y3Qg
-ZG1hX2J1Zl9tYXAgKmRzdCwgaW50IHZhbHVlLCBzaXplX3QgbGVuKQ0KPiArew0KPiArCWlm
-IChkc3QtPmlzX2lvbWVtKQ0KPiArCQltZW1zZXRfaW8oZHN0LT52YWRkcl9pb21lbSwgdmFs
-dWUsIGxlbik7DQo+ICsJZWxzZQ0KPiArCQltZW1zZXQoZHN0LT52YWRkciwgdmFsdWUsIGxl
-bik7DQo+ICt9DQoNCk1heWJlIGFkZCBhbiBvZmZzZXQgcGFyYW1ldGVyIGhlcmUuDQoNCkJl
-c3QgcmVnYXJkcw0KVGhvbWFzDQoNCj4gKw0KPiAgIC8qKg0KPiAgICAqIGRtYV9idWZfbWFw
-X2luY3IgLSBJbmNyZW1lbnRzIHRoZSBhZGRyZXNzIHN0b3JlZCBpbiBhIGRtYS1idWYgbWFw
-cGluZw0KPiAgICAqIEBtYXA6CVRoZSBkbWEtYnVmIG1hcHBpbmcgc3RydWN0dXJlDQoNCi0t
-IA0KVGhvbWFzIFppbW1lcm1hbm4NCkdyYXBoaWNzIERyaXZlciBEZXZlbG9wZXINClNVU0Ug
-U29mdHdhcmUgU29sdXRpb25zIEdlcm1hbnkgR21iSA0KTWF4ZmVsZHN0ci4gNSwgOTA0MDkg
-TsO8cm5iZXJnLCBHZXJtYW55DQooSFJCIDM2ODA5LCBBRyBOw7xybmJlcmcpDQpHZXNjaMOk
-ZnRzZsO8aHJlcjogSXZvIFRvdGV2DQo=
+>
+>Best regards
+>Thomas
+>
+>>+
+>>  /**
+>>   * dma_buf_map_incr - Increments the address stored in a dma-buf mapping
+>>   * @map:	The dma-buf mapping structure
+>
+>--=20
+>Thomas Zimmermann
+>Graphics Driver Developer
+>SUSE Software Solutions Germany GmbH
+>Maxfeldstr. 5, 90409 N=FCrnberg, Germany
+>(HRB 36809, AG N=FCrnberg)
+>Gesch=E4ftsf=FChrer: Ivo Totev
 
---------------nI0Yh6km02ArpMTUoS57PPJq--
 
---------------qRmQ02gbb1I86kFPwqzaVpbh
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmHysh0FAwAAAAAACgkQlh/E3EQov+A3
-ZxAAr5VXWQlRsbS8cSvWZ6EQYkXbTAu3e9bmzCT4dEaTn9l/lcOs50+nU1tOts6eCL57N8BpE6JL
-ALTmdjZ4uTYn5JubCyVECPZmqVH81qPPJoPHoX5moiJon+jcc7YYohAbrTS0nR5MIV/AKucZiY6f
-6SJfryLv6CcKytF+2DP7ebPyneXG5e4nyQC7ar4f839YaXcKkcmsJSFDVI6b3jwpYw7Pvv4uJ/6m
-o8SRUzSq0I+7vvtS0kuQB1SY8RHEMEr1hmw0IO5K15Eu0XIltumaATF5hbe/pikfJZRxNBjoT/6X
-g3alHMsJhKcL4GFpeZzQIhYAhO59zlrTr6GWVxOa+MSXC5K8v0YeGaHwFEMDID30qO5r22Sd+Qya
-8i7ntYy+VdcbdBf0IiLmwAVgRZdfnI1CNeV2Q+TKGAp2YUd+7re9A32gSKoWmy47788MrEzOU2UM
-S8m/xSL2Yftwdczy5UerUUCgjzT9qibXCjRrS9xXW2uUSeQvyO2tv7Mu0qPTTQODwJfVCsZVqxHR
-YKi1a4bc6voQau/OfByZr/hIaQEJzu1N7z5LeIPQsAXTnyr0+MF5T5GKfrrESODLSKl0x1vQwbpF
-6VxFzz/gcIoU0GfoLVBzoaXMdGNswoxbjBT4v3D6iNpNL7GF1MPTDDR506W6BqbfpJe4Hkgp1NsL
-jH8=
-=gmeQ
------END PGP SIGNATURE-----
-
---------------qRmQ02gbb1I86kFPwqzaVpbh--
-
---===============7479460591583276765==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============7479460591583276765==--
