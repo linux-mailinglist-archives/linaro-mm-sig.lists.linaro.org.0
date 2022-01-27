@@ -2,193 +2,251 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44E2E4B6B06
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 12:33:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6079A4B6B07
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 12:33:44 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 76BCA40167
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 11:33:36 +0000 (UTC)
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
-	by lists.linaro.org (Postfix) with ESMTPS id 4C2CF401C3
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Jan 2022 09:33:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1643276014; x=1674812014;
-  h=date:from:to:subject:message-id:references:mime-version:
-   content-transfer-encoding:in-reply-to;
-  bh=70bvD9FchQOD0i4lLqg413fUh6fr+M8PLj6aT5wcP/A=;
-  b=Yep//h8gQivjJcqN+rzl0kTulNkCNgpCIwP03DBKLLBCt4UFqArvlAEh
-   TScKWxPNPqq6edUYefSykcZWt7o5cfXOACl0aLyBeN1U3f0sH3lGFWE4Z
-   pf5ZfR8caLdFWCfUHzn0pcQE86ZOIVc7461YMH2uCaDwyx9df9G/FwG0W
-   Ctkahkf4BfxsJ2BC2VyJuC6eMQMtQ7dFwRZ30ySy66TjcE47W/VmWMZ12
-   Obq/OAVu/SXrtCZq7ybqpnPsck8x/HVuiyo2GK3rvoQ+guTvUHSuGlsHa
-   sEHithKnj5SzSNRju28bCy9Xh421RRCmAXjtsatJRdEE3uy+HvebXw1vc
-   w==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10239"; a="307514804"
-X-IronPort-AV: E=Sophos;i="5.88,320,1635231600";
-   d="scan'208";a="307514804"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jan 2022 01:33:33 -0800
-X-IronPort-AV: E=Sophos;i="5.88,320,1635231600";
-   d="scan'208";a="480224705"
-Received: from anithaha-mobl.amr.corp.intel.com (HELO ldmartin-desk2) ([10.212.224.126])
-  by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jan 2022 01:33:32 -0800
-Date: Thu, 27 Jan 2022 01:33:32 -0800
-From: Lucas De Marchi <lucas.demarchi@intel.com>
-To: Daniel Vetter <daniel@ffwll.ch>,
-	Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
-	linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	linux-media@vger.kernel.org
-Message-ID: <20220127093332.wnkd2qy4tvwg5i5l@ldmartin-desk2>
-X-Patchwork-Hint: comment
-References: <20220126203702.1784589-1-lucas.demarchi@intel.com>
- <20220126203702.1784589-3-lucas.demarchi@intel.com>
- <f0dbdcc0-13b5-c484-0bf3-a1f8c3e48954@amd.com>
- <20220127075728.ygwgorhnrwaocdqv@ldmartin-desk2>
- <3066c6a7-fc73-d34d-d209-a3ff6818dfb6@amd.com>
- <YfJedaoeJjE3grum@phenom.ffwll.local>
+	by lists.linaro.org (Postfix) with ESMTP id 91EB93EE8D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 11:33:43 +0000 (UTC)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+	by lists.linaro.org (Postfix) with ESMTPS id 259433EE45
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Jan 2022 14:26:45 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id 19E94218D9;
+	Thu, 27 Jan 2022 14:26:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1643293604; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=qkKymbU4u855IjZtmJFOcwp6gY+Q/ceYNOhefCCfveo=;
+	b=nhnd+CEmc2EtpndY7n+0uMn/vTs9PRiDhTVCeA/YnENN1tJv7fJrFk8J4AW16Vay/eNUm2
+	AFmBgpXKhPX8nbkj83DxTDrRRMRv1df2FB94QE2f7EpDiLRMrzP0n7Dlqm7RSWfogmh4Wr
+	Y3hlrk9W1oC2VT7LIjKstfAmp6UA/zA=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1643293604;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=qkKymbU4u855IjZtmJFOcwp6gY+Q/ceYNOhefCCfveo=;
+	b=ynPnZVMQ3zqa+0cKjXQ0Df/UFOmPCdk2snvImfnxa3/uWcDlHz+2ouSRugHnprUxhX13GF
+	+My6/h9Qr8GM5KCA==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E495813BF9;
+	Thu, 27 Jan 2022 14:26:43 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+	by imap2.suse-dmz.suse.de with ESMTPSA
+	id 3rjaNqOr8mF1QAAAMHmgww
+	(envelope-from <tzimmermann@suse.de>); Thu, 27 Jan 2022 14:26:43 +0000
+Message-ID: <b7057779-2df8-8737-e174-fcb138544dfb@suse.de>
+Date: Thu, 27 Jan 2022 15:26:43 +0100
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <YfJedaoeJjE3grum@phenom.ffwll.local>
-X-MailFrom: lucas.demarchi@intel.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Content-Language: en-US
+To: Lucas De Marchi <lucas.demarchi@intel.com>,
+ intel-gfx@lists.freedesktop.org
+References: <20220126203702.1784589-1-lucas.demarchi@intel.com>
+ <20220126203702.1784589-2-lucas.demarchi@intel.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <20220126203702.1784589-2-lucas.demarchi@intel.com>
+X-MailFrom: tzimmermann@suse.de
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: NDCJ7LFVCQQDGAT6OGVGSEAU3VQO5WBY
-X-Message-ID-Hash: NDCJ7LFVCQQDGAT6OGVGSEAU3VQO5WBY
-X-Mailman-Approved-At: Tue, 15 Feb 2022 11:33:14 +0000
+Message-ID-Hash: KN5GPLQNWD4KYMWATPC6RWAC3OQIEDA5
+X-Message-ID-Hash: KN5GPLQNWD4KYMWATPC6RWAC3OQIEDA5
+X-Mailman-Approved-At: Tue, 15 Feb 2022 11:33:16 +0000
+CC: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [Intel-gfx] [PATCH 02/19] dma-buf-map: Add helper to initialize second map
+Subject: [Linaro-mm-sig] Re: [PATCH 01/19] dma-buf-map: Add read/write helpers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NDCJ7LFVCQQDGAT6OGVGSEAU3VQO5WBY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KN5GPLQNWD4KYMWATPC6RWAC3OQIEDA5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"; format="flowed"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/mixed; boundary="===============7126452736519117059=="
 
-On Thu, Jan 27, 2022 at 09:57:25AM +0100, Daniel Vetter wrote:
->On Thu, Jan 27, 2022 at 09:02:54AM +0100, Christian K=F6nig wrote:
->> Am 27.01.22 um 08:57 schrieb Lucas De Marchi:
->> > On Thu, Jan 27, 2022 at 08:27:11AM +0100, Christian K=F6nig wrote:
->> > > Am 26.01.22 um 21:36 schrieb Lucas De Marchi:
->> > > > When dma_buf_map struct is passed around, it's useful to be able to
->> > > > initialize a second map that takes care of reading/writing to an o=
-ffset
->> > > > of the original map.
->> > > >
->> > > > Add a helper that copies the struct and add the offset to the prop=
-er
->> > > > address.
->> > >
->> > > Well what you propose here can lead to all kind of problems and is
->> > > rather bad design as far as I can see.
->> > >
->> > > The struct dma_buf_map is only to be filled in by the exporter and
->> > > should not be modified in this way by the importer.
->> >
->> > humn... not sure if I was=A0 clear. There is no importer and exporter =
-here.
->>
->> Yeah, and exactly that's what I'm pointing out as problem here.
->>
->> You are using the inter driver framework for something internal to the
->> driver. That is an absolutely clear NAK!
->>
->> We could discuss that, but you guys are just sending around patches to do
->> this without any consensus that this is a good idea.
->
->Uh I suggested this, also we're already using dma_buf_map all over the
->place as a convenient abstraction. So imo that's all fine, it should allow
->drivers to simplify some code where on igpu it's in normal kernel memory
->and on dgpu it's behind some pci bar.
->
->Maybe we should have a better name for that struct (and maybe also a
->better place), but way back when we discussed that bikeshed I didn't come
->up with anything better really.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============7126452736519117059==
+Content-Language: en-US
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------wrwd0Yw0wz2X0kWcNQWE68HB"
 
-I suggest iosys_map since it abstracts access to IO and system memory.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------wrwd0Yw0wz2X0kWcNQWE68HB
+Content-Type: multipart/mixed; boundary="------------Aw6QOcMQfdXUzvUokqCJsVWb";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Lucas De Marchi <lucas.demarchi@intel.com>,
+ intel-gfx@lists.freedesktop.org
+Cc: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
+Message-ID: <b7057779-2df8-8737-e174-fcb138544dfb@suse.de>
+Subject: Re: [PATCH 01/19] dma-buf-map: Add read/write helpers
+References: <20220126203702.1784589-1-lucas.demarchi@intel.com>
+ <20220126203702.1784589-2-lucas.demarchi@intel.com>
+In-Reply-To: <20220126203702.1784589-2-lucas.demarchi@intel.com>
 
->
->> > There is a role delegation on filling out and reading a buffer when
->> > that buffer represents a struct layout.
->> >
->> > struct bla {
->> > =A0=A0=A0=A0int a;
->> > =A0=A0=A0=A0int b;
->> > =A0=A0=A0=A0int c;
->> > =A0=A0=A0=A0struct foo foo;
->> > =A0=A0=A0=A0struct bar bar;
->> > =A0=A0=A0=A0int d;
->> > }
->> >
->> >
->> > This implementation allows you to have:
->> >
->> > =A0=A0=A0=A0fill_foo(struct dma_buf_map *bla_map) { ... }
->> > =A0=A0=A0=A0fill_bar(struct dma_buf_map *bla_map) { ... }
->> >
->> > and the first thing these do is to make sure the map it's pointing to
->> > is relative to the struct it's supposed to write/read. Otherwise you're
->> > suggesting everything to be relative to struct bla, or to do the same
->> > I'm doing it, but IMO more prone to error:
->> >
->> > =A0=A0=A0=A0struct dma_buf_map map =3D *bla_map;
->> > =A0=A0=A0=A0dma_buf_map_incr(map, offsetof(...));
->
->Wrt the issue at hand I think the above is perfectly fine code. The idea
->with dma_buf_map is really that it's just a special pointer, so writing
->the code exactly as pointer code feels best. Unfortunately you cannot make
->them typesafe (because of C), so the code sometimes looks a bit ugly.
->Otherwise we could do stuff like container_of and all that with
->typechecking in the macros.
+--------------Aw6QOcMQfdXUzvUokqCJsVWb
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-I had exactly this code above, but after writting quite a few patches
-using it, particularly with functions that have to write to 2 maps (see
-patch 6 for example), it felt much better to have something to
-initialize correctly from the start
+SGkNCg0KQW0gMjYuMDEuMjIgdW0gMjE6MzYgc2NocmllYiBMdWNhcyBEZSBNYXJjaGk6DQo+
+IEluIGNlcnRhaW4gc2l0dWF0aW9ucyBpdCdzIHVzZWZ1bCB0byBiZSBhYmxlIHRvIHJlYWQg
+b3Igd3JpdGUgdG8gYW4NCj4gb2Zmc2V0IHRoYXQgaXMgY2FsY3VsYXRlZCBieSBoYXZpbmcg
+dGhlIG1lbW9yeSBsYXlvdXQgZ2l2ZW4gYnkgYSBzdHJ1Y3QNCj4gZGVjbGFyYXRpb24uIFVz
+dWFsbHkgd2UgYXJlIGdvaW5nIHRvIHJlYWQvd3JpdGUgYSB1OCwgdTE2LCB1MzIgb3IgdTY0
+Lg0KPiANCj4gQWRkIGEgcGFpciBvZiBtYWNyb3MgZG1hX2J1Zl9tYXBfcmVhZF9maWVsZCgp
+L2RtYV9idWZfbWFwX3dyaXRlX2ZpZWxkKCkNCj4gdG8gY2FsY3VsYXRlIHRoZSBvZmZzZXQg
+b2YgYSBzdHJ1Y3QgbWVtYmVyIGFuZCBtZW1jcHkgdGhlIGRhdGEgZnJvbS90bw0KPiB0aGUg
+ZG1hX2J1Zl9tYXAuIFdlIGNvdWxkIHVzZSByZWFkYiwgcmVhZHcsIHJlYWRsLCByZWFkcSBh
+bmQgdGhlIHdyaXRlKg0KPiBjb3VudGVycGFydHMsIGhvd2V2ZXIgZHVlIHRvIGFsaWdubWVu
+dCBpc3N1ZXMgdGhpcyBtYXkgbm90IHdvcmsgb24gYWxsDQo+IGFyY2hpdGVjdHVyZXMuIElm
+IGFsaWdubWVudCBuZWVkcyB0byBiZSBjaGVja2VkIHRvIGNhbGwgdGhlIHJpZ2h0DQo+IGZ1
+bmN0aW9uLCBpdCdzIG5vdCBwb3NzaWJsZSB0byBkZWNpZGUgYXQgY29tcGlsZS10aW1lIHdo
+aWNoIGZ1bmN0aW9uIHRvDQo+IGNhbGw6IHNvIGp1c3QgbGVhdmUgdGhlIGRlY2lzaW9uIHRv
+IHRoZSBtZW1jcHkgZnVuY3Rpb24gdGhhdCB3aWxsIGRvDQo+IGV4YWN0bHkgdGhhdCBvbiBJ
+TyBtZW1vcnkgb3IgZGVyZWZlcmVuY2UgdGhlIHBvaW50ZXIuDQo+IA0KPiBDYzogU3VtaXQg
+U2Vtd2FsIDxzdW1pdC5zZW13YWxAbGluYXJvLm9yZz4NCj4gQ2M6IENocmlzdGlhbiBLw7Zu
+aWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCj4gQ2M6IGxpbnV4LW1lZGlhQHZnZXIu
+a2VybmVsLm9yZw0KPiBDYzogZHJpLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZw0KPiBD
+YzogbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnDQo+IENjOiBsaW51eC1rZXJuZWxA
+dmdlci5rZXJuZWwub3JnDQo+IFNpZ25lZC1vZmYtYnk6IEx1Y2FzIERlIE1hcmNoaSA8bHVj
+YXMuZGVtYXJjaGlAaW50ZWwuY29tPg0KPiAtLS0NCj4gICBpbmNsdWRlL2xpbnV4L2RtYS1i
+dWYtbWFwLmggfCA4MSArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+
+ICAgMSBmaWxlIGNoYW5nZWQsIDgxIGluc2VydGlvbnMoKykNCj4gDQo+IGRpZmYgLS1naXQg
+YS9pbmNsdWRlL2xpbnV4L2RtYS1idWYtbWFwLmggYi9pbmNsdWRlL2xpbnV4L2RtYS1idWYt
+bWFwLmgNCj4gaW5kZXggMTlmYTBiNWFlNWVjLi42NWU5MjdkOWNlMzMgMTAwNjQ0DQo+IC0t
+LSBhL2luY2x1ZGUvbGludXgvZG1hLWJ1Zi1tYXAuaA0KPiArKysgYi9pbmNsdWRlL2xpbnV4
+L2RtYS1idWYtbWFwLmgNCj4gQEAgLTYsNiArNiw3IEBADQo+ICAgI2lmbmRlZiBfX0RNQV9C
+VUZfTUFQX0hfXw0KPiAgICNkZWZpbmUgX19ETUFfQlVGX01BUF9IX18NCj4gICANCj4gKyNp
+bmNsdWRlIDxsaW51eC9rZXJuZWwuaD4NCj4gICAjaW5jbHVkZSA8bGludXgvaW8uaD4NCj4g
+ICAjaW5jbHVkZSA8bGludXgvc3RyaW5nLmg+DQo+ICAgDQo+IEBAIC0yMjksNiArMjMwLDQ2
+IEBAIHN0YXRpYyBpbmxpbmUgdm9pZCBkbWFfYnVmX21hcF9jbGVhcihzdHJ1Y3QgZG1hX2J1
+Zl9tYXAgKm1hcCkNCj4gICAJfQ0KPiAgIH0NCj4gICANCj4gKy8qKg0KPiArICogZG1hX2J1
+Zl9tYXBfbWVtY3B5X3RvX29mZnNldCAtIE1lbWNweSBpbnRvIG9mZnNldCBvZiBkbWEtYnVm
+IG1hcHBpbmcNCj4gKyAqIEBkc3Q6CVRoZSBkbWEtYnVmIG1hcHBpbmcgc3RydWN0dXJlDQo+
+ICsgKiBAb2Zmc2V0OglUaGUgb2Zmc2V0IGZyb20gd2hpY2ggdG8gY29weQ0KPiArICogQHNy
+YzoJVGhlIHNvdXJjZSBidWZmZXINCj4gKyAqIEBsZW46CVRoZSBudW1iZXIgb2YgYnl0ZSBp
+biBzcmMNCj4gKyAqDQo+ICsgKiBDb3BpZXMgZGF0YSBpbnRvIGEgZG1hLWJ1ZiBtYXBwaW5n
+IHdpdGggYW4gb2Zmc2V0LiBUaGUgc291cmNlIGJ1ZmZlciBpcyBpbg0KPiArICogc3lzdGVt
+IG1lbW9yeS4gRGVwZW5kaW5nIG9uIHRoZSBidWZmZXIncyBsb2NhdGlvbiwgdGhlIGhlbHBl
+ciBwaWNrcyB0aGUNCj4gKyAqIGNvcnJlY3QgbWV0aG9kIG9mIGFjY2Vzc2luZyB0aGUgbWVt
+b3J5Lg0KPiArICovDQo+ICtzdGF0aWMgaW5saW5lIHZvaWQgZG1hX2J1Zl9tYXBfbWVtY3B5
+X3RvX29mZnNldChzdHJ1Y3QgZG1hX2J1Zl9tYXAgKmRzdCwgc2l6ZV90IG9mZnNldCwNCj4g
+KwkJCQkJCWNvbnN0IHZvaWQgKnNyYywgc2l6ZV90IGxlbikNCj4gK3sNCj4gKwlpZiAoZHN0
+LT5pc19pb21lbSkNCj4gKwkJbWVtY3B5X3RvaW8oZHN0LT52YWRkcl9pb21lbSArIG9mZnNl
+dCwgc3JjLCBsZW4pOw0KPiArCWVsc2UNCj4gKwkJbWVtY3B5KGRzdC0+dmFkZHIgKyBvZmZz
+ZXQsIHNyYywgbGVuKTsNCj4gK30NCg0KUGxlYXNlIGRvbid0IGFkZCBhIG5ldyBmdW5jdGlv
+bi4gUmF0aGVyIHBsZWFzZSBhZGQgdGhlIG9mZnNldCBwYXJhbWV0ZXIgDQp0byBkbWFfYnVm
+X21hcF9tZW1jcHlfdG8oKSBhbmQgdXBkYXRlIHRoZSBjYWxsZXJzLiBUaGVyZSBhcmUgb25s
+eSB0d28gDQpjYWxscyB0byBkbWFfYnVmX21hcF9tZW1jcHlfdG8oKSB3aXRoaW4gdGhlIGtl
+cm5lbC4gVG8gbWFrZSBpdCBjbGVhciANCndoYXQgdGhlIG9mZnNldCBhcHBsaWVzIHRvLCBJ
+J2QgY2FsbCB0aGUgcGFyYW1ldGVyICdkc3Rfb2Zmc2V0Jy4NCg0KPiArDQo+ICsvKioNCj4g
+KyAqIGRtYV9idWZfbWFwX21lbWNweV9mcm9tX29mZnNldCAtIE1lbWNweSBmcm9tIG9mZnNl
+dCBvZiBkbWEtYnVmIG1hcHBpbmcgaW50byBzeXN0ZW0gbWVtb3J5DQo+ICsgKiBAZHN0OglE
+ZXN0aW5hdGlvbiBpbiBzeXN0ZW0gbWVtb3J5DQo+ICsgKiBAc3JjOglUaGUgZG1hLWJ1ZiBt
+YXBwaW5nIHN0cnVjdHVyZQ0KPiArICogQHNyYzoJVGhlIG9mZnNldCBmcm9tIHdoaWNoIHRv
+IGNvcHkNCj4gKyAqIEBsZW46CVRoZSBudW1iZXIgb2YgYnl0ZSBpbiBzcmMNCj4gKyAqDQo+
+ICsgKiBDb3BpZXMgZGF0YSBmcm9tIGEgZG1hLWJ1ZiBtYXBwaW5nIHdpdGggYW4gb2Zmc2V0
+LiBUaGUgZGVzdCBidWZmZXIgaXMgaW4NCj4gKyAqIHN5c3RlbSBtZW1vcnkuIERlcGVuZGlu
+ZyBvbiB0aGUgbWFwcGluZyBsb2NhdGlvbiwgdGhlIGhlbHBlciBwaWNrcyB0aGUNCj4gKyAq
+IGNvcnJlY3QgbWV0aG9kIG9mIGFjY2Vzc2luZyB0aGUgbWVtb3J5Lg0KPiArICovDQo+ICtz
+dGF0aWMgaW5saW5lIHZvaWQgZG1hX2J1Zl9tYXBfbWVtY3B5X2Zyb21fb2Zmc2V0KHZvaWQg
+KmRzdCwgY29uc3Qgc3RydWN0IGRtYV9idWZfbWFwICpzcmMsDQo+ICsJCQkJCQkgIHNpemVf
+dCBvZmZzZXQsIHNpemVfdCBsZW4pDQo+ICt7DQo+ICsJaWYgKHNyYy0+aXNfaW9tZW0pDQo+
+ICsJCW1lbWNweV9mcm9taW8oZHN0LCBzcmMtPnZhZGRyX2lvbWVtICsgb2Zmc2V0LCBsZW4p
+Ow0KPiArCWVsc2UNCj4gKwkJbWVtY3B5KGRzdCwgc3JjLT52YWRkciArIG9mZnNldCwgbGVu
+KTsNCj4gK30NCj4gKw0KDQpXaXRoIHRoZSBkbWFfYnVmX21hcF9tZW1jcHlfdG8oKSBjaGFu
+Z2VzLCBwbGVhc2UganVzdCBjYWxsIHRoaXMgZnVuY3Rpb24gDQpkbWFfYnVmX21hcF9tZW1j
+cHlfZnJvbSgpLg0KDQo+ICAgLyoqDQo+ICAgICogZG1hX2J1Zl9tYXBfbWVtY3B5X3RvIC0g
+TWVtY3B5IGludG8gZG1hLWJ1ZiBtYXBwaW5nDQo+ICAgICogQGRzdDoJVGhlIGRtYS1idWYg
+bWFwcGluZyBzdHJ1Y3R1cmUNCj4gQEAgLTI2Myw0ICszMDQsNDQgQEAgc3RhdGljIGlubGlu
+ZSB2b2lkIGRtYV9idWZfbWFwX2luY3Ioc3RydWN0IGRtYV9idWZfbWFwICptYXAsIHNpemVf
+dCBpbmNyKQ0KPiAgIAkJbWFwLT52YWRkciArPSBpbmNyOw0KPiAgIH0NCj4gICANCj4gKy8q
+Kg0KPiArICogZG1hX2J1Zl9tYXBfcmVhZF9maWVsZCAtIFJlYWQgc3RydWN0IG1lbWJlciBm
+cm9tIGRtYS1idWYgbWFwcGluZyB3aXRoDQo+ICsgKiBhcmJpdHJhcnkgc2l6ZSBhbmQgaGFu
+ZGxpbmcgdW4tYWxpZ25lZCBhY2Nlc3Nlcw0KPiArICoNCj4gKyAqIEBtYXBfXzoJVGhlIGRt
+YS1idWYgbWFwcGluZyBzdHJ1Y3R1cmUNCj4gKyAqIEB0eXBlX186CVRoZSBzdHJ1Y3QgdG8g
+YmUgdXNlZCBjb250YWluaW5nIHRoZSBmaWVsZCB0byByZWFkDQo+ICsgKiBAZmllbGRfXzoJ
+TWVtYmVyIGZyb20gc3RydWN0IHdlIHdhbnQgdG8gcmVhZA0KPiArICoNCj4gKyAqIFJlYWQg
+YSB2YWx1ZSBmcm9tIGRtYS1idWYgbWFwcGluZyBjYWxjdWxhdGluZyB0aGUgb2Zmc2V0IGFu
+ZCBzaXplOiB0aGlzIGFzc3VtZXMNCj4gKyAqIHRoZSBkbWEtYnVmIG1hcHBpbmcgaXMgYWxp
+Z25lZCB3aXRoIGEgYSBzdHJ1Y3QgdHlwZV9fLiBBIHNpbmdsZSB1OCwgdTE2LCB1MzINCj4g
+KyAqIG9yIHU2NCBjYW4gYmUgcmVhZCwgYmFzZWQgb24gdGhlIG9mZnNldCBhbmQgc2l6ZSBv
+ZiB0eXBlX18uZmllbGRfXy4NCj4gKyAqLw0KPiArI2RlZmluZSBkbWFfYnVmX21hcF9yZWFk
+X2ZpZWxkKG1hcF9fLCB0eXBlX18sIGZpZWxkX18pICh7CQkJCVwNCj4gKwl0eXBlX18gKnRf
+XzsJCQkJCQkJCQlcDQo+ICsJdHlwZW9mKHRfXy0+ZmllbGRfXykgdmFsX187CQkJCQkJCVwN
+Cj4gKwlkbWFfYnVmX21hcF9tZW1jcHlfZnJvbV9vZmZzZXQoJnZhbF9fLCBtYXBfXywgb2Zm
+c2V0b2YodHlwZV9fLCBmaWVsZF9fKSwJXA0KPiArCQkJCSAgICAgICBzaXplb2YodF9fLT5m
+aWVsZF9fKSk7CQkJCVwNCj4gKwl2YWxfXzsJCQkJCQkJCQkJXA0KPiArfSkNCj4gKw0KPiAr
+LyoqDQo+ICsgKiBkbWFfYnVmX21hcF93cml0ZV9maWVsZCAtIFdyaXRlIHN0cnVjdCBtZW1i
+ZXIgdG8gdGhlIGRtYS1idWYgbWFwcGluZyB3aXRoDQo+ICsgKiBhcmJpdHJhcnkgc2l6ZSBh
+bmQgaGFuZGxpbmcgdW4tYWxpZ25lZCBhY2Nlc3Nlcw0KPiArICoNCj4gKyAqIEBtYXBfXzoJ
+VGhlIGRtYS1idWYgbWFwcGluZyBzdHJ1Y3R1cmUNCj4gKyAqIEB0eXBlX186CVRoZSBzdHJ1
+Y3QgdG8gYmUgdXNlZCBjb250YWluaW5nIHRoZSBmaWVsZCB0byB3cml0ZQ0KPiArICogQGZp
+ZWxkX186CU1lbWJlciBmcm9tIHN0cnVjdCB3ZSB3YW50IHRvIHdyaXRlDQo+ICsgKiBAdmFs
+X186CVZhbHVlIHRvIGJlIHdyaXR0ZW4NCj4gKyAqDQo+ICsgKiBXcml0ZSBhIHZhbHVlIHRv
+IHRoZSBkbWEtYnVmIG1hcHBpbmcgY2FsY3VsYXRpbmcgdGhlIG9mZnNldCBhbmQgc2l6ZS4N
+Cj4gKyAqIEEgc2luZ2xlIHU4LCB1MTYsIHUzMiBvciB1NjQgY2FuIGJlIHdyaXR0ZW4gYmFz
+ZWQgb24gdGhlIG9mZnNldCBhbmQgc2l6ZSBvZg0KPiArICogdHlwZV9fLmZpZWxkX18uDQo+
+ICsgKi8NCj4gKyNkZWZpbmUgZG1hX2J1Zl9tYXBfd3JpdGVfZmllbGQobWFwX18sIHR5cGVf
+XywgZmllbGRfXywgdmFsX18pICh7CQkJXA0KPiArCXR5cGVfXyAqdF9fOwkJCQkJCQkJCVwN
+Cj4gKwl0eXBlb2YodF9fLT5maWVsZF9fKSB2YWxfX19fID0gdmFsX187CQkJCQkJXA0KPiAr
+CWRtYV9idWZfbWFwX21lbWNweV90b19vZmZzZXQobWFwX18sIG9mZnNldG9mKHR5cGVfXywg
+ZmllbGRfXyksCQkJXA0KPiArCQkJCSAgICAgJnZhbF9fX18sIHNpemVvZih0X18tPmZpZWxk
+X18pKTsJCQlcDQo+ICt9KQ0KDQpBcyB0aGUgb3JpZ2luYWwgYXV0aG9yIG9mIHRoaXMgZmls
+ZSwgSSBmZWVsIGxpa2UgdGhpcyBzaG91bGRuJ3QgYmUgaGVyZS4gDQpBdCBsZWFzdCBub3Qg
+dW50aWwgd2UgaGF2ZSBhbm90aGVyIGRyaXZlciB1c2luZyB0aGF0IHBhdHRlcm4uDQoNCkJl
+c3QgcmVnYXJkcw0KVGhvbWFzDQoNCj4gKw0KPiAgICNlbmRpZiAvKiBfX0RNQV9CVUZfTUFQ
+X0hfXyAqLw0KDQotLSANClRob21hcyBaaW1tZXJtYW5uDQpHcmFwaGljcyBEcml2ZXIgRGV2
+ZWxvcGVyDQpTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgNCk1heGZlbGRz
+dHIuIDUsIDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQ0KKEhSQiAzNjgwOSwgQUcgTsO8cm5i
+ZXJnKQ0KR2VzY2jDpGZ0c2bDvGhyZXI6IEl2byBUb3Rldg0K
 
-	struct dma_buf_map other_map =3D *bla_map;
-	/* poor Lucas forgetting dma_buf_map_incr(map, offsetof(...)); */
+--------------Aw6QOcMQfdXUzvUokqCJsVWb--
 
-is error prone and hard to debug since you will be reading/writting
-from/to another location rather than exploding
+--------------wrwd0Yw0wz2X0kWcNQWE68HB
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
-While with the construct below
+-----BEGIN PGP SIGNATURE-----
 
-	other_map;
-	...
-	other_map =3D INITIALIZER()
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmHyq6MFAwAAAAAACgkQlh/E3EQov+AQ
+/Q//b90gIWU4R3JA00li+PNQRWUckxSpzgUWZ2njJnxmAFDZIkBUd1jOYrEvDtpgrBRkA1OpGv1f
+0Jb+GKmz2jxdQNqA7xtbxtDXMrR6TnZm09+caI/BLtbL8+KDEu8FBYBBuRyKflICnu2DSV/onp7x
+BbZzDI9jrgMWoFPxxewEZpn17LGf+wA155n2BsLW0H1vCu0CBnM4vlNJhIlLOycd1Q8Y67t01OPC
+p1nfgpA7dbmjUBkbHseWJjSL9psSsHf56EXxfTvTzwhzSVIZ4+Myv7emNJcabYyMrh1X5Auwdwcq
+2uGdsP+nnC4qRQtaiBybI98Kjr5K0q0feSg08iU1USa5HXjOpN4s4YDM5JVUAiahRCLyICXWsreu
+dUoZSYtM0ZV2RN8dn+YcNebKyluSGcwn3M2aBxrj5nmuUpcF7vsfLYK9JQEjnHzk6vt68dnFZYPv
+5hhlzJUZVVStDq042kpaemEVsaLW4wGuWPO1xqAbKEr6yeqCTroKxVqQwLcS/BfwdQUX1iuOW3So
+sZug4WLQ/ZonclSowtm6+BlC1KBFzgH3DWzkODTaEnO6hAviShsclSXtD9XjHrRZFFmqUBgfLWCc
+AayZ69oQuPa1XZYpRsSAvmT2EQqOix69QpKyjKs3cltxB8/CgYRDJt+n69yQQ45BmYdbqmSCUOKi
+R9I=
+=oNB8
+-----END PGP SIGNATURE-----
 
-I can rely on the compiler complaining about uninitialized var. And
-in most of the cases I can just have this single line in the beggining of t=
-he
-function when the offset is constant:
+--------------wrwd0Yw0wz2X0kWcNQWE68HB--
 
-	struct dma_buf_map other_map =3D INITIALIZER(bla_map, offsetof(..));
+--===============7126452736519117059==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Lucas De Marchi
-
->-Daniel
->
->> > IMO this construct is worse because at a point in time in the function
->> > the map was pointing to the wrong thing the function was supposed to
->> > read/write.
->> >
->> > It's also useful when the function has double duty, updating a global
->> > part of the struct and a table inside it (see example in patch 6)
->> >
->> > thanks
->> > Lucas De Marchi
->>
->
->--=20
->Daniel Vetter
->Software Engineer, Intel Corporation
->http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============7126452736519117059==--
