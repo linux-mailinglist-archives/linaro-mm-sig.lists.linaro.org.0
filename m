@@ -2,143 +2,252 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EA0E4B6B38
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 12:34:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4F9D34B6B39
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 12:34:45 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A05F23EEC5
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 11:34:39 +0000 (UTC)
-Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
-	by lists.linaro.org (Postfix) with ESMTPS id 240B43ECEE
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Jan 2022 01:41:54 +0000 (UTC)
-Received: from kwepemi500020.china.huawei.com (unknown [172.30.72.57])
-	by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4JlKt34L5PzccpN;
-	Fri, 28 Jan 2022 09:40:59 +0800 (CST)
-Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
- kwepemi500020.china.huawei.com (7.221.188.8) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Fri, 28 Jan 2022 09:41:50 +0800
-Received: from localhost.localdomain (10.175.112.125) by
- kwepemm600017.china.huawei.com (7.193.23.234) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.21; Fri, 28 Jan 2022 09:41:49 +0800
-From: Peng Liu <liupeng256@huawei.com>
-To: <glider@google.com>, <elver@google.com>, <dvyukov@google.com>,
-	<corbet@lwn.net>, <sumit.semwal@linaro.org>, <christian.koenig@amd.com>,
-	<akpm@linux-foundation.org>
-Date: Fri, 28 Jan 2022 01:57:52 +0000
-Message-ID: <20220128015752.931256-1-liupeng256@huawei.com>
-X-Mailer: git-send-email 2.18.0.huawei.25
+	by lists.linaro.org (Postfix) with ESMTP id 88E853ECF6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 11:34:44 +0000 (UTC)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+	by lists.linaro.org (Postfix) with ESMTPS id 86E983EE07
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Jan 2022 08:15:46 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id 79FF421100;
+	Fri, 28 Jan 2022 08:15:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1643357745; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=v7lx9USLaP9NqVtXbKYtbPVvqqu2Rlzun880eNUsVzM=;
+	b=PJ66mx+BBXlPCCsExE3ZFRYvqDYwkPXANH8yFmAVxtn7hdN2U9oD/97b7iH0ITZyMTQnDJ
+	0n0YF436Z5BoI6mHrnNeumPLGwNm+TXmNOhl2rU4GI0lEhmSW9gNF3HgUX27PPmI4qUeXo
+	lSvminaWIBqcm1e0rXmAJM5XuKohZqU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1643357745;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=v7lx9USLaP9NqVtXbKYtbPVvqqu2Rlzun880eNUsVzM=;
+	b=cnLIHl1DuXQzqQmU9TKsr20vez27Cmq38jcdDymSwW/uJqFu3NG//QoqPNaEGYlGVH5reN
+	2Pxf5BzgibPGa2Bw==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4D122139C4;
+	Fri, 28 Jan 2022 08:15:45 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+	by imap2.suse-dmz.suse.de with ESMTPSA
+	id 3ZHPETGm82HAVgAAMHmgww
+	(envelope-from <tzimmermann@suse.de>); Fri, 28 Jan 2022 08:15:45 +0000
+Message-ID: <f033228e-c914-efb0-534c-41fc3344f272@suse.de>
+Date: Fri, 28 Jan 2022 09:15:44 +0100
 MIME-Version: 1.0
-X-Originating-IP: [10.175.112.125]
-X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
- kwepemm600017.china.huawei.com (7.193.23.234)
-X-CFilter-Loop: Reflected
-X-MailFrom: liupeng256@huawei.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Content-Language: en-US
+To: Lucas De Marchi <lucas.demarchi@intel.com>
+References: <20220126203702.1784589-1-lucas.demarchi@intel.com>
+ <20220126203702.1784589-3-lucas.demarchi@intel.com>
+ <b7a3fe1d-3b85-cb7e-19cf-1611ff4f3c9e@suse.de>
+ <20220127155913.vt7a74zmsglghzom@ldmartin-desk2>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <20220127155913.vt7a74zmsglghzom@ldmartin-desk2>
+X-MailFrom: tzimmermann@suse.de
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: XULZR7VZY7W32P4CDARG2NFNM7EL7VIH
-X-Message-ID-Hash: XULZR7VZY7W32P4CDARG2NFNM7EL7VIH
-X-Mailman-Approved-At: Tue, 15 Feb 2022 11:33:37 +0000
-CC: kasan-dev@googlegroups.com, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org, liupeng256@huawei.com
+Message-ID-Hash: Q5KJD2B24QY5J6MZMHXNB2QGZDBUGBNK
+X-Message-ID-Hash: Q5KJD2B24QY5J6MZMHXNB2QGZDBUGBNK
+X-Mailman-Approved-At: Tue, 15 Feb 2022 11:33:39 +0000
+CC: intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2] kfence: Make test case compatible with run time set sample interval
+Subject: [Linaro-mm-sig] Re: [Intel-gfx] [PATCH 02/19] dma-buf-map: Add helper to initialize second map
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XULZR7VZY7W32P4CDARG2NFNM7EL7VIH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Q5KJD2B24QY5J6MZMHXNB2QGZDBUGBNK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: multipart/mixed; boundary="===============9008612530614778518=="
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============9008612530614778518==
+Content-Language: en-US
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------z0Jm9qzAdckLTdSmXFQL57jX"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------z0Jm9qzAdckLTdSmXFQL57jX
+Content-Type: multipart/mixed; boundary="------------0SjZIcwgEq0qjev9gHgtiNGF";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Lucas De Marchi <lucas.demarchi@intel.com>
+Cc: intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ linux-media@vger.kernel.org
+Message-ID: <f033228e-c914-efb0-534c-41fc3344f272@suse.de>
+Subject: Re: [Intel-gfx] [PATCH 02/19] dma-buf-map: Add helper to initialize
+ second map
+References: <20220126203702.1784589-1-lucas.demarchi@intel.com>
+ <20220126203702.1784589-3-lucas.demarchi@intel.com>
+ <b7a3fe1d-3b85-cb7e-19cf-1611ff4f3c9e@suse.de>
+ <20220127155913.vt7a74zmsglghzom@ldmartin-desk2>
+In-Reply-To: <20220127155913.vt7a74zmsglghzom@ldmartin-desk2>
+
+--------------0SjZIcwgEq0qjev9gHgtiNGF
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+
+SGkNCg0KQW0gMjcuMDEuMjIgdW0gMTY6NTkgc2NocmllYiBMdWNhcyBEZSBNYXJjaGk6DQo+
+IE9uIFRodSwgSmFuIDI3LCAyMDIyIGF0IDAzOjMzOjEyUE0gKzAxMDAsIFRob21hcyBaaW1t
+ZXJtYW5uIHdyb3RlOg0KPj4NCj4+DQo+PiBBbSAyNi4wMS4yMiB1bSAyMTozNiBzY2hyaWVi
+IEx1Y2FzIERlIE1hcmNoaToNCj4+PiBXaGVuIGRtYV9idWZfbWFwIHN0cnVjdCBpcyBwYXNz
+ZWQgYXJvdW5kLCBpdCdzIHVzZWZ1bCB0byBiZSBhYmxlIHRvDQo+Pj4gaW5pdGlhbGl6ZSBh
+IHNlY29uZCBtYXAgdGhhdCB0YWtlcyBjYXJlIG9mIHJlYWRpbmcvd3JpdGluZyB0byBhbiBv
+ZmZzZXQNCj4+PiBvZiB0aGUgb3JpZ2luYWwgbWFwLg0KPj4+DQo+Pj4gQWRkIGEgaGVscGVy
+IHRoYXQgY29waWVzIHRoZSBzdHJ1Y3QgYW5kIGFkZCB0aGUgb2Zmc2V0IHRvIHRoZSBwcm9w
+ZXINCj4+PiBhZGRyZXNzLg0KPj4+DQo+Pj4gQ2M6IFN1bWl0IFNlbXdhbCA8c3VtaXQuc2Vt
+d2FsQGxpbmFyby5vcmc+DQo+Pj4gQ2M6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5r
+b2VuaWdAYW1kLmNvbT4NCj4+PiBDYzogbGludXgtbWVkaWFAdmdlci5rZXJuZWwub3JnDQo+
+Pj4gQ2M6IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcNCj4+PiBDYzogbGluYXJv
+LW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnDQo+Pj4gQ2M6IGxpbnV4LWtlcm5lbEB2Z2VyLmtl
+cm5lbC5vcmcNCj4+PiBTaWduZWQtb2ZmLWJ5OiBMdWNhcyBEZSBNYXJjaGkgPGx1Y2FzLmRl
+bWFyY2hpQGludGVsLmNvbT4NCj4+PiAtLS0NCj4+PiDCoGluY2x1ZGUvbGludXgvZG1hLWJ1
+Zi1tYXAuaCB8IDI5ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+Pj4gwqAxIGZp
+bGUgY2hhbmdlZCwgMjkgaW5zZXJ0aW9ucygrKQ0KPj4+DQo+Pj4gZGlmZiAtLWdpdCBhL2lu
+Y2x1ZGUvbGludXgvZG1hLWJ1Zi1tYXAuaCBiL2luY2x1ZGUvbGludXgvZG1hLWJ1Zi1tYXAu
+aA0KPj4+IGluZGV4IDY1ZTkyN2Q5Y2UzMy4uMzUxNGE4NTlmNjI4IDEwMDY0NA0KPj4+IC0t
+LSBhL2luY2x1ZGUvbGludXgvZG1hLWJ1Zi1tYXAuaA0KPj4+ICsrKyBiL2luY2x1ZGUvbGlu
+dXgvZG1hLWJ1Zi1tYXAuaA0KPj4+IEBAIC0xMzEsNiArMTMxLDM1IEBAIHN0cnVjdCBkbWFf
+YnVmX21hcCB7DQo+Pj4gwqDCoMKgwqDCoMKgwqDCoCAuaXNfaW9tZW0gPSBmYWxzZSwgXA0K
+Pj4+IMKgwqDCoMKgIH0NCj4+PiArLyoqDQo+Pj4gKyAqIERNQV9CVUZfTUFQX0lOSVRfT0ZG
+U0VUIC0gSW5pdGlhbGl6ZXMgc3RydWN0IGRtYV9idWZfbWFwIGZyb20gDQo+Pj4gYW5vdGhl
+ciBkbWFfYnVmX21hcA0KPj4+ICsgKiBAbWFwXzrCoMKgwqAgVGhlIGRtYS1idWYgbWFwcGlu
+ZyBzdHJ1Y3R1cmUgdG8gY29weSBmcm9tDQo+Pj4gKyAqIEBvZmZzZXQ6wqDCoMKgIE9mZnNl
+dCB0byBhZGQgdG8gdGhlIG90aGVyIG1hcHBpbmcNCj4+PiArICoNCj4+PiArICogSW5pdGlh
+bGl6ZXMgYSBuZXcgZG1hX2J1Zl9zdHJ1Y3QgYmFzZWQgb24gYW5vdGhlci4gVGhpcyBpcyB0
+aGUgDQo+Pj4gZXF1aXZhbGVudCBvZiBkb2luZzoNCj4+PiArICoNCj4+PiArICogLi4gY29k
+ZS1ibG9jazogYw0KPj4+ICsgKg0KPj4+ICsgKsKgwqDCoCBkbWFfYnVmX21hcCBtYXAgPSBv
+dGhlcl9tYXA7DQo+Pj4gKyAqwqDCoMKgIGRtYV9idWZfbWFwX2luY3IoJm1hcCwgJm9mZnNl
+dCk7DQo+Pj4gKyAqDQo+Pj4gKyAqIEV4YW1wbGUgdXNhZ2U6DQo+Pj4gKyAqDQo+Pj4gKyAq
+IC4uIGNvZGUtYmxvY2s6IGMNCj4+PiArICoNCj4+PiArICrCoMKgwqAgdm9pZCBmb28oc3Ry
+dWN0IGRldmljZSAqZGV2LCBzdHJ1Y3QgZG1hX2J1Zl9tYXAgKmJhc2VfbWFwKQ0KPj4+ICsg
+KsKgwqDCoCB7DQo+Pj4gKyAqwqDCoMKgwqDCoMKgwqAgLi4uDQo+Pj4gKyAqwqDCoMKgwqDC
+oMKgwqAgc3RydWN0IGRtYV9idWZfbWFwID0gRE1BX0JVRl9NQVBfSU5JVF9PRkZTRVQoYmFz
+ZV9tYXAsIA0KPj4+IEZJRUxEX09GRlNFVCk7DQo+Pj4gKyAqwqDCoMKgwqDCoMKgwqAgLi4u
+DQo+Pj4gKyAqwqDCoMKgIH0NCj4+PiArICovDQo+Pj4gKyNkZWZpbmUgRE1BX0JVRl9NQVBf
+SU5JVF9PRkZTRVQobWFwXywgb2Zmc2V0XynCoMKgwqAgKHN0cnVjdCANCj4+PiBkbWFfYnVm
+X21hcCnCoMKgwqAgXA0KPj4+ICvCoMKgwqAge8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIFwNCj4+PiArwqDCoMKgwqDC
+oMKgwqAgLnZhZGRyID0gKG1hcF8pLT52YWRkciArIChvZmZzZXRfKSzCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgIFwNCj4+PiArwqDCoMKgwqDCoMKgwqAgLmlzX2lvbWVtID0gKG1hcF8pLT5p
+c19pb21lbSzCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgXA0KPj4+ICvCoMKgwqAg
+fQ0KPj4+ICsNCj4+DQo+PiBJdCdzIGlsbGVnYWwgdG8gYWNjZXNzIC52YWRkcsKgIHdpdGgg
+cmF3IHBvaW50ZXIuIEFsd2F5cyB1c2UgYSANCj4+IGRtYV9idWZfbWVtY3B5XygpIGludGVy
+ZmFjZS4gU28gd2h5IHdvdWxkIHlvdSBuZWVkIHRoaXMgbWFjcm8gd2hlbiB5b3UgDQo+PiBo
+YXZlIGRtYV9idWZfbWVtY3B5XyooKSB3aXRoIGFuIG9mZnNldCBwYXJhbWV0ZXI/DQo+IA0K
+PiBJIGRpZCBhIGJldHRlciBqb2Igd2l0aCBhbiBleGFtcGxlIGluIA0KPiAyMDIyMDEyNzA5
+MzMzMi53bmtkMnF5NHR2d2c1aTVsQGxkbWFydGluLWRlc2syDQo+IA0KPiBXaGlsZSBkb2lu
+ZyB0aGlzIHNlcmllcyBJIGhhZCBjb2RlIGxpa2UgdGhpcyB3aGVuIHVzaW5nIHRoZSBBUEkg
+aW4gYSANCj4gZnVuY3Rpb24gdG8NCj4gcGFyc2UvdXBkYXRlIHBhcnQgb2YgdGhlIHN0cnVj
+dCBtYXBwZWQ6DQo+IA0KPiAgwqDCoMKgwqBpbnQgYmxhX3BhcnNlX2ZvbyhzdHJ1Y3QgZG1h
+X2J1Zl9tYXAgKmJsYV9tYXApDQo+ICDCoMKgwqDCoHsNCj4gIMKgwqDCoMKgwqDCoMKgIHN0
+cnVjdCBkbWFfYnVmX21hcCBmb29fbWFwID0gKmJsYV9tYXA7DQo+ICDCoMKgwqDCoMKgwqDC
+oCAuLi4NCj4gDQo+ICDCoMKgwqDCoMKgwqDCoCBkbWFfYnVmX21hcF9pbmNyKCZmb29fbWFw
+LCBvZmZzZXRvZihzdHJ1Y3QgYmxhLCBmb28pKTsNCj4gDQo+ICDCoMKgwqDCoMKgwqDCoCAu
+Li4NCj4gIMKgwqDCoMKgfQ0KPiANCj4gUGFzdGluZyB0aGUgcmVzdCBvZiB0aGUgcmVwbHkg
+aGVyZToNCj4gDQo+IEkgaGFkIGV4YWN0bHkgdGhpcyBjb2RlIGFib3ZlLCBidXQgYWZ0ZXIg
+d3JpdHRpbmcgcXVpdGUgYSBmZXcgcGF0Y2hlcw0KPiB1c2luZyBpdCwgcGFydGljdWxhcmx5
+IHdpdGggZnVuY3Rpb25zIHRoYXQgaGF2ZSB0byB3cml0ZSB0byAyIG1hcHMgKHNlZQ0KPiBw
+YXRjaCA2IGZvciBleGFtcGxlKSwgaXQgZmVsdCBtdWNoIGJldHRlciB0byBoYXZlIHNvbWV0
+aGluZyB0bw0KPiBpbml0aWFsaXplIGNvcnJlY3RseSBmcm9tIHRoZSBzdGFydA0KPiANCj4g
+IMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBkbWFfYnVmX21hcCBvdGhlcl9tYXAgPSAqYmxhX21h
+cDsNCj4gIMKgwqDCoMKgwqDCoMKgIC8qIHBvb3IgTHVjYXMgZm9yZ2V0dGluZyBkbWFfYnVm
+X21hcF9pbmNyKG1hcCwgb2Zmc2V0b2YoLi4uKSk7ICovDQo+IA0KPiBpcyBlcnJvciBwcm9u
+ZSBhbmQgaGFyZCB0byBkZWJ1ZyBzaW5jZSB5b3Ugd2lsbCBiZSByZWFkaW5nL3dyaXR0aW5n
+DQo+IGZyb20vdG8gYW5vdGhlciBsb2NhdGlvbiByYXRoZXIgdGhhbiBleHBsb2RpbmcNCg0K
+SW5kZWVkLiBXZSBoYXZlIHNvZW0gdmVyeSBzcGVjaWZpYyB1c2UgY2FzZXMgaW4gZ3JhcGhp
+Y3MgY29kZSwgd2hlbiANCmRtYV9idWZfbWFwX2luY3IoKSBtYWtlcyBzZW5zZS4gQnV0IGl0
+J3MgcmVhbGx5IGJhZCBmb3Igb3RoZXJzLiBJIGd1ZXNzIA0KdGhhdCB0aGUgZG9jcyBzaG91
+bGQgdGFsayBhYm91dCB0aGlzLg0KDQo+IA0KPiBXaGlsZSB3aXRoIHRoZSBjb25zdHJ1Y3Qg
+YmVsb3cNCj4gDQo+ICDCoMKgwqDCoMKgwqDCoCBvdGhlcl9tYXA7DQo+ICDCoMKgwqDCoMKg
+wqDCoCAuLi4NCj4gIMKgwqDCoMKgwqDCoMKgIG90aGVyX21hcCA9IElOSVRJQUxJWkVSKCkN
+Cj4gDQo+IEkgY2FuIHJlbHkgb24gdGhlIGNvbXBpbGVyIGNvbXBsYWluaW5nIGFib3V0IHVu
+aW5pdGlhbGl6ZWQgdmFyLiBBbmQNCj4gaW4gbW9zdCBvZiB0aGUgY2FzZXMgSSBjYW4ganVz
+dCBoYXZlIHRoaXMgc2luZ2xlIGxpbmUgaW4gdGhlIGJlZ2dpbmluZyANCj4gb2YgdGhlDQo+
+IGZ1bmN0aW9uIHdoZW4gdGhlIG9mZnNldCBpcyBjb25zdGFudDoNCj4gDQo+ICDCoMKgwqDC
+oMKgwqDCoCBzdHJ1Y3QgZG1hX2J1Zl9tYXAgb3RoZXJfbWFwID0gSU5JVElBTElaRVIoYmxh
+X21hcCwgb2Zmc2V0b2YoLi4pKTsNCj4gDQo+IA0KPiBUaGlzIGlzIHVzZWZ1bCB3aGVuIHlv
+dSBoYXZlIHNldmVyYWwgc21hbGwgZnVuY3Rpb25zIGluIGNoYXJnZSBvZg0KPiB1cGRhdGlu
+Zy9yZWFkaW5nIGlubmVyIHN0cnVjdCBtZW1iZXJzLg0KDQpZb3Ugd29uJ3QgbmVlZCBhbiBl
+eHRyYSB2YXJpYWJsZSBvciB0aGUgaW5pdGlhbGl6ZXIgbWFjcm8gaWYgeW91IGFkZCBhbiAN
+Cm9mZnNldCBwYXJhbWV0ZXIgdG8gZG1hX2J1Zl9tZW1jcHlfe2Zyb20sdG99LiAgU2ltcGxl
+IHBhc3Mgb2Zmc2V0b2YoLi4pIA0KdG8gdGhhdCBwYXJhbWV0ZXIgYW5kIGl0IHdpbGwgZG8g
+dGhlIHJpZ2h0IHRoaW5nLg0KDQpJdCBhdm9pZHMgdGhlIHByb2JsZW1zIG9mIHRoZSBjdXJy
+ZW50IG1hY3JvIGFuZCBpcyBldmVuIG1vcmUgZmxleGlibGUuIA0KT24gdG9wIG9mIHRoYXQs
+IHlvdSBjYW4gYnVpbGQgd2hhdGV2ZXIgY29udmVuaWVuY2UgbWFjcm9zIHlvdSBuZWVkIGZv
+ciBpOTE1Lg0KDQpCZXN0IHJlZ2FyZHMNClRob21hcw0KDQo+IA0KPj4NCj4+IEkndmUgYWxz
+byBiZWVuIHZlcnkgY2FyZWZ1bCB0byBkaXN0aW5ndWlzaCBiZXR3ZWVuIC52YWRkciBhbmQg
+DQo+PiAudmFkZHJfaW9tZW0sIGV2ZW4gaW4gcGxhY2VzIHdoZXJlIEkgd291bGRuJ3QgaGF2
+ZSB0by4gVGhpcyBtYWNybyANCj4+IGJyZWFrcyB0aGUgYXNzdW1wdGlvbi4NCj4gDQo+IFRo
+YXQncyBvbmUgcmVhc29uIEkgdGhpbmsgaWYgd2UgaGF2ZSB0aGlzIG1hY3JvLCBpdCBzaG91
+bGQgYmUgaW4gdGhlDQo+IGRtYV9idWZfbWFwLmggaGVhZGVyIChvciB3aGF0ZXZlciB3ZSBy
+ZW5hbWUgdGhlc2UgQVBJcyB0bykuIEl0J3MgdGhlDQo+IG9ubHkgcGxhY2Ugd2hlcmUgd2Ug
+Y2FuIHNhZmVseSBhZGQgY29kZSB0aGF0IHJlbGllcyBvbiB0aGUgaW1wbGVtZW50YXRpb24N
+Cj4gb2YgdGhlICJwcml2YXRlIiBmaWVsZHMgaW4gc3RydWN0IGRtYV9idWZfbWFwLg0KPiAN
+Cj4gTHVjYXMgRGUgTWFyY2hpDQo+IA0KPj4NCj4+IEJlc3QgcmVnYXJkcw0KPj4gVGhvbWFz
+DQo+Pg0KPj4+IMKgLyoqDQo+Pj4gwqAgKiBkbWFfYnVmX21hcF9zZXRfdmFkZHIgLSBTZXRz
+IGEgZG1hLWJ1ZiBtYXBwaW5nIHN0cnVjdHVyZSB0byBhbiANCj4+PiBhZGRyZXNzIGluIHN5
+c3RlbSBtZW1vcnkNCj4+PiDCoCAqIEBtYXA6wqDCoMKgIFRoZSBkbWEtYnVmIG1hcHBpbmcg
+c3RydWN0dXJlDQo+Pg0KPj4gLS0gDQo+PiBUaG9tYXMgWmltbWVybWFubg0KPj4gR3JhcGhp
+Y3MgRHJpdmVyIERldmVsb3Blcg0KPj4gU1VTRSBTb2Z0d2FyZSBTb2x1dGlvbnMgR2VybWFu
+eSBHbWJIDQo+PiBNYXhmZWxkc3RyLiA1LCA5MDQwOSBOw7xybmJlcmcsIEdlcm1hbnkNCj4+
+IChIUkIgMzY4MDksIEFHIE7DvHJuYmVyZykNCj4+IEdlc2Now6RmdHNmw7xocmVyOiBJdm8g
+VG90ZXYNCj4gDQo+IA0KPiANCg0KLS0gDQpUaG9tYXMgWmltbWVybWFubg0KR3JhcGhpY3Mg
+RHJpdmVyIERldmVsb3Blcg0KU1VTRSBTb2Z0d2FyZSBTb2x1dGlvbnMgR2VybWFueSBHbWJI
+DQpNYXhmZWxkc3RyLiA1LCA5MDQwOSBOw7xybmJlcmcsIEdlcm1hbnkNCihIUkIgMzY4MDks
+IEFHIE7DvHJuYmVyZykNCkdlc2Now6RmdHNmw7xocmVyOiBJdm8gVG90ZXYNCg==
+
+--------------0SjZIcwgEq0qjev9gHgtiNGF--
+
+--------------z0Jm9qzAdckLTdSmXFQL57jX
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmHzpjAFAwAAAAAACgkQlh/E3EQov+B/
+BA//Xuj97N9DZ6G5bOBe4XaixkCJsTU5kuALrQ0DGk/ISCLGCC9HdpDc643k9QVMmE38qkA8bdBv
+WoZEL9gve9Iu9T0P5kJ2gD4G8sR1mFoNEOIaSJ15JInYqwOaZd/2KXTDOsnYWUB3bF8HuNNvX04Y
+Ldx482ZwlVnveHwlEkrw+17S5vjHKioR4DUMmZVQldE2+HQ6UVclo9RLEPrr0Tr4mKTYffAohRsx
+wR+vvTKnPiOP58NvdXhzKcnaxbf021ikQlosGCQ9im7sC6wTPJat8xYAQ8TWNpEYeuYT2HvLW5o4
+6V7rasmanxibVOBKyN9mCcyZZQ92Mu0UxrTnvNibdjgcmf+JlNPZnnVroz0iIApP1CAgzUlA/mua
+JvXL1IK8WF5II3TsweUGm+WaJ/jBl7cqMGF9Omg1zGUNq2APeUqLmf7gQVxb1wULyqXTou2KU234
+TuKIIxNQjsWNXrCTDmu/kUW8W3EgMIXoj4jjnYwkfBuozvlzdtOSloAV1zcHGYMir9ynNEjnU2QQ
+mXMprtaXifrWiv3XZahdxaflePkzLWHz4BdYNL384BbQptpM2QV15CO6IPLXnKBdsuYg5geBw8Xp
+7lNA2EKACi7Cxk0eP4EOjCxSXz/MG5Wv5A2/QfU+9eBRaOEJfGdbdkRrL/LyfQw7ZFjoVCuyRgjJ
+Y7Y=
+=Tt7v
+-----END PGP SIGNATURE-----
+
+--------------z0Jm9qzAdckLTdSmXFQL57jX--
+
+--===============9008612530614778518==
 Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-
-The parameter kfence_sample_interval can be set via boot parameter
-and late shell command, which is convenient for automatical tests
-and KFENCE parameter optimation. However, KFENCE test case just use
-compile time CONFIG_KFENCE_SAMPLE_INTERVAL, this will make KFENCE
-test case not run as user desired. This patch will make KFENCE test
-case compatible with run-time-set sample interval.
-
-v1->v2:
-- Use EXPORT_SYMBOL_GPL replace EXPORT_SYMBOL
-
-Signed-off-by: Peng Liu <liupeng256@huawei.com>
----
- include/linux/kfence.h  | 2 ++
- mm/kfence/core.c        | 3 ++-
- mm/kfence/kfence_test.c | 8 ++++----
- 3 files changed, 8 insertions(+), 5 deletions(-)
-
-diff --git a/include/linux/kfence.h b/include/linux/kfence.h
-index 4b5e3679a72c..f49e64222628 100644
---- a/include/linux/kfence.h
-+++ b/include/linux/kfence.h
-@@ -17,6 +17,8 @@
- #include <linux/atomic.h>
- #include <linux/static_key.h>
- 
-+extern unsigned long kfence_sample_interval;
-+
- /*
-  * We allocate an even number of pages, as it simplifies calculations to map
-  * address to metadata indices; effectively, the very first page serves as an
-diff --git a/mm/kfence/core.c b/mm/kfence/core.c
-index 5ad40e3add45..13128fa13062 100644
---- a/mm/kfence/core.c
-+++ b/mm/kfence/core.c
-@@ -47,7 +47,8 @@
- 
- static bool kfence_enabled __read_mostly;
- 
--static unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
-+unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
-+EXPORT_SYMBOL_GPL(kfence_sample_interval); /* Export for test modules. */
- 
- #ifdef MODULE_PARAM_PREFIX
- #undef MODULE_PARAM_PREFIX
-diff --git a/mm/kfence/kfence_test.c b/mm/kfence/kfence_test.c
-index a22b1af85577..50dbb815a2a8 100644
---- a/mm/kfence/kfence_test.c
-+++ b/mm/kfence/kfence_test.c
-@@ -268,13 +268,13 @@ static void *test_alloc(struct kunit *test, size_t size, gfp_t gfp, enum allocat
- 	 * 100x the sample interval should be more than enough to ensure we get
- 	 * a KFENCE allocation eventually.
- 	 */
--	timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
-+	timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
- 	/*
- 	 * Especially for non-preemption kernels, ensure the allocation-gate
- 	 * timer can catch up: after @resched_after, every failed allocation
- 	 * attempt yields, to ensure the allocation-gate timer is scheduled.
- 	 */
--	resched_after = jiffies + msecs_to_jiffies(CONFIG_KFENCE_SAMPLE_INTERVAL);
-+	resched_after = jiffies + msecs_to_jiffies(kfence_sample_interval);
- 	do {
- 		if (test_cache)
- 			alloc = kmem_cache_alloc(test_cache, gfp);
-@@ -608,7 +608,7 @@ static void test_gfpzero(struct kunit *test)
- 	int i;
- 
- 	/* Skip if we think it'd take too long. */
--	KFENCE_TEST_REQUIRES(test, CONFIG_KFENCE_SAMPLE_INTERVAL <= 100);
-+	KFENCE_TEST_REQUIRES(test, kfence_sample_interval <= 100);
- 
- 	setup_test_cache(test, size, 0, NULL);
- 	buf1 = test_alloc(test, size, GFP_KERNEL, ALLOCATE_ANY);
-@@ -739,7 +739,7 @@ static void test_memcache_alloc_bulk(struct kunit *test)
- 	 * 100x the sample interval should be more than enough to ensure we get
- 	 * a KFENCE allocation eventually.
- 	 */
--	timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
-+	timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
- 	do {
- 		void *objects[100];
- 		int i, num = kmem_cache_alloc_bulk(test_cache, GFP_ATOMIC, ARRAY_SIZE(objects),
--- 
-2.18.0.huawei.25
+Content-Disposition: inline
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============9008612530614778518==--
