@@ -2,278 +2,143 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E7A14B6B37
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 12:34:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6EA0E4B6B38
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 12:34:40 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AE4EA401C5
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 11:34:34 +0000 (UTC)
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by lists.linaro.org (Postfix) with ESMTPS id 0D54F3EE45
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Jan 2022 16:34:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1643301269; x=1674837269;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=c1JSYjzfdbq8gU7ikAAFkClQc7FnpmVyHegh42jYpqU=;
-  b=Y3/s+j7DGU22FiOcfoiI+9+MpFUIfBgoH59k1vinoKtabXGg9ww9TMn6
-   U5UiFcythtTMIu4+0EZI0cIlhL00x3C+8X68+XYHVPojkGe03phI7Naw9
-   zrzyew/vSOYl2LL10iryFj1d/rBnplWxbKCG4j8OhSp97SHMHGxwFaZHu
-   Qev6EnJhPftyWOAm9Z2qen8Y/JPowSWm8UiGt1sIy955l8vhbv9Pc6/Xx
-   Bo9njkh2raqILVFH2OLerKfVEaeow1yNkZHopcivnN6dF0Zoy8QGcDjEz
-   7G/nS8XAQiukrCbTJUKAZuC88wPYaeEH/2Hf+HAPLlOl0ujvbxAwjdx6r
-   w==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10239"; a="333258291"
-X-IronPort-AV: E=Sophos;i="5.88,321,1635231600";
-   d="scan'208";a="333258291"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jan 2022 08:34:27 -0800
-X-IronPort-AV: E=Sophos;i="5.88,321,1635231600";
-   d="scan'208";a="618388451"
-Received: from anithaha-mobl.amr.corp.intel.com (HELO ldmartin-desk2) ([10.212.224.126])
-  by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jan 2022 08:34:27 -0800
-Date: Thu, 27 Jan 2022 08:34:26 -0800
-From: Lucas De Marchi <lucas.demarchi@intel.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Message-ID: <20220127163426.pehk4iomlvths47b@ldmartin-desk2>
-X-Patchwork-Hint: comment
-References: <20220126203702.1784589-1-lucas.demarchi@intel.com>
- <20220126203702.1784589-2-lucas.demarchi@intel.com>
- <b7057779-2df8-8737-e174-fcb138544dfb@suse.de>
+	by lists.linaro.org (Postfix) with ESMTP id A05F23EEC5
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 11:34:39 +0000 (UTC)
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+	by lists.linaro.org (Postfix) with ESMTPS id 240B43ECEE
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Jan 2022 01:41:54 +0000 (UTC)
+Received: from kwepemi500020.china.huawei.com (unknown [172.30.72.57])
+	by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4JlKt34L5PzccpN;
+	Fri, 28 Jan 2022 09:40:59 +0800 (CST)
+Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
+ kwepemi500020.china.huawei.com (7.221.188.8) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.21; Fri, 28 Jan 2022 09:41:50 +0800
+Received: from localhost.localdomain (10.175.112.125) by
+ kwepemm600017.china.huawei.com (7.193.23.234) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.21; Fri, 28 Jan 2022 09:41:49 +0800
+From: Peng Liu <liupeng256@huawei.com>
+To: <glider@google.com>, <elver@google.com>, <dvyukov@google.com>,
+	<corbet@lwn.net>, <sumit.semwal@linaro.org>, <christian.koenig@amd.com>,
+	<akpm@linux-foundation.org>
+Date: Fri, 28 Jan 2022 01:57:52 +0000
+Message-ID: <20220128015752.931256-1-liupeng256@huawei.com>
+X-Mailer: git-send-email 2.18.0.huawei.25
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <b7057779-2df8-8737-e174-fcb138544dfb@suse.de>
-X-MailFrom: lucas.demarchi@intel.com
+X-Originating-IP: [10.175.112.125]
+X-ClientProxiedBy: dggems703-chm.china.huawei.com (10.3.19.180) To
+ kwepemm600017.china.huawei.com (7.193.23.234)
+X-CFilter-Loop: Reflected
+X-MailFrom: liupeng256@huawei.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 67JVRUYNSKMDX7BA3SBQMEFCSEWLUZFD
-X-Message-ID-Hash: 67JVRUYNSKMDX7BA3SBQMEFCSEWLUZFD
-X-Mailman-Approved-At: Tue, 15 Feb 2022 11:33:35 +0000
-CC: intel-gfx@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
+Message-ID-Hash: XULZR7VZY7W32P4CDARG2NFNM7EL7VIH
+X-Message-ID-Hash: XULZR7VZY7W32P4CDARG2NFNM7EL7VIH
+X-Mailman-Approved-At: Tue, 15 Feb 2022 11:33:37 +0000
+CC: kasan-dev@googlegroups.com, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org, liupeng256@huawei.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 01/19] dma-buf-map: Add read/write helpers
+Subject: [Linaro-mm-sig] [PATCH v2] kfence: Make test case compatible with run time set sample interval
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/67JVRUYNSKMDX7BA3SBQMEFCSEWLUZFD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XULZR7VZY7W32P4CDARG2NFNM7EL7VIH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"; format="flowed"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jan 27, 2022 at 03:26:43PM +0100, Thomas Zimmermann wrote:
->Hi
->
->Am 26.01.22 um 21:36 schrieb Lucas De Marchi:
->>In certain situations it's useful to be able to read or write to an
->>offset that is calculated by having the memory layout given by a struct
->>declaration. Usually we are going to read/write a u8, u16, u32 or u64.
->>
->>Add a pair of macros dma_buf_map_read_field()/dma_buf_map_write_field()
->>to calculate the offset of a struct member and memcpy the data from/to
->>the dma_buf_map. We could use readb, readw, readl, readq and the write*
->>counterparts, however due to alignment issues this may not work on all
->>architectures. If alignment needs to be checked to call the right
->>function, it's not possible to decide at compile-time which function to
->>call: so just leave the decision to the memcpy function that will do
->>exactly that on IO memory or dereference the pointer.
->>
->>Cc: Sumit Semwal <sumit.semwal@linaro.org>
->>Cc: Christian K=F6nig <christian.koenig@amd.com>
->>Cc: linux-media@vger.kernel.org
->>Cc: dri-devel@lists.freedesktop.org
->>Cc: linaro-mm-sig@lists.linaro.org
->>Cc: linux-kernel@vger.kernel.org
->>Signed-off-by: Lucas De Marchi <lucas.demarchi@intel.com>
->>---
->>  include/linux/dma-buf-map.h | 81 +++++++++++++++++++++++++++++++++++++
->>  1 file changed, 81 insertions(+)
->>
->>diff --git a/include/linux/dma-buf-map.h b/include/linux/dma-buf-map.h
->>index 19fa0b5ae5ec..65e927d9ce33 100644
->>--- a/include/linux/dma-buf-map.h
->>+++ b/include/linux/dma-buf-map.h
->>@@ -6,6 +6,7 @@
->>  #ifndef __DMA_BUF_MAP_H__
->>  #define __DMA_BUF_MAP_H__
->>+#include <linux/kernel.h>
->>  #include <linux/io.h>
->>  #include <linux/string.h>
->>@@ -229,6 +230,46 @@ static inline void dma_buf_map_clear(struct dma_buf_=
-map *map)
->>  	}
->>  }
->>+/**
->>+ * dma_buf_map_memcpy_to_offset - Memcpy into offset of dma-buf mapping
->>+ * @dst:	The dma-buf mapping structure
->>+ * @offset:	The offset from which to copy
->>+ * @src:	The source buffer
->>+ * @len:	The number of byte in src
->>+ *
->>+ * Copies data into a dma-buf mapping with an offset. The source buffer =
-is in
->>+ * system memory. Depending on the buffer's location, the helper picks t=
-he
->>+ * correct method of accessing the memory.
->>+ */
->>+static inline void dma_buf_map_memcpy_to_offset(struct dma_buf_map *dst,=
- size_t offset,
->>+						const void *src, size_t len)
->>+{
->>+	if (dst->is_iomem)
->>+		memcpy_toio(dst->vaddr_iomem + offset, src, len);
->>+	else
->>+		memcpy(dst->vaddr + offset, src, len);
->>+}
->
->Please don't add a new function. Rather please add the offset=20
->parameter to dma_buf_map_memcpy_to() and update the callers. There are=20
->only two calls to dma_buf_map_memcpy_to() within the kernel. To make=20
->it clear what the offset applies to, I'd call the parameter=20
->'dst_offset'.
->
->>+
->>+/**
->>+ * dma_buf_map_memcpy_from_offset - Memcpy from offset of dma-buf mappin=
-g into system memory
->>+ * @dst:	Destination in system memory
->>+ * @src:	The dma-buf mapping structure
->>+ * @src:	The offset from which to copy
->>+ * @len:	The number of byte in src
->>+ *
->>+ * Copies data from a dma-buf mapping with an offset. The dest buffer is=
- in
->>+ * system memory. Depending on the mapping location, the helper picks the
->>+ * correct method of accessing the memory.
->>+ */
->>+static inline void dma_buf_map_memcpy_from_offset(void *dst, const struc=
-t dma_buf_map *src,
->>+						  size_t offset, size_t len)
->>+{
->>+	if (src->is_iomem)
->>+		memcpy_fromio(dst, src->vaddr_iomem + offset, len);
->>+	else
->>+		memcpy(dst, src->vaddr + offset, len);
->>+}
->>+
->
->With the dma_buf_map_memcpy_to() changes, please just call this=20
->function dma_buf_map_memcpy_from().
->
->>  /**
->>   * dma_buf_map_memcpy_to - Memcpy into dma-buf mapping
->>   * @dst:	The dma-buf mapping structure
->>@@ -263,4 +304,44 @@ static inline void dma_buf_map_incr(struct dma_buf_m=
-ap *map, size_t incr)
->>  		map->vaddr +=3D incr;
->>  }
->>+/**
->>+ * dma_buf_map_read_field - Read struct member from dma-buf mapping with
->>+ * arbitrary size and handling un-aligned accesses
->>+ *
->>+ * @map__:	The dma-buf mapping structure
->>+ * @type__:	The struct to be used containing the field to read
->>+ * @field__:	Member from struct we want to read
->>+ *
->>+ * Read a value from dma-buf mapping calculating the offset and size: th=
-is assumes
->>+ * the dma-buf mapping is aligned with a a struct type__. A single u8, u=
-16, u32
->>+ * or u64 can be read, based on the offset and size of type__.field__.
->>+ */
->>+#define dma_buf_map_read_field(map__, type__, field__) ({				\
->>+	type__ *t__;									\
->>+	typeof(t__->field__) val__;							\
->>+	dma_buf_map_memcpy_from_offset(&val__, map__, offsetof(type__, field__)=
-,	\
->>+				       sizeof(t__->field__));				\
->>+	val__;										\
->>+})
->>+
->>+/**
->>+ * dma_buf_map_write_field - Write struct member to the dma-buf mapping =
-with
->>+ * arbitrary size and handling un-aligned accesses
->>+ *
->>+ * @map__:	The dma-buf mapping structure
->>+ * @type__:	The struct to be used containing the field to write
->>+ * @field__:	Member from struct we want to write
->>+ * @val__:	Value to be written
->>+ *
->>+ * Write a value to the dma-buf mapping calculating the offset and size.
->>+ * A single u8, u16, u32 or u64 can be written based on the offset and s=
-ize of
->>+ * type__.field__.
->>+ */
->>+#define dma_buf_map_write_field(map__, type__, field__, val__) ({			\
->>+	type__ *t__;									\
->>+	typeof(t__->field__) val____ =3D val__;						\
->>+	dma_buf_map_memcpy_to_offset(map__, offsetof(type__, field__),			\
->>+				     &val____, sizeof(t__->field__));			\
->>+})
->
->As the original author of this file, I feel like this shouldn't be=20
->here. At least not until we have another driver using that pattern.
+The parameter kfence_sample_interval can be set via boot parameter
+and late shell command, which is convenient for automatical tests
+and KFENCE parameter optimation. However, KFENCE test case just use
+compile time CONFIG_KFENCE_SAMPLE_INTERVAL, this will make KFENCE
+test case not run as user desired. This patch will make KFENCE test
+case compatible with run-time-set sample interval.
 
-Let me try to clear out the confusion. Then maybe I can extend
-the documentation of this function in v2 if I'm able to convince this is
-useful here.
+v1->v2:
+- Use EXPORT_SYMBOL_GPL replace EXPORT_SYMBOL
 
-This is not about importer/exporter, having this to work cross-driver.
-This is about using dma_buf_map (which we are talking about on renaming
-to iosys_map or something else) for inner driver
-allocations/abstractions. The abstraction added by iosys_map helps on
-sharing the same functions we had before.  And this macro here is very
-useful when the buffer is described by a struct layout. Example:
+Signed-off-by: Peng Liu <liupeng256@huawei.com>
+---
+ include/linux/kfence.h  | 2 ++
+ mm/kfence/core.c        | 3 ++-
+ mm/kfence/kfence_test.c | 8 ++++----
+ 3 files changed, 8 insertions(+), 5 deletions(-)
 
-	struct bla {
-		struct inner inner1;
-		struct inner inner2;
-		u32 x, y ,z;
-	};
+diff --git a/include/linux/kfence.h b/include/linux/kfence.h
+index 4b5e3679a72c..f49e64222628 100644
+--- a/include/linux/kfence.h
++++ b/include/linux/kfence.h
+@@ -17,6 +17,8 @@
+ #include <linux/atomic.h>
+ #include <linux/static_key.h>
+ 
++extern unsigned long kfence_sample_interval;
++
+ /*
+  * We allocate an even number of pages, as it simplifies calculations to map
+  * address to metadata indices; effectively, the very first page serves as an
+diff --git a/mm/kfence/core.c b/mm/kfence/core.c
+index 5ad40e3add45..13128fa13062 100644
+--- a/mm/kfence/core.c
++++ b/mm/kfence/core.c
+@@ -47,7 +47,8 @@
+ 
+ static bool kfence_enabled __read_mostly;
+ 
+-static unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
++unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
++EXPORT_SYMBOL_GPL(kfence_sample_interval); /* Export for test modules. */
+ 
+ #ifdef MODULE_PARAM_PREFIX
+ #undef MODULE_PARAM_PREFIX
+diff --git a/mm/kfence/kfence_test.c b/mm/kfence/kfence_test.c
+index a22b1af85577..50dbb815a2a8 100644
+--- a/mm/kfence/kfence_test.c
++++ b/mm/kfence/kfence_test.c
+@@ -268,13 +268,13 @@ static void *test_alloc(struct kunit *test, size_t size, gfp_t gfp, enum allocat
+ 	 * 100x the sample interval should be more than enough to ensure we get
+ 	 * a KFENCE allocation eventually.
+ 	 */
+-	timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
++	timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
+ 	/*
+ 	 * Especially for non-preemption kernels, ensure the allocation-gate
+ 	 * timer can catch up: after @resched_after, every failed allocation
+ 	 * attempt yields, to ensure the allocation-gate timer is scheduled.
+ 	 */
+-	resched_after = jiffies + msecs_to_jiffies(CONFIG_KFENCE_SAMPLE_INTERVAL);
++	resched_after = jiffies + msecs_to_jiffies(kfence_sample_interval);
+ 	do {
+ 		if (test_cache)
+ 			alloc = kmem_cache_alloc(test_cache, gfp);
+@@ -608,7 +608,7 @@ static void test_gfpzero(struct kunit *test)
+ 	int i;
+ 
+ 	/* Skip if we think it'd take too long. */
+-	KFENCE_TEST_REQUIRES(test, CONFIG_KFENCE_SAMPLE_INTERVAL <= 100);
++	KFENCE_TEST_REQUIRES(test, kfence_sample_interval <= 100);
+ 
+ 	setup_test_cache(test, size, 0, NULL);
+ 	buf1 = test_alloc(test, size, GFP_KERNEL, ALLOCATE_ANY);
+@@ -739,7 +739,7 @@ static void test_memcache_alloc_bulk(struct kunit *test)
+ 	 * 100x the sample interval should be more than enough to ensure we get
+ 	 * a KFENCE allocation eventually.
+ 	 */
+-	timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
++	timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
+ 	do {
+ 		void *objects[100];
+ 		int i, num = kmem_cache_alloc_bulk(test_cache, GFP_ATOMIC, ARRAY_SIZE(objects),
+-- 
+2.18.0.huawei.25
 
-Functions that would previously do:
-
-	struct bla *bla =3D ...;
-
-	bla->x =3D 100;
-	bla->y =3D 200;
-	bla->inner1.inner_inner_field =3D 30;
-
-Can do the below, having the system/IO memory abstracted away
-(calling it iosys_map here instead of dma_buf_map, hopeful it helps):
-
-	struct iosys_map *map =3D ...;
-
-	iosys_map_write_field(map, struct bla, x, 100);
-	iosys_map_write_field(map, struct bla, y, 200);
-	iosys_map_write_field(map, struct bla,
-			      inner1.inner_inner_field, 30);
-
-When we are using mostly the same map, the individual drivers can add
-quick helpers on top. See the ads_blob_write() added in this series,
-which guarantees the map it's working on is always the guc->ads_map,
-while reducing verbosity to use the API. From patch
-"drm/i915/guc: Add read/write helpers for ADS blob":
-
-#define ads_blob_read(guc_, field_)                                    \
-        dma_buf_map_read_field(&(guc_)->ads_map, struct __guc_ads_blob, \
-                               field_)
-
-#define ads_blob_write(guc_, field_, val_)                             \
-        dma_buf_map_write_field(&(guc_)->ads_map, struct __guc_ads_blob,\
-                                field_, val_)
-
-So in intel_guc_ads, we can have a lot of:
-
--	bla->x =3D 100;
-+	ads_blob_write(guc, x, 10);
-
-thanks
-Lucas De Marchi
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
