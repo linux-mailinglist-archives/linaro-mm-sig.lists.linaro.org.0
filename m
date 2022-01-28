@@ -2,188 +2,174 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F4254B6B3C
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 12:34:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 296634B6B3D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 12:35:02 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9175E401C4
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 11:34:55 +0000 (UTC)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
-	by lists.linaro.org (Postfix) with ESMTPS id 0F2163EE07
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Jan 2022 08:34:07 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 2ADF821100;
-	Fri, 28 Jan 2022 08:34:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1643358846; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Mqq6/1K5Z07dZlfumrnft39HapgqP5bCcIjcLq2oulU=;
-	b=SWETHrW/LxhkzVFKP3689p6y9pCGa34HBldSN45JYS4l/YRhAbXV/qLVm8H4/XLEDJx7Nc
-	q+EGZZcMMluzQcSezBVsvF4F6Ql9pfwW43RbLbS2FhkQ8seW4HzWJZkgLfrr25ZdTQb0zC
-	pmj+qhYlkodQG5AaJevt6rUUM48Ynpo=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1643358846;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Mqq6/1K5Z07dZlfumrnft39HapgqP5bCcIjcLq2oulU=;
-	b=BI3ihQORjCMHjmpcGopsCZtaH7e7JTg7g31qKovAjVMGgO9vI+5ioFJpJyHuJMap8ZiGhS
-	bczXn03Ko3nfkEBg==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id EC40813AF2;
-	Fri, 28 Jan 2022 08:34:05 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-	by imap2.suse-dmz.suse.de with ESMTPSA
-	id c3k3OH2q82HOXgAAMHmgww
-	(envelope-from <tzimmermann@suse.de>); Fri, 28 Jan 2022 08:34:05 +0000
-Message-ID: <5cb9453b-c507-4afa-9d48-1efcfb60be46@suse.de>
-Date: Fri, 28 Jan 2022 09:34:05 +0100
+	by lists.linaro.org (Postfix) with ESMTP id 61BDE3EE89
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 11:35:01 +0000 (UTC)
+Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com [209.85.167.179])
+	by lists.linaro.org (Postfix) with ESMTPS id 3F4F73ECD1
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Jan 2022 09:49:47 +0000 (UTC)
+Received: by mail-oi1-f179.google.com with SMTP id g205so11311914oif.5
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Jan 2022 01:49:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=KD2MpvTo6d8AcZYWRzGbZANNSm7u8StOzxLlvpWuXTM=;
+        b=FQzQLz7w2uSqyOzFrdxgHPBSvl26iWOThEOJaHmMYuIVXnVQEgZKxZ5U4FWsJLPY0S
+         X4XEZ3XJtyt2Hk0VsyZfdJ30dA7SvjN3AZ6QJ5l2DCpTYfQZdDb00FoHJas4xqHE0lRE
+         0aOu4PtW8jL1ggLGdgMydU0uN8yXsBv5qOCviu2tDu4MBCNuiYhhW2oNdiW+QnjMy/jj
+         n0QqnYbHvV7RJUVwZjDX/6vTmFpoGsgkRhHiXwqRvFc9HrnyEWmxuljZgaze8tC1AAWV
+         PphyuKKG98JeSBtMcyM/5mPLxi2zPXe7nksv2nZa2qvYzpBK/MYoW2Y1GSzKRDWMxGWk
+         itVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=KD2MpvTo6d8AcZYWRzGbZANNSm7u8StOzxLlvpWuXTM=;
+        b=r6bsasXkXW0ZcWIh0n0PPEVQ7L00aC34RC2mbIucgmMXiyk0JR1PT6LtzoDFcA3N3T
+         CJT1NUuImGko2N4cH68LH74u4jBawpiRXN2bs834oHiy12aNBhIZNzSImID7wuwzbgQW
+         zsDNmBDSJPbuPDV1//Rx+6v8ftMTiLvX3fr5Xco33mKBROFef9+VC8KTPDzkY4DE0kQz
+         mq4nqjhzmKHWihmIJ8kDreCt6tip/9W5jSTCB/5jSjTDe0jz72bcmDEjvN4We/IumMVZ
+         zqwphQhvMwz5AzwBx1516DJPt/dgHP86ci1T5wqXBdke/TCOtix0SsSnxOA5uxfFBi9j
+         5vcQ==
+X-Gm-Message-State: AOAM530gBjXVy2r02G6nNd4Nha9YYSzpN+xYA6DikX0ZGCxiHEEd4bIW
+	pHKTho+RvGlgH7QWiZYg2y2co2Hfisf2EIDZvPvcaA==
+X-Google-Smtp-Source: ABdhPJxKbcqfZUb1crg7oqDeoxOAlqqsIMh8sFoswaBdoHmg/9J3J8aMcSu3WBha2OvAdhq+y7Y7sjYIrLFdQDgLj1w=
+X-Received: by 2002:a05:6808:1901:: with SMTP id bf1mr5020470oib.197.1643363386387;
+ Fri, 28 Jan 2022 01:49:46 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.5.0
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Lucas De Marchi <lucas.demarchi@intel.com>
-References: <20220126203702.1784589-1-lucas.demarchi@intel.com>
- <20220126203702.1784589-3-lucas.demarchi@intel.com>
- <b7a3fe1d-3b85-cb7e-19cf-1611ff4f3c9e@suse.de>
- <20220127155913.vt7a74zmsglghzom@ldmartin-desk2>
- <f033228e-c914-efb0-534c-41fc3344f272@suse.de>
-In-Reply-To: <f033228e-c914-efb0-534c-41fc3344f272@suse.de>
-X-MailFrom: tzimmermann@suse.de
+References: <20220128015752.931256-1-liupeng256@huawei.com>
+In-Reply-To: <20220128015752.931256-1-liupeng256@huawei.com>
+From: Marco Elver <elver@google.com>
+Date: Fri, 28 Jan 2022 10:49:34 +0100
+Message-ID: <CANpmjNP+J-Ztz_sov0LPXS8nGCf-2oJFs0OJp1LQMBeaL00CBQ@mail.gmail.com>
+To: Peng Liu <liupeng256@huawei.com>
+X-MailFrom: elver@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: WS55Q7ZHCKQTGRYLMX2OO4NEHPCVBL2O
-X-Message-ID-Hash: WS55Q7ZHCKQTGRYLMX2OO4NEHPCVBL2O
-X-Mailman-Approved-At: Tue, 15 Feb 2022 11:33:42 +0000
-CC: intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org
+Message-ID-Hash: VI4LFFP4LPQOBA2XHASEFFMZHOCBMZYL
+X-Message-ID-Hash: VI4LFFP4LPQOBA2XHASEFFMZHOCBMZYL
+X-Mailman-Approved-At: Tue, 15 Feb 2022 11:33:45 +0000
+CC: glider@google.com, dvyukov@google.com, corbet@lwn.net, christian.koenig@amd.com, akpm@linux-foundation.org, kasan-dev@googlegroups.com, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [Intel-gfx] [PATCH 02/19] dma-buf-map: Add helper to initialize second map
+Subject: [Linaro-mm-sig] Re: [PATCH v2] kfence: Make test case compatible with run time set sample interval
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WS55Q7ZHCKQTGRYLMX2OO4NEHPCVBL2O/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VI4LFFP4LPQOBA2XHASEFFMZHOCBMZYL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============1440638389407113917=="
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============1440638389407113917==
-Content-Language: en-US
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------wrkStvEPag0Mu6brdyvA0nI1"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------wrkStvEPag0Mu6brdyvA0nI1
-Content-Type: multipart/mixed; boundary="------------Rw0on2vsWNVSOyjdXQvrHDck";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Lucas De Marchi <lucas.demarchi@intel.com>
-Cc: intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- linux-media@vger.kernel.org
-Message-ID: <5cb9453b-c507-4afa-9d48-1efcfb60be46@suse.de>
-Subject: Re: [Intel-gfx] [PATCH 02/19] dma-buf-map: Add helper to initialize
- second map
-References: <20220126203702.1784589-1-lucas.demarchi@intel.com>
- <20220126203702.1784589-3-lucas.demarchi@intel.com>
- <b7a3fe1d-3b85-cb7e-19cf-1611ff4f3c9e@suse.de>
- <20220127155913.vt7a74zmsglghzom@ldmartin-desk2>
- <f033228e-c914-efb0-534c-41fc3344f272@suse.de>
-In-Reply-To: <f033228e-c914-efb0-534c-41fc3344f272@suse.de>
-
---------------Rw0on2vsWNVSOyjdXQvrHDck
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-
-SGkNCg0KQW0gMjguMDEuMjIgdW0gMDk6MTUgc2NocmllYiBUaG9tYXMgWmltbWVybWFubjoN
-Ci4uLg0KPiANCj4+DQo+PiBXaGlsZSB3aXRoIHRoZSBjb25zdHJ1Y3QgYmVsb3cNCj4+DQo+
-PiDCoMKgwqDCoMKgwqDCoMKgIG90aGVyX21hcDsNCj4+IMKgwqDCoMKgwqDCoMKgwqAgLi4u
-DQo+PiDCoMKgwqDCoMKgwqDCoMKgIG90aGVyX21hcCA9IElOSVRJQUxJWkVSKCkNCj4+DQo+
-PiBJIGNhbiByZWx5IG9uIHRoZSBjb21waWxlciBjb21wbGFpbmluZyBhYm91dCB1bmluaXRp
-YWxpemVkIHZhci4gQW5kDQo+PiBpbiBtb3N0IG9mIHRoZSBjYXNlcyBJIGNhbiBqdXN0IGhh
-dmUgdGhpcyBzaW5nbGUgbGluZSBpbiB0aGUgYmVnZ2luaW5nIA0KPj4gb2YgdGhlDQo+PiBm
-dW5jdGlvbiB3aGVuIHRoZSBvZmZzZXQgaXMgY29uc3RhbnQ6DQo+Pg0KPj4gwqDCoMKgwqDC
-oMKgwqDCoCBzdHJ1Y3QgZG1hX2J1Zl9tYXAgb3RoZXJfbWFwID0gSU5JVElBTElaRVIoYmxh
-X21hcCwgDQo+PiBvZmZzZXRvZiguLikpOw0KPj4NCj4+DQo+PiBUaGlzIGlzIHVzZWZ1bCB3
-aGVuIHlvdSBoYXZlIHNldmVyYWwgc21hbGwgZnVuY3Rpb25zIGluIGNoYXJnZSBvZg0KPj4g
-dXBkYXRpbmcvcmVhZGluZyBpbm5lciBzdHJ1Y3QgbWVtYmVycy4NCj4gDQo+IFlvdSB3b24n
-dCBuZWVkIGFuIGV4dHJhIHZhcmlhYmxlIG9yIHRoZSBpbml0aWFsaXplciBtYWNybyBpZiB5
-b3UgYWRkIGFuIA0KPiBvZmZzZXQgcGFyYW1ldGVyIHRvIGRtYV9idWZfbWVtY3B5X3tmcm9t
-LHRvfS7CoCBTaW1wbGUgcGFzcyBvZmZzZXRvZiguLikgDQo+IHRvIHRoYXQgcGFyYW1ldGVy
-IGFuZCBpdCB3aWxsIGRvIHRoZSByaWdodCB0aGluZy4NCj4gDQo+IEl0IGF2b2lkcyB0aGUg
-cHJvYmxlbXMgb2YgdGhlIGN1cnJlbnQgbWFjcm8gYW5kIGlzIGV2ZW4gbW9yZSBmbGV4aWJs
-ZS4gDQo+IE9uIHRvcCBvZiB0aGF0LCB5b3UgY2FuIGJ1aWxkIHdoYXRldmVyIGNvbnZlbmll
-bmNlIG1hY3JvcyB5b3UgbmVlZCBmb3IgDQo+IGk5MTUuDQoNCkFuZCBtYXliZSBwdXQgYWxs
-IGNoYW5nZXMgdG8gdGhlIGRtYV9idWZfbWFwIGludGVyZmFjZSBpbnRvIGEgc2luZ2xlIA0K
-cGF0Y2guIEl0IG1ha2VzIGl0IGVhc2llciB0byByZXZpZXcgYW5kIGRpc2N1c3MuDQoNCkJl
-c3QgcmVnYXJkcw0KVGhvbWFzDQoNCj4gDQo+IEJlc3QgcmVnYXJkcw0KPiBUaG9tYXMNCj4g
-DQo+Pg0KPj4+DQo+Pj4gSSd2ZSBhbHNvIGJlZW4gdmVyeSBjYXJlZnVsIHRvIGRpc3Rpbmd1
-aXNoIGJldHdlZW4gLnZhZGRyIGFuZCANCj4+PiAudmFkZHJfaW9tZW0sIGV2ZW4gaW4gcGxh
-Y2VzIHdoZXJlIEkgd291bGRuJ3QgaGF2ZSB0by4gVGhpcyBtYWNybyANCj4+PiBicmVha3Mg
-dGhlIGFzc3VtcHRpb24uDQo+Pg0KPj4gVGhhdCdzIG9uZSByZWFzb24gSSB0aGluayBpZiB3
-ZSBoYXZlIHRoaXMgbWFjcm8sIGl0IHNob3VsZCBiZSBpbiB0aGUNCj4+IGRtYV9idWZfbWFw
-LmggaGVhZGVyIChvciB3aGF0ZXZlciB3ZSByZW5hbWUgdGhlc2UgQVBJcyB0bykuIEl0J3Mg
-dGhlDQo+PiBvbmx5IHBsYWNlIHdoZXJlIHdlIGNhbiBzYWZlbHkgYWRkIGNvZGUgdGhhdCBy
-ZWxpZXMgb24gdGhlIGltcGxlbWVudGF0aW9uDQo+PiBvZiB0aGUgInByaXZhdGUiIGZpZWxk
-cyBpbiBzdHJ1Y3QgZG1hX2J1Zl9tYXAuDQo+Pg0KPj4gTHVjYXMgRGUgTWFyY2hpDQo+Pg0K
-Pj4+DQo+Pj4gQmVzdCByZWdhcmRzDQo+Pj4gVGhvbWFzDQo+Pj4NCj4+Pj4gwqAvKioNCj4+
-Pj4gwqAgKiBkbWFfYnVmX21hcF9zZXRfdmFkZHIgLSBTZXRzIGEgZG1hLWJ1ZiBtYXBwaW5n
-IHN0cnVjdHVyZSB0byBhbiANCj4+Pj4gYWRkcmVzcyBpbiBzeXN0ZW0gbWVtb3J5DQo+Pj4+
-IMKgICogQG1hcDrCoMKgwqAgVGhlIGRtYS1idWYgbWFwcGluZyBzdHJ1Y3R1cmUNCj4+Pg0K
-Pj4+IC0tIA0KPj4+IFRob21hcyBaaW1tZXJtYW5uDQo+Pj4gR3JhcGhpY3MgRHJpdmVyIERl
-dmVsb3Blcg0KPj4+IFNVU0UgU29mdHdhcmUgU29sdXRpb25zIEdlcm1hbnkgR21iSA0KPj4+
-IE1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQ0KPj4+IChIUkIgMzY4
-MDksIEFHIE7DvHJuYmVyZykNCj4+PiBHZXNjaMOkZnRzZsO8aHJlcjogSXZvIFRvdGV2DQo+
-Pg0KPj4NCj4+DQo+IA0KDQotLSANClRob21hcyBaaW1tZXJtYW5uDQpHcmFwaGljcyBEcml2
-ZXIgRGV2ZWxvcGVyDQpTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgNCk1h
-eGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQ0KKEhSQiAzNjgwOSwgQUcg
-TsO8cm5iZXJnKQ0KR2VzY2jDpGZ0c2bDvGhyZXI6IEl2byBUb3Rldg0K
-
---------------Rw0on2vsWNVSOyjdXQvrHDck--
-
---------------wrkStvEPag0Mu6brdyvA0nI1
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmHzqn0FAwAAAAAACgkQlh/E3EQov+Ba
-UQ//Y9rvX2ubfy6HXJP+dB719uVMRVzF68mbf9tty43qVNVHMvfMfSgKMDMYJHXyHpD9tm4bgsIg
-gP7fA7gyP+MLgG9qdUtuSizHcE+NNDept6NV4AVYUXTHXWKMtPANhVsW+8UMiyLfGWg2Vg0dOiNN
-ShebkBRlDGRs3I+m3FYGpyIi6LpnVsmLAHMcN3p2/Dg1NALX6xmM8K9kaS2LQwIEGNFponRQ0z5R
-BXd7ZttJHpBk5NJ2KC2WcMygQcE/s3F8WWi41zYq0sH2neRTUDmEjWdpkRL4iHoi342mKB3LM2Uc
-47Bh+I1Fdgdto2k/tVgOtrfiN9Bo05H2GuHKhSPbkBPcZJf6RVzAnqsauHRIsEoeTcCEEHj7JS2L
-6etQ0oBcycIyXpAzhqE49h7IK4bvhj46X4QJMYlsNQ2pcWP/DW4SWfCwIg1uM4jpgUW/VYSQLcah
-/KSHyAjOVGM6VQUn2JvFr2GRMASM/i7ZX0MsvawPz0+jbZRkgRRO/ClDAlUSYJSOESWZX/+VrsED
-tLpuZWgFxFCUzoep5HNcs2KlS6RxpB4wZsywAQfUUKeOBjOkRglmoe7MN/Wped0xOkG8LCV4RKrg
-SRlEJCsUDWyLQYzqxdFVKDCERDjB087q4rTUOXUd4tC2WcdD+OnkAPumNYip+h56aWsZVK4K+MP3
-Cs8=
-=RPZb
------END PGP SIGNATURE-----
-
---------------wrkStvEPag0Mu6brdyvA0nI1--
-
---===============1440638389407113917==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
+On Fri, 28 Jan 2022 at 02:41, Peng Liu <liupeng256@huawei.com> wrote:
+> The parameter kfence_sample_interval can be set via boot parameter
+> and late shell command, which is convenient for automatical tests
+
+s/automatical/automated/
+
+> and KFENCE parameter optimation. However, KFENCE test case just use
+
+s/optimation/optimization/
+
+> compile time CONFIG_KFENCE_SAMPLE_INTERVAL, this will make KFENCE
+> test case not run as user desired. This patch will make KFENCE test
+> case compatible with run-time-set sample interval.
+
+I'm not too particular about it, but "This patch" is usually bad style:
+https://www.kernel.org/doc/html/latest/process/submitting-patches.html#describe-your-changes
+
+> v1->v2:
+> - Use EXPORT_SYMBOL_GPL replace EXPORT_SYMBOL
+
+Changelog is usually placed after '---', because it's mostly redundant
+once committed. Often maintainers include a "Link" to the original
+patch which then has history and discussion.
+
+> Signed-off-by: Peng Liu <liupeng256@huawei.com>
+
+Reviewed-by: Marco Elver <elver@google.com>
+
+
+> ---
+>  include/linux/kfence.h  | 2 ++
+>  mm/kfence/core.c        | 3 ++-
+>  mm/kfence/kfence_test.c | 8 ++++----
+>  3 files changed, 8 insertions(+), 5 deletions(-)
+>
+> diff --git a/include/linux/kfence.h b/include/linux/kfence.h
+> index 4b5e3679a72c..f49e64222628 100644
+> --- a/include/linux/kfence.h
+> +++ b/include/linux/kfence.h
+> @@ -17,6 +17,8 @@
+>  #include <linux/atomic.h>
+>  #include <linux/static_key.h>
+>
+> +extern unsigned long kfence_sample_interval;
+> +
+>  /*
+>   * We allocate an even number of pages, as it simplifies calculations to map
+>   * address to metadata indices; effectively, the very first page serves as an
+> diff --git a/mm/kfence/core.c b/mm/kfence/core.c
+> index 5ad40e3add45..13128fa13062 100644
+> --- a/mm/kfence/core.c
+> +++ b/mm/kfence/core.c
+> @@ -47,7 +47,8 @@
+>
+>  static bool kfence_enabled __read_mostly;
+>
+> -static unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
+> +unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
+> +EXPORT_SYMBOL_GPL(kfence_sample_interval); /* Export for test modules. */
+>
+>  #ifdef MODULE_PARAM_PREFIX
+>  #undef MODULE_PARAM_PREFIX
+> diff --git a/mm/kfence/kfence_test.c b/mm/kfence/kfence_test.c
+> index a22b1af85577..50dbb815a2a8 100644
+> --- a/mm/kfence/kfence_test.c
+> +++ b/mm/kfence/kfence_test.c
+> @@ -268,13 +268,13 @@ static void *test_alloc(struct kunit *test, size_t size, gfp_t gfp, enum allocat
+>          * 100x the sample interval should be more than enough to ensure we get
+>          * a KFENCE allocation eventually.
+>          */
+> -       timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
+> +       timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
+>         /*
+>          * Especially for non-preemption kernels, ensure the allocation-gate
+>          * timer can catch up: after @resched_after, every failed allocation
+>          * attempt yields, to ensure the allocation-gate timer is scheduled.
+>          */
+> -       resched_after = jiffies + msecs_to_jiffies(CONFIG_KFENCE_SAMPLE_INTERVAL);
+> +       resched_after = jiffies + msecs_to_jiffies(kfence_sample_interval);
+>         do {
+>                 if (test_cache)
+>                         alloc = kmem_cache_alloc(test_cache, gfp);
+> @@ -608,7 +608,7 @@ static void test_gfpzero(struct kunit *test)
+>         int i;
+>
+>         /* Skip if we think it'd take too long. */
+> -       KFENCE_TEST_REQUIRES(test, CONFIG_KFENCE_SAMPLE_INTERVAL <= 100);
+> +       KFENCE_TEST_REQUIRES(test, kfence_sample_interval <= 100);
+>
+>         setup_test_cache(test, size, 0, NULL);
+>         buf1 = test_alloc(test, size, GFP_KERNEL, ALLOCATE_ANY);
+> @@ -739,7 +739,7 @@ static void test_memcache_alloc_bulk(struct kunit *test)
+>          * 100x the sample interval should be more than enough to ensure we get
+>          * a KFENCE allocation eventually.
+>          */
+> -       timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
+> +       timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
+>         do {
+>                 void *objects[100];
+>                 int i, num = kmem_cache_alloc_bulk(test_cache, GFP_ATOMIC, ARRAY_SIZE(objects),
+> --
+> 2.18.0.huawei.25
+>
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============1440638389407113917==--
