@@ -2,62 +2,31 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2E3A4B6F8F
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 16:15:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4240B4B6F90
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 16:16:00 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 25AC23EE8D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 15:15:52 +0000 (UTC)
-Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
-	by lists.linaro.org (Postfix) with ESMTPS id 7B9983EBD6
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  7 Feb 2022 08:55:53 +0000 (UTC)
-Received: by mail-yb1-f171.google.com with SMTP id e145so17767706yba.12
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 07 Feb 2022 00:55:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=knF2fFP9aIoGTNmgPKFlIdzkXuLeb4VSUzI7AmunKNY=;
-        b=kjKQjXhqwEwzFPGB6U7llci4Uyu0GDktsh9CriN7LUAxMChIRo0PfU0thwAaw7TEV0
-         eqCQDKSViTSVsvrwmtQtElbEyfpkPhnyg4gPW1DbIanejHpDHkfG/4K2wXFclclpkWzI
-         6WWHlSneOzKtnn8OzsMKXLagS1YERguBWMQh1qbU+fUkMIO42i0rVSiMI/6AnVSMVSkP
-         QIAO7fAtsQeLrnZrgbbX9hklHmvYu1UJxrrxfeJ11kickjSzmqyKZiEW+JH0AbcMcCp7
-         WeBBZbhdpkYxU/69NVf1lZzL3bs3DuayqvwzIEsIba6Y/YaBjtid3TAMYdo7sfNwHMiQ
-         LMBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=knF2fFP9aIoGTNmgPKFlIdzkXuLeb4VSUzI7AmunKNY=;
-        b=wliG0zelW4F9aPnkkDhZWYQeOgNk3A2vKrJTlQwmOAHbL6eeurpVPGShIQGphyMJLd
-         THczYI7nYoFyXhtsDW9xczbSFK9nytWcTq4Vg5gMdljFGaJhkCpx7ZttIQQACV0LF2mU
-         PMCByq6wv//9eLgWgYScFdpzrifASuX2PWmecLCWN3KwWCSR/3ASDhPIL0898nz/cTLH
-         8umFdOaH05Q7/KzB6YOqlCUBRDvb+YWvV4DIACV24ww1Z1340aCiIG0CxuEkDriWkiFO
-         VpQ+Dv2pnO2vj3SHiBYVTQ9jA7ObACAUBie7PD/C9lcmpn6b07rsZxRr/3CWVj1lb8xL
-         xAHQ==
-X-Gm-Message-State: AOAM5325/pSQtCRlhJmrLVnN7e6NOrThbMNyIU9J69htbbjmMKAOsNsi
-	6bxq51vVCqW2RZT6QZhTOvbnIwyXyiHUmXc7791AeA==
-X-Google-Smtp-Source: ABdhPJyWH7PhtKu+j316v5w82AR7rHUJWXjLEcMawUmUXMQHsH7DXQJajqIi03ZoF4QFGuosxGiLrl/nfBv2NmF3nwQ=
-X-Received: by 2002:a81:c505:: with SMTP id k5mr6144103ywi.264.1644224152818;
- Mon, 07 Feb 2022 00:55:52 -0800 (PST)
+	by lists.linaro.org (Postfix) with ESMTP id 79A65401D2
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 15:15:59 +0000 (UTC)
+Received: from aposti.net (aposti.net [89.234.176.197])
+	by lists.linaro.org (Postfix) with ESMTPS id D027B3EE45
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  7 Feb 2022 12:59:43 +0000 (UTC)
+From: Paul Cercueil <paul@crapouillou.net>
+To: Jonathan Cameron <jic23@kernel.org>
+Date: Mon,  7 Feb 2022 12:59:21 +0000
+Message-Id: <20220207125933.81634-1-paul@crapouillou.net>
 MIME-Version: 1.0
-References: <20220207034432.185532-1-liupeng256@huawei.com>
-In-Reply-To: <20220207034432.185532-1-liupeng256@huawei.com>
-From: Marco Elver <elver@google.com>
-Date: Mon, 7 Feb 2022 09:55:41 +0100
-Message-ID: <CANpmjNN=0Q6s5WnKrWm4YXqSj-1rRsL2VTD_QJUfQdv_2nhf0Q@mail.gmail.com>
-To: Peng Liu <liupeng256@huawei.com>
-X-MailFrom: elver@google.com
+X-MailFrom: paul@crapouillou.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 5UBAOCS4VEFNFJ7R6N4YQQMRAWCKQZGH
-X-Message-ID-Hash: 5UBAOCS4VEFNFJ7R6N4YQQMRAWCKQZGH
-X-Mailman-Approved-At: Tue, 15 Feb 2022 15:15:38 +0000
-CC: glider@google.com, dvyukov@google.com, corbet@lwn.net, christian.koenig@amd.com, akpm@linux-foundation.org, kasan-dev@googlegroups.com, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
+Message-ID-Hash: CBAWL4VC4VNO5MO2JYO337XQONNVXKFP
+X-Message-ID-Hash: CBAWL4VC4VNO5MO2JYO337XQONNVXKFP
+X-Mailman-Approved-At: Tue, 15 Feb 2022 15:15:40 +0000
+CC: Michael Hennerich <Michael.Hennerich@analog.com>, Lars-Peter Clausen <lars@metafoo.de>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Alexandru Ardelean <ardeleanalex@gmail.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org, Paul Cercueil <paul@crapouillou.net>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3] kfence: Make test case compatible with run time set sample interval
+Subject: [Linaro-mm-sig] [PATCH v2 00/12] iio: buffer-dma: write() and new DMABUF based API
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5UBAOCS4VEFNFJ7R6N4YQQMRAWCKQZGH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CBAWL4VC4VNO5MO2JYO337XQONNVXKFP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -67,105 +36,80 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon, 7 Feb 2022 at 04:29, 'Peng Liu' via kasan-dev
-<kasan-dev@googlegroups.com> wrote:
->
-> The parameter kfence_sample_interval can be set via boot parameter
-> and late shell command, which is convenient for automated tests and
-> KFENCE parameter optimization. However, KFENCE test case just uses
-> compile-time CONFIG_KFENCE_SAMPLE_INTERVAL, which will make KFENCE
-> test case not run as users desired. Export kfence_sample_interval,
-> so that KFENCE test case can use run-time-set sample interval.
->
-> Signed-off-by: Peng Liu <liupeng256@huawei.com>
+Hi Jonathan,
 
-Reviewed-by: Marco Elver <elver@google.com>
+This is the V2 of my patchset that introduces a new userspace interface
+based on DMABUF objects to complement the fileio API, and adds write()
+support to the existing fileio API.
 
-Thank you.
+Changes since v1:
 
-> ---
-> v2->v3:
-> - Revise change log description
-> v1->v2:
-> - Use EXPORT_SYMBOL_GPL replace EXPORT_SYMBOL
->
->  include/linux/kfence.h  | 2 ++
->  mm/kfence/core.c        | 3 ++-
->  mm/kfence/kfence_test.c | 8 ++++----
->  3 files changed, 8 insertions(+), 5 deletions(-)
->
-> diff --git a/include/linux/kfence.h b/include/linux/kfence.h
-> index 4b5e3679a72c..f49e64222628 100644
-> --- a/include/linux/kfence.h
-> +++ b/include/linux/kfence.h
-> @@ -17,6 +17,8 @@
->  #include <linux/atomic.h>
->  #include <linux/static_key.h>
->
-> +extern unsigned long kfence_sample_interval;
-> +
->  /*
->   * We allocate an even number of pages, as it simplifies calculations to map
->   * address to metadata indices; effectively, the very first page serves as an
-> diff --git a/mm/kfence/core.c b/mm/kfence/core.c
-> index 5ad40e3add45..13128fa13062 100644
-> --- a/mm/kfence/core.c
-> +++ b/mm/kfence/core.c
-> @@ -47,7 +47,8 @@
->
->  static bool kfence_enabled __read_mostly;
->
-> -static unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
-> +unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
-> +EXPORT_SYMBOL_GPL(kfence_sample_interval); /* Export for test modules. */
->
->  #ifdef MODULE_PARAM_PREFIX
->  #undef MODULE_PARAM_PREFIX
-> diff --git a/mm/kfence/kfence_test.c b/mm/kfence/kfence_test.c
-> index a22b1af85577..50dbb815a2a8 100644
-> --- a/mm/kfence/kfence_test.c
-> +++ b/mm/kfence/kfence_test.c
-> @@ -268,13 +268,13 @@ static void *test_alloc(struct kunit *test, size_t size, gfp_t gfp, enum allocat
->          * 100x the sample interval should be more than enough to ensure we get
->          * a KFENCE allocation eventually.
->          */
-> -       timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
-> +       timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
->         /*
->          * Especially for non-preemption kernels, ensure the allocation-gate
->          * timer can catch up: after @resched_after, every failed allocation
->          * attempt yields, to ensure the allocation-gate timer is scheduled.
->          */
-> -       resched_after = jiffies + msecs_to_jiffies(CONFIG_KFENCE_SAMPLE_INTERVAL);
-> +       resched_after = jiffies + msecs_to_jiffies(kfence_sample_interval);
->         do {
->                 if (test_cache)
->                         alloc = kmem_cache_alloc(test_cache, gfp);
-> @@ -608,7 +608,7 @@ static void test_gfpzero(struct kunit *test)
->         int i;
->
->         /* Skip if we think it'd take too long. */
-> -       KFENCE_TEST_REQUIRES(test, CONFIG_KFENCE_SAMPLE_INTERVAL <= 100);
-> +       KFENCE_TEST_REQUIRES(test, kfence_sample_interval <= 100);
->
->         setup_test_cache(test, size, 0, NULL);
->         buf1 = test_alloc(test, size, GFP_KERNEL, ALLOCATE_ANY);
-> @@ -739,7 +739,7 @@ static void test_memcache_alloc_bulk(struct kunit *test)
->          * 100x the sample interval should be more than enough to ensure we get
->          * a KFENCE allocation eventually.
->          */
-> -       timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
-> +       timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
->         do {
->                 void *objects[100];
->                 int i, num = kmem_cache_alloc_bulk(test_cache, GFP_ATOMIC, ARRAY_SIZE(objects),
-> --
-> 2.18.0.huawei.25
->
-> --
-> You received this message because you are subscribed to the Google Groups "kasan-dev" group.
-> To unsubscribe from this group and stop receiving emails from it, send an email to kasan-dev+unsubscribe@googlegroups.com.
-> To view this discussion on the web visit https://groups.google.com/d/msgid/kasan-dev/20220207034432.185532-1-liupeng256%40huawei.com.
+- the patches that were merged in v1 have been (obviously) dropped from
+  this patchset;
+- the patch that was setting the write-combine cache setting has been
+  dropped as well, as it was simply not useful.
+- [01/12]: 
+    * Only remove the outgoing queue, and keep the incoming queue, as we
+      want the buffer to start streaming data as soon as it is enabled.
+    * Remove IIO_BLOCK_STATE_DEQUEUED, since it is now functionally the
+      same as IIO_BLOCK_STATE_DONE.
+- [02/12]:
+    * Fix block->state not being reset in
+      iio_dma_buffer_request_update() for output buffers.
+    * Only update block->bytes_used once and add a comment about why we
+      update it.
+    * Add a comment about why we're setting a different state for output
+      buffers in iio_dma_buffer_request_update()
+    * Remove useless cast to bool (!!) in iio_dma_buffer_io()
+- [05/12]:
+    Only allow the new IOCTLs on the buffer FD created with
+    IIO_BUFFER_GET_FD_IOCTL().
+- [12/12]:
+    * Explicitly state that the new interface is optional and is
+      not implemented by all drivers.
+    * The IOCTLs can now only be called on the buffer FD returned by
+      IIO_BUFFER_GET_FD_IOCTL.
+    * Move the page up a bit in the index since it is core stuff and not
+      driver-specific.
+
+The patches not listed here have not been modified since v1.
+
+Cheers,
+-Paul
+
+Alexandru Ardelean (1):
+  iio: buffer-dma: split iio_dma_buffer_fileio_free() function
+
+Paul Cercueil (11):
+  iio: buffer-dma: Get rid of outgoing queue
+  iio: buffer-dma: Enable buffer write support
+  iio: buffer-dmaengine: Support specifying buffer direction
+  iio: buffer-dmaengine: Enable write support
+  iio: core: Add new DMABUF interface infrastructure
+  iio: buffer-dma: Use DMABUFs instead of custom solution
+  iio: buffer-dma: Implement new DMABUF based userspace API
+  iio: buffer-dmaengine: Support new DMABUF based userspace API
+  iio: core: Add support for cyclic buffers
+  iio: buffer-dmaengine: Add support for cyclic buffers
+  Documentation: iio: Document high-speed DMABUF based API
+
+ Documentation/driver-api/dma-buf.rst          |   2 +
+ Documentation/iio/dmabuf_api.rst              |  94 +++
+ Documentation/iio/index.rst                   |   2 +
+ drivers/iio/adc/adi-axi-adc.c                 |   3 +-
+ drivers/iio/buffer/industrialio-buffer-dma.c  | 610 ++++++++++++++----
+ .../buffer/industrialio-buffer-dmaengine.c    |  42 +-
+ drivers/iio/industrialio-buffer.c             |  60 ++
+ include/linux/iio/buffer-dma.h                |  38 +-
+ include/linux/iio/buffer-dmaengine.h          |   5 +-
+ include/linux/iio/buffer_impl.h               |   8 +
+ include/uapi/linux/iio/buffer.h               |  30 +
+ 11 files changed, 749 insertions(+), 145 deletions(-)
+ create mode 100644 Documentation/iio/dmabuf_api.rst
+
+-- 
+2.34.1
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
