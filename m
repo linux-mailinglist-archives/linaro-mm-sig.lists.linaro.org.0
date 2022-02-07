@@ -2,87 +2,346 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FCC44B6B81
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 12:49:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EC2784B6F8D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 16:15:39 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 528AA401C4
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 11:49:24 +0000 (UTC)
-Received: from mail-io1-f69.google.com (mail-io1-f69.google.com [209.85.166.69])
-	by lists.linaro.org (Postfix) with ESMTPS id 16AB83EE1F
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 31 Jan 2022 07:50:09 +0000 (UTC)
-Received: by mail-io1-f69.google.com with SMTP id y23-20020a5e8717000000b0060fd92726cbso9342212ioj.22
-        for <linaro-mm-sig@lists.linaro.org>; Sun, 30 Jan 2022 23:50:09 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:date:in-reply-to:message-id:subject
-         :from:to;
-        bh=mUUhKABASSDYvCUsc04M7XBtQBbnsrCUfjP/FgUZhxY=;
-        b=6VXfq6DnH9sWwhEM4qiHhjXPhESYQtdHKgDKhSM/SRoO9qb0TGAFG75oKVHW/Fox4G
-         lBSaAMIxXq2LCDDxc2OYT9PxScPgz4v5lkJTZz2be612wX5p4f4ioy+M+pFz+uC2mpq3
-         dep4HutF30faB9DiKQ4VIt8tdiGgoZRM2y1jxiO5W4sNwji7RStIrj9Czlvcq4n9aHcL
-         MyJ+Ti0Yb/w7oLKq9Kc1HxAckpo1R3NM8A3e+Mp8xlarvAi7y6hXdtN8Sc2qUD26mZul
-         10yN/8jjS/pD+q5G5lzHq7VBcZuZVo0v/1gYx4rsY+pEEfqOfjMRwjVaZ4g6plyU9HS9
-         /0MA==
-X-Gm-Message-State: AOAM533rED9i3zfUacrdCAuk/i+t1ihkWRZiIm4S9N/CcqSEWylPYb9L
-	IyUPiL1IEvdfPPdr8RkoKXQamR/tWyBiivlT4wsH40Aj6sKA
-X-Google-Smtp-Source: ABdhPJymwJlS8JsUdlrCW9lOYpIn2UaIQaZW0hA0lpGtEyFOwecg2a8tRTfuM68f+RfkiiN+E5hX3nWx76izWqmI0UiryQoaAMBM
+	by lists.linaro.org (Postfix) with ESMTP id 233833EE87
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Feb 2022 15:15:39 +0000 (UTC)
+Received: from szxga01-in.huawei.com (szxga01-in.huawei.com [45.249.212.187])
+	by lists.linaro.org (Postfix) with ESMTPS id D81C63E8AA
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  7 Feb 2022 01:25:47 +0000 (UTC)
+Received: from kwepemi500020.china.huawei.com (unknown [172.30.72.57])
+	by szxga01-in.huawei.com (SkyGuard) with ESMTP id 4JsT2j5gTZzcck1;
+	Mon,  7 Feb 2022 09:24:45 +0800 (CST)
+Received: from kwepemm600017.china.huawei.com (7.193.23.234) by
+ kwepemi500020.china.huawei.com (7.221.188.8) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.21; Mon, 7 Feb 2022 09:25:44 +0800
+Received: from [10.174.179.19] (10.174.179.19) by
+ kwepemm600017.china.huawei.com (7.193.23.234) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2308.21; Mon, 7 Feb 2022 09:25:43 +0800
+Message-ID: <1d0b0a51-8376-db19-2634-036e66692d02@huawei.com>
+Date: Mon, 7 Feb 2022 09:25:42 +0800
 MIME-Version: 1.0
-X-Received: by 2002:a6b:d90c:: with SMTP id r12mr10512979ioc.99.1643615408629;
- Sun, 30 Jan 2022 23:50:08 -0800 (PST)
-Date: Sun, 30 Jan 2022 23:50:08 -0800
-In-Reply-To: <0000000000008a7a1c05c9e53c87@google.com>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000942c2205d6dc0896@google.com>
-From: syzbot <syzbot+91525b2bd4b5dff71619@syzkaller.appspotmail.com>
-To: airlied@linux.ie, bugs-a21@moonlit-rail.com, christian.koenig@amd.com,
-	daniel.vetter@ffwll.ch, daniel.vetter@intel.com, daniel@ffwll.ch,
-	dri-devel@lists.freedesktop.org, javierm@redhat.com,
-	linaro-mm-sig-owner@lists.linaro.org, linaro-mm-sig@lists.linaro.org,
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-	maarten.lankhorst@linux.intel.com, maxime@cerno.tech, melissa.srw@gmail.com,
-	mripard@kernel.org, sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com,
-	tzimmermann@suse.de
-X-MailFrom: 3sJT3YQkbAM0BHI3t44xAt881w.z77z4xDBxAv76Cx6C.v75@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.2
+Content-Language: en-US
+To: Marco Elver <elver@google.com>
+References: <20220128015752.931256-1-liupeng256@huawei.com>
+ <CANpmjNP+J-Ztz_sov0LPXS8nGCf-2oJFs0OJp1LQMBeaL00CBQ@mail.gmail.com>
+From: "liupeng (DM)" <liupeng256@huawei.com>
+In-Reply-To: <CANpmjNP+J-Ztz_sov0LPXS8nGCf-2oJFs0OJp1LQMBeaL00CBQ@mail.gmail.com>
+X-Originating-IP: [10.174.179.19]
+X-ClientProxiedBy: dggems706-chm.china.huawei.com (10.3.19.183) To
+ kwepemm600017.china.huawei.com (7.193.23.234)
+X-CFilter-Loop: Reflected
+X-MailFrom: liupeng256@huawei.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: GEVFUSLNHDDZWCFQZGYHTYJW5KG4D5ZE
-X-Message-ID-Hash: GEVFUSLNHDDZWCFQZGYHTYJW5KG4D5ZE
-X-Mailman-Approved-At: Tue, 15 Feb 2022 11:49:09 +0000
+Message-ID-Hash: S6BKCJMCF2ZWNKINDOU3OSJD2ERBWPSI
+X-Message-ID-Hash: S6BKCJMCF2ZWNKINDOU3OSJD2ERBWPSI
+X-Mailman-Approved-At: Tue, 15 Feb 2022 15:15:34 +0000
+CC: glider@google.com, dvyukov@google.com, corbet@lwn.net, christian.koenig@amd.com, akpm@linux-foundation.org, kasan-dev@googlegroups.com, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [syzbot] WARNING in drm_gem_shmem_vm_open
+Subject: [Linaro-mm-sig] Re: [PATCH v2] kfence: Make test case compatible with run time set sample interval
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GEVFUSLNHDDZWCFQZGYHTYJW5KG4D5ZE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/S6BKCJMCF2ZWNKINDOU3OSJD2ERBWPSI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/mixed; boundary="===============5338875001600884820=="
+
+--===============5338875001600884820==
+Content-Type: multipart/alternative;
+	boundary="------------WBwpaL1IxONE0il5bX100oVb"
+Content-Language: en-US
+
+--------------WBwpaL1IxONE0il5bX100oVb
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-syzbot suspects this issue was fixed by commit:
 
-commit 0499f419b76f94ede08304aad5851144813ac55c
-Author: Javier Martinez Canillas <javierm@redhat.com>
-Date:   Mon Jan 10 09:56:25 2022 +0000
+On 2022/1/28 17:49, Marco Elver wrote:
+> On Fri, 28 Jan 2022 at 02:41, Peng Liu<liupeng256@huawei.com>  wrote:
+>> The parameter kfence_sample_interval can be set via boot parameter
+>> and late shell command, which is convenient for automatical tests
+> s/automatical/automated/
+>
+>> and KFENCE parameter optimation. However, KFENCE test case just use
+> s/optimation/optimization/
+>
+>> compile time CONFIG_KFENCE_SAMPLE_INTERVAL, this will make KFENCE
+>> test case not run as user desired. This patch will make KFENCE test
+>> case compatible with run-time-set sample interval.
+> I'm not too particular about it, but "This patch" is usually bad style:
+> https://www.kernel.org/doc/html/latest/process/submitting-patches.html#describe-your-changes
 
-    video: vga16fb: Only probe for EGA and VGA 16 color graphic cards
+I'm sorry for the "bad style", and I will carefully revise later.
 
-bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=126571e0700000
-start commit:   5d6ab0bb408f Merge tag 'xtensa-20211008' of git://github.c..
-git tree:       upstream
-kernel config:  https://syzkaller.appspot.com/x/.config?x=32e6048063923b7b
-dashboard link: https://syzkaller.appspot.com/bug?extid=91525b2bd4b5dff71619
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=11073300b00000
+>> v1->v2:
+>> - Use EXPORT_SYMBOL_GPL replace EXPORT_SYMBOL
+> Changelog is usually placed after '---', because it's mostly redundant
+> once committed. Often maintainers include a "Link" to the original
+> patch which then has history and discussion.
+>
+>> Signed-off-by: Peng Liu<liupeng256@huawei.com>
+> Reviewed-by: Marco Elver<elver@google.com>
+>
+>
+>> ---
+>>   include/linux/kfence.h  | 2 ++
+>>   mm/kfence/core.c        | 3 ++-
+>>   mm/kfence/kfence_test.c | 8 ++++----
+>>   3 files changed, 8 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/include/linux/kfence.h b/include/linux/kfence.h
+>> index 4b5e3679a72c..f49e64222628 100644
+>> --- a/include/linux/kfence.h
+>> +++ b/include/linux/kfence.h
+>> @@ -17,6 +17,8 @@
+>>   #include <linux/atomic.h>
+>>   #include <linux/static_key.h>
+>>
+>> +extern unsigned long kfence_sample_interval;
+>> +
+>>   /*
+>>    * We allocate an even number of pages, as it simplifies calculations to map
+>>    * address to metadata indices; effectively, the very first page serves as an
+>> diff --git a/mm/kfence/core.c b/mm/kfence/core.c
+>> index 5ad40e3add45..13128fa13062 100644
+>> --- a/mm/kfence/core.c
+>> +++ b/mm/kfence/core.c
+>> @@ -47,7 +47,8 @@
+>>
+>>   static bool kfence_enabled __read_mostly;
+>>
+>> -static unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
+>> +unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
+>> +EXPORT_SYMBOL_GPL(kfence_sample_interval); /* Export for test modules. */
+>>
+>>   #ifdef MODULE_PARAM_PREFIX
+>>   #undef MODULE_PARAM_PREFIX
+>> diff --git a/mm/kfence/kfence_test.c b/mm/kfence/kfence_test.c
+>> index a22b1af85577..50dbb815a2a8 100644
+>> --- a/mm/kfence/kfence_test.c
+>> +++ b/mm/kfence/kfence_test.c
+>> @@ -268,13 +268,13 @@ static void *test_alloc(struct kunit *test, size_t size, gfp_t gfp, enum allocat
+>>           * 100x the sample interval should be more than enough to ensure we get
+>>           * a KFENCE allocation eventually.
+>>           */
+>> -       timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
+>> +       timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
+>>          /*
+>>           * Especially for non-preemption kernels, ensure the allocation-gate
+>>           * timer can catch up: after @resched_after, every failed allocation
+>>           * attempt yields, to ensure the allocation-gate timer is scheduled.
+>>           */
+>> -       resched_after = jiffies + msecs_to_jiffies(CONFIG_KFENCE_SAMPLE_INTERVAL);
+>> +       resched_after = jiffies + msecs_to_jiffies(kfence_sample_interval);
+>>          do {
+>>                  if (test_cache)
+>>                          alloc = kmem_cache_alloc(test_cache, gfp);
+>> @@ -608,7 +608,7 @@ static void test_gfpzero(struct kunit *test)
+>>          int i;
+>>
+>>          /* Skip if we think it'd take too long. */
+>> -       KFENCE_TEST_REQUIRES(test, CONFIG_KFENCE_SAMPLE_INTERVAL <= 100);
+>> +       KFENCE_TEST_REQUIRES(test, kfence_sample_interval <= 100);
+>>
+>>          setup_test_cache(test, size, 0, NULL);
+>>          buf1 = test_alloc(test, size, GFP_KERNEL, ALLOCATE_ANY);
+>> @@ -739,7 +739,7 @@ static void test_memcache_alloc_bulk(struct kunit *test)
+>>           * 100x the sample interval should be more than enough to ensure we get
+>>           * a KFENCE allocation eventually.
+>>           */
+>> -       timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
+>> +       timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
+>>          do {
+>>                  void *objects[100];
+>>                  int i, num = kmem_cache_alloc_bulk(test_cache, GFP_ATOMIC, ARRAY_SIZE(objects),
+>> --
+>> 2.18.0.huawei.25
+>>
+> .
 
-If the result looks correct, please mark the issue as fixed by replying with:
+I'm sorry for the latency due to the spring festival. Thank you for your advice,
+and I will send a revised patch later.
 
-#syz fix: video: vga16fb: Only probe for EGA and VGA 16 color graphic cards
+Thanks,
+-- Peng Liu
 
-For information about bisection process see: https://goo.gl/tpsmEJ#bisection
+--------------WBwpaL1IxONE0il5bX100oVb
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+  <body>
+    <p><br>
+    </p>
+    <div class="moz-cite-prefix">On 2022/1/28 17:49, Marco Elver wrote:<br>
+    </div>
+    <blockquote type="cite"
+cite="mid:CANpmjNP+J-Ztz_sov0LPXS8nGCf-2oJFs0OJp1LQMBeaL00CBQ@mail.gmail.com">
+      <pre class="moz-quote-pre" wrap="">On Fri, 28 Jan 2022 at 02:41, Peng Liu <a class="moz-txt-link-rfc2396E" href="mailto:liupeng256@huawei.com">&lt;liupeng256@huawei.com&gt;</a> wrote:
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">The parameter kfence_sample_interval can be set via boot parameter
+and late shell command, which is convenient for automatical tests
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+s/automatical/automated/
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">and KFENCE parameter optimation. However, KFENCE test case just use
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+s/optimation/optimization/
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">compile time CONFIG_KFENCE_SAMPLE_INTERVAL, this will make KFENCE
+test case not run as user desired. This patch will make KFENCE test
+case compatible with run-time-set sample interval.
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+I'm not too particular about it, but "This patch" is usually bad style:
+<a class="moz-txt-link-freetext" href="https://www.kernel.org/doc/html/latest/process/submitting-patches.html#describe-your-changes">https://www.kernel.org/doc/html/latest/process/submitting-patches.html#describe-your-changes</a>
+</pre>
+    </blockquote>
+    <pre>I'm sorry for the "bad style", and I will carefully revise later.
+</pre>
+    <blockquote type="cite"
+cite="mid:CANpmjNP+J-Ztz_sov0LPXS8nGCf-2oJFs0OJp1LQMBeaL00CBQ@mail.gmail.com">
+      <pre class="moz-quote-pre" wrap="">
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">v1-&gt;v2:
+- Use EXPORT_SYMBOL_GPL replace EXPORT_SYMBOL
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+Changelog is usually placed after '---', because it's mostly redundant
+once committed. Often maintainers include a "Link" to the original
+patch which then has history and discussion.
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">Signed-off-by: Peng Liu <a class="moz-txt-link-rfc2396E" href="mailto:liupeng256@huawei.com">&lt;liupeng256@huawei.com&gt;</a>
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">
+Reviewed-by: Marco Elver <a class="moz-txt-link-rfc2396E" href="mailto:elver@google.com">&lt;elver@google.com&gt;</a>
+
+
+</pre>
+      <blockquote type="cite">
+        <pre class="moz-quote-pre" wrap="">---
+ include/linux/kfence.h  | 2 ++
+ mm/kfence/core.c        | 3 ++-
+ mm/kfence/kfence_test.c | 8 ++++----
+ 3 files changed, 8 insertions(+), 5 deletions(-)
+
+diff --git a/include/linux/kfence.h b/include/linux/kfence.h
+index 4b5e3679a72c..f49e64222628 100644
+--- a/include/linux/kfence.h
++++ b/include/linux/kfence.h
+@@ -17,6 +17,8 @@
+ #include &lt;linux/atomic.h&gt;
+ #include &lt;linux/static_key.h&gt;
+
++extern unsigned long kfence_sample_interval;
++
+ /*
+  * We allocate an even number of pages, as it simplifies calculations to map
+  * address to metadata indices; effectively, the very first page serves as an
+diff --git a/mm/kfence/core.c b/mm/kfence/core.c
+index 5ad40e3add45..13128fa13062 100644
+--- a/mm/kfence/core.c
++++ b/mm/kfence/core.c
+@@ -47,7 +47,8 @@
+
+ static bool kfence_enabled __read_mostly;
+
+-static unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
++unsigned long kfence_sample_interval __read_mostly = CONFIG_KFENCE_SAMPLE_INTERVAL;
++EXPORT_SYMBOL_GPL(kfence_sample_interval); /* Export for test modules. */
+
+ #ifdef MODULE_PARAM_PREFIX
+ #undef MODULE_PARAM_PREFIX
+diff --git a/mm/kfence/kfence_test.c b/mm/kfence/kfence_test.c
+index a22b1af85577..50dbb815a2a8 100644
+--- a/mm/kfence/kfence_test.c
++++ b/mm/kfence/kfence_test.c
+@@ -268,13 +268,13 @@ static void *test_alloc(struct kunit *test, size_t size, gfp_t gfp, enum allocat
+         * 100x the sample interval should be more than enough to ensure we get
+         * a KFENCE allocation eventually.
+         */
+-       timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
++       timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
+        /*
+         * Especially for non-preemption kernels, ensure the allocation-gate
+         * timer can catch up: after @resched_after, every failed allocation
+         * attempt yields, to ensure the allocation-gate timer is scheduled.
+         */
+-       resched_after = jiffies + msecs_to_jiffies(CONFIG_KFENCE_SAMPLE_INTERVAL);
++       resched_after = jiffies + msecs_to_jiffies(kfence_sample_interval);
+        do {
+                if (test_cache)
+                        alloc = kmem_cache_alloc(test_cache, gfp);
+@@ -608,7 +608,7 @@ static void test_gfpzero(struct kunit *test)
+        int i;
+
+        /* Skip if we think it'd take too long. */
+-       KFENCE_TEST_REQUIRES(test, CONFIG_KFENCE_SAMPLE_INTERVAL &lt;= 100);
++       KFENCE_TEST_REQUIRES(test, kfence_sample_interval &lt;= 100);
+
+        setup_test_cache(test, size, 0, NULL);
+        buf1 = test_alloc(test, size, GFP_KERNEL, ALLOCATE_ANY);
+@@ -739,7 +739,7 @@ static void test_memcache_alloc_bulk(struct kunit *test)
+         * 100x the sample interval should be more than enough to ensure we get
+         * a KFENCE allocation eventually.
+         */
+-       timeout = jiffies + msecs_to_jiffies(100 * CONFIG_KFENCE_SAMPLE_INTERVAL);
++       timeout = jiffies + msecs_to_jiffies(100 * kfence_sample_interval);
+        do {
+                void *objects[100];
+                int i, num = kmem_cache_alloc_bulk(test_cache, GFP_ATOMIC, ARRAY_SIZE(objects),
+--
+2.18.0.huawei.25
+
+</pre>
+      </blockquote>
+      <pre class="moz-quote-pre" wrap="">.</pre>
+    </blockquote>
+    <pre>I'm sorry for the latency due to the spring festival. Thank you for your advice,
+and I will send a revised patch later.
+
+Thanks,
+-- Peng Liu</pre>
+  </body>
+</html>
+--------------WBwpaL1IxONE0il5bX100oVb--
+
+--===============5338875001600884820==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============5338875001600884820==--
