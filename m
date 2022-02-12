@@ -2,118 +2,184 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FEE24B85D4
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Feb 2022 11:33:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D78944B87DF
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Feb 2022 13:42:33 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 46C4A3EEC4
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Feb 2022 10:33:45 +0000 (UTC)
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by lists.linaro.org (Postfix) with ESMTPS id 0F0FA3ECAA
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 16 Feb 2022 10:33:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1645007621; x=1676543621;
-  h=from:to:cc:subject:in-reply-to:references:date:
-   message-id:mime-version:content-transfer-encoding;
-  bh=0EU2xKs5/be5ABCYsSQiiugsjJ0zBzNPzGsy9hvHN5k=;
-  b=e5uyAEH7Q91TUJQIzIlu7tJ+BEhaeLeqekdP++f7VZGRYmLJe+5WeFv/
-   VvYDRgfrljwWmYYF1c40j6REuFKmZ3ecjg/hSubHVppaaH9aoFEdEXLDd
-   f6iZ+s1h1T7N6pKSAwPsmyt9zDoEVCQnKd/gAJMYpnVt9P2vkYzH0oSbt
-   LP/kbrxWdFceSvQbcwrntRbQT0iw+xa4BCYiDB5mycUFIhIjBmj2c9LLf
-   pg/cmKbKvM0z7IsLTSNPaIKzw3Rso3QrlJYqyYUkMRbgSTpPOedotKpCA
-   8pc6Uz1cle63eRuivs+6kaCwmATAXkug+jMzpJQorgogyrbV39heqYurU
-   w==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10259"; a="237980941"
-X-IronPort-AV: E=Sophos;i="5.88,373,1635231600";
-   d="scan'208";a="237980941"
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Feb 2022 02:33:39 -0800
-X-IronPort-AV: E=Sophos;i="5.88,373,1635231600";
-   d="scan'208";a="502968616"
-Received: from rbilei-mobl.ger.corp.intel.com (HELO localhost) ([10.252.13.113])
-  by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Feb 2022 02:33:35 -0800
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Ville =?utf-8?B?U3ly?=
- =?utf-8?B?asOkbMOk?=
- <ville.syrjala@linux.intel.com>
-In-Reply-To: <9a7b0e48-b00f-be11-7fc7-bc26719cbc1e@linux.intel.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20220216083849.91239-1-jiapeng.chong@linux.alibaba.com>
- <87h78z5gmp.fsf@intel.com> <YgzBpX2SKCh4cb19@intel.com>
- <9a7b0e48-b00f-be11-7fc7-bc26719cbc1e@linux.intel.com>
-Date: Wed, 16 Feb 2022 12:33:30 +0200
-Message-ID: <87leyb3xtx.fsf@intel.com>
+	by lists.linaro.org (Postfix) with ESMTP id 9CFBD3EECF
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Feb 2022 12:42:32 +0000 (UTC)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+	by lists.linaro.org (Postfix) with ESMTPS id 196223ECBC
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 12 Feb 2022 07:19:33 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by ams.source.kernel.org (Postfix) with ESMTPS id 0D13EB82A98;
+	Sat, 12 Feb 2022 07:19:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7399BC340F6;
+	Sat, 12 Feb 2022 07:19:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1644650370;
+	bh=fhuC77eYCkAqlGGGwVlWE8Ct6apx/c0HPnyA5bPYWI0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=SKf8uxp7qr1huh/b9rmhZA8SDUlctbo1KuMYNMSpxkSEX1IQtB4c/q6zzPaWGjI/L
+	 jOPB9Sjn/ArZ+a3qliza94LcQAQ2aBGXSpMP2Nk+2hbTEuTVMSB0WyYEStJda/8QrA
+	 gac9s/gJGTQWroDZ92oKLhXOlEXfPG2vnrw7mYv8=
+Date: Sat, 12 Feb 2022 08:19:23 +0100
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: "T.J. Mercier" <tjmercier@google.com>
+Message-ID: <Ygdfe3XSvN8iFuUc@kroah.com>
+References: <20220211161831.3493782-1-tjmercier@google.com>
+ <20220211161831.3493782-7-tjmercier@google.com>
 MIME-Version: 1.0
-Message-ID-Hash: LJWCJDCL7ZZ2BLA4CTLS2L2QS267R77B
-X-Message-ID-Hash: LJWCJDCL7ZZ2BLA4CTLS2L2QS267R77B
-X-MailFrom: jani.nikula@intel.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>, airlied@linux.ie, intel-gfx@lists.freedesktop.org, Abaci Robot <abaci@linux.alibaba.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, christian.koenig@amd.com, linaro-mm-sig@lists.linaro.org, rodrigo.vivi@intel.com, linux-media@vger.kernel.org
+Content-Disposition: inline
+In-Reply-To: <20220211161831.3493782-7-tjmercier@google.com>
+X-MailFrom: gregkh@linuxfoundation.org
+X-Mailman-Rule-Hits: max-recipients
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-size; news-moderation; no-subject; digests; suspicious-header
+Message-ID-Hash: 6CERSJVSY4FXCMQYP4WRJ6R5SEZEZG3S
+X-Message-ID-Hash: 6CERSJVSY4FXCMQYP4WRJ6R5SEZEZG3S
+X-Mailman-Approved-At: Wed, 16 Feb 2022 12:42:29 +0000
+CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, Arve =?iso-8859-1?B?SGr4bm5lduVn?= <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>, Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Benjamin Gaignard <benjamin.gaignard@linaro.org>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>, Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>, kaleshsingh@google.com, Kenny.Ho@amd.com, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.ke
+ rnel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, cgroups@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] drm/i915/gt: fix unsigned integer to signed assignment
+Subject: [Linaro-mm-sig] Re: [RFC v2 6/6] android: binder: Add a buffer flag to relinquish ownership of fds
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LJWCJDCL7ZZ2BLA4CTLS2L2QS267R77B/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6CERSJVSY4FXCMQYP4WRJ6R5SEZEZG3S/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-T24gV2VkLCAxNiBGZWIgMjAyMiwgVHZydGtvIFVyc3VsaW4gPHR2cnRrby51cnN1bGluQGxpbnV4
-LmludGVsLmNvbT4gd3JvdGU6DQo+IE9uIDE2LzAyLzIwMjIgMDk6MTksIFZpbGxlIFN5cmrDpGzD
-pCB3cm90ZToNCj4+IE9uIFdlZCwgRmViIDE2LCAyMDIyIGF0IDExOjAyOjA2QU0gKzAyMDAsIEph
-bmkgTmlrdWxhIHdyb3RlOg0KPj4+IE9uIFdlZCwgMTYgRmViIDIwMjIsIEppYXBlbmcgQ2hvbmcg
-PGppYXBlbmcuY2hvbmdAbGludXguYWxpYmFiYS5jb20+IHdyb3RlOg0KPj4+PiBFbGltaW5hdGUg
-dGhlIGZvbGxvdyBzbWF0Y2ggd2FybmluZzoNCj4+Pj4NCj4+Pj4gZHJpdmVycy9ncHUvZHJtL2k5
-MTUvZ3QvdWMvaW50ZWxfZ3VjX3N1Ym1pc3Npb24uYzo0NjQwDQo+Pj4+IGd1Y19jcmVhdGVfdmly
-dHVhbCgpIHdhcm46IGFzc2lnbmluZyAoLTIpIHRvIHVuc2lnbmVkIHZhcmlhYmxlDQo+Pj4+ICd2
-ZS0+YmFzZS5pbnN0YW5jZScuDQo+Pj4+DQo+Pj4+IGRyaXZlcnMvZ3B1L2RybS9pOTE1L2d0L3Vj
-L2ludGVsX2d1Y19zdWJtaXNzaW9uLmM6NDY0MQ0KPj4+PiBndWNfY3JlYXRlX3ZpcnR1YWwoKSB3
-YXJuOiBhc3NpZ25pbmcgKC0yKSB0byB1bnNpZ25lZCB2YXJpYWJsZQ0KPj4+PiAndmUtPmJhc2Uu
-dWFiaV9pbnN0YW5jZScuDQo+Pj4+DQo+Pj4+IFJlcG9ydGVkLWJ5OiBBYmFjaSBSb2JvdCA8YWJh
-Y2lAbGludXguYWxpYmFiYS5jb20+DQo+Pj4+IFNpZ25lZC1vZmYtYnk6IEppYXBlbmcgQ2hvbmcg
-PGppYXBlbmcuY2hvbmdAbGludXguYWxpYmFiYS5jb20+DQo+Pj4NCj4+PiBUaGUgcmVwb3J0IHNl
-ZW1zIHRvIGJlIHZhbGlkLCBidXQgSSBkb24ndCB0aGluayB0aGlzIGlzIHRoZSBmaXguDQo+Pj4N
-Cj4+PiBXaGVyZSBkbyB3ZSBldmVuIGNoZWNrIGZvciBpbnZhbGlkIGluc3RhbmNlL3VhYmlfaW5z
-dGFuY2UgaW4gY29kZT8NCj4+IA0KPj4gVGhlIHdob2xlIHRoaW5nIHNlZW1zIHJhdGhlciBwb29y
-bHkgZG9jdW1lbnRlZCBhcyB0aGVyZSdzIGEgbWF0Y2hpbmcNCj4+IHVhYmkgc3RydWN0IHdpdGgg
-X191MTYncyBhbmQgdGhlIG5lZ2F0aXZlIHZhbHVlcyBhcmUgZGVmaW5lZCByaWdodA0KPj4gdGhl
-cmUgaW4gdGhlIHVhcGkgaGVhZGVyIGFzIHdlbGwuDQo+DQo+IE5lZ2F0aXZlIG9uZXMgYXJlIGV4
-Y2VwdGlvbiB2YWx1ZXMgdG8gYmUgdXNlZCBpbiBjb25qdW5jdGlvbiB3aXRoIHRoZSB2aXJ0dWFs
-IGVuZ2luZSB1YXBpIChzZWUgIkRPQzogVmlydHVhbCBFbmdpbmUgdUFQSSIgYW5kIGFsc28gY29t
-bWVudCBuZXh0IHRvIEk5MTVfQ09OVEVYVF9QQVJBTV9FTkdJTkVTKS4NCj4NCj4gQUZBSUsgYXNz
-aWduaW5nIG5lZ2F0aXZlIGludCB0byB1bnNpZ25lZCBpbnQgaXMgZGVmaW5lZCBhbmQgZmluZS4N
-Cj4NCj4gQ29tcGlsZXIgZG9lcyB3YXJuIG9uIGNvbXBhcmlzb25zIHdoaWNoIGlzIHdoeSB3ZSBo
-YXZlOg0KPg0KPiAuL2dlbS9pOTE1X2dlbV9idXN5LmM6ICBpZiAoaWQgPT0gKHUxNilJOTE1X0VO
-R0lORV9DTEFTU19JTlZBTElEKQ0KPiAuL2dlbS9pOTE1X2dlbV9idXN5LmM6ICBpZiAoaWQgPT0g
-KHUxNilJOTE1X0VOR0lORV9DTEFTU19JTlZBTElEKQ0KPiAuL2dlbS9pOTE1X2dlbV9jb250ZXh0
-LmM6ICAgICAgICAgICAgICAgaWYgKGNpLmVuZ2luZV9jbGFzcyA9PSAodTE2KUk5MTVfRU5HSU5F
-X0NMQVNTX0lOVkFMSUQgJiYNCj4gLi9nZW0vaTkxNV9nZW1fY29udGV4dC5jOiAgICAgICAgICAg
-ICAgICAgICBjaS5lbmdpbmVfaW5zdGFuY2UgPT0gKHUxNilJOTE1X0VOR0lORV9DTEFTU19JTlZB
-TElEX05PTkUpDQo+DQo+IFNvIEkgdGhpbmsgbm8gYWN0aW9uIG5lZWRlZCBoZXJlLg0KDQpXZSBu
-ZXZlciBjaGVjayBpbnN0YW5jZSBvciB1YWJpX2luc3RhbmNlIG1lbWJlcnMgYWdhaW5zdA0KSTkx
-NV9FTkdJTkVfQ0xBU1NfSU5WQUxJRF9WSVJUVUFMIGFueXdoZXJlLg0KDQpCUiwNCkphbmkuDQoN
-Cj4NCj4gUmVnYXJkcywNCj4NCj4gVHZydGtvDQo+ICAgDQo+Pj4NCj4+PiBCUiwNCj4+PiBKYW5p
-Lg0KPj4+DQo+Pj4NCj4+Pj4gLS0tDQo+Pj4+ICAgZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3QvaW50
-ZWxfZW5naW5lX3R5cGVzLmggfCA0ICsrLS0NCj4+Pj4gICAxIGZpbGUgY2hhbmdlZCwgMiBpbnNl
-cnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KPj4+Pg0KPj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVy
-cy9ncHUvZHJtL2k5MTUvZ3QvaW50ZWxfZW5naW5lX3R5cGVzLmggYi9kcml2ZXJzL2dwdS9kcm0v
-aTkxNS9ndC9pbnRlbF9lbmdpbmVfdHlwZXMuaA0KPj4+PiBpbmRleCAzNjM2NWJkYmUxZWUuLmRj
-N2NjMDZjNjhlNyAxMDA2NDQNCj4+Pj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3QvaW50
-ZWxfZW5naW5lX3R5cGVzLmgNCj4+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3QvaW50
-ZWxfZW5naW5lX3R5cGVzLmgNCj4+Pj4gQEAgLTMyOCwxMCArMzI4LDEwIEBAIHN0cnVjdCBpbnRl
-bF9lbmdpbmVfY3Mgew0KPj4+PiAgIAlpbnRlbF9lbmdpbmVfbWFza190IGxvZ2ljYWxfbWFzazsN
-Cj4+Pj4gICANCj4+Pj4gICAJdTggY2xhc3M7DQo+Pj4+IC0JdTggaW5zdGFuY2U7DQo+Pj4+ICsJ
-czggaW5zdGFuY2U7DQo+Pj4+ICAgDQo+Pj4+ICAgCXUxNiB1YWJpX2NsYXNzOw0KPj4+PiAtCXUx
-NiB1YWJpX2luc3RhbmNlOw0KPj4+PiArCXMxNiB1YWJpX2luc3RhbmNlOw0KPj4+PiAgIA0KPj4+
-PiAgIAl1MzIgdWFiaV9jYXBhYmlsaXRpZXM7DQo+Pj4+ICAgCXUzMiBjb250ZXh0X3NpemU7DQo+
-Pj4NCj4+PiAtLSANCj4+PiBKYW5pIE5pa3VsYSwgSW50ZWwgT3BlbiBTb3VyY2UgR3JhcGhpY3Mg
-Q2VudGVyDQo+PiANCg0KLS0gDQpKYW5pIE5pa3VsYSwgSW50ZWwgT3BlbiBTb3VyY2UgR3JhcGhp
-Y3MgQ2VudGVyDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFy
-by5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZl
-QGxpc3RzLmxpbmFyby5vcmcK
+On Fri, Feb 11, 2022 at 04:18:29PM +0000, T.J. Mercier wrote:
+> This patch introduces a buffer flag BINDER_BUFFER_FLAG_SENDER_NO_NEED
+> that a process sending an fd array to another process over binder IPC
+> can set to relinquish ownership of the fds being sent for memory
+> accounting purposes. If the flag is found to be set during the fd array
+> translation and the fd is for a DMA-BUF, the buffer is uncharged from
+> the sender's cgroup and charged to the receiving process's cgroup
+> instead.
+>=20
+> It is up to the sending process to ensure that it closes the fds
+> regardless of whether the transfer failed or succeeded.
+>=20
+> Most graphics shared memory allocations in Android are done by the
+> graphics allocator HAL process. On requests from clients, the HAL process
+> allocates memory and sends the fds to the clients over binder IPC.
+> The graphics allocator HAL will not retain any references to the
+> buffers. When the HAL sets the BINDER_BUFFER_FLAG_SENDER_NO_NEED for fd
+> arrays holding DMA-BUF fds, the gpu cgroup controller will be able to
+> correctly charge the buffers to the client processes instead of the
+> graphics allocator HAL.
+>=20
+> From: Hridya Valsaraju <hridya@google.com>
+> Signed-off-by: Hridya Valsaraju <hridya@google.com>
+> Co-developed-by: T.J. Mercier <tjmercier@google.com>
+> Signed-off-by: T.J. Mercier <tjmercier@google.com>
+> ---
+> changes in v2
+> - Move dma-buf cgroup charge transfer from a dma_buf_op defined by every
+> heap to a single dma-buf function for all heaps per Daniel Vetter and
+> Christian K=F6nig.
+>=20
+>  drivers/android/binder.c            | 26 ++++++++++++++++++++++++++
+>  include/uapi/linux/android/binder.h |  1 +
+>  2 files changed, 27 insertions(+)
+>=20
+> diff --git a/drivers/android/binder.c b/drivers/android/binder.c
+> index 8351c5638880..f50d88ded188 100644
+> --- a/drivers/android/binder.c
+> +++ b/drivers/android/binder.c
+> @@ -42,6 +42,7 @@
+> =20
+>  #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+> =20
+> +#include <linux/dma-buf.h>
+>  #include <linux/fdtable.h>
+>  #include <linux/file.h>
+>  #include <linux/freezer.h>
+> @@ -2482,8 +2483,10 @@ static int binder_translate_fd_array(struct list_h=
+ead *pf_head,
+>  {
+>  	binder_size_t fdi, fd_buf_size;
+>  	binder_size_t fda_offset;
+> +	bool transfer_gpu_charge =3D false;
+>  	const void __user *sender_ufda_base;
+>  	struct binder_proc *proc =3D thread->proc;
+> +	struct binder_proc *target_proc =3D t->to_proc;
+>  	int ret;
+> =20
+>  	fd_buf_size =3D sizeof(u32) * fda->num_fds;
+> @@ -2521,8 +2524,15 @@ static int binder_translate_fd_array(struct list_h=
+ead *pf_head,
+>  	if (ret)
+>  		return ret;
+> =20
+> +	if (IS_ENABLED(CONFIG_CGROUP_GPU) &&
+> +		parent->flags & BINDER_BUFFER_FLAG_SENDER_NO_NEED)
+> +		transfer_gpu_charge =3D true;
+> +
+>  	for (fdi =3D 0; fdi < fda->num_fds; fdi++) {
+>  		u32 fd;
+> +		struct dma_buf *dmabuf;
+> +		struct gpucg *gpucg;
+> +
+>  		binder_size_t offset =3D fda_offset + fdi * sizeof(fd);
+>  		binder_size_t sender_uoffset =3D fdi * sizeof(fd);
+> =20
+> @@ -2532,6 +2542,22 @@ static int binder_translate_fd_array(struct list_h=
+ead *pf_head,
+>  						  in_reply_to);
+>  		if (ret)
+>  			return ret > 0 ? -EINVAL : ret;
+> +
+> +		if (!transfer_gpu_charge)
+> +			continue;
+> +
+> +		dmabuf =3D dma_buf_get(fd);
+> +		if (IS_ERR(dmabuf))
+> +			continue;
+> +
+> +		gpucg =3D gpucg_get(target_proc->tsk);
+> +		ret =3D dma_buf_charge_transfer(dmabuf, gpucg);
+> +		if (ret) {
+> +			pr_warn("%d:%d Unable to transfer DMA-BUF fd charge to %d",
+> +				proc->pid, thread->pid, target_proc->pid);
+> +			gpucg_put(gpucg);
+> +		}
+> +		dma_buf_put(dmabuf);
+>  	}
+>  	return 0;
+>  }
+> diff --git a/include/uapi/linux/android/binder.h b/include/uapi/linux/and=
+roid/binder.h
+> index 3246f2c74696..169fd5069a1a 100644
+> --- a/include/uapi/linux/android/binder.h
+> +++ b/include/uapi/linux/android/binder.h
+> @@ -137,6 +137,7 @@ struct binder_buffer_object {
+> =20
+>  enum {
+>  	BINDER_BUFFER_FLAG_HAS_PARENT =3D 0x01,
+> +	BINDER_BUFFER_FLAG_SENDER_NO_NEED =3D 0x02,
+>  };
+> =20
+>  /* struct binder_fd_array_object - object describing an array of fds in =
+a buffer
+> --=20
+> 2.35.1.265.g69c8d7142f-goog
+>=20
+
+How does userspace know that binder supports this new flag?  And where
+is the userspace test for this new feature?  Isn't there a binder test
+framework somewhere?
+
+thanks,
+
+greg k-h
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
