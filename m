@@ -2,184 +2,147 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D78944B87DF
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Feb 2022 13:42:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 809724B87E0
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Feb 2022 13:42:40 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9CFBD3EECF
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Feb 2022 12:42:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B8800401BD
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Feb 2022 12:42:39 +0000 (UTC)
 Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-	by lists.linaro.org (Postfix) with ESMTPS id 196223ECBC
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 12 Feb 2022 07:19:33 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 110933ED25
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 13 Feb 2022 18:39:38 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.source.kernel.org (Postfix) with ESMTPS id 0D13EB82A98;
-	Sat, 12 Feb 2022 07:19:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7399BC340F6;
-	Sat, 12 Feb 2022 07:19:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1644650370;
-	bh=fhuC77eYCkAqlGGGwVlWE8Ct6apx/c0HPnyA5bPYWI0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=SKf8uxp7qr1huh/b9rmhZA8SDUlctbo1KuMYNMSpxkSEX1IQtB4c/q6zzPaWGjI/L
-	 jOPB9Sjn/ArZ+a3qliza94LcQAQ2aBGXSpMP2Nk+2hbTEuTVMSB0WyYEStJda/8QrA
-	 gac9s/gJGTQWroDZ92oKLhXOlEXfPG2vnrw7mYv8=
-Date: Sat, 12 Feb 2022 08:19:23 +0100
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: "T.J. Mercier" <tjmercier@google.com>
-Message-ID: <Ygdfe3XSvN8iFuUc@kroah.com>
-References: <20220211161831.3493782-1-tjmercier@google.com>
- <20220211161831.3493782-7-tjmercier@google.com>
+	by ams.source.kernel.org (Postfix) with ESMTPS id C1029B80B6B;
+	Sun, 13 Feb 2022 18:39:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1936EC004E1;
+	Sun, 13 Feb 2022 18:39:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1644777576;
+	bh=62G4pAU8FmHDbset5IKmCXHU7ITta7/U1Abf+yudxtA=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=pwJQ1NO7br6owS38v9O55UrFNGA8LXTFnWMrfNKA9qbzqA4Mco85gRbDtaSkj48fu
+	 ciJf2jNVWazBul0qer4t6DTRsYXjBeaDtBNqtEJRlJI1sCBxFHdwUX4H7HPa8qq0wb
+	 VR3zjYrAGDR9zu5z/At01gwxCWTcFsvGjpZPB28PXAXZPnwLV0RaqDfXtBsUdp3clY
+	 yalK6rdNvJVbv+VwszApgUYBb5D539+KdNRrw8BchLVEk4BJB8howFwUWDdwd/LPY/
+	 6e0CrWvrSQeUdEwwHIu2lyjcCji7ecMw7eZfdrT4EqdItcUesBzaP0g8yue3huvwdY
+	 /glfHfZL2bnYg==
+Date: Sun, 13 Feb 2022 18:46:16 +0000
+From: Jonathan Cameron <jic23@kernel.org>
+To: Paul Cercueil <paul@crapouillou.net>
+Message-ID: <20220213184616.669b490b@jic23-huawei>
+In-Reply-To: <20220207125933.81634-1-paul@crapouillou.net>
+References: <20220207125933.81634-1-paul@crapouillou.net>
+X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.31; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220211161831.3493782-7-tjmercier@google.com>
-X-MailFrom: gregkh@linuxfoundation.org
-X-Mailman-Rule-Hits: max-recipients
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-size; news-moderation; no-subject; digests; suspicious-header
-Message-ID-Hash: 6CERSJVSY4FXCMQYP4WRJ6R5SEZEZG3S
-X-Message-ID-Hash: 6CERSJVSY4FXCMQYP4WRJ6R5SEZEZG3S
-X-Mailman-Approved-At: Wed, 16 Feb 2022 12:42:29 +0000
-CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, Arve =?iso-8859-1?B?SGr4bm5lduVn?= <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>, Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Benjamin Gaignard <benjamin.gaignard@linaro.org>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>, Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>, kaleshsingh@google.com, Kenny.Ho@amd.com, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.ke
- rnel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, cgroups@vger.kernel.org
+X-MailFrom: jic23@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: 4IC5M7VGHAQXWMG3QFXVOEPVYKQPWFXR
+X-Message-ID-Hash: 4IC5M7VGHAQXWMG3QFXVOEPVYKQPWFXR
+X-Mailman-Approved-At: Wed, 16 Feb 2022 12:42:30 +0000
+CC: Michael Hennerich <Michael.Hennerich@analog.com>, Lars-Peter Clausen <lars@metafoo.de>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Alexandru Ardelean <ardeleanalex@gmail.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v2 6/6] android: binder: Add a buffer flag to relinquish ownership of fds
+Subject: [Linaro-mm-sig] Re: [PATCH v2 00/12] iio: buffer-dma: write() and new DMABUF based API
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6CERSJVSY4FXCMQYP4WRJ6R5SEZEZG3S/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4IC5M7VGHAQXWMG3QFXVOEPVYKQPWFXR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Fri, Feb 11, 2022 at 04:18:29PM +0000, T.J. Mercier wrote:
-> This patch introduces a buffer flag BINDER_BUFFER_FLAG_SENDER_NO_NEED
-> that a process sending an fd array to another process over binder IPC
-> can set to relinquish ownership of the fds being sent for memory
-> accounting purposes. If the flag is found to be set during the fd array
-> translation and the fd is for a DMA-BUF, the buffer is uncharged from
-> the sender's cgroup and charged to the receiving process's cgroup
-> instead.
->=20
-> It is up to the sending process to ensure that it closes the fds
-> regardless of whether the transfer failed or succeeded.
->=20
-> Most graphics shared memory allocations in Android are done by the
-> graphics allocator HAL process. On requests from clients, the HAL process
-> allocates memory and sends the fds to the clients over binder IPC.
-> The graphics allocator HAL will not retain any references to the
-> buffers. When the HAL sets the BINDER_BUFFER_FLAG_SENDER_NO_NEED for fd
-> arrays holding DMA-BUF fds, the gpu cgroup controller will be able to
-> correctly charge the buffers to the client processes instead of the
-> graphics allocator HAL.
->=20
-> From: Hridya Valsaraju <hridya@google.com>
-> Signed-off-by: Hridya Valsaraju <hridya@google.com>
-> Co-developed-by: T.J. Mercier <tjmercier@google.com>
-> Signed-off-by: T.J. Mercier <tjmercier@google.com>
-> ---
-> changes in v2
-> - Move dma-buf cgroup charge transfer from a dma_buf_op defined by every
-> heap to a single dma-buf function for all heaps per Daniel Vetter and
-> Christian K=F6nig.
->=20
->  drivers/android/binder.c            | 26 ++++++++++++++++++++++++++
->  include/uapi/linux/android/binder.h |  1 +
->  2 files changed, 27 insertions(+)
->=20
-> diff --git a/drivers/android/binder.c b/drivers/android/binder.c
-> index 8351c5638880..f50d88ded188 100644
-> --- a/drivers/android/binder.c
-> +++ b/drivers/android/binder.c
-> @@ -42,6 +42,7 @@
-> =20
->  #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
-> =20
-> +#include <linux/dma-buf.h>
->  #include <linux/fdtable.h>
->  #include <linux/file.h>
->  #include <linux/freezer.h>
-> @@ -2482,8 +2483,10 @@ static int binder_translate_fd_array(struct list_h=
-ead *pf_head,
->  {
->  	binder_size_t fdi, fd_buf_size;
->  	binder_size_t fda_offset;
-> +	bool transfer_gpu_charge =3D false;
->  	const void __user *sender_ufda_base;
->  	struct binder_proc *proc =3D thread->proc;
-> +	struct binder_proc *target_proc =3D t->to_proc;
->  	int ret;
-> =20
->  	fd_buf_size =3D sizeof(u32) * fda->num_fds;
-> @@ -2521,8 +2524,15 @@ static int binder_translate_fd_array(struct list_h=
-ead *pf_head,
->  	if (ret)
->  		return ret;
-> =20
-> +	if (IS_ENABLED(CONFIG_CGROUP_GPU) &&
-> +		parent->flags & BINDER_BUFFER_FLAG_SENDER_NO_NEED)
-> +		transfer_gpu_charge =3D true;
-> +
->  	for (fdi =3D 0; fdi < fda->num_fds; fdi++) {
->  		u32 fd;
-> +		struct dma_buf *dmabuf;
-> +		struct gpucg *gpucg;
-> +
->  		binder_size_t offset =3D fda_offset + fdi * sizeof(fd);
->  		binder_size_t sender_uoffset =3D fdi * sizeof(fd);
-> =20
-> @@ -2532,6 +2542,22 @@ static int binder_translate_fd_array(struct list_h=
-ead *pf_head,
->  						  in_reply_to);
->  		if (ret)
->  			return ret > 0 ? -EINVAL : ret;
-> +
-> +		if (!transfer_gpu_charge)
-> +			continue;
-> +
-> +		dmabuf =3D dma_buf_get(fd);
-> +		if (IS_ERR(dmabuf))
-> +			continue;
-> +
-> +		gpucg =3D gpucg_get(target_proc->tsk);
-> +		ret =3D dma_buf_charge_transfer(dmabuf, gpucg);
-> +		if (ret) {
-> +			pr_warn("%d:%d Unable to transfer DMA-BUF fd charge to %d",
-> +				proc->pid, thread->pid, target_proc->pid);
-> +			gpucg_put(gpucg);
-> +		}
-> +		dma_buf_put(dmabuf);
->  	}
->  	return 0;
->  }
-> diff --git a/include/uapi/linux/android/binder.h b/include/uapi/linux/and=
-roid/binder.h
-> index 3246f2c74696..169fd5069a1a 100644
-> --- a/include/uapi/linux/android/binder.h
-> +++ b/include/uapi/linux/android/binder.h
-> @@ -137,6 +137,7 @@ struct binder_buffer_object {
-> =20
->  enum {
->  	BINDER_BUFFER_FLAG_HAS_PARENT =3D 0x01,
-> +	BINDER_BUFFER_FLAG_SENDER_NO_NEED =3D 0x02,
->  };
-> =20
->  /* struct binder_fd_array_object - object describing an array of fds in =
-a buffer
-> --=20
-> 2.35.1.265.g69c8d7142f-goog
->=20
+On Mon,  7 Feb 2022 12:59:21 +0000
+Paul Cercueil <paul@crapouillou.net> wrote:
 
-How does userspace know that binder supports this new flag?  And where
-is the userspace test for this new feature?  Isn't there a binder test
-framework somewhere?
+> Hi Jonathan,
+> 
+> This is the V2 of my patchset that introduces a new userspace interface
+> based on DMABUF objects to complement the fileio API, and adds write()
+> support to the existing fileio API.
 
-thanks,
+Hi Paul,
 
-greg k-h
+It's been a little while. Perhaps you could summarize the various view
+points around the appropriateness of using DMABUF for this?
+I appreciate it is a tricky topic to distil into a brief summary but
+I know I would find it useful even if no one else does!
+
+Thanks,
+
+Jonathan
+
+> 
+> Changes since v1:
+> 
+> - the patches that were merged in v1 have been (obviously) dropped from
+>   this patchset;
+> - the patch that was setting the write-combine cache setting has been
+>   dropped as well, as it was simply not useful.
+> - [01/12]: 
+>     * Only remove the outgoing queue, and keep the incoming queue, as we
+>       want the buffer to start streaming data as soon as it is enabled.
+>     * Remove IIO_BLOCK_STATE_DEQUEUED, since it is now functionally the
+>       same as IIO_BLOCK_STATE_DONE.
+> - [02/12]:
+>     * Fix block->state not being reset in
+>       iio_dma_buffer_request_update() for output buffers.
+>     * Only update block->bytes_used once and add a comment about why we
+>       update it.
+>     * Add a comment about why we're setting a different state for output
+>       buffers in iio_dma_buffer_request_update()
+>     * Remove useless cast to bool (!!) in iio_dma_buffer_io()
+> - [05/12]:
+>     Only allow the new IOCTLs on the buffer FD created with
+>     IIO_BUFFER_GET_FD_IOCTL().
+> - [12/12]:
+>     * Explicitly state that the new interface is optional and is
+>       not implemented by all drivers.
+>     * The IOCTLs can now only be called on the buffer FD returned by
+>       IIO_BUFFER_GET_FD_IOCTL.
+>     * Move the page up a bit in the index since it is core stuff and not
+>       driver-specific.
+> 
+> The patches not listed here have not been modified since v1.
+> 
+> Cheers,
+> -Paul
+> 
+> Alexandru Ardelean (1):
+>   iio: buffer-dma: split iio_dma_buffer_fileio_free() function
+> 
+> Paul Cercueil (11):
+>   iio: buffer-dma: Get rid of outgoing queue
+>   iio: buffer-dma: Enable buffer write support
+>   iio: buffer-dmaengine: Support specifying buffer direction
+>   iio: buffer-dmaengine: Enable write support
+>   iio: core: Add new DMABUF interface infrastructure
+>   iio: buffer-dma: Use DMABUFs instead of custom solution
+>   iio: buffer-dma: Implement new DMABUF based userspace API
+>   iio: buffer-dmaengine: Support new DMABUF based userspace API
+>   iio: core: Add support for cyclic buffers
+>   iio: buffer-dmaengine: Add support for cyclic buffers
+>   Documentation: iio: Document high-speed DMABUF based API
+> 
+>  Documentation/driver-api/dma-buf.rst          |   2 +
+>  Documentation/iio/dmabuf_api.rst              |  94 +++
+>  Documentation/iio/index.rst                   |   2 +
+>  drivers/iio/adc/adi-axi-adc.c                 |   3 +-
+>  drivers/iio/buffer/industrialio-buffer-dma.c  | 610 ++++++++++++++----
+>  .../buffer/industrialio-buffer-dmaengine.c    |  42 +-
+>  drivers/iio/industrialio-buffer.c             |  60 ++
+>  include/linux/iio/buffer-dma.h                |  38 +-
+>  include/linux/iio/buffer-dmaengine.h          |   5 +-
+>  include/linux/iio/buffer_impl.h               |   8 +
+>  include/uapi/linux/iio/buffer.h               |  30 +
+>  11 files changed, 749 insertions(+), 145 deletions(-)
+>  create mode 100644 Documentation/iio/dmabuf_api.rst
+> 
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
