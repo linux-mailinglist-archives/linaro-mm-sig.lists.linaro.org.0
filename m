@@ -2,169 +2,283 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 372374B8831
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Feb 2022 13:52:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8E164B9BD6
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Feb 2022 10:15:36 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6970240167
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 16 Feb 2022 12:52:52 +0000 (UTC)
-Received: from aposti.net (aposti.net [89.234.176.197])
-	by lists.linaro.org (Postfix) with ESMTPS id 9272D3ED38
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 15 Feb 2022 17:43:46 +0000 (UTC)
-Date: Tue, 15 Feb 2022 17:43:35 +0000
-From: Paul Cercueil <paul@crapouillou.net>
-To: Jonathan Cameron <jic23@kernel.org>
-Message-Id: <N8XC7R.5FP2M8552CGT3@crapouillou.net>
-In-Reply-To: <20220213184616.669b490b@jic23-huawei>
-References: <20220207125933.81634-1-paul@crapouillou.net>
-	<20220213184616.669b490b@jic23-huawei>
+	by lists.linaro.org (Postfix) with ESMTP id A6E303EE88
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Feb 2022 09:15:35 +0000 (UTC)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2041.outbound.protection.outlook.com [40.107.92.41])
+	by lists.linaro.org (Postfix) with ESMTPS id 546F53ED20
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Feb 2022 09:15:31 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Alo0JDL07LE94r3esJi6FQyukv4yFKTinKsei/BTI81xqnIF51jYxQtYiwBpZPh5XUiu0qMTAn3IL8h88VpmejVspSJdcKh0WauTk+AEkyctBoTtgPe0kidFn7zzf+Vi+6sxiPGwxO5NK7OOiKxSFPHmePsq0tBidhVZhrvxqGUvqv1l2ap2XK+R+EgrrtCYekzEvxijEaBh5QrfrJLR8tkZYzUASb7iiGIX+4C9XxnrwczI/nuZ+pxiIMWpsNkTZLpHHN2/Sa1dCM7T1FsTz4PkzgIxm75S8A0rGSfbnzCfjsVmLsuV/2LRBdiqHRaA5Px+sGDjVVd4a2cXu6jvCg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=f+fvC7FmM00Fqq+W1EWsQs8CSDW2+pKsNJSKOA1c48E=;
+ b=V3rsqAo7RJ9u/wwApEcFkYcSwOzHFvE6gXwTb5XnW6dYLZ3VhdgKN9OaQQ/skhmRUNg+W6JjugR3YeA+pksWpP/crk2E9xytyJgoewTTApT6+26ufWciEoDwFvlO064kSsdXLNO/QHXGRQth4Pcu3J1qiB38bPSoK79ReSnnh3tki54zxhDcIqEbTh3z2UidE6etGmFfTL4oIG0zPWwr72f5d+3AVE+iUv1nmci4IY/xuMVihhAaT0v8EN1kHMHBp5C0UgyCINh7VXDseTjBZltKzTl8CSL69Gk2ApMPvDG4PA9Nd3Gl0/Lr+/mU9arxGS8bugLcIxOwl3nRUYjwRA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=f+fvC7FmM00Fqq+W1EWsQs8CSDW2+pKsNJSKOA1c48E=;
+ b=Yl21PMOUebjMnr2uL4bjGuan9ZFfqMVw3574RZqz1RBsf+BKOZyGo9q+0HwGoIomVMVTW5pm+T7cFUkHexudcCFsVQWJsP2O8kFqlBMdLZGRQ5xVVUjO9ao4QU37ya87QaB2MEbaoqY8kN4kfdd5R3E60Spfm93ajLOu3OrBVyc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by BL0PR12MB2578.namprd12.prod.outlook.com (2603:10b6:207:49::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4995.16; Thu, 17 Feb
+ 2022 09:15:29 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::e03f:901a:be6c:b581]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::e03f:901a:be6c:b581%6]) with mapi id 15.20.4995.017; Thu, 17 Feb 2022
+ 09:15:29 +0000
+Message-ID: <5d3fdd2c-e74a-49f4-2b28-32c06483236f@amd.com>
+Date: Thu, 17 Feb 2022 10:15:22 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Content-Language: en-US
+To: Qiang Yu <qiang.yu@amd.com>, Alex Deucher <alexander.deucher@amd.com>,
+ "Pan, Xinhui" <Xinhui.Pan@amd.com>, David Airlie <airlied@linux.ie>,
+ Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>
+References: <20220217090440.4468-1-qiang.yu@amd.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20220217090440.4468-1-qiang.yu@amd.com>
+X-ClientProxiedBy: AM6PR01CA0037.eurprd01.prod.exchangelabs.com
+ (2603:10a6:20b:e0::14) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
 MIME-Version: 1.0
-X-MailFrom: paul@crapouillou.net
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 4EF3FKHDPCLXOPK2P427OLYRBCZO45L3
-X-Message-ID-Hash: 4EF3FKHDPCLXOPK2P427OLYRBCZO45L3
-X-Mailman-Approved-At: Wed, 16 Feb 2022 12:52:49 +0000
-CC: Michael Hennerich <Michael.Hennerich@analog.com>, Lars-Peter Clausen <lars@metafoo.de>, Christian =?iso-8859-1?b?S/ZuaWc=?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Alexandru Ardelean <ardeleanalex@gmail.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 6da0c031-69b8-4ee3-e652-08d9f1f60a9b
+X-MS-TrafficTypeDiagnostic: BL0PR12MB2578:EE_
+X-Microsoft-Antispam-PRVS: 
+	<BL0PR12MB25780A87749A83172A79137183369@BL0PR12MB2578.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	S+kcpARmUdPrKHB08aCCDPfP1m+srDN34dwj/KWuWgmhAe5ewImANmJ4RqycDDmgS2VpFM5/fS2KhO5+jg5jVm+EoKoh0AedBgcH/sHvtc+ReMP1s/dMWcrjN6AZZMe3eZZGTnK+Vay1saAUCsLE/KsRJvvG7b9QTj1pLvHThsBk5+MX3yX8kb0JzHWPgL6vVvl9+RXnwc8eLnIU+zUM7TgRwedN/amv5Eczfz481pHJ96WM8hYJnONvUsyvPZJ355VX8MgRhV/NE/Rb4VAosNddtXAT5KHcjKQ6d1KKH8v/8rc9KU4w9HnJcIKAjQZBz24IwA2NUP0fLPFCmFDyMH3CDzAUHh2ExL8cuihK9PN+Soyeqed/j0kl/BCsh5zyQrXQ92UdUoN3GMVGOPQ8RpvwWxn5MAQYao5xJiV+cYa+JCbG7gRPay7EDNmNeBIqi9ZlRRQbTVHJfltoo4O3uLLPfEGGnHkAbRGXqjKi6Y7BQ4DRI1BXS4+15js5Hp8fU+FLGLc6T18aidhYaMdjmemz3N/hZkh72DhwnfuqKMEJ1uR4XwzjQWWrs5ct4qIofAytLh5ZZe0DM6KD5IZWnYqsbbglhbXMA+3QSBJapX1q3haoYhJ1vCGqGQu3YRhuwJARgc6F8Y0Wc3/Rlq1Z20O3Q8bij+GVrc4DL+2XCKovIOgYM0WYPm6MIEd0h6MSmAKiP9VxlEX7MAj9aEBUzdAapDyoGxQ3m2YYFA4rIppnNwcfjhxBu5X+5Oq6pzpE
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(31686004)(316002)(36756003)(6666004)(110136005)(6486002)(38100700002)(66556008)(66946007)(2906002)(8676002)(4326008)(66476007)(6512007)(2616005)(508600001)(86362001)(5660300002)(8936002)(83380400001)(186003)(6506007)(31696002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?Zkl2UFYwRnB1VWNvQnpkMmUxTURyTlhubGtVb0VhWnJTMldMTU92M25MK28y?=
+ =?utf-8?B?Y1pxSHFicG5vYmoyVldKdkFUOEZveGo0REFRQ3dkblRaUmlYdExFM2xBRkM0?=
+ =?utf-8?B?RWNCL0JUb0J2djRVcFVvaDhhZzVLRjM4QXFUMDRlNkhIT0QrNVZkV0w0aFlO?=
+ =?utf-8?B?bktqUkVOL2lOV1poZ3N0MDMrZ2pMempobDY5RG1tK2k3a2VQMHZ4TkJ1cENu?=
+ =?utf-8?B?a2NPdkhjZHRFNTZnaTB0dkl4bCt2QWJoclJGcFVuY1UzSUR4d3ZHa1F5empk?=
+ =?utf-8?B?U2lmby9NeDdKb1l3NGQrWWkrbU9yNklIS01LNjhFYjRRTnhJcHM1RHRieS9T?=
+ =?utf-8?B?MUNsQkVBNllTRXo5YXNOMUxpNEhWcmhnRFJWcEozZHU3SHQrNDZRYWlOYkpU?=
+ =?utf-8?B?ZGlCK0tJWi9tSGhjZld4SllZenhxOUt3OUJDMTJxOUxscm1jbmowZkNKWHYx?=
+ =?utf-8?B?Z201bnF5c1h5bVRFTlVOOFBlU0tySGlySW1jRTlGajRPejBVei9NUTh0eitE?=
+ =?utf-8?B?TzJubTVqckhjNGZHenc2Y0dBd0FURkhOZnNiREdLMlJWS0JKWFZIMGNTVlR6?=
+ =?utf-8?B?UHNrZXE5dHBMYjAyZXVCbkMzbFVSSEpnTU55UmRwVDE1VWZ4Wk1lZzJDbElx?=
+ =?utf-8?B?Nm5jOGM0M1k3Z01vV2ZoNDQwZGFyREtMM0IyTHpHWEJWSzRKcXFnWjhRZXZn?=
+ =?utf-8?B?TTl1N1NheGxRbUFwTVpEcVBWbm0xV09iRnhZQXlmVUdPNU54cXF3ejFoTEdj?=
+ =?utf-8?B?dXRHOEVxdHMrM1kxeUFMeEtmK1N1OTExd0xieGNZb0h6dWMyMjgzRm5PZWo2?=
+ =?utf-8?B?dXd2WXV2M3NTT1hVUkN4TnZiL1ZOM3lVb2JuZ0FVUWwzNGtTNlo4MzlUcHNv?=
+ =?utf-8?B?VE5sVzJocjlNZVJicksvY3lNRmp2S1JpeHRzTE9pRStSeXFDUGJRcCs5NTlo?=
+ =?utf-8?B?Z3ZSOERtcjRqaUdGS3BWZmZ4MUJKTXZrMWloSGNNc0o1cTAzcjVtenkyT0Jq?=
+ =?utf-8?B?Tk5sZWNrUUQvNWpqbnJBSjl1K1JqMnF2WVZvbHYvaXJDU2JkU25jZTJ5WkJl?=
+ =?utf-8?B?MnAxcy9KaVVxWnpiM2o1aTJOYnQvTHZEdXlpZmIzOW0rcDdQZTRtZ3d3WUgv?=
+ =?utf-8?B?dksrMnV5RGdrUDhDKzVoTTJ4TkFGZkUvd0dlZ2pSOFEveENnOVVPZWNKb1BU?=
+ =?utf-8?B?ODd5TGVBbXZMeDd5dVlLWVJQNFZMZFFqQldqaDJUMmxyR0ZwOVltUHBmTHBt?=
+ =?utf-8?B?UXV0bUh1SjZMRkVnRmorenBOQ0g1Q0VhdkV4aW5qRFQ0TmJNL0pPd3gwY1dF?=
+ =?utf-8?B?emhPNTdUSSt5UVlYWDBlaUZ2L1piY0NFVE1LN0hvbStZa3hFcHg2am53VW9a?=
+ =?utf-8?B?TFdMYks0VHlJemVwS1lEOFlMUWJvNDZsRWpYODBVL281cHlueWsrUmFXOTR3?=
+ =?utf-8?B?TFFWbncxRngvUjZ5WGU3SGJQSGJXS3VUYVlJcXZycHJRNVlUMTVWMEI3TjA1?=
+ =?utf-8?B?SnJCMDBMeUU1bit5RmpWMy9Hb0VWN25JV2Vsc1k1ZHhMR050Y1dnTzA5UHJE?=
+ =?utf-8?B?VU1naWZJL0Q5RS92bnRaYzd5eFhCU2pIK21DZFhBdThkTVZaellXdEoyRUhK?=
+ =?utf-8?B?ajJHbEw2YmI1ZkdaRGdRVlpNckVMM0N6ZnJ2dXlJU0FSNlgzWE83VUVmQWtE?=
+ =?utf-8?B?K0dQeEZaS2ZEQU9PU1JBS2RaNFcrVUNRMDZmdzZac3grbDZ1VnozVm5CRHJK?=
+ =?utf-8?B?Nkc4L2NvYlJYQ2NxN2xnY0p6VDV0cjRMbzhHR01CRFlkSm40dlhsYlJEN01t?=
+ =?utf-8?B?cVBnQ2JQbGVEMmJjZjVHSjFSR05WUjM1UHN1UXYwWmZFdjJFNkVRbkZsZVpv?=
+ =?utf-8?B?RnlVbTdWYUsyL3cwZkhPUlRCMmcxZ05TcU1OT1d0MjNSZ2lvb0I0Q1pDNzZl?=
+ =?utf-8?B?RUdvUHpOZGFXY1lpaE5EanI5SkRKUE5Oa04vOVdjWTVHY2hzYldiOTRJS1hH?=
+ =?utf-8?B?K2RjVGJodkY0L0dOaW9KbjlWRzZtZE52RWUvOHNtY1RtbFh1ZHIwRWVaZXdU?=
+ =?utf-8?B?a3dxL0RmRzY1WVoyK2JWRzQ0UVdnVmYwSCtkSlhsb3ZpNWk2Y2ZVLzkvZXEz?=
+ =?utf-8?B?Z2drNS84eGhyNjM2cVdwYkhTUFNPTUdydWE3WVVlTFJIanBwNjlkWWkrRFNE?=
+ =?utf-8?Q?Jvgojk6iLNrEbuvPyZHxYiY=3D?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6da0c031-69b8-4ee3-e652-08d9f1f60a9b
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Feb 2022 09:15:29.3280
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: siWM4/xL7zMZqtr/TjrUGAfSP1sJ74kTNS4B9aGFrLt0F0OD+W2rcyVW8/QnuaNp
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR12MB2578
+Message-ID-Hash: XESWK2FVPUXX6W5XV33G4PBXJBHDACQ2
+X-Message-ID-Hash: XESWK2FVPUXX6W5XV33G4PBXJBHDACQ2
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 00/12] iio: buffer-dma: write() and new DMABUF based API
+Subject: [Linaro-mm-sig] Re: [PATCH] drm/amdgpu: check vm bo eviction valuable at last
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4EF3FKHDPCLXOPK2P427OLYRBCZO45L3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XESWK2FVPUXX6W5XV33G4PBXJBHDACQ2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-13"; format="flowed"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-Hi Jonathan,
+Am 17.02.22 um 10:04 schrieb Qiang Yu:
+> Workstation application ANSA/META get this error dmesg:
+> [drm:amdgpu_gem_va_ioctl [amdgpu]] *ERROR* Couldn't update BO_VA (-16)
+>
+> This is caused by:
+> 1. create a 256MB buffer in invisible VRAM
+> 2. CPU map the buffer and access it causes vm_fault and try to move
+>     it to visible VRAM
+> 3. force visible VRAM space and traverse all VRAM bos to check if
+>     evicting this bo is valuable
+> 4. when checking a VM bo (in invisible VRAM), amdgpu_vm_evictable()
+>     will set amdgpu_vm->evicting, but latter due to not in visible
+>     VRAM, won't really evict it so not add it to amdgpu_vm->evicted
+> 5. before next CS to clear the amdgpu_vm->evicting, user VM ops
+>     ioctl will pass amdgpu_vm_ready() (check amdgpu_vm->evicted)
+>     but fail in amdgpu_vm_bo_update_mapping() (check
+>     amdgpu_vm->evicting) and get this error log
+>
+> This error won't affect functionality as next CS will finish the
+> waiting VM ops. But we'd better make the amdgpu_vm->evicting
+> correctly reflact the vm status and clear the error log.
 
-Le dim., f=E9vr. 13 2022 at 18:46:16 +0000, Jonathan Cameron=20
-<jic23@kernel.org> a =E9crit :
-> On Mon,  7 Feb 2022 12:59:21 +0000
-> Paul Cercueil <paul@crapouillou.net> wrote:
->=20
->>  Hi Jonathan,
->>=20
->>  This is the V2 of my patchset that introduces a new userspace=20
->> interface
->>  based on DMABUF objects to complement the fileio API, and adds=20
->> write()
->>  support to the existing fileio API.
->=20
-> Hi Paul,
->=20
-> It's been a little while. Perhaps you could summarize the various view
-> points around the appropriateness of using DMABUF for this?
-> I appreciate it is a tricky topic to distil into a brief summary but
-> I know I would find it useful even if no one else does!
+Well NAK, that is intentional behavior.
 
-So we want to have a high-speed interface where buffers of samples are=20
-passed around between IIO devices and other devices (e.g. USB or=20
-network), or made available to userspace without copying the data.
+The VM page tables where considered for eviction, so setting the flag is 
+correct even when the page tables later on are not actually evicted.
 
-DMABUF is, at least in theory, exactly what we need. Quoting the=20
-documentation=20
-(https://www.kernel.org/doc/html/v5.15/driver-api/dma-buf.html):
-"The dma-buf subsystem provides the framework for sharing buffers for=20
-hardware (DMA) access across multiple device drivers and subsystems,=20
-and for synchronizing asynchronous hardware access. This is used, for=20
-example, by drm =B4prime=A1 multi-GPU support, but is of course not=20
-limited to GPU use cases."
+What we should rather do is to fix amdgpu_vm_ready() to take a look at 
+the flag instead of the linked list.
 
-The problem is that right now DMABUF is only really used by DRM, and to=20
-quote Daniel, "dma-buf looks like something super generic and useful,=20
-until you realize that there's a metric ton of gpu/accelerator bagage=20
-piled in".
+Regards,
+Christian.
 
-Still, it seems to be the only viable option. We could add a custom=20
-buffer-passing interface, but that would mean implementing the same=20
-buffer-passing interface on the network and USB stacks, and before we=20
-know it we re-invented DMABUFs.
-
-Cheers,
--Paul
-
-
->>=20
->>  Changes since v1:
->>=20
->>  - the patches that were merged in v1 have been (obviously) dropped=20
->> from
->>    this patchset;
->>  - the patch that was setting the write-combine cache setting has=20
->> been
->>    dropped as well, as it was simply not useful.
->>  - [01/12]:
->>      * Only remove the outgoing queue, and keep the incoming queue,=20
->> as we
->>        want the buffer to start streaming data as soon as it is=20
->> enabled.
->>      * Remove IIO_BLOCK_STATE_DEQUEUED, since it is now functionally=20
->> the
->>        same as IIO_BLOCK_STATE_DONE.
->>  - [02/12]:
->>      * Fix block->state not being reset in
->>        iio_dma_buffer_request_update() for output buffers.
->>      * Only update block->bytes_used once and add a comment about=20
->> why we
->>        update it.
->>      * Add a comment about why we're setting a different state for=20
->> output
->>        buffers in iio_dma_buffer_request_update()
->>      * Remove useless cast to bool (!!) in iio_dma_buffer_io()
->>  - [05/12]:
->>      Only allow the new IOCTLs on the buffer FD created with
->>      IIO_BUFFER_GET_FD_IOCTL().
->>  - [12/12]:
->>      * Explicitly state that the new interface is optional and is
->>        not implemented by all drivers.
->>      * The IOCTLs can now only be called on the buffer FD returned by
->>        IIO_BUFFER_GET_FD_IOCTL.
->>      * Move the page up a bit in the index since it is core stuff=20
->> and not
->>        driver-specific.
->>=20
->>  The patches not listed here have not been modified since v1.
->>=20
->>  Cheers,
->>  -Paul
->>=20
->>  Alexandru Ardelean (1):
->>    iio: buffer-dma: split iio_dma_buffer_fileio_free() function
->>=20
->>  Paul Cercueil (11):
->>    iio: buffer-dma: Get rid of outgoing queue
->>    iio: buffer-dma: Enable buffer write support
->>    iio: buffer-dmaengine: Support specifying buffer direction
->>    iio: buffer-dmaengine: Enable write support
->>    iio: core: Add new DMABUF interface infrastructure
->>    iio: buffer-dma: Use DMABUFs instead of custom solution
->>    iio: buffer-dma: Implement new DMABUF based userspace API
->>    iio: buffer-dmaengine: Support new DMABUF based userspace API
->>    iio: core: Add support for cyclic buffers
->>    iio: buffer-dmaengine: Add support for cyclic buffers
->>    Documentation: iio: Document high-speed DMABUF based API
->>=20
->>   Documentation/driver-api/dma-buf.rst          |   2 +
->>   Documentation/iio/dmabuf_api.rst              |  94 +++
->>   Documentation/iio/index.rst                   |   2 +
->>   drivers/iio/adc/adi-axi-adc.c                 |   3 +-
->>   drivers/iio/buffer/industrialio-buffer-dma.c  | 610=20
->> ++++++++++++++----
->>   .../buffer/industrialio-buffer-dmaengine.c    |  42 +-
->>   drivers/iio/industrialio-buffer.c             |  60 ++
->>   include/linux/iio/buffer-dma.h                |  38 +-
->>   include/linux/iio/buffer-dmaengine.h          |   5 +-
->>   include/linux/iio/buffer_impl.h               |   8 +
->>   include/uapi/linux/iio/buffer.h               |  30 +
->>   11 files changed, 749 insertions(+), 145 deletions(-)
->>   create mode 100644 Documentation/iio/dmabuf_api.rst
->>=20
->=20
-
+>
+> Signed-off-by: Qiang Yu <qiang.yu@amd.com>
+> ---
+>   drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c | 85 ++++++++++++++-----------
+>   1 file changed, 47 insertions(+), 38 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> index 5a32ee66d8c8..88a27911054f 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+> @@ -1306,45 +1306,11 @@ uint64_t amdgpu_ttm_tt_pte_flags(struct amdgpu_device *adev, struct ttm_tt *ttm,
+>   	return flags;
+>   }
+>   
+> -/*
+> - * amdgpu_ttm_bo_eviction_valuable - Check to see if we can evict a buffer
+> - * object.
+> - *
+> - * Return true if eviction is sensible. Called by ttm_mem_evict_first() on
+> - * behalf of ttm_bo_mem_force_space() which tries to evict buffer objects until
+> - * it can find space for a new object and by ttm_bo_force_list_clean() which is
+> - * used to clean out a memory space.
+> - */
+> -static bool amdgpu_ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
+> -					    const struct ttm_place *place)
+> +static bool amdgpu_ttm_mem_eviction_valuable(struct ttm_buffer_object *bo,
+> +					     const struct ttm_place *place)
+>   {
+>   	unsigned long num_pages = bo->resource->num_pages;
+>   	struct amdgpu_res_cursor cursor;
+> -	struct dma_resv_list *flist;
+> -	struct dma_fence *f;
+> -	int i;
+> -
+> -	/* Swapout? */
+> -	if (bo->resource->mem_type == TTM_PL_SYSTEM)
+> -		return true;
+> -
+> -	if (bo->type == ttm_bo_type_kernel &&
+> -	    !amdgpu_vm_evictable(ttm_to_amdgpu_bo(bo)))
+> -		return false;
+> -
+> -	/* If bo is a KFD BO, check if the bo belongs to the current process.
+> -	 * If true, then return false as any KFD process needs all its BOs to
+> -	 * be resident to run successfully
+> -	 */
+> -	flist = dma_resv_shared_list(bo->base.resv);
+> -	if (flist) {
+> -		for (i = 0; i < flist->shared_count; ++i) {
+> -			f = rcu_dereference_protected(flist->shared[i],
+> -				dma_resv_held(bo->base.resv));
+> -			if (amdkfd_fence_check_mm(f, current->mm))
+> -				return false;
+> -		}
+> -	}
+>   
+>   	switch (bo->resource->mem_type) {
+>   	case AMDGPU_PL_PREEMPT:
+> @@ -1377,10 +1343,53 @@ static bool amdgpu_ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
+>   		return false;
+>   
+>   	default:
+> -		break;
+> +		return ttm_bo_eviction_valuable(bo, place);
+>   	}
+> +}
+>   
+> -	return ttm_bo_eviction_valuable(bo, place);
+> +/*
+> + * amdgpu_ttm_bo_eviction_valuable - Check to see if we can evict a buffer
+> + * object.
+> + *
+> + * Return true if eviction is sensible. Called by ttm_mem_evict_first() on
+> + * behalf of ttm_bo_mem_force_space() which tries to evict buffer objects until
+> + * it can find space for a new object and by ttm_bo_force_list_clean() which is
+> + * used to clean out a memory space.
+> + */
+> +static bool amdgpu_ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
+> +					    const struct ttm_place *place)
+> +{
+> +	struct dma_resv_list *flist;
+> +	struct dma_fence *f;
+> +	int i;
+> +
+> +	/* Swapout? */
+> +	if (bo->resource->mem_type == TTM_PL_SYSTEM)
+> +		return true;
+> +
+> +	/* If bo is a KFD BO, check if the bo belongs to the current process.
+> +	 * If true, then return false as any KFD process needs all its BOs to
+> +	 * be resident to run successfully
+> +	 */
+> +	flist = dma_resv_shared_list(bo->base.resv);
+> +	if (flist) {
+> +		for (i = 0; i < flist->shared_count; ++i) {
+> +			f = rcu_dereference_protected(flist->shared[i],
+> +				dma_resv_held(bo->base.resv));
+> +			if (amdkfd_fence_check_mm(f, current->mm))
+> +				return false;
+> +		}
+> +	}
+> +
+> +	/* Check by different mem type. */
+> +	if (!amdgpu_ttm_mem_eviction_valuable(bo, place))
+> +		return false;
+> +
+> +	/* VM bo should be checked at last because it will mark VM evicting. */
+> +	if (bo->type == ttm_bo_type_kernel)
+> +		return amdgpu_vm_evictable(ttm_to_amdgpu_bo(bo));
+> +
+> +	return true;
+>   }
+>   
+>   static void amdgpu_ttm_vram_mm_access(struct amdgpu_device *adev, loff_t pos,
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
