@@ -2,74 +2,102 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6C59F4EA9DA
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 10:54:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 349A14EABE2
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 13:05:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 92AD33EC03
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 08:54:51 +0000 (UTC)
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com [209.85.221.66])
-	by lists.linaro.org (Postfix) with ESMTPS id 9D2CA3EBF3
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 08:54:47 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id d7so23751706wrb.7
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 01:54:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google;
-        h=date:from:to:cc:subject:message-id:mail-followup-to:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=AKQCa5BXj3nCU08wphZwQiPGLu+26prlcxnHAtm3VJI=;
-        b=JptjAoEckriZUf4zPujrteZ8s/NjMjT2ifzJiasv3jr8gD6d2FEM3pB0Uo5ATE9iAI
-         VBHJZ8AQuo7sU274dzli6jcmkRGhGsJBfZxO9ClibftgH1ggxrUC7fkoULKC0iPqnfZ7
-         683RUPXa73EJ+BaZYfown49PfOmqyEzjPkES4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id
-         :mail-followup-to:references:mime-version:content-disposition
-         :in-reply-to;
-        bh=AKQCa5BXj3nCU08wphZwQiPGLu+26prlcxnHAtm3VJI=;
-        b=3SrceAw7cJkZGdJa2u5JhmnrwIM4pTW7Hz9rz0yHz9/NVIfpHilKEhAxlO6FIOTdml
-         5aIG6tfeFPD10FJWDHURx9NrOEDOxftinS/MagCx9RTu0hVqrNWhoRa2RKVifGD0r+c5
-         NqTXHZegnknEQ647jdKAKswMDxhBnhrAR2qgwXyB0pmih1cmetsOq9S8/M/NrWqAuFtM
-         4iWruCyR7dPqYbWYCi2sG/fgZLIdnkmVY4u7cIftWEctH+ZR4aM/qNywN0vZyezKhAwU
-         NK85/kzQQoY8BnVbyn6d2z7mqf1i7XUl8lH7V0XPyRlF19oPnxHeDTFAu2QAD+PPulEn
-         YbEA==
-X-Gm-Message-State: AOAM532/PgmmQofoB6RCYNVD76pFKcUliWS5b5DjWfSzpj4aZLDrhf5z
-	Y5B2i4a3ZEZ4HdqefjvNWQF6Pw==
-X-Google-Smtp-Source: ABdhPJyh7a/JYQQVslvrEv4/VrglTy3NUcoYOA6Ic3/C5QjREHupUrY0ULUNmJyK+0rJ6Zuz0toy4A==
-X-Received: by 2002:a05:6000:186d:b0:204:110a:d832 with SMTP id d13-20020a056000186d00b00204110ad832mr29779909wri.47.1648544086671;
-        Tue, 29 Mar 2022 01:54:46 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id c11-20020a05600c0a4b00b0037c91e085ddsm1902614wmq.40.2022.03.29.01.54.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Mar 2022 01:54:45 -0700 (PDT)
-Date: Tue, 29 Mar 2022 10:54:43 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Paul Cercueil <paul@crapouillou.net>
-Message-ID: <YkLJU7Pp98CPIHfY@phenom.ffwll.local>
-Mail-Followup-To: Paul Cercueil <paul@crapouillou.net>,
-	Jonathan Cameron <jic23@kernel.org>,
-	Michael Hennerich <Michael.Hennerich@analog.com>,
-	Jonathan Corbet <corbet@lwn.net>, linux-iio@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
-	Alexandru Ardelean <ardeleanalex@gmail.com>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-References: <20220207125933.81634-1-paul@crapouillou.net>
- <20220207130140.81891-1-paul@crapouillou.net>
- <20220207130140.81891-2-paul@crapouillou.net>
+	by lists.linaro.org (Postfix) with ESMTP id 659BA3EC0C
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 11:05:55 +0000 (UTC)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2048.outbound.protection.outlook.com [40.107.237.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 22B4C3ED20
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Feb 2022 09:05:14 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=U/LJavLhnBAGZXSR1yIb0NUT83JlqdN5ICabm5Yl4khFxz3q7aY6+gTOkKN4aelDtIZPBQ7NDoemzVSjrlVBiD+yDbYs9qG59D/nfJw7CLPD1/BX6fGw00VI+spNtakZ/TQdIZ4wi1EL5Ze6eq89scRc6RSk7tsyXJN7S3LQ9plcsBe3J8FMicLgVE1R0d00l2y/jdiNLMURkVvSNgUvrvGkwWfN1znPdLna8Q788mfPJLJSZSoWHykxMY5KvRo7ijEUwM0n/PqiQ/jvTO4AJIezoKzxSrFpgroO8E8yyTBwevoXG/i/QrVMPag7G/t5sW3H1ODGwFRMbiPby9K3hg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=StHzjCXPDIh1RmTRrJTpZuB5CrJBaEqQAEe5wHy8V/E=;
+ b=Z7xAgIggt+1tl0Los6aR7Oz4v0OIBNdCbzpXvh9tlvgfAXl1N0CuksUonv7QoIFsvki+F1hm477hLH5/La5FlwighkPjv6BRvpByVDDI7wYoka35V0dpzn2KSPAvCTMYqWnwJDY8kYBjReR9B4OJtVnfpM635v7aoloP+0c9qHGKaFoXlXoBCY4oXMSxbPfnEIl6XR5VW9twKyao8m69qxnVjYOxpN9xnx6SPCO+2+xBtIJg8NdMXUrRIExNUwEK942rxyQuecSlvCU/Y2BhBFUpCcwF3ESnJpL4zMiAgMl4rEwMxGGSnhjGAeZqHLDejxKg8j+w9O+CJk3zVezz5g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=linux.ie smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=StHzjCXPDIh1RmTRrJTpZuB5CrJBaEqQAEe5wHy8V/E=;
+ b=k+A88yK0X8fni6rNzxh3vqRw0uG4onAigMpwD3egPc79J1e1uEy9mxuONQGIz/dxzId819+oFEGQPs/uBDxrCOlzOW+q5d5UUyyqwTdJ3MK3PdgXPp+O4qoqT92Wu1Ddb63TzGNi8z4Tf2Kg9rHyIV8wO/JBtgv7TImleDfySyA=
+Received: from MW4PR03CA0358.namprd03.prod.outlook.com (2603:10b6:303:dc::33)
+ by BY5PR12MB3858.namprd12.prod.outlook.com (2603:10b6:a03:1a7::32) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4995.14; Thu, 17 Feb
+ 2022 09:05:09 +0000
+Received: from CO1NAM11FT016.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:303:dc:cafe::47) by MW4PR03CA0358.outlook.office365.com
+ (2603:10b6:303:dc::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4995.16 via Frontend
+ Transport; Thu, 17 Feb 2022 09:05:09 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com;
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1NAM11FT016.mail.protection.outlook.com (10.13.175.141) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.4995.15 via Frontend Transport; Thu, 17 Feb 2022 09:05:09 +0000
+Received: from localhost.localdomain (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.18; Thu, 17 Feb
+ 2022 03:05:01 -0600
+From: Qiang Yu <qiang.yu@amd.com>
+To: Alex Deucher <alexander.deucher@amd.com>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, "Pan, Xinhui"
+	<Xinhui.Pan@amd.com>, David Airlie <airlied@linux.ie>, Daniel Vetter
+	<daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>
+Date: Thu, 17 Feb 2022 17:04:40 +0800
+Message-ID: <20220217090440.4468-1-qiang.yu@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220207130140.81891-2-paul@crapouillou.net>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Message-ID-Hash: HFKN2ZQRIP6CJ7CSEPZU2RFAJT7URZZN
-X-Message-ID-Hash: HFKN2ZQRIP6CJ7CSEPZU2RFAJT7URZZN
-X-MailFrom: daniel@ffwll.ch
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Jonathan Cameron <jic23@kernel.org>, Michael Hennerich <Michael.Hennerich@analog.com>, Jonathan Corbet <corbet@lwn.net>, linux-iio@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Alexandru Ardelean <ardeleanalex@gmail.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 6e408c89-bb10-4a9e-9248-08d9f1f49946
+X-MS-TrafficTypeDiagnostic: BY5PR12MB3858:EE_
+X-Microsoft-Antispam-PRVS: 
+	<BY5PR12MB38584CBACA7582C99EC849908F369@BY5PR12MB3858.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	pd3LYVcYFLpZwCSiUZpmHN0+UWsIRwJwVhUaX8PztcnS984npCdqc0ZFysAUIBN01H7dGcnalLWDuzkMCdbIZgsbzDzEOsY1jQaSo5eW1WF97EnIb1TypXlBDA1XcNxL+gODHAe4k3RQcI2UPy474YJSR/FGqZ4Qjr1+t79fGI2pNzFmVLDwzZNs5kCbdOiEk/etxYxfGDfCgN7rEPA1Wyih80mhRxwe4v/PZkUHyaqb4Hzfkj7qmRPUsBs+21ACFb5UitnT2noVhn3pJO5nB518SekU61IOyWLHu1jFE7vRxSCJVAM5KNQUs+N5/ZOgSCPnt+ClldlCZ87TCA7Sdqql029yJ+dOJLpyOFO7NCuWMgWKolLnwqKUxCfMrIwwHe5uXP73jThTO9e5qnZlHSYdvUXK70xvn9SkLqrLbKl69PtH/I+qUB0+pHhahj03IwJeYncjdJe+7+bdZEQKWtY2skEHS7JcLiCHLD5Hj/xZOQ7MSuuoTeL12pFXuFFkQxEclLe1gHr6NvZMm867yvTXerdfVnVG3ycDoh/ilzBaFDeY4v5QGnBwSinkp+DwBziwSNseiQbyfxZ2ZsQRDjF2wG7jtwESGNPw545zUtVcDBSY5JyB4z2k+ff2tffbcjGUcow1K47q2AMQLNaXhYnyGzRUQAfFS4BLkZH4jnpoy7VZIpSE6B8luZ7JDVI3yBmfyEtj2LN2rXTVqHdTZA==
+X-Forefront-Antispam-Report: 
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230001)(4636009)(36840700001)(46966006)(40470700004)(356005)(316002)(8936002)(110136005)(54906003)(16526019)(5660300002)(26005)(426003)(1076003)(83380400001)(186003)(2616005)(2906002)(6666004)(36756003)(40460700003)(47076005)(70586007)(44832011)(336012)(36860700001)(82310400004)(8676002)(81166007)(70206006)(508600001)(4326008)(86362001)(36900700001);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Feb 2022 09:05:09.3614
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6e408c89-bb10-4a9e-9248-08d9f1f49946
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	CO1NAM11FT016.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB3858
+X-MailFrom: Qiang.Yu@amd.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: PTJEIC64XGXJBCYUX7ZE2PQOWJU7M62B
+X-Message-ID-Hash: PTJEIC64XGXJBCYUX7ZE2PQOWJU7M62B
+X-Mailman-Approved-At: Tue, 29 Mar 2022 11:05:51 +0000
+CC: Qiang Yu <qiang.yu@amd.com>, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 12/12] Documentation: iio: Document high-speed DMABUF based API
+Subject: [Linaro-mm-sig] [PATCH] drm/amdgpu: check vm bo eviction valuable at last
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HFKN2ZQRIP6CJ7CSEPZU2RFAJT7URZZN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PTJEIC64XGXJBCYUX7ZE2PQOWJU7M62B/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -79,165 +107,143 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon, Feb 07, 2022 at 01:01:40PM +0000, Paul Cercueil wrote:
-> Document the new DMABUF based API.
-> 
-> v2: - Explicitly state that the new interface is optional and is
->       not implemented by all drivers.
->     - The IOCTLs can now only be called on the buffer FD returned by
->       IIO_BUFFER_GET_FD_IOCTL.
->     - Move the page up a bit in the index since it is core stuff and not
->       driver-specific.
-> 
-> Signed-off-by: Paul Cercueil <paul@crapouillou.net>
-> ---
->  Documentation/driver-api/dma-buf.rst |  2 +
->  Documentation/iio/dmabuf_api.rst     | 94 ++++++++++++++++++++++++++++
->  Documentation/iio/index.rst          |  2 +
->  3 files changed, 98 insertions(+)
->  create mode 100644 Documentation/iio/dmabuf_api.rst
-> 
-> diff --git a/Documentation/driver-api/dma-buf.rst b/Documentation/driver-api/dma-buf.rst
-> index 2cd7db82d9fe..d3c9b58d2706 100644
-> --- a/Documentation/driver-api/dma-buf.rst
-> +++ b/Documentation/driver-api/dma-buf.rst
-> @@ -1,3 +1,5 @@
-> +.. _dma-buf:
-> +
->  Buffer Sharing and Synchronization
->  ==================================
->  
-> diff --git a/Documentation/iio/dmabuf_api.rst b/Documentation/iio/dmabuf_api.rst
-> new file mode 100644
-> index 000000000000..43bb2c1b9fdc
-> --- /dev/null
-> +++ b/Documentation/iio/dmabuf_api.rst
-> @@ -0,0 +1,94 @@
-> +===================================
-> +High-speed DMABUF interface for IIO
-> +===================================
-> +
-> +1. Overview
-> +===========
-> +
-> +The Industrial I/O subsystem supports access to buffers through a file-based
-> +interface, with read() and write() access calls through the IIO device's dev
-> +node.
-> +
-> +It additionally supports a DMABUF based interface, where the userspace
-> +application can allocate and append DMABUF objects to the buffer's queue.
-> +This interface is however optional and is not available in all drivers.
-> +
-> +The advantage of this DMABUF based interface vs. the read()
-> +interface, is that it avoids an extra copy of the data between the
-> +kernel and userspace. This is particularly useful for high-speed
-> +devices which produce several megabytes or even gigabytes of data per
-> +second.
-> +
-> +The data in this DMABUF interface is managed at the granularity of
-> +DMABUF objects. Reducing the granularity from byte level to block level
-> +is done to reduce the userspace-kernelspace synchronization overhead
-> +since performing syscalls for each byte at a few Mbps is just not
-> +feasible.
-> +
-> +This of course leads to a slightly increased latency. For this reason an
-> +application can choose the size of the DMABUFs as well as how many it
-> +allocates. E.g. two DMABUFs would be a traditional double buffering
-> +scheme. But using a higher number might be necessary to avoid
-> +underflow/overflow situations in the presence of scheduling latencies.
+Workstation application ANSA/META get this error dmesg:
+[drm:amdgpu_gem_va_ioctl [amdgpu]] *ERROR* Couldn't update BO_VA (-16)
 
-So this reads a lot like reinventing io-uring with pre-registered O_DIRECT
-memory ranges. Except it's using dma-buf and hand-rolling a lot of pieces
-instead of io-uring and O_DIRECT.
+This is caused by:
+1. create a 256MB buffer in invisible VRAM
+2. CPU map the buffer and access it causes vm_fault and try to move
+   it to visible VRAM
+3. force visible VRAM space and traverse all VRAM bos to check if
+   evicting this bo is valuable
+4. when checking a VM bo (in invisible VRAM), amdgpu_vm_evictable()
+   will set amdgpu_vm->evicting, but latter due to not in visible
+   VRAM, won't really evict it so not add it to amdgpu_vm->evicted
+5. before next CS to clear the amdgpu_vm->evicting, user VM ops
+   ioctl will pass amdgpu_vm_ready() (check amdgpu_vm->evicted)
+   but fail in amdgpu_vm_bo_update_mapping() (check
+   amdgpu_vm->evicting) and get this error log
 
-At least if the entire justification for dma-buf support is zero-copy
-support between the driver and userspace it's _really_ not the right tool
-for the job. dma-buf is for zero-copy between devices, with cpu access
-from userpace (or kernel fwiw) being very much the exception (and often
-flat-out not supported at all).
--Daniel
+This error won't affect functionality as next CS will finish the
+waiting VM ops. But we'd better make the amdgpu_vm->evicting
+correctly reflact the vm status and clear the error log.
 
-> +
-> +2. User API
-> +===========
-> +
-> +``IIO_BUFFER_DMABUF_ALLOC_IOCTL(struct iio_dmabuf_alloc_req *)``
-> +----------------------------------------------------------------
-> +
-> +Each call will allocate a new DMABUF object. The return value (if not
-> +a negative errno value as error) will be the file descriptor of the new
-> +DMABUF.
-> +
-> +``IIO_BUFFER_DMABUF_ENQUEUE_IOCTL(struct iio_dmabuf *)``
-> +--------------------------------------------------------
-> +
-> +Place the DMABUF object into the queue pending for hardware process.
-> +
-> +These two IOCTLs have to be performed on the IIO buffer's file
-> +descriptor, obtained using the `IIO_BUFFER_GET_FD_IOCTL` ioctl.
-> +
-> +3. Usage
-> +========
-> +
-> +To access the data stored in a block by userspace the block must be
-> +mapped to the process's memory. This is done by calling mmap() on the
-> +DMABUF's file descriptor.
-> +
-> +Before accessing the data through the map, you must use the
-> +DMA_BUF_IOCTL_SYNC(struct dma_buf_sync *) ioctl, with the
-> +DMA_BUF_SYNC_START flag, to make sure that the data is available.
-> +This call may block until the hardware is done with this block. Once
-> +you are done reading or writing the data, you must use this ioctl again
-> +with the DMA_BUF_SYNC_END flag, before enqueueing the DMABUF to the
-> +kernel's queue.
-> +
-> +If you need to know when the hardware is done with a DMABUF, you can
-> +poll its file descriptor for the EPOLLOUT event.
-> +
-> +Finally, to destroy a DMABUF object, simply call close() on its file
-> +descriptor.
-> +
-> +For more information about manipulating DMABUF objects, see: :ref:`dma-buf`.
-> +
-> +A typical workflow for the new interface is:
-> +
-> +    for block in blocks:
-> +      DMABUF_ALLOC block
-> +      mmap block
-> +
-> +    enable buffer
-> +
-> +    while !done
-> +      for block in blocks:
-> +        DMABUF_ENQUEUE block
-> +
-> +        DMABUF_SYNC_START block
-> +        process data
-> +        DMABUF_SYNC_END block
-> +
-> +    disable buffer
-> +
-> +    for block in blocks:
-> +      close block
-> diff --git a/Documentation/iio/index.rst b/Documentation/iio/index.rst
-> index 58b7a4ebac51..669deb67ddee 100644
-> --- a/Documentation/iio/index.rst
-> +++ b/Documentation/iio/index.rst
-> @@ -9,4 +9,6 @@ Industrial I/O
->  
->     iio_configfs
->  
-> +   dmabuf_api
-> +
->     ep93xx_adc
-> -- 
-> 2.34.1
-> 
+Signed-off-by: Qiang Yu <qiang.yu@amd.com>
+---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c | 85 ++++++++++++++-----------
+ 1 file changed, 47 insertions(+), 38 deletions(-)
 
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+index 5a32ee66d8c8..88a27911054f 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
+@@ -1306,45 +1306,11 @@ uint64_t amdgpu_ttm_tt_pte_flags(struct amdgpu_device *adev, struct ttm_tt *ttm,
+ 	return flags;
+ }
+ 
+-/*
+- * amdgpu_ttm_bo_eviction_valuable - Check to see if we can evict a buffer
+- * object.
+- *
+- * Return true if eviction is sensible. Called by ttm_mem_evict_first() on
+- * behalf of ttm_bo_mem_force_space() which tries to evict buffer objects until
+- * it can find space for a new object and by ttm_bo_force_list_clean() which is
+- * used to clean out a memory space.
+- */
+-static bool amdgpu_ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
+-					    const struct ttm_place *place)
++static bool amdgpu_ttm_mem_eviction_valuable(struct ttm_buffer_object *bo,
++					     const struct ttm_place *place)
+ {
+ 	unsigned long num_pages = bo->resource->num_pages;
+ 	struct amdgpu_res_cursor cursor;
+-	struct dma_resv_list *flist;
+-	struct dma_fence *f;
+-	int i;
+-
+-	/* Swapout? */
+-	if (bo->resource->mem_type == TTM_PL_SYSTEM)
+-		return true;
+-
+-	if (bo->type == ttm_bo_type_kernel &&
+-	    !amdgpu_vm_evictable(ttm_to_amdgpu_bo(bo)))
+-		return false;
+-
+-	/* If bo is a KFD BO, check if the bo belongs to the current process.
+-	 * If true, then return false as any KFD process needs all its BOs to
+-	 * be resident to run successfully
+-	 */
+-	flist = dma_resv_shared_list(bo->base.resv);
+-	if (flist) {
+-		for (i = 0; i < flist->shared_count; ++i) {
+-			f = rcu_dereference_protected(flist->shared[i],
+-				dma_resv_held(bo->base.resv));
+-			if (amdkfd_fence_check_mm(f, current->mm))
+-				return false;
+-		}
+-	}
+ 
+ 	switch (bo->resource->mem_type) {
+ 	case AMDGPU_PL_PREEMPT:
+@@ -1377,10 +1343,53 @@ static bool amdgpu_ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
+ 		return false;
+ 
+ 	default:
+-		break;
++		return ttm_bo_eviction_valuable(bo, place);
+ 	}
++}
+ 
+-	return ttm_bo_eviction_valuable(bo, place);
++/*
++ * amdgpu_ttm_bo_eviction_valuable - Check to see if we can evict a buffer
++ * object.
++ *
++ * Return true if eviction is sensible. Called by ttm_mem_evict_first() on
++ * behalf of ttm_bo_mem_force_space() which tries to evict buffer objects until
++ * it can find space for a new object and by ttm_bo_force_list_clean() which is
++ * used to clean out a memory space.
++ */
++static bool amdgpu_ttm_bo_eviction_valuable(struct ttm_buffer_object *bo,
++					    const struct ttm_place *place)
++{
++	struct dma_resv_list *flist;
++	struct dma_fence *f;
++	int i;
++
++	/* Swapout? */
++	if (bo->resource->mem_type == TTM_PL_SYSTEM)
++		return true;
++
++	/* If bo is a KFD BO, check if the bo belongs to the current process.
++	 * If true, then return false as any KFD process needs all its BOs to
++	 * be resident to run successfully
++	 */
++	flist = dma_resv_shared_list(bo->base.resv);
++	if (flist) {
++		for (i = 0; i < flist->shared_count; ++i) {
++			f = rcu_dereference_protected(flist->shared[i],
++				dma_resv_held(bo->base.resv));
++			if (amdkfd_fence_check_mm(f, current->mm))
++				return false;
++		}
++	}
++
++	/* Check by different mem type. */
++	if (!amdgpu_ttm_mem_eviction_valuable(bo, place))
++		return false;
++
++	/* VM bo should be checked at last because it will mark VM evicting. */
++	if (bo->type == ttm_bo_type_kernel)
++		return amdgpu_vm_evictable(ttm_to_amdgpu_bo(bo));
++
++	return true;
+ }
+ 
+ static void amdgpu_ttm_vram_mm_access(struct amdgpu_device *adev, loff_t pos,
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+2.25.1
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
