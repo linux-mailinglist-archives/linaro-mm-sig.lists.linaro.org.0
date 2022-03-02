@@ -2,196 +2,550 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76EA14C85FA
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  1 Mar 2022 09:11:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7AF944CAC45
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Mar 2022 18:39:50 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5BA003EF1F
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  1 Mar 2022 08:11:44 +0000 (UTC)
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com [205.220.165.32])
-	by lists.linaro.org (Postfix) with ESMTPS id 0256F3EB82
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  1 Mar 2022 08:11:41 +0000 (UTC)
-Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
-	by mx0b-00069f02.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 2213PXHd018824;
-	Tue, 1 Mar 2022 08:11:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=date : from : to : cc
- : subject : message-id : content-type : mime-version; s=corp-2021-07-09;
- bh=LxAHWZ+KT15zWgenfBkkVQdByDwFwu141s+I29i0r7g=;
- b=Ekun/sB2kuCtXx3wR5xJTyJkSFv6Kn5pgJOJI+NdTHPFGDlgQnw9B5nZR6/82tRWTqCo
- 1rJl5wEHwnC2r2UdwJcm65bghuU/csEmaydOi9ytgdGZQMeBgUd0n1Jg9vzqcba7rQ/t
- Xyk5NC+in1Ueka9sQTpOTmcsy3cqh+q7eH+q10hK/fh5Wy3e9Xd2JB7iTmRzWqQ0dqEG
- 5IjDlfH7HCy/+uIGwg5+VFpthb1BlPPbHMOMNBcqCAy6FSVso7XYGqNZVukVNO17jm5v
- ZXsc8UvBC8iBOyGU0YQ1iqEWAIsgtBVmS4YxGqvtQaWcqi+8K6u6g1j6R6JhDIjl1ffz PA==
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
-	by mx0b-00069f02.pphosted.com with ESMTP id 3eh15ahwx7-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 01 Mar 2022 08:11:21 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
-	by aserp3020.oracle.com (8.16.1.2/8.16.1.2) with SMTP id 2218AnTL105191;
-	Tue, 1 Mar 2022 08:11:20 GMT
-Received: from nam10-mw2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2105.outbound.protection.outlook.com [104.47.55.105])
-	by aserp3020.oracle.com with ESMTP id 3efc13wb7n-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-	Tue, 01 Mar 2022 08:11:20 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Yrqqaw+M4fzJGXkc968+em74SOB/L3BC3r4MnLFypXSKl5SlP3NmpGFk8OuLRxsoH7fa4xtN4YJmTsld1GhhyTuAnWvXZFFdciDmqrg0wnVDWNC/zC6M9CgzV0oeBSHs8aspgOSwXUlR8N1MpROtJ4aKO3iurEq/YzRLFGxTkQ5SSXVgCmTOuRv9C1VrNNWM8QDv1xB3CwU+hNQG4TbdCI43O1lWJbf1dlx4bnTs8QlduFp0rW5Bm9WwZeMldyqE9TC7w0X5cd2bGvPrKfKJ6pH00fUGoFE114pDhGUe6TRwGvM8/pnAPyFQRVSEHbFfPCANxRZiAd5C/HWx59RWKQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LxAHWZ+KT15zWgenfBkkVQdByDwFwu141s+I29i0r7g=;
- b=AgswtsZJ4tzShVjNMlb2yal5GN2got9wa3BrmZZ96G8Oeo8qx/pEsUee6SsEY28ye/ZExGZuGccKNn23xf+WJKr462Bk9m5+KBylOQ9Me5l+0GLBPt8+CX599MQtW7+8+xuPxOi9UQQ82vLJ7F06drSz3YOq9BUaToHjyYyQV0QGVxbksg85y0ySKPz7Pogw0DwSMdy6RET4ikb2h7XCgBxNNaMzvz96SKkwlXNbyVKckvFLmGjmy7kMsufU5UaTRj67AvJVvtrrv/G0Ag7zwvLd0RqOnWR/odr01ZGsoKDhFTr8selU3b8OUGIXm4R4COWUN1HF65GjnjEmTcu2cQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
+	by lists.linaro.org (Postfix) with ESMTP id 94BD13EF45
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Mar 2022 17:39:49 +0000 (UTC)
+Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
+	by lists.linaro.org (Postfix) with ESMTPS id BE47C3EB7E
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  2 Mar 2022 17:39:47 +0000 (UTC)
+Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-2d07ae0b1c4so26443407b3.11
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 02 Mar 2022 09:39:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LxAHWZ+KT15zWgenfBkkVQdByDwFwu141s+I29i0r7g=;
- b=NocokS5+ih64C/6pvXLSixrcaIZ8pIuaGMGD5oB7ieRaipHGHLxIs3F0JUQ/xD7cENQ0EAMxLQW9PLNWWnHejQe2YvQuWv9KX4K+xBWJ+jm7QkaeMuGYyN9u865lUgm4sYv09rOKjQ1jep66mD7dv2PfXG6lS2oXFbOtqi3cHss=
-Received: from MWHPR1001MB2365.namprd10.prod.outlook.com
- (2603:10b6:301:2d::28) by MWHPR10MB1760.namprd10.prod.outlook.com
- (2603:10b6:301:a::10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5017.23; Tue, 1 Mar
- 2022 08:11:17 +0000
-Received: from MWHPR1001MB2365.namprd10.prod.outlook.com
- ([fe80::2c3d:92b5:42b3:c1c5]) by MWHPR1001MB2365.namprd10.prod.outlook.com
- ([fe80::2c3d:92b5:42b3:c1c5%4]) with mapi id 15.20.5017.027; Tue, 1 Mar 2022
- 08:11:17 +0000
-Date: Tue, 1 Mar 2022 11:11:04 +0300
-From: Dan Carpenter <dan.carpenter@oracle.com>
-To: Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
-        Srinivasa Rao Mandadapu <quic_srivasam@quicinc.com>
-Message-ID: <20220301081104.GB17375@kili>
-Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-ClientProxiedBy: ZR0P278CA0024.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:1c::11) To MWHPR1001MB2365.namprd10.prod.outlook.com
- (2603:10b6:301:2d::28)
+        d=jlekstrand-net.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=dy0qp9jCXbPntD4DO3PEqENN3OVYL+ttjW34ldJW1N4=;
+        b=rTJfN+ckozxJqKGtZdlPXeI5MVQrMQ7QYGCs1ZhDMe8r2zXJq7AwPE9maiPiKm5tav
+         EgbvovAvWOJfuknYH5parBhdU3qRQK4eMmIYWiEp7x5GJJBP7ra7Kl3rz53i/RHxLpzP
+         zgzh3fTH5pdVdMlyEmhfkwh+WNVeD6hkUpPi8HerSTOOSMSUJJUsBJF3EFe7qVWDs7la
+         6r/xb4sukN/LGC3kyUnrNw6cUIQtBRLOPsmxvc1Lh6l33IW2fnLGd8RKeaoy2ayrItR3
+         2ElcH/l9yxhiSPl0PxtmRdmVV2I5BZtCf8bxzSuACzD4hRo85rMVG7E4HuBgbmfI/a1w
+         GieA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=dy0qp9jCXbPntD4DO3PEqENN3OVYL+ttjW34ldJW1N4=;
+        b=KfYc/aQGFybrAleJUnV18TS1coJ7CQ5JrF7Us6jHQlU/ipgQFCLbndf+oRipka7ZKR
+         fhlPK6rAvq84WEtV7+x2Wj/N5xXx6PHfJfTVn8KnNtqUDyueqgqO/E+guFr/DMvUm8HX
+         ZEd3B9e99jMSTKeO0TVM2jYqz0t1Sh7fLYxLT8WtVgsDJ3J2s19/Fru3zJzxydLiV7PB
+         V77YriWUgqpMgpHMao4r5RFqnw2t1BzbiLe0T54QfQ5ng1OnCdB2ZJtr4n0zecC6Rjy3
+         w3lgN62HfroFiRq2CIrm5mUopgyKU7nxKGuX/fVk7Z7sP/hfGUSDFF4O8g9pAz+HGBUo
+         eyFQ==
+X-Gm-Message-State: AOAM532FU2XIvBgShLzlbaQvqTKeB2hBOeKhhoRlAHRvkC5VrVW+OgHl
+	qLI5v6x+Ht9hDn++a4ey76hSQdxp/qcZXx5vwURu7g==
+X-Google-Smtp-Source: ABdhPJwM4h3zmVhxZWOdwwslRdmHI5+XE2WwkEuYJT7++2fJnN/8iiL5UJDntVOMznD5AVyPzNpImUScUkfHYUpQ9Ek=
+X-Received: by 2002:a81:1d51:0:b0:2ca:73e5:9bd6 with SMTP id
+ d78-20020a811d51000000b002ca73e59bd6mr31774376ywd.490.1646242787212; Wed, 02
+ Mar 2022 09:39:47 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 11f5896d-f5ef-45bc-a24d-08d9fb5b0fa8
-X-MS-TrafficTypeDiagnostic: MWHPR10MB1760:EE_
-X-Microsoft-Antispam-PRVS: 
-	<MWHPR10MB17602C997ED677D411F51EDF8E029@MWHPR10MB1760.namprd10.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	+zChlm6UsrYrt+KhUtMAR0OFa5Ya/zlKf88fq1BY0i6WGIL+UQrzNbyVvo89dj0vgWcRhTT58NYg6iCwU5cng52oFrgv1xnEk+sv2VoQWVHFug2Yxj5SoIKBG1HeEaD3uZQcA1DCg2nP2JIVREJH1EZ6AZcu/z2lg3oHTdtAyn/uXQcSalNAG41+zEJnayia1YBqrom+7dktsfe8A21ExCzaC1TePQqokp3O89jZFCt4mJEgTAbCeJeo4F3wAJFde/CLCKSeWhwJAqv1PGYanMsBYAhpVdQra/PcVPmyKzS0BcDE760A5Bamx/2Tia7CpYyXpGWym7dCZDYuka5q1HITciqhtTMsvleL9jwKYNrrUwUWOV3KQvDvvWZaOUayMiYUh/lGN3FfI4v2znkTPK6wEK5g4tp/uMtq4IhVXQvH+yXQz2iczd6VGjdbT6NkKvIHtf9abHWzqhCm+Ul2loIVGudHat1dcVcCT7/yLGIA1ArRPmTCfULFXaHIS2llMtEmdOHuqx7+/DhLNr66QC6CvygPSbzDB+hzinh4D4dmOtkq7Ljw75dMODZxAV3vSBVXsnnXudWk/G06/rM61pCLLy5JsiBVfjTGzm3ivMNSxiKiWLZv9CDofxIU5Atp1+NYIccWBy+HNbyGYCRJTh5uK86xR1D4azWfnYQVmfLS/uu5s0nHxvkKBpSq/Otsq4De9mpyU84EvcSWATTSgw==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MWHPR1001MB2365.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(7916004)(366004)(33656002)(8936002)(86362001)(6486002)(508600001)(2906002)(38100700002)(7416002)(38350700002)(5660300002)(186003)(44832011)(66946007)(66476007)(66556008)(4326008)(83380400001)(8676002)(26005)(316002)(52116002)(54906003)(9686003)(6512007)(1076003)(110136005)(6506007)(6666004)(33716001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?G8p7VV9kuYDVY/YympCjcM9AfK808HdFh+Uh9GsatJ4qhvyKTGGyt5zUgpE4?=
- =?us-ascii?Q?WhV05nV9YoMHcTdRrceDsFnhHftK13ANoC1CprJx/6y+Dr7Wmuh4CX08pM/i?=
- =?us-ascii?Q?6jmfVlwJGixI3NmjMDxCZ0pGMRkCDR334BsLMaEVO0pIj5MqzFaz77lzRX7z?=
- =?us-ascii?Q?Re4gwwN52T4C/GUUEbRi+uaul/p8vUb2LB7Jd57J+BeOq2k7CTTdwC5sIVTV?=
- =?us-ascii?Q?rPpxzuZpD3OlBzH2RtIXv8GYVsS8+KhXiduSVJfofCIXxRHYpKSuhmP+SPOZ?=
- =?us-ascii?Q?/Y2zhGERC6k8Ns5scXR8FaHpFmFwBL7/qQEwWo8D+jiaaNnPoO8j6Jwa/G7+?=
- =?us-ascii?Q?LTR+kJCKoYDAkkU9V1WunAHCPM54J67d9DhXrvhk+feRTTBl8gcFmxVOZWla?=
- =?us-ascii?Q?/FY7LojtvqVMf6snUDM0tUjLSqbg3bj57va/Bvsd0yq/lh9Be9NCLHfs4nBG?=
- =?us-ascii?Q?uIDlAcVmjzyhokERgBcThJBQSPZySIXsy/W+8yhcVGPbaqEgVCHyujnBYJbk?=
- =?us-ascii?Q?4YeYyy3ICxE1afRvPhZ6LgTTtLH1Ugp8OWcywDcMaI5eEikRcGzY9c6dlMSK?=
- =?us-ascii?Q?HMpKMFWNS6alUb7HKEOQqZN06Ad+6sMxQ19ksmIex0o3KUFU24FjtHpopmSj?=
- =?us-ascii?Q?KIs/PtrRL348kZFCyCNUiGnXoWmdCSQ1/MfDC0fiV1nZsRoRcYBNPpgRkpzA?=
- =?us-ascii?Q?ZTZQk0co1YcVLkOO+U3noX847yzxrNZL7a6hhC+q1NWVDBfoF25bSELqfPTv?=
- =?us-ascii?Q?BBbnqP+AqltTpjO4pRAs7uC5Vz2jy3vmySODiNz0faz6lqglhzFaL1Og9qjZ?=
- =?us-ascii?Q?QAj+I8GEYM4OIL2b5GlJEMEv581H2Ef6/3LXjr3KaQQMzTJ7weg7x7mXbyAF?=
- =?us-ascii?Q?nNZ05EJltoABUOBPHXj9bFd2hD5MOA1vYaBVHUdaGa90HDMdul4w++mM2cQG?=
- =?us-ascii?Q?A18QDi2KEjp91S64ZKT7T5Ihi7JHEI8a5HqLXySe/KYFxk5H54Tgzng9TgfW?=
- =?us-ascii?Q?uOIE6zGyPxHa6Dob8T5JHhjCsAhNUt1ozjJbcrZ85Edgeu7j7B+Tcb5+4wb4?=
- =?us-ascii?Q?U1rTfjwNNK31jNtxXh02gWFyIOHQZTT8xaEO8H8KfIfLrakpZNbnseSf2WCS?=
- =?us-ascii?Q?PoshDdXnLpcV0++FwTNGedkVMMYfygfiXeFaM9DTOT4E4Jzv0+9WxHyiGl2r?=
- =?us-ascii?Q?Lw3XM786plpNcZvvq0vYUIYW0VKwW9dMaueDRqmVIyKQvaO68GH6xiE+un6F?=
- =?us-ascii?Q?US9thhw8gcmO1+H1JhVkzdwXBpydDIhZA0Skx/dzlrXyuIsMUuqqo/AAGl2Z?=
- =?us-ascii?Q?nSJ+5qRrihrN9UZF0r5EYFTOtLmQfbTTGgv3Wv5XSwZEwZlqKsep83wWASNd?=
- =?us-ascii?Q?X7WucXmfdPK9pTShaudFXobdKTuAcLCeCb1Fj0KvN2HeVjMUNMTTVnrueqcg?=
- =?us-ascii?Q?cEXJuZ9hyMbIXokGkhXysp9IzeixFHIe7Mmi/rDiNdUi3/S9sNSfdZpEm1+l?=
- =?us-ascii?Q?htSOfmE8AXUk/ysLs5A3U3ONOaKKMK9dV5v1oGdzFKkH+m76LkqbhYXbydUj?=
- =?us-ascii?Q?UkILL97BszEialc0E5Q6WgP7dRxIHgJuIJyM4aNkdnVZoatX6AugP7jEmBd+?=
- =?us-ascii?Q?mMSzQp2e8K5FNylrHNmxhkTYndBbjz14VnsY8hkWhM4vtF3ERcum0MwDzjLh?=
- =?us-ascii?Q?Ua1Zqg=3D=3D?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 11f5896d-f5ef-45bc-a24d-08d9fb5b0fa8
-X-MS-Exchange-CrossTenant-AuthSource: MWHPR1001MB2365.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Mar 2022 08:11:17.7628
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: t2Qs/+jCLpraWZ9/wzO3IuaU3YrAOLvW+hVra6mIJgociCqoyvDuue47pZtDU/uNyRTAd1SGELw0SBjRRjn5QRX9QmwXrs/f4hchb8jwdkc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR10MB1760
-X-Proofpoint-Virus-Version: vendor=nai engine=6300 definitions=10272 signatures=684655
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 mlxscore=0 phishscore=0
- bulkscore=0 adultscore=0 spamscore=0 suspectscore=0 mlxlogscore=999
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2201110000
- definitions=main-2203010039
-X-Proofpoint-ORIG-GUID: RofqWjqxV951meHF2wkFY3gyCztKbivN
-X-Proofpoint-GUID: RofqWjqxV951meHF2wkFY3gyCztKbivN
-Message-ID-Hash: 5EJ2CHOROL43XPDDWSTHEICHXKRWCHDS
-X-Message-ID-Hash: 5EJ2CHOROL43XPDDWSTHEICHXKRWCHDS
-X-MailFrom: dan.carpenter@oracle.com
+References: <20211207123411.167006-1-christian.koenig@amd.com>
+ <20211207123411.167006-5-christian.koenig@amd.com> <YcOWyHzY22ZCCvef@phenom.ffwll.local>
+ <95929048-b381-78d1-462c-e7b910c784b0@gmail.com> <YeGlbLXXuUITZlQP@phenom.ffwll.local>
+ <0b7b9a9f-65d8-706e-163b-5363df426c8b@gmail.com>
+In-Reply-To: <0b7b9a9f-65d8-706e-163b-5363df426c8b@gmail.com>
+From: Jason Ekstrand <jason@jlekstrand.net>
+Date: Wed, 2 Mar 2022 11:39:36 -0600
+Message-ID: <CAOFGe97FoE7LZeUutMgi_THR9GAjvRNqfdroSFqPsjyWVqp83Q@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID-Hash: 5HRUG3Z6BDAC7A2OYK7Q24MDTADPOAHY
+X-Message-ID-Hash: 5HRUG3Z6BDAC7A2OYK7Q24MDTADPOAHY
+X-MailFrom: jason@jlekstrand.net
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Banajit Goswami <bgoswami@codeaurora.org>, Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, alsa-devel@alsa-project.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kernel-janitors@vger.kernel.org
+CC: Daniel Vetter <daniel@ffwll.ch>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Maling list - DRI developers <dri-devel@lists.freedesktop.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] ASoC: qcom: Fix error code in lpass_platform_copy()
+Subject: [Linaro-mm-sig] Re: [PATCH 04/24] dma-buf: add dma_resv_get_singleton v2
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5EJ2CHOROL43XPDDWSTHEICHXKRWCHDS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5HRUG3Z6BDAC7A2OYK7Q24MDTADPOAHY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: multipart/mixed; boundary="===============7038201082142502987=="
+
+--===============7038201082142502987==
+Content-Type: multipart/alternative; boundary="0000000000008bd1ee05d93fc430"
+
+--0000000000008bd1ee05d93fc430
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jan 17, 2022 at 5:26 AM Christian K=C3=B6nig <
+ckoenig.leichtzumerken@gmail.com> wrote:
+
+> Am 14.01.22 um 17:31 schrieb Daniel Vetter:
+> > On Mon, Jan 03, 2022 at 12:13:41PM +0100, Christian K=C3=B6nig wrote:
+> >> Am 22.12.21 um 22:21 schrieb Daniel Vetter:
+> >>> On Tue, Dec 07, 2021 at 01:33:51PM +0100, Christian K=C3=B6nig wrote:
+> >>>> Add a function to simplify getting a single fence for all the fences
+> in
+> >>>> the dma_resv object.
+> >>>>
+> >>>> v2: fix ref leak in error handling
+> >>>>
+> >>>> Signed-off-by: Christian K=C3=B6nig <christian.koenig@amd.com>
+> >>>> ---
+> >>>>    drivers/dma-buf/dma-resv.c | 52
+> ++++++++++++++++++++++++++++++++++++++
+> >>>>    include/linux/dma-resv.h   |  2 ++
+> >>>>    2 files changed, 54 insertions(+)
+> >>>>
+> >>>> diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/dma-resv.c
+> >>>> index 480c305554a1..694716a3d66d 100644
+> >>>> --- a/drivers/dma-buf/dma-resv.c
+> >>>> +++ b/drivers/dma-buf/dma-resv.c
+> >>>> @@ -34,6 +34,7 @@
+> >>>>     */
+> >>>>    #include <linux/dma-resv.h>
+> >>>> +#include <linux/dma-fence-array.h>
+> >>>>    #include <linux/export.h>
+> >>>>    #include <linux/mm.h>
+> >>>>    #include <linux/sched/mm.h>
+> >>>> @@ -657,6 +658,57 @@ int dma_resv_get_fences(struct dma_resv *obj,
+> bool write,
+> >>>>    }
+> >>>>    EXPORT_SYMBOL_GPL(dma_resv_get_fences);
+> >>>> +/**
+> >>>> + * dma_resv_get_singleton - Get a single fence for all the fences
+> >>>> + * @obj: the reservation object
+> >>>> + * @write: true if we should return all fences
+> >>>> + * @fence: the resulting fence
+> >>>> + *
+> >>>> + * Get a single fence representing all the fences inside the resv
+> object.
+> >>>> + * Returns either 0 for success or -ENOMEM.
+> >>>> + *
+> >>>> + * Warning: This can't be used like this when adding the fence back
+> to the resv
+> >>>> + * object since that can lead to stack corruption when finalizing t=
+he
+> >>>> + * dma_fence_array.
+> >>> Uh I don't get this one? I thought the only problem with nested fence=
+s
+> is
+> >>> the signalling recursion, which we work around with the irq_work?
+> >> Nope, the main problem is finalizing the dma_fence_array.
+> >>
+> >> E.g. imagine that you build up a chain of dma_fence_array objects like
+> this:
+> >> a<-b<-c<-d<-e<-f.....
+> >>
+> >> With each one referencing the previous dma_fence_array and then you ca=
+ll
+> >> dma_fence_put() on the last one. That in turn will cause calling
+> >> dma_fence_put() on the previous one, which in turn will cause
+> >> dma_fence_put() one the one before the previous one etc....
+> >>
+> >> In other words you recurse because each dma_fence_array instance drops
+> the
+> >> last reference of it's predecessor.
+> >>
+> >> What we could do is to delegate dropping the reference to the containi=
+ng
+> >> fences in a dma_fence_array as well, but that would require some
+> changes to
+> >> the irq_work_run_list() function to be halve way efficient.o
+> >>
+> >>> Also if there's really an issue with dma_fence_array fences, then tha=
+t
+> >>> warning should be on the dma_resv kerneldoc, not somewhere hidden lik=
+e
+> >>> this. And finally I really don't see what can go wrong, sure we'll en=
+d
+> up
+> >>> with the same fence once in the dma_resv_list and then once more in t=
+he
+> >>> fence array. But they're all refcounted, so really shouldn't matter.
+> >>>
+> >>> The code itself looks correct, but me not understanding what even goe=
+s
+> >>> wrong here freaks me out a bit.
+> >> Yeah, IIRC we already discussed that with Jason in length as well.
+> >>
+> >> Essentially what you can't do is to put a dma_fence_array into another
+> >> dma_fence_array without causing issues.
+> >>
+> >> So I think we should maybe just add a WARN_ON() into
+> dma_fence_array_init()
+> >> to make sure that this never happens.
+> > Yeah I think this would be much clearer instead of sprinkling half the
+> > story as a scary&confusing warning over all kinds of users which
+> > internally use dma fence arrays.
+>
+
+Agreed.  WARN_ON in dma_fence_array_init() would be better for everyone, I
+think.
+
+
+> > And then if it goes boom I guess we could fix it internally in
+> > dma_fence_array_init by flattening fences down again. But only if
+> actually
+> > needed.
+>
+> Ok, going to do that first then.
+>
+
+Sounds good.  This patch looks pretty reasonable to me.  I do have a bit of
+a concern with how it's being used to replace calls to
+dma_resv_excl_fence() in later patches, though.  In particular, this may
+allocate memory whereas dma_resv_excl_fence() does not so we need to be
+really careful in each of the replacements that doing so is safe.  That's a
+job for the per-driver reviewers but I thought I'd drop a note here so
+we're all aware of and watching for it.
+
+--Jason
+
+
+> >
+> > What confused me is why dma_resv is special, and from your reply it
+> sounds
+> > like it really isn't.
+>
+> Well, it isn't special in any way. It's just something very obvious
+> which could go wrong.
+>
+> Regards,
+> Christian.
+>
+> > -Daniel
+> >
+> >
+> >> Regards,
+> >> Christian.
+> >>
+> >>> I guess something to figure out next year, I kinda hoped I could
+> squeeze a
+> >>> review in before I disappear :-/
+> >>> -Daniel
+> >>>
+> >>>> + */
+> >>>> +int dma_resv_get_singleton(struct dma_resv *obj, bool write,
+> >>>> +                     struct dma_fence **fence)
+> >>>> +{
+> >>>> +  struct dma_fence_array *array;
+> >>>> +  struct dma_fence **fences;
+> >>>> +  unsigned count;
+> >>>> +  int r;
+> >>>> +
+> >>>> +  r =3D dma_resv_get_fences(obj, write, &count, &fences);
+> >>>> +        if (r)
+> >>>> +          return r;
+> >>>> +
+> >>>> +  if (count =3D=3D 0) {
+> >>>> +          *fence =3D NULL;
+> >>>> +          return 0;
+> >>>> +  }
+> >>>> +
+> >>>> +  if (count =3D=3D 1) {
+> >>>> +          *fence =3D fences[0];
+> >>>> +          kfree(fences);
+> >>>> +          return 0;
+> >>>> +  }
+> >>>> +
+> >>>> +  array =3D dma_fence_array_create(count, fences,
+> >>>> +                                 dma_fence_context_alloc(1),
+> >>>> +                                 1, false);
+> >>>> +  if (!array) {
+> >>>> +          while (count--)
+> >>>> +                  dma_fence_put(fences[count]);
+> >>>> +          kfree(fences);
+> >>>> +          return -ENOMEM;
+> >>>> +  }
+> >>>> +
+> >>>> +  *fence =3D &array->base;
+> >>>> +  return 0;
+> >>>> +}
+> >>>> +EXPORT_SYMBOL_GPL(dma_resv_get_singleton);
+> >>>> +
+> >>>>    /**
+> >>>>     * dma_resv_wait_timeout - Wait on reservation's objects
+> >>>>     * shared and/or exclusive fences.
+> >>>> diff --git a/include/linux/dma-resv.h b/include/linux/dma-resv.h
+> >>>> index fa2002939b19..cdfbbda6f600 100644
+> >>>> --- a/include/linux/dma-resv.h
+> >>>> +++ b/include/linux/dma-resv.h
+> >>>> @@ -438,6 +438,8 @@ void dma_resv_replace_fences(struct dma_resv
+> *obj, uint64_t context,
+> >>>>    void dma_resv_add_excl_fence(struct dma_resv *obj, struct
+> dma_fence *fence);
+> >>>>    int dma_resv_get_fences(struct dma_resv *obj, bool write,
+> >>>>                            unsigned int *num_fences, struct dma_fenc=
+e
+> ***fences);
+> >>>> +int dma_resv_get_singleton(struct dma_resv *obj, bool write,
+> >>>> +                     struct dma_fence **fence);
+> >>>>    int dma_resv_copy_fences(struct dma_resv *dst, struct dma_resv
+> *src);
+> >>>>    long dma_resv_wait_timeout(struct dma_resv *obj, bool wait_all,
+> bool intr,
+> >>>>                               unsigned long timeout);
+> >>>> --
+> >>>> 2.25.1
+> >>>>
+>
+>
+
+--0000000000008bd1ee05d93fc430
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail=
+_attr">On Mon, Jan 17, 2022 at 5:26 AM Christian K=C3=B6nig &lt;<a href=3D"=
+mailto:ckoenig.leichtzumerken@gmail.com">ckoenig.leichtzumerken@gmail.com</=
+a>&gt; wrote:<br></div><blockquote class=3D"gmail_quote" style=3D"margin:0p=
+x 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">Am=
+ 14.01.22 um 17:31 schrieb Daniel Vetter:<br>
+&gt; On Mon, Jan 03, 2022 at 12:13:41PM +0100, Christian K=C3=B6nig wrote:<=
+br>
+&gt;&gt; Am 22.12.21 um 22:21 schrieb Daniel Vetter:<br>
+&gt;&gt;&gt; On Tue, Dec 07, 2021 at 01:33:51PM +0100, Christian K=C3=B6nig=
+ wrote:<br>
+&gt;&gt;&gt;&gt; Add a function to simplify getting a single fence for all =
+the fences in<br>
+&gt;&gt;&gt;&gt; the dma_resv object.<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; v2: fix ref leak in error handling<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; Signed-off-by: Christian K=C3=B6nig &lt;<a href=3D"mailto:=
+christian.koenig@amd.com" target=3D"_blank">christian.koenig@amd.com</a>&gt=
+;<br>
+&gt;&gt;&gt;&gt; ---<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 drivers/dma-buf/dma-resv.c | 52 +++++++++++++=
++++++++++++++++++++++++++<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 include/linux/dma-resv.h=C2=A0 =C2=A0|=C2=A0 =
+2 ++<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 2 files changed, 54 insertions(+)<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; diff --git a/drivers/dma-buf/dma-resv.c b/drivers/dma-buf/=
+dma-resv.c<br>
+&gt;&gt;&gt;&gt; index 480c305554a1..694716a3d66d 100644<br>
+&gt;&gt;&gt;&gt; --- a/drivers/dma-buf/dma-resv.c<br>
+&gt;&gt;&gt;&gt; +++ b/drivers/dma-buf/dma-resv.c<br>
+&gt;&gt;&gt;&gt; @@ -34,6 +34,7 @@<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0*/<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 #include &lt;linux/dma-resv.h&gt;<br>
+&gt;&gt;&gt;&gt; +#include &lt;linux/dma-fence-array.h&gt;<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 #include &lt;linux/export.h&gt;<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 #include &lt;linux/mm.h&gt;<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 #include &lt;linux/sched/mm.h&gt;<br>
+&gt;&gt;&gt;&gt; @@ -657,6 +658,57 @@ int dma_resv_get_fences(struct dma_re=
+sv *obj, bool write,<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 }<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 EXPORT_SYMBOL_GPL(dma_resv_get_fences);<br>
+&gt;&gt;&gt;&gt; +/**<br>
+&gt;&gt;&gt;&gt; + * dma_resv_get_singleton - Get a single fence for all th=
+e fences<br>
+&gt;&gt;&gt;&gt; + * @obj: the reservation object<br>
+&gt;&gt;&gt;&gt; + * @write: true if we should return all fences<br>
+&gt;&gt;&gt;&gt; + * @fence: the resulting fence<br>
+&gt;&gt;&gt;&gt; + *<br>
+&gt;&gt;&gt;&gt; + * Get a single fence representing all the fences inside =
+the resv object.<br>
+&gt;&gt;&gt;&gt; + * Returns either 0 for success or -ENOMEM.<br>
+&gt;&gt;&gt;&gt; + *<br>
+&gt;&gt;&gt;&gt; + * Warning: This can&#39;t be used like this when adding =
+the fence back to the resv<br>
+&gt;&gt;&gt;&gt; + * object since that can lead to stack corruption when fi=
+nalizing the<br>
+&gt;&gt;&gt;&gt; + * dma_fence_array.<br>
+&gt;&gt;&gt; Uh I don&#39;t get this one? I thought the only problem with n=
+ested fences is<br>
+&gt;&gt;&gt; the signalling recursion, which we work around with the irq_wo=
+rk?<br>
+&gt;&gt; Nope, the main problem is finalizing the dma_fence_array.<br>
+&gt;&gt;<br>
+&gt;&gt; E.g. imagine that you build up a chain of dma_fence_array objects =
+like this:<br>
+&gt;&gt; a&lt;-b&lt;-c&lt;-d&lt;-e&lt;-f.....<br>
+&gt;&gt;<br>
+&gt;&gt; With each one referencing the previous dma_fence_array and then yo=
+u call<br>
+&gt;&gt; dma_fence_put() on the last one. That in turn will cause calling<b=
+r>
+&gt;&gt; dma_fence_put() on the previous one, which in turn will cause<br>
+&gt;&gt; dma_fence_put() one the one before the previous one etc....<br>
+&gt;&gt;<br>
+&gt;&gt; In other words you recurse because each dma_fence_array instance d=
+rops the<br>
+&gt;&gt; last reference of it&#39;s predecessor.<br>
+&gt;&gt;<br>
+&gt;&gt; What we could do is to delegate dropping the reference to the cont=
+aining<br>
+&gt;&gt; fences in a dma_fence_array as well, but that would require some c=
+hanges to<br>
+&gt;&gt; the irq_work_run_list() function to be halve way efficient.o<br>
+&gt;&gt;<br>
+&gt;&gt;&gt; Also if there&#39;s really an issue with dma_fence_array fence=
+s, then that<br>
+&gt;&gt;&gt; warning should be on the dma_resv kerneldoc, not somewhere hid=
+den like<br>
+&gt;&gt;&gt; this. And finally I really don&#39;t see what can go wrong, su=
+re we&#39;ll end up<br>
+&gt;&gt;&gt; with the same fence once in the dma_resv_list and then once mo=
+re in the<br>
+&gt;&gt;&gt; fence array. But they&#39;re all refcounted, so really shouldn=
+&#39;t matter.<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; The code itself looks correct, but me not understanding what e=
+ven goes<br>
+&gt;&gt;&gt; wrong here freaks me out a bit.<br>
+&gt;&gt; Yeah, IIRC we already discussed that with Jason in length as well.=
+<br>
+&gt;&gt;<br>
+&gt;&gt; Essentially what you can&#39;t do is to put a dma_fence_array into=
+ another<br>
+&gt;&gt; dma_fence_array without causing issues.<br>
+&gt;&gt;<br>
+&gt;&gt; So I think we should maybe just add a WARN_ON() into dma_fence_arr=
+ay_init()<br>
+&gt;&gt; to make sure that this never happens.<br>
+&gt; Yeah I think this would be much clearer instead of sprinkling half the=
+<br>
+&gt; story as a scary&amp;confusing warning over all kinds of users which<b=
+r>
+&gt; internally use dma fence arrays.<br></blockquote><div><br></div><div>A=
+greed.=C2=A0 WARN_ON in dma_fence_array_init() would be better for everyone=
+, I think.<br></div><div>=C2=A0</div><blockquote class=3D"gmail_quote" styl=
+e=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);paddin=
+g-left:1ex">
+&gt; And then if it goes boom I guess we could fix it internally in<br>
+&gt; dma_fence_array_init by flattening fences down again. But only if actu=
+ally<br>
+&gt; needed.<br>
+<br>
+Ok, going to do that first then.<br></blockquote><div><br></div><div>Sounds=
+ good.=C2=A0 This patch looks pretty reasonable to me.=C2=A0 I do have a bi=
+t of a concern with how it&#39;s being used to replace calls to dma_resv_ex=
+cl_fence() in later patches, though.=C2=A0 In particular, this may allocate=
+ memory whereas dma_resv_excl_fence() does not so we need to be really care=
+ful in each of the replacements that doing so is safe.=C2=A0 That&#39;s a j=
+ob for the per-driver reviewers but I thought I&#39;d drop a note here so w=
+e&#39;re all aware of and watching for it.</div><div><br></div><div>--Jason=
+<br></div><div>=C2=A0</div><blockquote class=3D"gmail_quote" style=3D"margi=
+n:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex=
+">
+&gt;<br>
+&gt; What confused me is why dma_resv is special, and from your reply it so=
+unds<br>
+&gt; like it really isn&#39;t.<br>
+<br>
+Well, it isn&#39;t special in any way. It&#39;s just something very obvious=
+ <br>
+which could go wrong.<br>
+<br>
+Regards,<br>
+Christian.<br>
+<br>
+&gt; -Daniel<br>
+&gt;<br>
+&gt;<br>
+&gt;&gt; Regards,<br>
+&gt;&gt; Christian.<br>
+&gt;&gt;<br>
+&gt;&gt;&gt; I guess something to figure out next year, I kinda hoped I cou=
+ld squeeze a<br>
+&gt;&gt;&gt; review in before I disappear :-/<br>
+&gt;&gt;&gt; -Daniel<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; + */<br>
+&gt;&gt;&gt;&gt; +int dma_resv_get_singleton(struct dma_resv *obj, bool wri=
+te,<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0struct dma_fence **fence)<br>
+&gt;&gt;&gt;&gt; +{<br>
+&gt;&gt;&gt;&gt; +=C2=A0 struct dma_fence_array *array;<br>
+&gt;&gt;&gt;&gt; +=C2=A0 struct dma_fence **fences;<br>
+&gt;&gt;&gt;&gt; +=C2=A0 unsigned count;<br>
+&gt;&gt;&gt;&gt; +=C2=A0 int r;<br>
+&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt; +=C2=A0 r =3D dma_resv_get_fences(obj, write, &amp;count, =
+&amp;fences);<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 if (r)<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return r;<br>
+&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt; +=C2=A0 if (count =3D=3D 0) {<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *fence =3D NULL;<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return 0;<br>
+&gt;&gt;&gt;&gt; +=C2=A0 }<br>
+&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt; +=C2=A0 if (count =3D=3D 1) {<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *fence =3D fences[0];<=
+br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 kfree(fences);<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return 0;<br>
+&gt;&gt;&gt;&gt; +=C2=A0 }<br>
+&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt; +=C2=A0 array =3D dma_fence_array_create(count, fences,<br=
+>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0dma_fence_con=
+text_alloc(1),<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A01, false);<br=
+>
+&gt;&gt;&gt;&gt; +=C2=A0 if (!array) {<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 while (count--)<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 dma_fence_put(fences[count]);<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 kfree(fences);<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 return -ENOMEM;<br>
+&gt;&gt;&gt;&gt; +=C2=A0 }<br>
+&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt; +=C2=A0 *fence =3D &amp;array-&gt;base;<br>
+&gt;&gt;&gt;&gt; +=C2=A0 return 0;<br>
+&gt;&gt;&gt;&gt; +}<br>
+&gt;&gt;&gt;&gt; +EXPORT_SYMBOL_GPL(dma_resv_get_singleton);<br>
+&gt;&gt;&gt;&gt; +<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 /**<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0* dma_resv_wait_timeout - Wait on reser=
+vation&#39;s objects<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0* shared and/or exclusive fences.<br>
+&gt;&gt;&gt;&gt; diff --git a/include/linux/dma-resv.h b/include/linux/dma-=
+resv.h<br>
+&gt;&gt;&gt;&gt; index fa2002939b19..cdfbbda6f600 100644<br>
+&gt;&gt;&gt;&gt; --- a/include/linux/dma-resv.h<br>
+&gt;&gt;&gt;&gt; +++ b/include/linux/dma-resv.h<br>
+&gt;&gt;&gt;&gt; @@ -438,6 +438,8 @@ void dma_resv_replace_fences(struct dm=
+a_resv *obj, uint64_t context,<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 void dma_resv_add_excl_fence(struct dma_resv =
+*obj, struct dma_fence *fence);<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 int dma_resv_get_fences(struct dma_resv *obj,=
+ bool write,<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 unsigned int *num_fences, struct dma=
+_fence ***fences);<br>
+&gt;&gt;&gt;&gt; +int dma_resv_get_singleton(struct dma_resv *obj, bool wri=
+te,<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0struct dma_fence **fence);<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 int dma_resv_copy_fences(struct dma_resv *dst=
+, struct dma_resv *src);<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 long dma_resv_wait_timeout(struct dma_resv *o=
+bj, bool wait_all, bool intr,<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0unsigned long timeout);=
+<br>
+&gt;&gt;&gt;&gt; -- <br>
+&gt;&gt;&gt;&gt; 2.25.1<br>
+&gt;&gt;&gt;&gt;<br>
+<br>
+</blockquote></div></div>
+
+--0000000000008bd1ee05d93fc430--
+
+--===============7038201082142502987==
 Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-
-The copy_to/from_user() functions return the number of bytes remaining
-to be copied.  This function needs to return negative error codes
-because snd_soc_pcm_component_copy_user() treats positive returns as
-success in soc_component_ret().
-
-Fixes: 7d7209557b67 ("ASoC: qcom: Add support for codec dma driver")
-Signed-off-by: Dan Carpenter <dan.carpenter@oracle.com>
----
- sound/soc/qcom/lpass-platform.c | 16 ++++++++++------
- 1 file changed, 10 insertions(+), 6 deletions(-)
-
-diff --git a/sound/soc/qcom/lpass-platform.c b/sound/soc/qcom/lpass-platform.c
-index bf180a594c19..620312529c2f 100644
---- a/sound/soc/qcom/lpass-platform.c
-+++ b/sound/soc/qcom/lpass-platform.c
-@@ -1228,15 +1228,19 @@ static int lpass_platform_copy(struct snd_soc_component *component,
- 				channel * (rt->dma_bytes / rt->channels));
- 
- 	if (substream->stream == SNDRV_PCM_STREAM_PLAYBACK) {
--		if (is_cdc_dma_port(dai_id))
-+		if (is_cdc_dma_port(dai_id)) {
- 			ret = copy_from_user_toio(dma_buf, buf, bytes);
--		else
--			ret = copy_from_user((void __force *)dma_buf, buf, bytes);
-+		} else {
-+			if (copy_from_user((void __force *)dma_buf, buf, bytes))
-+				ret = -EFAULT;
-+		}
- 	} else if (substream->stream == SNDRV_PCM_STREAM_CAPTURE) {
--		if (is_cdc_dma_port(dai_id))
-+		if (is_cdc_dma_port(dai_id)) {
- 			ret = copy_to_user_fromio(buf, dma_buf, bytes);
--		else
--			ret = copy_to_user(buf, (void __force *)dma_buf, bytes);
-+		} else {
-+			if (copy_to_user(buf, (void __force *)dma_buf, bytes))
-+				ret = -EFAULT;
-+		}
- 	}
- 
- 	return ret;
--- 
-2.20.1
+Content-Disposition: inline
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============7038201082142502987==--
