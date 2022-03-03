@@ -2,50 +2,52 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01CD94EACDD
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 14:08:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4A54A4EACDE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 14:08:44 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 331223EC06
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 12:08:37 +0000 (UTC)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-	by lists.linaro.org (Postfix) with ESMTPS id 4EC083EB7E
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  2 Mar 2022 17:00:54 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	by lists.linaro.org (Postfix) with ESMTP id 812043EC04
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 12:08:43 +0000 (UTC)
+Received: from ssl.serverraum.org (ssl.serverraum.org [176.9.125.105])
+	by lists.linaro.org (Postfix) with ESMTPS id B74C93ECC0
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  3 Mar 2022 16:17:31 +0000 (UTC)
+Received: from mwalle01.kontron.local. (unknown [213.135.10.150])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-384) server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by ams.source.kernel.org (Postfix) with ESMTPS id 30FEFB820F9;
-	Wed,  2 Mar 2022 17:00:53 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3C66DC340ED;
-	Wed,  2 Mar 2022 17:00:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1646240451;
-	bh=/gWvP2vsXd8rkLtqrnHFSfxrMj9k6L9zIS6GLOLcGZg=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
-	b=ihaxAi5YdgX++mOBAWXxCQiSAgVpJ1bm319KXG1/l9w5dIEJ8a49WBAF0bnnhJHwe
-	 OFWyNQYEzX7m15f5Ps7Lg/sz5VKQzjHbIajYbHKu4sArBHTdEioYzPR4rteswDlU0x
-	 xwY5zGHUzdv07pXhhBNzZvhl1HN69wbhWvKYN1Sa3Kg7hfzcZAoMXh1U2YdQ1TLco5
-	 qLIVTWM44ydf7rF4+SSZWTXfkDZ45GSyhidRet+RmpxNsjwaCgqBCrpLe9RrxuIvQr
-	 YmMfZwPbRoY1FMx7syHCdW6/V+IGZgcJ8QfCtpAtc2D/FtrhuaXq8vOuB91hG71BY/
-	 /lvtCeFIJ5BvA==
-From: Mark Brown <broonie@kernel.org>
-To: Srinivasa Rao Mandadapu <quic_srivasam@quicinc.com>, Dan Carpenter <dan.carpenter@oracle.com>, Srinivas Kandagatla <srinivas.kandagatla@linaro.org>
-In-Reply-To: <20220301081104.GB17375@kili>
-References: <20220301081104.GB17375@kili>
-Message-Id: <164624044896.1145067.17126236966898923867.b4-ty@kernel.org>
-Date: Wed, 02 Mar 2022 17:00:48 +0000
+	by ssl.serverraum.org (Postfix) with ESMTPSA id 49F902223B;
+	Thu,  3 Mar 2022 17:17:29 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc; s=mail2016061301;
+	t=1646324250;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=PFcCtGt63rBp0kucxIHsntg/HdnJkcA4oD5l63d9a3E=;
+	b=JbU6lT9gA0vzBY0dz3e94kJ/OGyeZJZSJbYWL+9fPmX7eKB6GJwz6P+MsJyn2SN0XoS1vF
+	hr9Jc10NWzX5jilTfcOPebKpTC9S9c47WGfEPHwdX5E+uvK6La+F+gZp2x7b7mgH2aBxBX
+	95jxKtw4oDFeZ1hQ1aEF6AlUXePndvw=
+From: Michael Walle <michael@walle.cc>
+To: Codrin Ciubotariu <codrin.ciubotariu@microchip.com>,
+	Nicolas Ferre <nicolas.ferre@microchip.com>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Claudiu Beznea <claudiu.beznea@microchip.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Date: Thu,  3 Mar 2022 17:17:24 +0100
+Message-Id: <20220303161724.3324948-1-michael@walle.cc>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-X-MailFrom: broonie@kernel.org
+X-MailFrom: michael@walle.cc
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: VS2LTGCOIYNB6PAXB5QNMJN2LMWCHLUI
-X-Message-ID-Hash: VS2LTGCOIYNB6PAXB5QNMJN2LMWCHLUI
-X-Mailman-Approved-At: Tue, 29 Mar 2022 12:08:26 +0000
-CC: dri-devel@lists.freedesktop.org, Takashi Iwai <tiwai@suse.com>, =?utf-8?b?Q2hyaXN0aWFuIEvvv73vv71uaWc=?= <christian.koenig@amd.com>, kernel-janitors@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Banajit Goswami <bgoswami@codeaurora.org>, Liam Girdwood <lgirdwood@gmail.com>, alsa-devel@alsa-project.org, Jaroslav Kysela <perex@perex.cz>, linux-media@vger.kernel.org
+Message-ID-Hash: Z4C6DENBMCTRTEYOHTHN4F4QME6QPUQQ
+X-Message-ID-Hash: Z4C6DENBMCTRTEYOHTHN4F4QME6QPUQQ
+X-Mailman-Approved-At: Tue, 29 Mar 2022 12:08:28 +0000
+CC: linux-i2c@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Michael Walle <michael@walle.cc>, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] ASoC: qcom: Fix error code in lpass_platform_copy()
+Subject: [Linaro-mm-sig] [PATCH] i2c: at91: use dma safe buffers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VS2LTGCOIYNB6PAXB5QNMJN2LMWCHLUI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Z4C6DENBMCTRTEYOHTHN4F4QME6QPUQQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -55,41 +57,58 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, 1 Mar 2022 11:11:04 +0300, Dan Carpenter wrote:
-> The copy_to/from_user() functions return the number of bytes remaining
-> to be copied.  This function needs to return negative error codes
-> because snd_soc_pcm_component_copy_user() treats positive returns as
-> success in soc_component_ret().
-> 
-> 
+The supplied buffer might be on the stack and we get the following error
+message:
+[    3.312058] at91_i2c e0070600.i2c: rejecting DMA map of vmalloc memory
 
-Applied to
+Use i2c_{get,put}_dma_safe_msg_buf() to get a DMA-able memory region if
+necessary.
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-next
+Cc: stable@vger.kernel.org
+Signed-off-by: Michael Walle <michael@walle.cc>
+---
 
-Thanks!
+I'm not sure if or which Fixes: tag I should add to this patch. The issue
+seems to be since a very long time, but nobody seem to have triggered it.
+FWIW, I'm using the sff,sfp driver, which triggers this.
 
-[1/1] ASoC: qcom: Fix error code in lpass_platform_copy()
-      commit: d5dd781bcc81aa31b62310927f25cfa2574450f1
+ drivers/i2c/busses/i2c-at91-master.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
+diff --git a/drivers/i2c/busses/i2c-at91-master.c b/drivers/i2c/busses/i2c-at91-master.c
+index b0eae94909f4..a7a22fedbaba 100644
+--- a/drivers/i2c/busses/i2c-at91-master.c
++++ b/drivers/i2c/busses/i2c-at91-master.c
+@@ -656,6 +656,7 @@ static int at91_twi_xfer(struct i2c_adapter *adap, struct i2c_msg *msg, int num)
+ 	unsigned int_addr_flag = 0;
+ 	struct i2c_msg *m_start = msg;
+ 	bool is_read;
++	u8 *dma_buf;
+ 
+ 	dev_dbg(&adap->dev, "at91_xfer: processing %d messages:\n", num);
+ 
+@@ -703,7 +704,18 @@ static int at91_twi_xfer(struct i2c_adapter *adap, struct i2c_msg *msg, int num)
+ 	dev->msg = m_start;
+ 	dev->recv_len_abort = false;
+ 
++	if (dev->use_dma) {
++		dma_buf = i2c_get_dma_safe_msg_buf(m_start, 1);
++		if (!dma_buf) {
++			ret = -ENOMEM;
++			goto out;
++		}
++		dev->buf = dma_buf;
++	}
++
++
+ 	ret = at91_do_twi_transfer(dev);
++	i2c_put_dma_safe_msg_buf(dma_buf, m_start, !ret);
+ 
+ 	ret = (ret < 0) ? ret : num;
+ out:
+-- 
+2.30.2
 
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
-
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
