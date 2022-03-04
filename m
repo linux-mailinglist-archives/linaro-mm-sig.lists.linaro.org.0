@@ -2,41 +2,41 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C08F4CCFA5
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Mar 2022 09:11:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E27D34CD083
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Mar 2022 09:54:38 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AA53B3EF55
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Mar 2022 08:11:11 +0000 (UTC)
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com (mail-sn1anam02on2049.outbound.protection.outlook.com [40.107.96.49])
-	by lists.linaro.org (Postfix) with ESMTPS id A38BA3ECAA
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  4 Mar 2022 08:11:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2417D3EF5A
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Mar 2022 08:54:38 +0000 (UTC)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2083.outbound.protection.outlook.com [40.107.94.83])
+	by lists.linaro.org (Postfix) with ESMTPS id 9760F3EDFB
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  4 Mar 2022 08:54:35 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=MSZ5p74Zh2DFGU5qzxMbJxeAuUaHyZpot+2Em0ii2EHBLEzoD+H3i/j+mPfEWDnKwOvMrsakhFuzTPcSQNgjC9J3o8RAeW0nCsJJjZxi9bf8Y2wDUzbCTeuddnG4CP1RQAQijk6HTP4SoBlbRzfDXXG9/k5PEvvWzbz6Mdp6BO7DfUAFS5d8PknE8UlE4hZPGhJ98SIAqg+B+gWvw7NIu7Ni3c31rIwbAFR+mTmgDtdbLk3rr+RKZyRLaAGEmRufrnlS30iN10AMn37++EJCZ/Gd3n/vDnxDlZxVboeFLNjjMXS3MabHEWFX+DIx/xHQabdUfY2wrpMEgm0eNbK5Fw==
+ b=hn8wcRvhNK2pDXNMoWtzA0IxQyEZpqG/jIM4ZIfUq3ocrepCdchydmVd9+2j8BYwHLaD/HTkiwklAJ3saqSgXy+Bdil96vZP2A9VZeTQfVJag9a5xHq2RWPTkAigqoVex3qGECCh9Fir0XMuaN1TaLUldtp+OCXdwpWHiqSrYe2+lTeZ/MIgUqzmjpfsC51vA+07vdhq99bpXly9E+d3crJ6x0/Y5vCMD9YRnOJhwK1ZTwxyGC2rPeklaXDLihXHa0/8AYgxJWz2ioNZ/0eJSoBMS/vQAXx/mlbThmdJL5oai92buhRp6Zdol4ryRRkacwUq+jEbVZbvh66CI2/VnA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FU6US8/3SiUBDXs3+HUAOgMF/KkysQPS4IHL1+wKVJA=;
- b=KFt948GIFm5RFQGfDPCxv4sSBTVAePTdGgPJcUD53CRseNGPX4Jtc3ZyBPq7h67lWc0oppsZG26reGinDjOpy9xd61E6ci2jz/XJe06isiE33lEvDS9AlDNqEF+3uLFVDjFr1x63Wn7Q50NQjoJr7egLNcJ7QkiXaBj6M856WpmxO/YcbUmRjZWeQ/lj6QgsvslEgDn1U9FPDz5Z9mzHT9iYL/CwPLJsUwz2IqMu2g9skxSlQlIQhVnacizyCsoTO8N6wmioJI+qw0QlaESuHw/Qyi6EJgsVvUjvjDNT7A0ap8MY9W/hb+YbLNGmPyXm9K0K65PsphHYjk7MVdQ3Cg==
+ bh=/r+MatPPCy0pohx0s7qXFkl3DnCYd4LOmBIhKQGzTS4=;
+ b=Ru/EosZHrGV3Y5/vsEQ9DYkSsFuJJcB64LDiSNZrTc0QbQ/8VtzL+UrpIsZFMEyxlnCwF6Eh1zz5AecBP8qwdA7bPi4FtkfR1NM2oHaEVlD9RrGoH9ar11Zk+NpOmr/7VOTd26W6MUH1ELcBTbDxVd/c2jYWFVKXOI5IcHdaxG7ivDXi1ArBLK4g+71HPxf+NeewYTiaPor1y7MdalyCXNrcGA0JUyzusUgS69C2aHdKtRaBFAlrxyqNI1p2/4wR9dEsoXxT50aacJJKVBhzNOF22e9ZEB584kZB8+aa4X141W9dGSluTQsGyfW+q9iK16eOUtdwGUoLWmNLbqQ0kA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FU6US8/3SiUBDXs3+HUAOgMF/KkysQPS4IHL1+wKVJA=;
- b=vyk559MEdQhobpieFGGbd6MYuDqYnvInmvr2FjOA60j4Oe2KuFsXmvKl9DASL/v2yAXTbfz84/5vbuGAVvhuN6q0uYvXNWjvI2Ms/xv4JFdUQeJFty4/CjahLMz9qEDObUuUPcb7sUqLTLJE4S8X+YPPgGdVG1kSoQe9UA0iMQ4=
+ bh=/r+MatPPCy0pohx0s7qXFkl3DnCYd4LOmBIhKQGzTS4=;
+ b=a6DoSsZEZtD/v1865SsRnVaoEfwjvgLyrZcdSUaUZVCnqfXgvJR0x57A1py5RsPYRtACBrq/Jcivl602kYzvFMmhvEZnPOXxmIb3q1e9vSCF7ZoLbFWX8aRSp7rJ2QYqERwhtsejnzngr/USwBSrdz9cvy+tB9uVrC71GsCcxTg=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by DS7PR12MB5933.namprd12.prod.outlook.com (2603:10b6:8:7c::14) with
+ by CY4PR12MB1816.namprd12.prod.outlook.com (2603:10b6:903:11c::18) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5038.14; Fri, 4 Mar
- 2022 08:11:06 +0000
+ 2022 08:54:33 +0000
 Received: from BN8PR12MB3587.namprd12.prod.outlook.com
  ([fe80::e03f:901a:be6c:b581]) by BN8PR12MB3587.namprd12.prod.outlook.com
  ([fe80::e03f:901a:be6c:b581%6]) with mapi id 15.20.5038.014; Fri, 4 Mar 2022
- 08:11:06 +0000
-Message-ID: <4e25e595-cccb-0970-67b3-fc215bfd5b14@amd.com>
-Date: Fri, 4 Mar 2022 09:10:58 +0100
+ 08:54:32 +0000
+Message-ID: <dbb0f319-5e54-8a86-fcee-2c88c9891898@amd.com>
+Date: Fri, 4 Mar 2022 09:54:24 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.5.0
 Content-Language: en-US
@@ -51,82 +51,83 @@ To: Wolfram Sang <wsa@kernel.org>, Michael Walle <michael@walle.cc>,
  linaro-mm-sig@lists.linaro.org, stable@vger.kernel.org
 References: <20220303161724.3324948-1-michael@walle.cc>
  <fff424e7-247c-38d8-4151-8b0503a16a7d@amd.com> <YiHIIjSs03gDJmHV@shikoro>
+ <4e25e595-cccb-0970-67b3-fc215bfd5b14@amd.com> <YiHRGa5bDJAuBuHj@shikoro>
 From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <YiHIIjSs03gDJmHV@shikoro>
-X-ClientProxiedBy: AS8PR04CA0188.eurprd04.prod.outlook.com
- (2603:10a6:20b:2f3::13) To BN8PR12MB3587.namprd12.prod.outlook.com
+In-Reply-To: <YiHRGa5bDJAuBuHj@shikoro>
+X-ClientProxiedBy: AM7PR02CA0015.eurprd02.prod.outlook.com
+ (2603:10a6:20b:100::25) To BN8PR12MB3587.namprd12.prod.outlook.com
  (2603:10b6:408:43::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: b1c5f600-518d-4a61-06d6-08d9fdb6884b
-X-MS-TrafficTypeDiagnostic: DS7PR12MB5933:EE_
+X-MS-Office365-Filtering-Correlation-Id: 907f7b6b-a15f-42dc-00b9-08d9fdbc996f
+X-MS-TrafficTypeDiagnostic: CY4PR12MB1816:EE_
 X-Microsoft-Antispam-PRVS: 
-	<DS7PR12MB59333EBD2E59D3B53C2B947283059@DS7PR12MB5933.namprd12.prod.outlook.com>
+	<CY4PR12MB1816671B2E3CC1947950AAD683059@CY4PR12MB1816.namprd12.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	qSGJSYfWlcNLCMJWYdl6GoOl7cFb0jLrMs/qDfdtVtEPdJrP6T5/6hIJYF8hU3tiQD+VcYJxHXUIcXZyc278w0WjK/iwJ4xaolPPcX5Xf1scux8pO+3iXdpk5nIcI/Wtq/A70tCf7YjWcqUFPgqvIYgs0aMgepXtkWXlTH7L9f5heoT0DVXpwfyuJST1cN1pifIEwLRJoY0VgX3AxP8TTLkLGZVVWtRb7YjyE0CKyclwm+IKCz/yN1SbVUFWXQ3cYAaOP8gYnZFqARDwR257p5WxllCdYTwTrtHrh157F5M8tETyk67DOQ1uJOboQi8uDInB9fUqSH3t0UNBlalpk4A5YI+xRX58LOmDeLv0UiWGryAmI04wJxJofHvXOJjDzX1mpqegwMhuGMHaYpaTjI2vpypziQU+ZCAI3xyoDrSHQQqwK6d2ZQi+uF7X2/Vt3ofoF5XHuhPvS2gWyDCYysxHsGd5Tx95hfJG7EGN6nhHZtxTQHvy6XLW3RsmE2r4JLln8B+A56xLiFTp9Msc6o049f8fKbI4pNeGhz5VMFVYiORkcKOK37G/ePet9RQ7mKnwZQTfVT0CzmTghRroR4wyuI5qL8fyezZ3aNeF8RV0irjvKV3Lgcyvz/0VD6PM2w9xZul2K/l7T3YlhMdy6Kyv5wdTZQCggdxnO9nws0ZMxICaDTz1XKj9JV5tx6CK5T7hQBPqQgkE7yLyJPVnkkrqdmGktlQc8Fky/+ceZwxuPw5GI2TizD9F+nh32obKEgZDXt6PMSH1ELnBI7QurQ==
+	NQg0o6ElwuDjAF2zwxdianzTthERJcOkdffV3ZU0m3/ilSQqPTOIprbpmkFlOAfd0Hy3YZl5sHB/EMfY1wJIMGuO9umQu25AU0jiggjGTxs4xUxQ5TdmlzJqKxsd8mrzEI/ipA4fblN7ZMiMLDX55Plczt8bFTO2TMwQ1p9/vK1jyK21uvC4EuB+FunC3pBPgAEvAlfvkvzyNAY9LSYwMF46JLG4+u2WBRA6tqpPTYe0aWNA0el6ESCHmGf57GFbyYLtmu5zu0dcsWrBfJNUHqWkSJGj6fo8o+aqd1PhJXQG/TTL44720ZfTFgod4T+SD9+R9EoATqPyP8TclBMnAyEsWgShpE84bKAu2Q43esQbaII8XTjvwNNyY2IpcskjX3bcG/rlXTyoUExHuFwhnUOvoqKBw1gfwG3yH6f6agW5D2hLjuMERHSkIGmqGOz3POgDiZA1rwVEqsrDvovLqJxmV+DChbyQLOqxF1xwPJ5Pqp9RUza3Xi+RBDoNPK9ZpWp1kekpaVhLJ3rmXSA5MniUAV0pnvsdr8vddb/DIDfZ74/Z8N2WuCXLRxHxtyDFYGxSi+DdMiaPcuh61up+yDQ7Upv1tokFgEDm3neSjvcw/e4L+wzDIBz9KzzNcSh39CFjgtMQ7MyLXhQ5Bz2KBAaM3uxn/JyFUR0bd0uyOC1OcI9hkDxApwmh9qk/gfNHUt50FPG86nD+blTiiB8GU9d/UtDFYUVhx04god3ibTZRoM+n2gr1d//Wz37wqNdrWaWiBHYZWjDDUIlMMCKW3A==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(36756003)(921005)(8936002)(316002)(31696002)(110136005)(86362001)(38100700002)(7416002)(6506007)(2616005)(186003)(26005)(66556008)(66946007)(66476007)(8676002)(6512007)(31686004)(6666004)(508600001)(6486002)(2906002)(5660300002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(4744005)(7416002)(31686004)(921005)(8936002)(36756003)(2906002)(2616005)(26005)(186003)(38100700002)(316002)(110136005)(6486002)(8676002)(31696002)(86362001)(508600001)(5660300002)(66476007)(6666004)(6512007)(66556008)(6506007)(66946007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?cXNrS25BcVB6K0VkdEcrQ29qMzU4YXFtc3F2Y1M3d2tGbjRsUFJzVzBIL3dB?=
- =?utf-8?B?S1pKUlcwK0p6emVsRWtHaDhzY0xlTm5FSENMcDlhN29PcWxYRTJFemNobktZ?=
- =?utf-8?B?OFNVa21udUQyWVRJRHJaL2JPVWJUdkpHTmZLd25kSkR1cUhrMVA2aTcyYkoz?=
- =?utf-8?B?MmxEVFJWaCt0RlFjYjlvYUpMMHJvQXF4Yk9NbExkZFM0dVVzS3hpS3JMbFhz?=
- =?utf-8?B?VHJ0aG1WVlRpYUZ2QllUbkVmRi9QbHVmdnRUSDFSRC8zWVE2NnZqMmJjMDJZ?=
- =?utf-8?B?dFBYaDI5akJZY2JFOXExM2Nwam9HdWIwTkxEc0d5OEVDYTE2V2kzbUxyQ2Qw?=
- =?utf-8?B?dC9XcWE1MEF6b3NtNlRWbUg4YWZkK1pQeXJJSmxoYnFzVTVtMzI1QmEyWkVR?=
- =?utf-8?B?eWtsTnp0Vy90ODZvY1d2SUxXamZuMlhEL3dBNy8vT0pHWGRRTzFyYVYzQ3Qv?=
- =?utf-8?B?UDRSaWZnY0U5a2VuV1ZYbjhYR3lrYkVZVHIvT1RoOURVdnRmM2RsSHIxT3o4?=
- =?utf-8?B?dGVwMk5qRGsreXJ4T3RhSEwvaCtpUlVQVmV4WHUzR3F4c2Z2V3Z4WnJ0UUwz?=
- =?utf-8?B?NFVXTmlaNzFqOFVTK1FnOWZuckNIYTIydE0vWXp4MzBrOFpQVFRodWtZOGZw?=
- =?utf-8?B?WktiSk5WcTlIYktGdlFzbzRjaFdrZ21CQkR6enNQUWs1bFNVSTNaeGJnZXlX?=
- =?utf-8?B?SG0wOGtIVU8rcTBIcVViamYrcDdSYTdoYko2T2hrODVZNldsS2QrY0RGOXk0?=
- =?utf-8?B?WTRVV1QyMW1aNFBNcDUvZWkxNExiNnVneWh4TGh4ejdSV2xKUkgxY2F0N21u?=
- =?utf-8?B?a2dvWjVNcEhod05vNFFHV2VYakdaOE5FNXZGN0JOZExzNWIvbHBlQWpTamlr?=
- =?utf-8?B?aVd6RUF1Q2kyZWpKK1FlL3l6WVc3Y210dTlzcmFxTVk4SHVDbWk4WjFXc3FH?=
- =?utf-8?B?RVlCMUdmK0R6VkJuYnhZaHNRWXRHL1BjV2xSMEJ4WGpxS2FiZmdMSCtBdzVH?=
- =?utf-8?B?Ry8wb1RLeDlORk5pMElid1V2SXF6aDdVU3FRaTJDMHF0UlpsRzByNmY2RWRq?=
- =?utf-8?B?QWZaajhwTklGK015ZjFBaVI1YzFaQzl2WjlxK2ZsVGc0cU1Tam1DRXNlZWt4?=
- =?utf-8?B?aFZZcU9zWDJseUVpMjhMcHlrNVlmNEE5WkNlVHMxd0JwRkh0d05pK0l0U0F6?=
- =?utf-8?B?VHI5UkpmZTZGcGczdG1LM2FpUC93amwwOS9qaXZCSjNzSTN3ZkhLNWpXaGVs?=
- =?utf-8?B?elFDZXpFRGRGS3J4SFJOT0l1eWxJcmg1Nmh3SmpjOFplN3FFdWxTUVVmaDFS?=
- =?utf-8?B?Mlo4VHV4Y3ZnRHFGcEs3NDdNWjhOUmpnaUljWUEvVnk3Z1R1OTNPaE5UR3gr?=
- =?utf-8?B?SGszckdXcEJhNGFMdTBESDhEbzhub2RBdnFLUnVpZ0plZUxKWnpoVnU2SHpa?=
- =?utf-8?B?QldLL0tIZ3JBOFFER0F5eDBGZ2dFYkZsc1ZnR1VaN24vdWtabDdXRFczT0Q1?=
- =?utf-8?B?enZHS2N5MllYR05CbytIWE4wM1k5K3NhMlNJeU5BQ2dNTDhpM0d3SW9ybzcv?=
- =?utf-8?B?SUMxQUVmenduU3JmMmhQSGg1ekpWbW1jbVRnamJTQ3loTkZzVy9mRWdQVHZz?=
- =?utf-8?B?STRQb0M2bXJUYVByeHFXdGRaUkJwVklXT1Zxdm5nOGZVNzVtUHdNT3p6MmFL?=
- =?utf-8?B?ZEhodDNiYVZQWnBrSURPVmgzQU9jVDJTbTR5dGwya3g2cUlPUnFIY2RLMlAr?=
- =?utf-8?B?S0hPdUw3Q1d6aUdTKzE3ckwwczJOalZmTnZhY3hvTnM3MWkzSU5TeTJ3VWFr?=
- =?utf-8?B?TEptRGYwNFZINDdWTmowLzdjNUovOGxoTmZuTFNnQjVtRjNsWVFTZFplQXNh?=
- =?utf-8?B?R2VCOWdRaHk2R010dmdPcjRTeU9wLzlhUHJUd1hGN0hxekFHa2E2dmpjUUQx?=
- =?utf-8?B?Wno4bjhLeCtMNFFXWVZBdHBaSVpWaU9rdFR4cVV3blY5RWFEY3UrVXlRSTU0?=
- =?utf-8?B?SThvcWlKOUY3dnZqZ002Rk5lbDB1ZTZUK2t0RmJpbWtEaXNObFJBMW45eU4w?=
- =?utf-8?B?S3pNenB1SVNLZjZCOThFWVJzZmt3c2JxU3h1MktUTWMxK3Y4ZDU0d2YvQjFZ?=
- =?utf-8?Q?pjS4=3D?=
+	=?utf-8?B?Z3BMSWUwNFV1YlNUdUtIcWJOdUNZaCtyejk4QTZzSUtaOGJRRERHcFFBb2t2?=
+ =?utf-8?B?YTVtc0NvVjV6c2lRUHNZdlpQc2d5dkNyL1gyQlB1TUcwM09Wei9IRU0xTGNE?=
+ =?utf-8?B?K2E1SlhWQXN2bVBRdzVJV2lyNFp3M0dlSTZ6ZkZ6cnRuN1NmTzdhakUxQkk1?=
+ =?utf-8?B?V1pQSUpkT1IvdnN2L3NQTmlBbVZLdGt5ai9ZblVGaStwN3o1ZzVUSCsxTnRm?=
+ =?utf-8?B?K0syVHJVREtDblh4SFZBaFlwdjNIVnBob213VlhUNHBVSlJieXlNY0xYWnNX?=
+ =?utf-8?B?Z1R6RllEcnRVbnNlcjZjS3VqNVZ4THo2alMyZHdCRzVXVzA0V2pHeTU5OW5s?=
+ =?utf-8?B?cEc5WGtqSkdpdVJ4Sll1Q1JtVURwQlRWMWJWaVVnemZYZHFTREpmdHNrY2w5?=
+ =?utf-8?B?TWxhbmJQamNOR0xkdVVTOElSQjMxWFAxV0E1NGpHb2tpTDJrWDhxUTNjbTB5?=
+ =?utf-8?B?TEMzVzY3YnNWdDlWa1ZhY0ZuRUpKc3M2djdUNFB6elJCOGM1TWRkMDFEb2g5?=
+ =?utf-8?B?elBMM1FHdWMzcGJhMGN5NGQ5cUZZd010MW5tNmhmaTRVRzVjaCt6cFpBMGdQ?=
+ =?utf-8?B?aUxLM0dCcEp0M0NBcWozQkhLK3BvQjhFMUJmeFNDL1pFWENOcnBJejBaNjNB?=
+ =?utf-8?B?Y0hxeU1zN2N0MWhTTGNhWlZ6WGlXWXBaU0RzWkFwdlRRUnVvZXkwQnhnNzF5?=
+ =?utf-8?B?VituaEw1TVFSWEQ2Wm9JMlYyajg1TVhBRXpiSDVlV3BENlFsUFNkUXM4Y05u?=
+ =?utf-8?B?N0VTRlJLOHFEelVRZTJmMTFPY3BkYnRZYVZneVNFNVpTYm01RmZrVVNITDdJ?=
+ =?utf-8?B?ZG9BMWQvcUlwZC9oVUpLbnVJeVNlanRQNTErNGpVdE9PQ1AzTDVrUk8wclZN?=
+ =?utf-8?B?bC8xTHJ1LzlEMWFRbFlMcVNXYzQrdmZZWnltSlY4WnU2TnBpSWxPVHdGSEZ6?=
+ =?utf-8?B?L00yeW5GYVdsWWlrSXVneThYYU9sejdHY0FxbmJDZ281UlJoVkpyNC8xV0dn?=
+ =?utf-8?B?Q0xuM0JHVzBPaVc5eVFBMTB5RHlZWXRtTjZtWGxDSHdSVDFINE1hN3BXaE9T?=
+ =?utf-8?B?dTgzM3AwQUVlU2d2c3RwVUdXalJvdEpIMCsvbHd1WGRIeU9WV0FDa2UyMmhU?=
+ =?utf-8?B?MFoyZzNkTnpjbGFYOG1DSmUyaDFiUTcrWFhBd2JmQ04vcElkWjJIR01RK1Ru?=
+ =?utf-8?B?MVp6WFFEdEgzZ2pSUEVlOEppOEVnWnczUGRzeENUODBkNDduN3hQeTJmNlRz?=
+ =?utf-8?B?QnU2OW5Wa1NDYWhhMHI0dTRHRk5IbzJEQUtFdlU4ZUY3N1o4bVpMU3U1K050?=
+ =?utf-8?B?a2hweWF5eVBidEVOalBVT2RpazVhMlFVTE4zWFBDdlhaNjJNcDcremRNZmpV?=
+ =?utf-8?B?QjJEU2FqSlVEb2FyK1Z6dFdkNEcyZVl3U0tqQml5NVlmb0FkYVUrUHJQY09i?=
+ =?utf-8?B?OWJSRmcyOHVQU1ZoeFBhUHoxRUlWUVVkZHBVU1N1ckh4MXlmdnNKUWIwVTRD?=
+ =?utf-8?B?WHQ4U0dUYzlSZXZMaHQwdmNiZVhXQTBuSXdsK1NEMERMRHZoZC9Ybm1ETmNC?=
+ =?utf-8?B?YVU4dm9kcmcrazBmaW5vV2FYY3hpKzZKYUNvVVE0Vm9YMEIyQ1h1eDQ2VnNJ?=
+ =?utf-8?B?ckVDTk9hSmhDNHhxOG9xWEd1ajBzYzFGbmd1TnJaSi8yZHVWcm9nQVpYVmc0?=
+ =?utf-8?B?dks2ZVZrams3a2o1WW9jVjFsRStJSDdVaTFNNW9TMVJvbVQwT09KaWdpb29X?=
+ =?utf-8?B?K05peXhLbzNIQ0k0dVpLb01jQnF0cTBORWIrbXQweGhWQ0p5NEJsNFhpMXJP?=
+ =?utf-8?B?WXZIMWNnV1VrWG15YzRJdXc0N1B3OVRSZVVnNFUwblNvSVhsc3VuTzhFUWhU?=
+ =?utf-8?B?RG8yTVNNcnpMOFVSTFhVeWdOZGpYQnc5bEo0VWhOUXlZVVcybER5aGdWUCtp?=
+ =?utf-8?B?VThDbnJydGgralo2Um1ZTkQ5WHpRU2tWTXBTTHJIL0N5T0xKWGp6a3ZUSUp5?=
+ =?utf-8?B?c2k2WXZlbnlXUVF5UWFLOW56aFJkQW8zbXA1QmttRGV1ODdDWGkzemZyVkYr?=
+ =?utf-8?B?ZllsNFhCdEV5OFkyUVdlelBLUHgzZjdPNnM5WlVTVGNzWUYzdU05QjNRUnl6?=
+ =?utf-8?Q?riMg=3D?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b1c5f600-518d-4a61-06d6-08d9fdb6884b
+X-MS-Exchange-CrossTenant-Network-Message-Id: 907f7b6b-a15f-42dc-00b9-08d9fdbc996f
 X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2022 08:11:06.4785
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2022 08:54:32.2315
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zNGTFvnf/GNOmGMVgf/iLOW7uA5WgvxggWicxWcBFeN4tUvyK8+VIhzxTU3iHGbd
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5933
-Message-ID-Hash: SBCY7DJ56PGFBN7WKJXK22JMQZKSUWON
-X-Message-ID-Hash: SBCY7DJ56PGFBN7WKJXK22JMQZKSUWON
+X-MS-Exchange-CrossTenant-UserPrincipalName: KzoCr3sb31YDjLEqJIDLukpBXIVC1OrdSk0616uWIzt1zepnbTv4js9TnZU03/Dj
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR12MB1816
+Message-ID-Hash: AKVD3SBZSLDANOF2U73W6Y2QOISEGXZV
+X-Message-ID-Hash: AKVD3SBZSLDANOF2U73W6Y2QOISEGXZV
 X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH] i2c: at91: use dma safe buffers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SBCY7DJ56PGFBN7WKJXK22JMQZKSUWON/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AKVD3SBZSLDANOF2U73W6Y2QOISEGXZV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -136,43 +137,28 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-Am 04.03.22 um 09:04 schrieb Wolfram Sang:
-> Hi Christian,
+Am 04.03.22 um 09:43 schrieb Wolfram Sang:
+>> I'm getting quite a bunch of unrelated mails because the regex is not the
+>> best.
+> I can imagine!
 >
->> Maybe call your variable differently. DMA-buf is an inter driver buffer
->> sharing frame we use for GPU acceleration and V4L.
->>
->> It doesn't cause any technical issues, but the maintainer regex now triggers
->> on that. So you are CCing people not related to this code in any way.
-> Frankly, I think the 'dma_buf' regex is a bit too generic. 'dma_buf'
-> seems like a reasonable name to me if some subsystem has to deal with
-> different buffers which can be DMA or non-DMA, like I2C. If you git-grep
-> the tree, you will find it in quite some places.
->
-> We could now think of renaming the variable to 'dmabuf' but this is
-> a strange and kind of arbitrary rule to remember IMO.
->
-> I wonder if you'd miss a lot of patches if we remove 'dma_buf' from the
-> regex and keep 'dma_fence' and 'dma_resv'? Or extend it to 'dma_buf_' or
-> 'struct dma_buf'?
+>> On the other hand the framework is used in a lot of drivers and I do want to
+>> be notified when they mess with their interfaces.
+> Sure thing. I am convinced the regex can be improved to ensure that to a
+> high degree. I think it is also less work for you than asking people to
+> rename their variable all the time :)
 
-Yeah, I'm already considering something similar for a while.
+Well not all the time. It's just that you absolutely hit the nail on the 
+head with the name.
 
-I'm getting quite a bunch of unrelated mails because the regex is not 
-the best.
+The local variable for the DMA-buf handle is just nearly always named 
+dma_buf or dmabuf in the drivers.
 
-On the other hand the framework is used in a lot of drivers and I do 
-want to be notified when they mess with their interfaces.
-
-Going to take a another look at that when I have time.
-
-Thanks,
 Christian.
 
 >
-> All the best,
->
->     Wolfram
+>> Going to take a another look at that when I have time.
+> Thank you!
 >
 
 _______________________________________________
