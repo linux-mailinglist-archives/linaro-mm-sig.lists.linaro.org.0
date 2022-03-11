@@ -2,207 +2,189 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DED64D6054
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 11 Mar 2022 12:02:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A0E84D64E0
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 11 Mar 2022 16:46:25 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7C10F401F4
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 11 Mar 2022 11:02:54 +0000 (UTC)
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
-	by lists.linaro.org (Postfix) with ESMTPS id ABE403EE9E
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 11 Mar 2022 11:02:48 +0000 (UTC)
-Received: by mail-wr1-f44.google.com with SMTP id r6so11943119wrr.2
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 11 Mar 2022 03:02:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=UNgHNWu90boYpoxMk1k0+yKftnca6204fceO06hzhPg=;
-        b=JBv+FAZCPdXHp4g7Q28S30xEGRnWyogDnswo5XfpyGWKuAGJzVl3mj1MjwqvwbZ7F8
-         KF9XxOzxyzZ0nrovjqvX9B5YuRpDJCZYj2If0QkKX6byu7mnyuhQbN9rtBoQoJ3yrB1g
-         ABqRJDYox1gLyycMFcnqwiqbAkNbxiOtGJ3K/10SP3xZICtsf9az8DPGWgztmJvQD0Mr
-         SP1G8/sEjn89vy+csPzENReWJAX54QX7hYNW9vbfXl92U2o9LD3Mpw9g/1vD1NWsPWwp
-         3GBX3dbvc/wVKR3n6226JpwNYVKXhs95VTG/SaXhoUAfvFtRCb0ataPXVIBy6RY3jIKa
-         8wPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=UNgHNWu90boYpoxMk1k0+yKftnca6204fceO06hzhPg=;
-        b=yn7c1fQaGYDFM3lo0KkrRnMQYa0dlV42IhOO1q0GXyY1kzLeJ4CiZSW0dDieHc3wJi
-         xTQ779mmRWfVC2uE8V/Uz5wmgvrEiu4ViJ5WQHV6+cIIfjjReec2lVN/yPhmg9ZQtNTs
-         uyX6E7G6X03ot/t95/uQbXmHAKk+z0l0ukgN3+B3VxnBplOXVNjo+zMFKWgWs26CgGrq
-         E82j1Vj5cYCxgOr1OBE0osLwn2mfb5nY566JD9iDU5LsLfq8qGs6+sd2TiWE+g9LsNDJ
-         YluaPNpq+cpoH/ZbBMHcxyK0Ss0kUqcOtGtU29ILkU9c49T/JkQuMccyTK66w4FCSiH3
-         hVfA==
-X-Gm-Message-State: AOAM53031ZqDS3AzmjhblHiJZke3ltKelKrhritHHGHdbVBk68aF4ZzR
-	Ur3ytiDA/dgDvXpDceA61q0=
-X-Google-Smtp-Source: ABdhPJxSeLIRthL5xTjtN+leDPx5k/A8X+a4EQ8MBgckRoOt5bVVfDrZtE8RM4j5kVE8GtxdJhYycw==
-X-Received: by 2002:adf:e502:0:b0:1f0:2f4e:968e with SMTP id j2-20020adfe502000000b001f02f4e968emr6889930wrm.135.1646996567658;
-        Fri, 11 Mar 2022 03:02:47 -0800 (PST)
-Received: from able.fritz.box (p5b0eab60.dip0.t-ipconnect.de. [91.14.171.96])
-        by smtp.gmail.com with ESMTPSA id 9-20020a1c0209000000b003868897278asm10170918wmc.23.2022.03.11.03.02.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 11 Mar 2022 03:02:46 -0800 (PST)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-To: sumit.semwal@linaro.org,
-	gustavo@padovan.org,
-	linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
+	by lists.linaro.org (Postfix) with ESMTP id 668743EEE6
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 11 Mar 2022 15:46:24 +0000 (UTC)
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by lists.linaro.org (Postfix) with ESMTPS id C4FFF3ED8B
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 11 Mar 2022 15:46:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1647013581; x=1678549581;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=doA5l29ivmzlmpmnci4uIm0OjpcHK8laVi1C3PIPIXs=;
+  b=TTsXq4TTfqc056l/ygYb7Hr7R2b2Zha+/Q2GHTIA3Tr1aKTBxg2k6t3t
+   QhNGoxar/I8zftZSf5TBodnx1rqTc9/0G+O8JhLXsVxnD4ZdZrM3hsTSm
+   pbPuR1dEJLfIdwon+WDmgkOPQG94lRSfyirEF8S6h2CWD5T9k2sJJq938
+   DtC6PdAZt2uyp6HPw2Ea4hBOkhWPezaRqOclsE3jHWLDumKvF+jKvj9pl
+   yoy9RFS8bDP6LCfOuZQP1AKMNouxs18NDG69Qdw+ab6rotM+llNC5ffoA
+   Qjb5MIwnKWHlp6wBLLr6e5MjKGIPGDnMLaR1OjXZcQUsOEtOn2cUzAIgQ
+   Q==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10282"; a="255782646"
+X-IronPort-AV: E=Sophos;i="5.90,174,1643702400";
+   d="scan'208";a="255782646"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Mar 2022 07:46:19 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.90,174,1643702400";
+   d="scan'208";a="597144417"
+Received: from lkp-server02.sh.intel.com (HELO 89b41b6ae01c) ([10.239.97.151])
+  by fmsmga008.fm.intel.com with ESMTP; 11 Mar 2022 07:46:17 -0800
+Received: from kbuild by 89b41b6ae01c with local (Exim 4.92)
+	(envelope-from <lkp@intel.com>)
+	id 1nShT6-0006fB-Ks; Fri, 11 Mar 2022 15:46:16 +0000
+Date: Fri, 11 Mar 2022 23:45:37 +0800
+From: kernel test robot <lkp@intel.com>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+	sumit.semwal@linaro.org, gustavo@padovan.org,
+	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
 	linaro-mm-sig@lists.linaro.org
-Date: Fri, 11 Mar 2022 12:02:44 +0100
-Message-Id: <20220311110244.1245-2-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220311110244.1245-1-christian.koenig@amd.com>
+Message-ID: <202203112305.WcEordi2-lkp@intel.com>
 References: <20220311110244.1245-1-christian.koenig@amd.com>
 MIME-Version: 1.0
-Message-ID-Hash: TJJQKDCD6FOCCFAIDQIXX2ANW6EJKAGB
-X-Message-ID-Hash: TJJQKDCD6FOCCFAIDQIXX2ANW6EJKAGB
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
+Content-Disposition: inline
+In-Reply-To: <20220311110244.1245-1-christian.koenig@amd.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Message-ID-Hash: VVMHO5SJFMKES5JWVSQARFX6OAXG3TM4
+X-Message-ID-Hash: VVMHO5SJFMKES5JWVSQARFX6OAXG3TM4
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+CC: kbuild-all@lists.01.org, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 2/2] dma-buf/sync-file: fix warning about fence containers
+Subject: [Linaro-mm-sig] Re: [PATCH 1/2] dma-buf: add dma_fence_unwrap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TJJQKDCD6FOCCFAIDQIXX2ANW6EJKAGB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VVMHO5SJFMKES5JWVSQARFX6OAXG3TM4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-VGhlIGRtYV9mZW5jZV9jaGFpbiBjb250YWluZXJzIGNhbiBzaG93IHVwIGluIHN5bmNfZmlsZXMg
-YXMgd2VsbCByZXN1bHRpbmcgaW4NCndhcm5pbmdzIHRoYXQgdGhvc2UgY2FuJ3QgYmUgYWRkZWQg
-dG8gZG1hX2ZlbmNlX2FycmF5IGNvbnRhaW5lcnMgd2hlbiBtZXJnaW5nDQptdWx0aXBsZSBzeW5j
-X2ZpbGVzIHRvZ2V0aGVyLg0KDQpTb2x2ZSB0aGlzIGJ5IHVzaW5nIHRoZSBkbWFfZmVuY2VfdW53
-cmFwIGl0ZXJhdG9yIHRvIGRlZXAgZGl2ZSBpbnRvIHRoZQ0KY29udGFpbmVkIGZlbmNlcyBhbmQg
-dGhlbiBhZGQgdGhvc2UgZmxhdHRlbiBvdXQgaW50byBhIGRtYV9mZW5jZV9hcnJheS4NCg0KU2ln
-bmVkLW9mZi1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0K
-LS0tDQogZHJpdmVycy9kbWEtYnVmL3N5bmNfZmlsZS5jIHwgMTQxICsrKysrKysrKysrKysrKysr
-KystLS0tLS0tLS0tLS0tLS0tLQ0KIDEgZmlsZSBjaGFuZ2VkLCA3MyBpbnNlcnRpb25zKCspLCA2
-OCBkZWxldGlvbnMoLSkNCg0KZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9zeW5jX2ZpbGUu
-YyBiL2RyaXZlcnMvZG1hLWJ1Zi9zeW5jX2ZpbGUuYw0KaW5kZXggMzk0ZTZlMWU5Njg2Li5iOGRl
-YTRlYzEyM2IgMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2RtYS1idWYvc3luY19maWxlLmMNCisrKyBi
-L2RyaXZlcnMvZG1hLWJ1Zi9zeW5jX2ZpbGUuYw0KQEAgLTUsNiArNSw3IEBADQogICogQ29weXJp
-Z2h0IChDKSAyMDEyIEdvb2dsZSwgSW5jLg0KICAqLw0KIA0KKyNpbmNsdWRlIDxsaW51eC9kbWEt
-ZmVuY2UtdW53cmFwLmg+DQogI2luY2x1ZGUgPGxpbnV4L2V4cG9ydC5oPg0KICNpbmNsdWRlIDxs
-aW51eC9maWxlLmg+DQogI2luY2x1ZGUgPGxpbnV4L2ZzLmg+DQpAQCAtMTcyLDIwICsxNzMsNiBA
-QCBzdGF0aWMgaW50IHN5bmNfZmlsZV9zZXRfZmVuY2Uoc3RydWN0IHN5bmNfZmlsZSAqc3luY19m
-aWxlLA0KIAlyZXR1cm4gMDsNCiB9DQogDQotc3RhdGljIHN0cnVjdCBkbWFfZmVuY2UgKipnZXRf
-ZmVuY2VzKHN0cnVjdCBzeW5jX2ZpbGUgKnN5bmNfZmlsZSwNCi0JCQkJICAgICBpbnQgKm51bV9m
-ZW5jZXMpDQotew0KLQlpZiAoZG1hX2ZlbmNlX2lzX2FycmF5KHN5bmNfZmlsZS0+ZmVuY2UpKSB7
-DQotCQlzdHJ1Y3QgZG1hX2ZlbmNlX2FycmF5ICphcnJheSA9IHRvX2RtYV9mZW5jZV9hcnJheShz
-eW5jX2ZpbGUtPmZlbmNlKTsNCi0NCi0JCSpudW1fZmVuY2VzID0gYXJyYXktPm51bV9mZW5jZXM7
-DQotCQlyZXR1cm4gYXJyYXktPmZlbmNlczsNCi0JfQ0KLQ0KLQkqbnVtX2ZlbmNlcyA9IDE7DQot
-CXJldHVybiAmc3luY19maWxlLT5mZW5jZTsNCi19DQotDQogc3RhdGljIHZvaWQgYWRkX2ZlbmNl
-KHN0cnVjdCBkbWFfZmVuY2UgKipmZW5jZXMsDQogCQkgICAgICBpbnQgKmksIHN0cnVjdCBkbWFf
-ZmVuY2UgKmZlbmNlKQ0KIHsNCkBAIC0yMTAsODYgKzE5Nyw5NyBAQCBzdGF0aWMgdm9pZCBhZGRf
-ZmVuY2Uoc3RydWN0IGRtYV9mZW5jZSAqKmZlbmNlcywNCiBzdGF0aWMgc3RydWN0IHN5bmNfZmls
-ZSAqc3luY19maWxlX21lcmdlKGNvbnN0IGNoYXIgKm5hbWUsIHN0cnVjdCBzeW5jX2ZpbGUgKmEs
-DQogCQkJCQkgc3RydWN0IHN5bmNfZmlsZSAqYikNCiB7DQorCXN0cnVjdCBkbWFfZmVuY2UgKmFf
-ZmVuY2UsICpiX2ZlbmNlLCAqKmZlbmNlczsNCisJc3RydWN0IGRtYV9mZW5jZV91bndyYXAgYV9p
-dGVyLCBiX2l0ZXI7DQorCXVuc2lnbmVkIGludCBpbmRleCwgbnVtX2ZlbmNlczsNCiAJc3RydWN0
-IHN5bmNfZmlsZSAqc3luY19maWxlOw0KLQlzdHJ1Y3QgZG1hX2ZlbmNlICoqZmVuY2VzID0gTlVM
-TCwgKipuZmVuY2VzLCAqKmFfZmVuY2VzLCAqKmJfZmVuY2VzOw0KLQlpbnQgaSA9IDAsIGlfYSwg
-aV9iLCBudW1fZmVuY2VzLCBhX251bV9mZW5jZXMsIGJfbnVtX2ZlbmNlczsNCiANCiAJc3luY19m
-aWxlID0gc3luY19maWxlX2FsbG9jKCk7DQogCWlmICghc3luY19maWxlKQ0KIAkJcmV0dXJuIE5V
-TEw7DQogDQotCWFfZmVuY2VzID0gZ2V0X2ZlbmNlcyhhLCAmYV9udW1fZmVuY2VzKTsNCi0JYl9m
-ZW5jZXMgPSBnZXRfZmVuY2VzKGIsICZiX251bV9mZW5jZXMpOw0KLQlpZiAoYV9udW1fZmVuY2Vz
-ID4gSU5UX01BWCAtIGJfbnVtX2ZlbmNlcykNCi0JCWdvdG8gZXJyOw0KKwludW1fZmVuY2VzID0g
-MDsNCisJZG1hX2ZlbmNlX3Vud3JhcF9mb3JfZWFjaChhX2ZlbmNlLCAmYV9pdGVyLCBhLT5mZW5j
-ZSkNCisJCSsrbnVtX2ZlbmNlczsNCisJZG1hX2ZlbmNlX3Vud3JhcF9mb3JfZWFjaChiX2ZlbmNl
-LCAmYl9pdGVyLCBiLT5mZW5jZSkNCisJCSsrbnVtX2ZlbmNlczsNCiANCi0JbnVtX2ZlbmNlcyA9
-IGFfbnVtX2ZlbmNlcyArIGJfbnVtX2ZlbmNlczsNCisJaWYgKG51bV9mZW5jZXMgPiBJTlRfTUFY
-KQ0KKwkJZ290byBlcnJfZnJlZV9zeW5jX2ZpbGU7DQogDQogCWZlbmNlcyA9IGtjYWxsb2MobnVt
-X2ZlbmNlcywgc2l6ZW9mKCpmZW5jZXMpLCBHRlBfS0VSTkVMKTsNCiAJaWYgKCFmZW5jZXMpDQot
-CQlnb3RvIGVycjsNCisJCWdvdG8gZXJyX2ZyZWVfc3luY19maWxlOw0KIA0KIAkvKg0KLQkgKiBB
-c3N1bWUgc3luY19maWxlIGEgYW5kIGIgYXJlIGJvdGggb3JkZXJlZCBhbmQgaGF2ZSBubw0KLQkg
-KiBkdXBsaWNhdGVzIHdpdGggdGhlIHNhbWUgY29udGV4dC4NCisJICogV2UgY2FuJ3QgZ3VhcmFu
-dGVlIHRoYXQgZmVuY2VzIGluIGJvdGggYSBhbmQgYiBhcmUgb3JkZXJlZCwgYnV0IGl0IGlzDQor
-CSAqIHN0aWxsIHF1aXRlIGxpa2VseS4NCiAJICoNCi0JICogSWYgYSBzeW5jX2ZpbGUgY2FuIG9u
-bHkgYmUgY3JlYXRlZCB3aXRoIHN5bmNfZmlsZV9tZXJnZQ0KLQkgKiBhbmQgc3luY19maWxlX2Ny
-ZWF0ZSwgdGhpcyBpcyBhIHJlYXNvbmFibGUgYXNzdW1wdGlvbi4NCisJICogU28gYXR0ZW1wdCB0
-byBvcmRlciB0aGUgZmVuY2VzIGFzIHdlIHBhc3Mgb3ZlciB0aGVtIGFuZCBtZXJnZSBmZW5jZXMN
-CisJICogd2l0aCB0aGUgc2FtZSBjb250ZXh0Lg0KIAkgKi8NCi0JZm9yIChpX2EgPSBpX2IgPSAw
-OyBpX2EgPCBhX251bV9mZW5jZXMgJiYgaV9iIDwgYl9udW1fZmVuY2VzOyApIHsNCi0JCXN0cnVj
-dCBkbWFfZmVuY2UgKnB0X2EgPSBhX2ZlbmNlc1tpX2FdOw0KLQkJc3RydWN0IGRtYV9mZW5jZSAq
-cHRfYiA9IGJfZmVuY2VzW2lfYl07DQogDQotCQlpZiAocHRfYS0+Y29udGV4dCA8IHB0X2ItPmNv
-bnRleHQpIHsNCi0JCQlhZGRfZmVuY2UoZmVuY2VzLCAmaSwgcHRfYSk7DQorCWluZGV4ID0gMDsN
-CisJZm9yIChhX2ZlbmNlID0gZG1hX2ZlbmNlX3Vud3JhcF9maXJzdChhLT5mZW5jZSwgJmFfaXRl
-ciksDQorCSAgICAgYl9mZW5jZSA9IGRtYV9mZW5jZV91bndyYXBfZmlyc3QoYi0+ZmVuY2UsICZi
-X2l0ZXIpOw0KKwkgICAgIGFfZmVuY2UgfHwgYl9mZW5jZTsgKSB7DQorDQorCQlpZiAoIWJfZmVu
-Y2UpIHsNCisJCQlhZGRfZmVuY2UoZmVuY2VzLCAmaW5kZXgsIGFfZmVuY2UpOw0KKwkJCWFfZmVu
-Y2UgPSBkbWFfZmVuY2VfdW53cmFwX25leHQoJmFfaXRlcik7DQorDQorCQl9IGVsc2UgaWYgKCFh
-X2ZlbmNlKSB7DQorCQkJYWRkX2ZlbmNlKGZlbmNlcywgJmluZGV4LCBiX2ZlbmNlKTsNCisJCQli
-X2ZlbmNlID0gZG1hX2ZlbmNlX3Vud3JhcF9uZXh0KCZiX2l0ZXIpOw0KKw0KKwkJfSBlbHNlIGlm
-IChhX2ZlbmNlLT5jb250ZXh0IDwgYl9mZW5jZS0+Y29udGV4dCkgew0KKwkJCWFkZF9mZW5jZShm
-ZW5jZXMsICZpbmRleCwgYV9mZW5jZSk7DQorCQkJYV9mZW5jZSA9IGRtYV9mZW5jZV91bndyYXBf
-bmV4dCgmYV9pdGVyKTsNCiANCi0JCQlpX2ErKzsNCi0JCX0gZWxzZSBpZiAocHRfYS0+Y29udGV4
-dCA+IHB0X2ItPmNvbnRleHQpIHsNCi0JCQlhZGRfZmVuY2UoZmVuY2VzLCAmaSwgcHRfYik7DQor
-CQl9IGVsc2UgaWYgKGJfZmVuY2UtPmNvbnRleHQgPCBhX2ZlbmNlLT5jb250ZXh0KSB7DQorCQkJ
-YWRkX2ZlbmNlKGZlbmNlcywgJmluZGV4LCBiX2ZlbmNlKTsNCisJCQliX2ZlbmNlID0gZG1hX2Zl
-bmNlX3Vud3JhcF9uZXh0KCZiX2l0ZXIpOw0KKw0KKwkJfSBlbHNlIGlmIChfX2RtYV9mZW5jZV9p
-c19sYXRlcihhX2ZlbmNlLT5zZXFubywgYl9mZW5jZS0+c2Vxbm8sDQorCQkJCQkJYV9mZW5jZS0+
-b3BzKSkgew0KKwkJCWFkZF9mZW5jZShmZW5jZXMsICZpbmRleCwgYV9mZW5jZSk7DQorCQkJYV9m
-ZW5jZSA9IGRtYV9mZW5jZV91bndyYXBfbmV4dCgmYV9pdGVyKTsNCisJCQliX2ZlbmNlID0gZG1h
-X2ZlbmNlX3Vud3JhcF9uZXh0KCZiX2l0ZXIpOw0KIA0KLQkJCWlfYisrOw0KIAkJfSBlbHNlIHsN
-Ci0JCQlpZiAoX19kbWFfZmVuY2VfaXNfbGF0ZXIocHRfYS0+c2Vxbm8sIHB0X2ItPnNlcW5vLA0K
-LQkJCQkJCSBwdF9hLT5vcHMpKQ0KLQkJCQlhZGRfZmVuY2UoZmVuY2VzLCAmaSwgcHRfYSk7DQot
-CQkJZWxzZQ0KLQkJCQlhZGRfZmVuY2UoZmVuY2VzLCAmaSwgcHRfYik7DQotDQotCQkJaV9hKys7
-DQotCQkJaV9iKys7DQorCQkJYWRkX2ZlbmNlKGZlbmNlcywgJmluZGV4LCBiX2ZlbmNlKTsNCisJ
-CQlhX2ZlbmNlID0gZG1hX2ZlbmNlX3Vud3JhcF9uZXh0KCZhX2l0ZXIpOw0KKwkJCWJfZmVuY2Ug
-PSBkbWFfZmVuY2VfdW53cmFwX25leHQoJmJfaXRlcik7DQogCQl9DQogCX0NCiANCi0JZm9yICg7
-IGlfYSA8IGFfbnVtX2ZlbmNlczsgaV9hKyspDQotCQlhZGRfZmVuY2UoZmVuY2VzLCAmaSwgYV9m
-ZW5jZXNbaV9hXSk7DQotDQotCWZvciAoOyBpX2IgPCBiX251bV9mZW5jZXM7IGlfYisrKQ0KLQkJ
-YWRkX2ZlbmNlKGZlbmNlcywgJmksIGJfZmVuY2VzW2lfYl0pOw0KLQ0KLQlpZiAoaSA9PSAwKQ0K
-LQkJZmVuY2VzW2krK10gPSBkbWFfZmVuY2VfZ2V0KGFfZmVuY2VzWzBdKTsNCisJaWYgKGluZGV4
-ID09IDApDQorCQlhZGRfZmVuY2UoZmVuY2VzLCAmaW5kZXgsIGRtYV9mZW5jZV9nZXRfc3R1Yigp
-KTsNCiANCi0JaWYgKG51bV9mZW5jZXMgPiBpKSB7DQotCQluZmVuY2VzID0ga3JlYWxsb2NfYXJy
-YXkoZmVuY2VzLCBpLCBzaXplb2YoKmZlbmNlcyksIEdGUF9LRVJORUwpOw0KLQkJaWYgKCFuZmVu
-Y2VzKQ0KLQkJCWdvdG8gZXJyOw0KKwlpZiAobnVtX2ZlbmNlcyA+IGluZGV4KSB7DQorCQlzdHJ1
-Y3QgZG1hX2ZlbmNlICoqdG1wOw0KIA0KLQkJZmVuY2VzID0gbmZlbmNlczsNCisJCS8qIEtlZXAg
-Z29pbmcgZXZlbiB3aGVuIHJlZHVjaW5nIHRoZSBzaXplIGZhaWxlZCAqLw0KKwkJdG1wID0ga3Jl
-YWxsb2NfYXJyYXkoZmVuY2VzLCBpbmRleCwgc2l6ZW9mKCpmZW5jZXMpLA0KKwkJCQkgICAgIEdG
-UF9LRVJORUwpOw0KKwkJaWYgKHRtcCkNCisJCQlmZW5jZXMgPSB0bXA7DQogCX0NCiANCi0JaWYg
-KHN5bmNfZmlsZV9zZXRfZmVuY2Uoc3luY19maWxlLCBmZW5jZXMsIGkpIDwgMCkNCi0JCWdvdG8g
-ZXJyOw0KKwlpZiAoc3luY19maWxlX3NldF9mZW5jZShzeW5jX2ZpbGUsIGZlbmNlcywgaW5kZXgp
-IDwgMCkNCisJCWdvdG8gZXJyX3B1dF9mZW5jZXM7DQogDQogCXN0cmxjcHkoc3luY19maWxlLT51
-c2VyX25hbWUsIG5hbWUsIHNpemVvZihzeW5jX2ZpbGUtPnVzZXJfbmFtZSkpOw0KIAlyZXR1cm4g
-c3luY19maWxlOw0KIA0KLWVycjoNCi0Jd2hpbGUgKGkpDQotCQlkbWFfZmVuY2VfcHV0KGZlbmNl
-c1stLWldKTsNCitlcnJfcHV0X2ZlbmNlczoNCisJd2hpbGUgKGluZGV4KQ0KKwkJZG1hX2ZlbmNl
-X3B1dChmZW5jZXNbLS1pbmRleF0pOw0KIAlrZnJlZShmZW5jZXMpOw0KKw0KK2Vycl9mcmVlX3N5
-bmNfZmlsZToNCiAJZnB1dChzeW5jX2ZpbGUtPmZpbGUpOw0KIAlyZXR1cm4gTlVMTDsNCi0NCiB9
-DQogDQogc3RhdGljIGludCBzeW5jX2ZpbGVfcmVsZWFzZShzdHJ1Y3QgaW5vZGUgKmlub2RlLCBz
-dHJ1Y3QgZmlsZSAqZmlsZSkNCkBAIC0zOTgsMTEgKzM5NiwxMyBAQCBzdGF0aWMgaW50IHN5bmNf
-ZmlsbF9mZW5jZV9pbmZvKHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlLA0KIHN0YXRpYyBsb25nIHN5
-bmNfZmlsZV9pb2N0bF9mZW5jZV9pbmZvKHN0cnVjdCBzeW5jX2ZpbGUgKnN5bmNfZmlsZSwNCiAJ
-CQkJICAgICAgIHVuc2lnbmVkIGxvbmcgYXJnKQ0KIHsNCi0Jc3RydWN0IHN5bmNfZmlsZV9pbmZv
-IGluZm87DQogCXN0cnVjdCBzeW5jX2ZlbmNlX2luZm8gKmZlbmNlX2luZm8gPSBOVUxMOw0KLQlz
-dHJ1Y3QgZG1hX2ZlbmNlICoqZmVuY2VzOw0KKwlzdHJ1Y3QgZG1hX2ZlbmNlX3Vud3JhcCBpdGVy
-Ow0KKwlzdHJ1Y3Qgc3luY19maWxlX2luZm8gaW5mbzsNCisJdW5zaWduZWQgaW50IG51bV9mZW5j
-ZXM7DQorCXN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlOw0KKwlpbnQgcmV0Ow0KIAlfX3UzMiBzaXpl
-Ow0KLQlpbnQgbnVtX2ZlbmNlcywgcmV0LCBpOw0KIA0KIAlpZiAoY29weV9mcm9tX3VzZXIoJmlu
-Zm8sICh2b2lkIF9fdXNlciAqKWFyZywgc2l6ZW9mKGluZm8pKSkNCiAJCXJldHVybiAtRUZBVUxU
-Ow0KQEAgLTQxMCw3ICs0MTAsOSBAQCBzdGF0aWMgbG9uZyBzeW5jX2ZpbGVfaW9jdGxfZmVuY2Vf
-aW5mbyhzdHJ1Y3Qgc3luY19maWxlICpzeW5jX2ZpbGUsDQogCWlmIChpbmZvLmZsYWdzIHx8IGlu
-Zm8ucGFkKQ0KIAkJcmV0dXJuIC1FSU5WQUw7DQogDQotCWZlbmNlcyA9IGdldF9mZW5jZXMoc3lu
-Y19maWxlLCAmbnVtX2ZlbmNlcyk7DQorCW51bV9mZW5jZXMgPSAwOw0KKwlkbWFfZmVuY2VfdW53
-cmFwX2Zvcl9lYWNoKGZlbmNlLCAmaXRlciwgc3luY19maWxlLT5mZW5jZSkNCisJCSsrbnVtX2Zl
-bmNlczsNCiANCiAJLyoNCiAJICogUGFzc2luZyBudW1fZmVuY2VzID0gMCBtZWFucyB0aGF0IHVz
-ZXJzcGFjZSBkb2Vzbid0IHdhbnQgdG8NCkBAIC00MzMsOCArNDM1LDExIEBAIHN0YXRpYyBsb25n
-IHN5bmNfZmlsZV9pb2N0bF9mZW5jZV9pbmZvKHN0cnVjdCBzeW5jX2ZpbGUgKnN5bmNfZmlsZSwN
-CiAJaWYgKCFmZW5jZV9pbmZvKQ0KIAkJcmV0dXJuIC1FTk9NRU07DQogDQotCWZvciAoaSA9IDA7
-IGkgPCBudW1fZmVuY2VzOyBpKyspIHsNCi0JCWludCBzdGF0dXMgPSBzeW5jX2ZpbGxfZmVuY2Vf
-aW5mbyhmZW5jZXNbaV0sICZmZW5jZV9pbmZvW2ldKTsNCisJbnVtX2ZlbmNlcyA9IDA7DQorCWRt
-YV9mZW5jZV91bndyYXBfZm9yX2VhY2goZmVuY2UsICZpdGVyLCBzeW5jX2ZpbGUtPmZlbmNlKSB7
-DQorCQlpbnQgc3RhdHVzOw0KKw0KKwkJc3RhdHVzID0gc3luY19maWxsX2ZlbmNlX2luZm8oZmVu
-Y2UsICZmZW5jZV9pbmZvW251bV9mZW5jZXMrK10pOw0KIAkJaW5mby5zdGF0dXMgPSBpbmZvLnN0
-YXR1cyA8PSAwID8gaW5mby5zdGF0dXMgOiBzdGF0dXM7DQogCX0NCiANCi0tIA0KMi4yNS4xDQoN
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1t
-bS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1
-bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGlu
-YXJvLm9yZwo=
+Hi "Christian,
+
+I love your patch! Perhaps something to improve:
+
+[auto build test WARNING on linus/master]
+[also build test WARNING on v5.17-rc7 next-20220310]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch]
+
+url:    https://github.com/0day-ci/linux/commits/Christian-K-nig/dma-buf-add-dma_fence_unwrap/20220311-190352
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git 79b00034e9dcd2b065c1665c8b42f62b6b80a9be
+config: microblaze-randconfig-r011-20220310 (https://download.01.org/0day-ci/archive/20220311/202203112305.WcEordi2-lkp@intel.com/config)
+compiler: microblaze-linux-gcc (GCC) 11.2.0
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/0day-ci/linux/commit/088aa14c0f5cad378854823fa661ee145dd2c01b
+        git remote add linux-review https://github.com/0day-ci/linux
+        git fetch --no-tags linux-review Christian-K-nig/dma-buf-add-dma_fence_unwrap/20220311-190352
+        git checkout 088aa14c0f5cad378854823fa661ee145dd2c01b
+        # save the config file to linux build tree
+        mkdir build_dir
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.2.0 make.cross O=build_dir ARCH=microblaze SHELL=/bin/bash drivers/dma-buf/
+
+If you fix the issue, kindly add following tag as appropriate
+Reported-by: kernel test robot <lkp@intel.com>
+
+All warnings (new ones prefixed by >>):
+
+   In file included from drivers/dma-buf/st-dma-fence-unwrap.c:7:
+   include/linux/dma-fence-unwrap.h: In function 'dma_fence_unwrap_array':
+   include/linux/dma-fence-unwrap.h:44:25: error: implicit declaration of function 'dma_fence_chain_contained'; did you mean 'dma_fence_chain_init'? [-Werror=implicit-function-declaration]
+      44 |         cursor->array = dma_fence_chain_contained(cursor->chain);
+         |                         ^~~~~~~~~~~~~~~~~~~~~~~~~
+         |                         dma_fence_chain_init
+   include/linux/dma-fence-unwrap.h:44:23: warning: assignment to 'struct dma_fence *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+      44 |         cursor->array = dma_fence_chain_contained(cursor->chain);
+         |                       ^
+   include/linux/dma-fence-unwrap.h:46:16: error: implicit declaration of function 'dma_fence_array_first'; did you mean 'dma_fence_array_create'? [-Werror=implicit-function-declaration]
+      46 |         return dma_fence_array_first(cursor->array);
+         |                ^~~~~~~~~~~~~~~~~~~~~
+         |                dma_fence_array_create
+   include/linux/dma-fence-unwrap.h:46:16: warning: returning 'int' from a function with return type 'struct dma_fence *' makes pointer from integer without a cast [-Wint-conversion]
+      46 |         return dma_fence_array_first(cursor->array);
+         |                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   include/linux/dma-fence-unwrap.h: In function 'dma_fence_unwrap_next':
+   include/linux/dma-fence-unwrap.h:77:15: error: implicit declaration of function 'dma_fence_array_next'; did you mean 'dma_fence_unwrap_next'? [-Werror=implicit-function-declaration]
+      77 |         tmp = dma_fence_array_next(cursor->array, cursor->index);
+         |               ^~~~~~~~~~~~~~~~~~~~
+         |               dma_fence_unwrap_next
+   include/linux/dma-fence-unwrap.h:77:13: warning: assignment to 'struct dma_fence *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+      77 |         tmp = dma_fence_array_next(cursor->array, cursor->index);
+         |             ^
+   drivers/dma-buf/st-dma-fence-unwrap.c: In function 'unwrap_array':
+>> drivers/dma-buf/st-dma-fence-unwrap.c:133:13: warning: variable 'err' set but not used [-Wunused-but-set-variable]
+     133 |         int err = 0;
+         |             ^~~
+   drivers/dma-buf/st-dma-fence-unwrap.c: In function 'unwrap_chain':
+   drivers/dma-buf/st-dma-fence-unwrap.c:175:13: warning: variable 'err' set but not used [-Wunused-but-set-variable]
+     175 |         int err = 0;
+         |             ^~~
+   drivers/dma-buf/st-dma-fence-unwrap.c: In function 'unwrap_chain_array':
+   drivers/dma-buf/st-dma-fence-unwrap.c:217:13: warning: variable 'err' set but not used [-Wunused-but-set-variable]
+     217 |         int err = 0;
+         |             ^~~
+   cc1: some warnings being treated as errors
+
+
+vim +/err +133 drivers/dma-buf/st-dma-fence-unwrap.c
+
+   128	
+   129	static int unwrap_array(void *arg)
+   130	{
+   131		struct dma_fence *fence, *f1, *f2, *array;
+   132		struct dma_fence_unwrap iter;
+ > 133		int err = 0;
+   134	
+   135		f1 = mock_fence();
+   136		if (!f1)
+   137			return -ENOMEM;
+   138	
+   139		f2 = mock_fence();
+   140		if (!f2) {
+   141			dma_fence_put(f1);
+   142			return -ENOMEM;
+   143		}
+   144	
+   145		array = mock_array(2, f1, f2);
+   146		if (!array)
+   147			return -ENOMEM;
+   148	
+   149		dma_fence_unwrap_for_each(fence, &iter, array) {
+   150			if (fence == f1) {
+   151				f1 = NULL;
+   152			} else if (fence == f2) {
+   153				f2 = NULL;
+   154			} else {
+   155				pr_err("Unexpected fence!\n");
+   156				err = -EINVAL;
+   157			}
+   158		}
+   159	
+   160		if (f1 || f2) {
+   161			pr_err("Not all fences seen!\n");
+   162			err = -EINVAL;
+   163		}
+   164	
+   165		dma_fence_signal(f1);
+   166		dma_fence_signal(f2);
+   167		dma_fence_put(array);
+   168		return 0;
+   169	}
+   170	
+
+---
+0-DAY CI Kernel Test Service
+https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
