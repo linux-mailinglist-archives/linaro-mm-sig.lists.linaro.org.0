@@ -2,910 +2,176 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 632F44EAEBB
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 15:48:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A80B94EAEBC
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 15:49:00 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 995FE3EC06
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 13:48:53 +0000 (UTC)
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
-	by lists.linaro.org (Postfix) with ESMTPS id 6B4003ED8A
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 15 Mar 2022 00:43:54 +0000 (UTC)
-Received: by mail-lf1-f54.google.com with SMTP id bt26so30232397lfb.3
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Mar 2022 17:43:54 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id DE7753EC18
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 13:48:59 +0000 (UTC)
+Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com [209.85.208.175])
+	by lists.linaro.org (Postfix) with ESMTPS id 500C63ED8A
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 15 Mar 2022 00:50:19 +0000 (UTC)
+Received: by mail-lj1-f175.google.com with SMTP id o6so24392005ljp.3
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 14 Mar 2022 17:50:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=EAWljBQcSS2I+5zq8rKnuBFmnYtVgrriHmHAeuv+hBs=;
-        b=RoVpLLoBb3selLdMJ6cAwFl4RmCw/uIt7tVpNZL/0dCc3uVwaQdva+QkHJKhvTRPG3
-         bdu1uy3TfozS/UCJavQhsrwfNcLLB3s0zgebO5w47PIBdPy0RqxDS5W6pOjVeCidrVGb
-         oVNKfqit/8SMSwP0ApilXAOcGPtdWgMEsnmfBJgZlgDttXZEKZDtdtLRcS8qCWpamWiF
-         CZ1X2RmGECjLvvahNjMFiXpV3HwYRsN0qdnEpFXSao+QuKANc9bY1xOTdRn9SgfsyA9f
-         FOT7HwP/MUApAybBv/Mxt0XyOpxbkEbYUBtYTjBI4b4OHm3u2abyeZbqu5psLrUDHH7k
-         ZdGw==
+         :cc:content-transfer-encoding;
+        bh=iu1dDKMiO58IJTgn0Y5YT/ep6c6PH/A2I1xn5i2OO4M=;
+        b=A/QKF0mF9Rm2tSG6t2Q7FLiZsPmEh4wgSlnqrxSBzJTT18Tx/25nw5YitC+o5T1NIl
+         dHsn3dewSXLFAeqA/+ODgjyTVd/Tx+QWjF8zqtLmD0tIAydAS7721bsNCRqIJbtKOJmx
+         0AOy5rNA4qcgql5krqMhed3+t3qfYgcMOOsOjE3tnNwFKmr/qDH771GV9A5uGgXx8oaE
+         Vj+L8eHW1IIPVnDdUjCH5rbstiX6McbtDPBKBdIhI8BKsO6vPZplxqdd24rIn7fSlSIs
+         voa9xljon/WNiPC2LT2+MCpCtOQTHWC9qylrpk6wockoK/XRJO4YexgeGVa3vcONg4mj
+         368Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=EAWljBQcSS2I+5zq8rKnuBFmnYtVgrriHmHAeuv+hBs=;
-        b=rjmZGRbo/78RSDyDVnH1C9UeJ2qWOQjThVWOpX/+PHAOXl0hcYpEuOE38n4Ytckay2
-         HUUHMBMIAOnuxLc9aKE908h/oIZEi7yKYJktp1lIOZmXFEzpPJqnd9AiuNBl8h0cQ5ZF
-         wL/5XerFIRrL0tx2ekAlpTKiqtf+BMMH9jW2WrxBNsa7zurqDLAtRRg2ZXlSKWQ7HR0U
-         IWS0oBkc2nO5nTR84eN3sbsLE3A3lsWtE7/S0ZzYgmERqoqTHBDcY4qsVRGSRIRM72UJ
-         V3z5pJ3J7z38AvocruIOOxLh3ytIviDhA4c9t0RnP2Q4lTxuwNmciycSOemQU5RV8Ilw
-         Rblg==
-X-Gm-Message-State: AOAM532OJmEb7+E9pTKkiBasmCh2xBrWzLSXtGT5iicza/o+V6wqGcV6
-	th9vlv6twp7sq4VTtwk+eUl4WXwIYFgyrxldZaFpnA==
-X-Google-Smtp-Source: ABdhPJxXjjc97Yq1wggDOu4xBEWmJDG8DkRofKXfwwXuSeY7YoS7tjUur3OCT6XVYOAyQ+AbOcXcNiTvGQzZcwF5HMc=
-X-Received: by 2002:ac2:5fe3:0:b0:448:5ba2:445f with SMTP id
- s3-20020ac25fe3000000b004485ba2445fmr15459670lfg.682.1647305032893; Mon, 14
- Mar 2022 17:43:52 -0700 (PDT)
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=iu1dDKMiO58IJTgn0Y5YT/ep6c6PH/A2I1xn5i2OO4M=;
+        b=8P61emSyZ8QnxYFodW0cU1Ig1vgDoTHvWatj8ktZohXdgkaksQM2REPkQegFdiETmH
+         QAjdK4X4TgMS3UDfTBtA0rFdMFoFcRqyf4Hy4L7eBdMbNRnx6tu+eG9WrZ/pssedhsqt
+         9LDwmugGsmFXJNJlFKowRPjUOQ7xemf6wYGUW7WMdFEADm0P3VfHqzax8XAIXpi6dGqg
+         0JTbUEeNPOWXkAaUViZ43NkCZWnwN7CRlSPnAVRLA4mAzH2zfsZ7YFEGf8qbDYB0+EhB
+         pm1LFp32y5KDkVlp/JU3SW90wH2g1Pz8/c3NGrLt8CDyUXsJM2rgoZROhDzYGRM1k4NF
+         WVjw==
+X-Gm-Message-State: AOAM530n0PkHEx3U3gqqkvytj5sM8lYaHDGrjmbSVXo52TA9oqRmA0WW
+	uudod2F4CHbjiYlWtjg0kS0odxP5lziWU2k27x+Pig==
+X-Google-Smtp-Source: ABdhPJwHgu6MX7NhAwd4EkLiDaUQTvRgHtgs0ltqyCQLgN417gcAMf2BCutJE3sfOkxZqjDgfOwUxWCmaE1PNMqduXs=
+X-Received: by 2002:a2e:7c16:0:b0:244:be33:9718 with SMTP id
+ x22-20020a2e7c16000000b00244be339718mr15092896ljc.467.1647305417826; Mon, 14
+ Mar 2022 17:50:17 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220309165222.2843651-1-tjmercier@google.com> <20220309165222.2843651-9-tjmercier@google.com>
-In-Reply-To: <20220309165222.2843651-9-tjmercier@google.com>
+References: <20220309165222.2843651-1-tjmercier@google.com> <20220309165222.2843651-7-tjmercier@google.com>
+In-Reply-To: <20220309165222.2843651-7-tjmercier@google.com>
 From: Todd Kjos <tkjos@google.com>
-Date: Mon, 14 Mar 2022 17:43:40 -0700
-Message-ID: <CAHRSSEwN4Xuo2vLt8d2QfJbNOK21VB7_NjjbO_XGDz6pYUaXZg@mail.gmail.com>
+Date: Mon, 14 Mar 2022 17:50:05 -0700
+Message-ID: <CAHRSSEwY=1ns9LZSZi-yiYgx1UDE2_+L-+VFYPdWVqRuTSkYhw@mail.gmail.com>
 To: "T.J. Mercier" <tjmercier@google.com>
 X-MailFrom: tkjos@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: WGJR26G4PZHA2RUZQN6BLKLBYYERSGJX
-X-Message-ID-Hash: WGJR26G4PZHA2RUZQN6BLKLBYYERSGJX
-X-Mailman-Approved-At: Tue, 29 Mar 2022 13:48:27 +0000
+Message-ID-Hash: YFXVWWOXJ4QJJAIMBPUI2SBRMEEYI52Y
+X-Message-ID-Hash: YFXVWWOXJ4QJJAIMBPUI2SBRMEEYI52Y
+X-Mailman-Approved-At: Tue, 29 Mar 2022 13:48:29 +0000
 CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>, Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Benjamin Gaignard <benjamin.gaignard@linaro.org>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>, Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>, Shuah Khan <shuah@kernel.org>, kaleshsingh@google.com, Kenny.Ho@amd.com, 
  dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, cgroups@vger.kernel.org, linux-kselftest@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v3 8/8] selftests: Add binder cgroup gpu memory transfer test
+Subject: [Linaro-mm-sig] Re: [RFC v3 6/8] binder: Add a buffer flag to relinquish ownership of fds
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WGJR26G4PZHA2RUZQN6BLKLBYYERSGJX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YFXVWWOXJ4QJJAIMBPUI2SBRMEEYI52Y/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Wed, Mar 9, 2022 at 8:53 AM T.J. Mercier <tjmercier@google.com> wrote:
->
-> This test verifies that the cgroup GPU memory charge is transferred
-> correctly when a dmabuf is passed between processes in two different
-> cgroups and the sender specifies BINDER_BUFFER_FLAG_SENDER_NO_NEED in the
-> binder transaction data containing the dmabuf file descriptor.
->
-> Signed-off-by: T.J. Mercier <tjmercier@google.com>
-
-Reviewed-by: Todd Kjos <tkjos@google.com>
-for the binder driver interactions. Need Christian to take a look at
-the binderfs interactions.
-
-> ---
->  .../selftests/drivers/android/binder/Makefile |   8 +
->  .../drivers/android/binder/binder_util.c      | 254 +++++++++
->  .../drivers/android/binder/binder_util.h      |  32 ++
->  .../selftests/drivers/android/binder/config   |   4 +
->  .../binder/test_dmabuf_cgroup_transfer.c      | 480 ++++++++++++++++++
->  5 files changed, 778 insertions(+)
->  create mode 100644 tools/testing/selftests/drivers/android/binder/Makefile
->  create mode 100644 tools/testing/selftests/drivers/android/binder/binder_util.c
->  create mode 100644 tools/testing/selftests/drivers/android/binder/binder_util.h
->  create mode 100644 tools/testing/selftests/drivers/android/binder/config
->  create mode 100644 tools/testing/selftests/drivers/android/binder/test_dmabuf_cgroup_transfer.c
->
-> diff --git a/tools/testing/selftests/drivers/android/binder/Makefile b/tools/testing/selftests/drivers/android/binder/Makefile
-> new file mode 100644
-> index 000000000000..726439d10675
-> --- /dev/null
-> +++ b/tools/testing/selftests/drivers/android/binder/Makefile
-> @@ -0,0 +1,8 @@
-> +# SPDX-License-Identifier: GPL-2.0
-> +CFLAGS += -Wall
-> +
-> +TEST_GEN_PROGS = test_dmabuf_cgroup_transfer
-> +
-> +include ../../../lib.mk
-> +
-> +$(OUTPUT)/test_dmabuf_cgroup_transfer: ../../../cgroup/cgroup_util.c binder_util.c
-> diff --git a/tools/testing/selftests/drivers/android/binder/binder_util.c b/tools/testing/selftests/drivers/android/binder/binder_util.c
-> new file mode 100644
-> index 000000000000..c9dcf5b9d42b
-> --- /dev/null
-> +++ b/tools/testing/selftests/drivers/android/binder/binder_util.c
-> @@ -0,0 +1,254 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +#include "binder_util.h"
-> +
-> +#include <errno.h>
-> +#include <fcntl.h>
-> +#include <stdio.h>
-> +#include <stdlib.h>
-> +#include <string.h>
-> +#include <unistd.h>
-> +#include <sys/ioctl.h>
-> +#include <sys/mman.h>
-> +#include <sys/mount.h>
-> +
-> +#include <linux/limits.h>
-> +#include <linux/android/binder.h>
-> +#include <linux/android/binderfs.h>
-> +
-> +static const size_t BINDER_MMAP_SIZE = 64 * 1024;
-> +
-> +static void binderfs_unmount(const char *mountpoint)
-> +{
-> +       if (umount2(mountpoint, MNT_DETACH))
-> +               fprintf(stderr, "Failed to unmount binderfs at %s: %s\n",
-> +                       mountpoint, strerror(errno));
-> +       else
-> +               fprintf(stderr, "Binderfs unmounted: %s\n", mountpoint);
-> +
-> +       if (rmdir(mountpoint))
-> +               fprintf(stderr, "Failed to remove binderfs mount %s: %s\n",
-> +                       mountpoint, strerror(errno));
-> +       else
-> +               fprintf(stderr, "Binderfs mountpoint destroyed: %s\n", mountpoint);
-> +}
-> +
-> +struct binderfs_ctx create_binderfs(const char *name)
-> +{
-> +       int fd, ret, saved_errno;
-> +       struct binderfs_device device = { 0 };
-> +       struct binderfs_ctx ctx = { 0 };
-> +
-> +       /*
-> +        * P_tmpdir is set to "/tmp/" on Android platforms where Binder is most
-> +        * commonly used, but this path does not actually exist on Android. We
-> +        * will first try using "/data/local/tmp" and fallback to P_tmpdir if
-> +        * that fails for non-Android platforms.
-> +        */
-> +       static const char tmpdir[] = "/data/local/tmp";
-> +       static const size_t MAX_TMPDIR_SIZE =
-> +               sizeof(tmpdir) > sizeof(P_tmpdir) ?
-> +               sizeof(tmpdir) : sizeof(P_tmpdir);
-> +       static const char template[] = "/binderfs_XXXXXX";
-> +
-> +       char *mkdtemp_result;
-> +       char binderfs_mntpt[MAX_TMPDIR_SIZE + sizeof(template)];
-> +       char device_path[MAX_TMPDIR_SIZE + sizeof(template) + BINDERFS_MAX_NAME];
-> +
-> +       snprintf(binderfs_mntpt, sizeof(binderfs_mntpt), "%s%s", tmpdir, template);
-> +
-> +       mkdtemp_result = mkdtemp(binderfs_mntpt);
-> +       if (mkdtemp_result == NULL) {
-> +               fprintf(stderr, "Failed to create binderfs mountpoint at %s: %s.\n",
-> +                       binderfs_mntpt, strerror(errno));
-> +               fprintf(stderr, "Trying fallback mountpoint...\n");
-> +               snprintf(binderfs_mntpt, sizeof(binderfs_mntpt), "%s%s", P_tmpdir, template);
-> +               if (mkdtemp(binderfs_mntpt) == NULL) {
-> +                       fprintf(stderr, "Failed to create binderfs mountpoint at %s: %s\n",
-> +                       binderfs_mntpt, strerror(errno));
-> +                       return ctx;
-> +               }
-> +       }
-> +       fprintf(stderr, "Binderfs mountpoint created at %s\n", binderfs_mntpt);
-> +
-> +       if (mount(NULL, binderfs_mntpt, "binder", 0, 0)) {
-> +               perror("Could not mount binderfs");
-> +               rmdir(binderfs_mntpt);
-> +               return ctx;
-> +       }
-> +       fprintf(stderr, "Binderfs mounted at %s\n", binderfs_mntpt);
-> +
-> +       strncpy(device.name, name, sizeof(device.name));
-> +       snprintf(device_path, sizeof(device_path), "%s/binder-control", binderfs_mntpt);
-> +       fd = open(device_path, O_RDONLY | O_CLOEXEC);
-> +       if (!fd) {
-> +               perror("Failed to open binder-control device");
-> +               binderfs_unmount(binderfs_mntpt);
-> +               return ctx;
-> +       }
-> +
-> +       ret = ioctl(fd, BINDER_CTL_ADD, &device);
-> +       saved_errno = errno;
-> +       close(fd);
-> +       errno = saved_errno;
-> +       if (ret) {
-> +               perror("Failed to allocate new binder device");
-> +               binderfs_unmount(binderfs_mntpt);
-> +               return ctx;
-> +       }
-> +
-> +       fprintf(stderr, "Allocated new binder device with major %d, minor %d, and name %s at %s\n",
-> +               device.major, device.minor, device.name, binderfs_mntpt);
-> +
-> +       ctx.name = strdup(name);
-> +       ctx.mountpoint = strdup(binderfs_mntpt);
-> +       return ctx;
-> +}
-> +
-> +void destroy_binderfs(struct binderfs_ctx *ctx)
-> +{
-> +       char path[PATH_MAX];
-> +
-> +       snprintf(path, sizeof(path), "%s/%s", ctx->mountpoint, ctx->name);
-> +
-> +       if (unlink(path))
-> +               fprintf(stderr, "Failed to unlink binder device %s: %s\n", path, strerror(errno));
-> +       else
-> +               fprintf(stderr, "Destroyed binder %s at %s\n", ctx->name, ctx->mountpoint);
-> +
-> +       binderfs_unmount(ctx->mountpoint);
-> +
-> +       free(ctx->name);
-> +       free(ctx->mountpoint);
-> +}
-> +
-> +struct binder_ctx open_binder(struct binderfs_ctx *bfs_ctx)
-> +{
-> +       struct binder_ctx ctx = {.fd = -1, .memory = NULL};
-> +       char path[PATH_MAX];
-> +
-> +       snprintf(path, sizeof(path), "%s/%s", bfs_ctx->mountpoint, bfs_ctx->name);
-> +       ctx.fd = open(path, O_RDWR | O_NONBLOCK | O_CLOEXEC);
-> +       if (ctx.fd < 0) {
-> +               fprintf(stderr, "Error opening binder device %s: %s\n", path, strerror(errno));
-> +               return ctx;
-> +       }
-> +
-> +       ctx.memory = mmap(NULL, BINDER_MMAP_SIZE, PROT_READ, MAP_SHARED, ctx.fd, 0);
-> +       if (ctx.memory == NULL) {
-> +               perror("Error mapping binder memory");
-> +               close(ctx.fd);
-> +               ctx.fd = -1;
-> +       }
-> +
-> +       return ctx;
-> +}
-> +
-> +void close_binder(struct binder_ctx *ctx)
-> +{
-> +       if (munmap(ctx->memory, BINDER_MMAP_SIZE))
-> +               perror("Failed to unmap binder memory");
-> +       ctx->memory = NULL;
-> +
-> +       if (close(ctx->fd))
-> +               perror("Failed to close binder");
-> +       ctx->fd = -1;
-> +}
-> +
-> +int become_binder_context_manager(int binder_fd)
-> +{
-> +       return ioctl(binder_fd, BINDER_SET_CONTEXT_MGR, 0);
-> +}
-> +
-> +int do_binder_write_read(int binder_fd, void *writebuf, binder_size_t writesize,
-> +                        void *readbuf, binder_size_t readsize)
-> +{
-> +       int err;
-> +       struct binder_write_read bwr = {
-> +               .write_buffer = (binder_uintptr_t)writebuf,
-> +               .write_size = writesize,
-> +               .read_buffer = (binder_uintptr_t)readbuf,
-> +               .read_size = readsize
-> +       };
-> +
-> +       do {
-> +               if (ioctl(binder_fd, BINDER_WRITE_READ, &bwr) >= 0)
-> +                       err = 0;
-> +               else
-> +                       err = -errno;
-> +       } while (err == -EINTR);
-> +
-> +       if (err < 0) {
-> +               perror("BINDER_WRITE_READ");
-> +               return -1;
-> +       }
-> +
-> +       if (bwr.write_consumed < writesize) {
-> +               fprintf(stderr, "Binder did not consume full write buffer %llu %llu\n",
-> +                       bwr.write_consumed, writesize);
-> +               return -1;
-> +       }
-> +
-> +       return bwr.read_consumed;
-> +}
-> +
-> +static const char *reply_string(int cmd)
-> +{
-> +       switch (cmd) {
-> +       case BR_ERROR:
-> +               return("BR_ERROR");
-> +       case BR_OK:
-> +               return("BR_OK");
-> +       case BR_TRANSACTION_SEC_CTX:
-> +               return("BR_TRANSACTION_SEC_CTX");
-> +       case BR_TRANSACTION:
-> +               return("BR_TRANSACTION");
-> +       case BR_REPLY:
-> +               return("BR_REPLY");
-> +       case BR_ACQUIRE_RESULT:
-> +               return("BR_ACQUIRE_RESULT");
-> +       case BR_DEAD_REPLY:
-> +               return("BR_DEAD_REPLY");
-> +       case BR_TRANSACTION_COMPLETE:
-> +               return("BR_TRANSACTION_COMPLETE");
-> +       case BR_INCREFS:
-> +               return("BR_INCREFS");
-> +       case BR_ACQUIRE:
-> +               return("BR_ACQUIRE");
-> +       case BR_RELEASE:
-> +               return("BR_RELEASE");
-> +       case BR_DECREFS:
-> +               return("BR_DECREFS");
-> +       case BR_ATTEMPT_ACQUIRE:
-> +               return("BR_ATTEMPT_ACQUIRE");
-> +       case BR_NOOP:
-> +               return("BR_NOOP");
-> +       case BR_SPAWN_LOOPER:
-> +               return("BR_SPAWN_LOOPER");
-> +       case BR_FINISHED:
-> +               return("BR_FINISHED");
-> +       case BR_DEAD_BINDER:
-> +               return("BR_DEAD_BINDER");
-> +       case BR_CLEAR_DEATH_NOTIFICATION_DONE:
-> +               return("BR_CLEAR_DEATH_NOTIFICATION_DONE");
-> +       case BR_FAILED_REPLY:
-> +               return("BR_FAILED_REPLY");
-> +       case BR_FROZEN_REPLY:
-> +               return("BR_FROZEN_REPLY");
-> +       case BR_ONEWAY_SPAM_SUSPECT:
-> +               return("BR_ONEWAY_SPAM_SUSPECT");
-> +       default:
-> +               return("Unknown");
-> +       };
-> +}
-> +
-> +int expect_binder_reply(int32_t actual, int32_t expected)
-> +{
-> +       if (actual != expected) {
-> +               fprintf(stderr, "Expected %s but received %s\n",
-> +                       reply_string(expected), reply_string(actual));
-> +               return -1;
-> +       }
-> +       return 0;
-> +}
-> +
-> diff --git a/tools/testing/selftests/drivers/android/binder/binder_util.h b/tools/testing/selftests/drivers/android/binder/binder_util.h
-> new file mode 100644
-> index 000000000000..807f5abe987e
-> --- /dev/null
-> +++ b/tools/testing/selftests/drivers/android/binder/binder_util.h
-> @@ -0,0 +1,32 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +
-> +#ifndef SELFTEST_BINDER_UTIL_H
-> +#define SELFTEST_BINDER_UTIL_H
-> +
-> +#include <stdint.h>
-> +
-> +#include <linux/android/binder.h>
-> +
-> +struct binderfs_ctx {
-> +       char *name;
-> +       char *mountpoint;
-> +};
-> +
-> +struct binder_ctx {
-> +       int fd;
-> +       void *memory;
-> +};
-> +
-> +struct binderfs_ctx create_binderfs(const char *name);
-> +void destroy_binderfs(struct binderfs_ctx *ctx);
-> +
-> +struct binder_ctx open_binder(struct binderfs_ctx *bfs_ctx);
-> +void close_binder(struct binder_ctx *ctx);
-> +
-> +int become_binder_context_manager(int binder_fd);
-> +
-> +int do_binder_write_read(int binder_fd, void *writebuf, binder_size_t writesize,
-> +                        void *readbuf, binder_size_t readsize);
-> +
-> +int expect_binder_reply(int32_t actual, int32_t expected);
-> +#endif
-> diff --git a/tools/testing/selftests/drivers/android/binder/config b/tools/testing/selftests/drivers/android/binder/config
-> new file mode 100644
-> index 000000000000..fcc5f8f693b3
-> --- /dev/null
-> +++ b/tools/testing/selftests/drivers/android/binder/config
-> @@ -0,0 +1,4 @@
-> +CONFIG_CGROUP_GPU=y
-> +CONFIG_ANDROID=y
-> +CONFIG_ANDROID_BINDERFS=y
-> +CONFIG_ANDROID_BINDER_IPC=y
-> diff --git a/tools/testing/selftests/drivers/android/binder/test_dmabuf_cgroup_transfer.c b/tools/testing/selftests/drivers/android/binder/test_dmabuf_cgroup_transfer.c
-> new file mode 100644
-> index 000000000000..9b952ab401cc
-> --- /dev/null
-> +++ b/tools/testing/selftests/drivers/android/binder/test_dmabuf_cgroup_transfer.c
-> @@ -0,0 +1,480 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +
-> +/*
-> + * This test verifies that the cgroup GPU memory charge is transferred correctly
-> + * when a dmabuf is passed between processes in two different cgroups and the
-> + * sender specifies BINDER_BUFFER_FLAG_SENDER_NO_NEED in the binder transaction
-> + * data containing the dmabuf file descriptor.
-> + *
-> + * The gpu_cgroup_dmabuf_transfer test function becomes the binder context
-> + * manager, then forks a child who initiates a transaction with the context
-> + * manager by specifying a target of 0. The context manager reply contains a
-> + * dmabuf file descriptor which was allocated by the gpu_cgroup_dmabuf_transfer
-> + * test function, but should be charged to the child cgroup after the binder
-> + * transaction.
-> + */
-> +
-> +#include <errno.h>
-> +#include <fcntl.h>
-> +#include <stddef.h>
-> +#include <stdint.h>
-> +#include <stdio.h>
-> +#include <stdlib.h>
-> +#include <string.h>
-> +#include <sys/epoll.h>
-> +#include <sys/ioctl.h>
-> +#include <sys/types.h>
-> +#include <sys/wait.h>
-> +
-> +#include "binder_util.h"
-> +#include "../../../cgroup/cgroup_util.h"
-> +#include "../../../kselftest.h"
-> +#include "../../../kselftest_harness.h"
-> +
-> +#include <linux/limits.h>
-> +#include <linux/dma-heap.h>
-> +#include <linux/android/binder.h>
-> +
-> +#define UNUSED(x) ((void)(x))
-> +
-> +static const unsigned int BINDER_CODE = 8675309; /* Any number will work here */
-> +
-> +struct cgroup_ctx {
-> +       char *root;
-> +       char *source;
-> +       char *dest;
-> +};
-> +
-> +void destroy_cgroups(struct __test_metadata *_metadata, struct cgroup_ctx *ctx)
-> +{
-> +       if (ctx->source != NULL) {
-> +               TH_LOG("Destroying cgroup: %s", ctx->source);
-> +               rmdir(ctx->source);
-> +               free(ctx->source);
-> +       }
-> +
-> +       if (ctx->dest != NULL) {
-> +               TH_LOG("Destroying cgroup: %s", ctx->dest);
-> +               rmdir(ctx->dest);
-> +               free(ctx->dest);
-> +       }
-> +
-> +       free(ctx->root);
-> +       ctx->root = ctx->source = ctx->dest = NULL;
-> +}
-> +
-> +struct cgroup_ctx create_cgroups(struct __test_metadata *_metadata)
-> +{
-> +       struct cgroup_ctx ctx = {0};
-> +       char root[PATH_MAX], *tmp;
-> +       static const char template[] = "/gpucg_XXXXXX";
-> +
-> +       if (cg_find_unified_root(root, sizeof(root))) {
-> +               TH_LOG("Could not find cgroups root");
-> +               return ctx;
-> +       }
-> +
-> +       if (cg_read_strstr(root, "cgroup.controllers", "gpu")) {
-> +               TH_LOG("Could not find GPU controller");
-> +               return ctx;
-> +       }
-> +
-> +       if (cg_write(root, "cgroup.subtree_control", "+gpu")) {
-> +               TH_LOG("Could not enable GPU controller");
-> +               return ctx;
-> +       }
-> +
-> +       ctx.root = strdup(root);
-> +
-> +       snprintf(root, sizeof(root), "%s/%s", ctx.root, template);
-> +       tmp = mkdtemp(root);
-> +       if (tmp == NULL) {
-> +               TH_LOG("%s - Could not create source cgroup", strerror(errno));
-> +               destroy_cgroups(_metadata, &ctx);
-> +               return ctx;
-> +       }
-> +       ctx.source = strdup(tmp);
-> +
-> +       snprintf(root, sizeof(root), "%s/%s", ctx.root, template);
-> +       tmp = mkdtemp(root);
-> +       if (tmp == NULL) {
-> +               TH_LOG("%s - Could not create destination cgroup", strerror(errno));
-> +               destroy_cgroups(_metadata, &ctx);
-> +               return ctx;
-> +       }
-> +       ctx.dest = strdup(tmp);
-> +
-> +       TH_LOG("Created cgroups: %s %s", ctx.source, ctx.dest);
-> +
-> +       return ctx;
-> +}
-> +
-> +int dmabuf_heap_alloc(int fd, size_t len, int *dmabuf_fd)
-> +{
-> +       struct dma_heap_allocation_data data = {
-> +               .len = len,
-> +               .fd = 0,
-> +               .fd_flags = O_RDONLY | O_CLOEXEC,
-> +               .heap_flags = 0,
-> +       };
-> +       int ret;
-> +
-> +       if (!dmabuf_fd)
-> +               return -EINVAL;
-> +
-> +       ret = ioctl(fd, DMA_HEAP_IOCTL_ALLOC, &data);
-> +       if (ret < 0)
-> +               return ret;
-> +       *dmabuf_fd = (int)data.fd;
-> +       return ret;
-> +}
-> +
-> +/* The system heap is known to export dmabufs with support for cgroup tracking */
-> +int alloc_dmabuf_from_system_heap(struct __test_metadata *_metadata, size_t bytes)
-> +{
-> +       int heap_fd = -1, dmabuf_fd = -1;
-> +       static const char * const heap_path = "/dev/dma_heap/system";
-> +
-> +       heap_fd = open(heap_path, O_RDONLY);
-> +       if (heap_fd < 0) {
-> +               TH_LOG("%s - open %s failed!\n", strerror(errno), heap_path);
-> +               return -1;
-> +       }
-> +
-> +       if (dmabuf_heap_alloc(heap_fd, bytes, &dmabuf_fd))
-> +               TH_LOG("dmabuf allocation failed! - %s", strerror(errno));
-> +       close(heap_fd);
-> +
-> +       return dmabuf_fd;
-> +}
-> +
-> +int binder_request_dmabuf(int binder_fd)
-> +{
-> +       int ret;
-> +
-> +       /*
-> +        * We just send an empty binder_buffer_object to initiate a transaction
-> +        * with the context manager, who should respond with a single dmabuf
-> +        * inside a binder_fd_array_object.
-> +        */
-> +
-> +       struct binder_buffer_object bbo = {
-> +               .hdr.type = BINDER_TYPE_PTR,
-> +               .flags = 0,
-> +               .buffer = 0,
-> +               .length = 0,
-> +               .parent = 0, /* No parent */
-> +               .parent_offset = 0 /* No parent */
-> +       };
-> +
-> +       binder_size_t offsets[] = {0};
-> +
-> +       struct {
-> +               int32_t cmd;
-> +               struct binder_transaction_data btd;
-> +       } __attribute__((packed)) bc = {
-> +               .cmd = BC_TRANSACTION,
-> +               .btd = {
-> +                       .target = { 0 },
-> +                       .cookie = 0,
-> +                       .code = BINDER_CODE,
-> +                       .flags = TF_ACCEPT_FDS, /* We expect a FDA in the reply */
-> +                       .data_size = sizeof(bbo),
-> +                       .offsets_size = sizeof(offsets),
-> +                       .data.ptr = {
-> +                               (binder_uintptr_t)&bbo,
-> +                               (binder_uintptr_t)offsets
-> +                       }
-> +               },
-> +       };
-> +
-> +       struct {
-> +               int32_t reply_noop;
-> +       } __attribute__((packed)) br;
-> +
-> +       ret = do_binder_write_read(binder_fd, &bc, sizeof(bc), &br, sizeof(br));
-> +       if (ret >= sizeof(br) && expect_binder_reply(br.reply_noop, BR_NOOP)) {
-> +               return -1;
-> +       } else if (ret < sizeof(br)) {
-> +               fprintf(stderr, "Not enough bytes in binder reply %d\n", ret);
-> +               return -1;
-> +       }
-> +       return 0;
-> +}
-> +
-> +int send_dmabuf_reply(int binder_fd, struct binder_transaction_data *tr, int dmabuf_fd)
-> +{
-> +       int ret;
-> +       /*
-> +        * The trailing 0 is to achieve the necessary alignment for the binder
-> +        * buffer_size.
-> +        */
-> +       int fdarray[] = { dmabuf_fd, 0 };
-> +
-> +       struct binder_buffer_object bbo = {
-> +               .hdr.type = BINDER_TYPE_PTR,
-> +               .flags = BINDER_BUFFER_FLAG_SENDER_NO_NEED,
-> +               .buffer = (binder_uintptr_t)fdarray,
-> +               .length = sizeof(fdarray),
-> +               .parent = 0, /* No parent */
-> +               .parent_offset = 0 /* No parent */
-> +       };
-> +
-> +       struct binder_fd_array_object bfdao = {
-> +               .hdr.type = BINDER_TYPE_FDA,
-> +               .num_fds = 1,
-> +               .parent = 0, /* The binder_buffer_object */
-> +               .parent_offset = 0 /* FDs follow immediately */
-> +       };
-> +
-> +       uint64_t sz = sizeof(fdarray);
-> +       uint8_t data[sizeof(sz) + sizeof(bbo) + sizeof(bfdao)];
-> +       binder_size_t offsets[] = {sizeof(sz), sizeof(sz)+sizeof(bbo)};
-> +
-> +       memcpy(data,                            &sz, sizeof(sz));
-> +       memcpy(data + sizeof(sz),               &bbo, sizeof(bbo));
-> +       memcpy(data + sizeof(sz) + sizeof(bbo), &bfdao, sizeof(bfdao));
-> +
-> +       struct {
-> +               int32_t cmd;
-> +               struct binder_transaction_data_sg btd;
-> +       } __attribute__((packed)) bc = {
-> +               .cmd = BC_REPLY_SG,
-> +               .btd.transaction_data = {
-> +                       .target = { tr->target.handle },
-> +                       .cookie = tr->cookie,
-> +                       .code = BINDER_CODE,
-> +                       .flags = 0,
-> +                       .data_size = sizeof(data),
-> +                       .offsets_size = sizeof(offsets),
-> +                       .data.ptr = {
-> +                               (binder_uintptr_t)data,
-> +                               (binder_uintptr_t)offsets
-> +                       }
-> +               },
-> +               .btd.buffers_size = sizeof(fdarray)
-> +       };
-> +
-> +       struct {
-> +               int32_t reply_noop;
-> +       } __attribute__((packed)) br;
-> +
-> +       ret = do_binder_write_read(binder_fd, &bc, sizeof(bc), &br, sizeof(br));
-> +       if (ret >= sizeof(br) && expect_binder_reply(br.reply_noop, BR_NOOP)) {
-> +               return -1;
-> +       } else if (ret < sizeof(br)) {
-> +               fprintf(stderr, "Not enough bytes in binder reply %d\n", ret);
-> +               return -1;
-> +       }
-> +       return 0;
-> +}
-> +
-> +struct binder_transaction_data *binder_wait_for_transaction(int binder_fd,
-> +                                                           uint32_t *readbuf,
-> +                                                           size_t readsize)
-> +{
-> +       static const int MAX_EVENTS = 1, EPOLL_WAIT_TIME_MS = 3 * 1000;
-> +       struct binder_reply {
-> +               int32_t reply0;
-> +               int32_t reply1;
-> +               struct binder_transaction_data btd;
-> +       } *br;
-> +       struct binder_transaction_data *ret = NULL;
-> +       struct epoll_event events[MAX_EVENTS];
-> +       int epoll_fd, num_events, readcount;
-> +       uint32_t bc[] = { BC_ENTER_LOOPER };
-> +
-> +       do_binder_write_read(binder_fd, &bc, sizeof(bc), NULL, 0);
-> +
-> +       epoll_fd = epoll_create1(EPOLL_CLOEXEC);
-> +       if (epoll_fd == -1) {
-> +               perror("epoll_create");
-> +               return NULL;
-> +       }
-> +
-> +       events[0].events = EPOLLIN;
-> +       if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, binder_fd, &events[0])) {
-> +               perror("epoll_ctl add");
-> +               goto err_close;
-> +       }
-> +
-> +       num_events = epoll_wait(epoll_fd, events, MAX_EVENTS, EPOLL_WAIT_TIME_MS);
-> +       if (num_events < 0) {
-> +               perror("epoll_wait");
-> +               goto err_ctl;
-> +       } else if (num_events == 0) {
-> +               fprintf(stderr, "No events\n");
-> +               goto err_ctl;
-> +       }
-> +
-> +       readcount = do_binder_write_read(binder_fd, NULL, 0, readbuf, readsize);
-> +       fprintf(stderr, "Read %d bytes from binder\n", readcount);
-> +
-> +       if (readcount < (int)sizeof(struct binder_reply)) {
-> +               fprintf(stderr, "read_consumed not large enough\n");
-> +               goto err_ctl;
-> +       }
-> +
-> +       br = (struct binder_reply *)readbuf;
-> +       if (expect_binder_reply(br->reply0, BR_NOOP))
-> +               goto err_ctl;
-> +
-> +       if (br->reply1 == BR_TRANSACTION) {
-> +               if (br->btd.code == BINDER_CODE)
-> +                       ret = &br->btd;
-> +               else
-> +                       fprintf(stderr, "Received transaction with unexpected code: %u\n",
-> +                               br->btd.code);
-> +       } else {
-> +               expect_binder_reply(br->reply1, BR_TRANSACTION_COMPLETE);
-> +       }
-> +
-> +err_ctl:
-> +       if (epoll_ctl(epoll_fd, EPOLL_CTL_DEL, binder_fd, NULL))
-> +               perror("epoll_ctl del");
-> +err_close:
-> +       close(epoll_fd);
-> +       return ret;
-> +}
-> +
-> +static int child_request_dmabuf_transfer(const char *cgroup, void *arg)
-> +{
-> +       UNUSED(cgroup);
-> +       int ret = -1;
-> +       uint32_t readbuf[32];
-> +       struct binderfs_ctx bfs_ctx = *(struct binderfs_ctx *)arg;
-> +       struct binder_ctx b_ctx;
-> +
-> +       fprintf(stderr, "Child PID: %d\n", getpid());
-> +
-> +       b_ctx = open_binder(&bfs_ctx);
-> +       if (b_ctx.fd < 0) {
-> +               fprintf(stderr, "Child unable to open binder\n");
-> +               return -1;
-> +       }
-> +
-> +       if (binder_request_dmabuf(b_ctx.fd))
-> +               goto err;
-> +
-> +       /* The child must stay alive until the binder reply is received */
-> +       if (binder_wait_for_transaction(b_ctx.fd, readbuf, sizeof(readbuf)) == NULL)
-> +               ret = 0;
-> +
-> +       /*
-> +        * We don't close the received dmabuf here so that the parent can
-> +        * inspect the cgroup gpu memory charges to verify the charge transfer
-> +        * completed successfully.
-> +        */
-> +err:
-> +       close_binder(&b_ctx);
-> +       fprintf(stderr, "Child done\n");
-> +       return ret;
-> +}
-> +
-> +TEST(gpu_cgroup_dmabuf_transfer)
-> +{
-> +       static const char * const GPUMEM_FILENAME = "gpu.memory.current";
-> +       static const size_t ONE_MiB = 1024 * 1024;
-> +
-> +       int ret, dmabuf_fd;
-> +       uint32_t readbuf[32];
-> +       long memsize;
-> +       pid_t child_pid;
-> +       struct binderfs_ctx bfs_ctx;
-> +       struct binder_ctx b_ctx;
-> +       struct cgroup_ctx cg_ctx;
-> +       struct binder_transaction_data *tr;
-> +       struct flat_binder_object *fbo;
-> +       struct binder_buffer_object *bbo;
-> +
-> +       bfs_ctx = create_binderfs("testbinder");
-> +       if (bfs_ctx.name == NULL)
-> +               ksft_exit_skip("The Android binderfs filesystem is not available\n");
-> +
-> +       cg_ctx = create_cgroups(_metadata);
-> +       if (cg_ctx.root == NULL) {
-> +               destroy_binderfs(&bfs_ctx);
-> +               ksft_exit_skip("cgroup v2 isn't mounted\n");
-> +       }
-> +
-> +       ASSERT_EQ(cg_enter_current(cg_ctx.source), 0) {
-> +               TH_LOG("Could not move parent to cgroup: %s", cg_ctx.source);
-> +               goto err_cg;
-> +       }
-> +
-> +       dmabuf_fd = alloc_dmabuf_from_system_heap(_metadata, ONE_MiB);
-> +       ASSERT_GE(dmabuf_fd, 0) {
-> +               goto err_cg;
-> +       }
-> +       TH_LOG("Allocated dmabuf");
-> +
-> +       memsize = cg_read_key_long(cg_ctx.source, GPUMEM_FILENAME, "system");
-> +       ASSERT_EQ(memsize, ONE_MiB) {
-> +               TH_LOG("GPU memory used after allocation: %ld but it should be %lu",
-> +                      memsize, (unsigned long)ONE_MiB);
-> +               goto err_dmabuf;
-> +       }
-> +
-> +       b_ctx = open_binder(&bfs_ctx);
-> +       ASSERT_GE(b_ctx.fd, 0) {
-> +               TH_LOG("Parent unable to open binder");
-> +               goto err_dmabuf;
-> +       }
-> +       TH_LOG("Opened binder at %s/%s", bfs_ctx.mountpoint, bfs_ctx.name);
-> +
-> +       ASSERT_EQ(become_binder_context_manager(b_ctx.fd), 0) {
-> +               TH_LOG("Cannot become context manager: %s", strerror(errno));
-> +               goto err_binder;
-> +       }
-> +
-> +       child_pid = cg_run_nowait(cg_ctx.dest, child_request_dmabuf_transfer, &bfs_ctx);
-> +       ASSERT_GT(child_pid, 0) {
-> +               TH_LOG("Error forking: %s", strerror(errno));
-> +               goto err_binder;
-> +       }
-> +
-> +       tr = binder_wait_for_transaction(b_ctx.fd, readbuf, sizeof(readbuf));
-> +       ASSERT_NE(tr, NULL) {
-> +               TH_LOG("Error receiving transaction request from child");
-> +               goto err_child;
-> +       }
-> +       fbo = (struct flat_binder_object *)tr->data.ptr.buffer;
-> +       ASSERT_EQ(fbo->hdr.type, BINDER_TYPE_PTR) {
-> +               TH_LOG("Did not receive a buffer object from child");
-> +               goto err_child;
-> +       }
-> +       bbo = (struct binder_buffer_object *)fbo;
-> +       ASSERT_EQ(bbo->length, 0) {
-> +               TH_LOG("Did not receive an empty buffer object from child");
-> +               goto err_child;
-> +       }
-> +
-> +       TH_LOG("Received transaction from child");
-> +       send_dmabuf_reply(b_ctx.fd, tr, dmabuf_fd);
-> +
-> +       ASSERT_EQ(cg_read_key_long(cg_ctx.dest, GPUMEM_FILENAME, "system"), ONE_MiB) {
-> +               TH_LOG("Destination cgroup does not have system charge!");
-> +               goto err_child;
-> +       }
-> +       ASSERT_EQ(cg_read_key_long(cg_ctx.source, GPUMEM_FILENAME, "system"), 0) {
-> +               TH_LOG("Source cgroup still has system charge!");
-> +               goto err_child;
-> +       }
-> +       TH_LOG("Charge transfer succeeded!");
-> +
-> +err_child:
-> +       waitpid(child_pid, &ret, 0);
-> +       if (WIFEXITED(ret))
-> +               TH_LOG("Child %d terminated with %d", child_pid, WEXITSTATUS(ret));
-> +       else
-> +               TH_LOG("Child terminated abnormally");
-> +err_binder:
-> +       close_binder(&b_ctx);
-> +err_dmabuf:
-> +       close(dmabuf_fd);
-> +err_cg:
-> +       destroy_cgroups(_metadata, &cg_ctx);
-> +       destroy_binderfs(&bfs_ctx);
-> +}
-> +
-> +TEST_HARNESS_MAIN
-> --
-> 2.35.1.616.g0bdcbb4464-goog
->
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gV2VkLCBNYXIgOSwgMjAyMiBhdCA4OjUyIEFNIFQuSi4gTWVyY2llciA8dGptZXJjaWVyQGdv
+b2dsZS5jb20+IHdyb3RlOg0KPg0KPiBGcm9tOiBIcmlkeWEgVmFsc2FyYWp1IDxocmlkeWFAZ29v
+Z2xlLmNvbT4NCj4NCj4gVGhpcyBwYXRjaCBpbnRyb2R1Y2VzIGEgYnVmZmVyIGZsYWcgQklOREVS
+X0JVRkZFUl9GTEFHX1NFTkRFUl9OT19ORUVEDQo+IHRoYXQgYSBwcm9jZXNzIHNlbmRpbmcgYW4g
+ZmQgYXJyYXkgdG8gYW5vdGhlciBwcm9jZXNzIG92ZXIgYmluZGVyIElQQw0KPiBjYW4gc2V0IHRv
+IHJlbGlucXVpc2ggb3duZXJzaGlwIG9mIHRoZSBmZHMgYmVpbmcgc2VudCBmb3IgbWVtb3J5DQo+
+IGFjY291bnRpbmcgcHVycG9zZXMuIElmIHRoZSBmbGFnIGlzIGZvdW5kIHRvIGJlIHNldCBkdXJp
+bmcgdGhlIGZkIGFycmF5DQo+IHRyYW5zbGF0aW9uIGFuZCB0aGUgZmQgaXMgZm9yIGEgRE1BLUJV
+RiwgdGhlIGJ1ZmZlciBpcyB1bmNoYXJnZWQgZnJvbQ0KPiB0aGUgc2VuZGVyJ3MgY2dyb3VwIGFu
+ZCBjaGFyZ2VkIHRvIHRoZSByZWNlaXZpbmcgcHJvY2VzcydzIGNncm91cA0KPiBpbnN0ZWFkLg0K
+Pg0KPiBJdCBpcyB1cCB0byB0aGUgc2VuZGluZyBwcm9jZXNzIHRvIGVuc3VyZSB0aGF0IGl0IGNs
+b3NlcyB0aGUgZmRzDQo+IHJlZ2FyZGxlc3Mgb2Ygd2hldGhlciB0aGUgdHJhbnNmZXIgZmFpbGVk
+IG9yIHN1Y2NlZWRlZC4NCj4NCj4gTW9zdCBncmFwaGljcyBzaGFyZWQgbWVtb3J5IGFsbG9jYXRp
+b25zIGluIEFuZHJvaWQgYXJlIGRvbmUgYnkgdGhlDQo+IGdyYXBoaWNzIGFsbG9jYXRvciBIQUwg
+cHJvY2Vzcy4gT24gcmVxdWVzdHMgZnJvbSBjbGllbnRzLCB0aGUgSEFMIHByb2Nlc3MNCj4gYWxs
+b2NhdGVzIG1lbW9yeSBhbmQgc2VuZHMgdGhlIGZkcyB0byB0aGUgY2xpZW50cyBvdmVyIGJpbmRl
+ciBJUEMuDQo+IFRoZSBncmFwaGljcyBhbGxvY2F0b3IgSEFMIHdpbGwgbm90IHJldGFpbiBhbnkg
+cmVmZXJlbmNlcyB0byB0aGUNCj4gYnVmZmVycy4gV2hlbiB0aGUgSEFMIHNldHMgdGhlIEJJTkRF
+Ul9CVUZGRVJfRkxBR19TRU5ERVJfTk9fTkVFRCBmb3IgZmQNCj4gYXJyYXlzIGhvbGRpbmcgRE1B
+LUJVRiBmZHMsIHRoZSBncHUgY2dyb3VwIGNvbnRyb2xsZXIgd2lsbCBiZSBhYmxlIHRvDQo+IGNv
+cnJlY3RseSBjaGFyZ2UgdGhlIGJ1ZmZlcnMgdG8gdGhlIGNsaWVudCBwcm9jZXNzZXMgaW5zdGVh
+ZCBvZiB0aGUNCj4gZ3JhcGhpY3MgYWxsb2NhdG9yIEhBTC4NCj4NCj4gU2luY2UgdGhpcyBpcyBh
+IG5ldyBmZWF0dXJlIGV4cG9zZWQgdG8gdXNlcnNwYWNlLCB0aGUga2VybmVsIGFuZCB1c2Vyc3Bh
+Y2UNCj4gbXVzdCBiZSBjb21wYXRpYmxlIGZvciB0aGUgYWNjb3VudGluZyB0byB3b3JrIGZvciB0
+cmFuc2ZlcnMuIEluIGFsbCBjYXNlcw0KPiB0aGUgYWxsb2NhdGlvbiBhbmQgdHJhbnNwb3J0IG9m
+IERNQSBidWZmZXJzIHZpYSBiaW5kZXIgd2lsbCBzdWNjZWVkLCBidXQNCj4gb25seSB3aGVuIGJv
+dGggdGhlIGtlcm5lbCBzdXBwb3J0cywgYW5kIHVzZXJzcGFjZSBkZXBlbmRzIG9uIHRoaXMgZmVh
+dHVyZQ0KPiB3aWxsIHRoZSB0cmFuc2ZlciBhY2NvdW50aW5nIHdvcmsuIFRoZSBwb3NzaWJsZSBz
+Y2VuYXJpb3MgYXJlIGRldGFpbGVkDQo+IGJlbG93Og0KPg0KPiAxLiBuZXcga2VybmVsICsgb2xk
+IHVzZXJzcGFjZQ0KPiBUaGUga2VybmVsIHN1cHBvcnRzIHRoZSBmZWF0dXJlIGJ1dCB1c2Vyc3Bh
+Y2UgZG9lcyBub3QgdXNlIGl0LiBUaGUgb2xkDQo+IHVzZXJzcGFjZSB3b24ndCBtb3VudCB0aGUg
+bmV3IGNncm91cCBjb250cm9sbGVyLCBhY2NvdW50aW5nIGlzIG5vdA0KPiBwZXJmb3JtZWQsIGNo
+YXJnZSBpcyBub3QgdHJhbnNmZXJyZWQuDQo+DQo+IDIuIG9sZCBrZXJuZWwgKyBuZXcgdXNlcnNw
+YWNlDQo+IFRoZSBuZXcgY2dyb3VwIGNvbnRyb2xsZXIgaXMgbm90IHN1cHBvcnRlZCBieSB0aGUg
+a2VybmVsLCBhY2NvdW50aW5nIGlzDQo+IG5vdCBwZXJmb3JtZWQsIGNoYXJnZSBpcyBub3QgdHJh
+bnNmZXJyZWQuDQo+DQo+IDMuIG9sZCBrZXJuZWwgKyBvbGQgdXNlcnNwYWNlDQo+IFNhbWUgYXMg
+IzINCj4NCj4gNC4gbmV3IGtlcm5lbCArIG5ldyB1c2Vyc3BhY2UNCj4gQ2dyb3VwIGlzIG1vdW50
+ZWQsIGZlYXR1cmUgaXMgc3VwcG9ydGVkIGFuZCB1c2VkLg0KPg0KPiBTaWduZWQtb2ZmLWJ5OiBI
+cmlkeWEgVmFsc2FyYWp1IDxocmlkeWFAZ29vZ2xlLmNvbT4NCj4gU2lnbmVkLW9mZi1ieTogVC5K
+LiBNZXJjaWVyIDx0am1lcmNpZXJAZ29vZ2xlLmNvbT4NCg0KQWNrZWQtYnk6IFRvZGQgS2pvcyA8
+dGtqb3NAZ29vZ2xlLmNvbT4NCg0KPg0KPiAtLS0NCj4gdjMgY2hhbmdlcw0KPiBSZW1vdmUgYW5k
+cm9pZCBmcm9tIHRpdGxlIHBlciBUb2RkIEtqb3MuDQo+DQo+IFVzZSBtb3JlIGNvbW1vbiBkdWFs
+IGF1dGhvciBjb21taXQgbWVzc2FnZSBmb3JtYXQgcGVyIEpvaG4gU3R1bHR6Lg0KPg0KPiBJbmNs
+dWRlIGRldGFpbHMgb24gYmVoYXZpb3IgZm9yIGFsbCBjb21iaW5hdGlvbnMgb2Yga2VybmVsL3Vz
+ZXJzcGFjZQ0KPiB2ZXJzaW9ucyBpbiBjaGFuZ2Vsb2cgKHRoYW5rcyBTdXJlbiBCYWdoZGFzYXJ5
+YW4pIHBlciBHcmVnIEtyb2FoLUhhcnRtYW4uDQo+DQo+IHYyIGNoYW5nZXMNCj4gTW92ZSBkbWEt
+YnVmIGNncm91cCBjaGFyZ2UgdHJhbnNmZXIgZnJvbSBhIGRtYV9idWZfb3AgZGVmaW5lZCBieSBl
+dmVyeQ0KPiBoZWFwIHRvIGEgc2luZ2xlIGRtYS1idWYgZnVuY3Rpb24gZm9yIGFsbCBoZWFwcyBw
+ZXIgRGFuaWVsIFZldHRlciBhbmQNCj4gQ2hyaXN0aWFuIEvDtm5pZy4NCj4gLS0tDQo+ICBkcml2
+ZXJzL2FuZHJvaWQvYmluZGVyLmMgICAgICAgICAgICB8IDI2ICsrKysrKysrKysrKysrKysrKysr
+KysrKysrDQo+ICBpbmNsdWRlL3VhcGkvbGludXgvYW5kcm9pZC9iaW5kZXIuaCB8ICAxICsNCj4g
+IDIgZmlsZXMgY2hhbmdlZCwgMjcgaW5zZXJ0aW9ucygrKQ0KPg0KPiBkaWZmIC0tZ2l0IGEvZHJp
+dmVycy9hbmRyb2lkL2JpbmRlci5jIGIvZHJpdmVycy9hbmRyb2lkL2JpbmRlci5jDQo+IGluZGV4
+IDgzNTFjNTYzODg4MC4uZjUwZDg4ZGVkMTg4IDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL2FuZHJv
+aWQvYmluZGVyLmMNCj4gKysrIGIvZHJpdmVycy9hbmRyb2lkL2JpbmRlci5jDQo+IEBAIC00Miw2
+ICs0Miw3IEBADQo+DQo+ICAjZGVmaW5lIHByX2ZtdChmbXQpIEtCVUlMRF9NT0ROQU1FICI6ICIg
+Zm10DQo+DQo+ICsjaW5jbHVkZSA8bGludXgvZG1hLWJ1Zi5oPg0KPiAgI2luY2x1ZGUgPGxpbnV4
+L2ZkdGFibGUuaD4NCj4gICNpbmNsdWRlIDxsaW51eC9maWxlLmg+DQo+ICAjaW5jbHVkZSA8bGlu
+dXgvZnJlZXplci5oPg0KPiBAQCAtMjQ4Miw4ICsyNDgzLDEwIEBAIHN0YXRpYyBpbnQgYmluZGVy
+X3RyYW5zbGF0ZV9mZF9hcnJheShzdHJ1Y3QgbGlzdF9oZWFkICpwZl9oZWFkLA0KPiAgew0KPiAg
+ICAgICAgIGJpbmRlcl9zaXplX3QgZmRpLCBmZF9idWZfc2l6ZTsNCj4gICAgICAgICBiaW5kZXJf
+c2l6ZV90IGZkYV9vZmZzZXQ7DQo+ICsgICAgICAgYm9vbCB0cmFuc2Zlcl9ncHVfY2hhcmdlID0g
+ZmFsc2U7DQo+ICAgICAgICAgY29uc3Qgdm9pZCBfX3VzZXIgKnNlbmRlcl91ZmRhX2Jhc2U7DQo+
+ICAgICAgICAgc3RydWN0IGJpbmRlcl9wcm9jICpwcm9jID0gdGhyZWFkLT5wcm9jOw0KPiArICAg
+ICAgIHN0cnVjdCBiaW5kZXJfcHJvYyAqdGFyZ2V0X3Byb2MgPSB0LT50b19wcm9jOw0KPiAgICAg
+ICAgIGludCByZXQ7DQo+DQo+ICAgICAgICAgZmRfYnVmX3NpemUgPSBzaXplb2YodTMyKSAqIGZk
+YS0+bnVtX2ZkczsNCj4gQEAgLTI1MjEsOCArMjUyNCwxNSBAQCBzdGF0aWMgaW50IGJpbmRlcl90
+cmFuc2xhdGVfZmRfYXJyYXkoc3RydWN0IGxpc3RfaGVhZCAqcGZfaGVhZCwNCj4gICAgICAgICBp
+ZiAocmV0KQ0KPiAgICAgICAgICAgICAgICAgcmV0dXJuIHJldDsNCj4NCj4gKyAgICAgICBpZiAo
+SVNfRU5BQkxFRChDT05GSUdfQ0dST1VQX0dQVSkgJiYNCj4gKyAgICAgICAgICAgICAgIHBhcmVu
+dC0+ZmxhZ3MgJiBCSU5ERVJfQlVGRkVSX0ZMQUdfU0VOREVSX05PX05FRUQpDQo+ICsgICAgICAg
+ICAgICAgICB0cmFuc2Zlcl9ncHVfY2hhcmdlID0gdHJ1ZTsNCj4gKw0KPiAgICAgICAgIGZvciAo
+ZmRpID0gMDsgZmRpIDwgZmRhLT5udW1fZmRzOyBmZGkrKykgew0KPiAgICAgICAgICAgICAgICAg
+dTMyIGZkOw0KPiArICAgICAgICAgICAgICAgc3RydWN0IGRtYV9idWYgKmRtYWJ1ZjsNCj4gKyAg
+ICAgICAgICAgICAgIHN0cnVjdCBncHVjZyAqZ3B1Y2c7DQo+ICsNCj4gICAgICAgICAgICAgICAg
+IGJpbmRlcl9zaXplX3Qgb2Zmc2V0ID0gZmRhX29mZnNldCArIGZkaSAqIHNpemVvZihmZCk7DQo+
+ICAgICAgICAgICAgICAgICBiaW5kZXJfc2l6ZV90IHNlbmRlcl91b2Zmc2V0ID0gZmRpICogc2l6
+ZW9mKGZkKTsNCj4NCj4gQEAgLTI1MzIsNiArMjU0MiwyMiBAQCBzdGF0aWMgaW50IGJpbmRlcl90
+cmFuc2xhdGVfZmRfYXJyYXkoc3RydWN0IGxpc3RfaGVhZCAqcGZfaGVhZCwNCj4gICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpbl9yZXBseV90byk7DQo+
+ICAgICAgICAgICAgICAgICBpZiAocmV0KQ0KPiAgICAgICAgICAgICAgICAgICAgICAgICByZXR1
+cm4gcmV0ID4gMCA/IC1FSU5WQUwgOiByZXQ7DQo+ICsNCj4gKyAgICAgICAgICAgICAgIGlmICgh
+dHJhbnNmZXJfZ3B1X2NoYXJnZSkNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgY29udGludWU7
+DQo+ICsNCj4gKyAgICAgICAgICAgICAgIGRtYWJ1ZiA9IGRtYV9idWZfZ2V0KGZkKTsNCj4gKyAg
+ICAgICAgICAgICAgIGlmIChJU19FUlIoZG1hYnVmKSkNCj4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgY29udGludWU7DQo+ICsNCj4gKyAgICAgICAgICAgICAgIGdwdWNnID0gZ3B1Y2dfZ2V0KHRh
+cmdldF9wcm9jLT50c2spOw0KPiArICAgICAgICAgICAgICAgcmV0ID0gZG1hX2J1Zl9jaGFyZ2Vf
+dHJhbnNmZXIoZG1hYnVmLCBncHVjZyk7DQo+ICsgICAgICAgICAgICAgICBpZiAocmV0KSB7DQo+
+ICsgICAgICAgICAgICAgICAgICAgICAgIHByX3dhcm4oIiVkOiVkIFVuYWJsZSB0byB0cmFuc2Zl
+ciBETUEtQlVGIGZkIGNoYXJnZSB0byAlZCIsDQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgcHJvYy0+cGlkLCB0aHJlYWQtPnBpZCwgdGFyZ2V0X3Byb2MtPnBpZCk7DQo+ICsgICAg
+ICAgICAgICAgICAgICAgICAgIGdwdWNnX3B1dChncHVjZyk7DQo+ICsgICAgICAgICAgICAgICB9
+DQo+ICsgICAgICAgICAgICAgICBkbWFfYnVmX3B1dChkbWFidWYpOw0KPiAgICAgICAgIH0NCj4g
+ICAgICAgICByZXR1cm4gMDsNCj4gIH0NCj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvdWFwaS9saW51
+eC9hbmRyb2lkL2JpbmRlci5oIGIvaW5jbHVkZS91YXBpL2xpbnV4L2FuZHJvaWQvYmluZGVyLmgN
+Cj4gaW5kZXggMzI0NmYyYzc0Njk2Li4xNjlmZDUwNjlhMWEgMTAwNjQ0DQo+IC0tLSBhL2luY2x1
+ZGUvdWFwaS9saW51eC9hbmRyb2lkL2JpbmRlci5oDQo+ICsrKyBiL2luY2x1ZGUvdWFwaS9saW51
+eC9hbmRyb2lkL2JpbmRlci5oDQo+IEBAIC0xMzcsNiArMTM3LDcgQEAgc3RydWN0IGJpbmRlcl9i
+dWZmZXJfb2JqZWN0IHsNCj4NCj4gIGVudW0gew0KPiAgICAgICAgIEJJTkRFUl9CVUZGRVJfRkxB
+R19IQVNfUEFSRU5UID0gMHgwMSwNCj4gKyAgICAgICBCSU5ERVJfQlVGRkVSX0ZMQUdfU0VOREVS
+X05PX05FRUQgPSAweDAyLA0KPiAgfTsNCj4NCj4gIC8qIHN0cnVjdCBiaW5kZXJfZmRfYXJyYXlf
+b2JqZWN0IC0gb2JqZWN0IGRlc2NyaWJpbmcgYW4gYXJyYXkgb2YgZmRzIGluIGEgYnVmZmVyDQo+
+IC0tDQo+IDIuMzUuMS42MTYuZzBiZGNiYjQ0NjQtZ29vZw0KPg0KX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3Qg
+LS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4g
+ZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
