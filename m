@@ -2,65 +2,67 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DFBA34E70ED
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Mar 2022 11:13:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EF97C4E7103
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Mar 2022 11:18:03 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2092A3F06C
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Mar 2022 10:13:25 +0000 (UTC)
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com [209.85.221.68])
-	by lists.linaro.org (Postfix) with ESMTPS id F01C93F040
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Mar 2022 10:13:21 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id b19so10150193wrh.11
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Mar 2022 03:13:21 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id EFEA83F06A
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Mar 2022 10:18:02 +0000 (UTC)
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
+	by lists.linaro.org (Postfix) with ESMTPS id 1C9D13F040
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Mar 2022 10:17:59 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id bg31-20020a05600c3c9f00b00381590dbb33so4083619wmb.3
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Mar 2022 03:17:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ffwll.ch; s=google;
         h=date:from:to:cc:subject:message-id:references:mime-version
          :content-disposition:content-transfer-encoding:in-reply-to;
-        bh=W9yiDcs2xq89D8bBdi8YII9B/thS43VC5jakhczl+VM=;
-        b=SPZkSAWtoSjkxQqHoXP8wLmfxhqezv+leritFQeGncOLeeLBWjuRqw+wLrdaJRhJ3w
-         PX7jPlkrVwx2BUsIL9NYba5tXkRICeOXy4rbzhYriEapH0GpVjkBp0AxLP16j7XEVaT/
-         RDtA9dGnLahB+Vmd12nff+v5Gjlb5pNUkH7lI=
+        bh=0aC7V2mDNzElpy6JoV9pERSEeohzyPQnTb1F/WiSViA=;
+        b=Mn+ARwRbFqRnk2oy7dnOKKHx91uBcpUiOIMd4eyBPo68SELuD8J/J1RYXijYacFR0T
+         trQm858DiW3A+vNY3PcaKQLGZo9UXGvKlZWWMxHze7Nq1/eOYWBa7bw+rvFYMUV/UxBs
+         T/xitgmmSwgUBJ6ocvhynY5upRokl3NcvgQhY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:date:from:to:cc:subject:message-id:references
          :mime-version:content-disposition:content-transfer-encoding
          :in-reply-to;
-        bh=W9yiDcs2xq89D8bBdi8YII9B/thS43VC5jakhczl+VM=;
-        b=JcMqc2Vy2l1kf01FNrHU+XxKk39PxQnyxVRalWFMri77hKkNJSKYOAxbNSwbdtugxt
-         Jw2rdcZlFFata20ZOILizgCojCdyT0Wa95hJFpm/Md44XLXMjK4TbJR3qH2j38N+P+f8
-         haSoAN7oyND61yqsKVjbm8C+owFgq+nNkpIjT0+nDUxUebMTMcUzINUQywUbLEE6IyU/
-         b2cHeHwTo5irPUIYuHeF/ySI7xfWwjfA931Hd7I+9phc5CvY5DRzGj8ysdt+YJSX3zU5
-         NfSn9Gc/MdW6/QXvEfwf1Jt0lAydiMdATyIkiuZ7hgSg8+W3Zr6cqQsaKS2qe7p2wZ92
-         ot6g==
-X-Gm-Message-State: AOAM5300uMnS0hxIm4weaAFxdhiG3dOw4+69qGtYI+l2gZn5UAdZBh12
-	LrcgKx8sK6lZSKR9AyOhfTK6rg==
-X-Google-Smtp-Source: ABdhPJxJsIapLKDRWOW55VXgkBRTDSR7/GC05YvkU9YzG+ojWvqnYk/ydS2ikgwV+Y1Uo/+LhBN/Dw==
-X-Received: by 2002:adf:f949:0:b0:203:e87d:1d38 with SMTP id q9-20020adff949000000b00203e87d1d38mr8397904wrr.137.1648203201007;
-        Fri, 25 Mar 2022 03:13:21 -0700 (PDT)
+        bh=0aC7V2mDNzElpy6JoV9pERSEeohzyPQnTb1F/WiSViA=;
+        b=Mt9CvhxLSHZMeEaKqN2eObT3zp7Cq2b5LFvKkyTVjCwirrTIS2ws0m8dSFykzrd5IN
+         mJD78rNLrYMm/iMBFSpG6WnLDvns4PrVv/lKTWx+m8iAsyt87zxDxfYUF7rF6C6f6mV8
+         wsVg9kJItfqKkd7LAfZ56l6wTUN/FPIWQrqSOlOdyg8Ix9mf7pecKZl4ROTvshbrRz3P
+         a5sKrH0iv4ONcNgkkkwxNLvUQviyjkshk9Omy/yABIuUSU0Hh3F27GQmTP2i/L7/yXjm
+         VFZSp/5V+12nwkkbZQkvDjn+cDsvHbvKHh/r7bG3ZOPfRqoKhdXOcz4OezBIwKxmMvg7
+         aFzA==
+X-Gm-Message-State: AOAM533baoiaYHCHUsDEX2H9U+8Mlm80c+D9PZ4/VCFYG0gbbkBdO3vy
+	c/8N6wa00oOjT+v2ky9hjJ2BJA==
+X-Google-Smtp-Source: ABdhPJySTcRWNB3OFH3rh/Pj8vvL1+sAQrpoopdID698svkWEt8DcYWQ9IThQ5Kuq77l4/vA3+ZHFw==
+X-Received: by 2002:a1c:3bc3:0:b0:38c:9a42:a143 with SMTP id i186-20020a1c3bc3000000b0038c9a42a143mr18826984wma.64.1648203478044;
+        Fri, 25 Mar 2022 03:17:58 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id 3-20020a5d47a3000000b0020412ba45f6sm5667247wrb.8.2022.03.25.03.13.20
+        by smtp.gmail.com with ESMTPSA id z5-20020a05600c0a0500b0037bb8df81a2sm9586794wmp.13.2022.03.25.03.17.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Mar 2022 03:13:20 -0700 (PDT)
-Date: Fri, 25 Mar 2022 11:13:18 +0100
+        Fri, 25 Mar 2022 03:17:57 -0700 (PDT)
+Date: Fri, 25 Mar 2022 11:17:55 +0100
 From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <Yj2VvjGUJl8kCS8H@phenom.ffwll.local>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <Yj2W06Fri9jQbOrQ@phenom.ffwll.local>
 References: <20220311110244.1245-1-christian.koenig@amd.com>
- <20220311110244.1245-2-christian.koenig@amd.com>
+ <Yj2TiqwRMTNEEB3D@phenom.ffwll.local>
+ <Yj2UXwOh7/bAm8+J@phenom.ffwll.local>
+ <83c2935d-e5e9-7c4d-f350-9372cce26c8d@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220311110244.1245-2-christian.koenig@amd.com>
+In-Reply-To: <83c2935d-e5e9-7c4d-f350-9372cce26c8d@amd.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Message-ID-Hash: XZWSHE4A2GTFJ4HKJJTQMWBD3JORI4HO
-X-Message-ID-Hash: XZWSHE4A2GTFJ4HKJJTQMWBD3JORI4HO
+Message-ID-Hash: KR4R2FDOCPNS7OWOQQ6NBONWX5ZQ3CTP
+X-Message-ID-Hash: KR4R2FDOCPNS7OWOQQ6NBONWX5ZQ3CTP
 X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: gustavo@padovan.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+CC: Daniel Vetter <daniel@ffwll.ch>, gustavo@padovan.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 2/2] dma-buf/sync-file: fix warning about fence containers
+Subject: [Linaro-mm-sig] Re: [PATCH 1/2] dma-buf: add dma_fence_unwrap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XZWSHE4A2GTFJ4HKJJTQMWBD3JORI4HO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KR4R2FDOCPNS7OWOQQ6NBONWX5ZQ3CTP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -70,255 +72,547 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 11, 2022 at 12:02:44PM +0100, Christian K=F6nig wrote:
-> The dma_fence_chain containers can show up in sync_files as well resultin=
-g in
-> warnings that those can't be added to dma_fence_array containers when mer=
-ging
-> multiple sync_files together.
+On Fri, Mar 25, 2022 at 11:10:15AM +0100, Christian K=F6nig wrote:
+> Am 25.03.22 um 11:07 schrieb Daniel Vetter:
+> > On Fri, Mar 25, 2022 at 11:03:54AM +0100, Daniel Vetter wrote:
+> > > On Fri, Mar 11, 2022 at 12:02:43PM +0100, Christian K=F6nig wrote:
+> > > > Add a general purpose helper to deep dive into dma_fence_chain/dma_=
+fence_array
+> > > > structures and iterate over all the fences in them.
+> > > >=20
+> > > > This is useful when we need to flatten out all fences in those stru=
+ctures.
+> > > >=20
+> > > > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+> > > > ---
+> > > >   Documentation/driver-api/dma-buf.rst  |   6 +
+> > > >   drivers/dma-buf/Makefile              |   1 +
+> > > >   drivers/dma-buf/selftests.h           |   1 +
+> > > >   drivers/dma-buf/st-dma-fence-unwrap.c | 279 +++++++++++++++++++++=
++++++
+> > > >   include/linux/dma-fence-unwrap.h      |  99 +++++++++
+> > > >   5 files changed, 386 insertions(+)
+> > > >   create mode 100644 drivers/dma-buf/st-dma-fence-unwrap.c
+> > > >   create mode 100644 include/linux/dma-fence-unwrap.h
+> > > >=20
+> > > > diff --git a/Documentation/driver-api/dma-buf.rst b/Documentation/d=
+river-api/dma-buf.rst
+> > > > index 2cd7db82d9fe..7209500f08c8 100644
+> > > > --- a/Documentation/driver-api/dma-buf.rst
+> > > > +++ b/Documentation/driver-api/dma-buf.rst
+> > > > @@ -194,6 +194,12 @@ DMA Fence Chain
+> > > >   .. kernel-doc:: include/linux/dma-fence-chain.h
+> > > >      :internal:
+> > > > +DMA Fence unwrap
+> > > > +~~~~~~~~~~~~~~~~
+> > > > +
+> > > > +.. kernel-doc:: include/linux/dma-fence-unwrap.h
+> > > > +   :internal:
+> > Ok I forgot one bikeshed: I'd just include this in dma-fence-chain.h and
+> > maybe go with the dma_fence_chain_unwrap_ prefix for everything. That
+> > makes it even more clearer that the two are meant to go together. Plus =
+ofc
+> > the link from struct dma_fence_chain to this iterator in the docs too.
+> >=20
+> > Or I'm just not understanding why you made this a separate thing?
 >=20
-> Solve this by using the dma_fence_unwrap iterator to deep dive into the
-> contained fences and then add those flatten out into a dma_fence_array.
+> Well it should be used to unwrap dma_fence_array containers as well and I
+> don't really want to add a dependency between dma_fence_chain and
+> dma_fence_array.
 >=20
-> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
-
-I have no idea why we try to keep fences sorted, but oh well it looks like
-the merging is done correctly.
-
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-
-> ---
->  drivers/dma-buf/sync_file.c | 141 +++++++++++++++++++-----------------
->  1 file changed, 73 insertions(+), 68 deletions(-)
+> I've spend quite some work to keep the two containers separated and also
+> describe the separate use cases for each.
 >=20
-> diff --git a/drivers/dma-buf/sync_file.c b/drivers/dma-buf/sync_file.c
-> index 394e6e1e9686..b8dea4ec123b 100644
-> --- a/drivers/dma-buf/sync_file.c
-> +++ b/drivers/dma-buf/sync_file.c
-> @@ -5,6 +5,7 @@
->   * Copyright (C) 2012 Google, Inc.
->   */
-> =20
-> +#include <linux/dma-fence-unwrap.h>
->  #include <linux/export.h>
->  #include <linux/file.h>
->  #include <linux/fs.h>
-> @@ -172,20 +173,6 @@ static int sync_file_set_fence(struct sync_file *syn=
-c_file,
->  	return 0;
->  }
-> =20
-> -static struct dma_fence **get_fences(struct sync_file *sync_file,
-> -				     int *num_fences)
-> -{
-> -	if (dma_fence_is_array(sync_file->fence)) {
-> -		struct dma_fence_array *array =3D to_dma_fence_array(sync_file->fence);
-> -
-> -		*num_fences =3D array->num_fences;
-> -		return array->fences;
-> -	}
-> -
-> -	*num_fences =3D 1;
-> -	return &sync_file->fence;
-> -}
-> -
->  static void add_fence(struct dma_fence **fences,
->  		      int *i, struct dma_fence *fence)
->  {
-> @@ -210,86 +197,97 @@ static void add_fence(struct dma_fence **fences,
->  static struct sync_file *sync_file_merge(const char *name, struct sync_f=
-ile *a,
->  					 struct sync_file *b)
->  {
-> +	struct dma_fence *a_fence, *b_fence, **fences;
-> +	struct dma_fence_unwrap a_iter, b_iter;
-> +	unsigned int index, num_fences;
->  	struct sync_file *sync_file;
-> -	struct dma_fence **fences =3D NULL, **nfences, **a_fences, **b_fences;
-> -	int i =3D 0, i_a, i_b, num_fences, a_num_fences, b_num_fences;
-> =20
->  	sync_file =3D sync_file_alloc();
->  	if (!sync_file)
->  		return NULL;
-> =20
-> -	a_fences =3D get_fences(a, &a_num_fences);
-> -	b_fences =3D get_fences(b, &b_num_fences);
-> -	if (a_num_fences > INT_MAX - b_num_fences)
-> -		goto err;
-> +	num_fences =3D 0;
-> +	dma_fence_unwrap_for_each(a_fence, &a_iter, a->fence)
-> +		++num_fences;
-> +	dma_fence_unwrap_for_each(b_fence, &b_iter, b->fence)
-> +		++num_fences;
-> =20
-> -	num_fences =3D a_num_fences + b_num_fences;
-> +	if (num_fences > INT_MAX)
-> +		goto err_free_sync_file;
-> =20
->  	fences =3D kcalloc(num_fences, sizeof(*fences), GFP_KERNEL);
->  	if (!fences)
-> -		goto err;
-> +		goto err_free_sync_file;
-> =20
->  	/*
-> -	 * Assume sync_file a and b are both ordered and have no
-> -	 * duplicates with the same context.
-> +	 * We can't guarantee that fences in both a and b are ordered, but it is
-> +	 * still quite likely.
->  	 *
-> -	 * If a sync_file can only be created with sync_file_merge
-> -	 * and sync_file_create, this is a reasonable assumption.
-> +	 * So attempt to order the fences as we pass over them and merge fences
-> +	 * with the same context.
->  	 */
-> -	for (i_a =3D i_b =3D 0; i_a < a_num_fences && i_b < b_num_fences; ) {
-> -		struct dma_fence *pt_a =3D a_fences[i_a];
-> -		struct dma_fence *pt_b =3D b_fences[i_b];
-> =20
-> -		if (pt_a->context < pt_b->context) {
-> -			add_fence(fences, &i, pt_a);
-> +	index =3D 0;
-> +	for (a_fence =3D dma_fence_unwrap_first(a->fence, &a_iter),
-> +	     b_fence =3D dma_fence_unwrap_first(b->fence, &b_iter);
-> +	     a_fence || b_fence; ) {
-> +
-> +		if (!b_fence) {
-> +			add_fence(fences, &index, a_fence);
-> +			a_fence =3D dma_fence_unwrap_next(&a_iter);
-> +
-> +		} else if (!a_fence) {
-> +			add_fence(fences, &index, b_fence);
-> +			b_fence =3D dma_fence_unwrap_next(&b_iter);
-> +
-> +		} else if (a_fence->context < b_fence->context) {
-> +			add_fence(fences, &index, a_fence);
-> +			a_fence =3D dma_fence_unwrap_next(&a_iter);
-> =20
-> -			i_a++;
-> -		} else if (pt_a->context > pt_b->context) {
-> -			add_fence(fences, &i, pt_b);
-> +		} else if (b_fence->context < a_fence->context) {
-> +			add_fence(fences, &index, b_fence);
-> +			b_fence =3D dma_fence_unwrap_next(&b_iter);
-> +
-> +		} else if (__dma_fence_is_later(a_fence->seqno, b_fence->seqno,
-> +						a_fence->ops)) {
-> +			add_fence(fences, &index, a_fence);
-> +			a_fence =3D dma_fence_unwrap_next(&a_iter);
-> +			b_fence =3D dma_fence_unwrap_next(&b_iter);
-> =20
-> -			i_b++;
->  		} else {
-> -			if (__dma_fence_is_later(pt_a->seqno, pt_b->seqno,
-> -						 pt_a->ops))
-> -				add_fence(fences, &i, pt_a);
-> -			else
-> -				add_fence(fences, &i, pt_b);
-> -
-> -			i_a++;
-> -			i_b++;
-> +			add_fence(fences, &index, b_fence);
-> +			a_fence =3D dma_fence_unwrap_next(&a_iter);
-> +			b_fence =3D dma_fence_unwrap_next(&b_iter);
->  		}
->  	}
-> =20
-> -	for (; i_a < a_num_fences; i_a++)
-> -		add_fence(fences, &i, a_fences[i_a]);
-> -
-> -	for (; i_b < b_num_fences; i_b++)
-> -		add_fence(fences, &i, b_fences[i_b]);
-> -
-> -	if (i =3D=3D 0)
-> -		fences[i++] =3D dma_fence_get(a_fences[0]);
-> +	if (index =3D=3D 0)
-> +		add_fence(fences, &index, dma_fence_get_stub());
-> =20
-> -	if (num_fences > i) {
-> -		nfences =3D krealloc_array(fences, i, sizeof(*fences), GFP_KERNEL);
-> -		if (!nfences)
-> -			goto err;
-> +	if (num_fences > index) {
-> +		struct dma_fence **tmp;
-> =20
-> -		fences =3D nfences;
-> +		/* Keep going even when reducing the size failed */
-> +		tmp =3D krealloc_array(fences, index, sizeof(*fences),
-> +				     GFP_KERNEL);
-> +		if (tmp)
-> +			fences =3D tmp;
->  	}
-> =20
-> -	if (sync_file_set_fence(sync_file, fences, i) < 0)
-> -		goto err;
-> +	if (sync_file_set_fence(sync_file, fences, index) < 0)
-> +		goto err_put_fences;
-> =20
->  	strlcpy(sync_file->user_name, name, sizeof(sync_file->user_name));
->  	return sync_file;
-> =20
-> -err:
-> -	while (i)
-> -		dma_fence_put(fences[--i]);
-> +err_put_fences:
-> +	while (index)
-> +		dma_fence_put(fences[--index]);
->  	kfree(fences);
-> +
-> +err_free_sync_file:
->  	fput(sync_file->file);
->  	return NULL;
-> -
->  }
-> =20
->  static int sync_file_release(struct inode *inode, struct file *file)
-> @@ -398,11 +396,13 @@ static int sync_fill_fence_info(struct dma_fence *f=
-ence,
->  static long sync_file_ioctl_fence_info(struct sync_file *sync_file,
->  				       unsigned long arg)
->  {
-> -	struct sync_file_info info;
->  	struct sync_fence_info *fence_info =3D NULL;
-> -	struct dma_fence **fences;
-> +	struct dma_fence_unwrap iter;
-> +	struct sync_file_info info;
-> +	unsigned int num_fences;
-> +	struct dma_fence *fence;
-> +	int ret;
->  	__u32 size;
-> -	int num_fences, ret, i;
-> =20
->  	if (copy_from_user(&info, (void __user *)arg, sizeof(info)))
->  		return -EFAULT;
-> @@ -410,7 +410,9 @@ static long sync_file_ioctl_fence_info(struct sync_fi=
-le *sync_file,
->  	if (info.flags || info.pad)
->  		return -EINVAL;
-> =20
-> -	fences =3D get_fences(sync_file, &num_fences);
-> +	num_fences =3D 0;
-> +	dma_fence_unwrap_for_each(fence, &iter, sync_file->fence)
-> +		++num_fences;
-> =20
->  	/*
->  	 * Passing num_fences =3D 0 means that userspace doesn't want to
-> @@ -433,8 +435,11 @@ static long sync_file_ioctl_fence_info(struct sync_f=
-ile *sync_file,
->  	if (!fence_info)
->  		return -ENOMEM;
-> =20
-> -	for (i =3D 0; i < num_fences; i++) {
-> -		int status =3D sync_fill_fence_info(fences[i], &fence_info[i]);
-> +	num_fences =3D 0;
-> +	dma_fence_unwrap_for_each(fence, &iter, sync_file->fence) {
-> +		int status;
-> +
-> +		status =3D sync_fill_fence_info(fence, &fence_info[num_fences++]);
->  		info.status =3D info.status <=3D 0 ? info.status : status;
->  	}
-> =20
-> --=20
-> 2.25.1
+> I can of course add some kerneldoc to let the chain and array documentati=
+on
+> point to this one here.
+
+Yeah I think as a general iterator they should be fine as a separate
+thing. Also just realized that we'd need links from both array and chain
+to this since it's for both.
+
+The other thing I noticed is that we have dma_fence_chain_for_each()
+already. Should we replace all users of that outside of dma-fence-chain.c
+with this new thing, and move the chain specific iterator into
+dma-fence-chain.c so that it's hidden and people don't make funny
+accidents? Just for more safety in this maze, also ofc that's all
+follow-up.
+-Daniel
+
+
+
+>=20
+> Thanks,
+> Christian.
+>=20
+> > -Daniel
+> >=20
+> > > > +
+> > > >   DMA Fence uABI/Sync File
+> > > >   ~~~~~~~~~~~~~~~~~~~~~~~~
+> > > > diff --git a/drivers/dma-buf/Makefile b/drivers/dma-buf/Makefile
+> > > > index 511805dbeb75..4c9eb53ba3f8 100644
+> > > > --- a/drivers/dma-buf/Makefile
+> > > > +++ b/drivers/dma-buf/Makefile
+> > > > @@ -12,6 +12,7 @@ dmabuf_selftests-y :=3D \
+> > > >   	selftest.o \
+> > > >   	st-dma-fence.o \
+> > > >   	st-dma-fence-chain.o \
+> > > > +	st-dma-fence-unwrap.o \
+> > > >   	st-dma-resv.o
+> > > >   obj-$(CONFIG_DMABUF_SELFTESTS)	+=3D dmabuf_selftests.o
+> > > > diff --git a/drivers/dma-buf/selftests.h b/drivers/dma-buf/selftest=
+s.h
+> > > > index 97d73aaa31da..851965867d9c 100644
+> > > > --- a/drivers/dma-buf/selftests.h
+> > > > +++ b/drivers/dma-buf/selftests.h
+> > > > @@ -12,4 +12,5 @@
+> > > >   selftest(sanitycheck, __sanitycheck__) /* keep first (igt selfche=
+ck) */
+> > > >   selftest(dma_fence, dma_fence)
+> > > >   selftest(dma_fence_chain, dma_fence_chain)
+> > > > +selftest(dma_fence_unwrap, dma_fence_unwrap)
+> > > >   selftest(dma_resv, dma_resv)
+> > > > diff --git a/drivers/dma-buf/st-dma-fence-unwrap.c b/drivers/dma-bu=
+f/st-dma-fence-unwrap.c
+> > > > new file mode 100644
+> > > > index 000000000000..d821faaebe93
+> > > > --- /dev/null
+> > > > +++ b/drivers/dma-buf/st-dma-fence-unwrap.c
+> > > > @@ -0,0 +1,279 @@
+> > > > +// SPDX-License-Identifier: MIT
+> > > > +
+> > > > +/*
+> > > > + * Copyright (C) 2022 Advanced Micro Devices, Inc.
+> > > > + */
+> > > > +
+> > > > +#include <linux/dma-fence-unwrap.h>
+> > > > +#if 0
+> > > > +#include <linux/kernel.h>
+> > > > +#include <linux/kthread.h>
+> > > > +#include <linux/mm.h>
+> > > > +#include <linux/sched/signal.h>
+> > > > +#include <linux/slab.h>
+> > > > +#include <linux/spinlock.h>
+> > > > +#include <linux/random.h>
+> > > > +#endif
+> > > > +
+> > > > +#include "selftest.h"
+> > > > +
+> > > > +#define CHAIN_SZ (4 << 10)
+> > > > +
+> > > > +static struct kmem_cache *slab_fences;
+> > > Your own slab feels a bit like overkill. kmalloc/kfree not good enoug=
+h?
+> > >=20
+> > > > +
+> > > > +static inline struct mock_fence {
+> > > > +	struct dma_fence base;
+> > > > +	spinlock_t lock;
+> > > > +} *to_mock_fence(struct dma_fence *f) {
+> > > > +	return container_of(f, struct mock_fence, base);
+> > > > +}
+> > > > +
+> > > > +static const char *mock_name(struct dma_fence *f)
+> > > > +{
+> > > > +	return "mock";
+> > > > +}
+> > > > +
+> > > > +static void mock_fence_release(struct dma_fence *f)
+> > > > +{
+> > > > +	kmem_cache_free(slab_fences, to_mock_fence(f));
+> > > > +}
+> > > > +
+> > > > +static const struct dma_fence_ops mock_ops =3D {
+> > > > +	.get_driver_name =3D mock_name,
+> > > > +	.get_timeline_name =3D mock_name,
+> > > > +	.release =3D mock_fence_release,
+> > > > +};
+> > > > +
+> > > > +static struct dma_fence *mock_fence(void)
+> > > > +{
+> > > > +	struct mock_fence *f;
+> > > > +
+> > > > +	f =3D kmem_cache_alloc(slab_fences, GFP_KERNEL);
+> > > > +	if (!f)
+> > > > +		return NULL;
+> > > > +
+> > > > +	spin_lock_init(&f->lock);
+> > > > +	dma_fence_init(&f->base, &mock_ops, &f->lock, 0, 0);
+> > > > +
+> > > > +	return &f->base;
+> > > > +}
+> > > > +
+> > > > +static struct dma_fence *mock_array(unsigned int num_fences, ...)
+> > > > +{
+> > > > +	struct dma_fence_array *array;
+> > > > +	struct dma_fence **fences;
+> > > > +	va_list valist;
+> > > > +	int i;
+> > > > +
+> > > > +	fences =3D kcalloc(num_fences, sizeof(*fences), GFP_KERNEL);
+> > > > +	if (!fences)
+> > > > +		return NULL;
+> > > > +
+> > > > +	va_start(valist, num_fences);
+> > > > +	for (i =3D 0; i < num_fences; ++i)
+> > > > +		fences[i] =3D va_arg(valist, typeof(*fences));
+> > > > +	va_end(valist);
+> > > > +
+> > > > +	array =3D dma_fence_array_create(num_fences, fences,
+> > > > +				       dma_fence_context_alloc(1),
+> > > > +				       1, false);
+> > > > +	if (!array)
+> > > > +		goto cleanup;
+> > > > +	return &array->base;
+> > > > +
+> > > > +cleanup:
+> > > > +	for (i =3D 0; i < num_fences; ++i)
+> > > > +		dma_fence_put(fences[i]);
+> > > > +	kfree(fences);
+> > > > +	return NULL;
+> > > > +}
+> > > > +
+> > > > +static struct dma_fence *mock_chain(struct dma_fence *prev,
+> > > > +				    struct dma_fence *fence)
+> > > > +{
+> > > > +	struct dma_fence_chain *f;
+> > > > +
+> > > > +	f =3D dma_fence_chain_alloc();
+> > > > +	if (!f) {
+> > > > +		dma_fence_put(prev);
+> > > > +		dma_fence_put(fence);
+> > > > +		return NULL;
+> > > > +	}
+> > > > +
+> > > > +	dma_fence_chain_init(f, prev, fence, 1);
+> > > > +	return &f->base;
+> > > > +}
+> > > > +
+> > > > +static int sanitycheck(void *arg)
+> > > > +{
+> > > > +	struct dma_fence *f, *chain, *array;
+> > > > +	int err =3D 0;
+> > > > +
+> > > > +	f =3D mock_fence();
+> > > > +	if (!f)
+> > > > +		return -ENOMEM;
+> > > > +
+> > > > +	array =3D mock_array(1, f);
+> > > > +	if (!array)
+> > > > +		return -ENOMEM;
+> > > > +
+> > > > +	chain =3D mock_chain(NULL, array);
+> > > > +	if (!chain)
+> > > > +		return -ENOMEM;
+> > > > +
+> > > > +	dma_fence_signal(f);
+> > > > +	dma_fence_put(chain);
+> > > > +	return err;
+> > > > +}
+> > > > +
+> > > > +static int unwrap_array(void *arg)
+> > > > +{
+> > > > +	struct dma_fence *fence, *f1, *f2, *array;
+> > > > +	struct dma_fence_unwrap iter;
+> > > > +	int err =3D 0;
+> > > > +
+> > > > +	f1 =3D mock_fence();
+> > > > +	if (!f1)
+> > > > +		return -ENOMEM;
+> > > > +
+> > > > +	f2 =3D mock_fence();
+> > > > +	if (!f2) {
+> > > > +		dma_fence_put(f1);
+> > > > +		return -ENOMEM;
+> > > > +	}
+> > > > +
+> > > > +	array =3D mock_array(2, f1, f2);
+> > > > +	if (!array)
+> > > > +		return -ENOMEM;
+> > > > +
+> > > > +	dma_fence_unwrap_for_each(fence, &iter, array) {
+> > > > +		if (fence =3D=3D f1) {
+> > > > +			f1 =3D NULL;
+> > > > +		} else if (fence =3D=3D f2) {
+> > > > +			f2 =3D NULL;
+> > > > +		} else {
+> > > > +			pr_err("Unexpected fence!\n");
+> > > > +			err =3D -EINVAL;
+> > > > +		}
+> > > > +	}
+> > > > +
+> > > > +	if (f1 || f2) {
+> > > > +		pr_err("Not all fences seen!\n");
+> > > > +		err =3D -EINVAL;
+> > > > +	}
+> > > > +
+> > > > +	dma_fence_signal(f1);
+> > > > +	dma_fence_signal(f2);
+> > > > +	dma_fence_put(array);
+> > > > +	return 0;
+> > > > +}
+> > > > +
+> > > > +static int unwrap_chain(void *arg)
+> > > > +{
+> > > > +	struct dma_fence *fence, *f1, *f2, *chain;
+> > > > +	struct dma_fence_unwrap iter;
+> > > > +	int err =3D 0;
+> > > > +
+> > > > +	f1 =3D mock_fence();
+> > > > +	if (!f1)
+> > > > +		return -ENOMEM;
+> > > > +
+> > > > +	f2 =3D mock_fence();
+> > > > +	if (!f2) {
+> > > > +		dma_fence_put(f1);
+> > > > +		return -ENOMEM;
+> > > > +	}
+> > > > +
+> > > > +	chain =3D mock_chain(f1, f2);
+> > > > +	if (!chain)
+> > > > +		return -ENOMEM;
+> > > > +
+> > > > +	dma_fence_unwrap_for_each(fence, &iter, chain) {
+> > > > +		if (fence =3D=3D f1) {
+> > > > +			f1 =3D NULL;
+> > > > +		} else if (fence =3D=3D f2) {
+> > > > +			f2 =3D NULL;
+> > > > +		} else {
+> > > > +			pr_err("Unexpected fence!\n");
+> > > > +			err =3D -EINVAL;
+> > > > +		}
+> > > > +	}
+> > > > +
+> > > > +	if (f1 || f2) {
+> > > > +		pr_err("Not all fences seen!\n");
+> > > > +		err =3D -EINVAL;
+> > > > +	}
+> > > > +
+> > > > +	dma_fence_signal(f1);
+> > > > +	dma_fence_signal(f2);
+> > > > +	dma_fence_put(chain);
+> > > > +	return 0;
+> > > > +}
+> > > > +
+> > > > +static int unwrap_chain_array(void *arg)
+> > > > +{
+> > > > +	struct dma_fence *fence, *f1, *f2, *array, *chain;
+> > > > +	struct dma_fence_unwrap iter;
+> > > > +	int err =3D 0;
+> > > > +
+> > > > +	f1 =3D mock_fence();
+> > > > +	if (!f1)
+> > > > +		return -ENOMEM;
+> > > > +
+> > > > +	f2 =3D mock_fence();
+> > > > +	if (!f2) {
+> > > > +		dma_fence_put(f1);
+> > > > +		return -ENOMEM;
+> > > > +	}
+> > > > +
+> > > > +	array =3D mock_array(2, f1, f2);
+> > > > +	if (!array)
+> > > > +		return -ENOMEM;
+> > > > +
+> > > > +	chain =3D mock_chain(NULL, array);
+> > > > +	if (!chain)
+> > > > +		return -ENOMEM;
+> > > > +
+> > > > +	dma_fence_unwrap_for_each(fence, &iter, chain) {
+> > > > +		if (fence =3D=3D f1) {
+> > > > +			f1 =3D NULL;
+> > > > +		} else if (fence =3D=3D f2) {
+> > > > +			f2 =3D NULL;
+> > > > +		} else {
+> > > > +			pr_err("Unexpected fence!\n");
+> > > > +			err =3D -EINVAL;
+> > > > +		}
+> > > > +	}
+> > > > +
+> > > > +	if (f1 || f2) {
+> > > > +		pr_err("Not all fences seen!\n");
+> > > > +		err =3D -EINVAL;
+> > > > +	}
+> > > > +
+> > > > +	dma_fence_signal(f1);
+> > > > +	dma_fence_signal(f2);
+> > > > +	dma_fence_put(chain);
+> > > > +	return 0;
+> > > > +}
+> > > > +
+> > > > +int dma_fence_unwrap(void)
+> > > > +{
+> > > > +	static const struct subtest tests[] =3D {
+> > > > +		SUBTEST(sanitycheck),
+> > > > +		SUBTEST(unwrap_array),
+> > > > +		SUBTEST(unwrap_chain),
+> > > > +		SUBTEST(unwrap_chain_array),
+> > > > +	};
+> > > > +	int ret;
+> > > > +
+> > > > +	slab_fences =3D KMEM_CACHE(mock_fence,
+> > > > +				 SLAB_TYPESAFE_BY_RCU |
+> > > > +				 SLAB_HWCACHE_ALIGN);
+> > > > +	if (!slab_fences)
+> > > > +		return -ENOMEM;
+> > > > +
+> > > > +	ret =3D subtests(tests, NULL);
+> > > > +
+> > > > +	kmem_cache_destroy(slab_fences);
+> > > > +	return ret;
+> > > > +}
+> > > > diff --git a/include/linux/dma-fence-unwrap.h b/include/linux/dma-f=
+ence-unwrap.h
+> > > > new file mode 100644
+> > > > index 000000000000..54963df00c98
+> > > > --- /dev/null
+> > > > +++ b/include/linux/dma-fence-unwrap.h
+> > > > @@ -0,0 +1,99 @@
+> > > > +/* SPDX-License-Identifier: GPL-2.0-only */
+> > > > +/*
+> > > > + * fence-chain: chain fences together in a timeline
+> > > > + *
+> > > > + * Copyright (C) 2022 Advanced Micro Devices, Inc.
+> > > > + * Authors:
+> > > > + *	Christian K=F6nig <christian.koenig@amd.com>
+> > > > + */
+> > > > +
+> > > > +#ifndef __LINUX_DMA_FENCE_UNWRAP_H
+> > > > +#define __LINUX_DMA_FENCE_UNWRAP_H
+> > > > +
+> > > > +#include <linux/dma-fence-chain.h>
+> > > > +#include <linux/dma-fence-array.h>
+> > > > +
+> > > > +/**
+> > > > + * struct dma_fence_unwrap - cursor into the container structure
+> > > I think adding "This should be used together with
+> > > dma_fence_unwrap_for_each() iterator macro." would be nice here. I ju=
+st
+> > > like links :-)
+> > >=20
+> > > > + */
+> > > > +struct dma_fence_unwrap {
+> > > > +	/**
+> > > > +	 * @chain: potential dma_fence_chain, but can be other fence as w=
+ell
+> > > > +	 */
+> > > > +	struct dma_fence *chain;
+> > > > +	/**
+> > > > +	 * @array: potential dma_fence_array, but can be other fence as w=
+ell
+> > > > +	 */
+> > > > +	struct dma_fence *array;
+> > > > +	/**
+> > > > +	 * @index: last returned index if @array is really a dma_fence_ar=
+ray
+> > > > +	 */
+> > > > +	unsigned int index;
+> > > > +};
+> > > > +
+> > > > +/**
+> > > > + * dma_fence_unwrap_array - helper to unwrap dma_fence_arrays
+> > > > + * @cursor: cursor to initialize
+> > > > + *
+> > > > + * Helper function to unwrap dma_fence_array containers, don't tou=
+ch directly.
+> > > > + * Use dma_fence_unwrap_first/next instead.
+> > > > + */
+> > > > +static inline struct dma_fence *
+> > > > +dma_fence_unwrap_array(struct dma_fence_unwrap * cursor)
+> > > Since this is a helper that no one should call I'd give it a __ prefi=
+x and
+> > > drop the kerneldoc. Documenting stuff that people shouldn't use is
+> > > confusing :-)
+> > >=20
+> > > > +{
+> > > > +	cursor->array =3D dma_fence_chain_contained(cursor->chain);
+> > > > +	cursor->index =3D 0;
+> > > > +	return dma_fence_array_first(cursor->array);
+> > > > +}
+> > > > +
+> > > > +/**
+> > > > + * dma_fence_unwrap_first - return the first fence from fence cont=
+ainers
+> > > > + * @head: the entrypoint into the containers
+> > > > + * @cursor: current position inside the containers
+> > > > + *
+> > > > + * Unwraps potential dma_fence_chain/dma_fence_array containers an=
+d return the
+> > > > + * first fence.
+> > > > + */
+> > > > +static inline struct dma_fence *
+> > > > +dma_fence_unwrap_first(struct dma_fence *head, struct dma_fence_un=
+wrap *cursor)
+> > > > +{
+> > > > +	cursor->chain =3D dma_fence_get(head);
+> > > > +	return dma_fence_unwrap_array(cursor);
+> > > > +}
+> > > > +
+> > > > +/**
+> > > > + * dma_fence_unwrap_next - return the next fence from a fence cont=
+ainers
+> > > > + * @cursor: current position inside the containers
+> > > > + *
+> > > > + * Continue unwrapping the dma_fence_chain/dma_fence_array contain=
+ers and return
+> > > > + * the next fence from them.
+> > > > + */
+> > > > +static inline struct dma_fence *
+> > > > +dma_fence_unwrap_next(struct dma_fence_unwrap *cursor)
+> > > > +{
+> > > > +	struct dma_fence *tmp;
+> > > > +
+> > > > +	++cursor->index;
+> > > > +	tmp =3D dma_fence_array_next(cursor->array, cursor->index);
+> > > > +	if (tmp)
+> > > > +		return tmp;
+> > > > +
+> > > > +	cursor->chain =3D dma_fence_chain_walk(cursor->chain);
+> > > > +	return dma_fence_unwrap_array(cursor);
+> > > > +}
+> > > > +
+> > > > +/**
+> > > > + * dma_fence_unwrap_for_each - iterate over all fences in containe=
+rs
+> > > > + * @fence: current fence
+> > > > + * @cursor: current position inside the containers
+> > > > + * @head: starting point for the iterator
+> > > > + *
+> > > > + * Unwrap dma_fence_chain and dma_fence_array containers and deep =
+dive into all
+> > > > + * potential fences in them. If @head is just a normal fence only =
+that one is
+> > > > + * returned.
+> > > > + */
+> > > > +#define dma_fence_unwrap_for_each(fence, cursor, head)			\
+> > > > +	for (fence =3D dma_fence_unwrap_first(head, cursor); fence;	\
+> > > > +	     fence =3D dma_fence_unwrap_next(cursor))
+> > > > +
+> > > > +#endif
+> > > I think it'd be really good to add a small paragraph to struct
+> > > dma_fence_chain that this macro and iterator should be used for walki=
+ng
+> > > over all fences in a chain, including any fence arrays or anything li=
+ke
+> > > that.
+> > >=20
+> > > With the bikesheds addressed:
+> > >=20
+> > > Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+> > >=20
+> > > > --=20
+> > > > 2.25.1
+> > > >=20
+> > > --=20
+> > > Daniel Vetter
+> > > Software Engineer, Intel Corporation
+> > > https://nam11.safelinks.protection.outlook.com/?url=3Dhttp%3A%2F%2Fbl=
+og.ffwll.ch%2F&amp;data=3D04%7C01%7Cchristian.koenig%40amd.com%7Caa74708390=
+0b451d359308da0e4745e3%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C6378379=
+96532802687%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJ=
+BTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&amp;sdata=3DJts5%2BObWJHeUG4oy2biwj5Bf3P=
+KkMrYU%2F0EihvQRNuY%3D&amp;reserved=3D0
 >=20
 
 --=20
