@@ -2,623 +2,231 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF97C4E7103
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Mar 2022 11:18:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A4E8D4E715E
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Mar 2022 11:35:56 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EFEA83F06A
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Mar 2022 10:18:02 +0000 (UTC)
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
-	by lists.linaro.org (Postfix) with ESMTPS id 1C9D13F040
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Mar 2022 10:17:59 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id bg31-20020a05600c3c9f00b00381590dbb33so4083619wmb.3
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Mar 2022 03:17:59 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id AAD0B3F072
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Mar 2022 10:35:55 +0000 (UTC)
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+	by lists.linaro.org (Postfix) with ESMTPS id 9BFFD3EE7C
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Mar 2022 10:35:52 +0000 (UTC)
+Received: by mail-wr1-f49.google.com with SMTP id j18so10257887wrd.6
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Mar 2022 03:35:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:content-transfer-encoding:in-reply-to;
-        bh=0aC7V2mDNzElpy6JoV9pERSEeohzyPQnTb1F/WiSViA=;
-        b=Mn+ARwRbFqRnk2oy7dnOKKHx91uBcpUiOIMd4eyBPo68SELuD8J/J1RYXijYacFR0T
-         trQm858DiW3A+vNY3PcaKQLGZo9UXGvKlZWWMxHze7Nq1/eOYWBa7bw+rvFYMUV/UxBs
-         T/xitgmmSwgUBJ6ocvhynY5upRokl3NcvgQhY=
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=ThCn4geoMQpek8GKLLNmlyOOuxTDTdSXDAlHwQ0HQVE=;
+        b=GBh57jXalMTHH94OB9bzOcNJ6Y/X36mSlqs877c2rbFIiOrAWEUIKu/t0pESO7o12K
+         /AJRWqTCVRN7J98RqXLO+CakfvHcLMCzgLZG92GufthQiLkhwfJNMFSpG7celHBpgsQm
+         xsBf4K9RR9Z3EFz6KvDNGkF4xxH2ClDXOd/lqGzy7qscGW0SRn4l7LRLIpWvmmHVT17T
+         9GV4QH1fC5adSey1atHbkav6FCorrEUo46Tf9QQQDTwUnU8sHNy2arW5yIm8Ch4jF7Dt
+         Z73rIcQnigyLjh61j+Sv03qSC8TtfUI/zNXfPNJ93AYtSgk4CFZTHzyDFswnSMqQpzmH
+         4p/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:content-transfer-encoding
-         :in-reply-to;
-        bh=0aC7V2mDNzElpy6JoV9pERSEeohzyPQnTb1F/WiSViA=;
-        b=Mt9CvhxLSHZMeEaKqN2eObT3zp7Cq2b5LFvKkyTVjCwirrTIS2ws0m8dSFykzrd5IN
-         mJD78rNLrYMm/iMBFSpG6WnLDvns4PrVv/lKTWx+m8iAsyt87zxDxfYUF7rF6C6f6mV8
-         wsVg9kJItfqKkd7LAfZ56l6wTUN/FPIWQrqSOlOdyg8Ix9mf7pecKZl4ROTvshbrRz3P
-         a5sKrH0iv4ONcNgkkkwxNLvUQviyjkshk9Omy/yABIuUSU0Hh3F27GQmTP2i/L7/yXjm
-         VFZSp/5V+12nwkkbZQkvDjn+cDsvHbvKHh/r7bG3ZOPfRqoKhdXOcz4OezBIwKxmMvg7
-         aFzA==
-X-Gm-Message-State: AOAM533baoiaYHCHUsDEX2H9U+8Mlm80c+D9PZ4/VCFYG0gbbkBdO3vy
-	c/8N6wa00oOjT+v2ky9hjJ2BJA==
-X-Google-Smtp-Source: ABdhPJySTcRWNB3OFH3rh/Pj8vvL1+sAQrpoopdID698svkWEt8DcYWQ9IThQ5Kuq77l4/vA3+ZHFw==
-X-Received: by 2002:a1c:3bc3:0:b0:38c:9a42:a143 with SMTP id i186-20020a1c3bc3000000b0038c9a42a143mr18826984wma.64.1648203478044;
-        Fri, 25 Mar 2022 03:17:58 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id z5-20020a05600c0a0500b0037bb8df81a2sm9586794wmp.13.2022.03.25.03.17.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 25 Mar 2022 03:17:57 -0700 (PDT)
-Date: Fri, 25 Mar 2022 11:17:55 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <Yj2W06Fri9jQbOrQ@phenom.ffwll.local>
-References: <20220311110244.1245-1-christian.koenig@amd.com>
- <Yj2TiqwRMTNEEB3D@phenom.ffwll.local>
- <Yj2UXwOh7/bAm8+J@phenom.ffwll.local>
- <83c2935d-e5e9-7c4d-f350-9372cce26c8d@amd.com>
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=ThCn4geoMQpek8GKLLNmlyOOuxTDTdSXDAlHwQ0HQVE=;
+        b=xQcRO6SAo/Hdpvlrpd70hDmPu4/spi4iNXZrqx6ngAVp9iigPKN6319BV1C9gHanB6
+         X8q6qGdUIxGm3IhCZYVlnDxIkqR+AAzQBka5UQTAziupiDulIpG3OylaX3TpR5hHoG41
+         k7cNWxXkDYB+bWDlVxqUpnKvL0/UZQ1rUFvYfM7BIGlScPbiUKCctKRyc/OP95J40n14
+         eLyXu1UqrPTZDpzNsS3+Nkp1w1P4Fz0lS9zdMOzGDviQQAL+5cicLNMrH/akW5rdowEw
+         Dk6NpXSH9EUwBkbL1Y00E7x7zM6NEJmldq5ZYMDZb5oE9/fmrNPB5JcMHT3a1cAGPTKO
+         8u9A==
+X-Gm-Message-State: AOAM530TzI6E5n9Up0kwqALMIIJlg1ivMXCV9mk+ort2TppI8f9d4IPN
+	f0doBhDsnn7oPdvvVEnoZ7c=
+X-Google-Smtp-Source: ABdhPJwAZGav1tycxkaAeI7AfFLYlKNTlXB8P2mqAkTa1/mPDnRCy7oZNj18kE2uCXyXXP+M306Xzw==
+X-Received: by 2002:a05:6000:18a7:b0:204:1bc0:45a with SMTP id b7-20020a05600018a700b002041bc0045amr8402695wri.119.1648204551671;
+        Fri, 25 Mar 2022 03:35:51 -0700 (PDT)
+Received: from [192.168.178.21] (p5b0eab60.dip0.t-ipconnect.de. [91.14.171.96])
+        by smtp.gmail.com with ESMTPSA id v8-20020a05600c12c800b0038cc2b67c97sm3857980wmd.19.2022.03.25.03.35.50
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 25 Mar 2022 03:35:51 -0700 (PDT)
+Message-ID: <854a68de-2b35-df79-75bf-f13d7a67136f@gmail.com>
+Date: Fri, 25 Mar 2022 11:35:49 +0100
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <83c2935d-e5e9-7c4d-f350-9372cce26c8d@amd.com>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Message-ID-Hash: KR4R2FDOCPNS7OWOQQ6NBONWX5ZQ3CTP
-X-Message-ID-Hash: KR4R2FDOCPNS7OWOQQ6NBONWX5ZQ3CTP
-X-MailFrom: daniel@ffwll.ch
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.5.0
+Content-Language: en-US
+To: Daniel Vetter <daniel@ffwll.ch>
+References: <20220311110244.1245-1-christian.koenig@amd.com>
+ <20220311110244.1245-2-christian.koenig@amd.com>
+ <Yj2VvjGUJl8kCS8H@phenom.ffwll.local>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+In-Reply-To: <Yj2VvjGUJl8kCS8H@phenom.ffwll.local>
+Message-ID-Hash: NKCBWU7YDSVF6UMOX7PHNBSAFS55PHRO
+X-Message-ID-Hash: NKCBWU7YDSVF6UMOX7PHNBSAFS55PHRO
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Daniel Vetter <daniel@ffwll.ch>, gustavo@padovan.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: gustavo@padovan.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/2] dma-buf: add dma_fence_unwrap
+Subject: [Linaro-mm-sig] Re: [PATCH 2/2] dma-buf/sync-file: fix warning about fence containers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KR4R2FDOCPNS7OWOQQ6NBONWX5ZQ3CTP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NKCBWU7YDSVF6UMOX7PHNBSAFS55PHRO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-On Fri, Mar 25, 2022 at 11:10:15AM +0100, Christian K=F6nig wrote:
-> Am 25.03.22 um 11:07 schrieb Daniel Vetter:
-> > On Fri, Mar 25, 2022 at 11:03:54AM +0100, Daniel Vetter wrote:
-> > > On Fri, Mar 11, 2022 at 12:02:43PM +0100, Christian K=F6nig wrote:
-> > > > Add a general purpose helper to deep dive into dma_fence_chain/dma_=
-fence_array
-> > > > structures and iterate over all the fences in them.
-> > > >=20
-> > > > This is useful when we need to flatten out all fences in those stru=
-ctures.
-> > > >=20
-> > > > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
-> > > > ---
-> > > >   Documentation/driver-api/dma-buf.rst  |   6 +
-> > > >   drivers/dma-buf/Makefile              |   1 +
-> > > >   drivers/dma-buf/selftests.h           |   1 +
-> > > >   drivers/dma-buf/st-dma-fence-unwrap.c | 279 +++++++++++++++++++++=
-+++++
-> > > >   include/linux/dma-fence-unwrap.h      |  99 +++++++++
-> > > >   5 files changed, 386 insertions(+)
-> > > >   create mode 100644 drivers/dma-buf/st-dma-fence-unwrap.c
-> > > >   create mode 100644 include/linux/dma-fence-unwrap.h
-> > > >=20
-> > > > diff --git a/Documentation/driver-api/dma-buf.rst b/Documentation/d=
-river-api/dma-buf.rst
-> > > > index 2cd7db82d9fe..7209500f08c8 100644
-> > > > --- a/Documentation/driver-api/dma-buf.rst
-> > > > +++ b/Documentation/driver-api/dma-buf.rst
-> > > > @@ -194,6 +194,12 @@ DMA Fence Chain
-> > > >   .. kernel-doc:: include/linux/dma-fence-chain.h
-> > > >      :internal:
-> > > > +DMA Fence unwrap
-> > > > +~~~~~~~~~~~~~~~~
-> > > > +
-> > > > +.. kernel-doc:: include/linux/dma-fence-unwrap.h
-> > > > +   :internal:
-> > Ok I forgot one bikeshed: I'd just include this in dma-fence-chain.h and
-> > maybe go with the dma_fence_chain_unwrap_ prefix for everything. That
-> > makes it even more clearer that the two are meant to go together. Plus =
-ofc
-> > the link from struct dma_fence_chain to this iterator in the docs too.
-> >=20
-> > Or I'm just not understanding why you made this a separate thing?
->=20
-> Well it should be used to unwrap dma_fence_array containers as well and I
-> don't really want to add a dependency between dma_fence_chain and
-> dma_fence_array.
->=20
-> I've spend quite some work to keep the two containers separated and also
-> describe the separate use cases for each.
->=20
-> I can of course add some kerneldoc to let the chain and array documentati=
-on
-> point to this one here.
-
-Yeah I think as a general iterator they should be fine as a separate
-thing. Also just realized that we'd need links from both array and chain
-to this since it's for both.
-
-The other thing I noticed is that we have dma_fence_chain_for_each()
-already. Should we replace all users of that outside of dma-fence-chain.c
-with this new thing, and move the chain specific iterator into
-dma-fence-chain.c so that it's hidden and people don't make funny
-accidents? Just for more safety in this maze, also ofc that's all
-follow-up.
--Daniel
-
-
-
->=20
-> Thanks,
-> Christian.
->=20
-> > -Daniel
-> >=20
-> > > > +
-> > > >   DMA Fence uABI/Sync File
-> > > >   ~~~~~~~~~~~~~~~~~~~~~~~~
-> > > > diff --git a/drivers/dma-buf/Makefile b/drivers/dma-buf/Makefile
-> > > > index 511805dbeb75..4c9eb53ba3f8 100644
-> > > > --- a/drivers/dma-buf/Makefile
-> > > > +++ b/drivers/dma-buf/Makefile
-> > > > @@ -12,6 +12,7 @@ dmabuf_selftests-y :=3D \
-> > > >   	selftest.o \
-> > > >   	st-dma-fence.o \
-> > > >   	st-dma-fence-chain.o \
-> > > > +	st-dma-fence-unwrap.o \
-> > > >   	st-dma-resv.o
-> > > >   obj-$(CONFIG_DMABUF_SELFTESTS)	+=3D dmabuf_selftests.o
-> > > > diff --git a/drivers/dma-buf/selftests.h b/drivers/dma-buf/selftest=
-s.h
-> > > > index 97d73aaa31da..851965867d9c 100644
-> > > > --- a/drivers/dma-buf/selftests.h
-> > > > +++ b/drivers/dma-buf/selftests.h
-> > > > @@ -12,4 +12,5 @@
-> > > >   selftest(sanitycheck, __sanitycheck__) /* keep first (igt selfche=
-ck) */
-> > > >   selftest(dma_fence, dma_fence)
-> > > >   selftest(dma_fence_chain, dma_fence_chain)
-> > > > +selftest(dma_fence_unwrap, dma_fence_unwrap)
-> > > >   selftest(dma_resv, dma_resv)
-> > > > diff --git a/drivers/dma-buf/st-dma-fence-unwrap.c b/drivers/dma-bu=
-f/st-dma-fence-unwrap.c
-> > > > new file mode 100644
-> > > > index 000000000000..d821faaebe93
-> > > > --- /dev/null
-> > > > +++ b/drivers/dma-buf/st-dma-fence-unwrap.c
-> > > > @@ -0,0 +1,279 @@
-> > > > +// SPDX-License-Identifier: MIT
-> > > > +
-> > > > +/*
-> > > > + * Copyright (C) 2022 Advanced Micro Devices, Inc.
-> > > > + */
-> > > > +
-> > > > +#include <linux/dma-fence-unwrap.h>
-> > > > +#if 0
-> > > > +#include <linux/kernel.h>
-> > > > +#include <linux/kthread.h>
-> > > > +#include <linux/mm.h>
-> > > > +#include <linux/sched/signal.h>
-> > > > +#include <linux/slab.h>
-> > > > +#include <linux/spinlock.h>
-> > > > +#include <linux/random.h>
-> > > > +#endif
-> > > > +
-> > > > +#include "selftest.h"
-> > > > +
-> > > > +#define CHAIN_SZ (4 << 10)
-> > > > +
-> > > > +static struct kmem_cache *slab_fences;
-> > > Your own slab feels a bit like overkill. kmalloc/kfree not good enoug=
-h?
-> > >=20
-> > > > +
-> > > > +static inline struct mock_fence {
-> > > > +	struct dma_fence base;
-> > > > +	spinlock_t lock;
-> > > > +} *to_mock_fence(struct dma_fence *f) {
-> > > > +	return container_of(f, struct mock_fence, base);
-> > > > +}
-> > > > +
-> > > > +static const char *mock_name(struct dma_fence *f)
-> > > > +{
-> > > > +	return "mock";
-> > > > +}
-> > > > +
-> > > > +static void mock_fence_release(struct dma_fence *f)
-> > > > +{
-> > > > +	kmem_cache_free(slab_fences, to_mock_fence(f));
-> > > > +}
-> > > > +
-> > > > +static const struct dma_fence_ops mock_ops =3D {
-> > > > +	.get_driver_name =3D mock_name,
-> > > > +	.get_timeline_name =3D mock_name,
-> > > > +	.release =3D mock_fence_release,
-> > > > +};
-> > > > +
-> > > > +static struct dma_fence *mock_fence(void)
-> > > > +{
-> > > > +	struct mock_fence *f;
-> > > > +
-> > > > +	f =3D kmem_cache_alloc(slab_fences, GFP_KERNEL);
-> > > > +	if (!f)
-> > > > +		return NULL;
-> > > > +
-> > > > +	spin_lock_init(&f->lock);
-> > > > +	dma_fence_init(&f->base, &mock_ops, &f->lock, 0, 0);
-> > > > +
-> > > > +	return &f->base;
-> > > > +}
-> > > > +
-> > > > +static struct dma_fence *mock_array(unsigned int num_fences, ...)
-> > > > +{
-> > > > +	struct dma_fence_array *array;
-> > > > +	struct dma_fence **fences;
-> > > > +	va_list valist;
-> > > > +	int i;
-> > > > +
-> > > > +	fences =3D kcalloc(num_fences, sizeof(*fences), GFP_KERNEL);
-> > > > +	if (!fences)
-> > > > +		return NULL;
-> > > > +
-> > > > +	va_start(valist, num_fences);
-> > > > +	for (i =3D 0; i < num_fences; ++i)
-> > > > +		fences[i] =3D va_arg(valist, typeof(*fences));
-> > > > +	va_end(valist);
-> > > > +
-> > > > +	array =3D dma_fence_array_create(num_fences, fences,
-> > > > +				       dma_fence_context_alloc(1),
-> > > > +				       1, false);
-> > > > +	if (!array)
-> > > > +		goto cleanup;
-> > > > +	return &array->base;
-> > > > +
-> > > > +cleanup:
-> > > > +	for (i =3D 0; i < num_fences; ++i)
-> > > > +		dma_fence_put(fences[i]);
-> > > > +	kfree(fences);
-> > > > +	return NULL;
-> > > > +}
-> > > > +
-> > > > +static struct dma_fence *mock_chain(struct dma_fence *prev,
-> > > > +				    struct dma_fence *fence)
-> > > > +{
-> > > > +	struct dma_fence_chain *f;
-> > > > +
-> > > > +	f =3D dma_fence_chain_alloc();
-> > > > +	if (!f) {
-> > > > +		dma_fence_put(prev);
-> > > > +		dma_fence_put(fence);
-> > > > +		return NULL;
-> > > > +	}
-> > > > +
-> > > > +	dma_fence_chain_init(f, prev, fence, 1);
-> > > > +	return &f->base;
-> > > > +}
-> > > > +
-> > > > +static int sanitycheck(void *arg)
-> > > > +{
-> > > > +	struct dma_fence *f, *chain, *array;
-> > > > +	int err =3D 0;
-> > > > +
-> > > > +	f =3D mock_fence();
-> > > > +	if (!f)
-> > > > +		return -ENOMEM;
-> > > > +
-> > > > +	array =3D mock_array(1, f);
-> > > > +	if (!array)
-> > > > +		return -ENOMEM;
-> > > > +
-> > > > +	chain =3D mock_chain(NULL, array);
-> > > > +	if (!chain)
-> > > > +		return -ENOMEM;
-> > > > +
-> > > > +	dma_fence_signal(f);
-> > > > +	dma_fence_put(chain);
-> > > > +	return err;
-> > > > +}
-> > > > +
-> > > > +static int unwrap_array(void *arg)
-> > > > +{
-> > > > +	struct dma_fence *fence, *f1, *f2, *array;
-> > > > +	struct dma_fence_unwrap iter;
-> > > > +	int err =3D 0;
-> > > > +
-> > > > +	f1 =3D mock_fence();
-> > > > +	if (!f1)
-> > > > +		return -ENOMEM;
-> > > > +
-> > > > +	f2 =3D mock_fence();
-> > > > +	if (!f2) {
-> > > > +		dma_fence_put(f1);
-> > > > +		return -ENOMEM;
-> > > > +	}
-> > > > +
-> > > > +	array =3D mock_array(2, f1, f2);
-> > > > +	if (!array)
-> > > > +		return -ENOMEM;
-> > > > +
-> > > > +	dma_fence_unwrap_for_each(fence, &iter, array) {
-> > > > +		if (fence =3D=3D f1) {
-> > > > +			f1 =3D NULL;
-> > > > +		} else if (fence =3D=3D f2) {
-> > > > +			f2 =3D NULL;
-> > > > +		} else {
-> > > > +			pr_err("Unexpected fence!\n");
-> > > > +			err =3D -EINVAL;
-> > > > +		}
-> > > > +	}
-> > > > +
-> > > > +	if (f1 || f2) {
-> > > > +		pr_err("Not all fences seen!\n");
-> > > > +		err =3D -EINVAL;
-> > > > +	}
-> > > > +
-> > > > +	dma_fence_signal(f1);
-> > > > +	dma_fence_signal(f2);
-> > > > +	dma_fence_put(array);
-> > > > +	return 0;
-> > > > +}
-> > > > +
-> > > > +static int unwrap_chain(void *arg)
-> > > > +{
-> > > > +	struct dma_fence *fence, *f1, *f2, *chain;
-> > > > +	struct dma_fence_unwrap iter;
-> > > > +	int err =3D 0;
-> > > > +
-> > > > +	f1 =3D mock_fence();
-> > > > +	if (!f1)
-> > > > +		return -ENOMEM;
-> > > > +
-> > > > +	f2 =3D mock_fence();
-> > > > +	if (!f2) {
-> > > > +		dma_fence_put(f1);
-> > > > +		return -ENOMEM;
-> > > > +	}
-> > > > +
-> > > > +	chain =3D mock_chain(f1, f2);
-> > > > +	if (!chain)
-> > > > +		return -ENOMEM;
-> > > > +
-> > > > +	dma_fence_unwrap_for_each(fence, &iter, chain) {
-> > > > +		if (fence =3D=3D f1) {
-> > > > +			f1 =3D NULL;
-> > > > +		} else if (fence =3D=3D f2) {
-> > > > +			f2 =3D NULL;
-> > > > +		} else {
-> > > > +			pr_err("Unexpected fence!\n");
-> > > > +			err =3D -EINVAL;
-> > > > +		}
-> > > > +	}
-> > > > +
-> > > > +	if (f1 || f2) {
-> > > > +		pr_err("Not all fences seen!\n");
-> > > > +		err =3D -EINVAL;
-> > > > +	}
-> > > > +
-> > > > +	dma_fence_signal(f1);
-> > > > +	dma_fence_signal(f2);
-> > > > +	dma_fence_put(chain);
-> > > > +	return 0;
-> > > > +}
-> > > > +
-> > > > +static int unwrap_chain_array(void *arg)
-> > > > +{
-> > > > +	struct dma_fence *fence, *f1, *f2, *array, *chain;
-> > > > +	struct dma_fence_unwrap iter;
-> > > > +	int err =3D 0;
-> > > > +
-> > > > +	f1 =3D mock_fence();
-> > > > +	if (!f1)
-> > > > +		return -ENOMEM;
-> > > > +
-> > > > +	f2 =3D mock_fence();
-> > > > +	if (!f2) {
-> > > > +		dma_fence_put(f1);
-> > > > +		return -ENOMEM;
-> > > > +	}
-> > > > +
-> > > > +	array =3D mock_array(2, f1, f2);
-> > > > +	if (!array)
-> > > > +		return -ENOMEM;
-> > > > +
-> > > > +	chain =3D mock_chain(NULL, array);
-> > > > +	if (!chain)
-> > > > +		return -ENOMEM;
-> > > > +
-> > > > +	dma_fence_unwrap_for_each(fence, &iter, chain) {
-> > > > +		if (fence =3D=3D f1) {
-> > > > +			f1 =3D NULL;
-> > > > +		} else if (fence =3D=3D f2) {
-> > > > +			f2 =3D NULL;
-> > > > +		} else {
-> > > > +			pr_err("Unexpected fence!\n");
-> > > > +			err =3D -EINVAL;
-> > > > +		}
-> > > > +	}
-> > > > +
-> > > > +	if (f1 || f2) {
-> > > > +		pr_err("Not all fences seen!\n");
-> > > > +		err =3D -EINVAL;
-> > > > +	}
-> > > > +
-> > > > +	dma_fence_signal(f1);
-> > > > +	dma_fence_signal(f2);
-> > > > +	dma_fence_put(chain);
-> > > > +	return 0;
-> > > > +}
-> > > > +
-> > > > +int dma_fence_unwrap(void)
-> > > > +{
-> > > > +	static const struct subtest tests[] =3D {
-> > > > +		SUBTEST(sanitycheck),
-> > > > +		SUBTEST(unwrap_array),
-> > > > +		SUBTEST(unwrap_chain),
-> > > > +		SUBTEST(unwrap_chain_array),
-> > > > +	};
-> > > > +	int ret;
-> > > > +
-> > > > +	slab_fences =3D KMEM_CACHE(mock_fence,
-> > > > +				 SLAB_TYPESAFE_BY_RCU |
-> > > > +				 SLAB_HWCACHE_ALIGN);
-> > > > +	if (!slab_fences)
-> > > > +		return -ENOMEM;
-> > > > +
-> > > > +	ret =3D subtests(tests, NULL);
-> > > > +
-> > > > +	kmem_cache_destroy(slab_fences);
-> > > > +	return ret;
-> > > > +}
-> > > > diff --git a/include/linux/dma-fence-unwrap.h b/include/linux/dma-f=
-ence-unwrap.h
-> > > > new file mode 100644
-> > > > index 000000000000..54963df00c98
-> > > > --- /dev/null
-> > > > +++ b/include/linux/dma-fence-unwrap.h
-> > > > @@ -0,0 +1,99 @@
-> > > > +/* SPDX-License-Identifier: GPL-2.0-only */
-> > > > +/*
-> > > > + * fence-chain: chain fences together in a timeline
-> > > > + *
-> > > > + * Copyright (C) 2022 Advanced Micro Devices, Inc.
-> > > > + * Authors:
-> > > > + *	Christian K=F6nig <christian.koenig@amd.com>
-> > > > + */
-> > > > +
-> > > > +#ifndef __LINUX_DMA_FENCE_UNWRAP_H
-> > > > +#define __LINUX_DMA_FENCE_UNWRAP_H
-> > > > +
-> > > > +#include <linux/dma-fence-chain.h>
-> > > > +#include <linux/dma-fence-array.h>
-> > > > +
-> > > > +/**
-> > > > + * struct dma_fence_unwrap - cursor into the container structure
-> > > I think adding "This should be used together with
-> > > dma_fence_unwrap_for_each() iterator macro." would be nice here. I ju=
-st
-> > > like links :-)
-> > >=20
-> > > > + */
-> > > > +struct dma_fence_unwrap {
-> > > > +	/**
-> > > > +	 * @chain: potential dma_fence_chain, but can be other fence as w=
-ell
-> > > > +	 */
-> > > > +	struct dma_fence *chain;
-> > > > +	/**
-> > > > +	 * @array: potential dma_fence_array, but can be other fence as w=
-ell
-> > > > +	 */
-> > > > +	struct dma_fence *array;
-> > > > +	/**
-> > > > +	 * @index: last returned index if @array is really a dma_fence_ar=
-ray
-> > > > +	 */
-> > > > +	unsigned int index;
-> > > > +};
-> > > > +
-> > > > +/**
-> > > > + * dma_fence_unwrap_array - helper to unwrap dma_fence_arrays
-> > > > + * @cursor: cursor to initialize
-> > > > + *
-> > > > + * Helper function to unwrap dma_fence_array containers, don't tou=
-ch directly.
-> > > > + * Use dma_fence_unwrap_first/next instead.
-> > > > + */
-> > > > +static inline struct dma_fence *
-> > > > +dma_fence_unwrap_array(struct dma_fence_unwrap * cursor)
-> > > Since this is a helper that no one should call I'd give it a __ prefi=
-x and
-> > > drop the kerneldoc. Documenting stuff that people shouldn't use is
-> > > confusing :-)
-> > >=20
-> > > > +{
-> > > > +	cursor->array =3D dma_fence_chain_contained(cursor->chain);
-> > > > +	cursor->index =3D 0;
-> > > > +	return dma_fence_array_first(cursor->array);
-> > > > +}
-> > > > +
-> > > > +/**
-> > > > + * dma_fence_unwrap_first - return the first fence from fence cont=
-ainers
-> > > > + * @head: the entrypoint into the containers
-> > > > + * @cursor: current position inside the containers
-> > > > + *
-> > > > + * Unwraps potential dma_fence_chain/dma_fence_array containers an=
-d return the
-> > > > + * first fence.
-> > > > + */
-> > > > +static inline struct dma_fence *
-> > > > +dma_fence_unwrap_first(struct dma_fence *head, struct dma_fence_un=
-wrap *cursor)
-> > > > +{
-> > > > +	cursor->chain =3D dma_fence_get(head);
-> > > > +	return dma_fence_unwrap_array(cursor);
-> > > > +}
-> > > > +
-> > > > +/**
-> > > > + * dma_fence_unwrap_next - return the next fence from a fence cont=
-ainers
-> > > > + * @cursor: current position inside the containers
-> > > > + *
-> > > > + * Continue unwrapping the dma_fence_chain/dma_fence_array contain=
-ers and return
-> > > > + * the next fence from them.
-> > > > + */
-> > > > +static inline struct dma_fence *
-> > > > +dma_fence_unwrap_next(struct dma_fence_unwrap *cursor)
-> > > > +{
-> > > > +	struct dma_fence *tmp;
-> > > > +
-> > > > +	++cursor->index;
-> > > > +	tmp =3D dma_fence_array_next(cursor->array, cursor->index);
-> > > > +	if (tmp)
-> > > > +		return tmp;
-> > > > +
-> > > > +	cursor->chain =3D dma_fence_chain_walk(cursor->chain);
-> > > > +	return dma_fence_unwrap_array(cursor);
-> > > > +}
-> > > > +
-> > > > +/**
-> > > > + * dma_fence_unwrap_for_each - iterate over all fences in containe=
-rs
-> > > > + * @fence: current fence
-> > > > + * @cursor: current position inside the containers
-> > > > + * @head: starting point for the iterator
-> > > > + *
-> > > > + * Unwrap dma_fence_chain and dma_fence_array containers and deep =
-dive into all
-> > > > + * potential fences in them. If @head is just a normal fence only =
-that one is
-> > > > + * returned.
-> > > > + */
-> > > > +#define dma_fence_unwrap_for_each(fence, cursor, head)			\
-> > > > +	for (fence =3D dma_fence_unwrap_first(head, cursor); fence;	\
-> > > > +	     fence =3D dma_fence_unwrap_next(cursor))
-> > > > +
-> > > > +#endif
-> > > I think it'd be really good to add a small paragraph to struct
-> > > dma_fence_chain that this macro and iterator should be used for walki=
-ng
-> > > over all fences in a chain, including any fence arrays or anything li=
-ke
-> > > that.
-> > >=20
-> > > With the bikesheds addressed:
-> > >=20
-> > > Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
-> > >=20
-> > > > --=20
-> > > > 2.25.1
-> > > >=20
-> > > --=20
-> > > Daniel Vetter
-> > > Software Engineer, Intel Corporation
-> > > https://nam11.safelinks.protection.outlook.com/?url=3Dhttp%3A%2F%2Fbl=
-og.ffwll.ch%2F&amp;data=3D04%7C01%7Cchristian.koenig%40amd.com%7Caa74708390=
-0b451d359308da0e4745e3%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C6378379=
-96532802687%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJ=
-BTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&amp;sdata=3DJts5%2BObWJHeUG4oy2biwj5Bf3P=
-KkMrYU%2F0EihvQRNuY%3D&amp;reserved=3D0
->=20
-
---=20
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+QW0gMjUuMDMuMjIgdW0gMTE6MTMgc2NocmllYiBEYW5pZWwgVmV0dGVyOg0KPiBPbiBGcmksIE1h
+ciAxMSwgMjAyMiBhdCAxMjowMjo0NFBNICswMTAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0K
+Pj4gVGhlIGRtYV9mZW5jZV9jaGFpbiBjb250YWluZXJzIGNhbiBzaG93IHVwIGluIHN5bmNfZmls
+ZXMgYXMgd2VsbCByZXN1bHRpbmcgaW4NCj4+IHdhcm5pbmdzIHRoYXQgdGhvc2UgY2FuJ3QgYmUg
+YWRkZWQgdG8gZG1hX2ZlbmNlX2FycmF5IGNvbnRhaW5lcnMgd2hlbiBtZXJnaW5nDQo+PiBtdWx0
+aXBsZSBzeW5jX2ZpbGVzIHRvZ2V0aGVyLg0KPj4NCj4+IFNvbHZlIHRoaXMgYnkgdXNpbmcgdGhl
+IGRtYV9mZW5jZV91bndyYXAgaXRlcmF0b3IgdG8gZGVlcCBkaXZlIGludG8gdGhlDQo+PiBjb250
+YWluZWQgZmVuY2VzIGFuZCB0aGVuIGFkZCB0aG9zZSBmbGF0dGVuIG91dCBpbnRvIGEgZG1hX2Zl
+bmNlX2FycmF5Lg0KPj4NCj4+IFNpZ25lZC1vZmYtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlz
+dGlhbi5rb2VuaWdAYW1kLmNvbT4NCj4gSSBoYXZlIG5vIGlkZWEgd2h5IHdlIHRyeSB0byBrZWVw
+IGZlbmNlcyBzb3J0ZWQsIGJ1dCBvaCB3ZWxsIGl0IGxvb2tzIGxpa2UNCj4gdGhlIG1lcmdpbmcg
+aXMgZG9uZSBjb3JyZWN0bHkuDQoNClRvIGJlIGhvbmVzdCBJIGRvbid0IGZ1bGx5IGtub3cgZWl0
+aGVyLg0KDQpLZWVwaW5nIHRoZSBhcnJheSBzb3J0ZWQgYnkgY29udGV4dCBhbGxvd3MgdG8gbWVy
+Z2UgaXQgd2l0aG91dCBhZGRpbmcgDQpkdXBsaWNhdGVzLCBidXQgYWRkaW5nIGR1cGxpY2F0ZXMg
+aXMgbm90IGFuIGV4dHJhIG92ZXJoZWFkIHRvIGJlZ2luIHdpdGggDQpiZWNhdXNlIHdlIGFsd2F5
+cyBhbGxvY2F0ZSBtZW1vcnkgZm9yIHRoZSB3b3JzdCBjYXNlIGFueXdheS4NCg0KSnVzdCBrZWVw
+aW5nIGl0IGFyb3VuZCBmb3Igbm93Lg0KDQo+IFJldmlld2VkLWJ5OiBEYW5pZWwgVmV0dGVyIDxk
+YW5pZWwudmV0dGVyQGZmd2xsLmNoPg0KDQpUaGFua3MsDQpDaHJpc3RpYW4uDQoNCj4NCj4+IC0t
+LQ0KPj4gICBkcml2ZXJzL2RtYS1idWYvc3luY19maWxlLmMgfCAxNDEgKysrKysrKysrKysrKysr
+KysrKy0tLS0tLS0tLS0tLS0tLS0tDQo+PiAgIDEgZmlsZSBjaGFuZ2VkLCA3MyBpbnNlcnRpb25z
+KCspLCA2OCBkZWxldGlvbnMoLSkNCj4+DQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVm
+L3N5bmNfZmlsZS5jIGIvZHJpdmVycy9kbWEtYnVmL3N5bmNfZmlsZS5jDQo+PiBpbmRleCAzOTRl
+NmUxZTk2ODYuLmI4ZGVhNGVjMTIzYiAxMDA2NDQNCj4+IC0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9z
+eW5jX2ZpbGUuYw0KPj4gKysrIGIvZHJpdmVycy9kbWEtYnVmL3N5bmNfZmlsZS5jDQo+PiBAQCAt
+NSw2ICs1LDcgQEANCj4+ICAgICogQ29weXJpZ2h0IChDKSAyMDEyIEdvb2dsZSwgSW5jLg0KPj4g
+ICAgKi8NCj4+ICAgDQo+PiArI2luY2x1ZGUgPGxpbnV4L2RtYS1mZW5jZS11bndyYXAuaD4NCj4+
+ICAgI2luY2x1ZGUgPGxpbnV4L2V4cG9ydC5oPg0KPj4gICAjaW5jbHVkZSA8bGludXgvZmlsZS5o
+Pg0KPj4gICAjaW5jbHVkZSA8bGludXgvZnMuaD4NCj4+IEBAIC0xNzIsMjAgKzE3Myw2IEBAIHN0
+YXRpYyBpbnQgc3luY19maWxlX3NldF9mZW5jZShzdHJ1Y3Qgc3luY19maWxlICpzeW5jX2ZpbGUs
+DQo+PiAgIAlyZXR1cm4gMDsNCj4+ICAgfQ0KPj4gICANCj4+IC1zdGF0aWMgc3RydWN0IGRtYV9m
+ZW5jZSAqKmdldF9mZW5jZXMoc3RydWN0IHN5bmNfZmlsZSAqc3luY19maWxlLA0KPj4gLQkJCQkg
+ICAgIGludCAqbnVtX2ZlbmNlcykNCj4+IC17DQo+PiAtCWlmIChkbWFfZmVuY2VfaXNfYXJyYXko
+c3luY19maWxlLT5mZW5jZSkpIHsNCj4+IC0JCXN0cnVjdCBkbWFfZmVuY2VfYXJyYXkgKmFycmF5
+ID0gdG9fZG1hX2ZlbmNlX2FycmF5KHN5bmNfZmlsZS0+ZmVuY2UpOw0KPj4gLQ0KPj4gLQkJKm51
+bV9mZW5jZXMgPSBhcnJheS0+bnVtX2ZlbmNlczsNCj4+IC0JCXJldHVybiBhcnJheS0+ZmVuY2Vz
+Ow0KPj4gLQl9DQo+PiAtDQo+PiAtCSpudW1fZmVuY2VzID0gMTsNCj4+IC0JcmV0dXJuICZzeW5j
+X2ZpbGUtPmZlbmNlOw0KPj4gLX0NCj4+IC0NCj4+ICAgc3RhdGljIHZvaWQgYWRkX2ZlbmNlKHN0
+cnVjdCBkbWFfZmVuY2UgKipmZW5jZXMsDQo+PiAgIAkJICAgICAgaW50ICppLCBzdHJ1Y3QgZG1h
+X2ZlbmNlICpmZW5jZSkNCj4+ICAgew0KPj4gQEAgLTIxMCw4NiArMTk3LDk3IEBAIHN0YXRpYyB2
+b2lkIGFkZF9mZW5jZShzdHJ1Y3QgZG1hX2ZlbmNlICoqZmVuY2VzLA0KPj4gICBzdGF0aWMgc3Ry
+dWN0IHN5bmNfZmlsZSAqc3luY19maWxlX21lcmdlKGNvbnN0IGNoYXIgKm5hbWUsIHN0cnVjdCBz
+eW5jX2ZpbGUgKmEsDQo+PiAgIAkJCQkJIHN0cnVjdCBzeW5jX2ZpbGUgKmIpDQo+PiAgIHsNCj4+
+ICsJc3RydWN0IGRtYV9mZW5jZSAqYV9mZW5jZSwgKmJfZmVuY2UsICoqZmVuY2VzOw0KPj4gKwlz
+dHJ1Y3QgZG1hX2ZlbmNlX3Vud3JhcCBhX2l0ZXIsIGJfaXRlcjsNCj4+ICsJdW5zaWduZWQgaW50
+IGluZGV4LCBudW1fZmVuY2VzOw0KPj4gICAJc3RydWN0IHN5bmNfZmlsZSAqc3luY19maWxlOw0K
+Pj4gLQlzdHJ1Y3QgZG1hX2ZlbmNlICoqZmVuY2VzID0gTlVMTCwgKipuZmVuY2VzLCAqKmFfZmVu
+Y2VzLCAqKmJfZmVuY2VzOw0KPj4gLQlpbnQgaSA9IDAsIGlfYSwgaV9iLCBudW1fZmVuY2VzLCBh
+X251bV9mZW5jZXMsIGJfbnVtX2ZlbmNlczsNCj4+ICAgDQo+PiAgIAlzeW5jX2ZpbGUgPSBzeW5j
+X2ZpbGVfYWxsb2MoKTsNCj4+ICAgCWlmICghc3luY19maWxlKQ0KPj4gICAJCXJldHVybiBOVUxM
+Ow0KPj4gICANCj4+IC0JYV9mZW5jZXMgPSBnZXRfZmVuY2VzKGEsICZhX251bV9mZW5jZXMpOw0K
+Pj4gLQliX2ZlbmNlcyA9IGdldF9mZW5jZXMoYiwgJmJfbnVtX2ZlbmNlcyk7DQo+PiAtCWlmIChh
+X251bV9mZW5jZXMgPiBJTlRfTUFYIC0gYl9udW1fZmVuY2VzKQ0KPj4gLQkJZ290byBlcnI7DQo+
+PiArCW51bV9mZW5jZXMgPSAwOw0KPj4gKwlkbWFfZmVuY2VfdW53cmFwX2Zvcl9lYWNoKGFfZmVu
+Y2UsICZhX2l0ZXIsIGEtPmZlbmNlKQ0KPj4gKwkJKytudW1fZmVuY2VzOw0KPj4gKwlkbWFfZmVu
+Y2VfdW53cmFwX2Zvcl9lYWNoKGJfZmVuY2UsICZiX2l0ZXIsIGItPmZlbmNlKQ0KPj4gKwkJKytu
+dW1fZmVuY2VzOw0KPj4gICANCj4+IC0JbnVtX2ZlbmNlcyA9IGFfbnVtX2ZlbmNlcyArIGJfbnVt
+X2ZlbmNlczsNCj4+ICsJaWYgKG51bV9mZW5jZXMgPiBJTlRfTUFYKQ0KPj4gKwkJZ290byBlcnJf
+ZnJlZV9zeW5jX2ZpbGU7DQo+PiAgIA0KPj4gICAJZmVuY2VzID0ga2NhbGxvYyhudW1fZmVuY2Vz
+LCBzaXplb2YoKmZlbmNlcyksIEdGUF9LRVJORUwpOw0KPj4gICAJaWYgKCFmZW5jZXMpDQo+PiAt
+CQlnb3RvIGVycjsNCj4+ICsJCWdvdG8gZXJyX2ZyZWVfc3luY19maWxlOw0KPj4gICANCj4+ICAg
+CS8qDQo+PiAtCSAqIEFzc3VtZSBzeW5jX2ZpbGUgYSBhbmQgYiBhcmUgYm90aCBvcmRlcmVkIGFu
+ZCBoYXZlIG5vDQo+PiAtCSAqIGR1cGxpY2F0ZXMgd2l0aCB0aGUgc2FtZSBjb250ZXh0Lg0KPj4g
+KwkgKiBXZSBjYW4ndCBndWFyYW50ZWUgdGhhdCBmZW5jZXMgaW4gYm90aCBhIGFuZCBiIGFyZSBv
+cmRlcmVkLCBidXQgaXQgaXMNCj4+ICsJICogc3RpbGwgcXVpdGUgbGlrZWx5Lg0KPj4gICAJICoN
+Cj4+IC0JICogSWYgYSBzeW5jX2ZpbGUgY2FuIG9ubHkgYmUgY3JlYXRlZCB3aXRoIHN5bmNfZmls
+ZV9tZXJnZQ0KPj4gLQkgKiBhbmQgc3luY19maWxlX2NyZWF0ZSwgdGhpcyBpcyBhIHJlYXNvbmFi
+bGUgYXNzdW1wdGlvbi4NCj4+ICsJICogU28gYXR0ZW1wdCB0byBvcmRlciB0aGUgZmVuY2VzIGFz
+IHdlIHBhc3Mgb3ZlciB0aGVtIGFuZCBtZXJnZSBmZW5jZXMNCj4+ICsJICogd2l0aCB0aGUgc2Ft
+ZSBjb250ZXh0Lg0KPj4gICAJICovDQo+PiAtCWZvciAoaV9hID0gaV9iID0gMDsgaV9hIDwgYV9u
+dW1fZmVuY2VzICYmIGlfYiA8IGJfbnVtX2ZlbmNlczsgKSB7DQo+PiAtCQlzdHJ1Y3QgZG1hX2Zl
+bmNlICpwdF9hID0gYV9mZW5jZXNbaV9hXTsNCj4+IC0JCXN0cnVjdCBkbWFfZmVuY2UgKnB0X2Ig
+PSBiX2ZlbmNlc1tpX2JdOw0KPj4gICANCj4+IC0JCWlmIChwdF9hLT5jb250ZXh0IDwgcHRfYi0+
+Y29udGV4dCkgew0KPj4gLQkJCWFkZF9mZW5jZShmZW5jZXMsICZpLCBwdF9hKTsNCj4+ICsJaW5k
+ZXggPSAwOw0KPj4gKwlmb3IgKGFfZmVuY2UgPSBkbWFfZmVuY2VfdW53cmFwX2ZpcnN0KGEtPmZl
+bmNlLCAmYV9pdGVyKSwNCj4+ICsJICAgICBiX2ZlbmNlID0gZG1hX2ZlbmNlX3Vud3JhcF9maXJz
+dChiLT5mZW5jZSwgJmJfaXRlcik7DQo+PiArCSAgICAgYV9mZW5jZSB8fCBiX2ZlbmNlOyApIHsN
+Cj4+ICsNCj4+ICsJCWlmICghYl9mZW5jZSkgew0KPj4gKwkJCWFkZF9mZW5jZShmZW5jZXMsICZp
+bmRleCwgYV9mZW5jZSk7DQo+PiArCQkJYV9mZW5jZSA9IGRtYV9mZW5jZV91bndyYXBfbmV4dCgm
+YV9pdGVyKTsNCj4+ICsNCj4+ICsJCX0gZWxzZSBpZiAoIWFfZmVuY2UpIHsNCj4+ICsJCQlhZGRf
+ZmVuY2UoZmVuY2VzLCAmaW5kZXgsIGJfZmVuY2UpOw0KPj4gKwkJCWJfZmVuY2UgPSBkbWFfZmVu
+Y2VfdW53cmFwX25leHQoJmJfaXRlcik7DQo+PiArDQo+PiArCQl9IGVsc2UgaWYgKGFfZmVuY2Ut
+PmNvbnRleHQgPCBiX2ZlbmNlLT5jb250ZXh0KSB7DQo+PiArCQkJYWRkX2ZlbmNlKGZlbmNlcywg
+JmluZGV4LCBhX2ZlbmNlKTsNCj4+ICsJCQlhX2ZlbmNlID0gZG1hX2ZlbmNlX3Vud3JhcF9uZXh0
+KCZhX2l0ZXIpOw0KPj4gICANCj4+IC0JCQlpX2ErKzsNCj4+IC0JCX0gZWxzZSBpZiAocHRfYS0+
+Y29udGV4dCA+IHB0X2ItPmNvbnRleHQpIHsNCj4+IC0JCQlhZGRfZmVuY2UoZmVuY2VzLCAmaSwg
+cHRfYik7DQo+PiArCQl9IGVsc2UgaWYgKGJfZmVuY2UtPmNvbnRleHQgPCBhX2ZlbmNlLT5jb250
+ZXh0KSB7DQo+PiArCQkJYWRkX2ZlbmNlKGZlbmNlcywgJmluZGV4LCBiX2ZlbmNlKTsNCj4+ICsJ
+CQliX2ZlbmNlID0gZG1hX2ZlbmNlX3Vud3JhcF9uZXh0KCZiX2l0ZXIpOw0KPj4gKw0KPj4gKwkJ
+fSBlbHNlIGlmIChfX2RtYV9mZW5jZV9pc19sYXRlcihhX2ZlbmNlLT5zZXFubywgYl9mZW5jZS0+
+c2Vxbm8sDQo+PiArCQkJCQkJYV9mZW5jZS0+b3BzKSkgew0KPj4gKwkJCWFkZF9mZW5jZShmZW5j
+ZXMsICZpbmRleCwgYV9mZW5jZSk7DQo+PiArCQkJYV9mZW5jZSA9IGRtYV9mZW5jZV91bndyYXBf
+bmV4dCgmYV9pdGVyKTsNCj4+ICsJCQliX2ZlbmNlID0gZG1hX2ZlbmNlX3Vud3JhcF9uZXh0KCZi
+X2l0ZXIpOw0KPj4gICANCj4+IC0JCQlpX2IrKzsNCj4+ICAgCQl9IGVsc2Ugew0KPj4gLQkJCWlm
+IChfX2RtYV9mZW5jZV9pc19sYXRlcihwdF9hLT5zZXFubywgcHRfYi0+c2Vxbm8sDQo+PiAtCQkJ
+CQkJIHB0X2EtPm9wcykpDQo+PiAtCQkJCWFkZF9mZW5jZShmZW5jZXMsICZpLCBwdF9hKTsNCj4+
+IC0JCQllbHNlDQo+PiAtCQkJCWFkZF9mZW5jZShmZW5jZXMsICZpLCBwdF9iKTsNCj4+IC0NCj4+
+IC0JCQlpX2ErKzsNCj4+IC0JCQlpX2IrKzsNCj4+ICsJCQlhZGRfZmVuY2UoZmVuY2VzLCAmaW5k
+ZXgsIGJfZmVuY2UpOw0KPj4gKwkJCWFfZmVuY2UgPSBkbWFfZmVuY2VfdW53cmFwX25leHQoJmFf
+aXRlcik7DQo+PiArCQkJYl9mZW5jZSA9IGRtYV9mZW5jZV91bndyYXBfbmV4dCgmYl9pdGVyKTsN
+Cj4+ICAgCQl9DQo+PiAgIAl9DQo+PiAgIA0KPj4gLQlmb3IgKDsgaV9hIDwgYV9udW1fZmVuY2Vz
+OyBpX2ErKykNCj4+IC0JCWFkZF9mZW5jZShmZW5jZXMsICZpLCBhX2ZlbmNlc1tpX2FdKTsNCj4+
+IC0NCj4+IC0JZm9yICg7IGlfYiA8IGJfbnVtX2ZlbmNlczsgaV9iKyspDQo+PiAtCQlhZGRfZmVu
+Y2UoZmVuY2VzLCAmaSwgYl9mZW5jZXNbaV9iXSk7DQo+PiAtDQo+PiAtCWlmIChpID09IDApDQo+
+PiAtCQlmZW5jZXNbaSsrXSA9IGRtYV9mZW5jZV9nZXQoYV9mZW5jZXNbMF0pOw0KPj4gKwlpZiAo
+aW5kZXggPT0gMCkNCj4+ICsJCWFkZF9mZW5jZShmZW5jZXMsICZpbmRleCwgZG1hX2ZlbmNlX2dl
+dF9zdHViKCkpOw0KPj4gICANCj4+IC0JaWYgKG51bV9mZW5jZXMgPiBpKSB7DQo+PiAtCQluZmVu
+Y2VzID0ga3JlYWxsb2NfYXJyYXkoZmVuY2VzLCBpLCBzaXplb2YoKmZlbmNlcyksIEdGUF9LRVJO
+RUwpOw0KPj4gLQkJaWYgKCFuZmVuY2VzKQ0KPj4gLQkJCWdvdG8gZXJyOw0KPj4gKwlpZiAobnVt
+X2ZlbmNlcyA+IGluZGV4KSB7DQo+PiArCQlzdHJ1Y3QgZG1hX2ZlbmNlICoqdG1wOw0KPj4gICAN
+Cj4+IC0JCWZlbmNlcyA9IG5mZW5jZXM7DQo+PiArCQkvKiBLZWVwIGdvaW5nIGV2ZW4gd2hlbiBy
+ZWR1Y2luZyB0aGUgc2l6ZSBmYWlsZWQgKi8NCj4+ICsJCXRtcCA9IGtyZWFsbG9jX2FycmF5KGZl
+bmNlcywgaW5kZXgsIHNpemVvZigqZmVuY2VzKSwNCj4+ICsJCQkJICAgICBHRlBfS0VSTkVMKTsN
+Cj4+ICsJCWlmICh0bXApDQo+PiArCQkJZmVuY2VzID0gdG1wOw0KPj4gICAJfQ0KPj4gICANCj4+
+IC0JaWYgKHN5bmNfZmlsZV9zZXRfZmVuY2Uoc3luY19maWxlLCBmZW5jZXMsIGkpIDwgMCkNCj4+
+IC0JCWdvdG8gZXJyOw0KPj4gKwlpZiAoc3luY19maWxlX3NldF9mZW5jZShzeW5jX2ZpbGUsIGZl
+bmNlcywgaW5kZXgpIDwgMCkNCj4+ICsJCWdvdG8gZXJyX3B1dF9mZW5jZXM7DQo+PiAgIA0KPj4g
+ICAJc3RybGNweShzeW5jX2ZpbGUtPnVzZXJfbmFtZSwgbmFtZSwgc2l6ZW9mKHN5bmNfZmlsZS0+
+dXNlcl9uYW1lKSk7DQo+PiAgIAlyZXR1cm4gc3luY19maWxlOw0KPj4gICANCj4+IC1lcnI6DQo+
+PiAtCXdoaWxlIChpKQ0KPj4gLQkJZG1hX2ZlbmNlX3B1dChmZW5jZXNbLS1pXSk7DQo+PiArZXJy
+X3B1dF9mZW5jZXM6DQo+PiArCXdoaWxlIChpbmRleCkNCj4+ICsJCWRtYV9mZW5jZV9wdXQoZmVu
+Y2VzWy0taW5kZXhdKTsNCj4+ICAgCWtmcmVlKGZlbmNlcyk7DQo+PiArDQo+PiArZXJyX2ZyZWVf
+c3luY19maWxlOg0KPj4gICAJZnB1dChzeW5jX2ZpbGUtPmZpbGUpOw0KPj4gICAJcmV0dXJuIE5V
+TEw7DQo+PiAtDQo+PiAgIH0NCj4+ICAgDQo+PiAgIHN0YXRpYyBpbnQgc3luY19maWxlX3JlbGVh
+c2Uoc3RydWN0IGlub2RlICppbm9kZSwgc3RydWN0IGZpbGUgKmZpbGUpDQo+PiBAQCAtMzk4LDEx
+ICszOTYsMTMgQEAgc3RhdGljIGludCBzeW5jX2ZpbGxfZmVuY2VfaW5mbyhzdHJ1Y3QgZG1hX2Zl
+bmNlICpmZW5jZSwNCj4+ICAgc3RhdGljIGxvbmcgc3luY19maWxlX2lvY3RsX2ZlbmNlX2luZm8o
+c3RydWN0IHN5bmNfZmlsZSAqc3luY19maWxlLA0KPj4gICAJCQkJICAgICAgIHVuc2lnbmVkIGxv
+bmcgYXJnKQ0KPj4gICB7DQo+PiAtCXN0cnVjdCBzeW5jX2ZpbGVfaW5mbyBpbmZvOw0KPj4gICAJ
+c3RydWN0IHN5bmNfZmVuY2VfaW5mbyAqZmVuY2VfaW5mbyA9IE5VTEw7DQo+PiAtCXN0cnVjdCBk
+bWFfZmVuY2UgKipmZW5jZXM7DQo+PiArCXN0cnVjdCBkbWFfZmVuY2VfdW53cmFwIGl0ZXI7DQo+
+PiArCXN0cnVjdCBzeW5jX2ZpbGVfaW5mbyBpbmZvOw0KPj4gKwl1bnNpZ25lZCBpbnQgbnVtX2Zl
+bmNlczsNCj4+ICsJc3RydWN0IGRtYV9mZW5jZSAqZmVuY2U7DQo+PiArCWludCByZXQ7DQo+PiAg
+IAlfX3UzMiBzaXplOw0KPj4gLQlpbnQgbnVtX2ZlbmNlcywgcmV0LCBpOw0KPj4gICANCj4+ICAg
+CWlmIChjb3B5X2Zyb21fdXNlcigmaW5mbywgKHZvaWQgX191c2VyICopYXJnLCBzaXplb2YoaW5m
+bykpKQ0KPj4gICAJCXJldHVybiAtRUZBVUxUOw0KPj4gQEAgLTQxMCw3ICs0MTAsOSBAQCBzdGF0
+aWMgbG9uZyBzeW5jX2ZpbGVfaW9jdGxfZmVuY2VfaW5mbyhzdHJ1Y3Qgc3luY19maWxlICpzeW5j
+X2ZpbGUsDQo+PiAgIAlpZiAoaW5mby5mbGFncyB8fCBpbmZvLnBhZCkNCj4+ICAgCQlyZXR1cm4g
+LUVJTlZBTDsNCj4+ICAgDQo+PiAtCWZlbmNlcyA9IGdldF9mZW5jZXMoc3luY19maWxlLCAmbnVt
+X2ZlbmNlcyk7DQo+PiArCW51bV9mZW5jZXMgPSAwOw0KPj4gKwlkbWFfZmVuY2VfdW53cmFwX2Zv
+cl9lYWNoKGZlbmNlLCAmaXRlciwgc3luY19maWxlLT5mZW5jZSkNCj4+ICsJCSsrbnVtX2ZlbmNl
+czsNCj4+ICAgDQo+PiAgIAkvKg0KPj4gICAJICogUGFzc2luZyBudW1fZmVuY2VzID0gMCBtZWFu
+cyB0aGF0IHVzZXJzcGFjZSBkb2Vzbid0IHdhbnQgdG8NCj4+IEBAIC00MzMsOCArNDM1LDExIEBA
+IHN0YXRpYyBsb25nIHN5bmNfZmlsZV9pb2N0bF9mZW5jZV9pbmZvKHN0cnVjdCBzeW5jX2ZpbGUg
+KnN5bmNfZmlsZSwNCj4+ICAgCWlmICghZmVuY2VfaW5mbykNCj4+ICAgCQlyZXR1cm4gLUVOT01F
+TTsNCj4+ICAgDQo+PiAtCWZvciAoaSA9IDA7IGkgPCBudW1fZmVuY2VzOyBpKyspIHsNCj4+IC0J
+CWludCBzdGF0dXMgPSBzeW5jX2ZpbGxfZmVuY2VfaW5mbyhmZW5jZXNbaV0sICZmZW5jZV9pbmZv
+W2ldKTsNCj4+ICsJbnVtX2ZlbmNlcyA9IDA7DQo+PiArCWRtYV9mZW5jZV91bndyYXBfZm9yX2Vh
+Y2goZmVuY2UsICZpdGVyLCBzeW5jX2ZpbGUtPmZlbmNlKSB7DQo+PiArCQlpbnQgc3RhdHVzOw0K
+Pj4gKw0KPj4gKwkJc3RhdHVzID0gc3luY19maWxsX2ZlbmNlX2luZm8oZmVuY2UsICZmZW5jZV9p
+bmZvW251bV9mZW5jZXMrK10pOw0KPj4gICAJCWluZm8uc3RhdHVzID0gaW5mby5zdGF0dXMgPD0g
+MCA/IGluZm8uc3RhdHVzIDogc3RhdHVzOw0KPj4gICAJfQ0KPj4gICANCj4+IC0tIA0KPj4gMi4y
+NS4xDQo+Pg0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFy
+by5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZl
+QGxpc3RzLmxpbmFyby5vcmcK
