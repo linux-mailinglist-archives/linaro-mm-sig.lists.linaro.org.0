@@ -2,69 +2,93 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 596074E997E
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Mar 2022 16:28:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A0E894E99D2
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Mar 2022 16:36:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8635F3EF98
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Mar 2022 14:28:53 +0000 (UTC)
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
-	by lists.linaro.org (Postfix) with ESMTPS id 6FE813EBBA
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 14:28:49 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id k124-20020a1ca182000000b0038c9cf6e2a6so8695117wme.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 07:28:49 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 892633EF89
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Mar 2022 14:36:54 +0000 (UTC)
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
+	by lists.linaro.org (Postfix) with ESMTPS id 2A1EC3EBBA
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 14:36:51 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id u16so20712927wru.4
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 07:36:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ffwll.ch; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:content-transfer-encoding:in-reply-to;
-        bh=WjzWlNVKOE6uKeqLypa3nAMUDF+N13vP0KfWFKRJ4GI=;
-        b=LS3rXOJDDKiIT/tfMnHijyWDWKwjQ5oNrVsOyLIAWzFLVdxY+hwOODKpKuBtRwNV3R
-         xTjsntU/hYeUcaKuwj32/73XvAM0y9roGriVvmXssFLWO3TcuZbatSV1AKuqGoDSSOPg
-         xfUDca8Ykmw0v1welLVX1tyAjAHnnj60lrj4I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+        h=date:from:to:cc:subject:message-id:mail-followup-to:references
          :mime-version:content-disposition:content-transfer-encoding
          :in-reply-to;
-        bh=WjzWlNVKOE6uKeqLypa3nAMUDF+N13vP0KfWFKRJ4GI=;
-        b=fcjFgV0695GoM1HPhNspV0PLKq1uoC0kq2PNNbIOHOTq0AvVYTvgUgYrtKbVGv94LJ
-         HfShEB0tnW7s6OX8bdKxj3h4YRnCs88fmlpbQ2gz0FCK3097VVajsLQpKzrBwb7PF+mf
-         C6LAtlosw04ZrSnpBEDUAHRny1R2KHab0fUZa/M2E7Pust4NzwwczOOUJ46Du4A/IPbu
-         EC16jBERJCpbun/g+g9XOivERRK/ll2BpVeS3+QuOgVPZdU+jovp07XhNxhoLm89pXOK
-         gEEtzlCA8KVsvSK9QbaErSMDb9x2K8FRoJkUluh3mSMfY/eHtPeCBfl5nogpCFZBs2Pu
-         gcqw==
-X-Gm-Message-State: AOAM5305vVnsAUiAqvRfBSUnwThHaySNdZfeJBnZi48bnsFiy0j50Ozl
-	WWq/M8D+Z/9sJDkUZED4JpJRng==
-X-Google-Smtp-Source: ABdhPJyPodc097J11BwB9GCzd5t3BCFaMS5fyOq2wAqTzghwA5Fhs+Yzi48HpkmELIHQ4mBhJOTAyw==
-X-Received: by 2002:a1c:4303:0:b0:38d:43a:82a4 with SMTP id q3-20020a1c4303000000b0038d043a82a4mr9495849wma.37.1648477728396;
-        Mon, 28 Mar 2022 07:28:48 -0700 (PDT)
+        bh=v/hbcKwqx1gvBKjVXl56S5be+OnNXrcnFIQY2VQf+GQ=;
+        b=P3s83mzPAy1oHFyyIJNDomqrIFEN+HTK2X/xxvM6jHZRRhY1ia7LMcyS1CUq2WRLIt
+         5SoYJ0xl/ZAWRBo9MGjmVgpPNSAyN2Cue489qnIcE9rOOsVfG8KpauNpaa5c3+CHpQSK
+         gw9dIkAY9rZoEPI7OMXBY9dnJLfptFfKQMVcs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id
+         :mail-followup-to:references:mime-version:content-disposition
+         :content-transfer-encoding:in-reply-to;
+        bh=v/hbcKwqx1gvBKjVXl56S5be+OnNXrcnFIQY2VQf+GQ=;
+        b=MkQcwq4C/yIuHmIbReWDrPYpNUwlhuDiP2yu8zHqeBAFI4q0R8xkgXd+YzGdxBK1QN
+         8FHXSO0wLzjsCtNNW4no40WY8Dvk5VLLZCrnCxYCr1G08vIbuOnIbRuV9hLSpFDjlpJg
+         qgED1ik0YnR5Mnq++GC1P14DOrMXKlHrBwRjPZi2R74mxMLbJ1TMZ3iRBUNdlQuuqF2d
+         Q+7yapuKxL3XkT0VJ9Od+W/8LKiga9Pqq7tgq0kMsoYiMQK2ik21zIcQJtqbBVsNDMTf
+         oGGx/Ji+bBFa0zF0+h3eaaZyRnG8orV+MmGPVKzOGWcKHqBSqBA7d0fUHR7Rt0n3nGxn
+         46Ug==
+X-Gm-Message-State: AOAM532rN2FJYm/17bSV3oIwsLWBT6nW3Xn3POGZUPshz0pflT24/0+F
+	rI9Ec/kWxzVJ9AlPDKF+mdRHWg==
+X-Google-Smtp-Source: ABdhPJy2uVCV4k6lowv1jCTyfpTR0BZIIfD37/lbvSmV0qb6ifIlu4g+nMA4zLZtNKGFclvcpohivw==
+X-Received: by 2002:a5d:6d8a:0:b0:204:909:2d9a with SMTP id l10-20020a5d6d8a000000b0020409092d9amr25002730wrs.435.1648478210133;
+        Mon, 28 Mar 2022 07:36:50 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id y15-20020a05600015cf00b00203e324347bsm14508745wry.102.2022.03.28.07.28.47
+        by smtp.gmail.com with ESMTPSA id n23-20020a05600c3b9700b0038b7c4c0803sm16778890wms.30.2022.03.28.07.36.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Mar 2022 07:28:47 -0700 (PDT)
-Date: Mon, 28 Mar 2022 16:28:46 +0200
+        Mon, 28 Mar 2022 07:36:49 -0700 (PDT)
+Date: Mon, 28 Mar 2022 16:36:47 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <YkHGHtMOqVYClkhR@phenom.ffwll.local>
-References: <20220311110244.1245-1-christian.koenig@amd.com>
- <Yj3e0QjbnPoG7n4I@intel.com>
- <35cc3bd5-c0ab-0bd1-9603-4971234fbcd6@amd.com>
- <338d0623-1161-c958-101f-dc7d8ef12f99@gmail.com>
- <YkHEutP7ylbVgJjf@phenom.ffwll.local>
- <33e990e7-b6fc-d9f8-5dee-4a809ec80d6c@amd.com>
+To: "T.J. Mercier" <tjmercier@google.com>
+Message-ID: <YkHH/0Use7F30UUE@phenom.ffwll.local>
+Mail-Followup-To: "T.J. Mercier" <tjmercier@google.com>,
+	David Airlie <airlied@linux.ie>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Arve =?iso-8859-1?B?SGr4bm5lduVn?= <arve@android.com>,
+	Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>,
+	Joel Fernandes <joel@joelfernandes.org>,
+	Christian Brauner <brauner@kernel.org>,
+	Hridya Valsaraju <hridya@google.com>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Benjamin Gaignard <benjamin.gaignard@linaro.org>,
+	Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>,
+	Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <john.stultz@linaro.org>, Tejun Heo <tj@kernel.org>,
+	Zefan Li <lizefan.x@bytedance.com>,
+	Johannes Weiner <hannes@cmpxchg.org>, Shuah Khan <shuah@kernel.org>,
+	kaleshsingh@google.com, Kenny.Ho@amd.com, mkoutny@suse.com,
+	skhan@linuxfoundation.org, dri-devel@lists.freedesktop.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
+	cgroups@vger.kernel.org, linux-kselftest@vger.kernel.org
+References: <20220328035951.1817417-1-tjmercier@google.com>
+ <20220328035951.1817417-5-tjmercier@google.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <33e990e7-b6fc-d9f8-5dee-4a809ec80d6c@amd.com>
+In-Reply-To: <20220328035951.1817417-5-tjmercier@google.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Message-ID-Hash: Y3FI2XVJ6BKFDPSDECP6G42ZXLBPVFSP
-X-Message-ID-Hash: Y3FI2XVJ6BKFDPSDECP6G42ZXLBPVFSP
+Message-ID-Hash: E6UYFK6YPNRU7ZKYBY7V7RNBU62P54I2
+X-Message-ID-Hash: E6UYFK6YPNRU7ZKYBY7V7RNBU62P54I2
 X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Daniel Vetter <daniel@ffwll.ch>, Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>, gustavo@padovan.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Arve =?iso-8859-1?B?SGr4bm5lduVn?= <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>, Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Benjamin Gaignard <benjamin.gaignard@linaro.org>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>, Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>, Shuah Khan <shuah@kernel.org>, kaleshsingh@google.com, Kenny.Ho@amd.com, 
+ mkoutny@suse.com, skhan@linuxfoundation.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, cgroups@vger.kernel.org, linux-kselftest@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/2] dma-buf: add dma_fence_unwrap
+Subject: [Linaro-mm-sig] Re: [RFC v4 4/8] dmabuf: heaps: export system_heap buffers with GPU cgroup charging
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Y3FI2XVJ6BKFDPSDECP6G42ZXLBPVFSP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/E6UYFK6YPNRU7ZKYBY7V7RNBU62P54I2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -74,78 +98,171 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Mar 28, 2022 at 04:26:44PM +0200, Christian K=F6nig wrote:
-> Am 28.03.22 um 16:22 schrieb Daniel Vetter:
-> > On Mon, Mar 28, 2022 at 12:28:31PM +0200, Christian K=F6nig wrote:
-> > > Hi Ville & Daniel,
-> > >=20
-> > > Am 25.03.22 um 16:28 schrieb Christian K=F6nig:
-> > > > Am 25.03.22 um 16:25 schrieb Ville Syrj=E4l=E4:
-> > > > > On Fri, Mar 11, 2022 at 12:02:43PM +0100, Christian K=F6nig wrote:
-> > > > > > Add a general purpose helper to deep dive into
-> > > > > > dma_fence_chain/dma_fence_array
-> > > > > > structures and iterate over all the fences in them.
-> > > > > >=20
-> > > > > > This is useful when we need to flatten out all fences in those
-> > > > > > structures.
-> > > > > >=20
-> > > > > > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
-> > > > > One of the dma-buf patches took down Intel CI. Looks like every
-> > > > > machine oopses in some sync_file thing now:
-> > > > > <1>[=A0 260.470008] BUG: kernel NULL pointer dereference, address:
-> > > > > 0000000000000010
-> > > > > <1>[=A0 260.470020] #PF: supervisor read access in kernel mode
-> > > > > <1>[=A0 260.470025] #PF: error_code(0x0000) - not-present page
-> > > > > <6>[=A0 260.470030] PGD 0 P4D 0
-> > > > > <4>[=A0 260.470035] Oops: 0000 [#1] PREEMPT SMP NOPTI
-> > > > > <4>[=A0 260.470040] CPU: 0 PID: 5306 Comm: core_hotunplug Not tai=
-nted
-> > > > > 5.17.0-CI-CI_DRM_11405+ #1
-> > > > > <4>[=A0 260.470049] Hardware name: Intel Corporation Jasper Lake
-> > > > > Client Platform/Jasperlake DDR4 SODIMM RVP, BIOS
-> > > > > JSLSFWI1.R00.2385.D02.2010160831 10/16/2020
-> > > > > <4>[=A0 260.470058] RIP: 0010:dma_fence_array_first+0x19/0x20
-> > > I've looked into this and the root cause seems to be that the new code
-> > > doesn't handle dma_fence_arrays with zero elements.
-> > >=20
-> > > That is rather easy to fix, but a dma_fence_array with zero number of
-> > > elements is most likely a bug because under the wrong circumstances i=
-t can
-> > > create a dma_fence instance which will never signal.
-> > >=20
-> > > I've send out a patch on Frinday ([PATCH] dma-buf: WIP dma_fence_arra=
-y_first
-> > > fix) which avoids the crash and prints a warning if anybody tries to =
-create
-> > > a dma_fence_array with zero length.
-> > >=20
-> > > Can you test this?
-> > It's in drm-tip now (in the fixup branch) so drm-tip results should have
-> > the result soonish:
-> >=20
-> > https://nam11.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fint=
-el-gfx-ci.01.org%2Ftree%2Fdrm-tip%2Findex.html&amp;data=3D04%7C01%7Cchristi=
-an.koenig%40amd.com%7C0afc74b5df0c4ea384af08da10c672fa%7C3dd8961fe4884e608e=
-11a82d994e183d%7C0%7C0%7C637840742273792356%7CUnknown%7CTWFpbGZsb3d8eyJWIjo=
-iMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&amp;sdat=
-a=3DSL2CuMgM6lCSOhDTvs%2FaFg6zRlc7F3X%2BNkf6GuGMGXI%3D&amp;reserved=3D0?
+On Mon, Mar 28, 2022 at 03:59:43AM +0000, T.J. Mercier wrote:
+> From: Hridya Valsaraju <hridya@google.com>
 >=20
-> How do I find something in there? Is there a search function over all the
-> test results?
+> All DMA heaps now register a new GPU cgroup device upon creation, and the
+> system_heap now exports buffers associated with its GPU cgroup device for
+> tracking purposes.
+>=20
+> Signed-off-by: Hridya Valsaraju <hridya@google.com>
+> Signed-off-by: T.J. Mercier <tjmercier@google.com>
+>=20
+> ---
+> v3 changes
+> Use more common dual author commit message format per John Stultz.
+>=20
+> v2 changes
+> Move dma-buf cgroup charge transfer from a dma_buf_op defined by every
+> heap to a single dma-buf function for all heaps per Daniel Vetter and
+> Christian K=F6nig.
 
-Not really. You can ask on #intel-gfx-ci, or look at the tests that have
-blown up without this to know where to look.
+Apologies for being out of the loop quite a bit. I scrolled through this
+all and I think it looks good to get going.
 
-You can also download all the logfiles with wget recursive or so from the
-build directory (the links in the top row) and search locally.
+The only thing I have is whether we should move the cgroup controllers out
+of dma-buf heaps, since that's rather android centric. E.g.
+- a system gpucg_device which is used by all the various single page
+  allocators (dma-buf heap but also shmem helpers and really anything
+  else)
+- same for cma, again both for dma-buf heaps and also for the gem cma
+  helpers in drm
+
+Otherwise this will only work on non-upstream android where gpu drivers
+allocate everything from dma-buf heap. If you use something like the x86
+android project with mesa drivers, then driver-internal buffers will be
+allocated through gem and not through dma-buf heaps. Or at least I think
+that's how it works.
+
+But also meh, we can fix this fairly easily later on by adding these
+standard gpucg_dev somwehere with a bit of kerneldoc.
+
+Anyway has my all my ack, but don't count this as my in-depth review :-)
 -Daniel
 
+> ---
+>  drivers/dma-buf/dma-heap.c          | 27 +++++++++++++++++++++++++++
+>  drivers/dma-buf/heaps/system_heap.c |  3 +++
+>  include/linux/dma-heap.h            | 11 +++++++++++
+>  3 files changed, 41 insertions(+)
 >=20
-> Thanks,
-> Christian.
->=20
-> >=20
-> > Cheers, Daniel
+> diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+> index 8f5848aa144f..885072427775 100644
+> --- a/drivers/dma-buf/dma-heap.c
+> +++ b/drivers/dma-buf/dma-heap.c
+> @@ -7,6 +7,7 @@
+>   */
+> =20
+>  #include <linux/cdev.h>
+> +#include <linux/cgroup_gpu.h>
+>  #include <linux/debugfs.h>
+>  #include <linux/device.h>
+>  #include <linux/dma-buf.h>
+> @@ -31,6 +32,7 @@
+>   * @heap_devt		heap device node
+>   * @list		list head connecting to list of heaps
+>   * @heap_cdev		heap char device
+> + * @gpucg_dev		gpu cgroup device for memory accounting
+>   *
+>   * Represents a heap of memory from which buffers can be made.
+>   */
+> @@ -41,6 +43,9 @@ struct dma_heap {
+>  	dev_t heap_devt;
+>  	struct list_head list;
+>  	struct cdev heap_cdev;
+> +#ifdef CONFIG_CGROUP_GPU
+> +	struct gpucg_device gpucg_dev;
+> +#endif
+>  };
+> =20
+>  static LIST_HEAD(heap_list);
+> @@ -216,6 +221,26 @@ const char *dma_heap_get_name(struct dma_heap *heap)
+>  	return heap->name;
+>  }
+> =20
+> +#ifdef CONFIG_CGROUP_GPU
+> +/**
+> + * dma_heap_get_gpucg_dev() - get struct gpucg_device for the heap.
+> + * @heap: DMA-Heap to get the gpucg_device struct for.
+> + *
+> + * Returns:
+> + * The gpucg_device struct for the heap. NULL if the GPU cgroup controll=
+er is
+> + * not enabled.
+> + */
+> +struct gpucg_device *dma_heap_get_gpucg_dev(struct dma_heap *heap)
+> +{
+> +	return &heap->gpucg_dev;
+> +}
+> +#else /* CONFIG_CGROUP_GPU */
+> +struct gpucg_device *dma_heap_get_gpucg_dev(struct dma_heap *heap)
+> +{
+> +	return NULL;
+> +}
+> +#endif /* CONFIG_CGROUP_GPU */
+> +
+>  struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_inf=
+o)
+>  {
+>  	struct dma_heap *heap, *h, *err_ret;
+> @@ -288,6 +313,8 @@ struct dma_heap *dma_heap_add(const struct dma_heap_e=
+xport_info *exp_info)
+>  	list_add(&heap->list, &heap_list);
+>  	mutex_unlock(&heap_list_lock);
+> =20
+> +	gpucg_register_device(dma_heap_get_gpucg_dev(heap), exp_info->name);
+> +
+>  	return heap;
+> =20
+>  err2:
+> diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/heaps/=
+system_heap.c
+> index ab7fd896d2c4..752a05c3cfe2 100644
+> --- a/drivers/dma-buf/heaps/system_heap.c
+> +++ b/drivers/dma-buf/heaps/system_heap.c
+> @@ -395,6 +395,9 @@ static struct dma_buf *system_heap_allocate(struct dm=
+a_heap *heap,
+>  	exp_info.ops =3D &system_heap_buf_ops;
+>  	exp_info.size =3D buffer->len;
+>  	exp_info.flags =3D fd_flags;
+> +#ifdef CONFIG_CGROUP_GPU
+> +	exp_info.gpucg_dev =3D dma_heap_get_gpucg_dev(heap);
+> +#endif
+>  	exp_info.priv =3D buffer;
+>  	dmabuf =3D dma_buf_export(&exp_info);
+>  	if (IS_ERR(dmabuf)) {
+> diff --git a/include/linux/dma-heap.h b/include/linux/dma-heap.h
+> index 0c05561cad6e..e447a61d054e 100644
+> --- a/include/linux/dma-heap.h
+> +++ b/include/linux/dma-heap.h
+> @@ -10,6 +10,7 @@
+>  #define _DMA_HEAPS_H
+> =20
+>  #include <linux/cdev.h>
+> +#include <linux/cgroup_gpu.h>
+>  #include <linux/types.h>
+> =20
+>  struct dma_heap;
+> @@ -59,6 +60,16 @@ void *dma_heap_get_drvdata(struct dma_heap *heap);
+>   */
+>  const char *dma_heap_get_name(struct dma_heap *heap);
+> =20
+> +/**
+> + * dma_heap_get_gpucg_dev() - get a pointer to the struct gpucg_device f=
+or the
+> + * heap.
+> + * @heap: DMA-Heap to retrieve gpucg_device for.
+> + *
+> + * Returns:
+> + * The gpucg_device struct for the heap.
+> + */
+> +struct gpucg_device *dma_heap_get_gpucg_dev(struct dma_heap *heap);
+> +
+>  /**
+>   * dma_heap_add - adds a heap to dmabuf heaps
+>   * @exp_info:		information needed to register this heap
+> --=20
+> 2.35.1.1021.g381101b075-goog
 >=20
 
 --=20
