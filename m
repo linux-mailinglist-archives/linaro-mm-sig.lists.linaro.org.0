@@ -2,440 +2,144 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D57184EC4A9
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 14:42:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 946BE4EC4AB
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 14:42:17 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 128A63EC59
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 12:42:12 +0000 (UTC)
-Received: from aposti.net (aposti.net [89.234.176.197])
-	by lists.linaro.org (Postfix) with ESMTPS id 59C7E3E823
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 19:16:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
-	s=mail; t=1648494984; h=from:from:sender:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=bR+5ek2By7kDQ4MDZLE82wSKnOnXLjg0yQ+z90nLqXE=;
-	b=Y/OYuheazXHpu1GEObnPnrWFEJ5vTPCYieMCY9BJwtco180FyNGrXAp8hNZQDWGGWaVmdG
-	aXsx4iMkvQQhEMHoFi1BA0Dh9idiOE0GGMpDub54xvYbE49lKiH83y/SLrM9yJH9i4P6N+
-	15Lg8l46yEr678RsDsDJDw0L+Esd5hg=
-Date: Mon, 28 Mar 2022 20:16:13 +0100
-From: Paul Cercueil <paul@crapouillou.net>
-To: Jonathan Cameron <jic23@kernel.org>
-Message-Id: <1VYG9R.1JAKRTCN4I411@crapouillou.net>
-In-Reply-To: <20220328185425.56b51f4a@jic23-huawei>
-References: <20220207125933.81634-1-paul@crapouillou.net>
-	<20220207125933.81634-8-paul@crapouillou.net>
-	<20220328185425.56b51f4a@jic23-huawei>
+	by lists.linaro.org (Postfix) with ESMTP id CABB53EC7E
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 12:42:16 +0000 (UTC)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
+	by lists.linaro.org (Postfix) with ESMTPS id DF60B3ECAA
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 20:39:14 +0000 (UTC)
+Received: by mail-ed1-f46.google.com with SMTP id h4so10570853edr.3
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 13:39:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=xw6/eHXGYfyQo41MlHn2HdfwjJIHINXKEO94qSppq28=;
+        b=b9iImZGKfs3WXC8l0oFuFZaIT4EL8lWv990T7tzJDZ/JCoZfmiHuaQdc0wBbjADKgP
+         pz9RoVFnLZtDqu7juxQR8eaS+NrrHwSFtVfQnijQAPH7NQqVwEKLMFwF6KCJnha01cku
+         ZjxUGFM7SRxzSdQ05IFVG9EOK7WDaJ/nAVrd++ogw+D7GI52yQ4rkQ7SdzBX+DjMEH+o
+         A1nKxj05unPlW0bLqxImCIf4qHc+PnsNdSxmO/Vak6uZtNRINsHJxAVyoY8TDxEFTy/w
+         NGcv1jpMb8yBJGbzyXpIApg/IrNqwllJ310kyJZd3kogLQT8ziLRofCJhNUjSmwSm2Jk
+         pdBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=xw6/eHXGYfyQo41MlHn2HdfwjJIHINXKEO94qSppq28=;
+        b=Lp1Wrz/tsyVl+c13a6f8UpDU+3ssEf2GNUuuOhlTIDiGpaJWTiVbm9BkQz5T2MfOou
+         IDTcSpP4QZ4+ZLdMdHZkGvpayW4XZm8/J5glKSUQhUXhhGSkOMhH49CRI386+CY8hhf/
+         +25WVT20f9/ZaGP/u19n/VbEdPxs96DExtM1g6QTEVrShOM8kOScIW2dSSO3ZizUPmFV
+         0fSDUvsQsvxRYGnrKdoKRa0dWSjnzsdWvc5LJn+rPHF5pMYBNhn00y/xYJuAnHAKOl0r
+         OQFBzITbGDA3MPffcGqhmf3Gw85nS1Xa7JpVRQYRSrm4kEKX8h1GBtKvcKDL+60DYt/J
+         2jCA==
+X-Gm-Message-State: AOAM530G4Uazbv2d8jaZMvL2O02aMnIUedkag1oJAwiPA1svkWNdUEpg
+	W50KrXKGLOjvx4ueEa+59elvcLU8obe0U/m0YfY=
+X-Google-Smtp-Source: ABdhPJxNcNGSt0E34cJpbJ65P1lTtbFVtcXgaCXAMxqv38Y+bWSTAANcprjUbbcH+2VeLvdVtVd+xFb4arFR+965IIg=
+X-Received: by 2002:a05:6402:27d1:b0:419:1b02:4a04 with SMTP id
+ c17-20020a05640227d100b004191b024a04mr18437384ede.218.1648499953845; Mon, 28
+ Mar 2022 13:39:13 -0700 (PDT)
 MIME-Version: 1.0
-X-MailFrom: paul@crapouillou.net
+References: <20220207125933.81634-1-paul@crapouillou.net> <20220207125933.81634-3-paul@crapouillou.net>
+In-Reply-To: <20220207125933.81634-3-paul@crapouillou.net>
+From: Andy Shevchenko <andy.shevchenko@gmail.com>
+Date: Mon, 28 Mar 2022 23:38:38 +0300
+Message-ID: <CAHp75VeE2_D39X3gWidPTd49v=bdkgnMeoSBh60enp2hKJ-KPw@mail.gmail.com>
+To: Paul Cercueil <paul@crapouillou.net>
+X-MailFrom: andy.shevchenko@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: SCXDNZJEV5CURTJ6Q2JEG6YHGT34FPHD
-X-Message-ID-Hash: SCXDNZJEV5CURTJ6Q2JEG6YHGT34FPHD
-X-Mailman-Approved-At: Wed, 30 Mar 2022 12:40:49 +0000
-CC: Michael Hennerich <Michael.Hennerich@analog.com>, Lars-Peter Clausen <lars@metafoo.de>, Christian =?iso-8859-1?b?S/ZuaWc=?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Alexandru Ardelean <ardeleanalex@gmail.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org
+Message-ID-Hash: 5VXIHWNB2R6UDRI5SIIPHQSLJVZUBD5L
+X-Message-ID-Hash: 5VXIHWNB2R6UDRI5SIIPHQSLJVZUBD5L
+X-Mailman-Approved-At: Wed, 30 Mar 2022 12:40:52 +0000
+CC: Jonathan Cameron <jic23@kernel.org>, Michael Hennerich <Michael.Hennerich@analog.com>, Lars-Peter Clausen <lars@metafoo.de>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Alexandru Ardelean <ardeleanalex@gmail.com>, dri-devel <dri-devel@lists.freedesktop.org>, linaro-mm-sig@lists.linaro.org, Linux Documentation List <linux-doc@vger.kernel.org>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, linux-iio <linux-iio@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 07/12] iio: buffer-dma: Use DMABUFs instead of custom solution
+Subject: [Linaro-mm-sig] Re: [PATCH v2 02/12] iio: buffer-dma: Enable buffer write support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SCXDNZJEV5CURTJ6Q2JEG6YHGT34FPHD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5VXIHWNB2R6UDRI5SIIPHQSLJVZUBD5L/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"; format="flowed"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Hi Jonathan,
+On Wed, Feb 9, 2022 at 9:10 AM Paul Cercueil <paul@crapouillou.net> wrote:
+>
+> Adding write support to the buffer-dma code is easy - the write()
+> function basically needs to do the exact same thing as the read()
+> function: dequeue a block, read or write the data, enqueue the block
+> when entirely processed.
+>
+> Therefore, the iio_buffer_dma_read() and the new iio_buffer_dma_write()
+> now both call a function iio_buffer_dma_io(), which will perform this
+> task.
+>
+> The .space_available() callback can return the exact same value as the
+> .data_available() callback for input buffers, since in both cases we
+> count the exact same thing (the number of bytes in each available
+> block).
+>
+> Note that we preemptively reset block->bytes_used to the buffer's size
+> in iio_dma_buffer_request_update(), as in the future the
+> iio_dma_buffer_enqueue() function won't reset it.
 
-Le lun., mars 28 2022 at 18:54:25 +0100, Jonathan Cameron=20
-<jic23@kernel.org> a =E9crit :
-> On Mon,  7 Feb 2022 12:59:28 +0000
-> Paul Cercueil <paul@crapouillou.net> wrote:
->=20
->>  Enhance the current fileio code by using DMABUF objects instead of
->>  custom buffers.
->>=20
->>  This adds more code than it removes, but:
->>  - a lot of the complexity can be dropped, e.g. custom kref and
->>    iio_buffer_block_put_atomic() are not needed anymore;
->>  - it will be much easier to introduce an API to export these DMABUF
->>    objects to userspace in a following patch.
->>=20
->>  Signed-off-by: Paul Cercueil <paul@crapouillou.net>
-> Hi Paul,
->=20
-> I'm a bit rusty on dma mappings, but you seem to have
-> a mixture of streaming and coherent mappings going on in here.
+...
 
-That's OK, so am I. What do you call "streaming mappings"?
+> v2: - Fix block->state not being reset in
+>       iio_dma_buffer_request_update() for output buffers.
+>     - Only update block->bytes_used once and add a comment about why we
+>       update it.
+>     - Add a comment about why we're setting a different state for output
+>       buffers in iio_dma_buffer_request_update()
+>     - Remove useless cast to bool (!!) in iio_dma_buffer_io()
 
-> Is it the case that the current code is using the coherent mappings
-> and a potential 'other user' of the dma buffer might need
-> streaming mappings?
+Usual place for changelog is after the cutter '--- ' line below...
 
-Something like that. There are two different things; on both cases,=20
-userspace needs to create a DMABUF with IIO_BUFFER_DMABUF_ALLOC_IOCTL,=20
-and the backing memory is allocated with dma_alloc_coherent().
+> Signed-off-by: Paul Cercueil <paul@crapouillou.net>
+> Reviewed-by: Alexandru Ardelean <ardeleanalex@gmail.com>
+> ---
 
-- For the userspace interface, you then have a "cpu access" IOCTL=20
-(DMA_BUF_IOCTL_SYNC), that allows userspace to inform when it will=20
-start/finish to process the buffer in user-space (which will=20
-sync/invalidate the data cache if needed). A buffer can then be=20
-enqueued for DMA processing (TX or RX) with the new=20
-IIO_BUFFER_DMABUF_ENQUEUE_IOCTL.
+...somewhere here.
 
-- When the DMABUF created via the IIO core is sent to another driver=20
-through the driver's custom DMABUF import function, this driver will=20
-call dma_buf_attach(), which will call iio_buffer_dma_buf_map(). Since=20
-it has to return a "struct sg_table *", this function then simply=20
-creates a sgtable with one entry that points to the backing memory.
+>  drivers/iio/buffer/industrialio-buffer-dma.c | 88 ++++++++++++++++----
+>  include/linux/iio/buffer-dma.h               |  7 ++
 
-Note that I added the iio_buffer_dma_buf_map() / _unmap() functions=20
-because the dma-buf core would WARN() if these were not provided. But=20
-since this code doesn't yet support importing/exporting DMABUFs to=20
-other drivers, these are never called, and I should probably just make=20
-them return a ERR_PTR() unconditionally.
+...
 
-Cheers,
--Paul
+> +static int iio_dma_buffer_io(struct iio_buffer *buffer,
+> +                            size_t n, char __user *user_buffer, bool is_write)
 
-> Jonathan
->=20
->>  ---
->>   drivers/iio/buffer/industrialio-buffer-dma.c | 192=20
->> ++++++++++++-------
->>   include/linux/iio/buffer-dma.h               |   8 +-
->>   2 files changed, 122 insertions(+), 78 deletions(-)
->>=20
->>  diff --git a/drivers/iio/buffer/industrialio-buffer-dma.c=20
->> b/drivers/iio/buffer/industrialio-buffer-dma.c
->>  index 15ea7bc3ac08..54e6000cd2ee 100644
->>  --- a/drivers/iio/buffer/industrialio-buffer-dma.c
->>  +++ b/drivers/iio/buffer/industrialio-buffer-dma.c
->>  @@ -14,6 +14,7 @@
->>   #include <linux/poll.h>
->>   #include <linux/iio/buffer_impl.h>
->>   #include <linux/iio/buffer-dma.h>
->>  +#include <linux/dma-buf.h>
->>   #include <linux/dma-mapping.h>
->>   #include <linux/sizes.h>
->>=20
->>  @@ -90,103 +91,145 @@
->>    * callback is called from within the custom callback.
->>    */
->>=20
->>  -static void iio_buffer_block_release(struct kref *kref)
->>  -{
->>  -	struct iio_dma_buffer_block *block =3D container_of(kref,
->>  -		struct iio_dma_buffer_block, kref);
->>  -
->>  -	WARN_ON(block->state !=3D IIO_BLOCK_STATE_DEAD);
->>  -
->>  -	dma_free_coherent(block->queue->dev, PAGE_ALIGN(block->size),
->>  -					block->vaddr, block->phys_addr);
->>  -
->>  -	iio_buffer_put(&block->queue->buffer);
->>  -	kfree(block);
->>  -}
->>  -
->>  -static void iio_buffer_block_get(struct iio_dma_buffer_block=20
->> *block)
->>  -{
->>  -	kref_get(&block->kref);
->>  -}
->>  -
->>  -static void iio_buffer_block_put(struct iio_dma_buffer_block=20
->> *block)
->>  -{
->>  -	kref_put(&block->kref, iio_buffer_block_release);
->>  -}
->>  -
->>  -/*
->>  - * dma_free_coherent can sleep, hence we need to take some special=20
->> care to be
->>  - * able to drop a reference from an atomic context.
->>  - */
->>  -static LIST_HEAD(iio_dma_buffer_dead_blocks);
->>  -static DEFINE_SPINLOCK(iio_dma_buffer_dead_blocks_lock);
->>  -
->>  -static void iio_dma_buffer_cleanup_worker(struct work_struct *work)
->>  -{
->>  -	struct iio_dma_buffer_block *block, *_block;
->>  -	LIST_HEAD(block_list);
->>  -
->>  -	spin_lock_irq(&iio_dma_buffer_dead_blocks_lock);
->>  -	list_splice_tail_init(&iio_dma_buffer_dead_blocks, &block_list);
->>  -	spin_unlock_irq(&iio_dma_buffer_dead_blocks_lock);
->>  -
->>  -	list_for_each_entry_safe(block, _block, &block_list, head)
->>  -		iio_buffer_block_release(&block->kref);
->>  -}
->>  -static DECLARE_WORK(iio_dma_buffer_cleanup_work,=20
->> iio_dma_buffer_cleanup_worker);
->>  -
->>  -static void iio_buffer_block_release_atomic(struct kref *kref)
->>  -{
->>  +struct iio_buffer_dma_buf_attachment {
->>  +	struct scatterlist sgl;
->>  +	struct sg_table sg_table;
->>   	struct iio_dma_buffer_block *block;
->>  -	unsigned long flags;
->>  -
->>  -	block =3D container_of(kref, struct iio_dma_buffer_block, kref);
->>  -
->>  -	spin_lock_irqsave(&iio_dma_buffer_dead_blocks_lock, flags);
->>  -	list_add_tail(&block->head, &iio_dma_buffer_dead_blocks);
->>  -	spin_unlock_irqrestore(&iio_dma_buffer_dead_blocks_lock, flags);
->>  -
->>  -	schedule_work(&iio_dma_buffer_cleanup_work);
->>  -}
->>  -
->>  -/*
->>  - * Version of iio_buffer_block_put() that can be called from=20
->> atomic context
->>  - */
->>  -static void iio_buffer_block_put_atomic(struct=20
->> iio_dma_buffer_block *block)
->>  -{
->>  -	kref_put(&block->kref, iio_buffer_block_release_atomic);
->>  -}
->>  +};
->>=20
->>   static struct iio_dma_buffer_queue *iio_buffer_to_queue(struct=20
->> iio_buffer *buf)
->>   {
->>   	return container_of(buf, struct iio_dma_buffer_queue, buffer);
->>   }
->>=20
->>  +static struct iio_buffer_dma_buf_attachment *
->>  +to_iio_buffer_dma_buf_attachment(struct sg_table *table)
->>  +{
->>  +	return container_of(table, struct iio_buffer_dma_buf_attachment,=20
->> sg_table);
->>  +}
->>  +
->>  +static void iio_buffer_block_get(struct iio_dma_buffer_block=20
->> *block)
->>  +{
->>  +	get_dma_buf(block->dmabuf);
->>  +}
->>  +
->>  +static void iio_buffer_block_put(struct iio_dma_buffer_block=20
->> *block)
->>  +{
->>  +	dma_buf_put(block->dmabuf);
->>  +}
->>  +
->>  +static int iio_buffer_dma_buf_attach(struct dma_buf *dbuf,
->>  +				     struct dma_buf_attachment *at)
->>  +{
->>  +	at->priv =3D dbuf->priv;
->>  +
->>  +	return 0;
->>  +}
->>  +
->>  +static struct sg_table *iio_buffer_dma_buf_map(struct=20
->> dma_buf_attachment *at,
->>  +					       enum dma_data_direction dma_dir)
->>  +{
->>  +	struct iio_dma_buffer_block *block =3D at->priv;
->>  +	struct iio_buffer_dma_buf_attachment *dba;
->>  +	int ret;
->>  +
->>  +	dba =3D kzalloc(sizeof(*dba), GFP_KERNEL);
->>  +	if (!dba)
->>  +		return ERR_PTR(-ENOMEM);
->>  +
->>  +	sg_init_one(&dba->sgl, block->vaddr, PAGE_ALIGN(block->size));
->>  +	dba->sg_table.sgl =3D &dba->sgl;
->>  +	dba->sg_table.nents =3D 1;
->>  +	dba->block =3D block;
->>  +
->>  +	ret =3D dma_map_sgtable(at->dev, &dba->sg_table, dma_dir, 0);
->>  +	if (ret) {
->>  +		kfree(dba);
->>  +		return ERR_PTR(ret);
->>  +	}
->>  +
->>  +	return &dba->sg_table;
->>  +}
->>  +
->>  +static void iio_buffer_dma_buf_unmap(struct dma_buf_attachment *at,
->>  +				     struct sg_table *sg_table,
->>  +				     enum dma_data_direction dma_dir)
->>  +{
->>  +	struct iio_buffer_dma_buf_attachment *dba =3D
->>  +		to_iio_buffer_dma_buf_attachment(sg_table);
->>  +
->>  +	dma_unmap_sgtable(at->dev, &dba->sg_table, dma_dir, 0);
->>  +	kfree(dba);
->>  +}
->>  +
->>  +static void iio_buffer_dma_buf_release(struct dma_buf *dbuf)
->>  +{
->>  +	struct iio_dma_buffer_block *block =3D dbuf->priv;
->>  +	struct iio_dma_buffer_queue *queue =3D block->queue;
->>  +
->>  +	WARN_ON(block->state !=3D IIO_BLOCK_STATE_DEAD);
->>  +
->>  +	mutex_lock(&queue->lock);
->>  +
->>  +	dma_free_coherent(queue->dev, PAGE_ALIGN(block->size),
->>  +			  block->vaddr, block->phys_addr);
->>  +	kfree(block);
->>  +
->>  +	mutex_unlock(&queue->lock);
->>  +	iio_buffer_put(&queue->buffer);
->>  +}
->>  +
->>  +static const struct dma_buf_ops iio_dma_buffer_dmabuf_ops =3D {
->>  +	.attach			=3D iio_buffer_dma_buf_attach,
->>  +	.map_dma_buf		=3D iio_buffer_dma_buf_map,
->>  +	.unmap_dma_buf		=3D iio_buffer_dma_buf_unmap,
->>  +	.release		=3D iio_buffer_dma_buf_release,
->>  +};
->>  +
->>   static struct iio_dma_buffer_block *iio_dma_buffer_alloc_block(
->>   	struct iio_dma_buffer_queue *queue, size_t size)
->>   {
->>   	struct iio_dma_buffer_block *block;
->>  +	DEFINE_DMA_BUF_EXPORT_INFO(einfo);
->>  +	struct dma_buf *dmabuf;
->>  +	int err =3D -ENOMEM;
->>=20
->>   	block =3D kzalloc(sizeof(*block), GFP_KERNEL);
->>   	if (!block)
->>  -		return NULL;
->>  +		return ERR_PTR(err);
->>=20
->>   	block->vaddr =3D dma_alloc_coherent(queue->dev, PAGE_ALIGN(size),
->>   		&block->phys_addr, GFP_KERNEL);
->>  -	if (!block->vaddr) {
->>  -		kfree(block);
->>  -		return NULL;
->>  +	if (!block->vaddr)
->>  +		goto err_free_block;
->>  +
->>  +	einfo.ops =3D &iio_dma_buffer_dmabuf_ops;
->>  +	einfo.size =3D PAGE_ALIGN(size);
->>  +	einfo.priv =3D block;
->>  +	einfo.flags =3D O_RDWR;
->>  +
->>  +	dmabuf =3D dma_buf_export(&einfo);
->>  +	if (IS_ERR(dmabuf)) {
->>  +		err =3D PTR_ERR(dmabuf);
->>  +		goto err_free_dma;
->>   	}
->>=20
->>  +	block->dmabuf =3D dmabuf;
->>   	block->size =3D size;
->>   	block->state =3D IIO_BLOCK_STATE_DONE;
->>   	block->queue =3D queue;
->>   	INIT_LIST_HEAD(&block->head);
->>  -	kref_init(&block->kref);
->>=20
->>   	iio_buffer_get(&queue->buffer);
->>=20
->>   	return block;
->>  +
->>  +err_free_dma:
->>  +	dma_free_coherent(queue->dev, PAGE_ALIGN(size),
->>  +			  block->vaddr, block->phys_addr);
->>  +err_free_block:
->>  +	kfree(block);
->>  +	return ERR_PTR(err);
->>   }
->>=20
->>   static void _iio_dma_buffer_block_done(struct iio_dma_buffer_block=20
->> *block)
->>  @@ -223,7 +266,7 @@ void iio_dma_buffer_block_done(struct=20
->> iio_dma_buffer_block *block)
->>   	_iio_dma_buffer_block_done(block);
->>   	spin_unlock_irqrestore(&queue->list_lock, flags);
->>=20
->>  -	iio_buffer_block_put_atomic(block);
->>  +	iio_buffer_block_put(block);
->>   	iio_dma_buffer_queue_wake(queue);
->>   }
->>   EXPORT_SYMBOL_GPL(iio_dma_buffer_block_done);
->>  @@ -249,7 +292,8 @@ void iio_dma_buffer_block_list_abort(struct=20
->> iio_dma_buffer_queue *queue,
->>   		list_del(&block->head);
->>   		block->bytes_used =3D 0;
->>   		_iio_dma_buffer_block_done(block);
->>  -		iio_buffer_block_put_atomic(block);
->>  +
->>  +		iio_buffer_block_put(block);
->>   	}
->>   	spin_unlock_irqrestore(&queue->list_lock, flags);
->>=20
->>  @@ -340,8 +384,8 @@ int iio_dma_buffer_request_update(struct=20
->> iio_buffer *buffer)
->>=20
->>   		if (!block) {
->>   			block =3D iio_dma_buffer_alloc_block(queue, size);
->>  -			if (!block) {
->>  -				ret =3D -ENOMEM;
->>  +			if (IS_ERR(block)) {
->>  +				ret =3D PTR_ERR(block);
->>   				goto out_unlock;
->>   			}
->>   			queue->fileio.blocks[i] =3D block;
->>  diff --git a/include/linux/iio/buffer-dma.h=20
->> b/include/linux/iio/buffer-dma.h
->>  index 490b93f76fa8..6b3fa7d2124b 100644
->>  --- a/include/linux/iio/buffer-dma.h
->>  +++ b/include/linux/iio/buffer-dma.h
->>  @@ -8,7 +8,6 @@
->>   #define __INDUSTRIALIO_DMA_BUFFER_H__
->>=20
->>   #include <linux/list.h>
->>  -#include <linux/kref.h>
->>   #include <linux/spinlock.h>
->>   #include <linux/mutex.h>
->>   #include <linux/iio/buffer_impl.h>
->>  @@ -16,6 +15,7 @@
->>   struct iio_dma_buffer_queue;
->>   struct iio_dma_buffer_ops;
->>   struct device;
->>  +struct dma_buf;
->>=20
->>   /**
->>    * enum iio_block_state - State of a struct iio_dma_buffer_block
->>  @@ -39,8 +39,8 @@ enum iio_block_state {
->>    * @vaddr: Virutal address of the blocks memory
->>    * @phys_addr: Physical address of the blocks memory
->>    * @queue: Parent DMA buffer queue
->>  - * @kref: kref used to manage the lifetime of block
->>    * @state: Current state of the block
->>  + * @dmabuf: Underlying DMABUF object
->>    */
->>   struct iio_dma_buffer_block {
->>   	/* May only be accessed by the owner of the block */
->>  @@ -56,13 +56,13 @@ struct iio_dma_buffer_block {
->>   	size_t size;
->>   	struct iio_dma_buffer_queue *queue;
->>=20
->>  -	/* Must not be accessed outside the core. */
->>  -	struct kref kref;
->>   	/*
->>   	 * Must not be accessed outside the core. Access needs to hold
->>   	 * queue->list_lock if the block is not owned by the core.
->>   	 */
->>   	enum iio_block_state state;
->>  +
->>  +	struct dma_buf *dmabuf;
->>   };
->>=20
->>   /**
->=20
+I believe there is a room for size_t n on the previous line.
 
+...
 
+> +       if (is_write)
+
+I would name it is_from_user.
+
+> +               ret = copy_from_user(addr, user_buffer, n);
+> +       else
+> +               ret = copy_to_user(user_buffer, addr, n);
+
+...
+
+> +int iio_dma_buffer_write(struct iio_buffer *buffer, size_t n,
+> +                        const char __user *user_buffer)
+> +{
+> +       return iio_dma_buffer_io(buffer, n, (__force char *)user_buffer, true);
+
+Why do you drop address space markers?
+
+> +}
+
+-- 
+With Best Regards,
+Andy Shevchenko
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
