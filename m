@@ -2,219 +2,321 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 24A484EC537
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 15:09:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C33614EC4A7
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 14:42:02 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4CAE93EC34
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 13:09:04 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
-	by lists.linaro.org (Postfix) with ESMTPS id 1986B3EA5F
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 18:28:37 +0000 (UTC)
-Received: by mail-ej1-f48.google.com with SMTP id a8so30398392ejc.8
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 11:28:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=8WaH8oTp9zQ4RiMod88tKNM8FNGzolc7NDGliqXEyFM=;
-        b=RA1LFZlyqYnQKlZhfG5eW4EytFq6FXGfsjb2/DOkWkAoisIvQquLsZTwb8nBtNlht8
-         ZHqiJ/MOFhcB+HyYDg4DOrCFHvXKNreT5wQEPJ7PzPnMoI2QrObdeAd08uOLLZhCsV8Y
-         oo/fwNelFB8E06amjBdYhwsR2VhATbyd3kx12XlxxP1sGczHl+YWk9N47mzb48HohD17
-         d9HYqBqtvUEw1TYZH7O9tEkaSoRyqnabxydRHWLDA8W6lAvtHgHxiIUB7dc49IG+TBgi
-         G8ykTzQvXQ9aD4+tQHre6cRAhm0yoObw1rfkn0AAPUuFF1ZU/BUjCdEdRxBpKxz80uJg
-         RymA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=8WaH8oTp9zQ4RiMod88tKNM8FNGzolc7NDGliqXEyFM=;
-        b=rE0UdAeYcuXPeZM0KFD7aTRCsT28kcITDo/IXpvNxEMUc2JSlgE9ZVqz2vp164chx4
-         WZZhAWIMQZSIZQoib9y08tAos7L+rDlOL6NnW5eZCl5NBO2iifV2gk/+UQ21okrLFIKQ
-         o8BH5GLOv9cnWpejzywv6NCRxvicEaOQRp0oYqtQYtNsIxfdt5XwBLzjAylPmHfAxUdM
-         9xgl4q49gw5243w2iWSNFzylpMqLUHOW5kW8EUJtzNP/SXr3V2wSMtxDL6H/395UibcH
-         C2PNFjAkZfaAoKDJXNG6KnlPW2uPNLYf+TLoVc1/fQdE7vuAvJWYnEa6qbjvyUnHjJF2
-         IyRw==
-X-Gm-Message-State: AOAM532kxyOUP6ULSeaESkk9D6HYEZE4H+TgcLRlcss50DPGC144MAVt
-	itdrUsveVMbibe8N6r7h7Ll9PBH9SD4AL6XbGqiNsw==
-X-Google-Smtp-Source: ABdhPJz3R1rYGKfMgCT8Xw+uvi6MQu9Vw8tO6cBRgeUu+llCkBBC4HKzRw85BEQANrPE+Bd5D9ZFeLO+o1zCssURxAk=
-X-Received: by 2002:a17:906:9754:b0:6da:7d72:1353 with SMTP id
- o20-20020a170906975400b006da7d721353mr29368499ejy.273.1648492115577; Mon, 28
- Mar 2022 11:28:35 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 05CAE3ED85
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 12:42:02 +0000 (UTC)
+Received: from aposti.net (aposti.net [89.234.176.197])
+	by lists.linaro.org (Postfix) with ESMTPS id A9DC73ECAA
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 18:39:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
+	s=mail; t=1648492796; h=from:from:sender:reply-to:subject:subject:date:date:
+	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+	 content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=QmieihZbGB29NOEkXombMlBt3Ij7l+yxxQPdnPvDlbM=;
+	b=oBUY8yaDcgU5YYatcQr7/GNeFWvb5DzhkdvXEQunAKpWhRoGQxcwo5cuBZKwXRj32FyE0g
+	aqkOUpQRJiVkD5tz92uU0wyEMy0yjca22p+Vb1Kfoy1iLLosOikPwArTdhlSoKBjLxbbH8
+	jQ/rWoaM4qDFtKJWq6t51AwDAxoThy0=
+Date: Mon, 28 Mar 2022 19:39:45 +0100
+From: Paul Cercueil <paul@crapouillou.net>
+To: Jonathan Cameron <jic23@kernel.org>
+Message-Id: <96XG9R.3NOIIEN7IS001@crapouillou.net>
+In-Reply-To: <20220328182409.1e959386@jic23-huawei>
+References: <20220207125933.81634-1-paul@crapouillou.net>
+	<20220207125933.81634-3-paul@crapouillou.net>
+	<20220328182409.1e959386@jic23-huawei>
 MIME-Version: 1.0
-References: <20220328035951.1817417-1-tjmercier@google.com>
- <20220328035951.1817417-5-tjmercier@google.com> <YkHH/0Use7F30UUE@phenom.ffwll.local>
-In-Reply-To: <YkHH/0Use7F30UUE@phenom.ffwll.local>
-From: "T.J. Mercier" <tjmercier@google.com>
-Date: Mon, 28 Mar 2022 11:28:24 -0700
-Message-ID: <CABdmKX01p6g_iHsB6dd4Wwh=8iLdYiUqdY6_yyA5ax2YNHt6tQ@mail.gmail.com>
-To: "T.J. Mercier" <tjmercier@google.com>, David Airlie <airlied@linux.ie>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>,
-	Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>,
-	Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>,
-	Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-	Benjamin Gaignard <benjamin.gaignard@linaro.org>, Liam Mark <lmark@codeaurora.org>,
-	Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>,
-	John Stultz <john.stultz@linaro.org>, Tejun Heo <tj@kernel.org>,
-	Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>,
-	Shuah Khan <shuah@kernel.org>, Kalesh Singh <kaleshsingh@google.com>, Kenny.Ho@amd.com,
-	=?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>,
-	Shuah Khan <skhan@linuxfoundation.org>, dri-devel@lists.freedesktop.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
-	cgroups@vger.kernel.org, linux-kselftest@vger.kernel.org
-X-MailFrom: tjmercier@google.com
+X-MailFrom: paul@crapouillou.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: HABZAFIISTSJ5PRZH5PSZWKQ37TTVWGE
-X-Message-ID-Hash: HABZAFIISTSJ5PRZH5PSZWKQ37TTVWGE
-X-Mailman-Approved-At: Wed, 30 Mar 2022 13:08:59 +0000
-CC: Daniel Vetter <daniel@ffwll.ch>
+Message-ID-Hash: VSEKBW5DUIXIVSIGCLEGWQNJXBX6ZKDX
+X-Message-ID-Hash: VSEKBW5DUIXIVSIGCLEGWQNJXBX6ZKDX
+X-Mailman-Approved-At: Wed, 30 Mar 2022 12:40:45 +0000
+CC: Michael Hennerich <Michael.Hennerich@analog.com>, Lars-Peter Clausen <lars@metafoo.de>, Christian =?iso-8859-1?b?S/ZuaWc=?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Alexandru Ardelean <ardeleanalex@gmail.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v4 4/8] dmabuf: heaps: export system_heap buffers with GPU cgroup charging
+Subject: [Linaro-mm-sig] Re: [PATCH v2 02/12] iio: buffer-dma: Enable buffer write support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HABZAFIISTSJ5PRZH5PSZWKQ37TTVWGE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VSEKBW5DUIXIVSIGCLEGWQNJXBX6ZKDX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"; format="flowed"
+Content-Transfer-Encoding: quoted-printable
 
-T24gTW9uLCBNYXIgMjgsIDIwMjIgYXQgNzozNiBBTSBEYW5pZWwgVmV0dGVyIDxkYW5pZWxAZmZ3
-bGwuY2g+IHdyb3RlOg0KPg0KPiBPbiBNb24sIE1hciAyOCwgMjAyMiBhdCAwMzo1OTo0M0FNICsw
-MDAwLCBULkouIE1lcmNpZXIgd3JvdGU6DQo+ID4gRnJvbTogSHJpZHlhIFZhbHNhcmFqdSA8aHJp
-ZHlhQGdvb2dsZS5jb20+DQo+ID4NCj4gPiBBbGwgRE1BIGhlYXBzIG5vdyByZWdpc3RlciBhIG5l
-dyBHUFUgY2dyb3VwIGRldmljZSB1cG9uIGNyZWF0aW9uLCBhbmQgdGhlDQo+ID4gc3lzdGVtX2hl
-YXAgbm93IGV4cG9ydHMgYnVmZmVycyBhc3NvY2lhdGVkIHdpdGggaXRzIEdQVSBjZ3JvdXAgZGV2
-aWNlIGZvcg0KPiA+IHRyYWNraW5nIHB1cnBvc2VzLg0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTog
-SHJpZHlhIFZhbHNhcmFqdSA8aHJpZHlhQGdvb2dsZS5jb20+DQo+ID4gU2lnbmVkLW9mZi1ieTog
-VC5KLiBNZXJjaWVyIDx0am1lcmNpZXJAZ29vZ2xlLmNvbT4NCj4gPg0KPiA+IC0tLQ0KPiA+IHYz
-IGNoYW5nZXMNCj4gPiBVc2UgbW9yZSBjb21tb24gZHVhbCBhdXRob3IgY29tbWl0IG1lc3NhZ2Ug
-Zm9ybWF0IHBlciBKb2huIFN0dWx0ei4NCj4gPg0KPiA+IHYyIGNoYW5nZXMNCj4gPiBNb3ZlIGRt
-YS1idWYgY2dyb3VwIGNoYXJnZSB0cmFuc2ZlciBmcm9tIGEgZG1hX2J1Zl9vcCBkZWZpbmVkIGJ5
-IGV2ZXJ5DQo+ID4gaGVhcCB0byBhIHNpbmdsZSBkbWEtYnVmIGZ1bmN0aW9uIGZvciBhbGwgaGVh
-cHMgcGVyIERhbmllbCBWZXR0ZXIgYW5kDQo+ID4gQ2hyaXN0aWFuIEvDtm5pZy4NCj4NCj4gQXBv
-bG9naWVzIGZvciBiZWluZyBvdXQgb2YgdGhlIGxvb3AgcXVpdGUgYSBiaXQuIEkgc2Nyb2xsZWQg
-dGhyb3VnaCB0aGlzDQo+IGFsbCBhbmQgSSB0aGluayBpdCBsb29rcyBnb29kIHRvIGdldCBnb2lu
-Zy4NCj4NCj4gVGhlIG9ubHkgdGhpbmcgSSBoYXZlIGlzIHdoZXRoZXIgd2Ugc2hvdWxkIG1vdmUg
-dGhlIGNncm91cCBjb250cm9sbGVycyBvdXQNCj4gb2YgZG1hLWJ1ZiBoZWFwcywgc2luY2UgdGhh
-dCdzIHJhdGhlciBhbmRyb2lkIGNlbnRyaWMuIEUuZy4NCj4gLSBhIHN5c3RlbSBncHVjZ19kZXZp
-Y2Ugd2hpY2ggaXMgdXNlZCBieSBhbGwgdGhlIHZhcmlvdXMgc2luZ2xlIHBhZ2UNCj4gICBhbGxv
-Y2F0b3JzIChkbWEtYnVmIGhlYXAgYnV0IGFsc28gc2htZW0gaGVscGVycyBhbmQgcmVhbGx5IGFu
-eXRoaW5nDQo+ICAgZWxzZSkNCj4gLSBzYW1lIGZvciBjbWEsIGFnYWluIGJvdGggZm9yIGRtYS1i
-dWYgaGVhcHMgYW5kIGFsc28gZm9yIHRoZSBnZW0gY21hDQo+ICAgaGVscGVycyBpbiBkcm0NCg0K
-VGhhbmtzIERhbmllbCwgaW4gZ2VuZXJhbCB0aGF0IG1ha2VzIHNlbnNlIHRvIG1lIGFzIGFuIGFw
-cHJvYWNoIHRvDQptYWtpbmcgdGhpcyBtb3JlIHVuaXZlcnNhbC4gSG93ZXZlciBmb3IgdGhlIEFu
-ZHJvaWQgY2FzZSBJJ20gbm90IHN1cmUNCmlmIHRoZSBwYXJ0IGFib3V0IGEgc2luZ2xlIHN5c3Rl
-bSBncHVjZ19kZXZpY2Ugd291bGQgYmUgc3VmZmljaWVudCwNCmJlY2F1c2UgdGhlcmUgYXJlIGF0
-IGxlYXN0IDEyIGRpZmZlcmVudCBncmFwaGljcyByZWxhdGVkIGhlYXBzIHRoYXQNCmNvdWxkIHBv
-dGVudGlhbGx5IGJlIGFjY291bnRlZC9saW1pdGVkIGRpZmZlcmVudGx5LiBbMV0gIFNvIHRoYXQN
-CnJhaXNlcyB0aGUgcXVlc3Rpb24gb2YgaG93IGZpbmUgZ3JhaW5lZCB3ZSB3YW50IHRoaXMgdG8g
-YmUuLi4gSSB0ZW5kDQp0b3dhcmRzIHNlcGFyYXRpbmcgdGhlbSBhbGwsIGJ1dCBJIGhhdmVuJ3Qg
-Zm9ybWVkIGEgc3Ryb25nIG9waW5pb24NCmFib3V0IHRoaXMgYXQgdGhlIG1vbWVudC4gSXQgc291
-bmRzIGxpa2UgeW91IGFyZSBpbiBmYXZvciBvZiBhDQpzbWFsbGVyLCBtb3JlIHJpZ2lkbHkgZGVm
-aW5lZCBzZXQgb2YgdGhlbT8gRWl0aGVyIHdheSwgd2UgbmVlZCB0byBhZGQNCmNvZGUgZm9yIGFj
-Y291bnRpbmcgYXQgcG9pbnRzIHdoZXJlIHdlIGtub3cgbWVtb3J5IGlzIHNwZWNpZmljYWxseSBm
-b3INCmdyYXBoaWNzIHVzZSBhbmQgbm90IHNvbWV0aGluZyBlbHNlIHJpZ2h0PyAoSS5FLiBXaGV0
-aGVyIGl0IGlzIGENCmRtYS1idWYgaGVhcCBvciBzb21ld2hlcmUgbGlrZSBkcm1fZ2VtX29iamVj
-dF9pbml0LikgU28gSUlVQyB0aGUgb25seQ0KcXVlc3Rpb24gaXMgd2hhdCB0byB1c2UgZm9yIHRo
-ZSBncHVjZ19kZXZpY2UocykgYXQgdGhlc2UgbG9jYXRpb25zLg0KDQpbMV0gaHR0cHM6Ly9jcy5h
-bmRyb2lkLmNvbS9hbmRyb2lkL3BsYXRmb3JtL3N1cGVycHJvamVjdC8rL21hc3RlcjpoYXJkd2Fy
-ZS9nb29nbGUvZ3JhcGhpY3MvY29tbW9uL2xpYmlvbi9pb24uY3BwO2w9MzktNTANCg0KPg0KPiBP
-dGhlcndpc2UgdGhpcyB3aWxsIG9ubHkgd29yayBvbiBub24tdXBzdHJlYW0gYW5kcm9pZCB3aGVy
-ZSBncHUgZHJpdmVycw0KPiBhbGxvY2F0ZSBldmVyeXRoaW5nIGZyb20gZG1hLWJ1ZiBoZWFwLiBJ
-ZiB5b3UgdXNlIHNvbWV0aGluZyBsaWtlIHRoZSB4ODYNCj4gYW5kcm9pZCBwcm9qZWN0IHdpdGgg
-bWVzYSBkcml2ZXJzLCB0aGVuIGRyaXZlci1pbnRlcm5hbCBidWZmZXJzIHdpbGwgYmUNCj4gYWxs
-b2NhdGVkIHRocm91Z2ggZ2VtIGFuZCBub3QgdGhyb3VnaCBkbWEtYnVmIGhlYXBzLiBPciBhdCBs
-ZWFzdCBJIHRoaW5rDQo+IHRoYXQncyBob3cgaXQgd29ya3MuDQo+DQo+IEJ1dCBhbHNvIG1laCwg
-d2UgY2FuIGZpeCB0aGlzIGZhaXJseSBlYXNpbHkgbGF0ZXIgb24gYnkgYWRkaW5nIHRoZXNlDQo+
-IHN0YW5kYXJkIGdwdWNnX2RldiBzb213ZWhlcmUgd2l0aCBhIGJpdCBvZiBrZXJuZWxkb2MuDQoN
-ClRoaXMgaXMgd2hhdCBJIHdhcyB0aGlua2luZyB3b3VsZCBoYXBwZW4gbmV4dCwgYnV0IElESyBp
-ZiBhbnlvbmUgc2Vlcw0KYSBtb3JlIGNlbnRyYWwgcGxhY2UgdG8gZG8gdGhpcyB0eXBlIG9mIHVz
-ZS1zcGVjaWZpYyBhY2NvdW50aW5nLg0KDQo+DQo+IEFueXdheSBoYXMgbXkgYWxsIG15IGFjaywg
-YnV0IGRvbid0IGNvdW50IHRoaXMgYXMgbXkgaW4tZGVwdGggcmV2aWV3IDotKQ0KPiAtRGFuaWVs
-DQoNClRoYW5rcyBhZ2FpbiBmb3IgdGFraW5nIGEgbG9vayENCj4NCj4gPiAtLS0NCj4gPiAgZHJp
-dmVycy9kbWEtYnVmL2RtYS1oZWFwLmMgICAgICAgICAgfCAyNyArKysrKysrKysrKysrKysrKysr
-KysrKysrKysNCj4gPiAgZHJpdmVycy9kbWEtYnVmL2hlYXBzL3N5c3RlbV9oZWFwLmMgfCAgMyAr
-KysNCj4gPiAgaW5jbHVkZS9saW51eC9kbWEtaGVhcC5oICAgICAgICAgICAgfCAxMSArKysrKysr
-KysrKw0KPiA+ICAzIGZpbGVzIGNoYW5nZWQsIDQxIGluc2VydGlvbnMoKykNCj4gPg0KPiA+IGRp
-ZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvZG1hLWhlYXAuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9k
-bWEtaGVhcC5jDQo+ID4gaW5kZXggOGY1ODQ4YWExNDRmLi44ODUwNzI0Mjc3NzUgMTAwNjQ0DQo+
-ID4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1oZWFwLmMNCj4gPiArKysgYi9kcml2ZXJzL2Rt
-YS1idWYvZG1hLWhlYXAuYw0KPiA+IEBAIC03LDYgKzcsNyBAQA0KPiA+ICAgKi8NCj4gPg0KPiA+
-ICAjaW5jbHVkZSA8bGludXgvY2Rldi5oPg0KPiA+ICsjaW5jbHVkZSA8bGludXgvY2dyb3VwX2dw
-dS5oPg0KPiA+ICAjaW5jbHVkZSA8bGludXgvZGVidWdmcy5oPg0KPiA+ICAjaW5jbHVkZSA8bGlu
-dXgvZGV2aWNlLmg+DQo+ID4gICNpbmNsdWRlIDxsaW51eC9kbWEtYnVmLmg+DQo+ID4gQEAgLTMx
-LDYgKzMyLDcgQEANCj4gPiAgICogQGhlYXBfZGV2dCAgICAgICAgICAgICAgICBoZWFwIGRldmlj
-ZSBub2RlDQo+ID4gICAqIEBsaXN0ICAgICAgICAgICAgIGxpc3QgaGVhZCBjb25uZWN0aW5nIHRv
-IGxpc3Qgb2YgaGVhcHMNCj4gPiAgICogQGhlYXBfY2RldiAgICAgICAgICAgICAgICBoZWFwIGNo
-YXIgZGV2aWNlDQo+ID4gKyAqIEBncHVjZ19kZXYgICAgICAgICAgICAgICAgZ3B1IGNncm91cCBk
-ZXZpY2UgZm9yIG1lbW9yeSBhY2NvdW50aW5nDQo+ID4gICAqDQo+ID4gICAqIFJlcHJlc2VudHMg
-YSBoZWFwIG9mIG1lbW9yeSBmcm9tIHdoaWNoIGJ1ZmZlcnMgY2FuIGJlIG1hZGUuDQo+ID4gICAq
-Lw0KPiA+IEBAIC00MSw2ICs0Myw5IEBAIHN0cnVjdCBkbWFfaGVhcCB7DQo+ID4gICAgICAgZGV2
-X3QgaGVhcF9kZXZ0Ow0KPiA+ICAgICAgIHN0cnVjdCBsaXN0X2hlYWQgbGlzdDsNCj4gPiAgICAg
-ICBzdHJ1Y3QgY2RldiBoZWFwX2NkZXY7DQo+ID4gKyNpZmRlZiBDT05GSUdfQ0dST1VQX0dQVQ0K
-PiA+ICsgICAgIHN0cnVjdCBncHVjZ19kZXZpY2UgZ3B1Y2dfZGV2Ow0KPiA+ICsjZW5kaWYNCj4g
-PiAgfTsNCj4gPg0KPiA+ICBzdGF0aWMgTElTVF9IRUFEKGhlYXBfbGlzdCk7DQo+ID4gQEAgLTIx
-Niw2ICsyMjEsMjYgQEAgY29uc3QgY2hhciAqZG1hX2hlYXBfZ2V0X25hbWUoc3RydWN0IGRtYV9o
-ZWFwICpoZWFwKQ0KPiA+ICAgICAgIHJldHVybiBoZWFwLT5uYW1lOw0KPiA+ICB9DQo+ID4NCj4g
-PiArI2lmZGVmIENPTkZJR19DR1JPVVBfR1BVDQo+ID4gKy8qKg0KPiA+ICsgKiBkbWFfaGVhcF9n
-ZXRfZ3B1Y2dfZGV2KCkgLSBnZXQgc3RydWN0IGdwdWNnX2RldmljZSBmb3IgdGhlIGhlYXAuDQo+
-ID4gKyAqIEBoZWFwOiBETUEtSGVhcCB0byBnZXQgdGhlIGdwdWNnX2RldmljZSBzdHJ1Y3QgZm9y
-Lg0KPiA+ICsgKg0KPiA+ICsgKiBSZXR1cm5zOg0KPiA+ICsgKiBUaGUgZ3B1Y2dfZGV2aWNlIHN0
-cnVjdCBmb3IgdGhlIGhlYXAuIE5VTEwgaWYgdGhlIEdQVSBjZ3JvdXAgY29udHJvbGxlciBpcw0K
-PiA+ICsgKiBub3QgZW5hYmxlZC4NCj4gPiArICovDQo+ID4gK3N0cnVjdCBncHVjZ19kZXZpY2Ug
-KmRtYV9oZWFwX2dldF9ncHVjZ19kZXYoc3RydWN0IGRtYV9oZWFwICpoZWFwKQ0KPiA+ICt7DQo+
-ID4gKyAgICAgcmV0dXJuICZoZWFwLT5ncHVjZ19kZXY7DQo+ID4gK30NCj4gPiArI2Vsc2UgLyog
-Q09ORklHX0NHUk9VUF9HUFUgKi8NCj4gPiArc3RydWN0IGdwdWNnX2RldmljZSAqZG1hX2hlYXBf
-Z2V0X2dwdWNnX2RldihzdHJ1Y3QgZG1hX2hlYXAgKmhlYXApDQo+ID4gK3sNCj4gPiArICAgICBy
-ZXR1cm4gTlVMTDsNCj4gPiArfQ0KPiA+ICsjZW5kaWYgLyogQ09ORklHX0NHUk9VUF9HUFUgKi8N
-Cj4gPiArDQo+ID4gIHN0cnVjdCBkbWFfaGVhcCAqZG1hX2hlYXBfYWRkKGNvbnN0IHN0cnVjdCBk
-bWFfaGVhcF9leHBvcnRfaW5mbyAqZXhwX2luZm8pDQo+ID4gIHsNCj4gPiAgICAgICBzdHJ1Y3Qg
-ZG1hX2hlYXAgKmhlYXAsICpoLCAqZXJyX3JldDsNCj4gPiBAQCAtMjg4LDYgKzMxMyw4IEBAIHN0
-cnVjdCBkbWFfaGVhcCAqZG1hX2hlYXBfYWRkKGNvbnN0IHN0cnVjdCBkbWFfaGVhcF9leHBvcnRf
-aW5mbyAqZXhwX2luZm8pDQo+ID4gICAgICAgbGlzdF9hZGQoJmhlYXAtPmxpc3QsICZoZWFwX2xp
-c3QpOw0KPiA+ICAgICAgIG11dGV4X3VubG9jaygmaGVhcF9saXN0X2xvY2spOw0KPiA+DQo+ID4g
-KyAgICAgZ3B1Y2dfcmVnaXN0ZXJfZGV2aWNlKGRtYV9oZWFwX2dldF9ncHVjZ19kZXYoaGVhcCks
-IGV4cF9pbmZvLT5uYW1lKTsNCj4gPiArDQo+ID4gICAgICAgcmV0dXJuIGhlYXA7DQo+ID4NCj4g
-PiAgZXJyMjoNCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2hlYXBzL3N5c3RlbV9o
-ZWFwLmMgYi9kcml2ZXJzL2RtYS1idWYvaGVhcHMvc3lzdGVtX2hlYXAuYw0KPiA+IGluZGV4IGFi
-N2ZkODk2ZDJjNC4uNzUyYTA1YzNjZmUyIDEwMDY0NA0KPiA+IC0tLSBhL2RyaXZlcnMvZG1hLWJ1
-Zi9oZWFwcy9zeXN0ZW1faGVhcC5jDQo+ID4gKysrIGIvZHJpdmVycy9kbWEtYnVmL2hlYXBzL3N5
-c3RlbV9oZWFwLmMNCj4gPiBAQCAtMzk1LDYgKzM5NSw5IEBAIHN0YXRpYyBzdHJ1Y3QgZG1hX2J1
-ZiAqc3lzdGVtX2hlYXBfYWxsb2NhdGUoc3RydWN0IGRtYV9oZWFwICpoZWFwLA0KPiA+ICAgICAg
-IGV4cF9pbmZvLm9wcyA9ICZzeXN0ZW1faGVhcF9idWZfb3BzOw0KPiA+ICAgICAgIGV4cF9pbmZv
-LnNpemUgPSBidWZmZXItPmxlbjsNCj4gPiAgICAgICBleHBfaW5mby5mbGFncyA9IGZkX2ZsYWdz
-Ow0KPiA+ICsjaWZkZWYgQ09ORklHX0NHUk9VUF9HUFUNCj4gPiArICAgICBleHBfaW5mby5ncHVj
-Z19kZXYgPSBkbWFfaGVhcF9nZXRfZ3B1Y2dfZGV2KGhlYXApOw0KPiA+ICsjZW5kaWYNCj4gPiAg
-ICAgICBleHBfaW5mby5wcml2ID0gYnVmZmVyOw0KPiA+ICAgICAgIGRtYWJ1ZiA9IGRtYV9idWZf
-ZXhwb3J0KCZleHBfaW5mbyk7DQo+ID4gICAgICAgaWYgKElTX0VSUihkbWFidWYpKSB7DQo+ID4g
-ZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvZG1hLWhlYXAuaCBiL2luY2x1ZGUvbGludXgvZG1h
-LWhlYXAuaA0KPiA+IGluZGV4IDBjMDU1NjFjYWQ2ZS4uZTQ0N2E2MWQwNTRlIDEwMDY0NA0KPiA+
-IC0tLSBhL2luY2x1ZGUvbGludXgvZG1hLWhlYXAuaA0KPiA+ICsrKyBiL2luY2x1ZGUvbGludXgv
-ZG1hLWhlYXAuaA0KPiA+IEBAIC0xMCw2ICsxMCw3IEBADQo+ID4gICNkZWZpbmUgX0RNQV9IRUFQ
-U19IDQo+ID4NCj4gPiAgI2luY2x1ZGUgPGxpbnV4L2NkZXYuaD4NCj4gPiArI2luY2x1ZGUgPGxp
-bnV4L2Nncm91cF9ncHUuaD4NCj4gPiAgI2luY2x1ZGUgPGxpbnV4L3R5cGVzLmg+DQo+ID4NCj4g
-PiAgc3RydWN0IGRtYV9oZWFwOw0KPiA+IEBAIC01OSw2ICs2MCwxNiBAQCB2b2lkICpkbWFfaGVh
-cF9nZXRfZHJ2ZGF0YShzdHJ1Y3QgZG1hX2hlYXAgKmhlYXApOw0KPiA+ICAgKi8NCj4gPiAgY29u
-c3QgY2hhciAqZG1hX2hlYXBfZ2V0X25hbWUoc3RydWN0IGRtYV9oZWFwICpoZWFwKTsNCj4gPg0K
-PiA+ICsvKioNCj4gPiArICogZG1hX2hlYXBfZ2V0X2dwdWNnX2RldigpIC0gZ2V0IGEgcG9pbnRl
-ciB0byB0aGUgc3RydWN0IGdwdWNnX2RldmljZSBmb3IgdGhlDQo+ID4gKyAqIGhlYXAuDQo+ID4g
-KyAqIEBoZWFwOiBETUEtSGVhcCB0byByZXRyaWV2ZSBncHVjZ19kZXZpY2UgZm9yLg0KPiA+ICsg
-Kg0KPiA+ICsgKiBSZXR1cm5zOg0KPiA+ICsgKiBUaGUgZ3B1Y2dfZGV2aWNlIHN0cnVjdCBmb3Ig
-dGhlIGhlYXAuDQo+ID4gKyAqLw0KPiA+ICtzdHJ1Y3QgZ3B1Y2dfZGV2aWNlICpkbWFfaGVhcF9n
-ZXRfZ3B1Y2dfZGV2KHN0cnVjdCBkbWFfaGVhcCAqaGVhcCk7DQo+ID4gKw0KPiA+ICAvKioNCj4g
-PiAgICogZG1hX2hlYXBfYWRkIC0gYWRkcyBhIGhlYXAgdG8gZG1hYnVmIGhlYXBzDQo+ID4gICAq
-IEBleHBfaW5mbzogICAgICAgICAgICAgICAgaW5mb3JtYXRpb24gbmVlZGVkIHRvIHJlZ2lzdGVy
-IHRoaXMgaGVhcA0KPiA+IC0tDQo+ID4gMi4zNS4xLjEwMjEuZzM4MTEwMWIwNzUtZ29vZw0KPiA+
-DQo+DQo+IC0tDQo+IERhbmllbCBWZXR0ZXINCj4gU29mdHdhcmUgRW5naW5lZXIsIEludGVsIENv
-cnBvcmF0aW9uDQo+IGh0dHA6Ly9ibG9nLmZmd2xsLmNoDQpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBs
-aW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFp
-bCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+Hi Jonathan,
+
+Le lun., mars 28 2022 at 18:24:09 +0100, Jonathan Cameron=20
+<jic23@kernel.org> a =E9crit :
+> On Mon,  7 Feb 2022 12:59:23 +0000
+> Paul Cercueil <paul@crapouillou.net> wrote:
+>=20
+>>  Adding write support to the buffer-dma code is easy - the write()
+>>  function basically needs to do the exact same thing as the read()
+>>  function: dequeue a block, read or write the data, enqueue the block
+>>  when entirely processed.
+>>=20
+>>  Therefore, the iio_buffer_dma_read() and the new=20
+>> iio_buffer_dma_write()
+>>  now both call a function iio_buffer_dma_io(), which will perform=20
+>> this
+>>  task.
+>>=20
+>>  The .space_available() callback can return the exact same value as=20
+>> the
+>>  .data_available() callback for input buffers, since in both cases we
+>>  count the exact same thing (the number of bytes in each available
+>>  block).
+>>=20
+>>  Note that we preemptively reset block->bytes_used to the buffer's=20
+>> size
+>>  in iio_dma_buffer_request_update(), as in the future the
+>>  iio_dma_buffer_enqueue() function won't reset it.
+>>=20
+>>  v2: - Fix block->state not being reset in
+>>        iio_dma_buffer_request_update() for output buffers.
+>>      - Only update block->bytes_used once and add a comment about=20
+>> why we
+>>        update it.
+>>      - Add a comment about why we're setting a different state for=20
+>> output
+>>        buffers in iio_dma_buffer_request_update()
+>>      - Remove useless cast to bool (!!) in iio_dma_buffer_io()
+>>=20
+>>  Signed-off-by: Paul Cercueil <paul@crapouillou.net>
+>>  Reviewed-by: Alexandru Ardelean <ardeleanalex@gmail.com>
+> One comment inline.
+>=20
+> I'd be tempted to queue this up with that fixed, but do we have
+> any users?  Even though it's trivial I'm not that keen on code
+> upstream well in advance of it being used.
+
+There's a userspace user in libiio. On the kernel side we do have=20
+drivers that use it in ADI's downstream kernel, that we plan to=20
+upstream in the long term (but it can take some time, as we need to=20
+upstream other things first, like JESD204B support).
+
+>=20
+>>  ---
+>>   drivers/iio/buffer/industrialio-buffer-dma.c | 88=20
+>> ++++++++++++++++----
+>>   include/linux/iio/buffer-dma.h               |  7 ++
+>>   2 files changed, 79 insertions(+), 16 deletions(-)
+>>=20
+>>  diff --git a/drivers/iio/buffer/industrialio-buffer-dma.c=20
+>> b/drivers/iio/buffer/industrialio-buffer-dma.c
+>>  index 1fc91467d1aa..a9f1b673374f 100644
+>>  --- a/drivers/iio/buffer/industrialio-buffer-dma.c
+>>  +++ b/drivers/iio/buffer/industrialio-buffer-dma.c
+>>  @@ -195,6 +195,18 @@ static void _iio_dma_buffer_block_done(struct=20
+>> iio_dma_buffer_block *block)
+>>   		block->state =3D IIO_BLOCK_STATE_DONE;
+>>   }
+>>=20
+>>  +static void iio_dma_buffer_queue_wake(struct iio_dma_buffer_queue=20
+>> *queue)
+>>  +{
+>>  +	__poll_t flags;
+>>  +
+>>  +	if (queue->buffer.direction =3D=3D IIO_BUFFER_DIRECTION_IN)
+>>  +		flags =3D EPOLLIN | EPOLLRDNORM;
+>>  +	else
+>>  +		flags =3D EPOLLOUT | EPOLLWRNORM;
+>>  +
+>>  +	wake_up_interruptible_poll(&queue->buffer.pollq, flags);
+>>  +}
+>>  +
+>>   /**
+>>    * iio_dma_buffer_block_done() - Indicate that a block has been=20
+>> completed
+>>    * @block: The completed block
+>>  @@ -212,7 +224,7 @@ void iio_dma_buffer_block_done(struct=20
+>> iio_dma_buffer_block *block)
+>>   	spin_unlock_irqrestore(&queue->list_lock, flags);
+>>=20
+>>   	iio_buffer_block_put_atomic(block);
+>>  -	wake_up_interruptible_poll(&queue->buffer.pollq, EPOLLIN |=20
+>> EPOLLRDNORM);
+>>  +	iio_dma_buffer_queue_wake(queue);
+>>   }
+>>   EXPORT_SYMBOL_GPL(iio_dma_buffer_block_done);
+>>=20
+>>  @@ -241,7 +253,7 @@ void iio_dma_buffer_block_list_abort(struct=20
+>> iio_dma_buffer_queue *queue,
+>>   	}
+>>   	spin_unlock_irqrestore(&queue->list_lock, flags);
+>>=20
+>>  -	wake_up_interruptible_poll(&queue->buffer.pollq, EPOLLIN |=20
+>> EPOLLRDNORM);
+>>  +	iio_dma_buffer_queue_wake(queue);
+>>   }
+>>   EXPORT_SYMBOL_GPL(iio_dma_buffer_block_list_abort);
+>>=20
+>>  @@ -335,8 +347,24 @@ int iio_dma_buffer_request_update(struct=20
+>> iio_buffer *buffer)
+>>   			queue->fileio.blocks[i] =3D block;
+>>   		}
+>>=20
+>>  -		block->state =3D IIO_BLOCK_STATE_QUEUED;
+>>  -		list_add_tail(&block->head, &queue->incoming);
+>>  +		/*
+>>  +		 * block->bytes_used may have been modified previously, e.g. by
+>>  +		 * iio_dma_buffer_block_list_abort(). Reset it here to the
+>>  +		 * block's so that iio_dma_buffer_io() will work.
+>>  +		 */
+>>  +		block->bytes_used =3D block->size;
+>>  +
+>>  +		/*
+>>  +		 * If it's an input buffer, mark the block as queued, and
+>>  +		 * iio_dma_buffer_enable() will submit it. Otherwise mark it as
+>>  +		 * done, which means it's ready to be dequeued.
+>>  +		 */
+>>  +		if (queue->buffer.direction =3D=3D IIO_BUFFER_DIRECTION_IN) {
+>>  +			block->state =3D IIO_BLOCK_STATE_QUEUED;
+>>  +			list_add_tail(&block->head, &queue->incoming);
+>>  +		} else {
+>>  +			block->state =3D IIO_BLOCK_STATE_DONE;
+>>  +		}
+>>   	}
+>>=20
+>>   out_unlock:
+>>  @@ -465,20 +493,12 @@ static struct iio_dma_buffer_block=20
+>> *iio_dma_buffer_dequeue(
+>>   	return block;
+>>   }
+>>=20
+>>  -/**
+>>  - * iio_dma_buffer_read() - DMA buffer read callback
+>>  - * @buffer: Buffer to read form
+>>  - * @n: Number of bytes to read
+>>  - * @user_buffer: Userspace buffer to copy the data to
+>>  - *
+>>  - * Should be used as the read callback for iio_buffer_access_ops
+>>  - * struct for DMA buffers.
+>>  - */
+>>  -int iio_dma_buffer_read(struct iio_buffer *buffer, size_t n,
+>>  -	char __user *user_buffer)
+>>  +static int iio_dma_buffer_io(struct iio_buffer *buffer,
+>>  +			     size_t n, char __user *user_buffer, bool is_write)
+>>   {
+>>   	struct iio_dma_buffer_queue *queue =3D iio_buffer_to_queue(buffer);
+>>   	struct iio_dma_buffer_block *block;
+>>  +	void *addr;
+>>   	int ret;
+>>=20
+>>   	if (n < buffer->bytes_per_datum)
+>>  @@ -501,8 +521,13 @@ int iio_dma_buffer_read(struct iio_buffer=20
+>> *buffer, size_t n,
+>>   	n =3D rounddown(n, buffer->bytes_per_datum);
+>>   	if (n > block->bytes_used - queue->fileio.pos)
+>>   		n =3D block->bytes_used - queue->fileio.pos;
+>>  +	addr =3D block->vaddr + queue->fileio.pos;
+>>=20
+>>  -	if (copy_to_user(user_buffer, block->vaddr + queue->fileio.pos,=20
+>> n)) {
+>>  +	if (is_write)
+>>  +		ret =3D copy_from_user(addr, user_buffer, n);
+>>  +	else
+>>  +		ret =3D copy_to_user(user_buffer, addr, n);
+>>  +	if (ret) {
+>>   		ret =3D -EFAULT;
+>>   		goto out_unlock;
+>>   	}
+>>  @@ -521,8 +546,39 @@ int iio_dma_buffer_read(struct iio_buffer=20
+>> *buffer, size_t n,
+>>=20
+>>   	return ret;
+>>   }
+>>  +
+>>  +/**
+>>  + * iio_dma_buffer_read() - DMA buffer read callback
+>>  + * @buffer: Buffer to read form
+>>  + * @n: Number of bytes to read
+>>  + * @user_buffer: Userspace buffer to copy the data to
+>>  + *
+>>  + * Should be used as the read callback for iio_buffer_access_ops
+>>  + * struct for DMA buffers.
+>>  + */
+>>  +int iio_dma_buffer_read(struct iio_buffer *buffer, size_t n,
+>>  +	char __user *user_buffer)
+>>  +{
+>>  +	return iio_dma_buffer_io(buffer, n, user_buffer, false);
+>>  +}
+>>   EXPORT_SYMBOL_GPL(iio_dma_buffer_read);
+>>=20
+>>  +/**
+>>  + * iio_dma_buffer_write() - DMA buffer write callback
+>>  + * @buffer: Buffer to read form
+>>  + * @n: Number of bytes to read
+>>  + * @user_buffer: Userspace buffer to copy the data from
+>>  + *
+>>  + * Should be used as the write callback for iio_buffer_access_ops
+>>  + * struct for DMA buffers.
+>>  + */
+>>  +int iio_dma_buffer_write(struct iio_buffer *buffer, size_t n,
+>>  +			 const char __user *user_buffer)
+>>  +{
+>>  +	return iio_dma_buffer_io(buffer, n, (__force char *)user_buffer,=20
+>> true);
+>=20
+> Casting away the const is a little nasty.   Perhaps it's worth adding=20
+> a
+> parameter to iio_dma_buffer_io so you can have different parameters
+> for the read and write cases and hence keep the const in place?
+> return iio_dma_buffer_io(buffer, n, NULL, user_buffer, true);
+> and
+> return iio_dma_buffer_io(buffer,n, user_buffer, NULL, false);
+
+I can do that.
+
+Cheers,
+-Paul
+
+>>  +}
+>>  +EXPORT_SYMBOL_GPL(iio_dma_buffer_write);
+>>  +
+>>   /**
+>>    * iio_dma_buffer_data_available() - DMA buffer data_available=20
+>> callback
+>>    * @buf: Buffer to check for data availability
+>>  diff --git a/include/linux/iio/buffer-dma.h=20
+>> b/include/linux/iio/buffer-dma.h
+>>  index 18d3702fa95d..490b93f76fa8 100644
+>>  --- a/include/linux/iio/buffer-dma.h
+>>  +++ b/include/linux/iio/buffer-dma.h
+>>  @@ -132,6 +132,8 @@ int iio_dma_buffer_disable(struct iio_buffer=20
+>> *buffer,
+>>   	struct iio_dev *indio_dev);
+>>   int iio_dma_buffer_read(struct iio_buffer *buffer, size_t n,
+>>   	char __user *user_buffer);
+>>  +int iio_dma_buffer_write(struct iio_buffer *buffer, size_t n,
+>>  +			 const char __user *user_buffer);
+>>   size_t iio_dma_buffer_data_available(struct iio_buffer *buffer);
+>>   int iio_dma_buffer_set_bytes_per_datum(struct iio_buffer *buffer,=20
+>> size_t bpd);
+>>   int iio_dma_buffer_set_length(struct iio_buffer *buffer, unsigned=20
+>> int length);
+>>  @@ -142,4 +144,9 @@ int iio_dma_buffer_init(struct=20
+>> iio_dma_buffer_queue *queue,
+>>   void iio_dma_buffer_exit(struct iio_dma_buffer_queue *queue);
+>>   void iio_dma_buffer_release(struct iio_dma_buffer_queue *queue);
+>>=20
+>>  +static inline size_t iio_dma_buffer_space_available(struct=20
+>> iio_buffer *buffer)
+>>  +{
+>>  +	return iio_dma_buffer_data_available(buffer);
+>>  +}
+>>  +
+>>   #endif
+>=20
+
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
