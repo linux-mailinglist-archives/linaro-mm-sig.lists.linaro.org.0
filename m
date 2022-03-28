@@ -2,48 +2,48 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F7614EC48C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 14:40:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 971B54EC48D
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 14:40:39 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C04653EC3E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 12:40:31 +0000 (UTC)
-Received: from mail-yw1-f202.google.com (mail-yw1-f202.google.com [209.85.128.202])
-	by lists.linaro.org (Postfix) with ESMTPS id D69B53EA27
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 04:00:03 +0000 (UTC)
-Received: by mail-yw1-f202.google.com with SMTP id 00721157ae682-2e9eb7d669fso39521687b3.14
-        for <linaro-mm-sig@lists.linaro.org>; Sun, 27 Mar 2022 21:00:03 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id CE7523EC52
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 12:40:38 +0000 (UTC)
+Received: from mail-yw1-f201.google.com (mail-yw1-f201.google.com [209.85.128.201])
+	by lists.linaro.org (Postfix) with ESMTPS id 5F3203EA27
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 04:00:06 +0000 (UTC)
+Received: by mail-yw1-f201.google.com with SMTP id 00721157ae682-2ea6741dc72so12575587b3.12
+        for <linaro-mm-sig@lists.linaro.org>; Sun, 27 Mar 2022 21:00:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=IYYYJa14yGoWfIlSCozw9vFwnqgCtFZKfx+GkbnYSXE=;
-        b=RK4bONjo0HsvOUkL3Q0L0YYP4oMIRRUxsLZrGS1ggPxUPmcf0Ku+8mk6TthgaTShfI
-         S5LSzEJ8gsi/fNLS5JKi2Or1xauiPrbYmg8dMwASkKHC0K0Qq8bXqOsNilCcvWFFcsJh
-         95RQBY4SG+N+uFldG+tXlKf2/Kb+TgThsYky72KhLMM/hdbWgBJxHxYNZaq7G68vAJBR
-         5X0dibqhoLkd09ofaZCyqHq2STvP8euPy9X+RUtDyw9e7IOuznjbkp8i7UqgkgqVVYHr
-         Zj6HCgoXBscApkVfeq0zlYCZOIMpeOvOXuo2ScpjbfDbZoLPA3f6xz/pNEmOIP4w7Fs+
-         BZPQ==
+         :cc:content-transfer-encoding;
+        bh=swBHLDpMJlrENAUcNI4p95XFMSTGbJ8O3Tkem0fLvJU=;
+        b=oGTdKGCygtZYyY07tOAoRz5brM3z/11wHqQFfV9mV9rMC95YVrWjxdM1oH17EeKd9B
+         sByNIynrE388mR0y43nywkqC34DIeOWfgKVA5O3hEzW4JmCwZnUNYDylGb1gqtbrftTF
+         g8jBg5qa7X2rT2zyxTmddvwhuVxd5L9UddzZecSVdtPfdirn8wxoG6kLG3hSBeXG89m6
+         Lje6g2SKeC2vE4qLXT61Xj7PEozYJG8HH0CtLDPPhsGnkLhDhbUApKRxOOplFRmrta4M
+         fBt/snAG2E4gPBrqDmBpy+Cth+6pBc8VF8/wH4T0LMHtFjTaWFewprjrYCCBchUaw1xM
+         v4TQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=IYYYJa14yGoWfIlSCozw9vFwnqgCtFZKfx+GkbnYSXE=;
-        b=IOKnMfwCOeVr0ML8OmrjGUA//4vO0Wt+DIC8AX4uAd+YJXi8VziAnehrIWaiV+FYEc
-         YwmF2nWpGd9579EQnq6inXdIxNXowpsDSI7udOgLe7RdFKaOShX9vrOZRcIuPBFoYvDF
-         VsgnLu0vhq7+UZn0oZ1OT2UUfW1ptUq0oeSD8i8I0CNtY1kJ5F4914la1HwdcuHIx9vL
-         ikwq7J2I8kVESx0dH2Ggr4Q/9h4OXvO8+M3ddjv4otNBNV66tmBF0vS2eJPlm3RgVbnO
-         hkV7ds3/sH9hrKy1QOIwAU+FFmW0kvofD9Xyq1HvBHELVwhnlvLsgFvFIWI8vGf09dxO
-         hshw==
-X-Gm-Message-State: AOAM5309/HjllJV8Q3+29znq+6xCKPMmeG9mZ3uNujW9TyAt3DxBfOTi
-	bzMgAevJ8Epow+wfHdNn5kQKORhXyyhC4xY=
-X-Google-Smtp-Source: ABdhPJxYK7296EhIG6DPTxcUw4Vq+WUXF92UatMSSsMB6VQOxYjQeGp1NzWh43iM6Z6YlY0AXGgjNo5itdMR5Qk=
+         :references:subject:from:to:cc:content-transfer-encoding;
+        bh=swBHLDpMJlrENAUcNI4p95XFMSTGbJ8O3Tkem0fLvJU=;
+        b=AD/nRWCdab0puQ2FDzbLRy2iOu4mMnvQWoxoCeqs1ip+3JaiUC+zmeJlsnvr1rfxpq
+         WFINRDN+NDOi0YpqyONvBh1nYc0AsQaCRCkheJmn60r25+MHtZD9f5TusgymMwYMlz/M
+         7VVj/nQzrE27hc4oNGfj+r1HU+X5t+h71/MgELbd389I/O1yJ7j7JkGQFn6t74Vh3NzQ
+         dXobi9pJnQQetMjHytk6vPa8KQvadwX3d5vrphDg+eEnqELRsukYU4Hsa67sKg1Mf/us
+         MPV9C9CR3cLJrqlMeabkL9kr+bJ1K6WNaJxB33RJ038fJafZB51zVEFzW8es+TA0ZHm5
+         5BjQ==
+X-Gm-Message-State: AOAM533K9fZua/qAldVVRTyFCYUDPCi4j2Vh50BoyKnI/65GZc4Uyed+
+	NHi3ljp675xVwUFDHwaBYp3Xcg5X9BYSkkI=
+X-Google-Smtp-Source: ABdhPJwnqgWOYi8gA1e2h+a9hU2mT4oa3J/inlE1/8EHv9A1hYM2B/y7BXnnZpn5v3bzYFB0oT1SjC39tw71k5Q=
 X-Received: from tj2.c.googlers.com ([fda3:e722:ac3:cc00:20:ed76:c0a8:187])
- (user=tjmercier job=sendgmr) by 2002:a05:690c:81:b0:2e1:b8cf:5ea9 with SMTP
- id be1-20020a05690c008100b002e1b8cf5ea9mr24964136ywb.191.1648440003462; Sun,
- 27 Mar 2022 21:00:03 -0700 (PDT)
-Date: Mon, 28 Mar 2022 03:59:41 +0000
+ (user=tjmercier job=sendgmr) by 2002:a0d:cc4f:0:b0:2e5:e8fa:6754 with SMTP id
+ o76-20020a0dcc4f000000b002e5e8fa6754mr23233214ywd.295.1648440005966; Sun, 27
+ Mar 2022 21:00:05 -0700 (PDT)
+Date: Mon, 28 Mar 2022 03:59:42 +0000
 In-Reply-To: <20220328035951.1817417-1-tjmercier@google.com>
-Message-Id: <20220328035951.1817417-3-tjmercier@google.com>
+Message-Id: <20220328035951.1817417-4-tjmercier@google.com>
 Mime-Version: 1.0
 References: <20220328035951.1817417-1-tjmercier@google.com>
 X-Mailer: git-send-email 2.35.1.1021.g381101b075-goog
@@ -61,559 +61,128 @@ To: tjmercier@google.com, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel
 	Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>,
 	Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
 	Johannes Weiner <hannes@cmpxchg.org>, Shuah Khan <shuah@kernel.org>
-X-MailFrom: 3wzJBYgkKDUY1rumzkqmzowwotm.kwutqvizw-uu-0qotq010.tqvizw.wzo@flex--tjmercier.bounces.google.com
+X-MailFrom: 3xTJBYgkKDUg3two1mso1qyyqvo.mywvsxk1y-ww-2sqvs232.vsxk1y.y1q@flex--tjmercier.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: XV6M2ZEY5ETD3ETQ6KD34RYRWIIF4LYJ
-X-Message-ID-Hash: XV6M2ZEY5ETD3ETQ6KD34RYRWIIF4LYJ
-X-Mailman-Approved-At: Wed, 30 Mar 2022 12:40:15 +0000
+Message-ID-Hash: ZVK5POMQ62PG6LNOBS6KSVWCGDPTZ3NF
+X-Message-ID-Hash: ZVK5POMQ62PG6LNOBS6KSVWCGDPTZ3NF
+X-Mailman-Approved-At: Wed, 30 Mar 2022 12:40:17 +0000
 CC: kaleshsingh@google.com, Kenny.Ho@amd.com, mkoutny@suse.com, skhan@linuxfoundation.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, cgroups@vger.kernel.org, linux-kselftest@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [RFC v4 2/8] cgroup: gpu: Add a cgroup controller for allocator attribution of GPU memory
+Subject: [Linaro-mm-sig] [RFC v4 3/8] dmabuf: Use the GPU cgroup charge/uncharge APIs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XV6M2ZEY5ETD3ETQ6KD34RYRWIIF4LYJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZVK5POMQ62PG6LNOBS6KSVWCGDPTZ3NF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: Hridya Valsaraju <hridya@google.com>
-
-The cgroup controller provides accounting for GPU and GPU-related
-memory allocations. The memory being accounted can be device memory or
-memory allocated from pools dedicated to serve GPU-related tasks.
-
-This patch adds APIs to:
--allow a device to register for memory accounting using the GPU cgroup
-controller.
--charge and uncharge allocated memory to a cgroup.
-
-When the cgroup controller is enabled, it would expose information about
-the memory allocated by each device(registered for GPU cgroup memory
-accounting) for each cgroup.
-
-The API/UAPI can be extended to set per-device/total allocation limits
-in the future.
-
-The cgroup controller has been named following the discussion in [1].
-
-[1]: https://lore.kernel.org/amd-gfx/YCJp%2F%2FkMC7YjVMXv@phenom.ffwll.local/
-
-Signed-off-by: Hridya Valsaraju <hridya@google.com>
-Signed-off-by: T.J. Mercier <tjmercier@google.com>
-
----
-v4 changes
-Adjust gpucg_try_charge critical section for future charge transfer
-functionality.
-
-v3 changes
-Use more common dual author commit message format per John Stultz.
-
-v2 changes
-Fix incorrect Kconfig help section indentation per Randy Dunlap.
----
- include/linux/cgroup_gpu.h    | 127 ++++++++++++++
- include/linux/cgroup_subsys.h |   4 +
- init/Kconfig                  |   7 +
- kernel/cgroup/Makefile        |   1 +
- kernel/cgroup/gpu.c           | 303 ++++++++++++++++++++++++++++++++++
- 5 files changed, 442 insertions(+)
- create mode 100644 include/linux/cgroup_gpu.h
- create mode 100644 kernel/cgroup/gpu.c
-
-diff --git a/include/linux/cgroup_gpu.h b/include/linux/cgroup_gpu.h
-new file mode 100644
-index 000000000000..c90069719022
---- /dev/null
-+++ b/include/linux/cgroup_gpu.h
-@@ -0,0 +1,127 @@
-+/* SPDX-License-Identifier: MIT
-+ * Copyright 2019 Advanced Micro Devices, Inc.
-+ * Copyright (C) 2022 Google LLC.
-+ */
-+#ifndef _CGROUP_GPU_H
-+#define _CGROUP_GPU_H
-+
-+#include <linux/cgroup.h>
-+#include <linux/page_counter.h>
-+
-+#ifdef CONFIG_CGROUP_GPU
-+ /* The GPU cgroup controller data structure */
-+struct gpucg {
-+	struct cgroup_subsys_state css;
-+
-+	/* list of all resource pools that belong to this cgroup */
-+	struct list_head rpools;
-+};
-+
-+struct gpucg_device {
-+	/*
-+	 * list of various resource pools in various cgroups that the device is
-+	 * part of.
-+	 */
-+	struct list_head rpools;
-+
-+	/* list of all devices registered for GPU cgroup accounting */
-+	struct list_head dev_node;
-+
-+	/*
-+	 * pointer to string literal to be used as identifier for accounting and
-+	 * limit setting
-+	 */
-+	const char *name;
-+};
-+
-+/**
-+ * css_to_gpucg - get the corresponding gpucg ref from a cgroup_subsys_state
-+ * @css: the target cgroup_subsys_state
-+ *
-+ * Returns: gpu cgroup that contains the @css
-+ */
-+static inline struct gpucg *css_to_gpucg(struct cgroup_subsys_state *css)
-+{
-+	return css ? container_of(css, struct gpucg, css) : NULL;
-+}
-+
-+/**
-+ * gpucg_get - get the gpucg reference that a task belongs to
-+ * @task: the target task
-+ *
-+ * This increases the reference count of the css that the @task belongs to.
-+ *
-+ * Returns: reference to the gpu cgroup the task belongs to.
-+ */
-+static inline struct gpucg *gpucg_get(struct task_struct *task)
-+{
-+	if (!cgroup_subsys_enabled(gpu_cgrp_subsys))
-+		return NULL;
-+	return css_to_gpucg(task_get_css(task, gpu_cgrp_id));
-+}
-+
-+/**
-+ * gpucg_put - put a gpucg reference
-+ * @gpucg: the target gpucg
-+ *
-+ * Put a reference obtained via gpucg_get
-+ */
-+static inline void gpucg_put(struct gpucg *gpucg)
-+{
-+	if (gpucg)
-+		css_put(&gpucg->css);
-+}
-+
-+/**
-+ * gpucg_parent - find the parent of a gpu cgroup
-+ * @cg: the target gpucg
-+ *
-+ * This does not increase the reference count of the parent cgroup
-+ *
-+ * Returns: parent gpu cgroup of @cg
-+ */
-+static inline struct gpucg *gpucg_parent(struct gpucg *cg)
-+{
-+	return css_to_gpucg(cg->css.parent);
-+}
-+
-+int gpucg_try_charge(struct gpucg *gpucg, struct gpucg_device *device, u64 usage);
-+void gpucg_uncharge(struct gpucg *gpucg, struct gpucg_device *device, u64 usage);
-+void gpucg_register_device(struct gpucg_device *gpucg_dev, const char *name);
-+#else /* CONFIG_CGROUP_GPU */
-+
-+struct gpucg;
-+struct gpucg_device;
-+
-+static inline struct gpucg *css_to_gpucg(struct cgroup_subsys_state *css)
-+{
-+	return NULL;
-+}
-+
-+static inline struct gpucg *gpucg_get(struct task_struct *task)
-+{
-+	return NULL;
-+}
-+
-+static inline void gpucg_put(struct gpucg *gpucg) {}
-+
-+static inline struct gpucg *gpucg_parent(struct gpucg *cg)
-+{
-+	return NULL;
-+}
-+
-+static inline int gpucg_try_charge(struct gpucg *gpucg,
-+				   struct gpucg_device *device,
-+				   u64 usage)
-+{
-+	return 0;
-+}
-+
-+static inline void gpucg_uncharge(struct gpucg *gpucg,
-+				  struct gpucg_device *device,
-+				  u64 usage) {}
-+
-+static inline void gpucg_register_device(struct gpucg_device *gpucg_dev,
-+					 const char *name) {}
-+#endif /* CONFIG_CGROUP_GPU */
-+#endif /* _CGROUP_GPU_H */
-diff --git a/include/linux/cgroup_subsys.h b/include/linux/cgroup_subsys.h
-index 445235487230..46a2a7b93c41 100644
---- a/include/linux/cgroup_subsys.h
-+++ b/include/linux/cgroup_subsys.h
-@@ -65,6 +65,10 @@ SUBSYS(rdma)
- SUBSYS(misc)
- #endif
- 
-+#if IS_ENABLED(CONFIG_CGROUP_GPU)
-+SUBSYS(gpu)
-+#endif
-+
- /*
-  * The following subsystems are not supported on the default hierarchy.
-  */
-diff --git a/init/Kconfig b/init/Kconfig
-index e9119bf54b1f..43568472930a 100644
---- a/init/Kconfig
-+++ b/init/Kconfig
-@@ -980,6 +980,13 @@ config BLK_CGROUP
- 
- 	See Documentation/admin-guide/cgroup-v1/blkio-controller.rst for more information.
- 
-+config CGROUP_GPU
-+	bool "gpu cgroup controller (EXPERIMENTAL)"
-+	select PAGE_COUNTER
-+	help
-+	  Provides accounting and limit setting for memory allocations by the GPU and
-+	  GPU-related subsystems.
-+
- config CGROUP_WRITEBACK
- 	bool
- 	depends on MEMCG && BLK_CGROUP
-diff --git a/kernel/cgroup/Makefile b/kernel/cgroup/Makefile
-index 12f8457ad1f9..be95a5a532fc 100644
---- a/kernel/cgroup/Makefile
-+++ b/kernel/cgroup/Makefile
-@@ -7,3 +7,4 @@ obj-$(CONFIG_CGROUP_RDMA) += rdma.o
- obj-$(CONFIG_CPUSETS) += cpuset.o
- obj-$(CONFIG_CGROUP_MISC) += misc.o
- obj-$(CONFIG_CGROUP_DEBUG) += debug.o
-+obj-$(CONFIG_CGROUP_GPU) += gpu.o
-diff --git a/kernel/cgroup/gpu.c b/kernel/cgroup/gpu.c
-new file mode 100644
-index 000000000000..ac4c470914b5
---- /dev/null
-+++ b/kernel/cgroup/gpu.c
-@@ -0,0 +1,303 @@
-+// SPDX-License-Identifier: MIT
-+// Copyright 2019 Advanced Micro Devices, Inc.
-+// Copyright (C) 2022 Google LLC.
-+
-+#include <linux/cgroup.h>
-+#include <linux/cgroup_gpu.h>
-+#include <linux/mm.h>
-+#include <linux/page_counter.h>
-+#include <linux/seq_file.h>
-+#include <linux/slab.h>
-+
-+static struct gpucg *root_gpucg __read_mostly;
-+
-+/*
-+ * Protects list of resource pools maintained on per cgroup basis
-+ * and list of devices registered for memory accounting using the GPU cgroup
-+ * controller.
-+ */
-+static DEFINE_MUTEX(gpucg_mutex);
-+static LIST_HEAD(gpucg_devices);
-+
-+struct gpucg_resource_pool {
-+	/* The device whose resource usage is tracked by this resource pool */
-+	struct gpucg_device *device;
-+
-+	/* list of all resource pools for the cgroup */
-+	struct list_head cg_node;
-+
-+	/* list maintained by the gpucg_device to keep track of its resource pools */
-+	struct list_head dev_node;
-+
-+	/* tracks memory usage of the resource pool */
-+	struct page_counter total;
-+};
-+
-+static void free_cg_rpool_locked(struct gpucg_resource_pool *rpool)
-+{
-+	lockdep_assert_held(&gpucg_mutex);
-+
-+	list_del(&rpool->cg_node);
-+	list_del(&rpool->dev_node);
-+	kfree(rpool);
-+}
-+
-+static void gpucg_css_free(struct cgroup_subsys_state *css)
-+{
-+	struct gpucg_resource_pool *rpool, *tmp;
-+	struct gpucg *gpucg = css_to_gpucg(css);
-+
-+	// delete all resource pools
-+	mutex_lock(&gpucg_mutex);
-+	list_for_each_entry_safe(rpool, tmp, &gpucg->rpools, cg_node)
-+		free_cg_rpool_locked(rpool);
-+	mutex_unlock(&gpucg_mutex);
-+
-+	kfree(gpucg);
-+}
-+
-+static struct cgroup_subsys_state *
-+gpucg_css_alloc(struct cgroup_subsys_state *parent_css)
-+{
-+	struct gpucg *gpucg, *parent;
-+
-+	gpucg = kzalloc(sizeof(struct gpucg), GFP_KERNEL);
-+	if (!gpucg)
-+		return ERR_PTR(-ENOMEM);
-+
-+	parent = css_to_gpucg(parent_css);
-+	if (!parent)
-+		root_gpucg = gpucg;
-+
-+	INIT_LIST_HEAD(&gpucg->rpools);
-+
-+	return &gpucg->css;
-+}
-+
-+static struct gpucg_resource_pool *find_cg_rpool_locked(
-+	struct gpucg *cg,
-+	struct gpucg_device *device)
-+{
-+	struct gpucg_resource_pool *pool;
-+
-+	lockdep_assert_held(&gpucg_mutex);
-+
-+	list_for_each_entry(pool, &cg->rpools, cg_node)
-+		if (pool->device == device)
-+			return pool;
-+
-+	return NULL;
-+}
-+
-+static struct gpucg_resource_pool *init_cg_rpool(struct gpucg *cg,
-+						 struct gpucg_device *device)
-+{
-+	struct gpucg_resource_pool *rpool = kzalloc(sizeof(*rpool),
-+							GFP_KERNEL);
-+	if (!rpool)
-+		return ERR_PTR(-ENOMEM);
-+
-+	rpool->device = device;
-+
-+	page_counter_init(&rpool->total, NULL);
-+	INIT_LIST_HEAD(&rpool->cg_node);
-+	INIT_LIST_HEAD(&rpool->dev_node);
-+	list_add_tail(&rpool->cg_node, &cg->rpools);
-+	list_add_tail(&rpool->dev_node, &device->rpools);
-+
-+	return rpool;
-+}
-+
-+/**
-+ * get_cg_rpool_locked - find the resource pool for the specified device and
-+ * specified cgroup. If the resource pool does not exist for the cg, it is
-+ * created in a hierarchical manner in the cgroup and its ancestor cgroups who
-+ * do not already have a resource pool entry for the device.
-+ *
-+ * @cg: The cgroup to find the resource pool for.
-+ * @device: The device associated with the returned resource pool.
-+ *
-+ * Return: return resource pool entry corresponding to the specified device in
-+ * the specified cgroup (hierarchically creating them if not existing already).
-+ *
-+ */
-+static struct gpucg_resource_pool *
-+get_cg_rpool_locked(struct gpucg *cg, struct gpucg_device *device)
-+{
-+	struct gpucg *parent_cg, *p, *stop_cg;
-+	struct gpucg_resource_pool *rpool, *tmp_rpool;
-+	struct gpucg_resource_pool *parent_rpool = NULL, *leaf_rpool = NULL;
-+
-+	rpool = find_cg_rpool_locked(cg, device);
-+	if (rpool)
-+		return rpool;
-+
-+	stop_cg = cg;
-+	do {
-+		rpool = init_cg_rpool(stop_cg, device);
-+		if (IS_ERR(rpool))
-+			goto err;
-+
-+		if (!leaf_rpool)
-+			leaf_rpool = rpool;
-+
-+		stop_cg = gpucg_parent(stop_cg);
-+		if (!stop_cg)
-+			break;
-+
-+		rpool = find_cg_rpool_locked(stop_cg, device);
-+	} while (!rpool);
-+
-+	/*
-+	 * Re-initialize page counters of all rpools created in this invocation
-+	 * to enable hierarchical charging.
-+	 * stop_cg is the first ancestor cg who already had a resource pool for
-+	 * the device. It can also be NULL if no ancestors had a pre-existing
-+	 * resource pool for the device before this invocation.
-+	 */
-+	rpool = leaf_rpool;
-+	for (p = cg; p != stop_cg; p = parent_cg) {
-+		parent_cg = gpucg_parent(p);
-+		if (!parent_cg)
-+			break;
-+		parent_rpool = find_cg_rpool_locked(parent_cg, device);
-+		page_counter_init(&rpool->total, &parent_rpool->total);
-+
-+		rpool = parent_rpool;
-+	}
-+
-+	return leaf_rpool;
-+err:
-+	for (p = cg; p != stop_cg; p = gpucg_parent(p)) {
-+		tmp_rpool = find_cg_rpool_locked(p, device);
-+		free_cg_rpool_locked(tmp_rpool);
-+	}
-+	return rpool;
-+}
-+
-+/**
-+ * gpucg_try_charge - charge memory to the specified gpucg and gpucg_device.
-+ * Caller must hold a reference to @gpucg obtained through gpucg_get(). The size
-+ * of the memory is rounded up to be a multiple of the page size.
-+ *
-+ * @gpucg: The gpu cgroup to charge the memory to.
-+ * @device: The device to charge the memory to.
-+ * @usage: size of memory to charge in bytes.
-+ *
-+ * Return: returns 0 if the charging is successful and otherwise returns an
-+ * error code.
-+ */
-+int gpucg_try_charge(struct gpucg *gpucg, struct gpucg_device *device, u64 usage)
-+{
-+	struct page_counter *counter;
-+	u64 nr_pages;
-+	struct gpucg_resource_pool *rp;
-+	int ret = 0;
-+
-+	nr_pages = PAGE_ALIGN(usage) >> PAGE_SHIFT;
-+
-+	mutex_lock(&gpucg_mutex);
-+	rp = get_cg_rpool_locked(gpucg, device);
-+	/*
-+	 * Continue to hold gpucg_mutex because we use it to block charges
-+	 * while transfers are in progress.
-+	 */
-+	if (IS_ERR(rp)) {
-+		mutex_unlock(&gpucg_mutex);
-+		return PTR_ERR(rp);
-+	}
-+
-+	if (page_counter_try_charge(&rp->total, nr_pages, &counter))
-+		css_get_many(&gpucg->css, nr_pages);
-+	else
-+		ret = -ENOMEM;
-+	mutex_unlock(&gpucg_mutex);
-+
-+	return ret;
-+}
-+
-+/**
-+ * gpucg_uncharge - uncharge memory from the specified gpucg and gpucg_device.
-+ * The caller must hold a reference to @gpucg obtained through gpucg_get().
-+ *
-+ * @gpucg: The gpu cgroup to uncharge the memory from.
-+ * @device: The device to uncharge the memory from.
-+ * @usage: size of memory to uncharge in bytes.
-+ */
-+void gpucg_uncharge(struct gpucg *gpucg, struct gpucg_device *device, u64 usage)
-+{
-+	u64 nr_pages;
-+	struct gpucg_resource_pool *rp;
-+
-+	mutex_lock(&gpucg_mutex);
-+	rp = find_cg_rpool_locked(gpucg, device);
-+	/*
-+	 * gpucg_mutex can be unlocked here, rp will stay valid until gpucg is freed and there are
-+	 * active refs on gpucg. Uncharges are fine while transfers are in progress.
-+	 */
-+	mutex_unlock(&gpucg_mutex);
-+
-+	if (unlikely(!rp)) {
-+		pr_err("Resource pool not found, incorrect charge/uncharge ordering?\n");
-+		return;
-+	}
-+
-+	nr_pages = PAGE_ALIGN(usage) >> PAGE_SHIFT;
-+	page_counter_uncharge(&rp->total, nr_pages);
-+	css_put_many(&gpucg->css, nr_pages);
-+}
-+
-+/**
-+ * gpucg_register_device - Registers a device for memory accounting using the
-+ * GPU cgroup controller.
-+ *
-+ * @device: The device to register for memory accounting.
-+ * @name: Pointer to a string literal to denote the name of the device.
-+ *
-+ * Both @device andd @name must remain valid.
-+ */
-+void gpucg_register_device(struct gpucg_device *device, const char *name)
-+{
-+	if (!device)
-+		return;
-+
-+	INIT_LIST_HEAD(&device->dev_node);
-+	INIT_LIST_HEAD(&device->rpools);
-+
-+	mutex_lock(&gpucg_mutex);
-+	list_add_tail(&device->dev_node, &gpucg_devices);
-+	mutex_unlock(&gpucg_mutex);
-+
-+	device->name = name;
-+}
-+
-+static int gpucg_resource_show(struct seq_file *sf, void *v)
-+{
-+	struct gpucg_resource_pool *rpool;
-+	struct gpucg *cg = css_to_gpucg(seq_css(sf));
-+
-+	mutex_lock(&gpucg_mutex);
-+	list_for_each_entry(rpool, &cg->rpools, cg_node) {
-+		seq_printf(sf, "%s %lu\n", rpool->device->name,
-+			   page_counter_read(&rpool->total) * PAGE_SIZE);
-+	}
-+	mutex_unlock(&gpucg_mutex);
-+
-+	return 0;
-+}
-+
-+struct cftype files[] = {
-+	{
-+		.name = "memory.current",
-+		.seq_show = gpucg_resource_show,
-+	},
-+	{ }     /* terminate */
-+};
-+
-+struct cgroup_subsys gpu_cgrp_subsys = {
-+	.css_alloc      = gpucg_css_alloc,
-+	.css_free       = gpucg_css_free,
-+	.early_init     = false,
-+	.legacy_cftypes = files,
-+	.dfl_cftypes    = files,
-+};
--- 
-2.35.1.1021.g381101b075-goog
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+VGhpcyBwYXRjaCB1c2VzIHRoZSBHUFUgY2dyb3VwIGNoYXJnZS91bmNoYXJnZSBBUElzIHRvIGNo
+YXJnZSBidWZmZXJzDQphbGxvY2F0ZWQgYnkgYW55IERNQS1CVUYgZXhwb3J0ZXIgdGhhdCBleHBv
+cnRzIGEgYnVmZmVyIHdpdGggYSBHUFUgY2dyb3VwDQpkZXZpY2UgYXNzb2NpYXRpb24uDQoNCkJ5
+IGRvaW5nIHNvLCBpdCBiZWNvbWVzIHBvc3NpYmxlIHRvIHRyYWNrIHdobyBhbGxvY2F0ZWQvZXhw
+b3J0ZWQgYQ0KRE1BLUJVRiBldmVuIGFmdGVyIHRoZSBhbGxvY2F0aW5nIHByb2Nlc3MgZHJvcHMg
+YWxsIHJlZmVyZW5jZXMgdG8gYQ0KYnVmZmVyLg0KDQpPcmlnaW5hbGx5LWJ5OiBIcmlkeWEgVmFs
+c2FyYWp1IDxocmlkeWFAZ29vZ2xlLmNvbT4NClNpZ25lZC1vZmYtYnk6IFQuSi4gTWVyY2llciA8
+dGptZXJjaWVyQGdvb2dsZS5jb20+DQoNCi0tLQ0KdjQgY2hhbmdlcw0KRml4IHVuaW5pdGlhbGl6
+ZWQgcmV0dXJuIGNvZGUgZXJyb3IgZm9yIGRtYWJ1Zl90cnlfY2hhcmdlIGVycm9yIGNhc2UuDQoN
+CnYzIGNoYW5nZXMNClVzZSBtb3JlIGNvbW1vbiBkdWFsIGF1dGhvciBjb21taXQgbWVzc2FnZSBm
+b3JtYXQgcGVyIEpvaG4gU3R1bHR6Lg0KDQp2MiBjaGFuZ2VzDQpNb3ZlIGRtYS1idWYgY2dyb3Vw
+IGNoYXJnaW5nL3VuY2hhcmdpbmcgZnJvbSBhIGRtYV9idWZfb3AgZGVmaW5lZCBieQ0KZXZlcnkg
+aGVhcCB0byBhIHNpbmdsZSBkbWEtYnVmIGZ1bmN0aW9uIGZvciBhbGwgaGVhcHMgcGVyIERhbmll
+bCBWZXR0ZXIgYW5kDQpDaHJpc3RpYW4gS8O2bmlnLg0KLS0tDQogZHJpdmVycy9kbWEtYnVmL2Rt
+YS1idWYuYyB8IDU4ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKw0KIGlu
+Y2x1ZGUvbGludXgvZG1hLWJ1Zi5oICAgfCAyMCArKysrKysrKysrKystLQ0KIDIgZmlsZXMgY2hh
+bmdlZCwgNzYgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCg0KZGlmZiAtLWdpdCBhL2Ry
+aXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQppbmRl
+eCA2MDJiMTJkNzQ3MGQuLjFlZTVjNjBkM2Q2ZCAxMDA2NDQNCi0tLSBhL2RyaXZlcnMvZG1hLWJ1
+Zi9kbWEtYnVmLmMNCisrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMNCkBAIC01Niw2ICs1
+Niw1MyBAQCBzdGF0aWMgY2hhciAqZG1hYnVmZnNfZG5hbWUoc3RydWN0IGRlbnRyeSAqZGVudHJ5
+LCBjaGFyICpidWZmZXIsIGludCBidWZsZW4pDQogCQkJICAgICBkZW50cnktPmRfbmFtZS5uYW1l
+LCByZXQgPiAwID8gbmFtZSA6ICIiKTsNCiB9DQogDQorI2lmZGVmIENPTkZJR19DR1JPVVBfR1BV
+DQorc3RhdGljIGlubGluZSBzdHJ1Y3QgZ3B1Y2dfZGV2aWNlICoNCitleHBfaW5mb19ncHVjZ19k
+ZXYoY29uc3Qgc3RydWN0IGRtYV9idWZfZXhwb3J0X2luZm8gKmV4cF9pbmZvKQ0KK3sNCisJcmV0
+dXJuIGV4cF9pbmZvLT5ncHVjZ19kZXY7DQorfQ0KKw0KK3N0YXRpYyBpbnQgZG1hYnVmX3RyeV9j
+aGFyZ2Uoc3RydWN0IGRtYV9idWYgKmRtYWJ1ZiwNCisJCQkgICAgIHN0cnVjdCBncHVjZ19kZXZp
+Y2UgKmdwdWNnX2RldikNCit7DQorCWludCByZXQ7DQorDQorCWRtYWJ1Zi0+Z3B1Y2cgPSBncHVj
+Z19nZXQoY3VycmVudCk7DQorCWRtYWJ1Zi0+Z3B1Y2dfZGV2ID0gZ3B1Y2dfZGV2Ow0KKw0KKwly
+ZXQgPSBncHVjZ190cnlfY2hhcmdlKGRtYWJ1Zi0+Z3B1Y2csIGRtYWJ1Zi0+Z3B1Y2dfZGV2LCBk
+bWFidWYtPnNpemUpOw0KKwlpZiAocmV0KSB7DQorCQlncHVjZ19wdXQoZG1hYnVmLT5ncHVjZyk7
+DQorCQlkbWFidWYtPmdwdWNnID0gTlVMTDsNCisJCWRtYWJ1Zi0+Z3B1Y2dfZGV2ID0gTlVMTDsN
+CisJfQ0KKwlyZXR1cm4gcmV0Ow0KK30NCisNCitzdGF0aWMgdm9pZCBkbWFidWZfdW5jaGFyZ2Uo
+c3RydWN0IGRtYV9idWYgKmRtYWJ1ZikNCit7DQorCWlmIChkbWFidWYtPmdwdWNnICYmIGRtYWJ1
+Zi0+Z3B1Y2dfZGV2KSB7DQorCQlncHVjZ191bmNoYXJnZShkbWFidWYtPmdwdWNnLCBkbWFidWYt
+PmdwdWNnX2RldiwgZG1hYnVmLT5zaXplKTsNCisJCWdwdWNnX3B1dChkbWFidWYtPmdwdWNnKTsN
+CisJfQ0KK30NCisjZWxzZSAvKiBDT05GSUdfQ0dST1VQX0dQVSAqLw0KK3N0YXRpYyBpbmxpbmUg
+c3RydWN0IGdwdWNnX2RldmljZSAqZXhwX2luZm9fZ3B1Y2dfZGV2KA0KK2NvbnN0IHN0cnVjdCBk
+bWFfYnVmX2V4cG9ydF9pbmZvICpleHBfaW5mbykNCit7DQorCXJldHVybiBOVUxMOw0KK30NCisN
+CitzdGF0aWMgaW5saW5lIGludCBkbWFidWZfdHJ5X2NoYXJnZShzdHJ1Y3QgZG1hX2J1ZiAqZG1h
+YnVmLA0KKwkJCQkgICAgIHN0cnVjdCBncHVjZ19kZXZpY2UgKmdwdWNnX2RldikpDQorew0KKwly
+ZXR1cm4gMDsNCit9DQorDQorc3RhdGljIGlubGluZSB2b2lkIGRtYWJ1Zl91bmNoYXJnZShzdHJ1
+Y3QgZG1hX2J1ZiAqZG1hYnVmKSB7fQ0KKyNlbmRpZiAvKiBDT05GSUdfQ0dST1VQX0dQVSAqLw0K
+Kw0KIHN0YXRpYyB2b2lkIGRtYV9idWZfcmVsZWFzZShzdHJ1Y3QgZGVudHJ5ICpkZW50cnkpDQog
+ew0KIAlzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmOw0KQEAgLTc5LDYgKzEyNiw4IEBAIHN0YXRpYyB2
+b2lkIGRtYV9idWZfcmVsZWFzZShzdHJ1Y3QgZGVudHJ5ICpkZW50cnkpDQogCWlmIChkbWFidWYt
+PnJlc3YgPT0gKHN0cnVjdCBkbWFfcmVzdiAqKSZkbWFidWZbMV0pDQogCQlkbWFfcmVzdl9maW5p
+KGRtYWJ1Zi0+cmVzdik7DQogDQorCWRtYWJ1Zl91bmNoYXJnZShkbWFidWYpOw0KKw0KIAlXQVJO
+X09OKCFsaXN0X2VtcHR5KCZkbWFidWYtPmF0dGFjaG1lbnRzKSk7DQogCW1vZHVsZV9wdXQoZG1h
+YnVmLT5vd25lcik7DQogCWtmcmVlKGRtYWJ1Zi0+bmFtZSk7DQpAQCAtNDg0LDYgKzUzMyw3IEBA
+IHN0cnVjdCBkbWFfYnVmICpkbWFfYnVmX2V4cG9ydChjb25zdCBzdHJ1Y3QgZG1hX2J1Zl9leHBv
+cnRfaW5mbyAqZXhwX2luZm8pDQogew0KIAlzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmOw0KIAlzdHJ1
+Y3QgZG1hX3Jlc3YgKnJlc3YgPSBleHBfaW5mby0+cmVzdjsNCisJc3RydWN0IGdwdWNnX2Rldmlj
+ZSAqZ3B1Y2dfZGV2ID0gZXhwX2luZm9fZ3B1Y2dfZGV2KGV4cF9pbmZvKTsNCiAJc3RydWN0IGZp
+bGUgKmZpbGU7DQogCXNpemVfdCBhbGxvY19zaXplID0gc2l6ZW9mKHN0cnVjdCBkbWFfYnVmKTsN
+CiAJaW50IHJldDsNCkBAIC01MzQsNiArNTg0LDEyIEBAIHN0cnVjdCBkbWFfYnVmICpkbWFfYnVm
+X2V4cG9ydChjb25zdCBzdHJ1Y3QgZG1hX2J1Zl9leHBvcnRfaW5mbyAqZXhwX2luZm8pDQogCX0N
+CiAJZG1hYnVmLT5yZXN2ID0gcmVzdjsNCiANCisJaWYgKGdwdWNnX2Rldikgew0KKwkJcmV0ID0g
+ZG1hYnVmX3RyeV9jaGFyZ2UoZG1hYnVmLCBncHVjZ19kZXYpOw0KKwkJaWYgKHJldCkNCisJCQln
+b3RvIGVycl9jaGFyZ2U7DQorCX0NCisNCiAJZmlsZSA9IGRtYV9idWZfZ2V0ZmlsZShkbWFidWYs
+IGV4cF9pbmZvLT5mbGFncyk7DQogCWlmIChJU19FUlIoZmlsZSkpIHsNCiAJCXJldCA9IFBUUl9F
+UlIoZmlsZSk7DQpAQCAtNTY1LDYgKzYyMSw4IEBAIHN0cnVjdCBkbWFfYnVmICpkbWFfYnVmX2V4
+cG9ydChjb25zdCBzdHJ1Y3QgZG1hX2J1Zl9leHBvcnRfaW5mbyAqZXhwX2luZm8pDQogCWZpbGUt
+PmZfcGF0aC5kZW50cnktPmRfZnNkYXRhID0gTlVMTDsNCiAJZnB1dChmaWxlKTsNCiBlcnJfZG1h
+YnVmOg0KKwlkbWFidWZfdW5jaGFyZ2UoZG1hYnVmKTsNCitlcnJfY2hhcmdlOg0KIAlrZnJlZShk
+bWFidWYpOw0KIGVycl9tb2R1bGU6DQogCW1vZHVsZV9wdXQoZXhwX2luZm8tPm93bmVyKTsNCmRp
+ZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L2RtYS1idWYuaCBiL2luY2x1ZGUvbGludXgvZG1hLWJ1
+Zi5oDQppbmRleCA3YWI1MDA3NmU3YTYuLjc0MmYyOWMzZGFhZiAxMDA2NDQNCi0tLSBhL2luY2x1
+ZGUvbGludXgvZG1hLWJ1Zi5oDQorKysgYi9pbmNsdWRlL2xpbnV4L2RtYS1idWYuaA0KQEAgLTEz
+LDYgKzEzLDcgQEANCiAjaWZuZGVmIF9fRE1BX0JVRl9IX18NCiAjZGVmaW5lIF9fRE1BX0JVRl9I
+X18NCiANCisjaW5jbHVkZSA8bGludXgvY2dyb3VwX2dwdS5oPg0KICNpbmNsdWRlIDxsaW51eC9k
+bWEtYnVmLW1hcC5oPg0KICNpbmNsdWRlIDxsaW51eC9maWxlLmg+DQogI2luY2x1ZGUgPGxpbnV4
+L2Vyci5oPg0KQEAgLTMwMyw3ICszMDQsNyBAQCBzdHJ1Y3QgZG1hX2J1ZiB7DQogCS8qKg0KIAkg
+KiBAc2l6ZToNCiAJICoNCi0JICogU2l6ZSBvZiB0aGUgYnVmZmVyOyBpbnZhcmlhbnQgb3ZlciB0
+aGUgbGlmZXRpbWUgb2YgdGhlIGJ1ZmZlci4NCisJICogU2l6ZSBvZiB0aGUgYnVmZmVyIGluIGJ5
+dGVzOyBpbnZhcmlhbnQgb3ZlciB0aGUgbGlmZXRpbWUgb2YgdGhlIGJ1ZmZlci4NCiAJICovDQog
+CXNpemVfdCBzaXplOw0KIA0KQEAgLTQ1Myw2ICs0NTQsMTcgQEAgc3RydWN0IGRtYV9idWYgew0K
+IAkJc3RydWN0IGRtYV9idWYgKmRtYWJ1ZjsNCiAJfSAqc3lzZnNfZW50cnk7DQogI2VuZGlmDQor
+DQorI2lmZGVmIENPTkZJR19DR1JPVVBfR1BVDQorCS8qKiBAZ3B1Y2c6IFBvaW50ZXIgdG8gdGhl
+IGNncm91cCB0aGlzIGJ1ZmZlciBjdXJyZW50bHkgYmVsb25ncyB0by4gKi8NCisJc3RydWN0IGdw
+dWNnICpncHVjZzsNCisNCisJLyoqIEBncHVjZ19kZXY6DQorCSAqDQorCSAqIFBvaW50ZXIgdG8g
+dGhlIGNncm91cCBHUFUgZGV2aWNlIHdoZW5jZSB0aGlzIGJ1ZmZlciBvcmlnaW5hdGVzLg0KKwkg
+Ki8NCisJc3RydWN0IGdwdWNnX2RldmljZSAqZ3B1Y2dfZGV2Ow0KKyNlbmRpZg0KIH07DQogDQog
+LyoqDQpAQCAtNTI5LDkgKzU0MSwxMCBAQCBzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50IHsNCiAg
+KiBAZXhwX25hbWU6CW5hbWUgb2YgdGhlIGV4cG9ydGVyIC0gdXNlZnVsIGZvciBkZWJ1Z2dpbmcu
+DQogICogQG93bmVyOglwb2ludGVyIHRvIGV4cG9ydGVyIG1vZHVsZSAtIHVzZWQgZm9yIHJlZmNv
+dW50aW5nIGtlcm5lbCBtb2R1bGUNCiAgKiBAb3BzOglBdHRhY2ggYWxsb2NhdG9yLWRlZmluZWQg
+ZG1hIGJ1ZiBvcHMgdG8gdGhlIG5ldyBidWZmZXINCi0gKiBAc2l6ZToJU2l6ZSBvZiB0aGUgYnVm
+ZmVyIC0gaW52YXJpYW50IG92ZXIgdGhlIGxpZmV0aW1lIG9mIHRoZSBidWZmZXINCisgKiBAc2l6
+ZToJU2l6ZSBvZiB0aGUgYnVmZmVyIGluIGJ5dGVzIC0gaW52YXJpYW50IG92ZXIgdGhlIGxpZmV0
+aW1lIG9mIHRoZSBidWZmZXINCiAgKiBAZmxhZ3M6CW1vZGUgZmxhZ3MgZm9yIHRoZSBmaWxlDQog
+ICogQHJlc3Y6CXJlc2VydmF0aW9uLW9iamVjdCwgTlVMTCB0byBhbGxvY2F0ZSBkZWZhdWx0IG9u
+ZQ0KKyAqIEBncHVjZ19kZXY6CXBvaW50ZXIgdG8gdGhlIGdwdSBjZ3JvdXAgZGV2aWNlIHRoaXMg
+YnVmZmVyIGJlbG9uZ3MgdG8NCiAgKiBAcHJpdjoJQXR0YWNoIHByaXZhdGUgZGF0YSBvZiBhbGxv
+Y2F0b3IgdG8gdGhpcyBidWZmZXINCiAgKg0KICAqIFRoaXMgc3RydWN0dXJlIGhvbGRzIHRoZSBp
+bmZvcm1hdGlvbiByZXF1aXJlZCB0byBleHBvcnQgdGhlIGJ1ZmZlci4gVXNlZA0KQEAgLTU0NCw2
+ICs1NTcsOSBAQCBzdHJ1Y3QgZG1hX2J1Zl9leHBvcnRfaW5mbyB7DQogCXNpemVfdCBzaXplOw0K
+IAlpbnQgZmxhZ3M7DQogCXN0cnVjdCBkbWFfcmVzdiAqcmVzdjsNCisjaWZkZWYgQ09ORklHX0NH
+Uk9VUF9HUFUNCisJc3RydWN0IGdwdWNnX2RldmljZSAqZ3B1Y2dfZGV2Ow0KKyNlbmRpZg0KIAl2
+b2lkICpwcml2Ow0KIH07DQogDQotLSANCjIuMzUuMS4xMDIxLmczODExMDFiMDc1LWdvb2cNCg0K
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
+LXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVu
+c3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5h
+cm8ub3JnCg==
