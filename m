@@ -2,113 +2,130 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD0674E9285
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Mar 2022 12:28:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1289F4E9956
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Mar 2022 16:22:59 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 805123EF64
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Mar 2022 10:28:39 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
-	by lists.linaro.org (Postfix) with ESMTPS id B47193EA5B
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 10:28:34 +0000 (UTC)
-Received: by mail-ed1-f46.google.com with SMTP id a17so16332957edm.9
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 03:28:34 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 45E933EF7C
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Mar 2022 14:22:58 +0000 (UTC)
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com [209.85.128.66])
+	by lists.linaro.org (Postfix) with ESMTPS id 06A5D3EA16
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 14:22:54 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id r204-20020a1c44d5000000b0038ccb70e239so3679518wma.3
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 07:22:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=2fnW0hKm3/LoNJLASktWawEV8gjSA8FRX1R6A2wJmoc=;
-        b=AcbakU3oL6MVbrDUIllFrtKNdjGA58pmZ+0+Y+aRmRPr7qGEMAwr3+CnifI3kPcwMD
-         lVFQZkUGL+hNuNfowrtyQIQl7V2AJnr/FM1UAVCnU9xaCKIF41NfF4XCcDcy4xrxREyn
-         QVU0rtwTkF6CpqGBj0+urYVS9BGbbPStvFDgLXnF4sqTMC4aA0LVzXVbo732l9MoUuvP
-         YW0tFpvCKngyCg6/Sv0k+Q9Z6GuvSGE3O9jxlX9n37FnL1oEI3tBJFmP9ylrn4cblPAt
-         b/aA1KdvPicLOs8/a8bIF0SDH7pREkps3Hg/58ZLwwlfUzISlMrMCCtmbfGK16hIEaza
-         58cw==
+        d=ffwll.ch; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:content-transfer-encoding:in-reply-to;
+        bh=0qMi19vJjaBiLl9cST+fBDBfq+lOIRwdfDjsTWbv4+A=;
+        b=F6SrEc540oQbJ4koNpIXnsQNTXkFgqI6U/3cDMxUWVC4DyuuAWQRvto0jWiQx+RygR
+         az1eH84A1QaOlVPcmO2sktRA6+Oq14ehcGOz9Wipe7TsmT4xpng2OUhP8KJzz26RUyKz
+         O3PYrAc8ylFBmFqVK6n23fC3EaqzGbjQigaF0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=2fnW0hKm3/LoNJLASktWawEV8gjSA8FRX1R6A2wJmoc=;
-        b=TwBqLCepTWvNTJc+0k1ROo4zWOWwHeL4t5trLWhi99bzcI6G5OtdQotj38pIT6V95G
-         roKN7fvGhX536Vduo+gRxa2atpsYeWA5Ewi+CIlh563qfCVJfjvFZmk1+simlu3GgUV6
-         AGiWDfHOyKIbjddEIRZxZ2KaVk9Mp2ZSkFDGqDfKOeawIuVF/DYdhR6PhW3kpAcOoLbF
-         ATEzgZm3PIsRF9bBgJixO1TaYjHhmo1+ISa29zE9o31uCRKlXiGbxFewqAnsSwJOpx66
-         ueWU9i/b8GM+UM1lvRHnMjMJB7e5kxwDOp/2ra38DusLNmC89mJb0xkrpImaa6xRq6Tb
-         Cxzg==
-X-Gm-Message-State: AOAM5338PfHMlrnfrekbRkrPntpUoTQw4swlYhNR5ocBFqqyDdd+aJsm
-	4k9wDvM0+LfZa+h0liTuEnM=
-X-Google-Smtp-Source: ABdhPJwCTNosh9GI+S3j5GevCu9iAaWtBDkxqy67gDMWi3yh/+yzOHoB574Ou1NqeC8q0+4VIzZU1w==
-X-Received: by 2002:a05:6402:3689:b0:419:d380:ddbc with SMTP id ej9-20020a056402368900b00419d380ddbcmr8454741edb.230.1648463313648;
-        Mon, 28 Mar 2022 03:28:33 -0700 (PDT)
-Received: from ?IPV6:2a02:908:1252:fb60:4276:c469:b15d:9dea? ([2a02:908:1252:fb60:4276:c469:b15d:9dea])
-        by smtp.gmail.com with ESMTPSA id u4-20020a170906780400b006ce69ff6050sm5729145ejm.69.2022.03.28.03.28.32
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 28 Mar 2022 03:28:32 -0700 (PDT)
-Message-ID: <338d0623-1161-c958-101f-dc7d8ef12f99@gmail.com>
-Date: Mon, 28 Mar 2022 12:28:31 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- =?UTF-8?B?VmlsbGUgU3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
- Daniel Vetter <daniel.vetter@ffwll.ch>
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:content-transfer-encoding
+         :in-reply-to;
+        bh=0qMi19vJjaBiLl9cST+fBDBfq+lOIRwdfDjsTWbv4+A=;
+        b=qg8sAm34XDHMcqmy8uGAI4/LpuEGeNDCjbLXcclRIrQk+xekygPhwhf3TlgvRKCWYi
+         u1I4NcQ0BztdQ/FMlvHLFVLS17ZWTckzPFcNp7LIvaI84wSiHUR5iKDLf7P6Pw8J8ZBa
+         3Y+1nK4YU00ASNMrE06Pwu3jOE/WjWETV10gYw533whLGPy2XCFMREwLbty1n6R5H+tz
+         O43okO9qhtx8FOnNo44JtMmL/yJTsRo1MSU91/3XU0zL6wxhsa4tGeOzzVQGBWbPg9kx
+         93zlNbPGrUmFTka0TOIJENJlCb78LrGGngI0CHH1CTmr7UANz1sK3DQtaCbejjQ/iY/Z
+         QUyw==
+X-Gm-Message-State: AOAM530aWp31dsy/0UzEYYdA3IWC49ibdPxuZi/y1MM+2ICKKYxDhCoi
+	DQO11I36ZNYeZs+iFReVQqNUhQ==
+X-Google-Smtp-Source: ABdhPJy/CXlQv4q32M0C+eVPZAvzKzIlirYkPv5FpU1qt19fZsp2h8xi+lNT8j6s35IT6ynk7FjAsw==
+X-Received: by 2002:a05:600c:12c9:b0:38c:b319:6da2 with SMTP id v9-20020a05600c12c900b0038cb3196da2mr36510119wmd.125.1648477373048;
+        Mon, 28 Mar 2022 07:22:53 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id z5-20020a05600c0a0500b0037fa93193a8sm13921845wmp.44.2022.03.28.07.22.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Mar 2022 07:22:52 -0700 (PDT)
+Date: Mon, 28 Mar 2022 16:22:50 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <YkHEutP7ylbVgJjf@phenom.ffwll.local>
 References: <20220311110244.1245-1-christian.koenig@amd.com>
- <Yj3e0QjbnPoG7n4I@intel.com> <35cc3bd5-c0ab-0bd1-9603-4971234fbcd6@amd.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <35cc3bd5-c0ab-0bd1-9603-4971234fbcd6@amd.com>
-Message-ID-Hash: 6TAUYVVAVB37PI6K4TKFR3UWVORP4D2J
-X-Message-ID-Hash: 6TAUYVVAVB37PI6K4TKFR3UWVORP4D2J
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
+ <Yj3e0QjbnPoG7n4I@intel.com>
+ <35cc3bd5-c0ab-0bd1-9603-4971234fbcd6@amd.com>
+ <338d0623-1161-c958-101f-dc7d8ef12f99@gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <338d0623-1161-c958-101f-dc7d8ef12f99@gmail.com>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
+Message-ID-Hash: RXYY32DPTZESPSFY7IBPGSJ2DGBVEMCB
+X-Message-ID-Hash: RXYY32DPTZESPSFY7IBPGSJ2DGBVEMCB
+X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: gustavo@padovan.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Ville =?iso-8859-1?Q?Syrj=E4l=E4?= <ville.syrjala@linux.intel.com>, gustavo@padovan.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH 1/2] dma-buf: add dma_fence_unwrap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6TAUYVVAVB37PI6K4TKFR3UWVORP4D2J/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RXYY32DPTZESPSFY7IBPGSJ2DGBVEMCB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-SGkgVmlsbGUgJiBEYW5pZWwsDQoNCkFtIDI1LjAzLjIyIHVtIDE2OjI4IHNjaHJpZWIgQ2hyaXN0
-aWFuIEvDtm5pZzoNCj4gQW0gMjUuMDMuMjIgdW0gMTY6MjUgc2NocmllYiBWaWxsZSBTeXJqw6Rs
-w6Q6DQo+PiBPbiBGcmksIE1hciAxMSwgMjAyMiBhdCAxMjowMjo0M1BNICswMTAwLCBDaHJpc3Rp
-YW4gS8O2bmlnIHdyb3RlOg0KPj4+IEFkZCBhIGdlbmVyYWwgcHVycG9zZSBoZWxwZXIgdG8gZGVl
-cCBkaXZlIGludG8gDQo+Pj4gZG1hX2ZlbmNlX2NoYWluL2RtYV9mZW5jZV9hcnJheQ0KPj4+IHN0
-cnVjdHVyZXMgYW5kIGl0ZXJhdGUgb3ZlciBhbGwgdGhlIGZlbmNlcyBpbiB0aGVtLg0KPj4+DQo+
-Pj4gVGhpcyBpcyB1c2VmdWwgd2hlbiB3ZSBuZWVkIHRvIGZsYXR0ZW4gb3V0IGFsbCBmZW5jZXMg
-aW4gdGhvc2UgDQo+Pj4gc3RydWN0dXJlcy4NCj4+Pg0KPj4+IFNpZ25lZC1vZmYtYnk6IENocmlz
-dGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCj4+IE9uZSBvZiB0aGUgZG1h
-LWJ1ZiBwYXRjaGVzIHRvb2sgZG93biBJbnRlbCBDSS4gTG9va3MgbGlrZSBldmVyeQ0KPj4gbWFj
-aGluZSBvb3BzZXMgaW4gc29tZSBzeW5jX2ZpbGUgdGhpbmcgbm93Og0KPj4gPDE+W8KgIDI2MC40
-NzAwMDhdIEJVRzoga2VybmVsIE5VTEwgcG9pbnRlciBkZXJlZmVyZW5jZSwgYWRkcmVzczogDQo+
-PiAwMDAwMDAwMDAwMDAwMDEwDQo+PiA8MT5bwqAgMjYwLjQ3MDAyMF0gI1BGOiBzdXBlcnZpc29y
-IHJlYWQgYWNjZXNzIGluIGtlcm5lbCBtb2RlDQo+PiA8MT5bwqAgMjYwLjQ3MDAyNV0gI1BGOiBl
-cnJvcl9jb2RlKDB4MDAwMCkgLSBub3QtcHJlc2VudCBwYWdlDQo+PiA8Nj5bwqAgMjYwLjQ3MDAz
-MF0gUEdEIDAgUDREIDANCj4+IDw0PlvCoCAyNjAuNDcwMDM1XSBPb3BzOiAwMDAwIFsjMV0gUFJF
-RU1QVCBTTVAgTk9QVEkNCj4+IDw0PlvCoCAyNjAuNDcwMDQwXSBDUFU6IDAgUElEOiA1MzA2IENv
-bW06IGNvcmVfaG90dW5wbHVnIE5vdCB0YWludGVkIA0KPj4gNS4xNy4wLUNJLUNJX0RSTV8xMTQw
-NSsgIzENCj4+IDw0PlvCoCAyNjAuNDcwMDQ5XSBIYXJkd2FyZSBuYW1lOiBJbnRlbCBDb3Jwb3Jh
-dGlvbiBKYXNwZXIgTGFrZSBDbGllbnQgDQo+PiBQbGF0Zm9ybS9KYXNwZXJsYWtlIEREUjQgU09E
-SU1NIFJWUCwgQklPUyANCj4+IEpTTFNGV0kxLlIwMC4yMzg1LkQwMi4yMDEwMTYwODMxIDEwLzE2
-LzIwMjANCj4+IDw0PlvCoCAyNjAuNDcwMDU4XSBSSVA6IDAwMTA6ZG1hX2ZlbmNlX2FycmF5X2Zp
-cnN0KzB4MTkvMHgyMA0KDQpJJ3ZlIGxvb2tlZCBpbnRvIHRoaXMgYW5kIHRoZSByb290IGNhdXNl
-IHNlZW1zIHRvIGJlIHRoYXQgdGhlIG5ldyBjb2RlIA0KZG9lc24ndCBoYW5kbGUgZG1hX2ZlbmNl
-X2FycmF5cyB3aXRoIHplcm8gZWxlbWVudHMuDQoNClRoYXQgaXMgcmF0aGVyIGVhc3kgdG8gZml4
-LCBidXQgYSBkbWFfZmVuY2VfYXJyYXkgd2l0aCB6ZXJvIG51bWJlciBvZiANCmVsZW1lbnRzIGlz
-IG1vc3QgbGlrZWx5IGEgYnVnIGJlY2F1c2UgdW5kZXIgdGhlIHdyb25nIGNpcmN1bXN0YW5jZXMg
-aXQgDQpjYW4gY3JlYXRlIGEgZG1hX2ZlbmNlIGluc3RhbmNlIHdoaWNoIHdpbGwgbmV2ZXIgc2ln
-bmFsLg0KDQpJJ3ZlIHNlbmQgb3V0IGEgcGF0Y2ggb24gRnJpbmRheSAoW1BBVENIXSBkbWEtYnVm
-OiBXSVAgDQpkbWFfZmVuY2VfYXJyYXlfZmlyc3QgZml4KSB3aGljaCBhdm9pZHMgdGhlIGNyYXNo
-IGFuZCBwcmludHMgYSB3YXJuaW5nIA0KaWYgYW55Ym9keSB0cmllcyB0byBjcmVhdGUgYSBkbWFf
-ZmVuY2VfYXJyYXkgd2l0aCB6ZXJvIGxlbmd0aC4NCg0KQ2FuIHlvdSB0ZXN0IHRoaXM/DQoNClRo
-YW5rcyBpbiBhZHZhbmNlLA0KQ2hyaXN0aWFuLg0KX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJv
-LW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8g
-bGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+On Mon, Mar 28, 2022 at 12:28:31PM +0200, Christian K=F6nig wrote:
+> Hi Ville & Daniel,
+>=20
+> Am 25.03.22 um 16:28 schrieb Christian K=F6nig:
+> > Am 25.03.22 um 16:25 schrieb Ville Syrj=E4l=E4:
+> > > On Fri, Mar 11, 2022 at 12:02:43PM +0100, Christian K=F6nig wrote:
+> > > > Add a general purpose helper to deep dive into
+> > > > dma_fence_chain/dma_fence_array
+> > > > structures and iterate over all the fences in them.
+> > > >=20
+> > > > This is useful when we need to flatten out all fences in those
+> > > > structures.
+> > > >=20
+> > > > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+> > > One of the dma-buf patches took down Intel CI. Looks like every
+> > > machine oopses in some sync_file thing now:
+> > > <1>[=A0 260.470008] BUG: kernel NULL pointer dereference, address:
+> > > 0000000000000010
+> > > <1>[=A0 260.470020] #PF: supervisor read access in kernel mode
+> > > <1>[=A0 260.470025] #PF: error_code(0x0000) - not-present page
+> > > <6>[=A0 260.470030] PGD 0 P4D 0
+> > > <4>[=A0 260.470035] Oops: 0000 [#1] PREEMPT SMP NOPTI
+> > > <4>[=A0 260.470040] CPU: 0 PID: 5306 Comm: core_hotunplug Not tainted
+> > > 5.17.0-CI-CI_DRM_11405+ #1
+> > > <4>[=A0 260.470049] Hardware name: Intel Corporation Jasper Lake
+> > > Client Platform/Jasperlake DDR4 SODIMM RVP, BIOS
+> > > JSLSFWI1.R00.2385.D02.2010160831 10/16/2020
+> > > <4>[=A0 260.470058] RIP: 0010:dma_fence_array_first+0x19/0x20
+>=20
+> I've looked into this and the root cause seems to be that the new code
+> doesn't handle dma_fence_arrays with zero elements.
+>=20
+> That is rather easy to fix, but a dma_fence_array with zero number of
+> elements is most likely a bug because under the wrong circumstances it can
+> create a dma_fence instance which will never signal.
+>=20
+> I've send out a patch on Frinday ([PATCH] dma-buf: WIP dma_fence_array_fi=
+rst
+> fix) which avoids the crash and prints a warning if anybody tries to crea=
+te
+> a dma_fence_array with zero length.
+>=20
+> Can you test this?
+
+It's in drm-tip now (in the fixup branch) so drm-tip results should have
+the result soonish:
+
+https://intel-gfx-ci.01.org/tree/drm-tip/index.html?
+
+Cheers, Daniel
+--=20
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
