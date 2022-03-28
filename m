@@ -2,395 +2,219 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id E06E54EC4A6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 14:41:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 24A484EC537
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 15:09:05 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 227903EC67
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 12:41:57 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 3CF303EA5F
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 17:46:51 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id CC81360FE6;
-	Mon, 28 Mar 2022 17:46:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 671DCC004DD;
-	Mon, 28 Mar 2022 17:46:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1648489610;
-	bh=h8P/Pv/fbuJrvEjfFoWLdsLWaKSoEzLkSjfA5QGUX3w=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=hn79khCeI8og1Hy2rwe2oadj9g9ExOOJnPL/flnxCMPIZxTT4PH2QEobDCAgFKs2A
-	 6X91hkuuM9mg42NrkgbJME2U0xXYTCl7ZDSyT7FgEAU0Ny5/XPdwxJ5ur/hd+Mx75D
-	 odbfyYfsIUFLnHg4/vFsYW07Kl/t4k2kUC3Rckvjfg2uJ7N/JVbBv3GvFruiE6xXh/
-	 1lHw3KKHbdLwmr4UN1W74z26WEt1mRinmiof7W8pIFnk+LlP5lFwHBrfQhxUixL1U6
-	 OZk7GQ0ADi4xf7gdYtKlkWIntqjYH255/g50hwSZ6b6+Ef/s16haPEP4GwTHO/yVMo
-	 BWhjKX3lUIwWQ==
-Date: Mon, 28 Mar 2022 18:54:25 +0100
-From: Jonathan Cameron <jic23@kernel.org>
-To: Paul Cercueil <paul@crapouillou.net>
-Message-ID: <20220328185425.56b51f4a@jic23-huawei>
-In-Reply-To: <20220207125933.81634-8-paul@crapouillou.net>
-References: <20220207125933.81634-1-paul@crapouillou.net>
-	<20220207125933.81634-8-paul@crapouillou.net>
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+	by lists.linaro.org (Postfix) with ESMTP id 4CAE93EC34
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 13:09:04 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 1986B3EA5F
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 18:28:37 +0000 (UTC)
+Received: by mail-ej1-f48.google.com with SMTP id a8so30398392ejc.8
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Mar 2022 11:28:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=8WaH8oTp9zQ4RiMod88tKNM8FNGzolc7NDGliqXEyFM=;
+        b=RA1LFZlyqYnQKlZhfG5eW4EytFq6FXGfsjb2/DOkWkAoisIvQquLsZTwb8nBtNlht8
+         ZHqiJ/MOFhcB+HyYDg4DOrCFHvXKNreT5wQEPJ7PzPnMoI2QrObdeAd08uOLLZhCsV8Y
+         oo/fwNelFB8E06amjBdYhwsR2VhATbyd3kx12XlxxP1sGczHl+YWk9N47mzb48HohD17
+         d9HYqBqtvUEw1TYZH7O9tEkaSoRyqnabxydRHWLDA8W6lAvtHgHxiIUB7dc49IG+TBgi
+         G8ykTzQvXQ9aD4+tQHre6cRAhm0yoObw1rfkn0AAPUuFF1ZU/BUjCdEdRxBpKxz80uJg
+         RymA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=8WaH8oTp9zQ4RiMod88tKNM8FNGzolc7NDGliqXEyFM=;
+        b=rE0UdAeYcuXPeZM0KFD7aTRCsT28kcITDo/IXpvNxEMUc2JSlgE9ZVqz2vp164chx4
+         WZZhAWIMQZSIZQoib9y08tAos7L+rDlOL6NnW5eZCl5NBO2iifV2gk/+UQ21okrLFIKQ
+         o8BH5GLOv9cnWpejzywv6NCRxvicEaOQRp0oYqtQYtNsIxfdt5XwBLzjAylPmHfAxUdM
+         9xgl4q49gw5243w2iWSNFzylpMqLUHOW5kW8EUJtzNP/SXr3V2wSMtxDL6H/395UibcH
+         C2PNFjAkZfaAoKDJXNG6KnlPW2uPNLYf+TLoVc1/fQdE7vuAvJWYnEa6qbjvyUnHjJF2
+         IyRw==
+X-Gm-Message-State: AOAM532kxyOUP6ULSeaESkk9D6HYEZE4H+TgcLRlcss50DPGC144MAVt
+	itdrUsveVMbibe8N6r7h7Ll9PBH9SD4AL6XbGqiNsw==
+X-Google-Smtp-Source: ABdhPJz3R1rYGKfMgCT8Xw+uvi6MQu9Vw8tO6cBRgeUu+llCkBBC4HKzRw85BEQANrPE+Bd5D9ZFeLO+o1zCssURxAk=
+X-Received: by 2002:a17:906:9754:b0:6da:7d72:1353 with SMTP id
+ o20-20020a170906975400b006da7d721353mr29368499ejy.273.1648492115577; Mon, 28
+ Mar 2022 11:28:35 -0700 (PDT)
 MIME-Version: 1.0
-X-MailFrom: jic23@kernel.org
+References: <20220328035951.1817417-1-tjmercier@google.com>
+ <20220328035951.1817417-5-tjmercier@google.com> <YkHH/0Use7F30UUE@phenom.ffwll.local>
+In-Reply-To: <YkHH/0Use7F30UUE@phenom.ffwll.local>
+From: "T.J. Mercier" <tjmercier@google.com>
+Date: Mon, 28 Mar 2022 11:28:24 -0700
+Message-ID: <CABdmKX01p6g_iHsB6dd4Wwh=8iLdYiUqdY6_yyA5ax2YNHt6tQ@mail.gmail.com>
+To: "T.J. Mercier" <tjmercier@google.com>, David Airlie <airlied@linux.ie>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>,
+	Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>,
+	Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>,
+	Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+	Benjamin Gaignard <benjamin.gaignard@linaro.org>, Liam Mark <lmark@codeaurora.org>,
+	Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <john.stultz@linaro.org>, Tejun Heo <tj@kernel.org>,
+	Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>,
+	Shuah Khan <shuah@kernel.org>, Kalesh Singh <kaleshsingh@google.com>, Kenny.Ho@amd.com,
+	=?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>,
+	Shuah Khan <skhan@linuxfoundation.org>, dri-devel@lists.freedesktop.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
+	cgroups@vger.kernel.org, linux-kselftest@vger.kernel.org
+X-MailFrom: tjmercier@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: CHXNEGOC47VAGPPQFCDWMBWU34JISGTA
-X-Message-ID-Hash: CHXNEGOC47VAGPPQFCDWMBWU34JISGTA
-X-Mailman-Approved-At: Wed, 30 Mar 2022 12:40:43 +0000
-CC: Michael Hennerich <Michael.Hennerich@analog.com>, Lars-Peter Clausen <lars@metafoo.de>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Alexandru Ardelean <ardeleanalex@gmail.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-iio@vger.kernel.org
+Message-ID-Hash: HABZAFIISTSJ5PRZH5PSZWKQ37TTVWGE
+X-Message-ID-Hash: HABZAFIISTSJ5PRZH5PSZWKQ37TTVWGE
+X-Mailman-Approved-At: Wed, 30 Mar 2022 13:08:59 +0000
+CC: Daniel Vetter <daniel@ffwll.ch>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 07/12] iio: buffer-dma: Use DMABUFs instead of custom solution
+Subject: [Linaro-mm-sig] Re: [RFC v4 4/8] dmabuf: heaps: export system_heap buffers with GPU cgroup charging
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CHXNEGOC47VAGPPQFCDWMBWU34JISGTA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HABZAFIISTSJ5PRZH5PSZWKQ37TTVWGE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Mon,  7 Feb 2022 12:59:28 +0000
-Paul Cercueil <paul@crapouillou.net> wrote:
-
-> Enhance the current fileio code by using DMABUF objects instead of
-> custom buffers.
-> 
-> This adds more code than it removes, but:
-> - a lot of the complexity can be dropped, e.g. custom kref and
->   iio_buffer_block_put_atomic() are not needed anymore;
-> - it will be much easier to introduce an API to export these DMABUF
->   objects to userspace in a following patch.
-> 
-> Signed-off-by: Paul Cercueil <paul@crapouillou.net>
-Hi Paul,
-
-I'm a bit rusty on dma mappings, but you seem to have
-a mixture of streaming and coherent mappings going on in here.
-
-Is it the case that the current code is using the coherent mappings
-and a potential 'other user' of the dma buffer might need
-streaming mappings?
-
-Jonathan
-
-> ---
->  drivers/iio/buffer/industrialio-buffer-dma.c | 192 ++++++++++++-------
->  include/linux/iio/buffer-dma.h               |   8 +-
->  2 files changed, 122 insertions(+), 78 deletions(-)
-> 
-> diff --git a/drivers/iio/buffer/industrialio-buffer-dma.c b/drivers/iio/buffer/industrialio-buffer-dma.c
-> index 15ea7bc3ac08..54e6000cd2ee 100644
-> --- a/drivers/iio/buffer/industrialio-buffer-dma.c
-> +++ b/drivers/iio/buffer/industrialio-buffer-dma.c
-> @@ -14,6 +14,7 @@
->  #include <linux/poll.h>
->  #include <linux/iio/buffer_impl.h>
->  #include <linux/iio/buffer-dma.h>
-> +#include <linux/dma-buf.h>
->  #include <linux/dma-mapping.h>
->  #include <linux/sizes.h>
->  
-> @@ -90,103 +91,145 @@
->   * callback is called from within the custom callback.
->   */
->  
-> -static void iio_buffer_block_release(struct kref *kref)
-> -{
-> -	struct iio_dma_buffer_block *block = container_of(kref,
-> -		struct iio_dma_buffer_block, kref);
-> -
-> -	WARN_ON(block->state != IIO_BLOCK_STATE_DEAD);
-> -
-> -	dma_free_coherent(block->queue->dev, PAGE_ALIGN(block->size),
-> -					block->vaddr, block->phys_addr);
-> -
-> -	iio_buffer_put(&block->queue->buffer);
-> -	kfree(block);
-> -}
-> -
-> -static void iio_buffer_block_get(struct iio_dma_buffer_block *block)
-> -{
-> -	kref_get(&block->kref);
-> -}
-> -
-> -static void iio_buffer_block_put(struct iio_dma_buffer_block *block)
-> -{
-> -	kref_put(&block->kref, iio_buffer_block_release);
-> -}
-> -
-> -/*
-> - * dma_free_coherent can sleep, hence we need to take some special care to be
-> - * able to drop a reference from an atomic context.
-> - */
-> -static LIST_HEAD(iio_dma_buffer_dead_blocks);
-> -static DEFINE_SPINLOCK(iio_dma_buffer_dead_blocks_lock);
-> -
-> -static void iio_dma_buffer_cleanup_worker(struct work_struct *work)
-> -{
-> -	struct iio_dma_buffer_block *block, *_block;
-> -	LIST_HEAD(block_list);
-> -
-> -	spin_lock_irq(&iio_dma_buffer_dead_blocks_lock);
-> -	list_splice_tail_init(&iio_dma_buffer_dead_blocks, &block_list);
-> -	spin_unlock_irq(&iio_dma_buffer_dead_blocks_lock);
-> -
-> -	list_for_each_entry_safe(block, _block, &block_list, head)
-> -		iio_buffer_block_release(&block->kref);
-> -}
-> -static DECLARE_WORK(iio_dma_buffer_cleanup_work, iio_dma_buffer_cleanup_worker);
-> -
-> -static void iio_buffer_block_release_atomic(struct kref *kref)
-> -{
-> +struct iio_buffer_dma_buf_attachment {
-> +	struct scatterlist sgl;
-> +	struct sg_table sg_table;
->  	struct iio_dma_buffer_block *block;
-> -	unsigned long flags;
-> -
-> -	block = container_of(kref, struct iio_dma_buffer_block, kref);
-> -
-> -	spin_lock_irqsave(&iio_dma_buffer_dead_blocks_lock, flags);
-> -	list_add_tail(&block->head, &iio_dma_buffer_dead_blocks);
-> -	spin_unlock_irqrestore(&iio_dma_buffer_dead_blocks_lock, flags);
-> -
-> -	schedule_work(&iio_dma_buffer_cleanup_work);
-> -}
-> -
-> -/*
-> - * Version of iio_buffer_block_put() that can be called from atomic context
-> - */
-> -static void iio_buffer_block_put_atomic(struct iio_dma_buffer_block *block)
-> -{
-> -	kref_put(&block->kref, iio_buffer_block_release_atomic);
-> -}
-> +};
->  
->  static struct iio_dma_buffer_queue *iio_buffer_to_queue(struct iio_buffer *buf)
->  {
->  	return container_of(buf, struct iio_dma_buffer_queue, buffer);
->  }
->  
-> +static struct iio_buffer_dma_buf_attachment *
-> +to_iio_buffer_dma_buf_attachment(struct sg_table *table)
-> +{
-> +	return container_of(table, struct iio_buffer_dma_buf_attachment, sg_table);
-> +}
-> +
-> +static void iio_buffer_block_get(struct iio_dma_buffer_block *block)
-> +{
-> +	get_dma_buf(block->dmabuf);
-> +}
-> +
-> +static void iio_buffer_block_put(struct iio_dma_buffer_block *block)
-> +{
-> +	dma_buf_put(block->dmabuf);
-> +}
-> +
-> +static int iio_buffer_dma_buf_attach(struct dma_buf *dbuf,
-> +				     struct dma_buf_attachment *at)
-> +{
-> +	at->priv = dbuf->priv;
-> +
-> +	return 0;
-> +}
-> +
-> +static struct sg_table *iio_buffer_dma_buf_map(struct dma_buf_attachment *at,
-> +					       enum dma_data_direction dma_dir)
-> +{
-> +	struct iio_dma_buffer_block *block = at->priv;
-> +	struct iio_buffer_dma_buf_attachment *dba;
-> +	int ret;
-> +
-> +	dba = kzalloc(sizeof(*dba), GFP_KERNEL);
-> +	if (!dba)
-> +		return ERR_PTR(-ENOMEM);
-> +
-> +	sg_init_one(&dba->sgl, block->vaddr, PAGE_ALIGN(block->size));
-> +	dba->sg_table.sgl = &dba->sgl;
-> +	dba->sg_table.nents = 1;
-> +	dba->block = block;
-> +
-> +	ret = dma_map_sgtable(at->dev, &dba->sg_table, dma_dir, 0);
-> +	if (ret) {
-> +		kfree(dba);
-> +		return ERR_PTR(ret);
-> +	}
-> +
-> +	return &dba->sg_table;
-> +}
-> +
-> +static void iio_buffer_dma_buf_unmap(struct dma_buf_attachment *at,
-> +				     struct sg_table *sg_table,
-> +				     enum dma_data_direction dma_dir)
-> +{
-> +	struct iio_buffer_dma_buf_attachment *dba =
-> +		to_iio_buffer_dma_buf_attachment(sg_table);
-> +
-> +	dma_unmap_sgtable(at->dev, &dba->sg_table, dma_dir, 0);
-> +	kfree(dba);
-> +}
-> +
-> +static void iio_buffer_dma_buf_release(struct dma_buf *dbuf)
-> +{
-> +	struct iio_dma_buffer_block *block = dbuf->priv;
-> +	struct iio_dma_buffer_queue *queue = block->queue;
-> +
-> +	WARN_ON(block->state != IIO_BLOCK_STATE_DEAD);
-> +
-> +	mutex_lock(&queue->lock);
-> +
-> +	dma_free_coherent(queue->dev, PAGE_ALIGN(block->size),
-> +			  block->vaddr, block->phys_addr);
-> +	kfree(block);
-> +
-> +	mutex_unlock(&queue->lock);
-> +	iio_buffer_put(&queue->buffer);
-> +}
-> +
-> +static const struct dma_buf_ops iio_dma_buffer_dmabuf_ops = {
-> +	.attach			= iio_buffer_dma_buf_attach,
-> +	.map_dma_buf		= iio_buffer_dma_buf_map,
-> +	.unmap_dma_buf		= iio_buffer_dma_buf_unmap,
-> +	.release		= iio_buffer_dma_buf_release,
-> +};
-> +
->  static struct iio_dma_buffer_block *iio_dma_buffer_alloc_block(
->  	struct iio_dma_buffer_queue *queue, size_t size)
->  {
->  	struct iio_dma_buffer_block *block;
-> +	DEFINE_DMA_BUF_EXPORT_INFO(einfo);
-> +	struct dma_buf *dmabuf;
-> +	int err = -ENOMEM;
->  
->  	block = kzalloc(sizeof(*block), GFP_KERNEL);
->  	if (!block)
-> -		return NULL;
-> +		return ERR_PTR(err);
->  
->  	block->vaddr = dma_alloc_coherent(queue->dev, PAGE_ALIGN(size),
->  		&block->phys_addr, GFP_KERNEL);
-> -	if (!block->vaddr) {
-> -		kfree(block);
-> -		return NULL;
-> +	if (!block->vaddr)
-> +		goto err_free_block;
-> +
-> +	einfo.ops = &iio_dma_buffer_dmabuf_ops;
-> +	einfo.size = PAGE_ALIGN(size);
-> +	einfo.priv = block;
-> +	einfo.flags = O_RDWR;
-> +
-> +	dmabuf = dma_buf_export(&einfo);
-> +	if (IS_ERR(dmabuf)) {
-> +		err = PTR_ERR(dmabuf);
-> +		goto err_free_dma;
->  	}
->  
-> +	block->dmabuf = dmabuf;
->  	block->size = size;
->  	block->state = IIO_BLOCK_STATE_DONE;
->  	block->queue = queue;
->  	INIT_LIST_HEAD(&block->head);
-> -	kref_init(&block->kref);
->  
->  	iio_buffer_get(&queue->buffer);
->  
->  	return block;
-> +
-> +err_free_dma:
-> +	dma_free_coherent(queue->dev, PAGE_ALIGN(size),
-> +			  block->vaddr, block->phys_addr);
-> +err_free_block:
-> +	kfree(block);
-> +	return ERR_PTR(err);
->  }
->  
->  static void _iio_dma_buffer_block_done(struct iio_dma_buffer_block *block)
-> @@ -223,7 +266,7 @@ void iio_dma_buffer_block_done(struct iio_dma_buffer_block *block)
->  	_iio_dma_buffer_block_done(block);
->  	spin_unlock_irqrestore(&queue->list_lock, flags);
->  
-> -	iio_buffer_block_put_atomic(block);
-> +	iio_buffer_block_put(block);
->  	iio_dma_buffer_queue_wake(queue);
->  }
->  EXPORT_SYMBOL_GPL(iio_dma_buffer_block_done);
-> @@ -249,7 +292,8 @@ void iio_dma_buffer_block_list_abort(struct iio_dma_buffer_queue *queue,
->  		list_del(&block->head);
->  		block->bytes_used = 0;
->  		_iio_dma_buffer_block_done(block);
-> -		iio_buffer_block_put_atomic(block);
-> +
-> +		iio_buffer_block_put(block);
->  	}
->  	spin_unlock_irqrestore(&queue->list_lock, flags);
->  
-> @@ -340,8 +384,8 @@ int iio_dma_buffer_request_update(struct iio_buffer *buffer)
->  
->  		if (!block) {
->  			block = iio_dma_buffer_alloc_block(queue, size);
-> -			if (!block) {
-> -				ret = -ENOMEM;
-> +			if (IS_ERR(block)) {
-> +				ret = PTR_ERR(block);
->  				goto out_unlock;
->  			}
->  			queue->fileio.blocks[i] = block;
-> diff --git a/include/linux/iio/buffer-dma.h b/include/linux/iio/buffer-dma.h
-> index 490b93f76fa8..6b3fa7d2124b 100644
-> --- a/include/linux/iio/buffer-dma.h
-> +++ b/include/linux/iio/buffer-dma.h
-> @@ -8,7 +8,6 @@
->  #define __INDUSTRIALIO_DMA_BUFFER_H__
->  
->  #include <linux/list.h>
-> -#include <linux/kref.h>
->  #include <linux/spinlock.h>
->  #include <linux/mutex.h>
->  #include <linux/iio/buffer_impl.h>
-> @@ -16,6 +15,7 @@
->  struct iio_dma_buffer_queue;
->  struct iio_dma_buffer_ops;
->  struct device;
-> +struct dma_buf;
->  
->  /**
->   * enum iio_block_state - State of a struct iio_dma_buffer_block
-> @@ -39,8 +39,8 @@ enum iio_block_state {
->   * @vaddr: Virutal address of the blocks memory
->   * @phys_addr: Physical address of the blocks memory
->   * @queue: Parent DMA buffer queue
-> - * @kref: kref used to manage the lifetime of block
->   * @state: Current state of the block
-> + * @dmabuf: Underlying DMABUF object
->   */
->  struct iio_dma_buffer_block {
->  	/* May only be accessed by the owner of the block */
-> @@ -56,13 +56,13 @@ struct iio_dma_buffer_block {
->  	size_t size;
->  	struct iio_dma_buffer_queue *queue;
->  
-> -	/* Must not be accessed outside the core. */
-> -	struct kref kref;
->  	/*
->  	 * Must not be accessed outside the core. Access needs to hold
->  	 * queue->list_lock if the block is not owned by the core.
->  	 */
->  	enum iio_block_state state;
-> +
-> +	struct dma_buf *dmabuf;
->  };
->  
->  /**
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gTW9uLCBNYXIgMjgsIDIwMjIgYXQgNzozNiBBTSBEYW5pZWwgVmV0dGVyIDxkYW5pZWxAZmZ3
+bGwuY2g+IHdyb3RlOg0KPg0KPiBPbiBNb24sIE1hciAyOCwgMjAyMiBhdCAwMzo1OTo0M0FNICsw
+MDAwLCBULkouIE1lcmNpZXIgd3JvdGU6DQo+ID4gRnJvbTogSHJpZHlhIFZhbHNhcmFqdSA8aHJp
+ZHlhQGdvb2dsZS5jb20+DQo+ID4NCj4gPiBBbGwgRE1BIGhlYXBzIG5vdyByZWdpc3RlciBhIG5l
+dyBHUFUgY2dyb3VwIGRldmljZSB1cG9uIGNyZWF0aW9uLCBhbmQgdGhlDQo+ID4gc3lzdGVtX2hl
+YXAgbm93IGV4cG9ydHMgYnVmZmVycyBhc3NvY2lhdGVkIHdpdGggaXRzIEdQVSBjZ3JvdXAgZGV2
+aWNlIGZvcg0KPiA+IHRyYWNraW5nIHB1cnBvc2VzLg0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTog
+SHJpZHlhIFZhbHNhcmFqdSA8aHJpZHlhQGdvb2dsZS5jb20+DQo+ID4gU2lnbmVkLW9mZi1ieTog
+VC5KLiBNZXJjaWVyIDx0am1lcmNpZXJAZ29vZ2xlLmNvbT4NCj4gPg0KPiA+IC0tLQ0KPiA+IHYz
+IGNoYW5nZXMNCj4gPiBVc2UgbW9yZSBjb21tb24gZHVhbCBhdXRob3IgY29tbWl0IG1lc3NhZ2Ug
+Zm9ybWF0IHBlciBKb2huIFN0dWx0ei4NCj4gPg0KPiA+IHYyIGNoYW5nZXMNCj4gPiBNb3ZlIGRt
+YS1idWYgY2dyb3VwIGNoYXJnZSB0cmFuc2ZlciBmcm9tIGEgZG1hX2J1Zl9vcCBkZWZpbmVkIGJ5
+IGV2ZXJ5DQo+ID4gaGVhcCB0byBhIHNpbmdsZSBkbWEtYnVmIGZ1bmN0aW9uIGZvciBhbGwgaGVh
+cHMgcGVyIERhbmllbCBWZXR0ZXIgYW5kDQo+ID4gQ2hyaXN0aWFuIEvDtm5pZy4NCj4NCj4gQXBv
+bG9naWVzIGZvciBiZWluZyBvdXQgb2YgdGhlIGxvb3AgcXVpdGUgYSBiaXQuIEkgc2Nyb2xsZWQg
+dGhyb3VnaCB0aGlzDQo+IGFsbCBhbmQgSSB0aGluayBpdCBsb29rcyBnb29kIHRvIGdldCBnb2lu
+Zy4NCj4NCj4gVGhlIG9ubHkgdGhpbmcgSSBoYXZlIGlzIHdoZXRoZXIgd2Ugc2hvdWxkIG1vdmUg
+dGhlIGNncm91cCBjb250cm9sbGVycyBvdXQNCj4gb2YgZG1hLWJ1ZiBoZWFwcywgc2luY2UgdGhh
+dCdzIHJhdGhlciBhbmRyb2lkIGNlbnRyaWMuIEUuZy4NCj4gLSBhIHN5c3RlbSBncHVjZ19kZXZp
+Y2Ugd2hpY2ggaXMgdXNlZCBieSBhbGwgdGhlIHZhcmlvdXMgc2luZ2xlIHBhZ2UNCj4gICBhbGxv
+Y2F0b3JzIChkbWEtYnVmIGhlYXAgYnV0IGFsc28gc2htZW0gaGVscGVycyBhbmQgcmVhbGx5IGFu
+eXRoaW5nDQo+ICAgZWxzZSkNCj4gLSBzYW1lIGZvciBjbWEsIGFnYWluIGJvdGggZm9yIGRtYS1i
+dWYgaGVhcHMgYW5kIGFsc28gZm9yIHRoZSBnZW0gY21hDQo+ICAgaGVscGVycyBpbiBkcm0NCg0K
+VGhhbmtzIERhbmllbCwgaW4gZ2VuZXJhbCB0aGF0IG1ha2VzIHNlbnNlIHRvIG1lIGFzIGFuIGFw
+cHJvYWNoIHRvDQptYWtpbmcgdGhpcyBtb3JlIHVuaXZlcnNhbC4gSG93ZXZlciBmb3IgdGhlIEFu
+ZHJvaWQgY2FzZSBJJ20gbm90IHN1cmUNCmlmIHRoZSBwYXJ0IGFib3V0IGEgc2luZ2xlIHN5c3Rl
+bSBncHVjZ19kZXZpY2Ugd291bGQgYmUgc3VmZmljaWVudCwNCmJlY2F1c2UgdGhlcmUgYXJlIGF0
+IGxlYXN0IDEyIGRpZmZlcmVudCBncmFwaGljcyByZWxhdGVkIGhlYXBzIHRoYXQNCmNvdWxkIHBv
+dGVudGlhbGx5IGJlIGFjY291bnRlZC9saW1pdGVkIGRpZmZlcmVudGx5LiBbMV0gIFNvIHRoYXQN
+CnJhaXNlcyB0aGUgcXVlc3Rpb24gb2YgaG93IGZpbmUgZ3JhaW5lZCB3ZSB3YW50IHRoaXMgdG8g
+YmUuLi4gSSB0ZW5kDQp0b3dhcmRzIHNlcGFyYXRpbmcgdGhlbSBhbGwsIGJ1dCBJIGhhdmVuJ3Qg
+Zm9ybWVkIGEgc3Ryb25nIG9waW5pb24NCmFib3V0IHRoaXMgYXQgdGhlIG1vbWVudC4gSXQgc291
+bmRzIGxpa2UgeW91IGFyZSBpbiBmYXZvciBvZiBhDQpzbWFsbGVyLCBtb3JlIHJpZ2lkbHkgZGVm
+aW5lZCBzZXQgb2YgdGhlbT8gRWl0aGVyIHdheSwgd2UgbmVlZCB0byBhZGQNCmNvZGUgZm9yIGFj
+Y291bnRpbmcgYXQgcG9pbnRzIHdoZXJlIHdlIGtub3cgbWVtb3J5IGlzIHNwZWNpZmljYWxseSBm
+b3INCmdyYXBoaWNzIHVzZSBhbmQgbm90IHNvbWV0aGluZyBlbHNlIHJpZ2h0PyAoSS5FLiBXaGV0
+aGVyIGl0IGlzIGENCmRtYS1idWYgaGVhcCBvciBzb21ld2hlcmUgbGlrZSBkcm1fZ2VtX29iamVj
+dF9pbml0LikgU28gSUlVQyB0aGUgb25seQ0KcXVlc3Rpb24gaXMgd2hhdCB0byB1c2UgZm9yIHRo
+ZSBncHVjZ19kZXZpY2UocykgYXQgdGhlc2UgbG9jYXRpb25zLg0KDQpbMV0gaHR0cHM6Ly9jcy5h
+bmRyb2lkLmNvbS9hbmRyb2lkL3BsYXRmb3JtL3N1cGVycHJvamVjdC8rL21hc3RlcjpoYXJkd2Fy
+ZS9nb29nbGUvZ3JhcGhpY3MvY29tbW9uL2xpYmlvbi9pb24uY3BwO2w9MzktNTANCg0KPg0KPiBP
+dGhlcndpc2UgdGhpcyB3aWxsIG9ubHkgd29yayBvbiBub24tdXBzdHJlYW0gYW5kcm9pZCB3aGVy
+ZSBncHUgZHJpdmVycw0KPiBhbGxvY2F0ZSBldmVyeXRoaW5nIGZyb20gZG1hLWJ1ZiBoZWFwLiBJ
+ZiB5b3UgdXNlIHNvbWV0aGluZyBsaWtlIHRoZSB4ODYNCj4gYW5kcm9pZCBwcm9qZWN0IHdpdGgg
+bWVzYSBkcml2ZXJzLCB0aGVuIGRyaXZlci1pbnRlcm5hbCBidWZmZXJzIHdpbGwgYmUNCj4gYWxs
+b2NhdGVkIHRocm91Z2ggZ2VtIGFuZCBub3QgdGhyb3VnaCBkbWEtYnVmIGhlYXBzLiBPciBhdCBs
+ZWFzdCBJIHRoaW5rDQo+IHRoYXQncyBob3cgaXQgd29ya3MuDQo+DQo+IEJ1dCBhbHNvIG1laCwg
+d2UgY2FuIGZpeCB0aGlzIGZhaXJseSBlYXNpbHkgbGF0ZXIgb24gYnkgYWRkaW5nIHRoZXNlDQo+
+IHN0YW5kYXJkIGdwdWNnX2RldiBzb213ZWhlcmUgd2l0aCBhIGJpdCBvZiBrZXJuZWxkb2MuDQoN
+ClRoaXMgaXMgd2hhdCBJIHdhcyB0aGlua2luZyB3b3VsZCBoYXBwZW4gbmV4dCwgYnV0IElESyBp
+ZiBhbnlvbmUgc2Vlcw0KYSBtb3JlIGNlbnRyYWwgcGxhY2UgdG8gZG8gdGhpcyB0eXBlIG9mIHVz
+ZS1zcGVjaWZpYyBhY2NvdW50aW5nLg0KDQo+DQo+IEFueXdheSBoYXMgbXkgYWxsIG15IGFjaywg
+YnV0IGRvbid0IGNvdW50IHRoaXMgYXMgbXkgaW4tZGVwdGggcmV2aWV3IDotKQ0KPiAtRGFuaWVs
+DQoNClRoYW5rcyBhZ2FpbiBmb3IgdGFraW5nIGEgbG9vayENCj4NCj4gPiAtLS0NCj4gPiAgZHJp
+dmVycy9kbWEtYnVmL2RtYS1oZWFwLmMgICAgICAgICAgfCAyNyArKysrKysrKysrKysrKysrKysr
+KysrKysrKysNCj4gPiAgZHJpdmVycy9kbWEtYnVmL2hlYXBzL3N5c3RlbV9oZWFwLmMgfCAgMyAr
+KysNCj4gPiAgaW5jbHVkZS9saW51eC9kbWEtaGVhcC5oICAgICAgICAgICAgfCAxMSArKysrKysr
+KysrKw0KPiA+ICAzIGZpbGVzIGNoYW5nZWQsIDQxIGluc2VydGlvbnMoKykNCj4gPg0KPiA+IGRp
+ZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvZG1hLWhlYXAuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9k
+bWEtaGVhcC5jDQo+ID4gaW5kZXggOGY1ODQ4YWExNDRmLi44ODUwNzI0Mjc3NzUgMTAwNjQ0DQo+
+ID4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1oZWFwLmMNCj4gPiArKysgYi9kcml2ZXJzL2Rt
+YS1idWYvZG1hLWhlYXAuYw0KPiA+IEBAIC03LDYgKzcsNyBAQA0KPiA+ICAgKi8NCj4gPg0KPiA+
+ICAjaW5jbHVkZSA8bGludXgvY2Rldi5oPg0KPiA+ICsjaW5jbHVkZSA8bGludXgvY2dyb3VwX2dw
+dS5oPg0KPiA+ICAjaW5jbHVkZSA8bGludXgvZGVidWdmcy5oPg0KPiA+ICAjaW5jbHVkZSA8bGlu
+dXgvZGV2aWNlLmg+DQo+ID4gICNpbmNsdWRlIDxsaW51eC9kbWEtYnVmLmg+DQo+ID4gQEAgLTMx
+LDYgKzMyLDcgQEANCj4gPiAgICogQGhlYXBfZGV2dCAgICAgICAgICAgICAgICBoZWFwIGRldmlj
+ZSBub2RlDQo+ID4gICAqIEBsaXN0ICAgICAgICAgICAgIGxpc3QgaGVhZCBjb25uZWN0aW5nIHRv
+IGxpc3Qgb2YgaGVhcHMNCj4gPiAgICogQGhlYXBfY2RldiAgICAgICAgICAgICAgICBoZWFwIGNo
+YXIgZGV2aWNlDQo+ID4gKyAqIEBncHVjZ19kZXYgICAgICAgICAgICAgICAgZ3B1IGNncm91cCBk
+ZXZpY2UgZm9yIG1lbW9yeSBhY2NvdW50aW5nDQo+ID4gICAqDQo+ID4gICAqIFJlcHJlc2VudHMg
+YSBoZWFwIG9mIG1lbW9yeSBmcm9tIHdoaWNoIGJ1ZmZlcnMgY2FuIGJlIG1hZGUuDQo+ID4gICAq
+Lw0KPiA+IEBAIC00MSw2ICs0Myw5IEBAIHN0cnVjdCBkbWFfaGVhcCB7DQo+ID4gICAgICAgZGV2
+X3QgaGVhcF9kZXZ0Ow0KPiA+ICAgICAgIHN0cnVjdCBsaXN0X2hlYWQgbGlzdDsNCj4gPiAgICAg
+ICBzdHJ1Y3QgY2RldiBoZWFwX2NkZXY7DQo+ID4gKyNpZmRlZiBDT05GSUdfQ0dST1VQX0dQVQ0K
+PiA+ICsgICAgIHN0cnVjdCBncHVjZ19kZXZpY2UgZ3B1Y2dfZGV2Ow0KPiA+ICsjZW5kaWYNCj4g
+PiAgfTsNCj4gPg0KPiA+ICBzdGF0aWMgTElTVF9IRUFEKGhlYXBfbGlzdCk7DQo+ID4gQEAgLTIx
+Niw2ICsyMjEsMjYgQEAgY29uc3QgY2hhciAqZG1hX2hlYXBfZ2V0X25hbWUoc3RydWN0IGRtYV9o
+ZWFwICpoZWFwKQ0KPiA+ICAgICAgIHJldHVybiBoZWFwLT5uYW1lOw0KPiA+ICB9DQo+ID4NCj4g
+PiArI2lmZGVmIENPTkZJR19DR1JPVVBfR1BVDQo+ID4gKy8qKg0KPiA+ICsgKiBkbWFfaGVhcF9n
+ZXRfZ3B1Y2dfZGV2KCkgLSBnZXQgc3RydWN0IGdwdWNnX2RldmljZSBmb3IgdGhlIGhlYXAuDQo+
+ID4gKyAqIEBoZWFwOiBETUEtSGVhcCB0byBnZXQgdGhlIGdwdWNnX2RldmljZSBzdHJ1Y3QgZm9y
+Lg0KPiA+ICsgKg0KPiA+ICsgKiBSZXR1cm5zOg0KPiA+ICsgKiBUaGUgZ3B1Y2dfZGV2aWNlIHN0
+cnVjdCBmb3IgdGhlIGhlYXAuIE5VTEwgaWYgdGhlIEdQVSBjZ3JvdXAgY29udHJvbGxlciBpcw0K
+PiA+ICsgKiBub3QgZW5hYmxlZC4NCj4gPiArICovDQo+ID4gK3N0cnVjdCBncHVjZ19kZXZpY2Ug
+KmRtYV9oZWFwX2dldF9ncHVjZ19kZXYoc3RydWN0IGRtYV9oZWFwICpoZWFwKQ0KPiA+ICt7DQo+
+ID4gKyAgICAgcmV0dXJuICZoZWFwLT5ncHVjZ19kZXY7DQo+ID4gK30NCj4gPiArI2Vsc2UgLyog
+Q09ORklHX0NHUk9VUF9HUFUgKi8NCj4gPiArc3RydWN0IGdwdWNnX2RldmljZSAqZG1hX2hlYXBf
+Z2V0X2dwdWNnX2RldihzdHJ1Y3QgZG1hX2hlYXAgKmhlYXApDQo+ID4gK3sNCj4gPiArICAgICBy
+ZXR1cm4gTlVMTDsNCj4gPiArfQ0KPiA+ICsjZW5kaWYgLyogQ09ORklHX0NHUk9VUF9HUFUgKi8N
+Cj4gPiArDQo+ID4gIHN0cnVjdCBkbWFfaGVhcCAqZG1hX2hlYXBfYWRkKGNvbnN0IHN0cnVjdCBk
+bWFfaGVhcF9leHBvcnRfaW5mbyAqZXhwX2luZm8pDQo+ID4gIHsNCj4gPiAgICAgICBzdHJ1Y3Qg
+ZG1hX2hlYXAgKmhlYXAsICpoLCAqZXJyX3JldDsNCj4gPiBAQCAtMjg4LDYgKzMxMyw4IEBAIHN0
+cnVjdCBkbWFfaGVhcCAqZG1hX2hlYXBfYWRkKGNvbnN0IHN0cnVjdCBkbWFfaGVhcF9leHBvcnRf
+aW5mbyAqZXhwX2luZm8pDQo+ID4gICAgICAgbGlzdF9hZGQoJmhlYXAtPmxpc3QsICZoZWFwX2xp
+c3QpOw0KPiA+ICAgICAgIG11dGV4X3VubG9jaygmaGVhcF9saXN0X2xvY2spOw0KPiA+DQo+ID4g
+KyAgICAgZ3B1Y2dfcmVnaXN0ZXJfZGV2aWNlKGRtYV9oZWFwX2dldF9ncHVjZ19kZXYoaGVhcCks
+IGV4cF9pbmZvLT5uYW1lKTsNCj4gPiArDQo+ID4gICAgICAgcmV0dXJuIGhlYXA7DQo+ID4NCj4g
+PiAgZXJyMjoNCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2hlYXBzL3N5c3RlbV9o
+ZWFwLmMgYi9kcml2ZXJzL2RtYS1idWYvaGVhcHMvc3lzdGVtX2hlYXAuYw0KPiA+IGluZGV4IGFi
+N2ZkODk2ZDJjNC4uNzUyYTA1YzNjZmUyIDEwMDY0NA0KPiA+IC0tLSBhL2RyaXZlcnMvZG1hLWJ1
+Zi9oZWFwcy9zeXN0ZW1faGVhcC5jDQo+ID4gKysrIGIvZHJpdmVycy9kbWEtYnVmL2hlYXBzL3N5
+c3RlbV9oZWFwLmMNCj4gPiBAQCAtMzk1LDYgKzM5NSw5IEBAIHN0YXRpYyBzdHJ1Y3QgZG1hX2J1
+ZiAqc3lzdGVtX2hlYXBfYWxsb2NhdGUoc3RydWN0IGRtYV9oZWFwICpoZWFwLA0KPiA+ICAgICAg
+IGV4cF9pbmZvLm9wcyA9ICZzeXN0ZW1faGVhcF9idWZfb3BzOw0KPiA+ICAgICAgIGV4cF9pbmZv
+LnNpemUgPSBidWZmZXItPmxlbjsNCj4gPiAgICAgICBleHBfaW5mby5mbGFncyA9IGZkX2ZsYWdz
+Ow0KPiA+ICsjaWZkZWYgQ09ORklHX0NHUk9VUF9HUFUNCj4gPiArICAgICBleHBfaW5mby5ncHVj
+Z19kZXYgPSBkbWFfaGVhcF9nZXRfZ3B1Y2dfZGV2KGhlYXApOw0KPiA+ICsjZW5kaWYNCj4gPiAg
+ICAgICBleHBfaW5mby5wcml2ID0gYnVmZmVyOw0KPiA+ICAgICAgIGRtYWJ1ZiA9IGRtYV9idWZf
+ZXhwb3J0KCZleHBfaW5mbyk7DQo+ID4gICAgICAgaWYgKElTX0VSUihkbWFidWYpKSB7DQo+ID4g
+ZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvZG1hLWhlYXAuaCBiL2luY2x1ZGUvbGludXgvZG1h
+LWhlYXAuaA0KPiA+IGluZGV4IDBjMDU1NjFjYWQ2ZS4uZTQ0N2E2MWQwNTRlIDEwMDY0NA0KPiA+
+IC0tLSBhL2luY2x1ZGUvbGludXgvZG1hLWhlYXAuaA0KPiA+ICsrKyBiL2luY2x1ZGUvbGludXgv
+ZG1hLWhlYXAuaA0KPiA+IEBAIC0xMCw2ICsxMCw3IEBADQo+ID4gICNkZWZpbmUgX0RNQV9IRUFQ
+U19IDQo+ID4NCj4gPiAgI2luY2x1ZGUgPGxpbnV4L2NkZXYuaD4NCj4gPiArI2luY2x1ZGUgPGxp
+bnV4L2Nncm91cF9ncHUuaD4NCj4gPiAgI2luY2x1ZGUgPGxpbnV4L3R5cGVzLmg+DQo+ID4NCj4g
+PiAgc3RydWN0IGRtYV9oZWFwOw0KPiA+IEBAIC01OSw2ICs2MCwxNiBAQCB2b2lkICpkbWFfaGVh
+cF9nZXRfZHJ2ZGF0YShzdHJ1Y3QgZG1hX2hlYXAgKmhlYXApOw0KPiA+ICAgKi8NCj4gPiAgY29u
+c3QgY2hhciAqZG1hX2hlYXBfZ2V0X25hbWUoc3RydWN0IGRtYV9oZWFwICpoZWFwKTsNCj4gPg0K
+PiA+ICsvKioNCj4gPiArICogZG1hX2hlYXBfZ2V0X2dwdWNnX2RldigpIC0gZ2V0IGEgcG9pbnRl
+ciB0byB0aGUgc3RydWN0IGdwdWNnX2RldmljZSBmb3IgdGhlDQo+ID4gKyAqIGhlYXAuDQo+ID4g
+KyAqIEBoZWFwOiBETUEtSGVhcCB0byByZXRyaWV2ZSBncHVjZ19kZXZpY2UgZm9yLg0KPiA+ICsg
+Kg0KPiA+ICsgKiBSZXR1cm5zOg0KPiA+ICsgKiBUaGUgZ3B1Y2dfZGV2aWNlIHN0cnVjdCBmb3Ig
+dGhlIGhlYXAuDQo+ID4gKyAqLw0KPiA+ICtzdHJ1Y3QgZ3B1Y2dfZGV2aWNlICpkbWFfaGVhcF9n
+ZXRfZ3B1Y2dfZGV2KHN0cnVjdCBkbWFfaGVhcCAqaGVhcCk7DQo+ID4gKw0KPiA+ICAvKioNCj4g
+PiAgICogZG1hX2hlYXBfYWRkIC0gYWRkcyBhIGhlYXAgdG8gZG1hYnVmIGhlYXBzDQo+ID4gICAq
+IEBleHBfaW5mbzogICAgICAgICAgICAgICAgaW5mb3JtYXRpb24gbmVlZGVkIHRvIHJlZ2lzdGVy
+IHRoaXMgaGVhcA0KPiA+IC0tDQo+ID4gMi4zNS4xLjEwMjEuZzM4MTEwMWIwNzUtZ29vZw0KPiA+
+DQo+DQo+IC0tDQo+IERhbmllbCBWZXR0ZXINCj4gU29mdHdhcmUgRW5naW5lZXIsIEludGVsIENv
+cnBvcmF0aW9uDQo+IGh0dHA6Ly9ibG9nLmZmd2xsLmNoDQpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBs
+aW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFp
+bCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
