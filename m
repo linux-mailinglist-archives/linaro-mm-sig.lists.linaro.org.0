@@ -2,147 +2,327 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0A4B4EAEBD
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 15:49:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CAA484EAF0A
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 16:07:31 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E71473EC15
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 13:49:05 +0000 (UTC)
-Received: from mail-ej1-f43.google.com (mail-ej1-f43.google.com [209.85.218.43])
-	by lists.linaro.org (Postfix) with ESMTPS id 958C53ECA3
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 15 Mar 2022 19:02:48 +0000 (UTC)
-Received: by mail-ej1-f43.google.com with SMTP id bg10so43612580ejb.4
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 15 Mar 2022 12:02:48 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id F2AC53EC16
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 14:07:30 +0000 (UTC)
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
+	by lists.linaro.org (Postfix) with ESMTPS id 227D33EBF6
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 14:07:27 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id n35so10380766wms.5
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 07:07:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=nYOjHF+WhaOll744zl3KXczQ6UnybRfVr7cW3I5uN/U=;
-        b=eWq9aQSnpFSM7gGPtqgzIwr8bb/qKsDMvo0mIbS4s59AMIIHEMyCDMwhpLWRS+EYBR
-         qN4oTEZNXWPjiFCM5wbN4L3FVB0yMfHlzKy9DLlhHVCdkUAg+H8m96o6+l6phOAtZZtL
-         HqEaabMV1A231GA5THyiGjQn+CcdPV6Wcj7+UPW4PCAGWku/81HP+8C5q//5lWvhO0Pu
-         3zeib+NRZoI9eWeTsoj34Li0T9JVhg3Z1kUYOR1XGxD8A2nRmcx8ve9PFlZCqJIC6N4E
-         zEz1m0vSJoc3+NJsHrbvJr8ATMwQ+P3zv+QChYRQcRSYL4oNsBWZ06rrB2G0G0fVIJ1p
-         NQSA==
+        d=ffwll.ch; s=google;
+        h=date:from:to:cc:subject:message-id:mail-followup-to:references
+         :mime-version:content-disposition:content-transfer-encoding
+         :in-reply-to;
+        bh=wO+KuIhwNONjIP1+Omeq6F8wrHiYWSfSBngRsB9GXrY=;
+        b=BrecYWhHjxfGo6Ezo+gQnrlHVZTjI9Wi/uxDbXlwVRz85R5dLoKTzNI2MC2GX5Dv/G
+         mlTmo8D6Fidj7ZmFDBVG2bjgyGa5lR7Ha/V1+AcbwIHpzuS0W560NQS5EwtFqdcsxZfN
+         XvPWJ6QgGZjfSEuSK5+flPHypRYd7ejLLe7rA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=nYOjHF+WhaOll744zl3KXczQ6UnybRfVr7cW3I5uN/U=;
-        b=v5en4wbweNMCe/TEFuo5gdt5t0BMEQ9aKOAWPsASSM4tP1hPhZXxcL7gpf+0eeFtRx
-         xCpUp0XWvASPiNF4ijSsOg8JRS/vpjOUwDPKT47oBkoCFmU9AITPDxSOMTgJUzFIelsG
-         3i82LLYOZ2KLdEUfG1pye30GyjctCYIYfwZid4Xg/+6icx0endCSZrRULWq6AuIJ9WQp
-         IiBsuUm7vK9ihUq7wp6Oy3c5fm49dKTrYqfajWxQGF93xJwy1fg+dhduCEpbdDXjR+5f
-         wvgfu3O6GwjR1CQ+PzkgrqNO+fj8etiZnoT9BIWjox30VCjciUJIsaExLS0ydwTR1xBS
-         paDw==
-X-Gm-Message-State: AOAM5301pingFADNz9QSBh7hR/wa8s5cowW+5MHhHYawp8Ad0XxF/pM4
-	6BYN2fmIF2dxOxo47FfmsFXaDjSsiqr388O7e5Er7w==
-X-Google-Smtp-Source: ABdhPJxRVh2ZUD0Nbieh2mZpcZVRDFfmA10fIZydckRgsnzTb2ustxoM9NqZuPCgmtI1mueDRq1Ne12Wp4MutQ+KdLw=
-X-Received: by 2002:a17:907:7f2a:b0:6d6:df12:7f57 with SMTP id
- qf42-20020a1709077f2a00b006d6df127f57mr23761361ejc.122.1647370967391; Tue, 15
- Mar 2022 12:02:47 -0700 (PDT)
+        h=x-gm-message-state:date:from:to:cc:subject:message-id
+         :mail-followup-to:references:mime-version:content-disposition
+         :content-transfer-encoding:in-reply-to;
+        bh=wO+KuIhwNONjIP1+Omeq6F8wrHiYWSfSBngRsB9GXrY=;
+        b=yJm5GRIquvPIG1gvaip9A9Xk2Q+4+1GDHFKMewlz5wCS0SPrMFxwdG1VaPNacqhTID
+         81e5ldT5CGviS/EEPBruHdddg1UgjP9IrnY7UlHHflwQ1a67Yv2GYDiyEyLc2B+OxAkb
+         9VIS6ftbt9/RLkMJ3ocVuKZaHAiapgOiUf71GHsy2tm49661c59vAZzqiSpG+7/rON9g
+         lqVjsjExGYOOgLkvLrMc7Pfo19Hgs6++2xOCLUBDChmU9rKyjNqCJpzPI0uLwemf5USO
+         HHTh4VHJwSqyMsc3m8houPZDDpsig0fTNZM2IQhchds5mfqUlBC9GQHz9vMcYEPKGIdB
+         G8Ew==
+X-Gm-Message-State: AOAM533tBlxXHOxxt9JHkp9f3mWm+lg0r9Io5YFQ3goWb0zCvo6Oc+AC
+	vblV/zuTdPofu9lpQtb9tzUxpg==
+X-Google-Smtp-Source: ABdhPJyo7ea/nZXrlU3akF3tdf273o2t+KHlhil6iDV+KBGasrEr55RuNkwiRURTypDNaCbBNruEWw==
+X-Received: by 2002:a05:600c:4241:b0:38c:ec66:7c8f with SMTP id r1-20020a05600c424100b0038cec667c8fmr7130162wmm.179.1648562843585;
+        Tue, 29 Mar 2022 07:07:23 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id v4-20020adfa1c4000000b00205c6dfc41esm6194260wrv.18.2022.03.29.07.07.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 29 Mar 2022 07:07:23 -0700 (PDT)
+Date: Tue, 29 Mar 2022 16:07:21 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Paul Cercueil <paul@crapouillou.net>
+Message-ID: <YkMSmcQy1sKQJ5rJ@phenom.ffwll.local>
+Mail-Followup-To: Paul Cercueil <paul@crapouillou.net>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Michael Hennerich <Michael.Hennerich@analog.com>,
+	Jonathan Corbet <corbet@lwn.net>, linux-iio@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+	Alexandru Ardelean <ardeleanalex@gmail.com>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+References: <20220207125933.81634-1-paul@crapouillou.net>
+ <20220207130140.81891-1-paul@crapouillou.net>
+ <20220207130140.81891-2-paul@crapouillou.net>
+ <YkLJU7Pp98CPIHfY@phenom.ffwll.local>
+ <Z63I9R.MKYUKBH4V8L41@crapouillou.net>
 MIME-Version: 1.0
-References: <20220309165222.2843651-1-tjmercier@google.com>
- <20220309165222.2843651-8-tjmercier@google.com> <CAHRSSEy5_h9LJB4q5_OJA7fSq=ROo68UaK+hdPz-Vj-wac1Qhg@mail.gmail.com>
- <CABdmKX1G0Rwmz7=BP1ER+TmtrnkGiE0nROsPTHKxnj=6bHhY3Q@mail.gmail.com> <a365a5f6c7864a879b133b99d1f43fb2@AcuMS.aculab.com>
-In-Reply-To: <a365a5f6c7864a879b133b99d1f43fb2@AcuMS.aculab.com>
-From: "T.J. Mercier" <tjmercier@google.com>
-Date: Tue, 15 Mar 2022 12:02:35 -0700
-Message-ID: <CABdmKX3NEm8+pDBj2VG-r8E91CVHwQ+gGcKhG8D=5MgWcgincg@mail.gmail.com>
-To: David Laight <David.Laight@aculab.com>
-X-MailFrom: tjmercier@google.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: OJTUAQIOWYTM35ZJHY6I3NLE5MVD5OE6
-X-Message-ID-Hash: OJTUAQIOWYTM35ZJHY6I3NLE5MVD5OE6
-X-Mailman-Approved-At: Tue, 29 Mar 2022 13:48:31 +0000
-CC: Todd Kjos <tkjos@google.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Jonathan Corbet <corbet@lwn.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>, Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Benjamin Gaignard <benjamin.gaignard@linaro.org>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>, Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>, Shuah Khan <shuah@kernel.org>, Kalesh Singh
-  <kaleshsingh@google.com>, "Kenny.Ho@amd.com" <Kenny.Ho@amd.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "cgroups@vger.kernel.org" <cgroups@vger.kernel.org>, "linux-kselftest@vger.kernel.org" <linux-kselftest@vger.kernel.org>
+Content-Disposition: inline
+In-Reply-To: <Z63I9R.MKYUKBH4V8L41@crapouillou.net>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
+Message-ID-Hash: LJNN54GLL2BHJWRCLVCGLUM6WBLR7NAF
+X-Message-ID-Hash: LJNN54GLL2BHJWRCLVCGLUM6WBLR7NAF
+X-MailFrom: daniel@ffwll.ch
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Daniel Vetter <daniel@ffwll.ch>, Jonathan Cameron <jic23@kernel.org>, Michael Hennerich <Michael.Hennerich@analog.com>, Jonathan Corbet <corbet@lwn.net>, linux-iio@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Alexandru Ardelean <ardeleanalex@gmail.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v3 7/8] binder: use __kernel_pid_t and __kernel_uid_t for userspace
+Subject: [Linaro-mm-sig] Re: [PATCH v2 12/12] Documentation: iio: Document high-speed DMABUF based API
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OJTUAQIOWYTM35ZJHY6I3NLE5MVD5OE6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LJNN54GLL2BHJWRCLVCGLUM6WBLR7NAF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 15, 2022 at 12:56 AM David Laight <David.Laight@aculab.com> wrote:
->
-> From: T.J. Mercier
-> > Sent: 14 March 2022 23:45
-> >
-> > On Thu, Mar 10, 2022 at 11:33 AM Todd Kjos <tkjos@google.com> wrote:
-> > >
-> > > On Wed, Mar 9, 2022 at 8:52 AM T.J. Mercier <tjmercier@google.com> wrote:
-> > > >
-> > > > The kernel interface should use types that the kernel defines instead of
-> > > > pid_t and uid_t, whose definiton is owned by libc. This fixes the header
-> > > > so that it can be included without first including sys/types.h.
-> > > >
-> > > > Signed-off-by: T.J. Mercier <tjmercier@google.com>
-> > > > ---
-> > > >  include/uapi/linux/android/binder.h | 4 ++--
-> > > >  1 file changed, 2 insertions(+), 2 deletions(-)
-> > > >
-> > > > diff --git a/include/uapi/linux/android/binder.h b/include/uapi/linux/android/binder.h
-> > > > index 169fd5069a1a..aa28454dbca3 100644
-> > > > --- a/include/uapi/linux/android/binder.h
-> > > > +++ b/include/uapi/linux/android/binder.h
-> > > > @@ -289,8 +289,8 @@ struct binder_transaction_data {
-> > > >
-> > > >         /* General information about the transaction. */
-> > > >         __u32           flags;
-> > > > -       pid_t           sender_pid;
-> > > > -       uid_t           sender_euid;
-> > > > +       __kernel_pid_t  sender_pid;
-> > > > +       __kernel_uid_t  sender_euid;
-> > >
-> > > Are we guaranteed that this does not affect the UAPI at all? Userspace
-> > > code using this definition will have to run with kernels using the old
-> > > definition and visa-versa.
-> >
-> > A standards compliant userspace should be expecting a signed integer
-> > type here. So the only way I can think userspace would be affected is
-> > if:
-> > 1) pid_t is a long AND
-> > 2) sizeof(long) > sizeof(int) AND
-> > 3) Consumers of the pid_t definition actually attempt to mutate the
-> > result to make use of extra bits in the variable (which are not there)
->
-> Or the userspace headers have a 16bit pid_t.
+On Tue, Mar 29, 2022 at 10:47:23AM +0100, Paul Cercueil wrote:
+> Hi Daniel,
+>=20
+> Le mar., mars 29 2022 at 10:54:43 +0200, Daniel Vetter <daniel@ffwll.ch> a
+> =E9crit :
+> > On Mon, Feb 07, 2022 at 01:01:40PM +0000, Paul Cercueil wrote:
+> > >  Document the new DMABUF based API.
+> > >=20
+> > >  v2: - Explicitly state that the new interface is optional and is
+> > >        not implemented by all drivers.
+> > >      - The IOCTLs can now only be called on the buffer FD returned by
+> > >        IIO_BUFFER_GET_FD_IOCTL.
+> > >      - Move the page up a bit in the index since it is core stuff
+> > > and not
+> > >        driver-specific.
+> > >=20
+> > >  Signed-off-by: Paul Cercueil <paul@crapouillou.net>
+> > >  ---
+> > >   Documentation/driver-api/dma-buf.rst |  2 +
+> > >   Documentation/iio/dmabuf_api.rst     | 94
+> > > ++++++++++++++++++++++++++++
+> > >   Documentation/iio/index.rst          |  2 +
+> > >   3 files changed, 98 insertions(+)
+> > >   create mode 100644 Documentation/iio/dmabuf_api.rst
+> > >=20
+> > >  diff --git a/Documentation/driver-api/dma-buf.rst
+> > > b/Documentation/driver-api/dma-buf.rst
+> > >  index 2cd7db82d9fe..d3c9b58d2706 100644
+> > >  --- a/Documentation/driver-api/dma-buf.rst
+> > >  +++ b/Documentation/driver-api/dma-buf.rst
+> > >  @@ -1,3 +1,5 @@
+> > >  +.. _dma-buf:
+> > >  +
+> > >   Buffer Sharing and Synchronization
+> > >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > >=20
+> > >  diff --git a/Documentation/iio/dmabuf_api.rst
+> > > b/Documentation/iio/dmabuf_api.rst
+> > >  new file mode 100644
+> > >  index 000000000000..43bb2c1b9fdc
+> > >  --- /dev/null
+> > >  +++ b/Documentation/iio/dmabuf_api.rst
+> > >  @@ -0,0 +1,94 @@
+> > >  +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > >  +High-speed DMABUF interface for IIO
+> > >  +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > >  +
+> > >  +1. Overview
+> > >  +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > >  +
+> > >  +The Industrial I/O subsystem supports access to buffers through a
+> > > file-based
+> > >  +interface, with read() and write() access calls through the IIO
+> > > device's dev
+> > >  +node.
+> > >  +
+> > >  +It additionally supports a DMABUF based interface, where the
+> > > userspace
+> > >  +application can allocate and append DMABUF objects to the buffer's
+> > > queue.
+> > >  +This interface is however optional and is not available in all
+> > > drivers.
+> > >  +
+> > >  +The advantage of this DMABUF based interface vs. the read()
+> > >  +interface, is that it avoids an extra copy of the data between the
+> > >  +kernel and userspace. This is particularly useful for high-speed
+> > >  +devices which produce several megabytes or even gigabytes of data
+> > > per
+> > >  +second.
+> > >  +
+> > >  +The data in this DMABUF interface is managed at the granularity of
+> > >  +DMABUF objects. Reducing the granularity from byte level to block
+> > > level
+> > >  +is done to reduce the userspace-kernelspace synchronization
+> > > overhead
+> > >  +since performing syscalls for each byte at a few Mbps is just not
+> > >  +feasible.
+> > >  +
+> > >  +This of course leads to a slightly increased latency. For this
+> > > reason an
+> > >  +application can choose the size of the DMABUFs as well as how many
+> > > it
+> > >  +allocates. E.g. two DMABUFs would be a traditional double buffering
+> > >  +scheme. But using a higher number might be necessary to avoid
+> > >  +underflow/overflow situations in the presence of scheduling
+> > > latencies.
+> >=20
+> > So this reads a lot like reinventing io-uring with pre-registered
+> > O_DIRECT
+> > memory ranges. Except it's using dma-buf and hand-rolling a lot of
+> > pieces
+> > instead of io-uring and O_DIRECT.
+>=20
+> I don't see how io_uring would help us. It's an async I/O framework, does=
+ it
+> allow us to access a kernel buffer without copying the data? Does it allow
+> us to zero-copy the data to a network interface?
 
-Since the kernel uses an int for PIDs, wouldn't a 16 bit pid_t already
-be potentially broken (overflow) on systems where int is not 16 bits?
-On systems where int is 16 bits, there is no change here except to
-achieve uniform use of __kernel_pid_t in the kernel headers and fix
-the include problem.
+With networking, do you mean rdma, or some other kind of networking?
+Anything else than rdma doesn't support dma-buf, and I don't think it will
+likely ever do so. Similar it's really tricky to glue dma-buf support into
+the block layer.
 
->
-> I can't help feeling that uapi headers should only use explicit
-> fixed sized types.
-> There is no point indirecting the type names - the sizes still
-> can't be changes.
+Wrt io_uring, yes it's async, but that's not the point. The point is that
+with io_uring you pre-register ranges for reads and writes to target,
+which in combination with O_DIRECT, makes it effectively (and efficient!)
+zero-copy. Plus it has full integration with both networking and normal
+file io, which dma-buf just doesn't have.
 
-I think it's still unlikely to be an actual problem. For example there
-are other occasions where a switch like this was made:
-https://github.com/torvalds/linux/commit/694a58e29ef27c4c26f103a9decfd053f94dd34c
-https://github.com/torvalds/linux/commit/269b8fd5d058f2c0da01a42b20315ffc2640d99b
+Like you _cannot_ do zero copy from a dma-buf into a normal file. You
+absolutely can do the same with io_uring.
 
-And also since Binder's only known user is Android through Bionic
-which already expects the type of pid_t to be __kernel_pid_t.
+> > At least if the entire justification for dma-buf support is zero-copy
+> > support between the driver and userspace it's _really_ not the right
+> > tool
+> > for the job. dma-buf is for zero-copy between devices, with cpu access
+> > from userpace (or kernel fwiw) being very much the exception (and often
+> > flat-out not supported at all).
+>=20
+> We want both. Using dma-bufs for the driver/userspace interface is a
+> convenience as we then have a unique API instead of two distinct ones.
+>=20
+> Why should CPU access from userspace be the exception? It works fine for =
+IIO
+> dma-bufs. You keep warning about this being a terrible design, but I simp=
+ly
+> don't see it.
 
+It depends really on what you're trying to do, and there's extremely high
+chances it will simply not work.
 
->
->         David
->
-> -
-> Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
-> Registration No: 1397386 (Wales)
+Unless you want to do zero copy with a gpu, or something which is in that
+ecosystem of accelerators and devices, then dma-buf is probably not what
+you're looking for.
+-Daniel
+
+>=20
+> Cheers,
+> -Paul
+>=20
+> > >  +
+> > >  +2. User API
+> > >  +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> > >  +
+> > >  +``IIO_BUFFER_DMABUF_ALLOC_IOCTL(struct iio_dmabuf_alloc_req *)``
+> > >  +----------------------------------------------------------------
+> > >  +
+> > >  +Each call will allocate a new DMABUF object. The return value (if
+> > > not
+> > >  +a negative errno value as error) will be the file descriptor of
+> > > the new
+> > >  +DMABUF.
+> > >  +
+> > >  +``IIO_BUFFER_DMABUF_ENQUEUE_IOCTL(struct iio_dmabuf *)``
+> > >  +--------------------------------------------------------
+> > >  +
+> > >  +Place the DMABUF object into the queue pending for hardware
+> > > process.
+> > >  +
+> > >  +These two IOCTLs have to be performed on the IIO buffer's file
+> > >  +descriptor, obtained using the `IIO_BUFFER_GET_FD_IOCTL` ioctl.
+> > >  +
+> > >  +3. Usage
+> > >  +=3D=3D=3D=3D=3D=3D=3D=3D
+> > >  +
+> > >  +To access the data stored in a block by userspace the block must be
+> > >  +mapped to the process's memory. This is done by calling mmap() on
+> > > the
+> > >  +DMABUF's file descriptor.
+> > >  +
+> > >  +Before accessing the data through the map, you must use the
+> > >  +DMA_BUF_IOCTL_SYNC(struct dma_buf_sync *) ioctl, with the
+> > >  +DMA_BUF_SYNC_START flag, to make sure that the data is available.
+> > >  +This call may block until the hardware is done with this block.
+> > > Once
+> > >  +you are done reading or writing the data, you must use this ioctl
+> > > again
+> > >  +with the DMA_BUF_SYNC_END flag, before enqueueing the DMABUF to the
+> > >  +kernel's queue.
+> > >  +
+> > >  +If you need to know when the hardware is done with a DMABUF, you
+> > > can
+> > >  +poll its file descriptor for the EPOLLOUT event.
+> > >  +
+> > >  +Finally, to destroy a DMABUF object, simply call close() on its
+> > > file
+> > >  +descriptor.
+> > >  +
+> > >  +For more information about manipulating DMABUF objects, see:
+> > > :ref:`dma-buf`.
+> > >  +
+> > >  +A typical workflow for the new interface is:
+> > >  +
+> > >  +    for block in blocks:
+> > >  +      DMABUF_ALLOC block
+> > >  +      mmap block
+> > >  +
+> > >  +    enable buffer
+> > >  +
+> > >  +    while !done
+> > >  +      for block in blocks:
+> > >  +        DMABUF_ENQUEUE block
+> > >  +
+> > >  +        DMABUF_SYNC_START block
+> > >  +        process data
+> > >  +        DMABUF_SYNC_END block
+> > >  +
+> > >  +    disable buffer
+> > >  +
+> > >  +    for block in blocks:
+> > >  +      close block
+> > >  diff --git a/Documentation/iio/index.rst
+> > > b/Documentation/iio/index.rst
+> > >  index 58b7a4ebac51..669deb67ddee 100644
+> > >  --- a/Documentation/iio/index.rst
+> > >  +++ b/Documentation/iio/index.rst
+> > >  @@ -9,4 +9,6 @@ Industrial I/O
+> > >=20
+> > >      iio_configfs
+> > >=20
+> > >  +   dmabuf_api
+> > >  +
+> > >      ep93xx_adc
+> > >  --
+> > >  2.34.1
+> > >=20
+> >=20
+> > --
+> > Daniel Vetter
+> > Software Engineer, Intel Corporation
+> > http://blog.ffwll.ch
+>=20
+>=20
+
+--=20
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
