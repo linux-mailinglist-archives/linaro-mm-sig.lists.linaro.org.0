@@ -2,327 +2,238 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id CAA484EAF0A
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 16:07:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 643314EAF18
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 16:10:52 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F2AC53EC16
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 14:07:30 +0000 (UTC)
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
-	by lists.linaro.org (Postfix) with ESMTPS id 227D33EBF6
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 14:07:27 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id n35so10380766wms.5
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 07:07:27 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 92D8C3EC08
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 14:10:51 +0000 (UTC)
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com [209.85.221.65])
+	by lists.linaro.org (Postfix) with ESMTPS id ADAA53E80E
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 14:10:47 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id r13so24992167wrr.9
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 07:10:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ffwll.ch; s=google;
         h=date:from:to:cc:subject:message-id:mail-followup-to:references
          :mime-version:content-disposition:content-transfer-encoding
          :in-reply-to;
-        bh=wO+KuIhwNONjIP1+Omeq6F8wrHiYWSfSBngRsB9GXrY=;
-        b=BrecYWhHjxfGo6Ezo+gQnrlHVZTjI9Wi/uxDbXlwVRz85R5dLoKTzNI2MC2GX5Dv/G
-         mlTmo8D6Fidj7ZmFDBVG2bjgyGa5lR7Ha/V1+AcbwIHpzuS0W560NQS5EwtFqdcsxZfN
-         XvPWJ6QgGZjfSEuSK5+flPHypRYd7ejLLe7rA=
+        bh=Jpn95VpEwqe9LKeHWyblbqM6jwwK7W2+waTN1xRVPXQ=;
+        b=FCbILTsIeftcx9Jt0BEtLLHXxEr/T0XF35/erIBoKOW226wDqlmzTJQPPejMew+mhd
+         UlyRNka/Ra4EuqJADzu2GHuKEYKymT8PcEY403+mP8iE6I6bZNLs3UEDiydXVbaWBGD7
+         mz/tEVk+bpiGqc9fg1niAF7oUn+LfldzxaVuE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:date:from:to:cc:subject:message-id
          :mail-followup-to:references:mime-version:content-disposition
          :content-transfer-encoding:in-reply-to;
-        bh=wO+KuIhwNONjIP1+Omeq6F8wrHiYWSfSBngRsB9GXrY=;
-        b=yJm5GRIquvPIG1gvaip9A9Xk2Q+4+1GDHFKMewlz5wCS0SPrMFxwdG1VaPNacqhTID
-         81e5ldT5CGviS/EEPBruHdddg1UgjP9IrnY7UlHHflwQ1a67Yv2GYDiyEyLc2B+OxAkb
-         9VIS6ftbt9/RLkMJ3ocVuKZaHAiapgOiUf71GHsy2tm49661c59vAZzqiSpG+7/rON9g
-         lqVjsjExGYOOgLkvLrMc7Pfo19Hgs6++2xOCLUBDChmU9rKyjNqCJpzPI0uLwemf5USO
-         HHTh4VHJwSqyMsc3m8houPZDDpsig0fTNZM2IQhchds5mfqUlBC9GQHz9vMcYEPKGIdB
-         G8Ew==
-X-Gm-Message-State: AOAM533tBlxXHOxxt9JHkp9f3mWm+lg0r9Io5YFQ3goWb0zCvo6Oc+AC
-	vblV/zuTdPofu9lpQtb9tzUxpg==
-X-Google-Smtp-Source: ABdhPJyo7ea/nZXrlU3akF3tdf273o2t+KHlhil6iDV+KBGasrEr55RuNkwiRURTypDNaCbBNruEWw==
-X-Received: by 2002:a05:600c:4241:b0:38c:ec66:7c8f with SMTP id r1-20020a05600c424100b0038cec667c8fmr7130162wmm.179.1648562843585;
-        Tue, 29 Mar 2022 07:07:23 -0700 (PDT)
+        bh=Jpn95VpEwqe9LKeHWyblbqM6jwwK7W2+waTN1xRVPXQ=;
+        b=atqwovata96rQxfjIn/fZJS8tKLsFrELRp3rcJUJml5C+3yyZbRTlm9F5h0Q2iRbE7
+         QsEvLEphJdi54jiUkcxZVaCAtNLnaoHGd7ofo+euGeFTnrLKRoG9COtyXCpT2ZkGd0DF
+         lZPyzvCCRmRfsWWRBDb1rxVoEIEA7S+1FFMtFFdSia/Kiv0AfJrtmRtMpHAUEpEEjr4S
+         NX2tsG0EgcjLiPjtGSXFrkw8B5K/LF9sWYAi/YNKSpiM1ntdXrvE1nJgh/qfEjmiz77Z
+         0Fu83vRGGNplgTTFQo+YCVxq6U481HxLgUwLEm0P45j/lMz9psID55JImCx7EuCr8z7m
+         EQTg==
+X-Gm-Message-State: AOAM530e8b1UXWPTAAe+DKT7vg1LQewCfx5DNZw6aZt15ZTMakuCfI+y
+	Zo4JQCrP2cxhTteNJP2UOHvYaVnk0DtWLvjP
+X-Google-Smtp-Source: ABdhPJwiAiFHH9tvrLS6DxzHY+xXbg+mD5m1uI9ysyIBJJOZ4xC59b3stmOq2en/769fX0REs3phaQ==
+X-Received: by 2002:adf:e88c:0:b0:204:b1d:317a with SMTP id d12-20020adfe88c000000b002040b1d317amr31487688wrm.634.1648563046644;
+        Tue, 29 Mar 2022 07:10:46 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id v4-20020adfa1c4000000b00205c6dfc41esm6194260wrv.18.2022.03.29.07.07.22
+        by smtp.gmail.com with ESMTPSA id d14-20020a056000186e00b0020405198faasm17330362wri.52.2022.03.29.07.10.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Mar 2022 07:07:23 -0700 (PDT)
-Date: Tue, 29 Mar 2022 16:07:21 +0200
+        Tue, 29 Mar 2022 07:10:46 -0700 (PDT)
+Date: Tue, 29 Mar 2022 16:10:44 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Paul Cercueil <paul@crapouillou.net>
-Message-ID: <YkMSmcQy1sKQJ5rJ@phenom.ffwll.local>
+Message-ID: <YkMTZLea4+X39Fp8@phenom.ffwll.local>
 Mail-Followup-To: Paul Cercueil <paul@crapouillou.net>,
 	Jonathan Cameron <jic23@kernel.org>,
 	Michael Hennerich <Michael.Hennerich@analog.com>,
 	Jonathan Corbet <corbet@lwn.net>, linux-iio@vger.kernel.org,
 	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+	dri-devel@lists.freedesktop.org,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	linaro-mm-sig@lists.linaro.org,
 	Alexandru Ardelean <ardeleanalex@gmail.com>,
 	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
 References: <20220207125933.81634-1-paul@crapouillou.net>
- <20220207130140.81891-1-paul@crapouillou.net>
- <20220207130140.81891-2-paul@crapouillou.net>
- <YkLJU7Pp98CPIHfY@phenom.ffwll.local>
- <Z63I9R.MKYUKBH4V8L41@crapouillou.net>
+ <20220213184616.669b490b@jic23-huawei>
+ <N8XC7R.5FP2M8552CGT3@crapouillou.net>
+ <YkLEXJzs8ukrxG8s@phenom.ffwll.local>
+ <QI1I9R.GDPWLM86I45S@crapouillou.net>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <Z63I9R.MKYUKBH4V8L41@crapouillou.net>
+In-Reply-To: <QI1I9R.GDPWLM86I45S@crapouillou.net>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Message-ID-Hash: LJNN54GLL2BHJWRCLVCGLUM6WBLR7NAF
-X-Message-ID-Hash: LJNN54GLL2BHJWRCLVCGLUM6WBLR7NAF
+Message-ID-Hash: PBCYQJO7PITIO7WIZDSHITTRBSNERUIF
+X-Message-ID-Hash: PBCYQJO7PITIO7WIZDSHITTRBSNERUIF
 X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Daniel Vetter <daniel@ffwll.ch>, Jonathan Cameron <jic23@kernel.org>, Michael Hennerich <Michael.Hennerich@analog.com>, Jonathan Corbet <corbet@lwn.net>, linux-iio@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Alexandru Ardelean <ardeleanalex@gmail.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 12/12] Documentation: iio: Document high-speed DMABUF based API
+Subject: [Linaro-mm-sig] Re: [PATCH v2 00/12] iio: buffer-dma: write() and new DMABUF based API
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LJNN54GLL2BHJWRCLVCGLUM6WBLR7NAF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PBCYQJO7PITIO7WIZDSHITTRBSNERUIF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Tue, Mar 29, 2022 at 10:47:23AM +0100, Paul Cercueil wrote:
-> Hi Daniel,
->=20
-> Le mar., mars 29 2022 at 10:54:43 +0200, Daniel Vetter <daniel@ffwll.ch> a
-> =E9crit :
-> > On Mon, Feb 07, 2022 at 01:01:40PM +0000, Paul Cercueil wrote:
-> > >  Document the new DMABUF based API.
-> > >=20
-> > >  v2: - Explicitly state that the new interface is optional and is
-> > >        not implemented by all drivers.
-> > >      - The IOCTLs can now only be called on the buffer FD returned by
-> > >        IIO_BUFFER_GET_FD_IOCTL.
-> > >      - Move the page up a bit in the index since it is core stuff
-> > > and not
-> > >        driver-specific.
-> > >=20
-> > >  Signed-off-by: Paul Cercueil <paul@crapouillou.net>
-> > >  ---
-> > >   Documentation/driver-api/dma-buf.rst |  2 +
-> > >   Documentation/iio/dmabuf_api.rst     | 94
-> > > ++++++++++++++++++++++++++++
-> > >   Documentation/iio/index.rst          |  2 +
-> > >   3 files changed, 98 insertions(+)
-> > >   create mode 100644 Documentation/iio/dmabuf_api.rst
-> > >=20
-> > >  diff --git a/Documentation/driver-api/dma-buf.rst
-> > > b/Documentation/driver-api/dma-buf.rst
-> > >  index 2cd7db82d9fe..d3c9b58d2706 100644
-> > >  --- a/Documentation/driver-api/dma-buf.rst
-> > >  +++ b/Documentation/driver-api/dma-buf.rst
-> > >  @@ -1,3 +1,5 @@
-> > >  +.. _dma-buf:
-> > >  +
-> > >   Buffer Sharing and Synchronization
-> > >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > >=20
-> > >  diff --git a/Documentation/iio/dmabuf_api.rst
-> > > b/Documentation/iio/dmabuf_api.rst
-> > >  new file mode 100644
-> > >  index 000000000000..43bb2c1b9fdc
-> > >  --- /dev/null
-> > >  +++ b/Documentation/iio/dmabuf_api.rst
-> > >  @@ -0,0 +1,94 @@
-> > >  +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > >  +High-speed DMABUF interface for IIO
-> > >  +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > >  +
-> > >  +1. Overview
-> > >  +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > >  +
-> > >  +The Industrial I/O subsystem supports access to buffers through a
-> > > file-based
-> > >  +interface, with read() and write() access calls through the IIO
-> > > device's dev
-> > >  +node.
-> > >  +
-> > >  +It additionally supports a DMABUF based interface, where the
-> > > userspace
-> > >  +application can allocate and append DMABUF objects to the buffer's
-> > > queue.
-> > >  +This interface is however optional and is not available in all
-> > > drivers.
-> > >  +
-> > >  +The advantage of this DMABUF based interface vs. the read()
-> > >  +interface, is that it avoids an extra copy of the data between the
-> > >  +kernel and userspace. This is particularly useful for high-speed
-> > >  +devices which produce several megabytes or even gigabytes of data
-> > > per
-> > >  +second.
-> > >  +
-> > >  +The data in this DMABUF interface is managed at the granularity of
-> > >  +DMABUF objects. Reducing the granularity from byte level to block
-> > > level
-> > >  +is done to reduce the userspace-kernelspace synchronization
-> > > overhead
-> > >  +since performing syscalls for each byte at a few Mbps is just not
-> > >  +feasible.
-> > >  +
-> > >  +This of course leads to a slightly increased latency. For this
-> > > reason an
-> > >  +application can choose the size of the DMABUFs as well as how many
-> > > it
-> > >  +allocates. E.g. two DMABUFs would be a traditional double buffering
-> > >  +scheme. But using a higher number might be necessary to avoid
-> > >  +underflow/overflow situations in the presence of scheduling
-> > > latencies.
-> >=20
-> > So this reads a lot like reinventing io-uring with pre-registered
-> > O_DIRECT
-> > memory ranges. Except it's using dma-buf and hand-rolling a lot of
-> > pieces
-> > instead of io-uring and O_DIRECT.
->=20
-> I don't see how io_uring would help us. It's an async I/O framework, does=
- it
-> allow us to access a kernel buffer without copying the data? Does it allow
-> us to zero-copy the data to a network interface?
-
-With networking, do you mean rdma, or some other kind of networking?
-Anything else than rdma doesn't support dma-buf, and I don't think it will
-likely ever do so. Similar it's really tricky to glue dma-buf support into
-the block layer.
-
-Wrt io_uring, yes it's async, but that's not the point. The point is that
-with io_uring you pre-register ranges for reads and writes to target,
-which in combination with O_DIRECT, makes it effectively (and efficient!)
-zero-copy. Plus it has full integration with both networking and normal
-file io, which dma-buf just doesn't have.
-
-Like you _cannot_ do zero copy from a dma-buf into a normal file. You
-absolutely can do the same with io_uring.
-
-> > At least if the entire justification for dma-buf support is zero-copy
-> > support between the driver and userspace it's _really_ not the right
-> > tool
-> > for the job. dma-buf is for zero-copy between devices, with cpu access
-> > from userpace (or kernel fwiw) being very much the exception (and often
-> > flat-out not supported at all).
->=20
-> We want both. Using dma-bufs for the driver/userspace interface is a
-> convenience as we then have a unique API instead of two distinct ones.
->=20
-> Why should CPU access from userspace be the exception? It works fine for =
-IIO
-> dma-bufs. You keep warning about this being a terrible design, but I simp=
-ly
-> don't see it.
-
-It depends really on what you're trying to do, and there's extremely high
-chances it will simply not work.
-
-Unless you want to do zero copy with a gpu, or something which is in that
-ecosystem of accelerators and devices, then dma-buf is probably not what
-you're looking for.
--Daniel
-
->=20
-> Cheers,
-> -Paul
->=20
-> > >  +
-> > >  +2. User API
-> > >  +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > >  +
-> > >  +``IIO_BUFFER_DMABUF_ALLOC_IOCTL(struct iio_dmabuf_alloc_req *)``
-> > >  +----------------------------------------------------------------
-> > >  +
-> > >  +Each call will allocate a new DMABUF object. The return value (if
-> > > not
-> > >  +a negative errno value as error) will be the file descriptor of
-> > > the new
-> > >  +DMABUF.
-> > >  +
-> > >  +``IIO_BUFFER_DMABUF_ENQUEUE_IOCTL(struct iio_dmabuf *)``
-> > >  +--------------------------------------------------------
-> > >  +
-> > >  +Place the DMABUF object into the queue pending for hardware
-> > > process.
-> > >  +
-> > >  +These two IOCTLs have to be performed on the IIO buffer's file
-> > >  +descriptor, obtained using the `IIO_BUFFER_GET_FD_IOCTL` ioctl.
-> > >  +
-> > >  +3. Usage
-> > >  +=3D=3D=3D=3D=3D=3D=3D=3D
-> > >  +
-> > >  +To access the data stored in a block by userspace the block must be
-> > >  +mapped to the process's memory. This is done by calling mmap() on
-> > > the
-> > >  +DMABUF's file descriptor.
-> > >  +
-> > >  +Before accessing the data through the map, you must use the
-> > >  +DMA_BUF_IOCTL_SYNC(struct dma_buf_sync *) ioctl, with the
-> > >  +DMA_BUF_SYNC_START flag, to make sure that the data is available.
-> > >  +This call may block until the hardware is done with this block.
-> > > Once
-> > >  +you are done reading or writing the data, you must use this ioctl
-> > > again
-> > >  +with the DMA_BUF_SYNC_END flag, before enqueueing the DMABUF to the
-> > >  +kernel's queue.
-> > >  +
-> > >  +If you need to know when the hardware is done with a DMABUF, you
-> > > can
-> > >  +poll its file descriptor for the EPOLLOUT event.
-> > >  +
-> > >  +Finally, to destroy a DMABUF object, simply call close() on its
-> > > file
-> > >  +descriptor.
-> > >  +
-> > >  +For more information about manipulating DMABUF objects, see:
-> > > :ref:`dma-buf`.
-> > >  +
-> > >  +A typical workflow for the new interface is:
-> > >  +
-> > >  +    for block in blocks:
-> > >  +      DMABUF_ALLOC block
-> > >  +      mmap block
-> > >  +
-> > >  +    enable buffer
-> > >  +
-> > >  +    while !done
-> > >  +      for block in blocks:
-> > >  +        DMABUF_ENQUEUE block
-> > >  +
-> > >  +        DMABUF_SYNC_START block
-> > >  +        process data
-> > >  +        DMABUF_SYNC_END block
-> > >  +
-> > >  +    disable buffer
-> > >  +
-> > >  +    for block in blocks:
-> > >  +      close block
-> > >  diff --git a/Documentation/iio/index.rst
-> > > b/Documentation/iio/index.rst
-> > >  index 58b7a4ebac51..669deb67ddee 100644
-> > >  --- a/Documentation/iio/index.rst
-> > >  +++ b/Documentation/iio/index.rst
-> > >  @@ -9,4 +9,6 @@ Industrial I/O
-> > >=20
-> > >      iio_configfs
-> > >=20
-> > >  +   dmabuf_api
-> > >  +
-> > >      ep93xx_adc
-> > >  --
-> > >  2.34.1
-> > >=20
-> >=20
-> > --
-> > Daniel Vetter
-> > Software Engineer, Intel Corporation
-> > http://blog.ffwll.ch
->=20
->=20
-
---=20
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVHVlLCBNYXIgMjksIDIwMjIgYXQgMTA6MTE6MTRBTSArMDEwMCwgUGF1bCBDZXJjdWVpbCB3
+cm90ZToNCj4gSGkgRGFuaWVsLA0KPiANCj4gTGUgbWFyLiwgbWFycyAyOSAyMDIyIGF0IDEwOjMz
+OjMyICswMjAwLCBEYW5pZWwgVmV0dGVyIDxkYW5pZWxAZmZ3bGwuY2g+IGENCj4gw6ljcml0IDoN
+Cj4gPiBPbiBUdWUsIEZlYiAxNSwgMjAyMiBhdCAwNTo0MzozNVBNICswMDAwLCBQYXVsIENlcmN1
+ZWlsIHdyb3RlOg0KPiA+ID4gIEhpIEpvbmF0aGFuLA0KPiA+ID4gDQo+ID4gPiAgTGUgZGltLiwg
+ZsOpdnIuIDEzIDIwMjIgYXQgMTg6NDY6MTYgKzAwMDAsIEpvbmF0aGFuIENhbWVyb24NCj4gPiA+
+ICA8amljMjNAa2VybmVsLm9yZz4gYSDDqWNyaXQgOg0KPiA+ID4gID4gT24gTW9uLCAgNyBGZWIg
+MjAyMiAxMjo1OToyMSArMDAwMA0KPiA+ID4gID4gUGF1bCBDZXJjdWVpbCA8cGF1bEBjcmFwb3Vp
+bGxvdS5uZXQ+IHdyb3RlOg0KPiA+ID4gID4NCj4gPiA+ICA+ID4gIEhpIEpvbmF0aGFuLA0KPiA+
+ID4gID4gPg0KPiA+ID4gID4gPiAgVGhpcyBpcyB0aGUgVjIgb2YgbXkgcGF0Y2hzZXQgdGhhdCBp
+bnRyb2R1Y2VzIGEgbmV3IHVzZXJzcGFjZQ0KPiA+ID4gID4gPiBpbnRlcmZhY2UNCj4gPiA+ICA+
+ID4gIGJhc2VkIG9uIERNQUJVRiBvYmplY3RzIHRvIGNvbXBsZW1lbnQgdGhlIGZpbGVpbyBBUEks
+IGFuZCBhZGRzDQo+ID4gPiAgPiA+IHdyaXRlKCkNCj4gPiA+ICA+ID4gIHN1cHBvcnQgdG8gdGhl
+IGV4aXN0aW5nIGZpbGVpbyBBUEkuDQo+ID4gPiAgPg0KPiA+ID4gID4gSGkgUGF1bCwNCj4gPiA+
+ICA+DQo+ID4gPiAgPiBJdCdzIGJlZW4gYSBsaXR0bGUgd2hpbGUuIFBlcmhhcHMgeW91IGNvdWxk
+IHN1bW1hcml6ZSB0aGUgdmFyaW91cw0KPiA+ID4gdmlldw0KPiA+ID4gID4gcG9pbnRzIGFyb3Vu
+ZCB0aGUgYXBwcm9wcmlhdGVuZXNzIG9mIHVzaW5nIERNQUJVRiBmb3IgdGhpcz8NCj4gPiA+ICA+
+IEkgYXBwcmVjaWF0ZSBpdCBpcyBhIHRyaWNreSB0b3BpYyB0byBkaXN0aWwgaW50byBhIGJyaWVm
+IHN1bW1hcnkNCj4gPiA+IGJ1dA0KPiA+ID4gID4gSSBrbm93IEkgd291bGQgZmluZCBpdCB1c2Vm
+dWwgZXZlbiBpZiBubyBvbmUgZWxzZSBkb2VzIQ0KPiA+ID4gDQo+ID4gPiAgU28gd2Ugd2FudCB0
+byBoYXZlIGEgaGlnaC1zcGVlZCBpbnRlcmZhY2Ugd2hlcmUgYnVmZmVycyBvZiBzYW1wbGVzDQo+
+ID4gPiBhcmUNCj4gPiA+ICBwYXNzZWQgYXJvdW5kIGJldHdlZW4gSUlPIGRldmljZXMgYW5kIG90
+aGVyIGRldmljZXMgKGUuZy4gVVNCIG9yDQo+ID4gPiBuZXR3b3JrKSwNCj4gPiA+ICBvciBtYWRl
+IGF2YWlsYWJsZSB0byB1c2Vyc3BhY2Ugd2l0aG91dCBjb3B5aW5nIHRoZSBkYXRhLg0KPiA+ID4g
+DQo+ID4gPiAgRE1BQlVGIGlzLCBhdCBsZWFzdCBpbiB0aGVvcnksIGV4YWN0bHkgd2hhdCB3ZSBu
+ZWVkLiBRdW90aW5nIHRoZQ0KPiA+ID4gIGRvY3VtZW50YXRpb24NCj4gPiA+ICAoaHR0cHM6Ly93
+d3cua2VybmVsLm9yZy9kb2MvaHRtbC92NS4xNS9kcml2ZXItYXBpL2RtYS1idWYuaHRtbCk6DQo+
+ID4gPiAgIlRoZSBkbWEtYnVmIHN1YnN5c3RlbSBwcm92aWRlcyB0aGUgZnJhbWV3b3JrIGZvciBz
+aGFyaW5nIGJ1ZmZlcnMNCj4gPiA+IGZvcg0KPiA+ID4gIGhhcmR3YXJlIChETUEpIGFjY2VzcyBh
+Y3Jvc3MgbXVsdGlwbGUgZGV2aWNlIGRyaXZlcnMgYW5kDQo+ID4gPiBzdWJzeXN0ZW1zLCBhbmQg
+Zm9yDQo+ID4gPiAgc3luY2hyb25pemluZyBhc3luY2hyb25vdXMgaGFyZHdhcmUgYWNjZXNzLiBU
+aGlzIGlzIHVzZWQsIGZvcg0KPiA+ID4gZXhhbXBsZSwgYnkNCj4gPiA+ICBkcm0g4oCccHJpbWXi
+gJ0gbXVsdGktR1BVIHN1cHBvcnQsIGJ1dCBpcyBvZiBjb3Vyc2Ugbm90IGxpbWl0ZWQgdG8gR1BV
+DQo+ID4gPiB1c2UNCj4gPiA+ICBjYXNlcy4iDQo+ID4gPiANCj4gPiA+ICBUaGUgcHJvYmxlbSBp
+cyB0aGF0IHJpZ2h0IG5vdyBETUFCVUYgaXMgb25seSByZWFsbHkgdXNlZCBieSBEUk0sDQo+ID4g
+PiBhbmQgdG8NCj4gPiA+ICBxdW90ZSBEYW5pZWwsICJkbWEtYnVmIGxvb2tzIGxpa2Ugc29tZXRo
+aW5nIHN1cGVyIGdlbmVyaWMgYW5kDQo+ID4gPiB1c2VmdWwsIHVudGlsDQo+ID4gPiAgeW91IHJl
+YWxpemUgdGhhdCB0aGVyZSdzIGEgbWV0cmljIHRvbiBvZiBncHUvYWNjZWxlcmF0b3IgYmFnYWdl
+DQo+ID4gPiBwaWxlZCBpbiIuDQo+ID4gPiANCj4gPiA+ICBTdGlsbCwgaXQgc2VlbXMgdG8gYmUg
+dGhlIG9ubHkgdmlhYmxlIG9wdGlvbi4gV2UgY291bGQgYWRkIGEgY3VzdG9tDQo+ID4gPiAgYnVm
+ZmVyLXBhc3NpbmcgaW50ZXJmYWNlLCBidXQgdGhhdCB3b3VsZCBtZWFuIGltcGxlbWVudGluZyB0
+aGUgc2FtZQ0KPiA+ID4gIGJ1ZmZlci1wYXNzaW5nIGludGVyZmFjZSBvbiB0aGUgbmV0d29yayBh
+bmQgVVNCIHN0YWNrcywgYW5kIGJlZm9yZQ0KPiA+ID4gd2Uga25vdw0KPiA+ID4gIGl0IHdlIHJl
+LWludmVudGVkIERNQUJVRnMuDQo+ID4gDQo+ID4gZG1hLWJ1ZiBhbHNvIGRvZXNuJ3Qgc3VwcG9y
+dCBzaGFyaW5nIHdpdGggbmV0d29yayBhbmQgdXNiIHN0YWNrcywgc28gSSdtDQo+ID4gYQ0KPiA+
+IGJpdCBjb25mdXNlZCB3aHkgZXhhY3RseSB0aGlzIGlzIHVzZWZ1bD8NCj4gDQo+IFRoZXJlIGlz
+IGFuIGF0dGVtcHQgdG8gZ2V0IGRtYS1idWYgc3VwcG9ydCBpbiB0aGUgbmV0d29yayBzdGFjaywg
+Y2FsbGVkDQo+ICJ6Y3RhcCIuIExhc3QgcGF0Y2hzZXQgd2FzIHNlbnQgbGFzdCBub3ZlbWJlci4g
+VVNCIHN0YWNrIGRvZXMgbm90IHN1cHBvcnQNCj4gZG1hLWJ1ZiwgYnV0IHdlIGNhbiBhZGQgaXQg
+bGF0ZXIgSSBndWVzcy4NCj4gDQo+ID4gU28geWVhaCB1bmxlc3MgdGhlcmUncyBzb21lIHNoYXJp
+bmcgZ29pbmcgb24gd2l0aCBncHUgc3R1ZmYgKGZvciBkYXRhDQo+ID4gcHJvY2Vzc2luZyBtYXli
+ZSkgSSdtIG5vdCBzdXJlIHRoaXMgbWFrZXMgYSBsb3Qgb2Ygc2Vuc2UgcmVhbGx5LiBPciBhdA0K
+PiA+IGxlYXN0IHNvbWUgemVyby1jb3B5IHNoYXJpbmcgYmV0d2VlbiBkcml2ZXJzLCBidXQgZXZl
+biB0aGF0IHdvdWxkDQo+ID4gbWluaW1hbGx5IHJlcXVpcmUgYSBkbWEtYnVmIGltcG9ydCBpb2N0
+bCBvZiBzb21lIHNvcnRzLiBXaGljaCBJIGVpdGhlcg0KPiA+IG1pc3NlZCBvciBkb2Vzbid0IGV4
+aXN0Lg0KPiANCj4gV2UgZG8gd2FudCB6ZXJvLWNvcHkgYmV0d2VlbiBkcml2ZXJzLCB0aGUgbmV0
+d29yayBzdGFjaywgYW5kIHRoZSBVU0Igc3RhY2suDQo+IEl0J3Mgbm90IGp1c3QgYWJvdXQgaGF2
+aW5nIGEgdXNlcnNwYWNlIGludGVyZmFjZS4NCg0KSSB0aGluayBpbiB0aGF0IGNhc2Ugd2UgbmVl
+ZCB0aGVzZSBvdGhlciBwaWVjZXMgdG9vLiBBbmQgd2UgbmVlZCBhY2tzIGZyb20NCnJlbGV2YW50
+IHN1YnN5c3RlbXMgdGhhdCB0aGVzZSBvdGhlciBwaWVjZXMgYXJlIGEpIHJlYWR5IGZvciB1cHN0
+cmVhbQ0KbWVyZ2luZyBhbmQgYWxzbyB0aGF0IHRoZSBkbWEtYnVmIHNpZGUgb2YgdGhpbmdzIGFj
+dHVhbGx5IG1ha2VzIHNlbnNlLg0KDQo+ID4gSWYgdGhlcmUncyBub25lIG9mIHRoYXQgdGhlbiBq
+dXN0IGhhbmQtcm9sbCB5b3VyIGJ1ZmZlciBoYW5kbGluZyBjb2RlDQo+ID4gKHhhcnJheSBpcyBj
+aGVhcCB0byB1c2UgaW4gdGVybXMgb2YgY29kZSBmb3IgdGhpcyksIHlvdSBjYW4gYWx3YXlzIGFk
+ZA0KPiA+IGRtYS1idWYgaW1wb3J0L2V4cG9ydCBsYXRlciBvbiB3aGVuIHRoZSBuZWVkIGFyaXNl
+cy4NCj4gPiANCj4gPiBTY3JvbGxpbmcgdGhyb3VnaCBwYXRjaGVzIHlvdSBvbmx5IGhhdmUgZG1h
+LWJ1ZiBleHBvcnQsIGJ1dCBubw0KPiA+IGltcG9ydGluZywNCj4gPiBzbyB0aGUgdXNlLWNhc2Ug
+dGhhdCB3b3JrcyBpcyB3aXRoIG9uZSBvZiB0aGUgZXhpc3Rpbmcgc3Vic3lzdGVtcyB0aGF0DQo+
+ID4gc3VwcG9ydGluZyBkbWEtYnVmIGltcG9ydGluZy4NCj4gPiANCj4gPiBJIHRoaW5rIG1pbmlt
+YWxseSB3ZSBuZWVkIHRoZSB1c2UtY2FzZSAoaW4gZm9ybSBvZiBjb2RlKSB0aGF0IG5lZWRzIHRo
+ZQ0KPiA+IGJ1ZmZlciBzaGFyaW5nIGhlcmUuDQo+IA0KPiBJJ2xsIHRyeSB3aXRoIHpjdGFwIGFu
+ZCByZXBvcnQgYmFjay4NCg0KRG8geW91IGhhdmUgYSBsaW5rIGZvciB0aGlzPyBJIGp1c3QgY2hl
+Y2tlZCBkcmktZGV2ZWwgb24gbG9yZSwgYW5kIGl0J3MNCm5vdCB0aGVyZS4gTm9yIGFueXdoZXJl
+IGVsc2UuDQoNCldlIHJlYWxseSBuZWVkIGFsbCB0aGUgcGllY2VzLCBhbmQgaWYgYmxvY2sgbGF5
+ZXIgcmVhY3Rpb24gaXMgYW55dGhpbmcgdG8NCmp1ZGdlIGJ5LCBkbWEtYnVmIHdvbnQgaGFwcGVu
+IGZvciBuZXR3b3JraW5nIGVpdGhlci4gVGhlcmUncyBzb21lIHJlYWxseQ0KbmFzdHkgYW5kIGZh
+aXJseSBmdW5kYW1lbnRhbCBpc3N1ZXMgd2l0aCBsb2NraW5nIGFuZCBtZW1vcnkgcmVjbGFpbSB0
+aGF0DQptYWtlIHRoaXMgdXR0ZXIgcGFpbiBvciBvdXRyaWdodCBpbXBvc3NpYmxlLg0KLURhbmll
+bA0KDQo+IA0KPiBDaGVlcnMsDQo+IC1QYXVsDQo+IA0KPiA+ID4gID4gPg0KPiA+ID4gID4gPiAg
+Q2hhbmdlcyBzaW5jZSB2MToNCj4gPiA+ICA+ID4NCj4gPiA+ICA+ID4gIC0gdGhlIHBhdGNoZXMg
+dGhhdCB3ZXJlIG1lcmdlZCBpbiB2MSBoYXZlIGJlZW4gKG9idmlvdXNseSkNCj4gPiA+IGRyb3Bw
+ZWQNCj4gPiA+ICA+ID4gZnJvbQ0KPiA+ID4gID4gPiAgICB0aGlzIHBhdGNoc2V0Ow0KPiA+ID4g
+ID4gPiAgLSB0aGUgcGF0Y2ggdGhhdCB3YXMgc2V0dGluZyB0aGUgd3JpdGUtY29tYmluZSBjYWNo
+ZSBzZXR0aW5nDQo+ID4gPiBoYXMNCj4gPiA+ICA+ID4gYmVlbg0KPiA+ID4gID4gPiAgICBkcm9w
+cGVkIGFzIHdlbGwsIGFzIGl0IHdhcyBzaW1wbHkgbm90IHVzZWZ1bC4NCj4gPiA+ICA+ID4gIC0g
+WzAxLzEyXToNCj4gPiA+ICA+ID4gICAgICAqIE9ubHkgcmVtb3ZlIHRoZSBvdXRnb2luZyBxdWV1
+ZSwgYW5kIGtlZXAgdGhlIGluY29taW5nDQo+ID4gPiBxdWV1ZSwNCj4gPiA+ICA+ID4gYXMgd2UN
+Cj4gPiA+ICA+ID4gICAgICAgIHdhbnQgdGhlIGJ1ZmZlciB0byBzdGFydCBzdHJlYW1pbmcgZGF0
+YSBhcyBzb29uIGFzIGl0IGlzDQo+ID4gPiAgPiA+IGVuYWJsZWQuDQo+ID4gPiAgPiA+ICAgICAg
+KiBSZW1vdmUgSUlPX0JMT0NLX1NUQVRFX0RFUVVFVUVELCBzaW5jZSBpdCBpcyBub3cNCj4gPiA+
+IGZ1bmN0aW9uYWxseQ0KPiA+ID4gID4gPiB0aGUNCj4gPiA+ICA+ID4gICAgICAgIHNhbWUgYXMg
+SUlPX0JMT0NLX1NUQVRFX0RPTkUuDQo+ID4gPiAgPiA+ICAtIFswMi8xMl06DQo+ID4gPiAgPiA+
+ICAgICAgKiBGaXggYmxvY2stPnN0YXRlIG5vdCBiZWluZyByZXNldCBpbg0KPiA+ID4gID4gPiAg
+ICAgICAgaWlvX2RtYV9idWZmZXJfcmVxdWVzdF91cGRhdGUoKSBmb3Igb3V0cHV0IGJ1ZmZlcnMu
+DQo+ID4gPiAgPiA+ICAgICAgKiBPbmx5IHVwZGF0ZSBibG9jay0+Ynl0ZXNfdXNlZCBvbmNlIGFu
+ZCBhZGQgYSBjb21tZW50DQo+ID4gPiBhYm91dA0KPiA+ID4gID4gPiB3aHkgd2UNCj4gPiA+ICA+
+ID4gICAgICAgIHVwZGF0ZSBpdC4NCj4gPiA+ICA+ID4gICAgICAqIEFkZCBhIGNvbW1lbnQgYWJv
+dXQgd2h5IHdlJ3JlIHNldHRpbmcgYSBkaWZmZXJlbnQgc3RhdGUNCj4gPiA+IGZvcg0KPiA+ID4g
+ID4gPiBvdXRwdXQNCj4gPiA+ICA+ID4gICAgICAgIGJ1ZmZlcnMgaW4gaWlvX2RtYV9idWZmZXJf
+cmVxdWVzdF91cGRhdGUoKQ0KPiA+ID4gID4gPiAgICAgICogUmVtb3ZlIHVzZWxlc3MgY2FzdCB0
+byBib29sICghISkgaW4gaWlvX2RtYV9idWZmZXJfaW8oKQ0KPiA+ID4gID4gPiAgLSBbMDUvMTJd
+Og0KPiA+ID4gID4gPiAgICAgIE9ubHkgYWxsb3cgdGhlIG5ldyBJT0NUTHMgb24gdGhlIGJ1ZmZl
+ciBGRCBjcmVhdGVkIHdpdGgNCj4gPiA+ICA+ID4gICAgICBJSU9fQlVGRkVSX0dFVF9GRF9JT0NU
+TCgpLg0KPiA+ID4gID4gPiAgLSBbMTIvMTJdOg0KPiA+ID4gID4gPiAgICAgICogRXhwbGljaXRs
+eSBzdGF0ZSB0aGF0IHRoZSBuZXcgaW50ZXJmYWNlIGlzIG9wdGlvbmFsIGFuZA0KPiA+ID4gaXMN
+Cj4gPiA+ICA+ID4gICAgICAgIG5vdCBpbXBsZW1lbnRlZCBieSBhbGwgZHJpdmVycy4NCj4gPiA+
+ICA+ID4gICAgICAqIFRoZSBJT0NUTHMgY2FuIG5vdyBvbmx5IGJlIGNhbGxlZCBvbiB0aGUgYnVm
+ZmVyIEZEDQo+ID4gPiByZXR1cm5lZCBieQ0KPiA+ID4gID4gPiAgICAgICAgSUlPX0JVRkZFUl9H
+RVRfRkRfSU9DVEwuDQo+ID4gPiAgPiA+ICAgICAgKiBNb3ZlIHRoZSBwYWdlIHVwIGEgYml0IGlu
+IHRoZSBpbmRleCBzaW5jZSBpdCBpcyBjb3JlDQo+ID4gPiBzdHVmZg0KPiA+ID4gID4gPiBhbmQg
+bm90DQo+ID4gPiAgPiA+ICAgICAgICBkcml2ZXItc3BlY2lmaWMuDQo+ID4gPiAgPiA+DQo+ID4g
+PiAgPiA+ICBUaGUgcGF0Y2hlcyBub3QgbGlzdGVkIGhlcmUgaGF2ZSBub3QgYmVlbiBtb2RpZmll
+ZCBzaW5jZSB2MS4NCj4gPiA+ICA+ID4NCj4gPiA+ICA+ID4gIENoZWVycywNCj4gPiA+ICA+ID4g
+IC1QYXVsDQo+ID4gPiAgPiA+DQo+ID4gPiAgPiA+ICBBbGV4YW5kcnUgQXJkZWxlYW4gKDEpOg0K
+PiA+ID4gID4gPiAgICBpaW86IGJ1ZmZlci1kbWE6IHNwbGl0IGlpb19kbWFfYnVmZmVyX2ZpbGVp
+b19mcmVlKCkgZnVuY3Rpb24NCj4gPiA+ICA+ID4NCj4gPiA+ICA+ID4gIFBhdWwgQ2VyY3VlaWwg
+KDExKToNCj4gPiA+ICA+ID4gICAgaWlvOiBidWZmZXItZG1hOiBHZXQgcmlkIG9mIG91dGdvaW5n
+IHF1ZXVlDQo+ID4gPiAgPiA+ICAgIGlpbzogYnVmZmVyLWRtYTogRW5hYmxlIGJ1ZmZlciB3cml0
+ZSBzdXBwb3J0DQo+ID4gPiAgPiA+ICAgIGlpbzogYnVmZmVyLWRtYWVuZ2luZTogU3VwcG9ydCBz
+cGVjaWZ5aW5nIGJ1ZmZlciBkaXJlY3Rpb24NCj4gPiA+ICA+ID4gICAgaWlvOiBidWZmZXItZG1h
+ZW5naW5lOiBFbmFibGUgd3JpdGUgc3VwcG9ydA0KPiA+ID4gID4gPiAgICBpaW86IGNvcmU6IEFk
+ZCBuZXcgRE1BQlVGIGludGVyZmFjZSBpbmZyYXN0cnVjdHVyZQ0KPiA+ID4gID4gPiAgICBpaW86
+IGJ1ZmZlci1kbWE6IFVzZSBETUFCVUZzIGluc3RlYWQgb2YgY3VzdG9tIHNvbHV0aW9uDQo+ID4g
+PiAgPiA+ICAgIGlpbzogYnVmZmVyLWRtYTogSW1wbGVtZW50IG5ldyBETUFCVUYgYmFzZWQgdXNl
+cnNwYWNlIEFQSQ0KPiA+ID4gID4gPiAgICBpaW86IGJ1ZmZlci1kbWFlbmdpbmU6IFN1cHBvcnQg
+bmV3IERNQUJVRiBiYXNlZCB1c2Vyc3BhY2UgQVBJDQo+ID4gPiAgPiA+ICAgIGlpbzogY29yZTog
+QWRkIHN1cHBvcnQgZm9yIGN5Y2xpYyBidWZmZXJzDQo+ID4gPiAgPiA+ICAgIGlpbzogYnVmZmVy
+LWRtYWVuZ2luZTogQWRkIHN1cHBvcnQgZm9yIGN5Y2xpYyBidWZmZXJzDQo+ID4gPiAgPiA+ICAg
+IERvY3VtZW50YXRpb246IGlpbzogRG9jdW1lbnQgaGlnaC1zcGVlZCBETUFCVUYgYmFzZWQgQVBJ
+DQo+ID4gPiAgPiA+DQo+ID4gPiAgPiA+ICAgRG9jdW1lbnRhdGlvbi9kcml2ZXItYXBpL2RtYS1i
+dWYucnN0ICAgICAgICAgIHwgICAyICsNCj4gPiA+ICA+ID4gICBEb2N1bWVudGF0aW9uL2lpby9k
+bWFidWZfYXBpLnJzdCAgICAgICAgICAgICAgfCAgOTQgKysrDQo+ID4gPiAgPiA+ICAgRG9jdW1l
+bnRhdGlvbi9paW8vaW5kZXgucnN0ICAgICAgICAgICAgICAgICAgIHwgICAyICsNCj4gPiA+ICA+
+ID4gICBkcml2ZXJzL2lpby9hZGMvYWRpLWF4aS1hZGMuYyAgICAgICAgICAgICAgICAgfCAgIDMg
+Ky0NCj4gPiA+ICA+ID4gICBkcml2ZXJzL2lpby9idWZmZXIvaW5kdXN0cmlhbGlvLWJ1ZmZlci1k
+bWEuYyAgfCA2MTANCj4gPiA+ICA+ID4gKysrKysrKysrKysrKystLS0tDQo+ID4gPiAgPiA+ICAg
+Li4uL2J1ZmZlci9pbmR1c3RyaWFsaW8tYnVmZmVyLWRtYWVuZ2luZS5jICAgIHwgIDQyICstDQo+
+ID4gPiAgPiA+ICAgZHJpdmVycy9paW8vaW5kdXN0cmlhbGlvLWJ1ZmZlci5jICAgICAgICAgICAg
+IHwgIDYwICsrDQo+ID4gPiAgPiA+ICAgaW5jbHVkZS9saW51eC9paW8vYnVmZmVyLWRtYS5oICAg
+ICAgICAgICAgICAgIHwgIDM4ICstDQo+ID4gPiAgPiA+ICAgaW5jbHVkZS9saW51eC9paW8vYnVm
+ZmVyLWRtYWVuZ2luZS5oICAgICAgICAgIHwgICA1ICstDQo+ID4gPiAgPiA+ICAgaW5jbHVkZS9s
+aW51eC9paW8vYnVmZmVyX2ltcGwuaCAgICAgICAgICAgICAgIHwgICA4ICsNCj4gPiA+ICA+ID4g
+ICBpbmNsdWRlL3VhcGkvbGludXgvaWlvL2J1ZmZlci5oICAgICAgICAgICAgICAgfCAgMzAgKw0K
+PiA+ID4gID4gPiAgIDExIGZpbGVzIGNoYW5nZWQsIDc0OSBpbnNlcnRpb25zKCspLCAxNDUgZGVs
+ZXRpb25zKC0pDQo+ID4gPiAgPiA+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IERvY3VtZW50YXRpb24v
+aWlvL2RtYWJ1Zl9hcGkucnN0DQo+ID4gPiAgPiA+DQo+ID4gPiAgPg0KPiA+ID4gDQo+ID4gPiAN
+Cj4gPiANCj4gPiAtLQ0KPiA+IERhbmllbCBWZXR0ZXINCj4gPiBTb2Z0d2FyZSBFbmdpbmVlciwg
+SW50ZWwgQ29ycG9yYXRpb24NCj4gPiBodHRwOi8vYmxvZy5mZndsbC5jaA0KPiANCj4gDQoNCi0t
+IA0KRGFuaWVsIFZldHRlcg0KU29mdHdhcmUgRW5naW5lZXIsIEludGVsIENvcnBvcmF0aW9uDQpo
+dHRwOi8vYmxvZy5mZndsbC5jaA0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0Bs
+aXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1t
+LXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
