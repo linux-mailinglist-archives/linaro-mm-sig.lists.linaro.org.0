@@ -2,132 +2,137 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id F274D4EB581
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 00:02:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B75D4EB5B3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 00:14:39 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2A1BD3EC1B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 22:02:43 +0000 (UTC)
-Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
-	by lists.linaro.org (Postfix) with ESMTPS id 936323EBFD
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 22:02:39 +0000 (UTC)
-Received: by mail-lj1-f171.google.com with SMTP id c15so25244549ljr.9
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 15:02:39 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id A84C73EC1F
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 29 Mar 2022 22:14:38 +0000 (UTC)
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
+	by lists.linaro.org (Postfix) with ESMTPS id C61583EBFA
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 22:14:34 +0000 (UTC)
+Received: by mail-lf1-f45.google.com with SMTP id t25so32681043lfg.7
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 15:14:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :references:from:in-reply-to;
-        bh=GFh+hu29pLGd1yFJqG3TD5ib8w39W4JQGiYky9bmdEA=;
-        b=Uul80CmlA5J9+LprVKWbEBNT+SmpX7fuHJuj2ZcNq5lQoGbXiK7l08X9mWZUnyQ9xj
-         JGG6phzP2JIgAVM7Ck+/uPDofSFZS9DiEe+vTdfqlpktGqi5ac7BkNwpDuVFGoxB1j/L
-         kiTUpYuWVv1NpO5CD/u3+wXPH+VkKXOxXU0EKfbfEIs9OIrNH5DeSfkqq0ywl+G16oUs
-         EjjTffPfQWSLwPTUxIsp9apeOAkSzbzkNz+6u6mon973oumaMEcdCiHqApsz0Veblhsd
-         qGyeBpLbqSDPrXgY78vgDjWeIZHmYGtPl54GxQn+x5B1VeLWM6M7Ui77iW8/TQ/Q1xEu
-         yH0g==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=6bUho4h3zzyg8mrHSXNWvfp6RptsEnl8G83mOpfY+8A=;
+        b=bh7oMU8UPCqwbBrPRO6PPukc9f8hIRc+lb/bA8WWrXnuXulYF2BEAQFo14jUSUDx5s
+         v/eUHNA5ayGfb5BqoNdiNDRyXPrC1kpH0/sYRj+1xjYsWuZRqw59J5mjFIRxTaeQILoI
+         ocRVQEiF/frLG4RsG1ZpC51jWy3KK0satvkTzAMdkhAk01zHUUHXsKBI4N5zaQ63yagx
+         +pP7SOPZ0AqLBbyBtQl7RM93hlDECYrq3hkLFEgYZ9s2pbU0vyGqNmK3JOP4ApjsQobO
+         0VR9mde15FL1GZzs7GBEGpVvlUuPCqk8bBPtHlv5+7ul4Ehb5d0eFzkheJVgvZ+O2OSz
+         jAUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:references:from:in-reply-to;
-        bh=GFh+hu29pLGd1yFJqG3TD5ib8w39W4JQGiYky9bmdEA=;
-        b=vm2Rrt3h+JhwlfwAikaLqs1mpaP3p17yiAG0GT6hFOCS421zrmi4DSjhGlDmivzIz+
-         FE3sYK8BHINptHo+/EkskvhfNpQd5YqSmZiqkeZ+qJ13UKE53ZYNLdTFDuuPQBFFHUCr
-         aiqpFZGlZuaZTcjajMu4s+WI4F4+DmEY8o9zvP3o7qadlmKLquUGlHm5RIAmkJuhTFF2
-         nikneyfjd2ydGMsgBwPI7qMgBwxvwhclo7t+ruYQXbJi7xRCLsnqenmT925MOrByznt+
-         iimLP9eBJeT6B2LtIEgtsv47VwT428AeB4LxKTVPDTQbfOVJSOoKzAad1Ay7g5WC/lfT
-         wV5w==
-X-Gm-Message-State: AOAM532zbIR9KkweTF4XByWJx6defdZqyDT+m2FoduDliHeRWhqTqhiC
-	l35ZlqqKYKs6K2XSsBB7j4o=
-X-Google-Smtp-Source: ABdhPJwoHVOneGk1MKkV++hihnKGasRhaKJqXGRhP23iN10zifJJPhye88xL0pFF5DtY6cv59xPRXg==
-X-Received: by 2002:a2e:b7c1:0:b0:249:7a91:bba1 with SMTP id p1-20020a2eb7c1000000b002497a91bba1mr4503477ljo.276.1648591358215;
-        Tue, 29 Mar 2022 15:02:38 -0700 (PDT)
-Received: from [192.168.1.11] ([94.103.225.225])
-        by smtp.gmail.com with ESMTPSA id i2-20020a196d02000000b004488dae6d45sm2114104lfc.52.2022.03.29.15.02.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 29 Mar 2022 15:02:37 -0700 (PDT)
-Content-Type: multipart/mixed; boundary="------------787Zf0iirh0AwihTJK1ygKXK"
-Message-ID: <419a9bb8-cb68-8add-e7be-275a48b2126d@gmail.com>
-Date: Wed, 30 Mar 2022 01:02:36 +0300
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: en-US
-To: syzbot <syzbot+5c943fe38e86d615cac2@syzkaller.appspotmail.com>,
- christian.koenig@amd.com, daniel.vetter@ffwll.ch,
- dri-devel@lists.freedesktop.org, gustavo@padovan.org,
- linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, sumit.semwal@linaro.org,
- syzkaller-bugs@googlegroups.com
-References: <0000000000008eedfe05db620952@google.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=6bUho4h3zzyg8mrHSXNWvfp6RptsEnl8G83mOpfY+8A=;
+        b=og/xXDOyVkKXIFg1g3qo9IYQzo0NecfhfrjZ/ItYXpyRLy+j4KGcX7J36aB30AWfpS
+         kTSWWMehcR3eqCwapvVWz2wAHiF3ACSk4SYolFmF7hGrXeDPA6Bh/VwPCJ9nvxo9SQRd
+         zOWnX+v53cX/WgyiC1oxNY6uOwmfDdzge9dXr0me2pIJQqxFsrdPOqW60PfoEaHTDL3A
+         6FSx5T6Fh3kG67BH99Nf4gq0KNCsajtWh8qFwuGnL8rGlq3pYp+1rb7o7bGbGiYmaNPg
+         XGef3O1iUwWqgzgB6t5/hizcNt5+nc7tT0ZcmGXgV7FL67OPshNW3Q3iNOcUU/fVZmtk
+         Gx8g==
+X-Gm-Message-State: AOAM532OtjMMYvY/gYfludeSVrzRIp7d9Oma7AhMwLRfsFsbFGkpBIRu
+	ncrQlBFjvnrWfyRbkbtva7Y=
+X-Google-Smtp-Source: ABdhPJw/Cx1HFbKNuVfKF/lbkCI8c5zDX6pAuLqHOq2y9eMru5aTEj+d6/wIaOiUwpZ/NAFJvnki7A==
+X-Received: by 2002:a05:6512:13a1:b0:448:887e:da38 with SMTP id p33-20020a05651213a100b00448887eda38mr4661334lfa.298.1648592073440;
+        Tue, 29 Mar 2022 15:14:33 -0700 (PDT)
+Received: from localhost.localdomain ([94.103.225.225])
+        by smtp.gmail.com with ESMTPSA id h16-20020ac24db0000000b0044aace47e83sm427397lfe.185.2022.03.29.15.14.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 29 Mar 2022 15:14:33 -0700 (PDT)
 From: Pavel Skripkin <paskripkin@gmail.com>
-In-Reply-To: <0000000000008eedfe05db620952@google.com>
-Message-ID-Hash: HQBHVJSUG3WO3DWPNCN34OGHTXTL33ZS
-X-Message-ID-Hash: HQBHVJSUG3WO3DWPNCN34OGHTXTL33ZS
+To: sumit.semwal@linaro.org,
+	gustavo@padovan.org,
+	christian.koenig@amd.com,
+	daniel.vetter@ffwll.ch
+Date: Wed, 30 Mar 2022 01:14:25 +0300
+Message-Id: <20220329221425.22691-1-paskripkin@gmail.com>
+X-Mailer: git-send-email 2.35.1
+MIME-Version: 1.0
+Message-ID-Hash: RF75COOXXJ4GWJ2PMOZCQY2XFC6DPRME
+X-Message-ID-Hash: RF75COOXXJ4GWJ2PMOZCQY2XFC6DPRME
 X-MailFrom: paskripkin@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Pavel Skripkin <paskripkin@gmail.com>, syzbot+5c943fe38e86d615cac2@syzkaller.appspotmail.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [syzbot] general protection fault in dma_fence_array_first
+Subject: [Linaro-mm-sig] [PATCH next] dma-buf/sync-file: do not allow zero size allocations
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HQBHVJSUG3WO3DWPNCN34OGHTXTL33ZS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RF75COOXXJ4GWJ2PMOZCQY2XFC6DPRME/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-
-This is a multi-part message in MIME format.
---------------787Zf0iirh0AwihTJK1ygKXK
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
-
-T24gMy8zMC8yMiAwMDoyMywgc3l6Ym90IHdyb3RlOg0KPiBIZWxsbywNCj4gDQo+IHN5emJvdCBm
-b3VuZCB0aGUgZm9sbG93aW5nIGlzc3VlIG9uOg0KPiANCj4gSEVBRCBjb21taXQ6ICAgIDg1MTVk
-MDViZjZiYyBBZGQgbGludXgtbmV4dCBzcGVjaWZpYyBmaWxlcyBmb3IgMjAyMjAzMjgNCj4gZ2l0
-IHRyZWU6ICAgICAgIGxpbnV4LW5leHQNCj4gY29uc29sZSBvdXRwdXQ6IGh0dHBzOi8vc3l6a2Fs
-bGVyLmFwcHNwb3QuY29tL3gvbG9nLnR4dD94PTE2OTRlMjFiNzAwMDAwDQo+IGtlcm5lbCBjb25m
-aWc6ICBodHRwczovL3N5emthbGxlci5hcHBzcG90LmNvbS94Ly5jb25maWc/eD01MzBjNjhiZWY0
-ZTJiOGE4DQo+IGRhc2hib2FyZCBsaW5rOiBodHRwczovL3N5emthbGxlci5hcHBzcG90LmNvbS9i
-dWc/ZXh0aWQ9NWM5NDNmZTM4ZTg2ZDYxNWNhYzINCj4gY29tcGlsZXI6ICAgICAgIGdjYyAoRGVi
-aWFuIDEwLjIuMS02KSAxMC4yLjEgMjAyMTAxMTAsIEdOVSBsZCAoR05VIEJpbnV0aWxzIGZvciBE
-ZWJpYW4pIDIuMzUuMg0KPiBzeXogcmVwcm86ICAgICAgaHR0cHM6Ly9zeXprYWxsZXIuYXBwc3Bv
-dC5jb20veC9yZXByby5zeXo/eD0xNDY3MzEzYjcwMDAwMA0KPiBDIHJlcHJvZHVjZXI6ICAgaHR0
-cHM6Ly9zeXprYWxsZXIuYXBwc3BvdC5jb20veC9yZXByby5jP3g9MTIxYjdjYjk3MDAwMDANCj4g
-DQo+IFRoZSBpc3N1ZSB3YXMgYmlzZWN0ZWQgdG86DQo+IA0KPiBjb21taXQgNTE5ZjQ5MGRiMDdl
-MWE1Mzk0OTA2MTJmMzc2NDg3ZjYxZTQ4ZTM5Yw0KPiBBdXRob3I6IENocmlzdGlhbiBLw7ZuaWcg
-PGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCj4gRGF0ZTogICBGcmkgTWFyIDExIDA5OjMyOjI2
-IDIwMjIgKzAwMDANCj4gDQo+ICAgICAgZG1hLWJ1Zi9zeW5jLWZpbGU6IGZpeCB3YXJuaW5nIGFi
-b3V0IGZlbmNlIGNvbnRhaW5lcnMNCj4gDQoNClRoZXJlIGlzIFpFUk9fUFRSIGRlcmVmZXJlbmNl
-IGNhdXNlZCBieSBwYXNzaW5nIDAgdG8ga3JlYWxsb2NfYXJyYXkoKS4gDQpDb2RlIHNob3VsZCBu
-b3QgdHJ5IHRvIHJlZHVjZSBhbGxvY2F0ZWQgbWVtb3J5IGFyZWEgaWYgaW5kZXggaXMgZXF1YWwg
-dG8gMA0KDQojc3l6IHRlc3Q6DQpnaXQ6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tl
-cm5lbC9naXQvbmV4dC9saW51eC1uZXh0LmdpdCBtYXN0ZXINCg0KDQoNCg0KV2l0aCByZWdhcmRz
-LA0KUGF2ZWwgU2tyaXBraW4=
-
---------------787Zf0iirh0AwihTJK1ygKXK
-Content-Type: text/plain; charset=UTF-8; name="ph"
-Content-Disposition: attachment; filename="ph"
-Content-Transfer-Encoding: base64
-
-ZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9zeW5jX2ZpbGUuYyBiL2RyaXZlcnMvZG1h
-LWJ1Zi9zeW5jX2ZpbGUuYwppbmRleCBiOGRlYTRlYzEyM2IuLjYwY2I0MjY2ZTc3ZiAxMDA2
-NDQKLS0tIGEvZHJpdmVycy9kbWEtYnVmL3N5bmNfZmlsZS5jCisrKyBiL2RyaXZlcnMvZG1h
-LWJ1Zi9zeW5jX2ZpbGUuYwpAQCAtMjY0LDcgKzI2NCw3IEBAIHN0YXRpYyBzdHJ1Y3Qgc3lu
-Y19maWxlICpzeW5jX2ZpbGVfbWVyZ2UoY29uc3QgY2hhciAqbmFtZSwgc3RydWN0IHN5bmNf
-ZmlsZSAqYSwKIAlpZiAoaW5kZXggPT0gMCkKIAkJYWRkX2ZlbmNlKGZlbmNlcywgJmluZGV4
-LCBkbWFfZmVuY2VfZ2V0X3N0dWIoKSk7CiAKLQlpZiAobnVtX2ZlbmNlcyA+IGluZGV4KSB7
-CisJaWYgKGluZGV4ICYmIG51bV9mZW5jZXMgPiBpbmRleCkgewogCQlzdHJ1Y3QgZG1hX2Zl
-bmNlICoqdG1wOwogCiAJCS8qIEtlZXAgZ29pbmcgZXZlbiB3aGVuIHJlZHVjaW5nIHRoZSBz
-aXplIGZhaWxlZCAqLwo=
-
---------------787Zf0iirh0AwihTJK1ygKXK
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+
+syzbot reported GPF in dma_fence_array_first(), which is caused by
+dereferencing ZERO_PTR in dma-buf internals.
+
+ZERO_PTR was generated in sync_file_merge(). This functuion tries to
+reduce allocation size, but does not check if it reducing to 0.
+
+Fix reported bug by validating `index` value before passing it to
+krealloc_array().
+
+Fail log:
+
+general protection fault, probably for non-canonical address 0xdffffc0000000002: 0000 [#1] PREEMPT SMP KASAN
+KASAN: null-ptr-deref in range [0x0000000000000010-0x0000000000000017]
+CPU: 1 PID: 3595 Comm: syz-executor814 Not tainted 5.17.0-next-20220328-syzkaller #0
+...
+RIP: 0010:dma_fence_array_first+0x78/0xb0 drivers/dma-buf/dma-fence-array.c:234
+...
+Call Trace:
+ <TASK>
+ __dma_fence_unwrap_array include/linux/dma-fence-unwrap.h:42 [inline]
+ dma_fence_unwrap_first include/linux/dma-fence-unwrap.h:57 [inline]
+ sync_file_ioctl_fence_info drivers/dma-buf/sync_file.c:414 [inline]
+ sync_file_ioctl+0x248/0x22c0 drivers/dma-buf/sync_file.c:477
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:870 [inline]
+
+There was same problem with initial kcalloc() allocation in same
+function, so it's fixed as well.
+
+Reported-and-tested-by: syzbot+5c943fe38e86d615cac2@syzkaller.appspotmail.com
+Fixes: 519f490db07e ("dma-buf/sync-file: fix warning about fence containers")
+Signed-off-by: Pavel Skripkin <paskripkin@gmail.com>
+---
+ drivers/dma-buf/sync_file.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/dma-buf/sync_file.c b/drivers/dma-buf/sync_file.c
+index b8dea4ec123b..aa744f017008 100644
+--- a/drivers/dma-buf/sync_file.c
++++ b/drivers/dma-buf/sync_file.c
+@@ -212,7 +212,7 @@ static struct sync_file *sync_file_merge(const char *name, struct sync_file *a,
+ 	dma_fence_unwrap_for_each(b_fence, &b_iter, b->fence)
+ 		++num_fences;
+ 
+-	if (num_fences > INT_MAX)
++	if (num_fences > INT_MAX || !num_fences)
+ 		goto err_free_sync_file;
+ 
+ 	fences = kcalloc(num_fences, sizeof(*fences), GFP_KERNEL);
+@@ -264,7 +264,7 @@ static struct sync_file *sync_file_merge(const char *name, struct sync_file *a,
+ 	if (index == 0)
+ 		add_fence(fences, &index, dma_fence_get_stub());
+ 
+-	if (num_fences > index) {
++	if (index && num_fences > index) {
+ 		struct dma_fence **tmp;
+ 
+ 		/* Keep going even when reducing the size failed */
+-- 
+2.35.1
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---------------787Zf0iirh0AwihTJK1ygKXK--
