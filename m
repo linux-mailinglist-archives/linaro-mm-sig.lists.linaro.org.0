@@ -2,61 +2,73 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50BAB4EC539
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 15:09:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DA2F4EC53A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 15:09:21 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7EA4D3EC4D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 13:09:15 +0000 (UTC)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
-	by lists.linaro.org (Postfix) with ESMTPS id 5B5453EBFA
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 15:21:45 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 4FBEE1FD0A;
-	Tue, 29 Mar 2022 15:21:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1648567304; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=n/czKHIPapnBxpdu79ODwmVGjcsUIWEmGzncRJ5TN4Q=;
-	b=lbxalIk0hgBTc9ZrvdtVK14x3u1oqMDVbsoiIWRU/HZAKUtFdn9xuq+x4VdQSqRv2NIzra
-	6u7dg24T8Ka4DRgQdxJkMClNHbD8rd8VMmEUcF8AeBfKYtvlHup2tBTYs1n4gYuW4kxpnl
-	lnJuwJXKKePEEilmmgnC19er+O83O34=
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 755B913AB1;
-	Tue, 29 Mar 2022 15:21:43 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-	by imap2.suse-dmz.suse.de with ESMTPSA
-	id hsZZGwckQ2LkcwAAMHmgww
-	(envelope-from <mkoutny@suse.com>); Tue, 29 Mar 2022 15:21:43 +0000
-Date: Tue, 29 Mar 2022 17:21:42 +0200
-From: Michal =?iso-8859-1?Q?Koutn=FD?= <mkoutny@suse.com>
-To: "T.J. Mercier" <tjmercier@google.com>
-Message-ID: <20220329152142.GA15794@blackbody.suse.cz>
+	by lists.linaro.org (Postfix) with ESMTP id 4407A3EC36
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Mar 2022 13:09:20 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+	by lists.linaro.org (Postfix) with ESMTPS id A346E3EBFD
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 16:50:37 +0000 (UTC)
+Received: by mail-pl1-f179.google.com with SMTP id a16so1246258plh.13
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 29 Mar 2022 09:50:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=sender:date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=oo4DwVPmc4Xc8mHsSOZJPPM1+kxb1H+BME8RduWXyEc=;
+        b=fon/v7xEg/MG9yKo0ZhFyVDd8Pi8tu6+Ushj4CQ5i5ZK7JvGdhYA+9e/SNRbZmP9Sv
+         pCKmTk3lb6hjAAWbXCrUihV4aR6Osupca5LKufEEjFzjS5dKaHLe0jNplTFUZ36iHnVk
+         sTubKidTh4TFkPcklY8dTxB8YzPtwQKC9XMO0UBR3PrCLB/DdkbgqeffVh5WeCzY1Kz3
+         JiapQ7p+VMjbsVZb1XgQylMCEerXzU91lVY69si8AUutSOzJsBTatSYV6g7QbeGrvQUa
+         oPrdqMZejb1WJMC3kUMFa0DQeBm3jfo1vJfKQPQsi7YcylRvBDYfhLYmZlW2miVTOKKE
+         o0Mg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+         :references:mime-version:content-disposition:in-reply-to;
+        bh=oo4DwVPmc4Xc8mHsSOZJPPM1+kxb1H+BME8RduWXyEc=;
+        b=n+147TRtCsWk1DEGpT5PYr3eNilyiMrcvvgfpucrJLy4oVpFtqyhhwryHb4k1K4JoY
+         reltN7hwyhgAHwUXi4FnRkU+pTxY4H7945XNZE7ZjkghXR9Vlv3G2UpWi8ophk4BxCk0
+         Ymsw8c18nPM5d2OWJzX1EY9AjGUvAmZA7ipOwQ3p0fyqsdjUFXMZHnAyHh9++aJkJl9z
+         m53J/Rciz6cTu64vtadvZ68WHSe4XOY33rzqZVF9beiCp/BlFYnXQiw6Pzfhe37UAV0S
+         EbcGKkNTfawnDt2xcPwkUOp0BnxrAvt00IJUKczqz3GOiHC2/5uhdIRxTgNgq2M5iVj0
+         kiCA==
+X-Gm-Message-State: AOAM530SrIv5dL6n8TMNUcDXjJzSWYDmBMvfmETIC0KWzZLvxts+SOnq
+	33bczuvjgJg/FC2nvxkqgWc=
+X-Google-Smtp-Source: ABdhPJwK34gym8LY0bVce8JYqwr3XDALjGLRfStGWGhzeJS7utaFiUFkwfefNjUZnxfhL3wq68o19Q==
+X-Received: by 2002:a17:903:246:b0:153:87f0:a93e with SMTP id j6-20020a170903024600b0015387f0a93emr31382772plh.171.1648572636435;
+        Tue, 29 Mar 2022 09:50:36 -0700 (PDT)
+Received: from localhost ([2620:10d:c090:400::5:7749])
+        by smtp.gmail.com with ESMTPSA id b25-20020a637159000000b00381fda49d15sm17968864pgn.39.2022.03.29.09.50.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 29 Mar 2022 09:50:35 -0700 (PDT)
+Sender: Tejun Heo <htejun@gmail.com>
+Date: Tue, 29 Mar 2022 06:50:34 -1000
+From: Tejun Heo <tj@kernel.org>
+To: Daniel Vetter <daniel@ffwll.ch>
+Message-ID: <YkM42vdq3mdIP9Zl@slm.duckdns.org>
 References: <20220328035951.1817417-1-tjmercier@google.com>
- <20220328035951.1817417-6-tjmercier@google.com>
+ <20220328035951.1817417-5-tjmercier@google.com>
+ <YkHH/0Use7F30UUE@phenom.ffwll.local>
+ <CABdmKX01p6g_iHsB6dd4Wwh=8iLdYiUqdY6_yyA5ax2YNHt6tQ@mail.gmail.com>
+ <YkLGbL5Z3HVCyVkK@phenom.ffwll.local>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220328035951.1817417-6-tjmercier@google.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-MailFrom: mkoutny@suse.com
+In-Reply-To: <YkLGbL5Z3HVCyVkK@phenom.ffwll.local>
+X-MailFrom: htejun@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: LYRLYNISJXNIQA3O5NUVA54BLUFRDRFM
-X-Message-ID-Hash: LYRLYNISJXNIQA3O5NUVA54BLUFRDRFM
+Message-ID-Hash: Y5BUZWYW2RV6H6I5W2AVAJSGPDPZMHU5
+X-Message-ID-Hash: Y5BUZWYW2RV6H6I5W2AVAJSGPDPZMHU5
 X-Mailman-Approved-At: Wed, 30 Mar 2022 13:09:01 +0000
-CC: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Arve =?iso-8859-1?B?SGr4bm5lduVn?= <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>, Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Benjamin Gaignard <benjamin.gaignard@linaro.org>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>, Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>, Shuah Khan <shuah@kernel.org>, kaleshsingh@google.com, Kenny.Ho@amd.com, 
- skhan@linuxfoundation.org, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, cgroups@vger.kernel.org, linux-kselftest@vger.kernel.org
+CC: "T.J. Mercier" <tjmercier@google.com>, David Airlie <airlied@linux.ie>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Arve =?iso-8859-1?B?SGr4bm5lduVn?= <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>, Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Benjamin Gaignard <benjamin.gaignard@linaro.org>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>, Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>, Shuah Khan <shuah@kernel.org>, Kalesh Singh <kaleshsingh@google.com>, Kenny.Ho@amd.com, Michal
+  =?iso-8859-1?Q?Koutn=FD?= <mkoutny@suse.com>, Shuah Khan <skhan@linuxfoundation.org>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, cgroups@vger.kernel.org, linux-kselftest@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v4 5/8] dmabuf: Add gpu cgroup charge transfer function
+Subject: [Linaro-mm-sig] Re: [RFC v4 4/8] dmabuf: heaps: export system_heap buffers with GPU cgroup charging
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LYRLYNISJXNIQA3O5NUVA54BLUFRDRFM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Y5BUZWYW2RV6H6I5W2AVAJSGPDPZMHU5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -66,29 +78,16 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi.
+On Tue, Mar 29, 2022 at 10:42:20AM +0200, Daniel Vetter wrote:
+> Hm I just realized ... are the names in the groups abi? If yes then I
+> think we need to fix this before we merge anything.
 
-On Mon, Mar 28, 2022 at 03:59:44AM +0000, "T.J. Mercier" <tjmercier@google.com> wrote:
-> From: Hridya Valsaraju <hridya@google.com>
-> 
-> The dma_buf_charge_transfer function provides a way for processes to
+Yes.
 
-(s/dma_bug_charge_transfer/dma_bug_transfer_charge/)
+Thanks.
 
-> transfer charge of a buffer to a different process. This is essential
-> for the cases where a central allocator process does allocations for
-> various subsystems, hands over the fd to the client who requested the
-> memory and drops all references to the allocated memory.
-
-I understood from [1] some buffers are backed by regular RAM. How are
-these charges going to be transferred (if so)?
-
-
-Thanks,
-Michal
-
-[1]
-https://lore.kernel.org/r/CABdmKX2NSAKMC6rReMYfo2SSVNxEXcS466hk3qF6YFt-j-+_NQ@mail.gmail.com
+-- 
+tejun
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
