@@ -2,118 +2,108 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60853509D5F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Apr 2022 12:17:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DE4B050A17D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Apr 2022 16:03:50 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7EA3F47FAE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Apr 2022 10:17:43 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
-	by lists.linaro.org (Postfix) with ESMTPS id 2F1373EA4A
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 21 Apr 2022 10:17:39 +0000 (UTC)
-Received: by mail-ej1-f44.google.com with SMTP id ks6so9070905ejb.1
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 21 Apr 2022 03:17:39 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 2026547FC8
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Apr 2022 14:03:50 +0000 (UTC)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
+	by lists.linaro.org (Postfix) with ESMTPS id 974ED3E829
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 30 Mar 2022 20:56:21 +0000 (UTC)
+Received: by mail-ed1-f46.google.com with SMTP id h1so25923892edj.1
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 30 Mar 2022 13:56:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=o9Uwrnr+J/6PoPyTPGmYSGkDODoDuGBLtRMs0gUpXJk=;
-        b=Tw1xmngZVfgCT7TLBstw8nQFpll9Eq0dUwiVJsGbsS/YNeQ/L4ksc7k4vKU2gYhMG4
-         WIP/P3GVtSM8yQUBvFu0wzQ78CvU/jVksuhYepDhTmaFzetdJPma6K/6biJfMh2ou1mV
-         Y8YlaBN2lk5t/HxXOih3jiSyY0LmmKxksUQfDKQigduQaJfdeFZYGTZtfX6lrtc+7PgK
-         nU0GqecKph+MxFN0nxH2edRAv/7RwdPu1D7V/yjTDsOtz0gs4xjJISOSJZgsCOOt6zRZ
-         DFqR9U/lLaDZcgzIAgXpFM0KtrraQjTO95+6FFitzuEIK1qjfmZ2ZOUfzFuf61KKx9nZ
-         ynZQ==
+        d=google.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=nrCvj7Yq7SSib6FwgrmdzFU7UXWII5P9ju8EtUscCW0=;
+        b=boNOk7s9MFWRe9Q5TIHyCBcLZAL3UIEBNmLOOWFhXw6emE+CwKKHdvhC0KffHeh0nF
+         M6pQueP4aCRuJFI7dDzsd8w7oMHmH5zQ1LRTPvQqJiDWbX35wE19ft4HqpfvXL9C1Got
+         NCX+Q7kxCou/I+IrAEJ9Str9SLE8Vpfu1F+nizveKZzqZBmp0ZbLt4163c8iNRc9oq8L
+         +OvcysVAV7F4grrtlsY0RpODotiBIJhRyklfusZBaq0zNt0ADmOlhrzyjpVkba5kg+sN
+         XtIoUFtjlMDxb5pCPzyxnwJLsJ9yaQfPKTqYXEV4ifVXSG43LsveuoFab9UFC5oCyEkr
+         VAUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=o9Uwrnr+J/6PoPyTPGmYSGkDODoDuGBLtRMs0gUpXJk=;
-        b=6V+ORE+EBfjUTaB5SkceT1fkuVeNcD8Zt7R4QuAYfAyRcFlR60KeZyQEm9sdqhQjPO
-         3PwmWPgOekPZ0n0vVEpyaKcj9zC9+SlpdeEOYBSn5L/MutyZoCRedrNhnjSv2M29MXcZ
-         n/WG9V3d9X8qb0HlJRqYpUVyKe8cceZhdixrt1j1mLMTfC1MNFvrjZex0JNed9DZIZDt
-         Ny+K00TycRQFaxe1wWFgPksT8tedeuCb8wVWiS3Mf71TZdBIerMfjqCpUOyW+loATrLX
-         GF9mb/7MegWUfz79nde1m4JYxErFGO3z7YfcrCG/yzjjA64Lx002QHFcu8Ml2lWNi05D
-         BNHw==
-X-Gm-Message-State: AOAM530y/B074dDv7BGfY2v6/nGcmfAB+KKLQYBvuznws6LlapqtVCMg
-	vB7jepHjStZM42NAobuUNhY=
-X-Google-Smtp-Source: ABdhPJwfX3c1ZjiNGKR8X3C8C8qD7akq9C+VUDTYnVQCMx9rkiXUpNWEIgmkZxnq8ehfCKoNipcwXg==
-X-Received: by 2002:a17:907:7da3:b0:6f0:d63:69bd with SMTP id oz35-20020a1709077da300b006f00d6369bdmr5677073ejc.289.1650536258169;
-        Thu, 21 Apr 2022 03:17:38 -0700 (PDT)
-Received: from ?IPV6:2a02:908:1252:fb60:74ec:39fd:9a7c:7ff3? ([2a02:908:1252:fb60:74ec:39fd:9a7c:7ff3])
-        by smtp.gmail.com with ESMTPSA id a1-20020a1709063e8100b006ce06ed8aa7sm7745262ejj.142.2022.04.21.03.17.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 21 Apr 2022 03:17:37 -0700 (PDT)
-Message-ID: <6cd3571c-099b-df43-a7e0-243aba11726b@gmail.com>
-Date: Thu, 21 Apr 2022 12:17:36 +0200
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=nrCvj7Yq7SSib6FwgrmdzFU7UXWII5P9ju8EtUscCW0=;
+        b=wE8yP026eCU8zbAO/lelv6412H74of41pWwOrlALRuNtlv/o7zWYUx4td/KM31JiE7
+         H12cN4DNMtWhP9inPYEJEOoajXHEzjC9nKzA2C01Um0g1GMfp0rvZXyg9tzDlapJ3E0I
+         seBstYtA/kDqTQvnW/bcAKsrd/TaI2ZvcGbYRmxXwxXAs/fKY7Xi4XGZllB68pB7Ta9V
+         jJD7l1oqvQk91TZB2yjrpL2YT3DIZck7dihOeL5jonK1muBjNK9svdh9V/CAxKGXZjoD
+         D6D72UO9U4ENVqFQ+NZFTzAfe6OI+/n7TQ8JNIYPqteWyHfZwLS4VJd0YwSCLvO6sdFt
+         uZIQ==
+X-Gm-Message-State: AOAM533dI+6+RfPE350iNo6wcQncxj/vkeXKhZtfYF6z1s4fhvyHymi1
+	zmBBvc2XGOSIqxA17LIY6Gm/dJN6ZQna162IAtR5Tw==
+X-Google-Smtp-Source: ABdhPJxrjw92bYCs2jMACCLJM4/KOh2wxHOU9997F7UwcQsMWyUFgKpYWFcmr9tg4GWCYtbl/45JU/IvvXHerOIfRxk=
+X-Received: by 2002:a05:6402:3452:b0:418:f963:42a3 with SMTP id
+ l18-20020a056402345200b00418f96342a3mr13302952edc.12.1648673780493; Wed, 30
+ Mar 2022 13:56:20 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: en-US
-To: Zack Rusin <zackr@vmware.com>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "christian.koenig@amd.com" <christian.koenig@amd.com>,
- "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
- "daniel.vetter@ffwll.ch" <daniel.vetter@ffwll.ch>,
- "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>,
- "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>
-References: <20220407085946.744568-1-christian.koenig@amd.com>
- <20220407085946.744568-4-christian.koenig@amd.com>
- <60ab53ce1ce1333f5e6a15fc83c3c05cd9bd1084.camel@vmware.com>
- <4c2e9414-3926-c9d7-8482-0d6d9191c2ac@amd.com>
- <fe8916b53b0f0101e6616d23eb6896399b092d58.camel@vmware.com>
- <54d00af9-9384-5794-490c-7d4cafe086b6@gmail.com>
- <e1c60e2a1478c406f515d51608a751fdc9feff3a.camel@vmware.com>
- <baa19a2d-6ad9-63ea-20f4-284a794f8998@amd.com>
- <ac12f900-fb47-37d6-9a1c-ac44bc711069@gmail.com>
- <5d699ffa903b5e54e8660367c3b46f07c86f4c55.camel@vmware.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <5d699ffa903b5e54e8660367c3b46f07c86f4c55.camel@vmware.com>
-Message-ID-Hash: UOWGG7ROE63CADBCTYOLFF52GPUY2KXD
-X-Message-ID-Hash: UOWGG7ROE63CADBCTYOLFF52GPUY2KXD
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>
+References: <20220328035951.1817417-1-tjmercier@google.com>
+ <20220328035951.1817417-3-tjmercier@google.com> <YkM6/57mVxoNfSvm@slm.duckdns.org>
+In-Reply-To: <YkM6/57mVxoNfSvm@slm.duckdns.org>
+From: "T.J. Mercier" <tjmercier@google.com>
+Date: Wed, 30 Mar 2022 13:56:09 -0700
+Message-ID: <CABdmKX2Gxg35k7QiL2Vn4zWhmQ4UnM-Z8cnOXR0fwBWyJnZ+Ng@mail.gmail.com>
+To: Tejun Heo <tj@kernel.org>
+X-MailFrom: tjmercier@google.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: AYMO2DZAO66I4G7QWJUDGHYRPWNRAUVH
+X-Message-ID-Hash: AYMO2DZAO66I4G7QWJUDGHYRPWNRAUVH
+X-Mailman-Approved-At: Thu, 21 Apr 2022 14:03:45 +0000
+CC: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>, Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Benjamin Gaignard <benjamin.gaignard@linaro.org>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>, Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>, Shuah Khan <shuah@kernel.org>, Kalesh Singh <kaleshsingh@goo
+ gle.com>, Kenny.Ho@amd.com, =?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>, Shuah Khan <skhan@linuxfoundation.org>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, cgroups@vger.kernel.org, linux-kselftest@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 03/15] dma-buf & drm/amdgpu: remove dma_resv workaround
+Subject: [Linaro-mm-sig] Re: [RFC v4 2/8] cgroup: gpu: Add a cgroup controller for allocator attribution of GPU memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UOWGG7ROE63CADBCTYOLFF52GPUY2KXD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AYMO2DZAO66I4G7QWJUDGHYRPWNRAUVH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-QW0gMjAuMDQuMjIgdW0gMjE6Mjggc2NocmllYiBaYWNrIFJ1c2luOg0KPiBbU05JUF0NCj4+IFRv
-IGZpZ3VyZSBvdXQgd2hhdCBpdCBpcyBjb3VsZCB5b3UgdHJ5IHRoZSBmb2xsb3dpbmcgY29kZSBm
-cmFnbWVudDoNCj4+DQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3Ztd2dmeC92bXdn
-ZnhfdmFsaWRhdGlvbi5jDQo+PiBiL2RyaXZlcnMvZ3B1L2RybS92bXdnZngvdm13Z2Z4X3ZhbGlk
-YXRpb24uYw0KPj4gaW5kZXggZjQ2ODkxMDEyYmUzLi5hMzZmODlkM2YzNmQgMTAwNjQ0DQo+PiAt
-LS0gYS9kcml2ZXJzL2dwdS9kcm0vdm13Z2Z4L3Ztd2dmeF92YWxpZGF0aW9uLmMNCj4+ICsrKyBi
-L2RyaXZlcnMvZ3B1L2RybS92bXdnZngvdm13Z2Z4X3ZhbGlkYXRpb24uYw0KPj4gQEAgLTI4OCw3
-ICsyODgsNyBAQCBpbnQgdm13X3ZhbGlkYXRpb25fYWRkX2JvKHN0cnVjdA0KPj4gdm13X3ZhbGlk
-YXRpb25fY29udGV4dCAqY3R4LA0KPj4gIMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-IHZhbF9idWYtPmJvID0gdHRtX2JvX2dldF91bmxlc3NfemVybygmdmJvLT5iYXNlKTsNCj4+ICDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBpZiAoIXZhbF9idWYtPmJvKQ0KPj4gIMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVT
-UkNIOw0KPj4gLcKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdmFsX2J1Zi0+bnVtX3NoYXJl
-ZCA9IDA7DQo+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB2YWxfYnVmLT5udW1fc2hh
-cmVkID0gMTY7DQo+PiAgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbGlzdF9hZGRf
-dGFpbCgmdmFsX2J1Zi0+aGVhZCwgJmN0eC0+Ym9fbGlzdCk7DQo+PiAgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgYm9fbm9kZS0+YXNfbW9iID0gYXNfbW9iOw0KPj4gIMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGJvX25vZGUtPmNwdV9ibGl0ID0gY3B1X2JsaXQ7DQo+
-IEZhaWxzIHRoZSBzYW1lIEJVR19PTiB3aXRoIG51bV9mZW5jZXMgYW5kIG1heF9mZW5jZXMgPT0g
-MC4NCg0KVGhhbmtzIGZvciB0ZXN0aW5nIHRoaXMuDQoNClNvIHRoZSBidWZmZXIgb2JqZWN0IGlz
-IG5vdCByZXNlcnZlZCB0aHJvdWdoIA0Kdm13X3ZhbGlkYXRpb25fYm9fcmVzZXJ2ZSgpLCBidXQg
-Y29tZXMgZnJvbSBzb21ld2hlcmUgZWxzZS4gDQpVbmZvcnR1bmF0ZWx5IEkgYWJzb2x1dGVseSBj
-YW4ndCBmaW5kIHdoZXJlIHRoYXQncyBjb21pbmcgZnJvbS4NCg0KRG8geW91IGhhdmUgc29tZSBk
-b2N1bWVudGF0aW9uIGhvd3RvIHNldHVwIHZtd2dmeD8gRS5nLiBzYW1wbGUgVk0gd2hpY2ggDQpJ
-IGNhbiBkb3dubG9hZCBzb21ld2hlcmUgZXRjLi4NCg0KVGhhbmtzLA0KQ2hyaXN0aWFuLg0KDQo+
-DQo+IHoNCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-TGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8u
-b3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBs
-aXN0cy5saW5hcm8ub3JnCg==
+On Tue, Mar 29, 2022 at 9:59 AM Tejun Heo <tj@kernel.org> wrote:
+>
+> Hello,
+
+I'm sorry for the delay Tejun, my test device stopped working and my
+attention has been occupied with that.
+
+>
+> On Mon, Mar 28, 2022 at 03:59:41AM +0000, T.J. Mercier wrote:
+> > The API/UAPI can be extended to set per-device/total allocation limits
+> > in the future.
+>
+> This total thing kinda bothers me. Can you please provide some concrete
+> examples of how this and per-device limits would be used?
+
+The use case we have for accounting the total (separate from the
+individual devices) is to include the value as part of bugreports, for
+understanding the system-wide amount of dmabuf allocations. I'm not
+aware of an existing need to limit the total. Admittedly this is just
+the sum over the devices, but we currently maintain out of tree code
+to do this sort of thing today. [1]
+
+The per-device limits would be used to restrict the amount of each
+type of allocation charged to an individual application to prevent
+hogging or to completely prevent access. This limitation is not
+something we have implemented today, but it is on our roadmap.
+
+[1] https://android-review.googlesource.com/c/kernel/common/+/1566704/3/drivers/dma-buf/dma-heap.c
+
+>
+> Thanks.
+>
+> --
+> tejun
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
