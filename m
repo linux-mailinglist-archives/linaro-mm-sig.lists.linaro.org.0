@@ -2,225 +2,220 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEEDE4F11BC
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 Apr 2022 11:12:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D2384F15A3
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 Apr 2022 15:15:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BA6D8402C6
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 Apr 2022 09:12:55 +0000 (UTC)
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
-	by lists.linaro.org (Postfix) with ESMTPS id 569DA3EA4A
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 Apr 2022 09:12:52 +0000 (UTC)
-Received: from gallifrey.ext.pengutronix.de ([2001:67c:670:201:5054:ff:fe8d:eefb] helo=[IPv6:::1])
-	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <l.stach@pengutronix.de>)
-	id 1nbIlT-00034E-OG; Mon, 04 Apr 2022 11:12:47 +0200
-Message-ID: <0caef672cc44515edd7ead5dfacae09866816524.camel@pengutronix.de>
-From: Lucas Stach <l.stach@pengutronix.de>
-To: Daniel Vetter <daniel.vetter@ffwll.ch>, DRI Development
-	 <dri-devel@lists.freedesktop.org>
-Date: Mon, 04 Apr 2022 11:12:41 +0200
-In-Reply-To: <20220331204651.2699107-2-daniel.vetter@ffwll.ch>
+	by lists.linaro.org (Postfix) with ESMTP id 79A59402D3
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  4 Apr 2022 13:15:55 +0000 (UTC)
+Received: from mail-ed1-f68.google.com (mail-ed1-f68.google.com [209.85.208.68])
+	by lists.linaro.org (Postfix) with ESMTPS id 872F13EC25
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  4 Apr 2022 13:15:51 +0000 (UTC)
+Received: by mail-ed1-f68.google.com with SMTP id g20so11022839edw.6
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 04 Apr 2022 06:15:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ffwll.ch; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:content-transfer-encoding:in-reply-to;
+        bh=e61u/Rj10PyAVoeSur3oRsXcVJaSV8AdUmE92CJGoKQ=;
+        b=HKBE8gVWICPF7qNRCEmA43fR0NRltdik4eQVwFrxJxBprutGVsO+fM5N9XyArxcPEy
+         PuBEUQyeEfncKFJwUQe+0GIx2gI6vB3ZSXMfAIrA+2fBDc7QHHCb7PA0UKC2ws/Bkyc/
+         1spnSjrrdDpvpBJGXhuokkVOWNlt5tDyN237k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:content-transfer-encoding
+         :in-reply-to;
+        bh=e61u/Rj10PyAVoeSur3oRsXcVJaSV8AdUmE92CJGoKQ=;
+        b=az2HUWvn8gap6wrGU1zqCwwhrW/pqu7nnTWLDYsM5gHNuaQh5196B/kWkFd1TpMi/4
+         HQJbwMH9+uERVyyK3PQQW00vvpwy3Qdapbk/HiExtapJkz3IqRkuV7gc2vBb+7jUySh/
+         WV5bhmegECelSCnIG4OkMw9kiWY2P7K8qvF0gidQIjA6Y5z79/nUOHlrnBQ6nHLicmAg
+         sqrFww80OVJ0LJcfFBK7VexUib4uM/My90zDD7NamzkVjAehVVObDRucTrxaHA0nLE9p
+         qXiWNy3XYBdw0c9Ahk4qgVBWO94GO/PFMggGPtyWyIhhBx/qI9rbTpccbi36J/48n/ms
+         p9AQ==
+X-Gm-Message-State: AOAM531LfUWdEaNePDn3JuFi50S4/AY7zpzXvo6k1svnk3Qormdpct27
+	1jw1KxW0ZZMLIDg3zW12P2k+mA==
+X-Google-Smtp-Source: ABdhPJwetqXSOPzrs5uLpbEKMUuPL/AWkbxb9URzD/9fEBDPmvIgfQeHiIK5eM9V3hD1COpE/EBqLw==
+X-Received: by 2002:a05:6402:3693:b0:41c:dd5a:e8ca with SMTP id ej19-20020a056402369300b0041cdd5ae8camr662958edb.225.1649078150565;
+        Mon, 04 Apr 2022 06:15:50 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id b12-20020a170906038c00b006e4e48969d2sm3665065eja.88.2022.04.04.06.15.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 04 Apr 2022 06:15:50 -0700 (PDT)
+Date: Mon, 4 Apr 2022 15:15:48 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: DRI Development <dri-devel@lists.freedesktop.org>
+Message-ID: <YkrvhG/ODfshvX+y@phenom.ffwll.local>
 References: <20220331204651.2699107-1-daniel.vetter@ffwll.ch>
-	 <20220331204651.2699107-2-daniel.vetter@ffwll.ch>
-User-Agent: Evolution 3.40.4 (3.40.4-1.fc34) 
+ <20220331204651.2699107-3-daniel.vetter@ffwll.ch>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2001:67c:670:201:5054:ff:fe8d:eefb
-X-SA-Exim-Mail-From: l.stach@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linaro-mm-sig@lists.linaro.org
-Message-ID-Hash: OZYS5SEK46DZ7BRZALNJ6XSNRMWYQ2WQ
-X-Message-ID-Hash: OZYS5SEK46DZ7BRZALNJ6XSNRMWYQ2WQ
-X-MailFrom: l.stach@pengutronix.de
+Content-Disposition: inline
+In-Reply-To: <20220331204651.2699107-3-daniel.vetter@ffwll.ch>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
+Message-ID-Hash: PGBBTK2KGIBZZN4TXNDCOKOSH5EYSPF3
+X-Message-ID-Hash: PGBBTK2KGIBZZN4TXNDCOKOSH5EYSPF3
+X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: etnaviv@lists.freedesktop.org, Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org, Christian Gmeiner <christian.gmeiner@gmail.com>, Russell King <linux+etnaviv@armlinux.org.uk>, Daniel Vetter <daniel.vetter@intel.com>, linux-media@vger.kernel.org
+CC: Daniel Vetter <daniel.vetter@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/4] drm/etnaviv: Use scheduler dependency handling
+Subject: [Linaro-mm-sig] Re: [PATCH 2/4] drm/gem: Delete gem array fencing helpers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OZYS5SEK46DZ7BRZALNJ6XSNRMWYQ2WQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PGBBTK2KGIBZZN4TXNDCOKOSH5EYSPF3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-QW0gRG9ubmVyc3RhZywgZGVtIDMxLjAzLjIwMjIgdW0gMjI6NDYgKzAyMDAgc2NocmllYiBEYW5p
-ZWwgVmV0dGVyOg0KPiBXZSBuZWVkIHRvIHB1bGwgdGhlIGRybV9zY2hlZF9qb2JfaW5pdCBtdWNo
-IGVhcmxpZXIsIGJ1dCB0aGF0J3MgdmVyeQ0KPiBtaW5vciBzdXJnZXJ5Lg0KPiANCj4gdjI6IEFj
-dHVhbGx5IGZpeCB1cCBjbGVhbnVwIHBhdGhzIGJ5IGNhbGxpbmcgZHJtX3NjaGVkX2pvYl9pbml0
-LCB3aGljaA0KPiBJIHdhbnRlZCB0byB0byBpbiB0aGUgcHJldmlvdXMgcm91bmQgKGFuZCBkaWQs
-IGZvciBhbGwgb3RoZXIgZHJpdmVycykuDQo+IFNwb3R0ZWQgYnkgTHVjYXMuDQo+IA0KPiB2Mzog
-UmViYXNlIG92ZXIgcmVuYW1lZCBmdW5jdGlvbnMgdG8gYWRkIGRlcGVuZGVuY2llcy4NCj4gDQo+
-IHY0OiBSZWJhc2Ugb3ZlciBwYXRjaGVzIGZyb20gQ2hyaXN0aWFuLg0KPiANCj4gdjU6IE1vcmUg
-cmViYXNpbmcgb3ZlciB3b3JrIGZyb20gQ2hyaXN0aWFuLg0KPiANCj4gU2lnbmVkLW9mZi1ieTog
-RGFuaWVsIFZldHRlciA8ZGFuaWVsLnZldHRlckBpbnRlbC5jb20+DQo+IENjOiBMdWNhcyBTdGFj
-aCA8bC5zdGFjaEBwZW5ndXRyb25peC5kZT4NCj4gQ2M6IFJ1c3NlbGwgS2luZyA8bGludXgrZXRu
-YXZpdkBhcm1saW51eC5vcmcudWs+DQo+IENjOiBDaHJpc3RpYW4gR21laW5lciA8Y2hyaXN0aWFu
-LmdtZWluZXJAZ21haWwuY29tPg0KPiBDYzogU3VtaXQgU2Vtd2FsIDxzdW1pdC5zZW13YWxAbGlu
-YXJvLm9yZz4NCj4gQ2M6ICJDaHJpc3RpYW4gS8O2bmlnIiA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQu
-Y29tPg0KPiBDYzogZXRuYXZpdkBsaXN0cy5mcmVlZGVza3RvcC5vcmcNCj4gQ2M6IGxpbnV4LW1l
-ZGlhQHZnZXIua2VybmVsLm9yZw0KPiBDYzogbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3Jn
-DQoNCkFja2VkLWJ5OiBMdWNhcyBTdGFjaCA8bC5zdGFjaEBwZW5ndXRyb25peC5kZT4NCg0KPiAt
-LS0NCj4gIGRyaXZlcnMvZ3B1L2RybS9ldG5hdml2L2V0bmF2aXZfZ2VtLmggICAgICAgIHwgIDQg
-Ky0NCj4gIGRyaXZlcnMvZ3B1L2RybS9ldG5hdml2L2V0bmF2aXZfZ2VtX3N1Ym1pdC5jIHwgNTEg
-KysrKysrKysrKystLS0tLS0tLQ0KPiAgZHJpdmVycy9ncHUvZHJtL2V0bmF2aXYvZXRuYXZpdl9z
-Y2hlZC5jICAgICAgfCA1MyArLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiAgZHJpdmVycy9ncHUvZHJt
-L2V0bmF2aXYvZXRuYXZpdl9zY2hlZC5oICAgICAgfCAgMyArLQ0KPiAgNCBmaWxlcyBjaGFuZ2Vk
-LCAzNSBpbnNlcnRpb25zKCspLCA3NiBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9k
-cml2ZXJzL2dwdS9kcm0vZXRuYXZpdi9ldG5hdml2X2dlbS5oIGIvZHJpdmVycy9ncHUvZHJtL2V0
-bmF2aXYvZXRuYXZpdl9nZW0uaA0KPiBpbmRleCA4OTgzYTBlZjM4M2UuLjYzNjg4ZTZlNDU4MCAx
-MDA2NDQNCj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL2V0bmF2aXYvZXRuYXZpdl9nZW0uaA0KPiAr
-KysgYi9kcml2ZXJzL2dwdS9kcm0vZXRuYXZpdi9ldG5hdml2X2dlbS5oDQo+IEBAIC04MCw4ICs4
-MCw2IEBAIHN0cnVjdCBldG5hdml2X2dlbV9zdWJtaXRfYm8gew0KPiAgCXU2NCB2YTsNCj4gIAlz
-dHJ1Y3QgZXRuYXZpdl9nZW1fb2JqZWN0ICpvYmo7DQo+ICAJc3RydWN0IGV0bmF2aXZfdnJhbV9t
-YXBwaW5nICptYXBwaW5nOw0KPiAtCXVuc2lnbmVkIGludCBucl9mZW5jZXM7DQo+IC0Jc3RydWN0
-IGRtYV9mZW5jZSAqKmZlbmNlczsNCj4gIH07DQo+ICANCj4gIC8qIENyZWF0ZWQgcGVyIHN1Ym1p
-dC1pb2N0bCwgdG8gdHJhY2sgYm8ncyBhbmQgY21kc3RyZWFtIGJ1ZnMsIGV0YywNCj4gQEAgLTk0
-LDcgKzkyLDcgQEAgc3RydWN0IGV0bmF2aXZfZ2VtX3N1Ym1pdCB7DQo+ICAJc3RydWN0IGV0bmF2
-aXZfZmlsZV9wcml2YXRlICpjdHg7DQo+ICAJc3RydWN0IGV0bmF2aXZfZ3B1ICpncHU7DQo+ICAJ
-c3RydWN0IGV0bmF2aXZfaW9tbXVfY29udGV4dCAqbW11X2NvbnRleHQsICpwcmV2X21tdV9jb250
-ZXh0Ow0KPiAtCXN0cnVjdCBkbWFfZmVuY2UgKm91dF9mZW5jZSwgKmluX2ZlbmNlOw0KPiArCXN0
-cnVjdCBkbWFfZmVuY2UgKm91dF9mZW5jZTsNCj4gIAlpbnQgb3V0X2ZlbmNlX2lkOw0KPiAgCXN0
-cnVjdCBsaXN0X2hlYWQgbm9kZTsgLyogR1BVIGFjdGl2ZSBzdWJtaXQgbGlzdCAqLw0KPiAgCXN0
-cnVjdCBldG5hdml2X2NtZGJ1ZiBjbWRidWY7DQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9k
-cm0vZXRuYXZpdi9ldG5hdml2X2dlbV9zdWJtaXQuYyBiL2RyaXZlcnMvZ3B1L2RybS9ldG5hdml2
-L2V0bmF2aXZfZ2VtX3N1Ym1pdC5jDQo+IGluZGV4IDU5MmNiYjM4NjA5YS4uNWY1MDJjNDlhZWMy
-IDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vZXRuYXZpdi9ldG5hdml2X2dlbV9zdWJt
-aXQuYw0KPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vZXRuYXZpdi9ldG5hdml2X2dlbV9zdWJtaXQu
-Yw0KPiBAQCAtMTg4LDkgKzE4OCw5IEBAIHN0YXRpYyBpbnQgc3VibWl0X2ZlbmNlX3N5bmMoc3Ry
-dWN0IGV0bmF2aXZfZ2VtX3N1Ym1pdCAqc3VibWl0KQ0KPiAgCQlpZiAoc3VibWl0LT5mbGFncyAm
-IEVUTkFfU1VCTUlUX05PX0lNUExJQ0lUKQ0KPiAgCQkJY29udGludWU7DQo+ICANCj4gLQkJcmV0
-ID0gZG1hX3Jlc3ZfZ2V0X2ZlbmNlcyhyb2JqLA0KPiAtCQkJCQkgIGJvLT5mbGFncyAmIEVUTkFf
-U1VCTUlUX0JPX1dSSVRFLA0KPiAtCQkJCQkgICZiby0+bnJfZmVuY2VzLCAmYm8tPmZlbmNlcyk7
-DQo+ICsJCXJldCA9IGRybV9zY2hlZF9qb2JfYWRkX2ltcGxpY2l0X2RlcGVuZGVuY2llcygmc3Vi
-bWl0LT5zY2hlZF9qb2IsDQo+ICsJCQkJCQkJICAgICAgJmJvLT5vYmotPmJhc2UsDQo+ICsJCQkJ
-CQkJICAgICAgYm8tPmZsYWdzICYgRVROQV9TVUJNSVRfQk9fV1JJVEUpOw0KPiAgCQlpZiAocmV0
-KQ0KPiAgCQkJcmV0dXJuIHJldDsNCj4gIAl9DQo+IEBAIC0zOTgsOCArMzk4LDYgQEAgc3RhdGlj
-IHZvaWQgc3VibWl0X2NsZWFudXAoc3RydWN0IGtyZWYgKmtyZWYpDQo+ICANCj4gIAl3YWtlX3Vw
-X2FsbCgmc3VibWl0LT5ncHUtPmZlbmNlX2V2ZW50KTsNCj4gIA0KPiAtCWlmIChzdWJtaXQtPmlu
-X2ZlbmNlKQ0KPiAtCQlkbWFfZmVuY2VfcHV0KHN1Ym1pdC0+aW5fZmVuY2UpOw0KPiAgCWlmIChz
-dWJtaXQtPm91dF9mZW5jZSkgew0KPiAgCQkvKiBmaXJzdCByZW1vdmUgZnJvbSBJRFIsIHNvIGZl
-bmNlIGNhbiBub3QgYmUgZm91bmQgYW55bW9yZSAqLw0KPiAgCQltdXRleF9sb2NrKCZzdWJtaXQt
-PmdwdS0+ZmVuY2VfbG9jayk7DQo+IEBAIC01MzAsNTggKzUyOCw2OSBAQCBpbnQgZXRuYXZpdl9p
-b2N0bF9nZW1fc3VibWl0KHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHZvaWQgKmRhdGEsDQo+ICAJ
-cmV0ID0gZXRuYXZpdl9jbWRidWZfaW5pdChwcml2LT5jbWRidWZfc3ViYWxsb2MsICZzdWJtaXQt
-PmNtZGJ1ZiwNCj4gIAkJCQkgIEFMSUdOKGFyZ3MtPnN0cmVhbV9zaXplLCA4KSArIDgpOw0KPiAg
-CWlmIChyZXQpDQo+IC0JCWdvdG8gZXJyX3N1Ym1pdF9vYmplY3RzOw0KPiArCQlnb3RvIGVycl9z
-dWJtaXRfcHV0Ow0KPiAgDQo+ICAJc3VibWl0LT5jdHggPSBmaWxlLT5kcml2ZXJfcHJpdjsNCj4g
-IAlzdWJtaXQtPm1tdV9jb250ZXh0ID0gZXRuYXZpdl9pb21tdV9jb250ZXh0X2dldChzdWJtaXQt
-PmN0eC0+bW11KTsNCj4gIAlzdWJtaXQtPmV4ZWNfc3RhdGUgPSBhcmdzLT5leGVjX3N0YXRlOw0K
-PiAgCXN1Ym1pdC0+ZmxhZ3MgPSBhcmdzLT5mbGFnczsNCj4gIA0KPiArCXJldCA9IGRybV9zY2hl
-ZF9qb2JfaW5pdCgmc3VibWl0LT5zY2hlZF9qb2IsDQo+ICsJCQkJICZjdHgtPnNjaGVkX2VudGl0
-eVthcmdzLT5waXBlXSwNCj4gKwkJCQkgc3VibWl0LT5jdHgpOw0KPiArCWlmIChyZXQpDQo+ICsJ
-CWdvdG8gZXJyX3N1Ym1pdF9wdXQ7DQo+ICsNCj4gIAlyZXQgPSBzdWJtaXRfbG9va3VwX29iamVj
-dHMoc3VibWl0LCBmaWxlLCBib3MsIGFyZ3MtPm5yX2Jvcyk7DQo+ICAJaWYgKHJldCkNCj4gLQkJ
-Z290byBlcnJfc3VibWl0X29iamVjdHM7DQo+ICsJCWdvdG8gZXJyX3N1Ym1pdF9qb2I7DQo+ICAN
-Cj4gIAlpZiAoKHByaXYtPm1tdV9nbG9iYWwtPnZlcnNpb24gIT0gRVROQVZJVl9JT01NVV9WMikg
-JiYNCj4gIAkgICAgIWV0bmF2aXZfY21kX3ZhbGlkYXRlX29uZShncHUsIHN0cmVhbSwgYXJncy0+
-c3RyZWFtX3NpemUgLyA0LA0KPiAgCQkJCSAgICAgIHJlbG9jcywgYXJncy0+bnJfcmVsb2NzKSkg
-ew0KPiAgCQlyZXQgPSAtRUlOVkFMOw0KPiAtCQlnb3RvIGVycl9zdWJtaXRfb2JqZWN0czsNCj4g
-KwkJZ290byBlcnJfc3VibWl0X2pvYjsNCj4gIAl9DQo+ICANCj4gIAlpZiAoYXJncy0+ZmxhZ3Mg
-JiBFVE5BX1NVQk1JVF9GRU5DRV9GRF9JTikgew0KPiAtCQlzdWJtaXQtPmluX2ZlbmNlID0gc3lu
-Y19maWxlX2dldF9mZW5jZShhcmdzLT5mZW5jZV9mZCk7DQo+IC0JCWlmICghc3VibWl0LT5pbl9m
-ZW5jZSkgew0KPiArCQlzdHJ1Y3QgZG1hX2ZlbmNlICppbl9mZW5jZSA9IHN5bmNfZmlsZV9nZXRf
-ZmVuY2UoYXJncy0+ZmVuY2VfZmQpOw0KPiArCQlpZiAoIWluX2ZlbmNlKSB7DQo+ICAJCQlyZXQg
-PSAtRUlOVkFMOw0KPiAtCQkJZ290byBlcnJfc3VibWl0X29iamVjdHM7DQo+ICsJCQlnb3RvIGVy
-cl9zdWJtaXRfam9iOw0KPiAgCQl9DQo+ICsNCj4gKwkJcmV0ID0gZHJtX3NjaGVkX2pvYl9hZGRf
-ZGVwZW5kZW5jeSgmc3VibWl0LT5zY2hlZF9qb2IsDQo+ICsJCQkJCQkgICBpbl9mZW5jZSk7DQo+
-ICsJCWlmIChyZXQpDQo+ICsJCQlnb3RvIGVycl9zdWJtaXRfam9iOw0KPiAgCX0NCj4gIA0KPiAg
-CXJldCA9IHN1Ym1pdF9waW5fb2JqZWN0cyhzdWJtaXQpOw0KPiAgCWlmIChyZXQpDQo+IC0JCWdv
-dG8gZXJyX3N1Ym1pdF9vYmplY3RzOw0KPiArCQlnb3RvIGVycl9zdWJtaXRfam9iOw0KPiAgDQo+
-ICAJcmV0ID0gc3VibWl0X3JlbG9jKHN1Ym1pdCwgc3RyZWFtLCBhcmdzLT5zdHJlYW1fc2l6ZSAv
-IDQsDQo+ICAJCQkgICByZWxvY3MsIGFyZ3MtPm5yX3JlbG9jcyk7DQo+ICAJaWYgKHJldCkNCj4g
-LQkJZ290byBlcnJfc3VibWl0X29iamVjdHM7DQo+ICsJCWdvdG8gZXJyX3N1Ym1pdF9qb2I7DQo+
-ICANCj4gIAlyZXQgPSBzdWJtaXRfcGVyZm1vbl92YWxpZGF0ZShzdWJtaXQsIGFyZ3MtPmV4ZWNf
-c3RhdGUsIHBtcnMpOw0KPiAgCWlmIChyZXQpDQo+IC0JCWdvdG8gZXJyX3N1Ym1pdF9vYmplY3Rz
-Ow0KPiArCQlnb3RvIGVycl9zdWJtaXRfam9iOw0KPiAgDQo+ICAJbWVtY3B5KHN1Ym1pdC0+Y21k
-YnVmLnZhZGRyLCBzdHJlYW0sIGFyZ3MtPnN0cmVhbV9zaXplKTsNCj4gIA0KPiAgCXJldCA9IHN1
-Ym1pdF9sb2NrX29iamVjdHMoc3VibWl0LCAmdGlja2V0KTsNCj4gIAlpZiAocmV0KQ0KPiAtCQln
-b3RvIGVycl9zdWJtaXRfb2JqZWN0czsNCj4gKwkJZ290byBlcnJfc3VibWl0X2pvYjsNCj4gIA0K
-PiAgCXJldCA9IHN1Ym1pdF9mZW5jZV9zeW5jKHN1Ym1pdCk7DQo+ICAJaWYgKHJldCkNCj4gLQkJ
-Z290byBlcnJfc3VibWl0X29iamVjdHM7DQo+ICsJCWdvdG8gZXJyX3N1Ym1pdF9qb2I7DQo+ICAN
-Cj4gLQlyZXQgPSBldG5hdml2X3NjaGVkX3B1c2hfam9iKCZjdHgtPnNjaGVkX2VudGl0eVthcmdz
-LT5waXBlXSwgc3VibWl0KTsNCj4gKwlyZXQgPSBldG5hdml2X3NjaGVkX3B1c2hfam9iKHN1Ym1p
-dCk7DQo+ICAJaWYgKHJldCkNCj4gLQkJZ290byBlcnJfc3VibWl0X29iamVjdHM7DQo+ICsJCWdv
-dG8gZXJyX3N1Ym1pdF9qb2I7DQo+ICANCj4gIAlzdWJtaXRfYXR0YWNoX29iamVjdF9mZW5jZXMo
-c3VibWl0KTsNCj4gIA0KPiBAQCAtNTk1LDcgKzYwNCw3IEBAIGludCBldG5hdml2X2lvY3RsX2dl
-bV9zdWJtaXQoc3RydWN0IGRybV9kZXZpY2UgKmRldiwgdm9pZCAqZGF0YSwNCj4gIAkJc3luY19m
-aWxlID0gc3luY19maWxlX2NyZWF0ZShzdWJtaXQtPm91dF9mZW5jZSk7DQo+ICAJCWlmICghc3lu
-Y19maWxlKSB7DQo+ICAJCQlyZXQgPSAtRU5PTUVNOw0KPiAtCQkJZ290byBlcnJfc3VibWl0X29i
-amVjdHM7DQo+ICsJCQlnb3RvIGVycl9zdWJtaXRfam9iOw0KPiAgCQl9DQo+ICAJCWZkX2luc3Rh
-bGwob3V0X2ZlbmNlX2ZkLCBzeW5jX2ZpbGUtPmZpbGUpOw0KPiAgCX0NCj4gQEAgLTYwMyw3ICs2
-MTIsOSBAQCBpbnQgZXRuYXZpdl9pb2N0bF9nZW1fc3VibWl0KHN0cnVjdCBkcm1fZGV2aWNlICpk
-ZXYsIHZvaWQgKmRhdGEsDQo+ICAJYXJncy0+ZmVuY2VfZmQgPSBvdXRfZmVuY2VfZmQ7DQo+ICAJ
-YXJncy0+ZmVuY2UgPSBzdWJtaXQtPm91dF9mZW5jZV9pZDsNCj4gIA0KPiAtZXJyX3N1Ym1pdF9v
-YmplY3RzOg0KPiArZXJyX3N1Ym1pdF9qb2I6DQo+ICsJZHJtX3NjaGVkX2pvYl9jbGVhbnVwKCZz
-dWJtaXQtPnNjaGVkX2pvYik7DQo+ICtlcnJfc3VibWl0X3B1dDoNCj4gIAlldG5hdml2X3N1Ym1p
-dF9wdXQoc3VibWl0KTsNCj4gIA0KPiAgZXJyX3N1Ym1pdF93d19hY3F1aXJlOg0KPiBkaWZmIC0t
-Z2l0IGEvZHJpdmVycy9ncHUvZHJtL2V0bmF2aXYvZXRuYXZpdl9zY2hlZC5jIGIvZHJpdmVycy9n
-cHUvZHJtL2V0bmF2aXYvZXRuYXZpdl9zY2hlZC5jDQo+IGluZGV4IGE4NDUyY2UxMGUzYS4uNzJl
-MjU1M2ZiYzk4IDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vZXRuYXZpdi9ldG5hdml2
-X3NjaGVkLmMNCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2V0bmF2aXYvZXRuYXZpdl9zY2hlZC5j
-DQo+IEBAIC0xNyw0OCArMTcsNiBAQCBtb2R1bGVfcGFyYW1fbmFtZWQoam9iX2hhbmdfbGltaXQs
-IGV0bmF2aXZfam9iX2hhbmdfbGltaXQsIGludCAsIDA0NDQpOw0KPiAgc3RhdGljIGludCBldG5h
-dml2X2h3X2pvYnNfbGltaXQgPSA0Ow0KPiAgbW9kdWxlX3BhcmFtX25hbWVkKGh3X2pvYl9saW1p
-dCwgZXRuYXZpdl9od19qb2JzX2xpbWl0LCBpbnQgLCAwNDQ0KTsNCj4gIA0KPiAtc3RhdGljIHN0
-cnVjdCBkbWFfZmVuY2UgKg0KPiAtZXRuYXZpdl9zY2hlZF9kZXBlbmRlbmN5KHN0cnVjdCBkcm1f
-c2NoZWRfam9iICpzY2hlZF9qb2IsDQo+IC0JCQkgc3RydWN0IGRybV9zY2hlZF9lbnRpdHkgKmVu
-dGl0eSkNCj4gLXsNCj4gLQlzdHJ1Y3QgZXRuYXZpdl9nZW1fc3VibWl0ICpzdWJtaXQgPSB0b19l
-dG5hdml2X3N1Ym1pdChzY2hlZF9qb2IpOw0KPiAtCXN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlOw0K
-PiAtCWludCBpOw0KPiAtDQo+IC0JaWYgKHVubGlrZWx5KHN1Ym1pdC0+aW5fZmVuY2UpKSB7DQo+
-IC0JCWZlbmNlID0gc3VibWl0LT5pbl9mZW5jZTsNCj4gLQkJc3VibWl0LT5pbl9mZW5jZSA9IE5V
-TEw7DQo+IC0NCj4gLQkJaWYgKCFkbWFfZmVuY2VfaXNfc2lnbmFsZWQoZmVuY2UpKQ0KPiAtCQkJ
-cmV0dXJuIGZlbmNlOw0KPiAtDQo+IC0JCWRtYV9mZW5jZV9wdXQoZmVuY2UpOw0KPiAtCX0NCj4g
-LQ0KPiAtCWZvciAoaSA9IDA7IGkgPCBzdWJtaXQtPm5yX2JvczsgaSsrKSB7DQo+IC0JCXN0cnVj
-dCBldG5hdml2X2dlbV9zdWJtaXRfYm8gKmJvID0gJnN1Ym1pdC0+Ym9zW2ldOw0KPiAtCQlpbnQg
-ajsNCj4gLQ0KPiAtCQlmb3IgKGogPSAwOyBqIDwgYm8tPm5yX2ZlbmNlczsgaisrKSB7DQo+IC0J
-CQlpZiAoIWJvLT5mZW5jZXNbal0pDQo+IC0JCQkJY29udGludWU7DQo+IC0NCj4gLQkJCWZlbmNl
-ID0gYm8tPmZlbmNlc1tqXTsNCj4gLQkJCWJvLT5mZW5jZXNbal0gPSBOVUxMOw0KPiAtDQo+IC0J
-CQlpZiAoIWRtYV9mZW5jZV9pc19zaWduYWxlZChmZW5jZSkpDQo+IC0JCQkJcmV0dXJuIGZlbmNl
-Ow0KPiAtDQo+IC0JCQlkbWFfZmVuY2VfcHV0KGZlbmNlKTsNCj4gLQkJfQ0KPiAtCQlrZnJlZShi
-by0+ZmVuY2VzKTsNCj4gLQkJYm8tPm5yX2ZlbmNlcyA9IDA7DQo+IC0JCWJvLT5mZW5jZXMgPSBO
-VUxMOw0KPiAtCX0NCj4gLQ0KPiAtCXJldHVybiBOVUxMOw0KPiAtfQ0KPiAtDQo+ICBzdGF0aWMg
-c3RydWN0IGRtYV9mZW5jZSAqZXRuYXZpdl9zY2hlZF9ydW5fam9iKHN0cnVjdCBkcm1fc2NoZWRf
-am9iICpzY2hlZF9qb2IpDQo+ICB7DQo+ICAJc3RydWN0IGV0bmF2aXZfZ2VtX3N1Ym1pdCAqc3Vi
-bWl0ID0gdG9fZXRuYXZpdl9zdWJtaXQoc2NoZWRfam9iKTsNCj4gQEAgLTEzMiwyOSArOTAsMjIg
-QEAgc3RhdGljIHZvaWQgZXRuYXZpdl9zY2hlZF9mcmVlX2pvYihzdHJ1Y3QgZHJtX3NjaGVkX2pv
-YiAqc2NoZWRfam9iKQ0KPiAgfQ0KPiAgDQo+ICBzdGF0aWMgY29uc3Qgc3RydWN0IGRybV9zY2hl
-ZF9iYWNrZW5kX29wcyBldG5hdml2X3NjaGVkX29wcyA9IHsNCj4gLQkuZGVwZW5kZW5jeSA9IGV0
-bmF2aXZfc2NoZWRfZGVwZW5kZW5jeSwNCj4gIAkucnVuX2pvYiA9IGV0bmF2aXZfc2NoZWRfcnVu
-X2pvYiwNCj4gIAkudGltZWRvdXRfam9iID0gZXRuYXZpdl9zY2hlZF90aW1lZG91dF9qb2IsDQo+
-ICAJLmZyZWVfam9iID0gZXRuYXZpdl9zY2hlZF9mcmVlX2pvYiwNCj4gIH07DQo+ICANCj4gLWlu
-dCBldG5hdml2X3NjaGVkX3B1c2hfam9iKHN0cnVjdCBkcm1fc2NoZWRfZW50aXR5ICpzY2hlZF9l
-bnRpdHksDQo+IC0JCQkgICBzdHJ1Y3QgZXRuYXZpdl9nZW1fc3VibWl0ICpzdWJtaXQpDQo+ICtp
-bnQgZXRuYXZpdl9zY2hlZF9wdXNoX2pvYihzdHJ1Y3QgZXRuYXZpdl9nZW1fc3VibWl0ICpzdWJt
-aXQpDQo+ICB7DQo+ICAJaW50IHJldCA9IDA7DQo+ICANCj4gIAkvKg0KPiAgCSAqIEhvbGQgdGhl
-IGZlbmNlIGxvY2sgYWNyb3NzIHRoZSB3aG9sZSBvcGVyYXRpb24gdG8gYXZvaWQgam9icyBiZWlu
-Zw0KPiAgCSAqIHB1c2hlZCBvdXQgb2Ygb3JkZXIgd2l0aCByZWdhcmQgdG8gdGhlaXIgc2NoZWQg
-ZmVuY2Ugc2Vxbm9zIGFzDQo+IC0JICogYWxsb2NhdGVkIGluIGRybV9zY2hlZF9qb2JfaW5pdC4N
-Cj4gKwkgKiBhbGxvY2F0ZWQgaW4gZHJtX3NjaGVkX2pvYl9hcm0uDQo+ICAJICovDQo+ICAJbXV0
-ZXhfbG9jaygmc3VibWl0LT5ncHUtPmZlbmNlX2xvY2spOw0KPiAgDQo+IC0JcmV0ID0gZHJtX3Nj
-aGVkX2pvYl9pbml0KCZzdWJtaXQtPnNjaGVkX2pvYiwgc2NoZWRfZW50aXR5LA0KPiAtCQkJCSBz
-dWJtaXQtPmN0eCk7DQo+IC0JaWYgKHJldCkNCj4gLQkJZ290byBvdXRfdW5sb2NrOw0KPiAtDQo+
-ICAJZHJtX3NjaGVkX2pvYl9hcm0oJnN1Ym1pdC0+c2NoZWRfam9iKTsNCj4gIA0KPiAgCXN1Ym1p
-dC0+b3V0X2ZlbmNlID0gZG1hX2ZlbmNlX2dldCgmc3VibWl0LT5zY2hlZF9qb2Iuc19mZW5jZS0+
-ZmluaXNoZWQpOw0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL2V0bmF2aXYvZXRuYXZp
-dl9zY2hlZC5oIGIvZHJpdmVycy9ncHUvZHJtL2V0bmF2aXYvZXRuYXZpdl9zY2hlZC5oDQo+IGlu
-ZGV4IGMwYTY3OTZlMjJjOS4uYmFlYmZhMDY5YWZjIDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL2dw
-dS9kcm0vZXRuYXZpdi9ldG5hdml2X3NjaGVkLmgNCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2V0
-bmF2aXYvZXRuYXZpdl9zY2hlZC5oDQo+IEBAIC0xOCw3ICsxOCw2IEBAIHN0cnVjdCBldG5hdml2
-X2dlbV9zdWJtaXQgKnRvX2V0bmF2aXZfc3VibWl0KHN0cnVjdCBkcm1fc2NoZWRfam9iICpzY2hl
-ZF9qb2IpDQo+ICANCj4gIGludCBldG5hdml2X3NjaGVkX2luaXQoc3RydWN0IGV0bmF2aXZfZ3B1
-ICpncHUpOw0KPiAgdm9pZCBldG5hdml2X3NjaGVkX2Zpbmkoc3RydWN0IGV0bmF2aXZfZ3B1ICpn
-cHUpOw0KPiAtaW50IGV0bmF2aXZfc2NoZWRfcHVzaF9qb2Ioc3RydWN0IGRybV9zY2hlZF9lbnRp
-dHkgKnNjaGVkX2VudGl0eSwNCj4gLQkJCSAgIHN0cnVjdCBldG5hdml2X2dlbV9zdWJtaXQgKnN1
-Ym1pdCk7DQo+ICtpbnQgZXRuYXZpdl9zY2hlZF9wdXNoX2pvYihzdHJ1Y3QgZXRuYXZpdl9nZW1f
-c3VibWl0ICpzdWJtaXQpOw0KPiAgDQo+ICAjZW5kaWYgLyogX19FVE5BVklWX1NDSEVEX0hfXyAq
-Lw0KDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxp
-bmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9y
-ZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlz
-dHMubGluYXJvLm9yZwo=
+On Thu, Mar 31, 2022 at 10:46:49PM +0200, Daniel Vetter wrote:
+> Integrated into the scheduler now and all users converted over.
+>=20
+> v2: Rebased over changes from K=F6nig.
+>=20
+> Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+> Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+> Cc: Maxime Ripard <mripard@kernel.org>
+> Cc: Thomas Zimmermann <tzimmermann@suse.de>
+> Cc: David Airlie <airlied@linux.ie>
+> Cc: Daniel Vetter <daniel@ffwll.ch>
+> Cc: Sumit Semwal <sumit.semwal@linaro.org>
+> Cc: "Christian K=F6nig" <christian.koenig@amd.com>
+> Cc: linux-media@vger.kernel.org
+> Cc: linaro-mm-sig@lists.linaro.org
+
+Anyone up for an ack for this one here?
+
+Thanks, Daniel
+
+> ---
+>  drivers/gpu/drm/drm_gem.c | 80 ---------------------------------------
+>  include/drm/drm_gem.h     |  5 ---
+>  2 files changed, 85 deletions(-)
+>=20
+> diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
+> index 56fb87885146..133dfae06fab 100644
+> --- a/drivers/gpu/drm/drm_gem.c
+> +++ b/drivers/gpu/drm/drm_gem.c
+> @@ -1273,83 +1273,3 @@ drm_gem_unlock_reservations(struct drm_gem_object =
+**objs, int count,
+>  	ww_acquire_fini(acquire_ctx);
+>  }
+>  EXPORT_SYMBOL(drm_gem_unlock_reservations);
+> -
+> -/**
+> - * drm_gem_fence_array_add - Adds the fence to an array of fences to be
+> - * waited on, deduplicating fences from the same context.
+> - *
+> - * @fence_array: array of dma_fence * for the job to block on.
+> - * @fence: the dma_fence to add to the list of dependencies.
+> - *
+> - * This functions consumes the reference for @fence both on success and =
+error
+> - * cases.
+> - *
+> - * Returns:
+> - * 0 on success, or an error on failing to expand the array.
+> - */
+> -int drm_gem_fence_array_add(struct xarray *fence_array,
+> -			    struct dma_fence *fence)
+> -{
+> -	struct dma_fence *entry;
+> -	unsigned long index;
+> -	u32 id =3D 0;
+> -	int ret;
+> -
+> -	if (!fence)
+> -		return 0;
+> -
+> -	/* Deduplicate if we already depend on a fence from the same context.
+> -	 * This lets the size of the array of deps scale with the number of
+> -	 * engines involved, rather than the number of BOs.
+> -	 */
+> -	xa_for_each(fence_array, index, entry) {
+> -		if (entry->context !=3D fence->context)
+> -			continue;
+> -
+> -		if (dma_fence_is_later(fence, entry)) {
+> -			dma_fence_put(entry);
+> -			xa_store(fence_array, index, fence, GFP_KERNEL);
+> -		} else {
+> -			dma_fence_put(fence);
+> -		}
+> -		return 0;
+> -	}
+> -
+> -	ret =3D xa_alloc(fence_array, &id, fence, xa_limit_32b, GFP_KERNEL);
+> -	if (ret !=3D 0)
+> -		dma_fence_put(fence);
+> -
+> -	return ret;
+> -}
+> -EXPORT_SYMBOL(drm_gem_fence_array_add);
+> -
+> -/**
+> - * drm_gem_fence_array_add_implicit - Adds the implicit dependencies tra=
+cked
+> - * in the GEM object's reservation object to an array of dma_fences for =
+use in
+> - * scheduling a rendering job.
+> - *
+> - * This should be called after drm_gem_lock_reservations() on your array=
+ of
+> - * GEM objects used in the job but before updating the reservations with=
+ your
+> - * own fences.
+> - *
+> - * @fence_array: array of dma_fence * for the job to block on.
+> - * @obj: the gem object to add new dependencies from.
+> - * @write: whether the job might write the object (so we need to depend =
+on
+> - * shared fences in the reservation object).
+> - */
+> -int drm_gem_fence_array_add_implicit(struct xarray *fence_array,
+> -				     struct drm_gem_object *obj,
+> -				     bool write)
+> -{
+> -	struct dma_resv_iter cursor;
+> -	struct dma_fence *fence;
+> -	int ret =3D 0;
+> -
+> -	dma_resv_for_each_fence(&cursor, obj->resv, write, fence) {
+> -		ret =3D drm_gem_fence_array_add(fence_array, fence);
+> -		if (ret)
+> -			break;
+> -	}
+> -	return ret;
+> -}
+> -EXPORT_SYMBOL(drm_gem_fence_array_add_implicit);
+> diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
+> index e2941cee14b6..9d7c61a122dc 100644
+> --- a/include/drm/drm_gem.h
+> +++ b/include/drm/drm_gem.h
+> @@ -407,11 +407,6 @@ int drm_gem_lock_reservations(struct drm_gem_object =
+**objs, int count,
+>  			      struct ww_acquire_ctx *acquire_ctx);
+>  void drm_gem_unlock_reservations(struct drm_gem_object **objs, int count,
+>  				 struct ww_acquire_ctx *acquire_ctx);
+> -int drm_gem_fence_array_add(struct xarray *fence_array,
+> -			    struct dma_fence *fence);
+> -int drm_gem_fence_array_add_implicit(struct xarray *fence_array,
+> -				     struct drm_gem_object *obj,
+> -				     bool write);
+>  int drm_gem_dumb_map_offset(struct drm_file *file, struct drm_device *de=
+v,
+>  			    u32 handle, u64 *offset);
+> =20
+> --=20
+> 2.34.1
+>=20
+
+--=20
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
