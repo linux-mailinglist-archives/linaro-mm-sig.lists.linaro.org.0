@@ -2,124 +2,193 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7369550A523
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Apr 2022 18:22:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B86B350A61A
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Apr 2022 18:45:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A579447FC8
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Apr 2022 16:22:17 +0000 (UTC)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
-	by lists.linaro.org (Postfix) with ESMTPS id 750093EC36
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  5 Apr 2022 12:12:48 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 2FE681F745;
-	Tue,  5 Apr 2022 12:12:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1649160767; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=YGolTQlWegdqsJgfgfOCgFdotBM/n5qIvgfFfvEjxd0=;
-	b=BK6a6qL8o7p/MJgbNqqctnSF5bmv5BGKuuqBTv2USITbTpPoKI1f15ogW871KoTo/RdheN
-	2ofE8y9/q59bmAhdL1seIYTAGQd263xP4FVoKwCcc/FYdRc3tUwqP3pmlISrihOeY4NF+U
-	B5AcViJAx3CYaDGctEIJbO7LJzMoxwU=
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AA5C913A04;
-	Tue,  5 Apr 2022 12:12:46 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-	by imap2.suse-dmz.suse.de with ESMTPSA
-	id s8TPKD4yTGIlCAAAMHmgww
-	(envelope-from <mkoutny@suse.com>); Tue, 05 Apr 2022 12:12:46 +0000
-Date: Tue, 5 Apr 2022 14:12:45 +0200
-From: Michal =?iso-8859-1?Q?Koutn=FD?= <mkoutny@suse.com>
-To: "T.J. Mercier" <tjmercier@google.com>
-Message-ID: <20220405121245.GA30368@blackbody.suse.cz>
-References: <20220328035951.1817417-1-tjmercier@google.com>
- <20220328035951.1817417-6-tjmercier@google.com>
- <20220329152142.GA15794@blackbody.suse.cz>
- <CABdmKX2874NdYCBzpKLnqWhZQDkC2wKz4ZL_aFNqrec6iAutpQ@mail.gmail.com>
+	by lists.linaro.org (Postfix) with ESMTP id E7E0347FC5
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 21 Apr 2022 16:45:57 +0000 (UTC)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com [68.232.154.123])
+	by lists.linaro.org (Postfix) with ESMTPS id 7E9AA3EA49
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  5 Apr 2022 13:58:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+  t=1649167104; x=1680703104;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-id:content-transfer-encoding:
+   mime-version;
+  bh=FdhFYPmfgF3AosyvK2UN1G+ROB61XQxa4sgJO9kh3RA=;
+  b=fCD1UOwMErFUX+HvDCxmhq+LNurY+VcYOJAFgIappW3ag49bOGDbk+Xj
+   7Lehp1bI6UGY/JJ8snghNOVleqoprPuCeVUDnPgIyctmu0O0wBPzEbaKR
+   Pqt+VjVksnBo/HaLWDlcVLjBF8VlmQ1jtwKKzm2L7v4PZt8m2Cs9J3DKP
+   PUf6jKKJ/8P6M0DjyL9Oyhal6mT3bqPBZ8/KqK18qpTxUnT+rFbS8RrG8
+   W1pjL6+uafKxMC8fxFDL+ZDrPRFbZjvrRCBvBx6OQMuj42ojf4+TaX+jz
+   I7Zm9sxCdsHp3JQoSMUOqUrkLYJobd+8rR0CpAeHQZl3pxzfAhVzx/IbJ
+   w==;
+X-IronPort-AV: E=Sophos;i="5.90,236,1643698800";
+   d="scan'208";a="91296809"
+Received: from smtpout.microchip.com (HELO email.microchip.com) ([198.175.253.82])
+  by esa6.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256; 05 Apr 2022 06:58:23 -0700
+Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
+ chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.17; Tue, 5 Apr 2022 06:58:23 -0700
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (10.10.215.89) by
+ email.microchip.com (10.10.87.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.17 via Frontend
+ Transport; Tue, 5 Apr 2022 06:58:23 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=KfvS30YbJZt4LRAf/ZiTsumGqpVQXAazjmtiBMwlxnVyVedTmmeAC9q58dEaNG8+7PDUPKLFhfYroJSFZLsANlpTXB44h7sf1esGivT8xJ3T5XjqH7lO1LZ6PXaG1v1E7r8qXN+5pGaQC1yEIcwHWagI0z1th8lYzcltjyokjjX3xwEFq0JoYY9tXIkr+Lgy5m0tUtUUAqF671iVuvtHYv0+fdiyvPVKTYwMXeMmHgNr3OHGq52ktAk/plcJv6VQ5R1JOTlW4LMqvUACKw8oCyr+98wTTUOYoD7afhxSjU1UhhMs2JTHdjJF26N5r/+oqoa6xnRBabBhMr9k7j2oTQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FdhFYPmfgF3AosyvK2UN1G+ROB61XQxa4sgJO9kh3RA=;
+ b=cLS8iQWhMyA6P+cjD4jzLTuFn5d8h/Gv4LWOvANAeQDOR/IqQPrjn+aRLX1izoZmwhJNK/vPRBod82yBBNsjyyGLp94dh9CRny/TOeK5xBEqOEryluoN8Q3yrWpiaP33J81gw6F+Ha8iMcGmIpkHMQEUH6cNw8C3MBB8+fOYUppLGr9hR0/soEkMnVOsOpnI1cR7tmnFgqrTFGj3FOXIN8CCpyzNCcsCPE1We0t5ImVYAr+11aUhOizkXadBrfS8XTdeJO2U67FbTDJ2YXoHXnJffgggrab343EUxUr5cfSO5F6mMFxC78FdHaUka9fPzRZLNbys5bjHLboC58tTkQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=microchip.com; dmarc=pass action=none
+ header.from=microchip.com; dkim=pass header.d=microchip.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=microchiptechnology.onmicrosoft.com;
+ s=selector2-microchiptechnology-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FdhFYPmfgF3AosyvK2UN1G+ROB61XQxa4sgJO9kh3RA=;
+ b=CLgyzJTlXo5u+xjhLqsj0cddwshc4jnLb+qrGS0GDlle8TQ5Ie5UA9SpX0iiUTkF95njxbrpLRFu1vyC+I+BdeSC+F3EtD0SOO3gHSNLZUQDxI98LQZhsYQzsKJXxwkxNtZR54seqSzkOV5AOT58kN5IbiygziSVJq3tBG9V65E=
+Received: from DM8PR11MB5687.namprd11.prod.outlook.com (2603:10b6:8:22::7) by
+ PH7PR11MB5942.namprd11.prod.outlook.com (2603:10b6:510:13e::6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5123.31; Tue, 5 Apr 2022 13:58:21 +0000
+Received: from DM8PR11MB5687.namprd11.prod.outlook.com
+ ([fe80::fc32:96a4:933f:194f]) by DM8PR11MB5687.namprd11.prod.outlook.com
+ ([fe80::fc32:96a4:933f:194f%5]) with mapi id 15.20.5123.031; Tue, 5 Apr 2022
+ 13:58:21 +0000
+From: <Codrin.Ciubotariu@microchip.com>
+To: <michael@walle.cc>
+Thread-Topic: [PATCH] i2c: at91: use dma safe buffers
+Thread-Index: AQHYLxo2SrBDkK5iS0KDJl/Ehr5HqazhP32AgAAENQCAAAaigIAAEpYAgAAvSwA=
+Date: Tue, 5 Apr 2022 13:58:20 +0000
+Message-ID: <74494dda-e0cd-aa73-7e58-e4359c1ba292@microchip.com>
+References: <20220303161724.3324948-1-michael@walle.cc>
+ <46e1be55-9377-75b7-634d-9eadbebc98d7@microchip.com>
+ <bc32f1107786ebcbfb4952e1a6142304@walle.cc>
+ <360914ee-594c-86bc-2436-aa863a67953a@microchip.com>
+ <27f124c9adaf8a4fbdfb7a38456c4a2e@walle.cc>
+In-Reply-To: <27f124c9adaf8a4fbdfb7a38456c4a2e@walle.cc>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=microchip.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: d3e30fbc-d5d5-4c60-e700-08da170c580e
+x-ms-traffictypediagnostic: PH7PR11MB5942:EE_
+x-microsoft-antispam-prvs: <PH7PR11MB5942230CC46E6F2A3340D98DE7E49@PH7PR11MB5942.namprd11.prod.outlook.com>
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: Sgwe0au98jtnb9hu9RLGAQIRxYAUbpudwiDTMqFCcD+AVpo7adhOo20IHNl4vKcvtWIjcBMAMF3MVCePiMRdg1Q9kTJc2DhEgOy48p9OdGiS4GbeX5/Ox9cPkS760icwgaPWcvojoMHt888pjlzrdvC6fBoKL83KYrmL7CjvmqAw67dUN62TA6X2kDmpgobmOuKvKZ0KctwBCaGBaoSN348FsUteDSqdFI5JgHaClgELA7AN++Jii7rg4heqmPLUYbx9XImuzpf59GxjHZPqCJOqf9pwFKv7A7sekZYo3fqYCsyMrKEQ9sdiYDI0LG9UODgasXn49+Zg/MqSPRzSLOq+tF4oWzt/+ldn56YjmIDT6veVxzVb6dv5VHF/owOp2EhtGvAf8IUkLpWoX7F2mtogSw1GAyQWoEmVRqhGjmmMD6j+VmDeON7fRHBFG+Auf+o6MDOPJPPbuPYxDXC+9FVtg8vD58ukqLCHBQ2lPyPpKG0Vf9X3y+K6M887X773zlutZ+/7de+KUFGOIpAznHcROpxHqssEl6q3YshPBtcD6Z4KQ58M9NwtVhWfWCUmksizrLJKmXVg4TuYfIV8ftcoq725LNc9TwXM71QZPkJ+3pR/0fmF3s3AzbwxTiHalE+nnxLtJUofMIic56HzbD2gAM2hjeRBrunYMbxp5L9mKP36OuBgW4JnErKizYCTFJaMq4CGiYrvpj+AIr7md/dZpRYrUde3WziNnHB4zN+6i9Eb+Z7bROgK3LlUfo82gKpXxEtNZklv3BZU02lnpw==
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM8PR11MB5687.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(366004)(508600001)(31686004)(76116006)(66946007)(36756003)(38070700005)(6506007)(7416002)(64756008)(66556008)(66476007)(66446008)(86362001)(6512007)(4326008)(91956017)(53546011)(8936002)(31696002)(8676002)(186003)(54906003)(2906002)(2616005)(38100700002)(122000001)(71200400001)(6486002)(5660300002)(316002)(6916009)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 2
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?R0tiQWVIWEprQmhzcUhLRENJY3lrQ0R3d3ppc215RDFucjBCTmJPTUlpc2xm?=
+ =?utf-8?B?dzN5ZDRXTDYrUERFNm1CZ2ZjZW5nZHpSYTJrUERPK3E4U2ZUUGxMNWt4REcv?=
+ =?utf-8?B?cU1qdGNDTXZHcHdUNnNRQjd4NWZwZ1hkdW16eENzYWpJc0E3TW5PbTEwRTMv?=
+ =?utf-8?B?VXhCNWZMUVQ2dmJabUZUQU5oWml1OGtjQjJQMklhbWs5bWJudEt4WWtDTU1w?=
+ =?utf-8?B?UXRMQThPejllNmF2N3owMU9iV1RaNGdGZjFsTUVnanhWc1VHU25sRGY5L0dH?=
+ =?utf-8?B?WEpWNzcvVnc0dTFURytPR3E1M3NrdC9XalZldy9xbGlCenhCSjVsaEhvREZk?=
+ =?utf-8?B?K0RHSFl6Y3JQYkVtTWpMcmJsS2Q3ZmNxbFV6aFlrMEYwT1F0SjN5akFmZzBP?=
+ =?utf-8?B?UGpVa3EyNUJ6b3BuZkFhNWRtY3VUYi9RL0Jhb2F6KzNPVVpITjdwdnludDdM?=
+ =?utf-8?B?NDJSZ1A0UUVsQmV4R1h0VktndVIvdmF2d2krdldEWGdScTZPSm1XOFhTVWU0?=
+ =?utf-8?B?Z1BCTG1YYmllSFlXdWpjTVgwZmY2QVgrUmRKSS9wL0o3L3R6eW84MlpxQTY0?=
+ =?utf-8?B?NVduN0hQM0hudzlJOGJlcDNRelVZVnlGdVhSMXpneWxpbGRqZlNLcmszdDcv?=
+ =?utf-8?B?N3FnSlExd2hDdTRCQzNwOW1nNEh3K2oyTmFubVBKTG13RyszWWVQeDZHbE5m?=
+ =?utf-8?B?RHlSTy9zaFBKSXlLUzZjVjUybkkvUTZBMjRuL0c2dHZvUjlxdU9sd08vUlV3?=
+ =?utf-8?B?aHdrVWtHVE1jS3JWRXk5T1Y5alZKSGVKUjF2dHdkL3UvZjFleHE4SjFTakMz?=
+ =?utf-8?B?U3FncXdHeDVWQW1RYXhhRWF3a054TDB1aVNITURoMmFzV1YwV1JCV1hvZ2dR?=
+ =?utf-8?B?aU1TUGY5dzU5bGM3TXZ6U2tXai9Kck9iL2FSZ2YwVWJWVEVReDZQL0xMNnN3?=
+ =?utf-8?B?Tkx3OXR3Vm5pU0U5QTJCL0lPTzJGajlPRlN5Z0gxMGdpNEpqNzlHYWtDVXlB?=
+ =?utf-8?B?bTNlS09SRW15Nk50dGV4QUwwNmRaNnZYcElZUTR4ZnhxYzdYVmhaMnQxWVVh?=
+ =?utf-8?B?NUVBblNTM0pkVVE3T0RSejFDeDAycWtpcUlIUFc1bjYyREU3dVc2L1F3Yk1L?=
+ =?utf-8?B?MlE4eTlhVEZGUU16am9VcFQvUkJyMnJLd212UjNLZ2Jrb0V4SFBvNHB4ZUxM?=
+ =?utf-8?B?WTlYZ2xOSTNGTTQyVjBnSHFLWXFGbDA1N29pMllQN0ZzTFhkUTZhYUVzV2k2?=
+ =?utf-8?B?SVpXUEpwSVZXbWhmKzRONU4wbWVwbngwZ0prUnFaVXVJMU80QklSbjRvMFJn?=
+ =?utf-8?B?cjlWTE5nUGR2M0p2cXhaZDdrSnE5NE00bUIvTFVzQmpYQnRDeWs2V2o0eHox?=
+ =?utf-8?B?NTR2RXNPVHFjckk5QXBWcURZYk56Sy92dzRWb2wzU2pIZHNmUXFGWWk1ZC9E?=
+ =?utf-8?B?ZzdUeXJhQThqKzBnUnJZODRLY1Vsamg5a3N5N1JpdW9TRTF6YVZEclNtckF2?=
+ =?utf-8?B?OUhXc2d2Y2JCU1NuVnd2S3RRUTJQY3FxRFZIRm1jOWVKSWU4V2Q3dlJOdC9J?=
+ =?utf-8?B?bm1tbjQ1d1JQMTAyMnJNekZ2aG00RVNGaE5MbWcxQVlZaUVwTmlialJHYUs2?=
+ =?utf-8?B?R1NLWUg2MlBuMkFRZFRtRzFNanZnSXJiRkNTSVRvMCtyaFd5TmVxUkhnWnZs?=
+ =?utf-8?B?VUZ6eGJhOGF1c2U3VU5mOUpPcCtQaEdoS3huMjltNXlIblRkVFBJTFZxbmpH?=
+ =?utf-8?B?QkdnRXVvYVdkcFl5Wm9YU2xjUjdyQ3BsbE5ZSWVXc1k3Y0JKdnNQY21XTjFH?=
+ =?utf-8?B?VitMNUlVYVFKdFJQMjRCR1BSUVBXdWNHenI0cUlKWDdxbElYUStXTFNidERa?=
+ =?utf-8?B?RG9VM0lITEF4OERLaVBKMkUvNitLbEFESU1sVElSTDZpb3RnZzFuOVVSdjI1?=
+ =?utf-8?B?ZC9VNU95M3VjbllYK3o1NTJEcEV5dG01Y1BFeGFSVXFUK0VKa2o0MjdRc2tV?=
+ =?utf-8?B?cUJQa1RIUVkrNHFsWnl4d00yV21QbUhsc0ljZ0hydzRFbCtqUHJZaHRLaFFX?=
+ =?utf-8?B?Tm9yaHpXcndiRjFadmlFMW1wbkptNFFTU20zbUc3WFRHYWlDZldUamh1K3U2?=
+ =?utf-8?B?S1RjNlZKL0Z1K3RyRVArZi8yaFAxTnpnOEQ4QUJEU0ZJcmpiVEpJSmt5eDFp?=
+ =?utf-8?B?a0J5ditaMjJIanEycXphQUFsRFRpblkzUjlia2RpVGdudTdEKzNiaFljUlAv?=
+ =?utf-8?B?bGhvdlNPbVB3cjF3NlN5UnlOcm9TdVdaZFVhcUpoOVJRK3gvdEJwQjUxSlBT?=
+ =?utf-8?B?VlVJSFMxYjdVN1JEVTZSeSsxUlFTUytTMFQzaHdnOGlQcldPU085bzB3Q211?=
+ =?utf-8?Q?4lzIDAWheTNxWDMveevSgDIyo3VMvzSQ3UUZELe2+6L5o?=
+x-ms-exchange-antispam-messagedata-1: ErDyzDcb4XUaqkyemq5Kc+6JhwF1BUk7Nw8=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <951C743CC6F63B40BAB01AA030614C5D@namprd11.prod.outlook.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CABdmKX2874NdYCBzpKLnqWhZQDkC2wKz4ZL_aFNqrec6iAutpQ@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-MailFrom: mkoutny@suse.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM8PR11MB5687.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d3e30fbc-d5d5-4c60-e700-08da170c580e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Apr 2022 13:58:20.9983
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 3f4057f3-b418-4d4e-ba84-d55b4e897d88
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: w84DEoiuxpnKMDr+AwVojeyOi6ambexI62WrcYOVnsGtT29NiLrMnps6Rk2pAMEI3q8z20NSWNvtLz+z4TCd73OlvgJY2CDV/Rl3D5U8O1w=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB5942
+X-MailFrom: Codrin.Ciubotariu@microchip.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: AYM4MHI6JD32SXQMKKDU6NFD6OYIMTN4
-X-Message-ID-Hash: AYM4MHI6JD32SXQMKKDU6NFD6OYIMTN4
-X-Mailman-Approved-At: Thu, 21 Apr 2022 16:22:12 +0000
-CC: David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Jonathan Corbet <corbet@lwn.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Arve =?iso-8859-1?B?SGr4bm5lduVn?= <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>, Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Benjamin Gaignard <benjamin.gaignard@linaro.org>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>, Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>, Shuah Khan <shuah@kernel.org>, Ka
- lesh Singh <kaleshsingh@google.com>, Kenny.Ho@amd.com, Shuah Khan <skhan@linuxfoundation.org>, dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, cgroups@vger.kernel.org, linux-kselftest@vger.kernel.org
+Message-ID-Hash: UPBXU3GLN2JHKGUWP7J4YDBNJGTUYCUE
+X-Message-ID-Hash: UPBXU3GLN2JHKGUWP7J4YDBNJGTUYCUE
+X-Mailman-Approved-At: Thu, 21 Apr 2022 16:45:52 +0000
+CC: Nicolas.Ferre@microchip.com, alexandre.belloni@bootlin.com, Claudiu.Beznea@microchip.com, sumit.semwal@linaro.org, christian.koenig@amd.com, linux-i2c@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, stable@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC v4 5/8] dmabuf: Add gpu cgroup charge transfer function
+Subject: [Linaro-mm-sig] Re: [PATCH] i2c: at91: use dma safe buffers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AYM4MHI6JD32SXQMKKDU6NFD6OYIMTN4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UPBXU3GLN2JHKGUWP7J4YDBNJGTUYCUE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 
-On Fri, Apr 01, 2022 at 11:41:36AM -0700, "T.J. Mercier" <tjmercier@google.com> wrote:
-> This link doesn't work for me, but I think you're referring to the
-> discussion about your "RAM_backed_buffers" comment from March 23rd.
-
-(Oops, it's a non-public message. But yes, you guessed it right ;-))
-
-> Anyway the test I did goes like this: enable memcg and gpu cgoups
-> tracking and run a process that allocates 100MiB of dmabufs. Observe
-> memcg and gpu accounting values before and after the allocation.
-
-Thanks for this measurement/dem/demoo.
-
-> Before
-> # cat memory.current gpu.memory.current
-> 14909440
-> system 0
-> 
-> <Test program does the allocation of 100MiB of dmabufs>
-> 
-> After
-> # cat memory.current gpu.memory.current
-> 48025600
-> system 104857600
-> 
-> So the memcg value increases by about 30 MiB while the gpu values
-> increases by 100 MiB.
-
-> This is with kmem enabled, and the /proc/maps
-> file for this process indicates that the majority of that 30 MiB is
-> kernel memory.
-
-> I think this result shows that neither the kernel nor process memory
-> overlap with the gpu cgroup tracking of these allocations.
-
-It depends how the semantics of the 'system' entry is defined, no?
-As I grasped from other thread, the 'total' is going to be removed, so
-'system' represents exclusively device memory?
-
-
-> So despite the fact that these buffers are in main memory, they are
-> allocated in a way that does not result in memcg attribution. (It
-> looks to me like __GFP_ACCOUNT is not set for these.)
-
-(I thought you knew what dmabufs your program used :-p)
-
-So, the goal is to do the tracking and migrations only via the gpu cg
-layer, regardless how memcg charges it (or not).
-
-(I have no opinion on that, I'm just summing it so that we're on the
-same page.)
-
-Michal
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gMDUuMDQuMjAyMiAxNDowOSwgTWljaGFlbCBXYWxsZSB3cm90ZToNCj4gQW0gMjAyMi0wNC0w
+NSAxMjowMiwgc2NocmllYiBDb2RyaW4uQ2l1Ym90YXJpdUBtaWNyb2NoaXAuY29tOg0KPj4gT24g
+MDUuMDQuMjAyMiAxMjozOCwgTWljaGFlbCBXYWxsZSB3cm90ZToNCj4+PiBBbSAyMDIyLTA0LTA1
+IDExOjIzLCBzY2hyaWViIENvZHJpbi5DaXVib3Rhcml1QG1pY3JvY2hpcC5jb206DQo+Pj4+PiAr
+wqDCoMKgwqDCoMKgIGlmIChkZXYtPnVzZV9kbWEpIHsNCj4+Pj4+ICvCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgIGRtYV9idWYgPSBpMmNfZ2V0X2RtYV9zYWZlX21zZ19idWYobV9zdGFydCwg
+MSk7DQo+Pj4+DQo+Pj4+IElmIHlvdSB3YW50LCB5b3UgY291bGQganVzdCBkZXYtPmJ1ZiA9IGky
+Y19nZXRfZG1hX3NhZmUuLi4NCj4+Pg0KPj4+IEJ1dCB3aGVyZSBpcyB0aGUgZXJyb3IgaGFuZGxp
+bmcgaW4gdGhhdCBjYXNlPyBkZXYtPmJ1ZiB3aWxsDQo+Pj4gYmUgTlVMTCwgd2hpY2ggaXMgZXZl
+bnR1YWxseSBwYXNzZWQgdG8gZG1hX21hcF9zaW5nbGUoKS4NCj4+Pg0KPj4+IEFsc28sIEkgbmVl
+ZCB0aGUgZG1hX2J1ZiBmb3IgdGhlIGkyY19wdXRfZG1hX3NhZmVfbXNnX2J1ZigpDQo+Pj4gY2Fs
+bCBhbnl3YXksIGJlY2F1c2UgZGV2LT5idWYgd2lsbCBiZSBtb2RpZmllZCBkdXJpbmcNCj4+PiBw
+cm9jZXNzaW5nLg0KPj4NCj4+IFlvdSBzdGlsbDoNCj4+IMKgwqDCoMKgwqAgaWYgKCFkZXYtPmJ1
+Zikgew0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcmV0ID0gLUVOT01FTTsNCj4+IMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGdvdG8gb3V0Ow0KPj4gwqDCoMKgwqDCoCB9DQo+Pg0K
+Pj4gU28sIGF0OTFfZG9fdHdpX3RyYW5zZmVyKCkvZG1hX21hcF9zaW5nbGUoKSB3aWxsIG5vdCBi
+ZSBjYWxsZWQuDQo+IA0KPiBBaGgsIEkgbWlzdW5kZXJzdG9vZCB5b3UuIFllcywgYnV0IGFzIEkg
+c2FpZCwgSSBuZWVkIHRoZSBkbWFfYnVmDQo+IHRlbXBvcmFyeSB2YXJpYWJsZSBhbnl3YXksIGJl
+Y2F1c2UgZGV2LT5idWYgaXMgbW9kaWZpZWQsIGVnLiBzZWUNCj4gYXQ5MV90d2lfcmVhZF9kYXRh
+X2RtYV9jYWxsYmFjaygpLg0KYXQ5MV90d2lfcmVhZF9kYXRhX2RtYV9jYWxsYmFjaygpIGlzIGNh
+bGxlZCBhcyBjYWxsYmFjayBpZiANCmRtYV9hc3luY19pc3N1ZV9wZW5kaW5nKGRtYS0+Y2hhbl9y
+eCkgaXMgY2FsbGVkLiANCmRtYV9hc3luY19pc3N1ZV9wZW5kaW5nKGRtYS0+Y2hhbl9yeCkgaXMg
+Y2FsbGVkIG9uIA0KYXQ5MV90d2lfcmVhZF9kYXRhX2RtYSgpLCB3aGljaCBpcyBjYWxsZWQgaW4g
+YXQ5MV9kb190d2lfdHJhbnNmZXIoKSwgDQp3aGljaCB3ZSBkZWNpZGVkIGFib3ZlIHRvIHNraXAg
+aW4gY2FzZSBvZiBlcnJvci4NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlz
+dHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1z
+aWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
