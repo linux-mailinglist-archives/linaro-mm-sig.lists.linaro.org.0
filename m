@@ -2,113 +2,87 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54EA550FBE5
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 Apr 2022 13:24:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D24E50FD33
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 Apr 2022 14:38:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8A67B4800B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 Apr 2022 11:24:11 +0000 (UTC)
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by lists.linaro.org (Postfix) with ESMTPS id C4E6946570
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 26 Apr 2022 11:24:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1650972246; x=1682508246;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=T7i7L2KegkqO2tC7i2wJS6jE33RflZWgdhR+pL1K13o=;
-  b=YcD8EJH0Wm7nWv7+FMWxIITlii+8MiUJDF6fgILS7wSwIuOFGJgwqNoz
-   xUhD32prqtdO3zzFaIA7nJExObrlQ9Ub3yiw+pbMKQQuz1doTC1IQyPEW
-   Cv/guh5AXFoLJTxkNAkfVYvipkkp/CQPpAto9o+CVff1lo6TB2CeX9b1j
-   4f2AC8m0yQyPRfKmBKDpDSLFK5x/BcUgGEM56u+8et9E6pjiBftdYkpZ/
-   Sa2W8KDKQ594Qqz7wUrSD7P9nHp0LdzWMWjpojv0iULqsO4H8ceC3Iuqx
-   V8lqJ5K3eSW8o3RzCP+Eza/BWUVqd+ngucwxrbpik64eZd64TDkWH7zrA
-   Q==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10328"; a="351988236"
-X-IronPort-AV: E=Sophos;i="5.90,290,1643702400";
-   d="scan'208";a="351988236"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Apr 2022 04:24:05 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.90,290,1643702400";
-   d="scan'208";a="874412474"
-Received: from lkp-server01.sh.intel.com (HELO 5056e131ad90) ([10.239.97.150])
-  by fmsmga005.fm.intel.com with ESMTP; 26 Apr 2022 04:24:02 -0700
-Received: from kbuild by 5056e131ad90 with local (Exim 4.95)
-	(envelope-from <lkp@intel.com>)
-	id 1njJIY-0003U6-1q;
-	Tue, 26 Apr 2022 11:24:02 +0000
-Date: Tue, 26 Apr 2022 19:23:56 +0800
-From: kernel test robot <lkp@intel.com>
-To: Cai Huoqing <cai.huoqing@linux.dev>
-Message-ID: <202204261945.UCAr92eM-lkp@intel.com>
-References: <20220426060808.78225-5-cai.huoqing@linux.dev>
+	by lists.linaro.org (Postfix) with ESMTP id 7637447FA4
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 Apr 2022 12:38:45 +0000 (UTC)
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.134])
+	by lists.linaro.org (Postfix) with ESMTPS id D545147FA4
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 26 Apr 2022 12:38:39 +0000 (UTC)
+Received: from mail-yw1-f169.google.com ([209.85.128.169]) by
+ mrelayeu.kundenserver.de (mreue011 [213.165.67.97]) with ESMTPSA (Nemesis) id
+ 1Mf0Ru-1oOShw2BZ4-00gZmx for <linaro-mm-sig@lists.linaro.org>; Tue, 26 Apr
+ 2022 14:38:38 +0200
+Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-2ebf4b91212so180502407b3.8
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 26 Apr 2022 05:38:38 -0700 (PDT)
+X-Gm-Message-State: AOAM533X0+QoUfUEROPUJ+w6gIYZspGqx5Ey6nrjVzcAO+IyLaC2hrq/
+	75ffcgGz7UxYx8AYIjp7aI5PZKK718klqhmuIoI=
+X-Google-Smtp-Source: ABdhPJwgCuCUa4o+AgAH4pI2w9geQ9zGuYooiQu61gb9/bVoeW8aj/5quj9UKhljTouqCt64isUtADXX7teUyfMtQT0=
+X-Received: by 2002:a0d:d804:0:b0:2f4:e47d:1c2c with SMTP id
+ a4-20020a0dd804000000b002f4e47d1c2cmr21230444ywe.320.1650976717282; Tue, 26
+ Apr 2022 05:38:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220426060808.78225-5-cai.huoqing@linux.dev>
-Message-ID-Hash: BTUOYGJJUWSD22URTK23INOMGYYWT4QN
-X-Message-ID-Hash: BTUOYGJJUWSD22URTK23INOMGYYWT4QN
-X-MailFrom: lkp@intel.com
+References: <20220426060808.78225-1-cai.huoqing@linux.dev> <20220426060808.78225-5-cai.huoqing@linux.dev>
+ <618a4f53-0998-1e6b-e32b-8bf2d3057cec@amd.com> <CAK8P3a2w1t7Sk897u0ndD66Lwp5a4DuOqqQLN4yHSg=JmrpOHQ@mail.gmail.com>
+ <20220426122404.GA6788@chq-T47>
+In-Reply-To: <20220426122404.GA6788@chq-T47>
+From: Arnd Bergmann <arnd@arndb.de>
+Date: Tue, 26 Apr 2022 14:38:21 +0200
+X-Gmail-Original-Message-ID: <CAK8P3a2M=zw509HGRALmgbr+E6GjKoZqqkh9kCbyGB9hD_+3LA@mail.gmail.com>
+Message-ID: <CAK8P3a2M=zw509HGRALmgbr+E6GjKoZqqkh9kCbyGB9hD_+3LA@mail.gmail.com>
+To: Cai Huoqing <cai.huoqing@linux.dev>
+X-Provags-ID: V03:K1:N6cXqL8hpo4aFj0AEHugIr/j5sMvctii8MNDSoe3000DVBT0a3u
+ ho+FKlXcgSYZHdd0w/7XCAcRPQLdj1qPPWBckTiHnmfEXu+XpN+kaNKZPjWVOC6rFf9bcmU
+ MWurIEzJVPLvfSL70S8Qmn2JXcDpIxdiUafSVwvF/8IGHazTYsnCTfAz7fjr9czD3mWxbLn
+ NeN0vVhRPo34vqXtGNrEA==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:40dddYyt2AM=:FkQ9SFtl/VcRFD2aD2lQlL
+ B5FPG9q8gsWawUGqSbOGB3tW/6i7y2HXo+o1rbA9luLOoEoh7+snZWrW/1CGtQhPQPOSOs9ey
+ IQGEoC+gsqng5UIbGTGPcK4IVySqV7O9ub1QrbCycu8qsSpL18pwHrlzPq9bSBuzu1VQJ0Q9j
+ xEJSmwb/d62DY+N646ZUwXlgYWCpCHIT0HNV/youvHvf8ipCde+IITno4WX4pyA3wB30v1iiw
+ EuFItt71ASIWJPfzxz1FC6QhUf9BcPG3E9zWVSr1nP56lNBxtg5QP1wFwAdQoISCoQ8692Bey
+ dn6qE7WhFjtnaXjdNuPKxWCEWESWmQ/NL7lFQt/jFkANwPPp6iZzW1hyZIXx5/IDebwjGsX9O
+ h4+V8lMmQgBNuAzz6We7oYOrfKUT+/MvSj0Q3zaXswjX/hy1arC3xAszmdxUl2dVhxYUShT+B
+ bSKxVo4iuf6aEwHqTlEw2C5CP2Si8KzKIPae0e0jaPmm9inHCqPNpIaiZYzsynPYM+YUAbMlr
+ M9EAB/sXGfopVvLoJI7kuzh6GsYJHP/ct6/fk08Zkk2w9chhUaTbMbRfUxTUTyDCHTBty1xce
+ K0Ykt3I3lkpN40j0OTEQgei9M+6BC9Mu3gfxPemPGFjo3KQaVqIvaZ605GmoDRTrM+rmVBGR/
+ jl5NifECnUUQCK9Px8IwJdsn+PWayreLHJaOcWq3UjXxHGZX9wAa8w8ZdmMRocdOTRAUJYxYO
+ 4j+D53IFIWmAgiNPJmyuue6gZ7ijpia0v0tpo9g9ZJ9cEpKdFYp0Bi+iPOUiGh2eEBPUtt5TC
+ tBUPaZgYhIPYu4eMOdMnyqJudMzG2Ry9yZkXeo4aHhcLMBTBok=
+Message-ID-Hash: TWILRLNGDTL2I7ZXIV4N5TWRSKPGNXWX
+X-Message-ID-Hash: TWILRLNGDTL2I7ZXIV4N5TWRSKPGNXWX
+X-MailFrom: arnd@arndb.de
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: kbuild-all@lists.01.org, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: Arnd Bergmann <arnd@arndb.de>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, dri-devel <dri-devel@lists.freedesktop.org>, Linux Media Mailing List <linux-media@vger.kernel.org>, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v2 4/4] drm/nvdla/uapi: Add UAPI of NVDLA driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BTUOYGJJUWSD22URTK23INOMGYYWT4QN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TWILRLNGDTL2I7ZXIV4N5TWRSKPGNXWX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi Cai,
-
-I love your patch! Yet something to improve:
-
-[auto build test ERROR on drm/drm-next]
-[also build test ERROR on linus/master linux/master v5.18-rc4 next-20220422]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Cai-Huoqing/drm-nvdla-Add-driver-support-for-NVDLA/20220426-141148
-base:   git://anongit.freedesktop.org/drm/drm drm-next
-config: ia64-randconfig-r021-20220425 (https://download.01.org/0day-ci/archive/20220426/202204261945.UCAr92eM-lkp@intel.com/config)
-compiler: ia64-linux-gcc (GCC) 11.3.0
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://github.com/intel-lab-lkp/linux/commit/a54587f7637b8ee11ad624794af3b409e6306e07
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Cai-Huoqing/drm-nvdla-Add-driver-support-for-NVDLA/20220426-141148
-        git checkout a54587f7637b8ee11ad624794af3b409e6306e07
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.3.0 make.cross W=1 O=build_dir ARCH=ia64 prepare
-
-If you fix the issue, kindly add following tag as appropriate
-Reported-by: kernel test robot <lkp@intel.com>
-
-All errors (new ones prefixed by >>):
-
->> error: include/uapi/drm/nvdla_drm.h: missing "WITH Linux-syscall-note" for SPDX-License-Identifier
-   make[2]: *** [scripts/Makefile.headersinst:63: usr/include/drm/nvdla_drm.h] Error 1
-   make[2]: Target '__headers' not remade because of errors.
-   make[1]: *** [Makefile:1280: headers] Error 2
-   arch/ia64/kernel/asm-offsets.c:23:6: warning: no previous prototype for 'foo' [-Wmissing-prototypes]
-      23 | void foo(void)
-         |      ^~~
-   <stdin>:1517:2: warning: #warning syscall clone3 not implemented [-Wcpp]
-   make[1]: Target 'prepare' not remade because of errors.
-   make: *** [Makefile:219: __sub-make] Error 2
-   make: Target 'prepare' not remade because of errors.
-
--- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVHVlLCBBcHIgMjYsIDIwMjIgYXQgMjoyNCBQTSBDYWkgSHVvcWluZyA8Y2FpLmh1b3FpbmdA
+bGludXguZGV2PiB3cm90ZToNCj4gT24gMjYgNOaciCAyMiAxMjo1MDo1MCwgQXJuZCBCZXJnbWFu
+biB3cm90ZToNCg0KPiA+ID4gPiArI2RlZmluZSBEUk1fTlZETEFfU1VCTUlUICAgICAgICAgICAg
+IDB4MDANCj4gPiA+ID4gKyNkZWZpbmUgRFJNX05WRExBX0dFTV9DUkVBVEUgMHgwMQ0KPiA+ID4g
+PiArI2RlZmluZSBEUk1fTlZETEFfR0VNX01NQVAgICAgICAgICAgIDB4MDINCj4gPg0KPiA+IElz
+IHRoaXMgYW4gYWN0dWFsIG1tYXAoKSBjYWxsLCBvciBzb21ldGhpbmcgdGhhdCBuZWVkcyB0byBi
+ZSBkb25lIGJlZm9yZSB0aGUNCj4gPiBtbWFwKCk/IElzIHRoZSAnaGFuZGxlJyBhIGZpbGUgZGVz
+Y3JpcHRvciBvciBzb21lIGludGVybmFsIG51bWJlcj8NCj4gSXQncyBhbiBnZW0gb2JqZWN0IG1t
+YXAgd2hpY2ggY2FsbHMgZHJtX2dlbV9kdW1iX21hcF9vZmZzZXQoKSBpbnNpZGUgYW5kDQo+IHRo
+ZSBoYW5kbGUgaXMgZ2VtIG9iamVjdCBoYW5kbGUuDQoNCk9rLCB0aGFua3MgZm9yIHRoZSBjbGFy
+aWZpY2F0aW9uLiBJIHNlZSB0aGF0IG90aGVyIGRyaXZlcnMgaGF2ZSB0aGUNCmV4YWN0IHNhbWUg
+dGhpbmcsDQpzbyBJIGFzc3VtZSBpdCdzIGZpbmUgZm9yIGRyaXZlcnMvZ3B1LyB0aGVuLCBldmVu
+IGlmIGl0IHdvdWxkIGJlIGEgYml0IG9kZCBmb3INCm90aGVyIHN1YnN5c3RlbXMuDQoNCiAgICAg
+ICBBcm5kDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpM
+aW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5v
+cmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxp
+c3RzLmxpbmFyby5vcmcK
