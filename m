@@ -2,178 +2,149 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 499FC512AED
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Apr 2022 07:30:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE3FC512AEE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Apr 2022 07:30:51 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6B5DC47FB9
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Apr 2022 05:30:46 +0000 (UTC)
-Received: from out0.migadu.com (out0.migadu.com [94.23.1.103])
-	by lists.linaro.org (Postfix) with ESMTPS id 017D9402D7
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 26 Apr 2022 06:10:10 +0000 (UTC)
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+	by lists.linaro.org (Postfix) with ESMTP id E0F5C47FC7
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Apr 2022 05:30:50 +0000 (UTC)
+Received: from out1.migadu.com (out1.migadu.com [91.121.223.63])
+	by lists.linaro.org (Postfix) with ESMTPS id 5676A47FF3
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 26 Apr 2022 08:24:09 +0000 (UTC)
+Date: Tue, 26 Apr 2022 16:23:41 +0800
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1650953409;
+	t=1650961448;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=iitKyA2BmOSsGyxho5Xaj7J6p8svsGj9CM08D3cPrDw=;
-	b=pDf8Xdp8mG06STMNFr+MgjyhVeGDYweUdtAvMyJFG3qtkphI/3QCYOf1yYHU1uufXNfMd4
-	sSd1ieV0d25+A3tU2uxUri7/FSjZtTHwACxigDRKsQ7pyc3DMnMMwA7FW7XcJaPnGQnKfg
-	wJ0K3PRLYO7tnwMkNpYgxPs+9AR6RTI=
+	bh=IdGDIqYqS8uTN3qBHotmaehDUrqrCAd/ATCDmNWx4J8=;
+	b=F5B/akNZx0UWFc1a5zQAxRrrtRqnAQ+rEmouQVvUMOqPXm8YevuVpoikV0FD/OB0lqQMfm
+	1OM0kQltfw+/E4mXL7FzYhpRHk0Ur2BalRnHy7cm88OZGzBIu70RoL9cvlUrRse0q2brDg
+	M07BkQ9+qnbcASu4CcWq3g4zBvPwmPo=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
 From: Cai Huoqing <cai.huoqing@linux.dev>
-To: cai.huoqing@linux.dev
-Date: Tue, 26 Apr 2022 14:08:01 +0800
-Message-Id: <20220426060808.78225-5-cai.huoqing@linux.dev>
-In-Reply-To: <20220426060808.78225-1-cai.huoqing@linux.dev>
+To: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
+Message-ID: <20220426082341.GA83596@chq-T47>
 References: <20220426060808.78225-1-cai.huoqing@linux.dev>
+ <20220426060808.78225-5-cai.huoqing@linux.dev>
+ <618a4f53-0998-1e6b-e32b-8bf2d3057cec@amd.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <618a4f53-0998-1e6b-e32b-8bf2d3057cec@amd.com>
 X-Migadu-Flow: FLOW_OUT
 X-Migadu-Auth-User: linux.dev
 X-MailFrom: cai.huoqing@linux.dev
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: WDEE5IS2MXAPTT4TNCVLFTAPYJKY3O5S
-X-Message-ID-Hash: WDEE5IS2MXAPTT4TNCVLFTAPYJKY3O5S
-X-Mailman-Approved-At: Thu, 28 Apr 2022 05:30:24 +0000
-CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: BY3RRJZV6IQNHUBFETNBTIS6BCJSQCUM
+X-Message-ID-Hash: BY3RRJZV6IQNHUBFETNBTIS6BCJSQCUM
+X-Mailman-Approved-At: Thu, 28 Apr 2022 05:30:27 +0000
+CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 4/4] drm/nvdla/uapi: Add UAPI of NVDLA driver
+Subject: [Linaro-mm-sig] Re: [PATCH v2 4/4] drm/nvdla/uapi: Add UAPI of NVDLA driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WDEE5IS2MXAPTT4TNCVLFTAPYJKY3O5S/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BY3RRJZV6IQNHUBFETNBTIS6BCJSQCUM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-The NVIDIA Deep Learning Accelerator (NVDLA) is an open source IP
-which is integrated into NVIDIA Jetson AGX Xavier,
-so add UAPI of this driver.
-
-Signed-off-by: Cai Huoqing <cai.huoqing@linux.dev>
----
-v1->v2:
-*Rename nvdla_drm.[ch] to nvdla_drv.[ch] and rename nvdla_ioctl.h to nvdla_drm.h,
- move it to uapi.
- comments link: https://lore.kernel.org/lkml/20bac605-97e6-e5cd-c4e4-83a8121645d8@amd.com/
-
- include/uapi/drm/nvdla_drm.h | 99 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 99 insertions(+)
- create mode 100644 include/uapi/drm/nvdla_drm.h
-
-diff --git a/include/uapi/drm/nvdla_drm.h b/include/uapi/drm/nvdla_drm.h
-new file mode 100644
-index 000000000000..984635285525
---- /dev/null
-+++ b/include/uapi/drm/nvdla_drm.h
-@@ -0,0 +1,99 @@
-+/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-+/*
-+ * Copyright (C) 2017-2018 NVIDIA CORPORATION.
-+ * Copyright (C) 2022 Cai Huoqing
-+ */
-+
-+#ifndef __LINUX_NVDLA_IOCTL_H
-+#define __LINUX_NVDLA_IOCTL_H
-+
-+#include <linux/ioctl.h>
-+#include <linux/types.h>
-+
-+#if !defined(__KERNEL__)
-+#define __user
-+#endif
-+
-+/**
-+ * struct nvdla_mem_handle structure for memory handles
-+ *
-+ * @handle		handle to DMA buffer allocated in userspace
-+ * @reserved		Reserved for padding
-+ * @offset		offset in bytes from start address of buffer
-+ *
-+ */
-+struct nvdla_mem_handle {
-+	__u32 handle;
-+	__u32 reserved;
-+	__u64 offset;
-+};
-+
-+/**
-+ * struct nvdla_ioctl_submit_task structure for single task information
-+ *
-+ * @num_addresses		total number of entries in address_list
-+ * @reserved			Reserved for padding
-+ * @address_list		pointer to array of struct nvdla_mem_handle
-+ *
-+ */
-+struct nvdla_ioctl_submit_task {
-+#define NVDLA_MAX_BUFFERS_PER_TASK (6144)
-+	__u32 num_addresses;
-+#define NVDLA_NO_TIMEOUT    (0xffffffff)
-+	__u32 timeout;
-+	__u64 address_list;
-+};
-+
-+/**
-+ * struct nvdla_submit_args structure for task submit
-+ *
-+ * @tasks		pointer to array of struct nvdla_ioctl_submit_task
-+ * @num_tasks		number of entries in tasks
-+ * @flags		flags for task submit, no flags defined yet
-+ * @version		version of task structure
-+ *
-+ */
-+struct nvdla_submit_args {
-+	__u64 tasks;
-+	__u16 num_tasks;
-+#define NVDLA_MAX_TASKS_PER_SUBMIT	24
-+#define NVDLA_SUBMIT_FLAGS_ATOMIC	(1 << 0)
-+	__u16 flags;
-+	__u32 version;
-+};
-+
-+/**
-+ * struct nvdla_gem_create_args for allocating DMA buffer through GEM
-+ *
-+ * @handle		handle updated by kernel after allocation
-+ * @flags		implementation specific flags
-+ * @size		size of buffer to allocate
-+ */
-+struct nvdla_gem_create_args {
-+	__u32 handle;
-+	__u32 flags;
-+	__u64 size;
-+};
-+
-+/**
-+ * struct nvdla_gem_map_offset_args for mapping DMA buffer
-+ *
-+ * @handle		handle of the buffer
-+ * @reserved		reserved for padding
-+ * @offset		offset updated by kernel after mapping
-+ */
-+struct nvdla_gem_map_offset_args {
-+	__u32 handle;
-+	__u32 reserved;
-+	__u64 offset;
-+};
-+
-+#define DRM_NVDLA_SUBMIT		0x00
-+#define DRM_NVDLA_GEM_CREATE	0x01
-+#define DRM_NVDLA_GEM_MMAP		0x02
-+
-+#define DRM_IOCTL_NVDLA_SUBMIT DRM_IOWR(DRM_COMMAND_BASE + DRM_NVDLA_SUBMIT, struct nvdla_submit_args)
-+#define DRM_IOCTL_NVDLA_GEM_CREATE DRM_IOWR(DRM_COMMAND_BASE + DRM_NVDLA_GEM_CREATE, struct nvdla_gem_create_args)
-+#define DRM_IOCTL_NVDLA_GEM_MMAP DRM_IOWR(DRM_COMMAND_BASE + DRM_NVDLA_GEM_MMAP, struct nvdla_gem_map_offset_args)
-+
-+#endif
--- 
-2.25.1
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gMjYgNOaciCAyMiAwODozMTowNSwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToNCj4gQW0gMjYu
+MDQuMjIgdW0gMDg6MDggc2NocmllYiBDYWkgSHVvcWluZzoNCj4gPiBUaGUgTlZJRElBIERlZXAg
+TGVhcm5pbmcgQWNjZWxlcmF0b3IgKE5WRExBKSBpcyBhbiBvcGVuIHNvdXJjZSBJUA0KPiA+IHdo
+aWNoIGlzIGludGVncmF0ZWQgaW50byBOVklESUEgSmV0c29uIEFHWCBYYXZpZXIsDQo+ID4gc28g
+YWRkIFVBUEkgb2YgdGhpcyBkcml2ZXIuDQo+ID4gDQo+ID4gU2lnbmVkLW9mZi1ieTogQ2FpIEh1
+b3FpbmcgPGNhaS5odW9xaW5nQGxpbnV4LmRldj4NCj4gPiAtLS0NCj4gPiB2MS0+djI6DQo+ID4g
+KlJlbmFtZSBudmRsYV9kcm0uW2NoXSB0byBudmRsYV9kcnYuW2NoXSBhbmQgcmVuYW1lIG52ZGxh
+X2lvY3RsLmggdG8gbnZkbGFfZHJtLmgsDQo+ID4gICBtb3ZlIGl0IHRvIHVhcGkuDQo+ID4gICBj
+b21tZW50cyBsaW5rOiBodHRwczovL2xvcmUua2VybmVsLm9yZy9sa21sLzIwYmFjNjA1LTk3ZTYt
+ZTVjZC1jNGU0LTgzYTgxMjE2NDVkOEBhbWQuY29tLw0KPiA+IA0KPiA+ICAgaW5jbHVkZS91YXBp
+L2RybS9udmRsYV9kcm0uaCB8IDk5ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+Kw0KPiA+ICAgMSBmaWxlIGNoYW5nZWQsIDk5IGluc2VydGlvbnMoKykNCj4gPiAgIGNyZWF0ZSBt
+b2RlIDEwMDY0NCBpbmNsdWRlL3VhcGkvZHJtL252ZGxhX2RybS5oDQo+ID4gDQo+ID4gZGlmZiAt
+LWdpdCBhL2luY2x1ZGUvdWFwaS9kcm0vbnZkbGFfZHJtLmggYi9pbmNsdWRlL3VhcGkvZHJtL252
+ZGxhX2RybS5oDQo+ID4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwMDAw
+MDAuLjk4NDYzNTI4NTUyNQ0KPiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9pbmNsdWRlL3Vh
+cGkvZHJtL252ZGxhX2RybS5oDQo+ID4gQEAgLTAsMCArMSw5OSBAQA0KPiA+ICsvKiBTUERYLUxp
+Y2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMCBPUiBCU0QtMy1DbGF1c2UgKi8NCj4gPiArLyoNCj4g
+PiArICogQ29weXJpZ2h0IChDKSAyMDE3LTIwMTggTlZJRElBIENPUlBPUkFUSU9OLg0KPiA+ICsg
+KiBDb3B5cmlnaHQgKEMpIDIwMjIgQ2FpIEh1b3FpbmcNCj4gPiArICovDQo+ID4gKw0KPiA+ICsj
+aWZuZGVmIF9fTElOVVhfTlZETEFfSU9DVExfSA0KPiA+ICsjZGVmaW5lIF9fTElOVVhfTlZETEFf
+SU9DVExfSA0KPiA+ICsNCj4gPiArI2luY2x1ZGUgPGxpbnV4L2lvY3RsLmg+DQo+ID4gKyNpbmNs
+dWRlIDxsaW51eC90eXBlcy5oPg0KPiA+ICsNCj4gPiArI2lmICFkZWZpbmVkKF9fS0VSTkVMX18p
+DQo+ID4gKyNkZWZpbmUgX191c2VyDQo+ID4gKyNlbmRpZg0KPiA+ICsNCj4gPiArLyoqDQo+ID4g
+KyAqIHN0cnVjdCBudmRsYV9tZW1faGFuZGxlIHN0cnVjdHVyZSBmb3IgbWVtb3J5IGhhbmRsZXMN
+Cj4gPiArICoNCj4gPiArICogQGhhbmRsZQkJaGFuZGxlIHRvIERNQSBidWZmZXIgYWxsb2NhdGVk
+IGluIHVzZXJzcGFjZQ0KPiA+ICsgKiBAcmVzZXJ2ZWQJCVJlc2VydmVkIGZvciBwYWRkaW5nDQo+
+ID4gKyAqIEBvZmZzZXQJCW9mZnNldCBpbiBieXRlcyBmcm9tIHN0YXJ0IGFkZHJlc3Mgb2YgYnVm
+ZmVyDQo+ID4gKyAqDQo+ID4gKyAqLw0KPiA+ICtzdHJ1Y3QgbnZkbGFfbWVtX2hhbmRsZSB7DQo+
+ID4gKwlfX3UzMiBoYW5kbGU7DQo+ID4gKwlfX3UzMiByZXNlcnZlZDsNCj4gPiArCV9fdTY0IG9m
+ZnNldDsNCj4gPiArfTsNCj4gPiArDQo+ID4gKy8qKg0KPiA+ICsgKiBzdHJ1Y3QgbnZkbGFfaW9j
+dGxfc3VibWl0X3Rhc2sgc3RydWN0dXJlIGZvciBzaW5nbGUgdGFzayBpbmZvcm1hdGlvbg0KPiA+
+ICsgKg0KPiA+ICsgKiBAbnVtX2FkZHJlc3NlcwkJdG90YWwgbnVtYmVyIG9mIGVudHJpZXMgaW4g
+YWRkcmVzc19saXN0DQo+ID4gKyAqIEByZXNlcnZlZAkJCVJlc2VydmVkIGZvciBwYWRkaW5nDQo+
+ID4gKyAqIEBhZGRyZXNzX2xpc3QJCXBvaW50ZXIgdG8gYXJyYXkgb2Ygc3RydWN0IG52ZGxhX21l
+bV9oYW5kbGUNCj4gPiArICoNCj4gPiArICovDQo+ID4gK3N0cnVjdCBudmRsYV9pb2N0bF9zdWJt
+aXRfdGFzayB7DQo+ID4gKyNkZWZpbmUgTlZETEFfTUFYX0JVRkZFUlNfUEVSX1RBU0sgKDYxNDQp
+DQo+ID4gKwlfX3UzMiBudW1fYWRkcmVzc2VzOw0KPiA+ICsjZGVmaW5lIE5WRExBX05PX1RJTUVP
+VVQgICAgKDB4ZmZmZmZmZmYpDQo+ID4gKwlfX3UzMiB0aW1lb3V0Ow0KPiANCj4gV2hhdCBmb3Jt
+YXQgZG9lcyB0aGF0IHRpbWVvdXQgdmFsdWUgaGF2ZT8NCj4gDQo+IEluIGdlbmVyYWwgaXQgaXMg
+YmVzdCBwcmFjdGljZSB0byBoYXZlIGFic29sdXRlIDY0Yml0IG5hbm9zZWNvbmQgdGltZW91dHMN
+Cj4gKHRvIGJlIHVzZWQgd2l0aCBrdGltZSBpbnNpZGUgdGhlIGtlcm5lbCkgc28gdGhhdCByZXN0
+YXJ0aW5nIGludGVycnVwdGVkDQo+IElPQ1RMcyB3b3JrcyBzbW9vdGguDQo+IA0KPiA+ICsJX191
+NjQgYWRkcmVzc19saXN0Ow0KPiANCj4gTWF5YmUgbWFrZSB0aGUgY29tbWVudHMgaW5saW5lLCBj
+YXVzZSBJIGp1c3Qgd2FudGVkIHRvIHdyaXRlIHRoYXQgeW91IHNob3VsZA0KPiBub3RlIHRoYXQg
+dGhpcyBpcyBwb2ludGluZyB0byBhbiBudmRsYV9tZW1faGFuZGxlIGFycmF5IHVudGlsIEkgc2F3
+IHRoZQ0KPiBjb21tZW50IGFib3ZlLg0KPiANCj4gPiArfTsNCj4gPiArDQo+ID4gKy8qKg0KPiA+
+ICsgKiBzdHJ1Y3QgbnZkbGFfc3VibWl0X2FyZ3Mgc3RydWN0dXJlIGZvciB0YXNrIHN1Ym1pdA0K
+PiA+ICsgKg0KPiA+ICsgKiBAdGFza3MJCXBvaW50ZXIgdG8gYXJyYXkgb2Ygc3RydWN0IG52ZGxh
+X2lvY3RsX3N1Ym1pdF90YXNrDQo+ID4gKyAqIEBudW1fdGFza3MJCW51bWJlciBvZiBlbnRyaWVz
+IGluIHRhc2tzDQo+ID4gKyAqIEBmbGFncwkJZmxhZ3MgZm9yIHRhc2sgc3VibWl0LCBubyBmbGFn
+cyBkZWZpbmVkIHlldA0KPiA+ICsgKiBAdmVyc2lvbgkJdmVyc2lvbiBvZiB0YXNrIHN0cnVjdHVy
+ZQ0KPiA+ICsgKg0KPiA+ICsgKi8NCj4gPiArc3RydWN0IG52ZGxhX3N1Ym1pdF9hcmdzIHsNCj4g
+PiArCV9fdTY0IHRhc2tzOw0KPiA+ICsJX191MTYgbnVtX3Rhc2tzOw0KPiA+ICsjZGVmaW5lIE5W
+RExBX01BWF9UQVNLU19QRVJfU1VCTUlUCTI0DQo+ID4gKyNkZWZpbmUgTlZETEFfU1VCTUlUX0ZM
+QUdTX0FUT01JQwkoMSA8PCAwKQ0KPiANCj4gV2VsbCB0aGF0ICJubyBmbGFncyBkZWZpbmVkIHll
+dCIgZnJvbSB0aGUgY29tbWVudCBhYm92ZSBpcyBwcm9iYWJseSBvdXRkYXRlZA0KPiA6KQ0KPiAN
+Cj4gQSBjb21tZW50IHdoYXQgdGhpcyBmbGFnIG1lYW5zIHdvdWxkIGFsc28gYmUgbmljZSB0byBo
+YXZlLg0KPiANCj4gQXBhcnQgZnJvbSBhbGwgdGhvc2Ugbml0IHBpY2tzIHRoYXQgbG9va3MgcHJl
+dHR5IHNvbGlkIHRvIG1lLiBKdXN0IG9uZSBjb3JlDQo+IGZ1bmN0aW9uYWxpdHkgd2UgdXN1YWxs
+eSBoYXZlIHNlZW1zIHRvIGJlIG1pc3NpbmcgaGVyZTogSG93IGlzIGNvbXBsZXRpb24NCj4gc2ln
+bmFsaW5nIGltcGxlbWVudGVkPw0KSGksdGhhbmsgZm9yIHlvdXIgcmVwbHkuDQoNCkRvIHlvdSBt
+ZWFuIGZlbmNlIHNpZ25hbD8gSW4gdGhpcyBkcml2ZXIsIElPQ1RMX1NVQk1JVCBpcyBhIHN5bmNo
+cm9ub3VzIGNhbGwNCndoaWNoIGRvIHRhc2sgc3VibWlzc2lvbiAmIHdhaXQgZm9yIGRvbmUgY29t
+cGxldGlvbi4gVGhpcyBhY2NlcmxldG9yIGRlYWwNCndpdGggbWFzc2l2ZSBjb21wdXRlIG9wZXJh
+dG9yIChQb29saW5nLCBDb252Li4uKSwgdGhhdCBpcyBkaWZmZXJlbnQgdG8NCkdQVS4gSXQncyB1
+bm5lY2Vzc2FyeSB0byBleHBvc2UgZmVuY2UgQVBJIHRvIFVNRCBmb3IgcmVkdWNpbmcgc3VjaCBs
+ZXNzIHRpbWUuDQoNClRoYW5rcywNCkNhaQ0KPiANCj4gUmVnYXJkcywNCj4gQ2hyaXN0aWFuLg0K
+PiANCj4gPiArCV9fdTE2IGZsYWdzOw0KPiA+ICsJX191MzIgdmVyc2lvbjsNCj4gPiArfTsNCj4g
+PiArDQo+ID4gKy8qKg0KPiA+ICsgKiBzdHJ1Y3QgbnZkbGFfZ2VtX2NyZWF0ZV9hcmdzIGZvciBh
+bGxvY2F0aW5nIERNQSBidWZmZXIgdGhyb3VnaCBHRU0NCj4gPiArICoNCj4gPiArICogQGhhbmRs
+ZQkJaGFuZGxlIHVwZGF0ZWQgYnkga2VybmVsIGFmdGVyIGFsbG9jYXRpb24NCj4gPiArICogQGZs
+YWdzCQlpbXBsZW1lbnRhdGlvbiBzcGVjaWZpYyBmbGFncw0KPiA+ICsgKiBAc2l6ZQkJc2l6ZSBv
+ZiBidWZmZXIgdG8gYWxsb2NhdGUNCj4gPiArICovDQo+ID4gK3N0cnVjdCBudmRsYV9nZW1fY3Jl
+YXRlX2FyZ3Mgew0KPiA+ICsJX191MzIgaGFuZGxlOw0KPiA+ICsJX191MzIgZmxhZ3M7DQo+ID4g
+KwlfX3U2NCBzaXplOw0KPiA+ICt9Ow0KPiA+ICsNCj4gPiArLyoqDQo+ID4gKyAqIHN0cnVjdCBu
+dmRsYV9nZW1fbWFwX29mZnNldF9hcmdzIGZvciBtYXBwaW5nIERNQSBidWZmZXINCj4gPiArICoN
+Cj4gPiArICogQGhhbmRsZQkJaGFuZGxlIG9mIHRoZSBidWZmZXINCj4gPiArICogQHJlc2VydmVk
+CQlyZXNlcnZlZCBmb3IgcGFkZGluZw0KPiA+ICsgKiBAb2Zmc2V0CQlvZmZzZXQgdXBkYXRlZCBi
+eSBrZXJuZWwgYWZ0ZXIgbWFwcGluZw0KPiA+ICsgKi8NCj4gPiArc3RydWN0IG52ZGxhX2dlbV9t
+YXBfb2Zmc2V0X2FyZ3Mgew0KPiA+ICsJX191MzIgaGFuZGxlOw0KPiA+ICsJX191MzIgcmVzZXJ2
+ZWQ7DQo+ID4gKwlfX3U2NCBvZmZzZXQ7DQo+ID4gK307DQo+ID4gKw0KPiA+ICsjZGVmaW5lIERS
+TV9OVkRMQV9TVUJNSVQJCTB4MDANCj4gPiArI2RlZmluZSBEUk1fTlZETEFfR0VNX0NSRUFURQkw
+eDAxDQo+ID4gKyNkZWZpbmUgRFJNX05WRExBX0dFTV9NTUFQCQkweDAyDQo+ID4gKw0KPiA+ICsj
+ZGVmaW5lIERSTV9JT0NUTF9OVkRMQV9TVUJNSVQgRFJNX0lPV1IoRFJNX0NPTU1BTkRfQkFTRSAr
+IERSTV9OVkRMQV9TVUJNSVQsIHN0cnVjdCBudmRsYV9zdWJtaXRfYXJncykNCj4gPiArI2RlZmlu
+ZSBEUk1fSU9DVExfTlZETEFfR0VNX0NSRUFURSBEUk1fSU9XUihEUk1fQ09NTUFORF9CQVNFICsg
+RFJNX05WRExBX0dFTV9DUkVBVEUsIHN0cnVjdCBudmRsYV9nZW1fY3JlYXRlX2FyZ3MpDQo+ID4g
+KyNkZWZpbmUgRFJNX0lPQ1RMX05WRExBX0dFTV9NTUFQIERSTV9JT1dSKERSTV9DT01NQU5EX0JB
+U0UgKyBEUk1fTlZETEFfR0VNX01NQVAsIHN0cnVjdCBudmRsYV9nZW1fbWFwX29mZnNldF9hcmdz
+KQ0KPiA+ICsNCj4gPiArI2VuZGlmDQo+IA0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1t
+LXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGlu
+YXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
