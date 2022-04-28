@@ -2,106 +2,105 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8786E513060
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Apr 2022 11:55:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 62B835134B6
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Apr 2022 15:17:08 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BCD09401F7
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Apr 2022 09:55:07 +0000 (UTC)
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
-	by lists.linaro.org (Postfix) with ESMTPS id DC5BC401F7
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 28 Apr 2022 09:55:02 +0000 (UTC)
-Received: by mail-lf1-f50.google.com with SMTP id y32so7648173lfa.6
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 28 Apr 2022 02:55:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=V0XeT7IXBftt0apFPjjxPnSRBK1X7ldQ9u0yIYHiPlU=;
-        b=YCg4LQSCCHVcvC/S2cQuookZz0GMC3S83n5ovXl/cTO4vUS871u/K85uaoRnHXZi5n
-         s8HCkmeTShWkJtH/RqXwANzdsUpcmgKpDfbzBqKiXU7uJ6y/1V3S9dxb8m8M+jiijopy
-         QA4yKCLxZguaqkZJ64WGbrnlJOHQkRyG8j9nUnVtKNMnMXpfRSznH0OX9F+VIoHEIv1n
-         ulAWX0gv39ng0xftKnC1sBNS+j1hQ5UpILJw+cEeg9Y66AOHRf+sOQpVKsLiXa64cyui
-         guTOM8XV+qM+BriDGY6F6KIbFr2f9PgoC9XHjHUfqp3QxuZ7owy9GFz3dzitjKq+QOKx
-         RE4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=V0XeT7IXBftt0apFPjjxPnSRBK1X7ldQ9u0yIYHiPlU=;
-        b=71b6q2Tz7F4QXEye5YIhXuJhXMCmTAgN3Zn6bDUkoZUSszbw7buvT1VFQya0TF6T8h
-         pnRJct6eFqtvAJOQU33sZvn08BJIRnSdWyH107lqHqPCJz1iQy7xwuuUgIST/GnBGzgS
-         CbN7Hb72jntt2LbISBCUgwGt0oneqNVUQOheyazukWgphiXbf62w+RbDk2IN3jRWfIwX
-         l+oz85c7dDNzeM0I5ndfDJZ1sr4mYcFj72hjNeVrGGiyikNeOnmEbNcKQCLrDMYCJ9vq
-         r2SUHy9rbnutmXIPNqeQqnrqzDWHA3vhv8jxasBa1Enb9ohDWn6tgLosjD3k3N6jcnE9
-         MnVA==
-X-Gm-Message-State: AOAM531u+UUnqYyZrBw0ZLkLScft9dgz9DgH5hJgY69nvwf0HMn/hpD8
-	/NAYQf+cdUCiO4KNvJH/RkDHRmOuHeOZI6+keRS9SD2n
-X-Google-Smtp-Source: ABdhPJy0ybox27E6e84jHMcEqHixOb1KpVI0stK6pmS/L2GkVDTmApxzKoDq6QSEYP6f0A9CtGwOMHzZsfN+e/ROgxI=
-X-Received: by 2002:a05:6512:110c:b0:472:3d96:bd24 with SMTP id
- l12-20020a056512110c00b004723d96bd24mr678751lfg.389.1651139701661; Thu, 28
- Apr 2022 02:55:01 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220428063924.3570409-1-songyuanzheng@huawei.com> <e4e5bd41-df5b-bb65-b92f-47122d1e7738@amd.com>
-In-Reply-To: <e4e5bd41-df5b-bb65-b92f-47122d1e7738@amd.com>
-From: Sumit Semwal <sumit.semwal@linaro.org>
-Date: Thu, 28 Apr 2022 15:24:49 +0530
-Message-ID: <CAO_48GG6vX35HTZNXz5Bqf341K9+6a5M63Jxb+nYSbpWDqMH=w@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-Message-ID-Hash: 73VEM44DT7GTC4BJGED24GKG4TGXHV3Z
-X-Message-ID-Hash: 73VEM44DT7GTC4BJGED24GKG4TGXHV3Z
-X-MailFrom: sumit.semwal@linaro.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Yuanzheng Song <songyuanzheng@huawei.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, linux-kernel@vger.kernel.org
+	by lists.linaro.org (Postfix) with ESMTP id 9AD0548014
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Apr 2022 13:17:07 +0000 (UTC)
+Received: from mo-csw.securemx.jp (mo-csw1115.securemx.jp [210.130.202.157])
+	by lists.linaro.org (Postfix) with ESMTPS id 94A2847FCD
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 28 Apr 2022 13:16:56 +0000 (UTC)
+Received: by mo-csw.securemx.jp (mx-mo-csw1115) id 23SDGYBv005922; Thu, 28 Apr 2022 22:16:34 +0900
+X-Iguazu-Qid: 2wGrSY3sPO1pGNxkIK
+X-Iguazu-QSIG: v=2; s=0; t=1651151794; q=2wGrSY3sPO1pGNxkIK; m=bTvy+cUh66mFikFBu1CMUwP46MeZjQTe4nnCWw9Qy4Q=
+Received: from imx12-a.toshiba.co.jp (imx12-a.toshiba.co.jp [61.202.160.135])
+	by relay.securemx.jp (mx-mr1112) id 23SDGXQu017419
+	(version=TLSv1.2 cipher=AES128-GCM-SHA256 bits=128 verify=NOT);
+	Thu, 28 Apr 2022 22:16:33 +0900
+X-SA-MID: 3363560
+From: Yuji Ishikawa <yuji2.ishikawa@toshiba.co.jp>
+To: Rob Herring <robh+dt@kernel.org>,
+        Nobuhiro Iwamatsu <nobuhiro1.iwamatsu@toshiba.co.jp>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Date: Thu, 28 Apr 2022 22:11:24 +0900
+X-TSB-HOP2: ON
+Message-Id: <20220428131128.5053-1-yuji2.ishikawa@toshiba.co.jp>
+X-Mailer: git-send-email 2.17.1
+Message-ID-Hash: A7GFELIJGYAL2ZABNKM4O5GLRYMFOYUZ
+X-Message-ID-Hash: A7GFELIJGYAL2ZABNKM4O5GLRYMFOYUZ
+X-MailFrom: yuji2.ishikawa@toshiba.co.jp
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, yuji2.ishikawa@toshiba.co.jp
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: add the name field to the table header
+Subject: [Linaro-mm-sig] [PATCH 0/4] Add Toshiba Visconti DNN image processing accelerator driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/73VEM44DT7GTC4BJGED24GKG4TGXHV3Z/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/A7GFELIJGYAL2ZABNKM4O5GLRYMFOYUZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGkgQ2hyaXN0aWFuLA0KDQpPbiBUaHUsIDI4IEFwciAyMDIyIGF0IDEzOjMzLCBDaHJpc3RpYW4g
-S8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+IHdyb3RlOg0KPg0KPiBBbSAyOC4wNC4y
-MiB1bSAwODozOSBzY2hyaWViIFl1YW56aGVuZyBTb25nOg0KPiA+ICdjYXQgL3N5cy9rZXJuZWwv
-ZGVidWcvZG1hX2J1Zi9idWZpbmZvJyB3aWxsIHByaW50IHRoZSBEbWEtYnVmDQo+ID4gT2JqZWN0
-cycgaW5mb3JtYXRpb24gd2hlbiB0aGUgQ09ORklHX0RFQlVHX0ZTPXkuDQo+ID4gSG93ZXZlciwg
-dGhlIHByaW50ZWQgdGFibGUgaGVhZGVyIGluZm9ybWF0aW9uIGRvZXMgbm90IGNvbnRhaW4NCj4g
-PiB0aGUgbmFtZSBmaWVsZC4gU28gd2UgbmVlZCB0byBhZGQgdGhlIG5hbWUgZmllbGQgdG8gdGhl
-IHRhYmxlDQo+ID4gaGVhZGVyIGFuZCB1c2UgdGhlICc8bm9uZT4nIHRvIHJlcGxhY2UgdGhlIGVt
-cHR5IGJ1Zl9vYmotPm5hbWUuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBZdWFuemhlbmcgU29u
-ZyA8c29uZ3l1YW56aGVuZ0BodWF3ZWkuY29tPg0KPg0KPiBSZXZpZXdlZC1ieTogQ2hyaXN0aWFu
-IEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KPg0KPiBTdW1pdCBkbyB5b3Ugd2Fu
-dCB0byBwdXNoIHRoaXMgb3Igc2hvdWxkIEkgZ28gYWhlYWQ/DQoNCk5vIHdvcnJpZXMsIEkgY2Fu
-IHB1c2ggaXQgb3V0Lg0KDQpUaGFua3MgOikNCj4NCj4gPiAtLS0NCj4gPiAgIGRyaXZlcnMvZG1h
-LWJ1Zi9kbWEtYnVmLmMgfCA0ICsrLS0NCj4gPiAgIDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlv
-bnMoKyksIDIgZGVsZXRpb25zKC0pDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEt
-YnVmL2RtYS1idWYuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMNCj4gPiBpbmRleCA3OTc5
-NTg1N2JlM2UuLmEyZjlhMTgxNWUzOCAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJzL2RtYS1idWYv
-ZG1hLWJ1Zi5jDQo+ID4gKysrIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYw0KPiA+IEBAIC0x
-MzUxLDcgKzEzNTEsNyBAQCBzdGF0aWMgaW50IGRtYV9idWZfZGVidWdfc2hvdyhzdHJ1Y3Qgc2Vx
-X2ZpbGUgKnMsIHZvaWQgKnVudXNlZCkNCj4gPiAgICAgICAgICAgICAgIHJldHVybiByZXQ7DQo+
-ID4NCj4gPiAgICAgICBzZXFfcHV0cyhzLCAiXG5EbWEtYnVmIE9iamVjdHM6XG4iKTsNCj4gPiAt
-ICAgICBzZXFfcHJpbnRmKHMsICIlLThzXHQlLThzXHQlLThzXHQlLThzXHRleHBfbmFtZVx0JS04
-c1xuIiwNCj4gPiArICAgICBzZXFfcHJpbnRmKHMsICIlLThzXHQlLThzXHQlLThzXHQlLThzXHRl
-eHBfbmFtZVx0JS04c1x0bmFtZVxuIiwNCj4gPiAgICAgICAgICAgICAgICAgICJzaXplIiwgImZs
-YWdzIiwgIm1vZGUiLCAiY291bnQiLCAiaW5vIik7DQo+ID4NCj4gPiAgICAgICBsaXN0X2Zvcl9l
-YWNoX2VudHJ5KGJ1Zl9vYmosICZkYl9saXN0LmhlYWQsIGxpc3Rfbm9kZSkgew0KPiA+IEBAIC0x
-MzY4LDcgKzEzNjgsNyBAQCBzdGF0aWMgaW50IGRtYV9idWZfZGVidWdfc2hvdyhzdHJ1Y3Qgc2Vx
-X2ZpbGUgKnMsIHZvaWQgKnVudXNlZCkNCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICBmaWxlX2NvdW50KGJ1Zl9vYmotPmZpbGUpLA0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIGJ1Zl9vYmotPmV4cF9uYW1lLA0KPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGZpbGVfaW5vZGUoYnVmX29iai0+ZmlsZSktPmlfaW5vLA0KPiA+IC0gICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGJ1Zl9vYmotPm5hbWUgPzogIiIpOw0KPiA+ICsgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIGJ1Zl9vYmotPm5hbWUgPzogIjxub25lPiIpOw0KPiA+ICAgICAgICAg
-ICAgICAgc3Bpbl91bmxvY2soJmJ1Zl9vYmotPm5hbWVfbG9jayk7DQo+ID4NCj4gPiAgICAgICAg
-ICAgICAgIGRtYV9yZXN2X2Rlc2NyaWJlKGJ1Zl9vYmotPnJlc3YsIHMpOw0KPg0KDQpCZXN0LA0K
-U3VtaXQuDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpM
-aW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5v
-cmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxp
-c3RzLmxpbmFyby5vcmcK
+This series is the DNN image processing accelerator driver for Toshiba's ARM SoC, Visconti[0].
+This provides DT binding documentation, device driver, MAINTAINER files.
+
+The second patch "soc: visconti: Add Toshiba Visconti image processing accelerator common source"
+and the fourth patch "MAINTAINERS: ..." are the same as the ones in the preceding post for affine driver.
+
+Best regards,
+Yuji
+
+[0]: https://toshiba.semicon-storage.com/ap-en/semiconductor/product/image-recognition-processors-visconti.html
+
+Yuji Ishikawa (4):
+  dt-bindings: soc: visconti: Add Toshiba Visconti DNN image processing
+    accelerator bindings
+  soc: visconti: Add Toshiba Visconti image processing accelerator
+    common source
+  soc: visconti: Add Toshiba Visconti DNN image processing accelerator
+  MAINTAINERS: Add entries for Toshiba Visconti DNN image processing
+    accelerator
+
+ .../soc/visconti/toshiba,visconti-dnn.yaml    |  54 ++
+ MAINTAINERS                                   |   2 +
+ drivers/soc/Kconfig                           |   1 +
+ drivers/soc/Makefile                          |   1 +
+ drivers/soc/visconti/Kconfig                  |   7 +
+ drivers/soc/visconti/Makefile                 |   8 +
+ drivers/soc/visconti/dnn/Makefile             |   6 +
+ drivers/soc/visconti/dnn/dnn.c                | 533 ++++++++++++++++++
+ drivers/soc/visconti/dnn/hwd_dnn.c            | 183 ++++++
+ drivers/soc/visconti/dnn/hwd_dnn.h            |  68 +++
+ drivers/soc/visconti/dnn/hwd_dnn_reg.h        | 228 ++++++++
+ drivers/soc/visconti/ipa_common.c             |  55 ++
+ drivers/soc/visconti/ipa_common.h             |  18 +
+ drivers/soc/visconti/uapi/dnn.h               |  77 +++
+ drivers/soc/visconti/uapi/ipa.h               |  88 +++
+ 15 files changed, 1329 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/soc/visconti/toshiba,visconti-dnn.yaml
+ create mode 100644 drivers/soc/visconti/Kconfig
+ create mode 100644 drivers/soc/visconti/Makefile
+ create mode 100644 drivers/soc/visconti/dnn/Makefile
+ create mode 100644 drivers/soc/visconti/dnn/dnn.c
+ create mode 100644 drivers/soc/visconti/dnn/hwd_dnn.c
+ create mode 100644 drivers/soc/visconti/dnn/hwd_dnn.h
+ create mode 100644 drivers/soc/visconti/dnn/hwd_dnn_reg.h
+ create mode 100644 drivers/soc/visconti/ipa_common.c
+ create mode 100644 drivers/soc/visconti/ipa_common.h
+ create mode 100644 drivers/soc/visconti/uapi/dnn.h
+ create mode 100644 drivers/soc/visconti/uapi/ipa.h
+
+-- 
+2.17.1
+
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
