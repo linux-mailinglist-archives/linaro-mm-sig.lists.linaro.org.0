@@ -2,200 +2,262 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3048B5136EC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Apr 2022 16:32:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 21E90513719
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Apr 2022 16:40:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 69A0947FDC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Apr 2022 14:31:59 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
-	by lists.linaro.org (Postfix) with ESMTPS id E0F6647FC4
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 28 Apr 2022 14:31:54 +0000 (UTC)
-Received: by mail-wr1-f43.google.com with SMTP id i5so7015661wrc.13
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 28 Apr 2022 07:31:54 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 4CD2448012
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Apr 2022 14:40:15 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 3DB8F3EE1E
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 28 Apr 2022 14:40:10 +0000 (UTC)
+Received: by mail-wm1-f48.google.com with SMTP id p189so3069520wmp.3
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 28 Apr 2022 07:40:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=date:from:to:cc:subject:message-id:references:mime-version
          :content-disposition:in-reply-to:user-agent;
-        bh=tD4ZnsNL95O06h7hL8VE5RqbrsySI03OuKEhpsr3NBY=;
-        b=T+0wHxCSRyNbX5rV4CtSy8rx/AxW9OuTOoR+B8TOkzQDkyBO00HtWPeIdS0i/QQoQY
-         fIOOa1kMzZHo6F3oa7uC6jQ0ftswxFXMMRDXjYRe/5G6cMR0cdzvurS6yCzzuL0zOW4R
-         sRUOm+yBXzHomPvNlmik9KNG0ss9dhB/FJMBT5eETe9swWXH1w/J0Bm4lpnK/htqZk1d
-         IbA8C5RxGwvzzexMidvpK3rtw5yXJ7m6JKRGGyGLO9hVS6TShXtrfwhOiPix+/RbkMY/
-         TjIMGw5wiW2CRSMf4WuzZgFSykB+1wyg8udCjw7tQIi8gi6Bet16IGF7lTYPsEkHmR6d
-         0NyQ==
+        bh=VDF1S0swnQgnLGnudgbyWT1rZ74mGW3wr0MnYGtlGFg=;
+        b=RDrFgDDPhGeuzvPQOCdfvPZwSWVLp3JfR5m2ohcFjSHpxcbZReFodjhIzj+ng51WgX
+         EVs8A9lliHnt+qyNwiiA+aweIJRFnS3iCU16OTWNSLeHxeY6kLFmvzaheiTEevabewzd
+         OgfIR0cyv1KxCpIt1yGV4l8sS5EEOssAQV5kg/1fxzMTy2AD+B5+aHb5g63MUyqNAttq
+         r3IwuPv213YSE5FhC6J9LPnJJv4mOGiZOohmGgApFBJ6mkrTXEsy7bEYyE+VMq+NHzGJ
+         wmQdnt5s1S3CKCdhBI8YqVgL/OPwdqxyFiFueu8f3LXuT0MxbOpar3I1dfg8E4zrWdNg
+         7FJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:date:from:to:cc:subject:message-id:references
          :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=tD4ZnsNL95O06h7hL8VE5RqbrsySI03OuKEhpsr3NBY=;
-        b=CXurwisELx2tvRu/JofhpnJx+r0oNerViTxOmEcMBg1lQGyIRXeXdV7SWMybkMStmp
-         1+ZBNab+b9lxDwNnyG1gAGiR4Yzinwd2zQ1mPIdf8g15oPQhw4zVTJJhjKUUzm5Vyo+5
-         PGBYe67ivZJ14uAprcy7I3PiL/iS9Sjgib3lppdrLlw1dJ3dZ6T0goPW4ZnR5fm4scrO
-         YdeVblGmhyGonc41vLH3gYfUzTD3zQd3unurec06yp4m9a2jwkBdjKonskr5tJkeTF6t
-         kQZZb20GEpSsMjs88jpOJBPmK3yyWsuj9Go88YBce5bFFc95DICEu6o34IvNsI6neFwc
-         7zQQ==
-X-Gm-Message-State: AOAM531DLZkJnj8Gor6qbAhrYygCEsy41aoXcRqzoe40B7oOMu3CkCSi
-	MFaiOJN/MJnD1fQfDr1yI+U=
-X-Google-Smtp-Source: ABdhPJy94FFHTeKN1GK8czEcKl+i8gHZfXgzH0KKXwxLGWfDljbzaXXWHbYxQGcmuRPZvQYQIodsRw==
-X-Received: by 2002:a5d:42c8:0:b0:20a:d91f:87b5 with SMTP id t8-20020a5d42c8000000b0020ad91f87b5mr18368195wrr.301.1651156313725;
-        Thu, 28 Apr 2022 07:31:53 -0700 (PDT)
+        bh=VDF1S0swnQgnLGnudgbyWT1rZ74mGW3wr0MnYGtlGFg=;
+        b=dQHMZnE2Kozaw+ytOqeeoI05LQMCYMJQsKSWaWDKcBd5xpQaXbFN/fOrGCvVMUJtU9
+         ixJn6H7J+OqjjFUowD/1gGapc6HevamMthRK8OuxYLAAd2bZOoMkJb2sS1sXUjvuCr/A
+         jfKr4tjFvk6Lp+/YRHmbhmZHF3dvbdrmcbjSCR4R0QhFoOg6f2BABBNn4DjaViSoGuZt
+         BwhgUCj1uLszfJWISFBkBNGTeh6sBfJIL66yjn4K/GjxZYQLPi8+fn3yuxjluQ1QMEgk
+         FYfqPQ64WygfG1CU/JPOyjuscemf+04x6FUv6Vu1pkFXR++AKW4bpIqZoNZIUAocoALY
+         cmuQ==
+X-Gm-Message-State: AOAM530um4vIgtmy0neu6ic9mXXFVsuVjAPplHgnT9SwxhLJQ3lWbvEy
+	aLcjm2HZ0IW5C+RUZ8V/n0g=
+X-Google-Smtp-Source: ABdhPJxtWdPeuZGHutll5qdwBnskdYy79FMy79IM9OerYE+CBeorGM6cXBANz87spetWLA77cHiYJQ==
+X-Received: by 2002:a1c:acc6:0:b0:38e:b184:7721 with SMTP id v189-20020a1cacc6000000b0038eb1847721mr31085601wme.94.1651156809221;
+        Thu, 28 Apr 2022 07:40:09 -0700 (PDT)
 Received: from orome ([62.96.65.119])
-        by smtp.gmail.com with ESMTPSA id n16-20020a05600c3b9000b0039411b2e96fsm1581283wms.30.2022.04.28.07.31.51
+        by smtp.gmail.com with ESMTPSA id bk1-20020a0560001d8100b002061d6bdfd0sm42254wrb.63.2022.04.28.07.40.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 28 Apr 2022 07:31:52 -0700 (PDT)
-Date: Thu, 28 Apr 2022 16:31:50 +0200
+        Thu, 28 Apr 2022 07:40:07 -0700 (PDT)
+Date: Thu, 28 Apr 2022 16:40:05 +0200
 From: Thierry Reding <thierry.reding@gmail.com>
 To: Cai Huoqing <cai.huoqing@linux.dev>
-Message-ID: <YmqlVmYX3q74hMWT@orome>
+Message-ID: <YmqnReMMfRxLWK1d@orome>
 References: <20220426060808.78225-1-cai.huoqing@linux.dev>
- <20220426060808.78225-4-cai.huoqing@linux.dev>
+ <20220426060808.78225-5-cai.huoqing@linux.dev>
 MIME-Version: 1.0
-In-Reply-To: <20220426060808.78225-4-cai.huoqing@linux.dev>
+In-Reply-To: <20220426060808.78225-5-cai.huoqing@linux.dev>
 User-Agent: Mutt/2.2.1 (c8109e14) (2022-02-19)
-Message-ID-Hash: MJ5Z76AK4CXFWFAG6XLWX3TT3JTO3M3B
-X-Message-ID-Hash: MJ5Z76AK4CXFWFAG6XLWX3TT3JTO3M3B
+Message-ID-Hash: WHQTLBUJAXZAPXNQZVEBH5HK6UNAJB66
+X-Message-ID-Hash: WHQTLBUJAXZAPXNQZVEBH5HK6UNAJB66
 X-MailFrom: thierry.reding@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 3/4] drm/nvdla: Add register head file of NVDLA
+Subject: [Linaro-mm-sig] Re: [PATCH v2 4/4] drm/nvdla/uapi: Add UAPI of NVDLA driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MJ5Z76AK4CXFWFAG6XLWX3TT3JTO3M3B/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WHQTLBUJAXZAPXNQZVEBH5HK6UNAJB66/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============9025085227420773402=="
+Content-Type: multipart/mixed; boundary="===============6340660816296202268=="
 
 
---===============9025085227420773402==
+--===============6340660816296202268==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="xAWah0BCLTf7+aCW"
+	protocol="application/pgp-signature"; boundary="I49D4SbKWwrxdmO0"
 Content-Disposition: inline
 
 
---xAWah0BCLTf7+aCW
+--I49D4SbKWwrxdmO0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 26, 2022 at 02:08:00PM +0800, Cai Huoqing wrote:
+On Tue, Apr 26, 2022 at 02:08:01PM +0800, Cai Huoqing wrote:
 > The NVIDIA Deep Learning Accelerator (NVDLA) is an open source IP
 > which is integrated into NVIDIA Jetson AGX Xavier,
-> so add register head file of this accelerator.
+> so add UAPI of this driver.
 >=20
 > Signed-off-by: Cai Huoqing <cai.huoqing@linux.dev>
 > ---
->  drivers/gpu/drm/nvdla/nvdla_reg.h | 6411 +++++++++++++++++++++++++++++
->  1 file changed, 6411 insertions(+)
->  create mode 100644 drivers/gpu/drm/nvdla/nvdla_reg.h
-
-You probably want to change the ordering of the patches a little because
-this new header file is already being used in patch 2. With the current
-ordering you'll break the build between patches 2 and 3. The same will
-likely happen with patch 4 because I'm assuming (haven't looked yet)
-that the UAPI structures are getting used in the driver code as well.
-
-Other than that, not much to say about this. One note perhaps, see
-below.
+> v1->v2:
+> *Rename nvdla_drm.[ch] to nvdla_drv.[ch] and rename nvdla_ioctl.h to nvdl=
+a_drm.h,
+>  move it to uapi.
+>  comments link: https://lore.kernel.org/lkml/20bac605-97e6-e5cd-c4e4-83a8=
+121645d8@amd.com/
 >=20
-> diff --git a/drivers/gpu/drm/nvdla/nvdla_reg.h b/drivers/gpu/drm/nvdla/nv=
-dla_reg.h
+>  include/uapi/drm/nvdla_drm.h | 99 ++++++++++++++++++++++++++++++++++++
+>  1 file changed, 99 insertions(+)
+>  create mode 100644 include/uapi/drm/nvdla_drm.h
+>=20
+> diff --git a/include/uapi/drm/nvdla_drm.h b/include/uapi/drm/nvdla_drm.h
 > new file mode 100644
-> index 000000000000..5ca2897405bc
+> index 000000000000..984635285525
 > --- /dev/null
-> +++ b/drivers/gpu/drm/nvdla/nvdla_reg.h
-> @@ -0,0 +1,6411 @@
+> +++ b/include/uapi/drm/nvdla_drm.h
+> @@ -0,0 +1,99 @@
 > +/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
 > +/*
 > + * Copyright (C) 2017-2018 NVIDIA CORPORATION.
 > + * Copyright (C) 2022 Cai Huoqing
 > + */
 > +
-> +#ifndef __NVDLA_REG_H_
-> +#define __NVDLA_REG_H_
+> +#ifndef __LINUX_NVDLA_IOCTL_H
+> +#define __LINUX_NVDLA_IOCTL_H
 > +
-> +// Register NVDLA_CFGROM_CFGROM_HW_VERSION_0
-> +#define NVDLA_CFGROM_CFGROM_HW_VERSION_0			_MK_ADDR_CONST(0x0)
-> +#define NVDLA_CFGROM_CFGROM_HW_VERSION_0_HW_VERSION_SHIFT			_MK_SHIFT_CO=
-NST(0)
-> +#define NVDLA_CFGROM_CFGROM_HW_VERSION_0_HW_VERSION_FIELD			_MK_FIELD_CO=
-NST(0xffffffff, NVDLA_CFGROM_CFGROM_HW_VERSION_0_HW_VERSION_SHIFT)
-
-I know that people have in the past expressed reluctance about the way
-that these fields are defined. I personally don't like these very much
-because they are very redundant (e.g. that CFGROM_ is duplicated for no
-obvious reason). I also think those _MK_* macros are very difficult to
-understand because they can be found nowhere else in the Linux sources
-so people aren't used to the format. And in fact the Linux kernel has
-its own set of macros to define fields.
-
-I also realize that this would probably be a pain to change. Let me see
-if I can find out how exactly those get generated, so perhaps there's a
-way to get them generated into a format that more closely matches the
-idioms used in Linux.
-
-> +//
-> +// ADDRESS SPACES
-> +//
+> +#include <linux/ioctl.h>
+> +#include <linux/types.h>
 > +
-> +#define BASE_ADDRESS_NVDLA_CFGROM	0x0
-> +#define BASE_ADDRESS_NVDLA_GLB	0x1000
-> +#define BASE_ADDRESS_NVDLA_MCIF	0x2000
-> +#define BASE_ADDRESS_NVDLA_CDMA	0x3000
-> +#define BASE_ADDRESS_NVDLA_CSC	0x4000
-> +#define BASE_ADDRESS_NVDLA_CMAC_A	0x5000
-> +#define BASE_ADDRESS_NVDLA_CMAC_B	0x6000
-> +#define BASE_ADDRESS_NVDLA_CACC	0x7000
-> +#define BASE_ADDRESS_NVDLA_SDP_RDMA	0x8000
-> +#define BASE_ADDRESS_NVDLA_SDP	0x9000
-> +#define BASE_ADDRESS_NVDLA_PDP_RDMA	0xa000
-> +#define BASE_ADDRESS_NVDLA_PDP	0xb000
-> +#define BASE_ADDRESS_NVDLA_CDP_RDMA	0xc000
-> +#define BASE_ADDRESS_NVDLA_CDP	0xd000
-> +#define BASE_ADDRESS_NVDLA_GEC	0xe000
-> +#define BASE_ADDRESS_NVDLA_CVIF	0xf000
-> +#define BASE_ADDRESS_NVDLA_BDMA	0x10000
-> +#define BASE_ADDRESS_NVDLA_RBK	0x11000
+> +#if !defined(__KERNEL__)
+> +#define __user
+> +#endif
+> +
+> +/**
+> + * struct nvdla_mem_handle structure for memory handles
+> + *
+> + * @handle		handle to DMA buffer allocated in userspace
+> + * @reserved		Reserved for padding
+> + * @offset		offset in bytes from start address of buffer
+> + *
+> + */
+> +struct nvdla_mem_handle {
+> +	__u32 handle;
+> +	__u32 reserved;
+> +	__u64 offset;
+> +};
+> +
+> +/**
+> + * struct nvdla_ioctl_submit_task structure for single task information
+> + *
+> + * @num_addresses		total number of entries in address_list
+> + * @reserved			Reserved for padding
+> + * @address_list		pointer to array of struct nvdla_mem_handle
+> + *
+> + */
+> +struct nvdla_ioctl_submit_task {
+> +#define NVDLA_MAX_BUFFERS_PER_TASK (6144)
 
-I'm wondering if it might make sense to turn these into separate reg
-entries in the device tree, though it might not be worth it. The one
-concern I have is that these might change internally in a newer
-revision, which might then make it a pain to adapt the driver to the
-differing offsets.
+This is an odd number. Can you clarify where this limitation comes from?
+I say "limitation" here because, again, I'm no expert on DLA and I don't
+know what a typical workload would look like. 6144 is a lot of buffers,
+but are these tasks typically using a few large buffers or many small
+buffers?
 
-That said, I'm not an expert on DLA, so I don't know how this has
-evolved in newer chip. I'll try to track down our local experts so that
-they can clarify a few things for us.
+> +	__u32 num_addresses;
+> +#define NVDLA_NO_TIMEOUT    (0xffffffff)
+> +	__u32 timeout;
+> +	__u64 address_list;
+> +};
+
+So if a task is basically just a collection of DMA buffers, is the
+userspace supposed to fill some of those buffers with metadata to
+determine what the task is about? If so, is this something that the
+DLA firmware/hardware knows how to parse?
+
+> +/**
+> + * struct nvdla_submit_args structure for task submit
+> + *
+> + * @tasks		pointer to array of struct nvdla_ioctl_submit_task
+> + * @num_tasks		number of entries in tasks
+> + * @flags		flags for task submit, no flags defined yet
+> + * @version		version of task structure
+> + *
+> + */
+> +struct nvdla_submit_args {
+> +	__u64 tasks;
+> +	__u16 num_tasks;
+> +#define NVDLA_MAX_TASKS_PER_SUBMIT	24
+
+Perhaps worth clarifying if this is a hardware restriction or an
+arbitrary software limit. Is this perhaps worth parameterizing somehow
+if this can potentially change in newer versions of DLA?
+
+> +#define NVDLA_SUBMIT_FLAGS_ATOMIC	(1 << 0)
+
+What exactly does atomicity imply here? Should this be described in a
+comment?
 
 Thierry
 
---xAWah0BCLTf7+aCW
+> +	__u16 flags;
+> +	__u32 version;
+> +};
+> +
+> +/**
+> + * struct nvdla_gem_create_args for allocating DMA buffer through GEM
+> + *
+> + * @handle		handle updated by kernel after allocation
+> + * @flags		implementation specific flags
+> + * @size		size of buffer to allocate
+> + */
+> +struct nvdla_gem_create_args {
+> +	__u32 handle;
+> +	__u32 flags;
+> +	__u64 size;
+> +};
+> +
+> +/**
+> + * struct nvdla_gem_map_offset_args for mapping DMA buffer
+> + *
+> + * @handle		handle of the buffer
+> + * @reserved		reserved for padding
+> + * @offset		offset updated by kernel after mapping
+> + */
+> +struct nvdla_gem_map_offset_args {
+> +	__u32 handle;
+> +	__u32 reserved;
+> +	__u64 offset;
+> +};
+> +
+> +#define DRM_NVDLA_SUBMIT		0x00
+> +#define DRM_NVDLA_GEM_CREATE	0x01
+> +#define DRM_NVDLA_GEM_MMAP		0x02
+> +
+> +#define DRM_IOCTL_NVDLA_SUBMIT DRM_IOWR(DRM_COMMAND_BASE + DRM_NVDLA_SUB=
+MIT, struct nvdla_submit_args)
+> +#define DRM_IOCTL_NVDLA_GEM_CREATE DRM_IOWR(DRM_COMMAND_BASE + DRM_NVDLA=
+_GEM_CREATE, struct nvdla_gem_create_args)
+> +#define DRM_IOCTL_NVDLA_GEM_MMAP DRM_IOWR(DRM_COMMAND_BASE + DRM_NVDLA_G=
+EM_MMAP, struct nvdla_gem_map_offset_args)
+> +
+> +#endif
+> --=20
+> 2.25.1
+>=20
+
+--I49D4SbKWwrxdmO0
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmJqpVMACgkQ3SOs138+
-s6GRSRAAuXAm9LihLpfQ1BQOnd52lgMlO8jTO5IqOlkdP3akExLaPCPBoEmc1JSR
-UMgKddQ86r4PsPF26Z6o/qzPUQL1OSG7TyDYVt10Vq7OYC0FvBfamHYVQE8RW5Yo
-zXMjvoWM/P0PPtFz2474Ngq4/AztVLSUHYCtDDKOM40YW1pedUWcOfbIqbutQpD+
-kQf2GOM9tWT1jRVBpS9coH6guSU4HJEFXZFDZ710OtUN1ay/ZSECOYGIjRj8lGeS
-XME2ppdv5t3JpA5rfgGuzUjQu0e5kB/JNJx/nVnsLlpEyWnNpXcPhSJFo7ZjBAGj
-0nHtosK9pLOKiWDg35QUjUTIF7klWc9+R8Sg8W6HqyNiGg/NRlC48tj/1HR/Zjqe
-ZLZa3nlEnuwaEIrnQImIkWGjWv3qaiHIC0bskYooN2dzhVZGnTXwYB58CuhoJSpo
-gcwu7MKMFRZB/Mu088vwaMt/MmYsLM4lvwu8tLC3JUH0x987jNiRKjCjyOG+OPOp
-0HyAOjCAmtWSEnP6rYbFeNF6JCBAS6POHV2T2pY0Q+I98dYRvRsNr+RkaDQ1S78J
-xSTYE2vG83jqxcB5aYBvQMdNxkGhOVtOSz5rhrcGjcw4volYhcqWdDgjBjk5Ftgc
-6RMp3F2ff71qyNjYc85qexHoksZdqIcwX6sENHTjjvd2IToNbuI=
-=vU1Q
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmJqp0UACgkQ3SOs138+
+s6Gunw//TuYX49xRu9m3TkkQzqiVSDRnyRXCsPVWQi7j7LYGtX4PYetlK7GohlSe
+sejyf2OfBq49Q+Oaj6fNjvyYCl0r8oQA/ja+Wd7kf/PdMLP96PzaFNIqOO895eLJ
+x63U9QqdgXgZXGLokN1RmtsUz2JIaIiYK5RVAj8qxg7csnvcM0VhBaulfI7hUDAP
+E4Hc32TOvT/v205Sy7RuQYiT1deBrBYdSQ6bC/VM0oTHKP0uFW7OwlajAaU6/bCb
+AgnntlH3cth85S4wkWXwkMzEpUdNyEqlsbEQR+qY26JSbZ3Fy+5sVNSQLLEw0sOs
+hqPuIP1shji2SVMoFRs1Lf4AmMnYB8n2MUZyRsgGqqFZ9UN+QVtK5hMnMxQGqcOH
+y5cA/2dZoYS5qxtOhnT10jEiW5ve3taZROIJHHuGSyohVKJepQ9JT9jMe8UrtSSV
+W5qmsqXMjCfVet96Fb2qp4JxVXA8WpDGEkj2RYWj50mIrhO0m4hBKdA4A70x63nR
+Xa1u4d0zMkDvh1Cb4MnU/dBh0GnDwRLk4CedfG/XTsqpyErJzWNVRW1qUIy2BtQV
+GNpk9hvoZ4Xc6yjJEyzs+vUIm1fz3pGcHif/oz/48l/gfe/shIHnZtrE4+lomYwN
+Usrfpc5pYT/ylIQyZXCoF1IENb8BtD/7kpuYMwS5mRGtfnJQS1w=
+=08Yf
 -----END PGP SIGNATURE-----
 
---xAWah0BCLTf7+aCW--
+--I49D4SbKWwrxdmO0--
 
---===============9025085227420773402==
+--===============6340660816296202268==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -205,4 +267,4 @@ _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
 
---===============9025085227420773402==--
+--===============6340660816296202268==--
