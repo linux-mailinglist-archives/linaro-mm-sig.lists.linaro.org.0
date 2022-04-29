@@ -2,116 +2,172 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 090DB513F48
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 Apr 2022 01:59:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94BB25140D8
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 Apr 2022 05:28:43 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CDE4C4800A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Apr 2022 23:59:34 +0000 (UTC)
-Received: from ssl.serverraum.org (ssl.serverraum.org [176.9.125.105])
-	by lists.linaro.org (Postfix) with ESMTPS id B3AAD3EA20
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 28 Apr 2022 23:59:28 +0000 (UTC)
-Received: from apollo.. (unknown [IPv6:2a02:810b:4340:43bf:4685:ff:fe12:5967])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-384) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ssl.serverraum.org (Postfix) with ESMTPSA id 02E5722238;
-	Fri, 29 Apr 2022 01:59:25 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc; s=mail2016061301;
-	t=1651190367;
+	by lists.linaro.org (Postfix) with ESMTP id 602F248019
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 Apr 2022 03:28:42 +0000 (UTC)
+Received: from out1.migadu.com (out1.migadu.com [91.121.223.63])
+	by lists.linaro.org (Postfix) with ESMTPS id 1BAFC3EE85
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 29 Apr 2022 03:28:38 +0000 (UTC)
+Date: Fri, 29 Apr 2022 11:28:10 +0800
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1651202916;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=5+ookkYoRvSYJlv3MLXoEnad8QTltTpUU8LXR63oCiM=;
-	b=kMftywZQ8uoL7xrVY4AFZBywzWYY5z3HraaywHO9jqmOovu/2V91XSdbL3TD161AZaHWTX
-	ygvYHVz1bjc2BOvTiHMGNp0BQ6aKXiLidDQI8IPZ0SsiXlgO7jI8KpPbo8vZtKqSPHgJsh
-	jGOsGNmMEzD7LDCzgllNVok55IVVkRY=
-From: Michael Walle <michael@walle.cc>
-To: daniel.vetter@ffwll.ch
-Date: Fri, 29 Apr 2022 01:59:16 +0200
-Message-Id: <20220428235916.331490-1-michael@walle.cc>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220331204651.2699107-2-daniel.vetter@ffwll.ch>
-References: <20220331204651.2699107-2-daniel.vetter@ffwll.ch>
+	bh=WR7AidTezt3FhuHMgE1GKtelbFYIEUudur94Uc7U6sQ=;
+	b=xKr3p3iG1CdWcIoCvh74pr/16V95IjrnfEpjJjpakdxDjhj16raMvB01Ffq7Koo5qKH+dQ
+	yM+kdMncSOk+cVivhE/eOa/R9nWd7Fvv0pgsLZfkHgzlReSwhUOxVsM/b02FL6OTQVYSTc
+	MkFgS+z/ruizZd+tD7wnD00g243IeXg=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Cai Huoqing <cai.huoqing@linux.dev>
+To: Mikko Perttunen <cyndis@kapsi.fi>
+Message-ID: <20220429032810.GA10104@chq-T47>
+References: <20220426060808.78225-1-cai.huoqing@linux.dev>
+ <YmqgailZKIuY7zTZ@orome>
+ <beacfd71-ebd0-7fde-187f-34b7a42a47de@kapsi.fi>
 MIME-Version: 1.0
-Message-ID-Hash: RHDMT2CYHXZZMKGG42EULBVCYVFJTMHX
-X-Message-ID-Hash: RHDMT2CYHXZZMKGG42EULBVCYVFJTMHX
-X-MailFrom: michael@walle.cc
+Content-Disposition: inline
+In-Reply-To: <beacfd71-ebd0-7fde-187f-34b7a42a47de@kapsi.fi>
+X-Migadu-Flow: FLOW_OUT
+X-Migadu-Auth-User: linux.dev
+Message-ID-Hash: 5XGLNXIDLFFLFYXCZVINUWYVILT5Y4EB
+X-Message-ID-Hash: 5XGLNXIDLFFLFYXCZVINUWYVILT5Y4EB
+X-MailFrom: cai.huoqing@linux.dev
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: christian.gmeiner@gmail.com, christian.koenig@amd.com, daniel.vetter@intel.com, dri-devel@lists.freedesktop.org, etnaviv@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux+etnaviv@armlinux.org.uk, linux-media@vger.kernel.org, sumit.semwal@linaro.org, Michael Walle <michael@walle.cc>
+CC: Thierry Reding <thierry.reding@gmail.com>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linux-tegra@vger.kernel.org, Jon Hunter <jonathanh@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/4] drm/etnaviv: Use scheduler dependency handling
+Subject: [Linaro-mm-sig] Re: [PATCH v2 0/4] drm/nvdla: Add driver support for NVDLA
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RHDMT2CYHXZZMKGG42EULBVCYVFJTMHX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5XGLNXIDLFFLFYXCZVINUWYVILT5Y4EB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-> We need to pull the drm_sched_job_init much earlier, but that's very
-> minor surgery.
-
-This patch breaks the GC7000 on the LS1028A:
-
-[   35.671102] Unable to handle kernel NULL pointer dereference at virtual address 0000000000000078
-[   35.680925] Mem abort info:
-[   35.685127]   ESR = 0x96000004
-[   35.689583]   EC = 0x25: DABT (current EL), IL = 32 bits
-[   35.696312]   SET = 0, FnV = 0
-[   35.700766]   EA = 0, S1PTW = 0
-[   35.705315]   FSC = 0x04: level 0 translation fault
-[   35.711616] Data abort info:
-[   35.715916]   ISV = 0, ISS = 0x00000004
-[   35.721170]   CM = 0, WnR = 0
-[   35.725552] user pgtable: 4k pages, 48-bit VAs, pgdp=0000002083f59000
-[   35.733420] [0000000000000078] pgd=0000000000000000, p4d=0000000000000000
-[   35.741627] Internal error: Oops: 96000004 [#1] SMP
-[   35.747902] Modules linked in:
-[   35.750963] CPU: 0 PID: 44 Comm: f0c0000.gpu Not tainted 5.18.0-rc2-00894-gde6a1d7294f5 #24
-[   35.759345] Hardware name: Kontron KBox A-230-LS (DT)
-[   35.764409] pstate: 00000005 (nzcv daif -PAN -UAO -TCO -DIT -SSBS BTYPE=--)
-[   35.771394] pc : drm_sched_entity_select_rq+0x314/0x380
-[   35.776645] lr : drm_sched_entity_pop_job+0x4c/0x480
-[   35.781625] sp : ffff80000949bdb0
-[   35.784943] x29: ffff80000949bdb0 x28: 0000000000000000 x27: 0000000000000000
-[   35.792107] x26: ffff002003f09008 x25: ffff00200231d130 x24: ffff800008c13008
-[   35.799270] x23: ffff8000086af900 x22: ffff800008c13008 x21: ffff002003fb6e00
-[   35.806432] x20: 0000000000000040 x19: ffff002003f09008 x18: ffffffffffffffff
-[   35.813594] x17: 0000000000000000 x16: 0000000000000000 x15: ffff800009ee3d48
-[   35.820756] x14: 0000000000000000 x13: 0000000000000000 x12: ffffffff00000008
-[   35.827918] x11: 0000aaaadb063d30 x10: 0000000000000960 x9 : ffff8000086afedc
-[   35.835080] x8 : ffff00200186a900 x7 : 0000000000000000 x6 : 0000000000000000
-[   35.842242] x5 : ffff00200231d2b0 x4 : 0000000000000000 x3 : 0000000000000000
-[   35.849403] x2 : 0000000000000000 x1 : 0000000000000078 x0 : 0000000000000078
-[   35.856565] Call trace:
-[   35.859013]  drm_sched_entity_select_rq+0x314/0x380
-[   35.863906]  drm_sched_main+0x1b0/0x49c
-[   35.867752]  kthread+0xe4/0xf0
-[   35.870814]  ret_from_fork+0x10/0x20
-[   35.874401] Code: 8805fc24 35ffffa5 17fffef9 f9800031 (885f7c22) 
-[   35.880513] ---[ end trace 0000000000000000 ]---
-
-# glmark2-es2-drm
-=======================================================
-    glmark2 2021.02
-=======================================================
-    OpenGL Information
-    GL_VENDOR:     etnaviv
-    GL_RENDERER:   Vivante GC7000 rev 6202
-    GL_VERSION:    OpenGL ES 2.0 Mesa 22.1.0-devel
-
-Mesa is Lucas latest MR branch: lynxeye/etnaviv-gc7000-r6204.
-
-Reverting this patch on drm-next will make the oops go away. Any idea
-what's going wrong here?
-
--michael
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gMjggNOaciCAyMiAxODo1NjowNywgTWlra28gUGVydHR1bmVuIHdyb3RlOg0KPiBPbiA0LzI4
+LzIyIDE3OjEwLCBUaGllcnJ5IFJlZGluZyB3cm90ZToNCj4gPiBPbiBUdWUsIEFwciAyNiwgMjAy
+MiBhdCAwMjowNzo1N1BNICswODAwLCBDYWkgSHVvcWluZyB3cm90ZToNCj4gPiA+IFRoZSBOVklE
+SUEgRGVlcCBMZWFybmluZyBBY2NlbGVyYXRvciAoTlZETEEpIGlzIGFuIG9wZW4gc291cmNlIElQ
+DQo+ID4gPiB3aGljaCBpcyBpbnRlZ3JhdGVkIGludG8gTlZJRElBIEpldHNvbiBBR1ggWGF2aWVy
+LA0KPiA+ID4gc28gYWRkIGRyaXZlciBzdXBwb3J0IGZvciB0aGlzIGFjY2VsZXJhdG9yLiINCj4g
+PiANCj4gPiBIaSwNCj4gPiANCj4gPiBuaWNlIHRvIHNlZSB0aGlzIHdvcmsgZ29pbmcgb24uIEZv
+ciBzdWJzZXF1ZW50IHJldmlzaW9ucywgY2FuIHlvdSBwbGVhc2UNCj4gPiBhbHNvIENjIHRoZSBU
+ZWdyYSBtYWlsaW5nIGxpc3QgKGxpbnV4LXRlZ3JhQHZnZXIua2VybmVsLm9yZykgYXMgd2VsbCBh
+cw0KPiA+IHRoZSBUZWdyYSBwbGF0Zm9ybSBtYWludGFpbmVycyAodGhhdCdzIEpvbiBIdW50ZXIg
+YW5kIG15c2VsZikuIFRoaXMgd2lsbA0KPiA+IG1ha2Ugc3VyZSB0aGF0IG1vcmUgcGVvcGxlIHdp
+dGggYW4gaW50ZXJlc3QgaW4gdGhpcyB3aWxsIHNlZSB5b3VyIHdvcmsuDQo+ID4gTm90IGV2ZXJ5
+b25lIGZvbGxvd3MgZHJpLWRldmVsLCBsaW5hcm8tbW0tc2lnIG9yIGxpbnV4LW1lZGlhLg0KPiA+
+IA0KPiA+IFRoYW5rcywNCj4gPiBUaGllcnJ5DQo+IA0KPiBGcm9tIGEgcXVpY2sgZ2xhbmNlIGl0
+IGxvb2tzIGxpa2UgdGhpcyBkcml2ZXIgcG9rZXMgRExBIGhhcmR3YXJlIGRpcmVjdGx5DQo+IHdo
+aWNoIGlzIG5vdCB0aGUgaW50ZW5kZWQgcHJvZ3JhbW1pbmcgbW9kZWwgb24gVGVncmEgaGFyZHdh
+cmUgKHRoZXJlIGFyZQ0KPiBGYWxjb24gbWljcm9jb250cm9sbGVycyB0aGF0IG9mZmxvYWQgdGFz
+ayBzY2hlZHVsaW5nIGFuZCBzeW5jaHJvbml6YXRpb24NCj4gZnJvbSB0aGUgQ1BVKS4gVGhlIGhh
+cmR3YXJlIGlzIGFsc28gYmVoaW5kIHRoZSBIb3N0MXggYnVzIHNvIGEgc2ltcGxlDQo+IHBsYXRm
+b3JtIGRldmljZSBpcyBub3Qgc3VmZmljaWVudC4NCj4gDQo+IFdhcyB0aGlzIGRyaXZlciBkZXZl
+bG9wZWQgYWdhaW5zdCBzb21lIHBsYXRmb3JtIHdpdGggT3BlbkRMQSBoYXJkd2FyZSAoaS5lLg0K
+PiBub3QgVGVncmEpPw0KPiANCj4gSWYgc28sIHdlJ2QgbmVlZCB0byB2ZXJpZnkgaWYgdGhlIGhh
+cmR3YXJlIG1hdGNoZXMgdGhlIGhhcmR3YXJlIGluIFRlZ3JhMTk0Lg0KPiBBbHNvLCB0aGlzIGRy
+aXZlciBtYXkgbm90IGJlIGlkZWFsIGZvciBUZWdyYSBwbGF0Zm9ybXMgc2luY2Ugd2Ugd291bGQg
+bGFjaw0KPiB0aGUgaGFyZHdhcmUgc2NoZWR1bGluZyBhbmQgc3luY2hyb25pemF0aW9uIGZhY2ls
+aXRpZXMuIEl0IGlzIGxpa2VseQ0KPiBuZWNlc3NhcnkgdG8gaGF2ZSBzZXBhcmF0ZSBkcml2ZXJz
+IGZvciBPcGVuRExBIGFuZCBUZWdyYSdzIERMQSBpbnRlZ3JhdGlvbi4NCj4gDQo+IFRoYW5rcywN
+Cj4gTWlra28NCj4gDQpUZWdyYSBETEEgc2VlbXMgdG8gd29yayB3aXRoIGEgc2xhdmUgY29wcm9j
+ZXNzb3IsIHRoZSBob3N0IGRyaXZlciBqdXN0DQppbXBlbGVtZW50IG1lc3NhZ2UgcXVldWUsIHNo
+YXJlIGJ1ZmZlciwgbm90aWZpY2F0aW9uLi4uIFRoZSBoYXJkd2FyZQ0KZGV0YWlsIG9mIERMQSBt
+YXliZSBpbiB0aGUgc2xhdmUgZHJpdmVyKG5vdCBsaW51eCBPUz8pLg0KDQpTdXJlLCBUaGlzIGRy
+aXZlciBqdXN0IHN1cHBvcnQgZm9yIHRoZSBTT0NzIG9yIEZQR0FzIHRoYXQgT1BFTkRMQQ0KaW5z
+aWRlLiBJIHdpbGwgY2hhbmdlIHRoaXMga2luZCBvZiBkZXNjcmlwdGlvbiAiaW50ZWdyYXRlZCBp
+bnRvIE5WSURJQSBKZXRzb24gQUdYIFhhdmllciINCnRoaXMgZHJpdmVyIGRvbnQgc3VwcG9ydCBm
+b3IgVGVncmEgZGlyZWN0bHkuDQoNClRoYW5rcywNCkNhaQ0KPiA+IA0KPiA+ID4gDQo+ID4gPiB2
+MS0+djI6DQo+ID4gPiAqUmVuYW1lIG52ZGxhX2RybS5bY2hdIHRvIG52ZGxhX2Rydi5bY2hdIGFu
+ZCByZW5hbWUgbnZkbGFfaW9jdGwuaCB0byBudmRsYV9kcm0uaCwNCj4gPiA+ICAgbW92ZSBpdCB0
+byB1YXBpLg0KPiA+ID4gICBjb21tZW50cyBsaW5rOiBodHRwczovL2xvcmUua2VybmVsLm9yZy9s
+a21sLzIwYmFjNjA1LTk3ZTYtZTVjZC1jNGU0LTgzYTgxMjE2NDVkOEBhbWQuY29tLw0KPiA+ID4g
+KlJlbW92ZSB0aGUgIG9uZXhpc3RlbnQgZmlsZW5hbWUgIGluIE1ha2VmaWxlDQo+ID4gPiAgIGNv
+bW1lbnRzIGxpbms6IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2xrbWwvMjAyMjA0MjAxNTEyLnBw
+MjBNWFQ1LWxrcEBpbnRlbC5jb20vDQo+ID4gPiAqU29ydCBmaWxlIG5hbWVzIGFscGhhYmV0aWNh
+bGx5IGluIE1ha2VmaWxlLg0KPiA+ID4gKlJlYXJyYW5nZSB0aGUgZXJyb3IgbWVzc2FnZXMsIGFu
+ZCB1c2UgZHJtX2Vyci9fZGJnKCkgaW5zdGVhZCBvZiBwcl9lcnIvX2RiZygpLg0KPiA+ID4gKlJl
+cGxhY2UgICJkbGFfIiBwcmVmaXggd2l0aCAibnZkbGFfIg0KPiA+ID4gKkNoZWNrIHRoZSBpb3N5
+c19tYXAgYnkgaW9zeXNfbWFwX2lzX251bGwoKSwgYW5kIGNoZWNrICJyZXQiIGRpcmVjdGx5Lg0K
+PiA+ID4gKlVzaW5nIGlvc3lzX21hcF9tZW1jcHlfdG8vX2Zyb20oKSBmb3IgaW9zeXNfbWFwIGlu
+c3RlYWQgb2YgbWVtY3B5KCkNCj4gPiA+ICpGaXggcGFyYW1ldGVyIGVycm9yICJkbWFfYnVmX3Z1
+bm1hcChidWYsIHB0cikiLCB1c2UgIiZtYXAiIGluc3RlYWQgb2YgInB0ciINCj4gPiA+ICpVc2Ug
+aW9zeXNfbWFwIGluc3RlYWQgb2Yga3ZhZGRyIGFuZCB1c2UgImlvc3lzX21hcF9zZXRfdmFkZHIo
+KSIgdG8gaW5pdGlhbGl6ZSBpb3N5c19tYXANCj4gPiA+ICpVc2luZyAidm1hLT52bV9wZ29mZiAt
+PSBkcm1fdm1hX25vZGVfc3RhcnQoJm9iai0+dm1hX25vZGUpIiB0byB1cGRhdGUgdm1fcGdvZmYg
+aXMgY2xlYW5lcg0KPiA+ID4gKlJlbW92ZSB0aGUgdW51c2VkIG52ZGxhX2RybV9nZW1fbW1hcCwg
+cmVnaXN0ZXIgZHJtX2dlbV9tbWFwIHRvIGZpbGVfb3BlcmF0aW9ucyBkaXJlY3RseS4NCj4gPiA+
+ICpVc2UgREVGSU5FX0RSTV9HRU1fRk9QUygpIHRvIGRlZmluZSBudmRsYV9kcm1fZm9wcy4NCj4g
+PiA+ICpSZW1vdmUgdGhlIHVudXNlZCBudmRsYV9kcm1fZ2VtX21tYXBfYnVmLCByZWdpc3RlciBk
+cm1fZ2VtX3ByaW1lX21tYXAgdG8gZHJtX2RyaXZlciBkaXJlY3RseS4NCj4gPiA+ICAgY29tbWVu
+dHMgbGluazogaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGttbC83ZmExOTk5Ni01ODMwLWFmM2Qt
+YWIyNC0wOGM3NmUxZDU2MDRAc3VzZS5kZS8NCj4gPiA+ICpGaXggdHlwbyBhbmQgc29tZSBjb2Rl
+IHN0eWxlDQo+ID4gPiAqUmVtb3ZlIHVudXNlZCBmdW5jdGlvbiBudmRsYV9nZXRfdGltZV91cygp
+DQo+ID4gPiAgIGNvbW1lbnRzIGxpbms6IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2xrbWwvMGZh
+OWFiNDEtYzE4ZS1hNTY5LWU2ZmUtYTBlOWQ5NjU5MDVlQHN0YXJnYXRldW5pdmVyc2UubmV0Lw0K
+PiA+ID4gDQo+ID4gPiBDYWkgSHVvcWluZyAoNCk6DQo+ID4gPiAgICBNQUlOVEFJTkVSUzogQWRk
+IHRoZSBkcml2ZXIgaW5mbyBvZiB0aGUgTlZETEENCj4gPiA+ICAgIGRybS9udmRsYTogQWRkIGRy
+aXZlciBzdXBwb3J0IGZvciBOVkRMQQ0KPiA+ID4gICAgZHJtL252ZGxhOiBBZGQgcmVnaXN0ZXIg
+aGVhZCBmaWxlIG9mIE5WRExBDQo+ID4gPiAgICBkcm0vbnZkbGEvdWFwaTogQWRkIFVBUEkgb2Yg
+TlZETEEgZHJpdmVyDQo+ID4gPiANCj4gPiA+ICAgTUFJTlRBSU5FUlMgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIHwgICAgNyArDQo+ID4gPiAgIGRyaXZlcnMvZ3B1L2RybS9LY29uZmlnICAg
+ICAgICAgICAgICAgICB8ICAgIDIgKw0KPiA+ID4gICBkcml2ZXJzL2dwdS9kcm0vTWFrZWZpbGUg
+ICAgICAgICAgICAgICAgfCAgICAxICsNCj4gPiA+ICAgZHJpdmVycy9ncHUvZHJtL252ZGxhL0tj
+b25maWcgICAgICAgICAgIHwgICAgOCArDQo+ID4gPiAgIGRyaXZlcnMvZ3B1L2RybS9udmRsYS9N
+YWtlZmlsZSAgICAgICAgICB8ICAgMTcgKw0KPiA+ID4gICBkcml2ZXJzL2dwdS9kcm0vbnZkbGEv
+bnZkbGFfYmRtYS5jICAgICAgfCAgMTk4ICsNCj4gPiA+ICAgZHJpdmVycy9ncHUvZHJtL252ZGxh
+L252ZGxhX2NhY2hlLmMgICAgIHwgIDIwMiArDQo+ID4gPiAgIGRyaXZlcnMvZ3B1L2RybS9udmRs
+YS9udmRsYV9jZHAuYyAgICAgICB8ICAyOTkgKysNCj4gPiA+ICAgZHJpdmVycy9ncHUvZHJtL252
+ZGxhL252ZGxhX2NvbW1vbi5jICAgIHwgIDI5MyArKw0KPiA+ID4gICBkcml2ZXJzL2dwdS9kcm0v
+bnZkbGEvbnZkbGFfY29tbW9uLmggICAgfCAgODM1ICsrKw0KPiA+ID4gICBkcml2ZXJzL2dwdS9k
+cm0vbnZkbGEvbnZkbGFfY29udi5jICAgICAgfCAgNjg0ICsrKw0KPiA+ID4gICBkcml2ZXJzL2dw
+dS9kcm0vbnZkbGEvbnZkbGFfZHJ2LmMgICAgICAgfCAgNjk0ICsrKw0KPiA+ID4gICBkcml2ZXJz
+L2dwdS9kcm0vbnZkbGEvbnZkbGFfZHJ2LmggICAgICAgfCAgMTI5ICsNCj4gPiA+ICAgZHJpdmVy
+cy9ncHUvZHJtL252ZGxhL252ZGxhX2VuZ2luZS5jICAgIHwgIDIzMyArDQo+ID4gPiAgIGRyaXZl
+cnMvZ3B1L2RybS9udmRsYS9udmRsYV9lbmdpbmUuaCAgICB8ICAyNzIgKw0KPiA+ID4gICBkcml2
+ZXJzL2dwdS9kcm0vbnZkbGEvbnZkbGFfZ2VtLmMgICAgICAgfCAgMzU4ICsrDQo+ID4gPiAgIGRy
+aXZlcnMvZ3B1L2RybS9udmRsYS9udmRsYV9wZHAuYyAgICAgICB8ICA0NDggKysNCj4gPiA+ICAg
+ZHJpdmVycy9ncHUvZHJtL252ZGxhL252ZGxhX3JlZy5oICAgICAgIHwgNjQxMSArKysrKysrKysr
+KysrKysrKysrKysrKw0KPiA+ID4gICBkcml2ZXJzL2dwdS9kcm0vbnZkbGEvbnZkbGFfcnViaWsu
+YyAgICAgfCAgMjE0ICsNCj4gPiA+ICAgZHJpdmVycy9ncHUvZHJtL252ZGxhL252ZGxhX3NjaGVk
+LmggICAgIHwgICAzNyArDQo+ID4gPiAgIGRyaXZlcnMvZ3B1L2RybS9udmRsYS9udmRsYV9zY2hl
+ZHVsZXIuYyB8IDEwMTIgKysrKw0KPiA+ID4gICBkcml2ZXJzL2dwdS9kcm0vbnZkbGEvbnZkbGFf
+c2RwLmMgICAgICAgfCAgNzIzICsrKw0KPiA+ID4gICBpbmNsdWRlL3VhcGkvZHJtL252ZGxhX2Ry
+bS5oICAgICAgICAgICAgfCAgIDk5ICsNCj4gPiA+ICAgMjMgZmlsZXMgY2hhbmdlZCwgMTMxNzYg
+aW5zZXJ0aW9ucygrKQ0KPiA+ID4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJt
+L252ZGxhL0tjb25maWcNCj4gPiA+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2Ry
+bS9udmRsYS9NYWtlZmlsZQ0KPiA+ID4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUv
+ZHJtL252ZGxhL252ZGxhX2JkbWEuYw0KPiA+ID4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVy
+cy9ncHUvZHJtL252ZGxhL252ZGxhX2NhY2hlLmMNCj4gPiA+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0
+IGRyaXZlcnMvZ3B1L2RybS9udmRsYS9udmRsYV9jZHAuYw0KPiA+ID4gICBjcmVhdGUgbW9kZSAx
+MDA2NDQgZHJpdmVycy9ncHUvZHJtL252ZGxhL252ZGxhX2NvbW1vbi5jDQo+ID4gPiAgIGNyZWF0
+ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbnZkbGEvbnZkbGFfY29tbW9uLmgNCj4gPiA+
+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9udmRsYS9udmRsYV9jb252LmMN
+Cj4gPiA+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9udmRsYS9udmRsYV9k
+cnYuYw0KPiA+ID4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL252ZGxhL252
+ZGxhX2Rydi5oDQo+ID4gPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbnZk
+bGEvbnZkbGFfZW5naW5lLmMNCj4gPiA+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1
+L2RybS9udmRsYS9udmRsYV9lbmdpbmUuaA0KPiA+ID4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJp
+dmVycy9ncHUvZHJtL252ZGxhL252ZGxhX2dlbS5jDQo+ID4gPiAgIGNyZWF0ZSBtb2RlIDEwMDY0
+NCBkcml2ZXJzL2dwdS9kcm0vbnZkbGEvbnZkbGFfcGRwLmMNCj4gPiA+ICAgY3JlYXRlIG1vZGUg
+MTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9udmRsYS9udmRsYV9yZWcuaA0KPiA+ID4gICBjcmVhdGUg
+bW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL252ZGxhL252ZGxhX3J1YmlrLmMNCj4gPiA+ICAg
+Y3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9udmRsYS9udmRsYV9zY2hlZC5oDQo+
+ID4gPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbnZkbGEvbnZkbGFfc2No
+ZWR1bGVyLmMNCj4gPiA+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9udmRs
+YS9udmRsYV9zZHAuYw0KPiA+ID4gICBjcmVhdGUgbW9kZSAxMDA2NDQgaW5jbHVkZS91YXBpL2Ry
+bS9udmRsYV9kcm0uaA0KPiA+ID4gDQo+ID4gPiAtLSANCj4gPiA+IDIuMjUuMQ0KPiA+ID4gDQo+
+IA0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJv
+LW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRv
+IHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5s
+aW5hcm8ub3JnCg==
