@@ -2,91 +2,101 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DF6F52B529
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 May 2022 10:54:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F104152B867
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 May 2022 13:18:40 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EF14B404B6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 May 2022 08:54:53 +0000 (UTC)
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
-	by lists.linaro.org (Postfix) with ESMTPS id 3EF82404AE
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 May 2022 08:54:49 +0000 (UTC)
-Received: by mail-ed1-f45.google.com with SMTP id n23so2155569edy.0
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 18 May 2022 01:54:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NmakBTu/yOyy+SXgm2S0IBtesj4DDqTwypdR4z2zMUA=;
-        b=KEz4Bfyh0z1RizjUSsJ/8CTRYSpajI+zNYxQ01gkSHN/0/3A+AfdT3/4ghmoOnHgvk
-         9rIaBHU16WWuEpAjx6IMmBKtkD8+VLM59YIrx8m1UzK9HVyM4dPZ8nDOfxUrIRI8wyFj
-         AyaEit+RDj2uSN1DzdGcuKR5zRmdtdEkcyhpVtgUaWfagBiINDG7WXmJxLrVbnCFChqA
-         SG+J0yRnkL/jGE4i6dba2XRZ+t/IP8f6Zp5w8BTAoyHampntK0UGTEMl49rWIKtPCNC7
-         /X21EGM594pLwxJ8TJn1AB9rk7DNP4E0hw8ad73ftcNWl4meyDyroyt0RMN9VTJ0I1bH
-         Jy9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=NmakBTu/yOyy+SXgm2S0IBtesj4DDqTwypdR4z2zMUA=;
-        b=QppIHYMPni9SKy3zdbR6sSQkSyCBMXN3uQpimX8f3HFBAw9ULfwF9778c1hRlora7F
-         t/0FoMlizyG7jpLNwIrlVsEuNk8Hc5U5CvLYjb+NQlfZwgdcAWDuNt7QKevZvrL3f5lM
-         oC9uWNWvLK8ZlpseV4ImqLbpk1D+zFAFZF+a03Or/7jU/EqgIkuD5buOT1p+Iq5FYoMS
-         t5FASH612wWrss43o3cHhM/2sTmj87Zt5hMiu4K1znie3/l+rlvro5fUZlSbKdgFqXf9
-         /OJrH6t0HEPAAksyJQL6QV8cV1KmHwu7c9VDdgW3LCjaf9qB4qW577RgjiSVrxgXoTFE
-         KBgA==
-X-Gm-Message-State: AOAM531EmpUVvZQAESVoDXpr/M/qvmLQLA6L+sNCPYYe+hFsuLTbVIjk
-	To4AU7Z7oX4UOdN59MYFv5E=
-X-Google-Smtp-Source: ABdhPJxDonz8lzrvTV+KHVl0KiPlKtNFlPmtROdCUy+WJuAexza7caYRXnzxmG8UipUDKo4MqaZrIQ==
-X-Received: by 2002:a05:6402:354d:b0:428:19be:2447 with SMTP id f13-20020a056402354d00b0042819be2447mr23188331edd.308.1652864088372;
-        Wed, 18 May 2022 01:54:48 -0700 (PDT)
-Received: from able.fritz.box (p57b0bdaa.dip0.t-ipconnect.de. [87.176.189.170])
-        by smtp.gmail.com with ESMTPSA id jl26-20020a17090775da00b006f3ef214df0sm699275ejc.86.2022.05.18.01.54.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 May 2022 01:54:47 -0700 (PDT)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-To: sumit.semwal@linaro.org,
-	linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org
-Date: Wed, 18 May 2022 10:54:46 +0200
-Message-Id: <20220518085446.31338-1-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.25.1
+	by lists.linaro.org (Postfix) with ESMTP id 30552410A5
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 May 2022 11:18:40 +0000 (UTC)
+Received: from mail-m971.mail.163.com (mail-m971.mail.163.com [123.126.97.1])
+	by lists.linaro.org (Postfix) with ESMTP id 0F58D3EA4A
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 May 2022 17:15:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=Date:From:Subject:Message-ID:MIME-Version; bh=76j0I
+	vA+I38dm9XbzmM3FuswAc3dTUCCDmQhUcsk+2Y=; b=Wl+Y3oMk2j9KfVEFnmNLH
+	eg6GIloHE8BebBvjaOrJsoqg0fI36q4L9/D5d1age8+6bwL58KX2m/Pxnw+ztwLR
+	G6B+/2G04FTD4oDHRVw41oCG+8buoG1VLHJ5V4oZJl3dxIUjFfOyr7EwT6QWPqwR
+	14ReLd/MZLV3Tx5vk89Mz8=
+Received: from localhost (unknown [49.235.41.28])
+	by smtp1 (Coremail) with SMTP id GdxpCgCHteaAEXBicD8XAg--.29129S2;
+	Tue, 03 May 2022 01:14:40 +0800 (CST)
+Date: Tue, 3 May 2022 01:14:40 +0800
+From: Hui Su <suhui_kernel@163.com>
+To: sumit.semwal@linaro.org, christian.koenig@amd.com,
+	daniel.vetter@ffwll.ch, linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+	linux-kernel@vger.kernel.org
+Message-ID: <20220502171440.GA377545@localhost.localdomain>
 MIME-Version: 1.0
-Message-ID-Hash: XUZ4FT2WP4W55HFECWQQFRCEW4G6VZRQ
-X-Message-ID-Hash: XUZ4FT2WP4W55HFECWQQFRCEW4G6VZRQ
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Content-Disposition: inline
+X-CM-TRANSID: GdxpCgCHteaAEXBicD8XAg--.29129S2
+X-Coremail-Antispam: 1Uf129KBjvdXoWruF45ZFW8trW3GFW3Ar4fXwb_yoWkXrgEgr
+	48Xw4xX34vkr45tw1qywn5ZFyxKa4DZrZ5Arn2q3yayry5GrnxWw4ku3Z8A348Xa18WFWv
+	9ryfW34FkryUXjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUvcSsGvfC2KfnxnUUI43ZEXa7IU8YNt7UUUUU==
+X-Originating-IP: [49.235.41.28]
+X-CM-SenderInfo: 5vxk3xhbnh20lho6il2tof0z/1tbiMwD0bVXmBJls4AAAsI
+X-MailFrom: suhui_kernel@163.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: 5E5QK53CUCNBHQJ2VI5B4OTCXMOIYRMO
+X-Message-ID-Hash: 5E5QK53CUCNBHQJ2VI5B4OTCXMOIYRMO
+X-Mailman-Approved-At: Wed, 18 May 2022 11:18:35 +0000
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] dma-buf: cleanup dma_fence_chain_walk
+Subject: [Linaro-mm-sig] [PATCH] drivers/dma-buf: fix the wrong return val
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XUZ4FT2WP4W55HFECWQQFRCEW4G6VZRQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5E5QK53CUCNBHQJ2VI5B4OTCXMOIYRMO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-VXNlIHVucmN1X3BvaW50ZXIoKSBpbnN0ZWFkIG9mIHRoZSBtYW51YWwgY2FzdC4NCg0KU2lnbmVk
-LW9mZi1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KLS0t
-DQogZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS1jaGFpbi5jIHwgNCArKy0tDQogMSBmaWxlIGNo
-YW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCg0KZGlmZiAtLWdpdCBhL2Ry
-aXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UtY2hhaW4uYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVu
-Y2UtY2hhaW4uYw0KaW5kZXggMDZmOGVmOTdjNmU4Li5hMGQ5MjA1NzZiYTYgMTAwNjQ0DQotLS0g
-YS9kcml2ZXJzL2RtYS1idWYvZG1hLWZlbmNlLWNoYWluLmMNCisrKyBiL2RyaXZlcnMvZG1hLWJ1
-Zi9kbWEtZmVuY2UtY2hhaW4uYw0KQEAgLTYyLDggKzYyLDggQEAgc3RydWN0IGRtYV9mZW5jZSAq
-ZG1hX2ZlbmNlX2NoYWluX3dhbGsoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UpDQogCQkJcmVwbGFj
-ZW1lbnQgPSBOVUxMOw0KIAkJfQ0KIA0KLQkJdG1wID0gY21weGNoZygoc3RydWN0IGRtYV9mZW5j
-ZSBfX2ZvcmNlICoqKSZjaGFpbi0+cHJldiwNCi0JCQkgICAgICBwcmV2LCByZXBsYWNlbWVudCk7
-DQorCQl0bXAgPSB1bnJjdV9wb2ludGVyKGNtcHhjaGcoJmNoYWluLT5wcmV2LCBSQ1VfSU5JVElB
-TElaRVIocHJldiksDQorCQkJCQkgICAgIFJDVV9JTklUSUFMSVpFUihyZXBsYWNlbWVudCkpKTsN
-CiAJCWlmICh0bXAgPT0gcHJldikNCiAJCQlkbWFfZmVuY2VfcHV0KHRtcCk7DQogCQllbHNlDQot
-LSANCjIuMjUuMQ0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxp
-bmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxl
-YXZlQGxpc3RzLmxpbmFyby5vcmcK
+The function should return the correct value.
+
+Fixes: 64a8f92fd783 ("dma-buf: add dma_fence_unwrap v2")
+Signed-off-by: Hui Su <suhui@zeku.com>
+---
+ drivers/dma-buf/st-dma-fence-unwrap.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/dma-buf/st-dma-fence-unwrap.c b/drivers/dma-buf/st-dma-fence-unwrap.c
+index 039f016b57be..0f156fca9697 100644
+--- a/drivers/dma-buf/st-dma-fence-unwrap.c
++++ b/drivers/dma-buf/st-dma-fence-unwrap.c
+@@ -157,7 +157,7 @@ static int unwrap_array(void *arg)
+ 	dma_fence_signal(f1);
+ 	dma_fence_signal(f2);
+ 	dma_fence_put(array);
+-	return 0;
++	return err;
+ }
+
+ static int unwrap_chain(void *arg)
+@@ -199,7 +199,7 @@ static int unwrap_chain(void *arg)
+ 	dma_fence_signal(f1);
+ 	dma_fence_signal(f2);
+ 	dma_fence_put(chain);
+-	return 0;
++	return err;
+ }
+
+ static int unwrap_chain_array(void *arg)
+@@ -245,7 +245,7 @@ static int unwrap_chain_array(void *arg)
+ 	dma_fence_signal(f1);
+ 	dma_fence_signal(f2);
+ 	dma_fence_put(chain);
+-	return 0;
++	return err;
+ }
+
+ int dma_fence_unwrap(void)
+--
+2.34.1
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
