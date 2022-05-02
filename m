@@ -2,58 +2,77 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD159516A2A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 May 2022 06:48:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E793851746C
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 May 2022 18:37:35 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 66EBD48058
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 May 2022 04:48:27 +0000 (UTC)
-Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
-	by lists.linaro.org (Postfix) with ESMTPS id C2C3B3EC33
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 May 2022 04:48:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1651466901; x=1683002901;
-  h=date:from:to:cc:subject:message-id:mime-version:
-   content-transfer-encoding;
-  bh=97avMXbnH1YXWT85FvPWqGF+FH5iwwxYyMC7uastwlg=;
-  b=YBC7BFzKlOZ0K8keSQPaAfqsTGavu0yR+gkSbLkLQa5lvHMFf/SPihz6
-   CksSRNMJPWuC5zc8C2pPmIMwp4t90ZQ1GWPyuCLhpxNLB3EIugzsZu5Y2
-   EJVJcAorg+BM6a16l1FTZa81Tk8O1p04oN3Fqfvc4pm7vAH+aNhJPf6Pz
-   QgyPrCzmSdIly9M7POVmW1jQVxTt1z2Y5BP91RPGE6cObamNSLMf8tP0K
-   4QTCqzPw0IitNd9ozsAmUa3WyFH7ByOlVOMsbLYqxgp7mYffm/tovWQ8P
-   eT9J7DWg458djSd9Mr5ezg9p/Y/pr1UAELLyE9RB2XeNEm2LcGr6Gzr2z
-   w==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10334"; a="247032675"
-X-IronPort-AV: E=Sophos;i="5.91,190,1647327600";
-   d="scan'208";a="247032675"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 May 2022 21:48:16 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.91,190,1647327600";
-   d="scan'208";a="619738978"
-Received: from lkp-server01.sh.intel.com (HELO 5056e131ad90) ([10.239.97.150])
-  by fmsmga008.fm.intel.com with ESMTP; 01 May 2022 21:48:12 -0700
-Received: from kbuild by 5056e131ad90 with local (Exim 4.95)
-	(envelope-from <lkp@intel.com>)
-	id 1nlNyl-0009I7-B9;
-	Mon, 02 May 2022 04:48:11 +0000
-Date: Mon, 02 May 2022 12:47:54 +0800
-From: kernel test robot <lkp@intel.com>
-To: Andrew Morton <akpm@linux-foundation.org>
-Message-ID: <626f627a.zXY9JBY/2okMtjFz%lkp@intel.com>
-User-Agent: Heirloom mailx 12.5 6/20/10
+	by lists.linaro.org (Postfix) with ESMTP id D5EC44804E
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 May 2022 16:37:34 +0000 (UTC)
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
+	by lists.linaro.org (Postfix) with ESMTPS id 65BB33ED29
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 May 2022 16:37:28 +0000 (UTC)
+Received: by mail-wr1-f52.google.com with SMTP id e24so20218463wrc.9
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 02 May 2022 09:37:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=COh3IJfwy846oumlMkgPJInjAr/nsMBwOyb23bgz0lI=;
+        b=XqfYsPd37YQ0wPyDb2tewxVQmfVGsSpl3TJ3jxn7XMS3031B4AvpkhldJiATqEFuOl
+         TiL/UASlUflsQVKkaZ5JcEOycN2iZILkWbzJvds8Bvoo6FnEIvAcoF8wK5qTKHUP7ohW
+         HPmYbqxBiCr754RRQT1XCk2+ErHpzTipBUeqBphruGIAdx8IEAqz0RpaRec2gc9rpQ1c
+         rHuFgf0Fiacjgqqq2nVDX4y5RIbToTZmnGdTA8pXgksyy7MiAjFRsSICfPpETHXf86yQ
+         RlBzQnjGQaGM0HjW6eTtp+S6FSNDXtGTo3ZdmXXFRJWciJ9eWPINuCvyFrx814MrpC48
+         3YTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=COh3IJfwy846oumlMkgPJInjAr/nsMBwOyb23bgz0lI=;
+        b=Zq+UKDuBHI76uHo/YsX1wRBTUpMblC5QTUWbwnxelqmAmcIHZAcg9/eD9LIUKu7qm8
+         L1PpdY9WzIl65bIglunutFcxUigVaSKFFws+nSGIMAE/m0vwiGrPFtkLYsV3W9pQpdwJ
+         i1sKuYhDRZoFwl5rYwvNJi71J0VC68MpC3TQEJcHC9HiHTK4a817FHNWE9MMEwH3DOoq
+         V0hOiarf7W1bwsPJ5QhU1WnlQZdnSxX63/3yoqTLuuiyny3bOJ+IslW6bxTq03LsiSzP
+         adR8fuPj2fNJeQQHpoTx2EjZmQRNRkWQxASusqKoNaCAiMuy1frosxdCpoTqVODG1a9V
+         MXBw==
+X-Gm-Message-State: AOAM531+iUKn6sNk1Odj7LY1Ni+aSG788/IhnbwqstuZwvBAVGLgkQgm
+	0ueziv2RiBS9UsPdL37SVow=
+X-Google-Smtp-Source: ABdhPJy03s4PE7OwMq1frxy6huyo77/V1s5NOyyLjSguDd34niphgTgma7qdmcKzn+dduypfAbButA==
+X-Received: by 2002:a5d:47c5:0:b0:20c:5a48:7162 with SMTP id o5-20020a5d47c5000000b0020c5a487162mr7162226wrc.32.1651509447326;
+        Mon, 02 May 2022 09:37:27 -0700 (PDT)
+Received: from able.fritz.box (p57b0b9e1.dip0.t-ipconnect.de. [87.176.185.225])
+        by smtp.gmail.com with ESMTPSA id p14-20020adfaa0e000000b0020c5253d8f6sm7294694wrd.66.2022.05.02.09.37.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 May 2022 09:37:26 -0700 (PDT)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+To: daniel@ffwll.ch,
+	jason@jlekstrand.net,
+	daniels@collabora.com,
+	skhawaja@google.com,
+	maad.aldabagh@amd.com,
+	sergemetral@google.com,
+	sumit.semwal@linaro.org,
+	gustavo@padovan.org,
+	Felix.Kuehling@amd.com,
+	alexander.deucher@amd.com,
+	tzimmermann@suse.de,
+	tvrtko.ursulin@linux.intel.com,
+	linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org
+Date: Mon,  2 May 2022 18:37:07 +0200
+Message-Id: <20220502163722.3957-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Message-ID-Hash: QLRTKZ5ARJSA6D75UZWUARTRP3SKTR45
-X-Message-ID-Hash: QLRTKZ5ARJSA6D75UZWUARTRP3SKTR45
-X-MailFrom: lkp@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: netdev@vger.kernel.org, linux-wireless@vger.kernel.org, linux-media@vger.kernel.org, linux-hwmon@vger.kernel.org, linux-edac@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linaro-mm-sig@lists.linaro.org, io-uring@vger.kernel.org, intel-gvt-dev@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, bpf@vger.kernel.org, amd-gfx@lists.freedesktop.org, Linux Memory Management List <linux-mm@kvack.org>
+Message-ID-Hash: AUG76X4OU35PMKUSNPBTFTN25UZ37ZGV
+X-Message-ID-Hash: AUG76X4OU35PMKUSNPBTFTN25UZ37ZGV
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [linux-next:master] BUILD REGRESSION 5469f0c06732a077c70a759a81f2a1f00b277694
+Subject: [Linaro-mm-sig] Tackling the indefinite/user DMA fence problem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QLRTKZ5ARJSA6D75UZWUARTRP3SKTR45/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AUG76X4OU35PMKUSNPBTFTN25UZ37ZGV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -63,665 +82,56 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
-branch HEAD: 5469f0c06732a077c70a759a81f2a1f00b277694  Add linux-next specific files for 20220429
+Hello everyone,
 
-Error/Warning reports:
+it's a well known problem that the DMA-buf subsystem mixed synchronization and memory management requirements into the same dma_fence and dma_resv objects. Because of this dma_fence objects need to guarantee that they complete within a finite amount of time or otherwise the system can easily deadlock.
 
-https://lore.kernel.org/linux-mm/202204081656.6x4pfen4-lkp@intel.com
-https://lore.kernel.org/linux-mm/202204231818.yVvV3Oxp-lkp@intel.com
-https://lore.kernel.org/linux-mm/202204240458.z2cymyl5-lkp@intel.com
-https://lore.kernel.org/linux-mm/202204291904.NCK0h7cY-lkp@intel.com
-https://lore.kernel.org/linux-mm/202204291924.vTGZmerI-lkp@intel.com
-https://lore.kernel.org/linux-mm/202205010833.D736q4OR-lkp@intel.com
-https://lore.kernel.org/linux-mm/202205011336.ppUI1qHN-lkp@intel.com
-https://lore.kernel.org/lkml/202204300646.B29EmUql-lkp@intel.com
-https://lore.kernel.org/llvm/202205020853.CQCkKyFc-lkp@intel.com
+One of the few good things about this problem is that it is really good understood by now.
 
-Error/Warning: (recently discovered and may have been fixed)
+Daniel and others came up with some documentation: https://dri.freedesktop.org/docs/drm/driver-api/dma-buf.html?highlight=dma_buf#indefinite-dma-fences
 
-ERROR: modpost: "omap_set_dma_priority" [drivers/video/fbdev/omap/omapfb.ko] undefined!
-drivers/gpu/drm/amd/amdgpu/amdgpu_discovery.c:1348:5: warning: no previous prototype for 'amdgpu_discovery_get_mall_info' [-Wmissing-prototypes]
-drivers/gpu/drm/amd/amdgpu/soc21.c:128:6: warning: no previous prototype for 'soc21_grbm_select' [-Wmissing-prototypes]
-drivers/gpu/drm/i915/gt/intel_gt_sysfs_pm.c:276:20: error: call to undeclared function 'sysfs_gt_attribute_r_max_func'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-drivers/gpu/drm/i915/gt/intel_gt_sysfs_pm.c:327:9: error: call to undeclared function 'sysfs_gt_attribute_w_func'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-drivers/gpu/drm/i915/gt/intel_gt_sysfs_pm.c:416:17: error: call to undeclared function 'sysfs_gt_attribute_r_min_func'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-drivers/hwmon/nct6775-platform.c:199:9: sparse:    unsigned char
-drivers/hwmon/nct6775-platform.c:199:9: sparse:    void
-kernel/printk/printk_ringbuffer.h:337:21: warning: array subscript 0 is outside array bounds of 'char[0]' [-Warray-bounds]
-omapfb_main.c:(.text+0x41b4): undefined reference to `omap_set_dma_priority'
+And Jason did an excellent presentation about that problem on last years LPC: https://lpc.events/event/11/contributions/1115/
 
-Unverified Error/Warning (likely false positive, please contact us if interested):
+Based on that we had been able to reject new implementations of infinite/user DMA fences and mitigate the effect of the few existing ones.
 
-Error: Section .bss not empty in prom_init.c
-Makefile:612: arch/h8300/Makefile: No such file or directory
-Makefile:684: arch/h8300/Makefile: No such file or directory
-Makefile:691: arch/h8300/Makefile: No such file or directory
-arch/Kconfig:10: can't open file "arch/h8300/Kconfig"
-drivers/dma-buf/st-dma-fence-unwrap.c:125:13: warning: variable 'err' set but not used [-Wunused-but-set-variable]
-drivers/edac/edac_device.c:79 edac_device_alloc_ctl_info() warn: Please consider using kcalloc instead
-drivers/firmware/arm_scmi/clock.c:242:40: warning: Variable 'msg' is not assigned a value. [unassignedVariable]
-drivers/firmware/arm_scmi/driver.c:1214 scmi_iterator_run() warn: variable dereferenced before check 'i' (see line 1210)
-drivers/firmware/arm_scmi/perf.c:331:40: warning: Variable 'msg' is not assigned a value. [unassignedVariable]
-drivers/firmware/arm_scmi/sensors.c:341:48: warning: Variable 'msg' is not assigned a value. [unassignedVariable]
-drivers/firmware/arm_scmi/voltage.c:177:39: warning: Variable 'msg' is not assigned a value. [unassignedVariable]
-drivers/gpu/drm/amd/amdgpu/amdgpu_discovery.c:1348:5: warning: no previous prototype for function 'amdgpu_discovery_get_mall_info' [-Wmissing-prototypes]
-drivers/gpu/drm/amd/amdgpu/soc21.c:128:6: warning: no previous prototype for function 'soc21_grbm_select' [-Wmissing-prototypes]
-drivers/gpu/drm/display/drm_dp_aux_dev.c:251:76: warning: Parameter 'aux' can be declared with const [constParameter]
-drivers/gpu/drm/display/drm_dp_aux_dev.c:263:13: warning: Uninitialized variable: iter->aux [uninitvar]
-drivers/gpu/drm/display/drm_dp_helper.c:3677:4: warning: Undefined or garbage value returned to caller [clang-analyzer-core.uninitialized.UndefReturn]
-drivers/gpu/drm/display/drm_dp_mst_topology.c:5128:34: warning: Parameter 'branch' can be declared with const [constParameter]
-drivers/gpu/drm/drm_mipi_dsi.c:307:73: warning: Parameter 'node' can be declared with const [constParameter]
-drivers/gpu/drm/i915/gt/intel_gt_sysfs_pm.c:275:27: error: implicit declaration of function 'sysfs_gt_attribute_r_max_func' [-Werror=implicit-function-declaration]
-drivers/gpu/drm/i915/gt/intel_gt_sysfs_pm.c:326:16: error: implicit declaration of function 'sysfs_gt_attribute_w_func' [-Werror=implicit-function-declaration]
-drivers/gpu/drm/i915/gt/intel_gt_sysfs_pm.c:415:24: error: implicit declaration of function 'sysfs_gt_attribute_r_min_func' [-Werror=implicit-function-declaration]
-drivers/gpu/drm/i915/gvt/handlers.c:74:6: error: no previous prototype for 'intel_gvt_match_device' [-Werror=missing-prototypes]
-drivers/gpu/drm/solomon/ssd130x.c:515:2: warning: Undefined or garbage value returned to caller [clang-analyzer-core.uninitialized.UndefReturn]
-drivers/hid/wacom_wac.c:2411:42: warning: format specifies type 'unsigned short' but the argument has type 'int' [-Wformat]
-drivers/net/ethernet/mediatek/mtk_wed.c:813:2-8: ERROR: missing put_device; call of_find_device_by_node on line 806, but without a corresponding object release within this function.
-kernel/module/main.c:2189:4: warning: Null pointer passed as 1st argument to memory copy function [clang-analyzer-unix.cstring.NullArg]
-kernel/module/main.c:924:9: warning: Call to function 'sprintf' is insecure as it does not provide bounding of the memory buffer or security checks introduced in the C11 standard. Replace with analogous functions that support length arguments or provides boundary checks such as 'sprintf_s' in case of C11 [clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling]
-make[1]: *** No rule to make target 'arch/h8300/Makefile'.
-mm/page_io.c:261:15: warning: Value stored to 'page' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
-mm/sparse-vmemmap.c:740:17: warning: Value stored to 'next' during its initialization is never read [clang-analyzer-deadcode.DeadStores]
-net/ipv4/tcp_cong.c:430:32: warning: Division by zero [clang-analyzer-core.DivideZero]
-powerpc64-linux-ld: drivers/char/ipmi/ipmi_si_hardcode.o:(.bss+0x40): multiple definition of `____cacheline_aligned'; drivers/char/ipmi/ipmi_si_hotmod.o:(.bss+0x40): first defined here
-powerpc64-linux-ld: drivers/char/tpm/tpmrm-dev.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; drivers/char/tpm/tpm-dev.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: drivers/counter/counter-sysfs.o:(.bss+0x40): multiple definition of `____cacheline_aligned'; drivers/counter/counter-core.o:(.bss+0x40): first defined here
-powerpc64-linux-ld: drivers/dma-buf/st-dma-fence-chain.o:(.bss+0x40): multiple definition of `____cacheline_aligned'; drivers/dma-buf/st-dma-fence.o:(.bss+0x40): first defined here
-powerpc64-linux-ld: drivers/gpu/drm/arm/display/komeda/komeda_format_caps.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; drivers/gpu/drm/arm/display/komeda/komeda_dev.o:(.bss+0x40): first defined here
-powerpc64-linux-ld: drivers/gpu/drm/selftests/test-drm_framebuffer.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; drivers/gpu/drm/selftests/test-drm_plane_helper.o:(.bss+0x340): first defined here
-powerpc64-linux-ld: drivers/i3c/master.o:(.bss+0x80): multiple definition of `____cacheline_aligned'; drivers/i3c/device.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: drivers/media/common/siano/sms-cards.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; drivers/media/common/siano/smscoreapi.o:(.bss+0x80): first defined here
-powerpc64-linux-ld: drivers/media/dvb-core/dvb_demux.o:(.bss+0x40): multiple definition of `____cacheline_aligned'; drivers/media/dvb-core/dmxdev.o:(.bss+0x80): first defined here
-powerpc64-linux-ld: drivers/media/dvb-frontends/cxd2880/cxd2880_devio_spi.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; drivers/media/dvb-frontends/cxd2880/cxd2880_common.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: drivers/media/tuners/tda18271-common.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; drivers/media/tuners/tda18271-maps.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: drivers/mfd/arizona-irq.o:(.bss+0x40): multiple definition of `____cacheline_aligned'; drivers/mfd/arizona-core.o:(.bss+0x40): first defined here
-powerpc64-linux-ld: drivers/mfd/mt6397-irq.o:(.bss+0x40): multiple definition of `____cacheline_aligned'; drivers/mfd/mt6397-core.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: drivers/mfd/rsmu_i2c.o:(.bss+0x40): multiple definition of `____cacheline_aligned'; drivers/mfd/rsmu_core.o:(.bss+0x40): first defined here
-powerpc64-linux-ld: drivers/mmc/core/host.o:(.bss+0x80): multiple definition of `____cacheline_aligned'; drivers/mmc/core/bus.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: drivers/net/can/dev/length.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; drivers/net/can/dev/bittiming.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: drivers/net/can/flexcan/flexcan-ethtool.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; drivers/net/can/flexcan/flexcan-core.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: drivers/net/can/m_can/tcan4x5x-regmap.o:(.bss+0x40): multiple definition of `____cacheline_aligned'; drivers/net/can/m_can/tcan4x5x-core.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: drivers/net/can/spi/mcp251xfd/mcp251xfd-core.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; drivers/net/can/spi/mcp251xfd/mcp251xfd-chip-fifo.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: drivers/net/ethernet/samsung/sxgbe/sxgbe_desc.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; drivers/net/ethernet/samsung/sxgbe/sxgbe_main.o:(.bss+0x40): first defined here
-powerpc64-linux-ld: drivers/peci/request.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; drivers/peci/core.o:(.bss+0x40): first defined here
-powerpc64-linux-ld: drivers/soundwire/master.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; drivers/soundwire/bus.o:(.bss+0x40): first defined here
-powerpc64-linux-ld: drivers/staging/ks7010/ks_wlan_net.o:(.bss+0x80): multiple definition of `____cacheline_aligned'; drivers/staging/ks7010/ks_hostif.o:(.bss+0x80): first defined here
-powerpc64-linux-ld: fs/autofs/symlink.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; fs/autofs/inode.o:(.bss+0x40): first defined here
-powerpc64-linux-ld: lib/crypto/chacha20poly1305-selftest.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; lib/crypto/chacha20poly1305.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: lib/crypto/curve25519-generic.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; lib/crypto/curve25519-fiat32.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: lib/kunit/string-stream.o:(.bss+0x40): multiple definition of `____cacheline_aligned'; lib/kunit/test.o:(.bss+0x40): first defined here
-powerpc64-linux-ld: net/atm/svc.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; net/atm/pvc.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: net/ax25/ax25_dev.o:(.bss+0x40): multiple definition of `____cacheline_aligned'; net/ax25/ax25_addr.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: net/bluetooth/hci_conn.o:(.bss+0xc0): multiple definition of `____cacheline_aligned'; net/bluetooth/hci_core.o:(.bss+0x140): first defined here
-powerpc64-linux-ld: net/caif/cfmuxl.o:(.bss+0x40): multiple definition of `____cacheline_aligned'; net/caif/cfcnfg.o:(.bss+0x40): first defined here
-powerpc64-linux-ld: net/llc/llc_conn.o:(.bss+0x180): multiple definition of `____cacheline_aligned'; net/llc/llc_if.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: net/rose/rose_loopback.o:(.bss+0x100): multiple definition of `____cacheline_aligned'; net/rose/rose_link.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: net/x25/x25_out.o:(.bss+0x0): multiple definition of `____cacheline_aligned'; net/x25/x25_in.o:(.bss+0x0): first defined here
-powerpc64-linux-ld: security/keys/trusted-keys/trusted_tpm1.o:(.bss+0x40): multiple definition of `____cacheline_aligned'; security/keys/trusted-keys/trusted_core.o:(.bss+0x40): first defined here
+The still remaining down side is that we don't have a way of using user fences as dependency in both the explicit (sync_file, drm_syncobj) as well as the implicit (dma_resv) synchronization objects, resulting in numerous problems and limitations for things like HMM, user queues etc....
 
-Error/Warning ids grouped by kconfigs:
+This patch set here now tries to tackle this problem by untangling the synchronization from the memory management. What it does *not* try to do is to fix the existing kernel fences, because I think we now can all agree on that this isn't really possible.
 
-gcc_recent_errors
-|-- alpha-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   |-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:cast-to-restricted-__le16
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:incorrect-type-in-assignment-(different-base-types)-expected-unsigned-short-usertype-beacon_interval-got-restricted-__le16-usertype
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:cast-to-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-void-const-volatile-noderef-__iomem-addr-got-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-smem_partition_header-phdr-got-void-noderef-__iomem-virt_base
-|   `-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|-- alpha-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   |-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:cast-to-restricted-__le16
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:incorrect-type-in-assignment-(different-base-types)-expected-unsigned-short-usertype-beacon_interval-got-restricted-__le16-usertype
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:cast-to-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-void-const-volatile-noderef-__iomem-addr-got-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-smem_partition_header-phdr-got-void-noderef-__iomem-virt_base
-|   `-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|-- alpha-buildonly-randconfig-r001-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- alpha-buildonly-randconfig-r003-20220428
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- alpha-randconfig-c024-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- alpha-randconfig-r026-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- arc-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   |-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:cast-to-restricted-__le16
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:incorrect-type-in-assignment-(different-base-types)-expected-unsigned-short-usertype-beacon_interval-got-restricted-__le16-usertype
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:cast-to-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-void-const-volatile-noderef-__iomem-addr-got-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-smem_partition_header-phdr-got-void-noderef-__iomem-virt_base
-|   `-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|-- arc-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   |-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:cast-to-restricted-__le16
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:incorrect-type-in-assignment-(different-base-types)-expected-unsigned-short-usertype-beacon_interval-got-restricted-__le16-usertype
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:cast-to-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-void-const-volatile-noderef-__iomem-addr-got-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-smem_partition_header-phdr-got-void-noderef-__iomem-virt_base
-|   `-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|-- arc-buildonly-randconfig-r002-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- arc-randconfig-r043-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- arc-randconfig-r043-20220429
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- arc-randconfig-s031-20220429
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   `-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|-- arm-allmodconfig
-|   |-- ERROR:omap_set_dma_priority-drivers-video-fbdev-omap-omapfb.ko-undefined
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- arm-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   |-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|   `-- omapfb_main.c:(.text):undefined-reference-to-omap_set_dma_priority
-|-- arm-randconfig-c002-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- arm64-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- arm64-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- arm64-randconfig-c004-20220428
-|   `-- drivers-net-ethernet-mediatek-mtk_wed.c:ERROR:missing-put_device-call-of_find_device_by_node-on-line-but-without-a-corresponding-object-release-within-this-function.
-|-- arm64-randconfig-m031-20220429
-|   `-- drivers-firmware-arm_scmi-driver.c-scmi_iterator_run()-warn:variable-dereferenced-before-check-i-(see-line-)
-|-- csky-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- csky-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- h8300-alldefconfig
-|   |-- Makefile:arch-h8300-Makefile:No-such-file-or-directory
-|   |-- arch-Kconfig:can-t-open-file-arch-h8300-Kconfig
-|   `-- make:No-rule-to-make-target-arch-h8300-Makefile-.
-|-- h8300-allmodconfig
-|   |-- Makefile:arch-h8300-Makefile:No-such-file-or-directory
-|   |-- arch-Kconfig:can-t-open-file-arch-h8300-Kconfig
-|   `-- make:No-rule-to-make-target-arch-h8300-Makefile-.
-|-- h8300-allyesconfig
-|   |-- Makefile:arch-h8300-Makefile:No-such-file-or-directory
-|   |-- arch-Kconfig:can-t-open-file-arch-h8300-Kconfig
-|   `-- make:No-rule-to-make-target-arch-h8300-Makefile-.
-|-- h8300-buildonly-randconfig-r001-20220428
-|   |-- Makefile:arch-h8300-Makefile:No-such-file-or-directory
-|   |-- arch-Kconfig:can-t-open-file-arch-h8300-Kconfig
-|   `-- make:No-rule-to-make-target-arch-h8300-Makefile-.
-|-- h8300-buildonly-randconfig-r006-20220428
-|   |-- Makefile:arch-h8300-Makefile:No-such-file-or-directory
-|   |-- arch-Kconfig:can-t-open-file-arch-h8300-Kconfig
-|   `-- make:No-rule-to-make-target-arch-h8300-Makefile-.
-|-- h8300-randconfig-r024-20220428
-|   |-- Makefile:arch-h8300-Makefile:No-such-file-or-directory
-|   |-- arch-Kconfig:can-t-open-file-arch-h8300-Kconfig
-|   `-- make:No-rule-to-make-target-arch-h8300-Makefile-.
-|-- h8300-randconfig-r033-20220429
-|   |-- Makefile:arch-h8300-Makefile:No-such-file-or-directory
-|   |-- arch-Kconfig:can-t-open-file-arch-h8300-Kconfig
-|   `-- make:No-rule-to-make-target-arch-h8300-Makefile-.
-|-- i386-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   `-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|-- i386-randconfig-m021
-|   `-- drivers-edac-edac_device.c-edac_device_alloc_ctl_info()-warn:Please-consider-using-kcalloc-instead
-|-- i386-randconfig-s001
-|   |-- drivers-gpu-drm-i915-gt-intel_gt_sysfs_pm.c:error:implicit-declaration-of-function-sysfs_gt_attribute_r_max_func
-|   |-- drivers-gpu-drm-i915-gt-intel_gt_sysfs_pm.c:error:implicit-declaration-of-function-sysfs_gt_attribute_r_min_func
-|   |-- drivers-gpu-drm-i915-gt-intel_gt_sysfs_pm.c:error:implicit-declaration-of-function-sysfs_gt_attribute_w_func
-|   `-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|-- ia64-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- ia64-allyesconfig
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- m68k-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:cast-to-restricted-__le16
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:incorrect-type-in-assignment-(different-base-types)-expected-unsigned-short-usertype-beacon_interval-got-restricted-__le16-usertype
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:cast-to-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-smem_partition_header-phdr-got-void-noderef-__iomem-virt_base
-|   |-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|   `-- kernel-bpf-helpers.c:sparse:sparse:symbol-bpf_kptr_xchg_proto-was-not-declared.-Should-it-be-static
-|-- m68k-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-hwmon-nct6775-platform.c:sparse:sparse:incompatible-types-in-conditional-expression-(different-base-types):
-|   |-- drivers-hwmon-nct6775-platform.c:sparse:unsigned-char
-|   |-- drivers-hwmon-nct6775-platform.c:sparse:void
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:cast-to-restricted-__le16
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:incorrect-type-in-assignment-(different-base-types)-expected-unsigned-short-usertype-beacon_interval-got-restricted-__le16-usertype
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:cast-to-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-smem_partition_header-phdr-got-void-noderef-__iomem-virt_base
-|   |-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|   `-- kernel-bpf-helpers.c:sparse:sparse:symbol-bpf_kptr_xchg_proto-was-not-declared.-Should-it-be-static
-|-- m68k-randconfig-r021-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- m68k-randconfig-r036-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- microblaze-randconfig-p002-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- mips-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   |-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:cast-to-restricted-__le16
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:incorrect-type-in-assignment-(different-base-types)-expected-unsigned-short-usertype-beacon_interval-got-restricted-__le16-usertype
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:cast-to-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-void-const-volatile-noderef-__iomem-mem-got-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-smem_partition_header-phdr-got-void-noderef-__iomem-virt_base
-|   |-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|   `-- kernel-bpf-helpers.c:sparse:sparse:symbol-bpf_kptr_xchg_proto-was-not-declared.-Should-it-be-static
-|-- mips-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   |-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:cast-to-restricted-__le16
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:incorrect-type-in-assignment-(different-base-types)-expected-unsigned-short-usertype-beacon_interval-got-restricted-__le16-usertype
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:cast-to-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-void-const-volatile-noderef-__iomem-mem-got-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-smem_partition_header-phdr-got-void-noderef-__iomem-virt_base
-|   |-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|   `-- kernel-bpf-helpers.c:sparse:sparse:symbol-bpf_kptr_xchg_proto-was-not-declared.-Should-it-be-static
-|-- mips-randconfig-p001-20220428
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-firmware-arm_scmi-clock.c:warning:Variable-msg-is-not-assigned-a-value.-unassignedVariable
-|   |-- drivers-firmware-arm_scmi-perf.c:warning:Variable-msg-is-not-assigned-a-value.-unassignedVariable
-|   |-- drivers-firmware-arm_scmi-sensors.c:warning:Variable-msg-is-not-assigned-a-value.-unassignedVariable
-|   `-- drivers-firmware-arm_scmi-voltage.c:warning:Variable-msg-is-not-assigned-a-value.-unassignedVariable
-|-- mips-randconfig-r025-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- mips-randconfig-r036-20220429
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- nios2-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:cast-to-restricted-__le16
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:incorrect-type-in-assignment-(different-base-types)-expected-unsigned-short-usertype-beacon_interval-got-restricted-__le16-usertype
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:cast-to-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-void-const-volatile-noderef-__iomem-addr-got-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-smem_partition_header-phdr-got-void-noderef-__iomem-virt_base
-|   `-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|-- nios2-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:cast-to-restricted-__le16
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:incorrect-type-in-assignment-(different-base-types)-expected-unsigned-short-usertype-beacon_interval-got-restricted-__le16-usertype
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:cast-to-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-void-const-volatile-noderef-__iomem-addr-got-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-smem_partition_header-phdr-got-void-noderef-__iomem-virt_base
-|   `-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|-- openrisc-allyesconfig
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- openrisc-randconfig-r001-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- openrisc-randconfig-r022-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- parisc-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- parisc-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- parisc-randconfig-r011-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- powerpc-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   |-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:cast-to-restricted-__le16
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:incorrect-type-in-assignment-(different-base-types)-expected-unsigned-short-usertype-beacon_interval-got-restricted-__le16-usertype
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:cast-to-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-void-const-volatile-noderef-__iomem-addr-got-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-smem_partition_header-phdr-got-void-noderef-__iomem-virt_base
-|   |-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|   `-- kernel-bpf-helpers.c:sparse:sparse:symbol-bpf_kptr_xchg_proto-was-not-declared.-Should-it-be-static
-|-- powerpc-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   |-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:cast-to-restricted-__le16
-|   |-- drivers-net-wireless-purelifi-plfxlc-chip.c:sparse:sparse:incorrect-type-in-assignment-(different-base-types)-expected-unsigned-short-usertype-beacon_interval-got-restricted-__le16-usertype
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:cast-to-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-void-const-volatile-noderef-__iomem-addr-got-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-smem_partition_header-phdr-got-void-noderef-__iomem-virt_base
-|   |-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|   `-- kernel-bpf-helpers.c:sparse:sparse:symbol-bpf_kptr_xchg_proto-was-not-declared.-Should-it-be-static
-|-- powerpc64-randconfig-p001-20220429
-|   |-- Error:Section-.bss-not-empty-in-prom_init.c
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-char-ipmi-ipmi_si_hotmod.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-char-tpm-tpm-dev.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-counter-counter-core.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-dma-buf-st-dma-fence.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-gpu-drm-arm-display-komeda-komeda_dev.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-gpu-drm-selftests-test-drm_plane_helper.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-i3c-device.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-media-common-siano-smscoreapi.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-media-dvb-core-dmxdev.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-media-dvb-frontends-cxd2880-cxd2880_common.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-media-tuners-tda18271-maps.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-mfd-arizona-core.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-mfd-mt6397-core.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-mfd-rsmu_core.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-mmc-core-bus.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-net-can-dev-bittiming.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-net-can-flexcan-flexcan-core.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-net-can-m_can-tcan4x5x-core.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-net-can-spi-mcp251xfd-mcp251xfd-chip-fifo.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-net-ethernet-samsung-sxgbe-sxgbe_main.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-peci-core.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-soundwire-bus.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-drivers-staging-ks7010-ks_hostif.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-fs-autofs-inode.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-lib-crypto-chacha20poly1305.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-lib-crypto-curve25519-fiat32.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-lib-kunit-test.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-net-atm-pvc.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-net-ax25-ax25_addr.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-net-bluetooth-hci_core.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-net-caif-cfcnfg.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-net-llc-llc_if.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-net-rose-rose_link.o:(.bss):first-defined-here
-|   |-- multiple-definition-of-____cacheline_aligned-net-x25-x25_in.o:(.bss):first-defined-here
-|   `-- multiple-definition-of-____cacheline_aligned-security-keys-trusted-keys-trusted_core.o:(.bss):first-defined-here
-|-- riscv-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- riscv-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- riscv-randconfig-c004-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- riscv-randconfig-r042-20220429
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- s390-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|   `-- kernel-bpf-helpers.c:sparse:sparse:symbol-bpf_kptr_xchg_proto-was-not-declared.-Should-it-be-static
-|-- s390-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   |-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:cast-to-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-argument-(different-address-spaces)-expected-void-const-volatile-noderef-__iomem-addr-got-restricted-__le32
-|   |-- drivers-soc-qcom-smem.c:sparse:sparse:incorrect-type-in-assignment-(different-address-spaces)-expected-struct-smem_partition_header-phdr-got-void-noderef-__iomem-virt_base
-|   |-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|   `-- kernel-bpf-helpers.c:sparse:sparse:symbol-bpf_kptr_xchg_proto-was-not-declared.-Should-it-be-static
-|-- s390-randconfig-r003-20220428
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   `-- kernel-printk-printk_ringbuffer.h:warning:array-subscript-is-outside-array-bounds-of-char
-|-- s390-randconfig-r044-20220429
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- sh-allmodconfig
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- sh-allyesconfig
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- sh-randconfig-r031-20220429
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- sparc-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- sparc-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- sparc-randconfig-r005-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- sparc-randconfig-r033-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- sparc-randconfig-r035-20220428
-|   `-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|-- sparc64-randconfig-p001-20220428
-|   |-- drivers-gpu-drm-display-drm_dp_aux_dev.c:warning:Parameter-aux-can-be-declared-with-const-constParameter
-|   |-- drivers-gpu-drm-display-drm_dp_aux_dev.c:warning:Uninitialized-variable:iter-aux-uninitvar
-|   |-- drivers-gpu-drm-display-drm_dp_mst_topology.c:warning:Parameter-branch-can-be-declared-with-const-constParameter
-|   `-- drivers-gpu-drm-drm_mipi_dsi.c:warning:Parameter-node-can-be-declared-with-const-constParameter
-|-- um-i386_defconfig
-|   `-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|-- um-x86_64_defconfig
-|   `-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|-- x86_64-allyesconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-|-- x86_64-randconfig-a011
-|   |-- drivers-gpu-drm-i915-gt-intel_gt_sysfs_pm.c:error:implicit-declaration-of-function-sysfs_gt_attribute_r_max_func
-|   |-- drivers-gpu-drm-i915-gt-intel_gt_sysfs_pm.c:error:implicit-declaration-of-function-sysfs_gt_attribute_r_min_func
-|   `-- drivers-gpu-drm-i915-gt-intel_gt_sysfs_pm.c:error:implicit-declaration-of-function-sysfs_gt_attribute_w_func
-|-- x86_64-randconfig-c002
-|   |-- drivers-gpu-drm-i915-gt-intel_gt_sysfs_pm.c:error:implicit-declaration-of-function-sysfs_gt_attribute_r_max_func
-|   |-- drivers-gpu-drm-i915-gt-intel_gt_sysfs_pm.c:error:implicit-declaration-of-function-sysfs_gt_attribute_r_min_func
-|   `-- drivers-gpu-drm-i915-gt-intel_gt_sysfs_pm.c:error:implicit-declaration-of-function-sysfs_gt_attribute_w_func
-|-- x86_64-randconfig-m001
-|   `-- drivers-edac-edac_device.c-edac_device_alloc_ctl_info()-warn:Please-consider-using-kcalloc-instead
-|-- x86_64-randconfig-s021
-|   `-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|-- x86_64-randconfig-s022
-|   `-- kernel-bpf-helpers.c:sparse:sparse:symbol-bpf_kptr_xchg_proto-was-not-declared.-Should-it-be-static
-|-- x86_64-rhel-8.3-kselftests
-|   `-- fs-io_uring.c:sparse:sparse:marked-inline-but-without-a-definition
-|-- x86_64-rhel-8.3-syz
-|   `-- drivers-gpu-drm-i915-gvt-handlers.c:error:no-previous-prototype-for-intel_gvt_match_device
-|-- xtensa-allmodconfig
-|   |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
-`-- xtensa-allyesconfig
-    |-- drivers-dma-buf-st-dma-fence-unwrap.c:warning:variable-err-set-but-not-used
-    |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-amdgpu_discovery_get_mall_info
-    `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-soc21_grbm_select
+To archive this goal what I do in this patch set is to add some parallel infrastructure to cleanly separate normal kernel dma_fence objects from indefinite/user fences:
 
-clang_recent_errors
-|-- arm-randconfig-c002-20220428
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-function-amdgpu_discovery_get_mall_info
-|   |-- drivers-gpu-drm-display-drm_dp_helper.c:warning:Undefined-or-garbage-value-returned-to-caller-clang-analyzer-core.uninitialized.UndefReturn
-|   `-- drivers-gpu-drm-solomon-ssd13.c:warning:Undefined-or-garbage-value-returned-to-caller-clang-analyzer-core.uninitialized.UndefReturn
-|-- hexagon-randconfig-r041-20220428
-|   `-- drivers-hid-wacom_wac.c:warning:format-specifies-type-unsigned-short-but-the-argument-has-type-int
-|-- i386-allmodconfig
-|   `-- drivers-hid-wacom_wac.c:warning:format-specifies-type-unsigned-short-but-the-argument-has-type-int
-|-- i386-randconfig-a013-20220502
-|   |-- drivers-gpu-drm-i915-gt-intel_gt_sysfs_pm.c:error:call-to-undeclared-function-sysfs_gt_attribute_r_max_func-ISO-C99-and-later-do-not-support-implicit-function-declarations
-|   |-- drivers-gpu-drm-i915-gt-intel_gt_sysfs_pm.c:error:call-to-undeclared-function-sysfs_gt_attribute_r_min_func-ISO-C99-and-later-do-not-support-implicit-function-declarations
-|   `-- drivers-gpu-drm-i915-gt-intel_gt_sysfs_pm.c:error:call-to-undeclared-function-sysfs_gt_attribute_w_func-ISO-C99-and-later-do-not-support-implicit-function-declarations
-|-- i386-randconfig-a015
-|   `-- drivers-hid-wacom_wac.c:warning:format-specifies-type-unsigned-short-but-the-argument-has-type-int
-|-- i386-randconfig-c001
-|   |-- kernel-module-main.c:warning:Call-to-function-sprintf-is-insecure-as-it-does-not-provide-bounding-of-the-memory-buffer-or-security-checks-introduced-in-the-C11-standard.-Replace-with-analogous-functio
-|   |-- kernel-module-main.c:warning:Null-pointer-passed-as-1st-argument-to-memory-copy-function-clang-analyzer-unix.cstring.NullArg
-|   `-- net-ipv4-tcp_cong.c:warning:Division-by-zero-clang-analyzer-core.DivideZero
-|-- riscv-buildonly-randconfig-r005-20220428
-|   |-- drivers-gpu-drm-amd-amdgpu-amdgpu_discovery.c:warning:no-previous-prototype-for-function-amdgpu_discovery_get_mall_info
-|   `-- drivers-gpu-drm-amd-amdgpu-soc21.c:warning:no-previous-prototype-for-function-soc21_grbm_select
-|-- riscv-randconfig-c006-20220501
-|   `-- mm-page_io.c:warning:Value-stored-to-page-during-its-initialization-is-never-read-clang-analyzer-deadcode.DeadStores
-|-- x86_64-randconfig-a003
-|   `-- drivers-hid-wacom_wac.c:warning:format-specifies-type-unsigned-short-but-the-argument-has-type-int
-|-- x86_64-randconfig-a014
-|   `-- drivers-hid-wacom_wac.c:warning:format-specifies-type-unsigned-short-but-the-argument-has-type-int
-|-- x86_64-randconfig-a016
-|   `-- drivers-hid-wacom_wac.c:warning:format-specifies-type-unsigned-short-but-the-argument-has-type-int
-`-- x86_64-randconfig-c007
-    |-- kernel-module-main.c:warning:Call-to-function-sprintf-is-insecure-as-it-does-not-provide-bounding-of-the-memory-buffer-or-security-checks-introduced-in-the-C11-standard.-Replace-with-analogous-functio
-    |-- kernel-module-main.c:warning:Null-pointer-passed-as-1st-argument-to-memory-copy-function-clang-analyzer-unix.cstring.NullArg
-    |-- mm-sparse-vmemmap.c:warning:Value-stored-to-next-during-its-initialization-is-never-read-clang-analyzer-deadcode.DeadStores
-    `-- net-ipv4-tcp_cong.c:warning:Division-by-zero-clang-analyzer-core.DivideZero
+1. It introduce a DMA_FENCE_FLAG_USER define (after renaming some existing driver defines). To note that a certain dma_fence is an user fence and *must* be ignore by memory management and never used as dependency for normal none user dma_fence objects.
 
-elapsed time: 4104m
+2. The dma_fence_array and dma_fence_chain containers are modified so that they are marked as user fences whenever any of their contained fences are an user fence.
 
-configs tested: 133
-configs skipped: 3
+3. The dma_resv object gets a new DMA_RESV_USAGE_USER flag which must be used with indefinite/user fences and separates those into it's own synchronization domain.
 
-gcc tested configs:
-arm64                               defconfig
-arm                              allmodconfig
-arm                              allyesconfig
-arm                                 defconfig
-arm64                            allyesconfig
-mips                             allyesconfig
-riscv                            allyesconfig
-um                           x86_64_defconfig
-riscv                            allmodconfig
-um                             i386_defconfig
-mips                             allmodconfig
-powerpc                          allmodconfig
-m68k                             allyesconfig
-s390                             allmodconfig
-m68k                             allmodconfig
-powerpc                          allyesconfig
-s390                             allyesconfig
-sparc                            allyesconfig
-parisc                           allyesconfig
-sh                               allmodconfig
-h8300                            allyesconfig
-xtensa                           allyesconfig
-arc                              allyesconfig
-alpha                            allyesconfig
-nios2                            allyesconfig
-i386                          randconfig-c001
-powerpc                     tqm8541_defconfig
-sh                          lboxre2_defconfig
-powerpc                 mpc837x_rdb_defconfig
-arc                        nsim_700_defconfig
-sh                           se7206_defconfig
-m68k                         amcore_defconfig
-mips                  decstation_64_defconfig
-arm                            zeus_defconfig
-powerpc                   currituck_defconfig
-m68k                       m5208evb_defconfig
-xtensa                       common_defconfig
-arc                              alldefconfig
-sparc                       sparc64_defconfig
-powerpc                     pq2fads_defconfig
-microblaze                          defconfig
-arm                        multi_v7_defconfig
-sh                ecovec24-romimage_defconfig
-powerpc                      ppc6xx_defconfig
-sh                            hp6xx_defconfig
-arc                      axs103_smp_defconfig
-sparc64                             defconfig
-powerpc                 mpc837x_mds_defconfig
-arc                         haps_hs_defconfig
-sh                          rsk7264_defconfig
-x86_64                        randconfig-c001
-arm                  randconfig-c002-20220428
-ia64                                defconfig
-ia64                             allmodconfig
-ia64                             allyesconfig
-m68k                                defconfig
-alpha                               defconfig
-csky                                defconfig
-arc                                 defconfig
-parisc                              defconfig
-s390                                defconfig
-parisc64                            defconfig
-i386                   debian-10.3-kselftests
-i386                              debian-10.3
-i386                                defconfig
-i386                             allyesconfig
-sparc                               defconfig
-nios2                               defconfig
-powerpc                           allnoconfig
-x86_64                        randconfig-a004
-x86_64                        randconfig-a002
-x86_64                        randconfig-a006
-i386                          randconfig-a001
-i386                          randconfig-a003
-i386                          randconfig-a005
-x86_64                        randconfig-a013
-x86_64                        randconfig-a011
-x86_64                        randconfig-a015
-i386                          randconfig-a014
-i386                          randconfig-a012
-i386                          randconfig-a016
-riscv                randconfig-r042-20220429
-arc                  randconfig-r043-20220429
-arc                  randconfig-r043-20220428
-s390                 randconfig-r044-20220429
-riscv                             allnoconfig
-riscv                    nommu_k210_defconfig
-riscv                          rv32_defconfig
-riscv                    nommu_virt_defconfig
-riscv                               defconfig
-x86_64                    rhel-8.3-kselftests
-x86_64                              defconfig
-x86_64                           allyesconfig
-x86_64                                  kexec
-x86_64                           rhel-8.3-syz
-x86_64                          rhel-8.3-func
-x86_64                               rhel-8.3
-x86_64                         rhel-8.3-kunit
+4. The existing dma_buf_poll_add_cb() function is modified so that indefinite/user fences are included in the polling.
 
-clang tested configs:
-mips                 randconfig-c004-20220428
-x86_64                        randconfig-c007
-arm                  randconfig-c002-20220428
-riscv                randconfig-c006-20220428
-i386                          randconfig-c001
-powerpc              randconfig-c003-20220428
-s390                 randconfig-c005-20220428
-arm                       aspeed_g4_defconfig
-arm                       spear13xx_defconfig
-arm                         shannon_defconfig
-mips                   sb1250_swarm_defconfig
-powerpc                  mpc885_ads_defconfig
-arm                         socfpga_defconfig
-arm                       cns3420vb_defconfig
-arm                          moxart_defconfig
-mips                           mtx1_defconfig
-arm                             mxs_defconfig
-riscv                          rv32_defconfig
-mips                     cu1000-neo_defconfig
-mips                      bmips_stb_defconfig
-x86_64                        randconfig-a005
-x86_64                        randconfig-a001
-x86_64                        randconfig-a003
-i386                          randconfig-a002
-i386                          randconfig-a004
-i386                          randconfig-a006
-x86_64                        randconfig-a016
-x86_64                        randconfig-a012
-x86_64                        randconfig-a014
-i386                          randconfig-a013
-i386                          randconfig-a011
-i386                          randconfig-a015
-hexagon              randconfig-r045-20220429
-riscv                randconfig-r042-20220428
-s390                 randconfig-r044-20220428
-hexagon              randconfig-r045-20220428
-hexagon              randconfig-r041-20220429
-hexagon              randconfig-r041-20220428
+5. The sync_file synchronization object is modified so that we essentially have two fence streams instead of just one.
 
--- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
+6. The drm_syncobj is modified in a similar way. User fences are just ignored unless the driver explicitly states support to wait for them.
+
+7. The DRM subsystem gains a new DRIVER_USER_FENCE flag which drivers can use to indicate the need for user fences. If user fences are used the atomic mode setting starts to support user fences as IN/OUT fences.
+
+8. Lockdep is used at various critical locations to ensure that nobody ever tries to mix user fences with non user fences.
+
+The general approach is to just ignore user fences unless a driver stated explicitely support for them.
+
+On top of all of this I've hacked amdgpu so that we add the resulting CS fence only as kernel dependency to the dma_resv object and an additional wrapped up with a dma_fence_array and a stub user fence.
+
+The result is that the newly added atomic modeset functions now correctly wait for the user fence to complete before doing the flip. And dependent CS don't pipeline any more, but rather block on the CPU before submitting work.
+
+After tons of debugging and testing everything now seems to not go up in flames immediately and even lockdep is happy with the annotations.
+
+I'm perfectly aware that this is probably by far the most controversial patch set I've ever created and I really wish we wouldn't need it. But we certainly have the requirement for this and I don't see much other chance to get that working in an UAPI compatible way.
+
+Thoughts/comments?
+
+Regards,
+Christian.
+
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
