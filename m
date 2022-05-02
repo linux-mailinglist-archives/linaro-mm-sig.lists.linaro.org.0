@@ -2,201 +2,202 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 170BF5174A5
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 May 2022 18:38:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 00496517553
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 May 2022 19:04:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2EE9448063
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 May 2022 16:38:55 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	by lists.linaro.org (Postfix) with ESMTPS id 5C8A34805F
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 May 2022 16:37:50 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id 125-20020a1c1983000000b003941f354c62so4946424wmz.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 02 May 2022 09:37:50 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id E051248063
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  2 May 2022 17:04:24 +0000 (UTC)
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+	by lists.linaro.org (Postfix) with ESMTPS id 344663EA4A
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 May 2022 17:04:19 +0000 (UTC)
+Received: by mail-wr1-f46.google.com with SMTP id k2so20326962wrd.5
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 02 May 2022 10:04:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=JaejlDfj0uy9dkJeeagJEWX0/Sis0ZiAGo/I1Cyla8w=;
-        b=WJ14jFIJZIdqObfgPXjsBsWmhqzPN5JNkavdyclcrjJvsiZMlKFrcxW82UKBOKg1Kt
-         +FyDEMWQJLDovDeCeOC7uNufANhJwlQ3HGaAmUM8PD8QWue6I5FD2dl2byPzAYnQlbZT
-         1cFPbuBXiU+xID11jsSFtSTxaemQaed+J9VZrU7HrUImIBhc0ZWXbAwlimB4YDWbYXAZ
-         BIqdUTzQvGbtjWRv1nOZTP8ZrA2jOBZt2ADK+xok8RzzOzmtHyvCAsgiYiOLK9IAOuex
-         G6KX9NjweCQ+WmEDsvJ3zeqmrC5ueLUwluvFRCmkoAhT411SV3lUfs3KI3mu03Opg0B4
-         du0w==
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=IKIkKWLuV1OGwYFULnAsOkM2G0PGs69FkOVI5N/cNnw=;
+        b=E00mffjDjTe6c/+9iDlEB1wdjEcT0U7DrFgxMpBPQJx9s+IQ4i+hMTICCKe1dASuRK
+         vv17Che0ajGuui4mx+K4r1+z9SF2TndTWwcLkPj7BMuHQVSLA/G8SdWC1WOJcaezXcEO
+         b/Tooz0sFb9G1wLn4RiJVFlcskkBXXUmyjKYwz7a9+TwyRGdWnAuwzUf0fCiUkO4ygoB
+         YD8aLEPqcUpn/YjO2ONOe5YijCPdvSc8VQbjgldKdr1xt9IDzvQxyEeVTIAnEu+JSpYf
+         STMZn12f6RylbjtgqkIXpQn6ujutZoG6Wz/zFfehbOoE6scGhaR9O9vV+mvz4mPPLlYt
+         5d8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=JaejlDfj0uy9dkJeeagJEWX0/Sis0ZiAGo/I1Cyla8w=;
-        b=cGfj74HTDbTlbXuCWYLz6/MYe0viuLxgt94DDiP1RfJgV5eNdfm6XbdbbKxyLP56y4
-         1NhPOILBR5H9T5zU56x5a8PICXKELy2oqzMDRQVmfyu+F3pughmK6yM/vnloxpKL/aoM
-         vimacjyvIqtIleeTI2vD8WYN2YpDBanbN7BlgCgpDeF7g9R0xvSC0tOFfoEdCZHySk4/
-         9WwSMItbEW0UxZGpfmB/0zLMf4D1KOdfBQGn7AwU+AhGvOEeCBz9LAxo9zaepAZbTswx
-         6oPdQEM+VyP8/zhSADQsKCnXnw8m28imA573iKmX5aKQPiCGSR23YjNbFyJ7VLNgGp/F
-         ZOhA==
-X-Gm-Message-State: AOAM532i744FHe3+zZo+7lZaUjAmLZwUeggFkBRFyfyZoTLKWQ1a2Vm8
-	WvfTukUNZsx+Lu1PIv3xOWn42OJkjZw=
-X-Google-Smtp-Source: ABdhPJynMfTwX3SfWHMTUt/qZtPV8EjvjXV8D1iGxBM93doCrtHO7arJvRfSWJC8eKAagR1WU/LPWA==
-X-Received: by 2002:a05:600c:25d2:b0:394:2db5:bc32 with SMTP id 18-20020a05600c25d200b003942db5bc32mr10549461wml.39.1651509469475;
-        Mon, 02 May 2022 09:37:49 -0700 (PDT)
-Received: from able.fritz.box (p57b0b9e1.dip0.t-ipconnect.de. [87.176.185.225])
-        by smtp.gmail.com with ESMTPSA id p14-20020adfaa0e000000b0020c5253d8f6sm7294694wrd.66.2022.05.02.09.37.48
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=IKIkKWLuV1OGwYFULnAsOkM2G0PGs69FkOVI5N/cNnw=;
+        b=VxvljlQNuUbO1Y0u+G1yJ2tyG/c/K0a5qZ6REidJWyxJlgaOIvHMd69jV7/EFM5g9D
+         GUp50prJ7Z6EeX7Qt3KQ5J6wiiCPkO60sQAmiSIvKVIUPm+LK4Fy+25mFbz44ft/eDMi
+         gyiQgXmbKCM/AfyEC9R81Vr6usLDB4iQAESbxUsgyzKmsMHGIIQ/7bvZzRux2+TiFx8M
+         S20eaRqtAXaXO1k7+rYKTYz9yitIAk3cCOPl1iz6pvb7+zTvIryAY5stPQSeNsRJkeSt
+         a3OV44C8tqUpSmX9eXVJu3tlYlxGVxPT2Tq5GTpWZ/s8KCylY4xoActqFicofCUpNell
+         MUbA==
+X-Gm-Message-State: AOAM532Tr7EXRz2pRxC2te8Tqlv3t40Qqi7sItzPDtTdxKhJPz0njEB+
+	8fEFlNj37MhX+E+s/vgPhLs=
+X-Google-Smtp-Source: ABdhPJyY68uLuAzWuSiv8NzwPVrip8vAdDKoe4nwXxnPu/iAX4m8EhrXazWqZbj5vHpF7sAHIxdztA==
+X-Received: by 2002:a5d:5885:0:b0:20c:7048:2951 with SMTP id n5-20020a5d5885000000b0020c70482951mr1354652wrf.28.1651511058007;
+        Mon, 02 May 2022 10:04:18 -0700 (PDT)
+Received: from orome ([62.96.65.119])
+        by smtp.gmail.com with ESMTPSA id k8-20020adfc708000000b0020c5253d8easm9375256wrg.54.2022.05.02.10.04.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 02 May 2022 09:37:48 -0700 (PDT)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-To: daniel@ffwll.ch,
-	jason@jlekstrand.net,
-	daniels@collabora.com,
-	skhawaja@google.com,
-	maad.aldabagh@amd.com,
-	sergemetral@google.com,
-	sumit.semwal@linaro.org,
-	gustavo@padovan.org,
-	Felix.Kuehling@amd.com,
-	alexander.deucher@amd.com,
-	tzimmermann@suse.de,
-	tvrtko.ursulin@linux.intel.com,
-	linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org
-Date: Mon,  2 May 2022 18:37:22 +0200
-Message-Id: <20220502163722.3957-16-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220502163722.3957-1-christian.koenig@amd.com>
-References: <20220502163722.3957-1-christian.koenig@amd.com>
+        Mon, 02 May 2022 10:04:16 -0700 (PDT)
+Date: Mon, 2 May 2022 19:04:13 +0200
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Cai Huoqing <cai.huoqing@linux.dev>
+Message-ID: <YnAPDRZMc88cDdYS@orome>
+References: <20220426060808.78225-1-cai.huoqing@linux.dev>
+ <YmqgailZKIuY7zTZ@orome>
+ <beacfd71-ebd0-7fde-187f-34b7a42a47de@kapsi.fi>
+ <20220429032810.GA10104@chq-T47>
 MIME-Version: 1.0
-Message-ID-Hash: CTNUUCDN5FU6TFUEG6FYR6WZSDYO3GCM
-X-Message-ID-Hash: CTNUUCDN5FU6TFUEG6FYR6WZSDYO3GCM
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
+In-Reply-To: <20220429032810.GA10104@chq-T47>
+User-Agent: Mutt/2.2.1 (c8109e14) (2022-02-19)
+Message-ID-Hash: MRPEKY36V2IZDCN5IIMYEHIZZD2SUWTM
+X-Message-ID-Hash: MRPEKY36V2IZDCN5IIMYEHIZZD2SUWTM
+X-MailFrom: thierry.reding@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+CC: Mikko Perttunen <cyndis@kapsi.fi>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, linux-kernel@vger.kernel.org, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linux-tegra@vger.kernel.org, Jon Hunter <jonathanh@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 15/15] drm/amdgpu: user fence proof of concept
+Subject: [Linaro-mm-sig] Re: [PATCH v2 0/4] drm/nvdla: Add driver support for NVDLA
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CTNUUCDN5FU6TFUEG6FYR6WZSDYO3GCM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MRPEKY36V2IZDCN5IIMYEHIZZD2SUWTM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7172199800612110284=="
 
-SnVzdCBzb21lIGhhY2sgdG8gdGVzdCB0aGUgZnVuY3Rpb25hbGl0eSwgbm90IGEgcmVhbCBpbXBs
-ZW1lbnRhdGlvbiBvZg0KdGhlIGludGVyZmFjZS4NCg0KU2lnbmVkLW9mZi1ieTogQ2hyaXN0aWFu
-IEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KLS0tDQogZHJpdmVycy9kbWEtYnVm
-L2RtYS1yZXN2LmMgICAgICAgICAgICAgICAgICAgIHwgIDMgKy0NCiBkcml2ZXJzL2dwdS9kcm0v
-YW1kL2FtZGdwdS9hbWRncHVfY3MuYyAgICAgICAgfCAyOCArKysrKysrKysrKysrKysrLS0tDQog
-ZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2Rydi5jICAgICAgIHwgIDIgKy0NCiBk
-cml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfdm0uYyAgICAgICAgfCAgMiArLQ0KIC4u
-Li9ncHUvZHJtL2FtZC9kaXNwbGF5L2FtZGdwdV9kbS9hbWRncHVfZG0uYyB8ICA5ICsrKystLQ0K
-IDUgZmlsZXMgY2hhbmdlZCwgMzQgaW5zZXJ0aW9ucygrKSwgMTAgZGVsZXRpb25zKC0pDQoNCmRp
-ZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9k
-bWEtcmVzdi5jDQppbmRleCBkYTY2N2MyMWFkNTUuLmUxOGVmYjIxYzQ1MiAxMDA2NDQNCi0tLSBh
-L2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jDQorKysgYi9kcml2ZXJzL2RtYS1idWYvZG1hLXJl
-c3YuYw0KQEAgLTI4Niw3ICsyODYsOCBAQCB2b2lkIGRtYV9yZXN2X2FkZF9mZW5jZShzdHJ1Y3Qg
-ZG1hX3Jlc3YgKm9iaiwgc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UsDQogCS8qIERyaXZlcnMgc2hv
-dWxkIG5vdCBhZGQgY29udGFpbmVycyBoZXJlLCBpbnN0ZWFkIGFkZCBlYWNoIGZlbmNlDQogCSAq
-IGluZGl2aWR1YWxseS4NCiAJICovDQotCVdBUk5fT04oZG1hX2ZlbmNlX2lzX2NvbnRhaW5lcihm
-ZW5jZSkpOw0KKwkvL1dBUk5fT04oZG1hX2ZlbmNlX2lzX2NvbnRhaW5lcihmZW5jZSkpOw0KKw0K
-IA0KIAkvKiBVc2VyIGZlbmNlcyBtdXN0IGJlIGFkZGVkIHVzaW5nIERNQV9SRVNWX1VTQUdFX1VT
-RVIgKi8NCiAJV0FSTl9PTih0ZXN0X2JpdChETUFfRkVOQ0VfRkxBR19VU0VSLCAmZmVuY2UtPmZs
-YWdzKSAhPQ0KZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9j
-cy5jIGIvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2NzLmMNCmluZGV4IDk1ZWVh
-YjUyN2NhOS4uMjk5YWI4ZTUwYzQyIDEwMDY0NA0KLS0tIGEvZHJpdmVycy9ncHUvZHJtL2FtZC9h
-bWRncHUvYW1kZ3B1X2NzLmMNCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdw
-dV9jcy5jDQpAQCAtNDUzLDYgKzQ1Myw3IEBAIHN0YXRpYyBpbnQgYW1kZ3B1X2NzX3BhcnNlcl9i
-b3Moc3RydWN0IGFtZGdwdV9jc19wYXJzZXIgKnAsDQogCXN0cnVjdCBhbWRncHVfdm0gKnZtID0g
-JmZwcml2LT52bTsNCiAJc3RydWN0IGFtZGdwdV9ib19saXN0X2VudHJ5ICplOw0KIAlzdHJ1Y3Qg
-ZHJtX2dlbV9vYmplY3QgKm9iajsNCisJbG9uZyB0aW1lb3V0ID0gSFogLyAxMDsNCiAJc3RydWN0
-IGFtZGdwdV9ibyAqZ2RzOw0KIAlzdHJ1Y3QgYW1kZ3B1X2JvICpnd3M7DQogCXN0cnVjdCBhbWRn
-cHVfYm8gKm9hOw0KQEAgLTQ3Niw2ICs0NzcsMTcgQEAgc3RhdGljIGludCBhbWRncHVfY3NfcGFy
-c2VyX2JvcyhzdHJ1Y3QgYW1kZ3B1X2NzX3BhcnNlciAqcCwNCiAJCQlyZXR1cm4gcjsNCiAJfQ0K
-IA0KKwlhbWRncHVfYm9fbGlzdF9mb3JfZWFjaF9lbnRyeShlLCBwLT5ib19saXN0KSB7DQorCQlz
-dHJ1Y3QgZG1hX3Jlc3YgKnJlc3YgPSBlLT5iby0+dGJvLmJhc2UucmVzdjsNCisNCisJCXRpbWVv
-dXQgPSBkbWFfcmVzdl93YWl0X3RpbWVvdXQocmVzdiwgRE1BX1JFU1ZfVVNBR0VfVVNFUiwNCisJ
-CQkJCQl0cnVlLCB0aW1lb3V0KTsNCisJCWlmICh1bmxpa2VseSh0aW1lb3V0IDwgMCkpDQorCQkJ
-cmV0dXJuIHRpbWVvdXQ7DQorCQlpZiAodW5saWtlbHkodGltZW91dCA9PSAwKSkNCisJCQlyZXR1
-cm4gLUVUSU1FOw0KKwl9DQorDQogCS8qIEdldCB1c2VycHRyIGJhY2tpbmcgcGFnZXMuIElmIHBh
-Z2VzIGFyZSB1cGRhdGVkIGFmdGVyIHJlZ2lzdGVyZWQNCiAJICogaW4gYW1kZ3B1X2dlbV91c2Vy
-cHRyX2lvY3RsKCksIGFtZGdwdV9jc19saXN0X3ZhbGlkYXRlKCkgd2lsbCBkbw0KIAkgKiBhbWRn
-cHVfdHRtX2JhY2tlbmRfYmluZCgpIHRvIGZsdXNoIGFuZCBpbnZhbGlkYXRlIG5ldyBwYWdlcw0K
-QEAgLTUxNiw3ICs1MjgsNyBAQCBzdGF0aWMgaW50IGFtZGdwdV9jc19wYXJzZXJfYm9zKHN0cnVj
-dCBhbWRncHVfY3NfcGFyc2VyICpwLA0KIAkJCXJldHVybiByOw0KIA0KIAkJYW1kZ3B1X2JvX2xp
-c3RfZm9yX2VhY2hfZW50cnkoZSwgcC0+Ym9fbGlzdCkgew0KLQkJCXIgPSBkcm1fZXhlY19wcmVw
-YXJlX29iaigmcC0+ZXhlYywgJmUtPmJvLT50Ym8uYmFzZSwgMik7DQorCQkJciA9IGRybV9leGVj
-X3ByZXBhcmVfb2JqKCZwLT5leGVjLCAmZS0+Ym8tPnRiby5iYXNlLCAzKTsNCiAJCQlkcm1fZXhl
-Y19icmVha19vbl9jb250ZW50aW9uKCZwLT5leGVjKTsNCiAJCQlpZiAodW5saWtlbHkocikpDQog
-CQkJCXJldHVybiByOw0KQEAgLTUyNyw3ICs1MzksNyBAQCBzdGF0aWMgaW50IGFtZGdwdV9jc19w
-YXJzZXJfYm9zKHN0cnVjdCBhbWRncHVfY3NfcGFyc2VyICpwLA0KIA0KIAkJaWYgKHAtPnVmX2Jv
-KSB7DQogCQkJciA9IGRybV9leGVjX3ByZXBhcmVfb2JqKCZwLT5leGVjLCAmcC0+dWZfYm8tPnRi
-by5iYXNlLA0KLQkJCQkJCSAyKTsNCisJCQkJCQkgMyk7DQogCQkJZHJtX2V4ZWNfY29udGludWVf
-b25fY29udGVudGlvbigmcC0+ZXhlYyk7DQogCQkJaWYgKHVubGlrZWx5KHIpKQ0KIAkJCQlyZXR1
-cm4gcjsNCkBAIC0xMTYwLDYgKzExNzIsNyBAQCBzdGF0aWMgaW50IGFtZGdwdV9jc19zdWJtaXQo
-c3RydWN0IGFtZGdwdV9jc19wYXJzZXIgKnAsDQogCXN0cnVjdCBkcm1fc2NoZWRfZW50aXR5ICpl
-bnRpdHkgPSBwLT5lbnRpdHk7DQogCXN0cnVjdCBhbWRncHVfYm9fbGlzdF9lbnRyeSAqZTsNCiAJ
-c3RydWN0IGRybV9nZW1fb2JqZWN0ICpnb2JqOw0KKwlzdHJ1Y3QgZG1hX2ZlbmNlICpkdW1teTsN
-CiAJc3RydWN0IGFtZGdwdV9qb2IgKmpvYjsNCiAJdW5zaWduZWQgbG9uZyBpbmRleDsNCiAJdWlu
-dDY0X3Qgc2VxOw0KQEAgLTExOTEsNiArMTIwNCwxMSBAQCBzdGF0aWMgaW50IGFtZGdwdV9jc19z
-dWJtaXQoc3RydWN0IGFtZGdwdV9jc19wYXJzZXIgKnAsDQogCX0NCiANCiAJcC0+ZmVuY2UgPSBk
-bWFfZmVuY2VfZ2V0KCZqb2ItPmJhc2Uuc19mZW5jZS0+ZmluaXNoZWQpOw0KKwlkdW1teSA9IGRt
-YV9mZW5jZV9tZXJnZShwLT5mZW5jZSwgZG1hX2ZlbmNlX2dldF9zdHViKHRydWUpKTsNCisJaWYg
-KCFkdW1teSkgew0KKwkJciA9IC1FTk9NRU07DQorCQlnb3RvIGVycm9yX2Fib3J0Ow0KKwl9DQog
-DQogCWFtZGdwdV9jdHhfYWRkX2ZlbmNlKHAtPmN0eCwgZW50aXR5LCBwLT5mZW5jZSwgJnNlcSk7
-DQogCWFtZGdwdV9jc19wb3N0X2RlcGVuZGVuY2llcyhwKTsNCkBAIC0xMjE0LDExICsxMjMyLDEz
-IEBAIHN0YXRpYyBpbnQgYW1kZ3B1X2NzX3N1Ym1pdChzdHJ1Y3QgYW1kZ3B1X2NzX3BhcnNlciAq
-cCwNCiANCiAJZHJtX2V4ZWNfZm9yX2VhY2hfZHVwbGljYXRlX29iamVjdCgmcC0+ZXhlYywgaW5k
-ZXgsIGdvYmopIHsNCiAJCXR0bV9ib19tb3ZlX3RvX2xydV90YWlsX3VubG9ja2VkKCZnZW1fdG9f
-YW1kZ3B1X2JvKGdvYmopLT50Ym8pOw0KLQkJZG1hX3Jlc3ZfYWRkX2ZlbmNlKGdvYmotPnJlc3Ys
-IHAtPmZlbmNlLCBETUFfUkVTVl9VU0FHRV9XUklURSk7DQorCQlkbWFfcmVzdl9hZGRfZmVuY2Uo
-Z29iai0+cmVzdiwgcC0+ZmVuY2UsIERNQV9SRVNWX1VTQUdFX0tFUk5FTCk7DQorCQlkbWFfcmVz
-dl9hZGRfZmVuY2UoZ29iai0+cmVzdiwgZHVtbXksIERNQV9SRVNWX1VTQUdFX1VTRVIpOw0KIAl9
-DQogCWRybV9leGVjX2Zvcl9lYWNoX2xvY2tlZF9vYmplY3QoJnAtPmV4ZWMsIGluZGV4LCBnb2Jq
-KSB7DQogCQl0dG1fYm9fbW92ZV90b19scnVfdGFpbF91bmxvY2tlZCgmZ2VtX3RvX2FtZGdwdV9i
-byhnb2JqKS0+dGJvKTsNCi0JCWRtYV9yZXN2X2FkZF9mZW5jZShnb2JqLT5yZXN2LCBwLT5mZW5j
-ZSwgRE1BX1JFU1ZfVVNBR0VfV1JJVEUpOw0KKwkJZG1hX3Jlc3ZfYWRkX2ZlbmNlKGdvYmotPnJl
-c3YsIHAtPmZlbmNlLCBETUFfUkVTVl9VU0FHRV9LRVJORUwpOw0KKwkJZG1hX3Jlc3ZfYWRkX2Zl
-bmNlKGdvYmotPnJlc3YsIGR1bW15LCBETUFfUkVTVl9VU0FHRV9VU0VSKTsNCiAJfQ0KIA0KIAlt
-dXRleF91bmxvY2soJnAtPmFkZXYtPm5vdGlmaWVyX2xvY2spOw0KZGlmZiAtLWdpdCBhL2RyaXZl
-cnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9kcnYuYyBiL2RyaXZlcnMvZ3B1L2RybS9hbWQv
-YW1kZ3B1L2FtZGdwdV9kcnYuYw0KaW5kZXggYjAzNjYzZjQyY2M5Li5iZDMzNGY1ZmQ2NGYgMTAw
-NjQ0DQotLS0gYS9kcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfZHJ2LmMNCisrKyBi
-L2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9kcnYuYw0KQEAgLTI2NTUsNyArMjY1
-NSw3IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX2RyaXZlciBhbWRncHVfa21zX2RyaXZlciA9
-IHsNCiAJICAgIERSSVZFUl9BVE9NSUMgfA0KIAkgICAgRFJJVkVSX0dFTSB8DQogCSAgICBEUklW
-RVJfUkVOREVSIHwgRFJJVkVSX01PREVTRVQgfCBEUklWRVJfU1lOQ09CSiB8DQotCSAgICBEUklW
-RVJfU1lOQ09CSl9USU1FTElORSwNCisJICAgIERSSVZFUl9TWU5DT0JKX1RJTUVMSU5FIHwgRFJJ
-VkVSX1VTRVJfRkVOQ0UsDQogCS5vcGVuID0gYW1kZ3B1X2RyaXZlcl9vcGVuX2ttcywNCiAJLnBv
-c3RjbG9zZSA9IGFtZGdwdV9kcml2ZXJfcG9zdGNsb3NlX2ttcywNCiAJLmxhc3RjbG9zZSA9IGFt
-ZGdwdV9kcml2ZXJfbGFzdGNsb3NlX2ttcywNCmRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0v
-YW1kL2FtZGdwdS9hbWRncHVfdm0uYyBiL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdw
-dV92bS5jDQppbmRleCBlNWM4ZTcyYTk0ODUuLjY3MDUyODc4ODdlOSAxMDA2NDQNCi0tLSBhL2Ry
-aXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV92bS5jDQorKysgYi9kcml2ZXJzL2dwdS9k
-cm0vYW1kL2FtZGdwdS9hbWRncHVfdm0uYw0KQEAgLTYyOCw3ICs2MjgsNyBAQCBzdGF0aWMgdm9p
-ZCBhbWRncHVfdm1fcHRfbmV4dF9kZnMoc3RydWN0IGFtZGdwdV9kZXZpY2UgKmFkZXYsDQogICov
-DQogaW50IGFtZGdwdV92bV9sb2NrX3BkKHN0cnVjdCBhbWRncHVfdm0gKnZtLCBzdHJ1Y3QgZHJt
-X2V4ZWMgKmV4ZWMpDQogew0KLQlyZXR1cm4gZHJtX2V4ZWNfcHJlcGFyZV9vYmooZXhlYywgJnZt
-LT5yb290LmJvLT50Ym8uYmFzZSwgNCk7DQorCXJldHVybiBkcm1fZXhlY19wcmVwYXJlX29iaihl
-eGVjLCAmdm0tPnJvb3QuYm8tPnRiby5iYXNlLCA1KTsNCiB9DQogDQogLyoqDQpkaWZmIC0tZ2l0
-IGEvZHJpdmVycy9ncHUvZHJtL2FtZC9kaXNwbGF5L2FtZGdwdV9kbS9hbWRncHVfZG0uYyBiL2Ry
-aXZlcnMvZ3B1L2RybS9hbWQvZGlzcGxheS9hbWRncHVfZG0vYW1kZ3B1X2RtLmMNCmluZGV4IGM1
-YjI0MTdhZGNjNi4uMmUwZjA1OWI5ZDEyIDEwMDY0NA0KLS0tIGEvZHJpdmVycy9ncHUvZHJtL2Ft
-ZC9kaXNwbGF5L2FtZGdwdV9kbS9hbWRncHVfZG0uYw0KKysrIGIvZHJpdmVycy9ncHUvZHJtL2Ft
-ZC9kaXNwbGF5L2FtZGdwdV9kbS9hbWRncHVfZG0uYw0KQEAgLTc2MjcsMTIgKzc2MjcsMTEgQEAg
-c3RhdGljIGludCBkbV9wbGFuZV9oZWxwZXJfcHJlcGFyZV9mYihzdHJ1Y3QgZHJtX3BsYW5lICpw
-bGFuZSwNCiAJCURSTV9FUlJPUigiJXAgYmluZCBmYWlsZWRcbiIsIHJibyk7DQogCQlnb3RvIGVy
-cm9yX3VucGluOw0KIAl9DQorCWFtZGdwdV9ib191bnJlc2VydmUocmJvKTsNCiANCiAJciA9IGRy
-bV9nZW1fcGxhbmVfaGVscGVyX3ByZXBhcmVfZmIocGxhbmUsIG5ld19zdGF0ZSk7DQogCWlmICh1
-bmxpa2VseShyICE9IDApKQ0KLQkJZ290byBlcnJvcl91bnBpbjsNCi0NCi0JYW1kZ3B1X2JvX3Vu
-cmVzZXJ2ZShyYm8pOw0KKwkJZ290byBlcnJvcl9yZXNlcnZlOw0KIA0KIAlhZmItPmFkZHJlc3Mg
-PSBhbWRncHVfYm9fZ3B1X29mZnNldChyYm8pOw0KIA0KQEAgLTc2NjUsNiArNzY2NCwxMCBAQCBz
-dGF0aWMgaW50IGRtX3BsYW5lX2hlbHBlcl9wcmVwYXJlX2ZiKHN0cnVjdCBkcm1fcGxhbmUgKnBs
-YW5lLA0KIA0KIAlyZXR1cm4gMDsNCiANCitlcnJvcl9yZXNlcnZlOg0KKwlpZiAoV0FSTl9PTihh
-bWRncHVfYm9fcmVzZXJ2ZShyYm8sIHRydWUpKSkNCisJCXJldHVybiByOw0KKw0KIGVycm9yX3Vu
-cGluOg0KIAlhbWRncHVfYm9fdW5waW4ocmJvKTsNCiANCi0tIA0KMi4yNS4xDQoNCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFp
-bGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmli
-ZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+
+--===============7172199800612110284==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="xESg3apyTC1nCRXH"
+Content-Disposition: inline
+
+
+--xESg3apyTC1nCRXH
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Fri, Apr 29, 2022 at 11:28:10AM +0800, Cai Huoqing wrote:
+> On 28 4=E6=9C=88 22 18:56:07, Mikko Perttunen wrote:
+> > On 4/28/22 17:10, Thierry Reding wrote:
+> > > On Tue, Apr 26, 2022 at 02:07:57PM +0800, Cai Huoqing wrote:
+> > > > The NVIDIA Deep Learning Accelerator (NVDLA) is an open source IP
+> > > > which is integrated into NVIDIA Jetson AGX Xavier,
+> > > > so add driver support for this accelerator."
+> > >=20
+> > > Hi,
+> > >=20
+> > > nice to see this work going on. For subsequent revisions, can you ple=
+ase
+> > > also Cc the Tegra mailing list (linux-tegra@vger.kernel.org) as well =
+as
+> > > the Tegra platform maintainers (that's Jon Hunter and myself). This w=
+ill
+> > > make sure that more people with an interest in this will see your wor=
+k.
+> > > Not everyone follows dri-devel, linaro-mm-sig or linux-media.
+> > >=20
+> > > Thanks,
+> > > Thierry
+> >=20
+> > From a quick glance it looks like this driver pokes DLA hardware direct=
+ly
+> > which is not the intended programming model on Tegra hardware (there are
+> > Falcon microcontrollers that offload task scheduling and synchronization
+> > from the CPU). The hardware is also behind the Host1x bus so a simple
+> > platform device is not sufficient.
+> >=20
+> > Was this driver developed against some platform with OpenDLA hardware (=
+i.e.
+> > not Tegra)?
+> >=20
+> > If so, we'd need to verify if the hardware matches the hardware in Tegr=
+a194.
+> > Also, this driver may not be ideal for Tegra platforms since we would l=
+ack
+> > the hardware scheduling and synchronization facilities. It is likely
+> > necessary to have separate drivers for OpenDLA and Tegra's DLA integrat=
+ion.
+> >=20
+> > Thanks,
+> > Mikko
+> >=20
+> Tegra DLA seems to work with a slave coprocessor, the host driver just
+> impelement message queue, share buffer, notification... The hardware
+> detail of DLA maybe in the slave driver(not linux OS?).
+>=20
+> Sure, This driver just support for the SOCs or FPGAs that OPENDLA
+> inside. I will change this kind of description "integrated into NVIDIA Je=
+tson AGX Xavier"
+> this driver dont support for Tegra directly.
+
+Yes, I think it would be good to make it clear that this is not going to
+work with the Tegra instantiations so that people don't get confused.
+
+I think it would be ideal, though, if we could reuse as much of this
+driver as possible to work with other instantiations. The only reference
+to OpenDLA that I can find and which seems somehow relevant to this is
+here:
+
+	https://github.com/SCLUO/ITRI-OpenDLA
+
+Is that the version that you're using? Or is the version that you're
+using at least compatible with that one? Apart from that and the Tegra
+instantiations, are you aware of any other derivatives that we need to
+account for? I'm worried that this might fragment to the point where it
+becomes unmaintainable in upstream Linux.
+
+Even if this doesn't concern the Tegra instantiation, I think most of my
+other comments remain valid. Things like global variables will get in
+the way of multiple FPGA instantiations as well, for example.
+
+You will also need to provide the device tree bindings for the
+particular instantiation that you're working on. Typically this would be
+identified by a vendor-specific compatible string for your particular
+board, but if it stems from a "canonical" FPGA mapping, matching on that
+compatible string might also be an option. In either case, when you send
+out the DT bindings, please include the devicetree@vger.kernel.org
+mailing list so that they can be properly reviewed.
+
+Thierry
+
+--xESg3apyTC1nCRXH
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmJwDwoACgkQ3SOs138+
+s6HQBA/9G4mT1YRxO1XmbGtYRMlb5WwgJE5DE02upNSHm7Ixb2KSRxQqcdLPG/rQ
+ip5zcasTrh9hLKISslL9+mRphslV8obFPSF9tDhQ/SINiIRM/9CYvI4vkr/qe38t
+C6GU4tlQwn/IJIy1i4jaDVxdFEtQzXEAucfG1lLee1L46jYUpykk3cTKFCZM8xND
+HTrWnKdCUsjb9it08g68ItVxkq2v5lG2HKT+j4LJeEA82i4iS34/H42QOyQ7yQi9
+0CsRDMq/BC7Nu8bSCKzwMAp6FiO9ZSXBPb5Bvpy1gbZRKMX0OvQe2u0/wk2DI0zG
+G70ioJZUh8lq7Dtx6TnFTaYskxKFipHfni4oBOMXD4GQJ9YPlPG5NMNTDPLvL+Co
+OqwgDr3EFKee6efZwsJbzYF+2sculK4syW9OHZDvP8RuhqW2qCiWBBQxqj9SY/hB
+LJ33BUv7iCer3fpSORrmmT2rNRzCw0xqiOWniofQTdKZUDtphrjwxW9wT+FbnFNw
+/mrXZGsB8UY8sKQyhR3FDL74g6QYb9wrpq9mJ4jKD/Py3Yd00v00GjgeDHmb7V/d
+weu2Nrx1NG83vW4rBqGd4qnOZbMQtEesVgaa3SYmH5lyJSzAnCB9QT5PPR3xL8o3
+96I0sU2UqMHqWjCMqKFLD8886Oovi3Jo4uuXONTL95ZIDoScJaw=
+=Kefv
+-----END PGP SIGNATURE-----
+
+--xESg3apyTC1nCRXH--
+
+--===============7172199800612110284==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============7172199800612110284==--
