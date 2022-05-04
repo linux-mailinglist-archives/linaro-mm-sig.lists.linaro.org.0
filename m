@@ -2,468 +2,354 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0DAA519A32
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 May 2022 10:43:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0173D519ACD
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 May 2022 10:52:47 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B3A9A4805D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 May 2022 08:43:28 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
-	by lists.linaro.org (Postfix) with ESMTPS id 9171D3EC34
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 May 2022 08:43:23 +0000 (UTC)
-Received: by mail-ej1-f54.google.com with SMTP id l18so1525986ejc.7
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 04 May 2022 01:43:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:content-transfer-encoding:in-reply-to;
-        bh=ZDSiSQ9+DzqbG1QLctGKJfa/8V94fCXgQEeNXny9E/s=;
-        b=VZ3OFed+kLH3HOT6gylbvErAhudZNwsQVNXtCQkD8jSuuXHtTgYd2kRGaqCzrkzMoN
-         IfbtYTTG0Tctz5DuFGFKsoIe1DBT4989OhdTD2p5zLe0tthdPppRYHf9igrIC+KXujcD
-         OuDkDi85kyqCqk32XvsV7CVS+T5iquvqcT7yQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:content-transfer-encoding
-         :in-reply-to;
-        bh=ZDSiSQ9+DzqbG1QLctGKJfa/8V94fCXgQEeNXny9E/s=;
-        b=NwvY4dSnft5n8MCxvNE8slWiD4271gGXtya2aNWdWopxmY9yc/clSChoHeHjNmV0N0
-         UvcNWzRQwNwaRwB7ZflGykYZ46ZkS+YwvS0E5nLIgNPOyOfzxqnFGUIUGG2Jfhb7UXR4
-         t2lCJDf25IyXY6Yvu9AC8WHVoHx99he9ElOttLcxLaCopC8yZCrE54uGRUZ6rkpa+Frg
-         9ruQT6673JRYKGmi5kzuKMQUowxRdyh7nHyQSqDd6z1BaNTuxC8I+TZNbP0EM/eneS4g
-         Df7A5u8S5A1KzLEZE5x0AVrA087/nC25krdHMaaxyhUqJl/kQcYPvPV29I9w3/IbOJZj
-         NBXg==
-X-Gm-Message-State: AOAM533u5GxZJIsHnoMkjM2KWdrmuGJdl4+08EceKo1h7EWP9L59hp/O
-	GwwXAQQIDXszrOC9QkEAn2UnkQ==
-X-Google-Smtp-Source: ABdhPJyC0Zf5lRAj2+/WJCoBpcZKJuLmLKJonWjYMSOyQxvlYFvHKd7nsV9xeAyV3H0rGEWxFbFXeQ==
-X-Received: by 2002:a17:906:d146:b0:6f4:691a:d08e with SMTP id br6-20020a170906d14600b006f4691ad08emr10801671ejb.291.1651653802611;
-        Wed, 04 May 2022 01:43:22 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id s8-20020aa7cb08000000b0042617ba638csm8774281edt.22.2022.05.04.01.43.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 May 2022 01:43:22 -0700 (PDT)
-Date: Wed, 4 May 2022 10:43:20 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YnI8qJbJ1DYklNcm@phenom.ffwll.local>
+	by lists.linaro.org (Postfix) with ESMTP id 0DC484805C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 May 2022 08:52:47 +0000 (UTC)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2051.outbound.protection.outlook.com [40.107.93.51])
+	by lists.linaro.org (Postfix) with ESMTPS id 8EF843EC34
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 May 2022 08:52:41 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Blvx7/erQKnqRme/0eLMqpjdyBod47jmYnQdZjfpjIPSdXGKUnuXQw+eCk0RqCWn3Kd7i3tyEHCkjhaO25zi5nm0C/9svvBlHAtOjuJ5w5W6EWhJjPo+jdB8Et7C2Tm++ZPICA/MMDIMOrCo3ehoBiZ+sLvV8n/wrWdZh3vwJ/OCBJJQ/bmy1dN8JOfaDgdrUzJkZiz17/kb4hT1Rqoah7j931lIErLk+q4I1OoO2b9dTwxRqU4d2QYs9VXYnJkfHQ/WSaOkj25m68gn3x5+BRLiCeGR9IZ926I3TDOgPO2V2bR8KdVnxiUHnAhNWzm2Cn3Xnzm9jTLG475/9hNlZw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kYoip7fusvZ+0QtFzChfHvdg5Ut0er7RyYbeMYOOMC4=;
+ b=IXWjJOmH4aHPx/9Q66VtlHtHz5UtW57EWZuxLtrV6l1JVR7ijyU7Lp9sK3/2sZsVH4JCd7dR8WYxXbmht7iRkUEi9U5Sb0g5pOfA3R6wIB8PwFzcki7q33cXMPUlQ2/0vJC6qanhivqABXZGeEKIBHckPoaTI5ebwTMH1oGfiMD4ql2DkwTeq1hW3uLstFEzqZsNKbPDGV55+NjmlG6oNdadWZcWBt8tB1Ozg4aw4GfwuCfvxHo4BILY+xCeVx3ot9qRRc5Q3WFs50kWXYZlsIkSQa85hf7gHd1gH8LoKeWv+YoEVEuQM2AJHGNORmoBkekjXGUGR44yD7N+3zaLOg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kYoip7fusvZ+0QtFzChfHvdg5Ut0er7RyYbeMYOOMC4=;
+ b=sF1Aqxj78HjOrf8JRWej+fIhJ2cUyefcgY9um6Q60/sgDjyVfdg4oReObNAHF/PTMYZMu4S0Ie9JsFg16iRvL6UxueVA+o6lUba+jLr7PIWcli7WcI+YOcpbSUmlwAAV9uJx1H09UEsrruuAGw+PMndkB2QVhymocZlelUmLu2M=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by BY5PR12MB3714.namprd12.prod.outlook.com (2603:10b6:a03:1a9::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5206.24; Wed, 4 May
+ 2022 08:52:37 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::fdba:2c6c:b9ab:38f]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::fdba:2c6c:b9ab:38f%4]) with mapi id 15.20.5206.025; Wed, 4 May 2022
+ 08:52:34 +0000
+Message-ID: <09d1cd03-1da0-bb7a-5770-a75de67dffc8@amd.com>
+Date: Wed, 4 May 2022 10:52:20 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Content-Language: en-US
+To: Daniel Vetter <daniel@ffwll.ch>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
 References: <20220426124637.329764-1-christian.koenig@amd.com>
  <20220426124637.329764-3-christian.koenig@amd.com>
+ <YnI8qJbJ1DYklNcm@phenom.ffwll.local>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <YnI8qJbJ1DYklNcm@phenom.ffwll.local>
+X-ClientProxiedBy: AM6P192CA0082.EURP192.PROD.OUTLOOK.COM
+ (2603:10a6:209:8d::23) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220426124637.329764-3-christian.koenig@amd.com>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Message-ID-Hash: CFAB6QVKMIVE3XL7YDLE6DIFA5PYFGYL
-X-Message-ID-Hash: CFAB6QVKMIVE3XL7YDLE6DIFA5PYFGYL
-X-MailFrom: daniel@ffwll.ch
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: sumit.semwal@linaro.org, gustavo@padovan.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: db83f52e-335d-4248-d90d-08da2dab6ea2
+X-MS-TrafficTypeDiagnostic: BY5PR12MB3714:EE_
+X-Microsoft-Antispam-PRVS: 
+	<BY5PR12MB37146C3F9282E889F3C077EF83C39@BY5PR12MB3714.namprd12.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	9+zwaGVEJSkMZ87HTYk17A4dXqN5vFcZZr4F1ihCZ+593/yvI2qfl4YZBaVarZfkVzqsr8NwbOuP6kdbZkQlg+OHERjFltZ6eR1h2rs8sTpVjKlJPzZFiEs+7PRXnRCVzOJ9jON8xwdbJYWJltwpJG3dyQQvEk9xXV/biQU8GftpOBlVULLXW5mG1KtYWjRPU0Gdn66vhKbKxCKjRzdty/sBYvQnXbd2OwU01Xan4Oe3RbJD3qykJF9YB+U8pHNyKhWzC+iUVfgdAm6yCVyc3Wy5tLl+yL51975QFus1CHAjPHCDVoh8T2ZOGbPUaXK+tgrTyRtmF4ln6U0u+MvuqRiEuxabED4GgOPBj5zuihpwj2Npjbr+P33zCnQh1NX/EEjJISsZJZeexeyeh/hiisgs5LJCs7wi3QglSIQdiSvfOhPnKty89uNeKHIcO5Np4aC8NZ1TfkiUFTFbtl9BS6IHpWorON6d94/50Z4CL8AfPiY9YQgQnvs4bONpw0Yah9e3jN+6t0oNnonZyxqeMZVpfyNK8GtBXyso4hXaRGdG6IcatCUHE/liJGlBlGvBzNSOJh963snq41VYusXCGIjZk0z7gu5hiVaNqAlYkBJ2ABM0Ck0sEKt7khUXRmuofrwc8Q5DuWbfQuGO5tJkinG9v6Y7OfKsvctcWXLSxnylQZlzd98da75t641DS6/9S7TiPu/GxV4UYf2GKwO1g5oH9m/xvvfeMlGavG26545Asg91kXpUxX8GaKAKvQUr
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(110136005)(83380400001)(26005)(36756003)(31686004)(86362001)(2616005)(31696002)(6512007)(6506007)(66946007)(508600001)(66556008)(5660300002)(66476007)(38100700002)(8936002)(8676002)(4326008)(2906002)(6666004)(6486002)(186003)(30864003)(316002)(66574015)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?ZkVVQ2dkZ2pETW11N3dnOExacWtJeXUzOUpnVHR3ci9BL2U3OWdrN3VBaHpR?=
+ =?utf-8?B?S21kdk13dVdkaTVvSk5HS1lLZFFSUkVGKzczeThxZHVPa2xvY01zQk4wSHRG?=
+ =?utf-8?B?L1hnVWRabDkwSGxacUVkZ2NkTVVCbmFHUXhQVkdsdVI1MWVaa25nb3RrTEpN?=
+ =?utf-8?B?ckhVUzJFNUZ4ZVZlbmw2QjFJMlY0L25kNXFoV2tFbkovQURWSWtkU3JNS21k?=
+ =?utf-8?B?ZU5MUnYwK055dWs0SnBpS0doOEEzYTlDcU5BWnc3dlNYV3l6eEZOZUFDWW9H?=
+ =?utf-8?B?dnBQcmZvTmhvcFcvcjBsNXNMZ09xZjZUM1dMeE9HeEdwMkUxeDNWMEIvbGxC?=
+ =?utf-8?B?UDJBd080Rk9xTWRONEMycVNJWDVKTXlNZllEUEROakpRalNXM1diRmZBUTlG?=
+ =?utf-8?B?Q29LbXZ1Ny9ESXFlZ1dMOHlrWTdyTC9RWWdGMUZRZlBHalNuWkp0ODA2NTFT?=
+ =?utf-8?B?NzdYNHpLem9LUVpGWUxjSTFLUFgvUmFUcnFBWWgzc3FiN2Jid2ZRRUdBSnA4?=
+ =?utf-8?B?N1lMQXhPMm5rZ3BISXRpZWN3UW1aN2M1QlM4OEQyTSsxdG9CSkhaWHRyYy8r?=
+ =?utf-8?B?b2pELy9pY3JyVVdFdDdtSWlkT1krYzB2Tzc4MnA2OFpsV1ltTjR0Z3U5aHlC?=
+ =?utf-8?B?V0c4UFBTOWc2dzR4SGpOY2F5OHhUR3d6bGRTL1JxSS9oa25qeGkzRjUxVjZF?=
+ =?utf-8?B?UjZtNmF3ZStlZTN3RS92R1B6dWx1ZHpqVlRyNStHYnIyUVM3M1RYUG9nOUtK?=
+ =?utf-8?B?bDJzdk1IZ25TNmtKeEkzUkdFKzhvd2g2bjltalpQb21WcU5HcVpZaXU1QUhN?=
+ =?utf-8?B?T0dvL0pORXBHRUhuK2ljYS9qVzUrMnpza0lSanpNcHVLbjFKZGdKU3c5eWMw?=
+ =?utf-8?B?WWZWSTZLYy9QeDRGK0wycVJvY09HNTZZMmJLOHB6OE0vZERqd3FYYlptMHdl?=
+ =?utf-8?B?bTZjV2htY3B0NXhNRkJDK1JUc1JIVnlPbXBFdkFLMDRSL2c4Z2pqUGRIbWZW?=
+ =?utf-8?B?Yk5uOVkxWmJGVlIrYmdyOEpkblp6d3NiUjY3ZXJQR3Y5QllFQjY5SkJ5OHNY?=
+ =?utf-8?B?N0RHdUNoY1Y2b2VpbjNGNGN4dU52Q0FLY2NUUXZoNVhEbnp1U05obXFybm9q?=
+ =?utf-8?B?SEJRK2szS0dFUlRUZnJab1FkZGErNXJMSTU4UXVOMTVhL1ZTOThDSmZ3bDB5?=
+ =?utf-8?B?djVkZ0FHR3BsK1VSbTh5QTVISlRrNW5LRUFnYUdkL3V5OXkrL01Qa2Q0MkpG?=
+ =?utf-8?B?RnBCcksyS2M3aDNPVGRraU5TODBXYW1XcjF3bGNZQUJvZ2NKbzNFL2pSa2Ja?=
+ =?utf-8?B?R2xUdkZrRlFwVlpYb1NyQVJxRnhMZU9EMHpiclpjRG1WTEcrQlNCRENXZXhs?=
+ =?utf-8?B?L0ptM2U4TUxvNGs1K1pkSHBQcnJMdEpnVElobE1pSCtKekpOTjJ2YVRIQTQw?=
+ =?utf-8?B?NE9YZDE1c3VDY2lsYksvclp4YmVKa21TYTkveExJbWkwU3pnY1l1MVMxekpJ?=
+ =?utf-8?B?RENISk9TYUk2dHcrWG5iWVl1cDNqd2pWWDBtSkd6S2M1cC90blpzTGN2RTd3?=
+ =?utf-8?B?c1FpSDNpWDBVcVFram0vVDFSRyttb0U2VjRuTWRFdUg2S3FCUUZnd2RDMjdp?=
+ =?utf-8?B?QmxwbkFwbitIaWdMSzJDMm12RG5VZlZmOGxMeFlCT2hFTzd2MTc2OFRVbUNM?=
+ =?utf-8?B?blRFUTlrVG5HNjlqRE9VT1J0MTVWWjBYZXZ6S2JrbnZWMVhPdjZFR0tLYWJ4?=
+ =?utf-8?B?Sk5vOWVtY28yODgxSmJCQjBnNEZuOUFIeTh4WTQ4WjFDMkFVRCs1aENVcnBM?=
+ =?utf-8?B?ZFF4WHNNUlpZTmhhZXhOSm9SckdyV1EwN1k4Zmw4dnpWbUlyeHJLWFpIVklZ?=
+ =?utf-8?B?cU44V3pONEtZOGRaSkpFNUMxTkp0clltKzZRMTVTeUpuM3JhQjVzK2syRmpC?=
+ =?utf-8?B?eXlxUUNVVGlIYUUyakFtM1dDdDAxVW1HclFzTXJrK2tuUDFrNlozaTZGbGUy?=
+ =?utf-8?B?TEZMTnl1aHF4SSszTFd2aWRlUm1JMGR2WllHRXBoL2tHaDVyclcrY2ovUy9B?=
+ =?utf-8?B?Y0dTUUgxalhvQ2FUU3p6dFJEdEhDOHczUGZ3dHJEekFObm1iWHAxRi8wc1pa?=
+ =?utf-8?B?OTJHaHozdTd6RjVYeVhUQUlVcTZ4VXVsbHdpdjNFMFZHMDArZjRuaEtZRUVk?=
+ =?utf-8?B?dDNEY1Q2Ukc5QnFJUmFpMUpGeGx6UEo4cFVUa1hrTnliQ3FGaEF3L0J0b2FT?=
+ =?utf-8?B?cXU2Tkdka1czQmNuOCt2TzRTeFNQelhWbTRmM0hic3dNVmxMU3pXQzVnRUdk?=
+ =?utf-8?B?TUJ4WUc5ZzhERDNvTjZqZG9MMVBKcGFwWDN2MTc0VGZGdG43clhKUT09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: db83f52e-335d-4248-d90d-08da2dab6ea2
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 May 2022 08:52:34.7357
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: yevS/1boXHY/uQEVyLMHAtzRCtG1pdC7wSf+ee1wgnol4N9pWKRBYGMDPRzaf02X
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB3714
+Message-ID-Hash: TLI4TCYN7DYXDABCOPSRLTPQNX6AYYC6
+X-Message-ID-Hash: TLI4TCYN7DYXDABCOPSRLTPQNX6AYYC6
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: sumit.semwal@linaro.org, gustavo@padovan.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH 3/3] dma-buf: generalize fence merging
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CFAB6QVKMIVE3XL7YDLE6DIFA5PYFGYL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TLI4TCYN7DYXDABCOPSRLTPQNX6AYYC6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-On Tue, Apr 26, 2022 at 02:46:37PM +0200, Christian K=F6nig wrote:
-> Introduce a dma_fence_merge() macro which allows to unwrap fences which
-> potentially can be containers as well and then merge them back together
-> into a flat dma_fence_array.
->=20
-> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
-
-So this is really neat (the va args macro trick especially), but I'm not
-sure how much use it is with just one user. Is there like more planned?
-Or is the idea to make merging consistent so that the context sorting
-trick can be done consistently?
--Daniel
-
-> ---
->  drivers/dma-buf/dma-fence-unwrap.c    |  95 ++++++++++++++++++++
->  drivers/dma-buf/st-dma-fence-unwrap.c |  47 ++++++++++
->  drivers/dma-buf/sync_file.c           | 119 ++------------------------
->  include/linux/dma-fence-unwrap.h      |  24 ++++++
->  4 files changed, 172 insertions(+), 113 deletions(-)
->=20
-> diff --git a/drivers/dma-buf/dma-fence-unwrap.c b/drivers/dma-buf/dma-fen=
-ce-unwrap.c
-> index 711be125428c..c9becc74896d 100644
-> --- a/drivers/dma-buf/dma-fence-unwrap.c
-> +++ b/drivers/dma-buf/dma-fence-unwrap.c
-> @@ -11,6 +11,7 @@
->  #include <linux/dma-fence-array.h>
->  #include <linux/dma-fence-chain.h>
->  #include <linux/dma-fence-unwrap.h>
-> +#include <linux/slab.h>
-> =20
->  /* Internal helper to start new array iteration, don't use directly */
->  static struct dma_fence *
-> @@ -57,3 +58,97 @@ struct dma_fence *dma_fence_unwrap_next(struct dma_fen=
-ce_unwrap *cursor)
->  	return __dma_fence_unwrap_array(cursor);
->  }
->  EXPORT_SYMBOL_GPL(dma_fence_unwrap_next);
-> +
-> +/* Implementation for the dma_fence_merge() marco, don't use directly */
-> +struct dma_fence *__dma_fence_merge(unsigned int num_fences,
-> +				    struct dma_fence **fences,
-> +				    struct dma_fence_unwrap *iter)
-> +{
-> +	struct dma_fence_array *result;
-> +	struct dma_fence *tmp, **array;
-> +	unsigned int i, count;
-> +
-> +	count =3D 0;
-> +	for (i =3D 0; i < num_fences; ++i) {
-> +		dma_fence_unwrap_for_each(tmp, &iter[i], fences[i])
-> +			if (!dma_fence_is_signaled(tmp))
-> +				++count;
-> +	}
-> +
-> +	if (count =3D=3D 0)
-> +		return dma_fence_get_stub();
-> +
-> +	if (count > INT_MAX)
-> +		return NULL;
-> +
-> +	array =3D kmalloc_array(count, sizeof(*array), GFP_KERNEL);
-> +	if (!array)
-> +		return NULL;
-> +
-> +	/*
-> +	 * We can't guarantee that inpute fences are ordered by context, but
-> +	 * it is still quite likely when this function is used multiple times.
-> +	 * So attempt to order the fences by context as we pass over them and
-> +	 * merge fences with the same context.
-> +	 */
-> +	for (i =3D 0; i < num_fences; ++i)
-> +		fences[i] =3D dma_fence_unwrap_first(fences[i], &iter[i]);
-> +
-> +	count =3D 0;
-> +	do {
-> +		unsigned int sel;
-> +
-> +restart:
-> +		tmp =3D NULL;
-> +		for (i =3D 0; i < num_fences; ++i) {
-> +			struct dma_fence *next =3D fences[i];
-> +
-> +			if (!next || dma_fence_is_signaled(next))
-> +				continue;
-> +
-> +			if (!tmp || tmp->context > next->context) {
-> +				tmp =3D next;
-> +				sel =3D i;
-> +
-> +			} else if (tmp->context < next->context) {
-> +				continue;
-> +
-> +			} else if (dma_fence_is_later(tmp, next)) {
-> +				fences[i] =3D dma_fence_unwrap_next(&iter[i]);
-> +				goto restart;
-> +			} else {
-> +				fences[sel] =3D dma_fence_unwrap_next(&iter[sel]);
-> +				goto restart;
-> +			}
-> +		}
-> +
-> +		if (tmp) {
-> +			array[count++] =3D dma_fence_get(tmp);
-> +			fences[sel] =3D dma_fence_unwrap_next(&iter[sel]);
-> +		}
-> +	} while (tmp);
-> +
-> +	if (count =3D=3D 0) {
-> +		tmp =3D dma_fence_get_stub();
-> +		goto return_tmp;
-> +	}
-> +
-> +	if (count =3D=3D 1) {
-> +		tmp =3D array[0];
-> +		goto return_tmp;
-> +	}
-> +
-> +	result =3D dma_fence_array_create(count, array,
-> +					dma_fence_context_alloc(1),
-> +					1, false);
-> +	if (!result) {
-> +		tmp =3D NULL;
-> +		goto return_tmp;
-> +	}
-> +	return &result->base;
-> +
-> +return_tmp:
-> +	kfree(array);
-> +	return tmp;
-> +}
-> +EXPORT_SYMBOL_GPL(__dma_fence_merge);
-> diff --git a/drivers/dma-buf/st-dma-fence-unwrap.c b/drivers/dma-buf/st-d=
-ma-fence-unwrap.c
-> index 59628add93f5..23ab134417ed 100644
-> --- a/drivers/dma-buf/st-dma-fence-unwrap.c
-> +++ b/drivers/dma-buf/st-dma-fence-unwrap.c
-> @@ -240,6 +240,52 @@ static int unwrap_chain_array(void *arg)
->  	return err;
->  }
-> =20
-> +static int unwrap_merge(void *arg)
-> +{
-> +	struct dma_fence *fence, *f1, *f2, *f3;
-> +	struct dma_fence_unwrap iter;
-> +	int err =3D 0;
-> +
-> +	f1 =3D mock_fence();
-> +	if (!f1)
-> +		return -ENOMEM;
-> +
-> +	f2 =3D mock_fence();
-> +	if (!f2) {
-> +		err =3D -ENOMEM;
-> +		goto error_put_f1;
-> +	}
-> +
-> +	f3 =3D dma_fence_merge(f1, f2);
-> +	if (!f3) {
-> +		err =3D -ENOMEM;
-> +		goto error_put_f2;
-> +	}
-> +
-> +	dma_fence_unwrap_for_each(fence, &iter, f3) {
-> +		if (fence =3D=3D f1) {
-> +			f1 =3D NULL;
-> +		} else if (fence =3D=3D f2) {
-> +			f2 =3D NULL;
-> +		} else {
-> +			pr_err("Unexpected fence!\n");
-> +			err =3D -EINVAL;
-> +		}
-> +	}
-> +
-> +	if (f1 || f2) {
-> +		pr_err("Not all fences seen!\n");
-> +		err =3D -EINVAL;
-> +	}
-> +
-> +	dma_fence_put(f3);
-> +error_put_f2:
-> +	dma_fence_put(f2);
-> +error_put_f1:
-> +	dma_fence_put(f1);
-> +	return err;
-> +}
-> +
->  int dma_fence_unwrap(void)
->  {
->  	static const struct subtest tests[] =3D {
-> @@ -247,6 +293,7 @@ int dma_fence_unwrap(void)
->  		SUBTEST(unwrap_array),
->  		SUBTEST(unwrap_chain),
->  		SUBTEST(unwrap_chain_array),
-> +		SUBTEST(unwrap_merge),
->  	};
-> =20
->  	return subtests(tests, NULL);
-> diff --git a/drivers/dma-buf/sync_file.c b/drivers/dma-buf/sync_file.c
-> index 0fe564539166..fe149d7e3ce2 100644
-> --- a/drivers/dma-buf/sync_file.c
-> +++ b/drivers/dma-buf/sync_file.c
-> @@ -146,50 +146,6 @@ char *sync_file_get_name(struct sync_file *sync_file=
-, char *buf, int len)
->  	return buf;
->  }
-> =20
-> -static int sync_file_set_fence(struct sync_file *sync_file,
-> -			       struct dma_fence **fences, int num_fences)
-> -{
-> -	struct dma_fence_array *array;
-> -
-> -	/*
-> -	 * The reference for the fences in the new sync_file and held
-> -	 * in add_fence() during the merge procedure, so for num_fences =3D=3D 1
-> -	 * we already own a new reference to the fence. For num_fence > 1
-> -	 * we own the reference of the dma_fence_array creation.
-> -	 */
-> -
-> -	if (num_fences =3D=3D 0) {
-> -		sync_file->fence =3D dma_fence_get_stub();
-> -		kfree(fences);
-> -
-> -	} else if (num_fences =3D=3D 1) {
-> -		sync_file->fence =3D fences[0];
-> -		kfree(fences);
-> -
-> -	} else {
-> -		array =3D dma_fence_array_create(num_fences, fences,
-> -					       dma_fence_context_alloc(1),
-> -					       1, false);
-> -		if (!array)
-> -			return -ENOMEM;
-> -
-> -		sync_file->fence =3D &array->base;
-> -	}
-> -
-> -	return 0;
-> -}
-> -
-> -static void add_fence(struct dma_fence **fences,
-> -		      int *i, struct dma_fence *fence)
-> -{
-> -	fences[*i] =3D fence;
-> -
-> -	if (!dma_fence_is_signaled(fence)) {
-> -		dma_fence_get(fence);
-> -		(*i)++;
-> -	}
-> -}
-> -
->  /**
->   * sync_file_merge() - merge two sync_files
->   * @name:	name of new fence
-> @@ -203,84 +159,21 @@ static void add_fence(struct dma_fence **fences,
->  static struct sync_file *sync_file_merge(const char *name, struct sync_f=
-ile *a,
->  					 struct sync_file *b)
->  {
-> -	struct dma_fence *a_fence, *b_fence, **fences;
-> -	struct dma_fence_unwrap a_iter, b_iter;
-> -	unsigned int index, num_fences;
->  	struct sync_file *sync_file;
-> +	struct dma_fence *fence;
-> =20
->  	sync_file =3D sync_file_alloc();
->  	if (!sync_file)
->  		return NULL;
-> =20
-> -	num_fences =3D 0;
-> -	dma_fence_unwrap_for_each(a_fence, &a_iter, a->fence)
-> -		++num_fences;
-> -	dma_fence_unwrap_for_each(b_fence, &b_iter, b->fence)
-> -		++num_fences;
-> -
-> -	if (num_fences > INT_MAX)
-> -		goto err_free_sync_file;
-> -
-> -	fences =3D kcalloc(num_fences, sizeof(*fences), GFP_KERNEL);
-> -	if (!fences)
-> -		goto err_free_sync_file;
-> -
-> -	/*
-> -	 * We can't guarantee that fences in both a and b are ordered, but it is
-> -	 * still quite likely.
-> -	 *
-> -	 * So attempt to order the fences as we pass over them and merge fences
-> -	 * with the same context.
-> -	 */
-> -
-> -	index =3D 0;
-> -	for (a_fence =3D dma_fence_unwrap_first(a->fence, &a_iter),
-> -	     b_fence =3D dma_fence_unwrap_first(b->fence, &b_iter);
-> -	     a_fence || b_fence; ) {
-> -
-> -		if (!b_fence) {
-> -			add_fence(fences, &index, a_fence);
-> -			a_fence =3D dma_fence_unwrap_next(&a_iter);
-> -
-> -		} else if (!a_fence) {
-> -			add_fence(fences, &index, b_fence);
-> -			b_fence =3D dma_fence_unwrap_next(&b_iter);
-> -
-> -		} else if (a_fence->context < b_fence->context) {
-> -			add_fence(fences, &index, a_fence);
-> -			a_fence =3D dma_fence_unwrap_next(&a_iter);
-> -
-> -		} else if (b_fence->context < a_fence->context) {
-> -			add_fence(fences, &index, b_fence);
-> -			b_fence =3D dma_fence_unwrap_next(&b_iter);
-> -
-> -		} else if (__dma_fence_is_later(a_fence->seqno, b_fence->seqno,
-> -						a_fence->ops)) {
-> -			add_fence(fences, &index, a_fence);
-> -			a_fence =3D dma_fence_unwrap_next(&a_iter);
-> -			b_fence =3D dma_fence_unwrap_next(&b_iter);
-> -
-> -		} else {
-> -			add_fence(fences, &index, b_fence);
-> -			a_fence =3D dma_fence_unwrap_next(&a_iter);
-> -			b_fence =3D dma_fence_unwrap_next(&b_iter);
-> -		}
-> +	fence =3D dma_fence_merge(a->fence, b->fence);
-> +	if (!fence) {
-> +		fput(sync_file->file);
-> +		return NULL;
->  	}
-> -
-> -	if (sync_file_set_fence(sync_file, fences, index) < 0)
-> -		goto err_put_fences;
-> -
-> +	sync_file->fence =3D fence;
->  	strlcpy(sync_file->user_name, name, sizeof(sync_file->user_name));
->  	return sync_file;
-> -
-> -err_put_fences:
-> -	while (index)
-> -		dma_fence_put(fences[--index]);
-> -	kfree(fences);
-> -
-> -err_free_sync_file:
-> -	fput(sync_file->file);
-> -	return NULL;
->  }
-> =20
->  static int sync_file_release(struct inode *inode, struct file *file)
-> diff --git a/include/linux/dma-fence-unwrap.h b/include/linux/dma-fence-u=
-nwrap.h
-> index e7c219da4ed7..7c0fab318301 100644
-> --- a/include/linux/dma-fence-unwrap.h
-> +++ b/include/linux/dma-fence-unwrap.h
-> @@ -48,4 +48,28 @@ struct dma_fence *dma_fence_unwrap_next(struct dma_fen=
-ce_unwrap *cursor);
->  	for (fence =3D dma_fence_unwrap_first(head, cursor); fence;	\
->  	     fence =3D dma_fence_unwrap_next(cursor))
-> =20
-> +struct dma_fence *__dma_fence_merge(unsigned int num_fences,
-> +				    struct dma_fence **fences,
-> +				    struct dma_fence_unwrap *cursors);
-> +
-> +/**
-> + * dma_fence_merge - unwrap and merge fences
-> + *
-> + * All fences given as parameters are unwrapped and merged back together=
- as flat
-> + * dma_fence_array. Useful if multiple containers need to be merged toge=
-ther.
-> + *
-> + * Implemented as a macro to allocate the necessary arrays on the stack =
-and
-> + * account the stack frame size to the caller.
-> + *
-> + * Returns NULL on memory allocation failure, a dma_fence object represe=
-nting
-> + * all the given fences otherwise.
-> + */
-> +#define dma_fence_merge(...)					\
-> +	({							\
-> +		struct dma_fence *__f[] =3D { __VA_ARGS__ };	\
-> +		struct dma_fence_unwrap __c[ARRAY_SIZE(__f)];	\
-> +								\
-> +		__dma_fence_merge(ARRAY_SIZE(__f), __f, __c);	\
-> +	})
-> +
->  #endif
-> --=20
-> 2.25.1
->=20
-
---=20
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+QW0gMDQuMDUuMjIgdW0gMTA6NDMgc2NocmllYiBEYW5pZWwgVmV0dGVyOg0KPiBPbiBUdWUsIEFw
+ciAyNiwgMjAyMiBhdCAwMjo0NjozN1BNICswMjAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0K
+Pj4gSW50cm9kdWNlIGEgZG1hX2ZlbmNlX21lcmdlKCkgbWFjcm8gd2hpY2ggYWxsb3dzIHRvIHVu
+d3JhcCBmZW5jZXMgd2hpY2gNCj4+IHBvdGVudGlhbGx5IGNhbiBiZSBjb250YWluZXJzIGFzIHdl
+bGwgYW5kIHRoZW4gbWVyZ2UgdGhlbSBiYWNrIHRvZ2V0aGVyDQo+PiBpbnRvIGEgZmxhdCBkbWFf
+ZmVuY2VfYXJyYXkuDQo+Pg0KPj4gU2lnbmVkLW9mZi1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hy
+aXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KPiBTbyB0aGlzIGlzIHJlYWxseSBuZWF0ICh0aGUgdmEg
+YXJncyBtYWNybyB0cmljayBlc3BlY2lhbGx5KSwgYnV0IEknbSBub3QNCj4gc3VyZSBob3cgbXVj
+aCB1c2UgaXQgaXMgd2l0aCBqdXN0IG9uZSB1c2VyLiBJcyB0aGVyZSBsaWtlIG1vcmUgcGxhbm5l
+ZD8NCg0KV2UgaGF2ZSBhbm90aGVyIHBvdGVudGlhbCB1c2VyIG9mIHRoaXMgaW4gZHJtX3N5bmNv
+YmpfZmxhdHRlbl9jaGFpbigpIA0KYW5kIGF0IGxlYXN0IGFub3RoZXIgcG90ZW50aWFsIGNhc2Vz
+IGluIGFtZGdwdSBjb21lIHRvIG15IG1pbmQuDQoNCkkganVzdCB3YW50ZWQgdG8gZG91YmxlIGNo
+ZWNrIHRoZSBnZW5lcmFsIGltcGxlbWVudGF0aW9uIGJlZm9yZSBJIHN0YXJ0IA0KdG8gdXNlIHRo
+aXMgbW9yZSB3aWRlbHkuDQoNCj4gT3IgaXMgdGhlIGlkZWEgdG8gbWFrZSBtZXJnaW5nIGNvbnNp
+c3RlbnQgc28gdGhhdCB0aGUgY29udGV4dCBzb3J0aW5nDQo+IHRyaWNrIGNhbiBiZSBkb25lIGNv
+bnNpc3RlbnRseT8NCg0KVGhlIGNvbnRleHQgc29ydGluZyB0cmljayBpcyBqdXN0IGEgbmljZSB0
+byBoYXZlIG9wdGltaXphdGlvbi4gTXkgbWFpbiANCmludGVudGlvbiBoZXJlIGlzIHRvIGhhdmUg
+YW4gdXRpbGl0eSBmdW5jdGlvbiBmb3IgZmxhdHRlbmluZyB0aGluZ3Mgb3V0IA0KSSBjYW4gcG9p
+bnQgcGVvcGxlIHRvIHdoaWNoIGRvZXMgdGhlIGpvYiBhbmQgd29ya3MgcmVsaWFibGUgaW4gYWxs
+IGNhc2VzLg0KDQpDaHJpc3RpYW4uDQoNCj4gLURhbmllbA0KPg0KPj4gLS0tDQo+PiAgIGRyaXZl
+cnMvZG1hLWJ1Zi9kbWEtZmVuY2UtdW53cmFwLmMgICAgfCAgOTUgKysrKysrKysrKysrKysrKysr
+KysNCj4+ICAgZHJpdmVycy9kbWEtYnVmL3N0LWRtYS1mZW5jZS11bndyYXAuYyB8ICA0NyArKysr
+KysrKysrDQo+PiAgIGRyaXZlcnMvZG1hLWJ1Zi9zeW5jX2ZpbGUuYyAgICAgICAgICAgfCAxMTkg
+KystLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4+ICAgaW5jbHVkZS9saW51eC9kbWEtZmVuY2Ut
+dW53cmFwLmggICAgICB8ICAyNCArKysrKysNCj4+ICAgNCBmaWxlcyBjaGFuZ2VkLCAxNzIgaW5z
+ZXJ0aW9ucygrKSwgMTEzIGRlbGV0aW9ucygtKQ0KPj4NCj4+IGRpZmYgLS1naXQgYS9kcml2ZXJz
+L2RtYS1idWYvZG1hLWZlbmNlLXVud3JhcC5jIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS11
+bndyYXAuYw0KPj4gaW5kZXggNzExYmUxMjU0MjhjLi5jOWJlY2M3NDg5NmQgMTAwNjQ0DQo+PiAt
+LS0gYS9kcml2ZXJzL2RtYS1idWYvZG1hLWZlbmNlLXVud3JhcC5jDQo+PiArKysgYi9kcml2ZXJz
+L2RtYS1idWYvZG1hLWZlbmNlLXVud3JhcC5jDQo+PiBAQCAtMTEsNiArMTEsNyBAQA0KPj4gICAj
+aW5jbHVkZSA8bGludXgvZG1hLWZlbmNlLWFycmF5Lmg+DQo+PiAgICNpbmNsdWRlIDxsaW51eC9k
+bWEtZmVuY2UtY2hhaW4uaD4NCj4+ICAgI2luY2x1ZGUgPGxpbnV4L2RtYS1mZW5jZS11bndyYXAu
+aD4NCj4+ICsjaW5jbHVkZSA8bGludXgvc2xhYi5oPg0KPj4gICANCj4+ICAgLyogSW50ZXJuYWwg
+aGVscGVyIHRvIHN0YXJ0IG5ldyBhcnJheSBpdGVyYXRpb24sIGRvbid0IHVzZSBkaXJlY3RseSAq
+Lw0KPj4gICBzdGF0aWMgc3RydWN0IGRtYV9mZW5jZSAqDQo+PiBAQCAtNTcsMyArNTgsOTcgQEAg
+c3RydWN0IGRtYV9mZW5jZSAqZG1hX2ZlbmNlX3Vud3JhcF9uZXh0KHN0cnVjdCBkbWFfZmVuY2Vf
+dW53cmFwICpjdXJzb3IpDQo+PiAgIAlyZXR1cm4gX19kbWFfZmVuY2VfdW53cmFwX2FycmF5KGN1
+cnNvcik7DQo+PiAgIH0NCj4+ICAgRVhQT1JUX1NZTUJPTF9HUEwoZG1hX2ZlbmNlX3Vud3JhcF9u
+ZXh0KTsNCj4+ICsNCj4+ICsvKiBJbXBsZW1lbnRhdGlvbiBmb3IgdGhlIGRtYV9mZW5jZV9tZXJn
+ZSgpIG1hcmNvLCBkb24ndCB1c2UgZGlyZWN0bHkgKi8NCj4+ICtzdHJ1Y3QgZG1hX2ZlbmNlICpf
+X2RtYV9mZW5jZV9tZXJnZSh1bnNpZ25lZCBpbnQgbnVtX2ZlbmNlcywNCj4+ICsJCQkJICAgIHN0
+cnVjdCBkbWFfZmVuY2UgKipmZW5jZXMsDQo+PiArCQkJCSAgICBzdHJ1Y3QgZG1hX2ZlbmNlX3Vu
+d3JhcCAqaXRlcikNCj4+ICt7DQo+PiArCXN0cnVjdCBkbWFfZmVuY2VfYXJyYXkgKnJlc3VsdDsN
+Cj4+ICsJc3RydWN0IGRtYV9mZW5jZSAqdG1wLCAqKmFycmF5Ow0KPj4gKwl1bnNpZ25lZCBpbnQg
+aSwgY291bnQ7DQo+PiArDQo+PiArCWNvdW50ID0gMDsNCj4+ICsJZm9yIChpID0gMDsgaSA8IG51
+bV9mZW5jZXM7ICsraSkgew0KPj4gKwkJZG1hX2ZlbmNlX3Vud3JhcF9mb3JfZWFjaCh0bXAsICZp
+dGVyW2ldLCBmZW5jZXNbaV0pDQo+PiArCQkJaWYgKCFkbWFfZmVuY2VfaXNfc2lnbmFsZWQodG1w
+KSkNCj4+ICsJCQkJKytjb3VudDsNCj4+ICsJfQ0KPj4gKw0KPj4gKwlpZiAoY291bnQgPT0gMCkN
+Cj4+ICsJCXJldHVybiBkbWFfZmVuY2VfZ2V0X3N0dWIoKTsNCj4+ICsNCj4+ICsJaWYgKGNvdW50
+ID4gSU5UX01BWCkNCj4+ICsJCXJldHVybiBOVUxMOw0KPj4gKw0KPj4gKwlhcnJheSA9IGttYWxs
+b2NfYXJyYXkoY291bnQsIHNpemVvZigqYXJyYXkpLCBHRlBfS0VSTkVMKTsNCj4+ICsJaWYgKCFh
+cnJheSkNCj4+ICsJCXJldHVybiBOVUxMOw0KPj4gKw0KPj4gKwkvKg0KPj4gKwkgKiBXZSBjYW4n
+dCBndWFyYW50ZWUgdGhhdCBpbnB1dGUgZmVuY2VzIGFyZSBvcmRlcmVkIGJ5IGNvbnRleHQsIGJ1
+dA0KPj4gKwkgKiBpdCBpcyBzdGlsbCBxdWl0ZSBsaWtlbHkgd2hlbiB0aGlzIGZ1bmN0aW9uIGlz
+IHVzZWQgbXVsdGlwbGUgdGltZXMuDQo+PiArCSAqIFNvIGF0dGVtcHQgdG8gb3JkZXIgdGhlIGZl
+bmNlcyBieSBjb250ZXh0IGFzIHdlIHBhc3Mgb3ZlciB0aGVtIGFuZA0KPj4gKwkgKiBtZXJnZSBm
+ZW5jZXMgd2l0aCB0aGUgc2FtZSBjb250ZXh0Lg0KPj4gKwkgKi8NCj4+ICsJZm9yIChpID0gMDsg
+aSA8IG51bV9mZW5jZXM7ICsraSkNCj4+ICsJCWZlbmNlc1tpXSA9IGRtYV9mZW5jZV91bndyYXBf
+Zmlyc3QoZmVuY2VzW2ldLCAmaXRlcltpXSk7DQo+PiArDQo+PiArCWNvdW50ID0gMDsNCj4+ICsJ
+ZG8gew0KPj4gKwkJdW5zaWduZWQgaW50IHNlbDsNCj4+ICsNCj4+ICtyZXN0YXJ0Og0KPj4gKwkJ
+dG1wID0gTlVMTDsNCj4+ICsJCWZvciAoaSA9IDA7IGkgPCBudW1fZmVuY2VzOyArK2kpIHsNCj4+
+ICsJCQlzdHJ1Y3QgZG1hX2ZlbmNlICpuZXh0ID0gZmVuY2VzW2ldOw0KPj4gKw0KPj4gKwkJCWlm
+ICghbmV4dCB8fCBkbWFfZmVuY2VfaXNfc2lnbmFsZWQobmV4dCkpDQo+PiArCQkJCWNvbnRpbnVl
+Ow0KPj4gKw0KPj4gKwkJCWlmICghdG1wIHx8IHRtcC0+Y29udGV4dCA+IG5leHQtPmNvbnRleHQp
+IHsNCj4+ICsJCQkJdG1wID0gbmV4dDsNCj4+ICsJCQkJc2VsID0gaTsNCj4+ICsNCj4+ICsJCQl9
+IGVsc2UgaWYgKHRtcC0+Y29udGV4dCA8IG5leHQtPmNvbnRleHQpIHsNCj4+ICsJCQkJY29udGlu
+dWU7DQo+PiArDQo+PiArCQkJfSBlbHNlIGlmIChkbWFfZmVuY2VfaXNfbGF0ZXIodG1wLCBuZXh0
+KSkgew0KPj4gKwkJCQlmZW5jZXNbaV0gPSBkbWFfZmVuY2VfdW53cmFwX25leHQoJml0ZXJbaV0p
+Ow0KPj4gKwkJCQlnb3RvIHJlc3RhcnQ7DQo+PiArCQkJfSBlbHNlIHsNCj4+ICsJCQkJZmVuY2Vz
+W3NlbF0gPSBkbWFfZmVuY2VfdW53cmFwX25leHQoJml0ZXJbc2VsXSk7DQo+PiArCQkJCWdvdG8g
+cmVzdGFydDsNCj4+ICsJCQl9DQo+PiArCQl9DQo+PiArDQo+PiArCQlpZiAodG1wKSB7DQo+PiAr
+CQkJYXJyYXlbY291bnQrK10gPSBkbWFfZmVuY2VfZ2V0KHRtcCk7DQo+PiArCQkJZmVuY2VzW3Nl
+bF0gPSBkbWFfZmVuY2VfdW53cmFwX25leHQoJml0ZXJbc2VsXSk7DQo+PiArCQl9DQo+PiArCX0g
+d2hpbGUgKHRtcCk7DQo+PiArDQo+PiArCWlmIChjb3VudCA9PSAwKSB7DQo+PiArCQl0bXAgPSBk
+bWFfZmVuY2VfZ2V0X3N0dWIoKTsNCj4+ICsJCWdvdG8gcmV0dXJuX3RtcDsNCj4+ICsJfQ0KPj4g
+Kw0KPj4gKwlpZiAoY291bnQgPT0gMSkgew0KPj4gKwkJdG1wID0gYXJyYXlbMF07DQo+PiArCQln
+b3RvIHJldHVybl90bXA7DQo+PiArCX0NCj4+ICsNCj4+ICsJcmVzdWx0ID0gZG1hX2ZlbmNlX2Fy
+cmF5X2NyZWF0ZShjb3VudCwgYXJyYXksDQo+PiArCQkJCQlkbWFfZmVuY2VfY29udGV4dF9hbGxv
+YygxKSwNCj4+ICsJCQkJCTEsIGZhbHNlKTsNCj4+ICsJaWYgKCFyZXN1bHQpIHsNCj4+ICsJCXRt
+cCA9IE5VTEw7DQo+PiArCQlnb3RvIHJldHVybl90bXA7DQo+PiArCX0NCj4+ICsJcmV0dXJuICZy
+ZXN1bHQtPmJhc2U7DQo+PiArDQo+PiArcmV0dXJuX3RtcDoNCj4+ICsJa2ZyZWUoYXJyYXkpOw0K
+Pj4gKwlyZXR1cm4gdG1wOw0KPj4gK30NCj4+ICtFWFBPUlRfU1lNQk9MX0dQTChfX2RtYV9mZW5j
+ZV9tZXJnZSk7DQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL3N0LWRtYS1mZW5jZS11
+bndyYXAuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9zdC1kbWEtZmVuY2UtdW53cmFwLmMNCj4+IGluZGV4
+IDU5NjI4YWRkOTNmNS4uMjNhYjEzNDQxN2VkIDEwMDY0NA0KPj4gLS0tIGEvZHJpdmVycy9kbWEt
+YnVmL3N0LWRtYS1mZW5jZS11bndyYXAuYw0KPj4gKysrIGIvZHJpdmVycy9kbWEtYnVmL3N0LWRt
+YS1mZW5jZS11bndyYXAuYw0KPj4gQEAgLTI0MCw2ICsyNDAsNTIgQEAgc3RhdGljIGludCB1bndy
+YXBfY2hhaW5fYXJyYXkodm9pZCAqYXJnKQ0KPj4gICAJcmV0dXJuIGVycjsNCj4+ICAgfQ0KPj4g
+ICANCj4+ICtzdGF0aWMgaW50IHVud3JhcF9tZXJnZSh2b2lkICphcmcpDQo+PiArew0KPj4gKwlz
+dHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSwgKmYxLCAqZjIsICpmMzsNCj4+ICsJc3RydWN0IGRtYV9m
+ZW5jZV91bndyYXAgaXRlcjsNCj4+ICsJaW50IGVyciA9IDA7DQo+PiArDQo+PiArCWYxID0gbW9j
+a19mZW5jZSgpOw0KPj4gKwlpZiAoIWYxKQ0KPj4gKwkJcmV0dXJuIC1FTk9NRU07DQo+PiArDQo+
+PiArCWYyID0gbW9ja19mZW5jZSgpOw0KPj4gKwlpZiAoIWYyKSB7DQo+PiArCQllcnIgPSAtRU5P
+TUVNOw0KPj4gKwkJZ290byBlcnJvcl9wdXRfZjE7DQo+PiArCX0NCj4+ICsNCj4+ICsJZjMgPSBk
+bWFfZmVuY2VfbWVyZ2UoZjEsIGYyKTsNCj4+ICsJaWYgKCFmMykgew0KPj4gKwkJZXJyID0gLUVO
+T01FTTsNCj4+ICsJCWdvdG8gZXJyb3JfcHV0X2YyOw0KPj4gKwl9DQo+PiArDQo+PiArCWRtYV9m
+ZW5jZV91bndyYXBfZm9yX2VhY2goZmVuY2UsICZpdGVyLCBmMykgew0KPj4gKwkJaWYgKGZlbmNl
+ID09IGYxKSB7DQo+PiArCQkJZjEgPSBOVUxMOw0KPj4gKwkJfSBlbHNlIGlmIChmZW5jZSA9PSBm
+Mikgew0KPj4gKwkJCWYyID0gTlVMTDsNCj4+ICsJCX0gZWxzZSB7DQo+PiArCQkJcHJfZXJyKCJV
+bmV4cGVjdGVkIGZlbmNlIVxuIik7DQo+PiArCQkJZXJyID0gLUVJTlZBTDsNCj4+ICsJCX0NCj4+
+ICsJfQ0KPj4gKw0KPj4gKwlpZiAoZjEgfHwgZjIpIHsNCj4+ICsJCXByX2VycigiTm90IGFsbCBm
+ZW5jZXMgc2VlbiFcbiIpOw0KPj4gKwkJZXJyID0gLUVJTlZBTDsNCj4+ICsJfQ0KPj4gKw0KPj4g
+KwlkbWFfZmVuY2VfcHV0KGYzKTsNCj4+ICtlcnJvcl9wdXRfZjI6DQo+PiArCWRtYV9mZW5jZV9w
+dXQoZjIpOw0KPj4gK2Vycm9yX3B1dF9mMToNCj4+ICsJZG1hX2ZlbmNlX3B1dChmMSk7DQo+PiAr
+CXJldHVybiBlcnI7DQo+PiArfQ0KPj4gKw0KPj4gICBpbnQgZG1hX2ZlbmNlX3Vud3JhcCh2b2lk
+KQ0KPj4gICB7DQo+PiAgIAlzdGF0aWMgY29uc3Qgc3RydWN0IHN1YnRlc3QgdGVzdHNbXSA9IHsN
+Cj4+IEBAIC0yNDcsNiArMjkzLDcgQEAgaW50IGRtYV9mZW5jZV91bndyYXAodm9pZCkNCj4+ICAg
+CQlTVUJURVNUKHVud3JhcF9hcnJheSksDQo+PiAgIAkJU1VCVEVTVCh1bndyYXBfY2hhaW4pLA0K
+Pj4gICAJCVNVQlRFU1QodW53cmFwX2NoYWluX2FycmF5KSwNCj4+ICsJCVNVQlRFU1QodW53cmFw
+X21lcmdlKSwNCj4+ICAgCX07DQo+PiAgIA0KPj4gICAJcmV0dXJuIHN1YnRlc3RzKHRlc3RzLCBO
+VUxMKTsNCj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvc3luY19maWxlLmMgYi9kcml2
+ZXJzL2RtYS1idWYvc3luY19maWxlLmMNCj4+IGluZGV4IDBmZTU2NDUzOTE2Ni4uZmUxNDlkN2Uz
+Y2UyIDEwMDY0NA0KPj4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL3N5bmNfZmlsZS5jDQo+PiArKysg
+Yi9kcml2ZXJzL2RtYS1idWYvc3luY19maWxlLmMNCj4+IEBAIC0xNDYsNTAgKzE0Niw2IEBAIGNo
+YXIgKnN5bmNfZmlsZV9nZXRfbmFtZShzdHJ1Y3Qgc3luY19maWxlICpzeW5jX2ZpbGUsIGNoYXIg
+KmJ1ZiwgaW50IGxlbikNCj4+ICAgCXJldHVybiBidWY7DQo+PiAgIH0NCj4+ICAgDQo+PiAtc3Rh
+dGljIGludCBzeW5jX2ZpbGVfc2V0X2ZlbmNlKHN0cnVjdCBzeW5jX2ZpbGUgKnN5bmNfZmlsZSwN
+Cj4+IC0JCQkgICAgICAgc3RydWN0IGRtYV9mZW5jZSAqKmZlbmNlcywgaW50IG51bV9mZW5jZXMp
+DQo+PiAtew0KPj4gLQlzdHJ1Y3QgZG1hX2ZlbmNlX2FycmF5ICphcnJheTsNCj4+IC0NCj4+IC0J
+LyoNCj4+IC0JICogVGhlIHJlZmVyZW5jZSBmb3IgdGhlIGZlbmNlcyBpbiB0aGUgbmV3IHN5bmNf
+ZmlsZSBhbmQgaGVsZA0KPj4gLQkgKiBpbiBhZGRfZmVuY2UoKSBkdXJpbmcgdGhlIG1lcmdlIHBy
+b2NlZHVyZSwgc28gZm9yIG51bV9mZW5jZXMgPT0gMQ0KPj4gLQkgKiB3ZSBhbHJlYWR5IG93biBh
+IG5ldyByZWZlcmVuY2UgdG8gdGhlIGZlbmNlLiBGb3IgbnVtX2ZlbmNlID4gMQ0KPj4gLQkgKiB3
+ZSBvd24gdGhlIHJlZmVyZW5jZSBvZiB0aGUgZG1hX2ZlbmNlX2FycmF5IGNyZWF0aW9uLg0KPj4g
+LQkgKi8NCj4+IC0NCj4+IC0JaWYgKG51bV9mZW5jZXMgPT0gMCkgew0KPj4gLQkJc3luY19maWxl
+LT5mZW5jZSA9IGRtYV9mZW5jZV9nZXRfc3R1YigpOw0KPj4gLQkJa2ZyZWUoZmVuY2VzKTsNCj4+
+IC0NCj4+IC0JfSBlbHNlIGlmIChudW1fZmVuY2VzID09IDEpIHsNCj4+IC0JCXN5bmNfZmlsZS0+
+ZmVuY2UgPSBmZW5jZXNbMF07DQo+PiAtCQlrZnJlZShmZW5jZXMpOw0KPj4gLQ0KPj4gLQl9IGVs
+c2Ugew0KPj4gLQkJYXJyYXkgPSBkbWFfZmVuY2VfYXJyYXlfY3JlYXRlKG51bV9mZW5jZXMsIGZl
+bmNlcywNCj4+IC0JCQkJCSAgICAgICBkbWFfZmVuY2VfY29udGV4dF9hbGxvYygxKSwNCj4+IC0J
+CQkJCSAgICAgICAxLCBmYWxzZSk7DQo+PiAtCQlpZiAoIWFycmF5KQ0KPj4gLQkJCXJldHVybiAt
+RU5PTUVNOw0KPj4gLQ0KPj4gLQkJc3luY19maWxlLT5mZW5jZSA9ICZhcnJheS0+YmFzZTsNCj4+
+IC0JfQ0KPj4gLQ0KPj4gLQlyZXR1cm4gMDsNCj4+IC19DQo+PiAtDQo+PiAtc3RhdGljIHZvaWQg
+YWRkX2ZlbmNlKHN0cnVjdCBkbWFfZmVuY2UgKipmZW5jZXMsDQo+PiAtCQkgICAgICBpbnQgKmks
+IHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlKQ0KPj4gLXsNCj4+IC0JZmVuY2VzWyppXSA9IGZlbmNl
+Ow0KPj4gLQ0KPj4gLQlpZiAoIWRtYV9mZW5jZV9pc19zaWduYWxlZChmZW5jZSkpIHsNCj4+IC0J
+CWRtYV9mZW5jZV9nZXQoZmVuY2UpOw0KPj4gLQkJKCppKSsrOw0KPj4gLQl9DQo+PiAtfQ0KPj4g
+LQ0KPj4gICAvKioNCj4+ICAgICogc3luY19maWxlX21lcmdlKCkgLSBtZXJnZSB0d28gc3luY19m
+aWxlcw0KPj4gICAgKiBAbmFtZToJbmFtZSBvZiBuZXcgZmVuY2UNCj4+IEBAIC0yMDMsODQgKzE1
+OSwyMSBAQCBzdGF0aWMgdm9pZCBhZGRfZmVuY2Uoc3RydWN0IGRtYV9mZW5jZSAqKmZlbmNlcywN
+Cj4+ICAgc3RhdGljIHN0cnVjdCBzeW5jX2ZpbGUgKnN5bmNfZmlsZV9tZXJnZShjb25zdCBjaGFy
+ICpuYW1lLCBzdHJ1Y3Qgc3luY19maWxlICphLA0KPj4gICAJCQkJCSBzdHJ1Y3Qgc3luY19maWxl
+ICpiKQ0KPj4gICB7DQo+PiAtCXN0cnVjdCBkbWFfZmVuY2UgKmFfZmVuY2UsICpiX2ZlbmNlLCAq
+KmZlbmNlczsNCj4+IC0Jc3RydWN0IGRtYV9mZW5jZV91bndyYXAgYV9pdGVyLCBiX2l0ZXI7DQo+
+PiAtCXVuc2lnbmVkIGludCBpbmRleCwgbnVtX2ZlbmNlczsNCj4+ICAgCXN0cnVjdCBzeW5jX2Zp
+bGUgKnN5bmNfZmlsZTsNCj4+ICsJc3RydWN0IGRtYV9mZW5jZSAqZmVuY2U7DQo+PiAgIA0KPj4g
+ICAJc3luY19maWxlID0gc3luY19maWxlX2FsbG9jKCk7DQo+PiAgIAlpZiAoIXN5bmNfZmlsZSkN
+Cj4+ICAgCQlyZXR1cm4gTlVMTDsNCj4+ICAgDQo+PiAtCW51bV9mZW5jZXMgPSAwOw0KPj4gLQlk
+bWFfZmVuY2VfdW53cmFwX2Zvcl9lYWNoKGFfZmVuY2UsICZhX2l0ZXIsIGEtPmZlbmNlKQ0KPj4g
+LQkJKytudW1fZmVuY2VzOw0KPj4gLQlkbWFfZmVuY2VfdW53cmFwX2Zvcl9lYWNoKGJfZmVuY2Us
+ICZiX2l0ZXIsIGItPmZlbmNlKQ0KPj4gLQkJKytudW1fZmVuY2VzOw0KPj4gLQ0KPj4gLQlpZiAo
+bnVtX2ZlbmNlcyA+IElOVF9NQVgpDQo+PiAtCQlnb3RvIGVycl9mcmVlX3N5bmNfZmlsZTsNCj4+
+IC0NCj4+IC0JZmVuY2VzID0ga2NhbGxvYyhudW1fZmVuY2VzLCBzaXplb2YoKmZlbmNlcyksIEdG
+UF9LRVJORUwpOw0KPj4gLQlpZiAoIWZlbmNlcykNCj4+IC0JCWdvdG8gZXJyX2ZyZWVfc3luY19m
+aWxlOw0KPj4gLQ0KPj4gLQkvKg0KPj4gLQkgKiBXZSBjYW4ndCBndWFyYW50ZWUgdGhhdCBmZW5j
+ZXMgaW4gYm90aCBhIGFuZCBiIGFyZSBvcmRlcmVkLCBidXQgaXQgaXMNCj4+IC0JICogc3RpbGwg
+cXVpdGUgbGlrZWx5Lg0KPj4gLQkgKg0KPj4gLQkgKiBTbyBhdHRlbXB0IHRvIG9yZGVyIHRoZSBm
+ZW5jZXMgYXMgd2UgcGFzcyBvdmVyIHRoZW0gYW5kIG1lcmdlIGZlbmNlcw0KPj4gLQkgKiB3aXRo
+IHRoZSBzYW1lIGNvbnRleHQuDQo+PiAtCSAqLw0KPj4gLQ0KPj4gLQlpbmRleCA9IDA7DQo+PiAt
+CWZvciAoYV9mZW5jZSA9IGRtYV9mZW5jZV91bndyYXBfZmlyc3QoYS0+ZmVuY2UsICZhX2l0ZXIp
+LA0KPj4gLQkgICAgIGJfZmVuY2UgPSBkbWFfZmVuY2VfdW53cmFwX2ZpcnN0KGItPmZlbmNlLCAm
+Yl9pdGVyKTsNCj4+IC0JICAgICBhX2ZlbmNlIHx8IGJfZmVuY2U7ICkgew0KPj4gLQ0KPj4gLQkJ
+aWYgKCFiX2ZlbmNlKSB7DQo+PiAtCQkJYWRkX2ZlbmNlKGZlbmNlcywgJmluZGV4LCBhX2ZlbmNl
+KTsNCj4+IC0JCQlhX2ZlbmNlID0gZG1hX2ZlbmNlX3Vud3JhcF9uZXh0KCZhX2l0ZXIpOw0KPj4g
+LQ0KPj4gLQkJfSBlbHNlIGlmICghYV9mZW5jZSkgew0KPj4gLQkJCWFkZF9mZW5jZShmZW5jZXMs
+ICZpbmRleCwgYl9mZW5jZSk7DQo+PiAtCQkJYl9mZW5jZSA9IGRtYV9mZW5jZV91bndyYXBfbmV4
+dCgmYl9pdGVyKTsNCj4+IC0NCj4+IC0JCX0gZWxzZSBpZiAoYV9mZW5jZS0+Y29udGV4dCA8IGJf
+ZmVuY2UtPmNvbnRleHQpIHsNCj4+IC0JCQlhZGRfZmVuY2UoZmVuY2VzLCAmaW5kZXgsIGFfZmVu
+Y2UpOw0KPj4gLQkJCWFfZmVuY2UgPSBkbWFfZmVuY2VfdW53cmFwX25leHQoJmFfaXRlcik7DQo+
+PiAtDQo+PiAtCQl9IGVsc2UgaWYgKGJfZmVuY2UtPmNvbnRleHQgPCBhX2ZlbmNlLT5jb250ZXh0
+KSB7DQo+PiAtCQkJYWRkX2ZlbmNlKGZlbmNlcywgJmluZGV4LCBiX2ZlbmNlKTsNCj4+IC0JCQli
+X2ZlbmNlID0gZG1hX2ZlbmNlX3Vud3JhcF9uZXh0KCZiX2l0ZXIpOw0KPj4gLQ0KPj4gLQkJfSBl
+bHNlIGlmIChfX2RtYV9mZW5jZV9pc19sYXRlcihhX2ZlbmNlLT5zZXFubywgYl9mZW5jZS0+c2Vx
+bm8sDQo+PiAtCQkJCQkJYV9mZW5jZS0+b3BzKSkgew0KPj4gLQkJCWFkZF9mZW5jZShmZW5jZXMs
+ICZpbmRleCwgYV9mZW5jZSk7DQo+PiAtCQkJYV9mZW5jZSA9IGRtYV9mZW5jZV91bndyYXBfbmV4
+dCgmYV9pdGVyKTsNCj4+IC0JCQliX2ZlbmNlID0gZG1hX2ZlbmNlX3Vud3JhcF9uZXh0KCZiX2l0
+ZXIpOw0KPj4gLQ0KPj4gLQkJfSBlbHNlIHsNCj4+IC0JCQlhZGRfZmVuY2UoZmVuY2VzLCAmaW5k
+ZXgsIGJfZmVuY2UpOw0KPj4gLQkJCWFfZmVuY2UgPSBkbWFfZmVuY2VfdW53cmFwX25leHQoJmFf
+aXRlcik7DQo+PiAtCQkJYl9mZW5jZSA9IGRtYV9mZW5jZV91bndyYXBfbmV4dCgmYl9pdGVyKTsN
+Cj4+IC0JCX0NCj4+ICsJZmVuY2UgPSBkbWFfZmVuY2VfbWVyZ2UoYS0+ZmVuY2UsIGItPmZlbmNl
+KTsNCj4+ICsJaWYgKCFmZW5jZSkgew0KPj4gKwkJZnB1dChzeW5jX2ZpbGUtPmZpbGUpOw0KPj4g
+KwkJcmV0dXJuIE5VTEw7DQo+PiAgIAl9DQo+PiAtDQo+PiAtCWlmIChzeW5jX2ZpbGVfc2V0X2Zl
+bmNlKHN5bmNfZmlsZSwgZmVuY2VzLCBpbmRleCkgPCAwKQ0KPj4gLQkJZ290byBlcnJfcHV0X2Zl
+bmNlczsNCj4+IC0NCj4+ICsJc3luY19maWxlLT5mZW5jZSA9IGZlbmNlOw0KPj4gICAJc3RybGNw
+eShzeW5jX2ZpbGUtPnVzZXJfbmFtZSwgbmFtZSwgc2l6ZW9mKHN5bmNfZmlsZS0+dXNlcl9uYW1l
+KSk7DQo+PiAgIAlyZXR1cm4gc3luY19maWxlOw0KPj4gLQ0KPj4gLWVycl9wdXRfZmVuY2VzOg0K
+Pj4gLQl3aGlsZSAoaW5kZXgpDQo+PiAtCQlkbWFfZmVuY2VfcHV0KGZlbmNlc1stLWluZGV4XSk7
+DQo+PiAtCWtmcmVlKGZlbmNlcyk7DQo+PiAtDQo+PiAtZXJyX2ZyZWVfc3luY19maWxlOg0KPj4g
+LQlmcHV0KHN5bmNfZmlsZS0+ZmlsZSk7DQo+PiAtCXJldHVybiBOVUxMOw0KPj4gICB9DQo+PiAg
+IA0KPj4gICBzdGF0aWMgaW50IHN5bmNfZmlsZV9yZWxlYXNlKHN0cnVjdCBpbm9kZSAqaW5vZGUs
+IHN0cnVjdCBmaWxlICpmaWxlKQ0KPj4gZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvZG1hLWZl
+bmNlLXVud3JhcC5oIGIvaW5jbHVkZS9saW51eC9kbWEtZmVuY2UtdW53cmFwLmgNCj4+IGluZGV4
+IGU3YzIxOWRhNGVkNy4uN2MwZmFiMzE4MzAxIDEwMDY0NA0KPj4gLS0tIGEvaW5jbHVkZS9saW51
+eC9kbWEtZmVuY2UtdW53cmFwLmgNCj4+ICsrKyBiL2luY2x1ZGUvbGludXgvZG1hLWZlbmNlLXVu
+d3JhcC5oDQo+PiBAQCAtNDgsNCArNDgsMjggQEAgc3RydWN0IGRtYV9mZW5jZSAqZG1hX2ZlbmNl
+X3Vud3JhcF9uZXh0KHN0cnVjdCBkbWFfZmVuY2VfdW53cmFwICpjdXJzb3IpOw0KPj4gICAJZm9y
+IChmZW5jZSA9IGRtYV9mZW5jZV91bndyYXBfZmlyc3QoaGVhZCwgY3Vyc29yKTsgZmVuY2U7CVwN
+Cj4+ICAgCSAgICAgZmVuY2UgPSBkbWFfZmVuY2VfdW53cmFwX25leHQoY3Vyc29yKSkNCj4+ICAg
+DQo+PiArc3RydWN0IGRtYV9mZW5jZSAqX19kbWFfZmVuY2VfbWVyZ2UodW5zaWduZWQgaW50IG51
+bV9mZW5jZXMsDQo+PiArCQkJCSAgICBzdHJ1Y3QgZG1hX2ZlbmNlICoqZmVuY2VzLA0KPj4gKwkJ
+CQkgICAgc3RydWN0IGRtYV9mZW5jZV91bndyYXAgKmN1cnNvcnMpOw0KPj4gKw0KPj4gKy8qKg0K
+Pj4gKyAqIGRtYV9mZW5jZV9tZXJnZSAtIHVud3JhcCBhbmQgbWVyZ2UgZmVuY2VzDQo+PiArICoN
+Cj4+ICsgKiBBbGwgZmVuY2VzIGdpdmVuIGFzIHBhcmFtZXRlcnMgYXJlIHVud3JhcHBlZCBhbmQg
+bWVyZ2VkIGJhY2sgdG9nZXRoZXIgYXMgZmxhdA0KPj4gKyAqIGRtYV9mZW5jZV9hcnJheS4gVXNl
+ZnVsIGlmIG11bHRpcGxlIGNvbnRhaW5lcnMgbmVlZCB0byBiZSBtZXJnZWQgdG9nZXRoZXIuDQo+
+PiArICoNCj4+ICsgKiBJbXBsZW1lbnRlZCBhcyBhIG1hY3JvIHRvIGFsbG9jYXRlIHRoZSBuZWNl
+c3NhcnkgYXJyYXlzIG9uIHRoZSBzdGFjayBhbmQNCj4+ICsgKiBhY2NvdW50IHRoZSBzdGFjayBm
+cmFtZSBzaXplIHRvIHRoZSBjYWxsZXIuDQo+PiArICoNCj4+ICsgKiBSZXR1cm5zIE5VTEwgb24g
+bWVtb3J5IGFsbG9jYXRpb24gZmFpbHVyZSwgYSBkbWFfZmVuY2Ugb2JqZWN0IHJlcHJlc2VudGlu
+Zw0KPj4gKyAqIGFsbCB0aGUgZ2l2ZW4gZmVuY2VzIG90aGVyd2lzZS4NCj4+ICsgKi8NCj4+ICsj
+ZGVmaW5lIGRtYV9mZW5jZV9tZXJnZSguLi4pCQkJCQlcDQo+PiArCSh7CQkJCQkJCVwNCj4+ICsJ
+CXN0cnVjdCBkbWFfZmVuY2UgKl9fZltdID0geyBfX1ZBX0FSR1NfXyB9OwlcDQo+PiArCQlzdHJ1
+Y3QgZG1hX2ZlbmNlX3Vud3JhcCBfX2NbQVJSQVlfU0laRShfX2YpXTsJXA0KPj4gKwkJCQkJCQkJ
+XA0KPj4gKwkJX19kbWFfZmVuY2VfbWVyZ2UoQVJSQVlfU0laRShfX2YpLCBfX2YsIF9fYyk7CVwN
+Cj4+ICsJfSkNCj4+ICsNCj4+ICAgI2VuZGlmDQo+PiAtLSANCj4+IDIuMjUuMQ0KPj4NCg0KX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNp
+ZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vi
+c2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8u
+b3JnCg==
