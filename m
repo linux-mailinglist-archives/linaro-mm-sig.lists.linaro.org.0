@@ -2,65 +2,66 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6049351C0B3
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 May 2022 15:29:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8687951C124
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 May 2022 15:44:45 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3353248099
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 May 2022 13:29:28 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
-	by lists.linaro.org (Postfix) with ESMTPS id ADC4747FAE
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 May 2022 13:29:22 +0000 (UTC)
-Received: by mail-ej1-f48.google.com with SMTP id i19so8725429eja.11
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 05 May 2022 06:29:22 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 99B8048077
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 May 2022 13:44:44 +0000 (UTC)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+	by lists.linaro.org (Postfix) with ESMTPS id AEB5C3EEEE
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 May 2022 13:44:39 +0000 (UTC)
+Received: by mail-ed1-f52.google.com with SMTP id a1so5271470edt.3
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 05 May 2022 06:44:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ffwll.ch; s=google;
         h=date:from:to:cc:subject:message-id:references:mime-version
          :content-disposition:content-transfer-encoding:in-reply-to;
-        bh=Ui21piTZ0ApfGLe6rSNYF+vmLdIPcNpHB647yaNJAEA=;
-        b=GUYSMOZfibAtHewRxv7NXvJfooeNyLie4/C/2WhzfE1nZb66wcOaxp+lICUXVBORYe
-         topja/IRIvJeuJTYG3rs0ab7/us7cJ5gwWYgW2ms4wIGyHjiP1g79yloC/utlJWo6cW/
-         kBpNUgOtkT4bJPg5gjRorgiC9a2Opu0cDeSQw=
+        bh=v+VSD0WXo/Ce0B1o6X0LvfKWoHTwZAqIOF5ploz5VzI=;
+        b=hcDBBRRg5QPUwNBDCVYWy3H3fwcNY2LRCyqjB9RiCyGRIGk41LYlaL4EIPxM15kXG9
+         Ht+YCERZhkJZk05AujCIFm2HPIO73F+Qvp7oTr7sAtF8NImxhWwCMzcgQ3uvro4IUxUt
+         FhORcgexsj4z8+VB8HRfdAUiwMukLeMt+NWvw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:date:from:to:cc:subject:message-id:references
          :mime-version:content-disposition:content-transfer-encoding
          :in-reply-to;
-        bh=Ui21piTZ0ApfGLe6rSNYF+vmLdIPcNpHB647yaNJAEA=;
-        b=hcy+9ElkWkYipJvl1QrhosuYVhQJZVEsHjVBnTXT4OpGcFtcSrfC77OM13aBaz4W+a
-         ZPqcYMp//+y1hCXx/cr7u1Nnr//GvgSzwk3nu9vSy/EQi5uyBdJUKPLmGSj7hAe618Kq
-         ShmExdGuVVcrZIa6O5GcTeNu/BcpViIEqWQ4BufOkqQNCP7iwgQDNGF809abcdCt3lwl
-         qhsHPjfFtnM423McB9phR6Y6fZjEh+6gGwzMPqfUBPKm66nkGFS654cYeODbVrFSVq27
-         ffP7xW8YoPOK3CMe/ghQwELks1QrE2sy5a4N6ownjMOekCH4ceTJJs3IEVOgIvbtJQtp
-         33mg==
-X-Gm-Message-State: AOAM532ydEuimpXT+xL2jXXu6QLJeiVPe+ylKKlMx+LDQXNQKFA44fUg
-	p2oEyg4wp7S9QXjuRCnKF9OhvA==
-X-Google-Smtp-Source: ABdhPJwRHjykKqfmXvKBcfez+gqf/TcR5Uph1IH55dlRwflfrsGd9ZGWVMc2tb/Xq5lMPmwUta9buA==
-X-Received: by 2002:a17:907:7282:b0:6ef:f412:f7c4 with SMTP id dt2-20020a170907728200b006eff412f7c4mr25973036ejc.258.1651757361694;
-        Thu, 05 May 2022 06:29:21 -0700 (PDT)
+        bh=v+VSD0WXo/Ce0B1o6X0LvfKWoHTwZAqIOF5ploz5VzI=;
+        b=utwSYX6dZVlPSLnS+ZIGKI/PhCdG1ODuQ/1PfBT1DUH4vV8q3wbGRqPgC7M0PJ8Pyc
+         hkKvp7zvIfuRuCJOBFIkVs2X7s+4QXDunKRD8RYW9Ah3vJ/lnRtXwnQOBNmYBjVfpGPi
+         Z38PEjbVdxACrmOXIazVqgS1pD8EDthQlYggLUMv79dm5bTULPl2CVAXLjRt1M1lmBqm
+         oq08j+9j3wNtf0mN5AY0FN0797OcW32gdguuaqPjLb5ZoEXZ7BfSO9I0EhIvpUDD/ZND
+         CWYDmHFQPxjI+kWpnFDxMrYC894N+UTt5OJAGMXfkL0oB65x5O8yudWLVgb1vjFtXsUp
+         FSVQ==
+X-Gm-Message-State: AOAM532xclZ6zBLHXaTL9ZjVlAeOEsLlsZWWZwM6IEFPWcAXVmqXyTQz
+	QAiga73FjfwSX4oTm8yPt1T8VQ==
+X-Google-Smtp-Source: ABdhPJyP8cx9126bFIpJibfyv7g6n69rpQabIp4uwZs2KOxqVhMhAZvxNhO7n/FoNKidpmAN7rtpbA==
+X-Received: by 2002:a05:6402:cb6:b0:425:f2e0:3644 with SMTP id cn22-20020a0564020cb600b00425f2e03644mr29618286edb.301.1651758278650;
+        Thu, 05 May 2022 06:44:38 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id l10-20020a170906938a00b006f3ef214e68sm770067ejx.206.2022.05.05.06.29.20
+        by smtp.gmail.com with ESMTPSA id q22-20020a1709066ad600b006f3ef214dcbsm780909ejs.49.2022.05.05.06.44.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 May 2022 06:29:21 -0700 (PDT)
-Date: Thu, 5 May 2022 15:29:19 +0200
+        Thu, 05 May 2022 06:44:38 -0700 (PDT)
+Date: Thu, 5 May 2022 15:44:36 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <YnPRL7ndeh9z01mW@phenom.ffwll.local>
+Message-ID: <YnPUxGO3HfeDAf1B@phenom.ffwll.local>
 References: <20220504122256.1654-1-christian.koenig@amd.com>
+ <20220504122256.1654-2-christian.koenig@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220504122256.1654-1-christian.koenig@amd.com>
+In-Reply-To: <20220504122256.1654-2-christian.koenig@amd.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Message-ID-Hash: Q7ZRWIMCMSOCZJO5QU6P6RDRGYNOSEIP
-X-Message-ID-Hash: Q7ZRWIMCMSOCZJO5QU6P6RDRGYNOSEIP
+Message-ID-Hash: FCZACDZ7IZ45BLHAEEPX4ABDCHA2M2UM
+X-Message-ID-Hash: FCZACDZ7IZ45BLHAEEPX4ABDCHA2M2UM
 X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: daniel@ffwll.ch, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/5] dma-buf: cleanup dma_fence_unwrap selftest
+Subject: [Linaro-mm-sig] Re: [PATCH 2/5] dma-buf: cleanup dma_fence_unwrap implementation
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Q7ZRWIMCMSOCZJO5QU6P6RDRGYNOSEIP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FCZACDZ7IZ45BLHAEEPX4ABDCHA2M2UM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -70,123 +71,182 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 04, 2022 at 02:22:52PM +0200, Christian K=F6nig wrote:
-> The selftests, fix the error handling, remove unused functions and stop
-> leaking memory in failed tests.
+On Wed, May 04, 2022 at 02:22:53PM +0200, Christian K=F6nig wrote:
+> Move the code from the inline functions into exported functions.
 >=20
 > Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+
+Didn't check you didn't slip in a typo or so :-)
+
+Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+
 > ---
->  drivers/dma-buf/st-dma-fence-unwrap.c | 40 +++++++++++----------------
->  1 file changed, 16 insertions(+), 24 deletions(-)
+>  drivers/dma-buf/Makefile           |  2 +-
+>  drivers/dma-buf/dma-fence-unwrap.c | 59 ++++++++++++++++++++++++++++++
+>  include/linux/dma-fence-unwrap.h   | 52 ++------------------------
+>  3 files changed, 64 insertions(+), 49 deletions(-)
+>  create mode 100644 drivers/dma-buf/dma-fence-unwrap.c
 >=20
-> diff --git a/drivers/dma-buf/st-dma-fence-unwrap.c b/drivers/dma-buf/st-d=
-ma-fence-unwrap.c
-> index 039f016b57be..59628add93f5 100644
-> --- a/drivers/dma-buf/st-dma-fence-unwrap.c
-> +++ b/drivers/dma-buf/st-dma-fence-unwrap.c
-> @@ -4,27 +4,19 @@
->   * Copyright (C) 2022 Advanced Micro Devices, Inc.
->   */
-> =20
+> diff --git a/drivers/dma-buf/Makefile b/drivers/dma-buf/Makefile
+> index 4c9eb53ba3f8..70ec901edf2c 100644
+> --- a/drivers/dma-buf/Makefile
+> +++ b/drivers/dma-buf/Makefile
+> @@ -1,6 +1,6 @@
+>  # SPDX-License-Identifier: GPL-2.0-only
+>  obj-y :=3D dma-buf.o dma-fence.o dma-fence-array.o dma-fence-chain.o \
+> -	 dma-resv.o
+> +	 dma-fence-unwrap.o dma-resv.o
+>  obj-$(CONFIG_DMABUF_HEAPS)	+=3D dma-heap.o
+>  obj-$(CONFIG_DMABUF_HEAPS)	+=3D heaps/
+>  obj-$(CONFIG_SYNC_FILE)		+=3D sync_file.o
+> diff --git a/drivers/dma-buf/dma-fence-unwrap.c b/drivers/dma-buf/dma-fen=
+ce-unwrap.c
+> new file mode 100644
+> index 000000000000..711be125428c
+> --- /dev/null
+> +++ b/drivers/dma-buf/dma-fence-unwrap.c
+> @@ -0,0 +1,59 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * dma-fence-util: misc functions for dma_fence objects
+> + *
+> + * Copyright (C) 2022 Advanced Micro Devices, Inc.
+> + * Authors:
+> + *	Christian K=F6nig <christian.koenig@amd.com>
+> + */
+> +
 > +#include <linux/dma-fence.h>
 > +#include <linux/dma-fence-array.h>
 > +#include <linux/dma-fence-chain.h>
->  #include <linux/dma-fence-unwrap.h>
-> -#if 0
-> -#include <linux/kernel.h>
-> -#include <linux/kthread.h>
-> -#include <linux/mm.h>
-> -#include <linux/sched/signal.h>
-> -#include <linux/slab.h>
-> -#include <linux/spinlock.h>
-> -#include <linux/random.h>
-> -#endif
+> +#include <linux/dma-fence-unwrap.h>
+> +
+> +/* Internal helper to start new array iteration, don't use directly */
+> +static struct dma_fence *
+> +__dma_fence_unwrap_array(struct dma_fence_unwrap *cursor)
+> +{
+> +	cursor->array =3D dma_fence_chain_contained(cursor->chain);
+> +	cursor->index =3D 0;
+> +	return dma_fence_array_first(cursor->array);
+> +}
+> +
+> +/**
+> + * dma_fence_unwrap_first - return the first fence from fence containers
+> + * @head: the entrypoint into the containers
+> + * @cursor: current position inside the containers
+> + *
+> + * Unwraps potential dma_fence_chain/dma_fence_array containers and retu=
+rn the
+> + * first fence.
+> + */
+> +struct dma_fence *dma_fence_unwrap_first(struct dma_fence *head,
+> +					 struct dma_fence_unwrap *cursor)
+> +{
+> +	cursor->chain =3D dma_fence_get(head);
+> +	return __dma_fence_unwrap_array(cursor);
+> +}
+> +EXPORT_SYMBOL_GPL(dma_fence_unwrap_first);
+> +
+> +/**
+> + * dma_fence_unwrap_next - return the next fence from a fence containers
+> + * @cursor: current position inside the containers
+> + *
+> + * Continue unwrapping the dma_fence_chain/dma_fence_array containers an=
+d return
+> + * the next fence from them.
+> + */
+> +struct dma_fence *dma_fence_unwrap_next(struct dma_fence_unwrap *cursor)
+> +{
+> +	struct dma_fence *tmp;
+> +
+> +	++cursor->index;
+> +	tmp =3D dma_fence_array_next(cursor->array, cursor->index);
+> +	if (tmp)
+> +		return tmp;
+> +
+> +	cursor->chain =3D dma_fence_chain_walk(cursor->chain);
+> +	return __dma_fence_unwrap_array(cursor);
+> +}
+> +EXPORT_SYMBOL_GPL(dma_fence_unwrap_next);
+> diff --git a/include/linux/dma-fence-unwrap.h b/include/linux/dma-fence-u=
+nwrap.h
+> index 77e335a1bcac..e7c219da4ed7 100644
+> --- a/include/linux/dma-fence-unwrap.h
+> +++ b/include/linux/dma-fence-unwrap.h
+> @@ -1,7 +1,5 @@
+>  /* SPDX-License-Identifier: GPL-2.0-only */
+>  /*
+> - * fence-chain: chain fences together in a timeline
+> - *
+>   * Copyright (C) 2022 Advanced Micro Devices, Inc.
+>   * Authors:
+>   *	Christian K=F6nig <christian.koenig@amd.com>
+> @@ -10,8 +8,7 @@
+>  #ifndef __LINUX_DMA_FENCE_UNWRAP_H
+>  #define __LINUX_DMA_FENCE_UNWRAP_H
 > =20
->  #include "selftest.h"
+> -#include <linux/dma-fence-chain.h>
+> -#include <linux/dma-fence-array.h>
+> +struct dma_fence;
 > =20
->  #define CHAIN_SZ (4 << 10)
+>  /**
+>   * struct dma_fence_unwrap - cursor into the container structure
+> @@ -33,50 +30,9 @@ struct dma_fence_unwrap {
+>  	unsigned int index;
+>  };
 > =20
-> -static inline struct mock_fence {
-> +struct mock_fence {
->  	struct dma_fence base;
->  	spinlock_t lock;
-> -} *to_mock_fence(struct dma_fence *f) {
-> -	return container_of(f, struct mock_fence, base);
+> -/* Internal helper to start new array iteration, don't use directly */
+> -static inline struct dma_fence *
+> -__dma_fence_unwrap_array(struct dma_fence_unwrap * cursor)
+> -{
+> -	cursor->array =3D dma_fence_chain_contained(cursor->chain);
+> -	cursor->index =3D 0;
+> -	return dma_fence_array_first(cursor->array);
 > -}
-> +};
+> -
+> -/**
+> - * dma_fence_unwrap_first - return the first fence from fence containers
+> - * @head: the entrypoint into the containers
+> - * @cursor: current position inside the containers
+> - *
+> - * Unwraps potential dma_fence_chain/dma_fence_array containers and retu=
+rn the
+> - * first fence.
+> - */
+> -static inline struct dma_fence *
+> -dma_fence_unwrap_first(struct dma_fence *head, struct dma_fence_unwrap *=
+cursor)
+> -{
+> -	cursor->chain =3D dma_fence_get(head);
+> -	return __dma_fence_unwrap_array(cursor);
+> -}
+> -
+> -/**
+> - * dma_fence_unwrap_next - return the next fence from a fence containers
+> - * @cursor: current position inside the containers
+> - *
+> - * Continue unwrapping the dma_fence_chain/dma_fence_array containers an=
+d return
+> - * the next fence from them.
+> - */
+> -static inline struct dma_fence *
+> -dma_fence_unwrap_next(struct dma_fence_unwrap *cursor)
+> -{
+> -	struct dma_fence *tmp;
+> -
+> -	++cursor->index;
+> -	tmp =3D dma_fence_array_next(cursor->array, cursor->index);
+> -	if (tmp)
+> -		return tmp;
+> -
+> -	cursor->chain =3D dma_fence_chain_walk(cursor->chain);
+> -	return __dma_fence_unwrap_array(cursor);
+> -}
+> +struct dma_fence *dma_fence_unwrap_first(struct dma_fence *head,
+> +					 struct dma_fence_unwrap *cursor);
+> +struct dma_fence *dma_fence_unwrap_next(struct dma_fence_unwrap *cursor);
 > =20
->  static const char *mock_name(struct dma_fence *f)
->  {
-> @@ -45,7 +37,8 @@ static struct dma_fence *mock_fence(void)
->  		return NULL;
-> =20
->  	spin_lock_init(&f->lock);
-> -	dma_fence_init(&f->base, &mock_ops, &f->lock, 0, 0);
-> +	dma_fence_init(&f->base, &mock_ops, &f->lock,
-> +		       dma_fence_context_alloc(1), 1);
-> =20
->  	return &f->base;
->  }
-> @@ -113,7 +106,6 @@ static int sanitycheck(void *arg)
->  	if (!chain)
->  		return -ENOMEM;
-> =20
-> -	dma_fence_signal(f);
->  	dma_fence_put(chain);
->  	return err;
->  }
-> @@ -154,10 +146,10 @@ static int unwrap_array(void *arg)
->  		err =3D -EINVAL;
->  	}
-> =20
-> -	dma_fence_signal(f1);
-> -	dma_fence_signal(f2);
-> +	dma_fence_put(f1);
-> +	dma_fence_put(f2);
-
-I'm completely lost on why you add these _put() calls? The reference we
-create all get transferred over to the container object, and that takes
-care of releasing them.
-
-The other bits with error handling and code cleanup all look good, and
-dropping dma_fence_signal calls also makes sense. But this one I don't
-get.
--Daniel
-
->  	dma_fence_put(array);
-> -	return 0;
-> +	return err;
->  }
-> =20
->  static int unwrap_chain(void *arg)
-> @@ -196,10 +188,10 @@ static int unwrap_chain(void *arg)
->  		err =3D -EINVAL;
->  	}
-> =20
-> -	dma_fence_signal(f1);
-> -	dma_fence_signal(f2);
-> +	dma_fence_put(f1);
-> +	dma_fence_put(f2);
->  	dma_fence_put(chain);
-> -	return 0;
-> +	return err;
->  }
-> =20
->  static int unwrap_chain_array(void *arg)
-> @@ -242,10 +234,10 @@ static int unwrap_chain_array(void *arg)
->  		err =3D -EINVAL;
->  	}
-> =20
-> -	dma_fence_signal(f1);
-> -	dma_fence_signal(f2);
-> +	dma_fence_put(f1);
-> +	dma_fence_put(f2);
->  	dma_fence_put(chain);
-> -	return 0;
-> +	return err;
->  }
-> =20
->  int dma_fence_unwrap(void)
+>  /**
+>   * dma_fence_unwrap_for_each - iterate over all fences in containers
 > --=20
 > 2.25.1
 >=20
