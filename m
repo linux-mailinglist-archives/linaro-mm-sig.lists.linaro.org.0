@@ -2,219 +2,346 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90DAD51F49A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 May 2022 08:56:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8667C51FF2C
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 May 2022 16:11:08 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 794FD48050
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 May 2022 06:56:49 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
-	by lists.linaro.org (Postfix) with ESMTPS id DBDB53EA27
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 May 2022 06:56:44 +0000 (UTC)
-Received: by mail-ej1-f44.google.com with SMTP id bv19so24905335ejb.6
-        for <linaro-mm-sig@lists.linaro.org>; Sun, 08 May 2022 23:56:44 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 7691D4805B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 May 2022 14:11:07 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+	by lists.linaro.org (Postfix) with ESMTPS id E7BB4402F9
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 May 2022 14:11:02 +0000 (UTC)
+Received: by mail-ej1-f53.google.com with SMTP id j6so27046792ejc.13
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 09 May 2022 07:11:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=Uq2DhAFu4Cg4UFP594g3Fp+5VGJkH4S95/a8MfzJx7M=;
-        b=GbY8CFQpGULE/DlHQnQp/taRU+BgKU/ngdqdKa3BLxzHNlZiot4Sn6NwmVn+uQXkt2
-         ektG4W349/xOsUcaKyWDv+NH9tK3JjlqnTyuxMPpsMMXqdJsFZ1ZZhRNS0Gb80BSrCuh
-         fBi54iNq/0feObvpOM+x74o8gtf0SBY1Vg7tPC17xhUpI3n8W1q3IQH4Nmk2UMz/NPbO
-         e3yk+JbdG6g2IjZKxHbt49VDPeTO10zI7+RArUAE4/YzEy5JYFf2ce7s/dYG5KkU79dm
-         QzvtX8/NRdmg3tuwgrIv6XdAeVmty60GOrMi2+pJ2agZ76qs+Y4YehFpa1iLN6sH263X
-         P5bA==
+        d=ffwll.ch; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:content-transfer-encoding:in-reply-to;
+        bh=YAoxFHFRM8IxH//rl2E1kRzGQfqjVgqislcI54PaMRE=;
+        b=NVM+IF4sAq0pa7DJ5guFchnH9ankeuEs4ibAokSj9n9jCVYFWiu9Z3P05XucwG8WuJ
+         G12ZT6+TeBycSRZCcRHqsGSg21awPboH317dXXstBoUiBg1u4nuJxc82I/2IzGe+PDIc
+         Zn2/vMc6O2/jz4dZ0hPSIrauotcRRaOqFeb8o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=Uq2DhAFu4Cg4UFP594g3Fp+5VGJkH4S95/a8MfzJx7M=;
-        b=ObVr/2EbECd2lNToDIObwzOyrNrYixUBHGrmz7CVatQazUnbJp2WCApqWR1tzmEsCj
-         xRk+xoJozIjFaxl4ADd5P1wvMEm0i4NRHO0nHtqYhc9vDdwpYiV3lHKWzz1w2ixxppWi
-         +OhscPrMFrlERhnp1fa4tDxo+JJwq0HS8cz17DXoQBE/CUNOjSCNR21HsbQdxIFdO7eK
-         HqOGLjIpuIpmIpSFVGIYknt+KLsA6enWyHLV6Yi4Aj2/v+jdqOmWC26HotEB52GTrR1L
-         kseti89TbG8/VeEVzf+ItF3wyRBuqXsSced1GObAnEwAz76dTuhmAZKR0EJ6SPCLi/Xg
-         2RdQ==
-X-Gm-Message-State: AOAM5311fKe9OEVzE2Qrg8MKsWM7NVmJx/mEsQvpUAfATvIKmbZOXJIv
-	MeoOuCOiODpGVx4YJfSmITo=
-X-Google-Smtp-Source: ABdhPJzWIlwjPvKjr7JP2olqRlmmXwTeurwvfJnbxgDOkUMJKIMCvHbrbHRjBGUUw6elgQKQKQlwfg==
-X-Received: by 2002:a17:906:4741:b0:6f4:3f05:3941 with SMTP id j1-20020a170906474100b006f43f053941mr13053937ejs.691.1652079403832;
-        Sun, 08 May 2022 23:56:43 -0700 (PDT)
-Received: from [192.168.178.21] (p57b0b3fd.dip0.t-ipconnect.de. [87.176.179.253])
-        by smtp.gmail.com with ESMTPSA id t13-20020a056402524d00b0041d527833b9sm5899120edd.3.2022.05.08.23.56.42
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 08 May 2022 23:56:43 -0700 (PDT)
-Message-ID: <a01c7703-f7f7-f8ce-f80e-632a6fdcbbbe@gmail.com>
-Date: Mon, 9 May 2022 08:56:41 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: en-US
-To: Daniel Vetter <daniel@ffwll.ch>
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:content-transfer-encoding
+         :in-reply-to;
+        bh=YAoxFHFRM8IxH//rl2E1kRzGQfqjVgqislcI54PaMRE=;
+        b=kVn8Hpllsl2k5wGcmK3buqCqUcDOngBT2t9nRS7f5M0t4X0HKSzzKugQpHgD6x+qQF
+         nMV2Ug/xE0+bl4yRPFaKeDuUYfHaH8HqG82JukJ0IQQaJ9AWdD9n6Qp/FdV3NTH07M4R
+         Pk5PnPMnB2pHKKMb07tXdJmu8kw0VlkrVfbDt/10Vo2IfDd9hE2IH8rFRZLTAc7v4P5M
+         6LDjL84lixv5FWbJ7nwvriBuulPvCWXP/D/81PyjRAo9dYyb3qe9zYJ18hyITxhdxhax
+         p4v2WGIDnMyH99fM6SqCUlp+W+ifs2nbU1K9iaHbOnIQrO+6ido6X1GQHbxyeWip3c3U
+         NTuA==
+X-Gm-Message-State: AOAM530pIz15xBWkNjkNHJkfwwRp+Uj+jmv5QFdvqMlPmQdLo0hE1emA
+	HBKTi7GUboax4snCCWttoyXVtA==
+X-Google-Smtp-Source: ABdhPJy3c8FTR+UJLWgJvIV2jp0CoaWmRyQ/dDVLC9/TpZNgwGriaa43NPahAaje5AnLQbly7HOA0w==
+X-Received: by 2002:a17:907:6e2a:b0:6f4:69bb:7ef6 with SMTP id sd42-20020a1709076e2a00b006f469bb7ef6mr14346018ejc.0.1652105461812;
+        Mon, 09 May 2022 07:11:01 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id e1-20020a1709062c0100b006f3ef214dafsm5081920ejh.21.2022.05.09.07.11.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 May 2022 07:11:01 -0700 (PDT)
+Date: Mon, 9 May 2022 16:10:59 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <Ynkg81p6ADyZBa/L@phenom.ffwll.local>
 References: <20220502163722.3957-1-christian.koenig@amd.com>
  <YnJQs1iusrBvpuMs@phenom.ffwll.local>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <YnJQs1iusrBvpuMs@phenom.ffwll.local>
-Message-ID-Hash: QH35KFK6YET7NFOHPBMZR6XFLHOMDUVI
-X-Message-ID-Hash: QH35KFK6YET7NFOHPBMZR6XFLHOMDUVI
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: jason@jlekstrand.net, daniels@collabora.com, skhawaja@google.com, maad.aldabagh@amd.com, sergemetral@google.com, sumit.semwal@linaro.org, gustavo@padovan.org, Felix.Kuehling@amd.com, alexander.deucher@amd.com, tzimmermann@suse.de, tvrtko.ursulin@linux.intel.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+ <a01c7703-f7f7-f8ce-f80e-632a6fdcbbbe@gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <a01c7703-f7f7-f8ce-f80e-632a6fdcbbbe@gmail.com>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
+Message-ID-Hash: LBJBGWGAJRMHMEANHTPWTCFLQGJRMJUL
+X-Message-ID-Hash: LBJBGWGAJRMHMEANHTPWTCFLQGJRMJUL
+X-MailFrom: daniel@ffwll.ch
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Daniel Vetter <daniel@ffwll.ch>, jason@jlekstrand.net, daniels@collabora.com, skhawaja@google.com, maad.aldabagh@amd.com, sergemetral@google.com, sumit.semwal@linaro.org, gustavo@padovan.org, Felix.Kuehling@amd.com, alexander.deucher@amd.com, tzimmermann@suse.de, tvrtko.ursulin@linux.intel.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: Tackling the indefinite/user DMA fence problem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QH35KFK6YET7NFOHPBMZR6XFLHOMDUVI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LBJBGWGAJRMHMEANHTPWTCFLQGJRMJUL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-QW0gMDQuMDUuMjIgdW0gMTI6MDggc2NocmllYiBEYW5pZWwgVmV0dGVyOg0KPiBPbiBNb24sIE1h
-eSAwMiwgMjAyMiBhdCAwNjozNzowN1BNICswMjAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0K
-Pj4gSGVsbG8gZXZlcnlvbmUsDQo+Pg0KPj4gaXQncyBhIHdlbGwga25vd24gcHJvYmxlbSB0aGF0
-IHRoZSBETUEtYnVmIHN1YnN5c3RlbSBtaXhlZA0KPj4gc3luY2hyb25pemF0aW9uIGFuZCBtZW1v
-cnkgbWFuYWdlbWVudCByZXF1aXJlbWVudHMgaW50byB0aGUgc2FtZQ0KPj4gZG1hX2ZlbmNlIGFu
-ZCBkbWFfcmVzdiBvYmplY3RzLiBCZWNhdXNlIG9mIHRoaXMgZG1hX2ZlbmNlIG9iamVjdHMgbmVl
-ZA0KPj4gdG8gZ3VhcmFudGVlIHRoYXQgdGhleSBjb21wbGV0ZSB3aXRoaW4gYSBmaW5pdGUgYW1v
-dW50IG9mIHRpbWUgb3INCj4+IG90aGVyd2lzZSB0aGUgc3lzdGVtIGNhbiBlYXNpbHkgZGVhZGxv
-Y2suDQo+Pg0KPj4gT25lIG9mIHRoZSBmZXcgZ29vZCB0aGluZ3MgYWJvdXQgdGhpcyBwcm9ibGVt
-IGlzIHRoYXQgaXQgaXMgcmVhbGx5IGdvb2QNCj4+IHVuZGVyc3Rvb2QgYnkgbm93Lg0KPj4NCj4+
-IERhbmllbCBhbmQgb3RoZXJzIGNhbWUgdXAgd2l0aCBzb21lIGRvY3VtZW50YXRpb246DQo+PiBo
-dHRwczovL2RyaS5mcmVlZGVza3RvcC5vcmcvZG9jcy9kcm0vZHJpdmVyLWFwaS9kbWEtYnVmLmh0
-bWw/aGlnaGxpZ2h0PWRtYV9idWYjaW5kZWZpbml0ZS1kbWEtZmVuY2VzDQo+Pg0KPj4gQW5kIEph
-c29uIGRpZCBhbiBleGNlbGxlbnQgcHJlc2VudGF0aW9uIGFib3V0IHRoYXQgcHJvYmxlbSBvbiBs
-YXN0IHllYXJzDQo+PiBMUEM6IGh0dHBzOi8vbHBjLmV2ZW50cy9ldmVudC8xMS9jb250cmlidXRp
-b25zLzExMTUvDQo+Pg0KPj4gQmFzZWQgb24gdGhhdCB3ZSBoYWQgYmVlbiBhYmxlIHRvIHJlamVj
-dCBuZXcgaW1wbGVtZW50YXRpb25zIG9mDQo+PiBpbmZpbml0ZS91c2VyIERNQSBmZW5jZXMgYW5k
-IG1pdGlnYXRlIHRoZSBlZmZlY3Qgb2YgdGhlIGZldyBleGlzdGluZw0KPj4gb25lcy4NCj4+DQo+
-PiBUaGUgc3RpbGwgcmVtYWluaW5nIGRvd24gc2lkZSBpcyB0aGF0IHdlIGRvbid0IGhhdmUgYSB3
-YXkgb2YgdXNpbmcgdXNlcg0KPj4gZmVuY2VzIGFzIGRlcGVuZGVuY3kgaW4gYm90aCB0aGUgZXhw
-bGljaXQgKHN5bmNfZmlsZSwgZHJtX3N5bmNvYmopIGFzDQo+PiB3ZWxsIGFzIHRoZSBpbXBsaWNp
-dCAoZG1hX3Jlc3YpIHN5bmNocm9uaXphdGlvbiBvYmplY3RzLCByZXN1bHRpbmcgaW4NCj4+IG51
-bWVyb3VzIHByb2JsZW1zIGFuZCBsaW1pdGF0aW9ucyBmb3IgdGhpbmdzIGxpa2UgSE1NLCB1c2Vy
-IHF1ZXVlcw0KPj4gZXRjLi4uLg0KPj4NCj4+IFRoaXMgcGF0Y2ggc2V0IGhlcmUgbm93IHRyaWVz
-IHRvIHRhY2tsZSB0aGlzIHByb2JsZW0gYnkgdW50YW5nbGluZyB0aGUNCj4+IHN5bmNocm9uaXph
-dGlvbiBmcm9tIHRoZSBtZW1vcnkgbWFuYWdlbWVudC4gV2hhdCBpdCBkb2VzICpub3QqIHRyeSB0
-byBkbw0KPj4gaXMgdG8gZml4IHRoZSBleGlzdGluZyBrZXJuZWwgZmVuY2VzLCBiZWNhdXNlIEkg
-dGhpbmsgd2Ugbm93IGNhbiBhbGwNCj4+IGFncmVlIG9uIHRoYXQgdGhpcyBpc24ndCByZWFsbHkg
-cG9zc2libGUuDQo+Pg0KPj4gVG8gYXJjaGl2ZSB0aGlzIGdvYWwgd2hhdCBJIGRvIGluIHRoaXMg
-cGF0Y2ggc2V0IGlzIHRvIGFkZCBzb21lIHBhcmFsbGVsDQo+PiBpbmZyYXN0cnVjdHVyZSB0byBj
-bGVhbmx5IHNlcGFyYXRlIG5vcm1hbCBrZXJuZWwgZG1hX2ZlbmNlIG9iamVjdHMgZnJvbQ0KPj4g
-aW5kZWZpbml0ZS91c2VyIGZlbmNlczoNCj4+DQo+PiAxLiBJdCBpbnRyb2R1Y2UgYSBETUFfRkVO
-Q0VfRkxBR19VU0VSIGRlZmluZSAoYWZ0ZXIgcmVuYW1pbmcgc29tZQ0KPj4gZXhpc3RpbmcgZHJp
-dmVyIGRlZmluZXMpLiBUbyBub3RlIHRoYXQgYSBjZXJ0YWluIGRtYV9mZW5jZSBpcyBhbiB1c2Vy
-DQo+PiBmZW5jZSBhbmQgKm11c3QqIGJlIGlnbm9yZSBieSBtZW1vcnkgbWFuYWdlbWVudCBhbmQg
-bmV2ZXIgdXNlZCBhcw0KPj4gZGVwZW5kZW5jeSBmb3Igbm9ybWFsIG5vbmUgdXNlciBkbWFfZmVu
-Y2Ugb2JqZWN0cy4NCj4+DQo+PiAyLiBUaGUgZG1hX2ZlbmNlX2FycmF5IGFuZCBkbWFfZmVuY2Vf
-Y2hhaW4gY29udGFpbmVycyBhcmUgbW9kaWZpZWQgc28NCj4+IHRoYXQgdGhleSBhcmUgbWFya2Vk
-IGFzIHVzZXIgZmVuY2VzIHdoZW5ldmVyIGFueSBvZiB0aGVpciBjb250YWluZWQNCj4+IGZlbmNl
-cyBhcmUgYW4gdXNlciBmZW5jZS4NCj4+DQo+PiAzLiBUaGUgZG1hX3Jlc3Ygb2JqZWN0IGdldHMg
-YSBuZXcgRE1BX1JFU1ZfVVNBR0VfVVNFUiBmbGFnIHdoaWNoIG11c3QgYmUNCj4+IHVzZWQgd2l0
-aCBpbmRlZmluaXRlL3VzZXIgZmVuY2VzIGFuZCBzZXBhcmF0ZXMgdGhvc2UgaW50byBpdCdzIG93
-bg0KPj4gc3luY2hyb25pemF0aW9uIGRvbWFpbi4NCj4+DQo+PiA0LiBUaGUgZXhpc3RpbmcgZG1h
-X2J1Zl9wb2xsX2FkZF9jYigpIGZ1bmN0aW9uIGlzIG1vZGlmaWVkIHNvIHRoYXQNCj4+IGluZGVm
-aW5pdGUvdXNlciBmZW5jZXMgYXJlIGluY2x1ZGVkIGluIHRoZSBwb2xsaW5nLg0KPj4NCj4+IDUu
-IFRoZSBzeW5jX2ZpbGUgc3luY2hyb25pemF0aW9uIG9iamVjdCBpcyBtb2RpZmllZCBzbyB0aGF0
-IHdlDQo+PiBlc3NlbnRpYWxseSBoYXZlIHR3byBmZW5jZSBzdHJlYW1zIGluc3RlYWQgb2YganVz
-dCBvbmUuDQo+Pg0KPj4gNi4gVGhlIGRybV9zeW5jb2JqIGlzIG1vZGlmaWVkIGluIGEgc2ltaWxh
-ciB3YXkuIFVzZXIgZmVuY2VzIGFyZSBqdXN0DQo+PiBpZ25vcmVkIHVubGVzcyB0aGUgZHJpdmVy
-IGV4cGxpY2l0bHkgc3RhdGVzIHN1cHBvcnQgdG8gd2FpdCBmb3IgdGhlbS4NCj4+DQo+PiA3LiBU
-aGUgRFJNIHN1YnN5c3RlbSBnYWlucyBhIG5ldyBEUklWRVJfVVNFUl9GRU5DRSBmbGFnIHdoaWNo
-IGRyaXZlcnMNCj4+IGNhbiB1c2UgdG8gaW5kaWNhdGUgdGhlIG5lZWQgZm9yIHVzZXIgZmVuY2Vz
-LiBJZiB1c2VyIGZlbmNlcyBhcmUgdXNlZA0KPj4gdGhlIGF0b21pYyBtb2RlIHNldHRpbmcgc3Rh
-cnRzIHRvIHN1cHBvcnQgdXNlciBmZW5jZXMgYXMgSU4vT1VUIGZlbmNlcy4NCj4+DQo+PiA4LiBM
-b2NrZGVwIGlzIHVzZWQgYXQgdmFyaW91cyBjcml0aWNhbCBsb2NhdGlvbnMgdG8gZW5zdXJlIHRo
-YXQgbm9ib2R5DQo+PiBldmVyIHRyaWVzIHRvIG1peCB1c2VyIGZlbmNlcyB3aXRoIG5vbiB1c2Vy
-IGZlbmNlcy4NCj4+DQo+PiBUaGUgZ2VuZXJhbCBhcHByb2FjaCBpcyB0byBqdXN0IGlnbm9yZSB1
-c2VyIGZlbmNlcyB1bmxlc3MgYSBkcml2ZXINCj4+IHN0YXRlZCBleHBsaWNpdGVseSBzdXBwb3J0
-IGZvciB0aGVtLg0KPj4NCj4+IE9uIHRvcCBvZiBhbGwgb2YgdGhpcyBJJ3ZlIGhhY2tlZCBhbWRn
-cHUgc28gdGhhdCB3ZSBhZGQgdGhlIHJlc3VsdGluZyBDUw0KPj4gZmVuY2Ugb25seSBhcyBrZXJu
-ZWwgZGVwZW5kZW5jeSB0byB0aGUgZG1hX3Jlc3Ygb2JqZWN0IGFuZCBhbiBhZGRpdGlvbmFsDQo+
-PiB3cmFwcGVkIHVwIHdpdGggYSBkbWFfZmVuY2VfYXJyYXkgYW5kIGEgc3R1YiB1c2VyIGZlbmNl
-Lg0KPj4NCj4+IFRoZSByZXN1bHQgaXMgdGhhdCB0aGUgbmV3bHkgYWRkZWQgYXRvbWljIG1vZGVz
-ZXQgZnVuY3Rpb25zIG5vdw0KPj4gY29ycmVjdGx5IHdhaXQgZm9yIHRoZSB1c2VyIGZlbmNlIHRv
-IGNvbXBsZXRlIGJlZm9yZSBkb2luZyB0aGUgZmxpcC4gQW5kDQo+PiBkZXBlbmRlbnQgQ1MgZG9u
-J3QgcGlwZWxpbmUgYW55IG1vcmUsIGJ1dCByYXRoZXIgYmxvY2sgb24gdGhlIENQVSBiZWZvcmUN
-Cj4+IHN1Ym1pdHRpbmcgd29yay4NCj4+DQo+PiBBZnRlciB0b25zIG9mIGRlYnVnZ2luZyBhbmQg
-dGVzdGluZyBldmVyeXRoaW5nIG5vdyBzZWVtcyB0byBub3QgZ28gdXAgaW4NCj4+IGZsYW1lcyBp
-bW1lZGlhdGVseSBhbmQgZXZlbiBsb2NrZGVwIGlzIGhhcHB5IHdpdGggdGhlIGFubm90YXRpb25z
-Lg0KPj4NCj4+IEknbSBwZXJmZWN0bHkgYXdhcmUgdGhhdCB0aGlzIGlzIHByb2JhYmx5IGJ5IGZh
-ciB0aGUgbW9zdCBjb250cm92ZXJzaWFsDQo+PiBwYXRjaCBzZXQgSSd2ZSBldmVyIGNyZWF0ZWQg
-YW5kIEkgcmVhbGx5IHdpc2ggd2Ugd291bGRuJ3QgbmVlZCBpdC4gQnV0DQo+PiB3ZSBjZXJ0YWlu
-bHkgaGF2ZSB0aGUgcmVxdWlyZW1lbnQgZm9yIHRoaXMgYW5kIEkgZG9uJ3Qgc2VlIG11Y2ggb3Ro
-ZXINCj4+IGNoYW5jZSB0byBnZXQgdGhhdCB3b3JraW5nIGluIGFuIFVBUEkgY29tcGF0aWJsZSB3
-YXkuDQo+Pg0KPj4gVGhvdWdodHMvY29tbWVudHM/DQo+IEkgdGhpbmsgeW91IG5lZWQgdG8gdHlw
-ZSB1cCB0aGUgZ29hbCBvciBleGFjdCBwcm9ibGVtIHN0YXRlbWVudCB5b3UncmUNCj4gdHJ5aW5n
-IHRvIHNvbHZlIGZpcnN0LiBXaGF0IHlvdSB0eXBlZCB1cCBpcyBhIHNvbHV0aW9uIGFsb25nIHRo
-ZSBsaW5lcyBvZg0KPiAidHJ5IHRvIHN0dWZmIHVzZXJzcGFjZSBtZW1vcnkgZmVuY2VzIGludG8g
-ZG1hX2ZlbmNlIGFuZCBzZWUgaG93IGhvcnJpYmxlDQo+IGl0IGFsbCBpcyIsIGFuZCB0aGF0J3Mg
-Y2VydGFpbmx5IGFuIGludGVyZXN0aW5nIGV4cGVyaW1lbnQsIGJ1dCB3aGF0IGFyZQ0KPiB5b3Ug
-dHJ5aW5nIHRvIHNvbHZlIHdpdGggaXQ/DQoNCldlbGwsIGdvb2QgcG9pbnQuIEkgZXhwbGFpbmVk
-IHRvIG11Y2ggaG93IGl0IHdvcmtzLCBidXQgbm93IHdoeS4NCg0KSW4gZ2VuZXJhbCBJIHdvdWxk
-IGRlc2NyaWJlIHRoZSBnb2FsIGFzOiBQcm92aWRpbmcgYSBzdGFuZGFyZCBrZXJuZWwgDQppbmZy
-YXN0cnVjdHVyZSBmb3IgdXNlciBmZW5jZXMuDQoNCj4gTGlrZSBpZiB0aGUgaXNzdWUgaXMgdG8g
-ZW5hYmxlIG9wZW5jbCBvciB3aGF0ZXZlciwgdGhlbiB0aGF0J3Mgbm8gcHJvYmxlbQ0KPiAocm9j
-bSBvbiBhbWRrZmQgaXMgYSB0aGluZywgc2FtZSBtYXliZSB3aXRob3V0IHRoZSBrZmQgcGFydCBj
-YW4gYmUgZG9uZQ0KPiBhbnl3aGVyZSBlbHNlKS4gSWYgdGhlIGdvYWwgaXMgdG8gZW5hYmxlIHVz
-ZXJzcGFjZSBtZW1vcnkgZmVuY2VzIGZvciB2aywNCj4gdGhlbiB3ZSByZWFsbHkgZG9uJ3QgbmVl
-ZCB0aGVzZSBldmVyeXdoZXJlLCBidXQgcmVhbGx5IG9ubHkgaW4gZHJtX3N5bmNvYmoNCj4gKGFu
-ZCBtYXliZSBzeW5jX2ZpbGUpLg0KDQpZZXMsIGhhdmluZyBhbiBpbiBrZXJuZWwgcmVwcmVzZW50
-YXRpb24gZm9yIHZrIHVzZXIgc3BhY2UgZmVuY2VzIGlzIG9uZSANCm9mIHRoZSBnb2Fscy4NCg0K
-QW5kIEkgd2FzIGdvaW5nIGJhY2sgYW5kIGZvcnRoIGlmIEkgc2hvdWxkIHJhdGhlciBjb21lIHVw
-IHdpdGggYSBuZXcgDQpzdHJ1Y3R1cmUgZm9yIHRoaXMgb3IgdXNlIHRoZSBleGlzdGluZyBkbWFf
-ZmVuY2Ugd2l0aCBhIGZsYWcgYXMgd2VsbC4NCg0KSSd2ZSBkZWNpZGVkIHRvIGdvIGRvd24gdGhl
-IGxhdGVyIHJvdXRlciBiZWNhdXNlIHdlIGhhdmUgcXVpdGUgYSBsb3Qgb2YgDQpleGlzdGluZyBm
-dW5jdGlvbmFsaXR5IHdoaWNoIGNhbiBiZSByZS11c2VkLiBCdXQgaWYgeW91IGhhdmUgYSBnb29k
-IA0KYXJndW1lbnQgdGhhdCBpdCB3b3VsZCBiZSBtb3JlIGRlZmVuc2l2ZSB0byBjb21lIHVwIHdp
-dGggc29tZXRoaW5nIA0KY29tcGxldGVseSBuZXcsIEknbSBwZXJmZWN0bHkgZmluZSB3aXRoIHRo
-YXQgYXMgd2VsbC4NCg0KPiBJZiB0aGUgZ29hbCBpcyBzcGVjaWZpY2FsbHkgYXRvbWljIGttcywg
-dGhlbiB0aGVyZSdzIGFuIGVudGlyZSBjYW4gb2YNCj4gd29ybXMgdGhlcmUgdGhhdCBJIHJlYWxs
-eSBkb24ndCB3YW50IHRvIHRoaW5rIGFib3V0LCBidXQgaXQgZXhpc3RzOiBXZQ0KPiBoYXZlIGRt
-YV9mZW5jZSBhcyBvdXQtZmVuY2VzIGZyb20gYXRvbWljIGNvbW1pdCwgYW5kIHRoYXQncyBhbHJl
-YWR5DQo+IG1hc3NpdmVseSBicm9rZW4gc2luY2UgbW9zdCBkcml2ZXJzIGFsbG9jYXRlIHNvbWUg
-bWVtb3J5IG9yIGF0IGxlYXN0IHRha2UNCj4gbG9ja3Mgd2hpY2ggY2FuIGFsbG9jYXRlIG1lbW9y
-eSBpbiB0aGVpciBjb21taXQgcGF0aC4gTGlrZSBpMmMuIFB1dHRpbmcgYQ0KPiB1c2Vyc3BhY2Ug
-bWVtb3J5IGZlbmNlIGFzIGluLWZlbmNlIGluIHRoZXJlIG1ha2VzIHRoYXQgcHJvYmxlbQ0KPiBz
-dWJzdGFudGlhbGx5IHdvcnNlLCBzaW5jZSBhdCBsZWFzdCBpbiB0aGVvcnkgeW91J3JlIGp1c3Qg
-bm90IGFsbG93ZWQgdG8NCj4gbWlnaHRfZmF1bCBpbiBhdG9taWNfY29tbWl0X3RhaWwuDQoNClll
-cywgdGhhdCdzIHVuZm9ydHVuYXRlbHkgb25lIG9mIHRoZSBnb2FscyBhcyB3ZWxsIGFuZCB5ZXMg
-SSBjb21wbGV0ZWx5IA0KYWdyZWUgb24gdGhlIGNhbiBvZiB3b3Jtcy4gQnV0IEkgdGhpbmsgSSd2
-ZSBzb2x2ZWQgdGhhdC4NCg0KV2hhdCBJIGRvIGluIHRoZSBwYXRjaCBzZXQgaXMgdG8gZW5mb3Jj
-ZSB0aGF0IHRoZSBvdXQgZmVuY2UgaXMgYW4gdXNlciANCmZlbmNlIHdoZW4gdGhlIGRyaXZlciBz
-dXBwb3J0cyB1c2VyIGluIGZlbmNlcyBhcyB3ZWxsLg0KDQpTaW5jZSB1c2VyIGZlbmNlcyBkb2Vz
-bid0IGhhdmUgdGhlIG1lbW9yeSBtYW5hZ2VtZW50IGRlcGVuZGVuY3kgZHJpdmVycyANCmNhbiBh
-Y3R1YWxseSBhbGxvY2F0ZSBtZW1vcnkgb3IgY2FsbCBJMkMgZnVuY3Rpb25zIHdoaWNoIHRha2Vz
-IGxvY2tzIA0Kd2hpY2ggaGF2ZSBtZW1vcnkgYWxsb2NhdGlvbiBkZXBlbmRlbmNpZXMuDQoNCk9y
-IGRvIEkgbWlzcyBzb21lIG90aGVyIHJlYXNvbiB3aHkgeW91IGNhbid0IGZhdWx0IG9yIGFsbG9j
-YXRlIG1lbW9yeSBpbiANCmF0b21pY19jb21taXRfdGFpbD8gQXQgbGVhc3QgbG9ja2RlcCBzZWVt
-cyB0byBiZSBoYXBweSBhYm91dCB0aGF0IG5vdy4NCg0KPiBJZiB0aGUgZ29hbCBpcyB0byBrZWVw
-IHRoZSB1YXBpIHBlcmZlY3RseSBjb21wYXRpYmxlIHRoZW4geW91ciBwYXRjaCBzZXQNCj4gZG9l
-c24ndCBsb29rIGxpa2UgYSBzb2x1dGlvbiwgc2luY2UgYXMgc29vbiBhcyBhbm90aGVyIGRyaXZl
-ciBpcyBpbnZvbHZlZA0KPiB3aGljaCBkb2Vzbid0IHVuZGVyc3RhbmQgdXNlcnNwYWNlIG1lbW9y
-eSBmZW5jZXMgaXQgYWxsIGZhbGxzIGFwYXJ0LiBTbw0KPiB3b3JrcyBncmVhdCBmb3IgYSBxdWlj
-ayBkZW1vIHdpdGggYW1kK2FtZCBzaGFyaW5nLCBidXQgbm90IG11Y2ggZnVydGhlci4NCj4gQW5k
-IEkgZG9uJ3QgdGhpbmsgaXQncyBmZWFzaWJsZSB0byBqdXN0IHJldiB0aGUgZW50aXJlIGVjb3N5
-c3RlbSwgc2luY2UNCj4gdGhhdCBraW5kYSBkZWZlYXRzIHRoZSBwb2ludCBvZiBrZWVwaW5nIHVh
-cGkgc3RhYmxlIC0gaWYgd2UgcmV2IGV2ZXJ5dGhpbmcNCj4gd2UgbWlnaHQgYXMgd2VsbCBhbHNv
-IHJldiB0aGUgdWFwaSBhbmQgbWFrZSB0aGlzIGEgYml0IG1vcmUgaW5jcmVtZW50YWwNCj4gYWdh
-aW4gOi0pDQoNClllcywgdW5mb3J0dW5hdGVseSB0aGUgdWFwaSBuZWVkcyB0byBzdGF5IGNvbXBh
-dGlibGUgYXMgd2VsbCBhbmQgeWVzIA0KdGhhdCBtZWFucyB3ZSBuZWVkIHRvIGRlcGxveSB0aGlz
-IHRvIGFsbCBkcml2ZXJzIGludm9sdmVkLg0KDQpXZSBhdCBsZWFzdCBuZWVkIHRvIGJlIGFibGUg
-dG8gcHJvdmlkZSBhIHN0YWNrIG9uIG5ldyBoYXJkd2FyZSB3aXRoIChmb3IgDQpleGFtcGxlKSBV
-YnVudHUgMTguMDQgd2l0aG91dCByZXBsYWNpbmcgYWxsIHRoZSB1c2Vyc3BhY2UgY29tcG9uZW50
-cy4NCg0KV2hhdCB3ZSBjYW4gcmVwbGFjZSBpcyB0aGUgT3BlbkdMIHN0YWNrIGFuZCBpZiBuZWNl
-c3NhcnkgbGliZHJtLCBidXQgbm90IA0KKGZvciBleGFtcGxlKSB0aGUgWCBzZXJ2ZXIgYW5kIG1v
-c3QgbGlrZWx5IG5vdCB0aGUgRERYIGluIHNvbWUgY2FzZXMuDQoNClRoZSBzYW1lIGFwcGxpZXMg
-d2l0aCBzdXJmYWNlZmxpbmdlciBhbmQgdG8gc29tZSBleHRlbmQgV2F5bGFuZCBhcyB3ZWxsLg0K
-DQpSZWdhcmRzLA0KQ2hyaXN0aWFuLg0KDQo+DQo+IFRoZXJlJ3MgcHJvYmFibHkgbW9yZSB0byBw
-b25kZXIgaGVyZSAuLi4NCj4NCj4gSSdtIG5vdCBzdXJlIHdoYXQgZXhhY3RseSB0aGUgcHJvYmxl
-bSBzdGF0ZW1lbnQgaXMgdGhhdCBtYXRjaGVzIHlvdXINCj4gc29sdXRpb24gaGVyZSB0aG91Z2gs
-IHNvIHRoYXQgc2VlbXMgdG8gYmUgbWlzc2luZy4NCj4gLURhbmllbA0KDQpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcg
-bGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2Vu
-ZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Mon, May 09, 2022 at 08:56:41AM +0200, Christian K=F6nig wrote:
+> Am 04.05.22 um 12:08 schrieb Daniel Vetter:
+> > On Mon, May 02, 2022 at 06:37:07PM +0200, Christian K=F6nig wrote:
+> > > Hello everyone,
+> > >=20
+> > > it's a well known problem that the DMA-buf subsystem mixed
+> > > synchronization and memory management requirements into the same
+> > > dma_fence and dma_resv objects. Because of this dma_fence objects need
+> > > to guarantee that they complete within a finite amount of time or
+> > > otherwise the system can easily deadlock.
+> > >=20
+> > > One of the few good things about this problem is that it is really go=
+od
+> > > understood by now.
+> > >=20
+> > > Daniel and others came up with some documentation:
+> > > https://dri.freedesktop.org/docs/drm/driver-api/dma-buf.html?highligh=
+t=3Ddma_buf#indefinite-dma-fences
+> > >=20
+> > > And Jason did an excellent presentation about that problem on last ye=
+ars
+> > > LPC: https://lpc.events/event/11/contributions/1115/
+> > >=20
+> > > Based on that we had been able to reject new implementations of
+> > > infinite/user DMA fences and mitigate the effect of the few existing
+> > > ones.
+> > >=20
+> > > The still remaining down side is that we don't have a way of using us=
+er
+> > > fences as dependency in both the explicit (sync_file, drm_syncobj) as
+> > > well as the implicit (dma_resv) synchronization objects, resulting in
+> > > numerous problems and limitations for things like HMM, user queues
+> > > etc....
+> > >=20
+> > > This patch set here now tries to tackle this problem by untangling the
+> > > synchronization from the memory management. What it does *not* try to=
+ do
+> > > is to fix the existing kernel fences, because I think we now can all
+> > > agree on that this isn't really possible.
+> > >=20
+> > > To archive this goal what I do in this patch set is to add some paral=
+lel
+> > > infrastructure to cleanly separate normal kernel dma_fence objects fr=
+om
+> > > indefinite/user fences:
+> > >=20
+> > > 1. It introduce a DMA_FENCE_FLAG_USER define (after renaming some
+> > > existing driver defines). To note that a certain dma_fence is an user
+> > > fence and *must* be ignore by memory management and never used as
+> > > dependency for normal none user dma_fence objects.
+> > >=20
+> > > 2. The dma_fence_array and dma_fence_chain containers are modified so
+> > > that they are marked as user fences whenever any of their contained
+> > > fences are an user fence.
+> > >=20
+> > > 3. The dma_resv object gets a new DMA_RESV_USAGE_USER flag which must=
+ be
+> > > used with indefinite/user fences and separates those into it's own
+> > > synchronization domain.
+> > >=20
+> > > 4. The existing dma_buf_poll_add_cb() function is modified so that
+> > > indefinite/user fences are included in the polling.
+> > >=20
+> > > 5. The sync_file synchronization object is modified so that we
+> > > essentially have two fence streams instead of just one.
+> > >=20
+> > > 6. The drm_syncobj is modified in a similar way. User fences are just
+> > > ignored unless the driver explicitly states support to wait for them.
+> > >=20
+> > > 7. The DRM subsystem gains a new DRIVER_USER_FENCE flag which drivers
+> > > can use to indicate the need for user fences. If user fences are used
+> > > the atomic mode setting starts to support user fences as IN/OUT fence=
+s.
+> > >=20
+> > > 8. Lockdep is used at various critical locations to ensure that nobody
+> > > ever tries to mix user fences with non user fences.
+> > >=20
+> > > The general approach is to just ignore user fences unless a driver
+> > > stated explicitely support for them.
+> > >=20
+> > > On top of all of this I've hacked amdgpu so that we add the resulting=
+ CS
+> > > fence only as kernel dependency to the dma_resv object and an additio=
+nal
+> > > wrapped up with a dma_fence_array and a stub user fence.
+> > >=20
+> > > The result is that the newly added atomic modeset functions now
+> > > correctly wait for the user fence to complete before doing the flip. =
+And
+> > > dependent CS don't pipeline any more, but rather block on the CPU bef=
+ore
+> > > submitting work.
+> > >=20
+> > > After tons of debugging and testing everything now seems to not go up=
+ in
+> > > flames immediately and even lockdep is happy with the annotations.
+> > >=20
+> > > I'm perfectly aware that this is probably by far the most controversi=
+al
+> > > patch set I've ever created and I really wish we wouldn't need it. But
+> > > we certainly have the requirement for this and I don't see much other
+> > > chance to get that working in an UAPI compatible way.
+> > >=20
+> > > Thoughts/comments?
+> > I think you need to type up the goal or exact problem statement you're
+> > trying to solve first. What you typed up is a solution along the lines =
+of
+> > "try to stuff userspace memory fences into dma_fence and see how horrib=
+le
+> > it all is", and that's certainly an interesting experiment, but what are
+> > you trying to solve with it?
+>=20
+> Well, good point. I explained to much how it works, but now why.
+>=20
+> In general I would describe the goal as: Providing a standard kernel
+> infrastructure for user fences.
+
+So on that goal the part I fully agree on is that drm_syncobj can (and
+should imo) be able to contain userspace memory fences. The uapi semantics
+and everything is already fully set up to support that, but maybe with
+reduced performance: Non-aware userspace (or when you don't trust the
+supplier of the umf) needs to block when looking up the fence, and the
+dma_fence returned will always be signalled already. But that's just a
+mild performance issue (and vk drivers paper over that already with
+threading) and not a correctness issue.
+
+> > Like if the issue is to enable opencl or whatever, then that's no probl=
+em
+> > (rocm on amdkfd is a thing, same maybe without the kfd part can be done
+> > anywhere else). If the goal is to enable userspace memory fences for vk,
+> > then we really don't need these everywhere, but really only in drm_sync=
+obj
+> > (and maybe sync_file).
+>=20
+> Yes, having an in kernel representation for vk user space fences is one of
+> the goals.
+>=20
+> And I was going back and forth if I should rather come up with a new
+> structure for this or use the existing dma_fence with a flag as well.
+>=20
+> I've decided to go down the later router because we have quite a lot of
+> existing functionality which can be re-used. But if you have a good argum=
+ent
+> that it would be more defensive to come up with something completely new,
+> I'm perfectly fine with that as well.
+
+Yeah so stuffing that into dma_fence already freaks me out a bit. It is
+quite fundamentally a different thing, and it would be really nice to make
+that very apparent at the type level too.
+
+E.g. to make sure you never ever end up with an umf fence in mmu notifier
+invalidate callback. You can enforce that with runtime checks too, but imo
+compile time fail is better than runtime fail.
+
+> > If the goal is specifically atomic kms, then there's an entire can of
+> > worms there that I really don't want to think about, but it exists: We
+> > have dma_fence as out-fences from atomic commit, and that's already
+> > massively broken since most drivers allocate some memory or at least ta=
+ke
+> > locks which can allocate memory in their commit path. Like i2c. Putting=
+ a
+> > userspace memory fence as in-fence in there makes that problem
+> > substantially worse, since at least in theory you're just not allowed to
+> > might_faul in atomic_commit_tail.
+>=20
+> Yes, that's unfortunately one of the goals as well and yes I completely
+> agree on the can of worms. But I think I've solved that.
+>=20
+> What I do in the patch set is to enforce that the out fence is an user fe=
+nce
+> when the driver supports user in fences as well.
+>=20
+> Since user fences doesn't have the memory management dependency drivers c=
+an
+> actually allocate memory or call I2C functions which takes locks which ha=
+ve
+> memory allocation dependencies.
+>=20
+> Or do I miss some other reason why you can't fault or allocate memory in
+> atomic_commit_tail? At least lockdep seems to be happy about that now.
+
+The problem is a bit that this breaks the uapi already. At least if the
+goal is to have this all be perfectly transparent for userspace - as you
+as you have multi-gpu setups going on at least.
+
+> > If the goal is to keep the uapi perfectly compatible then your patch set
+> > doesn't look like a solution, since as soon as another driver is involv=
+ed
+> > which doesn't understand userspace memory fences it all falls apart. So
+> > works great for a quick demo with amd+amd sharing, but not much further.
+> > And I don't think it's feasible to just rev the entire ecosystem, since
+> > that kinda defeats the point of keeping uapi stable - if we rev everyth=
+ing
+> > we might as well also rev the uapi and make this a bit more incremental
+> > again :-)
+>=20
+> Yes, unfortunately the uapi needs to stay compatible as well and yes that
+> means we need to deploy this to all drivers involved.
+>=20
+> We at least need to be able to provide a stack on new hardware with (for
+> example) Ubuntu 18.04 without replacing all the userspace components.
+>=20
+> What we can replace is the OpenGL stack and if necessary libdrm, but not
+> (for example) the X server and most likely not the DDX in some cases.
+>=20
+> The same applies with surfaceflinger and to some extend Wayland as well.
+
+So for perfect uapi compat for existing compositor I really don't think
+stuffing umf into the kernel is the right approach. Too many little
+corners that break:
+
+- the in/out fence mismatch every
+- cross gpu with different userspace that doesn't understand umf and then
+  just ignores them
+- compositors which currently assume implicit sync finishes eventually,
+  and with umf that gets complicated at best
+- same with sync_file, the uapi atm does not have a concept of future
+  fence
+
+So you can kinda make this work, but it falls apart all over the place.
+And I also don't think smashing umf into all these old concepts helps us
+in any way to get towards a desktop which is umf-native.
+
+My take is still that for backwards compat the simplest way is if a
+umf-native driver simply provides dma-fence backwards compat as an opt-in,
+which userspace chooses when it's necessary. There's really only two
+things you need for that to work:
+
+- a timeout of some sort on the dma_fence, which might or might not kill
+  the entire context. This is entirey up to how your userspace does or
+  does not implement stuff like arb robustness or vk_error_device_lost
+
+- pre-pinned memory management to block out the all the inversions. This
+  is a bit more nasty, but since we do have all the code for this already
+  it really shouldn't be too tricky to make that happen for the fancy new
+  umf world.
+
+You do not need a kernel scheduler or anything like that at all, you can
+do full userspace direct submit to hw and all that fun. Maybe do a
+drm/sched frontend (and then your submit code does exactly what userspace
+would do too).
+
+Importantly the things you really don't need:
+
+- special hw support, even if the only mode your hw supports is with page
+  faults and all that: You can make sure all the pages are present
+  upfront, and then simply kill the entire context is a page fault
+  happens.
+
+- special fw scheduler support: Once the memory management inversions are
+  taken care of with pre-pinning under dma_fences, then the only other
+  thing you need is a timeout for the dma_fence to signal. And maybe some
+  kind of guaranteed ordering if you want to use a dma_fence timeline
+  since that one can't go backwards.
+
+Trying to shoehorn umf into all the old concepts like implicit sync or
+sync_file which really don't support umf works for a demo, but imo just
+isn't solid enough for shipping everywhere.
+
+And long term I really don't think we ever want umf anywhere else than
+drm_syncobj, at least for a 100% umf-native stack.
+
+So maybe this all goes back to the old discussion with had, where you
+argued for the need for special fw and hw and all that to make the old
+dma_fence stuff work. Why is that needed? I still don't get that part ...
+-Daniel
+--=20
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
