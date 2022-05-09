@@ -2,233 +2,119 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1D4552B94B
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 May 2022 14:07:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72D0D52C1F7
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 May 2022 20:13:29 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 00B114108F
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 May 2022 12:07:04 +0000 (UTC)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-	by lists.linaro.org (Postfix) with ESMTPS id 132113EF0C
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 May 2022 12:06:59 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by ams.source.kernel.org (Postfix) with ESMTPS id EA939B81F55;
-	Wed, 18 May 2022 12:06:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 13886C385A5;
-	Wed, 18 May 2022 12:06:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1652875616;
-	bh=QotIh7ZOcCKwfWvV5sJOexyAfJaV8SzuQ0JxUEs2VIk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=t7TyWoBQWift1DQwXw80K3wSMoi8EEezmi+HW8MyoJ32dXLuwWMmmZO2mfmci9gqc
-	 ZoJsmDXJuo84Il6+QuJF2aG0qv8KdOGYEE5cN94b4uaWLw5HD/Qt0Xbe2WYY+ueHcA
-	 sBsrbUsOnOeIpt9XTCvqvmawGE8SQuMA6T6fII+0=
-Date: Wed, 18 May 2022 14:06:53 +0200
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: "T.J. Mercier" <tjmercier@google.com>
-Message-ID: <YoThXfnVT0RzITBk@kroah.com>
-References: <20220516171315.2400578-1-tjmercier@google.com>
- <175c5af3-9224-9c8e-0784-349dad9a2954@amd.com>
- <CABdmKX2GcgCs1xANYPBp8OEtk9qqH7AvCzpdppj9rHXvMqWSAw@mail.gmail.com>
- <0875fa95-3a25-a354-1433-201fca81ed3e@amd.com>
- <CABdmKX1+VYfdzyVYOS5MCsr4ptGTygmuUP9ikyh-vW6DgKk2kg@mail.gmail.com>
- <YoM9BAwybcjG7K/H@kroah.com>
- <CABdmKX3SngXeq+X0YiQ8d4X3xpUhnUtewPiUam5Bfi7PCC6nWQ@mail.gmail.com>
+	by lists.linaro.org (Postfix) with ESMTP id 9E3EA410A7
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 May 2022 18:13:28 +0000 (UTC)
+Received: from alexa-out.qualcomm.com (alexa-out.qualcomm.com [129.46.98.28])
+	by lists.linaro.org (Postfix) with ESMTPS id 484B5402DF
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 May 2022 19:50:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=quicinc.com; i=@quicinc.com; q=dns/txt; s=qcdkim;
+  t=1652125834; x=1683661834;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=4lF5eKVzZJ607ZK+N219R0WFG63ugDlCSKTeifbf0n4=;
+  b=dwT3eOL99g1zvoiXB94bqakkz5737gM1/x1jHPQwxEEDMxjHZTlY+aer
+   cCIgEKeSI9QRfezVTc+uOH2Btnir12VqRU0hDX6fGXmFbtTW71HPToF58
+   r9XJ579hS8UNDRzbiUH3NSF6KuOP548X9ggSweHUpKOaK8f5Ege6Awy5G
+   s=;
+Received: from ironmsg08-lv.qualcomm.com ([10.47.202.152])
+  by alexa-out.qualcomm.com with ESMTP; 09 May 2022 12:50:33 -0700
+X-QCInternal: smtphost
+Received: from nasanex01c.na.qualcomm.com ([10.47.97.222])
+  by ironmsg08-lv.qualcomm.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 May 2022 12:50:33 -0700
+Received: from nalasex01a.na.qualcomm.com (10.47.209.196) by
+ nasanex01c.na.qualcomm.com (10.47.97.222) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.22; Mon, 9 May 2022 12:50:32 -0700
+Received: from hu-charante-hyd.qualcomm.com (10.80.80.8) by
+ nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.22; Mon, 9 May 2022 12:50:28 -0700
+From: Charan Teja Kalla <quic_charante@quicinc.com>
+To: <sumit.semwal@linaro.org>, <christian.koenig@amd.com>,
+	<hridya@google.com>, <daniel.vetter@ffwll.ch>, <gregkh@linuxfoundation.org>
+Date: Tue, 10 May 2022 01:19:57 +0530
+Message-ID: <1652125797-2043-1-git-send-email-quic_charante@quicinc.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CABdmKX3SngXeq+X0YiQ8d4X3xpUhnUtewPiUam5Bfi7PCC6nWQ@mail.gmail.com>
-Message-ID-Hash: WGMRH3E6QLHS6EUZBX6HQXJQYQ6T66B3
-X-Message-ID-Hash: WGMRH3E6QLHS6EUZBX6HQXJQYQ6T66B3
-X-MailFrom: gregkh@linuxfoundation.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Suren Baghdasaryan <surenb@google.com>, Kalesh Singh <kaleshsingh@google.com>, Minchan Kim <minchan@google.com>, Greg Kroah-Hartman <gregkh@google.com>, John Stultz <jstultz@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Hridya Valsaraju <hridya@google.com>, kernel-team@android.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-MailFrom: quic_charante@quicinc.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: CH6EP5KIWVRKKRLPDAZS5AEEPXPPXRQ4
+X-Message-ID-Hash: CH6EP5KIWVRKKRLPDAZS5AEEPXPPXRQ4
+X-Mailman-Approved-At: Wed, 18 May 2022 18:13:23 +0000
+CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, tjmercier@google.com, Charan Teja Reddy <quic_charante@quicinc.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: Move sysfs work out of DMA-BUF export path
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: call dma_buf_stats_setup after dmabuf is in valid list
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WGMRH3E6QLHS6EUZBX6HQXJQYQ6T66B3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CH6EP5KIWVRKKRLPDAZS5AEEPXPPXRQ4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Tue, May 17, 2022 at 04:09:36PM -0700, T.J. Mercier wrote:
-> On Mon, May 16, 2022 at 11:13 PM Greg Kroah-Hartman
-> <gregkh@linuxfoundation.org> wrote:
-> >
-> > On Mon, May 16, 2022 at 05:08:05PM -0700, T.J. Mercier wrote:
-> > > On Mon, May 16, 2022 at 12:21 PM Christian K=F6nig
-> > > <christian.koenig@amd.com> wrote:
-> > > >
-> > > > Am 16.05.22 um 20:08 schrieb T.J. Mercier:
-> > > > > On Mon, May 16, 2022 at 10:20 AM Christian K=F6nig
-> > > > > <christian.koenig@amd.com> wrote:
-> > > > >> Am 16.05.22 um 19:13 schrieb T.J. Mercier:
-> > > > >>> Recently, we noticed an issue where a process went into direct =
-reclaim
-> > > > >>> while holding the kernfs rw semaphore for sysfs in write (exclu=
-sive)
-> > > > >>> mode. This caused processes who were doing DMA-BUF exports and =
-releases
-> > > > >>> to go into uninterruptible sleep since they needed to acquire t=
-he same
-> > > > >>> semaphore for the DMA-BUF sysfs entry creation/deletion. In ord=
-er to avoid
-> > > > >>> blocking DMA-BUF export for an indeterminate amount of time whi=
-le
-> > > > >>> another process is holding the sysfs rw semaphore in exclusive =
-mode,
-> > > > >>> this patch moves the per-buffer sysfs file creation to the defa=
-ult work
-> > > > >>> queue. Note that this can lead to a short-term inaccuracy in th=
-e dmabuf
-> > > > >>> sysfs statistics, but this is a tradeoff to prevent the hot pat=
-h from
-> > > > >>> being blocked. A work_struct is added to dma_buf to achieve thi=
-s, but as
-> > > > >>> it is unioned with the kobject in the sysfs_entry, dma_buf does=
- not
-> > > > >>> increase in size.
-> > > > >> I'm still not very keen of this approach as it strongly feels li=
-ke we
-> > > > >> are working around shortcoming somewhere else.
-> > > > >>
-> > > > > My read of the thread for the last version is that we're running =
-into
-> > > > > a situation where sysfs is getting used for something it wasn't
-> > > > > originally intended for, but we're also stuck with this sysfs
-> > > > > functionality for dmabufs.
-> > > > >
-> > > > >>> Fixes: bdb8d06dfefd ("dmabuf: Add the capability to expose DMA-=
-BUF stats in sysfs")
-> > > > >>> Originally-by: Hridya Valsaraju <hridya@google.com>
-> > > > >>> Signed-off-by: T.J. Mercier <tjmercier@google.com>
-> > > > >>>
-> > > > >>> ---
-> > > > >>> See the originally submitted patch by Hridya Valsaraju here:
-> > > > >>> https://nam11.safelinks.protection.outlook.com/?url=3Dhttps%3A%=
-2F%2Flkml.org%2Flkml%2F2022%2F1%2F4%2F1066&amp;data=3D05%7C01%7Cchristian.k=
-oenig%40amd.com%7C794614324d114880a25508da37672e4b%7C3dd8961fe4884e608e11a8=
-2d994e183d%7C0%7C0%7C637883213566903705%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4=
-wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp=
-;sdata=3DbGlA2FeubfSeL5XDHYyWMZqUXfScoCphZjjK4jrqQJs%3D&amp;reserved=3D0
-> > > > >>>
-> > > > >>> v2 changes:
-> > > > >>> - Defer only sysfs creation instead of creation and teardown per
-> > > > >>> Christian K=F6nig
-> > > > >>>
-> > > > >>> - Use a work queue instead of a kthread for deferred work per
-> > > > >>> Christian K=F6nig
-> > > > >>> ---
-> > > > >>>    drivers/dma-buf/dma-buf-sysfs-stats.c | 56 +++++++++++++++++=
-+++-------
-> > > > >>>    include/linux/dma-buf.h               | 14 ++++++-
-> > > > >>>    2 files changed, 54 insertions(+), 16 deletions(-)
-> > > > >>>
-> > > > >>> diff --git a/drivers/dma-buf/dma-buf-sysfs-stats.c b/drivers/dm=
-a-buf/dma-buf-sysfs-stats.c
-> > > > >>> index 2bba0babcb62..67b0a298291c 100644
-> > > > >>> --- a/drivers/dma-buf/dma-buf-sysfs-stats.c
-> > > > >>> +++ b/drivers/dma-buf/dma-buf-sysfs-stats.c
-> > > > >>> @@ -11,6 +11,7 @@
-> > > > >>>    #include <linux/printk.h>
-> > > > >>>    #include <linux/slab.h>
-> > > > >>>    #include <linux/sysfs.h>
-> > > > >>> +#include <linux/workqueue.h>
-> > > > >>>
-> > > > >>>    #include "dma-buf-sysfs-stats.h"
-> > > > >>>
-> > > > >>> @@ -168,10 +169,46 @@ void dma_buf_uninit_sysfs_statistics(void)
-> > > > >>>        kset_unregister(dma_buf_stats_kset);
-> > > > >>>    }
-> > > > >>>
-> > > > >>> +static void sysfs_add_workfn(struct work_struct *work)
-> > > > >>> +{
-> > > > >>> +     struct dma_buf_sysfs_entry *sysfs_entry =3D
-> > > > >>> +             container_of(work, struct dma_buf_sysfs_entry, sy=
-sfs_add_work);
-> > > > >>> +     struct dma_buf *dmabuf =3D sysfs_entry->dmabuf;
-> > > > >>> +
-> > > > >>> +     /*
-> > > > >>> +      * A dmabuf is ref-counted via its file member. If this h=
-andler holds the only
-> > > > >>> +      * reference to the dmabuf, there is no need for sysfs ko=
-bject creation. This is an
-> > > > >>> +      * optimization and a race; when the reference count drop=
-s to 1 immediately after
-> > > > >>> +      * this check it is not harmful as the sysfs entry will s=
-till get cleaned up in
-> > > > >>> +      * dma_buf_stats_teardown, which won't get called until t=
-he final dmabuf reference
-> > > > >>> +      * is released, and that can't happen until the end of th=
-is function.
-> > > > >>> +      */
-> > > > >>> +     if (file_count(dmabuf->file) > 1) {
-> > > > >> Please completely drop that. I see absolutely no justification f=
-or this
-> > > > >> additional complexity.
-> > > > >>
-> > > > > This case gets hit around 5% of the time in my testing so the els=
-e is
-> > > > > not a completely unused branch.
-> > > >
-> > > > Well I can only repeat myself: This means that your userspace is
-> > > > severely broken!
-> > > >
-> > > > DMA-buf are meant to be long living objects
-> > > This patch addresses export *latency* regardless of how long-lived the
-> > > object is. Even a single, long-lived export will benefit from this
-> > > change if it would otherwise be blocked on adding an object to sysfs.
-> > > I think attempting to improve this latency still has merit.
-> >
-> > Fixing the latency is nice, but as it's just pushing the needed work off
-> > to another code path, it will take longer overall for the sysfs stuff to
-> > be ready for userspace to see.
-> >
-> > Perhaps we need to step back and understand what this code is supposed
-> > to be doing.  As I recall, it was created because some systems do not
-> > allow debugfs anymore, and they wanted the debugging information that
-> > the dmabuf code was exposing to debugfs on a "normal" system.  Moving
-> > that logic to sysfs made sense, but now I am wondering why we didn't see
-> > these issues in the debugfs code previously?
-> >
-> The debugfs stuff doesn't happen on every export, right?
+From: Charan Teja Reddy <quic_charante@quicinc.com>
 
-I do not remember.  If not, then why not do what that does?  :)
+When dma_buf_stats_setup() fails, it closes the dmabuf file which
+results into the calling of dma_buf_file_release() where it does
+list_del(&dmabuf->list_node) with out first adding it to the proper
+list. This is resulting into panic in the below path:
+__list_del_entry_valid+0x38/0xac
+dma_buf_file_release+0x74/0x158
+__fput+0xf4/0x428
+____fput+0x14/0x24
+task_work_run+0x178/0x24c
+do_notify_resume+0x194/0x264
+work_pending+0xc/0x5f0
 
-> > Perhaps we should go just one step further and make a misc device node
-> > for dmabug debugging information to be in and just have userspace
-> > poll/read on the device node and we spit the info that used to be in
-> > debugfs out through that?  That way this only affects systems when they
-> > want to read the information and not normal code paths?  Yeah that's a
-> > hack, but this whole thing feels overly complex now.
-> >
->=20
-> And deprecate sysfs support?
+Fix it by moving the dma_buf_stats_setup() after dmabuf is added to the
+list.
 
-As Android is the only current user, that would be easy to do.
+Fixes: bdb8d06dfefd ("dmabuf: Add the capability to expose DMA-BUF stats in sysfs")
+Signed-off-by: Charan Teja Reddy <quic_charante@quicinc.com>
+---
+ drivers/dma-buf/dma-buf.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-> I'm happy to try out anything you think might be a better way. As far
-> as complexity of this patch, this revision is a much simpler version
-> of the one from Hridya you already reviewed.
+diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+index 602b12d..a6fc96e 100644
+--- a/drivers/dma-buf/dma-buf.c
++++ b/drivers/dma-buf/dma-buf.c
+@@ -543,10 +543,6 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
+ 	file->f_mode |= FMODE_LSEEK;
+ 	dmabuf->file = file;
+ 
+-	ret = dma_buf_stats_setup(dmabuf);
+-	if (ret)
+-		goto err_sysfs;
+-
+ 	mutex_init(&dmabuf->lock);
+ 	INIT_LIST_HEAD(&dmabuf->attachments);
+ 
+@@ -554,6 +550,10 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
+ 	list_add(&dmabuf->list_node, &db_list.head);
+ 	mutex_unlock(&db_list.lock);
+ 
++	ret = dma_buf_stats_setup(dmabuf);
++	if (ret)
++		goto err_sysfs;
++
+ 	return dmabuf;
+ 
+ err_sysfs:
+-- 
+2.7.4
 
-I agree we should work to resolve this now, but just that going forward,
-perhaps this whole api should be revisited now that we see just how much
-complexity and extra system load it has added to to the system due to
-how some users interact with the dmabuf apis.
-
-You never learn just how bad an API really is until it gets used a lot,
-so it's no one's fault.  But let's learn and move forward if possible to
-make things better.
-
-thanks,
-
-greg k-h
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
