@@ -2,134 +2,271 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB63D5215FB
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 May 2022 14:53:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 28C97521DCE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 May 2022 17:12:23 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2A33C480CB
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 May 2022 12:53:02 +0000 (UTC)
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
-	by lists.linaro.org (Postfix) with ESMTPS id 5D3EF47FA6
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 10 May 2022 12:52:57 +0000 (UTC)
-Received: by mail-ed1-f47.google.com with SMTP id c12so12414173edv.10
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 10 May 2022 05:52:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=WI1zTOfSIg5efVZfyvBSsp8//tfBd0cdczBSSxTFZbM=;
-        b=M0XRCTZL5/OCjpLOp6VQQC7z0Re+F/RgmF1UukIrioiMykPB0R7Aj13djyzrg2StTD
-         VJDOyuKku0W+egHu+VrN33KttIt3d5+iHhTH3n/5IAmZek52mv17Dg1VcM7yXoyQttmc
-         /ZZ+3qIfmL178zYSJkv8X3S0uvoLXDPUu45142K201/sJhbuvvpMuTRzgyPc3YuIXza6
-         wIiYACOsi0KOPM/2POCEvOByBujP9Syuh5km2bLbH4e9CB0SYHbUVAnBIqvgA0oOQTmr
-         7gOt+5bvgMYuCV5wk35z/SUzp8lENBLwnQYKgIQPJW4nLEsiPn9P1pvj2F4NPM8pdkaE
-         AsOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=WI1zTOfSIg5efVZfyvBSsp8//tfBd0cdczBSSxTFZbM=;
-        b=gkDYKH/VTez6j2VZ+6OPmAlx72xbk4uaED5tkcFgk7wxawQyEyDKCXHmujq3T7JnXS
-         DKih82WLclQaCzwH/8+hkeEni2oE0Jdaz7Aw/U9cMml0E67RGqb36YuI+92OY51QbJmE
-         mbhznbmNuSe+kExLDwizS8Xd8adOsfAxeWf/H8OEl9kM6BTosW51sEyr5tDYnnz/eOyj
-         5xvY7lTrm4sQNd1/OqhH1ogkDiEtJalywpHjBE39EkV/9VQU+f62Ky3F7TS2eKGDl1Vu
-         SyJVTv4gzB+6jPDLHBTbF07GLLLlnsBqe0CMVv+DLjwrfgy5eUe7HmhBfY/mtLXYm4/9
-         5Z+g==
-X-Gm-Message-State: AOAM533BkXcB37AeMpipN0nQopQwH3P6RCN5sxM60GTxbTX82c8I2xCn
-	8pAE5iQPvfPR4IlaLpg7DfjdHIdEg24=
-X-Google-Smtp-Source: ABdhPJyN5CN/JhTtUeKUlijPnHsp542eYOzriocQW2nzKpv+Am+UGABpfo9csh4/XMFj0hFFENFGfA==
-X-Received: by 2002:a50:ce14:0:b0:425:cb75:5322 with SMTP id y20-20020a50ce14000000b00425cb755322mr23429940edi.386.1652187176341;
-        Tue, 10 May 2022 05:52:56 -0700 (PDT)
-Received: from ?IPV6:2a02:908:1256:79a0:616c:3555:9eac:59cc? ([2a02:908:1256:79a0:616c:3555:9eac:59cc])
-        by smtp.gmail.com with ESMTPSA id s3-20020a170906284300b006f3ef214df2sm6096680ejc.88.2022.05.10.05.52.55
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 10 May 2022 05:52:55 -0700 (PDT)
-Message-ID: <ae249cf7-7367-d3c2-60e5-7bfab6e3ef73@gmail.com>
-Date: Tue, 10 May 2022 14:52:54 +0200
-MIME-Version: 1.0
+	by lists.linaro.org (Postfix) with ESMTP id 11DC6480C8
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 May 2022 15:12:22 +0000 (UTC)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2081.outbound.protection.outlook.com [40.107.92.81])
+	by lists.linaro.org (Postfix) with ESMTPS id E2FC63EEEE
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 10 May 2022 15:12:16 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=AfdM13oNNvRX6UFVlZvlCgp6deHWGohtymApbgGknZUPLSXvukamKghFUR3CuaSuvhOvW26bsatDdDyX54mqE+kKrYZtV2nrQacjHKY/GYuo3bFFBzY8NDqro7nNEquCk5IynA5eoY7y2VAKbhGmdLd0EuTYM8e+pnFyH1CcJJIjw3KUZ68MTkf1wv3lR8Yd9QsBnwQadJBSzQJOvHuj2kKz3ZbgVBgQTsIDadlpiA1D6NMBikUCd0yzvNc89JzxtJY3MiyMPuvsBOZy2Lv/4iV26CSTJyWMFsBKc5JrfprRmts4d3MGn32OCmD7KqW2lXp8k/62avTJnoXrRJtA9w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5wjyK0zD8rRrMy/cRpcVvevQKwTPeRJ2bVwZXMmB1TE=;
+ b=FZuiwBXkZVOA6ka/WK+NqCovwvo9dbQz+ybCzBZX1c+ar1j2vRxlGjxG9CyRjQS4vz1K/IqnaWcBiatEV+JIxaSRgQp5L/5NYP32UeiwZP8/bDzN0QVndTZehKz3WQClabIGvgMgKk4BzPCmT5WhPzP/N5UVDS3PJH9iP/+VFwRc6guqaXvNNnSPBJfNtJjVQgS346j39TQvptgtvKecC8qewV05pQLtC5Lv2Pnsgn/+oHqeiSBr7pgMteP0UgNGlJ5sw0t7ApOaojDwHaYiMMW9MNwktu6ax5L7xlHSBLmZMGOwLf54TS4TRdNeafMEGoCC+L5wsEGKOesUSh/hBQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=5wjyK0zD8rRrMy/cRpcVvevQKwTPeRJ2bVwZXMmB1TE=;
+ b=Dp3z1B4yWLLvVJf4iZNHmeLMlSeWm+nsNVKRRQ90wk1rCUTDzOsnAuBzgAuMu5PWnHgDcXGjfAa+9eGeZsZ8rXsQbFvsvYcVY4tfXbnwmXUM0wb416CSazbiYcQBBtUe9VlpxWgWUgRQtYL9LW8Q73vTa01VOxMW5JPmZ/E4VXg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by DS0PR12MB6440.namprd12.prod.outlook.com (2603:10b6:8:c8::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5227.18; Tue, 10 May
+ 2022 15:12:14 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::fdba:2c6c:b9ab:38f]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::fdba:2c6c:b9ab:38f%4]) with mapi id 15.20.5227.023; Tue, 10 May 2022
+ 15:12:14 +0000
+Message-ID: <4ac55be2-7d55-2c3b-0d5e-f61c02c62792@amd.com>
+Date: Tue, 10 May 2022 17:12:07 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.7.0
 Content-Language: en-US
-To: Greg KH <gregkh@linuxfoundation.org>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-References: <1652178212-22383-1-git-send-email-quic_charante@quicinc.com>
- <YnpF1XP1tH83uBlM@kroah.com> <039e1acc-8688-2e06-1b2a-1acbe813b91e@amd.com>
- <YnpWNSdAQzG80keQ@kroah.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <YnpWNSdAQzG80keQ@kroah.com>
-Message-ID-Hash: 2L5RAUZM7LKIBSLOLA3XS5GQQXPQ2OXO
-X-Message-ID-Hash: 2L5RAUZM7LKIBSLOLA3XS5GQQXPQ2OXO
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
+To: Charan Teja Kalla <quic_charante@quicinc.com>,
+ gregkh@linuxfoundation.org, sumit.semwal@linaro.org, hridya@google.com,
+ daniel.vetter@ffwll.ch, tjmercier@google.com
+References: <1652191562-18700-1-git-send-email-quic_charante@quicinc.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <1652191562-18700-1-git-send-email-quic_charante@quicinc.com>
+X-ClientProxiedBy: AS9PR05CA0010.eurprd05.prod.outlook.com
+ (2603:10a6:20b:488::15) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 62146b42-0bfb-476e-6c68-08da329776a3
+X-MS-TrafficTypeDiagnostic: DS0PR12MB6440:EE_
+X-Microsoft-Antispam-PRVS: 
+	<DS0PR12MB64404585254F99902C7D1C1D83C99@DS0PR12MB6440.namprd12.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	CtwT7iiUByDeKbrVzvF/782xnuKz6SjgeOeA77U7/Muei9ilwvIcrvZm4Oje+39or18W4VhlA/K9AJdO2LbThPM1puen/E9mNzUaPFiMOyQBZFY1cKI+Ei7h5eA4ASgxJQDCtaUcYMLFY+JVZqPcMdkD3usi3gbWWfb86cR5V0H7pNM52+Lu7nsV1BYx2Vtuldq5RO/IApycFwRPkW5cBQ2jzKYc3pm93qwjmO/rFbxix3bavC3+D4rLoOTFw65QWttBhUuLnidoTyR9F8OhDFRdAOQdKIs1bZ93VFWMWKrhc1+B76rC4k9vSKCxXzHo4fEj6vX7e3h9Pn2yd6MuJYsxXKwbwTGZ15/knjZyUNGgD/j1NNTU7KPOSl6t2Qpaw5MJliMOJaXQoA16HPzgjaUhnz0gdJF7iaX5HEy1B7upcHhG/TiUXLgdSES/SnR/sGRq6HsbdUq6Z7KZEAXWXtRRPvhznFSULQHxanwutgyqf7xGYMi87rI6kM8NLJwRs4bUxiXIK2mO+A90I1k42mdqqfBEg1J3tiGh3NOkjUXqU1G6DNA1Sch5nNQi+tnO0drKS1ZWuUpfM89MY15gov0c6Fd+SCQPxB/UtznIuPrZxuzI4ZLLRMO7amkDVtuKN61xj90alVFQaRkuptd663GF11qRjbqe4/bdML1uzjKLDYqZutvLQCdAKqHY3AH3m1VJ3K3IJf4vj4rlHPRIbhtOg1FwmXShtyEhDrB3G92bJTpuRP8uEoESYLuOiYBVb+5HNWOPXX5yZ6E7giqse0njBIRkO295zL4ESA6CrsaCVJg1uCeJcsMyPsMTLJobXIoQ+EbWPKjH9gqdcAJI0Q==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(6666004)(966005)(6486002)(31696002)(86362001)(8936002)(7416002)(5660300002)(508600001)(83380400001)(6512007)(38100700002)(2616005)(6506007)(186003)(316002)(36756003)(31686004)(66556008)(4326008)(8676002)(66946007)(66476007)(2906002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?b1NBbWpRa1ZUQXVzdXVLTjZlZkxuQk5BaSthczBOVGxGRUs2QklURS9MU1g4?=
+ =?utf-8?B?VUVIZUNZb3QvaGg0enpPUy9mNitCa0VoSjdWU291VG5NOVRlQzFmN2xONXpU?=
+ =?utf-8?B?RjErM1czSS9JM3ZyQXZBeHNhdlc0UFlKVG9oQkJCWHUxeDNKY3ByUTRhVVZ4?=
+ =?utf-8?B?TllPeUZVdnd6YVF5V3pmWExOSFN4UG04citxMDJpM2xhRXlXdXc5dCtZRWwr?=
+ =?utf-8?B?dEhETDFRdmN0c3cvNXBzTGNOOGtTU3ZDVDFJYzMvU0ViNHJ6b1dRcHUrUEJj?=
+ =?utf-8?B?UjZIL3U5ODR0Q0RmV3ZJKzlLYStMenh1WlZRV242Zlh1OTZxRHI5NkJGZzlW?=
+ =?utf-8?B?SFdGRE1wNS9PRDNkeE9IUGhKMEdSdjhCcHR6NTF5Q0tOMVZyMnRZVEdyZU9k?=
+ =?utf-8?B?R1VaL1FWNTEvMWdhaUh2akFqQUhnSXVGOTlucGpQMnVIVUR4TUl1Y2t2K3U1?=
+ =?utf-8?B?dGhpcmM5UUFSNFBMdzdsWFJ3NWRvTExRbzNoRDhSYitXZWdxVGkzdzhuc2Js?=
+ =?utf-8?B?U0JjUnpSeUZPTzR1SStZblc2RWlZeXZTMjdTMEk5SnpvZHQrUVh1bG8rWGxu?=
+ =?utf-8?B?STFPU1VVNEwwZHZ0M0E2TUlpRUM1c0FKWUp1Ym5YNTh1S1kzZEN1WlE3N21H?=
+ =?utf-8?B?UVhIdkdwS3hLM1F4a2xyWU5rMXhjZ3VLSXZkSHhwbklyakRxVno1Rzk0RVR0?=
+ =?utf-8?B?RWpwUUZvTFlFaklLUHZ0SFpuVlpJTFJlc0dRWHpPYzFxRG5BWE9iM1NsYlVR?=
+ =?utf-8?B?VVNkeElQdGJJNDJhYk01MnFLRWx2NFVqNzNwL3oyaXUvSjdTdEhDOUFCQXRW?=
+ =?utf-8?B?Qit1UWpPQWdYMHh0Nk1pcXl5MDNoRG8zSFBsYkV1ajQ1Ykk0QmJ3YWpUV1Rn?=
+ =?utf-8?B?Qm0zaHlTYWVKSURoeVlYL0FBMFFNaTY0SmwyNzNRMXRTd0xxQUFCK1dvU3VD?=
+ =?utf-8?B?eHlCZlUrOFdoeEs2S0ozU2RhOW1wcUVobFA0OWlRRjRFSTA5UnlPS0dheTlG?=
+ =?utf-8?B?QUhENWh3K1FFZzdFSDRaNzNqa093ajdXNnpGSW85RXhUQlBOZlltajg3WjR3?=
+ =?utf-8?B?RktHbWk0NEVaOEtGZnFicnlGZ0V3YWg5OHNSbnhONk5Vd1ByWUd5elUxRkFG?=
+ =?utf-8?B?MXdLT0Zqa0JxSS95RnVJemtFT3J5NXg0dmd0d2p5SC9GVEcwNmpqVXc2ekRq?=
+ =?utf-8?B?anVXRFZpSHpzNUsrOWZZK3Rnb0pvaGR0MVlxNy96VnpqMDBLcUdkNGVHK0gy?=
+ =?utf-8?B?QVkxS05pc1Vpck5XK0ZDOVEvOVlvMDlDYjd3OFZrMDNDdkRJMmtDcDYvN2FM?=
+ =?utf-8?B?QWRWU2c0bFBQZXd2c2lKWVNCQVJtYXpIZGEzTy9leTh4Y3RGWVBpMWljUTZ4?=
+ =?utf-8?B?MDlWN2VPNkpHNjE4cEZSTU5VM0MrbXlvSWl1czN6Q2tDZnlGR3hHOXlDNUw5?=
+ =?utf-8?B?WHRLNUFaNnR4Q1krTVQyOHdNZ1dJN3VsUjhZT215V3lINmt5cm9KT3BldzZt?=
+ =?utf-8?B?NWhIUTQ2ZVNQRWNWMEZ0K0ZYZXJ0bGEvM1pxTnNVNlJkLytEbU94cjY1TlhI?=
+ =?utf-8?B?VkV4eEE1MTRrQzE5MFBHWUtsWG5wQTVObHNYN0RXbnFXZTZCN0hVZDg3MmlY?=
+ =?utf-8?B?SS9mWVhxY0FNYjlQMzBuVko3NXZwYWphUFdvaDR5clF0NkM5bU9TYlMzMjA0?=
+ =?utf-8?B?SFRZVlNRdFQ0cStkcUZIVTNUNUFlL0xtUjNrWjFUZU4ya2dad1l2cHNndXNJ?=
+ =?utf-8?B?ZG5QYmE5MExxWTd0ZzF5amRmYXlBbThmVWpZOUw3Y0xzUmVldzEreE5CQm1n?=
+ =?utf-8?B?NWMzbmcvZUdvZkYxY1RKNkV1V1VoNzNZNythM0RnSmJ3MFU3UEJsbzltNFVr?=
+ =?utf-8?B?bnJSbDdmZDRpSFNqeUdndUJnVlFmc0tva3ZuRGpuWTJyQSs0aWQxY0tNSmh4?=
+ =?utf-8?B?d1RCemM1WjlzbzNYU2JzWnV1clMwTnpVZDR4dDdqZTdzVWhOQ216bEpNSmlP?=
+ =?utf-8?B?UFhuQjF2U2JhOFJJNS81azN6MkNSRWxORUJpL0k5QWYyOUhZSTlCdFBuNENj?=
+ =?utf-8?B?eU56eHU4VkY2YXFnZXBESjg1WDBuUzNBS1o0QmZRVFIwK3o2c3V1LzdrazhP?=
+ =?utf-8?B?bmR3RUtMNXR1VkZGQjEyOUpqaGdibXhoT29nUkp6d3cxUlpISWc1UGYzcEhR?=
+ =?utf-8?B?NDF4b1VoWjA2Ny9uckovVlZMQTVZZVgzaEZwVTJBbDAyWXlJUENxc3dTWWxp?=
+ =?utf-8?B?VEVPdjF0QXdDSlVXR2pYbUVKK0Y0akl6VXJDaGJScUtoeURJMllSWHlKNXlq?=
+ =?utf-8?B?V1E2dEswNTJwbUNwaWlMd3hUcDcrNXE4RDNRTEtuU2hVa2NNSGFlVjV4Ujho?=
+ =?utf-8?Q?jg00R3tRW4FgRv2nuwDQpRCcOB5nZAqIp8so9VVowH30K?=
+X-MS-Exchange-AntiSpam-MessageData-1: MPagDzIZk9BR7Q==
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 62146b42-0bfb-476e-6c68-08da329776a3
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 May 2022 15:12:13.9624
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: I0qPe8r5o7FmAJUKn/yJlrGCcqGk5nqonYSqFf+xH3gWbg22CCV2BXI7qrFIesOc
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6440
+Message-ID-Hash: DEF6GNXIXWTEMWRRMYRLSBC2OTJA2ZJJ
+X-Message-ID-Hash: DEF6GNXIXWTEMWRRMYRLSBC2OTJA2ZJJ
+X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Charan Teja Kalla <quic_charante@quicinc.com>, sumit.semwal@linaro.org, tjmercier@google.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dmabuf: ensure unique directory name for dmabuf stats
+Subject: [Linaro-mm-sig] Re: [PATCH V2] dmabuf: ensure unique directory name for dmabuf stats
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2L5RAUZM7LKIBSLOLA3XS5GQQXPQ2OXO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DEF6GNXIXWTEMWRRMYRLSBC2OTJA2ZJJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-QW0gMTAuMDUuMjIgdW0gMTQ6MTAgc2NocmllYiBHcmVnIEtIOg0KPiBPbiBUdWUsIE1heSAxMCwg
-MjAyMiBhdCAwMTozNTo0MVBNICswMjAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPj4gQW0g
-MTAuMDUuMjIgdW0gMTM6MDAgc2NocmllYiBHcmVnIEtIOg0KPj4+IE9uIFR1ZSwgTWF5IDEwLCAy
-MDIyIGF0IDAzOjUzOjMyUE0gKzA1MzAsIENoYXJhbiBUZWphIEthbGxhIHdyb3RlOg0KPj4+PiBU
-aGUgZG1hYnVmIGZpbGUgdXNlcyBnZXRfbmV4dF9pbm8oKSh0aHJvdWdoIGRtYV9idWZfZ2V0Zmls
-ZSgpIC0+DQo+Pj4+IGFsbG9jX2Fub25faW5vZGUoKSkgdG8gZ2V0IGFuIGlub2RlIG51bWJlciBh
-bmQgdXNlcyB0aGUgc2FtZSBhcyBhDQo+Pj4+IGRpcmVjdG9yeSBuYW1lIHVuZGVyIC9zeXMva2Vy
-bmVsL2RtYWJ1Zi9idWZmZXJzLzxpbm8+LiBUaGlzIGRpcmVjdG9yeSBpcw0KPj4+PiB1c2VkIHRv
-IGNvbGxlY3QgdGhlIGRtYWJ1ZiBzdGF0cyBhbmQgaXQgaXMgY3JlYXRlZCB0aHJvdWdoDQo+Pj4+
-IGRtYV9idWZfc3RhdHNfc2V0dXAoKS4gQXQgY3VycmVudCwgZmFpbHVyZSB0byBjcmVhdGUgdGhp
-cyBkaXJlY3RvcnkNCj4+Pj4gZW50cnkgY2FuIG1ha2UgdGhlIGRtYV9idWZfZXhwb3J0KCkgdG8g
-ZmFpbC4NCj4+Pj4NCj4+Pj4gTm93LCBhcyB0aGUgZ2V0X25leHRfaW5vKCkgY2FuIGRlZmluaXRl
-bHkgZ2l2ZSBhIHJlcGV0aXRpdmUgaW5vZGUgbm8NCj4+Pj4gY2F1c2luZyB0aGUgZGlyZWN0b3J5
-IGVudHJ5IGNyZWF0aW9uIHRvIGZhaWwgd2l0aCAtRUVYSVNULiBUaGlzIGlzIGENCj4+Pj4gcHJv
-YmxlbSBvbiB0aGUgc3lzdGVtcyB3aGVyZSBkbWFidWYgc3RhdHMgZnVuY3Rpb25hbGl0eSBpcyBl
-bmFibGVkIG9uDQo+Pj4+IHRoZSBwcm9kdWN0aW9uIGJ1aWxkcyBjYW4gbWFrZSB0aGUgZG1hX2J1
-Zl9leHBvcnQoKSwgdGhvdWdoIHRoZSBkbWFidWYNCj4+Pj4gbWVtb3J5IGlzIGFsbG9jYXRlZCBz
-dWNjZXNzZnVsbHksIHRvIGZhaWwganVzdCBiZWNhdXNlIGl0IGNvdWxkbid0DQo+Pj4+IGNyZWF0
-ZSBzdGF0cyBlbnRyeS4NCj4+PiBUaGVuIG1heWJlIHdlIHNob3VsZCBub3QgZmFpbCB0aGUgY3Jl
-YXRpb24gcGF0aCBvZiB0aGUga29iamVjdCBmYWlscyB0bw0KPj4+IGJlIGNyZWF0ZWQ/ICBJdCdz
-IGp1c3QgZm9yIGRlYnVnZ2luZywgaXQgc2hvdWxkIGJlIGZpbmUgaWYgdGhlIGNyZWF0aW9uDQo+
-Pj4gb2YgaXQgaXNuJ3QgdGhlcmUuDQo+PiBXZWxsIGlmIGl0J3MganVzdCBmb3IgZGVidWdnaW5n
-IHRoZW4gaXQgc2hvdWxkIGJlIHVuZGVyIGRlYnVnZnMgYW5kIG5vdA0KPj4gc3lzZnMuDQo+IEkn
-bGwgbm90ZSB0aGF0IHRoZSBvcmlnaW5hbCBwYXRjaCBzZXJpZXMgZm9yIHRoaXMgZGVzY3JpYmVk
-IHdoeSB0aGlzIHdhcw0KPiBtb3ZlZCBmcm9tIGRlYnVnZnMgdG8gc3lzZnMuDQo+DQo+Pj4+IFRo
-aXMgaXNzdWUgd2UgYXJlIGFibGUgdG8gc2VlIG9uIHRoZSBzbmFwZHJhZ29uIHN5c3RlbSB3aXRo
-aW4gMTMgZGF5cw0KPj4+PiB3aGVyZSB0aGVyZSBhbHJlYWR5IGV4aXN0cyBhIGRpcmVjdG9yeSB3
-aXRoIGlub2RlIG5vICIxMjI2MDIiIHNvDQo+Pj4+IGRtYV9idWZfc3RhdHNfc2V0dXAoKSBmYWls
-ZWQgd2l0aCAtRUVYSVNUIGFzIGl0IGlzIHRyeWluZyB0byBjcmVhdGUNCj4+Pj4gdGhlIHNhbWUg
-ZGlyZWN0b3J5IGVudHJ5Lg0KPj4+Pg0KPj4+PiBUbyBtYWtlIHRoZSBkaXJlY3RvcnkgZW50cnkg
-YXMgdW5pcXVlLCBhcHBlbmQgdGhlIGlub2RlIGNyZWF0aW9uIHRpbWUgdG8NCj4+Pj4gdGhlIGlu
-b2RlLiBXaXRoIHRoaXMgY2hhbmdlIHRoZSBzdGF0cyBkaXJlY3RvcnkgZW50cmllcyB3aWxsIGJl
-IGluIHRoZQ0KPj4+PiBmb3JtYXQgb2Y6IC9zeXMva2VybmVsL2RtYWJ1Zi9idWZmZXJzLzxpbm9k
-ZSBubz4tPGlub2RlIGNyZWF0aW9uIHRpbWUgaW4NCj4+Pj4gc2Vjcz4uDQo+Pj4gQXMgeW91IGFy
-ZSBjaGFuZ2luZyB0aGUgZm9ybWF0IGhlcmUsIHNob3VsZG4ndCB0aGUgRG9jdW1lbnRhdGlvbi9B
-QkkvDQo+Pj4gZW50cnkgZm9yIHRoaXMgYWxzbyBiZSBjaGFuZ2VkPw0KPj4gQXMgZmFyIGFzIEkg
-Y2FuIHNlZSB0aGF0IGlzIGV2ZW4gYW4gVUFQSSBicmVhaywgbm90IHN1cmUgaWYgd2UgY2FuIGFs
-bG93DQo+PiB0aGF0Lg0KPiBXaHk/ICBEZXZpY2UgbmFtZXMgY2hhbmdlIGFsbCB0aGUgdGltZSBh
-bmQgc2hvdWxkIG5ldmVyIGJlIHN0YXRpYy4gIEENCj4gYnVmZmVyIG5hbWUgc2hvdWxkIGp1c3Qg
-YmUgYSB1bmlxdWUgaWRlbnRpZmllciBpbiB0aGF0IGRpcmVjdG9yeSwgdGhhdCdzDQo+IGFsbC4g
-IE5vIHJ1bGVzIG9uIHRoZSBmb3JtYXR0aW5nIG9mIGl0IHVubGVzcyBmb3Igc29tZSByZWFzb24g
-dGhlIG5hbWUNCj4gYmVpbmcgdGhlIGlub2RlIG51bWJlciB3YXMgc29tZWhvdyBiZWluZyB1c2Vk
-IGluIHVzZXJzcGFjZSBmb3IgdGhhdA0KPiBudW1iZXI/DQoNCk15IGltcHJlc3Npb24gd2FzIHRo
-YXQgd2UgZG9jdW1lbnRlZCB0aGF0IHNob3VsZCBoYXZlIGJlZW4gYSBudW1iZXIsIGJ1dCANCkkg
-bWlnaHQgYmUgd3Jvbmcgb24gdGhpcy4gQW5kIGlmIGl0J3Mgbm90IGRvY3VtZW50ZWQgdG8gYmUg
-YSBudW1iZXIsIEkgDQp0aGluayBpdCBzaG91bGQgYmUuDQoNClRoZSBiYWNrZ3JvdW5kIGlzIHRo
-YXQgeW91IHByb2JhYmx5IG5lZWQgdG8gYXNzb2NpYXRlIHRoZSBETUEtYnVmIHdpdGggDQpzb21l
-IHVzZXJzcGFjZSBzdHJ1Y3R1cmUgZm9yIGFjY291bnRpbmcgYW5kIHRoYXQgYmVjb21lcyBlYXNp
-ZXIgd2hlbiB5b3UgDQpjYW4ganVzdCBwdXQgdGhlbSBpbnRvIGEgcmFkaXguDQoNClJlZ2FyZHMs
-DQpDaHJpc3RpYW4uDQoNCj4NCj4gdGhhbmtzLA0KPg0KPiBncmVnIGstaA0KPiBfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBMaW5hcm8tbW0tc2lnIG1h
-aWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcNCj4gVG8gdW5zdWJz
-Y3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5v
-cmcNCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGlu
-YXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3Jn
-ClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0
-cy5saW5hcm8ub3JnCg==
+Am 10.05.22 um 16:06 schrieb Charan Teja Kalla:
+> The dmabuf file uses get_next_ino()(through dma_buf_getfile() ->
+> alloc_anon_inode()) to get an inode number and uses the same as a
+> directory name under /sys/kernel/dmabuf/buffers/<ino>. This directory is
+> used to collect the dmabuf stats and it is created through
+> dma_buf_stats_setup(). At current, failure to create this directory
+> entry can make the dma_buf_export() to fail.
+>
+> Now, as the get_next_ino() can definitely give a repetitive inode no
+> causing the directory entry creation to fail with -EEXIST. This is a
+> problem on the systems where dmabuf stats functionality is enabled on
+> the production builds can make the dma_buf_export(), though the dmabuf
+> memory is allocated successfully, to fail just because it couldn't
+> create stats entry.
+>
+> This issue we are able to see on the snapdragon system within 13 days
+> where there already exists a directory with inode no "122602" so
+> dma_buf_stats_setup() failed with -EEXIST as it is trying to create
+> the same directory entry.
+>
+> To make the directory entry as unique, append the unique_id for every
+> inode. With this change the stats directory entries will be in the
+> format of: /sys/kernel/dmabuf/buffers/<inode_number-unique_id>.
+>
+> Signed-off-by: Charan Teja Kalla <quic_charante@quicinc.com>
+> ---
+> Changes in V2:
+>    -- Used the atomic64_t variable to generate a unique_id to be appended to inode
+>       to have an unique directory with name <inode_number-unique_id> -- Suggested by christian
+>    -- Updated the ABI documentation -- Identified by Greg.
+>    -- Massaged the commit log.
+>
+> Changes in V1:
+>    -- Used the inode->i_ctime->tv_secs as an id appended to inode to create the
+>       unique directory with name <inode_number-time_in_secs>.
+>    -- https://lore.kernel.org/all/1652178212-22383-1-git-send-email-quic_charante@quicinc.com/
+>
+>   Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers | 10 +++++-----
+>   drivers/dma-buf/Kconfig                               |  6 +++---
+>   drivers/dma-buf/dma-buf-sysfs-stats.c                 |  8 +++++---
+>   3 files changed, 13 insertions(+), 11 deletions(-)
+>
+> diff --git a/Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers b/Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers
+> index 5d3bc99..9fffbd3 100644
+> --- a/Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers
+> +++ b/Documentation/ABI/testing/sysfs-kernel-dmabuf-buffers
+> @@ -4,19 +4,19 @@ KernelVersion:	v5.13
+>   Contact:	Hridya Valsaraju <hridya@google.com>
+>   Description:	The /sys/kernel/dmabuf/buffers directory contains a
+>   		snapshot of the internal state of every DMA-BUF.
+> -		/sys/kernel/dmabuf/buffers/<inode_number> will contain the
+> -		statistics for the DMA-BUF with the unique inode number
+> -		<inode_number>
+> +		/sys/kernel/dmabuf/buffers/<inode_number-unique_id> will
+> +		contain the statistics for the DMA-BUF with the unique
+> +		pair <inode_number-unique_id>
+>   Users:		kernel memory tuning/debugging tools
+>   
+> -What:		/sys/kernel/dmabuf/buffers/<inode_number>/exporter_name
+> +What:		/sys/kernel/dmabuf/buffers/<inode_number-unique_id>/exporter_name
+>   Date:		May 2021
+>   KernelVersion:	v5.13
+>   Contact:	Hridya Valsaraju <hridya@google.com>
+>   Description:	This file is read-only and contains the name of the exporter of
+>   		the DMA-BUF.
+>   
+> -What:		/sys/kernel/dmabuf/buffers/<inode_number>/size
+> +What:		/sys/kernel/dmabuf/buffers/<inode_number-unique_id>/size
+>   Date:		May 2021
+>   KernelVersion:	v5.13
+>   Contact:	Hridya Valsaraju <hridya@google.com>
+> diff --git a/drivers/dma-buf/Kconfig b/drivers/dma-buf/Kconfig
+> index 541efe0..5bcbdb1 100644
+> --- a/drivers/dma-buf/Kconfig
+> +++ b/drivers/dma-buf/Kconfig
+> @@ -81,9 +81,9 @@ menuconfig DMABUF_SYSFS_STATS
+>   	   Choose this option to enable DMA-BUF sysfs statistics
+>   	   in location /sys/kernel/dmabuf/buffers.
+>   
+> -	   /sys/kernel/dmabuf/buffers/<inode_number> will contain
+> -	   statistics for the DMA-BUF with the unique inode number
+> -	   <inode_number>.
+> +	   /sys/kernel/dmabuf/buffers/<inode_number-unique_id> will contain
+> +	   statistics for the DMA-BUF with the unique pair
+> +	   <inode_number-unique_id>.
+>   
+>   source "drivers/dma-buf/heaps/Kconfig"
+>   
+> diff --git a/drivers/dma-buf/dma-buf-sysfs-stats.c b/drivers/dma-buf/dma-buf-sysfs-stats.c
+> index 2bba0ba..29e9e23 100644
+> --- a/drivers/dma-buf/dma-buf-sysfs-stats.c
+> +++ b/drivers/dma-buf/dma-buf-sysfs-stats.c
+> @@ -38,8 +38,8 @@
+>    *
+>    * The following stats are exposed by the interface:
+>    *
+> - * * ``/sys/kernel/dmabuf/buffers/<inode_number>/exporter_name``
+> - * * ``/sys/kernel/dmabuf/buffers/<inode_number>/size``
+> + * * ``/sys/kernel/dmabuf/buffers/<inode_number-unique_id>/exporter_name``
+> + * * ``/sys/kernel/dmabuf/buffers/<inode_number-unique_id>/size``
+>    *
+>    * The information in the interface can also be used to derive per-exporter
+>    * statistics. The data from the interface can be gathered on error conditions
+> @@ -172,6 +172,7 @@ int dma_buf_stats_setup(struct dma_buf *dmabuf)
+>   {
+>   	struct dma_buf_sysfs_entry *sysfs_entry;
+>   	int ret;
+> +	static atomic64_t unique_id = ATOMIC_INIT(0);
+
+Please move that to the beginning of the declarations.
+
+>   
+>   	if (!dmabuf || !dmabuf->file)
+>   		return -EINVAL;
+> @@ -192,7 +193,8 @@ int dma_buf_stats_setup(struct dma_buf *dmabuf)
+>   
+>   	/* create the directory for buffer stats */
+>   	ret = kobject_init_and_add(&sysfs_entry->kobj, &dma_buf_ktype, NULL,
+> -				   "%lu", file_inode(dmabuf->file)->i_ino);
+> +				   "%lu-%lu", file_inode(dmabuf->file)->i_ino,
+
+Why not just use the unique value here? Or is the inode number necessary 
+for something?
+
+Regards,
+Christian.
+
+> +				   atomic64_add_return(1, &unique_id));
+>   	if (ret)
+>   		goto err_sysfs_dmabuf;
+>   
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
