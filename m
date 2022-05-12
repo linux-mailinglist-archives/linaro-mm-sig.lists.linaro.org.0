@@ -2,97 +2,100 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37AE55315B5
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 May 2022 21:25:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0715E5315B2
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 May 2022 21:24:52 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6AB423F4A0
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 May 2022 19:25:45 +0000 (UTC)
-Received: from mail-oa1-f52.google.com (mail-oa1-f52.google.com [209.85.160.52])
-	by lists.linaro.org (Postfix) with ESMTPS id 8D28C3EF7A
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 12 May 2022 13:10:49 +0000 (UTC)
-Received: by mail-oa1-f52.google.com with SMTP id 586e51a60fabf-ed8a3962f8so6552303fac.4
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 12 May 2022 06:10:49 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 3470E3F4C9
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 May 2022 19:24:51 +0000 (UTC)
+Received: from alexa-out-sd-02.qualcomm.com (alexa-out-sd-02.qualcomm.com [199.106.114.39])
+	by lists.linaro.org (Postfix) with ESMTPS id AA03D40497
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 12 May 2022 14:50:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=sdLATnA0kcPNoqu23cfiMLmFcXc/ybpMfIMW+RMWEMQ=;
-        b=WH/Yg/K2dHDjtYEYJw7pMyeqK00jg9PMsnBNd1pniF5ESO43pGuCO5fdpfXfdvg5GS
-         dXTx+tXrKuQ2bEym+hdoMu3ZiHpWZh8HoBecQMlgoxILQUx5GP3ns+53JGTVqz81nxHs
-         H8XCAbvLb1JMXpVlagB8O97aKBvYKmmLaiP9k1qxyXicWB1+cyUX/noBAfgX4Iwf+DWx
-         Q/0VY3i4K/tlbkd14LKewDJl+22Dflp2EotibMBNPrwppTqRJghkISNCNY5jVSXp71Xy
-         uYOFVcj6HHUiZvS0Sb2f8wEKmaPnVeXbBFwQS50AXuIsCdKGe5jPHfxGmCKc9rqrQBrU
-         +CwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=sdLATnA0kcPNoqu23cfiMLmFcXc/ybpMfIMW+RMWEMQ=;
-        b=52fwD+16rORjxuVaIOtPnSYxyxTUCcpJILejk4fXlnBZW+SgR8zuRMAtN5h5uBbXVU
-         d2gTHLRjv5dfgxqDC7qMusrMakq1MTdq9r/3xMDNFz5JxuExoaMfnRNE4ajRfG1+cLTh
-         tB/LypIiM7dUmn1FxsDycY5YO7kx2c4dwzziRITQJj3dpm/gilhjjjzf+GBVMiB9CAhB
-         8ZewMU5V/L685FPUIyKBugmSLP920PJsnXpFtkeji1x/jGAZCHPXBNDRF6Ijk+d6DPJO
-         UyRPYY27xs9zvHrZq/+SqDDI2wmbnNGc+lKQQ00IIC0AML+G0Nw2brJ4fnLHmHfstEbM
-         o0/Q==
-X-Gm-Message-State: AOAM533qRrgzepxoeCbE2x0G0Yuzu8Jbc+I/MGaFhEiqA+8XSI17Rqqh
-	7s1yCGOty9H8I3J2OYxc9Bgx+yovb3a1aFO4OkaiYw==
-X-Google-Smtp-Source: ABdhPJyS3tE3qF+JcU9MU6Fu4rHz6PDTLQJ7dBPcxrOf3QlhTSnRdWW6XbLBXQksgHFll5uPtYKXAL4qBCTjy5JTea8=
-X-Received: by 2002:a05:6870:d254:b0:db:12b5:da3 with SMTP id
- h20-20020a056870d25400b000db12b50da3mr5466937oac.211.1652361048752; Thu, 12
- May 2022 06:10:48 -0700 (PDT)
+  d=quicinc.com; i=@quicinc.com; q=dns/txt; s=qcdkim;
+  t=1652367015; x=1683903015;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=AJOZLU0t6aDTGHtV1c8nOzI70dn0CA+lR89QhiodPug=;
+  b=wiNcTh+OCYLwL/zrUnWVsmEar+0neJ/YeoHf32LLFkIGrzKYFnmAMBYA
+   JCTHmxcsTINBGDyJrL20kJv2n3uLP8Lh8uhDogq6YQZ1Lr0svx5U4SVue
+   D7GszkGLGRLjSyNvlbnl/qvbnMKmsF1AuoMvTGZ31JdRpk0JLGkutsci2
+   s=;
+Received: from unknown (HELO ironmsg04-sd.qualcomm.com) ([10.53.140.144])
+  by alexa-out-sd-02.qualcomm.com with ESMTP; 12 May 2022 07:50:14 -0700
+X-QCInternal: smtphost
+Received: from nasanex01c.na.qualcomm.com ([10.47.97.222])
+  by ironmsg04-sd.qualcomm.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 May 2022 07:50:14 -0700
+Received: from nalasex01a.na.qualcomm.com (10.47.209.196) by
+ nasanex01c.na.qualcomm.com (10.47.97.222) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.22; Thu, 12 May 2022 07:50:13 -0700
+Received: from [10.214.30.67] (10.80.80.8) by nalasex01a.na.qualcomm.com
+ (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.22; Thu, 12 May
+ 2022 07:50:10 -0700
+Message-ID: <9be4ea50-4dc0-50f0-0552-e4b9e4feafa2@quicinc.com>
+Date: Thu, 12 May 2022 20:20:07 +0530
 MIME-Version: 1.0
-References: <0000000000008a7a1c05c9e53c87@google.com> <000000000000942c2205d6dc0896@google.com>
-In-Reply-To: <000000000000942c2205d6dc0896@google.com>
-From: Dmitry Vyukov <dvyukov@google.com>
-Date: Thu, 12 May 2022 15:10:37 +0200
-Message-ID: <CACT4Y+Yfw+SFqbjqkBFw9aN7PABEgJapr7M2iY-O3nBwrMHVfQ@mail.gmail.com>
-To: syzbot <syzbot+91525b2bd4b5dff71619@syzkaller.appspotmail.com>
-X-MailFrom: dvyukov@google.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.7.0
+Content-Language: en-US
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+	<gregkh@linuxfoundation.org>, <sumit.semwal@linaro.org>, <hridya@google.com>,
+	<daniel.vetter@ffwll.ch>, <tjmercier@google.com>
+References: <1652191562-18700-1-git-send-email-quic_charante@quicinc.com>
+ <4ac55be2-7d55-2c3b-0d5e-f61c02c62792@amd.com>
+ <6dc59fa7-5885-9ed1-54c3-f2d112786312@quicinc.com>
+ <2a0312d3-d576-b5be-c823-938b38096523@amd.com>
+ <4d644a01-5259-a063-b5b2-ea95d5e7dd88@quicinc.com>
+ <93103bb7-8d67-a9ae-31c8-d53cb651a027@amd.com>
+From: Charan Teja Kalla <quic_charante@quicinc.com>
+In-Reply-To: <93103bb7-8d67-a9ae-31c8-d53cb651a027@amd.com>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-MailFrom: quic_charante@quicinc.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: UCT5XQMRH7W2YV3GB6F4TU7L5YYVJQL5
-X-Message-ID-Hash: UCT5XQMRH7W2YV3GB6F4TU7L5YYVJQL5
-X-Mailman-Approved-At: Mon, 23 May 2022 19:25:41 +0000
-CC: airlied@linux.ie, bugs-a21@moonlit-rail.com, christian.koenig@amd.com, daniel.vetter@intel.com, daniel@ffwll.ch, dri-devel@lists.freedesktop.org, javierm@redhat.com, linaro-mm-sig-owner@lists.linaro.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, maarten.lankhorst@linux.intel.com, maxime@cerno.tech, melissa.srw@gmail.com, mripard@kernel.org, sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com, tzimmermann@suse.de
+Message-ID-Hash: QV7WLM4LYU3K6BZTDFSJUYP6CQ6XZORW
+X-Message-ID-Hash: QV7WLM4LYU3K6BZTDFSJUYP6CQ6XZORW
+X-Mailman-Approved-At: Mon, 23 May 2022 19:24:47 +0000
+CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [syzbot] WARNING in drm_gem_shmem_vm_open
+Subject: [Linaro-mm-sig] Re: [PATCH V2] dmabuf: ensure unique directory name for dmabuf stats
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UCT5XQMRH7W2YV3GB6F4TU7L5YYVJQL5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QV7WLM4LYU3K6BZTDFSJUYP6CQ6XZORW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Mon, 31 Jan 2022 at 08:50, syzbot
-<syzbot+91525b2bd4b5dff71619@syzkaller.appspotmail.com> wrote:
->
-> syzbot suspects this issue was fixed by commit:
->
-> commit 0499f419b76f94ede08304aad5851144813ac55c
-> Author: Javier Martinez Canillas <javierm@redhat.com>
-> Date:   Mon Jan 10 09:56:25 2022 +0000
->
->     video: vga16fb: Only probe for EGA and VGA 16 color graphic cards
->
-> bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=126571e0700000
-> start commit:   5d6ab0bb408f Merge tag 'xtensa-20211008' of git://github.c..
-> git tree:       upstream
-> kernel config:  https://syzkaller.appspot.com/x/.config?x=32e6048063923b7b
-> dashboard link: https://syzkaller.appspot.com/bug?extid=91525b2bd4b5dff71619
-> syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=11073300b00000
->
-> If the result looks correct, please mark the issue as fixed by replying with:
->
-> #syz fix: video: vga16fb: Only probe for EGA and VGA 16 color graphic cards
-
-Not sure, but maybe:
-
-#syz fix: video: vga16fb: Only probe for EGA and VGA 16 color graphic cards
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+VGhhbmtzIENocmlzdGlhbiBmb3IgdGhlIGNvbW1lbnRzISENCg0KT24gNS8xMS8yMDIyIDEyOjMz
+IFBNLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPiANCj4+IFRoZSBzaW5nbGUgbnVtYmVyIGFw
+cHJvYWNoLCBnZW5lcmF0ZWQgYnkgYXRvbWljLCB3b3VsZG4ndCBicmVhayB0aGUNCj4+IHVhcGks
+IGJ1dCB0aGF0IG51bWJlciB3b24ndCBnaXZlIGFueSBtZWFuaW5nZnVsIGluZm9ybWF0aW9uIGVz
+cGVjaWFsbHkNCj4+IHdoZW4gdGhpcyBpcyB0YXJnZXRlZCBqdXN0IGZvciBkZWJ1ZyBwdXJwb3Nl
+LiBBbmQganVzdCAnaW5vZGUnIGlzIG5vdA0KPj4gdXNhYmxlIGZvciBhbHJlYWR5IHN0YXRlZCBy
+ZWFzb25zLg0KPiANCj4gV2VsbCwgd2h5IGRvIHlvdSB3YW50IHRvIHVzZSB0aGUgaW5vIGluIHRo
+ZSBmaXJzdCBwbGFjZT8gVGhpcyBpcyBhbg0KPiBhbm9ueW1vdXMgaW5vZGUgbm90IGFzc29jaWF0
+ZWQgd2l0aCBhbnkgZmlsZXN5c3RlbSwgc28gdGhhdCBudW1iZXIgaXMNCj4gbWVhbmluZ2xlc3Mg
+YW55d2F5Lg0KPiANCg0KSXQgaXMganVzdCBmb3IgZWFzZSBvZiBkZWJ1Z2dpbmcuIE5vdGhpbmcg
+bW9yZS4gSSBjYW4gcXVpY2tseSB0cmF2ZXJzZQ0KdGhlIC9zeXMva2VybmVsL2RtYWJ1Zi9idWZm
+ZXJzLyogYW5kIGdldCBjb21wbGV0ZSBpbmZvcm1hdGlvbiBhYm91dCB0aGUNCmRtYWJ1ZiBidWZm
+ZXJzIHdoaWxlIHJlbGF0aW5nIHRvIHdoaWNoIHByb2Nlc3MgdGhpcyBidWZmZXIgaXMgYWxsb2Nh
+dGVkDQpieSwgdXNpbmcgdGhpcyBpbm9kZSBhcyB0aGUgJ3VuaXF1ZScgcmVmZXJlbmNlLg0KDQpo
+dHRwczovL2NzLmFuZHJvaWQuY29tL2FuZHJvaWQvcGxhdGZvcm0vc3VwZXJwcm9qZWN0LysvbWFz
+dGVyOnN5c3RlbS9tZW1vcnkvbGlibWVtaW5mby9saWJkbWFidWZpbmZvL3Rvb2xzL2RtYWJ1Zl9k
+dW1wLmNwcA0KDQo+PiBIb3cgYWJvdXQgdXNpbmcgdGhlIGF0b21pYyBudW1iZXIgZ2VuZXJhdGVk
+IGl0IHNlbGYgdXNlZCBhcyBpbm9kZQ0KPj4gbnVtYmVyPyBJIHNlZSB0bXBmcyBhbHNvIG1haW50
+YWlucyBpdHMgb3duIGlub2RlIG51bWJlcnMgZm9yIHRoZSBzYW1lDQo+PiBvdmVyZmxvdyByZWFz
+b25zWzJdLg0KPiANCj4gWWVhaCwgdGhhdCBjb3VsZCBwb3RlbnRpYWxseSB3b3JrIGFzIHdlbGwu
+DQo+IA0KDQpUaGFua3MuIFdpbGwgd29yayBvbiB0aGUgbmV4dCB2ZXJzaW9uIG9mIHRoaXMgcGF0
+Y2guDQoNCj4gUmVnYXJkcywNCj4gQ2hyaXN0aWFuLg0KX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
+YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
+dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
