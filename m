@@ -2,162 +2,171 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E0A1526025
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 May 2022 12:42:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 221E3526095
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 May 2022 13:03:49 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9C7D7404D1
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 May 2022 10:42:15 +0000 (UTC)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2050.outbound.protection.outlook.com [40.107.237.50])
-	by lists.linaro.org (Postfix) with ESMTPS id 1BAC4404BA
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 13 May 2022 10:42:10 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=C1qjM1Vr2lvFMc5F2Qh6f2/pEqgXBgCodn+tN0rLvdg3u63DqYl8kkBRpeh7mSlPm2GfWMl8yQLkcxEA9f3tRVqirZ9X6+BEEccGDzIB/e2IcRj8Q/0mAItoYOuFmEoaapZ8+T+1sjXgl8PRmAGDn5P9iR51R2Uz5zjoqQUk16JztyS4CRIBFVBK3yJWwuIfiE2Si1vUQiPTgcKDFGJeyEaxhgY1B7WhZyVk6JHNhEN6c32Jup+zhO9/k5PczYNrgMZBQaKRpnuMb5poF6YvqazJfJjdCVGQi/f6oIl5Th2rbcGuxkRgfbQP48ZEz6fV5/XcZ4ogdwMbymN1GavhPA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W650cH49CSygHgTeS2WzM8OJXujGk0QvkyK3pduOLFs=;
- b=JO68NhoZtCfG2o7Nabd8NziomXoCZ5oxI7VStsJgDlkzkwjkBD39AvqWVep+m4vtONH8ixUI0eSOcEsZez6gJAyQFRL+D9HNUrMfns7AWOYQHnw4AG0nwNWEwf3fPruxgcEYIzuDe4mxclagg824Y6zcDv00EyAiVYsPXQnvuB47T9Xz/YNqJrzKivX/sWAEqFuRqCtj2rZsDzFEC4Mr57qBX1p8ErXnCQY2kzfu1XP6aAwrIvm7EIRsBaNg0aoNJFZ3WlExjys+Khbr2lkYJTK6n36w+gZCogOKkF6kRnXE6dhHgIyNXvyvdNaJLOlbclGXpqhpYZlJyhjhJE7h1g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W650cH49CSygHgTeS2WzM8OJXujGk0QvkyK3pduOLFs=;
- b=chvSVGZGU/wh0zdubD/481GB4uTvOmOoGC7kUmwv9oYpo9Dzb4w/I4edUG7UXkjKpyHtFVlEDMdYLgfVpzuY6YkK5917JV10OcEfG2KdnJSd2l4y+bJ1RnRS9uIN47Q9pjub0bk+BQMg/yyfiHFu0QGPeJxI1OnCPyh/3avdV6A=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by MN2PR12MB4320.namprd12.prod.outlook.com (2603:10b6:208:15f::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5250.13; Fri, 13 May
- 2022 10:42:07 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::7146:65ee:8fd3:dd03]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::7146:65ee:8fd3:dd03%4]) with mapi id 15.20.5250.014; Fri, 13 May 2022
- 10:42:07 +0000
-Message-ID: <4947c9e9-ec52-c6be-9f81-e341ddac4e54@amd.com>
-Date: Fri, 13 May 2022 12:42:02 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: en-US
-To: Charan Teja Kalla <quic_charante@quicinc.com>,
- Greg KH <gregkh@linuxfoundation.org>
-References: <1652434689-6203-1-git-send-email-quic_charante@quicinc.com>
- <Yn4u0AG8iC33S3jO@kroah.com>
- <2a45f1e1-39d5-76b3-8fd3-c1f8b288afac@quicinc.com>
- <0071e117-1d91-b086-7cb1-976b2a1c3498@amd.com>
- <f5988884-ba0a-643c-e920-6ae626bb67a1@quicinc.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <f5988884-ba0a-643c-e920-6ae626bb67a1@quicinc.com>
-X-ClientProxiedBy: AS9PR06CA0774.eurprd06.prod.outlook.com
- (2603:10a6:20b:484::29) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
+	by lists.linaro.org (Postfix) with ESMTP id 56493404C3
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 May 2022 11:03:48 +0000 (UTC)
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by lists.linaro.org (Postfix) with ESMTPS id AF553404BA
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 13 May 2022 11:03:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1652439823; x=1683975823;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=TLKqQ2wymwAEhGiToADns1nYw8QR22hogOXokBFX7Cc=;
+  b=kkxHsaE/dln+K6ADfeLHo1ZDOUh8gra0AN7erW7WU+HI2LwG/awB6prc
+   AfkTVQ9wmEBy0k17f5w5uUq/PapdVli4r5FQImQgCzQB5VeN3gkRM80PJ
+   KD/Hm9bUK+A8HmWr8fzEX7ydaxn1IJg7FWIYq/T5JmN1c3s3Pn697LR/1
+   6W/VtQ1pnYZ9H4YlM3rZQ3Jb8Zq5+fJfMGVlp2zWeehVyq6dKIzaVSFI+
+   fCkKHtjpN+xl0iI0a3xY1uqXGYiOZzNURRft8tc2KHygngRr6hjW7jhdo
+   YBU80AKDvxrP2TMRqcH8HZrPcNxF0jcJ++ZJg9G6YiePxsxqZCnWKfZ06
+   A==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10345"; a="270414096"
+X-IronPort-AV: E=Sophos;i="5.91,221,1647327600";
+   d="scan'208";a="270414096"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 May 2022 04:03:40 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.91,221,1647327600";
+   d="scan'208";a="815340352"
+Received: from lkp-server01.sh.intel.com (HELO 5056e131ad90) ([10.239.97.150])
+  by fmsmga006.fm.intel.com with ESMTP; 13 May 2022 04:03:36 -0700
+Received: from kbuild by 5056e131ad90 with local (Exim 4.95)
+	(envelope-from <lkp@intel.com>)
+	id 1npT55-000LfU-DL;
+	Fri, 13 May 2022 11:03:35 +0000
+Date: Fri, 13 May 2022 19:03:22 +0800
+From: kernel test robot <lkp@intel.com>
+To: Neal Liu <neal_liu@aspeedtech.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Joel Stanley <joel@jms.id.au>, Andrew Jeffery <andrew@aj.id.au>,
+	Felipe Balbi <balbi@kernel.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	Li Yang <leoyang.li@nxp.com>
+Message-ID: <202205131836.QEUySDoN-lkp@intel.com>
+References: <20220513065728.857722-2-neal_liu@aspeedtech.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 6569a305-f697-48e3-bc89-08da34cd39ed
-X-MS-TrafficTypeDiagnostic: MN2PR12MB4320:EE_
-X-Microsoft-Antispam-PRVS: 
-	<MN2PR12MB43203BC7EFDE51A92192AB2D83CA9@MN2PR12MB4320.namprd12.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	58MMRLOWSmy/7y1h58p922dfml0SdYebGICEZlL2lruxPl+4KPMzljWlwCzEeF8ZbXsmaJch3SC67vK0lhb3ZZTsqeNpRIrZoDad6MBquYUGw2Lxh3dO1q1C9qxD6qtYXms8OrCuUN+rNJaMU8GinOoWRTIYamKcBG81qhKGlkbPZDzcRnMzZLLFkNSrxnEmXKCU5Sou6mHx2mDBIjBp0x2i8rkiOKDY85Q6wEPrvFwRu4Qrs5R3PeC6fmEe7IwZVDm7aoW5hzANHzGin1hZ9Q90fa9VMQgQhEfqYLQtBF09JiCYR48FhG3A6mlMt+SnKIYAXD0TjBDOwX4rrYNVj4gO5YFdqz5xgTcsfn3taeNxyGOFCt72pclVbQ0evdvH0FBFs3V+KkWNNH2saVeIN9k6UQJ52acclLQPMCBmyNOOvYw55IZ83/hZZQP8sSLRu8PspwT1PjmDtKGqIU8LzdXD4Gpp4Fcnjmfp0ujpr87zdzAGNjyX5G6mVTsPeSzQYXcpjEbPlli3yqUJOKky5DIWwid7T2ZzcjMkQXJUuXXdi4/qtV/ypfTyPvbVc4IXZnGLSdSsXtqbyBzUr3V23zn/Ql/DSmGhYFvjlzK+NAlN2TNiwaqp6M5WtB1A5c04pM0BAvuAd3Wes0MfAloHRSQqVMVinfXUdtFXjlc6sKU/8fn9Kp+VyFVz4xKvJYCgESzQuBZQ1nqWXc9H/YdNIxgay1bp1fTn9N+BXameEDIk4IGtxSz8OWdKAVwRsK4c
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(66476007)(66556008)(86362001)(66946007)(4326008)(8676002)(8936002)(31696002)(110136005)(38100700002)(316002)(36756003)(6666004)(53546011)(2906002)(6506007)(2616005)(66574015)(186003)(6512007)(83380400001)(5660300002)(6486002)(508600001)(7416002)(31686004)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?dmJpejFVYmZSSlYvUDBEM3lnQU50TjErYzc3S1kwNmViSUVFcHlUWVRqT09L?=
- =?utf-8?B?ZnJocjJLNHc5WDhTb1A2UUVhZmhKK00yaVVMb2w1VkFQV2x6Um16ZERqR0p3?=
- =?utf-8?B?cnh6ZWlkSWRObnVPS01jTHNVRlhycGp2djhvelpRZU40NG1sQ1QzelJmbE9h?=
- =?utf-8?B?SnZxMkZwcDE3dnFDck1TejJGaHFlRGM3dmhQZ052dDcwODRZN2psa0tTU2Jy?=
- =?utf-8?B?Z2RhQXgwb0VNdm9YS0E0eE1FaHZqaHFxaC93NE1tSjMvemlwdkd2ak9RbWZn?=
- =?utf-8?B?SHd4emlyaTdhMFg1NEVJSDUzWW1nQ3pVeW51T0RSQWtHNkxSb3FtRGdUTlJL?=
- =?utf-8?B?SXZmQ1FhWFdHWkgrc0hRR3plT1FhS2JsWkRPaVNtYjMxd0dabSs5Q0VmZ1BO?=
- =?utf-8?B?YVFZYVA4UFJsckc3WFZTZTk4V0FDUzJ4VEYrMFNZa1hycnZnRWh3UVNZMUZ0?=
- =?utf-8?B?WGNjbnFKSHRiS2g3bXgwS2hkQURCZStTVkdVdnk2L1Vvd2VaVGsyL0ZTSzRW?=
- =?utf-8?B?cjg5eVl1aFVtaHArb251Nm9ldzNUYU9oSFRYYmhjTlQvRjFPa1IyNXdPWUFp?=
- =?utf-8?B?bDMwOUQwbWNBYUMrdEZVTThEcHdiS2VQQUEyMlNIQmo1M2l1Q1o4VGZOM3hV?=
- =?utf-8?B?akREcGVacmxwZnMrMVJPcEdxblZGRTM1MmUrbVdnZlp2L2t5Umhvc005WWdl?=
- =?utf-8?B?RkpIcFRmMGlHV0pva1lCRHordUloZ2FrTU5pei9NbjhwNlloSTM5UEtxOXZt?=
- =?utf-8?B?ZmQ1dkI3WE9GQUFKRWF5SGlRSU8yRzl4bUk1c2xOVHlsY1FYSnZDaEdrOERG?=
- =?utf-8?B?L3dHZThKZmk3M3FQT3gyMmIzU1o4YXNHNGlack9EWGVoNVlmNEg5eFVEUjJr?=
- =?utf-8?B?VndEandvRG54VWtKWHZaYlVDNU90N3Jidjh2V1BITmtTc0dwclZFek04bWJG?=
- =?utf-8?B?alZGZEhwTy95U0NxdmEwVzFFN3VBWFo0TEtoS3UrNDlxczhHdGlrZjMxVTVl?=
- =?utf-8?B?MnRscUR6RUl3ZGxWem1KaG56NUdEemVNN3VocHpUaXZiODBRNUJnMUx4NVV4?=
- =?utf-8?B?dTdVZDJFaEdwa2dnT3lQL0pMeFVkS1BPdDhMWTVDVDR4RHoxc3ZPUUxmUTlv?=
- =?utf-8?B?WHpQaldWMzgwck9OWG1jdkMwLzNlZkpjUTNtanBLVGlMY0czdTFmdk0yaC9s?=
- =?utf-8?B?TW5paWhWTVNPWjFjMGtWbW9kZGZrekJsTU5BTVY2aWpVRUZXY2dmZGtIa0t0?=
- =?utf-8?B?akFpdWJ3WjgxaGIwWE5iL1AzMDlGaHQxY0F3WWdmVmRKZ0tSWklGRm1TcENa?=
- =?utf-8?B?NU9vTTExeTJHWGZzOERuS3dBeTFpY3NlYjF2MXJTbHBJVThmQUZwWU41WXhO?=
- =?utf-8?B?MmV3Njd1QnROWVV5U09sWHFLbklrNlB0NVhOWWJmczhYRGFSSFFzQjlUM0VC?=
- =?utf-8?B?dHJndUdtdVY5c0JFK2cwdDl4QVNYVmM4NEFmMENxb25EQU14b1kzSGp1NlNS?=
- =?utf-8?B?LzVNalFpcmYxMVRuejJpZjVGaGpXM1BIaDlPNUdLR1dHR29mWEN3Uzg1SnBY?=
- =?utf-8?B?Z1lYL0VQUngrTnlqWmdqRUtkLzM0aXBaSWt1aEw4UlVWdDNsQmlTdThsN0JV?=
- =?utf-8?B?K1E4bkYyZVYxU0NrVkZQdjNPdzcySTQxT1RQdUo3eXh5ZVNEeHUwV2dydVB4?=
- =?utf-8?B?Rk5aVXlMaHRQc3phL3VIYTlBem5kWTRjeXhleTB1NFNPMzR4R3J6aStvQmlM?=
- =?utf-8?B?T3B4T3hHZ1VYQTNKNmxHT3Q4WGhzaGJSNStjWnUzbW81SVByb0NKN1piRTha?=
- =?utf-8?B?TmdxQ2ttb1IwdWxhenNlQWM3SGlwbXpVRDhaKzZDRGtQZWJzZ2o2ZkdnMG5z?=
- =?utf-8?B?blduTE5DQldndVNZZHVQQ1ppR3dtUkM2TlpjTFQ4bEd2bC9Ra3VvU04zcVVa?=
- =?utf-8?B?T0Nsc01yd0FhRE92djlIWmhnVmZ3Si9MRzExTE1EMWdSZG1LVWJqcW5QVGhM?=
- =?utf-8?B?SXp1K25EamczV0hVMWQwWUJYTFBUeWhSOHR4L0JmdE5Cd3BJRy92WTMwMkhE?=
- =?utf-8?B?S0J4MVkvQTBic3RzT3JJcVFlY0VOdkJIOTBVeFdHTzdpTGUzTjM4b0lyeG5S?=
- =?utf-8?B?TUxzMkpiUGJsNmRPN1I4Ui9Qc29YeVhUblVycS9ORkdvWW52bFFHeVozUzAz?=
- =?utf-8?B?V24xSW5vK2xOQ3R5alF6RnEyeUVBN09KUEJJejlIdUlsd0swWGFZVFE3QlhQ?=
- =?utf-8?B?K3pCdVlvaXFtS2J4L0NEc015NTVQN1N3SlhtQ1RrSXo3V1VaRXJrK3E3T2t4?=
- =?utf-8?B?UFRsN2l0b1lBTzY0SW1LbXRPWW9yZWY2SFlIUW13Q3h5STU1a090RVQ1NXdz?=
- =?utf-8?Q?Zu36Mv4wkaYCn5aH6BcZe71f6PmuSINm4TpPx/iEImujC?=
-X-MS-Exchange-AntiSpam-MessageData-1: kiJX5s3c5jokzg==
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6569a305-f697-48e3-bc89-08da34cd39ed
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 May 2022 10:42:07.4449
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: p0TXpPI8KrapUGKRXGxFE/x1VmyZ4SXowZY/qwFOFjeHBV8lpnDwsJidBy4vJ6md
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4320
-Message-ID-Hash: YTCSVLXVSPQ2PPSI4ZVUDS5PZAQEZRGM
-X-Message-ID-Hash: YTCSVLXVSPQ2PPSI4ZVUDS5PZAQEZRGM
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: sumit.semwal@linaro.org, hridya@google.com, tjmercier@google.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+Content-Disposition: inline
+In-Reply-To: <20220513065728.857722-2-neal_liu@aspeedtech.com>
+Message-ID-Hash: HRQ2T6CBUI7T5IVUTQBPMQWP57I2QFU7
+X-Message-ID-Hash: HRQ2T6CBUI7T5IVUTQBPMQWP57I2QFU7
+X-MailFrom: lkp@intel.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: kbuild-all@lists.01.org, Neal Liu <neal_liu@aspeedtech.com>, linux-aspeed@lists.ozlabs.org, linux-usb@vger.kernel.org, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, BMC-SW@aspeedtech.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH V3] dma-buf: ensure unique directory name for dmabuf stats
+Subject: [Linaro-mm-sig] Re: [PATCH 1/3] usb: gadget: add Aspeed ast2600 udc driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YTCSVLXVSPQ2PPSI4ZVUDS5PZAQEZRGM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HRQ2T6CBUI7T5IVUTQBPMQWP57I2QFU7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-DQoNCkFtIDEzLjA1LjIyIHVtIDEyOjM4IHNjaHJpZWIgQ2hhcmFuIFRlamEgS2FsbGE6DQo+IE9u
-IDUvMTMvMjAyMiAzOjU5IFBNLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPj4gQW0gMTMuMDUu
-MjIgdW0gMTI6MTggc2NocmllYiBDaGFyYW4gVGVqYSBLYWxsYToNCj4+PiBPbiA1LzEzLzIwMjIg
-Mzo0MSBQTSwgR3JlZyBLSCB3cm90ZToNCj4+Pj4+IFJlcG9ydGVkLWJ5OiBrZXJuZWwgdGVzdCBy
-b2JvdCA8bGtwQGludGVsLmNvbT4NCj4+Pj4gVGhlIHRyZXN0IHJvYm90IGRpZCBub3Qgc2F5IHRo
-YXQgdGhlIGRtYWJ1ZiBzdGF0IG5hbWUgd2FzIGJlaW5nDQo+Pj4+IGR1cGxpY2F0ZWQsIGRpZCBp
-dD8NCj4+Pj4NCj4+PiBJdCByZXBvcnRlZCBhIHByaW50ayB3YXJuaW5nIG9uIFYyWzFdLiBTaG91
-bGQgd2UgcmVtb3ZlIHRoaXMgb24gVjM/DQo+PiBXZSBvbmx5IGFkZCB0aGUga2VybmVsIHRlc3Qg
-cm9ib3QgaXMgcmVwb3J0IHdoZW4gaXQgZm91bmQgdGhlIHVuZGVybHlpbmcNCj4+IHByb2JsZW0g
-YW5kIG5vdCBqdXN0IG5vdGVkIHNvbWUgd2FybmluZyBvbiBhbiBpbnRlcm1lZGlhdGUgcGF0Y2gg
-dmVyc2lvbi4NCj4gTm90ZWQuIFRoYW5rcyEhDQo+Pj4gQENocmlzdGlhbjogQ291bGQgeW91IHBs
-ZWFzZSBkcm9wIHRoaXMgdGFnIHdoaWxlIG1lcmdpbmc/DQo+PiBTdXJlLCBJIGRvbid0IGhhdmUg
-bXVjaCBvbiBteSBwbGF0ZSBhdCB0aGUgbW9tZW50LiBCdXQgZG9uJ3QgbGV0IGl0DQo+PiBiZWNv
-bWUgYSBoYWJpdC4NCj4+DQo+IFN1cmUuIEkgYW0gYWxzbyB0aGlua2luZyBJZiBpdCBpcyB3b3J0
-aCB0byBhZGQgc3RhYmxlIHRhZz8gVGhvdWdoIGl0IGlzDQo+IG5vdCBjcmFzaGluZyB0aGUga2Vy
-bmVsIGJ1dCBkZWZpbml0ZWx5IG1ha2luZyB0aGUgZG1hX2J1Zl9leHBvcnQgdG8gZmFpbA0KPiBm
-b3Igbm8gcmVhc29uLg0KPg0KPiBJZiB5ZXMsIEkgY2FuIHJlc2VuZCB0aGUgcGF0Y2ggd2l0aCBh
-bGwgdGhlc2UgdGFncy4NCg0KWWVhaCwgc3VyZS4NCg0KQ2hyaXN0aWFuLg0KDQo+DQo+PiBHb2lu
-ZyB0byBwdXNoIGl0IHVwc3RyZWFtIHRocm91Z2ggZHJtLW1pc2MtZml4ZXMgbm93Lg0KDQpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2ln
-IG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJz
-Y3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5v
-cmcK
+Hi Neal,
+
+I love your patch! Perhaps something to improve:
+
+[auto build test WARNING on usb/usb-testing]
+[also build test WARNING on robh/for-next v5.18-rc6 next-20220513]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Neal-Liu/add-Aspeed-udc-driver-for-ast2600/20220513-150314
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb.git usb-testing
+config: alpha-allyesconfig (https://download.01.org/0day-ci/archive/20220513/202205131836.QEUySDoN-lkp@intel.com/config)
+compiler: alpha-linux-gcc (GCC) 11.3.0
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/intel-lab-lkp/linux/commit/272ae26f9fe89f60d584cf445431d0fa566eb24b
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Neal-Liu/add-Aspeed-udc-driver-for-ast2600/20220513-150314
+        git checkout 272ae26f9fe89f60d584cf445431d0fa566eb24b
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.3.0 make.cross W=1 O=build_dir ARCH=alpha SHELL=/bin/bash drivers/usb/gadget/udc/
+
+If you fix the issue, kindly add following tag as appropriate
+Reported-by: kernel test robot <lkp@intel.com>
+
+All warnings (new ones prefixed by >>):
+
+   drivers/usb/gadget/udc/aspeed_udc.c: In function 'ast_udc_ep0_out':
+>> drivers/usb/gadget/udc/aspeed_udc.c:790:13: warning: variable 'buf' set but not used [-Wunused-but-set-variable]
+     790 |         u8 *buf;
+         |             ^~~
+   drivers/usb/gadget/udc/aspeed_udc.c: In function 'ast_udc_ep0_handle_setup':
+>> drivers/usb/gadget/udc/aspeed_udc.c:1099:60: warning: suggest braces around empty body in an 'else' statement [-Wempty-body]
+    1099 |                 SETUP_DBG(udc, "No gadget for request !\n");
+         |                                                            ^
+>> drivers/usb/gadget/udc/aspeed_udc.c:1034:13: warning: variable 'ep_num' set but not used [-Wunused-but-set-variable]
+    1034 |         u16 ep_num = 0;
+         |             ^~~~~~
+
+
+vim +/buf +790 drivers/usb/gadget/udc/aspeed_udc.c
+
+   783	
+   784	static void ast_udc_ep0_out(struct ast_udc_dev *udc)
+   785	{
+   786		struct device *dev = &udc->pdev->dev;
+   787		struct ast_udc_ep *ep = &udc->ep[0];
+   788		struct ast_udc_request *req;
+   789		u16 rx_len;
+ > 790		u8 *buf;
+   791	
+   792		if (list_empty(&ep->queue))
+   793			return;
+   794	
+   795		req = list_entry(ep->queue.next, struct ast_udc_request, queue);
+   796	
+   797		buf = req->req.buf;
+   798		rx_len = EP0_GET_RX_LEN(ast_udc_read(udc, AST_UDC_EP0_CTRL));
+   799		req->req.actual += rx_len;
+   800	
+   801		SETUP_DBG(udc, "req %p (%d/%d)\n", req,
+   802			  req->req.actual, req->req.length);
+   803	
+   804		if ((rx_len < ep->ep.maxpacket) ||
+   805		    (req->req.actual == req->req.length)) {
+   806			ast_udc_ep0_tx(udc);
+   807			if (!ep->dir_in)
+   808				ast_udc_done(ep, req, 0);
+   809	
+   810		} else {
+   811			if (rx_len > req->req.length) {
+   812				// Issue Fix
+   813				dev_warn(dev, "Something wrong (%d/%d)\n",
+   814					 req->req.actual, req->req.length);
+   815				ast_udc_ep0_tx(udc);
+   816				ast_udc_done(ep, req, 0);
+   817				return;
+   818			}
+   819	
+   820			ep->dir_in = 0;
+   821	
+   822			/* More works */
+   823			ast_udc_ep0_queue(ep, req);
+   824		}
+   825	}
+   826	
+
+-- 
+0-DAY CI Kernel Test Service
+https://01.org/lkp
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
