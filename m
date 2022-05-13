@@ -2,17 +2,17 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63C1F5323D3
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 09:14:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4387D5323D9
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 09:16:26 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4086F3F8D9
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 07:14:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 712053F8C5
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 07:16:25 +0000 (UTC)
 Received: from twspam01.aspeedtech.com (twspam01.aspeedtech.com [211.20.114.71])
-	by lists.linaro.org (Postfix) with ESMTPS id 8BA4B404B0
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 13 May 2022 06:58:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 263B3404B7
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 13 May 2022 06:58:25 +0000 (UTC)
 Received: from mail.aspeedtech.com ([192.168.0.24])
-	by twspam01.aspeedtech.com with ESMTP id 24D6iAZJ026760;
-	Fri, 13 May 2022 14:44:11 +0800 (GMT-8)
+	by twspam01.aspeedtech.com with ESMTP id 24D6iAZK026760;
+	Fri, 13 May 2022 14:44:12 +0800 (GMT-8)
 	(envelope-from neal_liu@aspeedtech.com)
 Received: from localhost.localdomain (192.168.10.10) by TWMBX02.aspeed.com
  (192.168.0.24) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 13 May
@@ -33,8 +33,8 @@ To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         Geert Uytterhoeven <geert@linux-m68k.org>,
         "Li
  Yang" <leoyang.li@nxp.com>
-Date: Fri, 13 May 2022 14:57:27 +0800
-Message-ID: <20220513065728.857722-3-neal_liu@aspeedtech.com>
+Date: Fri, 13 May 2022 14:57:28 +0800
+Message-ID: <20220513065728.857722-4-neal_liu@aspeedtech.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220513065728.857722-1-neal_liu@aspeedtech.com>
 References: <20220513065728.857722-1-neal_liu@aspeedtech.com>
@@ -43,19 +43,19 @@ X-Originating-IP: [192.168.10.10]
 X-ClientProxiedBy: TWMBX02.aspeed.com (192.168.0.24) To TWMBX02.aspeed.com
  (192.168.0.24)
 X-DNSRBL: 
-X-MAIL: twspam01.aspeedtech.com 24D6iAZJ026760
+X-MAIL: twspam01.aspeedtech.com 24D6iAZK026760
 X-MailFrom: neal_liu@aspeedtech.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 2JRDW4XOBT3RNSKXKGKMMG3OYFWRMXEN
-X-Message-ID-Hash: 2JRDW4XOBT3RNSKXKGKMMG3OYFWRMXEN
-X-Mailman-Approved-At: Tue, 24 May 2022 07:14:47 +0000
+Message-ID-Hash: 44SUFL57CCDSSNI3BOTSJZK4I7YFK2NN
+X-Message-ID-Hash: 44SUFL57CCDSSNI3BOTSJZK4I7YFK2NN
+X-Mailman-Approved-At: Tue, 24 May 2022 07:16:21 +0000
 CC: Neal Liu <neal_liu@aspeedtech.com>, linux-aspeed@lists.ozlabs.org, linux-usb@vger.kernel.org, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, BMC-SW@aspeedtech.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 2/3] ARM: dts: aspeed: Add USB2.0 device controller node
+Subject: [Linaro-mm-sig] [PATCH 3/3] dt-bindings: usb: add documentation for aspeed udc
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2JRDW4XOBT3RNSKXKGKMMG3OYFWRMXEN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/44SUFL57CCDSSNI3BOTSJZK4I7YFK2NN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -65,35 +65,73 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Add USB2.0 device controller(udc) node to device tree
-for AST2600.
+Add device tree binding documentation for the Aspeed USB2.0 Device
+Controller.
 
 Signed-off-by: Neal Liu <neal_liu@aspeedtech.com>
 ---
- arch/arm/boot/dts/aspeed-g6.dtsi | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ .../devicetree/bindings/usb/aspeed,udc.yaml   | 52 +++++++++++++++++++
+ 1 file changed, 52 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/usb/aspeed,udc.yaml
 
-diff --git a/arch/arm/boot/dts/aspeed-g6.dtsi b/arch/arm/boot/dts/aspeed-g6.dtsi
-index 3d5ce9da42c3..5517313eb2b5 100644
---- a/arch/arm/boot/dts/aspeed-g6.dtsi
-+++ b/arch/arm/boot/dts/aspeed-g6.dtsi
-@@ -298,6 +298,16 @@ vhub: usb-vhub@1e6a0000 {
- 			status = "disabled";
- 		};
- 
-+		udc: udc@1e6a2000 {
-+			compatible = "aspeed,ast2600-udc";
-+			reg = <0x1e6a2000 0x300>;
-+			interrupts = <GIC_SPI 9 IRQ_TYPE_LEVEL_HIGH>;
-+			clocks = <&syscon ASPEED_CLK_GATE_USBPORT2CLK>;
-+			pinctrl-names = "default";
-+			pinctrl-0 = <&pinctrl_usb2bd_default>;
-+			status = "disabled";
-+		};
+diff --git a/Documentation/devicetree/bindings/usb/aspeed,udc.yaml b/Documentation/devicetree/bindings/usb/aspeed,udc.yaml
+new file mode 100644
+index 000000000000..d1d2f77d1c54
+--- /dev/null
++++ b/Documentation/devicetree/bindings/usb/aspeed,udc.yaml
+@@ -0,0 +1,52 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++# Copyright (c) 2020 Facebook Inc.
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/usb/aspeed,udc.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
- 		apb {
- 			compatible = "simple-bus";
- 			#address-cells = <1>;
++title: ASPEED USB 2.0 Device Controller
++
++maintainers:
++  - Neal Liu <neal_liu@aspeedtech.com>
++
++description: |+
++  The ASPEED USB 2.0 Device Controller implements 1 control endpoint and
++  4 generic endpoints for AST260x.
++
++  Supports independent DMA channel for each generic endpoint.
++  Supports 32/256 stages descriptor mode for all generic endpoints.
++
++properties:
++  compatible:
++    enum:
++      - aspeed,ast2600-udc
++
++  reg:
++    maxItems: 1
++
++  clocks:
++    maxItems: 1
++
++  interrupts:
++    maxItems: 1
++
++required:
++  - compatible
++  - reg
++  - clocks
++  - interrupts
++
++additionalProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/clock/aspeed-clock.h>
++    udc: udc@1e6a2000 {
++            compatible = "aspeed,ast2600-udc";
++            reg = <0x1e6a2000 0x300>;
++            interrupts = <9>;
++            clocks = <&syscon ASPEED_CLK_GATE_USBPORT2CLK>;
++            pinctrl-names = "default";
++            pinctrl-0 = <&pinctrl_usb2bd_default>;
++    };
 -- 
 2.25.1
 
