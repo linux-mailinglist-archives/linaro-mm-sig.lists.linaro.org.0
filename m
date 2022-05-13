@@ -2,78 +2,59 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id E49765323DD
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 09:17:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D69755323DE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 09:17:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 246663F8CA
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 07:17:06 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
-	by lists.linaro.org (Postfix) with ESMTPS id 0959E404B2
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 13 May 2022 09:07:07 +0000 (UTC)
-Received: by mail-wr1-f43.google.com with SMTP id k2so10551634wrd.5
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 13 May 2022 02:07:06 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 11BC33F8C0
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 07:17:25 +0000 (UTC)
+Received: from alexa-out.qualcomm.com (alexa-out.qualcomm.com [129.46.98.28])
+	by lists.linaro.org (Postfix) with ESMTPS id 3CEE1404B2
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 13 May 2022 09:39:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=tQhMv5wgd6P5e5ZPKnJXTqhF5TWWKVPkk+00hnqjRXs=;
-        b=l8ZqzODxTeK4g2pTFG9ZfVYndijHwk3ii/cTxtexptHo590e35fS20iJwufNZdEh92
-         2jnMvPNFHcft1cWJ2CbcRhtpHmMAmc8dJINengKkOOb5LUd5kbGum+qa3F+Uqhq9WxGl
-         Y+4vNppopCVyTh/NMA/pHCUtSirsXcuUpHKpHmqmDSiZwaJhIZS9BkwROWE1xhfpXly0
-         vSZYHS/eCsuDxwTwx4exGV1Fcw0wIFsgGORQL+NhF0F+GT4P72xlIFvgV2ehYcMbmDo+
-         /yl0yWZV9wzV5KCbXL8PYSXGFZ+bnosYCEC8iFJe3AHNNRz4j1c+vziQGTi+0eTaY+OS
-         xqFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=tQhMv5wgd6P5e5ZPKnJXTqhF5TWWKVPkk+00hnqjRXs=;
-        b=sdVYc5DVcTx23RapLJzxId7HpmVzkFVjTKmQi2pSzJuF8aUx0wYJ+0MrtlL3+wo/+R
-         PIdkYpRSLExoz3GadYZ6rzKhNHTytcMQqZ/sp2jcGuO0VT1ogVfMo1ChqCSk+1lfwkfp
-         wgRd2yVJbdzRuA4LTpDB9jPwTwpSa1IxfZdOgQ5vsQULMq0BdNvaClV7QjFyRhPeyWd+
-         20RUX2L4vapKYp20bZTULVlRg4Bj3C6EnaMmyk5XSKtSKLPxCLolK7Fzml9VDRjgehps
-         3mvaKDAAsvDrCQkNhU4uncrlVA6QvPgsDRR9GZxxn13PW46LdOlMG1VjNlyOW2rAEEUp
-         NjgQ==
-X-Gm-Message-State: AOAM532/A2IM50jyf+NNmxk9Ty4G1pWkopli4ucjFDdtJonfxJRfI7nx
-	0zuYxbgAlzkbl8x37BgeAW1Mbxsf
-X-Google-Smtp-Source: ABdhPJy98bvsVxNsD1pSSLGnY3/tw/4jQw9PX2RSQLFiZDfcJuBduq4HwVBFKrcSH9BcOE5sNaEWQA==
-X-Received: by 2002:a5d:4090:0:b0:20c:8b91:3b17 with SMTP id o16-20020a5d4090000000b0020c8b913b17mr2991905wrp.348.1652432826026;
-        Fri, 13 May 2022 02:07:06 -0700 (PDT)
-Received: from [192.168.0.169] (xdsl-188-155-176-92.adslplus.ch. [188.155.176.92])
-        by smtp.gmail.com with ESMTPSA id s23-20020adfa297000000b0020c5253d8f4sm1662710wra.64.2022.05.13.02.07.04
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 13 May 2022 02:07:05 -0700 (PDT)
-Message-ID: <da78aaf6-c9ae-d591-fdc4-723f097ace2c@linaro.org>
-Date: Fri, 13 May 2022 11:07:04 +0200
+  d=quicinc.com; i=@quicinc.com; q=dns/txt; s=qcdkim;
+  t=1652434741; x=1683970741;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=Ez+FQiFpOQTlhI+vyJS9Bue8ypwJicksZwlgEN+UBjg=;
+  b=PHVMjXtE7ORS91Vrwn6oLah1vGO8ZAPY5PazCBTI8Jy8aLG4iRDdkjua
+   qgGd++ocslOdZiiSzXyWx+NsbPnCaFO9J17V4XfnJCEZKabbnu49mt6MW
+   BxKwNf6kzNACrwfCO28KVtez+LDX0sxOy6lNuguxfidT2QiP1v1djKxcU
+   8=;
+Received: from ironmsg08-lv.qualcomm.com ([10.47.202.152])
+  by alexa-out.qualcomm.com with ESMTP; 13 May 2022 02:39:00 -0700
+X-QCInternal: smtphost
+Received: from nasanex01c.na.qualcomm.com ([10.47.97.222])
+  by ironmsg08-lv.qualcomm.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 May 2022 02:39:00 -0700
+Received: from nalasex01a.na.qualcomm.com (10.47.209.196) by
+ nasanex01c.na.qualcomm.com (10.47.97.222) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.22; Fri, 13 May 2022 02:38:59 -0700
+Received: from hu-charante-hyd.qualcomm.com (10.80.80.8) by
+ nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.22; Fri, 13 May 2022 02:38:55 -0700
+From: Charan Teja Kalla <quic_charante@quicinc.com>
+To: <christian.koenig@amd.com>, <sumit.semwal@linaro.org>,
+	<gregkh@linuxfoundation.org>, <hridya@google.com>, <daniel.vetter@ffwll.ch>,
+	<tjmercier@google.com>
+Date: Fri, 13 May 2022 15:08:09 +0530
+Message-ID: <1652434689-6203-1-git-send-email-quic_charante@quicinc.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.8.1
-Content-Language: en-US
-To: Neal Liu <neal_liu@aspeedtech.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Rob Herring <robh+dt@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Joel Stanley <joel@jms.id.au>, Andrew Jeffery <andrew@aj.id.au>,
- Felipe Balbi <balbi@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Li Yang <leoyang.li@nxp.com>
-References: <20220513065728.857722-1-neal_liu@aspeedtech.com>
- <20220513065728.857722-4-neal_liu@aspeedtech.com>
-From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-In-Reply-To: <20220513065728.857722-4-neal_liu@aspeedtech.com>
-X-MailFrom: krzysztof.kozlowski@linaro.org
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-MailFrom: quic_charante@quicinc.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: XMUIF7PXDGAGKFF67V2Z2X7RIVRNYLM5
-X-Message-ID-Hash: XMUIF7PXDGAGKFF67V2Z2X7RIVRNYLM5
-X-Mailman-Approved-At: Tue, 24 May 2022 07:17:02 +0000
-CC: linux-aspeed@lists.ozlabs.org, linux-usb@vger.kernel.org, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, BMC-SW@aspeedtech.com
+Message-ID-Hash: VSV3FGCUCIBGFW546QP4BZ245PUP3UPX
+X-Message-ID-Hash: VSV3FGCUCIBGFW546QP4BZ245PUP3UPX
+X-Mailman-Approved-At: Tue, 24 May 2022 07:17:18 +0000
+CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Charan Teja Kalla <quic_charante@quicinc.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 3/3] dt-bindings: usb: add documentation for aspeed udc
+Subject: [Linaro-mm-sig] [PATCH V3] dma-buf: ensure unique directory name for dmabuf stats
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XMUIF7PXDGAGKFF67V2Z2X7RIVRNYLM5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VSV3FGCUCIBGFW546QP4BZ245PUP3UPX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -83,87 +64,84 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 13/05/2022 08:57, Neal Liu wrote:
-> Add device tree binding documentation for the Aspeed USB2.0 Device
-> Controller.
-> 
-> Signed-off-by: Neal Liu <neal_liu@aspeedtech.com>
-> ---
->  .../devicetree/bindings/usb/aspeed,udc.yaml   | 52 +++++++++++++++++++
->  1 file changed, 52 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/usb/aspeed,udc.yaml
+The dmabuf file uses get_next_ino()(through dma_buf_getfile() ->
+alloc_anon_inode()) to get an inode number and uses the same as a
+directory name under /sys/kernel/dmabuf/buffers/<ino>. This directory is
+used to collect the dmabuf stats and it is created through
+dma_buf_stats_setup(). At current, failure to create this directory
+entry can make the dma_buf_export() to fail.
 
-Please name the file as first compatible, so "aspeed,ast2600-udc.yaml"
+Now, as the get_next_ino() can definitely give a repetitive inode no
+causing the directory entry creation to fail with -EEXIST. This is a
+problem on the systems where dmabuf stats functionality is enabled on
+the production builds can make the dma_buf_export(), though the dmabuf
+memory is allocated successfully, to fail just because it couldn't
+create stats entry.
 
+This issue we are able to see on the snapdragon system within 13 days
+where there already exists a directory with inode no "122602" so
+dma_buf_stats_setup() failed with -EEXIST as it is trying to create
+the same directory entry.
 
-> 
-> diff --git a/Documentation/devicetree/bindings/usb/aspeed,udc.yaml b/Documentation/devicetree/bindings/usb/aspeed,udc.yaml
-> new file mode 100644
-> index 000000000000..d1d2f77d1c54
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/usb/aspeed,udc.yaml
-> @@ -0,0 +1,52 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +# Copyright (c) 2020 Facebook Inc.
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/usb/aspeed,udc.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: ASPEED USB 2.0 Device Controller
-> +
-> +maintainers:
-> +  - Neal Liu <neal_liu@aspeedtech.com>
-> +
-> +description: |+
-> +  The ASPEED USB 2.0 Device Controller implements 1 control endpoint and
-> +  4 generic endpoints for AST260x.
-> +
-> +  Supports independent DMA channel for each generic endpoint.
-> +  Supports 32/256 stages descriptor mode for all generic endpoints.
-> +
-> +properties:
-> +  compatible:
-> +    enum:
-> +      - aspeed,ast2600-udc
-> +
-> +  reg:
-> +    maxItems: 1
-> +
-> +  clocks:
-> +    maxItems: 1
-> +
-> +  interrupts:
-> +    maxItems: 1
+To make the dentry name as unique, use the dmabuf fs specific inode
+which is based on the simple atomic variable increment. There is tmpfs
+subsystem too which relies on its own inode generation rather than
+relying on the get_next_ino() for the same reason of avoiding the
+duplicate inodes[1].
 
-No child properties? No ports or any other devices? No usb-hcd.yaml?
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - clocks
-> +  - interrupts
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/clock/aspeed-clock.h>
-> +    udc: udc@1e6a2000 {
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/patch/?id=e809d5f0b5c912fe981dce738f3283b2010665f0
 
-Node name: usb
+Reported-by: kernel test robot <lkp@intel.com>
+Signed-off-by: Charan Teja Kalla <quic_charante@quicinc.com>
+---
+Changes in V3:
+  -- Used the atomic64 variable to have dmabuf files its own inodes.
+  -- Ensured no UAPI breakage as suggested by Christian.
 
-> +            compatible = "aspeed,ast2600-udc";
-> +            reg = <0x1e6a2000 0x300>;
-> +            interrupts = <9>;
-> +            clocks = <&syscon ASPEED_CLK_GATE_USBPORT2CLK>;
-> +            pinctrl-names = "default";
-> +            pinctrl-0 = <&pinctrl_usb2bd_default>;
-> +    };
+Changes in V2:
+  -- Used the atomic64_t variable to generate a unique_id to be appended to inode
+     to have an unique directory with name <inode_number-unique_id> -- Suggested by christian
+  -- Updated the ABI documentation -- Identified by Greg.
+  -- Massaged the commit log.
+  -- https://lore.kernel.org/all/1652191562-18700-1-git-send-email-quic_charante@quicinc.com/
 
+Changes in V1:
+  -- Used the inode->i_ctime->tv_secs as an id appended to inode to create the
+     unique directory with name <inode_number-time_in_secs>.
+  -- https://lore.kernel.org/all/1652178212-22383-1-git-send-email-quic_charante@quicinc.com/
 
-Best regards,
-Krzysztof
+ drivers/dma-buf/dma-buf.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+index a6fc96e..0ad5039 100644
+--- a/drivers/dma-buf/dma-buf.c
++++ b/drivers/dma-buf/dma-buf.c
+@@ -407,6 +407,7 @@ static inline int is_dma_buf_file(struct file *file)
+ 
+ static struct file *dma_buf_getfile(struct dma_buf *dmabuf, int flags)
+ {
++	static atomic64_t dmabuf_inode = ATOMIC64_INIT(0);
+ 	struct file *file;
+ 	struct inode *inode = alloc_anon_inode(dma_buf_mnt->mnt_sb);
+ 
+@@ -416,6 +417,13 @@ static struct file *dma_buf_getfile(struct dma_buf *dmabuf, int flags)
+ 	inode->i_size = dmabuf->size;
+ 	inode_set_bytes(inode, dmabuf->size);
+ 
++	/*
++	 * The ->i_ino acquired from get_next_ino() is not unique thus
++	 * not suitable for using it as dentry name by dmabuf stats.
++	 * Override ->i_ino with the unique and dmabuffs specific
++	 * value.
++	 */
++	inode->i_ino = atomic64_add_return(1, &dmabuf_inode);
+ 	file = alloc_file_pseudo(inode, dma_buf_mnt, "dmabuf",
+ 				 flags, &dma_buf_fops);
+ 	if (IS_ERR(file))
+-- 
+2.7.4
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
