@@ -2,93 +2,150 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id E2A3D5323E0
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 09:18:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CC255323E1
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 09:18:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 225BE3F8CB
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 07:18:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8F5453F8C0
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 07:18:08 +0000 (UTC)
 Received: from alexa-out-sd-01.qualcomm.com (alexa-out-sd-01.qualcomm.com [199.106.114.38])
-	by lists.linaro.org (Postfix) with ESMTPS id CA019404BB
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 13 May 2022 10:38:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 16B45404BD
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 13 May 2022 11:29:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=quicinc.com; i=@quicinc.com; q=dns/txt; s=qcdkim;
-  t=1652438339; x=1683974339;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=wgMVjWhvJhoWOt/KHhALzY1JWO2Y10o5k6lUReCLpcY=;
-  b=Mf+RuqLgbWs/HkVSzdgSvL4Fvjx0otQSfQYf5jqac4J5Vu1M8XQF8rum
-   HnnyUhgxc1jDZhjUbUUvX2dyc/C1IdeCh9xSO3YjupY35GFELDqvx+3WJ
-   cwdDZ+6Zk8DgYu5TQ/Pe5t8uXMppU2CatDFywJzTRRClosvRJ1l0MvSv4
-   o=;
+  t=1652441347; x=1683977347;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=P/NlOnIOwLTJMaLQ0xxo/4m2h4ZXIfabeanSs7X/D70=;
+  b=oBt8ajFQzbNd1g4MfFLRiXnprWyTE9+hZt6DN9Kg4iFUL3X9uaTYdiVv
+   oGJlIwGYWQzhkc6mYWvAvvyd8wbbC5VMfpqQdfUEQUfcDTj8d4mBhE5Ic
+   rkq5h+9tJGUhfFAfrdkxIqQC8yrQauRw2mzwSOvne/TLu5msUlWBdGt8X
+   Y=;
 Received: from unknown (HELO ironmsg02-sd.qualcomm.com) ([10.53.140.142])
-  by alexa-out-sd-01.qualcomm.com with ESMTP; 13 May 2022 03:38:59 -0700
+  by alexa-out-sd-01.qualcomm.com with ESMTP; 13 May 2022 04:29:04 -0700
 X-QCInternal: smtphost
 Received: from nasanex01c.na.qualcomm.com ([10.47.97.222])
-  by ironmsg02-sd.qualcomm.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 May 2022 03:38:58 -0700
+  by ironmsg02-sd.qualcomm.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 May 2022 04:29:04 -0700
 Received: from nalasex01a.na.qualcomm.com (10.47.209.196) by
  nasanex01c.na.qualcomm.com (10.47.97.222) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.986.22; Fri, 13 May 2022 03:38:57 -0700
-Received: from [10.214.30.67] (10.80.80.8) by nalasex01a.na.qualcomm.com
- (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.22; Fri, 13 May
- 2022 03:38:54 -0700
-Message-ID: <f5988884-ba0a-643c-e920-6ae626bb67a1@quicinc.com>
-Date: Fri, 13 May 2022 16:08:51 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, Greg KH
-	<gregkh@linuxfoundation.org>
-References: <1652434689-6203-1-git-send-email-quic_charante@quicinc.com>
- <Yn4u0AG8iC33S3jO@kroah.com>
- <2a45f1e1-39d5-76b3-8fd3-c1f8b288afac@quicinc.com>
- <0071e117-1d91-b086-7cb1-976b2a1c3498@amd.com>
+ 15.2.986.22; Fri, 13 May 2022 04:29:03 -0700
+Received: from hu-charante-hyd.qualcomm.com (10.80.80.8) by
+ nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.22; Fri, 13 May 2022 04:28:59 -0700
 From: Charan Teja Kalla <quic_charante@quicinc.com>
-In-Reply-To: <0071e117-1d91-b086-7cb1-976b2a1c3498@amd.com>
+To: <gregkh@linuxfoundation.org>, <christian.koenig@amd.com>,
+	<sumit.semwal@linaro.org>, <hridya@google.com>, <daniel.vetter@ffwll.ch>,
+	<tjmercier@google.com>
+Date: Fri, 13 May 2022 16:58:16 +0530
+Message-ID: <1652441296-1986-1-git-send-email-quic_charante@quicinc.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
 X-Originating-IP: [10.80.80.8]
 X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
  nalasex01a.na.qualcomm.com (10.47.209.196)
 X-MailFrom: quic_charante@quicinc.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 5NTZTGEWWSH2ZEBP6XKBY3MFWXYJAWP4
-X-Message-ID-Hash: 5NTZTGEWWSH2ZEBP6XKBY3MFWXYJAWP4
-X-Mailman-Approved-At: Tue, 24 May 2022 07:17:56 +0000
-CC: sumit.semwal@linaro.org, hridya@google.com, tjmercier@google.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+Message-ID-Hash: YU3RBJLJP7L5ZVBSSOICERORSWBOWIXS
+X-Message-ID-Hash: YU3RBJLJP7L5ZVBSSOICERORSWBOWIXS
+X-Mailman-Approved-At: Tue, 24 May 2022 07:17:59 +0000
+CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Charan Teja Kalla <quic_charante@quicinc.com>, "# 5 . 15 . x+" <stable@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH V3] dma-buf: ensure unique directory name for dmabuf stats
+Subject: [Linaro-mm-sig] [PATCH V3 RESEND] dma-buf: ensure unique directory name for dmabuf stats
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5NTZTGEWWSH2ZEBP6XKBY3MFWXYJAWP4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YU3RBJLJP7L5ZVBSSOICERORSWBOWIXS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-DQpPbiA1LzEzLzIwMjIgMzo1OSBQTSwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToNCj4gQW0gMTMu
-MDUuMjIgdW0gMTI6MTggc2NocmllYiBDaGFyYW4gVGVqYSBLYWxsYToNCj4+IE9uIDUvMTMvMjAy
-MiAzOjQxIFBNLCBHcmVnIEtIIHdyb3RlOg0KPj4+PiBSZXBvcnRlZC1ieToga2VybmVsIHRlc3Qg
-cm9ib3QgPGxrcEBpbnRlbC5jb20+DQo+Pj4gVGhlIHRyZXN0IHJvYm90IGRpZCBub3Qgc2F5IHRo
-YXQgdGhlIGRtYWJ1ZiBzdGF0IG5hbWUgd2FzIGJlaW5nDQo+Pj4gZHVwbGljYXRlZCwgZGlkIGl0
-Pw0KPj4+DQo+PiBJdCByZXBvcnRlZCBhIHByaW50ayB3YXJuaW5nIG9uIFYyWzFdLiBTaG91bGQg
-d2UgcmVtb3ZlIHRoaXMgb24gVjM/DQo+IA0KPiBXZSBvbmx5IGFkZCB0aGUga2VybmVsIHRlc3Qg
-cm9ib3QgaXMgcmVwb3J0IHdoZW4gaXQgZm91bmQgdGhlIHVuZGVybHlpbmcNCj4gcHJvYmxlbSBh
-bmQgbm90IGp1c3Qgbm90ZWQgc29tZSB3YXJuaW5nIG9uIGFuIGludGVybWVkaWF0ZSBwYXRjaCB2
-ZXJzaW9uLg0KDQpOb3RlZC4gVGhhbmtzISENCj4gDQo+PiBAQ2hyaXN0aWFuOiBDb3VsZCB5b3Ug
-cGxlYXNlIGRyb3AgdGhpcyB0YWcgd2hpbGUgbWVyZ2luZz8NCj4gDQo+IFN1cmUsIEkgZG9uJ3Qg
-aGF2ZSBtdWNoIG9uIG15IHBsYXRlIGF0IHRoZSBtb21lbnQuIEJ1dCBkb24ndCBsZXQgaXQNCj4g
-YmVjb21lIGEgaGFiaXQuDQo+IA0KDQpTdXJlLiBJIGFtIGFsc28gdGhpbmtpbmcgSWYgaXQgaXMg
-d29ydGggdG8gYWRkIHN0YWJsZSB0YWc/IFRob3VnaCBpdCBpcw0Kbm90IGNyYXNoaW5nIHRoZSBr
-ZXJuZWwgYnV0IGRlZmluaXRlbHkgbWFraW5nIHRoZSBkbWFfYnVmX2V4cG9ydCB0byBmYWlsDQpm
-b3Igbm8gcmVhc29uLg0KDQpJZiB5ZXMsIEkgY2FuIHJlc2VuZCB0aGUgcGF0Y2ggd2l0aCBhbGwg
-dGhlc2UgdGFncy4NCg0KPiBHb2luZyB0byBwdXNoIGl0IHVwc3RyZWFtIHRocm91Z2ggZHJtLW1p
-c2MtZml4ZXMgbm93Lg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5s
-aW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1s
-ZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+The dmabuf file uses get_next_ino()(through dma_buf_getfile() ->
+alloc_anon_inode()) to get an inode number and uses the same as a
+directory name under /sys/kernel/dmabuf/buffers/<ino>. This directory is
+used to collect the dmabuf stats and it is created through
+dma_buf_stats_setup(). At current, failure to create this directory
+entry can make the dma_buf_export() to fail.
+
+Now, as the get_next_ino() can definitely give a repetitive inode no
+causing the directory entry creation to fail with -EEXIST. This is a
+problem on the systems where dmabuf stats functionality is enabled on
+the production builds can make the dma_buf_export(), though the dmabuf
+memory is allocated successfully, to fail just because it couldn't
+create stats entry.
+
+This issue we are able to see on the snapdragon system within 13 days
+where there already exists a directory with inode no "122602" so
+dma_buf_stats_setup() failed with -EEXIST as it is trying to create
+the same directory entry.
+
+To make the dentry name as unique, use the dmabuf fs specific inode
+which is based on the simple atomic variable increment. There is tmpfs
+subsystem too which relies on its own inode generation rather than
+relying on the get_next_ino() for the same reason of avoiding the
+duplicate inodes[1].
+
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/patch/?id=e809d5f0b5c912fe981dce738f3283b2010665f0
+
+Signed-off-by: Charan Teja Kalla <quic_charante@quicinc.com>
+Cc: <stable@vger.kernel.org> # 5.15.x+
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+Changes in V3-resend:
+  -- Collect all the tags and apply stable tag.
+
+Changes in V3:
+  -- Used the atomic64 variable to have dmabuf files its own inodes.
+  -- Ensured no UAPI breakage as suggested by Christian.
+
+Changes in V2:
+  -- Used the atomic64_t variable to generate a unique_id to be appended to inode
+     to have an unique directory with name <inode_number-unique_id> -- Suggested by christian
+  -- Updated the ABI documentation -- Identified by Greg.
+  -- Massaged the commit log.
+  -- https://lore.kernel.org/all/1652191562-18700-1-git-send-email-quic_charante@quicinc.com/
+
+Changes in V1:
+  -- Used the inode->i_ctime->tv_secs as an id appended to inode to create the
+     unique directory with name <inode_number-time_in_secs>.
+  -- https://lore.kernel.org/all/1652178212-22383-1-git-send-email-quic_charante@quicinc.com/
+
+ drivers/dma-buf/dma-buf.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+index a6fc96e..0ad5039 100644
+--- a/drivers/dma-buf/dma-buf.c
++++ b/drivers/dma-buf/dma-buf.c
+@@ -407,6 +407,7 @@ static inline int is_dma_buf_file(struct file *file)
+ 
+ static struct file *dma_buf_getfile(struct dma_buf *dmabuf, int flags)
+ {
++	static atomic64_t dmabuf_inode = ATOMIC64_INIT(0);
+ 	struct file *file;
+ 	struct inode *inode = alloc_anon_inode(dma_buf_mnt->mnt_sb);
+ 
+@@ -416,6 +417,13 @@ static struct file *dma_buf_getfile(struct dma_buf *dmabuf, int flags)
+ 	inode->i_size = dmabuf->size;
+ 	inode_set_bytes(inode, dmabuf->size);
+ 
++	/*
++	 * The ->i_ino acquired from get_next_ino() is not unique thus
++	 * not suitable for using it as dentry name by dmabuf stats.
++	 * Override ->i_ino with the unique and dmabuffs specific
++	 * value.
++	 */
++	inode->i_ino = atomic64_add_return(1, &dmabuf_inode);
+ 	file = alloc_file_pseudo(inode, dma_buf_mnt, "dmabuf",
+ 				 flags, &dma_buf_fops);
+ 	if (IS_ERR(file))
+-- 
+2.7.4
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
