@@ -2,42 +2,42 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 117895281D9
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 May 2022 12:22:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 33F325281DA
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 May 2022 12:22:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E9225405D3
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 May 2022 10:22:49 +0000 (UTC)
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by lists.linaro.org (Postfix) with ESMTPS id 7D1DE4050F
+	by lists.linaro.org (Postfix) with ESMTP id 6A425405CB
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 May 2022 10:22:54 +0000 (UTC)
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by lists.linaro.org (Postfix) with ESMTPS id 96ECC40510
 	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 May 2022 10:22:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
   t=1652696565; x=1684232565;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=rQd2aZJvrRMvYuDZkI9jNLzYYyg/Ub/0/Ce4xmZSbro=;
-  b=fwWQ+uXZiQfLGM6hqKTQe9Mq2vVs5UVCMkn/EyHIBzv27iOGX6KkaM0Q
-   X7wPiwy+Aa8tpYvtDTJg5FWoRDlyrqxjPHj7Ynv30z8kLpjxZLSRi6gOT
-   ZeDOuKtUu2aeo02chpC1Do1cgbtPZdUVGdxGoPCV7cJZLQmo72ofVxGH9
-   vk6cBHYqz0lfakoJ6y1s7vLftl90Uj4fp8P6vzK0hvLrtanN6aMCZk/ES
-   +/88ymYAj28yqgMUip4vADPSHb+SukF1fzhE7JJH2u0wcVsjjCstf6Udd
-   jQCygdC5X51If/2r2ZqDJZ15vCSlCVMrGWN99LWafhP03A5hT+pHCA2W0
-   w==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10348"; a="258360358"
+  bh=4m1rLHdZFdcKcCOwnZk3dcFtZOfNVE/31ZZkpnjq5xs=;
+  b=CnJ3cMk7UNw5Xu4TJ4T92UGPu1oGQ42aQDmQZLPBSNOClhT44QRS8YNW
+   ilChaB5+QKGD8YmbF8we4wuLY+L0Q4MurIPVP7hY1ONu0Zmz/S0muFAav
+   +Da0FyKB/xDgYQyQRuQm42+oegyadlDiuW24STKj4agMf1CfQd1frojsy
+   j17DX/RfgKHfBu/oxApoPCUWFrkMrtExpAIyd8k4rPpSh3ApknJDLok+M
+   tBn/UKfBi99q5KCmMMTx8z1VwMu17z9mSosIBuGuw3ZmdU3alP9H5jwsM
+   nEKCXcvv1cxPRoqfJB7hyqziSIQPml/djtxwU5sxyfwICOS79uu+9oaFt
+   Q==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10348"; a="270489284"
 X-IronPort-AV: E=Sophos;i="5.91,229,1647327600";
-   d="scan'208";a="258360358"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 May 2022 03:22:18 -0700
+   d="scan'208";a="270489284"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 May 2022 03:22:18 -0700
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="5.91,229,1647327600";
-   d="scan'208";a="660043145"
+   d="scan'208";a="544299728"
 Received: from lkp-server01.sh.intel.com (HELO d1462bc4b09b) ([10.239.97.150])
-  by FMSMGA003.fm.intel.com with ESMTP; 16 May 2022 03:22:13 -0700
+  by orsmga006.jf.intel.com with ESMTP; 16 May 2022 03:22:13 -0700
 Received: from kbuild by d1462bc4b09b with local (Exim 4.95)
 	(envelope-from <lkp@intel.com>)
-	id 1nqXrh-0002KB-0L;
+	id 1nqXrh-0002KE-1O;
 	Mon, 16 May 2022 10:22:13 +0000
-Date: Mon, 16 May 2022 18:21:55 +0800
+Date: Mon, 16 May 2022 18:21:57 +0800
 From: kernel test robot <lkp@intel.com>
 To: Neal Liu <neal_liu@aspeedtech.com>,
 	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -49,13 +49,13 @@ To: Neal Liu <neal_liu@aspeedtech.com>,
 	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
 	Geert Uytterhoeven <geert@linux-m68k.org>,
 	Li Yang <leoyang.li@nxp.com>
-Message-ID: <202205161801.OB6kCtEa-lkp@intel.com>
+Message-ID: <202205161842.gsOJeWvM-lkp@intel.com>
 References: <20220513065728.857722-2-neal_liu@aspeedtech.com>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <20220513065728.857722-2-neal_liu@aspeedtech.com>
-Message-ID-Hash: FLB4V5KTVKPZNTMHZN7PHXATUN5RGVP3
-X-Message-ID-Hash: FLB4V5KTVKPZNTMHZN7PHXATUN5RGVP3
+Message-ID-Hash: MDBDE2CGWCJ64P7VHMMAS6WJLJZ74IVT
+X-Message-ID-Hash: MDBDE2CGWCJ64P7VHMMAS6WJLJZ74IVT
 X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -64,7 +64,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH 1/3] usb: gadget: add Aspeed ast2600 udc driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FLB4V5KTVKPZNTMHZN7PHXATUN5RGVP3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MDBDE2CGWCJ64P7VHMMAS6WJLJZ74IVT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -79,15 +79,15 @@ Hi Neal,
 I love your patch! Perhaps something to improve:
 
 [auto build test WARNING on usb/usb-testing]
-[also build test WARNING on robh/for-next v5.18-rc7 next-20220513]
+[also build test WARNING on robh/for-next balbi-usb/testing/next v5.18-rc7 next-20220513]
 [If your patch is applied to the wrong git tree, kindly drop us a note.
 And when submitting patch, we suggest to use '--base' as documented in
 https://git-scm.com/docs/git-format-patch]
 
 url:    https://github.com/intel-lab-lkp/linux/commits/Neal-Liu/add-Aspeed-udc-driver-for-ast2600/20220513-150314
 base:   https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb.git usb-testing
-config: openrisc-randconfig-s031-20220516 (https://download.01.org/0day-ci/archive/20220516/202205161801.OB6kCtEa-lkp@intel.com/config)
-compiler: or1k-linux-gcc (GCC) 11.3.0
+config: sparc-randconfig-s031-20220516 (https://download.01.org/0day-ci/archive/20220516/202205161842.gsOJeWvM-lkp@intel.com/config)
+compiler: sparc-linux-gcc (GCC) 11.3.0
 reproduce:
         wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
         chmod +x ~/bin/make.cross
@@ -99,30 +99,63 @@ reproduce:
         git checkout 272ae26f9fe89f60d584cf445431d0fa566eb24b
         # save the config file
         mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.3.0 make.cross C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=openrisc SHELL=/bin/bash drivers/usb/gadget/udc/
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.3.0 make.cross C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=sparc SHELL=/bin/bash drivers/usb/gadget/udc/
 
 If you fix the issue, kindly add following tag as appropriate
 Reported-by: kernel test robot <lkp@intel.com>
 
 
 sparse warnings: (new ones prefixed by >>)
-   drivers/usb/gadget/udc/aspeed_udc.c:1009:34: sparse: sparse: restricted __le16 degrades to integer
->> drivers/usb/gadget/udc/aspeed_udc.c:1037:32: sparse: sparse: incorrect type in argument 2 (different address spaces) @@     expected void const volatile [noderef] __iomem *addr @@     got struct usb_ctrlrequest *creq @@
-   drivers/usb/gadget/udc/aspeed_udc.c:1037:32: sparse:     expected void const volatile [noderef] __iomem *addr
-   drivers/usb/gadget/udc/aspeed_udc.c:1037:32: sparse:     got struct usb_ctrlrequest *creq
-   drivers/usb/gadget/udc/aspeed_udc.c:1066:25: sparse: sparse: incorrect type in argument 1 (different base types) @@     expected unsigned int [usertype] value @@     got restricted __le16 [addressable] [usertype] wValue @@
+>> drivers/usb/gadget/udc/aspeed_udc.c:1009:34: sparse: sparse: restricted __le16 degrades to integer
+>> drivers/usb/gadget/udc/aspeed_udc.c:1037:9: sparse: sparse: incorrect type in argument 2 (different address spaces) @@     expected void const volatile [noderef] __iomem *src @@     got struct usb_ctrlrequest *creq @@
+   drivers/usb/gadget/udc/aspeed_udc.c:1037:9: sparse:     expected void const volatile [noderef] __iomem *src
+   drivers/usb/gadget/udc/aspeed_udc.c:1037:9: sparse:     got struct usb_ctrlrequest *creq
+>> drivers/usb/gadget/udc/aspeed_udc.c:1066:25: sparse: sparse: incorrect type in argument 1 (different base types) @@     expected unsigned int [usertype] value @@     got restricted __le16 [addressable] [usertype] wValue @@
    drivers/usb/gadget/udc/aspeed_udc.c:1066:25: sparse:     expected unsigned int [usertype] value
    drivers/usb/gadget/udc/aspeed_udc.c:1066:25: sparse:     got restricted __le16 [addressable] [usertype] wValue
    drivers/usb/gadget/udc/aspeed_udc.c:1070:37: sparse: sparse: restricted __le16 degrades to integer
    drivers/usb/gadget/udc/aspeed_udc.c:1075:37: sparse: sparse: restricted __le16 degrades to integer
-   drivers/usb/gadget/udc/aspeed_udc.c:1518:19: sparse: sparse: incorrect type in assignment (different address spaces) @@     expected struct usb_ctrlrequest *creq @@     got void [noderef] __iomem * @@
+>> drivers/usb/gadget/udc/aspeed_udc.c:1518:19: sparse: sparse: incorrect type in assignment (different address spaces) @@     expected struct usb_ctrlrequest *creq @@     got void [noderef] __iomem * @@
    drivers/usb/gadget/udc/aspeed_udc.c:1518:19: sparse:     expected struct usb_ctrlrequest *creq
    drivers/usb/gadget/udc/aspeed_udc.c:1518:19: sparse:     got void [noderef] __iomem *
-   drivers/usb/gadget/udc/aspeed_udc.c:619:38: sparse: sparse: cast truncates bits from constant value (80 becomes 0)
+>> drivers/usb/gadget/udc/aspeed_udc.c:619:38: sparse: sparse: cast truncates bits from constant value (80 becomes 0)
    drivers/usb/gadget/udc/aspeed_udc.c:625:12: sparse: sparse: context imbalance in 'ast_udc_ep_queue' - different lock contexts for basic block
 
-vim +1037 drivers/usb/gadget/udc/aspeed_udc.c
+vim +1009 drivers/usb/gadget/udc/aspeed_udc.c
 
+   994	
+   995	static void ast_udc_getstatus(struct ast_udc_dev *udc)
+   996	{
+   997		struct ast_udc_ep *ep;
+   998		u16 status = 0;
+   999		int epnum;
+  1000	
+  1001		switch (udc->creq->bRequestType & USB_RECIP_MASK) {
+  1002		case USB_RECIP_DEVICE:
+  1003			/* Get device status */
+  1004			status = 1 << USB_DEVICE_SELF_POWERED;
+  1005			break;
+  1006		case USB_RECIP_INTERFACE:
+  1007			break;
+  1008		case USB_RECIP_ENDPOINT:
+> 1009			epnum = udc->creq->wIndex & USB_ENDPOINT_NUMBER_MASK;
+  1010			status = udc->ep[epnum].stopped;
+  1011			break;
+  1012		default:
+  1013			goto stall;
+  1014		}
+  1015	
+  1016		ep = &udc->ep[epnum];
+  1017		EP_DBG(ep, "status: 0x%x\n", status);
+  1018		ast_udc_ep0_data_tx(udc, (u8 *)&status, sizeof(status));
+  1019	
+  1020		return;
+  1021	
+  1022	stall:
+  1023		EP_DBG(ep, "Can't respond request\n");
+  1024		ast_udc_write(udc, ast_udc_read(udc, AST_UDC_EP0_CTRL) | EP0_STALL,
+  1025			      AST_UDC_EP0_CTRL);
+  1026	}
   1027	
   1028	static void ast_udc_ep0_handle_setup(struct ast_udc_dev *udc)
   1029	{
@@ -162,7 +195,7 @@ vim +1037 drivers/usb/gadget/udc/aspeed_udc.c
   1063					udc->gadget.speed = USB_SPEED_FULL;
   1064	
   1065				SETUP_DBG(udc, "set addr: 0x%x\n", crq.wValue);
-  1066				ast_udc_write(udc, crq.wValue, AST_UDC_CONFIG);
+> 1066				ast_udc_write(udc, crq.wValue, AST_UDC_CONFIG);
   1067				goto req_complete;
   1068	
   1069			case USB_REQ_CLEAR_FEATURE:
