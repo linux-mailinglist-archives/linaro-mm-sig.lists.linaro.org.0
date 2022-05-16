@@ -2,72 +2,69 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75D2D5266D0
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 May 2022 18:13:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 117895281D9
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 May 2022 12:22:51 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 39FE6404DE
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 13 May 2022 16:13:33 +0000 (UTC)
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
-	by lists.linaro.org (Postfix) with ESMTPS id 0BA703EFA7
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 13 May 2022 16:13:28 +0000 (UTC)
-Received: by mail-pj1-f47.google.com with SMTP id cx11-20020a17090afd8b00b001d9fe5965b3so11217066pjb.3
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 13 May 2022 09:13:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=sender:date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=n4Ua5qSAHgvrptVTXpgV4jY28Fp/1ApPJcGYkkazweE=;
-        b=dh+CcTt4AjCORsqV1ZODlBqFq+OvMka9auOOZykOuG9GwHD05RDvn63lEcsItiN2eH
-         nH+MkFBQ8v1tdeWUMN4BRvaW+7Q1uwmQiOctS5wPsQLKRk5Ykt9si+fUFSf6n/at1dmY
-         4JOHexwRERxmPXQVd5EWv4mWhFA3BXiW4pCX0ZdVzHtYoUWHmurH8uIA0uBpYInyofFZ
-         pNEuW8xEgDqjAmuzWH27jn+y85YMNek74F2xgDatREWDoXEvBkL4SnO/axBiM7vQgUS4
-         gbWP9yrJI2fCACw+ngKTCewWFxR85tswkrdeT3TpOZ3UiGjOL9rgao5yscsrH/9y3/bl
-         VBAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-         :references:mime-version:content-disposition:in-reply-to;
-        bh=n4Ua5qSAHgvrptVTXpgV4jY28Fp/1ApPJcGYkkazweE=;
-        b=NteAuCuK/o2uzXgSrnQF04RebU9MFWj+x//eZhTZANTR6jRCg7oXoETSDiwW9jrTtf
-         yAailgjk8b8WSmXU+qrY2ayJN3hfATM5xLHg/KzP/Vj2u6xAdmR9Ej4i9cKWc0uKD9A/
-         1e2iqWaUu9qnJSnC6Tswm7HkB/nOAiY4IYEW6Lv8kTbe+1rjemtplX8WfSk1X+jXzbZa
-         ApFKMNlqtd7fY3+pIYqT41I9o5dgY69qEESK4gwzjygxUAZUg9XZoNqfwgaklrj+UwTf
-         1ppJVLrndTxRaMXmwzLUXvwBYN0X8ZnNac4yNaAsy6ETyoW3dIQsOEtrKapg9jGjAZsJ
-         ue5Q==
-X-Gm-Message-State: AOAM530L/FB7pxDVJ4128bS3oTIS48bGiMkP3HuYOLbp5FT0hngruZ18
-	W4jjmKqI7rV0yHyIQNDWOko=
-X-Google-Smtp-Source: ABdhPJx/E0j2BSOqlsmETv4JaHt8kQAXKtx8000l3ywPW9tmB75Cv/mYY002CdT2AqHaPSsO5Oy1mQ==
-X-Received: by 2002:a17:90b:17c4:b0:1de:c92c:ad91 with SMTP id me4-20020a17090b17c400b001dec92cad91mr5642606pjb.169.1652458407026;
-        Fri, 13 May 2022 09:13:27 -0700 (PDT)
-Received: from localhost ([2620:10d:c090:400::4:5607])
-        by smtp.gmail.com with ESMTPSA id ip14-20020a17090b314e00b001d81a30c437sm1796573pjb.50.2022.05.13.09.13.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 13 May 2022 09:13:26 -0700 (PDT)
-Sender: Tejun Heo <htejun@gmail.com>
-Date: Fri, 13 May 2022 06:13:25 -1000
-From: Tejun Heo <tj@kernel.org>
-To: "T.J. Mercier" <tjmercier@google.com>
-Message-ID: <Yn6DpUsoSz1/15Kc@slm.duckdns.org>
-References: <20220510235653.933868-1-tjmercier@google.com>
- <3365cd1d750e84fedc8e75d646a77ffd85619d35.camel@ndufresne.ca>
- <CABdmKX3ZV6-u-oLvW_wWavAMBfrsZ=C_rCgK_Uz4VjxcRvRFew@mail.gmail.com>
- <81026ef07c1ce20f8673b75b17bab79a2b39c548.camel@ndufresne.ca>
- <CABdmKX2LxZ6zZR=fhXfnuWCB2BR+gzDd1-t1DD2A2XP24wvuGQ@mail.gmail.com>
+	by lists.linaro.org (Postfix) with ESMTP id E9225405D3
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 May 2022 10:22:49 +0000 (UTC)
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by lists.linaro.org (Postfix) with ESMTPS id 7D1DE4050F
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 May 2022 10:22:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1652696565; x=1684232565;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=rQd2aZJvrRMvYuDZkI9jNLzYYyg/Ub/0/Ce4xmZSbro=;
+  b=fwWQ+uXZiQfLGM6hqKTQe9Mq2vVs5UVCMkn/EyHIBzv27iOGX6KkaM0Q
+   X7wPiwy+Aa8tpYvtDTJg5FWoRDlyrqxjPHj7Ynv30z8kLpjxZLSRi6gOT
+   ZeDOuKtUu2aeo02chpC1Do1cgbtPZdUVGdxGoPCV7cJZLQmo72ofVxGH9
+   vk6cBHYqz0lfakoJ6y1s7vLftl90Uj4fp8P6vzK0hvLrtanN6aMCZk/ES
+   +/88ymYAj28yqgMUip4vADPSHb+SukF1fzhE7JJH2u0wcVsjjCstf6Udd
+   jQCygdC5X51If/2r2ZqDJZ15vCSlCVMrGWN99LWafhP03A5hT+pHCA2W0
+   w==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10348"; a="258360358"
+X-IronPort-AV: E=Sophos;i="5.91,229,1647327600";
+   d="scan'208";a="258360358"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 May 2022 03:22:18 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.91,229,1647327600";
+   d="scan'208";a="660043145"
+Received: from lkp-server01.sh.intel.com (HELO d1462bc4b09b) ([10.239.97.150])
+  by FMSMGA003.fm.intel.com with ESMTP; 16 May 2022 03:22:13 -0700
+Received: from kbuild by d1462bc4b09b with local (Exim 4.95)
+	(envelope-from <lkp@intel.com>)
+	id 1nqXrh-0002KB-0L;
+	Mon, 16 May 2022 10:22:13 +0000
+Date: Mon, 16 May 2022 18:21:55 +0800
+From: kernel test robot <lkp@intel.com>
+To: Neal Liu <neal_liu@aspeedtech.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Joel Stanley <joel@jms.id.au>, Andrew Jeffery <andrew@aj.id.au>,
+	Felipe Balbi <balbi@kernel.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	Li Yang <leoyang.li@nxp.com>
+Message-ID: <202205161801.OB6kCtEa-lkp@intel.com>
+References: <20220513065728.857722-2-neal_liu@aspeedtech.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CABdmKX2LxZ6zZR=fhXfnuWCB2BR+gzDd1-t1DD2A2XP24wvuGQ@mail.gmail.com>
-Message-ID-Hash: CL6LGGCD26FCWM6QJMSDQ2S4TS2XHHR7
-X-Message-ID-Hash: CL6LGGCD26FCWM6QJMSDQ2S4TS2XHHR7
-X-MailFrom: htejun@gmail.com
+In-Reply-To: <20220513065728.857722-2-neal_liu@aspeedtech.com>
+Message-ID-Hash: FLB4V5KTVKPZNTMHZN7PHXATUN5RGVP3
+X-Message-ID-Hash: FLB4V5KTVKPZNTMHZN7PHXATUN5RGVP3
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Nicolas Dufresne <nicolas@ndufresne.ca>, Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Arve =?iso-8859-1?B?SGr4bm5lduVn?= <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>, Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>, Shuah Khan <shuah@kernel.org>, Daniel Vetter <daniel@ffwll.ch>, John Stultz <jstultz@google.com>, Carlos Llamas <cmllamas@google.com>, Kalesh Singh <kaleshsingh@google.com>, Kenny.Ho@amd.com, Michal =?iso-8859-1?Q?
- Koutn=FD?= <mkoutny@suse.com>, Shuah Khan <skhan@linuxfoundation.org>, kernel-team@android.com, cgroups@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kselftest@vger.kernel.org
+CC: kbuild-all@lists.01.org, Neal Liu <neal_liu@aspeedtech.com>, linux-aspeed@lists.ozlabs.org, linux-usb@vger.kernel.org, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, BMC-SW@aspeedtech.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v7 0/6] Proposal for a GPU cgroup controller
+Subject: [Linaro-mm-sig] Re: [PATCH 1/3] usb: gadget: add Aspeed ast2600 udc driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CL6LGGCD26FCWM6QJMSDQ2S4TS2XHHR7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FLB4V5KTVKPZNTMHZN7PHXATUN5RGVP3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -77,50 +74,147 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hello,
+Hi Neal,
 
-On Thu, May 12, 2022 at 08:43:52PM -0700, T.J. Mercier wrote:
-> > I'm actually happy I've asked this question, wasn't silly after all. I think the
-> > problem here is a naming issue. What you really are monitor is "video memory",
-> > which consist of a memory segment allocated to store data used to render images
-> > (its not always images of course, GPU an VPU have specialized buffers for their
-> > purpose).
-> >
-> > Whether this should be split between what is used specifically by the GPU
-> > drivers, the display drivers, the VPU (CODEC and pre/post-processor) or camera
-> > drivers is something that should be discussed. But in the current approach, you
-> > really meant Video memory as a superset of the above. Personally, I think
-> > generically (to de-Andronized your work), en-globing all video memory is
-> > sufficient. What I fail to understand is how you will manage to distinguished
-> > DMABuf Heap allocation (which are used outside of Android btw), from Video
-> > allocation or other type of usage. I'm sure non-video usage will exist in the
-> > future (think of machine learning, compute, other high bandwidth streaming
-> > thingy ...)
-> >
-> Ok thank you for pointing out the naming issue. The naming is a
-> consequence of the initial use case, but I guess it's too specific.
-> What I want out of this change is that android can track dmabufs that
-> come out of heaps, and drm can track gpu memory. But other drivers
-> could track different resources under different names. Imagine this
-> were called a buffer cgroup controller instead of a GPU cgroup
-> controller. Then the use component ("video memory") isn't tied up with
-> the name of the controller, but it's up to the name of the bucket the
-> resource is tracked under. I think this meets the needs of the two use
-> cases I'm aware of now, while leaving the door open to other future
-> needs. Really the controller is just enabling abstract named buckets
-> for tracking and eventually limiting a type of resource.
+I love your patch! Perhaps something to improve:
 
-So, there hasn't been whole lot of discussion w/ other GPU folks and what
-comes up still seems to indicate that we're still long way away from having
-a meaningful gpu controller. For your use case, would it make sense to just
-add dmabuf as a key to the misc controller? I'm not sure it makes sense to
-push "gpu controller" forward if there's no conceptual consensus around what
-resources are.
+[auto build test WARNING on usb/usb-testing]
+[also build test WARNING on robh/for-next v5.18-rc7 next-20220513]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch]
 
-Thanks.
+url:    https://github.com/intel-lab-lkp/linux/commits/Neal-Liu/add-Aspeed-udc-driver-for-ast2600/20220513-150314
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb.git usb-testing
+config: openrisc-randconfig-s031-20220516 (https://download.01.org/0day-ci/archive/20220516/202205161801.OB6kCtEa-lkp@intel.com/config)
+compiler: or1k-linux-gcc (GCC) 11.3.0
+reproduce:
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # apt-get install sparse
+        # sparse version: v0.6.4-dirty
+        # https://github.com/intel-lab-lkp/linux/commit/272ae26f9fe89f60d584cf445431d0fa566eb24b
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Neal-Liu/add-Aspeed-udc-driver-for-ast2600/20220513-150314
+        git checkout 272ae26f9fe89f60d584cf445431d0fa566eb24b
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.3.0 make.cross C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=openrisc SHELL=/bin/bash drivers/usb/gadget/udc/
+
+If you fix the issue, kindly add following tag as appropriate
+Reported-by: kernel test robot <lkp@intel.com>
+
+
+sparse warnings: (new ones prefixed by >>)
+   drivers/usb/gadget/udc/aspeed_udc.c:1009:34: sparse: sparse: restricted __le16 degrades to integer
+>> drivers/usb/gadget/udc/aspeed_udc.c:1037:32: sparse: sparse: incorrect type in argument 2 (different address spaces) @@     expected void const volatile [noderef] __iomem *addr @@     got struct usb_ctrlrequest *creq @@
+   drivers/usb/gadget/udc/aspeed_udc.c:1037:32: sparse:     expected void const volatile [noderef] __iomem *addr
+   drivers/usb/gadget/udc/aspeed_udc.c:1037:32: sparse:     got struct usb_ctrlrequest *creq
+   drivers/usb/gadget/udc/aspeed_udc.c:1066:25: sparse: sparse: incorrect type in argument 1 (different base types) @@     expected unsigned int [usertype] value @@     got restricted __le16 [addressable] [usertype] wValue @@
+   drivers/usb/gadget/udc/aspeed_udc.c:1066:25: sparse:     expected unsigned int [usertype] value
+   drivers/usb/gadget/udc/aspeed_udc.c:1066:25: sparse:     got restricted __le16 [addressable] [usertype] wValue
+   drivers/usb/gadget/udc/aspeed_udc.c:1070:37: sparse: sparse: restricted __le16 degrades to integer
+   drivers/usb/gadget/udc/aspeed_udc.c:1075:37: sparse: sparse: restricted __le16 degrades to integer
+   drivers/usb/gadget/udc/aspeed_udc.c:1518:19: sparse: sparse: incorrect type in assignment (different address spaces) @@     expected struct usb_ctrlrequest *creq @@     got void [noderef] __iomem * @@
+   drivers/usb/gadget/udc/aspeed_udc.c:1518:19: sparse:     expected struct usb_ctrlrequest *creq
+   drivers/usb/gadget/udc/aspeed_udc.c:1518:19: sparse:     got void [noderef] __iomem *
+   drivers/usb/gadget/udc/aspeed_udc.c:619:38: sparse: sparse: cast truncates bits from constant value (80 becomes 0)
+   drivers/usb/gadget/udc/aspeed_udc.c:625:12: sparse: sparse: context imbalance in 'ast_udc_ep_queue' - different lock contexts for basic block
+
+vim +1037 drivers/usb/gadget/udc/aspeed_udc.c
+
+  1027	
+  1028	static void ast_udc_ep0_handle_setup(struct ast_udc_dev *udc)
+  1029	{
+  1030		struct ast_udc_ep *ep = &udc->ep[0];
+  1031		struct ast_udc_request *req;
+  1032		struct usb_ctrlrequest crq;
+  1033		int req_num = 0;
+  1034		u16 ep_num = 0;
+  1035		int rc;
+  1036	
+> 1037		memcpy_fromio(&crq, udc->creq, sizeof(crq));
+  1038	
+  1039		SETUP_DBG(udc, "SETEUP packet: %02x/%02x/%04x/%04x/%04x\n",
+  1040			  crq.bRequestType, crq.bRequest, le16_to_cpu(crq.wValue),
+  1041			  le16_to_cpu(crq.wIndex), le16_to_cpu(crq.wLength));
+  1042	
+  1043		/*
+  1044		 * Cleanup ep0 request(s) in queue because
+  1045		 * there is a new control setup comes.
+  1046		 */
+  1047		list_for_each_entry(req, &udc->ep[0].queue, queue) {
+  1048			req_num++;
+  1049			EP_DBG(ep, "there is req %p in ep0 queue !\n", req);
+  1050		}
+  1051	
+  1052		if (req_num)
+  1053			ast_udc_nuke(&udc->ep[0], -ETIMEDOUT);
+  1054	
+  1055		udc->ep[0].dir_in = crq.bRequestType & USB_DIR_IN;
+  1056	
+  1057		if ((crq.bRequestType & USB_TYPE_MASK) == USB_TYPE_STANDARD) {
+  1058			switch (crq.bRequest) {
+  1059			case USB_REQ_SET_ADDRESS:
+  1060				if (ast_udc_read(udc, AST_UDC_STS) & UDC_STS_HIGHSPEED)
+  1061					udc->gadget.speed = USB_SPEED_HIGH;
+  1062				else
+  1063					udc->gadget.speed = USB_SPEED_FULL;
+  1064	
+  1065				SETUP_DBG(udc, "set addr: 0x%x\n", crq.wValue);
+  1066				ast_udc_write(udc, crq.wValue, AST_UDC_CONFIG);
+  1067				goto req_complete;
+  1068	
+  1069			case USB_REQ_CLEAR_FEATURE:
+  1070				ep_num = crq.wIndex & USB_ENDPOINT_NUMBER_MASK;
+  1071				SETUP_DBG(udc, "ep%d: CLEAR FEATURE\n", ep_num);
+  1072				goto req_driver;
+  1073	
+  1074			case USB_REQ_SET_FEATURE:
+  1075				ep_num = crq.wIndex & USB_ENDPOINT_NUMBER_MASK;
+  1076				SETUP_DBG(udc, "ep%d: SET FEATURE\n", ep_num);
+  1077				goto req_driver;
+  1078	
+  1079			case USB_REQ_GET_STATUS:
+  1080				ast_udc_getstatus(udc);
+  1081				return;
+  1082	
+  1083			default:
+  1084				goto req_driver;
+  1085			}
+  1086	
+  1087		}
+  1088	
+  1089	req_driver:
+  1090		if (udc->driver) {
+  1091			SETUP_DBG(udc, "Forwarding %s to gadget...\n",
+  1092				  udc->gadget.name);
+  1093	
+  1094			spin_unlock(&udc->lock);
+  1095			rc = udc->driver->setup(&udc->gadget, &crq);
+  1096			spin_lock(&udc->lock);
+  1097	
+  1098		} else
+  1099			SETUP_DBG(udc, "No gadget for request !\n");
+  1100	
+  1101		if (rc >= 0)
+  1102			return;
+  1103	
+  1104		/* Stall if gadget failed */
+  1105		SETUP_DBG(udc, "Stalling, rc:0x%x\n", rc);
+  1106		ast_udc_write(udc, ast_udc_read(udc, AST_UDC_EP0_CTRL) | EP0_STALL,
+  1107			      AST_UDC_EP0_CTRL);
+  1108		return;
+  1109	
+  1110	req_complete:
+  1111		SETUP_DBG(udc, "ep%d: Sending IN status without data\n", ep_num);
+  1112		ast_udc_write(udc, EP0_TX_BUFF_RDY, AST_UDC_EP0_CTRL);
+  1113	}
+  1114	
 
 -- 
-tejun
+0-DAY CI Kernel Test Service
+https://01.org/lkp
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
