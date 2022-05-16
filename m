@@ -2,226 +2,228 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AD65528C97
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 May 2022 20:09:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6333C528CFF
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 May 2022 20:28:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CF7F740FBE
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 May 2022 18:09:16 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
-	by lists.linaro.org (Postfix) with ESMTPS id 18E623EBB2
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 May 2022 18:09:11 +0000 (UTC)
-Received: by mail-ed1-f53.google.com with SMTP id m12so3932133edb.6
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 16 May 2022 11:09:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=M1PljccbIAOAE9neWAHKLdafeOscED/K3xPR9tFDwk4=;
-        b=PI7Q/iLr9MBJ1zVVAxdTHWye2DT/WcZy78H6wJG7W3W7GKo7sW3vIeF9XIrKQ9/FFy
-         TYFhZ2gsRTL5XpZfqSQuwT4PhTWyDgRPtmIHvNY+BoONCJM5B6p29fX01gfCEQKx0Jkl
-         Zsfi92aHCMCOePiGwZd0sQpgGOuk165Lvfd3bk+/jSd6WfAWUo7OXEVBlc8vWlKDzS14
-         sTI2sYDm0IgECfq4gu+dpwQD6rFUgmPRfIX6MnRfReWMrMIuNyYtoOh9w0Yfi3HLH129
-         Ejk14PJhA0y+oRpQx7MjXQezpymW0sd58wcZj4tTmwu7KXgIiOvCpP2EsCc4L2eCt+xr
-         QLmg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=M1PljccbIAOAE9neWAHKLdafeOscED/K3xPR9tFDwk4=;
-        b=VBfeYTJpJ2gxxr3AVB/uiWVZ8vF89kVjFr3h0sq92FnCw8Uk7SQRAU07lcCdCjMZew
-         4VzejuHIS7yLp7j8OaxMHxzT06YC5IjKncxJ8YkbWGnFqv2+lUfTsqXOYgBuFxPpUR9i
-         IClnMS80v81a4MLV0AMc0g5qSvxMVLjj7+scUdFlPlbjyH6k76XUV/8cu449IYM+UwhJ
-         DlbLVOkZFHie+RWU7U9JfmUaLg2O2fq6wgN6l4FWgB4kJ/IZ0m3UZ7AuH7KyncVBJVdj
-         W1PLu3AgUMhu1dUvH+H+50tpYF1IaAafpB6COq23u69fPsyNMtEag5QBB2Bj8XRcG/mH
-         K8HA==
-X-Gm-Message-State: AOAM533XPpvejwt85w3Tnn3eiAHf+3tCPwlLvRlPIERmfjBAJtWcR7sy
-	UaI9CdebC5FqwLeCYPKSBlSrsZkmJQ50mN+2hdTkxA==
-X-Google-Smtp-Source: ABdhPJybuxS4qikd73Kz3O+UugJ2dmVo1esTPFbqiEM0/0OxiI9stNtcymabcazgP7bTosofrHkTKIMCqGm0TzVKJDA=
-X-Received: by 2002:a05:6402:354d:b0:428:19be:2447 with SMTP id
- f13-20020a056402354d00b0042819be2447mr14561320edd.308.1652724549859; Mon, 16
- May 2022 11:09:09 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 90E1240FBE
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 16 May 2022 18:28:54 +0000 (UTC)
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by lists.linaro.org (Postfix) with ESMTPS id 41CF73EBB2
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 16 May 2022 18:28:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1652725729; x=1684261729;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=R32de3wh6TrT1gnFG0UBXSG3pbisE1mnMN7/ySz5rO0=;
+  b=Jr5+Uy0kyuFP2MputuerWSmDnxivd+RPHC+LD03E1YkT1rUSykGq5uJh
+   450c8F7iV0TgYMw8D8S5l/V87B+AHg4jA6apcX42mLcGmXLlzV4A4w0Yz
+   JII90DiaGE9LSvxF80YNozc39aV/DZt+vG6kv68ovsP41AEXOuihCCsnU
+   Eakl8pDHmAibAY0jz3m3WOSVa4GUxfZSCy8a0CwPMaHC+BmhyHwPfrQLE
+   rvJ+0gt0Fu5JdeLRC1su/rr49BhKUThBaQY/ggt/e4SZcP5iB6T+OV9b6
+   C7axrSbP3gMWfdyHsG4ktT3QFkYXKD4VxxtUl6rxkn9F28yFxwjMPddFF
+   w==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10349"; a="296197063"
+X-IronPort-AV: E=Sophos;i="5.91,230,1647327600";
+   d="scan'208";a="296197063"
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 May 2022 11:28:47 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.91,230,1647327600";
+   d="scan'208";a="574151701"
+Received: from lkp-server02.sh.intel.com (HELO 242b25809ac7) ([10.239.97.151])
+  by fmsmga007.fm.intel.com with ESMTP; 16 May 2022 11:28:42 -0700
+Received: from kbuild by 242b25809ac7 with local (Exim 4.95)
+	(envelope-from <lkp@intel.com>)
+	id 1nqfSU-0000G2-5F;
+	Mon, 16 May 2022 18:28:42 +0000
+Date: Tue, 17 May 2022 02:28:21 +0800
+From: kernel test robot <lkp@intel.com>
+To: Neal Liu <neal_liu@aspeedtech.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Joel Stanley <joel@jms.id.au>, Andrew Jeffery <andrew@aj.id.au>,
+	Felipe Balbi <balbi@kernel.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	Li Yang <leoyang.li@nxp.com>
+Message-ID: <202205170249.uTUi0uir-lkp@intel.com>
+References: <20220513065728.857722-2-neal_liu@aspeedtech.com>
 MIME-Version: 1.0
-References: <20220516171315.2400578-1-tjmercier@google.com> <175c5af3-9224-9c8e-0784-349dad9a2954@amd.com>
-In-Reply-To: <175c5af3-9224-9c8e-0784-349dad9a2954@amd.com>
-From: "T.J. Mercier" <tjmercier@google.com>
-Date: Mon, 16 May 2022 11:08:57 -0700
-Message-ID: <CABdmKX2GcgCs1xANYPBp8OEtk9qqH7AvCzpdppj9rHXvMqWSAw@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-Message-ID-Hash: KFMVJSWABMXXOMSOTHLET5MQOIIIHUEM
-X-Message-ID-Hash: KFMVJSWABMXXOMSOTHLET5MQOIIIHUEM
-X-MailFrom: tjmercier@google.com
+Content-Disposition: inline
+In-Reply-To: <20220513065728.857722-2-neal_liu@aspeedtech.com>
+Message-ID-Hash: OZ34NKTKCTDXFH4NQJHXURDV2YVRHSTH
+X-Message-ID-Hash: OZ34NKTKCTDXFH4NQJHXURDV2YVRHSTH
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Suren Baghdasaryan <surenb@google.com>, Kalesh Singh <kaleshsingh@google.com>, Minchan Kim <minchan@google.com>, Greg Kroah-Hartman <gregkh@google.com>, John Stultz <jstultz@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Hridya Valsaraju <hridya@google.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kernel-team@android.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+CC: kbuild-all@lists.01.org, Neal Liu <neal_liu@aspeedtech.com>, linux-aspeed@lists.ozlabs.org, linux-usb@vger.kernel.org, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, BMC-SW@aspeedtech.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: Move sysfs work out of DMA-BUF export path
+Subject: [Linaro-mm-sig] Re: [PATCH 1/3] usb: gadget: add Aspeed ast2600 udc driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KFMVJSWABMXXOMSOTHLET5MQOIIIHUEM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OZ34NKTKCTDXFH4NQJHXURDV2YVRHSTH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gTW9uLCBNYXkgMTYsIDIwMjIgYXQgMTA6MjAgQU0gQ2hyaXN0aWFuIEvDtm5pZw0KPGNocmlz
-dGlhbi5rb2VuaWdAYW1kLmNvbT4gd3JvdGU6DQo+DQo+IEFtIDE2LjA1LjIyIHVtIDE5OjEzIHNj
-aHJpZWIgVC5KLiBNZXJjaWVyOg0KPiA+IFJlY2VudGx5LCB3ZSBub3RpY2VkIGFuIGlzc3VlIHdo
-ZXJlIGEgcHJvY2VzcyB3ZW50IGludG8gZGlyZWN0IHJlY2xhaW0NCj4gPiB3aGlsZSBob2xkaW5n
-IHRoZSBrZXJuZnMgcncgc2VtYXBob3JlIGZvciBzeXNmcyBpbiB3cml0ZSAoZXhjbHVzaXZlKQ0K
-PiA+IG1vZGUuIFRoaXMgY2F1c2VkIHByb2Nlc3NlcyB3aG8gd2VyZSBkb2luZyBETUEtQlVGIGV4
-cG9ydHMgYW5kIHJlbGVhc2VzDQo+ID4gdG8gZ28gaW50byB1bmludGVycnVwdGlibGUgc2xlZXAg
-c2luY2UgdGhleSBuZWVkZWQgdG8gYWNxdWlyZSB0aGUgc2FtZQ0KPiA+IHNlbWFwaG9yZSBmb3Ig
-dGhlIERNQS1CVUYgc3lzZnMgZW50cnkgY3JlYXRpb24vZGVsZXRpb24uIEluIG9yZGVyIHRvIGF2
-b2lkDQo+ID4gYmxvY2tpbmcgRE1BLUJVRiBleHBvcnQgZm9yIGFuIGluZGV0ZXJtaW5hdGUgYW1v
-dW50IG9mIHRpbWUgd2hpbGUNCj4gPiBhbm90aGVyIHByb2Nlc3MgaXMgaG9sZGluZyB0aGUgc3lz
-ZnMgcncgc2VtYXBob3JlIGluIGV4Y2x1c2l2ZSBtb2RlLA0KPiA+IHRoaXMgcGF0Y2ggbW92ZXMg
-dGhlIHBlci1idWZmZXIgc3lzZnMgZmlsZSBjcmVhdGlvbiB0byB0aGUgZGVmYXVsdCB3b3JrDQo+
-ID4gcXVldWUuIE5vdGUgdGhhdCB0aGlzIGNhbiBsZWFkIHRvIGEgc2hvcnQtdGVybSBpbmFjY3Vy
-YWN5IGluIHRoZSBkbWFidWYNCj4gPiBzeXNmcyBzdGF0aXN0aWNzLCBidXQgdGhpcyBpcyBhIHRy
-YWRlb2ZmIHRvIHByZXZlbnQgdGhlIGhvdCBwYXRoIGZyb20NCj4gPiBiZWluZyBibG9ja2VkLiBB
-IHdvcmtfc3RydWN0IGlzIGFkZGVkIHRvIGRtYV9idWYgdG8gYWNoaWV2ZSB0aGlzLCBidXQgYXMN
-Cj4gPiBpdCBpcyB1bmlvbmVkIHdpdGggdGhlIGtvYmplY3QgaW4gdGhlIHN5c2ZzX2VudHJ5LCBk
-bWFfYnVmIGRvZXMgbm90DQo+ID4gaW5jcmVhc2UgaW4gc2l6ZS4NCj4NCj4gSSdtIHN0aWxsIG5v
-dCB2ZXJ5IGtlZW4gb2YgdGhpcyBhcHByb2FjaCBhcyBpdCBzdHJvbmdseSBmZWVscyBsaWtlIHdl
-DQo+IGFyZSB3b3JraW5nIGFyb3VuZCBzaG9ydGNvbWluZyBzb21ld2hlcmUgZWxzZS4NCj4NCk15
-IHJlYWQgb2YgdGhlIHRocmVhZCBmb3IgdGhlIGxhc3QgdmVyc2lvbiBpcyB0aGF0IHdlJ3JlIHJ1
-bm5pbmcgaW50bw0KYSBzaXR1YXRpb24gd2hlcmUgc3lzZnMgaXMgZ2V0dGluZyB1c2VkIGZvciBz
-b21ldGhpbmcgaXQgd2Fzbid0DQpvcmlnaW5hbGx5IGludGVuZGVkIGZvciwgYnV0IHdlJ3JlIGFs
-c28gc3R1Y2sgd2l0aCB0aGlzIHN5c2ZzDQpmdW5jdGlvbmFsaXR5IGZvciBkbWFidWZzLg0KDQo+
-ID4gRml4ZXM6IGJkYjhkMDZkZmVmZCAoImRtYWJ1ZjogQWRkIHRoZSBjYXBhYmlsaXR5IHRvIGV4
-cG9zZSBETUEtQlVGIHN0YXRzIGluIHN5c2ZzIikNCj4gPiBPcmlnaW5hbGx5LWJ5OiBIcmlkeWEg
-VmFsc2FyYWp1IDxocmlkeWFAZ29vZ2xlLmNvbT4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBULkouIE1l
-cmNpZXIgPHRqbWVyY2llckBnb29nbGUuY29tPg0KPiA+DQo+ID4gLS0tDQo+ID4gU2VlIHRoZSBv
-cmlnaW5hbGx5IHN1Ym1pdHRlZCBwYXRjaCBieSBIcmlkeWEgVmFsc2FyYWp1IGhlcmU6DQo+ID4g
-aHR0cHM6Ly9uYW0xMS5zYWZlbGlua3MucHJvdGVjdGlvbi5vdXRsb29rLmNvbS8/dXJsPWh0dHBz
-JTNBJTJGJTJGbGttbC5vcmclMkZsa21sJTJGMjAyMiUyRjElMkY0JTJGMTA2NiZhbXA7ZGF0YT0w
-NSU3QzAxJTdDY2hyaXN0aWFuLmtvZW5pZyU0MGFtZC5jb20lN0M1NTc1ZmE2MTI2ZDc0Y2E0MzE1
-NDA4ZGEzNzVmNjE4ZCU3QzNkZDg5NjFmZTQ4ODRlNjA4ZTExYTgyZDk5NGUxODNkJTdDMCU3QzAl
-N0M2Mzc4ODMxODAwNjMzOTM2NDklN0NVbmtub3duJTdDVFdGcGJHWnNiM2Q4ZXlKV0lqb2lNQzR3
-TGpBd01EQWlMQ0pRSWpvaVYybHVNeklpTENKQlRpSTZJazFoYVd3aUxDSlhWQ0k2TW4wJTNEJTdD
-MzAwMCU3QyU3QyU3QyZhbXA7c2RhdGE9MVBjWmFVZnNMaFFaT1cyOXlHVUR4YXp6Y3lOb0JyTjJO
-amVOMVliNDBoayUzRCZhbXA7cmVzZXJ2ZWQ9MA0KPiA+DQo+ID4gdjIgY2hhbmdlczoNCj4gPiAt
-IERlZmVyIG9ubHkgc3lzZnMgY3JlYXRpb24gaW5zdGVhZCBvZiBjcmVhdGlvbiBhbmQgdGVhcmRv
-d24gcGVyDQo+ID4gQ2hyaXN0aWFuIEvDtm5pZw0KPiA+DQo+ID4gLSBVc2UgYSB3b3JrIHF1ZXVl
-IGluc3RlYWQgb2YgYSBrdGhyZWFkIGZvciBkZWZlcnJlZCB3b3JrIHBlcg0KPiA+IENocmlzdGlh
-biBLw7ZuaWcNCj4gPiAtLS0NCj4gPiAgIGRyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLXN5c2ZzLXN0
-YXRzLmMgfCA1NiArKysrKysrKysrKysrKysrKysrKy0tLS0tLS0NCj4gPiAgIGluY2x1ZGUvbGlu
-dXgvZG1hLWJ1Zi5oICAgICAgICAgICAgICAgfCAxNCArKysrKystDQo+ID4gICAyIGZpbGVzIGNo
-YW5nZWQsIDU0IGluc2VydGlvbnMoKyksIDE2IGRlbGV0aW9ucygtKQ0KPiA+DQo+ID4gZGlmZiAt
-LWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLXN5c2ZzLXN0YXRzLmMgYi9kcml2ZXJzL2Rt
-YS1idWYvZG1hLWJ1Zi1zeXNmcy1zdGF0cy5jDQo+ID4gaW5kZXggMmJiYTBiYWJjYjYyLi42N2Iw
-YTI5ODI5MWMgMTAwNjQ0DQo+ID4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYtc3lzZnMt
-c3RhdHMuYw0KPiA+ICsrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLXN5c2ZzLXN0YXRzLmMN
-Cj4gPiBAQCAtMTEsNiArMTEsNyBAQA0KPiA+ICAgI2luY2x1ZGUgPGxpbnV4L3ByaW50ay5oPg0K
-PiA+ICAgI2luY2x1ZGUgPGxpbnV4L3NsYWIuaD4NCj4gPiAgICNpbmNsdWRlIDxsaW51eC9zeXNm
-cy5oPg0KPiA+ICsjaW5jbHVkZSA8bGludXgvd29ya3F1ZXVlLmg+DQo+ID4NCj4gPiAgICNpbmNs
-dWRlICJkbWEtYnVmLXN5c2ZzLXN0YXRzLmgiDQo+ID4NCj4gPiBAQCAtMTY4LDEwICsxNjksNDYg
-QEAgdm9pZCBkbWFfYnVmX3VuaW5pdF9zeXNmc19zdGF0aXN0aWNzKHZvaWQpDQo+ID4gICAgICAg
-a3NldF91bnJlZ2lzdGVyKGRtYV9idWZfc3RhdHNfa3NldCk7DQo+ID4gICB9DQo+ID4NCj4gPiAr
-c3RhdGljIHZvaWQgc3lzZnNfYWRkX3dvcmtmbihzdHJ1Y3Qgd29ya19zdHJ1Y3QgKndvcmspDQo+
-ID4gK3sNCj4gPiArICAgICBzdHJ1Y3QgZG1hX2J1Zl9zeXNmc19lbnRyeSAqc3lzZnNfZW50cnkg
-PQ0KPiA+ICsgICAgICAgICAgICAgY29udGFpbmVyX29mKHdvcmssIHN0cnVjdCBkbWFfYnVmX3N5
-c2ZzX2VudHJ5LCBzeXNmc19hZGRfd29yayk7DQo+ID4gKyAgICAgc3RydWN0IGRtYV9idWYgKmRt
-YWJ1ZiA9IHN5c2ZzX2VudHJ5LT5kbWFidWY7DQo+ID4gKw0KPiA+ICsgICAgIC8qDQo+ID4gKyAg
-ICAgICogQSBkbWFidWYgaXMgcmVmLWNvdW50ZWQgdmlhIGl0cyBmaWxlIG1lbWJlci4gSWYgdGhp
-cyBoYW5kbGVyIGhvbGRzIHRoZSBvbmx5DQo+ID4gKyAgICAgICogcmVmZXJlbmNlIHRvIHRoZSBk
-bWFidWYsIHRoZXJlIGlzIG5vIG5lZWQgZm9yIHN5c2ZzIGtvYmplY3QgY3JlYXRpb24uIFRoaXMg
-aXMgYW4NCj4gPiArICAgICAgKiBvcHRpbWl6YXRpb24gYW5kIGEgcmFjZTsgd2hlbiB0aGUgcmVm
-ZXJlbmNlIGNvdW50IGRyb3BzIHRvIDEgaW1tZWRpYXRlbHkgYWZ0ZXINCj4gPiArICAgICAgKiB0
-aGlzIGNoZWNrIGl0IGlzIG5vdCBoYXJtZnVsIGFzIHRoZSBzeXNmcyBlbnRyeSB3aWxsIHN0aWxs
-IGdldCBjbGVhbmVkIHVwIGluDQo+ID4gKyAgICAgICogZG1hX2J1Zl9zdGF0c190ZWFyZG93biwg
-d2hpY2ggd29uJ3QgZ2V0IGNhbGxlZCB1bnRpbCB0aGUgZmluYWwgZG1hYnVmIHJlZmVyZW5jZQ0K
-PiA+ICsgICAgICAqIGlzIHJlbGVhc2VkLCBhbmQgdGhhdCBjYW4ndCBoYXBwZW4gdW50aWwgdGhl
-IGVuZCBvZiB0aGlzIGZ1bmN0aW9uLg0KPiA+ICsgICAgICAqLw0KPiA+ICsgICAgIGlmIChmaWxl
-X2NvdW50KGRtYWJ1Zi0+ZmlsZSkgPiAxKSB7DQo+DQo+IFBsZWFzZSBjb21wbGV0ZWx5IGRyb3Ag
-dGhhdC4gSSBzZWUgYWJzb2x1dGVseSBubyBqdXN0aWZpY2F0aW9uIGZvciB0aGlzDQo+IGFkZGl0
-aW9uYWwgY29tcGxleGl0eS4NCj4NClRoaXMgY2FzZSBnZXRzIGhpdCBhcm91bmQgNSUgb2YgdGhl
-IHRpbWUgaW4gbXkgdGVzdGluZyBzbyB0aGUgZWxzZSBpcw0Kbm90IGEgY29tcGxldGVseSB1bnVz
-ZWQgYnJhbmNoLiBJdCdzIG9ubHkgMyBleHRyYSBsaW5lcyBvZiBhY3R1YWwNCmNvZGUuIEknZCBw
-cmVmZXIgdG8ga2VlcCBpdCwgYnV0IEknbGwgcmVtb3ZlIGl0IHRvIHJlZHVjZSBjb21wbGV4aXR5
-Lg0KVGhpcyBtZWFucyBkb2luZyB3b3JrIHRoYXQgd2Uga25vdyBpcyB1c2VsZXNzIHNvbWUgb2Yg
-dGhlIHRpbWUsIGFuZA0KYWRkaW5nIGNvbnRlbnRpb24gZm9yIGEgZ2xvYmFsIGtlcm5mcyBsb2Nr
-IHdoaWNoIHRoaXMgcGF0Y2ggaXMgYWltZWQNCmF0IGF2b2lkaW5nIChvbiB0aGUgaG90IHBhdGgp
-LCBidXQgYXQgbGVhc3QgdGhhdCB3b3JrIGlzIG9uIGEgd29ya2VyDQp0aHJlYWQgd2l0aCB0aGlz
-IHBhdGNoLg0KDQo+ID4gKyAgICAgICAgICAgICAvKg0KPiA+ICsgICAgICAgICAgICAgICoga29i
-amVjdF9pbml0X2FuZF9hZGQgZXhwZWN0cyBrb2JqZWN0IHRvIGJlIHplcm8tZmlsbGVkLCBidXQg
-d2UgaGF2ZSBwb3B1bGF0ZWQgaXQNCj4gPiArICAgICAgICAgICAgICAqICh0aGUgc3lzZnNfYWRk
-X3dvcmsgdW5pb24gbWVtYmVyKSB0byB0cmlnZ2VyIHRoaXMgd29yayBmdW5jdGlvbi4NCj4gPiAr
-ICAgICAgICAgICAgICAqLw0KPiA+ICsgICAgICAgICAgICAgbWVtc2V0KCZkbWFidWYtPnN5c2Zz
-X2VudHJ5LT5rb2JqLCAwLCBzaXplb2YoZG1hYnVmLT5zeXNmc19lbnRyeS0+a29iaikpOw0KPiA+
-ICsgICAgICAgICAgICAgZG1hYnVmLT5zeXNmc19lbnRyeS0+a29iai5rc2V0ID0gZG1hX2J1Zl9w
-ZXJfYnVmZmVyX3N0YXRzX2tzZXQ7DQo+ID4gKyAgICAgICAgICAgICBpZiAoa29iamVjdF9pbml0
-X2FuZF9hZGQoJmRtYWJ1Zi0+c3lzZnNfZW50cnktPmtvYmosICZkbWFfYnVmX2t0eXBlLCBOVUxM
-LA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiJWx1
-IiwgZmlsZV9pbm9kZShkbWFidWYtPmZpbGUpLT5pX2lubykpIHsNCj4gPiArICAgICAgICAgICAg
-ICAgICAgICAga29iamVjdF9wdXQoJmRtYWJ1Zi0+c3lzZnNfZW50cnktPmtvYmopOw0KPiA+ICsg
-ICAgICAgICAgICAgICAgICAgICBkbWFidWYtPnN5c2ZzX2VudHJ5ID0gTlVMTDsNCj4gPiArICAg
-ICAgICAgICAgIH0NCj4gPiArICAgICB9IGVsc2Ugew0KPiA+ICsgICAgICAgICAgICAgLyoNCj4g
-PiArICAgICAgICAgICAgICAqIEZyZWUgdGhlIHN5c2ZzX2VudHJ5IGFuZCByZXNldCB0aGUgcG9p
-bnRlciBzbyBkbWFfYnVmX3N0YXRzX3RlYXJkb3duIGRvZXNuJ3QNCj4gPiArICAgICAgICAgICAg
-ICAqIGF0dGVtcHQgdG8gb3BlcmF0ZSBvbiBpdC4NCj4gPiArICAgICAgICAgICAgICAqLw0KPiA+
-ICsgICAgICAgICAgICAga2ZyZWUoZG1hYnVmLT5zeXNmc19lbnRyeSk7DQo+ID4gKyAgICAgICAg
-ICAgICBkbWFidWYtPnN5c2ZzX2VudHJ5ID0gTlVMTDsNCj4gPiArICAgICB9DQo+ID4gKyAgICAg
-ZG1hX2J1Zl9wdXQoZG1hYnVmKTsNCj4gPiArfQ0KPiA+ICsNCj4gPiAgIGludCBkbWFfYnVmX3N0
-YXRzX3NldHVwKHN0cnVjdCBkbWFfYnVmICpkbWFidWYpDQo+ID4gICB7DQo+ID4gICAgICAgc3Ry
-dWN0IGRtYV9idWZfc3lzZnNfZW50cnkgKnN5c2ZzX2VudHJ5Ow0KPiA+IC0gICAgIGludCByZXQ7
-DQo+ID4NCj4gPiAgICAgICBpZiAoIWRtYWJ1ZiB8fCAhZG1hYnVmLT5maWxlKQ0KPiA+ICAgICAg
-ICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQo+ID4gQEAgLTE4MSwyNSArMjE4LDE2IEBAIGludCBk
-bWFfYnVmX3N0YXRzX3NldHVwKHN0cnVjdCBkbWFfYnVmICpkbWFidWYpDQo+ID4gICAgICAgICAg
-ICAgICByZXR1cm4gLUVJTlZBTDsNCj4gPiAgICAgICB9DQo+ID4NCj4gPiAtICAgICBzeXNmc19l
-bnRyeSA9IGt6YWxsb2Moc2l6ZW9mKHN0cnVjdCBkbWFfYnVmX3N5c2ZzX2VudHJ5KSwgR0ZQX0tF
-Uk5FTCk7DQo+ID4gKyAgICAgc3lzZnNfZW50cnkgPSBrbWFsbG9jKHNpemVvZihzdHJ1Y3QgZG1h
-X2J1Zl9zeXNmc19lbnRyeSksIEdGUF9LRVJORUwpOw0KPiA+ICAgICAgIGlmICghc3lzZnNfZW50
-cnkpDQo+ID4gICAgICAgICAgICAgICByZXR1cm4gLUVOT01FTTsNCj4gPg0KPiA+IC0gICAgIHN5
-c2ZzX2VudHJ5LT5rb2JqLmtzZXQgPSBkbWFfYnVmX3Blcl9idWZmZXJfc3RhdHNfa3NldDsNCj4g
-PiAgICAgICBzeXNmc19lbnRyeS0+ZG1hYnVmID0gZG1hYnVmOw0KPiA+IC0NCj4gPiAgICAgICBk
-bWFidWYtPnN5c2ZzX2VudHJ5ID0gc3lzZnNfZW50cnk7DQo+ID4NCj4gPiAtICAgICAvKiBjcmVh
-dGUgdGhlIGRpcmVjdG9yeSBmb3IgYnVmZmVyIHN0YXRzICovDQo+ID4gLSAgICAgcmV0ID0ga29i
-amVjdF9pbml0X2FuZF9hZGQoJnN5c2ZzX2VudHJ5LT5rb2JqLCAmZG1hX2J1Zl9rdHlwZSwgTlVM
-TCwNCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiJWx1IiwgZmlsZV9pbm9k
-ZShkbWFidWYtPmZpbGUpLT5pX2lubyk7DQo+ID4gLSAgICAgaWYgKHJldCkNCj4gPiAtICAgICAg
-ICAgICAgIGdvdG8gZXJyX3N5c2ZzX2RtYWJ1ZjsNCj4gPiArICAgICBJTklUX1dPUksoJmRtYWJ1
-Zi0+c3lzZnNfZW50cnktPnN5c2ZzX2FkZF93b3JrLCBzeXNmc19hZGRfd29ya2ZuKTsNCj4gPiAr
-ICAgICBnZXRfZG1hX2J1ZihkbWFidWYpOyAvKiBUaGlzIHJlZmVyZW5jZSB3aWxsIGJlIGRyb3Bw
-ZWQgaW4gc3lzZnNfYWRkX3dvcmtmbi4gKi8NCj4gPiArICAgICBzY2hlZHVsZV93b3JrKCZkbWFi
-dWYtPnN5c2ZzX2VudHJ5LT5zeXNmc19hZGRfd29yayk7DQo+ID4NCj4gPiAgICAgICByZXR1cm4g
-MDsNCj4gPiAtDQo+ID4gLWVycl9zeXNmc19kbWFidWY6DQo+ID4gLSAgICAga29iamVjdF9wdXQo
-JnN5c2ZzX2VudHJ5LT5rb2JqKTsNCj4gPiAtICAgICBkbWFidWYtPnN5c2ZzX2VudHJ5ID0gTlVM
-TDsNCj4gPiAtICAgICByZXR1cm4gcmV0Ow0KPiA+ICAgfQ0KPiA+IGRpZmYgLS1naXQgYS9pbmNs
-dWRlL2xpbnV4L2RtYS1idWYuaCBiL2luY2x1ZGUvbGludXgvZG1hLWJ1Zi5oDQo+ID4gaW5kZXgg
-MjA5Nzc2MGU4ZTk1Li4wMjAwY2FhM2M1MTUgMTAwNjQ0DQo+ID4gLS0tIGEvaW5jbHVkZS9saW51
-eC9kbWEtYnVmLmgNCj4gPiArKysgYi9pbmNsdWRlL2xpbnV4L2RtYS1idWYuaA0KPiA+IEBAIC0y
-Miw2ICsyMiw3IEBADQo+ID4gICAjaW5jbHVkZSA8bGludXgvZnMuaD4NCj4gPiAgICNpbmNsdWRl
-IDxsaW51eC9kbWEtZmVuY2UuaD4NCj4gPiAgICNpbmNsdWRlIDxsaW51eC93YWl0Lmg+DQo+ID4g
-KyNpbmNsdWRlIDxsaW51eC93b3JrcXVldWUuaD4NCj4gPg0KPiA+ICAgc3RydWN0IGRldmljZTsN
-Cj4gPiAgIHN0cnVjdCBkbWFfYnVmOw0KPiA+IEBAIC0zNjUsNyArMzY2LDcgQEAgc3RydWN0IGRt
-YV9idWYgew0KPiA+ICAgICAgICAqLw0KPiA+ICAgICAgIGNvbnN0IGNoYXIgKm5hbWU7DQo+ID4N
-Cj4NCj4gPiAtICAgICAvKiogQG5hbWVfbG9jazogU3BpbmxvY2sgdG8gcHJvdGVjdCBuYW1lIGFj
-Y2VzIGZvciByZWFkIGFjY2Vzcy4gKi8NCj4gPiArICAgICAvKiogQG5hbWVfbG9jazogU3Bpbmxv
-Y2sgdG8gcHJvdGVjdCBuYW1lIGFjY2VzcyBmb3IgcmVhZCBhY2Nlc3MuICovDQo+ID4gICAgICAg
-c3BpbmxvY2tfdCBuYW1lX2xvY2s7DQo+ID4NCj4gPiAgICAgICAvKioNCj4gPiBAQCAtNDQxLDYg
-KzQ0Miw3IEBAIHN0cnVjdCBkbWFfYnVmIHsNCj4gPg0KPiA+ICAgICAgICAgICAgICAgX19wb2xs
-X3QgYWN0aXZlOw0KPiA+ICAgICAgIH0gY2JfaW4sIGNiX291dDsNCj4gPiArDQo+DQo+IFRob3Nl
-IGNoYW5nZXMgYXJlIHVucmVsYXRlZC4NCj4NCkkgaW5jbHVkZWQgaXQgaGVyZSBiZWNhdXNlIEkg
-dGhvdWdodCBpdCB3YXMgYmFkIGZvcm0gdG8gc3VibWl0IGENCnR5cG8tb25seSBwYXRjaC4gV2ls
-bCByZW1vdmUuDQoNCg0KDQoNCj4gUmVnYXJkcywNCj4gQ2hyaXN0aWFuLg0KPg0KPiA+ICAgI2lm
-ZGVmIENPTkZJR19ETUFCVUZfU1lTRlNfU1RBVFMNCj4gPiAgICAgICAvKioNCj4gPiAgICAgICAg
-KiBAc3lzZnNfZW50cnk6DQo+ID4gQEAgLTQ0OSw3ICs0NTEsMTUgQEAgc3RydWN0IGRtYV9idWYg
-ew0KPiA+ICAgICAgICAqIGBETUEtQlVGIHN0YXRpc3RpY3NgXyBmb3IgdGhlIHVhcGkgdGhpcyBl
-bmFibGVzLg0KPiA+ICAgICAgICAqLw0KPiA+ICAgICAgIHN0cnVjdCBkbWFfYnVmX3N5c2ZzX2Vu
-dHJ5IHsNCj4gPiAtICAgICAgICAgICAgIHN0cnVjdCBrb2JqZWN0IGtvYmo7DQo+ID4gKyAgICAg
-ICAgICAgICB1bmlvbiB7DQo+ID4gKyAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCBrb2JqZWN0
-IGtvYmo7DQo+ID4gKw0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAvKiogQHN5c2ZzX2FkZF93
-b3JrOg0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgKg0KPiA+ICsgICAgICAgICAgICAgICAg
-ICAgICAgKiBGb3IgZGVmZXJyZWQgc3lzZnMga29iamVjdCBjcmVhdGlvbiB1c2luZyBhIHdvcmtx
-dWV1ZS4NCj4gPiArICAgICAgICAgICAgICAgICAgICAgICovDQo+ID4gKyAgICAgICAgICAgICAg
-ICAgICAgIHN0cnVjdCB3b3JrX3N0cnVjdCBzeXNmc19hZGRfd29yazsNCj4gPiArICAgICAgICAg
-ICAgIH07DQo+ID4gICAgICAgICAgICAgICBzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmOw0KPiA+ICAg
-ICAgIH0gKnN5c2ZzX2VudHJ5Ow0KPiA+ICAgI2VuZGlmDQo+DQpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAt
-LSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBl
-bWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+Hi Neal,
+
+I love your patch! Perhaps something to improve:
+
+[auto build test WARNING on usb/usb-testing]
+[also build test WARNING on robh/for-next v5.18-rc7]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Neal-Liu/add-Aspeed-udc-driver-for-ast2600/20220513-150314
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb.git usb-testing
+config: mips-randconfig-s032-20220516 (https://download.01.org/0day-ci/archive/20220517/202205170249.uTUi0uir-lkp@intel.com/config)
+compiler: mipsel-linux-gcc (GCC) 11.3.0
+reproduce:
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # apt-get install sparse
+        # sparse version: v0.6.4-dirty
+        # https://github.com/intel-lab-lkp/linux/commit/272ae26f9fe89f60d584cf445431d0fa566eb24b
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Neal-Liu/add-Aspeed-udc-driver-for-ast2600/20220513-150314
+        git checkout 272ae26f9fe89f60d584cf445431d0fa566eb24b
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.3.0 make.cross C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=mips SHELL=/bin/bash drivers/usb/gadget/udc/
+
+If you fix the issue, kindly add following tag as appropriate
+Reported-by: kernel test robot <lkp@intel.com>
+
+
+sparse warnings: (new ones prefixed by >>)
+   command-line: note: in included file:
+   builtin:1:9: sparse: sparse: preprocessor token __ATOMIC_ACQUIRE redefined
+   builtin:0:0: sparse: this was the original definition
+   builtin:1:9: sparse: sparse: preprocessor token __ATOMIC_SEQ_CST redefined
+   builtin:0:0: sparse: this was the original definition
+   builtin:1:9: sparse: sparse: preprocessor token __ATOMIC_ACQ_REL redefined
+   builtin:0:0: sparse: this was the original definition
+   builtin:1:9: sparse: sparse: preprocessor token __ATOMIC_RELEASE redefined
+   builtin:0:0: sparse: this was the original definition
+   drivers/usb/gadget/udc/aspeed_udc.c:1009:34: sparse: sparse: restricted __le16 degrades to integer
+   drivers/usb/gadget/udc/aspeed_udc.c:1037:32: sparse: sparse: incorrect type in argument 2 (different address spaces) @@     expected void const volatile [noderef] __iomem *src @@     got struct usb_ctrlrequest *creq @@
+   drivers/usb/gadget/udc/aspeed_udc.c:1037:32: sparse:     expected void const volatile [noderef] __iomem *src
+   drivers/usb/gadget/udc/aspeed_udc.c:1037:32: sparse:     got struct usb_ctrlrequest *creq
+>> drivers/usb/gadget/udc/aspeed_udc.c:1066:25: sparse: sparse: incorrect type in argument 1 (different base types) @@     expected unsigned int [usertype] val @@     got restricted __le16 [addressable] [usertype] wValue @@
+   drivers/usb/gadget/udc/aspeed_udc.c:1066:25: sparse:     expected unsigned int [usertype] val
+   drivers/usb/gadget/udc/aspeed_udc.c:1066:25: sparse:     got restricted __le16 [addressable] [usertype] wValue
+   drivers/usb/gadget/udc/aspeed_udc.c:1070:37: sparse: sparse: restricted __le16 degrades to integer
+   drivers/usb/gadget/udc/aspeed_udc.c:1075:37: sparse: sparse: restricted __le16 degrades to integer
+   drivers/usb/gadget/udc/aspeed_udc.c:1518:19: sparse: sparse: incorrect type in assignment (different address spaces) @@     expected struct usb_ctrlrequest *creq @@     got void [noderef] __iomem * @@
+   drivers/usb/gadget/udc/aspeed_udc.c:1518:19: sparse:     expected struct usb_ctrlrequest *creq
+   drivers/usb/gadget/udc/aspeed_udc.c:1518:19: sparse:     got void [noderef] __iomem *
+   drivers/usb/gadget/udc/aspeed_udc.c:619:38: sparse: sparse: cast truncates bits from constant value (80 becomes 0)
+   drivers/usb/gadget/udc/aspeed_udc.c:625:12: sparse: sparse: context imbalance in 'ast_udc_ep_queue' - different lock contexts for basic block
+
+vim +1066 drivers/usb/gadget/udc/aspeed_udc.c
+
+  1027	
+  1028	static void ast_udc_ep0_handle_setup(struct ast_udc_dev *udc)
+  1029	{
+  1030		struct ast_udc_ep *ep = &udc->ep[0];
+  1031		struct ast_udc_request *req;
+  1032		struct usb_ctrlrequest crq;
+  1033		int req_num = 0;
+  1034		u16 ep_num = 0;
+  1035		int rc;
+  1036	
+  1037		memcpy_fromio(&crq, udc->creq, sizeof(crq));
+  1038	
+  1039		SETUP_DBG(udc, "SETEUP packet: %02x/%02x/%04x/%04x/%04x\n",
+  1040			  crq.bRequestType, crq.bRequest, le16_to_cpu(crq.wValue),
+  1041			  le16_to_cpu(crq.wIndex), le16_to_cpu(crq.wLength));
+  1042	
+  1043		/*
+  1044		 * Cleanup ep0 request(s) in queue because
+  1045		 * there is a new control setup comes.
+  1046		 */
+  1047		list_for_each_entry(req, &udc->ep[0].queue, queue) {
+  1048			req_num++;
+  1049			EP_DBG(ep, "there is req %p in ep0 queue !\n", req);
+  1050		}
+  1051	
+  1052		if (req_num)
+  1053			ast_udc_nuke(&udc->ep[0], -ETIMEDOUT);
+  1054	
+  1055		udc->ep[0].dir_in = crq.bRequestType & USB_DIR_IN;
+  1056	
+  1057		if ((crq.bRequestType & USB_TYPE_MASK) == USB_TYPE_STANDARD) {
+  1058			switch (crq.bRequest) {
+  1059			case USB_REQ_SET_ADDRESS:
+  1060				if (ast_udc_read(udc, AST_UDC_STS) & UDC_STS_HIGHSPEED)
+  1061					udc->gadget.speed = USB_SPEED_HIGH;
+  1062				else
+  1063					udc->gadget.speed = USB_SPEED_FULL;
+  1064	
+  1065				SETUP_DBG(udc, "set addr: 0x%x\n", crq.wValue);
+> 1066				ast_udc_write(udc, crq.wValue, AST_UDC_CONFIG);
+  1067				goto req_complete;
+  1068	
+  1069			case USB_REQ_CLEAR_FEATURE:
+  1070				ep_num = crq.wIndex & USB_ENDPOINT_NUMBER_MASK;
+  1071				SETUP_DBG(udc, "ep%d: CLEAR FEATURE\n", ep_num);
+  1072				goto req_driver;
+  1073	
+  1074			case USB_REQ_SET_FEATURE:
+  1075				ep_num = crq.wIndex & USB_ENDPOINT_NUMBER_MASK;
+  1076				SETUP_DBG(udc, "ep%d: SET FEATURE\n", ep_num);
+  1077				goto req_driver;
+  1078	
+  1079			case USB_REQ_GET_STATUS:
+  1080				ast_udc_getstatus(udc);
+  1081				return;
+  1082	
+  1083			default:
+  1084				goto req_driver;
+  1085			}
+  1086	
+  1087		}
+  1088	
+  1089	req_driver:
+  1090		if (udc->driver) {
+  1091			SETUP_DBG(udc, "Forwarding %s to gadget...\n",
+  1092				  udc->gadget.name);
+  1093	
+  1094			spin_unlock(&udc->lock);
+  1095			rc = udc->driver->setup(&udc->gadget, &crq);
+  1096			spin_lock(&udc->lock);
+  1097	
+  1098		} else
+  1099			SETUP_DBG(udc, "No gadget for request !\n");
+  1100	
+  1101		if (rc >= 0)
+  1102			return;
+  1103	
+  1104		/* Stall if gadget failed */
+  1105		SETUP_DBG(udc, "Stalling, rc:0x%x\n", rc);
+  1106		ast_udc_write(udc, ast_udc_read(udc, AST_UDC_EP0_CTRL) | EP0_STALL,
+  1107			      AST_UDC_EP0_CTRL);
+  1108		return;
+  1109	
+  1110	req_complete:
+  1111		SETUP_DBG(udc, "ep%d: Sending IN status without data\n", ep_num);
+  1112		ast_udc_write(udc, EP0_TX_BUFF_RDY, AST_UDC_EP0_CTRL);
+  1113	}
+  1114	
+
+-- 
+0-DAY CI Kernel Test Service
+https://01.org/lkp
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
