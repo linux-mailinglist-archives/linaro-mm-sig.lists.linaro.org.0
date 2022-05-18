@@ -2,128 +2,208 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1072A52B911
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 May 2022 13:52:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8018652B944
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 May 2022 14:03:44 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3E48E40169
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 May 2022 11:52:39 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by lists.linaro.org (Postfix) with ESMTPS id 56EB04801E
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 May 2022 17:18:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1651684737;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=3t8epFEjcxVGinupv1KfUngZ1NH7mCjOSa22VqDXFR0=;
-	b=X1+4HlfZBhTqWCgP1r5i8asWa5k/8KZqFkILiwIgoa/ebK0fILBDn1kv2Q+C+UexoTywc6
-	FBnzZpoeCmKvxJAGs3b46jz3mnI4xhrpKPeTL61tszjksPi2yodu0urO3g+YI27F+F/3Sa
-	AyKObawJMjlCsttouj9uXen+WzX3vDo=
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-634-6nU-Y5LmPMqopHt5RDIB3Q-1; Wed, 04 May 2022 13:18:56 -0400
-X-MC-Unique: 6nU-Y5LmPMqopHt5RDIB3Q-1
-Received: by mail-ej1-f72.google.com with SMTP id ga27-20020a1709070c1b00b006f43c161da4so1222526ejc.7
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 04 May 2022 10:18:55 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=3t8epFEjcxVGinupv1KfUngZ1NH7mCjOSa22VqDXFR0=;
-        b=rZJ1jgglEcPDFDMEx1NgnKJl3I23bleMpPyM8T29jkt1J3yylJRqdEvLGbNFKncynF
-         drAIF5nzANJQSQOxc33NKf7QT5PBQf7rpCbym2+lTf0/WJBJHj9M+Q/o1tleu/QS2Ujh
-         zDwTyVZGCw1HRF8hE58bq9VwkkgbfSbO5tOVGldAfP+25BjMWjaOYxaqBtHIb64tE3Fq
-         qZtcbqZzYPfZVbjfm4ILseytYg3YTwxTCaTyG1OWPnKkmtXfZKxHa/lTyQ9DZD0FL29h
-         DEVEVyrdNIkDH8jT6XkeXxYmYUKUwcuZY3XD6+LdQt6WRrmmIS9BgNhb5b3q9eklgx62
-         XpKA==
-X-Gm-Message-State: AOAM531WQW1Blxn9HYZL7D0nsBDA35O0FRHfcptuDzKmkBmIXbGDi9oW
-	H6jf47MDq5uXsurUMceCsQY+bUOGscec5VpVi0cuq1EXTaVxTeEQBZ0uD7tugmwuTAlD6ejz60D
-	64hYN28IVnpO8zqJG07L2Z8XCXto=
-X-Received: by 2002:a17:907:a407:b0:6f4:3f14:7707 with SMTP id sg7-20020a170907a40700b006f43f147707mr16222517ejc.351.1651684734978;
-        Wed, 04 May 2022 10:18:54 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxeNLSEO6aMZEJmeSDZvOrdtsRQbX4QDRaEAbooQf77kraL3riqlGTEh69XjibmoSyspABsDQ==
-X-Received: by 2002:a17:907:a407:b0:6f4:3f14:7707 with SMTP id sg7-20020a170907a40700b006f43f147707mr16222496ejc.351.1651684734772;
-        Wed, 04 May 2022 10:18:54 -0700 (PDT)
-Received: from fedora.nat2.vcit.vutbr.net (nat2.vcit.vutbr.net. [185.62.108.68])
-        by smtp.gmail.com with ESMTPSA id bf16-20020a0564021a5000b0042617ba63aesm9492598edb.56.2022.05.04.10.18.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 04 May 2022 10:18:54 -0700 (PDT)
-From: Mark Menzynski <mmenzyns@redhat.com>
-To: linux-kernel@vger.kernel.org
-Date: Wed,  4 May 2022 19:18:51 +0200
-Message-Id: <20220504171851.17188-1-mmenzyns@redhat.com>
-X-Mailer: git-send-email 2.32.0
+	by lists.linaro.org (Postfix) with ESMTP id 96E99404D2
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 18 May 2022 12:03:43 +0000 (UTC)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2077.outbound.protection.outlook.com [40.107.237.77])
+	by lists.linaro.org (Postfix) with ESMTPS id C6EA33EF0C
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 May 2022 12:03:37 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=bcYsnb7TU9oBjupMr/Gv1X8NYQ01NROYeoFqDmkSMGlKdZnLl7nRjCgNrKXtd5odO2AJKDZH75lAiV8D3kkt+vQMpBlSFIACzdIqbEu4HpY/J62mLinNwJ1GNQiCMcxzbbF+vOcr6x9YxYATACDsFo9a3x/qC4ohkWpATTS5BadO7s8nCFYhXJY9jZxvqJKcrGsyconT2lcIvyQCENXRo4P8GTW9rwcsgmD0nyAqVKmjGb3wf6J3lUzq7HtjhXv6SGioIUPouwfdhv+u2LfBcak+86l96hn49OssKvEEuR8BUrtEQiHhTY80q+ufZsay4x9FZE4Oj6x8lcCcROjazQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=G3KFuxX+mUvErdLc/4ItB1fznJzX/iWBcgoTJ+UU+7E=;
+ b=E8vppWO1+dh1xjQr8DM2ukHQDK+rpc+AzhXKxyyc7+KKdzK9XG1pcxhmgYt52tEtAh9CIKGXhFP0PH9LJHZ/pbHYaEWk1R2cxAhTan+89e7THj+tI2Vd4gsOQ1N2gYq5YvEBZf3/OouasLTVoA7iwjvPA8CtSY5LkDT0SRqaLvgm+9XpfTtDeTr8iUtdjNrMGZkGXibJhC+ru/q1jNv0SRqYYebjU/B9g3TF8JlQbWdbo+xONyvFG2zKOGvUF9qn3mzYApAgTVysg9BWJGtWOKPksGWVDC4TdEn+bP6QHgMEWpwDZqSBjgF5vkXv9c9Z6k2sJKy8H8Inw8h9AWXF6A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=G3KFuxX+mUvErdLc/4ItB1fznJzX/iWBcgoTJ+UU+7E=;
+ b=jnEQraTQO/iW+wtNCmWMJinihzgHBD4ET4T0bkrB6pMEGJCCzJ8Gy/QM51OgnvXzz5qw4eVfixSwvHBUMxCFtTHOXzV5+7H3jwE9/NUPjNTWqjdUVWjJTrJhmoD0I/6wI7S1rLE0tdqefMJaLzb/dHZpxh6OvS9mWF0rFoKmmQ8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by CY5PR12MB6201.namprd12.prod.outlook.com (2603:10b6:930:26::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5250.15; Wed, 18 May
+ 2022 12:03:36 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::7146:65ee:8fd3:dd03]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::7146:65ee:8fd3:dd03%4]) with mapi id 15.20.5273.015; Wed, 18 May 2022
+ 12:03:35 +0000
+Message-ID: <7f895a99-adfa-bcbd-c130-a924c668b8af@amd.com>
+Date: Wed, 18 May 2022 14:03:28 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.8.1
+Content-Language: en-US
+To: "T.J. Mercier" <tjmercier@google.com>
+References: <20220516171315.2400578-1-tjmercier@google.com>
+ <175c5af3-9224-9c8e-0784-349dad9a2954@amd.com>
+ <CABdmKX2GcgCs1xANYPBp8OEtk9qqH7AvCzpdppj9rHXvMqWSAw@mail.gmail.com>
+ <0875fa95-3a25-a354-1433-201fca81ed3e@amd.com>
+ <CABdmKX1+VYfdzyVYOS5MCsr4ptGTygmuUP9ikyh-vW6DgKk2kg@mail.gmail.com>
+ <YoM9BAwybcjG7K/H@kroah.com> <d820893c-fa2e-3bac-88be-f39c06d89c01@amd.com>
+ <CABdmKX2m1b1kdACKM19S+u9uR5RTy1UGMRgd+3QA_oAyCpeggg@mail.gmail.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <CABdmKX2m1b1kdACKM19S+u9uR5RTy1UGMRgd+3QA_oAyCpeggg@mail.gmail.com>
+X-ClientProxiedBy: AM6P192CA0018.EURP192.PROD.OUTLOOK.COM
+ (2603:10a6:209:83::31) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
-	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mmenzyns@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-X-MailFrom: mmenzyns@redhat.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: LIKOPI7AHGFKV77PLNH5QVOVGUZMEQQW
-X-Message-ID-Hash: LIKOPI7AHGFKV77PLNH5QVOVGUZMEQQW
-X-Mailman-Approved-At: Wed, 18 May 2022 11:52:34 +0000
-CC: Mark Menzynski <mmenzyns@redhat.com>, Ben Skeggs <bskeggs@redhat.com>, Karol Herbst <kherbst@redhat.com>, Lyude Paul <lyude@redhat.com>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, nouveau@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: c68ef7e1-dc21-4410-5dbe-08da38c66fc6
+X-MS-TrafficTypeDiagnostic: CY5PR12MB6201:EE_
+X-Microsoft-Antispam-PRVS: 
+	<CY5PR12MB620161E94126F00A929CF0F183D19@CY5PR12MB6201.namprd12.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	ZknUcDnwpTw9T5vXnODpIV/hx4xduQ+U+Szb+sNxnFeiXG+sM7q9FNLHrJ7zy3O/GSe7+Iv4kcKncBP2GbNTEf7SfBGmFIvLwknXj39xyIygcyzX/iN4F3MqfJWgecClvUW8g2yHcxFwMim9CEjyQSWcx/34s0w/uY636g/yVsLnQQGb95S22zy8ak8K4L3Osbh/w3uzj9ZrJa+x7G0RJeWSQ5mE2DMbgrg/jvzkP0Ic7Ah5IFPSaosPFN+4r3sJUq5pRaPeau5mdSJ6reTAQx+C000owQsgHNLgu7VpROcWA0yuqKECstmGROGd4PgL/AwUiOtwopKrPrHrx7GOexS1uEnMRH6VTXIcydWYI3A4tfinu/VGf2+gDi0GAVZI3QrHhUCkvZj5Jsy02RBmJjnsYoHRcofcgBLcB0q+UfwkXD9ZBGGDkJnKD4Z3YZlfjlAe2K6xymDs3Ax2IISnWYwNujloN5+iHe4crL2dXXOp5BSTEReRXulscofJpXebsE3H0/AVAopwfCJyT98087W0IvHp9wTOABWqSFgrjIunx1FuikhYXjvqnUc7CA7ZbYijmyQNceAGgRuXy7hHFI6lH9PNritc/vR+f34hIThRieLJJTSKW8h3gkqLY63jtNgEQz+sHBvL5wypfJy2L6xE+fyAZ7qy4+R4cpJXSOalmBz8CIi5xQAynCoSKbG7ap5RLPqSqqkSxEuJSXADXGBYD69g5fJ2QVo75EyqZ/pm0TiDitsN4Xdwpi0L3NpqzXyVOrTxOEXOvg6rtQySEnFTIZE1fm8c47rrjtyqma2n2hIlmXs4SptBljwn3dhtvWfKb1m+VTEqFFCXsg09CQ==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(4326008)(83380400001)(6486002)(8936002)(966005)(36756003)(8676002)(31696002)(54906003)(6916009)(26005)(508600001)(66556008)(66476007)(66946007)(186003)(86362001)(5660300002)(6512007)(31686004)(6506007)(7416002)(316002)(2616005)(45080400002)(38100700002)(6666004)(2906002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?dFR2MU11Rks1dzUvSHJ0MEZOczh2NnVlN2k1dFRLSS84a2FWYjFPbGw5Qjls?=
+ =?utf-8?B?WFJHaDcxVy9RTWRFYzM2ZW41N2ZaTCt2anRoazhoTTNXQzVFYVFyV0tSRU8y?=
+ =?utf-8?B?Qjhoa1J2cnUzMWNvd3hqMVdZblZnNXdodSswei9sM0M4K004TzdyeHM0aUVu?=
+ =?utf-8?B?YjhYMjQ0S0VmcEJKRFdJL0lOUjRKaDAxSCt0YStnNGlvUkVPOGtrQ1hTd3lO?=
+ =?utf-8?B?REdncDVaS0gwS0hyMzVNT1B0SC92eVJWVGlMTzJ3STVZMXd0cWVlL0dleU9w?=
+ =?utf-8?B?VzhmWmZSeEcxYUxJM3VrWXBhS01BVW14Njk2VFNPSFdXRnlyN2V1aGI1dTNm?=
+ =?utf-8?B?R0dlMDlESVg5czk3dlVCNkdLZXcxdzQzUVNDVWsvcXNPL2VZWUI2OFZDb2FY?=
+ =?utf-8?B?VUZ0Z0dFYWFSUEZWbDduRWg0KytxRGtGL0VMY3VFZjZEYXBISStQQmJRSWow?=
+ =?utf-8?B?aTlQemFoQkNEcHk5eUVqU3NvdWdlYXFpV3Noako0Ui8vQW5WM3M1MWdXUzZ3?=
+ =?utf-8?B?TkI5cEVVVm92RGU5ZER4ZHdCQjJRVk5jakQ2dkJoUFRKU3pYb3h2MHMydFNT?=
+ =?utf-8?B?WnhlTHpwMDlpaUZhLzYvbG9zWlY0TFdoK3llZm52N3JHWXdaOEU2dmRNQnZB?=
+ =?utf-8?B?OE5mVmkwL3Z6cW1sOVZVYVA0M3kvT0g5b1B6QUpQRlJ0QytkVFZ4UjJHWDVq?=
+ =?utf-8?B?RTliL1Y3WlVwOGsraDUxejMwRytodGZpWDRpQy8veEUwM2YzS1ZYNE5Taklt?=
+ =?utf-8?B?Vzc0MVA5VTh3ZStvUFRFQ2xzaFpTdEpRRDhWVG5ZaDdCbTZXYk9NWHdGbU1C?=
+ =?utf-8?B?aEh5VGhyYVVIcUtFR1JiZGdvd1dIcStQWWZRekRobGVGQmppb0dmRkJsa2tG?=
+ =?utf-8?B?bHI2cEp6bVVMQkpqbWFSTDZ2anAyVzJZM0txaUdLNDcyTHN6NUQweXlYeHpU?=
+ =?utf-8?B?bjNmSE0rUzJ6N2w3eWlVYzBqRTl0UFpFMTVkWmtqcXF0RFAvUGE2emtGS1Zm?=
+ =?utf-8?B?cTRNKzN4dEhKL04yeHcyZENvdmtzYy93elFZbzRuZ3hHcndsRC84YnFUUVdV?=
+ =?utf-8?B?WHJVdmpDZ2xwNXRlQzZ2NnpSeFJoUDJlLzh1aG5uWDQybm1MalpGZS9xaFZj?=
+ =?utf-8?B?VUthWHRMT2Z0cGthUGxWaUF4MkwyY1o5UFAwOFJGOVl2UlJZVzNTMWJSVTZk?=
+ =?utf-8?B?bEc1aDcxdkh1OVYvRVpqM0pJRVJRTnI4M2YvYm5RTlhwOUFPS1BkcTZuTDRX?=
+ =?utf-8?B?L0NjbEdCemlYY3dQL1JrQmpiVE5zdGg5b2xqVHN3dUVXTENRSFFoa1I1U0xQ?=
+ =?utf-8?B?YUNheFRDcmpGa2JzT1RneEdscFpZWE50V0ZvRnVWekdiOU94Y3J1b3ZTWk9U?=
+ =?utf-8?B?bXZsTUY3UGkzTkxHRHRZLzBqZlcvTmRNaUFsa3IrWCt3RmVaeURoWFBrQWxo?=
+ =?utf-8?B?eTZrcHU2N0NrK0p0YXAyYmVCUkMvVWtHY29NdHYxRXZhVW15c2tVZXdhYkM0?=
+ =?utf-8?B?UHFpUWhuZ1ovWnJUamRXN1VGdUlKdjhNNkM1UU9LSWRRS3dHSVRRVFFlNEd2?=
+ =?utf-8?B?bWUra1hBc3FiQW1jY3VXYTI1c08yWDkzR3diZTArNGtRaHViS0hGLzVPSlRP?=
+ =?utf-8?B?eWRVWlV4Zkh1NENIVFpiVUlscTFvSDdkR3hCdXZlY2Fka1lZOWdMRTFoU0Ev?=
+ =?utf-8?B?RjNXdXRBcFJvUGdOZ0MyWEtEOTdSa1FDOGtaRTlUYnZqeHEyUmxMQ3BERGlW?=
+ =?utf-8?B?cXJWSCtvQzdSenpFaGQ1WWUycHRGNXNkODJVWFpCczFIdVNEM01xRklEUnE2?=
+ =?utf-8?B?WkxGRFBCMkMzakxBbkxNd2F4SjRpdXdCSVkwbmVoQ205aHlwcVZHWHgxOVNa?=
+ =?utf-8?B?aW5UNFBOT2FRWnNqcWhmQzRCalludyttWUhseDY1ZjRlbzh2Q0ZnL2tDV1VK?=
+ =?utf-8?B?ZjBXOEY4SjVnd2tBNkJlVzIxa0tzaXFoZmc5d2lQb01DeXB3ZTlLbkpiaXBq?=
+ =?utf-8?B?N1Z5OXJzcXF3UThURDRDQlJ2UFZhQUN2bDVPNjh2QzNoUnBaK3U2eHhDUlo2?=
+ =?utf-8?B?UjJZeEhNNjZtRnZjbmJHSXNUS1huUzJ6YmJieUoyRjE4cnFlMWVWTGp3RkNu?=
+ =?utf-8?B?QVJuZUJQMnduYzlrOWliZk5hWVFGM2IzSTg0dzNhZDJmVWN0WWl6ZXBBWVNE?=
+ =?utf-8?B?ZWdZMXladUkzcTlUQW42MWZGc1U1VWI5dWJEYXBGVzBGdjZ3d2hKa0lLUjdO?=
+ =?utf-8?B?N25WTlZJd1A3UlFzOVI3cjVmWU5oY0lQZURDWHNZSVNYa05hSHRzSWpGUDdX?=
+ =?utf-8?B?TGxpbE1sRThFa1g4YkkycUpjNHI3bWF2bGw1QVNXN080aVhkeTQ1dz09?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c68ef7e1-dc21-4410-5dbe-08da38c66fc6
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 May 2022 12:03:35.8953
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: SSnm2Hpr1LSa8mVd/prsxfMW7hBXsDhHianLRl00qSbLxCk0JESqmkKQfzCt2Otj
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6201
+Message-ID-Hash: E7O7L6PINMCDANUJ6XCQ4SU6WEF4RX24
+X-Message-ID-Hash: E7O7L6PINMCDANUJ6XCQ4SU6WEF4RX24
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Suren Baghdasaryan <surenb@google.com>, Kalesh Singh <kaleshsingh@google.com>, Minchan Kim <minchan@google.com>, Greg Kroah-Hartman <gregkh@google.com>, John Stultz <jstultz@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Hridya Valsaraju <hridya@google.com>, kernel-team@android.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] drm/nouveau: reorder nouveau_drm_device_fini
+Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: Move sysfs work out of DMA-BUF export path
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LIKOPI7AHGFKV77PLNH5QVOVGUZMEQQW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/E7O7L6PINMCDANUJ6XCQ4SU6WEF4RX24/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-UmVzb3VyY2VzIG5lZWRlZCBmb3Igb3V0cHV0IHBvbGwgd29ya2VycyBhcmUgZGVzdHJveWVkIGlu
-DQpub3V2ZWF1X2ZiY29uX2ZpbmkoKSBiZWZvcmUgb3V0cHV0IHBvbGwgd29ya2VycyBhcmUgY2xl
-YXJlZCBpbg0Kbm91dmVhdV9kaXNwbGF5X2ZpbmkoKS4gVGhpcyBtZWFucyB0aGVyZSBpcyBhIHRp
-bWUgYmV0d2VlbiBmYmNvbl9maW5pDQphbmQgZGlzcGxheV9maW5pLCB3aGVyZSBpZiBvdXRwdXQg
-cG9sbCBoYXBwZW5zLCBpdCBjcmFzaGVzLg0KDQpCVUc6IEtBU0FOOiB1c2UtYWZ0ZXItZnJlZSBp
-bg0KX19kcm1fZmJfaGVscGVyX2luaXRpYWxfY29uZmlnX2FuZF91bmxvY2suY29sZCsweDFmMy8w
-eDI5MQ0KW2RybV9rbXNfaGVscGVyXQ0KDQpDYzogQmVuIFNrZWdncyA8YnNrZWdnc0ByZWRoYXQu
-Y29tPg0KQ2M6IEthcm9sIEhlcmJzdCA8a2hlcmJzdEByZWRoYXQuY29tPg0KQ2M6IEx5dWRlIFBh
-dWwgPGx5dWRlQHJlZGhhdC5jb20+DQpDYzogRGF2aWQgQWlybGllIDxhaXJsaWVkQGxpbnV4Lmll
-Pg0KQ2M6IERhbmllbCBWZXR0ZXIgPGRhbmllbEBmZndsbC5jaD4NCkNjOiBTdW1pdCBTZW13YWwg
-PHN1bWl0LnNlbXdhbEBsaW5hcm8ub3JnPg0KQ2M6ICJDaHJpc3RpYW4gS8O2bmlnIiA8Y2hyaXN0
-aWFuLmtvZW5pZ0BhbWQuY29tPg0KQ2M6IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcN
-CkNjOiBub3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9yZw0KQ2M6IGxpbnV4LWtlcm5lbEB2Z2Vy
-Lmtlcm5lbC5vcmcNCkNjOiBsaW51eC1tZWRpYUB2Z2VyLmtlcm5lbC5vcmcNCkNjOiBsaW5hcm8t
-bW0tc2lnQGxpc3RzLmxpbmFyby5vcmcNClNpZ25lZC1vZmYtYnk6IE1hcmsgTWVuenluc2tpIDxt
-bWVuenluc0ByZWRoYXQuY29tPg0KLS0tDQogZHJpdmVycy9ncHUvZHJtL25vdXZlYXUvbm91dmVh
-dV9kcm0uYyB8IDE3ICsrKysrKysrLS0tLS0tLS0tDQogMSBmaWxlIGNoYW5nZWQsIDggaW5zZXJ0
-aW9ucygrKSwgOSBkZWxldGlvbnMoLSkNCg0KZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9u
-b3V2ZWF1L25vdXZlYXVfZHJtLmMgYi9kcml2ZXJzL2dwdS9kcm0vbm91dmVhdS9ub3V2ZWF1X2Ry
-bS5jDQppbmRleCA1NjEzMDlkNDQ3ZTAuLjc3M2VmZGQyMGQyZiAxMDA2NDQNCi0tLSBhL2RyaXZl
-cnMvZ3B1L2RybS9ub3V2ZWF1L25vdXZlYXVfZHJtLmMNCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9u
-b3V2ZWF1L25vdXZlYXVfZHJtLmMNCkBAIC01ODgsMTIgKzU4OCw2IEBAIG5vdXZlYXVfZHJtX2Rl
-dmljZV9pbml0KHN0cnVjdCBkcm1fZGV2aWNlICpkZXYpDQogCWlmIChyZXQpDQogCQlnb3RvIGZh
-aWxfZGlzcGN0b3I7DQogDQotCWlmIChkZXYtPm1vZGVfY29uZmlnLm51bV9jcnRjKSB7DQotCQly
-ZXQgPSBub3V2ZWF1X2Rpc3BsYXlfaW5pdChkZXYsIGZhbHNlLCBmYWxzZSk7DQotCQlpZiAocmV0
-KQ0KLQkJCWdvdG8gZmFpbF9kaXNwaW5pdDsNCi0JfQ0KLQ0KIAlub3V2ZWF1X2RlYnVnZnNfaW5p
-dChkcm0pOw0KIAlub3V2ZWF1X2h3bW9uX2luaXQoZGV2KTsNCiAJbm91dmVhdV9zdm1faW5pdChk
-cm0pOw0KQEAgLTYwMSw2ICs1OTUsMTIgQEAgbm91dmVhdV9kcm1fZGV2aWNlX2luaXQoc3RydWN0
-IGRybV9kZXZpY2UgKmRldikNCiAJbm91dmVhdV9mYmNvbl9pbml0KGRldik7DQogCW5vdXZlYXVf
-bGVkX2luaXQoZGV2KTsNCiANCisJaWYgKGRldi0+bW9kZV9jb25maWcubnVtX2NydGMpIHsNCisJ
-CXJldCA9IG5vdXZlYXVfZGlzcGxheV9pbml0KGRldiwgZmFsc2UsIGZhbHNlKTsNCisJCWlmIChy
-ZXQpDQorCQkJZ290byBmYWlsX2Rpc3Bpbml0Ow0KKwl9DQorDQogCWlmIChub3V2ZWF1X3Btb3Bz
-X3J1bnRpbWUoKSkgew0KIAkJcG1fcnVudGltZV91c2VfYXV0b3N1c3BlbmQoZGV2LT5kZXYpOw0K
-IAkJcG1fcnVudGltZV9zZXRfYXV0b3N1c3BlbmRfZGVsYXkoZGV2LT5kZXYsIDUwMDApOw0KQEAg
-LTY0MSwxNSArNjQxLDE0IEBAIG5vdXZlYXVfZHJtX2RldmljZV9maW5pKHN0cnVjdCBkcm1fZGV2
-aWNlICpkZXYpDQogCQlwbV9ydW50aW1lX2ZvcmJpZChkZXYtPmRldik7DQogCX0NCiANCisJaWYg
-KGRldi0+bW9kZV9jb25maWcubnVtX2NydGMpDQorCQlub3V2ZWF1X2Rpc3BsYXlfZmluaShkZXYs
-IGZhbHNlLCBmYWxzZSk7DQogCW5vdXZlYXVfbGVkX2ZpbmkoZGV2KTsNCiAJbm91dmVhdV9mYmNv
-bl9maW5pKGRldik7DQogCW5vdXZlYXVfZG1lbV9maW5pKGRybSk7DQogCW5vdXZlYXVfc3ZtX2Zp
-bmkoZHJtKTsNCiAJbm91dmVhdV9od21vbl9maW5pKGRldik7DQogCW5vdXZlYXVfZGVidWdmc19m
-aW5pKGRybSk7DQotDQotCWlmIChkZXYtPm1vZGVfY29uZmlnLm51bV9jcnRjKQ0KLQkJbm91dmVh
-dV9kaXNwbGF5X2ZpbmkoZGV2LCBmYWxzZSwgZmFsc2UpOw0KIAlub3V2ZWF1X2Rpc3BsYXlfZGVz
-dHJveShkZXYpOw0KIA0KIAlub3V2ZWF1X2FjY2VsX2ZpbmkoZHJtKTsNCi0tIA0KMi4zMi4wDQoN
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1t
-bS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1
-bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGlu
-YXJvLm9yZwo=
+Am 18.05.22 um 01:09 schrieb T.J. Mercier:
+> [SNIP]
+>>> Perhaps we should go just one step further and make a misc device node
+>>> for dmabug debugging information to be in and just have userspace
+>>> poll/read on the device node and we spit the info that used to be in
+>>> debugfs out through that?  That way this only affects systems when they
+>>> want to read the information and not normal code paths?  Yeah that's a
+>>> hack, but this whole thing feels overly complex now.
+>> Yeah, totally agree on the complexity note. I'm just absolutely not keen
+>> to add hack over hack over hack to make something work which from my
+>> point of view has some serious issues with it's design.
+>>
+> Why is this patch a hack? We found a problem with the initial design
+> which nobody saw when it was originally created, and now we're trying
+> to address it within the constraints that exist.
+
+Well the issue is that you don't try to tackle the underlying problem, 
+but rather just mitigate the unforeseen consequences. That is pretty 
+clearly a hack to me.
+
+> Is there some other
+> solution to the problem of exports getting blocked that you would
+> suggest here?
+
+Well pretty much the same as Greg outlined as well. Go back to your 
+drawing board and come back with a solution which does not need such 
+workarounds.
+
+Alternatively you can give me a full overview of the design and explain 
+why exactly that interface here is necessary in exactly that form.
+
+>> For example trying to do accounting based on DMA-bufs is extremely
+>> questionable to begin with. See a modern game for example can have
+>> between 10k and 100k of different buffers, reserving one file descriptor
+>> for each of those objects is absolutely not going to work.
+>>
+>> So my request is to please describe your full use case and not just why
+>> you think this patch is justified.
+>>
+> The use case was described in the commit message when the feature was
+> initially added (after discussion about it on the list) including
+> links to code that uses the feature:
+> https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Flore.kernel.org%2Fall%2F20210603214758.2955251-1-hridya%40google.com%2F&amp;data=05%7C01%7Cchristian.koenig%40amd.com%7C3f6e3e98fc6f45ead80d08da385a59e6%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C637884257979664387%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=i%2BSfpB%2B6iBolBHu6KrKH3njq0zo1SBbrKDHZOjpsIks%3D&amp;reserved=0
+
+Yeah and to be honest I have the strong feeling now that this was 
+absolutely not well thought through. This description as well as the in 
+kernel documentation are not even remotely sufficient to explain what 
+you guys are doing with this.
+
+So please come up with a complete design description for both userspace 
+and kernel why this interface here is necessary inside the upstream kernel.
+
+If you can't convince me that this is a good idea I will just bluntly 
+mark this DMA-buf sysfs interface as deprecated.
+
+Regards,
+Christian.
+
+>
+>
+>> Regards,
+>> Christian.
+>>
+>>> thanks,
+>>>
+>>> greg k-h
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
