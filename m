@@ -2,59 +2,47 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id F224F52CB5F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 May 2022 07:06:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 823A452D984
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 May 2022 17:56:29 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 30AB9410B4
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 May 2022 05:06:43 +0000 (UTC)
-Received: from alexa-out-sd-02.qualcomm.com (alexa-out-sd-02.qualcomm.com [199.106.114.39])
-	by lists.linaro.org (Postfix) with ESMTPS id 207E448066
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 10 May 2022 10:24:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=quicinc.com; i=@quicinc.com; q=dns/txt; s=qcdkim;
-  t=1652178244; x=1683714244;
-  h=from:to:cc:subject:date:message-id:mime-version;
-  bh=6VR3oeP5kAd2DRErHPuUEXFtXEbcDzDtOhkw+65RdIA=;
-  b=LWBIGHTIMmQsVKJ5NYffAYxe7n2vZ/ArFTatcCx/8+N5AJHxkY0yjZEo
-   VwTk/kSLYm8JSLwduCvj+0d8gZcC/jt3OCyEADMlAhimRsQXszRICI/dw
-   vY2WIJEhs+umxorpsyZ963lMiXR6J5f2OJ/jmg8WAATn9Bx/468FOTxbY
-   Q=;
-Received: from unknown (HELO ironmsg05-sd.qualcomm.com) ([10.53.140.145])
-  by alexa-out-sd-02.qualcomm.com with ESMTP; 10 May 2022 03:24:02 -0700
-X-QCInternal: smtphost
-Received: from nasanex01c.na.qualcomm.com ([10.47.97.222])
-  by ironmsg05-sd.qualcomm.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 May 2022 03:24:02 -0700
-Received: from nalasex01a.na.qualcomm.com (10.47.209.196) by
- nasanex01c.na.qualcomm.com (10.47.97.222) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.986.22; Tue, 10 May 2022 03:24:01 -0700
-Received: from hu-charante-hyd.qualcomm.com (10.80.80.8) by
- nalasex01a.na.qualcomm.com (10.47.209.196) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.986.22; Tue, 10 May 2022 03:23:58 -0700
-From: Charan Teja Kalla <quic_charante@quicinc.com>
-To: <sumit.semwal@linaro.org>, <christian.koenig@amd.com>,
-	<daniel.vetter@ffwll.ch>, <gregkh@linuxfoundation.org>,
-	<tjmercier@google.com>
-Date: Tue, 10 May 2022 15:53:32 +0530
-Message-ID: <1652178212-22383-1-git-send-email-quic_charante@quicinc.com>
-X-Mailer: git-send-email 2.7.4
+	by lists.linaro.org (Postfix) with ESMTP id 4C497410BD
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 May 2022 15:56:28 +0000 (UTC)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+	by lists.linaro.org (Postfix) with ESMTPS id 655253EC34
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 19 May 2022 15:56:23 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by ams.source.kernel.org (Postfix) with ESMTPS id 60508B82567;
+	Thu, 19 May 2022 15:56:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 961A5C385AA;
+	Thu, 19 May 2022 15:56:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+	s=korg; t=1652975781;
+	bh=7pFCBqNSOCLfuzYpPeUv7mtCv/aLkeRffL8GhHRye+Y=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=SjEnH3fNPqcYJf7wgZXzs/OuUWWntd9ED4SsWc0xmNyDMmQxhm9GJnZH3y6L8K6Qe
+	 uEVXAD15/cvqD3TBDwjGUTQeqHlxeT3+6LfwRKjrBoai3DslApfkcoQh1mhSmCSSQ7
+	 K5q8laNoq73GpDHrWSlZNdlb0Em0ET3sd+6l9Ys8=
+Date: Thu, 19 May 2022 17:56:18 +0200
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Neal Liu <neal_liu@aspeedtech.com>
+Message-ID: <YoZoouI4EbnNYE6h@kroah.com>
+References: <20220518062043.1075360-1-neal_liu@aspeedtech.com>
+ <20220518062043.1075360-2-neal_liu@aspeedtech.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-MailFrom: quic_charante@quicinc.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 6T7DGMDV3CGKLWG5WDBKXT2IZVWLMQKB
-X-Message-ID-Hash: 6T7DGMDV3CGKLWG5WDBKXT2IZVWLMQKB
-X-Mailman-Approved-At: Thu, 19 May 2022 05:06:38 +0000
-CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Charan Teja Kalla <quic_charante@quicinc.com>
+Content-Disposition: inline
+In-Reply-To: <20220518062043.1075360-2-neal_liu@aspeedtech.com>
+Message-ID-Hash: W7YY4VFKOUWBHK6HLZWJ6Q237DBTWIU5
+X-Message-ID-Hash: W7YY4VFKOUWBHK6HLZWJ6Q237DBTWIU5
+X-MailFrom: gregkh@linuxfoundation.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Andrew Jeffery <andrew@aj.id.au>, Felipe Balbi <balbi@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Geert Uytterhoeven <geert@linux-m68k.org>, Li Yang <leoyang.li@nxp.com>, linux-aspeed@lists.ozlabs.org, linux-usb@vger.kernel.org, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, kernel test robot <lkp@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] dmabuf: ensure unique directory name for dmabuf stats
+Subject: [Linaro-mm-sig] Re: [PATCH v3 1/3] usb: gadget: add Aspeed ast2600 udc driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6T7DGMDV3CGKLWG5WDBKXT2IZVWLMQKB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/W7YY4VFKOUWBHK6HLZWJ6Q237DBTWIU5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -64,51 +52,20 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-The dmabuf file uses get_next_ino()(through dma_buf_getfile() ->
-alloc_anon_inode()) to get an inode number and uses the same as a
-directory name under /sys/kernel/dmabuf/buffers/<ino>. This directory is
-used to collect the dmabuf stats and it is created through
-dma_buf_stats_setup(). At current, failure to create this directory
-entry can make the dma_buf_export() to fail.
+On Wed, May 18, 2022 at 02:20:41PM +0800, Neal Liu wrote:
+> Aspeed udc is compliant with USB2.0, supports USB High Speed
+> and Full Speed, backward compatible with USB1.1.
+> 
+> Supports independent DMA channel for each generic endpoint.
+> Supports 32/256 stages descriptor mode for all generic endpoints.
+> 
+> This driver supports full functionality including single/multiple
+> stages descriptor mode, and exposes 1 UDC gadget driver.
+> 
+> Signed-off-by: Neal Liu <neal_liu@aspeedtech.com>
+> Reported-by: kernel test robot <lkp@intel.com>
 
-Now, as the get_next_ino() can definitely give a repetitive inode no
-causing the directory entry creation to fail with -EEXIST. This is a
-problem on the systems where dmabuf stats functionality is enabled on
-the production builds can make the dma_buf_export(), though the dmabuf
-memory is allocated successfully, to fail just because it couldn't
-create stats entry.
-
-This issue we are able to see on the snapdragon system within 13 days
-where there already exists a directory with inode no "122602" so
-dma_buf_stats_setup() failed with -EEXIST as it is trying to create
-the same directory entry.
-
-To make the directory entry as unique, append the inode creation time to
-the inode. With this change the stats directory entries will be in the
-format of: /sys/kernel/dmabuf/buffers/<inode no>-<inode creation time in
-secs>.
-
-Signed-off-by: Charan Teja Kalla <quic_charante@quicinc.com>
----
- drivers/dma-buf/dma-buf-sysfs-stats.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/dma-buf/dma-buf-sysfs-stats.c b/drivers/dma-buf/dma-buf-sysfs-stats.c
-index 2bba0ba..292cb31 100644
---- a/drivers/dma-buf/dma-buf-sysfs-stats.c
-+++ b/drivers/dma-buf/dma-buf-sysfs-stats.c
-@@ -192,7 +192,8 @@ int dma_buf_stats_setup(struct dma_buf *dmabuf)
- 
- 	/* create the directory for buffer stats */
- 	ret = kobject_init_and_add(&sysfs_entry->kobj, &dma_buf_ktype, NULL,
--				   "%lu", file_inode(dmabuf->file)->i_ino);
-+				   "%lu-%lu", file_inode(dmabuf->file)->i_ino,
-+				   file_inode(dmabuf->file)->i_ctime.tv_sec);
- 	if (ret)
- 		goto err_sysfs_dmabuf;
- 
--- 
-2.7.4
+The kernel test robot did not report that you needed to add a new driver :(
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
