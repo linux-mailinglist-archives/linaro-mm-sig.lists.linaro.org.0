@@ -2,140 +2,178 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C750D532AD7
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 15:07:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F241B532B52
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 15:30:23 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 062493F8C1
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 13:07:49 +0000 (UTC)
-Received: from twspam01.aspeedtech.com (twspam01.aspeedtech.com [211.20.114.71])
-	by lists.linaro.org (Postfix) with ESMTPS id 880ED3EF85
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 18 May 2022 06:21:46 +0000 (UTC)
-Received: from mail.aspeedtech.com ([192.168.0.24])
-	by twspam01.aspeedtech.com with ESMTP id 24I6790g080863;
-	Wed, 18 May 2022 14:07:10 +0800 (GMT-8)
-	(envelope-from neal_liu@aspeedtech.com)
-Received: from localhost.localdomain (192.168.10.10) by TWMBX02.aspeed.com
- (192.168.0.24) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 18 May
- 2022 14:20:51 +0800
-From: Neal Liu <neal_liu@aspeedtech.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Rob Herring
-	<robh+dt@kernel.org>,
-        Krzysztof Kozlowski
-	<krzysztof.kozlowski+dt@linaro.org>,
-        Joel Stanley <joel@jms.id.au>, "Andrew
- Jeffery" <andrew@aj.id.au>,
-        Felipe Balbi <balbi@kernel.org>,
-        Sumit Semwal
-	<sumit.semwal@linaro.org>,
-        =?UTF-8?q?Christian=20K=C3=B6nig?=
-	<christian.koenig@amd.com>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        "Li
- Yang" <leoyang.li@nxp.com>
-Date: Wed, 18 May 2022 14:20:43 +0800
-Message-ID: <20220518062043.1075360-4-neal_liu@aspeedtech.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220518062043.1075360-1-neal_liu@aspeedtech.com>
-References: <20220518062043.1075360-1-neal_liu@aspeedtech.com>
+	by lists.linaro.org (Postfix) with ESMTP id 25B1A3F8D2
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 May 2022 13:30:23 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id 738424100E
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 19 May 2022 09:31:06 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 018E2618BB;
+	Thu, 19 May 2022 09:31:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7AAA9C385AA;
+	Thu, 19 May 2022 09:30:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1652952665;
+	bh=ymyWwFkIGcEgTX/HoyldR566LvQatVtWXOdUzMjInTY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=ZsqjEz6v2uriZ2N0Dq+pndBRjvXvXcsjqqD+SvOkF0pAjllZckSSQYaCIQuEcw1Jy
+	 2gDuMEW3YDYmQiSxD5oLg6FWYCdEjerCuH613MHsO//W5TSZsctd3moeGrzUDeRe6s
+	 A9o4YVEYofn+70aKTfqkQvyQKReky8arKQkuzj+/1fx+lWD15H7ZSBUhsWsqXso+2v
+	 pfcgLj1oqEZBMnIQHSVyd/1eNUlHWeCjPPq+0x8B1shXK+tDzT9UJeTpd9qImfciul
+	 P2Sn+4aIKue0xebzFbJ0yeibqCMn+utYG9Q8Y8N+qtr7MyADNwqr8dBlCdNZa0fDzj
+	 bxurpPC3T8esw==
+From: eballetbo@kernel.org
+To: lizefan.x@bytedance.com,
+	corbet@lwn.net,
+	joel@joelfernandes.org,
+	arve@android.com,
+	tjmercier@google.com,
+	maco@android.com,
+	benjamin.gaignard@collabora.com,
+	tj@kernel.org,
+	brauner@kernel.org,
+	sumit.semwal@linaro.org,
+	tkjos@android.com,
+	surenb@google.com,
+	hannes@cmpxchg.org,
+	Brian.Starkey@arm.com,
+	christian.koenig@amd.com,
+	gregkh@linuxfoundation.org,
+	lmark@codeaurora.org,
+	john.stultz@linaro.org,
+	hridya@google.com,
+	shuah@kernel.org,
+	labbott@redhat.com
+Date: Thu, 19 May 2022 11:30:35 +0200
+Message-Id: <20220519093034.541481-1-eballetbo@kernel.org>
+X-Mailer: git-send-email 2.36.1
+In-Reply-To: <20220510235653.933868-1-tjmercier@google.com>
+References: <20220510235653.933868-1-tjmercier@google.com>
 MIME-Version: 1.0
-X-Originating-IP: [192.168.10.10]
-X-ClientProxiedBy: TWMBX02.aspeed.com (192.168.0.24) To TWMBX02.aspeed.com
- (192.168.0.24)
-X-DNSRBL: 
-X-MAIL: twspam01.aspeedtech.com 24I6790g080863
-X-MailFrom: neal_liu@aspeedtech.com
+Content-Type: text/plain; charset="utf-8"
+X-MailFrom: eballetbo@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: FYIK32B2YZAZHDF2MT7YYYOQQB55IOAK
-X-Message-ID-Hash: FYIK32B2YZAZHDF2MT7YYYOQQB55IOAK
-X-Mailman-Approved-At: Tue, 24 May 2022 13:07:30 +0000
-CC: Neal Liu <neal_liu@aspeedtech.com>, linux-aspeed@lists.ozlabs.org, linux-usb@vger.kernel.org, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Message-ID-Hash: N3LQCD3GOL2ONID6D2YZQPK5GMQPZH7T
+X-Message-ID-Hash: N3LQCD3GOL2ONID6D2YZQPK5GMQPZH7T
+X-Mailman-Approved-At: Tue, 24 May 2022 13:30:18 +0000
+CC: Enric Balletbo i Serra <eballetbo@kernel.org>, cgroups@vger.kernel.org, kernel-team@android.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, cmllamas@google.com, daniel@ffwll.ch, Kenny.Ho@amd.com, linux-kselftest@vger.kernel.org, kaleshsingh@google.com, mkoutny@suse.com, jstultz@google.com, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, skhan@linuxfoundation.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 3/3] dt-bindings: usb: add documentation for aspeed udc
+Subject: [Linaro-mm-sig] Re: [PATCH v7 1/6] gpu: rfc: Proposal for a GPU cgroup controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FYIK32B2YZAZHDF2MT7YYYOQQB55IOAK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N3LQCD3GOL2ONID6D2YZQPK5GMQPZH7T/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
 
-Add device tree binding documentation for the Aspeed USB2.0 Device
-Controller.
-
-Signed-off-by: Neal Liu <neal_liu@aspeedtech.com>
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
----
- .../bindings/usb/aspeed,ast2600-udc.yaml      | 52 +++++++++++++++++++
- 1 file changed, 52 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/usb/aspeed,ast2600-udc.yaml
-
-diff --git a/Documentation/devicetree/bindings/usb/aspeed,ast2600-udc.yaml b/Documentation/devicetree/bindings/usb/aspeed,ast2600-udc.yaml
-new file mode 100644
-index 000000000000..c3b6be3d8002
---- /dev/null
-+++ b/Documentation/devicetree/bindings/usb/aspeed,ast2600-udc.yaml
-@@ -0,0 +1,52 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+# Copyright (c) 2020 Facebook Inc.
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/usb/aspeed,ast2600-udc.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: ASPEED USB 2.0 Device Controller
-+
-+maintainers:
-+  - Neal Liu <neal_liu@aspeedtech.com>
-+
-+description: |+
-+  The ASPEED USB 2.0 Device Controller implements 1 control endpoint and
-+  4 generic endpoints for AST260x.
-+
-+  Supports independent DMA channel for each generic endpoint.
-+  Supports 32/256 stages descriptor mode for all generic endpoints.
-+
-+properties:
-+  compatible:
-+    enum:
-+      - aspeed,ast2600-udc
-+
-+  reg:
-+    maxItems: 1
-+
-+  clocks:
-+    maxItems: 1
-+
-+  interrupts:
-+    maxItems: 1
-+
-+required:
-+  - compatible
-+  - reg
-+  - clocks
-+  - interrupts
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/clock/aspeed-clock.h>
-+    udc: usb@1e6a2000 {
-+        compatible = "aspeed,ast2600-udc";
-+        reg = <0x1e6a2000 0x300>;
-+        interrupts = <9>;
-+        clocks = <&syscon ASPEED_CLK_GATE_USBPORT2CLK>;
-+        pinctrl-names = "default";
-+        pinctrl-0 = <&pinctrl_usb2bd_default>;
-+    };
--- 
-2.25.1
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+RnJvbTogRW5yaWMgQmFsbGV0Ym8gaSBTZXJyYSA8ZWJhbGxldGJvQGtlcm5lbC5vcmc+DQoNCk9u
+IFR1ZSwgMTAgTWF5IDIwMjIgMjM6NTY6NDUgKzAwMDAsIFQuSi4gTWVyY2llciB3cm90ZToNCj4g
+RnJvbTogSHJpZHlhIFZhbHNhcmFqdSA8aHJpZHlhQGdvb2dsZS5jb20+DQo+DQoNCkhpIFQuSi4g
+TWVyY2llciwNCg0KTWFueSB0aGFua3MgZm9yIHRoaXMgZWZmb3J0LiBJdCBjYXVnaHQgbXkgYXR0
+ZW50aW9uIGJlY2F1c2Ugd2UgbWlnaHQgaGF2ZSBhIHVzZQ0KY2FzZSB3aGVyZSB0aGlzIGZlYXR1
+cmUgY2FuIGJlIHVzZWZ1bCBmb3IgdXMuIEhlbmNlIEknZCBsaWtlIHRvIGp1bXAgYW5kIGJlIHBh
+cnQNCm9mIHRoZSBkaXNjdXNzaW9uLCBJJ2QgcmVhbGx5IGFwcHJlY2lhdGUgaWYgeW91IGNhbiBj
+YydtZSBmb3IgbmV4dCB2ZXJzaW9ucy4NCg0KV2hpbGUgcmVhZGluZyB0aGUgZnVsbCBwYXRjaHNl
+dCBJIHdhcyBhIGJpdCBjb25mdXNlZCBhYm91dCB0aGUgc3RhdHVzIG9mIHRoaXMNCnByb3Bvc2Fs
+LiBJbiBmYWN0LCB0aGUgcmZjIGluIHRoZSBzdWJqZWN0IGNvbWJpbmVkIHdpdGggdGhlIG51bWJl
+ciBvZiBpdGVyYXRpb25zDQooYWxyZWFkeSBzZXZlbikgY29uZnVzZWQgbWUuIFNvIEknbSB3b25k
+ZXJpbmcgaWYgdGhpcyBpcyBhIFJGQyBvciBhICdyZWFsJw0KcHJvcG9zYWwgYWxyZWFkeSB0aGF0
+IHlvdSB3YW50IHRvIGxhbmQuDQoNCklmIHRoaXMgaXMgc3RpbGwgYSBSRkMgSSdkIHJlbW92ZSB0
+aGUgJ3JmYzogUHJvcG9zYWwnIGFuZCB1c2UgdGhlIG1vcmUgY2Fub25pY2FsDQp3YXkgdGhhdCBp
+cyBwdXQgUkZDIGluIHRoZSBbXS4gSS5lIFtQQVRDSCBSRkMgdjddIGNncm91cDogQWRkIGEgR1BV
+IGNncm91cA0KY29udHJvbGxlci4NCg0KSWYgaXQgaXMgbm90LCBJJ2QganVzdCByZW1vdmUgdGhl
+IFJGQyBhbmQgbWFrZSB0aGUgc3ViamVjdCBpbiB0aGUgY2dyb3VwDQpzdWJzeXN0ZW0gaW5zdGVh
+ZCBvZiB0aGUgZ3B1LiBJLkUgW1BBVENIIHY3XSBjZ3JvdXA6IEFkZCBhIEdQVSBjZ3JvdXANCg0K
+SSBkb24ndCB3YW50IHRvIG5pdHBpY2sgYnV0IElNTyB0aGF0IGhlbHBzIG5ldyBwZW9wbGUgdG8g
+am9pbiB0byB0aGUgaGlzdG9yeSBvZg0KdGhlIHBhdGNoc2V0Lg0KDQo+IFRoaXMgcGF0Y2ggYWRk
+cyBhIHByb3Bvc2FsIGZvciBhIG5ldyBHUFUgY2dyb3VwIGNvbnRyb2xsZXIgZm9yDQo+IGFjY291
+bnRpbmcvbGltaXRpbmcgR1BVIGFuZCBHUFUtcmVsYXRlZCBtZW1vcnkgYWxsb2NhdGlvbnMuDQoN
+CkFzIGZhciBhcyBJIGNhbiBzZWUgdGhlIG9ubHkgdGhpbmcgdGhhdCBpcyBhZGRpbmcgaGVyZSBp
+cyB0aGUgYWNjb3VudGluZywgc28gSSdkDQpyZW1vdmUgYW55IHJlZmVyZW5jZSB0byBsaW1pdGlu
+ZyBhbmQganVzdCBleHBsYWluIHdoYXQgdGhlIHBhdGNoIHJlYWxseQ0KaW50cm9kdWNlcywgbm90
+IHRoZSBmdXR1cmUsIG90aGVyd2lzZSBpcyBjb25mdXNpbmcgYW4geW91IGV4cGVjdCBtb3JlIHRo
+YW4gdGhlDQpwYXRjaCByZWFsbHkgZG9lcy4NCg0KSXQgaXMgaW1wb3J0YW50IG1haW50YWluIHRo
+ZSBjb21taXQgbWVzc2FnZSBzeW5jIHdpdGggd2hhdCB0aGUgcGF0Y2ggcmVhbGx5DQpkb2VzLg0K
+DQo+IFRoZSBwcm9wb3NlZCBjb250cm9sbGVyIGlzIGJhc2VkIG9uIHRoZSBEUk0gY2dyb3VwIGNv
+bnRyb2xsZXJbMV0gYW5kDQo+IGZvbGxvd3MgdGhlIGRlc2lnbiBvZiB0aGUgUkRNQSBjZ3JvdXAg
+Y29udHJvbGxlci4NCj4gDQo+IFRoZSBuZXcgY2dyb3VwIGNvbnRyb2xsZXIgd291bGQ6DQo+ICog
+QWxsb3cgc2V0dGluZyBwZXItZGV2aWNlIGxpbWl0cyBvbiB0aGUgdG90YWwgc2l6ZSBvZiBidWZm
+ZXJzDQo+ICAgYWxsb2NhdGVkIGJ5IGRldmljZSB3aXRoaW4gYSBjZ3JvdXAuDQo+ICogRXhwb3Nl
+IGEgcGVyLWRldmljZS9hbGxvY2F0b3IgYnJlYWtkb3duIG9mIHRoZSBidWZmZXJzIGNoYXJnZWQg
+dG8gYQ0KPiAgIGNncm91cC4NCj4gDQo+IFRoZSBwcm90b3R5cGUgaW4gdGhlIGZvbGxvd2luZyBw
+YXRjaGVzIGlzIG9ubHkgZm9yIG1lbW9yeSBhY2NvdW50aW5nDQo+IHVzaW5nIHRoZSBHUFUgY2dy
+b3VwIGNvbnRyb2xsZXIgYW5kIGRvZXMgbm90IGltcGxlbWVudCBsaW1pdCBzZXR0aW5nLg0KPiAN
+Cj4gWzFdOiBodHRwczovL2xvcmUua2VybmVsLm9yZy9hbWQtZ2Z4LzIwMjEwMTI2MjE0NjI2LjE2
+MjYwLTEtYnJpYW4ud2VsdHlAaW50ZWwuY29tLw0KPiANCg0KSSB0aGluayB0aGlzIGlzIG1hdGVy
+aWFsIGZvciB0aGUgY292ZXIgbW9yZSB0aGFuIHRoZSBjb21taXQgbWVzc2FnZS4gV2hlbiBJIHJl
+YWQNCnRoaXMgSSB3YXMgZXhwZWN0aW5nIGFsbCB0aGlzIGluIHRoaXMgcGF0Y2guDQoNCj4gU2ln
+bmVkLW9mZi1ieTogSHJpZHlhIFZhbHNhcmFqdSA8aHJpZHlhQGdvb2dsZS5jb20+DQo+IFNpZ25l
+ZC1vZmYtYnk6IFQuSi4gTWVyY2llciA8dGptZXJjaWVyQGdvb2dsZS5jb20+DQo+IC0tLQ0KPiB2
+NyBjaGFuZ2VzDQo+IFJlbW92ZSBjb21tZW50IGFib3V0IGR1cGxpY2F0ZSBuYW1lIHJlamVjdGlv
+biB3aGljaCBpcyBub3QgcmVsZXZhbnQgdG8NCj4gY2dyb3VwcyB1c2VycyBwZXIgTWljaGFsIEtv
+dXRuw70uDQo+IA0KPiB2NiBjaGFuZ2VzDQo+IE1vdmUgZG9jdW1lbnRhdGlvbiBpbnRvIGNncm91
+cC12Mi5yc3QgcGVyIFRlanVuIEhlby4NCj4gDQo+IHY1IGNoYW5nZXMNCj4gRHJvcCB0aGUgZ2xv
+YmFsIEdQVSBjZ3JvdXAgInRvdGFsIiAoc3VtIG9mIGFsbCBkZXZpY2UgdG90YWxzKSBwb3J0aW9u
+DQo+IG9mIHRoZSBkZXNpZ24gc2luY2UgdGhlcmUgaXMgbm8gY3VycmVudGx5IGtub3duIHVzZSBm
+b3IgdGhpcyBwZXINCj4gVGVqdW4gSGVvLg0KPiANCj4gVXBkYXRlIGZvciByZW5hbWVkIGZ1bmN0
+aW9ucy92YXJpYWJsZXMuDQo+IA0KPiB2MyBjaGFuZ2VzDQo+IFJlbW92ZSBVcHN0cmVhbWluZyBQ
+bGFuIGZyb20gZ3B1LWNncm91cC5yc3QgcGVyIEpvaG4gU3R1bHR6Lg0KPiANCj4gVXNlIG1vcmUg
+Y29tbW9uIGR1YWwgYXV0aG9yIGNvbW1pdCBtZXNzYWdlIGZvcm1hdCBwZXIgSm9obiBTdHVsdHou
+DQo+IC0tLQ0KPiAgRG9jdW1lbnRhdGlvbi9hZG1pbi1ndWlkZS9jZ3JvdXAtdjIucnN0IHwgMjMg
+KysrKysrKysrKysrKysrKysrKysrKysNCj4gIDEgZmlsZSBjaGFuZ2VkLCAyMyBpbnNlcnRpb25z
+KCspDQo+IA0KPiBkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi9hZG1pbi1ndWlkZS9jZ3JvdXAt
+djIucnN0IGIvRG9jdW1lbnRhdGlvbi9hZG1pbi1ndWlkZS9jZ3JvdXAtdjIucnN0DQo+IGluZGV4
+IDY5ZDdhNjk4M2Y3OC4uMmUxZDI2ZTMyN2M3IDEwMDY0NA0KPiAtLS0gYS9Eb2N1bWVudGF0aW9u
+L2FkbWluLWd1aWRlL2Nncm91cC12Mi5yc3QNCj4gKysrIGIvRG9jdW1lbnRhdGlvbi9hZG1pbi1n
+dWlkZS9jZ3JvdXAtdjIucnN0DQo+IEBAIC0yMzUyLDYgKzIzNTIsMjkgQEAgZmlyc3QsIGFuZCBz
+dGF5cyBjaGFyZ2VkIHRvIHRoYXQgY2dyb3VwIHVudGlsIHRoYXQgcmVzb3VyY2UgaXMgZnJlZWQu
+IE1pZ3JhdGluZw0KPiAgYSBwcm9jZXNzIHRvIGEgZGlmZmVyZW50IGNncm91cCBkb2VzIG5vdCBt
+b3ZlIHRoZSBjaGFyZ2UgdG8gdGhlIGRlc3RpbmF0aW9uDQo+ICBjZ3JvdXAgd2hlcmUgdGhlIHBy
+b2Nlc3MgaGFzIG1vdmVkLg0KPiAgDQo+ICsNCj4gK0dQVQ0KPiArLS0tDQo+ICsNCj4gK1RoZSBH
+UFUgY29udHJvbGxlciBhY2NvdW50cyBmb3IgZGV2aWNlIGFuZCBzeXN0ZW0gbWVtb3J5IGFsbG9j
+YXRlZCBieSB0aGUgR1BVDQo+ICthbmQgcmVsYXRlZCBzdWJzeXN0ZW1zIGZvciBncmFwaGljcyB1
+c2UuIFJlc291cmNlIGxpbWl0cyBhcmUgbm90IGN1cnJlbnRseQ0KPiArc3VwcG9ydGVkLg0KPiAr
+DQo+ICtHUFUgSW50ZXJmYWNlIEZpbGVzDQo+ICt+fn5+fn5+fn5+fn5+fn5+fn5+fg0KPiArDQo+
+ICsgIGdwdS5tZW1vcnkuY3VycmVudA0KPiArCUEgcmVhZC1vbmx5IGZpbGUgY29udGFpbmluZyBt
+ZW1vcnkgYWxsb2NhdGlvbnMgaW4gZmxhdC1rZXllZCBmb3JtYXQuIFRoZSBrZXkNCj4gKwlpcyBh
+IHN0cmluZyByZXByZXNlbnRpbmcgdGhlIGRldmljZSBuYW1lLiBUaGUgdmFsdWUgaXMgdGhlIHNp
+emUgb2YgdGhlIG1lbW9yeQ0KPiArCWNoYXJnZWQgdG8gdGhlIGRldmljZSBpbiBieXRlcy4gVGhl
+IGRldmljZSBuYW1lcyBhcmUgZ2xvYmFsbHkgdW5pcXVlLjo6DQo+ICsNCj4gKwkgICQgY2F0IC9z
+eXMva2VybmVsL2ZzL2Nncm91cDEvZ3B1Lm1lbW9yeS5jdXJyZW50DQoNCkkgdGhpbmsgdGhpcyBp
+cyBvdXRkYXRlZCwgeW91IGFyZSB1c2luZyBjZ3JvdXAgdjIsIHJpZ2h0Pw0KDQo+ICsJICBkZXYx
+IDQxOTQzMDQNCj4gKwkgIGRldjIgMTA0ODU3NjAwDQo+ICsNCg0KV2hlbiBJIGFwcGxpZWQgdGhl
+IGZ1bGwgc2VyaWVzIEkgd2FzIGV4cGVjdGluZyBzZWUgdGhlIG1lbW9yeSBhbGxvY2F0ZWQgYnkg
+dGhlDQpncHUgZGV2aWNlcyBvciB1c2VycyBvZiB0aGUgZ3B1IGluIHRoaXMgZmlsZSBidXQsIGFm
+dGVyIHNvbWUgZXhwZXJpbWVudHMsIHdoYXQgSQ0Kc2F3IGlzIHRoZSBtZW1vcnkgYWxsb2NhdGVk
+IHZpYSBhbnkgcHJvY2VzcyB0aGF0IHVzZXMgdGhlIGRtYS1idWYgaGVhcCBBUEkgKG5vdA0KbmVj
+ZXNzYXJ5IGdwdSB1c2VycykuIEZvciBleGFtcGxlLCBpZiB5b3UgY3JlYXRlIGEgc21hbGwgcHJv
+Z3JhbSB0aGF0IGFsbG9jYXRlcw0Kc29tZSBtZW1vcnkgdmlhIHRoZSBkbWEtYnVmIGhlYXAgQVBJ
+IGFuZCB0aGVuIHlvdSBjYXQgdGhlIGdwdS5tZW1vcnkuY3VycmVudA0KZmlsZSwgeW91IHNlZSB0
+aGF0IHRoZSBtZW1vcnkgYWNjb3VudGVkIGlzIG5vdCByZWxhdGVkIHRvIHRoZSBncHUuDQoNClRo
+aXMgaXMgcmVhbGx5IGNvbmZ1c2luZywgbG9va3MgdG8gbWUgdGhhdCB0aGUgcGF0Y2hlcyBldm9s
+dmVkIHRvIGFjY291bnQgbWVtb3J5DQp0aGF0IGlzIG5vdCByZWFsbHkgcmVsYXRlZCB0byB0aGUg
+R1BVIGJ1dCBhbGxvY2F0ZWQgdmkgdGhlIGRtYS1idWYgaGVhcCBBUEkuIElNTw0KdGhlIG5hbWUg
+b2YgdGhlIGZpbGUgc2hvdWxkIGJlIGFjY29yZGluZyB0byB3aGF0IHJlYWxseSBkb2VzIHRvIGF2
+b2lkDQpjb25mdXNpb25zLg0KDQpTbywgaXMgdGhpcyBwYXRjaHNldCBtZWFudCB0byBiZSBHUFUg
+c3BlY2lmaWM/IElmIHRoZSBhbnN3ZXIgaXMgeWVzIHRoYXQncyBnb29kDQpidXQgdGhhdCdzIG5v
+dCB3aGF0IEkgZXhwZXJpZW5jZWQuIEknbSBtaXNzaW5nIHNvbWV0aGluZz8NCg0KSWYgdGhlIGFu
+c3dlciBpcyB0aGF0IGV2b2x2ZWQgdG8gdHJhY2sgZG1hLWJ1ZiBoZWFwIGFsbG9jYXRpb25zIEkg
+dGhpbmsgYWxsIHRoZQ0KcGF0Y2hlcyBuZWVkIHNvbWUgcmV3b3JrIHRvIGFkYXB0IHRoZSB3b3Jk
+aW5nIGFzIHJpZ2h0IG5vdywgdGhlIGdwdSB3b3JkaW5nDQpzZWVtcyBjb25mdXNpbmcgdG8gbWUu
+DQoNCj4gKwlUaGUgZGV2aWNlIG5hbWUgc3RyaW5nIGlzIHNldCBieSBhIGRldmljZSBkcml2ZXIg
+d2hlbiBpdCByZWdpc3RlcnMgd2l0aCB0aGUNCj4gKwlHUFUgY2dyb3VwIGNvbnRyb2xsZXIgdG8g
+cGFydGljaXBhdGUgaW4gcmVzb3VyY2UgYWNjb3VudGluZy4NCj4gKw0KPiAgT3RoZXJzDQo+ICAt
+LS0tLS0NCj4NCj4NClRoYW5rcywNCiBFbnJpYw0KIA0KX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
+YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
+dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
