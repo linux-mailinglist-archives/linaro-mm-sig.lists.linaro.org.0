@@ -2,128 +2,136 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BE8A52E4FC
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 May 2022 08:29:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A407452E5A7
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 May 2022 09:03:17 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5D864410C1
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 May 2022 06:29:33 +0000 (UTC)
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com (mail-dm6nam08on2053.outbound.protection.outlook.com [40.107.102.53])
-	by lists.linaro.org (Postfix) with ESMTPS id 58B173EE2B
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 20 May 2022 06:29:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CAF89410C4
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 May 2022 07:03:16 +0000 (UTC)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2083.outbound.protection.outlook.com [40.107.237.83])
+	by lists.linaro.org (Postfix) with ESMTPS id EA1343E8F3
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 20 May 2022 07:03:11 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZUgcfFT8R+wKxNEb7QThBqUreTWQ8g7RORP7vhl9jZoNh+VekzJw1YHjPtl3nt0EGffcOer6+B7OcZZOuTt+7paSXHDlVajpgY989jK2iaTzNgT+gLgjs0VIi6El35YcWnyNN1qBKXut3XTIsh1M9dKgQhdsK88xXRPo3dVGsFKj5V+OjUqpWtGLDaUPeVXBX3uGH2l7HjESAX8XyvvpmHuhHHz/h31IcMigavTvSZWOkJ7TIUn1mWqUSRQ6fwtbhODDvu8pAPmGT0G8Tkwci3UnMGwr5SIo+2+aVXX1AbZS2eMicKstOsAFgt/5OFLjRrkkCosnsxbIFLR4tXhLeg==
+ b=Q/ptJNKHyiU7RyQQKnSkC/3SvtqERBKTzIlgIeBP8ggyLiRMZHTMhgG6b75KvhiUceulU8jIVbo1BbreHHheimFr84CJ8g8QqbKIZt3rBuTEcJ3Ln0Dgu1UlZ5X0pLSQprnMdK6zihZtiek7emD6jY+Ss0pkqydXml3TNrSk7mE3vunU/cJZBAWDz8Coej/cXTkdApEpwCtAWBUzZipxW5pxI3qrdIN8bzpJLvEMZ3vIWn8nQ07F9A0OaQ5248dsEeMUn334t0B6OWnkjt0eOUP4szMixpKNCbEtqoMDUrXMEvy/0MmFxovUC3rs3ea+bHxZW7wA8tt7WLHoj+sJCA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RbHbPLiJpa/HyDLtdxyhgztgfUdoVwbXkv5/zsw6aMc=;
- b=Nb/floog+tdkwjAsr91wF0e41a0ePTa1x8D0RYsuwRfLgVlNytToeJMuQYuuSBF5E6gRUVaSbhpEZMjWw/q8QsEQCxWSDS2FfBnRQGRnh26UTZa6MguCSoOFNoWIZ4HfRWsxXoyZIYleWQprkwdmwdw7OFXNfp/K1y4KUjopacBqeA4Ka6ACMU1iycbzna9ewpuAWXSQVtphO2TqU4mUMK0ZUBdoX5UVzfLBlZz49FQ3xk3d9LTU0Pzim2HQGNhqtFoxHKyAlPF/sPMLQo3AgXmlYt0kqlw4/h8Ljqrqo8yRdp6+/Zt2Q4kcbI4hu26Hg4dlpzfBHFF0Ji09aKuvuw==
+ bh=K+Dzvl+Dyi1MltSeP9RmO4xx+4ur6OdivvIhfRV+eeQ=;
+ b=c6/JZP+zE0Ic1TfeEtGekdOEF0I7FgqLJY/k6t+DPO+gY3EwXJyk98wHk+Rh844Is/6m9IVCHYeVtixGD5NSenfYgYHb7+Alf41qsG8OCJdWP5xcmMj033K3X8YOkwIRhG3PYw7lmlkM3K1TEY/KuiOrOEwHa/tCi6Z/5jPKfgzqPiSw2x3JCNMdL1tzOuLtMAgaHjqTP+1CVc5hYlsKPdB3ruxXaTT3tMh8NNL1/cZanPvWZr6BehPLM5lOkr4fyJNCG9krWrlhCN7SgeOVNZA54NiBZgv3Ne8syMsOwdqi12gw2GpcDnzbWeWIIN6R4HZAxkdCTDhkhk1dN568KQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RbHbPLiJpa/HyDLtdxyhgztgfUdoVwbXkv5/zsw6aMc=;
- b=wDFoZX7f+GbIDbwh2aLsmBYZClvIV4zVvTC1DicTDAoOn2fK3ttEBAEqLsaZobxX+35t/A82EbsqJWrhWQWDdHT8X56HRPF4h2LMF2zqtK4g0cUH7wZVD9ODyJWq553bxJThpPC5VSgMYXF4B1szqO5WHuFjpulJJP7fQbr75fc=
+ bh=K+Dzvl+Dyi1MltSeP9RmO4xx+4ur6OdivvIhfRV+eeQ=;
+ b=PMoxnjtpfjfeFtZS9ddU1YHCjMte8ZdggdV5Zn8fam2S11z/dm9ttugFrrYD485g/wEBqNcqydA4BqQ1fQok2QHlQBOPom5d4dqDa1c2uAv0uBLUdYKCgPKVkP/6r/s5kgmgJNRm+fWRkJ9svbOTSVjRtHZD/V6sY+7DPZTJgKM=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by BN6PR12MB1315.namprd12.prod.outlook.com (2603:10b6:404:1f::8) with
+ by CH2PR12MB4805.namprd12.prod.outlook.com (2603:10b6:610:12::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5250.16; Fri, 20 May
- 2022 06:29:26 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5273.17; Fri, 20 May
+ 2022 07:03:06 +0000
 Received: from BN8PR12MB3587.namprd12.prod.outlook.com
  ([fe80::7146:65ee:8fd3:dd03]) by BN8PR12MB3587.namprd12.prod.outlook.com
  ([fe80::7146:65ee:8fd3:dd03%4]) with mapi id 15.20.5273.017; Fri, 20 May 2022
- 06:29:26 +0000
-Message-ID: <4e35dc30-1157-50b3-e3b6-954481a0524d@amd.com>
-Date: Fri, 20 May 2022 08:29:18 +0200
+ 07:03:06 +0000
+Message-ID: <953d4a2c-bf0c-9a92-9964-eae445a8f113@amd.com>
+Date: Fri, 20 May 2022 09:03:00 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.8.1
 Content-Language: en-US
-To: Kalesh Singh <kaleshsingh@google.com>
-References: <20220519214021.3572840-1-kaleshsingh@google.com>
+To: "T.J. Mercier" <tjmercier@google.com>
+References: <20220516171315.2400578-1-tjmercier@google.com>
+ <175c5af3-9224-9c8e-0784-349dad9a2954@amd.com>
+ <CABdmKX2GcgCs1xANYPBp8OEtk9qqH7AvCzpdppj9rHXvMqWSAw@mail.gmail.com>
+ <0875fa95-3a25-a354-1433-201fca81ed3e@amd.com>
+ <CABdmKX1+VYfdzyVYOS5MCsr4ptGTygmuUP9ikyh-vW6DgKk2kg@mail.gmail.com>
+ <YoM9BAwybcjG7K/H@kroah.com> <d820893c-fa2e-3bac-88be-f39c06d89c01@amd.com>
+ <CABdmKX2m1b1kdACKM19S+u9uR5RTy1UGMRgd+3QA_oAyCpeggg@mail.gmail.com>
+ <7f895a99-adfa-bcbd-c130-a924c668b8af@amd.com>
+ <CABdmKX0XLvRZvXyiN0P_B-fUACiF5xwQ07+u_gaR+hDhu_x_TA@mail.gmail.com>
 From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20220519214021.3572840-1-kaleshsingh@google.com>
-X-ClientProxiedBy: AM6PR04CA0050.eurprd04.prod.outlook.com
- (2603:10a6:20b:f0::27) To BN8PR12MB3587.namprd12.prod.outlook.com
+In-Reply-To: <CABdmKX0XLvRZvXyiN0P_B-fUACiF5xwQ07+u_gaR+hDhu_x_TA@mail.gmail.com>
+X-ClientProxiedBy: AS9P194CA0002.EURP194.PROD.OUTLOOK.COM
+ (2603:10a6:20b:46d::7) To BN8PR12MB3587.namprd12.prod.outlook.com
  (2603:10b6:408:43::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 40043f3e-713e-4085-ce2f-08da3a2a15e3
-X-MS-TrafficTypeDiagnostic: BN6PR12MB1315:EE_
+X-MS-Office365-Filtering-Correlation-Id: f1d1f4ae-5678-4dea-02d4-08da3a2eca28
+X-MS-TrafficTypeDiagnostic: CH2PR12MB4805:EE_
 X-Microsoft-Antispam-PRVS: 
-	<BN6PR12MB131550335EABD2DC65C3FAA883D39@BN6PR12MB1315.namprd12.prod.outlook.com>
+	<CH2PR12MB48053D5060023C287239A4A383D39@CH2PR12MB4805.namprd12.prod.outlook.com>
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	d14YZn+irmJVw34RjNcmW/gCfI3fQ87go371MwkzyiYWn6Ub+//5nuMkUQYZ1SSWQuPUCrUYz/sHws1p3Uo4olFMkteDLWEYEY/H0u3ME0yk0T1l6TGDUSL/IO0NzvLExg1SG67agPM07OWYzW9DJXd0rOSKcoJ+NQdndiliaZuT+uOHUTtTd37EGTw3tgo5ZMCtC0nHW0PCMJA21KfTgGrLZSRpklnyU7GJt46uSb8oDsBiHEe5MIEoT1haUdpXEeVktO2t/HEQZVaovLmhuVKwsirSxeOu/3cQceh7TdWqmO7TmOVLE3n+XgFNxD88B5JMpyZuC3JBM4uAwABN2Pj6fbGufevnvyIuij62uaI6Pnq71Mg0ANRzbg2g+Ax/cBVp38OoNafMwBSRYnMliOcrbVd+t61s3+3GUyXB9fD8Pj9H/0Iu3Wwc1WwbgRBj5Rf7rJFj3gSElhPVgZz+KmOdHwC6WFESqZo5BPwE6ysGQyM+MZozN5Kp53zu8rKNQWWJz/Co1N3yXhVhxo501Kup9iuDtybXQz29SDzbIKsM9BzJMgCS426K7joN4ryP0aC6spTmKfEKZcADCF0qYfTQn0JB0vhO70lTmq94m0LlWOpZsNIQZmCv1zKKDZUAcFzqSrkEKWQdqIWAKU1O/f0va5ZyPkJIF6RFEIE5C3IAG56jb9tMtTLUuOl7g/4eQJNRPFkHenwA4q/H2fQdy72fwNWvfNDNbm5u9R73e3GOdu8SkQKnrXTRDgNFH3W/NLAndzSV3rD9UZAecwkc84nDYydZaPBsT4UiRVgX3H3n0WjK8NIMy4pmUE8y3oOGUiyOVfTDfSnIF/c9B0xMg8X4g9tiRAt0eQ1F8SCc+rE=
+	DdugSlSyKcxO0gi5mY7lMj/9fGzJd3wsTB5fbkvPXK2ejrhICrAQ6kkC50dz/NFgkt63q4LlvgNM/ERy+awIAaHYwzGvqJt9uArdbo/w/q8sK62d4w9hmtSWrAc460wmAauramu60Gb3H84I29Xuq8JojZ5DPgAQxstN2ZACw48T9NwxLACpuVsOsPNUH+gPx96owtHWAcHkBk42x6394LQd/y4Fkpk6XG8i9RbGQTcEzsyJpO4y/XvqzHNwnRKKOo45LKQTXASM/WjTS2Ad9RphiFTbORhm4JrKxhsQ8JQ12WKq7SvuAPQyKNsP1kGeWlJLbfvlmcz/Vx03a4Cl34WmVARN18dIEdAE0BDm9m48wirHMOQ056nJH7MqjIaqYirwCASpP488GGZQKX6axWH2KXfKFl1XsiEJUyUcjdsSNFqD2hOC+5K9R/vclckcBUiLxVapAaYJCsi0+j90P8sirfLhTXoahoN3ARIwW++vJi9mDnElYOTNcT9lb4aMaMN82sK6lrfFwUkZfP8/I9GV50dOmYlxP3NAEsii2V7LHShVEHOZPrUUV3L42vOQAupmB4I4KdAUpT6OnL0d2wDJe0A86BiAxZgDtz8wu0NFpJUcydpp1/G6iA1WOCTMqPoxB/zk7YE7Fk98j3JBtm/rx9rje9xbtyUe45lzZeg5LZhuZJ8MPJ+qDhikOX95F/yFyQ/4KZa3OeCH0/0DiWXhoNrMdghB+s6Qy0Cx06cVi+pUKueUWkBDMYhe2MPS
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(83380400001)(2906002)(36756003)(8676002)(4326008)(2616005)(6506007)(6486002)(966005)(7416002)(8936002)(6512007)(66556008)(54906003)(66946007)(5660300002)(508600001)(45080400002)(38100700002)(86362001)(316002)(66476007)(31696002)(6666004)(6916009)(31686004)(186003)(21314003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(31696002)(38100700002)(186003)(86362001)(2616005)(83380400001)(6512007)(5660300002)(8936002)(66946007)(66556008)(66476007)(8676002)(4326008)(36756003)(7416002)(2906002)(508600001)(6486002)(6506007)(6666004)(31686004)(316002)(6916009)(54906003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?ZXp1ZkRMVU9NRmZCSzdGMGlzazFnVHBTVEVYQmhUNEdBU01EcjM3Z29QV2dt?=
- =?utf-8?B?ajBZdjUvSUdjbXFaT0xIYmJEeFoybXQxbmMya1MwaEkrbXhjWWptdU5KYi9S?=
- =?utf-8?B?THIwRGwrMmNheU1PTG5BZlhreFpxTnhKNnZ1QXc1UTdSNm5tejhEbmdCeXdN?=
- =?utf-8?B?anIrZ0E2Ti8valdmRHA2ZU5KM244OXBnclpQVG9TRXkvNE41cFFrQVRta0p0?=
- =?utf-8?B?MXhqeHBTaWx0dWlGbHVZSHJtMi83YW1Ld1RqYXJnWGVFQ2RjQ25DOW9ITXdp?=
- =?utf-8?B?cWJNQS9DMTdvVXIvcTJlb3dkOWVmY3VSTEFRQzNtRlNlcmgrQWQyNjdPQjZE?=
- =?utf-8?B?bzJPZncvVFlXTWRtaXVNUGwwWTZCZEFGSEFWUTRwL3ArYmJUWVNKNXpyTHpK?=
- =?utf-8?B?OThJRlZ0R2pOUnZDSTVWbkJZTmlzcFZ1YmpHeGUvcmQyb2Z0MVVwdVJ2QjJG?=
- =?utf-8?B?U0tzb2VIZTVzUEprWXFZQUlGUnlLMmsyU1crVVp1aDZ1TTgyY0RmMjBZMndT?=
- =?utf-8?B?TUtTNmQ2M1prcDFHQ2JhWDlUd002TGlRZUI2d2VQb25kTDJaa2ZGUTdqWWN1?=
- =?utf-8?B?RWlkeEY4bE5OZ1JFWDRxNUx2Nm5kUjhOKzhCMnlvanpGN0NPTlJjMWxYdGt6?=
- =?utf-8?B?Nm9OdStadFk5T1NQRndBTSsyTXVhc2J4YVFFYTYxckRkSVNzK25xTllMbFJi?=
- =?utf-8?B?dEdNdHlPd2tZWWRWMjdJY2haUzlVWWVUZnR1b2cxV29DRnZXdWJ3OUlLM0ZP?=
- =?utf-8?B?R292T3k5NlMydXVyNHBrZEY4VTBzM2RpK2NFTGpHRmtEdWJNczlHMGVRNmQy?=
- =?utf-8?B?bkRKYnFFNFJqVUN0MFlaWnVIRnQ5eHlhNHhBaDZYaUVWZElEWU5WYkZ5cU0y?=
- =?utf-8?B?dzBGZUYrT0NlVEx1VE44NjRYZ0EzSDZsaEY0TWZtS3pmNTE3ckZhS1dyWktN?=
- =?utf-8?B?ZVFFMUVjTUNJbUxmbzF5dkREQU0zUkxYd2Y0S2w0K3MzWDdLbTZnR3h6cEd1?=
- =?utf-8?B?Z0lpbFA5WEh0NzBLcHQxQnlFUnJPZVFHSDlGdmUyazRGUFNHZGxleTdnK3RM?=
- =?utf-8?B?cVJQbkp2S1BhS3Y2Wnk3SGF0V3d3dHd0NU93MmsxOTRtZnJFK3lLb0ZYRXhS?=
- =?utf-8?B?U1FYcFhUUnV6V09NcnNEZ2VJdmJTZ2NYOWE2TXZSaG4rckEwSmhlNG5KL0dp?=
- =?utf-8?B?K3FyZDAxNjFYNHNBZzUwc1VkWnUvcGZVVEV5UE90SU1nUjdKZnVrd0xJcTA3?=
- =?utf-8?B?ODB2YVMvSFhqSW5wTWtVZk1BNE9EcFlaMkM3RGl3RVQxaWhUU0lvRndzNWJs?=
- =?utf-8?B?d0QxVkhHcFljU0VkMFJxRmg2bml2WWNGVFZEWnNDWGovQUx3aUJxckpmMG00?=
- =?utf-8?B?WW0xR0hjMzN4NFFhUk9Jek40Ujg4dFdTTXlXV29xZjVTVnNzVjhDK1QrU0Ro?=
- =?utf-8?B?WDExZDZhS2I1dnZhZ0ZkeHhXVkgraWJTSytyQzQ0ODdTWWxYNm5GVFNjbnBG?=
- =?utf-8?B?TXVXbVd1dTczbXQrK2h2L0wvY2FjbmltU0s1RS96R1YyditnaC9zZHpPeXlX?=
- =?utf-8?B?aVAwOU1GWmlZQWhMOUg3ek52REdlaXhoeUdGVXpPTkttcndQVzF2NDdRZ01Q?=
- =?utf-8?B?bGl3bytXeGc0aStPQTJkM29Ic20yUnBnbUFSUTFEVDFzQ3A1VDVqWFo4a0xs?=
- =?utf-8?B?dDI0aVVOUll2K0hWVFNZbmNkanFGOWI1Y2VydmZaOGRPNVpqRzZmbVplMk1x?=
- =?utf-8?B?d050QVVjajROZUt0QjFINk5hNFZJRk5mNGlxTUN2VnhFZ3hZU2NpaEUyZUI5?=
- =?utf-8?B?bGFDV2x3L3ZnVVlsSnRvUnIyaktjQisyNm00RCtsSXgvYXR6Vit3YzdaWlcv?=
- =?utf-8?B?cmQ4d2RkL0Z3Rm9Kc3pkYjM0TVFGZGpmYzZIYTVwOWgrREEzZFd4SFd1Qm1T?=
- =?utf-8?B?K2daR29NeEVrQndXWVlKV1BjNTZtQTdHdFN6dGk4MzczMlpaSXNHbldSUXFD?=
- =?utf-8?B?N0NHTGd1ZDdlZTlTNXYzcGpoMnFzWngwSmk0OUUzaU5sUUUrSlBnZi82ZG94?=
- =?utf-8?B?cUNGYkhRb29nU1JTaHBXbEdPTlNJZm5semwrb0ZqY2pNc2o1RUZKMC9LWkw1?=
- =?utf-8?B?UXJWY0I3WGZXNTNTMHl5amxZWTR4QXZWVWx1LzlPOFh4ZkFwczY3VjB0Vm9Q?=
- =?utf-8?B?Q0QzcGtqckI2QjlaMzZHc01oUlM1KzQ5Z0NrTWZLR3c0ejYrZzVrQXE0U1BF?=
- =?utf-8?B?RGtzMmtZd2RiUjliRXJLbmFwS0dvOTBOZStOU040ODN1WWI5MWo0TjJUQnJU?=
- =?utf-8?B?UmRrb2FrclpDbCs0Z25sSWp0endGN2kvaVBvUm94NmtiSHRpOTJwYlpCZjF5?=
- =?utf-8?Q?VhoBvsR6+H+F767+5Tp6Y3wCyG55ZeafLeU35Apumovd8?=
-X-MS-Exchange-AntiSpam-MessageData-1: 9U5E0eeqH8uiLg==
+	=?utf-8?B?ZElPWDJRdlpwMTZLM2NCZEJsM2U5UURaL0xpTEdzTzhqZlhSc0dRU01jSW5v?=
+ =?utf-8?B?eUZrdU56VlFDbllxaUdZZUFycno4RlZLRmhqVVYzTElQREhTRlcyT0JWTlNJ?=
+ =?utf-8?B?cEJ3Wk5WWGRESExOT21lRnFQYnZPSHBQVHhETTZtR1pUeWdkRjA0bFpOZEpI?=
+ =?utf-8?B?Y1BvRGRndkFuZUpreFpWSHQzZ3FpcXpUcGZjelBLT0oycEtCWjlkMjUzL1pN?=
+ =?utf-8?B?amc4NCtuaE9NcmJwVldkNUlCdmxOQkdRbGR1dTltb1JPelVrK3JreUZkRktz?=
+ =?utf-8?B?dEhXeG9uOW9PZzQ0ZVhZV2MxL1ZTUUI4eDd4S2RkMUNXVVRPRFVPWlBwVGxW?=
+ =?utf-8?B?a0IvdTVGTjlYTXAwTUFGd1RvRlJ0OVhSMDlVVzlaRUlHZmJjU1Z4RGc2QUQz?=
+ =?utf-8?B?ZXNzNmttR3R3UTRQKzJwZXRHR0pwT3NXMldjRU9JTTRFeDhwZHhha2x6ZzUw?=
+ =?utf-8?B?YVRMTlJhL2MwenBtSTkvQUtjR21sOU5LY1VRNUZ1UmdKdmRTbGxPY0IwenhT?=
+ =?utf-8?B?R1U5YWZxVXk5aE1hMTRVSHNjb3FTZ1F6bjNzNXlIWE8yY25hMituQ0JMNkF3?=
+ =?utf-8?B?U2FFeTVBQk5zRFJ0cENPLzZQY1BGS2FyakJKWGtmOUZsUkJtQmtYdWx2TEJ0?=
+ =?utf-8?B?aDBvcmMrNVJINXliVEI4ZUFRVXYrZnlaOVRjcFNTbmo4ZU83bmhqR0pVNTNt?=
+ =?utf-8?B?bjRvMHZVM0VSNnZUSTF6anc1UjU0MTJSN09SRUxiUDZPcm1jbXk3VDlQUWUr?=
+ =?utf-8?B?R2NXYUFxRHppUmJIK2ZvSmNjQjhFOVlnMnNWemc4OXBEbjlYZlpqV0Z5N0h0?=
+ =?utf-8?B?aFREdVFwVGI5RXRuSnZUTld2b3BzblF6cXJZWmlqcUJacGNIc3o5N05ZUmJH?=
+ =?utf-8?B?U2lvTUhOUzZrclJkUGNGYytTWXZqWFVBbFduRlNwUkxDTXA3Q3hzRzF6ZVAv?=
+ =?utf-8?B?dUhEN3BnT0hOT3EzSUJ6cTFXMkpmakFlQTl3cVA0bm1IcnlnN0t2dUd5VHVO?=
+ =?utf-8?B?d1gzc2k4MFEyYVozU1YwWVV4MzFDUTMxTnZxWU5aVkZGT005c0p4UXpmMWJ1?=
+ =?utf-8?B?Mm8rSDJ2eFJVcVIrN3dZL05XcTRuL1YvWGlVRlcvbFVScy9rclZkU24yN0dj?=
+ =?utf-8?B?V25zcDJlRmtIOEhLWmVqMzVNWW1RWno1M0NjTmZVVDNmMXlWV3d0UVFyUkpU?=
+ =?utf-8?B?SWJHZkxLYjNzNzdNYThYUTlPMTY4bXRkZlRmdGRjeHgrWVdSOUlWZmJmOTN0?=
+ =?utf-8?B?cWZKQnlBYnd2QlZxOTlTeEtGdDVoQkRpZkRiY1JiT2VWTFY3OERvY2VVbzlG?=
+ =?utf-8?B?M2k2SFhXOXY2RzdIbnpmSDNuMGwyYlFmcXg2Rmh1cHUwSVRjN091anVjQ2tK?=
+ =?utf-8?B?M3dUa1k5MTYyVmhRU3BlTDBGTnpJL3BydG15VXBuS2xlMnd5eHJ1bnltSmZw?=
+ =?utf-8?B?MGkrY0hFdUNIVXIvaU1PN1ZwRk9sZmp3T3FrQTQ5ZzY5ZkhpODFYTnpPcmJt?=
+ =?utf-8?B?U3NENW9aNFZUaE1JUXlUYjRpanZSbGNwamhrVzZoa09YeXBCT0dkN2tXSlBv?=
+ =?utf-8?B?ZlZITmQwVm5yU2tCREFITFZGNER4UXc5T1htMDZvOWM4NzNYeEJoWFpXTll0?=
+ =?utf-8?B?NGV2dExIT1d6RUYydWlGODRGbGNBaU9IeWpZOHZGOXFnNnZoWXNoU1dKN3pM?=
+ =?utf-8?B?VGJETWlmbzMyNExsbEN6TEJLcUwvZTVMU1drYUJBRFZ3Ti93cU9NbDRpdGI5?=
+ =?utf-8?B?OFowOXZVM0g0bFFXTmJEZUNhNGdCcG03NytyNHd5S3l0TjBPUk16U1BDZmlw?=
+ =?utf-8?B?TkZWc2ZxSEorSWh2cFlvSCtEM3lHbFhqL1crMWdabzM2K2h6ejNOQmVjNjly?=
+ =?utf-8?B?dUVTck1HSEpEY0NJTTFrcEdIY3p6aFR6b05DbTdMMWdoa2lWa1piRG5vR1lU?=
+ =?utf-8?B?c0NMVXBWUmFyVHp5eUhWK21kWEZFZ1JxczByWVZRYUNhUEppeFl5NU9xQWNy?=
+ =?utf-8?B?MVFrMjBKdWpzV05MUHJMOG9oZkRHN1pnMkVXRWZTN1dHczlXWDRrcmI5d0tL?=
+ =?utf-8?B?Y2JQWThlaUJDeENUWmhDMW9pdHNXRzFRRjR4TDBxUGtwbFo4Q2wzbEJpRW5T?=
+ =?utf-8?B?MEtobENVM2dEdWlpRWprTlpoWFJWcGtWTlJkc0x0dHk1RFVHd252ci9URjky?=
+ =?utf-8?B?Z1VmUnd4VWh6MmxVZCt3cHk3TS9ZSHJQb3Y1bFVlUTl6L240NDF5OVc0Z01K?=
+ =?utf-8?B?RGFmaittVE9CTW5TdWZ3emsyQURWc0UrenEyMXp1aEpDNFZ5SHIvY2NYYUdt?=
+ =?utf-8?B?cmlraE9rVGYxWU1LeE9LS2s1cEZmbTVDRjNZc2RRbUM1WEdCYm1DK0gzNW0z?=
+ =?utf-8?Q?sM0ZtNd5DAtfupCyzkS3Hm19nqrVE0kKdtWBg1B/Mr3E/?=
+X-MS-Exchange-AntiSpam-MessageData-1: 8SYuiOngzpzI7Q==
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 40043f3e-713e-4085-ce2f-08da3a2a15e3
+X-MS-Exchange-CrossTenant-Network-Message-Id: f1d1f4ae-5678-4dea-02d4-08da3a2eca28
 X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2022 06:29:25.8978
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2022 07:03:06.2122
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: GlAlIRkuByxzRffjDqYa46Xl5xpGJeJpAu551ByIULurg5UBvsqCKr9DnAnm2k9a
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR12MB1315
-Message-ID-Hash: 3BEPAIOENLPN3EPFPT6RB4RONG67AY7X
-X-Message-ID-Hash: 3BEPAIOENLPN3EPFPT6RB4RONG67AY7X
+X-MS-Exchange-CrossTenant-UserPrincipalName: VddUqOAAKwbyBjgh/rRfShJzsG9j2PKSOoci8vYufAj93FVbW7o5kPcg/TA0Th9p
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4805
+Message-ID-Hash: DK4PN35KV6HS6Y6PNRMVSZ6ROSTVWXBX
+X-Message-ID-Hash: DK4PN35KV6HS6Y6PNRMVSZ6ROSTVWXBX
 X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: ilkos@google.com, tjmercier@google.com, surenb@google.com, kernel-team@android.com, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Andrew Morton <akpm@linux-foundation.org>, Christoph Anton Mitterer <mail@christoph.anton.mitterer.name>, Kees Cook <keescook@chromium.org>, Mike Rapoport <rppt@kernel.org>, Colin Cross <ccross@google.com>, Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Suren Baghdasaryan <surenb@google.com>, Kalesh Singh <kaleshsingh@google.com>, Minchan Kim <minchan@google.com>, Greg Kroah-Hartman <gregkh@google.com>, John Stultz <jstultz@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Hridya Valsaraju <hridya@google.com>, kernel-team@android.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC PATCH] procfs: Add file path and size to /proc/<pid>/fdinfo
+Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: Move sysfs work out of DMA-BUF export path
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3BEPAIOENLPN3EPFPT6RB4RONG67AY7X/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DK4PN35KV6HS6Y6PNRMVSZ6ROSTVWXBX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -133,202 +141,98 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-Am 19.05.22 um 23:40 schrieb Kalesh Singh:
-> Processes can pin shared memory by keeping a handle to it through a
-> file descriptor; for instance dmabufs, memfd, and ashsmem (in Android).
->
-> In the case of a memory leak, to identify the process pinning the
-> memory, userspace needs to:
->    - Iterate the /proc/<pid>/fd/* for each process
->    - Do a readlink on each entry to identify the type of memory from
->      the file path.
->    - stat() each entry to get the size of the memory.
->
-> The file permissions on /proc/<pid>/fd/* only allows for the owner
-> or root to perform the operations above; and so is not suitable for
-> capturing the system-wide state in a production environment.
->
-> This issue was addressed for dmabufs by making /proc/*/fdinfo/*
-> accessible to a process with PTRACE_MODE_READ_FSCREDS credentials[1]
-> To allow the same kind of tracking for other types of shared memory,
-> add the following fields to /proc/<pid>/fdinfo/<fd>:
->
-> path - This allows identifying the type of memory based on common
->         prefixes: e.g. "/memfd...", "/dmabuf...", "/dev/ashmem..."
->
->         This was not an issued when dmabuf tracking was introduced
->         because the exp_name field of dmabuf fdinfo could be used
->         to distinguish dmabuf fds from other types.
->
-> size - To track the amount of memory that is being pinned.
->
->         dmabufs expose size as an additional field in fdinfo. Remove
->         this and make it a common field for all fds.
->
-> Access to /proc/<pid>/fdinfo is governed by PTRACE_MODE_READ_FSCREDS
-> -- the same as for /proc/<pid>/maps which also exposes the path and
-> size for mapped memory regions.
->
-> This allows for a system process with PTRACE_MODE_READ_FSCREDS to
-> account the pinned per-process memory via fdinfo.
+Am 20.05.22 um 00:58 schrieb T.J. Mercier:
+> [SNIP]
+>>> Is there some other
+>>> solution to the problem of exports getting blocked that you would
+>>> suggest here?
+>> Well pretty much the same as Greg outlined as well. Go back to your
+>> drawing board and come back with a solution which does not need such
+>> workarounds.
+>>
+>> Alternatively you can give me a full overview of the design and explain
+>> why exactly that interface here is necessary in exactly that form.
+>>
+> We ended up here because we could not use debugfs.
 
-I think this should be split into two patches, one adding the size and 
-one adding the path.
+[SNIP]
 
-Adding the size is completely unproblematic, but the path might raise 
-some eyebrows.
-
+> Another idea was adding per-buffer stats to procfs, but that was not
+> an option since per-buffer stats are not process specific.
 >
-> [1] https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Flore.kernel.org%2Flkml%2F20210308170651.919148-1-kaleshsingh%40google.com%2F&amp;data=05%7C01%7Cchristian.koenig%40amd.com%7C95ee7bf71c2c4aa342fa08da39e03398%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C637885932392014544%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=kf%2B2es12hV3z5zjOFhx3EyxI1XEMeHexqTLNpNoDhAY%3D&amp;reserved=0
->
-> Signed-off-by: Kalesh Singh <kaleshsingh@google.com>
-> ---
->   Documentation/filesystems/proc.rst | 22 ++++++++++++++++++++--
->   drivers/dma-buf/dma-buf.c          |  1 -
->   fs/proc/fd.c                       |  9 +++++++--
->   3 files changed, 27 insertions(+), 5 deletions(-)
->
-> diff --git a/Documentation/filesystems/proc.rst b/Documentation/filesystems/proc.rst
-> index 061744c436d9..ad66d78aca51 100644
-> --- a/Documentation/filesystems/proc.rst
-> +++ b/Documentation/filesystems/proc.rst
-> @@ -1922,13 +1922,16 @@ if precise results are needed.
->   3.8	/proc/<pid>/fdinfo/<fd> - Information about opened file
->   ---------------------------------------------------------------
->   This file provides information associated with an opened file. The regular
-> -files have at least four fields -- 'pos', 'flags', 'mnt_id' and 'ino'.
-> +files have at least six fields -- 'pos', 'flags', 'mnt_id', 'ino', 'size',
-> +and 'path'.
-> +
->   The 'pos' represents the current offset of the opened file in decimal
->   form [see lseek(2) for details], 'flags' denotes the octal O_xxx mask the
->   file has been created with [see open(2) for details] and 'mnt_id' represents
->   mount ID of the file system containing the opened file [see 3.5
->   /proc/<pid>/mountinfo for details]. 'ino' represents the inode number of
-> -the file.
-> +the file, 'size' represents the size of the file in bytes, and 'path'
-> +represents the file path.
->   
->   A typical output is::
->   
-> @@ -1936,6 +1939,8 @@ A typical output is::
->   	flags:	0100002
->   	mnt_id:	19
->   	ino:	63107
-> +        size:   0
-> +        path:   /dev/null
->   
->   All locks associated with a file descriptor are shown in its fdinfo too::
->   
-> @@ -1953,6 +1958,8 @@ Eventfd files
->   	flags:	04002
->   	mnt_id:	9
->   	ino:	63107
-> +        size:   0
-> +        path:   anon_inode:[eventfd]
->   	eventfd-count:	5a
->   
->   where 'eventfd-count' is hex value of a counter.
-> @@ -1966,6 +1973,8 @@ Signalfd files
->   	flags:	04002
->   	mnt_id:	9
->   	ino:	63107
-> +        size:   0
-> +        path:   anon_inode:[signalfd]
->   	sigmask:	0000000000000200
->   
->   where 'sigmask' is hex value of the signal mask associated
-> @@ -1980,6 +1989,8 @@ Epoll files
->   	flags:	02
->   	mnt_id:	9
->   	ino:	63107
-> +        size:   0
-> +        path:   anon_inode:[eventpoll]
->   	tfd:        5 events:       1d data: ffffffffffffffff pos:0 ino:61af sdev:7
->   
->   where 'tfd' is a target file descriptor number in decimal form,
-> @@ -1998,6 +2009,8 @@ For inotify files the format is the following::
->   	flags:	02000000
->   	mnt_id:	9
->   	ino:	63107
-> +        size:   0
-> +        path:   anon_inode:inotify
->   	inotify wd:3 ino:9e7e sdev:800013 mask:800afce ignored_mask:0 fhandle-bytes:8 fhandle-type:1 f_handle:7e9e0000640d1b6d
->   
->   where 'wd' is a watch descriptor in decimal form, i.e. a target file
-> @@ -2021,6 +2034,8 @@ For fanotify files the format is::
->   	flags:	02
->   	mnt_id:	9
->   	ino:	63107
-> +        size:   0
-> +        path:   anon_inode:[fanotify]
->   	fanotify flags:10 event-flags:0
->   	fanotify mnt_id:12 mflags:40 mask:38 ignored_mask:40000003
->   	fanotify ino:4f969 sdev:800013 mflags:0 mask:3b ignored_mask:40000000 fhandle-bytes:8 fhandle-type:1 f_handle:69f90400c275b5b4
-> @@ -2046,6 +2061,8 @@ Timerfd files
->   	flags:	02
->   	mnt_id:	9
->   	ino:	63107
-> +        size:   0
-> +        path:   anon_inode:[timerfd]
->   	clockid: 0
->   	ticks: 0
->   	settime flags: 01
-> @@ -2070,6 +2087,7 @@ DMA Buffer files
->   	mnt_id:	9
->   	ino:	63107
->   	size:   32768
-> +        path:   /dmabuf:
->   	count:  2
->   	exp_name:  system-heap
->   
-> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-> index b1e25ae98302..d61183ff3c30 100644
-> --- a/drivers/dma-buf/dma-buf.c
-> +++ b/drivers/dma-buf/dma-buf.c
-> @@ -377,7 +377,6 @@ static void dma_buf_show_fdinfo(struct seq_file *m, struct file *file)
->   {
->   	struct dma_buf *dmabuf = file->private_data;
->   
-> -	seq_printf(m, "size:\t%zu\n", dmabuf->size);
->   	/* Don't count the temporary reference taken inside procfs seq_show */
->   	seq_printf(m, "count:\t%ld\n", file_count(dmabuf->file) - 1);
->   	seq_printf(m, "exp_name:\t%s\n", dmabuf->exp_name);
-> diff --git a/fs/proc/fd.c b/fs/proc/fd.c
-> index 913bef0d2a36..a8a968bc58f0 100644
-> --- a/fs/proc/fd.c
-> +++ b/fs/proc/fd.c
-> @@ -54,10 +54,15 @@ static int seq_show(struct seq_file *m, void *v)
->   	if (ret)
->   		return ret;
->   
-> -	seq_printf(m, "pos:\t%lli\nflags:\t0%o\nmnt_id:\t%i\nino:\t%lu\n",
-> +	seq_printf(m, "pos:\t%lli\nflags:\t0%o\nmnt_id:\t%i\nino:\t%lu\nsize:\t%zu\n",
->   		   (long long)file->f_pos, f_flags,
->   		   real_mount(file->f_path.mnt)->mnt_id,
-> -		   file_inode(file)->i_ino);
-> +		   file_inode(file)->i_ino,
-> +		   file_inode(file)->i_size);
+> So it seemed like sysfs was an appropriate solution at the time. It
+> comes with a stable interface as a bonus, but with the limitation of 1
+> value per file this leads to creating lots of files in sysfs for all
+> dma buffers. This leads to increased kernfs lock contention, and
+> unfortunately we try to take the lock on the hot path.
 
-We might consider splitting this into multiple seq_printf calls, one for 
-each printed attribute.
+That's what I totally agree on about. debugfs is for debugging and not 
+for production use.
 
-It becomes a bit unreadable and the minimal additional overhead 
-shouldn't matter that much.
+So either sysfs or procfs or something completely different seems to be 
+the right direction for the solution of the problem.
+
+> With the description and links to the userspace code which actually
+> uses the feature I feel like that's a complete picture of what's
+> currently happening with this interface. If you could explain what
+> information is missing I'll do my best to provide it.
+
+Yeah, I've realized that I didn't made it clear what my concerns are 
+here. So let me try once more from the beginning:
+
+DMA-buf is a framework for sharing device buffers and their handles 
+between different userspace processes and kernel device. It's based 
+around the concept of representing those buffers as files which can then 
+be mmap(), referenced with a file descriptor, etc....
+
+Those abilities come with a certain overhead, using inode numbers, 
+reference counters, creating virtual files for tracking (both debugfs, 
+sysfs, procfs) etc... So what both drivers and userspace implementing 
+DMA-buf is doing is that they share buffers using this framework only 
+when they have to.
+
+In other words for upstream graphics drivers 99.9% of the buffers are 
+*not* shared using DMA-buf. And this is perfectly intentional because of 
+the additional overhead. Only the 3 or 4 buffers which are shared per 
+process between the client and server in a display environment are 
+actually exported and imported as DMA-buf.
+
+What the recent patches suggest is that this is not the case on Android. 
+So for example overrunning a 32bit inode number means that you manage to 
+created and destroy over 4 billion DMA-bufs. Same for this sysfs based 
+accounting, this only makes sense when you really export *everything* as 
+DMA-buf.
+
+So if that is correct, then that would be a pretty clear design issue in 
+Android. Now, if you want to keep this design then that is perfectly 
+fine with the kernel, but it also means that you need to deal with any 
+arising problems by yourself.
+
+Pushing patches upstream indicates that you want to share your work with 
+others. And in this case it suggests that you want to encourage others 
+to follow the Android design and that is something I would pretty 
+clearly reject.
+
+>> Yeah and to be honest I have the strong feeling now that this was
+>> absolutely not well thought through.
+> I'm open to working on a replacement for this if we can't find an
+> acceptable solution here, but I would appreciate some direction on
+> what would be acceptable. For example Greg's idea sounds workable, but
+> the question is if it mergeable?
+
+Well one possibility would be to use cgroups. That framework needs to do 
+accounting as well, just with an additional limitation to it.
+
+And there are already some proposed cgroup patches for device driver 
+memory. While reviewing those both Daniel and I already made it pretty 
+clear that it must be separated from DMA-buf, exactly because of the 
+reason that we probably don't want every buffer exported.
+
+But to work on a full blown solution I need a better understanding of 
+how your userspace components do.
 
 Regards,
 Christian.
-
-> +
-> +	seq_puts(m, "path:\t");
-> +	seq_file_path(m, file, "\n");
-> +	seq_putc(m, '\n');
->   
->   	/* show_fd_locks() never deferences files so a stale value is safe */
->   	show_fd_locks(m, file, files);
->
-> base-commit: b015dcd62b86d298829990f8261d5d154b8d7af5
-
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
