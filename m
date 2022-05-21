@@ -2,176 +2,184 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89E7052F4D3
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 May 2022 23:13:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 596FD52F76E
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 May 2022 03:58:36 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4B128410E3
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 May 2022 21:13:11 +0000 (UTC)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
-	by lists.linaro.org (Postfix) with ESMTPS id C27A2402FC
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 20 May 2022 21:13:05 +0000 (UTC)
-Received: by mail-ej1-f46.google.com with SMTP id n13so15867968ejv.1
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 20 May 2022 14:13:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=5tfmEi05Xxp6dAU46ufHV2sPoKhSLRcQSmdSLO82mmA=;
-        b=bA/NyeZJkA1hcMARgGoi/q6CxSZb4tZNUCU2SXUH09N5rv135UYjG5RiL08e98QaZF
-         NIDWP0MjQkSWnDPFpM2qKUjPHNuJ/ehR4zvL7ebrBnqYtQLo7zmft+h3vEqrGGwyMA74
-         WQoSa3DGbkfxVg8lmGeuisHCLuaTOSzltsN2TrXtllC/61Mdk4tju1sfAu/xQeYNWZex
-         tz6pRHj5vNRbN7Co6i7gV6+4+bZhcD2rBiCZsPemvHbDopbhwfCTKM98kKdnLEn1MgEy
-         1zCcGxm8mF/uw0lXTWu5s0kVMnYdtZJe+y0i9Q3glQNlBQgqkM0bpfONpICjraYnMrGd
-         KUNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=5tfmEi05Xxp6dAU46ufHV2sPoKhSLRcQSmdSLO82mmA=;
-        b=cVTEtxZtzWAzOSz4cf95u29aQCibryOpPvCLgcXyZtJ0u0GWp3n4KehnrTw/sQoMBR
-         267LX6PKtRgcg9h5ZBp57ePhfVLuqp7Vs1YeJo/cRJesavyyid87cwV/6PxKr0oeNLmA
-         73qX8r/jH3tb/Oxy9hq/dAfVWFwGe0FHbXQ2SUGJVecftKNFMq5fd1YV7gNasXMhBhdE
-         TH2vRKNZd3jEnt8Z5kXk7ZwfXReXi8OaKI363wihH+LQ40kCWwIWtvv+LdYkE8UbFvVX
-         JGTVBymyN2/JVg9bgbOPx/UdyTKpcpo46pFHZRqCrVk/M0K2reBMRPwV/uRFHtcGly5P
-         lhtQ==
-X-Gm-Message-State: AOAM533HuRvQLPe0xkB9UUKMzczcY8VzCdie14B+zQ6WQ9VlL8zPD5P0
-	5MouhPEYbBU0FfsvVXpzbVMCBPdjxiKFusAy1t8Gww==
-X-Google-Smtp-Source: ABdhPJyFNfBP1soSSW+7t14vdrjq1IQP8RcJSq0V3+aYaQxEfVyt7JYMA4eZujIkkMiueV9zFTA+HtvtZUjGyJAAOV4=
-X-Received: by 2002:a17:907:6e18:b0:6fe:324a:65c1 with SMTP id
- sd24-20020a1709076e1800b006fe324a65c1mr10678202ejc.368.1653081184534; Fri, 20
- May 2022 14:13:04 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 2BBB3410E6
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 21 May 2022 01:58:35 +0000 (UTC)
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by lists.linaro.org (Postfix) with ESMTPS id BB1133EE80
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 21 May 2022 01:58:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1653098309; x=1684634309;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=DrWDg9joVp2dABARq0RhykWRXTcxvZJXfd8ePCmsTW0=;
+  b=AbRDIbsP/ZFjQyR1HZiP5O6wSAsvD4fA1ATy58GfuARHa6gOEorHM47V
+   1F8CZOSegp8ymwdhhQEFl7QTdIKlc7ADwAWmvp2FW/TxNSw9Wlob8M409
+   Xb9TBAalPGO9gjkxVFTP734PuDwuzLEU9l2KggDWWmsoYOtvWsY7Kd1sy
+   VLT3qolI7DLq0EcgJPN72g7SfbRkqSCn2ynMerS9RPM7a2jB5pFQyguxc
+   z8OLeoUt8qWdmqxuK0crxC23xS7erRp5BZD5QjGSZ9uLx1dgArwQ4+9ok
+   yo/I8C056AtiqA+Uvo+da5z8rgjtNcAO+mDQzuPRxUxdYh9ZaEgNHT6Ah
+   A==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10353"; a="271614484"
+X-IronPort-AV: E=Sophos;i="5.91,240,1647327600";
+   d="scan'208";a="271614484"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 May 2022 18:58:28 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.91,240,1647327600";
+   d="scan'208";a="546969294"
+Received: from lkp-server02.sh.intel.com (HELO 242b25809ac7) ([10.239.97.151])
+  by orsmga006.jf.intel.com with ESMTP; 20 May 2022 18:58:23 -0700
+Received: from kbuild by 242b25809ac7 with local (Exim 4.95)
+	(envelope-from <lkp@intel.com>)
+	id 1nsENq-0005lm-Q8;
+	Sat, 21 May 2022 01:58:22 +0000
+Date: Sat, 21 May 2022 09:57:42 +0800
+From: kernel test robot <lkp@intel.com>
+To: Neal Liu <neal_liu@aspeedtech.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Rob Herring <robh+dt@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Joel Stanley <joel@jms.id.au>, Andrew Jeffery <andrew@aj.id.au>,
+	Felipe Balbi <balbi@kernel.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Geert Uytterhoeven <geert@linux-m68k.org>,
+	Li Yang <leoyang.li@nxp.com>
+Message-ID: <202205210945.hUK3CONa-lkp@intel.com>
+References: <20220520090617.2225080-2-neal_liu@aspeedtech.com>
 MIME-Version: 1.0
-References: <20220516171315.2400578-1-tjmercier@google.com>
- <175c5af3-9224-9c8e-0784-349dad9a2954@amd.com> <CABdmKX2GcgCs1xANYPBp8OEtk9qqH7AvCzpdppj9rHXvMqWSAw@mail.gmail.com>
- <0875fa95-3a25-a354-1433-201fca81ed3e@amd.com> <CABdmKX1+VYfdzyVYOS5MCsr4ptGTygmuUP9ikyh-vW6DgKk2kg@mail.gmail.com>
- <YoM9BAwybcjG7K/H@kroah.com> <d820893c-fa2e-3bac-88be-f39c06d89c01@amd.com>
- <CABdmKX2m1b1kdACKM19S+u9uR5RTy1UGMRgd+3QA_oAyCpeggg@mail.gmail.com>
- <7f895a99-adfa-bcbd-c130-a924c668b8af@amd.com> <CABdmKX0XLvRZvXyiN0P_B-fUACiF5xwQ07+u_gaR+hDhu_x_TA@mail.gmail.com>
- <953d4a2c-bf0c-9a92-9964-eae445a8f113@amd.com>
-In-Reply-To: <953d4a2c-bf0c-9a92-9964-eae445a8f113@amd.com>
-From: "T.J. Mercier" <tjmercier@google.com>
-Date: Fri, 20 May 2022 14:12:53 -0700
-Message-ID: <CABdmKX2dNYhgOYdrrJU6-jt6F=LjCidbKhR6t4F7yaa0SPr+-A@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-Message-ID-Hash: NY336S5GQA6D6REAHX544BMWGLFTXX4K
-X-Message-ID-Hash: NY336S5GQA6D6REAHX544BMWGLFTXX4K
-X-MailFrom: tjmercier@google.com
+Content-Disposition: inline
+In-Reply-To: <20220520090617.2225080-2-neal_liu@aspeedtech.com>
+Message-ID-Hash: TZFIIETWITEXAALP2SFKOOKROIBT5C5Z
+X-Message-ID-Hash: TZFIIETWITEXAALP2SFKOOKROIBT5C5Z
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Suren Baghdasaryan <surenb@google.com>, Kalesh Singh <kaleshsingh@google.com>, Minchan Kim <minchan@google.com>, Greg Kroah-Hartman <gregkh@google.com>, John Stultz <jstultz@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Hridya Valsaraju <hridya@google.com>, kernel-team@android.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+CC: llvm@lists.linux.dev, kbuild-all@lists.01.org, Neal Liu <neal_liu@aspeedtech.com>, linux-aspeed@lists.ozlabs.org, linux-usb@vger.kernel.org, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: Move sysfs work out of DMA-BUF export path
+Subject: [Linaro-mm-sig] Re: [PATCH v4 1/3] usb: gadget: add Aspeed ast2600 udc driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NY336S5GQA6D6REAHX544BMWGLFTXX4K/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TZFIIETWITEXAALP2SFKOOKROIBT5C5Z/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gRnJpLCBNYXkgMjAsIDIwMjIgYXQgMTI6MDMgQU0gQ2hyaXN0aWFuIEvDtm5pZw0KPGNocmlz
-dGlhbi5rb2VuaWdAYW1kLmNvbT4gd3JvdGU6DQo+DQo+IEFtIDIwLjA1LjIyIHVtIDAwOjU4IHNj
-aHJpZWIgVC5KLiBNZXJjaWVyOg0KPiA+IFtTTklQXQ0KPiA+Pj4gSXMgdGhlcmUgc29tZSBvdGhl
-cg0KPiA+Pj4gc29sdXRpb24gdG8gdGhlIHByb2JsZW0gb2YgZXhwb3J0cyBnZXR0aW5nIGJsb2Nr
-ZWQgdGhhdCB5b3Ugd291bGQNCj4gPj4+IHN1Z2dlc3QgaGVyZT8NCj4gPj4gV2VsbCBwcmV0dHkg
-bXVjaCB0aGUgc2FtZSBhcyBHcmVnIG91dGxpbmVkIGFzIHdlbGwuIEdvIGJhY2sgdG8geW91cg0K
-PiA+PiBkcmF3aW5nIGJvYXJkIGFuZCBjb21lIGJhY2sgd2l0aCBhIHNvbHV0aW9uIHdoaWNoIGRv
-ZXMgbm90IG5lZWQgc3VjaA0KPiA+PiB3b3JrYXJvdW5kcy4NCj4gPj4NCj4gPj4gQWx0ZXJuYXRp
-dmVseSB5b3UgY2FuIGdpdmUgbWUgYSBmdWxsIG92ZXJ2aWV3IG9mIHRoZSBkZXNpZ24gYW5kIGV4
-cGxhaW4NCj4gPj4gd2h5IGV4YWN0bHkgdGhhdCBpbnRlcmZhY2UgaGVyZSBpcyBuZWNlc3Nhcnkg
-aW4gZXhhY3RseSB0aGF0IGZvcm0uDQo+ID4+DQo+ID4gV2UgZW5kZWQgdXAgaGVyZSBiZWNhdXNl
-IHdlIGNvdWxkIG5vdCB1c2UgZGVidWdmcy4NCj4NCj4gW1NOSVBdDQo+DQo+ID4gQW5vdGhlciBp
-ZGVhIHdhcyBhZGRpbmcgcGVyLWJ1ZmZlciBzdGF0cyB0byBwcm9jZnMsIGJ1dCB0aGF0IHdhcyBu
-b3QNCj4gPiBhbiBvcHRpb24gc2luY2UgcGVyLWJ1ZmZlciBzdGF0cyBhcmUgbm90IHByb2Nlc3Mg
-c3BlY2lmaWMuDQo+ID4NCj4gPiBTbyBpdCBzZWVtZWQgbGlrZSBzeXNmcyB3YXMgYW4gYXBwcm9w
-cmlhdGUgc29sdXRpb24gYXQgdGhlIHRpbWUuIEl0DQo+ID4gY29tZXMgd2l0aCBhIHN0YWJsZSBp
-bnRlcmZhY2UgYXMgYSBib251cywgYnV0IHdpdGggdGhlIGxpbWl0YXRpb24gb2YgMQ0KPiA+IHZh
-bHVlIHBlciBmaWxlIHRoaXMgbGVhZHMgdG8gY3JlYXRpbmcgbG90cyBvZiBmaWxlcyBpbiBzeXNm
-cyBmb3IgYWxsDQo+ID4gZG1hIGJ1ZmZlcnMuIFRoaXMgbGVhZHMgdG8gaW5jcmVhc2VkIGtlcm5m
-cyBsb2NrIGNvbnRlbnRpb24sIGFuZA0KPiA+IHVuZm9ydHVuYXRlbHkgd2UgdHJ5IHRvIHRha2Ug
-dGhlIGxvY2sgb24gdGhlIGhvdCBwYXRoLg0KPg0KPiBUaGF0J3Mgd2hhdCBJIHRvdGFsbHkgYWdy
-ZWUgb24gYWJvdXQuIGRlYnVnZnMgaXMgZm9yIGRlYnVnZ2luZyBhbmQgbm90DQo+IGZvciBwcm9k
-dWN0aW9uIHVzZS4NCj4NCj4gU28gZWl0aGVyIHN5c2ZzIG9yIHByb2NmcyBvciBzb21ldGhpbmcg
-Y29tcGxldGVseSBkaWZmZXJlbnQgc2VlbXMgdG8gYmUNCj4gdGhlIHJpZ2h0IGRpcmVjdGlvbiBm
-b3IgdGhlIHNvbHV0aW9uIG9mIHRoZSBwcm9ibGVtLg0KPg0KPiA+IFdpdGggdGhlIGRlc2NyaXB0
-aW9uIGFuZCBsaW5rcyB0byB0aGUgdXNlcnNwYWNlIGNvZGUgd2hpY2ggYWN0dWFsbHkNCj4gPiB1
-c2VzIHRoZSBmZWF0dXJlIEkgZmVlbCBsaWtlIHRoYXQncyBhIGNvbXBsZXRlIHBpY3R1cmUgb2Yg
-d2hhdCdzDQo+ID4gY3VycmVudGx5IGhhcHBlbmluZyB3aXRoIHRoaXMgaW50ZXJmYWNlLiBJZiB5
-b3UgY291bGQgZXhwbGFpbiB3aGF0DQo+ID4gaW5mb3JtYXRpb24gaXMgbWlzc2luZyBJJ2xsIGRv
-IG15IGJlc3QgdG8gcHJvdmlkZSBpdC4NCj4NCj4gWWVhaCwgSSd2ZSByZWFsaXplZCB0aGF0IEkg
-ZGlkbid0IG1hZGUgaXQgY2xlYXIgd2hhdCBteSBjb25jZXJucyBhcmUNCj4gaGVyZS4gU28gbGV0
-IG1lIHRyeSBvbmNlIG1vcmUgZnJvbSB0aGUgYmVnaW5uaW5nOg0KPg0KPiBETUEtYnVmIGlzIGEg
-ZnJhbWV3b3JrIGZvciBzaGFyaW5nIGRldmljZSBidWZmZXJzIGFuZCB0aGVpciBoYW5kbGVzDQo+
-IGJldHdlZW4gZGlmZmVyZW50IHVzZXJzcGFjZSBwcm9jZXNzZXMgYW5kIGtlcm5lbCBkZXZpY2Uu
-IEl0J3MgYmFzZWQNCj4gYXJvdW5kIHRoZSBjb25jZXB0IG9mIHJlcHJlc2VudGluZyB0aG9zZSBi
-dWZmZXJzIGFzIGZpbGVzIHdoaWNoIGNhbiB0aGVuDQo+IGJlIG1tYXAoKSwgcmVmZXJlbmNlZCB3
-aXRoIGEgZmlsZSBkZXNjcmlwdG9yLCBldGMuLi4uDQo+DQo+IFRob3NlIGFiaWxpdGllcyBjb21l
-IHdpdGggYSBjZXJ0YWluIG92ZXJoZWFkLCB1c2luZyBpbm9kZSBudW1iZXJzLA0KPiByZWZlcmVu
-Y2UgY291bnRlcnMsIGNyZWF0aW5nIHZpcnR1YWwgZmlsZXMgZm9yIHRyYWNraW5nIChib3RoIGRl
-YnVnZnMsDQo+IHN5c2ZzLCBwcm9jZnMpIGV0Yy4uLiBTbyB3aGF0IGJvdGggZHJpdmVycyBhbmQg
-dXNlcnNwYWNlIGltcGxlbWVudGluZw0KPiBETUEtYnVmIGlzIGRvaW5nIGlzIHRoYXQgdGhleSBz
-aGFyZSBidWZmZXJzIHVzaW5nIHRoaXMgZnJhbWV3b3JrIG9ubHkNCj4gd2hlbiB0aGV5IGhhdmUg
-dG8uDQo+DQo+IEluIG90aGVyIHdvcmRzIGZvciB1cHN0cmVhbSBncmFwaGljcyBkcml2ZXJzIDk5
-LjklIG9mIHRoZSBidWZmZXJzIGFyZQ0KPiAqbm90KiBzaGFyZWQgdXNpbmcgRE1BLWJ1Zi4gQW5k
-IHRoaXMgaXMgcGVyZmVjdGx5IGludGVudGlvbmFsIGJlY2F1c2Ugb2YNCj4gdGhlIGFkZGl0aW9u
-YWwgb3ZlcmhlYWQuIE9ubHkgdGhlIDMgb3IgNCBidWZmZXJzIHdoaWNoIGFyZSBzaGFyZWQgcGVy
-DQo+IHByb2Nlc3MgYmV0d2VlbiB0aGUgY2xpZW50IGFuZCBzZXJ2ZXIgaW4gYSBkaXNwbGF5IGVu
-dmlyb25tZW50IGFyZQ0KPiBhY3R1YWxseSBleHBvcnRlZCBhbmQgaW1wb3J0ZWQgYXMgRE1BLWJ1
-Zi4NCj4NCj4gV2hhdCB0aGUgcmVjZW50IHBhdGNoZXMgc3VnZ2VzdCBpcyB0aGF0IHRoaXMgaXMg
-bm90IHRoZSBjYXNlIG9uIEFuZHJvaWQuDQo+IFNvIGZvciBleGFtcGxlIG92ZXJydW5uaW5nIGEg
-MzJiaXQgaW5vZGUgbnVtYmVyIG1lYW5zIHRoYXQgeW91IG1hbmFnZSB0bw0KPiBjcmVhdGVkIGFu
-ZCBkZXN0cm95IG92ZXIgNCBiaWxsaW9uIERNQS1idWZzLiBTYW1lIGZvciB0aGlzIHN5c2ZzIGJh
-c2VkDQo+IGFjY291bnRpbmcsIHRoaXMgb25seSBtYWtlcyBzZW5zZSB3aGVuIHlvdSByZWFsbHkg
-ZXhwb3J0ICpldmVyeXRoaW5nKiBhcw0KPiBETUEtYnVmLg0KPg0KPiBTbyBpZiB0aGF0IGlzIGNv
-cnJlY3QsIHRoZW4gdGhhdCB3b3VsZCBiZSBhIHByZXR0eSBjbGVhciBkZXNpZ24gaXNzdWUgaW4N
-Cj4gQW5kcm9pZC4gTm93LCBpZiB5b3Ugd2FudCB0byBrZWVwIHRoaXMgZGVzaWduIHRoZW4gdGhh
-dCBpcyBwZXJmZWN0bHkNCj4gZmluZSB3aXRoIHRoZSBrZXJuZWwsIGJ1dCBpdCBhbHNvIG1lYW5z
-IHRoYXQgeW91IG5lZWQgdG8gZGVhbCB3aXRoIGFueQ0KPiBhcmlzaW5nIHByb2JsZW1zIGJ5IHlv
-dXJzZWxmLg0KPg0KPiBQdXNoaW5nIHBhdGNoZXMgdXBzdHJlYW0gaW5kaWNhdGVzIHRoYXQgeW91
-IHdhbnQgdG8gc2hhcmUgeW91ciB3b3JrIHdpdGgNCj4gb3RoZXJzLiBBbmQgaW4gdGhpcyBjYXNl
-IGl0IHN1Z2dlc3RzIHRoYXQgeW91IHdhbnQgdG8gZW5jb3VyYWdlIG90aGVycw0KPiB0byBmb2xs
-b3cgdGhlIEFuZHJvaWQgZGVzaWduIGFuZCB0aGF0IGlzIHNvbWV0aGluZyBJIHdvdWxkIHByZXR0
-eQ0KPiBjbGVhcmx5IHJlamVjdC4NCj4NCk9rIHRoYW5rIHlvdSwgdGhpcyBpcyBjbGVhciBhbmQg
-SSB1bmRlcnN0YW5kIHlvdXIgcG9zaXRpb24uIFllcw0KQW5kcm9pZCBkb2VzIHRoaW5ncyBhIGxp
-dHRsZSBkaWZmZXJlbnRseS4gTXkgdGVhbSBpcyBhY3R1YWxseSBob3BpbmcNCnRvIGNyZWF0ZSBh
-IHByZXNlbnRhdGlvbiBvbiB0aGlzIHRvcGljIGV4cGxhaW5pbmcgd2h5IHRoaW5ncyBhcmUgdGhl
-DQp3YXkgdGhleSBhcmUgYmVjYXVzZSB0aGVzZSBkaWZmZXJlbmNlcyBrZWVwIGNvbWluZyB1cCBp
-biBkaXNjdXNzaW9ucy4NCg0KVGhlIGlub2RlIG51bWJlciByb2xsb3ZlciBoYXBwZW5lZCBhZnRl
-ciBydW5uaW5nIGZvciB0d28gd2Vla3MsIGJ1dA0KdGhhdCdzIHN0aWxsIGFyb3VuZCAzMDBNIGEg
-ZGF5IHdoaWNoIGlzIGV4dHJhb3JkaW5hcnksIHNvIEkgdGhpbmsgdGhleQ0KbXVzdCBoYXZlIGJl
-ZW4gc3RyZXNzIHRlc3RpbmcuIEJ1dCB5ZXMgdGhlIEFuZHJvaWQgZ3JhcGhpY3Mgc3RhY2sgZG9l
-cw0KbWFrZSBtdWNoIG1vcmUgdXNlIG9mIERNQS1idWZzIHRoYW4gb3RoZXIgdXNlcnMuDQoNCj4g
-Pj4gWWVhaCBhbmQgdG8gYmUgaG9uZXN0IEkgaGF2ZSB0aGUgc3Ryb25nIGZlZWxpbmcgbm93IHRo
-YXQgdGhpcyB3YXMNCj4gPj4gYWJzb2x1dGVseSBub3Qgd2VsbCB0aG91Z2h0IHRocm91Z2guDQo+
-ID4gSSdtIG9wZW4gdG8gd29ya2luZyBvbiBhIHJlcGxhY2VtZW50IGZvciB0aGlzIGlmIHdlIGNh
-bid0IGZpbmQgYW4NCj4gPiBhY2NlcHRhYmxlIHNvbHV0aW9uIGhlcmUsIGJ1dCBJIHdvdWxkIGFw
-cHJlY2lhdGUgc29tZSBkaXJlY3Rpb24gb24NCj4gPiB3aGF0IHdvdWxkIGJlIGFjY2VwdGFibGUu
-IEZvciBleGFtcGxlIEdyZWcncyBpZGVhIHNvdW5kcyB3b3JrYWJsZSwgYnV0DQo+ID4gdGhlIHF1
-ZXN0aW9uIGlzIGlmIGl0IG1lcmdlYWJsZT8NCj4NCj4gV2VsbCBvbmUgcG9zc2liaWxpdHkgd291
-bGQgYmUgdG8gdXNlIGNncm91cHMuIFRoYXQgZnJhbWV3b3JrIG5lZWRzIHRvIGRvDQo+IGFjY291
-bnRpbmcgYXMgd2VsbCwganVzdCB3aXRoIGFuIGFkZGl0aW9uYWwgbGltaXRhdGlvbiB0byBpdC4N
-Cj4NCj4gQW5kIHRoZXJlIGFyZSBhbHJlYWR5IHNvbWUgcHJvcG9zZWQgY2dyb3VwIHBhdGNoZXMg
-Zm9yIGRldmljZSBkcml2ZXINCj4gbWVtb3J5LiBXaGlsZSByZXZpZXdpbmcgdGhvc2UgYm90aCBE
-YW5pZWwgYW5kIEkgYWxyZWFkeSBtYWRlIGl0IHByZXR0eQ0KPiBjbGVhciB0aGF0IGl0IG11c3Qg
-YmUgc2VwYXJhdGVkIGZyb20gRE1BLWJ1ZiwgZXhhY3RseSBiZWNhdXNlIG9mIHRoZQ0KPiByZWFz
-b24gdGhhdCB3ZSBwcm9iYWJseSBkb24ndCB3YW50IGV2ZXJ5IGJ1ZmZlciBleHBvcnRlZC4NCj4N
-CkNncm91cHMgZGVmaW5pdGVseSB3b3VsZCBoZWxwIG91dCB3aXRoIHBlci1hcHBsaWNhdGlvbiBh
-Y2NvdW50aW5nLg0KTXVjaCBuaWNlciB0aGFuIHBhcnNpbmcgdGhyb3VnaCBwcm9jZnMuIEZvciBv
-dXIgdXNlIGNhc2UgdGhpcyByZXF1aXJlcw0KYXNzb2NpYXRpbmcgdGhlIGV4cG9ydGVyIG5hbWUg
-d2l0aCB0aGUgY2dyb3VwIHJlc291cmNlLCB3aGljaCBpcyBwYXJ0DQpvZiB0aGUgZGF0YSB0aGF0
-IGNvbWVzIGZyb20gc3lzZnMgbm93LiBJIGhhdmUgc29tZSBwYXRjaGVzIHdoaWNoIGRvDQp0aGlz
-LCBidXQgdGhpcyBuYW1pbmcgY29tcG9uZW50IGlzIGEgcG9pbnQgb2YgY29udGVudGlvbiBhdCB0
-aGUNCm1vbWVudC4gTWF5YmUgaXQgd291bGQgYmUgYmV0dGVyIHRvIGZvY3VzIGVmZm9ydHMgb24g
-dGhlIHByb2JsZW0gb2YNCmhvdyB0byBjYXRlZ29yaXplIGFuZCBhZ2dyZWdhdGUgKG9yIG5vdCBh
-Z2dyZWdhdGUpIGdyYXBoaWNzIHJlc291cmNlcw0KZm9yIGFjY291bnRpbmcgd2l0aCBjZ3JvdXBz
-IGluIGEgd2F5IHRoYXQgc3VpdHMgZXZlcnlvbmUncyBuZWVkcy4NCg0KVGhhbmtzLA0KVC5KLg0K
-DQoNCj4gQnV0IHRvIHdvcmsgb24gYSBmdWxsIGJsb3duIHNvbHV0aW9uIEkgbmVlZCBhIGJldHRl
-ciB1bmRlcnN0YW5kaW5nIG9mDQo+IGhvdyB5b3VyIHVzZXJzcGFjZSBjb21wb25lbnRzIGRvLg0K
-Pg0KPiBSZWdhcmRzLA0KPiBDaHJpc3RpYW4uDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8t
-bW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBs
-aW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+Hi Neal,
+
+I love your patch! Perhaps something to improve:
+
+[auto build test WARNING on usb/usb-testing]
+[also build test WARNING on robh/for-next v5.18-rc7 next-20220520]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Neal-Liu/add-Aspeed-udc-driver-for-ast2600/20220520-170904
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb.git usb-testing
+config: hexagon-allyesconfig (https://download.01.org/0day-ci/archive/20220521/202205210945.hUK3CONa-lkp@intel.com/config)
+compiler: clang version 15.0.0 (https://github.com/llvm/llvm-project e00cbbec06c08dc616a0d52a20f678b8fbd4e304)
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/intel-lab-lkp/linux/commit/19f3e863ea1b55f570db57febb96c6e8cb39c145
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Neal-Liu/add-Aspeed-udc-driver-for-ast2600/20220520-170904
+        git checkout 19f3e863ea1b55f570db57febb96c6e8cb39c145
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=hexagon SHELL=/bin/bash drivers/clk/ drivers/usb/gadget/udc/
+
+If you fix the issue, kindly add following tag where applicable
+Reported-by: kernel test robot <lkp@intel.com>
+
+All warnings (new ones prefixed by >>):
+
+>> drivers/usb/gadget/udc/aspeed_udc.c:310:11: warning: comparison of address of 'ep->queue' equal to a null pointer is always false [-Wtautological-pointer-compare]
+           if (&ep->queue == NULL)
+                ~~~~^~~~~    ~~~~
+>> drivers/usb/gadget/udc/aspeed_udc.c:967:7: warning: variable 'len' is uninitialized when used here [-Wuninitialized]
+                   if (len < ep->ep.maxpacket) {
+                       ^~~
+   drivers/usb/gadget/udc/aspeed_udc.c:908:9: note: initialize the variable 'len' to silence this warning
+           u16 len;
+                  ^
+                   = 0
+>> drivers/usb/gadget/udc/aspeed_udc.c:1011:7: warning: variable 'epnum' is used uninitialized whenever switch case is taken [-Wsometimes-uninitialized]
+           case USB_RECIP_INTERFACE:
+                ^~~~~~~~~~~~~~~~~~~
+   include/uapi/linux/usb/ch9.h:67:30: note: expanded from macro 'USB_RECIP_INTERFACE'
+   #define USB_RECIP_INTERFACE             0x01
+                                           ^~~~
+   drivers/usb/gadget/udc/aspeed_udc.c:1021:16: note: uninitialized use occurs here
+           ep = &udc->ep[epnum];
+                         ^~~~~
+   drivers/usb/gadget/udc/aspeed_udc.c:1007:7: warning: variable 'epnum' is used uninitialized whenever switch case is taken [-Wsometimes-uninitialized]
+           case USB_RECIP_DEVICE:
+                ^~~~~~~~~~~~~~~~
+   include/uapi/linux/usb/ch9.h:66:27: note: expanded from macro 'USB_RECIP_DEVICE'
+   #define USB_RECIP_DEVICE                0x00
+                                           ^~~~
+   drivers/usb/gadget/udc/aspeed_udc.c:1021:16: note: uninitialized use occurs here
+           ep = &udc->ep[epnum];
+                         ^~~~~
+   drivers/usb/gadget/udc/aspeed_udc.c:1002:11: note: initialize the variable 'epnum' to silence this warning
+           u16 epnum;
+                    ^
+                     = 0
+>> drivers/usb/gadget/udc/aspeed_udc.c:1096:6: warning: variable 'rc' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+           if (udc->driver) {
+               ^~~~~~~~~~~
+   drivers/usb/gadget/udc/aspeed_udc.c:1108:6: note: uninitialized use occurs here
+           if (rc >= 0)
+               ^~
+   drivers/usb/gadget/udc/aspeed_udc.c:1096:2: note: remove the 'if' if its condition is always true
+           if (udc->driver) {
+           ^~~~~~~~~~~~~~~~~
+   drivers/usb/gadget/udc/aspeed_udc.c:1039:8: note: initialize the variable 'rc' to silence this warning
+           int rc;
+                 ^
+                  = 0
+   5 warnings generated.
+
+
+vim +310 drivers/usb/gadget/udc/aspeed_udc.c
+
+   304	
+   305	static void ast_udc_nuke(struct ast_udc_ep *ep, int status)
+   306	{
+   307		int count = 0;
+   308	
+   309		/* Sanity check */
+ > 310		if (&ep->queue == NULL)
+   311			return;
+   312	
+   313		while (!list_empty(&ep->queue)) {
+   314			struct ast_udc_request *req;
+   315	
+   316			req = list_entry(ep->queue.next, struct ast_udc_request,
+   317					 queue);
+   318			ast_udc_done(ep, req, status);
+   319			count++;
+   320		}
+   321	
+   322		if (count)
+   323			EP_DBG(ep, "Nuked %d request(s)\n", count);
+   324	}
+   325	
+
+-- 
+0-DAY CI Kernel Test Service
+https://01.org/lkp
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
