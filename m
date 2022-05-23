@@ -1,145 +1,106 @@
 Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org>
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
-Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF238533701
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 May 2022 09:01:28 +0200 (CEST)
+Received: from lists.linaro.org (unknown [3.208.193.21])
+	by mail.lfdr.de (Postfix) with ESMTPS id B7968533C37
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 May 2022 14:04:00 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2CDEC3ED4D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 May 2022 07:01:28 +0000 (UTC)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
-	by lists.linaro.org (Postfix) with ESMTPS id 2B0F43EEC4
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 20 May 2022 10:02:51 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by sin.source.kernel.org (Postfix) with ESMTPS id 58C59CE280A;
-	Fri, 20 May 2022 10:02:48 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB789C385A9;
-	Fri, 20 May 2022 10:02:44 +0000 (UTC)
-Message-ID: <b7b5ac18-b4d2-a801-c2ff-6b48c8b863b9@xs4all.nl>
-Date: Fri, 20 May 2022 12:02:42 +0200
+	by lists.linaro.org (Postfix) with ESMTP id E65DE3ED42
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 May 2022 12:03:39 +0000 (UTC)
+Received: from twspam01.aspeedtech.com (twspam01.aspeedtech.com [211.20.114.71])
+	by lists.linaro.org (Postfix) with ESMTPS id A865D3F47B
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 May 2022 03:04:05 +0000 (UTC)
+Received: from mail.aspeedtech.com ([192.168.0.24])
+	by twspam01.aspeedtech.com with ESMTP id 24N2lgvN078066;
+	Mon, 23 May 2022 10:47:42 +0800 (GMT-8)
+	(envelope-from neal_liu@aspeedtech.com)
+Received: from localhost.localdomain (192.168.10.10) by TWMBX02.aspeed.com
+ (192.168.0.24) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 23 May
+ 2022 11:01:39 +0800
+From: Neal Liu <neal_liu@aspeedtech.com>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Rob Herring
+	<robh+dt@kernel.org>,
+        Krzysztof Kozlowski
+	<krzysztof.kozlowski+dt@linaro.org>,
+        Joel Stanley <joel@jms.id.au>, "Andrew
+ Jeffery" <andrew@aj.id.au>,
+        Felipe Balbi <balbi@kernel.org>,
+        Sumit Semwal
+	<sumit.semwal@linaro.org>,
+        =?UTF-8?q?Christian=20K=C3=B6nig?=
+	<christian.koenig@amd.com>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
+        "Li
+ Yang" <leoyang.li@nxp.com>
+Date: Mon, 23 May 2022 11:01:31 +0800
+Message-ID: <20220523030134.2977116-1-neal_liu@aspeedtech.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.6.1
-Content-Language: en-US
-To: yuji2.ishikawa@toshiba.co.jp, robh+dt@kernel.org,
- nobuhiro1.iwamatsu@toshiba.co.jp, sumit.semwal@linaro.org,
- christian.koenig@amd.com
-References: <20220428131128.5053-1-yuji2.ishikawa@toshiba.co.jp>
- <b5e35985-c159-6b11-8752-d6dd29fc6a64@xs4all.nl>
- <TYAPR01MB62015F4029956F009EC03FBE92D39@TYAPR01MB6201.jpnprd01.prod.outlook.com>
-From: Hans Verkuil <hverkuil@xs4all.nl>
-In-Reply-To: <TYAPR01MB62015F4029956F009EC03FBE92D39@TYAPR01MB6201.jpnprd01.prod.outlook.com>
-X-MailFrom: SRS0=rTmH=V4=xs4all.nl=hverkuil@kernel.org
+X-Originating-IP: [192.168.10.10]
+X-ClientProxiedBy: TWMBX02.aspeed.com (192.168.0.24) To TWMBX02.aspeed.com
+ (192.168.0.24)
+X-DNSRBL: 
+X-MAIL: twspam01.aspeedtech.com 24N2lgvN078066
+X-MailFrom: neal_liu@aspeedtech.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: OBCO5VSGLBVT4CS65HRICA6XZNOCCYFE
-X-Message-ID-Hash: OBCO5VSGLBVT4CS65HRICA6XZNOCCYFE
-X-Mailman-Approved-At: Wed, 25 May 2022 07:01:11 +0000
-CC: linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: QNTQ5YAZ3BFWRCRO5LX2CHUBGVU7JQKG
+X-Message-ID-Hash: QNTQ5YAZ3BFWRCRO5LX2CHUBGVU7JQKG
+X-Mailman-Approved-At: Wed, 25 May 2022 12:03:30 +0000
+CC: Neal Liu <neal_liu@aspeedtech.com>, linux-aspeed@lists.ozlabs.org, linux-usb@vger.kernel.org, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 0/4] Add Toshiba Visconti DNN image processing accelerator driver
+Subject: [Linaro-mm-sig] [PATCH v5 0/3] add Aspeed udc driver for ast2600
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OBCO5VSGLBVT4CS65HRICA6XZNOCCYFE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QNTQ5YAZ3BFWRCRO5LX2CHUBGVU7JQKG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGkgWXVqaSwNCg0KT24gNS8yMC8yMiAxMTo0OCwgeXVqaTIuaXNoaWthd2FAdG9zaGliYS5jby5q
-cCB3cm90ZToNCj4gSGkgSGFucywNCj4gDQo+IFRoYW5rIHlvdSBmb3IgeW91ciBjb21tZW50Lg0K
-PiBJIGFncmVlIHRoYXQgdGhpcyBzdWJtaXNzaW9uIGxhY2tzIGRvY3VtZW50cyBzaGFyaW5nIGJh
-c2ljIGlkZWEgb2YgdGhlIGFjY2VsZXJhdG9yczsgd2hhdCBkbyB0aGV5IGFjY2VwdCBhbmQgd2hh
-dCBkbyB0aGV5IHlpZWxkLg0KPiBXaGVyZSBjYW4gSSBwdXQgYSBuZXcgZG9jdW1lbnQ/IENhbiBJ
-IHB1dCBpdCBhcyBhIGNvbW1lbnQgaW4gYSBzb3VyY2U/IENhbiBJIGFkZCBhIGZpbGUgdW5kZXIg
-RG9jdW1lbnRhdGlvbi9taXNjLWRldmljZXMgZGlyZWN0b3J5Pw0KDQpTdGFydCB3aXRoIGV4cGxh
-aW5pbmcgaXQgYnkgcmVwbHlpbmcgdG8gdGhpcyBtYWlsLiBXaXRob3V0IGtub3dpbmcgYW55dGhp
-bmcNCmFib3V0IHRoZSBoYXJkd2FyZSwgaXQgaXMgZGlmZmljdWx0IHRvIHNheSB3aGF0IHRoZSBi
-ZXN0IHBsYWNlIGlzLiBVc3VhbGx5DQppdCBpcyBlaXRoZXIgdGhlIHB1YmxpYyBBUEkgaGVhZGVy
-LCBvciBzb21ld2hlcmUgaW4gRG9jdW1lbnRhdGlvbi4NCg0KVGhlIGZpcnN0IHN0ZXAgaXMgdG8g
-aGF2ZSBhIGJldHRlciB1bmRlcnN0YW5kaW5nIG9mIHRoZSBWaXNjb250aSBpbWFnZSBoYXJkd2Fy
-ZQ0KYW5kIHRvIHNlZSB3aGF0IHRoZSBiZXN0IHN1YnN5c3RlbSB3b3VsZCBiZSB0byBzdXBwb3J0
-IHRoYXQgaGFyZHdhcmUuDQoNClJlZ2FyZHMsDQoNCglIYW5zDQoNCj4gDQo+IFRoYW5rcywNCj4g
-WXVqaSBJc2hpa2F3YQ0KPiANCj4+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+PiBGcm9t
-OiBIYW5zIFZlcmt1aWwgPGh2ZXJrdWlsQHhzNGFsbC5ubD4NCj4+IFNlbnQ6IFRodXJzZGF5LCBN
-YXkgMTIsIDIwMjIgODoxNSBQTQ0KPj4gVG86IGlzaGlrYXdhIHl1amko55+z5bedIOaCoOWPuCDi
-l4vvvLLvvKTvvKPilqHvvKHvvKnvvLTvvKPil4vvvKXvvKHplospDQo+PiA8eXVqaTIuaXNoaWth
-d2FAdG9zaGliYS5jby5qcD47IFJvYiBIZXJyaW5nIDxyb2JoK2R0QGtlcm5lbC5vcmc+Ow0KPj4g
-aXdhbWF0c3Ugbm9idWhpcm8o5bKp5p2+IOS/oea0iyDilqHvvLPvvLfvvKPil6/vvKHvvKPvvLQp
-DQo+PiA8bm9idWhpcm8xLml3YW1hdHN1QHRvc2hpYmEuY28uanA+OyBTdW1pdCBTZW13YWwNCj4+
-IDxzdW1pdC5zZW13YWxAbGluYXJvLm9yZz47IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5r
-b2VuaWdAYW1kLmNvbT4NCj4+IENjOiBsaW51eC1hcm0ta2VybmVsQGxpc3RzLmluZnJhZGVhZC5v
-cmc7IGxpbnV4LWtlcm5lbEB2Z2VyLmtlcm5lbC5vcmc7DQo+PiBsaW51eC1tZWRpYUB2Z2VyLmtl
-cm5lbC5vcmc7IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmc7DQo+PiBsaW5hcm8tbW0t
-c2lnQGxpc3RzLmxpbmFyby5vcmcNCj4+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggMC80XSBBZGQgVG9z
-aGliYSBWaXNjb250aSBETk4gaW1hZ2UgcHJvY2Vzc2luZw0KPj4gYWNjZWxlcmF0b3IgZHJpdmVy
-DQo+Pg0KPj4gSGkgWXVqaSwNCj4+DQo+PiBPbiA0LzI4LzIyIDE1OjExLCBZdWppIElzaGlrYXdh
-IHdyb3RlOg0KPj4+IFRoaXMgc2VyaWVzIGlzIHRoZSBETk4gaW1hZ2UgcHJvY2Vzc2luZyBhY2Nl
-bGVyYXRvciBkcml2ZXIgZm9yIFRvc2hpYmEncyBBUk0NCj4+IFNvQywgVmlzY29udGlbMF0uDQo+
-Pj4gVGhpcyBwcm92aWRlcyBEVCBiaW5kaW5nIGRvY3VtZW50YXRpb24sIGRldmljZSBkcml2ZXIs
-IE1BSU5UQUlORVIgZmlsZXMuDQo+Pj4NCj4+PiBUaGUgc2Vjb25kIHBhdGNoICJzb2M6IHZpc2Nv
-bnRpOiBBZGQgVG9zaGliYSBWaXNjb250aSBpbWFnZSBwcm9jZXNzaW5nDQo+PiBhY2NlbGVyYXRv
-ciBjb21tb24gc291cmNlIg0KPj4+IGFuZCB0aGUgZm91cnRoIHBhdGNoICJNQUlOVEFJTkVSUzog
-Li4uIiBhcmUgdGhlIHNhbWUgYXMgdGhlIG9uZXMgaW4gdGhlDQo+PiBwcmVjZWRpbmcgcG9zdCBm
-b3IgYWZmaW5lIGRyaXZlci4NCj4+DQo+PiBUaGVyZSBhcHBlYXJzIHRvIGJlIG5vIGRvY3VtZW50
-YXRpb24gd2hhdHNvZXZlciwgdW5sZXNzIEkgYW0gbWlzc2luZw0KPj4gc29tZXRoaW5nLg0KPj4N
-Cj4+IEhvdyBpcyB0aGUgdUFQSSBzdXBwb3NlZCB0byBiZSB1c2VkPyBXaGF0IGRvZXMgaXQgZG8/
-IFdoYXQgZm9ybWF0cyBkb2VzIGl0DQo+PiBhY2NlcHQgb3IgcHJvZHVjZT8NCj4+DQo+PiBJZiB0
-aGlzIHByb2Nlc3NlcyBpbWFnZXMsIHRoZW4gKGFzIExhdXJlbnQgbWVudGlvbmVkKSB0aGlzIGlz
-IG1vcmUgc3VpdGFibGUgYXMgYQ0KPj4gVjRMMiBtZW0ybWVtIGRyaXZlci4NCj4+DQo+PiBTZWUN
-Cj4+IGh0dHBzOi8vbGludXh0di5vcmcvZG93bmxvYWRzL3Y0bC1kdmItYXBpcy1uZXcvdXNlcnNw
-YWNlLWFwaS92NGwvZGV2LW1lDQo+PiBtMm1lbS5odG1sDQo+PiBhbmQgdGhlIG1hbnkgZHJpdmVy
-cyBpbiBkcml2ZXJzL21lZGlhIHRoYXQgdXNlIGl0IChnaXQgZ3JlcCB2NGwyLW1lbTJtZW0uaCku
-DQo+Pg0KPj4gQnV0IHdpdGhvdXQgYW55IGV4cGxhbmF0aW9uIHdoYXRzb2V2ZXIgSSBoYXZlIG5v
-IGlkZWEgd2hhdCBkb2VzIG9yIGRvZXMgbm90DQo+PiBtYWtlIHNlbnNlLg0KPj4NCj4+IFJlZ2Fy
-ZHMsDQo+Pg0KPj4gCUhhbnMNCj4+DQo+Pj4NCj4+PiBCZXN0IHJlZ2FyZHMsDQo+Pj4gWXVqaQ0K
-Pj4+DQo+Pj4gWzBdOg0KPj4+DQo+PiBodHRwczovL3Rvc2hpYmEuc2VtaWNvbi1zdG9yYWdlLmNv
-bS9hcC1lbi9zZW1pY29uZHVjdG9yL3Byb2R1Y3QvaW1hZ2UtDQo+Pj4gcmVjb2duaXRpb24tcHJv
-Y2Vzc29ycy12aXNjb250aS5odG1sDQo+Pj4NCj4+PiBZdWppIElzaGlrYXdhICg0KToNCj4+PiAg
-IGR0LWJpbmRpbmdzOiBzb2M6IHZpc2NvbnRpOiBBZGQgVG9zaGliYSBWaXNjb250aSBETk4gaW1h
-Z2UgcHJvY2Vzc2luZw0KPj4+ICAgICBhY2NlbGVyYXRvciBiaW5kaW5ncw0KPj4+ICAgc29jOiB2
-aXNjb250aTogQWRkIFRvc2hpYmEgVmlzY29udGkgaW1hZ2UgcHJvY2Vzc2luZyBhY2NlbGVyYXRv
-cg0KPj4+ICAgICBjb21tb24gc291cmNlDQo+Pj4gICBzb2M6IHZpc2NvbnRpOiBBZGQgVG9zaGli
-YSBWaXNjb250aSBETk4gaW1hZ2UgcHJvY2Vzc2luZyBhY2NlbGVyYXRvcg0KPj4+ICAgTUFJTlRB
-SU5FUlM6IEFkZCBlbnRyaWVzIGZvciBUb3NoaWJhIFZpc2NvbnRpIEROTiBpbWFnZSBwcm9jZXNz
-aW5nDQo+Pj4gICAgIGFjY2VsZXJhdG9yDQo+Pj4NCj4+PiAgLi4uL3NvYy92aXNjb250aS90b3No
-aWJhLHZpc2NvbnRpLWRubi55YW1sICAgIHwgIDU0ICsrDQo+Pj4gIE1BSU5UQUlORVJTICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMiArDQo+Pj4gIGRyaXZlcnMvc29jL0tj
-b25maWcgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMSArDQo+Pj4gIGRyaXZlcnMvc29j
-L01ha2VmaWxlICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMSArDQo+Pj4gIGRyaXZlcnMv
-c29jL3Zpc2NvbnRpL0tjb25maWcgICAgICAgICAgICAgICAgICB8ICAgNyArDQo+Pj4gIGRyaXZl
-cnMvc29jL3Zpc2NvbnRpL01ha2VmaWxlICAgICAgICAgICAgICAgICB8ICAgOCArDQo+Pj4gIGRy
-aXZlcnMvc29jL3Zpc2NvbnRpL2Rubi9NYWtlZmlsZSAgICAgICAgICAgICB8ICAgNiArDQo+Pj4g
-IGRyaXZlcnMvc29jL3Zpc2NvbnRpL2Rubi9kbm4uYyAgICAgICAgICAgICAgICB8IDUzMw0KPj4g
-KysrKysrKysrKysrKysrKysrDQo+Pj4gIGRyaXZlcnMvc29jL3Zpc2NvbnRpL2Rubi9od2RfZG5u
-LmMgICAgICAgICAgICB8IDE4MyArKysrKysNCj4+PiAgZHJpdmVycy9zb2MvdmlzY29udGkvZG5u
-L2h3ZF9kbm4uaCAgICAgICAgICAgIHwgIDY4ICsrKw0KPj4+ICBkcml2ZXJzL3NvYy92aXNjb250
-aS9kbm4vaHdkX2Rubl9yZWcuaCAgICAgICAgfCAyMjggKysrKysrKysNCj4+PiAgZHJpdmVycy9z
-b2MvdmlzY29udGkvaXBhX2NvbW1vbi5jICAgICAgICAgICAgIHwgIDU1ICsrDQo+Pj4gIGRyaXZl
-cnMvc29jL3Zpc2NvbnRpL2lwYV9jb21tb24uaCAgICAgICAgICAgICB8ICAxOCArDQo+Pj4gIGRy
-aXZlcnMvc29jL3Zpc2NvbnRpL3VhcGkvZG5uLmggICAgICAgICAgICAgICB8ICA3NyArKysNCj4+
-PiAgZHJpdmVycy9zb2MvdmlzY29udGkvdWFwaS9pcGEuaCAgICAgICAgICAgICAgIHwgIDg4ICsr
-Kw0KPj4+ICAxNSBmaWxlcyBjaGFuZ2VkLCAxMzI5IGluc2VydGlvbnMoKykNCj4+PiAgY3JlYXRl
-IG1vZGUgMTAwNjQ0DQo+Pj4gRG9jdW1lbnRhdGlvbi9kZXZpY2V0cmVlL2JpbmRpbmdzL3NvYy92
-aXNjb250aS90b3NoaWJhLHZpc2NvbnRpLWRubi55YQ0KPj4+IG1sICBjcmVhdGUgbW9kZSAxMDA2
-NDQgZHJpdmVycy9zb2MvdmlzY29udGkvS2NvbmZpZyAgY3JlYXRlIG1vZGUNCj4+PiAxMDA2NDQg
-ZHJpdmVycy9zb2MvdmlzY29udGkvTWFrZWZpbGUgIGNyZWF0ZSBtb2RlIDEwMDY0NA0KPj4+IGRy
-aXZlcnMvc29jL3Zpc2NvbnRpL2Rubi9NYWtlZmlsZSAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+Pj4g
-ZHJpdmVycy9zb2MvdmlzY29udGkvZG5uL2Rubi5jICBjcmVhdGUgbW9kZSAxMDA2NDQNCj4+PiBk
-cml2ZXJzL3NvYy92aXNjb250aS9kbm4vaHdkX2Rubi5jDQo+Pj4gIGNyZWF0ZSBtb2RlIDEwMDY0
-NCBkcml2ZXJzL3NvYy92aXNjb250aS9kbm4vaHdkX2Rubi5oDQo+Pj4gIGNyZWF0ZSBtb2RlIDEw
-MDY0NCBkcml2ZXJzL3NvYy92aXNjb250aS9kbm4vaHdkX2Rubl9yZWcuaA0KPj4+ICBjcmVhdGUg
-bW9kZSAxMDA2NDQgZHJpdmVycy9zb2MvdmlzY29udGkvaXBhX2NvbW1vbi5jICBjcmVhdGUgbW9k
-ZQ0KPj4+IDEwMDY0NCBkcml2ZXJzL3NvYy92aXNjb250aS9pcGFfY29tbW9uLmggIGNyZWF0ZSBt
-b2RlIDEwMDY0NA0KPj4+IGRyaXZlcnMvc29jL3Zpc2NvbnRpL3VhcGkvZG5uLmggIGNyZWF0ZSBt
-b2RlIDEwMDY0NA0KPj4+IGRyaXZlcnMvc29jL3Zpc2NvbnRpL3VhcGkvaXBhLmgNCj4+Pg0KX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNp
-ZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vi
-c2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8u
-b3JnCg==
+This patch series aim to add Aspeed USB 2.0 Device Controller (udc)
+driver, including driver itself, device tree node and documentation.
+
+Change since v4:
+- Fix build test warning reported by kernel test robot,
+including Wtautological-pointer-compare, Wuninitialized,
+and Wsometimes-uninitialized.
+
+Change since v3:
+- Remove kernel test robot tag since it's a new driver.
+
+Change since v2:
+- Rename device tree nodes.
+- Fix unusual indentation.
+
+Change since v1:
+- Fix build test warning reported by kernel test robot.
+- Rename proper name for dt-bindings document.
+
+
+Neal Liu (3):
+  usb: gadget: add Aspeed ast2600 udc driver
+  ARM: dts: aspeed: Add USB2.0 device controller node
+  dt-bindings: usb: add documentation for aspeed udc
+
+ .../bindings/usb/aspeed,ast2600-udc.yaml      |   52 +
+ MAINTAINERS                                   |    7 +
+ arch/arm/boot/dts/aspeed-g6.dtsi              |   10 +
+ drivers/usb/gadget/udc/Kconfig                |   13 +
+ drivers/usb/gadget/udc/Makefile               |    1 +
+ drivers/usb/gadget/udc/aspeed_udc.c           | 1596 +++++++++++++++++
+ 6 files changed, 1679 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/usb/aspeed,ast2600-udc.yaml
+ create mode 100644 drivers/usb/gadget/udc/aspeed_udc.c
+
+-- 
+2.25.1
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
