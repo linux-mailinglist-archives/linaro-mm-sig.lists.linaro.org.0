@@ -2,27 +2,27 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1A893537CC5
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 May 2022 15:41:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C5574537CC8
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 May 2022 15:41:23 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 33ED03F2C0
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 May 2022 13:41:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 039C53EC28
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 May 2022 13:41:23 +0000 (UTC)
 Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
-	by lists.linaro.org (Postfix) with ESMTPS id E572E3E80E
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 May 2022 23:54:12 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id EE3293E80E
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 May 2022 23:54:15 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
 	(Authenticated sender: dmitry.osipenko)
-	with ESMTPSA id 59AAC1F40878
+	with ESMTPSA id 62C221F40887
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1653609252;
-	bh=hQQeDrOOx+1JCRSXi7OKWs0mUskygEo1Q1XD4BRlE0w=;
+	s=mail; t=1653609255;
+	bh=5LIdhJtan+LZ6LnQ64jsbMrAvP7fINcUYf3MaY5BoNM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=denQs0WIZ08+E6kW9JjgKq0KczlpedRQBync8cvXdUc/idQKbB6uafoeg89eoZRXX
-	 fd0O+TV9m9gN9MnlfFYQ6hiAqeG7PjzLToZEKGh3pruZK5PnOBbvPCW+UXHPzaJVaA
-	 Bgigrnz4HvCZBsAm0uP0lmQWOPKJiQb56yz07hyFtvKMbCGXvoUHcMfIWTmDFJ1YI8
-	 moEUQReSjPpVzp90kx4McPoRvrc/gFUZfdb/ufWZd2v6Zsy7YknSLXuDteEl4Fh2Rh
-	 lP82QwUta8X7dfbA7HPR3fq60l8kPX0Zxm9aa5TMUQOCc/1UKNp1W8HRCOYp01Cbuo
-	 VSTuDPrFCedhw==
+	b=f3hb0zk7VJGPn7ap02Rwgz7TrZ/O5CjxmjebLky7DXFjxwh1bGhEp5KdhmP9PuAlW
+	 ZVs/oT2mQG2LHjkG94AHUpI5j+6jkKfSTeC666f+Vnzg0MCBoFk/HB3KqNV3aFCeci
+	 mpb/yMpgDiuKC91hpp/ErpjhLFcDMsOCGcnUis/tlNxRRYM9dL5Uuyh0AVkOuuqyZO
+	 XjbeTgTToclrmOeI+ZEO+N7ioYFvs6q7MdaRDWNUK8Q/TVFV5+m5BBeUhPTERr1jrH
+	 ZVjKt8stdo9RGE876EpODo2XGhnQLHZHg8h4JGFnvYopRH/EBRHZs+lbAB8TtOY3Jk
+	 oFSx0RPGOuLSw==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: David Airlie <airlied@linux.ie>,
 	Gerd Hoffmann <kraxel@redhat.com>,
@@ -56,8 +56,8 @@ To: David Airlie <airlied@linux.ie>,
 	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
 	Rodrigo Vivi <rodrigo.vivi@intel.com>,
 	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-Date: Fri, 27 May 2022 02:50:19 +0300
-Message-Id: <20220526235040.678984-2-dmitry.osipenko@collabora.com>
+Date: Fri, 27 May 2022 02:50:20 +0300
+Message-Id: <20220526235040.678984-3-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.35.3
 In-Reply-To: <20220526235040.678984-1-dmitry.osipenko@collabora.com>
 References: <20220526235040.678984-1-dmitry.osipenko@collabora.com>
@@ -65,15 +65,15 @@ MIME-Version: 1.0
 X-MailFrom: dmitry.osipenko@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 3ATH4N75E42TJ5NHRJBRA6QVC5BUPDUQ
-X-Message-ID-Hash: 3ATH4N75E42TJ5NHRJBRA6QVC5BUPDUQ
-X-Mailman-Approved-At: Mon, 30 May 2022 13:41:11 +0000
+Message-ID-Hash: X7O2BJRQY7BHMWMVDXQPXUYHSEWEO3VB
+X-Message-ID-Hash: X7O2BJRQY7BHMWMVDXQPXUYHSEWEO3VB
+X-Mailman-Approved-At: Mon, 30 May 2022 13:41:14 +0000
 CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org, Dmitry Osipenko <digetx@gmail.com>, Dmitry Osipenko <dmitry.osipenko@collabora.com>, linux-tegra@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v6 01/22] drm/gem: Properly annotate WW context on drm_gem_lock_reservations() error
+Subject: [Linaro-mm-sig] [PATCH v6 02/22] drm/gem: Move mapping of imported dma-bufs to drm_gem_mmap_obj()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3ATH4N75E42TJ5NHRJBRA6QVC5BUPDUQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/X7O2BJRQY7BHMWMVDXQPXUYHSEWEO3VB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -83,40 +83,74 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Use ww_acquire_fini() in the error code paths. Otherwise lockdep
-thinks that lock is held when lock's memory is freed after the
-drm_gem_lock_reservations() error. The WW needs to be annotated
-as "freed", which fixes the noisy "WARNING: held lock freed!" splat
-of VirtIO-GPU driver with CONFIG_DEBUG_MUTEXES=y and enabled lockdep.
+Drivers that use drm_gem_mmap() and drm_gem_mmap_obj() helpers don't
+handle imported dma-bufs properly, which results in mapping of something
+else than the imported dma-buf. For example, on NVIDIA Tegra we get a hard
+lockup when userspace writes to the memory mapping of a dma-buf that was
+imported into Tegra's DRM GEM.
+
+To fix this bug, move mapping of imported dma-bufs to drm_gem_mmap_obj().
+Now mmaping of imported dma-bufs works properly for all DRM drivers.
 
 Cc: stable@vger.kernel.org
 Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 ---
- drivers/gpu/drm/drm_gem.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/drm_gem.c              | 3 +++
+ drivers/gpu/drm/drm_gem_shmem_helper.c | 9 ---------
+ drivers/gpu/drm/tegra/gem.c            | 4 ++++
+ 3 files changed, 7 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-index eb0c2d041f13..86d670c71286 100644
+index 86d670c71286..7c0b025508e4 100644
 --- a/drivers/gpu/drm/drm_gem.c
 +++ b/drivers/gpu/drm/drm_gem.c
-@@ -1226,7 +1226,7 @@ drm_gem_lock_reservations(struct drm_gem_object **objs, int count,
- 		ret = dma_resv_lock_slow_interruptible(obj->resv,
- 								 acquire_ctx);
- 		if (ret) {
--			ww_acquire_done(acquire_ctx);
-+			ww_acquire_fini(acquire_ctx);
- 			return ret;
- 		}
- 	}
-@@ -1251,7 +1251,7 @@ drm_gem_lock_reservations(struct drm_gem_object **objs, int count,
- 				goto retry;
- 			}
+@@ -1038,6 +1038,9 @@ int drm_gem_mmap_obj(struct drm_gem_object *obj, unsigned long obj_size,
+ 	if (obj_size < vma->vm_end - vma->vm_start)
+ 		return -EINVAL;
  
--			ww_acquire_done(acquire_ctx);
-+			ww_acquire_fini(acquire_ctx);
- 			return ret;
- 		}
- 	}
++	if (obj->import_attach)
++		return dma_buf_mmap(obj->dma_buf, vma, 0);
++
+ 	/* Take a ref for this mapping of the object, so that the fault
+ 	 * handler can dereference the mmap offset's pointer to the object.
+ 	 * This reference is cleaned up by the corresponding vm_close
+diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
+index 8ad0e02991ca..6190f5018986 100644
+--- a/drivers/gpu/drm/drm_gem_shmem_helper.c
++++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
+@@ -609,17 +609,8 @@ EXPORT_SYMBOL_GPL(drm_gem_shmem_vm_ops);
+  */
+ int drm_gem_shmem_mmap(struct drm_gem_shmem_object *shmem, struct vm_area_struct *vma)
+ {
+-	struct drm_gem_object *obj = &shmem->base;
+ 	int ret;
+ 
+-	if (obj->import_attach) {
+-		/* Drop the reference drm_gem_mmap_obj() acquired.*/
+-		drm_gem_object_put(obj);
+-		vma->vm_private_data = NULL;
+-
+-		return dma_buf_mmap(obj->dma_buf, vma, 0);
+-	}
+-
+ 	ret = drm_gem_shmem_get_pages(shmem);
+ 	if (ret) {
+ 		drm_gem_vm_close(vma);
+diff --git a/drivers/gpu/drm/tegra/gem.c b/drivers/gpu/drm/tegra/gem.c
+index 7c7dd84e6db8..f92aa20d63bb 100644
+--- a/drivers/gpu/drm/tegra/gem.c
++++ b/drivers/gpu/drm/tegra/gem.c
+@@ -564,6 +564,10 @@ int __tegra_gem_mmap(struct drm_gem_object *gem, struct vm_area_struct *vma)
+ {
+ 	struct tegra_bo *bo = to_tegra_bo(gem);
+ 
++	/* imported dmu-buf is mapped by drm_gem_mmap_obj()  */
++	if (gem->import_attach)
++		return 0;
++
+ 	if (!bo->pages) {
+ 		unsigned long vm_pgoff = vma->vm_pgoff;
+ 		int err;
 -- 
 2.35.3
 
