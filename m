@@ -2,245 +2,345 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67C635345E2
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 May 2022 23:39:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A8D9537B28
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 May 2022 15:15:07 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7FC823EE0B
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 May 2022 21:39:49 +0000 (UTC)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
-	by lists.linaro.org (Postfix) with ESMTPS id 0FA0F3EE0B
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 May 2022 21:39:45 +0000 (UTC)
-Received: by mail-ed1-f43.google.com with SMTP id j4so24180903edq.6
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 25 May 2022 14:39:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=YkKRJ1yUuH42jH2+egPvmJc2QWPvILlcWZlWZWTzpDk=;
-        b=q60MGtxeHRheg6iknuJY3qS0l27CyN0DuaX3wtTehHVlNTbiMft9I9zR2e2vAvrOl9
-         z+2Z93ol7OJ9i5PoauV6NSy2c1D60fkHajAD/RB4QXX96Mydyibnsj/Wk/vecX8Ep+fF
-         hhaIOKTCMRSJiVOpIY2LwpjrhClakTh8k2emKV0Y6Uw46GW6K2BirOeemrAbxlkFXPVo
-         K8D4gcpwecTxV/gckYGN4phWydDlzvoB2g+VDwsALMvVpE5AK3uflfq/2Wd69DLxBf3r
-         +WZ/86EAAJmu98KdRsJvKeZZ/dbx3O262MY1Z98hCQ26U/wmX1hf5dt0zqvybuNNR1qA
-         tfvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=YkKRJ1yUuH42jH2+egPvmJc2QWPvILlcWZlWZWTzpDk=;
-        b=EhfW1LTsJ93wWX8xYw80F3WGRo2Ck7XqaplT6Hw+cEn4fQdWqI96STs7jsfHLp4mnK
-         AB6eFFRxS00vkxsDW/1zNNqpPFJvtDHgunRbHyc4VDmLHiniJGeSR1S/I80BzRBvIokk
-         k1cS1ymrcoqobwPb85+z5modGeqTVQeRxydobsU63o27ZwuIAPMar+UJBZnAQ+WKPNMC
-         lvC0JuJTzw3bZqCK/Zye/fN8ImTO/crJHY3qL4JuWfFhUWRxfn/m0467ma1c2tQpzjTF
-         tW2DbjmkrlPgDDFdN6TEBY4kxkKhgGaWUkNX4OX0kn564EiJU8v1qK1Hj4PCPsQHkqh5
-         1krA==
-X-Gm-Message-State: AOAM532M8MM6ubB7FqPvrluQEY8SJSRbgHs7t1wXNTTeBKEQ5mPaIejJ
-	t6lvC1/o/ibfffpjq1jjACoQv24/LnZwqpP2r3zLrw==
-X-Google-Smtp-Source: ABdhPJz06OtV9t6/CMKQQ4DixHbF8wC6aLzsK8RljcfFkSHfazdAJXxJul4fBqp2cA1GKzwjsvmZSjZ+kQD/lM1L+D4=
-X-Received: by 2002:a05:6402:1f03:b0:42b:38ed:a9ff with SMTP id
- b3-20020a0564021f0300b0042b38eda9ffmr14557441edb.218.1653514783855; Wed, 25
- May 2022 14:39:43 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id B82673EC75
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 May 2022 13:15:06 +0000 (UTC)
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+	by lists.linaro.org (Postfix) with ESMTPS id 4A4143E80E
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 26 May 2022 23:54:10 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	(Authenticated sender: dmitry.osipenko)
+	with ESMTPSA id 4483D1F40874
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1653609249;
+	bh=I1kxpdsP20qNcPlQ3S/qdgM736mICTGXs/ZrSWQ9ttc=;
+	h=From:To:Cc:Subject:Date:From;
+	b=SHTmQV0zLXeImrn1UeqN8m/fhyY2ZlGh7b2rESG1aXUjlVDdXNI3FpYp6JOICoEZh
+	 5GQ2IQpyAa6+nUjxNM3vdRz+3PsfbOvfvICH/GRnjGtourjs7kudOWxAtn1fOSFI2c
+	 R+Cmmthp+WNj6cUZOnsaaoF4uEoyolk89saEo7fhwOlfATSVvHgar+q2KcmLkKQlw4
+	 /5kuYHnGiQH0YLWwcbnz9PEUZNMprm1gTg4gWGImZfS3MwxoibI8dRcVa3r8hbKZgf
+	 GV+5b/rY9nDxIHehUUckXeVTx9PGzo1xn8PLR5JL69vXvnYsi5M36LXQgDHFmJHYEw
+	 wNCXZkqbwXICA==
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+To: David Airlie <airlied@linux.ie>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Gurchetan Singh <gurchetansingh@chromium.org>,
+	Chia-I Wu <olvaffe@gmail.com>,
+	Daniel Vetter <daniel@ffwll.ch>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	Gert Wollny <gert.wollny@collabora.com>,
+	Gustavo Padovan <gustavo.padovan@collabora.com>,
+	Daniel Stone <daniel@fooishbar.org>,
+	Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Rob Herring <robh@kernel.org>,
+	Steven Price <steven.price@arm.com>,
+	Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
+	Rob Clark <robdclark@gmail.com>,
+	Emil Velikov <emil.l.velikov@gmail.com>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Qiang Yu <yuq825@gmail.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	"Pan, Xinhui" <Xinhui.Pan@amd.com>,
+	Thierry Reding <thierry.reding@gmail.com>,
+	Tomasz Figa <tfiga@chromium.org>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+Date: Fri, 27 May 2022 02:50:18 +0300
+Message-Id: <20220526235040.678984-1-dmitry.osipenko@collabora.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-References: <20220516171315.2400578-1-tjmercier@google.com>
- <175c5af3-9224-9c8e-0784-349dad9a2954@amd.com> <CABdmKX2GcgCs1xANYPBp8OEtk9qqH7AvCzpdppj9rHXvMqWSAw@mail.gmail.com>
- <0875fa95-3a25-a354-1433-201fca81ed3e@amd.com> <CABdmKX1+VYfdzyVYOS5MCsr4ptGTygmuUP9ikyh-vW6DgKk2kg@mail.gmail.com>
- <YoM9BAwybcjG7K/H@kroah.com> <Yo4/XhWQkACWaPIh@phenom.ffwll.local> <CABdmKX2dC0fkFrCedjhzmheYiDVP4PnKBMeGkX3_bgrLjOiYOg@mail.gmail.com>
-In-Reply-To: <CABdmKX2dC0fkFrCedjhzmheYiDVP4PnKBMeGkX3_bgrLjOiYOg@mail.gmail.com>
-From: "T.J. Mercier" <tjmercier@google.com>
-Date: Wed, 25 May 2022 14:39:32 -0700
-Message-ID: <CABdmKX0-8s9XZDo9o9R3j-fkQzAhLB72+ng9Q087thdBbsiT2g@mail.gmail.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "T.J. Mercier" <tjmercier@google.com>,
-	=?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-	Suren Baghdasaryan <surenb@google.com>, Kalesh Singh <kaleshsingh@google.com>,
-	Minchan Kim <minchan@google.com>, Greg Kroah-Hartman <gregkh@google.com>, John Stultz <jstultz@google.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>, Hridya Valsaraju <hridya@google.com>, kernel-team@android.com,
-	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
-Message-ID-Hash: LZIT3PT2TNHR6W5SRHHGFKHG76LDPMAE
-X-Message-ID-Hash: LZIT3PT2TNHR6W5SRHHGFKHG76LDPMAE
-X-MailFrom: tjmercier@google.com
+X-MailFrom: dmitry.osipenko@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: 257SPA4KGCMNAAFQGMFRV6ENZ7ZNLFHM
+X-Message-ID-Hash: 257SPA4KGCMNAAFQGMFRV6ENZ7ZNLFHM
+X-Mailman-Approved-At: Mon, 30 May 2022 13:15:02 +0000
+CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org, Dmitry Osipenko <digetx@gmail.com>, Dmitry Osipenko <dmitry.osipenko@collabora.com>, linux-tegra@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: Move sysfs work out of DMA-BUF export path
+Subject: [Linaro-mm-sig] [PATCH v6 00/22] Add generic memory shrinker to VirtIO-GPU and Panfrost DRM drivers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LZIT3PT2TNHR6W5SRHHGFKHG76LDPMAE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/257SPA4KGCMNAAFQGMFRV6ENZ7ZNLFHM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gV2VkLCBNYXkgMjUsIDIwMjIgYXQgMjowNSBQTSBULkouIE1lcmNpZXIgPHRqbWVyY2llckBn
-b29nbGUuY29tPiB3cm90ZToNCj4NCj4gT24gV2VkLCBNYXkgMjUsIDIwMjIgYXQgNzozOCBBTSBE
-YW5pZWwgVmV0dGVyIDxkYW5pZWxAZmZ3bGwuY2g+IHdyb3RlOg0KPiA+DQo+ID4gT24gVHVlLCBN
-YXkgMTcsIDIwMjIgYXQgMDg6MTM6MjRBTSArMDIwMCwgR3JlZyBLcm9haC1IYXJ0bWFuIHdyb3Rl
-Og0KPiA+ID4gT24gTW9uLCBNYXkgMTYsIDIwMjIgYXQgMDU6MDg6MDVQTSAtMDcwMCwgVC5KLiBN
-ZXJjaWVyIHdyb3RlOg0KPiA+ID4gPiBPbiBNb24sIE1heSAxNiwgMjAyMiBhdCAxMjoyMSBQTSBD
-aHJpc3RpYW4gS8O2bmlnDQo+ID4gPiA+IDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+IHdyb3Rl
-Og0KPiA+ID4gPiA+DQo+ID4gPiA+ID4gQW0gMTYuMDUuMjIgdW0gMjA6MDggc2NocmllYiBULkou
-IE1lcmNpZXI6DQo+ID4gPiA+ID4gPiBPbiBNb24sIE1heSAxNiwgMjAyMiBhdCAxMDoyMCBBTSBD
-aHJpc3RpYW4gS8O2bmlnDQo+ID4gPiA+ID4gPiA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPiB3
-cm90ZToNCj4gPiA+ID4gPiA+PiBBbSAxNi4wNS4yMiB1bSAxOToxMyBzY2hyaWViIFQuSi4gTWVy
-Y2llcjoNCj4gPiA+ID4gPiA+Pj4gUmVjZW50bHksIHdlIG5vdGljZWQgYW4gaXNzdWUgd2hlcmUg
-YSBwcm9jZXNzIHdlbnQgaW50byBkaXJlY3QgcmVjbGFpbQ0KPiA+ID4gPiA+ID4+PiB3aGlsZSBo
-b2xkaW5nIHRoZSBrZXJuZnMgcncgc2VtYXBob3JlIGZvciBzeXNmcyBpbiB3cml0ZSAoZXhjbHVz
-aXZlKQ0KPiA+ID4gPiA+ID4+PiBtb2RlLiBUaGlzIGNhdXNlZCBwcm9jZXNzZXMgd2hvIHdlcmUg
-ZG9pbmcgRE1BLUJVRiBleHBvcnRzIGFuZCByZWxlYXNlcw0KPiA+ID4gPiA+ID4+PiB0byBnbyBp
-bnRvIHVuaW50ZXJydXB0aWJsZSBzbGVlcCBzaW5jZSB0aGV5IG5lZWRlZCB0byBhY3F1aXJlIHRo
-ZSBzYW1lDQo+ID4gPiA+ID4gPj4+IHNlbWFwaG9yZSBmb3IgdGhlIERNQS1CVUYgc3lzZnMgZW50
-cnkgY3JlYXRpb24vZGVsZXRpb24uIEluIG9yZGVyIHRvIGF2b2lkDQo+ID4gPiA+ID4gPj4+IGJs
-b2NraW5nIERNQS1CVUYgZXhwb3J0IGZvciBhbiBpbmRldGVybWluYXRlIGFtb3VudCBvZiB0aW1l
-IHdoaWxlDQo+ID4gPiA+ID4gPj4+IGFub3RoZXIgcHJvY2VzcyBpcyBob2xkaW5nIHRoZSBzeXNm
-cyBydyBzZW1hcGhvcmUgaW4gZXhjbHVzaXZlIG1vZGUsDQo+ID4gPiA+ID4gPj4+IHRoaXMgcGF0
-Y2ggbW92ZXMgdGhlIHBlci1idWZmZXIgc3lzZnMgZmlsZSBjcmVhdGlvbiB0byB0aGUgZGVmYXVs
-dCB3b3JrDQo+ID4gPiA+ID4gPj4+IHF1ZXVlLiBOb3RlIHRoYXQgdGhpcyBjYW4gbGVhZCB0byBh
-IHNob3J0LXRlcm0gaW5hY2N1cmFjeSBpbiB0aGUgZG1hYnVmDQo+ID4gPiA+ID4gPj4+IHN5c2Zz
-IHN0YXRpc3RpY3MsIGJ1dCB0aGlzIGlzIGEgdHJhZGVvZmYgdG8gcHJldmVudCB0aGUgaG90IHBh
-dGggZnJvbQ0KPiA+ID4gPiA+ID4+PiBiZWluZyBibG9ja2VkLiBBIHdvcmtfc3RydWN0IGlzIGFk
-ZGVkIHRvIGRtYV9idWYgdG8gYWNoaWV2ZSB0aGlzLCBidXQgYXMNCj4gPiA+ID4gPiA+Pj4gaXQg
-aXMgdW5pb25lZCB3aXRoIHRoZSBrb2JqZWN0IGluIHRoZSBzeXNmc19lbnRyeSwgZG1hX2J1ZiBk
-b2VzIG5vdA0KPiA+ID4gPiA+ID4+PiBpbmNyZWFzZSBpbiBzaXplLg0KPiA+ID4gPiA+ID4+IEkn
-bSBzdGlsbCBub3QgdmVyeSBrZWVuIG9mIHRoaXMgYXBwcm9hY2ggYXMgaXQgc3Ryb25nbHkgZmVl
-bHMgbGlrZSB3ZQ0KPiA+ID4gPiA+ID4+IGFyZSB3b3JraW5nIGFyb3VuZCBzaG9ydGNvbWluZyBz
-b21ld2hlcmUgZWxzZS4NCj4gPiA+ID4gPiA+Pg0KPiA+ID4gPiA+ID4gTXkgcmVhZCBvZiB0aGUg
-dGhyZWFkIGZvciB0aGUgbGFzdCB2ZXJzaW9uIGlzIHRoYXQgd2UncmUgcnVubmluZyBpbnRvDQo+
-ID4gPiA+ID4gPiBhIHNpdHVhdGlvbiB3aGVyZSBzeXNmcyBpcyBnZXR0aW5nIHVzZWQgZm9yIHNv
-bWV0aGluZyBpdCB3YXNuJ3QNCj4gPiA+ID4gPiA+IG9yaWdpbmFsbHkgaW50ZW5kZWQgZm9yLCBi
-dXQgd2UncmUgYWxzbyBzdHVjayB3aXRoIHRoaXMgc3lzZnMNCj4gPiA+ID4gPiA+IGZ1bmN0aW9u
-YWxpdHkgZm9yIGRtYWJ1ZnMuDQo+ID4gPiA+ID4gPg0KPiA+ID4gPiA+ID4+PiBGaXhlczogYmRi
-OGQwNmRmZWZkICgiZG1hYnVmOiBBZGQgdGhlIGNhcGFiaWxpdHkgdG8gZXhwb3NlIERNQS1CVUYg
-c3RhdHMgaW4gc3lzZnMiKQ0KPiA+ID4gPiA+ID4+PiBPcmlnaW5hbGx5LWJ5OiBIcmlkeWEgVmFs
-c2FyYWp1IDxocmlkeWFAZ29vZ2xlLmNvbT4NCj4gPiA+ID4gPiA+Pj4gU2lnbmVkLW9mZi1ieTog
-VC5KLiBNZXJjaWVyIDx0am1lcmNpZXJAZ29vZ2xlLmNvbT4NCj4gPiA+ID4gPiA+Pj4NCj4gPiA+
-ID4gPiA+Pj4gLS0tDQo+ID4gPiA+ID4gPj4+IFNlZSB0aGUgb3JpZ2luYWxseSBzdWJtaXR0ZWQg
-cGF0Y2ggYnkgSHJpZHlhIFZhbHNhcmFqdSBoZXJlOg0KPiA+ID4gPiA+ID4+PiBodHRwczovL25h
-bTExLnNhZmVsaW5rcy5wcm90ZWN0aW9uLm91dGxvb2suY29tLz91cmw9aHR0cHMlM0ElMkYlMkZs
-a21sLm9yZyUyRmxrbWwlMkYyMDIyJTJGMSUyRjQlMkYxMDY2JmFtcDtkYXRhPTA1JTdDMDElN0Nj
-aHJpc3RpYW4ua29lbmlnJTQwYW1kLmNvbSU3Qzc5NDYxNDMyNGQxMTQ4ODBhMjU1MDhkYTM3Njcy
-ZTRiJTdDM2RkODk2MWZlNDg4NGU2MDhlMTFhODJkOTk0ZTE4M2QlN0MwJTdDMCU3QzYzNzg4MzIx
-MzU2NjkwMzcwNSU3Q1Vua25vd24lN0NUV0ZwYkdac2IzZDhleUpXSWpvaU1DNHdMakF3TURBaUxD
-SlFJam9pVjJsdU16SWlMQ0pCVGlJNklrMWhhV3dpTENKWFZDSTZNbjAlM0QlN0MzMDAwJTdDJTdD
-JTdDJmFtcDtzZGF0YT1iR2xBMkZldWJmU2VMNVhESFl5V01acVVYZlNjb0NwaFpqaks0anJxUUpz
-JTNEJmFtcDtyZXNlcnZlZD0wDQo+ID4gPiA+ID4gPj4+DQo+ID4gPiA+ID4gPj4+IHYyIGNoYW5n
-ZXM6DQo+ID4gPiA+ID4gPj4+IC0gRGVmZXIgb25seSBzeXNmcyBjcmVhdGlvbiBpbnN0ZWFkIG9m
-IGNyZWF0aW9uIGFuZCB0ZWFyZG93biBwZXINCj4gPiA+ID4gPiA+Pj4gQ2hyaXN0aWFuIEvDtm5p
-Zw0KPiA+ID4gPiA+ID4+Pg0KPiA+ID4gPiA+ID4+PiAtIFVzZSBhIHdvcmsgcXVldWUgaW5zdGVh
-ZCBvZiBhIGt0aHJlYWQgZm9yIGRlZmVycmVkIHdvcmsgcGVyDQo+ID4gPiA+ID4gPj4+IENocmlz
-dGlhbiBLw7ZuaWcNCj4gPiA+ID4gPiA+Pj4gLS0tDQo+ID4gPiA+ID4gPj4+ICAgIGRyaXZlcnMv
-ZG1hLWJ1Zi9kbWEtYnVmLXN5c2ZzLXN0YXRzLmMgfCA1NiArKysrKysrKysrKysrKysrKysrKy0t
-LS0tLS0NCj4gPiA+ID4gPiA+Pj4gICAgaW5jbHVkZS9saW51eC9kbWEtYnVmLmggICAgICAgICAg
-ICAgICB8IDE0ICsrKysrKy0NCj4gPiA+ID4gPiA+Pj4gICAgMiBmaWxlcyBjaGFuZ2VkLCA1NCBp
-bnNlcnRpb25zKCspLCAxNiBkZWxldGlvbnMoLSkNCj4gPiA+ID4gPiA+Pj4NCj4gPiA+ID4gPiA+
-Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLXN5c2ZzLXN0YXRzLmMgYi9k
-cml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi1zeXNmcy1zdGF0cy5jDQo+ID4gPiA+ID4gPj4+IGluZGV4
-IDJiYmEwYmFiY2I2Mi4uNjdiMGEyOTgyOTFjIDEwMDY0NA0KPiA+ID4gPiA+ID4+PiAtLS0gYS9k
-cml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi1zeXNmcy1zdGF0cy5jDQo+ID4gPiA+ID4gPj4+ICsrKyBi
-L2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLXN5c2ZzLXN0YXRzLmMNCj4gPiA+ID4gPiA+Pj4gQEAg
-LTExLDYgKzExLDcgQEANCj4gPiA+ID4gPiA+Pj4gICAgI2luY2x1ZGUgPGxpbnV4L3ByaW50ay5o
-Pg0KPiA+ID4gPiA+ID4+PiAgICAjaW5jbHVkZSA8bGludXgvc2xhYi5oPg0KPiA+ID4gPiA+ID4+
-PiAgICAjaW5jbHVkZSA8bGludXgvc3lzZnMuaD4NCj4gPiA+ID4gPiA+Pj4gKyNpbmNsdWRlIDxs
-aW51eC93b3JrcXVldWUuaD4NCj4gPiA+ID4gPiA+Pj4NCj4gPiA+ID4gPiA+Pj4gICAgI2luY2x1
-ZGUgImRtYS1idWYtc3lzZnMtc3RhdHMuaCINCj4gPiA+ID4gPiA+Pj4NCj4gPiA+ID4gPiA+Pj4g
-QEAgLTE2OCwxMCArMTY5LDQ2IEBAIHZvaWQgZG1hX2J1Zl91bmluaXRfc3lzZnNfc3RhdGlzdGlj
-cyh2b2lkKQ0KPiA+ID4gPiA+ID4+PiAgICAgICAga3NldF91bnJlZ2lzdGVyKGRtYV9idWZfc3Rh
-dHNfa3NldCk7DQo+ID4gPiA+ID4gPj4+ICAgIH0NCj4gPiA+ID4gPiA+Pj4NCj4gPiA+ID4gPiA+
-Pj4gK3N0YXRpYyB2b2lkIHN5c2ZzX2FkZF93b3JrZm4oc3RydWN0IHdvcmtfc3RydWN0ICp3b3Jr
-KQ0KPiA+ID4gPiA+ID4+PiArew0KPiA+ID4gPiA+ID4+PiArICAgICBzdHJ1Y3QgZG1hX2J1Zl9z
-eXNmc19lbnRyeSAqc3lzZnNfZW50cnkgPQ0KPiA+ID4gPiA+ID4+PiArICAgICAgICAgICAgIGNv
-bnRhaW5lcl9vZih3b3JrLCBzdHJ1Y3QgZG1hX2J1Zl9zeXNmc19lbnRyeSwgc3lzZnNfYWRkX3dv
-cmspOw0KPiA+ID4gPiA+ID4+PiArICAgICBzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmID0gc3lzZnNf
-ZW50cnktPmRtYWJ1ZjsNCj4gPiA+ID4gPiA+Pj4gKw0KPiA+ID4gPiA+ID4+PiArICAgICAvKg0K
-PiA+ID4gPiA+ID4+PiArICAgICAgKiBBIGRtYWJ1ZiBpcyByZWYtY291bnRlZCB2aWEgaXRzIGZp
-bGUgbWVtYmVyLiBJZiB0aGlzIGhhbmRsZXIgaG9sZHMgdGhlIG9ubHkNCj4gPiA+ID4gPiA+Pj4g
-KyAgICAgICogcmVmZXJlbmNlIHRvIHRoZSBkbWFidWYsIHRoZXJlIGlzIG5vIG5lZWQgZm9yIHN5
-c2ZzIGtvYmplY3QgY3JlYXRpb24uIFRoaXMgaXMgYW4NCj4gPiA+ID4gPiA+Pj4gKyAgICAgICog
-b3B0aW1pemF0aW9uIGFuZCBhIHJhY2U7IHdoZW4gdGhlIHJlZmVyZW5jZSBjb3VudCBkcm9wcyB0
-byAxIGltbWVkaWF0ZWx5IGFmdGVyDQo+ID4gPiA+ID4gPj4+ICsgICAgICAqIHRoaXMgY2hlY2sg
-aXQgaXMgbm90IGhhcm1mdWwgYXMgdGhlIHN5c2ZzIGVudHJ5IHdpbGwgc3RpbGwgZ2V0IGNsZWFu
-ZWQgdXAgaW4NCj4gPiA+ID4gPiA+Pj4gKyAgICAgICogZG1hX2J1Zl9zdGF0c190ZWFyZG93biwg
-d2hpY2ggd29uJ3QgZ2V0IGNhbGxlZCB1bnRpbCB0aGUgZmluYWwgZG1hYnVmIHJlZmVyZW5jZQ0K
-PiA+ID4gPiA+ID4+PiArICAgICAgKiBpcyByZWxlYXNlZCwgYW5kIHRoYXQgY2FuJ3QgaGFwcGVu
-IHVudGlsIHRoZSBlbmQgb2YgdGhpcyBmdW5jdGlvbi4NCj4gPiA+ID4gPiA+Pj4gKyAgICAgICov
-DQo+ID4gPiA+ID4gPj4+ICsgICAgIGlmIChmaWxlX2NvdW50KGRtYWJ1Zi0+ZmlsZSkgPiAxKSB7
-DQo+ID4gPiA+ID4gPj4gUGxlYXNlIGNvbXBsZXRlbHkgZHJvcCB0aGF0LiBJIHNlZSBhYnNvbHV0
-ZWx5IG5vIGp1c3RpZmljYXRpb24gZm9yIHRoaXMNCj4gPiA+ID4gPiA+PiBhZGRpdGlvbmFsIGNv
-bXBsZXhpdHkuDQo+ID4gPiA+ID4gPj4NCj4gPiA+ID4gPiA+IFRoaXMgY2FzZSBnZXRzIGhpdCBh
-cm91bmQgNSUgb2YgdGhlIHRpbWUgaW4gbXkgdGVzdGluZyBzbyB0aGUgZWxzZSBpcw0KPiA+ID4g
-PiA+ID4gbm90IGEgY29tcGxldGVseSB1bnVzZWQgYnJhbmNoLg0KPiA+ID4gPiA+DQo+ID4gPiA+
-ID4gV2VsbCBJIGNhbiBvbmx5IHJlcGVhdCBteXNlbGY6IFRoaXMgbWVhbnMgdGhhdCB5b3VyIHVz
-ZXJzcGFjZSBpcw0KPiA+ID4gPiA+IHNldmVyZWx5IGJyb2tlbiENCj4gPiA+ID4gPg0KPiA+ID4g
-PiA+IERNQS1idWYgYXJlIG1lYW50IHRvIGJlIGxvbmcgbGl2aW5nIG9iamVjdHMNCj4gPiA+ID4g
-VGhpcyBwYXRjaCBhZGRyZXNzZXMgZXhwb3J0ICpsYXRlbmN5KiByZWdhcmRsZXNzIG9mIGhvdyBs
-b25nLWxpdmVkIHRoZQ0KPiA+ID4gPiBvYmplY3QgaXMuIEV2ZW4gYSBzaW5nbGUsIGxvbmctbGl2
-ZWQgZXhwb3J0IHdpbGwgYmVuZWZpdCBmcm9tIHRoaXMNCj4gPiA+ID4gY2hhbmdlIGlmIGl0IHdv
-dWxkIG90aGVyd2lzZSBiZSBibG9ja2VkIG9uIGFkZGluZyBhbiBvYmplY3QgdG8gc3lzZnMuDQo+
-ID4gPiA+IEkgdGhpbmsgYXR0ZW1wdGluZyB0byBpbXByb3ZlIHRoaXMgbGF0ZW5jeSBzdGlsbCBo
-YXMgbWVyaXQuDQo+ID4gPg0KPiA+ID4gRml4aW5nIHRoZSBsYXRlbmN5IGlzIG5pY2UsIGJ1dCBh
-cyBpdCdzIGp1c3QgcHVzaGluZyB0aGUgbmVlZGVkIHdvcmsgb2ZmDQo+ID4gPiB0byBhbm90aGVy
-IGNvZGUgcGF0aCwgaXQgd2lsbCB0YWtlIGxvbmdlciBvdmVyYWxsIGZvciB0aGUgc3lzZnMgc3R1
-ZmYgdG8NCj4gPiA+IGJlIHJlYWR5IGZvciB1c2Vyc3BhY2UgdG8gc2VlLg0KPiA+ID4NCj4gPiA+
-IFBlcmhhcHMgd2UgbmVlZCB0byBzdGVwIGJhY2sgYW5kIHVuZGVyc3RhbmQgd2hhdCB0aGlzIGNv
-ZGUgaXMgc3VwcG9zZWQNCj4gPiA+IHRvIGJlIGRvaW5nLiAgQXMgSSByZWNhbGwsIGl0IHdhcyBj
-cmVhdGVkIGJlY2F1c2Ugc29tZSBzeXN0ZW1zIGRvIG5vdA0KPiA+ID4gYWxsb3cgZGVidWdmcyBh
-bnltb3JlLCBhbmQgdGhleSB3YW50ZWQgdGhlIGRlYnVnZ2luZyBpbmZvcm1hdGlvbiB0aGF0DQo+
-ID4gPiB0aGUgZG1hYnVmIGNvZGUgd2FzIGV4cG9zaW5nIHRvIGRlYnVnZnMgb24gYSAibm9ybWFs
-IiBzeXN0ZW0uICBNb3ZpbmcNCj4gPiA+IHRoYXQgbG9naWMgdG8gc3lzZnMgbWFkZSBzZW5zZSwg
-YnV0IG5vdyBJIGFtIHdvbmRlcmluZyB3aHkgd2UgZGlkbid0IHNlZQ0KPiA+ID4gdGhlc2UgaXNz
-dWVzIGluIHRoZSBkZWJ1Z2ZzIGNvZGUgcHJldmlvdXNseT8NCj4gPiA+DQo+ID4gPiBQZXJoYXBz
-IHdlIHNob3VsZCBnbyBqdXN0IG9uZSBzdGVwIGZ1cnRoZXIgYW5kIG1ha2UgYSBtaXNjIGRldmlj
-ZSBub2RlDQo+ID4gPiBmb3IgZG1hYnVnIGRlYnVnZ2luZyBpbmZvcm1hdGlvbiB0byBiZSBpbiBh
-bmQganVzdCBoYXZlIHVzZXJzcGFjZQ0KPiA+ID4gcG9sbC9yZWFkIG9uIHRoZSBkZXZpY2Ugbm9k
-ZSBhbmQgd2Ugc3BpdCB0aGUgaW5mbyB0aGF0IHVzZWQgdG8gYmUgaW4NCj4gPiA+IGRlYnVnZnMg
-b3V0IHRocm91Z2ggdGhhdD8gIFRoYXQgd2F5IHRoaXMgb25seSBhZmZlY3RzIHN5c3RlbXMgd2hl
-biB0aGV5DQo+ID4gPiB3YW50IHRvIHJlYWQgdGhlIGluZm9ybWF0aW9uIGFuZCBub3Qgbm9ybWFs
-IGNvZGUgcGF0aHM/ICBZZWFoIHRoYXQncyBhDQo+ID4gPiBoYWNrLCBidXQgdGhpcyB3aG9sZSB0
-aGluZyBmZWVscyBvdmVybHkgY29tcGxleCBub3cuDQo+ID4NCj4gPiBBIGJpdCBsYXRlIG9uIHRo
-aXMgZGlzY3Vzc2lvbiwgYnV0IGp1c3Qgd2FudGVkIHRvIGFkZCBteSArMSB0aGF0IHdlIHNob3Vs
-ZA0KPiA+IGVpdGhlciByZWRlc2lnbiB0aGUgdWFwaSwgb3IgZml4IHRoZSB1bmRlcmx5aW5nIGxh
-dGVuY3kgaXNzdWUgaW4gc3lzZnMsIG9yDQo+ID4gd2hhdGV2ZXIgZWxzZSBpcyBkZWVtZWQgdGhl
-IHByb3BlciBmaXguDQo+ID4NCj4gPiBNYWtpbmcgdWFwaSBpbnRlcmZhY2VzIGFzeW5jIGluIHdh
-eXMgdGhhdCB1c2Vyc3BhY2UgY2FuJ3QgZGlzY292ZXIgaXMgYQ0KPiA+IGhhY2sgdGhhdCB3ZSBy
-ZWFsbHkgc2hvdWxkbid0IGNvbnNpZGVyLCBhdCBsZWFzdCBmb3IgdXBzdHJlYW0uIEFsbCBraW5k
-cw0KPiA+IG9mIGhpbGFyaW91cyB0aGluZ3MgbWlnaHQgc3RhcnQgdG8gaGFwcGVuIHdoZW4gYW4g
-b2JqZWN0IGV4aXN0cywgYnV0IG5vdA0KPiA+IGNvbnNpc3RlbnRseSBpbiBhbGwgdGhlIHBsYWNl
-cyB3aGVyZSBpdCBzaG91bGQgYmUgdmlzaWJsZS4gVGhlcmUncyBhDQo+ID4gcmVhc29uIHN5c2Zz
-IGhhcyBhbGwgdGhlc2UgbmVhdCBwcm9wZXJ0eSBncm91cHMgc28gdGhhdCBhYnNvbHV0ZWx5DQo+
-ID4gZXZlcnl0aGluZyBpcyBhZGRlZCBhdG9taWNhbGx5LiBEb2luZyBzdHVmZiBsYXRlciBvbiBq
-dXN0IGJlY2F1c2UgdXN1YWxseQ0KPiA+IG5vIG9uZSBub3RpY2VzIHRoYXQgdGhlIGlsbHVzaW9u
-IGZhbGxzIGFwYXJ0IGlzbid0IGdyZWF0Lg0KPiA+DQo+ID4gVW5mb3J0dW5hdGVseSBJIGRvbid0
-IGhhdmUgYSBjbGVhciBpZGVhIGhlcmUgd2hhdCB3b3VsZCBiZSB0aGUgcmlnaHQNCj4gPiBzb2x1
-dGlvbiA6LS8gT25lIGlkZWEgcGVyaGFwczogU2hvdWxkIHdlIGR5bmFtaWNhbGx5IGVudW1lcmF0
-ZSB0aGUgb2JqZWN0cw0KPiA+IHdoZW4gdXNlcnNwYWNlIGRvZXMgYSByZWFkZGlyKCk/IFRoYXQn
-cyBhYnNvbHV0ZWx5IG5vdCBob3cgc3lzZnMgd29ya3MsDQo+ID4gYnV0IHByb2NmcyB3b3JrcyBs
-aWtlIHRoYXQgYW5kIHRoZXJlJ3MgZGlzY3Vzc2lvbnMgZ29pbmcgYXJvdW5kIGFib3V0DQo+ID4g
-bW92aW5nIHRoZXNlIG9wdGltaXphdGlvbnMgdG8gb3RoZXIga2VybmZzIGltcGxlbWVudGF0aW9u
-cy4gQXQgbGVhc3QgdGhlcmUNCj4gPiB3YXMgYSByZWNlbnQgbHduIGFydGljbGUgb24gdGhpczoN
-Cj4gPg0KPiA+IGh0dHBzOi8vbHduLm5ldC9BcnRpY2xlcy84OTUxMTEvDQo+ID4NCj4gPiBCdXQg
-dGhhdCB3b3VsZCBiZSBzZXJpb3VzIGFtb3VudHMgb2Ygd29yayBJIGd1ZXNzLg0KPiA+IC1EYW5p
-ZWwNCj4gPiAtLQ0KPiA+IERhbmllbCBWZXR0ZXIiDQo+ID4gU29mdHdhcmUgRW5naW5lZXIsIElu
-dGVsIENvcnBvcmF0aW9uDQo+ID4gaHR0cDovL2Jsb2cuZmZ3bGwuY2gNCj4NCj4gSGkgRGFuaWVs
-LA0KPg0KPiBNeSB0ZWFtIGhhcyBiZWVuIGRpc2N1c3NpbmcgdGhpcywgYW5kIEkgdGhpbmsgd2Un
-cmUgYXBwcm9hY2hpbmcgYQ0KPiBjb25zZW5zdXMgb24gYSB3YXkgZm9yd2FyZCB0aGF0IGludm9s
-dmVzIGRlcHJlY2F0aW5nIHRoZSBleGlzdGluZw0KPiB1YXBpLg0KPg0KPiBJIGFjdHVhbGx5IHBy
-b3Bvc2VkIGEgc2ltaWxhciAoYnV0IGxlc3MgZWxlZ2FudCkgaWRlYSB0byB0aGUgcmVhZGRpcigp
-DQo+IG9uZS4gQSBuZXcgImR1bXBfZG1hYnVmX2RhdGEiIHN5c2ZzIGZpbGUgdGhhdCBhIHVzZXIg
-d291bGQgd3JpdGUgdG8sDQo+IHdoaWNoIHdvdWxkIGNhdXNlIGEgb25lLXRpbWUgY3JlYXRpb24g
-b2YgdGhlIHBlci1idWZmZXIgZmlsZXMuIFRoZXNlDQo+IGNvdWxkIGJlIGxlZnQgYXJvdW5kIHRv
-IGJlY29tZSBzdGFsZSwgb3IgZ2V0IGNsZWFuZWQgdXAgYWZ0ZXIgZmlyc3QNCj4gcmVhZC4gSG93
-ZXZlciB0byBtZSBpdCBzZWVtcyBpbXBvc3NpYmxlIHRvIGNvcnJlY3RseSBkZWFsIHdpdGgNCj4g
-bXVsdGlwbGUgc2ltdWx0YW5lb3VzIHVzZXJzIHdpdGggdGhpcyB0ZWNobmlxdWUuIFdlJ3JlIG5v
-dCBjdXJyZW50bHkNCj4gcGxhbm5pbmcgdG8gcHVyc3VlIHRoaXMuDQo+DQo+IFRoYW5rcyBmb3Ig
-dGhlIGxpbmsgdG8gdGhlIGFydGljbGUuIFRoYXQgb24tZGVtYW5kIGNyZWF0aW9uIHNvdW5kcw0K
-PiBsaWtlIGl0IHdvdWxkIGFsbG93IHVzIHRvIGtlZXAgdGhlIGV4aXN0aW5nIHN0cnVjdHVyZSBh
-bmQgZmlsZXMgZm9yDQo+IERNQS1idWYsIGFzc3VtaW5nIHRoZXJlIGlzIG5vdCBhIHNpbWlsYXIg
-bG9jayBjb250ZW50aW9uIGlzc3VlIHdoZW4NCj4gYWRkaW5nIGEgbmV3IG5vZGUgdG8gdGhlIHZp
-cnR1YWwgdHJlZS4gOikNCg0KSSdsbCBmb2xsb3cgdXAgd2l0aCBTdGV2ZW4gb24gdGhpcyB0b3Bp
-Yy4gVGhhbmtzIGFnYWluLg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0
-cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNp
-Zy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+Hello,
+
+This patchset introduces memory shrinker for the VirtIO-GPU DRM driver
+and adds memory purging and eviction support to VirtIO-GPU driver.
+
+The new dma-buf locking convention is introduced here as well.
+
+During OOM, the shrinker will release BOs that are marked as "not needed"
+by userspace using the new madvise IOCTL, it will also evict idling BOs
+to SWAP. The userspace in this case is the Mesa VirGL driver, it will mark
+the cached BOs as "not needed", allowing kernel driver to release memory
+of the cached shmem BOs on lowmem situations, preventing OOM kills.
+
+The Panfrost driver is switched to use generic memory shrinker.
+
+This patchset includes improvements and fixes for various things that
+I found while was working on the shrinker.
+
+The Mesa and IGT patches will be kept on hold until this kernel series
+will be approved and merged.
+
+This patchset was tested using Qemu and crosvm, including both cases of
+IOMMU off/on.
+
+Mesa: https://gitlab.freedesktop.org/digetx/mesa/-/commits/virgl-madvise
+IGT:  https://gitlab.freedesktop.org/digetx/igt-gpu-tools/-/commits/virtio-madvise
+      https://gitlab.freedesktop.org/digetx/igt-gpu-tools/-/commits/panfrost-madvise
+
+Changelog:
+
+v6: - Added new VirtIO-related fix patch that previously was sent separately
+      and didn't get much attention:
+
+        drm/gem: Properly annotate WW context on drm_gem_lock_reservations() error
+
+    - Added new patch that fixes mapping of imported dma-bufs for
+      Tegra DRM and other affected drivers. It's also handy to have it
+      for switching to the new dma-buf locking convention scheme:
+
+        drm/gem: Move mapping of imported dma-bufs to drm_gem_mmap_obj()
+
+    - Added new patch that fixes shrinker list corruption for stable Panfrost
+      driver:
+
+        drm/panfrost: Fix shrinker list corruption by madvise IOCTL
+
+    - Added new minor patch-fix for drm-shmem:
+
+        drm/shmem-helper: Add missing vunmap on error
+
+    - Added fixes tag to the "Put mapping ..." patch like was suggested by
+      Steven Price.
+
+    - Added new VirtIO-GPU driver improvement patch:
+
+        drm/virtio: Return proper error codes instead of -1
+
+    - Reworked shrinker patches like was suggested by Daniel Vetter:
+
+        - Introduced the new locking convention for dma-bufs. Tested on
+          VirtIO-GPU, Panfrost, Lima, Tegra and Intel selftests.
+
+        - Dropped separate purge() callback. Now single evict() does
+          everything.
+
+        - Dropped swap_in() callback from drm-shmem objects. DRM drivers
+          now could and should restore only the required mappings.
+
+        - Dropped dynamic counting of evictable pages. This simplifies
+          code in exchange to *potentially* burning more CPU time on OOM.
+
+v5: - Added new for-stable patch "drm/panfrost: Put mapping instead of
+      shmem obj on panfrost_mmu_map_fault_addr() error" that corrects GEM's
+      refcounting in case of error.
+
+    - The drm_gem_shmem_v[un]map() now takes a separate vmap_lock for
+      imported GEMs to avoid recursive locking of DMA reservations.
+      This addresses v4 comment from Thomas Zimmermann about the potential
+      deadlocking of vmapping.
+
+    - Added ack from Thomas Zimmermann to "drm/shmem-helper: Correct
+      doc-comment of drm_gem_shmem_get_sg_table()" patch.
+
+    - Dropped explicit shmem states from the generic shrinker patch as
+      was requested by Thomas Zimmermann.
+
+    - Improved variable names and comments of the generic shrinker code.
+
+    - Extended drm_gem_shmem_print_info() with the shrinker-state info in
+      the "drm/virtio: Support memory shrinking" patch.
+
+    - Moved evict()/swap_in()/purge() callbacks from drm_gem_object_funcs
+      to drm_gem_shmem_object in the generic shrinker patch, for more
+      consistency.
+
+    - Corrected bisectability of the patches that was broken in v4
+      by accident.
+
+    - The virtio_gpu_plane_prepare_fb() now uses drm_gem_shmem_pin() instead
+      of drm_gem_shmem_set_unpurgeable_and_unevictable() and does it only for
+      shmem BOs in the "drm/virtio: Support memory shrinking" patch.
+
+    - Made more functions private to drm_gem_shmem_helper.c as was requested
+      by Thomas Zimmermann. This minimizes number of the public shmem helpers.
+
+v4: - Corrected minor W=1 warnings reported by kernel test robot for v3.
+
+    - Renamed DRM_GEM_SHMEM_PAGES_STATE_ACTIVE/INACTIVE to PINNED/UNPINNED,
+      for more clarity.
+
+v3: - Hardened shrinker's count() with usage of READ_ONCE() since we don't
+      use atomic type for counting and technically compiler is free to
+      re-fetch counter's variable.
+
+    - "Correct drm_gem_shmem_get_sg_table() error handling" now uses
+      PTR_ERR_OR_ZERO(), fixing typo that was made in v2.
+
+    - Removed obsoleted shrinker from the Panfrost driver, which I missed to
+      do in v2 by accident and Alyssa Rosenzweig managed to notice it.
+
+    - CCed stable kernels in all patches that make fixes, even the minor ones,
+      like was suggested by Emil Velikov and added his r-b to the patches.
+
+    - Added t-b from Steven Price to the Panfrost's shrinker patch.
+
+    - Corrected doc-comment of drm_gem_shmem_object.madv, like was suggested
+      by Steven Price. Comment now says that madv=1 means "object is purged"
+      instead of saying that value is unused.
+
+    - Added more doc-comments to the new shmem shrinker API.
+
+    - The "Improve DMA API usage for shmem BOs" patch got more improvements
+      by removing the obsoleted drm_dev_set_unique() quirk and its comment.
+
+    - Added patch that makes Virtio-GPU driver to use common dev_is_pci()
+      helper, which was suggested by Robin Murphy.
+
+    - Added new "drm/shmem-helper: Take GEM reservation lock instead of
+      drm_gem_shmem locks" patch, which was suggested by Daniel Vetter.
+
+    - Added new "drm/virtio: Simplify error handling of
+      virtio_gpu_object_create()" patch.
+
+    - Improved "Correct doc-comment of drm_gem_shmem_get_sg_table()" patch,
+      like was suggested by Daniel Vetter, by saying that function returns
+      ERR_PTR() and not errno.
+
+    - virtio_gpu_purge_object() is fenced properly now, turned out
+      virtio_gpu_notify() doesn't do fencing as I was supposing before.
+      Stress testing of memory eviction revealed that.
+
+    - Added new patch that corrects virtio_gpu_plane_cleanup_fb() to use
+      appropriate atomic plane state.
+
+    - SHMEM shrinker got eviction support.
+
+    - VirtIO-GPU driver now supports memory eviction. It's enabled for a
+      non-blob GEMs only, i.e. for VirGL. The blobs don't support dynamic
+      attaching/detaching of guest's memory, so it's not trivial to enable
+      them.
+
+    - Added patch that removes obsoleted drm_gem_shmem_purge()
+
+    - Added patch that makes drm_gem_shmem_get_pages() private.
+
+    - Added patch that fixes lockup on dma_resv_reserve_fences() error.
+
+v2: - Improved shrinker by using a more fine-grained locking to reduce
+      contention during scan of objects and dropped locking from the
+      'counting' callback by tracking count of shrinkable pages. This
+      was suggested by Rob Clark in the comment to v1.
+
+    - Factored out common shrinker code into drm_gem_shmem_helper.c
+      and switched Panfrost driver to use the new common memory shrinker.
+      This was proposed by Thomas Zimmermann in his prototype series that
+      he shared with us in the comment to v1. Note that I only compile-tested
+      the Panfrost driver.
+
+    - Shrinker now takes object_name_lock during scan to prevent racing
+      with dma-buf exporting.
+
+    - Shrinker now takes vmap_lock during scan to prevent racing with shmem
+      vmap/unmap code.
+
+    - Added "Correct doc-comment of drm_gem_shmem_get_sg_table()" patch,
+      which I sent out previously as a standalone change, since the
+      drm_gem_shmem_helper.c is now touched by this patchset anyways and
+      it doesn't hurt to group all the patches together.
+
+Dmitry Osipenko (22):
+  drm/gem: Properly annotate WW context on drm_gem_lock_reservations()
+    error
+  drm/gem: Move mapping of imported dma-bufs to drm_gem_mmap_obj()
+  drm/panfrost: Put mapping instead of shmem obj on
+    panfrost_mmu_map_fault_addr() error
+  drm/panfrost: Fix shrinker list corruption by madvise IOCTL
+  drm/virtio: Correct drm_gem_shmem_get_sg_table() error handling
+  drm/virtio: Check whether transferred 2D BO is shmem
+  drm/virtio: Unlock reservations on virtio_gpu_object_shmem_init()
+    error
+  drm/virtio: Unlock reservations on dma_resv_reserve_fences() error
+  drm/virtio: Use appropriate atomic state in
+    virtio_gpu_plane_cleanup_fb()
+  drm/shmem-helper: Add missing vunmap on error
+  drm/shmem-helper: Correct doc-comment of drm_gem_shmem_get_sg_table()
+  drm/virtio: Simplify error handling of virtio_gpu_object_create()
+  drm/virtio: Improve DMA API usage for shmem BOs
+  dma-buf: Introduce new locking convention
+  drm/shmem-helper: Don't use vmap_use_count for dma-bufs
+  drm/shmem-helper: Use reservation lock
+  drm/shmem-helper: Add generic memory shrinker
+  drm/gem: Add drm_gem_pin_unlocked()
+  drm/virtio: Support memory shrinking
+  drm/virtio: Use dev_is_pci()
+  drm/virtio: Return proper error codes instead of -1
+  drm/panfrost: Switch to generic memory shrinker
+
+ drivers/dma-buf/dma-buf.c                     | 270 ++++---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c       |   6 +-
+ drivers/gpu/drm/drm_client.c                  |   4 +-
+ drivers/gpu/drm/drm_gem.c                     |  69 +-
+ drivers/gpu/drm/drm_gem_framebuffer_helper.c  |   6 +-
+ drivers/gpu/drm/drm_gem_shmem_helper.c        | 718 ++++++++++++++----
+ drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c    |  10 +-
+ drivers/gpu/drm/lima/lima_gem.c               |   8 +-
+ drivers/gpu/drm/lima/lima_sched.c             |   4 +-
+ drivers/gpu/drm/panfrost/Makefile             |   1 -
+ drivers/gpu/drm/panfrost/panfrost_device.h    |   4 -
+ drivers/gpu/drm/panfrost/panfrost_drv.c       |  26 +-
+ drivers/gpu/drm/panfrost/panfrost_gem.c       |  33 +-
+ drivers/gpu/drm/panfrost/panfrost_gem.h       |   9 -
+ .../gpu/drm/panfrost/panfrost_gem_shrinker.c  | 122 ---
+ drivers/gpu/drm/panfrost/panfrost_job.c       |  18 +-
+ drivers/gpu/drm/panfrost/panfrost_mmu.c       |  21 +-
+ drivers/gpu/drm/panfrost/panfrost_perfcnt.c   |   6 +-
+ drivers/gpu/drm/qxl/qxl_object.c              |  17 +-
+ drivers/gpu/drm/qxl/qxl_prime.c               |   4 +-
+ drivers/gpu/drm/tegra/gem.c                   |   4 +
+ drivers/gpu/drm/virtio/virtgpu_drv.c          |  53 +-
+ drivers/gpu/drm/virtio/virtgpu_drv.h          |  23 +-
+ drivers/gpu/drm/virtio/virtgpu_gem.c          |  59 +-
+ drivers/gpu/drm/virtio/virtgpu_ioctl.c        |  37 +
+ drivers/gpu/drm/virtio/virtgpu_kms.c          |  16 +-
+ drivers/gpu/drm/virtio/virtgpu_object.c       | 203 +++--
+ drivers/gpu/drm/virtio/virtgpu_plane.c        |  28 +-
+ drivers/gpu/drm/virtio/virtgpu_vq.c           |  61 +-
+ .../common/videobuf2/videobuf2-dma-contig.c   |  11 +-
+ .../media/common/videobuf2/videobuf2-dma-sg.c |  11 +-
+ .../common/videobuf2/videobuf2-vmalloc.c      |  11 +-
+ include/drm/drm_device.h                      |   4 +
+ include/drm/drm_gem.h                         |   6 +
+ include/drm/drm_gem_shmem_helper.h            |  99 ++-
+ include/linux/dma-buf.h                       |  14 +-
+ include/uapi/drm/virtgpu_drm.h                |  14 +
+ 37 files changed, 1349 insertions(+), 661 deletions(-)
+ delete mode 100644 drivers/gpu/drm/panfrost/panfrost_gem_shrinker.c
+
+-- 
+2.35.3
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
