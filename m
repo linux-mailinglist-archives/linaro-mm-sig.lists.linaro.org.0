@@ -2,141 +2,188 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A46E537E4C
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 May 2022 15:57:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 26E4A53A456
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 13:51:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8DF553F2C2
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 30 May 2022 13:57:38 +0000 (UTC)
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
-	by lists.linaro.org (Postfix) with ESMTPS id 570E93F240
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 30 May 2022 13:57:30 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	(Authenticated sender: dmitry.osipenko)
-	with ESMTPSA id B98F41F417FE
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1653919049;
-	bh=2XRBuky6ctLBMkVpHH42tRbnrHaVzoRJDfOS/8wLl/E=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=mPwSP+W1lUR0EdMvCliWfZoiylZ8CVpOpjwgflCUTZaI9WHJh5tJXhk8DyguPhNeN
-	 HogdCkNBgtGD2G8U9Ep2K49/vmqE56g1BgD7MA21xGk1ZVBj+VJcIxxm08FCLdNgVK
-	 RmZOwzc+caJBzV5axbiwKDrCGcHjZmvJd24egZXw9xLh3XfQFPhTT3EpgfN70g8mqC
-	 9sjT+smifz0WHNiGEqr7+RZqCI9QQehNyQ19Mpiv9LWCOB9wzR78FM0tska4e7lqKe
-	 50oVtOr/eGMjVeh2uPvpXIVZhL/NQ2LFQ3MNEmBcidBDh44gsd28fmmYzNC+2ue0aj
-	 H9xWHCkQ7dKmg==
-Message-ID: <7372dd1b-06f7-5336-4738-15f9b4d4d4b3@collabora.com>
-Date: Mon, 30 May 2022 16:57:22 +0300
+	by lists.linaro.org (Postfix) with ESMTP id 5AF643F0C9
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 11:51:08 +0000 (UTC)
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+	by lists.linaro.org (Postfix) with ESMTPS id 2F5D83EC28
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 30 May 2022 14:22:51 +0000 (UTC)
+Received: by mail-pf1-f172.google.com with SMTP id x143so10684854pfc.11
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 30 May 2022 07:22:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=3GQ31AOMg6CYL2o02SAXplBrbILZAQU3ouRxiSJOrgU=;
+        b=cgfAWNSA80459wk4ly9bSAoXoF/r0/0/legUd21+ZHniCAG1wV1B7JWCmIV9cguxnR
+         NV+x0Xe7rxk2pW6mtOL0GEwag0Bw5mdIxGiHpGKwJ5FcR94bn8Tj5J80iBM1BOCblTGM
+         PptUeWclGDH0aOgyVPyWxqj6BN9KxTrSnvYHY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=3GQ31AOMg6CYL2o02SAXplBrbILZAQU3ouRxiSJOrgU=;
+        b=4p5jEafZ6y90R3KxoqCkqfkYrFry8XyW8aXyBbb3GZ17fvPDOC1pbUaLS7+NTXj5EW
+         qlJ4Iti++rGsBLH9uq0AeQx7WY2UscGagEVAqQkvDmEyMVF8G3h8PbckygpPOf6cmrK1
+         8p8aMYeO+JfywaMTxjqE5gcwHc2WmyQT0Iem2debGElwkiiPRRUY8bwoCKDMeWAsjbQq
+         ffmINQ/DGcgggVjlwJcsxzctOHX4u274A/8Eal5TZ6DcUKtYc+DxNxtoADOb1e6l2gQa
+         cMG/N07LfwfwZWNRduwKjCTXToCdq+2FrWU5pkx1JDeVOAklgYGBgPzVcEmaq9nH3Xjn
+         73dQ==
+X-Gm-Message-State: AOAM531xlLE1yOtfjnO4tiB8Oca/V41D+2jujx+VHZEfd9+gg6TPeCAI
+	wJM0zX5EVH1sxX/YphnKKh8+0k3ZU1rTrg==
+X-Google-Smtp-Source: ABdhPJygqQPEqP+uApdlFFyunbfljkbAcq0qYTWB6hl/oH8z4ZP/AA/eKh0jCieqFOXEU2LAYOIIAQ==
+X-Received: by 2002:a05:6a00:a8b:b0:4cd:6030:4df3 with SMTP id b11-20020a056a000a8b00b004cd60304df3mr57535126pfl.40.1653920570326;
+        Mon, 30 May 2022 07:22:50 -0700 (PDT)
+Received: from tigerii.tok.corp.google.com ([2401:fa00:8f:203:5f0f:14e6:3bd7:41e3])
+        by smtp.gmail.com with ESMTPSA id i29-20020a056a00005d00b00517de3dc3c6sm8835947pfk.84.2022.05.30.07.22.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 30 May 2022 07:22:49 -0700 (PDT)
+From: Sergey Senozhatsky <senozhatsky@chromium.org>
+To: Sumit Semwal <sumit.semwal@linaro.org>,
+	Gustavo Padovan <gustavo@padovan.org>,
+	Christian Konig <christian.koenig@amd.com>
+Date: Mon, 30 May 2022 23:22:32 +0900
+Message-Id: <20220530142232.2871634-1-senozhatsky@chromium.org>
+X-Mailer: git-send-email 2.36.1.124.g0e6072fb45-goog
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.0
-Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu
- <olvaffe@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Gert Wollny <gert.wollny@collabora.com>,
- Gustavo Padovan <gustavo.padovan@collabora.com>,
- Daniel Stone <daniel@fooishbar.org>,
- Tomeu Vizoso <tomeu.vizoso@collabora.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Herring <robh@kernel.org>, Steven Price <steven.price@arm.com>,
- Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
- Rob Clark <robdclark@gmail.com>, Emil Velikov <emil.l.velikov@gmail.com>,
- Robin Murphy <robin.murphy@arm.com>, Qiang Yu <yuq825@gmail.com>,
- Sumit Semwal <sumit.semwal@linaro.org>, "Pan, Xinhui" <Xinhui.Pan@amd.com>,
- Thierry Reding <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Alex Deucher <alexander.deucher@amd.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-References: <20220526235040.678984-1-dmitry.osipenko@collabora.com>
- <20220526235040.678984-15-dmitry.osipenko@collabora.com>
- <0a02a31d-a256-4ca4-0e35-e2ea1868a8ae@amd.com>
- <e6e17c52-43c2-064b-500e-325bb3ba3b2c@collabora.com>
- <02e7946b-34ca-b48e-1ba6-e7b63740a2d9@amd.com>
-From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-In-Reply-To: <02e7946b-34ca-b48e-1ba6-e7b63740a2d9@amd.com>
-Message-ID-Hash: RR2FHGBDBCCLMAIO7JXZFOPJZWCWABOG
-X-Message-ID-Hash: RR2FHGBDBCCLMAIO7JXZFOPJZWCWABOG
-X-MailFrom: dmitry.osipenko@collabora.com
+X-MailFrom: senozhatsky@chromium.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org, Dmitry Osipenko <digetx@gmail.com>, linux-tegra@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com
+Message-ID-Hash: APXM6HFCRHQSLC46FAJLDM5WVYDSJC6S
+X-Message-ID-Hash: APXM6HFCRHQSLC46FAJLDM5WVYDSJC6S
+X-Mailman-Approved-At: Wed, 01 Jun 2022 11:51:03 +0000
+CC: Tomasz Figa <tfiga@chromium.org>, Ricardo Ribalda <ribalda@chromium.org>, Christoph Hellwig <hch@infradead.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Sergey Senozhatsky <senozhatsky@chromium.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v6 14/22] dma-buf: Introduce new locking convention
+Subject: [Linaro-mm-sig] [PATCH] dma-fence: allow dma fence to have their own lock
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RR2FHGBDBCCLMAIO7JXZFOPJZWCWABOG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/APXM6HFCRHQSLC46FAJLDM5WVYDSJC6S/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gNS8zMC8yMiAxNjo0MSwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToNCj4gSGkgRG1pdHJ5LA0K
-PiANCj4gQW0gMzAuMDUuMjIgdW0gMTU6MjYgc2NocmllYiBEbWl0cnkgT3NpcGVua286DQo+PiBI
-ZWxsbyBDaHJpc3RpYW4sDQo+Pg0KPj4gT24gNS8zMC8yMiAwOTo1MCwgQ2hyaXN0aWFuIEvDtm5p
-ZyB3cm90ZToNCj4+PiBIaSBEbWl0cnksDQo+Pj4NCj4+PiBGaXJzdCBvZiBhbGwgcGxlYXNlIHNl
-cGFyYXRlIG91dCB0aGlzIHBhdGNoIGZyb20gdGhlIHJlc3Qgb2YgdGhlIHNlcmllcywNCj4+PiBz
-aW5jZSB0aGlzIGlzIGEgY29tcGxleCBzZXBhcmF0ZSBzdHJ1Y3R1cmFsIGNoYW5nZS4NCj4+IEkg
-YXNzdW1lIGFsbCB0aGUgcGF0Y2hlcyB3aWxsIGdvIHZpYSB0aGUgRFJNIHRyZWUgaW4gdGhlIGVu
-ZCBzaW5jZSB0aGUNCj4+IHJlc3Qgb2YgdGhlIERSTSBwYXRjaGVzIGluIHRoaXMgc2VyaWVzIGRl
-cGVuZCBvbiB0aGlzIGRtYS1idWYgY2hhbmdlLg0KPj4gQnV0IEkgc2VlIHRoYXQgc2VwYXJhdGlv
-biBtYXkgZWFzZSByZXZpZXdpbmcgb2YgdGhlIGRtYS1idWYgY2hhbmdlcywgc28NCj4+IGxldCdz
-IHRyeSBpdC4NCj4gDQo+IFRoYXQgc291bmRzIGxpa2UgeW91IGFyZSB1bmRlcmVzdGltYXRpbmcg
-YSBiaXQgaG93IG11Y2ggdHJvdWJsZSB0aGlzDQo+IHdpbGwgYmUuDQo+IA0KPj4+IEkgaGF2ZSB0
-cmllZCB0aGlzIGJlZm9yZSBhbmQgZmFpbGVkIGJlY2F1c2UgY2F0Y2hpbmcgYWxsIHRoZSBsb2Nr
-cyBpbg0KPj4+IHRoZSByaWdodCBjb2RlIHBhdGhzIGFyZSB2ZXJ5IHRyaWNreS4gU28gZXhwZWN0
-IHNvbWUgZmFsbG91dCBmcm9tIHRoaXMNCj4+PiBhbmQgbWFrZSBzdXJlIHRoZSBrZXJuZWwgdGVz
-dCByb2JvdCBhbmQgQ0kgc3lzdGVtcyBhcmUgY2xlYW4uDQo+PiBTdXJlLCBJJ2xsIGZpeCB1cCBh
-bGwgdGhlIHJlcG9ydGVkIHRoaW5ncyBpbiB0aGUgbmV4dCBpdGVyYXRpb24uDQo+Pg0KPj4gQlRX
-LCBoYXZlIHlvdSBldmVyIHBvc3RlZCB5b3VycyB2ZXJzaW9uIG9mIHRoZSBwYXRjaD8gV2lsbCBi
-ZSBncmVhdCBpZg0KPj4gd2UgY291bGQgY29tcGFyZSB0aGUgY2hhbmdlZCBjb2RlIHBhdGhzLg0K
-PiANCj4gTm8sIEkgbmV2ZXIgZXZlbiBmaW5pc2hlZCBjcmVhdGluZyBpdCBhZnRlciByZWFsaXpp
-bmcgaG93IG11Y2ggd29yayBpdA0KPiB3b3VsZCBiZS4NCj4gDQo+Pj4+IFRoaXMgcGF0Y2ggaW50
-cm9kdWNlcyBuZXcgbG9ja2luZyBjb252ZW50aW9uIGZvciBkbWEtYnVmIHVzZXJzLiBGcm9tDQo+
-Pj4+IG5vdw0KPj4+PiBvbiBhbGwgZG1hLWJ1ZiBpbXBvcnRlcnMgYXJlIHJlc3BvbnNpYmxlIGZv
-ciBob2xkaW5nIGRtYS1idWYNCj4+Pj4gcmVzZXJ2YXRpb24NCj4+Pj4gbG9jayBhcm91bmQgb3Bl
-cmF0aW9ucyBwZXJmb3JtZWQgb3ZlciBkbWEtYnVmcy4NCj4+Pj4NCj4+Pj4gVGhpcyBwYXRjaCBp
-bXBsZW1lbnRzIHRoZSBuZXcgZG1hLWJ1ZiBsb2NraW5nIGNvbnZlbnRpb24gYnk6DQo+Pj4+DQo+
-Pj4+IMKgwqDCoCAxLiBNYWtpbmcgZG1hLWJ1ZiBBUEkgZnVuY3Rpb25zIHRvIHRha2UgdGhlIHJl
-c2VydmF0aW9uIGxvY2suDQo+Pj4+DQo+Pj4+IMKgwqDCoCAyLiBBZGRpbmcgbmV3IGxvY2tlZCB2
-YXJpYW50cyBvZiB0aGUgZG1hLWJ1ZiBBUEkgZnVuY3Rpb25zIGZvcg0KPj4+PiBkcml2ZXJzDQo+
-Pj4+IMKgwqDCoMKgwqDCoCB0aGF0IG5lZWQgdG8gbWFuYWdlIGltcG9ydGVkIGRtYS1idWZzIHVu
-ZGVyIHRoZSBoZWxkIGxvY2suDQo+Pj4gSW5zdGVhZCBvZiBhZGRpbmcgbmV3IGxvY2tlZCB2YXJp
-YW50cyBwbGVhc2UgbWFyayBhbGwgdmFyaWFudHMgd2hpY2gNCj4+PiBleHBlY3QgdG8gYmUgY2Fs
-bGVkIHdpdGhvdXQgYSBsb2NrIHdpdGggYW4gX3VubG9ja2VkIHBvc3RmaXguDQo+Pj4NCj4+PiBU
-aGlzIHNob3VsZCBtYWtlIGl0IGVhc2llciB0byByZW1vdmUgdGhvc2UgaW4gYSBmb2xsb3cgdXAg
-cGF0Y2ggc2V0IGFuZA0KPj4+IHRoZW4gZnVsbHkgbW92ZSB0aGUgbG9ja2luZyBpbnRvIHRoZSBp
-bXBvcnRlci4NCj4+IERvIHdlIHJlYWxseSB3YW50IHRvIG1vdmUgYWxsIHRoZSBsb2NrcyB0byB0
-aGUgaW1wb3J0ZXJzPyBTZWVtcyB0aGUNCj4+IG1ham9yaXR5IG9mIGRyaXZlcnMgc2hvdWxkIGJl
-IGhhcHB5IHdpdGggdGhlIGRtYS1idWYgaGVscGVycyBoYW5kbGluZw0KPj4gdGhlIGxvY2tpbmcg
-Zm9yIHRoZW0uDQo+IA0KPiBZZXMsIEkgY2xlYXJseSB0aGluayBzby4NCj4gDQo+Pg0KPj4+PiDC
-oMKgwqAgMy4gQ29udmVydGluZyBhbGwgZHJpdmVycyB0byB0aGUgbmV3IGxvY2tpbmcgc2NoZW1l
-Lg0KPj4+IEkgaGF2ZSBzdHJvbmcgZG91YnRzIHRoYXQgeW91IGdvdCBhbGwgb2YgdGhlbS4gQXQg
-bGVhc3QgcmFkZW9uIGFuZA0KPj4+IG5vdXZlYXUgc2hvdWxkIGdyYWIgdGhlIHJlc2VydmF0aW9u
-IGxvY2sgaW4gdGhlaXIgLT5hdHRhY2ggY2FsbGJhY2tzDQo+Pj4gc29tZWhvdy4NCj4+IFJhZGVv
-biBhbmQgTm91dmVhdSB1c2UgZ2VtX3ByaW1lX2ltcG9ydF9zZ190YWJsZSgpIGFuZCB0aGV5IHRh
-a2UgcmVzdg0KPj4gbG9jayBhbHJlYWR5LCBzZWVtcyB0aGV5IHNob3VsZCBiZSBva2F5ICg/KQ0K
-PiANCj4gWW91IGFyZSBsb29raW5nIGF0IHRoZSB3cm9uZyBzaWRlLiBZb3UgbmVlZCB0byBmaXgg
-dGhlIGV4cG9ydCBjb2RlIHBhdGgsDQo+IG5vdCB0aGUgaW1wb3J0IG9uZXMuDQo+IA0KPiBTZWUg
-Zm9yIGV4YW1wbGUgYXR0YWNoIG9uIHJhZGVvbiB3b3JrcyBsaWtlIHRoaXMNCj4gZHJtX2dlbV9t
-YXBfYXR0YWNoLT5kcm1fZ2VtX3Bpbi0+cmFkZW9uX2dlbV9wcmltZV9waW4tPnJhZGVvbl9ib19y
-ZXNlcnZlLT50dG1fYm9fcmVzZXJ2ZS0+ZG1hX3Jlc3ZfbG9jay4NCg0KWWVhaCwgSSB3YXMgbG9v
-a2luZyBhdCB0aGUgYm90aCBzaWRlcywgYnV0IG1pc3NlZCB0aGlzIG9uZS4NCg0KPiBTYW1lIGZv
-ciBub3V2ZWF1IGFuZCBwcm9iYWJseSBhIGZldyBvdGhlciBleHBvcnRlcnMgYXMgd2VsbC4gVGhh
-dCB3aWxsDQo+IGNlcnRhaW5seSBjYXVzZSBhIGRlYWRsb2NrIGlmIHlvdSBkb24ndCBmaXggaXQu
-DQo+IA0KPiBJIHN0cm9uZ2x5IHN1Z2dlc3QgdG8gZG8gdGhpcyBzdGVwIGJ5IHN0ZXAsIGZpcnN0
-IGF0dGFjaC9kZXRhY2ggYW5kIHRoZW4NCj4gdGhlIHJlc3QuDQoNClRoYW5rIHlvdSB2ZXJ5IG11
-Y2ggZm9yIHRoZSBzdWdnZXN0aW9ucy4gSSdsbCBpbXBsZW1lbnQgdGhlbSBpbiB0aGUgbmV4dA0K
-dmVyc2lvbi4NCg0KLS0gDQpCZXN0IHJlZ2FyZHMsDQpEbWl0cnkNCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0
-IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFu
-IGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+	RFC
+
+	I don't have a good name for this yet and I did not spend
+	any time on documentataion (for that reason)
+
+We create fences (out fences) as part of operations execution, which
+are short-lived objects, we want to release all memory after operation
+execution is completed or when operation gets cancelled/deleted via
+ioctl().
+
+This creates a bit of a problem. DMA fences are refcounted objects and
+exporter never knows when importer imports a fence or puts its refcount,
+so exporter never knows when fence will be destoyed, which should not
+be a problem for refcounted objects, but here comes the twist...
+
+	operation A - creates and exports out fence X
+	... user-space imports fence X
+	operation A - finishes execution, signals fence X
+	kfree operation A, put dma_fence
+
+DMA fences are designed to borrow spinlock that DMA fences use to
+protect struct dma_fence members:
+
+	struct dma_fence {
+	        spinlock_t *lock;
+
+	        const struct dma_fence_ops *ops;
+		.....
+	};
+
+	void dma_fence_init(struct dma_fence *fence,
+			const struct dma_fence_ops *ops,
+			spinlock_t *lock,
+			u64 context,
+			u64 seqno);
+
+So the `lock` should have at least same lifespan as the DMA fence
+that borrows it, which is impossible to guarantee in our case. When
+we kfree operation A struct we also kfree ->lock that operation
+lends to DMA fence, which outlives operation A (depending on what
+fence importers do and when they drop imported fence refcount).
+
+This patch adds a new memnber to struct dma_fence: __lock_inplace.
+Which is a lock that DMA fence will use to protect its own data when
+it cannot reliably borrow a lock from the outside object.
+
+I also had a patch that puts inplace and borrowed locks to an unnamed
+uninon and adds one more dma_fence_flag_bits to distinguish between
+fences with borrowed and inplace locks
+
+	struct dma_fence {
+		uninon {
+			spinlock_t *lock;
+			spinlock_t __lock_inplace;
+		};
+		...
+	};
+
+And then instead of locking/unlocking ->lock directly we would use
+dma_fence_lock_irqsave()/dma_fence_unlock_irqrestore() macros which
+would check fence flags and either use borrowed lock or inplace lock.
+But after seeing how owten drivers directly access fence ->lock I
+decided to scratch that approach and just add extra spinlock member.
+
+Not-Yet-Signed-off-by: Sergey Senozhatsky <senozhatsky@chromium.org>
+---
+ drivers/dma-buf/dma-fence.c | 10 ++++++++++
+ include/linux/dma-fence.h   |  6 ++++++
+ 2 files changed, 16 insertions(+)
+
+diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
+index 066400ed8841..7ae40b8adb73 100644
+--- a/drivers/dma-buf/dma-fence.c
++++ b/drivers/dma-buf/dma-fence.c
+@@ -958,3 +958,13 @@ dma_fence_init(struct dma_fence *fence, const struct dma_fence_ops *ops,
+ 	trace_dma_fence_init(fence);
+ }
+ EXPORT_SYMBOL(dma_fence_init);
++
++void dma_fence_inplace_lock_init(struct dma_fence *fence,
++				 const struct dma_fence_ops *ops,
++				 u64 context, u64 seqno)
++{
++	spin_lock_init(&fence->__lock_inplace);
++
++	dma_fence_init(fence, ops, &fence->__lock_inplace, context, seqno);
++}
++EXPORT_SYMBOL(dma_fence_inplace_lock_init);
+diff --git a/include/linux/dma-fence.h b/include/linux/dma-fence.h
+index 1ea691753bd3..6b15a0d2eccf 100644
+--- a/include/linux/dma-fence.h
++++ b/include/linux/dma-fence.h
+@@ -64,6 +64,8 @@ struct dma_fence_cb;
+  */
+ struct dma_fence {
+ 	spinlock_t *lock;
++	spinlock_t __lock_inplace;
++
+ 	const struct dma_fence_ops *ops;
+ 	/*
+ 	 * We clear the callback list on kref_put so that by the time we
+@@ -262,6 +264,10 @@ struct dma_fence_ops {
+ void dma_fence_init(struct dma_fence *fence, const struct dma_fence_ops *ops,
+ 		    spinlock_t *lock, u64 context, u64 seqno);
+ 
++void dma_fence_inplace_lock_init(struct dma_fence *fence,
++				 const struct dma_fence_ops *ops,
++				 u64 context, u64 seqno);
++
+ void dma_fence_release(struct kref *kref);
+ void dma_fence_free(struct dma_fence *fence);
+ void dma_fence_describe(struct dma_fence *fence, struct seq_file *seq);
+-- 
+2.36.1.124.g0e6072fb45-goog
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
