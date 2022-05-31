@@ -2,88 +2,130 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id CA2E653A49D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 14:13:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1790E5398AB
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 May 2022 23:25:34 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 080FD3E818
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 12:13:44 +0000 (UTC)
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
-	by lists.linaro.org (Postfix) with ESMTPS id 3F5F23EE5B
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 31 May 2022 02:51:49 +0000 (UTC)
-Received: by mail-pj1-f44.google.com with SMTP id m14-20020a17090a414e00b001df77d29587so1099644pjg.2
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 30 May 2022 19:51:49 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id B683A3EDB1
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 31 May 2022 21:25:32 +0000 (UTC)
+Received: from mail-yb1-f202.google.com (mail-yb1-f202.google.com [209.85.219.202])
+	by lists.linaro.org (Postfix) with ESMTPS id 2C3693ED9F
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 31 May 2022 21:25:28 +0000 (UTC)
+Received: by mail-yb1-f202.google.com with SMTP id z67-20020a254c46000000b0065cd3d2e67eso5523722yba.7
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 31 May 2022 14:25:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:content-transfer-encoding:in-reply-to;
-        bh=xcpbx9Lt9Owdlm64rePa6qexHLWiyypbRMgxN1JLv/M=;
-        b=CyYXFkxhZiXQiu14RxVExNHuXRW0mFlO3k3+vtcoaKX56jC5Ba1StMa8qKRpw1gBRQ
-         m2pdXOpOXP5yoNapy24x4BR7MDFAg/xRghRxTbuu49cw3iyj+gWoa8iNtf8UAns32Wob
-         fQmMqbHWuHhV5B4vVeGxYjmDjsojaHhPcIBeQ=
+        d=google.com; s=20210112;
+        h=date:message-id:mime-version:subject:from:cc;
+        bh=L5daPTOP8huWXGF9zZZ/YOQgC5+YhUKYKEYEGgJKuXI=;
+        b=ni+vDj4JsvkDI6uQO/dBS970cz6dZc8DyFe2Zer4xTkNxkSHvK+9iWBnPWmPFlu+yM
+         GldK8tXmwDcVnPqD5rTmrw1O/5Fx84SqlvyYy1O+NdSXpTGCmxmOP42PbCZEsmapK/pI
+         LdPWt3eWdMCmmsdUAyhxzJwSk4K/f3XFD8JLMQDfFMKoV7yl3wD7c0YEyQZkVTKpKRls
+         bQIXSiUx6bvVEbfIXw2C31CtGBGyRZKnhhZI0oqDXke/z5Cd5Z5SAktEbZN0415/W9kX
+         oeGofIRzd3K6V4+k9c5ZaCl6y2CNVM4tUzcRZzthBuZX0q0DdV2YxdbJ4DLgGVowVllW
+         //UA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:content-transfer-encoding
-         :in-reply-to;
-        bh=xcpbx9Lt9Owdlm64rePa6qexHLWiyypbRMgxN1JLv/M=;
-        b=sdYGP5F5E3Ce/iCngH1oUqCuWyirvXCvFSBkVTqRyInfPk+YI4K7AK5W72QgSBS250
-         YFevwWGW4qBnJd8Uysnp9JISNoGqeq6kbOOsBBLj0o8i0Llcl18XNk7/w0loRif0363D
-         aGTNSYg3Rv7kimC+qRVVYIuYXjq/0iVXlUlWxDCnnJflNS0hoKtr6cZZUUHuC749hsTY
-         E0AF3p326x7p20nRgEjd9IY5KSC6+G+yDwc9atjxNkXKdoDJGU3zJZT6G1BQCtzexwjY
-         Moq7nCj4+JjDJiScCa2cDQKgpODL5ud31xWpwBnyD+zf/fpbjaYLwkgpas5y4hSVw72K
-         EgXw==
-X-Gm-Message-State: AOAM532cb7VxDNL41XgIaDhEV5yH3I4e3dzSOMrzHxbss8J8cCFGm7Vf
-	qqqZnKXx5Cfnbipwss/AF0D2KOZHzyRvWQ==
-X-Google-Smtp-Source: ABdhPJylou6Lhk/REVZIpM88w/Cw5uS6g71yGFXefOXkdi3IddUox11VUsoNOmO40/Smst1WUN/3KA==
-X-Received: by 2002:a17:90a:de01:b0:1df:cda5:8332 with SMTP id m1-20020a17090ade0100b001dfcda58332mr26157122pjv.123.1653965508382;
-        Mon, 30 May 2022 19:51:48 -0700 (PDT)
-Received: from google.com ([240f:75:7537:3187:7d2a:ad1f:afa1:7770])
-        by smtp.gmail.com with ESMTPSA id i16-20020a056a00005000b00518382bceaesm9479310pfk.57.2022.05.30.19.51.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 May 2022 19:51:47 -0700 (PDT)
-Date: Tue, 31 May 2022 11:51:42 +0900
-From: Sergey Senozhatsky <senozhatsky@chromium.org>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <YpWCvniLzJfcp684@google.com>
-References: <20220530142232.2871634-1-senozhatsky@chromium.org>
- <7eee4274-bd69-df8d-9067-771366217804@amd.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <7eee4274-bd69-df8d-9067-771366217804@amd.com>
-X-MailFrom: senozhatsky@chromium.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: OUX3WZPZJ7NMF4ZL7ESFNVWJM3G2JV4K
-X-Message-ID-Hash: OUX3WZPZJ7NMF4ZL7ESFNVWJM3G2JV4K
-X-Mailman-Approved-At: Wed, 01 Jun 2022 12:13:39 +0000
-CC: Sergey Senozhatsky <senozhatsky@chromium.org>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Tomasz Figa <tfiga@chromium.org>, Ricardo Ribalda <ribalda@chromium.org>, Christoph Hellwig <hch@infradead.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:cc;
+        bh=L5daPTOP8huWXGF9zZZ/YOQgC5+YhUKYKEYEGgJKuXI=;
+        b=wFKm+u/v1gZuawdZJ6jKm+xImiViytVhrxQM5n8BJ+YrgCESIA7PCZ55fJJK6bEeHm
+         neoCWX5koajiwZNCEhh69fEFrtvkIIcTlqlI2cO7iBCH6yukj8n3mmVqcbzeE/0qMZvl
+         eXumes3T9QpCf7htOuVbns8goAEhMwMIqiT7b3mSaQBDYktcxJYlCoiv+2TTsFD5Iad8
+         AbDfV2Urs8iqAaHzLkx+dHAQCFeocaqaPuObq9jB5vgCg/ZlDTVGDm73P7jt38gRQHLV
+         aPF3SVmyLd64rxPtgm9nIOSJMTnx87HbUF/aS5k5pmrfn1PgWfeV8VJ5fidOx7v+NmA+
+         Usfg==
+X-Gm-Message-State: AOAM532a4zso8dLCQe5M93s210ZNp5lUDftkkbnekWYHnT3DCP6/GWbD
+	KsbcKeN+z0idj0MYlvzS7RUE9zq4yWZZsojw2Q==
+X-Google-Smtp-Source: ABdhPJxWIiQFRYynwXQQYY0IBjtnA6j7FHVKcbmfGUIrmeVszzJonKHXPDCnsP8F5SOq9IOCJF3wUkeCrypYAVu4VA==
+X-Received: from kaleshsingh.mtv.corp.google.com ([2620:15c:211:200:a3c0:2a66:b25c:16df])
+ (user=kaleshsingh job=sendgmr) by 2002:a25:6588:0:b0:65d:57b9:c470 with SMTP
+ id z130-20020a256588000000b0065d57b9c470mr4071204ybb.142.1654032327734; Tue,
+ 31 May 2022 14:25:27 -0700 (PDT)
+Date: Tue, 31 May 2022 14:25:13 -0700
+Message-Id: <20220531212521.1231133-1-kaleshsingh@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.36.1.255.ge46751e96f-goog
+From: Kalesh Singh <kaleshsingh@google.com>
+Message-ID-Hash: IOR5GRPYEGQCXK6U5OY7IJLZQLICPSPE
+X-Message-ID-Hash: IOR5GRPYEGQCXK6U5OY7IJLZQLICPSPE
+X-MailFrom: 3x4eWYgsKDUwyozs6v6w1uvu22uzs.q20zw1o52-00-6wuzw676.zw1o52.25u@flex--kaleshsingh.bounces.google.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: ilkos@google.com, tjmercier@google.com, surenb@google.com, kernel-team@android.com, Kalesh Singh <kaleshsingh@google.com>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Andrew Morton <akpm@linux-foundation.org>, Johannes Weiner <hannes@cmpxchg.org>, David Hildenbrand <david@redhat.com>, Christoph Anton Mitterer <mail@christoph.anton.mitterer.name>, Mike Rapoport <rppt@kernel.org>, Paul Gortmaker <paul.gortmaker@windriver.com>, Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-fence: allow dma fence to have their own lock
+Subject: [Linaro-mm-sig] [PATCH 0/2] procfs: Add file path and size to /proc/<pid>/fdinfo
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OUX3WZPZJ7NMF4ZL7ESFNVWJM3G2JV4K/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IOR5GRPYEGQCXK6U5OY7IJLZQLICPSPE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On (22/05/30 16:55), Christian K=F6nig wrote:
-> Am 30.05.22 um 16:22 schrieb Sergey Senozhatsky:
-> > [SNIP]
-> > So the `lock` should have at least same lifespan as the DMA fence
-> > that borrows it, which is impossible to guarantee in our case.
->=20
-> Nope, that's not correct. The lock should have at least same lifespan as =
-the
-> context of the DMA fence.
+Processes can pin shared memory by keeping a handle to it through a
+file descriptor; for instance dmabufs, memfd, and ashmem (in Android).
 
-How does one know when it's safe to release the context? DMA fence
-objects are still transparently refcount-ed and "live their own lives",
-how does one synchronize lifespans?
+In the case of a memory leak, to identify the process pinning the
+memory, userspace needs to:
+  - Iterate the /proc/<pid>/fd/* for each process
+  - Do a readlink on each entry to identify the type of memory from
+    the file path.
+  - stat() each entry to get the size of the memory.
+
+The file permissions on /proc/<pid>/fd/* only allows for the owner
+or root to perform the operations above; and so is not suitable for
+capturing the system-wide state in a production environment.
+
+This issue was addressed for dmabufs by making /proc/*/fdinfo/*
+accessible to a process with PTRACE_MODE_READ_FSCREDS credentials[1]
+To allow the same kind of tracking for other types of shared memory,
+add the following fields to /proc/<pid>/fdinfo/<fd>:
+
+path - This allows identifying the type of memory based on common
+       prefixes: e.g. "/memfd...", "/dmabuf...", "/dev/ashmem..."
+
+       This was not an issued when dmabuf tracking was introduced
+       because the exp_name field of dmabuf fdinfo could be used
+       to distinguish dmabuf fds from other types.
+
+size - To track the amount of memory that is being pinned.
+
+       dmabufs expose size as an additional field in fdinfo. Remove
+       this and make it a common field for all fds.
+
+Access to /proc/<pid>/fdinfo is governed by PTRACE_MODE_READ_FSCREDS
+-- the same as for /proc/<pid>/maps which also exposes the path and
+size for mapped memory regions.
+
+This allows for a system process with PTRACE_MODE_READ_FSCREDS to
+account the pinned per-process memory via fdinfo.
+
+-----
+
+There was some concern about exposing the file path in the RFC[2], to that
+effect the change was split into separte patches. Also retrieving the file
+path from fdinfo is guarded by the same capability (PTRACE_MODE_READ) as
+/proc/<pid>/maps which also exposes file path, so this may not be an issue.
+
+[1] https://lore.kernel.org/r/20210308170651.919148-1-kaleshsingh@google.com/
+[2] https://lore.kernel.org/r/20220519214021.3572840-1-kaleshsingh@google.com/
+
+
+Kalesh Singh (2):
+  procfs: Add 'size' to /proc/<pid>/fdinfo/
+  procfs: Add 'path' to /proc/<pid>/fdinfo/
+
+ Documentation/filesystems/proc.rst | 22 ++++++++++++++++++++--
+ drivers/dma-buf/dma-buf.c          |  1 -
+ fs/proc/fd.c                       | 13 +++++++++----
+ 3 files changed, 29 insertions(+), 7 deletions(-)
+
+
+base-commit: 8ab2afa23bd197df47819a87f0265c0ac95c5b6a
+-- 
+2.36.1.255.ge46751e96f-goog
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
