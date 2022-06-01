@@ -2,178 +2,267 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0047453A973
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 16:58:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 280FB53A982
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 17:02:22 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 284743F0CC
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 14:58:32 +0000 (UTC)
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
-	by lists.linaro.org (Postfix) with ESMTPS id 0C73C3ED16
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jun 2022 14:58:28 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id x17so2737003wrg.6
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Jun 2022 07:58:28 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 562F03F0C7
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 15:02:21 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+	by lists.linaro.org (Postfix) with ESMTPS id 01E8C3EBC0
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jun 2022 15:02:16 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id p19so1144945wmg.2
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Jun 2022 08:02:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=bcxJZOoEGdj9HHyfjULCcOOxYPoZGRjHpoFm81lNVOs=;
-        b=P+A7Ep4P+FL+NTqEOtoX8UyZXTOoMsHDrPThvBn0p2XBWcLvNZFCRF7csyce5aJIgC
-         /9J8TqZFKIKxg2L9BWSFt0+g/QdglYWeGwGr9vBpkG6lvUtwe24zixvQnaVAwqK2LTTw
-         1epOyxU982uVJ8EcAUJAU6U9HLFl24Deyae4kvazM0NpvT9iCnL1FaKKzMmKp4f/M2Cf
-         KtruZqQI5Mxe/3mT8Qb8rfG3YG75gK3bweRHBCVUOlHWwTfHTMSj3dbyzs0XWy9/z5XF
-         jQKHq1dd7J3P8yVThLPD9s+w3k5yM1y6Z2oMhGM33BXvo/V2LfUPw0tyLQzHiaLK66HC
-         0syg==
+        d=gmail.com; s=20210112;
+        h=message-id:date:mime-version:user-agent:subject:content-language:to
+         :cc:references:from:in-reply-to:content-transfer-encoding;
+        bh=rbEDheK6UQKyC7vwWgTGjxwmqOZjkVmFEiePYqxVgok=;
+        b=NDDDd3dRmzfvucFAW3CzsYje+65nfJlxj9SixfgvDjDuWxVETyCtBN2G4hhiSRCd3m
+         9M/n0/CbiMWF6W8RDWwwmhExDd3klo/sRke7NiqT6HeG6NDbRgtIVQJW5XMIZd3nfw88
+         1UosYrIkVpF9dywBnSaoI3m3d84pakcuTjLThrx1IVCaF6CJdoBmMlwUsb3eM0lM8U0v
+         P1wZwhKTqBm6GgdxwnrrsfgBflY0aO4Sr21WH+Cd8XgiHedxCeC8V6/r98xKsosY3myq
+         RN9K0Hha1QnV8BGqeVFzUeUT+6oEVA8kYGpmJW3dtp6HD6/BC9NAARvXj8PbiiJ7QCbL
+         zLIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=bcxJZOoEGdj9HHyfjULCcOOxYPoZGRjHpoFm81lNVOs=;
-        b=KolV3XSMkq8jw5OKZrEabq4s5Aw+C8jDeFCJ85lWZjZ0E2zzLz4k4AsLopnh9MiXFE
-         uKM3JL/1xD7arCSvQOAjRAwzLt18XLXaAt8FbEF0O/EVLpUyFPhvr4laxLy4rhgIGPcm
-         fjtS1Ux8Cub0Zxdfigg1119a//XNgXcl6DvFHp5Hz9FvOg6VWgUD4X3NnbyMshtzSIh/
-         Eqe0Jf3+PPbqmoRYK9ZEBrBXXf4pl4hDr3oDNOcdfwthwcwQD+BPwhWhaMOkrvui5t+Y
-         LK74HNW0jGh8tH3Uwq7gQihsc3dOow+WRqJftD1ExSdbiXlmLwVf41Ym9qd2M/jo3L58
-         lESA==
-X-Gm-Message-State: AOAM532KfTds+WoVGpV8wj/KcDO6mB6XBCPQjw/Jgh0pUICNuQIEBANG
-	vNeKPsXj6dbvngC8x2ddwYOTRMeePxdHgOrhLYW/yQ==
-X-Google-Smtp-Source: ABdhPJwGBhJdLWicc8l4yIAJBeULOWR4YtzFjOWhqpz0EB4Y0mtAJ7jVfp5UnN5oAyj8L/4fmel35fvjSN1Ws9Bq2yA=
-X-Received: by 2002:a05:6000:71b:b0:20e:ed96:e976 with SMTP id
- bs27-20020a056000071b00b0020eed96e976mr178409wrb.500.1654095506747; Wed, 01
- Jun 2022 07:58:26 -0700 (PDT)
+        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+         :content-language:to:cc:references:from:in-reply-to
+         :content-transfer-encoding;
+        bh=rbEDheK6UQKyC7vwWgTGjxwmqOZjkVmFEiePYqxVgok=;
+        b=NwpMlwrL9u6FTa7cbVPkbZ6RXIFeuXKmO0wQ7fQ7AUHmZLlQr9KzZZw/EvM0ow/avi
+         uqcmPNQPjhyw78pPiCu9TSz7noC+XtPpoWsoZZGnNzalg+8o2JC68jmI7pKRy49zL9LN
+         +EE682FrxrlmLAzLO2i8lCWXSy+XNI9IqJQ1btSlIFbukZMVz0L+Qb5QS8EoGV+XHpJ0
+         jA3fGGmi9EQYDrR2qb3Ov1SxwaEg0LI3c/5c5x7lwGca4V16gSruw/CtXu5mq7BDDOaQ
+         +PstUnndPVofNH3jT2OOEd9koKzl0A4HWokZxYAA1MU3CNqzrT+VcOjrhC+pB2K8rKqN
+         PxKQ==
+X-Gm-Message-State: AOAM531ScR0vGsKDWu13fxPuHG5l3D/IEcRX8sLKatmoestD9sv9fcK1
+	YAFknEDbH++16vg8lAMSk2w=
+X-Google-Smtp-Source: ABdhPJzQu7LhhTR3bRvCCtmCXaKNkaqLAguVHXuLq1EWU7TKwK0uVOTAIkWkj5UleoR7DNTlwIGYuQ==
+X-Received: by 2002:a05:600c:3ac5:b0:397:774d:3890 with SMTP id d5-20020a05600c3ac500b00397774d3890mr225379wms.92.1654095733913;
+        Wed, 01 Jun 2022 08:02:13 -0700 (PDT)
+Received: from ?IPV6:2a02:908:1256:79a0:d1fb:e1e4:e193:e55f? ([2a02:908:1256:79a0:d1fb:e1e4:e193:e55f])
+        by smtp.gmail.com with ESMTPSA id p68-20020a1c2947000000b003976525c38bsm5595812wmp.3.2022.06.01.08.02.12
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 01 Jun 2022 08:02:13 -0700 (PDT)
+Message-ID: <4b79c2ea-dd1a-623d-e5b4-faa732c1a42d@gmail.com>
+Date: Wed, 1 Jun 2022 17:02:11 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Content-Language: en-US
+To: Stephen Brennan <stephen.s.brennan@oracle.com>,
+ Kalesh Singh <kaleshsingh@google.com>
 References: <20220531212521.1231133-1-kaleshsingh@google.com>
- <20220531212521.1231133-2-kaleshsingh@google.com> <78efbada-6dd5-ead7-fc10-38b5e1e92fc5@amd.com>
-In-Reply-To: <78efbada-6dd5-ead7-fc10-38b5e1e92fc5@amd.com>
-From: Kalesh Singh <kaleshsingh@google.com>
-Date: Wed, 1 Jun 2022 07:58:15 -0700
-Message-ID: <CAC_TJve6CTA-ssG9zJm2_=MJqRhCqV7Bwgz1YiSH7RVVy+pg4g@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-Message-ID-Hash: MC6ZXL3OXFQAD3FMN6UEIKXVLF6MYQ67
-X-Message-ID-Hash: MC6ZXL3OXFQAD3FMN6UEIKXVLF6MYQ67
-X-MailFrom: kaleshsingh@google.com
+ <20220531212521.1231133-3-kaleshsingh@google.com>
+ <14f85d24-a9de-9706-32f0-30be4999c71c@oracle.com>
+ <CAC_TJveDzDaYQKmuLSkGWpnuCW+gvrqdVJqq=wbzoTRjw4OoFw@mail.gmail.com>
+ <875yll1fp1.fsf@stepbren-lnx.us.oracle.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+In-Reply-To: <875yll1fp1.fsf@stepbren-lnx.us.oracle.com>
+Message-ID-Hash: 5QH6E4OCXMCVOD2JIGCA7TOHUSIACS3B
+X-Message-ID-Hash: 5QH6E4OCXMCVOD2JIGCA7TOHUSIACS3B
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Ioannis Ilkos <ilkos@google.com>, "T.J. Mercier" <tjmercier@google.com>, Suren Baghdasaryan <surenb@google.com>, "Cc: Android Kernel" <kernel-team@android.com>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@redhat.com>, Johannes Weiner <hannes@cmpxchg.org>, Christoph Anton Mitterer <mail@christoph.anton.mitterer.name>, Paul Gortmaker <paul.gortmaker@windriver.com>, Mike Rapoport <rppt@kernel.org>, Randy Dunlap <rdunlap@infradead.org>, LKML <linux-kernel@vger.kernel.org>, linux-fsdevel <linux-fsdevel@vger.kernel.org>, "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, Linux Media Mailing List <linux-media@vger.kernel.org>, DRI mailing list <dri-devel@lists.freedesktop.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
+CC: Ioannis Ilkos <ilkos@google.com>, "T.J. Mercier" <tjmercier@google.com>, Suren Baghdasaryan <surenb@google.com>, "Cc: Android Kernel" <kernel-team@android.com>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@redhat.com>, Christoph Anton Mitterer <mail@christoph.anton.mitterer.name>, Johannes Weiner <hannes@cmpxchg.org>, Colin Cross <ccross@google.com>, Mike Rapoport <rppt@kernel.org>, Paul Gortmaker <paul.gortmaker@windriver.com>, Randy Dunlap <rdunlap@infradead.org>, LKML <linux-kernel@vger.kernel.org>, linux-fsdevel <linux-fsdevel@vger.kernel.org>, "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, Linux Media Mailing List <linux-media@vger.kernel.org>, DRI mailing list <dri-devel@lists.freedesktop.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/2] procfs: Add 'size' to /proc/<pid>/fdinfo/
+Subject: [Linaro-mm-sig] Re: [PATCH 2/2] procfs: Add 'path' to /proc/<pid>/fdinfo/
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MC6ZXL3OXFQAD3FMN6UEIKXVLF6MYQ67/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5QH6E4OCXMCVOD2JIGCA7TOHUSIACS3B/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-T24gV2VkLCBKdW4gMSwgMjAyMiBhdCA2OjU1IEFNIENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlh
-bi5rb2VuaWdAYW1kLmNvbT4gd3JvdGU6DQo+DQo+IEFtIDMxLjA1LjIyIHVtIDIzOjI1IHNjaHJp
-ZWIgS2FsZXNoIFNpbmdoOg0KPiA+IFRvIGJlIGFibGUgdG8gYWNjb3VudCB0aGUgYW1vdW50IG9m
-IG1lbW9yeSBhIHByb2Nlc3MgaXMga2VlcGluZyBwaW5uZWQNCj4gPiBieSBvcGVuIGZpbGUgZGVz
-Y3JpcHRvcnMgYWRkIGEgJ3NpemUnIGZpZWxkIHRvIGZkaW5mbyBvdXRwdXQuDQo+ID4NCj4gPiBk
-bWFidWZzIGZkcyBhbHJlYWR5IGV4cG9zZSBhICdzaXplJyBmaWVsZCBmb3IgdGhpcyByZWFzb24s
-IHJlbW92ZSB0aGlzDQo+ID4gYW5kIG1ha2UgaXQgYSBjb21tb24gZmllbGQgZm9yIGFsbCBmZHMu
-IFRoaXMgYWxsb3dzIHRyYWNraW5nIG9mDQo+ID4gb3RoZXIgdHlwZXMgb2YgbWVtb3J5IChlLmcu
-IG1lbWZkIGFuZCBhc2htZW0gaW4gQW5kcm9pZCkuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBL
-YWxlc2ggU2luZ2ggPGthbGVzaHNpbmdoQGdvb2dsZS5jb20+DQo+DQo+IEF0IGxlYXN0IGZvciB0
-aGUgRE1BLWJ1ZiBwYXJ0IGZlZWwgZnJlZSB0byBhZGQgYW4gUmV2aWV3ZWQtYnk6IENocmlzdGlh
-bg0KPiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4gZm9yIHRoaXMuDQoNClRoYW5r
-cyBmb3IgdGhlIHJldmlldywgQ2hyaXN0aWFuLg0KDQotLUthbGVzaA0KDQo+DQo+IFJlZ2FyZHMs
-DQo+IENocmlzdGlhbi4NCj4NCj4gPiAtLS0NCj4gPg0KPiA+IENoYW5nZXMgZnJvbSByZmM6DQo+
-ID4gICAgLSBTcGxpdCBhZGRpbmcgJ3NpemUnIGFuZCAncGF0aCcgaW50byBhIHNlcGFyYXRlIHBh
-dGNoZXMsIHBlciBDaHJpc3RpYW4NCj4gPiAgICAtIFNwbGl0IGZkaW5mbyBzZXFfcHJpbnRmIGlu
-dG8gc2VwYXJhdGUgbGluZXMsIHBlciBDaHJpc3RpYW4NCj4gPiAgICAtIEZpeCBpbmRlbnRhdGlv
-biAodXNlIHRhYnMpIGluIGRvY3VtZW50YWlvbiwgcGVyIFJhbmR5DQo+ID4NCj4gPiAgIERvY3Vt
-ZW50YXRpb24vZmlsZXN5c3RlbXMvcHJvYy5yc3QgfCAxMiArKysrKysrKysrLS0NCj4gPiAgIGRy
-aXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMgICAgICAgICAgfCAgMSAtDQo+ID4gICBmcy9wcm9jL2Zk
-LmMgICAgICAgICAgICAgICAgICAgICAgIHwgIDkgKysrKystLS0tDQo+ID4gICAzIGZpbGVzIGNo
-YW5nZWQsIDE1IGluc2VydGlvbnMoKyksIDcgZGVsZXRpb25zKC0pDQo+ID4NCj4gPiBkaWZmIC0t
-Z2l0IGEvRG9jdW1lbnRhdGlvbi9maWxlc3lzdGVtcy9wcm9jLnJzdCBiL0RvY3VtZW50YXRpb24v
-ZmlsZXN5c3RlbXMvcHJvYy5yc3QNCj4gPiBpbmRleCAxYmM5MWZiOGMzMjEuLjc3OWMwNTUyOGU4
-NyAxMDA2NDQNCj4gPiAtLS0gYS9Eb2N1bWVudGF0aW9uL2ZpbGVzeXN0ZW1zL3Byb2MucnN0DQo+
-ID4gKysrIGIvRG9jdW1lbnRhdGlvbi9maWxlc3lzdGVtcy9wcm9jLnJzdA0KPiA+IEBAIC0xODg2
-LDEzICsxODg2LDE0IEBAIGlmIHByZWNpc2UgcmVzdWx0cyBhcmUgbmVlZGVkLg0KPiA+ICAgMy44
-IC9wcm9jLzxwaWQ+L2ZkaW5mby88ZmQ+IC0gSW5mb3JtYXRpb24gYWJvdXQgb3BlbmVkIGZpbGUN
-Cj4gPiAgIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLQ0KPiA+ICAgVGhpcyBmaWxlIHByb3ZpZGVzIGluZm9ybWF0aW9uIGFzc29j
-aWF0ZWQgd2l0aCBhbiBvcGVuZWQgZmlsZS4gVGhlIHJlZ3VsYXINCj4gPiAtZmlsZXMgaGF2ZSBh
-dCBsZWFzdCBmb3VyIGZpZWxkcyAtLSAncG9zJywgJ2ZsYWdzJywgJ21udF9pZCcgYW5kICdpbm8n
-Lg0KPiA+ICtmaWxlcyBoYXZlIGF0IGxlYXN0IGZpdmUgZmllbGRzIC0tICdwb3MnLCAnZmxhZ3Mn
-LCAnbW50X2lkJywgJ2lubycsIGFuZCAnc2l6ZScuDQo+ID4gKw0KPiA+ICAgVGhlICdwb3MnIHJl
-cHJlc2VudHMgdGhlIGN1cnJlbnQgb2Zmc2V0IG9mIHRoZSBvcGVuZWQgZmlsZSBpbiBkZWNpbWFs
-DQo+ID4gICBmb3JtIFtzZWUgbHNlZWsoMikgZm9yIGRldGFpbHNdLCAnZmxhZ3MnIGRlbm90ZXMg
-dGhlIG9jdGFsIE9feHh4IG1hc2sgdGhlDQo+ID4gICBmaWxlIGhhcyBiZWVuIGNyZWF0ZWQgd2l0
-aCBbc2VlIG9wZW4oMikgZm9yIGRldGFpbHNdIGFuZCAnbW50X2lkJyByZXByZXNlbnRzDQo+ID4g
-ICBtb3VudCBJRCBvZiB0aGUgZmlsZSBzeXN0ZW0gY29udGFpbmluZyB0aGUgb3BlbmVkIGZpbGUg
-W3NlZSAzLjUNCj4gPiAgIC9wcm9jLzxwaWQ+L21vdW50aW5mbyBmb3IgZGV0YWlsc10uICdpbm8n
-IHJlcHJlc2VudHMgdGhlIGlub2RlIG51bWJlciBvZg0KPiA+IC10aGUgZmlsZS4NCj4gPiArdGhl
-IGZpbGUsIGFuZCAnc2l6ZScgcmVwcmVzZW50cyB0aGUgc2l6ZSBvZiB0aGUgZmlsZSBpbiBieXRl
-cy4NCj4gPg0KPiA+ICAgQSB0eXBpY2FsIG91dHB1dCBpczo6DQo+ID4NCj4gPiBAQCAtMTkwMCw2
-ICsxOTAxLDcgQEAgQSB0eXBpY2FsIG91dHB1dCBpczo6DQo+ID4gICAgICAgZmxhZ3M6ICAwMTAw
-MDAyDQo+ID4gICAgICAgbW50X2lkOiAxOQ0KPiA+ICAgICAgIGlubzogICAgNjMxMDcNCj4gPiAr
-ICAgICBzaXplOiAgIDANCj4gPg0KPiA+ICAgQWxsIGxvY2tzIGFzc29jaWF0ZWQgd2l0aCBhIGZp
-bGUgZGVzY3JpcHRvciBhcmUgc2hvd24gaW4gaXRzIGZkaW5mbyB0b286Og0KPiA+DQo+ID4gQEAg
-LTE5MTcsNiArMTkxOSw3IEBAIEV2ZW50ZmQgZmlsZXMNCj4gPiAgICAgICBmbGFnczogIDA0MDAy
-DQo+ID4gICAgICAgbW50X2lkOiA5DQo+ID4gICAgICAgaW5vOiAgICA2MzEwNw0KPiA+ICsgICAg
-IHNpemU6ICAgMA0KPiA+ICAgICAgIGV2ZW50ZmQtY291bnQ6ICA1YQ0KPiA+DQo+ID4gICB3aGVy
-ZSAnZXZlbnRmZC1jb3VudCcgaXMgaGV4IHZhbHVlIG9mIGEgY291bnRlci4NCj4gPiBAQCAtMTkz
-MCw2ICsxOTMzLDcgQEAgU2lnbmFsZmQgZmlsZXMNCj4gPiAgICAgICBmbGFnczogIDA0MDAyDQo+
-ID4gICAgICAgbW50X2lkOiA5DQo+ID4gICAgICAgaW5vOiAgICA2MzEwNw0KPiA+ICsgICAgIHNp
-emU6ICAgMA0KPiA+ICAgICAgIHNpZ21hc2s6ICAgICAgICAwMDAwMDAwMDAwMDAwMjAwDQo+ID4N
-Cj4gPiAgIHdoZXJlICdzaWdtYXNrJyBpcyBoZXggdmFsdWUgb2YgdGhlIHNpZ25hbCBtYXNrIGFz
-c29jaWF0ZWQNCj4gPiBAQCAtMTk0NCw2ICsxOTQ4LDcgQEAgRXBvbGwgZmlsZXMNCj4gPiAgICAg
-ICBmbGFnczogIDAyDQo+ID4gICAgICAgbW50X2lkOiA5DQo+ID4gICAgICAgaW5vOiAgICA2MzEw
-Nw0KPiA+ICsgICAgIHNpemU6ICAgMA0KPiA+ICAgICAgIHRmZDogICAgICAgIDUgZXZlbnRzOiAg
-ICAgICAxZCBkYXRhOiBmZmZmZmZmZmZmZmZmZmZmIHBvczowIGlubzo2MWFmIHNkZXY6Nw0KPiA+
-DQo+ID4gICB3aGVyZSAndGZkJyBpcyBhIHRhcmdldCBmaWxlIGRlc2NyaXB0b3IgbnVtYmVyIGlu
-IGRlY2ltYWwgZm9ybSwNCj4gPiBAQCAtMTk2Miw2ICsxOTY3LDcgQEAgRm9yIGlub3RpZnkgZmls
-ZXMgdGhlIGZvcm1hdCBpcyB0aGUgZm9sbG93aW5nOjoNCj4gPiAgICAgICBmbGFnczogIDAyMDAw
-MDAwDQo+ID4gICAgICAgbW50X2lkOiA5DQo+ID4gICAgICAgaW5vOiAgICA2MzEwNw0KPiA+ICsg
-ICAgIHNpemU6ICAgMA0KPiA+ICAgICAgIGlub3RpZnkgd2Q6MyBpbm86OWU3ZSBzZGV2OjgwMDAx
-MyBtYXNrOjgwMGFmY2UgaWdub3JlZF9tYXNrOjAgZmhhbmRsZS1ieXRlczo4IGZoYW5kbGUtdHlw
-ZToxIGZfaGFuZGxlOjdlOWUwMDAwNjQwZDFiNmQNCj4gPg0KPiA+ICAgd2hlcmUgJ3dkJyBpcyBh
-IHdhdGNoIGRlc2NyaXB0b3IgaW4gZGVjaW1hbCBmb3JtLCBpLmUuIGEgdGFyZ2V0IGZpbGUNCj4g
-PiBAQCAtMTk4NSw2ICsxOTkxLDcgQEAgRm9yIGZhbm90aWZ5IGZpbGVzIHRoZSBmb3JtYXQgaXM6
-Og0KPiA+ICAgICAgIGZsYWdzOiAgMDINCj4gPiAgICAgICBtbnRfaWQ6IDkNCj4gPiAgICAgICBp
-bm86ICAgIDYzMTA3DQo+ID4gKyAgICAgc2l6ZTogICAwDQo+ID4gICAgICAgZmFub3RpZnkgZmxh
-Z3M6MTAgZXZlbnQtZmxhZ3M6MA0KPiA+ICAgICAgIGZhbm90aWZ5IG1udF9pZDoxMiBtZmxhZ3M6
-NDAgbWFzazozOCBpZ25vcmVkX21hc2s6NDAwMDAwMDMNCj4gPiAgICAgICBmYW5vdGlmeSBpbm86
-NGY5Njkgc2Rldjo4MDAwMTMgbWZsYWdzOjAgbWFzazozYiBpZ25vcmVkX21hc2s6NDAwMDAwMDAg
-ZmhhbmRsZS1ieXRlczo4IGZoYW5kbGUtdHlwZToxIGZfaGFuZGxlOjY5ZjkwNDAwYzI3NWI1YjQN
-Cj4gPiBAQCAtMjAxMCw2ICsyMDE3LDcgQEAgVGltZXJmZCBmaWxlcw0KPiA+ICAgICAgIGZsYWdz
-OiAgMDINCj4gPiAgICAgICBtbnRfaWQ6IDkNCj4gPiAgICAgICBpbm86ICAgIDYzMTA3DQo+ID4g
-KyAgICAgc2l6ZTogICAwDQo+ID4gICAgICAgY2xvY2tpZDogMA0KPiA+ICAgICAgIHRpY2tzOiAw
-DQo+ID4gICAgICAgc2V0dGltZSBmbGFnczogMDENCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9k
-bWEtYnVmL2RtYS1idWYuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMNCj4gPiBpbmRleCAz
-MmY1NTY0MDg5MGMuLjVmMmFlMzhjOTYwZiAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJzL2RtYS1i
-dWYvZG1hLWJ1Zi5jDQo+ID4gKysrIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYw0KPiA+IEBA
-IC0zNzgsNyArMzc4LDYgQEAgc3RhdGljIHZvaWQgZG1hX2J1Zl9zaG93X2ZkaW5mbyhzdHJ1Y3Qg
-c2VxX2ZpbGUgKm0sIHN0cnVjdCBmaWxlICpmaWxlKQ0KPiA+ICAgew0KPiA+ICAgICAgIHN0cnVj
-dCBkbWFfYnVmICpkbWFidWYgPSBmaWxlLT5wcml2YXRlX2RhdGE7DQo+ID4NCj4gPiAtICAgICBz
-ZXFfcHJpbnRmKG0sICJzaXplOlx0JXp1XG4iLCBkbWFidWYtPnNpemUpOw0KPiA+ICAgICAgIC8q
-IERvbid0IGNvdW50IHRoZSB0ZW1wb3JhcnkgcmVmZXJlbmNlIHRha2VuIGluc2lkZSBwcm9jZnMg
-c2VxX3Nob3cgKi8NCj4gPiAgICAgICBzZXFfcHJpbnRmKG0sICJjb3VudDpcdCVsZFxuIiwgZmls
-ZV9jb3VudChkbWFidWYtPmZpbGUpIC0gMSk7DQo+ID4gICAgICAgc2VxX3ByaW50ZihtLCAiZXhw
-X25hbWU6XHQlc1xuIiwgZG1hYnVmLT5leHBfbmFtZSk7DQo+ID4gZGlmZiAtLWdpdCBhL2ZzL3By
-b2MvZmQuYyBiL2ZzL3Byb2MvZmQuYw0KPiA+IGluZGV4IDkxM2JlZjBkMmEzNi4uNDY0YmMzZjU1
-NzU5IDEwMDY0NA0KPiA+IC0tLSBhL2ZzL3Byb2MvZmQuYw0KPiA+ICsrKyBiL2ZzL3Byb2MvZmQu
-Yw0KPiA+IEBAIC01NCwxMCArNTQsMTEgQEAgc3RhdGljIGludCBzZXFfc2hvdyhzdHJ1Y3Qgc2Vx
-X2ZpbGUgKm0sIHZvaWQgKnYpDQo+ID4gICAgICAgaWYgKHJldCkNCj4gPiAgICAgICAgICAgICAg
-IHJldHVybiByZXQ7DQo+ID4NCj4gPiAtICAgICBzZXFfcHJpbnRmKG0sICJwb3M6XHQlbGxpXG5m
-bGFnczpcdDAlb1xubW50X2lkOlx0JWlcbmlubzpcdCVsdVxuIiwNCj4gPiAtICAgICAgICAgICAg
-ICAgIChsb25nIGxvbmcpZmlsZS0+Zl9wb3MsIGZfZmxhZ3MsDQo+ID4gLSAgICAgICAgICAgICAg
-ICByZWFsX21vdW50KGZpbGUtPmZfcGF0aC5tbnQpLT5tbnRfaWQsDQo+ID4gLSAgICAgICAgICAg
-ICAgICBmaWxlX2lub2RlKGZpbGUpLT5pX2lubyk7DQo+ID4gKyAgICAgc2VxX3ByaW50ZihtLCAi
-cG9zOlx0JWxsaVxuIiwgKGxvbmcgbG9uZylmaWxlLT5mX3Bvcyk7DQo+ID4gKyAgICAgc2VxX3By
-aW50ZihtLCAiZmxhZ3M6XHQwJW9cbiIsIGZfZmxhZ3MpOw0KPiA+ICsgICAgIHNlcV9wcmludGYo
-bSwgIm1udF9pZDpcdCVpXG4iLCByZWFsX21vdW50KGZpbGUtPmZfcGF0aC5tbnQpLT5tbnRfaWQp
-Ow0KPiA+ICsgICAgIHNlcV9wcmludGYobSwgImlubzpcdCVsdVxuIiwgZmlsZV9pbm9kZShmaWxl
-KS0+aV9pbm8pOw0KPiA+ICsgICAgIHNlcV9wcmludGYobSwgInNpemU6XHQlbGxpXG4iLCAobG9u
-ZyBsb25nKWZpbGVfaW5vZGUoZmlsZSktPmlfc2l6ZSk7DQo+ID4NCj4gPiAgICAgICAvKiBzaG93
-X2ZkX2xvY2tzKCkgbmV2ZXIgZGVmZXJlbmNlcyBmaWxlcyBzbyBhIHN0YWxlIHZhbHVlIGlzIHNh
-ZmUgKi8NCj4gPiAgICAgICBzaG93X2ZkX2xvY2tzKG0sIGZpbGUsIGZpbGVzKTsNCj4NCl9fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcg
-bWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNj
-cmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9y
-Zwo=
+Am 01.06.22 um 00:48 schrieb Stephen Brennan:
+> Kalesh Singh <kaleshsingh@google.com> writes:
+>> On Tue, May 31, 2022 at 3:07 PM Stephen Brennan
+>> <stephen.s.brennan@oracle.com> wrote:
+>>> On 5/31/22 14:25, Kalesh Singh wrote:
+>>>> In order to identify the type of memory a process has pinned through
+>>>> its open fds, add the file path to fdinfo output. This allows
+>>>> identifying memory types based on common prefixes. e.g. "/memfd...",
+>>>> "/dmabuf...", "/dev/ashmem...".
+>>>>
+>>>> Access to /proc/<pid>/fdinfo is governed by PTRACE_MODE_READ_FSCREDS
+>>>> the same as /proc/<pid>/maps which also exposes the file path of
+>>>> mappings; so the security permissions for accessing path is consistent
+>>>> with that of /proc/<pid>/maps.
+>>> Hi Kalesh,
+>> Hi Stephen,
+>>
+>> Thanks for taking a look.
+>>
+>>> I think I see the value in the size field, but I'm curious about path,
+>>> which is available via readlink /proc/<pid>/fd/<n>, since those are
+>>> symlinks to the file themselves.
+>> This could work if we are root, but the file permissions wouldn't
+>> allow us to do the readlink on other processes otherwise. We want to
+>> be able to capture the system state in production environments from
+>> some trusted process with ptrace read capability.
+> Interesting, thanks for explaining. It seems weird to have a duplicate
+> interface for the same information but such is life.
+
+Yeah, the size change is really straight forward but for this one I'm 
+not 100% sure either.
+
+Probably best to ping some core fs developer before going further with it.
+
+BTW: Any preferred branch to push this upstream? If not I can take it 
+through drm-misc-next.
+
+Regards,
+Christian.
+
+>
+>>> File paths can contain fun characters like newlines or colons, which
+>>> could make parsing out filenames in this text file... fun. How would your
+>>> userspace parsing logic handle "/home/stephen/filename\nsize:\t4096"? The
+>>> readlink(2) API makes that easy already.
+>> I think since we have escaped the "\n" (seq_file_path(m, file, "\n")),
+> I really should have read through that function before commenting,
+> thanks for teaching me something new :)
+>
+> Stephen
+>
+>> then user space might parse this line like:
+>>
+>> if (strncmp(line, "path:\t", 6) == 0)
+>>          char* path = line + 6;
+>>
+>>
+>> Thanks,
+>> Kalesh
+>>
+>>> Is the goal avoiding races (e.g. file descriptor 3 is closed and reopened
+>>> to a different path between reading fdinfo and stating the fd)?
+>>>
+>>> Stephen
+>>>
+>>>> Signed-off-by: Kalesh Singh <kaleshsingh@google.com>
+>>>> ---
+>>>>
+>>>> Changes from rfc:
+>>>>    - Split adding 'size' and 'path' into a separate patches, per Christian
+>>>>    - Fix indentation (use tabs) in documentaion, per Randy
+>>>>
+>>>>   Documentation/filesystems/proc.rst | 14 ++++++++++++--
+>>>>   fs/proc/fd.c                       |  4 ++++
+>>>>   2 files changed, 16 insertions(+), 2 deletions(-)
+>>>>
+>>>> diff --git a/Documentation/filesystems/proc.rst b/Documentation/filesystems/proc.rst
+>>>> index 779c05528e87..591f12d30d97 100644
+>>>> --- a/Documentation/filesystems/proc.rst
+>>>> +++ b/Documentation/filesystems/proc.rst
+>>>> @@ -1886,14 +1886,16 @@ if precise results are needed.
+>>>>   3.8  /proc/<pid>/fdinfo/<fd> - Information about opened file
+>>>>   ---------------------------------------------------------------
+>>>>   This file provides information associated with an opened file. The regular
+>>>> -files have at least five fields -- 'pos', 'flags', 'mnt_id', 'ino', and 'size'.
+>>>> +files have at least six fields -- 'pos', 'flags', 'mnt_id', 'ino', 'size',
+>>>> +and 'path'.
+>>>>
+>>>>   The 'pos' represents the current offset of the opened file in decimal
+>>>>   form [see lseek(2) for details], 'flags' denotes the octal O_xxx mask the
+>>>>   file has been created with [see open(2) for details] and 'mnt_id' represents
+>>>>   mount ID of the file system containing the opened file [see 3.5
+>>>>   /proc/<pid>/mountinfo for details]. 'ino' represents the inode number of
+>>>> -the file, and 'size' represents the size of the file in bytes.
+>>>> +the file, 'size' represents the size of the file in bytes, and 'path'
+>>>> +represents the file path.
+>>>>
+>>>>   A typical output is::
+>>>>
+>>>> @@ -1902,6 +1904,7 @@ A typical output is::
+>>>>        mnt_id: 19
+>>>>        ino:    63107
+>>>>        size:   0
+>>>> +     path:   /dev/null
+>>>>
+>>>>   All locks associated with a file descriptor are shown in its fdinfo too::
+>>>>
+>>>> @@ -1920,6 +1923,7 @@ Eventfd files
+>>>>        mnt_id: 9
+>>>>        ino:    63107
+>>>>        size:   0
+>>>> +     path:   anon_inode:[eventfd]
+>>>>        eventfd-count:  5a
+>>>>
+>>>>   where 'eventfd-count' is hex value of a counter.
+>>>> @@ -1934,6 +1938,7 @@ Signalfd files
+>>>>        mnt_id: 9
+>>>>        ino:    63107
+>>>>        size:   0
+>>>> +     path:   anon_inode:[signalfd]
+>>>>        sigmask:        0000000000000200
+>>>>
+>>>>   where 'sigmask' is hex value of the signal mask associated
+>>>> @@ -1949,6 +1954,7 @@ Epoll files
+>>>>        mnt_id: 9
+>>>>        ino:    63107
+>>>>        size:   0
+>>>> +     path:   anon_inode:[eventpoll]
+>>>>        tfd:        5 events:       1d data: ffffffffffffffff pos:0 ino:61af sdev:7
+>>>>
+>>>>   where 'tfd' is a target file descriptor number in decimal form,
+>>>> @@ -1968,6 +1974,7 @@ For inotify files the format is the following::
+>>>>        mnt_id: 9
+>>>>        ino:    63107
+>>>>        size:   0
+>>>> +     path:   anon_inode:inotify
+>>>>        inotify wd:3 ino:9e7e sdev:800013 mask:800afce ignored_mask:0 fhandle-bytes:8 fhandle-type:1 f_handle:7e9e0000640d1b6d
+>>>>
+>>>>   where 'wd' is a watch descriptor in decimal form, i.e. a target file
+>>>> @@ -1992,6 +1999,7 @@ For fanotify files the format is::
+>>>>        mnt_id: 9
+>>>>        ino:    63107
+>>>>        size:   0
+>>>> +     path:   anon_inode:[fanotify]
+>>>>        fanotify flags:10 event-flags:0
+>>>>        fanotify mnt_id:12 mflags:40 mask:38 ignored_mask:40000003
+>>>>        fanotify ino:4f969 sdev:800013 mflags:0 mask:3b ignored_mask:40000000 fhandle-bytes:8 fhandle-type:1 f_handle:69f90400c275b5b4
+>>>> @@ -2018,6 +2026,7 @@ Timerfd files
+>>>>        mnt_id: 9
+>>>>        ino:    63107
+>>>>        size:   0
+>>>> +     path:   anon_inode:[timerfd]
+>>>>        clockid: 0
+>>>>        ticks: 0
+>>>>        settime flags: 01
+>>>> @@ -2042,6 +2051,7 @@ DMA Buffer files
+>>>>        mnt_id: 9
+>>>>        ino:    63107
+>>>>        size:   32768
+>>>> +     path:   /dmabuf:
+>>>>        count:  2
+>>>>        exp_name:  system-heap
+>>>>
+>>>> diff --git a/fs/proc/fd.c b/fs/proc/fd.c
+>>>> index 464bc3f55759..8889a8ba09d4 100644
+>>>> --- a/fs/proc/fd.c
+>>>> +++ b/fs/proc/fd.c
+>>>> @@ -60,6 +60,10 @@ static int seq_show(struct seq_file *m, void *v)
+>>>>        seq_printf(m, "ino:\t%lu\n", file_inode(file)->i_ino);
+>>>>        seq_printf(m, "size:\t%lli\n", (long long)file_inode(file)->i_size);
+>>>>
+>>>> +     seq_puts(m, "path:\t");
+>>>> +     seq_file_path(m, file, "\n");
+>>>> +     seq_putc(m, '\n');
+>>>> +
+>>>>        /* show_fd_locks() never deferences files so a stale value is safe */
+>>>>        show_fd_locks(m, file, files);
+>>>>        if (seq_has_overflowed(m))
+>>> --
+>>> To unsubscribe from this group and stop receiving emails from it, send an email to kernel-team+unsubscribe@android.com.
+>>>
+> _______________________________________________
+> Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+> To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
