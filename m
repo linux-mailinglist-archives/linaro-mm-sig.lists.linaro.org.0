@@ -2,129 +2,129 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7CD953A947
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 16:38:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 196BF53A969
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 16:52:54 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 23C593ED16
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 14:38:59 +0000 (UTC)
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
-	by lists.linaro.org (Postfix) with ESMTPS id A37743ED16
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jun 2022 14:38:54 +0000 (UTC)
-Received: by mail-wm1-f51.google.com with SMTP id n124-20020a1c2782000000b003972dfca96cso1210750wmn.4
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Jun 2022 07:38:54 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 4296B3F07A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 14:52:53 +0000 (UTC)
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 1EC113EBC0
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jun 2022 14:52:49 +0000 (UTC)
+Received: by mail-pj1-f48.google.com with SMTP id q12-20020a17090a304c00b001e2d4fb0eb4so6484133pjl.4
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Jun 2022 07:52:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=message-id:date:mime-version:user-agent:subject:content-language:to
-         :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=nEz+76T79tFW0RCrZGZI21N3hxWVslYlXYg2VKXX6II=;
-        b=MaD8PwmnHt8a09T+peqTHwVOA9ZMJagO1K5G+SyV6SZNU5n+F08WpEiHeJK3218K7q
-         TpMa2jHtVr6XzwZz/ZwmfQLeBpaol/DjLjdCgPEuGdts3zI+eeo5NBCLcFvgL1ZP7RD6
-         ioO/06Cr9tKOOMtD7GD9rb96R+083ZmEC0FgFh49pdInij8WyfudEHMhbbnzxvPO0cnl
-         NAsd2tz/9kZ9GjmlRo3jIZcOE2UrxK0mZt2K0ezbG16koclnfi0uXizmzNTmgP1BeCrB
-         gD3TN7uQWiJjBDB+QcU6rgIeiE87c2Uf8tumpI6vGFZpEp5j6HBVnKe/wAZaAMVzCe3d
-         oc4w==
+        d=chromium.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:content-transfer-encoding:in-reply-to;
+        bh=f+l3Hk+6FFyk8vfmjX/U6HXz2Y13gVkjD8RbjyOHnBg=;
+        b=T5QqxGoUWNlBhCvVCWar98KbLBlFh2IAuojNaK8vvjKwgDeliiAt4f3t71WOdr8+Py
+         HHMOe73t4gfkGJiwHy+Hm70Yy7VauFSTuriqV7I5dLMxENsXS5NHU703r5zm8sGzuyvW
+         ERZjD24VHVXiLLmqN1EGXjLw6PBs9QKqmrdhw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
-         :content-language:to:cc:references:from:in-reply-to
-         :content-transfer-encoding;
-        bh=nEz+76T79tFW0RCrZGZI21N3hxWVslYlXYg2VKXX6II=;
-        b=0XmgoHbOUEYdj4k36AUkhUtAGyXFzN0qGoYxBHLzXiuCk26f/ckwrYWP1HMNE7qjeq
-         5eh7txnY8rhH1I2qib0kOYyfYx5G7/0jgnamrXkdle0jgMm30M+LWQ99etyldIeex9YJ
-         dIpDgpx5aGwcN7V1ky8Qn3hcWhpil7tQflKgIZ+eVVcn5a6R/bPrZ3tYyBzGGYkmNUGI
-         aokFCLp9Az5MrdOnBDXCA7hG9U05/Rqh89g3auYZS+WcFLwU78Hr0H2UnBSEYjotEJ94
-         RTnsVylUCdXrCmQAdEa9jwtHlhQmFRuOgP2cJvpgt5UZC9CLdnC+wmw1F+O/huZPF8+L
-         VN+Q==
-X-Gm-Message-State: AOAM533AGW0KGKW4jITiX567TwpfDEs1r8/g1oKANAF8x4UoY94RE7LT
-	Ymid9nJmsarLzDshrWTKFKo=
-X-Google-Smtp-Source: ABdhPJxFJm/fvrtPm0Q76kR0LnUENBqB8SBsBwD/wEAz7gTa4nHm3tJgWR7y3ldaWLBOVk3IV9s8LQ==
-X-Received: by 2002:a7b:cb91:0:b0:397:3225:244 with SMTP id m17-20020a7bcb91000000b0039732250244mr28954441wmi.68.1654094333691;
-        Wed, 01 Jun 2022 07:38:53 -0700 (PDT)
-Received: from ?IPV6:2a02:908:1256:79a0:d1fb:e1e4:e193:e55f? ([2a02:908:1256:79a0:d1fb:e1e4:e193:e55f])
-        by smtp.gmail.com with ESMTPSA id u12-20020adfdb8c000000b002119c1a03e4sm503684wri.31.2022.06.01.07.38.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 01 Jun 2022 07:38:52 -0700 (PDT)
-Message-ID: <a009c207-a5fa-af1e-b961-8083b48360bf@gmail.com>
-Date: Wed, 1 Jun 2022 16:38:51 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.1
-Content-Language: en-US
-To: Sergey Senozhatsky <senozhatsky@chromium.org>
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:content-transfer-encoding
+         :in-reply-to;
+        bh=f+l3Hk+6FFyk8vfmjX/U6HXz2Y13gVkjD8RbjyOHnBg=;
+        b=do5PliPHBFM1Q1ZVFxmPIcCieC9CSjC5wogKryq3/rhMUqww2RG9tWaMXp72GQHTyx
+         DVXtcwch8u5zGpc10Ve4suEEqbiMd4NIhdSZtCZTiXyNmSZSiLw3A/LxXpRsmM7YlFeI
+         RQLXvJtqOyju+RcWeviL1QXO4T6bbfITqBv+eFIhtczXO5+2aq5rkc1FMYjZwnRL8x5Z
+         8gl+720ZxIYPgHiWST8JNQeaPHr+Esw0s8MzrS/BLImAfyAdhwXnuXgvOz2mO/p0IhKN
+         BopIGgjJrZ1hvVu+XqIfOHHKkWekMrKzWdWj5iM4YYcdDJOh6lUYRdP3UZ/5fnrlKovF
+         rPsw==
+X-Gm-Message-State: AOAM531ozq/g7x1jYUOVV9+zXeRIVdqY7cyPd+x/kA/3GZISx3ZAiKIv
+	8D3qA/YhWTS3nnFGadtd5JPOK/CkojXBWQ==
+X-Google-Smtp-Source: ABdhPJzKbPPwilL4Mlo2lBLeWQY4KScURQiGlR+yz2oCKIOnCppVLjpaiJcEObTKUBj8vtB6Oz8esg==
+X-Received: by 2002:a17:902:d2c1:b0:165:d4cd:e118 with SMTP id n1-20020a170902d2c100b00165d4cde118mr125029plc.4.1654095168205;
+        Wed, 01 Jun 2022 07:52:48 -0700 (PDT)
+Received: from google.com ([240f:75:7537:3187:ec3a:4b49:34bc:e5b4])
+        by smtp.gmail.com with ESMTPSA id u79-20020a627952000000b0051ba7515e0dsm1629431pfc.54.2022.06.01.07.52.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 01 Jun 2022 07:52:47 -0700 (PDT)
+Date: Wed, 1 Jun 2022 23:52:41 +0900
+From: Sergey Senozhatsky <senozhatsky@chromium.org>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <Ypd9OSqMtGMVKYZ0@google.com>
 References: <20220530142232.2871634-1-senozhatsky@chromium.org>
- <7eee4274-bd69-df8d-9067-771366217804@amd.com> <YpWCvniLzJfcp684@google.com>
+ <7eee4274-bd69-df8d-9067-771366217804@amd.com>
+ <YpWCvniLzJfcp684@google.com>
  <33aba213-b6ad-4a15-9272-c62f5dfb1fb7@gmail.com>
  <Ypd3Us3a93aLonqT@google.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <Ypd3Us3a93aLonqT@google.com>
-Message-ID-Hash: IFCJI4D5EGVRYQF6BW4DMZTIYEW2CPTK
-X-Message-ID-Hash: IFCJI4D5EGVRYQF6BW4DMZTIYEW2CPTK
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Tomasz Figa <tfiga@chromium.org>, Ricardo Ribalda <ribalda@chromium.org>, Christoph Hellwig <hch@infradead.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+ <a009c207-a5fa-af1e-b961-8083b48360bf@gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <a009c207-a5fa-af1e-b961-8083b48360bf@gmail.com>
+Message-ID-Hash: HVUWUORAQX7OAY5AG2YJ7D36FH7N2UQM
+X-Message-ID-Hash: HVUWUORAQX7OAY5AG2YJ7D36FH7N2UQM
+X-MailFrom: senozhatsky@chromium.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Sergey Senozhatsky <senozhatsky@chromium.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Tomasz Figa <tfiga@chromium.org>, Ricardo Ribalda <ribalda@chromium.org>, Christoph Hellwig <hch@infradead.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH] dma-fence: allow dma fence to have their own lock
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IFCJI4D5EGVRYQF6BW4DMZTIYEW2CPTK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HVUWUORAQX7OAY5AG2YJ7D36FH7N2UQM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-QW0gMDEuMDYuMjIgdW0gMTY6Mjcgc2NocmllYiBTZXJnZXkgU2Vub3poYXRza3k6DQo+IE9uICgy
-Mi8wNi8wMSAxNDo0NSksIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6DQo+PiBBbSAzMS4wNS4yMiB1
-bSAwNDo1MSBzY2hyaWViIFNlcmdleSBTZW5vemhhdHNreToNCj4+PiBPbiAoMjIvMDUvMzAgMTY6
-NTUpLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPj4+PiBBbSAzMC4wNS4yMiB1bSAxNjoyMiBz
-Y2hyaWViIFNlcmdleSBTZW5vemhhdHNreToNCj4+Pj4+IFtTTklQXQ0KPj4+Pj4gU28gdGhlIGBs
-b2NrYCBzaG91bGQgaGF2ZSBhdCBsZWFzdCBzYW1lIGxpZmVzcGFuIGFzIHRoZSBETUEgZmVuY2UN
-Cj4+Pj4+IHRoYXQgYm9ycm93cyBpdCwgd2hpY2ggaXMgaW1wb3NzaWJsZSB0byBndWFyYW50ZWUg
-aW4gb3VyIGNhc2UuDQo+Pj4+IE5vcGUsIHRoYXQncyBub3QgY29ycmVjdC4gVGhlIGxvY2sgc2hv
-dWxkIGhhdmUgYXQgbGVhc3Qgc2FtZSBsaWZlc3BhbiBhcyB0aGUNCj4+Pj4gY29udGV4dCBvZiB0
-aGUgRE1BIGZlbmNlLg0KPj4+IEhvdyBkb2VzIG9uZSBrbm93IHdoZW4gaXQncyBzYWZlIHRvIHJl
-bGVhc2UgdGhlIGNvbnRleHQ/IERNQSBmZW5jZQ0KPj4+IG9iamVjdHMgYXJlIHN0aWxsIHRyYW5z
-cGFyZW50bHkgcmVmY291bnQtZWQgYW5kICJsaXZlIHRoZWlyIG93biBsaXZlcyIsDQo+Pj4gaG93
-IGRvZXMgb25lIHN5bmNocm9uaXplIGxpZmVzcGFucz8NCj4+IFdlbGwsIHlvdSBkb24ndC4NCj4+
-DQo+PiBJZiB5b3UgaGF2ZSBhIGR5bmFtaWMgY29udGV4dCBzdHJ1Y3R1cmUgeW91IG5lZWQgdG8g
-cmVmZXJlbmNlIGNvdW50IHRoYXQgYXMNCj4+IHdlbGwuIEluIG90aGVyIHdvcmRzIGV2ZXJ5IHRp
-bWUgeW91IGNyZWF0ZSBhIGZlbmNlIGluIHlvdXIgY29udGV4dCB5b3UgbmVlZA0KPj4gdG8gaW5j
-cmVtZW50IHRoZSByZWZlcmVuY2UgY291bnQgYW5kIGV2ZXJ5IHRpbWUgYSBmZW5jZSBpcyByZWxl
-YXNlIHlvdQ0KPj4gZGVjcmVtZW50IGl0Lg0KPiBPSyB0aGVuIGZlbmNlIHJlbGVhc2Ugc2hvdWxk
-IGJlIGFibGUgdG8gcG9pbnQgYmFjayB0byBpdHMgImNvbnRleHQiDQo+IHN0cnVjdHVyZS4gRWl0
-aGVyIGEgInByaXZhdGUiIGRhdGEgaW4gZG1hIGZlbmNlIG9yIHdlIG5lZWQgdG8gImVtYmVkIg0K
-PiBmZW5jZSBpbnRvIGFub3RoZXIgb2JqZWN0IChyZWZjb3VudGVkKSB0aGF0IG93bnMgdGhlIGxv
-Y2sgYW5kIHByb3ZpZGUNCj4gZG1hIGZlbmNlIG9wcy0+cmVsZWFzZSBjYWxsYmFjaywgd2hpY2gg
-Y2FuIGNvbnRhaW5lcl9vZigpIHRvIHRoZSBvYmplY3QNCj4gdGhhdCBkbWEgZmVuY2UgaXMgZW1i
-ZWRkZWQgaW50by4NCj4NCj4gSSB0aGluayB5b3UgYXJlIHN1Z2dlc3RpbmcgdGhlIGxhdHRlci4g
-VGhhbmtzIGZvciBjbGFyaWZpY2F0aW9ucy4NCg0KRGFuaWVsIG1pZ2h0IGh1cnQgbWUgZm9yIHRo
-aXMsIGJ1dCBpZiB5b3UgcmVhbGx5IG9ubHkgbmVlZCBhIHBvaW50ZXIgdG8gDQp5b3VyIGNvbnRl
-eHQgdGhlbiB3ZSBjb3VsZCBzYXkgdGhhdCB1c2luZyBhIHBvaW50ZXIgdmFsdWUgZm9yIHRoZSAN
-CmNvbnRleHQgZmllbGQgaXMgb2sgYXMgd2VsbC4NCg0KVGhhdCBzaG91bGQgYmUgZmluZSBhcyB3
-ZWxsIGFzIGxvbmcgYXMgeW91IGNhbiBndWFyYW50ZWUgdGhhdCBpdCB3aWxsIGJlIA0KdW5pcXVl
-IGR1cmluZyB0aGUgbGlmZXRpbWUgb2YgYWxsIGl0J3MgZmVuY2VzLg0KDQpXZSB3b3VsZCBqdXN0
-IGhhdmUgdG8gYWRqdXN0IHRoZSBkb2N1bWVudGF0aW9uIGEgYml0Lg0KDQo+IFRoZSBsaW1pdGlu
-ZyBmYWN0b3Igb2YgdGhpcyBhcHByb2FjaCBpcyB0aGF0IG5vdyBvdXIgb3BzLT5yZWxlYXNlKCkg
-aXMNCj4gdW5kZXIgdGhlIHNhbWUgInByZXNzdXJlIiBhcyBkbWFfZmVuY2VfcHV0KCktPmRtYV9m
-ZW5jZV9yZWxlYXNlKCkgYXJlLg0KPiBkbWFfZmVuY2VfcHV0KCkgYW5kIGRtYV9mZW5jZV9yZWxl
-YXNlKCkgY2FuIGJlIGNhbGxlZCBmcm9tIGFueSBjb250ZXh0LA0KPiBhcyBmYXIgYXMgSSB1bmRl
-cnN0YW5kLCBlLmcuIElSUSwgaG93ZXZlciBvdXIgbm9ybWFsIG9iamVjdCAtPnJlbGVhc2UNCj4g
-Y2FuIHNjaGVkdWxlLCB3ZSBkbyB0aGluZ3MgbGlrZSBzeW5jaHJvbml6ZV9yY3UoKSBhbmQgc28g
-b24uIE5vdGhpbmcgaXMNCj4gaW1wb3NzaWJsZSwganVzdCBzYXlpbmcgdGhhdCBldmVuIHRoaXMg
-YXBwcm9hY2ggaXMgbm90IDEwMCUgcGVyZmVjdCBhbmQNCj4gbWF5IG5lZWQgYWRkaXRpb25hbCB3
-b3JrYXJvdW5kcy4NCg0KV2VsbCBqdXN0IHVzZSBhIHdvcmsgaXRlbSBmb3IgcmVsZWFzZS4NCg0K
-UmVnYXJkcywNCkNocmlzdGlhbi4NCg0KPj4gSWYgeW91IGhhdmUgYSBzdGF0aWMgY29udGV4dCBz
-dHJ1Y3R1cmUgbGlrZSBtb3N0IGRyaXZlcnMgaGF2ZSB0aGVuIHlvdSBtdXN0DQo+PiBtYWtlIHN1
-cmUgdGhhdCBhbGwgZmVuY2VzIGF0IGxlYXN0IHNpZ25hbCBiZWZvcmUgeW91IHVubG9hZCB5b3Vy
-IGRyaXZlci4gV2UNCj4+IHN0aWxsIHNvbWV3aGF0IGhhdmUgYSByYWNlIHdoZW4geW91IHRyeSB0
-byB1bmxvYWQgYSBkcml2ZXIgYW5kIHRoZSBmZW5jZV9vcHMNCj4+IHN0cnVjdHVyZSBzdWRkZW5s
-eSBkaXNhcHBlYXIsIGJ1dCB3ZSBjdXJyZW50bHkgbGl2ZSB3aXRoIHRoYXQuDQo+IEhtbSwgaW5k
-ZWVkLi4uIEkgZGlkbid0IGNvbnNpZGVyIGZlbmNlX29wcyBjYXNlLg0KPg0KPj4gQXBhcnQgZnJv
-bSB0aGF0IHlvdSBhcmUgcmlnaHQsIGZlbmNlcyBjYW4gbGl2ZSBmb3JldmVyIGFuZCB3ZSBuZWVk
-IHRvIGRlYWwNCj4+IHdpdGggdGhhdC4NCj4gT0suIEkgc2VlLg0KDQpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlz
-dCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBh
-biBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On (22/06/01 16:38), Christian K=F6nig wrote:
+> > > Well, you don't.
+> > >=20
+> > > If you have a dynamic context structure you need to reference count t=
+hat as
+> > > well. In other words every time you create a fence in your context yo=
+u need
+> > > to increment the reference count and every time a fence is release you
+> > > decrement it.
+> > OK then fence release should be able to point back to its "context"
+> > structure. Either a "private" data in dma fence or we need to "embed"
+> > fence into another object (refcounted) that owns the lock and provide
+> > dma fence ops->release callback, which can container_of() to the object
+> > that dma fence is embedded into.
+> >=20
+> > I think you are suggesting the latter. Thanks for clarifications.
+>=20
+> Daniel might hurt me for this, but if you really only need a pointer to y=
+our
+> context then we could say that using a pointer value for the context field
+> is ok as well.
+>=20
+> That should be fine as well as long as you can guarantee that it will be
+> unique during the lifetime of all it's fences.
+
+I think we can guarantee that. Object that creates fence is kmalloc-ed and
+it sticks around until dma_fence_release() calls ops->release() and kfree-s
+it. We *probably* can even do something like it now, by re-purposing dma_fe=
+nce
+context member:
+
+        dma_fence_init(obj->fence,
+                       &fence_ops,
+                       &obj->fence_lock,
+                       (u64)obj,                             <<   :/
+                       atomic64_inc_return(&obj->seqno));
+
+I'd certainly refrain from being creative here and doing things that
+are not documented/common. DMA fence embedding should work for us.
+
+> > The limiting factor of this approach is that now our ops->release() is
+> > under the same "pressure" as dma_fence_put()->dma_fence_release() are.
+> > dma_fence_put() and dma_fence_release() can be called from any context,
+> > as far as I understand, e.g. IRQ, however our normal object ->release
+> > can schedule, we do things like synchronize_rcu() and so on. Nothing is
+> > impossible, just saying that even this approach is not 100% perfect and
+> > may need additional workarounds.
+>=20
+> Well just use a work item for release.
+
+Yup, that's the plan.
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
