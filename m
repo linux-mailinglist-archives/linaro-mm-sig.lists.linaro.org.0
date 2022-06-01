@@ -2,267 +2,126 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 280FB53A982
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 17:02:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2529753A993
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 17:06:28 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 562F03F0C7
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 15:02:21 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	by lists.linaro.org (Postfix) with ESMTPS id 01E8C3EBC0
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jun 2022 15:02:16 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id p19so1144945wmg.2
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Jun 2022 08:02:15 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 4D39F3F0CD
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Jun 2022 15:06:27 +0000 (UTC)
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+	by lists.linaro.org (Postfix) with ESMTPS id 8C4123F05C
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Jun 2022 15:06:22 +0000 (UTC)
+Received: by mail-wr1-f53.google.com with SMTP id h5so2806782wrb.0
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Jun 2022 08:06:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=message-id:date:mime-version:user-agent:subject:content-language:to
          :cc:references:from:in-reply-to:content-transfer-encoding;
-        bh=rbEDheK6UQKyC7vwWgTGjxwmqOZjkVmFEiePYqxVgok=;
-        b=NDDDd3dRmzfvucFAW3CzsYje+65nfJlxj9SixfgvDjDuWxVETyCtBN2G4hhiSRCd3m
-         9M/n0/CbiMWF6W8RDWwwmhExDd3klo/sRke7NiqT6HeG6NDbRgtIVQJW5XMIZd3nfw88
-         1UosYrIkVpF9dywBnSaoI3m3d84pakcuTjLThrx1IVCaF6CJdoBmMlwUsb3eM0lM8U0v
-         P1wZwhKTqBm6GgdxwnrrsfgBflY0aO4Sr21WH+Cd8XgiHedxCeC8V6/r98xKsosY3myq
-         RN9K0Hha1QnV8BGqeVFzUeUT+6oEVA8kYGpmJW3dtp6HD6/BC9NAARvXj8PbiiJ7QCbL
-         zLIg==
+        bh=Leic+PhDW9JBtVqGFF33qmkBBaBIyf37xeEUSNRuRLw=;
+        b=XH0GWUPC4rtX5tdQrQMcCWEEcsMs/2hrq9PygPpWzqZYP/RMZk4ONuHge/lYiEsFvK
+         v6WciuNGiBg9/HBVpBfVhFPN7njNI4GhL8VuA60R1eK0ujsX8Qy023cZ2tJM0fo6ke7z
+         b7w0lc1yowLDgawmU2z/eV4WKF4q6HF0igBC9PUd4L0Kjb288DE7ESq8B+FnFK3MUmkn
+         V+qufjMsi9wJZfTauz6awGg8LcZ/+KC8xQuHPnyhm7DDkg65d8bSk1jYP+6a3gBVigHl
+         qUcikYx/jZvWz84tlXATBy0l6rjdcCQ5p2308GFL4GHy5T33GvTxaFUMb2Z129RazxTC
+         0MEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
          :content-language:to:cc:references:from:in-reply-to
          :content-transfer-encoding;
-        bh=rbEDheK6UQKyC7vwWgTGjxwmqOZjkVmFEiePYqxVgok=;
-        b=NwpMlwrL9u6FTa7cbVPkbZ6RXIFeuXKmO0wQ7fQ7AUHmZLlQr9KzZZw/EvM0ow/avi
-         uqcmPNQPjhyw78pPiCu9TSz7noC+XtPpoWsoZZGnNzalg+8o2JC68jmI7pKRy49zL9LN
-         +EE682FrxrlmLAzLO2i8lCWXSy+XNI9IqJQ1btSlIFbukZMVz0L+Qb5QS8EoGV+XHpJ0
-         jA3fGGmi9EQYDrR2qb3Ov1SxwaEg0LI3c/5c5x7lwGca4V16gSruw/CtXu5mq7BDDOaQ
-         +PstUnndPVofNH3jT2OOEd9koKzl0A4HWokZxYAA1MU3CNqzrT+VcOjrhC+pB2K8rKqN
-         PxKQ==
-X-Gm-Message-State: AOAM531ScR0vGsKDWu13fxPuHG5l3D/IEcRX8sLKatmoestD9sv9fcK1
-	YAFknEDbH++16vg8lAMSk2w=
-X-Google-Smtp-Source: ABdhPJzQu7LhhTR3bRvCCtmCXaKNkaqLAguVHXuLq1EWU7TKwK0uVOTAIkWkj5UleoR7DNTlwIGYuQ==
-X-Received: by 2002:a05:600c:3ac5:b0:397:774d:3890 with SMTP id d5-20020a05600c3ac500b00397774d3890mr225379wms.92.1654095733913;
-        Wed, 01 Jun 2022 08:02:13 -0700 (PDT)
+        bh=Leic+PhDW9JBtVqGFF33qmkBBaBIyf37xeEUSNRuRLw=;
+        b=Urbt/CMI/Dn8F0EcL3+vXuJWg3CDqG/AGB/dlY1CEU3vfZHCSxoqYqSWOkE3L/xdmL
+         bqbwM0SEjlTsqI4a78Ebey2t1fT4NtSKXeT58pNHUmVvpk6tFvX9tNxmOnywCtMwQ9o3
+         n2dM29ZPZbMSAau0f3g9JwQdbBkISyq0l0MM9kgM/htC+af4dEFka8yFawh6TU3JmKk0
+         MtCAEINZUYUuirN0v2SMkMKReC5yov/5/NAjKnQYYH0buGTyG6s7BdCTfyvHH9bT3+Ql
+         N98jhOuZhQ6xTK3nJ0EcGZfBqumsG1ZMTqX/ewL+dc/8PPZT7Pl9J9RwrGOZzCzzHUb4
+         CVSQ==
+X-Gm-Message-State: AOAM531m+YZU7UQ1+gxHmxBc6Vv6kMLYnsDyHT5YcMdP+025uwXXyKtL
+	oxbXQewaQsYc4mzzQevZzZU=
+X-Google-Smtp-Source: ABdhPJywvalFqzq1oRD29IlI1pb78iiaj27Usi9lg7MLrT/V1m31Qrl/vNekEuBU1JaXIWlVnGyUxw==
+X-Received: by 2002:adf:d1a3:0:b0:210:29f7:2d52 with SMTP id w3-20020adfd1a3000000b0021029f72d52mr179090wrc.397.1654095981285;
+        Wed, 01 Jun 2022 08:06:21 -0700 (PDT)
 Received: from ?IPV6:2a02:908:1256:79a0:d1fb:e1e4:e193:e55f? ([2a02:908:1256:79a0:d1fb:e1e4:e193:e55f])
-        by smtp.gmail.com with ESMTPSA id p68-20020a1c2947000000b003976525c38bsm5595812wmp.3.2022.06.01.08.02.12
+        by smtp.gmail.com with ESMTPSA id n20-20020a7bc5d4000000b0039aef592ca0sm2247384wmk.35.2022.06.01.08.06.19
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 01 Jun 2022 08:02:13 -0700 (PDT)
-Message-ID: <4b79c2ea-dd1a-623d-e5b4-faa732c1a42d@gmail.com>
-Date: Wed, 1 Jun 2022 17:02:11 +0200
+        Wed, 01 Jun 2022 08:06:20 -0700 (PDT)
+Message-ID: <30c96646-bb16-a876-57f5-155d46b8d805@gmail.com>
+Date: Wed, 1 Jun 2022 17:06:18 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.9.1
 Content-Language: en-US
-To: Stephen Brennan <stephen.s.brennan@oracle.com>,
- Kalesh Singh <kaleshsingh@google.com>
-References: <20220531212521.1231133-1-kaleshsingh@google.com>
- <20220531212521.1231133-3-kaleshsingh@google.com>
- <14f85d24-a9de-9706-32f0-30be4999c71c@oracle.com>
- <CAC_TJveDzDaYQKmuLSkGWpnuCW+gvrqdVJqq=wbzoTRjw4OoFw@mail.gmail.com>
- <875yll1fp1.fsf@stepbren-lnx.us.oracle.com>
+To: Sergey Senozhatsky <senozhatsky@chromium.org>
+References: <20220530142232.2871634-1-senozhatsky@chromium.org>
+ <7eee4274-bd69-df8d-9067-771366217804@amd.com> <YpWCvniLzJfcp684@google.com>
+ <33aba213-b6ad-4a15-9272-c62f5dfb1fb7@gmail.com>
+ <Ypd3Us3a93aLonqT@google.com>
+ <a009c207-a5fa-af1e-b961-8083b48360bf@gmail.com>
+ <Ypd9OSqMtGMVKYZ0@google.com>
 From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <875yll1fp1.fsf@stepbren-lnx.us.oracle.com>
-Message-ID-Hash: 5QH6E4OCXMCVOD2JIGCA7TOHUSIACS3B
-X-Message-ID-Hash: 5QH6E4OCXMCVOD2JIGCA7TOHUSIACS3B
+In-Reply-To: <Ypd9OSqMtGMVKYZ0@google.com>
+Message-ID-Hash: WGLAHCBKJYBJXWJ5LDIA3QZ5V7TL2LGR
+X-Message-ID-Hash: WGLAHCBKJYBJXWJ5LDIA3QZ5V7TL2LGR
 X-MailFrom: ckoenig.leichtzumerken@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Ioannis Ilkos <ilkos@google.com>, "T.J. Mercier" <tjmercier@google.com>, Suren Baghdasaryan <surenb@google.com>, "Cc: Android Kernel" <kernel-team@android.com>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@redhat.com>, Christoph Anton Mitterer <mail@christoph.anton.mitterer.name>, Johannes Weiner <hannes@cmpxchg.org>, Colin Cross <ccross@google.com>, Mike Rapoport <rppt@kernel.org>, Paul Gortmaker <paul.gortmaker@windriver.com>, Randy Dunlap <rdunlap@infradead.org>, LKML <linux-kernel@vger.kernel.org>, linux-fsdevel <linux-fsdevel@vger.kernel.org>, "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, Linux Media Mailing List <linux-media@vger.kernel.org>, DRI mailing list <dri-devel@lists.freedesktop.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
+CC: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Tomasz Figa <tfiga@chromium.org>, Ricardo Ribalda <ribalda@chromium.org>, Christoph Hellwig <hch@infradead.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 2/2] procfs: Add 'path' to /proc/<pid>/fdinfo/
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-fence: allow dma fence to have their own lock
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5QH6E4OCXMCVOD2JIGCA7TOHUSIACS3B/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WGLAHCBKJYBJXWJ5LDIA3QZ5V7TL2LGR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-Am 01.06.22 um 00:48 schrieb Stephen Brennan:
-> Kalesh Singh <kaleshsingh@google.com> writes:
->> On Tue, May 31, 2022 at 3:07 PM Stephen Brennan
->> <stephen.s.brennan@oracle.com> wrote:
->>> On 5/31/22 14:25, Kalesh Singh wrote:
->>>> In order to identify the type of memory a process has pinned through
->>>> its open fds, add the file path to fdinfo output. This allows
->>>> identifying memory types based on common prefixes. e.g. "/memfd...",
->>>> "/dmabuf...", "/dev/ashmem...".
->>>>
->>>> Access to /proc/<pid>/fdinfo is governed by PTRACE_MODE_READ_FSCREDS
->>>> the same as /proc/<pid>/maps which also exposes the file path of
->>>> mappings; so the security permissions for accessing path is consistent
->>>> with that of /proc/<pid>/maps.
->>> Hi Kalesh,
->> Hi Stephen,
->>
->> Thanks for taking a look.
->>
->>> I think I see the value in the size field, but I'm curious about path,
->>> which is available via readlink /proc/<pid>/fd/<n>, since those are
->>> symlinks to the file themselves.
->> This could work if we are root, but the file permissions wouldn't
->> allow us to do the readlink on other processes otherwise. We want to
->> be able to capture the system state in production environments from
->> some trusted process with ptrace read capability.
-> Interesting, thanks for explaining. It seems weird to have a duplicate
-> interface for the same information but such is life.
-
-Yeah, the size change is really straight forward but for this one I'm 
-not 100% sure either.
-
-Probably best to ping some core fs developer before going further with it.
-
-BTW: Any preferred branch to push this upstream? If not I can take it 
-through drm-misc-next.
-
-Regards,
-Christian.
-
->
->>> File paths can contain fun characters like newlines or colons, which
->>> could make parsing out filenames in this text file... fun. How would your
->>> userspace parsing logic handle "/home/stephen/filename\nsize:\t4096"? The
->>> readlink(2) API makes that easy already.
->> I think since we have escaped the "\n" (seq_file_path(m, file, "\n")),
-> I really should have read through that function before commenting,
-> thanks for teaching me something new :)
->
-> Stephen
->
->> then user space might parse this line like:
->>
->> if (strncmp(line, "path:\t", 6) == 0)
->>          char* path = line + 6;
->>
->>
->> Thanks,
->> Kalesh
->>
->>> Is the goal avoiding races (e.g. file descriptor 3 is closed and reopened
->>> to a different path between reading fdinfo and stating the fd)?
->>>
->>> Stephen
->>>
->>>> Signed-off-by: Kalesh Singh <kaleshsingh@google.com>
->>>> ---
->>>>
->>>> Changes from rfc:
->>>>    - Split adding 'size' and 'path' into a separate patches, per Christian
->>>>    - Fix indentation (use tabs) in documentaion, per Randy
->>>>
->>>>   Documentation/filesystems/proc.rst | 14 ++++++++++++--
->>>>   fs/proc/fd.c                       |  4 ++++
->>>>   2 files changed, 16 insertions(+), 2 deletions(-)
->>>>
->>>> diff --git a/Documentation/filesystems/proc.rst b/Documentation/filesystems/proc.rst
->>>> index 779c05528e87..591f12d30d97 100644
->>>> --- a/Documentation/filesystems/proc.rst
->>>> +++ b/Documentation/filesystems/proc.rst
->>>> @@ -1886,14 +1886,16 @@ if precise results are needed.
->>>>   3.8  /proc/<pid>/fdinfo/<fd> - Information about opened file
->>>>   ---------------------------------------------------------------
->>>>   This file provides information associated with an opened file. The regular
->>>> -files have at least five fields -- 'pos', 'flags', 'mnt_id', 'ino', and 'size'.
->>>> +files have at least six fields -- 'pos', 'flags', 'mnt_id', 'ino', 'size',
->>>> +and 'path'.
->>>>
->>>>   The 'pos' represents the current offset of the opened file in decimal
->>>>   form [see lseek(2) for details], 'flags' denotes the octal O_xxx mask the
->>>>   file has been created with [see open(2) for details] and 'mnt_id' represents
->>>>   mount ID of the file system containing the opened file [see 3.5
->>>>   /proc/<pid>/mountinfo for details]. 'ino' represents the inode number of
->>>> -the file, and 'size' represents the size of the file in bytes.
->>>> +the file, 'size' represents the size of the file in bytes, and 'path'
->>>> +represents the file path.
->>>>
->>>>   A typical output is::
->>>>
->>>> @@ -1902,6 +1904,7 @@ A typical output is::
->>>>        mnt_id: 19
->>>>        ino:    63107
->>>>        size:   0
->>>> +     path:   /dev/null
->>>>
->>>>   All locks associated with a file descriptor are shown in its fdinfo too::
->>>>
->>>> @@ -1920,6 +1923,7 @@ Eventfd files
->>>>        mnt_id: 9
->>>>        ino:    63107
->>>>        size:   0
->>>> +     path:   anon_inode:[eventfd]
->>>>        eventfd-count:  5a
->>>>
->>>>   where 'eventfd-count' is hex value of a counter.
->>>> @@ -1934,6 +1938,7 @@ Signalfd files
->>>>        mnt_id: 9
->>>>        ino:    63107
->>>>        size:   0
->>>> +     path:   anon_inode:[signalfd]
->>>>        sigmask:        0000000000000200
->>>>
->>>>   where 'sigmask' is hex value of the signal mask associated
->>>> @@ -1949,6 +1954,7 @@ Epoll files
->>>>        mnt_id: 9
->>>>        ino:    63107
->>>>        size:   0
->>>> +     path:   anon_inode:[eventpoll]
->>>>        tfd:        5 events:       1d data: ffffffffffffffff pos:0 ino:61af sdev:7
->>>>
->>>>   where 'tfd' is a target file descriptor number in decimal form,
->>>> @@ -1968,6 +1974,7 @@ For inotify files the format is the following::
->>>>        mnt_id: 9
->>>>        ino:    63107
->>>>        size:   0
->>>> +     path:   anon_inode:inotify
->>>>        inotify wd:3 ino:9e7e sdev:800013 mask:800afce ignored_mask:0 fhandle-bytes:8 fhandle-type:1 f_handle:7e9e0000640d1b6d
->>>>
->>>>   where 'wd' is a watch descriptor in decimal form, i.e. a target file
->>>> @@ -1992,6 +1999,7 @@ For fanotify files the format is::
->>>>        mnt_id: 9
->>>>        ino:    63107
->>>>        size:   0
->>>> +     path:   anon_inode:[fanotify]
->>>>        fanotify flags:10 event-flags:0
->>>>        fanotify mnt_id:12 mflags:40 mask:38 ignored_mask:40000003
->>>>        fanotify ino:4f969 sdev:800013 mflags:0 mask:3b ignored_mask:40000000 fhandle-bytes:8 fhandle-type:1 f_handle:69f90400c275b5b4
->>>> @@ -2018,6 +2026,7 @@ Timerfd files
->>>>        mnt_id: 9
->>>>        ino:    63107
->>>>        size:   0
->>>> +     path:   anon_inode:[timerfd]
->>>>        clockid: 0
->>>>        ticks: 0
->>>>        settime flags: 01
->>>> @@ -2042,6 +2051,7 @@ DMA Buffer files
->>>>        mnt_id: 9
->>>>        ino:    63107
->>>>        size:   32768
->>>> +     path:   /dmabuf:
->>>>        count:  2
->>>>        exp_name:  system-heap
->>>>
->>>> diff --git a/fs/proc/fd.c b/fs/proc/fd.c
->>>> index 464bc3f55759..8889a8ba09d4 100644
->>>> --- a/fs/proc/fd.c
->>>> +++ b/fs/proc/fd.c
->>>> @@ -60,6 +60,10 @@ static int seq_show(struct seq_file *m, void *v)
->>>>        seq_printf(m, "ino:\t%lu\n", file_inode(file)->i_ino);
->>>>        seq_printf(m, "size:\t%lli\n", (long long)file_inode(file)->i_size);
->>>>
->>>> +     seq_puts(m, "path:\t");
->>>> +     seq_file_path(m, file, "\n");
->>>> +     seq_putc(m, '\n');
->>>> +
->>>>        /* show_fd_locks() never deferences files so a stale value is safe */
->>>>        show_fd_locks(m, file, files);
->>>>        if (seq_has_overflowed(m))
->>> --
->>> To unsubscribe from this group and stop receiving emails from it, send an email to kernel-team+unsubscribe@android.com.
->>>
-> _______________________________________________
-> Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-> To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+QW0gMDEuMDYuMjIgdW0gMTY6NTIgc2NocmllYiBTZXJnZXkgU2Vub3poYXRza3k6DQo+IE9uICgy
+Mi8wNi8wMSAxNjozOCksIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6DQo+Pj4+IFdlbGwsIHlvdSBk
+b24ndC4NCj4+Pj4NCj4+Pj4gSWYgeW91IGhhdmUgYSBkeW5hbWljIGNvbnRleHQgc3RydWN0dXJl
+IHlvdSBuZWVkIHRvIHJlZmVyZW5jZSBjb3VudCB0aGF0IGFzDQo+Pj4+IHdlbGwuIEluIG90aGVy
+IHdvcmRzIGV2ZXJ5IHRpbWUgeW91IGNyZWF0ZSBhIGZlbmNlIGluIHlvdXIgY29udGV4dCB5b3Ug
+bmVlZA0KPj4+PiB0byBpbmNyZW1lbnQgdGhlIHJlZmVyZW5jZSBjb3VudCBhbmQgZXZlcnkgdGlt
+ZSBhIGZlbmNlIGlzIHJlbGVhc2UgeW91DQo+Pj4+IGRlY3JlbWVudCBpdC4NCj4+PiBPSyB0aGVu
+IGZlbmNlIHJlbGVhc2Ugc2hvdWxkIGJlIGFibGUgdG8gcG9pbnQgYmFjayB0byBpdHMgImNvbnRl
+eHQiDQo+Pj4gc3RydWN0dXJlLiBFaXRoZXIgYSAicHJpdmF0ZSIgZGF0YSBpbiBkbWEgZmVuY2Ug
+b3Igd2UgbmVlZCB0byAiZW1iZWQiDQo+Pj4gZmVuY2UgaW50byBhbm90aGVyIG9iamVjdCAocmVm
+Y291bnRlZCkgdGhhdCBvd25zIHRoZSBsb2NrIGFuZCBwcm92aWRlDQo+Pj4gZG1hIGZlbmNlIG9w
+cy0+cmVsZWFzZSBjYWxsYmFjaywgd2hpY2ggY2FuIGNvbnRhaW5lcl9vZigpIHRvIHRoZSBvYmpl
+Y3QNCj4+PiB0aGF0IGRtYSBmZW5jZSBpcyBlbWJlZGRlZCBpbnRvLg0KPj4+DQo+Pj4gSSB0aGlu
+ayB5b3UgYXJlIHN1Z2dlc3RpbmcgdGhlIGxhdHRlci4gVGhhbmtzIGZvciBjbGFyaWZpY2F0aW9u
+cy4NCj4+IERhbmllbCBtaWdodCBodXJ0IG1lIGZvciB0aGlzLCBidXQgaWYgeW91IHJlYWxseSBv
+bmx5IG5lZWQgYSBwb2ludGVyIHRvIHlvdXINCj4+IGNvbnRleHQgdGhlbiB3ZSBjb3VsZCBzYXkg
+dGhhdCB1c2luZyBhIHBvaW50ZXIgdmFsdWUgZm9yIHRoZSBjb250ZXh0IGZpZWxkDQo+PiBpcyBv
+ayBhcyB3ZWxsLg0KPj4NCj4+IFRoYXQgc2hvdWxkIGJlIGZpbmUgYXMgd2VsbCBhcyBsb25nIGFz
+IHlvdSBjYW4gZ3VhcmFudGVlIHRoYXQgaXQgd2lsbCBiZQ0KPj4gdW5pcXVlIGR1cmluZyB0aGUg
+bGlmZXRpbWUgb2YgYWxsIGl0J3MgZmVuY2VzLg0KPiBJIHRoaW5rIHdlIGNhbiBndWFyYW50ZWUg
+dGhhdC4gT2JqZWN0IHRoYXQgY3JlYXRlcyBmZW5jZSBpcyBrbWFsbG9jLWVkIGFuZA0KPiBpdCBz
+dGlja3MgYXJvdW5kIHVudGlsIGRtYV9mZW5jZV9yZWxlYXNlKCkgY2FsbHMgb3BzLT5yZWxlYXNl
+KCkgYW5kIGtmcmVlLXMNCj4gaXQuIFdlICpwcm9iYWJseSogY2FuIGV2ZW4gZG8gc29tZXRoaW5n
+IGxpa2UgaXQgbm93LCBieSByZS1wdXJwb3NpbmcgZG1hX2ZlbmNlDQo+IGNvbnRleHQgbWVtYmVy
+Og0KPg0KPiAgICAgICAgICBkbWFfZmVuY2VfaW5pdChvYmotPmZlbmNlLA0KPiAgICAgICAgICAg
+ICAgICAgICAgICAgICAmZmVuY2Vfb3BzLA0KPiAgICAgICAgICAgICAgICAgICAgICAgICAmb2Jq
+LT5mZW5jZV9sb2NrLA0KPiAgICAgICAgICAgICAgICAgICAgICAgICAodTY0KW9iaiwgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIDw8ICAgOi8NCj4gICAgICAgICAgICAgICAgICAgICAgICAg
+YXRvbWljNjRfaW5jX3JldHVybigmb2JqLT5zZXFubykpOw0KPg0KPiBJJ2QgY2VydGFpbmx5IHJl
+ZnJhaW4gZnJvbSBiZWluZyBjcmVhdGl2ZSBoZXJlIGFuZCBkb2luZyB0aGluZ3MgdGhhdA0KPiBh
+cmUgbm90IGRvY3VtZW50ZWQvY29tbW9uLiBETUEgZmVuY2UgZW1iZWRkaW5nIHNob3VsZCB3b3Jr
+IGZvciB1cy4NCg0KWWVhaCwgZXhhY3RseSB0aGF0J3MgdGhlIGlkZWEuIEJ1dCBpZiB5b3UgYXJl
+IGZpbmUgdG8gY3JlYXRlIGEgc3ViY2xhc3MgDQpvZiB0aGUgZG1hX2ZlbmNlIHRoYW4gdGhhdCB3
+b3VsZCBpbmRlZWQgYmUgY2xlYW5lci4NCg0KQ2hyaXN0aWFuLg0KDQo+DQo+Pj4gVGhlIGxpbWl0
+aW5nIGZhY3RvciBvZiB0aGlzIGFwcHJvYWNoIGlzIHRoYXQgbm93IG91ciBvcHMtPnJlbGVhc2Uo
+KSBpcw0KPj4+IHVuZGVyIHRoZSBzYW1lICJwcmVzc3VyZSIgYXMgZG1hX2ZlbmNlX3B1dCgpLT5k
+bWFfZmVuY2VfcmVsZWFzZSgpIGFyZS4NCj4+PiBkbWFfZmVuY2VfcHV0KCkgYW5kIGRtYV9mZW5j
+ZV9yZWxlYXNlKCkgY2FuIGJlIGNhbGxlZCBmcm9tIGFueSBjb250ZXh0LA0KPj4+IGFzIGZhciBh
+cyBJIHVuZGVyc3RhbmQsIGUuZy4gSVJRLCBob3dldmVyIG91ciBub3JtYWwgb2JqZWN0IC0+cmVs
+ZWFzZQ0KPj4+IGNhbiBzY2hlZHVsZSwgd2UgZG8gdGhpbmdzIGxpa2Ugc3luY2hyb25pemVfcmN1
+KCkgYW5kIHNvIG9uLiBOb3RoaW5nIGlzDQo+Pj4gaW1wb3NzaWJsZSwganVzdCBzYXlpbmcgdGhh
+dCBldmVuIHRoaXMgYXBwcm9hY2ggaXMgbm90IDEwMCUgcGVyZmVjdCBhbmQNCj4+PiBtYXkgbmVl
+ZCBhZGRpdGlvbmFsIHdvcmthcm91bmRzLg0KPj4gV2VsbCBqdXN0IHVzZSBhIHdvcmsgaXRlbSBm
+b3IgcmVsZWFzZS4NCj4gWXVwLCB0aGF0J3MgdGhlIHBsYW4uDQoNCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0
+IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFu
+IGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
