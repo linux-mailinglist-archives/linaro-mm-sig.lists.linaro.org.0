@@ -2,228 +2,167 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8983055BA99
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Jun 2022 16:50:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E84B55FD2A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Jun 2022 12:32:28 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 91D4A3F2F6
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Jun 2022 14:50:44 +0000 (UTC)
-Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
-	by lists.linaro.org (Postfix) with ESMTPS id B4A423F1D8
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 27 Jun 2022 14:50:38 +0000 (UTC)
-Received: by mail-lf1-f42.google.com with SMTP id t25so17050293lfg.7
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 27 Jun 2022 07:50:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=date:from:to:cc:subject:message-id:in-reply-to:references
-         :mime-version;
-        bh=dOaiYvQGA8dtTGj+gTVciKf9Z7xPlq9eoRmvFbM4ABs=;
-        b=j2qj+DKyPJa6z2/BA1wnZbSxy4/pUR1+eSpjczkT8Gdv462w+erbzpiWVrLLmnDcER
-         AamhE4B5Rl6x4M+BCYYBiIwnkFqVeLxD4h04MRmbQiVKESadT/JYMg2GqG+/IErozfRP
-         +3IHUvxM5fW4bn2oXZJa5mxiiq4jAGQMXYfW2GazIMfGUndMatX4F1pmkJNqu9I9TSQt
-         OeGQGwLR4dikszRt0rEvIbRpPTDtmelGzqIFfNC/K+pBxbxeCG2tGMega/0zViTSjL79
-         0pmtUaLspKp+ienq4BI80tMdXgQnEI9zuSlrPuSkJZkqErPYzwfwLoE+HGpRRF42syyV
-         xARw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
-         :references:mime-version;
-        bh=dOaiYvQGA8dtTGj+gTVciKf9Z7xPlq9eoRmvFbM4ABs=;
-        b=l16I2rx7XAX0AgY9O9XpHZh2g3uAF6tO6yoEMCk/i7ou8m7ac3r0ZQRQ10PXkXzuV9
-         Vov6F8QW/6rKi+7ovMpTPhOBsKcmK4sevkdR1Kz6uP2VfCItn8F2HG84jaE9EGoc1EhU
-         NLnRNORuwYGwzXijMpmcXBANV2JHAZ0lBSmsh3WgSBmTTWtCs8hRGZwujuHaIePwPg4K
-         hJ8xUzCTTOpdWSutjkLeYs2Qo5xvQ/pT05l0LBxsaGVGNZCAUA1m3IRC7AwiOQpkI8fQ
-         5D+LUnKXpxNM6o2OeDPP7eELJrVwkKQA5390Qv9s9UOZ9EUS4ByqO0tERWCwAkCr6l7/
-         IdtA==
-X-Gm-Message-State: AJIora/y7hHqpYHDyhjozlvAns3j01iXTgxWnTnlveRo0G4err6CCGyM
-	84kjNdbfLfQajSlnlmcEqnI=
-X-Google-Smtp-Source: AGRyM1v6lFqWm0FHzrmBm4gbQPzTbokaSItAs4aQArnkXDhvuj7me3ob6iEzkPIAQXmvUf+1dwycDg==
-X-Received: by 2002:a05:6512:3e06:b0:47f:7928:a578 with SMTP id i6-20020a0565123e0600b0047f7928a578mr8410754lfv.406.1656341437344;
-        Mon, 27 Jun 2022 07:50:37 -0700 (PDT)
-Received: from eldfell ([194.136.85.206])
-        by smtp.gmail.com with ESMTPSA id d10-20020a0565123d0a00b0048110fd06c4sm875143lfv.53.2022.06.27.07.50.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Jun 2022 07:50:36 -0700 (PDT)
-Date: Mon, 27 Jun 2022 17:50:26 +0300
-From: Pekka Paalanen <ppaalanen@gmail.com>
-To: Dennis Tsiang <Dennis.Tsiang@arm.com>
-Message-ID: <20220627175026.6a5dd239@eldfell>
-In-Reply-To: <AS8PR08MB81117652E417826E741154B8F8B99@AS8PR08MB8111.eurprd08.prod.outlook.com>
-References: <AS8PR08MB81117652E417826E741154B8F8B99@AS8PR08MB8111.eurprd08.prod.outlook.com>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
-MIME-Version: 1.0
-Message-ID-Hash: 4W2LHUD7KP6IA73QBPA6S6DOFURKUKAW
-X-Message-ID-Hash: 4W2LHUD7KP6IA73QBPA6S6DOFURKUKAW
-X-MailFrom: ppaalanen@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
-	"maarten.lankhorst@linux.intel.com\"         <maarten.lankhorst@linux.intel.com>, "@lists.linaro.org,
-	mripard@kernel.org, " <mripard@kernel.org>, "@lists.linaro.org,
-	tzimmermann@suse.de, " <tzimmermann@suse.de>, "@lists.linaro.org,
-	airlied@linux.ie, " <airlied@linux.ie>, "@lists.linaro.org,
-	daniel@ffwll.ch, " <daniel@ffwll.ch>, "@lists.linaro.org,
-	sumit.semwal@linaro.org,
-	" <sumit.semwal@linaro.org>, "@lists.linaro.org,
-	christian.koenig@amd.com,
-	" <christian.koenig@amd.com>, "@lists.linaro.org,
-	linux-kernel@vger.kernel.org,
-	" <linux-kernel@vger.kernel.org>, "@lists.linaro.org,
+	by lists.linaro.org (Postfix) with ESMTP id 5B2943F453
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Jun 2022 10:32:27 +0000 (UTC)
+Received: from APC01-TYZ-obe.outbound.protection.outlook.com (mail-tyzapc01on2101.outbound.protection.outlook.com [40.107.117.101])
+	by lists.linaro.org (Postfix) with ESMTPS id 263A53EBFA
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Jun 2022 07:20:41 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=kheZRaVu8vMPeT1sNqjU0UeRQ1FF4o9vKtQ0HLRq7ba6S3OkemU2CdadJL+a8hmafWgbUvretr/afoGLmvilwkZRrU3Q9EcWmiGUZA8bEzTjhcPOf59XRRVf/j/pO9hMBzBFT+QMECqdHBMqPYu+Knxahhv97KUyN/38ZmhTEph+3djVE3YLc0UKtiVnCD9FaFOaFmPdXzrIJ4MVE+zeaJbbdX7frQMvxguVk/andDJK30WX+nYa4jrKWSP12EehjzNY1DVwsnS/XeH3oz3IyIkfnaIfgjRBB+xoyKq2mkO1Eurm3UD187to9ssgzxR4+PD4UOFK9tN2EhjConj8ww==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YwN22oewKweV3idvZHZiYV4YvNEeET8yDZG38SZBr0E=;
+ b=WT69FNgEeinxm71GotnfuSONJ0t1ZkQZ0oE9Dq7zr7dMOqFPGKAtRGS06TcDq20p1ojlftRtDe1ggCYvwU3W0R9Hg8+eqsp0SPVvlZb5HfrYoHCxilkM4mCEemSanBewdTk+YMZNdnn0Wm/F1u4ZWPm5eg3TgFtc/upiWqHA1mv7bdxDiD/k0dCiNn8tOpo9hccq811wTS3NT1x7trmrUs/uOsEWsTup6hnJrWQI3LQY8iRgWq/YSTgmVHEMIDjrcw6Rca2LN6hEFDEntd84iUQcFQpuL8O/4Yhk6AUXTqY8iMJQvtOLJsp+OezMCiOmD70UozTLPGcLSGuwTtpZGQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo0.onmicrosoft.com;
+ s=selector2-vivo0-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YwN22oewKweV3idvZHZiYV4YvNEeET8yDZG38SZBr0E=;
+ b=PgoBFbg6/K4c5CeNV4cmNcev8L66k4xBLdMJbjqR/TjgUkbmlokBQWcdk0MBGX2Fs6hwD6KhOZbrOF19VCqHtwTTtzN89pD3GdsvbREhg5Yv48Vvs7gil3bFmayx6kpGthh2lfT3nb7yGPGDoea69bBIaQpd7D3g4V8HliMYTlg=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from SG2PR06MB3367.apcprd06.prod.outlook.com (2603:1096:4:78::19) by
+ PS2PR06MB3431.apcprd06.prod.outlook.com (2603:1096:300:69::16) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5332.12; Fri, 10 Jun 2022 07:20:37 +0000
+Received: from SG2PR06MB3367.apcprd06.prod.outlook.com
+ ([fe80::ccb7:f612:80b2:64d5]) by SG2PR06MB3367.apcprd06.prod.outlook.com
+ ([fe80::ccb7:f612:80b2:64d5%4]) with mapi id 15.20.5314.019; Fri, 10 Jun 2022
+ 07:20:37 +0000
+From: Wan Jiabing <wanjiabing@vivo.com>
+To: Sumit Semwal <sumit.semwal@linaro.org>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	Daniel Vetter <daniel.vetter@ffwll.ch>,
 	linux-media@vger.kernel.org,
-	" <linux-media@vger.kernel.org>, "@lists.linaro.org,
-	linaro-mm-sig@lists.linaro.org, <linaro-mm-sig@lists.linaro.org>,
-	Liviu Dudau <Liviu.Dudau@arm.com>,
-	Brian Starkey <Brian.Starkey@arm.com>, Lisa Wu <lisa.wu@arm.com>,
-	Normunds Rieksts <Normunds.Rieksts@arm.com>, nd <nd@arm.com>
+	dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	linux-kernel@vger.kernel.org
+Date: Fri, 10 Jun 2022 15:20:19 +0800
+Message-Id: <20220610072019.3075023-1-wanjiabing@vivo.com>
+X-Mailer: git-send-email 2.36.1
+X-ClientProxiedBy: SG2PR01CA0117.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:40::21) To SG2PR06MB3367.apcprd06.prod.outlook.com
+ (2603:1096:4:78::19)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 5dba2b39-fe5f-46c5-2106-08da4ab1b728
+X-MS-TrafficTypeDiagnostic: PS2PR06MB3431:EE_
+X-Microsoft-Antispam-PRVS: 
+	<PS2PR06MB34317612533E4797218FA13DABA69@PS2PR06MB3431.apcprd06.prod.outlook.com>
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	ESDWfg+B0hs0zKr87KfGMbBdf13o5HImKmouzt4GCTzBqdOFDvxi7VunZN8H1ovzRDjd52cn7pk8vaSb17EN4AkpalrYlzwEunIIC+/aGc2IwzMhUqnjiVFQ9hU05mEuRYZgWdSEnAYC+1W18tD301hRZkof8vOyeXrs80KKLIJO3fhwtlixi+MvXe3IAhoLNKtYCVPwOJ4qVx22W9H5bj3q74dCrQsA5ceQ95xcDrYcpB5ENDMwNon9cckB3+yLwuDZhShN+M9ADSOq7WxPk8pCB78SOtwZPVY5qmqcldA2WDFjLR3P9LBPagqVUMJzanNp2LTYrvVc39sQL6Le0ka/RcpAOmAmt+uXwBPBF8MjvjvOD8p20ZL/S7scrL06IhjNsa/y5ODX6xV8lpK7pMSfnkEsaEkrKFb4hDGiyAkl+dnnYPxs6quFdp+3ih6Eb6KvcfVa9hIT7Y7VX/+7Bec4c+BML1V3CvRjAlAIDNrorW6zdl3RT4ddzmAKbL4tG7SRZesdZcHP/9B5mDrY4R1nmQOh9Jn3AuAyoBH5g7vv72iZgLCI/t7UQboaUG1Nt4Z4y0zKOLpFQiyL2Ansd97hL+gm+lOcUVku7VXa8X7EZT6IP4O0YUCjTTAL3rgPVHNNAQ2LFvs23IVg1qH8y6LHbg/bc5VWsuPNdvukIbrwH8kY7rjbU9MqopOHDAmhEULAi+kG8hAnQaPTM4Alog==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SG2PR06MB3367.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230001)(4636009)(366004)(26005)(52116002)(6506007)(8936002)(5660300002)(66476007)(8676002)(4326008)(66946007)(66556008)(107886003)(186003)(38350700002)(38100700002)(1076003)(36756003)(2616005)(6486002)(2906002)(316002)(83380400001)(6512007)(6666004)(86362001)(110136005)(508600001);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?AT2fatIFB5wZxJ7JWfJLIfzrqSJTHFeLvzpiRpNQ3XinYXnRl6NpWbBE9ku2?=
+ =?us-ascii?Q?O8r14B0He1g5ykWQm6g38HCWus6w1hKC6S3ZvibsK51TYbkjzrqBGKART6+r?=
+ =?us-ascii?Q?8aj9qAuv+7684yopWRgcFkw1mFmPhuLDrzYpBspDsjIbtOhQZStQkNaB435H?=
+ =?us-ascii?Q?/myRAXOZ3+bz6wfGAqSchvEN1wbdk1lzHhsjUKnvupofYPdi0Vam5nS8UFBf?=
+ =?us-ascii?Q?FRsdq8sU0sjnnUS4DCCTX0rIkkDV2SHHbrjJU8dZslbXC4o2evEeYuZmvx1P?=
+ =?us-ascii?Q?abA0qqK2rLd8SgViphDbxGlH2cIfGIZPO7Umw8ZcQmoigPVWsnZrzxQRcrlx?=
+ =?us-ascii?Q?FWgfl6YQEqlFhds+QFXJwOc7+I3Oyifevv4E6iaOxTOLyBKf3TvatxLYDRXK?=
+ =?us-ascii?Q?gP8YqTCqIBCMmKgx7nIxqn/JKlkKSd+eFFw3MxMtKQLopD95HlTthyEUiHdq?=
+ =?us-ascii?Q?jVXnObYvmu3RNqJoEVwZAuf2vBQdi/z0hF0bNd8rMZ+L9ASaPBefM2XF40XR?=
+ =?us-ascii?Q?DOH3JyZYmXKYVVqP5eCKTULnC5kc+Aphdp3l6M+6542hVbfw6ZxM253tRRJq?=
+ =?us-ascii?Q?jz1osPm/qP7ThIhLq2hGKdGTFUUuQbrtONkVEbGMTdqiLmYU5z7Ck3/UQPtC?=
+ =?us-ascii?Q?Gde5E1UvT2whTFf9pV4DORln5u1uih0Q5TJ0ABYVliJm1eyUnCdkBQtlyFFa?=
+ =?us-ascii?Q?c4B1WQtffS1Zn+i6oKE5VbkUPbO5QHTqgb2gf2xoVznyhM1wxsKVC6rODVKD?=
+ =?us-ascii?Q?YngZVf6JA14gl8q7vPF4k9B84tXfDGD2GKiRWA8amufBjVGQGScj5g8EhLdN?=
+ =?us-ascii?Q?q3vTDM6kRGithOHPwIWuoyPK2s5GE9fhIDbzoQAxNa23GHhmSvWXqZNsXYgs?=
+ =?us-ascii?Q?z8EOlLEwxGxl8AlpDBOSI9ESEjEYrAMqcknlS3pnc8rMSzLNfwd7OxaScw90?=
+ =?us-ascii?Q?aynaB/JgNDhlcZmMJr7y6hy9hVqWAQ6b9GahyCCjO7zhxbVPsItZgEWbEXHD?=
+ =?us-ascii?Q?NrS2i4fRgQapkIcmiGDzA4+J1awCyT9UjhZFsCGuoTcgKPezy/qGH+m8ICG6?=
+ =?us-ascii?Q?q1F60HdvIvd3HZ9o3tFvFVF1iNZCRqfq95s1wYv4hq3lJSCEgbG2+M/CWpho?=
+ =?us-ascii?Q?Jd6a/5Bj//iDGnN77tKgbYgX00BHOmGDvb3mjcABUd5MJRndvBilLY3evq7K?=
+ =?us-ascii?Q?h/kNXiOoz0VoFmsYjvofz6cB6gn35WTXcsnIQJseDLeIig0KRzH94+FRVZG+?=
+ =?us-ascii?Q?CiW0jImNecLLU5V8OUKGjpwEOd+ClN0kzUh2yQwsauCK9EZbIjf83f4twiUo?=
+ =?us-ascii?Q?J1RpTJP9ETjxQ8wr+Og697DscPkSkEA6p702LMUpbMvjvc3YA6zLXCL6PXPG?=
+ =?us-ascii?Q?5B44IYUAChBTygAT93LfzCBujMq3VddIAF7wSHgiH6yc+CUbQzfs0TqOd/8q?=
+ =?us-ascii?Q?8b4Lh2kiGsq2Kwxvine3UEMGH4h1bjCi1dt8mg35tKD10RkUbn0TvROdebz3?=
+ =?us-ascii?Q?xo2PCN9/4mmKbpOs8Wb3EFheXQc4VcG3PVs9L91EXcm5EM91ezG1fNGoIlCc?=
+ =?us-ascii?Q?PNsrGfc3l5f+ly5jC/jnHQ9o+2K1qvkZQeFu4GlvtvgLdPJnUp27/QMUkuSK?=
+ =?us-ascii?Q?pesEAn62mplFsxEKbWtgKSMmmj5v3cnofNjDQT4mG+95G74aAwDhl+R8uf7J?=
+ =?us-ascii?Q?iFFJmo5cUv3E8hSbkLLNWIT32lOwNr1k3Sw9Iabt9dGZjhOwvHRHSBh1kEVC?=
+ =?us-ascii?Q?+0dVq3Caxw=3D=3D?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5dba2b39-fe5f-46c5-2106-08da4ab1b728
+X-MS-Exchange-CrossTenant-AuthSource: SG2PR06MB3367.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jun 2022 07:20:37.2467
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: QC3fzNKa061qJOuH+AKva1+2naGMLqZQjDQhnFOX9d2/8bWpZSeHiIS6iAJSjnyIAdaFbpAkOWRc9ZeKnJ9nJA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PS2PR06MB3431
+X-MailFrom: wanjiabing@vivo.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: 4KOFRWYF6QSRCVZ5XMOV5SUZYEDBIORI
+X-Message-ID-Hash: 4KOFRWYF6QSRCVZ5XMOV5SUZYEDBIORI
+X-Mailman-Approved-At: Wed, 29 Jun 2022 10:32:20 +0000
+CC: Wan Jiabing <wanjiabing@vivo.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 0/1] [RFC] drm/fourcc: Add new unsigned R16_UINT/RG1616_UINT formats
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: Don't use typeof in va_arg
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4W2LHUD7KP6IA73QBPA6S6DOFURKUKAW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4KOFRWYF6QSRCVZ5XMOV5SUZYEDBIORI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============7828670204814551410=="
-
---===============7828670204814551410==
-Content-Type: multipart/signed; boundary="Sig_/X2K583TfsJ/xM11qK+/tNYo";
- protocol="application/pgp-signature"; micalg=pgp-sha256
-
---Sig_/X2K583TfsJ/xM11qK+/tNYo
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, 27 Jun 2022 13:40:04 +0000
-Dennis Tsiang <Dennis.Tsiang@arm.com> wrote:
-
-> This patch is an early RFC to discuss the viable options and
-> alternatives for inclusion of unsigned integer formats for the DRM API.
->=20
-> This patch adds a new single component 16-bit and a two component 32-bit
-> DRM fourcc=E2=80=99s that represent unsigned integer formats. The use cas=
-e for
-> needing UINT formats, in our case, would be to support using raw buffers
-> for camera ISPs.
->=20
-> For images imported with DRM fourcc + modifier combination, the GPU
-> driver needs a way to determine the datatype of the format which
-> currently the DRM API does not provide explicitly with a notable
-> exception of the floating-point fourccs such as DRM_FORMAT_XRGB16161616F
-> as an example. As the DRM fourccs do not currently define the
-> interpretation of the data, should the information be made explicit in
-> the DRM API similarly to how it is already done in Vulkan?
->=20
-> The reason for introducing datatype to the DRM fourcc's is that the
-> alternative, for any API (e.g., EGL) that lacks the format datatype
-> information for fourcc/modifier combination for dma_buf interop would be
-> to introduce explicit additional metadata/attributes that encode this
-> information which then would be passed to the GPU driver but the
-> drawback of this is that it would require extending multiple graphics
-> APIs to support every single platform.
->=20
-> By having the DRM API expose the datatype information for formats saves
-> a lot of integration/verification work for all of the different graphics
-> APIs and platforms as this information could be determined by the DRM
-> triple alone for dma_buf interop.
->=20
-> It would be good to gather some opinions on what others think about
-> introducing datatypes to the DRM API.
-
-Hi,
-
-I didn't quite grasp where this information is necessary, and when it
-is necessary, is it that simple to communicate? Does it even belong
-with the pixel format at all?
-
-Let us consider the existing problems.
-
-All traditional integer formats in drm_fourcc.h right now are unsigned.
-They get interpreted as being in the range [0.0, 1.0] for color
-operations, which means converting to another bit depth works
-implicitly. That's where the simplicity ends. We assume to have full
-quantization range unless otherwise noted in some auxiliary data, like
-KMS properties (I forget if there even was a property to say DRM
-framebuffer uses limited quantization range). We assume all pixel data
-is non-linearly encoded. There is no color space information. YUV-RGB
-conversion matrix coefficients are handled by a KMS property IIRC.
-
-Coming back to the nominal range [0.0, 1.0]. That's an implicit
-assumption that allows us to apply things like LUTs. It already
-breaks down if you choose a floating-point format instead of unsigned
-integer format. Is FP pixel value 1.0 the same as nominal 1.0? Or is
-the FP pixel value 255.0 the same as nominal 1.0? KMS has no way to
-know or control that AFAIK.
-
-If you had UINT format, meaning the nominal value range is [0.0, 65535.0]
-(e.g. for 16 bpc) instead of [0.0, 1.0], then how does that work with a
-LUT element in the color pipeline? How would it be both meaningful and
-different to existing 16 bpc integer format?
-
-What's the actual difference between R16 and R16_UINT, what difference
-does it make to a GPU driver?
-
-Maybe that is intimately dependent on the API where the pixel formats
-are used?
-
-Maybe for KMS R16 and R16_UINT would be completely equivalent, but not
-for some other API?
-
-We also need to be very careful to not load pixel format with meaning
-that does not belong there. Non-linear encoding (transfer function) is
-obviously something that is completely unrelated to the pixel format,
-as long as the pixel format defines a conversion to nominal value
-range. Color space (primaries and white point) are another thing that
-has nothing to do with pixel format, and so must not be in any way
-implied by pixel format.
-
-Should a pixel format define how the raw pixel values are converted to
-nominal values?
-
-No, because we have quantization range as a separate property,
-currently with "full" and "limited" understood, where "limited" means
-different things depending on the color model.
-
-Color model is defined by the pixel formats: we have RGB and YUV
-formats, likewise is chroma sub-sampling.
-
-Hmm.
-
-
-Thanks,
-pq
-
---Sig_/X2K583TfsJ/xM11qK+/tNYo
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmK5w7IACgkQI1/ltBGq
-qqfJRA//Z7dsCsvuVbnZPOkkYsz76QPv2NXENM4/uQqafBCK2aJGsFPpMZOGXdzM
-5GaK+El6TO9OCREs5RrnrAQlX3os+/6RIprHd5Ib5cpRbVlYlWE5wx0UdG3wM9Fx
-f0fuPl+Flm1z+g1f8bbZOrioYNewTyHgnkwHF3kScYjxOinHAGAzJhg1DGqFvSvt
-QSe3Du9Oayt4RDCT5km0Kw7Ehwm+841Vpa/sOhcAb3sc1AqAOOFazf3u7XLmF0y9
-Uvm4n+Nas9vzktf3usdA0Ro1UyLAQrQ4FqWQfKwnowTWMX2dDsVq9OQ63Vyzj0Z4
-rIg2fgJnC9iAJzNCf3pzMVQVV841pBksBl/cySL2ZsadhtYp24+ezhq1BKCbZMlI
-fR1M0YdzDrfFUGeMI6bkZufC0JONhVYEqWrlpp0E9Nj9hMAGwqvFyqoVFrxf9xtO
-0lnQldxVQdLHWfkXK/4v7VK2qKz+kO4EzEn52zxPft4h5vU80m0X5h5UGN5V5RVz
-SnJD3V9Xyg7HWpepBPHALSVGwDeuLozKTXBlndS2hXkp28f1ARXyZactFQNnfiPW
-tlKR/Lv/BW4u21WxaJ5XCT0y0YST1j+ijDkx5+wugMtJ5CU+0ijy/9J/GUZs7wqx
-VeYJPuGRPL7nVGM2UmEwsxN9yZZGRes40/49vaNQaALOATxE2U4=
-=GP37
------END PGP SIGNATURE-----
-
---Sig_/X2K583TfsJ/xM11qK+/tNYo--
-
---===============7828670204814551410==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+
+Fix following coccicheck warning:
+./drivers/dma-buf/st-dma-fence-unwrap.c:75:39-45: ERROR: reference preceded by free on line 70
+
+Use 'struct dma_fence *' instead of 'typeof(*fences)' to avoid this
+warning and also fix other 'typeof(*fences)' to make them consistent.
+
+Fixes: 0c5064fa8d5a ("dma-buf: cleanup dma_fence_unwrap selftest v2")
+Signed-off-by: Wan Jiabing <wanjiabing@vivo.com>
+---
+ drivers/dma-buf/st-dma-fence-unwrap.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/dma-buf/st-dma-fence-unwrap.c b/drivers/dma-buf/st-dma-fence-unwrap.c
+index 4105d5ea8dde..1137a6d90b32 100644
+--- a/drivers/dma-buf/st-dma-fence-unwrap.c
++++ b/drivers/dma-buf/st-dma-fence-unwrap.c
+@@ -56,7 +56,7 @@ static struct dma_fence *mock_array(unsigned int num_fences, ...)
+ 
+ 	va_start(valist, num_fences);
+ 	for (i = 0; i < num_fences; ++i)
+-		fences[i] = va_arg(valist, typeof(*fences));
++		fences[i] = va_arg(valist, struct dma_fence *);
+ 	va_end(valist);
+ 
+ 	array = dma_fence_array_create(num_fences, fences,
+@@ -72,7 +72,7 @@ static struct dma_fence *mock_array(unsigned int num_fences, ...)
+ error_put:
+ 	va_start(valist, num_fences);
+ 	for (i = 0; i < num_fences; ++i)
+-		dma_fence_put(va_arg(valist, typeof(*fences)));
++		dma_fence_put(va_arg(valist, struct dma_fence *));
+ 	va_end(valist);
+ 	return NULL;
+ }
+-- 
+2.36.1
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============7828670204814551410==--
