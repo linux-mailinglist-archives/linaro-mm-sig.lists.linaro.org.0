@@ -2,55 +2,64 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43DAE551D78
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Jun 2022 16:09:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 98A2555202B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Jun 2022 17:18:05 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 285C73F206
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Jun 2022 14:09:07 +0000 (UTC)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-	by lists.linaro.org (Postfix) with ESMTPS id CD4583ED7B
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 20 Jun 2022 14:09:01 +0000 (UTC)
-Received: from [192.168.2.145] (109-252-136-92.dynamic.spd-mgts.ru [109.252.136.92])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: dmitry.osipenko)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id ED33766016AA;
-	Mon, 20 Jun 2022 15:08:57 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1655734140;
-	bh=BXU+ifI6vgvX2l7WRjph+CNUKyZnpbVEdIZ7RrhtSq4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=hbKEas/qwTrQOtYjHwF1kAp5bF+lx0c/HWQwXzlCDzigXVc6ThGjLuF3ZUDyYkTwz
-	 MouYrGpQnILP4PpIymmbBhVM9e1PASUWBFi+LgRwQKHtJaeCJSG55KGkiaLdAooRwx
-	 r2TI5GDTa0dTQ+8tpeAHv2LUf+jVTzvilnkf5MIXXOtgLhZavAyBeA5Coc+G+31H0n
-	 LqN5s7FdaPeYgtK9DeQIbTvs9nVBH3Vd5hMCs7Z3/RWoHnCkbvzEtAtefHevXEAM22
-	 OU+8g1IHrfEqrNowXyflyg+A+jrXLHwPj7JmxC/fo9Iq5iwKq0KsVJdcRE82IB0+gX
-	 J8VaycDtZEnTQ==
-Message-ID: <3bb3dc53-69fc-8cdb-ae37-583b9b2660a3@collabora.com>
-Date: Mon, 20 Jun 2022 17:08:54 +0300
+	by lists.linaro.org (Postfix) with ESMTP id 96C1B3F1FC
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 20 Jun 2022 15:18:04 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+	by lists.linaro.org (Postfix) with ESMTPS id C6E533EC2C
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 20 Jun 2022 15:17:59 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id i10so11387257wrc.0
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 20 Jun 2022 08:17:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=HLrdK2cHg8a+WfynFvGYZTk9JjHbb/Ti/PUAmWDEXmQ=;
+        b=qK7K5LcM7dyr13i14ftD313nslG8YxjHQmfv8LjV7Tk1r8ybUhZ5AI0jn5rTqQhgmm
+         i59iso5WlVRzUdhMyAPWt7eltJkNSfRGyu0jYjEV010WarFWgUS3zKaSaYaJfYgDz//T
+         pid5V6gslaCrjWsjULnAXS530hiyltR47EnpCo8fvT4ma6uRB5F+KGSfmkgW+IZhEhRU
+         OHPH8eR5Bncckxj2xyb0u6lbCoknZypydnAtyGNuGpMe8xIqnmVyJNbKWPMhsWl15p7Z
+         MAziNE52C7w3j7WtmrVuXvwuEgzAYrB48BIKNyK7u2dralOWnRbA4it6ts7mRM3p0T0z
+         PUdQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=HLrdK2cHg8a+WfynFvGYZTk9JjHbb/Ti/PUAmWDEXmQ=;
+        b=hteJ/EP5soxmeXGquctGf5s5TdKmMKgSqaomOC6+E4TZykkn4ErVEcBxjwz19xZ3yC
+         qNBGDns0naMr1c8Ixz90aIF9JxHk1DazOlifgjCdc+9I9IvlX8a19As42J+4PVPWpoux
+         MuEhHhk4dm8mRlml+Zsp9mozn5XIOryCvkQe0Ys/SA4OCi87wfc9wCNweuAfaqrjuk+l
+         mhGdO6BLr4sly97lyoNQVlIFV17AEnzOMRGFB5uYsjLtTCx8vkaMmmWvu9eB1FVNotXt
+         SBfWhcFbfdncz+TR+wSk2XjdFYyg+ERPv/wIpw2Mx3mah5qIXmeY4ve9eB08kB+bTvLr
+         WQSQ==
+X-Gm-Message-State: AJIora8FRgDj1HRFjqdEuWTHjX9J222DWxQhYvjJzHMjBM6XDTlrTYAg
+	5qewxMrmXKtkjBYFLUESwq4ybuvCTm90UYkz9u0=
+X-Google-Smtp-Source: AGRyM1uYeX1HSZm/HHpeWSpFPQwaEg25u16yH1bR8gO/m6+hhlHkAUqlKQD3fntq2L6SbV4iQSzZCmeHt3/fGRnXHoE=
+X-Received: by 2002:adf:eb45:0:b0:21a:efae:4b9f with SMTP id
+ u5-20020adfeb45000000b0021aefae4b9fmr17379320wrn.585.1655738278721; Mon, 20
+ Jun 2022 08:17:58 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.0
-Content-Language: en-US
-To: Rob Clark <robdclark@gmail.com>
 References: <20220526235040.678984-1-dmitry.osipenko@collabora.com>
- <20220526235040.678984-18-dmitry.osipenko@collabora.com>
- <CAF6AEGt61t2truYDCxm17hqUPV-UdEdHjLs+6vmj5RPoPuVBYg@mail.gmail.com>
-From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-In-Reply-To: <CAF6AEGt61t2truYDCxm17hqUPV-UdEdHjLs+6vmj5RPoPuVBYg@mail.gmail.com>
-Message-ID-Hash: MZFN2HYP2ELKOXN55UEG4DQVAPPT2GAW
-X-Message-ID-Hash: MZFN2HYP2ELKOXN55UEG4DQVAPPT2GAW
-X-MailFrom: dmitry.osipenko@collabora.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Daniel Vetter <daniel@ffwll.ch>, Daniel Almeida <daniel.almeida@collabora.com>, Gert Wollny <gert.wollny@collabora.com>, Gustavo Padovan <gustavo.padovan@collabora.com>, Daniel Stone <daniel@fooishbar.org>, Tomeu Vizoso <tomeu.vizoso@collabora.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>, Steven Price <steven.price@arm.com>, Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>, Emil Velikov <emil.l.velikov@gmail.com>, Robin Murphy <robin.murphy@arm.com>, Qiang Yu <yuq825@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, Alex Deuche
+ <20220526235040.678984-18-dmitry.osipenko@collabora.com> <CAF6AEGt61t2truYDCxm17hqUPV-UdEdHjLs+6vmj5RPoPuVBYg@mail.gmail.com>
+ <3bb3dc53-69fc-8cdb-ae37-583b9b2660a3@collabora.com>
+In-Reply-To: <3bb3dc53-69fc-8cdb-ae37-583b9b2660a3@collabora.com>
+From: Rob Clark <robdclark@gmail.com>
+Date: Mon, 20 Jun 2022 08:18:04 -0700
+Message-ID: <CAF6AEGus7R_i7RMWGmbawVi62xCk5mhLTWGq2QEkcWY+XaJBAQ@mail.gmail.com>
+To: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+Message-ID-Hash: EQ4APDTJWDCWUWLQ4DZFIQPQXPIQR6SQ
+X-Message-ID-Hash: EQ4APDTJWDCWUWLQ4DZFIQPQXPIQR6SQ
+X-MailFrom: robdclark@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Daniel Vetter <daniel@ffwll.ch>, Daniel Almeida <daniel.almeida@collabora.com>, Gert Wollny <gert.wollny@collabora.com>, Gustavo Padovan <gustavo.padovan@collabora.com>, Daniel Stone <daniel@fooishbar.org>, Tomeu Vizoso <tomeu.vizoso@collabora.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>, Steven Price <steven.price@arm.com>, Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>, Emil Velikov <emil.l.velikov@gmail.com>, Robin Murphy <robin.murphy@arm.com>, Qiang Yu <yuq825@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, Alex Deuche
  r <alexander.deucher@amd.com>, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org, Dmitry Osipenko <digetx@gmail.com>, linux-tegra@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v6 17/22] drm/shmem-helper: Add generic memory shrinker
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MZFN2HYP2ELKOXN55UEG4DQVAPPT2GAW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EQ4APDTJWDCWUWLQ4DZFIQPQXPIQR6SQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -60,61 +69,94 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 6/19/22 20:53, Rob Clark wrote:
-...
->> +static unsigned long
->> +drm_gem_shmem_shrinker_count_objects(struct shrinker *shrinker,
->> +                                    struct shrink_control *sc)
->> +{
->> +       struct drm_gem_shmem_shrinker *gem_shrinker = to_drm_shrinker(shrinker);
->> +       struct drm_gem_shmem_object *shmem;
->> +       unsigned long count = 0;
->> +
->> +       if (!mutex_trylock(&gem_shrinker->lock))
->> +               return 0;
->> +
->> +       list_for_each_entry(shmem, &gem_shrinker->lru_evictable, madv_list) {
->> +               count += shmem->base.size;
->> +
->> +               if (count >= SHRINK_EMPTY)
->> +                       break;
->> +       }
->> +
->> +       mutex_unlock(&gem_shrinker->lock);
-> 
-> As I mentioned on other thread, count_objects, being approximate but
-> lockless and fast is the important thing.  Otherwise when you start
-> hitting the shrinker on many threads, you end up serializing them all,
-> even if you have no pages to return to the system at that point.
+On Mon, Jun 20, 2022 at 7:09 AM Dmitry Osipenko
+<dmitry.osipenko@collabora.com> wrote:
+>
+> On 6/19/22 20:53, Rob Clark wrote:
+> ...
+> >> +static unsigned long
+> >> +drm_gem_shmem_shrinker_count_objects(struct shrinker *shrinker,
+> >> +                                    struct shrink_control *sc)
+> >> +{
+> >> +       struct drm_gem_shmem_shrinker *gem_shrinker = to_drm_shrinker(shrinker);
+> >> +       struct drm_gem_shmem_object *shmem;
+> >> +       unsigned long count = 0;
+> >> +
+> >> +       if (!mutex_trylock(&gem_shrinker->lock))
+> >> +               return 0;
+> >> +
+> >> +       list_for_each_entry(shmem, &gem_shrinker->lru_evictable, madv_list) {
+> >> +               count += shmem->base.size;
+> >> +
+> >> +               if (count >= SHRINK_EMPTY)
+> >> +                       break;
+> >> +       }
+> >> +
+> >> +       mutex_unlock(&gem_shrinker->lock);
+> >
+> > As I mentioned on other thread, count_objects, being approximate but
+> > lockless and fast is the important thing.  Otherwise when you start
+> > hitting the shrinker on many threads, you end up serializing them all,
+> > even if you have no pages to return to the system at that point.
+>
+> Daniel's point for dropping the lockless variant was that we're already
+> in trouble if we're hitting shrinker too often and extra optimizations
+> won't bring much benefits to us.
 
-Daniel's point for dropping the lockless variant was that we're already
-in trouble if we're hitting shrinker too often and extra optimizations
-won't bring much benefits to us.
+At least with zram swap (which I highly recommend using even if you
+are not using a physical swap file/partition), swapin/out is actually
+quite fast.  And if you are leaning on zram swap to fit 8GB of chrome
+browser on a 4GB device, the shrinker gets hit quite a lot.  Lower
+spec (4GB RAM) chromebooks can be under constant memory pressure and
+can quite easily get into a situation where you are hitting the
+shrinker on many threads simultaneously.  So it is pretty important
+for all shrinkers in the system (not just drm driver) to be as
+concurrent as possible.  As long as you avoid serializing reclaim on
+all the threads, performance can still be quite good, but if you don't
+performance will fall off a cliff.
 
-Alright, I'll add back the lockless variant (or will use yours
-drm_gem_lru) in the next revision. The code difference is very small
-after all.
+jfwiw, we are seeing pretty good results (iirc 40-70% increase in open
+tab counts) with the combination of eviction + multigen LRU[1] +
+sizing zram swap to be 2x physical RAM
 
-...
->> +               /* prevent racing with the dma-buf importing/exporting */
->> +               if (!mutex_trylock(&gem_shrinker->dev->object_name_lock)) {
->> +                       *lock_contention |= true;
->> +                       goto resv_unlock;
->> +               }
-> 
-> I'm not sure this is a good idea to serialize on object_name_lock.
-> Purgeable buffers should never be shared (imported or exported).  So
-> at best you are avoiding evicting and immediately swapping back in, in
-> a rare case, at the cost of serializing multiple threads trying to
-> reclaim pages in parallel.
+[1] https://lwn.net/Articles/856931/
 
-The object_name_lock shouldn't cause contention in practice. But objects
-are also pinned on attachment, hence maybe this lock is indeed
-unnecessary.. I'll re-check it.
+> Alright, I'll add back the lockless variant (or will use yours
+> drm_gem_lru) in the next revision. The code difference is very small
+> after all.
+>
+> ...
+> >> +               /* prevent racing with the dma-buf importing/exporting */
+> >> +               if (!mutex_trylock(&gem_shrinker->dev->object_name_lock)) {
+> >> +                       *lock_contention |= true;
+> >> +                       goto resv_unlock;
+> >> +               }
+> >
+> > I'm not sure this is a good idea to serialize on object_name_lock.
+> > Purgeable buffers should never be shared (imported or exported).  So
+> > at best you are avoiding evicting and immediately swapping back in, in
+> > a rare case, at the cost of serializing multiple threads trying to
+> > reclaim pages in parallel.
+>
+> The object_name_lock shouldn't cause contention in practice. But objects
+> are also pinned on attachment, hence maybe this lock is indeed
+> unnecessary.. I'll re-check it.
 
--- 
-Best regards,
-Dmitry
+I'm not worried about contention with export/import/etc, but
+contention between multiple threads hitting the shrinker in parallel.
+I guess since you are using trylock, it won't *block* the other
+threads hitting shrinker, but they'll just end up looping in
+do_shrink_slab() because they are hitting contention.
+
+I'd have to do some experiments to see how it works out in practice,
+but my gut feel is that it isn't a good idea
+
+BR,
+-R
+
+> --
+> Best regards,
+> Dmitry
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
