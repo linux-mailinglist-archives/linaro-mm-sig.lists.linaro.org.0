@@ -2,207 +2,137 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7EBB3557E8E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Jun 2022 17:26:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB177558B0F
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Jun 2022 00:06:29 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 353C13F459
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Jun 2022 15:26:19 +0000 (UTC)
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
-	by lists.linaro.org (Postfix) with ESMTPS id 1D67E3F43E
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Jun 2022 15:26:15 +0000 (UTC)
-Received: from gallifrey.ext.pengutronix.de ([2001:67c:670:201:5054:ff:fe8d:eefb] helo=[IPv6:::1])
-	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-	(Exim 4.92)
-	(envelope-from <l.stach@pengutronix.de>)
-	id 1o4Oic-00078y-6V; Thu, 23 Jun 2022 17:26:06 +0200
-Message-ID: <0edd288595cb53768822c3d9dc18b8506e07a244.camel@pengutronix.de>
-From: Lucas Stach <l.stach@pengutronix.de>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Pekka
-	Paalanen <ppaalanen@gmail.com>
-Date: Thu, 23 Jun 2022 17:26:04 +0200
-In-Reply-To: <4ea37684-5dda-94e4-a544-74d3812e8d9d@amd.com>
-References: <91ff0bbb-ea3a-2663-3453-dea96ccd6dd8@amd.com>
-	 <YCuPhOT4GhY3RR/6@phenom.ffwll.local>
-	 <9178e19f5c0e141772b61b759abaa0d176f902b6.camel@ndufresne.ca>
-	 <CAPj87rPYQNkgVEdHECQcHcYe2nCpgF3RYQKk_=wwhvJSxwHXCg@mail.gmail.com>
-	 <c6e65ee1-531e-d72c-a6a6-da7149e34f18@amd.com>
-	 <20220623101326.18beeab3@eldfell>
-	 <954d0a9b-29ef-52ef-f6ca-22d7e6aa3f4d@amd.com>
-	 <4b69f9f542d6efde2190b73c87096e87fa24d8ef.camel@pengutronix.de>
-	 <adc626ec-ff5a-5c06-44ce-09111be450cd@amd.com>
-	 <fbb228cd78e9bebd7e7921c19e0c4c09d0891f23.camel@pengutronix.de>
-	 <e691bccc-171d-f674-2817-13a945970f4a@amd.com>
-	 <95cca943bbfda6af07339fb8d2dc7f4da3aa0280.camel@pengutronix.de>
-	 <05814ddb-4f3e-99d8-025a-c31db7b2c46b@amd.com>
-	 <708e27755317a7650ca08ba2e4c14691ac0d6ba2.camel@pengutronix.de>
-	 <6287f5f8-d9af-e03d-a2c8-ea8ddcbdc0d8@amd.com>
-	 <f3c32cdd2ab4e76546c549b0cebba8e1d19d1cb0.camel@pengutronix.de>
-	 <34a1efd9-5447-848b-c08c-de75b48e997e@amd.com>
-	 <3c088a9a511762f7868b10dbe431942d3724917a.camel@pengutronix.de>
-	 <4ea37684-5dda-94e4-a544-74d3812e8d9d@amd.com>
-User-Agent: Evolution 3.40.4 (3.40.4-1.fc34) 
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2001:67c:670:201:5054:ff:fe8d:eefb
-X-SA-Exim-Mail-From: l.stach@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
-X-PTX-Original-Recipient: linaro-mm-sig@lists.linaro.org
-Message-ID-Hash: SFZJD72UZGQBOUCMQNE3WU2NQJGHJ424
-X-Message-ID-Hash: SFZJD72UZGQBOUCMQNE3WU2NQJGHJ424
-X-MailFrom: l.stach@pengutronix.de
+	by lists.linaro.org (Postfix) with ESMTP id B559D3F467
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Jun 2022 22:06:28 +0000 (UTC)
+Received: from mail-pf1-f201.google.com (mail-pf1-f201.google.com [209.85.210.201])
+	by lists.linaro.org (Postfix) with ESMTPS id 6E28C3ECC8
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Jun 2022 22:06:24 +0000 (UTC)
+Received: by mail-pf1-f201.google.com with SMTP id 189-20020a6216c6000000b005252417051fso364361pfw.8
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Jun 2022 15:06:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=KwqDl7Ku0++kd3bGbvwgzs1gT1laIcj9GIfwKObRL9E=;
+        b=f8U/4xKGanNwrOdn737tuWhSmnZoG61m1qxfjiv5VkQ8UPtSqaWeibB404rrX79rJX
+         Sr8EwtDegZkmDOiQT1PYLi73vlNuyK3MEO3CteMf7qrTyzJdkDqEDsqiRCNCHSPQ5OpW
+         eesWhWqiGdmVom/8h4KWFRd14AnohMl03xMmbV6Ab1oeKOXQCzTP9OQoqz1l8U2F6/ec
+         VlqIw1iK8+IqtbCAOHrXtiW4tOefdgMl+CoajfkyUTpBuZ8kM+4EuI/xDArQ35ySZCKy
+         wRv8WwozJNFIjWw3i7yzruaQIY9s/ub55YNu2bl9iMISFr3cyMkNMY6hYWwYFcZJ8fYO
+         pNYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=KwqDl7Ku0++kd3bGbvwgzs1gT1laIcj9GIfwKObRL9E=;
+        b=6yi3+LOdQTJr++jNR3bbOcbvAkY8JYUCvhhu+Q1Imbh4RoGHutkQeAe/iIvVvjAxjk
+         olo9J0FaXE2xtsE1gpDHbE5Qspu6h7z8GqF9aD/lYm4rndorIgZFRPBXFe1zpBQkyn9Y
+         QttztRw/m+1gcl1/FY+CtBUjumnIWuq8wY7O8gjTJQvGBQkvKpYpwMtgp0uXOIaOPQpe
+         lFVJmSrw4xlC37pWCuL1tbX6A1NoUvmwkSrrs8pRXjVDM9tuTeoeWKmYza5rpTot1wdY
+         adzl748JuO6rMUXTEiZT9qodcobbQ0VWlYdKvIW1WS1IeV1MoZnaZBgp9ToTYwhejeIN
+         uIeA==
+X-Gm-Message-State: AJIora+rGC2tVq48rUxaW+i9MzmB3mm294t9NF9yx3B2ck/lcmzBtQQu
+	FA1ClRNTigs9fpscLXJuHm42DRt7oXKa2Rlrrw==
+X-Google-Smtp-Source: AGRyM1sO9ieUDBnlX+/hb6X4MjMKGW7axAjbZt6eLMihv8A9ry56mIpW47+iL+E9JFdzcNk6h+YievpjxofEabG5Zw==
+X-Received: from kaleshsingh.mtv.corp.google.com ([2620:15c:211:200:ac62:20a7:e3c5:c221])
+ (user=kaleshsingh job=sendgmr) by 2002:a05:6a00:885:b0:510:950f:f787 with
+ SMTP id q5-20020a056a00088500b00510950ff787mr42464806pfj.83.1656021983532;
+ Thu, 23 Jun 2022 15:06:23 -0700 (PDT)
+Date: Thu, 23 Jun 2022 15:06:05 -0700
+Message-Id: <20220623220613.3014268-1-kaleshsingh@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.37.0.rc0.161.g10f37bed90-goog
+From: Kalesh Singh <kaleshsingh@google.com>
+To: ckoenig.leichtzumerken@gmail.com, christian.koenig@amd.com,
+	viro@zeniv.linux.org.uk, hch@infradead.org, stephen.s.brennan@oracle.com,
+	David.Laight@ACULAB.COM
+Message-ID-Hash: ZQA4LT3NVPXLVRGCBCGNWTJS63QOBJGV
+X-Message-ID-Hash: ZQA4LT3NVPXLVRGCBCGNWTJS63QOBJGV
+X-MailFrom: 33-O0YgsKDZYA0B4I7I8D676EE6B4.2ECB8D0HE-CC-I86B8IJI.B8D0HE.EH6@flex--kaleshsingh.bounces.google.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: "Sharma, Shashank" <Shashank.Sharma@amd.com>, lkml <linux-kernel@vger.kernel.org>, dri-devel <dri-devel@lists.freedesktop.org>, Nicolas Dufresne <nicolas@ndufresne.ca>, linaro-mm-sig@lists.linaro.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media <linux-media@vger.kernel.org>
+CC: ilkos@google.com, tjmercier@google.com, surenb@google.com, kernel-team@android.com, Kalesh Singh <kaleshsingh@google.com>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Andrew Morton <akpm@linux-foundation.org>, Christoph Anton Mitterer <mail@christoph.anton.mitterer.name>, Johannes Weiner <hannes@cmpxchg.org>, Mike Rapoport <rppt@kernel.org>, Colin Cross <ccross@google.com>, Paul Gortmaker <paul.gortmaker@windriver.com>, Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: DMA-buf and uncached system memory
+Subject: [Linaro-mm-sig] [PATCH v2 0/2] procfs: Add file path and size to /proc/<pid>/fdinfo
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SFZJD72UZGQBOUCMQNE3WU2NQJGHJ424/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZQA4LT3NVPXLVRGCBCGNWTJS63QOBJGV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-QW0gRG9ubmVyc3RhZywgZGVtIDIzLjA2LjIwMjIgdW0gMTQ6NTIgKzAyMDAgc2NocmllYiBDaHJp
-c3RpYW4gS8O2bmlnOg0KPiBBbSAyMy4wNi4yMiB1bSAxNDoxNCBzY2hyaWViIEx1Y2FzIFN0YWNo
-Og0KPiA+IEFtIERvbm5lcnN0YWcsIGRlbSAyMy4wNi4yMDIyIHVtIDEzOjU0ICswMjAwIHNjaHJp
-ZWIgQ2hyaXN0aWFuIEvDtm5pZzoNCj4gPiA+IEFtIDIzLjA2LjIyIHVtIDEzOjI5IHNjaHJpZWIg
-THVjYXMgU3RhY2g6DQo+ID4gPiBbU05JUF0NCj4gPiA+IEkgbWVhbiBJIGV2ZW4gaGFkIHNvbWVi
-b2R5IGZyb20gQVJNIHdoaWNoIHRvbGQgbWUgdGhhdCB0aGlzIGlzIG5vdCBnb2luZw0KPiA+ID4g
-dG8gd29yayB3aXRoIG91ciBHUFVzIG9uIGEgc3BlY2lmaWMgU29DLiBUaGF0IHRoZXJlIGFyZSBB
-Uk0gaW50ZXJuYWwgdXNlDQo+ID4gPiBjYXNlcyB3aGljaCBqdXN0IHNlZW0gdG8gd29yayBiZWNh
-dXNlIGFsbCB0aGUgZGV2aWNlcyBhcmUgbm9uLWNvaGVyZW50DQo+ID4gPiBpcyBjb21wbGV0ZWx5
-IG5ldyB0byBtZS4NCj4gPiA+IA0KPiA+IFllcywgdHJ5aW5nIHRvIGhvb2sgdXAgYSBwZXJpcGhl
-cmFsIHRoYXQgYXNzdW1lcyBjYWNoZSBzbm9vcGluZyBpbiBzb21lDQo+ID4gZGVzaWduIGRldGFp
-bHMgdG8gYSBub24gY29oZXJlbnQgU29DIG1heSBlbmQgdXAgZXhwbG9kaW5nIGluIHZhcmlvdXMN
-Cj4gPiB3YXlzLiBPbiB0aGUgb3RoZXIgaGFuZCB5b3UgY2FuIHdvcmsgYXJvdW5kIG1vc3Qgb2Yg
-dGhvc2UgYXNzdW1wdGlvbnMNCj4gPiBieSBtYXJraW5nIHRoZSBtZW1vcnkgYXMgdW5jYWNoZWQg
-dG8gdGhlIENQVSwgd2hpY2ggbWF5IHRhbmsNCj4gPiBwZXJmb3JtYW5jZSwgYnV0IHdpbGwgd29y
-ayBmcm9tIGEgY29ycmVjdG5lc3MgUG9WLg0KPiANCj4gWWVhaCwgYW5kIGV4YWN0bHkgdGhhdCdz
-IHdoYXQgSSBtZWFudCB3aXRoICJETUEtYnVmIGlzIG5vdCB0aGUgZnJhbWV3b3JrIA0KPiBmb3Ig
-dGhpcyIuDQo+IA0KPiBTZWUgd2UgZG8gc3VwcG9ydCB1c2luZyB1bmNhY2hlZC9ub3Qgc25vb3Bl
-ZCBtZW1vcnkgaW4gRE1BLWJ1ZiwgYnV0IG9ubHkgDQo+IGZvciB0aGUgZXhwb3J0ZXIgc2lkZS4N
-Cj4gDQo+IEZvciBleGFtcGxlIHRoZSBBTUQgYW5kIEludGVsIEdQVXMgaGF2ZSBhIHBlciBidWZm
-ZXIgZmxhZyBmb3IgdGhpcy4NCj4gDQo+IFRoZSBpbXBvcnRlciBvbiB0aGUgb3RoZXIgaGFuZCBu
-ZWVkcyB0byBiZSBhYmxlIHRvIGhhbmRsZSB3aGF0ZXZlciB0aGUgDQo+IGV4cG9ydGVyIHByb3Zp
-ZGVzLg0KPiANCkkgZmFpbCB0byBjb25zdHJ1Y3QgYSBjYXNlIHdoZXJlIHlvdSB3YW50IHRoZSBW
-dWxrYW4vR0wgIm5vIGRvbWFpbg0KdHJhbnNpdGlvbiIgY29oZXJlbnQgc2VtYW50aWMgd2l0aG91
-dCB0aGUgYWxsb2NhdG9yIGtub3dpbmcgYWJvdXQgdGhpcy4NCklmIHlvdSBuZWVkIHRoaXMgYW5k
-IHRoZSBzeXN0ZW0gaXMgbm9uLXNub29waW5nLCBzdXJlbHkgdGhlIGFsbG9jYXRvcg0Kd2lsbCBj
-aG9vc2UgdW5jYWNoZWQgbWVtb3J5Lg0KDQpJIGFncmVlIHRoYXQgeW91IGFic29sdXRlbHkgbmVl
-ZCB0byBmYWlsIHRoZSB1c2FnZSB3aGVuIHNvbWVvbmUgaW1wb3J0cw0KYSBDUFUgY2FjaGVkIGJ1
-ZmZlciBhbmQgdGhlbiB0cmllcyB0byB1c2UgaXQgYXMgR0wgY29oZXJlbnQgb24gYSBub24tDQpz
-bm9vcGluZyBzeXN0ZW0uIFRoYXQgc2ltcGx5IHdpbGwgbm90IHdvcmsuDQoNCj4gPiA+IFtTTklQ
-XQ0KPiA+ID4gPiBOb24gY29oZXJlbnQgYWNjZXNzLCBpbmNsdWRpbmcgeW91ciBub24tc25vb3Ag
-c2Nhbm91dCwgYW5kIG5vIGRvbWFpbg0KPiA+ID4gPiB0cmFuc2l0aW9uIHNpZ25hbCBqdXN0IGRv
-ZXNuJ3QgZ28gdG9nZXRoZXIgd2hlbiB5b3Ugd2FudCB0byBzb2x2ZQ0KPiA+ID4gPiB0aGluZ3Mg
-aW4gYSBnZW5lcmljIHdheS4NCj4gPiA+IFllYWgsIHRoYXQncyB0aGUgc3R1ZmYgSSB0b3RhbGx5
-IGFncmVlIG9uLg0KPiA+ID4gDQo+ID4gPiBTZWUgd2UgYWJzb2x1dGVseSBkbyBoYXZlIHRoZSBy
-ZXF1aXJlbWVudCBvZiBpbXBsZW1lbnRpbmcgY29oZXJlbnQNCj4gPiA+IGFjY2VzcyB3aXRob3V0
-IGRvbWFpbiB0cmFuc2l0aW9ucyBmb3IgVnVsa2FuIGFuZCBPcGVuR0wrZXh0ZW5zaW9ucy4NCj4g
-PiA+IA0KPiA+IENvaGVyZW50IGNhbiBtZWFuIDIgZGlmZmVyZW50IHRoaW5nczoNCj4gPiAxLiBD
-UFUgY2FjaGVkIHdpdGggc25vb3BpbmcgZnJvbSB0aGUgSU8gZGV2aWNlDQo+ID4gMi4gQ1BVIHVu
-Y2FjaGVkDQo+ID4gDQo+ID4gVGhlIFZ1bGthbiBhbmQgR0wgImNvaGVyZW50IiB1c2VzIGFyZSBy
-ZWFsbHkgY29oZXJlbnQgd2l0aG91dCBleHBsaWNpdA0KPiA+IGRvbWFpbiB0cmFuc2l0aW9ucywg
-c28gb24gbm9uIGNvaGVyZW50IGFyY2hlcyB0aGF0IHJlcXVpcmUgdGhlDQo+ID4gdHJhbnNpdGlv
-bnMgdGhlIG9ubHkgd2F5IHRvIGltcGxlbWVudCB0aGlzIGlzIGJ5IG1ha2luZyB0aGUgbWVtb3J5
-IENQVQ0KPiA+IHVuY2FjaGVkLiBXaGljaCBmcm9tIGEgcGVyZm9ybWFuY2UgUG9WIHdpbGwgcHJv
-YmFibHkgbm90IGJlIHdoYXQgYXBwDQo+ID4gZGV2ZWxvcGVycyBleHBlY3QsIGJ1dCB3aWxsIHN0
-aWxsIGV4cG9zZSB0aGUgY29ycmVjdCBiZWhhdmlvci4NCj4gDQo+IFF1aXRlIGEgYm9vbWVyIGZv
-ciBwZXJmb3JtYW5jZSwgYnV0IHllcyB0aGF0IHNob3VsZCB3b3JrLg0KPiANCj4gPiA+ID4gUmVt
-ZW1iZXIgdGhhdCBpbiBhIGZ1bGx5IChub3Qgb25seSBJTykgY29oZXJlbnQgc3lzdGVtIHRoZSBD
-UFUgaXNuJ3QNCj4gPiA+ID4gdGhlIG9ubHkgYWdlbnQgdGhhdCBtYXkgY2FjaGUgdGhlIGNvbnRl
-bnQgeW91IGFyZSB0cnlpbmcgdG8gYWNjZXNzDQo+ID4gPiA+IGhlcmUuIFRoZSBkaXJ0eSBjYWNo
-ZWxpbmUgY291bGQgcmVhc29uYWJseSBzdGlsbCBiZSBzaXR0aW5nIGluIGEgR1BVIG9yDQo+ID4g
-PiA+IFZQVSBjYWNoZSwgc28geW91IG5lZWQgc29tZSB3YXkgdG8gY2xlYW4gdGhvc2UgY2FjaGVs
-aW5lcywgd2hpY2ggaXNuJ3QNCj4gPiA+ID4gYSBtYWdpYyAiaW1wb3J0ZXIga25vd3MgaG93IHRv
-IGNhbGwgQ1BVIGNhY2hlIGNsZWFuIGluc3RydWN0aW9ucyIuDQo+ID4gPiBJSVJDIHdlIGRvIGFs
-cmVhZHkgaGF2ZS9oYWQgYSBTWU5DX0lPQ1RMIGZvciBjYXNlcyBsaWtlIHRoaXMsIGJ1dCAoSQ0K
-PiA+ID4gbmVlZCB0byBkb3VibGUgY2hlY2sgYXMgd2VsbCwgdGhhdCdzIHdheSB0byBsb25nIGFn
-bykgdGhpcyB3YXMga2lja2VkDQo+ID4gPiBvdXQgYmVjYXVzZSBvZiB0aGUgcmVxdWlyZW1lbnRz
-IGFib3ZlLg0KPiA+ID4gDQo+ID4gVGhlIERNQV9CVUZfSU9DVExfU1lOQyBpcyBhdmFpbGFibGUg
-aW4gdXBzdHJlYW0sIHdpdGggdGhlIGV4cGxpY2l0DQo+ID4gZG9jdW1lbnRhdGlvbiB0aGF0ICJ1
-c2Vyc3BhY2UgY2FuIG5vdCByZWx5IG9uIGNvaGVyZW50IGFjY2VzcyIuDQo+IA0KPiBZZWFoLCBk
-b3VibGUgY2hlY2tlZCB0aGF0IGFzIHdlbGwuIFRoaXMgaXMgZm9yIHRoZSBjb2hlcmVuY3kgY2Fz
-ZSBvbiB0aGUgDQo+IGV4cG9ydGVyIHNpZGUuDQo+IA0KPiA+ID4gPiA+IFlvdSBjYW4gb2YgY291
-cnNlIHVzZSBETUEtYnVmIGluIGFuIGluY29oZXJlbnQgZW52aXJvbm1lbnQsIGJ1dCB0aGVuIHlv
-dQ0KPiA+ID4gPiA+IGNhbid0IGV4cGVjdCB0aGF0IHRoaXMgd29ya3MgYWxsIHRoZSB0aW1lLg0K
-PiA+ID4gPiA+IA0KPiA+ID4gPiA+IFRoaXMgaXMgZG9jdW1lbnRlZCBiZWhhdmlvciBhbmQgc28g
-ZmFyIHdlIGhhdmUgYmx1bnRseSByZWplY3RlZCBhbnkgb2YNCj4gPiA+ID4gPiB0aGUgY29tcGxh
-aW5zIHRoYXQgaXQgZG9lc24ndCB3b3JrIG9uIG1vc3QgQVJNIFNvQ3MgYW5kIEkgZG9uJ3QgcmVh
-bGx5DQo+ID4gPiA+ID4gc2VlIGEgd2F5IHRvIGRvIHRoaXMgZGlmZmVyZW50bHkuDQo+ID4gPiA+
-IENhbiB5b3UgcG9pbnQgbWUgdG8gdGhhdCBwYXJ0IG9mIHRoZSBkb2N1bWVudGF0aW9uPyBBIHF1
-aWNrIGdyZXAgZm9yDQo+ID4gPiA+ICJjb2hlcmVudCIgZGlkbid0IGltbWVkaWF0ZWx5IHR1cm4g
-c29tZXRoaW5nIHVwIHdpdGhpbiB0aGUgRE1BLWJ1Zg0KPiA+ID4gPiBkaXJzLg0KPiA+ID4gU2Vh
-cmNoIGZvciAiY2FjaGUgY29oZXJlbmN5IG1hbmFnZW1lbnQiLiBJdCdzIHF1aXRlIGEgd2hpbGUg
-YWdvLCBidXQgSQ0KPiA+ID4gZG8gcmVtZW1iZXIgaGVscGluZyB0byByZXZpZXcgdGhhdCBzdHVm
-Zi4NCj4gPiA+IA0KPiA+IFRoYXQgb25seSB0dXJucyB1cCB0aGUgbGluZXMgaW4gRE1BX0JVRl9J
-T0NUTF9TWU5DIGRvYywgd2hpY2ggYXJlDQo+ID4gc2F5aW5nIHRoZSBleGFjdCBvcHBvc2l0ZSBv
-ZiB0aGUgRE1BLWJ1ZiBpcyBhbHdheXMgY29oZXJlbnQuDQo+IA0KPiBTb3VuZHMgbGlrZSBJJ20g
-bm90IG1ha2luZyBjbGVhciB3aGF0IEkgd2FudCB0byBzYXkgaGVyZTogRm9yIHRoZSANCj4gZXhw
-b3J0ZXIgdXNpbmcgY2FjaGUgY29oZXJlbnQgbWVtb3J5IGlzIG9wdGlvbmFsLCBmb3IgdGhlIGlt
-cG9ydGVyIGl0IGlzbid0Lg0KPiANCj4gRm9yIHRoZSBleHBvcnRlciBpdCBpcyBwZXJmZWN0bHkg
-dmFsaWQgdG8gdXNlIGttYWxsb2MsIGdldF9mcmVlX3BhZ2UgDQo+IGV0Yy4uLiBvbiBoaXMgYnVm
-ZmVycyBhcyBsb25nIGFzIGl0IHVzZXMgdGhlIERNQSBBUEkgdG8gZ2l2ZSB0aGUgDQo+IGltcG9y
-dGVyIGFjY2VzcyB0byBpdC4NCj4gDQpBbmQgaGVyZSBpcyB3aGVyZSBvdXIgbGluZSBvZiB0aG91
-Z2h0IGRpdmVyZ2VzOiB0aGUgRE1BIEFQSSBhbGxvd3MNCnNub29waW5nIGFuZCBub24tc25vb3Bp
-bmcgZGV2aWNlcyB0byB3b3JrIHRvZ2V0aGVyIGp1c3QgZmluZSwgYXMgaXQgaGFzDQpleHBsaWNp
-dCBkb21haW4gdHJhbnNpdGlvbnMsIHdoaWNoIGFyZSBuby1vcHMgaWYgYm90aCBkZXZpY2VzIGFy
-ZQ0Kc25vb3BpbmcsIGJ1dCB3aWxsIGRvIHRoZSBuZWNlc3NhcnkgY2FjaGUgbWFpbnRlbmFuY2Ug
-d2hlbiBvbmUgb2YgdGhlbQ0KaXMgbm9uLXNub29waW5nIGJ1dCB0aGUgbWVtb3J5IGlzIENQVSBj
-YWNoZWQuDQoNCkkgZG9uJ3Qgc2VlIHdoeSBETUEtYnVmIHNob3VsZCBiZSBhbnkgZGlmZmVyZW50
-IGhlcmUuIFllcywgeW91IGNhbiBub3QNCnN1cHBvcnQgdGhlICJubyBkb21haW4gdHJhbnNpdGlv
-biIgc2hhcmluZyB3aGVuIHRoZSBtZW1vcnkgaXMgQ1BVDQpjYWNoZWQgYW5kIG9uZSBvZiB0aGUg
-ZGV2aWNlcyBpbiBub24tc25vb3BpbmcsIGJ1dCB5b3UgY2FuIHN1cHBvcnQgOTklDQpvZiByZWFs
-IHVzZS1jYXNlcyBsaWtlIHRoZSBub24tc25vb3BlZCBzY2Fub3V0IG9yIHRoZSBVVkMgdmlkZW8g
-aW1wb3J0Lg0KDQo+IFRoZSBpbXBvcnRlciBvbiB0aGUgb3RoZXIgaGFuZCBuZWVkcyB0byBiZSBh
-YmxlIHRvIGRlYWwgd2l0aCB0aGF0LiBXaGVuIA0KPiB0aGlzIGlzIG5vdCB0aGUgY2FzZSB0aGVu
-IHRoZSBpbXBvcnRlciBzb21laG93IG5lZWRzIHRvIHdvcmsgYXJvdW5kIHRoYXQuDQo+IA0KV2h5
-PyBUaGUgaW1wb3J0ZXIgbWFwcyB0aGUgZG1hLWJ1ZiB2aWEgZG1hX2J1Zl9tYXBfYXR0YWNobWVu
-dCwgd2hpY2ggaW4NCm1vc3QgY2FzZXMgdHJpZ2dlcnMgYSBtYXAgdmlhIHRoZSBETUEgQVBJIG9u
-IHRoZSBleHBvcnRlciBzaWRlLiBUaGlzDQptYXAgdmlhIHRoZSBETUEgQVBJIHdpbGwgYWxyZWFk
-eSBkbyB0aGUgcmlnaHQgdGhpbmcgaW4gdGVybXMgb2YgY2FjaGUNCm1hbmFnZW1lbnQsIGl0J3Mg
-anVzdCB0aGF0IHdlIGV4cGxpY2l0bHkgZGlzYWJsZSBpdCB2aWENCkRNQV9BVFRSX1NLSVBfQ1BV
-X1NZTkMgaW4gRFJNIGJlY2F1c2Ugd2Uga25vdyB0aGF0IHRoZSBtYXBwaW5nIHdpbGwgYmUNCmNh
-Y2hlZCwgd2hpY2ggdmlvbGF0ZXMgdGhlIERNQSBBUEkgZXhwbGljaXQgZG9tYWluIHRyYW5zaXRp
-b24gYW55d2F5Lg0KDQo+IEVpdGhlciBieSBmbHVzaGluZyB0aGUgQ1BVIGNhY2hlcyBvciBieSBy
-ZWplY3RpbmcgdXNpbmcgdGhlIGltcG9ydGVkIA0KPiBidWZmZXIgZm9yIHRoaXMgc3BlY2lmaWMg
-dXNlIGNhc2UgKGxpa2UgQU1EIGFuZCBJbnRlbCBkcml2ZXJzIHNob3VsZCBiZSANCj4gZG9pbmcp
-Lg0KPiANCj4gSWYgdGhlIEludGVsIG9yIEFSTSBkaXNwbGF5IGRyaXZlcnMgbmVlZCBub24tY2Fj
-aGVkIG1lbW9yeSBhbmQgZG9uJ3QgDQo+IHJlamVjdCBidWZmZXIgd2hlcmUgdGhleSBkb24ndCBr
-bm93IHRoaXMgdGhlbiB0aGF0J3MgY2VydGFpbmx5IGEgYnVnIGluIA0KPiB0aG9zZSBkcml2ZXJz
-Lg0KDQpJdCdzIG5vdCBqdXN0IGRpc3BsYXkgZHJpdmVycywgdmlkZW8gY29kZWMgYWNjZWxlcmF0
-b3JzIGFuZCBtb3N0IEdQVXMNCmluIHRoaXMgc3BhY2UgYXJlIGFsc28gbm9uLXNub29waW5nLiBJ
-biB0aGUgQVJNIFNvQyB3b3JsZCBldmVyeW9uZSBqdXN0DQphc3N1bWVzIHlvdSBhcmUgbm9uLXNu
-b29waW5nLCB3aGljaCBpcyB3aHkgdGhpbmdzIHdvcmsgZm9yIG1vc3QgY2FzZXMNCmFuZCBvbmx5
-IGEgaGFuZGZ1bCBsaWtlIHRoZSBVVkMgdmlkZW8gaW1wb3J0IGlzIGJyb2tlbi4NCj4gDQo+IE90
-aGVyd2lzZSB3ZSB3b3VsZCBuZWVkIHRvIGNoYW5nZSBhbGwgRE1BLWJ1ZiBleHBvcnRlcnMgdG8g
-dXNlIGEgc3BlY2lhbCANCj4gZnVuY3Rpb24gZm9yIGFsbG9jYXRpb24gbm9uLWNvaGVyZW50IG1l
-bW9yeSBhbmQgdGhhdCBpcyBjZXJ0YWlubHkgbm90IA0KPiBnb2luZyB0byBmbHkuDQo+IA0KPiA+
-IEkgYWxzbyBkb24ndCBzZWUgd2h5IHlvdSB0aGluayB0aGF0IGJvdGggd29ybGQgdmlld3MgYXJl
-IHNvIHRvdGFsbHkNCj4gPiBkaWZmZXJlbnQuIFdlIGNvdWxkIGp1c3QgcmVxdWlyZSBleHBsaWNp
-dCBkb21haW4gdHJhbnNpdGlvbnMgZm9yIG5vbi0NCj4gPiBzbm9vcCBhY2Nlc3MsIHdoaWNoIHdv
-dWxkIHByb2JhYmx5IHNvbHZlIHlvdXIgc2Nhbm91dCBpc3N1ZSBhbmQgd291bGQNCj4gPiBub3Qg
-YmUgYSBwcm9ibGVtIGZvciBtb3N0IEFSTSBzeXN0ZW1zLCB3aGVyZSB3ZSBjb3VsZCBuby1vcCB0
-aGlzIGlmIHRoZQ0KPiA+IGJ1ZmZlciBpcyBhbHJlYWR5IGluIHVuY2FjaGVkIG1lbW9yeSBhbmQg
-YXQgdGhlIHNhbWUgdGltZSBrZWVwIHRoZSAieDg2DQo+ID4gYXNzdW1lcyBjYWNoZWQgKyBzbm9v
-cGVkIGFjY2VzcyBieSBkZWZhdWx0IiBzZW1hbnRpY3MuDQo+IA0KPiBXZWxsIHRoZSBrZXkgcG9p
-bnQgaXMgd2UgaW50ZW50aW9uYWxseSByZWplY3RlZCB0aGF0IGRlc2lnbiBwcmV2aW91c2x5IA0K
-PiBiZWNhdXNlIGl0IGNyZWF0ZWQgYWxsIGtpbmQgb2YgdHJvdWJsZSBhcyB3ZWxsLg0KPiANCkkg
-d291bGQgcmVhbGx5IGxpa2UgdG8ga25vdyB3aGF0IGlzc3VlcyBwb3BwZWQgdXAgdGhlcmUuIE1v
-dmluZyB0aGUNCmRtYS1idWYgYXR0YWNobWVudCB0byB3b3JrIG1vcmUgbGlrZSBhIGJ1ZmZlciB1
-c2VkIHdpdGggdGhlIERNQSBBUEkNCnNlZW1zIGxpa2UgYSBnb29kIHRoaW5nIHRvIG1lLg0KDQo+
-IEZvciB0aGlzIGxpbWl0ZWQgdXNlIGNhc2Ugb2YgZG9pbmcgYSBkb21haW4gdHJhbnNpdGlvbiBy
-aWdodCBiZWZvcmUgDQo+IHNjYW5vdXQgaXQgbWlnaHQgbWFrZSBzZW5zZSwgYnV0IHRoYXQncyBq
-dXN0IG9uZSB1c2UgY2FzZS4NCj4gDQpUaGUgb25seSBjYXNlIEkgc2VlIHRoYXQgd2Ugc3RpbGwg
-Y291bGRuJ3Qgc3VwcG9ydCB3aXRoIGEgY2hhbmdlIGluDQp0aGF0IGRpcmVjdGlvbiBpcyB0aGUg
-R0wgY29oZXJlbnQgYWNjZXNzIHRvIGEgaW1wb3J0ZWQgYnVmZmVyIHRoYXQgaGFzDQpiZWVuIGFs
-bG9jYXRlZCBmcm9tIENQVSBjYWNoZWQgbWVtb3J5IG9uIGEgc3lzdGVtIHdpdGggbm9uLXNub29w
-aW5nDQphZ2VudHMuIFdoaWNoIHRvIG1lIHNvdW5kcyBsaWtlIGEgcHJldHR5IG5pY2hlIHVzZS1j
-YXNlLCBidXQgSSB3b3VsZCBiZQ0KaGFwcHkgdG8gYmUgcHJvdmVuIHdyb25nLg0KDQpSZWdhcmRz
-LA0KTHVjYXMNCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5h
-cm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2
-ZUBsaXN0cy5saW5hcm8ub3JnCg==
+Hi all,
+
+This is v2 of the fdinfo patches. The main update is adding path
+field only for files with anon inodes. Rebased on 5.19-rc3.
+
+The previous cover letter is copied below for convenience.
+
+Thanks,
+Kalesh
+
+-----------
+
+Processes can pin shared memory by keeping a handle to it through a
+file descriptor; for instance dmabufs, memfd, and ashmem (in Android).
+
+In the case of a memory leak, to identify the process pinning the
+memory, userspace needs to:
+  - Iterate the /proc/<pid>/fd/* for each process
+  - Do a readlink on each entry to identify the type of memory from
+    the file path.
+  - stat() each entry to get the size of the memory.
+
+The file permissions on /proc/<pid>/fd/* only allows for the owner
+or root to perform the operations above; and so is not suitable for
+capturing the system-wide state in a production environment.
+
+This issue was addressed for dmabufs by making /proc/*/fdinfo/*
+accessible to a process with PTRACE_MODE_READ_FSCREDS credentials[1]
+To allow the same kind of tracking for other types of shared memory,
+add the following fields to /proc/<pid>/fdinfo/<fd>:
+
+path - This allows identifying the type of memory based on common
+       prefixes: e.g. "/memfd...", "/dmabuf...", "/dev/ashmem..."
+
+       This was not an issued when dmabuf tracking was introduced
+       because the exp_name field of dmabuf fdinfo could be used
+       to distinguish dmabuf fds from other types.
+
+size - To track the amount of memory that is being pinned.
+
+       dmabufs expose size as an additional field in fdinfo. Remove
+       this and make it a common field for all fds.
+
+Access to /proc/<pid>/fdinfo is governed by PTRACE_MODE_READ_FSCREDS
+-- the same as for /proc/<pid>/maps which also exposes the path and
+size for mapped memory regions.
+
+This allows for a system process with PTRACE_MODE_READ_FSCREDS to
+account the pinned per-process memory via fdinfo.
+
+
+Kalesh Singh (2):
+  procfs: Add 'size' to /proc/<pid>/fdinfo/
+  procfs: Add 'path' to /proc/<pid>/fdinfo/
+
+ Documentation/filesystems/proc.rst | 22 ++++++++++++++++++++--
+ drivers/dma-buf/dma-buf.c          |  1 -
+ fs/libfs.c                         |  9 +++++++++
+ fs/proc/fd.c                       | 18 ++++++++++++++----
+ include/linux/fs.h                 |  1 +
+ 5 files changed, 44 insertions(+), 7 deletions(-)
+
+
+base-commit: a111daf0c53ae91e71fd2bfe7497862d14132e3e
+-- 
+2.37.0.rc0.161.g10f37bed90-goog
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
