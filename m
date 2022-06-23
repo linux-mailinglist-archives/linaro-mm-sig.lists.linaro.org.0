@@ -2,70 +2,131 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BEFFB5575C1
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Jun 2022 10:44:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97F8C557617
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Jun 2022 10:58:39 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F0EB83F45D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Jun 2022 08:44:09 +0000 (UTC)
-Received: from out30-56.freemail.mail.aliyun.com (out30-56.freemail.mail.aliyun.com [115.124.30.56])
-	by lists.linaro.org (Postfix) with ESMTPS id 8BABB3EA51
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Jun 2022 08:44:05 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R911e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=ay29a033018046060;MF=jiapeng.chong@linux.alibaba.com;NM=1;PH=DS;RN=15;SR=0;TI=SMTPD_---0VHAjc-P_1655973829;
-Received: from localhost(mailfrom:jiapeng.chong@linux.alibaba.com fp:SMTPD_---0VHAjc-P_1655973829)
-          by smtp.aliyun-inc.com;
-          Thu, 23 Jun 2022 16:44:00 +0800
-From: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
-To: neal_liu@aspeedtech.com
-Date: Thu, 23 Jun 2022 16:43:47 +0800
-Message-Id: <20220623084347.38207-1-jiapeng.chong@linux.alibaba.com>
-X-Mailer: git-send-email 2.20.1.7.g153144c
+	by lists.linaro.org (Postfix) with ESMTP id 8366F3F459
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Jun 2022 08:58:38 +0000 (UTC)
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de [85.220.165.71])
+	by lists.linaro.org (Postfix) with ESMTPS id 0E9523EBC5
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Jun 2022 08:58:34 +0000 (UTC)
+Received: from gallifrey.ext.pengutronix.de ([2001:67c:670:201:5054:ff:fe8d:eefb] helo=[IPv6:::1])
+	by metis.ext.pengutronix.de with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+	(Exim 4.92)
+	(envelope-from <l.stach@pengutronix.de>)
+	id 1o4IfT-0001Zu-Cc; Thu, 23 Jun 2022 10:58:27 +0200
+Message-ID: <fbb228cd78e9bebd7e7921c19e0c4c09d0891f23.camel@pengutronix.de>
+From: Lucas Stach <l.stach@pengutronix.de>
+To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Pekka
+	Paalanen <ppaalanen@gmail.com>
+Date: Thu, 23 Jun 2022 10:58:26 +0200
+In-Reply-To: <adc626ec-ff5a-5c06-44ce-09111be450cd@amd.com>
+References: <91ff0bbb-ea3a-2663-3453-dea96ccd6dd8@amd.com>
+	 <YCuPhOT4GhY3RR/6@phenom.ffwll.local>
+	 <9178e19f5c0e141772b61b759abaa0d176f902b6.camel@ndufresne.ca>
+	 <CAPj87rPYQNkgVEdHECQcHcYe2nCpgF3RYQKk_=wwhvJSxwHXCg@mail.gmail.com>
+	 <c6e65ee1-531e-d72c-a6a6-da7149e34f18@amd.com>
+	 <20220623101326.18beeab3@eldfell>
+	 <954d0a9b-29ef-52ef-f6ca-22d7e6aa3f4d@amd.com>
+	 <4b69f9f542d6efde2190b73c87096e87fa24d8ef.camel@pengutronix.de>
+	 <adc626ec-ff5a-5c06-44ce-09111be450cd@amd.com>
+User-Agent: Evolution 3.40.4 (3.40.4-1.fc34) 
 MIME-Version: 1.0
-Message-ID-Hash: GWC4X4FRKZHLZD7Q6TJ66X4CQKV5TJIF
-X-Message-ID-Hash: GWC4X4FRKZHLZD7Q6TJ66X4CQKV5TJIF
-X-MailFrom: jiapeng.chong@linux.alibaba.com
+X-SA-Exim-Connect-IP: 2001:67c:670:201:5054:ff:fe8d:eefb
+X-SA-Exim-Mail-From: l.stach@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de); SAEximRunCond expanded to false
+X-PTX-Original-Recipient: linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: 4JHKUYIYTF7YI3QFZJKRWCJQO46II7AG
+X-Message-ID-Hash: 4JHKUYIYTF7YI3QFZJKRWCJQO46II7AG
+X-MailFrom: l.stach@pengutronix.de
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: balbi@kernel.org, gregkh@linuxfoundation.org, andrew@aj.id.au, sumit.semwal@linaro.org, christian.koenig@amd.com, linux-aspeed@lists.ozlabs.org, linux-usb@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
+CC: "Sharma, Shashank" <Shashank.Sharma@amd.com>, lkml <linux-kernel@vger.kernel.org>, dri-devel <dri-devel@lists.freedesktop.org>, Nicolas Dufresne <nicolas@ndufresne.ca>, linaro-mm-sig@lists.linaro.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media <linux-media@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] usb: gadget: Fix unsigned comparison with less than zero
+Subject: [Linaro-mm-sig] Re: DMA-buf and uncached system memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GWC4X4FRKZHLZD7Q6TJ66X4CQKV5TJIF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4JHKUYIYTF7YI3QFZJKRWCJQO46II7AG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-This was found by coccicheck:
-
-./drivers/usb/gadget/udc/aspeed_udc.c:496:8-13: WARNING: Unsigned expression compared with zero: chunk >= 0.
-
-Signed-off-by: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
----
- drivers/usb/gadget/udc/aspeed_udc.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/usb/gadget/udc/aspeed_udc.c b/drivers/usb/gadget/udc/aspeed_udc.c
-index 1fc15228ff15..387a7abdcee4 100644
---- a/drivers/usb/gadget/udc/aspeed_udc.c
-+++ b/drivers/usb/gadget/udc/aspeed_udc.c
-@@ -476,8 +476,8 @@ static int ast_dma_descriptor_setup(struct ast_udc_ep *ep, u32 dma_buf,
- {
- 	struct ast_udc_dev *udc = ep->udc;
- 	struct device *dev = &udc->pdev->dev;
--	u32 offset, chunk;
--	int count, last;
-+	u32 offset;
-+	int count, last, chunk;
- 
- 	if (!ep->descs) {
- 		dev_warn(dev, "%s: Empty DMA descs list failure\n",
--- 
-2.20.1.7.g153144c
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+QW0gRG9ubmVyc3RhZywgZGVtIDIzLjA2LjIwMjIgdW0gMTA6MTQgKzAyMDAgc2NocmllYiBDaHJp
+c3RpYW4gS8O2bmlnOg0KPiBBbSAyMy4wNi4yMiB1bSAxMDowNCBzY2hyaWViIEx1Y2FzIFN0YWNo
+Og0KPiA+IEFtIERvbm5lcnN0YWcsIGRlbSAyMy4wNi4yMDIyIHVtIDA5OjI2ICswMjAwIHNjaHJp
+ZWIgQ2hyaXN0aWFuIEvDtm5pZzoNCj4gPiA+IEFtIDIzLjA2LjIyIHVtIDA5OjEzIHNjaHJpZWIg
+UGVra2EgUGFhbGFuZW46DQo+ID4gPiA+IE9uIFRodSwgMjMgSnVuIDIwMjIgMDg6NTk6NDEgKzAy
+MDANCj4gPiA+ID4gQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPiB3
+cm90ZToNCj4gPiA+ID4gDQo+ID4gPiA+ID4gVGhlIGV4cG9ydGVyIGlzbid0IGRvaW5nIGFueXRo
+aW5nIHdyb25nIGhlcmUuIERNQS1idWYgYXJlIHN1cHBvc2VkIHRvIGJlDQo+ID4gPiA+ID4gQ1BV
+IGNhY2hlZCBhbmQgY2FuIGFsc28gYmUgY2FjaGUgaG90Lg0KPiA+ID4gPiBIaSwNCj4gPiA+ID4g
+DQo+ID4gPiA+IHdoYXQgaXMgdGhhdCBzdGF0ZW1lbnQgYmFzZWQgb24/DQo+ID4gPiBPbiB0aGUg
+ZGVzaWduIGRvY3VtZW50YXRpb24gb2YgRE1BLWJ1ZiBhbmQgdGhlIGFjdHVhbCBkcml2ZXINCj4g
+PiA+IGltcGxlbWVudGF0aW9ucy4NCj4gPiA+IA0KPiA+ID4gQ29oZXJlbmN5IGFuZCBzbm9vcGlu
+ZyBvZiB0aGUgQ1BVIGNhY2hlIGlzIG1hbmRhdG9yeSBmb3IgZGV2aWNlcyBhbmQNCj4gPiA+IHJv
+b3QgY29tcGxleGVzIGluIHRoZSBQQ0kgc3BlY2lmaWNhdGlvbi4gSW5jb2hlcmVudCBhY2Nlc3Mg
+aXMganVzdCBhbg0KPiA+ID4gZXh0ZW5zaW9uLg0KPiA+ID4gDQo+ID4gPiBXZSBpbmhlcml0ZWQg
+dGhhdCBieSBiYXNpbmcgRE1BLWJ1ZiBvbiB0aGUgTGludXgga2VybmVsIERNQS1BUEkgd2hpY2gg
+aW4NCj4gPiA+IHR1cm4gaXMgbGFyZ2VseSBiYXNlZCBvbiB0aGUgUENJIHNwZWNpZmljYXRpb24u
+DQo+ID4gPiANCj4gPiA+ID4gV2VyZSB0aGUgKG1hbmRhdG9yeSBmb3IgQ1BVIGFjY2VzcykgY3B1
+X2FjY2Vzc19iZWdpbi9lbmQgZnVuY3Rpb25zICYNCj4gPiA+ID4gaW9jdGxzIG5vdCBzdXBwb3Nl
+ZCB0byBlbnN1cmUgdGhhdCBDUFUgY2FjaGUgaXMgdXAtdG8tZGF0ZSAvIENQVSBjYWNoZQ0KPiA+
+ID4gPiBpcyBmdWxseSBmbHVzaGVkIG91dD8NCj4gPiA+IE5vLCB0aG9zZSBmdW5jdGlvbnMgYXJl
+IHRvIGluZm9ybSB0aGUgZXhwb3J0ZXIgdGhhdCB0aGUgaW1wb3J0ZXIgaGFzDQo+ID4gPiBzdGFy
+dGVkIGFuZCBmaW5pc2hlZCBhY2Nlc3NpbmcgdGhlIGJ1ZmZlciB1c2luZyB0aGUgQ1BVLg0KPiA+
+ID4gDQo+ID4gPiBUaGVyZSBpcyBubyBzaWduYWxpbmcgaW4gdGhlIG90aGVyIGRpcmVjdGlvbi4g
+SW4gb3RoZXIgd29yZHMgdGhlDQo+ID4gPiBleHBvcnRlciBkb2Vzbid0IGluZm9ybSB0aGUgaW1w
+b3J0ZXIgYWJvdXQgQ1BVIGFjY2Vzc2VzIGJlY2F1c2UgaXQgaXMNCj4gPiA+IHRoZSBvd25lciBv
+ZiB0aGUgYnVmZmVyLg0KPiA+ID4gDQo+ID4gPiBJdCdzIHRoZSByZXNwb25zaWJpbGl0eSBvZiB0
+aGUgaW1wb3J0ZXIgdG8gbWFrZSBzdXJlIHRoYXQgaXQgY2FuDQo+ID4gPiBhY3R1YWxseSBhY2Nl
+c3MgdGhlIGRhdGEgaW4gdGhlIGJ1ZmZlci4gSWYgaXQgY2FuJ3QgZ3VhcmFudGVlIHRoYXQgdGhl
+DQo+ID4gPiBpbXBvcnRlciBzaG91bGRuJ3QgaW1wb3J0IHRoZSBidWZmZXIgaW4gdGhlIGZpcnN0
+IHBsYWNlLg0KPiA+IFRoaXMgaXMgbm90IHJlYWxseSBjb3JyZWN0LiBETUEtYnVmIGluaGVyaXRl
+ZCB0aGUgdGhlIG1hcC91bm1hcCBwYXJ0DQo+ID4gZnJvbSB0aGUgRE1BIEFQSSwgd2hpY2ggb24g
+Y2FjaGUgY29oZXJlbnQgYXJjaGl0ZWN0dXJlIGlzIG1vc3RseSBhIG5vLQ0KPiA+IG9wIG9yIHRp
+ZXMgaW50byB0aGUgSU9NTVUgaW1wbGVtZW50YXRpb24gdG8gc2V0IHVwIHRoZSBwYWdldGFibGVz
+IGZvcg0KPiA+IHRoZSB0cmFuc2xhdGlvbi4gT24gbm9uIGNhY2hlIGNvaGVyZW50IGFyY2hpdGVj
+dHVyZXMgdGhpcyBpcyB0aGUgcG9pbnQNCj4gPiB3aGVyZSBhbnkgYW55IG5lY2Vzc2FyeSBjYWNo
+ZSBtYWludGVuYW5jZSBoYXBwZW5zLiBEUk0gYnJlYWtzIHRoaXMNCj4gPiBtb2RlbCBieSBjYWNo
+aW5nIHRoZSBETUEtYnVmIG1hcHBpbmcgZm9yIHBlcmZvcm1hbmNlIHJlYXNvbnMuDQo+IA0KPiBU
+aGF0J3Mgbm90IG9ubHkgYmVjYXVzZSBvZiBwZXJmb3JtYW5jZSByZWFzb25zLCBidXQgYWxzbyBi
+ZWNhdXNlIG9mIA0KPiBjb3JyZWN0bmVzcy4NCj4gDQo+IEF0IGxlYXN0IHRoZSBWdWxrYW4gQVBJ
+IGFuZCBhIGJ1bmNoIG9mIE9wZW5HTCBleHRlbnNpb25zIG1ha2UgaXQgDQo+IG1hbmRhdG9yeSBm
+b3IgdGhlIGJ1ZmZlciB0byBiZSBjYWNoZSBjb2hlcmVudC4gVGhlIGtlcm5lbCBpcyBzaW1wbHkg
+bm90IA0KPiBpbmZvcm1lZCBhYm91dCBkb21haW4gdHJhbnNmZXJzLg0KPiANCj4gRm9yIGV4YW1w
+bGUgeW91IGNhbiBqdXN0IGRvIGEgQ1BVIGNvcHkgdG8gYSByaW5nIGJ1ZmZlciBhbmQgdGhlIA0K
+PiBleHBlY3RhdGlvbiBpcyB0aGF0IGFuIGFscmVhZHkgcnVubmluZyBzaGFkZXIgc2VlcyB0aGF0
+Lg0KDQpZZXMsIHRoYXQgb25lIGlzIG5vdCByZWFsbHkgYW4gaXNzdWUgYXMgeW91IGtub3cgdGhh
+dCBhdCBidWZmZXINCmNyZWF0aW9uIHRpbWUgYW5kIGNhbiBtYWtlIHN1cmUgdG8gbWFwIHRob3Nl
+IGJ1ZmZlcnMgdW5jYWNoZWQgb24gbm9uDQpjb2hlcmVudCBhcmNoZXMuIElmIHRoZXJlIGFyZSBu
+byBleHBsaWNpdCBkb21haW4gdHJhbnNmZXIgcG9pbnRzIG5vbg0KY29oZXJlbnQgbXVzdCBiaXRl
+IHRoZSBidWxsZXQgYW5kIGJ5cGFzcyB0aGUgQ1BVIGNhY2hlcywgcnVubmluZw0KcGVyZm9ybWFu
+Y2UgaW50byB0aGUgZ3JvdW5kLg0KDQo+IA0KPiA+IEluIHRoZSBETUEgQVBJIGtlZXBpbmcgdGhp
+bmdzIG1hcHBlZCBpcyBhbHNvIGEgdmFsaWQgdXNlLWNhc2UsIGJ1dCB0aGVuDQo+ID4geW91IG5l
+ZWQgdG8gZG8gZXhwbGljaXQgZG9tYWluIHRyYW5zZmVycyB2aWEgdGhlIGRtYV9zeW5jXyogZmFt
+aWx5LA0KPiA+IHdoaWNoIERNQS1idWYgaGFzIG5vdCBpbmhlcml0ZWQuIEFnYWluIHRob3NlIHN5
+bmMgYXJlIG5vLW9wcyBvbiBjYWNoZQ0KPiA+IGNvaGVyZW50IGFyY2hpdGVjdHVyZXMsIGJ1dCBk
+byBhbnkgbmVjZXNzYXJ5IGNhY2hlIG1haW50ZW5hbmNlIG9uIG5vbg0KPiA+IGNvaGVyZW50IGFy
+Y2hlcy4NCj4gDQo+IENvcnJlY3QsIHllcy4gQ29oZXJlbmN5IGlzIG1hbmRhdG9yeSBmb3IgRE1B
+LWJ1ZiwgeW91IGNhbid0IHVzZSANCj4gZG1hX3N5bmNfKiBvbiBpdCB3aGVuIHlvdSBhcmUgdGhl
+IGltcG9ydGVyLg0KPiANCj4gVGhlIGV4cG9ydGVyIGNvdWxkIG9mIGNvdXJzZSBtYWtlIHVzZSBv
+ZiB0aGF0IGJlY2F1c2UgaGUgaXMgdGhlIG93bmVyIG9mIA0KPiB0aGUgYnVmZmVyLg0KDQpJbiB0
+aGUgZXhhbXBsZSBnaXZlbiBoZXJlIHdpdGggVVZDIHZpZGVvLCB5b3UgZG9uJ3Qga25vdyB0aGF0
+IHRoZQ0KYnVmZmVyIHdpbGwgYmUgZXhwb3J0ZWQgYW5kIG5lZWRzIHRvIGJlIGNvaGVyZW50IHdp
+dGhvdXQNCnN5bmNocm9uaXphdGlvbiBwb2ludHMsIGR1ZSB0byB0aGUgbWFwcGluZyBjYWNoZSBh
+dCB0aGUgRFJNIHNpZGUuIFNvDQpWNEwyIG5hdHVyYWxseSBhbGxvY2F0ZXMgdGhlIGJ1ZmZlcnMg
+ZnJvbSBDUFUgY2FjaGVkIG1lbW9yeS4gSWYgdGhlDQpleHBlY3RhdGlvbiBpcyB0aGF0IHRob3Nl
+IGJ1ZmZlcnMgYXJlIGRldmljZSBjb2hlcmVudCB3aXRob3V0IHJlbHlpbmcNCm9uIHRoZSBtYXAv
+dW5tYXBfYXR0YWNobWVudCBjYWxscywgdGhlbiBWNEwyIG5lZWRzIHRvIGFsd2F5cw0Kc3luY2hy
+b25pemUgY2FjaGVzIG9uIERRQlVGIHdoZW4gdGhlICBidWZmZXIgaXMgYWxsb2NhdGVkIGZyb20g
+Q1BVDQpjYWNoZWQgbWVtb3J5IGFuZCBhIHNpbmdsZSBETUEtYnVmIGF0dGFjaG1lbnQgZXhpc3Rz
+LiBBbmQgd2hpbGUgd3JpdGluZw0KdGhpcyBJIHJlYWxpemUgdGhhdCB0aGlzIGlzIHByb2JhYmx5
+IGV4YWN0bHkgd2hhdCBWNEwyIHNob3VsZCBkby4uLg0KDQpSZWdhcmRzLA0KTHVjYXMNCg0KX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNp
+ZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vi
+c2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8u
+b3JnCg==
