@@ -2,158 +2,178 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B41BE55756B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Jun 2022 10:27:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EBB4D5575BA
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Jun 2022 10:42:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DDFD13EF4B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Jun 2022 08:27:00 +0000 (UTC)
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com (mail-bn1nam07on2074.outbound.protection.outlook.com [40.107.212.74])
-	by lists.linaro.org (Postfix) with ESMTPS id 243803EA51
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Jun 2022 08:26:56 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Oe5K6WiRbg/2usFqvO3cxKGtFuf3bNmhTMpXBoUQomDeXJFs8DyfpFCdfC3F5hFQO3lpGJd7WbWKiSPL1zJtCtCRP6UEx88XTGR/XSSMXlo0FfXSO2X73UXWhcynlOuOiiRbTImJF6tUzSxSrykYAAvrQTYr9j+R7pmXEiwSIkW3M6+/J/kaIsRwyY0tyY9F3rWGlNGfqSj5Hia+I9bXwye1mFnpW9XxwXhmaACgOVvMbOz1Xa1OxA6aJAShq7idODLPrxCAwLMNyHPKH2B8IfDR6tYM26Z9SyjS+FZmp0gqZScqCE+41TTHKTJCZc5edr9UuYasbBqvb0ZS7/LbEw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1cDbVoyuIkUexteR48Ue/tGMML8XocbS4FmnCEbt44o=;
- b=DCfQLrEUK7u362FlQKv/vAX1K+EY84Ve6uhf7PYX2j8Wdb+7HXH40t8fsz/esJG3ciBBLP7WAt/CyVp1fYTgmV8L42x8YwOsY1dwgrPfGAGwiNae67UhNlhCcLXCww2ufyukLjWKIJPvrvWhYcJEIeNMqsr/hNdmxOAQqJX1IGtm6RDC4OZrU4CBEgmP2k1fU6v0jDIqS7RJaTuMqoRkDqYBbc4BsVKp3D5vSQVcnyrkFim7z+tFhFeqnYVuFA9aZr9lkWjfgC4znbv2BPqcbFooZcA+cX6sZo9hh8puB9sKb0NXQuLcuFqrHRuq2uz8AwVXn/ItvVN/WjMvlWFCHA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1cDbVoyuIkUexteR48Ue/tGMML8XocbS4FmnCEbt44o=;
- b=tq1YOZkLkEmP8/VPmjcdNyfJtyNb6WlxJbWgC3jNhAKhtTrLyZNNpfuuG4z5gUv26NY3SKPh/L+rJsrPmWxSw4l8hcZv9zBF6p+takjiu6Qbm6J67UQqyCoB5XnxQ8d/q8WVrCtMtXP8tmzXyOcLM0yJa4hyiQSKqGeYqG22aCE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by BY5PR12MB4324.namprd12.prod.outlook.com (2603:10b6:a03:209::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5373.15; Thu, 23 Jun
- 2022 08:26:54 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::e0fd:45cf:c701:2731]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::e0fd:45cf:c701:2731%6]) with mapi id 15.20.5373.015; Thu, 23 Jun 2022
- 08:26:53 +0000
-Message-ID: <dbf87831-1b14-d18f-f8ca-b5fe1f850190@amd.com>
-Date: Thu, 23 Jun 2022 10:26:45 +0200
+	by lists.linaro.org (Postfix) with ESMTP id 1F0A93F45E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Jun 2022 08:42:56 +0000 (UTC)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+	by lists.linaro.org (Postfix) with ESMTPS id E38AA3EA51
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Jun 2022 08:42:50 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id D70CD21DAB;
+	Thu, 23 Jun 2022 08:42:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1655973769; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=sD3bTgg438R/xlPh35R/pRi8nACfuVU2+pQ/XzpwbpE=;
+	b=yOLt126VjwmgVhVtMJvQXIfxMSX3pTDHUj7eZiO5LikO24ep+OKG5uvJ4V3HvSLa5nPeG+
+	JrZrdbeHH5RgrOLNBLlLA5XgsJGFOCxt5qJiBajjGpnuLepfcDFpSe7Ia8GHht7Lah0yzg
+	k/WhDVbmHjBEuSgZRTtxDSGOThqfboQ=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1655973769;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=sD3bTgg438R/xlPh35R/pRi8nACfuVU2+pQ/XzpwbpE=;
+	b=ENyeTl/Jo1Vi+HvfHE/2AhjgCXvcI37V1VlY55RmaH8FvXHIJTvj1HEyYAheiD1Dqtmg5c
+	ChKL5hVQjn1sN7Bw==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id AFEB013461;
+	Thu, 23 Jun 2022 08:42:49 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+	by imap2.suse-dmz.suse.de with ESMTPSA
+	id gIYAKokntGLuDQAAMHmgww
+	(envelope-from <tzimmermann@suse.de>); Thu, 23 Jun 2022 08:42:49 +0000
+Message-ID: <4988ab02-dbdb-e452-7106-771c2a1ebbca@suse.de>
+Date: Thu, 23 Jun 2022 10:42:49 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.1
+ Thunderbird/91.10.0
 Content-Language: en-US
-To: Thomas Zimmermann <tzimmermann@suse.de>,
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
  linux-media <linux-media@vger.kernel.org>,
  dri-devel <dri-devel@lists.freedesktop.org>, linaro-mm-sig@lists.linaro.org,
  lkml <linux-kernel@vger.kernel.org>
 References: <91ff0bbb-ea3a-2663-3453-dea96ccd6dd8@amd.com>
  <58e11013-01ab-8a2c-732e-860ae83a3df6@suse.de>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <58e11013-01ab-8a2c-732e-860ae83a3df6@suse.de>
-X-ClientProxiedBy: AS9P250CA0013.EURP250.PROD.OUTLOOK.COM
- (2603:10a6:20b:532::24) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 15ee4006-c820-4c1c-2062-08da54f220db
-X-MS-TrafficTypeDiagnostic: BY5PR12MB4324:EE_
-X-Microsoft-Antispam-PRVS: 
-	<BY5PR12MB43246384C2D210DF740F06DD83B59@BY5PR12MB4324.namprd12.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	ara8IX/8BnF3Y+c2F46BwRmWhvPry9NdTBJFgHFSrGvCs0cjyRKx9bRY7hsWXyj5YtzUEtiiZlZ0WG8Lpb/aw+oNteYYQwApiiA5ZhzuSEsqtQSru0pdNxEptMqJ+sWVAqp88cgEAeRkTInidcHf+AcqwlUjnyxobTIcZ1e+rl7ErRnsW3rriIW8897m9VMx/kpdf70oHUrmwVUDufX3clLcSoixSr5Jg28GbQKHMegJk2+A/6hb9eoKidBPdAzU8JjCYC/hPbkU7LxhGbp9DakjEijQuMY5PtcQDqhWZYMYSvozQDqiLQ5upy8NC+t7thhjWTnq4fq5Omwd2zZpBxCetpX74teXCJNYoQtiM80BVMsCkjz4krZBiI1tE9x62kwora2nT6uLA7nj2kvRi4AxJp9dbbWrsTk6H95AvRMV58CbsBerFl+veB6QLI3BkkEMR8BHiRatNQD+K9FLqtCiJOsaybhse2a+WPeelVgmSZdCTOu7G6Y1wjz0SVyy1uWvrUvFJvgMXaLXIkCPZ2OFeNp7rBKNY3ISr82Pdx5HmjcFcB7m5RRaNB0EstbNda9GW1snvG9O2rkwZXVVd/5q2wExTZx+usL8hnb8cgmiIjmXHNeDIs+ptPXU0I63BAPLDcb/rCcxdrbiTTW46+ePsQJbDNtnvfCM8BtT7CHCNCraMz+tnBd4g9TiGsnPrvkqWpEmnYOsMrAol5u/hpUZhTdkoNAaoahZNMWJTJY=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(136003)(376002)(346002)(366004)(396003)(39860400002)(66476007)(66556008)(478600001)(966005)(6486002)(86362001)(66946007)(31696002)(36756003)(6512007)(41300700001)(66574015)(38100700002)(6506007)(31686004)(6666004)(26005)(2616005)(110136005)(186003)(2906002)(8676002)(4326008)(5660300002)(8936002)(83380400001)(316002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?Sm1BK1hNWFdvQ1JoU0JkQ2VldTcrdmZMbWowMVh2UnZnWUx3MlBGWHAwN2sx?=
- =?utf-8?B?UkpGTkdlbHdpRnI4aXVXRnN6Y2hqT1FQendNbk1mN3RaY0NIQW9MRVlpdzNQ?=
- =?utf-8?B?b3ZXMklHNUliZTZLUUxqakNHc1BLZk5WWjlheDQyRkFxL1RUNVJMUURPdjMw?=
- =?utf-8?B?ZEZ2UkxtMTZkYkVtcGJKNlN6U1h5M3VENmtoMjV3cVI4aWt5czhnNy9TMldO?=
- =?utf-8?B?RVhoOWx4MFdQVFUyOEZ3a2QyWEZEZlRRMFI3Z2dPL29KUGlKWlN2YlYrcWpK?=
- =?utf-8?B?SUdhQWd3SDNSV1B2RnVZVUVXT1RncjBHZlQyTmYyMXlzakwrczg1L2R1TzV5?=
- =?utf-8?B?dFZMMTVYVUF3QndnM1ZuSHlkM0UwZnFveHZ6b3d0Q3REOFc2dm9FM1VZTnUw?=
- =?utf-8?B?OHNPOWJqVENSbzVWUWhwVlIySFU4anhjOU41Nm5hL1ZUMjYzelFUOEppenZj?=
- =?utf-8?B?TEkxenZEelNKZUtqei8vR25sNGN0QWlJV2UvQ1VBRTZpc2NCVjd4RjNCUjRz?=
- =?utf-8?B?a2VZcHdKNUhuTGVhUDQrL1NENmRZWFp6UWFheFNOQjZ1WmdsaGN1QVlRMlJ0?=
- =?utf-8?B?alYxLzMrNUJ4ZVlBSmdPMXFVNE0yOTEwQmJBaXAvUmk5amU2SDB2MkoxazZN?=
- =?utf-8?B?cm1vWVR1S2tUSTJRZlovU2JsNnJnSUxSdVNnRmp3dmpKVzFPc3JiMmdDV1lP?=
- =?utf-8?B?ZVVzVDNMQng0TVQwOHBvNWtXKzhvUHVleEhBOVQ4QXl3a2tNazN4QW5hamZy?=
- =?utf-8?B?T01pRlQ0a29yOVViak1aUEZVOFhOaTlBTm9SYVkwa0kwbFFvVFJyNFZ5SEVh?=
- =?utf-8?B?VkNjOStKRWsycmpZMXgxUFc2ZlNHaVFOOFJwZ3pmVEdmZWhtVUFzdlVZc2NH?=
- =?utf-8?B?MkNQbytPWFNGYTFpVGJ6ZzRPRlVsalcxZ1NTSDdEMVUvTnR3b0pkS1ZFZ0th?=
- =?utf-8?B?N2tGekNKZlpZQk9FRFBKSXZuU1UxM3F6NjhQZFgxazV3b1BpU1VlSUVUQXJv?=
- =?utf-8?B?bWowT2hCZE5RZ0pFdzhLejh5a3l4a05mSytWcElrdjRyTUVGL0JJWHFVU1VV?=
- =?utf-8?B?VXFFVDFjTFh0cllxdy9DV0llQnQwUFdPVXRWUkJLRXR2TnZGNGFOcjdJV2xz?=
- =?utf-8?B?clFtNTkzSjFzVXR1Q3dCYTVXWVdqNUhsSkJYRVh0bmRrWXRBOFMwM1A5OGY1?=
- =?utf-8?B?cWZPQ2gyMU9pdnJqSmhkbW1ubWtnWThmY0tic3RuOEZKaXRWSVFpZVZtVFBz?=
- =?utf-8?B?V0tma2dOdlpETkUraytOdEpNelZwTDNJdEk0azdQVEFOcnNPYk40RmRHdVFO?=
- =?utf-8?B?Qk0yK2pjUDVyVk83T3BPeWZNTVpZaHp4QWxDVmRxdjBJUWV1K016ZEFmUzJB?=
- =?utf-8?B?OVpzVWt0dWtjNlN0dkdEWDRER1oxOUVwOFBYaTZISlo1QmJjWng2YnpZZnI1?=
- =?utf-8?B?TVN4ZHhJVFI5cUJsUm5tcXVKLzBKMVBncmdxbXVpaFNNbHNDTDBCd0FCb1lT?=
- =?utf-8?B?cWF2ZXI2OXZ5SXZmWWVwQ3VsSzVxN0FUVUhoaCsxVFV2NVlhVUtJNVpYNkda?=
- =?utf-8?B?RVlrZ0JmclNRakhocWlZd1J0Tm45TVlvdytPVkJLQ2gzbTlreWlYRDl4L2ZL?=
- =?utf-8?B?eXJZamdZOVd3VVVZeW1kU3ZZTHQwMEZtY0pHazIzZGFTdGlscUV4RjVYaEVC?=
- =?utf-8?B?a0pyelNjVmRIcUU4SW5Db2M0Y0hrLzhEK3NwWHNQVzhwbkdKaEFzQ212R2pE?=
- =?utf-8?B?N3ZHQVl6M1RhWnFsN0kxQkcrWkZZUWRTQnFLNTdBMFl3VGJMUnJOT1FraHZI?=
- =?utf-8?B?d0tEVGRpVnFhRktvb3RpZlR2bkd2WlFsbGxWVDR2TXdQc2N1Tm1HNStRUjAw?=
- =?utf-8?B?cEQ2Mkg2VWQwSW1wOTc2ODU1TDh6NzNJVnd2a2pHc2FrZE91N3NIczVuR2ho?=
- =?utf-8?B?MXR3dFdROTEzSGIxSVpKbmYyc3h2Y1laOWJHNUpSSnU0bmc2OHV6Wmc5aHFE?=
- =?utf-8?B?ajFnckFkaHpibjBOUG1qbWFNSzBxRm8zckQ4OHByTy90RVYrRU44UjN2SEI2?=
- =?utf-8?B?Q2swaEJMWG9waWhhdHptUlBwcitzVXlLMGkvTEJMbHVabUZuMVNSSXpRNjFy?=
- =?utf-8?Q?6P5q4V4xlHrWdFce8V048TVik?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 15ee4006-c820-4c1c-2062-08da54f220db
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2022 08:26:53.8584
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: if1ZZH0+hvF6aVMQowp64KHct8ahuNDKIGwa6vncbedG5xYsWobEqKrD7/Nf7TIL
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4324
-Message-ID-Hash: KPKFTXKLVXZVU3K7M7XNA2723G2OODXI
-X-Message-ID-Hash: KPKFTXKLVXZVU3K7M7XNA2723G2OODXI
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+ <dbf87831-1b14-d18f-f8ca-b5fe1f850190@amd.com>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <dbf87831-1b14-d18f-f8ca-b5fe1f850190@amd.com>
+Message-ID-Hash: 6Y23GGVH57FRIYBVSXIDWG4SWLN4UBSZ
+X-Message-ID-Hash: 6Y23GGVH57FRIYBVSXIDWG4SWLN4UBSZ
+X-MailFrom: tzimmermann@suse.de
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: "Sharma, Shashank" <Shashank.Sharma@amd.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: DMA-buf and uncached system memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KPKFTXKLVXZVU3K7M7XNA2723G2OODXI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6Y23GGVH57FRIYBVSXIDWG4SWLN4UBSZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Type: multipart/mixed; boundary="===============4314287627892394316=="
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============4314287627892394316==
+Content-Language: en-US
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------OFTYXzYkyT04oFpF7yLvli0j"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------OFTYXzYkyT04oFpF7yLvli0j
+Content-Type: multipart/mixed; boundary="------------myyGSpB720BVRwpnx5jni6sb";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ linux-media <linux-media@vger.kernel.org>,
+ dri-devel <dri-devel@lists.freedesktop.org>, linaro-mm-sig@lists.linaro.org,
+ lkml <linux-kernel@vger.kernel.org>
+Cc: "Sharma, Shashank" <Shashank.Sharma@amd.com>
+Message-ID: <4988ab02-dbdb-e452-7106-771c2a1ebbca@suse.de>
+Subject: Re: DMA-buf and uncached system memory
+References: <91ff0bbb-ea3a-2663-3453-dea96ccd6dd8@amd.com>
+ <58e11013-01ab-8a2c-732e-860ae83a3df6@suse.de>
+ <dbf87831-1b14-d18f-f8ca-b5fe1f850190@amd.com>
+In-Reply-To: <dbf87831-1b14-d18f-f8ca-b5fe1f850190@amd.com>
+
+--------------myyGSpB720BVRwpnx5jni6sb
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: base64
 
-QW0gMjMuMDYuMjIgdW0gMTA6MTMgc2NocmllYiBUaG9tYXMgWmltbWVybWFubjoNCj4gSGkgQ2hy
-aXN0aWFuDQo+DQo+IEFtIDE1LjAyLjIxIHVtIDA5OjU4IHNjaHJpZWIgQ2hyaXN0aWFuIEvDtm5p
-ZzoNCj4+IEhpIGd1eXMsDQo+Pg0KPj4gd2UgYXJlIGN1cnJlbnRseSB3b3JraW5nIGFuIEZyZWVz
-eW5jIGFuZCBkaXJlY3Qgc2NhbiBvdXQgZnJvbSBzeXN0ZW0gDQo+PiBtZW1vcnkgb24gQU1EIEFQ
-VXMgaW4gQStBIGxhcHRvcHMuDQo+Pg0KPj4gT24gcHJvYmxlbSB3ZSBzdHVtYmxlZCBvdmVyIGlz
-IHRoYXQgb3VyIGRpc3BsYXkgaGFyZHdhcmUgbmVlZHMgdG8gDQo+PiBzY2FuIG91dCBmcm9tIHVu
-Y2FjaGVkIHN5c3RlbSBtZW1vcnkgYW5kIHdlIGN1cnJlbnRseSBkb24ndCBoYXZlIGEgDQo+PiB3
-YXkgdG8gY29tbXVuaWNhdGUgdGhhdCB0aHJvdWdoIERNQS1idWYuDQo+Pg0KPj4gRm9yIG91ciBz
-cGVjaWZpYyB1c2UgY2FzZSBhdCBoYW5kIHdlIGFyZSBnb2luZyB0byBpbXBsZW1lbnQgc29tZXRo
-aW5nIA0KPj4gZHJpdmVyIHNwZWNpZmljLCBidXQgdGhlIHF1ZXN0aW9uIGlzIHNob3VsZCB3ZSBo
-YXZlIHNvbWV0aGluZyBtb3JlIA0KPj4gZ2VuZXJpYyBmb3IgdGhpcz8NCj4NCj4gSSBoYWQgYSBw
-YXRjaHNldCBoZXJlIHRoYXQgZXh0ZW5kcyBpb3N5cy1tYXAgKGZvcm1lciBkbWEtYnVmLW1hcCkg
-d2l0aCANCj4gY2FjaGluZyBpbmZvcm1hdGlvbi4gSSdsbCBwb3N0IGEgY29weS4NCg0KT2gsIG5p
-Y2UuIEJ1dCB3aHkgb24gaW9zeXMtbWFwPyBXZSBuZWVkIHRoYXQgcGVyIERNQS1idWYuDQoNClRo
-YW5rcywNCkNocmlzdGlhbi4NCg0KPg0KPiBTb3JyeSBmb3IgYmVpbmcgbGF0ZSB0byByZXBseS4N
-Cj4NCj4gQmVzdCByZWdhcmRzDQo+IFRob21hcw0KPg0KPj4NCj4+IEFmdGVyIGFsbCB0aGUgc3lz
-dGVtIG1lbW9yeSBhY2Nlc3MgcGF0dGVybiBpcyBhIFBDSWUgZXh0ZW5zaW9uIGFuZCBhcyANCj4+
-IHN1Y2ggc29tZXRoaW5nIGdlbmVyaWMuDQo+Pg0KPj4gUmVnYXJkcywNCj4+IENocmlzdGlhbi4N
-Cj4+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+PiBk
-cmktZGV2ZWwgbWFpbGluZyBsaXN0DQo+PiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3Jn
-DQo+PiBodHRwczovL2xpc3RzLmZyZWVkZXNrdG9wLm9yZy9tYWlsbWFuL2xpc3RpbmZvL2RyaS1k
-ZXZlbA0KPg0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-XwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFy
-by5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZl
-QGxpc3RzLmxpbmFyby5vcmcK
+SGkNCg0KQW0gMjMuMDYuMjIgdW0gMTA6MjYgc2NocmllYiBDaHJpc3RpYW4gS8O2bmlnOg0K
+PiBBbSAyMy4wNi4yMiB1bSAxMDoxMyBzY2hyaWViIFRob21hcyBaaW1tZXJtYW5uOg0KPj4g
+SGkgQ2hyaXN0aWFuDQo+Pg0KPj4gQW0gMTUuMDIuMjEgdW0gMDk6NTggc2NocmllYiBDaHJp
+c3RpYW4gS8O2bmlnOg0KPj4+IEhpIGd1eXMsDQo+Pj4NCj4+PiB3ZSBhcmUgY3VycmVudGx5
+IHdvcmtpbmcgYW4gRnJlZXN5bmMgYW5kIGRpcmVjdCBzY2FuIG91dCBmcm9tIHN5c3RlbSAN
+Cj4+PiBtZW1vcnkgb24gQU1EIEFQVXMgaW4gQStBIGxhcHRvcHMuDQo+Pj4NCj4+PiBPbiBw
+cm9ibGVtIHdlIHN0dW1ibGVkIG92ZXIgaXMgdGhhdCBvdXIgZGlzcGxheSBoYXJkd2FyZSBu
+ZWVkcyB0byANCj4+PiBzY2FuIG91dCBmcm9tIHVuY2FjaGVkIHN5c3RlbSBtZW1vcnkgYW5k
+IHdlIGN1cnJlbnRseSBkb24ndCBoYXZlIGEgDQo+Pj4gd2F5IHRvIGNvbW11bmljYXRlIHRo
+YXQgdGhyb3VnaCBETUEtYnVmLg0KPj4+DQo+Pj4gRm9yIG91ciBzcGVjaWZpYyB1c2UgY2Fz
+ZSBhdCBoYW5kIHdlIGFyZSBnb2luZyB0byBpbXBsZW1lbnQgc29tZXRoaW5nIA0KPj4+IGRy
+aXZlciBzcGVjaWZpYywgYnV0IHRoZSBxdWVzdGlvbiBpcyBzaG91bGQgd2UgaGF2ZSBzb21l
+dGhpbmcgbW9yZSANCj4+PiBnZW5lcmljIGZvciB0aGlzPw0KPj4NCj4+IEkgaGFkIGEgcGF0
+Y2hzZXQgaGVyZSB0aGF0IGV4dGVuZHMgaW9zeXMtbWFwIChmb3JtZXIgZG1hLWJ1Zi1tYXAp
+IHdpdGggDQo+PiBjYWNoaW5nIGluZm9ybWF0aW9uLiBJJ2xsIHBvc3QgYSBjb3B5Lg0KPiAN
+Cj4gT2gsIG5pY2UuIEJ1dCB3aHkgb24gaW9zeXMtbWFwPyBXZSBuZWVkIHRoYXQgcGVyIERN
+QS1idWYuDQoNCkl0J3MgcmV0dXJuZWQgdmlhIHRoZSBkbWEtYnVmJ3Mgdm1hcCBjYWxsIHdp
+dGhpbiB0aGUgaW9zeXMtbWFwIA0Kc3RydWN0dXJlLiBJZiB0aGUgZG1hLWJ1ZiBtb3Zlcywg
+dGhlIGZvbGxvd2luZyB2bWFwIGNhbGxzIGFsd2F5cyByZXR1cm4gDQp1cGRhdGVkIGNhY2hp
+bmcgaW5mb3JtYXRpb24uIE1heWJlIGl0J3Mgbm90IHF1aXRlIHdoYXQgeW91IG5lZWQgZm9y
+IA0KRnJlZXN5bmM/DQoNCkknbGwgdXNlIHRoaXMgZm9yIGZvcm1hdC1jb252ZXJzaW9uIGhl
+bHBlcnMsIHdoaWNoIGRvIHNvbWUgb3B0aW1pemF0aW9ucyANCmZvciB1bmNhY2hlZCBtZW1v
+cnkuDQoNCkFueXdheSwgSSBoYXZlIHRvIGxvb2sgZm9yIHRoYXQgcGF0Y2guLi4NCg0KQmVz
+dCByZWdhcmRzDQpUaG9tYXMNCg0KPiANCj4gVGhhbmtzLA0KPiBDaHJpc3RpYW4uDQo+IA0K
+Pj4NCj4+IFNvcnJ5IGZvciBiZWluZyBsYXRlIHRvIHJlcGx5Lg0KPj4NCj4+IEJlc3QgcmVn
+YXJkcw0KPj4gVGhvbWFzDQo+Pg0KPj4+DQo+Pj4gQWZ0ZXIgYWxsIHRoZSBzeXN0ZW0gbWVt
+b3J5IGFjY2VzcyBwYXR0ZXJuIGlzIGEgUENJZSBleHRlbnNpb24gYW5kIGFzIA0KPj4+IHN1
+Y2ggc29tZXRoaW5nIGdlbmVyaWMuDQo+Pj4NCj4+PiBSZWdhcmRzLA0KPj4+IENocmlzdGlh
+bi4NCj4+PiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+Xw0KPj4+IGRyaS1kZXZlbCBtYWlsaW5nIGxpc3QNCj4+PiBkcmktZGV2ZWxAbGlzdHMuZnJl
+ZWRlc2t0b3Aub3JnDQo+Pj4gaHR0cHM6Ly9saXN0cy5mcmVlZGVza3RvcC5vcmcvbWFpbG1h
+bi9saXN0aW5mby9kcmktZGV2ZWwNCj4+DQo+IA0KDQotLSANClRob21hcyBaaW1tZXJtYW5u
+DQpHcmFwaGljcyBEcml2ZXIgRGV2ZWxvcGVyDQpTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBH
+ZXJtYW55IEdtYkgNCk1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQ0K
+KEhSQiAzNjgwOSwgQUcgTsO8cm5iZXJnKQ0KR2VzY2jDpGZ0c2bDvGhyZXI6IEl2byBUb3Rl
+dg0K
+
+--------------myyGSpB720BVRwpnx5jni6sb--
+
+--------------OFTYXzYkyT04oFpF7yLvli0j
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmK0J4kFAwAAAAAACgkQlh/E3EQov+B7
+YRAApxYE2c7ND8+f3+6Pb52FGy24VVNeAU84N4QiFMoEpWR+3aKnxm+vJ5ATwT/rgBltjQzuGi0P
+4IEQeDvjSQfFEYcICM9RaI8LHgIZ0aLGNcETRI/hRDtmcoYuxI5bHG4ZlE8rMjgyDDsuv0wDr06P
+PdrLMoIPTbTsQFHvVhJnJN6Ma5U1gr+5LHtl4v1aqNoKM4SB01gqARjjRuqCf6TjNK20OtiXrf6j
+UTFDmV+nIGnaqVv1Vsnyo4LDuQG56Euqukj000STCSq7HJBFnR+XYpxUw+PUREZghbrh6nDSwxmP
+seHg5qW7DT0nVaHv7J2AnecNKsUtdOfag0m+AtRcbIfTDtnUqetSmRcOgjYyqLQ09uWVQX62NGPA
+l0SXUrC0/FeVmnr09gZPKBLMOYXkIW4bwYAUogUxjqtZNvCeS3obrQ+yA90KRK8t4G+S6WRUtadh
+tOCU+8dSQ1wqVOd0YXbzFbC6B+NHMiZdKQc2w3PBOB5fUUE2TqWKffzX+GWKH2siDi0OZjm4mpxt
+eca8KcyqeTesewXKr/Pvda2qhvivA0t9vzwnc/dyqrHVxarav/qEsXkKbdyOr8XpOEPnT8QjbqKU
+XERka4C+OWYvfmHa329/3lgkaBMW9EFDguDb6nNcCEd/sToOJEJM+4mhs+WZGaoQaXK3XYIZkV8f
+sQ0=
+=Nj+f
+-----END PGP SIGNATURE-----
+
+--------------OFTYXzYkyT04oFpF7yLvli0j--
+
+--===============4314287627892394316==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============4314287627892394316==--
