@@ -2,178 +2,160 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5354E575FB1
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 Jul 2022 13:04:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C89D1577AEA
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 Jul 2022 08:27:03 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7F26C47ECC
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 Jul 2022 11:04:38 +0000 (UTC)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2066.outbound.protection.outlook.com [40.107.237.66])
-	by lists.linaro.org (Postfix) with ESMTPS id 6D25F3EBED
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 15 Jul 2022 11:04:33 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JAaFaLPZsF/vPwiHDX3dYoY0O7lwOazI8mFAwEJ9D/tYkiM5Xrz4MKlF3gpLeJY0YwNwrj64tVn8x/faEi+rmLtxQpem8dbswzqcaQmJGD/1j06gcTpzfuNWNOCedlkvK2VlAVr7D2Jh5r9YIjm5rC+nWwujwP8vEv+lukDRTBoTuU7FXyISyOWfcwO4jTRvdW/6WOpT8PBSnZKhVXz6X5hueN8KnggeGrYryLl+vMzO5uo3zGgXDZXxqjZiS7YH147FSHljeKxidZt2TXuBiZ+MSH11zG/UMmiSvIKkE20yNhQdgRsG6+Lnbt+JEUVQZk+DmsTXJhUe04EM8W5+uw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=x6nwuZk6jxCDh5cJ3kvuPX4Ekl6Mq2DMQkBCuVkfDGw=;
- b=mGiwZC2SHJLNUX8F6K0JwbiLII7mBk40S1auc9jb9jCu6HEB5TMwS8riId1N/Y83RPOeflfal4lH0oM7EPYxOdhzL3Gse1fCskWJRh6V+pPiCfbJ1Frhf0iFJcp3kPoBBpPRjdo2v0MbA2YbozY3lUJGPlh68MifY5I8kAAfjsPPeTcQSnvch0emAh8/VK3FY8H4gEY+eNt+I5woguAgBJ9cjW7YDXTRO/vMCe13LIuvlOHDv+oqNrIJVQIuAc6jYiJ+/Piy2KJJR6GudvpbQ1ZIwDO7V34W3xnitaONzqcXNYOmc397OZ0p23iI/ZAIGlUPmCJhZ61baa/YOsAuzg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=x6nwuZk6jxCDh5cJ3kvuPX4Ekl6Mq2DMQkBCuVkfDGw=;
- b=Zchzez7v9oX/JvKQOPe0idy21fo84o0VffIT8B+g0Rp1cgXPlJG1CdYYERUueoyVJSUh1jfw9bzkisacu/mTeWu6VylAihCl92XCebzmMWHC0vQebpJaORnxcU0ecOua3uAoi4IBNd1uKN/2Nnmxhm4JqxEsD9q7cBZsbH2owDI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by DM6PR12MB4187.namprd12.prod.outlook.com (2603:10b6:5:212::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5417.23; Fri, 15 Jul
- 2022 11:04:31 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::905:1701:3b51:7e39]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::905:1701:3b51:7e39%2]) with mapi id 15.20.5438.013; Fri, 15 Jul 2022
- 11:04:31 +0000
-Message-ID: <c6024ebb-4b3d-60c8-f0e7-006f994c9fae@amd.com>
-Date: Fri, 15 Jul 2022 13:04:21 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.1
-Content-Language: en-US
-To: Dmitry Osipenko <dmitry.osipenko@collabora.com>,
- David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu
- <olvaffe@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Gert Wollny <gert.wollny@collabora.com>,
- Gustavo Padovan <gustavo.padovan@collabora.com>,
- Daniel Stone <daniel@fooishbar.org>,
- Tomeu Vizoso <tomeu.vizoso@collabora.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Clark <robdclark@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>,
- "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding
- <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Alex Deucher <alexander.deucher@amd.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas_os@shipmail.org>
-References: <20220715005244.42198-1-dmitry.osipenko@collabora.com>
- <20220715005244.42198-2-dmitry.osipenko@collabora.com>
- <43c06f53-bad8-af99-0b57-781dbf716768@amd.com>
- <5c98385b-f154-0128-6f4b-5fac89529201@collabora.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <5c98385b-f154-0128-6f4b-5fac89529201@collabora.com>
-X-ClientProxiedBy: AS9PR07CA0009.eurprd07.prod.outlook.com
- (2603:10a6:20b:46c::9) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
+	by lists.linaro.org (Postfix) with ESMTP id 86C4047989
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 Jul 2022 06:27:02 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 902283EA36
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 20:32:57 +0000 (UTC)
+Received: by mail-wr1-f48.google.com with SMTP id r20so4606965wra.1
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 13:32:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=JOawYYsMmXVXjmJlEQmmHixFMSNq4rwAUlbsY6fSBgM=;
+        b=tg7SyNOOcpVv7QNLGjiD5KPi52/+81+/GdcF4vMbyPBIUjBBrCNv+tyegVY20uye/I
+         8Vyz/JGoeTKB1w5QEdFMlq0X9w98WbqAaklpSLN4EHbesVPHavlkpHILt1ZfuYLKpZ8W
+         QWm+Maw4GPgy2ApKPUsawPdD52CVDNryzSvuJBVG/RGE1Y030n422Z6wuG4tFFvBcR27
+         LjOjXsrh4klnn1DcCwwhoI0t8TTxE908V6t7zZjTqlwnAGdcuAOVwj1XL6eJ5KD7NEWR
+         SUf/6y2OeRLz1/Liz1zYe+r9C1qmHOr6YxgkPxXUsGyjo51BPVTKh4OJcFsWrx7rdii2
+         KEPw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=JOawYYsMmXVXjmJlEQmmHixFMSNq4rwAUlbsY6fSBgM=;
+        b=ifUanrfNDj6Ld9sciMp9zpu8tJRSgWJSnwTPj1mN+2oqBEGKa8YJN6HW3akfb2bskW
+         udhLLH/obrtZi8W188uXLo6zk8m8VVHCxphBCOayrUDKtCRVTUYOFP5mc1ocOTFZ10wy
+         g3T4XienSujMKpejTKCGI7GSfeLXhnIiVd0uQv3YL8PJzAGav3FSBR+iMkLuKxRJmoIZ
+         ziFfh5MS6E69tiTdqWVrqeHhKhISQHDpikoPdTaHAV1p7TFzuF80EkO9IxV0X4uXQGJ9
+         HbNscB6u61dGeCWPYNvZNyFsWDDt4wWucjDhEuXjmK/J9Nscvq8enlNmiL4KSth6wkep
+         iEzg==
+X-Gm-Message-State: AJIora8HJr4ahYNOXPxf9Nf0aa/4BTeKSHLKEbMslXob12Az95plHrBY
+	Ts6pGptXNyIlVi0dU+g9C1lq7UhHw4s7IREMMMtm
+X-Google-Smtp-Source: AGRyM1sLPS9VvP6ADwx2J+StFzJT3dvaf4MBsF0swSWZC7Xkp/3biNCnrEVvva/rSqr0ebVtvt4hYokyoFIu+/3DmQ4=
+X-Received: by 2002:adf:efd2:0:b0:21b:91ae:68ca with SMTP id
+ i18-20020adfefd2000000b0021b91ae68camr833768wrp.514.1656102776455; Fri, 24
+ Jun 2022 13:32:56 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 03ca3e4b-87ad-47c4-1e3a-08da6651cb0d
-X-MS-TrafficTypeDiagnostic: DM6PR12MB4187:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	hwu9HL1s/vpEK9NNLUhFqEEFCwwT70yFJas+vVnygSr4WcdgQzdpStTtgLb1JrNKmLg9YO/hpENuI58uOiWv4vOVfLml04yEZFOX0CoScjqEqWtHVvDTToBBxQ5IWgcWXhcV89ErwmP6+YlJmfvnc5+ckUwywNdZ1NMcgjDgpBFq2+6nBSVJ3c3CW9Soo9yUGVGNtyF24TIoHEAm0LwuiLnd7CCilm2C0GcAQ4EkiBckt5Z/v7i80R4zeiv7XfPuH0lAoeonRufwfbmtePUQhmbiNrusR/Wt1xN90thdj29JbUXBQZjKiPk4Las8q+t45Z3zidJHYvdQdGAbb2X2pXsdAT5EC94HaqXuMWADzYeeNuMafjiSWvFleiwegUTckXVitA0GvkBERs3IxBLSj4VwjW7QtsoR6DJnPEPoQyOuYTDe4/u5oiyHMuTyQzPJd+1hIfLbxB53o7Wrb8LdupY8u6ncPUC2SotNIXmNL1HUcciB/UNnJsIWfCUQJEJO780bTU4I+YgzeY7FRCkEe+A7zJoAELbVhqVnirroiVLOrzoESUzHfJgyjADk40Nrsu7MQTmY9v6mkgxfHLbVbbL4tZZPvuBPXW2UI1yGrkIOSZBb3pVsQOH9apkG5PDfYpNMqIVKQXiLPzUBA3MTp+WZzafAwfz34Zeb3GZBQlhyC2WlXNlgoR1KvwMbcRQStnR/u7SQz7QmIMJZRGjoqJymidjsXIF1EYH2WEO6QJR0fs2pncZArPbOeQtrnhl+FISOTxwRVJqok7xUY1ZK9FcVroWUnpRZZ0NYnXJNI5aldEzVZBj7VxUvEpxRHd5aBv7w7zUjIu1WBJ+p9LZQow6x2aEXiK9bDq4SCOuw3p8=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(366004)(39860400002)(396003)(376002)(346002)(136003)(66556008)(316002)(66476007)(7416002)(4326008)(38100700002)(41300700001)(31696002)(5660300002)(2906002)(7406005)(186003)(6486002)(8676002)(6666004)(921005)(36756003)(66574015)(83380400001)(110136005)(66946007)(6512007)(8936002)(6506007)(31686004)(2616005)(478600001)(53546011)(86362001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?UTFtR1A5a0NlWEI0R3pudjErN3hvWGxHbGdZYlUzU2tYUy9uY1ZOeHVxZGw2?=
- =?utf-8?B?eHlRWk9GKzZGRm9BVk85Q3h0aWFaY2VzVVo0anNXTzNEVmpGcXBVa01vZUFk?=
- =?utf-8?B?Q2V4K1NSNlM3ZFlkMjdkeUJHeHY4b0ZDWGdDVFZqb0JheGVPZjMvUnhCeHNp?=
- =?utf-8?B?K3dJMDU5Z2ozcFFrdVp3L1RWNS9ESzVLRjFzTXR1R2J2R2xLVTA5SHBGVVA2?=
- =?utf-8?B?OGZDcnc5dEl6a1JPOVZLMFpKdXRGYjQ3S3pxMlRRVDJWeUQ0M0ZjNkVQOGFh?=
- =?utf-8?B?RDVFUTM5SmNhVVhFcERUNjZITjQyRWNWbGpYODUySm9RdE9Ub2hyQU1FU0Rh?=
- =?utf-8?B?NDhTbWxQWmo2ZVJrNFYrMEpEOHFEaE1WTXJvaUtxd3hKYzlNVnVJMy9ieWQ0?=
- =?utf-8?B?Y2l2T216Zmx3cEY5SWhNdCtyNFBhejFRZ2kwazhabTNud1A3RisxTWJaaXVE?=
- =?utf-8?B?OEplQVExMHhpY2ZYc1g4bU9sYUdDYU5rU3RkcGxVRi96dXNXOUNQWXpmQUwx?=
- =?utf-8?B?TnBBcXZ2UGp3KzBxRWxuak1hZzNDd2N2eitINzIwTWdiU3F5Wmp3d2RadDFM?=
- =?utf-8?B?YzJsZ2xZdHFQUUpCK1RmanMrUWlyWXNCRzJlWU5obmxNY2hGdEhaUjRuelhi?=
- =?utf-8?B?M0xOdTRMQ2JWS3RQRHZxTlYxeUdNek9jUFZMM1Q2S0o3K3BFRUtITTlCdXp2?=
- =?utf-8?B?aWJzaElEYjhKbVhzWUllUWVTeTkrNit4STlhRzVGa1dnOWxxVDdKTkpKRGNP?=
- =?utf-8?B?ZHJ5L0c4M05iYkZzTTArUWVleFUyU2xYMXhHd0Jyank5eEJHcnpyYVhBU21R?=
- =?utf-8?B?enE5ZkxISm9IaXNMaUZVWC9CVk1GZFJha1l3YnVTQ1VZQ0RhT0ZkSm9hVzlH?=
- =?utf-8?B?akg1Y1JvUms3aHUrczdzQU52YmkzWnNsSmZuWmhIcnBla0JTN1JiaVpsVGRr?=
- =?utf-8?B?Z3c4S0V6d0xVTnl2Q2tUK1hqUU9pNVU3WGEwZ1BGN0FXSEx0aXRBUC9meksv?=
- =?utf-8?B?TkRUU3JHR09HeFRXYVRuMUtVakpwRFhNdFBvcmtCaGFzb2pNc0JHMDBKd3Ft?=
- =?utf-8?B?OWdvT0NEMUphdC9leEVqa1Brbk9qRmJFM3hCNUNDSDN0YURTdnVTMlM2elFG?=
- =?utf-8?B?RUd3ZU1JWldEaWh6aDAwT2pwamFQYU8xVHo5aWwwR0xvbUQvUEtudWxxcVRF?=
- =?utf-8?B?Z0dEc1RDZDdMMzZ2NzV5SEpaeHFsOVpiWjg2Y3pzS0RreDJCYUdIcVpqOWh1?=
- =?utf-8?B?TWFIQVB1MExOOGdIaXVNRk9Sa1pRKy9ZNHpBYkpRVDhyUUZNNSsrTVpsMGVG?=
- =?utf-8?B?TXM0NDg1QUhTU1J1anRaeFRLU1dtNVdneXQ4Q09GbWlUWTBFbDYzOWxKVHkr?=
- =?utf-8?B?eWxTWG5ZT1ZjNzJhb1Z6MGd4Q1FhWExweXdabzdhYjl0WmpNZzY2d1dkR2Iv?=
- =?utf-8?B?ZkxiTmpXWFI0ZU5OL2NVU24yNnpVT0VTODRTS3J0aUU5U2hLSE5QVmF6VTE3?=
- =?utf-8?B?U1Exd2FHVGJkT0p0eWlRQ21VK1VHQU9Ta3VzUGFxcGwxWmdPVFp1emd0RGRE?=
- =?utf-8?B?S0M1VU1sVHpITXhFd3YzbXFaMk9lNmZpZ3V4WjZrYjRuY2gyTXhlWG9rSVBZ?=
- =?utf-8?B?N2Jzazl4a1hha3FMZlZpTEFKS3NFQlpqYmh0SG5YWmN3bUtuWS9HekpWeGcr?=
- =?utf-8?B?L2JkTjRlTEJSTDN2NGhsblgzQys3cXNiWnJ1MGNXRmNoT0tCR3pQRVJESnEr?=
- =?utf-8?B?Rjhwd1NNK3FpZndMT0JpVlZTL2liQ0cxaEdHNUc0aGU5UVdPaWlJdmNQd01n?=
- =?utf-8?B?QjJzcit0elZoYmJFUitBMDFaQVU1NVNqcTE3bUpIajFSR2MzYmdzc3hhMmVN?=
- =?utf-8?B?UXZDYWhDd1N5aklWREV3ZUt3SzdWMW1sdEZQY3lnTk9pcmpxQTJYQjViTnMw?=
- =?utf-8?B?QnY1ZURxL0krUUYyYjh2OU9zMi9YWk5sVjdFbU9lUXNnczRMa05xS25EQmNM?=
- =?utf-8?B?ekJjU2tQQTViMWxrNno5ZERDaGlHb0hHcnZoRFZTZXkzM3JsaS80SFVROEFh?=
- =?utf-8?B?WkVXeE9vdHorWTFPWHE0ZUF4RUZqZmdjNTFxQml1ajl4aHcxZnpVWHlJRFBO?=
- =?utf-8?B?M0hjUkdsdW8zelR4UEpLTUlSM051bTVmRDVnbW1iWmJUVTFOcmtIa2hsQ2xJ?=
- =?utf-8?Q?LWO7z7gqcMc42JltizS1LALtTgwy7F4gZqPlkLSw+xqP?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 03ca3e4b-87ad-47c4-1e3a-08da6651cb0d
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2022 11:04:31.3083
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SWxf0JIvQSgFVOsGvL1oEJcveYBkNOLQpZ8Rst9LCvm3O7Qk5VVgUud1oOBUuQWa
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4187
-Message-ID-Hash: S6BJEFS75F3XSAUIXL2MAL4QQZS2MHT7
-X-Message-ID-Hash: S6BJEFS75F3XSAUIXL2MAL4QQZS2MHT7
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, spice-devel@lists.freedesktop.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org
+References: <20220510235653.933868-1-tjmercier@google.com> <3365cd1d750e84fedc8e75d646a77ffd85619d35.camel@ndufresne.ca>
+ <CABdmKX3ZV6-u-oLvW_wWavAMBfrsZ=C_rCgK_Uz4VjxcRvRFew@mail.gmail.com>
+ <81026ef07c1ce20f8673b75b17bab79a2b39c548.camel@ndufresne.ca>
+ <CABdmKX2LxZ6zZR=fhXfnuWCB2BR+gzDd1-t1DD2A2XP24wvuGQ@mail.gmail.com>
+ <Yn6DpUsoSz1/15Kc@slm.duckdns.org> <CABdmKX1xvm87WMEDkMc9Aye46E4zv1-scenwgaRxHesrOCsaYg@mail.gmail.com>
+ <YodHjYlMx1XGtM2+@slm.duckdns.org> <CABdmKX2Ok023rN1drQgXVZLKUO_DVYrzmEamCgMMu6BPO67yhQ@mail.gmail.com>
+ <CABdmKX0WV8VWgeafVGJ++nJ4xsJD7Wpz=3KX=BW1du=huttfvw@mail.gmail.com> <YrYbwu0iIAJJGXVg@phenom.ffwll.local>
+In-Reply-To: <YrYbwu0iIAJJGXVg@phenom.ffwll.local>
+From: John Stultz <jstultz@google.com>
+Date: Fri, 24 Jun 2022 13:32:45 -0700
+Message-ID: <CANDhNCqGjaq-SFvWwkqnEFj4tJcRqCYupZ03wLyCexqTH5MqMg@mail.gmail.com>
+To: "T.J. Mercier" <tjmercier@google.com>, Tejun Heo <tj@kernel.org>,
+	Nicolas Dufresne <nicolas@ndufresne.ca>, Zefan Li <lizefan.x@bytedance.com>,
+	Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>,
+	Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>,
+	Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>,
+	Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>, Liam Mark <lmark@codeaurora.org>,
+	Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <john.stultz@linaro.org>, Shuah Khan <shuah@kernel.org>,
+	John Stultz <jstultz@google.com>, Carlos Llamas <cmllamas@google.com>,
+	Kalesh Singh <kaleshsingh@google.com>, Kenny.Ho@amd.com,
+	=?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>,
+	Shuah Khan <skhan@linuxfoundation.org>, kernel-team@android.com,
+	cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+	linux-kselftest@vger.kernel.org
+X-MailFrom: jstultz@google.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: KIDOCRIMRIAEOEK7UJVIRSOMMBOKGTYT
+X-Message-ID-Hash: KIDOCRIMRIAEOEK7UJVIRSOMMBOKGTYT
+X-Mailman-Approved-At: Mon, 18 Jul 2022 06:26:59 +0000
+CC: Daniel Vetter <daniel@ffwll.ch>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v1 1/6] dma-buf: Add _unlocked postfix to function names
+Subject: [Linaro-mm-sig] Re: [PATCH v7 0/6] Proposal for a GPU cgroup controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/S6BJEFS75F3XSAUIXL2MAL4QQZS2MHT7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KIDOCRIMRIAEOEK7UJVIRSOMMBOKGTYT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-QW0gMTUuMDcuMjIgdW0gMTE6MzEgc2NocmllYiBEbWl0cnkgT3NpcGVua286DQo+IE9uIDcvMTUv
-MjIgMTA6MTksIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6DQo+Pj4gLXN0cnVjdCBzZ190YWJsZSAq
-ZG1hX2J1Zl9tYXBfYXR0YWNobWVudChzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50DQo+Pj4gKmF0
-dGFjaCwNCj4+PiAtwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZW51bSBk
-bWFfZGF0YV9kaXJlY3Rpb24gZGlyZWN0aW9uKQ0KPj4+ICtzdHJ1Y3Qgc2dfdGFibGUgKg0KPj4+
-ICtkbWFfYnVmX21hcF9hdHRhY2htZW50X3VubG9ja2VkKHN0cnVjdCBkbWFfYnVmX2F0dGFjaG1l
-bnQgKmF0dGFjaCwNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGVudW0gZG1h
-X2RhdGFfZGlyZWN0aW9uIGRpcmVjdGlvbikNCj4+IFRoZSBsb2NraW5nIHN0YXRlIG9mIG1hcHBp
-bmcgYW5kIHVubWFwcGluZyBvcGVyYXRpb25zIGRlcGVuZCBvbiBpZiB0aGUNCj4+IGF0dGFjaG1l
-bnQgaXMgZHluYW1pYyBvciBub3QuDQo+Pg0KPj4gU28gdGhpcyBoZXJlIGlzIG5vdCBhIGdvb2Qg
-aWRlYSBhdCBhbGwgc2luY2UgaXQgc3VnZ2VzdHMgdGhhdCB0aGUNCj4+IGZ1bmN0aW9uIGlzIGFs
-d2F5cyBjYWxsZWQgd2l0aG91dCBob2xkaW5nIHRoZSBsb2NrLg0KPiBJIGhhZCB0aGUgc2FtZSB0
-aG91Z2h0IHdoaWxlIHdhcyB3b3JraW5nIG9uIHRoaXMgcGF0Y2ggYW5kIGluaXRpYWxseSB3YXMN
-Cj4gdGhpbmtpbmcgYWJvdXQgYWRkaW5nIGFuICJ1bmxvY2tlZCIgYWxpYXMgdG8gZG1hX2J1Zl9t
-YXBfYXR0YWNobWVudCgpLg0KPiBJbiB0aGUgZW5kIEkgZGVjaWRlZCB0aGF0IGl0IHdpbGwgY3Jl
-YXRlIGV2ZW4gbW9yZSBjb25mdXNpb24gYW5kIGl0J3MNCj4gc2ltcGxlciBqdXN0IHRvIHJlbmFt
-ZSB0aGlzIGZ1bmMgaGVyZSBzaW5jZSB0aGVyZSBhcmUgb25seSB0d28gZHJpdmVycw0KPiB1c2lu
-ZyB0aGUgZHluYW1pYyBtYXBwaW5nLg0KPg0KPiBEbyB5b3UgaGF2ZSBzdWdnZXN0aW9ucyBob3cg
-dG8gaW1wcm92ZSBpdD8NCg0KSnVzdCBrZWVwIGl0IGFzIGl0IGlzLiBUaGUgdWx0aW1hdGl2ZSBn
-b2FsIGlzIHRvIHN3aXRjaCBhbGwgZHJpdmVycyBvdmVyIA0KdG8gdGhlIGR5bmFtaWMgbWFwcGlu
-ZyBvciBhdCBsZWFzdCBvdmVyIHRvIGFzc3VtZSB0aGF0IHRoZSBtYXAvdW5tYXAgDQpjYWxsYmFj
-a3MgYXJlIGNhbGxlZCB3aXRoIHRoZSBsb2NrIGhlbGQuDQoNClJlZ2FyZHMsDQpDaHJpc3RpYW4u
-DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8t
-bW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8g
-dW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxp
-bmFyby5vcmcK
+On Fri, Jun 24, 2022 at 1:17 PM Daniel Vetter <daniel@ffwll.ch> wrote:
+>
+> On Wed, Jun 15, 2022 at 10:31:21AM -0700, T.J. Mercier wrote:
+> > On Fri, May 20, 2022 at 9:25 AM T.J. Mercier <tjmercier@google.com> wrote:
+> > >
+> > > On Fri, May 20, 2022 at 12:47 AM Tejun Heo <tj@kernel.org> wrote:
+> > > >
+> > > > Hello,
+> > > >
+> > > > On Tue, May 17, 2022 at 04:30:29PM -0700, T.J. Mercier wrote:
+> > > > > Thanks for your suggestion. This almost works. "dmabuf" as a key could
+> > > > > work, but I'd actually like to account for each heap. Since heaps can
+> > > > > be dynamically added, I can't accommodate every potential heap name by
+> > > > > hardcoding registrations in the misc controller.
+> > > >
+> > > > On its own, that's a pretty weak reason to be adding a separate gpu
+> > > > controller especially given that it doesn't really seem to be one with
+> > > > proper abstractions for gpu resources. We don't want to keep adding random
+> > > > keys to misc controller but can definitely add limited flexibility. What
+> > > > kind of keys do you need?
+> > > >
+> > > Well the dmabuf-from-heaps component of this is the initial use case.
+> > > I was envisioning we'd have additional keys as discussed here:
+> > > https://lore.kernel.org/lkml/20220328035951.1817417-1-tjmercier@google.com/T/#m82e5fe9d8674bb60160701e52dae4356fea2ddfa
+> > > So we'd end up with a well-defined core set of keys like "system", and
+> > > then drivers would be free to use their own keys for their own unique
+> > > purposes which could be complementary or orthogonal to the core set.
+> > > Yesterday I was talking with someone who is interested in limiting gpu
+> > > cores and bus IDs in addition to gpu memory. How to define core keys
+> > > is the part where it looks like there's trouble.
+> > >
+> > > For my use case it would be sufficient to have current and maximum
+> > > values for an arbitrary number of keys - one per heap. So the only
+> > > part missing from the misc controller (for my use case) is the ability
+> > > to register a new key at runtime as heaps are added. Instead of
+> > > keeping track of resources with enum misc_res_type, requesting a
+> > > resource handle/ID from the misc controller at runtime is what I think
+> > > would be required instead.
+> > >
+> > Quick update: I'm going to make an attempt to modify the misc
+> > controller to support a limited amount of dynamic resource
+> > registration/tracking in place of the new controller in this series.
+> >
+> > Thanks everyone for the feedback.
+>
+> Somehow I missed this entire chain here.
+>
+> I'm not a fan, because I'm kinda hoping we could finally unify gpu memory
+> account. Atm everyone just adds their one-off solution in a random corner:
+> - total tracking in misc cgroup controller
+> - dma-buf sysfs files (except apparently too slow so it'll get deleted
+>   again)
+> - random other stuff on open device files os OOM killer can see it
+>
+> This doesn't look good.
+
+But I also think one could see it as "gpu memory" is the drm subsystem
+doing the same thing (in that it's artificially narrow to gpus). It
+seems we need something to account for buffers allocated by drivers,
+no matter which subsystem it was in (drm, v4l2, or networking or
+whatever).
+
+thanks
+-john
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
