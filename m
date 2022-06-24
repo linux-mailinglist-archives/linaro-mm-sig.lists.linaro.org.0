@@ -2,105 +2,102 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id F28BD55A291
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Jun 2022 22:23:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 13D3A55A2D2
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Jun 2022 22:36:50 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 01DCA4792F
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Jun 2022 20:23:58 +0000 (UTC)
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
-	by lists.linaro.org (Postfix) with ESMTPS id 228E63F0D8
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 20:23:53 +0000 (UTC)
-Received: by mail-ed1-f45.google.com with SMTP id fd6so4985550edb.5
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 13:23:53 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 3CFEF4792E
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Jun 2022 20:36:49 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+	by lists.linaro.org (Postfix) with ESMTPS id E052D3F0D8
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 20:36:43 +0000 (UTC)
+Received: by mail-ej1-f44.google.com with SMTP id ge10so6956820ejb.7
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 13:36:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ffwll.ch; s=google;
         h=date:from:to:cc:subject:message-id:mail-followup-to:references
          :mime-version:content-disposition:in-reply-to;
-        bh=rM6StsZ/3rmWNZ6eG3nFC9QNenxnUOTVwI/HAfEm2EQ=;
-        b=VYViBveaMX2iHovNjImE8ft1aL8oby/bDvJodcDA4y4Eo+tutY1hGinHsM3aKTvLEE
-         UKfzf6+eCMmxZ49Ku37S9pc+tHn/uh5pXrCXh3E8Ggw/FSYRFeIyB8RDclfGgyvtHmNh
-         MqpcvSiLK6jgmcJHZD8u3uLJ1nBF6f8mOUmtg=
+        bh=2ZlRpEdtEVnBuC7aEnd7d6UXgiUoHLzki+QPk6nXlJo=;
+        b=grPNnukEJPKIcNnJemOGDgxKea/T9pmQbUrVjX1fkdNW4DFFEep8GNYhuqPwoNbYjY
+         XI+N5u6z+zW4ITmghCISZyzSC3ay1C1KDFluTGPgXVRWPyq/0p5zTh43/1KWbFJRI5zo
+         gi6FaaNeRjLvD+bffmfq5EeP2MPq426xKwcM8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=x-gm-message-state:date:from:to:cc:subject:message-id
          :mail-followup-to:references:mime-version:content-disposition
          :in-reply-to;
-        bh=rM6StsZ/3rmWNZ6eG3nFC9QNenxnUOTVwI/HAfEm2EQ=;
-        b=TIhNshxOQOuMV7SzdPGkomDU4CeCYNW06WP1zyK3KUKDKukqnCd1hkMc7nf6f7R7Cr
-         rxugUB2VlsOq8QKTk7O3r8at48whQXJBRTNZmwGM6BoWF/2QZ/KpjU7mX32LY7rvXMZY
-         vYV9a3GpYw0HuHjwqghMnT7RlA/4b5DIsnC5dikivZeV0YwM2e3Ma3pqum+m0GyDJYD7
-         2A+0i/ZV9mjh5ClL65A81N8Ij+/+F18l573GsSAB1xEDYftSNW/KBLG9IWKCWmPhhubH
-         lWt7dxmG4JbJD6A7jWdKiilZluwonKDwSKaFL1WnwchRbZVn2quN/H0EddB18Eg4PK6X
-         szHw==
-X-Gm-Message-State: AJIora8Dyxu2Tmbt2lzESBSns6zW6Njx8FB+fPQZg4nQDAEIlriwuQDN
-	lnntMB+tMrN8dHCtRxaFlPcQ9Q==
-X-Google-Smtp-Source: AGRyM1uJnErMjUto5d2AkMD9qcjjZpgW235kvjYxoK3tSLlU8a0umCcexISHAvYdIuLK226BGQhyeA==
-X-Received: by 2002:a05:6402:4248:b0:435:9150:ccfb with SMTP id g8-20020a056402424800b004359150ccfbmr1101365edb.374.1656102232134;
-        Fri, 24 Jun 2022 13:23:52 -0700 (PDT)
+        bh=2ZlRpEdtEVnBuC7aEnd7d6UXgiUoHLzki+QPk6nXlJo=;
+        b=k/GDhwJWY8jeuUZ/PgJWXSdkYKZdeOxALRSvUyWQcsSTvQ/qUNWZR63C/n3SyGlUwv
+         f//l5kIKneRPfVHnE3iB0UmZG2qRgCckyuvGnZD45FgjAYfpbNxqTyUx9fg58zinfoIG
+         jH0tzip6CpwIFhf83dV4biUODnSclecRnAlnqmfS1/vsDiXhHuGVKneMt72yKm4bqfni
+         MsPh7IbMe3WCoTaV5KiVBdgoEG/U9XAWySVsuKBnBZGMb2RlUQ7W70XZiudCeZ5geKCH
+         dVucetrk4QCsHkSBLMDYkJHX9qVNVmACBms/6kElCRUajQtNKJAsy+lLFfZMLVFeDIs4
+         xWGw==
+X-Gm-Message-State: AJIora/DiqiuUV2oBEXYUbzU6HHOpQFuSkcrwqNHcS1xpz2veNqROiyE
+	Xx2HF7d2hCBttU9B+HKGLaNptA==
+X-Google-Smtp-Source: AGRyM1u+bgpkqRd7Tf8NAE0sJHQ4Pm531P9FvYf/RkXKzWMPcEol6g8iSVT+enOuzr6oKZn0svlQ7g==
+X-Received: by 2002:a17:906:9c82:b0:6df:baa2:9f75 with SMTP id fj2-20020a1709069c8200b006dfbaa29f75mr833410ejc.762.1656103002903;
+        Fri, 24 Jun 2022 13:36:42 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id z23-20020a170906435700b007094f98788csm1630637ejm.113.2022.06.24.13.23.50
+        by smtp.gmail.com with ESMTPSA id jl18-20020a17090775d200b006fec8e8eff6sm1661323ejc.176.2022.06.24.13.36.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jun 2022 13:23:51 -0700 (PDT)
-Date: Fri, 24 Jun 2022 22:23:49 +0200
+        Fri, 24 Jun 2022 13:36:42 -0700 (PDT)
+Date: Fri, 24 Jun 2022 22:36:40 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
-To: Rob Clark <robdclark@gmail.com>
-Message-ID: <YrYdVRMjK4YS33hO@phenom.ffwll.local>
-Mail-Followup-To: Rob Clark <robdclark@gmail.com>,
-	Dmitry Osipenko <dmitry.osipenko@collabora.com>,
-	David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
-	Gurchetan Singh <gurchetansingh@chromium.org>,
-	Chia-I Wu <olvaffe@gmail.com>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Gert Wollny <gert.wollny@collabora.com>,
-	Gustavo Padovan <gustavo.padovan@collabora.com>,
-	Daniel Stone <daniel@fooishbar.org>,
-	Tomeu Vizoso <tomeu.vizoso@collabora.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Rob Herring <robh@kernel.org>, Steven Price <steven.price@arm.com>,
-	Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
-	Emil Velikov <emil.l.velikov@gmail.com>,
-	Robin Murphy <robin.murphy@arm.com>, Qiang Yu <yuq825@gmail.com>,
+To: John Stultz <jstultz@google.com>
+Message-ID: <YrYgWCTtZqfvCt5D@phenom.ffwll.local>
+Mail-Followup-To: John Stultz <jstultz@google.com>,
+	"T.J. Mercier" <tjmercier@google.com>, Tejun Heo <tj@kernel.org>,
+	Nicolas Dufresne <nicolas@ndufresne.ca>,
+	Zefan Li <lizefan.x@bytedance.com>,
+	Johannes Weiner <hannes@cmpxchg.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Arve =?iso-8859-1?B?SGr4bm5lduVn?= <arve@android.com>,
+	Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>,
+	Joel Fernandes <joel@joelfernandes.org>,
+	Christian Brauner <brauner@kernel.org>,
+	Hridya Valsaraju <hridya@google.com>,
+	Suren Baghdasaryan <surenb@google.com>,
 	Sumit Semwal <sumit.semwal@linaro.org>,
 	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	"Pan, Xinhui" <Xinhui.Pan@amd.com>,
-	Thierry Reding <thierry.reding@gmail.com>,
-	Tomasz Figa <tfiga@chromium.org>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
-	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-	virtualization@lists.linux-foundation.org,
-	Dmitry Osipenko <digetx@gmail.com>, linux-tegra@vger.kernel.org,
-	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
-	amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
-	kernel@collabora.com
-References: <20220526235040.678984-1-dmitry.osipenko@collabora.com>
- <20220526235040.678984-18-dmitry.osipenko@collabora.com>
- <CAF6AEGt61t2truYDCxm17hqUPV-UdEdHjLs+6vmj5RPoPuVBYg@mail.gmail.com>
- <3bb3dc53-69fc-8cdb-ae37-583b9b2660a3@collabora.com>
- <CAF6AEGus7R_i7RMWGmbawVi62xCk5mhLTWGq2QEkcWY+XaJBAQ@mail.gmail.com>
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+	Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>,
+	Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <john.stultz@linaro.org>, Shuah Khan <shuah@kernel.org>,
+	Carlos Llamas <cmllamas@google.com>,
+	Kalesh Singh <kaleshsingh@google.com>, Kenny.Ho@amd.com,
+	Michal =?iso-8859-1?Q?Koutn=FD?= <mkoutny@suse.com>,
+	Shuah Khan <skhan@linuxfoundation.org>, kernel-team@android.com,
+	cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+	linux-kselftest@vger.kernel.org
+References: <CABdmKX3ZV6-u-oLvW_wWavAMBfrsZ=C_rCgK_Uz4VjxcRvRFew@mail.gmail.com>
+ <81026ef07c1ce20f8673b75b17bab79a2b39c548.camel@ndufresne.ca>
+ <CABdmKX2LxZ6zZR=fhXfnuWCB2BR+gzDd1-t1DD2A2XP24wvuGQ@mail.gmail.com>
+ <Yn6DpUsoSz1/15Kc@slm.duckdns.org>
+ <CABdmKX1xvm87WMEDkMc9Aye46E4zv1-scenwgaRxHesrOCsaYg@mail.gmail.com>
+ <YodHjYlMx1XGtM2+@slm.duckdns.org>
+ <CABdmKX2Ok023rN1drQgXVZLKUO_DVYrzmEamCgMMu6BPO67yhQ@mail.gmail.com>
+ <CABdmKX0WV8VWgeafVGJ++nJ4xsJD7Wpz=3KX=BW1du=huttfvw@mail.gmail.com>
+ <YrYbwu0iIAJJGXVg@phenom.ffwll.local>
+ <CANDhNCqGjaq-SFvWwkqnEFj4tJcRqCYupZ03wLyCexqTH5MqMg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAF6AEGus7R_i7RMWGmbawVi62xCk5mhLTWGq2QEkcWY+XaJBAQ@mail.gmail.com>
+In-Reply-To: <CANDhNCqGjaq-SFvWwkqnEFj4tJcRqCYupZ03wLyCexqTH5MqMg@mail.gmail.com>
 X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Message-ID-Hash: TX5FAOQQHN4RTUKDQM4HIJXOHBFJK47S
-X-Message-ID-Hash: TX5FAOQQHN4RTUKDQM4HIJXOHBFJK47S
+Message-ID-Hash: RYAL6GTYAJQWXARGMGLWADUL4FBIEHOW
+X-Message-ID-Hash: RYAL6GTYAJQWXARGMGLWADUL4FBIEHOW
 X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Dmitry Osipenko <dmitry.osipenko@collabora.com>, David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Daniel Vetter <daniel@ffwll.ch>, Daniel Almeida <daniel.almeida@collabora.com>, Gert Wollny <gert.wollny@collabora.com>, Gustavo Padovan <gustavo.padovan@collabora.com>, Daniel Stone <daniel@fooishbar.org>, Tomeu Vizoso <tomeu.vizoso@collabora.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>, Steven Price <steven.price@arm.com>, Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>, Emil Velikov <emil.l.velikov@gmail.com>, Robin Murphy <robin.murphy@arm.com>, Qiang Yu <yuq825@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>, Maur
- o Carvalho Chehab <mchehab@kernel.org>, Alex Deucher <alexander.deucher@amd.com>, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org, Dmitry Osipenko <digetx@gmail.com>, linux-tegra@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com
+CC: "T.J. Mercier" <tjmercier@google.com>, Tejun Heo <tj@kernel.org>, Nicolas Dufresne <nicolas@ndufresne.ca>, Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Arve =?iso-8859-1?B?SGr4bm5lduVn?= <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>, Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>, Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <john.stultz@linaro.org>, Shuah Khan <shuah@kernel.org>, Carlos Llamas <cmllamas@google.com>, Kalesh Singh <kaleshsingh@google.com>, Kenny.Ho@amd.com, Michal =?iso-8859-1?Q?K
+ outn=FD?= <mkoutny@suse.com>, Shuah Khan <skhan@linuxfoundation.org>, kernel-team@android.com, cgroups@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kselftest@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v6 17/22] drm/shmem-helper: Add generic memory shrinker
+Subject: [Linaro-mm-sig] Re: [PATCH v7 0/6] Proposal for a GPU cgroup controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TX5FAOQQHN4RTUKDQM4HIJXOHBFJK47S/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RYAL6GTYAJQWXARGMGLWADUL4FBIEHOW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -110,95 +107,75 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon, Jun 20, 2022 at 08:18:04AM -0700, Rob Clark wrote:
-> On Mon, Jun 20, 2022 at 7:09 AM Dmitry Osipenko
-> <dmitry.osipenko@collabora.com> wrote:
+On Fri, Jun 24, 2022 at 01:32:45PM -0700, John Stultz wrote:
+> On Fri, Jun 24, 2022 at 1:17 PM Daniel Vetter <daniel@ffwll.ch> wrote:
 > >
-> > On 6/19/22 20:53, Rob Clark wrote:
-> > ...
-> > >> +static unsigned long
-> > >> +drm_gem_shmem_shrinker_count_objects(struct shrinker *shrinker,
-> > >> +                                    struct shrink_control *sc)
-> > >> +{
-> > >> +       struct drm_gem_shmem_shrinker *gem_shrinker = to_drm_shrinker(shrinker);
-> > >> +       struct drm_gem_shmem_object *shmem;
-> > >> +       unsigned long count = 0;
-> > >> +
-> > >> +       if (!mutex_trylock(&gem_shrinker->lock))
-> > >> +               return 0;
-> > >> +
-> > >> +       list_for_each_entry(shmem, &gem_shrinker->lru_evictable, madv_list) {
-> > >> +               count += shmem->base.size;
-> > >> +
-> > >> +               if (count >= SHRINK_EMPTY)
-> > >> +                       break;
-> > >> +       }
-> > >> +
-> > >> +       mutex_unlock(&gem_shrinker->lock);
+> > On Wed, Jun 15, 2022 at 10:31:21AM -0700, T.J. Mercier wrote:
+> > > On Fri, May 20, 2022 at 9:25 AM T.J. Mercier <tjmercier@google.com> wrote:
+> > > >
+> > > > On Fri, May 20, 2022 at 12:47 AM Tejun Heo <tj@kernel.org> wrote:
+> > > > >
+> > > > > Hello,
+> > > > >
+> > > > > On Tue, May 17, 2022 at 04:30:29PM -0700, T.J. Mercier wrote:
+> > > > > > Thanks for your suggestion. This almost works. "dmabuf" as a key could
+> > > > > > work, but I'd actually like to account for each heap. Since heaps can
+> > > > > > be dynamically added, I can't accommodate every potential heap name by
+> > > > > > hardcoding registrations in the misc controller.
+> > > > >
+> > > > > On its own, that's a pretty weak reason to be adding a separate gpu
+> > > > > controller especially given that it doesn't really seem to be one with
+> > > > > proper abstractions for gpu resources. We don't want to keep adding random
+> > > > > keys to misc controller but can definitely add limited flexibility. What
+> > > > > kind of keys do you need?
+> > > > >
+> > > > Well the dmabuf-from-heaps component of this is the initial use case.
+> > > > I was envisioning we'd have additional keys as discussed here:
+> > > > https://lore.kernel.org/lkml/20220328035951.1817417-1-tjmercier@google.com/T/#m82e5fe9d8674bb60160701e52dae4356fea2ddfa
+> > > > So we'd end up with a well-defined core set of keys like "system", and
+> > > > then drivers would be free to use their own keys for their own unique
+> > > > purposes which could be complementary or orthogonal to the core set.
+> > > > Yesterday I was talking with someone who is interested in limiting gpu
+> > > > cores and bus IDs in addition to gpu memory. How to define core keys
+> > > > is the part where it looks like there's trouble.
+> > > >
+> > > > For my use case it would be sufficient to have current and maximum
+> > > > values for an arbitrary number of keys - one per heap. So the only
+> > > > part missing from the misc controller (for my use case) is the ability
+> > > > to register a new key at runtime as heaps are added. Instead of
+> > > > keeping track of resources with enum misc_res_type, requesting a
+> > > > resource handle/ID from the misc controller at runtime is what I think
+> > > > would be required instead.
+> > > >
+> > > Quick update: I'm going to make an attempt to modify the misc
+> > > controller to support a limited amount of dynamic resource
+> > > registration/tracking in place of the new controller in this series.
 > > >
-> > > As I mentioned on other thread, count_objects, being approximate but
-> > > lockless and fast is the important thing.  Otherwise when you start
-> > > hitting the shrinker on many threads, you end up serializing them all,
-> > > even if you have no pages to return to the system at that point.
+> > > Thanks everyone for the feedback.
 > >
-> > Daniel's point for dropping the lockless variant was that we're already
-> > in trouble if we're hitting shrinker too often and extra optimizations
-> > won't bring much benefits to us.
-> 
-> At least with zram swap (which I highly recommend using even if you
-> are not using a physical swap file/partition), swapin/out is actually
-> quite fast.  And if you are leaning on zram swap to fit 8GB of chrome
-> browser on a 4GB device, the shrinker gets hit quite a lot.  Lower
-> spec (4GB RAM) chromebooks can be under constant memory pressure and
-> can quite easily get into a situation where you are hitting the
-> shrinker on many threads simultaneously.  So it is pretty important
-> for all shrinkers in the system (not just drm driver) to be as
-> concurrent as possible.  As long as you avoid serializing reclaim on
-> all the threads, performance can still be quite good, but if you don't
-> performance will fall off a cliff.
-> 
-> jfwiw, we are seeing pretty good results (iirc 40-70% increase in open
-> tab counts) with the combination of eviction + multigen LRU[1] +
-> sizing zram swap to be 2x physical RAM
-> 
-> [1] https://lwn.net/Articles/856931/
-> 
-> > Alright, I'll add back the lockless variant (or will use yours
-> > drm_gem_lru) in the next revision. The code difference is very small
-> > after all.
+> > Somehow I missed this entire chain here.
 > >
-> > ...
-> > >> +               /* prevent racing with the dma-buf importing/exporting */
-> > >> +               if (!mutex_trylock(&gem_shrinker->dev->object_name_lock)) {
-> > >> +                       *lock_contention |= true;
-> > >> +                       goto resv_unlock;
-> > >> +               }
-> > >
-> > > I'm not sure this is a good idea to serialize on object_name_lock.
-> > > Purgeable buffers should never be shared (imported or exported).  So
-> > > at best you are avoiding evicting and immediately swapping back in, in
-> > > a rare case, at the cost of serializing multiple threads trying to
-> > > reclaim pages in parallel.
+> > I'm not a fan, because I'm kinda hoping we could finally unify gpu memory
+> > account. Atm everyone just adds their one-off solution in a random corner:
+> > - total tracking in misc cgroup controller
+> > - dma-buf sysfs files (except apparently too slow so it'll get deleted
+> >   again)
+> > - random other stuff on open device files os OOM killer can see it
 > >
-> > The object_name_lock shouldn't cause contention in practice. But objects
-> > are also pinned on attachment, hence maybe this lock is indeed
-> > unnecessary.. I'll re-check it.
+> > This doesn't look good.
 > 
-> I'm not worried about contention with export/import/etc, but
-> contention between multiple threads hitting the shrinker in parallel.
-> I guess since you are using trylock, it won't *block* the other
-> threads hitting shrinker, but they'll just end up looping in
-> do_shrink_slab() because they are hitting contention.
-> 
-> I'd have to do some experiments to see how it works out in practice,
-> but my gut feel is that it isn't a good idea
+> But I also think one could see it as "gpu memory" is the drm subsystem
+> doing the same thing (in that it's artificially narrow to gpus). It
+> seems we need something to account for buffers allocated by drivers,
+> no matter which subsystem it was in (drm, v4l2, or networking or
+> whatever).
 
-Yeah trylock on anything else than the object lock is No Good in the
-shrinker. And it really shouldn't be needed, since import/export should
-pin stuff as needed. Which should be protected by the dma_resv object
-lock. If not, we need to fix that.
+This is what the gpucg was. It wasn't called the dmabuf cg because we want
+to account also memory of other types (e.g. drm gem buffer objects which
+aren't exported), and I guess people didn't dare call it an xpu.
 
-Picking a random drm-internal lock like this is definitely no good design.
+But this was absolutely for a lot more than just "gpu drivers in drm".
+Better names welcome.
 -Daniel
 -- 
 Daniel Vetter
