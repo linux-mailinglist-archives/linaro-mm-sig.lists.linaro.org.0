@@ -2,197 +2,215 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B940A55A365
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Jun 2022 23:18:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D36D755A422
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 25 Jun 2022 00:02:34 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C6F2A47936
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Jun 2022 21:18:06 +0000 (UTC)
-Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
-	by lists.linaro.org (Postfix) with ESMTPS id C73A93F0D8
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 21:18:01 +0000 (UTC)
-Received: by mail-ej1-f50.google.com with SMTP id h23so7090349ejj.12
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 14:18:01 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 07DF547935
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Jun 2022 22:02:34 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+	by lists.linaro.org (Postfix) with ESMTPS id 8EB4E3EA36
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 22:02:29 +0000 (UTC)
+Received: by mail-wr1-f43.google.com with SMTP id s1so4796998wra.9
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 15:02:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=kOvhoEpSE/InAZniXEti7vxsLeyf1a5ZFLlDrYfEPAA=;
-        b=M1hPxnJUFy/KS9mddV1ZPCrOTUCJOFrbdOpyi7j0ftrXkyhBEEnYliwfUMRIJpc302
-         UerGSaJuJ0U+ZQOOBbu9YnTTWBPqzn6BGm20kcHK021zUKyUQcLbeROv76yKvkCA4wL5
-         TKPV/NeXPSFred9jnh+TebuOPhqPca6DgiiGGp4t7notg/0HrutadjdFHCaRzrR60/SS
-         kEf+UPdtfuMWWyAGy3sWvPgk2BDAIWToAkVEoiSpYe94Nv1jd3nvOoAgAb/ln/G4XSiC
-         GAFPYKei8IcLsfKWZvc/9gQfNai9RmMKWnJqWlZq+QZRlzREX3RhLKN999kWcpZY7b77
-         80Uw==
+        d=ffwll.ch; s=google;
+        h=date:from:to:cc:subject:message-id:mail-followup-to:references
+         :mime-version:content-disposition:content-transfer-encoding
+         :in-reply-to;
+        bh=bViPZBAMgiXFQeC0Ts9kGgYh0djVJEBJnUFAscIdXfs=;
+        b=Rz8Nx4ymy75hrX0gaCBI4344J1bwBh+sOZ0axM97pDdxTgAZCwKsYA02NUuNgyuZeG
+         qKht7O/JTqYnIz91prEg2+GBQqCdj3NY1VKMJIlEooRATP79woE+w3eDaKmVVDTxzbVf
+         iIVM0EFWFYWW3QEvxzfR51JtkpYZKX/LIyVms=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=kOvhoEpSE/InAZniXEti7vxsLeyf1a5ZFLlDrYfEPAA=;
-        b=tVHuZNtsWdqV5g895LJoFh/TCTTRbGRm9Wi6ljB9ERkCfG1Vcb/0s6PioUcbkMrori
-         TM41ptLvTCuxcA6KJRZdyhNAxXVgTRQXOhbG4E6bVJkjQonNUeo+Mcft5kXLA+rnlihN
-         8g6NePD/SrjlmCfg9f8ywo06Bx8YoPgPWSCPsJuq/dwzjd0jdCve2IziE4/XdkhzJ18Y
-         IQJCcd//lCg8bRcuFgXAapvEWcRIej7A3dtxJtARbzfENbJMDMrz7s+SHpLSiNMU2g/F
-         idNT1xEg910Yi083lmrt6JRA4IftMVa69V8FN0LlbLrVyuHRpSYn49KvnEizpkzzSvk9
-         yOGA==
-X-Gm-Message-State: AJIora8Dd3tr+1h5px6BxRux4420nDGFbYDjJQ4axgs3zzpKG3RScBta
-	Sh+EA8VupuK4Y01cZ/F62i4kzyDwnaTVsbtr7OlFnA==
-X-Google-Smtp-Source: AGRyM1sSg7LIinwzTB+qnSxgsQphAXAb9tAoVzunteBdzvrsgIwf9MXdDqBKLlkpEVBLtUpHvFPPJdLDYUqh2lPKgqo=
-X-Received: by 2002:a17:907:d25:b0:711:ea61:63aa with SMTP id
- gn37-20020a1709070d2500b00711ea6163aamr992776ejc.584.1656105480525; Fri, 24
- Jun 2022 14:18:00 -0700 (PDT)
+        h=x-gm-message-state:date:from:to:cc:subject:message-id
+         :mail-followup-to:references:mime-version:content-disposition
+         :content-transfer-encoding:in-reply-to;
+        bh=bViPZBAMgiXFQeC0Ts9kGgYh0djVJEBJnUFAscIdXfs=;
+        b=OPgQbxCgxPrN7a9y7Y8qnn7UT710R4mOwJjn3fKMi85z9g7nMAoP/IdkTV/6BPVsxF
+         k2mvIn8Y2gNQXY/5YhAEoIMchWC0qnHutwXgjaaofxgFJWyjcBwf2zVHUC5D73FpyZOe
+         JjvEYUgUE6t4AGb3v4LIGbudvjXDC4fa6+NCmUhak5fJrrKDnB6UloLvB1y2HjmAcxYX
+         3EoQ0SNsjVj7wVsVlwWn2je3CtDDtNTpKMizcMyClZkg4VzPF0lG+7TTFsYs8G8/DbKF
+         N0TZpNjgXmG0+I0lnQqjPGIxac4fmjcbVfRfiaj1K6uNCVIvB5g6ezSJlbR1H1Mc6XCA
+         RtYA==
+X-Gm-Message-State: AJIora8qD7AxRgHwvSsKDlu4QbZ0iU1cQRGSdcXGZ9XtEdSWt5K4hw1y
+	9sRJyQQ57lgEs9S9faftJhzmNQ==
+X-Google-Smtp-Source: AGRyM1s5n8eWyRmaa3id4LPoBE/bT384zG7zulVFh2/9XfPhNQr+6xueKkF3HpAXx+5+DdHBdYLKHQ==
+X-Received: by 2002:adf:e502:0:b0:21b:8de6:7f14 with SMTP id j2-20020adfe502000000b0021b8de67f14mr1062488wrm.3.1656108148577;
+        Fri, 24 Jun 2022 15:02:28 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id v17-20020a5d43d1000000b0021b95bcaf7fsm3328710wrr.59.2022.06.24.15.02.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 24 Jun 2022 15:02:27 -0700 (PDT)
+Date: Sat, 25 Jun 2022 00:02:25 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <YrY0cQY1BTL5H7Xp@phenom.ffwll.local>
+Mail-Followup-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Daniel Stone <daniel@fooishbar.org>,
+	Pekka Paalanen <ppaalanen@gmail.com>,
+	"Sharma, Shashank" <Shashank.Sharma@amd.com>,
+	lkml <linux-kernel@vger.kernel.org>,
+	dri-devel <dri-devel@lists.freedesktop.org>,
+	Nicolas Dufresne <nicolas@ndufresne.ca>,
+	linaro-mm-sig@lists.linaro.org,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	linux-media <linux-media@vger.kernel.org>
+References: <4b69f9f542d6efde2190b73c87096e87fa24d8ef.camel@pengutronix.de>
+ <adc626ec-ff5a-5c06-44ce-09111be450cd@amd.com>
+ <fbb228cd78e9bebd7e7921c19e0c4c09d0891f23.camel@pengutronix.de>
+ <e691bccc-171d-f674-2817-13a945970f4a@amd.com>
+ <95cca943bbfda6af07339fb8d2dc7f4da3aa0280.camel@pengutronix.de>
+ <05814ddb-4f3e-99d8-025a-c31db7b2c46b@amd.com>
+ <708e27755317a7650ca08ba2e4c14691ac0d6ba2.camel@pengutronix.de>
+ <6287f5f8-d9af-e03d-a2c8-ea8ddcbdc0d8@amd.com>
+ <CAPj87rOykZv7bjNhHPT4StrsPz8Y_DWqab4Ryq=Qqh77LS2e=Q@mail.gmail.com>
+ <578953dd-6298-2bfe-a8fb-52004b84fd17@amd.com>
 MIME-Version: 1.0
-References: <CABdmKX3ZV6-u-oLvW_wWavAMBfrsZ=C_rCgK_Uz4VjxcRvRFew@mail.gmail.com>
- <81026ef07c1ce20f8673b75b17bab79a2b39c548.camel@ndufresne.ca>
- <CABdmKX2LxZ6zZR=fhXfnuWCB2BR+gzDd1-t1DD2A2XP24wvuGQ@mail.gmail.com>
- <Yn6DpUsoSz1/15Kc@slm.duckdns.org> <CABdmKX1xvm87WMEDkMc9Aye46E4zv1-scenwgaRxHesrOCsaYg@mail.gmail.com>
- <YodHjYlMx1XGtM2+@slm.duckdns.org> <CABdmKX2Ok023rN1drQgXVZLKUO_DVYrzmEamCgMMu6BPO67yhQ@mail.gmail.com>
- <CABdmKX0WV8VWgeafVGJ++nJ4xsJD7Wpz=3KX=BW1du=huttfvw@mail.gmail.com>
- <YrYbwu0iIAJJGXVg@phenom.ffwll.local> <CANDhNCqGjaq-SFvWwkqnEFj4tJcRqCYupZ03wLyCexqTH5MqMg@mail.gmail.com>
- <YrYgWCTtZqfvCt5D@phenom.ffwll.local>
-In-Reply-To: <YrYgWCTtZqfvCt5D@phenom.ffwll.local>
-From: "T.J. Mercier" <tjmercier@google.com>
-Date: Fri, 24 Jun 2022 14:17:49 -0700
-Message-ID: <CABdmKX0bJDLwK7JEDGVb=KHtoVbZgnXYr8UE5eUpLYuAyiWwyw@mail.gmail.com>
-To: John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Tejun Heo <tj@kernel.org>,
-	Nicolas Dufresne <nicolas@ndufresne.ca>, Zefan Li <lizefan.x@bytedance.com>,
-	Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>,
-	Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>,
-	Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>,
-	Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-	Benjamin Gaignard <benjamin.gaignard@collabora.com>, Liam Mark <lmark@codeaurora.org>,
-	Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>,
-	John Stultz <john.stultz@linaro.org>, Shuah Khan <shuah@kernel.org>,
-	Carlos Llamas <cmllamas@google.com>, Kalesh Singh <kaleshsingh@google.com>, Kenny.Ho@amd.com,
-	=?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>,
-	Shuah Khan <skhan@linuxfoundation.org>, kernel-team@android.com,
-	cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
-	linux-kselftest@vger.kernel.org
-Message-ID-Hash: L4BDWZOHUBX53HQVT3S7YPYBRZCTG5EC
-X-Message-ID-Hash: L4BDWZOHUBX53HQVT3S7YPYBRZCTG5EC
-X-MailFrom: tjmercier@google.com
+Content-Disposition: inline
+In-Reply-To: <578953dd-6298-2bfe-a8fb-52004b84fd17@amd.com>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
+Message-ID-Hash: N6457NZ5DIBAQT3KH7WWF2UTL276OB6J
+X-Message-ID-Hash: N6457NZ5DIBAQT3KH7WWF2UTL276OB6J
+X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Daniel Vetter <daniel@ffwll.ch>
+CC: Daniel Stone <daniel@fooishbar.org>, Pekka Paalanen <ppaalanen@gmail.com>, "Sharma, Shashank" <Shashank.Sharma@amd.com>, lkml <linux-kernel@vger.kernel.org>, dri-devel <dri-devel@lists.freedesktop.org>, Nicolas Dufresne <nicolas@ndufresne.ca>, linaro-mm-sig@lists.linaro.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media <linux-media@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v7 0/6] Proposal for a GPU cgroup controller
+Subject: [Linaro-mm-sig] Re: DMA-buf and uncached system memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/L4BDWZOHUBX53HQVT3S7YPYBRZCTG5EC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N6457NZ5DIBAQT3KH7WWF2UTL276OB6J/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jun 24, 2022 at 1:36 PM Daniel Vetter <daniel@ffwll.ch> wrote:
->
-> On Fri, Jun 24, 2022 at 01:32:45PM -0700, John Stultz wrote:
-> > On Fri, Jun 24, 2022 at 1:17 PM Daniel Vetter <daniel@ffwll.ch> wrote:
-> > >
-> > > On Wed, Jun 15, 2022 at 10:31:21AM -0700, T.J. Mercier wrote:
-> > > > On Fri, May 20, 2022 at 9:25 AM T.J. Mercier <tjmercier@google.com> wrote:
-> > > > >
-> > > > > On Fri, May 20, 2022 at 12:47 AM Tejun Heo <tj@kernel.org> wrote:
-> > > > > >
-> > > > > > Hello,
-> > > > > >
-> > > > > > On Tue, May 17, 2022 at 04:30:29PM -0700, T.J. Mercier wrote:
-> > > > > > > Thanks for your suggestion. This almost works. "dmabuf" as a key could
-> > > > > > > work, but I'd actually like to account for each heap. Since heaps can
-> > > > > > > be dynamically added, I can't accommodate every potential heap name by
-> > > > > > > hardcoding registrations in the misc controller.
-> > > > > >
-> > > > > > On its own, that's a pretty weak reason to be adding a separate gpu
-> > > > > > controller especially given that it doesn't really seem to be one with
-> > > > > > proper abstractions for gpu resources. We don't want to keep adding random
-> > > > > > keys to misc controller but can definitely add limited flexibility. What
-> > > > > > kind of keys do you need?
-> > > > > >
-> > > > > Well the dmabuf-from-heaps component of this is the initial use case.
-> > > > > I was envisioning we'd have additional keys as discussed here:
-> > > > > https://lore.kernel.org/lkml/20220328035951.1817417-1-tjmercier@google.com/T/#m82e5fe9d8674bb60160701e52dae4356fea2ddfa
-> > > > > So we'd end up with a well-defined core set of keys like "system", and
-> > > > > then drivers would be free to use their own keys for their own unique
-> > > > > purposes which could be complementary or orthogonal to the core set.
-> > > > > Yesterday I was talking with someone who is interested in limiting gpu
-> > > > > cores and bus IDs in addition to gpu memory. How to define core keys
-> > > > > is the part where it looks like there's trouble.
-> > > > >
-> > > > > For my use case it would be sufficient to have current and maximum
-> > > > > values for an arbitrary number of keys - one per heap. So the only
-> > > > > part missing from the misc controller (for my use case) is the ability
-> > > > > to register a new key at runtime as heaps are added. Instead of
-> > > > > keeping track of resources with enum misc_res_type, requesting a
-> > > > > resource handle/ID from the misc controller at runtime is what I think
-> > > > > would be required instead.
-> > > > >
-> > > > Quick update: I'm going to make an attempt to modify the misc
-> > > > controller to support a limited amount of dynamic resource
-> > > > registration/tracking in place of the new controller in this series.
-> > > >
-> > > > Thanks everyone for the feedback.
-> > >
-> > > Somehow I missed this entire chain here.
-> > >
-> > > I'm not a fan, because I'm kinda hoping we could finally unify gpu memory
-> > > account. Atm everyone just adds their one-off solution in a random corner:
-> > > - total tracking in misc cgroup controller
-> > > - dma-buf sysfs files (except apparently too slow so it'll get deleted
-> > >   again)
-> > > - random other stuff on open device files os OOM killer can see it
-> > >
-> > > This doesn't look good.
-> >
-> > But I also think one could see it as "gpu memory" is the drm subsystem
-> > doing the same thing (in that it's artificially narrow to gpus). It
-> > seems we need something to account for buffers allocated by drivers,
-> > no matter which subsystem it was in (drm, v4l2, or networking or
-> > whatever).
->
-> This is what the gpucg was. It wasn't called the dmabuf cg because we want
-> to account also memory of other types (e.g. drm gem buffer objects which
-> aren't exported), and I guess people didn't dare call it an xpu.
->
-> But this was absolutely for a lot more than just "gpu drivers in drm".
-> Better names welcome.
-> -Daniel
-> --
-> Daniel Vetter
-> Software Engineer, Intel Corporation
-> http://blog.ffwll.ch
+On Thu, Jun 23, 2022 at 01:32:18PM +0200, Christian K=F6nig wrote:
+> Am 23.06.22 um 13:27 schrieb Daniel Stone:
+> > Hi Christian,
+> >=20
+> > On Thu, 23 Jun 2022 at 12:11, Christian K=F6nig <christian.koenig@amd.c=
+om> wrote:
+> > > > In fact DMA-buf sharing works fine on most of those SoCs because
+> > > > everyone just assumes that all the accelerators don't snoop, so the
+> > > > memory shared via DMA-buf is mostly CPU uncached. It only falls apa=
+rt
+> > > > for uses like the UVC cameras, where the shared buffer ends up being
+> > > > CPU cached.
+> > > Well then the existing DMA-buf framework is not what you want to use =
+for
+> > > this.
+> > >=20
+> > > > Non-coherent without explicit domain transfer points is just not go=
+ing
+> > > > to work. So why can't we solve the issue for DMA-buf in the same wa=
+y as
+> > > > the DMA API already solved it years ago: by adding the equivalent of
+> > > > the dma_sync calls that do cache maintenance when necessary? On x86=
+ (or
+> > > > any system where things are mostly coherent) you could still no-op =
+them
+> > > > for the common case and only trigger cache cleaning if the importer
+> > > > explicitly says that is going to do a non-snooping access.
+> > > Because DMA-buf is a framework for buffer sharing between cache coher=
+ent
+> > > devices which don't signal transitions.
+> > >=20
+> > > We intentionally didn't implemented any of the dma_sync_* functions
+> > > because that would break the intended use case.
+> > >=20
+> > > You can of course use DMA-buf in an incoherent environment, but then =
+you
+> > > can't expect that this works all the time.
+> > >=20
+> > > This is documented behavior and so far we have bluntly rejected any of
+> > > the complains that it doesn't work on most ARM SoCs and I don't really
+> > > see a way to do this differently.
+> > For some strange reason, 'let's do buffer sharing but make sure it
+> > doesn't work on Arm' wasn't exactly the intention of the groups who
+> > came together under the Linaro umbrella to create dmabuf.
+> >=20
+> > If it's really your belief that dmabuf requires universal snooping, I
+> > recommend you send the patch to update the documentation, as well as
+> > to remove DRIVER_PRIME from, realistically, most non-PCIE drivers.
+>=20
+> Well, to be honest I think that would indeed be necessary.
+>=20
+> What we have created are essentially two different worlds, one for PCI
+> devices and one for the rest.
+>=20
+> This was indeed not the intention, but it's a fact that basically all
+> DMA-buf based PCI drivers assume coherent access.
 
-From an API perspective the two approaches (misc vs GPU) seem similar
-to me. Someone comes up with a name of a resource they want to track,
-and it's added as a key in a cgroup interface file as drivers register
-and perform accounting on that resource. Considering just the naming,
-what do you see as the appeal of a controller named GPU/XPU vs one
-named Misc? Folks seem to have assumptions about the type of resources
-a "GPU" controller should be tracking, and potentially also how
-different resources are grouped under a single resource name. So is
-your thought that non-graphics related accounting of the same sort
-should be using a differently named controller, even if that
-controller could have the same implementation?
+dma-buf does not require universal snooping.
 
-My thought is that the resource names should be as specific as
-possible to allow fine-grained accounting, and leave any grouping of
-resources to userspace. We can do that under any controller. If you'd
-like to see a separate controller for graphics related stuff... well
-that's what I was aiming for with the GPU cgroup controller. It's just
-that dmabufs from heaps are the first use-case wired up.
+It does defacto require that all device access is coherent with all other
+device access, and consistent with the exporters notion of how cpu
+coherency is achieved. Not that coherent does not mean snooping, as long
+as all devices do unsnooped access and the exporter either does wc/uc or
+flushes caches that's perfectly fine, and how all the arm soc dma-buf
+sharing works.
 
-I haven't put much time into the misc controller effort yet, and I'd
-still be happy to see the GPU controller accepted if we can agree
-about how it'd be used going forward. Daniel, I think you're in a
-great position to comment about this. :) If there's a place where the
-implementation is missing the mark, then let's change it. Are the
-controller and resource naming the only issues?
+We did originally have the wording in there that you have to map/unamp
+around every device access, but that got dropped because no one was doing
+that anyway.
+
+Now where this totally breaks down is how we make this work, because the
+idea was that dma_buf_attach validates this all. Where this means all the
+hilarious reasons buffer sharing might not work:
+- wrong coherency mode (cpu cached or not)
+- not contiguous (we do check that, but only once we get the sg from
+  dma_buf_attachment_map, which strictly speaking is a bit too late but
+  most drivers do attach&map as one step so not that bad in practice)
+- whether the dma api will throw in bounce buffers or not
+- random shit like "oh this is in the wrong memory bank", which I think
+  never landed in upstream
+
+p2p connectivity is about the only one that gets this right, yay. And the
+only reason we can even get it right is because all the information is
+exposed to drivers fully.
+
+The issue is that the device dma api refuses to share this information
+because it would "leak". Which sucks, because we have defacto build every
+single cross-device use-case of dma-buf on the assumption we can check
+this (up to gl/vk specs), but oh well.
+
+So in practice this gets sorted out by endless piles of hacks to make
+individual use-cases work.
+
+Oh and: This is definitely not limited to arm socs. x86 socs with intel
+at least have exactly all the same issues, and they get solved by adding
+various shitty hacks to the involved drivers (like i915+amdgpu). Luckily
+the intel camera driver isn't in upstream yet, since that would break a
+bunch of the hacks since suddently there will be now 2 cpu cache
+incoherent devices in an x86 system.
+
+Ideally someone fixes this, but I'm not hopeful.
+
+I recommend pouring more drinks.
+
+What is definitely not correct is claiming that dma-buf wasn't meant for
+this. We discussed cache coherency issues endless in budapest 12 or so
+years ago, I was there. It's just that the reality of the current
+implementation is falling short, and every time someone tries to fix it we
+get shouted down by dma api maintainers for looking behind their current.
+
+tldr; You have to magically know to not use cpu cached allocators on these
+machines.
+
+Aside: This is also why vgem alloates wc memory on x86. It's the least
+common denominator that works. arm unfortunately doesn't allow you to
+allocate wc memory, so there stuff is simply somewhat broken.
+-Daniel
+--=20
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
