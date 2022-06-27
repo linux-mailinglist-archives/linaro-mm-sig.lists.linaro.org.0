@@ -2,160 +2,281 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C89D1577AEA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 Jul 2022 08:27:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B315577D5B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 Jul 2022 10:19:39 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 86C4047989
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 Jul 2022 06:27:02 +0000 (UTC)
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
-	by lists.linaro.org (Postfix) with ESMTPS id 902283EA36
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 20:32:57 +0000 (UTC)
-Received: by mail-wr1-f48.google.com with SMTP id r20so4606965wra.1
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 13:32:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=JOawYYsMmXVXjmJlEQmmHixFMSNq4rwAUlbsY6fSBgM=;
-        b=tg7SyNOOcpVv7QNLGjiD5KPi52/+81+/GdcF4vMbyPBIUjBBrCNv+tyegVY20uye/I
-         8Vyz/JGoeTKB1w5QEdFMlq0X9w98WbqAaklpSLN4EHbesVPHavlkpHILt1ZfuYLKpZ8W
-         QWm+Maw4GPgy2ApKPUsawPdD52CVDNryzSvuJBVG/RGE1Y030n422Z6wuG4tFFvBcR27
-         LjOjXsrh4klnn1DcCwwhoI0t8TTxE908V6t7zZjTqlwnAGdcuAOVwj1XL6eJ5KD7NEWR
-         SUf/6y2OeRLz1/Liz1zYe+r9C1qmHOr6YxgkPxXUsGyjo51BPVTKh4OJcFsWrx7rdii2
-         KEPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=JOawYYsMmXVXjmJlEQmmHixFMSNq4rwAUlbsY6fSBgM=;
-        b=ifUanrfNDj6Ld9sciMp9zpu8tJRSgWJSnwTPj1mN+2oqBEGKa8YJN6HW3akfb2bskW
-         udhLLH/obrtZi8W188uXLo6zk8m8VVHCxphBCOayrUDKtCRVTUYOFP5mc1ocOTFZ10wy
-         g3T4XienSujMKpejTKCGI7GSfeLXhnIiVd0uQv3YL8PJzAGav3FSBR+iMkLuKxRJmoIZ
-         ziFfh5MS6E69tiTdqWVrqeHhKhISQHDpikoPdTaHAV1p7TFzuF80EkO9IxV0X4uXQGJ9
-         HbNscB6u61dGeCWPYNvZNyFsWDDt4wWucjDhEuXjmK/J9Nscvq8enlNmiL4KSth6wkep
-         iEzg==
-X-Gm-Message-State: AJIora8HJr4ahYNOXPxf9Nf0aa/4BTeKSHLKEbMslXob12Az95plHrBY
-	Ts6pGptXNyIlVi0dU+g9C1lq7UhHw4s7IREMMMtm
-X-Google-Smtp-Source: AGRyM1sLPS9VvP6ADwx2J+StFzJT3dvaf4MBsF0swSWZC7Xkp/3biNCnrEVvva/rSqr0ebVtvt4hYokyoFIu+/3DmQ4=
-X-Received: by 2002:adf:efd2:0:b0:21b:91ae:68ca with SMTP id
- i18-20020adfefd2000000b0021b91ae68camr833768wrp.514.1656102776455; Fri, 24
- Jun 2022 13:32:56 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 8830547980
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 18 Jul 2022 08:19:38 +0000 (UTC)
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com (mail-eopbgr80051.outbound.protection.outlook.com [40.107.8.51])
+	by lists.linaro.org (Postfix) with ESMTPS id 64B283EA34
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 27 Jun 2022 13:41:58 +0000 (UTC)
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
+ b=nNBNzlVmZR0fM4lW9ggezzmzyoq1y1O4DsMpOOFu/bk72edG/erzYYo04pPgIHISDGm6y+nh4zt3+XpcfjCeg+HBa9EWL5CI/kQEAHU+/QL9t/3Z92rhKrqAuc3lxNi9lLOzehjyQMdrxQT2CAiAm8eYqAJFD2ss4wj2QwqAJHgONjN34aKagp+BODhgplSvwr/lC/UfwhCE8sAtBx4E/F7BVEHw4BxmhLBjWJUPBJWMR3ozbxGWk1IcJXdltyjs4Oz0aS4MmhxiAjteT1hqdtFSP9pyFjxHRaA/l0+s1mFG7KdCZR04VZhg9lLeDD0o1K6qmMnKMhIpPbpwdBxU0w==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6A/jsnnDAy3MIcCKZHVPer0knJRNuaEswqZGUYjinqM=;
+ b=ewxtmaugPC6bUPOt1hyVWds+Eockij6RL1GCS9zwWtyC3d+8J3H2PhhKEuHVlORhASHCN+ZMjH3bXfJy5c6XYrmL18LdnUGJqU/EU5oy+uKYDaUhtbsmBcDAxmG405Y9dMdJncT8zNeVP7eYiiKe0dwzgNXD0PxaGv/lk/tJ44IapnelDjLVOUfKmy5myn4A7OvofSXa8XyZ9JT3aaRtFh4Gphr4FNThc5N+PAlkpsjMMCpRwNnOk4V6tyhBWv0dg4dRAjj73FnAXf5aGiNaj9Wr2rew7AhcxHlGbTrelh5mB5gi3i8ahBUXqfQ5kgmVwLDdQ2BPybr4fZc9AkMphg==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 63.35.35.123) smtp.rcpttodomain=lists.linaro.org smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
+ oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6A/jsnnDAy3MIcCKZHVPer0knJRNuaEswqZGUYjinqM=;
+ b=dA6wWAE4pCcnqp+L5VCy5DMFLPCT0/qZWk8n8VQYK4mTMWEE4hRXohp1VbnaAl4xLoPWSaegivSutc+U6T8CEvgi3Hmw2waxBsMJVb+e2s9CYoUSgB1QkQXBLHGPxr6pKSPnMyiIC3V1OWhJ3D9g6QzMxa77T0u+p4bFATismxY=
+Received: from AS9PR06CA0295.eurprd06.prod.outlook.com (2603:10a6:20b:45a::12)
+ by AM9PR08MB6738.eurprd08.prod.outlook.com (2603:10a6:20b:30b::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5373.15; Mon, 27 Jun
+ 2022 13:41:54 +0000
+Received: from VE1EUR03FT048.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:45a:cafe::3) by AS9PR06CA0295.outlook.office365.com
+ (2603:10a6:20b:45a::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5373.15 via Frontend
+ Transport; Mon, 27 Jun 2022 13:41:54 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ VE1EUR03FT048.mail.protection.outlook.com (10.152.19.8) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5373.15 via Frontend Transport; Mon, 27 Jun 2022 13:41:54 +0000
+Received: ("Tessian outbound e40990bc24d7:v120"); Mon, 27 Jun 2022 13:41:53 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 35f1cae9cb91e2d6
+X-CR-MTA-TID: 64aa7808
+Received: from 87e66a722269.1
+	by 64aa7808-outbound-1.mta.getcheckrecipient.com id 59D621F2-3339-459F-BD38-D148D18CEF64.1;
+	Mon, 27 Jun 2022 13:41:43 +0000
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 87e66a722269.1
+    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+    Mon, 27 Jun 2022 13:41:43 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=kKbdBBwHfRJJnDYOYIsUtY7MQEm1HxIOltMWR4vTaiI7PMwYlmR4tBMtIIKcWKkTraUZrWNikDD49QabNbWiW2eRi9P77qMuYaPQdJdKqFXADn4KdkrNCZ8wQiqzBsGPvJubjsL/11U6h79eN6x/3RM6iAcy2ZZMy1+bWSCi7sqVImRK5HVdPQzrz+oUgCYFKlCZREkfbCpw2MJATT8Fbc7s1UXr01WG2C3M9Wu1WRH3L6oAiKD7XMYppXlPWj07xiOBQ2JwmAPlxSD7V+oH/s7A6rovb75ETijDpgnY+ivMSEsBm1OBRiWHzvouetDaWvyIwFoeZO27Myci89v80w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=6A/jsnnDAy3MIcCKZHVPer0knJRNuaEswqZGUYjinqM=;
+ b=Xoc/WUAtz60VjxykzdJBcIUqosNMgWDo1dH11xT6+2Ki4KmI4DjRF694ftLe/uXTc8cjTcJ6MUEL6z/UAk8uCP38+zVgcskE5WkFWmTyMuOFZNCgRed989O8e8F1R9+/GqvEnH6fE8gaPUPLS39LnK1osLMTDCHexS4Ivuev9zPo+Ik27wQCnZyeZTo0AVHpZ2u/IDI0BmAioyDXwUeanasPobMQ9ggG/ZK/4Dch8PXryN82VFxrO7woIgrl6fWDS18hTaRj5j+/TlPpDlFS6K1D4XA2SOhWFjoYi9w60aswzuPaEPmGVZDjomJ4iS/B091tpgQ9QzbNVfi4FBHFbw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=6A/jsnnDAy3MIcCKZHVPer0knJRNuaEswqZGUYjinqM=;
+ b=dA6wWAE4pCcnqp+L5VCy5DMFLPCT0/qZWk8n8VQYK4mTMWEE4hRXohp1VbnaAl4xLoPWSaegivSutc+U6T8CEvgi3Hmw2waxBsMJVb+e2s9CYoUSgB1QkQXBLHGPxr6pKSPnMyiIC3V1OWhJ3D9g6QzMxa77T0u+p4bFATismxY=
+Received: from AS8PR08MB8111.eurprd08.prod.outlook.com (2603:10a6:20b:54d::22)
+ by PAXPR08MB7247.eurprd08.prod.outlook.com (2603:10a6:102:212::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5373.17; Mon, 27 Jun
+ 2022 13:41:40 +0000
+Received: from AS8PR08MB8111.eurprd08.prod.outlook.com
+ ([fe80::1050:2cea:6ae5:160f]) by AS8PR08MB8111.eurprd08.prod.outlook.com
+ ([fe80::1050:2cea:6ae5:160f%7]) with mapi id 15.20.5373.018; Mon, 27 Jun 2022
+ 13:41:40 +0000
+From: Dennis Tsiang <Dennis.Tsiang@arm.com>
+To: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>
+Thread-Topic: [PATCH 1/1] [RFC] drm/fourcc: Add new unsigned
+ R16_UINT/RG1616_UINT formats
+Thread-Index: AQHYiiuhzWQ6qVyNMUCCgXIluRaSKg==
+Date: Mon, 27 Jun 2022 13:41:40 +0000
+Message-ID: 
+ <AS8PR08MB8111253493F5F36AA20E75D3F8B99@AS8PR08MB8111.eurprd08.prod.outlook.com>
+References: 
+ <AS8PR08MB81117652E417826E741154B8F8B99@AS8PR08MB8111.eurprd08.prod.outlook.com>
+In-Reply-To: 
+ <AS8PR08MB81117652E417826E741154B8F8B99@AS8PR08MB8111.eurprd08.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+suggested_attachment_session_id: f95b30b6-4709-e20d-7121-8452f5afedeb
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-MS-Office365-Filtering-Correlation-Id: 05ee4627-5f55-4abb-cbf2-08da5842cc2c
+x-ms-traffictypediagnostic: 
+	PAXPR08MB7247:EE_|VE1EUR03FT048:EE_|AM9PR08MB6738:EE_
+x-checkrecipientrouted: true
+nodisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: 
+ N5zPr97vGzoz8G7iZW2tqBPLqczzY83ig9eibILn8FxzzbgWx7VLQVCsGzZKmisWNsaoxpXiCU2X9dGNQXkhlEGDRYyYDtNhETVlyidY8e1ih+92lND5nMdCfCauFneB9qMUc3UA8wyddrsd8VrwWfigLSxPGfZDjxrcCARNPE5qbyp+0KrDZdJB8U67QotcdyVyflWFvpVpCNlXBiMr0uqjWCBPGc9GL4eXWV/V/PD6AUogpzbQvwcSY7ebN8+OkTMcVxFpuz905uUFTb6m1Xz3xIkBCPGHUWD8mFUm38knnFubpMujR5bVOZ4b0p6/vf7EzKSM3iAxbYgaNC67prOSkvWvXnJhSkK305hh4C4/+ZNKwRv7GBwvpiBdijHcdyejiYHh9KZ8OdxRH41VoGrzeiq5zcKl55NkvZ3UF46LwvpZrkDZ7g+EPjterg39rkyJvihI7j0RZPEr8zm/UeAra8rEH6HOZSBlzv5TnN6Md+q3vcaz6CxAzNIJivDjSisEbvSrWAi+3/ET7JGy3nfa61v2YFWpPeaYYfFbzgVLK4zIyG/N5KWuzLjOA7TSaC9n2Mdl1HRNSTYczv2NazjBz9PG/59GWpfpTL8mF2XSAsYMwhJEP/qmUSo8fI/h21qldBp00MlCi5HEuw6Z8DnDlUWrk0XzekdxdGLt6NMhHQSrWX69Wv7MWKottkmxcDXBmXUhvZ3PFkenHKESblixbZy8ug7Poa5Uawnn7/zcw6xI2tJlhmLwnTte95FD8D6bB8srMAiNL+TctkBD/NeM6q1zMIa8vEEInVL52Lo=
+X-Forefront-Antispam-Report-Untrusted: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR08MB8111.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(396003)(366004)(346002)(39860400002)(376002)(136003)(52536014)(33656002)(4326008)(8936002)(8676002)(7416002)(55016003)(54906003)(66476007)(66556008)(76116006)(66446008)(2906002)(316002)(64756008)(66946007)(71200400001)(2940100002)(41300700001)(26005)(86362001)(6916009)(5660300002)(53546011)(7696005)(186003)(478600001)(38100700002)(122000001)(38070700005)(83380400001)(6506007)(91956017)(9686003);DIR:OUT;SFP:1101;
 MIME-Version: 1.0
-References: <20220510235653.933868-1-tjmercier@google.com> <3365cd1d750e84fedc8e75d646a77ffd85619d35.camel@ndufresne.ca>
- <CABdmKX3ZV6-u-oLvW_wWavAMBfrsZ=C_rCgK_Uz4VjxcRvRFew@mail.gmail.com>
- <81026ef07c1ce20f8673b75b17bab79a2b39c548.camel@ndufresne.ca>
- <CABdmKX2LxZ6zZR=fhXfnuWCB2BR+gzDd1-t1DD2A2XP24wvuGQ@mail.gmail.com>
- <Yn6DpUsoSz1/15Kc@slm.duckdns.org> <CABdmKX1xvm87WMEDkMc9Aye46E4zv1-scenwgaRxHesrOCsaYg@mail.gmail.com>
- <YodHjYlMx1XGtM2+@slm.duckdns.org> <CABdmKX2Ok023rN1drQgXVZLKUO_DVYrzmEamCgMMu6BPO67yhQ@mail.gmail.com>
- <CABdmKX0WV8VWgeafVGJ++nJ4xsJD7Wpz=3KX=BW1du=huttfvw@mail.gmail.com> <YrYbwu0iIAJJGXVg@phenom.ffwll.local>
-In-Reply-To: <YrYbwu0iIAJJGXVg@phenom.ffwll.local>
-From: John Stultz <jstultz@google.com>
-Date: Fri, 24 Jun 2022 13:32:45 -0700
-Message-ID: <CANDhNCqGjaq-SFvWwkqnEFj4tJcRqCYupZ03wLyCexqTH5MqMg@mail.gmail.com>
-To: "T.J. Mercier" <tjmercier@google.com>, Tejun Heo <tj@kernel.org>,
-	Nicolas Dufresne <nicolas@ndufresne.ca>, Zefan Li <lizefan.x@bytedance.com>,
-	Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, =?UTF-8?B?QXJ2ZSBIasO4bm5ldsOlZw==?= <arve@android.com>,
-	Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>,
-	Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>,
-	Hridya Valsaraju <hridya@google.com>, Suren Baghdasaryan <surenb@google.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-	Benjamin Gaignard <benjamin.gaignard@collabora.com>, Liam Mark <lmark@codeaurora.org>,
-	Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>,
-	John Stultz <john.stultz@linaro.org>, Shuah Khan <shuah@kernel.org>,
-	John Stultz <jstultz@google.com>, Carlos Llamas <cmllamas@google.com>,
-	Kalesh Singh <kaleshsingh@google.com>, Kenny.Ho@amd.com,
-	=?UTF-8?Q?Michal_Koutn=C3=BD?= <mkoutny@suse.com>,
-	Shuah Khan <skhan@linuxfoundation.org>, kernel-team@android.com,
-	cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
-	linux-kselftest@vger.kernel.org
-X-MailFrom: jstultz@google.com
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB7247
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
+ VE1EUR03FT048.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 
+	955cfa80-0e25-409d-55a4-08da5842c410
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	q7EpGOyz0Uf2CeTrHWErNORpJ7mO/jAnXJfbxQiMV3oWyE+JjVZ5A6F6iH8k5vNUYQ15IEcX6+z1BLap5KmhGsQ3wSAejDMIFQpDFOXr8+b0ElITpAsJU8E0eiaFjTNwRKyMCyN7Fp/LV9A2g5whz724+ZJR3xj0p2OyCMaTNfVK02LcF6ESw8dI1MJXgCM/4qU8Ips58yNGSIfcNE0zmAFCm772adPboWtgmGiVSu2PTDfOFMGMwvWUue9RwX/Qd05M1WgoSnV8rXvB/e/18NFZ+rmhSOliPYlb4PsQuDM9rswSSCJrE3mEZyq7D43DMHPCSbvMmp8rB7R0+5Mdzzj4dMw5cEOaGEw1e/MWPuAsmVvl/rbCBW46LJGFuibCoxriD3A3jLogykBsq8SdMZPRwq0w5rtrFpGuNTnWV3EDHg+gml9VbBr8l8kZ22A/2wio+80LkWsAgf6sgn3zOUnGHfuym9kQ3GxByOgh3wfg37H/0ADXtPmx2IR1erhQWgDlJlBKbDFPOb8eGuIqFFtsrHszs8jlZgvlkAcPR6gYTLDtDFL2mVly/Mz7hZfzPHchbaIb6VFJj4or+cbaEWZghIc14eUP8ukGLBNnyn6Q1beHBGAgkvFud+NTiT/56ETC8pMHkPCvWJwE66FA7vssxbVaCXC74toTO7JL2+1Gw/dxwhr0zf8WCUSkaOGBFB/nKutvMe0vpCdseVdHRhRjV2ivD8q9V2ehcamxwuo9IGzBLKmZnqvfwM0rtmMmjjtBlYDHSQG8E3UR3jAeBgiKD7MzvCZuU3EFd+H1GQevWJDwm0sbxJG6vxalHmdI
+X-Forefront-Antispam-Report: 
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230016)(4636009)(396003)(376002)(346002)(136003)(39860400002)(40470700004)(36840700001)(46966006)(2940100002)(336012)(40460700003)(47076005)(186003)(6862004)(33656002)(82740400003)(81166007)(5660300002)(316002)(40480700001)(55016003)(356005)(53546011)(70586007)(70206006)(478600001)(54906003)(82310400005)(4326008)(86362001)(2906002)(8676002)(8936002)(52536014)(6506007)(36860700001)(83380400001)(9686003)(26005)(41300700001)(7696005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jun 2022 13:41:54.1045
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 05ee4627-5f55-4abb-cbf2-08da5842cc2c
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	VE1EUR03FT048.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR08MB6738
+X-MailFrom: Dennis.Tsiang@arm.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: KIDOCRIMRIAEOEK7UJVIRSOMMBOKGTYT
-X-Message-ID-Hash: KIDOCRIMRIAEOEK7UJVIRSOMMBOKGTYT
-X-Mailman-Approved-At: Mon, 18 Jul 2022 06:26:59 +0000
-CC: Daniel Vetter <daniel@ffwll.ch>
+Message-ID-Hash: 3ZFNIHOPGVAZEPUALLCPMOY4AJ6F5BA6
+X-Message-ID-Hash: 3ZFNIHOPGVAZEPUALLCPMOY4AJ6F5BA6
+X-Mailman-Approved-At: Mon, 18 Jul 2022 08:19:35 +0000
+CC: "maarten.lankhorst@linux.intel.com" <maarten.lankhorst@linux.intel.com>, "mripard@kernel.org" <mripard@kernel.org>, "tzimmermann@suse.de" <tzimmermann@suse.de>, "airlied@linux.ie" <airlied@linux.ie>, "daniel@ffwll.ch" <daniel@ffwll.ch>, "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "christian.koenig@amd.com" <christian.koenig@amd.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, Liviu Dudau <Liviu.Dudau@arm.com>, Brian Starkey <Brian.Starkey@arm.com>, Lisa Wu <lisa.wu@arm.com>, Normunds Rieksts <Normunds.Rieksts@arm.com>, nd <nd@arm.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v7 0/6] Proposal for a GPU cgroup controller
+Subject: [Linaro-mm-sig] [PATCH 1/1] [RFC] drm/fourcc: Add new unsigned R16_UINT/RG1616_UINT formats
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KIDOCRIMRIAEOEK7UJVIRSOMMBOKGTYT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JUAWXM73PX3JMYMJXWVYVCXZQA3ON7I5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jun 24, 2022 at 1:17 PM Daniel Vetter <daniel@ffwll.ch> wrote:
->
-> On Wed, Jun 15, 2022 at 10:31:21AM -0700, T.J. Mercier wrote:
-> > On Fri, May 20, 2022 at 9:25 AM T.J. Mercier <tjmercier@google.com> wrote:
-> > >
-> > > On Fri, May 20, 2022 at 12:47 AM Tejun Heo <tj@kernel.org> wrote:
-> > > >
-> > > > Hello,
-> > > >
-> > > > On Tue, May 17, 2022 at 04:30:29PM -0700, T.J. Mercier wrote:
-> > > > > Thanks for your suggestion. This almost works. "dmabuf" as a key could
-> > > > > work, but I'd actually like to account for each heap. Since heaps can
-> > > > > be dynamically added, I can't accommodate every potential heap name by
-> > > > > hardcoding registrations in the misc controller.
-> > > >
-> > > > On its own, that's a pretty weak reason to be adding a separate gpu
-> > > > controller especially given that it doesn't really seem to be one with
-> > > > proper abstractions for gpu resources. We don't want to keep adding random
-> > > > keys to misc controller but can definitely add limited flexibility. What
-> > > > kind of keys do you need?
-> > > >
-> > > Well the dmabuf-from-heaps component of this is the initial use case.
-> > > I was envisioning we'd have additional keys as discussed here:
-> > > https://lore.kernel.org/lkml/20220328035951.1817417-1-tjmercier@google.com/T/#m82e5fe9d8674bb60160701e52dae4356fea2ddfa
-> > > So we'd end up with a well-defined core set of keys like "system", and
-> > > then drivers would be free to use their own keys for their own unique
-> > > purposes which could be complementary or orthogonal to the core set.
-> > > Yesterday I was talking with someone who is interested in limiting gpu
-> > > cores and bus IDs in addition to gpu memory. How to define core keys
-> > > is the part where it looks like there's trouble.
-> > >
-> > > For my use case it would be sufficient to have current and maximum
-> > > values for an arbitrary number of keys - one per heap. So the only
-> > > part missing from the misc controller (for my use case) is the ability
-> > > to register a new key at runtime as heaps are added. Instead of
-> > > keeping track of resources with enum misc_res_type, requesting a
-> > > resource handle/ID from the misc controller at runtime is what I think
-> > > would be required instead.
-> > >
-> > Quick update: I'm going to make an attempt to modify the misc
-> > controller to support a limited amount of dynamic resource
-> > registration/tracking in place of the new controller in this series.
-> >
-> > Thanks everyone for the feedback.
->
-> Somehow I missed this entire chain here.
->
-> I'm not a fan, because I'm kinda hoping we could finally unify gpu memory
-> account. Atm everyone just adds their one-off solution in a random corner:
-> - total tracking in misc cgroup controller
-> - dma-buf sysfs files (except apparently too slow so it'll get deleted
->   again)
-> - random other stuff on open device files os OOM killer can see it
->
-> This doesn't look good.
+Adds R16_UINT and RG1616_UINT DRM formats that represent unsigned
+integer formats.
 
-But I also think one could see it as "gpu memory" is the drm subsystem
-doing the same thing (in that it's artificially narrow to gpus). It
-seems we need something to account for buffers allocated by drivers,
-no matter which subsystem it was in (drm, v4l2, or networking or
-whatever).
+Although these formats are not used at this moment, they would need to
+be exposed in the future for applications that need to use raw formats
+suitable for camera ISPs
 
-thanks
--john
+Signed-off-by: Dennis Tsiang <dennis.tsiang@arm.com>
+Signed-off-by: Normunds Rieksts <normunds.rieksts@arm.com>
+---
+ include/uapi/drm/drm_fourcc.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/include/uapi/drm/drm_fourcc.h b/include/uapi/drm/drm_fourcc.h
+index f1972154a594..fdb7d2a76507 100644
+--- a/include/uapi/drm/drm_fourcc.h
++++ b/include/uapi/drm/drm_fourcc.h
+@@ -112,14 +112,16 @@ extern "C" {
+
+ /* 16 bpp Red */
+ #define DRM_FORMAT_R16         fourcc_code('R', '1', '6', ' ') /* [15:0] R=
+ little endian */
++#define DRM_FORMAT_R16_UINT    fourcc_code('R', '1', '6', 'U') /* [15:0] R=
+ little endian, unsigned */
+
+ /* 16 bpp RG */
+ #define DRM_FORMAT_RG88                fourcc_code('R', 'G', '8', '8') /* =
+[15:0] R:G 8:8 little endian */
+ #define DRM_FORMAT_GR88                fourcc_code('G', 'R', '8', '8') /* =
+[15:0] G:R 8:8 little endian */
+
+ /* 32 bpp RG */
+-#define DRM_FORMAT_RG1616      fourcc_code('R', 'G', '3', '2') /* [31:0] R=
+:G 16:16 little endian */
+-#define DRM_FORMAT_GR1616      fourcc_code('G', 'R', '3', '2') /* [31:0] G=
+:R 16:16 little endian */
++#define DRM_FORMAT_RG1616              fourcc_code('R', 'G', '3', '2') /* =
+[31:0] R:G 16:16 little endian */
++#define DRM_FORMAT_RG1616_UINT         fourcc_code('R', 'G', '3', 'U') /* =
+[31:0] R:G 16:16 little endian, unsigned */
++#define DRM_FORMAT_GR1616              fourcc_code('G', 'R', '3', '2') /* =
+[31:0] G:R 16:16 little endian */
+
+ /* 8 bpp RGB */
+ #define DRM_FORMAT_RGB332      fourcc_code('R', 'G', 'B', '8') /* [7:0] R:=
+G:B 3:3:2 */
+--
+2.36.1
+
+
+
+
+From: Dennis Tsiang
+Sent: Monday, June 27, 2022 2:40 PM
+To: dri-devel@lists.freedesktop.org <dri-devel@lists.freedesktop.org>
+Cc: maarten.lankhorst@linux.intel.com <maarten.lankhorst@linux.intel.com>; =
+mripard@kernel.org <mripard@kernel.org>; tzimmermann@suse.de <tzimmermann@s=
+use.de>; airlied@linux.ie <airlied@linux.ie>; daniel@ffwll.ch <daniel@ffwll=
+.ch>; sumit.semwal@linaro.org <sumit.semwal@linaro.org>; christian.koenig@a=
+md.com <christian.koenig@amd.com>; linux-kernel@vger.kernel.org <linux-kern=
+el@vger.kernel.org>; linux-media@vger.kernel.org <linux-media@vger.kernel.o=
+rg>; linaro-mm-sig@lists.linaro.org <linaro-mm-sig@lists.linaro.org>; Liviu=
+ Dudau <Liviu.Dudau@arm.com>; Brian Starkey <Brian.Starkey@arm.com>; Lisa W=
+u <lisa.wu@arm.com>; Normunds Rieksts <Normunds.Rieksts@arm.com>; Dennis Ts=
+iang <Dennis.Tsiang@arm.com>; nd <nd@arm.com>
+Subject: [PATCH 0/1] [RFC] drm/fourcc: Add new unsigned R16_UINT/RG1616_UIN=
+T formats
+
+This patch is an early RFC to discuss the viable options and
+alternatives for inclusion of unsigned integer formats for the DRM API.
+
+This patch adds a new single component 16-bit and a two component 32-bit
+DRM fourcc=92s that represent unsigned integer formats. The use case for
+needing UINT formats, in our case, would be to support using raw buffers
+for camera ISPs.
+
+For images imported with DRM fourcc + modifier combination, the GPU
+driver needs a way to determine the datatype of the format which
+currently the DRM API does not provide explicitly with a notable
+exception of the floating-point fourccs such as DRM_FORMAT_XRGB16161616F
+as an example. As the DRM fourccs do not currently define the
+interpretation of the data, should the information be made explicit in
+the DRM API similarly to how it is already done in Vulkan?
+
+The reason for introducing datatype to the DRM fourcc's is that the
+alternative, for any API (e.g., EGL) that lacks the format datatype
+information for fourcc/modifier combination for dma_buf interop would be
+to introduce explicit additional metadata/attributes that encode this
+information which then would be passed to the GPU driver but the
+drawback of this is that it would require extending multiple graphics
+APIs to support every single platform.
+
+By having the DRM API expose the datatype information for formats saves
+a lot of integration/verification work for all of the different graphics
+APIs and platforms as this information could be determined by the DRM
+triple alone for dma_buf interop.
+
+It would be good to gather some opinions on what others think about
+introducing datatypes to the DRM API.
+
+Any feedback and suggestions are highly appreciated.
+
+Dennis Tsiang (1):
+  [RFC] drm/fourcc: Add new unsigned R16_UINT/RG1616_UINT formats
+
+ include/uapi/drm/drm_fourcc.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+--
+2.36.1
+IMPORTANT NOTICE: The contents of this email and any attachments are confid=
+ential and may also be privileged. If you are not the intended recipient, p=
+lease notify the sender immediately and do not disclose the contents to any=
+ other person, use it for any purpose, or store or copy the information in =
+any medium. Thank you.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
