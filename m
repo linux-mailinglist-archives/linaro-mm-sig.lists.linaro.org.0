@@ -2,215 +2,119 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D36D755A422
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 25 Jun 2022 00:02:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6809955BA22
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Jun 2022 15:51:33 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 07DF547935
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Jun 2022 22:02:34 +0000 (UTC)
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
-	by lists.linaro.org (Postfix) with ESMTPS id 8EB4E3EA36
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 22:02:29 +0000 (UTC)
-Received: by mail-wr1-f43.google.com with SMTP id s1so4796998wra.9
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Jun 2022 15:02:29 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 358423ECC0
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 Jun 2022 13:51:32 +0000 (UTC)
+Received: from mail-qv1-f49.google.com (mail-qv1-f49.google.com [209.85.219.49])
+	by lists.linaro.org (Postfix) with ESMTPS id 17F6C3ECC0
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 27 Jun 2022 13:51:27 +0000 (UTC)
+Received: by mail-qv1-f49.google.com with SMTP id y14so14734109qvs.10
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 27 Jun 2022 06:51:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google;
-        h=date:from:to:cc:subject:message-id:mail-followup-to:references
-         :mime-version:content-disposition:content-transfer-encoding
-         :in-reply-to;
-        bh=bViPZBAMgiXFQeC0Ts9kGgYh0djVJEBJnUFAscIdXfs=;
-        b=Rz8Nx4ymy75hrX0gaCBI4344J1bwBh+sOZ0axM97pDdxTgAZCwKsYA02NUuNgyuZeG
-         qKht7O/JTqYnIz91prEg2+GBQqCdj3NY1VKMJIlEooRATP79woE+w3eDaKmVVDTxzbVf
-         iIVM0EFWFYWW3QEvxzfR51JtkpYZKX/LIyVms=
+        d=ndufresne-ca.20210112.gappssmtp.com; s=20210112;
+        h=message-id:subject:from:to:cc:date:in-reply-to:references
+         :content-transfer-encoding:user-agent:mime-version;
+        bh=IO/5LQDipzPqsfiPf2oKew6mU+NIadwTqMByhggPg0I=;
+        b=GOyk+HaLucKVVNkgp6ddt+d56vzd0A8t7G4KOm1AbUEU5/BeYVRzygTy8xCIa+lNPf
+         Si1v7SHohI30eBXdgPyC7mZJixMFZ35tJljXaSgkh0Li26Q+p0JAIButdSaunBS85MXd
+         WXo6/Mf1UKxdoyn+uUXME6FEzJ7YFXrx6o2LDBi9QFHEZtTbCLtan2urHYd2GWdvzte5
+         3V0ii1UopvsZFN2VxRhYSgOy6FU3B7szGbIf0CymZAbD0Ba5wzZmNVE7nN1mxUBGPJ2n
+         duSOw6JuHYdOLa2znVpddX5BlAaBgG0AbhYMuNzwZXU/IS2NZvQlGSPIK6kyuB6VzIBx
+         PFKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id
-         :mail-followup-to:references:mime-version:content-disposition
-         :content-transfer-encoding:in-reply-to;
-        bh=bViPZBAMgiXFQeC0Ts9kGgYh0djVJEBJnUFAscIdXfs=;
-        b=OPgQbxCgxPrN7a9y7Y8qnn7UT710R4mOwJjn3fKMi85z9g7nMAoP/IdkTV/6BPVsxF
-         k2mvIn8Y2gNQXY/5YhAEoIMchWC0qnHutwXgjaaofxgFJWyjcBwf2zVHUC5D73FpyZOe
-         JjvEYUgUE6t4AGb3v4LIGbudvjXDC4fa6+NCmUhak5fJrrKDnB6UloLvB1y2HjmAcxYX
-         3EoQ0SNsjVj7wVsVlwWn2je3CtDDtNTpKMizcMyClZkg4VzPF0lG+7TTFsYs8G8/DbKF
-         N0TZpNjgXmG0+I0lnQqjPGIxac4fmjcbVfRfiaj1K6uNCVIvB5g6ezSJlbR1H1Mc6XCA
-         RtYA==
-X-Gm-Message-State: AJIora8qD7AxRgHwvSsKDlu4QbZ0iU1cQRGSdcXGZ9XtEdSWt5K4hw1y
-	9sRJyQQ57lgEs9S9faftJhzmNQ==
-X-Google-Smtp-Source: AGRyM1s5n8eWyRmaa3id4LPoBE/bT384zG7zulVFh2/9XfPhNQr+6xueKkF3HpAXx+5+DdHBdYLKHQ==
-X-Received: by 2002:adf:e502:0:b0:21b:8de6:7f14 with SMTP id j2-20020adfe502000000b0021b8de67f14mr1062488wrm.3.1656108148577;
-        Fri, 24 Jun 2022 15:02:28 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id v17-20020a5d43d1000000b0021b95bcaf7fsm3328710wrr.59.2022.06.24.15.02.27
+        h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+         :references:content-transfer-encoding:user-agent:mime-version;
+        bh=IO/5LQDipzPqsfiPf2oKew6mU+NIadwTqMByhggPg0I=;
+        b=4QZSYiOpS0gG+f1MW5mq97B3kIWXHZ8tAwy+btKNt9u7QBIxgI3vBEXzx/WDV5jYvH
+         oa+vKvsNqySfrmxdKrmbwXZV7wTBTrMM+T7bZr4f1kwXd430gxZzzZQz3FG63NhDLgDo
+         hIQeeUFoF1EKgPGKUZUIp5oY/UissjT1WK2YKWBNwnsOXM93n94aW4dm3uK36JY6k9gz
+         x25KIPpFj0UABtnLrsDuDh73at1E+qg0WA3zqRX4n3OKBXRGq7gx5Z+tYFpGpI7seqv8
+         CDrWnkG5KqGDsKguVqlHlxOW15mUTLXWs1Kiaa+C03phj0v26dpkRuxBKUU7AuvBQhH5
+         Sonw==
+X-Gm-Message-State: AJIora9AnDtULxKd4yR5ro2lyCURXRX4PYOIEnbLbgzbVUKoe5Y/k9GK
+	yNnDMTtq1H1MF65nFHsja4irvA==
+X-Google-Smtp-Source: AGRyM1uwTUgcdBTwPIHf6SCg4Il6IWSeM4ajg7IuHzzyn8HZDcP+XrUxKuXlZI8HzHEN016LOLSDHA==
+X-Received: by 2002:a05:622a:5985:b0:31b:899:3093 with SMTP id gb5-20020a05622a598500b0031b08993093mr2059921qtb.616.1656337886689;
+        Mon, 27 Jun 2022 06:51:26 -0700 (PDT)
+Received: from nicolas-tpx395.localdomain (192-222-136-102.qc.cable.ebox.net. [192.222.136.102])
+        by smtp.gmail.com with ESMTPSA id s24-20020ac85ed8000000b00317c519be8bsm6996967qtx.66.2022.06.27.06.51.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jun 2022 15:02:27 -0700 (PDT)
-Date: Sat, 25 Jun 2022 00:02:25 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <YrY0cQY1BTL5H7Xp@phenom.ffwll.local>
-Mail-Followup-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	Daniel Stone <daniel@fooishbar.org>,
-	Pekka Paalanen <ppaalanen@gmail.com>,
-	"Sharma, Shashank" <Shashank.Sharma@amd.com>,
-	lkml <linux-kernel@vger.kernel.org>,
-	dri-devel <dri-devel@lists.freedesktop.org>,
-	Nicolas Dufresne <nicolas@ndufresne.ca>,
-	linaro-mm-sig@lists.linaro.org,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	linux-media <linux-media@vger.kernel.org>
-References: <4b69f9f542d6efde2190b73c87096e87fa24d8ef.camel@pengutronix.de>
- <adc626ec-ff5a-5c06-44ce-09111be450cd@amd.com>
- <fbb228cd78e9bebd7e7921c19e0c4c09d0891f23.camel@pengutronix.de>
- <e691bccc-171d-f674-2817-13a945970f4a@amd.com>
- <95cca943bbfda6af07339fb8d2dc7f4da3aa0280.camel@pengutronix.de>
- <05814ddb-4f3e-99d8-025a-c31db7b2c46b@amd.com>
- <708e27755317a7650ca08ba2e4c14691ac0d6ba2.camel@pengutronix.de>
- <6287f5f8-d9af-e03d-a2c8-ea8ddcbdc0d8@amd.com>
- <CAPj87rOykZv7bjNhHPT4StrsPz8Y_DWqab4Ryq=Qqh77LS2e=Q@mail.gmail.com>
- <578953dd-6298-2bfe-a8fb-52004b84fd17@amd.com>
+        Mon, 27 Jun 2022 06:51:26 -0700 (PDT)
+Message-ID: <36eef859d63640b4456360e17383635644703e3d.camel@ndufresne.ca>
+From: Nicolas Dufresne <nicolas@ndufresne.ca>
+To: Lucas Stach <l.stach@pengutronix.de>, Christian =?ISO-8859-1?Q?K=F6nig?=
+	 <christian.koenig@amd.com>, Pekka Paalanen <ppaalanen@gmail.com>
+Date: Mon, 27 Jun 2022 09:51:24 -0400
+In-Reply-To: <fbb228cd78e9bebd7e7921c19e0c4c09d0891f23.camel@pengutronix.de>
+References: <91ff0bbb-ea3a-2663-3453-dea96ccd6dd8@amd.com>
+	 <YCuPhOT4GhY3RR/6@phenom.ffwll.local>
+	 <9178e19f5c0e141772b61b759abaa0d176f902b6.camel@ndufresne.ca>
+	 <CAPj87rPYQNkgVEdHECQcHcYe2nCpgF3RYQKk_=wwhvJSxwHXCg@mail.gmail.com>
+	 <c6e65ee1-531e-d72c-a6a6-da7149e34f18@amd.com>
+	 <20220623101326.18beeab3@eldfell>
+	 <954d0a9b-29ef-52ef-f6ca-22d7e6aa3f4d@amd.com>
+	 <4b69f9f542d6efde2190b73c87096e87fa24d8ef.camel@pengutronix.de>
+	 <adc626ec-ff5a-5c06-44ce-09111be450cd@amd.com>
+	 <fbb228cd78e9bebd7e7921c19e0c4c09d0891f23.camel@pengutronix.de>
+User-Agent: Evolution 3.44.2 (3.44.2-1.fc36) 
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <578953dd-6298-2bfe-a8fb-52004b84fd17@amd.com>
-X-Operating-System: Linux phenom 5.10.0-8-amd64 
-Message-ID-Hash: N6457NZ5DIBAQT3KH7WWF2UTL276OB6J
-X-Message-ID-Hash: N6457NZ5DIBAQT3KH7WWF2UTL276OB6J
-X-MailFrom: daniel@ffwll.ch
+Message-ID-Hash: DM34GUEX6HHAIK2PTCOS6MV56NWNNHAL
+X-Message-ID-Hash: DM34GUEX6HHAIK2PTCOS6MV56NWNNHAL
+X-MailFrom: nicolas@ndufresne.ca
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Daniel Stone <daniel@fooishbar.org>, Pekka Paalanen <ppaalanen@gmail.com>, "Sharma, Shashank" <Shashank.Sharma@amd.com>, lkml <linux-kernel@vger.kernel.org>, dri-devel <dri-devel@lists.freedesktop.org>, Nicolas Dufresne <nicolas@ndufresne.ca>, linaro-mm-sig@lists.linaro.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media <linux-media@vger.kernel.org>
+CC: "Sharma, Shashank" <Shashank.Sharma@amd.com>, lkml <linux-kernel@vger.kernel.org>, dri-devel <dri-devel@lists.freedesktop.org>, linaro-mm-sig@lists.linaro.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-media <linux-media@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: DMA-buf and uncached system memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N6457NZ5DIBAQT3KH7WWF2UTL276OB6J/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DM34GUEX6HHAIK2PTCOS6MV56NWNNHAL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Thu, Jun 23, 2022 at 01:32:18PM +0200, Christian K=F6nig wrote:
-> Am 23.06.22 um 13:27 schrieb Daniel Stone:
-> > Hi Christian,
-> >=20
-> > On Thu, 23 Jun 2022 at 12:11, Christian K=F6nig <christian.koenig@amd.c=
-om> wrote:
-> > > > In fact DMA-buf sharing works fine on most of those SoCs because
-> > > > everyone just assumes that all the accelerators don't snoop, so the
-> > > > memory shared via DMA-buf is mostly CPU uncached. It only falls apa=
-rt
-> > > > for uses like the UVC cameras, where the shared buffer ends up being
-> > > > CPU cached.
-> > > Well then the existing DMA-buf framework is not what you want to use =
-for
-> > > this.
-> > >=20
-> > > > Non-coherent without explicit domain transfer points is just not go=
-ing
-> > > > to work. So why can't we solve the issue for DMA-buf in the same wa=
-y as
-> > > > the DMA API already solved it years ago: by adding the equivalent of
-> > > > the dma_sync calls that do cache maintenance when necessary? On x86=
- (or
-> > > > any system where things are mostly coherent) you could still no-op =
-them
-> > > > for the common case and only trigger cache cleaning if the importer
-> > > > explicitly says that is going to do a non-snooping access.
-> > > Because DMA-buf is a framework for buffer sharing between cache coher=
-ent
-> > > devices which don't signal transitions.
-> > >=20
-> > > We intentionally didn't implemented any of the dma_sync_* functions
-> > > because that would break the intended use case.
-> > >=20
-> > > You can of course use DMA-buf in an incoherent environment, but then =
-you
-> > > can't expect that this works all the time.
-> > >=20
-> > > This is documented behavior and so far we have bluntly rejected any of
-> > > the complains that it doesn't work on most ARM SoCs and I don't really
-> > > see a way to do this differently.
-> > For some strange reason, 'let's do buffer sharing but make sure it
-> > doesn't work on Arm' wasn't exactly the intention of the groups who
-> > came together under the Linaro umbrella to create dmabuf.
-> >=20
-> > If it's really your belief that dmabuf requires universal snooping, I
-> > recommend you send the patch to update the documentation, as well as
-> > to remove DRIVER_PRIME from, realistically, most non-PCIE drivers.
->=20
-> Well, to be honest I think that would indeed be necessary.
->=20
-> What we have created are essentially two different worlds, one for PCI
-> devices and one for the rest.
->=20
-> This was indeed not the intention, but it's a fact that basically all
-> DMA-buf based PCI drivers assume coherent access.
-
-dma-buf does not require universal snooping.
-
-It does defacto require that all device access is coherent with all other
-device access, and consistent with the exporters notion of how cpu
-coherency is achieved. Not that coherent does not mean snooping, as long
-as all devices do unsnooped access and the exporter either does wc/uc or
-flushes caches that's perfectly fine, and how all the arm soc dma-buf
-sharing works.
-
-We did originally have the wording in there that you have to map/unamp
-around every device access, but that got dropped because no one was doing
-that anyway.
-
-Now where this totally breaks down is how we make this work, because the
-idea was that dma_buf_attach validates this all. Where this means all the
-hilarious reasons buffer sharing might not work:
-- wrong coherency mode (cpu cached or not)
-- not contiguous (we do check that, but only once we get the sg from
-  dma_buf_attachment_map, which strictly speaking is a bit too late but
-  most drivers do attach&map as one step so not that bad in practice)
-- whether the dma api will throw in bounce buffers or not
-- random shit like "oh this is in the wrong memory bank", which I think
-  never landed in upstream
-
-p2p connectivity is about the only one that gets this right, yay. And the
-only reason we can even get it right is because all the information is
-exposed to drivers fully.
-
-The issue is that the device dma api refuses to share this information
-because it would "leak". Which sucks, because we have defacto build every
-single cross-device use-case of dma-buf on the assumption we can check
-this (up to gl/vk specs), but oh well.
-
-So in practice this gets sorted out by endless piles of hacks to make
-individual use-cases work.
-
-Oh and: This is definitely not limited to arm socs. x86 socs with intel
-at least have exactly all the same issues, and they get solved by adding
-various shitty hacks to the involved drivers (like i915+amdgpu). Luckily
-the intel camera driver isn't in upstream yet, since that would break a
-bunch of the hacks since suddently there will be now 2 cpu cache
-incoherent devices in an x86 system.
-
-Ideally someone fixes this, but I'm not hopeful.
-
-I recommend pouring more drinks.
-
-What is definitely not correct is claiming that dma-buf wasn't meant for
-this. We discussed cache coherency issues endless in budapest 12 or so
-years ago, I was there. It's just that the reality of the current
-implementation is falling short, and every time someone tries to fix it we
-get shouted down by dma api maintainers for looking behind their current.
-
-tldr; You have to magically know to not use cpu cached allocators on these
-machines.
-
-Aside: This is also why vgem alloates wc memory on x86. It's the least
-common denominator that works. arm unfortunately doesn't allow you to
-allocate wc memory, so there stuff is simply somewhat broken.
--Daniel
---=20
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SGksDQoNCkxlIGpldWRpIDIzIGp1aW4gMjAyMiDDoCAxMDo1OCArMDIwMCwgTHVjYXMgU3RhY2gg
+YSDDqWNyaXTCoDoNCj4gPiA+IEluIHRoZSBETUEgQVBJIGtlZXBpbmcgdGhpbmdzIG1hcHBlZCBp
+cyBhbHNvIGEgdmFsaWQgdXNlLWNhc2UsIGJ1dCB0aGVuDQo+ID4gPiB5b3UgbmVlZCB0byBkbyBl
+eHBsaWNpdCBkb21haW4gdHJhbnNmZXJzIHZpYSB0aGUgZG1hX3N5bmNfKiBmYW1pbHksDQo+ID4g
+PiB3aGljaCBETUEtYnVmIGhhcyBub3QgaW5oZXJpdGVkLiBBZ2FpbiB0aG9zZSBzeW5jIGFyZSBu
+by1vcHMgb24gY2FjaGUNCj4gPiA+IGNvaGVyZW50IGFyY2hpdGVjdHVyZXMsIGJ1dCBkbyBhbnkg
+bmVjZXNzYXJ5IGNhY2hlIG1haW50ZW5hbmNlIG9uIG5vbg0KPiA+ID4gY29oZXJlbnQgYXJjaGVz
+Lg0KPiA+IA0KPiA+IENvcnJlY3QsIHllcy4gQ29oZXJlbmN5IGlzIG1hbmRhdG9yeSBmb3IgRE1B
+LWJ1ZiwgeW91IGNhbid0IHVzZSANCj4gPiBkbWFfc3luY18qIG9uIGl0IHdoZW4geW91IGFyZSB0
+aGUgaW1wb3J0ZXIuDQo+ID4gDQo+ID4gVGhlIGV4cG9ydGVyIGNvdWxkIG9mIGNvdXJzZSBtYWtl
+IHVzZSBvZiB0aGF0IGJlY2F1c2UgaGUgaXMgdGhlIG93bmVyIG9mIA0KPiA+IHRoZSBidWZmZXIu
+DQo+IA0KPiBJbiB0aGUgZXhhbXBsZSBnaXZlbiBoZXJlIHdpdGggVVZDIHZpZGVvLCB5b3UgZG9u
+J3Qga25vdyB0aGF0IHRoZQ0KPiBidWZmZXIgd2lsbCBiZSBleHBvcnRlZCBhbmQgbmVlZHMgdG8g
+YmUgY29oZXJlbnQgd2l0aG91dA0KPiBzeW5jaHJvbml6YXRpb24gcG9pbnRzLCBkdWUgdG8gdGhl
+IG1hcHBpbmcgY2FjaGUgYXQgdGhlIERSTSBzaWRlLiBTbw0KPiBWNEwyIG5hdHVyYWxseSBhbGxv
+Y2F0ZXMgdGhlIGJ1ZmZlcnMgZnJvbSBDUFUgY2FjaGVkIG1lbW9yeS4gSWYgdGhlDQo+IGV4cGVj
+dGF0aW9uIGlzIHRoYXQgdGhvc2UgYnVmZmVycyBhcmUgZGV2aWNlIGNvaGVyZW50IHdpdGhvdXQg
+cmVseWluZw0KPiBvbiB0aGUgbWFwL3VubWFwX2F0dGFjaG1lbnQgY2FsbHMsIHRoZW4gVjRMMiBu
+ZWVkcyB0byBhbHdheXMNCj4gc3luY2hyb25pemUgY2FjaGVzIG9uIERRQlVGIHdoZW4gdGhlwqAg
+YnVmZmVyIGlzIGFsbG9jYXRlZCBmcm9tIENQVQ0KPiBjYWNoZWQgbWVtb3J5IGFuZCBhIHNpbmds
+ZSBETUEtYnVmIGF0dGFjaG1lbnQgZXhpc3RzLiBBbmQgd2hpbGUgd3JpdGluZw0KPiB0aGlzIEkg
+cmVhbGl6ZSB0aGF0IHRoaXMgaXMgcHJvYmFibHkgZXhhY3RseSB3aGF0IFY0TDIgc2hvdWxkIGRv
+Li4uDQoNCkknbSBub3Qgc3VyZSB3ZSBhcmUgbWFraW5nIGFueSBwcm9ncmVzcyBoZXJlLiBEb2lu
+ZyBzbyB3aWxsIGp1c3QgcmVncmVzcw0KcGVyZm9ybWFuY2Ugb2YgY29oZXJlbnQgZGV2aWNlcyB1
+c2VkIHRvIHJlbmRlciBVVkMgdmlkZW8gZmVlZHMuIEluIGZhY3QsIHRoZXkNCmFyZSBhbGwgY29o
+ZXJlbnQgZXhjZXB0IHRoZSBkaXNwbGF5IGNvbnRyb2xsZXIgKG9uIEludGVsKS4gV2hhdCBteSBj
+b2xsZWFndWUgd2FzDQpzdWdnZXN0aW5nIG1lIHRvIHRyeSAod2l0aCB0aGUgZXhwZWN0YXRpb24g
+dGhhdCBzb21lIGFkYXB0YXRpb24gd2lsbCBiZSBuZWVkZWQsDQpwZXJoYXBzIG5ldyBzaWduYWxs
+aW5nIGZsYWdzKSwgaXMgdG8gcmVhZCB0aGUgZG1hX2NvaGVyZW5jeV9tYXNrIHZhbHVlcyBvbiB0
+aGUNCmRldmljZXMgdGhhdCBjYWxscyBhdHRhY2goKSBhbmQgYWRhcHQgdjRsMiBleHBvcnRlciBh
+Y2NvcmRpbmdseS4NCg0KSXRzIGxpa2VseSB3cm9uZyBhcy1pcywgbm90IGludGVuZGVkIHRvIGJl
+IHVzZWQgZm9yIHRoYXQsIGJ1dCB0aGUgdmFsdWUgaXMgdGhhdA0KaXQgdHJpZXMgdG8gZml4IHRo
+ZSBwcm9ibGVtLCB1bmxpa2Ugd2hhdCBJJ20gcmVhZGluZyBoZXJlLg0KDQpOaWNvbGFzDQoNCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1z
+aWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1
+YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJv
+Lm9yZwo=
