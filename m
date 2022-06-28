@@ -2,155 +2,129 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB7A457B2A7
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 10:16:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D981757B2A9
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 10:17:19 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E1119402F5
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 08:16:49 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 969093EBC5
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 28 Jun 2022 13:10:31 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id 148126170D;
-	Tue, 28 Jun 2022 13:10:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86553C3411D;
-	Tue, 28 Jun 2022 13:10:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1656421830;
-	bh=zaJPEAaU+2IfbqDeHuN4dAvwwL5eGrjWz/+JpqGOhkY=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
-	b=lZBjp0/akQQG/fsX+EOzNJDZnz3AgW8oxqYgMuJ9ki9PciNapkpDFse9sUtmk4DW+
-	 hVYKROeXjkxwHbMmIdTaxiPRNHushRD9zKxTC1x5gr7YL1BsfHCWObKDhOrjAF3LG0
-	 WoJLiFtW5PUfGrGu6eCn9tHLbj7l83vtpEgetMlBOIizblbmiXEvUA6LanFmZSBG2+
-	 e8zgAe7z/B48hU9t+1t8O1ffXmP4LV9XOd0C5CmCCiam2dXYESoVFlxgP5qj5hs1hn
-	 Eti9QjQMH9n6YUFbUvVe058E7zWtgwPORzUcNR3th/aQ9Hq+aG93r2lLgXfG653zHV
-	 rR7M5tigR+4+w==
-From: Mark Brown <broonie@kernel.org>
-To: mchehab@kernel.org, linux-doc@vger.kernel.org
-In-Reply-To: <cover.1656409369.git.mchehab@kernel.org>
-References: <cover.1656409369.git.mchehab@kernel.org>
-Message-Id: <165642182225.1205882.7217075149410531618.b4-ty@kernel.org>
-Date: Tue, 28 Jun 2022 14:10:22 +0100
+	by lists.linaro.org (Postfix) with ESMTP id 15FD63EF69
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 08:17:19 +0000 (UTC)
+Received: from ste-pvt-msa1.bahnhof.se (ste-pvt-msa1.bahnhof.se [213.80.101.70])
+	by lists.linaro.org (Postfix) with ESMTPS id 2A6173EC81
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 28 Jun 2022 20:13:01 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by ste-pvt-msa1.bahnhof.se (Postfix) with ESMTP id AC47E3F6D0;
+	Tue, 28 Jun 2022 22:12:59 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at bahnhof.se
+X-Spam-Flag: NO
+X-Spam-Score: -2.11
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.11 tagged_above=-999 required=6.31
+	tests=[BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
+	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
+	T_SCC_BODY_TEXT_LINE=-0.01, URIBL_BLOCKED=0.001]
+	autolearn=ham autolearn_force=no
+Authentication-Results: ste-pvt-msa1.bahnhof.se (amavisd-new);
+	dkim=pass (1024-bit key) header.d=shipmail.org
+Received: from ste-pvt-msa1.bahnhof.se ([127.0.0.1])
+	by localhost (ste-pvt-msa1.bahnhof.se [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id mmpRsQHvcbQV; Tue, 28 Jun 2022 22:12:58 +0200 (CEST)
+Received: 
+	by ste-pvt-msa1.bahnhof.se (Postfix) with ESMTPA id CDA333F5E5;
+	Tue, 28 Jun 2022 22:12:55 +0200 (CEST)
+Received: from [192.168.0.209] (h-155-4-205-35.A357.priv.bahnhof.se [155.4.205.35])
+	by mail1.shipmail.org (Postfix) with ESMTPSA id 5504F360156;
+	Tue, 28 Jun 2022 22:12:48 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=shipmail.org; s=mail;
+	t=1656447175; bh=8qVW4B3M3sdbclxh8UQh5P9peDN3xxFvdDdC5TV32/0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=dVFF/BzMCsmmWG2zHPWW6M0VCmuZz4GO4qbbISmpcnG1hjGYEkIoPCt6RUdqXtSN5
+	 Zw7NouOgpWzqOWItxknC6wyoxQz+N4x4jBvrz2P0oIotiPufQ3K9y8CBhGSA/p5GgE
+	 mX1Zal2b0Dlj2qezn+xXIo0JguejcKH2kGq5qm/s=
+Message-ID: <d3fcb4ee-83ec-09b8-d1ef-0191512fda91@shipmail.org>
+Date: Tue, 28 Jun 2022 22:12:46 +0200
 MIME-Version: 1.0
-X-MailFrom: broonie@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: NOZDIJRTCSHVZUWZGQ3ZNRQLU2P7ZJVJ
-X-Message-ID-Hash: NOZDIJRTCSHVZUWZGQ3ZNRQLU2P7ZJVJ
-X-Mailman-Approved-At: Wed, 20 Jul 2022 08:16:47 +0000
-CC: heikki.krogerus@linux.intel.com, daniel@ffwll.ch, mingo@redhat.com, bp@alien8.de, netdev@vger.kernel.org, pabeni@redhat.com, linux-fsdevel@vger.kernel.org, sumit.semwal@linaro.org, mchehab+huawei@kernel.org, kasan-dev@googlegroups.com, linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, christian.koenig@amd.com, airlied@linux.ie, corbet@lwn.net, hpa@zytor.com, linux-mm@kvack.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, tglx@linutronix.de, myungjoo.ham@samsung.com, glider@google.com, balbi@kernel.org, davem@davemloft.net, johannes@sipsolutions.net, linux-cachefs@redhat.com, x86@kernel.org, dave.hansen@linux.intel.com, linux-wireless@vger.kernel.org, Al Viro <viro@zeniv.linux.org.uk>, kuba@kernel.org, dri-devel@lists.freedesktop.org, linux-sgx@vger.kernel.org, andrey.grodzovsky@amd.com, cw00.choi@samsung.com, dvyukov@google.com, elver@google.com, Andrew Morton <akpm@linux-foundation.org>, amd-gfx@lists.freedesktop.org, linux-usb@vger.kernel.org, edumazet@go
- ogle.com, kyungmin.park@samsung.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.0
+Content-Language: en-US
+To: Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+ David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu
+ <olvaffe@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Gert Wollny <gert.wollny@collabora.com>,
+ Gustavo Padovan <gustavo.padovan@collabora.com>,
+ Daniel Stone <daniel@fooishbar.org>,
+ Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Rob Herring <robh@kernel.org>, Steven Price <steven.price@arm.com>,
+ Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
+ Rob Clark <robdclark@gmail.com>, Emil Velikov <emil.l.velikov@gmail.com>,
+ Robin Murphy <robin.murphy@arm.com>, Qiang Yu <yuq825@gmail.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding
+ <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+References: <20220526235040.678984-1-dmitry.osipenko@collabora.com>
+ <20220526235040.678984-2-dmitry.osipenko@collabora.com>
+From: =?UTF-8?Q?Thomas_Hellstr=c3=b6m_=28Intel=29?= <thomas_os@shipmail.org>
+In-Reply-To: <20220526235040.678984-2-dmitry.osipenko@collabora.com>
+X-MailFrom: thomas_os@shipmail.org
+X-Mailman-Rule-Hits: member-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
+Message-ID-Hash: 6MUJTYG3MSVNWJL47IIJOPEGVNU5XGAY
+X-Message-ID-Hash: 6MUJTYG3MSVNWJL47IIJOPEGVNU5XGAY
+X-Mailman-Approved-At: Wed, 20 Jul 2022 08:17:16 +0000
+CC: intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, linux-tegra@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, kernel@collabora.com, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: (subset) [PATCH 00/22] Fix kernel-doc warnings at linux-next
+Subject: [Linaro-mm-sig] Re: [PATCH v6 01/22] drm/gem: Properly annotate WW context on drm_gem_lock_reservations() error
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NOZDIJRTCSHVZUWZGQ3ZNRQLU2P7ZJVJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6MUJTYG3MSVNWJL47IIJOPEGVNU5XGAY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-On Tue, 28 Jun 2022 10:46:04 +0100, Mauro Carvalho Chehab wrote:
-> As we're currently discussing about making kernel-doc issues fatal when
-> CONFIG_WERROR is enable, let's fix all 60 kernel-doc warnings
-> inside linux-next:
-> 
-> 	arch/x86/include/uapi/asm/sgx.h:19: warning: Enum value 'SGX_PAGE_MEASURE' not described in enum 'sgx_page_flags'
-> 	arch/x86/include/uapi/asm/sgx.h:97: warning: Function parameter or member 'rdi' not described in 'sgx_enclave_user_handler_t'
-> 	arch/x86/include/uapi/asm/sgx.h:97: warning: Function parameter or member 'rsi' not described in 'sgx_enclave_user_handler_t'
-> 	arch/x86/include/uapi/asm/sgx.h:97: warning: Function parameter or member 'rdx' not described in 'sgx_enclave_user_handler_t'
-> 	arch/x86/include/uapi/asm/sgx.h:97: warning: Function parameter or member 'rsp' not described in 'sgx_enclave_user_handler_t'
-> 	arch/x86/include/uapi/asm/sgx.h:97: warning: Function parameter or member 'r8' not described in 'sgx_enclave_user_handler_t'
-> 	arch/x86/include/uapi/asm/sgx.h:97: warning: Function parameter or member 'r9' not described in 'sgx_enclave_user_handler_t'
-> 	arch/x86/include/uapi/asm/sgx.h:124: warning: Function parameter or member 'reserved' not described in 'sgx_enclave_run'
-> 	drivers/devfreq/devfreq.c:707: warning: Function parameter or member 'val' not described in 'qos_min_notifier_call'
-> 	drivers/devfreq/devfreq.c:707: warning: Function parameter or member 'ptr' not described in 'qos_min_notifier_call'
-> 	drivers/devfreq/devfreq.c:717: warning: Function parameter or member 'val' not described in 'qos_max_notifier_call'
-> 	drivers/devfreq/devfreq.c:717: warning: Function parameter or member 'ptr' not described in 'qos_max_notifier_call'
-> 	drivers/gpu/drm/amd/amdgpu/amdgpu_device.c:5095: warning: expecting prototype for amdgpu_device_gpu_recover_imp(). Prototype was for amdgpu_device_gpu_recover() instead
-> 	drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.h:544: warning: Function parameter or member 'dmub_outbox_params' not described in 'amdgpu_display_manager'
-> 	drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.h:544: warning: Function parameter or member 'num_of_edps' not described in 'amdgpu_display_manager'
-> 	drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.h:544: warning: Function parameter or member 'disable_hpd_irq' not described in 'amdgpu_display_manager'
-> 	drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.h:544: warning: Function parameter or member 'dmub_aux_transfer_done' not described in 'amdgpu_display_manager'
-> 	drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.h:544: warning: Function parameter or member 'delayed_hpd_wq' not described in 'amdgpu_display_manager'
-> 	drivers/gpu/drm/amd/include/amd_shared.h:224: warning: Enum value 'PP_GFX_DCS_MASK' not described in enum 'PP_FEATURE_MASK'
-> 	drivers/gpu/drm/scheduler/sched_main.c:999: warning: Function parameter or member 'dev' not described in 'drm_sched_init'
-> 	drivers/usb/dwc3/core.h:1328: warning: Function parameter or member 'async_callbacks' not described in 'dwc3'
-> 	drivers/usb/dwc3/gadget.c:675: warning: Function parameter or member 'mult' not described in 'dwc3_gadget_calc_tx_fifo_size'
-> 	fs/attr.c:36: warning: Function parameter or member 'ia_vfsuid' not described in 'chown_ok'
-> 	fs/attr.c:36: warning: Excess function parameter 'uid' description in 'chown_ok'
-> 	fs/attr.c:63: warning: Function parameter or member 'ia_vfsgid' not described in 'chgrp_ok'
-> 	fs/attr.c:63: warning: Excess function parameter 'gid' description in 'chgrp_ok'
-> 	fs/namei.c:649: warning: Function parameter or member 'mnt' not described in 'path_connected'
-> 	fs/namei.c:649: warning: Function parameter or member 'dentry' not described in 'path_connected'
-> 	fs/namei.c:1089: warning: Function parameter or member 'inode' not described in 'may_follow_link'
-> 	include/drm/gpu_scheduler.h:463: warning: Function parameter or member 'dev' not described in 'drm_gpu_scheduler'
-> 	include/linux/dcache.h:309: warning: expecting prototype for dget, dget_dlock(). Prototype was for dget_dlock() instead
-> 	include/linux/fscache.h:270: warning: Function parameter or member 'cookie' not described in 'fscache_use_cookie'
-> 	include/linux/fscache.h:270: warning: Excess function parameter 'object' description in 'fscache_use_cookie'
-> 	include/linux/fscache.h:287: warning: Function parameter or member 'cookie' not described in 'fscache_unuse_cookie'
-> 	include/linux/fscache.h:287: warning: Excess function parameter 'object' description in 'fscache_unuse_cookie'
-> 	include/linux/genalloc.h:54: warning: Function parameter or member 'start_addr' not described in 'genpool_algo_t'
-> 	include/linux/kfence.h:221: warning: Function parameter or member 'slab' not described in '__kfence_obj_info'
-> 	include/linux/regulator/driver.h:434: warning: Function parameter or member 'n_ramp_values' not described in 'regulator_desc'
-> 	include/linux/textsearch.h:51: warning: Function parameter or member 'list' not described in 'ts_ops'
-> 	include/linux/usb/typec_altmode.h:132: warning: Function parameter or member 'altmode' not described in 'typec_altmode_get_orientation'
-> 	include/net/cfg80211.h:391: warning: Function parameter or member 'bw' not described in 'ieee80211_eht_mcs_nss_supp'
-> 	include/net/cfg80211.h:437: warning: Function parameter or member 'eht_cap' not described in 'ieee80211_sband_iftype_data'
-> 	include/net/cfg80211.h:507: warning: Function parameter or member 's1g' not described in 'ieee80211_sta_s1g_cap'
-> 	include/net/cfg80211.h:1390: warning: Function parameter or member 'counter_offset_beacon' not described in 'cfg80211_color_change_settings'
-> 	include/net/cfg80211.h:1390: warning: Function parameter or member 'counter_offset_presp' not described in 'cfg80211_color_change_settings'
-> 	include/net/cfg80211.h:1430: warning: Enum value 'STATION_PARAM_APPLY_STA_TXPOWER' not described in enum 'station_parameters_apply_mask'
-> 	include/net/cfg80211.h:2195: warning: Function parameter or member 'dot11MeshConnectedToAuthServer' not described in 'mesh_config'
-> 	include/net/cfg80211.h:2341: warning: Function parameter or member 'short_ssid' not described in 'cfg80211_scan_6ghz_params'
-> 	include/net/cfg80211.h:3328: warning: Function parameter or member 'kck_len' not described in 'cfg80211_gtk_rekey_data'
-> 	include/net/cfg80211.h:3698: warning: Function parameter or member 'ftm' not described in 'cfg80211_pmsr_result'
-> 	include/net/cfg80211.h:3828: warning: Function parameter or member 'global_mcast_stypes' not described in 'mgmt_frame_regs'
-> 	include/net/cfg80211.h:4977: warning: Function parameter or member 'ftm' not described in 'cfg80211_pmsr_capabilities'
-> 	include/net/cfg80211.h:5742: warning: Function parameter or member 'u' not described in 'wireless_dev'
-> 	include/net/cfg80211.h:5742: warning: Function parameter or member 'links' not described in 'wireless_dev'
-> 	include/net/cfg80211.h:5742: warning: Function parameter or member 'valid_links' not described in 'wireless_dev'
-> 	include/net/cfg80211.h:6076: warning: Function parameter or member 'is_amsdu' not described in 'ieee80211_data_to_8023_exthdr'
-> 	include/net/cfg80211.h:6949: warning: Function parameter or member 'sig_dbm' not described in 'cfg80211_notify_new_peer_candidate'
-> 	include/net/mac80211.h:6250: warning: Function parameter or member 'vif' not described in 'ieee80211_channel_switch_disconnect'
-> 	mm/memory.c:1729: warning: Function parameter or member 'mt' not described in 'unmap_vmas'
-> 	net/mac80211/sta_info.h:569: warning: Function parameter or member 'cur_max_bandwidth' not described in 'link_sta_info'
-> 
-> [...]
-
-Applied to
-
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/regulator.git for-next
-
-Thanks!
-
-[18/22] regulator: fix a kernel-doc warning
-        commit: 0e584d46218e3b9dc12a98e18e81a0cd3e0d5419
-
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
-
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
-
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SGksDQoNCk9uIDUvMjcvMjIgMDE6NTAsIERtaXRyeSBPc2lwZW5rbyB3cm90ZToNCj4gVXNlIHd3
+X2FjcXVpcmVfZmluaSgpIGluIHRoZSBlcnJvciBjb2RlIHBhdGhzLiBPdGhlcndpc2UgbG9ja2Rl
+cA0KPiB0aGlua3MgdGhhdCBsb2NrIGlzIGhlbGQgd2hlbiBsb2NrJ3MgbWVtb3J5IGlzIGZyZWVk
+IGFmdGVyIHRoZQ0KPiBkcm1fZ2VtX2xvY2tfcmVzZXJ2YXRpb25zKCkgZXJyb3IuIFRoZSBXVyBu
+ZWVkcyB0byBiZSBhbm5vdGF0ZWQNCj4gYXMgImZyZWVkIg0KDQpzIC9XVy93d19hY3F1aXJlX2Nv
+bnRleHQvID8NCnMgLyJmcmVlZCIvInJlbGVhc2VkIi8gPw0KDQoNCj4gLCB3aGljaCBmaXhlcyB0
+aGUgbm9pc3kgIldBUk5JTkc6IGhlbGQgbG9jayBmcmVlZCEiIHNwbGF0DQo+IG9mIFZpcnRJTy1H
+UFUgZHJpdmVyIHdpdGggQ09ORklHX0RFQlVHX01VVEVYRVM9eSBhbmQgZW5hYmxlZCBsb2NrZGVw
+Lg0KPg0KPiBDYzogc3RhYmxlQHZnZXIua2VybmVsLm9yZw0KDQpDYW4geW91IGRpZyB1cCB0aGUg
+Y29tbWl0IGluIGVycm9yIGFuZCBhZGQgYSBGaXhlczogVGFnPw0KDQpVc2luZyB0aGF0IGFuZCAi
+ZGltIGZpeGVzIiB3aWxsIGFsc28gbWFrZSB0aGUgQ2M6IHN0YWJsZSB0YWcgYSBiaXQgbW9yZSAN
+CnZlcmJvc2UuDQoNCldpdGggdGhhdCBmaXhlZCwNCg0KUmV2aWV3ZWQtYnk6IFRob21hcyBIZWxs
+c3Ryw7ZtIDx0aG9tYXMuaGVsbHN0cm9tQGxpbnV4LmludGVsLmNvbT4NCg0KDQo+IFNpZ25lZC1v
+ZmYtYnk6IERtaXRyeSBPc2lwZW5rbyA8ZG1pdHJ5Lm9zaXBlbmtvQGNvbGxhYm9yYS5jb20+DQo+
+IC0tLQ0KPiAgIGRyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtLmMgfCA0ICsrLS0NCj4gICAxIGZpbGUg
+Y2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KPg0KPiBkaWZmIC0tZ2l0
+IGEvZHJpdmVycy9ncHUvZHJtL2RybV9nZW0uYyBiL2RyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtLmMN
+Cj4gaW5kZXggZWIwYzJkMDQxZjEzLi44NmQ2NzBjNzEyODYgMTAwNjQ0DQo+IC0tLSBhL2RyaXZl
+cnMvZ3B1L2RybS9kcm1fZ2VtLmMNCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2RybV9nZW0uYw0K
+PiBAQCAtMTIyNiw3ICsxMjI2LDcgQEAgZHJtX2dlbV9sb2NrX3Jlc2VydmF0aW9ucyhzdHJ1Y3Qg
+ZHJtX2dlbV9vYmplY3QgKipvYmpzLCBpbnQgY291bnQsDQo+ICAgCQlyZXQgPSBkbWFfcmVzdl9s
+b2NrX3Nsb3dfaW50ZXJydXB0aWJsZShvYmotPnJlc3YsDQo+ICAgCQkJCQkJCQkgYWNxdWlyZV9j
+dHgpOw0KPiAgIAkJaWYgKHJldCkgew0KPiAtCQkJd3dfYWNxdWlyZV9kb25lKGFjcXVpcmVfY3R4
+KTsNCj4gKwkJCXd3X2FjcXVpcmVfZmluaShhY3F1aXJlX2N0eCk7DQo+ICAgCQkJcmV0dXJuIHJl
+dDsNCj4gICAJCX0NCj4gICAJfQ0KPiBAQCAtMTI1MSw3ICsxMjUxLDcgQEAgZHJtX2dlbV9sb2Nr
+X3Jlc2VydmF0aW9ucyhzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKipvYmpzLCBpbnQgY291bnQsDQo+
+ICAgCQkJCWdvdG8gcmV0cnk7DQo+ICAgCQkJfQ0KPiAgIA0KPiAtCQkJd3dfYWNxdWlyZV9kb25l
+KGFjcXVpcmVfY3R4KTsNCj4gKwkJCXd3X2FjcXVpcmVfZmluaShhY3F1aXJlX2N0eCk7DQo+ICAg
+CQkJcmV0dXJuIHJldDsNCj4gICAJCX0NCj4gICAJfQ0KX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
+YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
+dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
