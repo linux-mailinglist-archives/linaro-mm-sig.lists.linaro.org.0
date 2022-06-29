@@ -2,129 +2,90 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D981757B2A9
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 10:17:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80B4057B2BE
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 10:21:15 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 15FD63EF69
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 08:17:19 +0000 (UTC)
-Received: from ste-pvt-msa1.bahnhof.se (ste-pvt-msa1.bahnhof.se [213.80.101.70])
-	by lists.linaro.org (Postfix) with ESMTPS id 2A6173EC81
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 28 Jun 2022 20:13:01 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by ste-pvt-msa1.bahnhof.se (Postfix) with ESMTP id AC47E3F6D0;
-	Tue, 28 Jun 2022 22:12:59 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at bahnhof.se
-X-Spam-Flag: NO
-X-Spam-Score: -2.11
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.11 tagged_above=-999 required=6.31
-	tests=[BAYES_00=-1.9, DKIM_SIGNED=0.1, DKIM_VALID=-0.1,
-	DKIM_VALID_AU=-0.1, DKIM_VALID_EF=-0.1, NICE_REPLY_A=-0.001,
-	T_SCC_BODY_TEXT_LINE=-0.01, URIBL_BLOCKED=0.001]
-	autolearn=ham autolearn_force=no
-Authentication-Results: ste-pvt-msa1.bahnhof.se (amavisd-new);
-	dkim=pass (1024-bit key) header.d=shipmail.org
-Received: from ste-pvt-msa1.bahnhof.se ([127.0.0.1])
-	by localhost (ste-pvt-msa1.bahnhof.se [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id mmpRsQHvcbQV; Tue, 28 Jun 2022 22:12:58 +0200 (CEST)
-Received: 
-	by ste-pvt-msa1.bahnhof.se (Postfix) with ESMTPA id CDA333F5E5;
-	Tue, 28 Jun 2022 22:12:55 +0200 (CEST)
-Received: from [192.168.0.209] (h-155-4-205-35.A357.priv.bahnhof.se [155.4.205.35])
-	by mail1.shipmail.org (Postfix) with ESMTPSA id 5504F360156;
-	Tue, 28 Jun 2022 22:12:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=shipmail.org; s=mail;
-	t=1656447175; bh=8qVW4B3M3sdbclxh8UQh5P9peDN3xxFvdDdC5TV32/0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=dVFF/BzMCsmmWG2zHPWW6M0VCmuZz4GO4qbbISmpcnG1hjGYEkIoPCt6RUdqXtSN5
-	 Zw7NouOgpWzqOWItxknC6wyoxQz+N4x4jBvrz2P0oIotiPufQ3K9y8CBhGSA/p5GgE
-	 mX1Zal2b0Dlj2qezn+xXIo0JguejcKH2kGq5qm/s=
-Message-ID: <d3fcb4ee-83ec-09b8-d1ef-0191512fda91@shipmail.org>
-Date: Tue, 28 Jun 2022 22:12:46 +0200
+	by lists.linaro.org (Postfix) with ESMTP id 88163402F5
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 08:21:14 +0000 (UTC)
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+	by lists.linaro.org (Postfix) with ESMTPS id 592F43EA50
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Jun 2022 03:24:06 +0000 (UTC)
+Received: by mail-pj1-f46.google.com with SMTP id n16-20020a17090ade9000b001ed15b37424so14681849pjv.3
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 28 Jun 2022 20:24:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=Fj7BbdljqsoGparCST0EyCcPUKNtLNBlk+LCRCpdJLw=;
+        b=oFx79pTDKe/0K4DzWTg5WbhaY9GMAgsDaFSkH6r1vPW1HFdOJXqGQ5UZxgywHDM3Ir
+         0equTGt8PyPlERIlnTf5/BcxXxzGITpucSE2VIl8CV1o9ehzFCMhzuOGmi45/AK6qG76
+         /8w9TpCEjcwZrf18xju/rDZxtqGU8P6zQ25P+y1i5vCqEbFPPa98WvDxnH8cFtX3sIwJ
+         junUVkx5AYbgAFw0eC61vARiqpw1IzYsntMTivQEIBdgIUJa+1mBXf7au2lMkxwOomRF
+         Tq177jWJbMD53EgF/Vw9Bn+IKNlGCEHOCstQTlq+u9cuVkwNV5MjGVV2oNYBWWI67o+0
+         Kprw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=Fj7BbdljqsoGparCST0EyCcPUKNtLNBlk+LCRCpdJLw=;
+        b=CTk8eiTHbHrqFJGF1D3YY/l7+MrkbhSkujCavjp0N0dNxv7UvUI2Tb3UEaNVW5bcBw
+         KIJKsUXmTDvJUj4E1Ts664giFwd2h8uWvQc9rRcaL3Qqh2gFM4gedIzmpZq2mHXXQqpj
+         dQcr1bYkIjqvwkI5ukqHxACNdfUULqgrlZsi/R7gS72HNM0HvTgklmR9I3fDMHZJ5ZBk
+         XcTJGFsDoTX22Op9rSGZcVsztVpeF6AVzAMEyex/l+fhC1+JWfvmyJBh+s48AqfQEVTR
+         ObWJy9moPvZ3sS/+kQGyJYlkc1Dgu2trz3Auu3OQrrOFD/8AvdPKniwWBbKOvkj8BBSH
+         zILA==
+X-Gm-Message-State: AJIora+Z8j3SX0GN14zb3QKngoWbWKudY6rRbIghc0EdhQt7Cobr6NPu
+	MGkKk0Gs8IWFCwsbUWd3OI8=
+X-Google-Smtp-Source: AGRyM1vsi7CgNn+hm6JA8nRBvn1UfsHiN+DuVQjG+D41n++oNdHScStsgrICm72S8/mDUKvSMDDq4A==
+X-Received: by 2002:a17:902:a701:b0:16a:65b:f9f1 with SMTP id w1-20020a170902a70100b0016a065bf9f1mr8387462plq.73.1656473045455;
+        Tue, 28 Jun 2022 20:24:05 -0700 (PDT)
+Received: from debian.me (subs02-180-214-232-13.three.co.id. [180.214.232.13])
+        by smtp.gmail.com with ESMTPSA id p9-20020a1709026b8900b0016372486febsm10011584plk.297.2022.06.28.20.24.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 28 Jun 2022 20:24:04 -0700 (PDT)
+Received: by debian.me (Postfix, from userid 1000)
+	id E4C29103832; Wed, 29 Jun 2022 10:23:59 +0700 (WIB)
+Date: Wed, 29 Jun 2022 10:23:58 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Mauro Carvalho Chehab <mchehab@kernel.org>
+Message-ID: <YrvFzoH61feRFoxV@debian.me>
+References: <cover.1656409369.git.mchehab@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.0
-Content-Language: en-US
-To: Dmitry Osipenko <dmitry.osipenko@collabora.com>,
- David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu
- <olvaffe@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Gert Wollny <gert.wollny@collabora.com>,
- Gustavo Padovan <gustavo.padovan@collabora.com>,
- Daniel Stone <daniel@fooishbar.org>,
- Tomeu Vizoso <tomeu.vizoso@collabora.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Herring <robh@kernel.org>, Steven Price <steven.price@arm.com>,
- Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
- Rob Clark <robdclark@gmail.com>, Emil Velikov <emil.l.velikov@gmail.com>,
- Robin Murphy <robin.murphy@arm.com>, Qiang Yu <yuq825@gmail.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding
- <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Alex Deucher <alexander.deucher@amd.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-References: <20220526235040.678984-1-dmitry.osipenko@collabora.com>
- <20220526235040.678984-2-dmitry.osipenko@collabora.com>
-From: =?UTF-8?Q?Thomas_Hellstr=c3=b6m_=28Intel=29?= <thomas_os@shipmail.org>
-In-Reply-To: <20220526235040.678984-2-dmitry.osipenko@collabora.com>
-X-MailFrom: thomas_os@shipmail.org
-X-Mailman-Rule-Hits: member-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address
-Message-ID-Hash: 6MUJTYG3MSVNWJL47IIJOPEGVNU5XGAY
-X-Message-ID-Hash: 6MUJTYG3MSVNWJL47IIJOPEGVNU5XGAY
-X-Mailman-Approved-At: Wed, 20 Jul 2022 08:17:16 +0000
-CC: intel-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, linux-tegra@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, kernel@collabora.com, linux-media@vger.kernel.org
+Content-Disposition: inline
+In-Reply-To: <cover.1656409369.git.mchehab@kernel.org>
+X-MailFrom: bagasdotme@gmail.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: KPFM3GEPTYHKYAJQJFH6IH67BAL3WOGF
+X-Message-ID-Hash: KPFM3GEPTYHKYAJQJFH6IH67BAL3WOGF
+X-Mailman-Approved-At: Wed, 20 Jul 2022 08:21:11 +0000
+CC: Linux Doc Mailing List <linux-doc@vger.kernel.org>, Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, "David S. Miller" <davem@davemloft.net>, "H. Peter Anvin" <hpa@zytor.com>, Alexander Potapenko <glider@google.com>, Alexander Viro <viro@zeniv.linux.org.uk>, Andrew Morton <akpm@linux-foundation.org>, Andrey Grodzovsky <andrey.grodzovsky@amd.com>, Borislav Petkov <bp@alien8.de>, Chanwoo Choi <cw00.choi@samsung.com>, Daniel Vetter <daniel@ffwll.ch>, Dave Hansen <dave.hansen@linux.intel.com>, David Airlie <airlied@linux.ie>, Dmitry Vyukov <dvyukov@google.com>, Eric Dumazet <edumazet@google.com>, Felipe Balbi <balbi@kernel.org>, Heikki Krogerus <heikki.krogerus@linux.intel.com>, Ingo Molnar <mingo@redhat.com>, Jakub Kicinski <kuba@kernel.org>, Johannes Berg <johannes@sipsolutions.net>, Kyungmin Park <kyungmin.park@samsung.com>, Marco Elver <elver@google.com>, M
+ yungJoo Ham <myungjoo.ham@samsung.com>, Paolo Abeni <pabeni@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, Thomas Gleixner <tglx@linutronix.de>, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, kasan-dev@googlegroups.com, linaro-mm-sig@lists.linaro.org, linux-cachefs@redhat.com, linux-fsdevel@vger.kernel.org, linux-media@vger.kernel.org, linux-mm@kvack.org, linux-pm@vger.kernel.org, linux-sgx@vger.kernel.org, linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org, netdev@vger.kernel.org, x86@kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v6 01/22] drm/gem: Properly annotate WW context on drm_gem_lock_reservations() error
+Subject: [Linaro-mm-sig] Re: [PATCH 00/22] Fix kernel-doc warnings at linux-next
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6MUJTYG3MSVNWJL47IIJOPEGVNU5XGAY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KPFM3GEPTYHKYAJQJFH6IH67BAL3WOGF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGksDQoNCk9uIDUvMjcvMjIgMDE6NTAsIERtaXRyeSBPc2lwZW5rbyB3cm90ZToNCj4gVXNlIHd3
-X2FjcXVpcmVfZmluaSgpIGluIHRoZSBlcnJvciBjb2RlIHBhdGhzLiBPdGhlcndpc2UgbG9ja2Rl
-cA0KPiB0aGlua3MgdGhhdCBsb2NrIGlzIGhlbGQgd2hlbiBsb2NrJ3MgbWVtb3J5IGlzIGZyZWVk
-IGFmdGVyIHRoZQ0KPiBkcm1fZ2VtX2xvY2tfcmVzZXJ2YXRpb25zKCkgZXJyb3IuIFRoZSBXVyBu
-ZWVkcyB0byBiZSBhbm5vdGF0ZWQNCj4gYXMgImZyZWVkIg0KDQpzIC9XVy93d19hY3F1aXJlX2Nv
-bnRleHQvID8NCnMgLyJmcmVlZCIvInJlbGVhc2VkIi8gPw0KDQoNCj4gLCB3aGljaCBmaXhlcyB0
-aGUgbm9pc3kgIldBUk5JTkc6IGhlbGQgbG9jayBmcmVlZCEiIHNwbGF0DQo+IG9mIFZpcnRJTy1H
-UFUgZHJpdmVyIHdpdGggQ09ORklHX0RFQlVHX01VVEVYRVM9eSBhbmQgZW5hYmxlZCBsb2NrZGVw
-Lg0KPg0KPiBDYzogc3RhYmxlQHZnZXIua2VybmVsLm9yZw0KDQpDYW4geW91IGRpZyB1cCB0aGUg
-Y29tbWl0IGluIGVycm9yIGFuZCBhZGQgYSBGaXhlczogVGFnPw0KDQpVc2luZyB0aGF0IGFuZCAi
-ZGltIGZpeGVzIiB3aWxsIGFsc28gbWFrZSB0aGUgQ2M6IHN0YWJsZSB0YWcgYSBiaXQgbW9yZSAN
-CnZlcmJvc2UuDQoNCldpdGggdGhhdCBmaXhlZCwNCg0KUmV2aWV3ZWQtYnk6IFRob21hcyBIZWxs
-c3Ryw7ZtIDx0aG9tYXMuaGVsbHN0cm9tQGxpbnV4LmludGVsLmNvbT4NCg0KDQo+IFNpZ25lZC1v
-ZmYtYnk6IERtaXRyeSBPc2lwZW5rbyA8ZG1pdHJ5Lm9zaXBlbmtvQGNvbGxhYm9yYS5jb20+DQo+
-IC0tLQ0KPiAgIGRyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtLmMgfCA0ICsrLS0NCj4gICAxIGZpbGUg
-Y2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KPg0KPiBkaWZmIC0tZ2l0
-IGEvZHJpdmVycy9ncHUvZHJtL2RybV9nZW0uYyBiL2RyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtLmMN
-Cj4gaW5kZXggZWIwYzJkMDQxZjEzLi44NmQ2NzBjNzEyODYgMTAwNjQ0DQo+IC0tLSBhL2RyaXZl
-cnMvZ3B1L2RybS9kcm1fZ2VtLmMNCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2RybV9nZW0uYw0K
-PiBAQCAtMTIyNiw3ICsxMjI2LDcgQEAgZHJtX2dlbV9sb2NrX3Jlc2VydmF0aW9ucyhzdHJ1Y3Qg
-ZHJtX2dlbV9vYmplY3QgKipvYmpzLCBpbnQgY291bnQsDQo+ICAgCQlyZXQgPSBkbWFfcmVzdl9s
-b2NrX3Nsb3dfaW50ZXJydXB0aWJsZShvYmotPnJlc3YsDQo+ICAgCQkJCQkJCQkgYWNxdWlyZV9j
-dHgpOw0KPiAgIAkJaWYgKHJldCkgew0KPiAtCQkJd3dfYWNxdWlyZV9kb25lKGFjcXVpcmVfY3R4
-KTsNCj4gKwkJCXd3X2FjcXVpcmVfZmluaShhY3F1aXJlX2N0eCk7DQo+ICAgCQkJcmV0dXJuIHJl
-dDsNCj4gICAJCX0NCj4gICAJfQ0KPiBAQCAtMTI1MSw3ICsxMjUxLDcgQEAgZHJtX2dlbV9sb2Nr
-X3Jlc2VydmF0aW9ucyhzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKipvYmpzLCBpbnQgY291bnQsDQo+
-ICAgCQkJCWdvdG8gcmV0cnk7DQo+ICAgCQkJfQ0KPiAgIA0KPiAtCQkJd3dfYWNxdWlyZV9kb25l
-KGFjcXVpcmVfY3R4KTsNCj4gKwkJCXd3X2FjcXVpcmVfZmluaShhY3F1aXJlX2N0eCk7DQo+ICAg
-CQkJcmV0dXJuIHJldDsNCj4gICAJCX0NCj4gICAJfQ0KX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
-YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
-dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+On Tue, Jun 28, 2022 at 10:46:04AM +0100, Mauro Carvalho Chehab wrote:
+> As we're currently discussing about making kernel-doc issues fatal when
+> CONFIG_WERROR is enable, let's fix all 60 kernel-doc warnings 
+> inside linux-next:
+> 
+
+To be fair, besides triggering error on kernel-doc warnings, Sphinx
+warnings should also be errors on CONFIG_WERROR.
+
+-- 
+An old man doll... just what I always wanted! - Clara
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
