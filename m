@@ -2,497 +2,261 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B39C57B4E0
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 12:54:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F54157B7D0
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 15:47:36 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 76CD24047A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 10:54:22 +0000 (UTC)
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by lists.linaro.org (Postfix) with ESMTPS id 2820D3ED9E
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 20 Jul 2022 10:54:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1658314459; x=1689850459;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=dzRSOCecOKuSp5kCoV+oNzT4jn93g84yhLPZPXbgd+Q=;
-  b=IEDkw607AOQ2z1V+DCkTtI1jQ9BCV88icN/VwIK2sygojWKNVJKAtmbr
-   HJUR+11V8aeQGiWMioEG7d3/ECGGIzoLoOpAnJzCOCNPmWp584Wy8vWqc
-   QD1uIwnj1F+2uxRDrzViAlDbAlNVLJPNQR7v5tBQ/STXKb72OVlDWO667
-   M7YTE9PhuCaESjJQZIjzeW1M9MwYN5mINGSJ5aDlhQ9AbmzlSdZsQCLO7
-   8ftsnxfFj7nxyFwJcDaQFd1lbUQJ10Vdhp0Gn1QYxUNOHlxLRMvT5GHMt
-   HULSi3RItxKXAnAHJfjcSNiGGehxqlwNcgNaUgLBSy5rAATWFeIM0bdj7
-   Q==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10413"; a="287902163"
-X-IronPort-AV: E=Sophos;i="5.92,286,1650956400";
-   d="scan'208";a="287902163"
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jul 2022 03:54:18 -0700
-X-IronPort-AV: E=Sophos;i="5.92,286,1650956400";
-   d="scan'208";a="630728805"
-Received: from spmccann-mobl.ger.corp.intel.com (HELO [10.213.200.99]) ([10.213.200.99])
-  by orsmga001-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jul 2022 03:54:11 -0700
-Message-ID: <567823d5-57ba-30db-dd64-de609df4d8c5@linux.intel.com>
-Date: Wed, 20 Jul 2022 11:54:09 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+	by lists.linaro.org (Postfix) with ESMTP id AD0AD4798A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 13:47:35 +0000 (UTC)
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com (mail-eopbgr80057.outbound.protection.outlook.com [40.107.8.57])
+	by lists.linaro.org (Postfix) with ESMTPS id C3F453EBFA
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Jun 2022 14:47:06 +0000 (UTC)
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
+ b=dGKQwBBX3JVLheREUf4jSsd1GKz9lX1cSY+jBKG12q5gzbC+sdox+V+yqPHcHdGa2SgO6G/wIyfov4eSRiR7qJeiu9tFkwG/ZnSVVJv0txg1ZVZ1CzBzAQVTnsmJLz+0YMBDJYKgtT53XqNhU2EgbOOi9GdoHmQ//oNjxMsR/UlZlqHBkFZxCWz6YeCLVZKb0ZGFMhVGGTyf36b6ApOLAjLdj6Mxx3MQ/VJYKLLSGkm95rli+VeXguCAD0k57LKb4a/dkJeArj5BRsLkOMpl/HZbKDFykPd7ETh8Ow3Hzrw2D/rMDJn5+Q/a29p8rnHES0ia/b2FfGwrVzrla5xFbQ==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nCNuTTwxH7u6QhRhAgEPpQd5RBZOzHHHVqxF+negakM=;
+ b=PRA0S5nSK5ZEfzdSl47Q3CDqZ1saqbBSeufbHrDANpbarb96l63dTvW6R2VFEsuaf0ChUuVwiWV3mVK+yOnmbJlVEDf+soroSNNqNHDod1eQ+a8mon1+ZB7cC0xUvxuHHwmCSfuz73l0r89l3WWqoUW9b3GeXuf1ve19+CNZwtvmsfSWhQdMnBtXfg7jAC6FLXrvlC5uTYBeFNDhchja9HFWj+3E6ZZA/pbB1aYFcMsHU4L7bEhb7C6/jKmbBJsuDf8YXRSUmCYiQXezaLlXEwaieWd4Wmo2fOSNQlzJcxLVDWIu9WwzfjMhWEikPyc/LphTLPJkySM+PKpJECejow==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 63.35.35.123) smtp.rcpttodomain=lists.linaro.org smtp.mailfrom=arm.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=arm.com;
+ dkim=pass (signature was verified) header.d=armh.onmicrosoft.com; arc=pass (0
+ oda=1 ltdi=1 spf=[1,1,smtp.mailfrom=arm.com] dkim=[1,1,header.d=arm.com]
+ dmarc=[1,1,header.from=arm.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nCNuTTwxH7u6QhRhAgEPpQd5RBZOzHHHVqxF+negakM=;
+ b=xYewEEiHe2E6YwXugFNNcwHHWTt52J7WaEPXGAhThpArUsmNfFFfbhJkT4FKsgpnUKFWZRRgYV43sxSdTLNmOhgyYBUqOIwE+afxDaY/8BJRl28j8tjIY2Mj1SA8YFFL37lDvRhiCUrvtqmK2HMgd14aQ+gkCcX9liDdz2Vx8QE=
+Received: from AS9P251CA0023.EURP251.PROD.OUTLOOK.COM (2603:10a6:20b:50f::19)
+ by VE1PR08MB5776.eurprd08.prod.outlook.com (2603:10a6:800:1ac::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5373.17; Wed, 29 Jun
+ 2022 14:46:45 +0000
+Received: from AM5EUR03FT031.eop-EUR03.prod.protection.outlook.com
+ (2603:10a6:20b:50f:cafe::4a) by AS9P251CA0023.outlook.office365.com
+ (2603:10a6:20b:50f::19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5395.14 via Frontend
+ Transport; Wed, 29 Jun 2022 14:46:45 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 63.35.35.123)
+ smtp.mailfrom=arm.com; dkim=pass (signature was verified)
+ header.d=armh.onmicrosoft.com;dmarc=pass action=none header.from=arm.com;
+Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
+ 63.35.35.123 as permitted sender) receiver=protection.outlook.com;
+ client-ip=63.35.35.123; helo=64aa7808-outbound-1.mta.getcheckrecipient.com;
+ pr=C
+Received: from 64aa7808-outbound-1.mta.getcheckrecipient.com (63.35.35.123) by
+ AM5EUR03FT031.mail.protection.outlook.com (10.152.16.111) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5373.15 via Frontend Transport; Wed, 29 Jun 2022 14:46:44 +0000
+Received: ("Tessian outbound 9336577968ca:v121"); Wed, 29 Jun 2022 14:46:44 +0000
+X-CheckRecipientChecked: true
+X-CR-MTA-CID: 54b399280bc09e21
+X-CR-MTA-TID: 64aa7808
+Received: from 7b42733dac57.2
+	by 64aa7808-outbound-1.mta.getcheckrecipient.com id BB638F8F-FE66-4A8C-90AE-B171B8B02429.1;
+	Wed, 29 Jun 2022 14:46:33 +0000
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+    by 64aa7808-outbound-1.mta.getcheckrecipient.com with ESMTPS id 7b42733dac57.2
+    (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384);
+    Wed, 29 Jun 2022 14:46:33 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ReodyvBD2fjlP1lMYHt84wyUzficGq/wKvMfEMXInZXdfM7ki21+tum+akQUHCstONSV4eAGVuH8IfoWiLg08SRECtUwrq5wKgVw+dNtbzqUAOPo+Tw8bdsXRhoxpBi+j6R3F0r/qpfXYSlNuCSI0lTG9kn7Itf57IvldHFVkmXE1Jb6YPmsBJrQBg6R4Mu+7rYMVeUtgk/LS1gLsSqg5zw1H1C0p1rrMhYuWwNGrJlVBM1DPWVg5STnaUEaaCAgy6s/8h9dhVPTOohA/GNF+ET64G4Q5gtyhNelXoZC9Q8zcx45VLX8W2ZngEaVxBQuA0VOz8GFWOeQYk8fsaLK1A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nCNuTTwxH7u6QhRhAgEPpQd5RBZOzHHHVqxF+negakM=;
+ b=oJZzii4Yel1CdWvXRnYfokD5WIwjh/SaEp0q3V0+wXIkzfZHmQ0OaLJLAG5QJYN04k/DNRX21KUFyQYY6xXK+FGyZRwO02WmjHfeSVnJJNFWZ4lLMot/Mst/lRyb0Ko2+lZAYvPlim3B6e1a5vfOK3EVpHFz+Teh2VyQ585YlP+kypvXObgjgejdqaUbM/HjqhnVE5/6vfZq61vA4asOqc8LgD/SEkGf22qXGxl0FBIteaBFIK3WaLVTWjdJ+qgK9bJDqpekiejvifu85/Uxezz0l8PKj1v5MLhUB5I7WZNIchz5z80wNHNoPBHhI27xC7L6FkltTDRhwLw9Kw3m3g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=arm.com; dmarc=pass action=none header.from=arm.com; dkim=pass
+ header.d=arm.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=armh.onmicrosoft.com;
+ s=selector2-armh-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nCNuTTwxH7u6QhRhAgEPpQd5RBZOzHHHVqxF+negakM=;
+ b=xYewEEiHe2E6YwXugFNNcwHHWTt52J7WaEPXGAhThpArUsmNfFFfbhJkT4FKsgpnUKFWZRRgYV43sxSdTLNmOhgyYBUqOIwE+afxDaY/8BJRl28j8tjIY2Mj1SA8YFFL37lDvRhiCUrvtqmK2HMgd14aQ+gkCcX9liDdz2Vx8QE=
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+Received: from AS8PR08MB8111.eurprd08.prod.outlook.com (2603:10a6:20b:54d::22)
+ by VI1PR08MB3711.eurprd08.prod.outlook.com (2603:10a6:803:bc::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5373.16; Wed, 29 Jun
+ 2022 14:46:22 +0000
+Received: from AS8PR08MB8111.eurprd08.prod.outlook.com
+ ([fe80::8bc:5425:ded2:3a38]) by AS8PR08MB8111.eurprd08.prod.outlook.com
+ ([fe80::8bc:5425:ded2:3a38%4]) with mapi id 15.20.5395.014; Wed, 29 Jun 2022
+ 14:46:22 +0000
+Message-ID: <05513f59-0bd9-77cd-36d4-41027bc339be@arm.com>
+Date: Wed, 29 Jun 2022 15:46:20 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.10.0
 Content-Language: en-US
-To: Mauro Carvalho Chehab <mchehab@kernel.org>
-References: <cover.1657800199.git.mchehab@kernel.org>
- <9f535a97f32320a213a619a30c961ba44b595453.1657800199.git.mchehab@kernel.org>
-From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-Organization: Intel Corporation UK Plc
-In-Reply-To: <9f535a97f32320a213a619a30c961ba44b595453.1657800199.git.mchehab@kernel.org>
-Message-ID-Hash: PUGACU5TI2JSEFNDLKTXASIQ5KCT4A5W
-X-Message-ID-Hash: PUGACU5TI2JSEFNDLKTXASIQ5KCT4A5W
-X-MailFrom: tvrtko.ursulin@linux.intel.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Chris Wilson <chris.p.wilson@intel.com>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>, Andi Shyti <andi.shyti@linux.intel.com>, Ashutosh Dixit <ashutosh.dixit@intel.com>, Ayaz A Siddiqui <ayaz.siddiqui@intel.com>, Casey Bowman <casey.g.bowman@intel.com>, Daniel Vetter <daniel@ffwll.ch>, Daniele Ceraolo Spurio <daniele.ceraolospurio@intel.com>, Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>, Jani Nikula <jani.nikula@linux.intel.com>, Jason Ekstrand <jason@jlekstrand.net>, John Harrison <John.C.Harrison@Intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Lucas De Marchi <lucas.demarchi@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Matt Roper <matthew.d.roper@intel.com>, Matthew Auld <matthew.auld@intel.com>, Prathap Kumar Valsan <prathap.kumar.valsan@intel.com>, Ramalingam C <ramalingam.c@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Sumit Sem
- wal <sumit.semwal@linaro.org>, Tomas Winkler <tomas.winkler@intel.com>, dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, stable@vger.kernel.org, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Fei Yang <fei.yang@intel.com>
+To: Pekka Paalanen <ppaalanen@gmail.com>
+References: <AS8PR08MB81117652E417826E741154B8F8B99@AS8PR08MB8111.eurprd08.prod.outlook.com>
+ <20220627175026.6a5dd239@eldfell>
+From: Dennis Tsiang <dennis.tsiang@arm.com>
+In-Reply-To: <20220627175026.6a5dd239@eldfell>
+X-ClientProxiedBy: LO4P123CA0386.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:18f::13) To AS8PR08MB8111.eurprd08.prod.outlook.com
+ (2603:10a6:20b:54d::22)
+MIME-Version: 1.0
+X-MS-Office365-Filtering-Correlation-Id: 392db90d-04f8-4c35-151b-08da59de2fff
+X-MS-TrafficTypeDiagnostic: 
+	VI1PR08MB3711:EE_|AM5EUR03FT031:EE_|VE1PR08MB5776:EE_
+x-checkrecipientrouted: true
+NoDisclaimer: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: 
+ URFyHkDK2yR3bwJnRbZuhgkTUz6ULDYDfBbPvp7HVBP37lndakl3NDIKZZv2gjt2Fx8Wu7XnTtUdEUHAabsgEXLKRDQmzQ/pEwKSSIso1Xh421bgv8fN+D/+tF+AMs+r8DQyT5vxPH9KKP5IqoLejRJLsoXDayG5t7LL6zgkrQnSKSF4NpsflvoPVoBn8wdAgO0CnMG4274nw9O8FO7bhVw9uEqPtsv4m6rGCgwOSZ+5bXQQeU+cas31tqBhQg/LYVfhO6llwYLbOy5i1fSSQlGY3O85GmAYvqBzXJBvETRtnNpsnsv2uQJ1UJyFnf7JKKeDjpeQoFMxKJUYxOfLxO/eN6VfZ+rstH6aPOhSNpQdYH5Zzwdq30Nk40ie4EuDTdhnkOgjbWGs3xGsFv1rhd17KUGcA3ktuChT5WTkI9DVBFSPIYHvuzS76mSpujXWtOSrYP2ZlTNpZ7E9beRcls3AiQegWABpG+PbnvDBoEGkTc0ntSTrRlKGechce09BJApWSW10BdYti7doA0NK6Pgfpb+GOXGVUTS/LdgasDTb/f4q2K+yFlOgHUcPtpKNLby0ZZ3DJpuSeWMLrF4a2YRVUr9jgDWfBe4P/qQmks0RhcKBMDZWw+rUnmv4WRuOqQ3W+ZeDtWmfjBlx3M13JYuPWmx1k2Q9i85Eo4VeZ3tGPfOnesrMSq3cRN1wLUc3nztHSTxzi+YgP5HWxbFKYAVnKNUHGGbS8MFdbWK6igPV6TdzEHuzQUzXesZul6ElSFuKFO7sQU/K5urZqABLW/DJBfccgizX7PBvr2HIZwc+YttCNpUTrIQuWf4EiV1plB9cK8n2HvOtMEgHeVJokw==
+X-Forefront-Antispam-Report-Untrusted: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR08MB8111.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(396003)(366004)(376002)(346002)(39860400002)(136003)(8676002)(316002)(41300700001)(31696002)(478600001)(66556008)(2616005)(86362001)(36756003)(6916009)(6486002)(2906002)(6506007)(53546011)(66476007)(44832011)(31686004)(7416002)(83380400001)(54906003)(6512007)(5660300002)(4326008)(26005)(38100700002)(186003)(66946007)(8936002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR08MB3711
+Original-Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arm.com;
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: 
+ AM5EUR03FT031.eop-EUR03.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 
+	72356d92-de01-4898-937e-08da59de225b
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	XIDCC5ZUqxhaJFgXAEj8CEjNLw6tcSIXiovXW/VKyJtKGlim6UpXIt7H9Y8dSf5snoiy7j1Z7INO6flvbELFWSNQeG2PeYmEOmcOpL/r4ccyh6OpW2ibHR6uJY7NifRT9pE0fRRjHpQDf1t+umi81M2bcMo+DKlHoKGY995LF7Odm6GeU2Inp+5t76dmy0gR1PCTg2SNcf2Rib1Pcgwc5j/7MGFIMO1PM1wjuPQQqDc0CrN8m1fKUQ11JpEiLW9G6wArfQgbLrZ/xkVSN2VTPJVk/r+QVWkgKwPBNbR9pYgMar5YGTKb44+bZdqAS1Xs8dLRi573ObpQYFb3PuHYbQQI2AfkMbSTqT36H2sSx9WtyalQBNQWXzHy6y8jC+MYOUhKZ/piUwcZtDX18VeiFlTxZA7/0tZkusNfAWxoLB2S84uP7VHCEjivjtEXMfZEWo5u8jBGIHIhdu0E1xd+G1jMPaWL1u89MAl/HnSh1cQFS7edcuUh5CTp2ekZK6MH/ytsxvxuqd5FqmDL738bH6R4vtt8I2nszCyXjgMzy4X3UtXBAasdc4f/OviP/LoroLfd7cWticB4cuxo3gKWcCY1rRtWbtsxkpqPG6ELrgHL3z40D2qEAQkewW6W2TBT8PqNxT/0mJrj9DgQ4p8mWFEsRhvp1/k8TwLrcncNZe5sHt46HEmBRL9g77EvV9wJIdE9SYn4Zz9w3n3ATuHERtR+NUzWLVfSYK5VJMQQNpPqwFFYtQOolqXrXWplWU+mVBJQltbsC7LKd3nDfO421xXL05E0WqW0Ru+8nY53OOPYGfRaQNkkNGbkiNDWT4xDb17h7T/41pMRH6sd0zCxXg==
+X-Forefront-Antispam-Report: 
+	CIP:63.35.35.123;CTRY:IE;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:64aa7808-outbound-1.mta.getcheckrecipient.com;PTR:ec2-63-35-35-123.eu-west-1.compute.amazonaws.com;CAT:NONE;SFS:(13230016)(4636009)(39860400002)(346002)(396003)(136003)(376002)(46966006)(40470700004)(36840700001)(86362001)(47076005)(31696002)(356005)(186003)(4326008)(82740400003)(83380400001)(2906002)(36860700001)(336012)(40480700001)(36756003)(8936002)(6486002)(54906003)(40460700003)(31686004)(316002)(8676002)(6862004)(82310400005)(478600001)(53546011)(26005)(41300700001)(44832011)(6506007)(70206006)(2616005)(5660300002)(6512007)(81166007)(70586007)(43740500002);DIR:OUT;SFP:1101;
+X-OriginatorOrg: arm.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jun 2022 14:46:44.8423
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 392db90d-04f8-4c35-151b-08da59de2fff
+X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[63.35.35.123];Helo=[64aa7808-outbound-1.mta.getcheckrecipient.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	AM5EUR03FT031.eop-EUR03.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VE1PR08MB5776
+X-MailFrom: Dennis.Tsiang@arm.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: TCM2RZJ5WVA3W33J4MZ6CER72GJAG6CZ
+X-Message-ID-Hash: TCM2RZJ5WVA3W33J4MZ6CER72GJAG6CZ
+X-Mailman-Approved-At: Wed, 20 Jul 2022 13:47:33 +0000
+CC: christian.koenig@amd.com, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Liviu Dudau <Liviu.Dudau@arm.com>, Brian Starkey <Brian.Starkey@arm.com>, Lisa Wu <lisa.wu@arm.com>, Normunds Rieksts <Normunds.Rieksts@arm.com>, nd <nd@arm.com>, daniel@ffwll.ch, sumit.semwal@linaro.org, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, mripard@kernel.org, tzimmermann@suse.de, airlied@linux.ie, maarten.lankhorst@linux.intel.com, david.harvey-macaulay@arm.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 06/21] drm/i915/gt: Batch TLB invalidations
+Subject: [Linaro-mm-sig] Re: [PATCH 0/1] [RFC] drm/fourcc: Add new unsigned R16_UINT/RG1616_UINT formats
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PUGACU5TI2JSEFNDLKTXASIQ5KCT4A5W/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TCM2RZJ5WVA3W33J4MZ6CER72GJAG6CZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-
-On 14/07/2022 13:06, Mauro Carvalho Chehab wrote:
-> From: Chris Wilson <chris.p.wilson@intel.com>
-> 
-> Invalidate TLB in patch, in order to reduce performance regressions.
-> 
-> Currently, every caller performs a full barrier around a TLB
-> invalidation, ignoring all other invalidations that may have already
-> removed their PTEs from the cache. As this is a synchronous operation
-> and can be quite slow, we cause multiple threads to contend on the TLB
-> invalidate mutex blocking userspace.
-> 
-> We only need to invalidate the TLB once after replacing our PTE to
-> ensure that there is no possible continued access to the physical
-> address before releasing our pages. By tracking a seqno for each full
-> TLB invalidate we can quickly determine if one has been performed since
-> rewriting the PTE, and only if necessary trigger one for ourselves.
-> 
-> That helps to reduce the performance regression introduced by TLB
-> invalidate logic.
-> 
-> [mchehab: rebased to not require moving the code to a separate file]
-> 
-> Cc: stable@vger.kernel.org
-> Fixes: 7938d61591d3 ("drm/i915: Flush TLBs before releasing backing store")
-> Suggested-by: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
-> Signed-off-by: Chris Wilson <chris.p.wilson@intel.com>
-> Cc: Fei Yang <fei.yang@intel.com>
-> Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
-> ---
-> 
-> To avoid mailbombing on a large number of people, only mailing lists were C/C on the cover.
-> See [PATCH v2 00/21] at: https://lore.kernel.org/all/cover.1657800199.git.mchehab@kernel.org/
-> 
->   .../gpu/drm/i915/gem/i915_gem_object_types.h  |  3 +-
->   drivers/gpu/drm/i915/gem/i915_gem_pages.c     | 21 +++++---
->   drivers/gpu/drm/i915/gt/intel_gt.c            | 53 ++++++++++++++-----
->   drivers/gpu/drm/i915/gt/intel_gt.h            | 12 ++++-
->   drivers/gpu/drm/i915/gt/intel_gt_types.h      | 18 ++++++-
->   drivers/gpu/drm/i915/gt/intel_ppgtt.c         |  8 ++-
->   drivers/gpu/drm/i915/i915_vma.c               | 34 +++++++++---
->   drivers/gpu/drm/i915/i915_vma.h               |  1 +
->   drivers/gpu/drm/i915/i915_vma_resource.c      |  5 +-
->   drivers/gpu/drm/i915/i915_vma_resource.h      |  6 ++-
->   10 files changed, 125 insertions(+), 36 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_object_types.h b/drivers/gpu/drm/i915/gem/i915_gem_object_types.h
-> index 5cf36a130061..9f6b14ec189a 100644
-> --- a/drivers/gpu/drm/i915/gem/i915_gem_object_types.h
-> +++ b/drivers/gpu/drm/i915/gem/i915_gem_object_types.h
-> @@ -335,7 +335,6 @@ struct drm_i915_gem_object {
->   #define I915_BO_READONLY          BIT(7)
->   #define I915_TILING_QUIRK_BIT     8 /* unknown swizzling; do not release! */
->   #define I915_BO_PROTECTED         BIT(9)
-> -#define I915_BO_WAS_BOUND_BIT     10
->   	/**
->   	 * @mem_flags - Mutable placement-related flags
->   	 *
-> @@ -616,6 +615,8 @@ struct drm_i915_gem_object {
->   		 * pages were last acquired.
->   		 */
->   		bool dirty:1;
-> +
-> +		u32 tlb;
->   	} mm;
->   
->   	struct {
-> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_pages.c b/drivers/gpu/drm/i915/gem/i915_gem_pages.c
-> index 6835279943df..8357dbdcab5c 100644
-> --- a/drivers/gpu/drm/i915/gem/i915_gem_pages.c
-> +++ b/drivers/gpu/drm/i915/gem/i915_gem_pages.c
-> @@ -191,6 +191,18 @@ static void unmap_object(struct drm_i915_gem_object *obj, void *ptr)
->   		vunmap(ptr);
->   }
->   
-> +static void flush_tlb_invalidate(struct drm_i915_gem_object *obj)
-> +{
-> +	struct drm_i915_private *i915 = to_i915(obj->base.dev);
-> +	struct intel_gt *gt = to_gt(i915);
-> +
-> +	if (!obj->mm.tlb)
-> +		return;
-> +
-> +	intel_gt_invalidate_tlb(gt, obj->mm.tlb);
-> +	obj->mm.tlb = 0;
-> +}
-> +
->   struct sg_table *
->   __i915_gem_object_unset_pages(struct drm_i915_gem_object *obj)
->   {
-> @@ -216,14 +228,7 @@ __i915_gem_object_unset_pages(struct drm_i915_gem_object *obj)
->   	__i915_gem_object_reset_page_iter(obj);
->   	obj->mm.page_sizes.phys = obj->mm.page_sizes.sg = 0;
->   
-> -	if (test_and_clear_bit(I915_BO_WAS_BOUND_BIT, &obj->flags)) {
-> -		struct drm_i915_private *i915 = to_i915(obj->base.dev);
-> -		struct intel_gt *gt = to_gt(i915);
-> -		intel_wakeref_t wakeref;
-> -
-> -		with_intel_gt_pm_if_awake(gt, wakeref)
-> -			intel_gt_invalidate_tlbs(gt);
-> -	}
-> +	flush_tlb_invalidate(obj);
->   
->   	return pages;
->   }
-> diff --git a/drivers/gpu/drm/i915/gt/intel_gt.c b/drivers/gpu/drm/i915/gt/intel_gt.c
-> index 5c55a90672f4..f435e06125aa 100644
-> --- a/drivers/gpu/drm/i915/gt/intel_gt.c
-> +++ b/drivers/gpu/drm/i915/gt/intel_gt.c
-> @@ -38,8 +38,6 @@ static void __intel_gt_init_early(struct intel_gt *gt)
->   {
->   	spin_lock_init(&gt->irq_lock);
->   
-> -	mutex_init(&gt->tlb_invalidate_lock);
-> -
->   	INIT_LIST_HEAD(&gt->closed_vma);
->   	spin_lock_init(&gt->closed_lock);
->   
-> @@ -50,6 +48,8 @@ static void __intel_gt_init_early(struct intel_gt *gt)
->   	intel_gt_init_reset(gt);
->   	intel_gt_init_requests(gt);
->   	intel_gt_init_timelines(gt);
-> +	mutex_init(&gt->tlb.invalidate_lock);
-> +	seqcount_mutex_init(&gt->tlb.seqno, &gt->tlb.invalidate_lock);
->   	intel_gt_pm_init_early(gt);
->   
->   	intel_uc_init_early(&gt->uc);
-> @@ -770,6 +770,7 @@ void intel_gt_driver_late_release_all(struct drm_i915_private *i915)
->   		intel_gt_fini_requests(gt);
->   		intel_gt_fini_reset(gt);
->   		intel_gt_fini_timelines(gt);
-> +		mutex_destroy(&gt->tlb.invalidate_lock);
->   		intel_engines_free(gt);
->   	}
->   }
-> @@ -908,7 +909,7 @@ get_reg_and_bit(const struct intel_engine_cs *engine, const bool gen8,
->   	return rb;
->   }
->   
-> -void intel_gt_invalidate_tlbs(struct intel_gt *gt)
-> +static void mmio_invalidate_full(struct intel_gt *gt)
->   {
->   	static const i915_reg_t gen8_regs[] = {
->   		[RENDER_CLASS]			= GEN8_RTCR,
-> @@ -931,12 +932,6 @@ void intel_gt_invalidate_tlbs(struct intel_gt *gt)
->   	const i915_reg_t *regs;
->   	unsigned int num = 0;
->   
-> -	if (I915_SELFTEST_ONLY(gt->awake == -ENODEV))
-> -		return;
-> -
-> -	if (intel_gt_is_wedged(gt))
-> -		return;
-> -
->   	if (GRAPHICS_VER(i915) == 12) {
->   		regs = gen12_regs;
->   		num = ARRAY_SIZE(gen12_regs);
-> @@ -951,9 +946,6 @@ void intel_gt_invalidate_tlbs(struct intel_gt *gt)
->   			  "Platform does not implement TLB invalidation!"))
->   		return;
->   
-> -	GEM_TRACE("\n");
-> -
-> -	mutex_lock(&gt->tlb_invalidate_lock);
->   	intel_uncore_forcewake_get(uncore, FORCEWAKE_ALL);
->   
->   	spin_lock_irq(&uncore->lock); /* serialise invalidate with GT reset */
-> @@ -973,6 +965,8 @@ void intel_gt_invalidate_tlbs(struct intel_gt *gt)
->   		awake |= engine->mask;
->   	}
->   
-> +	GT_TRACE(gt, "invalidated engines %08x\n", awake);
-> +
->   	/* Wa_2207587034:tgl,dg1,rkl,adl-s,adl-p */
->   	if (awake &&
->   	    (IS_TIGERLAKE(i915) ||
-> @@ -1012,5 +1006,38 @@ void intel_gt_invalidate_tlbs(struct intel_gt *gt)
->   	 * transitions.
->   	 */
->   	intel_uncore_forcewake_put_delayed(uncore, FORCEWAKE_ALL);
-> -	mutex_unlock(&gt->tlb_invalidate_lock);
-> +}
-> +
-> +static bool tlb_seqno_passed(const struct intel_gt *gt, u32 seqno)
-> +{
-> +	u32 cur = intel_gt_tlb_seqno(gt);
-> +
-> +	/* Only skip if a *full* TLB invalidate barrier has passed */
-> +	return (s32)(cur - ALIGN(seqno, 2)) > 0;
-> +}
-> +
-> +void intel_gt_invalidate_tlb(struct intel_gt *gt, u32 seqno)
-> +{
-> +	intel_wakeref_t wakeref;
-> +
-> +	if (I915_SELFTEST_ONLY(gt->awake == -ENODEV))
-> +		return;
-> +
-> +	if (intel_gt_is_wedged(gt))
-> +		return;
-> +
-> +	if (tlb_seqno_passed(gt, seqno))
-> +		return;
-> +
-> +	with_intel_gt_pm_if_awake(gt, wakeref) {
-> +		mutex_lock(&gt->tlb.invalidate_lock);
-> +		if (tlb_seqno_passed(gt, seqno))
-> +			goto unlock;
-> +
-> +		mmio_invalidate_full(gt);
-> +
-> +		write_seqcount_invalidate(&gt->tlb.seqno);
-> +unlock:
-> +		mutex_unlock(&gt->tlb.invalidate_lock);
-> +	}
->   }
-> diff --git a/drivers/gpu/drm/i915/gt/intel_gt.h b/drivers/gpu/drm/i915/gt/intel_gt.h
-> index 82d6f248d876..40b06adf509a 100644
-> --- a/drivers/gpu/drm/i915/gt/intel_gt.h
-> +++ b/drivers/gpu/drm/i915/gt/intel_gt.h
-> @@ -101,6 +101,16 @@ void intel_gt_info_print(const struct intel_gt_info *info,
->   
->   void intel_gt_watchdog_work(struct work_struct *work);
->   
-> -void intel_gt_invalidate_tlbs(struct intel_gt *gt);
-> +static inline u32 intel_gt_tlb_seqno(const struct intel_gt *gt)
-> +{
-> +	return seqprop_sequence(&gt->tlb.seqno);
-> +}
-> +
-> +static inline u32 intel_gt_next_invalidate_tlb_full(const struct intel_gt *gt)
-> +{
-> +	return intel_gt_tlb_seqno(gt) | 1;
-> +}
-> +
-> +void intel_gt_invalidate_tlb(struct intel_gt *gt, u32 seqno);
->   
->   #endif /* __INTEL_GT_H__ */
-> diff --git a/drivers/gpu/drm/i915/gt/intel_gt_types.h b/drivers/gpu/drm/i915/gt/intel_gt_types.h
-> index df708802889d..3804a583382b 100644
-> --- a/drivers/gpu/drm/i915/gt/intel_gt_types.h
-> +++ b/drivers/gpu/drm/i915/gt/intel_gt_types.h
-> @@ -11,6 +11,7 @@
->   #include <linux/llist.h>
->   #include <linux/mutex.h>
->   #include <linux/notifier.h>
-> +#include <linux/seqlock.h>
->   #include <linux/spinlock.h>
->   #include <linux/types.h>
->   #include <linux/workqueue.h>
-> @@ -83,7 +84,22 @@ struct intel_gt {
->   	struct intel_uc uc;
->   	struct intel_gsc gsc;
->   
-> -	struct mutex tlb_invalidate_lock;
-> +	struct {
-> +		/* Serialize global tlb invalidations */
-> +		struct mutex invalidate_lock;
-> +
-> +		/*
-> +		 * Batch TLB invalidations
-> +		 *
-> +		 * After unbinding the PTE, we need to ensure the TLB
-> +		 * are invalidated prior to releasing the physical pages.
-> +		 * But we only need one such invalidation for all unbinds,
-> +		 * so we track how many TLB invalidations have been
-> +		 * performed since unbind the PTE and only emit an extra
-> +		 * invalidate if no full barrier has been passed.
-> +		 */
-> +		seqcount_mutex_t seqno;
-> +	} tlb;
->   
->   	struct i915_wa_list wa_list;
->   
-> diff --git a/drivers/gpu/drm/i915/gt/intel_ppgtt.c b/drivers/gpu/drm/i915/gt/intel_ppgtt.c
-> index d8b94d638559..2da6c82a8bd2 100644
-> --- a/drivers/gpu/drm/i915/gt/intel_ppgtt.c
-> +++ b/drivers/gpu/drm/i915/gt/intel_ppgtt.c
-> @@ -206,8 +206,12 @@ void ppgtt_bind_vma(struct i915_address_space *vm,
->   void ppgtt_unbind_vma(struct i915_address_space *vm,
->   		      struct i915_vma_resource *vma_res)
->   {
-> -	if (vma_res->allocated)
-> -		vm->clear_range(vm, vma_res->start, vma_res->vma_size);
-> +	if (!vma_res->allocated)
-> +		return;
-> +
-> +	vm->clear_range(vm, vma_res->start, vma_res->vma_size);
-> +	if (vma_res->tlb)
-> +		vma_invalidate_tlb(vm, *vma_res->tlb);
->   }
->   
->   static unsigned long pd_count(u64 size, int shift)
-> diff --git a/drivers/gpu/drm/i915/i915_vma.c b/drivers/gpu/drm/i915/i915_vma.c
-> index 646f419b2035..84a9ccbc5fc5 100644
-> --- a/drivers/gpu/drm/i915/i915_vma.c
-> +++ b/drivers/gpu/drm/i915/i915_vma.c
-> @@ -538,9 +538,6 @@ int i915_vma_bind(struct i915_vma *vma,
->   				   bind_flags);
->   	}
->   
-> -	if (bind_flags & I915_VMA_LOCAL_BIND)
-> -		set_bit(I915_BO_WAS_BOUND_BIT, &vma->obj->flags);
-> -
->   	atomic_or(bind_flags, &vma->flags);
->   	return 0;
->   }
-> @@ -1311,6 +1308,19 @@ I915_SELFTEST_EXPORT int i915_vma_get_pages(struct i915_vma *vma)
->   	return err;
->   }
->   
-> +void vma_invalidate_tlb(struct i915_address_space *vm, u32 tlb)
-> +{
-> +	/*
-> +	 * Before we release the pages that were bound by this vma, we
-> +	 * must invalidate all the TLBs that may still have a reference
-> +	 * back to our physical address. It only needs to be done once,
-> +	 * so after updating the PTE to point away from the pages, record
-> +	 * the most recent TLB invalidation seqno, and if we have not yet
-> +	 * flushed the TLBs upon release, perform a full invalidation.
-> +	 */
-> +	WRITE_ONCE(tlb, intel_gt_next_invalidate_tlb_full(vm->gt));
-
-Shouldn't tlb be a pointer for this to make sense?
-
-Regards,
-
-Tvrtko
-
-> +}
-> +
->   static void __vma_put_pages(struct i915_vma *vma, unsigned int count)
->   {
->   	/* We allocate under vma_get_pages, so beware the shrinker */
-> @@ -1942,7 +1952,12 @@ struct dma_fence *__i915_vma_evict(struct i915_vma *vma, bool async)
->   		vma->vm->skip_pte_rewrite;
->   	trace_i915_vma_unbind(vma);
->   
-> -	unbind_fence = i915_vma_resource_unbind(vma_res);
-> +	if (async)
-> +		unbind_fence = i915_vma_resource_unbind(vma_res,
-> +							&vma->obj->mm.tlb);
-> +	else
-> +		unbind_fence = i915_vma_resource_unbind(vma_res, NULL);
-> +
->   	vma->resource = NULL;
->   
->   	atomic_and(~(I915_VMA_BIND_MASK | I915_VMA_ERROR | I915_VMA_GGTT_WRITE),
-> @@ -1950,10 +1965,13 @@ struct dma_fence *__i915_vma_evict(struct i915_vma *vma, bool async)
->   
->   	i915_vma_detach(vma);
->   
-> -	if (!async && unbind_fence) {
-> -		dma_fence_wait(unbind_fence, false);
-> -		dma_fence_put(unbind_fence);
-> -		unbind_fence = NULL;
-> +	if (!async) {
-> +		if (unbind_fence) {
-> +			dma_fence_wait(unbind_fence, false);
-> +			dma_fence_put(unbind_fence);
-> +			unbind_fence = NULL;
-> +		}
-> +		vma_invalidate_tlb(vma->vm, vma->obj->mm.tlb);
->   	}
->   
->   	/*
-> diff --git a/drivers/gpu/drm/i915/i915_vma.h b/drivers/gpu/drm/i915/i915_vma.h
-> index 88ca0bd9c900..5048eed536da 100644
-> --- a/drivers/gpu/drm/i915/i915_vma.h
-> +++ b/drivers/gpu/drm/i915/i915_vma.h
-> @@ -213,6 +213,7 @@ bool i915_vma_misplaced(const struct i915_vma *vma,
->   			u64 size, u64 alignment, u64 flags);
->   void __i915_vma_set_map_and_fenceable(struct i915_vma *vma);
->   void i915_vma_revoke_mmap(struct i915_vma *vma);
-> +void vma_invalidate_tlb(struct i915_address_space *vm, u32 tlb);
->   struct dma_fence *__i915_vma_evict(struct i915_vma *vma, bool async);
->   int __i915_vma_unbind(struct i915_vma *vma);
->   int __must_check i915_vma_unbind(struct i915_vma *vma);
-> diff --git a/drivers/gpu/drm/i915/i915_vma_resource.c b/drivers/gpu/drm/i915/i915_vma_resource.c
-> index 27c55027387a..5a67995ea5fe 100644
-> --- a/drivers/gpu/drm/i915/i915_vma_resource.c
-> +++ b/drivers/gpu/drm/i915/i915_vma_resource.c
-> @@ -223,10 +223,13 @@ i915_vma_resource_fence_notify(struct i915_sw_fence *fence,
->    * Return: A refcounted pointer to a dma-fence that signals when unbinding is
->    * complete.
->    */
-> -struct dma_fence *i915_vma_resource_unbind(struct i915_vma_resource *vma_res)
-> +struct dma_fence *i915_vma_resource_unbind(struct i915_vma_resource *vma_res,
-> +					   u32 *tlb)
->   {
->   	struct i915_address_space *vm = vma_res->vm;
->   
-> +	vma_res->tlb = tlb;
-> +
->   	/* Reference for the sw fence */
->   	i915_vma_resource_get(vma_res);
->   
-> diff --git a/drivers/gpu/drm/i915/i915_vma_resource.h b/drivers/gpu/drm/i915/i915_vma_resource.h
-> index 5d8427caa2ba..06923d1816e7 100644
-> --- a/drivers/gpu/drm/i915/i915_vma_resource.h
-> +++ b/drivers/gpu/drm/i915/i915_vma_resource.h
-> @@ -67,6 +67,7 @@ struct i915_page_sizes {
->    * taken when the unbind is scheduled.
->    * @skip_pte_rewrite: During ggtt suspend and vm takedown pte rewriting
->    * needs to be skipped for unbind.
-> + * @tlb: pointer for obj->mm.tlb, if async unbind. Otherwise, NULL
->    *
->    * The lifetime of a struct i915_vma_resource is from a binding request to
->    * the actual possible asynchronous unbind has completed.
-> @@ -119,6 +120,8 @@ struct i915_vma_resource {
->   	bool immediate_unbind:1;
->   	bool needs_wakeref:1;
->   	bool skip_pte_rewrite:1;
-> +
-> +	u32 *tlb;
->   };
->   
->   bool i915_vma_resource_hold(struct i915_vma_resource *vma_res,
-> @@ -131,7 +134,8 @@ struct i915_vma_resource *i915_vma_resource_alloc(void);
->   
->   void i915_vma_resource_free(struct i915_vma_resource *vma_res);
->   
-> -struct dma_fence *i915_vma_resource_unbind(struct i915_vma_resource *vma_res);
-> +struct dma_fence *i915_vma_resource_unbind(struct i915_vma_resource *vma_res,
-> +					   u32 *tlb);
->   
->   void __i915_vma_resource_init(struct i915_vma_resource *vma_res);
->   
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gMjcvMDYvMjAyMiAxNTo1MCwgUGVra2EgUGFhbGFuZW4gd3JvdGU6DQo+IE9uIE1vbiwgMjcg
+SnVuIDIwMjIgMTM6NDA6MDQgKzAwMDANCj4gRGVubmlzIFRzaWFuZyA8RGVubmlzLlRzaWFuZ0Bh
+cm0uY29tPiB3cm90ZToNCj4NCj4+IFRoaXMgcGF0Y2ggaXMgYW4gZWFybHkgUkZDIHRvIGRpc2N1
+c3MgdGhlIHZpYWJsZSBvcHRpb25zIGFuZA0KPj4gYWx0ZXJuYXRpdmVzIGZvciBpbmNsdXNpb24g
+b2YgdW5zaWduZWQgaW50ZWdlciBmb3JtYXRzIGZvciB0aGUgRFJNIEFQSS4NCj4+DQo+PiBUaGlz
+IHBhdGNoIGFkZHMgYSBuZXcgc2luZ2xlIGNvbXBvbmVudCAxNi1iaXQgYW5kIGEgdHdvIGNvbXBv
+bmVudCAzMi1iaXQNCj4+IERSTSBmb3VyY2PigJlzIHRoYXQgcmVwcmVzZW50IHVuc2lnbmVkIGlu
+dGVnZXIgZm9ybWF0cy4gVGhlIHVzZSBjYXNlIGZvcg0KPj4gbmVlZGluZyBVSU5UIGZvcm1hdHMs
+IGluIG91ciBjYXNlLCB3b3VsZCBiZSB0byBzdXBwb3J0IHVzaW5nIHJhdyBidWZmZXJzDQo+PiBm
+b3IgY2FtZXJhIElTUHMuDQo+Pg0KPj4gRm9yIGltYWdlcyBpbXBvcnRlZCB3aXRoIERSTSBmb3Vy
+Y2MgKyBtb2RpZmllciBjb21iaW5hdGlvbiwgdGhlIEdQVQ0KPj4gZHJpdmVyIG5lZWRzIGEgd2F5
+IHRvIGRldGVybWluZSB0aGUgZGF0YXR5cGUgb2YgdGhlIGZvcm1hdCB3aGljaA0KPj4gY3VycmVu
+dGx5IHRoZSBEUk0gQVBJIGRvZXMgbm90IHByb3ZpZGUgZXhwbGljaXRseSB3aXRoIGEgbm90YWJs
+ZQ0KPj4gZXhjZXB0aW9uIG9mIHRoZSBmbG9hdGluZy1wb2ludCBmb3VyY2NzIHN1Y2ggYXMgRFJN
+X0ZPUk1BVF9YUkdCMTYxNjE2MTZGDQo+PiBhcyBhbiBleGFtcGxlLiBBcyB0aGUgRFJNIGZvdXJj
+Y3MgZG8gbm90IGN1cnJlbnRseSBkZWZpbmUgdGhlDQo+PiBpbnRlcnByZXRhdGlvbiBvZiB0aGUg
+ZGF0YSwgc2hvdWxkIHRoZSBpbmZvcm1hdGlvbiBiZSBtYWRlIGV4cGxpY2l0IGluDQo+PiB0aGUg
+RFJNIEFQSSBzaW1pbGFybHkgdG8gaG93IGl0IGlzIGFscmVhZHkgZG9uZSBpbiBWdWxrYW4/DQo+
+Pg0KPj4gVGhlIHJlYXNvbiBmb3IgaW50cm9kdWNpbmcgZGF0YXR5cGUgdG8gdGhlIERSTSBmb3Vy
+Y2MncyBpcyB0aGF0IHRoZQ0KPj4gYWx0ZXJuYXRpdmUsIGZvciBhbnkgQVBJIChlLmcuLCBFR0wp
+IHRoYXQgbGFja3MgdGhlIGZvcm1hdCBkYXRhdHlwZQ0KPj4gaW5mb3JtYXRpb24gZm9yIGZvdXJj
+Yy9tb2RpZmllciBjb21iaW5hdGlvbiBmb3IgZG1hX2J1ZiBpbnRlcm9wIHdvdWxkIGJlDQo+PiB0
+byBpbnRyb2R1Y2UgZXhwbGljaXQgYWRkaXRpb25hbCBtZXRhZGF0YS9hdHRyaWJ1dGVzIHRoYXQg
+ZW5jb2RlIHRoaXMNCj4+IGluZm9ybWF0aW9uIHdoaWNoIHRoZW4gd291bGQgYmUgcGFzc2VkIHRv
+IHRoZSBHUFUgZHJpdmVyIGJ1dCB0aGUNCj4+IGRyYXdiYWNrIG9mIHRoaXMgaXMgdGhhdCBpdCB3
+b3VsZCByZXF1aXJlIGV4dGVuZGluZyBtdWx0aXBsZSBncmFwaGljcw0KPj4gQVBJcyB0byBzdXBw
+b3J0IGV2ZXJ5IHNpbmdsZSBwbGF0Zm9ybS4NCj4+DQo+PiBCeSBoYXZpbmcgdGhlIERSTSBBUEkg
+ZXhwb3NlIHRoZSBkYXRhdHlwZSBpbmZvcm1hdGlvbiBmb3IgZm9ybWF0cyBzYXZlcw0KPj4gYSBs
+b3Qgb2YgaW50ZWdyYXRpb24vdmVyaWZpY2F0aW9uIHdvcmsgZm9yIGFsbCBvZiB0aGUgZGlmZmVy
+ZW50IGdyYXBoaWNzDQo+PiBBUElzIGFuZCBwbGF0Zm9ybXMgYXMgdGhpcyBpbmZvcm1hdGlvbiBj
+b3VsZCBiZSBkZXRlcm1pbmVkIGJ5IHRoZSBEUk0NCj4+IHRyaXBsZSBhbG9uZSBmb3IgZG1hX2J1
+ZiBpbnRlcm9wLg0KPj4NCj4+IEl0IHdvdWxkIGJlIGdvb2QgdG8gZ2F0aGVyIHNvbWUgb3Bpbmlv
+bnMgb24gd2hhdCBvdGhlcnMgdGhpbmsgYWJvdXQNCj4+IGludHJvZHVjaW5nIGRhdGF0eXBlcyB0
+byB0aGUgRFJNIEFQSS4NCj4NCj4gSGksDQo+DQo+IEkgZGlkbid0IHF1aXRlIGdyYXNwIHdoZXJl
+IHRoaXMgaW5mb3JtYXRpb24gaXMgbmVjZXNzYXJ5LCBhbmQgd2hlbiBpdA0KPiBpcyBuZWNlc3Nh
+cnksIGlzIGl0IHRoYXQgc2ltcGxlIHRvIGNvbW11bmljYXRlPyBEb2VzIGl0IGV2ZW4gYmVsb25n
+DQo+IHdpdGggdGhlIHBpeGVsIGZvcm1hdCBhdCBhbGw/DQo+DQo+IExldCB1cyBjb25zaWRlciB0
+aGUgZXhpc3RpbmcgcHJvYmxlbXMuDQo+DQo+IEFsbCB0cmFkaXRpb25hbCBpbnRlZ2VyIGZvcm1h
+dHMgaW4gZHJtX2ZvdXJjYy5oIHJpZ2h0IG5vdyBhcmUgdW5zaWduZWQuDQo+IFRoZXkgZ2V0IGlu
+dGVycHJldGVkIGFzIGJlaW5nIGluIHRoZSByYW5nZSBbMC4wLCAxLjBdIGZvciBjb2xvcg0KPiBv
+cGVyYXRpb25zLCB3aGljaCBtZWFucyBjb252ZXJ0aW5nIHRvIGFub3RoZXIgYml0IGRlcHRoIHdv
+cmtzDQo+IGltcGxpY2l0bHkuIFRoYXQncyB3aGVyZSB0aGUgc2ltcGxpY2l0eSBlbmRzLiBXZSBh
+c3N1bWUgdG8gaGF2ZSBmdWxsDQo+IHF1YW50aXphdGlvbiByYW5nZSB1bmxlc3Mgb3RoZXJ3aXNl
+IG5vdGVkIGluIHNvbWUgYXV4aWxpYXJ5IGRhdGEsIGxpa2UNCj4gS01TIHByb3BlcnRpZXMgKEkg
+Zm9yZ2V0IGlmIHRoZXJlIGV2ZW4gd2FzIGEgcHJvcGVydHkgdG8gc2F5IERSTQ0KPiBmcmFtZWJ1
+ZmZlciB1c2VzIGxpbWl0ZWQgcXVhbnRpemF0aW9uIHJhbmdlKS4gV2UgYXNzdW1lIGFsbCBwaXhl
+bCBkYXRhDQo+IGlzIG5vbi1saW5lYXJseSBlbmNvZGVkLiBUaGVyZSBpcyBubyBjb2xvciBzcGFj
+ZSBpbmZvcm1hdGlvbi4gWVVWLVJHQg0KPiBjb252ZXJzaW9uIG1hdHJpeCBjb2VmZmljaWVudHMg
+YXJlIGhhbmRsZWQgYnkgYSBLTVMgcHJvcGVydHkgSUlSQy4NCj4NCj4gQ29taW5nIGJhY2sgdG8g
+dGhlIG5vbWluYWwgcmFuZ2UgWzAuMCwgMS4wXS4gVGhhdCdzIGFuIGltcGxpY2l0DQo+IGFzc3Vt
+cHRpb24gdGhhdCBhbGxvd3MgdXMgdG8gYXBwbHkgdGhpbmdzIGxpa2UgTFVUcy4gSXQgYWxyZWFk
+eQ0KPiBicmVha3MgZG93biBpZiB5b3UgY2hvb3NlIGEgZmxvYXRpbmctcG9pbnQgZm9ybWF0IGlu
+c3RlYWQgb2YgdW5zaWduZWQNCj4gaW50ZWdlciBmb3JtYXQuIElzIEZQIHBpeGVsIHZhbHVlIDEu
+MCB0aGUgc2FtZSBhcyBub21pbmFsIDEuMD8gT3IgaXMNCj4gdGhlIEZQIHBpeGVsIHZhbHVlIDI1
+NS4wIHRoZSBzYW1lIGFzIG5vbWluYWwgMS4wPyBLTVMgaGFzIG5vIHdheSB0bw0KPiBrbm93IG9y
+IGNvbnRyb2wgdGhhdCBBRkFJSy4NCj4NCj4gSWYgeW91IGhhZCBVSU5UIGZvcm1hdCwgbWVhbmlu
+ZyB0aGUgbm9taW5hbCB2YWx1ZSByYW5nZSBpcyBbMC4wLCA2NTUzNS4wXQ0KPiAoZS5nLiBmb3Ig
+MTYgYnBjKSBpbnN0ZWFkIG9mIFswLjAsIDEuMF0sIHRoZW4gaG93IGRvZXMgdGhhdCB3b3JrIHdp
+dGggYQ0KPiBMVVQgZWxlbWVudCBpbiB0aGUgY29sb3IgcGlwZWxpbmU/IEhvdyB3b3VsZCBpdCBi
+ZSBib3RoIG1lYW5pbmdmdWwgYW5kDQo+IGRpZmZlcmVudCB0byBleGlzdGluZyAxNiBicGMgaW50
+ZWdlciBmb3JtYXQ/DQo+DQo+IFdoYXQncyB0aGUgYWN0dWFsIGRpZmZlcmVuY2UgYmV0d2VlbiBS
+MTYgYW5kIFIxNl9VSU5ULCB3aGF0IGRpZmZlcmVuY2UNCj4gZG9lcyBpdCBtYWtlIHRvIGEgR1BV
+IGRyaXZlcj8NCj4NCj4gTWF5YmUgdGhhdCBpcyBpbnRpbWF0ZWx5IGRlcGVuZGVudCBvbiB0aGUg
+QVBJIHdoZXJlIHRoZSBwaXhlbCBmb3JtYXRzDQo+IGFyZSB1c2VkPw0KPg0KPiBNYXliZSBmb3Ig
+S01TIFIxNiBhbmQgUjE2X1VJTlQgd291bGQgYmUgY29tcGxldGVseSBlcXVpdmFsZW50LCBidXQg
+bm90DQo+IGZvciBzb21lIG90aGVyIEFQST8NCj4NCj4gV2UgYWxzbyBuZWVkIHRvIGJlIHZlcnkg
+Y2FyZWZ1bCB0byBub3QgbG9hZCBwaXhlbCBmb3JtYXQgd2l0aCBtZWFuaW5nDQo+IHRoYXQgZG9l
+cyBub3QgYmVsb25nIHRoZXJlLiBOb24tbGluZWFyIGVuY29kaW5nICh0cmFuc2ZlciBmdW5jdGlv
+bikgaXMNCj4gb2J2aW91c2x5IHNvbWV0aGluZyB0aGF0IGlzIGNvbXBsZXRlbHkgdW5yZWxhdGVk
+IHRvIHRoZSBwaXhlbCBmb3JtYXQsDQo+IGFzIGxvbmcgYXMgdGhlIHBpeGVsIGZvcm1hdCBkZWZp
+bmVzIGEgY29udmVyc2lvbiB0byBub21pbmFsIHZhbHVlDQo+IHJhbmdlLiBDb2xvciBzcGFjZSAo
+cHJpbWFyaWVzIGFuZCB3aGl0ZSBwb2ludCkgYXJlIGFub3RoZXIgdGhpbmcgdGhhdA0KPiBoYXMg
+bm90aGluZyB0byBkbyB3aXRoIHBpeGVsIGZvcm1hdCwgYW5kIHNvIG11c3Qgbm90IGJlIGluIGFu
+eSB3YXkNCj4gaW1wbGllZCBieSBwaXhlbCBmb3JtYXQuDQo+DQo+IFNob3VsZCBhIHBpeGVsIGZv
+cm1hdCBkZWZpbmUgaG93IHRoZSByYXcgcGl4ZWwgdmFsdWVzIGFyZSBjb252ZXJ0ZWQgdG8NCj4g
+bm9taW5hbCB2YWx1ZXM/DQo+DQo+IE5vLCBiZWNhdXNlIHdlIGhhdmUgcXVhbnRpemF0aW9uIHJh
+bmdlIGFzIGEgc2VwYXJhdGUgcHJvcGVydHksDQo+IGN1cnJlbnRseSB3aXRoICJmdWxsIiBhbmQg
+ImxpbWl0ZWQiIHVuZGVyc3Rvb2QsIHdoZXJlICJsaW1pdGVkIiBtZWFucw0KPiBkaWZmZXJlbnQg
+dGhpbmdzIGRlcGVuZGluZyBvbiB0aGUgY29sb3IgbW9kZWwuDQo+DQo+IENvbG9yIG1vZGVsIGlz
+IGRlZmluZWQgYnkgdGhlIHBpeGVsIGZvcm1hdHM6IHdlIGhhdmUgUkdCIGFuZCBZVVYNCj4gZm9y
+bWF0cywgbGlrZXdpc2UgaXMgY2hyb21hIHN1Yi1zYW1wbGluZy4NCj4NCj4gSG1tLg0KPg0KPg0K
+PiBUaGFua3MsDQo+IHBxDQoNCkhpIFBla2thLA0KDQpUaGFua3MgZm9yIHlvdXIgY29tbWVudHMu
+IFRoaXMgaXMgbm90IGludGVuZGVkIHRvIGJlIHVzZWQgZm9yIEtNUywgd2hlcmUNCmluZGVlZCB0
+aGVyZSB3b3VsZCBiZSBubyBkaWZmZXJlbmNlLiBUaGlzIHByb3Bvc2FsIGlzIGZvciBvdGhlciBH
+cmFwaGljcw0KQVBJcyBzdWNoIGFzIFZ1bGthbiwgd2hpY2ggcmVxdWlyZXMgdGhlIGFwcGxpY2F0
+aW9uIHRvIGJlIGV4cGxpY2l0DQp1cGZyb250IGFib3V0IGhvdyB0aGV5IHdpbGwgaW50ZXJwcmV0
+IHRoZSBkYXRhLCB3aGV0aGVyIHRoYXQgYmUgVU5PUk0sDQpVSU5UIC5ldGMuIFdlIHdhbnQgdG8g
+YmUgYWJsZSB0byBpbXBvcnQgZG1hX2J1ZnMgd2hpY2ggY3JlYXRlIGEgVmtJbWFnZQ0Kd2l0aCBh
+ICJfVUlOVCIgVmtGb3JtYXQuIEhvd2V2ZXIgdGhlcmUgaXMgY3VycmVudGx5IG5vIGV4cGxpY2l0
+IG1hcHBpbmcNCmJldHdlZW4gdGhlIERSTSBmb3VyY2NzICsgbW9kaWZpZXJzIGNvbWJvcyB0byAi
+X1VJTlQiIFZrRm9ybWF0cy4gT25lDQpzb2x1dGlvbiBpcyB0byBlbmNvZGUgdGhhdCBpbnRvIHRo
+ZSBmb3VyY2NzLCB3aGljaCBpcyB3aGF0IHRoaXMgUkZDIGlzDQpwcm9wb3NpbmcuDQoNClRoYW5r
+cywNCkRlbm5pcw0KSU1QT1JUQU5UIE5PVElDRTogVGhlIGNvbnRlbnRzIG9mIHRoaXMgZW1haWwg
+YW5kIGFueSBhdHRhY2htZW50cyBhcmUgY29uZmlkZW50aWFsIGFuZCBtYXkgYWxzbyBiZSBwcml2
+aWxlZ2VkLiBJZiB5b3UgYXJlIG5vdCB0aGUgaW50ZW5kZWQgcmVjaXBpZW50LCBwbGVhc2Ugbm90
+aWZ5IHRoZSBzZW5kZXIgaW1tZWRpYXRlbHkgYW5kIGRvIG5vdCBkaXNjbG9zZSB0aGUgY29udGVu
+dHMgdG8gYW55IG90aGVyIHBlcnNvbiwgdXNlIGl0IGZvciBhbnkgcHVycG9zZSwgb3Igc3RvcmUg
+b3IgY29weSB0aGUgaW5mb3JtYXRpb24gaW4gYW55IG1lZGl1bS4gVGhhbmsgeW91Lg0KX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBt
+YWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2Ny
+aWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3Jn
+Cg==
