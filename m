@@ -2,94 +2,280 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0399257B7D2
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 15:47:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 23CC657B7D4
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 15:48:13 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 49BB3404F1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 13:47:57 +0000 (UTC)
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by lists.linaro.org (Postfix) with ESMTPS id 82DA43EF25
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Jun 2022 07:02:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1656572520; x=1688108520;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=AeHi61WsIJAmFsEU0j7KjinoFRAELD1Z5s+ZxYgSLyY=;
-  b=d5jFrPaLz6eleaHaXeQ192JEwsoywlO+90bPqFnd6ZsPOmc/dZZvjKdr
-   0MTb1GzOYlOipOI2ij7J9tL8XML63/Z3GTncaHXZ7LOcORWv77iTkmvwa
-   SRh6hTiMHv3FV1k0BxpR7QEqeFxKBJ5/IeyAJe1RtYbDK9wPNIwCwxgh4
-   mUj/AMVkP1toYkEllcW6yRZq7sM791soOTAlwwJA2Ij6Vyg6HhlD3s4Uv
-   3ziRMKzgtjuLDmnZm0FAjY5wwsjbM/MBIOCbTG3Z+7Tqrf4Elcc01i0L+
-   tfhZEG/21srZPUfu/2mQmS/INSpSIzT8RwwiDMXRlpps/1BcC6RyrqtRx
-   w==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10393"; a="271032836"
-X-IronPort-AV: E=Sophos;i="5.92,233,1650956400";
-   d="scan'208";a="271032836"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jun 2022 00:01:57 -0700
-X-IronPort-AV: E=Sophos;i="5.92,233,1650956400";
-   d="scan'208";a="647761832"
-Received: from nirmoyda-mobl.ger.corp.intel.com (HELO [10.251.217.92]) ([10.251.217.92])
-  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Jun 2022 00:01:49 -0700
-Message-ID: <83341d51-6c63-4b37-2f02-b3f305930308@linux.intel.com>
-Date: Thu, 30 Jun 2022 09:01:47 +0200
+	by lists.linaro.org (Postfix) with ESMTP id 6AB1D4109C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 13:48:12 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+	by lists.linaro.org (Postfix) with ESMTPS id 280553F1DB
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Jun 2022 11:48:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1656589732;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=PuYKS2jgPzieTAQHjEiRWkzk1xJEb/FrbHOJrQZTZMA=;
+	b=h9Q+mJtW5voCiocL+NFF71bKgsQQEshmzA+HAvYN5S5FOtsRbxhmTUsd6wwEZ76H2h8ILN
+	AYlWCnQ0wM8MJtj7939LF6ThtRT4opdrhQjHWGkegVrAYdNiHMPG2SL2thEuCI6RbFjLrv
+	4Jb2nEqcbB8tT3ZWkn9m26eRFaCYItk=
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
+ [209.85.222.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-96-uBYR1pwKNQqqz4Q1fFFmNg-1; Thu, 30 Jun 2022 07:48:51 -0400
+X-MC-Unique: uBYR1pwKNQqqz4Q1fFFmNg-1
+Received: by mail-qk1-f200.google.com with SMTP id o70-20020a37a549000000b006af05e7eca3so18075266qke.10
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Jun 2022 04:48:51 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:content-transfer-encoding
+         :in-reply-to;
+        bh=PuYKS2jgPzieTAQHjEiRWkzk1xJEb/FrbHOJrQZTZMA=;
+        b=j0sx21a+uDUENNOVisaDgep3uTh14PLerLPX0+003Xih2ykkmbz1f8nP14c2Elsoxm
+         /kxc1FfcOAs1umldC3CVZMUJ//nvUWGZ+SGaIPcLiOOU9fc4Ht/5uofdb7xkX3F1XBAg
+         YVCX/dfPZ7BbHch9xd1aZYwOLM+OSjHxRvptDoe3aFNTLfdipyPqHZtE/dU2aF42wTgd
+         m30AMmAfMd8wnJ6R+YFRUiaQYFGeeeQh8g1Q50fCSzp36bSnZ3ASzaDMdc0AgVFK2iPs
+         yNKT+YBbuJImIA9dQNbuXrTuxmrVVjMYzpHB4PPS2Aj/jBnVvJ15kqtX4GilzfeHrr8k
+         DQfg==
+X-Gm-Message-State: AJIora/VnOqMBPJyzPq/OOgeB+mi6frcOKcA3mLYqTFmu4fUK0DBpoRp
+	OLygZBA//g0j8/LqmeH5C+0MmQkKr/a5C7Kq4sZ9oznVNvUrjg7/kWds9PWO09tMpsj/C1E0V6Q
+	BbQ6fm0E6Tl1T8F7zmlIjBZJLN8A=
+X-Received: by 2002:a05:622a:109:b0:31d:23fe:7b4c with SMTP id u9-20020a05622a010900b0031d23fe7b4cmr6581301qtw.312.1656589730512;
+        Thu, 30 Jun 2022 04:48:50 -0700 (PDT)
+X-Google-Smtp-Source: AGRyM1uRz44w+O3VbQzatODmiPcnbDn785yVVNQoG4sSqp1OaDj0ogmo2bhAXqTAqLnNxIU5BCVTqw==
+X-Received: by 2002:a05:622a:109:b0:31d:23fe:7b4c with SMTP id u9-20020a05622a010900b0031d23fe7b4cmr6581266qtw.312.1656589730128;
+        Thu, 30 Jun 2022 04:48:50 -0700 (PDT)
+Received: from bfoster (c-24-61-119-116.hsd1.ma.comcast.net. [24.61.119.116])
+        by smtp.gmail.com with ESMTPSA id l12-20020a37f90c000000b006b14fb1ba18sm2588043qkj.35.2022.06.30.04.48.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 30 Jun 2022 04:48:49 -0700 (PDT)
+Date: Thu, 30 Jun 2022 07:48:46 -0400
+From: Brian Foster <bfoster@redhat.com>
+To: Kalesh Singh <kaleshsingh@google.com>
+Message-ID: <Yr2NngYE2qX8WzPV@bfoster>
+References: <20220623220613.3014268-1-kaleshsingh@google.com>
+ <20220623220613.3014268-2-kaleshsingh@google.com>
+ <Yrrrz7MxMu8OoEPU@bfoster>
+ <CAC_TJvejs5gbggC1hekyjUNctC_8+3FmVn0B7zAZox2+MkEjaA@mail.gmail.com>
+ <YrxEUbDkYLE6XF6x@bfoster>
+ <CAC_TJvcRd7=9xGXP5-t8v3g5iFWtYANpGA-nTqaGZBVTwa=07w@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- jie1zhan <jesse.zhang@amd.com>, broonie@kernel.org,
- alsa-devel@alsa-project.org
-References: <20220629060236.3283445-1-jesse.zhang@amd.com>
- <8499b1f1-cd39-5cb4-9fac-735e68393556@amd.com>
-From: "Das, Nirmoy" <nirmoy.das@linux.intel.com>
-In-Reply-To: <8499b1f1-cd39-5cb4-9fac-735e68393556@amd.com>
-X-MailFrom: nirmoy.das@linux.intel.com
+In-Reply-To: <CAC_TJvcRd7=9xGXP5-t8v3g5iFWtYANpGA-nTqaGZBVTwa=07w@mail.gmail.com>
+Authentication-Results: relay.mimecast.com;
+	auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=bfoster@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+X-MailFrom: bfoster@redhat.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: MY7HO3YFBZZ65TE5W62JGYAPV4TWDBNW
-X-Message-ID-Hash: MY7HO3YFBZZ65TE5W62JGYAPV4TWDBNW
-X-Mailman-Approved-At: Wed, 20 Jul 2022 13:47:55 +0000
-CC: Vijendar.Mukunda@amd.com, Basavaraj.Hiregoudar@amd.com, Sunil-kumar.Dommati@amd.com, ajitkumar.pandey@amd.com, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, "open list:DRM DRIVERS" <dri-devel@lists.freedesktop.org>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
+Message-ID-Hash: 76PDHBGQ2TNIFELV7IR4TK5RAWZ6LAZJ
+X-Message-ID-Hash: 76PDHBGQ2TNIFELV7IR4TK5RAWZ6LAZJ
+X-Mailman-Approved-At: Wed, 20 Jul 2022 13:48:10 +0000
+CC: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Alexander Viro <viro@zeniv.linux.org.uk>, Christoph Hellwig <hch@infradead.org>, Stephen Brennan <stephen.s.brennan@oracle.com>, David.Laight@aculab.com, Ioannis Ilkos <ilkos@google.com>, "T.J. Mercier" <tjmercier@google.com>, Suren Baghdasaryan <surenb@google.com>, "Cc: Android Kernel" <kernel-team@android.com>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Andrew Morton <akpm@linux-foundation.org>, Johannes Weiner <hannes@cmpxchg.org>, Christoph Anton Mitterer <mail@christoph.anton.mitterer.name>, Paul Gortmaker <paul.gortmaker@windriver.com>, Mike Rapoport <rppt@kernel.org>, Randy Dunlap <rdunlap@infradead.org>, LKML <linux-kernel@vger.kernel.org>, linux-fsdevel <linux-fsdevel@vger.kernel.org>, "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, Linux Media Mailing List <linux-media@vger.kernel.org>, DRI mailing list <dri-devel@lists.freedesktop.org>, "moderated list:DMA BUFFER SHARIN
+ G FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v1] Fix: SYNCOBJ TIMELINE Test failed.
+Subject: [Linaro-mm-sig] Re: [PATCH v2 1/2] procfs: Add 'size' to /proc/<pid>/fdinfo/
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MY7HO3YFBZZ65TE5W62JGYAPV4TWDBNW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/76PDHBGQ2TNIFELV7IR4TK5RAWZ6LAZJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-DQpPbiA2LzI5LzIwMjIgMTE6MTIgQU0sIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6DQo+IEFtIDI5
-LjA2LjIyIHVtIDA4OjAyIHNjaHJpZWIgamllMXpoYW46DQo+PiDCoCBUaGUgaXNzdWUgY2F1c2Ug
-YnkgdGhlIGNvbW1pdCA6DQo+Pg0KPj4gNzIxMjU1YjUyNyhkcm0vc3luY29iajogZmxhdHRlbiBk
-bWFfZmVuY2VfY2hhaW5zIG9uIHRyYW5zZmVyKS4NCj4+DQo+PiBCZWNhdXNlIGl0IHVzZSB0aGUg
-cG9pbnQgb2YgZG1hX2ZlbmNlIGluY29ycmVjdGx5DQo+Pg0KPj4gQ29ycmVjdCB0aGUgcG9pbnQg
-b2YgZG1hX2ZlbmNlIGJ5IGZlbmNlIGFycmF5DQo+DQo+IFdlbGwgdGhhdCBwYXRjaCBpcyBqdXN0
-IHV0dGVybHkgbm9uc2Vuc2UgYXMgZmFyIGFzIEkgY2FuIHNlZS4NCj4NCj4+DQo+PiBTaWduZWQt
-b2ZmLWJ5OiBqaWUxemhhbiA8amVzc2UuemhhbmdAYW1kLmNvbT4NCj4+DQo+PiBSZXZpZXdlZC1i
-eTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KPj4NCj4+IFJl
-dmlld2VkLWJ5OiBOaXJtb3kgRGFzIDxuaXJtb3kuZGFzQGxpbnV4LmludGVsLmNvbT4NCj4NCj4g
-SSBoYXZlIHN0cm9uZyBkb3VidHMgdGhhdCBOaXJtb3kgaGFzIHJldmlld2VkIHRoaXMgYW5kIEkg
-Y2VydGFpbmx5IA0KPiBoYXZlbid0IHJldmlld2VkIGl0Lg0KDQoNCkkgaGF2ZW4ndMKgIHJldmll
-d2VkIHRoaXMgZWl0aGVyLg0KDQoNCk5pcm1veQ0KDQo+DQo+IENocmlzdGlhbi4NCj4NCj4+IC0t
-LQ0KPj4gwqAgZHJpdmVycy9ncHUvZHJtL2RybV9zeW5jb2JqLmMgfCAyICstDQo+PiDCoCAxIGZp
-bGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkNCj4+DQo+PiBkaWZmIC0t
-Z2l0IGEvZHJpdmVycy9ncHUvZHJtL2RybV9zeW5jb2JqLmMgDQo+PiBiL2RyaXZlcnMvZ3B1L2Ry
-bS9kcm1fc3luY29iai5jDQo+PiBpbmRleCA3ZTQ4ZGNkMWJlZTQuLmQ1ZGI4MThmMWM3NiAxMDA2
-NDQNCj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9kcm1fc3luY29iai5jDQo+PiArKysgYi9kcml2
-ZXJzL2dwdS9kcm0vZHJtX3N5bmNvYmouYw0KPj4gQEAgLTg4Nyw3ICs4ODcsNyBAQCBzdGF0aWMg
-aW50IGRybV9zeW5jb2JqX2ZsYXR0ZW5fY2hhaW4oc3RydWN0IA0KPj4gZG1hX2ZlbmNlICoqZikN
-Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBnb3RvIGZyZWVfZmVuY2VzOw0KPj4gwqAgwqDCoMKgwqDC
-oCBkbWFfZmVuY2VfcHV0KCpmKTsNCj4+IC3CoMKgwqAgKmYgPSAmYXJyYXktPmJhc2U7DQo+PiAr
-wqDCoMKgICpmID0gYXJyYXktPmZlbmNlc1swXTsNCj4+IMKgwqDCoMKgwqAgcmV0dXJuIDA7DQo+
-PiDCoCDCoCBmcmVlX2ZlbmNlczoNCj4NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1z
-aWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFy
-by1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On Wed, Jun 29, 2022 at 01:43:11PM -0700, Kalesh Singh wrote:
+> On Wed, Jun 29, 2022 at 5:23 AM Brian Foster <bfoster@redhat.com> wrote:
+> >
+> > On Tue, Jun 28, 2022 at 03:38:02PM -0700, Kalesh Singh wrote:
+> > > On Tue, Jun 28, 2022 at 4:54 AM Brian Foster <bfoster@redhat.com> wro=
+te:
+> > > >
+> > > > On Thu, Jun 23, 2022 at 03:06:06PM -0700, Kalesh Singh wrote:
+> > > > > To be able to account the amount of memory a process is keeping p=
+inned
+> > > > > by open file descriptors add a 'size' field to fdinfo output.
+> > > > >
+> > > > > dmabufs fds already expose a 'size' field for this reason, remove=
+ this
+> > > > > and make it a common field for all fds. This allows tracking of
+> > > > > other types of memory (e.g. memfd and ashmem in Android).
+> > > > >
+> > > > > Signed-off-by: Kalesh Singh <kaleshsingh@google.com>
+> > > > > Reviewed-by: Christian K=F6nig <christian.koenig@amd.com>
+> > > > > ---
+> > > > >
+> > > > > Changes in v2:
+> > > > >   - Add Christian's Reviewed-by
+> > > > >
+> > > > > Changes from rfc:
+> > > > >   - Split adding 'size' and 'path' into a separate patches, per C=
+hristian
+> > > > >   - Split fdinfo seq_printf into separate lines, per Christian
+> > > > >   - Fix indentation (use tabs) in documentaion, per Randy
+> > > > >
+> > > > >  Documentation/filesystems/proc.rst | 12 ++++++++++--
+> > > > >  drivers/dma-buf/dma-buf.c          |  1 -
+> > > > >  fs/proc/fd.c                       |  9 +++++----
+> > > > >  3 files changed, 15 insertions(+), 7 deletions(-)
+> > > > >
+> > ...
+> > > >
+> > > > Also not sure if it matters that much for your use case, but someth=
+ing
+> > > > worth noting at least with shmem is that one can do something like:
+> > > >
+> > > > # cat /proc/meminfo | grep Shmem:
+> > > > Shmem:               764 kB
+> > > > # xfs_io -fc "falloc -k 0 10m" ./file
+> > > > # ls -alh file
+> > > > -rw-------. 1 root root 0 Jun 28 07:22 file
+> > > > # stat file
+> > > >   File: file
+> > > >   Size: 0               Blocks: 20480      IO Block: 4096   regular=
+ empty file
+> > > > # cat /proc/meminfo | grep Shmem:
+> > > > Shmem:             11004 kB
+> > > >
+> > > > ... where the resulting memory usage isn't reflected in i_size (but=
+ is
+> > > > is in i_blocks/bytes).
+> > >
+> > > I tried a similar experiment a few times, but I don't see the same
+> > > results. In my case, there is not any change in shmem. IIUC the
+> > > fallocate is allocating the disk space not shared memory.
+> > >
+> >
+> > Sorry, it was implied in my previous test was that I was running against
+> > tmpfs. So regardless of fs, the fallocate keep_size semantics shown in
+> > both cases is as expected: the underlying blocks are allocated and the
+> > inode size is unchanged.
+> >
+> > What wasn't totally clear to me when I read this patch was 1. whether
+> > tmpfs refers to Shmem and 2. whether tmpfs allowed this sort of
+> > operation. The test above seems to confirm both, however, right? E.g., a
+> > more detailed example:
+> >
+> > # mount | grep /tmp
+> > tmpfs on /tmp type tmpfs (rw,nosuid,nodev,seclabel,nr_inodes=3D1048576,=
+inode64)
+> > # cat /proc/meminfo | grep Shmem:
+> > Shmem:              5300 kB
+> > # xfs_io -fc "falloc -k 0 1g" /tmp/file
+> > # stat /tmp/file
+> >   File: /tmp/file
+> >   Size: 0               Blocks: 2097152    IO Block: 4096   regular emp=
+ty file
+> > Device: 22h/34d Inode: 45          Links: 1
+> > Access: (0600/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)
+> > Context: unconfined_u:object_r:user_tmp_t:s0
+> > Access: 2022-06-29 08:04:01.301307154 -0400
+> > Modify: 2022-06-29 08:04:01.301307154 -0400
+> > Change: 2022-06-29 08:04:01.451312834 -0400
+> >  Birth: 2022-06-29 08:04:01.301307154 -0400
+> > # cat /proc/meminfo | grep Shmem:
+> > Shmem:           1053876 kB
+> > # rm -f /tmp/file
+> > # cat /proc/meminfo | grep Shmem:
+> > Shmem:              5300 kB
+> >
+> > So clearly this impacts Shmem.. was your test run against tmpfs or some
+> > other (disk based) fs?
+>=20
+> Hi Brian,
+>=20
+> Thanks for clarifying. My issue was tmpfs not mounted at /tmp in my syste=
+m:
+>=20
+> =3D=3D> meminfo.start <=3D=3D
+> Shmem:               572 kB
+> =3D=3D> meminfo.stop <=3D=3D
+> Shmem:             51688 kB
+>=20
+
+Ok, makes sense.
+
+> >
+> > FWIW, I don't have any objection to exposing inode size if it's commonly
+> > useful information. My feedback was more just an fyi that i_size doesn't
+> > necessarily reflect underlying space consumption (whether it's memory or
+> > disk space) in more generic cases, because it sounds like that is really
+> > what you're after here. The opposite example to the above would be
+> > something like an 'xfs_io -fc "truncate 1t" /tmp/file', which shows a
+> > 1TB inode size with zero additional shmem usage.
+>=20
+> From these cases, it seems the more generic way to do this is by
+> calculating the actual size consumed using the blocks. (i_blocks *
+> 512). So in the latter example  'xfs_io -fc "truncate 1t" /tmp/file'
+> the size consumed would be zero. Let me know if it sounds ok to you
+> and I can repost the updated version.
+>=20
+
+That sounds a bit more useful to me if you're interested in space usage,
+or at least I don't have a better idea for you. ;)
+
+One thing to note is that I'm not sure whether all fs' use i_blocks
+reliably. E.g., XFS populates stat->blocks via a separate block counter
+in the XFS specific inode structure (see xfs_vn_getattr()). A bunch of
+other fs' seem to touch it so perhaps that is just an outlier. You could
+consider fixing that up, perhaps make a ->getattr() call to avoid it, or
+just use the field directly if it's useful enough as is and there are no
+other objections. Something to think about anyways..
+
+Brian
+
+> Thanks,
+> Kalesh
+>=20
+> >
+> > Brian
+> >
+> > > cat /proc/meminfo > meminfo.start
+> > > xfs_io -fc "falloc -k 0 50m" ./xfs_file
+> > > cat /proc/meminfo > meminfo.stop
+> > > tail -n +1 meminfo.st* | grep -i '=3D=3D\|Shmem:'
+> > >
+> > > =3D=3D> meminfo.start <=3D=3D
+> > > Shmem:               484 kB
+> > > =3D=3D> meminfo.stop <=3D=3D
+> > > Shmem:               484 kB
+> > >
+> > > ls -lh xfs_file
+> > > -rw------- 1 root root 0 Jun 28 15:12 xfs_file
+> > >
+> > > stat xfs_file
+> > >   File: xfs_file
+> > >   Size: 0               Blocks: 102400     IO Block: 4096   regular e=
+mpty file
+> > >
+> > > Thanks,
+> > > Kalesh
+> > >
+> > > >
+> > > > Brian
+> > > >
+> > > > >
+> > > > >       /* show_fd_locks() never deferences files so a stale value =
+is safe */
+> > > > >       show_fd_locks(m, file, files);
+> > > > > --
+> > > > > 2.37.0.rc0.161.g10f37bed90-goog
+> > > > >
+> > > >
+> > >
+> >
+> > --
+> > To unsubscribe from this group and stop receiving emails from it, send =
+an email to kernel-team+unsubscribe@android.com.
+> >
+>=20
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
