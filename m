@@ -2,45 +2,49 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62B5C57B7DC
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 15:49:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6890157B7E3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 15:49:54 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AA0804796D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 13:49:20 +0000 (UTC)
-Received: from jari.cn (unknown [218.92.28.120])
-	by lists.linaro.org (Postfix) with ESMTP id C40673F04C
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  1 Jul 2022 11:31:38 +0000 (UTC)
-Received: by ajax-webmail-localhost.localdomain (Coremail) ; Fri, 1 Jul 2022
- 19:26:07 +0800 (GMT+08:00)
-X-Originating-IP: [182.148.13.66]
-Date: Fri, 1 Jul 2022 19:26:07 +0800 (GMT+08:00)
-X-CM-HeaderCharset: UTF-8
-From: "XueBing Chen" <chenxuebing@jari.cn>
-To: sumit.semwal@linaro.org, christian.koenig@amd.com
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version XT6.0.1 build 20210329(c53f3fee)
- Copyright (c) 2002-2022 www.mailtech.cn
- mispb-4e503810-ca60-4ec8-a188-7102c18937cf-zhkzyfz.cn
+	by lists.linaro.org (Postfix) with ESMTP id A4F02404F1
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Jul 2022 13:49:53 +0000 (UTC)
+Received: from out1.migadu.com (out1.migadu.com [91.121.223.63])
+	by lists.linaro.org (Postfix) with ESMTPS id B466E3EA39
+	for <linaro-mm-sig@lists.linaro.org>; Sat,  2 Jul 2022 01:03:34 +0000 (UTC)
+Date: Fri, 1 Jul 2022 18:03:10 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1656723813;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=UefsvJWBOCsJEHG/jcpgIGR+KBtUCRUqjXcROu7qjh4=;
+	b=oGHlDm4tgr6UzDbC5z/sb7q2WEts5mi8mJ8aiIMXBOzW75BRr4BaIuszRL9hOCzoFfVxku
+	tmO6BM7R9GzDDzZbe/MQeyeOEOAx+3VHqH/w/8ecEZ7fImffcNYGlal4Cw/gQ26E9Sym1J
+	usYWeNXz8OdB9Vt23HLuxwKOwXbZ7ng=
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Roman Gushchin <roman.gushchin@linux.dev>
+To: Andrew Morton <akpm@linux-foundation.org>,
+	kernel test robot <lkp@intel.com>
+Message-ID: <Yr+ZTnLb9lJk6fJO@castle>
+References: <62be3696.+PAAAVlbtWK6G2hk%lkp@intel.com>
 MIME-Version: 1.0
-Message-ID: <6aad3bff.d1a.181b982d1b1.Coremail.chenxuebing@jari.cn>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: AQAAfwD3AG_P2b5i5PdFAA--.865W
-X-CM-SenderInfo: hfkh05pxhex0nj6mt2flof0/1tbiAQAICmFEYxsvOAAQsZ
-X-Coremail-Antispam: 1Ur529EdanIXcx71UUUUU7IcSsGvfJ3iIAIbVAYjsxI4VW7Jw
-	CS07vEb4IE77IF4wCS07vE1I0E4x80FVAKz4kxMIAIbVAFxVCaYxvI4VCIwcAKzIAtYxBI
-	daVFxhVjvjDU=
-X-MailFrom: chenxuebing@jari.cn
+Content-Disposition: inline
+In-Reply-To: <62be3696.+PAAAVlbtWK6G2hk%lkp@intel.com>
+X-Migadu-Flow: FLOW_OUT
+X-Migadu-Auth-User: linux.dev
+X-MailFrom: roman.gushchin@linux.dev
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: MUOMHUVKK3ZKBR6J6RCQSHEQGYHQBZGE
-X-Message-ID-Hash: MUOMHUVKK3ZKBR6J6RCQSHEQGYHQBZGE
-X-Mailman-Approved-At: Wed, 20 Jul 2022 13:49:17 +0000
-CC: gustavo@padovan.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+Message-ID-Hash: 2W4DWSFMTN7ATFV6AHP7B566SZ2RHZXH
+X-Message-ID-Hash: 2W4DWSFMTN7ATFV6AHP7B566SZ2RHZXH
+X-Mailman-Approved-At: Wed, 20 Jul 2022 13:49:51 +0000
+CC: virtualization@lists.linux-foundation.org, usbb2k-api-dev@nongnu.org, tipc-discussion@lists.sourceforge.net, target-devel@vger.kernel.org, sound-open-firmware@alsa-project.org, samba-technical@lists.samba.org, rds-devel@oss.oracle.com, patches@opensource.cirrus.com, osmocom-net-gprs@lists.osmocom.org, openipmi-developer@lists.sourceforge.net, nvdimm@lists.linux.dev, ntb@lists.linux.dev, netfilter-devel@vger.kernel.org, netdev@vger.kernel.org, mjpeg-users@lists.sourceforge.net, megaraidlinux.pdl@broadcom.com, linuxppc-dev@lists.ozlabs.org, linux1394-devel@lists.sourceforge.net, linux-x25@vger.kernel.org, linux-wpan@vger.kernel.org, linux-wireless@vger.kernel.org, linux-watchdog@vger.kernel.org, linux-usb@vger.kernel.org, linux-unionfs@vger.kernel.org, linux-tegra@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com, linux-staging@lists.linux.dev, linux-serial@vger.kernel.org, linux-sctp@vger.kernel.org, linux-scsi@vger.kernel.org, linux-samsung-soc@vger.kernel.org, linux-rock
+ chip@lists.infradead.org, linux-renesas-soc@vger.kernel.org, linux-rdma@vger.kernel.org, linux-raid@vger.kernel.org, linux-pm@vger.kernel.org, linux-phy@lists.infradead.org, linux-perf-users@vger.kernel.org, linux-pci@vger.kernel.org, linux-parport@lists.infradead.org, linux-parisc@vger.kernel.org, linux-omap@vger.kernel.org, linux-nfc@lists.01.org, linux-mtd@lists.infradead.org, linux-mmc@vger.kernel.org, linux-mm@kvack.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, linux-leds@vger.kernel.org, linux-integrity@vger.kernel.org, linux-input@vger.kernel.org, linux-iio@vger.kernel.org, linux-ide@vger.kernel.org, linux-hwmon@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-fpga@vger.kernel.org, linux-fbdev@vger.kernel.org, linux-ext4@vger.kernel.org, linux-efi@vger.kernel.org, linux-cxl@vger.kernel.org, linux-crypto@vger.kernel.org, linux-clk@vger.kernel.org, linux-cifs@vger.kernel.org, linux-btrfs@vger.kernel.org, linux-bluetooth@vger.kernel.org, linux-block@
+ vger.kernel.org, linux-bcache@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-amlogic@lists.infradead.org, linaro-mm-sig@lists.linaro.org, legousb-devel@lists.sourceforge.net, kvm@vger.kernel.org, keyrings@vger.kernel.org, isdn4linux@listserv.isdn4linux.de, iommu@lists.linux.dev, iommu@lists.linux-foundation.org, intel-wired-lan@lists.osuosl.org, dri-devel@lists.freedesktop.org, dm-devel@redhat.com, devicetree@vger.kernel.org, dev@openvswitch.org, dccp@vger.kernel.org, damon@lists.linux.dev, coreteam@netfilter.org, cgroups@vger.kernel.org, ceph-devel@vger.kernel.org, apparmor@lists.ubuntu.com, amd-gfx@lists.freedesktop.org, alsa-devel@alsa-project.org, accessrunner-general@lists.sourceforge.net
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] dma-buf/sync_file: use strscpy to replace strlcpy
+Subject: [Linaro-mm-sig] Re: [linux-next:master] BUILD REGRESSION 6cc11d2a1759275b856e464265823d94aabd5eaf
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MUOMHUVKK3ZKBR6J6RCQSHEQGYHQBZGE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2W4DWSFMTN7ATFV6AHP7B566SZ2RHZXH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -50,51 +54,102 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
+esOn Fri, Jul 01, 2022 at 07:49:42AM +0800, kbuild test robot wrote:
+> tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
+> branch HEAD: 6cc11d2a1759275b856e464265823d94aabd5eaf  Add linux-next specific files for 20220630
+> 
+> Error/Warning reports:
+> 
+> https://lore.kernel.org/linux-mm/202206301859.UodBCrva-lkp@intel.com
+> 
+> Error/Warning: (recently discovered and may have been fixed)
+> 
+> arch/powerpc/kernel/interrupt.c:542:55: error: suggest braces around empty body in an 'if' statement [-Werror=empty-body]
+> arch/powerpc/kernel/interrupt.c:542:55: warning: suggest braces around empty body in an 'if' statement [-Wempty-body]
+> drivers/pci/endpoint/functions/pci-epf-vntb.c:975:5: warning: no previous prototype for 'pci_read' [-Wmissing-prototypes]
+> drivers/pci/endpoint/functions/pci-epf-vntb.c:984:5: warning: no previous prototype for 'pci_write' [-Wmissing-prototypes]
+> mm/shrinker_debug.c:143:9: warning: function 'shrinker_debugfs_rename' might be a candidate for 'gnu_printf' format attribute [-Wsuggest-attribute=format]
+> mm/shrinker_debug.c:217:9: warning: function 'shrinker_debugfs_rename' might be a candidate for 'gnu_printf' format attribute [-Wsuggest-attribute=format]
+> mm/vmscan.c:637:9: warning: function 'prealloc_shrinker' might be a candidate for 'gnu_printf' format attribute [-Wsuggest-attribute=format]
+> mm/vmscan.c:642:9: warning: function 'prealloc_shrinker' might be a candidate for 'gnu_printf' format attribute [-Wsuggest-attribute=format]
+> mm/vmscan.c:697:9: warning: function 'register_shrinker' might be a candidate for 'gnu_printf' format attribute [-Wsuggest-attribute=format]
+> mm/vmscan.c:702:9: warning: function 'register_shrinker' might be a candidate for 'gnu_printf' format attribute [-Wsuggest-attribute=format]
 
-The strlcpy should not be used because it doesn't limit the source
-length. Preferred is strscpy.
+Shrinker-related warnings should be fixed by the following patch.
 
-Signed-off-by: XueBing Chen <chenxuebing@jari.cn>
+Thanks!
+
+--
+
+From c399aff65c7745a209397a531c5b28fd404d83c2 Mon Sep 17 00:00:00 2001
+From: Roman Gushchin <roman.gushchin@linux.dev>
+Date: Fri, 1 Jul 2022 17:38:31 -0700
+Subject: [PATCH] mm:shrinkers: fix build warnings
+
+Add __printf(a, b) attributes to shrinker functions taking shrinker
+name as an argument to avoid compiler warnings like:
+
+mm/shrinker_debug.c:143:9: warning: function 'shrinker_debugfs_rename'
+  might be a candidate for 'gnu_printf' format attribute [-Wsuggest-attribute=format]
+mm/shrinker_debug.c:217:9: warning: function 'shrinker_debugfs_rename'
+  might be a candidate for 'gnu_printf' format attribute [-Wsuggest-attribute=format]
+mm/vmscan.c:637:9: warning: function 'prealloc_shrinker' might be a
+  candidate for 'gnu_printf' format attribute [-Wsuggest-attribute=format]
+mm/vmscan.c:642:9: warning: function 'prealloc_shrinker' might be a
+  candidate for 'gnu_printf' format attribute [-Wsuggest-attribute=format]
+mm/vmscan.c:697:9: warning: function 'register_shrinker' might be a
+  candidate for 'gnu_printf' format attribute [-Wsuggest-attribute=format]
+mm/vmscan.c:702:9: warning: function 'register_shrinker' might be a
+  candidate for 'gnu_printf' format attribute [-Wsuggest-attribute=format]
+
+Signed-off-by: Roman Gushchin <roman.gushchin@linux.dev>
 ---
- drivers/dma-buf/sync_file.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ include/linux/shrinker.h | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/dma-buf/sync_file.c b/drivers/dma-buf/sync_file.c
-index 3ebec19a8e02..af57799c86ce 100644
---- a/drivers/dma-buf/sync_file.c
-+++ b/drivers/dma-buf/sync_file.c
-@@ -132,7 +132,7 @@ EXPORT_SYMBOL(sync_file_get_fence);
- char *sync_file_get_name(struct sync_file *sync_file, char *buf, int len)
- {
- 	if (sync_file->user_name[0]) {
--		strlcpy(buf, sync_file->user_name, len);
-+		strscpy(buf, sync_file->user_name, len);
- 	} else {
- 		struct dma_fence *fence = sync_file->fence;
+diff --git a/include/linux/shrinker.h b/include/linux/shrinker.h
+index 64416f3e0a1f..08e6054e061f 100644
+--- a/include/linux/shrinker.h
++++ b/include/linux/shrinker.h
+@@ -93,9 +93,11 @@ struct shrinker {
+  */
+ #define SHRINKER_NONSLAB	(1 << 3)
  
-@@ -172,7 +172,7 @@ static struct sync_file *sync_file_merge(const char *name, struct sync_file *a,
- 		return NULL;
- 	}
- 	sync_file->fence = fence;
--	strlcpy(sync_file->user_name, name, sizeof(sync_file->user_name));
-+	strscpy(sync_file->user_name, name, sizeof(sync_file->user_name));
- 	return sync_file;
+-extern int prealloc_shrinker(struct shrinker *shrinker, const char *fmt, ...);
++extern int __printf(2, 3) prealloc_shrinker(struct shrinker *shrinker,
++					    const char *fmt, ...);
+ extern void register_shrinker_prepared(struct shrinker *shrinker);
+-extern int register_shrinker(struct shrinker *shrinker, const char *fmt, ...);
++extern int __printf(2, 3) register_shrinker(struct shrinker *shrinker,
++					    const char *fmt, ...);
+ extern void unregister_shrinker(struct shrinker *shrinker);
+ extern void free_prealloced_shrinker(struct shrinker *shrinker);
+ extern void synchronize_shrinkers(void);
+@@ -103,8 +105,8 @@ extern void synchronize_shrinkers(void);
+ #ifdef CONFIG_SHRINKER_DEBUG
+ extern int shrinker_debugfs_add(struct shrinker *shrinker);
+ extern void shrinker_debugfs_remove(struct shrinker *shrinker);
+-extern int shrinker_debugfs_rename(struct shrinker *shrinker,
+-				   const char *fmt, ...);
++extern int __printf(2, 3) shrinker_debugfs_rename(struct shrinker *shrinker,
++						  const char *fmt, ...);
+ #else /* CONFIG_SHRINKER_DEBUG */
+ static inline int shrinker_debugfs_add(struct shrinker *shrinker)
+ {
+@@ -113,8 +115,8 @@ static inline int shrinker_debugfs_add(struct shrinker *shrinker)
+ static inline void shrinker_debugfs_remove(struct shrinker *shrinker)
+ {
  }
- 
-@@ -262,9 +262,9 @@ static long sync_file_ioctl_merge(struct sync_file *sync_file,
- static int sync_fill_fence_info(struct dma_fence *fence,
- 				 struct sync_fence_info *info)
+-static inline int shrinker_debugfs_rename(struct shrinker *shrinker,
+-					  const char *fmt, ...)
++static inline __printf(2, 3)
++int shrinker_debugfs_rename(struct shrinker *shrinker, const char *fmt, ...)
  {
--	strlcpy(info->obj_name, fence->ops->get_timeline_name(fence),
-+	strscpy(info->obj_name, fence->ops->get_timeline_name(fence),
- 		sizeof(info->obj_name));
--	strlcpy(info->driver_name, fence->ops->get_driver_name(fence),
-+	strscpy(info->driver_name, fence->ops->get_driver_name(fence),
- 		sizeof(info->driver_name));
- 
- 	info->status = dma_fence_get_status(fence);
+ 	return 0;
+ }
 -- 
-2.25.1
+2.36.1
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
