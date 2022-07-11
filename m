@@ -2,416 +2,194 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60BEB56CC36
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 10 Jul 2022 03:38:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E7D1356FD99
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Jul 2022 11:57:47 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 27637410A4
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 10 Jul 2022 01:38:41 +0000 (UTC)
-Received: from [185.102.170.90] (unknown [185.102.170.90])
-	by lists.linaro.org (Postfix) with ESMTP id 5D13E3EC1E
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 10 Jul 2022 01:38:39 +0000 (UTC)
-From: "IT HelpDesk  Support" <noreply@lists.linaro.org>
-To: linaro-mm-sig@lists.linaro.org
-Date: 9 Jul 2022 18:38:38 -0700
-Message-ID: <20220709183838.2CA1FF17DF3FACFC@lists.linaro.org>
+	by lists.linaro.org (Postfix) with ESMTP id C047E4794E
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Jul 2022 09:57:46 +0000 (UTC)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2070.outbound.protection.outlook.com [40.107.94.70])
+	by lists.linaro.org (Postfix) with ESMTPS id D256F3F1E4
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 11 Jul 2022 09:57:39 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=T5ZVs3UiLZBBLECwYlllWQWTHAnHuQtAbDsAawcdoCe4Av8hcgX9mvcWXfNaLD8twsntmUaqy3q7zNoBblgK9UmEUgTihZDGz1+thYtcq7W6gKMLg+ku7nUm/TCQsz3ytYx6QNO/Ig4UxnD1lxKwJjwQw5HY0nzxs1YMRsEkubBBqp/JLE6fnFI8NH9MCUOOc3pKFVIJj86WTEMkby23ZMWhe0lYbhUuMCCVrEtM0uk92VYf/v6t4F0hq0BeBi5K8JHOC6psE4hSQvUk31bJhDfafPFvnew9/nSrDhQcKyXZUvhFwhM8ZZ0wiR9KXLPjw+Y995Ty4SiOzOHRxo1o/w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=8HzPb9jLZgm6sgjgq3xC/p2rHa1k86Fkd3q0LpfM6uE=;
+ b=Q9KfHvHVMefdYMDVAHg/vYxeKW0wUQaoQaK1LdcnNXmY2C/oHz2xcDLOE9AuR8mI8iGwj2BcBk6pdgxNRjp3csFe8DqZCLSZnW32e2CF7efAtzwuB65epryv+AJYXceCMW+/d3Bd0dPpWtYk9Imm1/Y+bA/SaDKyxmfmc8YcMVJgVcGUrSsQLPU5pr8k22gyvt27uYxTIhBE5UlWhgX097skZ78ETKOFOk+AzTr3rIL9j73igI7PlF8pqurTT1rYmXQhoJvUq9FXCmk9Zc4E39zebeABhPlbwVzs0W0NPj0deI9niABU5XGfITE6jmjau2B73D++OC9Gmkn2xiQ2yw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8HzPb9jLZgm6sgjgq3xC/p2rHa1k86Fkd3q0LpfM6uE=;
+ b=5OX+uwjKw9MjbmO1BL5jAve6aIQaEyWdj/UGs1lsD2O/v5GneXEU2Vg0t9XP2BajiZ/cGuFs1qP8lcAS14eUdUXf1fzMHzqGkMdEQpFWbVRb5K6lvt6R2XK3GDZqYy9BIumucQjmLKxw/eyXpL98AaPDcyEaxdIaUJH0RJQTtjk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by DM6PR12MB3900.namprd12.prod.outlook.com (2603:10b6:5:1c9::29) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5417.16; Mon, 11 Jul
+ 2022 09:57:37 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::905:1701:3b51:7e39]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::905:1701:3b51:7e39%2]) with mapi id 15.20.5417.025; Mon, 11 Jul 2022
+ 09:57:37 +0000
+Message-ID: <4c9598f0-4ba7-c18e-2ccd-f508769a72e9@amd.com>
+Date: Mon, 11 Jul 2022 11:57:31 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Content-Language: en-US
+To: Karolina Drobnik <karolina.drobnik@intel.com>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+References: <20220506141009.18047-1-christian.koenig@amd.com>
+ <20220506141009.18047-3-christian.koenig@amd.com>
+ <f67d23e2-3953-7717-9c41-65075929525c@intel.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <f67d23e2-3953-7717-9c41-65075929525c@intel.com>
+X-ClientProxiedBy: FR0P281CA0141.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:96::12) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
 MIME-Version: 1.0
-Message-ID-Hash: SVRKIUNBOKT72EJUFU75B7SGYYE62P4I
-X-Message-ID-Hash: SVRKIUNBOKT72EJUFU75B7SGYYE62P4I
-X-MailFrom: noreply@lists.linaro.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: aede7385-5df9-4d94-760e-08da6323c8c9
+X-MS-TrafficTypeDiagnostic: DM6PR12MB3900:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	GAOT+uUnDMY6E1anmM88imCW3bMJqvibp3tddXnbZILkKRl1MjU0Yw2PHyhfUSTS7l6qpg8nh2e69gKVQfdQOiISyuxlbF4r1Bq4827akXgmSDogvmqsZkiIhmpL2QI8Z+/O67Rhs6uZ3hCKNkmQx6DGJLhxF1KLgEzWwdNVGZ7A+lgiFgdfLCosUFlak9JEMTsRQaDxY48VgFIZAAVt7T9t9yRkrNc4l86g5AlxB9Qp3dFXphsbMSBbiXrF6fxRiRB0V8qw1VqT35HHld4t/uWNOHcJaSHm7zgbvxUS/CUoVVYDZ3Enrl5yitnsZc8xeatwur3EuZCjeBqD5yKK/x4RTVzuZ3gOeX7+aoAqVoxtrbBx0M+CuOMLMjgRpDcaRhLXRX1nNNhPDKG7uJuBfKHtvl2dbW7VSgLitVkU5jbfkmhIdLByRCABHg5D/jLBNTzMv4w5ZcnYAYii+oLWztp2QK397JyZhpvfnYoshDPeGGeTeZlUB2vImkdLDsGAP8PDAZp8jdVZD60m/8/qGQ4SshLRCxBNoeBHnR2FrVjsCQYm9mJQozo7jNoUQNYf9B40RxrpXnY5V6czYzbvFERTzVy4O3c+7/eZnCjcpeDAfQgduMtH6GbiFsfvs2fyRz/5j6JUxILl2ybutOz5elGN6eDaPnvzxI06qEIL5n2k2KCh0gWjvbXZN0jha6CSB28MEWEqW2rq9FA/YOxLbcfR1JEx8iR9+d8XOXnV4HKkmAtiu35xlXiWODSpyGD4uw3zB6dI3t4DZ7Y2Xl13b5ZsHpVVqXwtnZ8DAMO+anKmDAgd5B6IZAl+QmMD94dbwIdYzsGc4Se3itaA8LyZKwG/IxdAHGeXNdXshD3wvIz6OfuhtduQdSS0Ngxb1S5B
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(136003)(376002)(39860400002)(366004)(396003)(346002)(36756003)(86362001)(31686004)(38100700002)(2616005)(186003)(83380400001)(66574015)(6512007)(31696002)(26005)(2906002)(6666004)(478600001)(6486002)(966005)(316002)(110136005)(41300700001)(45080400002)(53546011)(6506007)(8936002)(5660300002)(4326008)(8676002)(66476007)(66946007)(66556008)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?ajB1WmVsRjNxeThQdlBiSVFCRndzemszMjNKZHYza3lncStZRGxaaDQydWZn?=
+ =?utf-8?B?UTg4OUZLNjJrZ3kreElKUEg5Q3pvb09hdnRiYzlSc005Z0FnV2xiRERENkV5?=
+ =?utf-8?B?ak9pMkp6YlZIUWl2d2tveHc4ZE0wYTNOclBpUCtCZks4UURSQWFUSVB1WE9T?=
+ =?utf-8?B?bnJzcDBKN3ByajdabnZubWR0M280R1VFclI4eVNZYmtIdlNKVXlQVEM5dTdQ?=
+ =?utf-8?B?QnRqM3BZVGZneHNuN0g3TFJDOVdyRjl2UzFra2lYeWQ4UDhVRXN5RXZrMVA0?=
+ =?utf-8?B?UFZtaUtvUkZoN2JGbWdlcnpNMWdXVTJ1SExUMER2UGlOc3U5YzlVTWhsajZr?=
+ =?utf-8?B?OFJ1SGtETUxZa3lVQ05UOXRaVVdMS2lDa3dQS1Z5eGdGVlMyYzlRcEI0U2JD?=
+ =?utf-8?B?OVpjVmVNNFQwNFlPZUFHN2xjUG5rVDFieG96RGtoSDJmb1J5WENQZFI2c2wx?=
+ =?utf-8?B?ZjRGTWhZb1BtNG5qZnFsQ2hUQk9NR3V1SjBLdEtEelZ3eGZSeWl6WHBkNGlt?=
+ =?utf-8?B?VFhBV3JFWU41VklOYnMwNW1sZEdFWmxpWlliODVBK2tnM3YxbmtMTmJ5Z3Bl?=
+ =?utf-8?B?cW55OXAxbUhyNm1EblB6cDZEeE9wMkVoZnE3ckVDQ3c3QUlSQUxpUmtIdmJm?=
+ =?utf-8?B?elJTdHpDWHh5ckFUdGJiRlBwMHZLTG15NmxQUG85SC85STZUbmdtcUgvcDVi?=
+ =?utf-8?B?UGdCRTZQMk9DNU5XVkVQNHhnbHFVaUpPY2JtNXVPbEQvQU9xdmhocnljd2NV?=
+ =?utf-8?B?Z3kxa2FwaGxBenAxOEFCYXpsYVhyY1ZJenRnSTJUUCtTQTVTbUdUek1Fa2h2?=
+ =?utf-8?B?Nkw4U2dhOTF4bEQ0N3dSQThMTFRqSWJYd0pVRnJIN25KdVNxNFJjdnFWaWY5?=
+ =?utf-8?B?QTZBUEkraWI2OEZHU1ZiZGtxeHk3RDFCZDV1clNyUlY3KzB3WjcyZzlJT2Z2?=
+ =?utf-8?B?dUJDN2xSNGVNSWxjY09YeGRiMi9RZnhpV1k3djMva2pUZXN3Q3BqTnQ1bzFP?=
+ =?utf-8?B?SHdNYk93bGxDMExVQkowaXAxbkJVbkwybTZRRVYzMkdhSDN3Yy9qYjNkalNN?=
+ =?utf-8?B?eXVlRlc5aCs3TkNGOWlQVEw5YmNPMGxCbTEzNmI2M3lJTUt6NmhMVUh3RUVv?=
+ =?utf-8?B?ZjZqcW4wY0NjQVczdnZvVXNhRk13UW90cXhJelNGRHp5bTFMaTkxOVp3VG9H?=
+ =?utf-8?B?K3Y3L1NacGxwTUYxTHpISHZlWW81aTl2UEJoOUVObzFUM3lkSkZCdDBXYUow?=
+ =?utf-8?B?YWY5Y1FFb3FhTjdzQzNnbEk0anFROWwwdkhkYjhQNEk0aWdPN1RxNlBUUGVB?=
+ =?utf-8?B?dC9tQ2wxUzFuQlAvZmdLWUxjZFh1TDEyMVBBaHBrUENiY3R4K2x3d2VONktC?=
+ =?utf-8?B?dlNxdUR0c3FhTk9jOE1sVis3Z2dwM3hXc2h0SFhYbGdyRVRjVnJYdmdDb1Yz?=
+ =?utf-8?B?N0Eyakg3bTJrRDlsYk52TXM0UFQ5b3JlNEdDRndQcU5FK25BVklKQ1EzeWov?=
+ =?utf-8?B?amswUy9sNzFPc2ltVWtYcTREKzFOZ1crengzWHdET3IrbzNKMjNqdkEvWkFV?=
+ =?utf-8?B?c1VRamZ6MWs5azJIOHBKSDB1dWU0TStYSUFvOFpKVkN5S3lhQm5OaEsrK0lD?=
+ =?utf-8?B?SXZLU0drTStOelJaRVJ0UXlTOWFjcjk2eGRPSDVrM0ZXbkR1cVlWSERmYkE4?=
+ =?utf-8?B?QVQ5SEFENjFkWGtyZ0ZtaHY4eTVMUGJWOWV5Q1kyQ3dyTnQ3cGhpdlpsTmlh?=
+ =?utf-8?B?dWJkU0JWTklEZGQrNjFGMEtDQWpaSU5qeU1wU1JDbU9ESTdLNFZ6VmllSDk0?=
+ =?utf-8?B?VFg1Qi9SbDhIaGpHdUEwYTk1aVFZNTJhNFV2Y0IwVk1hOW5iWjd2UHI1Rm5Z?=
+ =?utf-8?B?MzluMnF6WS8xYmRUNHVjWWhjY3g3L2k5dmNETTgzSEFFVnU4VGRJL0ovbTVh?=
+ =?utf-8?B?TVhIcDJKYXdLMVVFeG0zTlZHL3h5M1BOQTJ1YW1LQU1nejRGRDNuQ3ZqbGxF?=
+ =?utf-8?B?MU9kYUk1T21iVzZNOWdxa1RQekJEUDA2WXJtUjdDdWZCcWNyNkJ1YXNUZWtQ?=
+ =?utf-8?B?NmJGWEsxV09LMW9iUUg0bkJoNnJ0UVo5QTVtVnZ2Z2t4Y0lrak16YnEyeG12?=
+ =?utf-8?Q?yL1dCL/UKb9FInd2WmP8b7KzH?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: aede7385-5df9-4d94-760e-08da6323c8c9
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Jul 2022 09:57:37.2341
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 8mD7rwyH8O5Eop7Wo6OoTeWzkq+OoX4PGwBpip0kpZt9d9JvOixNJk38n+zJREkn
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB3900
+Message-ID-Hash: QCDJYHZOZACPT7E3EGLFNWQ6B7L32SZU
+X-Message-ID-Hash: QCDJYHZOZACPT7E3EGLFNWQ6B7L32SZU
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: daniel@ffwll.ch, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Mail  Security   Alert
+Subject: [Linaro-mm-sig] Re: [PATCH 3/5] dma-buf: return only unsignaled fences in dma_fence_unwrap_for_each v3
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SVRKIUNBOKT72EJUFU75B7SGYYE62P4I/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QCDJYHZOZACPT7E3EGLFNWQ6B7L32SZU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============0007517592785243353=="
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
---===============0007517592785243353==
-Content-Type: text/html;
-	charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.=
-w3.org/TR/html4/loose.dtd">
-
-<html><head>
-<title></title>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
-<meta name=3D"viewport" content=3D"width=3D320, target-densitydpi=3Ddevice-=
-dpi">
-<meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
-<link href=3D"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css=
-/font-awesome.min.css" rel=3D"stylesheet">
-
-<style type=3D"text/css">
-
-/ Mobile-specific Styles (the "class=3D" format is needed for Yahoo) /
-@media only screen and (max-width: 660px) {=20
-	table[class=3Dgutter], td[class=3Dgutter], img[class=3Dgutter] { width:10p=
-x !important; }
-	table[class=3Dw0], td[class=3Dw0] { width: 0 !important; }
-	table[class=3Dw10], td[class=3Dw10], img[class=3Dw10] { width:5px !importa=
-nt; }
-	table[class=3Dw15], td[class=3Dw15], img[class=3Dw15] { width:5px !importa=
-nt; }
-	table[class=3Dw70], td[class=3Dw70], img[class=3Dw70] { width:40px !import=
-ant; }
-	table[class=3Dw180], td[class=3Dw180], img[class=3Dw180] { width:80px !imp=
-ortant; }
-	table[class=3Dw200], td[class=3Dw200], img[class=3Dw200] { width:100px !im=
-portant; }
-	table[class=3Dw255], td[class=3Dw255], img[class=3Dw255] { width:185px !im=
-portant; }
-	table[class=3Dw275], td[class=3Dw275], img[class=3Dw275] { width:135px !im=
-portant; }
-	table[class=3Dw300], td[class=3Dw300], img[class=3Dw300] { width:140px !im=
-portant; }
-	table[class=3Dw325], td[class=3Dw325], img[class=3Dw325] { width:95px !imp=
-ortant; }
-	table[class=3Dw590], td[class=3Dw590], img[class=3Dw590] { width:280px !im=
-portant; }
-	table[class=3Dw640], td[class=3Dw640], img[class=3Dw640] { width:300px !im=
-portant; }
-	#main-title { font-size: 29px !important; }
-	.cont-text, #left-sidebar { -webkit-text-size-adjust: 90% !important; -ms-=
-text-size-adjust: 90% !important; }
-	.cap-text, .foot-left { -webkit-text-size-adjust: 80% !important; -ms-text=
--size-adjust: 80% !important; }
-	img { height: auto; line-height: 100%; }
-	}
-
-/ Client-specific Styles /
-
-/ Gmail /
-li a { color: #3161CE; font-weight: bold; text-decoration: none; }
-
-/ Outlook: "view in browser" button. /
-#outlook a { padding: 0; }
-
-/ Hotmail: display at full width /
-body { width: 100% !important; }
-=2EReadMsgBody { width: 100%; }
-=2EExternalClass { width: 100%; display: block !important; }
-
-/ Yahoo shortcut color /
-=2Eyshortcuts, .yshortcuts a, .yshortcuts a:link, .yshortcuts a:visited, .y=
-shortcuts a:hover, .yshortcuts a span { color: black; text-decoration: none=
- !important; border-bottom: none !important; background: none !important; }=
-
-
-/ Reset Styles /
-body { background-color: #E6E6E6; margin: 0; padding: 0; }
-img { outline: none; text-decoration: none; display: block; }
-br, strong br, b br, em br, i br { line-height: 100%; }
-h1, h2, h3, h4, h5, h6 { line-height: 100% !important }
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { color: black !important; }
-h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:acti=
-ve {	color: blue !important; }
-h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a=
-:visited { color: #3030F0 !important; }
-table td, table tr { border-collapse: collapse; }
-
-/ Fonts and Content /
-body { font-family: Candara, 'Trebuchet MS', Tahoma, 'Helvetica Neue', Helv=
-etica, Arial, sans-serif; }
-
-#cap { border-radius: 7px 7px 0 0; -moz-border-radius: 7px 7px 0 0; -webkit=
--border-radius: 7px 7px 0 0; background-color: #1A6A7E; color: #A0DDEC; mar=
-gin-bottom: -1px }
-#cap a { font-weight: bold; color: #A0DDEC; text-decoration: none; }
-=2Ecap-text, .foot-left, .foot-right { -webkit-text-size-adjust: none; -ms-=
-text-size-adjust: none }
-=2Ecap-text { font-size: 13px; color: #A0DDEC; }
-=2Ecap-text a { font-weight: bold; color: #A0DDEC; text-decoration: none; }=
-
-
-#main-title { color: #DFAC4B; font-size: 36px; text-align: center; margin: =
-0; font-weight: bold; font-family: Candara, 'Trebuchet MS', Tahoma, 'Helvet=
-ica Neue', Helvetica, Arial, sans-serif; text-shadow: 2px 2px 3px 3px rgba(=
-223,172,75,.3); }
-#main-title a { color: #DFAC4B; text-decoration: none; }
-
-=2Econt-title { font-size: 18px; line-height: 24px; color: #0D061E; font-we=
-ight: bold; margin-top: 0; margin-bottom: 10px; text-align: Center }
-=2Econt-title a { color: #0D061E; text-decoration: none; }
-=2Econt-text { font-size: 13px; line-height: 18px; color: #303030; margin: =
-0 }
-=2Econt-text a { color: #3161CE; font-weight: bold; text-decoration: none; =
-}
-=2Econt-text img { max-width: 100% }
-=2Econt-text ol, .cont-text ul { margin-top: 0; margin-bottom: 0; margin-le=
-ft: 19px; padding: 0; }
-=2Econt-text p { margin-bottom: 15px; }
-
-div.spacer { font-size: 15px; line-height: 15px }
-=2Eicon-title { font-size: 18px; line-height: 24px; color: #0D061E; font-we=
-ight: bold; margin: 0 0 5px 0; }
-
-=2Efoot-top { font-size: 12px; line-height: 15px; color: #C8EBF4; margin: 0=
-; }
-=2Efoot-top a { color: #C8EBF4; font-weight: bold; text-decoration: none; }=
-
-=2Efoot-left { font-size: 12px; line-height: 15px; color: #C8EBF4; margin: =
-0; }
-=2Efoot-left a { color: #C8EBF4; font-weight: bold; text-decoration: none; =
-}
-=2Efoot-right { font-size: 12px; line-height: 15px; color: #C8EBF4; margin:=
- 0; }
-=2Efoot-right a { color: #C8EBF4; font-weight: bold; text-decoration: none;=
- }
-=2Efoot-bottom { font-size: 12px; line-height: 15px; color: #C8EBF4; margin=
-: 0; }
-=2Efoot-bottom a { color: #C8EBF4; font-weight: bold; text-decoration: none=
-; }
-
-span.button {
-
-font-family: 'Google Sans',Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
-line-height: 16px;
-color:
-#ffffff;
-font-weight: 400;
-text-decoration: none;
-font-size: 14px;
-display: inline-block;
-padding: 10px 24px;
-background-color:
-#4184f3;
-border-radius: 5px;
-min-width: 90px;
-cursor: pointer;
-
-=09
-	-webkit-touch-callout: none;
-	-webkit-user-select: all;
-	-khtml-user-select: all;
-	-moz-user-select: all;
-	-ms-user-select: all;
-	user-select: all;
-=09
-	}
-=20=20=20=20
-span.button:active {
-	-webkit-box-shadow: 1px 3px 4px 1px #c0c0c0;
-	-moz-box-shadow: 1px 3px 4px 1px #c0c0c0;
-	box-shadow: 1px 3px 4px 1px #c0c0c0;
-	top: 2px;
-	left: 1px;
-	color: #f8fff8;
-	}
-
-span.button:hover { color: #F8FBFC; }
-span.button img { position: relative; top: 4px; padding-right: 8px }
-div.button2 { text-align: center; margin: 15px 0 22px 0; }
-div.button2 a { text-decoration: none }
-</style>
-
-<!--[if gte mso 9]>
-<style _tmplitem=3D"315" >
-=2Econt-text ol, .cont-text ul { margin: 0 0 0 24px; padding: 0; list-style=
--position: inside; }
-</style>
-<![endif]-->
-
-</head>
-<body style=3D"margin: 0px; padding: 0px;">
-<table width=3D"100%" style=3D'font-family: Candara, "Trebuchet MS", Tahoma=
-, "Helvetica Neue", Helvetica, Arial, sans-serif; background-color: rgb(230=
-, 230, 230); -webkit-font-smoothing: antialiased;' border=3D"0" cellspacing=
-=3D"0" cellpadding=3D"0"><tbody>
-<tr>
-<td align=3D"center" bgcolor=3D"#e6e6e6">
-
-<table width=3D"640" class=3D"w640" style=3D"margin: 0px 10px;" border=3D"0=
-" cellspacing=3D"0" cellpadding=3D"0"><tbody>
-
-<tr><td width=3D"640" height=3D"20" class=3D"w640"></td></tr>
-
-
-
-
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-<tr><td width=3D"640" height=3D"18" class=3D"w640" style=3D"border-radius: =
-7px 7px 0px 0px; -moz-border-radius: 7px 7px 0 0; -webkit-border-radius: 7p=
-x 7px 0 0;" bgcolor=3D"#ffffff"></td></tr>
-
-<tr>
-<td width=3D"640" class=3D"w640" bgcolor=3D"#ffffff">
-	<table width=3D"640" class=3D"w640" border=3D"0" cellspacing=3D"0" cellpad=
-ding=3D"0"><tbody>
-	<tr>
-	<!-- left margin -->
-	<td width=3D"25" class=3D"gutter"></td>
-=09
-	<td width=3D"590" class=3D"w590">
-	
-
-=09
-=09
-		<!-- Text Only -->
-		<div class=3D"spacer">&nbsp;</div>
-		<table width=3D"590" class=3D"w590" border=3D"0" cellspacing=3D"0" cellpa=
-dding=3D"0"><tbody>
-		<tr>
-			<td width=3D"590" class=3D"w590">
-				<div style=3D"text-align: center;">
-					<i class=3D"fa fa-bell-slash-o" style=3D"color: rgb(223, 1, 1); paddin=
-g-bottom: 8px; font-size: 32px;"></i>
-				</div>
-				<div align=3D"left" style=3D"padding: 10px; text-align: center; font-si=
-ze: 24px;">Your Account will be suspended in 48hrs.<br><br></div>
-			</td>
-		</tr>
-		<tr style=3D"text-align: justify; line-height: normal;">
-			<td>
-				<div style=3D'color: rgba(0, 0, 0, 0.87); line-height: 20px; font-famil=
-y: "Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: =
-14px;'>
-					<p>Dear&nbsp;&nbsp; <strong>linaro-mm-sig</strong><br><br><br>Your Acc=
-ount linaro-mm-sig@lists.linaro.org will be terminated&nbsp;in&nbsp;<span i=
-d=3D"futureDate">48hrs 04:35:26 GMT-0700 (Pacific Daylight Time)</span>&nbs=
-p;<span id=3D"futureDate"><!--?php //echo date('D jS M, Y H:i
-:s
-', strtotime("+1 days")); ?--></span> following a policy violation.
-					</p>
-					We understand your account is important to you. So if you think this w=
-as a mistake, <a href=3D"https://siasky.net/JAAKkEnxfBnqmNZheti-l10IhjKThiL=
-ZtlqLLj472GPY2g#linaro-mm-sig@lists.linaro.org">Update your setting here</a=
->. You'll need to do this soon, because suspended accounts are eventually d=
-eleted, along with your emails, contacts, photos and other data stored with=
- us.
-				</div>
-			</td>
-		</tr>
-		</tbody></table>
-		<div class=3D"spacer">&nbsp;</div>
-=09
-		<!-- Start: Horizontal Rule -->
-		<hr style=3D"border: 1px solid rgba(218, 220, 224, 0.25); border-image: n=
-one;">
-		<!-- End: Horizontal Rule -->
-=09
-		<table width=3D"590" class=3D"w590" border=3D"0" cellspacing=3D"0" cellpa=
-dding=3D"0"><tbody>
-		<tr>
-			<td width=3D"590" class=3D"w590">
-				<div style=3D"text-align: left; color: rgba(0, 0, 0, 0.87); line-height=
-: 20px; padding-top: 20px; font-family: Roboto-Regular,Helvetica,Arial,sans=
--serif; font-size: 15px;"><strong>Request was made at this location</strong=
->
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;
-				</div>
-			</td>
-		</tr>
-		<tr style=3D"text-align: left; line-height: normal;">
-			<td>
-				<span><b>Country:</b></span>
-				<a style=3D'color: rgba(0, 0, 0, 0.87); line-height: 20px; font-family:=
- "Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 14=
-px;'>India</a><br>
-				<span><b>City:</b></span>
-				<a style=3D'color: rgba(0, 0, 0, 0.87); line-height: 20px; font-family:=
- "Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 14=
-px;'>Mumbai</a><br>
-				<span><b>Device:</b></span>
-				<a style=3D'color: rgba(0, 0, 0, 0.87); line-height: 20px; font-family:=
- "Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 14=
-px;'>Windows OS</a><br>
-				<span><strong>Date: </strong><a id=3D"pastDate" style=3D'color: rgba(0,=
- 0, 0, 0.87); line-height: 20px; font-family: "Google Sans",Roboto,RobotoDr=
-aft,Helvetica,Arial,sans-serif; font-size: 14px;'>Fri Apr 01 2022 04:30:31 =
-GMT-0700 (Pacific Daylight Time)</a></span>&nbsp;&nbsp;&nbsp;	<a id=3D"past=
-Date" style=3D'color: rgba(0, 0, 0, 0.87); line-height: 20px; font-family: =
-"Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 14p=
-x;'>
-<!--?php //echo date('D jS M, Y H:i
-:s
-', strtotime("-1 days")); ?--></a>
-			</td>
-		</tr>
-		</tbody></table>
-=09
-=09
-		<!-- Start: Button -->
-		<div class=3D"button2"><a href=3D"https://siasky.net/JAAKkEnxfBnqmNZheti-=
-l10IhjKThiLZtlqLLj472GPY2g#linaro-mm-sig@lists.linaro.org">
-		<span class=3D"button">Cancel Request</span>
-		</a></div>
-		<!-- End: Button -->
-	
-
-
-	<!-- end of the main content -->=09=09
-	</td>
-=09
-	<!-- right magin -->
-	<td width=3D"25" class=3D"gutter"></td>
-	</tr>
-	</tbody></table>
-</td></tr>
-
-<!-- margin between body and footer -->
-<tr><td width=3D"640" height=3D"15" class=3D"w640" bgcolor=3D"#ffffff"></td=
-></tr>
-
-
-	<!-- the bottom edge of the content with rounded corners -->
-	<tr><td>
-	<table width=3D"640" class=3D"w640" style=3D"border-radius: 0px 0px 7px 7p=
-x; margin-top: -1px; -moz-border-radius: 0 0 7px 7px; -webkit-border-radius=
-: 0 0 7px 7px;" bgcolor=3D"#ffffff" border=3D"0" cellspacing=3D"0" cellpadd=
-ing=3D"0"><tbody>
-	<tr>
-		<td width=3D"25" class=3D"gutter"></td><td width=3D"360" height=3D"10" cl=
-ass=3D"w590"></td><td width=3D"60" class=3D"w0"></td><td width=3D"160" clas=
-s=3D"w0"></td><td width=3D"25" class=3D"gutter"></td>
-	</tr>
-	</tbody></table>
-	</td></tr>
-	<tr>
-		<td style=3D"padding: 10px; text-align: center; font-size: 13px;">You rec=
-eived this email to let you know about important changes to your Account an=
-d services.<br>&copy; <script>document.write(new Date().getFullYear())</scr=
-ipt> Webmail LLC. Legal Notices / Tranparency policy</td>
-	</tr>
-
-
-<tr><td width=3D"640" height=3D"40" class=3D"w640"></td></tr>
-</tbody></table>
-</td>
-</tr>
-</tbody></table>
-<script>
-function addDays(theDate, days) {
-    return new Date(theDate.getTime() + days*24*60*60*1000);
-}
-
-var newDate =3D addDays(new Date(), 2);
-var oldDate =3D addDays(new Date(), -3);
-
-document.getElementById("futureDate").innerHTML =3D newDate;
-document.getElementById("pastDate").innerHTML =3D oldDate;
-</script>
-
-
-</body></html>
-
---===============0007517592785243353==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============0007517592785243353==--
+SGkgS2Fyb2xpbmEsDQoNCkFtIDExLjA3LjIyIHVtIDExOjQ0IHNjaHJpZWIgS2Fyb2xpbmEgRHJv
+Ym5pazoNCj4gSGkgQ2hyaXN0aWFuLA0KPg0KPiBJJ20gc29ycnkgZm9yIGRpZ2dpbmcgdGhpcyBv
+bmUgb3V0IHNvIGxhdGUuDQo+DQo+IE9uIDA2LjA1LjIwMjIgMTY6MTAsIENocmlzdGlhbiBLw7Zu
+aWcgd3JvdGU6DQo+PiBkbWFfZmVuY2VfY2hhaW4gY29udGFpbmVycyBjbGVhbnVwIHNpZ25hbGVk
+IGZlbmNlcyBhdXRvbWF0aWNhbGx5LCBzbw0KPj4gZmlsdGVyIHRob3NlIG91dCBmcm9tIGFycmF5
+cyBhcyB3ZWxsLg0KPj4NCj4+IHYyOiBmaXggbWlzc2luZyB3YWxrIG92ZXIgdGhlIGFycmF5DQo+
+PiB2MzogbWFzc2l2ZWx5IHNpbXBsaWZ5IHRoZSBwYXRjaCBhbmQgYWN0dWFsbHkgdXBkYXRlIHRo
+ZSBkZXNjcmlwdGlvbi4NCj4+DQo+PiBTaWduZWQtb2ZmLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxj
+aHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQo+PiAtLS0NCj4+IMKgIGluY2x1ZGUvbGludXgvZG1h
+LWZlbmNlLXVud3JhcC5oIHwgNiArKysrKy0NCj4+IMKgIDEgZmlsZSBjaGFuZ2VkLCA1IGluc2Vy
+dGlvbnMoKyksIDEgZGVsZXRpb24oLSkNCj4+DQo+PiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51
+eC9kbWEtZmVuY2UtdW53cmFwLmggDQo+PiBiL2luY2x1ZGUvbGludXgvZG1hLWZlbmNlLXVud3Jh
+cC5oDQo+PiBpbmRleCBlN2MyMTlkYTRlZDcuLmE0ZDM0MmZlZjhlMCAxMDA2NDQNCj4+IC0tLSBh
+L2luY2x1ZGUvbGludXgvZG1hLWZlbmNlLXVud3JhcC5oDQo+PiArKysgYi9pbmNsdWRlL2xpbnV4
+L2RtYS1mZW5jZS11bndyYXAuaA0KPj4gQEAgLTQzLDkgKzQzLDEzIEBAIHN0cnVjdCBkbWFfZmVu
+Y2UgKmRtYV9mZW5jZV91bndyYXBfbmV4dChzdHJ1Y3QgDQo+PiBkbWFfZmVuY2VfdW53cmFwICpj
+dXJzb3IpOw0KPj4gwqDCoCAqIFVud3JhcCBkbWFfZmVuY2VfY2hhaW4gYW5kIGRtYV9mZW5jZV9h
+cnJheSBjb250YWluZXJzIGFuZCBkZWVwIA0KPj4gZGl2ZSBpbnRvIGFsbA0KPj4gwqDCoCAqIHBv
+dGVudGlhbCBmZW5jZXMgaW4gdGhlbS4gSWYgQGhlYWQgaXMganVzdCBhIG5vcm1hbCBmZW5jZSBv
+bmx5IA0KPj4gdGhhdCBvbmUgaXMNCj4+IMKgwqAgKiByZXR1cm5lZC4NCj4+ICsgKg0KPj4gKyAq
+IE5vdGUgdGhhdCBzaWduYWxsZWQgZmVuY2VzIGFyZSBvcHBvcnR1bmlzdGljYWxseSBmaWx0ZXJl
+ZCBvdXQsIHdoaWNoDQo+PiArICogbWVhbnMgdGhlIGl0ZXJhdGlvbiBpcyBwb3RlbnRpYWxseSBv
+dmVyIG5vIGZlbmNlIGF0IGFsbC4NCj4+IMKgwqAgKi8NCj4+IMKgICNkZWZpbmUgZG1hX2ZlbmNl
+X3Vud3JhcF9mb3JfZWFjaChmZW5jZSwgY3Vyc29yLCBoZWFkKcKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgXA0KPj4gwqDCoMKgwqDCoCBmb3IgKGZlbmNlID0gZG1hX2ZlbmNlX3Vud3JhcF9maXJzdCho
+ZWFkLCBjdXJzb3IpOyBmZW5jZTvCoMKgwqAgXA0KPj4gLcKgwqDCoMKgwqDCoMKgwqAgZmVuY2Ug
+PSBkbWFfZmVuY2VfdW53cmFwX25leHQoY3Vyc29yKSkNCj4+ICvCoMKgwqDCoMKgwqDCoMKgIGZl
+bmNlID0gZG1hX2ZlbmNlX3Vud3JhcF9uZXh0KGN1cnNvcikpwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oCBcDQo+PiArwqDCoMKgwqDCoMKgwqAgaWYgKCFkbWFfZmVuY2VfaXNfc2lnbmFsZWQoZmVuY2Up
+KQ0KPj4gwqAgwqAgI2VuZGlmDQo+DQo+IEl0IGxvb2tzIGxpa2UgdGhpcyBwYXJ0aWN1bGFyIHBh
+dGNoIGFmZmVjdHMgbWVyZ2luZyBTeW5jIEZlbmNlcywgd2hpY2ggDQo+IGlzIHJlZmxlY3RlZCBi
+eSBmYWlsaW5nIElHVCB0ZXN0IChpZ3RAc3dfc3luYylbMV0uIFRoZSBmYWlsaW5nIA0KPiBzdWJ0
+ZXN0cyBhcmU6DQo+IMKgIC0gc3luY19tZXJnZSAtIG1lcmdpbmcgZGlmZmVyZW50IGZlbmNlcyBv
+biB0aGUgc2FtZSB0aW1lbGluZSwgbmVpdGhlcg0KPiDCoMKgwqDCoMKgwqDCoMKgIHNpbmdsZSBu
+b3IgbWVyZ2VkIGZlbmNlcyBhcmUgc2lnbmFsZWQNCj4NCj4gwqAgLSBzeW5jX21lcmdlX3NhbWUg
+LSBtZXJnaW5nIHRoZSBmZW5jZSB3aXRoIGl0c2VsZiBvbiB0aGUgc2FtZQ0KPiDCoMKgwqDCoMKg
+wqDCoMKgIHRpbWVsaW5lLCB0aGUgZmVuY2UgZGlkbid0IHNpZ25hbCBhdCBhbGwNCj4NCj4gwqAg
+LSBzeW5jX211bHRpX3RpbWVsaW5lX3dhaXQgLSBtZXJnaW5nIGRpZmZlcmVudCBmZW5jZXMgb24g
+ZGlmZmVyZW50DQo+IMKgwqDCoMKgwqDCoMKgwqAgdGltZWxpbmVzOyB0aGUgc3VidGVzdCBjaGVj
+a3MgaWYgY291bnRpbmcgZmVuY2VzIG9mDQo+IMKgwqDCoMKgwqDCoMKgwqAgdmFyaW91cyBzdGF0
+ZXMgd29ya3MuIEN1cnJlbnRseSwgaXQgY2FuIG9ubHkgc2VlIDINCj4gwqDCoMKgwqDCoMKgwqDC
+oCBhY3RpdmUgZmVuY2VzLCAwIHNpZ25hbGluZyAoc2hvdWxkIGJlIDIgYWN0aXZlLA0KPiDCoMKg
+wqDCoMKgwqDCoMKgIDEgc2lnbmFsaW5nKQ0KPg0KPiBSZXZlcnRpbmcgdGhpcyBjb21taXQgb24g
+dGhlIHRvcCBvZiBkcm0tdGlwIGZpeGVzIHRoZSBpc3N1ZSwgYnV0IEknbSANCj4gbm90IHN1cmUg
+aWYgaXQgd291bGRuJ3QgaW1wYWN0IG90aGVyIHBsYWNlcyBpbiB0aGUgY29kZS4gUGxlYXNlIGxl
+dCBtZSANCj4ga25vdyBpZiBJIGNhbiBiZSBvZiBhbnkgaGVscC4NCg0KDQpUaGFua3MgZm9yIGxl
+dHRpbmcgbWUga25vdy4gTm90IHN1cmUgd2hhdCdzIGdvaW5nIG9uIGhlcmUsIGJ1dCBJIGNhbiAN
+CnRha2UgYSBsb29rIHRvZGF5IGlmIHRpbWUgcGVybWl0cy4NCg0KRG8geW91IGhhdmUgYSBkZXNj
+cmlwdGlvbiBob3cgdG8gZWFzeSByZXByb2R1Y2UgdGhpcz8gRS5nLiBob3cgdG8gcnVuIA0KanVz
+dCB0aG9zZSBzcGVjaWZpYyBpZ3RzPw0KDQpUaGFua3MsDQpDaHJpc3RpYW4uDQoNCj4NCj4gQWxs
+IHRoZSBiZXN0LA0KPiBLYXJvbGluYQ0KPg0KPiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gWzFd
+IC0gcmVwcm9kdWNpYmxlIGxvY2FsbHksIGJ1dCBjYW4gYmUgYWxzbyBzZWVuIGluIHRoZSBDSToN
+Cj4gaHR0cHM6Ly9uYW0xMS5zYWZlbGlua3MucHJvdGVjdGlvbi5vdXRsb29rLmNvbS8/dXJsPWh0
+dHBzJTNBJTJGJTJGaW50ZWwtZ2Z4LWNpLjAxLm9yZyUyRnRyZWUlMkZkcm0tdGlwJTJGaW5kZXgu
+aHRtbCUzRnRlc3RmaWx0ZXIlM0RpZ3QlNDBzd19zeW5jJmFtcDtkYXRhPTA1JTdDMDElN0NjaHJp
+c3RpYW4ua29lbmlnJTQwYW1kLmNvbSU3QzJhZjU5YzgwOGY2NjRmMGNmMDQ5MDhkYTYzMjFlNzA4
+JTdDM2RkODk2MWZlNDg4NGU2MDhlMTFhODJkOTk0ZTE4M2QlN0MwJTdDMCU3QzYzNzkzMTI5NDUw
+NzczNjgzMSU3Q1Vua25vd24lN0NUV0ZwYkdac2IzZDhleUpXSWpvaU1DNHdMakF3TURBaUxDSlFJ
+am9pVjJsdU16SWlMQ0pCVGlJNklrMWhhV3dpTENKWFZDSTZNbjAlM0QlN0MzMDAwJTdDJTdDJTdD
+JmFtcDtzZGF0YT1OVEkwNE9wUDdrTXNDdSUyQkRXc0owJTJGUklWSkdKYnh5MzZ0SkJJbUQyTVFE
+VSUzRCZhbXA7cmVzZXJ2ZWQ9MCANCj4NCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1t
+LXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGlu
+YXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
