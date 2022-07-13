@@ -2,149 +2,487 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE36258E7D0
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Aug 2022 09:23:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 62C6458E7CF
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Aug 2022 09:22:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0EAC947984
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Aug 2022 07:23:01 +0000 (UTC)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-	by lists.linaro.org (Postfix) with ESMTPS id C1B5A3EBFF
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Jul 2022 09:30:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7E3A33F1D7
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Aug 2022 07:22:54 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id 8364D3EBFF
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Jul 2022 09:30:24 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.source.kernel.org (Postfix) with ESMTPS id BC4F0B81D73;
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 1562561CCC;
 	Wed, 13 Jul 2022 09:30:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 57719C385A5;
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 06BE8C341CE;
 	Wed, 13 Jul 2022 09:30:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1657704622;
-	bh=KEI5HMlpCOrMUecDm6ehTcV2JBjxp5VNyS4qBhBdw24=;
-	h=From:To:Cc:Subject:Date:From;
-	b=bBIJjsCGdafvwdRqD7Ea6g4x6iQyquNNjsn/HU14xKgcfVBdbtzmt3ttMITOCWE4k
-	 kuyGNFByCAJ2IuVrolN9ECMO8KxNbvOaXOh5nO4Mqv/7bqyvPC3pykJeqi38LzkaTP
-	 3pM5IwwwCBGOHUaAgiXIO5bDu5pIDE1nduCs9VYO3l8IYKdbru1VxvSOF1rmqQS1kl
-	 9paq/s89MRM8P5LbDtFhAnEPRIdstpfDBPb6/zJBrSMyLDAOsxAV9bpmxu46xSdpmN
-	 GFOVs5gL99v0ASPLRxzcTvZfV+pbRXrK7pkmQUZqsbWycTsutJ8/7znxbqp90QIOE+
-	 vFhV8xixrMc3w==
+	bh=4kra6JYeTpbloCB6kM7O8tizc0ckPfouvDEAsME0I7s=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=NemMJha7tWvDKcj4DC+bd1y8XTLHj9TvZ1LtAyIdVc2dYXFHJmeKaK1iyBjQCRxy3
+	 rzAVThpXORItJO06UWTeBO2a8iDjKWrQu1+fFkJ6vVutOepGgqaTFx/MsfztuNf2+N
+	 V1CELjToakFHpe+JRkFCCcjdjk8dW0Rk2R0WqJpy4+JNRtpTetKJu4WpLWtehune/8
+	 u/bNjpmGKEWv6selcxgSwrI5NW8ZbBbdnvriSS0fY42OQVD6e2C0QFd1oaDFH8CWLI
+	 IkMKIwXVn5Qt/rAQ2KIEWws7KbJLeGqP4N2E2zrLGiCHjTA5/1nqSgN1TKDcaO0bmS
+	 lgv3n92bNscbw==
 Received: from mchehab by mail.kernel.org with local (Exim 4.95)
 	(envelope-from <mchehab@kernel.org>)
-	id 1oBYhH-0050L9-Fb;
+	id 1oBYhH-0050LR-L7;
 	Wed, 13 Jul 2022 10:30:19 +0100
 From: Mauro Carvalho Chehab <mchehab@kernel.org>
 To: 
-Date: Wed, 13 Jul 2022 10:29:57 +0100
-Message-Id: <cover.1657703926.git.mchehab@kernel.org>
+Date: Wed, 13 Jul 2022 10:30:03 +0100
+Message-Id: <d75cf5bbd2169004e3ab9942652af0766de06e06.1657703926.git.mchehab@kernel.org>
 X-Mailer: git-send-email 2.36.1
+In-Reply-To: <cover.1657703926.git.mchehab@kernel.org>
+References: <cover.1657703926.git.mchehab@kernel.org>
 MIME-Version: 1.0
 X-MailFrom: mchehab@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: Z52MMAMRG77DQCCO7XIYFFICCN73OI6L
-X-Message-ID-Hash: Z52MMAMRG77DQCCO7XIYFFICCN73OI6L
-X-Mailman-Approved-At: Wed, 10 Aug 2022 07:22:53 +0000
-CC: Mauro Carvalho Chehab <mchehab@kernel.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Abdiel Janulgue <abdiel.janulgue@linux.intel.com>, Alan Previn <alan.previn.teres.alexis@intel.com>, Andi Shyti <andi.shyti@linux.intel.com>, Andrzej Hajda <andrzej.hajda@intel.com>, Ashutosh Dixit <ashutosh.dixit@intel.com>, Ayaz A Siddiqui <ayaz.siddiqui@intel.com>, Borislav Petkov <bp@suse.de>, Casey Bowman <casey.g.bowman@intel.com>, Chris Wilson <chris.p.wilson@intel.com>, Daniel Vetter <daniel@ffwll.ch>, Daniele Ceraolo Spurio <daniele.ceraolospurio@intel.com>, Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>, Jani Nikula <jani.nikula@linux.intel.com>, Jason Ekstrand <jason@jlekstrand.net>, John Harrison <John.C.Harrison@Intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Lucas De Marchi <lucas.demarchi@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, M
- att Atwood <matthew.s.atwood@intel.com>, Matt Roper <matthew.d.roper@intel.com>, Matthew Auld <matthew.auld@intel.com>, Matthew Brost <matthew.brost@intel.com>, Michael Cheng <michael.cheng@intel.com>, Michal Wajdeczko <michal.wajdeczko@intel.com>, Prathap Kumar Valsan <prathap.kumar.valsan@intel.com>, Ramalingam C <ramalingam.c@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, Tomas Winkler <tomas.winkler@intel.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Umesh Nerlige Ramappa <umesh.nerlige.ramappa@intel.com>, Vinay Belgaumkar <vinay.belgaumkar@intel.com>, dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
+Message-ID-Hash: 55W44ZC5JYEBISABFHMHSJNPFYHRMFWX
+X-Message-ID-Hash: 55W44ZC5JYEBISABFHMHSJNPFYHRMFWX
+X-Mailman-Approved-At: Wed, 10 Aug 2022 07:22:52 +0000
+CC: Chris Wilson <chris.p.wilson@intel.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, =?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, Abdiel Janulgue <abdiel.janulgue@linux.intel.com>, Andi Shyti <andi.shyti@linux.intel.com>, Andrzej Hajda <andrzej.hajda@intel.com>, Ayaz A Siddiqui <ayaz.siddiqui@intel.com>, Casey Bowman <casey.g.bowman@intel.com>, Daniel Vetter <daniel@ffwll.ch>, Daniele Ceraolo Spurio <daniele.ceraolospurio@intel.com>, Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>, Jani Nikula <jani.nikula@linux.intel.com>, Jason Ekstrand <jason@jlekstrand.net>, John Harrison <John.C.Harrison@Intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Lucas De Marchi <lucas.demarchi@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Matt Roper <matthew.d.roper@intel.com>, Matthew Auld <matthew.auld@intel.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Prathap Kumar Valsan <prathap.kumar.valsan@in
+ tel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, Tomas Winkler <tomas.winkler@intel.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, stable@vger.kernel.org, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Fei Yang <fei.yang@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 00/21] Fix performance regressions with TLB and add GuC support
+Subject: [Linaro-mm-sig] [PATCH 06/21] drm/i915/gt: Batch TLB invalidations
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Z52MMAMRG77DQCCO7XIYFFICCN73OI6L/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/55W44ZC5JYEBISABFHMHSJNPFYHRMFWX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-VExCIGludmFsaWRhdGlvbiBpcyBhIHNsb3cgb3BlcmF0aW9uLiBJdCBzaG91bGQgbm90IGJlIGRv
-aW5nIGxpZ2h0bHksIGFzIGl0DQpjYXVzZXMgcGVyZm9ybWFuY2UgcmVncmVzc2lvbnMsIGxpa2Ug
-dGhpczoNCg0KWzE3OC44MjEwMDJdIGk5MTUgMDAwMDowMDowMi4wOiBbZHJtXSAqRVJST1IqIHJj
-czAgVExCIGludmFsaWRhdGlvbiBkaWQgbm90IGNvbXBsZXRlIGluIDRtcyENCg0KVGhpcyBzZXJp
-ZXMgY29udGFpbiANCg0KMSkgc29tZSBwYXRjaGVzIHRoYXQgbWFrZXMgVExCIGludmFsaWRhdGlv
-biB0byBoYXBwZW4gb25seSBvbg0KYWN0aXZlLCBub24td2VkZ2VkIGVuZ2luZXMsIGRvaW5nIGNh
-Y2hlIGludmFsaWRhdGlvbiBpbiBiYXRjaCANCmFuZCBvbmx5IHdoZW4gR1Qgb2JqZWN0cyBhcmUg
-ZXhwb3NlZCB0byB1c2Vyc3BhY2U6DQoNCiAgZHJtL2k5MTUvZ3Q6IElnbm9yZSBUTEIgaW52YWxp
-ZGF0aW9ucyBvbiBpZGxlIGVuZ2luZXMNCiAgZHJtL2k5MTUvZ3Q6IE9ubHkgaW52YWxpZGF0ZSBU
-TEJzIGV4cG9zZWQgdG8gdXNlciBtYW5pcHVsYXRpb24NCiAgZHJtL2k5MTUvZ3Q6IFNraXAgVExC
-IGludmFsaWRhdGlvbnMgb25jZSB3ZWRnZWQNCiAgZHJtL2k5MTUvZ3Q6IEJhdGNoIFRMQiBpbnZh
-bGlkYXRpb25zDQogIGRybS9pOTE1L2d0OiBNb3ZlIFRMQiBpbnZhbGlkYXRpb24gdG8gaXRzIG93
-biBmaWxlDQoNCjIpIEl0IGZpeGVzIHR3byBidWdzLCBiZWluZyB0aGUgZmlyc3QgYSB3b3JrYXJv
-dW5kOg0KDQogIGRybS9pOTE1L2d0OiBJbnZhbGlkYXRlIFRMQiBvZiB0aGUgT0EgdW5pdCBhdCBU
-TEIgaW52YWxpZGF0aW9ucw0KICBkcm0vaTkxNTogSW52YWxpZGF0ZSB0aGUgVExCcyBvbiBlYWNo
-IEdUDQoNCiAgZHJtL2k5MTUvZ3VjOiBJbnRyb2R1Y2UgVExCX0lOVkFMSURBVElPTl9BTEwgYWN0
-aW9uDQoNCjMpIEl0IGFkZHMgR3VDIHN1cHBvcnQuIEJlc2lkZXMgcHJvdmlkaW5nIFRMQiBpbnZh
-bGlkYXRpb24gb24gc29tZQ0KYWRkaXRpb25hbCBoYXJkd2FyZSwgdGhpcyBzaG91bGQgYWxzbyBo
-ZWxwIHNlcmlhbGl6aW5nIEd1QyBvcGVyYXRpb25zDQp3aXRoIFRMQiBpbnZhbGlkYXRpb246DQoN
-CiAgZHJtL2k5MTUvZ3VjOiBJbnRyb2R1Y2UgVExCX0lOVkFMSURBVElPTl9BTEwgYWN0aW9uDQog
-IGRybS9pOTE1L2d1YzogRGVmaW5lIENUQiBiYXNlZCBUTEIgaW52YWxpZGF0aW9uIHJvdXRpbmVz
-DQogIGRybS9pOTE1OiBBZGQgcGxhdGZvcm0gbWFjcm8gZm9yIHNlbGVjdGl2ZSB0bGIgZmx1c2gN
-CiAgZHJtL2k5MTU6IERlZmluZSBHdUMgQmFzZWQgVExCIGludmFsaWRhdGlvbiByb3V0aW5lcw0K
-ICBkcm0vaTkxNTogQWRkIGdlbmVyaWMgaW50ZXJmYWNlIGZvciB0bGIgaW52YWxpZGF0aW9uIGZv
-ciBYZUhQDQogIGRybS9pOTE1OiBVc2Ugc2VsZWN0aXZlIHRsYiBpbnZhbGlkYXRpb25zIHdoZXJl
-IHN1cHBvcnRlZA0KDQo0KSBJdCBhZGRzIHRoZSBjb3JyZXNwb25kaW5nIGtlcm5lbC1kb2MgbWFy
-a3VwcyBmb3IgdGhlIGtBUEkNCnVzZWQgZm9yIFRMQiBpbnZhbGlkYXRpb24uDQoNCldoaWxlIEkg
-Y291bGQgaGF2ZSBzcGxpdCB0aGlzIGludG8gc21hbGxlciBwaWVjZXMsIEknbSBvcHRpbmcgdG8g
-c2VuZA0KdGhlbSBhbHRvZ2V0aGVyLCBpbiBvcmRlciBmb3IgQ0kgdHJ5Ym90IHRvIGJldHRlciB2
-ZXJpZnkgd2hhdCBpc3N1ZXMNCndpbGwgYmUgY2xvc2VkIHdpdGggdGhpcyBzZXJpZXMuDQoNCi0t
-LQ0KDQpDaHJpcyBXaWxzb24gKDcpOg0KICBkcm0vaTkxNS9ndDogSWdub3JlIFRMQiBpbnZhbGlk
-YXRpb25zIG9uIGlkbGUgZW5naW5lcw0KICBkcm0vaTkxNS9ndDogSW52YWxpZGF0ZSBUTEIgb2Yg
-dGhlIE9BIHVuaXQgYXQgVExCIGludmFsaWRhdGlvbnMNCiAgZHJtL2k5MTUvZ3Q6IE9ubHkgaW52
-YWxpZGF0ZSBUTEJzIGV4cG9zZWQgdG8gdXNlciBtYW5pcHVsYXRpb24NCiAgZHJtL2k5MTUvZ3Q6
-IFNraXAgVExCIGludmFsaWRhdGlvbnMgb25jZSB3ZWRnZWQNCiAgZHJtL2k5MTUvZ3Q6IEJhdGNo
-IFRMQiBpbnZhbGlkYXRpb25zDQogIGRybS9pOTE1L2d0OiBNb3ZlIFRMQiBpbnZhbGlkYXRpb24g
-dG8gaXRzIG93biBmaWxlDQogIGRybS9pOTE1OiBJbnZhbGlkYXRlIHRoZSBUTEJzIG9uIGVhY2gg
-R1QNCg0KTWF1cm8gQ2FydmFsaG8gQ2hlaGFiICg4KToNCiAgZHJtL2k5MTUvZ3Q6IGRvY3VtZW50
-IHdpdGhfaW50ZWxfZ3RfcG1faWZfYXdha2UoKQ0KICBkcm0vaTkxNS9ndDogZGVzY3JpYmUgdGhl
-IG5ldyB0bGIgcGFyYW1ldGVyIGF0IGk5MTVfdm1hX3Jlc291cmNlDQogIGRybS9pOTE1L2d1Yzog
-dXNlIGtlcm5lbC1kb2MgZm9yIGVudW0gaW50ZWxfZ3VjX3RsYl9pbnZhbF9tb2RlDQogIGRybS9p
-OTE1L2d1YzogZG9jdW1lbnQgdGhlIFRMQiBpbnZhbGlkYXRpb24gc3RydWN0IG1lbWJlcnMNCiAg
-ZHJtL2k5MTU6IGRvY3VtZW50IHRsYiBmaWVsZCBhdCBzdHJ1Y3QgZHJtX2k5MTVfZ2VtX29iamVj
-dA0KICBkcm0vaTkxNS9ndDogZG9jdW1lbnQgVExCIGNhY2hlIGludmFsaWRhdGlvbiBmdW5jdGlv
-bnMNCiAgZHJtL2k5MTUvZ3VjOiBkZXNjcmliZSBlbnVtIGludGVsX2d1Y190bGJfaW52YWxpZGF0
-aW9uX3R5cGUNCiAgZHJtL2k5MTUvZ3VjOiBkb2N1bWVudCBUTEIgY2FjaGUgaW52YWxpZGF0aW9u
-IGZ1bmN0aW9ucw0KDQpQaW90ciBQacOzcmtvd3NraSAoMSk6DQogIGRybS9pOTE1L2d1YzogSW50
-cm9kdWNlIFRMQl9JTlZBTElEQVRJT05fQUxMIGFjdGlvbg0KDQpQcmF0aGFwIEt1bWFyIFZhbHNh
-biAoNSk6DQogIGRybS9pOTE1L2d1YzogRGVmaW5lIENUQiBiYXNlZCBUTEIgaW52YWxpZGF0aW9u
-IHJvdXRpbmVzDQogIGRybS9pOTE1OiBBZGQgcGxhdGZvcm0gbWFjcm8gZm9yIHNlbGVjdGl2ZSB0
-bGIgZmx1c2gNCiAgZHJtL2k5MTU6IERlZmluZSBHdUMgQmFzZWQgVExCIGludmFsaWRhdGlvbiBy
-b3V0aW5lcw0KICBkcm0vaTkxNTogQWRkIGdlbmVyaWMgaW50ZXJmYWNlIGZvciB0bGIgaW52YWxp
-ZGF0aW9uIGZvciBYZUhQDQogIGRybS9pOTE1OiBVc2Ugc2VsZWN0aXZlIHRsYiBpbnZhbGlkYXRp
-b25zIHdoZXJlIHN1cHBvcnRlZA0KDQogZHJpdmVycy9ncHUvZHJtL2k5MTUvTWFrZWZpbGUgICAg
-ICAgICAgICAgICAgIHwgICAxICsNCiAuLi4vZ3B1L2RybS9pOTE1L2dlbS9pOTE1X2dlbV9vYmpl
-Y3RfdHlwZXMuaCAgfCAgIDYgKy0NCiBkcml2ZXJzL2dwdS9kcm0vaTkxNS9nZW0vaTkxNV9nZW1f
-cGFnZXMuYyAgICAgfCAgMjggKy0NCiBkcml2ZXJzL2dwdS9kcm0vaTkxNS9ndC9pbnRlbF9lbmdp
-bmUuaCAgICAgICAgfCAgIDEgKw0KIGRyaXZlcnMvZ3B1L2RybS9pOTE1L2d0L2ludGVsX2d0LmMg
-ICAgICAgICAgICB8IDEyNSArLS0tLS0tLQ0KIGRyaXZlcnMvZ3B1L2RybS9pOTE1L2d0L2ludGVs
-X2d0LmggICAgICAgICAgICB8ICAgMiAtDQogLi4uL2dwdS9kcm0vaTkxNS9ndC9pbnRlbF9ndF9i
-dWZmZXJfcG9vbC5oICAgIHwgICAzICstDQogZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3QvaW50ZWxf
-Z3RfZGVmaW5lcy5oICAgIHwgIDExICsNCiBkcml2ZXJzL2dwdS9kcm0vaTkxNS9ndC9pbnRlbF9n
-dF9wbS5oICAgICAgICAgfCAgMTAgKw0KIGRyaXZlcnMvZ3B1L2RybS9pOTE1L2d0L2ludGVsX2d0
-X3JlZ3MuaCAgICAgICB8ICAgOCArDQogZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3QvaW50ZWxfZ3Rf
-dHlwZXMuaCAgICAgIHwgIDIyICstDQogZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3QvaW50ZWxfcHBn
-dHQuYyAgICAgICAgIHwgICA4ICstDQogZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3QvaW50ZWxfdGxi
-LmMgICAgICAgICAgIHwgMjk1ICsrKysrKysrKysrKysrKysrKw0KIGRyaXZlcnMvZ3B1L2RybS9p
-OTE1L2d0L2ludGVsX3RsYi5oICAgICAgICAgICB8ICAzMCArKw0KIC4uLi9ncHUvZHJtL2k5MTUv
-Z3QvdWMvYWJpL2d1Y19hY3Rpb25zX2FiaS5oICB8ICA1NCArKysrDQogZHJpdmVycy9ncHUvZHJt
-L2k5MTUvZ3QvdWMvaW50ZWxfZ3VjLmMgICAgICAgIHwgMjMyICsrKysrKysrKysrKysrDQogZHJp
-dmVycy9ncHUvZHJtL2k5MTUvZ3QvdWMvaW50ZWxfZ3VjLmggICAgICAgIHwgIDM2ICsrKw0KIGRy
-aXZlcnMvZ3B1L2RybS9pOTE1L2d0L3VjL2ludGVsX2d1Y19jdC5jICAgICB8ICAyNCArLQ0KIGRy
-aXZlcnMvZ3B1L2RybS9pOTE1L2d0L3VjL2ludGVsX2d1Y19md2lmLmggICB8ICAgOSArDQogLi4u
-L2dwdS9kcm0vaTkxNS9ndC91Yy9pbnRlbF9ndWNfc3VibWlzc2lvbi5jIHwgIDkxICsrKysrLQ0K
-IGRyaXZlcnMvZ3B1L2RybS9pOTE1L2k5MTVfZHJ2LmggICAgICAgICAgICAgICB8ICAgNCArLQ0K
-IGRyaXZlcnMvZ3B1L2RybS9pOTE1L2k5MTVfcGNpLmMgICAgICAgICAgICAgICB8ICAgMSArDQog
-ZHJpdmVycy9ncHUvZHJtL2k5MTUvaTkxNV92bWEuYyAgICAgICAgICAgICAgIHwgIDQ2ICsrLQ0K
-IGRyaXZlcnMvZ3B1L2RybS9pOTE1L2k5MTVfdm1hLmggICAgICAgICAgICAgICB8ICAgMiArDQog
-ZHJpdmVycy9ncHUvZHJtL2k5MTUvaTkxNV92bWFfcmVzb3VyY2UuYyAgICAgIHwgICA5ICstDQog
-ZHJpdmVycy9ncHUvZHJtL2k5MTUvaTkxNV92bWFfcmVzb3VyY2UuaCAgICAgIHwgICA2ICstDQog
-ZHJpdmVycy9ncHUvZHJtL2k5MTUvaW50ZWxfZGV2aWNlX2luZm8uaCAgICAgIHwgICAxICsNCiAy
-NyBmaWxlcyBjaGFuZ2VkLCA5MTAgaW5zZXJ0aW9ucygrKSwgMTU1IGRlbGV0aW9ucygtKQ0KIGNy
-ZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vaTkxNS9ndC9pbnRlbF9ndF9kZWZpbmVz
-LmgNCiBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3QvaW50ZWxfdGxi
-LmMNCiBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2k5MTUvZ3QvaW50ZWxfdGxi
-LmgNCg0KLS0gDQoyLjM2LjENCg0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2ln
-QGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8t
-bW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+From: Chris Wilson <chris.p.wilson@intel.com>
+
+Invalidate TLB in patch, in order to reduce performance regressions.
+
+Currently, every caller performs a full barrier around a TLB
+invalidation, ignoring all other invalidations that may have already
+removed their PTEs from the cache. As this is a synchronous operation
+and can be quite slow, we cause multiple threads to contend on the TLB
+invalidate mutex blocking userspace.
+
+We only need to invalidate the TLB once after replacing our PTE to
+ensure that there is no possible continued access to the physical
+address before releasing our pages. By tracking a seqno for each full
+TLB invalidate we can quickly determine if one has been performed since
+rewriting the PTE, and only if necessary trigger one for ourselves.
+
+That helps to reduce the performance regression introduced by TLB
+invalidate logic.
+
+[mchehab: rebased to not require moving the code to a separate file]
+
+Cc: stable@vger.kernel.org
+Fixes: 7938d61591d3 ("drm/i915: Flush TLBs before releasing backing store")
+Suggested-by: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
+Signed-off-by: Chris Wilson <chris.p.wilson@intel.com>
+Cc: Fei Yang <fei.yang@intel.com>
+Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
+---
+
+See [PATCH 00/21] at: https://lore.kernel.org/all/cover.1657703926.git.mchehab@kernel.org/
+
+ .../gpu/drm/i915/gem/i915_gem_object_types.h  |  3 +-
+ drivers/gpu/drm/i915/gem/i915_gem_pages.c     | 21 +++++---
+ drivers/gpu/drm/i915/gt/intel_gt.c            | 53 ++++++++++++++-----
+ drivers/gpu/drm/i915/gt/intel_gt.h            | 12 ++++-
+ drivers/gpu/drm/i915/gt/intel_gt_types.h      | 18 ++++++-
+ drivers/gpu/drm/i915/gt/intel_ppgtt.c         |  8 ++-
+ drivers/gpu/drm/i915/i915_vma.c               | 34 +++++++++---
+ drivers/gpu/drm/i915/i915_vma.h               |  1 +
+ drivers/gpu/drm/i915/i915_vma_resource.c      |  5 +-
+ drivers/gpu/drm/i915/i915_vma_resource.h      |  6 ++-
+ 10 files changed, 125 insertions(+), 36 deletions(-)
+
+diff --git a/drivers/gpu/drm/i915/gem/i915_gem_object_types.h b/drivers/gpu/drm/i915/gem/i915_gem_object_types.h
+index 5cf36a130061..9f6b14ec189a 100644
+--- a/drivers/gpu/drm/i915/gem/i915_gem_object_types.h
++++ b/drivers/gpu/drm/i915/gem/i915_gem_object_types.h
+@@ -335,7 +335,6 @@ struct drm_i915_gem_object {
+ #define I915_BO_READONLY          BIT(7)
+ #define I915_TILING_QUIRK_BIT     8 /* unknown swizzling; do not release! */
+ #define I915_BO_PROTECTED         BIT(9)
+-#define I915_BO_WAS_BOUND_BIT     10
+ 	/**
+ 	 * @mem_flags - Mutable placement-related flags
+ 	 *
+@@ -616,6 +615,8 @@ struct drm_i915_gem_object {
+ 		 * pages were last acquired.
+ 		 */
+ 		bool dirty:1;
++
++		u32 tlb;
+ 	} mm;
+ 
+ 	struct {
+diff --git a/drivers/gpu/drm/i915/gem/i915_gem_pages.c b/drivers/gpu/drm/i915/gem/i915_gem_pages.c
+index 6835279943df..8357dbdcab5c 100644
+--- a/drivers/gpu/drm/i915/gem/i915_gem_pages.c
++++ b/drivers/gpu/drm/i915/gem/i915_gem_pages.c
+@@ -191,6 +191,18 @@ static void unmap_object(struct drm_i915_gem_object *obj, void *ptr)
+ 		vunmap(ptr);
+ }
+ 
++static void flush_tlb_invalidate(struct drm_i915_gem_object *obj)
++{
++	struct drm_i915_private *i915 = to_i915(obj->base.dev);
++	struct intel_gt *gt = to_gt(i915);
++
++	if (!obj->mm.tlb)
++		return;
++
++	intel_gt_invalidate_tlb(gt, obj->mm.tlb);
++	obj->mm.tlb = 0;
++}
++
+ struct sg_table *
+ __i915_gem_object_unset_pages(struct drm_i915_gem_object *obj)
+ {
+@@ -216,14 +228,7 @@ __i915_gem_object_unset_pages(struct drm_i915_gem_object *obj)
+ 	__i915_gem_object_reset_page_iter(obj);
+ 	obj->mm.page_sizes.phys = obj->mm.page_sizes.sg = 0;
+ 
+-	if (test_and_clear_bit(I915_BO_WAS_BOUND_BIT, &obj->flags)) {
+-		struct drm_i915_private *i915 = to_i915(obj->base.dev);
+-		struct intel_gt *gt = to_gt(i915);
+-		intel_wakeref_t wakeref;
+-
+-		with_intel_gt_pm_if_awake(gt, wakeref)
+-			intel_gt_invalidate_tlbs(gt);
+-	}
++	flush_tlb_invalidate(obj);
+ 
+ 	return pages;
+ }
+diff --git a/drivers/gpu/drm/i915/gt/intel_gt.c b/drivers/gpu/drm/i915/gt/intel_gt.c
+index 5c55a90672f4..f435e06125aa 100644
+--- a/drivers/gpu/drm/i915/gt/intel_gt.c
++++ b/drivers/gpu/drm/i915/gt/intel_gt.c
+@@ -38,8 +38,6 @@ static void __intel_gt_init_early(struct intel_gt *gt)
+ {
+ 	spin_lock_init(&gt->irq_lock);
+ 
+-	mutex_init(&gt->tlb_invalidate_lock);
+-
+ 	INIT_LIST_HEAD(&gt->closed_vma);
+ 	spin_lock_init(&gt->closed_lock);
+ 
+@@ -50,6 +48,8 @@ static void __intel_gt_init_early(struct intel_gt *gt)
+ 	intel_gt_init_reset(gt);
+ 	intel_gt_init_requests(gt);
+ 	intel_gt_init_timelines(gt);
++	mutex_init(&gt->tlb.invalidate_lock);
++	seqcount_mutex_init(&gt->tlb.seqno, &gt->tlb.invalidate_lock);
+ 	intel_gt_pm_init_early(gt);
+ 
+ 	intel_uc_init_early(&gt->uc);
+@@ -770,6 +770,7 @@ void intel_gt_driver_late_release_all(struct drm_i915_private *i915)
+ 		intel_gt_fini_requests(gt);
+ 		intel_gt_fini_reset(gt);
+ 		intel_gt_fini_timelines(gt);
++		mutex_destroy(&gt->tlb.invalidate_lock);
+ 		intel_engines_free(gt);
+ 	}
+ }
+@@ -908,7 +909,7 @@ get_reg_and_bit(const struct intel_engine_cs *engine, const bool gen8,
+ 	return rb;
+ }
+ 
+-void intel_gt_invalidate_tlbs(struct intel_gt *gt)
++static void mmio_invalidate_full(struct intel_gt *gt)
+ {
+ 	static const i915_reg_t gen8_regs[] = {
+ 		[RENDER_CLASS]			= GEN8_RTCR,
+@@ -931,12 +932,6 @@ void intel_gt_invalidate_tlbs(struct intel_gt *gt)
+ 	const i915_reg_t *regs;
+ 	unsigned int num = 0;
+ 
+-	if (I915_SELFTEST_ONLY(gt->awake == -ENODEV))
+-		return;
+-
+-	if (intel_gt_is_wedged(gt))
+-		return;
+-
+ 	if (GRAPHICS_VER(i915) == 12) {
+ 		regs = gen12_regs;
+ 		num = ARRAY_SIZE(gen12_regs);
+@@ -951,9 +946,6 @@ void intel_gt_invalidate_tlbs(struct intel_gt *gt)
+ 			  "Platform does not implement TLB invalidation!"))
+ 		return;
+ 
+-	GEM_TRACE("\n");
+-
+-	mutex_lock(&gt->tlb_invalidate_lock);
+ 	intel_uncore_forcewake_get(uncore, FORCEWAKE_ALL);
+ 
+ 	spin_lock_irq(&uncore->lock); /* serialise invalidate with GT reset */
+@@ -973,6 +965,8 @@ void intel_gt_invalidate_tlbs(struct intel_gt *gt)
+ 		awake |= engine->mask;
+ 	}
+ 
++	GT_TRACE(gt, "invalidated engines %08x\n", awake);
++
+ 	/* Wa_2207587034:tgl,dg1,rkl,adl-s,adl-p */
+ 	if (awake &&
+ 	    (IS_TIGERLAKE(i915) ||
+@@ -1012,5 +1006,38 @@ void intel_gt_invalidate_tlbs(struct intel_gt *gt)
+ 	 * transitions.
+ 	 */
+ 	intel_uncore_forcewake_put_delayed(uncore, FORCEWAKE_ALL);
+-	mutex_unlock(&gt->tlb_invalidate_lock);
++}
++
++static bool tlb_seqno_passed(const struct intel_gt *gt, u32 seqno)
++{
++	u32 cur = intel_gt_tlb_seqno(gt);
++
++	/* Only skip if a *full* TLB invalidate barrier has passed */
++	return (s32)(cur - ALIGN(seqno, 2)) > 0;
++}
++
++void intel_gt_invalidate_tlb(struct intel_gt *gt, u32 seqno)
++{
++	intel_wakeref_t wakeref;
++
++	if (I915_SELFTEST_ONLY(gt->awake == -ENODEV))
++		return;
++
++	if (intel_gt_is_wedged(gt))
++		return;
++
++	if (tlb_seqno_passed(gt, seqno))
++		return;
++
++	with_intel_gt_pm_if_awake(gt, wakeref) {
++		mutex_lock(&gt->tlb.invalidate_lock);
++		if (tlb_seqno_passed(gt, seqno))
++			goto unlock;
++
++		mmio_invalidate_full(gt);
++
++		write_seqcount_invalidate(&gt->tlb.seqno);
++unlock:
++		mutex_unlock(&gt->tlb.invalidate_lock);
++	}
+ }
+diff --git a/drivers/gpu/drm/i915/gt/intel_gt.h b/drivers/gpu/drm/i915/gt/intel_gt.h
+index 82d6f248d876..40b06adf509a 100644
+--- a/drivers/gpu/drm/i915/gt/intel_gt.h
++++ b/drivers/gpu/drm/i915/gt/intel_gt.h
+@@ -101,6 +101,16 @@ void intel_gt_info_print(const struct intel_gt_info *info,
+ 
+ void intel_gt_watchdog_work(struct work_struct *work);
+ 
+-void intel_gt_invalidate_tlbs(struct intel_gt *gt);
++static inline u32 intel_gt_tlb_seqno(const struct intel_gt *gt)
++{
++	return seqprop_sequence(&gt->tlb.seqno);
++}
++
++static inline u32 intel_gt_next_invalidate_tlb_full(const struct intel_gt *gt)
++{
++	return intel_gt_tlb_seqno(gt) | 1;
++}
++
++void intel_gt_invalidate_tlb(struct intel_gt *gt, u32 seqno);
+ 
+ #endif /* __INTEL_GT_H__ */
+diff --git a/drivers/gpu/drm/i915/gt/intel_gt_types.h b/drivers/gpu/drm/i915/gt/intel_gt_types.h
+index df708802889d..3804a583382b 100644
+--- a/drivers/gpu/drm/i915/gt/intel_gt_types.h
++++ b/drivers/gpu/drm/i915/gt/intel_gt_types.h
+@@ -11,6 +11,7 @@
+ #include <linux/llist.h>
+ #include <linux/mutex.h>
+ #include <linux/notifier.h>
++#include <linux/seqlock.h>
+ #include <linux/spinlock.h>
+ #include <linux/types.h>
+ #include <linux/workqueue.h>
+@@ -83,7 +84,22 @@ struct intel_gt {
+ 	struct intel_uc uc;
+ 	struct intel_gsc gsc;
+ 
+-	struct mutex tlb_invalidate_lock;
++	struct {
++		/* Serialize global tlb invalidations */
++		struct mutex invalidate_lock;
++
++		/*
++		 * Batch TLB invalidations
++		 *
++		 * After unbinding the PTE, we need to ensure the TLB
++		 * are invalidated prior to releasing the physical pages.
++		 * But we only need one such invalidation for all unbinds,
++		 * so we track how many TLB invalidations have been
++		 * performed since unbind the PTE and only emit an extra
++		 * invalidate if no full barrier has been passed.
++		 */
++		seqcount_mutex_t seqno;
++	} tlb;
+ 
+ 	struct i915_wa_list wa_list;
+ 
+diff --git a/drivers/gpu/drm/i915/gt/intel_ppgtt.c b/drivers/gpu/drm/i915/gt/intel_ppgtt.c
+index d8b94d638559..2da6c82a8bd2 100644
+--- a/drivers/gpu/drm/i915/gt/intel_ppgtt.c
++++ b/drivers/gpu/drm/i915/gt/intel_ppgtt.c
+@@ -206,8 +206,12 @@ void ppgtt_bind_vma(struct i915_address_space *vm,
+ void ppgtt_unbind_vma(struct i915_address_space *vm,
+ 		      struct i915_vma_resource *vma_res)
+ {
+-	if (vma_res->allocated)
+-		vm->clear_range(vm, vma_res->start, vma_res->vma_size);
++	if (!vma_res->allocated)
++		return;
++
++	vm->clear_range(vm, vma_res->start, vma_res->vma_size);
++	if (vma_res->tlb)
++		vma_invalidate_tlb(vm, *vma_res->tlb);
+ }
+ 
+ static unsigned long pd_count(u64 size, int shift)
+diff --git a/drivers/gpu/drm/i915/i915_vma.c b/drivers/gpu/drm/i915/i915_vma.c
+index 646f419b2035..84a9ccbc5fc5 100644
+--- a/drivers/gpu/drm/i915/i915_vma.c
++++ b/drivers/gpu/drm/i915/i915_vma.c
+@@ -538,9 +538,6 @@ int i915_vma_bind(struct i915_vma *vma,
+ 				   bind_flags);
+ 	}
+ 
+-	if (bind_flags & I915_VMA_LOCAL_BIND)
+-		set_bit(I915_BO_WAS_BOUND_BIT, &vma->obj->flags);
+-
+ 	atomic_or(bind_flags, &vma->flags);
+ 	return 0;
+ }
+@@ -1311,6 +1308,19 @@ I915_SELFTEST_EXPORT int i915_vma_get_pages(struct i915_vma *vma)
+ 	return err;
+ }
+ 
++void vma_invalidate_tlb(struct i915_address_space *vm, u32 tlb)
++{
++	/*
++	 * Before we release the pages that were bound by this vma, we
++	 * must invalidate all the TLBs that may still have a reference
++	 * back to our physical address. It only needs to be done once,
++	 * so after updating the PTE to point away from the pages, record
++	 * the most recent TLB invalidation seqno, and if we have not yet
++	 * flushed the TLBs upon release, perform a full invalidation.
++	 */
++	WRITE_ONCE(tlb, intel_gt_next_invalidate_tlb_full(vm->gt));
++}
++
+ static void __vma_put_pages(struct i915_vma *vma, unsigned int count)
+ {
+ 	/* We allocate under vma_get_pages, so beware the shrinker */
+@@ -1942,7 +1952,12 @@ struct dma_fence *__i915_vma_evict(struct i915_vma *vma, bool async)
+ 		vma->vm->skip_pte_rewrite;
+ 	trace_i915_vma_unbind(vma);
+ 
+-	unbind_fence = i915_vma_resource_unbind(vma_res);
++	if (async)
++		unbind_fence = i915_vma_resource_unbind(vma_res,
++							&vma->obj->mm.tlb);
++	else
++		unbind_fence = i915_vma_resource_unbind(vma_res, NULL);
++
+ 	vma->resource = NULL;
+ 
+ 	atomic_and(~(I915_VMA_BIND_MASK | I915_VMA_ERROR | I915_VMA_GGTT_WRITE),
+@@ -1950,10 +1965,13 @@ struct dma_fence *__i915_vma_evict(struct i915_vma *vma, bool async)
+ 
+ 	i915_vma_detach(vma);
+ 
+-	if (!async && unbind_fence) {
+-		dma_fence_wait(unbind_fence, false);
+-		dma_fence_put(unbind_fence);
+-		unbind_fence = NULL;
++	if (!async) {
++		if (unbind_fence) {
++			dma_fence_wait(unbind_fence, false);
++			dma_fence_put(unbind_fence);
++			unbind_fence = NULL;
++		}
++		vma_invalidate_tlb(vma->vm, vma->obj->mm.tlb);
+ 	}
+ 
+ 	/*
+diff --git a/drivers/gpu/drm/i915/i915_vma.h b/drivers/gpu/drm/i915/i915_vma.h
+index 88ca0bd9c900..5048eed536da 100644
+--- a/drivers/gpu/drm/i915/i915_vma.h
++++ b/drivers/gpu/drm/i915/i915_vma.h
+@@ -213,6 +213,7 @@ bool i915_vma_misplaced(const struct i915_vma *vma,
+ 			u64 size, u64 alignment, u64 flags);
+ void __i915_vma_set_map_and_fenceable(struct i915_vma *vma);
+ void i915_vma_revoke_mmap(struct i915_vma *vma);
++void vma_invalidate_tlb(struct i915_address_space *vm, u32 tlb);
+ struct dma_fence *__i915_vma_evict(struct i915_vma *vma, bool async);
+ int __i915_vma_unbind(struct i915_vma *vma);
+ int __must_check i915_vma_unbind(struct i915_vma *vma);
+diff --git a/drivers/gpu/drm/i915/i915_vma_resource.c b/drivers/gpu/drm/i915/i915_vma_resource.c
+index 27c55027387a..5a67995ea5fe 100644
+--- a/drivers/gpu/drm/i915/i915_vma_resource.c
++++ b/drivers/gpu/drm/i915/i915_vma_resource.c
+@@ -223,10 +223,13 @@ i915_vma_resource_fence_notify(struct i915_sw_fence *fence,
+  * Return: A refcounted pointer to a dma-fence that signals when unbinding is
+  * complete.
+  */
+-struct dma_fence *i915_vma_resource_unbind(struct i915_vma_resource *vma_res)
++struct dma_fence *i915_vma_resource_unbind(struct i915_vma_resource *vma_res,
++					   u32 *tlb)
+ {
+ 	struct i915_address_space *vm = vma_res->vm;
+ 
++	vma_res->tlb = tlb;
++
+ 	/* Reference for the sw fence */
+ 	i915_vma_resource_get(vma_res);
+ 
+diff --git a/drivers/gpu/drm/i915/i915_vma_resource.h b/drivers/gpu/drm/i915/i915_vma_resource.h
+index 5d8427caa2ba..06923d1816e7 100644
+--- a/drivers/gpu/drm/i915/i915_vma_resource.h
++++ b/drivers/gpu/drm/i915/i915_vma_resource.h
+@@ -67,6 +67,7 @@ struct i915_page_sizes {
+  * taken when the unbind is scheduled.
+  * @skip_pte_rewrite: During ggtt suspend and vm takedown pte rewriting
+  * needs to be skipped for unbind.
++ * @tlb: pointer for obj->mm.tlb, if async unbind. Otherwise, NULL
+  *
+  * The lifetime of a struct i915_vma_resource is from a binding request to
+  * the actual possible asynchronous unbind has completed.
+@@ -119,6 +120,8 @@ struct i915_vma_resource {
+ 	bool immediate_unbind:1;
+ 	bool needs_wakeref:1;
+ 	bool skip_pte_rewrite:1;
++
++	u32 *tlb;
+ };
+ 
+ bool i915_vma_resource_hold(struct i915_vma_resource *vma_res,
+@@ -131,7 +134,8 @@ struct i915_vma_resource *i915_vma_resource_alloc(void);
+ 
+ void i915_vma_resource_free(struct i915_vma_resource *vma_res);
+ 
+-struct dma_fence *i915_vma_resource_unbind(struct i915_vma_resource *vma_res);
++struct dma_fence *i915_vma_resource_unbind(struct i915_vma_resource *vma_res,
++					   u32 *tlb);
+ 
+ void __i915_vma_resource_init(struct i915_vma_resource *vma_res);
+ 
+-- 
+2.36.1
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
