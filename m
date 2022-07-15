@@ -2,45 +2,38 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E747575C5C
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 Jul 2022 09:31:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 73B6C575E95
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 Jul 2022 11:31:49 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 395B547EC9
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 Jul 2022 07:31:30 +0000 (UTC)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com (mail-co1nam11on2084.outbound.protection.outlook.com [40.107.220.84])
-	by lists.linaro.org (Postfix) with ESMTPS id 0AAF14109C
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 15 Jul 2022 07:31:25 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lRqZAAfux1nyiMlhkGz1oQeyvfRyYYjd33GPEv9FF+ULuaViZwz30JNm7RWjAP9RlX7TCWvsFiThN2MCAOJY6QnLLEUGWWt77pOfXG8xugPhSlxUpzyIrnbvjcIaLSyK0LVS6Z62rmRJcMN6HMgmYTltwt73NJfHDkmM4tajewuIqDpJCo8kyf+OGT8XXTeInJDdg+OAr9iSfdT4K3ozOWKcZIB8PWuNf4tv6PwNv5GC8bfXED8r4P9TQicw2j1xKj9Kk5uzk4WrpN23V7nXbLzgk6eHOup7Jr7yBYcae7ueslmqLiblmhy6UTimH4kC7789gpU9nqXemjB+Qlaffg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=u7bwDf0qM/tQuy+789QAkidbPdSab2SEqKFy5qDE2ow=;
- b=oOm3FKNsRcTWb+lYjZJqDvOEdz8OCUqlWKvHgYJbjF3yItja9u1XnxDY+PaF8pDT9D+jqPUf6aHQqGsunKQ7jYDvSvjoIjp2htDMzbyMppU86loepYIxXBEox22y3IzXglq4SZ8r9XbqzYXLv7qdeh7WS6up1ZPb92xXVFlq5om1F8WX/xhqjkc3fGV067KAas4HeEqj5DhXylGREr0kBd+j150E+ca0jJYdJqlUTp3KNGqMecYm2dVUCU8UzKcIDsTtfxKVQIKUOr1GMO3lus9/AVRLUMZEe62/vz5/4MasZZMdykSq9gNYtD+9MK4eCY3RhaE+x38JMoBzkNyynA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=u7bwDf0qM/tQuy+789QAkidbPdSab2SEqKFy5qDE2ow=;
- b=AzygjbT2i+TV3XGyRZYsuV1GO/G63GmnWwAibfhtq3f0MLOXA1XRYc+eUyw04L9G37waAxBNMjAQ9t7zZxHF2vPKVfmPfYS/8ymWBREtiYqat/TIBXGQKNDUy74hCQXwvGEXxvhBPR2tPUB9pO8+BJ9aRkowQUHIPcgpPZDH2y0=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by DM6PR12MB4338.namprd12.prod.outlook.com (2603:10b6:5:2a2::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5438.14; Fri, 15 Jul
- 2022 07:31:21 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::905:1701:3b51:7e39]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::905:1701:3b51:7e39%2]) with mapi id 15.20.5438.013; Fri, 15 Jul 2022
- 07:31:21 +0000
-Message-ID: <138407a9-e97f-001e-6e87-e5d92a55c8e8@amd.com>
-Date: Fri, 15 Jul 2022 09:31:12 +0200
+	by lists.linaro.org (Postfix) with ESMTP id 5E0C847ECA
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 Jul 2022 09:31:48 +0000 (UTC)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+	by lists.linaro.org (Postfix) with ESMTPS id 278FF3ED19
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 15 Jul 2022 09:31:44 +0000 (UTC)
+Received: from [192.168.2.145] (109-252-119-232.nat.spd-mgts.ru [109.252.119.232])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: dmitry.osipenko)
+	by madras.collabora.co.uk (Postfix) with ESMTPSA id 5E29866019A8;
+	Fri, 15 Jul 2022 10:31:40 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1657877502;
+	bh=TWozmotf+sQwVdZNmn/06hy3nh6q5FZqNEZs2dkO0Xk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=ook7FofVSeFu98kzfOW85/NvaqQGYfMlcoQwPYYEf1uM53lI6XEH5r2IfZA5D39YG
+	 One7B2e3W/fD6MOKVR32mTsfa0F578/RBAeOo8/NotqqijY2/uTpe7t/xwykgVmrPt
+	 +yavsYIuw7Eo6wCEeOig0kwF08jXCpcKDfKm5bf62mOtUtod68wxkNTfoOrBO2Vigr
+	 jGGe7rNPzl9ucoy/rbaMWflBdm9lL83CRfG8Nh3DuvKmTusiGl7vlEzXHo8BAnin4h
+	 VmXp2fNABeQZzflx/SPBJ4BlHwecx5t82vj5mWQ6sz+HwjJh2hV8TUmAiQ8RvCIpsC
+	 jI9dt2CUipsuA==
+Message-ID: <5c98385b-f154-0128-6f4b-5fac89529201@collabora.com>
+Date: Fri, 15 Jul 2022 12:31:37 +0300
+MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.1
+ Thunderbird/91.10.0
 Content-Language: en-US
-To: Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
  David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
  Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu
  <olvaffe@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
@@ -61,369 +54,50 @@ To: Dmitry Osipenko <dmitry.osipenko@collabora.com>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas_os@shipmail.org>,
- Thomas Zimmermann <tzimmermann@suse.de>
+ =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas_os@shipmail.org>
 References: <20220715005244.42198-1-dmitry.osipenko@collabora.com>
- <20220715005244.42198-3-dmitry.osipenko@collabora.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20220715005244.42198-3-dmitry.osipenko@collabora.com>
-X-ClientProxiedBy: FR3P281CA0096.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a1::8) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a4804b5a-7352-469f-3eaa-08da663403b0
-X-MS-TrafficTypeDiagnostic: DM6PR12MB4338:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	y9BIhgcKhrwO2Wi+KpxBTiMCjT2gE7YIfKVQu71l+MYSa2zWeH+fEYE+jchr5RyzUK8DdPAH6exQ9SGMh60dOTIuByPUoJW3Hkq5ckMHswmw5QWYJcSXZhbA8BOKnECX+fHvxG9vrPtVRk4d20L4y2m71iDSHdvarvaGxlCZShGF2z/YrXDa1Rt7R+ld0/vRwFt6TFczwZgfHwYsHZRLeSCsBT2zAbGFC5d5RLh/pCQ/BSp4DJ9IbaAK/sG1mc0j7njP+Mg2ubudzGN57JsJ2/cnKgowhbT7VOvj+lG1kAQCbFePIaVFPJIwCSBOJCfiNkMwhEKcFG9vIYI4LqXLRaLzI5CCiDg4nB/ZofO7AlqeucoRu/TKA34JH6Dfc+tj+/MR9yDbI/RqJrFLeOui3Azivm2yPwQ5STE0n0n3wIEhLAjurvL4XT6eJRbaLjWbovPsWux1RAmKGSMNDLn3ws8foThus52yetfrp/rVCyYk20x/5RHAR3Phr5OF1DzGiTyPj6qUJEJTsCP7nxvxUfoar5mLdV6BV516F7MZmrCJ79kOYrDW3wJ2nsaLJHCnglcQnlCGZJUzn5xxZrMnnqxdFNfVF2RqmNZLEUi96PDJcLvndhFPKvriSkyenQpizDImPWgfVGYoQt2rCXT7YxEkuYZOAJoVsWGSfeBAySrbWJcmV88ooq04wC+XIvYkUf1E3Zj+JEW42PwF61jIntAj1/fMOE+t0gKRnd2vigC5AG/M+IW+lHiJM52RiHu+xZvndxieb7gWjs+ZR1G2HuhJnn+zzD7H235PsconYTmbyVrkWUyE3qj0s6tb9PO23TrmOg0wpm2SXOvGskqMZqUXcAnar1Cf3Ib2PmSW7q8=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(396003)(376002)(39860400002)(346002)(366004)(136003)(316002)(41300700001)(83380400001)(6666004)(2906002)(31696002)(86362001)(478600001)(110136005)(2616005)(6506007)(6486002)(186003)(6512007)(36756003)(7416002)(5660300002)(38100700002)(7406005)(66476007)(4326008)(8936002)(8676002)(66556008)(31686004)(66946007)(921005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?MU9tVHpqUFZMQ2h6Z2NEQlFCcExOdFR6aFVCOHBhU3p1MVZ2NzQyMURUZGw1?=
- =?utf-8?B?MFZhZm45WW1UVEkyZTY4MWhPSFFaYk0yaE9hOGZXSWM0elJCaWQ2cjFBdFNj?=
- =?utf-8?B?c1IwbVBnalNET0NUbzdhM1pxOTFFdVl1T1k5L0xZd2NMclVyM1NXUGFmWmhG?=
- =?utf-8?B?dkhWbWVQZGlJdHpTaWRaZ3QyLy8vallXeHhmL2pvRFllV1VNbWZGeEpvZnYx?=
- =?utf-8?B?OUYvNHd3cXJyVm5wL3Roajh2NTFuVm1BYncwRmpGbERjWFk1UFpWbHZEd1ZH?=
- =?utf-8?B?eDg2VTcxQlFuaEhmU1dQV0d3U2JMQjJkOU1OaGVqM1FaRUpZZVV0YlBWbktr?=
- =?utf-8?B?MDBlTXUwVWRTY25Hc254OGZzR0dZd2VwSkdkVElUR2hRWDJRSko3VFErSDJh?=
- =?utf-8?B?UUxtL0hlTERmSlRqNDdMTFdzN0RkWTUwbFVWOXpJalhCNWlxSUQwemN6Vits?=
- =?utf-8?B?R0pQMjJOVlYzM24vUHVBMzkwbEliaThMYzdXVXp4c0FqaWx6RW5IZmJhdDRX?=
- =?utf-8?B?Y1ZtQ0M0ait0S25MVkczUTVHQlUySmlhQWxQY3JvMXVjR0JObHdoN1h4MzVR?=
- =?utf-8?B?N2tPZlJpbTUxc3lzTWloQUxqcWxMK2tjU0gzL2hIdVRkWVhtR05hWmlrZDFZ?=
- =?utf-8?B?M25WbEhJNjJDQ0VTanJyblBLUHp1RTUrYlJuczJUMWRRSHBQK3FGRU40Q09L?=
- =?utf-8?B?Wk1Ga2NraVZtYWVNU0xYU2hWMTBsb2dIaG5oV1FCdXVEZGlad2pxOGx5cUtt?=
- =?utf-8?B?Z1NveS9ycXpKaTBsdHpDSzhPWUJTcUhBbUlJa0cwaWIxd21rV0FSeFFQVkhl?=
- =?utf-8?B?eHh0VlpQVWpkb3NnYjUvVW1KZWFkRkVyVG1TdFFHbEpXS3ZnS3FxUitEaWJZ?=
- =?utf-8?B?VmlEaEdaYW8zSUN1cWlPS1pJMVBFREpkemFtTzBmamdyL3hKcXVjNHlzbjhk?=
- =?utf-8?B?d1hjcDg0Q3RDRHV6Vkk1ckJEVWRQNmcwNHdyenN3czJxYzB4NUt4WTFOdWNt?=
- =?utf-8?B?UXRKdWcyMjJNN1NJd3ZSNjlhTWMxaGNDQWJjeE9PcGJrYXAxZ2NkVExLcVNy?=
- =?utf-8?B?Umo5dHc2YkhjSVgvZXpoUnhJdC9TK0RMeU9EYmNVNVA0T1V5MFNwckJIK0xF?=
- =?utf-8?B?czhLdDFwR05yU2x6ZklVblIyWDc3WjlNbzFYek1CN3hYcXorMTdFMFFZL3ZC?=
- =?utf-8?B?SDRjTndnVzFocm1QU1pmZmZtenFSTlhKQ2JOdHp6b3JnUXpQQlJjVHNTNEE0?=
- =?utf-8?B?UTQ2R3o3UUF4NzFRVEFEb3QxUktwZFdNMEcyZXpaenNBUGdNN0JYNHQyc2dT?=
- =?utf-8?B?VWU4L214U1RlQWx1aDN2amxHSENrV0xXYzhSemRISHU5WWRaSFhHcTBkL3NM?=
- =?utf-8?B?aFl4SGhVV0ZuUGZ5bUMyTUV1VkhtWWxPeFhmRFZaZ3d2OWFvTERhL0xyMjNl?=
- =?utf-8?B?bUpTdGpsRE84OGlFTXRhV3BYWUNLeGJBdHB1cU9sT2VISnJ2Q1k0cjRxZ015?=
- =?utf-8?B?SExCUTVyUys3NXBWZGJrMm1OYnBDeklGeENMM28waXNrdFVPMDR6eFp5b1dw?=
- =?utf-8?B?NFArYXdxS3Vqc28zNThtMlBoK2p1eU1rNHV5VUVvWkViUEthUVEvMW5wclg5?=
- =?utf-8?B?NjJxeTdMZDBvc0gyLys5RmM4NDVuSUlVbUtIOUlNNmxDaTVtL0FiOXJFNmJV?=
- =?utf-8?B?RDM5Z05XNlVSMnQ4emovbk5DVXB4V3RBN1hsRlRnZS9ZTTJLRmlvV2x3QW1m?=
- =?utf-8?B?d29PRWxRNXBjTVB2bVByTjE5M0srS2V2dDIvQjdibUQ2VmF3UG03cmRNREFq?=
- =?utf-8?B?d3FhNGE4Y01EUkRzWllxWE8zcFU3dTVzUTFOd2kvd2Z6K0JLWlJzQ2xzVkdt?=
- =?utf-8?B?QjVLK040ZVE4UU5yWFVEVElOOEZTbjhnWHYyV1pTdXRqWUV2WmtPelgzSEQv?=
- =?utf-8?B?cFl1RTEvdUZORzBudU1vUzN0U09SbVFGdkw4b2xLdHl0UVBjanEzb09LWjVI?=
- =?utf-8?B?b3d6bFM1NXF3cS9valNpMHlXdVI3VTF5TXQrQVZmQVZ4clJ2L0N5dDJvb09Z?=
- =?utf-8?B?aW1CQkg1RXYrV09jMHoyK1NJZWdpNzhHekgySlByNjhlREpFM3E5OVNLZ0pE?=
- =?utf-8?B?c3ZGMEJDbHJ4L2ZOVGZQNnJ0a3c1L3VPS3Bkb3o3bm1jU01ZMEU4V3RqSXR2?=
- =?utf-8?Q?bZJsAarfJw11WK3HN8PWk+Vs08qIqcpBc49hznLHfovR?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a4804b5a-7352-469f-3eaa-08da663403b0
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2022 07:31:21.3654
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sIVSt/Kz3qpSEQ1FdbHocGr+ZKk3MC6frNNvwEg1e45w/VcWB6JgRx5nl94FwCDU
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4338
-Message-ID-Hash: QYI3APJFVP3AQ34UIIFRYZN2JT7SMGLD
-X-Message-ID-Hash: QYI3APJFVP3AQ34UIIFRYZN2JT7SMGLD
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+ <20220715005244.42198-2-dmitry.osipenko@collabora.com>
+ <43c06f53-bad8-af99-0b57-781dbf716768@amd.com>
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+In-Reply-To: <43c06f53-bad8-af99-0b57-781dbf716768@amd.com>
+Message-ID-Hash: 3PB64WFOAXUKEJBFVZOSN7QIYDW3K6SJ
+X-Message-ID-Hash: 3PB64WFOAXUKEJBFVZOSN7QIYDW3K6SJ
+X-MailFrom: dmitry.osipenko@collabora.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, spice-devel@lists.freedesktop.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v1 2/6] drm/gem: Take reservation lock for vmap/vunmap operations
+Subject: [Linaro-mm-sig] Re: [PATCH v1 1/6] dma-buf: Add _unlocked postfix to function names
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QYI3APJFVP3AQ34UIIFRYZN2JT7SMGLD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3PB64WFOAXUKEJBFVZOSN7QIYDW3K6SJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Am 15.07.22 um 02:52 schrieb Dmitry Osipenko:
-> The new common dma-buf locking convention will require buffer importers
-> to hold the reservation lock around mapping operations. Make DRM GEM core
-> to take the lock around the vmapping operations and update QXL and i915
-> drivers to use the locked functions for the case where DRM core now holds
-> the lock. This patch prepares DRM core and drivers to transition to the
-> common dma-buf locking convention where vmapping of exported GEMs will
-> be done under the held reservation lock.
-
-Oh ^^ That looks like a bug fix to me!
-
-At least drm_gem_ttm_vmap() and drm_gem_ttm_vunmap() already expected 
-that they are called with the reservation lock held.
-
-Otherwise you could mess up internal structures in the TTM buffer object 
-while vmapping it.
-
-I will take a deeper look at this.
-
-Regards,
-Christian.
-
->
-> Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-> ---
->   drivers/gpu/drm/drm_client.c                 |  4 +--
->   drivers/gpu/drm/drm_gem.c                    | 28 ++++++++++++++++++++
->   drivers/gpu/drm/drm_gem_framebuffer_helper.c |  6 ++---
->   drivers/gpu/drm/drm_prime.c                  |  4 +--
->   drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c   |  2 +-
->   drivers/gpu/drm/qxl/qxl_object.c             | 17 ++++++------
->   drivers/gpu/drm/qxl/qxl_prime.c              |  4 +--
->   include/drm/drm_gem.h                        |  3 +++
->   8 files changed, 50 insertions(+), 18 deletions(-)
->
-> diff --git a/drivers/gpu/drm/drm_client.c b/drivers/gpu/drm/drm_client.c
-> index 2b230b4d6942..fbcb1e995384 100644
-> --- a/drivers/gpu/drm/drm_client.c
-> +++ b/drivers/gpu/drm/drm_client.c
-> @@ -323,7 +323,7 @@ drm_client_buffer_vmap(struct drm_client_buffer *buffer,
->   	 * fd_install step out of the driver backend hooks, to make that
->   	 * final step optional for internal users.
->   	 */
-> -	ret = drm_gem_vmap(buffer->gem, map);
-> +	ret = drm_gem_vmap_unlocked(buffer->gem, map);
->   	if (ret)
->   		return ret;
->   
-> @@ -345,7 +345,7 @@ void drm_client_buffer_vunmap(struct drm_client_buffer *buffer)
->   {
->   	struct iosys_map *map = &buffer->map;
->   
-> -	drm_gem_vunmap(buffer->gem, map);
-> +	drm_gem_vunmap_unlocked(buffer->gem, map);
->   }
->   EXPORT_SYMBOL(drm_client_buffer_vunmap);
->   
-> diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-> index eb0c2d041f13..9769c33cad99 100644
-> --- a/drivers/gpu/drm/drm_gem.c
-> +++ b/drivers/gpu/drm/drm_gem.c
-> @@ -1155,6 +1155,8 @@ void drm_gem_print_info(struct drm_printer *p, unsigned int indent,
->   
->   int drm_gem_pin(struct drm_gem_object *obj)
->   {
-> +	dma_resv_assert_held(obj->resv);
-> +
->   	if (obj->funcs->pin)
->   		return obj->funcs->pin(obj);
->   	else
-> @@ -1163,6 +1165,8 @@ int drm_gem_pin(struct drm_gem_object *obj)
->   
->   void drm_gem_unpin(struct drm_gem_object *obj)
->   {
-> +	dma_resv_assert_held(obj->resv);
-> +
->   	if (obj->funcs->unpin)
->   		obj->funcs->unpin(obj);
->   }
-> @@ -1171,6 +1175,8 @@ int drm_gem_vmap(struct drm_gem_object *obj, struct iosys_map *map)
->   {
->   	int ret;
->   
-> +	dma_resv_assert_held(obj->resv);
-> +
->   	if (!obj->funcs->vmap)
->   		return -EOPNOTSUPP;
->   
-> @@ -1186,6 +1192,8 @@ EXPORT_SYMBOL(drm_gem_vmap);
->   
->   void drm_gem_vunmap(struct drm_gem_object *obj, struct iosys_map *map)
->   {
-> +	dma_resv_assert_held(obj->resv);
-> +
->   	if (iosys_map_is_null(map))
->   		return;
->   
-> @@ -1197,6 +1205,26 @@ void drm_gem_vunmap(struct drm_gem_object *obj, struct iosys_map *map)
->   }
->   EXPORT_SYMBOL(drm_gem_vunmap);
->   
-> +int drm_gem_vmap_unlocked(struct drm_gem_object *obj, struct iosys_map *map)
-> +{
-> +	int ret;
-> +
-> +	dma_resv_lock(obj->resv, NULL);
-> +	ret = drm_gem_vmap(obj, map);
-> +	dma_resv_unlock(obj->resv);
-> +
-> +	return ret;
-> +}
-> +EXPORT_SYMBOL(drm_gem_vmap_unlocked);
-> +
-> +void drm_gem_vunmap_unlocked(struct drm_gem_object *obj, struct iosys_map *map)
-> +{
-> +	dma_resv_lock(obj->resv, NULL);
-> +	drm_gem_vunmap(obj, map);
-> +	dma_resv_unlock(obj->resv);
-> +}
-> +EXPORT_SYMBOL(drm_gem_vunmap_unlocked);
-> +
->   /**
->    * drm_gem_lock_reservations - Sets up the ww context and acquires
->    * the lock on an array of GEM objects.
-> diff --git a/drivers/gpu/drm/drm_gem_framebuffer_helper.c b/drivers/gpu/drm/drm_gem_framebuffer_helper.c
-> index 880a4975507f..e35e224e6303 100644
-> --- a/drivers/gpu/drm/drm_gem_framebuffer_helper.c
-> +++ b/drivers/gpu/drm/drm_gem_framebuffer_helper.c
-> @@ -354,7 +354,7 @@ int drm_gem_fb_vmap(struct drm_framebuffer *fb, struct iosys_map *map,
->   			ret = -EINVAL;
->   			goto err_drm_gem_vunmap;
->   		}
-> -		ret = drm_gem_vmap(obj, &map[i]);
-> +		ret = drm_gem_vmap_unlocked(obj, &map[i]);
->   		if (ret)
->   			goto err_drm_gem_vunmap;
->   	}
-> @@ -376,7 +376,7 @@ int drm_gem_fb_vmap(struct drm_framebuffer *fb, struct iosys_map *map,
->   		obj = drm_gem_fb_get_obj(fb, i);
->   		if (!obj)
->   			continue;
-> -		drm_gem_vunmap(obj, &map[i]);
-> +		drm_gem_vunmap_unlocked(obj, &map[i]);
->   	}
->   	return ret;
->   }
-> @@ -403,7 +403,7 @@ void drm_gem_fb_vunmap(struct drm_framebuffer *fb, struct iosys_map *map)
->   			continue;
->   		if (iosys_map_is_null(&map[i]))
->   			continue;
-> -		drm_gem_vunmap(obj, &map[i]);
-> +		drm_gem_vunmap_unlocked(obj, &map[i]);
->   	}
->   }
->   EXPORT_SYMBOL(drm_gem_fb_vunmap);
-> diff --git a/drivers/gpu/drm/drm_prime.c b/drivers/gpu/drm/drm_prime.c
-> index b75ef1756873..1bd234fd21a5 100644
-> --- a/drivers/gpu/drm/drm_prime.c
-> +++ b/drivers/gpu/drm/drm_prime.c
-> @@ -678,7 +678,7 @@ int drm_gem_dmabuf_vmap(struct dma_buf *dma_buf, struct iosys_map *map)
->   {
->   	struct drm_gem_object *obj = dma_buf->priv;
->   
-> -	return drm_gem_vmap(obj, map);
-> +	return drm_gem_vmap_unlocked(obj, map);
->   }
->   EXPORT_SYMBOL(drm_gem_dmabuf_vmap);
->   
-> @@ -694,7 +694,7 @@ void drm_gem_dmabuf_vunmap(struct dma_buf *dma_buf, struct iosys_map *map)
->   {
->   	struct drm_gem_object *obj = dma_buf->priv;
->   
-> -	drm_gem_vunmap(obj, map);
-> +	drm_gem_vunmap_unlocked(obj, map);
->   }
->   EXPORT_SYMBOL(drm_gem_dmabuf_vunmap);
->   
-> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c b/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c
-> index 5ecea7df98b1..cc54a5b1d6ae 100644
-> --- a/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c
-> +++ b/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c
-> @@ -72,7 +72,7 @@ static int i915_gem_dmabuf_vmap(struct dma_buf *dma_buf,
->   	struct drm_i915_gem_object *obj = dma_buf_to_obj(dma_buf);
->   	void *vaddr;
->   
-> -	vaddr = i915_gem_object_pin_map_unlocked(obj, I915_MAP_WB);
-> +	vaddr = i915_gem_object_pin_map(obj, I915_MAP_WB);
->   	if (IS_ERR(vaddr))
->   		return PTR_ERR(vaddr);
->   
-> diff --git a/drivers/gpu/drm/qxl/qxl_object.c b/drivers/gpu/drm/qxl/qxl_object.c
-> index 695d9308d1f0..06a58dad5f5c 100644
-> --- a/drivers/gpu/drm/qxl/qxl_object.c
-> +++ b/drivers/gpu/drm/qxl/qxl_object.c
-> @@ -168,9 +168,16 @@ int qxl_bo_vmap_locked(struct qxl_bo *bo, struct iosys_map *map)
->   		bo->map_count++;
->   		goto out;
->   	}
-> -	r = ttm_bo_vmap(&bo->tbo, &bo->map);
-> +
-> +	r = __qxl_bo_pin(bo);
->   	if (r)
->   		return r;
-> +
-> +	r = ttm_bo_vmap(&bo->tbo, &bo->map);
-> +	if (r) {
-> +		__qxl_bo_unpin(bo);
-> +		return r;
-> +	}
->   	bo->map_count = 1;
->   
->   	/* TODO: Remove kptr in favor of map everywhere. */
-> @@ -192,12 +199,6 @@ int qxl_bo_vmap(struct qxl_bo *bo, struct iosys_map *map)
->   	if (r)
->   		return r;
->   
-> -	r = __qxl_bo_pin(bo);
-> -	if (r) {
-> -		qxl_bo_unreserve(bo);
-> -		return r;
-> -	}
-> -
->   	r = qxl_bo_vmap_locked(bo, map);
->   	qxl_bo_unreserve(bo);
->   	return r;
-> @@ -247,6 +248,7 @@ void qxl_bo_vunmap_locked(struct qxl_bo *bo)
->   		return;
->   	bo->kptr = NULL;
->   	ttm_bo_vunmap(&bo->tbo, &bo->map);
-> +	__qxl_bo_unpin(bo);
->   }
->   
->   int qxl_bo_vunmap(struct qxl_bo *bo)
-> @@ -258,7 +260,6 @@ int qxl_bo_vunmap(struct qxl_bo *bo)
->   		return r;
->   
->   	qxl_bo_vunmap_locked(bo);
-> -	__qxl_bo_unpin(bo);
->   	qxl_bo_unreserve(bo);
->   	return 0;
->   }
-> diff --git a/drivers/gpu/drm/qxl/qxl_prime.c b/drivers/gpu/drm/qxl/qxl_prime.c
-> index 142d01415acb..9169c26357d3 100644
-> --- a/drivers/gpu/drm/qxl/qxl_prime.c
-> +++ b/drivers/gpu/drm/qxl/qxl_prime.c
-> @@ -59,7 +59,7 @@ int qxl_gem_prime_vmap(struct drm_gem_object *obj, struct iosys_map *map)
->   	struct qxl_bo *bo = gem_to_qxl_bo(obj);
->   	int ret;
->   
-> -	ret = qxl_bo_vmap(bo, map);
-> +	ret = qxl_bo_vmap_locked(bo, map);
->   	if (ret < 0)
->   		return ret;
->   
-> @@ -71,5 +71,5 @@ void qxl_gem_prime_vunmap(struct drm_gem_object *obj,
->   {
->   	struct qxl_bo *bo = gem_to_qxl_bo(obj);
->   
-> -	qxl_bo_vunmap(bo);
-> +	qxl_bo_vunmap_locked(bo);
->   }
-> diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
-> index 87cffc9efa85..bf3700415229 100644
-> --- a/include/drm/drm_gem.h
-> +++ b/include/drm/drm_gem.h
-> @@ -420,4 +420,7 @@ void drm_gem_unlock_reservations(struct drm_gem_object **objs, int count,
->   int drm_gem_dumb_map_offset(struct drm_file *file, struct drm_device *dev,
->   			    u32 handle, u64 *offset);
->   
-> +int drm_gem_vmap_unlocked(struct drm_gem_object *obj, struct iosys_map *map);
-> +void drm_gem_vunmap_unlocked(struct drm_gem_object *obj, struct iosys_map *map);
-> +
->   #endif /* __DRM_GEM_H__ */
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gNy8xNS8yMiAxMDoxOSwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToNCj4+IC1zdHJ1Y3Qgc2df
+dGFibGUgKmRtYV9idWZfbWFwX2F0dGFjaG1lbnQoc3RydWN0IGRtYV9idWZfYXR0YWNobWVudA0K
+Pj4gKmF0dGFjaCwNCj4+IC3CoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBl
+bnVtIGRtYV9kYXRhX2RpcmVjdGlvbiBkaXJlY3Rpb24pDQo+PiArc3RydWN0IHNnX3RhYmxlICoN
+Cj4+ICtkbWFfYnVmX21hcF9hdHRhY2htZW50X3VubG9ja2VkKHN0cnVjdCBkbWFfYnVmX2F0dGFj
+aG1lbnQgKmF0dGFjaCwNCj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZW51bSBk
+bWFfZGF0YV9kaXJlY3Rpb24gZGlyZWN0aW9uKQ0KPiANCj4gVGhlIGxvY2tpbmcgc3RhdGUgb2Yg
+bWFwcGluZyBhbmQgdW5tYXBwaW5nIG9wZXJhdGlvbnMgZGVwZW5kIG9uIGlmIHRoZQ0KPiBhdHRh
+Y2htZW50IGlzIGR5bmFtaWMgb3Igbm90Lg0KPiANCj4gU28gdGhpcyBoZXJlIGlzIG5vdCBhIGdv
+b2QgaWRlYSBhdCBhbGwgc2luY2UgaXQgc3VnZ2VzdHMgdGhhdCB0aGUNCj4gZnVuY3Rpb24gaXMg
+YWx3YXlzIGNhbGxlZCB3aXRob3V0IGhvbGRpbmcgdGhlIGxvY2suDQoNCkkgaGFkIHRoZSBzYW1l
+IHRob3VnaHQgd2hpbGUgd2FzIHdvcmtpbmcgb24gdGhpcyBwYXRjaCBhbmQgaW5pdGlhbGx5IHdh
+cw0KdGhpbmtpbmcgYWJvdXQgYWRkaW5nIGFuICJ1bmxvY2tlZCIgYWxpYXMgdG8gZG1hX2J1Zl9t
+YXBfYXR0YWNobWVudCgpLg0KSW4gdGhlIGVuZCBJIGRlY2lkZWQgdGhhdCBpdCB3aWxsIGNyZWF0
+ZSBldmVuIG1vcmUgY29uZnVzaW9uIGFuZCBpdCdzDQpzaW1wbGVyIGp1c3QgdG8gcmVuYW1lIHRo
+aXMgZnVuYyBoZXJlIHNpbmNlIHRoZXJlIGFyZSBvbmx5IHR3byBkcml2ZXJzDQp1c2luZyB0aGUg
+ZHluYW1pYyBtYXBwaW5nLg0KDQpEbyB5b3UgaGF2ZSBzdWdnZXN0aW9ucyBob3cgdG8gaW1wcm92
+ZSBpdD8NCg0KLS0gDQpCZXN0IHJlZ2FyZHMsDQpEbWl0cnkNCl9fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0t
+IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVt
+YWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
