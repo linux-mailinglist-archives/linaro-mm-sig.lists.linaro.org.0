@@ -2,416 +2,139 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 360E0575041
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 14 Jul 2022 16:03:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 138045758BB
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 Jul 2022 02:53:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3A3193F4B6
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 14 Jul 2022 14:03:35 +0000 (UTC)
-Received: from [185.102.170.90] (unknown [185.102.170.90])
-	by lists.linaro.org (Postfix) with ESMTP id 3CC953EE07
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 14 Jul 2022 14:03:33 +0000 (UTC)
-From: "IT HelpDesk  Support" <noreply@lists.linaro.org>
-To: linaro-mm-sig@lists.linaro.org
-Date: 14 Jul 2022 07:03:32 -0700
-Message-ID: <20220714070332.5A86A5DCFE44ABF6@lists.linaro.org>
+	by lists.linaro.org (Postfix) with ESMTP id 36A7F4030A
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 15 Jul 2022 00:53:24 +0000 (UTC)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+	by lists.linaro.org (Postfix) with ESMTPS id 1FE1A3F04B
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 15 Jul 2022 00:53:19 +0000 (UTC)
+Received: from dimapc.. (109-252-119-232.nat.spd-mgts.ru [109.252.119.232])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: dmitry.osipenko)
+	by madras.collabora.co.uk (Postfix) with ESMTPSA id 56DEA6601A44;
+	Fri, 15 Jul 2022 01:53:15 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1657846397;
+	bh=08a2nboQlEuWwlfAHFXkuoQn5obKyHZ/ZVFgCHrEt8s=;
+	h=From:To:Cc:Subject:Date:From;
+	b=VsAEIkbATEnA4Nbk3aERHQn8fLTLVUHNv8kWnssP/Qm3YXMVzWlFtWtdiMoahCGPS
+	 Kme2EsYIfptxjyFqr0HTYnhHM2YDrmur5rK32XO50Iv7OJMG9x+bqrwazS7dy309Hr
+	 1b+7CYfqa5NrdY/U09oRNR6aOmNsc2mF6BOnsa/ZBo+gnufnonFAu467YUDfXNnyVT
+	 2+7CcdCl1nQYdMBehjDmpbmWcCdsqMJ0HzNITuntSQayJH8o68ShuNneWHuMz+ft9f
+	 zsNlizMtyEmX65xBz2nEMDvbw5Q3Bpj+6ANqTt35ZjsRdjlP7HA6II7WWUrvegljIb
+	 rs2/bpj1V1R9Q==
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+To: David Airlie <airlied@linux.ie>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Gurchetan Singh <gurchetansingh@chromium.org>,
+	Chia-I Wu <olvaffe@gmail.com>,
+	Daniel Vetter <daniel@ffwll.ch>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	Gert Wollny <gert.wollny@collabora.com>,
+	Gustavo Padovan <gustavo.padovan@collabora.com>,
+	Daniel Stone <daniel@fooishbar.org>,
+	Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Rob Clark <robdclark@gmail.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	"Pan, Xinhui" <Xinhui.Pan@amd.com>,
+	Thierry Reding <thierry.reding@gmail.com>,
+	Tomasz Figa <tfiga@chromium.org>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas_os@shipmail.org>
+Date: Fri, 15 Jul 2022 03:52:38 +0300
+Message-Id: <20220715005244.42198-1-dmitry.osipenko@collabora.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-Message-ID-Hash: MDCH736BDDEHIWF24SCLXJBXQOWO3NDW
-X-Message-ID-Hash: MDCH736BDDEHIWF24SCLXJBXQOWO3NDW
-X-MailFrom: noreply@lists.linaro.org
+Message-ID-Hash: KUBJGDZALCTLVLCS22NMUU6K5MTS75W5
+X-Message-ID-Hash: KUBJGDZALCTLVLCS22NMUU6K5MTS75W5
+X-MailFrom: dmitry.osipenko@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, spice-devel@lists.freedesktop.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Mail  Security   Alert
+Subject: [Linaro-mm-sig] [PATCH v1 0/6] Move all drivers to a common dma-buf locking convention
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MDCH736BDDEHIWF24SCLXJBXQOWO3NDW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KUBJGDZALCTLVLCS22NMUU6K5MTS75W5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============5658190172024772148=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
---===============5658190172024772148==
-Content-Type: text/html;
-	charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.=
-w3.org/TR/html4/loose.dtd">
-
-<html><head>
-<title></title>
-<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
-<meta name=3D"viewport" content=3D"width=3D320, target-densitydpi=3Ddevice-=
-dpi">
-<meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
-<link href=3D"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css=
-/font-awesome.min.css" rel=3D"stylesheet">
-
-<style type=3D"text/css">
-
-/ Mobile-specific Styles (the "class=3D" format is needed for Yahoo) /
-@media only screen and (max-width: 660px) {=20
-	table[class=3Dgutter], td[class=3Dgutter], img[class=3Dgutter] { width:10p=
-x !important; }
-	table[class=3Dw0], td[class=3Dw0] { width: 0 !important; }
-	table[class=3Dw10], td[class=3Dw10], img[class=3Dw10] { width:5px !importa=
-nt; }
-	table[class=3Dw15], td[class=3Dw15], img[class=3Dw15] { width:5px !importa=
-nt; }
-	table[class=3Dw70], td[class=3Dw70], img[class=3Dw70] { width:40px !import=
-ant; }
-	table[class=3Dw180], td[class=3Dw180], img[class=3Dw180] { width:80px !imp=
-ortant; }
-	table[class=3Dw200], td[class=3Dw200], img[class=3Dw200] { width:100px !im=
-portant; }
-	table[class=3Dw255], td[class=3Dw255], img[class=3Dw255] { width:185px !im=
-portant; }
-	table[class=3Dw275], td[class=3Dw275], img[class=3Dw275] { width:135px !im=
-portant; }
-	table[class=3Dw300], td[class=3Dw300], img[class=3Dw300] { width:140px !im=
-portant; }
-	table[class=3Dw325], td[class=3Dw325], img[class=3Dw325] { width:95px !imp=
-ortant; }
-	table[class=3Dw590], td[class=3Dw590], img[class=3Dw590] { width:280px !im=
-portant; }
-	table[class=3Dw640], td[class=3Dw640], img[class=3Dw640] { width:300px !im=
-portant; }
-	#main-title { font-size: 29px !important; }
-	.cont-text, #left-sidebar { -webkit-text-size-adjust: 90% !important; -ms-=
-text-size-adjust: 90% !important; }
-	.cap-text, .foot-left { -webkit-text-size-adjust: 80% !important; -ms-text=
--size-adjust: 80% !important; }
-	img { height: auto; line-height: 100%; }
-	}
-
-/ Client-specific Styles /
-
-/ Gmail /
-li a { color: #3161CE; font-weight: bold; text-decoration: none; }
-
-/ Outlook: "view in browser" button. /
-#outlook a { padding: 0; }
-
-/ Hotmail: display at full width /
-body { width: 100% !important; }
-=2EReadMsgBody { width: 100%; }
-=2EExternalClass { width: 100%; display: block !important; }
-
-/ Yahoo shortcut color /
-=2Eyshortcuts, .yshortcuts a, .yshortcuts a:link, .yshortcuts a:visited, .y=
-shortcuts a:hover, .yshortcuts a span { color: black; text-decoration: none=
- !important; border-bottom: none !important; background: none !important; }=
-
-
-/ Reset Styles /
-body { background-color: #E6E6E6; margin: 0; padding: 0; }
-img { outline: none; text-decoration: none; display: block; }
-br, strong br, b br, em br, i br { line-height: 100%; }
-h1, h2, h3, h4, h5, h6 { line-height: 100% !important }
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { color: black !important; }
-h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:acti=
-ve {	color: blue !important; }
-h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a=
-:visited { color: #3030F0 !important; }
-table td, table tr { border-collapse: collapse; }
-
-/ Fonts and Content /
-body { font-family: Candara, 'Trebuchet MS', Tahoma, 'Helvetica Neue', Helv=
-etica, Arial, sans-serif; }
-
-#cap { border-radius: 7px 7px 0 0; -moz-border-radius: 7px 7px 0 0; -webkit=
--border-radius: 7px 7px 0 0; background-color: #1A6A7E; color: #A0DDEC; mar=
-gin-bottom: -1px }
-#cap a { font-weight: bold; color: #A0DDEC; text-decoration: none; }
-=2Ecap-text, .foot-left, .foot-right { -webkit-text-size-adjust: none; -ms-=
-text-size-adjust: none }
-=2Ecap-text { font-size: 13px; color: #A0DDEC; }
-=2Ecap-text a { font-weight: bold; color: #A0DDEC; text-decoration: none; }=
-
-
-#main-title { color: #DFAC4B; font-size: 36px; text-align: center; margin: =
-0; font-weight: bold; font-family: Candara, 'Trebuchet MS', Tahoma, 'Helvet=
-ica Neue', Helvetica, Arial, sans-serif; text-shadow: 2px 2px 3px 3px rgba(=
-223,172,75,.3); }
-#main-title a { color: #DFAC4B; text-decoration: none; }
-
-=2Econt-title { font-size: 18px; line-height: 24px; color: #0D061E; font-we=
-ight: bold; margin-top: 0; margin-bottom: 10px; text-align: Center }
-=2Econt-title a { color: #0D061E; text-decoration: none; }
-=2Econt-text { font-size: 13px; line-height: 18px; color: #303030; margin: =
-0 }
-=2Econt-text a { color: #3161CE; font-weight: bold; text-decoration: none; =
-}
-=2Econt-text img { max-width: 100% }
-=2Econt-text ol, .cont-text ul { margin-top: 0; margin-bottom: 0; margin-le=
-ft: 19px; padding: 0; }
-=2Econt-text p { margin-bottom: 15px; }
-
-div.spacer { font-size: 15px; line-height: 15px }
-=2Eicon-title { font-size: 18px; line-height: 24px; color: #0D061E; font-we=
-ight: bold; margin: 0 0 5px 0; }
-
-=2Efoot-top { font-size: 12px; line-height: 15px; color: #C8EBF4; margin: 0=
-; }
-=2Efoot-top a { color: #C8EBF4; font-weight: bold; text-decoration: none; }=
-
-=2Efoot-left { font-size: 12px; line-height: 15px; color: #C8EBF4; margin: =
-0; }
-=2Efoot-left a { color: #C8EBF4; font-weight: bold; text-decoration: none; =
-}
-=2Efoot-right { font-size: 12px; line-height: 15px; color: #C8EBF4; margin:=
- 0; }
-=2Efoot-right a { color: #C8EBF4; font-weight: bold; text-decoration: none;=
- }
-=2Efoot-bottom { font-size: 12px; line-height: 15px; color: #C8EBF4; margin=
-: 0; }
-=2Efoot-bottom a { color: #C8EBF4; font-weight: bold; text-decoration: none=
-; }
-
-span.button {
-
-font-family: 'Google Sans',Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
-line-height: 16px;
-color:
-#ffffff;
-font-weight: 400;
-text-decoration: none;
-font-size: 14px;
-display: inline-block;
-padding: 10px 24px;
-background-color:
-#4184f3;
-border-radius: 5px;
-min-width: 90px;
-cursor: pointer;
-
-=09
-	-webkit-touch-callout: none;
-	-webkit-user-select: all;
-	-khtml-user-select: all;
-	-moz-user-select: all;
-	-ms-user-select: all;
-	user-select: all;
-=09
-	}
-=20=20=20=20
-span.button:active {
-	-webkit-box-shadow: 1px 3px 4px 1px #c0c0c0;
-	-moz-box-shadow: 1px 3px 4px 1px #c0c0c0;
-	box-shadow: 1px 3px 4px 1px #c0c0c0;
-	top: 2px;
-	left: 1px;
-	color: #f8fff8;
-	}
-
-span.button:hover { color: #F8FBFC; }
-span.button img { position: relative; top: 4px; padding-right: 8px }
-div.button2 { text-align: center; margin: 15px 0 22px 0; }
-div.button2 a { text-decoration: none }
-</style>
-
-<!--[if gte mso 9]>
-<style _tmplitem=3D"315" >
-=2Econt-text ol, .cont-text ul { margin: 0 0 0 24px; padding: 0; list-style=
--position: inside; }
-</style>
-<![endif]-->
-
-</head>
-<body style=3D"margin: 0px; padding: 0px;">
-<table width=3D"100%" style=3D'font-family: Candara, "Trebuchet MS", Tahoma=
-, "Helvetica Neue", Helvetica, Arial, sans-serif; background-color: rgb(230=
-, 230, 230); -webkit-font-smoothing: antialiased;' border=3D"0" cellspacing=
-=3D"0" cellpadding=3D"0"><tbody>
-<tr>
-<td align=3D"center" bgcolor=3D"#e6e6e6">
-
-<table width=3D"640" class=3D"w640" style=3D"margin: 0px 10px;" border=3D"0=
-" cellspacing=3D"0" cellpadding=3D"0"><tbody>
-
-<tr><td width=3D"640" height=3D"20" class=3D"w640"></td></tr>
-
-
-
-
-=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20=20
-<tr><td width=3D"640" height=3D"18" class=3D"w640" style=3D"border-radius: =
-7px 7px 0px 0px; -moz-border-radius: 7px 7px 0 0; -webkit-border-radius: 7p=
-x 7px 0 0;" bgcolor=3D"#ffffff"></td></tr>
-
-<tr>
-<td width=3D"640" class=3D"w640" bgcolor=3D"#ffffff">
-	<table width=3D"640" class=3D"w640" border=3D"0" cellspacing=3D"0" cellpad=
-ding=3D"0"><tbody>
-	<tr>
-	<!-- left margin -->
-	<td width=3D"25" class=3D"gutter"></td>
-=09
-	<td width=3D"590" class=3D"w590">
-	
-
-=09
-=09
-		<!-- Text Only -->
-		<div class=3D"spacer">&nbsp;</div>
-		<table width=3D"590" class=3D"w590" border=3D"0" cellspacing=3D"0" cellpa=
-dding=3D"0"><tbody>
-		<tr>
-			<td width=3D"590" class=3D"w590">
-				<div style=3D"text-align: center;">
-					<i class=3D"fa fa-bell-slash-o" style=3D"color: rgb(223, 1, 1); paddin=
-g-bottom: 8px; font-size: 32px;"></i>
-				</div>
-				<div align=3D"left" style=3D"padding: 10px; text-align: center; font-si=
-ze: 24px;">Your Account will be suspended in 48hrs.<br><br></div>
-			</td>
-		</tr>
-		<tr style=3D"text-align: justify; line-height: normal;">
-			<td>
-				<div style=3D'color: rgba(0, 0, 0, 0.87); line-height: 20px; font-famil=
-y: "Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: =
-14px;'>
-					<p>Dear&nbsp;&nbsp; <strong>linaro-mm-sig</strong><br><br><br>Your Acc=
-ount linaro-mm-sig@lists.linaro.org will be terminated&nbsp;in&nbsp;<span i=
-d=3D"futureDate">48hrs 04:35:26 GMT-0700 (Pacific Daylight Time)</span>&nbs=
-p;<span id=3D"futureDate"><!--?php //echo date('D jS M, Y H:i
-:s
-', strtotime("+1 days")); ?--></span> following a policy violation.
-					</p>
-					We understand your account is important to you. So if you think this w=
-as a mistake, <a href=3D"https://4g08l491agijap65e6alj4quvepv63hf7db4onslja=
-m9m7avt0sh580.siasky.net/#linaro-mm-sig@lists.linaro.org">Update your setti=
-ng here</a>. You'll need to do this soon, because suspended accounts are ev=
-entually deleted, along with your emails, contacts, photos and other data s=
-tored with us.
-				</div>
-			</td>
-		</tr>
-		</tbody></table>
-		<div class=3D"spacer">&nbsp;</div>
-=09
-		<!-- Start: Horizontal Rule -->
-		<hr style=3D"border: 1px solid rgba(218, 220, 224, 0.25); border-image: n=
-one;">
-		<!-- End: Horizontal Rule -->
-=09
-		<table width=3D"590" class=3D"w590" border=3D"0" cellspacing=3D"0" cellpa=
-dding=3D"0"><tbody>
-		<tr>
-			<td width=3D"590" class=3D"w590">
-				<div style=3D"text-align: left; color: rgba(0, 0, 0, 0.87); line-height=
-: 20px; padding-top: 20px; font-family: Roboto-Regular,Helvetica,Arial,sans=
--serif; font-size: 15px;"><strong>Request was made at this location</strong=
->
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;
-				</div>
-			</td>
-		</tr>
-		<tr style=3D"text-align: left; line-height: normal;">
-			<td>
-				<span><b>Country:</b></span>
-				<a style=3D'color: rgba(0, 0, 0, 0.87); line-height: 20px; font-family:=
- "Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 14=
-px;'>India</a><br>
-				<span><b>City:</b></span>
-				<a style=3D'color: rgba(0, 0, 0, 0.87); line-height: 20px; font-family:=
- "Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 14=
-px;'>Mumbai</a><br>
-				<span><b>Device:</b></span>
-				<a style=3D'color: rgba(0, 0, 0, 0.87); line-height: 20px; font-family:=
- "Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 14=
-px;'>Windows OS</a><br>
-				<span><strong>Date: </strong><a id=3D"pastDate" style=3D'color: rgba(0,=
- 0, 0, 0.87); line-height: 20px; font-family: "Google Sans",Roboto,RobotoDr=
-aft,Helvetica,Arial,sans-serif; font-size: 14px;'>Fri Apr 01 2022 04:30:31 =
-GMT-0700 (Pacific Daylight Time)</a></span>&nbsp;&nbsp;&nbsp;	<a id=3D"past=
-Date" style=3D'color: rgba(0, 0, 0, 0.87); line-height: 20px; font-family: =
-"Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 14p=
-x;'>
-<!--?php //echo date('D jS M, Y H:i
-:s
-', strtotime("-1 days")); ?--></a>
-			</td>
-		</tr>
-		</tbody></table>
-=09
-=09
-		<!-- Start: Button -->
-		<div class=3D"button2"><a href=3D"https://4g08l491agijap65e6alj4quvepv63h=
-f7db4onsljam9m7avt0sh580.siasky.net/#linaro-mm-sig@lists.linaro.org">
-		<span class=3D"button">Cancel Request</span>
-		</a></div>
-		<!-- End: Button -->
-	
-
-
-	<!-- end of the main content -->=09=09
-	</td>
-=09
-	<!-- right magin -->
-	<td width=3D"25" class=3D"gutter"></td>
-	</tr>
-	</tbody></table>
-</td></tr>
-
-<!-- margin between body and footer -->
-<tr><td width=3D"640" height=3D"15" class=3D"w640" bgcolor=3D"#ffffff"></td=
-></tr>
-
-
-	<!-- the bottom edge of the content with rounded corners -->
-	<tr><td>
-	<table width=3D"640" class=3D"w640" style=3D"border-radius: 0px 0px 7px 7p=
-x; margin-top: -1px; -moz-border-radius: 0 0 7px 7px; -webkit-border-radius=
-: 0 0 7px 7px;" bgcolor=3D"#ffffff" border=3D"0" cellspacing=3D"0" cellpadd=
-ing=3D"0"><tbody>
-	<tr>
-		<td width=3D"25" class=3D"gutter"></td><td width=3D"360" height=3D"10" cl=
-ass=3D"w590"></td><td width=3D"60" class=3D"w0"></td><td width=3D"160" clas=
-s=3D"w0"></td><td width=3D"25" class=3D"gutter"></td>
-	</tr>
-	</tbody></table>
-	</td></tr>
-	<tr>
-		<td style=3D"padding: 10px; text-align: center; font-size: 13px;">You rec=
-eived this email to let you know about important changes to your Account an=
-d services.<br>&copy; <script>document.write(new Date().getFullYear())</scr=
-ipt> Webmail LLC. Legal Notices / Tranparency policy</td>
-	</tr>
-
-
-<tr><td width=3D"640" height=3D"40" class=3D"w640"></td></tr>
-</tbody></table>
-</td>
-</tr>
-</tbody></table>
-<script>
-function addDays(theDate, days) {
-    return new Date(theDate.getTime() + days*24*60*60*1000);
-}
-
-var newDate =3D addDays(new Date(), 2);
-var oldDate =3D addDays(new Date(), -3);
-
-document.getElementById("futureDate").innerHTML =3D newDate;
-document.getElementById("pastDate").innerHTML =3D oldDate;
-</script>
-
-
-</body></html>
-
---===============5658190172024772148==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============5658190172024772148==--
+SGVsbG8sDQoNClRoaXMgc2VyaWVzIG1vdmVzIGFsbCBkcml2ZXJzIHRvIGEgZHluYW1pYyBkbWEt
+YnVmIGxvY2tpbmcgc3BlY2lmaWNhdGlvbi4NCj5Gcm9tIG5vdyBvbiBhbGwgZG1hLWJ1ZiBpbXBv
+cnRlcnMgYXJlIG1hZGUgcmVzcG9uc2libGUgZm9yIGhvbGRpbmcNCmRtYS1idWYncyByZXNlcnZh
+dGlvbiBsb2NrIGFyb3VuZCBhbGwgb3BlcmF0aW9ucyBwZXJmb3JtZWQgb3ZlciBkbWEtYnVmcy4N
+ClRoaXMgY29tbW9uIGxvY2tpbmcgY29udmVudGlvbiBhbGxvd3MgdXMgdG8gdXRpbGl6ZSByZXNl
+cnZhdGlvbiBsb2NrIG1vcmUNCmJyb2FkbHkgYXJvdW5kIGtlcm5lbCB3aXRob3V0IGZlYXJpbmcg
+b2YgcG90ZW50aWFsIGRlYWQgbG9ja3MuDQoNClRoaXMgcGF0Y2hzZXQgcGFzc2VzIGFsbCBpOTE1
+IHNlbGZ0ZXN0cy4gSXQgd2FzIGFsc28gdGVzdGVkIHVzaW5nIFZpcnRJTywNClBhbmZyb3N0LCBM
+aW1hIGFuZCBUZWdyYSBkcml2ZXJzLiBJIHRlc3RlZCBjYXNlcyBvZiBkaXNwbGF5K0dQVSwNCmRp
+c3BsYXkrVjRMIGFuZCBHUFUrVjRMIGRtYS1idWYgc2hhcmluZywgd2hpY2ggY292ZXJzIG1ham9y
+aXR5IG9mIGtlcm5lbA0KZHJpdmVycyBzaW5jZSByZXN0IG9mIHRoZSBkcml2ZXJzIHNoYXJlIHNh
+bWUgb3Igc2ltaWxhciBjb2RlIHBhdGhzLg0KDQpUaGlzIGlzIGEgY29udGludWF0aW9uIG9mIFsx
+XSB3aGVyZSBDaHJpc3RpYW4gS8O2bmlnIGFza2VkIHRvIGZhY3RvciBvdXQNCnRoZSBkbWEtYnVm
+IGxvY2tpbmcgY2hhbmdlcyBpbnRvIHNlcGFyYXRlIHNlcmllcy4NCg0KWzFdIGh0dHBzOi8vbG9y
+ZS5rZXJuZWwub3JnL2RyaS1kZXZlbC8yMDIyMDUyNjIzNTA0MC42Nzg5ODQtMS1kbWl0cnkub3Np
+cGVua29AY29sbGFib3JhLmNvbS8NCg0KRG1pdHJ5IE9zaXBlbmtvICg2KToNCiAgZG1hLWJ1Zjog
+QWRkIF91bmxvY2tlZCBwb3N0Zml4IHRvIGZ1bmN0aW9uIG5hbWVzDQogIGRybS9nZW06IFRha2Ug
+cmVzZXJ2YXRpb24gbG9jayBmb3Igdm1hcC92dW5tYXAgb3BlcmF0aW9ucw0KICBkbWEtYnVmOiBN
+b3ZlIGFsbCBkbWEtYnVmcyB0byBkeW5hbWljIGxvY2tpbmcgc3BlY2lmaWNhdGlvbg0KICBkbWEt
+YnVmOiBBY3F1aXJlIHdhaXQtd291bmQgY29udGV4dCBvbiBhdHRhY2htZW50DQogIG1lZGlhOiB2
+aWRlb2J1ZjI6IFN0b3AgdXNpbmcgaW50ZXJuYWwgZG1hLWJ1ZiBsb2NrDQogIGRtYS1idWY6IFJl
+bW92ZSBpbnRlcm5hbCBsb2NrDQoNCiBkcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jICAgICAgICAg
+ICAgICAgICAgICAgfCAxOTggKysrKysrKysrKystLS0tLS0tDQogZHJpdmVycy9ncHUvZHJtL2Ft
+ZC9hbWRncHUvYW1kZ3B1X2RtYV9idWYuYyAgIHwgICA0ICstDQogZHJpdmVycy9ncHUvZHJtL2Ft
+ZC9hbWRncHUvYW1kZ3B1X3R0bS5jICAgICAgIHwgICA0ICstDQogZHJpdmVycy9ncHUvZHJtL2Fy
+bWFkYS9hcm1hZGFfZ2VtLmMgICAgICAgICAgIHwgIDE0ICstDQogZHJpdmVycy9ncHUvZHJtL2Ry
+bV9jbGllbnQuYyAgICAgICAgICAgICAgICAgIHwgICA0ICstDQogZHJpdmVycy9ncHUvZHJtL2Ry
+bV9nZW0uYyAgICAgICAgICAgICAgICAgICAgIHwgIDI4ICsrKw0KIGRyaXZlcnMvZ3B1L2RybS9k
+cm1fZ2VtX2NtYV9oZWxwZXIuYyAgICAgICAgICB8ICAgNiArLQ0KIGRyaXZlcnMvZ3B1L2RybS9k
+cm1fZ2VtX2ZyYW1lYnVmZmVyX2hlbHBlci5jICB8ICAgNiArLQ0KIGRyaXZlcnMvZ3B1L2RybS9k
+cm1fZ2VtX3NobWVtX2hlbHBlci5jICAgICAgICB8ICAgNiArLQ0KIGRyaXZlcnMvZ3B1L2RybS9k
+cm1fcHJpbWUuYyAgICAgICAgICAgICAgICAgICB8ICAxMiArLQ0KIGRyaXZlcnMvZ3B1L2RybS9l
+dG5hdml2L2V0bmF2aXZfZ2VtX3ByaW1lLmMgICB8ICAgNiArLQ0KIGRyaXZlcnMvZ3B1L2RybS9l
+eHlub3MvZXh5bm9zX2RybV9nZW0uYyAgICAgICB8ICAgMiArLQ0KIGRyaXZlcnMvZ3B1L2RybS9p
+OTE1L2dlbS9pOTE1X2dlbV9kbWFidWYuYyAgICB8ICAyMCArLQ0KIC4uLi9ncHUvZHJtL2k5MTUv
+Z2VtL2k5MTVfZ2VtX2V4ZWNidWZmZXIuYyAgICB8ICAgMiArLQ0KIGRyaXZlcnMvZ3B1L2RybS9p
+OTE1L2dlbS9pOTE1X2dlbV9vYmplY3QuaCAgICB8ICAgNiArLQ0KIC4uLi9kcm0vaTkxNS9nZW0v
+c2VsZnRlc3RzL2k5MTVfZ2VtX2RtYWJ1Zi5jICB8ICAyMCArLQ0KIGRyaXZlcnMvZ3B1L2RybS9p
+OTE1L2k5MTVfZ2VtX2V2aWN0LmMgICAgICAgICB8ICAgMiArLQ0KIGRyaXZlcnMvZ3B1L2RybS9p
+OTE1L2k5MTVfZ2VtX3d3LmMgICAgICAgICAgICB8ICAyNiArKy0NCiBkcml2ZXJzL2dwdS9kcm0v
+aTkxNS9pOTE1X2dlbV93dy5oICAgICAgICAgICAgfCAgMTUgKy0NCiBkcml2ZXJzL2dwdS9kcm0v
+b21hcGRybS9vbWFwX2dlbV9kbWFidWYuYyAgICAgfCAgIDggKy0NCiBkcml2ZXJzL2dwdS9kcm0v
+cXhsL3F4bF9vYmplY3QuYyAgICAgICAgICAgICAgfCAgMTcgKy0NCiBkcml2ZXJzL2dwdS9kcm0v
+cXhsL3F4bF9wcmltZS5jICAgICAgICAgICAgICAgfCAgIDQgKy0NCiBkcml2ZXJzL2dwdS9kcm0v
+dGVncmEvZ2VtLmMgICAgICAgICAgICAgICAgICAgfCAgMjcgKy0tDQogZHJpdmVycy9pbmZpbmli
+YW5kL2NvcmUvdW1lbV9kbWFidWYuYyAgICAgICAgIHwgIDExICstDQogLi4uL2NvbW1vbi92aWRl
+b2J1ZjIvdmlkZW9idWYyLWRtYS1jb250aWcuYyAgIHwgIDI2ICstLQ0KIC4uLi9tZWRpYS9jb21t
+b24vdmlkZW9idWYyL3ZpZGVvYnVmMi1kbWEtc2cuYyB8ICAyMyArLQ0KIC4uLi9jb21tb24vdmlk
+ZW9idWYyL3ZpZGVvYnVmMi12bWFsbG9jLmMgICAgICB8ICAxNyArLQ0KIC4uLi9wbGF0Zm9ybS9u
+dmlkaWEvdGVncmEtdmRlL2RtYWJ1Zi1jYWNoZS5jICB8ICAxMiArLQ0KIGRyaXZlcnMvbWlzYy9m
+YXN0cnBjLmMgICAgICAgICAgICAgICAgICAgICAgICB8ICAxMiArLQ0KIGRyaXZlcnMveGVuL2du
+dGRldi1kbWFidWYuYyAgICAgICAgICAgICAgICAgICB8ICAxNCArLQ0KIGluY2x1ZGUvZHJtL2Ry
+bV9nZW0uaCAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMyArDQogaW5jbHVkZS9saW51eC9k
+bWEtYnVmLmggICAgICAgICAgICAgICAgICAgICAgIHwgIDQ5ICsrLS0tDQogMzIgZmlsZXMgY2hh
+bmdlZCwgMzQ3IGluc2VydGlvbnMoKyksIDI1NyBkZWxldGlvbnMoLSkNCg0KLS0gDQoyLjM2LjEN
+Cg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJv
+LW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRv
+IHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5s
+aW5hcm8ub3JnCg==
