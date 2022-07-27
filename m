@@ -2,272 +2,496 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F7DF597E36
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Aug 2022 07:50:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 985BC59807E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Aug 2022 11:04:31 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 59C323F611
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Aug 2022 05:50:54 +0000 (UTC)
-Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
-	by lists.linaro.org (Postfix) with ESMTPS id F15983F1C4
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 18 Aug 2022 05:50:50 +0000 (UTC)
-Received: by mail-qk1-f171.google.com with SMTP id j6so420444qkl.10
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Aug 2022 22:50:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc;
-        bh=KnXVfj+T4u59u5J2KygjH6Rp2ec5Yoi6AW22Q/4H+6I=;
-        b=gYFJGDKAZN34/WoR5EjsSipswRGwu4w7Ht8XDPDeVPSVtQHCznF5MPwovMhqc8OC8u
-         8THI+3cp0xPYujus/2EiU0efdwxnIE5LnwRoH/V8aNGE7bdRG1C7p2AH6QjaM1p/3xVQ
-         aYAT62RdhRis0COJDJJ5ZL5+dKJu7zqxUmYmc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc;
-        bh=KnXVfj+T4u59u5J2KygjH6Rp2ec5Yoi6AW22Q/4H+6I=;
-        b=wMsGYO1OkswRdUP2NccuRLgTjLzvqtd7EblRWLNxCIGuwn1sndQVeeY/QK+ZkRhrS7
-         UY8iLvzpipoL77Xja9UUdl0KWOYANvxJr3wLPrTqw/8xwvBZ6EbCMuLPPq0vWAhY2Z2W
-         wWvhORYanN5I7dVHgROYC+djGvqbQuSh21N3NowLj7D4hh+JWCHITBSWlwmtcNgiaUSB
-         GwqOSbsZkugZ5aEbK6XMrU9iyGZHSEARmNl/I4r1DnHvrjWW/WkO9YdEeRmjlbl+9jIu
-         tWvuw33s8+mDnVOn6XcVWfg39qy/j1hHMaptcUNa+VPvzuDhEGQBVs9zNxQxUOqb+/yD
-         BiQw==
-X-Gm-Message-State: ACgBeo0QubGUX363gwLkeW/csONX6lQR0VUI0QfF1hYbWrClulkxyNeN
-	rP+kvAb7ykWb4xXtuYJyGQtHGgql2TXZ4w==
-X-Google-Smtp-Source: AA6agR7171igYXzI91TBxXSZ2etIYDLcJWkI3SbuJYsp7plpU4os8VbLe3OjptHC0+id8bJ57WU3cw==
-X-Received: by 2002:a05:620a:2627:b0:6b8:c8c3:78f9 with SMTP id z39-20020a05620a262700b006b8c8c378f9mr966501qko.641.1660801850109;
-        Wed, 17 Aug 2022 22:50:50 -0700 (PDT)
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com. [209.85.128.169])
-        by smtp.gmail.com with ESMTPSA id r19-20020a05620a299300b006b555509398sm824433qkp.136.2022.08.17.22.50.47
-        for <linaro-mm-sig@lists.linaro.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 17 Aug 2022 22:50:48 -0700 (PDT)
-Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-33387bf0c4aso14068107b3.11
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Aug 2022 22:50:47 -0700 (PDT)
-X-Received: by 2002:a25:6a46:0:b0:67b:66ad:ae40 with SMTP id
- f67-20020a256a46000000b0067b66adae40mr1387247ybc.261.1660801846946; Wed, 17
- Aug 2022 22:50:46 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 8F4783F60B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Aug 2022 09:04:30 +0000 (UTC)
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by lists.linaro.org (Postfix) with ESMTPS id 1484B4796F
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 27 Jul 2022 14:26:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1658931991; x=1690467991;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=yRtRA2L5KXrA6ay/GCNvTsGR00ioBhNP9ppGrfmcupo=;
+  b=my1AWvHGJKKbX67nPmY38sC11I6oLF1kRH2Bm0f8YPsCJYSOkk5KLG3H
+   rKjo3OyxRotYL/v+LksPk6H8MfxpY6EB37q2fPWndGED0w0K1FaA6v0QJ
+   HSFsAcvVrm5DEfRVod4SKsm5fRyNbpSo/xVoUdkSfk1Bl4zfs0Q94TwpM
+   CmzO5uOSIGs0G9se/R/DlllZm2OwfCxpYS85eKa0qGoYwDBt6+vWss9CB
+   CqUXUH13QYtN0/mZxfqSDF/cGT4LoSStdjrh5mb9UAmryNUhfUc90LtyK
+   Mw2460gckEf9vV9+1vxYF7dA6a28T4N6/TUp++RZQ5MgDiFH712QSjt9E
+   Q==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10421"; a="286999443"
+X-IronPort-AV: E=Sophos;i="5.93,195,1654585200";
+   d="scan'208";a="286999443"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jul 2022 07:26:09 -0700
+X-IronPort-AV: E=Sophos;i="5.93,195,1654585200";
+   d="scan'208";a="659218275"
+Received: from cene1-mobl.ger.corp.intel.com (HELO intel.com) ([10.252.44.151])
+  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jul 2022 07:26:01 -0700
+Date: Wed, 27 Jul 2022 16:25:59 +0200
+From: Andi Shyti <andi.shyti@linux.intel.com>
+To: Mauro Carvalho Chehab <mchehab@kernel.org>
+Message-ID: <YuFK9x00rTQsVymf@alfio.lan>
+References: <cover.1658924372.git.mchehab@kernel.org>
+ <4e97ef5deb6739cadaaf40aa45620547e9c4ec06.1658924372.git.mchehab@kernel.org>
 MIME-Version: 1.0
-References: <CAAFQd5AL=OejdaubnYDRF4M1EKyStZP_FAMPz4CJ=KCa_8QjaA@mail.gmail.com>
- <CF192A87-1664-45B2-B26C-A9B8B6A52523@soulik.info> <CAAFQd5DTNDkZ7W0Rs8Xfq-x+y+cmHZHkDYQys29aNt2YvCJc1A@mail.gmail.com>
- <7c7c2c49-a0e4-cda8-be29-0d143851b9fd@synaptics.com>
-In-Reply-To: <7c7c2c49-a0e4-cda8-be29-0d143851b9fd@synaptics.com>
-From: Tomasz Figa <tfiga@chromium.org>
-Date: Thu, 18 Aug 2022 14:50:35 +0900
-X-Gmail-Original-Message-ID: <CAAFQd5BDWBwYH=hfQBmvuyB6xSgXhHKhv2093w2irz4C4_kX5w@mail.gmail.com>
-Message-ID: <CAAFQd5BDWBwYH=hfQBmvuyB6xSgXhHKhv2093w2irz4C4_kX5w@mail.gmail.com>
-To: Hsia-Jun Li <Randy.Li@synaptics.com>
-Message-ID-Hash: ZP6HGAIDLSOLWFFD7IRBJA5PPKM5MXIG
-X-Message-ID-Hash: ZP6HGAIDLSOLWFFD7IRBJA5PPKM5MXIG
-X-MailFrom: tfiga@chromium.org
+Content-Disposition: inline
+In-Reply-To: <4e97ef5deb6739cadaaf40aa45620547e9c4ec06.1658924372.git.mchehab@kernel.org>
+X-MailFrom: andi.shyti@linux.intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: linux-media@vger.kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, ayaka <ayaka@soulik.info>
+Message-ID-Hash: 6AI2UG4JCSU3DLQMRPDCFCEMLRV3Y7UE
+X-Message-ID-Hash: 6AI2UG4JCSU3DLQMRPDCFCEMLRV3Y7UE
+X-Mailman-Approved-At: Thu, 18 Aug 2022 09:04:28 +0000
+CC: Chris Wilson <chris.p.wilson@intel.com>, Christian =?iso-8859-15?Q?K=F6nig?= <christian.koenig@amd.com>, =?utf-8?Q?Micha=C5=82?= Winiarski <michal.winiarski@intel.com>, Thomas =?iso-8859-15?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>, Andi Shyti <andi.shyti@linux.intel.com>, Andrzej Hajda <andrzej.hajda@intel.com>, Ashutosh Dixit <ashutosh.dixit@intel.com>, Ayaz A Siddiqui <ayaz.siddiqui@intel.com>, Casey Bowman <casey.g.bowman@intel.com>, Daniel Vetter <daniel@ffwll.ch>, Daniele Ceraolo Spurio <daniele.ceraolospurio@intel.com>, Dave Airlie <airlied@redhat.com>, David Airlie <airlied@linux.ie>, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Lucas De Marchi <lucas.demarchi@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Matt Roper <matthew.d.roper@intel.com>, Matthew Auld <matthew.auld@intel.com>, Michael Cheng <michael.cheng@intel.com>, Nirmoy Das <nirmoy.das@linux.intel.com>, Ramalingam C <ramalingam.c@inte
+ l.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, Tomas Winkler <tomas.winkler@intel.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, stable@vger.kernel.org, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Fei Yang <fei.yang@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] [Draft]: media: videobuf2-dma-heap: add a vendor defined memory runtine
+Subject: [Linaro-mm-sig] Re: [PATCH v3 5/6] drm/i915/gt: Batch TLB invalidations
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZP6HGAIDLSOLWFFD7IRBJA5PPKM5MXIG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6AI2UG4JCSU3DLQMRPDCFCEMLRV3Y7UE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGkgUmFuZHksDQoNClNvcnJ5IGZvciB0aGUgbGF0ZSByZXBseSwgSSB3ZW50IG9uIHZhY2F0aW9u
-IGxhc3Qgd2Vlay4NCg0KT24gU3VuLCBBdWcgNywgMjAyMiBhdCAxMjoyMyBBTSBIc2lhLUp1biBM
-aSA8UmFuZHkuTGlAc3luYXB0aWNzLmNvbT4gd3JvdGU6DQo+DQo+DQo+DQo+IE9uIDgvNS8yMiAx
-ODowOSwgVG9tYXN6IEZpZ2Egd3JvdGU6DQo+ID4gQ0FVVElPTjogRW1haWwgb3JpZ2luYXRlZCBl
-eHRlcm5hbGx5LCBkbyBub3QgY2xpY2sgbGlua3Mgb3Igb3BlbiBhdHRhY2htZW50cyB1bmxlc3Mg
-eW91IHJlY29nbml6ZSB0aGUgc2VuZGVyIGFuZCBrbm93IHRoZSBjb250ZW50IGlzIHNhZmUuDQo+
-ID4NCj4gPg0KPiA+IE9uIFR1ZSwgQXVnIDIsIDIwMjIgYXQgOToyMSBQTSBheWFrYSA8YXlha2FA
-c291bGlrLmluZm8+IHdyb3RlOg0KPiA+Pg0KPiA+PiBTb3JyeSwgdGhlIHByZXZpb3VzIG9uZSBj
-b250YWlucyBodG1sIGRhdGEuDQo+ID4+DQo+ID4+PiBPbiBBdWcgMiwgMjAyMiwgYXQgMzozMyBQ
-TSwgVG9tYXN6IEZpZ2EgPHRmaWdhQGNocm9taXVtLm9yZz4gd3JvdGU6DQo+ID4+Pg0KPiA+Pj4g
-77u/T24gTW9uLCBBdWcgMSwgMjAyMiBhdCA4OjQzIFBNIGF5YWthIDxheWFrYUBzb3VsaWsuaW5m
-bz4gd3JvdGU6DQo+ID4+Pj4gU2VudCBmcm9tIG15IGlQYWQNCj4gPj4+Pj4+IE9uIEF1ZyAxLCAy
-MDIyLCBhdCA1OjQ2IFBNLCBUb21hc3ogRmlnYSA8dGZpZ2FAY2hyb21pdW0ub3JnPiB3cm90ZToN
-Cj4gPj4+Pj4g77u/Q0FVVElPTjogRW1haWwgb3JpZ2luYXRlZCBleHRlcm5hbGx5LCBkbyBub3Qg
-Y2xpY2sgbGlua3Mgb3Igb3BlbiBhdHRhY2htZW50cyB1bmxlc3MgeW91IHJlY29nbml6ZSB0aGUg
-c2VuZGVyIGFuZCBrbm93IHRoZSBjb250ZW50IGlzIHNhZmUuDQo+ID4+Pj4+PiBPbiBNb24sIEF1
-ZyAxLCAyMDIyIGF0IDM6NDQgUE0gSHNpYS1KdW4gTGkgPFJhbmR5LkxpQHN5bmFwdGljcy5jb20+
-IHdyb3RlOg0KPiA+Pj4+Pj4+IE9uIDgvMS8yMiAxNDoxOSwgVG9tYXN6IEZpZ2Egd3JvdGU6DQo+
-ID4+Pj4+PiBIZWxsbyBUb21hc3oNCj4gPj4+Pj4+PiA/SGkgUmFuZHksDQo+ID4+Pj4+Pj4gT24g
-TW9uLCBBdWcgMSwgMjAyMiBhdCA1OjIxIEFNIDxheWFrYUBzb3VsaWsuaW5mbz4gd3JvdGU6DQo+
-ID4+Pj4+Pj4+IEZyb206IFJhbmR5IExpIDxheWFrYUBzb3VsaWsuaW5mbz4NCj4gPj4+Pj4+Pj4g
-VGhpcyBtb2R1bGUgaXMgc3RpbGwgYXQgYSBlYXJseSBzdGFnZSwgSSB3cm90ZSB0aGlzIGZvciBz
-aG93aW5nIHdoYXQNCj4gPj4+Pj4+Pj4gQVBJcyB3ZSBuZWVkIGhlcmUuDQo+ID4+Pj4+Pj4+IExl
-dCBtZSBleHBsYWluIHdoeSB3ZSBuZWVkIHN1Y2ggYSBtb2R1bGUgaGVyZS4NCj4gPj4+Pj4+Pj4g
-SWYgeW91IHdvbid0IGFsbG9jYXRlIGJ1ZmZlcnMgZnJvbSBhIFY0TDIgTTJNIGRldmljZSwgdGhp
-cyBtb2R1bGUNCj4gPj4+Pj4+Pj4gbWF5IG5vdCBiZSB2ZXJ5IHVzZWZ1bC4gSSBhbSBzdXJlIHRo
-ZSBtb3N0IG9mIHVzZXJzIHdvbid0IGtub3cgYQ0KPiA+Pj4+Pj4+PiBkZXZpY2Ugd291bGQgcmVx
-dWlyZSB0aGVtIGFsbG9jYXRlIGJ1ZmZlcnMgZnJvbSBhIERNQS1IZWFwIHRoZW4NCj4gPj4+Pj4+
-Pj4gaW1wb3J0IHRob3NlIGJ1ZmZlcnMgaW50byBhIFY0TDIncyBxdWV1ZS4NCj4gPj4+Pj4+Pj4g
-VGhlbiB0aGUgcXVlc3Rpb24gZ29lcyBiYWNrIHRvIHdoeSBETUEtSGVhcC4gRnJvbSB0aGUgQW5k
-cm9pZCdzDQo+ID4+Pj4+Pj4+IGRlc2NyaXB0aW9uLCB3ZSBrbm93IGl0IGlzIGFib3V0IHRoZSBj
-b3B5cmlnaHQncyBEUk0uDQo+ID4+Pj4+Pj4+IFdoZW4gd2UgYWxsb2NhdGUgYSBidWZmZXIgaW4g
-YSBETUEtSGVhcCwgaXQgbWF5IHJlZ2lzdGVyIHRoYXQgYnVmZmVyDQo+ID4+Pj4+Pj4+IGluIHRo
-ZSB0cnVzdGVkIGV4ZWN1dGlvbiBlbnZpcm9ubWVudCBzbyB0aGUgZmlybXdhcmUgd2hpY2ggaXMg
-cnVubmluZw0KPiA+Pj4+Pj4+PiBvciBjb3VsZCBvbmx5IGJlIGFjY2Nlc2VkIGZyb20gdGhlcmUg
-Y291bGQgdXNlIHRoYXQgYnVmZmVyIGxhdGVyLg0KPiA+Pj4+Pj4+PiBUaGUgYW5zd2VyIGFib3Zl
-IGxlYWRzIHRvIGFub3RoZXIgdGhpbmcgd2hpY2ggaXMgbm90IGRvbmUgaW4gdGhpcw0KPiA+Pj4+
-Pj4+PiB2ZXJzaW9uLCB0aGUgRE1BIG1hcHBpbmcuIEFsdGhvdWdoIGluIHNvbWUgcGxhdGZvcm1z
-LCBhIERNQS1IZWFwDQo+ID4+Pj4+Pj4+IHJlc3BvbnNlcyBhIElPTU1VIGRldmljZSBhcyB3ZWxs
-LiBGb3IgdGhlIGdlbmVybmFsIHB1cnBvc2UsIHdlIHdvdWxkDQo+ID4+Pj4+Pj4+IGJlIGJldHRl
-ciBhc3N1bWluZyB0aGUgZGV2aWNlIG1hcHBpbmcgc2hvdWxkIGJlIGRvbmUgZm9yIGVhY2ggZGV2
-aWNlDQo+ID4+Pj4+Pj4+IGl0c2VsZi4gVGhlIHByb2JsZW0gaGVyZSB3ZSBvbmx5IGtub3cgYWxs
-b2NfZGV2cyBpbiB0aG9zZSBETUFidWYNCj4gPj4+Pj4+Pj4gbWV0aG9kcywgd2hpY2ggYXJlIERN
-QS1oZWFwcyBpbiBteSBkZXNpZ24sIHRoZSBkZXZpY2UgZnJvbSB0aGUgcXVldWUNCj4gPj4+Pj4+
-Pj4gaXMgbm90IGVub3VnaCwgYSBwbGFuZSBtYXkgcmVxdWVzdHMgYW5vdGhlciBJT01NVSBkZXZp
-Y2Ugb3IgdGFibGUNCj4gPj4+Pj4+Pj4gZm9yIG1hcHBpbmcuDQo+ID4+Pj4+Pj4+IFNpZ25lZC1v
-ZmYtYnk6IFJhbmR5IExpIDxheWFrYUBzb3VsaWsuaW5mbz4NCj4gPj4+Pj4+Pj4gLS0tDQo+ID4+
-Pj4+Pj4+IGRyaXZlcnMvbWVkaWEvY29tbW9uL3ZpZGVvYnVmMi9LY29uZmlnICAgICAgICB8ICAg
-NiArDQo+ID4+Pj4+Pj4+IGRyaXZlcnMvbWVkaWEvY29tbW9uL3ZpZGVvYnVmMi9NYWtlZmlsZSAg
-ICAgICB8ICAgMSArDQo+ID4+Pj4+Pj4+IC4uLi9jb21tb24vdmlkZW9idWYyL3ZpZGVvYnVmMi1k
-bWEtaGVhcC5jICAgICB8IDM1MCArKysrKysrKysrKysrKysrKysNCj4gPj4+Pj4+Pj4gaW5jbHVk
-ZS9tZWRpYS92aWRlb2J1ZjItZG1hLWhlYXAuaCAgICAgICAgICAgIHwgIDMwICsrDQo+ID4+Pj4+
-Pj4+IDQgZmlsZXMgY2hhbmdlZCwgMzg3IGluc2VydGlvbnMoKykNCj4gPj4+Pj4+Pj4gY3JlYXRl
-IG1vZGUgMTAwNjQ0IGRyaXZlcnMvbWVkaWEvY29tbW9uL3ZpZGVvYnVmMi92aWRlb2J1ZjItZG1h
-LWhlYXAuYw0KPiA+Pj4+Pj4+PiBjcmVhdGUgbW9kZSAxMDA2NDQgaW5jbHVkZS9tZWRpYS92aWRl
-b2J1ZjItZG1hLWhlYXAuaA0KPiA+Pj4+Pj4+IEZpcnN0IG9mIGFsbCwgdGhhbmtzIGZvciB0aGUg
-c2VyaWVzLg0KPiA+Pj4+Pj4+IFBvc3NpYmx5IGEgc3R1cGlkIHF1ZXN0aW9uLCBidXQgd2h5IG5v
-dCBqdXN0IGFsbG9jYXRlIHRoZSBETUEtYnVmcw0KPiA+Pj4+Pj4+IGRpcmVjdGx5IGZyb20gdGhl
-IERNQS1idWYgaGVhcCBkZXZpY2UgaW4gdGhlIHVzZXJzcGFjZSBhbmQganVzdCBpbXBvcnQNCj4g
-Pj4+Pj4+PiB0aGUgYnVmZmVycyB0byB0aGUgVjRMMiBkZXZpY2UgdXNpbmcgVjRMMl9NRU1PUllf
-RE1BQlVGPw0KPiA+Pj4+Pj4gU29tZXRpbWVzIHRoZSBhbGxvY2F0aW9uIHBvbGljeSBjb3VsZCBi
-ZSB2ZXJ5IGNvbXBsZXgsIGxldCdzIHN1cHBvc2UgYQ0KPiA+Pj4+Pj4gbXVsdGlwbGUgcGxhbmVz
-IHBpeGVsIGZvcm1hdCBlbmFibGluZyB3aXRoIGZyYW1lIGJ1ZmZlciBjb21wcmVzc2lvbi4NCj4g
-Pj4+Pj4+IEl0cyBsdW1hLCBjaHJvbWEgZGF0YSBjb3VsZCBiZSBhbGxvY2F0ZWQgZnJvbSBhIHBv
-b2wgd2hpY2ggaXMgZGVsZWdhdGVkDQo+ID4+Pj4+PiBmb3IgbGFyZ2UgYnVmZmVycyB3aGlsZSBp
-dHMgbWV0YWRhdGEgd291bGQgY29tZSBmcm9tIGEgcG9vbCB3aGljaCBtYW55DQo+ID4+Pj4+PiB1
-c2VycyBjb3VsZCB0YWtlIHNvbWUgZmV3IHNsaWNlcyBmcm9tIGl0KGxpa2VzIHN5c3RlbSBwb29s
-KS4NCj4gPj4+Pj4+IFRoZW4gd2hlbiB3ZSBoYXZlIGEgbmV3IHVzZXJzIGtub3dpbmcgbm90aGlu
-ZyBhYm91dCB0aGlzIHBsYXRmb3JtLCBpZiB3ZQ0KPiA+Pj4+Pj4ganVzdCBjb25maWd1cmUgdGhl
-IGFsbG9jX2RldnMgaW4gZWFjaCBxdWV1ZXMgd2VsbC4gVGhlIHVzZXIgd29uJ3QgbmVlZA0KPiA+
-Pj4+Pj4gdG8ga25vdyB0aG9zZSBjb21wbGV4IHJ1bGVzLg0KPiA+Pj4+Pj4gVGhlIHJlYWwgc2l0
-dWF0aW9uIGNvdWxkIGJlIG1vcmUgY29tcGxleCwgU2Ftc3VuZyBNRkMncyBsZWZ0IGFuZCByaWdo
-dA0KPiA+Pj4+Pj4gYmFua3MgY291bGQgYmUgcmVnYXJkZWQgYXMgdHdvIHBvb2xzLCBtYW55IGRl
-dmljZXMgd291bGQgYmVuZWZpdCBmcm9tDQo+ID4+Pj4+PiB0aGlzIGVpdGhlciBmcm9tIHRoZSBh
-bGxvY2F0aW9uIHRpbWVzIG9yIHRoZSBzZWN1cml0eSBidWZmZXJzIHBvbGljeS4NCj4gPj4+Pj4+
-IEluIG91ciBkZXNpZ24sIHdoZW4gd2UgbmVlZCB0byBkbyBzb21lIHNlY3VyaXR5IGRlY29kaW5n
-KERSTSB2aWRlbyksDQo+ID4+Pj4+PiBjb2RlY3MyIHdvdWxkIGFsbG9jYXRlIGJ1ZmZlcnMgZnJv
-bSB0aGUgcG9vbCBkZWxlZ2F0ZWQgZm9yIHRoYXQuIFdoaWxlDQo+ID4+Pj4+PiB0aGUgbm9uLURS
-TSB2aWRlbywgdXNlcnMgY291bGQgbm90IGNhcmUgYWJvdXQgdGhpcy4NCj4gPj4+Pj4gSSdtIGEg
-bGl0dGxlIGJpdCBzdXJwcmlzZWQgYWJvdXQgdGhpcywgYmVjYXVzZSBvbiBBbmRyb2lkIGFsbCB0
-aGUNCj4gPj4+Pj4gZ3JhcGhpY3MgYnVmZmVycyBhcmUgYWxsb2NhdGVkIGZyb20gdGhlIHN5c3Rl
-bSBJQWxsb2NhdG9yIGFuZCBpbXBvcnRlZA0KPiA+Pj4+PiB0byB0aGUgc3BlY2lmaWMgZGV2aWNl
-cy4NCj4gPj4+PiBJbiB0aGUgbm9uLXR1bm5lbCBtb2RlLCB5ZXMgaXQgaXMuIFdoaWxlIHRoZSB0
-dW5uZWwgbW9kZSBpcyBjb21wbGV0ZWx5IHZlbmRvciBkZWZpbmVkLiBOZWl0aGVyIEhXQyBub3Ig
-Y29kZWMyIGNhcmVzIGFib3V0IHdoZXJlIHRoZSBidWZmZXJzIGNvbWluZyBmcm9tLCB5b3UgY291
-bGQgZG8gd2hhdCBldmVyIHlvdSB3YW50Lg0KPiA+Pj4+IEJlc2lkZXMgdGhlcmUgYXJlIERSTSB2
-aWRlbyBpbiBHTlUgTGludXggcGxhdGZvcm0sIEkgaGVhcmQgdGhlIHdlYmtpdCBoYXMgbWFkZSBo
-dWdlIGVmZm9ydCBoZXJlIGFuZCBQbGF5cmVhZHkgaXMgb25lIGNvdWxkIHdvcmsgaW4gbm9uLUFu
-ZHJvaWQgTGludXguDQo+ID4+Pj4+IFdvdWxkIGl0IG1ha2Ugc2Vuc2UgdG8gaW5zdGVhZCBleHRl
-bmQgdGhlIFVBUEkgdG8gZXhwb3NlIGVub3VnaA0KPiA+Pj4+PiBpbmZvcm1hdGlvbiBhYm91dCB0
-aGUgYWxsb2NhdGlvbiByZXF1aXJlbWVudHMgdG8gdGhlIHVzZXJzcGFjZSwgc28gaXQNCj4gPj4+
-Pj4gY2FuIGFsbG9jYXRlIGNvcnJlY3RseT8NCj4gPj4+PiBZZXMsIGl0IGNvdWxkLiBCdXQgYXMg
-SSBzYWlkIGl0IHdvdWxkIG5lZWQgdGhlIHVzZXJzIHRvIGRvIG1vcmUgd29ya3MuDQo+ID4+Pj4+
-IE15IHJlYXNvbmluZyBoZXJlIGlzIHRoYXQgaXQncyBub3QgYSBkcml2ZXIncyBkZWNpc2lvbiB0
-byBhbGxvY2F0ZQ0KPiA+Pj4+PiBmcm9tIGEgRE1BLWJ1ZiBoZWFwIChhbmQgd2hpY2ggb25lKSBv
-ciBub3QuIEl0J3MgdGhlIHVzZXJzcGFjZSB3aGljaA0KPiA+Pj4+PiBrbm93cyB0aGF0LCBiYXNl
-ZCBvbiB0aGUgc3BlY2lmaWMgdXNlIGNhc2UgdGhhdCBpdCB3YW50cyB0byBmdWxmaWxsLg0KPiA+
-Pj4+IEFsdGhvdWdoIEkgd291bGQgbGlrZSB0byBsZXQgdGhlIHVzZXJzIGRlY2lkZSB0aGF0LCB1
-c2VycyBqdXN0IGNhbuKAmXQgZG8gdGhhdCB3aGljaCB3b3VsZCB2aW9sYXRlIHRoZSBzZWN1cml0
-eSBydWxlcyBpbiBzb21lIHBsYXRmb3Jtcy4NCj4gPj4+PiBGb3IgZXhhbXBsZSwgIHZpZGVvIGNv
-ZGVjIGFuZCBkaXNwbGF5IGRldmljZSBjb3VsZCBvbmx5IGFjY2VzcyBhIHJlZ2lvbiBvZiBtZW1v
-cnksIGFueSBvdGhlciBkZXZpY2Ugb3IgdHJ1c3RlZCBhcHBzIGNhbuKAmXQgYWNjZXNzIGl0LiBV
-c2VycyBoYXZlIHRvIGFsbG9jYXRlIHRoZSBidWZmZXIgZnJvbSB0aGUgcG9vbCB0aGUgdmVuZG9y
-IGRlY2lkZWQuDQo+ID4+Pj4gU28gd2h5IG5vdCB3ZSBvZmZlciBhIHF1aWNrIHdheSB0aGF0IHVz
-ZXJzIGRvbuKAmXQgbmVlZCB0byB0cnkgYW5kIGVycm9yLg0KPiA+Pj4NCj4gPj4+IEluIHByaW5j
-aXBsZSwgSSdtIG5vdCBhZ2FpbnN0IGludGVncmF0aW5nIERNQS1idWYgaGVhcCB3aXRoIHZiMiwN
-Cj4gPj4+IGhvd2V2ZXIgSSBzZWUgc29tZSBwcm9ibGVtcyBJIG1lbnRpb25lZCBiZWZvcmU6DQo+
-ID4+Pg0KPiA+Pj4gMSkgSG93IHdvdWxkIHRoZSBkcml2ZXIga25vdyBpZiBpdCBzaG91bGQgYWxs
-b2NhdGUgZnJvbSBhIERNQS1idWYgaGVhcCBvciBub3Q/DQo+ID4+DQo+ID4+IHN0cnVjdCB2YjJf
-cXVldWUubWVtX29wcw0KPiA+Pg0KPiA+PiBpbnQgKCpxdWV1ZV9zZXR1cCkoc3RydWN0IHZiMl9x
-dWV1ZSAqcSx1bnNpZ25lZCBpbnQgKm51bV9idWZmZXJzLCB1bnNpZ25lZCBpbnQgKm51bV9wbGFu
-ZXMsIHVuc2lnbmVkIGludCBzaXplc1tdLCBzdHJ1Y3QgZGV2aWNlICphbGxvY19kZXZzW10pOw0K
-PiA+DQo+ID4gU29ycnksIEkgZG9uJ3QgdW5kZXJzdGFuZCB3aGF0IHlvdSBtZWFuIGhlcmUuDQo+
-ID4NCj4gPiBKdXN0IHRvIG1ha2Ugc3VyZSB3ZSdyZSBvbiB0aGUgc2FtZSBwYWdlIC0gd2hhdCBJ
-J20gcmVmZXJyaW5nIHRvIGlzDQo+ID4gdGhhdCB3aGV0aGVyIERNQS1idWYgaGVhcCBpcyB1c2Vk
-IG9yIG5vdCBpcyBzcGVjaWZpYyB0byBhIGdpdmVuIHVzZQ0KPiA+IGNhc2UsIHdoaWNoIGlzIGNv
-bnRyb2xsZWQgYnkgdGhlIHVzZXJzcGFjZS4gU28gdGhlIHVzZXJzcGFjZSBtdXN0IGJlDQo+ID4g
-YWJsZSB0byBjb250cm9sIHdoZXRoZXIgdGhlIGRyaXZlciBhbGxvY2F0ZXMgZnJvbSBhIERNQS1i
-dWYgaGVhcCBvcg0KPiA+IHRoZSByZWd1bGFyIHdheS4NCj4gTm8sIGl0IGRvZXMgbm90IGRlcGVu
-ZCBvbiB0aGUgdXNlIGNhc2UgaGVyZS4gV2UgZG9uJ3QgYWNjZXB0IGFueSBidWZmZXJzDQo+IGJl
-eW9uZCB0aGUgcmVnaW9uIHdlIGRlY2lkZWQuIEV2ZW4gZm9yIHRoZSBub24tRFJNLCBub24tc2Vj
-dXJpdHkgdmlkZW8sDQo+IG91ciBjb2RlYyBkZXZpY2VzIGFyZSBydW5uaW5nIHVuZGVyIHRoZSBz
-ZWN1cmUgbW9kZS4NCj4NCj4gWW91IE1VU1QgYWxsb2NhdGUgdGhlIGJ1ZmZlciBmb3IgYSBkZXZp
-Y2UgZnJvbSB0aGUgRE1BLWhlYXAgd2UoU1lOQSkNCj4gZGVjaWRlZC4NCg0KVGhhdCdzIHlvdXIg
-dXNlIGNhc2UsIGJ1dCB0aGVyZSBjb3VsZCBiZSB1c2UgY2FzZXMgd2hpY2ggd29yaw0KZGlmZmVy
-ZW50bHkuIEluIGZhY3QsIGluIENocm9tZU9TIHdlIG9ubHkgdXNlIHRoZSBzZWN1cmUgYWxsb2Nh
-dGlvbg0KcGF0aCBmb3IgcHJvdGVjdGVkIGNvbnRlbnQsIGJlY2F1c2UgaXQgaW1wb3NlcyBzb21l
-IG92ZXJoZWFkLg0KDQo+DQo+IEkgYmVsaWV2ZSBzb21lIG90aGVyIGRldmljZXMgbWF5IGhhdmUg
-bXVjaCBsaW1pdGF0aW9uIGZvciBub3QgdGhlDQo+IHNlY3VyaXR5IHJlYXNvbiwgZm9yIGV4YW1w
-bGUsIGl0IGNhbid0IGFjY2VzcyB0aGUgbWVtb3J5IGFib3ZlIDQgR2lCIG9yDQo+IGZvciB0aGUg
-cGVyZm9ybWFuY2UncyByZWFzb24uDQoNCkZvciBzdWNoIGxpbWl0YXRpb25zLCB0aGVyZSBpcyB0
-aGUgc2hhcmVkIERNQSBwb29sIG9yIHJlc3RyaWN0ZWQgRE1BDQpwb29sIGZ1bmN0aW9uYWxpdHks
-IHdoaWNoIGNhbiBiZSBnaXZlbiB0byBhIGRldmljZSBpbiBEVCBhbmQgdGhlbiB0aGUNCkRNQSBt
-YXBwaW5nIEFQSSB3b3VsZCBqdXN0IGFsbG9jYXRlIHdpdGhpbiB0aGF0IGFyZWEgZm9yIHRoYXQg
-ZGV2aWNlLg0KTWF5YmUgdGhhdCdzIHdoYXQgeW91IG5lZWQgaGVyZT8NCg0KPiA+DQo+ID4+DQo+
-ID4+PiAyKSBIb3cgd291bGQgdGhlIGRyaXZlciBrbm93IHdoaWNoIGhlYXAgdG8gYWxsb2NhdGUg
-ZnJvbT8NCj4gPj4NCj4gPj4gIEZyb20gdmIyX3F1ZXVlLmFsbG9jX2RldnMNCj4gPj4NCj4gPj4g
-V2hhdCBJIGRpZCBub3cgaXMgbGlrZXMgd2hhdCBNRkMgZG9lcywgY3JlYXRlIHNvbWUgbWVtX2Fs
-bG9jX2RldnMuDQo+ID4+IEl0IHdvdWxkIGJlIGJldHRlciB0aGF0IHdlIGNvdWxkIHJldHJpZXZl
-IHRoZSBETUEtaGVhcHPigJkgZGV2aWNlcyBmcm9tIGtlcm5lbCwgYnV0IHRoYXQgaXMgbm90IGVu
-b3VnaCwgd2UgbmVlZCBhIHBsYWNlIHRvIHN0b3JlIHRoZSBoZWFwIGZsYWdzIGFsdGhvdWdoIG5v
-bmUgb2YgdGhlbSBhcmUgZGVmaW5lZCB5ZXQuDQo+ID4+DQo+ID4+ICBGcm9tIEFuZHJvaWQgZG9j
-dW1lbnRzLCBJIHRoaW5rIGl0IGlzIHVubGlrZWx5IHdlIHdvdWxkIGhhdmUgaGVhcCBmbGFncy4N
-Cj4gPj4g4oCcU3RhbmRhcmRpemF0aW9uOiBUaGUgRE1BLUJVRiBoZWFwcyBmcmFtZXdvcmsgb2Zm
-ZXJzIGEgd2VsbC1kZWZpbmVkIFVBUEkuIElPTiBhbGxvd2VkIGN1c3RvbSBmbGFncyBhbmQgaGVh
-cCBJRHMgdGhhdCBwcmV2ZW50ZWQgZGV2ZWxvcGluZyBhIGNvbW1vbiB0ZXN0aW5nIGZyYW1ld29y
-ayBiZWNhdXNlIGVhY2ggZGV2aWNl4oCZcyBJT04gaW1wbGVtZW50YXRpb24gY291bGQgYmVoYXZl
-IGRpZmZlcmVudGx5LuKAnQ0KPiA+Pg0KPiA+DQo+ID4gYWxsb2NfZGV2cyBpcyBzb21ldGhpbmcg
-dGhhdCB0aGUgZHJpdmVyIHNldHMgYW5kIGl0J3MgYSBzdHJ1Y3QgZGV2aWNlDQo+ID4gZm9yIHdo
-aWNoIHRoZSBETUEgQVBJIGNhbiBiZSBjYWxsZWQgdG8gbWFuYWdlIHRoZSBETUEgYnVmZmVycyBm
-b3IgdGhpcw0KPiA+IHZpZGVvIGRldmljZS4gSXQncyBub3QgYSB3YXkgdG8gc2VsZWN0IGEgdXNl
-IGNhc2UtZGVwZW5kZW50IGFsbG9jYXRpb24NCj4gPiBtZXRob2QuDQo+ID4NCj4gSSBzZWUsIHRo
-ZW4gbW92ZSB0byB0aGUgbGFzdCBxdWVzdGlvbiwgd2UgbmVlZCB0byBleHBhbmQgdGhlIFY0TDIN
-Cj4gZnJhbWV3b3JrJ3Mgc3RydWN0dXJlLg0KPiA+Pj4gMykgSG93IHdvdWxkIHRoZSBoZWFwIGtu
-b3cgaG93IHRvIGFsbG9jYXRlIHByb3Blcmx5IGZvciB0aGUgZGV2aWNlPw0KPiA+Pj4NCj4gPj4g
-QmVjYXVzZSDigJxlYWNoIERNQS1CVUYgaGVhcCBpcyBhIHNlcGFyYXRlIGNoYXJhY3RlciBkZXZp
-Y2XigJ0uDQo+ID4NCj4gPiBDb3VsZCB5b3UgZWxhYm9yYXRlPyBTb3JyeSwgSSdtIG5vdCBzdXJl
-IGhvdyB0aGlzIGFuc3dlcnMgbXkgcXVlc3Rpb24uDQo+IEJlY2F1c2UgYSBETUEtaGVhcCwgYSBo
-ZWFwIGRldmljZSBpdHNlbGYgaXMgZW5vdWdoIGhlcmUsIG1heSBwbHVzIEhFQVANCj4gZmxhZyB3
-aGVuIHRoZXJlIGlzLg0KPg0KPiBJIGRvbid0IGtub3cgd2hhdCBlbHNlIHdvdWxkIGJlIG5lZWQg
-dG8gZG8gaGVyZS4NCj4gSWYgeW91IGFsbG9jYXRlIGEgYnVmZmVyIGZyb20gYSBoZWFwIHdoaWNo
-IGlzIGRlbGVnYXRlZCBmb3Igc2VjdXJpdHkNCj4gbWVtb3J5IG9mIHRoYXQgZGV2aWNlLCB0aGUg
-aGVhcCBkcml2ZXIgaXRzZWxmIHdvdWxkIGluZm9ybSB0aGUgVEVFIHRoZQ0KPiBwYWdlcyBvY2N1
-cGllZCBieSBpdCBvciB0aGUgbWVtb3J5IGFsbG9jYXRlZCBmcm9tIHRoZSBwb29sIHdoaWNoIGlz
-IGluIGENCj4gcmVnaW9uIG9mIG1lbW9yeSByZXNlcnZlZCBmb3IgdGhpcyBwdXJwb3NlLg0KDQpT
-byB0aGUgaGVhcCBpcyBvbmx5IGZvciB0aGUgdmlkZW8gZGV2aWNlPw0KDQo+ID4NCj4gPj4gQnV0
-IGFzIEkgc2FpZCBpbiB0aGUgZmlyc3QgZHJhZnQgSSBhbSBub3Qgc3VyZSBhYm91dCB0aGUgRE1B
-IG1hcHBpbmcgcGFydC4gYWxsb2NfZGV2cyByZXNwb25kcyBmb3IgdGhlIGhlYXAsIHdlIGhhdmUg
-YSBkZXZpY2UgdmFyaWFibGUgaW4gdGhlIHF1ZXVlIHRoYXQgbWFwcGluZyBmdW5jdGlvbiBjb3Vs
-ZCBhY2Nlc3MsIGJ1dCB0aGF0IG1heSBub3QgYmUgZW5vdWdoLiBBIHBsYW5lIG1heSBhcHBseSBh
-IGRpZmZlcmVudCBtYXBwaW5nIHBvbGljeSBvciBJT01NVSBoZXJlLg0KPiA+Pg0KPiA+PiBXb3Vs
-ZCBpdCBiZSBiZXR0ZXIgdGhhdCBJIGNyZWF0ZSBhIGludGVyZmFjZSBoZXJlIHRoYXQgY3JlYXRp
-bmcgYSBtZW1kZXYgd2l0aCBETUEtaGVhcCBkZXNjcmlwdGlvbiA/DQo+ID4NCj4gPiBNeSBpbnR1
-aXRpb24gc3RpbGwgdGVsbHMgbWUgdGhhdCBpdCB3b3VsZCBiZSB1bml2ZXJzYWxseSBiZXR0ZXIg
-dG8NCj4gPiBqdXN0IGxldCB0aGUgdXNlcnNwYWNlIGFsbG9jYXRlIHRoZSBidWZmZXJzIGluZGVw
-ZW5kZW50bHkgKGxpa2Ugd2l0aA0KPiA+IGdyYWxsb2MvSW9uKSBhbmQgaW1wb3J0IHRvIFY0TDIg
-dXNpbmcgVjRMMl9NRU1fRE1BQlVGLiBJdCB3YXMgcG9zc2libGUNCj4gPiB0byBkbyB0aGluZ3Mg
-dGhpcyB3YXkgbmljZWx5IHdpdGggcmVndWxhciBBbmRyb2lkIGdyYXBoaWNzIGJ1ZmZlcnMsIHNv
-DQo+ID4gY291bGQgeW91IGV4cGxhaW4gd2hhdCBkaWZmZXJlbmNlIG9mIHlvdXIgdXNlIGNhc2Ug
-bWFrZXMgaXQNCj4gPiBpbXBvc3NpYmxlPw0KPiBXaXRob3V0IGtlZXBpbmcgdGhlIGJhY2t3YXJk
-IGNvbXBhdGliaWxpdHksIGl0IHdvbid0IGhhdmUgYW55IHByb2JsZW0gSUYNCj4gd2UgY291bGQg
-dGVsbCB0aGUgdXNlcnMgdGhlIGFjY2VwdGFibGUgRE1BLWhlYXAgZm9yIGVhY2ggb2YgcGxhbmVz
-IGFuZA0KPiBETUEtaGVhcCdzIGhlYXAgZmxhZ3MuDQo+DQo+IFdlIGRvbid0IGhhdmUgYW4gaW9j
-dGwgZm9yIHRoaXMgeWV0LCB0aGUgbW9zdCBwb3NzaWJsZSBmb3IgdGhlIGRlY29kZXINCj4gaXMg
-ZG9pbmcgdGhhdCBhdCBHRVRfRk1UIGlvY3RsKCk/Lg0KDQpEbyB3ZSBuZWVkIHRoZSBrZXJuZWwg
-dG8gdGVsbCB0aGUgdXNlcnNwYWNlIHdoaWNoIGhlYXAgdG8gdXNlPyBBcyB5b3UNCm1lbnRpb25l
-ZCBhYm92ZSwgdGhlIGhlYXAgd291bGQgYmUgc3BlY2lmaWMgZm9yIHRoZSB2aWRlbyBkZXZpY2Ug
-YW5kDQp0aGUgdXNlcnNwYWNlIHdvdWxkIGFsc28gYmUgc3BlY2lmaWMgZm9yIHlvdXIgdXNlIGNh
-c2UsIHNvIHdoeQ0KY291bGRuJ3QgaXQganVzdCBmaW5kIHRoZSByaWdodCBoZWFwIG9uIGl0cyBv
-d24gKGUuZy4gYnkgbmFtZSk/DQoNCkFzIGZvciBoZWFwIGZsYWdzLCBjb3VsZCB5b3UgZWxhYm9y
-YXRlIG9uIHdoYXQga2luZCBvZiBmbGFncyB5b3UNCmltYWdpbmUgY291bGQgYmUgZGVjaWRlZCBi
-eSBhIFY0TDIgZHJpdmVyPw0KDQpCZXN0IHJlZ2FyZHMsDQpUb21hc3oNCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBs
-aXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5k
-IGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+Hi Mauro,
+
+I think there are still some unanswered questions from Tvrtko on
+this patch, am I right?
+
+Andi
+
+On Wed, Jul 27, 2022 at 02:29:55PM +0200, Mauro Carvalho Chehab wrote:
+> From: Chris Wilson <chris.p.wilson@intel.com>
+> 
+> Invalidate TLB in batches, in order to reduce performance regressions.
+> 
+> Currently, every caller performs a full barrier around a TLB
+> invalidation, ignoring all other invalidations that may have already
+> removed their PTEs from the cache. As this is a synchronous operation
+> and can be quite slow, we cause multiple threads to contend on the TLB
+> invalidate mutex blocking userspace.
+> 
+> We only need to invalidate the TLB once after replacing our PTE to
+> ensure that there is no possible continued access to the physical
+> address before releasing our pages. By tracking a seqno for each full
+> TLB invalidate we can quickly determine if one has been performed since
+> rewriting the PTE, and only if necessary trigger one for ourselves.
+> 
+> That helps to reduce the performance regression introduced by TLB
+> invalidate logic.
+> 
+> [mchehab: rebased to not require moving the code to a separate file]
+> 
+> Cc: stable@vger.kernel.org
+> Fixes: 7938d61591d3 ("drm/i915: Flush TLBs before releasing backing store")
+> Suggested-by: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
+> Signed-off-by: Chris Wilson <chris.p.wilson@intel.com>
+> Cc: Fei Yang <fei.yang@intel.com>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
+> ---
+> 
+> To avoid mailbombing on a large number of people, only mailing lists were C/C on the cover.
+> See [PATCH v3 0/6] at: https://lore.kernel.org/all/cover.1658924372.git.mchehab@kernel.org/
+> 
+>  .../gpu/drm/i915/gem/i915_gem_object_types.h  |  3 +-
+>  drivers/gpu/drm/i915/gem/i915_gem_pages.c     | 21 +++++---
+>  drivers/gpu/drm/i915/gt/intel_gt.c            | 53 ++++++++++++++-----
+>  drivers/gpu/drm/i915/gt/intel_gt.h            | 12 ++++-
+>  drivers/gpu/drm/i915/gt/intel_gt_types.h      | 18 ++++++-
+>  drivers/gpu/drm/i915/gt/intel_ppgtt.c         |  8 ++-
+>  drivers/gpu/drm/i915/i915_vma.c               | 33 +++++++++---
+>  drivers/gpu/drm/i915/i915_vma.h               |  1 +
+>  drivers/gpu/drm/i915/i915_vma_resource.c      |  5 +-
+>  drivers/gpu/drm/i915/i915_vma_resource.h      |  6 ++-
+>  10 files changed, 125 insertions(+), 35 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_object_types.h b/drivers/gpu/drm/i915/gem/i915_gem_object_types.h
+> index 5cf36a130061..9f6b14ec189a 100644
+> --- a/drivers/gpu/drm/i915/gem/i915_gem_object_types.h
+> +++ b/drivers/gpu/drm/i915/gem/i915_gem_object_types.h
+> @@ -335,7 +335,6 @@ struct drm_i915_gem_object {
+>  #define I915_BO_READONLY          BIT(7)
+>  #define I915_TILING_QUIRK_BIT     8 /* unknown swizzling; do not release! */
+>  #define I915_BO_PROTECTED         BIT(9)
+> -#define I915_BO_WAS_BOUND_BIT     10
+>  	/**
+>  	 * @mem_flags - Mutable placement-related flags
+>  	 *
+> @@ -616,6 +615,8 @@ struct drm_i915_gem_object {
+>  		 * pages were last acquired.
+>  		 */
+>  		bool dirty:1;
+> +
+> +		u32 tlb;
+>  	} mm;
+>  
+>  	struct {
+> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_pages.c b/drivers/gpu/drm/i915/gem/i915_gem_pages.c
+> index 6835279943df..8357dbdcab5c 100644
+> --- a/drivers/gpu/drm/i915/gem/i915_gem_pages.c
+> +++ b/drivers/gpu/drm/i915/gem/i915_gem_pages.c
+> @@ -191,6 +191,18 @@ static void unmap_object(struct drm_i915_gem_object *obj, void *ptr)
+>  		vunmap(ptr);
+>  }
+>  
+> +static void flush_tlb_invalidate(struct drm_i915_gem_object *obj)
+> +{
+> +	struct drm_i915_private *i915 = to_i915(obj->base.dev);
+> +	struct intel_gt *gt = to_gt(i915);
+> +
+> +	if (!obj->mm.tlb)
+> +		return;
+> +
+> +	intel_gt_invalidate_tlb(gt, obj->mm.tlb);
+> +	obj->mm.tlb = 0;
+> +}
+> +
+>  struct sg_table *
+>  __i915_gem_object_unset_pages(struct drm_i915_gem_object *obj)
+>  {
+> @@ -216,14 +228,7 @@ __i915_gem_object_unset_pages(struct drm_i915_gem_object *obj)
+>  	__i915_gem_object_reset_page_iter(obj);
+>  	obj->mm.page_sizes.phys = obj->mm.page_sizes.sg = 0;
+>  
+> -	if (test_and_clear_bit(I915_BO_WAS_BOUND_BIT, &obj->flags)) {
+> -		struct drm_i915_private *i915 = to_i915(obj->base.dev);
+> -		struct intel_gt *gt = to_gt(i915);
+> -		intel_wakeref_t wakeref;
+> -
+> -		with_intel_gt_pm_if_awake(gt, wakeref)
+> -			intel_gt_invalidate_tlbs(gt);
+> -	}
+> +	flush_tlb_invalidate(obj);
+>  
+>  	return pages;
+>  }
+> diff --git a/drivers/gpu/drm/i915/gt/intel_gt.c b/drivers/gpu/drm/i915/gt/intel_gt.c
+> index 5c55a90672f4..f435e06125aa 100644
+> --- a/drivers/gpu/drm/i915/gt/intel_gt.c
+> +++ b/drivers/gpu/drm/i915/gt/intel_gt.c
+> @@ -38,8 +38,6 @@ static void __intel_gt_init_early(struct intel_gt *gt)
+>  {
+>  	spin_lock_init(&gt->irq_lock);
+>  
+> -	mutex_init(&gt->tlb_invalidate_lock);
+> -
+>  	INIT_LIST_HEAD(&gt->closed_vma);
+>  	spin_lock_init(&gt->closed_lock);
+>  
+> @@ -50,6 +48,8 @@ static void __intel_gt_init_early(struct intel_gt *gt)
+>  	intel_gt_init_reset(gt);
+>  	intel_gt_init_requests(gt);
+>  	intel_gt_init_timelines(gt);
+> +	mutex_init(&gt->tlb.invalidate_lock);
+> +	seqcount_mutex_init(&gt->tlb.seqno, &gt->tlb.invalidate_lock);
+>  	intel_gt_pm_init_early(gt);
+>  
+>  	intel_uc_init_early(&gt->uc);
+> @@ -770,6 +770,7 @@ void intel_gt_driver_late_release_all(struct drm_i915_private *i915)
+>  		intel_gt_fini_requests(gt);
+>  		intel_gt_fini_reset(gt);
+>  		intel_gt_fini_timelines(gt);
+> +		mutex_destroy(&gt->tlb.invalidate_lock);
+>  		intel_engines_free(gt);
+>  	}
+>  }
+> @@ -908,7 +909,7 @@ get_reg_and_bit(const struct intel_engine_cs *engine, const bool gen8,
+>  	return rb;
+>  }
+>  
+> -void intel_gt_invalidate_tlbs(struct intel_gt *gt)
+> +static void mmio_invalidate_full(struct intel_gt *gt)
+>  {
+>  	static const i915_reg_t gen8_regs[] = {
+>  		[RENDER_CLASS]			= GEN8_RTCR,
+> @@ -931,12 +932,6 @@ void intel_gt_invalidate_tlbs(struct intel_gt *gt)
+>  	const i915_reg_t *regs;
+>  	unsigned int num = 0;
+>  
+> -	if (I915_SELFTEST_ONLY(gt->awake == -ENODEV))
+> -		return;
+> -
+> -	if (intel_gt_is_wedged(gt))
+> -		return;
+> -
+>  	if (GRAPHICS_VER(i915) == 12) {
+>  		regs = gen12_regs;
+>  		num = ARRAY_SIZE(gen12_regs);
+> @@ -951,9 +946,6 @@ void intel_gt_invalidate_tlbs(struct intel_gt *gt)
+>  			  "Platform does not implement TLB invalidation!"))
+>  		return;
+>  
+> -	GEM_TRACE("\n");
+> -
+> -	mutex_lock(&gt->tlb_invalidate_lock);
+>  	intel_uncore_forcewake_get(uncore, FORCEWAKE_ALL);
+>  
+>  	spin_lock_irq(&uncore->lock); /* serialise invalidate with GT reset */
+> @@ -973,6 +965,8 @@ void intel_gt_invalidate_tlbs(struct intel_gt *gt)
+>  		awake |= engine->mask;
+>  	}
+>  
+> +	GT_TRACE(gt, "invalidated engines %08x\n", awake);
+> +
+>  	/* Wa_2207587034:tgl,dg1,rkl,adl-s,adl-p */
+>  	if (awake &&
+>  	    (IS_TIGERLAKE(i915) ||
+> @@ -1012,5 +1006,38 @@ void intel_gt_invalidate_tlbs(struct intel_gt *gt)
+>  	 * transitions.
+>  	 */
+>  	intel_uncore_forcewake_put_delayed(uncore, FORCEWAKE_ALL);
+> -	mutex_unlock(&gt->tlb_invalidate_lock);
+> +}
+> +
+> +static bool tlb_seqno_passed(const struct intel_gt *gt, u32 seqno)
+> +{
+> +	u32 cur = intel_gt_tlb_seqno(gt);
+> +
+> +	/* Only skip if a *full* TLB invalidate barrier has passed */
+> +	return (s32)(cur - ALIGN(seqno, 2)) > 0;
+> +}
+> +
+> +void intel_gt_invalidate_tlb(struct intel_gt *gt, u32 seqno)
+> +{
+> +	intel_wakeref_t wakeref;
+> +
+> +	if (I915_SELFTEST_ONLY(gt->awake == -ENODEV))
+> +		return;
+> +
+> +	if (intel_gt_is_wedged(gt))
+> +		return;
+> +
+> +	if (tlb_seqno_passed(gt, seqno))
+> +		return;
+> +
+> +	with_intel_gt_pm_if_awake(gt, wakeref) {
+> +		mutex_lock(&gt->tlb.invalidate_lock);
+> +		if (tlb_seqno_passed(gt, seqno))
+> +			goto unlock;
+> +
+> +		mmio_invalidate_full(gt);
+> +
+> +		write_seqcount_invalidate(&gt->tlb.seqno);
+> +unlock:
+> +		mutex_unlock(&gt->tlb.invalidate_lock);
+> +	}
+>  }
+> diff --git a/drivers/gpu/drm/i915/gt/intel_gt.h b/drivers/gpu/drm/i915/gt/intel_gt.h
+> index 82d6f248d876..40b06adf509a 100644
+> --- a/drivers/gpu/drm/i915/gt/intel_gt.h
+> +++ b/drivers/gpu/drm/i915/gt/intel_gt.h
+> @@ -101,6 +101,16 @@ void intel_gt_info_print(const struct intel_gt_info *info,
+>  
+>  void intel_gt_watchdog_work(struct work_struct *work);
+>  
+> -void intel_gt_invalidate_tlbs(struct intel_gt *gt);
+> +static inline u32 intel_gt_tlb_seqno(const struct intel_gt *gt)
+> +{
+> +	return seqprop_sequence(&gt->tlb.seqno);
+> +}
+> +
+> +static inline u32 intel_gt_next_invalidate_tlb_full(const struct intel_gt *gt)
+> +{
+> +	return intel_gt_tlb_seqno(gt) | 1;
+> +}
+> +
+> +void intel_gt_invalidate_tlb(struct intel_gt *gt, u32 seqno);
+>  
+>  #endif /* __INTEL_GT_H__ */
+> diff --git a/drivers/gpu/drm/i915/gt/intel_gt_types.h b/drivers/gpu/drm/i915/gt/intel_gt_types.h
+> index df708802889d..3804a583382b 100644
+> --- a/drivers/gpu/drm/i915/gt/intel_gt_types.h
+> +++ b/drivers/gpu/drm/i915/gt/intel_gt_types.h
+> @@ -11,6 +11,7 @@
+>  #include <linux/llist.h>
+>  #include <linux/mutex.h>
+>  #include <linux/notifier.h>
+> +#include <linux/seqlock.h>
+>  #include <linux/spinlock.h>
+>  #include <linux/types.h>
+>  #include <linux/workqueue.h>
+> @@ -83,7 +84,22 @@ struct intel_gt {
+>  	struct intel_uc uc;
+>  	struct intel_gsc gsc;
+>  
+> -	struct mutex tlb_invalidate_lock;
+> +	struct {
+> +		/* Serialize global tlb invalidations */
+> +		struct mutex invalidate_lock;
+> +
+> +		/*
+> +		 * Batch TLB invalidations
+> +		 *
+> +		 * After unbinding the PTE, we need to ensure the TLB
+> +		 * are invalidated prior to releasing the physical pages.
+> +		 * But we only need one such invalidation for all unbinds,
+> +		 * so we track how many TLB invalidations have been
+> +		 * performed since unbind the PTE and only emit an extra
+> +		 * invalidate if no full barrier has been passed.
+> +		 */
+> +		seqcount_mutex_t seqno;
+> +	} tlb;
+>  
+>  	struct i915_wa_list wa_list;
+>  
+> diff --git a/drivers/gpu/drm/i915/gt/intel_ppgtt.c b/drivers/gpu/drm/i915/gt/intel_ppgtt.c
+> index d8b94d638559..2da6c82a8bd2 100644
+> --- a/drivers/gpu/drm/i915/gt/intel_ppgtt.c
+> +++ b/drivers/gpu/drm/i915/gt/intel_ppgtt.c
+> @@ -206,8 +206,12 @@ void ppgtt_bind_vma(struct i915_address_space *vm,
+>  void ppgtt_unbind_vma(struct i915_address_space *vm,
+>  		      struct i915_vma_resource *vma_res)
+>  {
+> -	if (vma_res->allocated)
+> -		vm->clear_range(vm, vma_res->start, vma_res->vma_size);
+> +	if (!vma_res->allocated)
+> +		return;
+> +
+> +	vm->clear_range(vm, vma_res->start, vma_res->vma_size);
+> +	if (vma_res->tlb)
+> +		vma_invalidate_tlb(vm, *vma_res->tlb);
+>  }
+>  
+>  static unsigned long pd_count(u64 size, int shift)
+> diff --git a/drivers/gpu/drm/i915/i915_vma.c b/drivers/gpu/drm/i915/i915_vma.c
+> index ef3b04c7e153..84a9ccbc5fc5 100644
+> --- a/drivers/gpu/drm/i915/i915_vma.c
+> +++ b/drivers/gpu/drm/i915/i915_vma.c
+> @@ -538,8 +538,6 @@ int i915_vma_bind(struct i915_vma *vma,
+>  				   bind_flags);
+>  	}
+>  
+> -	set_bit(I915_BO_WAS_BOUND_BIT, &vma->obj->flags);
+> -
+>  	atomic_or(bind_flags, &vma->flags);
+>  	return 0;
+>  }
+> @@ -1310,6 +1308,19 @@ I915_SELFTEST_EXPORT int i915_vma_get_pages(struct i915_vma *vma)
+>  	return err;
+>  }
+>  
+> +void vma_invalidate_tlb(struct i915_address_space *vm, u32 tlb)
+> +{
+> +	/*
+> +	 * Before we release the pages that were bound by this vma, we
+> +	 * must invalidate all the TLBs that may still have a reference
+> +	 * back to our physical address. It only needs to be done once,
+> +	 * so after updating the PTE to point away from the pages, record
+> +	 * the most recent TLB invalidation seqno, and if we have not yet
+> +	 * flushed the TLBs upon release, perform a full invalidation.
+> +	 */
+> +	WRITE_ONCE(tlb, intel_gt_next_invalidate_tlb_full(vm->gt));
+> +}
+> +
+>  static void __vma_put_pages(struct i915_vma *vma, unsigned int count)
+>  {
+>  	/* We allocate under vma_get_pages, so beware the shrinker */
+> @@ -1941,7 +1952,12 @@ struct dma_fence *__i915_vma_evict(struct i915_vma *vma, bool async)
+>  		vma->vm->skip_pte_rewrite;
+>  	trace_i915_vma_unbind(vma);
+>  
+> -	unbind_fence = i915_vma_resource_unbind(vma_res);
+> +	if (async)
+> +		unbind_fence = i915_vma_resource_unbind(vma_res,
+> +							&vma->obj->mm.tlb);
+> +	else
+> +		unbind_fence = i915_vma_resource_unbind(vma_res, NULL);
+> +
+>  	vma->resource = NULL;
+>  
+>  	atomic_and(~(I915_VMA_BIND_MASK | I915_VMA_ERROR | I915_VMA_GGTT_WRITE),
+> @@ -1949,10 +1965,13 @@ struct dma_fence *__i915_vma_evict(struct i915_vma *vma, bool async)
+>  
+>  	i915_vma_detach(vma);
+>  
+> -	if (!async && unbind_fence) {
+> -		dma_fence_wait(unbind_fence, false);
+> -		dma_fence_put(unbind_fence);
+> -		unbind_fence = NULL;
+> +	if (!async) {
+> +		if (unbind_fence) {
+> +			dma_fence_wait(unbind_fence, false);
+> +			dma_fence_put(unbind_fence);
+> +			unbind_fence = NULL;
+> +		}
+> +		vma_invalidate_tlb(vma->vm, vma->obj->mm.tlb);
+>  	}
+>  
+>  	/*
+> diff --git a/drivers/gpu/drm/i915/i915_vma.h b/drivers/gpu/drm/i915/i915_vma.h
+> index 88ca0bd9c900..5048eed536da 100644
+> --- a/drivers/gpu/drm/i915/i915_vma.h
+> +++ b/drivers/gpu/drm/i915/i915_vma.h
+> @@ -213,6 +213,7 @@ bool i915_vma_misplaced(const struct i915_vma *vma,
+>  			u64 size, u64 alignment, u64 flags);
+>  void __i915_vma_set_map_and_fenceable(struct i915_vma *vma);
+>  void i915_vma_revoke_mmap(struct i915_vma *vma);
+> +void vma_invalidate_tlb(struct i915_address_space *vm, u32 tlb);
+>  struct dma_fence *__i915_vma_evict(struct i915_vma *vma, bool async);
+>  int __i915_vma_unbind(struct i915_vma *vma);
+>  int __must_check i915_vma_unbind(struct i915_vma *vma);
+> diff --git a/drivers/gpu/drm/i915/i915_vma_resource.c b/drivers/gpu/drm/i915/i915_vma_resource.c
+> index 27c55027387a..5a67995ea5fe 100644
+> --- a/drivers/gpu/drm/i915/i915_vma_resource.c
+> +++ b/drivers/gpu/drm/i915/i915_vma_resource.c
+> @@ -223,10 +223,13 @@ i915_vma_resource_fence_notify(struct i915_sw_fence *fence,
+>   * Return: A refcounted pointer to a dma-fence that signals when unbinding is
+>   * complete.
+>   */
+> -struct dma_fence *i915_vma_resource_unbind(struct i915_vma_resource *vma_res)
+> +struct dma_fence *i915_vma_resource_unbind(struct i915_vma_resource *vma_res,
+> +					   u32 *tlb)
+>  {
+>  	struct i915_address_space *vm = vma_res->vm;
+>  
+> +	vma_res->tlb = tlb;
+> +
+>  	/* Reference for the sw fence */
+>  	i915_vma_resource_get(vma_res);
+>  
+> diff --git a/drivers/gpu/drm/i915/i915_vma_resource.h b/drivers/gpu/drm/i915/i915_vma_resource.h
+> index 5d8427caa2ba..06923d1816e7 100644
+> --- a/drivers/gpu/drm/i915/i915_vma_resource.h
+> +++ b/drivers/gpu/drm/i915/i915_vma_resource.h
+> @@ -67,6 +67,7 @@ struct i915_page_sizes {
+>   * taken when the unbind is scheduled.
+>   * @skip_pte_rewrite: During ggtt suspend and vm takedown pte rewriting
+>   * needs to be skipped for unbind.
+> + * @tlb: pointer for obj->mm.tlb, if async unbind. Otherwise, NULL
+>   *
+>   * The lifetime of a struct i915_vma_resource is from a binding request to
+>   * the actual possible asynchronous unbind has completed.
+> @@ -119,6 +120,8 @@ struct i915_vma_resource {
+>  	bool immediate_unbind:1;
+>  	bool needs_wakeref:1;
+>  	bool skip_pte_rewrite:1;
+> +
+> +	u32 *tlb;
+>  };
+>  
+>  bool i915_vma_resource_hold(struct i915_vma_resource *vma_res,
+> @@ -131,7 +134,8 @@ struct i915_vma_resource *i915_vma_resource_alloc(void);
+>  
+>  void i915_vma_resource_free(struct i915_vma_resource *vma_res);
+>  
+> -struct dma_fence *i915_vma_resource_unbind(struct i915_vma_resource *vma_res);
+> +struct dma_fence *i915_vma_resource_unbind(struct i915_vma_resource *vma_res,
+> +					   u32 *tlb);
+>  
+>  void __i915_vma_resource_init(struct i915_vma_resource *vma_res);
+>  
+> -- 
+> 2.36.1
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
