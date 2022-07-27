@@ -2,142 +2,189 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 933CC581632
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 Jul 2022 17:15:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2351958267D
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 Jul 2022 14:30:08 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 94CA13F4AA
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 26 Jul 2022 15:15:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D927447F49
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 Jul 2022 12:30:06 +0000 (UTC)
 Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-	by lists.linaro.org (Postfix) with ESMTPS id 354A03F4AA
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 26 Jul 2022 15:15:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 7CF423ECBC
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 27 Jul 2022 12:30:03 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.source.kernel.org (Postfix) with ESMTPS id 33028B80FF0;
-	Tue, 26 Jul 2022 15:15:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 06B62C433C1;
-	Tue, 26 Jul 2022 15:15:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1658848536;
-	bh=JdYLPvm15DCGWDloUpXmxYYLmSi+V/FEw3vBEoaF+Jw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=xBokB72rddFLxtHSosxuv3alJqsdn0oyulNn4jSAaE2unHKS0UIM1wLxL2J8T16L0
-	 k39NRaycdo4vXVxUP4FOVG+nE53iMehPLaex58j9lRVfL0OQ2uKPiGgF5dJfnEg16i
-	 sBHsTSPvke7L3MCKx6Puv+grQDjTJVYq56eH/DFk=
-Date: Tue, 26 Jul 2022 17:15:30 +0200
-From: Greg KH <gregkh@linuxfoundation.org>
-To: yuji2.ishikawa@toshiba.co.jp
-Message-ID: <YuAFEvKLnavheZMn@kroah.com>
-References: <20220722082858.17880-1-yuji2.ishikawa@toshiba.co.jp>
- <20220722082858.17880-4-yuji2.ishikawa@toshiba.co.jp>
- <Yt6Rryi4SHVc4DR4@kroah.com>
- <TYAPR01MB62013C42CB26FD456929C0D592949@TYAPR01MB6201.jpnprd01.prod.outlook.com>
+	by ams.source.kernel.org (Postfix) with ESMTPS id 5873AB8207B;
+	Wed, 27 Jul 2022 12:30:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 91EF6C43142;
+	Wed, 27 Jul 2022 12:30:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1658925000;
+	bh=O16fl6xnuruHw9EitYozS/ajIy5XCfOlDNrLaJzlciQ=;
+	h=From:To:Cc:Subject:Date:From;
+	b=AoERcxQFSIZcDBNsr19j3+HxaOu+iJiBwf6HJO6H5dpAlq9Hu6f9iqMZOt+B2+Yfz
+	 Me3zIB9YfCF+YeQ99RHm+j4ZFYDDVHJzRvkhj6gGa6Pr/jz1MFBnWyXWBVcPNG8Arw
+	 Y2bBzb3XC97Zjn0ynPJbxbM6+ohDPRoaM+FQyray0uikPSnxTXYgkQU2wgoE7dQzVq
+	 LbW/kgUiUXQ+sxK8vHLo+W7GSorikGm42YxVyub295/U4F1N2MgC+ljriNTFEYZkOQ
+	 Hw4zq+4zz7V+hZ6RV5Ko2saS0vxyAiG8DU5w51vmNCHo1jnIJt020SA/QOinj9J4X3
+	 AVEYkzIoevCxA==
+Received: from mchehab by mail.kernel.org with local (Exim 4.95)
+	(envelope-from <mchehab@kernel.org>)
+	id 1oGgAo-003xm5-4u;
+	Wed, 27 Jul 2022 14:29:58 +0200
+From: Mauro Carvalho Chehab <mchehab@kernel.org>
+To: 
+Date: Wed, 27 Jul 2022 14:29:50 +0200
+Message-Id: <cover.1658924372.git.mchehab@kernel.org>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <TYAPR01MB62013C42CB26FD456929C0D592949@TYAPR01MB6201.jpnprd01.prod.outlook.com>
-Message-ID-Hash: UTP2K3XTGGYN4ZYMFNBXUSILF6SEJJJB
-X-Message-ID-Hash: UTP2K3XTGGYN4ZYMFNBXUSILF6SEJJJB
-X-MailFrom: gregkh@linuxfoundation.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: robh+dt@kernel.org, hverkuil@xs4all.nl, nobuhiro1.iwamatsu@toshiba.co.jp, corbet@lwn.net, sumit.semwal@linaro.org, christian.koenig@amd.com, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: 27RR5NJDUATEEGZW5GROVAUZIG34MHXU
+X-Message-ID-Hash: 27RR5NJDUATEEGZW5GROVAUZIG34MHXU
+X-MailFrom: mchehab@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Mauro Carvalho Chehab <mchehab@kernel.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@linux.ie>, Sumit Semwal <sumit.semwal@linaro.org>, dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 3/5] soc: visconti: Add Toshiba Visconti DNN image processing accelerator
+Subject: [Linaro-mm-sig] [PATCH v3 0/6] drm/i915: reduce TLB performance regressions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UTP2K3XTGGYN4ZYMFNBXUSILF6SEJJJB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/27RR5NJDUATEEGZW5GROVAUZIG34MHXU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gVHVlLCBKdWwgMjYsIDIwMjIgYXQgMDY6MTA6MzdBTSArMDAwMCwgeXVqaTIuaXNoaWthd2FA
-dG9zaGliYS5jby5qcCB3cm90ZToNCj4gSGkgR3JlZw0KPiANCj4gVGhhbmsgeW91IGZvciB5b3Vy
-IGNvbW1lbnRzLg0KPiANCj4gPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+IEZyb206
-IEdyZWcgS0ggPGdyZWdraEBsaW51eGZvdW5kYXRpb24ub3JnPg0KPiA+IFNlbnQ6IE1vbmRheSwg
-SnVseSAyNSwgMjAyMiA5OjUxIFBNDQo+ID4gVG86IGlzaGlrYXdhIHl1amko55+z5bedIOaCoOWP
-uCDil4vvvLLvvKTvvKPilqHvvKHvvKnvvLTvvKPil4vvvKXvvKHplospDQo+ID4gPHl1amkyLmlz
-aGlrYXdhQHRvc2hpYmEuY28uanA+DQo+ID4gQ2M6IFJvYiBIZXJyaW5nIDxyb2JoK2R0QGtlcm5l
-bC5vcmc+OyBIYW5zIFZlcmt1aWwgPGh2ZXJrdWlsQHhzNGFsbC5ubD47DQo+ID4gaXdhbWF0c3Ug
-bm9idWhpcm8o5bKp5p2+IOS/oea0iyDilqHvvLPvvLfvvKPil6/vvKHvvKPvvLQpDQo+ID4gPG5v
-YnVoaXJvMS5pd2FtYXRzdUB0b3NoaWJhLmNvLmpwPjsgSm9uYXRoYW4gQ29yYmV0IDxjb3JiZXRA
-bHduLm5ldD47DQo+ID4gU3VtaXQgU2Vtd2FsIDxzdW1pdC5zZW13YWxAbGluYXJvLm9yZz47IENo
-cmlzdGlhbiBLw7ZuaWcNCj4gPiA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPjsgbGludXgtYXJt
-LWtlcm5lbEBsaXN0cy5pbmZyYWRlYWQub3JnOw0KPiA+IGxpbnV4LWtlcm5lbEB2Z2VyLmtlcm5l
-bC5vcmc7IGxpbnV4LW1lZGlhQHZnZXIua2VybmVsLm9yZzsNCj4gPiBkcmktZGV2ZWxAbGlzdHMu
-ZnJlZWRlc2t0b3Aub3JnOyBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcNCj4gPiBTdWJq
-ZWN0OiBSZTogW1BBVENIIHYyIDMvNV0gc29jOiB2aXNjb250aTogQWRkIFRvc2hpYmEgVmlzY29u
-dGkgRE5OIGltYWdlDQo+ID4gcHJvY2Vzc2luZyBhY2NlbGVyYXRvcg0KPiA+IA0KPiA+IE9uIEZy
-aSwgSnVsIDIyLCAyMDIyIGF0IDA1OjI4OjU2UE0gKzA5MDAsIFl1amkgSXNoaWthd2Egd3JvdGU6
-DQo+ID4gPiAtLS0gL2Rldi9udWxsDQo+ID4gPiArKysgYi9kcml2ZXJzL3NvYy92aXNjb250aS91
-YXBpL2Rubi5oDQo+ID4gPiBAQCAtMCwwICsxLDc3IEBADQo+ID4gPiArLyogU1BEWC1MaWNlbnNl
-LUlkZW50aWZpZXI6IEdQTC0yLjAgV0lUSCBMaW51eC1zeXNjYWxsLW5vdGUgKi8NCj4gPiA+ICsv
-KiBUb3NoaWJhIFZpc2NvbnRpIEROTiBBY2NlbGVyYXRvciBTdXBwb3J0DQo+ID4gPiArICoNCj4g
-PiA+ICsgKiAoQykgQ29weXJpZ2h0IDIwMjIgVE9TSElCQSBDT1JQT1JBVElPTg0KPiA+ID4gKyAq
-IChDKSBDb3B5cmlnaHQgMjAyMiBUb3NoaWJhIEVsZWN0cm9uaWMgRGV2aWNlcyAmIFN0b3JhZ2UN
-Cj4gPiA+ICtDb3Jwb3JhdGlvbiAgKi8NCj4gPiA+ICsNCj4gPiA+ICsjaWZuZGVmIF9VQVBJX0xJ
-TlVYX0ROTl9IDQo+ID4gPiArI2RlZmluZSBfVUFQSV9MSU5VWF9ETk5fSA0KPiA+ID4gKw0KPiA+
-ID4gKyNpbmNsdWRlIDxsaW51eC9pb2N0bC5oPg0KPiA+ID4gKyNpbmNsdWRlIDxsaW51eC90eXBl
-cy5oPg0KPiA+ID4gKyNpbmNsdWRlICJpcGEuaCINCj4gPiA+ICsNCj4gPiA+ICsjZGVmaW5lIERS
-Vl9ETk5fQklUX0NPTkZJR19ERVNDX0ZJTkFMICgweDgwMDBVKQ0KPiA+ID4gKyNkZWZpbmUgRFJW
-X0ROTl9CVUZGRVJfSU5ERVhfTUFYICAgICAgKDE1KQ0KPiA+ID4gKw0KPiA+ID4gKyNkZWZpbmUg
-RFJWX0ROTl9CQVNFX0FERFJfTlVNICg4VSkgLyogRE5OIG51bWJlciBvZiBiYXNlDQo+ID4gYWRk
-cmVzcyAqLw0KPiA+ID4gKw0KPiA+ID4gKyNkZWZpbmUgRFJWX0ROTl9CQVNFX0FERFJfUFVSUE9T
-RV9JTlBVVAkgICAgKDFVKQ0KPiA+ID4gKyNkZWZpbmUgRFJWX0ROTl9CQVNFX0FERFJfUFVSUE9T
-RV9PVVRQVVQgICAgKDJVKQ0KPiA+ID4gKyNkZWZpbmUgRFJWX0ROTl9CQVNFX0FERFJfUFVSUE9T
-RV9BV0IJICAgICgzVSkNCj4gPiA+ICsjZGVmaW5lIERSVl9ETk5fQkFTRV9BRERSX1BVUlBPU0Vf
-VEVNUE9SQVJZICg0VSkNCj4gPiA+ICsNCj4gPiA+ICsvKioNCj4gPiA+ICsgKiBzdHJ1Y3QgZHJ2
-X2Rubl9zdGF0dXMgLSBETk4gSVBBIHN0YXR1cyBmb3IgSU9DX0lQQV9HRVRfU1RBVFVTDQo+ID4g
-PiArICoNCj4gPiA+ICsgKiBAc3RhdGU6ICAgICBTdGF0ZSBvZiBkcml2ZXINCj4gPiA+ICsgKiBA
-ZWVyX2NtZDogICBFeGVjdXRpb24gZXJyb3IgY29tbWFuZA0KPiA+ID4gKyAqIEBlZXI6ICAgICAg
-IEV4ZWN1dGlvbiBlcnJvcg0KPiA+ID4gKyAqIEByZXNlcnZlZDogIFBhZGRpbmcNCj4gPiA+ICsg
-KiBAZWVyX2ZsYWdzOiBFeGVjdXRpb24gZXJyb3IgZmxhZ3MNCj4gPiA+ICsgKi8NCj4gPiA+ICtz
-dHJ1Y3QgZHJ2X2Rubl9zdGF0dXMgew0KPiA+ID4gKwllbnVtIGRydl9pcGFfc3RhdGUgc3RhdGU7
-DQo+ID4gPiArCV9fdTMyIGVlcl9jbWQ7DQo+ID4gPiArCV9fdTMyIGVlciA6IDE7DQo+ID4gPiAr
-CV9fdTMyIHJlc2VydmVkIDogMzE7DQo+ID4gDQo+ID4gYml0ZmllbGRzIHdpbGwgbm90IHdvcmsg
-bGlrZSB0aGlzIGZvciB1YXBpIGZpbGVzLCBzb3JyeS4NCj4gDQo+IEknbGwgY2hhbmdlIHRoZSB0
-eXBlIG9mIHRoZSBtZW1iZXIgZWVyIGZyb20gYml0ZmllbGQgdG8gYm9vbC4NCg0KYm9vbCB3aWxs
-IG5vdCB3b3JrIGZvciBhIHVzZXIva2VybmVsIGFwaSBzdHJ1Y3R1cmUgYXQgYWxsLCBzb3JyeS4N
-Cg0KPiA+ID4gKwlfX3UzMiBlZXJfZmxhZ3NbMzJdOw0KPiA+IA0KPiA+IFdoYXQgZW5kaWFuIGlz
-IGFsbCBvZiB0aGVzZT8gIEJpZz8gIExpdHRsZT8gIFVua25vd24/DQo+IA0KPiBUaGUgcHJvY2Vz
-c29ycyBhbmQgYWNjZWxlcmF0b3JzIGFyZSBsaXR0bGUgZW5kaWFuIGluIFZpc2NvbnRpIFNvQy4N
-Cj4gRG8gSSBoYXZlIHRvIHVzZSBtb3JlIHNwZWNpZmljIHR5cGUgc3VjaCBhcyBfX2xlMzIgPw0K
-DQpPZiBjb3Vyc2UsIHRoaXMgaGFzIHRvIGJlIGRlZmluZWQgYXMgdG8gaG93IHRoZSBoYXJkd2Fy
-ZSBzZWVzIGl0LiAgV2h5DQp3b3VsZG4ndCB5b3Ugc3BlY2lmeSB0aGlzPw0KDQo+ID4gPiArfTsN
-Cj4gPiA+ICsNCj4gPiA+ICtzdHJ1Y3QgZHJ2X2Rubl9iYXNlX2FkZHIgew0KPiA+ID4gKwlfX3Uz
-MiBwdXJwb3NlOw0KPiA+ID4gKwl1bmlvbiB7DQo+ID4gPiArCQlzdHJ1Y3QgZHJ2X2lwYV9hZGRy
-IGlwYV9hZGRyOw0KPiA+ID4gKwkJdWludHB0cl90IGxpc3RfYWRkcjsNCj4gPiANCj4gPiBZb3Ug
-cmVhbGx5IGRvIG5vdCBldmVyIHdhbnQgYSB1aW50cHRyX3QgaW4gYSB1YXBpIGZpbGUsIHRoYXQn
-cyBub3QgZ29pbmcgdG8gYmUNCj4gPiBwb3J0YWJsZSBhdCBhbGwuICBJdCdzIGFsc28gbm90IGEg
-dmFsaWQga2VybmVsIHR5cGUgOigNCj4gDQo+IEkgdW5kZXJzdGFuZC4gVGhlIG1lbWJlciBsaXN0
-X2FkZHIgc2hvdWxkIGJlIHR5cGVkICJzdHJ1Y3QgZHJ2X2lwYV9hZGRyKiIuDQoNCk5vLCBub3Qg
-YXQgYWxsLCB0aGF0IHRvbyB3aWxsIG5vdCB3b3JrIGFuZCBpcyBub3QgcG9ydGFibGUuICBQbGVh
-c2UgcmVhZA0KdGhlIGRvY3VtZW50YXRpb24gaW4gdGhlIGtlcm5lbCBmb3IgaG93IHRvIHdyaXRl
-IGNvcnJlY3QgdXNlci9rZXJuZWwNCmFwaXMgd2l0aCBpb2N0bCBzdHJ1Y3R1cmVzLiAgSXQgaXMg
-YWxsIGRvY3VtZW50ZWQgdGhlcmUsIHBsZWFzZSBkbyBub3QNCmlnbm9yZSBpdCBhbmQgY3JlYXRl
-IGFuIGFwaSB0aGF0IHdpbGwgYmUgYnJva2VuLg0KDQo+ID4gPiArICogQGNvbmZpZ19kb25lOiAg
-ICAgICAgICBGbGFncyBvZiBjYWxsZWQgY29uZmlndXJhdGlvbg0KPiA+ID4gKyAqIEBidWZmZXJf
-aW5mbzogICAgICAgICAgVGFibGUgb2YgYnVmZmVyIGluZm9ybWF0aW9uDQo+ID4gPiArICogQGJ1
-ZmZlcl9pbmZvX251bTogICAgICBOdW1iZXIgb2YgYnVmZmVyX2luZm8NCj4gPiA+ICsgKi8NCj4g
-PiA+ICtzdHJ1Y3QgZHJ2X2Rubl9kZXNjcmlwdG9yIHsNCj4gPiA+ICsJc3RydWN0IGRydl9pcGFf
-YWRkciBjb25maWd1cmF0aW9uOw0KPiA+ID4gKwlfX3UzMiBjb25maWd1cmF0aW9uX29mZnNldDsN
-Cj4gPiANCj4gPiBXaGF0IGVuZGlhbiBhcmUgYW55IG9mIHRoZXNlPw0KPiANCj4gVGhleSBhcmUg
-bGl0dGxlIGVuZGlhbiBhcyBwcm9jZXNzb3JzIGFuZCBhY2NlbGVyYXRvcnMgYXJlIExFLg0KPiBE
-byBJIGhhdmUgdG8gdXNlIHNwZWNpZmljIHR5cGUgc3VjaCBhcyBfX2xlMzI/DQoNClllcywgYXMg
-dGhhdCBpcyBkZWZpbmVkIGJ5IHlvdXIgaGFyZHdhcmUsIG5vdCB0aGUgcHJvY2Vzc29yIHRoZSBr
-ZXJuZWwNCmlzIHJ1bm5pbmcgYXMuDQoNCj4gRG8gd2UgbmVlZCBzcGVjaWFsIGNhcmUgZm9yIGVu
-ZGlhbm5lc3MJd2hlbiB1c2VybGFuZCBhbmQga2VybmVsIGFyZSBzaGFyaW5nIGRhdGEgKGEgZHJ2
-X2Rubl9kZXNjcmlwdG9yIGluc3RhbmNlKSA/DQoNClllcywgd2h5IHdvdWxkbid0IHlvdT8NCg0K
-PiBJIHRob3VnaHQgdGhlcmUncmUgbm8gZW5kaWFubmVzcyBwcm9ibGVtIHdoZW4gdGhlIGRyaXZl
-ciBpcyByZWFkaW5nL3dyaXRpbmcgSFcncyAzMmJpdCByZWdpc3RlcnMuDQoNCklzIHRoYXQgd2hh
-dCB5b3UgYXJlIGRvaW5nIGhlcmU/ICBJdCdzIGltcG9zc2libGUgdG8gdGVsbC4NCg0KRm9yIGRh
-dGEgdGhhdCBvbmx5IGNyb3NzZXMgdGhlIHVzZXIva2VybmVsIGJvdW5kcnksIHlvdSBjYW4gdXNl
-IHRoZQ0KbmF0aXZlIHByb2Nlc3NvciBlbmRpYW4sIGJ1dCB3aGVuIGl0IGNyb3NzZXMgdGhlIGtl
-cm5lbC9oYXJkd2FyZQ0KYm91bmRyeSwgeW91IEhBVkUgdG8gc3BlY2lmeSBpdCBhcyB0byB3aGF0
-IHRoZSBoYXJkd2FyZSBleHBlY3RzLg0KDQp0aGFua3MsDQoNCmdyZWcgay1oDQpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxp
-bmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUg
-c2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+Doing TLB invalidation cause performance regressions, like:
+	[424.370996] i915 0000:00:02.0: [drm] *ERROR* rcs0 TLB invalidation did not complete in 4ms!
+
+As reported at:
+	https://gitlab.freedesktop.org/drm/intel/-/issues/6424
+
+as this is an expensive operation. So, reduce the need of it by:
+  - checking if the engine is awake;
+  - checking if the engine is not wedged;
+  - batching operations.
+
+Additionally, add a workaround for a known hardware issue on some GPUs.
+
+In order to double-check that this series won't be introducing any regressions,
+I used this new IGT test:
+
+https://patchwork.freedesktop.org/patch/495684/?series=106757&rev=1
+
+Checking the results for 3 different patchsets, on Broadwell:
+
+1) On the top of drm-tip (2022y-07m-14d-08h-35m-36) - e. g. with TLB
+invalidation and serialization patches:
+
+	$ sudo build/tests/gem_exec_tlb|grep Subtest
+	Subtest close-clear: SUCCESS (10.490s)
+	Subtest madv-clear: SUCCESS (10.484s)
+	Subtest u-unmap-clear: SUCCESS (10.527s)
+	Subtest u-shrink-clear: SUCCESS (10.506s)
+	Subtest close-dumb: SUCCESS (10.165s)
+	Subtest madv-dumb: SUCCESS (10.177s)
+	Subtest u-unmap-dumb: SUCCESS (10.172s)
+	Subtest u-shrink-dumb: SUCCESS (10.172s)
+
+2) With the new version of the batch TLB invalidation patches from this series:
+
+	$ sudo build/tests/gem_exec_tlb|grep Subtest
+	Subtest close-clear: SUCCESS (10.483s)
+	Subtest madv-clear: SUCCESS (10.495s)
+	Subtest u-unmap-clear: SUCCESS (10.545s)
+	Subtest u-shrink-clear: SUCCESS (10.508s)
+	Subtest close-dumb: SUCCESS (10.172s)
+	Subtest madv-dumb: SUCCESS (10.169s)
+	Subtest u-unmap-dumb: SUCCESS (10.174s)
+	Subtest u-shrink-dumb: SUCCESS (10.176s)
+
+3) Changing the TLB invalidation routine to do nothing[1]:
+
+	$ sudo ~/freedesktop-igt/build/tests/gem_exec_tlb|grep Subtest
+	(gem_exec_tlb:1958) CRITICAL: Test assertion failure function check_bo, file ../tests/i915/gem_exec_tlb.c:384:
+	(gem_exec_tlb:1958) CRITICAL: Failed assertion: !sq
+	(gem_exec_tlb:1958) CRITICAL: Found deadbeef in a new (clear) buffer after 3 tries!
+	(gem_exec_tlb:1956) CRITICAL: Test assertion failure function check_bo, file ../tests/i915/gem_exec_tlb.c:384:
+	(gem_exec_tlb:1956) CRITICAL: Failed assertion: !sq
+	(gem_exec_tlb:1956) CRITICAL: Found deadbeef in a new (clear) buffer after 89 tries!
+	(gem_exec_tlb:1957) CRITICAL: Test assertion failure function check_bo, file ../tests/i915/gem_exec_tlb.c:384:
+	(gem_exec_tlb:1957) CRITICAL: Failed assertion: !sq
+	(gem_exec_tlb:1957) CRITICAL: Found deadbeef in a new (clear) buffer after 256 tries!
+	(gem_exec_tlb:1960) CRITICAL: Test assertion failure function check_bo, file ../tests/i915/gem_exec_tlb.c:384:
+	(gem_exec_tlb:1960) CRITICAL: Failed assertion: !sq
+	(gem_exec_tlb:1960) CRITICAL: Found deadbeef in a new (clear) buffer after 845 tries!
+	(gem_exec_tlb:1961) CRITICAL: Test assertion failure function check_bo, file ../tests/i915/gem_exec_tlb.c:384:
+	(gem_exec_tlb:1961) CRITICAL: Failed assertion: !sq
+	(gem_exec_tlb:1961) CRITICAL: Found deadbeef in a new (clear) buffer after 1138 tries!
+	(gem_exec_tlb:1954) CRITICAL: Test assertion failure function check_bo, file ../tests/i915/gem_exec_tlb.c:384:
+	(gem_exec_tlb:1954) CRITICAL: Failed assertion: !sq
+	(gem_exec_tlb:1954) CRITICAL: Found deadbeef in a new (clear) buffer after 1359 tries!
+	(gem_exec_tlb:1955) CRITICAL: Test assertion failure function check_bo, file ../tests/i915/gem_exec_tlb.c:384:
+	(gem_exec_tlb:1955) CRITICAL: Failed assertion: !sq
+	(gem_exec_tlb:1955) CRITICAL: Found deadbeef in a new (clear) buffer after 1794 tries!
+	(gem_exec_tlb:1959) CRITICAL: Test assertion failure function check_bo, file ../tests/i915/gem_exec_tlb.c:384:
+	(gem_exec_tlb:1959) CRITICAL: Failed assertion: !sq
+	(gem_exec_tlb:1959) CRITICAL: Found deadbeef in a new (clear) buffer after 2139 tries!
+	Dynamic subtest smem0 failed.
+	**** DEBUG ****
+	(gem_exec_tlb:1944) DEBUG: 2M hole:200000 contains poison:6b6b6b6b
+	(gem_exec_tlb:1944) DEBUG: Running writer for 200000 at 300000 on bcs0
+	(gem_exec_tlb:1944) DEBUG: Closing hole:200000 on rcs0, sample:deadbeef
+	(gem_exec_tlb:1944) DEBUG: Rechecking hole:200000, sample:6b6b6b6b
+	****  END  ****
+	Subtest close-clear: FAIL (10.434s)
+	Subtest madv-clear: SUCCESS (10.479s)
+	Subtest u-unmap-clear: SUCCESS (10.512s)
+
+In summary, the test does properly detect fail when TLB cache invalidation doesn't happen,
+as shown at result (3). It also shows that both current drm-tip and drm-tip with this series
+applied don't have TLB invalidation cache issues.
+
+[1] I applied this patch on the top of drm-tip:
+
+	diff --git a/drivers/gpu/drm/i915/gt/intel_gt.c b/drivers/gpu/drm/i915/gt/intel_gt.c
+	index 68c2b0d8f187..0aefcd7be5e9 100644
+	--- a/drivers/gpu/drm/i915/gt/intel_gt.c
+	+++ b/drivers/gpu/drm/i915/gt/intel_gt.c
+	@@ -930,0 +931,3 @@ void intel_gt_invalidate_tlbs(struct intel_gt *gt)
+	+	// HACK: don't do TLB invalidations!!!
+	+	return;
+	+
+
+Regards,
+Mauro
+
+Chris Wilson (4):
+  drm/i915/gt: Ignore TLB invalidations on idle engines
+  drm/i915/gt: Invalidate TLB of the OA unit at TLB invalidations
+  drm/i915/gt: Skip TLB invalidations once wedged
+  drm/i915/gt: Batch TLB invalidations
+
+Mauro Carvalho Chehab (2):
+  drm/i915/gt: document with_intel_gt_pm_if_awake()
+  drm/i915/gt: describe the new tlb parameter at i915_vma_resource
+
+ .../gpu/drm/i915/gem/i915_gem_object_types.h  |  3 +-
+ drivers/gpu/drm/i915/gem/i915_gem_pages.c     | 25 +++---
+ drivers/gpu/drm/i915/gt/intel_gt.c            | 77 +++++++++++++++----
+ drivers/gpu/drm/i915/gt/intel_gt.h            | 12 ++-
+ drivers/gpu/drm/i915/gt/intel_gt_pm.h         | 11 +++
+ drivers/gpu/drm/i915/gt/intel_gt_types.h      | 18 ++++-
+ drivers/gpu/drm/i915/gt/intel_ppgtt.c         |  8 +-
+ drivers/gpu/drm/i915/i915_vma.c               | 33 ++++++--
+ drivers/gpu/drm/i915/i915_vma.h               |  1 +
+ drivers/gpu/drm/i915/i915_vma_resource.c      |  9 ++-
+ drivers/gpu/drm/i915/i915_vma_resource.h      |  6 +-
+ 11 files changed, 163 insertions(+), 40 deletions(-)
+
+-- 
+2.36.1
+
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
