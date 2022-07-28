@@ -2,131 +2,195 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D5A3583A92
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Jul 2022 10:47:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B26A2583BCE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Jul 2022 12:11:38 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7AFE13EA51
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Jul 2022 08:47:17 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id EDD2A3EA51
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 28 Jul 2022 08:47:14 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id 918FF61BEF;
-	Thu, 28 Jul 2022 08:47:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 704E4C433C1;
-	Thu, 28 Jul 2022 08:47:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1658998034;
-	bh=jCsd0BYUuxQPFCGggo3LU7ymg+rWOZhe5SyLYMPuEII=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=sjSBJyeyjGNBExkzleVUKJJqVo66l495ZESo768hjKGH9VbAxM6Xm3sasdnFBW2Sb
-	 n3T6EG5M6iwOWhTqD4FIMdgI1abQhslYZZrH59lsDPb7bfQpgL+eW7A0GjxTDOJXRo
-	 eje3Y0dy/nhLNejdZ4DX/YsEcnRmQUHHxcDY4BwI=
-Date: Thu, 28 Jul 2022 10:47:11 +0200
-From: Greg KH <gregkh@linuxfoundation.org>
-To: yuji2.ishikawa@toshiba.co.jp
-Message-ID: <YuJNDxglPxqa3hnf@kroah.com>
-References: <20220722082858.17880-1-yuji2.ishikawa@toshiba.co.jp>
- <Yt6Qw/r0FQ0ElYdn@kroah.com>
- <TYAPR01MB62010C6B98C1C197E7E894AF92949@TYAPR01MB6201.jpnprd01.prod.outlook.com>
+	by lists.linaro.org (Postfix) with ESMTP id BA62247F53
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Jul 2022 10:11:37 +0000 (UTC)
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by lists.linaro.org (Postfix) with ESMTPS id 278863EA51
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 28 Jul 2022 10:11:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1659003094; x=1690539094;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=abgk3vUpAQZd9qPd9c0j2BN6XVDXH3lIfe2uKYnCea4=;
+  b=XNZ2JSquzClKK9tdNj7SnmcOu/LUFad/P2j2svPGmk+aeKbvYKqSVklP
+   bfvzTkxDgjbPCkaHYN9OUTivuSw5zEQBZjZCW2kn0kjdL4h2Xy8dp2YED
+   3d33dGkwoVv3at3q5FfsvIXVTKvSqq2ztkg4TJfesjGEEW/DX85O0tZR1
+   fXOZ4aTeCLLcQgVm4NYphkzD6hIZrhDytGkIrh0WD4NmhrurSo3EGkahc
+   DIuq5msqMDVHBg3DZFtGXNOtYdffGy5TztWZCP+mp5Tsfa/riVNqZEIBL
+   EK0TepzMet26WgvbQgQ44SXacefJuxOEm/R5Mh/n+9s61ijCypBq5HCdR
+   Q==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10421"; a="286025649"
+X-IronPort-AV: E=Sophos;i="5.93,196,1654585200";
+   d="scan'208";a="286025649"
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Jul 2022 03:11:33 -0700
+X-IronPort-AV: E=Sophos;i="5.93,196,1654585200";
+   d="scan'208";a="633603135"
+Received: from niviojax-mobl2.ger.corp.intel.com (HELO [10.213.204.129]) ([10.213.204.129])
+  by orsmga001-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Jul 2022 03:11:29 -0700
+Message-ID: <a5605b3a-173d-d4a4-fccf-7cf6ba559913@linux.intel.com>
+Date: Thu, 28 Jul 2022 11:11:27 +0100
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <TYAPR01MB62010C6B98C1C197E7E894AF92949@TYAPR01MB6201.jpnprd01.prod.outlook.com>
-Message-ID-Hash: PHD4EIM4JUMNH7DL4VUVADECLUO6UEOK
-X-Message-ID-Hash: PHD4EIM4JUMNH7DL4VUVADECLUO6UEOK
-X-MailFrom: gregkh@linuxfoundation.org
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To: Mauro Carvalho Chehab <mauro.chehab@linux.intel.com>
+References: <cover.1657800199.git.mchehab@kernel.org>
+ <9f535a97f32320a213a619a30c961ba44b595453.1657800199.git.mchehab@kernel.org>
+ <567823d5-57ba-30db-dd64-de609df4d8c5@linux.intel.com>
+ <20220727134836.7f7b5fab@maurocar-mobl2>
+ <d2337b73-ae34-3dd3-afa3-85c77dc2135e@linux.intel.com>
+ <20220728083232.352f80cf@maurocar-mobl2>
+From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+Organization: Intel Corporation UK Plc
+In-Reply-To: <20220728083232.352f80cf@maurocar-mobl2>
+Message-ID-Hash: LGFOZL3MF27A43C3XUYQWJCUFFQMB62O
+X-Message-ID-Hash: LGFOZL3MF27A43C3XUYQWJCUFFQMB62O
+X-MailFrom: tvrtko.ursulin@linux.intel.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: robh+dt@kernel.org, hverkuil@xs4all.nl, nobuhiro1.iwamatsu@toshiba.co.jp, corbet@lwn.net, sumit.semwal@linaro.org, christian.koenig@amd.com, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: stable@vger.kernel.org, =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>, linux-media@vger.kernel.org, David Airlie <airlied@linux.ie>, intel-gfx@lists.freedesktop.org, Lucas De Marchi <lucas.demarchi@intel.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org, Chris Wilson <chris.p.wilson@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Dave Airlie <airlied@redhat.com>, Tomas Winkler <tomas.winkler@intel.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Matthew Auld <matthew.auld@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 0/5] Add Toshiba Visconti DNN image processing accelerator driver
+Subject: [Linaro-mm-sig] Re: [Intel-gfx] [PATCH v2 06/21] drm/i915/gt: Batch TLB invalidations
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PHD4EIM4JUMNH7DL4VUVADECLUO6UEOK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LGFOZL3MF27A43C3XUYQWJCUFFQMB62O/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-T24gVHVlLCBKdWwgMjYsIDIwMjIgYXQgMDY6MDk6NTBBTSArMDAwMCwgeXVqaTIuaXNoaWthd2FA
-dG9zaGliYS5jby5qcCB3cm90ZToNCj4gSGkgR3JlZw0KPiANCj4gVGhhbmsgeW91IGZvciB5b3Vy
-IGNvbW1lbnRzLg0KPiANCj4gPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+IEZyb206
-IEdyZWcgS0ggPGdyZWdraEBsaW51eGZvdW5kYXRpb24ub3JnPg0KPiA+IFNlbnQ6IE1vbmRheSwg
-SnVseSAyNSwgMjAyMiA5OjQ3IFBNDQo+ID4gVG86IGlzaGlrYXdhIHl1amko55+z5bedIOaCoOWP
-uCDil4vvvLLvvKTvvKPilqHvvKHvvKnvvLTvvKPil4vvvKXvvKHplospDQo+ID4gPHl1amkyLmlz
-aGlrYXdhQHRvc2hpYmEuY28uanA+DQo+ID4gQ2M6IFJvYiBIZXJyaW5nIDxyb2JoK2R0QGtlcm5l
-bC5vcmc+OyBIYW5zIFZlcmt1aWwgPGh2ZXJrdWlsQHhzNGFsbC5ubD47DQo+ID4gaXdhbWF0c3Ug
-bm9idWhpcm8o5bKp5p2+IOS/oea0iyDilqHvvLPvvLfvvKPil6/vvKHvvKPvvLQpDQo+ID4gPG5v
-YnVoaXJvMS5pd2FtYXRzdUB0b3NoaWJhLmNvLmpwPjsgSm9uYXRoYW4gQ29yYmV0IDxjb3JiZXRA
-bHduLm5ldD47DQo+ID4gU3VtaXQgU2Vtd2FsIDxzdW1pdC5zZW13YWxAbGluYXJvLm9yZz47IENo
-cmlzdGlhbiBLw7ZuaWcNCj4gPiA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPjsgbGludXgtYXJt
-LWtlcm5lbEBsaXN0cy5pbmZyYWRlYWQub3JnOw0KPiA+IGxpbnV4LWtlcm5lbEB2Z2VyLmtlcm5l
-bC5vcmc7IGxpbnV4LW1lZGlhQHZnZXIua2VybmVsLm9yZzsNCj4gPiBkcmktZGV2ZWxAbGlzdHMu
-ZnJlZWRlc2t0b3Aub3JnOyBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcNCj4gPiBTdWJq
-ZWN0OiBSZTogW1BBVENIIHYyIDAvNV0gQWRkIFRvc2hpYmEgVmlzY29udGkgRE5OIGltYWdlIHBy
-b2Nlc3NpbmcNCj4gPiBhY2NlbGVyYXRvciBkcml2ZXINCj4gPiANCj4gPiBPbiBGcmksIEp1bCAy
-MiwgMjAyMiBhdCAwNToyODo1M1BNICswOTAwLCBZdWppIElzaGlrYXdhIHdyb3RlOg0KPiA+ID4g
-VGhpcyBzZXJpZXMgaXMgdGhlIEROTiBpbWFnZSBwcm9jZXNzaW5nIGFjY2VsZXJhdG9yIGRyaXZl
-ciBmb3IgVG9zaGliYSdzIEFSTQ0KPiA+IFNvQywgVmlzY29udGlbMF0uDQo+ID4gPiBUaGlzIHBy
-b3ZpZGVzIERUIGJpbmRpbmcgZG9jdW1lbnRhdGlvbiwgZGV2aWNlIGRyaXZlciwgTUFJTlRBSU5F
-UiBmaWxlcw0KPiA+IGFuZCBkb2N1bWVudHMuDQo+ID4gPg0KPiA+ID4gQmVzdCByZWdhcmRzLA0K
-PiA+ID4gWXVqaQ0KPiA+ID4NCj4gPiA+IFswXToNCj4gPiA+DQo+ID4gaHR0cHM6Ly90b3NoaWJh
-LnNlbWljb24tc3RvcmFnZS5jb20vYXAtZW4vc2VtaWNvbmR1Y3Rvci9wcm9kdWN0L2ltYWdlLQ0K
-PiA+ID4gcmVjb2duaXRpb24tcHJvY2Vzc29ycy12aXNjb250aS5odG1sDQo+ID4gPg0KPiA+ID4g
-ZHQtYmluZGluZ3M6IHNvYzogdmlzY29udGk6IEFkZCBUb3NoaWJhIFZpc2NvbnRpIEROTiBpbWFn
-ZSBwcm9jZXNzaW5nDQo+ID4gYWNjZWxlcmF0b3IgYmluZGluZ3MNCj4gPiA+ICAgdjEgLT4gdjI6
-DQo+ID4gPiAgICAgLSBObyB1cGRhdGUNCj4gPiA+DQo+ID4gPiBzb2M6IHZpc2NvbnRpOiBBZGQg
-VG9zaGliYSBWaXNjb250aSBpbWFnZSBwcm9jZXNzaW5nIGFjY2VsZXJhdG9yIGNvbW1vbg0KPiA+
-IHNvdXJjZQ0KPiA+ID4gICB2MSAtPiB2MjoNCj4gPiA+ICAgICAtIGNoZWNrZWQgd2l0aCBjaGVj
-a3BhdGNoLnBsIC0tc3RyaWN0DQo+ID4gPg0KPiA+ID4gc29jOiB2aXNjb250aTogQWRkIFRvc2hp
-YmEgVmlzY29udGkgRE5OIGltYWdlIHByb2Nlc3NpbmcgYWNjZWxlcmF0b3INCj4gPiA+ICAgdjEg
-LT4gdjI6DQo+ID4gPiAgICAgLSBjaGVja2VkIHdpdGggY2hlY2twYXRjaC5wbCAtLXN0cmljdA0K
-PiA+ID4gICAgIC0gcmVtb3ZlZCB1bnVzZWQgY29kZQ0KPiA+ID4NCj4gPiA+IE1BSU5UQUlORVJT
-OiBBZGQgZW50cmllcyBmb3IgVG9zaGliYSBWaXNjb250aSBETk4gaW1hZ2UgcHJvY2Vzc2luZw0K
-PiA+ID4gICB2MSAtPiB2MjoNCj4gPiA+ICAgICAtIE5vIHVwZGF0ZQ0KPiA+ID4NCj4gPiA+IERv
-Y3VtZW50YXRpb246IGRyaXZlci1hcGk6IHZpc2NvbnRpOiBhZGQgYSBkZXNjcmlwdGlvbiBvZiBE
-Tk4gZHJpdmVyLg0KPiA+ID4gICB2MSAtPiB2MjoNCj4gPiA+ICAgICAtIG5ld2x5IGFkZGVkIGRv
-Y3VtZW50cw0KPiA+ID4NCj4gPiA+IFl1amkgSXNoaWthd2EgKDUpOg0KPiA+ID4gICBkdC1iaW5k
-aW5nczogc29jOiB2aXNjb250aTogQWRkIFRvc2hpYmEgVmlzY29udGkgRE5OIGltYWdlIHByb2Nl
-c3NpbmcNCj4gPiA+ICAgICBhY2NlbGVyYXRvciBiaW5kaW5ncw0KPiA+ID4gICBzb2M6IHZpc2Nv
-bnRpOiBBZGQgVG9zaGliYSBWaXNjb250aSBpbWFnZSBwcm9jZXNzaW5nIGFjY2VsZXJhdG9yDQo+
-ID4gPiAgICAgY29tbW9uIHNvdXJjZQ0KPiA+ID4gICBzb2M6IHZpc2NvbnRpOiBBZGQgVG9zaGli
-YSBWaXNjb250aSBETk4gaW1hZ2UgcHJvY2Vzc2luZyBhY2NlbGVyYXRvcg0KPiA+ID4gICBNQUlO
-VEFJTkVSUzogQWRkIGVudHJpZXMgZm9yIFRvc2hpYmEgVmlzY29udGkgRE5OIGltYWdlIHByb2Nl
-c3NpbmcNCj4gPiA+ICAgICBhY2NlbGVyYXRvcg0KPiA+ID4gICBEb2N1bWVudGF0aW9uOiBkcml2
-ZXItYXBpOiB2aXNjb250aTogYWRkIGEgZGVzY3JpcHRpb24gb2YgRE5OIGRyaXZlci4NCj4gPiA+
-DQo+ID4gPiAgLi4uL3NvYy92aXNjb250aS90b3NoaWJhLHZpc2NvbnRpLWRubi55YW1sICAgIHwg
-IDU0ICsrDQo+ID4gPiAgRG9jdW1lbnRhdGlvbi9kcml2ZXItYXBpL3Zpc2NvbnRpL2NvbW1vbi5y
-c3QgIHwgMTE1ICsrKysNCj4gPiA+ICBEb2N1bWVudGF0aW9uL2RyaXZlci1hcGkvdmlzY29udGkv
-ZG5uLnJzdCAgICAgfCAzOTQgKysrKysrKysrKysrKw0KPiA+ID4gIE1BSU5UQUlORVJTICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMiArDQo+ID4gPiAgZHJpdmVycy9zb2Mv
-S2NvbmZpZyAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAxICsNCj4gPiA+ICBkcml2ZXJz
-L3NvYy9NYWtlZmlsZSAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDEgKw0KPiA+ID4gIGRy
-aXZlcnMvc29jL3Zpc2NvbnRpL0tjb25maWcgICAgICAgICAgICAgICAgICB8ICAgNyArDQo+ID4g
-PiAgZHJpdmVycy9zb2MvdmlzY29udGkvTWFrZWZpbGUgICAgICAgICAgICAgICAgIHwgICA4ICsN
-Cj4gPiA+ICBkcml2ZXJzL3NvYy92aXNjb250aS9kbm4vTWFrZWZpbGUgICAgICAgICAgICAgfCAg
-IDYgKw0KPiA+ID4gIGRyaXZlcnMvc29jL3Zpc2NvbnRpL2Rubi9kbm4uYyAgICAgICAgICAgICAg
-ICB8IDUyMw0KPiA+ICsrKysrKysrKysrKysrKysrKw0KPiA+ID4gIGRyaXZlcnMvc29jL3Zpc2Nv
-bnRpL2Rubi9od2RfZG5uLmMgICAgICAgICAgICB8IDE4MyArKysrKysNCj4gPiA+ICBkcml2ZXJz
-L3NvYy92aXNjb250aS9kbm4vaHdkX2Rubi5oICAgICAgICAgICAgfCAgNjggKysrDQo+ID4gPiAg
-ZHJpdmVycy9zb2MvdmlzY29udGkvZG5uL2h3ZF9kbm5fcmVnLmggICAgICAgIHwgMjI4ICsrKysr
-KysrDQo+ID4gPiAgZHJpdmVycy9zb2MvdmlzY29udGkvaXBhX2NvbW1vbi5jICAgICAgICAgICAg
-IHwgIDU1ICsrDQo+ID4gPiAgZHJpdmVycy9zb2MvdmlzY29udGkvaXBhX2NvbW1vbi5oICAgICAg
-ICAgICAgIHwgIDE4ICsNCj4gPiA+ICBkcml2ZXJzL3NvYy92aXNjb250aS91YXBpL2Rubi5oICAg
-ICAgICAgICAgICAgfCAgNzcgKysrDQo+ID4gPiAgZHJpdmVycy9zb2MvdmlzY29udGkvdWFwaS9p
-cGEuaCAgICAgICAgICAgICAgIHwgIDkwICsrKw0KPiA+IA0KPiA+IFdoeSBpcyB0aGlzIGluIGRy
-aXZlcnMvc29jLz8NCj4gDQo+IEFjdHVhbGx5LCBJJ20gbm90IHN1cmUgd2hlcmUgaGlzIG1vZHVs
-ZSBzaG91bGQgbGl2ZSBpbi4NCj4gVGhlIGRpcmVjdG9yeSBkcml2ZXJzL3NvYyB3ZXJlIGNob3Nl
-biBqdXN0IGJlY2F1c2UgdGhlIGRyaXZlciBpcyBzcGVjaWZpYyB0byBWaXNjb250aSBTb0MuDQo+
-IElzIGl0IGJldHRlciB0byBtb3ZlIHRoZSBkcml2ZXIgdG8gYW5vdGhlciBkaXJlY3Rvcnkgc3Vj
-aCBhcyBkcml2ZXJzL21pc2MgPw0KDQpZZXMgcGxlYXNlIHN0YXJ0IG91dCBpbiBkcml2ZXJzL21p
-c2MvIHVubGVzcyB3ZSBmaW5kIGEgYmV0dGVyIHBsYWNlIGZvcg0KaXQuDQoNCnRoYW5rcywNCg0K
-Z3JlZyBrLWgNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-CkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJv
-Lm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVA
-bGlzdHMubGluYXJvLm9yZwo=
+
+On 28/07/2022 07:32, Mauro Carvalho Chehab wrote:
+> On Wed, 27 Jul 2022 13:56:50 +0100
+> Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com> wrote:
+> 
+>>> Because vma_invalidate_tlb() basically stores a TLB seqno, but the
+>>> actual invalidation is deferred to when the pages are unset, at
+>>> __i915_gem_object_unset_pages().
+>>>
+>>> So, what happens is:
+>>>
+>>> - on VMA sync mode, the need to invalidate TLB is marked at
+>>>     __vma_put_pages(), before VMA unbind;
+>>> - on async, this is deferred to happen at ppgtt_unbind_vma(), where
+>>>     it marks the need to invalidate TLBs.
+>>>
+>>> On both cases, __i915_gem_object_unset_pages() is called later,
+>>> when the driver is ready to unmap the page.
+>>
+>> Sorry still not clear to me why is the patch moving marking of the need
+>> to invalidate (regardless if it a bit like today, or a seqno like in
+>> this patch) from bind to unbind?
+>>
+>> What if the seqno was stored in i915_vma_bind, where the bit is set
+>> today, and all the hunks which touch the unbind and evict would
+>> disappear from the patch. What wouldn't work in that case, if anything?
+> 
+> Ah, now I see your point.
+> 
+> I can't see any sense on having a sequence number at VMA bind, as the
+> unbind order can be different. The need of doing a full TLB invalidation
+> or not depends on the unbind order.
+
+Sorry yes that was stupid from me.. What I was really thinking was the 
+approach I initially used for coalescing. Keeping the set_bit in bind 
+and then once the code enters intel_gt_invalidate_tlbs, takes a "ticket" 
+and waits on the mutex. Once it gets the mutex checks the ticket against 
+the GT copy and if two invalidations have passed since it was waiting on 
+the mutex it can immediately exit. That would seem like a minimal 
+improvement to batch things up.
+
+But I guess it would still emit needless invalidations if there is no 
+contention, just a stream of serialized put pages. While the approach 
+from this patch can skip all but truly required.
+
+Okay, go for it and thanks for the explanations.
+
+Acked-by: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
+
+Regards,
+
+Tvrtko
+
+P.S. The last remaining "ugliness" is the 2nd call to invalidation from 
+evict. It would be nicer if there was a single common place to do it on 
+vma unbind but okay, I do not plan to dig into it so fine.
+
+> 
+> The way the current algorithm works is that drm_i915_gem_object can be
+> created on any order, and, at unbind/evict, they receive a seqno.
+> 
+> The seqno is incremented at intel_gt_invalidate_tlb():
+> 
+>      void intel_gt_invalidate_tlb(struct intel_gt *gt, u32 seqno)
+>      {
+> 	with_intel_gt_pm_if_awake(gt, wakeref) {
+> 		mutex_lock(&gt->tlb.invalidate_lock);
+> 		if (tlb_seqno_passed(gt, seqno))
+> 				goto unlock;
+> 
+> 		mmio_invalidate_full(gt);
+> 
+> 		write_seqcount_invalidate(&gt->tlb.seqno);	// increment seqno
+> 		
+> 
+> So, let's say 3 objects were created, on this order:
+> 
+> 	obj1
+> 	obj2
+> 	obj3
+> 
+> They would be unbind/evict on a different order. On that time,
+> the mm.tlb will be stamped with a seqno, using the number from the
+> last TLB flush, plus 1.
+> 
+> As different threads can be used to handle TLB flushes, let's imagine
+> two threads (just for the sake of having an example). On such case,
+> what we would have is:
+> 
+> seqno		Thread 0			Thread 1
+> 
+> seqno=2		unbind/evict event
+> 		obj3.mm.tlb = seqno | 1
+> seqno=2		unbind/evict event
+> 		obj1.mm.tlb = seqno | 1
+> 						__i915_gem_object_unset_pages()
+> 						called for obj3, TLB flush happened,
+> 						invalidating both obj1 and obj2.
+> 						seqno += 2					
+> seqno=4		unbind/evict event
+> 		obj1.mm.tlb = seqno | 1
+> 						__i915_gem_object_unset_pages()
+> 						called for obj1, don't flush.
+> ...
+> 						__i915_gem_object_unset_pages() called for obj2, TLB flush happened
+> 						seqno += 2
+> seqno=6
+> 
+> So, basically the seqno is used to track when the object data stopped
+> being updated, because of an unbind/evict event, being later used by
+> intel_gt_invalidate_tlb() when called from __i915_gem_object_unset_pages(),
+> in order to check if a previous invalidation call was enough to invalidate
+> the object, or if a new call is needed.
+> 
+> Now, if seqno is stored at bind, data can still leak, as the assumption
+> made by intel_gt_invalidate_tlb() that the data stopped being used at
+> seqno is not true anymore.
+> 
+> Still, I agree that this logic is complex and should be better
+> documented. So, if you're now OK with this patch, I'll add the above
+> explanation inside a kernel-doc comment.
+> 
+> Regards,
+> Mauro
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
