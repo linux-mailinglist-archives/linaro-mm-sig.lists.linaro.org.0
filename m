@@ -2,195 +2,94 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B26A2583BCE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Jul 2022 12:11:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 231B5585426
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 Jul 2022 19:07:20 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BA62247F53
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 28 Jul 2022 10:11:37 +0000 (UTC)
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by lists.linaro.org (Postfix) with ESMTPS id 278863EA51
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 28 Jul 2022 10:11:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1659003094; x=1690539094;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=abgk3vUpAQZd9qPd9c0j2BN6XVDXH3lIfe2uKYnCea4=;
-  b=XNZ2JSquzClKK9tdNj7SnmcOu/LUFad/P2j2svPGmk+aeKbvYKqSVklP
-   bfvzTkxDgjbPCkaHYN9OUTivuSw5zEQBZjZCW2kn0kjdL4h2Xy8dp2YED
-   3d33dGkwoVv3at3q5FfsvIXVTKvSqq2ztkg4TJfesjGEEW/DX85O0tZR1
-   fXOZ4aTeCLLcQgVm4NYphkzD6hIZrhDytGkIrh0WD4NmhrurSo3EGkahc
-   DIuq5msqMDVHBg3DZFtGXNOtYdffGy5TztWZCP+mp5Tsfa/riVNqZEIBL
-   EK0TepzMet26WgvbQgQ44SXacefJuxOEm/R5Mh/n+9s61ijCypBq5HCdR
-   Q==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10421"; a="286025649"
-X-IronPort-AV: E=Sophos;i="5.93,196,1654585200";
-   d="scan'208";a="286025649"
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Jul 2022 03:11:33 -0700
-X-IronPort-AV: E=Sophos;i="5.93,196,1654585200";
-   d="scan'208";a="633603135"
-Received: from niviojax-mobl2.ger.corp.intel.com (HELO [10.213.204.129]) ([10.213.204.129])
-  by orsmga001-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Jul 2022 03:11:29 -0700
-Message-ID: <a5605b3a-173d-d4a4-fccf-7cf6ba559913@linux.intel.com>
-Date: Thu, 28 Jul 2022 11:11:27 +0100
+	by lists.linaro.org (Postfix) with ESMTP id CD72947ED7
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 Jul 2022 17:07:18 +0000 (UTC)
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com [209.85.210.173])
+	by lists.linaro.org (Postfix) with ESMTPS id 825C03F207
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 29 Jul 2022 17:07:16 +0000 (UTC)
+Received: by mail-pf1-f173.google.com with SMTP id c139so5151353pfc.2
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 29 Jul 2022 10:07:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc;
+        bh=xOX9chVYPROOGAwdmaGgZcPW07GxLyOUqTmIVsiyRrY=;
+        b=MRLwlAUouciI2C7C4GlFSSMaiCgUFvFJHEtdHFSFik2hSiv0VP8gL4ZSfprY2hsTK1
+         71DIYxBGrwqXFBScOnqP+VzlVWE/yF7/4yB3mDGe+vThJBq8uPvmws21UEmirDlolpMy
+         x549Jju9p8IU2GkZyiWgwKVdtIHXMUNPMhzRBu+dYou1+wt+08d0lBPCrTdJXwzkiDN6
+         JGHGbeMh9SUdLwzzK3x2hd2GyvGvJjuGYxepwaCRt1WmmePQgRRw+KTKKuRl+7PDrYbw
+         HFD4qHEQTMrxQPUwhb11Op/lv6vtakCbR4692upCeChRxW01QL5PORt1xeQ8tBNUL24N
+         4sXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc;
+        bh=xOX9chVYPROOGAwdmaGgZcPW07GxLyOUqTmIVsiyRrY=;
+        b=NHUnJ8f6P/iME27478XjVgMC1L3wvZIqvqJvvGn5xk2o99Gd8nxOOLnWNxvoPelILR
+         7Z/X6oJZ4Z1qnAdEiWVvge91d8nbHo5WP35lo3NuhZ9ufU2I6P/l91goDoyALEgma34N
+         +38H8ZVAirtQxH1zBmE3KpBQeTnbhDBOmHFbTUZHMiCMGb5pOp3uScXNlxIY9UaTt3L+
+         SGl/lZjo77r676Upb6CcACNGRrAfa2iVx0OWmEQAsH5f0STMgyusd8k9ky/0TgtMmUDm
+         02+0PK284DieVRpjKKy1UB9SkobzsV6XwtlseZGgfuADIepZdEcJqm7GeD6Zir7CDttF
+         SRGw==
+X-Gm-Message-State: AJIora/D033zNABZf1QLxIxzkJDN3AvQFJTZH7Pt3HeFIQ35VsNVd2st
+	wUBw7ejDa9gU1SyU+MDq3WA=
+X-Google-Smtp-Source: AGRyM1uGBuQ9vqrdjA1iXWiRUZ+wtLiHx4OPCFlykBcsRNNxwJRC70pXFBsgRPqQ7gjXtfmlRSztjQ==
+X-Received: by 2002:a63:4546:0:b0:41a:5e8f:508a with SMTP id u6-20020a634546000000b0041a5e8f508amr3767050pgk.419.1659114435380;
+        Fri, 29 Jul 2022 10:07:15 -0700 (PDT)
+Received: from localhost ([2a00:79e1:abd:4a00:2703:3c72:eb1a:cffd])
+        by smtp.gmail.com with ESMTPSA id bg1-20020a056a02010100b00419a6f3c8f5sm2778376pgb.19.2022.07.29.10.07.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 29 Jul 2022 10:07:14 -0700 (PDT)
+From: Rob Clark <robdclark@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Date: Fri, 29 Jul 2022 10:07:39 -0700
+Message-Id: <20220729170744.1301044-1-robdclark@gmail.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
-To: Mauro Carvalho Chehab <mauro.chehab@linux.intel.com>
-References: <cover.1657800199.git.mchehab@kernel.org>
- <9f535a97f32320a213a619a30c961ba44b595453.1657800199.git.mchehab@kernel.org>
- <567823d5-57ba-30db-dd64-de609df4d8c5@linux.intel.com>
- <20220727134836.7f7b5fab@maurocar-mobl2>
- <d2337b73-ae34-3dd3-afa3-85c77dc2135e@linux.intel.com>
- <20220728083232.352f80cf@maurocar-mobl2>
-From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-Organization: Intel Corporation UK Plc
-In-Reply-To: <20220728083232.352f80cf@maurocar-mobl2>
-Message-ID-Hash: LGFOZL3MF27A43C3XUYQWJCUFFQMB62O
-X-Message-ID-Hash: LGFOZL3MF27A43C3XUYQWJCUFFQMB62O
-X-MailFrom: tvrtko.ursulin@linux.intel.com
+Message-ID-Hash: DGEPSWI3CMM4GVUHKDB4ZSZ45HWA72IL
+X-Message-ID-Hash: DGEPSWI3CMM4GVUHKDB4ZSZ45HWA72IL
+X-MailFrom: robdclark@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: stable@vger.kernel.org, =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas.hellstrom@linux.intel.com>, linux-media@vger.kernel.org, David Airlie <airlied@linux.ie>, intel-gfx@lists.freedesktop.org, Lucas De Marchi <lucas.demarchi@intel.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org, Chris Wilson <chris.p.wilson@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Dave Airlie <airlied@redhat.com>, Tomas Winkler <tomas.winkler@intel.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Matthew Auld <matthew.auld@intel.com>
+CC: freedreno@lists.freedesktop.org, Rob Clark <robdclark@chromium.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, =?UTF-8?q?J=C3=A9r=C3=B4me=20Pouiller?= <jerome.pouiller@silabs.com>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, Sean Paul <sean@poorly.run>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [Intel-gfx] [PATCH v2 06/21] drm/i915/gt: Batch TLB invalidations
+Subject: [Linaro-mm-sig] [PATCH 0/3] dma-buf: map-info support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LGFOZL3MF27A43C3XUYQWJCUFFQMB62O/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DGEPSWI3CMM4GVUHKDB4ZSZ45HWA72IL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
+From: Rob Clark <robdclark@chromium.org>
 
-On 28/07/2022 07:32, Mauro Carvalho Chehab wrote:
-> On Wed, 27 Jul 2022 13:56:50 +0100
-> Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com> wrote:
-> 
->>> Because vma_invalidate_tlb() basically stores a TLB seqno, but the
->>> actual invalidation is deferred to when the pages are unset, at
->>> __i915_gem_object_unset_pages().
->>>
->>> So, what happens is:
->>>
->>> - on VMA sync mode, the need to invalidate TLB is marked at
->>>     __vma_put_pages(), before VMA unbind;
->>> - on async, this is deferred to happen at ppgtt_unbind_vma(), where
->>>     it marks the need to invalidate TLBs.
->>>
->>> On both cases, __i915_gem_object_unset_pages() is called later,
->>> when the driver is ready to unmap the page.
->>
->> Sorry still not clear to me why is the patch moving marking of the need
->> to invalidate (regardless if it a bit like today, or a seqno like in
->> this patch) from bind to unbind?
->>
->> What if the seqno was stored in i915_vma_bind, where the bit is set
->> today, and all the hunks which touch the unbind and evict would
->> disappear from the patch. What wouldn't work in that case, if anything?
-> 
-> Ah, now I see your point.
-> 
-> I can't see any sense on having a sequence number at VMA bind, as the
-> unbind order can be different. The need of doing a full TLB invalidation
-> or not depends on the unbind order.
+See 1/3 for motivation.
 
-Sorry yes that was stupid from me.. What I was really thinking was the 
-approach I initially used for coalescing. Keeping the set_bit in bind 
-and then once the code enters intel_gt_invalidate_tlbs, takes a "ticket" 
-and waits on the mutex. Once it gets the mutex checks the ticket against 
-the GT copy and if two invalidations have passed since it was waiting on 
-the mutex it can immediately exit. That would seem like a minimal 
-improvement to batch things up.
+Rob Clark (3):
+  dma-buf: Add ioctl to query mmap info
+  drm/prime: Wire up mmap_info support
+  drm/msm/prime: Add mmap_info support
 
-But I guess it would still emit needless invalidations if there is no 
-contention, just a stream of serialized put pages. While the approach 
-from this patch can skip all but truly required.
+ drivers/dma-buf/dma-buf.c           | 26 ++++++++++++++++++++++++++
+ drivers/gpu/drm/drm_prime.c         | 12 ++++++++++++
+ drivers/gpu/drm/msm/msm_drv.c       |  1 +
+ drivers/gpu/drm/msm/msm_drv.h       |  1 +
+ drivers/gpu/drm/msm/msm_gem_prime.c | 11 +++++++++++
+ include/drm/drm_drv.h               |  7 +++++++
+ include/linux/dma-buf.h             |  7 +++++++
+ include/uapi/linux/dma-buf.h        | 28 ++++++++++++++++++++++++++++
+ 8 files changed, 93 insertions(+)
 
-Okay, go for it and thanks for the explanations.
+-- 
+2.36.1
 
-Acked-by: Tvrtko Ursulin <tvrtko.ursulin@intel.com>
-
-Regards,
-
-Tvrtko
-
-P.S. The last remaining "ugliness" is the 2nd call to invalidation from 
-evict. It would be nicer if there was a single common place to do it on 
-vma unbind but okay, I do not plan to dig into it so fine.
-
-> 
-> The way the current algorithm works is that drm_i915_gem_object can be
-> created on any order, and, at unbind/evict, they receive a seqno.
-> 
-> The seqno is incremented at intel_gt_invalidate_tlb():
-> 
->      void intel_gt_invalidate_tlb(struct intel_gt *gt, u32 seqno)
->      {
-> 	with_intel_gt_pm_if_awake(gt, wakeref) {
-> 		mutex_lock(&gt->tlb.invalidate_lock);
-> 		if (tlb_seqno_passed(gt, seqno))
-> 				goto unlock;
-> 
-> 		mmio_invalidate_full(gt);
-> 
-> 		write_seqcount_invalidate(&gt->tlb.seqno);	// increment seqno
-> 		
-> 
-> So, let's say 3 objects were created, on this order:
-> 
-> 	obj1
-> 	obj2
-> 	obj3
-> 
-> They would be unbind/evict on a different order. On that time,
-> the mm.tlb will be stamped with a seqno, using the number from the
-> last TLB flush, plus 1.
-> 
-> As different threads can be used to handle TLB flushes, let's imagine
-> two threads (just for the sake of having an example). On such case,
-> what we would have is:
-> 
-> seqno		Thread 0			Thread 1
-> 
-> seqno=2		unbind/evict event
-> 		obj3.mm.tlb = seqno | 1
-> seqno=2		unbind/evict event
-> 		obj1.mm.tlb = seqno | 1
-> 						__i915_gem_object_unset_pages()
-> 						called for obj3, TLB flush happened,
-> 						invalidating both obj1 and obj2.
-> 						seqno += 2					
-> seqno=4		unbind/evict event
-> 		obj1.mm.tlb = seqno | 1
-> 						__i915_gem_object_unset_pages()
-> 						called for obj1, don't flush.
-> ...
-> 						__i915_gem_object_unset_pages() called for obj2, TLB flush happened
-> 						seqno += 2
-> seqno=6
-> 
-> So, basically the seqno is used to track when the object data stopped
-> being updated, because of an unbind/evict event, being later used by
-> intel_gt_invalidate_tlb() when called from __i915_gem_object_unset_pages(),
-> in order to check if a previous invalidation call was enough to invalidate
-> the object, or if a new call is needed.
-> 
-> Now, if seqno is stored at bind, data can still leak, as the assumption
-> made by intel_gt_invalidate_tlb() that the data stopped being used at
-> seqno is not true anymore.
-> 
-> Still, I agree that this logic is complex and should be better
-> documented. So, if you're now OK with this patch, I'll add the above
-> explanation inside a kernel-doc comment.
-> 
-> Regards,
-> Mauro
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
