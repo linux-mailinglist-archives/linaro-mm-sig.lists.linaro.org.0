@@ -2,601 +2,421 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8596A5A1216
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Aug 2022 15:29:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EFF385A1217
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Aug 2022 15:29:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B88683F61B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Aug 2022 13:29:16 +0000 (UTC)
-Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
-	by lists.linaro.org (Postfix) with ESMTPS id A8C7047F32
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  1 Aug 2022 09:46:12 +0000 (UTC)
-Received: by mail-qk1-f171.google.com with SMTP id m16so7933039qka.12
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 01 Aug 2022 02:46:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=VPFHdbaBa7EI6frsIzdNt1TytQNWZ647AsxmmEjKTPQ=;
-        b=KBLk2hLPWZ2S1nksjkH8x/bB+Y29Jirw7u4KrBzQ9xMJhZoqD+jPkf9T92AYBVh2Kl
-         dFSa3AyYu4pCFNOUgY+s83zy1H8wbJ8MO8sIk535NCVMAkYCBsDrWM2qnSQtx+/tip3d
-         eV9qOEECz1l0UiiLdP816Ar7+v8mzBHMwrSq0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=VPFHdbaBa7EI6frsIzdNt1TytQNWZ647AsxmmEjKTPQ=;
-        b=Kx1/raJmIUVyhSR3LS82oE7u9vLFs2VgTA/X22k9i19GfyLXJEE5lM/mHlrMRb+PNM
-         CzFDc9r4ouIbQlB8MSchvw+6Svj1piMmpRM7rblcTw7zsF8wCfHvaCDHdY3sfPV7aMCj
-         V63P2nHLItODejbE07yHPwZLaEaCBpxuD5Z+X5VUfP9uGuxm2AlS08qZqkLKwyyx5Zya
-         hLIej+mYpesOyZo8FD5fIclTpTZ4Lwwa4DGIOwT6tdcn550k+qd3quCkKM9qiv5F1Hl3
-         C5wdrjS+ANsJz8D9M4URGrF2nagGxH67cXDcebB1Q2e3AA0Dj0KntGajjhNAKUNFKZZ3
-         kw/Q==
-X-Gm-Message-State: ACgBeo1lLGwzTge9L1nIqDMDXk+YDRACx+uSuTYj/KuwslYesJKoydqB
-	7x5m6CZ8a4hMGYqdbjexMjd42ZI1rbtmYg==
-X-Google-Smtp-Source: AA6agR5hL+xAS4mT2O6N0jyTEglY5dWKw8VWE4wSyVs+91f9dyrELO3bFCQg6tYH5NfqeFdst4P88A==
-X-Received: by 2002:a05:620a:1906:b0:6b8:ac92:1f1c with SMTP id bj6-20020a05620a190600b006b8ac921f1cmr2476985qkb.633.1659347172019;
-        Mon, 01 Aug 2022 02:46:12 -0700 (PDT)
-Received: from mail-yb1-f174.google.com (mail-yb1-f174.google.com. [209.85.219.174])
-        by smtp.gmail.com with ESMTPSA id q20-20020a05620a0d9400b006aee5df383csm5410923qkl.134.2022.08.01.02.46.10
-        for <linaro-mm-sig@lists.linaro.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 01 Aug 2022 02:46:10 -0700 (PDT)
-Received: by mail-yb1-f174.google.com with SMTP id j63so18016410ybb.13
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 01 Aug 2022 02:46:10 -0700 (PDT)
-X-Received: by 2002:a05:6902:1148:b0:677:dd8:5a06 with SMTP id
- p8-20020a056902114800b006770dd85a06mr3743396ybu.261.1659347170310; Mon, 01
- Aug 2022 02:46:10 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220731202116.820516-1-ayaka@soulik.info> <CAAFQd5C95W-2=oLTmbgQCBoYq1Ef3hKgpmk=ij4+nFPY3XVWPg@mail.gmail.com>
- <ec08ac1d-dc03-097e-dcb4-0ea0e86c612c@synaptics.com>
-In-Reply-To: <ec08ac1d-dc03-097e-dcb4-0ea0e86c612c@synaptics.com>
-From: Tomasz Figa <tfiga@chromium.org>
-Date: Mon, 1 Aug 2022 18:45:59 +0900
-X-Gmail-Original-Message-ID: <CAAFQd5CKfv6F6cgN95SE42HWQYynsSuYFcU_8aePgtawXyey1g@mail.gmail.com>
-Message-ID: <CAAFQd5CKfv6F6cgN95SE42HWQYynsSuYFcU_8aePgtawXyey1g@mail.gmail.com>
-To: Hsia-Jun Li <Randy.Li@synaptics.com>
-X-MailFrom: tfiga@chromium.org
+	by lists.linaro.org (Postfix) with ESMTP id 303ED3F8D3
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Aug 2022 13:29:25 +0000 (UTC)
+Received: from kozue.soulik.info (kozue.soulik.info [108.61.200.231])
+	by lists.linaro.org (Postfix) with ESMTPS id C3EF647F33
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  1 Aug 2022 11:43:11 +0000 (UTC)
+Received: from [192.168.10.77] (unknown [112.65.61.203])
+	by kozue.soulik.info (Postfix) with ESMTPSA id 06989100DB3;
+	Mon,  1 Aug 2022 20:34:06 +0900 (JST)
+From: ayaka <ayaka@soulik.info>
+Mime-Version: 1.0 (1.0)
+Date: Mon, 1 Aug 2022 19:39:51 +0800
+Message-Id: <1C214079-69AA-40D7-92EC-ED1F86CD37A3@soulik.info>
+References: <CAAFQd5CKfv6F6cgN95SE42HWQYynsSuYFcU_8aePgtawXyey1g@mail.gmail.com>
+In-Reply-To: <CAAFQd5CKfv6F6cgN95SE42HWQYynsSuYFcU_8aePgtawXyey1g@mail.gmail.com>
+To: Tomasz Figa <tfiga@chromium.org>
+X-Mailer: iPad Mail (18D61)
+X-MailFrom: ayaka@soulik.info
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 7G5MBSMJHDSR32JJE67MUQI4GPPEU7LX
-X-Message-ID-Hash: 7G5MBSMJHDSR32JJE67MUQI4GPPEU7LX
-X-Mailman-Approved-At: Thu, 25 Aug 2022 13:28:56 +0000
-CC: linux-media@vger.kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, ayaka@soulik.info
+Message-ID-Hash: F2PHYYVUPTF6KKLTJIAILZ6AZ3RIFZLB
+X-Message-ID-Hash: F2PHYYVUPTF6KKLTJIAILZ6AZ3RIFZLB
+X-Mailman-Approved-At: Thu, 25 Aug 2022 13:29:00 +0000
+CC: Hsia-Jun Li <randy.li@synaptics.com>, linux-media@vger.kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH] [Draft]: media: videobuf2-dma-heap: add a vendor defined memory runtine
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7G5MBSMJHDSR32JJE67MUQI4GPPEU7LX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/F2PHYYVUPTF6KKLTJIAILZ6AZ3RIFZLB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Mon, Aug 1, 2022 at 3:44 PM Hsia-Jun Li <Randy.Li@synaptics.com> wrote:
->
->
->
-> On 8/1/22 14:19, Tomasz Figa wrote:
-> >
-> Hello Tomasz
-> >
-> > ?Hi Randy,
-> >
-> > On Mon, Aug 1, 2022 at 5:21 AM <ayaka@soulik.info> wrote:
-> >>
-> >> From: Randy Li <ayaka@soulik.info>
-> >>
-> >> This module is still at a early stage, I wrote this for showing what
-> >> APIs we need here.
-> >>
-> >> Let me explain why we need such a module here.
-> >> If you won't allocate buffers from a V4L2 M2M device, this module
-> >> may not be very useful. I am sure the most of users won't know a
-> >> device would require them allocate buffers from a DMA-Heap then
-> >> import those buffers into a V4L2's queue.
-> >>
-> >> Then the question goes back to why DMA-Heap. From the Android's
-> >> description, we know it is about the copyright's DRM.
-> >> When we allocate a buffer in a DMA-Heap, it may register that buffer
-> >> in the trusted execution environment so the firmware which is running
-> >> or could only be acccesed from there could use that buffer later.
-> >>
-> >> The answer above leads to another thing which is not done in this
-> >> version, the DMA mapping. Although in some platforms, a DMA-Heap
-> >> responses a IOMMU device as well. For the genernal purpose, we would
-> >> be better assuming the device mapping should be done for each device
-> >> itself. The problem here we only know alloc_devs in those DMAbuf
-> >> methods, which are DMA-heaps in my design, the device from the queue
-> >> is not enough, a plane may requests another IOMMU device or table
-> >> for mapping.
-> >>
-> >> Signed-off-by: Randy Li <ayaka@soulik.info>
-> >> ---
-> >>   drivers/media/common/videobuf2/Kconfig        |   6 +
-> >>   drivers/media/common/videobuf2/Makefile       |   1 +
-> >>   .../common/videobuf2/videobuf2-dma-heap.c     | 350 ++++++++++++++++++
-> >>   include/media/videobuf2-dma-heap.h            |  30 ++
-> >>   4 files changed, 387 insertions(+)
-> >>   create mode 100644 drivers/media/common/videobuf2/videobuf2-dma-heap.c
-> >>   create mode 100644 include/media/videobuf2-dma-heap.h
-> >>
-> >
-> > First of all, thanks for the series.
-> >
-> > Possibly a stupid question, but why not just allocate the DMA-bufs
-> > directly from the DMA-buf heap device in the userspace and just import
-> > the buffers to the V4L2 device using V4L2_MEMORY_DMABUF?
-> Sometimes the allocation policy could be very complex, let's suppose a
-> multiple planes pixel format enabling with frame buffer compression.
-> Its luma, chroma data could be allocated from a pool which is delegated
-> for large buffers while its metadata would come from a pool which many
-> users could take some few slices from it(likes system pool).
->
-> Then when we have a new users knowing nothing about this platform, if we
-> just configure the alloc_devs in each queues well. The user won't need
-> to know those complex rules.
->
-> The real situation could be more complex, Samsung MFC's left and right
-> banks could be regarded as two pools, many devices would benefit from
-> this either from the allocation times or the security buffers policy.
->
-> In our design, when we need to do some security decoding(DRM video),
-> codecs2 would allocate buffers from the pool delegated for that. While
-> the non-DRM video, users could not care about this.
-
-I'm a little bit surprised about this, because on Android all the
-graphics buffers are allocated from the system IAllocator and imported
-to the specific devices.
-
-Would it make sense to instead extend the UAPI to expose enough
-information about the allocation requirements to the userspace, so it
-can allocate correctly?
-My reasoning here is that it's not a driver's decision to allocate
-from a DMA-buf heap (and which one) or not. It's the userspace which
-knows that, based on the specific use case that it wants to fulfill.
-
-Also, FWIW, dma_heap_ioctl_allocate() is a static function not exposed
-to other kernel modules:
-https://elixir.bootlin.com/linux/v5.19/source/drivers/dma-buf/dma-heap.c#L52
-
-By the way, the MFC left/right port requirement was gone long ago, it
-was only one of the earliest Exynos SoCs which required that.
-
-Best regards,
-Tomasz
-
-> >
-> > Best regards,
-> > Tomasz
-> >
-> >> diff --git a/drivers/media/common/videobuf2/Kconfig b/drivers/media/common/videobuf2/Kconfig
-> >> index d2223a12c95f..02235077f07e 100644
-> >> --- a/drivers/media/common/videobuf2/Kconfig
-> >> +++ b/drivers/media/common/videobuf2/Kconfig
-> >> @@ -30,3 +30,9 @@ config VIDEOBUF2_DMA_SG
-> >>   config VIDEOBUF2_DVB
-> >>          tristate
-> >>          select VIDEOBUF2_CORE
-> >> +
-> >> +config VIDEOBUF2_DMA_HEAP
-> >> +       tristate
-> >> +       select VIDEOBUF2_CORE
-> >> +       select VIDEOBUF2_MEMOPS
-> >> +       select DMABUF_HEAPS
-> >> diff --git a/drivers/media/common/videobuf2/Makefile b/drivers/media/common/videobuf2/Makefile
-> >> index a6fe3f304685..7fe65f93117f 100644
-> >> --- a/drivers/media/common/videobuf2/Makefile
-> >> +++ b/drivers/media/common/videobuf2/Makefile
-> >> @@ -10,6 +10,7 @@ endif
-> >>   # (e. g. LC_ALL=C sort Makefile)
-> >>   obj-$(CONFIG_VIDEOBUF2_CORE) += videobuf2-common.o
-> >>   obj-$(CONFIG_VIDEOBUF2_DMA_CONTIG) += videobuf2-dma-contig.o
-> >> +obj-$(CONFIG_VIDEOBUF2_DMA_HEAP) += videobuf2-dma-heap.o
-> >>   obj-$(CONFIG_VIDEOBUF2_DMA_SG) += videobuf2-dma-sg.o
-> >>   obj-$(CONFIG_VIDEOBUF2_DVB) += videobuf2-dvb.o
-> >>   obj-$(CONFIG_VIDEOBUF2_MEMOPS) += videobuf2-memops.o
-> >> diff --git a/drivers/media/common/videobuf2/videobuf2-dma-heap.c b/drivers/media/common/videobuf2/videobuf2-dma-heap.c
-> >> new file mode 100644
-> >> index 000000000000..377b82ab8f5a
-> >> --- /dev/null
-> >> +++ b/drivers/media/common/videobuf2/videobuf2-dma-heap.c
-> >> @@ -0,0 +1,350 @@
-> >> +/*
-> >> + * Copyright (C) 2022 Randy Li <ayaka@soulik.info>
-> >> + *
-> >> + * This software is licensed under the terms of the GNU General Public
-> >> + * License version 2, as published by the Free Software Foundation, and
-> >> + * may be copied, distributed, and modified under those terms.
-> >> + *
-> >> + * This program is distributed in the hope that it will be useful,
-> >> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> >> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> >> + * GNU General Public License for more details.
-> >> + *
-> >> + */
-> >> +
-> >> +#include <linux/dma-buf.h>
-> >> +#include <linux/dma-heap.h>
-> >> +#include <linux/refcount.h>
-> >> +#include <linux/scatterlist.h>
-> >> +#include <linux/sched.h>
-> >> +#include <linux/slab.h>
-> >> +#include <linux/dma-mapping.h>
-> >> +
-> >> +#include <media/videobuf2-v4l2.h>
-> >> +#include <media/videobuf2-memops.h>
-> >> +#include <media/videobuf2-dma-heap.h>
-> >> +
-> >> +struct vb2_dmaheap_buf {
-> >> +       struct device *dev;
-> >> +       void *vaddr;
-> >> +       unsigned long size;
-> >> +       struct dma_buf *dmabuf;
-> >> +       dma_addr_t dma_addr;
-> >> +       unsigned long attrs;
-> >> +       enum dma_data_direction dma_dir;
-> >> +       struct sg_table *dma_sgt;
-> >> +
-> >> +       /* MMAP related */
-> >> +       struct vb2_vmarea_handler handler;
-> >> +       refcount_t refcount;
-> >> +
-> >> +       /* DMABUF related */
-> >> +       struct dma_buf_attachment *db_attach;
-> >> +};
-> >> +
-> >> +/*********************************************/
-> >> +/*         callbacks for all buffers         */
-> >> +/*********************************************/
-> >> +
-> >> +void *vb2_dmaheap_cookie(struct vb2_buffer *vb, void *buf_priv)
-> >> +{
-> >> +       struct vb2_dmaheap_buf *buf = buf_priv;
-> >> +
-> >> +       return &buf->dma_addr;
-> >> +}
-> >> +
-> >> +static void *vb2_dmaheap_vaddr(struct vb2_buffer *vb, void *buf_priv)
-> >> +{
-> >> +       struct vb2_dmaheap_buf *buf = buf_priv;
-> >> +       struct iosys_map map;
-> >> +
-> >> +       if (buf->vaddr)
-> >> +           return buf->vaddr;
-> >> +
-> >> +       if (buf->db_attach) {
-> >> +               if (!dma_buf_vmap(buf->db_attach->dmabuf, &map))
-> >> +                       buf->vaddr = map.vaddr;
-> >> +       }
-> >> +
-> >> +       return buf->vaddr;
-> >> +}
-> >> +
-> >> +static unsigned int vb2_dmaheap_num_users(void *buf_priv)
-> >> +{
-> >> +       struct vb2_dmaheap_buf *buf = buf_priv;
-> >> +
-> >> +       return refcount_read(&buf->refcount);
-> >> +}
-> >> +
-> >> +static void vb2_dmaheap_prepare(void *buf_priv)
-> >> +{
-> >> +       struct vb2_dmaheap_buf *buf = buf_priv;
-> >> +
-> >> +       /* TODO: DMABUF exporter will flush the cache for us */
-> >> +       if (buf->db_attach)
-> >> +               return;
-> >> +
-> >> +       dma_buf_end_cpu_access(buf->dmabuf, buf->dma_dir);
-> >> +}
-> >> +
-> >> +static void vb2_dmaheap_finish(void *buf_priv)
-> >> +{
-> >> +       struct vb2_dmaheap_buf *buf = buf_priv;
-> >> +
-> >> +       /* TODO: DMABUF exporter will flush the cache for us */
-> >> +       if (buf->db_attach)
-> >> +               return;
-> >> +
-> >> +       dma_buf_begin_cpu_access(buf->dmabuf, buf->dma_dir);
-> >> +}
-> >> +
-> >> +/*********************************************/
-> >> +/*        callbacks for MMAP buffers         */
-> >> +/*********************************************/
-> >> +
-> >> +void vb2_dmaheap_put(void *buf_priv)
-> >> +{
-> >> +       struct vb2_dmaheap_buf *buf = buf_priv;
-> >> +
-> >> +       if (!refcount_dec_and_test(&buf->refcount))
-> >> +               return;
-> >> +
-> >> +       dma_buf_put(buf->dmabuf);
-> >> +
-> >> +       put_device(buf->dev);
-> >> +       kfree(buf);
-> >> +}
-> >> +
-> >> +static void *vb2_dmaheap_alloc(struct vb2_buffer *vb,
-> >> +                              struct device *dev,
-> >> +                              unsigned long size)
-> >> +{
-> >> +       struct vb2_queue *q = vb->vb2_queue;
-> >> +       struct dma_heap *heap;
-> >> +       struct vb2_dmaheap_buf *buf;
-> >> +       const char *heap_name;
-> >> +       int ret;
-> >> +
-> >> +       if (WARN_ON(!dev))
-> >> +               return ERR_PTR(-EINVAL);
-> >> +
-> >> +       heap_name = dev_name(dev);
-> >> +       if (!heap_name)
-> >> +               return ERR_PTR(-EINVAL);
-> >> +
-> >> +       heap = dma_heap_find(heap_name);
-> >> +       if (!heap) {
-> >> +               dev_err(dev, "is not a DMA-heap device\n");
-> >> +               return ERR_PTR(-EINVAL);
-> >> +       }
-> >> +
-> >> +       buf = kzalloc(sizeof *buf, GFP_KERNEL);
-> >> +       if (!buf)
-> >> +               return ERR_PTR(-ENOMEM);
-> >> +
-> >> +       /* Prevent the device from being released while the buffer is used */
-> >> +       buf->dev = get_device(dev);
-> >> +       buf->attrs = vb->vb2_queue->dma_attrs;
-> >> +       buf->dma_dir = vb->vb2_queue->dma_dir;
-> >> +
-> >> +       /* TODO: heap flags */
-> >> +       ret = dma_heap_buffer_alloc(heap, size, 0, 0);
-> >> +       if (ret < 0) {
-> >> +               dev_err(dev, "is not a DMA-heap device\n");
-> >> +               put_device(buf->dev);
-> >> +               kfree(buf);
-> >> +               return ERR_PTR(ret);
-> >> +       }
-> >> +       buf->dmabuf = dma_buf_get(ret);
-> >> +
-> >> +       /* FIXME */
-> >> +       buf->dma_addr = 0;
-> >> +
-> >> +       if ((q->dma_attrs & DMA_ATTR_NO_KERNEL_MAPPING) == 0)
-> >> +               buf->vaddr = buf->dmabuf;
-> >> +
-> >> +       buf->handler.refcount = &buf->refcount;
-> >> +       buf->handler.put = vb2_dmaheap_put;
-> >> +       buf->handler.arg = buf;
-> >> +
-> >> +       refcount_set(&buf->refcount, 1);
-> >> +
-> >> +       return buf;
-> >> +}
-> >> +
-> >> +static int vb2_dmaheap_mmap(void *buf_priv, struct vm_area_struct *vma)
-> >> +{
-> >> +       struct vb2_dmaheap_buf *buf = buf_priv;
-> >> +       int ret;
-> >> +
-> >> +       if (!buf) {
-> >> +               printk(KERN_ERR "No buffer to map\n");
-> >> +               return -EINVAL;
-> >> +       }
-> >> +
-> >> +       vma->vm_flags &= ~VM_PFNMAP;
-> >> +
-> >> +       ret = dma_buf_mmap(buf->dmabuf, vma, 0);
-> >> +       if (ret) {
-> >> +               pr_err("Remapping memory failed, error: %d\n", ret);
-> >> +               return ret;
-> >> +       }
-> >> +       vma->vm_flags           |= VM_DONTEXPAND | VM_DONTDUMP;
-> >> +       vma->vm_private_data    = &buf->handler;
-> >> +       vma->vm_ops             = &vb2_common_vm_ops;
-> >> +
-> >> +       vma->vm_ops->open(vma);
-> >> +
-> >> +       pr_debug("%s: mapped memid 0x%08lx at 0x%08lx, size %ld\n",
-> >> +                __func__, (unsigned long)buf->dma_addr, vma->vm_start,
-> >> +                buf->size);
-> >> +
-> >> +       return 0;
-> >> +}
-> >> +
-> >> +/*********************************************/
-> >> +/*         DMABUF ops for exporters          */
-> >> +/*********************************************/
-> >> +
-> >> +static struct dma_buf *vb2_dmaheap_get_dmabuf(struct vb2_buffer *vb,
-> >> +                                             void *buf_priv,
-> >> +                                             unsigned long flags)
-> >> +{
-> >> +       struct vb2_dmaheap_buf *buf = buf_priv;
-> >> +       struct dma_buf *dbuf;
-> >> +
-> >> +       dbuf = buf->dmabuf;
-> >> +
-> >> +       return dbuf;
-> >> +}
-> >> +
-> >> +/*********************************************/
-> >> +/*       callbacks for DMABUF buffers        */
-> >> +/*********************************************/
-> >> +
-> >> +static int vb2_dmaheap_map_dmabuf(void *mem_priv)
-> >> +{
-> >> +       struct vb2_dmaheap_buf *buf = mem_priv;
-> >> +       struct sg_table *sgt;
-> >> +
-> >> +       if (WARN_ON(!buf->db_attach)) {
-> >> +               pr_err("trying to pin a non attached buffer\n");
-> >> +               return -EINVAL;
-> >> +       }
-> >> +
-> >> +       if (WARN_ON(buf->dma_sgt)) {
-> >> +               pr_err("dmabuf buffer is already pinned\n");
-> >> +               return 0;
-> >> +       }
-> >> +
-> >> +       /* get the associated scatterlist for this buffer */
-> >> +       sgt = dma_buf_map_attachment(buf->db_attach, buf->dma_dir);
-> >> +       if (IS_ERR(sgt)) {
-> >> +               pr_err("Error getting dmabuf scatterlist\n");
-> >> +               return -EINVAL;
-> >> +       }
-> >> +
-> >> +       buf->dma_addr = sg_dma_address(sgt->sgl);
-> >> +       buf->dma_sgt = sgt;
-> >> +       buf->vaddr = NULL;
-> >> +
-> >> +       return 0;
-> >> +}
-> >> +
-> >> +static void vb2_dmaheap_unmap_dmabuf(void *mem_priv)
-> >> +{
-> >> +       struct vb2_dmaheap_buf *buf = mem_priv;
-> >> +       struct sg_table *sgt = buf->dma_sgt;
-> >> +       struct iosys_map map = IOSYS_MAP_INIT_VADDR(buf->vaddr);
-> >> +
-> >> +       if (WARN_ON(!buf->db_attach)) {
-> >> +               pr_err("trying to unpin a not attached buffer\n");
-> >> +               return;
-> >> +       }
-> >> +
-> >> +       if (WARN_ON(!sgt)) {
-> >> +               pr_err("dmabuf buffer is already unpinned\n");
-> >> +               return;
-> >> +       }
-> >> +
-> >> +       if (buf->vaddr) {
-> >> +               dma_buf_vunmap(buf->db_attach->dmabuf, &map);
-> >> +               buf->vaddr = NULL;
-> >> +       }
-> >> +       dma_buf_unmap_attachment(buf->db_attach, sgt, buf->dma_dir);
-> >> +
-> >> +       buf->dma_addr = 0;
-> >> +       buf->dma_sgt = NULL;
-> >> +}
-> >> +
-> >> +static void vb2_dmaheap_detach_dmabuf(void *mem_priv)
-> >> +{
-> >> +       struct vb2_dmaheap_buf *buf = mem_priv;
-> >> +
-> >> +       /* if vb2 works correctly you should never detach mapped buffer */
-> >> +       if (WARN_ON(buf->dma_addr))
-> >> +               vb2_dmaheap_unmap_dmabuf(buf);
-> >> +
-> >> +       /* detach this attachment */
-> >> +       dma_buf_detach(buf->db_attach->dmabuf, buf->db_attach);
-> >> +       kfree(buf);
-> >> +}
-> >> +
-> >> +static void *vb2_dmaheap_attach_dmabuf(struct vb2_buffer *vb, struct device *dev,
-> >> +                                      struct dma_buf *dbuf, unsigned long size)
-> >> +{
-> >> +       struct vb2_dmaheap_buf *buf;
-> >> +       struct dma_buf_attachment *dba;
-> >> +
-> >> +       if (dbuf->size < size)
-> >> +               return ERR_PTR(-EFAULT);
-> >> +
-> >> +       if (WARN_ON(!dev))
-> >> +               return ERR_PTR(-EINVAL);
-> >> +       /*
-> >> +        * TODO: A better way to check whether the buffer is coming
-> >> +        * from this heap or this heap could accept this buffer
-> >> +        */
-> >> +       if (strcmp(dbuf->exp_name, dev_name(dev)))
-> >> +               return ERR_PTR(-EINVAL);
-> >> +
-> >> +       buf = kzalloc(sizeof(*buf), GFP_KERNEL);
-> >> +       if (!buf)
-> >> +               return ERR_PTR(-ENOMEM);
-> >> +
-> >> +       buf->dev = dev;
-> >> +       /* create attachment for the dmabuf with the user device */
-> >> +       dba = dma_buf_attach(dbuf, buf->dev);
-> >> +       if (IS_ERR(dba)) {
-> >> +               pr_err("failed to attach dmabuf\n");
-> >> +               kfree(buf);
-> >> +               return dba;
-> >> +       }
-> >> +
-> >> +       buf->dma_dir = vb->vb2_queue->dma_dir;
-> >> +       buf->size = size;
-> >> +       buf->db_attach = dba;
-> >> +
-> >> +       return buf;
-> >> +}
-> >> +
-> >> +const struct vb2_mem_ops vb2_dmaheap_memops = {
-> >> +       .alloc = vb2_dmaheap_alloc,
-> >> +       .put = vb2_dmaheap_put,
-> >> +       .get_dmabuf = vb2_dmaheap_get_dmabuf,
-> >> +       .cookie = vb2_dmaheap_cookie,
-> >> +       .vaddr = vb2_dmaheap_vaddr,
-> >> +       .prepare = vb2_dmaheap_prepare,
-> >> +       .finish = vb2_dmaheap_finish,
-> >> +       .map_dmabuf = vb2_dmaheap_map_dmabuf,
-> >> +       .unmap_dmabuf = vb2_dmaheap_unmap_dmabuf,
-> >> +       .attach_dmabuf = vb2_dmaheap_attach_dmabuf,
-> >> +       .detach_dmabuf = vb2_dmaheap_detach_dmabuf,
-> >> +       .num_users = vb2_dmaheap_num_users,
-> >> +       .mmap = vb2_dmaheap_mmap,
-> >> +};
-> >> +
-> >> +MODULE_DESCRIPTION("DMA-Heap memory handling routines for videobuf2");
-> >> +MODULE_AUTHOR("Randy Li <ayaka@soulik.info>");
-> >> +MODULE_LICENSE("GPL");
-> >> +MODULE_IMPORT_NS(DMA_BUF);
-> >> diff --git a/include/media/videobuf2-dma-heap.h b/include/media/videobuf2-dma-heap.h
-> >> new file mode 100644
-> >> index 000000000000..fa057f67d6e9
-> >> --- /dev/null
-> >> +++ b/include/media/videobuf2-dma-heap.h
-> >> @@ -0,0 +1,30 @@
-> >> +/*
-> >> + * Copyright (C) 2022 Randy Li <ayaka@soulik.info>
-> >> + *
-> >> + * This software is licensed under the terms of the GNU General Public
-> >> + * License version 2, as published by the Free Software Foundation, and
-> >> + * may be copied, distributed, and modified under those terms.
-> >> + *
-> >> + * This program is distributed in the hope that it will be useful,
-> >> + * but WITHOUT ANY WARRANTY; without even the implied warranty of
-> >> + * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> >> + * GNU General Public License for more details.
-> >> + *
-> >> + */
-> >> +
-> >> +#ifndef _MEDIA_VIDEOBUF2_DMA_HEAP_H
-> >> +#define _MEDIA_VIDEOBUF2_DMA_HEAP_H
-> >> +
-> >> +#include <media/videobuf2-v4l2.h>
-> >> +#include <linux/dma-mapping.h>
-> >> +
-> >> +static inline dma_addr_t
-> >> +vb2_dmaheap_plane_dma_addr(struct vb2_buffer *vb, unsigned int plane_no)
-> >> +{
-> >> +       dma_addr_t *addr = vb2_plane_cookie(vb, plane_no);
-> >> +
-> >> +       return *addr;
-> >> +}
-> >> +
-> >> +extern const struct vb2_mem_ops vb2_dmaheap_memops;
-> >> +#endif
-> >> --
-> >> 2.17.1
-> >>
->
-> --
-> Hsia-Jun(Randy) Li
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+DQoNClNlbnQgZnJvbSBteSBpUGFkDQoNCj4gT24gQXVnIDEsIDIwMjIsIGF0IDU6NDYgUE0sIFRv
+bWFzeiBGaWdhIDx0ZmlnYUBjaHJvbWl1bS5vcmc+IHdyb3RlOg0KPiANCj4g77u/Q0FVVElPTjog
+RW1haWwgb3JpZ2luYXRlZCBleHRlcm5hbGx5LCBkbyBub3QgY2xpY2sgbGlua3Mgb3Igb3BlbiBh
+dHRhY2htZW50cyB1bmxlc3MgeW91IHJlY29nbml6ZSB0aGUgc2VuZGVyIGFuZCBrbm93IHRoZSBj
+b250ZW50IGlzIHNhZmUuDQo+IA0KPiANCj4+IE9uIE1vbiwgQXVnIDEsIDIwMjIgYXQgMzo0NCBQ
+TSBIc2lhLUp1biBMaSA8UmFuZHkuTGlAc3luYXB0aWNzLmNvbT4gd3JvdGU6DQo+PiANCj4+IA0K
+Pj4gDQo+Pj4gT24gOC8xLzIyIDE0OjE5LCBUb21hc3ogRmlnYSB3cm90ZToNCj4+PiANCj4+IEhl
+bGxvIFRvbWFzeg0KPj4+IA0KPj4+ID9IaSBSYW5keSwNCj4+PiANCj4+PiBPbiBNb24sIEF1ZyAx
+LCAyMDIyIGF0IDU6MjEgQU0gPGF5YWthQHNvdWxpay5pbmZvPiB3cm90ZToNCj4+Pj4gDQo+Pj4+
+IEZyb206IFJhbmR5IExpIDxheWFrYUBzb3VsaWsuaW5mbz4NCj4+Pj4gDQo+Pj4+IFRoaXMgbW9k
+dWxlIGlzIHN0aWxsIGF0IGEgZWFybHkgc3RhZ2UsIEkgd3JvdGUgdGhpcyBmb3Igc2hvd2luZyB3
+aGF0DQo+Pj4+IEFQSXMgd2UgbmVlZCBoZXJlLg0KPj4+PiANCj4+Pj4gTGV0IG1lIGV4cGxhaW4g
+d2h5IHdlIG5lZWQgc3VjaCBhIG1vZHVsZSBoZXJlLg0KPj4+PiBJZiB5b3Ugd29uJ3QgYWxsb2Nh
+dGUgYnVmZmVycyBmcm9tIGEgVjRMMiBNMk0gZGV2aWNlLCB0aGlzIG1vZHVsZQ0KPj4+PiBtYXkg
+bm90IGJlIHZlcnkgdXNlZnVsLiBJIGFtIHN1cmUgdGhlIG1vc3Qgb2YgdXNlcnMgd29uJ3Qga25v
+dyBhDQo+Pj4+IGRldmljZSB3b3VsZCByZXF1aXJlIHRoZW0gYWxsb2NhdGUgYnVmZmVycyBmcm9t
+IGEgRE1BLUhlYXAgdGhlbg0KPj4+PiBpbXBvcnQgdGhvc2UgYnVmZmVycyBpbnRvIGEgVjRMMidz
+IHF1ZXVlLg0KPj4+PiANCj4+Pj4gVGhlbiB0aGUgcXVlc3Rpb24gZ29lcyBiYWNrIHRvIHdoeSBE
+TUEtSGVhcC4gRnJvbSB0aGUgQW5kcm9pZCdzDQo+Pj4+IGRlc2NyaXB0aW9uLCB3ZSBrbm93IGl0
+IGlzIGFib3V0IHRoZSBjb3B5cmlnaHQncyBEUk0uDQo+Pj4+IFdoZW4gd2UgYWxsb2NhdGUgYSBi
+dWZmZXIgaW4gYSBETUEtSGVhcCwgaXQgbWF5IHJlZ2lzdGVyIHRoYXQgYnVmZmVyDQo+Pj4+IGlu
+IHRoZSB0cnVzdGVkIGV4ZWN1dGlvbiBlbnZpcm9ubWVudCBzbyB0aGUgZmlybXdhcmUgd2hpY2gg
+aXMgcnVubmluZw0KPj4+PiBvciBjb3VsZCBvbmx5IGJlIGFjY2Nlc2VkIGZyb20gdGhlcmUgY291
+bGQgdXNlIHRoYXQgYnVmZmVyIGxhdGVyLg0KPj4+PiANCj4+Pj4gVGhlIGFuc3dlciBhYm92ZSBs
+ZWFkcyB0byBhbm90aGVyIHRoaW5nIHdoaWNoIGlzIG5vdCBkb25lIGluIHRoaXMNCj4+Pj4gdmVy
+c2lvbiwgdGhlIERNQSBtYXBwaW5nLiBBbHRob3VnaCBpbiBzb21lIHBsYXRmb3JtcywgYSBETUEt
+SGVhcA0KPj4+PiByZXNwb25zZXMgYSBJT01NVSBkZXZpY2UgYXMgd2VsbC4gRm9yIHRoZSBnZW5l
+cm5hbCBwdXJwb3NlLCB3ZSB3b3VsZA0KPj4+PiBiZSBiZXR0ZXIgYXNzdW1pbmcgdGhlIGRldmlj
+ZSBtYXBwaW5nIHNob3VsZCBiZSBkb25lIGZvciBlYWNoIGRldmljZQ0KPj4+PiBpdHNlbGYuIFRo
+ZSBwcm9ibGVtIGhlcmUgd2Ugb25seSBrbm93IGFsbG9jX2RldnMgaW4gdGhvc2UgRE1BYnVmDQo+
+Pj4+IG1ldGhvZHMsIHdoaWNoIGFyZSBETUEtaGVhcHMgaW4gbXkgZGVzaWduLCB0aGUgZGV2aWNl
+IGZyb20gdGhlIHF1ZXVlDQo+Pj4+IGlzIG5vdCBlbm91Z2gsIGEgcGxhbmUgbWF5IHJlcXVlc3Rz
+IGFub3RoZXIgSU9NTVUgZGV2aWNlIG9yIHRhYmxlDQo+Pj4+IGZvciBtYXBwaW5nLg0KPj4+PiAN
+Cj4+Pj4gU2lnbmVkLW9mZi1ieTogUmFuZHkgTGkgPGF5YWthQHNvdWxpay5pbmZvPg0KPj4+PiAt
+LS0NCj4+Pj4gIGRyaXZlcnMvbWVkaWEvY29tbW9uL3ZpZGVvYnVmMi9LY29uZmlnICAgICAgICB8
+ICAgNiArDQo+Pj4+ICBkcml2ZXJzL21lZGlhL2NvbW1vbi92aWRlb2J1ZjIvTWFrZWZpbGUgICAg
+ICAgfCAgIDEgKw0KPj4+PiAgLi4uL2NvbW1vbi92aWRlb2J1ZjIvdmlkZW9idWYyLWRtYS1oZWFw
+LmMgICAgIHwgMzUwICsrKysrKysrKysrKysrKysrKw0KPj4+PiAgaW5jbHVkZS9tZWRpYS92aWRl
+b2J1ZjItZG1hLWhlYXAuaCAgICAgICAgICAgIHwgIDMwICsrDQo+Pj4+ICA0IGZpbGVzIGNoYW5n
+ZWQsIDM4NyBpbnNlcnRpb25zKCspDQo+Pj4+ICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9t
+ZWRpYS9jb21tb24vdmlkZW9idWYyL3ZpZGVvYnVmMi1kbWEtaGVhcC5jDQo+Pj4+ICBjcmVhdGUg
+bW9kZSAxMDA2NDQgaW5jbHVkZS9tZWRpYS92aWRlb2J1ZjItZG1hLWhlYXAuaA0KPj4+PiANCj4+
+PiANCj4+PiBGaXJzdCBvZiBhbGwsIHRoYW5rcyBmb3IgdGhlIHNlcmllcy4NCj4+PiANCj4+PiBQ
+b3NzaWJseSBhIHN0dXBpZCBxdWVzdGlvbiwgYnV0IHdoeSBub3QganVzdCBhbGxvY2F0ZSB0aGUg
+RE1BLWJ1ZnMNCj4+PiBkaXJlY3RseSBmcm9tIHRoZSBETUEtYnVmIGhlYXAgZGV2aWNlIGluIHRo
+ZSB1c2Vyc3BhY2UgYW5kIGp1c3QgaW1wb3J0DQo+Pj4gdGhlIGJ1ZmZlcnMgdG8gdGhlIFY0TDIg
+ZGV2aWNlIHVzaW5nIFY0TDJfTUVNT1JZX0RNQUJVRj8NCj4+IFNvbWV0aW1lcyB0aGUgYWxsb2Nh
+dGlvbiBwb2xpY3kgY291bGQgYmUgdmVyeSBjb21wbGV4LCBsZXQncyBzdXBwb3NlIGENCj4+IG11
+bHRpcGxlIHBsYW5lcyBwaXhlbCBmb3JtYXQgZW5hYmxpbmcgd2l0aCBmcmFtZSBidWZmZXIgY29t
+cHJlc3Npb24uDQo+PiBJdHMgbHVtYSwgY2hyb21hIGRhdGEgY291bGQgYmUgYWxsb2NhdGVkIGZy
+b20gYSBwb29sIHdoaWNoIGlzIGRlbGVnYXRlZA0KPj4gZm9yIGxhcmdlIGJ1ZmZlcnMgd2hpbGUg
+aXRzIG1ldGFkYXRhIHdvdWxkIGNvbWUgZnJvbSBhIHBvb2wgd2hpY2ggbWFueQ0KPj4gdXNlcnMg
+Y291bGQgdGFrZSBzb21lIGZldyBzbGljZXMgZnJvbSBpdChsaWtlcyBzeXN0ZW0gcG9vbCkuDQo+
+PiANCj4+IFRoZW4gd2hlbiB3ZSBoYXZlIGEgbmV3IHVzZXJzIGtub3dpbmcgbm90aGluZyBhYm91
+dCB0aGlzIHBsYXRmb3JtLCBpZiB3ZQ0KPj4ganVzdCBjb25maWd1cmUgdGhlIGFsbG9jX2RldnMg
+aW4gZWFjaCBxdWV1ZXMgd2VsbC4gVGhlIHVzZXIgd29uJ3QgbmVlZA0KPj4gdG8ga25vdyB0aG9z
+ZSBjb21wbGV4IHJ1bGVzLg0KPj4gDQo+PiBUaGUgcmVhbCBzaXR1YXRpb24gY291bGQgYmUgbW9y
+ZSBjb21wbGV4LCBTYW1zdW5nIE1GQydzIGxlZnQgYW5kIHJpZ2h0DQo+PiBiYW5rcyBjb3VsZCBi
+ZSByZWdhcmRlZCBhcyB0d28gcG9vbHMsIG1hbnkgZGV2aWNlcyB3b3VsZCBiZW5lZml0IGZyb20N
+Cj4+IHRoaXMgZWl0aGVyIGZyb20gdGhlIGFsbG9jYXRpb24gdGltZXMgb3IgdGhlIHNlY3VyaXR5
+IGJ1ZmZlcnMgcG9saWN5Lg0KPj4gDQo+PiBJbiBvdXIgZGVzaWduLCB3aGVuIHdlIG5lZWQgdG8g
+ZG8gc29tZSBzZWN1cml0eSBkZWNvZGluZyhEUk0gdmlkZW8pLA0KPj4gY29kZWNzMiB3b3VsZCBh
+bGxvY2F0ZSBidWZmZXJzIGZyb20gdGhlIHBvb2wgZGVsZWdhdGVkIGZvciB0aGF0LiBXaGlsZQ0K
+Pj4gdGhlIG5vbi1EUk0gdmlkZW8sIHVzZXJzIGNvdWxkIG5vdCBjYXJlIGFib3V0IHRoaXMuDQo+
+IA0KPiBJJ20gYSBsaXR0bGUgYml0IHN1cnByaXNlZCBhYm91dCB0aGlzLCBiZWNhdXNlIG9uIEFu
+ZHJvaWQgYWxsIHRoZQ0KPiBncmFwaGljcyBidWZmZXJzIGFyZSBhbGxvY2F0ZWQgZnJvbSB0aGUg
+c3lzdGVtIElBbGxvY2F0b3IgYW5kIGltcG9ydGVkDQo+IHRvIHRoZSBzcGVjaWZpYyBkZXZpY2Vz
+Lg0KPiANCkluIHRoZSBub24tdHVubmVsIG1vZGUsIHllcyBpdCBpcy4gV2hpbGUgdGhlIHR1bm5l
+bCBtb2RlIGlzIGNvbXBsZXRlbHkgdmVuZG9yIGRlZmluZWQuIE5laXRoZXIgSFdDIG5vciBjb2Rl
+YzIgY2FyZXMgYWJvdXQgd2hlcmUgdGhlIGJ1ZmZlcnMgY29taW5nIGZyb20sIHlvdSBjb3VsZCBk
+byB3aGF0IGV2ZXIgeW91IHdhbnQuDQoNCkJlc2lkZXMgdGhlcmUgYXJlIERSTSB2aWRlbyBpbiBH
+TlUgTGludXggcGxhdGZvcm0sIEkgaGVhcmQgdGhlIHdlYmtpdCBoYXMgbWFkZSBodWdlIGVmZm9y
+dCBoZXJlIGFuZCBQbGF5cmVhZHkgaXMgb25lIGNvdWxkIHdvcmsgaW4gbm9uLUFuZHJvaWQgTGlu
+dXguDQo+IFdvdWxkIGl0IG1ha2Ugc2Vuc2UgdG8gaW5zdGVhZCBleHRlbmQgdGhlIFVBUEkgdG8g
+ZXhwb3NlIGVub3VnaA0KPiBpbmZvcm1hdGlvbiBhYm91dCB0aGUgYWxsb2NhdGlvbiByZXF1aXJl
+bWVudHMgdG8gdGhlIHVzZXJzcGFjZSwgc28gaXQNCj4gY2FuIGFsbG9jYXRlIGNvcnJlY3RseT8N
+ClllcywgaXQgY291bGQuIEJ1dCBhcyBJIHNhaWQgaXQgd291bGQgbmVlZCB0aGUgdXNlcnMgdG8g
+ZG8gbW9yZSB3b3Jrcy4NCj4gTXkgcmVhc29uaW5nIGhlcmUgaXMgdGhhdCBpdCdzIG5vdCBhIGRy
+aXZlcidzIGRlY2lzaW9uIHRvIGFsbG9jYXRlDQo+IGZyb20gYSBETUEtYnVmIGhlYXAgKGFuZCB3
+aGljaCBvbmUpIG9yIG5vdC4gSXQncyB0aGUgdXNlcnNwYWNlIHdoaWNoDQo+IGtub3dzIHRoYXQs
+IGJhc2VkIG9uIHRoZSBzcGVjaWZpYyB1c2UgY2FzZSB0aGF0IGl0IHdhbnRzIHRvIGZ1bGZpbGwu
+DQo+IA0KQWx0aG91Z2ggSSB3b3VsZCBsaWtlIHRvIGxldCB0aGUgdXNlcnMgZGVjaWRlIHRoYXQs
+IHVzZXJzIGp1c3QgY2Fu4oCZdCBkbyB0aGF0IHdoaWNoIHdvdWxkIHZpb2xhdGUgdGhlIHNlY3Vy
+aXR5IHJ1bGVzIGluIHNvbWUgcGxhdGZvcm1zLg0KRm9yIGV4YW1wbGUsICB2aWRlbyBjb2RlYyBh
+bmQgZGlzcGxheSBkZXZpY2UgY291bGQgb25seSBhY2Nlc3MgYSByZWdpb24gb2YgbWVtb3J5LCBh
+bnkgb3RoZXIgZGV2aWNlIG9yIHRydXN0ZWQgYXBwcyBjYW7igJl0IGFjY2VzcyBpdC4gVXNlcnMg
+aGF2ZSB0byBhbGxvY2F0ZSB0aGUgYnVmZmVyIGZyb20gdGhlIHBvb2wgdGhlIHZlbmRvciBkZWNp
+ZGVkLg0KDQpTbyB3aHkgbm90IHdlIG9mZmVyIGEgcXVpY2sgd2F5IHRoYXQgdXNlcnMgZG9u4oCZ
+dCBuZWVkIHRvIHRyeSBhbmQgZXJyb3IuDQo+IEFsc28sIEZXSVcsIGRtYV9oZWFwX2lvY3RsX2Fs
+bG9jYXRlKCkgaXMgYSBzdGF0aWMgZnVuY3Rpb24gbm90IGV4cG9zZWQNCj4gdG8gb3RoZXIga2Vy
+bmVsIG1vZHVsZXM6DQo+IGh0dHBzOi8vdXJsZGVmZW5zZS5wcm9vZnBvaW50LmNvbS92Mi91cmw/
+dT1odHRwcy0zQV9fZWxpeGlyLmJvb3RsaW4uY29tX2xpbnV4X3Y1LjE5X3NvdXJjZV9kcml2ZXJz
+X2RtYS0yRGJ1Zl9kbWEtMkRoZWFwLmMtMjNMNTImZD1Ed0lCYVEmYz03ZGZCSjhjWGJXamhjMEJo
+SW11OHdWSW9VRm1Cemoxczg4cjhFR3lNMFVZJnI9UDR4YjJfN2JpcUJ4RDRMR0dQclNWNmotamYz
+QzN4bFI3UFhVLW1MVGVaRSZtPUhGQzNLU19aVTltNjFyV1FnQ085OXhTQXduZlIzblQ4TTZoOWFX
+MkpZRzQtU3lfVW9nNHhrUjhhd1VPdzY1RmUmcz1UUFF3V2VHLURkTGNnSnRhQTFjSXVRaGwzenNI
+TElUa1dGVjFVTkxTRldzJmU9DQo+IA0KSSBtYXkgZm9yZ2V0IHRvIG1lbnRpb24gdGhhdCB5b3Ug
+bmVlZCB0d28gZXh0cmEgcGF0Y2hlcyBmcm9tIExpbmFybyB0aGF0IGV4cG9ydCB0aG9zZSBBUEko
+b3JpZ2luYWwgdmVyc2lvbiBpcyBhY3R1YWxseSBvdXQgb2YgdGltZSkuIEJlc2lkZXMgQW5kcm9p
+ZCBrZXJuZWwgZGlkIGhhdmUgdGhlIHR3byBrQVBJIEkgbmVlZCBoZXJlLg0KQWN0dWFsbHkgSSBu
+ZWVkIG1vcmUgQVBJcyBmcm9tIERNQS1oZWFwIHRvIGFyY2hpdmUgdGhvc2UgdGhpbmdzIGluIFRP
+RE8gbGlzdC4NCj4gQnkgdGhlIHdheSwgdGhlIE1GQyBsZWZ0L3JpZ2h0IHBvcnQgcmVxdWlyZW1l
+bnQgd2FzIGdvbmUgbG9uZyBhZ28sIGl0DQo+IHdhcyBvbmx5IG9uZSBvZiB0aGUgZWFybGllc3Qg
+RXh5bm9zIFNvQ3Mgd2hpY2ggcmVxdWlyZWQgdGhhdC4NCj4gDQpZZXMsIE1GQ3Y1IG9yIHY2IHJp
+Z2h0LiBJIGp1c3Qgd2FudCBtZW50aW9uIHRoYXQgdGhlIHdvcmxkIGhhcyBhbnkgcG9zc2libGUs
+IHZlbmRvciBhbHdheXMgaGFzIGl0cyBvd24gcmVhc29uLg0KPiBCZXN0IHJlZ2FyZHMsDQo+IFRv
+bWFzeg0KPiANCj4+PiANCj4+PiBCZXN0IHJlZ2FyZHMsDQo+Pj4gVG9tYXN6DQo+Pj4gDQo+Pj4+
+IGRpZmYgLS1naXQgYS9kcml2ZXJzL21lZGlhL2NvbW1vbi92aWRlb2J1ZjIvS2NvbmZpZyBiL2Ry
+aXZlcnMvbWVkaWEvY29tbW9uL3ZpZGVvYnVmMi9LY29uZmlnDQo+Pj4+IGluZGV4IGQyMjIzYTEy
+Yzk1Zi4uMDIyMzUwNzdmMDdlIDEwMDY0NA0KPj4+PiAtLS0gYS9kcml2ZXJzL21lZGlhL2NvbW1v
+bi92aWRlb2J1ZjIvS2NvbmZpZw0KPj4+PiArKysgYi9kcml2ZXJzL21lZGlhL2NvbW1vbi92aWRl
+b2J1ZjIvS2NvbmZpZw0KPj4+PiBAQCAtMzAsMyArMzAsOSBAQCBjb25maWcgVklERU9CVUYyX0RN
+QV9TRw0KPj4+PiAgY29uZmlnIFZJREVPQlVGMl9EVkINCj4+Pj4gICAgICAgICB0cmlzdGF0ZQ0K
+Pj4+PiAgICAgICAgIHNlbGVjdCBWSURFT0JVRjJfQ09SRQ0KPj4+PiArDQo+Pj4+ICtjb25maWcg
+VklERU9CVUYyX0RNQV9IRUFQDQo+Pj4+ICsgICAgICAgdHJpc3RhdGUNCj4+Pj4gKyAgICAgICBz
+ZWxlY3QgVklERU9CVUYyX0NPUkUNCj4+Pj4gKyAgICAgICBzZWxlY3QgVklERU9CVUYyX01FTU9Q
+Uw0KPj4+PiArICAgICAgIHNlbGVjdCBETUFCVUZfSEVBUFMNCj4+Pj4gZGlmZiAtLWdpdCBhL2Ry
+aXZlcnMvbWVkaWEvY29tbW9uL3ZpZGVvYnVmMi9NYWtlZmlsZSBiL2RyaXZlcnMvbWVkaWEvY29t
+bW9uL3ZpZGVvYnVmMi9NYWtlZmlsZQ0KPj4+PiBpbmRleCBhNmZlM2YzMDQ2ODUuLjdmZTY1Zjkz
+MTE3ZiAxMDA2NDQNCj4+Pj4gLS0tIGEvZHJpdmVycy9tZWRpYS9jb21tb24vdmlkZW9idWYyL01h
+a2VmaWxlDQo+Pj4+ICsrKyBiL2RyaXZlcnMvbWVkaWEvY29tbW9uL3ZpZGVvYnVmMi9NYWtlZmls
+ZQ0KPj4+PiBAQCAtMTAsNiArMTAsNyBAQCBlbmRpZg0KPj4+PiAgIyAoZS4gZy4gTENfQUxMPUMg
+c29ydCBNYWtlZmlsZSkNCj4+Pj4gIG9iai0kKENPTkZJR19WSURFT0JVRjJfQ09SRSkgKz0gdmlk
+ZW9idWYyLWNvbW1vbi5vDQo+Pj4+ICBvYmotJChDT05GSUdfVklERU9CVUYyX0RNQV9DT05USUcp
+ICs9IHZpZGVvYnVmMi1kbWEtY29udGlnLm8NCj4+Pj4gK29iai0kKENPTkZJR19WSURFT0JVRjJf
+RE1BX0hFQVApICs9IHZpZGVvYnVmMi1kbWEtaGVhcC5vDQo+Pj4+ICBvYmotJChDT05GSUdfVklE
+RU9CVUYyX0RNQV9TRykgKz0gdmlkZW9idWYyLWRtYS1zZy5vDQo+Pj4+ICBvYmotJChDT05GSUdf
+VklERU9CVUYyX0RWQikgKz0gdmlkZW9idWYyLWR2Yi5vDQo+Pj4+ICBvYmotJChDT05GSUdfVklE
+RU9CVUYyX01FTU9QUykgKz0gdmlkZW9idWYyLW1lbW9wcy5vDQo+Pj4+IGRpZmYgLS1naXQgYS9k
+cml2ZXJzL21lZGlhL2NvbW1vbi92aWRlb2J1ZjIvdmlkZW9idWYyLWRtYS1oZWFwLmMgYi9kcml2
+ZXJzL21lZGlhL2NvbW1vbi92aWRlb2J1ZjIvdmlkZW9idWYyLWRtYS1oZWFwLmMNCj4+Pj4gbmV3
+IGZpbGUgbW9kZSAxMDA2NDQNCj4+Pj4gaW5kZXggMDAwMDAwMDAwMDAwLi4zNzdiODJhYjhmNWEN
+Cj4+Pj4gLS0tIC9kZXYvbnVsbA0KPj4+PiArKysgYi9kcml2ZXJzL21lZGlhL2NvbW1vbi92aWRl
+b2J1ZjIvdmlkZW9idWYyLWRtYS1oZWFwLmMNCj4+Pj4gQEAgLTAsMCArMSwzNTAgQEANCj4+Pj4g
+Ky8qDQo+Pj4+ICsgKiBDb3B5cmlnaHQgKEMpIDIwMjIgUmFuZHkgTGkgPGF5YWthQHNvdWxpay5p
+bmZvPg0KPj4+PiArICoNCj4+Pj4gKyAqIFRoaXMgc29mdHdhcmUgaXMgbGljZW5zZWQgdW5kZXIg
+dGhlIHRlcm1zIG9mIHRoZSBHTlUgR2VuZXJhbCBQdWJsaWMNCj4+Pj4gKyAqIExpY2Vuc2UgdmVy
+c2lvbiAyLCBhcyBwdWJsaXNoZWQgYnkgdGhlIEZyZWUgU29mdHdhcmUgRm91bmRhdGlvbiwgYW5k
+DQo+Pj4+ICsgKiBtYXkgYmUgY29waWVkLCBkaXN0cmlidXRlZCwgYW5kIG1vZGlmaWVkIHVuZGVy
+IHRob3NlIHRlcm1zLg0KPj4+PiArICoNCj4+Pj4gKyAqIFRoaXMgcHJvZ3JhbSBpcyBkaXN0cmli
+dXRlZCBpbiB0aGUgaG9wZSB0aGF0IGl0IHdpbGwgYmUgdXNlZnVsLA0KPj4+PiArICogYnV0IFdJ
+VEhPVVQgQU5ZIFdBUlJBTlRZOyB3aXRob3V0IGV2ZW4gdGhlIGltcGxpZWQgd2FycmFudHkgb2YN
+Cj4+Pj4gKyAqIE1FUkNIQU5UQUJJTElUWSBvciBGSVRORVNTIEZPUiBBIFBBUlRJQ1VMQVIgUFVS
+UE9TRS4gIFNlZSB0aGUNCj4+Pj4gKyAqIEdOVSBHZW5lcmFsIFB1YmxpYyBMaWNlbnNlIGZvciBt
+b3JlIGRldGFpbHMuDQo+Pj4+ICsgKg0KPj4+PiArICovDQo+Pj4+ICsNCj4+Pj4gKyNpbmNsdWRl
+IDxsaW51eC9kbWEtYnVmLmg+DQo+Pj4+ICsjaW5jbHVkZSA8bGludXgvZG1hLWhlYXAuaD4NCj4+
+Pj4gKyNpbmNsdWRlIDxsaW51eC9yZWZjb3VudC5oPg0KPj4+PiArI2luY2x1ZGUgPGxpbnV4L3Nj
+YXR0ZXJsaXN0Lmg+DQo+Pj4+ICsjaW5jbHVkZSA8bGludXgvc2NoZWQuaD4NCj4+Pj4gKyNpbmNs
+dWRlIDxsaW51eC9zbGFiLmg+DQo+Pj4+ICsjaW5jbHVkZSA8bGludXgvZG1hLW1hcHBpbmcuaD4N
+Cj4+Pj4gKw0KPj4+PiArI2luY2x1ZGUgPG1lZGlhL3ZpZGVvYnVmMi12NGwyLmg+DQo+Pj4+ICsj
+aW5jbHVkZSA8bWVkaWEvdmlkZW9idWYyLW1lbW9wcy5oPg0KPj4+PiArI2luY2x1ZGUgPG1lZGlh
+L3ZpZGVvYnVmMi1kbWEtaGVhcC5oPg0KPj4+PiArDQo+Pj4+ICtzdHJ1Y3QgdmIyX2RtYWhlYXBf
+YnVmIHsNCj4+Pj4gKyAgICAgICBzdHJ1Y3QgZGV2aWNlICpkZXY7DQo+Pj4+ICsgICAgICAgdm9p
+ZCAqdmFkZHI7DQo+Pj4+ICsgICAgICAgdW5zaWduZWQgbG9uZyBzaXplOw0KPj4+PiArICAgICAg
+IHN0cnVjdCBkbWFfYnVmICpkbWFidWY7DQo+Pj4+ICsgICAgICAgZG1hX2FkZHJfdCBkbWFfYWRk
+cjsNCj4+Pj4gKyAgICAgICB1bnNpZ25lZCBsb25nIGF0dHJzOw0KPj4+PiArICAgICAgIGVudW0g
+ZG1hX2RhdGFfZGlyZWN0aW9uIGRtYV9kaXI7DQo+Pj4+ICsgICAgICAgc3RydWN0IHNnX3RhYmxl
+ICpkbWFfc2d0Ow0KPj4+PiArDQo+Pj4+ICsgICAgICAgLyogTU1BUCByZWxhdGVkICovDQo+Pj4+
+ICsgICAgICAgc3RydWN0IHZiMl92bWFyZWFfaGFuZGxlciBoYW5kbGVyOw0KPj4+PiArICAgICAg
+IHJlZmNvdW50X3QgcmVmY291bnQ7DQo+Pj4+ICsNCj4+Pj4gKyAgICAgICAvKiBETUFCVUYgcmVs
+YXRlZCAqLw0KPj4+PiArICAgICAgIHN0cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKmRiX2F0dGFj
+aDsNCj4+Pj4gK307DQo+Pj4+ICsNCj4+Pj4gKy8qKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKiovDQo+Pj4+ICsvKiAgICAgICAgIGNhbGxiYWNrcyBmb3IgYWxsIGJ1
+ZmZlcnMgICAgICAgICAqLw0KPj4+PiArLyoqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKi8NCj4+Pj4gKw0KPj4+PiArdm9pZCAqdmIyX2RtYWhlYXBfY29va2llKHN0
+cnVjdCB2YjJfYnVmZmVyICp2Yiwgdm9pZCAqYnVmX3ByaXYpDQo+Pj4+ICt7DQo+Pj4+ICsgICAg
+ICAgc3RydWN0IHZiMl9kbWFoZWFwX2J1ZiAqYnVmID0gYnVmX3ByaXY7DQo+Pj4+ICsNCj4+Pj4g
+KyAgICAgICByZXR1cm4gJmJ1Zi0+ZG1hX2FkZHI7DQo+Pj4+ICt9DQo+Pj4+ICsNCj4+Pj4gK3N0
+YXRpYyB2b2lkICp2YjJfZG1haGVhcF92YWRkcihzdHJ1Y3QgdmIyX2J1ZmZlciAqdmIsIHZvaWQg
+KmJ1Zl9wcml2KQ0KPj4+PiArew0KPj4+PiArICAgICAgIHN0cnVjdCB2YjJfZG1haGVhcF9idWYg
+KmJ1ZiA9IGJ1Zl9wcml2Ow0KPj4+PiArICAgICAgIHN0cnVjdCBpb3N5c19tYXAgbWFwOw0KPj4+
+PiArDQo+Pj4+ICsgICAgICAgaWYgKGJ1Zi0+dmFkZHIpDQo+Pj4+ICsgICAgICAgICAgIHJldHVy
+biBidWYtPnZhZGRyOw0KPj4+PiArDQo+Pj4+ICsgICAgICAgaWYgKGJ1Zi0+ZGJfYXR0YWNoKSB7
+DQo+Pj4+ICsgICAgICAgICAgICAgICBpZiAoIWRtYV9idWZfdm1hcChidWYtPmRiX2F0dGFjaC0+
+ZG1hYnVmLCAmbWFwKSkNCj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgYnVmLT52YWRkciA9
+IG1hcC52YWRkcjsNCj4+Pj4gKyAgICAgICB9DQo+Pj4+ICsNCj4+Pj4gKyAgICAgICByZXR1cm4g
+YnVmLT52YWRkcjsNCj4+Pj4gK30NCj4+Pj4gKw0KPj4+PiArc3RhdGljIHVuc2lnbmVkIGludCB2
+YjJfZG1haGVhcF9udW1fdXNlcnModm9pZCAqYnVmX3ByaXYpDQo+Pj4+ICt7DQo+Pj4+ICsgICAg
+ICAgc3RydWN0IHZiMl9kbWFoZWFwX2J1ZiAqYnVmID0gYnVmX3ByaXY7DQo+Pj4+ICsNCj4+Pj4g
+KyAgICAgICByZXR1cm4gcmVmY291bnRfcmVhZCgmYnVmLT5yZWZjb3VudCk7DQo+Pj4+ICt9DQo+
+Pj4+ICsNCj4+Pj4gK3N0YXRpYyB2b2lkIHZiMl9kbWFoZWFwX3ByZXBhcmUodm9pZCAqYnVmX3By
+aXYpDQo+Pj4+ICt7DQo+Pj4+ICsgICAgICAgc3RydWN0IHZiMl9kbWFoZWFwX2J1ZiAqYnVmID0g
+YnVmX3ByaXY7DQo+Pj4+ICsNCj4+Pj4gKyAgICAgICAvKiBUT0RPOiBETUFCVUYgZXhwb3J0ZXIg
+d2lsbCBmbHVzaCB0aGUgY2FjaGUgZm9yIHVzICovDQo+Pj4+ICsgICAgICAgaWYgKGJ1Zi0+ZGJf
+YXR0YWNoKQ0KPj4+PiArICAgICAgICAgICAgICAgcmV0dXJuOw0KPj4+PiArDQo+Pj4+ICsgICAg
+ICAgZG1hX2J1Zl9lbmRfY3B1X2FjY2VzcyhidWYtPmRtYWJ1ZiwgYnVmLT5kbWFfZGlyKTsNCj4+
+Pj4gK30NCj4+Pj4gKw0KPj4+PiArc3RhdGljIHZvaWQgdmIyX2RtYWhlYXBfZmluaXNoKHZvaWQg
+KmJ1Zl9wcml2KQ0KPj4+PiArew0KPj4+PiArICAgICAgIHN0cnVjdCB2YjJfZG1haGVhcF9idWYg
+KmJ1ZiA9IGJ1Zl9wcml2Ow0KPj4+PiArDQo+Pj4+ICsgICAgICAgLyogVE9ETzogRE1BQlVGIGV4
+cG9ydGVyIHdpbGwgZmx1c2ggdGhlIGNhY2hlIGZvciB1cyAqLw0KPj4+PiArICAgICAgIGlmIChi
+dWYtPmRiX2F0dGFjaCkNCj4+Pj4gKyAgICAgICAgICAgICAgIHJldHVybjsNCj4+Pj4gKw0KPj4+
+PiArICAgICAgIGRtYV9idWZfYmVnaW5fY3B1X2FjY2VzcyhidWYtPmRtYWJ1ZiwgYnVmLT5kbWFf
+ZGlyKTsNCj4+Pj4gK30NCj4+Pj4gKw0KPj4+PiArLyoqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKi8NCj4+Pj4gKy8qICAgICAgICBjYWxsYmFja3MgZm9yIE1NQVAg
+YnVmZmVycyAgICAgICAgICovDQo+Pj4+ICsvKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqLw0KPj4+PiArDQo+Pj4+ICt2b2lkIHZiMl9kbWFoZWFwX3B1dCh2b2lk
+ICpidWZfcHJpdikNCj4+Pj4gK3sNCj4+Pj4gKyAgICAgICBzdHJ1Y3QgdmIyX2RtYWhlYXBfYnVm
+ICpidWYgPSBidWZfcHJpdjsNCj4+Pj4gKw0KPj4+PiArICAgICAgIGlmICghcmVmY291bnRfZGVj
+X2FuZF90ZXN0KCZidWYtPnJlZmNvdW50KSkNCj4+Pj4gKyAgICAgICAgICAgICAgIHJldHVybjsN
+Cj4+Pj4gKw0KPj4+PiArICAgICAgIGRtYV9idWZfcHV0KGJ1Zi0+ZG1hYnVmKTsNCj4+Pj4gKw0K
+Pj4+PiArICAgICAgIHB1dF9kZXZpY2UoYnVmLT5kZXYpOw0KPj4+PiArICAgICAgIGtmcmVlKGJ1
+Zik7DQo+Pj4+ICt9DQo+Pj4+ICsNCj4+Pj4gK3N0YXRpYyB2b2lkICp2YjJfZG1haGVhcF9hbGxv
+YyhzdHJ1Y3QgdmIyX2J1ZmZlciAqdmIsDQo+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBzdHJ1Y3QgZGV2aWNlICpkZXYsDQo+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICB1bnNpZ25lZCBsb25nIHNpemUpDQo+Pj4+ICt7DQo+Pj4+ICsgICAgICAgc3RydWN0IHZi
+Ml9xdWV1ZSAqcSA9IHZiLT52YjJfcXVldWU7DQo+Pj4+ICsgICAgICAgc3RydWN0IGRtYV9oZWFw
+ICpoZWFwOw0KPj4+PiArICAgICAgIHN0cnVjdCB2YjJfZG1haGVhcF9idWYgKmJ1ZjsNCj4+Pj4g
+KyAgICAgICBjb25zdCBjaGFyICpoZWFwX25hbWU7DQo+Pj4+ICsgICAgICAgaW50IHJldDsNCj4+
+Pj4gKw0KPj4+PiArICAgICAgIGlmIChXQVJOX09OKCFkZXYpKQ0KPj4+PiArICAgICAgICAgICAg
+ICAgcmV0dXJuIEVSUl9QVFIoLUVJTlZBTCk7DQo+Pj4+ICsNCj4+Pj4gKyAgICAgICBoZWFwX25h
+bWUgPSBkZXZfbmFtZShkZXYpOw0KPj4+PiArICAgICAgIGlmICghaGVhcF9uYW1lKQ0KPj4+PiAr
+ICAgICAgICAgICAgICAgcmV0dXJuIEVSUl9QVFIoLUVJTlZBTCk7DQo+Pj4+ICsNCj4+Pj4gKyAg
+ICAgICBoZWFwID0gZG1hX2hlYXBfZmluZChoZWFwX25hbWUpOw0KPj4+PiArICAgICAgIGlmICgh
+aGVhcCkgew0KPj4+PiArICAgICAgICAgICAgICAgZGV2X2VycihkZXYsICJpcyBub3QgYSBETUEt
+aGVhcCBkZXZpY2VcbiIpOw0KPj4+PiArICAgICAgICAgICAgICAgcmV0dXJuIEVSUl9QVFIoLUVJ
+TlZBTCk7DQo+Pj4+ICsgICAgICAgfQ0KPj4+PiArDQo+Pj4+ICsgICAgICAgYnVmID0ga3phbGxv
+YyhzaXplb2YgKmJ1ZiwgR0ZQX0tFUk5FTCk7DQo+Pj4+ICsgICAgICAgaWYgKCFidWYpDQo+Pj4+
+ICsgICAgICAgICAgICAgICByZXR1cm4gRVJSX1BUUigtRU5PTUVNKTsNCj4+Pj4gKw0KPj4+PiAr
+ICAgICAgIC8qIFByZXZlbnQgdGhlIGRldmljZSBmcm9tIGJlaW5nIHJlbGVhc2VkIHdoaWxlIHRo
+ZSBidWZmZXIgaXMgdXNlZCAqLw0KPj4+PiArICAgICAgIGJ1Zi0+ZGV2ID0gZ2V0X2RldmljZShk
+ZXYpOw0KPj4+PiArICAgICAgIGJ1Zi0+YXR0cnMgPSB2Yi0+dmIyX3F1ZXVlLT5kbWFfYXR0cnM7
+DQo+Pj4+ICsgICAgICAgYnVmLT5kbWFfZGlyID0gdmItPnZiMl9xdWV1ZS0+ZG1hX2RpcjsNCj4+
+Pj4gKw0KPj4+PiArICAgICAgIC8qIFRPRE86IGhlYXAgZmxhZ3MgKi8NCj4+Pj4gKyAgICAgICBy
+ZXQgPSBkbWFfaGVhcF9idWZmZXJfYWxsb2MoaGVhcCwgc2l6ZSwgMCwgMCk7DQo+Pj4+ICsgICAg
+ICAgaWYgKHJldCA8IDApIHsNCj4+Pj4gKyAgICAgICAgICAgICAgIGRldl9lcnIoZGV2LCAiaXMg
+bm90IGEgRE1BLWhlYXAgZGV2aWNlXG4iKTsNCj4+Pj4gKyAgICAgICAgICAgICAgIHB1dF9kZXZp
+Y2UoYnVmLT5kZXYpOw0KPj4+PiArICAgICAgICAgICAgICAga2ZyZWUoYnVmKTsNCj4+Pj4gKyAg
+ICAgICAgICAgICAgIHJldHVybiBFUlJfUFRSKHJldCk7DQo+Pj4+ICsgICAgICAgfQ0KPj4+PiAr
+ICAgICAgIGJ1Zi0+ZG1hYnVmID0gZG1hX2J1Zl9nZXQocmV0KTsNCj4+Pj4gKw0KPj4+PiArICAg
+ICAgIC8qIEZJWE1FICovDQo+Pj4+ICsgICAgICAgYnVmLT5kbWFfYWRkciA9IDA7DQo+Pj4+ICsN
+Cj4+Pj4gKyAgICAgICBpZiAoKHEtPmRtYV9hdHRycyAmIERNQV9BVFRSX05PX0tFUk5FTF9NQVBQ
+SU5HKSA9PSAwKQ0KPj4+PiArICAgICAgICAgICAgICAgYnVmLT52YWRkciA9IGJ1Zi0+ZG1hYnVm
+Ow0KPj4+PiArDQo+Pj4+ICsgICAgICAgYnVmLT5oYW5kbGVyLnJlZmNvdW50ID0gJmJ1Zi0+cmVm
+Y291bnQ7DQo+Pj4+ICsgICAgICAgYnVmLT5oYW5kbGVyLnB1dCA9IHZiMl9kbWFoZWFwX3B1dDsN
+Cj4+Pj4gKyAgICAgICBidWYtPmhhbmRsZXIuYXJnID0gYnVmOw0KPj4+PiArDQo+Pj4+ICsgICAg
+ICAgcmVmY291bnRfc2V0KCZidWYtPnJlZmNvdW50LCAxKTsNCj4+Pj4gKw0KPj4+PiArICAgICAg
+IHJldHVybiBidWY7DQo+Pj4+ICt9DQo+Pj4+ICsNCj4+Pj4gK3N0YXRpYyBpbnQgdmIyX2RtYWhl
+YXBfbW1hcCh2b2lkICpidWZfcHJpdiwgc3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEpDQo+Pj4+
+ICt7DQo+Pj4+ICsgICAgICAgc3RydWN0IHZiMl9kbWFoZWFwX2J1ZiAqYnVmID0gYnVmX3ByaXY7
+DQo+Pj4+ICsgICAgICAgaW50IHJldDsNCj4+Pj4gKw0KPj4+PiArICAgICAgIGlmICghYnVmKSB7
+DQo+Pj4+ICsgICAgICAgICAgICAgICBwcmludGsoS0VSTl9FUlIgIk5vIGJ1ZmZlciB0byBtYXBc
+biIpOw0KPj4+PiArICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQo+Pj4+ICsgICAgICAg
+fQ0KPj4+PiArDQo+Pj4+ICsgICAgICAgdm1hLT52bV9mbGFncyAmPSB+Vk1fUEZOTUFQOw0KPj4+
+PiArDQo+Pj4+ICsgICAgICAgcmV0ID0gZG1hX2J1Zl9tbWFwKGJ1Zi0+ZG1hYnVmLCB2bWEsIDAp
+Ow0KPj4+PiArICAgICAgIGlmIChyZXQpIHsNCj4+Pj4gKyAgICAgICAgICAgICAgIHByX2Vycigi
+UmVtYXBwaW5nIG1lbW9yeSBmYWlsZWQsIGVycm9yOiAlZFxuIiwgcmV0KTsNCj4+Pj4gKyAgICAg
+ICAgICAgICAgIHJldHVybiByZXQ7DQo+Pj4+ICsgICAgICAgfQ0KPj4+PiArICAgICAgIHZtYS0+
+dm1fZmxhZ3MgICAgICAgICAgIHw9IFZNX0RPTlRFWFBBTkQgfCBWTV9ET05URFVNUDsNCj4+Pj4g
+KyAgICAgICB2bWEtPnZtX3ByaXZhdGVfZGF0YSAgICA9ICZidWYtPmhhbmRsZXI7DQo+Pj4+ICsg
+ICAgICAgdm1hLT52bV9vcHMgICAgICAgICAgICAgPSAmdmIyX2NvbW1vbl92bV9vcHM7DQo+Pj4+
+ICsNCj4+Pj4gKyAgICAgICB2bWEtPnZtX29wcy0+b3Blbih2bWEpOw0KPj4+PiArDQo+Pj4+ICsg
+ICAgICAgcHJfZGVidWcoIiVzOiBtYXBwZWQgbWVtaWQgMHglMDhseCBhdCAweCUwOGx4LCBzaXpl
+ICVsZFxuIiwNCj4+Pj4gKyAgICAgICAgICAgICAgICBfX2Z1bmNfXywgKHVuc2lnbmVkIGxvbmcp
+YnVmLT5kbWFfYWRkciwgdm1hLT52bV9zdGFydCwNCj4+Pj4gKyAgICAgICAgICAgICAgICBidWYt
+PnNpemUpOw0KPj4+PiArDQo+Pj4+ICsgICAgICAgcmV0dXJuIDA7DQo+Pj4+ICt9DQo+Pj4+ICsN
+Cj4+Pj4gKy8qKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKiovDQo+
+Pj4+ICsvKiAgICAgICAgIERNQUJVRiBvcHMgZm9yIGV4cG9ydGVycyAgICAgICAgICAqLw0KPj4+
+PiArLyoqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKi8NCj4+Pj4g
+Kw0KPj4+PiArc3RhdGljIHN0cnVjdCBkbWFfYnVmICp2YjJfZG1haGVhcF9nZXRfZG1hYnVmKHN0
+cnVjdCB2YjJfYnVmZmVyICp2YiwNCj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHZvaWQgKmJ1Zl9wcml2LA0KPj4+PiArICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgbG9uZyBmbGFncykNCj4+Pj4gK3sN
+Cj4+Pj4gKyAgICAgICBzdHJ1Y3QgdmIyX2RtYWhlYXBfYnVmICpidWYgPSBidWZfcHJpdjsNCj4+
+Pj4gKyAgICAgICBzdHJ1Y3QgZG1hX2J1ZiAqZGJ1ZjsNCj4+Pj4gKw0KPj4+PiArICAgICAgIGRi
+dWYgPSBidWYtPmRtYWJ1ZjsNCj4+Pj4gKw0KPj4+PiArICAgICAgIHJldHVybiBkYnVmOw0KPj4+
+PiArfQ0KPj4+PiArDQo+Pj4+ICsvKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqLw0KPj4+PiArLyogICAgICAgY2FsbGJhY2tzIGZvciBETUFCVUYgYnVmZmVycyAg
+ICAgICAgKi8NCj4+Pj4gKy8qKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKiovDQo+Pj4+ICsNCj4+Pj4gK3N0YXRpYyBpbnQgdmIyX2RtYWhlYXBfbWFwX2RtYWJ1Zih2
+b2lkICptZW1fcHJpdikNCj4+Pj4gK3sNCj4+Pj4gKyAgICAgICBzdHJ1Y3QgdmIyX2RtYWhlYXBf
+YnVmICpidWYgPSBtZW1fcHJpdjsNCj4+Pj4gKyAgICAgICBzdHJ1Y3Qgc2dfdGFibGUgKnNndDsN
+Cj4+Pj4gKw0KPj4+PiArICAgICAgIGlmIChXQVJOX09OKCFidWYtPmRiX2F0dGFjaCkpIHsNCj4+
+Pj4gKyAgICAgICAgICAgICAgIHByX2VycigidHJ5aW5nIHRvIHBpbiBhIG5vbiBhdHRhY2hlZCBi
+dWZmZXJcbiIpOw0KPj4+PiArICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQo+Pj4+ICsg
+ICAgICAgfQ0KPj4+PiArDQo+Pj4+ICsgICAgICAgaWYgKFdBUk5fT04oYnVmLT5kbWFfc2d0KSkg
+ew0KPj4+PiArICAgICAgICAgICAgICAgcHJfZXJyKCJkbWFidWYgYnVmZmVyIGlzIGFscmVhZHkg
+cGlubmVkXG4iKTsNCj4+Pj4gKyAgICAgICAgICAgICAgIHJldHVybiAwOw0KPj4+PiArICAgICAg
+IH0NCj4+Pj4gKw0KPj4+PiArICAgICAgIC8qIGdldCB0aGUgYXNzb2NpYXRlZCBzY2F0dGVybGlz
+dCBmb3IgdGhpcyBidWZmZXIgKi8NCj4+Pj4gKyAgICAgICBzZ3QgPSBkbWFfYnVmX21hcF9hdHRh
+Y2htZW50KGJ1Zi0+ZGJfYXR0YWNoLCBidWYtPmRtYV9kaXIpOw0KPj4+PiArICAgICAgIGlmIChJ
+U19FUlIoc2d0KSkgew0KPj4+PiArICAgICAgICAgICAgICAgcHJfZXJyKCJFcnJvciBnZXR0aW5n
+IGRtYWJ1ZiBzY2F0dGVybGlzdFxuIik7DQo+Pj4+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVJ
+TlZBTDsNCj4+Pj4gKyAgICAgICB9DQo+Pj4+ICsNCj4+Pj4gKyAgICAgICBidWYtPmRtYV9hZGRy
+ID0gc2dfZG1hX2FkZHJlc3Moc2d0LT5zZ2wpOw0KPj4+PiArICAgICAgIGJ1Zi0+ZG1hX3NndCA9
+IHNndDsNCj4+Pj4gKyAgICAgICBidWYtPnZhZGRyID0gTlVMTDsNCj4+Pj4gKw0KPj4+PiArICAg
+ICAgIHJldHVybiAwOw0KPj4+PiArfQ0KPj4+PiArDQo+Pj4+ICtzdGF0aWMgdm9pZCB2YjJfZG1h
+aGVhcF91bm1hcF9kbWFidWYodm9pZCAqbWVtX3ByaXYpDQo+Pj4+ICt7DQo+Pj4+ICsgICAgICAg
+c3RydWN0IHZiMl9kbWFoZWFwX2J1ZiAqYnVmID0gbWVtX3ByaXY7DQo+Pj4+ICsgICAgICAgc3Ry
+dWN0IHNnX3RhYmxlICpzZ3QgPSBidWYtPmRtYV9zZ3Q7DQo+Pj4+ICsgICAgICAgc3RydWN0IGlv
+c3lzX21hcCBtYXAgPSBJT1NZU19NQVBfSU5JVF9WQUREUihidWYtPnZhZGRyKTsNCj4+Pj4gKw0K
+Pj4+PiArICAgICAgIGlmIChXQVJOX09OKCFidWYtPmRiX2F0dGFjaCkpIHsNCj4+Pj4gKyAgICAg
+ICAgICAgICAgIHByX2VycigidHJ5aW5nIHRvIHVucGluIGEgbm90IGF0dGFjaGVkIGJ1ZmZlclxu
+Iik7DQo+Pj4+ICsgICAgICAgICAgICAgICByZXR1cm47DQo+Pj4+ICsgICAgICAgfQ0KPj4+PiAr
+DQo+Pj4+ICsgICAgICAgaWYgKFdBUk5fT04oIXNndCkpIHsNCj4+Pj4gKyAgICAgICAgICAgICAg
+IHByX2VycigiZG1hYnVmIGJ1ZmZlciBpcyBhbHJlYWR5IHVucGlubmVkXG4iKTsNCj4+Pj4gKyAg
+ICAgICAgICAgICAgIHJldHVybjsNCj4+Pj4gKyAgICAgICB9DQo+Pj4+ICsNCj4+Pj4gKyAgICAg
+ICBpZiAoYnVmLT52YWRkcikgew0KPj4+PiArICAgICAgICAgICAgICAgZG1hX2J1Zl92dW5tYXAo
+YnVmLT5kYl9hdHRhY2gtPmRtYWJ1ZiwgJm1hcCk7DQo+Pj4+ICsgICAgICAgICAgICAgICBidWYt
+PnZhZGRyID0gTlVMTDsNCj4+Pj4gKyAgICAgICB9DQo+Pj4+ICsgICAgICAgZG1hX2J1Zl91bm1h
+cF9hdHRhY2htZW50KGJ1Zi0+ZGJfYXR0YWNoLCBzZ3QsIGJ1Zi0+ZG1hX2Rpcik7DQo+Pj4+ICsN
+Cj4+Pj4gKyAgICAgICBidWYtPmRtYV9hZGRyID0gMDsNCj4+Pj4gKyAgICAgICBidWYtPmRtYV9z
+Z3QgPSBOVUxMOw0KPj4+PiArfQ0KPj4+PiArDQo+Pj4+ICtzdGF0aWMgdm9pZCB2YjJfZG1haGVh
+cF9kZXRhY2hfZG1hYnVmKHZvaWQgKm1lbV9wcml2KQ0KPj4+PiArew0KPj4+PiArICAgICAgIHN0
+cnVjdCB2YjJfZG1haGVhcF9idWYgKmJ1ZiA9IG1lbV9wcml2Ow0KPj4+PiArDQo+Pj4+ICsgICAg
+ICAgLyogaWYgdmIyIHdvcmtzIGNvcnJlY3RseSB5b3Ugc2hvdWxkIG5ldmVyIGRldGFjaCBtYXBw
+ZWQgYnVmZmVyICovDQo+Pj4+ICsgICAgICAgaWYgKFdBUk5fT04oYnVmLT5kbWFfYWRkcikpDQo+
+Pj4+ICsgICAgICAgICAgICAgICB2YjJfZG1haGVhcF91bm1hcF9kbWFidWYoYnVmKTsNCj4+Pj4g
+Kw0KPj4+PiArICAgICAgIC8qIGRldGFjaCB0aGlzIGF0dGFjaG1lbnQgKi8NCj4+Pj4gKyAgICAg
+ICBkbWFfYnVmX2RldGFjaChidWYtPmRiX2F0dGFjaC0+ZG1hYnVmLCBidWYtPmRiX2F0dGFjaCk7
+DQo+Pj4+ICsgICAgICAga2ZyZWUoYnVmKTsNCj4+Pj4gK30NCj4+Pj4gKw0KPj4+PiArc3RhdGlj
+IHZvaWQgKnZiMl9kbWFoZWFwX2F0dGFjaF9kbWFidWYoc3RydWN0IHZiMl9idWZmZXIgKnZiLCBz
+dHJ1Y3QgZGV2aWNlICpkZXYsDQo+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHN0cnVjdCBkbWFfYnVmICpkYnVmLCB1bnNpZ25lZCBsb25nIHNpemUpDQo+Pj4+ICt7
+DQo+Pj4+ICsgICAgICAgc3RydWN0IHZiMl9kbWFoZWFwX2J1ZiAqYnVmOw0KPj4+PiArICAgICAg
+IHN0cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKmRiYTsNCj4+Pj4gKw0KPj4+PiArICAgICAgIGlm
+IChkYnVmLT5zaXplIDwgc2l6ZSkNCj4+Pj4gKyAgICAgICAgICAgICAgIHJldHVybiBFUlJfUFRS
+KC1FRkFVTFQpOw0KPj4+PiArDQo+Pj4+ICsgICAgICAgaWYgKFdBUk5fT04oIWRldikpDQo+Pj4+
+ICsgICAgICAgICAgICAgICByZXR1cm4gRVJSX1BUUigtRUlOVkFMKTsNCj4+Pj4gKyAgICAgICAv
+Kg0KPj4+PiArICAgICAgICAqIFRPRE86IEEgYmV0dGVyIHdheSB0byBjaGVjayB3aGV0aGVyIHRo
+ZSBidWZmZXIgaXMgY29taW5nDQo+Pj4+ICsgICAgICAgICogZnJvbSB0aGlzIGhlYXAgb3IgdGhp
+cyBoZWFwIGNvdWxkIGFjY2VwdCB0aGlzIGJ1ZmZlcg0KPj4+PiArICAgICAgICAqLw0KPj4+PiAr
+ICAgICAgIGlmIChzdHJjbXAoZGJ1Zi0+ZXhwX25hbWUsIGRldl9uYW1lKGRldikpKQ0KPj4+PiAr
+ICAgICAgICAgICAgICAgcmV0dXJuIEVSUl9QVFIoLUVJTlZBTCk7DQo+Pj4+ICsNCj4+Pj4gKyAg
+ICAgICBidWYgPSBremFsbG9jKHNpemVvZigqYnVmKSwgR0ZQX0tFUk5FTCk7DQo+Pj4+ICsgICAg
+ICAgaWYgKCFidWYpDQo+Pj4+ICsgICAgICAgICAgICAgICByZXR1cm4gRVJSX1BUUigtRU5PTUVN
+KTsNCj4+Pj4gKw0KPj4+PiArICAgICAgIGJ1Zi0+ZGV2ID0gZGV2Ow0KPj4+PiArICAgICAgIC8q
+IGNyZWF0ZSBhdHRhY2htZW50IGZvciB0aGUgZG1hYnVmIHdpdGggdGhlIHVzZXIgZGV2aWNlICov
+DQo+Pj4+ICsgICAgICAgZGJhID0gZG1hX2J1Zl9hdHRhY2goZGJ1ZiwgYnVmLT5kZXYpOw0KPj4+
+PiArICAgICAgIGlmIChJU19FUlIoZGJhKSkgew0KPj4+PiArICAgICAgICAgICAgICAgcHJfZXJy
+KCJmYWlsZWQgdG8gYXR0YWNoIGRtYWJ1ZlxuIik7DQo+Pj4+ICsgICAgICAgICAgICAgICBrZnJl
+ZShidWYpOw0KPj4+PiArICAgICAgICAgICAgICAgcmV0dXJuIGRiYTsNCj4+Pj4gKyAgICAgICB9
+DQo+Pj4+ICsNCj4+Pj4gKyAgICAgICBidWYtPmRtYV9kaXIgPSB2Yi0+dmIyX3F1ZXVlLT5kbWFf
+ZGlyOw0KPj4+PiArICAgICAgIGJ1Zi0+c2l6ZSA9IHNpemU7DQo+Pj4+ICsgICAgICAgYnVmLT5k
+Yl9hdHRhY2ggPSBkYmE7DQo+Pj4+ICsNCj4+Pj4gKyAgICAgICByZXR1cm4gYnVmOw0KPj4+PiAr
+fQ0KPj4+PiArDQo+Pj4+ICtjb25zdCBzdHJ1Y3QgdmIyX21lbV9vcHMgdmIyX2RtYWhlYXBfbWVt
+b3BzID0gew0KPj4+PiArICAgICAgIC5hbGxvYyA9IHZiMl9kbWFoZWFwX2FsbG9jLA0KPj4+PiAr
+ICAgICAgIC5wdXQgPSB2YjJfZG1haGVhcF9wdXQsDQo+Pj4+ICsgICAgICAgLmdldF9kbWFidWYg
+PSB2YjJfZG1haGVhcF9nZXRfZG1hYnVmLA0KPj4+PiArICAgICAgIC5jb29raWUgPSB2YjJfZG1h
+aGVhcF9jb29raWUsDQo+Pj4+ICsgICAgICAgLnZhZGRyID0gdmIyX2RtYWhlYXBfdmFkZHIsDQo+
+Pj4+ICsgICAgICAgLnByZXBhcmUgPSB2YjJfZG1haGVhcF9wcmVwYXJlLA0KPj4+PiArICAgICAg
+IC5maW5pc2ggPSB2YjJfZG1haGVhcF9maW5pc2gsDQo+Pj4+ICsgICAgICAgLm1hcF9kbWFidWYg
+PSB2YjJfZG1haGVhcF9tYXBfZG1hYnVmLA0KPj4+PiArICAgICAgIC51bm1hcF9kbWFidWYgPSB2
+YjJfZG1haGVhcF91bm1hcF9kbWFidWYsDQo+Pj4+ICsgICAgICAgLmF0dGFjaF9kbWFidWYgPSB2
+YjJfZG1haGVhcF9hdHRhY2hfZG1hYnVmLA0KPj4+PiArICAgICAgIC5kZXRhY2hfZG1hYnVmID0g
+dmIyX2RtYWhlYXBfZGV0YWNoX2RtYWJ1ZiwNCj4+Pj4gKyAgICAgICAubnVtX3VzZXJzID0gdmIy
+X2RtYWhlYXBfbnVtX3VzZXJzLA0KPj4+PiArICAgICAgIC5tbWFwID0gdmIyX2RtYWhlYXBfbW1h
+cCwNCj4+Pj4gK307DQo+Pj4+ICsNCj4+Pj4gK01PRFVMRV9ERVNDUklQVElPTigiRE1BLUhlYXAg
+bWVtb3J5IGhhbmRsaW5nIHJvdXRpbmVzIGZvciB2aWRlb2J1ZjIiKTsNCj4+Pj4gK01PRFVMRV9B
+VVRIT1IoIlJhbmR5IExpIDxheWFrYUBzb3VsaWsuaW5mbz4iKTsNCj4+Pj4gK01PRFVMRV9MSUNF
+TlNFKCJHUEwiKTsNCj4+Pj4gK01PRFVMRV9JTVBPUlRfTlMoRE1BX0JVRik7DQo+Pj4+IGRpZmYg
+LS1naXQgYS9pbmNsdWRlL21lZGlhL3ZpZGVvYnVmMi1kbWEtaGVhcC5oIGIvaW5jbHVkZS9tZWRp
+YS92aWRlb2J1ZjItZG1hLWhlYXAuaA0KPj4+PiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPj4+PiBp
+bmRleCAwMDAwMDAwMDAwMDAuLmZhMDU3ZjY3ZDZlOQ0KPj4+PiAtLS0gL2Rldi9udWxsDQo+Pj4+
+ICsrKyBiL2luY2x1ZGUvbWVkaWEvdmlkZW9idWYyLWRtYS1oZWFwLmgNCj4+Pj4gQEAgLTAsMCAr
+MSwzMCBAQA0KPj4+PiArLyoNCj4+Pj4gKyAqIENvcHlyaWdodCAoQykgMjAyMiBSYW5keSBMaSA8
+YXlha2FAc291bGlrLmluZm8+DQo+Pj4+ICsgKg0KPj4+PiArICogVGhpcyBzb2Z0d2FyZSBpcyBs
+aWNlbnNlZCB1bmRlciB0aGUgdGVybXMgb2YgdGhlIEdOVSBHZW5lcmFsIFB1YmxpYw0KPj4+PiAr
+ICogTGljZW5zZSB2ZXJzaW9uIDIsIGFzIHB1Ymxpc2hlZCBieSB0aGUgRnJlZSBTb2Z0d2FyZSBG
+b3VuZGF0aW9uLCBhbmQNCj4+Pj4gKyAqIG1heSBiZSBjb3BpZWQsIGRpc3RyaWJ1dGVkLCBhbmQg
+bW9kaWZpZWQgdW5kZXIgdGhvc2UgdGVybXMuDQo+Pj4+ICsgKg0KPj4+PiArICogVGhpcyBwcm9n
+cmFtIGlzIGRpc3RyaWJ1dGVkIGluIHRoZSBob3BlIHRoYXQgaXQgd2lsbCBiZSB1c2VmdWwsDQo+
+Pj4+ICsgKiBidXQgV0lUSE9VVCBBTlkgV0FSUkFOVFk7IHdpdGhvdXQgZXZlbiB0aGUgaW1wbGll
+ZCB3YXJyYW50eSBvZg0KPj4+PiArICogTUVSQ0hBTlRBQklMSVRZIG9yIEZJVE5FU1MgRk9SIEEg
+UEFSVElDVUxBUiBQVVJQT1NFLiAgU2VlIHRoZQ0KPj4+PiArICogR05VIEdlbmVyYWwgUHVibGlj
+IExpY2Vuc2UgZm9yIG1vcmUgZGV0YWlscy4NCj4+Pj4gKyAqDQo+Pj4+ICsgKi8NCj4+Pj4gKw0K
+Pj4+PiArI2lmbmRlZiBfTUVESUFfVklERU9CVUYyX0RNQV9IRUFQX0gNCj4+Pj4gKyNkZWZpbmUg
+X01FRElBX1ZJREVPQlVGMl9ETUFfSEVBUF9IDQo+Pj4+ICsNCj4+Pj4gKyNpbmNsdWRlIDxtZWRp
+YS92aWRlb2J1ZjItdjRsMi5oPg0KPj4+PiArI2luY2x1ZGUgPGxpbnV4L2RtYS1tYXBwaW5nLmg+
+DQo+Pj4+ICsNCj4+Pj4gK3N0YXRpYyBpbmxpbmUgZG1hX2FkZHJfdA0KPj4+PiArdmIyX2RtYWhl
+YXBfcGxhbmVfZG1hX2FkZHIoc3RydWN0IHZiMl9idWZmZXIgKnZiLCB1bnNpZ25lZCBpbnQgcGxh
+bmVfbm8pDQo+Pj4+ICt7DQo+Pj4+ICsgICAgICAgZG1hX2FkZHJfdCAqYWRkciA9IHZiMl9wbGFu
+ZV9jb29raWUodmIsIHBsYW5lX25vKTsNCj4+Pj4gKw0KPj4+PiArICAgICAgIHJldHVybiAqYWRk
+cjsNCj4+Pj4gK30NCj4+Pj4gKw0KPj4+PiArZXh0ZXJuIGNvbnN0IHN0cnVjdCB2YjJfbWVtX29w
+cyB2YjJfZG1haGVhcF9tZW1vcHM7DQo+Pj4+ICsjZW5kaWYNCj4+Pj4gLS0NCj4+Pj4gMi4xNy4x
+DQo+Pj4+IA0KPj4gDQo+PiAtLQ0KPj4gSHNpYS1KdW4oUmFuZHkpIExpDQoNCl9fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGlu
+ZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBz
+ZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
