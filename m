@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 643C55A1221
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Aug 2022 15:30:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CF965A1222
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Aug 2022 15:30:14 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 982FF3F619
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Aug 2022 13:30:06 +0000 (UTC)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com (mail-db8eur05on2062.outbound.protection.outlook.com [40.107.20.62])
-	by lists.linaro.org (Postfix) with ESMTPS id 00F704798B
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  2 Aug 2022 09:58:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 910823F5C3
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Aug 2022 13:30:13 +0000 (UTC)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com (mail-db8eur05on2048.outbound.protection.outlook.com [40.107.20.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 81DB647F3C
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  2 Aug 2022 09:58:54 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lhYAwWmzEbXWMWfplvvTPs2jdv7G5K/U4X06eCW2LDiUDLYFCrTWZNdvmwAbAKnFyV5r+T6SIqU1z+jZIXMnhiWPLKIUun4caev1LGsSmmYrybXBxybv95TxkHO74BZeensHNJyuH2TViLOP+Ra1LlMbVNQA9i4WJrJrrlFbXQuakvv7xkdwep04hl8RUjyGBK7khA17mdkiHS1wkj1nUR+NTMmhLJhD4E+8Dn5bEdsQnz9t8snIzVulVNvt2mHZilnpAn/Np6njvnLS0A5XaA+76Xq3gbhNfJXoQvtkZuF0p6Lid2ESWWJTLx+4WIsEC3+iHS18kZZvDnBvtMniKA==
+ b=fAyb09nd/oxYF2HHyOIzdifj0LwovxhxsMt7wXDaqTlxUEFyWDTDM6m1scRQ8wHiQ1WBfOtcrqGaa78E1xs3JnpXLw7gaKKJO93/h0pm7bo4w9TdMf+xNAUeoPiB6RvLp3WrVrZ+juMrL6asbgji88a2BXX8PrEOarbKpxFO7sbbsc23SoXnlW/DnBEQ+2JjzEVHXvLsYxxsFBlBSkUArnuwLvzk28aZRVlcdmKVgnYhCzJ+UyT9qPh+KI9mcLzZtwCv4vqnHasu2BWQ1ZDTtpFMRu9Yq2BvYquilgYFiuJF9hMaPNC6Fsf75yTaw2ULumnZhdZ8i0b4piJ30bZx/g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=B6F4CMRdmn0GSb1NELVUv8fyXfsdW1uJtKJqqy0RZHs=;
- b=c04TM49Wfkm+Bng/rkCbN1wkDmskI1ZKdrsB8axBnq/NWm4ujX4jwrne9WSYqtJpJDuh05NDR6I79Cve8QnmigtG5rPjtkO9oxF+cvmE9jgILx7CpxpRVdpCyeYn5yD9uugBrPNVT3IxHCy2u7wXuJn0o5u5sg0Vo7axo/1awLun3/DG3Lfaonf7A0wA27AEIEn6zd1OsEe9pBWQlG0qs8LhnkP27aoShq+5c4b3aew0XN3a/nF5eUqseiAMP8gVq5lXqpEIf3jdFEdLNJrGMrinNyRbOdJ2e3R1tCnYtujEyusEKEpcU67h0ZDeuWt1ahId5v4HGI3jBI5akRfT0g==
+ bh=Lk8z61pSjUyn51VI9T8eBY3Ubnc7j16YLC8/9J63+4k=;
+ b=QbOSOWbZqt9CSWaMF3aM57bneDYWJiYnTesycTAhzldKkP4I+TbVYme0xwn1dXPzWtCDsmsE47qMMZeh7f3elC2f+jJRp/wIheNIAkuwl9jTuDw65orE4fmzTApK4+mi2YUpB3iVm2hLWA6DiDueFixrN8VV77MrJG0s5YJVhgGkAVhFvcknKIG05iVYSJTDjWOWJemMeMRk8oNIvm28OIBJzEh6j5XHU+blTyoKMXYCUDAHNAHdIvgxgSlHs7Erxi8XIqKRb5ecXOtMV/acHmhiCr63nIx9ohhiRss29JuYOOU9x5FNFUJFr8KB/shgfVWjahjqeZTHxABM/jiFXg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
  header.d=nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=B6F4CMRdmn0GSb1NELVUv8fyXfsdW1uJtKJqqy0RZHs=;
- b=hHeWLaNkxVsyN7YIJ58EQ18YBZNAoOfutrJWRBbRDlwwq6dvopuX9ARso3HH86ArB9vC1zZpQRPXnwvZYQ5GOHRRnFC+MVnMdTy6izvE4lS6aEk8/5GOQXiZpIYOX1w7AuWleeuTccqAZlgr/a5KXjshZdKoDnNCUfEO/DwqZrk=
+ bh=Lk8z61pSjUyn51VI9T8eBY3Ubnc7j16YLC8/9J63+4k=;
+ b=YA7144S06dZgXkQvxUNM6dW3kpWhC6nCiaxX0loZw7Qhd9V2vF6QQmCC5aTQsTuRIDqhp+1Ml42Sk7mzz1qcTj7UrCTfIUsuOwk1UKwBwevk6f5MADQxvS54ktEUy/KYAN1RApfRj/8WmcYERY2dXxOCTLsRiKWJDMpVEA0nHNU=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nxp.com;
 Received: from AM0PR04MB6737.eurprd04.prod.outlook.com (2603:10a6:208:176::18)
  by AS8PR04MB8341.eurprd04.prod.outlook.com (2603:10a6:20b:3b0::24) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5482.16; Tue, 2 Aug
- 2022 09:58:52 +0000
+ 2022 09:58:53 +0000
 Received: from AM0PR04MB6737.eurprd04.prod.outlook.com
  ([fe80::6ca7:299e:d92f:7d1b]) by AM0PR04MB6737.eurprd04.prod.outlook.com
  ([fe80::6ca7:299e:d92f:7d1b%5]) with mapi id 15.20.5482.011; Tue, 2 Aug 2022
@@ -44,8 +44,8 @@ To: sumit.semwal@linaro.org,
 	dri-devel@lists.freedesktop.org,
 	linaro-mm-sig@lists.linaro.org,
 	linux-kernel@vger.kernel.org
-Date: Tue,  2 Aug 2022 11:58:40 +0200
-Message-Id: <20220802095843.14614-3-olivier.masse@nxp.com>
+Date: Tue,  2 Aug 2022 11:58:41 +0200
+Message-Id: <20220802095843.14614-4-olivier.masse@nxp.com>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20220802095843.14614-1-olivier.masse@nxp.com>
 References: <20220802095843.14614-1-olivier.masse@nxp.com>
@@ -54,273 +54,736 @@ X-ClientProxiedBy: AM3PR07CA0145.eurprd07.prod.outlook.com
  (2603:10a6:208:176::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: d1aa91d2-bdc0-4ee8-19a8-08da746d9a88
+X-MS-Office365-Filtering-Correlation-Id: 3c3323bc-c935-4a49-c419-08da746d9af5
 X-MS-TrafficTypeDiagnostic: AS8PR04MB8341:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	OrZ+Mf2Im1BWeUgPbN/aeFSeGEekynp4KPB7T98fHlEIdvs8OvGsFdFjRALozCFA/gkdbPPx8avo2CD8IiVLwq+FeSb8bhmN6/XlBai9zjnk3AxtOwM3OLZlimRwL8CqtaFhuNRNKwlIDrMs5/4KhN5msNAX3uN5jV0zNOy6QCN1PzcY8iXmqTAeysEiahk7f5aUCnErBUBN5RLp/d0ErRHmNVel8fVNnN0Fvbiwvy+mSpV/px610mP07GPKuBuuD5mt9DmAW3e5bLCvWBVXhjYMvBhf+eLO4bjMq7RBV0T7wyvKk/p5jBheFx6tyC0FcFtx8GDT8MMnGpzvS1D5mzy50PZWhJmMpbkior99F0gtjL18MSveLPzWY2hKg6IVpXNCpmJb5xy6OogG1nHO4S0jD137ouRxhNPXsgdJEQQr6mJFOfEMOyNVhYh3E4YBWxajhnaDygzA/+sSWe91gaiB6b8Jp3hUrYaNTrlJ367MK7c3+OizXmgzbkSZjJAYX68XVnh8pG2cLmfaqW9W1zzXaI1lvhOYfZJ1PFxo99yupkGA7FV0SYfHOggsBOl/ep6QVvRzdsl7KftFJjK7HSsO6WoofMu5qv/GyPD9jv16t2B8eqrv4bnPg7tQ8wHkV35oDV3IoVqrkDBYHFFRkQYjCb0dczyEwr0rXbYgNOkiFdiSzIGHAC0L9t/RS0agtyy0VDFvRPCizmcZDeJng2mEoG22k4Mqv+2WKUuoKuf15iZnnxaKifyFewTFJNeJGUgUipQyIoS3Fbd0xOXrhKV9n4OiQUltOV11TZx6Crk=
+	3VJUOiXuJkxZk8uXTbdXPV4FOnmukCl8oeyHT5nadlKsz0HcrdrGP6BMBg9k8LNP/szZyemJw9O0FMhCWDEvpFtLSh+gMpGDyBs0cmW7RTfScuCXk9zL5BLly5jGM0zKCuuGRJo3xGkovLqdbmZVXSe+fqCJ+Z41q+Nqgz/xJqR08xljDh+TO5O8usZan9hk+Sxk8Z8siPQ1cuZh/No+p9qvTBNhjDeXsEVfBnykivqvnv1hfKdoiZ5uvUeENN/OoVHzkprl7lVOppE6aXxbl9zTyZTbJjM4llpqV80PvHStiJEFnuWOJ0W491mQADDzfwWjRl4KZ/TlU+VBnjLn5485X25Z6tsI9x9mvy63gbxrmU5b7uh5wscDyJ5AeHQMeE1p0IRGcQUO4eCrttRMB/UMX9gDSauSRnAgePiLDkOqhEtnGr5czIc2lGFNro8m3G6NsqEiWZTjARFTlj81jUU/Fw6VROLRGT6VonHcXmuQbpXZlwG68JlMISyUaMpv8EPJ7AHSgTeoeuLMwwAKfNNM2kNvMP3yZ93GtFP9FcoDRgrqdEh9FAFVr/h9p2sGi9r7MiVjUukubC7jTXNjQu38EZViEImwFj2sw0Su6PRdt3PSgpq/kQ4a1Oy+Vf+ROleCIz5rwWyPoCS3/YTD8+w71IOsB+b97lgALabIMjGK5JIhmKq1jPfU/QffkaoF3/Qu7/y1G+j2zWeVMLGFfFNZC9AOa56N3lkx4A8Ux6kYXXRmU6ddE95osjDYmBMa6kJOnec5cSmakaibUcDkICrJxLA2WDfPUQEUavFnYiE=
 X-Forefront-Antispam-Report: 
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR04MB6737.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(396003)(346002)(366004)(136003)(39860400002)(376002)(41300700001)(2906002)(83380400001)(2616005)(86362001)(6666004)(52116002)(6506007)(44832011)(1076003)(30864003)(36756003)(26005)(6512007)(38100700002)(186003)(38350700002)(6486002)(5660300002)(8676002)(66556008)(66476007)(66946007)(8936002)(478600001)(4326008)(316002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?OUdyV2V6Z3RqcEYvbmVLUWFldTJzT0ZoekFDUUNwTnB5WHc1QVQ3NWh3RmFk?=
- =?utf-8?B?NjI2T3l2RjUvYmpQcDVYNndnSTlkYTNTVzRwcGxLcTJvTzNFQzJ1WnFvSkp2?=
- =?utf-8?B?bzYrZURyLzRFckRVV1AxY3lyaE42ZmFuMisyVnE4QWFEZWZqNitva3VsNm5r?=
- =?utf-8?B?R0ZpUkcxeFcrbU80eGY0WEFLZytGY1o3djhLWk4yaWoxdDR5TzVKcmc1UUlW?=
- =?utf-8?B?dEg0ZXhPU3BvMDdNbit2dzY1R3E0ZVo2aERZY3phVHgxNlVYaFRqN1lhcE1E?=
- =?utf-8?B?MEs0dldFaTRoVWdNNTRWQWtkUER4YUJaenNxV3FONEZmTTZLV0tzNldIN1Iz?=
- =?utf-8?B?cHZ3Y3djcGgzRWtCVWhmek9pRWNYdmowYVRNQzlYT0xSTlpTRUZmSHUzcng5?=
- =?utf-8?B?Q3ZreEZTRUxyVjdqaVlpc0s0N004RW9Ka2dxUTlqeHNkb1oyYm5ndEdWTHI3?=
- =?utf-8?B?dnBvNDVDL0sxR1BQemNNN21Ta3ljaytsaFZnS0NRNnlwMHp6WkVzRjRTUEFB?=
- =?utf-8?B?Snh3WTc0Y3BydXdQOG4vVTdqU3p4Nk5ZVDVIUm9lTmdrdy9IaWtOR0ZETXFR?=
- =?utf-8?B?UjdpTVVSdTI0SUQ0ejlSRk1nODdJd2V1ci9EQ0cxeHJFbytWcy9CUW9LL3BL?=
- =?utf-8?B?YlB1UHQ3OTAycnVJTktOM2dEV016NkxBd09keUgxRjl3Qm1zYmVBWGFkUTFG?=
- =?utf-8?B?UGc3WmZydmdEYitzV0czbStkWmcvK3l3Wk9jczBQQ2pBWlR0OFppZ3Fzdnpl?=
- =?utf-8?B?MC9nd0FKZkNsSnRsYUprMk5aYTdicGhYdjFRbzhXYVpITnMydHJwTXByYzN5?=
- =?utf-8?B?T0c1S3dkRUdtVmpaN0pPci9KMWVJWStLVmljSG5MNHdSQWpWcnNGNkwzMG45?=
- =?utf-8?B?L0poa0JIVjB6OEJjSFBGb1NMZWlUem5JTmxuSmlRbmhxWEduQXFMU29lRDhk?=
- =?utf-8?B?Ym11S0pYRmIzLzZIUDhETXMwejhqOWpLVFBSb0ZqdzV2Z0Y5YStsdTl4N0s0?=
- =?utf-8?B?SlFwdXVmdTJIQWlZNyt4cWwzNXRyOFpTV2tPR2cwencvd0o1Q3c3TUJLa3Zi?=
- =?utf-8?B?NGRwYUV1dWFkVUZVOGJjWDBmVGRIMGhLdXRBSVFVTGg0MDllbHRPNndXWUZs?=
- =?utf-8?B?Z3cwOFYrOU9xTXY3TFljaTZJYXo1RGNGTGJpYnBxdUZ4cnhKY2pQK0VMSTZ4?=
- =?utf-8?B?OUNWNThoSkl4czBGWTVNZ2xmZUxIelZpbndOU0QvVWlwanFZcDFFaE92L2VW?=
- =?utf-8?B?Snc3UlRMY0NVR0tuRkZtdUhDd0RnOXF6eWIrN0ZWV1BUU0RYbTQ2OWw2SDZ6?=
- =?utf-8?B?bHJkeFV3VGpneDh5RWpSZkNFRER3SVFRdGREOVVUbnRuNWwrU3VVL0piOU5z?=
- =?utf-8?B?RDYzNW9NcW8wVXpEeTdKWFJ5YmZCbG9UWnQ4MVc0MDhLWGE5NERnY3p5RWxo?=
- =?utf-8?B?K3djczNoZGs2SVhWMjJHVjFNTUxRSURtNkdwVkZmSnZ1NWFDQU81dTgyVVlm?=
- =?utf-8?B?M3phZ1VNejJRMTFxZGlxdlRMbmhiWENma1FvTE05ZERrckVaUVd5Q3N6bkFH?=
- =?utf-8?B?MnE1RzBpSTNscG5zVU10ODVFRDN3b2NZdFNaejdrYmcxSUt5MTQxUWxGWHA5?=
- =?utf-8?B?eURPcUN0Y21vOGZ2a2N5U3pnK3BRY0cxWHlpYUFaMVZBaGxNVFVaczYraVkz?=
- =?utf-8?B?NnYwQkZoOGluenMwVDNvUzdiVWJrZEExSkZXSGJOYWpRSmRIa0pFMDAzRytX?=
- =?utf-8?B?WDNhc3l0THRTQUxUdDc5RWkvS1k2TmVBOTRVWHJjYWJkaDFndzVzS1VSaEVD?=
- =?utf-8?B?WFowL0ZuWGhVQzhTdzN2VkhmaXFxTW94akN1TzBIQ1RpTzVrUmJCMmRsRVUx?=
- =?utf-8?B?OUdIazFONjhDeTRpY2NDQWNyeUVaRkJsMUhBOVZrWnNnNXBZazVzbnYzQzl3?=
- =?utf-8?B?MmJuUDVPWElHK1NFUERvUC9nd0QvL2Y2UlVBVFl5bXExZnJyVHRkTkdldThH?=
- =?utf-8?B?dGZNMzZYN3NjZXVINjJCb2lIVTljbUh3aStTemxiYVYyWGhReUh5MDNWMHVQ?=
- =?utf-8?B?MXhwV2owbzdyaWdFeVVmME90V2pOZ1llSUo5OWRlQ3d3R3FuMVFwK3JkVGZi?=
- =?utf-8?Q?qzUe9BkSK6iQ32qnk95Y7Wilb?=
+	=?us-ascii?Q?RtVU1wcVxH2WPoDSDnZpQBbfWhWRfIPe6FnRQ7p++u0XGdPj4XSUEXTVKgDl?=
+ =?us-ascii?Q?LzeS2YpSiRdr0jC9mIPLl5PW24quP5nL1My5IdzE3v0VUeejF/shnTIRRBsq?=
+ =?us-ascii?Q?U85eUoqHND56TVMb967kNmLxTzqykXCyXJ2K/QN0iHTBGjjV++Xa25Lq9+7k?=
+ =?us-ascii?Q?iTqAcfq/U7p1jELq0X4EhZu/sddsSjZPFtOMYRjt3dYyX334bH7Grkw6yTNI?=
+ =?us-ascii?Q?UftV1T5QXmBPprTs0ASfj48ao/UBJ2kEGI7WHw87y8vL+5C61QoyOj7YCIYM?=
+ =?us-ascii?Q?0J6xMrau+6Xn7EoBBV/3GtNUTQPTO/hhvtktZqvQDAWTl8cGe7S2QMVHJik7?=
+ =?us-ascii?Q?CAsTvJomGuf/kNMI+Taph562icO3aU3B7olQK8eqf1HYtX0Sy0707qZDnMqe?=
+ =?us-ascii?Q?wQ0NyObvc6lNx8x69Xn3uXtxCsAx0Libe3t9onPVleqEN7Q6QKll2JX2DS0Y?=
+ =?us-ascii?Q?jLy5Vn4I62LUzOgdF/13NBZuce5AXH15ALjDNCuDJZO7DLS7KXlEKXd9MSmW?=
+ =?us-ascii?Q?zeH03se8unc46J01XdIzQc4S1JCOMfo7eunCeal3Rrdr5IwtJgjFHeADX8sg?=
+ =?us-ascii?Q?gtoi/kFmj5Ma54cINZZ/HWLw2vBHonSvWMjRZUASY7xxhTnIcRuaUiJewRDG?=
+ =?us-ascii?Q?eb3n+JeXjm2Q9TnywQ8EhHHLmQ8k95KD9n3zdIf+vmMpxwKm5VNizjsbjvXa?=
+ =?us-ascii?Q?6sBLZfdrbmTzEYdZHF34qQLeL9aKZR0p9e5gP/mkL+nm3ErvWWQJ+zJMiMuj?=
+ =?us-ascii?Q?lUy6lZAEqJdfGlTYGpv5vMajU7dydV7kQ5TvSVllBgEtx4im9yddIX8jC+fl?=
+ =?us-ascii?Q?DvxZhMlrdghftDRn8cyX7tyancVrQ3qLnva+cEvGdT+TNtErCFZFTHmPUCjA?=
+ =?us-ascii?Q?ON36S0sZ51J2YCvDoytDlUf/IK9fgdST+fOwZBSMNgfzppMyBBN6QBoihyKi?=
+ =?us-ascii?Q?QrLotc/gboFily66xwP9fEl9UHkyxFMJx2FNXVfo51gLxXIM5jKFHjmQsOGv?=
+ =?us-ascii?Q?J0yXb6wkQkJ3lHEYPj3+alov26D/uA9zJyGBtC5y0xoWDHd0eSrpBuwKQPPD?=
+ =?us-ascii?Q?S1uo/LgzQ772Oa7ilsKe1qFqR0my93le5bSiqE7NZVycRsRKWV/wY6SjSV/p?=
+ =?us-ascii?Q?eRgKfy1TYPcntr2sEFzUFDWTA1OZBCjS2PAtlYUr5EomTkh4l3v2cQmHjTLU?=
+ =?us-ascii?Q?/cqHzW65Dco+r6zBV1n5wxpXPRsYK+1pamqZGhPVgT8hFRE3/FEuIgh+TA7c?=
+ =?us-ascii?Q?5tYgxJ5o41gWMq0AIf3F5DnlI3eIAvi/zVDOGie9zpAt3B1d0RQWXp9jqiox?=
+ =?us-ascii?Q?rUHpHupY8UWenF2CNqWfA74HrXZ1BQMoQkuVh//oFlu23SPMVsm1pONWTYmf?=
+ =?us-ascii?Q?QpNaaY14TVJhEdU/JUZp5yyzU8UvY2F+c+xtaCXs6SrW6ncb8z+wxcRuP+SY?=
+ =?us-ascii?Q?0YglghD2tkplp3OpnUwyQ//9+f6TkzBbIgOPLXb7WZ20bWlEQtizrtgWc74c?=
+ =?us-ascii?Q?6G3Q1SrUiKvrFiwri5r6P3o3RQL3rNBp99ktsiYEC2OdZPSl4sa7XdOm6huG?=
+ =?us-ascii?Q?V1ny4KB8u+BULo8JBl/lGC1sP747f8Zerucrwwyb?=
 X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d1aa91d2-bdc0-4ee8-19a8-08da746d9a88
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3c3323bc-c935-4a49-c419-08da746d9af5
 X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB6737.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Aug 2022 09:58:52.0620
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Aug 2022 09:58:52.8901
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JJVQHhZVNHPI+vhQST2F/FbSJjoy0Oqz6BAmLzShGIaCRPcNiniHit7RCDbtHPsZK50coI1r7PjNQ7KlBC0mfw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: IslUwqqCqgJank03GR1fwYylWB6A1KouinKSk9UMpkq1K5CY/N/sS+MTz/sdJ2R8CtYtciIzIOkcnMffkM9wfA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8341
 X-MailFrom: olivier.masse@nxp.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: RJVE5ZOFA5X5PWENRU5V2SEFJFCR35TF
-X-Message-ID-Hash: RJVE5ZOFA5X5PWENRU5V2SEFJFCR35TF
-X-Mailman-Approved-At: Thu, 25 Aug 2022 13:29:17 +0000
+Message-ID-Hash: QRSQE6GSF6P6FLSPJRH42NPJ7MNIUGBK
+X-Message-ID-Hash: QRSQE6GSF6P6FLSPJRH42NPJ7MNIUGBK
+X-Mailman-Approved-At: Thu, 25 Aug 2022 13:29:21 +0000
 CC: clement.faure@nxp.com, olivier.masse@nxp.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 2/5] ANDROID: dma-buf: heaps: Add a shrinker controlled page pool
+Subject: [Linaro-mm-sig] [PATCH 3/5] dma-buf: heaps: add Linaro secure dmabuf heap support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RJVE5ZOFA5X5PWENRU5V2SEFJFCR35TF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QRSQE6GSF6P6FLSPJRH42NPJ7MNIUGBK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-RnJvbTogSm9obiBTdHVsdHogPGpvaG4uc3R1bHR6QGxpbmFyby5vcmc+DQoNClRoaXMgcGF0Y2gg
-YWRkcyBhIHNpbXBsZSBzaHJpbmtlciBjb250cm9sbGVkIHBhZ2UgcG9vbCB0byB0aGUNCmRtYWJ1
-ZiBoZWFwcyBzdWJzeXN0ZW0uDQoNClRoaXMgcmVwbGFjZXMgdGhlIHVzZSBvZiB0aGUgbmV0d29y
-a2luZyBwYWdlX3Bvb2wsIG92ZXIgY29uY2VybnMNCnRoYXQgdGhlIGxhY2sgb2YgYSBzaHJpbmtl
-ciBmb3IgdGhhdCBpbXBsZW1lbnRhdGlvbiBtYXkgY2F1c2UNCmFkZGl0aW9uYWwgbG93LW1lbW9y
-eSBraWxscw0KDQpUT0RPOiBUYWtlIGFub3RoZXIgcGFzcyBhdCB0cnlpbmcgdG8gdW5pZnkgdGhp
-cyB3LyB0aGUgdHRtIHBvb2wNCg0KVGhvdWdodHMgYW5kIGZlZWRiYWNrIHdvdWxkIGJlIGdyZWF0
-bHkgYXBwcmVjaWF0ZWQhDQoNCkNjOiBTdW1pdCBTZW13YWwgPHN1bWl0LnNlbXdhbEBsaW5hcm8u
-b3JnPg0KQ2M6IExpYW0gTWFyayA8bG1hcmtAY29kZWF1cm9yYS5vcmc+DQpDYzogTGF1cmEgQWJi
-b3R0IDxsYWJib3R0QGtlcm5lbC5vcmc+DQpDYzogQnJpYW4gU3RhcmtleSA8QnJpYW4uU3Rhcmtl
-eUBhcm0uY29tPg0KQ2M6IEhyaWR5YSBWYWxzYXJhanUgPGhyaWR5YUBnb29nbGUuY29tPg0KQ2M6
-IFN1cmVuIEJhZ2hkYXNhcnlhbiA8c3VyZW5iQGdvb2dsZS5jb20+DQpDYzogU2FuZGVlcCBQYXRp
-bCA8c3NwYXRpbEBnb29nbGUuY29tPg0KQ2M6IERhbmllbCBNZW50eiA8ZGFuaWVsbWVudHpAZ29v
-Z2xlLmNvbT4NCkNjOiBDaHJpcyBHb2xkc3dvcnRoeSA8Y2dvbGRzd29AY29kZWF1cm9yYS5vcmc+
-DQpDYzogw5hyamFuIEVpZGUgPG9yamFuLmVpZGVAYXJtLmNvbT4NCkNjOiBSb2JpbiBNdXJwaHkg
-PHJvYmluLm11cnBoeUBhcm0uY29tPg0KQ2M6IEV6ZXF1aWVsIEdhcmNpYSA8ZXplcXVpZWxAY29s
-bGFib3JhLmNvbT4NCkNjOiBTaW1vbiBTZXIgPGNvbnRhY3RAZW1lcnNpb24uZnI+DQpDYzogSmFt
-ZXMgSm9uZXMgPGpham9uZXNAbnZpZGlhLmNvbT4NCkNjOiBBbmRyZXcgTW9ydG9uIDxha3BtQGxp
-bnV4LWZvdW5kYXRpb24ub3JnPg0KQ2M6IERhdmUgSGFuc2VuIDxkYXZlLmhhbnNlbkBpbnRlbC5j
-b20+DQpDYzogbGludXgtbW1Aa3ZhY2sub3JnDQpDYzogbGludXgtbWVkaWFAdmdlci5rZXJuZWwu
-b3JnDQpDYzogZHJpLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZw0KU2lnbmVkLW9mZi1ieTog
-Sm9obiBTdHVsdHogPGpvaG4uc3R1bHR6QGxpbmFyby5vcmc+DQpTaWduZWQtb2ZmLWJ5OiBPbGl2
-aWVyIE1hc3NlIDxvbGl2aWVyLm1hc3NlQG54cC5jb20+DQpCdWc6IDE2ODc0MjA0Mw0KLS0tDQog
-ZHJpdmVycy9kbWEtYnVmL2hlYXBzL0tjb25maWcgICAgIHwgICAzICsNCiBkcml2ZXJzL2RtYS1i
-dWYvaGVhcHMvTWFrZWZpbGUgICAgfCAgIDEgKw0KIGRyaXZlcnMvZG1hLWJ1Zi9oZWFwcy9wYWdl
-X3Bvb2wuYyB8IDI0NiArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysNCiBkcml2ZXJzL2Rt
-YS1idWYvaGVhcHMvcGFnZV9wb29sLmggfCAgNTUgKysrKysrKw0KIDQgZmlsZXMgY2hhbmdlZCwg
-MzA1IGluc2VydGlvbnMoKykNCiBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9kbWEtYnVmL2hl
-YXBzL3BhZ2VfcG9vbC5jDQogY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZG1hLWJ1Zi9oZWFw
-cy9wYWdlX3Bvb2wuaA0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2hlYXBzL0tjb25m
-aWcgYi9kcml2ZXJzL2RtYS1idWYvaGVhcHMvS2NvbmZpZw0KaW5kZXggOGVlNjQyNzdhNWQyLi42
-YTMzMTkzYTdiM2UgMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2RtYS1idWYvaGVhcHMvS2NvbmZpZw0K
-KysrIGIvZHJpdmVycy9kbWEtYnVmL2hlYXBzL0tjb25maWcNCkBAIC0xLDYgKzEsOSBAQA0KIGNv
-bmZpZyBETUFCVUZfSEVBUFNfREVGRVJSRURfRlJFRQ0KIAl0cmlzdGF0ZQ0KIA0KK2NvbmZpZyBE
-TUFCVUZfSEVBUFNfUEFHRV9QT09MDQorCXRyaXN0YXRlDQorDQogY29uZmlnIERNQUJVRl9IRUFQ
-U19TWVNURU0NCiAJYm9vbCAiRE1BLUJVRiBTeXN0ZW0gSGVhcCINCiAJZGVwZW5kcyBvbiBETUFC
-VUZfSEVBUFMNCmRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvaGVhcHMvTWFrZWZpbGUgYi9k
-cml2ZXJzL2RtYS1idWYvaGVhcHMvTWFrZWZpbGUNCmluZGV4IDVkZTk1Yjc3ZTE2OS4uZTcwNzIy
-ZWE2MTVlIDEwMDY0NA0KLS0tIGEvZHJpdmVycy9kbWEtYnVmL2hlYXBzL01ha2VmaWxlDQorKysg
-Yi9kcml2ZXJzL2RtYS1idWYvaGVhcHMvTWFrZWZpbGUNCkBAIC0xLDUgKzEsNiBAQA0KICMgU1BE
-WC1MaWNlbnNlLUlkZW50aWZpZXI6IEdQTC0yLjANCiBvYmotJChDT05GSUdfRE1BQlVGX0hFQVBT
-X0RFRkVSUkVEX0ZSRUUpICs9IGRlZmVycmVkLWZyZWUtaGVscGVyLm8NCitvYmotJChDT05GSUdf
-RE1BQlVGX0hFQVBTX1BBR0VfUE9PTCkJKz0gcGFnZV9wb29sLm8NCiBvYmotJChDT05GSUdfRE1B
-QlVGX0hFQVBTX1NZU1RFTSkJKz0gc3lzdGVtX2hlYXAubw0KIG9iai0kKENPTkZJR19ETUFCVUZf
-SEVBUFNfQ01BKQkJKz0gY21hX2hlYXAubw0KIG9iai0kKENPTkZJR19ETUFCVUZfSEVBUFNfRFNQ
-KSAgICAgICAgICArPSBkc3BfaGVhcC5vDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2hl
-YXBzL3BhZ2VfcG9vbC5jIGIvZHJpdmVycy9kbWEtYnVmL2hlYXBzL3BhZ2VfcG9vbC5jDQpuZXcg
-ZmlsZSBtb2RlIDEwMDY0NA0KaW5kZXggMDAwMDAwMDAwMDAwLi4zZGQ0YzM4NjJkY2ENCi0tLSAv
-ZGV2L251bGwNCisrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9oZWFwcy9wYWdlX3Bvb2wuYw0KQEAgLTAs
-MCArMSwyNDYgQEANCisvLyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMA0KKy8qDQor
-ICogRE1BIEJVRiBwYWdlIHBvb2wgc3lzdGVtDQorICoNCisgKiBDb3B5cmlnaHQgKEMpIDIwMjAg
-TGluYXJvIEx0ZC4NCisgKg0KKyAqIEJhc2VkIG9uIHRoZSBJT04gcGFnZSBwb29sIGNvZGUNCisg
-KiBDb3B5cmlnaHQgKEMpIDIwMTEgR29vZ2xlLCBJbmMuDQorICovDQorDQorI2luY2x1ZGUgPGxp
-bnV4L2ZyZWV6ZXIuaD4NCisjaW5jbHVkZSA8bGludXgvbGlzdC5oPg0KKyNpbmNsdWRlIDxsaW51
-eC9zY2hlZC9zaWduYWwuaD4NCisjaW5jbHVkZSA8bGludXgvc2xhYi5oPg0KKyNpbmNsdWRlIDxs
-aW51eC9zd2FwLmg+DQorI2luY2x1ZGUgInBhZ2VfcG9vbC5oIg0KKw0KK3N0YXRpYyBMSVNUX0hF
-QUQocG9vbF9saXN0KTsNCitzdGF0aWMgREVGSU5FX01VVEVYKHBvb2xfbGlzdF9sb2NrKTsNCisN
-CitzdGF0aWMgc3RydWN0IHBhZ2UgKmRtYWJ1Zl9wYWdlX3Bvb2xfYWxsb2NfcGFnZXMoc3RydWN0
-IGRtYWJ1Zl9wYWdlX3Bvb2wgKnBvb2wpDQorew0KKwlpZiAoZmF0YWxfc2lnbmFsX3BlbmRpbmco
-Y3VycmVudCkpDQorCQlyZXR1cm4gTlVMTDsNCisJcmV0dXJuIGFsbG9jX3BhZ2VzKHBvb2wtPmdm
-cF9tYXNrLCBwb29sLT5vcmRlcik7DQorfQ0KKw0KK3N0YXRpYyB2b2lkIGRtYWJ1Zl9wYWdlX3Bv
-b2xfZnJlZV9wYWdlcyhzdHJ1Y3QgZG1hYnVmX3BhZ2VfcG9vbCAqcG9vbCwNCisJCQkJCSAgICAg
-ICBzdHJ1Y3QgcGFnZSAqcGFnZSkNCit7DQorCV9fZnJlZV9wYWdlcyhwYWdlLCBwb29sLT5vcmRl
-cik7DQorfQ0KKw0KK3N0YXRpYyB2b2lkIGRtYWJ1Zl9wYWdlX3Bvb2xfYWRkKHN0cnVjdCBkbWFi
-dWZfcGFnZV9wb29sICpwb29sLCBzdHJ1Y3QgcGFnZSAqcGFnZSkNCit7DQorCWludCBpbmRleDsN
-CisNCisJaWYgKFBhZ2VIaWdoTWVtKHBhZ2UpKQ0KKwkJaW5kZXggPSBQT09MX0hJR0hQQUdFOw0K
-KwllbHNlDQorCQlpbmRleCA9IFBPT0xfTE9XUEFHRTsNCisNCisJbXV0ZXhfbG9jaygmcG9vbC0+
-bXV0ZXgpOw0KKwlsaXN0X2FkZF90YWlsKCZwYWdlLT5scnUsICZwb29sLT5pdGVtc1tpbmRleF0p
-Ow0KKwlwb29sLT5jb3VudFtpbmRleF0rKzsNCisJbW9kX25vZGVfcGFnZV9zdGF0ZShwYWdlX3Bn
-ZGF0KHBhZ2UpLCBOUl9LRVJORUxfTUlTQ19SRUNMQUlNQUJMRSwNCisJCQkgICAgMSA8PCBwb29s
-LT5vcmRlcik7DQorCW11dGV4X3VubG9jaygmcG9vbC0+bXV0ZXgpOw0KK30NCisNCitzdGF0aWMg
-c3RydWN0IHBhZ2UgKmRtYWJ1Zl9wYWdlX3Bvb2xfcmVtb3ZlKHN0cnVjdCBkbWFidWZfcGFnZV9w
-b29sICpwb29sLCBpbnQgaW5kZXgpDQorew0KKwlzdHJ1Y3QgcGFnZSAqcGFnZTsNCisNCisJbXV0
-ZXhfbG9jaygmcG9vbC0+bXV0ZXgpOw0KKwlwYWdlID0gbGlzdF9maXJzdF9lbnRyeV9vcl9udWxs
-KCZwb29sLT5pdGVtc1tpbmRleF0sIHN0cnVjdCBwYWdlLCBscnUpOw0KKwlpZiAocGFnZSkgew0K
-KwkJcG9vbC0+Y291bnRbaW5kZXhdLS07DQorCQlsaXN0X2RlbCgmcGFnZS0+bHJ1KTsNCisJCW1v
-ZF9ub2RlX3BhZ2Vfc3RhdGUocGFnZV9wZ2RhdChwYWdlKSwgTlJfS0VSTkVMX01JU0NfUkVDTEFJ
-TUFCTEUsDQorCQkJCSAgICAtKDEgPDwgcG9vbC0+b3JkZXIpKTsNCisJfQ0KKwltdXRleF91bmxv
-Y2soJnBvb2wtPm11dGV4KTsNCisNCisJcmV0dXJuIHBhZ2U7DQorfQ0KKw0KK3N0YXRpYyBzdHJ1
-Y3QgcGFnZSAqZG1hYnVmX3BhZ2VfcG9vbF9mZXRjaChzdHJ1Y3QgZG1hYnVmX3BhZ2VfcG9vbCAq
-cG9vbCkNCit7DQorCXN0cnVjdCBwYWdlICpwYWdlID0gTlVMTDsNCisNCisJcGFnZSA9IGRtYWJ1
-Zl9wYWdlX3Bvb2xfcmVtb3ZlKHBvb2wsIFBPT0xfSElHSFBBR0UpOw0KKwlpZiAoIXBhZ2UpDQor
-CQlwYWdlID0gZG1hYnVmX3BhZ2VfcG9vbF9yZW1vdmUocG9vbCwgUE9PTF9MT1dQQUdFKTsNCisN
-CisJcmV0dXJuIHBhZ2U7DQorfQ0KKw0KK3N0cnVjdCBwYWdlICpkbWFidWZfcGFnZV9wb29sX2Fs
-bG9jKHN0cnVjdCBkbWFidWZfcGFnZV9wb29sICpwb29sKQ0KK3sNCisJc3RydWN0IHBhZ2UgKnBh
-Z2UgPSBOVUxMOw0KKw0KKwlpZiAoV0FSTl9PTighcG9vbCkpDQorCQlyZXR1cm4gTlVMTDsNCisN
-CisJcGFnZSA9IGRtYWJ1Zl9wYWdlX3Bvb2xfZmV0Y2gocG9vbCk7DQorCWlmICghcGFnZSkNCisJ
-CXBhZ2UgPSBkbWFidWZfcGFnZV9wb29sX2FsbG9jX3BhZ2VzKHBvb2wpOw0KKw0KKwlyZXR1cm4g
-cGFnZTsNCit9DQorRVhQT1JUX1NZTUJPTF9HUEwoZG1hYnVmX3BhZ2VfcG9vbF9hbGxvYyk7DQor
-DQordm9pZCBkbWFidWZfcGFnZV9wb29sX2ZyZWUoc3RydWN0IGRtYWJ1Zl9wYWdlX3Bvb2wgKnBv
-b2wsIHN0cnVjdCBwYWdlICpwYWdlKQ0KK3sNCisJaWYgKFdBUk5fT04ocG9vbC0+b3JkZXIgIT0g
-Y29tcG91bmRfb3JkZXIocGFnZSkpKQ0KKwkJcmV0dXJuOw0KKw0KKwlkbWFidWZfcGFnZV9wb29s
-X2FkZChwb29sLCBwYWdlKTsNCit9DQorRVhQT1JUX1NZTUJPTF9HUEwoZG1hYnVmX3BhZ2VfcG9v
-bF9mcmVlKTsNCisNCitzdGF0aWMgaW50IGRtYWJ1Zl9wYWdlX3Bvb2xfdG90YWwoc3RydWN0IGRt
-YWJ1Zl9wYWdlX3Bvb2wgKnBvb2wsIGJvb2wgaGlnaCkNCit7DQorCWludCBjb3VudCA9IHBvb2wt
-PmNvdW50W1BPT0xfTE9XUEFHRV07DQorDQorCWlmIChoaWdoKQ0KKwkJY291bnQgKz0gcG9vbC0+
-Y291bnRbUE9PTF9ISUdIUEFHRV07DQorDQorCXJldHVybiBjb3VudCA8PCBwb29sLT5vcmRlcjsN
-Cit9DQorDQorc3RydWN0IGRtYWJ1Zl9wYWdlX3Bvb2wgKmRtYWJ1Zl9wYWdlX3Bvb2xfY3JlYXRl
-KGdmcF90IGdmcF9tYXNrLCB1bnNpZ25lZCBpbnQgb3JkZXIpDQorew0KKwlzdHJ1Y3QgZG1hYnVm
-X3BhZ2VfcG9vbCAqcG9vbCA9IGttYWxsb2Moc2l6ZW9mKCpwb29sKSwgR0ZQX0tFUk5FTCk7DQor
-CWludCBpOw0KKw0KKwlpZiAoIXBvb2wpDQorCQlyZXR1cm4gTlVMTDsNCisNCisJZm9yIChpID0g
-MDsgaSA8IFBPT0xfVFlQRV9TSVpFOyBpKyspIHsNCisJCXBvb2wtPmNvdW50W2ldID0gMDsNCisJ
-CUlOSVRfTElTVF9IRUFEKCZwb29sLT5pdGVtc1tpXSk7DQorCX0NCisJcG9vbC0+Z2ZwX21hc2sg
-PSBnZnBfbWFzayB8IF9fR0ZQX0NPTVA7DQorCXBvb2wtPm9yZGVyID0gb3JkZXI7DQorCW11dGV4
-X2luaXQoJnBvb2wtPm11dGV4KTsNCisNCisJbXV0ZXhfbG9jaygmcG9vbF9saXN0X2xvY2spOw0K
-KwlsaXN0X2FkZCgmcG9vbC0+bGlzdCwgJnBvb2xfbGlzdCk7DQorCW11dGV4X3VubG9jaygmcG9v
-bF9saXN0X2xvY2spOw0KKw0KKwlyZXR1cm4gcG9vbDsNCit9DQorRVhQT1JUX1NZTUJPTF9HUEwo
-ZG1hYnVmX3BhZ2VfcG9vbF9jcmVhdGUpOw0KKw0KK3ZvaWQgZG1hYnVmX3BhZ2VfcG9vbF9kZXN0
-cm95KHN0cnVjdCBkbWFidWZfcGFnZV9wb29sICpwb29sKQ0KK3sNCisJc3RydWN0IHBhZ2UgKnBh
-Z2U7DQorCWludCBpOw0KKw0KKwkvKiBSZW1vdmUgdXMgZnJvbSB0aGUgcG9vbCBsaXN0ICovDQor
-CW11dGV4X2xvY2soJnBvb2xfbGlzdF9sb2NrKTsNCisJbGlzdF9kZWwoJnBvb2wtPmxpc3QpOw0K
-KwltdXRleF91bmxvY2soJnBvb2xfbGlzdF9sb2NrKTsNCisNCisJLyogRnJlZSBhbnkgcmVtYWlu
-aW5nIHBhZ2VzIGluIHRoZSBwb29sICovDQorCWZvciAoaSA9IDA7IGkgPCBQT09MX1RZUEVfU0la
-RTsgaSsrKSB7DQorCQl3aGlsZSAoKHBhZ2UgPSBkbWFidWZfcGFnZV9wb29sX3JlbW92ZShwb29s
-LCBpKSkpDQorCQkJZG1hYnVmX3BhZ2VfcG9vbF9mcmVlX3BhZ2VzKHBvb2wsIHBhZ2UpOw0KKwl9
-DQorDQorCWtmcmVlKHBvb2wpOw0KK30NCitFWFBPUlRfU1lNQk9MX0dQTChkbWFidWZfcGFnZV9w
-b29sX2Rlc3Ryb3kpOw0KKw0KK3N0YXRpYyBpbnQgZG1hYnVmX3BhZ2VfcG9vbF9kb19zaHJpbmso
-c3RydWN0IGRtYWJ1Zl9wYWdlX3Bvb2wgKnBvb2wsIGdmcF90IGdmcF9tYXNrLA0KKwkJCQkgICAg
-ICBpbnQgbnJfdG9fc2NhbikNCit7DQorCWludCBmcmVlZCA9IDA7DQorCWJvb2wgaGlnaDsNCisN
-CisJaWYgKGN1cnJlbnRfaXNfa3N3YXBkKCkpDQorCQloaWdoID0gdHJ1ZTsNCisJZWxzZQ0KKwkJ
-aGlnaCA9ICEhKGdmcF9tYXNrICYgX19HRlBfSElHSE1FTSk7DQorDQorCWlmIChucl90b19zY2Fu
-ID09IDApDQorCQlyZXR1cm4gZG1hYnVmX3BhZ2VfcG9vbF90b3RhbChwb29sLCBoaWdoKTsNCisN
-CisJd2hpbGUgKGZyZWVkIDwgbnJfdG9fc2Nhbikgew0KKwkJc3RydWN0IHBhZ2UgKnBhZ2U7DQor
-DQorCQkvKiBUcnkgdG8gZnJlZSBsb3cgcGFnZXMgZmlyc3QgKi8NCisJCXBhZ2UgPSBkbWFidWZf
-cGFnZV9wb29sX3JlbW92ZShwb29sLCBQT09MX0xPV1BBR0UpOw0KKwkJaWYgKCFwYWdlKQ0KKwkJ
-CXBhZ2UgPSBkbWFidWZfcGFnZV9wb29sX3JlbW92ZShwb29sLCBQT09MX0hJR0hQQUdFKTsNCisN
-CisJCWlmICghcGFnZSkNCisJCQlicmVhazsNCisNCisJCWRtYWJ1Zl9wYWdlX3Bvb2xfZnJlZV9w
-YWdlcyhwb29sLCBwYWdlKTsNCisJCWZyZWVkICs9ICgxIDw8IHBvb2wtPm9yZGVyKTsNCisJfQ0K
-Kw0KKwlyZXR1cm4gZnJlZWQ7DQorfQ0KKw0KK3N0YXRpYyBpbnQgZG1hYnVmX3BhZ2VfcG9vbF9z
-aHJpbmsoZ2ZwX3QgZ2ZwX21hc2ssIGludCBucl90b19zY2FuKQ0KK3sNCisJc3RydWN0IGRtYWJ1
-Zl9wYWdlX3Bvb2wgKnBvb2w7DQorCWludCBucl90b3RhbCA9IDA7DQorCWludCBucl9mcmVlZDsN
-CisJYm9vbCBvbmx5X3NjYW4gPSBmYWxzZTsNCisNCisJaWYgKCFucl90b19zY2FuKQ0KKwkJb25s
-eV9zY2FuID0gdHJ1ZTsNCisNCisJbXV0ZXhfbG9jaygmcG9vbF9saXN0X2xvY2spOw0KKwlsaXN0
-X2Zvcl9lYWNoX2VudHJ5KHBvb2wsICZwb29sX2xpc3QsIGxpc3QpIHsNCisJCWlmIChvbmx5X3Nj
-YW4pIHsNCisJCQlucl90b3RhbCArPSBkbWFidWZfcGFnZV9wb29sX2RvX3Nocmluayhwb29sLA0K
-KwkJCQkJCQkgICAgICAgZ2ZwX21hc2ssDQorCQkJCQkJCSAgICAgICBucl90b19zY2FuKTsNCisJ
-CX0gZWxzZSB7DQorCQkJbnJfZnJlZWQgPSBkbWFidWZfcGFnZV9wb29sX2RvX3Nocmluayhwb29s
-LA0KKwkJCQkJCQkgICAgICBnZnBfbWFzaywNCisJCQkJCQkJICAgICAgbnJfdG9fc2Nhbik7DQor
-CQkJbnJfdG9fc2NhbiAtPSBucl9mcmVlZDsNCisJCQlucl90b3RhbCArPSBucl9mcmVlZDsNCisJ
-CQlpZiAobnJfdG9fc2NhbiA8PSAwKQ0KKwkJCQlicmVhazsNCisJCX0NCisJfQ0KKwltdXRleF91
-bmxvY2soJnBvb2xfbGlzdF9sb2NrKTsNCisNCisJcmV0dXJuIG5yX3RvdGFsOw0KK30NCisNCitz
-dGF0aWMgdW5zaWduZWQgbG9uZyBkbWFidWZfcGFnZV9wb29sX3Nocmlua19jb3VudChzdHJ1Y3Qg
-c2hyaW5rZXIgKnNocmlua2VyLA0KKwkJCQkJCSAgIHN0cnVjdCBzaHJpbmtfY29udHJvbCAqc2Mp
-DQorew0KKwlyZXR1cm4gZG1hYnVmX3BhZ2VfcG9vbF9zaHJpbmsoc2MtPmdmcF9tYXNrLCAwKTsN
-Cit9DQorDQorc3RhdGljIHVuc2lnbmVkIGxvbmcgZG1hYnVmX3BhZ2VfcG9vbF9zaHJpbmtfc2Nh
-bihzdHJ1Y3Qgc2hyaW5rZXIgKnNocmlua2VyLA0KKwkJCQkJCSAgc3RydWN0IHNocmlua19jb250
-cm9sICpzYykNCit7DQorCWlmIChzYy0+bnJfdG9fc2NhbiA9PSAwKQ0KKwkJcmV0dXJuIDA7DQor
-CXJldHVybiBkbWFidWZfcGFnZV9wb29sX3NocmluayhzYy0+Z2ZwX21hc2ssIHNjLT5ucl90b19z
-Y2FuKTsNCit9DQorDQorc3RydWN0IHNocmlua2VyIHBvb2xfc2hyaW5rZXIgPSB7DQorCS5jb3Vu
-dF9vYmplY3RzID0gZG1hYnVmX3BhZ2VfcG9vbF9zaHJpbmtfY291bnQsDQorCS5zY2FuX29iamVj
-dHMgPSBkbWFidWZfcGFnZV9wb29sX3Nocmlua19zY2FuLA0KKwkuc2Vla3MgPSBERUZBVUxUX1NF
-RUtTLA0KKwkuYmF0Y2ggPSAwLA0KK307DQorDQorc3RhdGljIGludCBkbWFidWZfcGFnZV9wb29s
-X2luaXRfc2hyaW5rZXIodm9pZCkNCit7DQorCXJldHVybiByZWdpc3Rlcl9zaHJpbmtlcigmcG9v
-bF9zaHJpbmtlcik7DQorfQ0KK21vZHVsZV9pbml0KGRtYWJ1Zl9wYWdlX3Bvb2xfaW5pdF9zaHJp
-bmtlcik7DQorTU9EVUxFX0xJQ0VOU0UoIkdQTCB2MiIpOw0KZGlmZiAtLWdpdCBhL2RyaXZlcnMv
-ZG1hLWJ1Zi9oZWFwcy9wYWdlX3Bvb2wuaCBiL2RyaXZlcnMvZG1hLWJ1Zi9oZWFwcy9wYWdlX3Bv
-b2wuaA0KbmV3IGZpbGUgbW9kZSAxMDA2NDQNCmluZGV4IDAwMDAwMDAwMDAwMC4uZTNlYzllYWFj
-YmMyDQotLS0gL2Rldi9udWxsDQorKysgYi9kcml2ZXJzL2RtYS1idWYvaGVhcHMvcGFnZV9wb29s
-LmgNCkBAIC0wLDAgKzEsNTUgQEANCisvKiBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIu
-MCAqLw0KKy8qDQorICogRE1BIEJVRiBQYWdlUG9vbCBpbXBsZW1lbnRhdGlvbg0KKyAqIEJhc2Vk
-IG9uIGVhcmxpZXIgSU9OIGNvZGUgYnkgR29vZ2xlDQorICoNCisgKiBDb3B5cmlnaHQgKEMpIDIw
-MTEgR29vZ2xlLCBJbmMuDQorICogQ29weXJpZ2h0IChDKSAyMDIwIExpbmFybyBMdGQuDQorICov
-DQorDQorI2lmbmRlZiBfRE1BQlVGX1BBR0VfUE9PTF9IDQorI2RlZmluZSBfRE1BQlVGX1BBR0Vf
-UE9PTF9IDQorDQorI2luY2x1ZGUgPGxpbnV4L2RldmljZS5oPg0KKyNpbmNsdWRlIDxsaW51eC9r
-cmVmLmg+DQorI2luY2x1ZGUgPGxpbnV4L21tX3R5cGVzLmg+DQorI2luY2x1ZGUgPGxpbnV4L211
-dGV4Lmg+DQorI2luY2x1ZGUgPGxpbnV4L3Nocmlua2VyLmg+DQorI2luY2x1ZGUgPGxpbnV4L3R5
-cGVzLmg+DQorDQorLyogcGFnZSB0eXBlcyB3ZSB0cmFjayBpbiB0aGUgcG9vbCAqLw0KK2VudW0g
-ew0KKwlQT09MX0xPV1BBR0UsICAgICAgLyogQ2xlYW4gbG93bWVtIHBhZ2VzICovDQorCVBPT0xf
-SElHSFBBR0UsICAgICAvKiBDbGVhbiBoaWdobWVtIHBhZ2VzICovDQorDQorCVBPT0xfVFlQRV9T
-SVpFDQorfTsNCisNCisvKioNCisgKiBzdHJ1Y3QgZG1hYnVmX3BhZ2VfcG9vbCAtIHBhZ2Vwb29s
-IHN0cnVjdA0KKyAqIEBjb3VudFtdOgkJYXJyYXkgb2YgbnVtYmVyIG9mIHBhZ2VzIG9mIHRoYXQg
-dHlwZSBpbiB0aGUgcG9vbA0KKyAqIEBpdGVtc1tdOgkJYXJyYXkgb2YgbGlzdCBvZiBwYWdlcyBv
-ZiB0aGUgc3BlY2lmaWMgdHlwZQ0KKyAqIEBtdXRleDoJCWxvY2sgcHJvdGVjdGluZyB0aGlzIHN0
-cnVjdCBhbmQgZXNwZWNpYWxseSB0aGUgY291bnQNCisgKgkJCWl0ZW0gbGlzdA0KKyAqIEBnZnBf
-bWFzazoJCWdmcF9tYXNrIHRvIHVzZSBmcm9tIGFsbG9jDQorICogQG9yZGVyOgkJb3JkZXIgb2Yg
-cGFnZXMgaW4gdGhlIHBvb2wNCisgKiBAbGlzdDoJCWxpc3Qgbm9kZSBmb3IgbGlzdCBvZiBwb29s
-cw0KKyAqDQorICogQWxsb3dzIHlvdSB0byBrZWVwIGEgcG9vbCBvZiBwcmUgYWxsb2NhdGVkIHBh
-Z2VzIHRvIHVzZQ0KKyAqLw0KK3N0cnVjdCBkbWFidWZfcGFnZV9wb29sIHsNCisJaW50IGNvdW50
-W1BPT0xfVFlQRV9TSVpFXTsNCisJc3RydWN0IGxpc3RfaGVhZCBpdGVtc1tQT09MX1RZUEVfU0la
-RV07DQorCXN0cnVjdCBtdXRleCBtdXRleDsNCisJZ2ZwX3QgZ2ZwX21hc2s7DQorCXVuc2lnbmVk
-IGludCBvcmRlcjsNCisJc3RydWN0IGxpc3RfaGVhZCBsaXN0Ow0KK307DQorDQorc3RydWN0IGRt
-YWJ1Zl9wYWdlX3Bvb2wgKmRtYWJ1Zl9wYWdlX3Bvb2xfY3JlYXRlKGdmcF90IGdmcF9tYXNrLA0K
-KwkJCQkJCSB1bnNpZ25lZCBpbnQgb3JkZXIpOw0KK3ZvaWQgZG1hYnVmX3BhZ2VfcG9vbF9kZXN0
-cm95KHN0cnVjdCBkbWFidWZfcGFnZV9wb29sICpwb29sKTsNCitzdHJ1Y3QgcGFnZSAqZG1hYnVm
-X3BhZ2VfcG9vbF9hbGxvYyhzdHJ1Y3QgZG1hYnVmX3BhZ2VfcG9vbCAqcG9vbCk7DQordm9pZCBk
-bWFidWZfcGFnZV9wb29sX2ZyZWUoc3RydWN0IGRtYWJ1Zl9wYWdlX3Bvb2wgKnBvb2wsIHN0cnVj
-dCBwYWdlICpwYWdlKTsNCisNCisjZW5kaWYgLyogX0RNQUJVRl9QQUdFX1BPT0xfSCAqLw0KLS0g
-DQoyLjI1LjANCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5h
-cm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2
-ZUBsaXN0cy5saW5hcm8ub3JnCg==
+add Linaro secure heap bindings: linaro,secure-heap
+use genalloc to allocate/free buffer from buffer pool.
+buffer pool info is from dts.
+use sg_table instore the allocated memory info, the length of sg_table is 1.
+implement secure_heap_buf_ops to implement buffer share in difference device:
+1. Userspace passes this fd to all drivers it wants this buffer
+to share with: First the filedescriptor is converted to a &dma_buf using
+dma_buf_get(). Then the buffer is attached to the device using dma_buf_attach().
+2. Once the buffer is attached to all devices userspace can initiate DMA
+access to the shared buffer. In the kernel this is done by calling dma_buf_map_attachment()
+3. get sg_table with dma_buf_map_attachment in difference device.
+
+Signed-off-by: Olivier Masse <olivier.masse@nxp.com>
+---
+ drivers/dma-buf/heaps/Kconfig       |  21 +-
+ drivers/dma-buf/heaps/Makefile      |   1 +
+ drivers/dma-buf/heaps/secure_heap.c | 588 ++++++++++++++++++++++++++++
+ 3 files changed, 606 insertions(+), 4 deletions(-)
+ create mode 100644 drivers/dma-buf/heaps/secure_heap.c
+
+diff --git a/drivers/dma-buf/heaps/Kconfig b/drivers/dma-buf/heaps/Kconfig
+index 6a33193a7b3e..b2406932192e 100644
+--- a/drivers/dma-buf/heaps/Kconfig
++++ b/drivers/dma-buf/heaps/Kconfig
+@@ -1,8 +1,12 @@
+-config DMABUF_HEAPS_DEFERRED_FREE
+-	tristate
++menuconfig DMABUF_HEAPS_DEFERRED_FREE
++	bool "DMA-BUF heaps deferred-free library"
++	help
++	  Choose this option to enable the DMA-BUF heaps deferred-free library.
+ 
+-config DMABUF_HEAPS_PAGE_POOL
+-	tristate
++menuconfig DMABUF_HEAPS_PAGE_POOL
++	bool "DMA-BUF heaps page-pool library"
++	help
++	  Choose this option to enable the DMA-BUF heaps page-pool library.
+ 
+ config DMABUF_HEAPS_SYSTEM
+ 	bool "DMA-BUF System Heap"
+@@ -26,3 +30,12 @@ config DMABUF_HEAPS_DSP
+           Choose this option to enable the dsp dmabuf heap. The dsp heap
+           is allocated by gen allocater. it's allocated according the dts.
+           If in doubt, say Y.
++
++config DMABUF_HEAPS_SECURE
++	tristate "DMA-BUF Secure Heap"
++	depends on DMABUF_HEAPS && DMABUF_HEAPS_DEFERRED_FREE
++	help
++	  Choose this option to enable the secure dmabuf heap. The secure heap
++	  pools are defined according to the DT. Heaps are allocated
++	  in the pools using gen allocater.
++	  If in doubt, say Y.
+diff --git a/drivers/dma-buf/heaps/Makefile b/drivers/dma-buf/heaps/Makefile
+index e70722ea615e..08f6aa5919d1 100644
+--- a/drivers/dma-buf/heaps/Makefile
++++ b/drivers/dma-buf/heaps/Makefile
+@@ -4,3 +4,4 @@ obj-$(CONFIG_DMABUF_HEAPS_PAGE_POOL)	+= page_pool.o
+ obj-$(CONFIG_DMABUF_HEAPS_SYSTEM)	+= system_heap.o
+ obj-$(CONFIG_DMABUF_HEAPS_CMA)		+= cma_heap.o
+ obj-$(CONFIG_DMABUF_HEAPS_DSP)          += dsp_heap.o
++obj-$(CONFIG_DMABUF_HEAPS_SECURE)	+= secure_heap.o
+diff --git a/drivers/dma-buf/heaps/secure_heap.c b/drivers/dma-buf/heaps/secure_heap.c
+new file mode 100644
+index 000000000000..31aac5d050b4
+--- /dev/null
++++ b/drivers/dma-buf/heaps/secure_heap.c
+@@ -0,0 +1,588 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * DMABUF secure heap exporter
++ *
++ * Copyright 2021 NXP.
++ */
++
++#include <linux/dma-buf.h>
++#include <linux/dma-heap.h>
++#include <linux/dma-mapping.h>
++#include <linux/err.h>
++#include <linux/genalloc.h>
++#include <linux/highmem.h>
++#include <linux/mm.h>
++#include <linux/module.h>
++#include <linux/of.h>
++#include <linux/of_fdt.h>
++#include <linux/of_reserved_mem.h>
++#include <linux/scatterlist.h>
++#include <linux/slab.h>
++#include <linux/vmalloc.h>
++
++#include "deferred-free-helper.h"
++#include "page_pool.h"
++
++#define MAX_SECURE_HEAP 2
++#define MAX_HEAP_NAME_LEN 32
++
++struct secure_heap_buffer {
++	struct dma_heap *heap;
++	struct list_head attachments;
++	struct mutex lock;
++	unsigned long len;
++	struct sg_table sg_table;
++	int vmap_cnt;
++	struct deferred_freelist_item deferred_free;
++	void *vaddr;
++	bool uncached;
++};
++
++struct dma_heap_attachment {
++	struct device *dev;
++	struct sg_table *table;
++	struct list_head list;
++	bool no_map;
++	bool mapped;
++	bool uncached;
++};
++
++struct secure_heap_info {
++	struct gen_pool *pool;
++
++	bool no_map;
++};
++
++struct rmem_secure {
++	phys_addr_t base;
++	phys_addr_t size;
++
++	char name[MAX_HEAP_NAME_LEN];
++
++	bool no_map;
++};
++
++static struct rmem_secure secure_data[MAX_SECURE_HEAP] = {0};
++static unsigned int secure_data_count;
++
++static struct sg_table *dup_sg_table(struct sg_table *table)
++{
++	struct sg_table *new_table;
++	int ret, i;
++	struct scatterlist *sg, *new_sg;
++
++	new_table = kzalloc(sizeof(*new_table), GFP_KERNEL);
++	if (!new_table)
++		return ERR_PTR(-ENOMEM);
++
++	ret = sg_alloc_table(new_table, table->orig_nents, GFP_KERNEL);
++	if (ret) {
++		kfree(new_table);
++		return ERR_PTR(-ENOMEM);
++	}
++
++	new_sg = new_table->sgl;
++	for_each_sgtable_sg(table, sg, i) {
++		sg_set_page(new_sg, sg_page(sg), sg->length, sg->offset);
++		new_sg->dma_address = sg->dma_address;
++#ifdef CONFIG_NEED_SG_DMA_LENGTH
++		new_sg->dma_length = sg->dma_length;
++#endif
++		new_sg = sg_next(new_sg);
++	}
++
++	return new_table;
++}
++
++static int secure_heap_attach(struct dma_buf *dmabuf,
++			      struct dma_buf_attachment *attachment)
++{
++	struct secure_heap_buffer *buffer = dmabuf->priv;
++	struct secure_heap_info *info = dma_heap_get_drvdata(buffer->heap);
++	struct dma_heap_attachment *a;
++	struct sg_table *table;
++
++	a = kzalloc(sizeof(*a), GFP_KERNEL);
++	if (!a)
++		return -ENOMEM;
++
++	table = dup_sg_table(&buffer->sg_table);
++	if (IS_ERR(table)) {
++		kfree(a);
++		return -ENOMEM;
++	}
++
++	a->table = table;
++	a->dev = attachment->dev;
++	INIT_LIST_HEAD(&a->list);
++	a->no_map = info->no_map;
++	a->mapped = false;
++	a->uncached = buffer->uncached;
++	attachment->priv = a;
++
++	mutex_lock(&buffer->lock);
++	list_add(&a->list, &buffer->attachments);
++	mutex_unlock(&buffer->lock);
++
++	return 0;
++}
++
++static void secure_heap_detach(struct dma_buf *dmabuf,
++			       struct dma_buf_attachment *attachment)
++{
++	struct secure_heap_buffer *buffer = dmabuf->priv;
++	struct dma_heap_attachment *a = attachment->priv;
++
++	mutex_lock(&buffer->lock);
++	list_del(&a->list);
++	mutex_unlock(&buffer->lock);
++
++	sg_free_table(a->table);
++	kfree(a->table);
++	kfree(a);
++}
++
++static struct sg_table *secure_heap_map_dma_buf(struct dma_buf_attachment *attachment,
++						enum dma_data_direction direction)
++{
++	struct dma_heap_attachment *a = attachment->priv;
++	struct sg_table *table = a->table;
++	int attr = 0;
++	int ret;
++
++	if (!a->no_map) {
++		if (a->uncached)
++			attr = DMA_ATTR_SKIP_CPU_SYNC;
++
++		ret = dma_map_sgtable(attachment->dev, table, direction, attr);
++		if (ret)
++			return ERR_PTR(ret);
++
++		a->mapped = true;
++	}
++
++	return table;
++}
++
++static void secure_heap_unmap_dma_buf(struct dma_buf_attachment *attachment,
++				      struct sg_table *table,
++				      enum dma_data_direction direction)
++{
++	struct dma_heap_attachment *a = attachment->priv;
++	int attr = 0;
++
++	if (!a->no_map)	{
++		if (a->uncached)
++			attr = DMA_ATTR_SKIP_CPU_SYNC;
++
++		a->mapped = false;
++		dma_unmap_sgtable(attachment->dev, table, direction, attr);
++	}
++}
++
++static int secure_heap_dma_buf_begin_cpu_access(struct dma_buf *dmabuf,
++						enum dma_data_direction direction)
++{
++	struct secure_heap_buffer *buffer = dmabuf->priv;
++	struct dma_heap_attachment *a;
++
++	mutex_lock(&buffer->lock);
++
++	if (buffer->vmap_cnt)
++		invalidate_kernel_vmap_range(buffer->vaddr, buffer->len);
++
++	if (!buffer->uncached) {
++		list_for_each_entry(a, &buffer->attachments, list) {
++			if (!a->mapped)
++				continue;
++			dma_sync_sgtable_for_cpu(a->dev, a->table, direction);
++		}
++	}
++	mutex_unlock(&buffer->lock);
++
++	return 0;
++}
++
++static int secure_heap_dma_buf_end_cpu_access(struct dma_buf *dmabuf,
++					      enum dma_data_direction direction)
++{
++	struct secure_heap_buffer *buffer = dmabuf->priv;
++	struct dma_heap_attachment *a;
++
++	mutex_lock(&buffer->lock);
++
++	if (buffer->vmap_cnt)
++		flush_kernel_vmap_range(buffer->vaddr, buffer->len);
++
++	if (!buffer->uncached) {
++		list_for_each_entry(a, &buffer->attachments, list) {
++			if (!a->mapped)
++				continue;
++			dma_sync_sgtable_for_device(a->dev, a->table, direction);
++		}
++	}
++	mutex_unlock(&buffer->lock);
++
++	return 0;
++}
++
++static int secure_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
++{
++	struct secure_heap_buffer *buffer = dmabuf->priv;
++	struct sg_table *table = &buffer->sg_table;
++	unsigned long addr = vma->vm_start;
++	struct sg_page_iter piter;
++	int ret;
++
++	if (buffer->uncached)
++		vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
++
++	for_each_sgtable_page(table, &piter, vma->vm_pgoff) {
++		struct page *page = sg_page_iter_page(&piter);
++
++		ret = remap_pfn_range(vma, addr, page_to_pfn(page), PAGE_SIZE,
++				      vma->vm_page_prot);
++		if (ret)
++			return ret;
++		addr += PAGE_SIZE;
++	}
++	return 0;
++}
++
++static void *secure_heap_do_vmap(struct secure_heap_buffer *buffer)
++{
++	struct sg_table *table = &buffer->sg_table;
++	int npages = PAGE_ALIGN(buffer->len) / PAGE_SIZE;
++	struct page **pages = vmalloc(sizeof(struct page *) * npages);
++	struct page **tmp = pages;
++	struct sg_page_iter piter;
++	pgprot_t pgprot = PAGE_KERNEL;
++	void *vaddr;
++
++	if (!pages)
++		return ERR_PTR(-ENOMEM);
++
++	if (buffer->uncached)
++		pgprot = pgprot_writecombine(PAGE_KERNEL);
++
++	for_each_sgtable_page(table, &piter, 0) {
++		WARN_ON(tmp - pages >= npages);
++		*tmp++ = sg_page_iter_page(&piter);
++	}
++
++	vaddr = vmap(pages, npages, VM_MAP, pgprot);
++	vfree(pages);
++
++	if (!vaddr)
++		return ERR_PTR(-ENOMEM);
++
++	return vaddr;
++}
++
++static int secure_heap_vmap(struct dma_buf *dmabuf, struct dma_buf_map *map)
++{
++	struct secure_heap_buffer *buffer = dmabuf->priv;
++	void *vaddr;
++	int ret = 0;
++
++	mutex_lock(&buffer->lock);
++	if (buffer->vmap_cnt) {
++		buffer->vmap_cnt++;
++		goto out;
++	}
++
++	vaddr = secure_heap_do_vmap(buffer);
++	if (IS_ERR(vaddr)) {
++		ret = PTR_ERR(vaddr);
++		goto out;
++	}
++
++	buffer->vaddr = vaddr;
++	buffer->vmap_cnt++;
++	dma_buf_map_set_vaddr(map, buffer->vaddr);
++out:
++	mutex_unlock(&buffer->lock);
++
++	return ret;
++}
++
++static void secure_heap_vunmap(struct dma_buf *dmabuf, struct dma_buf_map *map)
++{
++	struct secure_heap_buffer *buffer = dmabuf->priv;
++
++	mutex_lock(&buffer->lock);
++	if (!--buffer->vmap_cnt) {
++		vunmap(buffer->vaddr);
++		buffer->vaddr = NULL;
++	}
++	mutex_unlock(&buffer->lock);
++	dma_buf_map_clear(map);
++}
++
++static void secure_heap_zero_buffer(struct secure_heap_buffer *buffer)
++{
++	struct sg_table *sgt = &buffer->sg_table;
++	struct sg_page_iter piter;
++	struct page *p;
++	void *vaddr;
++
++	for_each_sgtable_page(sgt, &piter, 0) {
++		p = sg_page_iter_page(&piter);
++		vaddr = kmap_atomic(p);
++		memset(vaddr, 0, PAGE_SIZE);
++		kunmap_atomic(vaddr);
++	}
++}
++
++static void secure_heap_buf_free(struct deferred_freelist_item *item,
++				 enum df_reason reason)
++{
++	struct secure_heap_buffer *buffer;
++	struct secure_heap_info *info;
++	struct sg_table *table;
++	struct scatterlist *sg;
++	int i;
++
++	buffer = container_of(item, struct secure_heap_buffer, deferred_free);
++	info = dma_heap_get_drvdata(buffer->heap);
++
++	if (!info->no_map) {
++		// Zero the buffer pages before adding back to the pool
++		if (reason == DF_NORMAL)
++			secure_heap_zero_buffer(buffer);
++	}
++
++	table = &buffer->sg_table;
++	for_each_sg(table->sgl, sg, table->nents, i)
++		gen_pool_free(info->pool, sg_dma_address(sg), sg_dma_len(sg));
++
++	sg_free_table(table);
++	kfree(buffer);
++}
++
++static void secure_heap_dma_buf_release(struct dma_buf *dmabuf)
++{
++	struct secure_heap_buffer *buffer = dmabuf->priv;
++	int npages = PAGE_ALIGN(buffer->len) / PAGE_SIZE;
++
++	deferred_free(&buffer->deferred_free, secure_heap_buf_free, npages);
++}
++
++static const struct dma_buf_ops secure_heap_buf_ops = {
++	.attach = secure_heap_attach,
++	.detach = secure_heap_detach,
++	.map_dma_buf = secure_heap_map_dma_buf,
++	.unmap_dma_buf = secure_heap_unmap_dma_buf,
++	.begin_cpu_access = secure_heap_dma_buf_begin_cpu_access,
++	.end_cpu_access = secure_heap_dma_buf_end_cpu_access,
++	.mmap = secure_heap_mmap,
++	.vmap = secure_heap_vmap,
++	.vunmap = secure_heap_vunmap,
++	.release = secure_heap_dma_buf_release,
++};
++
++static struct dma_buf *secure_heap_do_allocate(struct dma_heap *heap,
++					       unsigned long len,
++					       unsigned long fd_flags,
++					       unsigned long heap_flags,
++					       bool uncached)
++{
++	struct secure_heap_buffer *buffer;
++	struct secure_heap_info *info = dma_heap_get_drvdata(heap);
++	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
++	unsigned long size = roundup(len, PAGE_SIZE);
++	struct dma_buf *dmabuf;
++	struct sg_table *table;
++	int ret = -ENOMEM;
++	unsigned long phy_addr;
++
++	buffer = kzalloc(sizeof(*buffer), GFP_KERNEL);
++	if (!buffer)
++		return ERR_PTR(-ENOMEM);
++
++	INIT_LIST_HEAD(&buffer->attachments);
++	mutex_init(&buffer->lock);
++	buffer->heap = heap;
++	buffer->len = size;
++	buffer->uncached = uncached;
++
++	phy_addr = gen_pool_alloc(info->pool, size);
++	if (!phy_addr)
++		goto free_buffer;
++
++	table = &buffer->sg_table;
++	if (sg_alloc_table(table, 1, GFP_KERNEL))
++		goto free_pool;
++
++	sg_set_page(table->sgl,	phys_to_page(phy_addr),	size, 0);
++	sg_dma_address(table->sgl) = phy_addr;
++	sg_dma_len(table->sgl) = size;
++
++	/* create the dmabuf */
++	exp_info.exp_name = dma_heap_get_name(heap);
++	exp_info.ops = &secure_heap_buf_ops;
++	exp_info.size = buffer->len;
++	exp_info.flags = fd_flags;
++	exp_info.priv = buffer;
++	dmabuf = dma_buf_export(&exp_info);
++	if (IS_ERR(dmabuf)) {
++		ret = PTR_ERR(dmabuf);
++		goto free_pages;
++	}
++
++	return dmabuf;
++
++free_pages:
++	sg_free_table(table);
++
++free_pool:
++	gen_pool_free(info->pool, phy_addr, size);
++
++free_buffer:
++	mutex_destroy(&buffer->lock);
++	kfree(buffer);
++
++	return ERR_PTR(ret);
++}
++
++static struct dma_buf *secure_heap_allocate(struct dma_heap *heap,
++					    unsigned long len,
++					    unsigned long fd_flags,
++					    unsigned long heap_flags)
++{
++	// use uncache buffer here by default
++	return secure_heap_do_allocate(heap, len, fd_flags, heap_flags, true);
++	// use cache buffer
++	// return secure_heap_do_allocate(heap, len, fd_flags, heap_flags, false);
++}
++
++static const struct dma_heap_ops secure_heap_ops = {
++	.allocate = secure_heap_allocate,
++};
++
++static int secure_heap_add(struct rmem_secure *rmem)
++{
++	struct dma_heap *secure_heap;
++	struct dma_heap_export_info exp_info;
++	struct secure_heap_info *info = NULL;
++	struct gen_pool *pool = NULL;
++	int ret = -EINVAL;
++
++	if (rmem->base == 0 || rmem->size == 0) {
++		pr_err("secure_data base or size is not correct\n");
++		goto error;
++	}
++
++	info = kzalloc(sizeof(*info), GFP_KERNEL);
++	if (!info) {
++		pr_err("dmabuf info allocation failed\n");
++		ret = -ENOMEM;
++		goto error;
++	}
++
++	pool = gen_pool_create(PAGE_SHIFT, -1);
++	if (!pool) {
++		pr_err("can't create gen pool\n");
++		ret = -ENOMEM;
++		goto error;
++	}
++
++	if (gen_pool_add(pool, rmem->base, rmem->size, -1) < 0) {
++		pr_err("failed to add memory into pool\n");
++		ret = -ENOMEM;
++		goto error;
++	}
++
++	info->pool = pool;
++	info->no_map = rmem->no_map;
++
++	exp_info.name = rmem->name;
++	exp_info.ops = &secure_heap_ops;
++	exp_info.priv = info;
++
++	secure_heap = dma_heap_add(&exp_info);
++	if (IS_ERR(secure_heap)) {
++		pr_err("dmabuf secure heap allocation failed\n");
++		ret = PTR_ERR(secure_heap);
++		goto error;
++	}
++
++	return 0;
++
++error:
++	kfree(info);
++	if (pool)
++		gen_pool_destroy(pool);
++
++	return ret;
++}
++
++static int secure_heap_create(void)
++{
++	unsigned int i;
++	int ret;
++
++	for (i = 0; i < secure_data_count; i++) {
++		ret = secure_heap_add(&secure_data[i]);
++		if (ret)
++			return ret;
++	}
++	return 0;
++}
++
++static int rmem_secure_heap_device_init(struct reserved_mem *rmem,
++					 struct device *dev)
++{
++	dev_set_drvdata(dev, rmem);
++	return 0;
++}
++
++static void rmem_secure_heap_device_release(struct reserved_mem *rmem,
++					 struct device *dev)
++{
++	dev_set_drvdata(dev, NULL);
++}
++
++static const struct reserved_mem_ops rmem_dma_ops = {
++	.device_init    = rmem_secure_heap_device_init,
++	.device_release = rmem_secure_heap_device_release,
++};
++
++static int __init rmem_secure_heap_setup(struct reserved_mem *rmem)
++{
++	if (secure_data_count < MAX_SECURE_HEAP) {
++		int name_len = 0;
++		char *s = rmem->name;
++
++		secure_data[secure_data_count].base = rmem->base;
++		secure_data[secure_data_count].size = rmem->size;
++		secure_data[secure_data_count].no_map =
++			(of_get_flat_dt_prop(rmem->fdt_node, "no-map", NULL) != NULL);
++
++		while (name_len < MAX_HEAP_NAME_LEN) {
++			if ((*s == '@') || (*s == '\0'))
++				break;
++			name_len++;
++			s++;
++		}
++		if (name_len == MAX_HEAP_NAME_LEN)
++			name_len--;
++
++		strncpy(secure_data[secure_data_count].name, rmem->name, name_len);
++
++		rmem->ops = &rmem_dma_ops;
++		pr_info("Reserved memory: DMA buf secure pool %s at %pa, size %ld MiB\n",
++			secure_data[secure_data_count].name,
++			&rmem->base, (unsigned long)rmem->size / SZ_1M);
++
++		secure_data_count++;
++		return 0;
++	}
++	WARN_ONCE(1, "Cannot handle more than %u secure heaps\n", MAX_SECURE_HEAP);
++	return -EINVAL;
++}
++
++RESERVEDMEM_OF_DECLARE(secure_heap, "linaro,secure-heap", rmem_secure_heap_setup);
++
++module_init(secure_heap_create);
++MODULE_LICENSE("GPL v2");
+-- 
+2.25.0
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
