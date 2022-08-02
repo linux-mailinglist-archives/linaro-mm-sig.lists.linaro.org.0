@@ -2,469 +2,166 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6579A5A1227
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Aug 2022 15:30:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DE255A1228
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Aug 2022 15:30:49 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 995F23F513
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Aug 2022 13:30:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 62D513F513
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Aug 2022 13:30:48 +0000 (UTC)
 Received: from kozue.soulik.info (kozue.soulik.info [108.61.200.231])
-	by lists.linaro.org (Postfix) with ESMTPS id 1D4E13EA51
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  2 Aug 2022 12:17:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 6FB273EA51
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  2 Aug 2022 12:21:32 +0000 (UTC)
 Received: from [192.168.10.77] (unknown [140.207.23.88])
-	by kozue.soulik.info (Postfix) with ESMTPSA id 83DF5100DB3;
-	Tue,  2 Aug 2022 21:11:04 +0900 (JST)
-From: ayaka <ayaka@soulik.info>
+	by kozue.soulik.info (Postfix) with ESMTPSA id 18E6D100DB3;
+	Tue,  2 Aug 2022 21:15:17 +0900 (JST)
 Mime-Version: 1.0 (1.0)
-Date: Tue, 2 Aug 2022 20:16:58 +0800
-Message-Id: <627050DE-3436-40D4-99B9-FAE24DB60C85@soulik.info>
-References: <CAAFQd5AL=OejdaubnYDRF4M1EKyStZP_FAMPz4CJ=KCa_8QjaA@mail.gmail.com>
+From: ayaka <ayaka@soulik.info>
 In-Reply-To: <CAAFQd5AL=OejdaubnYDRF4M1EKyStZP_FAMPz4CJ=KCa_8QjaA@mail.gmail.com>
+Date: Tue, 2 Aug 2022 20:21:22 +0800
+Message-Id: <CF192A87-1664-45B2-B26C-A9B8B6A52523@soulik.info>
+References: <CAAFQd5AL=OejdaubnYDRF4M1EKyStZP_FAMPz4CJ=KCa_8QjaA@mail.gmail.com>
 To: Tomasz Figa <tfiga@chromium.org>
 X-Mailer: iPad Mail (18D61)
 X-MailFrom: ayaka@soulik.info
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: CTBCOETEPHIK3EYYHWCD4NPTNWULEKQD
-X-Message-ID-Hash: CTBCOETEPHIK3EYYHWCD4NPTNWULEKQD
-X-Mailman-Approved-At: Thu, 25 Aug 2022 13:29:35 +0000
+Message-ID-Hash: GNTBXHRCIFJFRLNTL2UY4366WHLFHYLR
+X-Message-ID-Hash: GNTBXHRCIFJFRLNTL2UY4366WHLFHYLR
+X-Mailman-Approved-At: Thu, 25 Aug 2022 13:29:39 +0000
 CC: Hsia-Jun Li <randy.li@synaptics.com>, linux-media@vger.kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH] [Draft]: media: videobuf2-dma-heap: add a vendor defined memory runtine
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CTBCOETEPHIK3EYYHWCD4NPTNWULEKQD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GNTBXHRCIFJFRLNTL2UY4366WHLFHYLR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============2077861066240811239=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-
---===============2077861066240811239==
-Content-Type: multipart/alternative; boundary=Apple-Mail-62FF0608-D7AC-4BEA-92D0-19895551D34C
-Content-Transfer-Encoding: 7bit
-
-
---Apple-Mail-62FF0608-D7AC-4BEA-92D0-19895551D34C
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-
-
-Sent from my iPad
-
-> On Aug 2, 2022, at 3:33 PM, Tomasz Figa <tfiga@chromium.org> wrote:
->=20
-> =EF=BB=BFOn Mon, Aug 1, 2022 at 8:43 PM ayaka <ayaka@soulik.info> wrote:
->>=20
->>=20
->>=20
->> Sent from my iPad
->>=20
->>>> On Aug 1, 2022, at 5:46 PM, Tomasz Figa <tfiga@chromium.org> wrote:
->>>=20
->>> =EF=BB=BFCAUTION: Email originated externally, do not click links or ope=
-n attachments unless you recognize the sender and know the content is safe.
->>>=20
->>>=20
->>>> On Mon, Aug 1, 2022 at 3:44 PM Hsia-Jun Li <Randy.Li@synaptics.com> wro=
-te:
->>>>> On 8/1/22 14:19, Tomasz Figa wrote:
->>>> Hello Tomasz
->>>>> ?Hi Randy,
->>>>> On Mon, Aug 1, 2022 at 5:21 AM <ayaka@soulik.info> wrote:
->>>>>> From: Randy Li <ayaka@soulik.info>
->>>>>> This module is still at a early stage, I wrote this for showing what
->>>>>> APIs we need here.
->>>>>> Let me explain why we need such a module here.
->>>>>> If you won't allocate buffers from a V4L2 M2M device, this module
->>>>>> may not be very useful. I am sure the most of users won't know a
->>>>>> device would require them allocate buffers from a DMA-Heap then
->>>>>> import those buffers into a V4L2's queue.
->>>>>> Then the question goes back to why DMA-Heap. =46rom the Android's
->>>>>> description, we know it is about the copyright's DRM.
->>>>>> When we allocate a buffer in a DMA-Heap, it may register that buffer
->>>>>> in the trusted execution environment so the firmware which is running=
-
->>>>>> or could only be acccesed from there could use that buffer later.
->>>>>> The answer above leads to another thing which is not done in this
->>>>>> version, the DMA mapping. Although in some platforms, a DMA-Heap
->>>>>> responses a IOMMU device as well. For the genernal purpose, we would
->>>>>> be better assuming the device mapping should be done for each device
->>>>>> itself. The problem here we only know alloc_devs in those DMAbuf
->>>>>> methods, which are DMA-heaps in my design, the device from the queue
->>>>>> is not enough, a plane may requests another IOMMU device or table
->>>>>> for mapping.
->>>>>> Signed-off-by: Randy Li <ayaka@soulik.info>
->>>>>> ---
->>>>>> drivers/media/common/videobuf2/Kconfig        |   6 +
->>>>>> drivers/media/common/videobuf2/Makefile       |   1 +
->>>>>> .../common/videobuf2/videobuf2-dma-heap.c     | 350 +++++++++++++++++=
-+
->>>>>> include/media/videobuf2-dma-heap.h            |  30 ++
->>>>>> 4 files changed, 387 insertions(+)
->>>>>> create mode 100644 drivers/media/common/videobuf2/videobuf2-dma-heap.=
-c
->>>>>> create mode 100644 include/media/videobuf2-dma-heap.h
->>>>> First of all, thanks for the series.
->>>>> Possibly a stupid question, but why not just allocate the DMA-bufs
->>>>> directly from the DMA-buf heap device in the userspace and just import=
-
->>>>> the buffers to the V4L2 device using V4L2_MEMORY_DMABUF?
->>>> Sometimes the allocation policy could be very complex, let's suppose a
->>>> multiple planes pixel format enabling with frame buffer compression.
->>>> Its luma, chroma data could be allocated from a pool which is delegated=
-
->>>> for large buffers while its metadata would come from a pool which many
->>>> users could take some few slices from it(likes system pool).
->>>> Then when we have a new users knowing nothing about this platform, if w=
-e
->>>> just configure the alloc_devs in each queues well. The user won't need
->>>> to know those complex rules.
->>>> The real situation could be more complex, Samsung MFC's left and right
->>>> banks could be regarded as two pools, many devices would benefit from
->>>> this either from the allocation times or the security buffers policy.
->>>> In our design, when we need to do some security decoding(DRM video),
->>>> codecs2 would allocate buffers from the pool delegated for that. While
->>>> the non-DRM video, users could not care about this.
->>>=20
->>> I'm a little bit surprised about this, because on Android all the
->>> graphics buffers are allocated from the system IAllocator and imported
->>> to the specific devices.
->> In the non-tunnel mode, yes it is. While the tunnel mode is completely ve=
-ndor defined. Neither HWC nor codec2 cares about where the buffers coming fr=
-om, you could do what ever you want.
->>=20
->> Besides there are DRM video in GNU Linux platform, I heard the webkit has=
- made huge effort here and Playready is one could work in non-Android Linux.=
-
->>> Would it make sense to instead extend the UAPI to expose enough
->>> information about the allocation requirements to the userspace, so it
->>> can allocate correctly?
->> Yes, it could. But as I said it would need the users to do more works.
->>> My reasoning here is that it's not a driver's decision to allocate
->>> from a DMA-buf heap (and which one) or not. It's the userspace which
->>> knows that, based on the specific use case that it wants to fulfill.
->> Although I would like to let the users decide that, users just can=E2=80=99=
-t do that which would violate the security rules in some platforms.
->> For example,  video codec and display device could only access a region o=
-f memory, any other device or trusted apps can=E2=80=99t access it. Users ha=
-ve to allocate the buffer from the pool the vendor decided.
->>=20
->> So why not we offer a quick way that users don=E2=80=99t need to try and e=
-rror.
->=20
-> In principle, I'm not against integrating DMA-buf heap with vb2,
-> however I see some problems I mentioned before:
->=20
-> 1) How would the driver know if it should allocate from a DMA-buf heap or n=
-ot?
-struct vb2_queue.mem_ops
-
-int (*queue_setup)(struct vb2_queue *q,unsigned int *num_buffers, unsigned i=
-nt *num_planes, unsigned int sizes[], struct device *alloc_devs[]);
-
-> 2) How would the driver know which heap to allocate from?
-=46rom vb2_queue.alloc_devs
-
-What I did now is likes what MFC does, create some mem_alloc_devs.
-It would be better that we could retrieve the DMA-heaps=E2=80=99 devices fro=
-m kernel, but that is not enough, we need a place to store the heap flags al=
-though none of them are defined yet.
-
-=46rom Android documents, I think it is unlikely we would have heap flags.
-=E2=80=9CStandardization: The DMA-BUF heaps framework offers a well-defined U=
-API. ION allowed custom flags and heap IDs that prevented developing a commo=
-n testing framework because each device=E2=80=99s ION implementation could b=
-ehave differently.=E2=80=9D
-
-> 3) How would the heap know how to allocate properly for the device?
->=20
-Because =E2=80=9Ceach DMA-BUF heap is a separate character device=E2=80=9D.
-But as I said in the first draft I am not sure about the DMA mapping part. a=
-lloc_devs responds for the heap, we have a device variable in the queue that=
- mapping function could access, but that may not be enough. A plane may appl=
-y a different mapping policy or IOMMU here.
-
-Would it be better that I create a interface here that creating a memdev wit=
-h DMA-heap description ?=20
-> Best regards,
-> Tomasz
-
---Apple-Mail-62FF0608-D7AC-4BEA-92D0-19895551D34C
-Content-Type: text/html;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-<html><head><meta http-equiv=3D"content-type" content=3D"text/html; charset=3D=
-utf-8"></head><body dir=3D"auto"><br><br><div dir=3D"ltr">Sent from my iPad<=
-/div><div dir=3D"ltr"><br><blockquote type=3D"cite">On Aug 2, 2022, at 3:33 P=
-M, Tomasz Figa &lt;tfiga@chromium.org&gt; wrote:<br><br></blockquote></div><=
-blockquote type=3D"cite"><div dir=3D"ltr">=EF=BB=BF<span>On Mon, Aug 1, 2022=
- at 8:43 PM ayaka &lt;ayaka@soulik.info&gt; wrote:</span><br><blockquote typ=
-e=3D"cite"><span></span><br></blockquote><blockquote type=3D"cite"><span></s=
-pan><br></blockquote><blockquote type=3D"cite"><span></span><br></blockquote=
-><blockquote type=3D"cite"><span>Sent from my iPad</span><br></blockquote><b=
-lockquote type=3D"cite"><span></span><br></blockquote><blockquote type=3D"ci=
-te"><blockquote type=3D"cite"><span>On Aug 1, 2022, at 5:46 PM, Tomasz Figa &=
-lt;tfiga@chromium.org&gt; wrote:</span><br></blockquote></blockquote><blockq=
-uote type=3D"cite"><blockquote type=3D"cite"><span></span><br></blockquote><=
-/blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><span>=EF=BB=
-=BFCAUTION: Email originated externally, do not click links or open attachme=
-nts unless you recognize the sender and know the content is safe.</span><br>=
-</blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite=
-"><span></span><br></blockquote></blockquote><blockquote type=3D"cite"><bloc=
-kquote type=3D"cite"><span></span><br></blockquote></blockquote><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>On Mo=
-n, Aug 1, 2022 at 3:44 PM Hsia-Jun Li &lt;Randy.Li@synaptics.com&gt; wrote:<=
-/span><br></blockquote></blockquote></blockquote><blockquote type=3D"cite"><=
-blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"=
-><span>On 8/1/22 14:19, Tomasz Figa wrote:</span><br></blockquote></blockquo=
-te></blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"c=
-ite"><blockquote type=3D"cite"><span>Hello Tomasz</span><br></blockquote></b=
-lockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><=
-blockquote type=3D"cite"><blockquote type=3D"cite"><span>?Hi Randy,</span><b=
-r></blockquote></blockquote></blockquote></blockquote><blockquote type=3D"ci=
-te"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"=
-cite"><span>On Mon, Aug 1, 2022 at 5:21 AM &lt;ayaka@soulik.info&gt; wrote:<=
-/span><br></blockquote></blockquote></blockquote></blockquote><blockquote ty=
-pe=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><span>From: Randy Li &lt;ayaka@soulik=
-.info&gt;</span><br></blockquote></blockquote></blockquote></blockquote></bl=
-ockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote typ=
-e=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>This mo=
-dule is still at a early stage, I wrote this for showing what</span><br></bl=
-ockquote></blockquote></blockquote></blockquote></blockquote><blockquote typ=
-e=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><span>APIs we need here.</span><br></=
-blockquote></blockquote></blockquote></blockquote></blockquote><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote=
- type=3D"cite"><blockquote type=3D"cite"><span>Let me explain why we need su=
-ch a module here.</span><br></blockquote></blockquote></blockquote></blockqu=
-ote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockq=
-uote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span=
->If you won't allocate buffers from a V4L2 M2M device, this module</span><br=
-></blockquote></blockquote></blockquote></blockquote></blockquote><blockquot=
-e type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockqu=
-ote type=3D"cite"><blockquote type=3D"cite"><span>may not be very useful. I a=
-m sure the most of users won't know a</span><br></blockquote></blockquote></=
-blockquote></blockquote></blockquote><blockquote type=3D"cite"><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote=
- type=3D"cite"><span>device would require them allocate buffers from a DMA-H=
-eap then</span><br></blockquote></blockquote></blockquote></blockquote></blo=
-ckquote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=
-=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>import t=
-hose buffers into a V4L2's queue.</span><br></blockquote></blockquote></bloc=
-kquote></blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><span>Then the question goes back to why DMA-Heap. =46rom the Android=
-'s</span><br></blockquote></blockquote></blockquote></blockquote></blockquot=
-e><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"ci=
-te"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>description, w=
-e know it is about the copyright's DRM.</span><br></blockquote></blockquote>=
-</blockquote></blockquote></blockquote><blockquote type=3D"cite"><blockquote=
- type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquo=
-te type=3D"cite"><span>When we allocate a buffer in a DMA-Heap, it may regis=
-ter that buffer</span><br></blockquote></blockquote></blockquote></blockquot=
-e></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquo=
-te type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>i=
-n the trusted execution environment so the firmware which is running</span><=
-br></blockquote></blockquote></blockquote></blockquote></blockquote><blockqu=
-ote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><block=
-quote type=3D"cite"><blockquote type=3D"cite"><span>or could only be acccese=
-d from there could use that buffer later.</span><br></blockquote></blockquot=
-e></blockquote></blockquote></blockquote><blockquote type=3D"cite"><blockquo=
-te type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockq=
-uote type=3D"cite"><span>The answer above leads to another thing which is no=
-t done in this</span><br></blockquote></blockquote></blockquote></blockquote=
-></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquot=
-e type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>ve=
-rsion, the DMA mapping. Although in some platforms, a DMA-Heap</span><br></b=
-lockquote></blockquote></blockquote></blockquote></blockquote><blockquote ty=
-pe=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><span>responses a IOMMU device as wel=
-l. For the genernal purpose, we would</span><br></blockquote></blockquote></=
-blockquote></blockquote></blockquote><blockquote type=3D"cite"><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote=
- type=3D"cite"><span>be better assuming the device mapping should be done fo=
-r each device</span><br></blockquote></blockquote></blockquote></blockquote>=
-</blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote=
- type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>its=
-elf. The problem here we only know alloc_devs in those DMAbuf</span><br></bl=
-ockquote></blockquote></blockquote></blockquote></blockquote><blockquote typ=
-e=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><span>methods, which are DMA-heaps in=
- my design, the device from the queue</span><br></blockquote></blockquote></=
-blockquote></blockquote></blockquote><blockquote type=3D"cite"><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote=
- type=3D"cite"><span>is not enough, a plane may requests another IOMMU devic=
-e or table</span><br></blockquote></blockquote></blockquote></blockquote></b=
-lockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote ty=
-pe=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>for ma=
-pping.</span><br></blockquote></blockquote></blockquote></blockquote></block=
-quote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>Signed-off-=
-by: Randy Li &lt;ayaka@soulik.info&gt;</span><br></blockquote></blockquote><=
-/blockquote></blockquote></blockquote><blockquote type=3D"cite"><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote=
- type=3D"cite"><span>---</span><br></blockquote></blockquote></blockquote></=
-blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite">=
-<blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite=
-"><span>drivers/media/common/videobuf2/Kconfig &nbsp;&nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;| &nbsp;&nbsp;6 +</span><br></blockquote></blockquote></blockqu=
-ote></blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"=
-cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><span>drivers/media/common/videobuf2/Makefile &nbsp;&nbsp;&nbsp;&nbsp=
-;&nbsp;&nbsp;| &nbsp;&nbsp;1 +</span><br></blockquote></blockquote></blockqu=
-ote></blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"=
-cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><span>.../common/videobuf2/videobuf2-dma-heap.c &nbsp;&nbsp;&nbsp;&nb=
-sp;| 350 ++++++++++++++++++</span><br></blockquote></blockquote></blockquote=
-></blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cit=
-e"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"c=
-ite"><span>include/media/videobuf2-dma-heap.h &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;30 ++</span><br></blockquote></b=
-lockquote></blockquote></blockquote></blockquote><blockquote type=3D"cite"><=
-blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"=
-><blockquote type=3D"cite"><span>4 files changed, 387 insertions(+)</span><b=
-r></blockquote></blockquote></blockquote></blockquote></blockquote><blockquo=
-te type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockq=
-uote type=3D"cite"><blockquote type=3D"cite"><span>create mode 100644 driver=
-s/media/common/videobuf2/videobuf2-dma-heap.c</span><br></blockquote></block=
-quote></blockquote></blockquote></blockquote><blockquote type=3D"cite"><bloc=
-kquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><bl=
-ockquote type=3D"cite"><span>create mode 100644 include/media/videobuf2-dma-=
-heap.h</span><br></blockquote></blockquote></blockquote></blockquote></block=
-quote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><span>First of all, thanks for the series.<=
-/span><br></blockquote></blockquote></blockquote></blockquote><blockquote ty=
-pe=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote t=
-ype=3D"cite"><span>Possibly a stupid question, but why not just allocate the=
- DMA-bufs</span><br></blockquote></blockquote></blockquote></blockquote><blo=
-ckquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><b=
-lockquote type=3D"cite"><span>directly from the DMA-buf heap device in the u=
-serspace and just import</span><br></blockquote></blockquote></blockquote></=
-blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><span>the buffers to the V4L2 device u=
-sing V4L2_MEMORY_DMABUF?</span><br></blockquote></blockquote></blockquote></=
-blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote t=
-ype=3D"cite"><span>Sometimes the allocation policy could be very complex, le=
-t's suppose a</span><br></blockquote></blockquote></blockquote><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>multi=
-ple planes pixel format enabling with frame buffer compression.</span><br></=
-blockquote></blockquote></blockquote><blockquote type=3D"cite"><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><span>Its luma, chroma data could be a=
-llocated from a pool which is delegated</span><br></blockquote></blockquote>=
-</blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote=
- type=3D"cite"><span>for large buffers while its metadata would come from a p=
-ool which many</span><br></blockquote></blockquote></blockquote><blockquote t=
-ype=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>users=
- could take some few slices from it(likes system pool).</span><br></blockquo=
-te></blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D"c=
-ite"><blockquote type=3D"cite"><span>Then when we have a new users knowing n=
-othing about this platform, if we</span><br></blockquote></blockquote></bloc=
-kquote><blockquote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><span>just configure the alloc_devs in each queues well. The user won=
-'t need</span><br></blockquote></blockquote></blockquote><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>to know tho=
-se complex rules.</span><br></blockquote></blockquote></blockquote><blockquo=
-te type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span>T=
-he real situation could be more complex, Samsung MFC's left and right</span>=
-<br></blockquote></blockquote></blockquote><blockquote type=3D"cite"><blockq=
-uote type=3D"cite"><blockquote type=3D"cite"><span>banks could be regarded a=
-s two pools, many devices would benefit from</span><br></blockquote></blockq=
-uote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><block=
-quote type=3D"cite"><span>this either from the allocation times or the secur=
-ity buffers policy.</span><br></blockquote></blockquote></blockquote><blockq=
-uote type=3D"cite"><blockquote type=3D"cite"><blockquote type=3D"cite"><span=
->In our design, when we need to do some security decoding(DRM video),</span>=
-<br></blockquote></blockquote></blockquote><blockquote type=3D"cite"><blockq=
-uote type=3D"cite"><blockquote type=3D"cite"><span>codecs2 would allocate bu=
-ffers from the pool delegated for that. While</span><br></blockquote></block=
-quote></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><bloc=
-kquote type=3D"cite"><span>the non-DRM video, users could not care about thi=
-s.</span><br></blockquote></blockquote></blockquote><blockquote type=3D"cite=
-"><blockquote type=3D"cite"><span></span><br></blockquote></blockquote><bloc=
-kquote type=3D"cite"><blockquote type=3D"cite"><span>I'm a little bit surpri=
-sed about this, because on Android all the</span><br></blockquote></blockquo=
-te><blockquote type=3D"cite"><blockquote type=3D"cite"><span>graphics buffer=
-s are allocated from the system IAllocator and imported</span><br></blockquo=
-te></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite"><span>to=
- the specific devices.</span><br></blockquote></blockquote><blockquote type=3D=
-"cite"><span>In the non-tunnel mode, yes it is. While the tunnel mode is com=
-pletely vendor defined. Neither HWC nor codec2 cares about where the buffers=
- coming from, you could do what ever you want.</span><br></blockquote><block=
-quote type=3D"cite"><span></span><br></blockquote><blockquote type=3D"cite">=
-<span>Besides there are DRM video in GNU Linux platform, I heard the webkit h=
-as made huge effort here and Playready is one could work in non-Android Linu=
-x.</span><br></blockquote><blockquote type=3D"cite"><blockquote type=3D"cite=
-"><span>Would it make sense to instead extend the UAPI to expose enough</spa=
-n><br></blockquote></blockquote><blockquote type=3D"cite"><blockquote type=3D=
-"cite"><span>information about the allocation requirements to the userspace,=
- so it</span><br></blockquote></blockquote><blockquote type=3D"cite"><blockq=
-uote type=3D"cite"><span>can allocate correctly?</span><br></blockquote></bl=
-ockquote><blockquote type=3D"cite"><span>Yes, it could. But as I said it wou=
-ld need the users to do more works.</span><br></blockquote><blockquote type=3D=
-"cite"><blockquote type=3D"cite"><span>My reasoning here is that it's not a d=
-river's decision to allocate</span><br></blockquote></blockquote><blockquote=
- type=3D"cite"><blockquote type=3D"cite"><span>from a DMA-buf heap (and whic=
-h one) or not. It's the userspace which</span><br></blockquote></blockquote>=
-<blockquote type=3D"cite"><blockquote type=3D"cite"><span>knows that, based o=
-n the specific use case that it wants to fulfill.</span><br></blockquote></b=
-lockquote><blockquote type=3D"cite"><span>Although I would like to let the u=
-sers decide that, users just can=E2=80=99t do that which would violate the s=
-ecurity rules in some platforms.</span><br></blockquote><blockquote type=3D"=
-cite"><span>For example, &nbsp;video codec and display device could only acc=
-ess a region of memory, any other device or trusted apps can=E2=80=99t acces=
-s it. Users have to allocate the buffer from the pool the vendor decided.</s=
-pan><br></blockquote><blockquote type=3D"cite"><span></span><br></blockquote=
-><blockquote type=3D"cite"><span>So why not we offer a quick way that users d=
-on=E2=80=99t need to try and error.</span><br></blockquote><span></span><br>=
-<span>In principle, I'm not against integrating DMA-buf heap with vb2,</span=
-><br><span>however I see some problems I mentioned before:</span><br><span><=
-/span><br><span>1) How would the driver know if it should allocate from a DM=
-A-buf heap or not?</span></div></blockquote>struct vb2_queue.mem_ops<div><sp=
-an style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);"><br></span></di=
-v><div><span style=3D"caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">int (=
-*queue_setup)(struct vb2_queue *q,unsigned int *num_buffers, unsigned int *n=
-um_planes, unsigned int sizes[], struct device *alloc_devs[]);</span></div><=
-div><font color=3D"#000000"><span style=3D"caret-color: rgb(0, 0, 0);"><br><=
-/span></font><div><blockquote type=3D"cite"><div dir=3D"ltr"><span>2) How wo=
-uld the driver know which heap to allocate from?</span><br></div></blockquot=
-e><div>=46rom vb2_queue.alloc_devs</div><div><br></div><div>What I did now i=
-s likes what MFC does, create some mem_alloc_devs.</div><div>It would be bet=
-ter that we could retrieve the DMA-heaps=E2=80=99 devices from kernel, but t=
-hat is not enough, we need a place to store the heap flags although none of t=
-hem are defined yet.</div><div><br></div><div>=46rom Android documents, I th=
-ink it is unlikely we would have heap flags.</div><div>=E2=80=9CStandardizat=
-ion: The DMA-BUF heaps framework offers a well-defined UAPI. ION allowed cus=
-tom flags and heap IDs that prevented developing a common testing framework b=
-ecause each device=E2=80=99s ION implementation could behave differently.=E2=
-=80=9D</div><div><br><blockquote type=3D"cite"><div dir=3D"ltr"><span>3) How=
- would the heap know how to allocate properly for the device?</span><br><spa=
-n></span><br></div></blockquote>Because =E2=80=9Ceach DMA-BUF heap is a sepa=
-rate character device=E2=80=9D.</div><div>But as I said in the first draft I=
- am not sure about the DMA mapping part. alloc_devs responds for the heap, w=
-e have a device variable in the queue that mapping function could access, bu=
-t that may not be enough. A plane may apply a different mapping policy or IO=
-MMU here.</div><div><br></div><div>Would it be better that I create a interf=
-ace here that creating a memdev with DMA-heap description ?&nbsp;<br><blockq=
-uote type=3D"cite"><div dir=3D"ltr"><span>Best regards,</span><br><span>Toma=
-sz</span><br></div></blockquote></div></div></div></body></html>=
-
---Apple-Mail-62FF0608-D7AC-4BEA-92D0-19895551D34C--
-
---===============2077861066240811239==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============2077861066240811239==--
+U29ycnksIHRoZSBwcmV2aW91cyBvbmUgY29udGFpbnMgaHRtbCBkYXRhLg0KDQo+IE9uIEF1ZyAy
+LCAyMDIyLCBhdCAzOjMzIFBNLCBUb21hc3ogRmlnYSA8dGZpZ2FAY2hyb21pdW0ub3JnPiB3cm90
+ZToNCj4gDQo+IO+7v09uIE1vbiwgQXVnIDEsIDIwMjIgYXQgODo0MyBQTSBheWFrYSA8YXlha2FA
+c291bGlrLmluZm8+IHdyb3RlOg0KPj4gU2VudCBmcm9tIG15IGlQYWQNCj4+Pj4gT24gQXVnIDEs
+IDIwMjIsIGF0IDU6NDYgUE0sIFRvbWFzeiBGaWdhIDx0ZmlnYUBjaHJvbWl1bS5vcmc+IHdyb3Rl
+Og0KPj4+IO+7v0NBVVRJT046IEVtYWlsIG9yaWdpbmF0ZWQgZXh0ZXJuYWxseSwgZG8gbm90IGNs
+aWNrIGxpbmtzIG9yIG9wZW4gYXR0YWNobWVudHMgdW5sZXNzIHlvdSByZWNvZ25pemUgdGhlIHNl
+bmRlciBhbmQga25vdyB0aGUgY29udGVudCBpcyBzYWZlLg0KPj4+PiBPbiBNb24sIEF1ZyAxLCAy
+MDIyIGF0IDM6NDQgUE0gSHNpYS1KdW4gTGkgPFJhbmR5LkxpQHN5bmFwdGljcy5jb20+IHdyb3Rl
+Og0KPj4+Pj4gT24gOC8xLzIyIDE0OjE5LCBUb21hc3ogRmlnYSB3cm90ZToNCj4+Pj4gSGVsbG8g
+VG9tYXN6DQo+Pj4+PiA/SGkgUmFuZHksDQo+Pj4+PiBPbiBNb24sIEF1ZyAxLCAyMDIyIGF0IDU6
+MjEgQU0gPGF5YWthQHNvdWxpay5pbmZvPiB3cm90ZToNCj4+Pj4+PiBGcm9tOiBSYW5keSBMaSA8
+YXlha2FAc291bGlrLmluZm8+DQo+Pj4+Pj4gVGhpcyBtb2R1bGUgaXMgc3RpbGwgYXQgYSBlYXJs
+eSBzdGFnZSwgSSB3cm90ZSB0aGlzIGZvciBzaG93aW5nIHdoYXQNCj4+Pj4+PiBBUElzIHdlIG5l
+ZWQgaGVyZS4NCj4+Pj4+PiBMZXQgbWUgZXhwbGFpbiB3aHkgd2UgbmVlZCBzdWNoIGEgbW9kdWxl
+IGhlcmUuDQo+Pj4+Pj4gSWYgeW91IHdvbid0IGFsbG9jYXRlIGJ1ZmZlcnMgZnJvbSBhIFY0TDIg
+TTJNIGRldmljZSwgdGhpcyBtb2R1bGUNCj4+Pj4+PiBtYXkgbm90IGJlIHZlcnkgdXNlZnVsLiBJ
+IGFtIHN1cmUgdGhlIG1vc3Qgb2YgdXNlcnMgd29uJ3Qga25vdyBhDQo+Pj4+Pj4gZGV2aWNlIHdv
+dWxkIHJlcXVpcmUgdGhlbSBhbGxvY2F0ZSBidWZmZXJzIGZyb20gYSBETUEtSGVhcCB0aGVuDQo+
+Pj4+Pj4gaW1wb3J0IHRob3NlIGJ1ZmZlcnMgaW50byBhIFY0TDIncyBxdWV1ZS4NCj4+Pj4+PiBU
+aGVuIHRoZSBxdWVzdGlvbiBnb2VzIGJhY2sgdG8gd2h5IERNQS1IZWFwLiBGcm9tIHRoZSBBbmRy
+b2lkJ3MNCj4+Pj4+PiBkZXNjcmlwdGlvbiwgd2Uga25vdyBpdCBpcyBhYm91dCB0aGUgY29weXJp
+Z2h0J3MgRFJNLg0KPj4+Pj4+IFdoZW4gd2UgYWxsb2NhdGUgYSBidWZmZXIgaW4gYSBETUEtSGVh
+cCwgaXQgbWF5IHJlZ2lzdGVyIHRoYXQgYnVmZmVyDQo+Pj4+Pj4gaW4gdGhlIHRydXN0ZWQgZXhl
+Y3V0aW9uIGVudmlyb25tZW50IHNvIHRoZSBmaXJtd2FyZSB3aGljaCBpcyBydW5uaW5nDQo+Pj4+
+Pj4gb3IgY291bGQgb25seSBiZSBhY2NjZXNlZCBmcm9tIHRoZXJlIGNvdWxkIHVzZSB0aGF0IGJ1
+ZmZlciBsYXRlci4NCj4+Pj4+PiBUaGUgYW5zd2VyIGFib3ZlIGxlYWRzIHRvIGFub3RoZXIgdGhp
+bmcgd2hpY2ggaXMgbm90IGRvbmUgaW4gdGhpcw0KPj4+Pj4+IHZlcnNpb24sIHRoZSBETUEgbWFw
+cGluZy4gQWx0aG91Z2ggaW4gc29tZSBwbGF0Zm9ybXMsIGEgRE1BLUhlYXANCj4+Pj4+PiByZXNw
+b25zZXMgYSBJT01NVSBkZXZpY2UgYXMgd2VsbC4gRm9yIHRoZSBnZW5lcm5hbCBwdXJwb3NlLCB3
+ZSB3b3VsZA0KPj4+Pj4+IGJlIGJldHRlciBhc3N1bWluZyB0aGUgZGV2aWNlIG1hcHBpbmcgc2hv
+dWxkIGJlIGRvbmUgZm9yIGVhY2ggZGV2aWNlDQo+Pj4+Pj4gaXRzZWxmLiBUaGUgcHJvYmxlbSBo
+ZXJlIHdlIG9ubHkga25vdyBhbGxvY19kZXZzIGluIHRob3NlIERNQWJ1Zg0KPj4+Pj4+IG1ldGhv
+ZHMsIHdoaWNoIGFyZSBETUEtaGVhcHMgaW4gbXkgZGVzaWduLCB0aGUgZGV2aWNlIGZyb20gdGhl
+IHF1ZXVlDQo+Pj4+Pj4gaXMgbm90IGVub3VnaCwgYSBwbGFuZSBtYXkgcmVxdWVzdHMgYW5vdGhl
+ciBJT01NVSBkZXZpY2Ugb3IgdGFibGUNCj4+Pj4+PiBmb3IgbWFwcGluZy4NCj4+Pj4+PiBTaWdu
+ZWQtb2ZmLWJ5OiBSYW5keSBMaSA8YXlha2FAc291bGlrLmluZm8+DQo+Pj4+Pj4gLS0tDQo+Pj4+
+Pj4gZHJpdmVycy9tZWRpYS9jb21tb24vdmlkZW9idWYyL0tjb25maWcgICAgICAgIHwgICA2ICsN
+Cj4+Pj4+PiBkcml2ZXJzL21lZGlhL2NvbW1vbi92aWRlb2J1ZjIvTWFrZWZpbGUgICAgICAgfCAg
+IDEgKw0KPj4+Pj4+IC4uLi9jb21tb24vdmlkZW9idWYyL3ZpZGVvYnVmMi1kbWEtaGVhcC5jICAg
+ICB8IDM1MCArKysrKysrKysrKysrKysrKysNCj4+Pj4+PiBpbmNsdWRlL21lZGlhL3ZpZGVvYnVm
+Mi1kbWEtaGVhcC5oICAgICAgICAgICAgfCAgMzAgKysNCj4+Pj4+PiA0IGZpbGVzIGNoYW5nZWQs
+IDM4NyBpbnNlcnRpb25zKCspDQo+Pj4+Pj4gY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvbWVk
+aWEvY29tbW9uL3ZpZGVvYnVmMi92aWRlb2J1ZjItZG1hLWhlYXAuYw0KPj4+Pj4+IGNyZWF0ZSBt
+b2RlIDEwMDY0NCBpbmNsdWRlL21lZGlhL3ZpZGVvYnVmMi1kbWEtaGVhcC5oDQo+Pj4+PiBGaXJz
+dCBvZiBhbGwsIHRoYW5rcyBmb3IgdGhlIHNlcmllcy4NCj4+Pj4+IFBvc3NpYmx5IGEgc3R1cGlk
+IHF1ZXN0aW9uLCBidXQgd2h5IG5vdCBqdXN0IGFsbG9jYXRlIHRoZSBETUEtYnVmcw0KPj4+Pj4g
+ZGlyZWN0bHkgZnJvbSB0aGUgRE1BLWJ1ZiBoZWFwIGRldmljZSBpbiB0aGUgdXNlcnNwYWNlIGFu
+ZCBqdXN0IGltcG9ydA0KPj4+Pj4gdGhlIGJ1ZmZlcnMgdG8gdGhlIFY0TDIgZGV2aWNlIHVzaW5n
+IFY0TDJfTUVNT1JZX0RNQUJVRj8NCj4+Pj4gU29tZXRpbWVzIHRoZSBhbGxvY2F0aW9uIHBvbGlj
+eSBjb3VsZCBiZSB2ZXJ5IGNvbXBsZXgsIGxldCdzIHN1cHBvc2UgYQ0KPj4+PiBtdWx0aXBsZSBw
+bGFuZXMgcGl4ZWwgZm9ybWF0IGVuYWJsaW5nIHdpdGggZnJhbWUgYnVmZmVyIGNvbXByZXNzaW9u
+Lg0KPj4+PiBJdHMgbHVtYSwgY2hyb21hIGRhdGEgY291bGQgYmUgYWxsb2NhdGVkIGZyb20gYSBw
+b29sIHdoaWNoIGlzIGRlbGVnYXRlZA0KPj4+PiBmb3IgbGFyZ2UgYnVmZmVycyB3aGlsZSBpdHMg
+bWV0YWRhdGEgd291bGQgY29tZSBmcm9tIGEgcG9vbCB3aGljaCBtYW55DQo+Pj4+IHVzZXJzIGNv
+dWxkIHRha2Ugc29tZSBmZXcgc2xpY2VzIGZyb20gaXQobGlrZXMgc3lzdGVtIHBvb2wpLg0KPj4+
+PiBUaGVuIHdoZW4gd2UgaGF2ZSBhIG5ldyB1c2VycyBrbm93aW5nIG5vdGhpbmcgYWJvdXQgdGhp
+cyBwbGF0Zm9ybSwgaWYgd2UNCj4+Pj4ganVzdCBjb25maWd1cmUgdGhlIGFsbG9jX2RldnMgaW4g
+ZWFjaCBxdWV1ZXMgd2VsbC4gVGhlIHVzZXIgd29uJ3QgbmVlZA0KPj4+PiB0byBrbm93IHRob3Nl
+IGNvbXBsZXggcnVsZXMuDQo+Pj4+IFRoZSByZWFsIHNpdHVhdGlvbiBjb3VsZCBiZSBtb3JlIGNv
+bXBsZXgsIFNhbXN1bmcgTUZDJ3MgbGVmdCBhbmQgcmlnaHQNCj4+Pj4gYmFua3MgY291bGQgYmUg
+cmVnYXJkZWQgYXMgdHdvIHBvb2xzLCBtYW55IGRldmljZXMgd291bGQgYmVuZWZpdCBmcm9tDQo+
+Pj4+IHRoaXMgZWl0aGVyIGZyb20gdGhlIGFsbG9jYXRpb24gdGltZXMgb3IgdGhlIHNlY3VyaXR5
+IGJ1ZmZlcnMgcG9saWN5Lg0KPj4+PiBJbiBvdXIgZGVzaWduLCB3aGVuIHdlIG5lZWQgdG8gZG8g
+c29tZSBzZWN1cml0eSBkZWNvZGluZyhEUk0gdmlkZW8pLA0KPj4+PiBjb2RlY3MyIHdvdWxkIGFs
+bG9jYXRlIGJ1ZmZlcnMgZnJvbSB0aGUgcG9vbCBkZWxlZ2F0ZWQgZm9yIHRoYXQuIFdoaWxlDQo+
+Pj4+IHRoZSBub24tRFJNIHZpZGVvLCB1c2VycyBjb3VsZCBub3QgY2FyZSBhYm91dCB0aGlzLg0K
+Pj4+IEknbSBhIGxpdHRsZSBiaXQgc3VycHJpc2VkIGFib3V0IHRoaXMsIGJlY2F1c2Ugb24gQW5k
+cm9pZCBhbGwgdGhlDQo+Pj4gZ3JhcGhpY3MgYnVmZmVycyBhcmUgYWxsb2NhdGVkIGZyb20gdGhl
+IHN5c3RlbSBJQWxsb2NhdG9yIGFuZCBpbXBvcnRlZA0KPj4+IHRvIHRoZSBzcGVjaWZpYyBkZXZp
+Y2VzLg0KPj4gSW4gdGhlIG5vbi10dW5uZWwgbW9kZSwgeWVzIGl0IGlzLiBXaGlsZSB0aGUgdHVu
+bmVsIG1vZGUgaXMgY29tcGxldGVseSB2ZW5kb3IgZGVmaW5lZC4gTmVpdGhlciBIV0Mgbm9yIGNv
+ZGVjMiBjYXJlcyBhYm91dCB3aGVyZSB0aGUgYnVmZmVycyBjb21pbmcgZnJvbSwgeW91IGNvdWxk
+IGRvIHdoYXQgZXZlciB5b3Ugd2FudC4NCj4+IEJlc2lkZXMgdGhlcmUgYXJlIERSTSB2aWRlbyBp
+biBHTlUgTGludXggcGxhdGZvcm0sIEkgaGVhcmQgdGhlIHdlYmtpdCBoYXMgbWFkZSBodWdlIGVm
+Zm9ydCBoZXJlIGFuZCBQbGF5cmVhZHkgaXMgb25lIGNvdWxkIHdvcmsgaW4gbm9uLUFuZHJvaWQg
+TGludXguDQo+Pj4gV291bGQgaXQgbWFrZSBzZW5zZSB0byBpbnN0ZWFkIGV4dGVuZCB0aGUgVUFQ
+SSB0byBleHBvc2UgZW5vdWdoDQo+Pj4gaW5mb3JtYXRpb24gYWJvdXQgdGhlIGFsbG9jYXRpb24g
+cmVxdWlyZW1lbnRzIHRvIHRoZSB1c2Vyc3BhY2UsIHNvIGl0DQo+Pj4gY2FuIGFsbG9jYXRlIGNv
+cnJlY3RseT8NCj4+IFllcywgaXQgY291bGQuIEJ1dCBhcyBJIHNhaWQgaXQgd291bGQgbmVlZCB0
+aGUgdXNlcnMgdG8gZG8gbW9yZSB3b3Jrcy4NCj4+PiBNeSByZWFzb25pbmcgaGVyZSBpcyB0aGF0
+IGl0J3Mgbm90IGEgZHJpdmVyJ3MgZGVjaXNpb24gdG8gYWxsb2NhdGUNCj4+PiBmcm9tIGEgRE1B
+LWJ1ZiBoZWFwIChhbmQgd2hpY2ggb25lKSBvciBub3QuIEl0J3MgdGhlIHVzZXJzcGFjZSB3aGlj
+aA0KPj4+IGtub3dzIHRoYXQsIGJhc2VkIG9uIHRoZSBzcGVjaWZpYyB1c2UgY2FzZSB0aGF0IGl0
+IHdhbnRzIHRvIGZ1bGZpbGwuDQo+PiBBbHRob3VnaCBJIHdvdWxkIGxpa2UgdG8gbGV0IHRoZSB1
+c2VycyBkZWNpZGUgdGhhdCwgdXNlcnMganVzdCBjYW7igJl0IGRvIHRoYXQgd2hpY2ggd291bGQg
+dmlvbGF0ZSB0aGUgc2VjdXJpdHkgcnVsZXMgaW4gc29tZSBwbGF0Zm9ybXMuDQo+PiBGb3IgZXhh
+bXBsZSwgIHZpZGVvIGNvZGVjIGFuZCBkaXNwbGF5IGRldmljZSBjb3VsZCBvbmx5IGFjY2VzcyBh
+IHJlZ2lvbiBvZiBtZW1vcnksIGFueSBvdGhlciBkZXZpY2Ugb3IgdHJ1c3RlZCBhcHBzIGNhbuKA
+mXQgYWNjZXNzIGl0LiBVc2VycyBoYXZlIHRvIGFsbG9jYXRlIHRoZSBidWZmZXIgZnJvbSB0aGUg
+cG9vbCB0aGUgdmVuZG9yIGRlY2lkZWQuDQo+PiBTbyB3aHkgbm90IHdlIG9mZmVyIGEgcXVpY2sg
+d2F5IHRoYXQgdXNlcnMgZG9u4oCZdCBuZWVkIHRvIHRyeSBhbmQgZXJyb3IuDQo+IA0KPiBJbiBw
+cmluY2lwbGUsIEknbSBub3QgYWdhaW5zdCBpbnRlZ3JhdGluZyBETUEtYnVmIGhlYXAgd2l0aCB2
+YjIsDQo+IGhvd2V2ZXIgSSBzZWUgc29tZSBwcm9ibGVtcyBJIG1lbnRpb25lZCBiZWZvcmU6DQo+
+IA0KPiAxKSBIb3cgd291bGQgdGhlIGRyaXZlciBrbm93IGlmIGl0IHNob3VsZCBhbGxvY2F0ZSBm
+cm9tIGEgRE1BLWJ1ZiBoZWFwIG9yIG5vdD8NCg0Kc3RydWN0IHZiMl9xdWV1ZS5tZW1fb3BzDQoN
+CmludCAoKnF1ZXVlX3NldHVwKShzdHJ1Y3QgdmIyX3F1ZXVlICpxLHVuc2lnbmVkIGludCAqbnVt
+X2J1ZmZlcnMsIHVuc2lnbmVkIGludCAqbnVtX3BsYW5lcywgdW5zaWduZWQgaW50IHNpemVzW10s
+IHN0cnVjdCBkZXZpY2UgKmFsbG9jX2RldnNbXSk7DQoNCj4gMikgSG93IHdvdWxkIHRoZSBkcml2
+ZXIga25vdyB3aGljaCBoZWFwIHRvIGFsbG9jYXRlIGZyb20/DQoNCkZyb20gdmIyX3F1ZXVlLmFs
+bG9jX2RldnMNCg0KV2hhdCBJIGRpZCBub3cgaXMgbGlrZXMgd2hhdCBNRkMgZG9lcywgY3JlYXRl
+IHNvbWUgbWVtX2FsbG9jX2RldnMuDQpJdCB3b3VsZCBiZSBiZXR0ZXIgdGhhdCB3ZSBjb3VsZCBy
+ZXRyaWV2ZSB0aGUgRE1BLWhlYXBz4oCZIGRldmljZXMgZnJvbSBrZXJuZWwsIGJ1dCB0aGF0IGlz
+IG5vdCBlbm91Z2gsIHdlIG5lZWQgYSBwbGFjZSB0byBzdG9yZSB0aGUgaGVhcCBmbGFncyBhbHRo
+b3VnaCBub25lIG9mIHRoZW0gYXJlIGRlZmluZWQgeWV0Lg0KDQpGcm9tIEFuZHJvaWQgZG9jdW1l
+bnRzLCBJIHRoaW5rIGl0IGlzIHVubGlrZWx5IHdlIHdvdWxkIGhhdmUgaGVhcCBmbGFncy4NCuKA
+nFN0YW5kYXJkaXphdGlvbjogVGhlIERNQS1CVUYgaGVhcHMgZnJhbWV3b3JrIG9mZmVycyBhIHdl
+bGwtZGVmaW5lZCBVQVBJLiBJT04gYWxsb3dlZCBjdXN0b20gZmxhZ3MgYW5kIGhlYXAgSURzIHRo
+YXQgcHJldmVudGVkIGRldmVsb3BpbmcgYSBjb21tb24gdGVzdGluZyBmcmFtZXdvcmsgYmVjYXVz
+ZSBlYWNoIGRldmljZeKAmXMgSU9OIGltcGxlbWVudGF0aW9uIGNvdWxkIGJlaGF2ZSBkaWZmZXJl
+bnRseS7igJ0NCg0KPiAzKSBIb3cgd291bGQgdGhlIGhlYXAga25vdyBob3cgdG8gYWxsb2NhdGUg
+cHJvcGVybHkgZm9yIHRoZSBkZXZpY2U/DQo+IA0KQmVjYXVzZSDigJxlYWNoIERNQS1CVUYgaGVh
+cCBpcyBhIHNlcGFyYXRlIGNoYXJhY3RlciBkZXZpY2XigJ0uDQpCdXQgYXMgSSBzYWlkIGluIHRo
+ZSBmaXJzdCBkcmFmdCBJIGFtIG5vdCBzdXJlIGFib3V0IHRoZSBETUEgbWFwcGluZyBwYXJ0LiBh
+bGxvY19kZXZzIHJlc3BvbmRzIGZvciB0aGUgaGVhcCwgd2UgaGF2ZSBhIGRldmljZSB2YXJpYWJs
+ZSBpbiB0aGUgcXVldWUgdGhhdCBtYXBwaW5nIGZ1bmN0aW9uIGNvdWxkIGFjY2VzcywgYnV0IHRo
+YXQgbWF5IG5vdCBiZSBlbm91Z2guIEEgcGxhbmUgbWF5IGFwcGx5IGEgZGlmZmVyZW50IG1hcHBp
+bmcgcG9saWN5IG9yIElPTU1VIGhlcmUuDQoNCldvdWxkIGl0IGJlIGJldHRlciB0aGF0IEkgY3Jl
+YXRlIGEgaW50ZXJmYWNlIGhlcmUgdGhhdCBjcmVhdGluZyBhIG1lbWRldiB3aXRoIERNQS1oZWFw
+IGRlc2NyaXB0aW9uID8gDQoNCj4gQmVzdCByZWdhcmRzLA0KPiBUb21hc3oNCg0KX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWls
+aW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJl
+IHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
