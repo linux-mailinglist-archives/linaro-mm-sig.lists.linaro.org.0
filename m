@@ -2,149 +2,204 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD37D5A81B8
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 17:40:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97D3C5A8E0C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 08:13:45 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0080543F49
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 15:40:58 +0000 (UTC)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-	by lists.linaro.org (Postfix) with ESMTPS id 2E48043F49
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 31 Aug 2022 15:40:21 +0000 (UTC)
-Received: from dimapc.. (109-252-119-13.nat.spd-mgts.ru [109.252.119.13])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: dmitry.osipenko)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id 839826601E58;
-	Wed, 31 Aug 2022 16:40:17 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1661960420;
-	bh=X6+cHdBcYoofQ/ea0HJ3XSrd+3wQc+6k4P4KoLaHXmw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=CvPSAXgoUaJptHhz6ntZ4HfZFNqNSVu8Uhx5gdFZizZ5wNTkZ2TXBgjmGArOrzTsI
-	 EX9IGJoD7YNYICqH7CJHWIxcjxFsSnNnZT5QCOBFfcaSmA0LimW8vw3n3ZyJC/PM1K
-	 bkSvcksN8TvjoiXsx4l+vd639Gt/kebvz9P5mKcxDq+5ZgvMnVu+arcqSEfMx4O1Y2
-	 j6iSkn4FYOTBtofQYDS0bqMvMZZLmuZhXl3t9SS9owkRGwdUJP3UqeSo4gWyidJtx6
-	 MNksLlFbKwY9PCs714XVdEo80iZJRuAetN/bj97toAQ7rh2a87KOpIqcsLtBCHPN0f
-	 UJs0gPbPXdJWg==
-From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-To: David Airlie <airlied@linux.ie>,
-	Gerd Hoffmann <kraxel@redhat.com>,
-	Gurchetan Singh <gurchetansingh@chromium.org>,
-	Chia-I Wu <olvaffe@gmail.com>,
-	Daniel Vetter <daniel@ffwll.ch>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Gert Wollny <gert.wollny@collabora.com>,
-	Gustavo Padovan <gustavo.padovan@collabora.com>,
-	Daniel Stone <daniel@fooishbar.org>,
-	Tomeu Vizoso <tomeu.vizoso@collabora.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Rob Clark <robdclark@gmail.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
-	"Pan, Xinhui" <Xinhui.Pan@amd.com>,
-	Thierry Reding <thierry.reding@gmail.com>,
-	Tomasz Figa <tfiga@chromium.org>,
-	Marek Szyprowski <m.szyprowski@samsung.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Jani Nikula <jani.nikula@linux.intel.com>,
-	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
-	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas_os@shipmail.org>,
-	Qiang Yu <yuq825@gmail.com>,
-	Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
-	Amol Maheshwari <amahesh@qti.qualcomm.com>,
-	Jason Gunthorpe <jgg@ziepe.ca>,
-	Leon Romanovsky <leon@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Tomi Valkeinen <tomba@kernel.org>,
-	Russell King <linux@armlinux.org.uk>,
-	Lucas Stach <l.stach@pengutronix.de>,
-	Christian Gmeiner <christian.gmeiner@gmail.com>
-Date: Wed, 31 Aug 2022 18:37:57 +0300
-Message-Id: <20220831153757.97381-22-dmitry.osipenko@collabora.com>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20220831153757.97381-1-dmitry.osipenko@collabora.com>
-References: <20220831153757.97381-1-dmitry.osipenko@collabora.com>
+	by lists.linaro.org (Postfix) with ESMTP id 55EA63F540
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 06:13:44 +0000 (UTC)
+Received: from alexa-out.qualcomm.com (alexa-out.qualcomm.com [129.46.98.28])
+	by lists.linaro.org (Postfix) with ESMTPS id 35E063ED93
+	for <linaro-mm-sig@lists.linaro.org>; Sun,  7 Aug 2022 20:25:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=quicinc.com; i=@quicinc.com; q=dns/txt; s=qcdkim;
+  t=1659903953; x=1691439953;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=eQ5vUTIVjFaJOW49JpDtCqaTs+jr2jaJBCrYgnxt4dI=;
+  b=N5EVe6SWkfIjMBYqNx9tkukCc/lPhO+mzjPh/cSqxKf4hP1wa5WrfskT
+   AA0Sc2CNxrgSaTwnShlmB/AEXz7WnnpKDF0QkO7Ska/ltxnXJDC9dCjO/
+   EwQz28V+6HG7DZeWgrs6LNtdDtBgySnPcZBvCE74AS9LZUaHdLhFu+5qs
+   M=;
+Received: from ironmsg09-lv.qualcomm.com ([10.47.202.153])
+  by alexa-out.qualcomm.com with ESMTP; 07 Aug 2022 13:25:52 -0700
+X-QCInternal: smtphost
+Received: from nasanex01c.na.qualcomm.com ([10.47.97.222])
+  by ironmsg09-lv.qualcomm.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Aug 2022 13:25:52 -0700
+Received: from nalasex01a.na.qualcomm.com (10.47.209.196) by
+ nasanex01c.na.qualcomm.com (10.47.97.222) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.22; Sun, 7 Aug 2022 13:25:51 -0700
+Received: from [10.216.42.249] (10.80.80.8) by nalasex01a.na.qualcomm.com
+ (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.22; Sun, 7 Aug 2022
+ 13:25:48 -0700
+Message-ID: <62afe47a-1a50-80ef-400d-8c238f1cb332@quicinc.com>
+Date: Mon, 8 Aug 2022 01:55:45 +0530
 MIME-Version: 1.0
-Message-ID-Hash: IEWUNTN6JUR5BKKGQFDGC3UQVXBBGT7U
-X-Message-ID-Hash: IEWUNTN6JUR5BKKGQFDGC3UQVXBBGT7U
-X-MailFrom: dmitry.osipenko@collabora.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.3.2
+Content-Language: en-US
+To: Rob Clark <robdclark@gmail.com>, <dri-devel@lists.freedesktop.org>
+References: <20220729170744.1301044-1-robdclark@gmail.com>
+ <20220729170744.1301044-2-robdclark@gmail.com>
+From: Akhil P Oommen <quic_akhilpo@quicinc.com>
+In-Reply-To: <20220729170744.1301044-2-robdclark@gmail.com>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-MailFrom: quic_akhilpo@quicinc.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Message-ID-Hash: AJ3P32UXJKEWRRSGK6QMJJ7HAPETEYPU
+X-Message-ID-Hash: AJ3P32UXJKEWRRSGK6QMJJ7HAPETEYPU
+X-Mailman-Approved-At: Thu, 01 Sep 2022 06:13:39 +0000
+CC: Rob Clark <robdclark@chromium.org>, =?UTF-8?B?SsOpcsO0bWUgUG91aWxsZXI=?= <jerome.pouiller@silabs.com>, open list <linux-kernel@vger.kernel.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, freedreno@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v4 21/21] dma-buf: Remove obsoleted internal lock
+Subject: [Linaro-mm-sig] Re: [Freedreno] [PATCH 1/3] dma-buf: Add ioctl to query mmap info
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IEWUNTN6JUR5BKKGQFDGC3UQVXBBGT7U/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AJ3P32UXJKEWRRSGK6QMJJ7HAPETEYPU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-VGhlIGludGVybmFsIGRtYS1idWYgbG9jayBpc24ndCBuZWVkZWQgYW55bW9yZSBiZWNhdXNlIHRo
-ZSB1cGRhdGVkDQpsb2NraW5nIHNwZWNpZmljYXRpb24gY2xhaW1zIHRoYXQgZG1hLWJ1ZiByZXNl
-cnZhdGlvbiBtdXN0IGJlIGxvY2tlZA0KYnkgaW1wb3J0ZXJzLCBhbmQgdGh1cywgdGhlIGludGVy
-bmFsIGRhdGEgaXMgYWxyZWFkeSBwcm90ZWN0ZWQgYnkgdGhlDQpyZXNlcnZhdGlvbiBsb2NrLiBS
-ZW1vdmUgdGhlIG9ic29sZXRlZCBpbnRlcm5hbCBsb2NrLg0KDQpBY2tlZC1ieTogQ2hyaXN0aWFu
-IEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KU2lnbmVkLW9mZi1ieTogRG1pdHJ5
-IE9zaXBlbmtvIDxkbWl0cnkub3NpcGVua29AY29sbGFib3JhLmNvbT4NCi0tLQ0KIGRyaXZlcnMv
-ZG1hLWJ1Zi9kbWEtYnVmLmMgfCAxNCArKysrLS0tLS0tLS0tLQ0KIGluY2x1ZGUvbGludXgvZG1h
-LWJ1Zi5oICAgfCAgOSAtLS0tLS0tLS0NCiAyIGZpbGVzIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygr
-KSwgMTkgZGVsZXRpb25zKC0pDQoNCmRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1
-Zi5jIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYw0KaW5kZXggOTdjZTg4NGZhZDc2Li43NzJm
-ZGQ5ZWVlZDggMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQorKysgYi9k
-cml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQpAQCAtNjU2LDcgKzY1Niw2IEBAIHN0cnVjdCBkbWFf
-YnVmICpkbWFfYnVmX2V4cG9ydChjb25zdCBzdHJ1Y3QgZG1hX2J1Zl9leHBvcnRfaW5mbyAqZXhw
-X2luZm8pDQogDQogCWRtYWJ1Zi0+ZmlsZSA9IGZpbGU7DQogDQotCW11dGV4X2luaXQoJmRtYWJ1
-Zi0+bG9jayk7DQogCUlOSVRfTElTVF9IRUFEKCZkbWFidWYtPmF0dGFjaG1lbnRzKTsNCiANCiAJ
-bXV0ZXhfbG9jaygmZGJfbGlzdC5sb2NrKTsNCkBAIC0xNTAyLDcgKzE1MDEsNyBAQCBFWFBPUlRf
-U1lNQk9MX05TX0dQTChkbWFfYnVmX21tYXAsIERNQV9CVUYpOw0KIGludCBkbWFfYnVmX3ZtYXAo
-c3RydWN0IGRtYV9idWYgKmRtYWJ1Ziwgc3RydWN0IGlvc3lzX21hcCAqbWFwKQ0KIHsNCiAJc3Ry
-dWN0IGlvc3lzX21hcCBwdHI7DQotCWludCByZXQgPSAwOw0KKwlpbnQgcmV0Ow0KIA0KIAlpb3N5
-c19tYXBfY2xlYXIobWFwKTsNCiANCkBAIC0xNTE0LDI4ICsxNTEzLDI1IEBAIGludCBkbWFfYnVm
-X3ZtYXAoc3RydWN0IGRtYV9idWYgKmRtYWJ1Ziwgc3RydWN0IGlvc3lzX21hcCAqbWFwKQ0KIAlp
-ZiAoIWRtYWJ1Zi0+b3BzLT52bWFwKQ0KIAkJcmV0dXJuIC1FSU5WQUw7DQogDQotCW11dGV4X2xv
-Y2soJmRtYWJ1Zi0+bG9jayk7DQogCWlmIChkbWFidWYtPnZtYXBwaW5nX2NvdW50ZXIpIHsNCiAJ
-CWRtYWJ1Zi0+dm1hcHBpbmdfY291bnRlcisrOw0KIAkJQlVHX09OKGlvc3lzX21hcF9pc19udWxs
-KCZkbWFidWYtPnZtYXBfcHRyKSk7DQogCQkqbWFwID0gZG1hYnVmLT52bWFwX3B0cjsNCi0JCWdv
-dG8gb3V0X3VubG9jazsNCisJCXJldHVybiAwOw0KIAl9DQogDQogCUJVR19PTihpb3N5c19tYXBf
-aXNfc2V0KCZkbWFidWYtPnZtYXBfcHRyKSk7DQogDQogCXJldCA9IGRtYWJ1Zi0+b3BzLT52bWFw
-KGRtYWJ1ZiwgJnB0cik7DQogCWlmIChXQVJOX09OX09OQ0UocmV0KSkNCi0JCWdvdG8gb3V0X3Vu
-bG9jazsNCisJCXJldHVybiByZXQ7DQogDQogCWRtYWJ1Zi0+dm1hcF9wdHIgPSBwdHI7DQogCWRt
-YWJ1Zi0+dm1hcHBpbmdfY291bnRlciA9IDE7DQogDQogCSptYXAgPSBkbWFidWYtPnZtYXBfcHRy
-Ow0KIA0KLW91dF91bmxvY2s6DQotCW11dGV4X3VubG9jaygmZG1hYnVmLT5sb2NrKTsNCi0JcmV0
-dXJuIHJldDsNCisJcmV0dXJuIDA7DQogfQ0KIEVYUE9SVF9TWU1CT0xfTlNfR1BMKGRtYV9idWZf
-dm1hcCwgRE1BX0JVRik7DQogDQpAQCAtMTU3NywxMyArMTU3MywxMSBAQCB2b2lkIGRtYV9idWZf
-dnVubWFwKHN0cnVjdCBkbWFfYnVmICpkbWFidWYsIHN0cnVjdCBpb3N5c19tYXAgKm1hcCkNCiAJ
-QlVHX09OKGRtYWJ1Zi0+dm1hcHBpbmdfY291bnRlciA9PSAwKTsNCiAJQlVHX09OKCFpb3N5c19t
-YXBfaXNfZXF1YWwoJmRtYWJ1Zi0+dm1hcF9wdHIsIG1hcCkpOw0KIA0KLQltdXRleF9sb2NrKCZk
-bWFidWYtPmxvY2spOw0KIAlpZiAoLS1kbWFidWYtPnZtYXBwaW5nX2NvdW50ZXIgPT0gMCkgew0K
-IAkJaWYgKGRtYWJ1Zi0+b3BzLT52dW5tYXApDQogCQkJZG1hYnVmLT5vcHMtPnZ1bm1hcChkbWFi
-dWYsIG1hcCk7DQogCQlpb3N5c19tYXBfY2xlYXIoJmRtYWJ1Zi0+dm1hcF9wdHIpOw0KIAl9DQot
-CW11dGV4X3VubG9jaygmZG1hYnVmLT5sb2NrKTsNCiB9DQogRVhQT1JUX1NZTUJPTF9OU19HUEwo
-ZG1hX2J1Zl92dW5tYXAsIERNQV9CVUYpOw0KIA0KZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgv
-ZG1hLWJ1Zi5oIGIvaW5jbHVkZS9saW51eC9kbWEtYnVmLmgNCmluZGV4IGYxMWI1YmJjMmYzNy4u
-NmZhOGQ0ZTI5NzE5IDEwMDY0NA0KLS0tIGEvaW5jbHVkZS9saW51eC9kbWEtYnVmLmgNCisrKyBi
-L2luY2x1ZGUvbGludXgvZG1hLWJ1Zi5oDQpAQCAtMzI2LDE1ICszMjYsNiBAQCBzdHJ1Y3QgZG1h
-X2J1ZiB7DQogCS8qKiBAb3BzOiBkbWFfYnVmX29wcyBhc3NvY2lhdGVkIHdpdGggdGhpcyBidWZm
-ZXIgb2JqZWN0LiAqLw0KIAljb25zdCBzdHJ1Y3QgZG1hX2J1Zl9vcHMgKm9wczsNCiANCi0JLyoq
-DQotCSAqIEBsb2NrOg0KLQkgKg0KLQkgKiBVc2VkIGludGVybmFsbHkgdG8gc2VyaWFsaXplIGxp
-c3QgbWFuaXB1bGF0aW9uLCBhdHRhY2gvZGV0YWNoIGFuZA0KLQkgKiB2bWFwL3VubWFwLiBOb3Rl
-IHRoYXQgaW4gbWFueSBjYXNlcyB0aGlzIGlzIHN1cGVyc2VlZGVkIGJ5DQotCSAqIGRtYV9yZXN2
-X2xvY2soKSBvbiBAcmVzdi4NCi0JICovDQotCXN0cnVjdCBtdXRleCBsb2NrOw0KLQ0KIAkvKioN
-CiAJICogQHZtYXBwaW5nX2NvdW50ZXI6DQogCSAqDQotLSANCjIuMzcuMg0KDQpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxp
-bmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUg
-c2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On 7/29/2022 10:37 PM, Rob Clark wrote:
+> From: Rob Clark <robdclark@chromium.org>
+>
+> This is a fairly narrowly focused interface, providing a way for a VMM
+> in userspace to tell the guest kernel what pgprot settings to use when
+> mapping a buffer to guest userspace.
+>
+> For buffers that get mapped into guest userspace, virglrenderer returns
+> a dma-buf fd to the VMM (crosvm or qemu).  In addition to mapping the
+> pages into the guest VM, it needs to report to drm/virtio in the guest
+> the cache settings to use for guest userspace.  In particular, on some
+> architectures, creating aliased mappings with different cache attributes
+> is frowned upon, so it is important that the guest mappings have the
+> same cache attributes as any potential host mappings.
+>
+> Signed-off-by: Rob Clark <robdclark@chromium.org>
+> ---
+>   drivers/dma-buf/dma-buf.c    | 26 ++++++++++++++++++++++++++
+>   include/linux/dma-buf.h      |  7 +++++++
+>   include/uapi/linux/dma-buf.h | 28 ++++++++++++++++++++++++++++
+>   3 files changed, 61 insertions(+)
+>
+> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+> index 32f55640890c..d02d6c2a3b49 100644
+> --- a/drivers/dma-buf/dma-buf.c
+> +++ b/drivers/dma-buf/dma-buf.c
+> @@ -326,6 +326,29 @@ static long dma_buf_set_name(struct dma_buf *dmabuf, const char __user *buf)
+>   	return 0;
+>   }
+>   
+> +static long dma_buf_info(struct dma_buf *dmabuf, const void __user *uarg)
+> +{
+> +	struct dma_buf_info arg;
+> +
+> +	if (copy_from_user(&arg, uarg, sizeof(arg)))
+> +		return -EFAULT;
+> +
+> +	switch (arg.param) {
+> +	case DMA_BUF_INFO_VM_PROT:
+> +		if (!dmabuf->ops->mmap_info)
+> +			return -ENOSYS;
+> +		arg.value = dmabuf->ops->mmap_info(dmabuf);
+> +		break;
+> +	default:
+> +		return -EINVAL;
+> +	}
+> +
+> +	if (copy_to_user(uarg, &arg, sizeof(arg)))
+> +		return -EFAULT;
+> +
+> +	return 0;
+> +}
+> +
+>   static long dma_buf_ioctl(struct file *file,
+>   			  unsigned int cmd, unsigned long arg)
+>   {
+> @@ -369,6 +392,9 @@ static long dma_buf_ioctl(struct file *file,
+>   	case DMA_BUF_SET_NAME_B:
+>   		return dma_buf_set_name(dmabuf, (const char __user *)arg);
+>   
+> +	case DMA_BUF_IOCTL_INFO:
+> +		return dma_buf_info(dmabuf, (const void __user *)arg);
+> +
+>   	default:
+>   		return -ENOTTY;
+>   	}
+> diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
+> index 71731796c8c3..6f4de64a5937 100644
+> --- a/include/linux/dma-buf.h
+> +++ b/include/linux/dma-buf.h
+> @@ -283,6 +283,13 @@ struct dma_buf_ops {
+>   	 */
+>   	int (*mmap)(struct dma_buf *, struct vm_area_struct *vma);
+>   
+> +	/**
+> +	 * @mmap_info:
+> +	 *
+> +	 * Return mmapping info for the buffer.  See DMA_BUF_INFO_VM_PROT.
+> +	 */
+> +	int (*mmap_info)(struct dma_buf *);
+> +
+>   	int (*vmap)(struct dma_buf *dmabuf, struct iosys_map *map);
+>   	void (*vunmap)(struct dma_buf *dmabuf, struct iosys_map *map);
+>   };
+> diff --git a/include/uapi/linux/dma-buf.h b/include/uapi/linux/dma-buf.h
+> index b1523cb8ab30..a41adac0f46a 100644
+> --- a/include/uapi/linux/dma-buf.h
+> +++ b/include/uapi/linux/dma-buf.h
+> @@ -85,6 +85,32 @@ struct dma_buf_sync {
+>   
+>   #define DMA_BUF_NAME_LEN	32
+>   
+> +
+> +/**
+> + * struct dma_buf_info - Query info about the buffer.
+> + */
+> +struct dma_buf_info {
+> +
+> +#define DMA_BUF_INFO_VM_PROT      1
+> +#  define DMA_BUF_VM_PROT_WC      0
+> +#  define DMA_BUF_VM_PROT_CACHED  1
+> +
+> +	/**
+> +	 * @param: Which param to query
+> +	 *
+> +	 * DMA_BUF_INFO_BM_PROT:
+Is there a typo here? BM -> VM ?
+
+-Akhil.
+> +	 *     Query the access permissions of userspace mmap's of this buffer.
+> +	 *     Returns one of DMA_BUF_VM_PROT_x
+> +	 */
+> +	__u32 param;
+> +	__u32 pad;
+> +
+> +	/**
+> +	 * @value: Return value of the query.
+> +	 */
+> +	__u64 value;
+> +};
+> +
+>   #define DMA_BUF_BASE		'b'
+>   #define DMA_BUF_IOCTL_SYNC	_IOW(DMA_BUF_BASE, 0, struct dma_buf_sync)
+>   
+> @@ -95,4 +121,6 @@ struct dma_buf_sync {
+>   #define DMA_BUF_SET_NAME_A	_IOW(DMA_BUF_BASE, 1, __u32)
+>   #define DMA_BUF_SET_NAME_B	_IOW(DMA_BUF_BASE, 1, __u64)
+>   
+> +#define DMA_BUF_IOCTL_INFO	_IOWR(DMA_BUF_BASE, 2, struct dma_buf_info)
+> +
+>   #endif
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
