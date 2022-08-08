@@ -2,512 +2,175 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72E3C5A8E29
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 08:16:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B75E5A8E24
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 08:15:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A7EB23F46D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 06:16:54 +0000 (UTC)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com (mail-eopbgr60066.outbound.protection.outlook.com [40.107.6.66])
-	by lists.linaro.org (Postfix) with ESMTPS id A67AA3F23D
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  8 Aug 2022 14:58:27 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NSo24lqrgIwuX8r7x1Fw04y8UNgGJ3H3aVr573V5QMLX8usOmijH3SF00Hg0cGL0XINsdgK0iVF2TdHhdbYRaz+56kYZcNeK2Uo2XTsClnunbCzjcnXy5ENSBJxeFSVr3TEZzDRgMvTMm7e2q0mVOWb+m/xN/3IsAnZfsNJI9KuU3gQQ5lWCmn04fc3cip7Ryec9CCOld0nXgFCB/PMWsr+DzmtDWWF+ITFwDR7ahprqjdPPg5CcICoB9OvAEsUqQorGbS3IKQQ3jpMNXSg2HRiOpcQFOhjOCnqaJZCfg7Vqny+IAvqxPuXofrHrXzhpqExqgw08oapeXvScom5Snw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FxTuwg1X8qAwF21M87xxBCmOM7qUuvYcbHbpmp88cuk=;
- b=PkJA3T4omNiml/oXfgqGRZlDArRrVpPNf5kO/pinK2Wsu2oFRn4/7GTAwzWTrc50PR/RbRxqy4Rj39+c0VDSagyVhLRn0DV/79/pMRtjbfxwBkhi8MjaoP6M7N59bjalxG92QbMQuYvWoFP80bx8Hxi+MSNUgIkF+c58uM6kov4XQ4zr5/NnFS3QHMfuY3mCUDRRGxCC0qHF/tyUoRuZ/2N82NEuDa7q/xHqzx5sqTKq9QGLpPcfdaecepnME5yJiCgfl6jJc/dIKU+HEMAV0tJWJIdDi+X5oPYieYvWm4ADAXD1IYhdfPPHd8sK4O9cPuijSrLlYXULllxgvoRhqg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FxTuwg1X8qAwF21M87xxBCmOM7qUuvYcbHbpmp88cuk=;
- b=HdeYoyySZ4V0YT/mNtUfAnVQE5CEMeB+cS1+ZYxIfM3VkkbCNvTP6/2dKYIA6BmuUy7251Nc68C07euXTyoXGCSWFecWJBO9guAF/shC9qYQ+a7HPV5rn4oea0qRfjrBlVAMqSR9Y7Uz646LvOY4McvDOym5OSxiNdFopBr88rk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-Received: from AM6PR04MB6743.eurprd04.prod.outlook.com (2603:10a6:20b:f1::11)
- by DB3PR0402MB3881.eurprd04.prod.outlook.com (2603:10a6:8:12::28) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5504.20; Mon, 8 Aug
- 2022 14:58:25 +0000
-Received: from AM6PR04MB6743.eurprd04.prod.outlook.com
- ([fe80::a401:5ed6:1bfa:89a9]) by AM6PR04MB6743.eurprd04.prod.outlook.com
- ([fe80::a401:5ed6:1bfa:89a9%5]) with mapi id 15.20.5504.019; Mon, 8 Aug 2022
- 14:58:25 +0000
-From: Olivier Masse <olivier.masse@nxp.com>
-To: sumit.semwal@linaro.org,
-	benjamin.gaignard@collabora.com,
-	Brian.Starkey@arm.com,
-	christian.koenig@amd.com,
-	linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org,
-	linux-kernel@vger.kernel.org
-Date: Mon,  8 Aug 2022 16:58:19 +0200
-Message-Id: <20220808145819.12176-1-olivier.masse@nxp.com>
-X-Mailer: git-send-email 2.25.0
-X-ClientProxiedBy: AM0PR01CA0094.eurprd01.prod.exchangelabs.com
- (2603:10a6:208:10e::35) To AM6PR04MB6743.eurprd04.prod.outlook.com
- (2603:10a6:20b:f1::11)
+	by lists.linaro.org (Postfix) with ESMTP id 8F4BC3F196
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 06:15:57 +0000 (UTC)
+Received: from mail-yb1-f169.google.com (mail-yb1-f169.google.com [209.85.219.169])
+	by lists.linaro.org (Postfix) with ESMTPS id 265B23F48C
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  8 Aug 2022 16:29:26 +0000 (UTC)
+Received: by mail-yb1-f169.google.com with SMTP id e127so14432964yba.12
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 08 Aug 2022 09:29:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=Y2IMNWPIjkzwaAM4UvkDC79np/PUW3X2sEbAT/ct8M4=;
+        b=LxmDtRGZHfImjROQcKCDQgGiXe9nnrACKjUj1qQ1Oo5w8W1sVppkiIaStTZalM3DXn
+         d4fg1VCCvKly9zyZDlAlOBTDConQkbR6pYotSN97XAEEa3G6Ci/dkjE2SlkeewTK2qS/
+         +LZD9TM6jhdfJet5x28hBgUlGGgDvlR0Axijg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=Y2IMNWPIjkzwaAM4UvkDC79np/PUW3X2sEbAT/ct8M4=;
+        b=JhPXZnI5TFvT97iVk4K7L/h79AaHDrmHhRuLe3El+CO2rwy1rVrZD2qk9Mv7wcJzDZ
+         clYrmH/o3VnmbvYOviafen1XHcGPodRZrvrc6+CQ7Hv2uY5mncz6OKhb/gO5mJbCM2hC
+         m3qLsuLr6QSUo0bx23q/lBHvmtxa5DE4MfGPqMcOrzJiQFy1BnrZe2fYBH1HILoEL+aE
+         uRbcfkDhdhg6GaIAzNxf4cndoE2+rH8uR+8WeK12SF/4HlzUKrOO4geprUTTw56JNmtK
+         KTSxe/3g5f93KPAAg7NwF5t3INwVeMO6NjXWR2BOh//BKK55OppUpx3ILKMhwQWJJAvK
+         jUNA==
+X-Gm-Message-State: ACgBeo3IHWdwJTb0hl3xYirNbMGGRutcf7psoxad3Kx+Tf+QtnqoFuw8
+	HOWyzJf0xActGvlalByJi1ub1W0/h/1lYOBhUDkqDQ==
+X-Google-Smtp-Source: AA6agR6kDyxRT7WvypBMOU0kjVKYcER2bG2K/ZyDSG0YHpOdaiMnykM2TuLH0P9zUQOyjlN1ElXY6sY14LDXcz0HYCw=
+X-Received: by 2002:a25:b68b:0:b0:673:df99:5838 with SMTP id
+ s11-20020a25b68b000000b00673df995838mr17329517ybj.157.1659976165690; Mon, 08
+ Aug 2022 09:29:25 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 88b4f7e9-adcc-40a0-99fb-08da794e71be
-X-MS-TrafficTypeDiagnostic: DB3PR0402MB3881:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	fAh+BtEargVVr6XB/XhN5s1Nq80bhVfm4Ppyt8V83KsQ5Uxaua5JhrDscTaEF8DK10Bq7UfqjzCW/zNCetvtPfl4wOmSifP2f70j8ls7RwnZz1hxdZjHxZP14ElW/EhCLnooYefha+vGObyaY6Wtf2OXJdR3LpT70bb09TYF3wWJFjkXvR5WteI+FbguP5cK1KwE/ZSO8KFMttEYG+ocweSbcVXcDwM3jQ2azEdS00EOZXpYDSXpQhcJht/uLDU1GtjjDy+gBUAPhHsOxN6oJGRHT1PFkE+0NrE3tH3iVMdD1uD79md+saXtYmR7+otxrSUSMr7FgSeazrk1UMer/CmfxW8fIm2k2LUH8YuuLsH1Q151i+e9Z/j/uT6llWHyeRiRvLijSG6Fk6why8kXJzBjkNMcOzytaY7zk/XjbIKHpRKN6PhScK9Ny/tLDFLyBsmVf1wlMwstvLuHQ318bqD9c04S9JK80kfIlR1GQfq77bOvTXdwYT2zihIWGQY/OatYkBZgCxrxDr/lxEJdHGwEyAMoroQYHiQWpHkj6i0Lkgdg3zSppP/n7UQc4C2bBRl2PwdTeP8rrJcCwBRaVKXj3xnGxnYroUSnMszmEmhLFr7fSTqYRDGNopOVDX536ldypCxuFHBlb7OMs2vKydpFwRh+FdCLrvwmHwMSAyLKKQEygNjh72SuOIBuNAQbdBdEmE1a6gpncZ6+nS48sdK2lwKnDebkbpw4VrlEgUFCXcP0Jrcov3g3I4D3NfU78/kfwIIdSzYLcmdUjLQwY4KmpcJb8Za8tW4YRexnP0w=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR04MB6743.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(376002)(346002)(366004)(39860400002)(396003)(136003)(38100700002)(38350700002)(2906002)(66476007)(66946007)(66556008)(86362001)(8676002)(52116002)(4326008)(55236004)(6506007)(6512007)(6666004)(26005)(478600001)(316002)(6486002)(41300700001)(186003)(2616005)(1076003)(83380400001)(8936002)(5660300002)(36756003)(44832011);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?us-ascii?Q?v3nFSzNS43bqsrMn8DDxhayNfNM8UUcm6y0RoPztCyJ1A0ZdhVFHC7xj3hWJ?=
- =?us-ascii?Q?ojXJueKzVpJoEhMHI6bd2iZeFTwgTLuXsz+QaJCYfxeLoyjBvuf7AU25qb63?=
- =?us-ascii?Q?qLlPB6i4k1hInsNkV97OUggaULzU082xomHzmZVsOZDujfEygkvTPtXK9L0T?=
- =?us-ascii?Q?Ypo65/Bfl3ayWKTxyQbyRUbafvw/7slvu43uaay4WwCZMBo0ZvzjyVLuCMv/?=
- =?us-ascii?Q?Z4qwFP8GCBxgz29rVegrVu8PYKBavFAm/ye8J9agoSYto7sjX40kvPauW0GI?=
- =?us-ascii?Q?7ZWF33W3rHSbyqZLAWRbsqo9Fti8TzyPkkOFPhiXj5/UECcFZlg/QBOFV4hU?=
- =?us-ascii?Q?JaOsE2tAOiSKQhbwcEyQrSVcGVt42OW4p426S7QJtg1nupEBHi++Ru1aXPa9?=
- =?us-ascii?Q?n8Xh1kldK8E+kWNQOrU53SB1y3xF5UJcczxSQMqOniMo5psinpIp8o0Ry+Ok?=
- =?us-ascii?Q?0kvQe9YntBgvi2+COMEUIASot2H226qAb7Worhafb+AvIvtXuP4ViCI9Kdcl?=
- =?us-ascii?Q?OPCa9oOKOkOT1fFSWrDZsGwx4vIaahIz69DJa3hsJT89jR9metwunoB78ktb?=
- =?us-ascii?Q?JOkhi5UqfELwDx8yeVr7So6FaNc7k0t1e0BgcDuXi6xlf3lb2hNtwZFORGWg?=
- =?us-ascii?Q?yXjXbZp5VHj0vkzhAyQWVPQt9wGFq55Ap6NTn6ioD37H4zFxiIYgcJZjU6we?=
- =?us-ascii?Q?zbIJ1ODi3gOr8G1EMs9OUbjkIXPYR8Po4zFQxfK7WN3z53JUfUBgWd9LaPR0?=
- =?us-ascii?Q?reDuABz8ag/ITxhtCq368Nup1RiBlIz6k6+S+gk4l/hrPSz8yrbbH+4L943/?=
- =?us-ascii?Q?Mg+g5VeZtnQ5M52THIzLpGbmfH7t2HN5QhBVdY4MTx50lg5mzQefgy0yPuzH?=
- =?us-ascii?Q?buACrpDdU+8+KpzF4/Tr7Yw38xNlvj+r47tOzffixKfRgnPkZPgbxSjkNeGX?=
- =?us-ascii?Q?qd33tFmnkRQ/Lsytks7HaN2sswkafXQxORWzCYi4tv6QvZQvlg+kIex8NwMt?=
- =?us-ascii?Q?QjpkxbeJ0DByNQKzAY0xx/ZYIN1LEqGgsUSFLzhFdg5HXmWjkgmvoyrRHmJO?=
- =?us-ascii?Q?zwTMTv3qBAr2qr0chpUW5EoEnrIwfoYx7ZmRy5tk0clwC+4N30Ryu4seD7b5?=
- =?us-ascii?Q?gXkULu5pgreFmsWXvAIOami14AlTf3hIR8myPtEgzDtqdkuAzDldoB3VZH88?=
- =?us-ascii?Q?Djhq27LJhujzn/Ajv7/Hr61+IKAdRHcpc5hA/MSmWamXatemC6z1aJwnW/+v?=
- =?us-ascii?Q?SbfPuumjhMKA+aXvonvVv4wps2ADz1d4l5HXR3kXxJAVAKhFMzYgbAhVtjzl?=
- =?us-ascii?Q?whtVKInNqQfiIuR5KcHc1sww3fY1SlWWKYgwy+fGltAKI6WflwsVXE8/KDGf?=
- =?us-ascii?Q?ovGXoJ7Civ5asZk9zkXeF1jJuHjMwkjhcDkbZ1cH6r4C+MGLYEihyifHxje2?=
- =?us-ascii?Q?IXMmwTOL4d1oeSHuH1SvHF5EwLPguwl/uw27v9USned8+h6JpiKVgWE2AXml?=
- =?us-ascii?Q?BXmpaIUcDtFfE7pOWEa1z4tXleo6M6Ffpoe8owEtVY/mWPfNm5WozHRZfe5C?=
- =?us-ascii?Q?7ev/CY8QfcwmLq8nny+12cx+sbNEgHnOzNGPk2St?=
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 88b4f7e9-adcc-40a0-99fb-08da794e71be
-X-MS-Exchange-CrossTenant-AuthSource: AM6PR04MB6743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2022 14:58:25.1104
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: eXUTNyt/Lcghza+1l0SMInSH5rDZaEX6gPh4akbhdHDYqJT+NQO+tpFHVmIo13Vivl9doqYqRQrhPNfJ0fya7g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR0402MB3881
-X-MailFrom: olivier.masse@nxp.com
+References: <20220729170744.1301044-1-robdclark@gmail.com> <20220729170744.1301044-2-robdclark@gmail.com>
+ <3d2083aa-fc6c-6875-3daf-e5abe45fb762@gmail.com> <CAF6AEGvKdM3vyCvBZK=ZcdGmak7tsrP1b8ANyyaMjVfNDViqyw@mail.gmail.com>
+ <973de2f8-75e4-d4c7-a13a-c541a6cf7c77@amd.com> <CAF6AEGuhQT6A_jh8kLWh5xMoUGc1osdewyBk-8NoprtWOHseaQ@mail.gmail.com>
+ <2fc74efe-220f-b57a-e804-7d2b3880d14f@gmail.com> <CAF6AEGv9H+fSFKPNqwPxYUjkgj05AimpXbp-p_JL8nKLnzON=w@mail.gmail.com>
+ <e2423bd7-ef73-8d43-c661-a19c80ad1a26@gmail.com> <CAF6AEGsoYaXe2+qug_TfT99KXuXh9Ez2L2HjQZroE6c6GSW4SQ@mail.gmail.com>
+ <e90caaaa-cae9-c6d1-bfb6-dc56aa559681@amd.com> <CAF6AEGtWjtF7_uCYAH4uARVXgnOnX3DZ3KQahxTdAi_9Myvw0w@mail.gmail.com>
+ <4e7448d2-7b26-e260-3d6c-7aa263a75250@amd.com>
+In-Reply-To: <4e7448d2-7b26-e260-3d6c-7aa263a75250@amd.com>
+From: Rob Clark <robdclark@chromium.org>
+Date: Mon, 8 Aug 2022 09:29:52 -0700
+Message-ID: <CAJs_Fx7vf7RyGqBrQHySyG4zr31O_j8GyQeWTCjxZ3R2VDnE9Q@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+X-MailFrom: robdclark@chromium.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: EIXMOLRSZESRHCRIVWVPX63XHRPX4SFB
-X-Message-ID-Hash: EIXMOLRSZESRHCRIVWVPX63XHRPX4SFB
-X-Mailman-Approved-At: Thu, 01 Sep 2022 06:16:50 +0000
-CC: clement.faure@nxp.com, olivier.masse@nxp.com
+Message-ID-Hash: X2JUS3ZNMO67ECO5JHPN3HQV7JIT365W
+X-Message-ID-Hash: X2JUS3ZNMO67ECO5JHPN3HQV7JIT365W
+X-Mailman-Approved-At: Thu, 01 Sep 2022 06:15:53 +0000
+CC: Rob Clark <robdclark@gmail.com>, dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, freedreno@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?B?SsOpcsO0bWUgUG91aWxsZXI=?= <jerome.pouiller@silabs.com>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 1/3] dma-buf: heaps: add Linaro secure dmabuf heap support
+Subject: [Linaro-mm-sig] Re: [PATCH 1/3] dma-buf: Add ioctl to query mmap info
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EIXMOLRSZESRHCRIVWVPX63XHRPX4SFB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/X2JUS3ZNMO67ECO5JHPN3HQV7JIT365W/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-add Linaro secure heap compatible reserved mem: linaro,secure-heap
-use genalloc to allocate/free buffer from buffer pool.
-buffer pool info is defined from a dts reserved memory.
-
-Signed-off-by: Olivier Masse <olivier.masse@nxp.com>
----
- drivers/dma-buf/heaps/Kconfig       |   9 +
- drivers/dma-buf/heaps/Makefile      |   1 +
- drivers/dma-buf/heaps/secure_heap.c | 339 ++++++++++++++++++++++++++++
- 3 files changed, 349 insertions(+)
- create mode 100644 drivers/dma-buf/heaps/secure_heap.c
-
-diff --git a/drivers/dma-buf/heaps/Kconfig b/drivers/dma-buf/heaps/Kconfig
-index 3782eeeb91c0..c9070c728b9a 100644
---- a/drivers/dma-buf/heaps/Kconfig
-+++ b/drivers/dma-buf/heaps/Kconfig
-@@ -20,3 +20,12 @@ config DMABUF_HEAPS_DSP
-           Choose this option to enable the dsp dmabuf heap. The dsp heap
-           is allocated by gen allocater. it's allocated according the dts.
-           If in doubt, say Y.
-+
-+config DMABUF_HEAPS_SECURE
-+	tristate "DMA-BUF Secure Heap"
-+	depends on DMABUF_HEAPS
-+	help
-+	  Choose this option to enable the secure dmabuf heap. The secure heap
-+	  pools are defined according to the DT. Heaps are allocated
-+	  in the pools using gen allocater.
-+	  If in doubt, say Y.
-diff --git a/drivers/dma-buf/heaps/Makefile b/drivers/dma-buf/heaps/Makefile
-index 29733f84c354..863ef10056a3 100644
---- a/drivers/dma-buf/heaps/Makefile
-+++ b/drivers/dma-buf/heaps/Makefile
-@@ -2,3 +2,4 @@
- obj-$(CONFIG_DMABUF_HEAPS_SYSTEM)	+= system_heap.o
- obj-$(CONFIG_DMABUF_HEAPS_CMA)		+= cma_heap.o
- obj-$(CONFIG_DMABUF_HEAPS_DSP)          += dsp_heap.o
-+obj-$(CONFIG_DMABUF_HEAPS_SECURE)	+= secure_heap.o
-diff --git a/drivers/dma-buf/heaps/secure_heap.c b/drivers/dma-buf/heaps/secure_heap.c
-new file mode 100644
-index 000000000000..a3023bf8d457
---- /dev/null
-+++ b/drivers/dma-buf/heaps/secure_heap.c
-@@ -0,0 +1,339 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * DMABUF secure heap exporter
-+ *
-+ * Copyright 2022 NXP.
-+ */
-+
-+#include <linux/dma-buf.h>
-+#include <linux/dma-heap.h>
-+#include <linux/dma-mapping.h>
-+#include <linux/err.h>
-+#include <linux/genalloc.h>
-+#include <linux/highmem.h>
-+#include <linux/mm.h>
-+#include <linux/module.h>
-+#include <linux/of.h>
-+#include <linux/of_fdt.h>
-+#include <linux/of_reserved_mem.h>
-+#include <linux/scatterlist.h>
-+#include <linux/slab.h>
-+#include <linux/vmalloc.h>
-+
-+#define MAX_SECURE_HEAP 2
-+#define MAX_HEAP_NAME_LEN 32
-+
-+struct secure_heap_buffer {
-+	struct dma_heap *heap;
-+	struct list_head attachments;
-+	struct mutex lock;
-+	unsigned long len;
-+	struct sg_table sg_table;
-+	int vmap_cnt;
-+	void *vaddr;
-+};
-+
-+struct secure_heap_attachment {
-+	struct device *dev;
-+	struct sg_table *table;
-+	struct list_head list;
-+};
-+
-+struct secure_heap_info {
-+	struct gen_pool *pool;
-+};
-+
-+struct rmem_secure {
-+	phys_addr_t base;
-+	phys_addr_t size;
-+
-+	char name[MAX_HEAP_NAME_LEN];
-+};
-+
-+static struct rmem_secure secure_data[MAX_SECURE_HEAP] = {0};
-+static unsigned int secure_data_count;
-+
-+static struct sg_table *dup_sg_table(struct sg_table *table)
-+{
-+	struct sg_table *new_table;
-+	int ret, i;
-+	struct scatterlist *sg, *new_sg;
-+
-+	new_table = kzalloc(sizeof(*new_table), GFP_KERNEL);
-+	if (!new_table)
-+		return ERR_PTR(-ENOMEM);
-+
-+	ret = sg_alloc_table(new_table, table->orig_nents, GFP_KERNEL);
-+	if (ret) {
-+		kfree(new_table);
-+		return ERR_PTR(-ENOMEM);
-+	}
-+
-+	new_sg = new_table->sgl;
-+	for_each_sgtable_sg(table, sg, i) {
-+		sg_set_page(new_sg, sg_page(sg), sg->length, sg->offset);
-+		new_sg->dma_address = sg->dma_address;
-+#ifdef CONFIG_NEED_SG_DMA_LENGTH
-+		new_sg->dma_length = sg->dma_length;
-+#endif
-+		new_sg = sg_next(new_sg);
-+	}
-+
-+	return new_table;
-+}
-+
-+static int secure_heap_attach(struct dma_buf *dmabuf,
-+			      struct dma_buf_attachment *attachment)
-+{
-+	struct secure_heap_buffer *buffer = dmabuf->priv;
-+	struct secure_heap_attachment *a;
-+	struct sg_table *table;
-+
-+	a = kzalloc(sizeof(*a), GFP_KERNEL);
-+	if (!a)
-+		return -ENOMEM;
-+
-+	table = dup_sg_table(&buffer->sg_table);
-+	if (IS_ERR(table)) {
-+		kfree(a);
-+		return PTR_ERR(table);
-+	}
-+
-+	a->table = table;
-+	a->dev = attachment->dev;
-+	INIT_LIST_HEAD(&a->list);
-+	attachment->priv = a;
-+
-+	mutex_lock(&buffer->lock);
-+	list_add(&a->list, &buffer->attachments);
-+	mutex_unlock(&buffer->lock);
-+
-+	return 0;
-+}
-+
-+static void secure_heap_detach(struct dma_buf *dmabuf,
-+			       struct dma_buf_attachment *attachment)
-+{
-+	struct secure_heap_buffer *buffer = dmabuf->priv;
-+	struct secure_heap_attachment *a = attachment->priv;
-+
-+	mutex_lock(&buffer->lock);
-+	list_del(&a->list);
-+	mutex_unlock(&buffer->lock);
-+
-+	sg_free_table(a->table);
-+	kfree(a->table);
-+	kfree(a);
-+}
-+
-+static struct sg_table *secure_heap_map_dma_buf(struct dma_buf_attachment *attachment,
-+						enum dma_data_direction direction)
-+{
-+	struct secure_heap_attachment *a = attachment->priv;
-+
-+	return a->table;
-+}
-+
-+static void secure_heap_unmap_dma_buf(struct dma_buf_attachment *attachment,
-+				      struct sg_table *table,
-+				      enum dma_data_direction direction)
-+{
-+}
-+
-+static void secure_heap_dma_buf_release(struct dma_buf *dmabuf)
-+{
-+	struct secure_heap_buffer *buffer = dmabuf->priv;
-+	struct secure_heap_info *info;
-+	struct sg_table *table;
-+	struct scatterlist *sg;
-+	int i;
-+
-+	info = dma_heap_get_drvdata(buffer->heap);
-+
-+	table = &buffer->sg_table;
-+	for_each_sg(table->sgl, sg, table->nents, i)
-+		gen_pool_free(info->pool, sg_dma_address(sg), sg_dma_len(sg));
-+
-+	sg_free_table(table);
-+	kfree(buffer);
-+}
-+
-+static const struct dma_buf_ops secure_heap_buf_ops = {
-+	.attach = secure_heap_attach,
-+	.detach = secure_heap_detach,
-+	.map_dma_buf = secure_heap_map_dma_buf,
-+	.unmap_dma_buf = secure_heap_unmap_dma_buf,
-+	.release = secure_heap_dma_buf_release,
-+};
-+
-+static struct dma_buf *secure_heap_allocate(struct dma_heap *heap,
-+					    unsigned long len,
-+					    unsigned long fd_flags,
-+					    unsigned long heap_flags)
-+{
-+	struct secure_heap_buffer *buffer;
-+	struct secure_heap_info *info = dma_heap_get_drvdata(heap);
-+	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
-+	unsigned long size = roundup(len, PAGE_SIZE);
-+	struct dma_buf *dmabuf;
-+	struct sg_table *table;
-+	int ret = -ENOMEM;
-+	unsigned long phy_addr;
-+
-+	buffer = kzalloc(sizeof(*buffer), GFP_KERNEL);
-+	if (!buffer)
-+		return ERR_PTR(-ENOMEM);
-+
-+	INIT_LIST_HEAD(&buffer->attachments);
-+	mutex_init(&buffer->lock);
-+	buffer->heap = heap;
-+	buffer->len = size;
-+
-+	phy_addr = gen_pool_alloc(info->pool, size);
-+	if (!phy_addr)
-+		goto free_buffer;
-+
-+	table = &buffer->sg_table;
-+	if (sg_alloc_table(table, 1, GFP_KERNEL))
-+		goto free_pool;
-+
-+	sg_set_page(table->sgl,	phys_to_page(phy_addr),	size, 0);
-+	sg_dma_address(table->sgl) = phy_addr;
-+	sg_dma_len(table->sgl) = size;
-+
-+	/* create the dmabuf */
-+	exp_info.exp_name = dma_heap_get_name(heap);
-+	exp_info.ops = &secure_heap_buf_ops;
-+	exp_info.size = buffer->len;
-+	exp_info.flags = fd_flags;
-+	exp_info.priv = buffer;
-+	dmabuf = dma_buf_export(&exp_info);
-+	if (IS_ERR(dmabuf)) {
-+		ret = PTR_ERR(dmabuf);
-+		goto free_table;
-+	}
-+
-+	return dmabuf;
-+
-+free_table:
-+	sg_free_table(table);
-+
-+free_pool:
-+	gen_pool_free(info->pool, phy_addr, size);
-+
-+free_buffer:
-+	mutex_destroy(&buffer->lock);
-+	kfree(buffer);
-+
-+	return ERR_PTR(ret);
-+}
-+
-+static const struct dma_heap_ops secure_heap_ops = {
-+	.allocate = secure_heap_allocate,
-+};
-+
-+static int secure_heap_add(struct rmem_secure *rmem)
-+{
-+	struct dma_heap *secure_heap;
-+	struct dma_heap_export_info exp_info;
-+	struct secure_heap_info *info = NULL;
-+	struct gen_pool *pool = NULL;
-+	int ret = -EINVAL;
-+
-+	if (rmem->base == 0 || rmem->size == 0) {
-+		pr_err("secure_data base or size is not correct\n");
-+		goto error;
-+	}
-+
-+	info = kzalloc(sizeof(*info), GFP_KERNEL);
-+	if (!info) {
-+		pr_err("dmabuf info allocation failed\n");
-+		ret = -ENOMEM;
-+		goto error;
-+	}
-+
-+	pool = gen_pool_create(PAGE_SHIFT, -1);
-+	if (!pool) {
-+		pr_err("can't create gen pool\n");
-+		ret = -ENOMEM;
-+		goto error;
-+	}
-+
-+	if (gen_pool_add(pool, rmem->base, rmem->size, -1) < 0) {
-+		pr_err("failed to add memory into pool\n");
-+		ret = -ENOMEM;
-+		goto error;
-+	}
-+
-+	info->pool = pool;
-+
-+	exp_info.name = rmem->name;
-+	exp_info.ops = &secure_heap_ops;
-+	exp_info.priv = info;
-+
-+	secure_heap = dma_heap_add(&exp_info);
-+	if (IS_ERR(secure_heap)) {
-+		pr_err("dmabuf secure heap allocation failed\n");
-+		ret = PTR_ERR(secure_heap);
-+		goto error;
-+	}
-+
-+	return 0;
-+
-+error:
-+	if (pool)
-+		gen_pool_destroy(pool);
-+	kfree(info);
-+
-+	return ret;
-+}
-+
-+static int secure_heap_create(void)
-+{
-+	unsigned int i;
-+	int ret;
-+
-+	for (i = 0; i < secure_data_count; i++) {
-+		ret = secure_heap_add(&secure_data[i]);
-+		if (ret)
-+			return ret;
-+	}
-+	return 0;
-+}
-+
-+static int __init rmem_secure_heap_setup(struct reserved_mem *rmem)
-+{
-+	if (secure_data_count < MAX_SECURE_HEAP) {
-+		int name_len = 0;
-+		const char *s = rmem->name;
-+
-+		secure_data[secure_data_count].base = rmem->base;
-+		secure_data[secure_data_count].size = rmem->size;
-+
-+		while (name_len < MAX_HEAP_NAME_LEN) {
-+			if ((*s == '@') || (*s == '\0'))
-+				break;
-+			name_len++;
-+			s++;
-+		}
-+		if (name_len == MAX_HEAP_NAME_LEN)
-+			name_len--;
-+
-+		strncpy(secure_data[secure_data_count].name, rmem->name, name_len);
-+		secure_data[secure_data_count].name[name_len] = '\0';
-+
-+		pr_info("Reserved memory: DMA buf secure pool %s at %pa, size %ld MiB\n",
-+			secure_data[secure_data_count].name,
-+			&rmem->base, (unsigned long)rmem->size / SZ_1M);
-+
-+		secure_data_count++;
-+		return 0;
-+	}
-+	WARN_ONCE(1, "Cannot handle more than %u secure heaps\n", MAX_SECURE_HEAP);
-+	return -EINVAL;
-+}
-+
-+RESERVEDMEM_OF_DECLARE(secure_heap, "linaro,secure-heap", rmem_secure_heap_setup);
-+
-+module_init(secure_heap_create);
-+MODULE_LICENSE("GPL v2");
--- 
-2.25.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gTW9uLCBBdWcgOCwgMjAyMiBhdCA3OjU2IEFNIENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlh
+bi5rb2VuaWdAYW1kLmNvbT4gd3JvdGU6DQo+DQo+IEFtIDA4LjA4LjIyIHVtIDE1OjI2IHNjaHJp
+ZWIgUm9iIENsYXJrOg0KPiA+IE9uIE1vbiwgQXVnIDgsIDIwMjIgYXQgNDoyMiBBTSBDaHJpc3Rp
+YW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+IHdyb3RlOg0KPiA+DQo+ID4gW1NO
+SVBdDQo+ID4+Pj4gSWYgdGhlIHZpcnRpby92aXJ0Z3B1IFVBUEkgd2FzIGJ1aWxkIGFyb3VuZCB0
+aGUgaWRlYSB0aGF0IHRoaXMgaXMNCj4gPj4+PiBwb3NzaWJsZSB0aGVuIGl0IGlzIG1vc3QgbGlr
+ZWx5IGZ1bmRhbWVudGFsIGJyb2tlbi4NCj4gPj4+IEhvdyBlbHNlIGNhbiB5b3UgZW52aXNpb24g
+bW1hcCdpbmcgdG8gZ3Vlc3QgdXNlcnNwYWNlIHdvcmtpbmc/DQo+ID4+IFdlbGwgbG9uZyBzdG9y
+eSBzaG9ydDogWW91IGNhbid0Lg0KPiA+Pg0KPiA+PiBTZWUgdXNlcnNwYWNlIG1hcHBpbmdzIGFy
+ZSBub3QgcGVyc2lzdGVudCwgYnV0IHJhdGhlciBmYXVsdGVkIGluIG9uDQo+ID4+IGRlbWFuZC4g
+VGhlIGV4cG9ydGVyIGlzIHJlc3BvbnNpYmxlIGZvciBzZXR0aW5nIHRob3NlIHVwIHRvIGJlIGFi
+bGUgdG8NCj4gPj4gYWRkIHJldmVyc2UgdHJhY2tpbmcgYW5kIHNvIGNhbiBpbnZhbGlkYXRlIHRo
+b3NlIG1hcHBpbmdzIHdoZW4gdGhlDQo+ID4+IGJhY2tpbmcgc3RvcmUgY2hhbmdlcy4NCj4gPiBJ
+IHRoaW5rIHRoYXQgaXMgbm90IGFjdHVhbGx5IGEgcHJvYmxlbS4gIEF0IGxlYXN0IGZvciBob3cg
+aXQgd29ya3Mgb24NCj4gPiBhcm02NCBidXQgSSdtIGFsbW9zdCBwb3NpdGl2ZSB4ODYgaXMgc2lt
+aWxhci4uIEknbSBub3Qgc3VyZSBob3cgZWxzZQ0KPiA+IHlvdSBjb3VsZCB2aXJ0dWFsaXplIG1t
+dS9pb21tdS9ldGMgaW4gYSB3YXkgdGhhdCBkaWRuJ3QgaGF2ZSBob3JyaWJsZQ0KPiA+IHBlcmZv
+cm1hbmNlLg0KPiA+DQo+ID4gVGhlcmUgYXJlIHR3byBsZXZlbHMgb2YgcGFnZXRhYmxlIHRyYW5z
+bGF0aW9uLCB0aGUgZmlyc3QgY29udHJvbGxlZCBieQ0KPiA+IHRoZSBob3N0IGtlcm5lbCwgdGhl
+IHNlY29uZCBieSB0aGUgZ3Vlc3QuICBGcm9tIHRoZSBQb1Ygb2YgaG9zdA0KPiA+IGtlcm5lbCwg
+aXQgaXMganVzdCBtZW1vcnkgbWFwcGVkIHRvIHVzZXJzcGFjZSwgZ2V0dGluZyBmYXVsdGVkIGlu
+IG9uDQo+ID4gZGVtYW5kLCBqdXN0IGFzIG5vcm1hbC4gIEZpcnN0IHRoZSBndWVzdCBjb250cm9s
+bGVkIHRyYW5zbGF0aW9uDQo+ID4gdHJpZ2dlcnMgYSBmYXVsdCBpbiB0aGUgZ3Vlc3Qgd2hpY2gg
+c2V0cyB1cCBndWVzdCBtYXBwaW5nLiAgQW5kIHRoZW4NCj4gPiB0aGUgc2Vjb25kIGxldmVsIG9m
+IHRyYW5zbGF0aW9uIHRvIHRyYW5zbGF0ZSBmcm9tIHdoYXQgZ3Vlc3Qgc2VlcyBhcw0KPiA+IFBB
+IChidXQgaG9zdCBzZWVzIGFzIFZBKSB0byBhY3R1YWwgUEEgdHJpZ2dlcnMgYSBmYXVsdCBpbiB0
+aGUgaG9zdC4NCj4NCj4gT2ssIHRoYXQncyBjYWxtaW5nLg0KPg0KPiBBdCBsZWFzdCB0aGF0J3Mg
+bm90IHRoZSBhcHByb2FjaCB0YWxrZWQgYWJvdXQgdGhlIGxhc3QgdGltZSB0aGlzIGNhbWUgdXAN
+Cj4gYW5kIGl0IGRvZXNuJ3QgcmlwIGEgbWFzc2l2ZSBzZWN1cml0eSBob2xlIHNvbWV3aGVyZS4N
+Cg0KSG1tLCB0YmggSSdtIG5vdCBzdXJlIHdoaWNoIHRocmVhZC9kaXNjdXNzaW9uIHRoaXMgd2Fz
+Li4gaXQgY291bGQgaGF2ZQ0KYmVlbiBiZWZvcmUgSSB3YXMgcGF5aW5nIG11Y2ggYXR0ZW50aW9u
+IHRvIHRoZSB2bSB1c2UtY2FzZQ0KDQo+IFRoZSBxdWVzdGlvbiBpcyB3aHkgaXMgdGhlIGd1ZXN0
+IHRoZW4gbm90IHVzaW5nIHRoZSBjYWNoaW5nIGF0dHJpYnV0ZXMNCj4gc2V0dXAgYnkgdGhlIGhv
+c3QgcGFnZSB0YWJsZXMgd2hlbiB0aGUgdHJhbnNsYXRpb24gaXMgZm9yd2FyZGVkIGFueXdheT8N
+Cg0KVGhlIGd1ZXN0IGtlcm5lbCBpdHNlbGYgZG9lc24ndCBrbm93LiAgQUZBSUNULCBhdCBsZWFz
+dCBvbiBhcm0sIHRoZSBodw0Kd2lsbCBjb21iaW5lIHRoZSBhdHRyaWJ1dGVzIG9mIHRoZSBtYXBw
+aW5nIGluIFMxIGFuZCBTMiBwYWdldGFibGVzIGFuZA0KdXNlIHRoZSBtb3N0IHJlc3RyaWN0aXZl
+LiAgU28gaWYgUzEgKGhvc3QpIGlzIGNhY2hlZCBidXQgUzIgKGd1ZXN0KSBpcw0KV0MsIHlvdSds
+bCBlbmQgdXAgdy8gV0MuDQoNClRoYXQgc2FpZCwgYXQgbGVhc3Qgb24gYWFyY2g2NCwgaXQgc2Vl
+bXMgbGlrZSB3ZSBjb3VsZCBhbHdheXMgdGVsbCB0aGUNCmd1ZXN0IGl0IGlzIGNhY2hlZCwgYW5k
+IGlmIG1hcHBlZCBXQyBpbiBTMSB5b3UnbGwgZW5kIHVwIHdpdGggV0MNCmFjY2Vzcy4gIEJ1dCB0
+aGlzIHNlZW1zIHRvIGRlcGVuZCBvbiBhbiBvcHRpb25hbCBmZWF0dXJlLCBGV0IsIHdoaWNoDQph
+bGxvd3MgUzIgdG8gb3ZlcnJpZGUgUzEgYXR0cmlidXRlcywgbm90IGJlaW5nIGVuYWJsZWQuICBB
+bmQgbm90DQplbnRpcmVseSBzdXJlIGhvdyBpdCB3b3JrcyBvbiB4ODYuDQoNCkJSLA0KLVINCg0K
+PiA+IFtTTklQXQ0KPiA+IFRoaXMgaXMgYmFzaWNhbGx5IHdoYXQgaGFwcGVucywgYWx0aG91Z2gg
+dmlhIHRoZSB0d28gbGV2ZWxzIG9mIHBndGFibGUNCj4gPiB0cmFuc2xhdGlvbi4gIFRoaXMgcGF0
+Y2ggcHJvdmlkZXMgdGhlIG1pc3NpbmcgcGllY2UsIHRoZSBjYWNoaW5nDQo+ID4gYXR0cmlidXRl
+cy4NCj4NCj4gWWVhaCwgYnV0IHRoYXQgd29uJ3Qgd29yayBsaWtlIHRoaXMuIFNlZSB0aGUgYmFj
+a2luZyBzdG9yZSBtaWdyYXRlcyBhbGwNCj4gdGhlIHRpbWUgYW5kIHdoZW4gaXQgaXMgYmFja2Vk
+IGJ5IFBDSWUvVlJBTS9sb2NhbCBtZW1vcnkgeW91IG5lZWQgdG8gdXNlDQo+IHdyaXRlIGNvbWJp
+bmUgd2hpbGUgc3lzdGVtIG1lbW9yeSBpcyB1c3VhbGx5IGNhY2hlZC4NCj4NCj4gPj4gICAgICAg
+QmVjYXVzZSBvdGhlcndpc2UgeW91IGNhbid0IGFjY29tbW9kYXRlIHRoYXQgdGhlIGV4cG9ydGVy
+IGlzDQo+ID4+IGNoYW5naW5nIHRob3NlIGNhY2hpbmcgYXR0cmlidXRlcy4NCj4gPiBDaGFuZ2lu
+ZyB0aGUgYXR0cmlidXRlcyBkeW5hbWljYWxseSBpc24ndCBnb2luZyB0byB3b3JrLi4gb3IgYXQg
+bGVhc3QNCj4gPiBub3QgZWFzaWx5LiAgSWYgeW91IGhhZCBzb21lIHNvcnQgb2Ygc3luY2hyb25v
+dXMgbm90aWZpY2F0aW9uIHRvIGhvc3QNCj4gPiB1c2Vyc3BhY2UsIGl0IGNvdWxkIHRyaWdnZXIg
+YW4gaXJxIHRvIHRoZSBndWVzdCwgSSBzdXBwb3NlLiAgQnV0IGl0DQo+ID4gd291bGQgbWVhbiBo
+b3N0IGtlcm5lbCBoYXMgdG8gYmxvY2sgd2FpdGluZyBmb3IgaG9zdCB1c2Vyc3BhY2UgdG8NCj4g
+PiBpbnRlcnJ1cHQgdGhlIGd1ZXN0LCB0aGVuIHdhaXQgZm9yIGd1ZXN0IHZncHUgcHJvY2VzcyB0
+byBiZSBzY2hlZHVsZWQNCj4gPiBhbmQgaGFuZGxlIHRoZSBpcnEuDQo+DQo+IFdlIGJhc2ljYWxs
+eSBjaGFuZ2UgdGhhdCBvbiBldmVyeSBwYWdlIGZsaXAgb24gQVBVcyBhbmQgdGhhdCBkb2Vzbid0
+DQo+IHNvdW5kIGxpa2Ugc29tZXRoaW5nIGZhc3QuDQo+DQo+IFRoYW5rcyBmb3IgdGhlIGV4cGxh
+bmF0aW9uIGhvdyB0aGlzIHdvcmtzLA0KPiBDaHJpc3RpYW4uDQo+DQo+ID4NCj4gPiBBdCBsZWFz
+dCBpbiB0aGUgY2FzZSBvZiBtc20sIHRoZSBjYWNoZSBhdHRyaWJ1dGVzIGFyZSBzdGF0aWMgZm9y
+IHRoZQ0KPiA+IGxpZmUgb2YgdGhlIGJ1ZmZlciwgc28gdGhpcyBzY2VuYXJpbyBpc24ndCBhIHBy
+b2JsZW0uICBBRkFJQ1QgdGhpcw0KPiA+IHNob3VsZCB3b3JrIGZpbmUgZm9yIGF0IGxlYXN0IGFs
+bCBVTUEgaHcuLiBJJ20gYSBiaXQgbGVzcyBzdXJlIHdoZW4gaXQNCj4gPiBjb21lcyB0byBUVE0s
+IGJ1dCBzaG91bGRuJ3QgeW91IGF0IGxlYXN0IGJlIGFibGUgdG8gdXNlIHdvcnN0LWNhY2hlDQo+
+ID4gY2FjaGUgYXR0cmlidXRlcyBmb3IgYnVmZmVycyB0aGF0IGFyZSBhbGxvd2VkIHRvIGJlIG1h
+cHBlZCB0byBndWVzdD8NCj4gPg0KPiA+IEJSLA0KPiA+IC1SDQo+ID4NCj4gPj4+IEJ1dCBtb3Jl
+IHNlcmlvdXNseSwgbGV0J3MgdGFrZSBhIHN0ZXAgYmFjayBoZXJlLi4gd2hhdCBzY2VuYXJpb3Mg
+YXJlDQo+ID4+PiB5b3Ugc2VlaW5nIHRoaXMgYmVpbmcgcHJvYmxlbWF0aWMgZm9yPyAgVGhlbiB3
+ZSBjYW4gc2VlIGhvdyB0byBjb21lIHVwDQo+ID4+PiB3aXRoIHNvbHV0aW9ucy4gIFRoZSBjdXJy
+ZW50IHNpdHVhdGlvbiBvZiBob3N0IHVzZXJzcGFjZSBWTU0ganVzdA0KPiA+Pj4gZ3Vlc3Npbmcg
+aXNuJ3QgZ3JlYXQuDQo+ID4+IFdlbGwgImlzbid0IGdyZWF0IiBpcyBhIGNvbXBsZXRlIHVuZGVy
+c3RhdGVtZW50LiBXaGVuIEtWTS92aXJ0aW8vdmlydGdwdQ0KPiA+PiBpcyBkb2luZyB3aGF0IEkg
+Z3Vlc3MgdGhleSBhcmUgZG9pbmcgaGVyZSB0aGVuIHRoYXQgaXMgYSByZWFsbHkgbWFqb3INCj4g
+Pj4gc2VjdXJpdHkgaG9sZS4NCj4gPj4NCj4gPj4+ICAgICBBbmQgc3RpY2tpbmcgb3VyIGhlYWRz
+IGluIHRoZSBzYW5kIGFuZA0KPiA+Pj4gcHJldGVuZGluZyBWTXMgZG9uJ3QgZXhpc3QgaXNuJ3Qg
+Z3JlYXQuICBTbyB3aGF0IGNhbiB3ZSBkbz8gIEkgY2FuDQo+ID4+PiBpbnN0ZWFkIGFkZCBhIG1z
+bSBpb2N0bCB0byByZXR1cm4gdGhpcyBpbmZvIGFuZCBzb2x2ZSB0aGUgcHJvYmxlbSBldmVuDQo+
+ID4+PiBtb3JlIG5hcnJvd2x5IGZvciBhIHNpbmdsZSBwbGF0Zm9ybS4gIEJ1dCB0aGVuIHRoZSBw
+cm9ibGVtIHN0aWxsDQo+ID4+PiByZW1haW5zIG9uIG90aGVyIHBsYXRmb3Jtcy4NCj4gPj4gV2Vs
+bCBvbmNlIG1vcmU6IFRoaXMgaXMgKm5vdCogTVNNIHNwZWNpZmljLCB5b3UganVzdCBhYnNvbHV0
+ZWx5ICpjYW4ndA0KPiA+PiBkbyB0aGF0KiBmb3IgYW55IGRyaXZlciENCj4gPj4NCj4gPj4gSSdt
+IGp1c3QgcmVhbGx5IHdvbmRlcmluZyB3aGF0IHRoZSBoZWNrIGlzIGdvaW5nIG9uIGhlcmUsIGJl
+Y2F1c2UgYWxsIG9mDQo+ID4+IHRoaXMgd2FzIGRpc2N1c3NlZCBpbiBsZW5ndGh5IGJlZm9yZSBv
+biB0aGUgbWFpbGluZyBsaXN0IGFuZCB2ZXJ5DQo+ID4+IGJsdW50bHkgcmVqZWN0ZWQuDQo+ID4+
+DQo+ID4+IEVpdGhlciBJJ20gbWlzc2luZyBzb21ldGhpbmcgKHRoYXQncyBjZXJ0YWlubHkgcG9z
+c2libGUpIG9yIHdlIGhhdmUgYQ0KPiA+PiBzdHJvbmcgY2FzZSBvZiBzb21lYm9keSBpbXBsZW1l
+bnRpbmcgc29tZXRoaW5nIHdpdGhvdXQgdGhpbmtpbmcgYWJvdXQNCj4gPj4gYWxsIHRoZSBjb25z
+ZXF1ZW5jZXMuDQo+ID4+DQo+ID4+IFJlZ2FyZHMsDQo+ID4+IENocmlzdGlhbi4NCj4gPj4NCj4g
+Pj4NCj4gPj4+IFNsaWdodGx5IGltcGxpY2l0IGluIHRoaXMgaXMgdGhhdCBtYXBwaW5nIGRtYS1i
+dWZzIHRvIHRoZSBndWVzdCB3b24ndA0KPiA+Pj4gd29yayBmb3IgYW55dGhpbmcgdGhhdCByZXF1
+aXJlcyBETUFfQlVGX0lPQ1RMX1NZTkMgZm9yIGNvaGVyZW5jeS4uIHdlDQo+ID4+PiBjb3VsZCBh
+ZGQgYSBwb3NzaWJsZSByZXR1cm4gdmFsdWUgZm9yIERNQV9CVUZfSU5GT19WTV9QUk9UIGluZGlj
+YXRpbmcNCj4gPj4+IHRoYXQgdGhlIGJ1ZmZlciBkb2VzIG5vdCBzdXBwb3J0IG1hcHBpbmcgdG8g
+Z3Vlc3Qgb3IgQ1BVIGFjY2Vzcw0KPiA+Pj4gd2l0aG91dCBETUFfQlVGX0lPQ1RMX1NZTkMuICBU
+aGVuIGF0IGxlYXN0IHRoZSBWTU0gY2FuIGZhaWwgZ3JhY2VmdWxseQ0KPiA+Pj4gaW5zdGVhZCBv
+ZiBzdWJ0bHkuDQo+ID4+Pg0KPiA+Pj4gQlIsDQo+ID4+PiAtUg0KPg0KX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxp
+c3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQg
+YW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
