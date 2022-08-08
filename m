@@ -2,121 +2,117 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 171645A8E22
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 08:15:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72E3C5A8E29
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 08:16:55 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4C1533F56C
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 06:15:31 +0000 (UTC)
-Received: from EUR02-VE1-obe.outbound.protection.outlook.com (mail-eopbgr20056.outbound.protection.outlook.com [40.107.2.56])
-	by lists.linaro.org (Postfix) with ESMTPS id DBCC447F1F
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  8 Aug 2022 14:39:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A7EB23F46D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 06:16:54 +0000 (UTC)
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com (mail-eopbgr60066.outbound.protection.outlook.com [40.107.6.66])
+	by lists.linaro.org (Postfix) with ESMTPS id A67AA3F23D
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  8 Aug 2022 14:58:27 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=KbbecUIf2hmoJEPPqZJSwLflPxl2F03hCyjPKNzZNFfGtqIWLur66JlFDmBSVuO17pIc+NLjnBf+uyokxRmycB3BZl3rO37Rl8UYk12fCZdqpy+jMdi38RLq2sMiz/4QwFpDdn3VFgq5Q/W2x033Q7DWkarj0/H0p15aE56rGv6ZCdMSbNyWAG4xaXy2OOXY0JWniDgzOQrSp3/f8W2g5lpKKNZ4UIYnNpj3s57Lvrqm6onBbdyzdLL/mje9jjf5H95EPDQ2UEl8W85V5zyfQ0dbfeTRtjbhQYh/um+qVoW3CDa74rQ36H7UmrBkuBGFiIC2qSAcCqwIvyRSzAnpxA==
+ b=NSo24lqrgIwuX8r7x1Fw04y8UNgGJ3H3aVr573V5QMLX8usOmijH3SF00Hg0cGL0XINsdgK0iVF2TdHhdbYRaz+56kYZcNeK2Uo2XTsClnunbCzjcnXy5ENSBJxeFSVr3TEZzDRgMvTMm7e2q0mVOWb+m/xN/3IsAnZfsNJI9KuU3gQQ5lWCmn04fc3cip7Ryec9CCOld0nXgFCB/PMWsr+DzmtDWWF+ITFwDR7ahprqjdPPg5CcICoB9OvAEsUqQorGbS3IKQQ3jpMNXSg2HRiOpcQFOhjOCnqaJZCfg7Vqny+IAvqxPuXofrHrXzhpqExqgw08oapeXvScom5Snw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N2HHSbfc3pn2YJFnPBWYwuOWvQGRjYckyuYciKWpHD4=;
- b=VTlqWczvEL0X9sjlIO+2+/JboPqEFfikcrYNOdBwhfaW8TfssM1ToZGbwr740a3kjZXGb+0Rqhvurl2iB52JnwCxVhoKh/XRva+xovNGDiKz/GTti49Sd6wNE0UQoy80xYkmuotmsyzQfH/UcqIuwiIF8UOTRK13OpyaXJebJU6i/bth0UjWt0GtYWNHi4IM+/QQCWG0/fAQj6KfH6tf/LRfu9J/yXxn3VeDf/qHjheJYuxQqNGFfNo5p1XOF2K/a9ue40vmrNQ9k8C1L1l1ouJtdn55f/jRcdPu+lGnRj0f5PWgPbW3AHxiPpCCsFQI4FU39dIO2Mqja/y3sb7ChA==
+ bh=FxTuwg1X8qAwF21M87xxBCmOM7qUuvYcbHbpmp88cuk=;
+ b=PkJA3T4omNiml/oXfgqGRZlDArRrVpPNf5kO/pinK2Wsu2oFRn4/7GTAwzWTrc50PR/RbRxqy4Rj39+c0VDSagyVhLRn0DV/79/pMRtjbfxwBkhi8MjaoP6M7N59bjalxG92QbMQuYvWoFP80bx8Hxi+MSNUgIkF+c58uM6kov4XQ4zr5/NnFS3QHMfuY3mCUDRRGxCC0qHF/tyUoRuZ/2N82NEuDa7q/xHqzx5sqTKq9QGLpPcfdaecepnME5yJiCgfl6jJc/dIKU+HEMAV0tJWJIdDi+X5oPYieYvWm4ADAXD1IYhdfPPHd8sK4O9cPuijSrLlYXULllxgvoRhqg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
  header.d=nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N2HHSbfc3pn2YJFnPBWYwuOWvQGRjYckyuYciKWpHD4=;
- b=T7WNtoKR3ebmxaALXmwgkVlBHpZR/cFYhfe+YVLeJNPIhm9M+q9mo5j/VbDdYoIbdrtIMiTMvLIPZo+0ncuDd6zSOAs5wUXZMUcYfiO3CXp9Xvk04GBpIDMcgVG/bb8buXbn7Gb3SoHlu5+KQ/pQzN8z/hbA28Krm5g2PsLnKUg=
+ bh=FxTuwg1X8qAwF21M87xxBCmOM7qUuvYcbHbpmp88cuk=;
+ b=HdeYoyySZ4V0YT/mNtUfAnVQE5CEMeB+cS1+ZYxIfM3VkkbCNvTP6/2dKYIA6BmuUy7251Nc68C07euXTyoXGCSWFecWJBO9guAF/shC9qYQ+a7HPV5rn4oea0qRfjrBlVAMqSR9Y7Uz646LvOY4McvDOym5OSxiNdFopBr88rk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
 Received: from AM6PR04MB6743.eurprd04.prod.outlook.com (2603:10a6:20b:f1::11)
- by AS8PR04MB8931.eurprd04.prod.outlook.com (2603:10a6:20b:42e::12) with
+ by DB3PR0402MB3881.eurprd04.prod.outlook.com (2603:10a6:8:12::28) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5504.20; Mon, 8 Aug
- 2022 14:39:53 +0000
+ 2022 14:58:25 +0000
 Received: from AM6PR04MB6743.eurprd04.prod.outlook.com
  ([fe80::a401:5ed6:1bfa:89a9]) by AM6PR04MB6743.eurprd04.prod.outlook.com
  ([fe80::a401:5ed6:1bfa:89a9%5]) with mapi id 15.20.5504.019; Mon, 8 Aug 2022
- 14:39:53 +0000
+ 14:58:25 +0000
 From: Olivier Masse <olivier.masse@nxp.com>
-To: "brian.starkey@arm.com" <brian.starkey@arm.com>
-Thread-Topic: [EXT] Re: [PATCH 1/3] dma-buf: heaps: add Linaro secure dmabuf
- heap support
-Thread-Index: AQHYqNLEB1kEEMDN2EiJXHn7b90D762gcg6AgASkiYA=
-Date: Mon, 8 Aug 2022 14:39:53 +0000
-Message-ID: <7e61668164f8bf02f6c4ee166e85abc42b5ee958.camel@nxp.com>
-References: <20220805135330.970-1-olivier.masse@nxp.com>
-	 <20220805135330.970-2-olivier.masse@nxp.com>
-	 <20220805154139.2qkqxwklufjpsfdx@000377403353>
-In-Reply-To: <20220805154139.2qkqxwklufjpsfdx@000377403353>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: ed727720-04b2-4e22-0552-08da794bdb62
-x-ms-traffictypediagnostic: AS8PR04MB8931:EE_
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- KuZCgSeyTj4GkqTL10pB5exECN8sVGC3O/3RgLWnAsSlNHezj387QALPfaReWb8zw9Nz6M9xmns6+IUpy7wdQRlWBTkuZPoPK4VHcf2qArasWcSr6MKWNKNJbz4ExelVaB+16TIseWsOJD+SonrZqCGFHgIIQephNcvkqQL3xRPuBEagjm+sF217tSVZWERataVVLqGR3sfc3jkojB5oo7vXZVUQoZDRYgBuXJQouO+jjQNB5Ipm/vzsywX76/BH2DB4vsMRCsA0D+SHKs3b4jI+o7E120ysgyaEXG39q2Ocl+AZHWmBFkXTrAwZSXlA46E/YTsIV2fmgkQE27mFM+5VWhXy1//frieyObu2GFifhlk+tbu8FpTpyHklqP6pBqfSr2Xp6iB6VIorxkaS4hiVmniXqWLjejjM7S1LgLxnx36sb2i1Zx4sSFFq+1ZTm9g/8ifgzLNqQkock68rsHRt4kMXunDsKDTfMUNQ57wwcddp26C6vpOpRzV1j+j8TsDFVUw78hk+CtIUr0YH1gB9Qs81lv71u2feZvH/6JFZYzepwToRMXAY1p4xzATduPau6lqmUIsa+R9ibtgYw3onkSp3FX+5XGN2t3hqh+EWZ2QDHvphf4M8zPuRCzGl6hfLcrZVpnLh1Telmq3/0E769yIYEzjhsTkC8VuQthFzE55w0e1iVYdnR+jnXllXr1VgiUaChDrKG6MFg9f0Os8QbemV56JVMXEGySAZp4wA4v94JsFrI4l6wSLclnT64dwufsJup/kSOTCuicek89BkgjS7ImLwj/zZvnQgoqz11BWNwWC4H7NGeOmL6o0tk5Gk/T94GU2C42OKptqnAxX0BozUfx1ewEY6DBPbUik=
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR04MB6743.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(136003)(366004)(346002)(376002)(396003)(39860400002)(122000001)(5660300002)(36756003)(8936002)(6486002)(44832011)(86362001)(2906002)(41300700001)(38100700002)(966005)(30864003)(478600001)(76116006)(64756008)(66476007)(66446008)(91956017)(66556008)(66946007)(8676002)(4326008)(6916009)(54906003)(6506007)(316002)(71200400001)(38070700005)(186003)(26005)(83380400001)(6512007)(2616005)(99106002);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-15?Q?d/S9i4xEYXBq6opfM3XvEfxz+UXp/m0HK2Sui+VKAIvFTG+5StYXOvMnN?=
- =?iso-8859-15?Q?/5GVlCl6WG14SvN7AhvGGf/2RUwHM7Z0w2l7p/UIeSNMhi00EYGpCzcK1?=
- =?iso-8859-15?Q?giGQANBHm3yWFGWR759tz5xcqIvHKv6WMGvOB2GHnMrWpa8v8PQ5YQJ02?=
- =?iso-8859-15?Q?1EmwXdfiAwHEK/lkaYDNnO2a+wqwU36ZlmHoAvQXup4waw+vNj1dg3ZbA?=
- =?iso-8859-15?Q?ja09eaPeKlJPGMSphys+Q0l6dPgsdO2dgvD9NxVfliJLlvAItieIuxMmJ?=
- =?iso-8859-15?Q?XOcmjMVrA/sIz46g0xA2YrhBgvFVtqCOwCrnaZJeIUGa/Atv2w8Tf6gq2?=
- =?iso-8859-15?Q?tYRVlzQg6Agr9inVX+ZHpE5D5vxsNkGEllIJ+DDBZFe70DQdtPKTyJyx6?=
- =?iso-8859-15?Q?37D6zghHhj+MYFxN+bsK7gjDd9hmjHD7FMntGdMdPNGjuHmTdksjOuQt/?=
- =?iso-8859-15?Q?TqTFhFwVk0AvlILqo8jJahb9HzvIdjOpOPjOmf6wkgMpiP54MjLPpM3Pf?=
- =?iso-8859-15?Q?fnyuK+1s2C9XayqMyDCU52YKqQH9OCJkF0lWPPurRTl54Rmj8vFfoTbP4?=
- =?iso-8859-15?Q?QXaxOuDHaXm7sYXC6noMztNKwPC+E8aMKDYrGkLWj5Onrz3/pJ2t0e0P+?=
- =?iso-8859-15?Q?aTgkZDueUT0GwftEhCXl71lLKemkFUCvbQUMAHrndIZ7JnD4a+4e3n/F4?=
- =?iso-8859-15?Q?8MgK/WVWiY2m6ryjrULr/1RoEzSJZQwK+Byc2aZtSMACdQAe5Codh8eCm?=
- =?iso-8859-15?Q?qHtu0qMzH0gVRdXAjHOfv/jWU0wTjqN6Kl24pc4imF4rqS0mTQV7FWlEK?=
- =?iso-8859-15?Q?vUGjKRFI0q5C5jhdPsD1gmwZj6Q6/f+mBbvwxsEXWRhCZzZ/yiObaMsph?=
- =?iso-8859-15?Q?mhju9maV8gYVh2FaS50pfc6GdlkyF84zdnjLa/rJqo3DBn5Xqb7FpWdVT?=
- =?iso-8859-15?Q?bp6uVJm/bBSuAHo2+vCtSOMY4EBTq1fWO3IsSraR8y4LKvEtmE28w+IQ2?=
- =?iso-8859-15?Q?CQzRwaWybZyCliHgT6rUqwKCIqY43dXEsJM9WhSA9fglXzb/b//rFlKm7?=
- =?iso-8859-15?Q?ZU+KLvnQK7/tvtZFYdX9MRuCWUcnbGrMvklyqcJLa/Yy8B5EX/VxbXrtT?=
- =?iso-8859-15?Q?7tEpyPVhXcuStWur+0KrC0ark4SJdlYWS9gx10QgNG46f2v3ihK3HCwDm?=
- =?iso-8859-15?Q?6A3OcdI+sQgGNdqg3En6umSk9H7WkJeiksTocDEx8o0m9J3DrtyHZ6pae?=
- =?iso-8859-15?Q?Rz2fLNC4G8XRwxr9eSpEWnzRFUVGEGv3w326SScD2HkGgA0lQuVd7zQL5?=
- =?iso-8859-15?Q?kbN2qZA7nU/NdpKO8WKKJNWykMp8PwxKYf+aHJpw9NFEfkv4zzjiPWOCs?=
- =?iso-8859-15?Q?cNaeAJ2nRur6Je11x0aJYewtOyxmkOuyZS3eaefxV3nWDNGPhRIYF5Mgs?=
- =?iso-8859-15?Q?Bo5jx1FMGXStUr5CGHjLHHkB2nqQoyJRuM55zC1w8XFoKlxu5M4UDtOhM?=
- =?iso-8859-15?Q?x9n+NiYgUB9aLVulqRE9req0CRsCIo7HEvnjmCeXzNroYE18kjkvWnNuX?=
- =?iso-8859-15?Q?Y7XRqNXns5hjoeW+hPCnkbo5bAJjq2PhANelCZ7EatkUuaJG8FGWejJ7W?=
- =?iso-8859-15?Q?XKB6E9AJGC2MkaGpLRbjkVmSjiSO1upBpdqwkeqwDgqU1EEtkv4rA3uPW?=
- =?iso-8859-15?Q?cVeR?=
-Content-ID: <87716A19DBA34946A724DBA1DED4990B@eurprd04.prod.outlook.com>
+To: sumit.semwal@linaro.org,
+	benjamin.gaignard@collabora.com,
+	Brian.Starkey@arm.com,
+	christian.koenig@amd.com,
+	linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	linux-kernel@vger.kernel.org
+Date: Mon,  8 Aug 2022 16:58:19 +0200
+Message-Id: <20220808145819.12176-1-olivier.masse@nxp.com>
+X-Mailer: git-send-email 2.25.0
+X-ClientProxiedBy: AM0PR01CA0094.eurprd01.prod.exchangelabs.com
+ (2603:10a6:208:10e::35) To AM6PR04MB6743.eurprd04.prod.outlook.com
+ (2603:10a6:20b:f1::11)
 MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 88b4f7e9-adcc-40a0-99fb-08da794e71be
+X-MS-TrafficTypeDiagnostic: DB3PR0402MB3881:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	fAh+BtEargVVr6XB/XhN5s1Nq80bhVfm4Ppyt8V83KsQ5Uxaua5JhrDscTaEF8DK10Bq7UfqjzCW/zNCetvtPfl4wOmSifP2f70j8ls7RwnZz1hxdZjHxZP14ElW/EhCLnooYefha+vGObyaY6Wtf2OXJdR3LpT70bb09TYF3wWJFjkXvR5WteI+FbguP5cK1KwE/ZSO8KFMttEYG+ocweSbcVXcDwM3jQ2azEdS00EOZXpYDSXpQhcJht/uLDU1GtjjDy+gBUAPhHsOxN6oJGRHT1PFkE+0NrE3tH3iVMdD1uD79md+saXtYmR7+otxrSUSMr7FgSeazrk1UMer/CmfxW8fIm2k2LUH8YuuLsH1Q151i+e9Z/j/uT6llWHyeRiRvLijSG6Fk6why8kXJzBjkNMcOzytaY7zk/XjbIKHpRKN6PhScK9Ny/tLDFLyBsmVf1wlMwstvLuHQ318bqD9c04S9JK80kfIlR1GQfq77bOvTXdwYT2zihIWGQY/OatYkBZgCxrxDr/lxEJdHGwEyAMoroQYHiQWpHkj6i0Lkgdg3zSppP/n7UQc4C2bBRl2PwdTeP8rrJcCwBRaVKXj3xnGxnYroUSnMszmEmhLFr7fSTqYRDGNopOVDX536ldypCxuFHBlb7OMs2vKydpFwRh+FdCLrvwmHwMSAyLKKQEygNjh72SuOIBuNAQbdBdEmE1a6gpncZ6+nS48sdK2lwKnDebkbpw4VrlEgUFCXcP0Jrcov3g3I4D3NfU78/kfwIIdSzYLcmdUjLQwY4KmpcJb8Za8tW4YRexnP0w=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR04MB6743.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(376002)(346002)(366004)(39860400002)(396003)(136003)(38100700002)(38350700002)(2906002)(66476007)(66946007)(66556008)(86362001)(8676002)(52116002)(4326008)(55236004)(6506007)(6512007)(6666004)(26005)(478600001)(316002)(6486002)(41300700001)(186003)(2616005)(1076003)(83380400001)(8936002)(5660300002)(36756003)(44832011);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?v3nFSzNS43bqsrMn8DDxhayNfNM8UUcm6y0RoPztCyJ1A0ZdhVFHC7xj3hWJ?=
+ =?us-ascii?Q?ojXJueKzVpJoEhMHI6bd2iZeFTwgTLuXsz+QaJCYfxeLoyjBvuf7AU25qb63?=
+ =?us-ascii?Q?qLlPB6i4k1hInsNkV97OUggaULzU082xomHzmZVsOZDujfEygkvTPtXK9L0T?=
+ =?us-ascii?Q?Ypo65/Bfl3ayWKTxyQbyRUbafvw/7slvu43uaay4WwCZMBo0ZvzjyVLuCMv/?=
+ =?us-ascii?Q?Z4qwFP8GCBxgz29rVegrVu8PYKBavFAm/ye8J9agoSYto7sjX40kvPauW0GI?=
+ =?us-ascii?Q?7ZWF33W3rHSbyqZLAWRbsqo9Fti8TzyPkkOFPhiXj5/UECcFZlg/QBOFV4hU?=
+ =?us-ascii?Q?JaOsE2tAOiSKQhbwcEyQrSVcGVt42OW4p426S7QJtg1nupEBHi++Ru1aXPa9?=
+ =?us-ascii?Q?n8Xh1kldK8E+kWNQOrU53SB1y3xF5UJcczxSQMqOniMo5psinpIp8o0Ry+Ok?=
+ =?us-ascii?Q?0kvQe9YntBgvi2+COMEUIASot2H226qAb7Worhafb+AvIvtXuP4ViCI9Kdcl?=
+ =?us-ascii?Q?OPCa9oOKOkOT1fFSWrDZsGwx4vIaahIz69DJa3hsJT89jR9metwunoB78ktb?=
+ =?us-ascii?Q?JOkhi5UqfELwDx8yeVr7So6FaNc7k0t1e0BgcDuXi6xlf3lb2hNtwZFORGWg?=
+ =?us-ascii?Q?yXjXbZp5VHj0vkzhAyQWVPQt9wGFq55Ap6NTn6ioD37H4zFxiIYgcJZjU6we?=
+ =?us-ascii?Q?zbIJ1ODi3gOr8G1EMs9OUbjkIXPYR8Po4zFQxfK7WN3z53JUfUBgWd9LaPR0?=
+ =?us-ascii?Q?reDuABz8ag/ITxhtCq368Nup1RiBlIz6k6+S+gk4l/hrPSz8yrbbH+4L943/?=
+ =?us-ascii?Q?Mg+g5VeZtnQ5M52THIzLpGbmfH7t2HN5QhBVdY4MTx50lg5mzQefgy0yPuzH?=
+ =?us-ascii?Q?buACrpDdU+8+KpzF4/Tr7Yw38xNlvj+r47tOzffixKfRgnPkZPgbxSjkNeGX?=
+ =?us-ascii?Q?qd33tFmnkRQ/Lsytks7HaN2sswkafXQxORWzCYi4tv6QvZQvlg+kIex8NwMt?=
+ =?us-ascii?Q?QjpkxbeJ0DByNQKzAY0xx/ZYIN1LEqGgsUSFLzhFdg5HXmWjkgmvoyrRHmJO?=
+ =?us-ascii?Q?zwTMTv3qBAr2qr0chpUW5EoEnrIwfoYx7ZmRy5tk0clwC+4N30Ryu4seD7b5?=
+ =?us-ascii?Q?gXkULu5pgreFmsWXvAIOami14AlTf3hIR8myPtEgzDtqdkuAzDldoB3VZH88?=
+ =?us-ascii?Q?Djhq27LJhujzn/Ajv7/Hr61+IKAdRHcpc5hA/MSmWamXatemC6z1aJwnW/+v?=
+ =?us-ascii?Q?SbfPuumjhMKA+aXvonvVv4wps2ADz1d4l5HXR3kXxJAVAKhFMzYgbAhVtjzl?=
+ =?us-ascii?Q?whtVKInNqQfiIuR5KcHc1sww3fY1SlWWKYgwy+fGltAKI6WflwsVXE8/KDGf?=
+ =?us-ascii?Q?ovGXoJ7Civ5asZk9zkXeF1jJuHjMwkjhcDkbZ1cH6r4C+MGLYEihyifHxje2?=
+ =?us-ascii?Q?IXMmwTOL4d1oeSHuH1SvHF5EwLPguwl/uw27v9USned8+h6JpiKVgWE2AXml?=
+ =?us-ascii?Q?BXmpaIUcDtFfE7pOWEa1z4tXleo6M6Ffpoe8owEtVY/mWPfNm5WozHRZfe5C?=
+ =?us-ascii?Q?7ev/CY8QfcwmLq8nny+12cx+sbNEgHnOzNGPk2St?=
 X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-Network-Message-Id: 88b4f7e9-adcc-40a0-99fb-08da794e71be
 X-MS-Exchange-CrossTenant-AuthSource: AM6PR04MB6743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ed727720-04b2-4e22-0552-08da794bdb62
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Aug 2022 14:39:53.6020
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Aug 2022 14:58:25.1104
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: mbOgy1PnhikyGMvR/AgGhLgiNu/MIQa0dieqDA39Dnf8cc0byG885+gDz1lqhzNaFli5u0VaRqNHNj2FF+IePg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8931
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: eXUTNyt/Lcghza+1l0SMInSH5rDZaEX6gPh4akbhdHDYqJT+NQO+tpFHVmIo13Vivl9doqYqRQrhPNfJ0fya7g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR0402MB3881
 X-MailFrom: olivier.masse@nxp.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: P6BNL3LSGL3R5LQTZFIAYGC7IUWH344E
-X-Message-ID-Hash: P6BNL3LSGL3R5LQTZFIAYGC7IUWH344E
-X-Mailman-Approved-At: Thu, 01 Sep 2022 06:15:26 +0000
-CC: "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "christian.koenig@amd.com" <christian.koenig@amd.com>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "nd@arm.com" <nd@arm.com>, =?iso-8859-15?Q?Cl=E9ment_Faure?= <clement.faure@nxp.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "benjamin.gaignard@collabora.com" <benjamin.gaignard@collabora.com>
+Message-ID-Hash: EIXMOLRSZESRHCRIVWVPX63XHRPX4SFB
+X-Message-ID-Hash: EIXMOLRSZESRHCRIVWVPX63XHRPX4SFB
+X-Mailman-Approved-At: Thu, 01 Sep 2022 06:16:50 +0000
+CC: clement.faure@nxp.com, olivier.masse@nxp.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [EXT] Re: [PATCH 1/3] dma-buf: heaps: add Linaro secure dmabuf heap support
+Subject: [Linaro-mm-sig] [PATCH 1/3] dma-buf: heaps: add Linaro secure dmabuf heap support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/P6BNL3LSGL3R5LQTZFIAYGC7IUWH344E/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EIXMOLRSZESRHCRIVWVPX63XHRPX4SFB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -126,554 +122,392 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi Brian,
+add Linaro secure heap compatible reserved mem: linaro,secure-heap
+use genalloc to allocate/free buffer from buffer pool.
+buffer pool info is defined from a dts reserved memory.
 
-On ven., 2022-08-05 at 16:41 +0100, Brian Starkey wrote:
-> Caution: EXT Email
-> 
-> Hi Olivier,
-> 
-> Thanks, I think this is looking much better.
-> 
-> I'd like to know how others feel about landing this heap; there's
-> been
-> push-back in the past about heaps in device-tree and discussions
-> around how "custom" heaps should be treated (though IMO this is quite
-> a generic one).
-> 
-> On Fri, Aug 05, 2022 at 03:53:28PM +0200, Olivier Masse wrote:
-> > add Linaro secure heap bindings: linaro,secure-heap
-> > use genalloc to allocate/free buffer from buffer pool.
-> > buffer pool info is from dts.
-> > use sg_table instore the allocated memory info, the length of
-> > sg_table is 1.
-> > implement secure_heap_buf_ops to implement buffer share in
-> > difference device:
-> > 1. Userspace passes this fd to all drivers it wants this buffer
-> > to share with: First the filedescriptor is converted to a &dma_buf
-> > using
-> > dma_buf_get(). Then the buffer is attached to the device using
-> > dma_buf_attach().
-> > 2. Once the buffer is attached to all devices userspace can
-> > initiate DMA
-> > access to the shared buffer. In the kernel this is done by calling
-> > dma_buf_map_attachment()
-> > 3. get sg_table with dma_buf_map_attachment in difference device.
-> > 
-> 
-> I think this commit message could use a little rework. A few
-> thoughts:
-> 
-> * The bindings are in a separate commit, so seems strange to mention
->   here.
+Signed-off-by: Olivier Masse <olivier.masse@nxp.com>
+---
+ drivers/dma-buf/heaps/Kconfig       |   9 +
+ drivers/dma-buf/heaps/Makefile      |   1 +
+ drivers/dma-buf/heaps/secure_heap.c | 339 ++++++++++++++++++++++++++++
+ 3 files changed, 349 insertions(+)
+ create mode 100644 drivers/dma-buf/heaps/secure_heap.c
 
-what about:
-"add Linaro secure heap compatible reserved memory: linaro,secure-heap"
+diff --git a/drivers/dma-buf/heaps/Kconfig b/drivers/dma-buf/heaps/Kconfig
+index 3782eeeb91c0..c9070c728b9a 100644
+--- a/drivers/dma-buf/heaps/Kconfig
++++ b/drivers/dma-buf/heaps/Kconfig
+@@ -20,3 +20,12 @@ config DMABUF_HEAPS_DSP
+           Choose this option to enable the dsp dmabuf heap. The dsp heap
+           is allocated by gen allocater. it's allocated according the dts.
+           If in doubt, say Y.
++
++config DMABUF_HEAPS_SECURE
++	tristate "DMA-BUF Secure Heap"
++	depends on DMABUF_HEAPS
++	help
++	  Choose this option to enable the secure dmabuf heap. The secure heap
++	  pools are defined according to the DT. Heaps are allocated
++	  in the pools using gen allocater.
++	  If in doubt, say Y.
+diff --git a/drivers/dma-buf/heaps/Makefile b/drivers/dma-buf/heaps/Makefile
+index 29733f84c354..863ef10056a3 100644
+--- a/drivers/dma-buf/heaps/Makefile
++++ b/drivers/dma-buf/heaps/Makefile
+@@ -2,3 +2,4 @@
+ obj-$(CONFIG_DMABUF_HEAPS_SYSTEM)	+= system_heap.o
+ obj-$(CONFIG_DMABUF_HEAPS_CMA)		+= cma_heap.o
+ obj-$(CONFIG_DMABUF_HEAPS_DSP)          += dsp_heap.o
++obj-$(CONFIG_DMABUF_HEAPS_SECURE)	+= secure_heap.o
+diff --git a/drivers/dma-buf/heaps/secure_heap.c b/drivers/dma-buf/heaps/secure_heap.c
+new file mode 100644
+index 000000000000..a3023bf8d457
+--- /dev/null
++++ b/drivers/dma-buf/heaps/secure_heap.c
+@@ -0,0 +1,339 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * DMABUF secure heap exporter
++ *
++ * Copyright 2022 NXP.
++ */
++
++#include <linux/dma-buf.h>
++#include <linux/dma-heap.h>
++#include <linux/dma-mapping.h>
++#include <linux/err.h>
++#include <linux/genalloc.h>
++#include <linux/highmem.h>
++#include <linux/mm.h>
++#include <linux/module.h>
++#include <linux/of.h>
++#include <linux/of_fdt.h>
++#include <linux/of_reserved_mem.h>
++#include <linux/scatterlist.h>
++#include <linux/slab.h>
++#include <linux/vmalloc.h>
++
++#define MAX_SECURE_HEAP 2
++#define MAX_HEAP_NAME_LEN 32
++
++struct secure_heap_buffer {
++	struct dma_heap *heap;
++	struct list_head attachments;
++	struct mutex lock;
++	unsigned long len;
++	struct sg_table sg_table;
++	int vmap_cnt;
++	void *vaddr;
++};
++
++struct secure_heap_attachment {
++	struct device *dev;
++	struct sg_table *table;
++	struct list_head list;
++};
++
++struct secure_heap_info {
++	struct gen_pool *pool;
++};
++
++struct rmem_secure {
++	phys_addr_t base;
++	phys_addr_t size;
++
++	char name[MAX_HEAP_NAME_LEN];
++};
++
++static struct rmem_secure secure_data[MAX_SECURE_HEAP] = {0};
++static unsigned int secure_data_count;
++
++static struct sg_table *dup_sg_table(struct sg_table *table)
++{
++	struct sg_table *new_table;
++	int ret, i;
++	struct scatterlist *sg, *new_sg;
++
++	new_table = kzalloc(sizeof(*new_table), GFP_KERNEL);
++	if (!new_table)
++		return ERR_PTR(-ENOMEM);
++
++	ret = sg_alloc_table(new_table, table->orig_nents, GFP_KERNEL);
++	if (ret) {
++		kfree(new_table);
++		return ERR_PTR(-ENOMEM);
++	}
++
++	new_sg = new_table->sgl;
++	for_each_sgtable_sg(table, sg, i) {
++		sg_set_page(new_sg, sg_page(sg), sg->length, sg->offset);
++		new_sg->dma_address = sg->dma_address;
++#ifdef CONFIG_NEED_SG_DMA_LENGTH
++		new_sg->dma_length = sg->dma_length;
++#endif
++		new_sg = sg_next(new_sg);
++	}
++
++	return new_table;
++}
++
++static int secure_heap_attach(struct dma_buf *dmabuf,
++			      struct dma_buf_attachment *attachment)
++{
++	struct secure_heap_buffer *buffer = dmabuf->priv;
++	struct secure_heap_attachment *a;
++	struct sg_table *table;
++
++	a = kzalloc(sizeof(*a), GFP_KERNEL);
++	if (!a)
++		return -ENOMEM;
++
++	table = dup_sg_table(&buffer->sg_table);
++	if (IS_ERR(table)) {
++		kfree(a);
++		return PTR_ERR(table);
++	}
++
++	a->table = table;
++	a->dev = attachment->dev;
++	INIT_LIST_HEAD(&a->list);
++	attachment->priv = a;
++
++	mutex_lock(&buffer->lock);
++	list_add(&a->list, &buffer->attachments);
++	mutex_unlock(&buffer->lock);
++
++	return 0;
++}
++
++static void secure_heap_detach(struct dma_buf *dmabuf,
++			       struct dma_buf_attachment *attachment)
++{
++	struct secure_heap_buffer *buffer = dmabuf->priv;
++	struct secure_heap_attachment *a = attachment->priv;
++
++	mutex_lock(&buffer->lock);
++	list_del(&a->list);
++	mutex_unlock(&buffer->lock);
++
++	sg_free_table(a->table);
++	kfree(a->table);
++	kfree(a);
++}
++
++static struct sg_table *secure_heap_map_dma_buf(struct dma_buf_attachment *attachment,
++						enum dma_data_direction direction)
++{
++	struct secure_heap_attachment *a = attachment->priv;
++
++	return a->table;
++}
++
++static void secure_heap_unmap_dma_buf(struct dma_buf_attachment *attachment,
++				      struct sg_table *table,
++				      enum dma_data_direction direction)
++{
++}
++
++static void secure_heap_dma_buf_release(struct dma_buf *dmabuf)
++{
++	struct secure_heap_buffer *buffer = dmabuf->priv;
++	struct secure_heap_info *info;
++	struct sg_table *table;
++	struct scatterlist *sg;
++	int i;
++
++	info = dma_heap_get_drvdata(buffer->heap);
++
++	table = &buffer->sg_table;
++	for_each_sg(table->sgl, sg, table->nents, i)
++		gen_pool_free(info->pool, sg_dma_address(sg), sg_dma_len(sg));
++
++	sg_free_table(table);
++	kfree(buffer);
++}
++
++static const struct dma_buf_ops secure_heap_buf_ops = {
++	.attach = secure_heap_attach,
++	.detach = secure_heap_detach,
++	.map_dma_buf = secure_heap_map_dma_buf,
++	.unmap_dma_buf = secure_heap_unmap_dma_buf,
++	.release = secure_heap_dma_buf_release,
++};
++
++static struct dma_buf *secure_heap_allocate(struct dma_heap *heap,
++					    unsigned long len,
++					    unsigned long fd_flags,
++					    unsigned long heap_flags)
++{
++	struct secure_heap_buffer *buffer;
++	struct secure_heap_info *info = dma_heap_get_drvdata(heap);
++	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
++	unsigned long size = roundup(len, PAGE_SIZE);
++	struct dma_buf *dmabuf;
++	struct sg_table *table;
++	int ret = -ENOMEM;
++	unsigned long phy_addr;
++
++	buffer = kzalloc(sizeof(*buffer), GFP_KERNEL);
++	if (!buffer)
++		return ERR_PTR(-ENOMEM);
++
++	INIT_LIST_HEAD(&buffer->attachments);
++	mutex_init(&buffer->lock);
++	buffer->heap = heap;
++	buffer->len = size;
++
++	phy_addr = gen_pool_alloc(info->pool, size);
++	if (!phy_addr)
++		goto free_buffer;
++
++	table = &buffer->sg_table;
++	if (sg_alloc_table(table, 1, GFP_KERNEL))
++		goto free_pool;
++
++	sg_set_page(table->sgl,	phys_to_page(phy_addr),	size, 0);
++	sg_dma_address(table->sgl) = phy_addr;
++	sg_dma_len(table->sgl) = size;
++
++	/* create the dmabuf */
++	exp_info.exp_name = dma_heap_get_name(heap);
++	exp_info.ops = &secure_heap_buf_ops;
++	exp_info.size = buffer->len;
++	exp_info.flags = fd_flags;
++	exp_info.priv = buffer;
++	dmabuf = dma_buf_export(&exp_info);
++	if (IS_ERR(dmabuf)) {
++		ret = PTR_ERR(dmabuf);
++		goto free_table;
++	}
++
++	return dmabuf;
++
++free_table:
++	sg_free_table(table);
++
++free_pool:
++	gen_pool_free(info->pool, phy_addr, size);
++
++free_buffer:
++	mutex_destroy(&buffer->lock);
++	kfree(buffer);
++
++	return ERR_PTR(ret);
++}
++
++static const struct dma_heap_ops secure_heap_ops = {
++	.allocate = secure_heap_allocate,
++};
++
++static int secure_heap_add(struct rmem_secure *rmem)
++{
++	struct dma_heap *secure_heap;
++	struct dma_heap_export_info exp_info;
++	struct secure_heap_info *info = NULL;
++	struct gen_pool *pool = NULL;
++	int ret = -EINVAL;
++
++	if (rmem->base == 0 || rmem->size == 0) {
++		pr_err("secure_data base or size is not correct\n");
++		goto error;
++	}
++
++	info = kzalloc(sizeof(*info), GFP_KERNEL);
++	if (!info) {
++		pr_err("dmabuf info allocation failed\n");
++		ret = -ENOMEM;
++		goto error;
++	}
++
++	pool = gen_pool_create(PAGE_SHIFT, -1);
++	if (!pool) {
++		pr_err("can't create gen pool\n");
++		ret = -ENOMEM;
++		goto error;
++	}
++
++	if (gen_pool_add(pool, rmem->base, rmem->size, -1) < 0) {
++		pr_err("failed to add memory into pool\n");
++		ret = -ENOMEM;
++		goto error;
++	}
++
++	info->pool = pool;
++
++	exp_info.name = rmem->name;
++	exp_info.ops = &secure_heap_ops;
++	exp_info.priv = info;
++
++	secure_heap = dma_heap_add(&exp_info);
++	if (IS_ERR(secure_heap)) {
++		pr_err("dmabuf secure heap allocation failed\n");
++		ret = PTR_ERR(secure_heap);
++		goto error;
++	}
++
++	return 0;
++
++error:
++	if (pool)
++		gen_pool_destroy(pool);
++	kfree(info);
++
++	return ret;
++}
++
++static int secure_heap_create(void)
++{
++	unsigned int i;
++	int ret;
++
++	for (i = 0; i < secure_data_count; i++) {
++		ret = secure_heap_add(&secure_data[i]);
++		if (ret)
++			return ret;
++	}
++	return 0;
++}
++
++static int __init rmem_secure_heap_setup(struct reserved_mem *rmem)
++{
++	if (secure_data_count < MAX_SECURE_HEAP) {
++		int name_len = 0;
++		const char *s = rmem->name;
++
++		secure_data[secure_data_count].base = rmem->base;
++		secure_data[secure_data_count].size = rmem->size;
++
++		while (name_len < MAX_HEAP_NAME_LEN) {
++			if ((*s == '@') || (*s == '\0'))
++				break;
++			name_len++;
++			s++;
++		}
++		if (name_len == MAX_HEAP_NAME_LEN)
++			name_len--;
++
++		strncpy(secure_data[secure_data_count].name, rmem->name, name_len);
++		secure_data[secure_data_count].name[name_len] = '\0';
++
++		pr_info("Reserved memory: DMA buf secure pool %s at %pa, size %ld MiB\n",
++			secure_data[secure_data_count].name,
++			&rmem->base, (unsigned long)rmem->size / SZ_1M);
++
++		secure_data_count++;
++		return 0;
++	}
++	WARN_ONCE(1, "Cannot handle more than %u secure heaps\n", MAX_SECURE_HEAP);
++	return -EINVAL;
++}
++
++RESERVEDMEM_OF_DECLARE(secure_heap, "linaro,secure-heap", rmem_secure_heap_setup);
++
++module_init(secure_heap_create);
++MODULE_LICENSE("GPL v2");
+-- 
+2.25.0
 
-> * "buffer pool info is from dts" --> I think you should mention that
->   this uses a reserved-memory region.
-ok
-
-> * sg_table nents and genalloc seem like low-level implementation
->   details, so probably not needed in the commit message
-> * The usage steps 1, 2, 3 aren't specific to this heap - that's how
->   all dma-buf sharing works.
-ok, let's cleanup and removed this.
-
-> 
-> > Signed-off-by: Olivier Masse <olivier.masse@nxp.com>
-> > ---
-> >  drivers/dma-buf/heaps/Kconfig       |   9 +
-> >  drivers/dma-buf/heaps/Makefile      |   1 +
-> >  drivers/dma-buf/heaps/secure_heap.c | 357
-> > ++++++++++++++++++++++++++++
-> >  3 files changed, 367 insertions(+)
-> >  create mode 100644 drivers/dma-buf/heaps/secure_heap.c
-> > 
-> > diff --git a/drivers/dma-buf/heaps/Kconfig b/drivers/dma-
-> > buf/heaps/Kconfig
-> > index 3782eeeb91c0..c9070c728b9a 100644
-> > --- a/drivers/dma-buf/heaps/Kconfig
-> > +++ b/drivers/dma-buf/heaps/Kconfig
-> > @@ -20,3 +20,12 @@ config DMABUF_HEAPS_DSP
-> >            Choose this option to enable the dsp dmabuf heap. The
-> > dsp heap
-> >            is allocated by gen allocater. it's allocated according
-> > the dts.
-> >            If in doubt, say Y.
-> > +
-> > +config DMABUF_HEAPS_SECURE
-> > +     tristate "DMA-BUF Secure Heap"
-> > +     depends on DMABUF_HEAPS
-> > +     help
-> > +       Choose this option to enable the secure dmabuf heap. The
-> > secure heap
-> > +       pools are defined according to the DT. Heaps are allocated
-> > +       in the pools using gen allocater.
-> > +       If in doubt, say Y.
-> > diff --git a/drivers/dma-buf/heaps/Makefile b/drivers/dma-
-> > buf/heaps/Makefile
-> > index 29733f84c354..863ef10056a3 100644
-> > --- a/drivers/dma-buf/heaps/Makefile
-> > +++ b/drivers/dma-buf/heaps/Makefile
-> > @@ -2,3 +2,4 @@
-> >  obj-$(CONFIG_DMABUF_HEAPS_SYSTEM)    += system_heap.o
-> >  obj-$(CONFIG_DMABUF_HEAPS_CMA)               += cma_heap.o
-> >  obj-$(CONFIG_DMABUF_HEAPS_DSP)          += dsp_heap.o
-> > +obj-$(CONFIG_DMABUF_HEAPS_SECURE)    += secure_heap.o
-> > diff --git a/drivers/dma-buf/heaps/secure_heap.c b/drivers/dma-
-> > buf/heaps/secure_heap.c
-> > new file mode 100644
-> > index 000000000000..25b3629613f3
-> > --- /dev/null
-> > +++ b/drivers/dma-buf/heaps/secure_heap.c
-> > @@ -0,0 +1,357 @@
-> > +// SPDX-License-Identifier: GPL-2.0
-> > +/*
-> > + * DMABUF secure heap exporter
-> > + *
-> > + * Copyright 2021 NXP.
-> 
-> It's 2022 :-)
-> 
-> > + */
-> > +
-> > +#include <linux/dma-buf.h>
-> > +#include <linux/dma-heap.h>
-> > +#include <linux/dma-mapping.h>
-> > +#include <linux/err.h>
-> > +#include <linux/genalloc.h>
-> > +#include <linux/highmem.h>
-> > +#include <linux/mm.h>
-> > +#include <linux/module.h>
-> > +#include <linux/of.h>
-> > +#include <linux/of_fdt.h>
-> > +#include <linux/of_reserved_mem.h>
-> > +#include <linux/scatterlist.h>
-> > +#include <linux/slab.h>
-> > +#include <linux/vmalloc.h>
-> > +
-> > +#define MAX_SECURE_HEAP 2
-> > +#define MAX_HEAP_NAME_LEN 32
-> > +
-> > +struct secure_heap_buffer {
-> > +     struct dma_heap *heap;
-> > +     struct list_head attachments;
-> > +     struct mutex lock;
-> > +     unsigned long len;
-> > +     struct sg_table sg_table;
-> > +     int vmap_cnt;
-> > +     void *vaddr;
-> > +};
-> > +
-> > +struct secure_heap_attachment {
-> > +     struct device *dev;
-> > +     struct sg_table *table;
-> > +     struct list_head list;
-> > +};
-> > +
-> > +struct secure_heap_info {
-> > +     struct gen_pool *pool;
-> > +};
-> > +
-> > +struct rmem_secure {
-> > +     phys_addr_t base;
-> > +     phys_addr_t size;
-> > +
-> > +     char name[MAX_HEAP_NAME_LEN];
-> > +};
-> > +
-> > +static struct rmem_secure secure_data[MAX_SECURE_HEAP] = {0};
-> > +static unsigned int secure_data_count;
-> > +
-> > +static struct sg_table *dup_sg_table(struct sg_table *table)
-> > +{
-> > +     struct sg_table *new_table;
-> > +     int ret, i;
-> > +     struct scatterlist *sg, *new_sg;
-> > +
-> > +     new_table = kzalloc(sizeof(*new_table), GFP_KERNEL);
-> > +     if (!new_table)
-> > +             return ERR_PTR(-ENOMEM);
-> > +
-> > +     ret = sg_alloc_table(new_table, table->orig_nents,
-> > GFP_KERNEL);
-> > +     if (ret) {
-> > +             kfree(new_table);
-> > +             return ERR_PTR(-ENOMEM);
-> > +     }
-> > +
-> > +     new_sg = new_table->sgl;
-> > +     for_each_sgtable_sg(table, sg, i) {
-> > +             sg_set_page(new_sg, sg_page(sg), sg->length, sg-
-> > >offset);
-> > +             new_sg->dma_address = sg->dma_address;
-> > +#ifdef CONFIG_NEED_SG_DMA_LENGTH
-> > +             new_sg->dma_length = sg->dma_length;
-> > +#endif
-> > +             new_sg = sg_next(new_sg);
-> > +     }
-> > +
-> > +     return new_table;
-> > +}
-> > +
-> > +static int secure_heap_attach(struct dma_buf *dmabuf,
-> > +                           struct dma_buf_attachment *attachment)
-> > +{
-> > +     struct secure_heap_buffer *buffer = dmabuf->priv;
-> > +     struct secure_heap_attachment *a;
-> > +     struct sg_table *table;
-> > +
-> > +     a = kzalloc(sizeof(*a), GFP_KERNEL);
-> > +     if (!a)
-> > +             return -ENOMEM;
-> > +
-> > +     table = dup_sg_table(&buffer->sg_table);
-> > +     if (IS_ERR(table)) {
-> > +             kfree(a);
-> > +             return -ENOMEM;
-> 
-> nit: You could return PTR_ERR(table), in case dup_sg_table starts
-> returning other errors.
-> 
-> > +     }
-> > +
-> > +     a->table = table;
-> > +     a->dev = attachment->dev;
-> > +     INIT_LIST_HEAD(&a->list);
-> > +     attachment->priv = a;
-> > +
-> > +     mutex_lock(&buffer->lock);
-> > +     list_add(&a->list, &buffer->attachments);
-> > +     mutex_unlock(&buffer->lock);
-> > +
-> > +     return 0;
-> > +}
-> > +
-> > +static void secure_heap_detach(struct dma_buf *dmabuf,
-> > +                            struct dma_buf_attachment *attachment)
-> > +{
-> > +     struct secure_heap_buffer *buffer = dmabuf->priv;
-> > +     struct secure_heap_attachment *a = attachment->priv;
-> > +
-> > +     mutex_lock(&buffer->lock);
-> > +     list_del(&a->list);
-> > +     mutex_unlock(&buffer->lock);
-> > +
-> > +     sg_free_table(a->table);
-> > +     kfree(a->table);
-> > +     kfree(a);
-> > +}
-> > +
-> > +static struct sg_table *secure_heap_map_dma_buf(struct
-> > dma_buf_attachment *attachment,
-> > +                                             enum
-> > dma_data_direction direction)
-> > +{
-> > +     struct secure_heap_attachment *a = attachment->priv;
-> > +
-> > +     return a->table;
-> 
-> I think you still need to implement mapping and unmapping using the
-> DMA APIs. For example devices might be behind IOMMUs and the buffer
-> will need mapping into the IOMMU.
-
-Devices that will need access to the buffer must be in secure.
-The tee driver will only need the scatter-list table to get dma address
-and len. Mapping will be done in the TEE.
-Please find tee_shm_register_fd in the following commit
-https://github.com/linaro-swg/linux/commit/41e21e5c405530590dc2dd10b2a8dbe64589840f
-
-This patch need to be up-streamed as well.
-
-
-> 
-> > +}
-> > +
-> > +static void secure_heap_unmap_dma_buf(struct dma_buf_attachment
-> > *attachment,
-> > +                                   struct sg_table *table,
-> > +                                   enum dma_data_direction
-> > direction)
-> > +{
-> > +}
-> > +
-> > +static void secure_heap_dma_buf_release(struct dma_buf *dmabuf)
-> > +{
-> > +     struct secure_heap_buffer *buffer = dmabuf->priv;
-> > +     struct secure_heap_info *info;
-> > +     struct sg_table *table;
-> > +     struct scatterlist *sg;
-> > +     int i;
-> > +
-> > +     info = dma_heap_get_drvdata(buffer->heap);
-> > +
-> > +     table = &buffer->sg_table;
-> > +     for_each_sg(table->sgl, sg, table->nents, i)
-> > +             gen_pool_free(info->pool, sg_dma_address(sg),
-> > sg_dma_len(sg));
-> > +
-> > +     sg_free_table(table);
-> > +     kfree(buffer);
-> > +}
-> > +
-> > +static const struct dma_buf_ops secure_heap_buf_ops = {
-> > +     .attach = secure_heap_attach,
-> > +     .detach = secure_heap_detach,
-> > +     .map_dma_buf = secure_heap_map_dma_buf,
-> > +     .unmap_dma_buf = secure_heap_unmap_dma_buf,
-> > +     .release = secure_heap_dma_buf_release,
-> > +};
-> > +
-> > +static struct dma_buf *secure_heap_allocate(struct dma_heap *heap,
-> > +                                         unsigned long len,
-> > +                                         unsigned long fd_flags,
-> > +                                         unsigned long heap_flags)
-> > +{
-> > +     struct secure_heap_buffer *buffer;
-> > +     struct secure_heap_info *info = dma_heap_get_drvdata(heap);
-> > +     DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
-> > +     unsigned long size = roundup(len, PAGE_SIZE);
-> > +     struct dma_buf *dmabuf;
-> > +     struct sg_table *table;
-> > +     int ret = -ENOMEM;
-> > +     unsigned long phy_addr;
-> > +
-> > +     buffer = kzalloc(sizeof(*buffer), GFP_KERNEL);
-> > +     if (!buffer)
-> > +             return ERR_PTR(-ENOMEM);
-> > +
-> > +     INIT_LIST_HEAD(&buffer->attachments);
-> > +     mutex_init(&buffer->lock);
-> > +     buffer->heap = heap;
-> > +     buffer->len = size;
-> > +
-> > +     phy_addr = gen_pool_alloc(info->pool, size);
-> > +     if (!phy_addr)
-> > +             goto free_buffer;
-> > +
-> > +     table = &buffer->sg_table;
-> > +     if (sg_alloc_table(table, 1, GFP_KERNEL))
-> > +             goto free_pool;
-> > +
-> > +     sg_set_page(table->sgl, phys_to_page(phy_addr), size, 0);
-> > +     sg_dma_address(table->sgl) = phy_addr;
-> > +     sg_dma_len(table->sgl) = size;
-> > +
-> > +     /* create the dmabuf */
-> > +     exp_info.exp_name = dma_heap_get_name(heap);
-> > +     exp_info.ops = &secure_heap_buf_ops;
-> > +     exp_info.size = buffer->len;
-> > +     exp_info.flags = fd_flags;
-> > +     exp_info.priv = buffer;
-> > +     dmabuf = dma_buf_export(&exp_info);
-> > +     if (IS_ERR(dmabuf)) {
-> > +             ret = PTR_ERR(dmabuf);
-> > +             goto free_pages;
-> > +     }
-> > +
-> > +     return dmabuf;
-> > +
-> > +free_pages:
-> 
-> Should maybe be called free_table:
-
-right
-> 
-> > +     sg_free_table(table);
-> > +
-> > +free_pool:
-> > +     gen_pool_free(info->pool, phy_addr, size);
-> > +
-> > +free_buffer:
-> > +     mutex_destroy(&buffer->lock);
-> > +     kfree(buffer);
-> > +
-> > +     return ERR_PTR(ret);
-> > +}
-> > +
-> > +static const struct dma_heap_ops secure_heap_ops = {
-> > +     .allocate = secure_heap_allocate,
-> > +};
-> > +
-> > +static int secure_heap_add(struct rmem_secure *rmem)
-> > +{
-> > +     struct dma_heap *secure_heap;
-> > +     struct dma_heap_export_info exp_info;
-> > +     struct secure_heap_info *info = NULL;
-> > +     struct gen_pool *pool = NULL;
-> > +     int ret = -EINVAL;
-> > +
-> > +     if (rmem->base == 0 || rmem->size == 0) {
-> > +             pr_err("secure_data base or size is not correct\n");
-> > +             goto error;
-> > +     }
-> > +
-> > +     info = kzalloc(sizeof(*info), GFP_KERNEL);
-> > +     if (!info) {
-> > +             pr_err("dmabuf info allocation failed\n");
-> > +             ret = -ENOMEM;
-> > +             goto error;
-> > +     }
-> > +
-> > +     pool = gen_pool_create(PAGE_SHIFT, -1);
-> > +     if (!pool) {
-> > +             pr_err("can't create gen pool\n");
-> > +             ret = -ENOMEM;
-> > +             goto error;
-> > +     }
-> > +
-> > +     if (gen_pool_add(pool, rmem->base, rmem->size, -1) < 0) {
-> > +             pr_err("failed to add memory into pool\n");
-> > +             ret = -ENOMEM;
-> > +             goto error;
-> > +     }
-> > +
-> > +     info->pool = pool;
-> > +
-> > +     exp_info.name = rmem->name;
-> > +     exp_info.ops = &secure_heap_ops;
-> > +     exp_info.priv = info;
-> > +
-> > +     secure_heap = dma_heap_add(&exp_info);
-> > +     if (IS_ERR(secure_heap)) {
-> > +             pr_err("dmabuf secure heap allocation failed\n");
-> > +             ret = PTR_ERR(secure_heap);
-> > +             goto error;
-> > +     }
-> > +
-> > +     return 0;
-> > +
-> > +error:
-> > +     kfree(info);
-> > +     if (pool)
-> > +             gen_pool_destroy(pool);
-> 
-> nit: I think your order should be reversed here, to match the
-> opposite
-> order of allocation.
-
-agree
-> 
-> > +
-> > +     return ret;
-> > +}
-> > +
-> > +static int secure_heap_create(void)
-> > +{
-> > +     unsigned int i;
-> > +     int ret;
-> > +
-> > +     for (i = 0; i < secure_data_count; i++) {
-> > +             ret = secure_heap_add(&secure_data[i]);
-> > +             if (ret)
-> > +                     return ret;
-> > +     }
-> > +     return 0;
-> > +}
-> > +
-> > +static int rmem_secure_heap_device_init(struct reserved_mem *rmem,
-> > +                                      struct device *dev)
-> > +{
-> > +     dev_set_drvdata(dev, rmem);
-> > +     return 0;
-> > +}
-> > +
-> > +static void rmem_secure_heap_device_release(struct reserved_mem
-> > *rmem,
-> > +                                      struct device *dev)
-> > +{
-> > +     dev_set_drvdata(dev, NULL);
-> > +}
-> > +
-> > +static const struct reserved_mem_ops rmem_dma_ops = {
-> > +     .device_init    = rmem_secure_heap_device_init,
-> > +     .device_release = rmem_secure_heap_device_release,
-> > +};
-> 
-> What are these reserved_mem_ops for? Setting the drvdata for a random
-> device seems like it could cause lots of problems.
-> 
-> Is there a requirement to support assigning this SDP reserved-memory
-> region to a specific device? If not, I think you can just drop this.
-> Otherwise, I think you need some other mechanism to do the
-> association.
-
-indeed, can be removed as driver private data is set at heap creation
-and should not be modified.
-
-> 
-> > +
-> > +static int __init rmem_secure_heap_setup(struct reserved_mem
-> > *rmem)
-> > +{
-> > +     if (secure_data_count < MAX_SECURE_HEAP) {
-> > +             int name_len = 0;
-> > +             const char *s = rmem->name;
-> > +
-> > +             secure_data[secure_data_count].base = rmem->base;
-> > +             secure_data[secure_data_count].size = rmem->size;
-> > +
-> > +             while (name_len < MAX_HEAP_NAME_LEN) {
-> > +                     if ((*s == '@') || (*s == '\0'))
-> > +                             break;
-> > +                     name_len++;
-> > +                     s++;
-> > +             }
-> > +             if (name_len == MAX_HEAP_NAME_LEN)
-> > +                     name_len--;
-> > +
-> > +             strncpy(secure_data[secure_data_count].name, rmem-
-> > >name, name_len);
-> 
-> I think it would be good to explicitly do:
-> 
->   secure_data[secure_data_count].name[name_len] = '\0'
-
-ok
-> 
-> I know it's zero-initialised, but that's done on a line far away, so
-> may be best to be defensive.
-> 
-> > +
-> > +             rmem->ops = &rmem_dma_ops;
-> > +             pr_info("Reserved memory: DMA buf secure pool %s at
-> > %pa, size %ld MiB\n",
-> > +                     secure_data[secure_data_count].name,
-> > +                     &rmem->base, (unsigned long)rmem->size /
-> > SZ_1M);
-> 
-> nit: What if rmem->size < SZ_1M, or not 1M-aligned
-> 
-> > +
-> > +             secure_data_count++;
-> > +             return 0;
-> > +     }
-> > +     WARN_ONCE(1, "Cannot handle more than %u secure heaps\n",
-> > MAX_SECURE_HEAP);
-> > +     return -EINVAL;
-> > +}
-> > +
-> > +RESERVEDMEM_OF_DECLARE(secure_heap, "linaro,secure-heap",
-> > rmem_secure_heap_setup);
-> 
-> Is there anything linaro-specific about this? Could it be
-> linux,secure-heap?
-
-for now, it's specific to Linaro OPTEE OS.
-but in a more generic way, it could be 
-linux,unmapped-heap ?
-
-> 
-> Thanks,
-> -Brian
-> 
-> > +
-> > +module_init(secure_heap_create);
-> > +MODULE_LICENSE("GPL v2");
-> > --
-> > 2.25.0
-> > 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
