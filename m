@@ -2,72 +2,45 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1C3205A8E1D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 08:14:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DFA325A8E1F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 08:14:53 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 515A23EA49
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 06:14:35 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
-	by lists.linaro.org (Postfix) with ESMTPS id DAF7A47F50
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  8 Aug 2022 07:00:02 +0000 (UTC)
-Received: by mail-ej1-f47.google.com with SMTP id m4so14892746ejr.3
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 08 Aug 2022 00:00:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:from:to:cc;
-        bh=2/N6mFP+TYpvLhr23ybFH/UP8B6EWzbXHA/jkbBuIoc=;
-        b=lkU29Ua428YWYVoXEMmDC0UaKbp+MGrvym2etqoPjNHVD2NL3tW0LF47PkXL04Ez3I
-         vvDnB0EtThz40r8LCfeh+Mi4sLOX5jf8l3WCEzdsZk29I34a9O4PwXXIdG1oZTobtiTS
-         Pr8yAIQcboCA7RWA0WoPC/lm1iMyf/gbxHMWKW/BfGmB15dsR2/tcpYYVI1egrVLe5QD
-         n4sJi1Cd7mLiUIbqcvP7KLtQx9ydpy1/5chSsTH6oupCLjJMhZSlmioLlr6BVSn6QEkW
-         RVhYK9yeeUKGculzGgFZU/b7kaWseSpXzQZagr+e3yArPV0ouWvwmyQdyF8oANNnxi7k
-         zzOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-transfer-encoding:mime-version:x-gm-message-state:from:to
-         :cc;
-        bh=2/N6mFP+TYpvLhr23ybFH/UP8B6EWzbXHA/jkbBuIoc=;
-        b=t6omLpj/tVIy3ScHsWNiQw+VCU51FmK8Aze3qi/k07hAHa3xpBrGjdbtbarSYGy/B/
-         WuQGTCInfFVLrdFy1x1rrCCoNG+J4yZrD/s9Rq2GzqXyL/mBKc1tegHHwwXB7kEk6g1L
-         cRmncC+oXz+pkC9+CMo9InwJBOSaP9O0/TklaQ/OG9EQhLvDuKOAK0VXuLMI+w1YxWkf
-         wEy054tWxXoaPnO9N1PxM3heCgpsUy7dPJdLdJj2m9X4b+Nk5Z3utaNO3cCSGcrhAkI2
-         pZw0Iaf3pVCQVwF/E5lz9UvNXmZF161Cs/4xAsJl7/GfdGNTZF42ZQt8BLUENvOCzhi5
-         TIRQ==
-X-Gm-Message-State: ACgBeo32cIN/E5L+eNOVWBOdtJFqMmNoXpxPatxOwGL+HWEgIWfX7Q2B
-	8q//1vsM4XCHuznhHktLRJV2XA==
-X-Google-Smtp-Source: AA6agR6hGuVY0jLoIpyBwpB68Ep5URWwiz9kxZGjZ1bEwFDjjVx2YCyxBdkT2y7+2dYKFcVRfMWxGg==
-X-Received: by 2002:a17:907:2721:b0:731:2aeb:7940 with SMTP id d1-20020a170907272100b007312aeb7940mr6385812ejl.448.1659942001700;
-        Mon, 08 Aug 2022 00:00:01 -0700 (PDT)
-Received: from localhost (144-178-202-138.static.ef-service.nl. [144.178.202.138])
-        by smtp.gmail.com with ESMTPSA id zk19-20020a17090733d300b0072aadbd48c7sm4512240ejb.84.2022.08.08.00.00.00
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 08 Aug 2022 00:00:01 -0700 (PDT)
-Mime-Version: 1.0
-Date: Mon, 08 Aug 2022 08:59:59 +0200
-Message-Id: <CM0GBVEZHLBT.1V54N4FCEN7V6@otso>
-From: "Luca Weiss" <luca.weiss@fairphone.com>
-To: "Robin Reckmann" <robin.reckmann@googlemail.com>, "Andy Gross"
- <agross@kernel.org>, "Bjorn Andersson" <bjorn.andersson@linaro.org>,
- "Konrad Dybcio" <konrad.dybcio@somainline.org>, "Sumit Semwal"
- <sumit.semwal@linaro.org>, =?utf-8?q?Christian_K=C3=B6nig?=
- <christian.koenig@amd.com>
-X-Mailer: aerc 0.11.0
+	by lists.linaro.org (Postfix) with ESMTP id 1F0AB3EFA1
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 06:14:53 +0000 (UTC)
+Received: from relay08.th.seeweb.it (relay08.th.seeweb.it [5.144.164.169])
+	by lists.linaro.org (Postfix) with ESMTPS id 2FDFB47F50
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  8 Aug 2022 11:46:34 +0000 (UTC)
+Received: from [192.168.1.101] (abxh187.neoplus.adsl.tpnet.pl [83.9.1.187])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by m-r2.th.seeweb.it (Postfix) with ESMTPSA id 2D60F3F6FC;
+	Mon,  8 Aug 2022 13:46:32 +0200 (CEST)
+Message-ID: <c9402e30-f410-8c29-2da4-4cbc993de6a5@somainline.org>
+Date: Mon, 8 Aug 2022 13:46:31 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.12.0
+Content-Language: en-US
+To: Robin Reckmann <robin.reckmann@googlemail.com>,
+ Andy Gross <agross@kernel.org>, Bjorn Andersson
+ <bjorn.andersson@linaro.org>, Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
 References: <20220807140455.409417-1-robin.reckmann@gmail.com>
+From: Konrad Dybcio <konrad.dybcio@somainline.org>
 In-Reply-To: <20220807140455.409417-1-robin.reckmann@gmail.com>
-X-MailFrom: luca.weiss@fairphone.com
+X-MailFrom: konrad.dybcio@somainline.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 6H52YA7UVEZNOTQ332D6IUJPDTDGVEI6
-X-Message-ID-Hash: 6H52YA7UVEZNOTQ332D6IUJPDTDGVEI6
-X-Mailman-Approved-At: Thu, 01 Sep 2022 06:14:31 +0000
+Message-ID-Hash: ZLZFZ45A7NGUDTQ4MCIEYYOMJ3ZZ3YDT
+X-Message-ID-Hash: ZLZFZ45A7NGUDTQ4MCIEYYOMJ3ZZ3YDT
+X-Mailman-Approved-At: Thu, 01 Sep 2022 06:14:49 +0000
 CC: Robin Reckmann <robin.reckmann@gmail.com>, linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH] i2c: qcom-geni: Fix GPI DMA buffer sync-back
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6H52YA7UVEZNOTQ332D6IUJPDTDGVEI6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZLZFZ45A7NGUDTQ4MCIEYYOMJ3ZZ3YDT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -77,34 +50,39 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi Robin,
 
-On Sun Aug 7, 2022 at 4:04 PM CEST, Robin Reckmann wrote:
+
+On 7.08.2022 16:04, Robin Reckmann wrote:
 > Fix i2c transfers using GPI DMA mode for all message types that do not set
 > the I2C_M_DMA_SAFE flag (e.g. SMBus "read byte").
->
+> 
 > In this case a bounce buffer is returned by i2c_get_dma_safe_msg_buf(),
 > and it has to synced back to the message after the transfer is done.
->
+> 
 > Add missing assignment of dma buffer in geni_i2c_gpi().
->
+> 
 > Set xferred in i2c_put_dma_safe_msg_buf() to true in case of no error to
 > ensure the sync-back of this dma buffer to the message.
->
+> 
 > Signed-off-by: Robin Reckmann <robin.reckmann@gmail.com>
-
-This makes I2C with GPI DMA work on sm6350/sm7725 fairphone-fp4!
-Thanks for fixing this!
-
-Tested-by: Luca Weiss <luca.weiss@fairphone.com>
-
-Regards
-Luca
-
 > ---
+Makes SM8450 Xperia 1 IV boot with the touchscreen but enabled (previously
+it would simply crash), but the touchscreen itself does not work yet (not
+yet sure if something is still missing on my part wrt hw setup):
+
+[    1.838819] gpi 900000.dma-controller: Error in Transaction
+[    1.838944] geni_i2c 990000.i2c: DMA txn failed:3
+[    1.839166] geni_i2c 990000.i2c: GPI transfer failed: -5
+
+
+Still, this is a very nice improvement.
+
+Reviewed-by: Konrad Dybcio <konrad.dybcio@somainline.org>
+
+Konrad
 >  drivers/i2c/busses/i2c-qcom-geni.c | 5 +++--
 >  1 file changed, 3 insertions(+), 2 deletions(-)
->
+> 
 > diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
 > index 6ac402ea58fb..d3541e94794e 100644
 > --- a/drivers/i2c/busses/i2c-qcom-geni.c
@@ -132,9 +110,6 @@ Luca
 >  	*dma_addr_p = addr;
 >  
 >  	return 0;
-> -- 
-> 2.25.1
-
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
