@@ -2,121 +2,58 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E5835A8E33
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 08:17:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 47FD75A8E27
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 08:16:22 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4367E3F1BF
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 06:17:26 +0000 (UTC)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com (mail-vi1eur05on2055.outbound.protection.outlook.com [40.107.21.55])
-	by lists.linaro.org (Postfix) with ESMTPS id 50C3F3ECFE
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Aug 2022 13:39:03 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OmpotJivurqWjU/SgXM6gkCPXBtwXUTsTCxK7LOji8DG7aZMXy43f+pVjMPD/FRaT/IQMRw6+sKPrpRNjZs0+0/bMhVyPe0HMYS0oQYB9tOI4l5IIMaesxOPpxuK6ZSsKYce/Ou4BAGBevBr+bR332HR3lcXhbBHDDalfCnZR9CTjEOb9TJ919EVbE8Nf20ZcgI6NjAFsBaezNtporGaPme6NyJUOngj8AWYonqXOqz7vaplhRyJbKuYX7q5WTRVVeOwQJudwsJZXDEUJBSLOoPTiEIZ0FwW7vmJOwdWu3LwdCBK7357sBoQPX6aPeZjPR+BEqSsz1l+ZPE4GatHyQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xsW/73XAUpgJI/4b2pVcUZ62NA9Odlc8GVNM5GvZnz8=;
- b=ljm1uRTNchyqLmbXXa5ajzOQY1gaFVpcU6Zsq8R9GmjB8Y0uTWmotvfLFyl9WjVfDpR68wT4m2H2ApSYAg7NIdK1BipXyV5+Bj4RnGKK6SqcN8yqQaSAao6Dk5diOFS6cd7HqV9jO+1DcRQwRM69qEYfisD8o38M66gDuS4U2WU9cZqUZyyVOC1l2dwP6NhMfnCwYTlH/vmHdCSc0qQ0HyQaZU6+w+6mLEpOrNyZih8mcL0WZYOm3biyDQRXuGDs/BdMHXqUi/nrnTWRYzW/F2Y60IERTLxTB85Bwr+guRsIAFdpUqM22Ob1DjLgbcl1yn8owNe2F3buXbTMcFelLQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xsW/73XAUpgJI/4b2pVcUZ62NA9Odlc8GVNM5GvZnz8=;
- b=khbzf13sH7uupXC5YCWZFyULLMcgFx1WFLWjXQ2h0B4gwcBmpC9YiV2M7bGwDHhrfst1Du+929OwOaDXyoIyBcwoY55a1wllpivasbfXMK4ZQs7kSVS7Klp99G26fb9tc2yzP6vXpIZ1Wf3b9fT5ktZzFRXXHPvE18myF9h+X4w=
-Received: from AM6PR04MB6743.eurprd04.prod.outlook.com (2603:10a6:20b:f1::11)
- by PR3PR04MB7419.eurprd04.prod.outlook.com (2603:10a6:102:80::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5504.21; Tue, 9 Aug
- 2022 13:38:59 +0000
-Received: from AM6PR04MB6743.eurprd04.prod.outlook.com
- ([fe80::a401:5ed6:1bfa:89a9]) by AM6PR04MB6743.eurprd04.prod.outlook.com
- ([fe80::a401:5ed6:1bfa:89a9%5]) with mapi id 15.20.5504.019; Tue, 9 Aug 2022
- 13:38:59 +0000
-From: Olivier Masse <olivier.masse@nxp.com>
-To: "brian.starkey@arm.com" <brian.starkey@arm.com>
-Thread-Topic: [EXT] Re: [PATCH 1/3] dma-buf: heaps: add Linaro secure dmabuf
- heap support
-Thread-Index: AQHYqNLEB1kEEMDN2EiJXHn7b90D762gcg6AgAYmygA=
-Date: Tue, 9 Aug 2022 13:38:58 +0000
-Message-ID: <86524ed0e12cbb76a8d746447b24f90f0aca55fa.camel@nxp.com>
-References: <20220805135330.970-1-olivier.masse@nxp.com>
-	 <20220805135330.970-2-olivier.masse@nxp.com>
-	 <20220805154139.2qkqxwklufjpsfdx@000377403353>
-In-Reply-To: <20220805154139.2qkqxwklufjpsfdx@000377403353>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 52c61423-bbd6-4211-cad8-08da7a0c838b
-x-ms-traffictypediagnostic: PR3PR04MB7419:EE_
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 
- RfprcbVvfHi7d61+p/i5/qlUFwhlud26kFMGhgYyOKSnQJogf3DiFhrBcBVxYNu56N/yRx+xDB+lWg+sjZ7i/mstqGlhMPApSaXqwnoVI0InY3Zo+Fn4jZam4yIvF//Fa1ATg7CWINwC05M2KhYZEj0pQESfwUJyDEwIcgsmy9jkBjf9vpQB090kJ7ZCKMwfHCXm5bWKvwC8+QrWjP6HrSUJMb/Sr/aEFtsxPWmNjRA6/Ix35B1qXpcR4C1hlI4Roa/ZRqH2+Ct9kqns7gqjlWxW0a/jGgvm8t7+hYTl7d5j53pOi+rfiZY/aZXKOUoeMOI9teczV1nmY27FwImVgh5ENPAHb5H711JLAOeTyHD3Hlitema4lI+kzc7S2bnikJSROPhou7gF0118HEDr5l+TMEM9uV/9ywRGhrXIxH6p+5diIGLVrnH6ZBDgr0FFMKWR62PKp7SYKOna4yLu8fTKPBZu1YV7YtfrwlCm1OsgfLx3pzmUKnFD4QMysf07msqpF7VFnR5UGkDd/DfQBEYiDucBCthtnX4uRtpbrsEF2ZdICeQryBHk50qWUgboLeuyLqZYgeq47TRWpd1cTjJaTJ0I2JwUXyd8iqzDc+iNwAlaES3NpYJ/zkVCEAFIVviEY9T4Mbez6WvT51SrSEFp+iIt7wZl+KlPrxSFke6yrdlUeMZ2Dml1j1fDlm6KI47zPZQ0OZZqhb8HymkPxmsLpje4+DxJhya0zQpM6T6p8UvSYezVGOvTI+yzuC2uRUcpS+L+LyvOsCZUOibCY5LrekBLRikDLi30MboGqDPcA4Ookd0Jq8tDOqIjr+g4
-x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR04MB6743.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(366004)(396003)(39860400002)(376002)(136003)(346002)(8936002)(66946007)(316002)(4744005)(71200400001)(76116006)(122000001)(4326008)(66446008)(66556008)(8676002)(64756008)(44832011)(66476007)(54906003)(6916009)(36756003)(91956017)(5660300002)(6486002)(478600001)(41300700001)(2906002)(186003)(26005)(6512007)(6506007)(38070700005)(38100700002)(2616005)(86362001)(99106002);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-15?Q?mTbtCZlpLpUxtuQPPk454uXcovBOeMck3ZH41opFaBsfvrzrp3lOs83Dw?=
- =?iso-8859-15?Q?cCrxIKNF7sv0wNrKvKpXjAX6KoclKpzP/IsIy6lvVEPB1F7pdjcQniaxt?=
- =?iso-8859-15?Q?WhBjhHoELd3sUyCxGANOAzrRRIJM977vBLYFfEpjZMm4xHGIHflyUo3O0?=
- =?iso-8859-15?Q?JUxFs2BiBqc5I2WlFFWulF9r82cPSk4sgHXNcxAJOzr2qO/eULv1SRrDN?=
- =?iso-8859-15?Q?L7TQTe+a1sIXcp9cQUwxfhru1sPAdxNbhlmOrSSq/+4qiC5nSMZd3kv+X?=
- =?iso-8859-15?Q?Abigdr0zrLgJH0uaTiPJBQb2ZcoEuv+FnoRNM/YoetJQDMy9XLsIH+Yau?=
- =?iso-8859-15?Q?b/L5ReeBYyZeo7PBuQeDgO9i5FUFLLa43/nCkgLci6f9Y23bGDw349y2/?=
- =?iso-8859-15?Q?MAiXGlMS8zTuCjx03HBa6zlEZojnzHQjsWGuKUcmR/LCbu/tUfBk/RnLz?=
- =?iso-8859-15?Q?EPB5O2Oi8D/uuYlK4uyeZUvlFw5/JIWfUaqRmYqAjbMDZPSlD2s9pJopk?=
- =?iso-8859-15?Q?+qTo+5AL2e8x2PS8B2Z3lywmSU61m/yog7U7Nn3efC1fCVsqUnN73+2Mz?=
- =?iso-8859-15?Q?qAhFi1Xmu5e5/Cmi4oOo6rNzUGChdhTeHWYxQ5swfAtr7FmQNaLvJy98R?=
- =?iso-8859-15?Q?/u5DlCOAOXCtfiYghcduj9qxe0HUEPR/gRIWnLZ7VmUS+ueGt/xbiZNQw?=
- =?iso-8859-15?Q?SG/xErFk91095GB+dvWWv7RyXhWm1jf8TLleeJLdPJ3WhoCHyVRWQAgDl?=
- =?iso-8859-15?Q?cVcElyWZX7LC8IDW3SKvperaGx5Pl5IBmImLfMq2/mAsCtSXS3RUTP/ry?=
- =?iso-8859-15?Q?RYQXS+gGmUUZQnJE1fav+uB27/mERqZu6E3BEekm3dOqrqcWj1bsmbwwj?=
- =?iso-8859-15?Q?rxf6sLkvRpFVYk4KzWlLeo3wtY0N1qGdvJyEGTt0j2TmUT7Raz47Ehx6q?=
- =?iso-8859-15?Q?3B3yOylQHPeNN8zwiX/7aRX6wQL+00osLkerJUOvRquj735Ssc0lAp6U5?=
- =?iso-8859-15?Q?3agntM/orqQrc+vu4mLB0dsZJBA1MIqJ4KXup8gjqEH2HuBX6QdkeFNfR?=
- =?iso-8859-15?Q?EIP29MVz2B9qVb/od20HwARO3r6PS51lOjDKOfxM2WILF7zdUthbgAgZl?=
- =?iso-8859-15?Q?+1WloeUyjlmRtuc8hiWsL6S2HXrSWJTIrn7Hf4u8RENX38X9n5vDPRFi8?=
- =?iso-8859-15?Q?clbq8yJ2qht1q/612EYL+8DcT1welRSzKhsxuXVonscqayKBBa47K/Lir?=
- =?iso-8859-15?Q?n1m3zZaood3jJH2pFdZFDhVuErkE8ZVvl0l5cBqIYW9N1awTmr56Wh4US?=
- =?iso-8859-15?Q?j9DwwrYeUwkUdk6wN7of2VEQo/vUEVC+2CBPbFdthHY6kDgSRQ22DsEGr?=
- =?iso-8859-15?Q?OdQsoOzGuer/58u/5xHzzTfn8F0lSVu2XlzqR5ve4qwFWcz4fCvvv6pRv?=
- =?iso-8859-15?Q?oSiHnMZjym+eNxF23HSXIlIsWz2ZhOYr3PesbDgcvzClt9aLXcNNvmy8e?=
- =?iso-8859-15?Q?KabQ4/bZT0tf/C3mTxuqT5KOOAgVQ2PwvTtOsUHInI/UtJBfgsxMeIBiD?=
- =?iso-8859-15?Q?GF0b11vf94damJX4rV30Je0gOPXz3B4S8DMZJKVR41Hp3Xp99hL6cQRMc?=
- =?iso-8859-15?Q?9iLtyjamSaO2yKAcdWwaQD8usO8teNGwcynKBZNrdt4N2gPFhoHSF9R4G?=
- =?iso-8859-15?Q?vuTN?=
-Content-ID: <75FA77FEE6A4EA4FA7E03430296AEECC@eurprd04.prod.outlook.com>
+	by lists.linaro.org (Postfix) with ESMTP id 7D80F3F1BF
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 06:16:21 +0000 (UTC)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+	by lists.linaro.org (Postfix) with ESMTPS id 43F733EE60
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Aug 2022 16:32:43 +0000 (UTC)
+Received: from beaker.jlekstrand.net (2603-8080-2102-63d7-019e-342e-5881-a163.res6.spectrum.com [IPv6:2603:8080:2102:63d7:19e:342e:5881:a163])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: jekstrand)
+	by madras.collabora.co.uk (Postfix) with ESMTPSA id 844776601C5B;
+	Tue,  9 Aug 2022 17:32:39 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1660062762;
+	bh=08B1dX3gAyCyt7HHY55sqZ0SuaeO3yqxbdw03xUaetg=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+	b=FAar9p+dtTgGgZLkiX5DUXgzJVL6kTFg7OcUeCozn25aHe+bk4Hd3XPbNiqmxK0+m
+	 c5NOEUd+UXLWAmokYKcQarA9S8mNVZLbkhSEaeZNvv0YrbQo9qEgzd2pp3IEt18CbR
+	 7W0UQLAWbsz+3sXCXUIKKFIOXpkroOwm3P2k1qyJmB2G54AgABgDGGYYi2L4WSakhS
+	 YylWonFFn6x2KbVHMsWpifs0eDpp5sTWPcG//EvuDGIyOamwmDv/tmkmbBWF/dsAjg
+	 JkeY64mCyb2y/A0caTgZplHQXCaRo1v5dQHP9EuFzJAnCzk1Gtczr5dVF1b52JUh1f
+	 62P6Nvoryuwag==
+Message-ID: <731935a814e0decf2ff5c7771cd0bba9a72fa654.camel@collabora.com>
+From: Jason Ekstrand <jason.ekstrand@collabora.com>
+To: Dennis Tsiang <dennis.tsiang@arm.com>, Pekka Paalanen
+ <ppaalanen@gmail.com>
+Date: Tue, 09 Aug 2022 11:32:35 -0500
+In-Reply-To: <7e8856ac-40a1-6fec-042c-c2a01775beeb@arm.com>
+References: 
+	<AS8PR08MB81117652E417826E741154B8F8B99@AS8PR08MB8111.eurprd08.prod.outlook.com>
+	 <20220627175026.6a5dd239@eldfell>
+	 <05513f59-0bd9-77cd-36d4-41027bc339be@arm.com>
+	 <o1qcCo8e19pmmNe-YJbPkmu4SBrOQ_E3u7eqdrcXUzdBccLtFswL_ARTpbrX9C10tippuy5ieXAsqdf7H47JuT7Hqa1NlizAPqVuRM0kRt4=@emersion.fr>
+	 <20220630104725.602bff9a@eldfell>
+	 <7e8856ac-40a1-6fec-042c-c2a01775beeb@arm.com>
+User-Agent: Evolution 3.44.4 (3.44.4-1.fc36) 
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM6PR04MB6743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 52c61423-bbd6-4211-cad8-08da7a0c838b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Aug 2022 13:38:59.1363
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: xGCuLJ0H3rzKi/vNo31iJZbhcmECRyChxlvcpA3J+1WKoL+bOAX6JtSzdhq6caAjZ3H0VyMGFwOKHV0vgxLyXQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3PR04MB7419
-X-MailFrom: olivier.masse@nxp.com
+X-MailFrom: jason.ekstrand@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: A2CJOJOFEMGSC7RDZAVHBS56ZMYQS7TZ
-X-Message-ID-Hash: A2CJOJOFEMGSC7RDZAVHBS56ZMYQS7TZ
-X-Mailman-Approved-At: Thu, 01 Sep 2022 06:17:12 +0000
-CC: "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "christian.koenig@amd.com" <christian.koenig@amd.com>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "nd@arm.com" <nd@arm.com>, =?iso-8859-15?Q?Cl=E9ment_Faure?= <clement.faure@nxp.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "benjamin.gaignard@collabora.com" <benjamin.gaignard@collabora.com>
+Message-ID-Hash: Z3V7ICVRFG247KQWYFFFYYSVLT3L4VN4
+X-Message-ID-Hash: Z3V7ICVRFG247KQWYFFFYYSVLT3L4VN4
+X-Mailman-Approved-At: Thu, 01 Sep 2022 06:16:17 +0000
+CC: Normunds Rieksts <Normunds.Rieksts@arm.com>, airlied@linux.ie, Liviu Dudau <Liviu.Dudau@arm.com>, linux-kernel@vger.kernel.org, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, sumit.semwal@linaro.org, linaro-mm-sig@lists.linaro.org, david.harvey-macaulay@arm.com, Lisa Wu <lisa.wu@arm.com>, tzimmermann@suse.de, nd <nd@arm.com>, christian.koenig@amd.com, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [EXT] Re: [PATCH 1/3] dma-buf: heaps: add Linaro secure dmabuf heap support
+Subject: [Linaro-mm-sig] Re: [PATCH 0/1] [RFC] drm/fourcc: Add new unsigned R16_UINT/RG1616_UINT formats
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/A2CJOJOFEMGSC7RDZAVHBS56ZMYQS7TZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Z3V7ICVRFG247KQWYFFFYYSVLT3L4VN4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -126,31 +63,130 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi Brian,
-
-> > +
-> > +             rmem->ops = &rmem_dma_ops;
-> > +             pr_info("Reserved memory: DMA buf secure pool %s at
-> > %pa, size %ld MiB\n",
-> > +                     secure_data[secure_data_count].name,
-> > +                     &rmem->base, (unsigned long)rmem->size /
-> > SZ_1M);
+On Fri, 2022-07-15 at 11:20 +0100, Dennis Tsiang wrote:
+> On 30/06/2022 08:47, Pekka Paalanen wrote:
+> > On Wed, 29 Jun 2022 14:53:49 +0000
+> > Simon Ser <contact@emersion.fr> wrote:
+> > 
+> > > On Wednesday, June 29th, 2022 at 16:46, Dennis Tsiang
+> > > <dennis.tsiang@arm.com> wrote:
+> > > 
+> > > > Thanks for your comments. This is not intended to be used for
+> > > > KMS, where
+> > > > indeed there would be no difference. This proposal is for other
+> > > > Graphics
+> > > > APIs such as Vulkan, which requires the application to be
+> > > > explicit
+> > > > upfront about how they will interpret the data, whether that be
+> > > > UNORM,
+> > > > UINT .etc. We want to be able to import dma_bufs which create a
+> > > > VkImage
+> > > > with a "_UINT" VkFormat. However there is currently no explicit
+> > > > mapping
+> > > > between the DRM fourccs + modifiers combos to "_UINT"
+> > > > VkFormats. One
+> > > > solution is to encode that into the fourccs, which is what this
+> > > > RFC is
+> > > > proposing.
+> > > 
+> > > As a general comment, I don't think it's reasonable to encode all
+> > > of the
+> > > VkFormat information inside DRM FourCC. For instance, VkFormat
+> > > has SRGB/UNORM
+> > > variants which describe whether pixel values are electrical or
+> > > optical
+> > > (IOW, EOTF-encoded or not). Moreover, other APIs may encode
+> > > different
+> > > information in their format enums.
+> > 
+> > Yeah, do not add any of that information to the DRM pixel format
+> > codes.
+> > 
+> > There is *so much* other stuff you also need to define than what's
+> > already mentioned, and which bits you need for the API at hand
+> > depends
+> > totally on the API at hand. After the API has defined some parts of
+> > the
+> > metadata, the API user has to take care of the remaining parts of
+> > the
+> > metadata in other ways, like dynamic range or color space.
+> > 
+> > Besides, when you deal with dmabuf, you already need to pass a lot
+> > of
+> > metadata explicitly, like the pixel format, width, height, stride,
+> > modifier, etc. so it's better to add more of those (like we will be
+> > doing in Wayland, and not specific to dmabuf even) than to try make
+> > pixel formats a huge mess through combinatorial explosion and
+> > sometimes
+> > partial and sometimes conflicting image metadata.
+> > 
+> > You might be able to get a glimpse of what all metadata there could
+> > be
+> > by reading
+> > https://gitlab.freedesktop.org/pq/color-and-hdr/-/blob/main/doc/pixels_color.md
+> > .
+> > 
+> > Compare Vulkan formats to e.g.
+> > https://docs.microsoft.com/en-us/windows/win32/api/dxgicommon/ne-dxgicommon-dxgi_color_space_type
+> > and you'll see that while DXGI color space enumeration is mostly
+> > about
+> > other stuff, it also has overlap with Vulkan formats I think, at
+> > least
+> > the SRGB vs. not part.
+> > 
+> > Btw. practically all buffers you see used, especially if they are 8
+> > bpc, they are almost guaranteed to be "SRGB" non-linearly encoded,
+> > but
+> > do you ever see that fact being explicitly communicated?
+> > 
+> > Then there is the question that if you have an SRGB-encoded buffer,
+> > do
+> > you want to read out SRGB-encoded or linear values? That depends on
+> > what you are doing with the buffer, so if you always mapped dmabuf
+> > to
+> > Vulkan SRGB formats (or always to non-SRGB formats), then you need
+> > some
+> > other way in Vulkan for the app to say whether to sample encoded or
+> > linear (electrical or optical) values. And whether texture
+> > filtering is
+> > done in encoded or linear space, because that makes a difference
+> > too.
+> > 
+> > IOW, there are cases where the format mapping depends on the user
+> > of the
+> > buffer and not only on the contents of the buffer.
+> > 
+> > Therefore you simply cannot create a static mapping table between
+> > two
+> > format definition systems when the two systems are fundamentally
+> > different, like Vulkan and DRM fourcc.
+> > 
+> > 
+> > Thanks,
+> > pq
 > 
-> nit: What if rmem->size < SZ_1M, or not 1M-aligned
-> 
+> Thanks all for your comments. We'll look into an alternative approach
+> to
+> achieve what we need.
 
-Let's assume that size is 1K-aligned, maybe something like that could
-be better ?
+I mostly agree with Pekka here.  The fourcc formats as they currently
+are defined only specify a bit pattern and channel order, not an
+interpretation.  Vulkan formats, on the other hand, have everything you
+need in order to know how to convert float vec4s to/from that format in
+a shader.  That's not the same as knowing what the data represents
+(colorspace, wite values, etc.) but it's a lot more than fourcc.
 
-		unsigned long mb = rmem->size >> 20;
-		unsigned long kb = (rmem->size & (SZ_1M - 1)) >> 10;
+That said, the Vulkan APIs for querying modifier support will give you
+much more fine-grained information about exactly the Vulkan formats you
+request.  So if you ask for modifier support for VK_FORMAT_R16G16_UINT,
+that's what you'll get.  I *think* it should be fine to use
+VK_FORMAT_R16G16_UINT with DRM_FOURCC_GR1616.  Of course, the API on
+the other side will also need a more precise format specifier than
+fourcc if it's to know the difference between R16G16_UINT and
+R16G16_UNORM.
 
-		pr_info("Reserved memory: DMA buf secure pool %s at %pa, size %ld MiB and %ld KiB",
-			secure_data[secure_data_count].name,
-			&rmem->base, mb, kb);
+--Jason
 
-Cheers,
-Olivier
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
