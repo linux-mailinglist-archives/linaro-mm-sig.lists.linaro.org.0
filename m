@@ -2,134 +2,181 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA4FB58F013
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Aug 2022 18:06:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BCE4658F0BF
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Aug 2022 18:51:40 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A6D3847963
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Aug 2022 16:06:28 +0000 (UTC)
-Received: from mail-vk1-f172.google.com (mail-vk1-f172.google.com [209.85.221.172])
-	by lists.linaro.org (Postfix) with ESMTPS id EB6893EF5A
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Jul 2022 09:14:01 +0000 (UTC)
-Received: by mail-vk1-f172.google.com with SMTP id m30so5232250vkl.4
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Jul 2022 02:14:01 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id B9B7047992
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Aug 2022 16:51:39 +0000 (UTC)
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com [209.85.128.67])
+	by lists.linaro.org (Postfix) with ESMTPS id 538183F30F
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 10 Aug 2022 16:51:37 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id c187-20020a1c35c4000000b003a30d88fe8eso1321475wma.2
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 10 Aug 2022 09:51:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=USiHEWO3jenD+4D67wgYkGKlAcIRmi0lfoN5PdFyKzQ=;
-        b=dFYdzZzeGTwRc0FPEgBG5fRwMWNVjXZzxLxwtIHOW4IyAUtC1iJhL8ze0h/ntk8Iq4
-         lKlrAFaVxT4/pV4802tsmPOfXqrd/5krNwAeme2Ty0hfRzSXMQ2O+C/Kf1izAeM/mOcz
-         8LysLHAdaCtPPppxeQNBi2EL1ZGV/VNGij1I4=
+        d=ffwll.ch; s=google;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc;
+        bh=lWfrAoXxVHXbhkuomaZdWya3VTYtQlo2c1Ei9aMf4QI=;
+        b=ap5d/xqFftsbBitBxOcPRemV8XqbP5ZdmM9NGdAdoh0SKuAqcZuc4H8vwixxsdknjY
+         hQxj6sZvqynIarjgcpGo9vJmg8rzvtJrd7VtQ1DZsX7kH2spjdK21lRu+KdFnMjeWQ14
+         PPV/sk+vBgMu7qzpOvWra+vO5YW1ZwJBfv5+Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=USiHEWO3jenD+4D67wgYkGKlAcIRmi0lfoN5PdFyKzQ=;
-        b=ryfqqrj+OjijgtLc7mA34Uw8kER5BLydqjhlH0UZWRawshpJpPTOMoVaXMtkEV9jph
-         snJIV/BcHzXFQi6UgbejhztlLYtwYHHYVcb8TH76rGk2eqdS6lNdePEVx1h8TUXqeeWk
-         3n1buNV3LMGULwoy2NgwqA5ZqHUZ2810A+yB6KdfIVmFIpxXMq3J+fRVlUD+bdWtF2uV
-         t5EtW5wgVlZ+4s3Q0IaFqjESpr1xtvqBdLqz6MHfISzfKJOnihf95R0YHF4C3CB6DPry
-         Hlm0ZJU14hJguIun/JXsmpAi2LqbNHjJ4PIT4NDVP76EvT7EtXUaTlUOzUgkaA32O0Vk
-         XNNw==
-X-Gm-Message-State: AJIora9VpEoE1x3cM5fh39H3l2ecSWFlRk8x6mYNKxrzylJUuNf+kL1U
-	UOm623572Ju/H4GBsdJMSU8Uboct74ToZQ==
-X-Google-Smtp-Source: AGRyM1vMLr7lRMIBlV2sB2LeOyXGJY4o7ZMa/iKjStJVql8YofpDutYwJchrcG0YeHIbLtVbdmf1tw==
-X-Received: by 2002:a1f:3d88:0:b0:374:e94e:4d40 with SMTP id k130-20020a1f3d88000000b00374e94e4d40mr10711136vka.27.1658222040907;
-        Tue, 19 Jul 2022 02:14:00 -0700 (PDT)
-Received: from mail-ua1-f51.google.com (mail-ua1-f51.google.com. [209.85.222.51])
-        by smtp.gmail.com with ESMTPSA id n14-20020a9f3ece000000b003842250a024sm168762uaj.10.2022.07.19.02.14.00
-        for <linaro-mm-sig@lists.linaro.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 19 Jul 2022 02:14:00 -0700 (PDT)
-Received: by mail-ua1-f51.google.com with SMTP id t21so6513088uaq.3
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Jul 2022 02:14:00 -0700 (PDT)
-X-Received: by 2002:a81:6ccd:0:b0:31d:c77:73e5 with SMTP id
- h196-20020a816ccd000000b0031d0c7773e5mr33706265ywc.314.1658222030025; Tue, 19
- Jul 2022 02:13:50 -0700 (PDT)
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc;
+        bh=lWfrAoXxVHXbhkuomaZdWya3VTYtQlo2c1Ei9aMf4QI=;
+        b=MQ8vEFjgDwvspTqXK/xY4sOqGgLICXccBLvrnCZwIHr4laFTuWDKo88tVAGBsBFoUH
+         AsATDbbpGQ2jw1Xif/+tk2GkIZA4TXEkM84/nV9zy6sxo4yBZPFZ4pGTYjmovX/Y32OF
+         ZhDvLw+Rjy2hWKUw178E5YxLDhxHVGlTWU1XRYl1TqY0soP+2MN7hQwgU1yyYyI/mmZQ
+         JP7bGBSNnSFr/56SpBZc7HMUF5RIkljWgFj+OasHy/0kw51vVp57ZSAiKubgRzwF9Bdj
+         G45xw8FH8o/8wvV2F0DKId1igTY26wCb2GtGm1EEx1iIh8VURNIrTjHDv0kr9NUSL8LD
+         thig==
+X-Gm-Message-State: ACgBeo3bG6sFuqkV0utt0wkCVvocMjTfm9IkE475899sECtc6nPgVTIP
+	VuIXYq9zWLwe9ACl4dzw8QtKXQ==
+X-Google-Smtp-Source: AA6agR43A0U3CxBaG/pwAjxm6ETbq1ZTA/0wn+vLG7ILpaqLzgTR7ANYl+Syh3bE/yDBKAxRu0QLqQ==
+X-Received: by 2002:a7b:c5d2:0:b0:3a3:55d9:fd36 with SMTP id n18-20020a7bc5d2000000b003a355d9fd36mr3146947wmk.52.1660150296416;
+        Wed, 10 Aug 2022 09:51:36 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id j13-20020adfe50d000000b00222d512d96asm7089559wrm.75.2022.08.10.09.51.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 10 Aug 2022 09:51:35 -0700 (PDT)
+Date: Wed, 10 Aug 2022 18:51:33 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>
+Message-ID: <YvPiFYOvH4ZI2frl@phenom.ffwll.local>
+References: <20220712131201.131475-1-christian.koenig@amd.com>
+ <CADnq5_PSECF0b_ynF=UhXu3Os0hYZcvcQtk1pD+T3q+Z1g-Hgg@mail.gmail.com>
+ <a3dfc73f-5867-d442-b74d-a890a42753bd@amd.com>
+ <CAP+8YyHLy9=ueEcgVbk6nnAr=aqJXW1f31xm37gkGVrzdG3o=g@mail.gmail.com>
 MIME-Version: 1.0
-References: <20220715005244.42198-1-dmitry.osipenko@collabora.com>
-In-Reply-To: <20220715005244.42198-1-dmitry.osipenko@collabora.com>
-From: Tomasz Figa <tfiga@chromium.org>
-Date: Tue, 19 Jul 2022 18:13:39 +0900
-X-Gmail-Original-Message-ID: <CAAFQd5C0dx5X=VEqXDyj22fbxs1jhOQLLid3vSNfAc9vataPhg@mail.gmail.com>
-Message-ID: <CAAFQd5C0dx5X=VEqXDyj22fbxs1jhOQLLid3vSNfAc9vataPhg@mail.gmail.com>
-To: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-X-MailFrom: tfiga@chromium.org
+Content-Disposition: inline
+In-Reply-To: <CAP+8YyHLy9=ueEcgVbk6nnAr=aqJXW1f31xm37gkGVrzdG3o=g@mail.gmail.com>
+X-Operating-System: Linux phenom 5.10.0-8-amd64 
+Message-ID-Hash: 7DITF2VS5UPXULQJ34K6WA5CEALHVGZK
+X-Message-ID-Hash: 7DITF2VS5UPXULQJ34K6WA5CEALHVGZK
+X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: RNQ4Y2HWZEUZVUXYKQU37RMIV36UJIXQ
-X-Message-ID-Hash: RNQ4Y2HWZEUZVUXYKQU37RMIV36UJIXQ
-X-Mailman-Approved-At: Wed, 10 Aug 2022 16:06:26 +0000
-CC: David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Daniel Vetter <daniel@ffwll.ch>, Daniel Almeida <daniel.almeida@collabora.com>, Gert Wollny <gert.wollny@collabora.com>, Gustavo Padovan <gustavo.padovan@collabora.com>, Daniel Stone <daniel@fooishbar.org>, Tomeu Vizoso <tomeu.vizoso@collabora.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Rob Clark <robdclark@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding <thierry.reding@gmail.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Alex Deucher <alexander.deucher@amd.com>, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, dri-devel@lists.
- freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, spice-devel@lists.freedesktop.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org
+CC: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media <linux-media@vger.kernel.org>, Maling list - DRI developers <dri-devel@lists.freedesktop.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Daniel Vetter <daniel@ffwll.ch>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v1 0/6] Move all drivers to a common dma-buf locking convention
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf/dma_resv_usage: update explicit sync documentation
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RNQ4Y2HWZEUZVUXYKQU37RMIV36UJIXQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7DITF2VS5UPXULQJ34K6WA5CEALHVGZK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-T24gRnJpLCBKdWwgMTUsIDIwMjIgYXQgOTo1MyBBTSBEbWl0cnkgT3NpcGVua28NCjxkbWl0cnku
-b3NpcGVua29AY29sbGFib3JhLmNvbT4gd3JvdGU6DQo+DQo+IEhlbGxvLA0KPg0KPiBUaGlzIHNl
-cmllcyBtb3ZlcyBhbGwgZHJpdmVycyB0byBhIGR5bmFtaWMgZG1hLWJ1ZiBsb2NraW5nIHNwZWNp
-ZmljYXRpb24uDQo+IEZyb20gbm93IG9uIGFsbCBkbWEtYnVmIGltcG9ydGVycyBhcmUgbWFkZSBy
-ZXNwb25zaWJsZSBmb3IgaG9sZGluZw0KPiBkbWEtYnVmJ3MgcmVzZXJ2YXRpb24gbG9jayBhcm91
-bmQgYWxsIG9wZXJhdGlvbnMgcGVyZm9ybWVkIG92ZXIgZG1hLWJ1ZnMuDQo+IFRoaXMgY29tbW9u
-IGxvY2tpbmcgY29udmVudGlvbiBhbGxvd3MgdXMgdG8gdXRpbGl6ZSByZXNlcnZhdGlvbiBsb2Nr
-IG1vcmUNCj4gYnJvYWRseSBhcm91bmQga2VybmVsIHdpdGhvdXQgZmVhcmluZyBvZiBwb3RlbnRp
-YWwgZGVhZCBsb2Nrcy4NCj4NCj4gVGhpcyBwYXRjaHNldCBwYXNzZXMgYWxsIGk5MTUgc2VsZnRl
-c3RzLiBJdCB3YXMgYWxzbyB0ZXN0ZWQgdXNpbmcgVmlydElPLA0KPiBQYW5mcm9zdCwgTGltYSBh
-bmQgVGVncmEgZHJpdmVycy4gSSB0ZXN0ZWQgY2FzZXMgb2YgZGlzcGxheStHUFUsDQo+IGRpc3Bs
-YXkrVjRMIGFuZCBHUFUrVjRMIGRtYS1idWYgc2hhcmluZywgd2hpY2ggY292ZXJzIG1ham9yaXR5
-IG9mIGtlcm5lbA0KPiBkcml2ZXJzIHNpbmNlIHJlc3Qgb2YgdGhlIGRyaXZlcnMgc2hhcmUgc2Ft
-ZSBvciBzaW1pbGFyIGNvZGUgcGF0aHMuDQo+DQo+IFRoaXMgaXMgYSBjb250aW51YXRpb24gb2Yg
-WzFdIHdoZXJlIENocmlzdGlhbiBLw7ZuaWcgYXNrZWQgdG8gZmFjdG9yIG91dA0KPiB0aGUgZG1h
-LWJ1ZiBsb2NraW5nIGNoYW5nZXMgaW50byBzZXBhcmF0ZSBzZXJpZXMuDQo+DQo+IFsxXSBodHRw
-czovL2xvcmUua2VybmVsLm9yZy9kcmktZGV2ZWwvMjAyMjA1MjYyMzUwNDAuNjc4OTg0LTEtZG1p
-dHJ5Lm9zaXBlbmtvQGNvbGxhYm9yYS5jb20vDQo+DQo+IERtaXRyeSBPc2lwZW5rbyAoNik6DQo+
-ICAgZG1hLWJ1ZjogQWRkIF91bmxvY2tlZCBwb3N0Zml4IHRvIGZ1bmN0aW9uIG5hbWVzDQo+ICAg
-ZHJtL2dlbTogVGFrZSByZXNlcnZhdGlvbiBsb2NrIGZvciB2bWFwL3Z1bm1hcCBvcGVyYXRpb25z
-DQo+ICAgZG1hLWJ1ZjogTW92ZSBhbGwgZG1hLWJ1ZnMgdG8gZHluYW1pYyBsb2NraW5nIHNwZWNp
-ZmljYXRpb24NCj4gICBkbWEtYnVmOiBBY3F1aXJlIHdhaXQtd291bmQgY29udGV4dCBvbiBhdHRh
-Y2htZW50DQo+ICAgbWVkaWE6IHZpZGVvYnVmMjogU3RvcCB1c2luZyBpbnRlcm5hbCBkbWEtYnVm
-IGxvY2sNCj4gICBkbWEtYnVmOiBSZW1vdmUgaW50ZXJuYWwgbG9jaw0KPg0KPiAgZHJpdmVycy9k
-bWEtYnVmL2RtYS1idWYuYyAgICAgICAgICAgICAgICAgICAgIHwgMTk4ICsrKysrKysrKysrLS0t
-LS0tLQ0KPiAgZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvYW1kZ3B1X2RtYV9idWYuYyAgIHwg
-ICA0ICstDQo+ICBkcml2ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9hbWRncHVfdHRtLmMgICAgICAg
-fCAgIDQgKy0NCj4gIGRyaXZlcnMvZ3B1L2RybS9hcm1hZGEvYXJtYWRhX2dlbS5jICAgICAgICAg
-ICB8ICAxNCArLQ0KPiAgZHJpdmVycy9ncHUvZHJtL2RybV9jbGllbnQuYyAgICAgICAgICAgICAg
-ICAgIHwgICA0ICstDQo+ICBkcml2ZXJzL2dwdS9kcm0vZHJtX2dlbS5jICAgICAgICAgICAgICAg
-ICAgICAgfCAgMjggKysrDQo+ICBkcml2ZXJzL2dwdS9kcm0vZHJtX2dlbV9jbWFfaGVscGVyLmMg
-ICAgICAgICAgfCAgIDYgKy0NCj4gIGRyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtX2ZyYW1lYnVmZmVy
-X2hlbHBlci5jICB8ICAgNiArLQ0KPiAgZHJpdmVycy9ncHUvZHJtL2RybV9nZW1fc2htZW1faGVs
-cGVyLmMgICAgICAgIHwgICA2ICstDQo+ICBkcml2ZXJzL2dwdS9kcm0vZHJtX3ByaW1lLmMgICAg
-ICAgICAgICAgICAgICAgfCAgMTIgKy0NCj4gIGRyaXZlcnMvZ3B1L2RybS9ldG5hdml2L2V0bmF2
-aXZfZ2VtX3ByaW1lLmMgICB8ICAgNiArLQ0KPiAgZHJpdmVycy9ncHUvZHJtL2V4eW5vcy9leHlu
-b3NfZHJtX2dlbS5jICAgICAgIHwgICAyICstDQo+ICBkcml2ZXJzL2dwdS9kcm0vaTkxNS9nZW0v
-aTkxNV9nZW1fZG1hYnVmLmMgICAgfCAgMjAgKy0NCj4gIC4uLi9ncHUvZHJtL2k5MTUvZ2VtL2k5
-MTVfZ2VtX2V4ZWNidWZmZXIuYyAgICB8ICAgMiArLQ0KPiAgZHJpdmVycy9ncHUvZHJtL2k5MTUv
-Z2VtL2k5MTVfZ2VtX29iamVjdC5oICAgIHwgICA2ICstDQo+ICAuLi4vZHJtL2k5MTUvZ2VtL3Nl
-bGZ0ZXN0cy9pOTE1X2dlbV9kbWFidWYuYyAgfCAgMjAgKy0NCj4gIGRyaXZlcnMvZ3B1L2RybS9p
-OTE1L2k5MTVfZ2VtX2V2aWN0LmMgICAgICAgICB8ICAgMiArLQ0KPiAgZHJpdmVycy9ncHUvZHJt
-L2k5MTUvaTkxNV9nZW1fd3cuYyAgICAgICAgICAgIHwgIDI2ICsrLQ0KPiAgZHJpdmVycy9ncHUv
-ZHJtL2k5MTUvaTkxNV9nZW1fd3cuaCAgICAgICAgICAgIHwgIDE1ICstDQo+ICBkcml2ZXJzL2dw
-dS9kcm0vb21hcGRybS9vbWFwX2dlbV9kbWFidWYuYyAgICAgfCAgIDggKy0NCj4gIGRyaXZlcnMv
-Z3B1L2RybS9xeGwvcXhsX29iamVjdC5jICAgICAgICAgICAgICB8ICAxNyArLQ0KPiAgZHJpdmVy
-cy9ncHUvZHJtL3F4bC9xeGxfcHJpbWUuYyAgICAgICAgICAgICAgIHwgICA0ICstDQo+ICBkcml2
-ZXJzL2dwdS9kcm0vdGVncmEvZ2VtLmMgICAgICAgICAgICAgICAgICAgfCAgMjcgKy0tDQo+ICBk
-cml2ZXJzL2luZmluaWJhbmQvY29yZS91bWVtX2RtYWJ1Zi5jICAgICAgICAgfCAgMTEgKy0NCj4g
-IC4uLi9jb21tb24vdmlkZW9idWYyL3ZpZGVvYnVmMi1kbWEtY29udGlnLmMgICB8ICAyNiArLS0N
-Cj4gIC4uLi9tZWRpYS9jb21tb24vdmlkZW9idWYyL3ZpZGVvYnVmMi1kbWEtc2cuYyB8ICAyMyAr
-LQ0KPiAgLi4uL2NvbW1vbi92aWRlb2J1ZjIvdmlkZW9idWYyLXZtYWxsb2MuYyAgICAgIHwgIDE3
-ICstDQoNCkZvciB0aGUgdmlkZW9idWYyIGNoYW5nZXM6DQoNCkFja2VkLWJ5OiBUb21hc3ogRmln
-YSA8dGZpZ2FAY2hyb21pdW0ub3JnPg0KDQpCZXN0IHJlZ2FyZHMsDQpUb21hc3oNCl9fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFp
-bGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmli
-ZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On Wed, Jul 13, 2022 at 01:27:13PM +0200, Bas Nieuwenhuizen wrote:
+> With that changed
+>=20
+> Reviewed-by: Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>
+
+Yeah this is a nice clarification.
+
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+
+In case it hasn't landed yet or so.
+-Daniel
+
+>=20
+> Thanks!
+>=20
+> On Tue, Jul 12, 2022 at 3:23 PM Christian K=F6nig
+> <christian.koenig@amd.com> wrote:
+> >
+> > Am 12.07.22 um 15:20 schrieb Alex Deucher:
+> > > On Tue, Jul 12, 2022 at 9:12 AM Christian K=F6nig
+> > > <ckoenig.leichtzumerken@gmail.com> wrote:
+> > >> Make it clear that DMA_RESV_USAGE_BOOKMARK can be used for explicit =
+synced
+> > > DMA_RESV_USAGE_BOOKKEEP?
+> >
+> > Crappy autocorrect and copy&paste. Thanks for pointing that out.
+> >
+> > Christian.
+> >
+> > >
+> > >> user space submissions as well and document the rules around adding =
+the
+> > >> same fence with different usages.
+> > >>
+> > >> Signed-off-by: Christian K=F6nig <christian.koenig@amd.com>
+> > >> ---
+> > >>   include/linux/dma-resv.h | 16 +++++++++++++---
+> > >>   1 file changed, 13 insertions(+), 3 deletions(-)
+> > >>
+> > >> diff --git a/include/linux/dma-resv.h b/include/linux/dma-resv.h
+> > >> index c8ccbc94d5d2..264e27e56dff 100644
+> > >> --- a/include/linux/dma-resv.h
+> > >> +++ b/include/linux/dma-resv.h
+> > >> @@ -62,6 +62,11 @@ struct dma_resv_list;
+> > >>    * For example when asking for WRITE fences then the KERNEL fences=
+ are returned
+> > >>    * as well. Similar when asked for READ fences then both WRITE and=
+ KERNEL
+> > >>    * fences are returned as well.
+> > >> + *
+> > >> + * Already used fences can be promoted in the sense that a fence wi=
+th
+> > >> + * DMA_RESV_USAGE_BOOKMARK could become DMA_RESV_USAGE_READ by addi=
+ng it again
+> > > Same here.
+> > >
+> > > With that fixed,
+> > > Acked-by: Alex Deucher <alexander.deucher@amd.com>
+> > >
+> > > Alex
+> > >
+> > >> + * with this usage. But fences can never be degraded in the sense t=
+hat a fence
+> > >> + * with DMA_RESV_USAGE_WRITE could become DMA_RESV_USAGE_READ.
+> > >>    */
+> > >>   enum dma_resv_usage {
+> > >>          /**
+> > >> @@ -98,10 +103,15 @@ enum dma_resv_usage {
+> > >>           * @DMA_RESV_USAGE_BOOKKEEP: No implicit sync.
+> > >>           *
+> > >>           * This should be used by submissions which don't want to p=
+articipate in
+> > >> -        * implicit synchronization.
+> > >> +        * any implicit synchronization.
+> > >> +        *
+> > >> +        * The most common case are preemption fences, page table up=
+dates, TLB
+> > >> +        * flushes as well as explicit synced user submissions.
+> > >>           *
+> > >> -        * The most common case are preemption fences as well as pag=
+e table
+> > >> -        * updates and their TLB flushes.
+> > >> +        * Explicit synced user user submissions can be promoted to
+> > >> +        * DMA_RESV_USAGE_READ or DMA_RESV_USAGE_WRITE as needed usi=
+ng
+> > >> +        * dma_buf_import_sync_file() when implicit synchronization =
+should
+> > >> +        * become necessary after initial adding of the fence.
+> > >>           */
+> > >>          DMA_RESV_USAGE_BOOKKEEP
+> > >>   };
+> > >> --
+> > >> 2.25.1
+> > >>
+> > >> _______________________________________________
+> > >> Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+> > >> To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+> >
+
+--=20
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
