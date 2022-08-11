@@ -2,52 +2,52 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3EFB58FF86
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Aug 2022 17:31:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E9B2590091
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Aug 2022 17:45:02 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id ECB9F3F4E5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Aug 2022 15:31:27 +0000 (UTC)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-	by lists.linaro.org (Postfix) with ESMTPS id 931C53F4DB
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Aug 2022 15:31:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 108513F4E5
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Aug 2022 15:45:01 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id B12EA3EA4B
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Aug 2022 15:44:58 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.source.kernel.org (Postfix) with ESMTPS id 8E51BB82156;
-	Thu, 11 Aug 2022 15:31:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CC8B1C433C1;
-	Thu, 11 Aug 2022 15:31:20 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 2EB0F616DF;
+	Thu, 11 Aug 2022 15:44:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1E70DC433C1;
+	Thu, 11 Aug 2022 15:44:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1660231881;
+	s=k20201202; t=1660232697;
 	bh=tWgSr+DRnRR0cd/P0/BM0NpbtsePMct9xsm4rKnsmRI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=qZLm6g7ZlPdG119Sb4N/tIRObhMqCUobqSVYuVGEpYO6WyOxZECIQ+JDaQuWg1tNr
-	 jghCZfKbDoAYlXF160iJHJODJY0I2EDUoUC93SiUqZqkx3WmeCE+DY3hK2znvSNm4P
-	 bBc668R1lvK3cRLtgjzBg/QoDfMmIwV0b5xk3VSO9JGlzGyx+ylTS1SclFTmELm6r0
-	 GmdD52EV+X/06yoQK2VK4VIAtB0PHs2v43V9ewT0ja5JzUKHkqEYT1p4hvLgDeY2XI
-	 28EyajE2EVTctQxBKlbQ3I/mnX+RidvHVYukDMcAOY/RYjxLJoF9G3r1LpqJKkxkj9
-	 JXqd2ldIiWAaQ==
+	b=DW3fW0SwAtaHXWzBdEMbtZ9UK7RPDqXuJOkLfrlE1DYjJyCBVA0vO8PH7IB0d8G0E
+	 czw+vVxkdlN0HhEsWujEB0dcossyXJH2RFoiP2HwOc3dL/BZDQPwxBb0SboZi4u6Ah
+	 DchjAKT/+YBLaBSI5AsUFwXDfDCzdNtXalb1HCecr8OiIXlcW1BDSE8G79CBJksuEr
+	 sOxOMwnqK/ERsXR8/66tCnGvBL3sI6W9dkV9XqoQe8TGgjcwtIaFz0RhfLLnq4Cvui
+	 FX4J/4eD7JtWokQi804Siru5s6BZ+1I8vuCLwIWe265QXMfXKmh8lHeRvgnHmHPNZ+
+	 CfEmvSmuPajkw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Thu, 11 Aug 2022 11:27:05 -0400
-Message-Id: <20220811152851.1520029-21-sashal@kernel.org>
+Date: Thu, 11 Aug 2022 11:41:14 -0400
+Message-Id: <20220811154237.1531313-20-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220811152851.1520029-1-sashal@kernel.org>
-References: <20220811152851.1520029-1-sashal@kernel.org>
+In-Reply-To: <20220811154237.1531313-1-sashal@kernel.org>
+References: <20220811154237.1531313-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Message-ID-Hash: NAZXHTDJSOUVIRCJV3IF3UA42PO42QS5
-X-Message-ID-Hash: NAZXHTDJSOUVIRCJV3IF3UA42PO42QS5
+Message-ID-Hash: 7CAN7YTE7YQXHTYW7FROBHUPCW6X6AKJ
+X-Message-ID-Hash: 7CAN7YTE7YQXHTYW7FROBHUPCW6X6AKJ
 X-MailFrom: sashal@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Vivek Kasireddy <vivek.kasireddy@intel.com>, syzbot+10e27961f4da37c443b2@syzkaller.appspotmail.com, Gerd Hoffmann <kraxel@redhat.com>, Sasha Levin <sashal@kernel.org>, sumit.semwal@linaro.org, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.19 021/105] udmabuf: Set the DMA mask for the udmabuf device (v2)
+Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.18 20/93] udmabuf: Set the DMA mask for the udmabuf device (v2)
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NAZXHTDJSOUVIRCJV3IF3UA42PO42QS5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7CAN7YTE7YQXHTYW7FROBHUPCW6X6AKJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
