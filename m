@@ -2,101 +2,162 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74F3158F28E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Aug 2022 20:53:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C3EFB58FF86
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Aug 2022 17:31:28 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9FF5847994
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Aug 2022 18:53:23 +0000 (UTC)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-	by lists.linaro.org (Postfix) with ESMTPS id 4CB173F30F
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 10 Aug 2022 18:53:20 +0000 (UTC)
-Received: from [192.168.2.145] (109-252-119-13.nat.spd-mgts.ru [109.252.119.13])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	by lists.linaro.org (Postfix) with ESMTP id ECB9F3F4E5
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Aug 2022 15:31:27 +0000 (UTC)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+	by lists.linaro.org (Postfix) with ESMTPS id 931C53F4DB
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Aug 2022 15:31:24 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	(Authenticated sender: dmitry.osipenko)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id 944246601C70;
-	Wed, 10 Aug 2022 19:53:16 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1660157599;
-	bh=xbCaL2ScXB+T0FyoL/VdM0qhBj61RQMv/0Mh8aht9Y0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=byieT9EU43F/eRBpe3bi/nsXqvGsphP+xnN+9uCcJQiiqE+2eL+6OggtflfgiZV5H
-	 2tbgBedC4VmW8VqMPGH+MSJmFXxmN5L0KjGxSmnjKSb9TYnT6q+8+bdtF2Dueo+auX
-	 67XZQj1miiDmUza/2oi5U1NkSKSVPEVKs1DgEoiMZjakSsK7ADM0J790qkaQ8pphu7
-	 M1BkTB2bL3dJox2DaLhHDMTu8D3c4zfRYO6jQNX4dYPdDaIr7OfFFbIsXhbVC8CrhI
-	 DDaWDFnqfaqxGjPW9cdp+mVCoxjC3Q4VxEfkM8NccRtG0HVYtdCNsAeJQgHxfz0CIU
-	 fpCGA/irmwkpA==
-Message-ID: <0863cafa-c252-e194-3d23-ef640941e36e@collabora.com>
-Date: Wed, 10 Aug 2022 21:53:13 +0300
+	by ams.source.kernel.org (Postfix) with ESMTPS id 8E51BB82156;
+	Thu, 11 Aug 2022 15:31:23 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CC8B1C433C1;
+	Thu, 11 Aug 2022 15:31:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1660231881;
+	bh=tWgSr+DRnRR0cd/P0/BM0NpbtsePMct9xsm4rKnsmRI=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=qZLm6g7ZlPdG119Sb4N/tIRObhMqCUobqSVYuVGEpYO6WyOxZECIQ+JDaQuWg1tNr
+	 jghCZfKbDoAYlXF160iJHJODJY0I2EDUoUC93SiUqZqkx3WmeCE+DY3hK2znvSNm4P
+	 bBc668R1lvK3cRLtgjzBg/QoDfMmIwV0b5xk3VSO9JGlzGyx+ylTS1SclFTmELm6r0
+	 GmdD52EV+X/06yoQK2VK4VIAtB0PHs2v43V9ewT0ja5JzUKHkqEYT1p4hvLgDeY2XI
+	 28EyajE2EVTctQxBKlbQ3I/mnX+RidvHVYukDMcAOY/RYjxLJoF9G3r1LpqJKkxkj9
+	 JXqd2ldIiWAaQ==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Date: Thu, 11 Aug 2022 11:27:05 -0400
+Message-Id: <20220811152851.1520029-21-sashal@kernel.org>
+X-Mailer: git-send-email 2.35.1
+In-Reply-To: <20220811152851.1520029-1-sashal@kernel.org>
+References: <20220811152851.1520029-1-sashal@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.12.0
-Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-References: <20220725151839.31622-1-dmitry.osipenko@collabora.com>
- <20220725151839.31622-4-dmitry.osipenko@collabora.com>
- <6c8bded9-1809-608f-749a-5ee28b852d32@gmail.com>
- <562fbacf-3673-ff3c-23a1-124284b4456c@collabora.com>
- <87724722-b9f3-a016-c25c-4b0415f2c37f@amd.com>
-From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-In-Reply-To: <87724722-b9f3-a016-c25c-4b0415f2c37f@amd.com>
-Message-ID-Hash: 2JRSHFVM4CHUOL6XU5O4YKK36ZKUMYHL
-X-Message-ID-Hash: 2JRSHFVM4CHUOL6XU5O4YKK36ZKUMYHL
-X-MailFrom: dmitry.osipenko@collabora.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, spice-devel@lists.freedesktop.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org, David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Daniel Vetter <daniel@ffwll.ch>, Daniel Almeida <daniel.almeida@collabora.com>, Gert Wollny <gert.wollny@collabora.com>, Gustavo Padovan <gustavo.padovan@collabora.com>, Daniel Stone <daniel@fooishbar.org>, Tomeu Vizoso <tomeu.vizoso@collabora.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Rob Clark <robdclark@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thier
- ry Reding <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, Alex Deucher <alexander.deucher@amd.com>, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+X-stable: review
+X-Patchwork-Hint: Ignore
+Message-ID-Hash: NAZXHTDJSOUVIRCJV3IF3UA42PO42QS5
+X-Message-ID-Hash: NAZXHTDJSOUVIRCJV3IF3UA42PO42QS5
+X-MailFrom: sashal@kernel.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Vivek Kasireddy <vivek.kasireddy@intel.com>, syzbot+10e27961f4da37c443b2@syzkaller.appspotmail.com, Gerd Hoffmann <kraxel@redhat.com>, Sasha Levin <sashal@kernel.org>, sumit.semwal@linaro.org, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 3/5] dma-buf: Move all dma-bufs to dynamic locking specification
+Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.19 021/105] udmabuf: Set the DMA mask for the udmabuf device (v2)
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2JRSHFVM4CHUOL6XU5O4YKK36ZKUMYHL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NAZXHTDJSOUVIRCJV3IF3UA42PO42QS5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gOC8xMC8yMiAyMToyNSwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToNCj4gQW0gMTAuMDguMjIg
-dW0gMTk6NDkgc2NocmllYiBEbWl0cnkgT3NpcGVua286DQo+PiBPbiA4LzEwLzIyIDE0OjMwLCBD
-aHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPj4+IEFtIDI1LjA3LjIyIHVtIDE3OjE4IHNjaHJpZWIg
-RG1pdHJ5IE9zaXBlbmtvOg0KPj4+PiBUaGlzIHBhdGNoIG1vdmVzIHRoZSBub24tZHluYW1pYyBk
-bWEtYnVmIHVzZXJzIG92ZXIgdG8gdGhlIGR5bmFtaWMNCj4+Pj4gbG9ja2luZyBzcGVjaWZpY2F0
-aW9uLiBUaGUgc3RyaWN0IGxvY2tpbmcgY29udmVudGlvbiBwcmV2ZW50cyBkZWFkbG9jaw0KPj4+
-PiBzaXR1YXRpb24gZm9yIGRtYS1idWYgaW1wb3J0ZXJzIGFuZCBleHBvcnRlcnMuDQo+Pj4+DQo+
-Pj4+IFByZXZpb3VzbHkgdGhlICJ1bmxvY2tlZCIgdmVyc2lvbnMgb2YgdGhlIGRtYS1idWYgQVBJ
-IGZ1bmN0aW9ucyB3ZXJlbid0DQo+Pj4+IHRha2luZyB0aGUgcmVzZXJ2YXRpb24gbG9jayBhbmQg
-dGhpcyBwYXRjaCBtYWtlcyB0aGVtIHRvIHRha2UgdGhlIGxvY2suDQo+Pj4+DQo+Pj4+IEludGVs
-IGFuZCBBTUQgR1BVIGRyaXZlcnMgYWxyZWFkeSB3ZXJlIG1hcHBpbmcgaW1wb3J0ZWQgZG1hLWJ1
-ZnMgdW5kZXINCj4+Pj4gdGhlIGhlbGQgbG9jaywgaGVuY2UgdGhlICJsb2NrZWQiIHZhcmlhbnQg
-b2YgdGhlIGZ1bmN0aW9ucyBhcmUgYWRkZWQNCj4+Pj4gZm9yIHRoZW0gYW5kIHRoZSBkcml2ZXJz
-IGFyZSB1cGRhdGVkIHRvIHVzZSB0aGUgImxvY2tlZCIgdmVyc2lvbnMuDQo+Pj4gSW4gZ2VuZXJh
-bCAiWWVzLCBwbGVhc2UiLCBidXQgdGhhdCB3b24ndCBiZSB0aGF0IGVhc3kuDQo+Pj4NCj4+PiBZ
-b3Ugbm90IG9ubHkgbmVlZCB0byBjaGFuZ2UgYW1kZ3B1IGFuZCBpOTE1LCBidXQgYWxsIGRyaXZl
-cnMNCj4+PiBpbXBsZW1lbnRpbmcgdGhlIG1hcF9kbWFfYnVmKCksIHVubWFwX2RtYV9idWYoKSBj
-YWxsYmFja3MuDQo+Pj4NCj4+PiBBdWRpdGluZyBhbGwgdGhhdCBjb2RlIGlzIGEgaHVnZSBidW5j
-aCBvZiB3b3JrLg0KPj4gSG0sIG5laXRoZXIgb2YgZHJpdmVycyB0YWtlIHRoZSByZXN2IGxvY2sg
-aW4gbWFwX2RtYV9idWYvdW5tYXBfZG1hX2J1Zi4NCj4+IEl0J3MgZWFzeSB0byBhdWRpdCB0aGVt
-IGFsbCBhbmQgSSBkaWQgaXQuIFNvIGVpdGhlciBJJ20gbWlzc2luZw0KPj4gc29tZXRoaW5nIG9y
-IGl0IGRvZXNuJ3QgdGFrZSBtdWNoIHRpbWUgdG8gY2hlY2sgdGhlbSBhbGwuIEFtIEkgcmVhbGx5
-DQo+PiBtaXNzaW5nIHNvbWV0aGluZz8NCj4gDQo+IE9rLCBzbyB0aGlzIGlzIG9ubHkgY2hhbmdp
-bmcgbWFwL3VubWFwIG5vdz8NCg0KSXQgYWxzbyB2bWFwL3Z1bm1hcCBhbmQgYXR0YWNoL2RldGFj
-aDogSW4gdGhlIHByZXZpb3VzIHBhdGNoIEkgYWRkZWQgdGhlDQpfdW5sb2NrZWQgcG9zdGZpeCB0
-byB0aGUgZnVuYyBuYW1lcyBhbmQgaW4gdGhpcyBwYXRjaCBJIG1hZGUgdGhlbSBhbGwgdG8NCmFj
-dHVhbGx5IHRha2UgdGhlIGxvY2suDQoNCj4gSW4gdGhpcyBjYXNlIHBsZWFzZSBzZXBhcmF0ZSB0
-aGlzIGZyb20gdGhlIGRvY3VtZW50YXRpb24gY2hhbmdlLg0KDQpJJ2xsIGZhY3RvciBvdXQgdGhl
-IGRvYyBpbiB0aGUgdjMuDQoNCj4gSSB3b3VsZCBhbHNvIGRyb3AgdGhlIF9sb2NrZWQgcG9zdGZp
-eCBmcm9tIHRoZSBmdW5jdGlvbiBuYW1lLCBqdXN0DQo+IGhhdmluZyBfdW5sb2NrZWQgb24gYWxs
-IGZ1bmN0aW9ucyB3aGljaCBhcmUgc3VwcG9zZWQgdG8gYmUgY2FsbGVkIHdpdGgNCj4gdGhlIGxv
-Y2sgaGVsZCBzaG91bGQgYmUgc3VmZmljaWVudC4NCg0KTm90ZWQgZm9yIHRoZSB2My4NCg0KPiBU
-aGFua3MgZm9yIGxvb2tpbmcgaW50byB0aGlzLA0KPiBDaHJpc3RpYW4uDQoNClRoYW5rIHlvdSBm
-b3IgdGhlIHJldmlldy4NCg0KLS0gDQpCZXN0IHJlZ2FyZHMsDQpEbWl0cnkNCl9fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGlu
-ZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBz
-ZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+From: Vivek Kasireddy <vivek.kasireddy@intel.com>
+
+[ Upstream commit 9e9fa6a9198b767b00f48160800128e83a038f9f ]
+
+If the DMA mask is not set explicitly, the following warning occurs
+when the userspace tries to access the dma-buf via the CPU as
+reported by syzbot here:
+
+WARNING: CPU: 1 PID: 3595 at kernel/dma/mapping.c:188
+__dma_map_sg_attrs+0x181/0x1f0 kernel/dma/mapping.c:188
+Modules linked in:
+CPU: 0 PID: 3595 Comm: syz-executor249 Not tainted
+5.17.0-rc2-syzkaller-00316-g0457e5153e0e #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS
+Google 01/01/2011
+RIP: 0010:__dma_map_sg_attrs+0x181/0x1f0 kernel/dma/mapping.c:188
+Code: 00 00 00 00 00 fc ff df 48 c1 e8 03 80 3c 10 00 75 71 4c 8b 3d c0
+83 b5 0d e9 db fe ff ff e8 b6 0f 13 00 0f 0b e8 af 0f 13 00 <0f> 0b 45
+   31 e4 e9 54 ff ff ff e8 a0 0f 13 00 49 8d 7f 50 48 b8 00
+RSP: 0018:ffffc90002a07d68 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: 0000000000000000 RCX: 0000000000000000
+RDX: ffff88807e25e2c0 RSI: ffffffff81649e91 RDI: ffff88801b848408
+RBP: ffff88801b848000 R08: 0000000000000002 R09: ffff88801d86c74f
+R10: ffffffff81649d72 R11: 0000000000000001 R12: 0000000000000002
+R13: ffff88801d86c680 R14: 0000000000000001 R15: 0000000000000000
+FS:  0000555556e30300(0000) GS:ffff8880b9d00000(0000)
+knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 00000000200000cc CR3: 000000001d74a000 CR4: 00000000003506e0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+Call Trace:
+ <TASK>
+ dma_map_sgtable+0x70/0xf0 kernel/dma/mapping.c:264
+ get_sg_table.isra.0+0xe0/0x160 drivers/dma-buf/udmabuf.c:72
+ begin_cpu_udmabuf+0x130/0x1d0 drivers/dma-buf/udmabuf.c:126
+ dma_buf_begin_cpu_access+0xfd/0x1d0 drivers/dma-buf/dma-buf.c:1164
+ dma_buf_ioctl+0x259/0x2b0 drivers/dma-buf/dma-buf.c:363
+ vfs_ioctl fs/ioctl.c:51 [inline]
+ __do_sys_ioctl fs/ioctl.c:874 [inline]
+ __se_sys_ioctl fs/ioctl.c:860 [inline]
+ __x64_sys_ioctl+0x193/0x200 fs/ioctl.c:860
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x35/0xb0 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x44/0xae
+RIP: 0033:0x7f62fcf530f9
+Code: 28 c3 e8 2a 14 00 00 66 2e 0f 1f 84 00 00 00 00 00 48 89 f8 48 89
+f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01
+f0 ff ff 73 01 c3 48 c7 c1 c0 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffe3edab9b8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f62fcf530f9
+RDX: 0000000020000200 RSI: 0000000040086200 RDI: 0000000000000006
+RBP: 00007f62fcf170e0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 00007f62fcf17170
+R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
+ </TASK>
+
+v2: Dont't forget to deregister if DMA mask setup fails.
+
+Reported-by: syzbot+10e27961f4da37c443b2@syzkaller.appspotmail.com
+Cc: Gerd Hoffmann <kraxel@redhat.com>
+Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
+Link: http://patchwork.freedesktop.org/patch/msgid/20220520205235.3687336-1-vivek.kasireddy@intel.com
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/dma-buf/udmabuf.c | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
+index 9631f2fd2faf..38e8767ec371 100644
+--- a/drivers/dma-buf/udmabuf.c
++++ b/drivers/dma-buf/udmabuf.c
+@@ -368,7 +368,23 @@ static struct miscdevice udmabuf_misc = {
+ 
+ static int __init udmabuf_dev_init(void)
+ {
+-	return misc_register(&udmabuf_misc);
++	int ret;
++
++	ret = misc_register(&udmabuf_misc);
++	if (ret < 0) {
++		pr_err("Could not initialize udmabuf device\n");
++		return ret;
++	}
++
++	ret = dma_coerce_mask_and_coherent(udmabuf_misc.this_device,
++					   DMA_BIT_MASK(64));
++	if (ret < 0) {
++		pr_err("Could not setup DMA mask for udmabuf device\n");
++		misc_deregister(&udmabuf_misc);
++		return ret;
++	}
++
++	return 0;
+ }
+ 
+ static void __exit udmabuf_dev_exit(void)
+-- 
+2.35.1
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
