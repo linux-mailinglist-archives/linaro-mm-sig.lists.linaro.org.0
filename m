@@ -2,52 +2,64 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 39F5359024B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Aug 2022 18:08:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A9BC8590B7E
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Aug 2022 07:27:41 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 64B013F4D3
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Aug 2022 16:08:50 +0000 (UTC)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-	by lists.linaro.org (Postfix) with ESMTPS id AFA883F4D3
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Aug 2022 16:08:46 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by ams.source.kernel.org (Postfix) with ESMTPS id C048AB821AE;
-	Thu, 11 Aug 2022 16:08:45 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 51C47C433C1;
-	Thu, 11 Aug 2022 16:08:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1660234124;
-	bh=xgAvagYUr1AMw6qb2QzsbPq4Zr6sFU6jAqOUa4LLJ28=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Hlp53luzaE99nRdXFiIRWiHxbVAJouEvZfKMJFyKTEaHfgyUQIv1qmL9e7HKFbxY3
-	 JbOO7YqkLVWqRTm/y+6Y7Wz1r/Sj3Z50x5q8cuJGnKVYne3rDvUcF/AhpZDZ+CoPk0
-	 TV5sJT87YOMSeDu7udwD+dvG4fDvHbblXFw6mYng31hOIa2n8shOwtLW1ffl94794u
-	 5zoftMf60gSITIxyHiNL/GDYsIE+TmiNmvD0orDArzIyNfRxaCCiqtua3xTUCDK+6Q
-	 HgFWNeLwe8o1ppanqCNltOGL66HwR229OBlIAzPEz4hOCoKZ3S3Ab2te07gPoXxBYO
-	 WuEB5VWQ8GDFA==
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Thu, 11 Aug 2022 12:08:04 -0400
-Message-Id: <20220811160826.1541971-9-sashal@kernel.org>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220811160826.1541971-1-sashal@kernel.org>
-References: <20220811160826.1541971-1-sashal@kernel.org>
+	by lists.linaro.org (Postfix) with ESMTP id 8E6083F50B
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 12 Aug 2022 05:27:40 +0000 (UTC)
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by lists.linaro.org (Postfix) with ESMTPS id 61F313F1D2
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 12 Aug 2022 05:27:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1660282057; x=1691818057;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=aD66a3tlUSHNk9f+LMWfIXawj2d8pgOYlU8yPhvZhyU=;
+  b=iXz5xrSVk4iOPeRa9kHKFYFN1ye9CqgS6mcMHGuD8M8BFVjUXBnH3LQU
+   kSZJS9IMrBouZ26SbJAQjcWHDplQvApVy1AUnthSYOY5IiEZ/d29eTyK0
+   15InJ1qEKKPDG3bM44lr+OC6o77OOUVmw0PW5p/7elIkQwxRC/2icslgB
+   NUyn0lY9Om51+VzDIr0gUNWpW7tMFxwDr8crt4bSui/53InyO1w+E+u3g
+   j8wWnY7OleZo+use5f8U6aX1acboX5GxgHYCQEqTclTeoAwhbkwKCBrvh
+   lP9RPjYU5T2+h7Mu3y/KTHRILVDnsmRQmtzPRuhOn4fNb2nfAN/H2N5LB
+   Q==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10436"; a="292319491"
+X-IronPort-AV: E=Sophos;i="5.93,231,1654585200";
+   d="scan'208";a="292319491"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Aug 2022 22:27:36 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.93,231,1654585200";
+   d="scan'208";a="556407140"
+Received: from lkp-server02.sh.intel.com (HELO 8745164cafc7) ([10.239.97.151])
+  by orsmga003.jf.intel.com with ESMTP; 11 Aug 2022 22:27:33 -0700
+Received: from kbuild by 8745164cafc7 with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1oMNCm-0000CU-2a;
+	Fri, 12 Aug 2022 05:27:32 +0000
+Date: Fri, 12 Aug 2022 13:27:13 +0800
+From: kernel test robot <lkp@intel.com>
+To: Olivier Masse <olivier.masse@nxp.com>, jens.wiklander@linaro.org,
+	sumit.garg@linaro.org, sumit.semwal@linaro.org,
+	christian.koenig@amd.com, op-tee@lists.trustedfirmware.org,
+	linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org
+Message-ID: <202208121326.FWVAzlch-lkp@intel.com>
+References: <20220811135637.6332-2-olivier.masse@nxp.com>
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Message-ID-Hash: L5XZUC5RDSBGYB4KJRY533DB3LKK46MF
-X-Message-ID-Hash: L5XZUC5RDSBGYB4KJRY533DB3LKK46MF
-X-MailFrom: sashal@kernel.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Vivek Kasireddy <vivek.kasireddy@intel.com>, syzbot+10e27961f4da37c443b2@syzkaller.appspotmail.com, Gerd Hoffmann <kraxel@redhat.com>, Sasha Levin <sashal@kernel.org>, sumit.semwal@linaro.org, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Content-Disposition: inline
+In-Reply-To: <20220811135637.6332-2-olivier.masse@nxp.com>
+Message-ID-Hash: TP7OF6DUADXP2SDZBSVQINIRY63IMCQD
+X-Message-ID-Hash: TP7OF6DUADXP2SDZBSVQINIRY63IMCQD
+X-MailFrom: lkp@intel.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: kbuild-all@lists.01.org, clement.faure@nxp.com, olivier.masse@nxp.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.4 09/25] udmabuf: Set the DMA mask for the udmabuf device (v2)
+Subject: [Linaro-mm-sig] Re: [PATCH 1/1] tee: new ioctl to a register tee_shm from a dmabuf file descriptor
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/L5XZUC5RDSBGYB4KJRY533DB3LKK46MF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TP7OF6DUADXP2SDZBSVQINIRY63IMCQD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -57,107 +69,42 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-From: Vivek Kasireddy <vivek.kasireddy@intel.com>
+Hi Olivier,
 
-[ Upstream commit 9e9fa6a9198b767b00f48160800128e83a038f9f ]
+Thank you for the patch! Yet something to improve:
 
-If the DMA mask is not set explicitly, the following warning occurs
-when the userspace tries to access the dma-buf via the CPU as
-reported by syzbot here:
+[auto build test ERROR on drm-misc/drm-misc-next]
+[also build test ERROR on drm-tip/drm-tip linus/master v5.19 next-20220811]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-WARNING: CPU: 1 PID: 3595 at kernel/dma/mapping.c:188
-__dma_map_sg_attrs+0x181/0x1f0 kernel/dma/mapping.c:188
-Modules linked in:
-CPU: 0 PID: 3595 Comm: syz-executor249 Not tainted
-5.17.0-rc2-syzkaller-00316-g0457e5153e0e #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS
-Google 01/01/2011
-RIP: 0010:__dma_map_sg_attrs+0x181/0x1f0 kernel/dma/mapping.c:188
-Code: 00 00 00 00 00 fc ff df 48 c1 e8 03 80 3c 10 00 75 71 4c 8b 3d c0
-83 b5 0d e9 db fe ff ff e8 b6 0f 13 00 0f 0b e8 af 0f 13 00 <0f> 0b 45
-   31 e4 e9 54 ff ff ff e8 a0 0f 13 00 49 8d 7f 50 48 b8 00
-RSP: 0018:ffffc90002a07d68 EFLAGS: 00010293
-RAX: 0000000000000000 RBX: 0000000000000000 RCX: 0000000000000000
-RDX: ffff88807e25e2c0 RSI: ffffffff81649e91 RDI: ffff88801b848408
-RBP: ffff88801b848000 R08: 0000000000000002 R09: ffff88801d86c74f
-R10: ffffffff81649d72 R11: 0000000000000001 R12: 0000000000000002
-R13: ffff88801d86c680 R14: 0000000000000001 R15: 0000000000000000
-FS:  0000555556e30300(0000) GS:ffff8880b9d00000(0000)
-knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00000000200000cc CR3: 000000001d74a000 CR4: 00000000003506e0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- <TASK>
- dma_map_sgtable+0x70/0xf0 kernel/dma/mapping.c:264
- get_sg_table.isra.0+0xe0/0x160 drivers/dma-buf/udmabuf.c:72
- begin_cpu_udmabuf+0x130/0x1d0 drivers/dma-buf/udmabuf.c:126
- dma_buf_begin_cpu_access+0xfd/0x1d0 drivers/dma-buf/dma-buf.c:1164
- dma_buf_ioctl+0x259/0x2b0 drivers/dma-buf/dma-buf.c:363
- vfs_ioctl fs/ioctl.c:51 [inline]
- __do_sys_ioctl fs/ioctl.c:874 [inline]
- __se_sys_ioctl fs/ioctl.c:860 [inline]
- __x64_sys_ioctl+0x193/0x200 fs/ioctl.c:860
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x35/0xb0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x44/0xae
-RIP: 0033:0x7f62fcf530f9
-Code: 28 c3 e8 2a 14 00 00 66 2e 0f 1f 84 00 00 00 00 00 48 89 f8 48 89
-f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01
-f0 ff ff 73 01 c3 48 c7 c1 c0 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007ffe3edab9b8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
-RAX: ffffffffffffffda RBX: 0000000000000000 RCX: 00007f62fcf530f9
-RDX: 0000000020000200 RSI: 0000000040086200 RDI: 0000000000000006
-RBP: 00007f62fcf170e0 R08: 0000000000000000 R09: 0000000000000000
-R10: 0000000000000000 R11: 0000000000000246 R12: 00007f62fcf17170
-R13: 0000000000000000 R14: 0000000000000000 R15: 0000000000000000
- </TASK>
+url:    https://github.com/intel-lab-lkp/linux/commits/Olivier-Masse/tee-Add-tee_shm_register_fd/20220811-220012
+base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
+config: i386-allyesconfig (https://download.01.org/0day-ci/archive/20220812/202208121326.FWVAzlch-lkp@intel.com/config)
+compiler: gcc-11 (Debian 11.3.0-3) 11.3.0
+reproduce (this is a W=1 build):
+        # https://github.com/intel-lab-lkp/linux/commit/2e8827973f200fdfe64366bec5a57686086f4672
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Olivier-Masse/tee-Add-tee_shm_register_fd/20220811-220012
+        git checkout 2e8827973f200fdfe64366bec5a57686086f4672
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        make W=1 O=build_dir ARCH=i386 SHELL=/bin/bash
 
-v2: Dont't forget to deregister if DMA mask setup fails.
+If you fix the issue, kindly add following tag where applicable
+Reported-by: kernel test robot <lkp@intel.com>
 
-Reported-by: syzbot+10e27961f4da37c443b2@syzkaller.appspotmail.com
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-Link: http://patchwork.freedesktop.org/patch/msgid/20220520205235.3687336-1-vivek.kasireddy@intel.com
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/dma-buf/udmabuf.c | 18 +++++++++++++++++-
- 1 file changed, 17 insertions(+), 1 deletion(-)
+All errors (new ones prefixed by >>):
 
-diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
-index c6e9b7bd7618..80ccdf96093f 100644
---- a/drivers/dma-buf/udmabuf.c
-+++ b/drivers/dma-buf/udmabuf.c
-@@ -287,7 +287,23 @@ static struct miscdevice udmabuf_misc = {
- 
- static int __init udmabuf_dev_init(void)
- {
--	return misc_register(&udmabuf_misc);
-+	int ret;
-+
-+	ret = misc_register(&udmabuf_misc);
-+	if (ret < 0) {
-+		pr_err("Could not initialize udmabuf device\n");
-+		return ret;
-+	}
-+
-+	ret = dma_coerce_mask_and_coherent(udmabuf_misc.this_device,
-+					   DMA_BIT_MASK(64));
-+	if (ret < 0) {
-+		pr_err("Could not setup DMA mask for udmabuf device\n");
-+		misc_deregister(&udmabuf_misc);
-+		return ret;
-+	}
-+
-+	return 0;
- }
- 
- static void __exit udmabuf_dev_exit(void)
+   In file included from <command-line>:
+>> ./usr/include/linux/tee.h:136:13: error: expected declaration specifiers or '...' before numeric constant
+     136 | } __aligned(8);
+         |             ^
+
 -- 
-2.35.1
-
+0-DAY CI Kernel Test Service
+https://01.org/lkp
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
