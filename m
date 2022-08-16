@@ -2,47 +2,50 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 38C135F58B4
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Oct 2022 18:59:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 344375F58B6
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Oct 2022 19:00:21 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4EE9C3F538
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Oct 2022 16:59:53 +0000 (UTC)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com (mail-eopbgr60074.outbound.protection.outlook.com [40.107.6.74])
-	by lists.linaro.org (Postfix) with ESMTPS id 63D7F3F1C8
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Aug 2022 09:06:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 464FB3F4FC
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Oct 2022 17:00:20 +0000 (UTC)
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com (mail-eopbgr140044.outbound.protection.outlook.com [40.107.14.44])
+	by lists.linaro.org (Postfix) with ESMTPS id CCCA23F5C2
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Aug 2022 11:20:52 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YyuWkgGYDiki/yJft1vnXPsssYED4jZ7gpy16ygm55DMQlAVP7FrkGZ3H9B15B8FQP3d8mgvoGEtEWt04tliq9oTVgo7ehH/y5Vt6oe6MOvY0h2NSIw8eI5zH7QW5ov1htPt9dodtMfV10Q60Z1+qYpQDFkKnvcqePpkE7vQmN7Rkf7RvdPSraqPstSEm1otSOeBtu1LunQixWBphegS+dY8T8CYh+3dWcUTxFzcD4YundhmUBoZIsj2l1WxtCxZ+tKxPWgfnUbZJxannX+ZEgbQn3HdCo2TzDtQ8HxDnweI/BGVkG2J8k8MZeKLVqMXSHedeB8OjY7WyZr98RrV5A==
+ b=fHJAyL70mYTQ/1uLXYJAjGdNp28ovRqNdpFiw20igMcBoR28cA7mRiodj/o/XbhCQuDsg6hmD0fDfmus7C1D7gMKV4EayxgEyXbD1estqrGSW6DHVMNkqA83KhHvsPAKIcDhVFQmhIO73/osJ7RRE9g7QegVf3iJAummEQQf3gZzsFrpF/fSU0YXNFUacjUbFublbJIRoL+nUQDlI22fMh+jizcFzPEDaZGVMVJUww+wVGTWURMmr9ExcHcMO5VRqjT2V/PDRxxg0gT2B4zHDIx2iLOF+ipIYCzd9n+3d8lTUyUhKikz0TBfqyLENqce3OtjlMEHkEC3x90VN3alRw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=q3y/Y5XJbccaxB8Sdwx9sH9NZeC8dm8psE3hgAMmSCo=;
- b=MA8r413b07m3CrpbqBjIMhhGPMzmY7jANEmnjmeR81xcold3WFZBI1hocUdxNfjLJNfNfzMWOVFCZrDz8JxLEHJO7Ib/ErvtMpxgWMlIjXFoAmdDk8lK8w6XJNdf7PNuPdFvhl4xP5tD93kt28rV31/J6SEQ7tYCVb65HjyeylvVACZLKrM1JpmCNlqx+qus5mt+eEW62yzRHnfuIqlacyLVNz9nau+TO/023DLGhOmdD4Rx4CjylFXleO8tuI7CdHh1TY5GJkZeHAB1RHM4CQdd08mNXQdYeW1z1cAvZoxETDO5HohHQoXWj1R3TR+U+oc0OCiivH667gHtEjCQyw==
+ bh=mBbkGqfH4Mc36aohrKz8HsxMmkMC2nqCivIr63yDziU=;
+ b=d6sD6u5pKmOUTBWZaBUf1OTxI7p7B5nFrxCCx4HFRqJNblRhtmUogEMPFkXaFK42FMF0r6Q5OHUaLCpUMdLz3fEABDy+L1MAf2XTECLE8U6F5yxYSJIFZf5ahd6R5afqT9TVcU3AfM+BVoYYx2nK1/KI4spxXxeIv5bKw6jfU19dXXyjIGlG7MYcNx6jLlnKBh0u09y1xPy1Vi5p64GPRbmntNFp4kaheI0o9QqzI4nxx2Fa3FvDzBcg2yV4M4WMmFdyLGHB/a1+Cik4O4V5MufQuMFR9iheDq/KArgwPqb/46XxBimF2jRPLmwD8sUA1/Gggg38UbkpEfs4KRbg5Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
  header.d=nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=q3y/Y5XJbccaxB8Sdwx9sH9NZeC8dm8psE3hgAMmSCo=;
- b=SbAks66CgU7sgWaFtz2n3PAdXpDnJUe7hk4RHBTJwBOEh3iI9Wqcuww+I2M0N6tIHpQzWG+y7kbqeWAkuQ5jtbHjSkUoKI3cT9xLyADY8zqGjgHi4H+Bm+9uHY4BMZ/X8iEzc4+7cEsK+E1EfPtsA0MdiD3LCYkxF2IvqKficCY=
+ bh=mBbkGqfH4Mc36aohrKz8HsxMmkMC2nqCivIr63yDziU=;
+ b=Em4NEFksGAdbQDxQUwCWI+2Lu07sfE0Z7qJaYaY4eIBPMipFpRxnglHXy2vMUOArgmjXi3kheWkddriS8L9d2yuWNgxEFA/ucuvHcfJjGXhnvA0oMbVsN4lEzPsSRvXDe9bpkpOmh78FfDTA3o4ouJWnNnPsR2kCTvmVX/NQ/WY=
 Received: from AM6PR04MB6743.eurprd04.prod.outlook.com (2603:10a6:20b:f1::11)
- by HE1PR04MB3114.eurprd04.prod.outlook.com (2603:10a6:7:20::32) with
+ by AM6PR04MB6517.eurprd04.prod.outlook.com (2603:10a6:20b:f5::12) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5504.28; Tue, 16 Aug
- 2022 09:06:57 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5504.27; Tue, 16 Aug
+ 2022 11:20:50 +0000
 Received: from AM6PR04MB6743.eurprd04.prod.outlook.com
  ([fe80::c27:3940:d92e:acd6]) by AM6PR04MB6743.eurprd04.prod.outlook.com
  ([fe80::c27:3940:d92e:acd6%4]) with mapi id 15.20.5525.011; Tue, 16 Aug 2022
- 09:06:57 +0000
+ 11:20:50 +0000
 From: Olivier Masse <olivier.masse@nxp.com>
-To: "jens.wiklander@linaro.org" <jens.wiklander@linaro.org>
-Thread-Topic: [EXT] Re: [PATCH v2 0/1] tee: Add tee_shm_register_fd
-Thread-Index: AQHYrlglkVt62yOLKU2bEUe77YcK2K2xNLAAgAANWwA=
-Date: Tue, 16 Aug 2022 09:06:56 +0000
-Message-ID: <0cd2fbe9eac3eff50ed22fcd7ac6742ff46064fd.camel@nxp.com>
-References: <20220812143055.12938-1-olivier.masse@nxp.com>
-	 <CAHUa44EgA1btRyj2ByooyLr9Q+8AmW=9EfjtQFxyr7DuCXASvA@mail.gmail.com>
-In-Reply-To: 
- <CAHUa44EgA1btRyj2ByooyLr9Q+8AmW=9EfjtQFxyr7DuCXASvA@mail.gmail.com>
+To: "brian.starkey@arm.com" <brian.starkey@arm.com>
+Thread-Topic: [EXT] Re: [PATCH 1/3] dma-buf: heaps: add Linaro secure dmabuf
+ heap support
+Thread-Index: AQHYqNLEB1kEEMDN2EiJXHn7b90D762gcg6AgASkiYCABmvpAIAF7/SA
+Date: Tue, 16 Aug 2022 11:20:50 +0000
+Message-ID: <de46324d8fa8fb6a8dda4641e531d30842410744.camel@nxp.com>
+References: <20220805135330.970-1-olivier.masse@nxp.com>
+	 <20220805135330.970-2-olivier.masse@nxp.com>
+	 <20220805154139.2qkqxwklufjpsfdx@000377403353>
+	 <7e61668164f8bf02f6c4ee166e85abc42b5ee958.camel@nxp.com>
+	 <20220812163922.v7sf3havi5dpgi5u@000377403353>
+In-Reply-To: <20220812163922.v7sf3havi5dpgi5u@000377403353>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -51,71 +54,71 @@ x-mailer: Evolution 3.28.5-0ubuntu0.18.04.2
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=nxp.com;
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: c839e74c-e71a-4f64-6a2f-08da7f66abb5
-x-ms-traffictypediagnostic: HE1PR04MB3114:EE_
+x-ms-office365-filtering-correlation-id: fa45d1bc-75f4-498c-43f3-08da7f796013
+x-ms-traffictypediagnostic: AM6PR04MB6517:EE_
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
 x-microsoft-antispam-message-info: 
- 03E+iqwbQy+UAezGBG0mZvvN3ozvu9deDmiqPhVsWBJlWme/x17WhHExexubcTSCYEmI4ShOFNjmWMs7J8T9GhV/88iQENtnb1ZIv4dOxY6V5tFuMG4T8Vt1iOF8eU36zFt8MwVOjMA9ycTROAyoMQwfpP5zdCMvD5arXkrnoGd3eKGdCGVmzQm/LpPOzDU0OlJ8dDjVRq03vK5FPirlhcm0AGxAGnHsZfhZA7LzYJhc9I0GiO1l4nJvdd81DWjdkeUoc4hgOebS8hGtUEQZHacmbElVi9RWFjxdWvvbJiz7hMatHlDAI1kxM+UbeH+HyVNMWuzAKxJ8WGuZ1u2tBgZAiF+SACMS7tNbUuOW7XulEgpJjoR2iIpBu0aEvxnYmuh76rmRRiX+9mKnHhSEz5CHO/Hcj0OG+1NY+Nw8NA+8ErcTb56uV+OTGtvR6XcqAoCbWaGazFjJMruIWfQAxDLbyGHEJkgTN96LruqZuVTm4tWY9rz5iVrh6TNZDz1tXaetFQgoVDSj6KC5RBK8TiP1oFrvd2p5bq71hukYRwtDJszT03aP7JaGCPnazz9m3rPEffFFR4dcIZEszQPTuN7FTkZyOzRShEo09eN8iOYgohdhwZihHCzmjpzTVeZRSxh988wVXEFnl8IeU1Z12iOReKbv5Bt/CPygtQCz1EDXk59nquCC6fC+9wy6UTpfps1LJui0xPDsh+rXZbNsrns+C8XshElB7yWQvP5EBKYSun4tZhr3LNHvMYAGuJku888iS9LsbFdfNAzpyWQ7Za33dnAeq60MPwu32y+RIA+JhFY2+Tl0yRh6BOV2aNvgTfocoh5VMTlvbcc2ATrXcg==
+ AZ9eVd3e0OHiNOQjzY0Ig1hDDi6/E0BoHSsQTVvTMm+XCmclTHIm5SJfgLt5glkulw8n7fyVS0OrUs1ccc9k+ITDzEgx042wZxYFE8KL42ZpgjKB2jhnxJBS/6pH+nOCuh/FtGr/RLof8vBwod2D844IdVsQhKaEOIYTVYYIjQfMZFCtrxM6ZeO59tfziQnGEMLa364fBRq2mtN0nkPd0dd3ztPgqNt1a8gVULuqxWqkw84g9As1S3AykDtpF32mSoLw2Lkvhfe5a1asDcDjY9WqxQSCUXhZQ2f+/OjkmaSaC1uO7q4/eS9d+vFPFea7lwDp/F3ir1SWxCLTnP2M8XjvwxIbDaJx2ckaytNhHIaTMqM3RXRlr2ottJVQez4stoWl2Wx3ghK9+K1JsLwUjPwXXJ09RBVBTApku2kHTugbyB4neZcnW5HuqPJNrj5a4vphcre8E4krLHnVRDDedZeHsIZz3rz4hu8EUokdzlWL6wATsi+BfLJIIHxYhhuy3j8dZbKHPMA2+aAfGWRT9CPxPIZR6AXrIeZOIwPNBULR7KejiO+ZO3HkZqYem0r2eukMowaz2bmpiL/tMnmFA8/EqmigTBcbFikXp5sLlMTlpXiV0TDum0lLSgF0oTESaS7FyiEpi7wVZGdHglygoF/xjzLa8Gjx1NV0GmHod140bvH60Iqf6uuS2I2o3pswqTJT4GaFelQBq2+r9TpPPLftmajn3npxFefxfqDZa/hINlWUJ/ZFyJHgvh1BQ7YONR+s27WxljuUQhw6E7WfWkHcjgLXCRBEHb8ZfU9McKuRIDqQ1jS/7Upa7bflJOb8cYrdiRqIiW9Vt0StZAjJ2YNgBsIWPHHBmgOIwAyiQcv2YGiN7u0KzQgeBO8vFSka1ICPoFN92uJs1UQIKElLCg==
 x-forefront-antispam-report: 
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR04MB6743.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(376002)(346002)(366004)(39860400002)(396003)(136003)(71200400001)(186003)(2616005)(8676002)(6512007)(6506007)(26005)(53546011)(66946007)(36756003)(6486002)(478600001)(41300700001)(966005)(4326008)(86362001)(38070700005)(91956017)(122000001)(83380400001)(316002)(7416002)(45080400002)(8936002)(2906002)(5660300002)(44832011)(64756008)(66556008)(76116006)(66446008)(6916009)(38100700002)(54906003)(66476007)(99106002);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM6PR04MB6743.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(39860400002)(376002)(136003)(396003)(346002)(366004)(4326008)(45080400002)(54906003)(8676002)(966005)(6486002)(5660300002)(41300700001)(186003)(44832011)(2906002)(6506007)(36756003)(26005)(6512007)(2616005)(6916009)(38070700005)(83380400001)(76116006)(71200400001)(91956017)(66446008)(8936002)(316002)(66476007)(66946007)(86362001)(66556008)(478600001)(38100700002)(64756008)(122000001)(99106002);DIR:OUT;SFP:1101;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0: 
- =?iso-8859-15?Q?Vvq+iwnWaczp8I8kGqllEizRg4J3IvgxOFleEYKkA7FIN4qFWtZEIKuf6?=
- =?iso-8859-15?Q?KOMeaJwCzj3zrQ20+au7RxZHwmjLmbFxiYQWtFyt2AVsE0YPW9qcYrmqN?=
- =?iso-8859-15?Q?sNbxrqjiDePjZme5z/85uxHiyCXPdz/a/SohmPE2sRGILAlevdH6GyIoH?=
- =?iso-8859-15?Q?/6G6aPSzrgWjIdpsaou+2zLbDqhgPOsL3/6aNDVcJG0NIM7K+e+g739oH?=
- =?iso-8859-15?Q?ZERHCMsUiAm3jQvWUwyMLqHGyRzDIJjU6bsrU4SGyzDo4FgVatm0UODT8?=
- =?iso-8859-15?Q?4+VeHpGLvdYqnAfDv7YKvzBdwaACehu7fKlFXhNRCFmADvDlY0vmzzDem?=
- =?iso-8859-15?Q?RZktTVzrPxisnR+oK9X8qNHIugD//cKzvdKiLFaaT5OWDYpEhDeQJzuN2?=
- =?iso-8859-15?Q?E2HiGSrS8/hNtY47qF5qa1YJ50BZ7T403AR45l8/7RAHrGXgLSG8fJTFb?=
- =?iso-8859-15?Q?2Pwf/BQpLUt9LuvKKC59o+c0XT381A61OAKji1oJuz/X4BxwtYOa/PuRu?=
- =?iso-8859-15?Q?X8Ri+AERWX9VAp55c8hczpmGoayPTU9gtaMAuwo9CbtWqyP1lnu+rGd+M?=
- =?iso-8859-15?Q?mJ0UhTC5Ppw/5WUamkQX72Ogt+yxNyYttA5hjuSU1yx/XKGyl6i1Jpdvv?=
- =?iso-8859-15?Q?Yo6QqtWZB1idMu8qaS2fEeeMZxhD8bzJn4H6KGUmBoENo2sGdWntMUy1u?=
- =?iso-8859-15?Q?RQBMumoN0asVsrw6S4OFJCZWeLvTzoQriJeQZn1MsCQEeyxXP9g0IEGz8?=
- =?iso-8859-15?Q?LRFgmay5kqZ7FouSWZACU8qXD9jdpzFQRxHTfmNqm6lolBhBpszutv8Gz?=
- =?iso-8859-15?Q?9LX1mKpWvUlNrdrkcCUT2P5ym5Do6b/CQ++CsYUFgm5yjxu4fs7ICo0R4?=
- =?iso-8859-15?Q?4FeGt0xESwJFtXqsdfCcj7+CCBp7HimTEQ9Q3bEeiv1LDmj806+SEuQUx?=
- =?iso-8859-15?Q?79xF6XqOuLqFC+ygXPqfz3xjhtXqXn+mcw8jRVl8cv5Mxwud3H+To8Asl?=
- =?iso-8859-15?Q?ECJ+xzyUEQWmX4xUazqqCJXHZ9sTtPv0cA5GI6Gw+TQrBMIg/1j9q3VM9?=
- =?iso-8859-15?Q?XNdnNIzMqk26kMSwszxY/kyB3TfENIQVxiaUXxs6zcwHoP8lAcbwzSAbJ?=
- =?iso-8859-15?Q?k46itJcaAcmWiGj+iRP/3q0TbN+Ly4N8nOwCfORfR6S75wtDTNhYidzn7?=
- =?iso-8859-15?Q?Y1p4C6zlOrYl3DRi2ISw5Pb3IlRWuOHpt3m8CINnVN9qv9/giXsnSeEXV?=
- =?iso-8859-15?Q?31v5jID1SvSKGzyb82MadbP5NPcBmq+7qd6g/u24CVZpHWFYb/qdq+Y/P?=
- =?iso-8859-15?Q?T0aSq3NBE5+p+PavV816XomIiaks42KdR+nAKOg4MpWZaHar1EqdfZjlw?=
- =?iso-8859-15?Q?LH+YgLF2P8nrB5t4LtT5Q7SWbHdyzO/Y4l95VfJ+kRC4S5r6grQKuT4Yu?=
- =?iso-8859-15?Q?+DK3EXyxLYZgHsqhNSrDQgZKoCEDgNBhThz8clA0leZSgPC7fuKEE9+tB?=
- =?iso-8859-15?Q?NPVcjlyQj1StGXMl20HaMtsXlker5hxYk6QRME6ZwxRqo2uctkODXrbri?=
- =?iso-8859-15?Q?mpvCkwIwuPPrhJJT+7AyL8kEzilpItSX/qOn2KWJh6tlpbPfM6vlpW0hO?=
- =?iso-8859-15?Q?6IhGvwbxKbRnlXHCG7GOVOxwHvan8dihdRhmV4c9xyxxPkZp73JR3Jc9S?=
- =?iso-8859-15?Q?4PDD?=
-Content-ID: <A01E2C74227620439EF2D174D5B2867E@eurprd04.prod.outlook.com>
+ =?iso-8859-15?Q?VY8YLuESmcW8ddzqz4YkagK014TaXTKcgAf5OPZjAdraWDUwJXT4S/x6r?=
+ =?iso-8859-15?Q?vtcrkv8314v86WSDnmB+PYApM034LE8jKe8zeeVG2PqBiaUyn+0fzJPQA?=
+ =?iso-8859-15?Q?kyLm1qQB3cx4m9mxVMiMuAis8f7FD1Xn95cYHGG5d8B0sCOqytb6QDH6y?=
+ =?iso-8859-15?Q?QS49ftKrFhlabLNg772PZNUfbhyQSGLVNgLtxHHN8/sGc/JP1JdgKLGyv?=
+ =?iso-8859-15?Q?yESocqQsFOo9yZORrcjKNN9PVPKj+iIguhf9sIwIkOTnu3KmOr8xTW64S?=
+ =?iso-8859-15?Q?3QULVkJs35L9dLvYK2578ntU79I10u4KWynJc2f5heE9sO4/Tl9oM+yq3?=
+ =?iso-8859-15?Q?MPQuTAWajszYTk5weMhQLwD8vMT4RnG+kg8nGGGglkOy2anbYhbnI9TJq?=
+ =?iso-8859-15?Q?neaH4X2LTE5lUxNeU4EoqgOMouu48TdICx6A/t4IioiMexcwUDRB9uJKv?=
+ =?iso-8859-15?Q?cNzqIPXPqbckrxXlBxfMuQxgh/5TyVsZWUMIqikYcFDShISvZvfr5hdEH?=
+ =?iso-8859-15?Q?2cTn48NQSrQqc6eX40QvySFtHb0oUK3ezHgbRqjmkGQQUNHJ7Xl3oWrPg?=
+ =?iso-8859-15?Q?N7WrqndBX4NfO/gVBl/QBKNTV/Z+TBnFcZvaA069GvBjHt9a82gG+bsNz?=
+ =?iso-8859-15?Q?G7Gtfi67T2278ZnmnkkI38wrTX0wCNTvILTRXnr09s8MRMxL54J0yBdpV?=
+ =?iso-8859-15?Q?EcqzCkwulNf45Vt4Rg0FJ2ufjdSSnmWW7INKENUlf3S1bxa+WHcER8f67?=
+ =?iso-8859-15?Q?7KI/XzhnmKXvslj6pl5oBf+/IFQT1opv0uunRGhX8BTg3Umh3KOHGaT/w?=
+ =?iso-8859-15?Q?lZsvgsYqZ9aFVU8ak0C6G77GCnMAMF/+WZXDy4Wl/6kkVXmcCDbTDI7wO?=
+ =?iso-8859-15?Q?IZxKxMe38YCJiAFlyJ0jZQrrQUR8uhWI6Prs95s6bTzrGeXlFrFIgsXkV?=
+ =?iso-8859-15?Q?XBzwbtvI1vmNN/2Cx1QvI/tHLYuaPNNPKt67h69KMrXJ2P69d4j6jAq/I?=
+ =?iso-8859-15?Q?F7Gcg+fDC6dLkNn8tP/wVV0wDKM7me+hp5s2z/bHAjGrXCJL6xF2LLgOL?=
+ =?iso-8859-15?Q?MWIO7CL/hRkIpmiIrxRGf8qQyO73DbGntGRDxKI0uIz9DCIW+PgD9cnbi?=
+ =?iso-8859-15?Q?vNwQ81zed9Uu/+j3QwHcmKtheudaMWIKq5DSqsiBCE+F+Pdca2udBnnnf?=
+ =?iso-8859-15?Q?TErB7VUk2XOZGfAvGNcfsidOoUlu9Dv0GPny/QE1nrhb/GiPhvNauv7yZ?=
+ =?iso-8859-15?Q?N3S6MwAro8HktT1dJOeIcwIpT/H7K+7UKC3d6wH7D2dalKVrvS2Gpxz4I?=
+ =?iso-8859-15?Q?Pe+i4gY9tOxzX8QZvpokkZfWAD8X3heFcB8Vngc6KLwrpH0STep++Hx56?=
+ =?iso-8859-15?Q?/hcurGcRZv+PUmew2CN7H3HrU6GqZXW4/WTHZdI2LJzJLHfgX/2du6aP2?=
+ =?iso-8859-15?Q?qWHijihuaVI8kJ0YgO0reCwBMWcNHLhq7sLf93zc5m+HxP78MNmYqJdDY?=
+ =?iso-8859-15?Q?5WPraTTsqXwZIztt99+CzbGwFCPi1hAmHf1bLmOrpWXV+W8pDWjPSyWs/?=
+ =?iso-8859-15?Q?vpXMubSAck34v7hgtGu9vIOuOBfw2jGRHVkKy1kENDD5ecFNjhzUEzv9Y?=
+ =?iso-8859-15?Q?JYhFlVK0eAkN4Bcuo/5RqmsUdwY13+yH+amgI/M/09YiqaHL01cc7L0yr?=
+ =?iso-8859-15?Q?JypI?=
+Content-ID: <735FFE6E4F11EF4BAD83CA414469C0D3@eurprd04.prod.outlook.com>
 MIME-Version: 1.0
 X-OriginatorOrg: nxp.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: AM6PR04MB6743.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c839e74c-e71a-4f64-6a2f-08da7f66abb5
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Aug 2022 09:06:57.0062
+X-MS-Exchange-CrossTenant-Network-Message-Id: fa45d1bc-75f4-498c-43f3-08da7f796013
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Aug 2022 11:20:50.5835
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: /mpJ2eZCnmi7GXXIs4wBXPzLLugS2f0vBXbropqHGcvSOPrUDf8kV7hw4nDjQUDXcl+//VO+7t2uohMhYyXS7A==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR04MB3114
+X-MS-Exchange-CrossTenant-userprincipalname: Lry1cBm68VfE46vpR5J7sI3h57cQANr+llcgfSEDrFsh8fV59XuWGrYj2g6Vx9vEpCT6NsLDnUIvDfR+Z/jVqg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR04MB6517
 X-MailFrom: olivier.masse@nxp.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: UIT3R2CNSQYDFMZC3JZFYLRBPCHVJP7H
-X-Message-ID-Hash: UIT3R2CNSQYDFMZC3JZFYLRBPCHVJP7H
-X-Mailman-Approved-At: Wed, 05 Oct 2022 16:58:57 +0000
-CC: "sumit.garg@linaro.org" <sumit.garg@linaro.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "christian.koenig@amd.com" <christian.koenig@amd.com>, =?iso-8859-15?Q?Cl=E9ment_Faure?= <clement.faure@nxp.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "op-tee@lists.trustedfirmware.org" <op-tee@lists.trustedfirmware.org>, "etienne.carriere@linaro.org" <etienne.carriere@linaro.org>
+Message-ID-Hash: I35AKCI4IEKVG5M7OGQS4MPDWDRTIXBZ
+X-Message-ID-Hash: I35AKCI4IEKVG5M7OGQS4MPDWDRTIXBZ
+X-Mailman-Approved-At: Wed, 05 Oct 2022 16:58:58 +0000
+CC: "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "christian.koenig@amd.com" <christian.koenig@amd.com>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "nd@arm.com" <nd@arm.com>, =?iso-8859-15?Q?Cl=E9ment_Faure?= <clement.faure@nxp.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "benjamin.gaignard@collabora.com" <benjamin.gaignard@collabora.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [EXT] Re: [PATCH v2 0/1] tee: Add tee_shm_register_fd
+Subject: [Linaro-mm-sig] Re: [EXT] Re: [PATCH 1/3] dma-buf: heaps: add Linaro secure dmabuf heap support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UIT3R2CNSQYDFMZC3JZFYLRBPCHVJP7H/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/I35AKCI4IEKVG5M7OGQS4MPDWDRTIXBZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -125,58 +128,231 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi Jens,
+Hi Brian,
 
-On mar., 2022-08-16 at 10:17 +0200, Jens Wiklander wrote:
+
+On ven., 2022-08-12 at 17:39 +0100, Brian Starkey wrote:
 > Caution: EXT Email
 > 
-> Hi Olivier,
+> Hi,
 > 
-> On Fri, Aug 12, 2022 at 4:31 PM Olivier Masse <olivier.masse@nxp.com>
-> wrote:
+> On Mon, Aug 08, 2022 at 02:39:53PM +0000, Olivier Masse wrote:
+> > Hi Brian,
 > > 
-> > Add a new ioctl called TEE_IOC_SHM_REGISTER_FD to register a
-> > shared memory from a dmabuf file descriptor.
-> > This new ioctl will allow the Linux Kernel to register a buffer
-> > to be used by the Secure Data Path OPTEE OS feature.
+> > On ven., 2022-08-05 at 16:41 +0100, Brian Starkey wrote:
+> > > Caution: EXT Email
+> > > 
+> > > Hi Olivier,
+> > > 
+> > > Thanks, I think this is looking much better.
+> > > 
+> > > I'd like to know how others feel about landing this heap; there's
+> > > been
+> > > push-back in the past about heaps in device-tree and discussions
+> > > around how "custom" heaps should be treated (though IMO this is
+> > > quite
+> > > a generic one).
+> > > 
+> > > On Fri, Aug 05, 2022 at 03:53:28PM +0200, Olivier Masse wrote:
+> > > > add Linaro secure heap bindings: linaro,secure-heap
+> > > > use genalloc to allocate/free buffer from buffer pool.
+> > > > buffer pool info is from dts.
+> > > > use sg_table instore the allocated memory info, the length of
+> > > > sg_table is 1.
+> > > > implement secure_heap_buf_ops to implement buffer share in
+> > > > difference device:
+> > > > 1. Userspace passes this fd to all drivers it wants this buffer
+> > > > to share with: First the filedescriptor is converted to a
+> > > > &dma_buf
+> > > > using
+> > > > dma_buf_get(). Then the buffer is attached to the device using
+> > > > dma_buf_attach().
+> > > > 2. Once the buffer is attached to all devices userspace can
+> > > > initiate DMA
+> > > > access to the shared buffer. In the kernel this is done by
+> > > > calling
+> > > > dma_buf_map_attachment()
+> > > > 3. get sg_table with dma_buf_map_attachment in difference
+> > > > device.
+> > > > 
+> > > 
+> > > I think this commit message could use a little rework. A few
+> > > thoughts:
+> > > 
+> > > * The bindings are in a separate commit, so seems strange to
+> > > mention
+> > >   here.
 > > 
-> > Please find more information here:
+> > what about:
+> > "add Linaro secure heap compatible reserved memory: linaro,secure-
+> > heap"
 > > 
-https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fstatic.linaro.org%2Fconnect%2Fsan19%2Fpresentations%2Fsan19-107.pdf&amp;data=05%7C01%7Colivier.masse%40nxp.com%7C20ddb873be8f4cd89b5408da7f5fda26%7C686ea1d3bc2b4c6fa92cd99c5c301635%7C0%7C1%7C637962346897373445%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=cMbuihC0Hat4DEVORzcGhzwjO%2FxclAW43AIcvR8yReE%3D&amp;reserved=0
-> > 
-> > Patch tested on Hikey 6220.
 > 
-> What's new in this V2?
+> I'd say something like:
+> 
+> Add a dma-buf heap to allocate secure buffers from a reserved-memory
+> region.
+> 
+> ..snip
 
-Just updated the cover letter and minor change to fix a build error
-with gcc-11 for x86 architecture:
->> ./usr/include/linux/tee.h:136:13: error: expected declaration
-specifiers or '...' before numeric constant
-     136 | } __aligned(8);
-         |             ^
+ok right.
+
+> 
+> > > > +
+> > > > +static struct sg_table *secure_heap_map_dma_buf(struct
+> > > > dma_buf_attachment *attachment,
+> > > > +                                             enum
+> > > > dma_data_direction direction)
+> > > > +{
+> > > > +     struct secure_heap_attachment *a = attachment->priv;
+> > > > +
+> > > > +     return a->table;
+> > > 
+> > > I think you still need to implement mapping and unmapping using
+> > > the
+> > > DMA APIs. For example devices might be behind IOMMUs and the
+> > > buffer
+> > > will need mapping into the IOMMU.
+> > 
+> > Devices that will need access to the buffer must be in secure.
+> > The tee driver will only need the scatter-list table to get dma
+> > address
+> > and len. Mapping will be done in the TEE.
+> > Please find tee_shm_register_fd in the following commit
+> > 
+https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fgithub.com%2Flinaro-swg%2Flinux%2Fcommit%2F41e21e5c405530590dc2dd10b2a8dbe64589840f&amp;data=05%7C01%7Colivier.masse%40nxp.com%7C6b3d47f1e15c41a8cf7108da7c813ef6%7C686ea1d3bc2b4c6fa92cd99c5c301635%7C0%7C1%7C637959191795668899%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=OKZhaNevD5dj7Wjm6zbZlij0mPA9XYyio1NAN3VjTVM%3D&amp;reserved=0
+> > 
+> > This patch need to be up-streamed as well.
+> > 
+> 
+> Interesting, that's not how the devices I've worked on operated.
+> 
+> Are you saying that you have to have a display controller driver
+> running in the TEE to display one of these buffers?
+
+In fact the display controller is managing 3 plans : UI, PiP and
+video. The video plan is protected in secure as you can see on slide
+11:
+https://static.linaro.org/connect/san19/presentations/san19-107.pdf
+
+The DCSS (display controller) is able to read from the protected secure
+heap and composition result is send directly to the HDMI/HDCP port.
+
+
+>  If everything
+> needs to be in the TEE, then why even have these buffers allocated
+> by non-secure Linux at all?
+
+The TEE is only doing decryption using the HW Crypto Accelerator
+(CAAM).
+The CAAM will read from a non protected encrypted buffer to write clear
+content to a secure buffer allocated with DMABUF and mapped in secure
+by OPTEE OS.
+
+> 
+> I would have expected there to be HW enforcement of buffer access,
+> but for the display driver to be in non-secure Linux. That's how
+> TZMP1 works: 
+> https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fstatic.linaro.org%2Fconnect%2Fhkg18%2Fpresentations%2Fhkg18-408.pdf&amp;data=05%7C01%7Colivier.masse%40nxp.com%7C6b3d47f1e15c41a8cf7108da7c813ef6%7C686ea1d3bc2b4c6fa92cd99c5c301635%7C0%7C1%7C637959191795668899%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=XVpI93dXYu%2BGswLE8dcYboq%2FAWzSJn9j9LMlngpr238%3D&amp;reserved=0
+> 
+> Looking at this SDP presentation, that also seems to be the case
+> there: 
+> https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fstatic.linaro.org%2Fconnect%2Fsan19%2Fpresentations%2Fsan19-107.pdf&amp;data=05%7C01%7Colivier.masse%40nxp.com%7C6b3d47f1e15c41a8cf7108da7c813ef6%7C686ea1d3bc2b4c6fa92cd99c5c301635%7C0%7C1%7C637959191795668899%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=5Ec61NC1f0UQU%2F3BEURZQhEBrZ%2FuvJ1vaoSN4ChMn%2Bw%3D&amp;reserved=0
+> 
+
+Indeed, TZMP1 is similar to our implementation.
+
+> Based on those presentations, I think this heap should be
+> implementing
+> map_dma_buf in the "normal" way, using the DMA API to map the buffer
+> to the device. It's up to the TEE and HW firewall to prevent access
+> to those mappings from non-secure devices.
+
+In fact, our devices (VPU and DCSS) do not need any mapping, but only
+the physical address of buffers which need to be contiguous.
+The VPU decoder, run by the CPU, read video meta data from a non
+protected buffer and send physical memory address of encoded buffer to
+the VPU HW.
+As well, the DCSS get physical address of contiguous decoded video
+buffer to do the composition.
+
+> 
+> My understanding is:
+> 
+> * The memory region should never be mapped or accessed from the host
+>   CPU. This is not a security requirement - the CPU will be denied
+>   access by whatever hardware is enforcing security - but any CPU
+>   accesses will fail, so there is no point in ever having a CPU
+>   mapping.
+
+agree with that.
+
+> * The allocated buffers _should_ be mapped to devices via
+> map_dma_buf.
+>   Again the HW enforcement will prevent access from devices which
+>   aren't permitted access, but for example a display controller
+>   may be allowed to read the secure buffer, composite it with other
+>   buffers, and display it on the screen.
+
+yes, in could be done for a more generic implementation.
+
+> 
+> Am I wrong? Even if SDP doesn't work this way, I think we should make
+> the heap as generic as possible so that it can work with different
+> secure video implementations.
+> 
+> > 
+> > > 
+> 
+> .. snip
+
+alright, I get your point
+
+> 
+> > > > +
+> > > > +RESERVEDMEM_OF_DECLARE(secure_heap, "linaro,secure-heap",
+> > > > rmem_secure_heap_setup);
+> > > 
+> > > Is there anything linaro-specific about this? Could it be
+> > > linux,secure-heap?
+> > 
+> > for now, it's specific to Linaro OPTEE OS.
+> > but in a more generic way, it could be
+> > linux,unmapped-heap ?
+> 
+> If these buffers can never be mapped, not to the CPU nor to devices,
+> then actually I don't see why it should be a dma-buf heap at all.
+> 
+> If this is just an interface to associate some identifier (in this
+> case an fd) with a region of physical address space, then why is it
+> useful to pretend that it's a dma-buf, if none of the dma-buf
+> operations actually do anything?
+
+in our previous implementation, we were using unmapped ION buffer to be
+able to send an opaque fd to the TEE driver which could then be mapped
+in secure by OPTEE.
+Transitioning from ION to DMABUF heaps, our retaining option was to
+create a new heap type.
+
 
 Best regards,
 Olivier
 
 > 
-> Thanks,
-> Jens
+> Cheers,
+> -Brian
 > 
 > > 
-> > Etienne Carriere (1):
-> >   tee: new ioctl to a register tee_shm from a dmabuf file
-> > descriptor
-> > 
-> >  drivers/tee/tee_core.c   | 38 +++++++++++++++
-> >  drivers/tee/tee_shm.c    | 99
-> > +++++++++++++++++++++++++++++++++++++++-
-> >  include/linux/tee_drv.h  | 11 +++++
-> >  include/uapi/linux/tee.h | 29 ++++++++++++
-> >  4 files changed, 175 insertions(+), 2 deletions(-)
-> > 
-> > --
-> > 2.25.0
-> > 
+> > > 
+> > > Thanks,
+> > > -Brian
+> > > 
+> > > > +
+> > > > +module_init(secure_heap_create);
+> > > > +MODULE_LICENSE("GPL v2");
+> > > > --
+> > > > 2.25.0
+> > > > 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
