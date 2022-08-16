@@ -2,48 +2,63 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0782C5F446F
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Oct 2022 15:40:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D6DB45F4477
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Oct 2022 15:41:15 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1D2A53EBF7
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Oct 2022 13:40:04 +0000 (UTC)
-Received: from mailgw.kylinos.cn (unknown [124.126.103.232])
-	by lists.linaro.org (Postfix) with ESMTPS id 7DFB63F5C0
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Aug 2022 09:49:24 +0000 (UTC)
-X-UUID: 3f618f1b57eb4e66bf4b267ffaa0b010-20220815
-X-Spam-Fingerprint: 0
-X-GW-Reason: 13103
-X-Policy-Incident: 5pS25Lu25Lq66LaF6L+HMTDkurrpnIDopoHlrqHmoLg=
-X-Content-Feature: 
-	ica/max.line-size 103
-	audit/email.address 2
-	dict/adv 1
-	dict/notice 2
-	meta/cnt.alert 1
-X-UUID: 3f618f1b57eb4e66bf4b267ffaa0b010-20220815
-X-User: oushixiong@kylinos.cn
-Received: from localhost.localdomain [(116.128.244.169)] by mailgw
-	(envelope-from <oushixiong@kylinos.cn>)
-	(Generic MTA)
-	with ESMTP id 1275458966; Mon, 15 Aug 2022 16:14:47 +0800
-From: oushixiong <oushixiong@kylinos.cn>
-To: Dave Airlie <airlied@redhat.com>
-Date: Mon, 15 Aug 2022 16:14:30 +0800
-Message-Id: <20220815081430.2919066-1-oushixiong@kylinos.cn>
-X-Mailer: git-send-email 2.25.1
+	by lists.linaro.org (Postfix) with ESMTP id EC7713F4B3
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Oct 2022 13:41:14 +0000 (UTC)
+Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
+	by lists.linaro.org (Postfix) with ESMTPS id E6DE13F496
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Aug 2022 08:18:07 +0000 (UTC)
+Received: by mail-pg1-f172.google.com with SMTP id d71so8616386pgc.13
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 16 Aug 2022 01:18:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc;
+        bh=yiBicl/xtck+sUvDa6HbwVr3KCpBiQ3kP9sWsGd0v+M=;
+        b=uT3jiYPYFRn7lq9viYTDzroDVdXL8pYjwBzK6ZhdPWJ3ales5ct7XINz7ercxdfD7Y
+         rvax/AK/RPxyH9Qyvj6cKGyu5Z9eSVcZeTL3ghWM02DMNeRTu1dNZ7beU/wveqK5kb+b
+         cgTDsiraqeHQID8d9ZRhhEi710zRj0h9tNoJIy/ZIZdDiEU/5Tq3uSnDDCMR184RYyCg
+         LVWxI+KwzGdKQ6ji/qPZRP+nel4pcCCfqXweiR63F69BqC+Nt+6QIM31Ab1sSdW2FTPk
+         LjcGqOsRMi5qhAbnOjRjnE/4ICeEvzLIfRc/1JoVKPEsJ2GoYjX+SmVkYwcf+ocJax8W
+         K0eQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc;
+        bh=yiBicl/xtck+sUvDa6HbwVr3KCpBiQ3kP9sWsGd0v+M=;
+        b=f9nrTCPXXhw3xrSyBcFLpe+nDdt4pJBEgPEXkkS7bjfoIwRSEiB8VjAisNvFK9lqE+
+         Fpina7g2jOWsSTdKK2GeBOmVXpwok4tz1fFEUhiZZBeMwRXsqjHlKi8czPFBtNgnbDca
+         siF8c6pgQ057mnbkJZluMR1wHUH0Bj9Ttm8krnX+39jAFTdGCVYPcJ27FaX+Wb4336v2
+         h5ihnnbQ6sXKzqIxGI5OzWefQ8wx7T2em4o6uqPUtCAomnAP2FBSxpgf3vRalla21ciJ
+         FB+aMxc0ojjrgFrjk4cssGyvjD2atSlzNssGx+0b1caKR2j8pV/BnsAE0DLzSA93qzTo
+         4kAw==
+X-Gm-Message-State: ACgBeo3jsRmS3pIKNwRxFe9qG2j0DxqseZsOMclO/l4GgOdTUc+64eMK
+	p0zdCrRpSXbK2JQgPnmmZOD02SvNZpTosBYJpCXWyquZ
+X-Google-Smtp-Source: AA6agR7a2co2/3EHjLJWWfyl0Y9FC9Qup8Vvr947CQmLmaKAXgb15xFZYz1xNiLfRaHjV9zeEjmoSBme+mzy7PUZf/A=
+X-Received: by 2002:a63:e217:0:b0:41a:69b1:a68e with SMTP id
+ q23-20020a63e217000000b0041a69b1a68emr16488504pgh.428.1660637887011; Tue, 16
+ Aug 2022 01:18:07 -0700 (PDT)
 MIME-Version: 1.0
-X-MailFrom: oushixiong@kylinos.cn
+References: <20220812143055.12938-1-olivier.masse@nxp.com>
+In-Reply-To: <20220812143055.12938-1-olivier.masse@nxp.com>
+From: Jens Wiklander <jens.wiklander@linaro.org>
+Date: Tue, 16 Aug 2022 10:17:56 +0200
+Message-ID: <CAHUa44EgA1btRyj2ByooyLr9Q+8AmW=9EfjtQFxyr7DuCXASvA@mail.gmail.com>
+To: Olivier Masse <olivier.masse@nxp.com>
+X-MailFrom: jens.wiklander@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: XPJFJPKUG7YZ4MJ7O4I7HTOMI2EHJU77
-X-Message-ID-Hash: XPJFJPKUG7YZ4MJ7O4I7HTOMI2EHJU77
-X-Mailman-Approved-At: Tue, 04 Oct 2022 13:38:31 +0000
-CC: Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, oushixiong <oushixiong@kylinos.cn>, kernel test robot <lkp@intel.com>
+Message-ID-Hash: YRDVUO4XOZFNVYVIOFVXFTEZ3IGUO25C
+X-Message-ID-Hash: YRDVUO4XOZFNVYVIOFVXFTEZ3IGUO25C
+X-Mailman-Approved-At: Tue, 04 Oct 2022 13:40:57 +0000
+CC: etienne.carriere@linaro.org, sumit.garg@linaro.org, sumit.semwal@linaro.org, christian.koenig@amd.com, op-tee@lists.trustedfirmware.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, clement.faure@nxp.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] drm/ast: add dmabuf/prime buffer sharing support
+Subject: [Linaro-mm-sig] Re: [PATCH v2 0/1] tee: Add tee_shm_register_fd
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XPJFJPKUG7YZ4MJ7O4I7HTOMI2EHJU77/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YRDVUO4XOZFNVYVIOFVXFTEZ3IGUO25C/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -53,214 +68,38 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-This patch adds ast specific codes for DRM prime feature.
-Add the prime function to solve the xorg conflict problem when AST
-and AMD are in place at the same time, so that both can be displayed.
+Hi Olivier,
 
-Signed-off-by: oushixiong <oushixiong@kylinos.cn>
-Reported-by: kernel test robot <lkp@intel.com>
----
- drivers/gpu/drm/ast/ast_drv.c  |  22 ++++++
- drivers/gpu/drm/ast/ast_mode.c | 125 ++++++++++++++++++++++++++++++++-
- 2 files changed, 146 insertions(+), 1 deletion(-)
+On Fri, Aug 12, 2022 at 4:31 PM Olivier Masse <olivier.masse@nxp.com> wrote:
+>
+> Add a new ioctl called TEE_IOC_SHM_REGISTER_FD to register a
+> shared memory from a dmabuf file descriptor.
+> This new ioctl will allow the Linux Kernel to register a buffer
+> to be used by the Secure Data Path OPTEE OS feature.
+>
+> Please find more information here:
+> https://static.linaro.org/connect/san19/presentations/san19-107.pdf
+>
+> Patch tested on Hikey 6220.
 
-diff --git a/drivers/gpu/drm/ast/ast_drv.c b/drivers/gpu/drm/ast/ast_drv.c
-index 7465c4f0156a..6c1f75174368 100644
---- a/drivers/gpu/drm/ast/ast_drv.c
-+++ b/drivers/gpu/drm/ast/ast_drv.c
-@@ -28,6 +28,7 @@
- 
- #include <linux/module.h>
- #include <linux/pci.h>
-+#include <linux/dma-buf.h>
- 
- #include <drm/drm_aperture.h>
- #include <drm/drm_atomic_helper.h>
-@@ -50,6 +51,23 @@ module_param_named(modeset, ast_modeset, int, 0400);
- 
- DEFINE_DRM_GEM_FOPS(ast_fops);
- 
-+static struct drm_gem_object *ast_gem_prime_import_sg_table(struct drm_device *dev,
-+					struct dma_buf_attachment *attach,
-+					struct sg_table *sg)
-+{
-+	struct drm_gem_vram_object *gbo;
-+	struct dma_resv *resv = attach->dmabuf->resv;
-+
-+	ww_mutex_lock(&resv->lock, NULL);
-+	gbo = drm_gem_vram_create(dev, attach->dmabuf->size, 0);
-+	ww_mutex_unlock(&resv->lock);
-+
-+	if (IS_ERR(gbo))
-+		return NULL;
-+
-+	return &gbo->bo.base;
-+}
-+
- static const struct drm_driver ast_driver = {
- 	.driver_features = DRIVER_ATOMIC |
- 			   DRIVER_GEM |
-@@ -63,6 +81,10 @@ static const struct drm_driver ast_driver = {
- 	.minor = DRIVER_MINOR,
- 	.patchlevel = DRIVER_PATCHLEVEL,
- 
-+	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
-+	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
-+	.gem_prime_import_sg_table = ast_gem_prime_import_sg_table,
-+
- 	DRM_GEM_VRAM_DRIVER
- };
- 
-diff --git a/drivers/gpu/drm/ast/ast_mode.c b/drivers/gpu/drm/ast/ast_mode.c
-index 45b56b39ad47..ebe732705e34 100644
---- a/drivers/gpu/drm/ast/ast_mode.c
-+++ b/drivers/gpu/drm/ast/ast_mode.c
-@@ -48,6 +48,8 @@
- #include "ast_drv.h"
- #include "ast_tables.h"
- 
-+MODULE_IMPORT_NS(DMA_BUF);
-+
- static inline void ast_load_palette_index(struct ast_private *ast,
- 				     u8 index, u8 red, u8 green,
- 				     u8 blue)
-@@ -1535,8 +1537,129 @@ static const struct drm_mode_config_helper_funcs ast_mode_config_helper_funcs =
- 	.atomic_commit_tail = drm_atomic_helper_commit_tail_rpm,
- };
- 
-+static int ast_handle_damage(struct drm_framebuffer *fb, int x, int y,
-+					int width, int height)
-+{
-+	struct drm_gem_vram_object *dst_bo = NULL;
-+	void *dst = NULL;
-+	int ret = 0, i;
-+	unsigned long offset = 0;
-+	bool unmap = false;
-+	unsigned int bytesPerPixel;
-+	struct iosys_map map;
-+	struct iosys_map dmabuf_map;
-+
-+	bytesPerPixel = fb->format->cpp[0];
-+
-+	if (!fb->obj[0]->import_attach)
-+		return -EINVAL;
-+
-+	if (!fb->obj[0]->import_attach->dmabuf->vmap_ptr.vaddr) {
-+		ret = dma_buf_vmap(fb->obj[0]->import_attach->dmabuf, &dmabuf_map);
-+		if (ret)
-+			return 0;
-+	} else
-+		dmabuf_map.vaddr = fb->obj[0]->import_attach->dmabuf->vmap_ptr.vaddr;
-+
-+	dst_bo = drm_gem_vram_of_gem(fb->obj[0]);
-+
-+	ret = drm_gem_vram_pin(dst_bo, 0);
-+	if (ret) {
-+		DRM_ERROR("ast_bo_pin failed\n");
-+		goto error;
-+	}
-+
-+	if (!dst_bo->map.vaddr) {
-+		ret = drm_gem_vram_vmap(dst_bo, &map);
-+		if (ret) {
-+			DRM_ERROR("failed to vmap fbcon\n");
-+			drm_gem_vram_unpin(dst_bo);
-+			goto error;
-+		}
-+		unmap = true;
-+	}
-+	dst = dst_bo->map.vaddr;
-+
-+	for (i = y; i < y + height; i++) {
-+		offset = i * fb->pitches[0] + (x * bytesPerPixel);
-+		memcpy_toio(dst + offset, dmabuf_map.vaddr + offset,
-+			width * bytesPerPixel);
-+	}
-+
-+	if (unmap)
-+		drm_gem_vram_vunmap(dst_bo, &map);
-+
-+	drm_gem_vram_unpin(dst_bo);
-+error:
-+	return 0;
-+}
-+
-+
-+static int ast_user_framebuffer_dirty(struct drm_framebuffer *fb,
-+				struct drm_file *file,
-+				unsigned int flags,
-+				unsigned int color,
-+				struct drm_clip_rect *clips,
-+				unsigned int num_clips)
-+{
-+	int i, ret = 0;
-+
-+	drm_modeset_lock_all(fb->dev);
-+	if (fb->obj[0]->import_attach) {
-+		ret = dma_buf_begin_cpu_access(fb->obj[0]->import_attach->dmabuf,
-+				DMA_FROM_DEVICE);
-+		if (ret)
-+			goto unlock;
-+	}
-+
-+	for (i = 0; i < num_clips; i++) {
-+		ret = ast_handle_damage(fb, clips[i].x1, clips[i].y1,
-+				clips[i].x2 - clips[i].x1, clips[i].y2 - clips[i].y1);
-+		if (ret)
-+			break;
-+	}
-+
-+	if (fb->obj[0]->import_attach) {
-+		dma_buf_end_cpu_access(fb->obj[0]->import_attach->dmabuf,
-+				DMA_FROM_DEVICE);
-+	}
-+
-+unlock:
-+	drm_modeset_unlock_all(fb->dev);
-+
-+	return ret;
-+}
-+
-+static void ast_user_framebuffer_destroy(struct drm_framebuffer *fb)
-+{
-+	struct iosys_map dmabuf_map;
-+
-+	if (fb->obj[0]->import_attach) {
-+		dmabuf_map.vaddr = fb->obj[0]->import_attach->dmabuf->vmap_ptr.vaddr;
-+		if (dmabuf_map.vaddr)
-+			dma_buf_vunmap(fb->obj[0]->import_attach->dmabuf,
-+					&dmabuf_map);
-+	}
-+
-+	drm_gem_fb_destroy(fb);
-+}
-+
-+static const struct drm_framebuffer_funcs ast_gem_fb_funcs_dirtyfb = {
-+	.destroy	= ast_user_framebuffer_destroy,
-+	.create_handle	= drm_gem_fb_create_handle,
-+	.dirty		= ast_user_framebuffer_dirty,
-+};
-+
-+static struct drm_framebuffer *
-+ast_gem_fb_create_with_dirty(struct drm_device *dev, struct drm_file *file,
-+				const struct drm_mode_fb_cmd2 *mode_cmd)
-+{
-+	return drm_gem_fb_create_with_funcs(dev, file, mode_cmd,
-+					&ast_gem_fb_funcs_dirtyfb);
-+}
-+
- static const struct drm_mode_config_funcs ast_mode_config_funcs = {
--	.fb_create = drm_gem_fb_create,
-+	.fb_create = ast_gem_fb_create_with_dirty,
- 	.mode_valid = drm_vram_helper_mode_valid,
- 	.atomic_check = drm_atomic_helper_check,
- 	.atomic_commit = drm_atomic_helper_commit,
--- 
-2.17.1
+What's new in this V2?
 
+Thanks,
+Jens
 
-No virus found
-		Checked by Hillstone Network AntiVirus
+>
+> Etienne Carriere (1):
+>   tee: new ioctl to a register tee_shm from a dmabuf file descriptor
+>
+>  drivers/tee/tee_core.c   | 38 +++++++++++++++
+>  drivers/tee/tee_shm.c    | 99 +++++++++++++++++++++++++++++++++++++++-
+>  include/linux/tee_drv.h  | 11 +++++
+>  include/uapi/linux/tee.h | 29 ++++++++++++
+>  4 files changed, 175 insertions(+), 2 deletions(-)
+>
+> --
+> 2.25.0
+>
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
