@@ -2,324 +2,189 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3F6B859813E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Aug 2022 12:04:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ED57D5981EC
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Aug 2022 13:07:29 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 592D93F618
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Aug 2022 10:04:25 +0000 (UTC)
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by lists.linaro.org (Postfix) with ESMTPS id 3B31F401CB
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 28 Jul 2022 07:26:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1658993186; x=1690529186;
-  h=date:from:to:cc:subject:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=g5kqmchM6HB+PXC+MCy/bxSNFEjJ81QvgGnZA2putgI=;
-  b=b8vIPvZ+1s+uqxOzQD4Dt0qa4Z32Ft8SHCT/RQaP7O7pC0fa9uKyn+M4
-   JPt4yu3uocStU27r8mgQl11VshEtGNT7ZVy4hYBeY04IOwySdLJoPT7oR
-   aIVoslFCkvRofFhF7q/aVoksGmn7ST5Q0YPPyZxkz0MwatvPJjtiA6e8V
-   x+8Cn8vCxql+3saaylfPt2Pre8fN636Ye25g+pD5SotFWbjk4H0dMEk33
-   NBnKyeBpHW7QFAGHjVeGvAD3a3OEOv9baUuStqb69c/lWD4vS0lSI2Oqj
-   XLURv9vu77FML0pWajPHQcao9yCewIg2kJQg2gwQpPtMGoGrTw6+Fb0Ag
-   Q==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10421"; a="275325007"
-X-IronPort-AV: E=Sophos;i="5.93,196,1654585200";
-   d="scan'208";a="275325007"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Jul 2022 00:26:25 -0700
-X-IronPort-AV: E=Sophos;i="5.93,196,1654585200";
-   d="scan'208";a="659590683"
-Received: from maurocar-mobl2.ger.corp.intel.com (HELO maurocar-mobl2) ([10.249.36.196])
-  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Jul 2022 00:26:21 -0700
-Date: Thu, 28 Jul 2022 09:26:18 +0200
-From: Mauro Carvalho Chehab <mauro.chehab@linux.intel.com>
-To: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-Message-ID: <20220728092618.050969fc@maurocar-mobl2>
-In-Reply-To: <20220728083232.352f80cf@maurocar-mobl2>
-References: <cover.1657800199.git.mchehab@kernel.org>
-	<9f535a97f32320a213a619a30c961ba44b595453.1657800199.git.mchehab@kernel.org>
-	<567823d5-57ba-30db-dd64-de609df4d8c5@linux.intel.com>
-	<20220727134836.7f7b5fab@maurocar-mobl2>
-	<d2337b73-ae34-3dd3-afa3-85c77dc2135e@linux.intel.com>
-	<20220728083232.352f80cf@maurocar-mobl2>
-X-Mailer: Claws Mail 4.1.0 (GTK 3.24.34; x86_64-redhat-linux-gnu)
+	by lists.linaro.org (Postfix) with ESMTP id 273ED3F619
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Aug 2022 11:07:29 +0000 (UTC)
+Received: from NAM04-MW2-obe.outbound.protection.outlook.com (mail-mw2nam04on2041.outbound.protection.outlook.com [40.107.101.41])
+	by lists.linaro.org (Postfix) with ESMTPS id 2F0C63F1C4
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 18 Aug 2022 11:07:26 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=UyPn7w+muA8xnfl73Gsep5MJudZ74qIJ0QYNBNVcDfHCpVGctMGGjKbnjKga8Tuqx7vmrrdtNm98pqWQwbi8OxQzMrnKAmDwmtj42nbRzQzXrxdfq4isN7o4oHXFWT67kmKYDxjemhQBF5qD4xTB29estE+974UrHGEG4JMWX1p90hqOZESuRvM9/l9NNmpfN0zJQP6VVIyKfBdYsqCZJ54ZisFAmOwZVXMmxlctU7mYn4nTWwqqRqkCSmpS15Ngl6L80sldM/Vu5PZJClJ5/1Kx+m8+Q2QfzCmQvq3OSGKsqXqXKKPS2pC8y8bO78A62q9urBWRo3QXTLQOZ5KOYw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Us6TlYHLMxPdE4hYt7W9gTHkpE1RbdXfDEq8ZfiRJQM=;
+ b=VTW5Qim020aGWqgFA4uSe0HYgHFNHMBckmnX9uoA3rJ0B9Dh+SZghnPwNcftYWJvF/8Intcwt1+xi5B5i+6nFG7RsOO2oCZ8X5EhxZ3P8FsfkK1zjEu2iENDY+zUjHtxymJGBnhUa67HKfib/d34ylEHQKmEwju2uj5dJVSDxiSzXGA5E1AiHhQzldEJeZ6hXVsOSQGmWivXpa2IaMejvMSt0eETdCgIIhhK6gG9D4JstG4oK7uJdef37ZtK7O4nwKSwkUwv6EDT5f0MfRao41LGj2AfgVYXryJ9FsebX9MG219ximHt02Dm+2nqgnUaS7RUF+9ddkmMbWxqAZHQwg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Us6TlYHLMxPdE4hYt7W9gTHkpE1RbdXfDEq8ZfiRJQM=;
+ b=vR1b4yNjpQ7WOoSsV+YPbsRhTK8wer719SV45C1lz/OolKS+ZXFWkeNAP9MJ+I/DhEEW+ER6QYhHUwY94QRdMliMyGwp0PA/LUkHinDGVe3BwWn68XlJ0wQefEnuLhL8QrBIaCW0GNi05rq/o1GtQ8IWvfKtmG6S7nMr1mhjsTo=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by DM4PR12MB6277.namprd12.prod.outlook.com (2603:10b6:8:a5::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5525.11; Thu, 18 Aug
+ 2022 11:07:23 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::905:1701:3b51:7e39]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::905:1701:3b51:7e39%2]) with mapi id 15.20.5504.020; Thu, 18 Aug 2022
+ 11:07:23 +0000
+Message-ID: <921de79a-9cb3-4217-f079-4b23958a16aa@amd.com>
+Date: Thu, 18 Aug 2022 13:07:16 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To: Jason Gunthorpe <jgg@nvidia.com>,
+ Alex Williamson <alex.williamson@redhat.com>,
+ Cornelia Huck <cohuck@redhat.com>, dri-devel@lists.freedesktop.org,
+ kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
+ linux-media@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>
+References: <0-v1-9e6e1739ed95+5fa-vfio_dma_buf_jgg@nvidia.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <0-v1-9e6e1739ed95+5fa-vfio_dma_buf_jgg@nvidia.com>
+X-ClientProxiedBy: AM5PR1001CA0018.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:206:2::31) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
 MIME-Version: 1.0
-X-MailFrom: mauro.chehab@linux.intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: N7Z7XLQQZU3QUNW5FYKYVRMPGR6MKO7W
-X-Message-ID-Hash: N7Z7XLQQZU3QUNW5FYKYVRMPGR6MKO7W
-X-Mailman-Approved-At: Thu, 18 Aug 2022 10:04:23 +0000
-CC: stable@vger.kernel.org, Thomas =?UTF-8?B?SGVsbHN0csO2bQ==?= <thomas.hellstrom@linux.intel.com>, linux-media@vger.kernel.org, David Airlie <airlied@linux.ie>, intel-gfx@lists.freedesktop.org, Lucas De Marchi <lucas.demarchi@intel.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org, Chris Wilson <chris.p.wilson@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Dave Airlie <airlied@redhat.com>, Tomas Winkler <tomas.winkler@intel.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Matthew Auld <matthew.auld@intel.com>
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: d8de71c2-81f2-4a5a-0758-08da8109d3cf
+X-MS-TrafficTypeDiagnostic: DM4PR12MB6277:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	OafRzBMxtX1br2KNDTkiafwrT5RFEvqSqxyp7OLDrnV3bSsK154GNvuvcbpYGQl2rjikYMRHppRs5PGSYuh41lpsiK2iFOe+CIby4Q4QRQlfukEiQOp6YDbf+BMBVrIRxRQU+4OSSoiXURD2FBl5S9elA5KS4S+8FcHHZf6n7YzYDuNhBxpFhRL00Kinaz9xv5/Dn1WFjzDCAbFBYGO27Z0jUWBKK6sVglwwO5RcpanCkh16GtbjuShKByQnEuWy+XZEKMhwNWjCBRGpMPcX4TPRiiEdgJ/AoA3JW+KpBl4nr0ji48tFBlqkEz/Mr9OO6qTWhVncBSRRLWT4OH8aLhND1yyz3LZT5pvzQ4xTWVfOh9G3YwTyAy7JxLA5i6aIJsCxUmrkNmlnuIzXWUFonn4CJKosCflb1DhV6tTRUwHPilpCL72jdVspP7u3dVJvRPMv4+95hP6CoOH3rt4+j+be5Ra/IEh53Xpct4YcohSkFGrDZfouuxT7xeNNveZkWnIusKLhV+iZh/ZuTgp2b9K5ek+SqFjM7MS9kmUIOQM68Zz4Kv4l96Go7og9Oe7dL6724yUpcDSM3vNDC8IDwv6HmnHA6hYsepaaexOg0i/eNvMDISX0h4pj9En8aCm6UYvepHBXfJ66eD0q4Sc1l5E5p+qwQ3P6QJYBmK1T5T+meDmvW48X8hI+1BSoWqc+HGIFPUJTJfGfcdTz1LecOzBfxEz6wTLZ5YSQy7BNbMSOY0cGOlVjs/ucBdmPXmkCkEORXTL2RjzKD4tFXEUf2NBzS7OdEV7mxPH+u2/SpL5r+DIlUjBzXoWSge6NfgWGThc4tOAbplJsxiaMIZI/KA==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(136003)(346002)(396003)(39860400002)(376002)(366004)(966005)(41300700001)(54906003)(316002)(478600001)(38100700002)(6486002)(5660300002)(8676002)(66946007)(7416002)(110136005)(66556008)(66476007)(8936002)(2906002)(4326008)(31696002)(36756003)(31686004)(26005)(6506007)(186003)(86362001)(6666004)(2616005)(6512007)(83380400001)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?K1E5L1dPMEtRd1NlbWpTSGRjNmhVaHBUYjltcFZIdEdnb2xjMXBXUm5uNlZO?=
+ =?utf-8?B?VFZodHM4V0xtY2Jad1BuMlNPRVQyZGxzZkVjYmRjRU1yY1ZxemI5KzdteWdS?=
+ =?utf-8?B?Ri92L0VKVjlKcVlpNWppSVpCbk8wMVRXUGdYNSswdW5WWTlSTGRBQWkwWURZ?=
+ =?utf-8?B?QkR1b0NGalErSTJ1aWh4ckN0RHpVSEFvcHVPVW1ZTXlzclI5VVpENFZPNnF2?=
+ =?utf-8?B?K1RkREtjRUxlb2t0YTZVUHF1SGpOS0M1S0htd2htaEZ3S3B4TVZrQ2pXU2xu?=
+ =?utf-8?B?ZWNHdExKbWpKOFZzeTkvdVpjNWdFOHBGeXg5aTYvalMrQXB0T1o4VzEwUVZ5?=
+ =?utf-8?B?dUhlNHQ1aGRxaHkxUlhoL0QwR3dpU2doTyt0QnkzSkZoSVZxVUp1VjVVTUlw?=
+ =?utf-8?B?SFc0YjRTTkN0SndMSUFwdktnOHBaRVhMSUtwWmo5MjFzY3VBdE9sZWZMTWRL?=
+ =?utf-8?B?L2hUWE5pUXRub1c5cERMcmUya3dxaS9HSHcvSzNmYURUKzczVFluY1ZTSlhE?=
+ =?utf-8?B?Wkg2bzByUkxyWVA1c3hLSVBjMXRDSW4xYUxBS0ladXlvaGoxY3RKU3dvQkRO?=
+ =?utf-8?B?cE9sdlhVUVpzVTZySlZsYm5jT3EzZy9MRDZQU1dMSDBXUkZQV1lXNkN1dEll?=
+ =?utf-8?B?bE1EcjZOSUZ6REo2WW1BT2RVaStXUi9lb1pDdTcyT2dIOHZWKzNKclZYMjBD?=
+ =?utf-8?B?SGFZc3RyYjdWUkZZaHJhVEcwbGoxOVhTTS84Q1lVbnBnbFNxQkUxaHdIK3N0?=
+ =?utf-8?B?Y3pOZ3l6aE45SDlRQWF6NkRyUkhKM1orS2tsajVNL0UvSUZLNWV1YkNLcWN2?=
+ =?utf-8?B?N0VVSkM1dE1Ha2NjT1RXOWwwbzVlUnh4V1FkOGgxb2RRRFgvQ2wrZUl1RGox?=
+ =?utf-8?B?bC9McERkc2FDQzJrZi9JVUJ6bzFvUnI2WGVRcGQxNGRQaTlhTGdHeEtKN0kr?=
+ =?utf-8?B?d1AyVGhWZHhIazJVZ1VYaGxWTncxUFdLZUlkWFl5MDFtcVplOTZrcHczRm50?=
+ =?utf-8?B?aW9JNEVBdnZmSndNZHpBQU85cWhDRHR5cUxhRXJtZ2FjYlp4UEpydTA1V1pt?=
+ =?utf-8?B?eDBJZ2RueFhDRmQ3UG9uRGtxMEZycE44UG1NcFNad2p1dXZUN1NRRGtaOUNj?=
+ =?utf-8?B?QXZ5ODZqOVhvQ2wwRDRvKytUSlhNbjBLMzd2RTlRRXlZMjU1ZGVqYXM5RnFv?=
+ =?utf-8?B?dTUzeDFyU1lKbXNFUFZsb1NFQmU3NXVZeVIzZk1ncVdvYXFHWkNtUk9MQ1lL?=
+ =?utf-8?B?bTd2ZDhxWDBZZlRkQW10MzhZcEZ0cC9TZnd4Z1pNcTd5MDZEckh5aXJGZHJl?=
+ =?utf-8?B?WkFYb3FSMnBGYlN2UE4xbktiWVFielVkV2lhOFdWM212N21QMFcrbEhKeSts?=
+ =?utf-8?B?NkJiQ0tGQ0dYUGJieU9LeU9rTTJRM0FXL2lwYW41dzMwU3c1UTJMTW5IQnFi?=
+ =?utf-8?B?MXVrUWppWmR2WlllRjhZckU2dEpZUTExNW5aZjFna280M1A5VGVrTFZwRk1R?=
+ =?utf-8?B?dkFtRk14MGRhaHYvNkNOVGw0TlR6U2V0YUs4N0t2MHNIQnlHUlFwUTl3MmdE?=
+ =?utf-8?B?WXNvZDh0ak1rL0VBbUxiNkdoclRJVjZtaVVVTnBySWFFOGVQcXhRMnVmQ0lJ?=
+ =?utf-8?B?Q2FiRVVsUmptbGZqOFVYMWl5TENwdkJxcytvbkNvR2d6QXN1Z3IzRTg4ZHYz?=
+ =?utf-8?B?eGx3TzltR1c5Y1V4bFJWdXNWVkVleThZRFg4dlNLVGQxY3ViWXM2OGZ6R3oz?=
+ =?utf-8?B?R2FWTFp1N1BGUFB5RUFESGlLc2h4aVhQSDNQZ1R1aXdndmpoOTFXdk5yaDI5?=
+ =?utf-8?B?MXdFc2xJb0orWldTczlCdXJNWnZyWmo3R3F6WFRHZUdOa3VLNXRrOGxxR0ov?=
+ =?utf-8?B?eWR5M2dTSzlNa2VRc1U4MStwVHFzdDJCNFp1M0NzSmJJOE9XdkpYTGZ1TzVi?=
+ =?utf-8?B?QmJ3SUZ4dFdTcTFPa1BqRjhwQ1I4RFF2MWVCNnpPNVo5ZWtsR245SkxRYUdl?=
+ =?utf-8?B?Tithd2dtTURkRFpCb2dnbVJmR1l0S0ZCak01WGF0aVNlQjRYcWp0UEdBNWwx?=
+ =?utf-8?B?V1JEd2xYRnpjWTM4dyswT2VTNmlGbURyRVZZZ1VHM2doZHNySWJyU0xhd3Jr?=
+ =?utf-8?Q?PXLzKBr3/xa2VgsBTxOH17IoV?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d8de71c2-81f2-4a5a-0758-08da8109d3cf
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Aug 2022 11:07:23.6470
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: YuMu0+Njn/1/XlMOZQtongsO2UwgXtWWjqq+oz2u1blxKXH/QkJBmcrLfvWrUqC7
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6277
+Message-ID-Hash: R5KLWSBWQUJKUFZMNO7T4MTV65BDWDG7
+X-Message-ID-Hash: R5KLWSBWQUJKUFZMNO7T4MTV65BDWDG7
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Leon Romanovsky <leon@kernel.org>, linux-rdma@vger.kernel.org, Maor Gottlieb <maorg@nvidia.com>, Oded Gabbay <ogabbay@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [Intel-gfx] [PATCH v2 06/21] drm/i915/gt: Batch TLB invalidations
+Subject: [Linaro-mm-sig] Re: [PATCH 0/4] Allow MMIO regions to be exported through dma-buf
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N7Z7XLQQZU3QUNW5FYKYVRMPGR6MKO7W/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/R5KLWSBWQUJKUFZMNO7T4MTV65BDWDG7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-On Thu, 28 Jul 2022 08:32:32 +0200
-Mauro Carvalho Chehab <mauro.chehab@linux.intel.com> wrote:
+Am 17.08.22 um 18:11 schrieb Jason Gunthorpe:
+> dma-buf has become a way to safely acquire a handle to non-struct page
+> memory that can still have lifetime controlled by the exporter. Notably
+> RDMA can now import dma-buf FDs and build them into MRs which allows for
+> PCI P2P operations. Extend this to allow vfio-pci to export MMIO memory
+> from PCI device BARs.
+>
+> This series supports a use case for SPDK where a NVMe device will be owned
+> by SPDK through VFIO but interacting with a RDMA device. The RDMA device
+> may directly access the NVMe CMB or directly manipulate the NVMe device's
+> doorbell using PCI P2P.
+>
+> However, as a general mechanism, it can support many other scenarios with
+> VFIO. I imagine this dmabuf approach to be usable by iommufd as well for
+> generic and safe P2P mappings.
 
-> On Wed, 27 Jul 2022 13:56:50 +0100
-> Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com> wrote:
-> 
-> > > Because vma_invalidate_tlb() basically stores a TLB seqno, but the
-> > > actual invalidation is deferred to when the pages are unset, at
-> > > __i915_gem_object_unset_pages().
-> > > 
-> > > So, what happens is:
-> > > 
-> > > - on VMA sync mode, the need to invalidate TLB is marked at
-> > >    __vma_put_pages(), before VMA unbind;
-> > > - on async, this is deferred to happen at ppgtt_unbind_vma(), where
-> > >    it marks the need to invalidate TLBs.
-> > > 
-> > > On both cases, __i915_gem_object_unset_pages() is called later,
-> > > when the driver is ready to unmap the page.    
-> > 
-> > Sorry still not clear to me why is the patch moving marking of the need 
-> > to invalidate (regardless if it a bit like today, or a seqno like in 
-> > this patch) from bind to unbind?
-> > 
-> > What if the seqno was stored in i915_vma_bind, where the bit is set 
-> > today, and all the hunks which touch the unbind and evict would 
-> > disappear from the patch. What wouldn't work in that case, if anything?  
-> 
-> Ah, now I see your point.
-> 
-> I can't see any sense on having a sequence number at VMA bind, as the
-> unbind order can be different. The need of doing a full TLB invalidation
-> or not depends on the unbind order.
-> 
-> The way the current algorithm works is that drm_i915_gem_object can be
-> created on any order, and, at unbind/evict, they receive a seqno.
-> 
-> The seqno is incremented at intel_gt_invalidate_tlb():
-> 
->     void intel_gt_invalidate_tlb(struct intel_gt *gt, u32 seqno)
->     {
-> 	with_intel_gt_pm_if_awake(gt, wakeref) {
-> 		mutex_lock(&gt->tlb.invalidate_lock);
-> 		if (tlb_seqno_passed(gt, seqno))
-> 				goto unlock;
-> 
-> 		mmio_invalidate_full(gt);
-> 
-> 		write_seqcount_invalidate(&gt->tlb.seqno);	// increment seqno
-> 		
-> 
-> So, let's say 3 objects were created, on this order:
-> 
-> 	obj1
-> 	obj2
-> 	obj3
-> 
-> They would be unbind/evict on a different order. On that time, 
-> the mm.tlb will be stamped with a seqno, using the number from the
-> last TLB flush, plus 1.
-> 
-> As different threads can be used to handle TLB flushes, let's imagine
-> two threads (just for the sake of having an example). On such case,
-> what we would have is:
-> 
-> seqno		Thread 0			Thread 1
-> 
-> seqno=2		unbind/evict event
-> 		obj3.mm.tlb = seqno | 1
-> seqno=2		unbind/evict event
-> 		obj1.mm.tlb = seqno | 1
-> 						__i915_gem_object_unset_pages() 
-> 						called for obj3, TLB flush happened,
-> 						invalidating both obj1 and obj2.
-> 						seqno += 2					
-> seqno=4		unbind/evict event
-> 		obj1.mm.tlb = seqno | 1
+In general looks good to me, but we really need to get away from using 
+sg_tables for this here.
 
-cut-and-paste typo. it should be, instead:
+The only thing I'm not 100% convinced of is dma_buf_try_get(), I've seen 
+this incorrectly used so many times that I can't count them any more.
 
- 		obj2.mm.tlb = seqno | 1
+Would that be somehow avoidable? Or could you at least explain the use 
+case a bit better.
 
+Thanks,
+Christian.
 
-> 						__i915_gem_object_unset_pages()
-> 						called for obj1, don't flush.
-> ...
-> 						__i915_gem_object_unset_pages() called for obj2, TLB flush happened
-> 						seqno += 2
-> seqno=6
-> 
-> So, basically the seqno is used to track when the object data stopped
-> being updated, because of an unbind/evict event, being later used by
-> intel_gt_invalidate_tlb() when called from __i915_gem_object_unset_pages(),
-> in order to check if a previous invalidation call was enough to invalidate
-> the object, or if a new call is needed.
-> 
-> Now, if seqno is stored at bind, data can still leak, as the assumption
-> made by intel_gt_invalidate_tlb() that the data stopped being used at
-> seqno is not true anymore.
-> 
-> Still, I agree that this logic is complex and should be better 
-> documented. So, if you're now OK with this patch, I'll add the above
-> explanation inside a kernel-doc comment.
-
-I'm enclosing the kernel-doc patch (to be applied after moving the code into
-its own files: intel_tlb.c/intel_tlb.h):
-
-[PATCH] drm/i915/gt: document TLB cache invalidation functions
-
-Add a description for the TLB cache invalidation algorithm and for
-the related kAPI functions.
-
-Signed-off-by: Mauro Carvalho Chehab <mchehab@kernel.org>
-
-diff --git a/drivers/gpu/drm/i915/gt/intel_tlb.c b/drivers/gpu/drm/i915/gt/intel_tlb.c
-index af8cae979489..8eda0743da74 100644
---- a/drivers/gpu/drm/i915/gt/intel_tlb.c
-+++ b/drivers/gpu/drm/i915/gt/intel_tlb.c
-@@ -145,6 +145,18 @@ static void mmio_invalidate_full(struct intel_gt *gt)
- 	intel_uncore_forcewake_put_delayed(uncore, FORCEWAKE_ALL);
- }
- 
-+/**
-+ * intel_gt_invalidate_tlb_full - do full TLB cache invalidation
-+ * @gt: GT structure
-+ * @seqno: sequence number
-+ *
-+ * Do a full TLB cache invalidation if the @seqno is bigger than the last
-+ * full TLB cache invalidation.
-+ *
-+ * Note:
-+ * The TLB cache invalidation logic depends on GEN-specific registers.
-+ * It currently supports GEN8 to GEN12 and GuC-based TLB cache invalidation.
-+ */
- void intel_gt_invalidate_tlb_full(struct intel_gt *gt, u32 seqno)
- {
- 	intel_wakeref_t wakeref;
-@@ -177,6 +189,12 @@ void intel_gt_init_tlb(struct intel_gt *gt)
- 	seqcount_mutex_init(&gt->tlb.seqno, &gt->tlb.invalidate_lock);
- }
- 
-+/**
-+ * intel_gt_fini_tlb - initialize TLB-specific vars
-+ * @gt: GT structure
-+ *
-+ * Frees any resources needed by TLB cache invalidation logic.
-+ */
- void intel_gt_fini_tlb(struct intel_gt *gt)
- {
- 	mutex_destroy(&gt->tlb.invalidate_lock);
-diff --git a/drivers/gpu/drm/i915/gt/intel_tlb.h b/drivers/gpu/drm/i915/gt/intel_tlb.h
-index 46ce25bf5afe..d186f5d5901f 100644
---- a/drivers/gpu/drm/i915/gt/intel_tlb.h
-+++ b/drivers/gpu/drm/i915/gt/intel_tlb.h
-@@ -11,16 +11,99 @@
- 
- #include "intel_gt_types.h"
- 
-+/**
-+ * DOC: TLB cache invalidation logic
-+ *
-+ * The way the current algorithm works is that drm_i915_gem_object can be
-+ * created on any order. At unbind/evict time, the object is warranted that
-+ * it won't be used anymore. So, they store a sequence number provided by
-+ * intel_gt_next_invalidate_tlb_full().This can happen either at
-+ * __vma_put_pages(), for VMA sync unbind, or at ppgtt_unbind_vma(), for
-+ * VMA async VMA bind.
-+ *
-+ * At __i915_gem_object_unset_pages(), intel_gt_invalidate_tlb() is called,
-+ * where it checks if the sequence number of the object was already invalidated
-+ * or not. If not, it increments it::
-+ *
-+ *   void intel_gt_invalidate_tlb(struct intel_gt *gt, u32 seqno)
-+ *   {
-+ *   ...
-+ * 	with_intel_gt_pm_if_awake(gt, wakeref) {
-+ * 		mutex_lock(&gt->tlb.invalidate_lock);
-+ * 		if (tlb_seqno_passed(gt, seqno))
-+ * 				goto unlock;
-+ *
-+ * 		mmio_invalidate_full(gt);
-+ *
-+ * 		write_seqcount_invalidate(&gt->tlb.seqno); // increment seqno
-+ *    ...
-+ *
-+ * So, let's say the current seqno is 2 and 3 new objects were created,
-+ * on this order:
-+ *
-+ * 	obj1
-+ * 	obj2
-+ * 	obj3
-+ *
-+ * They can be unbind/evict on a different order. At unbind/evict time,
-+ * the mm.tlb will be stamped with the sequence number, using the number
-+ * from the last TLB flush, plus 1.
-+ *
-+ * Different threads may be used on unbind/evict and/or unset pages.
-+ *
-+ * As the logic at void intel_gt_invalidate_tlb() is protected by a mutex,
-+ * for simplicity, let's consider just two threads::
-+ *
-+ *   sequence number	Thread 0		Thread 1
-+ *
-+ *   seqno=2
-+ *			unbind/evict event
-+ * 			obj3.mm.tlb = seqno | 1
-+ *
-+ *			unbind/evict event
-+ * 			obj1.mm.tlb = seqno | 1
-+ * 						__i915_gem_object_unset_pages()
-+ * 						called for obj3 => TLB flush
-+ * 						invalidating both obj1 and obj2.
-+ * 						seqno += 2
-+ *   seqno=4
-+ *			unbind/evict event
-+ * 			obj2.mm.tlb = seqno | 1
-+ * 						__i915_gem_object_unset_pages()
-+ * 						called for obj1, don't flush,
-+ *						as past flush invalidated obj1
-+ *
-+ * 						__i915_gem_object_unset_pages()
-+ *						called for obj2 => TLB flush
-+ * 						seqno += 2
-+ *   seqno=6
-+ */
-+
- void intel_gt_invalidate_tlb_full(struct intel_gt *gt, u32 seqno);
- 
- void intel_gt_init_tlb(struct intel_gt *gt);
- void intel_gt_fini_tlb(struct intel_gt *gt);
- 
-+/**
-+ * intel_gt_tlb_seqno - Returns the current TLB invlidation sequence number
-+ *
-+ * @gt: GT structure
-+ *
-+ * There's no need to lock while calling it, as seqprop_sequence is thread-safe
-+ */
- static inline u32 intel_gt_tlb_seqno(const struct intel_gt *gt)
- {
- 	return seqprop_sequence(&gt->tlb.seqno);
- }
- 
-+/**
-+ * intel_gt_next_invalidate_tlb_full - Returns the next TLB full invalidation
-+ *	sequence number
-+ *
-+ * @gt: GT structure
-+ *
-+ * There's no need to lock while calling it, as seqprop_sequence is thread-safe
-+ */
- static inline u32 intel_gt_next_invalidate_tlb_full(const struct intel_gt *gt)
- {
- 	return intel_gt_tlb_seqno(gt) | 1;
+>
+> This series goes after the "Break up ioctl dispatch functions to one
+> function per ioctl" series.
+>
+> This is on github: https://github.com/jgunthorpe/linux/commits/vfio_dma_buf
+>
+> Jason Gunthorpe (4):
+>    dma-buf: Add dma_buf_try_get()
+>    vfio: Add vfio_device_get()
+>    vfio_pci: Do not open code pci_try_reset_function()
+>    vfio/pci: Allow MMIO regions to be exported through dma-buf
+>
+>   drivers/vfio/pci/Makefile           |   1 +
+>   drivers/vfio/pci/vfio_pci_config.c  |  22 ++-
+>   drivers/vfio/pci/vfio_pci_core.c    |  33 +++-
+>   drivers/vfio/pci/vfio_pci_dma_buf.c | 265 ++++++++++++++++++++++++++++
+>   drivers/vfio/pci/vfio_pci_priv.h    |  24 +++
+>   drivers/vfio/vfio_main.c            |   3 +-
+>   include/linux/dma-buf.h             |  13 ++
+>   include/linux/vfio.h                |   6 +
+>   include/linux/vfio_pci_core.h       |   1 +
+>   include/uapi/linux/vfio.h           |  18 ++
+>   10 files changed, 364 insertions(+), 22 deletions(-)
+>   create mode 100644 drivers/vfio/pci/vfio_pci_dma_buf.c
+>
+>
+> base-commit: 385f0411fcd2780b5273992832cdc8edcd5b8ea9
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
