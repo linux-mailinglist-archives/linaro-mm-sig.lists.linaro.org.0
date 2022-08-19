@@ -2,112 +2,129 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E6E75F6862
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  6 Oct 2022 15:42:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 911C05F6861
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  6 Oct 2022 15:42:34 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2C4763F50B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  6 Oct 2022 13:42:52 +0000 (UTC)
-Received: from mail.zeus03.de (www.zeus03.de [194.117.254.33])
-	by lists.linaro.org (Postfix) with ESMTPS id 207903F61F
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 18 Aug 2022 21:00:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple; d=sang-engineering.com; h=
-	from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding; s=k1; bh=DNFHSkc/9XD0IHp+EWFcSaSQYS0
-	nS/muBE/k1ZBILf8=; b=H6uoo853Vu3QQNSs1Tt7SlUYVDfJ6r0x5E65BgTaa/7
-	FaUXVhinALbmG/Yh6c5yDqWe1VGNQmJsm4Mvb4QGp6vgXhMIQxF0zhLckXw34ss8
-	rNnSQxv74/kFjFlNrH2+ZqShDoFZE0BCR09E2ClmUW8luDro4NnFOEEfukAB9wZY
-	=
-Received: (qmail 3959804 invoked from network); 18 Aug 2022 23:00:05 +0200
-Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 18 Aug 2022 23:00:05 +0200
-X-UD-Smtp-Session: l3s3148p1@l0sQRIrmEpQucref
-From: Wolfram Sang <wsa+renesas@sang-engineering.com>
-To: linux-kernel@vger.kernel.org
-Date: Thu, 18 Aug 2022 23:00:04 +0200
-Message-Id: <20220818210005.6673-1-wsa+renesas@sang-engineering.com>
-X-Mailer: git-send-email 2.35.1
+	by lists.linaro.org (Postfix) with ESMTP id 4E1113F4FD
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  6 Oct 2022 13:42:33 +0000 (UTC)
+Received: from mail-m11885.qiye.163.com (mail-m11885.qiye.163.com [115.236.118.85])
+	by lists.linaro.org (Postfix) with ESMTPS id B04BD3F2F2
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 19 Aug 2022 07:33:56 +0000 (UTC)
+Received: from localhost (unknown [103.29.142.67])
+	by mail-m11885.qiye.163.com (Hmail) with ESMTPA id 5AF324C02BD;
+	Fri, 19 Aug 2022 15:33:51 +0800 (CST)
+From: Jeffy Chen <jeffy.chen@rock-chips.com>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+Date: Fri, 19 Aug 2022 15:28:34 +0800
+Message-Id: <20220819072834.17888-1-jeffy.chen@rock-chips.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-MailFrom: wsa+renesas@sang-engineering.com
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZTh4fVk9MHk4fQxlKGE9DS1UTARMWGhIXJBQOD1
+	lXWRgSC1lBWUpLSFVJQlVKT0lVTUxZV1kWGg8SFR0UWUFZT0tIVUpKS0hKQ1VLWQY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OQw6Hgw*IT0wCRYyFh9NEEMj
+	DCswFDNVSlVKTU1LQ0JPT0hKQk9IVTMWGhIXVREeHR0CVRgTHhU7CRQYEFYYExILCFUYFBZFWVdZ
+	EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQU1KT043Bg++
+X-HM-Tid: 0a82b505c8ac2eb9kusn5af324c02bd
+X-MailFrom: jeffy.chen@rock-chips.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: T7KXX57TQSHNHDIH6ELTXLIWNONFX6YY
-X-Message-ID-Hash: T7KXX57TQSHNHDIH6ELTXLIWNONFX6YY
-X-Mailman-Approved-At: Thu, 06 Oct 2022 13:42:26 +0000
-CC: Wolfram Sang <wsa+renesas@sang-engineering.com>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: V6RRZ27CC5PRXTMQDCKWODL5TE7S7ZIY
+X-Message-ID-Hash: V6RRZ27CC5PRXTMQDCKWODL5TE7S7ZIY
+X-Mailman-Approved-At: Thu, 06 Oct 2022 13:42:15 +0000
+CC: Andy Yan <andy.yan@rock-chips.com>, Jianqun Xu <jay.xu@rock-chips.com>, Jeffy Chen <jeffy.chen@rock-chips.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Maxime Ripard <mripard@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Thomas Zimmermann <tzimmermann@suse.de>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, David Airlie <airlied@linux.ie>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, linux-media@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] dma-buf: move from strlcpy with unused retval to strscpy
+Subject: [Linaro-mm-sig] [PATCH v3] drm/gem: Fix GEM handle release errors
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/T7KXX57TQSHNHDIH6ELTXLIWNONFX6YY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/V6RRZ27CC5PRXTMQDCKWODL5TE7S7ZIY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Follow the advice of the below link and prefer 'strscpy' in this
-subsystem. Conversion is 1:1 because the return value is not used.
-Generated by a coccinelle script.
-
-Link: https://lore.kernel.org/r/CAHk-=wgfRnXz0W3D37d01q3JFkr_i_uTL=V6A6G1oUZcprmknw@mail.gmail.com/
-Signed-off-by: Wolfram Sang <wsa+renesas@sang-engineering.com>
----
- drivers/dma-buf/sw_sync.c   | 2 +-
- drivers/dma-buf/sync_file.c | 8 ++++----
- 2 files changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/drivers/dma-buf/sw_sync.c b/drivers/dma-buf/sw_sync.c
-index 348b3a9170fa..63f0aeb66db6 100644
---- a/drivers/dma-buf/sw_sync.c
-+++ b/drivers/dma-buf/sw_sync.c
-@@ -85,7 +85,7 @@ static struct sync_timeline *sync_timeline_create(const char *name)
- 
- 	kref_init(&obj->kref);
- 	obj->context = dma_fence_context_alloc(1);
--	strlcpy(obj->name, name, sizeof(obj->name));
-+	strscpy(obj->name, name, sizeof(obj->name));
- 
- 	obj->pt_tree = RB_ROOT;
- 	INIT_LIST_HEAD(&obj->pt_list);
-diff --git a/drivers/dma-buf/sync_file.c b/drivers/dma-buf/sync_file.c
-index 3ebec19a8e02..af57799c86ce 100644
---- a/drivers/dma-buf/sync_file.c
-+++ b/drivers/dma-buf/sync_file.c
-@@ -132,7 +132,7 @@ EXPORT_SYMBOL(sync_file_get_fence);
- char *sync_file_get_name(struct sync_file *sync_file, char *buf, int len)
- {
- 	if (sync_file->user_name[0]) {
--		strlcpy(buf, sync_file->user_name, len);
-+		strscpy(buf, sync_file->user_name, len);
- 	} else {
- 		struct dma_fence *fence = sync_file->fence;
- 
-@@ -172,7 +172,7 @@ static struct sync_file *sync_file_merge(const char *name, struct sync_file *a,
- 		return NULL;
- 	}
- 	sync_file->fence = fence;
--	strlcpy(sync_file->user_name, name, sizeof(sync_file->user_name));
-+	strscpy(sync_file->user_name, name, sizeof(sync_file->user_name));
- 	return sync_file;
- }
- 
-@@ -262,9 +262,9 @@ static long sync_file_ioctl_merge(struct sync_file *sync_file,
- static int sync_fill_fence_info(struct dma_fence *fence,
- 				 struct sync_fence_info *info)
- {
--	strlcpy(info->obj_name, fence->ops->get_timeline_name(fence),
-+	strscpy(info->obj_name, fence->ops->get_timeline_name(fence),
- 		sizeof(info->obj_name));
--	strlcpy(info->driver_name, fence->ops->get_driver_name(fence),
-+	strscpy(info->driver_name, fence->ops->get_driver_name(fence),
- 		sizeof(info->driver_name));
- 
- 	info->status = dma_fence_get_status(fence);
--- 
-2.35.1
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+Q3VycmVudGx5IHdlIGFyZSBhc3N1bWluZyBhIG9uZSB0byBvbmUgbWFwcGluZyBiZXR3ZWVuIGRt
+YWJ1ZiBhbmQNCkdFTSBoYW5kbGUgd2hlbiByZWxlYXNpbmcgR0VNIGhhbmRsZXMuDQoNCkJ1dCB0
+aGF0IGlzIG5vdCBhbHdheXMgdHJ1ZSwgc2luY2Ugd2Ugd291bGQgY3JlYXRlIGV4dHJhIGhhbmRs
+ZXMgZm9yIHRoZQ0KR0VNIG9iaiBpbiBjYXNlcyBsaWtlIGdlbV9vcGVuKCkgYW5kIGdldGZieywy
+fSgpLg0KDQpBIHNpbWlsYXIgaXNzdWUgd2FzIHJlcG9ydGVkIGF0Og0KaHR0cHM6Ly9sb3JlLmtl
+cm5lbC5vcmcvYWxsLzIwMjExMTA1MDgzMzA4LjM5MjE1Ni0xLWpheS54dUByb2NrLWNoaXBzLmNv
+bS8NCg0KQW5vdGhlciBwcm9ibGVtIGlzIHRoYXQgdGhlIGltcG9ydGVkIGRtYWJ1ZiBtaWdodCBu
+b3QgYWx3YXlzIGhhdmUNCmdlbV9vYmotPmRtYV9idWYgc2V0LCB3aGljaCB3b3VsZCBjYXVzZSBs
+ZWFrcyBpbg0KZHJtX2dlbV9yZW1vdmVfcHJpbWVfaGFuZGxlcygpLg0KDQpMZXQncyBmaXggdGhl
+c2UgZm9yIG5vdyBieSB1c2luZyBoYW5kbGUgdG8gZmluZCB0aGUgZXhhY3QgbWFwIHRvIHJlbW92
+ZS4NCg0KU2lnbmVkLW9mZi1ieTogSmVmZnkgQ2hlbiA8amVmZnkuY2hlbkByb2NrLWNoaXBzLmNv
+bT4NClJldmlld2VkLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5j
+b20+DQoNCi0tLQ0KDQpDaGFuZ2VzIGluIHYzOg0KUmV3cml0ZSBjb21taXQgbWVzc2FnZSBhIGJp
+dC4NCg0KQ2hhbmdlcyBpbiB2MjoNCkZpeCBhIHR5cG8gb2YgcmJ0cmVlLg0KDQogZHJpdmVycy9n
+cHUvZHJtL2RybV9nZW0uYyAgICAgIHwgMTcgKy0tLS0tLS0tLS0tLS0tLS0NCiBkcml2ZXJzL2dw
+dS9kcm0vZHJtX2ludGVybmFsLmggfCAgNCArKy0tDQogZHJpdmVycy9ncHUvZHJtL2RybV9wcmlt
+ZS5jICAgIHwgMjAgKysrKysrKysrKysrLS0tLS0tLS0NCiAzIGZpbGVzIGNoYW5nZWQsIDE1IGlu
+c2VydGlvbnMoKyksIDI2IGRlbGV0aW9ucygtKQ0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUv
+ZHJtL2RybV9nZW0uYyBiL2RyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtLmMNCmluZGV4IGViMGMyZDA0
+MWYxMy4uZWQzOWRhMzgzNTcwIDEwMDY0NA0KLS0tIGEvZHJpdmVycy9ncHUvZHJtL2RybV9nZW0u
+Yw0KKysrIGIvZHJpdmVycy9ncHUvZHJtL2RybV9nZW0uYw0KQEAgLTE2OCwyMSArMTY4LDYgQEAg
+dm9pZCBkcm1fZ2VtX3ByaXZhdGVfb2JqZWN0X2luaXQoc3RydWN0IGRybV9kZXZpY2UgKmRldiwN
+CiB9DQogRVhQT1JUX1NZTUJPTChkcm1fZ2VtX3ByaXZhdGVfb2JqZWN0X2luaXQpOw0KIA0KLXN0
+YXRpYyB2b2lkDQotZHJtX2dlbV9yZW1vdmVfcHJpbWVfaGFuZGxlcyhzdHJ1Y3QgZHJtX2dlbV9v
+YmplY3QgKm9iaiwgc3RydWN0IGRybV9maWxlICpmaWxwKQ0KLXsNCi0JLyoNCi0JICogTm90ZTog
+b2JqLT5kbWFfYnVmIGNhbid0IGRpc2FwcGVhciBhcyBsb25nIGFzIHdlIHN0aWxsIGhvbGQgYQ0K
+LQkgKiBoYW5kbGUgcmVmZXJlbmNlIGluIG9iai0+aGFuZGxlX2NvdW50Lg0KLQkgKi8NCi0JbXV0
+ZXhfbG9jaygmZmlscC0+cHJpbWUubG9jayk7DQotCWlmIChvYmotPmRtYV9idWYpIHsNCi0JCWRy
+bV9wcmltZV9yZW1vdmVfYnVmX2hhbmRsZV9sb2NrZWQoJmZpbHAtPnByaW1lLA0KLQkJCQkJCSAg
+IG9iai0+ZG1hX2J1Zik7DQotCX0NCi0JbXV0ZXhfdW5sb2NrKCZmaWxwLT5wcmltZS5sb2NrKTsN
+Ci19DQotDQogLyoqDQogICogZHJtX2dlbV9vYmplY3RfaGFuZGxlX2ZyZWUgLSByZWxlYXNlIHJl
+c291cmNlcyBib3VuZCB0byB1c2Vyc3BhY2UgaGFuZGxlcw0KICAqIEBvYmo6IEdFTSBvYmplY3Qg
+dG8gY2xlYW4gdXAuDQpAQCAtMjUzLDcgKzIzOCw3IEBAIGRybV9nZW1fb2JqZWN0X3JlbGVhc2Vf
+aGFuZGxlKGludCBpZCwgdm9pZCAqcHRyLCB2b2lkICpkYXRhKQ0KIAlpZiAob2JqLT5mdW5jcy0+
+Y2xvc2UpDQogCQlvYmotPmZ1bmNzLT5jbG9zZShvYmosIGZpbGVfcHJpdik7DQogDQotCWRybV9n
+ZW1fcmVtb3ZlX3ByaW1lX2hhbmRsZXMob2JqLCBmaWxlX3ByaXYpOw0KKwlkcm1fcHJpbWVfcmVt
+b3ZlX2J1Zl9oYW5kbGUoJmZpbGVfcHJpdi0+cHJpbWUsIGlkKTsNCiAJZHJtX3ZtYV9ub2RlX3Jl
+dm9rZSgmb2JqLT52bWFfbm9kZSwgZmlsZV9wcml2KTsNCiANCiAJZHJtX2dlbV9vYmplY3RfaGFu
+ZGxlX3B1dF91bmxvY2tlZChvYmopOw0KZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9kcm1f
+aW50ZXJuYWwuaCBiL2RyaXZlcnMvZ3B1L2RybS9kcm1faW50ZXJuYWwuaA0KaW5kZXggMWZiYmMx
+OWYxYWMwLi43YmI5OGU2YTQ0NmQgMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2lu
+dGVybmFsLmgNCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9kcm1faW50ZXJuYWwuaA0KQEAgLTc0LDgg
+Kzc0LDggQEAgaW50IGRybV9wcmltZV9mZF90b19oYW5kbGVfaW9jdGwoc3RydWN0IGRybV9kZXZp
+Y2UgKmRldiwgdm9pZCAqZGF0YSwNCiANCiB2b2lkIGRybV9wcmltZV9pbml0X2ZpbGVfcHJpdmF0
+ZShzdHJ1Y3QgZHJtX3ByaW1lX2ZpbGVfcHJpdmF0ZSAqcHJpbWVfZnByaXYpOw0KIHZvaWQgZHJt
+X3ByaW1lX2Rlc3Ryb3lfZmlsZV9wcml2YXRlKHN0cnVjdCBkcm1fcHJpbWVfZmlsZV9wcml2YXRl
+ICpwcmltZV9mcHJpdik7DQotdm9pZCBkcm1fcHJpbWVfcmVtb3ZlX2J1Zl9oYW5kbGVfbG9ja2Vk
+KHN0cnVjdCBkcm1fcHJpbWVfZmlsZV9wcml2YXRlICpwcmltZV9mcHJpdiwNCi0JCQkJCXN0cnVj
+dCBkbWFfYnVmICpkbWFfYnVmKTsNCit2b2lkIGRybV9wcmltZV9yZW1vdmVfYnVmX2hhbmRsZShz
+dHJ1Y3QgZHJtX3ByaW1lX2ZpbGVfcHJpdmF0ZSAqcHJpbWVfZnByaXYsDQorCQkJCSB1aW50MzJf
+dCBoYW5kbGUpOw0KIA0KIC8qIGRybV9kcnYuYyAqLw0KIHN0cnVjdCBkcm1fbWlub3IgKmRybV9t
+aW5vcl9hY3F1aXJlKHVuc2lnbmVkIGludCBtaW5vcl9pZCk7DQpkaWZmIC0tZ2l0IGEvZHJpdmVy
+cy9ncHUvZHJtL2RybV9wcmltZS5jIGIvZHJpdmVycy9ncHUvZHJtL2RybV9wcmltZS5jDQppbmRl
+eCBlM2YwOWYxODExMGMuLmJkNTM2NmIxNjM4MSAxMDA2NDQNCi0tLSBhL2RyaXZlcnMvZ3B1L2Ry
+bS9kcm1fcHJpbWUuYw0KKysrIGIvZHJpdmVycy9ncHUvZHJtL2RybV9wcmltZS5jDQpAQCAtMTkw
+LDI5ICsxOTAsMzMgQEAgc3RhdGljIGludCBkcm1fcHJpbWVfbG9va3VwX2J1Zl9oYW5kbGUoc3Ry
+dWN0IGRybV9wcmltZV9maWxlX3ByaXZhdGUgKnByaW1lX2ZwcmkNCiAJcmV0dXJuIC1FTk9FTlQ7
+DQogfQ0KIA0KLXZvaWQgZHJtX3ByaW1lX3JlbW92ZV9idWZfaGFuZGxlX2xvY2tlZChzdHJ1Y3Qg
+ZHJtX3ByaW1lX2ZpbGVfcHJpdmF0ZSAqcHJpbWVfZnByaXYsDQotCQkJCQlzdHJ1Y3QgZG1hX2J1
+ZiAqZG1hX2J1ZikNCit2b2lkIGRybV9wcmltZV9yZW1vdmVfYnVmX2hhbmRsZShzdHJ1Y3QgZHJt
+X3ByaW1lX2ZpbGVfcHJpdmF0ZSAqcHJpbWVfZnByaXYsDQorCQkJCSB1aW50MzJfdCBoYW5kbGUp
+DQogew0KIAlzdHJ1Y3QgcmJfbm9kZSAqcmI7DQogDQotCXJiID0gcHJpbWVfZnByaXYtPmRtYWJ1
+ZnMucmJfbm9kZTsNCisJbXV0ZXhfbG9jaygmcHJpbWVfZnByaXYtPmxvY2spOw0KKw0KKwlyYiA9
+IHByaW1lX2Zwcml2LT5oYW5kbGVzLnJiX25vZGU7DQogCXdoaWxlIChyYikgew0KIAkJc3RydWN0
+IGRybV9wcmltZV9tZW1iZXIgKm1lbWJlcjsNCiANCi0JCW1lbWJlciA9IHJiX2VudHJ5KHJiLCBz
+dHJ1Y3QgZHJtX3ByaW1lX21lbWJlciwgZG1hYnVmX3JiKTsNCi0JCWlmIChtZW1iZXItPmRtYV9i
+dWYgPT0gZG1hX2J1Zikgew0KKwkJbWVtYmVyID0gcmJfZW50cnkocmIsIHN0cnVjdCBkcm1fcHJp
+bWVfbWVtYmVyLCBoYW5kbGVfcmIpOw0KKwkJaWYgKG1lbWJlci0+aGFuZGxlID09IGhhbmRsZSkg
+ew0KIAkJCXJiX2VyYXNlKCZtZW1iZXItPmhhbmRsZV9yYiwgJnByaW1lX2Zwcml2LT5oYW5kbGVz
+KTsNCiAJCQlyYl9lcmFzZSgmbWVtYmVyLT5kbWFidWZfcmIsICZwcmltZV9mcHJpdi0+ZG1hYnVm
+cyk7DQogDQotCQkJZG1hX2J1Zl9wdXQoZG1hX2J1Zik7DQorCQkJZG1hX2J1Zl9wdXQobWVtYmVy
+LT5kbWFfYnVmKTsNCiAJCQlrZnJlZShtZW1iZXIpOw0KLQkJCXJldHVybjsNCi0JCX0gZWxzZSBp
+ZiAobWVtYmVyLT5kbWFfYnVmIDwgZG1hX2J1Zikgew0KKwkJCWJyZWFrOw0KKwkJfSBlbHNlIGlm
+IChtZW1iZXItPmhhbmRsZSA8IGhhbmRsZSkgew0KIAkJCXJiID0gcmItPnJiX3JpZ2h0Ow0KIAkJ
+fSBlbHNlIHsNCiAJCQlyYiA9IHJiLT5yYl9sZWZ0Ow0KIAkJfQ0KIAl9DQorDQorCW11dGV4X3Vu
+bG9jaygmcHJpbWVfZnByaXYtPmxvY2spOw0KIH0NCiANCiB2b2lkIGRybV9wcmltZV9pbml0X2Zp
+bGVfcHJpdmF0ZShzdHJ1Y3QgZHJtX3ByaW1lX2ZpbGVfcHJpdmF0ZSAqcHJpbWVfZnByaXYpDQot
+LSANCjIuMjAuMQ0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxp
+bmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxl
+YXZlQGxpc3RzLmxpbmFyby5vcmcK
