@@ -2,35 +2,67 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C754059C48A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Aug 2022 19:03:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B289159CD4C
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Aug 2022 02:46:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A3FF43F94B
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Aug 2022 17:03:11 +0000 (UTC)
-Received: from kozue.soulik.info (kozue.soulik.info [108.61.200.231])
-	by lists.linaro.org (Postfix) with ESMTPS id A358D3EE28
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 31 Jul 2022 20:21:35 +0000 (UTC)
-Received: from randy-t14s.synaptics.com (unknown [112.65.48.159])
-	by kozue.soulik.info (Postfix) with ESMTPSA id 0C42B100DB3;
-	Mon,  1 Aug 2022 05:15:17 +0900 (JST)
-From: ayaka@soulik.info
-To: linux-media@vger.kernel.org
-Date: Mon,  1 Aug 2022 04:21:16 +0800
-Message-Id: <20220731202116.820516-1-ayaka@soulik.info>
-X-Mailer: git-send-email 2.37.1
+	by lists.linaro.org (Postfix) with ESMTP id ADAD43F944
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Aug 2022 00:46:29 +0000 (UTC)
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+	by lists.linaro.org (Postfix) with ESMTPS id 7C8F13EDB5
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Aug 2022 00:46:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1661215582; x=1692751582;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=2g8nN0jrK8PfdCkNhbKM2KDBhQ6tYPvqKN20IXskZ5c=;
+  b=lmNHF4qcmoEoqzEy4B1DKntMNt3WRqhYyGt4L5ZVVZLRDjcObQ23790X
+   9K7DpKeLr0YqoLzdLi5HewipYZKum9F25YY2EQjzHBGKo2bOXHujvF4Yp
+   zDSMc/0nQpnq1kowQsr1ZM9TOsddKO75w5SCxjWS3KGqBvJPuIcDKI+ZI
+   D7byRFf6xnoEJtg2y5V2YcrNKNunEZQQGpbDseQwBY+XfJAT6VT78zEOH
+   jMDHN5IxZtHCmsJFuo1FP8cwgRWrVdb2JxviBJlwkIkwoPj343X7Zk5Qx
+   Pnd4/p89zwa52pfwbX6MHSpwd+LSke+jHmxVpLWQKIKEO2C7MPPzlZP37
+   g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10447"; a="273310928"
+X-IronPort-AV: E=Sophos;i="5.93,256,1654585200";
+   d="scan'208";a="273310928"
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Aug 2022 17:46:21 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.93,255,1654585200";
+   d="scan'208";a="735292102"
+Received: from lkp-server01.sh.intel.com (HELO dd9b29378baa) ([10.239.97.150])
+  by orsmga004.jf.intel.com with ESMTP; 22 Aug 2022 17:46:18 -0700
+Received: from kbuild by dd9b29378baa with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1oQI3d-0000vH-1A;
+	Tue, 23 Aug 2022 00:46:17 +0000
+Date: Tue, 23 Aug 2022 08:45:36 +0800
+From: kernel test robot <lkp@intel.com>
+To: Andrew Davis <afd@ti.com>, Sumit Semwal <sumit.semwal@linaro.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+	Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>,
+	Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <jstultz@google.com>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+	linux-kernel@vger.kernel.org
+Message-ID: <202208230840.npLcmvVn-lkp@intel.com>
+References: <20220822233025.3965-1-afd@ti.com>
 MIME-Version: 1.0
-X-MailFrom: ayaka@soulik.info
+Content-Disposition: inline
+In-Reply-To: <20220822233025.3965-1-afd@ti.com>
+Message-ID-Hash: MCO56QOELXAZRYSLHQBQYAWT4P3HDNQN
+X-Message-ID-Hash: MCO56QOELXAZRYSLHQBQYAWT4P3HDNQN
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: S2FIITIUY4CATAHO3FMMEM27QXAYJUNJ
-X-Message-ID-Hash: S2FIITIUY4CATAHO3FMMEM27QXAYJUNJ
-X-Mailman-Approved-At: Mon, 22 Aug 2022 17:03:04 +0000
-CC: tfiga@chromium.org, sumit.semwal@linaro.org, christian.koenig@amd.com, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, randy.li@synaptics.com, Randy Li <ayaka@soulik.info>
+CC: kbuild-all@lists.01.org, Andrew Davis <afd@ti.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] [Draft]: media: videobuf2-dma-heap: add a vendor defined memory runtine
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: cma_heap: Check for device max segment size when attaching
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/S2FIITIUY4CATAHO3FMMEM27QXAYJUNJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MCO56QOELXAZRYSLHQBQYAWT4P3HDNQN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -40,463 +72,83 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-From: Randy Li <ayaka@soulik.info>
+Hi Andrew,
 
-This module is still at a early stage, I wrote this for showing what
-APIs we need here.
+Thank you for the patch! Perhaps something to improve:
 
-Let me explain why we need such a module here.
-If you won't allocate buffers from a V4L2 M2M device, this module
-may not be very useful. I am sure the most of users won't know a
-device would require them allocate buffers from a DMA-Heap then
-import those buffers into a V4L2's queue.
+[auto build test WARNING on drm-misc/drm-misc-next]
+[also build test WARNING on linus/master v6.0-rc2 next-20220822]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-Then the question goes back to why DMA-Heap. From the Android's
-description, we know it is about the copyright's DRM.
-When we allocate a buffer in a DMA-Heap, it may register that buffer
-in the trusted execution environment so the firmware which is running
-or could only be acccesed from there could use that buffer later.
+url:    https://github.com/intel-lab-lkp/linux/commits/Andrew-Davis/dma-buf-cma_heap-Check-for-device-max-segment-size-when-attaching/20220823-073240
+base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
+config: s390-allyesconfig (https://download.01.org/0day-ci/archive/20220823/202208230840.npLcmvVn-lkp@intel.com/config)
+compiler: s390-linux-gcc (GCC) 12.1.0
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/intel-lab-lkp/linux/commit/f390cef50ba6681ea767283e413cb8e9f8f2b426
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Andrew-Davis/dma-buf-cma_heap-Check-for-device-max-segment-size-when-attaching/20220823-073240
+        git checkout f390cef50ba6681ea767283e413cb8e9f8f2b426
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=s390 SHELL=/bin/bash drivers/dma-buf/
 
-The answer above leads to another thing which is not done in this
-version, the DMA mapping. Although in some platforms, a DMA-Heap
-responses a IOMMU device as well. For the genernal purpose, we would
-be better assuming the device mapping should be done for each device
-itself. The problem here we only know alloc_devs in those DMAbuf
-methods, which are DMA-heaps in my design, the device from the queue
-is not enough, a plane may requests another IOMMU device or table
-for mapping.
+If you fix the issue, kindly add following tag where applicable
+Reported-by: kernel test robot <lkp@intel.com>
 
-Signed-off-by: Randy Li <ayaka@soulik.info>
----
- drivers/media/common/videobuf2/Kconfig        |   6 +
- drivers/media/common/videobuf2/Makefile       |   1 +
- .../common/videobuf2/videobuf2-dma-heap.c     | 350 ++++++++++++++++++
- include/media/videobuf2-dma-heap.h            |  30 ++
- 4 files changed, 387 insertions(+)
- create mode 100644 drivers/media/common/videobuf2/videobuf2-dma-heap.c
- create mode 100644 include/media/videobuf2-dma-heap.h
+All warnings (new ones prefixed by >>):
 
-diff --git a/drivers/media/common/videobuf2/Kconfig b/drivers/media/common/videobuf2/Kconfig
-index d2223a12c95f..02235077f07e 100644
---- a/drivers/media/common/videobuf2/Kconfig
-+++ b/drivers/media/common/videobuf2/Kconfig
-@@ -30,3 +30,9 @@ config VIDEOBUF2_DMA_SG
- config VIDEOBUF2_DVB
- 	tristate
- 	select VIDEOBUF2_CORE
-+
-+config VIDEOBUF2_DMA_HEAP
-+	tristate
-+	select VIDEOBUF2_CORE
-+	select VIDEOBUF2_MEMOPS
-+	select DMABUF_HEAPS
-diff --git a/drivers/media/common/videobuf2/Makefile b/drivers/media/common/videobuf2/Makefile
-index a6fe3f304685..7fe65f93117f 100644
---- a/drivers/media/common/videobuf2/Makefile
-+++ b/drivers/media/common/videobuf2/Makefile
-@@ -10,6 +10,7 @@ endif
- # (e. g. LC_ALL=C sort Makefile)
- obj-$(CONFIG_VIDEOBUF2_CORE) += videobuf2-common.o
- obj-$(CONFIG_VIDEOBUF2_DMA_CONTIG) += videobuf2-dma-contig.o
-+obj-$(CONFIG_VIDEOBUF2_DMA_HEAP) += videobuf2-dma-heap.o
- obj-$(CONFIG_VIDEOBUF2_DMA_SG) += videobuf2-dma-sg.o
- obj-$(CONFIG_VIDEOBUF2_DVB) += videobuf2-dvb.o
- obj-$(CONFIG_VIDEOBUF2_MEMOPS) += videobuf2-memops.o
-diff --git a/drivers/media/common/videobuf2/videobuf2-dma-heap.c b/drivers/media/common/videobuf2/videobuf2-dma-heap.c
-new file mode 100644
-index 000000000000..377b82ab8f5a
---- /dev/null
-+++ b/drivers/media/common/videobuf2/videobuf2-dma-heap.c
-@@ -0,0 +1,350 @@
-+/*
-+ * Copyright (C) 2022 Randy Li <ayaka@soulik.info>
-+ *
-+ * This software is licensed under the terms of the GNU General Public
-+ * License version 2, as published by the Free Software Foundation, and
-+ * may be copied, distributed, and modified under those terms.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ */
-+
-+#include <linux/dma-buf.h>
-+#include <linux/dma-heap.h>
-+#include <linux/refcount.h>
-+#include <linux/scatterlist.h>
-+#include <linux/sched.h>
-+#include <linux/slab.h>
-+#include <linux/dma-mapping.h>
-+
-+#include <media/videobuf2-v4l2.h>
-+#include <media/videobuf2-memops.h>
-+#include <media/videobuf2-dma-heap.h>
-+
-+struct vb2_dmaheap_buf {
-+	struct device *dev;
-+	void *vaddr;
-+	unsigned long size;
-+	struct dma_buf *dmabuf;
-+	dma_addr_t dma_addr;
-+	unsigned long attrs;
-+	enum dma_data_direction dma_dir;
-+	struct sg_table *dma_sgt;
-+
-+	/* MMAP related */
-+	struct vb2_vmarea_handler handler;
-+	refcount_t refcount;
-+
-+	/* DMABUF related */
-+	struct dma_buf_attachment *db_attach;
-+};
-+
-+/*********************************************/
-+/*         callbacks for all buffers         */
-+/*********************************************/
-+
-+void *vb2_dmaheap_cookie(struct vb2_buffer *vb, void *buf_priv)
-+{
-+	struct vb2_dmaheap_buf *buf = buf_priv;
-+
-+	return &buf->dma_addr;
-+}
-+
-+static void *vb2_dmaheap_vaddr(struct vb2_buffer *vb, void *buf_priv)
-+{
-+	struct vb2_dmaheap_buf *buf = buf_priv;
-+	struct iosys_map map;
-+
-+	if (buf->vaddr)
-+	    return buf->vaddr;
-+
-+	if (buf->db_attach) {
-+		if (!dma_buf_vmap(buf->db_attach->dmabuf, &map))
-+			buf->vaddr = map.vaddr;
-+	}
-+
-+	return buf->vaddr;
-+}
-+
-+static unsigned int vb2_dmaheap_num_users(void *buf_priv)
-+{
-+	struct vb2_dmaheap_buf *buf = buf_priv;
-+
-+	return refcount_read(&buf->refcount);
-+}
-+
-+static void vb2_dmaheap_prepare(void *buf_priv)
-+{
-+	struct vb2_dmaheap_buf *buf = buf_priv;
-+
-+	/* TODO: DMABUF exporter will flush the cache for us */
-+	if (buf->db_attach)
-+		return;
-+
-+	dma_buf_end_cpu_access(buf->dmabuf, buf->dma_dir);
-+}
-+
-+static void vb2_dmaheap_finish(void *buf_priv)
-+{
-+	struct vb2_dmaheap_buf *buf = buf_priv;
-+
-+	/* TODO: DMABUF exporter will flush the cache for us */
-+	if (buf->db_attach)
-+		return;
-+
-+	dma_buf_begin_cpu_access(buf->dmabuf, buf->dma_dir);
-+}
-+
-+/*********************************************/
-+/*        callbacks for MMAP buffers         */
-+/*********************************************/
-+
-+void vb2_dmaheap_put(void *buf_priv)
-+{
-+	struct vb2_dmaheap_buf *buf = buf_priv;
-+
-+	if (!refcount_dec_and_test(&buf->refcount))
-+		return;
-+
-+	dma_buf_put(buf->dmabuf);
-+
-+	put_device(buf->dev);
-+	kfree(buf);
-+}
-+
-+static void *vb2_dmaheap_alloc(struct vb2_buffer *vb,
-+			       struct device *dev,
-+			       unsigned long size)
-+{
-+	struct vb2_queue *q = vb->vb2_queue;
-+	struct dma_heap *heap;
-+	struct vb2_dmaheap_buf *buf;
-+	const char *heap_name;
-+	int ret;
-+
-+	if (WARN_ON(!dev))
-+		return ERR_PTR(-EINVAL);
-+
-+	heap_name = dev_name(dev);
-+	if (!heap_name)
-+		return ERR_PTR(-EINVAL);
-+
-+	heap = dma_heap_find(heap_name);
-+	if (!heap) {
-+		dev_err(dev, "is not a DMA-heap device\n");
-+		return ERR_PTR(-EINVAL);
-+	}
-+
-+	buf = kzalloc(sizeof *buf, GFP_KERNEL);
-+	if (!buf)
-+		return ERR_PTR(-ENOMEM);
-+
-+	/* Prevent the device from being released while the buffer is used */
-+	buf->dev = get_device(dev);
-+	buf->attrs = vb->vb2_queue->dma_attrs;
-+	buf->dma_dir = vb->vb2_queue->dma_dir;
-+
-+	/* TODO: heap flags */
-+	ret = dma_heap_buffer_alloc(heap, size, 0, 0);
-+	if (ret < 0) {
-+		dev_err(dev, "is not a DMA-heap device\n");
-+		put_device(buf->dev);
-+		kfree(buf);
-+		return ERR_PTR(ret);
-+	}
-+	buf->dmabuf = dma_buf_get(ret);
-+
-+	/* FIXME */
-+	buf->dma_addr = 0;
-+
-+	if ((q->dma_attrs & DMA_ATTR_NO_KERNEL_MAPPING) == 0)
-+		buf->vaddr = buf->dmabuf;
-+
-+	buf->handler.refcount = &buf->refcount;
-+	buf->handler.put = vb2_dmaheap_put;
-+	buf->handler.arg = buf;
-+
-+	refcount_set(&buf->refcount, 1);
-+
-+	return buf;
-+}
-+
-+static int vb2_dmaheap_mmap(void *buf_priv, struct vm_area_struct *vma)
-+{
-+	struct vb2_dmaheap_buf *buf = buf_priv;
-+	int ret;
-+
-+	if (!buf) {
-+		printk(KERN_ERR "No buffer to map\n");
-+		return -EINVAL;
-+	}
-+
-+	vma->vm_flags &= ~VM_PFNMAP;
-+
-+	ret = dma_buf_mmap(buf->dmabuf, vma, 0);
-+	if (ret) {
-+		pr_err("Remapping memory failed, error: %d\n", ret);
-+		return ret;
-+	}
-+	vma->vm_flags           |= VM_DONTEXPAND | VM_DONTDUMP;
-+	vma->vm_private_data    = &buf->handler;
-+	vma->vm_ops             = &vb2_common_vm_ops;
-+
-+	vma->vm_ops->open(vma);
-+
-+	pr_debug("%s: mapped memid 0x%08lx at 0x%08lx, size %ld\n",
-+		 __func__, (unsigned long)buf->dma_addr, vma->vm_start,
-+		 buf->size);
-+
-+	return 0;
-+}
-+
-+/*********************************************/
-+/*         DMABUF ops for exporters          */
-+/*********************************************/
-+
-+static struct dma_buf *vb2_dmaheap_get_dmabuf(struct vb2_buffer *vb,
-+					      void *buf_priv,
-+					      unsigned long flags)
-+{
-+	struct vb2_dmaheap_buf *buf = buf_priv;
-+	struct dma_buf *dbuf;
-+
-+	dbuf = buf->dmabuf;
-+
-+	return dbuf;
-+}
-+
-+/*********************************************/
-+/*       callbacks for DMABUF buffers        */
-+/*********************************************/
-+
-+static int vb2_dmaheap_map_dmabuf(void *mem_priv)
-+{
-+	struct vb2_dmaheap_buf *buf = mem_priv;
-+	struct sg_table *sgt;
-+
-+	if (WARN_ON(!buf->db_attach)) {
-+		pr_err("trying to pin a non attached buffer\n");
-+		return -EINVAL;
-+	}
-+
-+	if (WARN_ON(buf->dma_sgt)) {
-+		pr_err("dmabuf buffer is already pinned\n");
-+		return 0;
-+	}
-+
-+	/* get the associated scatterlist for this buffer */
-+	sgt = dma_buf_map_attachment(buf->db_attach, buf->dma_dir);
-+	if (IS_ERR(sgt)) {
-+		pr_err("Error getting dmabuf scatterlist\n");
-+		return -EINVAL;
-+	}
-+
-+	buf->dma_addr = sg_dma_address(sgt->sgl);
-+	buf->dma_sgt = sgt;
-+	buf->vaddr = NULL;
-+
-+	return 0;
-+}
-+
-+static void vb2_dmaheap_unmap_dmabuf(void *mem_priv)
-+{
-+	struct vb2_dmaheap_buf *buf = mem_priv;
-+	struct sg_table *sgt = buf->dma_sgt;
-+	struct iosys_map map = IOSYS_MAP_INIT_VADDR(buf->vaddr);
-+
-+	if (WARN_ON(!buf->db_attach)) {
-+		pr_err("trying to unpin a not attached buffer\n");
-+		return;
-+	}
-+
-+	if (WARN_ON(!sgt)) {
-+		pr_err("dmabuf buffer is already unpinned\n");
-+		return;
-+	}
-+
-+	if (buf->vaddr) {
-+		dma_buf_vunmap(buf->db_attach->dmabuf, &map);
-+		buf->vaddr = NULL;
-+	}
-+	dma_buf_unmap_attachment(buf->db_attach, sgt, buf->dma_dir);
-+
-+	buf->dma_addr = 0;
-+	buf->dma_sgt = NULL;
-+}
-+
-+static void vb2_dmaheap_detach_dmabuf(void *mem_priv)
-+{
-+	struct vb2_dmaheap_buf *buf = mem_priv;
-+
-+	/* if vb2 works correctly you should never detach mapped buffer */
-+	if (WARN_ON(buf->dma_addr))
-+		vb2_dmaheap_unmap_dmabuf(buf);
-+
-+	/* detach this attachment */
-+	dma_buf_detach(buf->db_attach->dmabuf, buf->db_attach);
-+	kfree(buf);
-+}
-+
-+static void *vb2_dmaheap_attach_dmabuf(struct vb2_buffer *vb, struct device *dev,
-+				       struct dma_buf *dbuf, unsigned long size)
-+{
-+	struct vb2_dmaheap_buf *buf;
-+	struct dma_buf_attachment *dba;
-+
-+	if (dbuf->size < size)
-+		return ERR_PTR(-EFAULT);
-+
-+	if (WARN_ON(!dev))
-+		return ERR_PTR(-EINVAL);
-+	/*
-+	 * TODO: A better way to check whether the buffer is coming
-+	 * from this heap or this heap could accept this buffer
-+	 */
-+	if (strcmp(dbuf->exp_name, dev_name(dev)))
-+		return ERR_PTR(-EINVAL);
-+
-+	buf = kzalloc(sizeof(*buf), GFP_KERNEL);
-+	if (!buf)
-+		return ERR_PTR(-ENOMEM);
-+
-+	buf->dev = dev;
-+	/* create attachment for the dmabuf with the user device */
-+	dba = dma_buf_attach(dbuf, buf->dev);
-+	if (IS_ERR(dba)) {
-+		pr_err("failed to attach dmabuf\n");
-+		kfree(buf);
-+		return dba;
-+	}
-+
-+	buf->dma_dir = vb->vb2_queue->dma_dir;
-+	buf->size = size;
-+	buf->db_attach = dba;
-+
-+	return buf;
-+}
-+
-+const struct vb2_mem_ops vb2_dmaheap_memops = {
-+	.alloc = vb2_dmaheap_alloc,
-+	.put = vb2_dmaheap_put,
-+	.get_dmabuf = vb2_dmaheap_get_dmabuf,
-+	.cookie = vb2_dmaheap_cookie,
-+	.vaddr = vb2_dmaheap_vaddr,
-+	.prepare = vb2_dmaheap_prepare,
-+	.finish = vb2_dmaheap_finish,
-+	.map_dmabuf = vb2_dmaheap_map_dmabuf,
-+	.unmap_dmabuf = vb2_dmaheap_unmap_dmabuf,
-+	.attach_dmabuf = vb2_dmaheap_attach_dmabuf,
-+	.detach_dmabuf = vb2_dmaheap_detach_dmabuf,
-+	.num_users = vb2_dmaheap_num_users,
-+	.mmap = vb2_dmaheap_mmap,
-+};
-+
-+MODULE_DESCRIPTION("DMA-Heap memory handling routines for videobuf2");
-+MODULE_AUTHOR("Randy Li <ayaka@soulik.info>");
-+MODULE_LICENSE("GPL");
-+MODULE_IMPORT_NS(DMA_BUF);
-diff --git a/include/media/videobuf2-dma-heap.h b/include/media/videobuf2-dma-heap.h
-new file mode 100644
-index 000000000000..fa057f67d6e9
---- /dev/null
-+++ b/include/media/videobuf2-dma-heap.h
-@@ -0,0 +1,30 @@
-+/*
-+ * Copyright (C) 2022 Randy Li <ayaka@soulik.info>
-+ *
-+ * This software is licensed under the terms of the GNU General Public
-+ * License version 2, as published by the Free Software Foundation, and
-+ * may be copied, distributed, and modified under those terms.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ *
-+ */
-+
-+#ifndef _MEDIA_VIDEOBUF2_DMA_HEAP_H
-+#define _MEDIA_VIDEOBUF2_DMA_HEAP_H
-+
-+#include <media/videobuf2-v4l2.h>
-+#include <linux/dma-mapping.h>
-+
-+static inline dma_addr_t
-+vb2_dmaheap_plane_dma_addr(struct vb2_buffer *vb, unsigned int plane_no)
-+{
-+	dma_addr_t *addr = vb2_plane_cookie(vb, plane_no);
-+
-+	return *addr;
-+}
-+
-+extern const struct vb2_mem_ops vb2_dmaheap_memops;
-+#endif
+   drivers/dma-buf/heaps/cma_heap.c: In function 'cma_heap_attach':
+>> drivers/dma-buf/heaps/cma_heap.c:61:9: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+      61 |         size_t max_segment = dma_get_max_seg_size(attachment->dev);
+         |         ^~~~~~
+
+
+vim +61 drivers/dma-buf/heaps/cma_heap.c
+
+    49	
+    50	static int cma_heap_attach(struct dma_buf *dmabuf,
+    51				   struct dma_buf_attachment *attachment)
+    52	{
+    53		struct cma_heap_buffer *buffer = dmabuf->priv;
+    54		struct dma_heap_attachment *a;
+    55		int ret;
+    56	
+    57		a = kzalloc(sizeof(*a), GFP_KERNEL);
+    58		if (!a)
+    59			return -ENOMEM;
+    60	
+  > 61		size_t max_segment = dma_get_max_seg_size(attachment->dev);
+    62		ret = sg_alloc_table_from_pages_segment(&a->table, buffer->pages,
+    63							buffer->pagecount, 0,
+    64							buffer->pagecount << PAGE_SHIFT,
+    65							max_segment, GFP_KERNEL);
+    66		if (ret) {
+    67			kfree(a);
+    68			return ret;
+    69		}
+    70	
+    71		a->dev = attachment->dev;
+    72		INIT_LIST_HEAD(&a->list);
+    73		a->mapped = false;
+    74	
+    75		attachment->priv = a;
+    76	
+    77		mutex_lock(&buffer->lock);
+    78		list_add(&a->list, &buffer->attachments);
+    79		mutex_unlock(&buffer->lock);
+    80	
+    81		return 0;
+    82	}
+    83	
+
 -- 
-2.17.1
-
+0-DAY CI Kernel Test Service
+https://01.org/lkp
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
