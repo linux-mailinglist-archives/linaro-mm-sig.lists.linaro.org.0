@@ -2,153 +2,175 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04D4C59D2B0
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Aug 2022 09:54:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7ABB859F766
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 Aug 2022 12:23:49 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1778E3F5F9
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 23 Aug 2022 07:54:45 +0000 (UTC)
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by lists.linaro.org (Postfix) with ESMTPS id C78D53F0CE
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 23 Aug 2022 07:54:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1661241277; x=1692777277;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=cEOZdzegwHLzQIT58dSZ/XXOqg0uoIRUya/QlSkPQJU=;
-  b=FW29uWs9nFvIqUM38iwxP1g88ikz/Xkwq3PpGLVxoFcDWeVu63MLaa/j
-   DNCc9oh2VM1LeV8BsiUM54PTXu1d/hRgyFysPtujU/aik4OMLDsyfbAxS
-   FgNymZ3/e8Sl9kbq1xWrdm0s442eS4DBD2t/oc/wZEhW8QyFsZ/XGFsGK
-   BH4/BBfWJfyFAmJX7Vl+hj0CFdbQdkmc4BCl/ewdwaukG7f5UI52Hj9X7
-   f5Yx7Yp/HGQEoajaeGHuQNvJT/Vb0zWwrzTd6iO9ZTyvnuJFQ4cbNBsCE
-   mvJHPDBQ+ZtkRB3biDF0igLNfEb8A3v2od3RDfRkvKlsEF5ONgXyb6bbs
-   A==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10447"; a="319660801"
-X-IronPort-AV: E=Sophos;i="5.93,256,1654585200";
-   d="scan'208";a="319660801"
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Aug 2022 00:52:48 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.93,257,1654585200";
-   d="scan'208";a="609256215"
-Received: from lkp-server02.sh.intel.com (HELO 9bbcefcddf9f) ([10.239.97.151])
-  by orsmga002.jf.intel.com with ESMTP; 23 Aug 2022 00:52:44 -0700
-Received: from kbuild by 9bbcefcddf9f with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1oQOiJ-00001O-34;
-	Tue, 23 Aug 2022 07:52:43 +0000
-Date: Tue, 23 Aug 2022 15:52:39 +0800
-From: kernel test robot <lkp@intel.com>
-To: Andrew Davis <afd@ti.com>, Sumit Semwal <sumit.semwal@linaro.org>,
-	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
-	Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>,
-	Brian Starkey <Brian.Starkey@arm.com>,
-	John Stultz <jstultz@google.com>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
-	linux-kernel@vger.kernel.org
-Message-ID: <202208231555.eczOE9TV-lkp@intel.com>
-References: <20220822233025.3965-1-afd@ti.com>
+	by lists.linaro.org (Postfix) with ESMTP id 60AF53F5B1
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 Aug 2022 10:23:48 +0000 (UTC)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+	by lists.linaro.org (Postfix) with ESMTPS id 1078E3EE60
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 24 Aug 2022 10:23:39 +0000 (UTC)
+Received: from dimapc.. (109-252-119-13.nat.spd-mgts.ru [109.252.119.13])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: dmitry.osipenko)
+	by madras.collabora.co.uk (Postfix) with ESMTPSA id 518CA6601DAD;
+	Wed, 24 Aug 2022 11:23:35 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1661336617;
+	bh=CWlyIap4cbi2NpOihsLARmOOwwjeknxOoSCWAV4ajqA=;
+	h=From:To:Cc:Subject:Date:From;
+	b=b5Nhoxv/POic6NyUcUJ+k8TJIFTWE6IyZKn6URLO//apT9ls1oa4z+UZXjmyEWVC3
+	 OeTVeyn5O9AEfBMx9lriWH9WPyRBZ0B9zqNw3idljg/60RttMUIFaVA40idf8uYr3A
+	 Ft+9+RofHKd3c6TtR6WCHH3ChfOh/tn7hqLsuTjPeT2/LWMgDmVOKiZyy1BKEXmxjo
+	 SwjS5PBNCp1FuKVYj1mF4V4LVCudFj6i8H1NB/DbxwhPUgf0/+DTVhQZSpxv15mZAT
+	 bqY34qasjmnm6us3j8q+NNQtBJ7I9LP9++0Qr56mLRjlGqqn8RYdr93aaxYrRuZkQQ
+	 Tk7ORvZan1c5Q==
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+To: David Airlie <airlied@linux.ie>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	Gurchetan Singh <gurchetansingh@chromium.org>,
+	Chia-I Wu <olvaffe@gmail.com>,
+	Daniel Vetter <daniel@ffwll.ch>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	Gert Wollny <gert.wollny@collabora.com>,
+	Gustavo Padovan <gustavo.padovan@collabora.com>,
+	Daniel Stone <daniel@fooishbar.org>,
+	Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Rob Clark <robdclark@gmail.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	"Pan, Xinhui" <Xinhui.Pan@amd.com>,
+	Thierry Reding <thierry.reding@gmail.com>,
+	Tomasz Figa <tfiga@chromium.org>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	Jani Nikula <jani.nikula@linux.intel.com>,
+	Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+	Rodrigo Vivi <rodrigo.vivi@intel.com>,
+	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+	=?UTF-8?q?Thomas=20Hellstr=C3=B6m?= <thomas_os@shipmail.org>,
+	Qiang Yu <yuq825@gmail.com>
+Date: Wed, 24 Aug 2022 13:22:39 +0300
+Message-Id: <20220824102248.91964-1-dmitry.osipenko@collabora.com>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220822233025.3965-1-afd@ti.com>
-Message-ID-Hash: JQMQSTB6JMSTZYNTJPP6B24AQIOZODIK
-X-Message-ID-Hash: JQMQSTB6JMSTZYNTJPP6B24AQIOZODIK
-X-MailFrom: lkp@intel.com
+Message-ID-Hash: INUPLLQABNWD65LPL5BSWLVV3E5IQIVH
+X-Message-ID-Hash: INUPLLQABNWD65LPL5BSWLVV3E5IQIVH
+X-MailFrom: dmitry.osipenko@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: llvm@lists.linux.dev, kbuild-all@lists.01.org, Andrew Davis <afd@ti.com>
+CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org, lima@lists.freedesktop.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: cma_heap: Check for device max segment size when attaching
+Subject: [Linaro-mm-sig] [PATCH v3 0/9] Move all drivers to a common dma-buf locking convention
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JQMQSTB6JMSTZYNTJPP6B24AQIOZODIK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/INUPLLQABNWD65LPL5BSWLVV3E5IQIVH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi Andrew,
-
-Thank you for the patch! Perhaps something to improve:
-
-[auto build test WARNING on drm-misc/drm-misc-next]
-[also build test WARNING on linus/master v6.0-rc2 next-20220823]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Andrew-Davis/dma-buf-cma_heap-Check-for-device-max-segment-size-when-attaching/20220823-073240
-base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
-config: x86_64-randconfig-a002-20220822 (https://download.01.org/0day-ci/archive/20220823/202208231555.eczOE9TV-lkp@intel.com/config)
-compiler: clang version 14.0.6 (https://github.com/llvm/llvm-project f28c006a5895fc0e329fe15fead81e37457cb1d1)
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://github.com/intel-lab-lkp/linux/commit/f390cef50ba6681ea767283e413cb8e9f8f2b426
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Andrew-Davis/dma-buf-cma_heap-Check-for-device-max-segment-size-when-attaching/20220823-073240
-        git checkout f390cef50ba6681ea767283e413cb8e9f8f2b426
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=x86_64 SHELL=/bin/bash drivers/dma-buf/heaps/
-
-If you fix the issue, kindly add following tag where applicable
-Reported-by: kernel test robot <lkp@intel.com>
-
-All warnings (new ones prefixed by >>):
-
->> drivers/dma-buf/heaps/cma_heap.c:61:9: warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
-           size_t max_segment = dma_get_max_seg_size(attachment->dev);
-                  ^
-   1 warning generated.
-
-
-vim +61 drivers/dma-buf/heaps/cma_heap.c
-
-    49	
-    50	static int cma_heap_attach(struct dma_buf *dmabuf,
-    51				   struct dma_buf_attachment *attachment)
-    52	{
-    53		struct cma_heap_buffer *buffer = dmabuf->priv;
-    54		struct dma_heap_attachment *a;
-    55		int ret;
-    56	
-    57		a = kzalloc(sizeof(*a), GFP_KERNEL);
-    58		if (!a)
-    59			return -ENOMEM;
-    60	
-  > 61		size_t max_segment = dma_get_max_seg_size(attachment->dev);
-    62		ret = sg_alloc_table_from_pages_segment(&a->table, buffer->pages,
-    63							buffer->pagecount, 0,
-    64							buffer->pagecount << PAGE_SHIFT,
-    65							max_segment, GFP_KERNEL);
-    66		if (ret) {
-    67			kfree(a);
-    68			return ret;
-    69		}
-    70	
-    71		a->dev = attachment->dev;
-    72		INIT_LIST_HEAD(&a->list);
-    73		a->mapped = false;
-    74	
-    75		attachment->priv = a;
-    76	
-    77		mutex_lock(&buffer->lock);
-    78		list_add(&a->list, &buffer->attachments);
-    79		mutex_unlock(&buffer->lock);
-    80	
-    81		return 0;
-    82	}
-    83	
-
--- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SGVsbG8sDQoNClRoaXMgc2VyaWVzIG1vdmVzIGFsbCBkcml2ZXJzIHRvIGEgZHluYW1pYyBkbWEt
+YnVmIGxvY2tpbmcgc3BlY2lmaWNhdGlvbi4NCj5Gcm9tIG5vdyBvbiBhbGwgZG1hLWJ1ZiBpbXBv
+cnRlcnMgYXJlIG1hZGUgcmVzcG9uc2libGUgZm9yIGhvbGRpbmcNCmRtYS1idWYncyByZXNlcnZh
+dGlvbiBsb2NrIGFyb3VuZCBhbGwgb3BlcmF0aW9ucyBwZXJmb3JtZWQgb3ZlciBkbWEtYnVmcw0K
+aW4gYWNjb3JkYW5jZSB0byB0aGUgbG9ja2luZyBzcGVjaWZpY2F0aW9uLiBUaGlzIGFsbG93cyB1
+cyB0byB1dGlsaXplDQpyZXNlcnZhdGlvbiBsb2NrIG1vcmUgYnJvYWRseSBhcm91bmQga2VybmVs
+IHdpdGhvdXQgZmVhcmluZyBvZiBhIHBvdGVudGlhbA0KZGVhZGxvY2tzLg0KDQpUaGlzIHBhdGNo
+c2V0IHBhc3NlcyBhbGwgaTkxNSBzZWxmdGVzdHMuIEl0IHdhcyBhbHNvIHRlc3RlZCB1c2luZyBW
+aXJ0SU8sDQpQYW5mcm9zdCwgTGltYSwgVGVncmEsIHVkbWFidWYsIEFNREdQVSBhbmQgTm91dmVh
+dSBkcml2ZXJzLiBJIHRlc3RlZCBjYXNlcw0Kb2YgZGlzcGxheStHUFUsIGRpc3BsYXkrVjRMIGFu
+ZCBHUFUrVjRMIGRtYS1idWYgc2hhcmluZyAod2hlcmUgYXBwcm9wcmlhdGUpLA0Kd2hpY2ggY292
+ZXJzIG1ham9yaXR5IG9mIGtlcm5lbCBkcml2ZXJzIHNpbmNlIHJlc3Qgb2YgdGhlIGRyaXZlcnMg
+c2hhcmUNCnNhbWUgb3Igc2ltaWxhciBjb2RlIHBhdGhzLg0KDQpDaGFuZ2Vsb2c6DQoNCnYzOiAt
+IEZhY3RvcmVkIG91dCBkbWFfYnVmX21tYXBfdW5sb2NrZWQoKSBhbmQgYXR0YWNobWVudCBmdW5j
+dGlvbnMNCiAgICAgIGludG8gYXNlcGFyYXRlIHBhdGNoZXMsIGxpa2Ugd2FzIHN1Z2dlc3RlZCBi
+eSBDaHJpc3RpYW4gS8O2bmlnLg0KDQogICAgLSBDb3JyZWN0ZWQgYW5kIGZhY3RvcmVkIG91dCBk
+bWEtYnVmIGxvY2tpbmcgZG9jdW1lbnRhdGlvbiBpbnRvDQogICAgICBhIHNlcGFyYXRlIHBhdGNo
+LCBsaWtlIHdhcyBzdWdnZXN0ZWQgYnkgQ2hyaXN0aWFuIEvDtm5pZy4NCg0KICAgIC0gSW50ZWwg
+ZHJpdmVyIGRyb3BwZWQgdGhlIHJlc2VydmF0aW9uIGxvY2tpbmcgZmV3cyBkYXlzIGFnbyBmcm9t
+DQogICAgICBpdHMgQk8tcmVsZWFzZSBjb2RlIHBhdGgsIGJ1dCB3ZSBuZWVkIHRoYXQgbG9ja2lu
+ZyBmb3IgdGhlIGltcG9ydGVkDQogICAgICBHRU1zIGJlY2F1c2UgaW4gdGhlIGVuZCB0aGF0IGNv
+ZGUgcGF0aCB1bm1hcHMgdGhlIGltcG9ydGVkIEdFTS4NCiAgICAgIFNvIEkgYWRkZWQgYmFjayB0
+aGUgbG9ja2luZyBuZWVkZWQgYnkgdGhlIGltcG9ydGVkIEdFTXMsIHVwZGF0aW5nDQogICAgICB0
+aGUgImRtYS1idWYgYXR0YWNobWVudCBsb2NraW5nIHNwZWNpZmljYXRpb24iIHBhdGNoIGFwcHJv
+cHJpYXRlbHkuDQoNCiAgICAtIFRlc3RlZCBOb3V2ZWF1K0ludGVsIGRtYS1idWYgaW1wb3J0L2V4
+cG9ydCBjb21iby4NCg0KICAgIC0gVGVzdGVkIHVkbWFidWYgaW1wb3J0IHRvIGk5MTUvTm91dmVh
+dS9BTURHUFUuDQoNCiAgICAtIEZpeGVkIGZldyBwbGFjZXMgaW4gRXRuYXZpdiwgUGFuZnJvc3Qg
+YW5kIExpbWEgZHJpdmVycyB0aGF0IEkgbWlzc2VkDQogICAgICB0byBzd2l0Y2ggdG8gbG9ja2Vk
+IGRtYS1idWYgdm1hcHBpbmcgaW4gdGhlIGRybS9nZW06IFRha2UgcmVzZXJ2YXRpb24NCiAgICAg
+IGxvY2sgZm9yIHZtYXAvdnVubWFwIG9wZXJhdGlvbnMiIHBhdGNoLiBJbiBhIHJlc3VsdCBpbnZh
+bGlkYXRlZCB0aGUNCiAgICAgIENocmlzdGlhbidzIHItYiB0aGF0IGhlIGdhdmUgdG8gdjIuDQoN
+CiAgICAtIEFkZGVkIGxvY2tlZCBkbWEtYnVmIHZtYXAvdnVubWFwIGZ1bmN0aW9ucyB0aGF0IGFy
+ZSBuZWVkZWQgZm9yIGZpeGluZw0KICAgICAgdm1hcHBwaW5nIG9mIEV0bmF2aXYsIFBhbmZyb3N0
+IGFuZCBMaW1hIGRyaXZlcnMgbWVudGlvbmVkIGFib3ZlLg0KICAgICAgSSBhY3R1YWxseSBoYWQg
+dGhpcyBjaGFuZ2Ugc3Rhc2hlZCBmb3IgdGhlIGRybS1zaG1lbSBzaHJpbmtlciBwYXRjaHNldCwN
+CiAgICAgIGJ1dCB0aGVuIHJlYWxpemVkIHRoYXQgaXQncyBhbHJlYWR5IG5lZWRlZCBieSB0aGUg
+ZG1hLWJ1ZiBwYXRjaGVzLg0KICAgICAgQWxzbyBpbXByb3ZlZCBteSB0ZXN0cyB0byBiZXR0ZXIg
+Y292ZXIgdGhlc2UgY29kZSBwYXRocy4NCg0KdjI6IC0gQ2hhbmdlZCBsb2NraW5nIHNwZWNpZmlj
+YXRpb24gdG8gYXZvaWQgcHJvYmxlbXMgd2l0aCBhIGNyb3NzLWRyaXZlcg0KICAgICAgd3cgbG9j
+a2luZywgbGlrZSB3YXMgc3VnZ2VzdGVkIGJ5IENocmlzdGlhbiBLw7ZuaWcuIE5vdyB0aGUgYXR0
+YWNoL2RldGFjaA0KICAgICAgY2FsbGJhY2tzIGFyZSBpbnZva2VkIHdpdGhvdXQgdGhlIGhlbGQg
+bG9jayBhbmQgZXhwb3J0ZXIgc2hvdWxkIHRha2UgdGhlDQogICAgICBsb2NrLg0KDQogICAgLSBB
+ZGRlZCAibG9ja2luZyBjb252ZW50aW9uIiBkb2N1bWVudGF0aW9uIHRoYXQgZXhwbGFpbnMgd2hp
+Y2ggZG1hLWJ1Zg0KICAgICAgZnVuY3Rpb25zIGFuZCBjYWxsYmFja3MgYXJlIGxvY2tlZC91bmxv
+Y2tlZCBmb3IgaW1wb3J0ZXJzIGFuZCBleHBvcnRlcnMsDQogICAgICB3aGljaCB3YXMgcmVxdWVz
+dGVkIGJ5IENocmlzdGlhbiBLw7ZuaWcuDQoNCiAgICAtIEFkZGVkIGFjayBmcm9tIFRvbWFzeiBG
+aWdhIHRvIHRoZSBWNEwgcGF0Y2hlcyB0aGF0IGhlIGdhdmUgdG8gdjEuDQoNCkRtaXRyeSBPc2lw
+ZW5rbyAoOSk6DQogIGRtYS1idWY6IEFkZCBfdW5sb2NrZWQgcG9zdGZpeCB0byBmdW5jdGlvbiBu
+YW1lcw0KICBkbWEtYnVmOiBBZGQgbG9ja2VkIHZhcmlhbnQgb2YgZG1hX2J1Zl92bWFwL3Z1bm1h
+cCgpDQogIGRybS9nZW06IFRha2UgcmVzZXJ2YXRpb24gbG9jayBmb3Igdm1hcC92dW5tYXAgb3Bl
+cmF0aW9ucw0KICBkbWEtYnVmOiBNb3ZlIGRtYV9idWZfdm1hcC92dW5tYXBfdW5sb2NrZWQoKSB0
+byBkeW5hbWljIGxvY2tpbmcNCiAgICBzcGVjaWZpY2F0aW9uDQogIGRtYS1idWY6IE1vdmUgZG1h
+X2J1Zl9tbWFwX3VubG9ja2VkKCkgdG8gZHluYW1pYyBsb2NraW5nIHNwZWNpZmljYXRpb24NCiAg
+ZG1hLWJ1ZjogTW92ZSBkbWEtYnVmIGF0dGFjaG1lbnQgdG8gZHluYW1pYyBsb2NraW5nIHNwZWNp
+ZmljYXRpb24NCiAgZG1hLWJ1ZjogRG9jdW1lbnQgZHluYW1pYyBsb2NraW5nIGNvbnZlbnRpb24N
+CiAgbWVkaWE6IHZpZGVvYnVmMjogU3RvcCB1c2luZyBpbnRlcm5hbCBkbWEtYnVmIGxvY2sNCiAg
+ZG1hLWJ1ZjogUmVtb3ZlIGludGVybmFsIGxvY2sNCg0KIERvY3VtZW50YXRpb24vZHJpdmVyLWFw
+aS9kbWEtYnVmLnJzdCAgICAgICAgICB8ICAgNiArDQogZHJpdmVycy9kbWEtYnVmL2RtYS1idWYu
+YyAgICAgICAgICAgICAgICAgICAgIHwgMjc2ICsrKysrKysrKysrKysrLS0tLQ0KIGRyaXZlcnMv
+Z3B1L2RybS9hbWQvYW1kZ3B1L2FtZGdwdV9kbWFfYnVmLmMgICB8ICAgNCArLQ0KIGRyaXZlcnMv
+Z3B1L2RybS9hcm1hZGEvYXJtYWRhX2dlbS5jICAgICAgICAgICB8ICAxNCArLQ0KIGRyaXZlcnMv
+Z3B1L2RybS9kcm1fY2xpZW50LmMgICAgICAgICAgICAgICAgICB8ICAgNCArLQ0KIGRyaXZlcnMv
+Z3B1L2RybS9kcm1fZ2VtLmMgICAgICAgICAgICAgICAgICAgICB8ICAyNCArKw0KIGRyaXZlcnMv
+Z3B1L2RybS9kcm1fZ2VtX2RtYV9oZWxwZXIuYyAgICAgICAgICB8ICAgNiArLQ0KIGRyaXZlcnMv
+Z3B1L2RybS9kcm1fZ2VtX2ZyYW1lYnVmZmVyX2hlbHBlci5jICB8ICAgNiArLQ0KIGRyaXZlcnMv
+Z3B1L2RybS9kcm1fZ2VtX3NobWVtX2hlbHBlci5jICAgICAgICB8ICAgMiArLQ0KIGRyaXZlcnMv
+Z3B1L2RybS9kcm1fZ2VtX3R0bV9oZWxwZXIuYyAgICAgICAgICB8ICAgOSArLQ0KIGRyaXZlcnMv
+Z3B1L2RybS9kcm1fcHJpbWUuYyAgICAgICAgICAgICAgICAgICB8ICAxMiArLQ0KIGRyaXZlcnMv
+Z3B1L2RybS9ldG5hdml2L2V0bmF2aXZfZ2VtX3ByaW1lLmMgICB8ICAgNCArLQ0KIGRyaXZlcnMv
+Z3B1L2RybS9leHlub3MvZXh5bm9zX2RybV9nZW0uYyAgICAgICB8ICAgMiArLQ0KIGRyaXZlcnMv
+Z3B1L2RybS9pOTE1L2dlbS9pOTE1X2dlbV9kbWFidWYuYyAgICB8ICAgNiArLQ0KIGRyaXZlcnMv
+Z3B1L2RybS9pOTE1L2dlbS9pOTE1X2dlbV9vYmplY3QuYyAgICB8ICAxMiArDQogLi4uL2RybS9p
+OTE1L2dlbS9zZWxmdGVzdHMvaTkxNV9nZW1fZG1hYnVmLmMgIHwgIDIwICstDQogZHJpdmVycy9n
+cHUvZHJtL2xpbWEvbGltYV9zY2hlZC5jICAgICAgICAgICAgIHwgICA0ICstDQogZHJpdmVycy9n
+cHUvZHJtL29tYXBkcm0vb21hcF9nZW1fZG1hYnVmLmMgICAgIHwgICA4ICstDQogZHJpdmVycy9n
+cHUvZHJtL3BhbmZyb3N0L3BhbmZyb3N0X2R1bXAuYyAgICAgIHwgICA0ICstDQogZHJpdmVycy9n
+cHUvZHJtL3BhbmZyb3N0L3BhbmZyb3N0X3BlcmZjbnQuYyAgIHwgICA2ICstDQogZHJpdmVycy9n
+cHUvZHJtL3F4bC9xeGxfb2JqZWN0LmMgICAgICAgICAgICAgIHwgIDE3ICstDQogZHJpdmVycy9n
+cHUvZHJtL3F4bC9xeGxfcHJpbWUuYyAgICAgICAgICAgICAgIHwgICA0ICstDQogZHJpdmVycy9n
+cHUvZHJtL3RlZ3JhL2dlbS5jICAgICAgICAgICAgICAgICAgIHwgIDI3ICstDQogZHJpdmVycy9p
+bmZpbmliYW5kL2NvcmUvdW1lbV9kbWFidWYuYyAgICAgICAgIHwgIDExICstDQogLi4uL2NvbW1v
+bi92aWRlb2J1ZjIvdmlkZW9idWYyLWRtYS1jb250aWcuYyAgIHwgIDI2ICstDQogLi4uL21lZGlh
+L2NvbW1vbi92aWRlb2J1ZjIvdmlkZW9idWYyLWRtYS1zZy5jIHwgIDIzICstDQogLi4uL2NvbW1v
+bi92aWRlb2J1ZjIvdmlkZW9idWYyLXZtYWxsb2MuYyAgICAgIHwgIDE3ICstDQogLi4uL3BsYXRm
+b3JtL252aWRpYS90ZWdyYS12ZGUvZG1hYnVmLWNhY2hlLmMgIHwgIDEyICstDQogZHJpdmVycy9t
+aXNjL2Zhc3RycGMuYyAgICAgICAgICAgICAgICAgICAgICAgIHwgIDEyICstDQogZHJpdmVycy94
+ZW4vZ250ZGV2LWRtYWJ1Zi5jICAgICAgICAgICAgICAgICAgIHwgIDE0ICstDQogaW5jbHVkZS9k
+cm0vZHJtX2dlbS5oICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAzICsNCiBpbmNsdWRlL2xp
+bnV4L2RtYS1idWYuaCAgICAgICAgICAgICAgICAgICAgICAgfCAgNTcgKystLQ0KIDMyIGZpbGVz
+IGNoYW5nZWQsIDQxMCBpbnNlcnRpb25zKCspLCAyNDIgZGVsZXRpb25zKC0pDQoNCi0tIA0KMi4z
+Ny4yDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxp
+bmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9y
+ZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlz
+dHMubGluYXJvLm9yZwo=
