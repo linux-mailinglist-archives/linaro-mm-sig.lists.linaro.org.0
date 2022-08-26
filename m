@@ -2,82 +2,50 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88ECF5F9478
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Oct 2022 01:56:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 826CE5FA2BE
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Oct 2022 19:30:02 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 964493F58B
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  9 Oct 2022 23:56:45 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 736CE3F459
-	for <linaro-mm-sig@lists.linaro.org>; Sun,  9 Oct 2022 23:56:25 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id 116AC60D57;
-	Sun,  9 Oct 2022 23:56:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52C2EC433B5;
-	Sun,  9 Oct 2022 23:56:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1665359784;
-	bh=qjR24BSMmkAFS/BFtuOkdK3KlnwctJ3VBLjJxkzooCQ=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Yq8Y3s1Bre6eEay07gi39LORAeMoFxk5BmWe+vnR2YRKbJrWTCfCbOY6DLCJoLa+P
-	 52onZ47xpdatABpPKW1gmcpAHoHpAaCA/jRWv6n2UAAOp3Br0T+hFXRQtA7LIflhpQ
-	 ZVUsMVWlb55zdFpT0nIxob4HmVCyyhY8Oem9vxcWiJDB5wyzG52OfmLqvskVhfDvfk
-	 xVFyAuviZsrIBv1tVJqZpQgodmiSDPHD2WojdjzVXIa0F8hlNDgqcxm1OeCMCDLpcX
-	 mM2w7crhIwVKVMyuCWJI5IxIjZhXlxuoOkJArYlY2hcPBL72YzKuYAMjBqYOezt+Po
-	 s2/60jo7RSx/w==
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Date: Sun,  9 Oct 2022 19:55:25 -0400
-Message-Id: <20221009235540.1231640-7-sashal@kernel.org>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20221009235540.1231640-1-sashal@kernel.org>
-References: <20221009235540.1231640-1-sashal@kernel.org>
+	by lists.linaro.org (Postfix) with ESMTP id BBE3A3F598
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Oct 2022 17:30:00 +0000 (UTC)
+Received: from mailgw.kylinos.cn (unknown [124.126.103.232])
+	by lists.linaro.org (Postfix) with ESMTPS id A99393F4B5
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Aug 2022 07:38:42 +0000 (UTC)
+X-UUID: c402bdaddaff492a99060e2f1a7dc99d-20220826
+X-Spam-Fingerprint: 0
+X-GW-Reason: 11109
+X-Policy-Incident: 5pS25Lu25Lq66LaF6L+HMTDkurrpnIDopoHlrqHmoLg=
+X-Content-Feature: 
+	ica/max.line-size 103
+	audit/email.address 1
+	dict/adv 1
+	dict/contack 1
+	dict/notice 1
+	dict/operate 1
+	meta/cnt.alert 1
+X-UUID: c402bdaddaff492a99060e2f1a7dc99d-20220826
+X-User: oushixiong@kylinos.cn
+Received: from localhost.localdomain [(116.128.244.169)] by mailgw
+	(envelope-from <oushixiong@kylinos.cn>)
+	(Generic MTA)
+	with ESMTP id 205237631; Fri, 26 Aug 2022 09:31:22 +0800
+From: oushixiong <oushixiong@kylinos.cn>
+To: Dave Airlie <airlied@redhat.com>
+Date: Fri, 26 Aug 2022 09:31:03 +0800
+Message-Id: <20220826013103.1519411-1-oushixiong@kylinos.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: -
-X-Rspamd-Queue-Id: 736CE3F459
-X-Spamd-Result: default: False [-1.00 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org:c];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	TAGGED_RCPT(0.00)[c80e9ef5d8bb45894db0];
-	ARC_NA(0.00)[]
-Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Yq8Y3s1B;
-	spf=pass (lists.linaro.org: domain of sashal@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=sashal@kernel.org;
-	dmarc=pass (policy=none) header.from=kernel.org
-Message-ID-Hash: IYTQDITPAW5MACPRUH32VWXDSJPFYUAW
-X-Message-ID-Hash: IYTQDITPAW5MACPRUH32VWXDSJPFYUAW
-X-MailFrom: sashal@kernel.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Vivek Kasireddy <vivek.kasireddy@intel.com>, syzbot+c80e9ef5d8bb45894db0@syzkaller.appspotmail.com, Gerd Hoffmann <kraxel@redhat.com>, Sasha Levin <sashal@kernel.org>, sumit.semwal@linaro.org, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+X-MailFrom: oushixiong@kylinos.cn
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: TI7JX6WCJSFLDUDAEUBT7NRX6J3ERNTG
+X-Message-ID-Hash: TI7JX6WCJSFLDUDAEUBT7NRX6J3ERNTG
+X-Mailman-Approved-At: Mon, 10 Oct 2022 17:29:42 +0000
+CC: Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, oushixiong <oushixiong@kylinos.cn>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.10 07/22] udmabuf: Set ubuf->sg = NULL if the creation of sg table fails
+Subject: [Linaro-mm-sig] [PATCH] drm/ast: add dmabuf/prime buffer sharing support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IYTQDITPAW5MACPRUH32VWXDSJPFYUAW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TI7JX6WCJSFLDUDAEUBT7NRX6J3ERNTG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -87,116 +55,272 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-From: Vivek Kasireddy <vivek.kasireddy@intel.com>
+This patch adds ast specific codes for DRM prime feature, this is to
+allow for offloading of rending in one direction and outputs in other.
 
-[ Upstream commit d9c04a1b7a15b5e74b2977461d9511e497f05d8f ]
+This patch is designed to solve the problem that the AST is not displayed
+when the server plug in a discrete graphics graphics card at the same time.
+We call the dirty callback function to copy the rendering results of the
+discrete graphics card to the ast side by dma-buf.
 
-When userspace tries to map the dmabuf and if for some reason
-(e.g. OOM) the creation of the sg table fails, ubuf->sg needs to be
-set to NULL. Otherwise, when the userspace subsequently closes the
-dmabuf fd, we'd try to erroneously free the invalid sg table from
-release_udmabuf resulting in the following crash reported by syzbot:
+v1->v2:
+  - Fix the comment.
+v2->v3:
+  - we remove the attach function, add the drm_gem_pin() before dma_buf_vmap(),
+    and add the drm_gem_unpin() after the dma_buf_vunmap().
 
-general protection fault, probably for non-canonical address
-0xdffffc0000000000: 0000 [#1] PREEMPT SMP KASAN
-KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
-CPU: 0 PID: 3609 Comm: syz-executor487 Not tainted
-5.19.0-syzkaller-13930-g7ebfc85e2cd7 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS
-Google 07/22/2022
-RIP: 0010:dma_unmap_sgtable include/linux/dma-mapping.h:378 [inline]
-RIP: 0010:put_sg_table drivers/dma-buf/udmabuf.c:89 [inline]
-RIP: 0010:release_udmabuf+0xcb/0x4f0 drivers/dma-buf/udmabuf.c:114
-Code: 48 89 fa 48 c1 ea 03 80 3c 02 00 0f 85 2b 04 00 00 48 8d 7d 0c 4c
-8b 63 30 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <0f> b6 14
-02 48 89 f8 83 e0 07 83 c0 03 38 d0 7c 08 84 d2 0f 85 e2
-RSP: 0018:ffffc900037efd30 EFLAGS: 00010246
-RAX: dffffc0000000000 RBX: ffffffff8cb67800 RCX: 0000000000000000
-RDX: 0000000000000000 RSI: ffffffff84ad27e0 RDI: 0000000000000000
-RBP: fffffffffffffff4 R08: 0000000000000005 R09: 0000000000000000
-R10: 0000000000000000 R11: 000000000008c07c R12: ffff88801fa05000
-R13: ffff888073db07e8 R14: ffff888025c25440 R15: 0000000000000000
-FS:  0000555555fc4300(0000) GS:ffff8880b9a00000(0000)
-knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007fc1c0ce06e4 CR3: 00000000715e6000 CR4: 00000000003506f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- <TASK>
- dma_buf_release+0x157/0x2d0 drivers/dma-buf/dma-buf.c:78
- __dentry_kill+0x42b/0x640 fs/dcache.c:612
- dentry_kill fs/dcache.c:733 [inline]
- dput+0x806/0xdb0 fs/dcache.c:913
- __fput+0x39c/0x9d0 fs/file_table.c:333
- task_work_run+0xdd/0x1a0 kernel/task_work.c:177
- ptrace_notify+0x114/0x140 kernel/signal.c:2353
- ptrace_report_syscall include/linux/ptrace.h:420 [inline]
- ptrace_report_syscall_exit include/linux/ptrace.h:482 [inline]
- syscall_exit_work kernel/entry/common.c:249 [inline]
- syscall_exit_to_user_mode_prepare+0x129/0x280 kernel/entry/common.c:276
- __syscall_exit_to_user_mode_work kernel/entry/common.c:281 [inline]
- syscall_exit_to_user_mode+0x9/0x50 kernel/entry/common.c:294
- do_syscall_64+0x42/0xb0 arch/x86/entry/common.c:86
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-RIP: 0033:0x7fc1c0c35b6b
-Code: 0f 05 48 3d 00 f0 ff ff 77 45 c3 0f 1f 40 00 48 83 ec 18 89 7c 24
-0c e8 63 fc ff ff 8b 7c 24 0c 41 89 c0 b8 03 00 00 00 0f 05 <48> 3d 00
-f0 ff ff 77 35 44 89 c7 89 44 24 0c e8 a1 fc ff ff 8b 44
-RSP: 002b:00007ffd78a06090 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
-RAX: 0000000000000000 RBX: 0000000000000007 RCX: 00007fc1c0c35b6b
-RDX: 0000000020000280 RSI: 0000000040086200 RDI: 0000000000000006
-RBP: 0000000000000007 R08: 0000000000000000 R09: 0000000000000000
-R10: 0000000000000000 R11: 0000000000000293 R12: 000000000000000c
-R13: 0000000000000003 R14: 00007fc1c0cfe4a0 R15: 00007ffd78a06140
- </TASK>
-Modules linked in:
----[ end trace 0000000000000000 ]---
-RIP: 0010:dma_unmap_sgtable include/linux/dma-mapping.h:378 [inline]
-RIP: 0010:put_sg_table drivers/dma-buf/udmabuf.c:89 [inline]
-RIP: 0010:release_udmabuf+0xcb/0x4f0 drivers/dma-buf/udmabuf.c:114
-
-Reported-by: syzbot+c80e9ef5d8bb45894db0@syzkaller.appspotmail.com
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-Link: http://patchwork.freedesktop.org/patch/msgid/20220825063522.801264-1-vivek.kasireddy@intel.com
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
+Signed-off-by: oushixiong <oushixiong@kylinos.cn>
 ---
- drivers/dma-buf/udmabuf.c | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ drivers/gpu/drm/ast/ast_drv.c  |  27 +++++++
+ drivers/gpu/drm/ast/ast_mode.c | 134 ++++++++++++++++++++++++++++++++-
+ drivers/gpu/drm/drm_gem.c      |   2 +
+ include/drm/drm_gem.h          |   3 +
+ 4 files changed, 165 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
-index b624f3d8f0e6..e359c5c6c4df 100644
---- a/drivers/dma-buf/udmabuf.c
-+++ b/drivers/dma-buf/udmabuf.c
-@@ -118,17 +118,20 @@ static int begin_cpu_udmabuf(struct dma_buf *buf,
- {
- 	struct udmabuf *ubuf = buf->priv;
- 	struct device *dev = ubuf->device->this_device;
-+	int ret = 0;
+diff --git a/drivers/gpu/drm/ast/ast_drv.c b/drivers/gpu/drm/ast/ast_drv.c
+index 7465c4f0156a..107383a56ca7 100644
+--- a/drivers/gpu/drm/ast/ast_drv.c
++++ b/drivers/gpu/drm/ast/ast_drv.c
+@@ -28,6 +28,7 @@
  
- 	if (!ubuf->sg) {
- 		ubuf->sg = get_sg_table(dev, buf, direction);
--		if (IS_ERR(ubuf->sg))
--			return PTR_ERR(ubuf->sg);
-+		if (IS_ERR(ubuf->sg)) {
-+			ret = PTR_ERR(ubuf->sg);
-+			ubuf->sg = NULL;
+ #include <linux/module.h>
+ #include <linux/pci.h>
++#include <linux/dma-buf.h>
+ 
+ #include <drm/drm_aperture.h>
+ #include <drm/drm_atomic_helper.h>
+@@ -50,6 +51,29 @@ module_param_named(modeset, ast_modeset, int, 0400);
+ 
+ DEFINE_DRM_GEM_FOPS(ast_fops);
+ 
++struct drm_gem_object *ast_gem_prime_import(struct drm_device *dev,
++						struct dma_buf *dma_buf)
++{
++	struct drm_gem_vram_object *gbo;
++
++	gbo = drm_gem_vram_of_gem(dma_buf->priv);
++	if (gbo->bo.base.dev == dev) {
++		/*
++		* Importing dmabuf exported from out own gem increases
++		* refcount on gem itself instead of f_count of dmabuf.
++		*/
++		drm_gem_object_get(&gbo->bo.base);
++		return &gbo->bo.base;
++	}
++
++	gbo = drm_gem_vram_create(dev, dma_buf->size, 0);
++	if (IS_ERR(gbo))
++		return NULL;
++
++	get_dma_buf(dma_buf);
++	return &gbo->bo.base;
++}
++
+ static const struct drm_driver ast_driver = {
+ 	.driver_features = DRIVER_ATOMIC |
+ 			   DRIVER_GEM |
+@@ -63,6 +87,9 @@ static const struct drm_driver ast_driver = {
+ 	.minor = DRIVER_MINOR,
+ 	.patchlevel = DRIVER_PATCHLEVEL,
+ 
++	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
++	.gem_prime_import = ast_gem_prime_import,
++
+ 	DRM_GEM_VRAM_DRIVER
+ };
+ 
+diff --git a/drivers/gpu/drm/ast/ast_mode.c b/drivers/gpu/drm/ast/ast_mode.c
+index 45b56b39ad47..c81a6148b6df 100644
+--- a/drivers/gpu/drm/ast/ast_mode.c
++++ b/drivers/gpu/drm/ast/ast_mode.c
+@@ -48,6 +48,8 @@
+ #include "ast_drv.h"
+ #include "ast_tables.h"
+ 
++MODULE_IMPORT_NS(DMA_BUF);
++
+ static inline void ast_load_palette_index(struct ast_private *ast,
+ 				     u8 index, u8 red, u8 green,
+ 				     u8 blue)
+@@ -1535,8 +1537,138 @@ static const struct drm_mode_config_helper_funcs ast_mode_config_helper_funcs =
+ 	.atomic_commit_tail = drm_atomic_helper_commit_tail_rpm,
+ };
+ 
++static int ast_handle_damage(struct drm_framebuffer *fb, int x, int y,
++					int width, int height)
++{
++	struct drm_gem_vram_object *dst_bo = NULL;
++	void *dst = NULL;
++	int ret = 0, i;
++	unsigned long offset = 0;
++	bool unmap = false;
++	unsigned int bytesPerPixel;
++	struct iosys_map map;
++	struct iosys_map dmabuf_map;
++
++	bytesPerPixel = fb->format->cpp[0];
++
++	if (!fb->obj[0]->dma_buf)
++		return -EINVAL;
++
++	if (!fb->obj[0]->dma_buf->vmap_ptr.vaddr) {
++		ret = drm_gem_pin(fb->obj[0]->dma_buf->priv);
++		if (ret)
++			return ret;
++		ret = dma_buf_vmap(fb->obj[0]->dma_buf, &dmabuf_map);
++		if (ret)
++			goto err_vmap_dmabuf;
++	} else
++		dmabuf_map.vaddr = fb->obj[0]->dma_buf->vmap_ptr.vaddr;
++
++	dst_bo = drm_gem_vram_of_gem(fb->obj[0]);
++
++	ret = drm_gem_vram_pin(dst_bo, 0);
++	if (ret) {
++		DRM_ERROR("ast_bo_pin failed\n");
++		goto err_ast_pin;
++	}
++
++	if (!dst_bo->map.vaddr) {
++		ret = drm_gem_vram_vmap(dst_bo, &map);
++		if (ret) {
++			DRM_ERROR("failed to vmap fbcon\n");
++			goto err_vmap_ast_bo;
 +		}
- 	} else {
- 		dma_sync_sg_for_cpu(dev, ubuf->sg->sgl, ubuf->sg->nents,
- 				    direction);
- 	}
- 
--	return 0;
++		unmap = true;
++	}
++	dst = dst_bo->map.vaddr;
++
++	for (i = y; i < y + height; i++) {
++		offset = i * fb->pitches[0] + (x * bytesPerPixel);
++		memcpy_toio(dst + offset, dmabuf_map.vaddr + offset,
++			width * bytesPerPixel);
++	}
++
++	if (unmap)
++		drm_gem_vram_vunmap(dst_bo, &map);
++
++	drm_gem_vram_unpin(dst_bo);
++	return 0;
++
++err_vmap_ast_bo:
++	drm_gem_vram_unpin(dst_bo);
++err_ast_pin:
++err_vmap_dmabuf:
++	drm_gem_unpin(fb->obj[0]->dma_buf->priv);
 +	return ret;
++}
++
++
++static int ast_user_framebuffer_dirty(struct drm_framebuffer *fb,
++				struct drm_file *file,
++				unsigned int flags,
++				unsigned int color,
++				struct drm_clip_rect *clips,
++				unsigned int num_clips)
++{
++	int i, ret = 0;
++
++	drm_modeset_lock_all(fb->dev);
++	if (fb->obj[0]->dma_buf) {
++		ret = dma_buf_begin_cpu_access(fb->obj[0]->dma_buf,
++				DMA_FROM_DEVICE);
++		if (ret)
++			goto unlock;
++	}
++
++	for (i = 0; i < num_clips; i++) {
++		ret = ast_handle_damage(fb, clips[i].x1, clips[i].y1,
++				clips[i].x2 - clips[i].x1, clips[i].y2 - clips[i].y1);
++		if (ret)
++			break;
++	}
++
++	if (fb->obj[0]->dma_buf) {
++		dma_buf_end_cpu_access(fb->obj[0]->dma_buf,
++				DMA_FROM_DEVICE);
++	}
++
++unlock:
++	drm_modeset_unlock_all(fb->dev);
++
++	return ret;
++}
++
++static void ast_user_framebuffer_destroy(struct drm_framebuffer *fb)
++{
++	struct iosys_map dmabuf_map;
++
++	if (fb->obj[0]->dma_buf) {
++		dmabuf_map.is_iomem = fb->obj[0]->dma_buf->vmap_ptr.is_iomem;
++		dmabuf_map.vaddr = fb->obj[0]->dma_buf->vmap_ptr.vaddr;
++		if (dmabuf_map.vaddr)
++			dma_buf_vunmap(fb->obj[0]->dma_buf, &dmabuf_map);
++		drm_gem_unpin(fb->obj[0]->dma_buf->priv);
++	}
++
++	drm_gem_fb_destroy(fb);
++}
++
++static const struct drm_framebuffer_funcs ast_gem_fb_funcs_dirtyfb = {
++	.destroy	= ast_user_framebuffer_destroy,
++	.create_handle	= drm_gem_fb_create_handle,
++	.dirty		= ast_user_framebuffer_dirty,
++};
++
++static struct drm_framebuffer *
++ast_gem_fb_create_with_dirty(struct drm_device *dev, struct drm_file *file,
++				const struct drm_mode_fb_cmd2 *mode_cmd)
++{
++	return drm_gem_fb_create_with_funcs(dev, file, mode_cmd,
++					&ast_gem_fb_funcs_dirtyfb);
++}
++
+ static const struct drm_mode_config_funcs ast_mode_config_funcs = {
+-	.fb_create = drm_gem_fb_create,
++	.fb_create = ast_gem_fb_create_with_dirty,
+ 	.mode_valid = drm_vram_helper_mode_valid,
+ 	.atomic_check = drm_atomic_helper_check,
+ 	.atomic_commit = drm_atomic_helper_commit,
+diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
+index 56fb87885146..3a4f5137abc5 100644
+--- a/drivers/gpu/drm/drm_gem.c
++++ b/drivers/gpu/drm/drm_gem.c
+@@ -1159,12 +1159,14 @@ int drm_gem_pin(struct drm_gem_object *obj)
+ 	else
+ 		return 0;
  }
++EXPORT_SYMBOL(drm_gem_pin);
  
- static int end_cpu_udmabuf(struct dma_buf *buf,
+ void drm_gem_unpin(struct drm_gem_object *obj)
+ {
+ 	if (obj->funcs->unpin)
+ 		obj->funcs->unpin(obj);
+ }
++EXPORT_SYMBOL(drm_gem_unpin);
+ 
+ int drm_gem_vmap(struct drm_gem_object *obj, struct iosys_map *map)
+ {
+diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
+index e2941cee14b6..30c4366968bf 100644
+--- a/include/drm/drm_gem.h
++++ b/include/drm/drm_gem.h
+@@ -352,6 +352,9 @@ int drm_gem_mmap_obj(struct drm_gem_object *obj, unsigned long obj_size,
+ 		     struct vm_area_struct *vma);
+ int drm_gem_mmap(struct file *filp, struct vm_area_struct *vma);
+ 
++int drm_gem_pin(struct drm_gem_object *obj);
++void drm_gem_unpin(struct drm_gem_object *obj);
++
+ /**
+  * drm_gem_object_get - acquire a GEM buffer object reference
+  * @obj: GEM buffer object
 -- 
-2.35.1
+2.17.1
 
+
+No virus found
+		Checked by Hillstone Network AntiVirus
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
