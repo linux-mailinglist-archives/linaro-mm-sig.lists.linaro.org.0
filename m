@@ -2,150 +2,141 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44DF25FA3D1
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Oct 2022 20:56:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3D6E95FB331
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 11 Oct 2022 15:18:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DEC353F529
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Oct 2022 18:56:57 +0000 (UTC)
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
-	by lists.linaro.org (Postfix) with ESMTPS id 4F5AC3ED7D
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Oct 2022 18:56:39 +0000 (UTC)
-Received: by mail-qk1-f169.google.com with SMTP id a5so2177293qkl.6
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Oct 2022 11:56:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=mfdinePb/h+FQryCI1VnJk1iVMwwW9XbS8GRZ1SXnEM=;
-        b=Y1FJnNxKCCmUeBjERypSSpOT5hLZIa3B6ZfL7TmeBlDcYn7G53u+wzaqGztD4xstS6
-         H56NjZrTnnAs/mwbv/53uHY1GhzxoFxOLWj+6+255TR+XIgzukZ2wrhnTPfXH4rpl0ll
-         x20RYa7gkPKPOAB+2GjUbYRf86UKilK/+RP5mPzo1iTwxgbIcI/NL1hAwcQva+CI+c58
-         wXQg1m452/c0qjzqE/xGhDgd9xycIGhUX5tiX7SJhqTWnYftDSAsnXqQ0qceqqSNwxFf
-         a0gsQbHVGj7OQXKVN8LpCmOTHmcWT/lMPoHErC7k7GBXJjyyytJ8h/nDzI7STIfMcpme
-         CGHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=mfdinePb/h+FQryCI1VnJk1iVMwwW9XbS8GRZ1SXnEM=;
-        b=2WU3MzFMRZp1dxRLnJPsF/5wEoMke2ZKAckHbSYRdj0PugSeKSN54nwuFc5xigNN9e
-         FPAi+SqOq/OK9ecskGb+2emGbsVQXjnYM6emKcWs5Nvl+YPwmRjfxDLd7FTbtxnL3IzQ
-         vpWbo0f1SuZYg7PDgktYGb39xKE4iZPfZz5MJYy0AoHVTjZ+FrE93betXY1t3sJLbLkV
-         50W66WVUPgCBuvmgYfRbaDqZ0/cNqgv9qFC3DK/y0jjN7ATJPLK1Sau+ivXHUbBGX5Mn
-         i0swafTzCYsnDklq4ym/LbGwSNFd9/o+yPkEQtfW5x1k8AXYopULMzRwHd7cPy2aZpAd
-         043w==
-X-Gm-Message-State: ACrzQf0WNZv78+yjHrXLq4gJVCX3wuDiQWwkRyesY7ZKzCtNAZaJsedP
-	Qc9iRhkdBD8/13lTVM0NwTUyDg==
-X-Google-Smtp-Source: AMsMyM4cq1ZiSompu2ffs6ddf24dPwkk/2Lnq1GVt1O6/KQn3scUPTnTqdwZ/uWcjL7riJrPyy9iDQ==
-X-Received: by 2002:a05:620a:4397:b0:6e1:345a:e080 with SMTP id a23-20020a05620a439700b006e1345ae080mr13783062qkp.677.1665428198984;
-        Mon, 10 Oct 2022 11:56:38 -0700 (PDT)
-Received: from ziepe.ca (hlfxns017vw-47-55-122-23.dhcp-dynamic.fibreop.ns.bellaliant.net. [47.55.122.23])
-        by smtp.gmail.com with ESMTPSA id j8-20020a05620a288800b006bb2cd2f6d1sm10684472qkp.127.2022.10.10.11.56.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Oct 2022 11:56:38 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.95)
-	(envelope-from <jgg@ziepe.ca>)
-	id 1ohxx7-0012V5-CO;
-	Mon, 10 Oct 2022 15:56:37 -0300
-Date: Mon, 10 Oct 2022 15:56:37 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-Message-ID: <Y0Rq5Zb9+63++2z/@ziepe.ca>
-References: <20220928191600.5874-1-dmitry.osipenko@collabora.com>
- <20220928191600.5874-11-dmitry.osipenko@collabora.com>
- <e3ba146d-8153-add5-2cf4-02fe6519abee@collabora.com>
-MIME-Version: 1.0
+	by lists.linaro.org (Postfix) with ESMTP id 17FB53F56C
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 11 Oct 2022 13:18:56 +0000 (UTC)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2083.outbound.protection.outlook.com [40.107.93.83])
+	by lists.linaro.org (Postfix) with ESMTPS id 129B93F064
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Aug 2022 18:10:35 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=EstCAFLvDH/peylH1Ig571g34OXOIRJHfVjeY13LYAkuKFi4+QXVriK8gK6MuAyVSPFnJjjEge/4R/DRTwPTygH6VFNNBtYUqJbhftl30uWffZvhUac37PywTw6cSvVIE07niPTVb9yNSGUkTEFx1lE3xoUH3KT4+U3Zom8ESrO3JU2tB+NNAn3yr5ndxRpEuUJ4wFnQFuT64Ddvpe1fcqI0GOImrzAdu670Mg/gnQuAr8WI/slHn8/tG/UWdKv9efI83a1sr0RefPKx1s65eWvzO/EvLmYNe3T1G2rVKls/+8s+1e/Npl4it/JLDb8jEroQZFrwGR7lubCCZkUO3g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TuJoj7hld2EeSSN3LhJ3+Si9zZbkdaroRJY+9G8cEdM=;
+ b=oRzrTBTs0BpbO1MlUK7CGzBZvACVhQI3QEj8mvEXt8TuLUL/P3sVVnkb51Q3KlioFhqezq1rbNqBUHXltPOV+NibnO9VZQlWxlrSgn/klnHIHtW5mkXwLTjxYXxieO/shovYTQ/05ELC67DQs3ga9T45zAVNBJBFbwKQKpPivfbbmoNHEA5dT+gwM+S4+VfJuVgSwROPMLdn0pse84XlbU4trZ1hhYy7cZGTK3ApvJj2IUJn7Bc1roEQNsAkLOsFBD/0qqgcZrmgo6DId1ReR4w4iMWY7O+DxPzkrcoDGLZ6+ORYSwqxB0SnAxdgGJ0ia+DmTN7ZtjP2YRXr+2MbqA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TuJoj7hld2EeSSN3LhJ3+Si9zZbkdaroRJY+9G8cEdM=;
+ b=mIEOsXe/CdvBc53h05oD4SHgKfjEOyyQ3yNEuMw8nRh0IjZcNWEffbT8cBytQAzZuE8dyjo+9xDZKCgR4mESwXMcuhvLqBwYKigJNgnDtSeZ2OIXH1SnV61fxua10a6bCchllbCtJe2QP6n4O+WBuMtShnfHxdxKTcY1o657OjCqESUpgoAMI+P48b0v4plpI3WBbiLxWvs8wWQ6RQ/L+958QpmhYa4H/UJCeFWDbIuOKmeSS/6SmQrrNFsimX3rNNlcVsgyQl6HjVbwOkejXp1i/ygpRBlt5TAnPlQbXaU7DlGFilS6TE1/Ivi+yFJs/zQRJY182Zv+CZa7K5/ORg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from MN2PR12MB4192.namprd12.prod.outlook.com (2603:10b6:208:1d5::15)
+ by CY5PR12MB6180.namprd12.prod.outlook.com (2603:10b6:930:23::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5566.15; Fri, 26 Aug
+ 2022 18:10:33 +0000
+Received: from MN2PR12MB4192.namprd12.prod.outlook.com
+ ([fe80::462:7fe:f04f:d0d5]) by MN2PR12MB4192.namprd12.prod.outlook.com
+ ([fe80::462:7fe:f04f:d0d5%8]) with mapi id 15.20.5566.016; Fri, 26 Aug 2022
+ 18:10:33 +0000
+Date: Fri, 26 Aug 2022 15:10:32 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Oded Gabbay <ogabbay@kernel.org>
+Message-ID: <YwkMmFjpsKuJroBz@nvidia.com>
+References: <0-v1-9e6e1739ed95+5fa-vfio_dma_buf_jgg@nvidia.com>
+ <4-v1-9e6e1739ed95+5fa-vfio_dma_buf_jgg@nvidia.com>
+ <CAFCwf13kOBri3NDO=6SGHOXq-M=wndbdcMxik9bf8H1AUCE1tQ@mail.gmail.com>
 Content-Disposition: inline
-In-Reply-To: <e3ba146d-8153-add5-2cf4-02fe6519abee@collabora.com>
-X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: -------
-X-Rspamd-Queue-Id: 4F5AC3ED7D
-X-Spamd-Result: default: False [-7.00 / 15.00];
-	DWL_DNSWL_HI(-3.50)[ziepe.ca:dkim];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-0.50)[47.55.122.23:received];
-	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	MIME_GOOD(-0.10)[text/plain];
-	DMARC_NA(0.00)[ziepe.ca];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_IN_DNSWL_NONE(0.00)[209.85.222.169:from];
-	TO_DN_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.222.169:from];
-	RCPT_COUNT_GT_50(0.00)[51];
-	TAGGED_RCPT(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[ziepe.ca:+];
-	FREEMAIL_CC(0.00)[kernel.org,lists.freedesktop.org,vger.kernel.org,gmail.com,lists.linaro.org,collabora.com,lists.linux-foundation.org,linux.ie,redhat.com,chromium.org,ffwll.ch,fooishbar.org,linux.intel.com,suse.de,linaro.org,amd.com,samsung.com,intel.com,shipmail.org,qti.qualcomm.com,suse.com,epam.com,armlinux.org.uk,pengutronix.de];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
-Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ziepe.ca header.s=google header.b=Y1FJnNxK;
-	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.222.169 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
-	dmarc=none
-Message-ID-Hash: GPWELJ6PLXTOJRJL5VRXBHD3OIQGCFIZ
-X-Message-ID-Hash: GPWELJ6PLXTOJRJL5VRXBHD3OIQGCFIZ
-X-MailFrom: jgg@ziepe.ca
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Leon Romanovsky <leon@kernel.org>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org, David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Daniel Vetter <daniel@ffwll.ch>, Daniel Almeida <daniel.almeida@collabora.com>, Gert Wollny <gert.wollny@collabora.com>, Gustavo Padovan <gustavo.padovan@collabora.com>, Daniel Stone <daniel@fooishbar.org>, Tomeu Vizoso <tomeu.vizoso@collabora.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Rob Clark <robdclark@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian
- .koenig@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, Alex Deucher <alexander.deucher@amd.com>, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Qiang Yu <yuq825@gmail.com>, Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, Amol Maheshwari <amahesh@qti.qualcomm.com>, Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Tomi Valkeinen <tomba@kernel.org>, Russell King <linux@armlinux.org.uk>, Christian Gmeiner <christian.gmeiner@gmail.com>, Ruhl Michael J <michael.j.ruhl@intel.com>
+In-Reply-To: <CAFCwf13kOBri3NDO=6SGHOXq-M=wndbdcMxik9bf8H1AUCE1tQ@mail.gmail.com>
+X-ClientProxiedBy: BL1PR13CA0268.namprd13.prod.outlook.com
+ (2603:10b6:208:2ba::33) To MN2PR12MB4192.namprd12.prod.outlook.com
+ (2603:10b6:208:1d5::15)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 496c1765-6208-46f4-aa50-08da878e4497
+X-MS-TrafficTypeDiagnostic: CY5PR12MB6180:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	wDBO32CR5YRONTjlTkB73qExBL4EIVO0zEhxQvMDlAvcVGciGfKgfTukqgrb/axadQu++NTMKcnjTCl3i6XqiMJvR63VO3JfE6RGee84AJQOXhCbf2hKwudHYJCjXvnaN2TjbrW9PXxc9i0RhBGK6XQLaOUAVa7n7t1BsEgmA7QkTrx7IT3B/CB0M5fIprvnKvrEKlQH+4VukbUF07qeAW3RCLDU68TT6SBJ8Yd4ozgC0I6jNgedcUNMdnWUsXa9ghf7EYkBfktZgHv6InTkU9H52PxayBWxjQiZdvqhqziRUQ+edN+pPTfTv+kKeDgYMg9x2MhtJAEf0XEl/BBKs1vFvg11Q4CvWnonpngo7Effkx7E4hQjh+tDyItHqMm+Nk6swhFlcOMYS2tVck60i3fk1vGPFcD0zY7p3BW+0Zu/F5uhKqQ5nFytF/jBWxiXQM5YaG3NFP+MAcv9PoOB5/NSb1zPTgHr6q49J6R51FtW7I7A22/mDYoY6sqZp2t/sMyHRlnV/mgbZX+jpcOMMzJxGdn7oZQgZKwGNhFJ/zhBMMCO8Y2M1XLQPa7ibm+0gupuyZ2n1T/T6+feKWgY00d7rN4+WZ1c21RI8dSzlrBUV+Bytv4y6UyL94bkphNUpZPO6eHpVRmeKiC/EjH9hpJrNos+7TPGEYSeaFs5xousDbonZnkz1VKYwmfTcBSjlADRZ+UKv167h0bAqWmanQ==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR12MB4192.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(396003)(376002)(346002)(39860400002)(136003)(366004)(316002)(86362001)(8936002)(6916009)(4326008)(8676002)(66946007)(66556008)(66476007)(54906003)(26005)(83380400001)(6512007)(2616005)(7416002)(186003)(6486002)(478600001)(6506007)(38100700002)(2906002)(107886003)(41300700001)(36756003)(5660300002)(4744005);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?r8tIeO7XypHpu0U3gaORBl840X7xXAXx/UGCKaHtsql7BdFGEznCy1DAzH8W?=
+ =?us-ascii?Q?1VpIb+I4dZD16shjHLq1UHzJwTfjvZLn7drXWiytercDa7KrHAbGqIgGA1IZ?=
+ =?us-ascii?Q?MLHsNXEKUki0o/PF9yU5J7RY2Y3HwqSBvbquSR3iZTlq2oFYyHiMXNoNw7Hz?=
+ =?us-ascii?Q?/AffYUtunSZtf/c24XJJo9OGdX7Qa3R5832Auq5BMY1oXlYx6cxCD23z6nGc?=
+ =?us-ascii?Q?+68IQxQrwnmulZku2FKVZaOFCFVnZnnbX27+QPMSllwFUUSwGcr1AkEqBC0A?=
+ =?us-ascii?Q?6LzD14AdHFUxouG8ZIRaw/ri+6yw9BXqSAPLdG6kTRQf4rseDugOfNOGdu1w?=
+ =?us-ascii?Q?ayTAAkXQL8k9xCumptmpsSl8vgSJ1wdfPlbdjMW5HenPYyybI5Nj5adYJ85t?=
+ =?us-ascii?Q?KPf9iOK6NBHaIsFPubP8YqU/aXX/hk6+WjCfpbVFiBL8AwADGrL0oJiHCC6Y?=
+ =?us-ascii?Q?yOF/UCti0lZE/kB0Uih6kWpsnKRgFdFI3Xw+wx6FHZeHUpnCYF2V/9/OWc94?=
+ =?us-ascii?Q?frCmBO18+5xt/aVrRx/SQWS7AaAbRJBTWQ6aybJUTu0bJGU7MrayyFwB5Dgr?=
+ =?us-ascii?Q?P7XURzowXpSkSyXxq1S0UZXrgpqgDh2BmEEWHGPfliZBuqgEaZBggcHnM7Ku?=
+ =?us-ascii?Q?twC39BO9Ooo1GL/Dir5BRSAcfBt1asLCQwwz2oz50IN3LJ2mp4NVMXZ0oKYE?=
+ =?us-ascii?Q?tNk112u7P/LATJwVpwCzzeC4JKFI+e3Syx+DnzCaSc9vYv/KtKEyycH2THja?=
+ =?us-ascii?Q?WTzRfdfhBfbTBtjvsLi+Os/slmQ8r/7hkhDkAM7wyNoGnA/wo5Er2t0ohfw1?=
+ =?us-ascii?Q?rJzkvnhCCTSUNiQ3i1qATjEAX9PY4ZXr9mFLd0Y2sJ7gkSSd5k4RJ894Oc3w?=
+ =?us-ascii?Q?EyZFASCErXagTGcBCXZ1cw1poAz+/wmoOpbZrRFelPZqatyqMqIQPybgLUn3?=
+ =?us-ascii?Q?8TAvT/ppfWi1r+Hl+c8FxGQfUuKzQxcLkkxFL9B9T1Y2sZ5BkGe3QCHB2XHv?=
+ =?us-ascii?Q?W3a2R2UD+dEu0U4/X2geSQ14R2VVXTFdaWkLKh9Ust454218pQC0QLmI8qH+?=
+ =?us-ascii?Q?uWinoQ/+/Zpm8fAFLLIXywHLh0vYfjx8cGAUgW8qOsRpiKDv7Vmx/Sg0zkCt?=
+ =?us-ascii?Q?7yurMBb58p98ajBvr39UJ2VgFdIsBhoph83wQWLvmAcoqk9DHdqJuiUpchQx?=
+ =?us-ascii?Q?XCPPI73xxnGrCvo+DQYFaMXS+Qzq7bhCrOzo7vxdF1Tvcfw/S2BUu3WW+rjD?=
+ =?us-ascii?Q?hlrFaNYWBdYOD9WWrQ/58zjh6EwC0Kv9qGUvABkr2mZG4USZD7Puco4rvweT?=
+ =?us-ascii?Q?ygLEYKtBZrXZ9ERzl/m26KiwvDR0qsEaVrvlvANb/j+H3m1+3xoPOonzOGxI?=
+ =?us-ascii?Q?BU1LyVKUHcSB9Y9Y775QhFSRIC83zcjY6YJp37xoVcL4hcrTRCM1lpK0NmP6?=
+ =?us-ascii?Q?37/WmQLUzRQGqEesPDND3BAaZPm12de9teCQwP97hLZf7MR7QHelbYonhWvK?=
+ =?us-ascii?Q?NJ6u6fzN4fYiDRZByZA1Z7WUvrCA3Q0w4C0E/AxTdZGPgSlkky5Nt4DwxRob?=
+ =?us-ascii?Q?b+buYN4/lEesnAQgBeDKP1+b5kyHCqM03h5WzczF?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 496c1765-6208-46f4-aa50-08da878e4497
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB4192.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Aug 2022 18:10:33.4430
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6aNmX6VLedMHvn98GkrIymcqtfJCX0BtjGN6bjR7S/jS03Rj3DkVKR79uVxLTVpG
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6180
+X-MailFrom: jgg@nvidia.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: JH4BJCQ7CYSNFMNT7YWDXGVZFYVRHKLR
+X-Message-ID-Hash: JH4BJCQ7CYSNFMNT7YWDXGVZFYVRHKLR
+X-Mailman-Approved-At: Tue, 11 Oct 2022 13:18:36 +0000
+CC: Alex Williamson <alex.williamson@redhat.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Cornelia Huck <cohuck@redhat.com>, Maling list - DRI developers <dri-devel@lists.freedesktop.org>, KVM list <kvm@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Linux Media Mailing List <linux-media@vger.kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Leon Romanovsky <leon@kernel.org>, linux-rdma <linux-rdma@vger.kernel.org>, Maor Gottlieb <maorg@nvidia.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v6 10/21] RDMA/umem: Prepare to dynamic dma-buf locking specification
+Subject: [Linaro-mm-sig] Re: Fwd: [PATCH 4/4] vfio/pci: Allow MMIO regions to be exported through dma-buf
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GPWELJ6PLXTOJRJL5VRXBHD3OIQGCFIZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JH4BJCQ7CYSNFMNT7YWDXGVZFYVRHKLR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gU3VuLCBPY3QgMDksIDIwMjIgYXQgMDM6MDg6NTZBTSArMDMwMCwgRG1pdHJ5IE9zaXBlbmtv
-IHdyb3RlOg0KPiBPbiA5LzI4LzIyIDIyOjE1LCBEbWl0cnkgT3NpcGVua28gd3JvdGU6DQo+ID4g
-UHJlcGFyZSBJbmZpbmlCYW5kIGRyaXZlcnMgdG8gdGhlIGNvbW1vbiBkeW5hbWljIGRtYS1idWYg
-bG9ja2luZw0KPiA+IGNvbnZlbnRpb24gYnkgc3RhcnRpbmcgdG8gdXNlIHRoZSB1bmxvY2tlZCB2
-ZXJzaW9ucyBvZiBkbWEtYnVmIEFQSQ0KPiA+IGZ1bmN0aW9ucy4NCj4gPiANCj4gPiBBY2tlZC1i
-eTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KPiA+IFNpZ25l
-ZC1vZmYtYnk6IERtaXRyeSBPc2lwZW5rbyA8ZG1pdHJ5Lm9zaXBlbmtvQGNvbGxhYm9yYS5jb20+
-DQo+ID4gLS0tDQo+ID4gIGRyaXZlcnMvaW5maW5pYmFuZC9jb3JlL3VtZW1fZG1hYnVmLmMgfCA3
-ICsrKystLS0NCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlv
-bnMoLSkNCj4gPiANCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9pbmZpbmliYW5kL2NvcmUvdW1l
-bV9kbWFidWYuYyBiL2RyaXZlcnMvaW5maW5pYmFuZC9jb3JlL3VtZW1fZG1hYnVmLmMNCj4gPiBp
-bmRleCAwNGMwNGU2ZDI0YzMuLjQzYjI2YmMxMjI4OCAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJz
-L2luZmluaWJhbmQvY29yZS91bWVtX2RtYWJ1Zi5jDQo+ID4gKysrIGIvZHJpdmVycy9pbmZpbmli
-YW5kL2NvcmUvdW1lbV9kbWFidWYuYw0KPiA+IEBAIC0yNiw3ICsyNiw4IEBAIGludCBpYl91bWVt
-X2RtYWJ1Zl9tYXBfcGFnZXMoc3RydWN0IGliX3VtZW1fZG1hYnVmICp1bWVtX2RtYWJ1ZikNCj4g
-PiAgCWlmICh1bWVtX2RtYWJ1Zi0+c2d0KQ0KPiA+ICAJCWdvdG8gd2FpdF9mZW5jZTsNCj4gPiAg
-DQo+ID4gLQlzZ3QgPSBkbWFfYnVmX21hcF9hdHRhY2htZW50KHVtZW1fZG1hYnVmLT5hdHRhY2gs
-IERNQV9CSURJUkVDVElPTkFMKTsNCj4gPiArCXNndCA9IGRtYV9idWZfbWFwX2F0dGFjaG1lbnRf
-dW5sb2NrZWQodW1lbV9kbWFidWYtPmF0dGFjaCwNCj4gPiArCQkJCQkgICAgICBETUFfQklESVJF
-Q1RJT05BTCk7DQo+ID4gIAlpZiAoSVNfRVJSKHNndCkpDQo+ID4gIAkJcmV0dXJuIFBUUl9FUlIo
-c2d0KTsNCj4gPiAgDQo+ID4gQEAgLTEwMiw4ICsxMDMsOCBAQCB2b2lkIGliX3VtZW1fZG1hYnVm
-X3VubWFwX3BhZ2VzKHN0cnVjdCBpYl91bWVtX2RtYWJ1ZiAqdW1lbV9kbWFidWYpDQo+ID4gIAkJ
-dW1lbV9kbWFidWYtPmxhc3Rfc2dfdHJpbSA9IDA7DQo+ID4gIAl9DQo+ID4gIA0KPiA+IC0JZG1h
-X2J1Zl91bm1hcF9hdHRhY2htZW50KHVtZW1fZG1hYnVmLT5hdHRhY2gsIHVtZW1fZG1hYnVmLT5z
-Z3QsDQo+ID4gLQkJCQkgRE1BX0JJRElSRUNUSU9OQUwpOw0KPiA+ICsJZG1hX2J1Zl91bm1hcF9h
-dHRhY2htZW50X3VubG9ja2VkKHVtZW1fZG1hYnVmLT5hdHRhY2gsIHVtZW1fZG1hYnVmLT5zZ3Qs
-DQo+ID4gKwkJCQkJICBETUFfQklESVJFQ1RJT05BTCk7DQo+ID4gIA0KPiA+ICAJdW1lbV9kbWFi
-dWYtPnNndCA9IE5VTEw7DQo+ID4gIH0NCj4gDQo+IEphc29uIC8gTGVvbiwNCj4gDQo+IENvdWxk
-IHlvdSBwbGVhc2UgYWNrIHRoaXMgcGF0Y2g/DQoNCllvdSBwcm9iYWJseSBkb24ndCBuZWVkIGl0
-LCBmb3Igc29tZXRoaW5nIHNvIHNpbXBsZSwgYnV0IHN1cmUNCg0KQWNrZWQtYnk6IEphc29uIEd1
-bnRob3JwZSA8amdnQG52aWRpYS5jb20+DQoNCkphc29uDQpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBs
-aW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFp
-bCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Sun, Aug 21, 2022 at 04:51:34PM +0300, Oded Gabbay wrote:
+
+> > +static void vfio_pci_dma_buf_unmap(struct dma_buf_attachment *attachment,
+> > +                                  struct sg_table *sgt,
+> > +                                  enum dma_data_direction dir)
+> > +{
+> > +       struct vfio_pci_dma_buf *priv = attachment->dmabuf->priv;
+> > +
+> > +       dma_unmap_resource(attachment->dev, sg_dma_address(sgt->sgl),
+> > +                          priv->dmabuf->size, dir, DMA_ATTR_SKIP_CPU_SYNC);
+> > +       sg_free_table(sgt);
+> Before calling sg_free_table(), you need to restore the orig_nents as
+> it is used in that function to free the allocated memory of the sgt.
+
+Oops, right, thanks good catch
+
+Jason
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
