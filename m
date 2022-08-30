@@ -2,52 +2,52 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 70A0F5A69D2
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Aug 2022 19:23:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA5F05A69F3
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Aug 2022 19:24:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AD3693F4BB
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Aug 2022 17:23:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E40BF3F5FE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Aug 2022 17:24:57 +0000 (UTC)
 Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-	by lists.linaro.org (Postfix) with ESMTPS id 55D983F4BB
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Aug 2022 17:23:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 51B803F4BB
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Aug 2022 17:24:52 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.source.kernel.org (Postfix) with ESMTPS id 70841B81D18;
-	Tue, 30 Aug 2022 17:23:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8784AC433C1;
-	Tue, 30 Aug 2022 17:23:24 +0000 (UTC)
+	by ams.source.kernel.org (Postfix) with ESMTPS id 75E42B81D1B;
+	Tue, 30 Aug 2022 17:24:51 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BD356C433D6;
+	Tue, 30 Aug 2022 17:24:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1661880206;
-	bh=Wt1k6YYO7A7x5sNg2MQY+ULG/lmKJp3pfkgomSxsC9c=;
+	s=k20201202; t=1661880291;
+	bh=+B/deXk8yVP4vKZULyveQWzafq6t/dXHKfPkuAy3W3E=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=mhaW15z2XyzvopnDFnrpymaOvXdkOEg1FOWGa9EcTCypm36O3mg80nhoKzBunnKqc
-	 hupv0iXXKwYB1ih/Cxrc/22jfJW3G9AzA9rKRDajUx1p8EZjYW7MGlsVffJu5nB5oH
-	 6PfwD1qnAGIz70OIMkzcKfIUdKJJ293hrb+tKhtXtLfdqEWuYpXTSqdvY2UvzWy9hM
-	 Fellb5Fta0kI8HIJkO21+yUSvGOWMG7LhDJ4Fp+ePbbH9nhkq0MiJRVS2eONVC8gQU
-	 FmfHRYsrTSoSazANkw6T0RCs9aQk20d1Bvs4ZKekJ99kHqC7DUECOn9UA1txZNVEm9
-	 sfAkHITiO36yg==
+	b=lQ9337AFM3XAXBHlWQd3oyAkz0hbg7ct3/YcUNbUV+eRD1Y+a/yHqhlD/59x4cJle
+	 Rv8NGLWS1dzx/EFWUpYbWLX3AIF/8GjqZy3f/+Wl72HNCFQZhtchz4w8nlxAbZw9ac
+	 e6lVHji6hDoY26Op1Ahchdhfzz/rve87HNc0jVZdHYuPtCOozruQFLng2cxZv/QuK3
+	 8aiYGnwanC2/jPU3gV5qOlTeZbkIEkd2JiacsyHWD2shLAdmoLF4woC/V+8sQoAoO5
+	 gkHjb2Z0X4mmKkkToUEXHj85eth7kGH01IPmXq5frpCQQwG3KiGXHer1iMfgPmDs89
+	 TZO9zeVNv1zzQ==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Tue, 30 Aug 2022 13:23:05 -0400
-Message-Id: <20220830172317.581397-4-sashal@kernel.org>
+Date: Tue, 30 Aug 2022 13:24:34 -0400
+Message-Id: <20220830172444.581654-3-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220830172317.581397-1-sashal@kernel.org>
-References: <20220830172317.581397-1-sashal@kernel.org>
+In-Reply-To: <20220830172444.581654-1-sashal@kernel.org>
+References: <20220830172444.581654-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Message-ID-Hash: UMRLYOBQHVABD4KJLB4T5FJFYVO6BWZ6
-X-Message-ID-Hash: UMRLYOBQHVABD4KJLB4T5FJFYVO6BWZ6
+Message-ID-Hash: Z7SJB6XDQ6YOIVRM6QDCGTPCML3L6JUX
+X-Message-ID-Hash: Z7SJB6XDQ6YOIVRM6QDCGTPCML3L6JUX
 X-MailFrom: sashal@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Jeffy Chen <jeffy.chen@rock-chips.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Sasha Levin <sashal@kernel.org>, maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, airlied@linux.ie, daniel@ffwll.ch, sumit.semwal@linaro.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.10 04/16] drm/gem: Fix GEM handle release errors
+Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.4 03/12] drm/gem: Fix GEM handle release errors
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UMRLYOBQHVABD4KJLB4T5FJFYVO6BWZ6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Z7SJB6XDQ6YOIVRM6QDCGTPCML3L6JUX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -79,9 +79,9 @@ cHUvZHJtL2RybV9nZW0uYyAgICAgIHwgMTcgKy0tLS0tLS0tLS0tLS0tLS0NCiBkcml2ZXJzL2dw
 dS9kcm0vZHJtX2ludGVybmFsLmggfCAgNCArKy0tDQogZHJpdmVycy9ncHUvZHJtL2RybV9wcmlt
 ZS5jICAgIHwgMjAgKysrKysrKysrKysrLS0tLS0tLS0NCiAzIGZpbGVzIGNoYW5nZWQsIDE1IGlu
 c2VydGlvbnMoKyksIDI2IGRlbGV0aW9ucygtKQ0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUv
-ZHJtL2RybV9nZW0uYyBiL2RyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtLmMNCmluZGV4IDU5NzlhZjIz
-MGVkYTAuLjhiMzBlOGQ4M2ZiY2YgMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2dl
-bS5jDQorKysgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2dlbS5jDQpAQCAtMTY2LDIxICsxNjYsNiBA
+ZHJtL2RybV9nZW0uYyBiL2RyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtLmMNCmluZGV4IDI1YTJkODAy
+ODdkNjcuLmQ2YTcyZjNjYjFmYmQgMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2dl
+bS5jDQorKysgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2dlbS5jDQpAQCAtMTY3LDIxICsxNjcsNiBA
 QCB2b2lkIGRybV9nZW1fcHJpdmF0ZV9vYmplY3RfaW5pdChzdHJ1Y3QgZHJtX2RldmljZSAqZGV2
 LA0KIH0NCiBFWFBPUlRfU1lNQk9MKGRybV9nZW1fcHJpdmF0ZV9vYmplY3RfaW5pdCk7DQogDQot
 c3RhdGljIHZvaWQNCi1kcm1fZ2VtX3JlbW92ZV9wcmltZV9oYW5kbGVzKHN0cnVjdCBkcm1fZ2Vt
@@ -93,7 +93,7 @@ ZHJtX3ByaW1lX3JlbW92ZV9idWZfaGFuZGxlX2xvY2tlZCgmZmlscC0+cHJpbWUsDQotCQkJCQkJ
 ICAgb2JqLT5kbWFfYnVmKTsNCi0JfQ0KLQltdXRleF91bmxvY2soJmZpbHAtPnByaW1lLmxvY2sp
 Ow0KLX0NCi0NCiAvKioNCiAgKiBkcm1fZ2VtX29iamVjdF9oYW5kbGVfZnJlZSAtIHJlbGVhc2Ug
 cmVzb3VyY2VzIGJvdW5kIHRvIHVzZXJzcGFjZSBoYW5kbGVzDQogICogQG9iajogR0VNIG9iamVj
-dCB0byBjbGVhbiB1cC4NCkBAIC0yNTQsNyArMjM5LDcgQEAgZHJtX2dlbV9vYmplY3RfcmVsZWFz
+dCB0byBjbGVhbiB1cC4NCkBAIC0yNTUsNyArMjQwLDcgQEAgZHJtX2dlbV9vYmplY3RfcmVsZWFz
 ZV9oYW5kbGUoaW50IGlkLCB2b2lkICpwdHIsIHZvaWQgKmRhdGEpDQogCWVsc2UgaWYgKGRldi0+
 ZHJpdmVyLT5nZW1fY2xvc2Vfb2JqZWN0KQ0KIAkJZGV2LT5kcml2ZXItPmdlbV9jbG9zZV9vYmpl
 Y3Qob2JqLCBmaWxlX3ByaXYpOw0KIA0KLQlkcm1fZ2VtX3JlbW92ZV9wcmltZV9oYW5kbGVzKG9i
@@ -101,9 +101,9 @@ aiwgZmlsZV9wcml2KTsNCisJZHJtX3ByaW1lX3JlbW92ZV9idWZfaGFuZGxlKCZmaWxlX3ByaXYt
 PnByaW1lLCBpZCk7DQogCWRybV92bWFfbm9kZV9yZXZva2UoJm9iai0+dm1hX25vZGUsIGZpbGVf
 cHJpdik7DQogDQogCWRybV9nZW1fb2JqZWN0X2hhbmRsZV9wdXRfdW5sb2NrZWQob2JqKTsNCmRp
 ZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2ludGVybmFsLmggYi9kcml2ZXJzL2dwdS9k
-cm0vZHJtX2ludGVybmFsLmgNCmluZGV4IGI2NTg2NWM2MzBiMGEuLmY4MGUwZjI4MDg3ZDEgMTAw
+cm0vZHJtX2ludGVybmFsLmgNCmluZGV4IDUxYTIwNTVjOGYxOGEuLjQxYTlhOWJhZTU4NDggMTAw
 NjQ0DQotLS0gYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2ludGVybmFsLmgNCisrKyBiL2RyaXZlcnMv
-Z3B1L2RybS9kcm1faW50ZXJuYWwuaA0KQEAgLTg2LDggKzg2LDggQEAgaW50IGRybV9wcmltZV9m
+Z3B1L2RybS9kcm1faW50ZXJuYWwuaA0KQEAgLTU5LDggKzU5LDggQEAgaW50IGRybV9wcmltZV9m
 ZF90b19oYW5kbGVfaW9jdGwoc3RydWN0IGRybV9kZXZpY2UgKmRldiwgdm9pZCAqZGF0YSwNCiAN
 CiB2b2lkIGRybV9wcmltZV9pbml0X2ZpbGVfcHJpdmF0ZShzdHJ1Y3QgZHJtX3ByaW1lX2ZpbGVf
 cHJpdmF0ZSAqcHJpbWVfZnByaXYpOw0KIHZvaWQgZHJtX3ByaW1lX2Rlc3Ryb3lfZmlsZV9wcml2
@@ -114,8 +114,8 @@ b2lkIGRybV9wcmltZV9yZW1vdmVfYnVmX2hhbmRsZShzdHJ1Y3QgZHJtX3ByaW1lX2ZpbGVfcHJp
 dmF0ZSAqcHJpbWVfZnByaXYsDQorCQkJCSB1aW50MzJfdCBoYW5kbGUpOw0KIA0KIC8qIGRybV9k
 cnYuYyAqLw0KIHN0cnVjdCBkcm1fbWlub3IgKmRybV9taW5vcl9hY3F1aXJlKHVuc2lnbmVkIGlu
 dCBtaW5vcl9pZCk7DQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL2RybV9wcmltZS5jIGIv
-ZHJpdmVycy9ncHUvZHJtL2RybV9wcmltZS5jDQppbmRleCA5Zjk1NWYyMDEwYzI1Li44MjU0OTll
-YTNmZjU5IDEwMDY0NA0KLS0tIGEvZHJpdmVycy9ncHUvZHJtL2RybV9wcmltZS5jDQorKysgYi9k
+ZHJpdmVycy9ncHUvZHJtL2RybV9wcmltZS5jDQppbmRleCAwYTIzMTZlMGU4MTIxLi42YjdjZjAx
+NzBmOWQxIDEwMDY0NA0KLS0tIGEvZHJpdmVycy9ncHUvZHJtL2RybV9wcmltZS5jDQorKysgYi9k
 cml2ZXJzL2dwdS9kcm0vZHJtX3ByaW1lLmMNCkBAIC0xODcsMjkgKzE4NywzMyBAQCBzdGF0aWMg
 aW50IGRybV9wcmltZV9sb29rdXBfYnVmX2hhbmRsZShzdHJ1Y3QgZHJtX3ByaW1lX2ZpbGVfcHJp
 dmF0ZSAqcHJpbWVfZnByaQ0KIAlyZXR1cm4gLUVOT0VOVDsNCiB9DQogDQotdm9pZCBkcm1fcHJp
