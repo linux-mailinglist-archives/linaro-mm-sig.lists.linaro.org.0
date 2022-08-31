@@ -2,162 +2,258 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BE3D602E4F
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Oct 2022 16:22:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C98F3602E52
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Oct 2022 16:23:06 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 723B53F5E5
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Oct 2022 14:22:45 +0000 (UTC)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
-	by lists.linaro.org (Postfix) with ESMTPS id EB84F3F4EB
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 31 Aug 2022 10:43:19 +0000 (UTC)
-X-UUID: 9770c0a5a4344fd69741819be046347b-20220831
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
-	h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From; bh=Es87NlIhjYHpg4dZrG96TP+dhMTbFw0ydOaC4lEEmKE=;
-	b=KwM9lxn+c0JVvWg3oWMOALZiJE8/kfWQWSWEsOcGsRc1MJhN57COKW1Js8RJ+vXYYt2ul/lVkcdJcA3fWcT/XeSkd7FtiYKisQ1xOsZE4f1TqvqE8qAyvqBwN3FeriVC/OMaXrO1ptRLx0NweRkrjBp26H9lKuTTxV/xa5nDCD0=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.10,REQID:3d9de0a7-2ca3-49df-b3a4-fac8c4c089db,OB:0,L
-	OB:0,IP:0,URL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Releas
-	e_Ham,ACTION:release,TS:-25
-X-CID-META: VersionHash:84eae18,CLOUDID:e4442656-e800-47dc-8adf-0c936acf4f1b,C
-	OID:IGNORED,Recheck:0,SF:nil,TC:nil,Content:0,EDM:-3,IP:nil,URL:1,File:nil
-	,Bulk:nil,QS:nil,BEC:nil,COL:0
-X-UUID: 9770c0a5a4344fd69741819be046347b-20220831
-Received: from mtkexhb01.mediatek.inc [(172.21.101.102)] by mailgw01.mediatek.com
-	(envelope-from <yf.wang@mediatek.com>)
-	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-SHA384 256/256)
-	with ESMTP id 212749007; Wed, 31 Aug 2022 18:43:11 +0800
-Received: from mtkmbs11n1.mediatek.inc (172.21.101.186) by
- mtkmbs10n1.mediatek.inc (172.21.101.34) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.792.15; Wed, 31 Aug 2022 18:43:10 +0800
-Received: from mbjsdccf07.mediatek.inc (10.15.20.246) by
- mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.792.15 via Frontend Transport; Wed, 31 Aug 2022 18:43:10 +0800
-From: <yf.wang@mediatek.com>
-To: Daniel Vetter <daniel.vetter@ffwll.ch>, Sumit Semwal
-	<sumit.semwal@linaro.org>, <christian.koenig@amd.com>,
-	<linux-media@vger.kernel.org>
-Date: Wed, 31 Aug 2022 18:35:21 +0800
-Message-ID: <20220831103521.3019-1-yf.wang@mediatek.com>
-X-Mailer: git-send-email 2.18.0
+	by lists.linaro.org (Postfix) with ESMTP id E24A53F1D6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Oct 2022 14:23:05 +0000 (UTC)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+	by lists.linaro.org (Postfix) with ESMTPS id 10F173F60A
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 31 Aug 2022 15:44:01 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by smtp-out1.suse.de (Postfix) with ESMTPS id DFDDA2199A;
+	Wed, 31 Aug 2022 15:43:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1661960639; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=3yrYAWdBoy31kX+Qe1EoE7Uurbd/80U+VpqsfDJ+/94=;
+	b=Ml9yC086UCw1N9YLeQ/ewgEYRQklA/m3wWbB0ec4AYp1moM28bA478xtCH/y2hHNRbuXqC
+	n1xfjY3C5P1+tM0HKiw3ofr2WUA5dURXFiQ1BillQ7KJpEkaq3alPZjI9tv6DPjn2gpqWX
+	xN379Vzr1DhVio/DWxLP50Z+ixQUiRA=
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7A73E13A7C;
+	Wed, 31 Aug 2022 15:43:58 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+	by imap2.suse-dmz.suse.de with ESMTPSA
+	id 1f6CHL6BD2NTcwAAMHmgww
+	(envelope-from <jgross@suse.com>); Wed, 31 Aug 2022 15:43:58 +0000
+Message-ID: <9c9bb842-c4ce-021c-4be6-be7f13f277d9@suse.com>
+Date: Wed, 31 Aug 2022 17:43:58 +0200
 MIME-Version: 1.0
-X-MTK: N
-X-MailFrom: yf.wang@mediatek.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.12.0
+Content-Language: en-US
+To: Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+ David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu
+ <olvaffe@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Gert Wollny <gert.wollny@collabora.com>,
+ Gustavo Padovan <gustavo.padovan@collabora.com>,
+ Daniel Stone <daniel@fooishbar.org>,
+ Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Rob Clark <robdclark@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding
+ <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas_os@shipmail.org>,
+ Qiang Yu <yuq825@gmail.com>,
+ Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+ Amol Maheshwari <amahesh@qti.qualcomm.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Leon Romanovsky <leon@kernel.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Tomi Valkeinen <tomba@kernel.org>, Russell King <linux@armlinux.org.uk>,
+ Lucas Stach <l.stach@pengutronix.de>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>
+References: <20220831153757.97381-1-dmitry.osipenko@collabora.com>
+ <20220831153757.97381-13-dmitry.osipenko@collabora.com>
+From: Juergen Gross <jgross@suse.com>
+In-Reply-To: <20220831153757.97381-13-dmitry.osipenko@collabora.com>
+X-MailFrom: jgross@suse.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 6M3N6Y4OU3X5XUIVEPHRSJJ5WFVVF6YY
-X-Message-ID-Hash: 6M3N6Y4OU3X5XUIVEPHRSJJ5WFVVF6YY
-X-Mailman-Approved-At: Tue, 18 Oct 2022 14:22:29 +0000
-CC: wsd_upstream@mediatek.com, Libo Kang <Libo.Kang@mediatek.com>, Ning Li <Ning.Li@mediatek.com>, Yong Wu <Yong.Wu@mediatek.com>, Miles Chen <miles.chen@mediatek.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+Message-ID-Hash: ENEJ55SYM44P2BBBX5SGVGFINFUTV26Q
+X-Message-ID-Hash: ENEJ55SYM44P2BBBX5SGVGFINFUTV26Q
+X-Mailman-Approved-At: Tue, 18 Oct 2022 14:22:37 +0000
+CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [bug report] dma-buf: Add debug option
+Subject: [Linaro-mm-sig] Re: [PATCH v4 12/21] xen/gntdev: Prepare to dynamic dma-buf locking specification
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6M3N6Y4OU3X5XUIVEPHRSJJ5WFVVF6YY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ENEJ55SYM44P2BBBX5SGVGFINFUTV26Q/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: multipart/mixed; boundary="===============1883999141933624483=="
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============1883999141933624483==
+Content-Language: en-US
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------G6Hfo1qgQ46O6AttifejsfyG"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------G6Hfo1qgQ46O6AttifejsfyG
+Content-Type: multipart/mixed; boundary="------------lypUeJqL5gtL0yFztu3gk66a";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+ David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu
+ <olvaffe@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Gert Wollny <gert.wollny@collabora.com>,
+ Gustavo Padovan <gustavo.padovan@collabora.com>,
+ Daniel Stone <daniel@fooishbar.org>,
+ Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Rob Clark <robdclark@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding
+ <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Alex Deucher <alexander.deucher@amd.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>,
+ Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas_os@shipmail.org>,
+ Qiang Yu <yuq825@gmail.com>,
+ Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+ Amol Maheshwari <amahesh@qti.qualcomm.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Leon Romanovsky <leon@kernel.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Tomi Valkeinen <tomba@kernel.org>, Russell King <linux@armlinux.org.uk>,
+ Lucas Stach <l.stach@pengutronix.de>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>
+Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org,
+ intel-gfx@lists.freedesktop.org, kernel@collabora.com,
+ virtualization@lists.linux-foundation.org, linux-rdma@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org
+Message-ID: <9c9bb842-c4ce-021c-4be6-be7f13f277d9@suse.com>
+Subject: Re: [PATCH v4 12/21] xen/gntdev: Prepare to dynamic dma-buf locking
+ specification
+References: <20220831153757.97381-1-dmitry.osipenko@collabora.com>
+ <20220831153757.97381-13-dmitry.osipenko@collabora.com>
+In-Reply-To: <20220831153757.97381-13-dmitry.osipenko@collabora.com>
+
+--------------lypUeJqL5gtL0yFztu3gk66a
+Content-Type: multipart/mixed; boundary="------------ZWUad5gqJZJlvL38yNtpOUye"
+
+--------------ZWUad5gqJZJlvL38yNtpOUye
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+
+T24gMzEuMDguMjIgMTc6MzcsIERtaXRyeSBPc2lwZW5rbyB3cm90ZToNCj4gUHJlcGFyZSBn
+bnRkZXYgZHJpdmVyIHRvIHRoZSBjb21tb24gZHluYW1pYyBkbWEtYnVmIGxvY2tpbmcgY29u
+dmVudGlvbg0KPiBieSBzdGFydGluZyB0byB1c2UgdGhlIHVubG9ja2VkIHZlcnNpb25zIG9m
+IGRtYS1idWYgQVBJIGZ1bmN0aW9ucy4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IERtaXRyeSBP
+c2lwZW5rbyA8ZG1pdHJ5Lm9zaXBlbmtvQGNvbGxhYm9yYS5jb20+DQoNCkFja2VkLWJ5OiBK
+dWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+DQoNCg0KSnVlcmdlbg0K
+--------------ZWUad5gqJZJlvL38yNtpOUye
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+jR/i1DG86lem3iBDXzXsZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------ZWUad5gqJZJlvL38yNtpOUye--
+
+--------------lypUeJqL5gtL0yFztu3gk66a--
+
+--------------G6Hfo1qgQ46O6AttifejsfyG
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmMPgb4FAwAAAAAACgkQsN6d1ii/Ey+D
+8Af9EoFfR34QuXUPOWdkfHrwdTH5BQ9JUu7MI+fPHT/BbpvHP1KNO6dUIir1KSN0Ngy5hyMmv4or
+0G90PYpMrubAXjRlgD8uOsTsLwB1ymxFNA/9C8x+QdAqUSxLH2XcT0ja7kCH6zIEJ1T7//+Nnoyn
+ieoDNKkBGgSdHURfCbXSEYaJYxvUWibR2S7EyL1eTJWzxkSy8RC3M1iPgTjkwIYDnvqd/8Nrj7a6
+27pmswL+U3zJsR/DFOYdIW7/u1exr1RHagcJUdrBXW4f15alyN9hS/sIop3C0yaB0bqiEDKLLFdl
+ibIU0gFydFqt+p6qnmM8QBmFzL292hkN89U1YVgTuw==
+=QW6/
+-----END PGP SIGNATURE-----
+
+--------------G6Hfo1qgQ46O6AttifejsfyG--
+
+--===============1883999141933624483==
 Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi Daniel Vetter,
-
-The patch https://patchwork.freedesktop.org/patch/414455/:
-"dma-buf: Add debug option" from Jan. 15, 2021, leads to the following expection:
-
-Backtrace:
-
-[<ffffffc0081a2258>] atomic_notifier_call_chain+0x9c/0xe8
-[<ffffffc0081a2d54>] notify_die+0x114/0x19c
-[<ffffffc0080348d8>] __die+0xec/0x468
-[<ffffffc008034648>] die+0x54/0x1f8
-[<ffffffc0080631e8>] die_kernel_fault+0x80/0xbc
-[<ffffffc0080630fc>] __do_kernel_fault+0x268/0x2d4
-[<ffffffc008062c4c>] do_bad_area+0x68/0x148
-[<ffffffc00a6dab34>] do_translation_fault+0xbc/0x108
-[<ffffffc0080619f8>] do_mem_abort+0x6c/0x1e8
-[<ffffffc00a68f5cc>] el1_abort+0x3c/0x64
-[<ffffffc00a68f54c>] el1h_64_sync_handler+0x5c/0xa0
-[<ffffffc008011ae4>] el1h_64_sync+0x78/0x80
-[<ffffffc008063b9c>] dcache_inval_poc+0x40/0x58
-[<ffffffc009236104>] iommu_dma_sync_sg_for_cpu+0x144/0x280
-[<ffffffc0082b4870>] dma_sync_sg_for_cpu+0xbc/0x110
-[<ffffffc002c7538c>] system_heap_dma_buf_begin_cpu_access+0x144/0x1e0 [system_heap]
-[<ffffffc0094154e4>] dma_buf_begin_cpu_access+0xa4/0x10c
-[<ffffffc004888df4>] isp71_allocate_working_buffer+0x3b0/0xe8c [mtk_hcp]
-[<ffffffc004884a20>] mtk_hcp_allocate_working_buffer+0xc0/0x108 [mtk_hcp]
-
-Because of CONFIG_DMABUF_DEBUG will default enable when DMA_API_DEBUG enable,
-and when not support dma coherent, since the main function of user calling
-dma_buf_begin_cpu_access and dma_buf_end_cpu_access is to do cache sync during
-dma_buf_map_attachment and dma_buf_unmap_attachment, which get PA error from
-sgtable by sg_phys(sg), this leads to the expection.
-
-1.dma_buf_map_attachement()
- -.> mangle_sg_table(sg)  // "sg->page_link ^= ~0xffUL" to rotate PA in this patch.
-
-2.dma_buf_begin_cpu_access()
- -.> system_heap_dma_buf_begin_cpu_access() in system_heap.c  // do cache sync if mapped attachment before
-    -.> iommu_dma_sync_sg_for_cpu() in dma-iommu.c
-        -.>  arch_sync_dma_for_device(sg_phys(sg), sg->length, dir) // get PA error since PA mix up
-
-3.dma_buf_end_cpu_access() and dma_buf_begin_cpu_access are similar.
-
-4.dma_buf_unmap_attachement()
-       -.> mangle_sg_table(sg) // "sg->page_link ^= ~0xffUL" to rotate PA
-
-
-
-drivers/dma-buf/Kconfig:
-config DMABUF_DEBUG
-	bool "DMA-BUF debug checks"
-	default y if DMA_API_DEBUG
-
-
-drivers/dma-buf/dma-buf.c:
-static void mangle_sg_table(struct sg_table *sg_table)
-{
-#ifdef CONFIG_DMABUF_DEBUG
-	int i;
-	struct scatterlist *sg;
-
-	/* To catch abuse of the underlying struct page by importers mix
-	 * up the bits, but take care to preserve the low SG_ bits to
-	 * not corrupt the sgt. The mixing is undone in __unmap_dma_buf
-	 * before passing the sgt back to the exporter. */
-	for_each_sgtable_sg(sg_table, sg, i)
-		sg->page_link ^= ~0xffUL;
-#endif
-}
-
-
-drivers/iommu/dma-iommu.c:
-static void iommu_dma_sync_sg_for_cpu(struct device *dev,
-		struct scatterlist *sgl, int nelems,
-		enum dma_data_direction dir)
-{
-	struct scatterlist *sg;
-	int i;
-
-	if (dev_is_dma_coherent(dev) && !dev_is_untrusted(dev))
-		return;
-
-	for_each_sg(sgl, sg, nelems, i) {
-		if (!dev_is_dma_coherent(dev))
-			arch_sync_dma_for_cpu(sg_phys(sg), sg->length, dir);
-
-		if (is_swiotlb_buffer(sg_phys(sg)))
-			swiotlb_tbl_sync_single(dev, sg_phys(sg), sg->length,
-						dir, SYNC_FOR_CPU);
-	}
-}
-
-
-Thanks,
-Yunfei.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============1883999141933624483==--
