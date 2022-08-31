@@ -2,31 +2,31 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4414C5A817A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 17:39:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 30E015A817C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 17:39:45 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7B36E43F41
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 15:39:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6711B43C98
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 15:39:44 +0000 (UTC)
 Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-	by lists.linaro.org (Postfix) with ESMTPS id BE71C43C99
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 31 Aug 2022 15:39:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id DEBAE43C9B
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 31 Aug 2022 15:39:30 +0000 (UTC)
 Received: from dimapc.. (109-252-119-13.nat.spd-mgts.ru [109.252.119.13])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
 	(Authenticated sender: dmitry.osipenko)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id 17BD46601DEC;
-	Wed, 31 Aug 2022 16:39:24 +0100 (BST)
+	by madras.collabora.co.uk (Postfix) with ESMTPSA id 3C1B16601DF1;
+	Wed, 31 Aug 2022 16:39:27 +0100 (BST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1661960367;
-	bh=hr6PZ3PZkgZIDKEVGvhp21Gu2CuOWzIjLk/98UZ+6+w=;
+	s=mail; t=1661960370;
+	bh=0d0E/K4G1VpCa944vVBlmjIzTakzf/Ny/1hT+JzAxgI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=PbFxKLmk+yhPhvKt9j8QVXmIw3tFBmxIHwOaI1NCTabYelI/2jFQvI65VaYm3+s++
-	 MRIQEDt5ISJBMdrdoTQCXJgzNgOmJOLrfeGPdhTJXI2drR7V8ScO8bU5m2xKWENMeM
-	 9OB1vZA4eP9ohRHPaXK5e9vk5hTztfkhkoiMzMlnBYgA1bJxheMaX18kZaPRgaKngO
-	 N2O1dlB9993AUt3rO2cNoIkWWagjiVkM5WGi7Nfy7fZGANwkCarb1aMEW3PPRaVxgU
-	 c+t34gdLxh0x2+bBu+C5rfWrjRIjNQH6njd1ho1cgESu7rOA4CoIpHnpNWDXKMt2YD
-	 oaM9pP9AD/2Ow==
+	b=SSYw/8l7HkRDOU35x76FkU3THpRsV9TQ90B07NN0rXBmj1uULWKXKDb05m5kBcSV5
+	 2QMU/aHfsgznYxJoN8zVPOMXnpyBk81L1FdV+W+EClTphtQm6AcrWhh+r2SXcOhmFG
+	 Y2rIMZSTxL14ue9sv8oE5w3tcFwE5h75YcJyLZrMJDrACUeIiHPg8q5DNdXmxl6qIY
+	 ONFOO+57WajunpTHluO3XwimozfEbUjkuCkuNbGAqdQTKCISbQerJxhLwlnuvnsSHF
+	 fcCrB0xf3Y4e3YH3rvDzaDCPE5TnvhY4DhFpdnIn/cjdUV5Aw5nRI1Bbn0uOLVBmPS
+	 qulFOiJc2o4nw==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: David Airlie <airlied@linux.ie>,
 	Gerd Hoffmann <kraxel@redhat.com>,
@@ -67,23 +67,23 @@ To: David Airlie <airlied@linux.ie>,
 	Russell King <linux@armlinux.org.uk>,
 	Lucas Stach <l.stach@pengutronix.de>,
 	Christian Gmeiner <christian.gmeiner@gmail.com>
-Date: Wed, 31 Aug 2022 18:37:40 +0300
-Message-Id: <20220831153757.97381-5-dmitry.osipenko@collabora.com>
+Date: Wed, 31 Aug 2022 18:37:41 +0300
+Message-Id: <20220831153757.97381-6-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20220831153757.97381-1-dmitry.osipenko@collabora.com>
 References: <20220831153757.97381-1-dmitry.osipenko@collabora.com>
 MIME-Version: 1.0
-Message-ID-Hash: M2K74N632ZCCUY4Q644TOHOI6TEU7BK3
-X-Message-ID-Hash: M2K74N632ZCCUY4Q644TOHOI6TEU7BK3
+Message-ID-Hash: ZCOHALVOHHAIMKPQQHIUL7KEIQSV4JKO
+X-Message-ID-Hash: ZCOHALVOHHAIMKPQQHIUL7KEIQSV4JKO
 X-MailFrom: dmitry.osipenko@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v4 04/21] drm/prime: Prepare to dynamic dma-buf locking specification
+Subject: [Linaro-mm-sig] [PATCH v4 05/21] drm/armada: Prepare to dynamic dma-buf locking specification
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/M2K74N632ZCCUY4Q644TOHOI6TEU7BK3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZCOHALVOHHAIMKPQQHIUL7KEIQSV4JKO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -93,45 +93,40 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Prepare DRM prime core to the common dynamic dma-buf locking convention
+Prepare Armada driver to the common dynamic dma-buf locking convention
 by starting to use the unlocked versions of dma-buf API functions.
 
 Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 ---
- drivers/gpu/drm/drm_prime.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ drivers/gpu/drm/armada/armada_gem.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_prime.c b/drivers/gpu/drm/drm_prime.c
-index eb09e86044c6..20e109a802ae 100644
---- a/drivers/gpu/drm/drm_prime.c
-+++ b/drivers/gpu/drm/drm_prime.c
-@@ -940,7 +940,7 @@ struct drm_gem_object *drm_gem_prime_import_dev(struct drm_device *dev,
+diff --git a/drivers/gpu/drm/armada/armada_gem.c b/drivers/gpu/drm/armada/armada_gem.c
+index 5430265ad458..26d10065d534 100644
+--- a/drivers/gpu/drm/armada/armada_gem.c
++++ b/drivers/gpu/drm/armada/armada_gem.c
+@@ -66,8 +66,8 @@ void armada_gem_free_object(struct drm_gem_object *obj)
+ 	if (dobj->obj.import_attach) {
+ 		/* We only ever display imported data */
+ 		if (dobj->sgt)
+-			dma_buf_unmap_attachment(dobj->obj.import_attach,
+-						 dobj->sgt, DMA_TO_DEVICE);
++			dma_buf_unmap_attachment_unlocked(dobj->obj.import_attach,
++							  dobj->sgt, DMA_TO_DEVICE);
+ 		drm_prime_gem_destroy(&dobj->obj, NULL);
+ 	}
  
- 	get_dma_buf(dma_buf);
+@@ -539,8 +539,8 @@ int armada_gem_map_import(struct armada_gem_object *dobj)
+ {
+ 	int ret;
  
--	sgt = dma_buf_map_attachment(attach, DMA_BIDIRECTIONAL);
-+	sgt = dma_buf_map_attachment_unlocked(attach, DMA_BIDIRECTIONAL);
- 	if (IS_ERR(sgt)) {
- 		ret = PTR_ERR(sgt);
- 		goto fail_detach;
-@@ -958,7 +958,7 @@ struct drm_gem_object *drm_gem_prime_import_dev(struct drm_device *dev,
- 	return obj;
- 
- fail_unmap:
--	dma_buf_unmap_attachment(attach, sgt, DMA_BIDIRECTIONAL);
-+	dma_buf_unmap_attachment_unlocked(attach, sgt, DMA_BIDIRECTIONAL);
- fail_detach:
- 	dma_buf_detach(dma_buf, attach);
- 	dma_buf_put(dma_buf);
-@@ -1056,7 +1056,7 @@ void drm_prime_gem_destroy(struct drm_gem_object *obj, struct sg_table *sg)
- 
- 	attach = obj->import_attach;
- 	if (sg)
--		dma_buf_unmap_attachment(attach, sg, DMA_BIDIRECTIONAL);
-+		dma_buf_unmap_attachment_unlocked(attach, sg, DMA_BIDIRECTIONAL);
- 	dma_buf = attach->dmabuf;
- 	dma_buf_detach(attach->dmabuf, attach);
- 	/* remove the reference */
+-	dobj->sgt = dma_buf_map_attachment(dobj->obj.import_attach,
+-					   DMA_TO_DEVICE);
++	dobj->sgt = dma_buf_map_attachment_unlocked(dobj->obj.import_attach,
++						    DMA_TO_DEVICE);
+ 	if (IS_ERR(dobj->sgt)) {
+ 		ret = PTR_ERR(dobj->sgt);
+ 		dobj->sgt = NULL;
 -- 
 2.37.2
 
