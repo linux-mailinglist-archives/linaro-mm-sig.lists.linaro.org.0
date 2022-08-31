@@ -2,31 +2,31 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0C6285A8191
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 17:40:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F3D565A8197
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 17:40:08 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 43E0643C98
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 15:40:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3704343C99
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 15:40:08 +0000 (UTC)
 Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-	by lists.linaro.org (Postfix) with ESMTPS id 8594E43F43
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 31 Aug 2022 15:39:43 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 9BE0743F38
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 31 Aug 2022 15:39:46 +0000 (UTC)
 Received: from dimapc.. (109-252-119-13.nat.spd-mgts.ru [109.252.119.13])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
 	(Authenticated sender: dmitry.osipenko)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id CAE176601DF4;
-	Wed, 31 Aug 2022 16:39:39 +0100 (BST)
+	by madras.collabora.co.uk (Postfix) with ESMTPSA id E84C66601DF5;
+	Wed, 31 Aug 2022 16:39:42 +0100 (BST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1661960382;
-	bh=zNh//xUsR9gO6Pa17YYOufQr/5kZYwJDvTfSDOMKvjg=;
+	s=mail; t=1661960385;
+	bh=/oF5kgcekO75Xv0wAeHKpq3Pgp50WSiycM6oE7wSKRk=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=fJCGtZIIfrLTvH0IUhpK8WRZ7Udt9M91nUZFLNu5gw+APX3XfXzEfXbLmwe9px7IZ
-	 SszS4MzmoYZbVzk2XZJqsCgn/baTwXkFCH+wD9JWaNWByzmWYNIVrp6XT4AwyaEhEl
-	 7W0Z/z5BKz+/9r7fsbVaqvkzyRgAbKSWRzxcxraKqrfB173l+gJ7Tal8JoWiWPwvq6
-	 PSWSkqY1qaGJ0K09/f9HACABp3NsjzCQoHz3ETH2bpMK/Me0VEAiHKtJ3zpPSifbv+
-	 oVrI3BCDQ4BSy2Xuc8LFhkBP1hrfFJBcHchbythi7iaN8zCYPwmXQpFVDlEpDFm4Q4
-	 fIR7QTTM47FMA==
+	b=Sl51L1bR+Y9SxOT89Q/0nVkX+TLwDp7OcA2pgpm4I/3SumRue+tVnK1q3Vw+RbjOE
+	 Xl6atoNl+C31e92BVfqyqVAKhtHD6pK31qCu8j0Uno1FBRl+Xnj8l7hTvW36MZfXLi
+	 kMxfgy3gfal5jhWoFiCx8em30aMFpWCXq0oZzUxpaNj57iukLilYisYbjMXYFNRDzp
+	 tG9ew+QPiTBRtgqpD4xjf85rqFOoNtYODtXw+U5QgdYnxMPA+B0E74wOPuZ76PdATv
+	 levx+u2+qDHOjLZIoeA6U5Vu7faXHIfhzUMg9Cz0ga92kx/uZARd8jrxI2uVDGG2GD
+	 SZaDsJp2+o7cw==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: David Airlie <airlied@linux.ie>,
 	Gerd Hoffmann <kraxel@redhat.com>,
@@ -67,23 +67,23 @@ To: David Airlie <airlied@linux.ie>,
 	Russell King <linux@armlinux.org.uk>,
 	Lucas Stach <l.stach@pengutronix.de>,
 	Christian Gmeiner <christian.gmeiner@gmail.com>
-Date: Wed, 31 Aug 2022 18:37:45 +0300
-Message-Id: <20220831153757.97381-10-dmitry.osipenko@collabora.com>
+Date: Wed, 31 Aug 2022 18:37:46 +0300
+Message-Id: <20220831153757.97381-11-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20220831153757.97381-1-dmitry.osipenko@collabora.com>
 References: <20220831153757.97381-1-dmitry.osipenko@collabora.com>
 MIME-Version: 1.0
-Message-ID-Hash: OLCCKV3TRUSHZM7YDTW5BEDP4M2ESBWV
-X-Message-ID-Hash: OLCCKV3TRUSHZM7YDTW5BEDP4M2ESBWV
+Message-ID-Hash: SANN3BGOGZJPXTYKUJP3L6RCLB7UMPRC
+X-Message-ID-Hash: SANN3BGOGZJPXTYKUJP3L6RCLB7UMPRC
 X-MailFrom: dmitry.osipenko@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v4 09/21] drm/etnaviv: Prepare to dynamic dma-buf locking specification
+Subject: [Linaro-mm-sig] [PATCH v4 10/21] RDMA/umem: Prepare to dynamic dma-buf locking specification
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OLCCKV3TRUSHZM7YDTW5BEDP4M2ESBWV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SANN3BGOGZJPXTYKUJP3L6RCLB7UMPRC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -93,27 +93,40 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Prepare Etnaviv driver to the common dynamic dma-buf locking convention
-by starting to use the unlocked versions of dma-buf API functions.
+Prepare InfiniBand drivers to the common dynamic dma-buf locking
+convention by starting to use the unlocked versions of dma-buf API
+functions.
 
 Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 ---
- drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/infiniband/core/umem_dmabuf.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c b/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-index 3fa2da149639..7031db145a77 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-@@ -65,7 +65,7 @@ static void etnaviv_gem_prime_release(struct etnaviv_gem_object *etnaviv_obj)
- 	struct iosys_map map = IOSYS_MAP_INIT_VADDR(etnaviv_obj->vaddr);
+diff --git a/drivers/infiniband/core/umem_dmabuf.c b/drivers/infiniband/core/umem_dmabuf.c
+index 04c04e6d24c3..43b26bc12288 100644
+--- a/drivers/infiniband/core/umem_dmabuf.c
++++ b/drivers/infiniband/core/umem_dmabuf.c
+@@ -26,7 +26,8 @@ int ib_umem_dmabuf_map_pages(struct ib_umem_dmabuf *umem_dmabuf)
+ 	if (umem_dmabuf->sgt)
+ 		goto wait_fence;
  
- 	if (etnaviv_obj->vaddr)
--		dma_buf_vunmap(etnaviv_obj->base.import_attach->dmabuf, &map);
-+		dma_buf_vunmap_unlocked(etnaviv_obj->base.import_attach->dmabuf, &map);
+-	sgt = dma_buf_map_attachment(umem_dmabuf->attach, DMA_BIDIRECTIONAL);
++	sgt = dma_buf_map_attachment_unlocked(umem_dmabuf->attach,
++					      DMA_BIDIRECTIONAL);
+ 	if (IS_ERR(sgt))
+ 		return PTR_ERR(sgt);
  
- 	/* Don't drop the pages for imported dmabuf, as they are not
- 	 * ours, just free the array we allocated:
+@@ -102,8 +103,8 @@ void ib_umem_dmabuf_unmap_pages(struct ib_umem_dmabuf *umem_dmabuf)
+ 		umem_dmabuf->last_sg_trim = 0;
+ 	}
+ 
+-	dma_buf_unmap_attachment(umem_dmabuf->attach, umem_dmabuf->sgt,
+-				 DMA_BIDIRECTIONAL);
++	dma_buf_unmap_attachment_unlocked(umem_dmabuf->attach, umem_dmabuf->sgt,
++					  DMA_BIDIRECTIONAL);
+ 
+ 	umem_dmabuf->sgt = NULL;
+ }
 -- 
 2.37.2
 
