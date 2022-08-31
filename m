@@ -2,31 +2,31 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EA395A81AD
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 17:40:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 77D185A81B0
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 17:40:49 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 45E413F60A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 15:40:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AFAF243F21
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Aug 2022 15:40:48 +0000 (UTC)
 Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-	by lists.linaro.org (Postfix) with ESMTPS id C1B0943F46
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 31 Aug 2022 15:40:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id E112643C9B
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 31 Aug 2022 15:40:14 +0000 (UTC)
 Received: from dimapc.. (109-252-119-13.nat.spd-mgts.ru [109.252.119.13])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
 	(Authenticated sender: dmitry.osipenko)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id 1817B6601F08;
-	Wed, 31 Aug 2022 16:40:08 +0100 (BST)
+	by madras.collabora.co.uk (Postfix) with ESMTPSA id 3F03A6601DEE;
+	Wed, 31 Aug 2022 16:40:11 +0100 (BST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1661960411;
-	bh=wM9CtxO7g+I2MDvrzT3LZe35Eb7d1xKXFtly+o9W8Ak=;
+	s=mail; t=1661960414;
+	bh=tOl8HnGHuspOaHfQ8kLvPjNpiAx+VJwtG1vjNitDsbY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=dnGv0uxhtNMBxsdvy3hH+pPM5/F2s6xH4ZhZcnNjO08lYkNBDqZm4iMB3nemHgWFB
-	 xB/nRvHipZ2WOZ5Kqpkf56IU/2D3DvGF8Ukp4zZCKoG7ndRQ+r8cINug8sgCQnMTH7
-	 saMR0YeItwmYev/7tzwNgcXa1oRjErFEjeAAZMZPlax5q8kI+a/wG7coEm1oVYHaeI
-	 Kw0kAckg2QNpLnwZqNiSOQmKc+EGEjXs1gswAZIvlxq/ggU62BRAwq838pQ6IwjI/9
-	 FK9xl6sHtEO4DnPpF7PMp4LzNmCD4DaNMXlGCvkAiyNSG8GlqH5e+cf1vhxAdtfnJB
-	 cCB0V24HbPT+A==
+	b=kstPveCaJveRBMwtfiKH3ZEeiXoX62OYMZ2fGOLodxxp4RoJkGu4+wX+ZBBPsIclU
+	 jC6BGy95i//NUiQnoMQ4erjBSYOBC8Ru++SGHiCT/9wRglO2GVJFcSugeKpeAWgkxM
+	 8JtLuUEtcNQZlNOXOMUPUT5Cj80Xq6sd33axeBXK+rmA+vwkNdDb0AUKjfB6EB3ptw
+	 KaBaYu80d/FuWGBMzslNdWxVAePKz+26arVlSAG7NZLi+VvCqcjfUUarsJM71hn2Xo
+	 jO/K0Hu5Ruk7Boo4ixyRth/yzAD1hmSV+/zWxE4Zq8LIZSxSuFlUqFURm8A50yCeS1
+	 ycL3RR0VL1zYw==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: David Airlie <airlied@linux.ie>,
 	Gerd Hoffmann <kraxel@redhat.com>,
@@ -67,55 +67,137 @@ To: David Airlie <airlied@linux.ie>,
 	Russell King <linux@armlinux.org.uk>,
 	Lucas Stach <l.stach@pengutronix.de>,
 	Christian Gmeiner <christian.gmeiner@gmail.com>
-Date: Wed, 31 Aug 2022 18:37:54 +0300
-Message-Id: <20220831153757.97381-19-dmitry.osipenko@collabora.com>
+Date: Wed, 31 Aug 2022 18:37:55 +0300
+Message-Id: <20220831153757.97381-20-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20220831153757.97381-1-dmitry.osipenko@collabora.com>
 References: <20220831153757.97381-1-dmitry.osipenko@collabora.com>
 MIME-Version: 1.0
-Message-ID-Hash: ZPWZXQ6CMYB27BCXXLTP6JPBEOG7QGQQ
-X-Message-ID-Hash: ZPWZXQ6CMYB27BCXXLTP6JPBEOG7QGQQ
+Message-ID-Hash: QS4IMKMXDRCXPTFDVTU3O27MZBSIHQEQ
+X-Message-ID-Hash: QS4IMKMXDRCXPTFDVTU3O27MZBSIHQEQ
 X-MailFrom: dmitry.osipenko@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v4 18/21] dma-buf: Move dma_buf_mmap() to dynamic locking specification
+Subject: [Linaro-mm-sig] [PATCH v4 19/21] dma-buf: Document dynamic locking convention
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZPWZXQ6CMYB27BCXXLTP6JPBEOG7QGQQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QS4IMKMXDRCXPTFDVTU3O27MZBSIHQEQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-TW92ZSBkbWFfYnVmX21tYXAoKSBmdW5jdGlvbiB0byB0aGUgZHluYW1pYyBsb2NraW5nIHNwZWNp
-ZmljYXRpb24gYnkNCnRha2luZyB0aGUgcmVzZXJ2YXRpb24gbG9jay4gTmVpdGhlciBvZiB0aGUg
-dG9kYXkncyBkcml2ZXJzIHRha2UgdGhlDQpyZXNlcnZhdGlvbiBsb2NrIHdpdGhpbiB0aGUgbW1h
-cCgpIGNhbGxiYWNrLCBoZW5jZSBpdCdzIHNhZmUgdG8gZW5mb3JjZQ0KdGhlIGxvY2tpbmcuDQoN
-CkFja2VkLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQpT
-aWduZWQtb2ZmLWJ5OiBEbWl0cnkgT3NpcGVua28gPGRtaXRyeS5vc2lwZW5rb0Bjb2xsYWJvcmEu
-Y29tPg0KLS0tDQogZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYyB8IDggKysrKysrKy0NCiAxIGZp
-bGUgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pDQoNCmRpZmYgLS1naXQg
-YS9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYw0K
-aW5kZXggOGU5MjhmZTZlOGRmLi5kOTEzMDQ4NmNiOGYgMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2Rt
-YS1idWYvZG1hLWJ1Zi5jDQorKysgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQpAQCAtMTM4
-OSw2ICsxMzg5LDggQEAgRVhQT1JUX1NZTUJPTF9OU19HUEwoZG1hX2J1Zl9lbmRfY3B1X2FjY2Vz
-cywgRE1BX0JVRik7DQogaW50IGRtYV9idWZfbW1hcChzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmLCBz
-dHJ1Y3Qgdm1fYXJlYV9zdHJ1Y3QgKnZtYSwNCiAJCSB1bnNpZ25lZCBsb25nIHBnb2ZmKQ0KIHsN
-CisJaW50IHJldDsNCisNCiAJaWYgKFdBUk5fT04oIWRtYWJ1ZiB8fCAhdm1hKSkNCiAJCXJldHVy
-biAtRUlOVkFMOw0KIA0KQEAgLTE0MDksNyArMTQxMSwxMSBAQCBpbnQgZG1hX2J1Zl9tbWFwKHN0
-cnVjdCBkbWFfYnVmICpkbWFidWYsIHN0cnVjdCB2bV9hcmVhX3N0cnVjdCAqdm1hLA0KIAl2bWFf
-c2V0X2ZpbGUodm1hLCBkbWFidWYtPmZpbGUpOw0KIAl2bWEtPnZtX3Bnb2ZmID0gcGdvZmY7DQog
-DQotCXJldHVybiBkbWFidWYtPm9wcy0+bW1hcChkbWFidWYsIHZtYSk7DQorCWRtYV9yZXN2X2xv
-Y2soZG1hYnVmLT5yZXN2LCBOVUxMKTsNCisJcmV0ID0gZG1hYnVmLT5vcHMtPm1tYXAoZG1hYnVm
-LCB2bWEpOw0KKwlkbWFfcmVzdl91bmxvY2soZG1hYnVmLT5yZXN2KTsNCisNCisJcmV0dXJuIHJl
-dDsNCiB9DQogRVhQT1JUX1NZTUJPTF9OU19HUEwoZG1hX2J1Zl9tbWFwLCBETUFfQlVGKTsNCiAN
-Ci0tIA0KMi4zNy4yDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMu
-bGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWct
-bGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+Add documentation for the dynamic locking convention. The documentation
+tells dma-buf API users when they should take the reservation lock and
+when not.
+
+Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+---
+ Documentation/driver-api/dma-buf.rst |  6 +++
+ drivers/dma-buf/dma-buf.c            | 64 ++++++++++++++++++++++++++++
+ 2 files changed, 70 insertions(+)
+
+diff --git a/Documentation/driver-api/dma-buf.rst b/Documentation/driver-api/dma-buf.rst
+index 36a76cbe9095..622b8156d212 100644
+--- a/Documentation/driver-api/dma-buf.rst
++++ b/Documentation/driver-api/dma-buf.rst
+@@ -119,6 +119,12 @@ DMA Buffer ioctls
+ 
+ .. kernel-doc:: include/uapi/linux/dma-buf.h
+ 
++DMA-BUF locking convention
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++.. kernel-doc:: drivers/dma-buf/dma-buf.c
++   :doc: locking convention
++
+ Kernel Functions and Structures Reference
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+index d9130486cb8f..97ce884fad76 100644
+--- a/drivers/dma-buf/dma-buf.c
++++ b/drivers/dma-buf/dma-buf.c
+@@ -794,6 +794,70 @@ static struct sg_table * __map_dma_buf(struct dma_buf_attachment *attach,
+ 	return sg_table;
+ }
+ 
++/**
++ * DOC: locking convention
++ *
++ * In order to avoid deadlock situations between dma-buf exports and importers,
++ * all dma-buf API users must follow the common dma-buf locking convention.
++ *
++ * Convention for importers
++ *
++ * 1. Importers must hold the dma-buf reservation lock when calling these
++ *    functions:
++ *
++ *     - dma_buf_pin()
++ *     - dma_buf_unpin()
++ *     - dma_buf_map_attachment()
++ *     - dma_buf_unmap_attachment()
++ *     - dma_buf_vmap()
++ *     - dma_buf_vunmap()
++ *
++ * 2. Importers must not hold the dma-buf reservation lock when calling these
++ *    functions:
++ *
++ *     - dma_buf_attach()
++ *     - dma_buf_dynamic_attach()
++ *     - dma_buf_detach()
++ *     - dma_buf_export(
++ *     - dma_buf_fd()
++ *     - dma_buf_get()
++ *     - dma_buf_put()
++ *     - dma_buf_mmap()
++ *     - dma_buf_begin_cpu_access()
++ *     - dma_buf_end_cpu_access()
++ *     - dma_buf_map_attachment_unlocked()
++ *     - dma_buf_unmap_attachment_unlocked()
++ *     - dma_buf_vmap_unlocked()
++ *     - dma_buf_vunmap_unlocked()
++ *
++ * Convention for exporters
++ *
++ * 1. These &dma_buf_ops callbacks are invoked with unlocked dma-buf
++ *    reservation and exporter can take the lock:
++ *
++ *     - &dma_buf_ops.attach()
++ *     - &dma_buf_ops.detach()
++ *     - &dma_buf_ops.release()
++ *     - &dma_buf_ops.begin_cpu_access()
++ *     - &dma_buf_ops.end_cpu_access()
++ *
++ * 2. These &dma_buf_ops callbacks are invoked with locked dma-buf
++ *    reservation and exporter can't take the lock:
++ *
++ *     - &dma_buf_ops.pin()
++ *     - &dma_buf_ops.unpin()
++ *     - &dma_buf_ops.map_dma_buf()
++ *     - &dma_buf_ops.unmap_dma_buf()
++ *     - &dma_buf_ops.mmap()
++ *     - &dma_buf_ops.vmap()
++ *     - &dma_buf_ops.vunmap()
++ *
++ * 3. Exporters must hold the dma-buf reservation lock when calling these
++ *    functions:
++ *
++ *     - dma_buf_move_notify()
++ */
++
+ /**
+  * dma_buf_dynamic_attach - Add the device to dma_buf's attachments list
+  * @dmabuf:		[in]	buffer to attach device to.
+-- 
+2.37.2
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
