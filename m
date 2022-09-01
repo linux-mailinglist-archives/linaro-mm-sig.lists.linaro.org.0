@@ -2,122 +2,369 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C106E5A9A41
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 16:29:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5538C5A99A5
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 16:03:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CFA17479BE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 14:29:48 +0000 (UTC)
-Received: from mail-m11885.qiye.163.com (mail-m11885.qiye.163.com [115.236.118.85])
-	by lists.linaro.org (Postfix) with ESMTPS id E0E654049D
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 10 Aug 2022 04:16:21 +0000 (UTC)
-Received: from [192.168.111.100] (unknown [58.22.7.114])
-	by mail-m11885.qiye.163.com (Hmail) with ESMTPA id C437A4C0160;
-	Wed, 10 Aug 2022 12:16:18 +0800 (CST)
-Message-ID: <05488346-ebbd-b1d9-4094-a83daf65f6db@rock-chips.com>
-Date: Wed, 10 Aug 2022 12:16:16 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.1.1
+	by lists.linaro.org (Postfix) with ESMTP id E0D2F479BE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Sep 2022 14:03:53 +0000 (UTC)
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by lists.linaro.org (Postfix) with ESMTPS id D664A3EC48
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  1 Sep 2022 14:03:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1662041029; x=1693577029;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=H7oNPMaMGRMvpqrmWoiI7VVYWC1hv+BhSiD5ZVZNMhs=;
+  b=QaFmSNp7MGpWSFU8bIBJcOzdBxbzmXsRhKuZnoQK3ao+OAnTOycNKhG8
+   vAhvv2igsHxR4PHQJxqsp6DE/REv2FL9In91zMx1kmmzhnwalzsJTb+tN
+   KqcGtLIt+5J9wkGzgymBtMme2DpgYkP47DrdiarfoXVqFrNfc5A9qgjmH
+   DY+0pkckhvtVs3WokbPg8fOm4AHnLLb6wVQQv3LG4svvHT8Px9Hr5GI0e
+   5PGG3rLI/sfHjS1tW1YLGm0P+pKozubmu/PL0+g8roXCIM54gY16IIN4V
+   yYtk+GcL1ZGEAsPWfQElxNU33L1IQUeowonWEsBNcf2ICOxRjj96sNT7O
+   Q==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10457"; a="296505353"
+X-IronPort-AV: E=Sophos;i="5.93,281,1654585200";
+   d="scan'208";a="296505353"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Sep 2022 07:03:27 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.93,281,1654585200";
+   d="scan'208";a="940859749"
+Received: from fmsmsx603.amr.corp.intel.com ([10.18.126.83])
+  by fmsmga005.fm.intel.com with ESMTP; 01 Sep 2022 07:03:26 -0700
+Received: from fmsmsx611.amr.corp.intel.com (10.18.126.91) by
+ fmsmsx603.amr.corp.intel.com (10.18.126.83) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Thu, 1 Sep 2022 07:03:26 -0700
+Received: from fmsmsx610.amr.corp.intel.com (10.18.126.90) by
+ fmsmsx611.amr.corp.intel.com (10.18.126.91) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Thu, 1 Sep 2022 07:03:25 -0700
+Received: from fmsedg602.ED.cps.intel.com (10.1.192.136) by
+ fmsmsx610.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31 via Frontend Transport; Thu, 1 Sep 2022 07:03:25 -0700
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (104.47.58.168)
+ by edgegateway.intel.com (192.55.55.71) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2375.31; Thu, 1 Sep 2022 07:03:25 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=AXYRwln+kGLwEahVtKb+mgYSHUWAtGOmA9oLOzsI8aq1bKkY5l3w5iGEtWJzsNDd/6LvM+4WVo8izghZx+rvqtFrXXPHtzcp3GttrvaVXDGCG+Z+0KfokXByjHyAM0RwsLoX0lcb23fR1f4PvR+nm8rexHtCRfsx231dOArvvSI0VSiSd7Kj8n45AalLVnYoyAqOIUs3Fl9Ndryi+oAZxZuBCtwh2HqzBa/oicTPOwYIpBjujC5YZo/xsF0dvmnhUMiEewgruE6O7y/E/2ubp7V+dXd96+T1EAIRYdU8aiMww+XEwXcQ30IrBM2MiTQHp2IUkrnUCW5S8DBsCKOaVg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oogV8wEgaxlGmFuNC1AWMk6XFu0TpR3Q+a0Y1F5tmEg=;
+ b=RpWr91LUoU6x18JsnJehmCzQdLRz6eLCgVO1TQFVuE0lleIxUu3ylsZeWjcpKg2YrvU9hmTI1a8SRMZbBrpzpkZxpaUDhLtnJnmFUPNXawxJqw+FofeTChzORcA3VtQU5WMNRDo6EOsC/w7QQdH3LUkMG1qsrcT1i1JDr6r2fTNgJAK9xb3xKs/OHSOT4vvRItmXB1aaDMaBFxMvMTuMzC+yLDDlR40IxZW/cy7emy+Yo+kF+39Dv9uqkT3AKRc8bzvpk8QQRbZZCUXAOg/qN+ofGNuCmvapeABi+sm4YXm4lMlWuN1wkiaVfHGe3BKUgKyBtEEdTwgOgSZJBai+lQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from DM5PR11MB1324.namprd11.prod.outlook.com (2603:10b6:3:15::14) by
+ BN8PR11MB3634.namprd11.prod.outlook.com (2603:10b6:408:88::31) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.5566.19; Thu, 1 Sep 2022 14:03:00 +0000
+Received: from DM5PR11MB1324.namprd11.prod.outlook.com
+ ([fe80::64f9:b9bd:85bb:c756]) by DM5PR11MB1324.namprd11.prod.outlook.com
+ ([fe80::64f9:b9bd:85bb:c756%3]) with mapi id 15.20.5588.010; Thu, 1 Sep 2022
+ 14:03:00 +0000
+From: "Ruhl, Michael J" <michael.j.ruhl@intel.com>
+To: Dmitry Osipenko <dmitry.osipenko@collabora.com>, David Airlie
+	<airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>, Gurchetan Singh
+	<gurchetansingh@chromium.org>, Chia-I Wu <olvaffe@gmail.com>, Daniel Vetter
+	<daniel@ffwll.ch>, Daniel Almeida <daniel.almeida@collabora.com>, Gert Wollny
+	<gert.wollny@collabora.com>, Gustavo Padovan <gustavo.padovan@collabora.com>,
+	Daniel Stone <daniel@fooishbar.org>, Tomeu Vizoso
+	<tomeu.vizoso@collabora.com>, Maarten Lankhorst
+	<maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>, Rob Clark <robdclark@gmail.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>, =?iso-8859-1?Q?Christian_K=F6nig?=
+	<christian.koenig@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>, "Thierry
+ Reding" <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>, "Marek
+ Szyprowski" <m.szyprowski@samsung.com>, Mauro Carvalho Chehab
+	<mchehab@kernel.org>, Alex Deucher <alexander.deucher@amd.com>, Jani Nikula
+	<jani.nikula@linux.intel.com>, Joonas Lahtinen
+	<joonas.lahtinen@linux.intel.com>, "Vivi, Rodrigo" <rodrigo.vivi@intel.com>,
+	Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+	=?iso-8859-1?Q?Thomas_Hellstr=F6m?= <thomas_os@shipmail.org>, Qiang Yu
+	<yuq825@gmail.com>, Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+	Amol Maheshwari <amahesh@qti.qualcomm.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+	Leon Romanovsky <leon@kernel.org>, "Gross, Jurgen" <jgross@suse.com>,
+	"Stefano Stabellini" <sstabellini@kernel.org>, Oleksandr Tyshchenko
+	<oleksandr_tyshchenko@epam.com>, Tomi Valkeinen <tomba@kernel.org>, "Russell
+ King" <linux@armlinux.org.uk>, Lucas Stach <l.stach@pengutronix.de>,
+	Christian Gmeiner <christian.gmeiner@gmail.com>
+Thread-Topic: [PATCH v4 06/21] drm/i915: Prepare to dynamic dma-buf locking
+ specification
+Thread-Index: AQHYvVAKt26jWPyWVUOQMFIjO4nTPq3Km+VA
+Date: Thu, 1 Sep 2022 14:02:59 +0000
+Message-ID: <DM5PR11MB1324088635FDE00B0D957816C17B9@DM5PR11MB1324.namprd11.prod.outlook.com>
+References: <20220831153757.97381-1-dmitry.osipenko@collabora.com>
+ <20220831153757.97381-7-dmitry.osipenko@collabora.com>
+In-Reply-To: <20220831153757.97381-7-dmitry.osipenko@collabora.com>
+Accept-Language: en-US
 Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Daniel Vetter <daniel.vetter@ffwll.ch>
-References: <20220803083237.3701-1-jeffy.chen@rock-chips.com>
- <c7cb225b-7f21-8d9a-773b-efc655e6332c@amd.com>
- <7cd16264-fa84-7b50-f3ed-64f7f22dcef2@rock-chips.com>
- <64bf4e4b-4e22-0ff0-5f92-76f603c04ec0@amd.com>
- <cd806954-e94e-aec8-2b0c-4047da9a92ec@rock-chips.com>
- <0e284f57-e03c-f128-f6e7-52a58edbcd54@amd.com>
- <71e47fe6-440b-e9ea-cd66-8362c41428ca@amd.com>
- <6b3e82f9-6902-fd5c-c67d-e2c42c995133@rock-chips.com>
- <cb478ae3-a6c6-ea90-a47c-13d52b606942@amd.com>
-From: Chen Jeffy <jeffy.chen@rock-chips.com>
-In-Reply-To: <cb478ae3-a6c6-ea90-a47c-13d52b606942@amd.com>
-X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFJSktLSjdXWS1ZQUlXWQ8JGhUIEh9ZQVkZTUIeVh9KT0oaGh0ZHhpLTVUTARMWGhIXJB
-	QOD1lXWRgSC1lBWU5DVUlJVUxVSkpPWVdZFhoPEhUdFFlBWU9LSFVKSktISkNVS1kG
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NQw6HCo6ET0rMywTAQ0sGhY#
-	NB0KCS5VSlVKTU1LSktPQkxCTktIVTMWGhIXVREeHR0CVRgTHhU7CRQYEFYYExILCFUYFBZFWVdZ
-	EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFNSUtINwY+
-X-HM-Tid: 0a8285f7b2cd2eb9kusnc437a4c0160
-X-MailFrom: jeffy.chen@rock-chips.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: SEVBL6S6EW4SLGD6PVITO3UWYU6MIMCQ
-X-Message-ID-Hash: SEVBL6S6EW4SLGD6PVITO3UWYU6MIMCQ
-X-Mailman-Approved-At: Thu, 01 Sep 2022 14:29:44 +0000
-CC: Andy Yan <andy.yan@rock-chips.com>, Jianqun Xu <jay.xu@rock-chips.com>, Maxime Ripard <mripard@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Thomas Zimmermann <tzimmermann@suse.de>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, David Airlie <airlied@linux.ie>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, linux-media@vger.kernel.org, Daniel Vetter <daniel@ffwll.ch>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-product: dlpe-windows
+dlp-reaction: no-action
+dlp-version: 11.6.500.17
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: dfed438e-2f29-44bb-b802-08da8c22add9
+x-ms-traffictypediagnostic: BN8PR11MB3634:EE_
+x-ld-processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: mMq9NvvlP9ajuIOC+hjVMXkGSs9f2xATLCHpzwcW4K4uToAIfBItl5anbvP8D/tQkrT742txZ6/mHbjfpGASPB8x9p1ncMrB0QFSlHxRxlOQVWknKM3MoLvkLON8VozxWRFvN1syZWQqgQJA/p4CjZPA5UiTVocZuABTpmbkAGiMklGi5RNQQwaPuXDrWYdj/gWUdWQTGnlR/A/mddFikY8agDGlTEsdwHne2hwREGmzZw/5AlnKcp1wfIzXf4CTqRnBju5VUVVi/xadfb9bdfSuEySg06roQZkBmPRBgOGbRcKa8+6JthIwfkys6ct4f84bzD+yljkDAOsuFfflPz8aiboRrzyaadxWeRMkILum86jOPwoh+KeA22P24Dk1W4XlI48XxRrQoi68MG62CY11/oU3j9ceXm4OsaLyvsBh+R7eOzhfszvGdC7QwXJVv74kz2QiPJum3Jpnt3nWhIRybmJzXtp763eUPN0+NFzP5CEhThNSOvr0e3Sz4ArzsDhNegaHnyGHHoD/JRIUslAnyj+PwIV6Afp4hmAT3QHa9b6eSEaheRKa2bYORMG4MUDn5Re8cBWy4kk/xAVNife9tDF7FyYPm7mHS90Hy3UdWE3cry1jjGEMTowtmuzQtuSJcqSnNasuZjZPTFvdMdfEkXIkI2VMnLoBBVe/awD7kVsTq5XZvCw59IYht95KIj83kBl2oDzgjfHs7xfcw71TJ3dxNuLN1pyZaEskaF/4mECTzGyTIA38xyVzS3x/sCHzmlBR8L0C3MaNGcmgEU1UCzawHIOHatEDsMHlLvw=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB1324.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(39860400002)(396003)(376002)(136003)(346002)(366004)(66446008)(66556008)(38070700005)(82960400001)(4326008)(76116006)(64756008)(921005)(8676002)(66946007)(33656002)(122000001)(38100700002)(86362001)(66574015)(41300700001)(83380400001)(7416002)(9686003)(71200400001)(6506007)(186003)(7696005)(7366002)(478600001)(2906002)(26005)(54906003)(316002)(5660300002)(110136005)(52536014)(7406005)(55016003)(66476007)(8936002);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?eTE9ZUc5shAZ4zJTDbsqtqeqDWyXoP1oKxD87GwpnAsCuETLBlz+u51mBd?=
+ =?iso-8859-1?Q?knTY2+M0+J1kXabO31GvuNv5a9D+ZJ4Ynw9IWa7aKUmeMzumDAqObeLlrA?=
+ =?iso-8859-1?Q?z3Q58azARmZfMlxV7G00pcey1FtYjqFH92Hbf0P6fHoqTgA1EI7ycr02wJ?=
+ =?iso-8859-1?Q?Kq9Fyp5aOMEXy+v4f0/vFl2Ndh0FyJhKNdpZ3Z//ZBeLi+WrBL96ouOeqc?=
+ =?iso-8859-1?Q?Tu7HCI8rV8jkVP1/pYV1OEPfJWIp3CROGKhNAip/6X/644CT4NF4FMn2ve?=
+ =?iso-8859-1?Q?3urYPNNBOdPLloNug9hfrvyeZNDNTAjBFRWkdzfX+1KVO7YQK8qwn2hbqa?=
+ =?iso-8859-1?Q?lJPQY85ld4q7eJ3zbaY5VrBW02tNDPGKYsMCOd6tYT8FlPVgs+0P+qwL3w?=
+ =?iso-8859-1?Q?PWLYWmOkvkhai+o0aJKSrcCu1wrlhfbaEwU0hPPyTbvdRZx5g+X7Is7COZ?=
+ =?iso-8859-1?Q?LgTO3CPAsL9ZdVNzmzdAgp+4Azis8B5TCFbwMT6g88hHkfuHSJfTvrEJJt?=
+ =?iso-8859-1?Q?BME5gI+0Kgb4ORJhN78XwD8Z2H2IezeXmSNsq+d790fB608CGBEzneNnzG?=
+ =?iso-8859-1?Q?udrGnWUosS5dcODPNQqyHl/pyViEQUk7OqUu+Mh1iO1CtieQSJDe87/O1R?=
+ =?iso-8859-1?Q?aSswHbAtre/6ueRmxi20a5b4n5RX0Df2KZAoG2f8mqD0+eoxZBZFTXGu6d?=
+ =?iso-8859-1?Q?F+i0kb5J507GDB9YKL6QYu1VLEQTux01VyIpSmd9d+0oySgs00dFG3nyYl?=
+ =?iso-8859-1?Q?PFTD/R50P+z7teGeS2XLcY50/JaRRPG24LWHWuGbhw+SrY3/DyLZWZ/KXd?=
+ =?iso-8859-1?Q?eC2BYNePDP6JtMWFwr3nyIjHFA3kElGtHpMeiP/LpRzRr1cPJMy2yvGkD/?=
+ =?iso-8859-1?Q?s+POeWW5yQ3h0W4jsXw4r+tKjzfXJp5eokNeQ1ILGwYsN7Q6VSuEKfH0y1?=
+ =?iso-8859-1?Q?MFrkn8OTdnV9bsuoNo0CQYNVDpYFcr8QcZkbxxDyBEfYt7DShSN/sHLqdX?=
+ =?iso-8859-1?Q?6hIYav44JP9lr3fPSLAQNnN7DIQy7rXF/Ih5hSj2S/IurSixf7a/I4xrxn?=
+ =?iso-8859-1?Q?/p+Z4sjcZPiIQuVjy816arXYEd4eVsEM5SBJFmhqSrTgKqJOUDt+VQHgiz?=
+ =?iso-8859-1?Q?ZA5Oum2QZoiTlhDJ+ZkDOgNiwJxAK0dQ6qlVBNYjsnmUtZtrez+Ga6N6RC?=
+ =?iso-8859-1?Q?1jbCv4JYo5M9rBxewQhslZyLBfvSHMP59pRbQ5JEvnwbncpLe6tt0BMlSp?=
+ =?iso-8859-1?Q?IE4FjZyHkOR+8zWJ72yGJzn1icb3P/dd2K8lkutOowgmyBtc1JTvh0XT4v?=
+ =?iso-8859-1?Q?KB4/EX0rx+EuKInpRJ8A3eptyTStszd40DBtPSeQhO2vR+DY2q8T3pIRTO?=
+ =?iso-8859-1?Q?AjAmmLwUUTPxWVsrDXwMtHWT5ITwemVogrHKUhk2REko+hK0+U8J3keUYw?=
+ =?iso-8859-1?Q?b/YMDmxvbHTAf+b4WKN7nQz2YVgq1cFnVcGeXQzomczzHwzw8BQe2cbLQy?=
+ =?iso-8859-1?Q?sJxACFam/yO2EoDzb33S12SZ5oA8N5tL9qtA7Fx3TlxFaF173q5AmEH8P4?=
+ =?iso-8859-1?Q?1bso8HoKU5rdnQHknlGPfOG5XDhVOJQYuRlpUTt+kBqWhV0Kvi6aUXUw6o?=
+ =?iso-8859-1?Q?xDJvotJoE5Hufyev5Z4n83S2NvhD3fk6H2?=
+Content-Type: text/plain; charset="iso-8859-1"
+MIME-Version: 1.0
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB1324.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: dfed438e-2f29-44bb-b802-08da8c22add9
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Sep 2022 14:02:59.9225
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: g4ycS2vn1nGCJetZEgi48T+II34HkcCyIwVoRqc8cCeDu0JsHdf6zxPEc6wzDGuRYDM1mGqbVX1T5j3KqAM+NmwjRh1luBMpOlzNGEZf7UE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN8PR11MB3634
+X-OriginatorOrg: intel.com
+Message-ID-Hash: NIJ5MXZDAFD3FA2RLTMI2J2YZSZV5YCT
+X-Message-ID-Hash: NIJ5MXZDAFD3FA2RLTMI2J2YZSZV5YCT
+X-MailFrom: michael.j.ruhl@intel.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Dmitry Osipenko <digetx@gmail.com>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "amd-gfx@lists.freedesktop.org" <amd-gfx@lists.freedesktop.org>, "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>, "kernel@collabora.com" <kernel@collabora.com>, "virtualization@lists.linux-foundation.org" <virtualization@lists.linux-foundation.org>, "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>, "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] drm/gem: Fix GEM handle release errors
+Subject: [Linaro-mm-sig] Re: [PATCH v4 06/21] drm/i915: Prepare to dynamic dma-buf locking specification
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SEVBL6S6EW4SLGD6PVITO3UWYU6MIMCQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NIJ5MXZDAFD3FA2RLTMI2J2YZSZV5YCT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: quoted-printable
 
-SGkgQ2hyaXN0aWFuLA0KDQpPbiA4Lzkg5pif5pyf5LqMIDE4OjE4LCBDaHJpc3RpYW4gS8O2bmln
-IHdyb3RlOg0KPiBIaSBKZWZmeSwNCj4gDQo+IEFtIDA5LjA4LjIyIHVtIDEyOjAyIHNjaHJpZWIg
-Q2hlbiBKZWZmeToNCj4+IEhpIENocmlzdGlhbiwNCj4+DQo+PiBPbiA4Lzkg5pif5pyf5LqMIDE3
-OjA4LCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPj4+IEhpIEplZmZ5LA0KPj4+DQo+Pj4gQW0g
-MDkuMDguMjIgdW0gMDk6NTUgc2NocmllYiBDaHJpc3RpYW4gS8O2bmlnOg0KPj4+PiBbU05JUF0N
-Cj4+Pj4+Pg0KPj4+Pj4+Pg0KPj4+Pj4+Pg0KPj4+Pj4+PiBTbyB3ZSBhcmUgYWxsb3dpbmcgR0VN
-IG9iamVjdCB0byBoYXZlIG11bHRpcGxlIGhhbmRsZXMsIGFuZCBHRU0gDQo+Pj4+Pj4+IG9iamVj
-dCBjb3VsZCBoYXZlIGF0IG1vc3Qgb25lIGRtYS1idWYsIGRvZXNuJ3QgdGhhdCBtZWFucyB0aGF0
-IA0KPj4+Pj4+PiBkbWEtYnVmIGNvdWxkIG1hcCB0byBtdWx0aXBsZSBoYW5kbGVzPw0KPj4+Pj4+
-DQo+Pj4+Pj4gTm8sIGF0IGxlYXN0IG5vdCBmb3IgdGhlIHNhbWUgR0VNIGZpbGUgcHJpdmF0ZS4g
-VGhhdCdzIHRoZSByZWFzb24gDQo+Pj4+Pj4gd2h5IHRoZSByYiBpcyBpbmRleGVkIGJ5IHRoZSBk
-bWFfYnVmIG9iamVjdCBhbmQgbm90IHRoZSBoYW5kbGUuDQo+Pj4+Pj4NCj4+Pj4+PiBJbiBvdGhl
-ciB3b3JkcyB0aGUgcmIgaXMgc28gdGhhdCB5b3UgaGF2ZSBleGFjdGx5IG9uZSBoYW5kbGUgZm9y
-IA0KPj4+Pj4+IGVhY2ggZG1hX2J1ZiBpbiBlYWNoIGZpbGUgcHJpdmF0ZS4NCj4+Pj4+DQo+Pj4+
-PiBJIGRvbid0IHRoaW5rIHNvLCBiZWNhdXNlIGlmIHVzZXIgZ2V0IG11bHRpcGxlIGhhbmRsZXMg
-Zm9yIHRoZSBzYW1lIA0KPj4+Pj4gR0VNIG9iaiBhbmQgdXNlIGRybV9nZW1fcHJpbWVfaGFuZGxl
-X3RvX2ZkKCkgZm9yIHRob3NlIGhhbmRsZXMNCj4+Pj4NCj4+Pj4gTWhtLCB0aGF0IHdvcmtzPyBU
-aGlzIGlzIGlsbGVnYWwgYW5kIHNob3VsZCBoYXZlIGJlZW4gcHJldmVudGVkIA0KPj4+PiBzb21l
-aG93Lg0KPj4+DQo+Pj4gQXQgbGVhc3QgSSBzZWUgdGhlIHByb2JsZW0gbm93LiBJJ20ganVzdCBu
-b3Qgc3VyZSBob3cgdG8gZml4IGl0Lg0KPj4+DQo+Pj4gWW91ciB2MiBwYXRjaCBpbmRlZWQgcHJl
-dmVudHMgbGVha2FnZSBvZiB0aGUgZHJtX3ByaW1lX21lbWJlciBmb3IgdGhlIA0KPj4+IGFkZGl0
-aW9uYWwgaGFuZGxlcywgYnV0IHRob3NlIHNob3VsZG4ndCBoYXZlIGJlZW4gYWRkZWQgaW4gdGhl
-IGZpcnN0IA0KPj4+IHBsYWNlLg0KPj4+DQo+Pj4gVGhlIGlzc3VlIGlzIHRoYXQgd2l0aCB0aGlz
-IHdlIG1ha2UgaXQgdW5wcmVkaWN0YWJsZSB3aGljaCBoYW5kbGUgaXMgDQo+Pj4gcmV0dXJuZWQu
-IEUuZy4gaWYgd2UgaGF2ZSBoYW5kbGUgMiw1LDcgaXQgY2FuIGJlIHRoYXQgYmVjYXVzZSBvZiAN
-Cj4+PiByZS1iYWxhbmNpbmcgdGhlIHRyZWUgc29tZXRpbWVzIDIgYW5kIHNvbWV0aW1lcyA1IGlz
-IHJldHVybmVkLg0KPj4NCj4+IE1heWJlIGNhY2hlIHRoZSBsYXRlc3QgcmV0dXJuZWQgaGFuZGxl
-IGluIHRoZSBvYmooYWZ0ZXIgDQo+PiBkcm1fZ2VtX3ByaW1lX2ZkX3RvX2hhbmRsZSksIGFuZCBj
-bGVhciBpdCB3aGVuIHRoYXQgaGFuZGxlIGJlZW4gDQo+PiBkZWxldGVkIGluIGRybV9nZW1faGFu
-ZGxlX2RlbGV0ZSgpPw0KPiANCj4gVGhhdCB3b24ndCB3b3JrLiBUaGUgaGFuZGxlIGlzIHBlciBm
-cHJpdiwgYnV0IHRoZSBzYW1lIG9iamVjdCBpcyB1c2VkIGJ5IA0KPiBtdWx0aXBsZSBmcHJpdiBp
-bnN0YW5jZXMuID4NCj4gV2hhdCB3ZSBjb3VsZCBtYXliZSBkbyBpcyB0byBwcmV2ZW50IGFkZGlu
-ZyBtdWx0aXBsZSBsb2NrdXAgc3RydWN0dXJlcyANCj4gd2hlbiB0aGVyZSBpcyBhbHJlYWR5IG9u
-ZSwgYnV0IHRoYXQncyBub3Qgc29tZXRoaW5nIEkgY2FuIGVhc2lseSBqdWRnZS4NCg0KU28gbWF5
-YmUgd2UgbmVlZCB0byBwcm90ZWN0IHRoYXQgdW5pcXVlIGxvb2t1cCBzdHJ1Y3R1cmUgYmVlbiBk
-ZWxldGVkIA0KYmVmb3JlIGRlbGV0aW5nIHRoZSBsYXN0IGhhbmRsZSwgYW5kIG1ha2UgdGhlIGhh
-bmRsZSB1bmlxdWUgZm9yIEdFTSBvYmosIA0KaW4gY2FzZSBvZiB0aGF0IHVuaXF1ZSBsb29rdXAn
-cyBoYW5kbGUgYmVlbiBkZWxldGVkIGVhcmxpZXIgdGhhdCBvdGhlcnM/DQoNCkhvdyBhYm91dCBh
-ZGRpbmcgYSBHRU0gb2JqIHJidHJlZSB0b28sIGFuZCBtYWtlIGRybV9wcmltZV9tZW1iZXIga3Jl
-Zi1lZD8NCg0KU28gdGhlIA0KZHJtX3ByaW1lX2FkZF9idWZfaGFuZGxlL2RybV9nZW1faGFuZGxl
-X2NyZWF0ZV90YWlsL2RybV9nZW1faGFuZGxlX2RlbGV0ZSANCndvdWxkIGJlIGxvb2tpbmcgdXAg
-ZHJtX3ByaW1lX21lbWJlciBieSBHRU0gb2JqLCB0aGVuIHVwZGF0ZSBkbWFidWYgcmIgDQphbmQg
-aW5jL2RlYyBkcm1fcHJpbWVfbWVtYmVyJ3Mga3JlZiwgDQpkcm1fZ2VtX3ByaW1lX2ZkX3RvX2hh
-bmRsZS9kcm1fZ2VtX3ByaW1lX2hhbmRsZV90b19mZCByZW1haW4gdW5jaGFuZ2VkLg0KDQo+IA0K
-PiBEYW5pZWwgc2VlbXMgdG8gYmUgZWl0aGVyIHZlcnkgYnVzeSBvciBvbiB2YWNhdGlvbiBvdGhl
-cndpc2UgaGUgd291bGQgDQo+IGhhdmUgY2hpbWVkIGluIGJ5IG5vdy4NCj4gDQo+IEFueXdheSwg
-eW91ciBwYXRjaCBzZWVtcyB0byBhdCBsZWFzdCBmaXggdGhlIG9mIGhhbmQgbWVtb3J5IGxlYWss
-IHNvIA0KPiBmZWVsIGZyZWUgdG8gYWRkIG15IHJiIHRvIHRoZSB2MiBhbmQgcHVzaCBpdCB0byBk
-cm0tbWlzYy1maXhlcyBmb3Igbm93Lg0KPiANCj4gVGhhbmtzLA0KPiBDaHJpc3RpYW4uDQo+IA0K
-Pj4NCj4+DQo+PiBTb21ldGhpbmcgbGlrZToNCj4+IGRybV9nZW1fcHJpbWVfZmRfdG9faGFuZGxl
-DQo+PiDCoCBoYW5kbGUgPSBkcm1fcHJpbWVfbG9va3VwX2J1Zl9oYW5kbGUoYnVmKQ0KPj4gwqAg
-b2JqID0gb2JqX2Zyb21faGFuZGxlKGhhbmRsZSkNCj4+IMKgIGlmICFvYmotPnByaW1hcnlfaGFu
-ZGxlDQo+PiDCoMKgwqAgb2JqLT5wcmltYXJ5X2hhbmRsZSA9IGhhbmRsZQ0KPj4gwqAgcmV0dXJu
-IG9iai0+cHJpbWFyeV9oYW5kbGUNCj4+DQo+PiBPciBtYXliZSBsaW1pdCBHRU0gb2JqIHdpdGgg
-YSBzaW5nbGUgbGlmZXRpbWUgaGFuZGxlPw0KPj4NCj4+Pg0KPj4+IFRoYXQncyBub3QgcmVhbGx5
-IGEgZ29vZCBpZGVhIGFuZCBicmVha3MgYSBjb3VwbGUgb2YgYXNzdW1wdGlvbnMgYXMgDQo+Pj4g
-ZmFyIGFzIEkga25vdy4NCj4+Pg0KPj4+IElkZWFzPw0KPj4+DQo+Pj4gVGhhbmtzLA0KPj4+IENo
-cmlzdGlhbi4NCj4+Pg0KPj4NCj4gDQo+IA0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8t
-bW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBs
-aW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+>-----Original Message-----
+>From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+>Sent: Wednesday, August 31, 2022 11:38 AM
+>To: David Airlie <airlied@linux.ie>; Gerd Hoffmann <kraxel@redhat.com>;
+>Gurchetan Singh <gurchetansingh@chromium.org>; Chia-I Wu
+><olvaffe@gmail.com>; Daniel Vetter <daniel@ffwll.ch>; Daniel Almeida
+><daniel.almeida@collabora.com>; Gert Wollny <gert.wollny@collabora.com>;
+>Gustavo Padovan <gustavo.padovan@collabora.com>; Daniel Stone
+><daniel@fooishbar.org>; Tomeu Vizoso <tomeu.vizoso@collabora.com>;
+>Maarten Lankhorst <maarten.lankhorst@linux.intel.com>; Maxime Ripard
+><mripard@kernel.org>; Thomas Zimmermann <tzimmermann@suse.de>;
+>Rob Clark <robdclark@gmail.com>; Sumit Semwal
+><sumit.semwal@linaro.org>; Christian K=F6nig <christian.koenig@amd.com>;
+>Pan, Xinhui <Xinhui.Pan@amd.com>; Thierry Reding
+><thierry.reding@gmail.com>; Tomasz Figa <tfiga@chromium.org>; Marek
+>Szyprowski <m.szyprowski@samsung.com>; Mauro Carvalho Chehab
+><mchehab@kernel.org>; Alex Deucher <alexander.deucher@amd.com>; Jani
+>Nikula <jani.nikula@linux.intel.com>; Joonas Lahtinen
+><joonas.lahtinen@linux.intel.com>; Vivi, Rodrigo <rodrigo.vivi@intel.com>;
+>Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>; Thomas Hellstr=F6m
+><thomas_os@shipmail.org>; Qiang Yu <yuq825@gmail.com>; Srinivas
+>Kandagatla <srinivas.kandagatla@linaro.org>; Amol Maheshwari
+><amahesh@qti.qualcomm.com>; Jason Gunthorpe <jgg@ziepe.ca>; Leon
+>Romanovsky <leon@kernel.org>; Gross, Jurgen <jgross@suse.com>; Stefano
+>Stabellini <sstabellini@kernel.org>; Oleksandr Tyshchenko
+><oleksandr_tyshchenko@epam.com>; Tomi Valkeinen <tomba@kernel.org>;
+>Russell King <linux@armlinux.org.uk>; Lucas Stach <l.stach@pengutronix.de>;
+>Christian Gmeiner <christian.gmeiner@gmail.com>
+>Cc: dri-devel@lists.freedesktop.org; linux-kernel@vger.kernel.org; Dmitry
+>Osipenko <digetx@gmail.com>; linux-media@vger.kernel.org; linaro-mm-
+>sig@lists.linaro.org; amd-gfx@lists.freedesktop.org; intel-
+>gfx@lists.freedesktop.org; kernel@collabora.com; virtualization@lists.linu=
+x-
+>foundation.org; linux-rdma@vger.kernel.org; linux-arm-
+>msm@vger.kernel.org
+>Subject: [PATCH v4 06/21] drm/i915: Prepare to dynamic dma-buf locking
+>specification
+>
+>Prepare i915 driver to the common dynamic dma-buf locking convention
+>by starting to use the unlocked versions of dma-buf API functions
+>and handling cases where importer now holds the reservation lock.
+>
+>Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+>---
+> drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c       |  2 +-
+> drivers/gpu/drm/i915/gem/i915_gem_object.c       | 12 ++++++++++++
+> .../gpu/drm/i915/gem/selftests/i915_gem_dmabuf.c | 16 ++++++++--------
+> 3 files changed, 21 insertions(+), 9 deletions(-)
+>
+>diff --git a/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c
+>b/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c
+>index f5062d0c6333..07eee1c09aaf 100644
+>--- a/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c
+>+++ b/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c
+>@@ -72,7 +72,7 @@ static int i915_gem_dmabuf_vmap(struct dma_buf
+>*dma_buf,
+> 	struct drm_i915_gem_object *obj =3D dma_buf_to_obj(dma_buf);
+> 	void *vaddr;
+>
+>-	vaddr =3D i915_gem_object_pin_map_unlocked(obj, I915_MAP_WB);
+>+	vaddr =3D i915_gem_object_pin_map(obj, I915_MAP_WB);
+> 	if (IS_ERR(vaddr))
+> 		return PTR_ERR(vaddr);
+>
+>diff --git a/drivers/gpu/drm/i915/gem/i915_gem_object.c
+>b/drivers/gpu/drm/i915/gem/i915_gem_object.c
+>index 389e9f157ca5..7e2a9b02526c 100644
+>--- a/drivers/gpu/drm/i915/gem/i915_gem_object.c
+>+++ b/drivers/gpu/drm/i915/gem/i915_gem_object.c
+>@@ -331,7 +331,19 @@ static void __i915_gem_free_objects(struct
+>drm_i915_private *i915,
+> 			continue;
+> 		}
+>
+>+		/*
+>+		 * dma_buf_unmap_attachment() requires reservation to be
+>+		 * locked. The imported GEM shouldn't share reservation lock,
+>+		 * so it's safe to take the lock.
+>+		 */
+>+		if (obj->base.import_attach)
+>+			i915_gem_object_lock(obj, NULL);
+
+There is a lot of stuff going here.  Taking the lock may be premature...
+
+> 		__i915_gem_object_pages_fini(obj);
+
+The i915_gem_dmabuf.c:i915_gem_object_put_pages_dmabuf is where
+unmap_attachment is actually called, would it make more sense to make
+do the locking there?
+
+Mike
+
+
+>+
+>+		if (obj->base.import_attach)
+>+			i915_gem_object_unlock(obj);
+>+
+> 		__i915_gem_free_object(obj);
+>
+> 		/* But keep the pointer alive for RCU-protected lookups */
+>diff --git a/drivers/gpu/drm/i915/gem/selftests/i915_gem_dmabuf.c
+>b/drivers/gpu/drm/i915/gem/selftests/i915_gem_dmabuf.c
+>index 62c61af77a42..9e3ed634aa0e 100644
+>--- a/drivers/gpu/drm/i915/gem/selftests/i915_gem_dmabuf.c
+>+++ b/drivers/gpu/drm/i915/gem/selftests/i915_gem_dmabuf.c
+>@@ -213,7 +213,7 @@ static int igt_dmabuf_import_same_driver(struct
+>drm_i915_private *i915,
+> 		goto out_import;
+> 	}
+>
+>-	st =3D dma_buf_map_attachment(import_attach,
+>DMA_BIDIRECTIONAL);
+>+	st =3D dma_buf_map_attachment_unlocked(import_attach,
+>DMA_BIDIRECTIONAL);
+> 	if (IS_ERR(st)) {
+> 		err =3D PTR_ERR(st);
+> 		goto out_detach;
+>@@ -226,7 +226,7 @@ static int igt_dmabuf_import_same_driver(struct
+>drm_i915_private *i915,
+> 		timeout =3D -ETIME;
+> 	}
+> 	err =3D timeout > 0 ? 0 : timeout;
+>-	dma_buf_unmap_attachment(import_attach, st,
+>DMA_BIDIRECTIONAL);
+>+	dma_buf_unmap_attachment_unlocked(import_attach, st,
+>DMA_BIDIRECTIONAL);
+> out_detach:
+> 	dma_buf_detach(dmabuf, import_attach);
+> out_import:
+>@@ -296,7 +296,7 @@ static int igt_dmabuf_import(void *arg)
+> 		goto out_obj;
+> 	}
+>
+>-	err =3D dma_buf_vmap(dmabuf, &map);
+>+	err =3D dma_buf_vmap_unlocked(dmabuf, &map);
+> 	dma_map =3D err ? NULL : map.vaddr;
+> 	if (!dma_map) {
+> 		pr_err("dma_buf_vmap failed\n");
+>@@ -337,7 +337,7 @@ static int igt_dmabuf_import(void *arg)
+>
+> 	err =3D 0;
+> out_dma_map:
+>-	dma_buf_vunmap(dmabuf, &map);
+>+	dma_buf_vunmap_unlocked(dmabuf, &map);
+> out_obj:
+> 	i915_gem_object_put(obj);
+> out_dmabuf:
+>@@ -358,7 +358,7 @@ static int igt_dmabuf_import_ownership(void *arg)
+> 	if (IS_ERR(dmabuf))
+> 		return PTR_ERR(dmabuf);
+>
+>-	err =3D dma_buf_vmap(dmabuf, &map);
+>+	err =3D dma_buf_vmap_unlocked(dmabuf, &map);
+> 	ptr =3D err ? NULL : map.vaddr;
+> 	if (!ptr) {
+> 		pr_err("dma_buf_vmap failed\n");
+>@@ -367,7 +367,7 @@ static int igt_dmabuf_import_ownership(void *arg)
+> 	}
+>
+> 	memset(ptr, 0xc5, PAGE_SIZE);
+>-	dma_buf_vunmap(dmabuf, &map);
+>+	dma_buf_vunmap_unlocked(dmabuf, &map);
+>
+> 	obj =3D to_intel_bo(i915_gem_prime_import(&i915->drm, dmabuf));
+> 	if (IS_ERR(obj)) {
+>@@ -418,7 +418,7 @@ static int igt_dmabuf_export_vmap(void *arg)
+> 	}
+> 	i915_gem_object_put(obj);
+>
+>-	err =3D dma_buf_vmap(dmabuf, &map);
+>+	err =3D dma_buf_vmap_unlocked(dmabuf, &map);
+> 	ptr =3D err ? NULL : map.vaddr;
+> 	if (!ptr) {
+> 		pr_err("dma_buf_vmap failed\n");
+>@@ -435,7 +435,7 @@ static int igt_dmabuf_export_vmap(void *arg)
+> 	memset(ptr, 0xc5, dmabuf->size);
+>
+> 	err =3D 0;
+>-	dma_buf_vunmap(dmabuf, &map);
+>+	dma_buf_vunmap_unlocked(dmabuf, &map);
+> out:
+> 	dma_buf_put(dmabuf);
+> 	return err;
+>--
+>2.37.2
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
