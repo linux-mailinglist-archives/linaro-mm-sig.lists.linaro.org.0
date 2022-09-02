@@ -2,50 +2,50 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1DCC7602E59
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Oct 2022 16:23:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36ABF602E5B
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Oct 2022 16:24:12 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 304AB3ED72
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Oct 2022 14:23:51 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
-	by lists.linaro.org (Postfix) with ESMTPS id 2EE9D3EA25
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  2 Sep 2022 09:31:29 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id c7so1509618wrp.11
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 02 Sep 2022 02:31:29 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 506B63F1D6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Oct 2022 14:24:11 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+	by lists.linaro.org (Postfix) with ESMTPS id 4727A43F28
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  2 Sep 2022 09:31:30 +0000 (UTC)
+Received: by mail-wm1-f47.google.com with SMTP id d12-20020a05600c34cc00b003a83d20812fso1062272wmq.1
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 02 Sep 2022 02:31:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date;
         bh=1gh2cH8+/vu9+O44Ntzb/QjlvRTOJYihF+Y3Qm1SXrI=;
-        b=EVe1TJlwgwENLq9wjko+3+iqmTNZUI3JPuYAT7OKSM+R/epnoMEDtd8xg6TmEMxWx3
-         w3tho74vxXAPjBSsm4lYFUcgCWErhh5+d3jcpk70E6Cl1y+e5y1R2FlOY66Rl8+JeCwL
-         W3nltWTUG/K5D5uJwaOIEe1GS28g32m2+6rHL+rUQ9SE6SLcEMA41Q+pdYi3o3e/Gse3
-         vkzFGeV6Fodjv9QezhLGwOjQYvAKxf+B1t8jpSLVlaAcYGHcSmHNtUS1CA4d+v2e/F68
-         XWkTUJ18yNVic8+Sr4F0TOACzpTFk8RLS58xwLJ8vLbq0MIzXXHOSVbDexp4Q4m4S3zf
-         Pupw==
+        b=X4/4Zk55Ukbyir5IW5L08w5Q+fBtLNiG6CONxZPYH5OrhlCyRaaYThfUPWsbJipvYT
+         swTNjLlHybyUWC/dfqbdAW5Ah7r6Ymh4/g/oVrerD+13326oWvDv3zz6rydOMv/zNWXn
+         LtHud4zBf5xTIhynm9koMjOkNsLG74eqnxnm8RKGFRPGx7mBVVLJnC9rPLFS1X7yRHuD
+         1yX57RVfuS/GckEUMvFGVsy+Mf5mTMSC+0BUZDK65PEfhodItsbyEKzD56Ku/yT7NOR6
+         3oT1E3kXSyaBiSKfL1ykhnf13PQkgJjtaV8uIpotOq7DBSYoGzbS6ubAJ3YQ7hxyMo0X
+         wobw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date;
         bh=1gh2cH8+/vu9+O44Ntzb/QjlvRTOJYihF+Y3Qm1SXrI=;
-        b=Dz+GD72SM70KaOu/25kAUioMr+nUD5ZDuX+caug2juMrDUP69mxOVnqwZR/7/rGlfY
-         K4ncfR+zLn67A0tnpwAJCwpmsIHs5/RwWlueBejndWFGY9xSRjrP1qER01sXKe+tqqWz
-         xq52MOPaEE3Gv9L3OHyMSNU1+ia8YN8HDUSSpF39AeZCH+fvD/BIc83A9qanyH0sAgwW
-         UiJwurSX8XfZh7w0uuHBe4BMCdzBbKpFXFalNPZc0HWm5R2OHNyqvMrHubG6Y9zhB/1k
-         CCY/AtQ63FS5hgrIqkaUce8udSPrNw2bAShb1zVlJKhcDj/BN88d169Odh/vyTpTLKhr
-         Vm1A==
-X-Gm-Message-State: ACgBeo2mgvalQeBTKJr3X6QWpRJBZx/XdX2Pg6oc/7MTFbKSiniLNGXp
-	M20BSFRMT6uuEjPh6o60qQM0x2PC
-X-Google-Smtp-Source: AA6agR6YtQhQs9M+XpNrEr5ZjCr4K1ke8LjplN8/PGIGXMDtTqKLhIXAP+/GSYEqOabmcCpXMoNTwQ==
-X-Received: by 2002:a05:6000:184e:b0:226:e227:35e4 with SMTP id c14-20020a056000184e00b00226e22735e4mr10140437wri.624.1662111088131;
-        Fri, 02 Sep 2022 02:31:28 -0700 (PDT)
+        b=3/rNW2/1HJXzc977rmPIb6S81URmmfd5F3hETf9SJVXsG/z40qS9DPzIhJQW6uItKt
+         oLYn10bcX60oU9+T/C+c83AUrAcoAoIboRES+rMqPyYK7YZ5vOlHH3b5jqrXPfCc3cRV
+         +6AZZa/U714I9C64F2MZ28bhm4imrkBAujsFLZsAl7zXRMA9yUNazTiYjhENhHxtc9O+
+         iMsSE6kzxwqKTWJgMmtdt/T9KFw6szz+FCqiBZSFvoCb4KwSTezSDeBTh08rZ+LueFyK
+         KOmgYPzgcZLTRV/hw8Z5w9YThMq1jW7LzuFURo/KysMWmXbqJJeq92drZuX561P9xw6I
+         mwEg==
+X-Gm-Message-State: ACgBeo3kX/3TPoNiuFeMUSHlrSUYTNYN/rPW8TNzDdH09OhcKuSM87b9
+	yXXACed/aKJd20X3xd9Gpephcar1
+X-Google-Smtp-Source: AA6agR7RmSVyjAeQGFw3MIw2xrxrUVQiVxAzEY6jcgGsEMR0UnpBnCqr/mnb1uGpwjcB9GCyqvs1tA==
+X-Received: by 2002:a1c:7703:0:b0:3a5:aefa:68e3 with SMTP id t3-20020a1c7703000000b003a5aefa68e3mr2239820wmi.158.1662111089219;
+        Fri, 02 Sep 2022 02:31:29 -0700 (PDT)
 Received: from [192.168.86.238] (cpc90716-aztw32-2-0-cust825.18-1.cable.virginm.net. [86.26.103.58])
-        by smtp.googlemail.com with ESMTPSA id d17-20020adffbd1000000b002253d865715sm1042629wrs.87.2022.09.02.02.31.25
+        by smtp.googlemail.com with ESMTPSA id g40-20020a05600c4ca800b003a4f1385f0asm1537794wmp.24.2022.09.02.02.31.25
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 02 Sep 2022 02:31:27 -0700 (PDT)
-Message-ID: <c2cd764e-ef70-4a7a-fe7d-aade5adb8057@linaro.org>
+        Fri, 02 Sep 2022 02:31:28 -0700 (PDT)
+Message-ID: <c22a8724-4a1c-dcc5-816d-32faedf6dee2@linaro.org>
 Date: Fri, 2 Sep 2022 10:31:24 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
@@ -89,15 +89,15 @@ In-Reply-To: <20220831153757.97381-12-dmitry.osipenko@collabora.com>
 X-MailFrom: srinivas.kandagatla@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: EXMQ76GI6YHE763TGADB2ZPY7IWT34BG
-X-Message-ID-Hash: EXMQ76GI6YHE763TGADB2ZPY7IWT34BG
-X-Mailman-Approved-At: Tue, 18 Oct 2022 14:22:54 +0000
+Message-ID-Hash: SWPV4X2NG7CNWOC6UYZF63KYH5A5NWY2
+X-Message-ID-Hash: SWPV4X2NG7CNWOC6UYZF63KYH5A5NWY2
+X-Mailman-Approved-At: Tue, 18 Oct 2022 14:23:02 +0000
 CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v4 11/21] misc: fastrpc: Prepare to dynamic dma-buf locking specification
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EXMQ76GI6YHE763TGADB2ZPY7IWT34BG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SWPV4X2NG7CNWOC6UYZF63KYH5A5NWY2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
