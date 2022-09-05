@@ -2,500 +2,169 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00538604324
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 13:27:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F1B9C60431B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 13:26:00 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0E45F3F5BF
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 11:27:21 +0000 (UTC)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2044.outbound.protection.outlook.com [40.107.92.44])
-	by lists.linaro.org (Postfix) with ESMTPS id 6E71B479FE
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  5 Sep 2022 10:58:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 102CE3F5E8
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 11:26:00 +0000 (UTC)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (mail-co1nam11on2084.outbound.protection.outlook.com [40.107.220.84])
+	by lists.linaro.org (Postfix) with ESMTPS id 3C9EE3F93F
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  5 Sep 2022 13:44:09 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hL7SuwZUs5GYrIAb21YW/7rwpuByi0MoRuU0jQsoYIDV4PzEAH+Sf8TF1CIx+6Sq0ufB3NPDxYeVF1Cq5hB6xQJc/Z2ofoiR3MeTpHis3JDvItycEvcBaBsleLGojTXYBrqprqqhiOAkLkpRV35ncUBFh8BzwklkPczVudEqNwk4S19XSNxERfSvj1zgsGrqiWYJHqsjB01PP5bURvWPIvQWZ9EsrZxx4Txnw6Leo3I1xfY3bJJHgr4j2OOsH/qx6AYWHmiYJMNY/C5ttRsgR1yYIUSB7fRzrTYPcZUN5M/avTqnLQ/5/Y1Y9OWrblk1oLpUxgDls67GBH56IuK19Q==
+ b=kZn7vcvPqixnJdgWTIDFPiRf4DDC0/KLhR32Jnnt91376OMlXnudsKINM2B1dnkn8ztpW7RPZyCm3vzTFd/ZYOK+i8RP/mNnDhcHBFbOZBF7SlAbE0PIwhpbe861nQw/pdV7Lbhe8afQlU3M7od13IexqiG8JjzGGL3gBrxNYBNoJYuabays2REbDqeVDJczpfwkngcQeTs/JaYSG/qrbbJWwSCXs+n4wzlwdCsRMwySaRcP2o7U5C/Y6gM6baHVdLVHsJR1gc1R+biEnZlT6XPwq6fwBlC3BdDduuPhiy6010cQT4W5F8ECIKiwlAa+ei7dfLpZfdeMc8AxAh0+dw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=W+86d+YE+hPaWE8HohimmzLAeT0xeEM82WImJePul4U=;
- b=FZC83QGtB33FCA+lFO9Mp5mfx8ZRhDhCAhyvNM/Hgp/sWtssC9MkcbdCOkYYJXelv/tS5WNQjAhDsKhrkew4prGPkmu3Av+M+rmPWeVTg0M9gC9DEEzSzQy8Qwq2twpYWAwyr5wjKOwuGOOx0v1kq/oYqtRiyGzJTDdqrhDO8w33wHJH+HsmgYNj2N4OJ808CBy3lX6e03VCSsKtI8tii1Eewp1KmqCwFvvUBCZmFObXeDNrb5HFi48Qi78ywYUZvopivL2PTE24DPxAdVwyQfbrNRzRq/Nu8dJHNM2h8U2zeGtf3FIRAyiMaLR8ygx/FBjg/WxIxd4+linfQVWLrw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=linaro.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none
+ bh=cid+8NWSvJ+eXJ6qlWu4YIkrdJL8/GvCc5XORUBydg4=;
+ b=JNkW5o3uykZjoVWH0h4q0GpnwPAP5wip1c4eGPVtg/400XLAzEahymtrGYqup1ZevdBtLag2fSAS5SZg9EeIkkYNikjRH6h76mpjTt01p6Hx1LcM1+tH95/x4Zq0DrD2vR0u1E0CMG1uH+R0Lm8tkVtw5wc9Pl6uq4kXa8TkCG5au0MD6Psyvar8aUY0hZGWvgp8YreQKeMMRfE0NGBImoyqoviNFURlLsGXbav/yGIk9Y93eZONk1ckIB9eQm0moCGQmeZBjHzz+QHbqJnVW0pFamXNGDgP/LGlm0u+WCSKn0upv7Q73eC94PvWo40xIuFBbVaE5STy13WWVRzjuQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=W+86d+YE+hPaWE8HohimmzLAeT0xeEM82WImJePul4U=;
- b=QP9wcIVdl718V4sJWfjIGzKQWYnll1jRM/OFTwPfV9BsZ8qGAnjeau0yGrVsK0iCS1febY2oH1I7aJ7n7cCnYcd+Ls8KPpWxfGMH+m0yWG2sTsAKH/3cKVyA8F9PD9v5TnFm584fMIB1RuivgkeuDz1ypRpFeQ0LdzBDDGdO86w=
-Received: from DM6PR07CA0038.namprd07.prod.outlook.com (2603:10b6:5:74::15) by
- BL1PR12MB5320.namprd12.prod.outlook.com (2603:10b6:208:314::17) with
+ bh=cid+8NWSvJ+eXJ6qlWu4YIkrdJL8/GvCc5XORUBydg4=;
+ b=Qlj5ZhyTapLYdiQEOaVPefQ6RhCwHrxq63uVsDMjJKgvXb3BIIB9wcnr7jSqPQElCkDknqxfLpZUDwFCD33Ae/7f8/labwHWf0MpZ9da+/EhHHoD6pJlnKVWUwOD9S9AdwQDODfV8Gng+h+oDhp6/mJW+z8Qy60drdbUjZK9vPc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from PH7PR12MB6000.namprd12.prod.outlook.com (2603:10b6:510:1dc::15)
+ by MN0PR12MB6079.namprd12.prod.outlook.com (2603:10b6:208:3c9::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5588.10; Mon, 5 Sep
- 2022 10:58:21 +0000
-Received: from DM6NAM11FT023.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:74:cafe::97) by DM6PR07CA0038.outlook.office365.com
- (2603:10b6:5:74::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5588.13 via Frontend
- Transport; Mon, 5 Sep 2022 10:58:21 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DM6NAM11FT023.mail.protection.outlook.com (10.13.173.96) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5588.10 via Frontend Transport; Mon, 5 Sep 2022 10:58:21 +0000
-Received: from amd.amd.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Mon, 5 Sep
- 2022 05:58:16 -0500
-From: Arvind Yadav <Arvind.Yadav@amd.com>
-To: <Christian.Koenig@amd.com>, <andrey.grodzovsky@amd.com>,
-	<shashank.sharma@amd.com>, <amaranath.somalapuram@amd.com>,
-	<Arunpravin.PaneerSelvam@amd.com>, <sumit.semwal@linaro.org>,
-	<gustavo@padovan.org>, <airlied@linux.ie>, <daniel@ffwll.ch>,
-	<linux-media@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
-	<linaro-mm-sig@lists.linaro.org>, <linux-kernel@vger.kernel.org>
-Date: Mon, 5 Sep 2022 16:26:53 +0530
-Message-ID: <20220905105653.13670-5-Arvind.Yadav@amd.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20220905105653.13670-1-Arvind.Yadav@amd.com>
+ 2022 13:44:05 +0000
+Received: from PH7PR12MB6000.namprd12.prod.outlook.com
+ ([fe80::2e8f:6161:3959:aa0c]) by PH7PR12MB6000.namprd12.prod.outlook.com
+ ([fe80::2e8f:6161:3959:aa0c%5]) with mapi id 15.20.5588.015; Mon, 5 Sep 2022
+ 13:44:04 +0000
+Message-ID: <f9042797-1c41-a4c2-fdd2-60feaf38e87a@amd.com>
+Date: Mon, 5 Sep 2022 19:13:52 +0530
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.1
+Content-Language: en-US
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Arvind Yadav <Arvind.Yadav@amd.com>, andrey.grodzovsky@amd.com,
+ shashank.sharma@amd.com, amaranath.somalapuram@amd.com,
+ Arunpravin.PaneerSelvam@amd.com, sumit.semwal@linaro.org,
+ gustavo@padovan.org, airlied@linux.ie, daniel@ffwll.ch,
+ linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 References: <20220905105653.13670-1-Arvind.Yadav@amd.com>
+ <20220905105653.13670-2-Arvind.Yadav@amd.com>
+ <0038fcff-35f1-87e3-aa26-cdd104a13628@amd.com>
+From: "Yadav, Arvind" <arvyadav@amd.com>
+In-Reply-To: <0038fcff-35f1-87e3-aa26-cdd104a13628@amd.com>
+X-ClientProxiedBy: PN2PR01CA0147.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c01:6::32) To PH7PR12MB6000.namprd12.prod.outlook.com
+ (2603:10b6:510:1dc::15)
 MIME-Version: 1.0
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: fa7a37eb-d71a-45d8-b9ba-08da8f2d8c3a
-X-MS-TrafficTypeDiagnostic: BL1PR12MB5320:EE_
+X-MS-Office365-Filtering-Correlation-Id: fb022abf-5b92-41c9-dc7d-08da8f44b2ac
+X-MS-TrafficTypeDiagnostic: MN0PR12MB6079:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	6pZdIabnuyzg/tjkdT50fSdP2h7S2l11xYbiKJ5fqaQEkPpTFyMNYq6ce8hULcDb7ahugIHgbJsMKbTAillsIpzlDZM31OzEOJN9+jlwgC/bESDLByWTTRxJKLKhVIi/CsyZ81S4EumwRFFvSuj05CUTZn3oRcb9IMl0Xfo0Hgx7HN/P+LELU5ZnAbq+whdvWl3CcUgMm5M2t+/SEorEzELC0OYSt0RKYaAyvqgEECslagbb8eevAbdmZ5aLk14P+U69srWyEKvZcIItG1cLBKYEsfPKhfBDcoAG9tZLEAYO6SxEU9pTjen0RuAM3yR3RA9IHTH/8ishldAgQ7rE+cWUukRRAO9qYLLU9IejdvnoOOjTirp662pOLemPtWghqfjDVyBldqsJCma0o7yM9+JDdlcFLN2WUvWgVCq1nWlBL1DXMykf/S178+DDREyujQpiTGVEkIfffjDA4wwxG/L+0vM91Z3q/XQJ14qOCEo3SJMs922nbWmTz/a2Ot3AWtiTUK8Ml20pEb3EW4rSRHed8czgIhCnaZ7c7I87SrAqDEvDwt6oIz7JXUNRQ1Hq/qM0I8ghX3nsdFt7C25VA/S5SUM1eDS/QFNd0gOETTsn/gB6Gth6r15kn6Ix/EVnxpMpfohGGBnn/Nf8SGe9VB7mHoYBC8h0LiIVxFhIOyZy+YhMMF+bJCfOPi9BQnW5jElvCNZePS28W8rJGFqLDWEK0YJ5F/A4a2r27vc0CF8D/rlWRumPX2Iqiyl0Cj5u/MGVmVvR5dVAHS0c+QlfU2Vx7F9NNxAIGpipC9lHlc8XaoynlEb+Pha+Oy+MOyZhMZQBVGYY4psn+78QDxjeHWQuPQX6dlKVtO/oBlrwoSGjX2fFB1bEcb4IDGVKX4az
+	qeut4IHlVi0eoEqDpLklR2uZG4h+g8XrjwX70+Hypd3dfb7JuJrKuZxOMfNDMKiaZShObzLKEqJ8vMgvj4P5NfvBGPo1f684e2P5zRwHZOXZyXW5XSetUFHfxIws9ovtAipCdEplSl6Xsde4VDxNOhN2asuThenmkPZsUGe963JqHl71S7jgupk91JTO+X0GX3s6UXACDFmenKQUs1b/BV6bBW+v5xphkIrhJqAlk88ezl0u4iM6KrPRXgg0+Ee7FaBaqXDIJZvs0T5PggNQelpgP06dA4+/mZ5UlhIhYpRAdlABVakGf87uLJOEDwrYoRsATUyF1pxiZHJzA9LMARSkzHZkgQ2mN3pMBMyNIHPy2MQFoDuzbHhZJhCfa3fPRwnU7w9fLsOM21xAcrnDoBtdlSByyXwMT0S02qZXD4yLyQoHirPKBG6gEzCQv6c1qX17evlkv8V6skHPLMxTObzxDYEXzGu6xdqPZXe7xc3Ni/8QIbx431vHAMi19gnxTjle1k+hrsa5/L819tONhAAPEhyiwTRlY94qK/D5spY2NCJKGrZj1Bxi2ba73fyZWAZAixqrt9g2bIvtp5jK5Gy/kTezxbJrOiiEt+croRibgR4FqsyC49Wjjl1H9UXPEODkba+9fg+RATouNDwRuNzJT+TGYODNrcVm2vFt2hnu56m+i3n8/pc1VAKwGZwcNX+Iv+QTJ60xjeP5r+A9KN/HPVxFyZOFodnpNxoYy+SDJm5SgYe20RbYg6if4BOtDVh5qt4XMTtURoMn4qLIQy9mJEAwWnTFsqQfZidYfoxETV7odJZ2Em7mZXAYWEn6
 X-Forefront-Antispam-Report: 
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230016)(4636009)(376002)(396003)(346002)(136003)(39860400002)(40470700004)(36840700001)(46966006)(2906002)(36756003)(81166007)(47076005)(426003)(356005)(921005)(1076003)(83380400001)(16526019)(336012)(186003)(2616005)(8676002)(70206006)(70586007)(40480700001)(5660300002)(8936002)(4326008)(110136005)(316002)(82310400005)(26005)(41300700001)(7696005)(478600001)(6666004)(36860700001)(40460700003)(86362001)(82740400003)(83996005)(36900700001)(2101003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB6000.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(136003)(376002)(346002)(39860400002)(366004)(396003)(6506007)(31696002)(83380400001)(38100700002)(921005)(316002)(110136005)(66476007)(8676002)(2906002)(66946007)(2616005)(66556008)(6512007)(53546011)(66574015)(8936002)(186003)(478600001)(6486002)(5660300002)(41300700001)(36756003)(31686004)(26005)(6666004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?OTNIai9xSk04RFcvVnlWdDBsbVcxUEU5dU5FVno0b09iWXlYWkpQWkdYckpF?=
+ =?utf-8?B?endBdnF6ajk3QmRoOUtUclZ4Vmthcno5R1NVL0xaa25BcVZnRXREOG15Z0s3?=
+ =?utf-8?B?YzFkUm1QSkszS0UyajJmYTNkcldNOG1WNjB6REQwL1JCa0hMMWl6cjM0a0JJ?=
+ =?utf-8?B?MjlnZ291QVI2T0l3MXNkOHA4RlNFVTRWbytMZTJjWlp5aUhsRVBMY01hM3hL?=
+ =?utf-8?B?UDlCUk9TRHp1em9rbzZ0YUgwUHVpMFQ1WE1tS0p5ZU9US01tbW11WWtKaVFr?=
+ =?utf-8?B?MjJ1dVREYTc0dmEySUxuUUQ4Ynd5aGNYWElYZWJCcmpDYzBwa0FiTm5hMWlZ?=
+ =?utf-8?B?SUdncTQ3NDJ6Z1ZRNitUcXY3S1F1Yzd4UWVOdFBCMTU0VGN0SDBtbjJRMmJi?=
+ =?utf-8?B?aUkyaDhXM1dJcnBUVnZzT2dMcStDd09hNmRjSzBkQzhiK3FPN3hsd1lSc2Rz?=
+ =?utf-8?B?N1BPR2h2TC9VckE4elRaY053NDdYbTllQTQ1bXo2TkpyV3FPUi9ld3dQWFNU?=
+ =?utf-8?B?cnUrUEJqOEo5RDc2L00wQVZ4S3I5cjVsUEthQ0pDU05Ha01hSHNNWkgrVHpx?=
+ =?utf-8?B?azF5YVNtS2RqaytFRkRGRjRjSVBqTndNTlduKzBRZW5nb2Z1VTEyMnFzSmMx?=
+ =?utf-8?B?dk13V3FTMkJPT1RZWUVSd09veklwRFVYMFZZaXNiZ2UvcVJJaXNkb3VpZ3Jv?=
+ =?utf-8?B?Yy9nUUJacXozdGJ3TURiMHVNRWZ2Zm5HNTdiak56aGZpSzJrZlBhdTJXOVgy?=
+ =?utf-8?B?SS96bWpvZEg1K2crR2pBSGpNRk9WNWNnTnlmSkpWS1Fuc0JvVmNyaWRCd1Fs?=
+ =?utf-8?B?R09ldTNYRE5lSzYycm11c0tEWWF6dVVpSjlldEZxVlZ4TTJYZHYxOGdBaGI2?=
+ =?utf-8?B?WWg3alJWbDc2c3lrWkVyTGlyZG1qR3J1RTV0L0RUOENWYy9idE9KbktZZTVx?=
+ =?utf-8?B?NjdNcmo2RWgyY29XSVhoNmVtaWwzWnRHcit2OVBzNjZSeU1qYXNudm5JS3FH?=
+ =?utf-8?B?djM1Y3BDQzBmVHFkc0pVcS9uK1g4N2lpdjJwTmNJWllmM0wzUWU1RFZYS3Y3?=
+ =?utf-8?B?aVZWeXdnUTh3dEJDZUR1RWY5by9Ha2Jtb0hyMzBvb0tPbXpXTllPSURVTG1W?=
+ =?utf-8?B?OTJkdUtsR0EwNSs5YklrVkhTYkV6L2tIclluWVVNSm8zQTV0VG82dXJocU0y?=
+ =?utf-8?B?TE1nMFkrQ214TjljclZTQllBNVEzblpRV0tIQU1MRUZkRHh3WTAwendadGhy?=
+ =?utf-8?B?UVNTSkhOVXdJa3JBdUdKeWIrNmV6akFmN1NPckxuTWZTQ0FSVTB2NGFHcTlF?=
+ =?utf-8?B?V1djMVdORmZCK0hZYU9PTGdpMHhaNEhiNFZETkdoanNVZ1hKSEpwMjZ6bFVK?=
+ =?utf-8?B?NWZjM0crckNLL2grTmtCMm9BaG0xR3A2eU9sK2hHTjUwTFpsU3BCbzNHSDJO?=
+ =?utf-8?B?S05RT0h4UDZWZncydUNWbTM0WXA3OXoweDBQMWVsb3ZKZWJzRXVXTm5WUWhz?=
+ =?utf-8?B?NFRGVXNsMFFvSWZvOWVWNUVyRlZOa2FEZHcvb3BiTGxlREN2ditza25yYW0r?=
+ =?utf-8?B?QmNLMmEydkFmT0RKVjlzZ1ljdzFXcVZiNEFrblFCNWhtMkkySlRzVW5SNWtz?=
+ =?utf-8?B?UTNNL0o1ckxRbjJLZkpMdVJaOUowS3dpNUlQSWlRbk5DeEZXc1QxU1NsbU8v?=
+ =?utf-8?B?QUhuMy9CalVZN21tTXgzSkp3ck9meWpVYTFTMnpQVVA1MHFlVk9xUmRjOGRE?=
+ =?utf-8?B?NlExU2oyWGNSdHA2WnZ0N2lnVkw0bTR2VGtPSjc1U0FJbjZFS3FsMVM3UTd6?=
+ =?utf-8?B?Mm5ZblBXWlBzWDRCMUFuYjhHcm1CbnpQSDVlWCtFaUJVc1oyY1Z5S1BaY0tM?=
+ =?utf-8?B?RG1kZ3VXNWxoZDB4V0ZjQ0lsMDAyMDV2cDF0MkluM2xXZjN0VnlxWXYzRndh?=
+ =?utf-8?B?WklUZlUrbWZLQ0IzbTU0RUpIaEo1TktpQkR2TmYxTGp2dHYwOEFpaG1GVGo0?=
+ =?utf-8?B?Wk03VXR1WlRoQjh6d0t4K0F3ME9lSGRnTHAySE5SY2sxdStYV0FleGE4WnBV?=
+ =?utf-8?B?TmczNUVZSkpBek9zT1NiN0F4ajlpektRb2FoM2VzcjN4NEJCbFdrVldrZTFu?=
+ =?utf-8?Q?DWNF16cWEWYKPef5vN1YjQQxw?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Sep 2022 10:58:21.4368
+X-MS-Exchange-CrossTenant-Network-Message-Id: fb022abf-5b92-41c9-dc7d-08da8f44b2ac
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB6000.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Sep 2022 13:44:04.8004
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fa7a37eb-d71a-45d8-b9ba-08da8f2d8c3a
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: 
-	DM6NAM11FT023.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5320
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: fKHDNm/l1qKe0cdS98ujoIJf5cyhgdhrPgf2fneRWJ66otueqohj3DuRDHXt6RfBDueldcEzedixb6znC4BzqQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6079
 X-MailFrom: Arvind.Yadav@amd.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: CEV6AJPIMEZAZ54TNT4TQJCK3DZLPHDO
-X-Message-ID-Hash: CEV6AJPIMEZAZ54TNT4TQJCK3DZLPHDO
-X-Mailman-Approved-At: Wed, 19 Oct 2022 11:25:28 +0000
-CC: Arvind Yadav <Arvind.Yadav@amd.com>
+Message-ID-Hash: AK32VUQITDXK6VK5BR4OBPGJVXHPJ7NQ
+X-Message-ID-Hash: AK32VUQITDXK6VK5BR4OBPGJVXHPJ7NQ
+X-Mailman-Approved-At: Wed, 19 Oct 2022 11:25:22 +0000
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 4/4] dma-buf: Add callback and enable signaling on debug
+Subject: [Linaro-mm-sig] Re: [PATCH 1/4] dma-buf: Check status of enable-signaling bit on debug
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CEV6AJPIMEZAZ54TNT4TQJCK3DZLPHDO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AK32VUQITDXK6VK5BR4OBPGJVXHPJ7NQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-Here's on debug adding an enable_signaling callback for fences
-and enabling software signaling for selftest.
-
-Signed-off-by: Arvind Yadav <Arvind.Yadav@amd.com>
----
- drivers/dma-buf/st-dma-fence-chain.c  | 17 +++++++++
- drivers/dma-buf/st-dma-fence-unwrap.c | 54 +++++++++++++++++++++++++++
- drivers/dma-buf/st-dma-fence.c        | 34 ++++++++++++++++-
- drivers/dma-buf/st-dma-resv.c         | 30 +++++++++++++++
- 4 files changed, 134 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/dma-buf/st-dma-fence-chain.c b/drivers/dma-buf/st-dma-fence-chain.c
-index 8ce1ea59d31b..ffbb24d6a890 100644
---- a/drivers/dma-buf/st-dma-fence-chain.c
-+++ b/drivers/dma-buf/st-dma-fence-chain.c
-@@ -32,6 +32,12 @@ static const char *mock_name(struct dma_fence *f)
- {
- 	return "mock";
- }
-+#ifdef CONFIG_DEBUG_FS
-+static bool mock_fence_enable_signaling(struct dma_fence *f)
-+{
-+	return true;
-+}
-+#endif
- 
- static void mock_fence_release(struct dma_fence *f)
- {
-@@ -41,6 +47,9 @@ static void mock_fence_release(struct dma_fence *f)
- static const struct dma_fence_ops mock_ops = {
- 	.get_driver_name = mock_name,
- 	.get_timeline_name = mock_name,
-+#ifdef CONFIG_DEBUG_FS
-+	.enable_signaling =  mock_fence_enable_signaling,
-+#endif
- 	.release = mock_fence_release,
- };
- 
-@@ -87,6 +96,10 @@ static int sanitycheck(void *arg)
- 	if (!chain)
- 		err = -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(chain);
-+#endif
-+
- 	dma_fence_signal(f);
- 	dma_fence_put(f);
- 
-@@ -143,6 +156,10 @@ static int fence_chains_init(struct fence_chains *fc, unsigned int count,
- 		}
- 
- 		fc->tail = fc->chains[i];
-+
-+#ifdef CONFIG_DEBUG_FS
-+		dma_fence_enable_sw_signaling(fc->chains[i]);
-+#endif
- 	}
- 
- 	fc->chain_length = i;
-diff --git a/drivers/dma-buf/st-dma-fence-unwrap.c b/drivers/dma-buf/st-dma-fence-unwrap.c
-index 4105d5ea8dde..b43c57559ead 100644
---- a/drivers/dma-buf/st-dma-fence-unwrap.c
-+++ b/drivers/dma-buf/st-dma-fence-unwrap.c
-@@ -23,9 +23,19 @@ static const char *mock_name(struct dma_fence *f)
- 	return "mock";
- }
- 
-+#ifdef CONFIG_DEBUG_FS
-+static bool mock_fence_enable_signaling(struct dma_fence *f)
-+{
-+	return true;
-+}
-+#endif
-+
- static const struct dma_fence_ops mock_ops = {
- 	.get_driver_name = mock_name,
- 	.get_timeline_name = mock_name,
-+#ifdef CONFIG_DEBUG_FS
-+	.enable_signaling =  mock_fence_enable_signaling,
-+#endif
- };
- 
- static struct dma_fence *mock_fence(void)
-@@ -102,6 +112,10 @@ static int sanitycheck(void *arg)
- 	if (!f)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f);
-+#endif
-+
- 	array = mock_array(1, f);
- 	if (!array)
- 		return -ENOMEM;
-@@ -124,12 +138,20 @@ static int unwrap_array(void *arg)
- 	if (!f1)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f1);
-+#endif
-+
- 	f2 = mock_fence();
- 	if (!f2) {
- 		dma_fence_put(f1);
- 		return -ENOMEM;
- 	}
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f2);
-+#endif
-+
- 	array = mock_array(2, f1, f2);
- 	if (!array)
- 		return -ENOMEM;
-@@ -164,12 +186,20 @@ static int unwrap_chain(void *arg)
- 	if (!f1)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f1);
-+#endif
-+
- 	f2 = mock_fence();
- 	if (!f2) {
- 		dma_fence_put(f1);
- 		return -ENOMEM;
- 	}
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f2);
-+#endif
-+
- 	chain = mock_chain(f1, f2);
- 	if (!chain)
- 		return -ENOMEM;
-@@ -204,12 +234,20 @@ static int unwrap_chain_array(void *arg)
- 	if (!f1)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f1);
-+#endif
-+
- 	f2 = mock_fence();
- 	if (!f2) {
- 		dma_fence_put(f1);
- 		return -ENOMEM;
- 	}
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f2);
-+#endif
-+
- 	array = mock_array(2, f1, f2);
- 	if (!array)
- 		return -ENOMEM;
-@@ -248,12 +286,20 @@ static int unwrap_merge(void *arg)
- 	if (!f1)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f1);
-+#endif
-+
- 	f2 = mock_fence();
- 	if (!f2) {
- 		err = -ENOMEM;
- 		goto error_put_f1;
- 	}
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f2);
-+#endif
-+
- 	f3 = dma_fence_unwrap_merge(f1, f2);
- 	if (!f3) {
- 		err = -ENOMEM;
-@@ -296,10 +342,18 @@ static int unwrap_merge_complex(void *arg)
- 	if (!f1)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f1);
-+#endif
-+
- 	f2 = mock_fence();
- 	if (!f2)
- 		goto error_put_f1;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f2);
-+#endif
-+
- 	f3 = dma_fence_unwrap_merge(f1, f2);
- 	if (!f3)
- 		goto error_put_f2;
-diff --git a/drivers/dma-buf/st-dma-fence.c b/drivers/dma-buf/st-dma-fence.c
-index c8a12d7ad71a..4adb763f4509 100644
---- a/drivers/dma-buf/st-dma-fence.c
-+++ b/drivers/dma-buf/st-dma-fence.c
-@@ -27,6 +27,12 @@ static const char *mock_name(struct dma_fence *f)
- {
- 	return "mock";
- }
-+#ifdef CONFIG_DEBUG_FS
-+static bool mock_fence_enable_signaling(struct dma_fence *f)
-+{
-+	return true;
-+}
-+#endif
- 
- static void mock_fence_release(struct dma_fence *f)
- {
-@@ -77,6 +83,9 @@ static const struct dma_fence_ops mock_ops = {
- 	.get_driver_name = mock_name,
- 	.get_timeline_name = mock_name,
- 	.wait = mock_wait,
-+#ifdef CONFIG_DEBUG_FS
-+	.enable_signaling =  mock_fence_enable_signaling,
-+#endif
- 	.release = mock_fence_release,
- };
- 
-@@ -101,7 +110,9 @@ static int sanitycheck(void *arg)
- 	f = mock_fence();
- 	if (!f)
- 		return -ENOMEM;
--
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f);
-+#endif
- 	dma_fence_signal(f);
- 	dma_fence_put(f);
- 
-@@ -117,6 +128,9 @@ static int test_signaling(void *arg)
- 	if (!f)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f);
-+#endif
- 	if (dma_fence_is_signaled(f)) {
- 		pr_err("Fence unexpectedly signaled on creation\n");
- 		goto err_free;
-@@ -190,6 +204,9 @@ static int test_late_add_callback(void *arg)
- 	if (!f)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f);
-+#endif
- 	dma_fence_signal(f);
- 
- 	if (!dma_fence_add_callback(f, &cb.cb, simple_callback)) {
-@@ -282,6 +299,9 @@ static int test_status(void *arg)
- 	if (!f)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f);
-+#endif
- 	if (dma_fence_get_status(f)) {
- 		pr_err("Fence unexpectedly has signaled status on creation\n");
- 		goto err_free;
-@@ -308,6 +328,9 @@ static int test_error(void *arg)
- 	if (!f)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f);
-+#endif
- 	dma_fence_set_error(f, -EIO);
- 
- 	if (dma_fence_get_status(f)) {
-@@ -337,6 +360,9 @@ static int test_wait(void *arg)
- 	if (!f)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f);
-+#endif
- 	if (dma_fence_wait_timeout(f, false, 0) != -ETIME) {
- 		pr_err("Wait reported complete before being signaled\n");
- 		goto err_free;
-@@ -379,6 +405,9 @@ static int test_wait_timeout(void *arg)
- 	if (!wt.f)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(wt.f);
-+#endif
- 	if (dma_fence_wait_timeout(wt.f, false, 1) != -ETIME) {
- 		pr_err("Wait reported complete before being signaled\n");
- 		goto err_free;
-@@ -458,6 +487,9 @@ static int thread_signal_callback(void *arg)
- 			break;
- 		}
- 
-+#ifdef CONFIG_DEBUG_FS
-+		dma_fence_enable_sw_signaling(f1);
-+#endif
- 		rcu_assign_pointer(t->fences[t->id], f1);
- 		smp_wmb();
- 
-diff --git a/drivers/dma-buf/st-dma-resv.c b/drivers/dma-buf/st-dma-resv.c
-index 813779e3c9be..fa4e7b09d54c 100644
---- a/drivers/dma-buf/st-dma-resv.c
-+++ b/drivers/dma-buf/st-dma-resv.c
-@@ -18,9 +18,19 @@ static const char *fence_name(struct dma_fence *f)
- 	return "selftest";
- }
- 
-+#ifdef CONFIG_DEBUG_FS
-+static bool fence_enable_signaling(struct dma_fence *f)
-+{
-+	return true;
-+}
-+#endif
-+
- static const struct dma_fence_ops fence_ops = {
- 	.get_driver_name = fence_name,
- 	.get_timeline_name = fence_name,
-+#ifdef CONFIG_DEBUG_FS
-+	.enable_signaling =  fence_enable_signaling,
-+#endif
- };
- 
- static struct dma_fence *alloc_fence(void)
-@@ -45,6 +55,10 @@ static int sanitycheck(void *arg)
- 	if (!f)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f);
-+#endif
-+
- 	dma_fence_signal(f);
- 	dma_fence_put(f);
- 
-@@ -69,6 +83,10 @@ static int test_signaling(void *arg)
- 	if (!f)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f);
-+#endif
-+
- 	dma_resv_init(&resv);
- 	r = dma_resv_lock(&resv, NULL);
- 	if (r) {
-@@ -114,6 +132,10 @@ static int test_for_each(void *arg)
- 	if (!f)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f);
-+#endif
-+
- 	dma_resv_init(&resv);
- 	r = dma_resv_lock(&resv, NULL);
- 	if (r) {
-@@ -173,6 +195,10 @@ static int test_for_each_unlocked(void *arg)
- 	if (!f)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f);
-+#endif
-+
- 	dma_resv_init(&resv);
- 	r = dma_resv_lock(&resv, NULL);
- 	if (r) {
-@@ -244,6 +270,10 @@ static int test_get_fences(void *arg)
- 	if (!f)
- 		return -ENOMEM;
- 
-+#ifdef CONFIG_DEBUG_FS
-+	dma_fence_enable_sw_signaling(f);
-+#endif
-+
- 	dma_resv_init(&resv);
- 	r = dma_resv_lock(&resv, NULL);
- 	if (r) {
--- 
-2.25.1
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+DQpPbiA5LzUvMjAyMiA0OjUxIFBNLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPiBBbSAwNS4w
+OS4yMiB1bSAxMjo1NiBzY2hyaWViIEFydmluZCBZYWRhdjoNCj4+IFRoZSBjb3JlIERNQS1idWYg
+ZnJhbWV3b3JrIG5lZWRzIHRvIGVuYWJsZSBzaWduYWxpbmcNCj4+IGJlZm9yZSB0aGUgZmVuY2Ug
+aXMgc2lnbmFsZWQuIFRoZSBjb3JlIERNQS1idWYgZnJhbWV3b3JrDQo+PiBjYW4gZm9yZ2V0IHRv
+IGVuYWJsZSBzaWduYWxpbmcgYmVmb3JlIHRoZSBmZW5jZSBpcyBzaWduYWxlZC4NCj4+IFRvIGF2
+b2lkIHRoaXMgc2NlbmFyaW8gb24gdGhlIGRlYnVnIGtlcm5lbCwgY2hlY2sgdGhlDQo+PiBETUFf
+RkVOQ0VfRkxBR19FTkFCTEVfU0lHTkFMX0JJVCBzdGF0dXMgYml0IGJlZm9yZSBjaGVja2luZw0K
+Pj4gdGhlIHNpZ25hbGluZyBiaXQgc3RhdHVzIHRvIGNvbmZpcm0gdGhhdCBlbmFibGVfc2lnbmFs
+aW5nDQo+PiBpcyBlbmFibGVkLg0KPg0KPiBZb3UgbWlnaHQgd2FudCB0byBwdXQgdGhpcyBwYXRj
+aCBhdCB0aGUgZW5kIG9mIHRoZSBzZXJpZXMgdG8gYXZvaWQgDQo+IGJyZWFraW5nIHRoZSBrZXJu
+ZWwgaW4gYmV0d2Vlbi4NCj4NCnN1cmUsIEkgd2lsbCBhZGQgdGhpcyBwYXRjaCBhdCBlbmQuDQo+
+Pg0KPj4gU2lnbmVkLW9mZi1ieTogQXJ2aW5kIFlhZGF2IDxBcnZpbmQuWWFkYXZAYW1kLmNvbT4N
+Cj4+IC0tLQ0KPj4gwqAgaW5jbHVkZS9saW51eC9kbWEtZmVuY2UuaCB8IDUgKysrKysNCj4+IMKg
+IDEgZmlsZSBjaGFuZ2VkLCA1IGluc2VydGlvbnMoKykNCj4+DQo+PiBkaWZmIC0tZ2l0IGEvaW5j
+bHVkZS9saW51eC9kbWEtZmVuY2UuaCBiL2luY2x1ZGUvbGludXgvZG1hLWZlbmNlLmgNCj4+IGlu
+ZGV4IDc3NWNkYzBiNGYyNC4uNjBjMGU5MzVjMGI1IDEwMDY0NA0KPj4gLS0tIGEvaW5jbHVkZS9s
+aW51eC9kbWEtZmVuY2UuaA0KPj4gKysrIGIvaW5jbHVkZS9saW51eC9kbWEtZmVuY2UuaA0KPj4g
+QEAgLTQyOCw2ICs0MjgsMTEgQEAgZG1hX2ZlbmNlX2lzX3NpZ25hbGVkX2xvY2tlZChzdHJ1Y3Qg
+ZG1hX2ZlbmNlIA0KPj4gKmZlbmNlKQ0KPj4gwqAgc3RhdGljIGlubGluZSBib29sDQo+PiDCoCBk
+bWFfZmVuY2VfaXNfc2lnbmFsZWQoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UpDQo+PiDCoCB7DQo+
+PiArI2lmZGVmIENPTkZJR19ERUJVR19GUw0KPg0KPiBDT05GSUdfREVCVUdfRlMgaXMgY2VydGFp
+bmx5IHdyb25nLCBwcm9iYWJseSBiZXR0ZXIgdG8gY2hlY2sgZm9yIA0KPiBDT05GSUdfREVCVUdf
+V1dfTVVURVhfU0xPV1BBVEggaGVyZS4NCj4NCj4gQXBhcnQgZnJvbSB0aGF0IGxvb2tzIGdvb2Qg
+dG8gbWUsDQo+IENocmlzdGlhbi4NCj4NCkkgd2lsbCB1c2UgQ09ORklHX0RFQlVHX1dXX01VVEVY
+X1NMT1dQQVRIIGluc3RlYWQgb2YgQ09ORklHX0RFQlVHX0ZTDQoNCn5hcnZpbmQNCg0KPj4gK8Kg
+wqDCoCBpZiAoIXRlc3RfYml0KERNQV9GRU5DRV9GTEFHX0VOQUJMRV9TSUdOQUxfQklULCAmZmVu
+Y2UtPmZsYWdzKSkNCj4+ICvCoMKgwqDCoMKgwqDCoCByZXR1cm4gZmFsc2U7DQo+PiArI2VuZGlm
+DQo+PiArDQo+PiDCoMKgwqDCoMKgIGlmICh0ZXN0X2JpdChETUFfRkVOQ0VfRkxBR19TSUdOQUxF
+RF9CSVQsICZmZW5jZS0+ZmxhZ3MpKQ0KPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiB0cnVl
+Ow0KPg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGlu
+YXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3Jn
+ClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0
+cy5saW5hcm8ub3JnCg==
