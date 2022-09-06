@@ -2,164 +2,247 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8D035AF322
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Sep 2022 19:52:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 82B685AF4AB
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Sep 2022 21:46:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F06BE48A20
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Sep 2022 17:52:19 +0000 (UTC)
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com (mail-bn8nam04on2088.outbound.protection.outlook.com [40.107.100.88])
-	by lists.linaro.org (Postfix) with ESMTPS id 7C5843F4F4
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Sep 2022 17:52:14 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=B3JR84OI0nyKYJSMQEmQjKGxJowwXsOpE6OdQkTP45uoxUJdaKHF0DKqxfJvDKrZ92rlrmAYU9eRA3MekB6OfVvZxNi4/U7pzWBjvh+BTzsCrDz/hPzaMJHzlRrYLO08JEx7K1rvphA9kGP1kt9/cBIKqIG2+/hwHyqQVZhzZimHDBqgKESyTVBU9sQl77VgNO8F6SNr4ALueh2HiPfKDbc7+haFcQdF0GPr5XMNtmt9SvlvpsiPbPvEsKqb6Pbt2BIxUTVENpZYW6RK61eckHNZPjouJwh7elpXUgLts8FvMOUN/rczVUWman4Zzujyn2SKV6IsspfGv7xJZi+W6A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Dw/ZtvChJNfBcOxE8GjM/WXySKf5NjRI8gX73oWCScE=;
- b=j2Su9MWHKGLZ0w5vBhEudRFhJiq2We4iTfUT9nXtssvXzum5DmyN3AfesYOFwi4aNUTt73Ww3VAi+p9gtFDsYm5yZivF5BxrKOqBeKgEwgVECqzsBXw8XoWOm5x+RByMTbxMvOpEWqNtefzvduGnctyvnvc8c7jGB1XfHi1YLI0/jDn+wovCv1hKvxk/hi5VGPccAXgN1IzqvnwudunuKizdIR+XCUrW06y2JWyYUgsUo9ngapRl/cFY+43QZuLoiqJ1b2wcKxRWJY4ALdFqyH88F5xRhaZwmT0sfbkDT8plsgp8DCmuSzr/FxlF1mOutSFqXRJxoOMCCXXbxdKk6A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Dw/ZtvChJNfBcOxE8GjM/WXySKf5NjRI8gX73oWCScE=;
- b=xm+6URIMlgOyLlj/PEwUCyPN9lV6cbKojc8PLBL+bVK/pT6zXgOBGbB6Yf2mv493Ak8XtiDWD6fv4kLmKnTo180lf8wzwo6U1wuAbp1mKY1L7svWId1afzYc/hDdPljVY/2zdXy+zTJdzlAhwY3GEJt1SjPPda2ContEdCUExhs=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from BYAPR12MB3589.namprd12.prod.outlook.com (2603:10b6:a03:df::29)
- by BY5PR12MB4081.namprd12.prod.outlook.com (2603:10b6:a03:20e::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5588.10; Tue, 6 Sep
- 2022 17:52:12 +0000
-Received: from BYAPR12MB3589.namprd12.prod.outlook.com
- ([fe80::a997:c7f:aea0:764a]) by BYAPR12MB3589.namprd12.prod.outlook.com
- ([fe80::a997:c7f:aea0:764a%4]) with mapi id 15.20.5588.018; Tue, 6 Sep 2022
- 17:52:12 +0000
-Message-ID: <cfbea503-10a3-5cf2-1657-e0c849d194a0@amd.com>
-Date: Tue, 6 Sep 2022 19:52:04 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
-To: Jason Gunthorpe <jgg@nvidia.com>
-References: <1-v2-472615b3877e+28f7-vfio_dma_buf_jgg@nvidia.com>
- <18b3dd75-7995-a2a8-372b-1fd5838dfe1d@amd.com> <Yxd42anepRnmFJwe@nvidia.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <Yxd42anepRnmFJwe@nvidia.com>
-X-ClientProxiedBy: FR3P281CA0045.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:4a::16) To BYAPR12MB3589.namprd12.prod.outlook.com
- (2603:10b6:a03:df::29)
+	by lists.linaro.org (Postfix) with ESMTP id 905EB48A24
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Sep 2022 19:46:57 +0000 (UTC)
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+	by lists.linaro.org (Postfix) with ESMTPS id 843463F4F4
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Sep 2022 19:46:51 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id b17so3667259wrq.3
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 06 Sep 2022 12:46:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ffwll.ch; s=google;
+        h=in-reply-to:content-disposition:mime-version:references
+         :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+         :subject:date;
+        bh=bqv4iAd1mha/jCj0gsDylHCagZEixO6XwXeJh7bhmjc=;
+        b=NOyba92itqhhR/PpT3mpwNTiRuKPnJapzGo69+6nqHs39ugWnmJIcQdoc8PxAppiEe
+         Nhqo0BS1I2PQjWxAv660Zg3oA2AeRIsQXadSeWz8/QN+hKxVKwerxPyju8jl7Tf1WzGl
+         cAlMn1PiLddYyVHh0KGDxNdvkyeMTC7j4JKXE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references
+         :mail-followup-to:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date;
+        bh=bqv4iAd1mha/jCj0gsDylHCagZEixO6XwXeJh7bhmjc=;
+        b=gZf+o8/6+I8QdoC1tM/2lyrAFQFxcrhy5E16Huim9sX4AZQf3GCh3bKqoUfeEK3DFx
+         ieJYS9RmOTfiNBAAQWgBIZBC+saArrc71THg/KR6AuhAQG/JnsG1EBpbzhiHhQi4+8gF
+         uxdNd/zWlunmCcATfSlVNA89oQPlqN6KNBjXRssAwBPUr6nrWumvFvIxXzEp5Nndqxuq
+         mR1cz4eMwJ7udhMjsakA4wd3ymNJokU+NgBf6VVB2RoqMg8vxD2TPr5UJ6Ilx4wxereX
+         +Hd6quGqtZl5NfyTpdw20KtoYiB9gbS4/Jsvs3Gi5anJEOhKIU9ngY6WzUn3+fI/Sluj
+         Gw8g==
+X-Gm-Message-State: ACgBeo173Q9KZUDWDJrMw5aNSsbImr/vCxmFQSXOUCer4MoqdwYfuGtZ
+	LalF3jkY6yq1PHC9Ei8i064PUQ==
+X-Google-Smtp-Source: AA6agR6T7vwwOwFPSx9Y+6VkmPyGEeXPD3TVawQvk4BRuNrP/PJ8qNADqn/aJdfgkNiIYFdT3OynxQ==
+X-Received: by 2002:a5d:5a06:0:b0:226:d25e:b4ee with SMTP id bq6-20020a5d5a06000000b00226d25eb4eemr47055wrb.280.1662493610556;
+        Tue, 06 Sep 2022 12:46:50 -0700 (PDT)
+Received: from phenom.ffwll.local (212-51-149-33.fiber7.init7.net. [212.51.149.33])
+        by smtp.gmail.com with ESMTPSA id z15-20020a5d654f000000b002211fc70174sm16324064wrv.99.2022.09.06.12.46.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 06 Sep 2022 12:46:50 -0700 (PDT)
+Date: Tue, 6 Sep 2022 21:46:48 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Rob Clark <robdclark@gmail.com>
+Message-ID: <YxejqOuHTjoO/iXg@phenom.ffwll.local>
+Mail-Followup-To: Rob Clark <robdclark@gmail.com>,
+	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+	Rob Clark <robdclark@chromium.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	=?iso-8859-1?B?Suly9G1l?= Pouiller <jerome.pouiller@silabs.com>,
+	"open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>,
+	"moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>,
+	open list <linux-kernel@vger.kernel.org>
+References: <20220801170459.1593706-1-robdclark@gmail.com>
+ <20220801170459.1593706-2-robdclark@gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 348a38bd-beb7-47ba-dbb4-08da903086dc
-X-MS-TrafficTypeDiagnostic: BY5PR12MB4081:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	7Smbmm05fINUdZzYr01IVIwaAaoSwbXsMEITm5uV8LS2KgEeyMrrBup7DGM5Q2sBVxnLbr8uhqKBs5ZNq75P77kgJp2TPHt6DwBQ4PgdEvPzY2Jz3h1YUZ6wdi9jJ7vaECgm63p6LGTB6++Sh/0ia9UNvpwuZXPxiBTtjYKvGxNu4YMzAU33LJ/NF9th3bxCRaD0d+VRkN5spMyO7EbS4TJrYR+YR4bzIBAn3sadUzsvmIYBCoONvB5hX2o3dVaYKipu3UiDBYV0NxUlyE/FSUP1KejUsPErQwQU381xPpYfwjACkT2uOGTU+CerssFFzfBnGVp3/uS2V7WjiPsuvg+7/CetQoAT1sINTkwxh2kB1pIYTvJBNrMtxKzthCkBrIEW/+B5Gl2DtPtUDexGq5KRvzRcYP7RoCK44XYnCf0WWJeE8zu0qm8UqN896qdssQMKVNnJtLKcoEYhphZVivyH3kc1w1o3P3nd1hTXLk1NDqb3RP0WjCBoBLR1mGlqTgJkP1pmcpAx9Tab5sZK+FMC20XzzdU8t7axxy3JxolMC45SI0e5WeKCpxPXLtG06BV3XV1zefBkXtB0cAA8qzPFR6z+6eZyIusla+HLQ6R655cvAWMe7X4nxQQDSGnO1WfaUk7AM4TDtaNbOlqSywK9Et1tJRqAHtcJU/LXOglMDldrPAEJmVM779ZPAszo3204RFogaudQKnGufoKbQP/AXfjF9z5PcoXmAjgEIDfbH8zTIbC18FgmvZDDHrurFfXJhYlXBwXyKKJlFvx8G7W5fsD3h3IJw0ufufs3XP8=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR12MB3589.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(136003)(366004)(376002)(396003)(39860400002)(346002)(83380400001)(6512007)(6506007)(66574015)(2906002)(31696002)(86362001)(186003)(2616005)(38100700002)(66556008)(5660300002)(66476007)(8676002)(66946007)(4326008)(31686004)(6486002)(36756003)(41300700001)(316002)(478600001)(6916009)(54906003)(8936002)(7416002)(6666004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?Y2RTTEpsVmNhSmdLK2RMVlRqcDlUVGF2THFxaEp2dnY5TUYyZFFJY2E5T1p4?=
- =?utf-8?B?UWNYUnRYZXdiRnVHR2RNSGJCT0hFeVBZcTZHd3h6cHp5RnFiNUlxUlJJWFV1?=
- =?utf-8?B?ZWNmNnJodGVUdzhwMTNkUFNvMml5WjhXbEZCQ0h1YVVmeHpjZXdwbFdSbDUy?=
- =?utf-8?B?cHBlc083WVVlQW1yaDFNREx5cGRLZDBsdFRxSUl0aXlvWUc4eHNraFVlVlhh?=
- =?utf-8?B?NnRpM3U1WnZzeit6cUt5V2h6U3J2cVVnRkIvK29jS0d2bTNCbTVhU29Hb3V4?=
- =?utf-8?B?WkFHVlhaSE1JS0dJRGthSVVvUzdQVTdRU2RMWURGd1htV3RwUzNTcWsrNU5X?=
- =?utf-8?B?SlNzc1U1WlVoMkdyQklyVDhWVVlwNklZMDNWQW5PdTVlNjFKVXBheG9KTUJ4?=
- =?utf-8?B?OXQ4T3NBVTdSNWpvbXYxVnhqYjUwYlFmWG8zbUEveXBUeUxjdFRodGIvNDBQ?=
- =?utf-8?B?bmx3bStpR1JFSkNHY1M2K3FoL2xEdUp1eFhhaHJiWVpPRW4yZm92ci9jemgw?=
- =?utf-8?B?TFJZT0NJVnNSTGQvZHlwSFRwZ1d1aFR5UGR3NDFQZTJ0MzJIRXNVZjY2bXk1?=
- =?utf-8?B?L3FPMDd3RklKaFEwT01xenlWRUFKMFQvOVQ5bmVVZWxQN2xSSWhuYWhrdVFm?=
- =?utf-8?B?cWx0UzlGY1I0K2YwTHdsZnRJRGtXSzkvREJUcnhFanhxb2k0RHJSamhWRVpC?=
- =?utf-8?B?T2Iwbk04andaQ1IvQUFJd0Y0UWNIbDRSYVUzRDZMM1BEZ3Jtc1k2QUFSTDc0?=
- =?utf-8?B?LzRUdEVSK2F2SWNEV0pHVC83VmFKTDZsMWk1dkxpaGg5QmdoOFZxNlB4dm9r?=
- =?utf-8?B?Qll2VVd5ZXNSdzdFU2llVzRJTmFLVmhkWVdqMms2QnFiVDVsNUsyUk5zSHBZ?=
- =?utf-8?B?ZTN5aUNTd0QyNEFzaGpUd0NBeUxwYXJ4TGxxY2NuYnk5QzZiRUNpbTRlSm04?=
- =?utf-8?B?VXp5OVA3SnNoVFlkU2lsZ1VLaDkxaEQrUUJFelFFMXFydGNQK29ialorM3JY?=
- =?utf-8?B?SUM0M3Q4RWhpUGpMcWdZSWNoRXVDSDhGY0tSSDdDb1ZITkhpZVVvWmZaT1Fv?=
- =?utf-8?B?S3lleFZhNE5uOFNSMHVKZkRiV3Zoei9xZkJRQkpGV0c1VXVDMDFkS1A3SVp5?=
- =?utf-8?B?ek9sa3g2cnNMb1dEdEJ2NUlJcG4wWk50ZUdIbkFiZGFEYWJSVWhPRXI2QWRL?=
- =?utf-8?B?ejRaQTF3Z2h3dU9pNVJGRElPaG9lNmVpai9sUks2bndjMDgySURnS1kxdkhj?=
- =?utf-8?B?b3h2cUYvTUZPbnZHbFJkaVh6dGJGOEdOK0N0S0c3MmFOY2l3V3c0Y0IzZnJs?=
- =?utf-8?B?ck9pbERwVThTM3NqL0lOb1M5VjhSMkYyVkQ5UnBwNk9QS0NiKzVGTE4wcEMw?=
- =?utf-8?B?bHdLc3BaWkRwZUc5Uk8rcUNuaDBPdlQ1YTZVdlZVZjBFY1JkMVpWR0ttUlJj?=
- =?utf-8?B?MlFDUTlqdDVCbVI0MlJ0d0ZEYXZ0cGhGNy94U3hjd2tRSitiQjVZc2t3bnBr?=
- =?utf-8?B?dEF2cVFVUXVlMjNHanlsejNrUFQ5UytJVkEvY2Zsa2dZMU51VTlGM0pkTy95?=
- =?utf-8?B?aHllKzhsaXk1OGdFZUJFNTNLckZKNm9DZkxyYSttRFN6eVRhb0dVemp1cEQy?=
- =?utf-8?B?ZG9ib3R3TFJ2dTUzRFVaQllNcmxLZ3h4MXF3UlVLQUpubjdxNnNEUVVCY2Vo?=
- =?utf-8?B?VFlnazYzSG53N0M0Z2M5RUttY3B5dXdCSzAvSWFMM3NLL1R4TXhDdlIxNVQx?=
- =?utf-8?B?QWJZc1M5VStJbVVxcEFJZVUzQnpTbjVDZVk1OC9PWkxSU1Z1Q3JYVENuMUUy?=
- =?utf-8?B?MmpveFFVZksyUFo2T05GY3B1eGxJTnVldFUvMUh1bVhuQTFFOTZuQ2dtUm1Q?=
- =?utf-8?B?SnUxcWNFM1NncXFzL2NGTzdjQTh1c21hK0R0VTRJZ3d3THhqamVseDhSM0pH?=
- =?utf-8?B?N2t0MWhmNkdWVDl3NCtKdlR0UWhDM2dQVTRYTkQ4RWhzVXJrM2NSRFNQV3pq?=
- =?utf-8?B?YURkQW12UVFRdzZuL2kwc09JQkwxa0Q2M1hSQ0V0cVZYWHVxYk9WNlhMbDJ2?=
- =?utf-8?B?aHV6SHFHZldnTGRSR0pDMGM3c25RQklyVUNyNk82NzN6YkE4T0xZeTI0T0cy?=
- =?utf-8?B?WFNTMDBkT3IvaUhwREg1V0dhcmQzOTNaNDRyOEdRcng3ZDZXVWlxSTVzNHNq?=
- =?utf-8?Q?qwmAcdRZEiihD6HfN6xLFPPUDlTF485JDQvbiB074682?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 348a38bd-beb7-47ba-dbb4-08da903086dc
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB3589.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Sep 2022 17:52:12.3516
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kWjaQMdeiXC7jj2FhGgAHfraWi5CxZBBrfRRx3C8RmEHwObONlkI/4gk+hzxAXz/
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4081
-Message-ID-Hash: FNFZUCPRQ7EUNOBQUVJU6VE2XHFLVW2Z
-X-Message-ID-Hash: FNFZUCPRQ7EUNOBQUVJU6VE2XHFLVW2Z
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Alex Williamson <alex.williamson@redhat.com>, Cornelia Huck <cohuck@redhat.com>, dri-devel@lists.freedesktop.org, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, Leon Romanovsky <leon@kernel.org>, linux-rdma@vger.kernel.org, Maor Gottlieb <maorg@nvidia.com>, Oded Gabbay <ogabbay@kernel.org>
+Content-Disposition: inline
+In-Reply-To: <20220801170459.1593706-2-robdclark@gmail.com>
+X-Operating-System: Linux phenom 5.18.0-4-amd64 
+Message-ID-Hash: ZRZ6YQGHSV47Y5W5ZLLFIYAXL72QRAJC
+X-Message-ID-Hash: ZRZ6YQGHSV47Y5W5ZLLFIYAXL72QRAJC
+X-MailFrom: daniel@ffwll.ch
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, Rob Clark <robdclark@chromium.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, =?iso-8859-1?B?Suly9G1l?= Pouiller <jerome.pouiller@silabs.com>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 1/4] dma-buf: Add dma_buf_try_get()
+Subject: [Linaro-mm-sig] Re: [PATCH v2 1/3] dma-buf: Add ioctl to query mmap info
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FNFZUCPRQ7EUNOBQUVJU6VE2XHFLVW2Z/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZRZ6YQGHSV47Y5W5ZLLFIYAXL72QRAJC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-QW0gMDYuMDkuMjIgdW0gMTg6NDQgc2NocmllYiBKYXNvbiBHdW50aG9ycGU6DQo+IE9uIFRodSwg
-U2VwIDAxLCAyMDIyIGF0IDA5OjU1OjA4QU0gKzAyMDAsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6
-DQo+PiBBbSAwMS4wOS4yMiB1bSAwMToxMiBzY2hyaWViIEphc29uIEd1bnRob3JwZToNCj4+PiBV
-c2VkIHRvIGluY3JlbWVudCB0aGUgcmVmY291bnQgb2YgdGhlIGRtYSBidWYncyBzdHJ1Y3QgZmls
-ZSwgb25seSBpZiB0aGUNCj4+PiByZWZjb3VudCBpcyBub3QgemVyby4gVXNlZnVsIHRvIGFsbG93
-IHRoZSBzdHJ1Y3QgZmlsZSdzIGxpZmV0aW1lIHRvDQo+Pj4gY29udHJvbCB0aGUgbGlmZXRpbWUg
-b2YgdGhlIGRtYWJ1ZiB3aGlsZSBzdGlsbCBsZXR0aW5nIHRoZSBkcml2ZXIgdG8ga2VlcA0KPj4+
-IHRyYWNrIG9mIGNyZWF0ZWQgZG1hYnVmcy4NCj4+Pg0KPj4+IFNpZ25lZC1vZmYtYnk6IEphc29u
-IEd1bnRob3JwZSA8amdnQG52aWRpYS5jb20+DQo+Pj4gLS0tDQo+Pj4gICAgaW5jbHVkZS9saW51
-eC9kbWEtYnVmLmggfCAxMyArKysrKysrKysrKysrDQo+Pj4gICAgMSBmaWxlIGNoYW5nZWQsIDEz
-IGluc2VydGlvbnMoKykNCj4+Pg0KPj4+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L2RtYS1i
-dWYuaCBiL2luY2x1ZGUvbGludXgvZG1hLWJ1Zi5oDQo+Pj4gaW5kZXggNzE3MzE3OTZjOGMzYTgu
-LmEzNWYxNTU0ZjJmYjM2IDEwMDY0NA0KPj4+IC0tLSBhL2luY2x1ZGUvbGludXgvZG1hLWJ1Zi5o
-DQo+Pj4gKysrIGIvaW5jbHVkZS9saW51eC9kbWEtYnVmLmgNCj4+PiBAQCAtNjE4LDYgKzYxOCwx
-OSBAQCBpbnQgZG1hX2J1Zl9mZChzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmLCBpbnQgZmxhZ3MpOw0K
-Pj4+ICAgIHN0cnVjdCBkbWFfYnVmICpkbWFfYnVmX2dldChpbnQgZmQpOw0KPj4+ICAgIHZvaWQg
-ZG1hX2J1Zl9wdXQoc3RydWN0IGRtYV9idWYgKmRtYWJ1Zik7DQo+Pj4gKy8qKg0KPj4+ICsgKiBk
-bWFfYnVmX3RyeV9nZXQgLSB0cnkgdG8gZ2V0IGEgcmVmZXJlbmNlIG9uIGEgZG1hYnVmDQo+Pj4g
-KyAqIEBkbWFidWYgLSB0aGUgZG1hYnVmIHRvIGdldA0KPj4+ICsgKg0KPj4+ICsgKiBSZXR1cm5z
-IHRydWUgaWYgYSByZWZlcmVuY2Ugd2FzIHN1Y2Nlc3NmdWxseSBvYnRhaW5lZC4gVGhlIGNhbGxl
-ciBtdXN0DQo+Pj4gKyAqIGludGVybG9jayB3aXRoIHRoZSBkbWFidWYncyByZWxlYXNlIGZ1bmN0
-aW9uIGluIHNvbWUgd2F5LCBzdWNoIGFzIFJDVSwgdG8NCj4+PiArICogZW5zdXJlIHRoYXQgdGhp
-cyBpcyBub3QgY2FsbGVkIG9uIGZyZWVkIG1lbW9yeS4NCj4+IEkgc3RpbGwgaGF2ZSBhIGJhZCBm
-ZWVsaW5nIGFib3V0IHRoaXMsIGJ1dCBJIGFsc28gc2VlIHRoYXQgd2UgY2FuIG9ubHkNCj4+IGNo
-b29zZSBiZXR3ZWVuIGV2aWxzIGhlcmUuDQo+Pg0KPj4gQ291bGQgeW91IGp1c3QgY2FsbCBnZXRf
-ZmlsZV9yY3UoKSBmcm9tIHRoZSBleHBvcnRlciB3aXRoIGEgY29tbWVudA0KPj4gZXhwbGFpbmlu
-ZyB3aHkgdGhpcyB3b3JrcyBpbnN0ZWFkPw0KPiBJIGd1ZXNzLCBhcmUgeW91IHN1cmU/IEl0IHNl
-ZW1zIHZlcnkgaGFja3kuDQoNClllcywgaXQncyBzdGlsbCBiZXR0ZXIgdGhhbiBleHBvc2luZyBh
-IGRtYV9idWZfdHJ5X2dldCgpIGludGVyZmFjZSB0byANCmV2ZXJ5b25lLg0KDQpLZWVwIGluIG1p
-bmQgdGhhdCB0aG9zZSBmdW5jdGlvbnMgaGVyZSBhcmUgbW9zdGx5IHN1cHBvc2VkIHRvIGJlIHVz
-ZWQgYnkgDQp0aGUgaW1wb3J0ZXIgYW5kIG5vdCB0aGUgZXhwb3J0ZXIuDQoNCkNocmlzdGlhbi4N
-Cg0KPg0KPiBKYXNvbg0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3Rz
-LmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2ln
-LWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Mon, Aug 01, 2022 at 10:04:55AM -0700, Rob Clark wrote:
+> From: Rob Clark <robdclark@chromium.org>
+> 
+> This is a fairly narrowly focused interface, providing a way for a VMM
+> in userspace to tell the guest kernel what pgprot settings to use when
+> mapping a buffer to guest userspace.
+> 
+> For buffers that get mapped into guest userspace, virglrenderer returns
+> a dma-buf fd to the VMM (crosvm or qemu).  In addition to mapping the
+> pages into the guest VM, it needs to report to drm/virtio in the guest
+> the cache settings to use for guest userspace.  In particular, on some
+> architectures, creating aliased mappings with different cache attributes
+> is frowned upon, so it is important that the guest mappings have the
+> same cache attributes as any potential host mappings.
+> 
+> Signed-off-by: Rob Clark <robdclark@chromium.org>
+> ---
+> v2. fix compiler warning
+
+I think I bikeshedded this on irc already, here for the record too.
+
+- this wont work for buffers which do change the mapping when they move
+  (ttm can do that). And cros does make noises about discrete gpus I've
+  heard, this matters even for you :-)
+- I'm pretty sure this will put is even more onto the nasty people list
+  that dma-api folks maintain, especially with passing this all to
+  userspace
+- follow_pte() can figure this out internally in the kernel and kvm is
+  already using this, and I think doing this all internally with mmu
+  notifier and what not to make sure it all stays in sync is the right
+  approach. So your kvm/whatever combo should be able to figure out wth
+  it's supposed to be doing.
+
+I think if you make this a virtio special case like we've done with the
+magic uuid stuff, then that would make sense. Making it a full dma-buf
+interface doesn't imo.
+
+Cheers, Daniel
+
+> 
+>  drivers/dma-buf/dma-buf.c    | 26 ++++++++++++++++++++++++++
+>  include/linux/dma-buf.h      |  7 +++++++
+>  include/uapi/linux/dma-buf.h | 28 ++++++++++++++++++++++++++++
+>  3 files changed, 61 insertions(+)
+> 
+> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+> index 32f55640890c..87c52f080274 100644
+> --- a/drivers/dma-buf/dma-buf.c
+> +++ b/drivers/dma-buf/dma-buf.c
+> @@ -326,6 +326,29 @@ static long dma_buf_set_name(struct dma_buf *dmabuf, const char __user *buf)
+>  	return 0;
+>  }
+>  
+> +static long dma_buf_info(struct dma_buf *dmabuf, void __user *uarg)
+> +{
+> +	struct dma_buf_info arg;
+> +
+> +	if (copy_from_user(&arg, uarg, sizeof(arg)))
+> +		return -EFAULT;
+> +
+> +	switch (arg.param) {
+> +	case DMA_BUF_INFO_VM_PROT:
+> +		if (!dmabuf->ops->mmap_info)
+> +			return -ENOSYS;
+> +		arg.value = dmabuf->ops->mmap_info(dmabuf);
+> +		break;
+> +	default:
+> +		return -EINVAL;
+> +	}
+> +
+> +	if (copy_to_user(uarg, &arg, sizeof(arg)))
+> +		return -EFAULT;
+> +
+> +	return 0;
+> +}
+> +
+>  static long dma_buf_ioctl(struct file *file,
+>  			  unsigned int cmd, unsigned long arg)
+>  {
+> @@ -369,6 +392,9 @@ static long dma_buf_ioctl(struct file *file,
+>  	case DMA_BUF_SET_NAME_B:
+>  		return dma_buf_set_name(dmabuf, (const char __user *)arg);
+>  
+> +	case DMA_BUF_IOCTL_INFO:
+> +		return dma_buf_info(dmabuf, (void __user *)arg);
+> +
+>  	default:
+>  		return -ENOTTY;
+>  	}
+> diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
+> index 71731796c8c3..6f4de64a5937 100644
+> --- a/include/linux/dma-buf.h
+> +++ b/include/linux/dma-buf.h
+> @@ -283,6 +283,13 @@ struct dma_buf_ops {
+>  	 */
+>  	int (*mmap)(struct dma_buf *, struct vm_area_struct *vma);
+>  
+> +	/**
+> +	 * @mmap_info:
+> +	 *
+> +	 * Return mmapping info for the buffer.  See DMA_BUF_INFO_VM_PROT.
+> +	 */
+> +	int (*mmap_info)(struct dma_buf *);
+> +
+>  	int (*vmap)(struct dma_buf *dmabuf, struct iosys_map *map);
+>  	void (*vunmap)(struct dma_buf *dmabuf, struct iosys_map *map);
+>  };
+> diff --git a/include/uapi/linux/dma-buf.h b/include/uapi/linux/dma-buf.h
+> index b1523cb8ab30..a41adac0f46a 100644
+> --- a/include/uapi/linux/dma-buf.h
+> +++ b/include/uapi/linux/dma-buf.h
+> @@ -85,6 +85,32 @@ struct dma_buf_sync {
+>  
+>  #define DMA_BUF_NAME_LEN	32
+>  
+> +
+> +/**
+> + * struct dma_buf_info - Query info about the buffer.
+> + */
+> +struct dma_buf_info {
+> +
+> +#define DMA_BUF_INFO_VM_PROT      1
+> +#  define DMA_BUF_VM_PROT_WC      0
+> +#  define DMA_BUF_VM_PROT_CACHED  1
+> +
+> +	/**
+> +	 * @param: Which param to query
+> +	 *
+> +	 * DMA_BUF_INFO_BM_PROT:
+> +	 *     Query the access permissions of userspace mmap's of this buffer.
+> +	 *     Returns one of DMA_BUF_VM_PROT_x
+> +	 */
+> +	__u32 param;
+> +	__u32 pad;
+> +
+> +	/**
+> +	 * @value: Return value of the query.
+> +	 */
+> +	__u64 value;
+> +};
+> +
+>  #define DMA_BUF_BASE		'b'
+>  #define DMA_BUF_IOCTL_SYNC	_IOW(DMA_BUF_BASE, 0, struct dma_buf_sync)
+>  
+> @@ -95,4 +121,6 @@ struct dma_buf_sync {
+>  #define DMA_BUF_SET_NAME_A	_IOW(DMA_BUF_BASE, 1, __u32)
+>  #define DMA_BUF_SET_NAME_B	_IOW(DMA_BUF_BASE, 1, __u64)
+>  
+> +#define DMA_BUF_IOCTL_INFO	_IOWR(DMA_BUF_BASE, 2, struct dma_buf_info)
+> +
+>  #endif
+> -- 
+> 2.36.1
+> 
+> _______________________________________________
+> Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+> To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
