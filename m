@@ -2,65 +2,121 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87397604371
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 13:40:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1DA98604379
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 13:40:42 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 983383F612
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 11:40:12 +0000 (UTC)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
-	by lists.linaro.org (Postfix) with ESMTPS id 4461A3F8EB
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  8 Sep 2022 10:28:59 +0000 (UTC)
-Received: by mail-lf1-f51.google.com with SMTP id k10so12359467lfm.4
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 08 Sep 2022 03:28:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date;
-        bh=o8Z4CAve5fqqekItJ5TFGp6h+pybclKENCYKBTuFmhk=;
-        b=IwcoQSz3UBrwnTW+HJsc6p8YeZ3gsbEhZ9gow3OEDbwrZWKiJ4I0GZtV40U0N60tH4
-         g6iWHb8C/2uMf1AUqLqniwMkuSC0UXtsyjPPUO/238y/DnuRIcMCTrvrKfwhjwFST81q
-         WCI0Bzvb+68TiJRBY2P3TXTqKehNdv1cuRQVc31f7d3fT9OSHBmtRpeVNXKXm0itJAZu
-         wzG2WwVEBIaPuN21x1nTMFmLsMU2yRjFNpKQrXZpj8F0G1aR0kF8N0JlrwbLQIchOG2S
-         S0sKweHdVu2Py7n87UpmgLnbDYmywB/aBdtRTJ5Q/i0bugqSaUHWPVsvVuCK04qp4WPD
-         t3Lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date;
-        bh=o8Z4CAve5fqqekItJ5TFGp6h+pybclKENCYKBTuFmhk=;
-        b=EZ/T06HmITUfMQxTymjdIgyQ6uOYin8VvjEPjZxInItsQ47lBLil9mZR28fLV6lzjU
-         ZhaKsUqrzHkuHYquQzAYYwVF4TxMFm3/xdrIu3ZE8DMTb7liqmrZ/v7F1BNVRTJSu6qj
-         UKgC+DrxiXRWh/ITFqcV3LmPmmjmca+l7OD/ElIixNQbTS/iKtm/Bo0jCoFvO1FHpfZ7
-         gH9kSizNPEoqKsZBp5dWlr3di0BlwjtoTrKVSLTAqWoN/fgydFoRWBO/+ual1GWviJDY
-         QFszn/lLV7KjKRQJl1z+L20L0cO6HdxGDTrXoEuIzSBxxhSDlEZ4tc4SMnClvdf8cHiB
-         wngA==
-X-Gm-Message-State: ACgBeo33TpUwWnBYTVSkWhEiZDQ2j4cbW4VgJvrn1VJk8e2E90xqhR9R
-	LabbVU69HZiKcGEFcFlNdrT/HUG/0DYtkOPjFVtRhK53
-X-Google-Smtp-Source: AA6agR5m51Ese4pRsiZ202uyHyguCnTFQK0dB89rjGUTjXVlu7AN+6Kz3Be2wVD4Zf8ywGIliea3qbme0TqsVaR8RrU=
-X-Received: by 2002:a05:6512:3da5:b0:497:6082:98fd with SMTP id
- k37-20020a0565123da500b00497608298fdmr2328152lfv.109.1662632938143; Thu, 08
- Sep 2022 03:28:58 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id 2CF6F40469
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 11:40:41 +0000 (UTC)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2089.outbound.protection.outlook.com [40.107.92.89])
+	by lists.linaro.org (Postfix) with ESMTPS id B20F33F4AC
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  9 Sep 2022 14:09:10 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=AwqV17AQmgaxRuXlIDsykTD4n+bY4nKXB0/q6yPoXuJ/G3gCW1viM+9LWaWDy0hBN+b9hEraZ/5ko5nbNEYx3Up7nGue4TXHYgS+qSOdANcbhQ5qrY+Kl/w/PwbYWp5FtXcipUlPBx0yQDoUK/ySe+9y10d8kBa7GnMZcNAixPmFdBBRzNVJS3gCz4GhMVzU/Dkukou8eftQaZb67z2mbYRpoOEBiGcJ2/CfHIyIBtedptJBSr1hjzc2Jt6XzEWgnM7vGTzFrcpQ8nDrYRlUihvBWKzBAex8wGQ5cWRKgmsWimZPOzqKLbPnrUkPwARpgRLQJNgyC8LE5cLmR1Fsrg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VDDx3Gzl0z/3q1o5OT+nLG/+juHQj0ulWrpoO/hsV0Y=;
+ b=UtRfvSP9qVrvI1E1Tuxrnzg35nz5DSpbAZ2GD1BlnCqKbGnRuA2aulULbpbsDtoR01frMGetGQ3lfM16KnmvR6pRVSsEHkImbLq2aPIwlfU7EJaGpM17JTjXtp/I6LuOMN2QXpOXeE+iFQOHC9iqd5eKsDNuRZqXE1niRTopWJtFofdQD1bxQ2RUZpqAwnkr2Rtn9dN68ZE2IlM5pHhFdmi9WkiU8J56skWK14dtB32EauiJ1DyaeI5ijRLiY23SRvGcty6JlxSx8teh0E0enY+AOn28VZA3Zp8okc4AhEppavBmw43e7frp6rT0KKcLc97VEPNsc98bOODSxNUN9Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VDDx3Gzl0z/3q1o5OT+nLG/+juHQj0ulWrpoO/hsV0Y=;
+ b=Zt0HNVYhpZG4nNgdZNbNUeKyqFgoiUUyrCPuXqflrhR3dZiPBtQw9HA1qW0v0PzHjjEOuZzvVAUbG4LhK1mx1ztc70bsF0YUbwM1zHCna+VceXKxjVReZT3Or+hqEgeBgwoUyrDzeBS1JiTz4XqIcJMobGZIWU/rLnejSvIPrueK/tOC4UBVRHkU0qoPkhUxxG8gH1Nk9+B2cCo+YQ93JC8nIb2DSZMVpJndMjiKSYIJbt+b7YuzgG+gPobZydzlOaGyLRI06RBySVa9PARGP3JXcnNhuvpQyplvBAF9Sj3rvQdBNsF7kHwYBfVxghBO1W+Q352aDlDmXk966kYpkA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from MN2PR12MB4192.namprd12.prod.outlook.com (2603:10b6:208:1d5::15)
+ by DM4PR12MB7551.namprd12.prod.outlook.com (2603:10b6:8:10d::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5612.19; Fri, 9 Sep
+ 2022 14:09:08 +0000
+Received: from MN2PR12MB4192.namprd12.prod.outlook.com
+ ([fe80::462:7fe:f04f:d0d5]) by MN2PR12MB4192.namprd12.prod.outlook.com
+ ([fe80::462:7fe:f04f:d0d5%7]) with mapi id 15.20.5612.019; Fri, 9 Sep 2022
+ 14:09:08 +0000
+Date: Fri, 9 Sep 2022 11:09:07 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Christoph Hellwig <hch@infradead.org>
+Message-ID: <YxtJA34l5pYhZaCQ@nvidia.com>
+References: <YxcYGzPv022G2vLm@infradead.org>
+ <b6b5d236-c089-7428-4cc9-a08fe4f6b4a3@amd.com>
+ <YxczjNIloP7TWcf2@nvidia.com>
+ <YxiJJYtWgh1l0wxg@infradead.org>
+ <YxiPh4u/92chN02C@nvidia.com>
+ <Yxiq5sjf/qA7xS8A@infradead.org>
+ <Yxi3cFfs0SA4XWJw@nvidia.com>
+ <Yxi5h09JAzIo4Kh8@infradead.org>
+ <YxjDBOIavc79ZByZ@nvidia.com>
+ <Yxs+k6psNfBLDqdv@infradead.org>
+Content-Disposition: inline
+In-Reply-To: <Yxs+k6psNfBLDqdv@infradead.org>
+X-ClientProxiedBy: MN2PR01CA0019.prod.exchangelabs.com (2603:10b6:208:10c::32)
+ To MN2PR12MB4192.namprd12.prod.outlook.com (2603:10b6:208:1d5::15)
 MIME-Version: 1.0
-References: <20220812143055.12938-1-olivier.masse@nxp.com> <CAFA6WYM89+SrW2Br-fnFke4djt4GgGHXn7JS3=rxvAa7dAAY7w@mail.gmail.com>
- <fb641c168a6b9fc041785a0baa8ee4b2d3ff8ed4.camel@nxp.com>
-In-Reply-To: <fb641c168a6b9fc041785a0baa8ee4b2d3ff8ed4.camel@nxp.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 8 Sep 2022 15:58:47 +0530
-Message-ID: <CAFA6WYM+G=MPonqPpfVXCgCAxuezUjFnm7gZ1x6ybHGrAtQp3g@mail.gmail.com>
-To: Olivier Masse <olivier.masse@nxp.com>
-X-MailFrom: sumit.garg@linaro.org
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MN2PR12MB4192:EE_|DM4PR12MB7551:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3e33b889-8257-4473-b5a2-08da926cdcd7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	lvGBu2QoSoqQMITYZEFsZzW9aAbXhGVaPQ9pVFAqNXJmuJai/GiT76EbK8VGtshmiIQzy+XDMJnZ4W5V2ZB5pmxMUOxK4PWe59sq7pYlBDjU+S8XW7IEtZXdWYiwFVKINi5ERs5f+aHyKzL3nbkDZYcjvkqxOZsw5fVqMohJB5qhnpTVKPSwvcvgajiJP9Q1rMOTt0JL3rzbLw2nwoom1rfgOmG9YRJyt2QP5gBy21LKZRbpzU6wqTj/oUi83c1Ob2eryulRqJC+sXmNGSgaymTVKFxqAsC64tV0+2+IEcaVhwBV00bMZSHGX70Jx1BRTNDkR4DOYpUJuIhmRiPxNb3tGJbKHMcQR7bpBfSVwjpkQCxB7jqe30HuraT2IEbeqcs0gOgoP2vrLNnso9RhscVZNfvT20zOaqz/YZBU+2sP9U5UkqdOMcY7tj5ih8zirlXST1E3pCzCRuKqTDJXbO5aMTL0qZcShuqIHzpvFdw6NXXfZvVEvp3olAN5BX2nuR8179FhyQwVSu7tt3n7xt7QOlT2xQInyw9OcHtWAZmllfRbwvCRniEyJ3BUyQ26OgFxwxSqyVdhWcIVYPhWNqQWehTXhEVfwM/6MkLgK1edFNA3MCmAppgzGuse4jNPDPGHnuSV402Ul/6BfQOivH61cz4kiTEgp2KFGyaar3r06u8K8vDXnACilvzupJpU3wYjH0qczwuLMF1PCfNMbA==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR12MB4192.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230016)(4636009)(346002)(376002)(366004)(39860400002)(396003)(136003)(6916009)(6486002)(316002)(54906003)(86362001)(2616005)(186003)(478600001)(7416002)(6506007)(38100700002)(26005)(6512007)(2906002)(66556008)(8936002)(5660300002)(41300700001)(8676002)(4326008)(66476007)(66946007)(36756003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?o2t8RfIp3LClSwtaZmn/53MaLtcfx53Y/bcuxTmaQ0Y4E4FzaQ6I8QwOoqli?=
+ =?us-ascii?Q?cRu33CLP3QzwXiy+Hrk+9OI71hCc8rNd+06j+vIvIrIa+o08V4PEZQMDUHcU?=
+ =?us-ascii?Q?DlUAo9vaOgWYLK1eyjvQ9VyyUNbJ4+eXdkfteJtHkfvqSPyiZmQwlsf1xAMa?=
+ =?us-ascii?Q?uxyHf0Yi6Z3L0c6kV8HX/Ov0KYTx54Mqbv6h/zJg/pbWyhS8RKiJb0SfbUvp?=
+ =?us-ascii?Q?Hwve1rQux53Et89z7M3ZGe79tSdTghaab5xdMnRJzSf7d4/mM8LZ1LIcjrjh?=
+ =?us-ascii?Q?hAjMGqjyEno3sfNBi6nevZQpwsDgbJuyLmotfbCyNjA4Jd3Mj6N9dmLbEXTB?=
+ =?us-ascii?Q?lmEfbjWcXDQQB1ynOapvxMOPsFQVsBScy/gXX2RrpnMURTCVrria/2kLGGxK?=
+ =?us-ascii?Q?Smkf8DJsY/fAx+MonNX7XdSzlGX0nu8RHLUEkG9EUu4oJCPKz1lQX6Af6mCs?=
+ =?us-ascii?Q?ZRH7hOHOfjFs439iMop3TPZwKjQUv2uJWphSMF/Cfa4qH66MIaWzCarJ+XBk?=
+ =?us-ascii?Q?aSlubpNNl3esIa6bMIhmLRItMXtvrBbVnPEdjOPpR0L7OwHswCu+MoWwx7/L?=
+ =?us-ascii?Q?jtX6rCjvsdW9Djj63qzuhlE38IcPlCOaxhGGB3uIbpLExnMvID8M2X2kZEHw?=
+ =?us-ascii?Q?Fq5PMw1NFvnfrUK8rMxAvVmxu3kSD/We/AZjRCbsgu2sMuW3+PVUyZCqu9so?=
+ =?us-ascii?Q?nP0jTwowqrfOnn09AWcsh7WkTSwQA/SZAeQjZthv0/e6tIosp/sHuGTLYzSB?=
+ =?us-ascii?Q?79YB7GDudmj7VN9rVBQwTh4NM5z4qTpjtFFUs/Q7D1h+IY8qiFYlXvcjR6PW?=
+ =?us-ascii?Q?SRKKtkQ37fUxjUKgFc+VPoaJHYDGMuwDFOQ/9gcXjT/DuGOZDDe39a0wv5TT?=
+ =?us-ascii?Q?d36btNADQ2SI6/Hif5yspm+Whv8omRT2WbFEq4cbLyyntllg4exea59LghD2?=
+ =?us-ascii?Q?wUkV6rgLT5kuwsVH9ZdFTo9uTX2Ph2TPZ5Ux1hKUzDjJZZ2I/vn4vt5SsxW9?=
+ =?us-ascii?Q?hVH7+WqGJskwsDQlRflUiGyWTJKHd6Ay5I2WR5LsbHs6UYQyLF3OwLNYcaDU?=
+ =?us-ascii?Q?ZgEjTsKBwY2qO/HMxbHfdey3G31WinJ1P6n1OGlgdsNydFLlQ8xFTs1nEk5B?=
+ =?us-ascii?Q?CW0/K04pGZjGEKOavUXNESxdSwoOldKGlT3KwuvYF7PAAghTk8/QSgop67nn?=
+ =?us-ascii?Q?o8hi6a1Gdu3nJCfgSXgv2Yl8ibSTQwmRRcYnqDqcT0PM5LuGWvA5UdXJ41yD?=
+ =?us-ascii?Q?F7CGDNGsCP0qi+vAliQFNGgzelOkGcEIFiSP6tmiQiGKOEIc0Q4xyHEm8NRP?=
+ =?us-ascii?Q?m65t3JMT98rbCnYpkmUoujq9+ppNtbUpHoMhatbpNSM29LJWngKvXJtS3AAQ?=
+ =?us-ascii?Q?8UdiYpnAVPrk4IZCOBBe3ZFhvEE2e7cpQv5GCDMFINb8mXNhEEO9w6LwHXoc?=
+ =?us-ascii?Q?HS7iWmODW9wCpcFl3QzOtt67VP/EGpkhE5QS/+M9tibV07rtN5i8Q4KJYOYB?=
+ =?us-ascii?Q?4nVGxLxAmJZt7u9Gezb3B9sduKnTSYSyy803H0qiuPsfRU6h2LTTblIOoQUJ?=
+ =?us-ascii?Q?fsiAcpl+yaS/RIzXfryoFgUTX1tWK68g6t2nIiuX?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3e33b889-8257-4473-b5a2-08da926cdcd7
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB4192.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2022 14:09:08.7000
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vwuAk4RxKxbKYgMkqNUcQLWVy1c1om0V2U4vi15nid1b/xX8usyodY15nvilTI7W
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7551
+X-MailFrom: jgg@nvidia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 6TYAEJFP5DUGRCXCVEIXBCLS6G2TGPI2
-X-Message-ID-Hash: 6TYAEJFP5DUGRCXCVEIXBCLS6G2TGPI2
-X-Mailman-Approved-At: Wed, 19 Oct 2022 11:38:14 +0000
-CC: "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "christian.koenig@amd.com" <christian.koenig@amd.com>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, =?UTF-8?Q?Cl=C3=A9ment_Faure?= <clement.faure@nxp.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "jens.wiklander@linaro.org" <jens.wiklander@linaro.org>, "op-tee@lists.trustedfirmware.org" <op-tee@lists.trustedfirmware.org>, "etienne.carriere@linaro.org" <etienne.carriere@linaro.org>
+Message-ID-Hash: 6PTKNIZSBLBSLUD66AAXBQGFNRU2UPIR
+X-Message-ID-Hash: 6PTKNIZSBLBSLUD66AAXBQGFNRU2UPIR
+X-Mailman-Approved-At: Wed, 19 Oct 2022 11:38:15 +0000
+CC: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Alex Williamson <alex.williamson@redhat.com>, Cornelia Huck <cohuck@redhat.com>, dri-devel@lists.freedesktop.org, kvm@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, Leon Romanovsky <leon@kernel.org>, linux-rdma@vger.kernel.org, Maor Gottlieb <maorg@nvidia.com>, Oded Gabbay <ogabbay@kernel.org>, Dan Williams <dan.j.williams@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [EXT] Re: [PATCH v2 0/1] tee: Add tee_shm_register_fd
+Subject: [Linaro-mm-sig] Re: [PATCH v2 4/4] vfio/pci: Allow MMIO regions to be exported through dma-buf
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6TYAEJFP5DUGRCXCVEIXBCLS6G2TGPI2/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6PTKNIZSBLBSLUD66AAXBQGFNRU2UPIR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -70,64 +126,63 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Thu, 8 Sept 2022 at 14:48, Olivier Masse <olivier.masse@nxp.com> wrote:
->
-> Hi Sumit
->
-> On ven., 2022-08-19 at 13:54 +0530, Sumit Garg wrote:
-> > Caution: EXT Email
-> >
-> > Hi Olivier,
-> >
-> > On Fri, 12 Aug 2022 at 20:01, Olivier Masse <olivier.masse@nxp.com>
-> > wrote:
-> > >
-> > > Add a new ioctl called TEE_IOC_SHM_REGISTER_FD to register a
-> > > shared memory from a dmabuf file descriptor.
-> > > This new ioctl will allow the Linux Kernel to register a buffer
-> > > to be used by the Secure Data Path OPTEE OS feature.
-> > >
-> > > Please find more information here:
-> > >
-> https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fstatic.linaro.org%2Fconnect%2Fsan19%2Fpresentations%2Fsan19-107.pdf&amp;data=05%7C01%7Colivier.masse%40nxp.com%7C05071ff1c28044ab740908da81bc44e2%7C686ea1d3bc2b4c6fa92cd99c5c301635%7C0%7C1%7C637964942860947359%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=nYLb2iMoJExdKEg4CL4eW5%2FQ%2Bqqj4Iw1TxFsd1UqWW0%3D&amp;reserved=0
-> > >
-> > > Patch tested on Hikey 6220.
-> > >
-> >
-> > AFAIU, for the OP-TEE SDP feature to work you need to have a DMA-BUF
-> > heap driver for allocating secure buffers through exposed chardev:
-> > "/dev/dma_heap/sdp". Have you tested it with some out-of-tree driver
-> > as I can't find it upstream? Also, do you plan to push that upstream
-> > as well?
->
-> It has been tested with linaro,secure-heap reserved dma heap memory
-> which is also in review for upstream.
+On Fri, Sep 09, 2022 at 06:24:35AM -0700, Christoph Hellwig wrote:
+> On Wed, Sep 07, 2022 at 01:12:52PM -0300, Jason Gunthorpe wrote:
+> > The PCI offset is some embedded thing - I've never seen it in a server
+> > platform.
+> 
+> That's not actually true, e.g. some power system definitively had it,
+> althiugh I don't know if the current ones do.
 
-Can you provide the corresponding reference? Also, do keep OP-TEE ML
-in CC if you send any new iteration for that patch.
+I thought those were all power embedded systems.
 
--Sumit
+> There is a reason why we have these proper APIs and no one has any
+> business bypassing them.
 
->
-> >
-> > BTW, please add a changelog while sending newer patch-set versions.
-> >
-> > -Sumit
-> >
-> > > Etienne Carriere (1):
-> > >   tee: new ioctl to a register tee_shm from a dmabuf file
-> > > descriptor
-> > >
-> > >  drivers/tee/tee_core.c   | 38 +++++++++++++++
-> > >  drivers/tee/tee_shm.c    | 99
-> > > +++++++++++++++++++++++++++++++++++++++-
-> > >  include/linux/tee_drv.h  | 11 +++++
-> > >  include/uapi/linux/tee.h | 29 ++++++++++++
-> > >  4 files changed, 175 insertions(+), 2 deletions(-)
-> > >
-> > > --
-> > > 2.25.0
-> > >
+Yes, we should try to support these things, but you said this patch
+didn't work and wasn't tested - that is not true at all.
+
+And it isn't like we have APIs just sitting here to solve this
+specific problem. So lets make something.
+
+> > So, would you be OK with this series if I try to make a dma_map_p2p()
+> > that resolves the offset issue?
+> 
+> Well, if it also solves the other issue of invalid scatterlists leaking
+> outside of drm we can think about it.
+
+The scatterlist stuff has already leaked outside of DRM anyhow.
+
+Again, I think it is very problematic to let DRM get away with things
+and then insist all the poor non-DRM people be responsible to clean up
+their mess.
+
+I'm skeptical I can fix AMD GPU, but I can try to create a DMABUF op
+that returns something that is not a scatterlist and teach RDMA to use
+it. So at least the VFIO/RDMA part can avoid the scatter list abuse. I
+expected to need non-scatterlist for iommufd anyhow.
+
+Coupled with a series to add some dma_map_resource_pci() that handles
+the PCI_P2PDMA_MAP_BUS_ADDR and the PCI offset, would it be an
+agreeable direction?
+
+> Take a look at iommu_dma_map_sg and pci_p2pdma_map_segment to see how
+> this is handled.
+
+So there is a bug in all these DMABUF implementations, they do ignore
+the PCI_P2PDMA_MAP_BUS_ADDR "distance type".
+
+This isn't a real-world problem for VFIO because VFIO is largely
+incompatible with the non-ACS configuration that would trigger
+PCI_P2PDMA_MAP_BUS_ADDR, and explains why we never saw any
+problem. All our systems have ACS turned on so we can use VFIO.
+
+I'm unclear how Habana or AMD have avoided a problem here..
+
+This is much more serious than the pci offset in my mind.
+
+Thanks,
+Jason
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
