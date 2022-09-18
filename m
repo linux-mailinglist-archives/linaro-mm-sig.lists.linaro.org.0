@@ -2,66 +2,69 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE3E36043CB
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 13:49:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A67386043CC
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 13:49:33 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C76163EE41
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 11:49:08 +0000 (UTC)
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
-	by lists.linaro.org (Postfix) with ESMTPS id D24583F59C
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 16 Sep 2022 06:31:57 +0000 (UTC)
-Received: by mail-pg1-f172.google.com with SMTP id r23so10881591pgr.6
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 15 Sep 2022 23:31:57 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id A94B33EE41
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 11:49:32 +0000 (UTC)
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com [209.85.210.178])
+	by lists.linaro.org (Postfix) with ESMTPS id 8DEB23ED1B
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 18 Sep 2022 22:07:48 +0000 (UTC)
+Received: by mail-pf1-f178.google.com with SMTP id w2so16061039pfb.0
+        for <linaro-mm-sig@lists.linaro.org>; Sun, 18 Sep 2022 15:07:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date;
-        bh=ZmowVWWRmWocJjPgWDw2ZalH/Av3o/R31s38SjsWoiI=;
-        b=K8iwJPV0dZif8U+5GjpaEh333xmUojgSqrpCXhk94yfRb5731bgocIRuX/EDCI9SvW
-         rR/zBCM/ZijUHjs3V+//iPjM1dU2wd5Enf/hTOLs32ho/K8A755MsW99g8tQCwhLzwqo
-         jt/N8/RlaQW7xAkQwVGWDehT2NpdJtcLTzMbMuVJFsdS7nAp/ikElttEU8BVJpfGbQpO
-         m+cjovW/oroujWx+2TCw2PaFVIIE02AOHAeB0tnCMvFzQA1vqE7PiPXvC23M/FR2XFKr
-         oQsRj9S45QPZ2bGm7vm2uS31u2elXivEH/itahepzQ7U0CXSVKKLGGPCdNeV2WUroSwW
-         VNZA==
+        bh=oAZa73Ms9QVpxhmjRkhl/oIipHOwLafi4P86QyHcFa0=;
+        b=JEqFXyJwbJqlQ1qM4Gt7ZjSBcNjtwpvDggFsPm5D4V0iTzm7x5O/OLEiX2y1gkvfi3
+         gBzFqyPlL801WgcyDu9JWXbrzmemvUutUINjW0Lf7zTpYvCCJkMPbAptr0sIPbyRiVhW
+         6wWxPRvSYQYYaIwdSvq/F4dgq26b9JUkye7k5mVBqwvUw1QtBcAZDDvH0lqRTHR/9pL9
+         8ZvIeVAhaTi645806bbFpTPkjcvkk/KfuUDVGcXn3jIz96y2db72BkM1m3UrHWUaxqzJ
+         Xq2vV+BtZfA+HIbcewUbkKwNz4mrhyYNdn/EvYUJVgO3lps7R5f4LZGWNTJIRfftXyd6
+         ORjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-message-state:from:to:cc:subject:date;
-        bh=ZmowVWWRmWocJjPgWDw2ZalH/Av3o/R31s38SjsWoiI=;
-        b=ee0x9aE7AyqKTHvdePeBYM0NjHNYeM7IEMMacf+RgfYX/2a3gKJy3kZxtVwTl4L5g3
-         aVBLuLYsYh8LdPe+VfYmbM8oqXbcfsBdMX8IMCzQtxC/AlMVTwoI2jtqR1oYcei6Y16K
-         SACXUSYTsr9E5lebRhzjRvxmUCVsfE6gfGIYo8SVWYTFlaaauaqMD06r73i8F9tFuXjq
-         dmYJ4MpptaxuvKo7UbeOLJVzP8zxj/QiJuznwtqlxXl7Ty3hSHwNng9/10ChFYgLKTlu
-         B0WF1SeWCOP3Uk+OLxi5I78pYU4ik6VwjKC2TKF/qPWs7EiZnrIQguAkY+KYEOfy2PNB
-         h4rQ==
-X-Gm-Message-State: ACrzQf0miVfo1b+ST4sqksJsnIfmHlOWdJTFn+sAku9cI3EQYKEkXB7b
-	mqPh6mb09hxeWBRlwvb0myI=
-X-Google-Smtp-Source: AMsMyM6uCFnr0zMkH2Fblyo61mCd4o4GMS/d2jGZqVplmezgaEe+fdsJwx1cUQVqtDOJQYy8wyq4+Q==
-X-Received: by 2002:a05:6a00:b8d:b0:545:e7de:78e5 with SMTP id g13-20020a056a000b8d00b00545e7de78e5mr3266569pfj.72.1663309916926;
-        Thu, 15 Sep 2022 23:31:56 -0700 (PDT)
-Received: from localhost.localdomain ([193.203.214.57])
-        by smtp.gmail.com with ESMTPSA id rm10-20020a17090b3eca00b001fbb6d73da5sm735561pjb.21.2022.09.15.23.31.55
+        bh=oAZa73Ms9QVpxhmjRkhl/oIipHOwLafi4P86QyHcFa0=;
+        b=EtwfZa7eHbqa6OwsJ29Qp5zyBc/woTLEEQ21y9ZJJWG8dfSDWW9VhB4rYY4OfPyufp
+         XAwwe3j985ecA3pLRNqZWthwEe2I4gCd8KZrZkEz4MmHwNpc6/xZd9j7XpNNqDmRdjwT
+         hr5xGHgN+Nd2z6L4USeTB/WdBxcWSomHzelD4yZqHAHXDAiYvCIWuOu9D9bNl1Y5n3p1
+         lksbWClRLgk6bmmOdVbtLau0I14/DONk7y156D0sf97KOzAIhCq5ZTvCbeZIvwegiqAt
+         bk6yQH432iwelpvFjJ086IiZvxNrQalxPtVnEzMLsqnIC9wMlNvpMNuA7NT6AI6DXCHf
+         59ZA==
+X-Gm-Message-State: ACrzQf2xXtuUWCnfgxje97VnvnqbxYE7SXgzgvd8o4hnBvI1QJ8x1lsJ
+	8hKzZI2N2LIkVncz5p09M+o=
+X-Google-Smtp-Source: AMsMyM5OITmrhfBXTIMTtYY7kFUoTNgOex+iRyyFQjgfDBr5qfnfxKk5sWU8UnYONKmIlJmDfiU69A==
+X-Received: by 2002:aa7:8759:0:b0:540:aad4:b13e with SMTP id g25-20020aa78759000000b00540aad4b13emr15687055pfo.13.1663538867560;
+        Sun, 18 Sep 2022 15:07:47 -0700 (PDT)
+Received: from localhost.localdomain (lily-optiplex-3070.dynamic.ucsd.edu. [2607:f720:1300:3033::1:4dd])
+        by smtp.googlemail.com with ESMTPSA id u10-20020a170902e80a00b00176b63535ccsm19061232plg.193.2022.09.18.15.07.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 15 Sep 2022 23:31:56 -0700 (PDT)
-From: cgel.zte@gmail.com
-X-Google-Original-From: chi.minghao@zte.com.cn
-To: sumit.semwal@linaro.org
-Date: Fri, 16 Sep 2022 06:31:52 +0000
-Message-Id: <20220916063152.155257-1-chi.minghao@zte.com.cn>
+        Sun, 18 Sep 2022 15:07:46 -0700 (PDT)
+From: Li Zhong <floridsleeves@gmail.com>
+To: linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	linaro-mm-sig@lists.linaro.org,
+	dri-devel@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org
+Date: Sun, 18 Sep 2022 15:07:31 -0700
+Message-Id: <20220918220731.1026200-1-floridsleeves@gmail.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-MailFrom: cgel.zte@gmail.com
+X-MailFrom: floridsleeves@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: HIW7LHPJK5XFSO3RPXP6HSXAWPXFFJZ6
-X-Message-ID-Hash: HIW7LHPJK5XFSO3RPXP6HSXAWPXFFJZ6
-X-Mailman-Approved-At: Wed, 19 Oct 2022 11:46:05 +0000
-CC: christian.koenig@amd.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Minghao Chi <chi.minghao@zte.com.cn>
+Message-ID-Hash: NGEMDGJZ3TIEFWVP7YFGB5PRTS6IVK3L
+X-Message-ID-Hash: NGEMDGJZ3TIEFWVP7YFGB5PRTS6IVK3L
+X-Mailman-Approved-At: Wed, 19 Oct 2022 11:46:21 +0000
+CC: airlied@redhat.com, ville.syrjala@linux.intel.com, christian.koenig@amd.com, sumit.semwal@linaro.org, daniel@ffwll.ch, airlied@linux.ie, tvrtko.ursulin@linux.intel.com, rodrigo.vivi@intel.com, joonas.lahtinen@linux.intel.com, jani.nikula@linux.intel.com, Li Zhong <floridsleeves@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] dma-buf: use strscpy() is more robust and safer
+Subject: [Linaro-mm-sig] [PATCH v1] drivers/gpu/drm/i915/gt: Check the return value of i915_active_acquire()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HIW7LHPJK5XFSO3RPXP6HSXAWPXFFJZ6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NGEMDGJZ3TIEFWVP7YFGB5PRTS6IVK3L/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -71,32 +74,33 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-From: Minghao Chi <chi.minghao@zte.com.cn>
+i915_active_acquire() could return error when the acquire fails. Check
+and return the error code.
 
-The implementation of strscpy() is more robust and safer.
-
-That's now the recommended way to copy NUL terminated strings.
-
-Signed-off-by: Minghao Chi <chi.minghao@zte.com.cn>
+Signed-off-by: Li Zhong <floridsleeves@gmail.com>
 ---
- drivers/dma-buf/dma-buf.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/i915/gt/intel_timeline.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-index dd0f83ee505b..51cdd4060539 100644
---- a/drivers/dma-buf/dma-buf.c
-+++ b/drivers/dma-buf/dma-buf.c
-@@ -50,7 +50,7 @@ static char *dmabuffs_dname(struct dentry *dentry, char *buffer, int buflen)
- 	dmabuf = dentry->d_fsdata;
- 	spin_lock(&dmabuf->name_lock);
- 	if (dmabuf->name)
--		ret = strlcpy(name, dmabuf->name, DMA_BUF_NAME_LEN);
-+		ret = strscpy(name, dmabuf->name, DMA_BUF_NAME_LEN);
- 	spin_unlock(&dmabuf->name_lock);
+diff --git a/drivers/gpu/drm/i915/gt/intel_timeline.c b/drivers/gpu/drm/i915/gt/intel_timeline.c
+index b9640212d659..d8333ab64574 100644
+--- a/drivers/gpu/drm/i915/gt/intel_timeline.c
++++ b/drivers/gpu/drm/i915/gt/intel_timeline.c
+@@ -211,7 +211,10 @@ int intel_timeline_pin(struct intel_timeline *tl, struct i915_gem_ww_ctx *ww)
+ 	GT_TRACE(tl->gt, "timeline:%llx using HWSP offset:%x\n",
+ 		 tl->fence_context, tl->hwsp_offset);
  
- 	return dynamic_dname(buffer, buflen, "/%s:%s",
+-	i915_active_acquire(&tl->active);
++	err = i915_active_acquire(&tl->active);
++	if (err)
++		return err;
++
+ 	if (atomic_fetch_inc(&tl->pin_count)) {
+ 		i915_active_release(&tl->active);
+ 		__i915_vma_unpin(tl->hwsp_ggtt);
 -- 
 2.25.1
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
