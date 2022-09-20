@@ -2,44 +2,122 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48BBF5BE2AB
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Sep 2022 12:07:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93F765BE558
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Sep 2022 14:12:22 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F12C948A5E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Sep 2022 10:07:16 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by lists.linaro.org (Postfix) with ESMTP id 47F353F5C2
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Sep 2022 10:07:10 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6FCC4169C;
-	Tue, 20 Sep 2022 03:07:16 -0700 (PDT)
-Received: from [10.57.18.118] (unknown [10.57.18.118])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 53F333F73B;
-	Tue, 20 Sep 2022 03:07:07 -0700 (PDT)
-Message-ID: <5ef51421-e6b0-edd5-6b6e-439b47b794a8@arm.com>
-Date: Tue, 20 Sep 2022 11:07:05 +0100
+	by lists.linaro.org (Postfix) with ESMTP id 69C1948A6F
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 20 Sep 2022 12:12:21 +0000 (UTC)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2071.outbound.protection.outlook.com [40.107.93.71])
+	by lists.linaro.org (Postfix) with ESMTPS id 9025548A08
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 20 Sep 2022 12:12:16 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=aUfHRGoGx0+jtHwPwbLWq0xG7aJR1z+2sCZdXUQUHuj7BbdNTlQDWb4NiIsiXOQmCbXQgoU0C42U/Gc7mdxF7BT3f8xzZBqHiDvWfxDfTmusAq03s5IPRUzlIB/649ADVsqUlLKkLgHdv6o5VkmpMXNRCLn0gO7G6OZjevbRqatOCrjiuiG9ZnVzBqBARCJPTOwNmJh5nS9kHHuGKaqw3XLmhVxG6+Gh9kuck8DlSn+Az9FBPtXMU+yzTrCdzNPS/oWwU/2PLwbQxpotWUsEIH3jdeuNnrErKr93bEIxDpEuxvlxYcJDUUrkj+SOmBx6yhtb327nH3gGNR9ldJpkAg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=k9+3OeAZej9Qg9483IsmEVA3K8pH4uo+IKIWExXkupI=;
+ b=H6wYPeZUvIxlyBAIBEuKi7N1LG8HJknVahqs1jEkzQkmBgRRGWJTDes6FroNql15ZwJmCTw8bjKNRfy4/2wRjdo62HvW6TX4X0NdwtuEr6ftWVnOZaA6VNjCRj1PCxICkZnBspgEHFRXPwChS5mJ2bW0Xzj4nDdHYZ2tP2IWd6qBLdtlqls5XVqM95aZybn1O5wsoArmGH3hOnQf9sZazqjEuZxe7h624upT1FbySYI/mAqf8Zn0rOSt25ntlqmOnRWbaKcRKiXk/+ivVmMvcsDfPRYfGn4zkWOUuSESJJHB02F9o2GU+uymBGXwcT07B/oseuGnLkjrpP9zM552KA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=k9+3OeAZej9Qg9483IsmEVA3K8pH4uo+IKIWExXkupI=;
+ b=xEqKjneYs2oUzecRvhE+/4OL0BeJV7ShbsIMTxjxH24iIVs+44DYjoVrbnhKU87DgV6QQjjTr5ROHHpBUm8KHNN9gC0tx5owB1uY1K8RYDvs8eL7v0ZrsN5oZAv0Pb6gej9I5InR45Z00gNskZqRkwVZdI5ofNiW8Njjl79OR+A=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by BL1PR12MB5287.namprd12.prod.outlook.com (2603:10b6:208:317::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5632.21; Tue, 20 Sep
+ 2022 12:12:14 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::653f:e59b:3f40:8fed]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::653f:e59b:3f40:8fed%6]) with mapi id 15.20.5632.021; Tue, 20 Sep 2022
+ 12:12:14 +0000
+Message-ID: <dafdf6a1-9390-3589-0177-ff7b361f3cb4@amd.com>
+Date: Tue, 20 Sep 2022 14:12:07 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+To: Sudip Mukherjee <sudipm.mukherjee@gmail.com>,
+ Alex Deucher <alexander.deucher@amd.com>
+References: <YymoZR0jHR7seGyU@debian>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <YymoZR0jHR7seGyU@debian>
+X-ClientProxiedBy: FR3P281CA0069.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:4b::16) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Content-Language: en-GB
-To: Sean Anderson <sean.anderson@seco.com>,
- Oleksij Rempel <linux@rempel-privat.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>, linux-i2c@vger.kernel.org,
- linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
- Vinod Koul <vkoul@kernel.org>, dmaengine@vger.kernel.org
-References: <38974aab-06d0-f5ff-d359-5eedd2f3bb3e@seco.com>
-From: Robin Murphy <robin.murphy@arm.com>
-In-Reply-To: <38974aab-06d0-f5ff-d359-5eedd2f3bb3e@seco.com>
-Message-ID-Hash: JQOVRS566ILYXUMS7XOMUKHLKDEICWKT
-X-Message-ID-Hash: JQOVRS566ILYXUMS7XOMUKHLKDEICWKT
-X-MailFrom: robin.murphy@arm.com
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|BL1PR12MB5287:EE_
+X-MS-Office365-Filtering-Correlation-Id: a70a1b98-1a86-406a-dd00-08da9b015a90
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	AeTwsYeTo4xaIBL1CXw+07Wop+rlz6dZYpGbTXgUxHvt9GWJRahqRwqiZFitR09imZeHM92Kb3V07gH4XhTvJR+mXbCJQ2vyYGALtKochpFhHeFQ1nvgBX6ZiCazXTQlROejSYT6nM+Uow/dAB4+lG44jxGiQ4vYD3S81CQvHsuwfEVlc2AV/eogXTfoy4q4wPRlIQav5bv7rw6bU7v0CM8V5/svfhqCnqb8ef4fWIrjf2XDQyf9grthGSnyz6B81R0v1d05C/6j5IfDnYJtRE36MNXaE+8NnsRnjKnURPJEk7TD5bNqPna2zFyv5C+5P4UBKcYjiWDRg+nXN344UAhKDS5rBOPnc/e4lx8Ui5K4egkHtqnkaK20iY1pheLcWYUXd3yTDeoSktjHaZwLnnYvgq7cXf8E46Z9wmrH9ettqeAZRCKcDP2ExGncaSzETCVIMs8W8A+qCbiVHI4w7THIIMVMA8T0vIrc0gp5fvKhmBQol2cfcqtfg217HGV9h4gXiZGPhS7+XLUXzZCW3gdIANjp8Mg3qyTxapWg++UvPwZ68j0TDf8nXWuUA4H9CMlEAuB0BQRsQxzM/v3Aq5TusdpODYZVQ7ZcAdkRw2AQvUKvLLDPzH3Pf234BZ+kfx4MlrVodRLb1MxVpqNZpXYO4Q3J3CuycO2CZUwvwp0w/OLInfCtErW3DdSe0lWpH3PaBowGpT7wPmSMBeAO4M1DQRP+tc9eNkPP577yhTCwT/COpf2UFJk/yHmwtfkhSO4ZMNwhFvKveK7IdZjubd/JoXpxPTUQnt75TEoaxCI=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(136003)(366004)(39860400002)(346002)(396003)(376002)(451199015)(5660300002)(8936002)(4744005)(83380400001)(38100700002)(31696002)(86362001)(54906003)(6636002)(6486002)(316002)(110136005)(186003)(6506007)(2616005)(2906002)(6512007)(26005)(7416002)(31686004)(66476007)(66556008)(66946007)(6666004)(478600001)(4326008)(8676002)(41300700001)(36756003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?TkN4d0F4V3FxRFdwRWRRRCtLM3RrN3FaUmhmcGYzWExzVmZnQjBud0c5VU1Z?=
+ =?utf-8?B?d2VhY2M5N09Kd2tMR1JGb2xpd2lDRzdRUWoreWhjVStobXREa1RXS1o5TG1z?=
+ =?utf-8?B?d01XV1ltTkhRSHdWcWVJa2lydCtsVGUrWVpnVDNFN2dRK09sLytOajJ5Wm9G?=
+ =?utf-8?B?MDhqdEJFbGhXTlVRT3Z2cFRPc0VKTkpSZlVvOTRkdytZVDNkOE0vcjZEMmZP?=
+ =?utf-8?B?Q3UxUmhkSWVSWlRaWWdxdGdYaENqM0Rtc0ZzQ1REUkVMUXg3TE5MTnBPcEc1?=
+ =?utf-8?B?OWZCS2FvWUZKV0t6TjdZTTJZN1hzNGZqcldxNlc0YUM5Ukt3RE1UdGhWdi9K?=
+ =?utf-8?B?MVNvSk5sanlLWFVIeURzQ2p0M3Z3eitvS1JKT3lIM0d4ZUowSE1NMGhmM0Nq?=
+ =?utf-8?B?cmZ5QUNHQWU5RG15WGlCTm9iUnQrVFByZEg0SGdaVklrNkF6TmpjSEZwRnJK?=
+ =?utf-8?B?WWc5SmhaOTY2T2NwY25rZVhBNmZqUGtJdW5qU25kREtSSHpSU2w1ZjFCN3pq?=
+ =?utf-8?B?TnFYYkp0SVZxTTgzeUFSZ2tjUnlEU2xQRjI3WXZkMU1OQXB4dTNNakcyUUhz?=
+ =?utf-8?B?NURQNUZqdkEvOUd0YjlKZy9yUXZXeEpJYmNUWjA4dVJpSmUrTjRDeStlWWd5?=
+ =?utf-8?B?Y0JLMEdBZGdaclY5Zk4zL1FNVjI5bm4vbmluc0IzT0V5T2Z5dllYOXI2ZUYy?=
+ =?utf-8?B?aEtmRGpsYi8xc3F3eENDcVdHT1krYWZRbnJQcEVtWEQ4OXgwQ01GMFBVMlJp?=
+ =?utf-8?B?V1ZwOS9SSFYxdXlaZUhoOUVnaEJZY0IvRmtoRjEvZWdkTEFTVlU4dFQrejVx?=
+ =?utf-8?B?K3FUTzJzeDJPMHJ6RVJFTTRrSzRZWmpRclJZZTRLRytQdElGeXBFZlZSZUxs?=
+ =?utf-8?B?Nk1FbHQzTUdBM2tIQTB0VWdzSFpkVG1jUFp0SHEySDg0NXI4MmJJYjY1Y1BV?=
+ =?utf-8?B?OVo3SVg1V0xFbGpCWVJYcG9VV0tXMVlGKzIrcXNBeVYycUVLR3RhdjZUUm5U?=
+ =?utf-8?B?dmVCaXR3NmxQLzZKZlhiMXp5SVpRK0Vma3dBY1RtY3NZdGRaMVdvWDVDbEJG?=
+ =?utf-8?B?OEZ3TjQyV2Y0MlZMWERwVy9KY2ZOaHFFLzVHMnJqNGpzYUhJektIWmpqTmNq?=
+ =?utf-8?B?aDVzdUZsL08xTDUvU1cxQ3JiNTJwZkFWdlkweWgzenFwSndrbFNtZVVUMlFl?=
+ =?utf-8?B?ejQyd3lHTWFpVGNZR0Q0YlBnVzdtYTV6YlY1bk5KLys4VWhNcEM4aWgvVFRD?=
+ =?utf-8?B?TUtVQkk1MGNmc1pFSy85emI0WE1GWXB6NTFKeTVuWk41OXFUejZ1Q0R2WUxL?=
+ =?utf-8?B?WmJGSlZDcUdLQnJZb01PaSt3ZE54aXZGTG1UU01DbDd3di9TandwRENNWFFk?=
+ =?utf-8?B?bWZiV2drNlZyOUVaOU1teGRZRi9TVlZIRHpoM2FLVjJRU3ptSytSSUk3N2Q5?=
+ =?utf-8?B?c01JK3B5NjVXcE9UOXdWRzVQbFl3NUdpNmcvQTk4aGZwK2ZYdG5Wc2VTbnVD?=
+ =?utf-8?B?UVhwVGxJTy9WQnNSQkQ2WHl4L3VWclEyelpFeE8yZU0wd3dkUUtiUVFyRXJD?=
+ =?utf-8?B?WHozL0tDMlk5ZjlyeTU0RDl4STR2S3FHRVZtL2ZxVlE4MWRZWlc5SGQ5QnhX?=
+ =?utf-8?B?STJJeC9nTHcyK0pEZVVHTG9odmgwcytIdGtUUmt2bjlEcTQ1SlJoZHB4RGpD?=
+ =?utf-8?B?aW8rNVY5SlNMNVFEM2E2OCs4bEtWejNtRFJiUlRGZTE2TEU4ZVVXdXR2eXM3?=
+ =?utf-8?B?am1Relp5UGFHQXhhYzlMUDNQMWdQSHA0TDIwTEl6MEUyQVBiR2JIZStJSFlN?=
+ =?utf-8?B?djVTMytMSFlURHR0eHpXYU56akxIQ2JTRDdkNkRxdXlnTzhRY3B0QVNzbHNB?=
+ =?utf-8?B?ZDhOVVNoVFQvZGZSY25aQ3F0eFc1NzNXUmsxTGZlWmdFM0NWSE1waklXU0F3?=
+ =?utf-8?B?UEhabTNXM2hUdFdwUHBNTDI4WmNDd1lQZjFZMmhNK1MrTGZ4WFh4aHlJMlVk?=
+ =?utf-8?B?RWFaUGxJZVdscktmQzFydFZWT2JCWXJHT2NDRWcxeUNOM0RRa29KdGxBMWpT?=
+ =?utf-8?B?c0ROWnNQakl3SmZRWGpYTGtTVXFJZnNDUkJZbmtWTHJzZmFPS1ZyZXNqZ293?=
+ =?utf-8?Q?eE+3tbsZhSJi9Txs1gpK3ghxq?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a70a1b98-1a86-406a-dd00-08da9b015a90
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Sep 2022 12:12:14.5718
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: x3RQDnEFdb3N4w0IPM6ax+vGAWcY9fCDXzRhx7UhJlSrwyHQDaDa4VAr2uJnCQbx
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5287
+Message-ID-Hash: ZFPP5JCN6ZLVYULDD6JED2JSFRZFLKMI
+X-Message-ID-Hash: ZFPP5JCN6ZLVYULDD6JED2JSFRZFLKMI
+X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Li Yang <leoyang.li@nxp.com>, Peng Ma <peng.ma@nxp.com>, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org, Robin Gong <yibin.gong@nxp.com>, Shawn Guo <shawnguo@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Joy Zou <joy.zou@nxp.com>, linux-media@vger.kernel.org
+CC: "Pan, Xinhui" <Xinhui.Pan@amd.com>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Philip Yang <Philip.Yang@amd.com>, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-next@vger.kernel.org, Nathan Chancellor <nathan@kernel.org>, llvm@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [BUG] ls1046a: eDMA does not transfer data from I2C
+Subject: [Linaro-mm-sig] Re: build failure of next-20220920 due to c2b08e7a6d27 ("drm/amdgpu: move entity selection and job init earlier during CS")
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JQOVRS566ILYXUMS7XOMUKHLKDEICWKT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZFPP5JCN6ZLVYULDD6JED2JSFRZFLKMI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -49,107 +127,35 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-On 2022-09-19 23:24, Sean Anderson wrote:
-> Hi all,
-> 
-> I discovered a bug in either imx_i2c or fsl-edma on the LS1046A where no
-> data is read in i2c_imx_dma_read except for the last two bytes (which
-> are not read using DMA). This is perhaps best illustrated with the
-> following example:
-> 
-> # hexdump -C /sys/bus/nvmem/devices/0-00540/nvmem
-> [  308.914884] i2c i2c-0: ffff000809380000 0x0000000889380000 0x00000000f5401000 ffff000075401000
-> [  308.923529] src= 2180004 dst=f5401000 attr=   0 soff=   0 nbytes=1 slast=       0
-> [  308.923529] citer=  7e biter=  7e doff=   1 dlast_sga=       0
-> [  308.923529] major_int=1 disable_req=1 enable_sg=0
-> [  308.942113] fsl-edma 2c00000.edma: vchan 000000001b4371fc: txd 00000000d9dd26c5[4]: submitted
-> [  308.974049] fsl-edma 2c00000.edma: txd 00000000d9dd26c5[4]: marked complete
-> [  308.981339] i2c i2c-0: ffff000809380000 = [2e 2e 2f 2e 2e 2f 2e 2e 2f 64 65 76 69 63 65 73 2f 70 6c 61 74 66 6f 72 6d 2f 73 6f 63 2f 32 31 38 30 30 30 30 2e 69 32 63 2f 69 32 63 2d 30 2f 30 2d 30 30 35 34 2f 30 2d 30 30 35 34 30 00 00]
-> [  309.002226] i2c i2c-0: ffff000075401000 = [2e 2e 2f 2e 2e 2f 2e 2e 2f 64 65 76 69 63 65 73 2f 70 6c 61 74 66 6f 72 6d 2f 73 6f 63 2f 32 31 38 30 30 30 30 2e 69 32 63 2f 69 32 63 2d 30 2f 30 2d 30 30 35 34 2f 30 2d 30 30 35 34 30 00 00]
-> [  309.024649] i2c i2c-0: ffff000809380080 0x0000000889380080 0x00000000f5401800 ffff000075401800
-> [  309.033270] src= 2180004 dst=f5401800 attr=   0 soff=   0 nbytes=1 slast=       0
-> [  309.033270] citer=  7e biter=  7e doff=   1 dlast_sga=       0
-> [  309.033270] major_int=1 disable_req=1 enable_sg=0
-> [  309.051633] fsl-edma 2c00000.edma: vchan 000000001b4371fc: txd 00000000d9dd26c5[5]: submitted
-> [  309.083526] fsl-edma 2c00000.edma: txd 00000000d9dd26c5[5]: marked complete
-> [  309.090807] i2c i2c-0: ffff000809380080 = [00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-> [  309.111694] i2c i2c-0: ffff000075401800 = [00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00]
-> 00000000  2e 2e 2f 2e 2e 2f 2e 2e  2f 64 65 76 69 63 65 73  |../../../devices|
-> 00000010  2f 70 6c 61 74 66 6f 72  6d 2f 73 6f 63 2f 32 31  |/platform/soc/21|
-> 00000020  38 30 30 30 30 2e 69 32  63 2f 69 32 63 2d 30 2f  |80000.i2c/i2c-0/|
-> 00000030  30 2d 30 30 35 34 2f 30  2d 30 30 35 34 30 00 00  |0-0054/0-00540..|
-> 00000040  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
-> *
-> 00000070  00 00 00 00 00 00 00 00  00 00 00 00 00 00 ff ff  |................|
-> 00000080  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
-> *
-> 000000f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 ff 5b  |...............[|
-> 00000100
-> 
-> (patch with my debug prints appended below)
-> 
-> Despite the DMA completing successfully, no data was copied into the
-> buffer, leaving the original (now junk) contents. I probed the I2C bus
-> with an oscilloscope, and I verified that the transfer did indeed occur.
-> The timing between submission and completion seems reasonable for the
-> bus speed (50 kHz for whatever reason).
-> 
-> I had a look over the I2C driver, and nothing looked obviously
-> incorrect. If anyone has ideas on what to try, I'm more than willing.
+Thanks for pointing this out! It's indeed quite a bug.
 
-Is the DMA controller cache-coherent? I see the mainline LS1046A DT 
-doesn't have a "dma-coherent" property for it, but the behaviour is 
-entirely consistent with that being wrong - dma_map_single() cleans the 
-cache, coherent DMA write hits the still-present cache lines, 
-dma_unmap_single() invalidates the cache, and boom, the data is gone and 
-you read back the previous content of the buffer that was cleaned out to 
-DRAM beforehand.
+Going to send a patch ASAP.
 
-Robin.
+Regards,
+Christian.
 
-> --Sean
-> 
-> diff --git a/drivers/dma/fsl-edma-common.c b/drivers/dma/fsl-edma-common.c
-> index 15896e2413c4..1d9d4a55d2af 100644
-> --- a/drivers/dma/fsl-edma-common.c
-> +++ b/drivers/dma/fsl-edma-common.c
-> @@ -391,6 +391,12 @@ void fsl_edma_fill_tcd(struct fsl_edma_hw_tcd *tcd, u32 src, u32 dst,
->   {
->          u16 csr = 0;
->   
-> +       pr_info("src=%8x dst=%8x attr=%4x soff=%4x nbytes=%u slast=%8x\n"
-> +               "citer=%4x biter=%4x doff=%4x dlast_sga=%8x\n"
-> +               "major_int=%d disable_req=%d enable_sg=%d\n",
-> +               src, dst, attr, soff, nbytes, slast, citer, biter, doff,
-> +               dlast_sga, major_int, disable_req, enable_sg);
-> +
->          /*
->           * eDMA hardware SGs require the TCDs to be stored in little
->           * endian format irrespective of the register endian model.
-> diff --git a/drivers/i2c/busses/i2c-imx.c b/drivers/i2c/busses/i2c-imx.c
-> index 3576b63a6c03..0217f0cb1331 100644
-> --- a/drivers/i2c/busses/i2c-imx.c
-> +++ b/drivers/i2c/busses/i2c-imx.c
-> @@ -402,6 +402,9 @@ static int i2c_imx_dma_xfer(struct imx_i2c_struct *i2c_imx,
->                  dev_err(dev, "DMA mapping failed\n");
->                  goto err_map;
->          }
-> +       phys_addr_t bufp = virt_to_phys(msgs->buf);
-> +       dev_info(dev, "%px %pap %pad %px\n", msgs->buf, &bufp,
-> +                &dma->dma_buf, phys_to_virt(dma->dma_buf));
->   
->          txdesc = dmaengine_prep_slave_single(dma->chan_using, dma->dma_buf,
->                                          dma->dma_len, dma->dma_transfer_dir,
-> @@ -965,6 +968,9 @@ static int i2c_imx_dma_read(struct imx_i2c_struct *i2c_imx,
->                  }
->                  schedule();
->          }
-> +       dev_info(dev, "%px = [%*ph]\n", msgs->buf, msgs->len, msgs->buf);
-> +       dev_info(dev, "%px = [%*ph]\n", phys_to_virt(dma->dma_buf), msgs->len,
-> +                phys_to_virt(dma->dma_buf));
->   
->          temp = imx_i2c_read_reg(i2c_imx, IMX_I2C_I2CR);
->          temp &= ~I2CR_DMAEN;
+Am 20.09.22 um 13:47 schrieb Sudip Mukherjee:
+> Hi All,
+>
+> The builds of arm64 allmodconfig with clang failed to build next-20220920
+> with the error:
+>
+> drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c:1190:3: error: variable 'r' is uninitialized when used here [-Werror,-Wuninitialized]
+>                  r |= !amdgpu_ttm_tt_get_user_pages_done(bo->tbo.ttm);
+>                  ^
+> drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c:1171:7: note: initialize the variable 'r' to silence this warning
+>          int r;
+>               ^
+>                = 0
+> 1 error generated.
+>
+>
+> git bisect pointed to c2b08e7a6d27 ("drm/amdgpu: move entity selection and job init earlier during CS")
+>
+> I will be happy to test any patch or provide any extra log if needed.
+>
+>
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
