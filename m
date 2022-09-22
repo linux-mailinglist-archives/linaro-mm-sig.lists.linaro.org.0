@@ -2,45 +2,71 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0007C604DC7
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 18:52:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 744F9604DC8
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 18:52:53 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 04CD43F080
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 16:52:32 +0000 (UTC)
-Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
-	by lists.linaro.org (Postfix) with ESMTPS id 2C39A3F4E4
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Sep 2022 11:33:21 +0000 (UTC)
-Received: from dggpeml500023.china.huawei.com (unknown [172.30.72.54])
-	by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4MYChg332szMnbq;
-	Thu, 22 Sep 2022 19:28:35 +0800 (CST)
-Received: from ubuntu1804.huawei.com (10.67.174.58) by
- dggpeml500023.china.huawei.com (7.185.36.114) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31; Thu, 22 Sep 2022 19:33:17 +0800
-From: Xiu Jianfeng <xiujianfeng@huawei.com>
-To: <sumit.semwal@linaro.org>, <benjamin.gaignard@collabora.com>,
-	<lmark@codeaurora.org>, <labbott@redhat.com>, <Brian.Starkey@arm.com>,
-	<jstultz@google.com>, <christian.koenig@amd.com>
-Date: Thu, 22 Sep 2022 19:29:38 +0800
-Message-ID: <20220922112938.147609-1-xiujianfeng@huawei.com>
-X-Mailer: git-send-email 2.17.1
+	by lists.linaro.org (Postfix) with ESMTP id 7B4923F2D4
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 16:52:52 +0000 (UTC)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+	by lists.linaro.org (Postfix) with ESMTPS id 598B53F549
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Sep 2022 13:35:48 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id 312D81F8F8;
+	Thu, 22 Sep 2022 13:35:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
+	t=1663853747;
+	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+	 cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=IwL9ZLjfbaspCU82c8med1UAPhmCPx1OWhj8R1+9qNM=;
+	b=XihVZkR0NFlKaTEY2REooJ4nnysnnfLcvjy51KzgHbSW+oLtMuf9IonwLm/KkASRNsstRo
+	s4Dx+Q4cpaICoaXsH0DUfapvCIci0Ubcv9A9s0vR8XX8+NUFKAnyoOuIT9zDwNjs4dr4X/
+	qezh4tAzHSN1OltdzTUMbRixdeL8EVg=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
+	s=susede2_ed25519; t=1663853747;
+	h=from:from:reply-to:reply-to:date:date:message-id:message-id:to:to:
+	 cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=IwL9ZLjfbaspCU82c8med1UAPhmCPx1OWhj8R1+9qNM=;
+	b=D4SrbPeIUjJXDbzN3l/v7S9Ic5eD5VW9j9nh63nD86Qj+hCZa1n0PAF8TSLqyf+7TdxxOs
+	g6cysoCnwD04I3Cw==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 5C8F513AA5;
+	Thu, 22 Sep 2022 13:35:46 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+	by imap2.suse-dmz.suse.de with ESMTPSA
+	id RvYRFbJkLGM6egAAMHmgww
+	(envelope-from <dsterba@suse.cz>); Thu, 22 Sep 2022 13:35:46 +0000
+Date: Thu, 22 Sep 2022 15:30:14 +0200
+From: David Sterba <dsterba@suse.cz>
+To: Kees Cook <keescook@chromium.org>
+Message-ID: <20220922133014.GI32411@suse.cz>
+References: <20220922031013.2150682-1-keescook@chromium.org>
+ <20220922031013.2150682-5-keescook@chromium.org>
 MIME-Version: 1.0
-X-Originating-IP: [10.67.174.58]
-X-ClientProxiedBy: dggems704-chm.china.huawei.com (10.3.19.181) To
- dggpeml500023.china.huawei.com (7.185.36.114)
-X-CFilter-Loop: Reflected
-X-MailFrom: xiujianfeng@huawei.com
+Content-Disposition: inline
+In-Reply-To: <20220922031013.2150682-5-keescook@chromium.org>
+User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
+X-MailFrom: dsterba@suse.cz
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: VBJ66ULZDJCN3IONNYH5UVPP4UX6P2EI
-X-Message-ID-Hash: VBJ66ULZDJCN3IONNYH5UVPP4UX6P2EI
-X-Mailman-Approved-At: Wed, 19 Oct 2022 16:52:04 +0000
-CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+Message-ID-Hash: AYNX3KDEH6QML4USTHYSUV5U2M4ITYO4
+X-Message-ID-Hash: AYNX3KDEH6QML4USTHYSUV5U2M4ITYO4
+X-Mailman-Approved-At: Wed, 19 Oct 2022 16:52:11 +0000
+CC: Vlastimil Babka <vbabka@suse.cz>, linux-btrfs@vger.kernel.org, Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Andrew Morton <akpm@linux-foundation.org>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, Alex Elder <elder@kernel.org>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Jesse Brandeburg <jesse.brandeburg@intel.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Marco Elver <elver@google.com>, Miguel Ojeda <ojeda@kernel.org>, Jacob Shin <jacob.shin@amd.com>, linux-kernel@vger.kernel.org, linux-mm@kvack.org, netdev@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedes
+ ktop.org, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, intel-wired-lan@lists.osuosl.org, dev@openvswitch.org, x86@kernel.org, linux-wireless@vger.kernel.org, llvm@lists.linux.dev, linux-hardening@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] dma-buf: Add __init annotation to module init func
+Reply-To: dsterba@suse.cz
+Subject: [Linaro-mm-sig] Re: [PATCH 04/12] btrfs: send: Proactively round up to kmalloc bucket size
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VBJ66ULZDJCN3IONNYH5UVPP4UX6P2EI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AYNX3KDEH6QML4USTHYSUV5U2M4ITYO4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -50,43 +76,16 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Add missing __init annotation to module init func.
+On Wed, Sep 21, 2022 at 08:10:05PM -0700, Kees Cook wrote:
+> Instead of discovering the kmalloc bucket size _after_ allocation, round
+> up proactively so the allocation is explicitly made for the full size,
+> allowing the compiler to correctly reason about the resulting size of
+> the buffer through the existing __alloc_size() hint.
+> 
+> Cc: linux-btrfs@vger.kernel.org
+> Signed-off-by: Kees Cook <keescook@chromium.org>
 
-Signed-off-by: Xiu Jianfeng <xiujianfeng@huawei.com>
----
- drivers/dma-buf/heaps/cma_heap.c    | 2 +-
- drivers/dma-buf/heaps/system_heap.c | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma_heap.c
-index 28fb04eccdd0..62d0d0e8b10d 100644
---- a/drivers/dma-buf/heaps/cma_heap.c
-+++ b/drivers/dma-buf/heaps/cma_heap.c
-@@ -392,7 +392,7 @@ static int __add_cma_heap(struct cma *cma, void *data)
- 	return 0;
- }
- 
--static int add_default_cma_heap(void)
-+static int __init add_default_cma_heap(void)
- {
- 	struct cma *default_cma = dev_get_cma_area(NULL);
- 	int ret = 0;
-diff --git a/drivers/dma-buf/heaps/system_heap.c b/drivers/dma-buf/heaps/system_heap.c
-index fcf836ba9c1f..cbe445bc5bab 100644
---- a/drivers/dma-buf/heaps/system_heap.c
-+++ b/drivers/dma-buf/heaps/system_heap.c
-@@ -422,7 +422,7 @@ static const struct dma_heap_ops system_heap_ops = {
- 	.allocate = system_heap_allocate,
- };
- 
--static int system_heap_create(void)
-+static int __init system_heap_create(void)
- {
- 	struct dma_heap_export_info exp_info;
- 
--- 
-2.17.1
-
+Acked-by: David Sterba <dsterba@suse.com>
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
