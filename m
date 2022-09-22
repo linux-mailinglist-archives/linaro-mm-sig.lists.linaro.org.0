@@ -2,66 +2,52 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D152F604DD1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 18:53:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C4E1C604DD7
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 18:53:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B51263F48D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 16:53:37 +0000 (UTC)
-Received: from mail-il1-f174.google.com (mail-il1-f174.google.com [209.85.166.174])
-	by lists.linaro.org (Postfix) with ESMTPS id 1B8473F549
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Sep 2022 17:41:19 +0000 (UTC)
-Received: by mail-il1-f174.google.com with SMTP id d14so4205985ilf.2
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Sep 2022 10:41:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date;
-        bh=AsxpWsr5dzcIncNfx/+Sw1HyEwfMiBKVAKBEW7wNeQA=;
-        b=HG1BCa9aD7EruuXSP8vfBpl2xSAcB9NgvDE4n3t4WegezK8iPhrhfTbs3Xxfdxp/aP
-         0j4XfOQ90rYJJLxvR5Fxutq+CKSR+3NwG5g3gHNWC0rGeSJkCPwM1qeiyt5MoX9kie1E
-         Ogc+09wvN660uSYqTrtW/DY7BHEKikOuBqjuMNkdFuICid58Qmi9sfyROy/V1LgkIpE7
-         e2Nv1gEo4Vp0GQpWl3bRqM1059jceqcIcZbW6os/ZnPJ8J1PnWKNgSi8e2+WYP/WJpYk
-         +8abyMsCFGIX1fgDuD8Pv5kCGUDjVFxUFNtnD5auEWqa0LNmLWv9bnrrUipYT443cCtB
-         +LNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date;
-        bh=AsxpWsr5dzcIncNfx/+Sw1HyEwfMiBKVAKBEW7wNeQA=;
-        b=HKD8Cae1tKamf1+IO8lfVs/X2NWRsqzvh7LhSbS/GskQ/oJm0yuJXALDUZir1HYh3v
-         2gSJCsmROZzIwkHMae34dgES09m5qAtaQupS4rPpGCMpIZoyRQcEysrh6PChXrSa13x1
-         BlJ/mQw4T5Gnti7ehA4oMclRoCYsr2k9xTMVNQ12KlTlD8GfGeG9yPyI5mUbJsM7g/j5
-         DVPSW91kOfXpzW8ZCsfWV2DttD/ndA7sNtEoJM4SIHMb7fbrjfC6plGlVSysWmIql/+c
-         Ei3PySnoirPicUpALoaMc0E7zI608798+8KciJxkFBMzMdmCRve6nO0IVAsuT5LPJE19
-         Qlqw==
-X-Gm-Message-State: ACrzQf0rVqs+gZoFMy2TK8tz9bW3D5Uft6vd7LzzCI7pECa7EpMsGv5t
-	VGAB+xJeIjl8Pov42ehpyWDrz7dttH+BfkvCIkg=
-X-Google-Smtp-Source: AMsMyM5Iawxjt3SoOGTNllk8NVk3tyvcsl1U/lS7sz1j/GB7JoPgBuMEGvT0T6zJ1tbupUccXP7nLvzrv1dgRwQijjQ=
-X-Received: by 2002:a05:6e02:152a:b0:2f6:58ae:ff0c with SMTP id
- i10-20020a056e02152a00b002f658aeff0cmr2429401ilu.237.1663868478589; Thu, 22
- Sep 2022 10:41:18 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220922031013.2150682-1-keescook@chromium.org>
- <20220922031013.2150682-12-keescook@chromium.org> <CANiq72=m9VngFH9jE3s0RV7MpjX0a=ekJN4pZwcDksBkSRR_1w@mail.gmail.com>
- <202209220855.B8DA16E@keescook>
-In-Reply-To: <202209220855.B8DA16E@keescook>
-From: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Date: Thu, 22 Sep 2022 19:41:07 +0200
-Message-ID: <CANiq72=unhDJOGTg+ja4UdVRp8sG7Wc+_rqQhvJideA=WNjbFA@mail.gmail.com>
+	by lists.linaro.org (Postfix) with ESMTP id CB8803F1C3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Oct 2022 16:53:57 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id C99653F49E
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Sep 2022 19:40:42 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 585666115C;
+	Thu, 22 Sep 2022 19:40:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 45829C433C1;
+	Thu, 22 Sep 2022 19:40:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1663875641;
+	bh=Iu+ioVZAl++oTxE1oI47t/6oQuwifWn8lmpY1yCr8J4=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=YC8ixN8EP0aZI0e+nDZs91siEij37VrKEmFWG3Ty2t8usgwjVxksauo5Og7qifkq5
+	 ESf2BqmXtU9USNgh+H2YKJEXRWpyu7EDcgicu3AJOn2B/4WayyL94dp8xbokjZvmw2
+	 M56qmrIx+uvo2sUUrQmzfQ5/ucT/pOiWMPHGNcLJ6IIzRCYzVRcutddcWgSvzdbhZM
+	 fcZkJSFboZpZl7fu6RLNBgaLlv3gbFkR4ETLqK750bOZ4J5pst6/eAIZH31PhhVZLn
+	 QMHkEcQOXS8pXwYt/LtILex4KMGS/VXDhD7XC9erQbOO/ciNySxRd4PP7XyTR4i5Zs
+	 1sdrT7lGqR5Mw==
+Date: Thu, 22 Sep 2022 12:40:39 -0700
+From: Jakub Kicinski <kuba@kernel.org>
 To: Kees Cook <keescook@chromium.org>
-X-MailFrom: miguel.ojeda.sandonis@gmail.com
+Message-ID: <20220922124039.688be0b8@kernel.org>
+In-Reply-To: <20220922031013.2150682-3-keescook@chromium.org>
+References: <20220922031013.2150682-1-keescook@chromium.org>
+	<20220922031013.2150682-3-keescook@chromium.org>
+MIME-Version: 1.0
+X-MailFrom: kuba@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: ZK5UIHH44ZZRLYJFQK6AQFBBJB3QWHJR
-X-Message-ID-Hash: ZK5UIHH44ZZRLYJFQK6AQFBBJB3QWHJR
-X-Mailman-Approved-At: Wed, 19 Oct 2022 16:52:27 +0000
-CC: Vlastimil Babka <vbabka@suse.cz>, Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Andrew Morton <akpm@linux-foundation.org>, Nick Desaulniers <ndesaulniers@google.com>, Hao Luo <haoluo@google.com>, Marco Elver <elver@google.com>, linux-mm@kvack.org, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Alex Elder <elder@kernel.org>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Jesse Brandeburg <jesse.brandeburg@intel.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Miguel Ojeda <ojeda@kernel.org>, Feng Tang <feng.tang@intel.com>, linux-kernel@vger.kernel.org, netdev@vger.kernel.org, linux-btrfs@vger.kernel.org, linux-media@vger.kernel.o
- rg, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, intel-wired-lan@lists.osuosl.org, dev@openvswitch.org, x86@kernel.org, linux-wireless@vger.kernel.org, llvm@lists.linux.dev, linux-hardening@vger.kernel.org
+Message-ID-Hash: AY5KCBLEDHJ2IQHE24P75L2YDB3SQQYG
+X-Message-ID-Hash: AY5KCBLEDHJ2IQHE24P75L2YDB3SQQYG
+X-Mailman-Approved-At: Wed, 19 Oct 2022 16:52:34 +0000
+CC: Vlastimil Babka <vbabka@suse.cz>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, netdev@vger.kernel.org, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, David Rientjes <rientjes@google.com>, Pekka Enberg <penberg@kernel.org>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Andrew Morton <akpm@linux-foundation.org>, Alex Elder <elder@kernel.org>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Jesse Brandeburg <jesse.brandeburg@intel.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Marco Elver <elver@google.com>, Miguel Ojeda <ojeda@kernel.org>, Jacob Shin <jacob.shin@amd.com>, linux-kernel@vger.kernel.org, linux-mm@kvack.org, linux-btrfs@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.o
+ rg, linux-fsdevel@vger.kernel.org, intel-wired-lan@lists.osuosl.org, dev@openvswitch.org, x86@kernel.org, linux-wireless@vger.kernel.org, llvm@lists.linux.dev, linux-hardening@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 11/12] slab: Remove __malloc attribute from realloc functions
+Subject: [Linaro-mm-sig] Re: [PATCH 02/12] skbuff: Proactively round up to kmalloc bucket size
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZK5UIHH44ZZRLYJFQK6AQFBBJB3QWHJR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AY5KCBLEDHJ2IQHE24P75L2YDB3SQQYG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -71,26 +57,36 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Thu, Sep 22, 2022 at 5:56 PM Kees Cook <keescook@chromium.org> wrote:
->
-> I wasn't sure if this "composite macro" was sane there, especially since
-> it would be using __malloc before it was defined, etc. Would you prefer
-> I move it?
+On Wed, 21 Sep 2022 20:10:03 -0700 Kees Cook wrote:
+> diff --git a/net/core/skbuff.c b/net/core/skbuff.c
+> index 974bbbbe7138..4fe4c7544c1d 100644
+> --- a/net/core/skbuff.c
+> +++ b/net/core/skbuff.c
+> @@ -427,14 +427,15 @@ struct sk_buff *__alloc_skb(unsigned int size, gfp_t gfp_mask,
+>  	 */
+>  	size = SKB_DATA_ALIGN(size);
+>  	size += SKB_DATA_ALIGN(sizeof(struct skb_shared_info));
+> -	data = kmalloc_reserve(size, gfp_mask, node, &pfmemalloc);
+> -	if (unlikely(!data))
+> -		goto nodata;
+> -	/* kmalloc(size) might give us more room than requested.
+> +	/* kmalloc(size) might give us more room than requested, so
+> +	 * allocate the true bucket size up front.
+>  	 * Put skb_shared_info exactly at the end of allocated zone,
+>  	 * to allow max possible filling before reallocation.
+>  	 */
+> -	osize = ksize(data);
+> +	osize = kmalloc_size_roundup(size);
+> +	data = kmalloc_reserve(osize, gfp_mask, node, &pfmemalloc);
+> +	if (unlikely(!data))
+> +		goto nodata;
+>  	size = SKB_WITH_OVERHEAD(osize);
+>  	prefetchw(data + size);
 
-Hmm... On one hand, they end up being attributes, so it could make
-sense to have them there (after all, the big advantage of that header
-is that there is no `#ifdef` nest like in others, and that it is only
-for attributes).
+I'd rename osize here to alloc_size for consistency but one could 
+argue either way :)
 
-On the other hand, you are right that the file so far is intended to
-be as simple as possible (`__always_inline` having an extra `inline`
-and `fallthrough` would be closest outliers), so if we do it, I would
-prefer to do so in an independent series that carries its own rationale.
-
-So I would leave the patch as it is here.
-
-Cheers,
-Miguel
+Acked-by: Jakub Kicinski <kuba@kernel.org>
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
