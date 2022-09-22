@@ -2,67 +2,67 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id CEBC85E590B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Sep 2022 05:10:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BA9B5E5906
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Sep 2022 05:10:41 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0DEC648A66
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Sep 2022 03:10:50 +0000 (UTC)
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com [209.85.210.175])
-	by lists.linaro.org (Postfix) with ESMTPS id F2CB048A65
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Sep 2022 03:10:26 +0000 (UTC)
-Received: by mail-pf1-f175.google.com with SMTP id 9so7908703pfz.12
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Sep 2022 20:10:26 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id CFA3F48A64
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Sep 2022 03:10:40 +0000 (UTC)
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+	by lists.linaro.org (Postfix) with ESMTPS id EF8A048A2C
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Sep 2022 03:10:24 +0000 (UTC)
+Received: by mail-pf1-f172.google.com with SMTP id l65so7937581pfl.8
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 21 Sep 2022 20:10:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=9y2lxcjKWi6kM02eOSoQVeQPXSl5vobQ22c95G6mEc4=;
-        b=agBKCvV0iC7GQIcf8sz7UOH3dVItREZG7jPdBvtdPy2YLOE0+XAy2KLGvZyzWCldr+
-         eBmNfNQZyJ71RW93/RqEBJpErudlrwRKiB3G8SDyrXVW40aMl2oo1k6YG1lfeIUUjh9P
-         GUamhTzL1Eje9pLqolXG4/wF2iRxonrtVdIpw=
+        bh=kaPCbEUam/i/QzM3EsiD/q7EbxvCz2hqpx3qsHkAHe4=;
+        b=n3JitkeKKUUxbz6yn64Uwj1L8NZF8ivw+xHJGwLWPTznbBHC9NKX5oIDtTPO2BaSLc
+         93ZTFQf3icolOuiYEksXgK7g/tzg0rkadZNBpMtyblAayJyXz59n3d2igSogXrXOJeEu
+         gpFsv/wtpmyI2nisZWM6BTAhUm+uMJ0L5a/t4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=9y2lxcjKWi6kM02eOSoQVeQPXSl5vobQ22c95G6mEc4=;
-        b=5CX6/bK0PfANmwTRb8tpVga58Tmgxnd2XoDEYEI5yLNfZNRyiFbmmT8MfhTJNnQknN
-         uDOcRtbtF023FaPxN1AykP1bd5xvPYu0vaLSskCsDHmssBJV7OJmVbMcu8rxMiqh+EC+
-         9hIw5FJEV84VjNrAZEKfQX9Erb3DzMa99zT+/2ga5W/5tWYcbUaFpcIUhdxUv1oMnfcI
-         JN00ttWJqVo8HQrsHxUMd7Hlj4Dwz5tdNcLHo+C8sWzrwqa2dHlEPrFE1KHhEv4zdFCp
-         9/iMdC1qQtBe/hTQo9PBWw3g5qnl6XDOsPMWsvEmLKnkoRGw1qtGnpI8xj3r3g3Dg1kK
-         qKUQ==
-X-Gm-Message-State: ACrzQf0TPFly3Mkd5T2kzPTcNBf50mYqFtMNc831kfE4OG6CrNHSZTa8
-	3AHZP9XiloXbnsrG58BAKuvxcA==
-X-Google-Smtp-Source: AMsMyM7fmjxAfGTycH9CaoCA2DJAnd13bu5HArBXnwB99jjW/VrHSPoTFEUdZfu+ReZxNaNi1nSSsA==
-X-Received: by 2002:a05:6a00:14d3:b0:546:e93c:4768 with SMTP id w19-20020a056a0014d300b00546e93c4768mr1278425pfu.36.1663816226130;
-        Wed, 21 Sep 2022 20:10:26 -0700 (PDT)
+        bh=kaPCbEUam/i/QzM3EsiD/q7EbxvCz2hqpx3qsHkAHe4=;
+        b=11iH5cRJE8DRzjIyZaIkRM1GCa6MDLKKv7/wf7hsENAVRAORn7MahtP7nG6RRPRk6c
+         DKDvkx2RoO9+EwGgpwhaeFqnaN83ni8WRzai4lfN6Q0vA1l9Kr05PlIaSS9n12ulN6lf
+         PVFh+YKhGoMBPyspiY1syDdfziTYfKJHyW1xGx4ksBn/vTbyJgI952Z9/ShQDabUSQiP
+         CwnTS7XlDglZVvBdWElEN7gxG/7B5tT4oEF0YaQCB3mKSbkpO5NJiBYiMNRwYgBY5Sxk
+         K/rzu4pgb5QIM220++43n0oCxyaDBHKnNdIR21yRXVVEMvJnq+fYqpUfVVHW+uE1pcy8
+         5n/A==
+X-Gm-Message-State: ACrzQf1f9b5tEIwKfwvH+ec+sTXHFr5apeaitlaZaOZXT7edEbCfIthY
+	I3LiJIy1wXl3tvCzWWd/YMhpAQ==
+X-Google-Smtp-Source: AMsMyM6cFS7tDGVCwJ0vHG2t9zSWZS1Eoi8Welusn2TdzO1FITGlKW23X2CzrnylSu9gzNhY4M5M0Q==
+X-Received: by 2002:a05:6a00:c91:b0:540:f165:b049 with SMTP id a17-20020a056a000c9100b00540f165b049mr1383264pfv.76.1663816224094;
+        Wed, 21 Sep 2022 20:10:24 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
-        by smtp.gmail.com with ESMTPSA id b15-20020a63d30f000000b004393cb720afsm2684116pgg.38.2022.09.21.20.10.22
+        by smtp.gmail.com with ESMTPSA id 69-20020a621748000000b0053725e331a1sm2959597pfx.82.2022.09.21.20.10.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Wed, 21 Sep 2022 20:10:22 -0700 (PDT)
 From: Kees Cook <keescook@chromium.org>
 To: Vlastimil Babka <vbabka@suse.cz>
-Date: Wed, 21 Sep 2022 20:10:04 -0700
-Message-Id: <20220922031013.2150682-4-keescook@chromium.org>
+Date: Wed, 21 Sep 2022 20:10:05 -0700
+Message-Id: <20220922031013.2150682-5-keescook@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220922031013.2150682-1-keescook@chromium.org>
 References: <20220922031013.2150682-1-keescook@chromium.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1741; h=from:subject; bh=N6cTYse7nKSOYOPwHuuyZ39Ee5FBmcRJBaahsbeuoYs=; b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBjK9ISVSHfuaLwQgHhIfT+G4+ZNlvTp+tw3ysmjP49 mcPajiqJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCYyvSEgAKCRCJcvTf3G3AJoHDD/ 9MEz1x/p8W1mV4RgWnzrofQu8Rnt8S3z6RAn+Qe1cSDrxAzlEofmKXpYWiJ+/LrW8d+DMyEPH/qhiv Z0a3iYatcr1nh3CMNcUGNtMmB0uLZf4MMZQ184oh/sUT8PfviA8YvnEqJsU39RxjaNFpvevCU+UIhE ampATmMNn3x9mz3MinyvwRAeCqjlprv9qGhZP19uivXAzi7A5LdGcnY9/yU4NERLhAyGSQzZMoevL5 foxanGNGMhF7lJpEQx7SiHJ5/UGNfHDmQUAWnnIkH/iu4aw6z8wFCMrDe26riTARf1OhVgycx3C53y RsfcyayukdwLx9qBoxlSnrXwcUJmn8ly2s9mOX2jMHadZIKMM3erpLkcz5K5LzoAcHlMME0ZTa6H4I r+U57Oid2/dp01vdDgMvdb84JzOixL5JoQHu938RHKYP30IYQwkmhzBuFTkeMJzZsGS4WER47knxxd 45A6nI1zHNqipyFcbwqyCP0c9FHuUWJex4p1UkuPhpfl9BEy2OV28T7pqLJh6gYsDDqnVtz/7bvacg zQ8eV1paLCDfmSbshlpEBTxLnGWlSfPt0cPNLOqHf+Rw64Ee8lJY4M1B9xEIc9508QU/bABpMn7ngE vWtwJ0BkH0HMufph7v+73fhgqm8PD3cLFKaT53fQXDIr4zxoPqlAoJbGBvtQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1342; h=from:subject; bh=PATxOgKCtfzCXQKH17glgfixgYzE1x2L+YHf7rSxpvE=; b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBjK9ITJpSDjmxsaSk36KMYUjIvxLLAk9hi4Gv/fvEs tw4mn0yJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCYyvSEwAKCRCJcvTf3G3AJh3FD/ 9lgh/1XHl0SkyqPlMmPB17u7DDgE4q/VJ/Qa3GzTJ+egqjXOgy56TZhDHA57JAbNFH368V7dUHPLKC QXVOMAIaBG86hiTbSG2GFtspKIl5m4mQliPhYXo+9i2ctGvX67kQtgkloJBBOBTzM1Va+l8n8oDiM7 1keZZzJh1/Ke/X48PR3xg7Nx1uYbX9+ergUrLAPxTg/zdXdpoqFOJHqJQ3KTDdZ/Ei4EYr7MM+zZd1 B+a+f4KPaYbr0rUNv/eRElOKPdR3IRmKr00cn3bz0YQJFHMIHIfiUC7c02Q5mRGArZMpC6TDBu3Tkb nuAA6r64037k3F4P3KgpNrjYdXUKHgrLD5MS0HV/wt0Jl9wh6vCNnbY9hyrP1HoFV59EkKwXqy05Vl 7L7CE/IjCudzIhmSQJ5qMWxuufWw0aOCT98jEVLKn5HNir4xbt3Nk5GB3h8odtKKt5aij2g+sglk0N VozOjrkQEETzGVX7M0zWbpzsD61ZTOIY4ZAn6Zzztl/0Napt96blNs9J1EbovYn8uMQ2+XR6pZAwD1 TALlt7LDxwlItLIQQBK7XhEI2TYqOric6v3Z1icQjPqGGv16cy/WXfeY/MEtdwAcxELgoSF7ClvUlL BHriLuCX3SJCTRPP98sRsMm0ReDlyAlIib9iPFvDtr+pDztAlOw51wwNqgZQ==
 X-Developer-Key: i=keescook@chromium.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
-Message-ID-Hash: NOI6AQA6MMKFY2EYJV5QT4JCRXC2LKSL
-X-Message-ID-Hash: NOI6AQA6MMKFY2EYJV5QT4JCRXC2LKSL
+Message-ID-Hash: 6JHQEQZSSXUMSI5LIVFOG2RVDKHY47X2
+X-Message-ID-Hash: 6JHQEQZSSXUMSI5LIVFOG2RVDKHY47X2
 X-MailFrom: keescook@chromium.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Kees Cook <keescook@chromium.org>, Alex Elder <elder@kernel.org>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, netdev@vger.kernel.org, Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Andrew Morton <akpm@linux-foundation.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Jesse Brandeburg <jesse.brandeburg@intel.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Marco Elver <elver@google.com>, Miguel Ojeda <ojeda@kernel.org>, Jacob Shin <jacob.shin@amd.com>, linux-kernel@vger.kernel.org, linux-mm@kvack.org, linux-btrfs@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freede
+CC: Kees Cook <keescook@chromium.org>, linux-btrfs@vger.kernel.org, Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Andrew Morton <akpm@linux-foundation.org>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, Alex Elder <elder@kernel.org>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Jesse Brandeburg <jesse.brandeburg@intel.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Marco Elver <elver@google.com>, Miguel Ojeda <ojeda@kernel.org>, Jacob Shin <jacob.shin@amd.com>, linux-kernel@vger.kernel.org, linux-mm@kvack.org, netdev@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freede
  sktop.org, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, intel-wired-lan@lists.osuosl.org, dev@openvswitch.org, x86@kernel.org, linux-wireless@vger.kernel.org, llvm@lists.linux.dev, linux-hardening@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 03/12] net: ipa: Proactively round up to kmalloc bucket size
+Subject: [Linaro-mm-sig] [PATCH 04/12] btrfs: send: Proactively round up to kmalloc bucket size
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NOI6AQA6MMKFY2EYJV5QT4JCRXC2LKSL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6JHQEQZSSXUMSI5LIVFOG2RVDKHY47X2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -77,47 +77,41 @@ up proactively so the allocation is explicitly made for the full size,
 allowing the compiler to correctly reason about the resulting size of
 the buffer through the existing __alloc_size() hint.
 
-Cc: Alex Elder <elder@kernel.org>
-Cc: "David S. Miller" <davem@davemloft.net>
-Cc: Eric Dumazet <edumazet@google.com>
-Cc: Jakub Kicinski <kuba@kernel.org>
-Cc: Paolo Abeni <pabeni@redhat.com>
-Cc: netdev@vger.kernel.org
+Cc: linux-btrfs@vger.kernel.org
 Signed-off-by: Kees Cook <keescook@chromium.org>
 ---
- drivers/net/ipa/gsi_trans.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ fs/btrfs/send.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/net/ipa/gsi_trans.c b/drivers/net/ipa/gsi_trans.c
-index 18e7e8c405be..cec968854dcf 100644
---- a/drivers/net/ipa/gsi_trans.c
-+++ b/drivers/net/ipa/gsi_trans.c
-@@ -89,6 +89,7 @@ int gsi_trans_pool_init(struct gsi_trans_pool *pool, size_t size, u32 count,
- 			u32 max_alloc)
- {
- 	void *virt;
-+	size_t allocate;
+diff --git a/fs/btrfs/send.c b/fs/btrfs/send.c
+index e7671afcee4f..d40d65598e8f 100644
+--- a/fs/btrfs/send.c
++++ b/fs/btrfs/send.c
+@@ -435,6 +435,11 @@ static int fs_path_ensure_buf(struct fs_path *p, int len)
+ 	path_len = p->end - p->start;
+ 	old_buf_len = p->buf_len;
  
- 	if (!size)
- 		return -EINVAL;
-@@ -104,13 +105,15 @@ int gsi_trans_pool_init(struct gsi_trans_pool *pool, size_t size, u32 count,
- 	 * If there aren't enough entries starting at the free index,
- 	 * we just allocate free entries from the beginning of the pool.
++	/*
++	 * Allocate to the next largest kmalloc bucket size, to let
++	 * the fast path happen most of the time.
++	 */
++	len = kmalloc_size_roundup(len);
+ 	/*
+ 	 * First time the inline_buf does not suffice
  	 */
--	virt = kcalloc(count + max_alloc - 1, size, GFP_KERNEL);
-+	allocate = size_mul(count + max_alloc - 1, size);
-+	allocate = kmalloc_size_roundup(allocate);
-+	virt = kzalloc(allocate, GFP_KERNEL);
- 	if (!virt)
+@@ -448,11 +453,7 @@ static int fs_path_ensure_buf(struct fs_path *p, int len)
+ 	if (!tmp_buf)
  		return -ENOMEM;
+ 	p->buf = tmp_buf;
+-	/*
+-	 * The real size of the buffer is bigger, this will let the fast path
+-	 * happen most of the time
+-	 */
+-	p->buf_len = ksize(p->buf);
++	p->buf_len = len;
  
- 	pool->base = virt;
- 	/* If the allocator gave us any extra memory, use it */
--	pool->count = ksize(pool->base) / size;
-+	pool->count = allocate / size;
- 	pool->free = 0;
- 	pool->max_alloc = max_alloc;
- 	pool->size = size;
+ 	if (p->reversed) {
+ 		tmp_buf = p->buf + old_buf_len - path_len - 1;
 -- 
 2.34.1
 
