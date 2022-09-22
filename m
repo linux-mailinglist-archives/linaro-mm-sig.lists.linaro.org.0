@@ -2,99 +2,108 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 371865E67EC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Sep 2022 18:00:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E392C5E6EC9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Sep 2022 23:49:18 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5C0BB3F619
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Sep 2022 16:00:39 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
-	by lists.linaro.org (Postfix) with ESMTPS id C91C43F60D
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Sep 2022 16:00:29 +0000 (UTC)
-Received: by mail-pl1-f171.google.com with SMTP id t3so9205636ply.2
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Sep 2022 09:00:29 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id E679A3F61E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Sep 2022 21:49:17 +0000 (UTC)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+	by lists.linaro.org (Postfix) with ESMTPS id D2D403F49E
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Sep 2022 21:49:11 +0000 (UTC)
+Received: by mail-pj1-f53.google.com with SMTP id o99-20020a17090a0a6c00b002039c4fce53so3815490pjo.2
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Sep 2022 14:49:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date;
-        bh=e+3VYhs+DuwH7bu+QHtV1rjWq3mJNnHisCvMMFS3bAw=;
-        b=XxhEWZKeaIg8g+YPuHc57mvNIPPhpigg738nM9wsLJjiUYpKwjJNzBKKGjefZOhAzi
-         0KqHQ1P/cHiMmQgsO3z2jt2+D0oCcG8Ck+pj5sopXZOTE33QKhSQ8Lb6DWDYvG77ZJIc
-         GQLx6jVnYAJuMY3HV3uGUN51p3PNgpWkx9A1M=
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date;
+        bh=HR7XDnra6aPtamhjv2ZebPHNXJTov7JqNOvsimryjio=;
+        b=SzXIxv6C1tCw5E3cmrWDJ/hT6jlBfbW+dFuRj81LBsGuMMA1AsgUJRpxwVsVSvwR2s
+         HjojE3kOc43go5tDIXGrMTl5j+2eCPTyOeyLkDKEdQ6zWs58EaHgr7cs3m2ezx/7gyPH
+         QYSAs2hvSa7UX6V/rYFn8OuKvubD7Tx83ZZcc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
-        bh=e+3VYhs+DuwH7bu+QHtV1rjWq3mJNnHisCvMMFS3bAw=;
-        b=0LYABxqY2Z2/2dpwdv2m5XNrwcJkNxEk2EVSCpx8WvPj1+W4BHIDWpb1kEHhvLRi98
-         EcrjAd+14503NeBeTRHr/rVW0mlvFkqfQ6XILBlpcVQ6jLYWYuFKgE1msauHrn+pUDXJ
-         oXTPUEVHmMVJxH8xvr3lZ03+1+PQUvuSMDkEXnQ3ZI5GkH2GKPIcK7i8sZFH143cYAqA
-         70sU6j8IB27ucS32YeyqF2wavWyzN5Fb5cB4Zf+teZmaJlu7p76GRRbH2Kva/6XM9Wh6
-         Wuddq7miO12nGgumPVVNpKMZ3ZpgG61a3IcQ+u38Q0xBuArdRQqZZFE8qtFLl9iDtsd/
-         2UMQ==
-X-Gm-Message-State: ACrzQf2xEtGAHcpEXRRmK4V+iFsYsGHn9iVxasYVfdRXNAce9lIryb/v
-	r+zuzRop1BMCmWeBpjAFCVqqIQ==
-X-Google-Smtp-Source: AMsMyM6q4mhFYq39gGoVyx6Hnh47y8QFV1PKitfWXVTUQGpGwPy/JbIncPBlq3WqciXD78b9y3HP3A==
-X-Received: by 2002:a17:90b:164d:b0:202:69b3:1002 with SMTP id il13-20020a17090b164d00b0020269b31002mr4362502pjb.86.1663862428935;
-        Thu, 22 Sep 2022 09:00:28 -0700 (PDT)
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date;
+        bh=HR7XDnra6aPtamhjv2ZebPHNXJTov7JqNOvsimryjio=;
+        b=aFuJZ+0IbevQIgiGnsOGZiNXEz2ztHWSLlkdw+XhkU1DgrxT+vjYibLyX1duEh4YWB
+         a7bs0/iZS+cyWMG7+JpI6/rJqa1JJZPLgJPriVyNj7+96YVJQ5Q7UbtOFY1D2UlmUMFi
+         7GwvcBG44IsRc1e5pZzzbhFBaWPtePWCZUyyX3eq60A9C0gLrnFMs+fiXMQFkCbNrbtM
+         UFdrjGxVR9DBYkUDNhAgiwtQ9hvukz26MZnd6iSqfnKw7fPlijVSi5Czqfn6+wpRgASV
+         heYW9PQlhyelcrdm4zD4mED3XkTG4V5buJufYHsPGuTLwenbY+9w0TNWNtqFFtt99QX+
+         BcOQ==
+X-Gm-Message-State: ACrzQf3wH3HUP9Jh0ertum4rx5H75FajSLomVK5dl/7WffYrVGYm7GEe
+	4bLLX+hnscIwsl8GWRdkhOVvww==
+X-Google-Smtp-Source: AMsMyM7EVCvewBY8ReI9lCX0qEaIkOeoxfNJfZf95NgQUB74fHJwtUZioqBUOFwe31SWjNTGJEPjqg==
+X-Received: by 2002:a17:902:d2d2:b0:177:4940:cc0f with SMTP id n18-20020a170902d2d200b001774940cc0fmr5257349plc.4.1663883350927;
+        Thu, 22 Sep 2022 14:49:10 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
-        by smtp.gmail.com with ESMTPSA id ms3-20020a17090b234300b002005c3d4d4fsm4007085pjb.19.2022.09.22.09.00.27
+        by smtp.gmail.com with ESMTPSA id j6-20020a170902da8600b00176acc23a73sm4597636plx.281.2022.09.22.14.49.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Sep 2022 09:00:28 -0700 (PDT)
-Date: Thu, 22 Sep 2022 09:00:26 -0700
+        Thu, 22 Sep 2022 14:49:10 -0700 (PDT)
+Date: Thu, 22 Sep 2022 14:49:08 -0700
 From: Kees Cook <keescook@chromium.org>
-To: "Ruhl, Michael J" <michael.j.ruhl@intel.com>
-Message-ID: <202209220859.DA21F91EAE@keescook>
+To: Vlastimil Babka <vbabka@suse.cz>
+Message-ID: <202209221446.5E90AEED@keescook>
 References: <20220922031013.2150682-1-keescook@chromium.org>
- <20220922031013.2150682-8-keescook@chromium.org>
- <DM5PR11MB13241226F3AACC81398F7E8EC14E9@DM5PR11MB1324.namprd11.prod.outlook.com>
+ <673e425d-1692-ef47-052b-0ff2de0d9c1d@amd.com>
+ <202209220845.2F7A050@keescook>
+ <cb38655c-2107-bda6-2fa8-f5e1e97eab14@suse.cz>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <DM5PR11MB13241226F3AACC81398F7E8EC14E9@DM5PR11MB1324.namprd11.prod.outlook.com>
-Message-ID-Hash: YW2QR6LBTCA25NNUTXP6FPZ6B3IDBI46
-X-Message-ID-Hash: YW2QR6LBTCA25NNUTXP6FPZ6B3IDBI46
+In-Reply-To: <cb38655c-2107-bda6-2fa8-f5e1e97eab14@suse.cz>
+Message-ID-Hash: 2522T3U7LSXOGSY2L6OVY2EHWGY3ZGMN
+X-Message-ID-Hash: 2522T3U7LSXOGSY2L6OVY2EHWGY3ZGMN
 X-MailFrom: keescook@chromium.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Vlastimil Babka <vbabka@suse.cz>, "linux-wireless@vger.kernel.org" <linux-wireless@vger.kernel.org>, Feng Tang <feng.tang@intel.com>, "llvm@lists.linux.dev" <llvm@lists.linux.dev>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>, Eric Dumazet <edumazet@google.com>, "Nguyen, Anthony L" <anthony.l.nguyen@intel.com>, "linux-hardening@vger.kernel.org" <linux-hardening@vger.kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, "dev@openvswitch.org" <dev@openvswitch.org>, "x86@kernel.org" <x86@kernel.org>, "Brandeburg, Jesse" <jesse.brandeburg@intel.com>, "intel-wired-lan@lists.osuosl.org" <intel-wired-lan@lists.osuosl.org>, David Rientjes <rientjes@google.com>, Miguel Ojeda <ojeda@kernel.org>, Yonghong Song <yhs@fb.com>, Paolo Abeni <pabeni@redhat.com>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, Marco Elver <elver@google.com>, Josef Bacik <josef@toxicpanda.com>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-
- sig@lists.linaro.org>, Jakub Kicinski <kuba@kernel.org>, David Sterba <dsterba@suse.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Alex Elder <elder@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "David S. Miller" <davem@davemloft.net>, Pekka Enberg <penberg@kernel.org>, Daniel Micay <danielmicay@gmail.com>, "netdev@vger.kernel.org" <netdev@vger.kernel.org>, "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>, Andrew Morton <akpm@linux-foundation.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, "linux-btrfs@vger.kernel.org" <linux-btrfs@vger.kernel.org>
+CC: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Pekka Enberg <penberg@kernel.org>, Feng Tang <feng.tang@intel.com>, David Rientjes <rientjes@google.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Andrew Morton <akpm@linux-foundation.org>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, Alex Elder <elder@kernel.org>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, Jesse Brandeburg <jesse.brandeburg@intel.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Marco Elver <elver@google.com>, Miguel Ojeda <ojeda@kernel.org>, linux-kernel@vger.kernel.org, linux-mm@kvack.org, netdev@vger.kernel.org, linux-btrfs@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.lina
+ ro.org, linux-fsdevel@vger.kernel.org, intel-wired-lan@lists.osuosl.org, dev@openvswitch.org, x86@kernel.org, linux-wireless@vger.kernel.org, llvm@lists.linux.dev, linux-hardening@vger.kernel.org, Hyeonggon Yoo <42.hyeyoo@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 07/12] igb: Proactively round up to kmalloc bucket size
+Subject: [Linaro-mm-sig] Re: [PATCH 00/12] slab: Introduce kmalloc_size_roundup()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YW2QR6LBTCA25NNUTXP6FPZ6B3IDBI46/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2522T3U7LSXOGSY2L6OVY2EHWGY3ZGMN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 22, 2022 at 03:56:54PM +0000, Ruhl, Michael J wrote:
-> >From: dri-devel <dri-devel-bounces@lists.freedesktop.org> On Behalf Of Kees Cook
-> [...]
-> >diff --git a/drivers/net/ethernet/intel/igb/igb_main.c
-> >b/drivers/net/ethernet/intel/igb/igb_main.c
-> >index 2796e81d2726..4d70ee5b0f79 100644
-> >--- a/drivers/net/ethernet/intel/igb/igb_main.c
-> >+++ b/drivers/net/ethernet/intel/igb/igb_main.c
-> >@@ -1196,6 +1196,7 @@ static int igb_alloc_q_vector(struct igb_adapter
-> >*adapter,
-> >
-> > 	ring_count = txr_count + rxr_count;
-> > 	size = struct_size(q_vector, ring, ring_count);
-> >+	size = kmalloc_size_roundup(size);
-> 
-> why not:
-> 
-> 	size = kmalloc_size_roundup(struct_size(q_vector, ring, ring_count));
-> 
-> ?
+On Thu, Sep 22, 2022 at 11:05:47PM +0200, Vlastimil Babka wrote:
+> On 9/22/22 17:55, Kees Cook wrote:
+> > On Thu, Sep 22, 2022 at 09:10:56AM +0200, Christian K=F6nig wrote:
+> > [...]
+> > > So when this patch set is about to clean up this use case it should p=
+robably
+> > > also take care to remove ksize() or at least limit it so that it won'=
+t be
+> > > used for this use case in the future.
+> >=20
+> > Yeah, my goal would be to eliminate ksize(), and it seems possible if
+> > other cases are satisfied with tracking their allocation sizes directly.
+>=20
+> I think we could leave ksize() to determine the size without a need for
+> external tracking, but from now on forbid callers from using that hint to
+> overflow the allocation size they actually requested? Once we remove the
+> kasan/kfence hooks in ksize() that make the current kinds of usage possib=
+le,
+> we should be able to catch any offenders of the new semantics that would =
+appear?
 
-Sure! I though it might be more readable split up. I will change it. :)
+That's correct. I spent the morning working my way through the rest of
+the ksize() users I didn't clean up yesterday, and in several places I
+just swapped in __ksize(). But that wouldn't even be needed if we just
+removed the kasan unpoisoning from ksize(), etc.
 
--- 
+I am tempted to leave it __ksize(), though, just to reinforce that it's
+not supposed to be used "normally". What do you think?
+
+--=20
 Kees Cook
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
