@@ -2,104 +2,115 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 895F15E8396
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 23 Sep 2022 22:29:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 890195E8393
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 23 Sep 2022 22:29:12 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BD4D63F94E
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 23 Sep 2022 20:29:20 +0000 (UTC)
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
-	by lists.linaro.org (Postfix) with ESMTPS id 7E6E03F94F
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 23 Sep 2022 20:28:32 +0000 (UTC)
-Received: by mail-pl1-f182.google.com with SMTP id d24so1177704pls.4
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 23 Sep 2022 13:28:32 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id BD92D3F942
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 23 Sep 2022 20:29:11 +0000 (UTC)
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com [209.85.215.176])
+	by lists.linaro.org (Postfix) with ESMTPS id E12FC3F95A
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 23 Sep 2022 20:28:31 +0000 (UTC)
+Received: by mail-pg1-f176.google.com with SMTP id t70so1264931pgc.5
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 23 Sep 2022 13:28:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date;
-        bh=9WHW9dcNJ7USo93XbepCTz52gEB8RJhZFTCAgOxjaWE=;
-        b=MCrThrcpHBXTtrPTMUDahiOxJ8D8ml0adnc2b/ZnUpLhKCWbzkicjK7DVQ0Out5WOD
-         FREFmdsJO4H0m9nZW5aGp3kZr8NyuDEg+cjmHSd2PFaU5B93FD7J4xKRdTkOt4VgUbKn
-         UMInxMGoGT3uNhBnpORcuWbRNV0aijKsC637c=
+        bh=8ihjvmU6X32IA3g0n6Ob0CbMhk1X+mcnfaE/5Wfmhd8=;
+        b=LPhVNeH7/j6XoYSyZU8Fbh//laqcTzvu//J4Iy04p1XS4de+UJKinl09GFu2JyMlZM
+         OiqIFGFrD5z7VUB8De1Lo4L81RAcz4hJEUvZG4jbI7uvuCZ21WW6CkLOkKLLpki0ZPPj
+         ptuTYFeO3yYhD48tSYI8BF3HO3FHnDA3HFKOc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date;
-        bh=9WHW9dcNJ7USo93XbepCTz52gEB8RJhZFTCAgOxjaWE=;
-        b=4jf/dBwo/Cy2Oq4egv0wVTjVp+Kh9yOdQ+Gsma8181a72OisrLnEqStKWE87irYuxT
-         cixI5uhzdX2VB2M/PBRW49ySgOVhMwDtcK2UsR8srgiPLia5VDZEZcoDWywKj8EIdS5v
-         LbVrEfpO+ZRNx+2tUD+MU2Ofld+Xndp8XbMT2s6LDenNyRi9+BEIhyk5tes9mVi3hkll
-         of4R6xXQBN8zgU/kcYpClITcBpQ11yKgyyiJupq7HsOqWegzqj3RUIE+8Z0l5OlFnLOA
-         YsD5nZ6quxhpUKevEmc4Y8pE5OHf/EfGHm9O6xF4TPaTkhKwcJDF2fcTygbXMyLVYtMo
-         J/Ig==
-X-Gm-Message-State: ACrzQf3Oo3/3mOt98EZfiwGHu3u9I+ztzsOyuTbB2vzqrHuUC8szivC/
-	1ojPmWezDEakfVDPoHEUdgKQ9w==
-X-Google-Smtp-Source: AMsMyM5oK9MYI8mIo+EhF+H1NGRpmeDN3XTs1GMolX8M2ezSAV2Ua89sZ12ya0mBIXqqAy1a/ohl1A==
-X-Received: by 2002:a17:902:ce85:b0:178:2402:1f7d with SMTP id f5-20020a170902ce8500b0017824021f7dmr10208022plg.81.1663964912148;
-        Fri, 23 Sep 2022 13:28:32 -0700 (PDT)
+        bh=8ihjvmU6X32IA3g0n6Ob0CbMhk1X+mcnfaE/5Wfmhd8=;
+        b=xKloTn/VYOEpPje1HFfGLjJnQ3LRA5R+55rhCzQm89UK/eJay9+0jBfUkALn1HXyn0
+         TihH6XkjX17EdPDpjdgJYUvLjiFdNcEuG9mOcxIDS6lt8djioZxprtHbHzR/FPxKArP7
+         XEDDk8tV90EhhZIuvr/m0T3svE6Y2bfgiTY7hCMLwzVlpJWA9o/eRmlXxnMZi+dLxol9
+         szWEwS4G52mX64ZgsQh/ZDX+VGkK2VLQgwG0S8u+2Xmx+nTWfzYUcjR0yxzVyAfraO3s
+         SmgbJQ2L4Er4EnB2e9Tg3xq9+x5ZVukPIS387oDTmBvPI2ZcnTgF/TtR8bqlPfcBZ5+T
+         Gp+Q==
+X-Gm-Message-State: ACrzQf3dlJrLqk4o6vjgzxsSbbyvozwoyOc1os8FkBWBPskKpimUmvsj
+	tn1C9vLhF5ejbFqqbmCc6uP9zQ==
+X-Google-Smtp-Source: AMsMyM7hhwlwgGRqkrSlb8k8bTqhsy6m3L3BTgcy2EFgVZwJvbZTev1f0ePX9YiutVAIEpKxIDEauA==
+X-Received: by 2002:a05:6a00:2185:b0:520:7276:6570 with SMTP id h5-20020a056a00218500b0052072766570mr10823472pfi.84.1663964910977;
+        Fri, 23 Sep 2022 13:28:30 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
-        by smtp.gmail.com with ESMTPSA id n8-20020a170902d2c800b00174d9bbeda4sm6514749plc.197.2022.09.23.13.28.26
+        by smtp.gmail.com with ESMTPSA id a7-20020a170902710700b00176ae5c0f38sm6420511pll.178.2022.09.23.13.28.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Fri, 23 Sep 2022 13:28:28 -0700 (PDT)
 From: Kees Cook <keescook@chromium.org>
 To: Vlastimil Babka <vbabka@suse.cz>
-Date: Fri, 23 Sep 2022 13:28:14 -0700
-Message-Id: <20220923202822.2667581-9-keescook@chromium.org>
+Date: Fri, 23 Sep 2022 13:28:15 -0700
+Message-Id: <20220923202822.2667581-10-keescook@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220923202822.2667581-1-keescook@chromium.org>
 References: <20220923202822.2667581-1-keescook@chromium.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1536; h=from:subject; bh=1k9cluqwH+m+5FA9iHjyZRl7ltBBZL1qz3WU+O4eJDg=; b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBjLhbkkQMIyxW+p5Yq+8oZ2wcfayyBNx+y5dQbw2fi AE/i2oWJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCYy4W5AAKCRCJcvTf3G3AJs+QD/ sFhRuVLRx0nMn49LZ3LgzAUGJu/OCv8HKw/plbSsv+vpxeMZ5Y4Z2yz+8pOjvg3cX6lD5EGOFnhfDh AkybvgBPzOD3UBEmc2+orSVNWeDOnYXG/2dyEL7KYashVN5HVyJ+SxZeRk177uhTjBzjbNRkAQ/SVs Oxp1fa8tJlAzSNr4khPvRqKxudlyHIfws9eHam1m+xu9Yx4IaRjlpv73TPFSCF3B4R61s5d9qdqmI6 QtxsboSAw9VmMnwtQ92JY/zE3XF4HhRRzOwCGtrvQkJf7xWir9bHo5kODtv29MGnYSHOD7MNuLNHvy yT9yMlcMCSUI01Gqw83MyXuzCvvbGT8fRIxDuE0OLV8AuytMSMYtLLvmi8aqicaaH1P85zLrbxJ7VQ ibgpFBaDwYITAulUo26Uezs0cpbObE4vDsRPIMUwW8KNHI4PXEY3ej4CfYwEi05WAoQDnHjsKiI3mw NgRo1Knltm0LSiFomNDPAPC2bLhoNZ5ap0NV7jcfaCdq1s+e8i6UWoxTNuvUmvNZIO/WymKW5MaK0w VFLb8zJYoMtYLSQQRa1twKC/oiHyzfBWzmy0upGh1vD2LcXJMTsecq1f9iPUzq0AYRDLPe3zIIPTo5 8qm3uJJ1hdyE1VeTF4mKkOhP+oujwwLKoB9fQmxF1d5+YH73zekSnLGtymEw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1167; h=from:subject; bh=pDNvsGLyQA8RpBfkkqJxHruRXSdA8gdZalovRqbX85w=; b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBjLhbl/n4E1MQAIRbO7TQnliesxT9vRRUjnB997VqU NfNmMx2JAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCYy4W5QAKCRCJcvTf3G3AJpnPD/ 9wQBqpy8w8j9Te2wEo0D0Hjxhxo55M1tuhtvCVgvJfQ/ry5sJ8eH8KM6rA1+i5+yyravM0DuBRah4g uhrc77nIoJb2kV7c8d7t1g4x8ALFz6XhAPkRpZqDiQcQBAvW8O9x3Cx08jWpK7nAg3/Y43225OKOB6 tVTYN27JCpBxTSSIqc4UFTMXN2IAlMQ5Ob/Zqv/+83XGkTWlJ6QhWxs83ZN6cbP38BNiVxIU8R4X4q w2vVsmNS7RSYF8P5DQihlKqCqmUoYEHbPbwmJ7+PuzAaQl9B925ePSW3sWLgeYKees47F1AL85pjZc FvVYlWbV8TxR5ah3RwNTZ38Wn7CZrVxE9cLyRCKZf3k1yiSPL97A/a4HIYBpAtaCVUIze1SOb44gG5 AeD/OBUhZfYjCqNQUMcrXaVEETtQEQyYObvDbWpjZMSgelJPeNBFTw4EHffM7FA71KwkU2YjesRYnu oDThnDhHv4KriQ3B5f+kESZJ2BjJePfLpOXMGt9bH1GXYnTKm2ZjNYVGmhOLx9jqiq7V9DNRZ8gtzJ iP1adulU4jNHuzcGVGv1REEmZUqTzrvgs4oy3VrE+j7gZBdT6IsTqQy5TPFC3tl2xHFdDR3KPEPqVf jCvjUcb44rcHyPLMelC6K/nXZ7kIHy17/M3xfiCKeCwJLqv86xQvXPgVl2QA==
 X-Developer-Key: i=keescook@chromium.org; a=openpgp; fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
-Message-ID-Hash: UJMZO5DZSS2VFRN4V24QQ5VBVEJP7AUX
-X-Message-ID-Hash: UJMZO5DZSS2VFRN4V24QQ5VBVEJP7AUX
+Message-ID-Hash: 67IUKYZHO36TNKLJSAHSLI3BDT3HIZVN
+X-Message-ID-Hash: 67IUKYZHO36TNKLJSAHSLI3BDT3HIZVN
 X-MailFrom: keescook@chromium.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Kees Cook <keescook@chromium.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, "Ruhl, Michael J" <michael.j.ruhl@intel.com>, Hyeonggon Yoo <42.hyeyoo@gmail.com>, Christoph Lameter <cl@linux.com>, Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Andrew Morton <akpm@linux-foundation.org>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, Alex Elder <elder@kernel.org>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Jesse Brandeburg <jesse.brandeburg@intel.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Marco Elver <elver@google.com>, Miguel Oj
- eda <ojeda@kernel.org>, linux-kernel@vger.kernel.org, linux-mm@kvack.org, netdev@vger.kernel.org, linux-btrfs@vger.kernel.org, linux-fsdevel@vger.kernel.org, intel-wired-lan@lists.osuosl.org, dev@openvswitch.org, x86@kernel.org, llvm@lists.linux.dev, linux-hardening@vger.kernel.org
+CC: Kees Cook <keescook@chromium.org>, linux-fsdevel@vger.kernel.org, "Ruhl, Michael J" <michael.j.ruhl@intel.com>, Hyeonggon Yoo <42.hyeyoo@gmail.com>, Christoph Lameter <cl@linux.com>, Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Andrew Morton <akpm@linux-foundation.org>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, Alex Elder <elder@kernel.org>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Jesse Brandeburg <jesse.brandeburg@intel.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Marco Elver <elver@google.com>, Miguel Ojeda <ojeda@kernel.org>, linux-kernel@vger.kernel.org, linux-mm@
+ kvack.org, netdev@vger.kernel.org, linux-btrfs@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, intel-wired-lan@lists.osuosl.org, dev@openvswitch.org, x86@kernel.org, llvm@lists.linux.dev, linux-hardening@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 08/16] dma-buf: Proactively round up to kmalloc bucket size
+Subject: [Linaro-mm-sig] [PATCH v2 09/16] coredump: Proactively round up to kmalloc bucket size
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UJMZO5DZSS2VFRN4V24QQ5VBVEJP7AUX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/67IUKYZHO36TNKLJSAHSLI3BDT3HIZVN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SW5zdGVhZCBvZiBkaXNjb3ZlcmluZyB0aGUga21hbGxvYyBidWNrZXQgc2l6ZSBfYWZ0ZXJfIGFs
-bG9jYXRpb24sIHJvdW5kDQp1cCBwcm9hY3RpdmVseSBzbyB0aGUgYWxsb2NhdGlvbiBpcyBleHBs
-aWNpdGx5IG1hZGUgZm9yIHRoZSBmdWxsIHNpemUsDQphbGxvd2luZyB0aGUgY29tcGlsZXIgdG8g
-Y29ycmVjdGx5IHJlYXNvbiBhYm91dCB0aGUgcmVzdWx0aW5nIHNpemUgb2YNCnRoZSBidWZmZXIg
-dGhyb3VnaCB0aGUgZXhpc3RpbmcgX19hbGxvY19zaXplKCkgaGludC4NCg0KQ2M6IFN1bWl0IFNl
-bXdhbCA8c3VtaXQuc2Vtd2FsQGxpbmFyby5vcmc+DQpDYzogIkNocmlzdGlhbiBLw7ZuaWciIDxj
-aHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQpDYzogbGludXgtbWVkaWFAdmdlci5rZXJuZWwub3Jn
-DQpDYzogZHJpLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZw0KQ2M6IGxpbmFyby1tbS1zaWdA
-bGlzdHMubGluYXJvLm9yZw0KU2lnbmVkLW9mZi1ieTogS2VlcyBDb29rIDxrZWVzY29va0BjaHJv
-bWl1bS5vcmc+DQotLS0NCiBkcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYyB8IDkgKysrKysrKy0t
-DQogMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCg0KZGlm
-ZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jIGIvZHJpdmVycy9kbWEtYnVmL2Rt
-YS1yZXN2LmMNCmluZGV4IDIwNWFjYjJjNzQ0ZC4uNWIwYTRiODgzMGZmIDEwMDY0NA0KLS0tIGEv
-ZHJpdmVycy9kbWEtYnVmL2RtYS1yZXN2LmMNCisrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVz
-di5jDQpAQCAtOTgsMTIgKzk4LDE3IEBAIHN0YXRpYyB2b2lkIGRtYV9yZXN2X2xpc3Rfc2V0KHN0
-cnVjdCBkbWFfcmVzdl9saXN0ICpsaXN0LA0KIHN0YXRpYyBzdHJ1Y3QgZG1hX3Jlc3ZfbGlzdCAq
-ZG1hX3Jlc3ZfbGlzdF9hbGxvYyh1bnNpZ25lZCBpbnQgbWF4X2ZlbmNlcykNCiB7DQogCXN0cnVj
-dCBkbWFfcmVzdl9saXN0ICpsaXN0Ow0KKwlzaXplX3Qgc2l6ZTsNCiANCi0JbGlzdCA9IGttYWxs
-b2Moc3RydWN0X3NpemUobGlzdCwgdGFibGUsIG1heF9mZW5jZXMpLCBHRlBfS0VSTkVMKTsNCisJ
-LyogUm91bmQgdXAgdG8gdGhlIG5leHQga21hbGxvYyBidWNrZXQgc2l6ZS4gKi8NCisJc2l6ZSA9
-IGttYWxsb2Nfc2l6ZV9yb3VuZHVwKHN0cnVjdF9zaXplKGxpc3QsIHRhYmxlLCBtYXhfZmVuY2Vz
-KSk7DQorDQorCWxpc3QgPSBrbWFsbG9jKHNpemUsIEdGUF9LRVJORUwpOw0KIAlpZiAoIWxpc3Qp
-DQogCQlyZXR1cm4gTlVMTDsNCiANCi0JbGlzdC0+bWF4X2ZlbmNlcyA9IChrc2l6ZShsaXN0KSAt
-IG9mZnNldG9mKHR5cGVvZigqbGlzdCksIHRhYmxlKSkgLw0KKwkvKiBHaXZlbiB0aGUgcmVzdWx0
-aW5nIGJ1Y2tldCBzaXplLCByZWNhbGN1bGF0ZWQgbWF4X2ZlbmNlcy4gKi8NCisJbGlzdC0+bWF4
-X2ZlbmNlcyA9IChzaXplIC0gb2Zmc2V0b2YodHlwZW9mKCpsaXN0KSwgdGFibGUpKSAvDQogCQlz
-aXplb2YoKmxpc3QtPnRhYmxlKTsNCiANCiAJcmV0dXJuIGxpc3Q7DQotLSANCjIuMzQuMQ0KDQpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0t
-c2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5z
-dWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFy
-by5vcmcK
+Instead of discovering the kmalloc bucket size _after_ allocation, round
+up proactively so the allocation is explicitly made for the full size,
+allowing the compiler to correctly reason about the resulting size of
+the buffer through the existing __alloc_size() hint.
+
+Cc: linux-fsdevel@vger.kernel.org
+Signed-off-by: Kees Cook <keescook@chromium.org>
+---
+ fs/coredump.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/fs/coredump.c b/fs/coredump.c
+index 9f4aae202109..0894b2c35d98 100644
+--- a/fs/coredump.c
++++ b/fs/coredump.c
+@@ -68,7 +68,10 @@ struct core_name {
+ 
+ static int expand_corename(struct core_name *cn, int size)
+ {
+-	char *corename = krealloc(cn->corename, size, GFP_KERNEL);
++	char *corename;
++
++	size = kmalloc_size_roundup(size);
++	corename = krealloc(cn->corename, size, GFP_KERNEL);
+ 
+ 	if (!corename)
+ 		return -ENOMEM;
+@@ -76,7 +79,7 @@ static int expand_corename(struct core_name *cn, int size)
+ 	if (size > core_name_size) /* racy but harmless */
+ 		core_name_size = size;
+ 
+-	cn->size = ksize(corename);
++	cn->size = size;
+ 	cn->corename = corename;
+ 	return 0;
+ }
+-- 
+2.34.1
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
