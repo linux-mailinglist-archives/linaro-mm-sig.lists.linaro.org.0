@@ -2,104 +2,128 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 77B625E977A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Sep 2022 02:38:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AAC355E9783
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Sep 2022 02:41:32 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 447F43F1C0
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Sep 2022 00:38:57 +0000 (UTC)
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com [209.85.215.172])
-	by lists.linaro.org (Postfix) with ESMTPS id 4C56D3F1C0
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Sep 2022 00:38:51 +0000 (UTC)
-Received: by mail-pg1-f172.google.com with SMTP id 3so5196586pga.1
-        for <linaro-mm-sig@lists.linaro.org>; Sun, 25 Sep 2022 17:38:51 -0700 (PDT)
+	by lists.linaro.org (Postfix) with ESMTP id D7C1241077
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Sep 2022 00:41:31 +0000 (UTC)
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+	by lists.linaro.org (Postfix) with ESMTPS id 7A0AF3F1C0
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Sep 2022 00:41:26 +0000 (UTC)
+Received: by mail-pj1-f42.google.com with SMTP id d64-20020a17090a6f4600b00202ce056566so10879351pjk.4
+        for <linaro-mm-sig@lists.linaro.org>; Sun, 25 Sep 2022 17:41:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date;
-        bh=ZsMZDiPJ05dqPEjOyzQRRCQyAniieUtquk7D7/uc9oo=;
-        b=EloZHChUwOJ+IAK+dqPRjhd24FYS6MkmFqZpedddEJP3NPIP54FWcwg3RKRz6Ai8pZ
-         z2DviABmbm5Ne8x7+vcrgYA1N3bmoOgjdNpOgYz+yaXmcZ9y56Pdoen1P+xANPX4dHu4
-         HiKqS9DzqPcFKjopFBXMCDEaM898Bv94O7hJQ=
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date;
+        bh=Ee6jY7viFUfMjAsx1AOZFi9ykD0TZlKjDDVt7+BAWpA=;
+        b=Tymc3mQ6yYtKo/fUwb0pntTGEsuDmA3KGe5ZainSrzJcqfvTUXGD6g4AS/QDrdEz1m
+         IPp9Tld0kqL2gFrY1NTkahNxDsLTe8rCfVZ7Sf6Yy58l+LrHh3LtaZFzBUsKT5oECTI8
+         ASxk03BGu9JGtTcAH5Y41r1unU3COw5iwE/sg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
-        bh=ZsMZDiPJ05dqPEjOyzQRRCQyAniieUtquk7D7/uc9oo=;
-        b=ZVsvnHYuwCy1++YqH/mI8a5nelda5NrCUaMBu3PukKI1qSF/F2J0UqpLlIVm/AnmGc
-         dFkZG8ijgxH+PzK4H6btAm+1GXlRcMpsrZJZapJnsmtrsycSgvdEDUGOE/+vrmn94Jl7
-         vjMQ5erBCgmASj3MJAU74o+fEDFG/JLIViX1MGdznDHNM3g9bo4JxbDtlisU/sGIJwJa
-         zpWJfZSiX8Yyn5ZRzVlO1kwHjtQshhE9CCvjjwfobMdcqgVXkvkbLIm9ex8aTEx3HKkP
-         ZQuACu5TcwW1MEWaEyPBAgx9gkH8PTGcBbXPG2Y05kZWG5tPCRcsHQi4/sSt7+d1N0Fx
-         Nz3A==
-X-Gm-Message-State: ACrzQf2QFMZR1+WfXK9UOrbSxXIbnTQFDPsZ8GnluXeSnXOoVP2Ossyz
-	+BDsIMfy5TdwZSL3267scDQXQw==
-X-Google-Smtp-Source: AMsMyM7j48vn8CX614C8f5vlUd1g6FcIEIYyyHHTpwyTo0bx6Hew8gRK92T2JHXk4G8JNUKlDJxOQQ==
-X-Received: by 2002:a63:4b1d:0:b0:439:e6a4:e902 with SMTP id y29-20020a634b1d000000b00439e6a4e902mr18048148pga.212.1664152730415;
-        Sun, 25 Sep 2022 17:38:50 -0700 (PDT)
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date;
+        bh=Ee6jY7viFUfMjAsx1AOZFi9ykD0TZlKjDDVt7+BAWpA=;
+        b=3Zt0LowjoTL84b9MBSl+WECJBC/EvmgbtHA89XpA1P8Yokk+dcwW8R8RZbcB5EyrnK
+         Y6XOXWedpiYc5uQOTb7e+ADXXcDwSJgzMmqlnuTjahZ0Ux2hErP8lChjJ7Mh9K+H5HUV
+         TMWXx71f9Ws+DaDpGAmZpaSyqhYinYQWWZpd+R1whBEVWIxXOYspKDpjF/zEFRCpu/Vb
+         Y+inuHcSvw675c1GDp2YwS5YNuWE7rn/DbweQN+1RS3orSXqmbWAneBjIzJiU6IxpY/y
+         rBS2M6wkY3ZsEMaR+gozgJ0D+SBaRztdakLYgdMlY6NMlbsgcDcZ0IkWgQ48p0b7DvUP
+         L0aw==
+X-Gm-Message-State: ACrzQf1ksGAwEN1GiRurMn1VtKLOVR3Nq5x4pGv1y6ReIGK6sRoL6VK0
+	VCNkmnYZurBK+NXropZLCvsvhA==
+X-Google-Smtp-Source: AMsMyM5VpMx54A01n2IxbeNYegjZcGYyyX6uNC/69UJfyYAh5+QLjokwGVSlu1kDsKsMHY6BwDZQuA==
+X-Received: by 2002:a17:902:ea0e:b0:178:3d49:45ad with SMTP id s14-20020a170902ea0e00b001783d4945admr19810833plg.103.1664152885590;
+        Sun, 25 Sep 2022 17:41:25 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
-        by smtp.gmail.com with ESMTPSA id t11-20020a17090340cb00b00172951ddb12sm9640855pld.42.2022.09.25.17.38.49
+        by smtp.gmail.com with ESMTPSA id l7-20020a622507000000b0053ebafa7c42sm10576331pfl.79.2022.09.25.17.41.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 25 Sep 2022 17:38:49 -0700 (PDT)
-Date: Sun, 25 Sep 2022 17:38:48 -0700
+        Sun, 25 Sep 2022 17:41:24 -0700 (PDT)
+Date: Sun, 25 Sep 2022 17:41:23 -0700
 From: Kees Cook <keescook@chromium.org>
-To: Dmitry Vyukov <dvyukov@google.com>
-Message-ID: <202209251738.6A453BC008@keescook>
+To: Paolo Abeni <pabeni@redhat.com>
+Message-ID: <202209251738.2E6B9C29D@keescook>
 References: <20220923202822.2667581-1-keescook@chromium.org>
- <20220923202822.2667581-15-keescook@chromium.org>
- <CACT4Y+bg=j9VdteQwrJTNFF_t4EE5uDTMLj07+uMJ9-NcooXGQ@mail.gmail.com>
+ <20220923202822.2667581-5-keescook@chromium.org>
+ <e340d993bce8e1b2742fba52ac6383771cfaddae.camel@redhat.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CACT4Y+bg=j9VdteQwrJTNFF_t4EE5uDTMLj07+uMJ9-NcooXGQ@mail.gmail.com>
-Message-ID-Hash: TFACC5VD2MQ4RCARGDVCXQUYBGTAGMGF
-X-Message-ID-Hash: TFACC5VD2MQ4RCARGDVCXQUYBGTAGMGF
+In-Reply-To: <e340d993bce8e1b2742fba52ac6383771cfaddae.camel@redhat.com>
+Message-ID-Hash: PTECB4IMTIGVQQAAWW5OD6AT756EC2PA
+X-Message-ID-Hash: PTECB4IMTIGVQQAAWW5OD6AT756EC2PA
 X-MailFrom: keescook@chromium.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Vlastimil Babka <vbabka@suse.cz>, Andrey Ryabinin <ryabinin.a.a@gmail.com>, Alexander Potapenko <glider@google.com>, Andrey Konovalov <andreyknvl@gmail.com>, Vincenzo Frascino <vincenzo.frascino@arm.com>, Andrew Morton <akpm@linux-foundation.org>, kasan-dev@googlegroups.com, linux-mm@kvack.org, "Ruhl, Michael J" <michael.j.ruhl@intel.com>, Hyeonggon Yoo <42.hyeyoo@gmail.com>, Christoph Lameter <cl@linux.com>, Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, Alex Elder <elder@kernel.org>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Jesse Brandeburg <jesse.brande
- burg@intel.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Marco Elver <elver@google.com>, Miguel Ojeda <ojeda@kernel.org>, linux-kernel@vger.kernel.org, netdev@vger.kernel.org, linux-btrfs@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, intel-wired-lan@lists.osuosl.org, dev@openvswitch.org, x86@kernel.org, llvm@lists.linux.dev, linux-hardening@vger.kernel.org
+CC: Vlastimil Babka <vbabka@suse.cz>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, netdev@vger.kernel.org, "Ruhl, Michael J" <michael.j.ruhl@intel.com>, Hyeonggon Yoo <42.hyeyoo@gmail.com>, Christoph Lameter <cl@linux.com>, Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Andrew Morton <akpm@linux-foundation.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, Alex Elder <elder@kernel.org>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Jesse Brandeburg <jesse.brandeburg@intel.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Marco Elver <elver@google.com>, Miguel Ojeda <ojeda@kernel.org>, linux-kernel@vger.kernel.org, linux-mm@kvack.org, linux-btrfs@vger.kernel.org, l
+ inux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, intel-wired-lan@lists.osuosl.org, dev@openvswitch.org, x86@kernel.org, llvm@lists.linux.dev, linux-hardening@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 14/16] kasan: Remove ksize()-related tests
+Subject: [Linaro-mm-sig] Re: [PATCH v2 04/16] skbuff: Phase out ksize() fallback for frag_size
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TFACC5VD2MQ4RCARGDVCXQUYBGTAGMGF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PTECB4IMTIGVQQAAWW5OD6AT756EC2PA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Sep 24, 2022 at 10:15:18AM +0200, Dmitry Vyukov wrote:
-> On Fri, 23 Sept 2022 at 22:28, Kees Cook <keescook@chromium.org> wrote:
-> >
-> > In preparation for no longer unpoisoning in ksize(), remove the behavioral
-> > self-tests for ksize().
-> >
+On Sun, Sep 25, 2022 at 09:17:40AM +0200, Paolo Abeni wrote:
+> On Fri, 2022-09-23 at 13:28 -0700, Kees Cook wrote:
+> > All callers of APIs that allowed a 0-sized frag_size appear to be
+> > passing actual size information already
+>=20
+> AFAICS, not yet:
+>=20
+> drivers/net/ethernet/qlogic/qed/qed_ll2.c:
+> 	skb =3D build_skb(buffer->data, 0); // -> __build_skb(..., 0)=A0
+> 		// ->  __build_skb_around()
+>=20
+> drivers/net/ethernet/broadcom/bnx2.c:
+> 	skb =3D build_skb(data, 0);
+>=20
+> I guess some more drivers have calls leading to=A0
+>=20
+> 	__build_skb_around(...,  0)
+>=20
+> there are several call path to checks...
+
+Ah-ha! Thank you. I will try to hunt these down -- I think we can't
+remove the "secret resizing" effect of ksize() without fixing these.
+
 > > [...]
-> > -/* Check that ksize() makes the whole object accessible. */
-> > -static void ksize_unpoisons_memory(struct kunit *test)
-> > -{
-> > -       char *ptr;
-> > -       size_t size = 123, real_size;
-> > -
-> > -       ptr = kmalloc(size, GFP_KERNEL);
-> > -       KUNIT_ASSERT_NOT_ERR_OR_NULL(test, ptr);
-> > -       real_size = ksize(ptr);
-> > -
-> > -       OPTIMIZER_HIDE_VAR(ptr);
-> > -
-> > -       /* This access shouldn't trigger a KASAN report. */
->  > -       ptr[size] = 'x';
-> 
-> I would rather keep the tests and update to the new behavior. We had
-> bugs in ksize, we need test coverage.
-> I assume ptr[size] access must now produce an error even after ksize.
+> > diff --git a/net/core/skbuff.c b/net/core/skbuff.c
+> > index 0b30fbdbd0d0..84ca89c781cd 100644
+> > --- a/net/core/skbuff.c
+> > +++ b/net/core/skbuff.c
+> > @@ -195,7 +195,11 @@ static void __build_skb_around(struct sk_buff *skb=
+, void *data,
+> >  			       unsigned int frag_size)
+> >  {
+> >  	struct skb_shared_info *shinfo;
+> > -	unsigned int size =3D frag_size ? : ksize(data);
+> > +	unsigned int size =3D frag_size;
+> > +
+> > +	/* All callers should be setting frag size now? */
+> > +	if (WARN_ON_ONCE(size =3D=3D 0))
+> > +		size =3D ksize(data);
+>=20
+> At some point in the future, I guess we could even drop this check,
+> right?
 
-Good point on all these! I'll respin.
+Alternatively, we might be able to ask the slab if "data" came from
+kmalloc or a kmem_cache, and if the former, do:
 
--- 
+	data =3D krealloc(kmalloc_size_roundup(ksize(data), ...)
+
+But that seems ugly...
+
+--=20
 Kees Cook
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
