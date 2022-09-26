@@ -2,144 +2,277 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 223765EA179
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Sep 2022 12:51:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E4AC5EAB9B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Sep 2022 17:49:29 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9F3B240488
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Sep 2022 10:51:22 +0000 (UTC)
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
-	by lists.linaro.org (Postfix) with ESMTPS id 58CCF3ED77
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Sep 2022 10:50:59 +0000 (UTC)
-Received: by mail-wr1-f49.google.com with SMTP id bq9so9597134wrb.4
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Sep 2022 03:50:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date;
-        bh=RRTzEh4eX7QJuMr9PBYcSE6qe2YnKNQ4s+EeI3ZLOR8=;
-        b=N2CdQZ5DidOd7rXorrAHwsU7REyGYjsVLRQw24k5i/zVnwxTVLXi79SokmwMPQ23dG
-         ltHADiZ2Xdl1ZpGJHcq9sCz91HuEiXsn5cgUkN6cCcc0qhs3gJdO6JtWSNxOVKAm2maA
-         RUP45w5trMH4BmzGD7P4bYWDoQ80fJ5gk/tTcqUWNZwxEVqilkjzRE/DXJj2o9eLrnMT
-         Eibb/G/CFzTjUYyiTkzjs9+xpKaddZrQr2Ady4gPnOt6q/+8sfnBsKlTNnNA0nWB58c5
-         OZTJtHQ5pIa7jnF722Q6qFBJveO3Wd9eH06jY4XW0T30bgmjP4abl+o8prFN+WFIDcbp
-         QH5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date;
-        bh=RRTzEh4eX7QJuMr9PBYcSE6qe2YnKNQ4s+EeI3ZLOR8=;
-        b=hKlWSeQpKCpf8XINkip7KQUmGi9trrTjcbIbjzfncRoEAG78PZrTWASof71Lm9NXfp
-         Rn8XTG2tUQyxqBwy0XFOS72mYwJiF2ZfnkOpa8gleNWLusHyFdLVMEff5df/PIQrAhph
-         YRA2xqEZbcViehvOUGbTsdhl1LrymUwLHkz4T8E7N0iz4dciuQZifnKzdf+PdAkrJLF/
-         1npXHDVG3LXntY81k87K1uFgD6Vv8Jv/eVPjJIsPOgbpqLPsFoBwQmEHaeICVSptFvKf
-         JzzLg6RufyKk+aZOgEsvp/MA9H0/pYTidpr4j2WzBG3gPopZ34E/Tg/uoM62uH3iB5Qu
-         x1cg==
-X-Gm-Message-State: ACrzQf2Iz221Dj9g9asz7dHRpKzJ4VwJ1xdZh68ClxTtIiK0+Ay1NeZ9
-	kv6wgm0O7jIVm/pTAOdnEMFLz7sbNJ0=
-X-Google-Smtp-Source: AMsMyM7SuVBgSYWy5kh1HhAcVXy6Llss6obNUjIA/ZoXJgkE8T8RGaoTb9VPoRu5QX3Pg6i6kN2O6A==
-X-Received: by 2002:a05:6402:2489:b0:454:11de:7698 with SMTP id q9-20020a056402248900b0045411de7698mr21490387eda.214.1664184564514;
-        Mon, 26 Sep 2022 02:29:24 -0700 (PDT)
-Received: from [192.168.178.21] (p4fc20ebf.dip0.t-ipconnect.de. [79.194.14.191])
-        by smtp.gmail.com with ESMTPSA id lh3-20020a170906f8c300b00782ee6b34f2sm3710039ejb.183.2022.09.26.02.29.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 26 Sep 2022 02:29:24 -0700 (PDT)
-Message-ID: <a07c4a5e-1668-3609-334c-8aee2834ff90@gmail.com>
-Date: Mon, 26 Sep 2022 11:29:20 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Content-Language: en-US
+	by lists.linaro.org (Postfix) with ESMTP id 1E91E4050C
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Sep 2022 15:49:28 +0000 (UTC)
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+	by lists.linaro.org (Postfix) with ESMTPS id 8ABF13F8EB
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Sep 2022 15:49:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1664207346; x=1695743346;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=cVdSevvhDIWDYS8iV0bUsmnd4ZtdDXW1rzPl0O1tgDg=;
+  b=SG+tzfqlHEpj/CGX4mgrSW3yPAMvqMmoWXR0UtY65zkorUtkA/kcAJEx
+   d3o/qgu8MUXgSliKWWp91+PMBlnsnTGh8aAMTkt0/p0vbpOI91rWGRwm8
+   XKPPD+QpPJqgKJbv+Bl22AIGJvOhgF8OraSK8TMpH9bN83/qVje2Wz3Fi
+   nwpkbu+a3h6hobkA3hh2hxnniqdyd90Q0ENzX3ZyL4E/vSQuf3I7QMaem
+   nNQeaabrxJDENU7rwXneiUF1zNmVErOR/DjbLHdLJ2LwhMgH4UXFQDhtk
+   HV19duYh1tRmxMQ4JkcuAyjIOHigIIQETjd2nrtJnBD55Rt+im5fGxG5c
+   A==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10482"; a="284180669"
+X-IronPort-AV: E=Sophos;i="5.93,346,1654585200";
+   d="scan'208";a="284180669"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Sep 2022 08:49:05 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10482"; a="651872904"
+X-IronPort-AV: E=Sophos;i="5.93,346,1654585200";
+   d="scan'208";a="651872904"
+Received: from orsmsx601.amr.corp.intel.com ([10.22.229.14])
+  by orsmga008.jf.intel.com with ESMTP; 26 Sep 2022 08:49:04 -0700
+Received: from orsmsx601.amr.corp.intel.com (10.22.229.14) by
+ ORSMSX601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31; Mon, 26 Sep 2022 08:49:04 -0700
+Received: from orsedg603.ED.cps.intel.com (10.7.248.4) by
+ orsmsx601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.31 via Frontend Transport; Mon, 26 Sep 2022 08:49:04 -0700
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (104.47.57.172)
+ by edgegateway.intel.com (134.134.137.100) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2375.31; Mon, 26 Sep 2022 08:49:04 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=hhtVrnV1hWrZFMrW6hu+L0FvMm3efW1jV51BgXpDWUPYs92/cWrcS/NaHyp1AkTateGEmJ0rWmbKLghV347RQUlusnKQqDRoBx1ofdB3B6+Gr/2FFlS2Hvigns85tH74mj8Pfp+M8UzVeB5tj9kefJ7RonQ+iidia75muDq0WZmd7W1HHNPyutpemM0mQ2ZMI/WUP5TiebfZXT/EuxLlX04pk1XuTPb5tCpL66td5BdCSWKk00qUe7mqdU6ZxCrMqXSVHR1+xVUUl17Q2fI7WlOdW48kkuAutWAvadPVLvo2RO5CT017btgVcpcnRauIEVC0QltEa8qRpQB1zyKV7w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fofTDFGBoNvMPEw1Dpr0xEP1PSg2NB2o1FENz4SGW6I=;
+ b=Gjy8JkG/wFQ6bItH6RmDqCdYDrgE73YEiTXqndxOrZB7iLKF4fjqQ8OzEca/83b8O/JETI2JlFZtvYXcd9zP162MyRwysVuN06/zgbZ9kl3x2AixZ/LV1s6UyvONWapsDmXH8LWCyNylv1VJgPU+KC/kkC7lcggq1YsGPIXOvAN9zXIu/NEFDjGrSo8ECnrdW+5Az7bUA02c3apZxRU8E8cbzlHIN4/ezhWYQpd63LnELgKQGpOe84Daq/xXxYcF8Xkt7Monz1Ju8FXwBq4U6bJT24XIL7pinutnheTde/q/rrh8tHW6hrQNPnMFHs9UmJZ0CtJRzUSdGDEfl/szvA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from DM5PR11MB1324.namprd11.prod.outlook.com (2603:10b6:3:15::14) by
+ BL1PR11MB5221.namprd11.prod.outlook.com (2603:10b6:208:310::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.25; Mon, 26 Sep
+ 2022 15:49:02 +0000
+Received: from DM5PR11MB1324.namprd11.prod.outlook.com
+ ([fe80::7992:6033:ae1f:3e08]) by DM5PR11MB1324.namprd11.prod.outlook.com
+ ([fe80::7992:6033:ae1f:3e08%11]) with mapi id 15.20.5654.025; Mon, 26 Sep
+ 2022 15:49:02 +0000
+From: "Ruhl, Michael J" <michael.j.ruhl@intel.com>
 To: Kees Cook <keescook@chromium.org>, Vlastimil Babka <vbabka@suse.cz>
+Thread-Topic: [PATCH v2 06/16] igb: Proactively round up to kmalloc bucket
+ size
+Thread-Index: AQHYz4sQnGagtDAy5Ey39TamNoTGUK3x3q/A
+Date: Mon, 26 Sep 2022 15:49:02 +0000
+Message-ID: <DM5PR11MB13241141BB4C863F1A01D958C1529@DM5PR11MB1324.namprd11.prod.outlook.com>
 References: <20220923202822.2667581-1-keescook@chromium.org>
- <20220923202822.2667581-9-keescook@chromium.org>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <20220923202822.2667581-9-keescook@chromium.org>
+ <20220923202822.2667581-7-keescook@chromium.org>
+In-Reply-To: <20220923202822.2667581-7-keescook@chromium.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-product: dlpe-windows
+dlp-reaction: no-action
+dlp-version: 11.6.500.17
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DM5PR11MB1324:EE_|BL1PR11MB5221:EE_
+x-ms-office365-filtering-correlation-id: 3b13f607-4bfa-4e36-51e6-08da9fd6a282
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: B30/mdLOatQAiRtXoSU9ThH7GMZqYobdTBoeUkupZqB8NQQzuiPufJRt+xUV9Mlphn9XaKTnwqkNVNJYRggptoA7kAxQvFhbc886EY3QlyT85/yj2C9zMjalS8Oy3TxjiS1jxCYsURNDSOcF0CAtyMDEjDeR16pObo4J4GfAgrrBAfednKnZ4/UR5BexfId7wivgzrr0QJFp43FV0FfBml2iSePSFbIFhd6VJ6VlpqDv+vydQazHYB7x5HY6d998BLlU1gRMVWXMJjeHv56alVS4Jr+IChnCXsJBE0rwxcmxcK6x1i9NbeiK5O8Yyj7n1nIMoeHuiLZy1hXX9TrOgJ/3TNWzRNuawYp9dMZ5YK2tQpO2GBObKlkt8acIM8Z9sUnzvKkvzAFUppLLMAaSpjo2do6OJLvjLsOC6WKCI7NAIbC2p57ErD8qmMPk0NegJkC5r7ormJKghC2TEuT/FqquQUqboirfhYhQ73+Vfm1CEr0gbtGpqkFDmDPMc4yBZNNdgDnCZTGIJpUOUw1WIcZf7YPVAjE6mniGb3R91hxwArP8PiKJZ73Z56uMBcKCTnmdreIlQxtlZ/wBWSghZVDMizzvlS1bLOEtNGocg2LMDaoBsabjFQ2AdUS1huJUSi7SJ6bbygE2+oP5q5BSvVmPV/JDMVxRjqv0KNo5btFhVfQo3lMG1e7/IZhZpStakQ+oisI/VOrD0OOGC4B/OYmvHx2LNU1uF+rSIkXZw+tPpmcJy5oB+JFibzQStJRlsmH5pGQEmYEKhkyBBkoCdw==
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB1324.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(346002)(366004)(396003)(376002)(39860400002)(136003)(451199015)(54906003)(71200400001)(110136005)(316002)(478600001)(83380400001)(66556008)(76116006)(66946007)(8676002)(4326008)(66476007)(66446008)(41300700001)(7696005)(6506007)(52536014)(64756008)(5660300002)(9686003)(7416002)(26005)(7406005)(38070700005)(2906002)(8936002)(33656002)(186003)(66574015)(82960400001)(122000001)(38100700002)(55016003)(86362001);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?AIGrTDbDFItjn4Ryzw80Jp36y9fRnr/BqJ50poZHfHifbpx3TK4GxN3wLw?=
+ =?iso-8859-1?Q?Wf/aeQeLRJCZ9P5nh/rDr4nnMOpahTfkkC+fUPq1MpEbJ46lY873by7FdU?=
+ =?iso-8859-1?Q?J2cw3+PkOjZqr952qdBoDP4n8mZoRkqMrL3atK9pR8sqRNdtu8xwFT0Ry4?=
+ =?iso-8859-1?Q?E3VFxUQN0aHmYndJtE6YUJtZ4cpUGhWpXPZD00EUFIAfWs08f8yaGjDJ9l?=
+ =?iso-8859-1?Q?ncSm+xyxBD1R4/PxRVSYc0Nv1V9aOu4YjTqzAldndhWBHvVFrrUM0YBu3b?=
+ =?iso-8859-1?Q?af2gbglzyB5yMA9V3vitzkoMMgO8yH5TSr3W3bosOAoIvAItjDFoqmuFVq?=
+ =?iso-8859-1?Q?lLYN8jq4h95OEmiGeFteIAiZBIe6HUlX/nH7LDhl/blo8scMmaAOVsQrdf?=
+ =?iso-8859-1?Q?olupVt356KLQ0Og0nB+ecMlN6EbqZPEcruA31MZSZ0lz76ubOChyHrIXXm?=
+ =?iso-8859-1?Q?jHkYwR+Uhn03JA8wgBMLgoSpIL/+9dAQVGpMap0j3Rexm/8z40UtGBnVXj?=
+ =?iso-8859-1?Q?CSovMeYyGmi4CHXoXfiXuo3glmED68t9C2lq9S75RTDhFTCK3auRcDWbyM?=
+ =?iso-8859-1?Q?d/cMOsEr2vc8L7gNrbyI+W6m4b5QRggJ+22xh9hKaVesQMAlW4dMMG8A6T?=
+ =?iso-8859-1?Q?79rzTmOGWj3/L5TcmkntS31AB9ZDukDEXFaNXQ8XYUfsbM/Rx1cGQMW3CN?=
+ =?iso-8859-1?Q?H4GfFka+AdbGR54KnJFSl8qRL98dkmy1jtk7Z2cZauT0NIx0vppc4KiWN9?=
+ =?iso-8859-1?Q?TC0XaITbgjREt+/EAfFGYS0bOszJ704Wv3Npd2AMTav6nAXhl2vVv74sAG?=
+ =?iso-8859-1?Q?wFbhbVmou/FcES5nolt2Xb/FVQCwFfBxPv9MwJhdFu8RYUJQiAQaWVx+g2?=
+ =?iso-8859-1?Q?7/4zjzaoUy/aYLnulenNzKyEL8bFpR/VOi76HPQP9x2Wl1tqUuvSKT4pWv?=
+ =?iso-8859-1?Q?qW6AFEFivC3KSZVhkj58dSSpuDzp+sM/dnUHbL7BG5ppTcdEIxId1G+sD3?=
+ =?iso-8859-1?Q?5ALS8UTSqkyW1SRqDYyMNlhsuBzKDRXOD1cKVLu6gO1YcfHYIhczsj5lde?=
+ =?iso-8859-1?Q?jm5GeWXoMq2/sovZ2XCfk1kxMWV3r9O2lm7pc3YY6Ng5ImU9MDEmaHmFeP?=
+ =?iso-8859-1?Q?kyLvTTPKI+oYCmZwHPWnpnkFDvdvqe0Kc7Qe3rBQXXgOhQdKP+eXbm+V0X?=
+ =?iso-8859-1?Q?wxHazAY51hizH4umUdbO69bZRz1m5c/TJnY+lOYaQjLPWDJZwhk7QIydxY?=
+ =?iso-8859-1?Q?rstGMoJHAM8AJzg6le3U0UXgLXoDSj8DzopjPGJTNbwzFHBAcNAPhp9Z/M?=
+ =?iso-8859-1?Q?c2vlGWNZh56Z0wqfS3JdYCkq34Z4rSx6F/ABopOEmhytlzV18ZBGBsW4mL?=
+ =?iso-8859-1?Q?bot2lCu7Fek8tSBGBVu1HOoveRb69bFXLcpJYo7fcCdEN42FqkLUXnSPL1?=
+ =?iso-8859-1?Q?a0Khc3p2AVe1ETebA6FZH6M+4n0+tAgeeXDi7VWkVMqWd7NkvM/R7oDBkR?=
+ =?iso-8859-1?Q?RP8WRKpGbcG09Tewj1uc4knl1D2rr/kKYIPNzWnPl1jPZ2Uq54QsXg87jf?=
+ =?iso-8859-1?Q?P9kG9GzfXxaMwRKkPrnDxOfX5ElS5WaqBWzSNIT9TDPfiacjrff3Z9bYNW?=
+ =?iso-8859-1?Q?EZE+iFekeX83uHYvQWK9qhM/5NwWK8ZZLM?=
+Content-Type: text/plain; charset="iso-8859-1"
+MIME-Version: 1.0
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB1324.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3b13f607-4bfa-4e36-51e6-08da9fd6a282
+X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Sep 2022 15:49:02.4457
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: QQDp/xFXJV7+d1QXhc5KT5kx9GvtnmEuu3UiJvVwVZaI8oGr7EdbJa6J1WFxdP4+VJW3h7gYwvRDgb0M5HM3n6atR7KeFrBgeExOURDbMX0=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR11MB5221
+X-OriginatorOrg: intel.com
 X-Rspamd-Server: lists.linaro.org
 X-Spamd-Bar: /
-X-Rspamd-Queue-Id: 58CCF3ED77
-X-Spamd-Result: default: False [0.50 / 15.00];
+X-Rspamd-Queue-Id: 8ABF13F8EB
+X-Spamd-Result: default: False [-0.30 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:134.134.136.126/32];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[38];
-	ARC_NA(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_FROM(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	FROM_EQ_ENVFROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.221.49:from];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	ASN(0.00)[asn:4983, ipnet:134.134.136.0/24, country:US];
+	R_DKIM_PERMFAIL(0.00)[intel.com:s=Intel];
+	RCVD_COUNT_SEVEN(0.00)[8];
+	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:~];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[linaro.org,amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,intel.com,gmail.com,linux.com,kernel.org,google.com,lge.com,linux-foundation.org,davemloft.net,redhat.com,linuxfoundation.org,toxicpanda.com,suse.com,fb.com,kvack.org,lists.osuosl.org,openvswitch.org,lists.linux.dev];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[38];
 	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
+	FREEMAIL_CC(0.00)[intel.com,davemloft.net,google.com,kernel.org,redhat.com,lists.osuosl.org,vger.kernel.org,gmail.com,linux.com,lge.com,linux-foundation.org,linuxfoundation.org,toxicpanda.com,suse.com,linaro.org,amd.com,fb.com,kvack.org,lists.freedesktop.org,lists.linaro.org,openvswitch.org,lists.linux.dev]
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=N2CdQZ5D;
-	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.221.49 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Message-ID-Hash: 4IBWHAVNGD3KA23NHEPXTVZOHTD3FZPR
-X-Message-ID-Hash: 4IBWHAVNGD3KA23NHEPXTVZOHTD3FZPR
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
+	dkim=none ("invalid DKIM record") header.d=intel.com header.s=Intel header.b=SG+tzfql;
+	spf=pass (lists.linaro.org: domain of michael.j.ruhl@intel.com designates 134.134.136.126 as permitted sender) smtp.mailfrom=michael.j.ruhl@intel.com;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1");
+	dmarc=pass (policy=none) header.from=intel.com
+Message-ID-Hash: 43IZABUWCK5H2P7OELWEFOSGVRH2BO3U
+X-Message-ID-Hash: 43IZABUWCK5H2P7OELWEFOSGVRH2BO3U
+X-MailFrom: michael.j.ruhl@intel.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, "Ruhl, Michael J" <michael.j.ruhl@intel.com>, Hyeonggon Yoo <42.hyeyoo@gmail.com>, Christoph Lameter <cl@linux.com>, Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Andrew Morton <akpm@linux-foundation.org>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, Alex Elder <elder@kernel.org>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Jesse Brandeburg <jesse.brandeburg@intel.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Marco Elver <elver@google.com>, Miguel Oj eda <ojeda@kernel.org>, linux-kernel
- @vger.kernel.org, linux-mm@kvack.org, netdev@vger.kernel.org, linux-btrfs@vger.kernel.org, linux-fsdevel@vger.kernel.org, intel-wired-lan@lists.osuosl.org, dev@openvswitch.org, x86@kernel.org, llvm@lists.linux.dev, linux-hardening@vger.kernel.org
+CC: "Brandeburg, Jesse" <jesse.brandeburg@intel.com>, "Nguyen, Anthony L" <anthony.l.nguyen@intel.com>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, "intel-wired-lan@lists.osuosl.org" <intel-wired-lan@lists.osuosl.org>, "netdev@vger.kernel.org" <netdev@vger.kernel.org>, Hyeonggon Yoo <42.hyeyoo@gmail.com>, Christoph Lameter <cl@linux.com>, Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Andrew Morton <akpm@linux-foundation.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, Alex Elder <elder@kernel.org>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?iso-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Marco Elver <elver@google.com>, Miguel Oj
+ eda <ojeda@kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>, "linux-btrfs@vger.kernel.org" <linux-btrfs@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>, "dev@openvswitch.org" <dev@openvswitch.org>, "x86@kernel.org" <x86@kernel.org>, "llvm@lists.linux.dev" <llvm@lists.linux.dev>, "linux-hardening@vger.kernel.org" <linux-hardening@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 08/16] dma-buf: Proactively round up to kmalloc bucket size
+Subject: [Linaro-mm-sig] Re: [PATCH v2 06/16] igb: Proactively round up to kmalloc bucket size
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4IBWHAVNGD3KA23NHEPXTVZOHTD3FZPR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/43IZABUWCK5H2P7OELWEFOSGVRH2BO3U/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: quoted-printable
 
-QW0gMjMuMDkuMjIgdW0gMjI6Mjggc2NocmllYiBLZWVzIENvb2s6DQo+IEluc3RlYWQgb2YgZGlz
-Y292ZXJpbmcgdGhlIGttYWxsb2MgYnVja2V0IHNpemUgX2FmdGVyXyBhbGxvY2F0aW9uLCByb3Vu
-ZA0KPiB1cCBwcm9hY3RpdmVseSBzbyB0aGUgYWxsb2NhdGlvbiBpcyBleHBsaWNpdGx5IG1hZGUg
-Zm9yIHRoZSBmdWxsIHNpemUsDQo+IGFsbG93aW5nIHRoZSBjb21waWxlciB0byBjb3JyZWN0bHkg
-cmVhc29uIGFib3V0IHRoZSByZXN1bHRpbmcgc2l6ZSBvZg0KPiB0aGUgYnVmZmVyIHRocm91Z2gg
-dGhlIGV4aXN0aW5nIF9fYWxsb2Nfc2l6ZSgpIGhpbnQuDQo+DQo+IENjOiBTdW1pdCBTZW13YWwg
-PHN1bWl0LnNlbXdhbEBsaW5hcm8ub3JnPg0KPiBDYzogIkNocmlzdGlhbiBLw7ZuaWciIDxjaHJp
-c3RpYW4ua29lbmlnQGFtZC5jb20+DQo+IENjOiBsaW51eC1tZWRpYUB2Z2VyLmtlcm5lbC5vcmcN
-Cj4gQ2M6IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcNCj4gQ2M6IGxpbmFyby1tbS1z
-aWdAbGlzdHMubGluYXJvLm9yZw0KPiBTaWduZWQtb2ZmLWJ5OiBLZWVzIENvb2sgPGtlZXNjb29r
-QGNocm9taXVtLm9yZz4NCg0KUmV2aWV3ZWQtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlh
-bi5rb2VuaWdAYW1kLmNvbT4NCg0KPiAtLS0NCj4gICBkcml2ZXJzL2RtYS1idWYvZG1hLXJlc3Yu
-YyB8IDkgKysrKysrKy0tDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDcgaW5zZXJ0aW9ucygrKSwgMiBk
-ZWxldGlvbnMoLSkNCj4NCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5j
-IGIvZHJpdmVycy9kbWEtYnVmL2RtYS1yZXN2LmMNCj4gaW5kZXggMjA1YWNiMmM3NDRkLi41YjBh
-NGI4ODMwZmYgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jDQo+ICsr
-KyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jDQo+IEBAIC05OCwxMiArOTgsMTcgQEAgc3Rh
-dGljIHZvaWQgZG1hX3Jlc3ZfbGlzdF9zZXQoc3RydWN0IGRtYV9yZXN2X2xpc3QgKmxpc3QsDQo+
-ICAgc3RhdGljIHN0cnVjdCBkbWFfcmVzdl9saXN0ICpkbWFfcmVzdl9saXN0X2FsbG9jKHVuc2ln
-bmVkIGludCBtYXhfZmVuY2VzKQ0KPiAgIHsNCj4gICAJc3RydWN0IGRtYV9yZXN2X2xpc3QgKmxp
-c3Q7DQo+ICsJc2l6ZV90IHNpemU7DQo+ICAgDQo+IC0JbGlzdCA9IGttYWxsb2Moc3RydWN0X3Np
-emUobGlzdCwgdGFibGUsIG1heF9mZW5jZXMpLCBHRlBfS0VSTkVMKTsNCj4gKwkvKiBSb3VuZCB1
-cCB0byB0aGUgbmV4dCBrbWFsbG9jIGJ1Y2tldCBzaXplLiAqLw0KPiArCXNpemUgPSBrbWFsbG9j
-X3NpemVfcm91bmR1cChzdHJ1Y3Rfc2l6ZShsaXN0LCB0YWJsZSwgbWF4X2ZlbmNlcykpOw0KPiAr
-DQo+ICsJbGlzdCA9IGttYWxsb2Moc2l6ZSwgR0ZQX0tFUk5FTCk7DQo+ICAgCWlmICghbGlzdCkN
-Cj4gICAJCXJldHVybiBOVUxMOw0KPiAgIA0KPiAtCWxpc3QtPm1heF9mZW5jZXMgPSAoa3NpemUo
-bGlzdCkgLSBvZmZzZXRvZih0eXBlb2YoKmxpc3QpLCB0YWJsZSkpIC8NCj4gKwkvKiBHaXZlbiB0
-aGUgcmVzdWx0aW5nIGJ1Y2tldCBzaXplLCByZWNhbGN1bGF0ZWQgbWF4X2ZlbmNlcy4gKi8NCj4g
-KwlsaXN0LT5tYXhfZmVuY2VzID0gKHNpemUgLSBvZmZzZXRvZih0eXBlb2YoKmxpc3QpLCB0YWJs
-ZSkpIC8NCj4gICAJCXNpemVvZigqbGlzdC0+dGFibGUpOw0KPiAgIA0KPiAgIAlyZXR1cm4gbGlz
-dDsNCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGlu
-YXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3Jn
-ClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0
-cy5saW5hcm8ub3JnCg==
+>-----Original Message-----
+>From: Kees Cook <keescook@chromium.org>
+>Sent: Friday, September 23, 2022 4:28 PM
+>To: Vlastimil Babka <vbabka@suse.cz>
+>Cc: Kees Cook <keescook@chromium.org>; Brandeburg, Jesse
+><jesse.brandeburg@intel.com>; Nguyen, Anthony L
+><anthony.l.nguyen@intel.com>; David S. Miller <davem@davemloft.net>;
+>Eric Dumazet <edumazet@google.com>; Jakub Kicinski <kuba@kernel.org>;
+>Paolo Abeni <pabeni@redhat.com>; intel-wired-lan@lists.osuosl.org;
+>netdev@vger.kernel.org; Ruhl, Michael J <michael.j.ruhl@intel.com>;
+>Hyeonggon Yoo <42.hyeyoo@gmail.com>; Christoph Lameter
+><cl@linux.com>; Pekka Enberg <penberg@kernel.org>; David Rientjes
+><rientjes@google.com>; Joonsoo Kim <iamjoonsoo.kim@lge.com>; Andrew
+>Morton <akpm@linux-foundation.org>; Greg Kroah-Hartman
+><gregkh@linuxfoundation.org>; Nick Desaulniers
+><ndesaulniers@google.com>; Alex Elder <elder@kernel.org>; Josef Bacik
+><josef@toxicpanda.com>; David Sterba <dsterba@suse.com>; Sumit Semwal
+><sumit.semwal@linaro.org>; Christian K=F6nig <christian.koenig@amd.com>;
+>Daniel Micay <danielmicay@gmail.com>; Yonghong Song <yhs@fb.com>;
+>Marco Elver <elver@google.com>; Miguel Ojeda <ojeda@kernel.org>; linux-
+>kernel@vger.kernel.org; linux-mm@kvack.org; linux-btrfs@vger.kernel.org;
+>linux-media@vger.kernel.org; dri-devel@lists.freedesktop.org; linaro-mm-
+>sig@lists.linaro.org; linux-fsdevel@vger.kernel.org; dev@openvswitch.org;
+>x86@kernel.org; llvm@lists.linux.dev; linux-hardening@vger.kernel.org
+>Subject: [PATCH v2 06/16] igb: Proactively round up to kmalloc bucket size
+>
+>In preparation for removing the "silently change allocation size"
+>users of ksize(), explicitly round up all q_vector allocations so that
+>allocations can be correctly compared to ksize().
+>
+>Additionally fix potential use-after-free in the case of new allocation
+>failure: only free memory if the replacement allocation succeeds.
+>
+>Cc: Jesse Brandeburg <jesse.brandeburg@intel.com>
+>Cc: Tony Nguyen <anthony.l.nguyen@intel.com>
+>Cc: "David S. Miller" <davem@davemloft.net>
+>Cc: Eric Dumazet <edumazet@google.com>
+>Cc: Jakub Kicinski <kuba@kernel.org>
+>Cc: Paolo Abeni <pabeni@redhat.com>
+>Cc: intel-wired-lan@lists.osuosl.org
+>Cc: netdev@vger.kernel.org
+>Signed-off-by: Kees Cook <keescook@chromium.org>
+>---
+> drivers/net/ethernet/intel/igb/igb_main.c | 5 +++--
+> 1 file changed, 3 insertions(+), 2 deletions(-)
+>
+>diff --git a/drivers/net/ethernet/intel/igb/igb_main.c
+>b/drivers/net/ethernet/intel/igb/igb_main.c
+>index 2796e81d2726..eb51e531c096 100644
+>--- a/drivers/net/ethernet/intel/igb/igb_main.c
+>+++ b/drivers/net/ethernet/intel/igb/igb_main.c
+>@@ -1195,15 +1195,16 @@ static int igb_alloc_q_vector(struct igb_adapter
+>*adapter,
+> 		return -ENOMEM;
+>
+> 	ring_count =3D txr_count + rxr_count;
+>-	size =3D struct_size(q_vector, ring, ring_count);
+>+	size =3D kmalloc_size_roundup(struct_size(q_vector, ring, ring_count));
+
+This looks good to me...
+
+> 	/* allocate q_vector and rings */
+> 	q_vector =3D adapter->q_vector[v_idx];
+> 	if (!q_vector) {
+> 		q_vector =3D kzalloc(size, GFP_KERNEL);
+> 	} else if (size > ksize(q_vector)) {
+>-		kfree_rcu(q_vector, rcu);
+> 		q_vector =3D kzalloc(size, GFP_KERNEL);
+>+		if (q_vector)
+>+			kfree_rcu(q_vector, rcu);
+
+Even though this is in the ksize part, this seems like an unrelated change?
+ Should this be in a different patch?
+
+Also, the kfree_rcu will free q_vector after the RCU grace period?
+
+Is that what you want to do?
+
+How does rcu distinguish between the original q_vector, and the newly kzall=
+oced one?
+
+Thanks,
+
+Mike
+
+
+
+> 	} else {
+> 		memset(q_vector, 0, size);
+> 	}
+>--
+>2.34.1
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
