@@ -2,277 +2,306 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2E4AC5EAB9B
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Sep 2022 17:49:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA5FC5EAE9F
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Sep 2022 19:51:01 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1E91E4050C
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Sep 2022 15:49:28 +0000 (UTC)
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
-	by lists.linaro.org (Postfix) with ESMTPS id 8ABF13F8EB
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Sep 2022 15:49:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1664207346; x=1695743346;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-transfer-encoding:mime-version;
-  bh=cVdSevvhDIWDYS8iV0bUsmnd4ZtdDXW1rzPl0O1tgDg=;
-  b=SG+tzfqlHEpj/CGX4mgrSW3yPAMvqMmoWXR0UtY65zkorUtkA/kcAJEx
-   d3o/qgu8MUXgSliKWWp91+PMBlnsnTGh8aAMTkt0/p0vbpOI91rWGRwm8
-   XKPPD+QpPJqgKJbv+Bl22AIGJvOhgF8OraSK8TMpH9bN83/qVje2Wz3Fi
-   nwpkbu+a3h6hobkA3hh2hxnniqdyd90Q0ENzX3ZyL4E/vSQuf3I7QMaem
-   nNQeaabrxJDENU7rwXneiUF1zNmVErOR/DjbLHdLJ2LwhMgH4UXFQDhtk
-   HV19duYh1tRmxMQ4JkcuAyjIOHigIIQETjd2nrtJnBD55Rt+im5fGxG5c
-   A==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10482"; a="284180669"
-X-IronPort-AV: E=Sophos;i="5.93,346,1654585200";
-   d="scan'208";a="284180669"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Sep 2022 08:49:05 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10482"; a="651872904"
-X-IronPort-AV: E=Sophos;i="5.93,346,1654585200";
-   d="scan'208";a="651872904"
-Received: from orsmsx601.amr.corp.intel.com ([10.22.229.14])
-  by orsmga008.jf.intel.com with ESMTP; 26 Sep 2022 08:49:04 -0700
-Received: from orsmsx601.amr.corp.intel.com (10.22.229.14) by
- ORSMSX601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31; Mon, 26 Sep 2022 08:49:04 -0700
-Received: from orsedg603.ED.cps.intel.com (10.7.248.4) by
- orsmsx601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31 via Frontend Transport; Mon, 26 Sep 2022 08:49:04 -0700
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com (104.47.57.172)
- by edgegateway.intel.com (134.134.137.100) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2375.31; Mon, 26 Sep 2022 08:49:04 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hhtVrnV1hWrZFMrW6hu+L0FvMm3efW1jV51BgXpDWUPYs92/cWrcS/NaHyp1AkTateGEmJ0rWmbKLghV347RQUlusnKQqDRoBx1ofdB3B6+Gr/2FFlS2Hvigns85tH74mj8Pfp+M8UzVeB5tj9kefJ7RonQ+iidia75muDq0WZmd7W1HHNPyutpemM0mQ2ZMI/WUP5TiebfZXT/EuxLlX04pk1XuTPb5tCpL66td5BdCSWKk00qUe7mqdU6ZxCrMqXSVHR1+xVUUl17Q2fI7WlOdW48kkuAutWAvadPVLvo2RO5CT017btgVcpcnRauIEVC0QltEa8qRpQB1zyKV7w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fofTDFGBoNvMPEw1Dpr0xEP1PSg2NB2o1FENz4SGW6I=;
- b=Gjy8JkG/wFQ6bItH6RmDqCdYDrgE73YEiTXqndxOrZB7iLKF4fjqQ8OzEca/83b8O/JETI2JlFZtvYXcd9zP162MyRwysVuN06/zgbZ9kl3x2AixZ/LV1s6UyvONWapsDmXH8LWCyNylv1VJgPU+KC/kkC7lcggq1YsGPIXOvAN9zXIu/NEFDjGrSo8ECnrdW+5Az7bUA02c3apZxRU8E8cbzlHIN4/ezhWYQpd63LnELgKQGpOe84Daq/xXxYcF8Xkt7Monz1Ju8FXwBq4U6bJT24XIL7pinutnheTde/q/rrh8tHW6hrQNPnMFHs9UmJZ0CtJRzUSdGDEfl/szvA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from DM5PR11MB1324.namprd11.prod.outlook.com (2603:10b6:3:15::14) by
- BL1PR11MB5221.namprd11.prod.outlook.com (2603:10b6:208:310::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5654.25; Mon, 26 Sep
- 2022 15:49:02 +0000
-Received: from DM5PR11MB1324.namprd11.prod.outlook.com
- ([fe80::7992:6033:ae1f:3e08]) by DM5PR11MB1324.namprd11.prod.outlook.com
- ([fe80::7992:6033:ae1f:3e08%11]) with mapi id 15.20.5654.025; Mon, 26 Sep
- 2022 15:49:02 +0000
-From: "Ruhl, Michael J" <michael.j.ruhl@intel.com>
-To: Kees Cook <keescook@chromium.org>, Vlastimil Babka <vbabka@suse.cz>
-Thread-Topic: [PATCH v2 06/16] igb: Proactively round up to kmalloc bucket
- size
-Thread-Index: AQHYz4sQnGagtDAy5Ey39TamNoTGUK3x3q/A
-Date: Mon, 26 Sep 2022 15:49:02 +0000
-Message-ID: <DM5PR11MB13241141BB4C863F1A01D958C1529@DM5PR11MB1324.namprd11.prod.outlook.com>
+	by lists.linaro.org (Postfix) with ESMTP id A54D24050C
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Sep 2022 17:51:00 +0000 (UTC)
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+	by lists.linaro.org (Postfix) with ESMTPS id 112833F8EB
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Sep 2022 17:50:40 +0000 (UTC)
+Received: by mail-pl1-f173.google.com with SMTP id d24so6926740pls.4
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Sep 2022 10:50:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date;
+        bh=TNDUsCjQ4zB2/5GZ7X+uS9zeoK4Uz9rg4Dmc7gG+Kts=;
+        b=diPFMelUGqg5Olz6I8z2UqQgP/qT0p6U2CTPr1IKXAPPQDlXjIbGiW+Mq8ZW/AJerP
+         YVtmTqGjAus4WfzbTh4Tizc48Roo/vvFh6ncx714UJ4hLWN/DikhBXoZzoyhCy7LE6Y/
+         3OYOMIYymLSLRxuRHD8IaRlLtQ4iFKBE+1Png=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
+        bh=TNDUsCjQ4zB2/5GZ7X+uS9zeoK4Uz9rg4Dmc7gG+Kts=;
+        b=TXty05NrTObouBj1iNnL6cIpg2+lOmBfjc8j7jW2ZMerRbi7tbz5SMhp21HTQmf0fL
+         L1DUmiCX28gpz5u5x7vX/akw2BoRkx8fhqnZszhKAnWilPC08hMmiX6VVhP9RTTt6B1+
+         km5pbFMgIueEZMnaFaDiWgHarJygQ8ve9zJG0wK+agDLm/LBrCGcbRVkAufG/6CgQpbM
+         +29ogvklN83jnCsvxGMibWNx4iIwtDekFGACb4Gsjl17/We/+9baQu3coJXsDN4Mp+7o
+         dirEqFawMZVjLUqWO9BdRd9mhxvejuKuaPPPlFVDgLXYaKran0ZaJE/z7q9vilstaDUE
+         CU4g==
+X-Gm-Message-State: ACrzQf1Ax1iditux8n/9G08fAiqfceMVhTSDCBo4KviywBojIOa0ehlQ
+	8xSKm4xbRdhvaDcHL1hXb2am/A==
+X-Google-Smtp-Source: AMsMyM53HUNBt6kGZBRWVtwFK3cgJAVMJrfeOBQoCVB2uG4qpYwM3FiGKu6g/YmgMRQUrRqqychKmQ==
+X-Received: by 2002:a17:90a:a09:b0:202:ab93:2afb with SMTP id o9-20020a17090a0a0900b00202ab932afbmr37124281pjo.60.1664214639071;
+        Mon, 26 Sep 2022 10:50:39 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id g13-20020aa79f0d000000b00536097dd45bsm12539497pfr.134.2022.09.26.10.50.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 26 Sep 2022 10:50:37 -0700 (PDT)
+Date: Mon, 26 Sep 2022 10:50:36 -0700
+From: Kees Cook <keescook@chromium.org>
+To: Vlastimil Babka <vbabka@suse.cz>
+Message-ID: <202209261050.560459B@keescook>
 References: <20220923202822.2667581-1-keescook@chromium.org>
- <20220923202822.2667581-7-keescook@chromium.org>
-In-Reply-To: <20220923202822.2667581-7-keescook@chromium.org>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-reaction: no-action
-dlp-version: 11.6.500.17
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DM5PR11MB1324:EE_|BL1PR11MB5221:EE_
-x-ms-office365-filtering-correlation-id: 3b13f607-4bfa-4e36-51e6-08da9fd6a282
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: B30/mdLOatQAiRtXoSU9ThH7GMZqYobdTBoeUkupZqB8NQQzuiPufJRt+xUV9Mlphn9XaKTnwqkNVNJYRggptoA7kAxQvFhbc886EY3QlyT85/yj2C9zMjalS8Oy3TxjiS1jxCYsURNDSOcF0CAtyMDEjDeR16pObo4J4GfAgrrBAfednKnZ4/UR5BexfId7wivgzrr0QJFp43FV0FfBml2iSePSFbIFhd6VJ6VlpqDv+vydQazHYB7x5HY6d998BLlU1gRMVWXMJjeHv56alVS4Jr+IChnCXsJBE0rwxcmxcK6x1i9NbeiK5O8Yyj7n1nIMoeHuiLZy1hXX9TrOgJ/3TNWzRNuawYp9dMZ5YK2tQpO2GBObKlkt8acIM8Z9sUnzvKkvzAFUppLLMAaSpjo2do6OJLvjLsOC6WKCI7NAIbC2p57ErD8qmMPk0NegJkC5r7ormJKghC2TEuT/FqquQUqboirfhYhQ73+Vfm1CEr0gbtGpqkFDmDPMc4yBZNNdgDnCZTGIJpUOUw1WIcZf7YPVAjE6mniGb3R91hxwArP8PiKJZ73Z56uMBcKCTnmdreIlQxtlZ/wBWSghZVDMizzvlS1bLOEtNGocg2LMDaoBsabjFQ2AdUS1huJUSi7SJ6bbygE2+oP5q5BSvVmPV/JDMVxRjqv0KNo5btFhVfQo3lMG1e7/IZhZpStakQ+oisI/VOrD0OOGC4B/OYmvHx2LNU1uF+rSIkXZw+tPpmcJy5oB+JFibzQStJRlsmH5pGQEmYEKhkyBBkoCdw==
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM5PR11MB1324.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(346002)(366004)(396003)(376002)(39860400002)(136003)(451199015)(54906003)(71200400001)(110136005)(316002)(478600001)(83380400001)(66556008)(76116006)(66946007)(8676002)(4326008)(66476007)(66446008)(41300700001)(7696005)(6506007)(52536014)(64756008)(5660300002)(9686003)(7416002)(26005)(7406005)(38070700005)(2906002)(8936002)(33656002)(186003)(66574015)(82960400001)(122000001)(38100700002)(55016003)(86362001);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?AIGrTDbDFItjn4Ryzw80Jp36y9fRnr/BqJ50poZHfHifbpx3TK4GxN3wLw?=
- =?iso-8859-1?Q?Wf/aeQeLRJCZ9P5nh/rDr4nnMOpahTfkkC+fUPq1MpEbJ46lY873by7FdU?=
- =?iso-8859-1?Q?J2cw3+PkOjZqr952qdBoDP4n8mZoRkqMrL3atK9pR8sqRNdtu8xwFT0Ry4?=
- =?iso-8859-1?Q?E3VFxUQN0aHmYndJtE6YUJtZ4cpUGhWpXPZD00EUFIAfWs08f8yaGjDJ9l?=
- =?iso-8859-1?Q?ncSm+xyxBD1R4/PxRVSYc0Nv1V9aOu4YjTqzAldndhWBHvVFrrUM0YBu3b?=
- =?iso-8859-1?Q?af2gbglzyB5yMA9V3vitzkoMMgO8yH5TSr3W3bosOAoIvAItjDFoqmuFVq?=
- =?iso-8859-1?Q?lLYN8jq4h95OEmiGeFteIAiZBIe6HUlX/nH7LDhl/blo8scMmaAOVsQrdf?=
- =?iso-8859-1?Q?olupVt356KLQ0Og0nB+ecMlN6EbqZPEcruA31MZSZ0lz76ubOChyHrIXXm?=
- =?iso-8859-1?Q?jHkYwR+Uhn03JA8wgBMLgoSpIL/+9dAQVGpMap0j3Rexm/8z40UtGBnVXj?=
- =?iso-8859-1?Q?CSovMeYyGmi4CHXoXfiXuo3glmED68t9C2lq9S75RTDhFTCK3auRcDWbyM?=
- =?iso-8859-1?Q?d/cMOsEr2vc8L7gNrbyI+W6m4b5QRggJ+22xh9hKaVesQMAlW4dMMG8A6T?=
- =?iso-8859-1?Q?79rzTmOGWj3/L5TcmkntS31AB9ZDukDEXFaNXQ8XYUfsbM/Rx1cGQMW3CN?=
- =?iso-8859-1?Q?H4GfFka+AdbGR54KnJFSl8qRL98dkmy1jtk7Z2cZauT0NIx0vppc4KiWN9?=
- =?iso-8859-1?Q?TC0XaITbgjREt+/EAfFGYS0bOszJ704Wv3Npd2AMTav6nAXhl2vVv74sAG?=
- =?iso-8859-1?Q?wFbhbVmou/FcES5nolt2Xb/FVQCwFfBxPv9MwJhdFu8RYUJQiAQaWVx+g2?=
- =?iso-8859-1?Q?7/4zjzaoUy/aYLnulenNzKyEL8bFpR/VOi76HPQP9x2Wl1tqUuvSKT4pWv?=
- =?iso-8859-1?Q?qW6AFEFivC3KSZVhkj58dSSpuDzp+sM/dnUHbL7BG5ppTcdEIxId1G+sD3?=
- =?iso-8859-1?Q?5ALS8UTSqkyW1SRqDYyMNlhsuBzKDRXOD1cKVLu6gO1YcfHYIhczsj5lde?=
- =?iso-8859-1?Q?jm5GeWXoMq2/sovZ2XCfk1kxMWV3r9O2lm7pc3YY6Ng5ImU9MDEmaHmFeP?=
- =?iso-8859-1?Q?kyLvTTPKI+oYCmZwHPWnpnkFDvdvqe0Kc7Qe3rBQXXgOhQdKP+eXbm+V0X?=
- =?iso-8859-1?Q?wxHazAY51hizH4umUdbO69bZRz1m5c/TJnY+lOYaQjLPWDJZwhk7QIydxY?=
- =?iso-8859-1?Q?rstGMoJHAM8AJzg6le3U0UXgLXoDSj8DzopjPGJTNbwzFHBAcNAPhp9Z/M?=
- =?iso-8859-1?Q?c2vlGWNZh56Z0wqfS3JdYCkq34Z4rSx6F/ABopOEmhytlzV18ZBGBsW4mL?=
- =?iso-8859-1?Q?bot2lCu7Fek8tSBGBVu1HOoveRb69bFXLcpJYo7fcCdEN42FqkLUXnSPL1?=
- =?iso-8859-1?Q?a0Khc3p2AVe1ETebA6FZH6M+4n0+tAgeeXDi7VWkVMqWd7NkvM/R7oDBkR?=
- =?iso-8859-1?Q?RP8WRKpGbcG09Tewj1uc4knl1D2rr/kKYIPNzWnPl1jPZ2Uq54QsXg87jf?=
- =?iso-8859-1?Q?P9kG9GzfXxaMwRKkPrnDxOfX5ElS5WaqBWzSNIT9TDPfiacjrff3Z9bYNW?=
- =?iso-8859-1?Q?EZE+iFekeX83uHYvQWK9qhM/5NwWK8ZZLM?=
-Content-Type: text/plain; charset="iso-8859-1"
+ <20220923202822.2667581-3-keescook@chromium.org>
+ <e0326835-9b0d-af1b-bd22-2aadb178bd25@suse.cz>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DM5PR11MB1324.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3b13f607-4bfa-4e36-51e6-08da9fd6a282
-X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Sep 2022 15:49:02.4457
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: QQDp/xFXJV7+d1QXhc5KT5kx9GvtnmEuu3UiJvVwVZaI8oGr7EdbJa6J1WFxdP4+VJW3h7gYwvRDgb0M5HM3n6atR7KeFrBgeExOURDbMX0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR11MB5221
-X-OriginatorOrg: intel.com
+Content-Disposition: inline
+In-Reply-To: <e0326835-9b0d-af1b-bd22-2aadb178bd25@suse.cz>
 X-Rspamd-Server: lists.linaro.org
 X-Spamd-Bar: /
-X-Rspamd-Queue-Id: 8ABF13F8EB
-X-Spamd-Result: default: False [-0.30 / 15.00];
+X-Rspamd-Queue-Id: 112833F8EB
+X-Spamd-Result: default: False [0.90 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:134.134.136.126/32];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[chromium.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[chromium.org:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:134.134.136.0/24, country:US];
-	R_DKIM_PERMFAIL(0.00)[intel.com:s=Intel];
-	RCVD_COUNT_SEVEN(0.00)[8];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.173:from];
 	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:~];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[38];
-	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[37];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[chromium.org:+];
+	TO_DN_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TAGGED_RCPT(0.00)[];
-	FREEMAIL_CC(0.00)[intel.com,davemloft.net,google.com,kernel.org,redhat.com,lists.osuosl.org,vger.kernel.org,gmail.com,linux.com,lge.com,linux-foundation.org,linuxfoundation.org,toxicpanda.com,suse.com,linaro.org,amd.com,fb.com,kvack.org,lists.freedesktop.org,lists.linaro.org,openvswitch.org,lists.linux.dev]
+	FREEMAIL_CC(0.00)[linux.com,kernel.org,google.com,lge.com,linux-foundation.org,kvack.org,intel.com,gmail.com,davemloft.net,redhat.com,linuxfoundation.org,toxicpanda.com,suse.com,linaro.org,amd.com,fb.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.osuosl.org,openvswitch.org,lists.linux.dev]
 Authentication-Results: lists.linaro.org;
-	dkim=none ("invalid DKIM record") header.d=intel.com header.s=Intel header.b=SG+tzfql;
-	spf=pass (lists.linaro.org: domain of michael.j.ruhl@intel.com designates 134.134.136.126 as permitted sender) smtp.mailfrom=michael.j.ruhl@intel.com;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1");
-	dmarc=pass (policy=none) header.from=intel.com
-Message-ID-Hash: 43IZABUWCK5H2P7OELWEFOSGVRH2BO3U
-X-Message-ID-Hash: 43IZABUWCK5H2P7OELWEFOSGVRH2BO3U
-X-MailFrom: michael.j.ruhl@intel.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: "Brandeburg, Jesse" <jesse.brandeburg@intel.com>, "Nguyen, Anthony L" <anthony.l.nguyen@intel.com>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, "intel-wired-lan@lists.osuosl.org" <intel-wired-lan@lists.osuosl.org>, "netdev@vger.kernel.org" <netdev@vger.kernel.org>, Hyeonggon Yoo <42.hyeyoo@gmail.com>, Christoph Lameter <cl@linux.com>, Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Andrew Morton <akpm@linux-foundation.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, Alex Elder <elder@kernel.org>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?iso-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Marco Elver <elver@google.com>, Miguel Oj
- eda <ojeda@kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-mm@kvack.org" <linux-mm@kvack.org>, "linux-btrfs@vger.kernel.org" <linux-btrfs@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>, "dev@openvswitch.org" <dev@openvswitch.org>, "x86@kernel.org" <x86@kernel.org>, "llvm@lists.linux.dev" <llvm@lists.linux.dev>, "linux-hardening@vger.kernel.org" <linux-hardening@vger.kernel.org>
+	dkim=pass header.d=chromium.org header.s=google header.b=diPFMelU;
+	spf=pass (lists.linaro.org: domain of keescook@chromium.org designates 209.85.214.173 as permitted sender) smtp.mailfrom=keescook@chromium.org;
+	dmarc=pass (policy=none) header.from=chromium.org
+Message-ID-Hash: T7HTPNDCPHUNIDPYPWCO3CMREFUIOF64
+X-Message-ID-Hash: T7HTPNDCPHUNIDPYPWCO3CMREFUIOF64
+X-MailFrom: keescook@chromium.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Christoph Lameter <cl@linux.com>, Pekka Enberg <penberg@kernel.org>, David Rientjes <rientjes@google.com>, Joonsoo Kim <iamjoonsoo.kim@lge.com>, Andrew Morton <akpm@linux-foundation.org>, linux-mm@kvack.org, "Ruhl, Michael J" <michael.j.ruhl@intel.com>, Hyeonggon Yoo <42.hyeyoo@gmail.com>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Nick Desaulniers <ndesaulniers@google.com>, Alex Elder <elder@kernel.org>, Josef Bacik <josef@toxicpanda.com>, David Sterba <dsterba@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Jesse Brandeburg <jesse.brandeburg@intel.com>, Daniel Micay <danielmicay@gmail.com>, Yonghong Song <yhs@fb.com>, Marco Elver <elver@google.com>, Miguel Ojeda <ojeda@kernel.org>, linux-kernel@vger.kernel.org, netdev@vger.kernel.org, linux-btrfs@vger.kernel.org, li
+ nux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, intel-wired-lan@lists.osuosl.org, dev@openvswitch.org, x86@kernel.org, llvm@lists.linux.dev, linux-hardening@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 06/16] igb: Proactively round up to kmalloc bucket size
+Subject: [Linaro-mm-sig] Re: [PATCH v2 02/16] slab: Introduce kmalloc_size_roundup()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/43IZABUWCK5H2P7OELWEFOSGVRH2BO3U/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/T7HTPNDCPHUNIDPYPWCO3CMREFUIOF64/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
->-----Original Message-----
->From: Kees Cook <keescook@chromium.org>
->Sent: Friday, September 23, 2022 4:28 PM
->To: Vlastimil Babka <vbabka@suse.cz>
->Cc: Kees Cook <keescook@chromium.org>; Brandeburg, Jesse
-><jesse.brandeburg@intel.com>; Nguyen, Anthony L
-><anthony.l.nguyen@intel.com>; David S. Miller <davem@davemloft.net>;
->Eric Dumazet <edumazet@google.com>; Jakub Kicinski <kuba@kernel.org>;
->Paolo Abeni <pabeni@redhat.com>; intel-wired-lan@lists.osuosl.org;
->netdev@vger.kernel.org; Ruhl, Michael J <michael.j.ruhl@intel.com>;
->Hyeonggon Yoo <42.hyeyoo@gmail.com>; Christoph Lameter
-><cl@linux.com>; Pekka Enberg <penberg@kernel.org>; David Rientjes
-><rientjes@google.com>; Joonsoo Kim <iamjoonsoo.kim@lge.com>; Andrew
->Morton <akpm@linux-foundation.org>; Greg Kroah-Hartman
-><gregkh@linuxfoundation.org>; Nick Desaulniers
-><ndesaulniers@google.com>; Alex Elder <elder@kernel.org>; Josef Bacik
-><josef@toxicpanda.com>; David Sterba <dsterba@suse.com>; Sumit Semwal
-><sumit.semwal@linaro.org>; Christian K=F6nig <christian.koenig@amd.com>;
->Daniel Micay <danielmicay@gmail.com>; Yonghong Song <yhs@fb.com>;
->Marco Elver <elver@google.com>; Miguel Ojeda <ojeda@kernel.org>; linux-
->kernel@vger.kernel.org; linux-mm@kvack.org; linux-btrfs@vger.kernel.org;
->linux-media@vger.kernel.org; dri-devel@lists.freedesktop.org; linaro-mm-
->sig@lists.linaro.org; linux-fsdevel@vger.kernel.org; dev@openvswitch.org;
->x86@kernel.org; llvm@lists.linux.dev; linux-hardening@vger.kernel.org
->Subject: [PATCH v2 06/16] igb: Proactively round up to kmalloc bucket size
->
->In preparation for removing the "silently change allocation size"
->users of ksize(), explicitly round up all q_vector allocations so that
->allocations can be correctly compared to ksize().
->
->Additionally fix potential use-after-free in the case of new allocation
->failure: only free memory if the replacement allocation succeeds.
->
->Cc: Jesse Brandeburg <jesse.brandeburg@intel.com>
->Cc: Tony Nguyen <anthony.l.nguyen@intel.com>
->Cc: "David S. Miller" <davem@davemloft.net>
->Cc: Eric Dumazet <edumazet@google.com>
->Cc: Jakub Kicinski <kuba@kernel.org>
->Cc: Paolo Abeni <pabeni@redhat.com>
->Cc: intel-wired-lan@lists.osuosl.org
->Cc: netdev@vger.kernel.org
->Signed-off-by: Kees Cook <keescook@chromium.org>
->---
-> drivers/net/ethernet/intel/igb/igb_main.c | 5 +++--
-> 1 file changed, 3 insertions(+), 2 deletions(-)
->
->diff --git a/drivers/net/ethernet/intel/igb/igb_main.c
->b/drivers/net/ethernet/intel/igb/igb_main.c
->index 2796e81d2726..eb51e531c096 100644
->--- a/drivers/net/ethernet/intel/igb/igb_main.c
->+++ b/drivers/net/ethernet/intel/igb/igb_main.c
->@@ -1195,15 +1195,16 @@ static int igb_alloc_q_vector(struct igb_adapter
->*adapter,
-> 		return -ENOMEM;
->
-> 	ring_count =3D txr_count + rxr_count;
->-	size =3D struct_size(q_vector, ring, ring_count);
->+	size =3D kmalloc_size_roundup(struct_size(q_vector, ring, ring_count));
+On Mon, Sep 26, 2022 at 03:15:22PM +0200, Vlastimil Babka wrote:
+> On 9/23/22 22:28, Kees Cook wrote:
+> > In the effort to help the compiler reason about buffer sizes, the
+> > __alloc_size attribute was added to allocators. This improves the scope
+> > of the compiler's ability to apply CONFIG_UBSAN_BOUNDS and (in the near
+> > future) CONFIG_FORTIFY_SOURCE. For most allocations, this works well,
+> > as the vast majority of callers are not expecting to use more memory
+> > than what they asked for.
+> > 
+> > There is, however, one common exception to this: anticipatory resizing
+> > of kmalloc allocations. These cases all use ksize() to determine the
+> > actual bucket size of a given allocation (e.g. 128 when 126 was asked
+> > for). This comes in two styles in the kernel:
+> > 
+> > 1) An allocation has been determined to be too small, and needs to be
+> >     resized. Instead of the caller choosing its own next best size, it
+> >     wants to minimize the number of calls to krealloc(), so it just uses
+> >     ksize() plus some additional bytes, forcing the realloc into the next
+> >     bucket size, from which it can learn how large it is now. For example:
+> > 
+> > 	data = krealloc(data, ksize(data) + 1, gfp);
+> > 	data_len = ksize(data);
+> > 
+> > 2) The minimum size of an allocation is calculated, but since it may
+> >     grow in the future, just use all the space available in the chosen
+> >     bucket immediately, to avoid needing to reallocate later. A good
+> >     example of this is skbuff's allocators:
+> > 
+> > 	data = kmalloc_reserve(size, gfp_mask, node, &pfmemalloc);
+> > 	...
+> > 	/* kmalloc(size) might give us more room than requested.
+> > 	 * Put skb_shared_info exactly at the end of allocated zone,
+> > 	 * to allow max possible filling before reallocation.
+> > 	 */
+> > 	osize = ksize(data);
+> >          size = SKB_WITH_OVERHEAD(osize);
+> > 
+> > In both cases, the "how much was actually allocated?" question is answered
+> > _after_ the allocation, where the compiler hinting is not in an easy place
+> > to make the association any more. This mismatch between the compiler's
+> > view of the buffer length and the code's intention about how much it is
+> > going to actually use has already caused problems[1]. It is possible to
+> > fix this by reordering the use of the "actual size" information.
+> > 
+> > We can serve the needs of users of ksize() and still have accurate buffer
+> > length hinting for the compiler by doing the bucket size calculation
+> > _before_ the allocation. Code can instead ask "how large an allocation
+> > would I get for a given size?".
+> > 
+> > Introduce kmalloc_size_roundup(), to serve this function so we can start
+> > replacing the "anticipatory resizing" uses of ksize().
+> > 
+> > [1] https://github.com/ClangBuiltLinux/linux/issues/1599
+> >      https://github.com/KSPP/linux/issues/183
+> > 
+> > Cc: Vlastimil Babka <vbabka@suse.cz>
+> > Cc: Christoph Lameter <cl@linux.com>
+> > Cc: Pekka Enberg <penberg@kernel.org>
+> > Cc: David Rientjes <rientjes@google.com>
+> > Cc: Joonsoo Kim <iamjoonsoo.kim@lge.com>
+> > Cc: Andrew Morton <akpm@linux-foundation.org>
+> > Cc: linux-mm@kvack.org
+> > Signed-off-by: Kees Cook <keescook@chromium.org>
+> 
+> OK, added patch 1+2 to slab.git for-next branch.
+> Had to adjust this one a bit, see below.
+> 
+> > ---
+> >   include/linux/slab.h | 31 +++++++++++++++++++++++++++++++
+> >   mm/slab.c            |  9 ++++++---
+> >   mm/slab_common.c     | 20 ++++++++++++++++++++
+> >   3 files changed, 57 insertions(+), 3 deletions(-)
+> > 
+> > diff --git a/include/linux/slab.h b/include/linux/slab.h
+> > index 41bd036e7551..727640173568 100644
+> > --- a/include/linux/slab.h
+> > +++ b/include/linux/slab.h
+> > @@ -188,7 +188,21 @@ void * __must_check krealloc(const void *objp, size_t new_size, gfp_t flags) __r
+> >   void kfree(const void *objp);
+> >   void kfree_sensitive(const void *objp);
+> >   size_t __ksize(const void *objp);
+> > +
+> > +/**
+> > + * ksize - Report actual allocation size of associated object
+> > + *
+> > + * @objp: Pointer returned from a prior kmalloc()-family allocation.
+> > + *
+> > + * This should not be used for writing beyond the originally requested
+> > + * allocation size. Either use krealloc() or round up the allocation size
+> > + * with kmalloc_size_roundup() prior to allocation. If this is used to
+> > + * access beyond the originally requested allocation size, UBSAN_BOUNDS
+> > + * and/or FORTIFY_SOURCE may trip, since they only know about the
+> > + * originally allocated size via the __alloc_size attribute.
+> > + */
+> >   size_t ksize(const void *objp);
+> > +
+> >   #ifdef CONFIG_PRINTK
+> >   bool kmem_valid_obj(void *object);
+> >   void kmem_dump_obj(void *object);
+> > @@ -779,6 +793,23 @@ extern void kvfree(const void *addr);
+> >   extern void kvfree_sensitive(const void *addr, size_t len);
+> >   unsigned int kmem_cache_size(struct kmem_cache *s);
+> > +
+> > +/**
+> > + * kmalloc_size_roundup - Report allocation bucket size for the given size
+> > + *
+> > + * @size: Number of bytes to round up from.
+> > + *
+> > + * This returns the number of bytes that would be available in a kmalloc()
+> > + * allocation of @size bytes. For example, a 126 byte request would be
+> > + * rounded up to the next sized kmalloc bucket, 128 bytes. (This is strictly
+> > + * for the general-purpose kmalloc()-based allocations, and is not for the
+> > + * pre-sized kmem_cache_alloc()-based allocations.)
+> > + *
+> > + * Use this to kmalloc() the full bucket size ahead of time instead of using
+> > + * ksize() to query the size after an allocation.
+> > + */
+> > +size_t kmalloc_size_roundup(size_t size);
+> > +
+> >   void __init kmem_cache_init_late(void);
+> >   #if defined(CONFIG_SMP) && defined(CONFIG_SLAB)
+> > diff --git a/mm/slab.c b/mm/slab.c
+> > index 10e96137b44f..2da862bf6226 100644
+> > --- a/mm/slab.c
+> > +++ b/mm/slab.c
+> > @@ -4192,11 +4192,14 @@ void __check_heap_object(const void *ptr, unsigned long n,
+> >   #endif /* CONFIG_HARDENED_USERCOPY */
+> >   /**
+> > - * __ksize -- Uninstrumented ksize.
+> > + * __ksize -- Report full size of underlying allocation
+> >    * @objp: pointer to the object
+> >    *
+> > - * Unlike ksize(), __ksize() is uninstrumented, and does not provide the same
+> > - * safety checks as ksize() with KASAN instrumentation enabled.
+> > + * This should only be used internally to query the true size of allocations.
+> > + * It is not meant to be a way to discover the usable size of an allocation
+> > + * after the fact. Instead, use kmalloc_size_roundup(). Using memory beyond
+> > + * the originally requested allocation size may trigger KASAN, UBSAN_BOUNDS,
+> > + * and/or FORTIFY_SOURCE.
+> >    *
+> >    * Return: size of the actual memory used by @objp in bytes
+> >    */
+> > diff --git a/mm/slab_common.c b/mm/slab_common.c
+> > index 457671ace7eb..d7420cf649f8 100644
+> > --- a/mm/slab_common.c
+> > +++ b/mm/slab_common.c
+> > @@ -721,6 +721,26 @@ struct kmem_cache *kmalloc_slab(size_t size, gfp_t flags)
+> >   	return kmalloc_caches[kmalloc_type(flags)][index];
+> >   }
+> > +size_t kmalloc_size_roundup(size_t size)
+> > +{
+> > +	struct kmem_cache *c;
+> > +
+> > +	/* Short-circuit the 0 size case. */
+> > +	if (unlikely(size == 0))
+> > +		return 0;
+> > +	/* Short-circuit saturated "too-large" case. */
+> > +	if (unlikely(size == SIZE_MAX))
+> > +		return SIZE_MAX;
+> > +	/* Above the smaller buckets, size is a multiple of page size. */
+> > +	if (size > KMALLOC_MAX_CACHE_SIZE)
+> > +		return PAGE_SIZE << get_order(size);
+> > +
+> > +	/* The flags don't matter since size_index is common to all. */
+> > +	c = kmalloc_slab(size, GFP_KERNEL);
+> > +	return c ? c->object_size : 0;
+> > +}
+> > +EXPORT_SYMBOL(kmalloc_size_roundup);
+> 
+> We need a SLOB version too as it's not yet removed... I added this:
+> 
+> diff --git a/mm/slob.c b/mm/slob.c
+> index 2bd4f476c340..5dbdf6ad8bcc 100644
+> --- a/mm/slob.c
+> +++ b/mm/slob.c
+> @@ -574,6 +574,20 @@ void kfree(const void *block)
+>  }
+>  EXPORT_SYMBOL(kfree);
+> +size_t kmalloc_size_roundup(size_t size)
+> +{
+> +       /* Short-circuit the 0 size case. */
+> +       if (unlikely(size == 0))
+> +               return 0;
+> +       /* Short-circuit saturated "too-large" case. */
+> +       if (unlikely(size == SIZE_MAX))
+> +               return SIZE_MAX;
+> +
+> +       return ALIGN(size, ARCH_KMALLOC_MINALIGN);
+> +}
+> +
+> +EXPORT_SYMBOL(kmalloc_size_roundup);
 
-This looks good to me...
+Ah, perfect! Thanks for catching that. :)
 
-> 	/* allocate q_vector and rings */
-> 	q_vector =3D adapter->q_vector[v_idx];
-> 	if (!q_vector) {
-> 		q_vector =3D kzalloc(size, GFP_KERNEL);
-> 	} else if (size > ksize(q_vector)) {
->-		kfree_rcu(q_vector, rcu);
-> 		q_vector =3D kzalloc(size, GFP_KERNEL);
->+		if (q_vector)
->+			kfree_rcu(q_vector, rcu);
+FWIW:
 
-Even though this is in the ksize part, this seems like an unrelated change?
- Should this be in a different patch?
+Reviewed-by: Kees Cook <keescook@chromium.org>
 
-Also, the kfree_rcu will free q_vector after the RCU grace period?
-
-Is that what you want to do?
-
-How does rcu distinguish between the original q_vector, and the newly kzall=
-oced one?
-
-Thanks,
-
-Mike
-
-
-
-> 	} else {
-> 		memset(q_vector, 0, size);
-> 	}
->--
->2.34.1
-
+-- 
+Kees Cook
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
