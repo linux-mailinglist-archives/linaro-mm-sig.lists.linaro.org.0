@@ -2,31 +2,31 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E4E35EE575
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 28 Sep 2022 21:21:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C72AD5EE576
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 28 Sep 2022 21:21:20 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A62373F48E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 28 Sep 2022 19:21:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DE1733F511
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 28 Sep 2022 19:21:19 +0000 (UTC)
 Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-	by lists.linaro.org (Postfix) with ESMTPS id 845023EF2F
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 28 Sep 2022 19:17:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id B9FF63EF9B
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 28 Sep 2022 19:17:59 +0000 (UTC)
 Received: from dimapc.. (unknown [109.252.125.248])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
 	(Authenticated sender: dmitry.osipenko)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id C14EC660229B;
-	Wed, 28 Sep 2022 20:17:52 +0100 (BST)
+	by madras.collabora.co.uk (Postfix) with ESMTPSA id F35BD66022B6;
+	Wed, 28 Sep 2022 20:17:55 +0100 (BST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1664392675;
-	bh=d4kuxWWfCXJ7AC6vJtgzZbHEhy+iIaxiq8Yot3IE+C4=;
+	s=mail; t=1664392679;
+	bh=f3G12g+5czfdXru1FeeGI7Ybfs2QOu1D1lZN+8ABGmM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=QZUn3sS5mpeJ9rfZUxDSPGBk76y+42iVQT5pycyiUXbtxp+NhtOuwIlDaz4IMCQbS
-	 Lz/feTWmHNHuGgGIy8AraB53nuUo4WaNWh+BdyMeiWoBmcbMAJJbEDO3stkWA/2poR
-	 sfHokuDEq9J8MFyLYqOxKOhBeqKfLZH+jEChDaDOC71g11aQ6hP4tccgs4zFbqaI1a
-	 23xNQyE7z2SBq9vYcxs3sg1j1b47sw+5AOEPtpEnUaY3VHlSyCwp+6t61WXa1qxCnM
-	 05T44ryddZ4zczXyU11rMxHidWBznkTP9BAcJ8bxZ1U95utkAna/j9KV51Uf2INJ06
-	 goNyAV6XXzwnA==
+	b=PtCLdIMfXvqh6cEs8jT8c5CUa4kud+N1s6CpLl8wJwPcqYx63cK46fxVUNSmpB5dW
+	 YKBxz53PUOaj5NZTocXMbYgc7BSDkST7AUOg6x9l1RIXwmPsnVn7kzx4TYXHgK27TP
+	 bKMXgdJEQfUpZjabDQ1jWXu/u+sUluGsl9CSveFIwr0e16HCNI/xW9v/SE9ObGmklU
+	 qgqufjJFDhSWVkok2eQqRvdufhpvSbN+Ff29+ikbqk8pGu6zqBsf4Gy5PmQLj5vq20
+	 EivXDNIeK0GpMV/1+gAhSdaPlgZc8AI08eGnsuPu4dLQhxxk2hdVS8zWhB89DgyGbN
+	 vEEHMqXY8WSeA==
 From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 To: David Airlie <airlied@linux.ie>,
 	Gerd Hoffmann <kraxel@redhat.com>,
@@ -68,15 +68,15 @@ To: David Airlie <airlied@linux.ie>,
 	Lucas Stach <l.stach@pengutronix.de>,
 	Christian Gmeiner <christian.gmeiner@gmail.com>,
 	Ruhl Michael J <michael.j.ruhl@intel.com>
-Date: Wed, 28 Sep 2022 22:15:49 +0300
-Message-Id: <20220928191600.5874-11-dmitry.osipenko@collabora.com>
+Date: Wed, 28 Sep 2022 22:15:50 +0300
+Message-Id: <20220928191600.5874-12-dmitry.osipenko@collabora.com>
 X-Mailer: git-send-email 2.37.3
 In-Reply-To: <20220928191600.5874-1-dmitry.osipenko@collabora.com>
 References: <20220928191600.5874-1-dmitry.osipenko@collabora.com>
 MIME-Version: 1.0
 X-Rspamd-Server: lists.linaro.org
 X-Spamd-Bar: -------
-X-Rspamd-Queue-Id: 845023EF2F
+X-Rspamd-Queue-Id: B9FF63EF9B
 X-Spamd-Result: default: False [-7.00 / 15.00];
 	DWL_DNSWL_HI(-3.50)[collabora.com:dkim];
 	BAYES_HAM(-3.00)[100.00%];
@@ -103,23 +103,23 @@ X-Spamd-Result: default: False [-7.00 / 15.00];
 	RCPT_COUNT_GT_50(0.00)[51];
 	RCVD_TLS_ALL(0.00)[];
 	ARC_NA(0.00)[];
-	URIBL_BLOCKED(0.00)[amd.com:email,collabora.com:email,collabora.com:dkim];
+	URIBL_BLOCKED(0.00)[amd.com:email,linaro.org:email,collabora.com:email,collabora.com:dkim];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=QZUn3sS5;
+	dkim=pass header.d=collabora.com header.s=mail header.b=PtCLdIMf;
 	spf=pass (lists.linaro.org: domain of dmitry.osipenko@collabora.com designates 46.235.227.172 as permitted sender) smtp.mailfrom=dmitry.osipenko@collabora.com;
 	dmarc=pass (policy=none) header.from=collabora.com
-Message-ID-Hash: 25RONBHJJEKEBVXGZH3SSEA6P5X3ZY6E
-X-Message-ID-Hash: 25RONBHJJEKEBVXGZH3SSEA6P5X3ZY6E
+Message-ID-Hash: JZNCRTM6WWOUQ44KUDPYXZPP63GBP2P7
+X-Message-ID-Hash: JZNCRTM6WWOUQ44KUDPYXZPP63GBP2P7
 X-MailFrom: dmitry.osipenko@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v6 10/21] RDMA/umem: Prepare to dynamic dma-buf locking specification
+Subject: [Linaro-mm-sig] [PATCH v6 11/21] misc: fastrpc: Prepare to dynamic dma-buf locking specification
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/25RONBHJJEKEBVXGZH3SSEA6P5X3ZY6E/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JZNCRTM6WWOUQ44KUDPYXZPP63GBP2P7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -129,30 +129,29 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 
-UHJlcGFyZSBJbmZpbmlCYW5kIGRyaXZlcnMgdG8gdGhlIGNvbW1vbiBkeW5hbWljIGRtYS1idWYg
-bG9ja2luZw0KY29udmVudGlvbiBieSBzdGFydGluZyB0byB1c2UgdGhlIHVubG9ja2VkIHZlcnNp
-b25zIG9mIGRtYS1idWYgQVBJDQpmdW5jdGlvbnMuDQoNCkFja2VkLWJ5OiBDaHJpc3RpYW4gS8O2
-bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQpTaWduZWQtb2ZmLWJ5OiBEbWl0cnkgT3Np
-cGVua28gPGRtaXRyeS5vc2lwZW5rb0Bjb2xsYWJvcmEuY29tPg0KLS0tDQogZHJpdmVycy9pbmZp
-bmliYW5kL2NvcmUvdW1lbV9kbWFidWYuYyB8IDcgKysrKy0tLQ0KIDEgZmlsZSBjaGFuZ2VkLCA0
-IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pDQoNCmRpZmYgLS1naXQgYS9kcml2ZXJzL2lu
-ZmluaWJhbmQvY29yZS91bWVtX2RtYWJ1Zi5jIGIvZHJpdmVycy9pbmZpbmliYW5kL2NvcmUvdW1l
-bV9kbWFidWYuYw0KaW5kZXggMDRjMDRlNmQyNGMzLi40M2IyNmJjMTIyODggMTAwNjQ0DQotLS0g
-YS9kcml2ZXJzL2luZmluaWJhbmQvY29yZS91bWVtX2RtYWJ1Zi5jDQorKysgYi9kcml2ZXJzL2lu
-ZmluaWJhbmQvY29yZS91bWVtX2RtYWJ1Zi5jDQpAQCAtMjYsNyArMjYsOCBAQCBpbnQgaWJfdW1l
-bV9kbWFidWZfbWFwX3BhZ2VzKHN0cnVjdCBpYl91bWVtX2RtYWJ1ZiAqdW1lbV9kbWFidWYpDQog
-CWlmICh1bWVtX2RtYWJ1Zi0+c2d0KQ0KIAkJZ290byB3YWl0X2ZlbmNlOw0KIA0KLQlzZ3QgPSBk
-bWFfYnVmX21hcF9hdHRhY2htZW50KHVtZW1fZG1hYnVmLT5hdHRhY2gsIERNQV9CSURJUkVDVElP
-TkFMKTsNCisJc2d0ID0gZG1hX2J1Zl9tYXBfYXR0YWNobWVudF91bmxvY2tlZCh1bWVtX2RtYWJ1
-Zi0+YXR0YWNoLA0KKwkJCQkJICAgICAgRE1BX0JJRElSRUNUSU9OQUwpOw0KIAlpZiAoSVNfRVJS
-KHNndCkpDQogCQlyZXR1cm4gUFRSX0VSUihzZ3QpOw0KIA0KQEAgLTEwMiw4ICsxMDMsOCBAQCB2
-b2lkIGliX3VtZW1fZG1hYnVmX3VubWFwX3BhZ2VzKHN0cnVjdCBpYl91bWVtX2RtYWJ1ZiAqdW1l
-bV9kbWFidWYpDQogCQl1bWVtX2RtYWJ1Zi0+bGFzdF9zZ190cmltID0gMDsNCiAJfQ0KIA0KLQlk
-bWFfYnVmX3VubWFwX2F0dGFjaG1lbnQodW1lbV9kbWFidWYtPmF0dGFjaCwgdW1lbV9kbWFidWYt
-PnNndCwNCi0JCQkJIERNQV9CSURJUkVDVElPTkFMKTsNCisJZG1hX2J1Zl91bm1hcF9hdHRhY2ht
-ZW50X3VubG9ja2VkKHVtZW1fZG1hYnVmLT5hdHRhY2gsIHVtZW1fZG1hYnVmLT5zZ3QsDQorCQkJ
-CQkgIERNQV9CSURJUkVDVElPTkFMKTsNCiANCiAJdW1lbV9kbWFidWYtPnNndCA9IE5VTEw7DQog
-fQ0KLS0gDQoyLjM3LjMNCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0
-cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNp
-Zy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+UHJlcGFyZSBmYXN0cnBjIHRvIHRoZSBjb21tb24gZHluYW1pYyBkbWEtYnVmIGxvY2tpbmcgY29u
+dmVudGlvbiBieQ0Kc3RhcnRpbmcgdG8gdXNlIHRoZSB1bmxvY2tlZCB2ZXJzaW9ucyBvZiBkbWEt
+YnVmIEFQSSBmdW5jdGlvbnMuDQoNCkFja2VkLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3Rp
+YW4ua29lbmlnQGFtZC5jb20+DQpBY2tlZC1ieTogU3Jpbml2YXMgS2FuZGFnYXRsYSA8c3Jpbml2
+YXMua2FuZGFnYXRsYUBsaW5hcm8ub3JnPg0KU2lnbmVkLW9mZi1ieTogRG1pdHJ5IE9zaXBlbmtv
+IDxkbWl0cnkub3NpcGVua29AY29sbGFib3JhLmNvbT4NCi0tLQ0KIGRyaXZlcnMvbWlzYy9mYXN0
+cnBjLmMgfCA2ICsrKy0tLQ0KIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDMgZGVs
+ZXRpb25zKC0pDQoNCmRpZmYgLS1naXQgYS9kcml2ZXJzL21pc2MvZmFzdHJwYy5jIGIvZHJpdmVy
+cy9taXNjL2Zhc3RycGMuYw0KaW5kZXggN2ZmMGI2M2MyNWUzLi4xYWQ1ODA4NjU1MjUgMTAwNjQ0
+DQotLS0gYS9kcml2ZXJzL21pc2MvZmFzdHJwYy5jDQorKysgYi9kcml2ZXJzL21pc2MvZmFzdHJw
+Yy5jDQpAQCAtMzEwLDggKzMxMCw4IEBAIHN0YXRpYyB2b2lkIGZhc3RycGNfZnJlZV9tYXAoc3Ry
+dWN0IGtyZWYgKnJlZikNCiAJCQkJcmV0dXJuOw0KIAkJCX0NCiAJCX0NCi0JCWRtYV9idWZfdW5t
+YXBfYXR0YWNobWVudChtYXAtPmF0dGFjaCwgbWFwLT50YWJsZSwNCi0JCQkJCSBETUFfQklESVJF
+Q1RJT05BTCk7DQorCQlkbWFfYnVmX3VubWFwX2F0dGFjaG1lbnRfdW5sb2NrZWQobWFwLT5hdHRh
+Y2gsIG1hcC0+dGFibGUsDQorCQkJCQkJICBETUFfQklESVJFQ1RJT05BTCk7DQogCQlkbWFfYnVm
+X2RldGFjaChtYXAtPmJ1ZiwgbWFwLT5hdHRhY2gpOw0KIAkJZG1hX2J1Zl9wdXQobWFwLT5idWYp
+Ow0KIAl9DQpAQCAtNzI2LDcgKzcyNiw3IEBAIHN0YXRpYyBpbnQgZmFzdHJwY19tYXBfY3JlYXRl
+KHN0cnVjdCBmYXN0cnBjX3VzZXIgKmZsLCBpbnQgZmQsDQogCQlnb3RvIGF0dGFjaF9lcnI7DQog
+CX0NCiANCi0JbWFwLT50YWJsZSA9IGRtYV9idWZfbWFwX2F0dGFjaG1lbnQobWFwLT5hdHRhY2gs
+IERNQV9CSURJUkVDVElPTkFMKTsNCisJbWFwLT50YWJsZSA9IGRtYV9idWZfbWFwX2F0dGFjaG1l
+bnRfdW5sb2NrZWQobWFwLT5hdHRhY2gsIERNQV9CSURJUkVDVElPTkFMKTsNCiAJaWYgKElTX0VS
+UihtYXAtPnRhYmxlKSkgew0KIAkJZXJyID0gUFRSX0VSUihtYXAtPnRhYmxlKTsNCiAJCWdvdG8g
+bWFwX2VycjsNCi0tIA0KMi4zNy4zDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1z
+aWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFy
+by1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
