@@ -2,82 +2,81 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62C0E5F9428
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Oct 2022 01:53:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 766F55F9453
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Oct 2022 01:54:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7B2D83F56D
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  9 Oct 2022 23:53:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C2AE63F58B
+	for <lists+linaro-mm-sig@lfdr.de>; Sun,  9 Oct 2022 23:54:54 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 3CB333F55E
-	for <linaro-mm-sig@lists.linaro.org>; Sun,  9 Oct 2022 23:52:43 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id C275A3F459
+	for <linaro-mm-sig@lists.linaro.org>; Sun,  9 Oct 2022 23:54:34 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id CD47460DD8;
-	Sun,  9 Oct 2022 23:52:42 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 858FDC4347C;
-	Sun,  9 Oct 2022 23:52:41 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 6060160D17;
+	Sun,  9 Oct 2022 23:54:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 578B8C43142;
+	Sun,  9 Oct 2022 23:54:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1665359562;
-	bh=yxGkSTZYL1lOGJSNqH0ReJY84nBjcJY52M5+93fYZ7c=;
+	s=k20201202; t=1665359673;
+	bh=a+sMAFLjX68L2kxSVMElN69vaO37Vkarqiw6jNLmAIs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=rcleiAa8sz02A4ptTJnueYUay3sWYT0z3Eq1efAHM0h8QZTOW0VB0MCgE2GSYJcts
-	 6IBTSBuMBxsVpA5toKlBUQtrAqB8wz1I+sW6fuxdhm1dhfcKnrLctPhnk34ucgDj/1
-	 cAbsQdeLvD8s4grdyr1Mu+LXYXzlJncwfqNlqs8Sd8hUhJ6/OYbhB3dKF7RISI4/u5
-	 64IcKLd/qpNj9nFq/awZXAoGdw5QphpbRu0bxH4/rzgILfaedB2LL28mEVG7+Sng7g
-	 VbLOc/ntAbVsdZ6Z96XkbNpHVki/IZPbv4weg1gCycuOx4xBCPyF/0UoMlr2KnSfDc
-	 +6rGayaqZCCgQ==
+	b=W8/KGa16yoT0k6h0IbAF0jlZCycBbaRG0vhziVUzhMhzRyIXkkMbVXc8RtTM5Ppef
+	 QMy0Y10oSVpAPuQNhQ2K2y0w0FXYoQ+DHvAL3bDQdlZ5kZk0P5RAGqiz5Jip0Kx6zU
+	 A36DxT25K6NkxP8Og9NV+BwTSkx9FR0ALMR4gNuXa016cVIsLUdUPatNHqf75IKT/P
+	 eVDgRiK3OQj83vtvxRWFJx/iFkJU/VbGpiyJbFwJJEL1MhViMF43i3X7DfVQzpxb0g
+	 KIo+QA52P5gTnH6ZLl9ZIJ2SFeLTaiwnAQmI8E8oc/LAXF8ts295C1X27pMVGnuuko
+	 RI4Mucvuv5Gqw==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Date: Sun,  9 Oct 2022 19:51:54 -0400
-Message-Id: <20221009235222.1230786-8-sashal@kernel.org>
+Date: Sun,  9 Oct 2022 19:54:04 -0400
+Message-Id: <20221009235426.1231313-4-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20221009235222.1230786-1-sashal@kernel.org>
-References: <20221009235222.1230786-1-sashal@kernel.org>
+In-Reply-To: <20221009235426.1231313-1-sashal@kernel.org>
+References: <20221009235426.1231313-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: -
-X-Rspamd-Queue-Id: 3CB333F55E
-X-Spamd-Result: default: False [-1.00 / 15.00];
+X-Spamd-Bar: --
+X-Rspamd-Queue-Id: C275A3F459
+X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org:c];
+	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org:c];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[11];
 	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TO_DN_SOME(0.00)[];
 	RCVD_TLS_ALL(0.00)[];
-	TAGGED_RCPT(0.00)[c80e9ef5d8bb45894db0];
-	ARC_NA(0.00)[]
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_EQ_ENVFROM(0.00)[];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[arm.com,kernel.org,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org]
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=rcleiAa8;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="W8/KGa16";
 	spf=pass (lists.linaro.org: domain of sashal@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=sashal@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
-Message-ID-Hash: PJ7V4VEY72CB3WP3XNV77SYUIHWLSCXU
-X-Message-ID-Hash: PJ7V4VEY72CB3WP3XNV77SYUIHWLSCXU
+Message-ID-Hash: LXXKFSFWGXHJQ64T6FHB5C6BAO2JYA5G
+X-Message-ID-Hash: LXXKFSFWGXHJQ64T6FHB5C6BAO2JYA5G
 X-MailFrom: sashal@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Vivek Kasireddy <vivek.kasireddy@intel.com>, syzbot+c80e9ef5d8bb45894db0@syzkaller.appspotmail.com, Gerd Hoffmann <kraxel@redhat.com>, Sasha Levin <sashal@kernel.org>, sumit.semwal@linaro.org, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: Liviu Dudau <liviu.dudau@arm.com>, Carsten Haitzler <carsten.haitzler@arm.com>, Sasha Levin <sashal@kernel.org>, james.qian.wang@arm.com, mihail.atanassov@arm.com, brian.starkey@arm.com, daniel@ffwll.ch, sumit.semwal@linaro.org, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.19 08/36] udmabuf: Set ubuf->sg = NULL if the creation of sg table fails
+Subject: [Linaro-mm-sig] [PATCH AUTOSEL 5.15 04/25] drm/komeda: Fix handling of atomic commits in the atomic_commit_tail hook
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PJ7V4VEY72CB3WP3XNV77SYUIHWLSCXU/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LXXKFSFWGXHJQ64T6FHB5C6BAO2JYA5G/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -87,113 +86,113 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-From: Vivek Kasireddy <vivek.kasireddy@intel.com>
+From: Liviu Dudau <liviu.dudau@arm.com>
 
-[ Upstream commit d9c04a1b7a15b5e74b2977461d9511e497f05d8f ]
+[ Upstream commit eaa225b6b52233d45457fd33730e1528c604d92d ]
 
-When userspace tries to map the dmabuf and if for some reason
-(e.g. OOM) the creation of the sg table fails, ubuf->sg needs to be
-set to NULL. Otherwise, when the userspace subsequently closes the
-dmabuf fd, we'd try to erroneously free the invalid sg table from
-release_udmabuf resulting in the following crash reported by syzbot:
+Komeda driver relies on the generic DRM atomic helper functions to handle
+commits. It only implements an atomic_commit_tail hook for the
+mode_config_helper_funcs and even that one is pretty close to the generic
+implementation with the exception of additional dma_fence signalling.
 
-general protection fault, probably for non-canonical address
-0xdffffc0000000000: 0000 [#1] PREEMPT SMP KASAN
-KASAN: null-ptr-deref in range [0x0000000000000000-0x0000000000000007]
-CPU: 0 PID: 3609 Comm: syz-executor487 Not tainted
-5.19.0-syzkaller-13930-g7ebfc85e2cd7 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS
-Google 07/22/2022
-RIP: 0010:dma_unmap_sgtable include/linux/dma-mapping.h:378 [inline]
-RIP: 0010:put_sg_table drivers/dma-buf/udmabuf.c:89 [inline]
-RIP: 0010:release_udmabuf+0xcb/0x4f0 drivers/dma-buf/udmabuf.c:114
-Code: 48 89 fa 48 c1 ea 03 80 3c 02 00 0f 85 2b 04 00 00 48 8d 7d 0c 4c
-8b 63 30 48 b8 00 00 00 00 00 fc ff df 48 89 fa 48 c1 ea 03 <0f> b6 14
-02 48 89 f8 83 e0 07 83 c0 03 38 d0 7c 08 84 d2 0f 85 e2
-RSP: 0018:ffffc900037efd30 EFLAGS: 00010246
-RAX: dffffc0000000000 RBX: ffffffff8cb67800 RCX: 0000000000000000
-RDX: 0000000000000000 RSI: ffffffff84ad27e0 RDI: 0000000000000000
-RBP: fffffffffffffff4 R08: 0000000000000005 R09: 0000000000000000
-R10: 0000000000000000 R11: 000000000008c07c R12: ffff88801fa05000
-R13: ffff888073db07e8 R14: ffff888025c25440 R15: 0000000000000000
-FS:  0000555555fc4300(0000) GS:ffff8880b9a00000(0000)
-knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007fc1c0ce06e4 CR3: 00000000715e6000 CR4: 00000000003506f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- <TASK>
- dma_buf_release+0x157/0x2d0 drivers/dma-buf/dma-buf.c:78
- __dentry_kill+0x42b/0x640 fs/dcache.c:612
- dentry_kill fs/dcache.c:733 [inline]
- dput+0x806/0xdb0 fs/dcache.c:913
- __fput+0x39c/0x9d0 fs/file_table.c:333
- task_work_run+0xdd/0x1a0 kernel/task_work.c:177
- ptrace_notify+0x114/0x140 kernel/signal.c:2353
- ptrace_report_syscall include/linux/ptrace.h:420 [inline]
- ptrace_report_syscall_exit include/linux/ptrace.h:482 [inline]
- syscall_exit_work kernel/entry/common.c:249 [inline]
- syscall_exit_to_user_mode_prepare+0x129/0x280 kernel/entry/common.c:276
- __syscall_exit_to_user_mode_work kernel/entry/common.c:281 [inline]
- syscall_exit_to_user_mode+0x9/0x50 kernel/entry/common.c:294
- do_syscall_64+0x42/0xb0 arch/x86/entry/common.c:86
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-RIP: 0033:0x7fc1c0c35b6b
-Code: 0f 05 48 3d 00 f0 ff ff 77 45 c3 0f 1f 40 00 48 83 ec 18 89 7c 24
-0c e8 63 fc ff ff 8b 7c 24 0c 41 89 c0 b8 03 00 00 00 0f 05 <48> 3d 00
-f0 ff ff 77 35 44 89 c7 89 44 24 0c e8 a1 fc ff ff 8b 44
-RSP: 002b:00007ffd78a06090 EFLAGS: 00000293 ORIG_RAX: 0000000000000003
-RAX: 0000000000000000 RBX: 0000000000000007 RCX: 00007fc1c0c35b6b
-RDX: 0000000020000280 RSI: 0000000040086200 RDI: 0000000000000006
-RBP: 0000000000000007 R08: 0000000000000000 R09: 0000000000000000
-R10: 0000000000000000 R11: 0000000000000293 R12: 000000000000000c
-R13: 0000000000000003 R14: 00007fc1c0cfe4a0 R15: 00007ffd78a06140
- </TASK>
-Modules linked in:
----[ end trace 0000000000000000 ]---
-RIP: 0010:dma_unmap_sgtable include/linux/dma-mapping.h:378 [inline]
-RIP: 0010:put_sg_table drivers/dma-buf/udmabuf.c:89 [inline]
-RIP: 0010:release_udmabuf+0xcb/0x4f0 drivers/dma-buf/udmabuf.c:114
+What the generic helper framework doesn't do is waiting for the actual
+hardware to signal that the commit parameters have been written into the
+appropriate registers. As we signal CRTC events only on the irq handlers,
+we need to flush the configuration and wait for the hardware to respond.
 
-Reported-by: syzbot+c80e9ef5d8bb45894db0@syzkaller.appspotmail.com
-Cc: Gerd Hoffmann <kraxel@redhat.com>
-Signed-off-by: Vivek Kasireddy <vivek.kasireddy@intel.com>
-Link: http://patchwork.freedesktop.org/patch/msgid/20220825063522.801264-1-vivek.kasireddy@intel.com
-Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Add the Komeda specific implementation for atomic_commit_hw_done() that
+flushes and waits for flip done before calling drm_atomic_helper_commit_hw_done().
+
+The fix was prompted by a patch from Carsten Haitzler where he was trying to
+solve the same issue but in a different way that I think can lead to wrong
+event signaling to userspace.
+
+Reported-by: Carsten Haitzler <carsten.haitzler@arm.com>
+Tested-by: Carsten Haitzler <carsten.haitzler@arm.com>
+Reviewed-by: Carsten Haitzler <carsten.haitzler@arm.com>
+Signed-off-by: Liviu Dudau <liviu.dudau@arm.com>
+Link: https://patchwork.freedesktop.org/patch/msgid/20220722122139.288486-1-liviu.dudau@arm.com
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/dma-buf/udmabuf.c | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ .../gpu/drm/arm/display/komeda/komeda_crtc.c  |  4 ++--
+ .../gpu/drm/arm/display/komeda/komeda_kms.c   | 21 ++++++++++++++++++-
+ .../gpu/drm/arm/display/komeda/komeda_kms.h   |  2 ++
+ 3 files changed, 24 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
-index 38e8767ec371..bf11d32205f3 100644
---- a/drivers/dma-buf/udmabuf.c
-+++ b/drivers/dma-buf/udmabuf.c
-@@ -124,17 +124,20 @@ static int begin_cpu_udmabuf(struct dma_buf *buf,
- {
- 	struct udmabuf *ubuf = buf->priv;
- 	struct device *dev = ubuf->device->this_device;
-+	int ret = 0;
- 
- 	if (!ubuf->sg) {
- 		ubuf->sg = get_sg_table(dev, buf, direction);
--		if (IS_ERR(ubuf->sg))
--			return PTR_ERR(ubuf->sg);
-+		if (IS_ERR(ubuf->sg)) {
-+			ret = PTR_ERR(ubuf->sg);
-+			ubuf->sg = NULL;
-+		}
- 	} else {
- 		dma_sync_sg_for_cpu(dev, ubuf->sg->sgl, ubuf->sg->nents,
- 				    direction);
- 	}
- 
--	return 0;
-+	return ret;
+diff --git a/drivers/gpu/drm/arm/display/komeda/komeda_crtc.c b/drivers/gpu/drm/arm/display/komeda/komeda_crtc.c
+index 59172acb9738..292f533d8cf0 100644
+--- a/drivers/gpu/drm/arm/display/komeda/komeda_crtc.c
++++ b/drivers/gpu/drm/arm/display/komeda/komeda_crtc.c
+@@ -235,7 +235,7 @@ void komeda_crtc_handle_event(struct komeda_crtc   *kcrtc,
+ 			crtc->state->event = NULL;
+ 			drm_crtc_send_vblank_event(crtc, event);
+ 		} else {
+-			DRM_WARN("CRTC[%d]: FLIP happen but no pending commit.\n",
++			DRM_WARN("CRTC[%d]: FLIP happened but no pending commit.\n",
+ 				 drm_crtc_index(&kcrtc->base));
+ 		}
+ 		spin_unlock_irqrestore(&crtc->dev->event_lock, flags);
+@@ -286,7 +286,7 @@ komeda_crtc_atomic_enable(struct drm_crtc *crtc,
+ 	komeda_crtc_do_flush(crtc, old);
  }
  
- static int end_cpu_udmabuf(struct dma_buf *buf,
+-static void
++void
+ komeda_crtc_flush_and_wait_for_flip_done(struct komeda_crtc *kcrtc,
+ 					 struct completion *input_flip_done)
+ {
+diff --git a/drivers/gpu/drm/arm/display/komeda/komeda_kms.c b/drivers/gpu/drm/arm/display/komeda/komeda_kms.c
+index 93b7f09b96ca..327051bba5b6 100644
+--- a/drivers/gpu/drm/arm/display/komeda/komeda_kms.c
++++ b/drivers/gpu/drm/arm/display/komeda/komeda_kms.c
+@@ -69,6 +69,25 @@ static const struct drm_driver komeda_kms_driver = {
+ 	.minor = 1,
+ };
+ 
++static void komeda_kms_atomic_commit_hw_done(struct drm_atomic_state *state)
++{
++	struct drm_device *dev = state->dev;
++	struct komeda_kms_dev *kms = to_kdev(dev);
++	int i;
++
++	for (i = 0; i < kms->n_crtcs; i++) {
++		struct komeda_crtc *kcrtc = &kms->crtcs[i];
++
++		if (kcrtc->base.state->active) {
++			struct completion *flip_done = NULL;
++			if (kcrtc->base.state->event)
++				flip_done = kcrtc->base.state->event->base.completion;
++			komeda_crtc_flush_and_wait_for_flip_done(kcrtc, flip_done);
++		}
++	}
++	drm_atomic_helper_commit_hw_done(state);
++}
++
+ static void komeda_kms_commit_tail(struct drm_atomic_state *old_state)
+ {
+ 	struct drm_device *dev = old_state->dev;
+@@ -81,7 +100,7 @@ static void komeda_kms_commit_tail(struct drm_atomic_state *old_state)
+ 
+ 	drm_atomic_helper_commit_modeset_enables(dev, old_state);
+ 
+-	drm_atomic_helper_commit_hw_done(old_state);
++	komeda_kms_atomic_commit_hw_done(old_state);
+ 
+ 	drm_atomic_helper_wait_for_flip_done(dev, old_state);
+ 
+diff --git a/drivers/gpu/drm/arm/display/komeda/komeda_kms.h b/drivers/gpu/drm/arm/display/komeda/komeda_kms.h
+index 456f3c435719..bf6e8fba5061 100644
+--- a/drivers/gpu/drm/arm/display/komeda/komeda_kms.h
++++ b/drivers/gpu/drm/arm/display/komeda/komeda_kms.h
+@@ -182,6 +182,8 @@ void komeda_kms_cleanup_private_objs(struct komeda_kms_dev *kms);
+ 
+ void komeda_crtc_handle_event(struct komeda_crtc   *kcrtc,
+ 			      struct komeda_events *evts);
++void komeda_crtc_flush_and_wait_for_flip_done(struct komeda_crtc *kcrtc,
++					      struct completion *input_flip_done);
+ 
+ struct komeda_kms_dev *komeda_kms_attach(struct komeda_dev *mdev);
+ void komeda_kms_detach(struct komeda_kms_dev *kms);
 -- 
 2.35.1
 
