@@ -2,325 +2,150 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 826CE5FA2BE
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Oct 2022 19:30:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 44DF25FA3D1
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Oct 2022 20:56:59 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BBE3A3F598
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Oct 2022 17:30:00 +0000 (UTC)
-Received: from mailgw.kylinos.cn (unknown [124.126.103.232])
-	by lists.linaro.org (Postfix) with ESMTPS id A99393F4B5
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 26 Aug 2022 07:38:42 +0000 (UTC)
-X-UUID: c402bdaddaff492a99060e2f1a7dc99d-20220826
-X-Spam-Fingerprint: 0
-X-GW-Reason: 11109
-X-Policy-Incident: 5pS25Lu25Lq66LaF6L+HMTDkurrpnIDopoHlrqHmoLg=
-X-Content-Feature: 
-	ica/max.line-size 103
-	audit/email.address 1
-	dict/adv 1
-	dict/contack 1
-	dict/notice 1
-	dict/operate 1
-	meta/cnt.alert 1
-X-UUID: c402bdaddaff492a99060e2f1a7dc99d-20220826
-X-User: oushixiong@kylinos.cn
-Received: from localhost.localdomain [(116.128.244.169)] by mailgw
-	(envelope-from <oushixiong@kylinos.cn>)
-	(Generic MTA)
-	with ESMTP id 205237631; Fri, 26 Aug 2022 09:31:22 +0800
-From: oushixiong <oushixiong@kylinos.cn>
-To: Dave Airlie <airlied@redhat.com>
-Date: Fri, 26 Aug 2022 09:31:03 +0800
-Message-Id: <20220826013103.1519411-1-oushixiong@kylinos.cn>
-X-Mailer: git-send-email 2.25.1
+	by lists.linaro.org (Postfix) with ESMTP id DEC353F529
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Oct 2022 18:56:57 +0000 (UTC)
+Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com [209.85.222.169])
+	by lists.linaro.org (Postfix) with ESMTPS id 4F5AC3ED7D
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Oct 2022 18:56:39 +0000 (UTC)
+Received: by mail-qk1-f169.google.com with SMTP id a5so2177293qkl.6
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Oct 2022 11:56:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=mfdinePb/h+FQryCI1VnJk1iVMwwW9XbS8GRZ1SXnEM=;
+        b=Y1FJnNxKCCmUeBjERypSSpOT5hLZIa3B6ZfL7TmeBlDcYn7G53u+wzaqGztD4xstS6
+         H56NjZrTnnAs/mwbv/53uHY1GhzxoFxOLWj+6+255TR+XIgzukZ2wrhnTPfXH4rpl0ll
+         x20RYa7gkPKPOAB+2GjUbYRf86UKilK/+RP5mPzo1iTwxgbIcI/NL1hAwcQva+CI+c58
+         wXQg1m452/c0qjzqE/xGhDgd9xycIGhUX5tiX7SJhqTWnYftDSAsnXqQ0qceqqSNwxFf
+         a0gsQbHVGj7OQXKVN8LpCmOTHmcWT/lMPoHErC7k7GBXJjyyytJ8h/nDzI7STIfMcpme
+         CGHA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=mfdinePb/h+FQryCI1VnJk1iVMwwW9XbS8GRZ1SXnEM=;
+        b=2WU3MzFMRZp1dxRLnJPsF/5wEoMke2ZKAckHbSYRdj0PugSeKSN54nwuFc5xigNN9e
+         FPAi+SqOq/OK9ecskGb+2emGbsVQXjnYM6emKcWs5Nvl+YPwmRjfxDLd7FTbtxnL3IzQ
+         vpWbo0f1SuZYg7PDgktYGb39xKE4iZPfZz5MJYy0AoHVTjZ+FrE93betXY1t3sJLbLkV
+         50W66WVUPgCBuvmgYfRbaDqZ0/cNqgv9qFC3DK/y0jjN7ATJPLK1Sau+ivXHUbBGX5Mn
+         i0swafTzCYsnDklq4ym/LbGwSNFd9/o+yPkEQtfW5x1k8AXYopULMzRwHd7cPy2aZpAd
+         043w==
+X-Gm-Message-State: ACrzQf0WNZv78+yjHrXLq4gJVCX3wuDiQWwkRyesY7ZKzCtNAZaJsedP
+	Qc9iRhkdBD8/13lTVM0NwTUyDg==
+X-Google-Smtp-Source: AMsMyM4cq1ZiSompu2ffs6ddf24dPwkk/2Lnq1GVt1O6/KQn3scUPTnTqdwZ/uWcjL7riJrPyy9iDQ==
+X-Received: by 2002:a05:620a:4397:b0:6e1:345a:e080 with SMTP id a23-20020a05620a439700b006e1345ae080mr13783062qkp.677.1665428198984;
+        Mon, 10 Oct 2022 11:56:38 -0700 (PDT)
+Received: from ziepe.ca (hlfxns017vw-47-55-122-23.dhcp-dynamic.fibreop.ns.bellaliant.net. [47.55.122.23])
+        by smtp.gmail.com with ESMTPSA id j8-20020a05620a288800b006bb2cd2f6d1sm10684472qkp.127.2022.10.10.11.56.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Oct 2022 11:56:38 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.95)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1ohxx7-0012V5-CO;
+	Mon, 10 Oct 2022 15:56:37 -0300
+Date: Mon, 10 Oct 2022 15:56:37 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+Message-ID: <Y0Rq5Zb9+63++2z/@ziepe.ca>
+References: <20220928191600.5874-1-dmitry.osipenko@collabora.com>
+ <20220928191600.5874-11-dmitry.osipenko@collabora.com>
+ <e3ba146d-8153-add5-2cf4-02fe6519abee@collabora.com>
 MIME-Version: 1.0
-X-MailFrom: oushixiong@kylinos.cn
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: TI7JX6WCJSFLDUDAEUBT7NRX6J3ERNTG
-X-Message-ID-Hash: TI7JX6WCJSFLDUDAEUBT7NRX6J3ERNTG
-X-Mailman-Approved-At: Mon, 10 Oct 2022 17:29:42 +0000
-CC: Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, oushixiong <oushixiong@kylinos.cn>
+Content-Disposition: inline
+In-Reply-To: <e3ba146d-8153-add5-2cf4-02fe6519abee@collabora.com>
+X-Rspamd-Server: lists.linaro.org
+X-Spamd-Bar: -------
+X-Rspamd-Queue-Id: 4F5AC3ED7D
+X-Spamd-Result: default: False [-7.00 / 15.00];
+	DWL_DNSWL_HI(-3.50)[ziepe.ca:dkim];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	RCVD_IN_DNSWL_HI(-0.50)[47.55.122.23:received];
+	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	MIME_GOOD(-0.10)[text/plain];
+	DMARC_NA(0.00)[ziepe.ca];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_IN_DNSWL_NONE(0.00)[209.85.222.169:from];
+	TO_DN_SOME(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.222.169:from];
+	RCPT_COUNT_GT_50(0.00)[51];
+	TAGGED_RCPT(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[ziepe.ca:+];
+	FREEMAIL_CC(0.00)[kernel.org,lists.freedesktop.org,vger.kernel.org,gmail.com,lists.linaro.org,collabora.com,lists.linux-foundation.org,linux.ie,redhat.com,chromium.org,ffwll.ch,fooishbar.org,linux.intel.com,suse.de,linaro.org,amd.com,samsung.com,intel.com,shipmail.org,qti.qualcomm.com,suse.com,epam.com,armlinux.org.uk,pengutronix.de];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
+Authentication-Results: lists.linaro.org;
+	dkim=pass header.d=ziepe.ca header.s=google header.b=Y1FJnNxK;
+	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.222.169 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
+	dmarc=none
+Message-ID-Hash: GPWELJ6PLXTOJRJL5VRXBHD3OIQGCFIZ
+X-Message-ID-Hash: GPWELJ6PLXTOJRJL5VRXBHD3OIQGCFIZ
+X-MailFrom: jgg@ziepe.ca
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Leon Romanovsky <leon@kernel.org>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org, David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Daniel Vetter <daniel@ffwll.ch>, Daniel Almeida <daniel.almeida@collabora.com>, Gert Wollny <gert.wollny@collabora.com>, Gustavo Padovan <gustavo.padovan@collabora.com>, Daniel Stone <daniel@fooishbar.org>, Tomeu Vizoso <tomeu.vizoso@collabora.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Rob Clark <robdclark@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian
+ .koenig@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, Alex Deucher <alexander.deucher@amd.com>, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Qiang Yu <yuq825@gmail.com>, Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, Amol Maheshwari <amahesh@qti.qualcomm.com>, Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Tomi Valkeinen <tomba@kernel.org>, Russell King <linux@armlinux.org.uk>, Christian Gmeiner <christian.gmeiner@gmail.com>, Ruhl Michael J <michael.j.ruhl@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] drm/ast: add dmabuf/prime buffer sharing support
+Subject: [Linaro-mm-sig] Re: [PATCH v6 10/21] RDMA/umem: Prepare to dynamic dma-buf locking specification
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TI7JX6WCJSFLDUDAEUBT7NRX6J3ERNTG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GPWELJ6PLXTOJRJL5VRXBHD3OIQGCFIZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-This patch adds ast specific codes for DRM prime feature, this is to
-allow for offloading of rending in one direction and outputs in other.
-
-This patch is designed to solve the problem that the AST is not displayed
-when the server plug in a discrete graphics graphics card at the same time.
-We call the dirty callback function to copy the rendering results of the
-discrete graphics card to the ast side by dma-buf.
-
-v1->v2:
-  - Fix the comment.
-v2->v3:
-  - we remove the attach function, add the drm_gem_pin() before dma_buf_vmap(),
-    and add the drm_gem_unpin() after the dma_buf_vunmap().
-
-Signed-off-by: oushixiong <oushixiong@kylinos.cn>
----
- drivers/gpu/drm/ast/ast_drv.c  |  27 +++++++
- drivers/gpu/drm/ast/ast_mode.c | 134 ++++++++++++++++++++++++++++++++-
- drivers/gpu/drm/drm_gem.c      |   2 +
- include/drm/drm_gem.h          |   3 +
- 4 files changed, 165 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/gpu/drm/ast/ast_drv.c b/drivers/gpu/drm/ast/ast_drv.c
-index 7465c4f0156a..107383a56ca7 100644
---- a/drivers/gpu/drm/ast/ast_drv.c
-+++ b/drivers/gpu/drm/ast/ast_drv.c
-@@ -28,6 +28,7 @@
- 
- #include <linux/module.h>
- #include <linux/pci.h>
-+#include <linux/dma-buf.h>
- 
- #include <drm/drm_aperture.h>
- #include <drm/drm_atomic_helper.h>
-@@ -50,6 +51,29 @@ module_param_named(modeset, ast_modeset, int, 0400);
- 
- DEFINE_DRM_GEM_FOPS(ast_fops);
- 
-+struct drm_gem_object *ast_gem_prime_import(struct drm_device *dev,
-+						struct dma_buf *dma_buf)
-+{
-+	struct drm_gem_vram_object *gbo;
-+
-+	gbo = drm_gem_vram_of_gem(dma_buf->priv);
-+	if (gbo->bo.base.dev == dev) {
-+		/*
-+		* Importing dmabuf exported from out own gem increases
-+		* refcount on gem itself instead of f_count of dmabuf.
-+		*/
-+		drm_gem_object_get(&gbo->bo.base);
-+		return &gbo->bo.base;
-+	}
-+
-+	gbo = drm_gem_vram_create(dev, dma_buf->size, 0);
-+	if (IS_ERR(gbo))
-+		return NULL;
-+
-+	get_dma_buf(dma_buf);
-+	return &gbo->bo.base;
-+}
-+
- static const struct drm_driver ast_driver = {
- 	.driver_features = DRIVER_ATOMIC |
- 			   DRIVER_GEM |
-@@ -63,6 +87,9 @@ static const struct drm_driver ast_driver = {
- 	.minor = DRIVER_MINOR,
- 	.patchlevel = DRIVER_PATCHLEVEL,
- 
-+	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
-+	.gem_prime_import = ast_gem_prime_import,
-+
- 	DRM_GEM_VRAM_DRIVER
- };
- 
-diff --git a/drivers/gpu/drm/ast/ast_mode.c b/drivers/gpu/drm/ast/ast_mode.c
-index 45b56b39ad47..c81a6148b6df 100644
---- a/drivers/gpu/drm/ast/ast_mode.c
-+++ b/drivers/gpu/drm/ast/ast_mode.c
-@@ -48,6 +48,8 @@
- #include "ast_drv.h"
- #include "ast_tables.h"
- 
-+MODULE_IMPORT_NS(DMA_BUF);
-+
- static inline void ast_load_palette_index(struct ast_private *ast,
- 				     u8 index, u8 red, u8 green,
- 				     u8 blue)
-@@ -1535,8 +1537,138 @@ static const struct drm_mode_config_helper_funcs ast_mode_config_helper_funcs =
- 	.atomic_commit_tail = drm_atomic_helper_commit_tail_rpm,
- };
- 
-+static int ast_handle_damage(struct drm_framebuffer *fb, int x, int y,
-+					int width, int height)
-+{
-+	struct drm_gem_vram_object *dst_bo = NULL;
-+	void *dst = NULL;
-+	int ret = 0, i;
-+	unsigned long offset = 0;
-+	bool unmap = false;
-+	unsigned int bytesPerPixel;
-+	struct iosys_map map;
-+	struct iosys_map dmabuf_map;
-+
-+	bytesPerPixel = fb->format->cpp[0];
-+
-+	if (!fb->obj[0]->dma_buf)
-+		return -EINVAL;
-+
-+	if (!fb->obj[0]->dma_buf->vmap_ptr.vaddr) {
-+		ret = drm_gem_pin(fb->obj[0]->dma_buf->priv);
-+		if (ret)
-+			return ret;
-+		ret = dma_buf_vmap(fb->obj[0]->dma_buf, &dmabuf_map);
-+		if (ret)
-+			goto err_vmap_dmabuf;
-+	} else
-+		dmabuf_map.vaddr = fb->obj[0]->dma_buf->vmap_ptr.vaddr;
-+
-+	dst_bo = drm_gem_vram_of_gem(fb->obj[0]);
-+
-+	ret = drm_gem_vram_pin(dst_bo, 0);
-+	if (ret) {
-+		DRM_ERROR("ast_bo_pin failed\n");
-+		goto err_ast_pin;
-+	}
-+
-+	if (!dst_bo->map.vaddr) {
-+		ret = drm_gem_vram_vmap(dst_bo, &map);
-+		if (ret) {
-+			DRM_ERROR("failed to vmap fbcon\n");
-+			goto err_vmap_ast_bo;
-+		}
-+		unmap = true;
-+	}
-+	dst = dst_bo->map.vaddr;
-+
-+	for (i = y; i < y + height; i++) {
-+		offset = i * fb->pitches[0] + (x * bytesPerPixel);
-+		memcpy_toio(dst + offset, dmabuf_map.vaddr + offset,
-+			width * bytesPerPixel);
-+	}
-+
-+	if (unmap)
-+		drm_gem_vram_vunmap(dst_bo, &map);
-+
-+	drm_gem_vram_unpin(dst_bo);
-+	return 0;
-+
-+err_vmap_ast_bo:
-+	drm_gem_vram_unpin(dst_bo);
-+err_ast_pin:
-+err_vmap_dmabuf:
-+	drm_gem_unpin(fb->obj[0]->dma_buf->priv);
-+	return ret;
-+}
-+
-+
-+static int ast_user_framebuffer_dirty(struct drm_framebuffer *fb,
-+				struct drm_file *file,
-+				unsigned int flags,
-+				unsigned int color,
-+				struct drm_clip_rect *clips,
-+				unsigned int num_clips)
-+{
-+	int i, ret = 0;
-+
-+	drm_modeset_lock_all(fb->dev);
-+	if (fb->obj[0]->dma_buf) {
-+		ret = dma_buf_begin_cpu_access(fb->obj[0]->dma_buf,
-+				DMA_FROM_DEVICE);
-+		if (ret)
-+			goto unlock;
-+	}
-+
-+	for (i = 0; i < num_clips; i++) {
-+		ret = ast_handle_damage(fb, clips[i].x1, clips[i].y1,
-+				clips[i].x2 - clips[i].x1, clips[i].y2 - clips[i].y1);
-+		if (ret)
-+			break;
-+	}
-+
-+	if (fb->obj[0]->dma_buf) {
-+		dma_buf_end_cpu_access(fb->obj[0]->dma_buf,
-+				DMA_FROM_DEVICE);
-+	}
-+
-+unlock:
-+	drm_modeset_unlock_all(fb->dev);
-+
-+	return ret;
-+}
-+
-+static void ast_user_framebuffer_destroy(struct drm_framebuffer *fb)
-+{
-+	struct iosys_map dmabuf_map;
-+
-+	if (fb->obj[0]->dma_buf) {
-+		dmabuf_map.is_iomem = fb->obj[0]->dma_buf->vmap_ptr.is_iomem;
-+		dmabuf_map.vaddr = fb->obj[0]->dma_buf->vmap_ptr.vaddr;
-+		if (dmabuf_map.vaddr)
-+			dma_buf_vunmap(fb->obj[0]->dma_buf, &dmabuf_map);
-+		drm_gem_unpin(fb->obj[0]->dma_buf->priv);
-+	}
-+
-+	drm_gem_fb_destroy(fb);
-+}
-+
-+static const struct drm_framebuffer_funcs ast_gem_fb_funcs_dirtyfb = {
-+	.destroy	= ast_user_framebuffer_destroy,
-+	.create_handle	= drm_gem_fb_create_handle,
-+	.dirty		= ast_user_framebuffer_dirty,
-+};
-+
-+static struct drm_framebuffer *
-+ast_gem_fb_create_with_dirty(struct drm_device *dev, struct drm_file *file,
-+				const struct drm_mode_fb_cmd2 *mode_cmd)
-+{
-+	return drm_gem_fb_create_with_funcs(dev, file, mode_cmd,
-+					&ast_gem_fb_funcs_dirtyfb);
-+}
-+
- static const struct drm_mode_config_funcs ast_mode_config_funcs = {
--	.fb_create = drm_gem_fb_create,
-+	.fb_create = ast_gem_fb_create_with_dirty,
- 	.mode_valid = drm_vram_helper_mode_valid,
- 	.atomic_check = drm_atomic_helper_check,
- 	.atomic_commit = drm_atomic_helper_commit,
-diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-index 56fb87885146..3a4f5137abc5 100644
---- a/drivers/gpu/drm/drm_gem.c
-+++ b/drivers/gpu/drm/drm_gem.c
-@@ -1159,12 +1159,14 @@ int drm_gem_pin(struct drm_gem_object *obj)
- 	else
- 		return 0;
- }
-+EXPORT_SYMBOL(drm_gem_pin);
- 
- void drm_gem_unpin(struct drm_gem_object *obj)
- {
- 	if (obj->funcs->unpin)
- 		obj->funcs->unpin(obj);
- }
-+EXPORT_SYMBOL(drm_gem_unpin);
- 
- int drm_gem_vmap(struct drm_gem_object *obj, struct iosys_map *map)
- {
-diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
-index e2941cee14b6..30c4366968bf 100644
---- a/include/drm/drm_gem.h
-+++ b/include/drm/drm_gem.h
-@@ -352,6 +352,9 @@ int drm_gem_mmap_obj(struct drm_gem_object *obj, unsigned long obj_size,
- 		     struct vm_area_struct *vma);
- int drm_gem_mmap(struct file *filp, struct vm_area_struct *vma);
- 
-+int drm_gem_pin(struct drm_gem_object *obj);
-+void drm_gem_unpin(struct drm_gem_object *obj);
-+
- /**
-  * drm_gem_object_get - acquire a GEM buffer object reference
-  * @obj: GEM buffer object
--- 
-2.17.1
-
-
-No virus found
-		Checked by Hillstone Network AntiVirus
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gU3VuLCBPY3QgMDksIDIwMjIgYXQgMDM6MDg6NTZBTSArMDMwMCwgRG1pdHJ5IE9zaXBlbmtv
+IHdyb3RlOg0KPiBPbiA5LzI4LzIyIDIyOjE1LCBEbWl0cnkgT3NpcGVua28gd3JvdGU6DQo+ID4g
+UHJlcGFyZSBJbmZpbmlCYW5kIGRyaXZlcnMgdG8gdGhlIGNvbW1vbiBkeW5hbWljIGRtYS1idWYg
+bG9ja2luZw0KPiA+IGNvbnZlbnRpb24gYnkgc3RhcnRpbmcgdG8gdXNlIHRoZSB1bmxvY2tlZCB2
+ZXJzaW9ucyBvZiBkbWEtYnVmIEFQSQ0KPiA+IGZ1bmN0aW9ucy4NCj4gPiANCj4gPiBBY2tlZC1i
+eTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KPiA+IFNpZ25l
+ZC1vZmYtYnk6IERtaXRyeSBPc2lwZW5rbyA8ZG1pdHJ5Lm9zaXBlbmtvQGNvbGxhYm9yYS5jb20+
+DQo+ID4gLS0tDQo+ID4gIGRyaXZlcnMvaW5maW5pYmFuZC9jb3JlL3VtZW1fZG1hYnVmLmMgfCA3
+ICsrKystLS0NCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlv
+bnMoLSkNCj4gPiANCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9pbmZpbmliYW5kL2NvcmUvdW1l
+bV9kbWFidWYuYyBiL2RyaXZlcnMvaW5maW5pYmFuZC9jb3JlL3VtZW1fZG1hYnVmLmMNCj4gPiBp
+bmRleCAwNGMwNGU2ZDI0YzMuLjQzYjI2YmMxMjI4OCAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJz
+L2luZmluaWJhbmQvY29yZS91bWVtX2RtYWJ1Zi5jDQo+ID4gKysrIGIvZHJpdmVycy9pbmZpbmli
+YW5kL2NvcmUvdW1lbV9kbWFidWYuYw0KPiA+IEBAIC0yNiw3ICsyNiw4IEBAIGludCBpYl91bWVt
+X2RtYWJ1Zl9tYXBfcGFnZXMoc3RydWN0IGliX3VtZW1fZG1hYnVmICp1bWVtX2RtYWJ1ZikNCj4g
+PiAgCWlmICh1bWVtX2RtYWJ1Zi0+c2d0KQ0KPiA+ICAJCWdvdG8gd2FpdF9mZW5jZTsNCj4gPiAg
+DQo+ID4gLQlzZ3QgPSBkbWFfYnVmX21hcF9hdHRhY2htZW50KHVtZW1fZG1hYnVmLT5hdHRhY2gs
+IERNQV9CSURJUkVDVElPTkFMKTsNCj4gPiArCXNndCA9IGRtYV9idWZfbWFwX2F0dGFjaG1lbnRf
+dW5sb2NrZWQodW1lbV9kbWFidWYtPmF0dGFjaCwNCj4gPiArCQkJCQkgICAgICBETUFfQklESVJF
+Q1RJT05BTCk7DQo+ID4gIAlpZiAoSVNfRVJSKHNndCkpDQo+ID4gIAkJcmV0dXJuIFBUUl9FUlIo
+c2d0KTsNCj4gPiAgDQo+ID4gQEAgLTEwMiw4ICsxMDMsOCBAQCB2b2lkIGliX3VtZW1fZG1hYnVm
+X3VubWFwX3BhZ2VzKHN0cnVjdCBpYl91bWVtX2RtYWJ1ZiAqdW1lbV9kbWFidWYpDQo+ID4gIAkJ
+dW1lbV9kbWFidWYtPmxhc3Rfc2dfdHJpbSA9IDA7DQo+ID4gIAl9DQo+ID4gIA0KPiA+IC0JZG1h
+X2J1Zl91bm1hcF9hdHRhY2htZW50KHVtZW1fZG1hYnVmLT5hdHRhY2gsIHVtZW1fZG1hYnVmLT5z
+Z3QsDQo+ID4gLQkJCQkgRE1BX0JJRElSRUNUSU9OQUwpOw0KPiA+ICsJZG1hX2J1Zl91bm1hcF9h
+dHRhY2htZW50X3VubG9ja2VkKHVtZW1fZG1hYnVmLT5hdHRhY2gsIHVtZW1fZG1hYnVmLT5zZ3Qs
+DQo+ID4gKwkJCQkJICBETUFfQklESVJFQ1RJT05BTCk7DQo+ID4gIA0KPiA+ICAJdW1lbV9kbWFi
+dWYtPnNndCA9IE5VTEw7DQo+ID4gIH0NCj4gDQo+IEphc29uIC8gTGVvbiwNCj4gDQo+IENvdWxk
+IHlvdSBwbGVhc2UgYWNrIHRoaXMgcGF0Y2g/DQoNCllvdSBwcm9iYWJseSBkb24ndCBuZWVkIGl0
+LCBmb3Igc29tZXRoaW5nIHNvIHNpbXBsZSwgYnV0IHN1cmUNCg0KQWNrZWQtYnk6IEphc29uIEd1
+bnRob3JwZSA8amdnQG52aWRpYS5jb20+DQoNCkphc29uDQpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBs
+aW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFp
+bCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
