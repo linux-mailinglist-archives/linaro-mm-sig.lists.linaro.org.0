@@ -2,220 +2,313 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58AAA60DC78
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Oct 2022 09:50:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3B14160DC79
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Oct 2022 09:51:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6F61C3EEC1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Oct 2022 07:50:43 +0000 (UTC)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
-	by lists.linaro.org (Postfix) with ESMTPS id 627853ECFB
-	for <linaro-mm-sig@lists.linaro.org>; Sat,  8 Oct 2022 01:48:15 +0000 (UTC)
-Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
-	by smtp-out1.suse.de (Postfix) with ESMTP id 5CAB2218A9;
-	Sat,  8 Oct 2022 01:48:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.cz; s=susede2_rsa;
-	t=1665193694; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=L7jyJrkdsFmXq01fk0YZDGAy2JdoxUyJSLc3cwYSrwM=;
-	b=YWuRC+TfYfwErIkc330RxLKxH3WMk3+dQndL1heGH5+0LZgm/f4EYgrdi7gKIOifK4JrQb
-	fbOAF1lamzHdcySR//xnYsj3IEp2On9P+uwWNI1ISz87U73vPdtrIMC7TaT0cZkP5Jz0PF
-	PKl4Hb1QBFsr8tgCNEj84n6Zu9Rv24c=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.cz;
-	s=susede2_ed25519; t=1665193694;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=L7jyJrkdsFmXq01fk0YZDGAy2JdoxUyJSLc3cwYSrwM=;
-	b=CehdQSF8yK+QRZLXHJHewgP7KtkOSzhbIjd2k+F9FUzuJHpggS5q3aMLI2lZQk/wkFcKRj
-	CjVecdIBUyxmWNCA==
-Received: from lion.mk-sys.cz (unknown [10.100.200.14])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by relay2.suse.de (Postfix) with ESMTPS id E6C222C141;
-	Sat,  8 Oct 2022 01:48:13 +0000 (UTC)
-Received: by lion.mk-sys.cz (Postfix, from userid 1000)
-	id BAB9A6092E; Sat,  8 Oct 2022 03:48:13 +0200 (CEST)
-Date: Sat, 8 Oct 2022 03:48:13 +0200
-From: Michal Kubecek <mkubecek@suse.cz>
-To: "Yadav, Arvind" <arvyadav@amd.com>
-Message-ID: <20221008014813.vgcdte65mydbwlqa@lion.mk-sys.cz>
-References: <20220930084810.4639-1-Arvind.Yadav@amd.com>
- <38ef1813-030c-8315-249d-349d69b81c52@amd.com>
- <e4aeea32-4ed8-c1db-e826-32ce278f61c4@amd.com>
+	by lists.linaro.org (Postfix) with ESMTP id 51D383F4D7
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Oct 2022 07:51:03 +0000 (UTC)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11on2041.outbound.protection.outlook.com [40.107.236.41])
+	by lists.linaro.org (Postfix) with ESMTPS id BE1ED3ECD4
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 12 Oct 2022 13:23:27 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=eOrTKnlC6Ysz90vTljg+Dw/1kNbkSA47qr6uxuTaK9aa8G0yOAhCju+luThP/TPhDf1UkKKgioR2AMuKuJglLmdy15Xv6G1pdhUlXPzbgbHMpRS2RNGHZnAA1t2Xlsh+goGJC00kBZNkjtNY6vNXJsQH/JpxYBzguWnfjqg3jiX7Ott7V+qW1bliOmXAwsrGW6sifyxYPUwRKGVH3FAu8/510X+Gxyge9S3gQYc3bGnQjmUBfuVfUp+uLzO6UihYo1DSjptXbTbUgP+Ya668e7bwY6UpRxtZg/tB6mfqaYbU/HBBAk+bSvUps41hUvoRvqTpBMBhiQE2I08w4PMlQQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2wEDab7qHqzAJ6/Q++fysSh76DlXf3/D+WICRnB2suE=;
+ b=kYZ0IU/elzoAGJ7f1CqLWUC7a/+9uihwUFF3UhujNxy05SO7CYbU6FwioXnAwGDNOk1xR3Eak70lJHpFSczHjYwPIILUmEE42tup/BzoZAsgaxARIaJfn+n1WyF4jEZX9A0CBdGGkD9E1Lc9iQGvbZG/qKk/iJsOdEavMeiaBBOr2B60/Q6C1qNMLDS8Oclfe90O7p/9TwW035HaB3YzzfeaqlzRnBMr+bdrtdXSz2rYEpADPPZl3PLnk6mi6P4I5PdqWXoHcYdfybfOOp5pPnFcQ+49cbeAlQ8bnLujDuiHJQ8GO4xl5KchgUViiaWyMXmFT+b3pBNawYfFP7u95g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=linaro.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2wEDab7qHqzAJ6/Q++fysSh76DlXf3/D+WICRnB2suE=;
+ b=nWUO5XNOKJ3YyyU7wgQDPzQBRkD3XXXO2TTlmSZq5qsD9i5fpHAE7bDxMLBKdT//nn9AsZPtSxk9dlOyrpJ/OdZ2IzOVu5FdswwefYl1SeqrcdJqawMgOmIp0hiRXzK8MyjElwaUT4PWmHy5mMmSe/ghKKv/6nxIN+b7JuexGvc=
+Received: from DM6PR06CA0032.namprd06.prod.outlook.com (2603:10b6:5:120::45)
+ by DM4PR12MB5889.namprd12.prod.outlook.com (2603:10b6:8:65::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5709.19; Wed, 12 Oct
+ 2022 13:23:25 +0000
+Received: from DM6NAM11FT024.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:5:120:cafe::69) by DM6PR06CA0032.outlook.office365.com
+ (2603:10b6:5:120::45) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5709.21 via Frontend
+ Transport; Wed, 12 Oct 2022 13:23:25 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DM6NAM11FT024.mail.protection.outlook.com (10.13.172.159) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.5723.20 via Frontend Transport; Wed, 12 Oct 2022 13:23:25 +0000
+Received: from amd.amd.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Wed, 12 Oct
+ 2022 08:22:53 -0500
+From: Arvind Yadav <Arvind.Yadav@amd.com>
+To: <Christian.Koenig@amd.com>, <andrey.grodzovsky@amd.com>,
+	<shashank.sharma@amd.com>, <amaranath.somalapuram@amd.com>,
+	<Arunpravin.PaneerSelvam@amd.com>, <sumit.semwal@linaro.org>,
+	<gustavo@padovan.org>, <airlied@linux.ie>, <daniel@ffwll.ch>,
+	<linux-media@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+	<linaro-mm-sig@lists.linaro.org>, <linux-kernel@vger.kernel.org>,
+	<steven.price@arm.com>
+Date: Wed, 12 Oct 2022 18:52:00 +0530
+Message-ID: <20221012132200.13011-1-Arvind.Yadav@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <e4aeea32-4ed8-c1db-e826-32ce278f61c4@amd.com>
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6NAM11FT024:EE_|DM4PR12MB5889:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1403e0a6-265b-4ea5-c32f-08daac54f1ad
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	YQCSgCHaxIi80wXNrOdgIDQI+21Y0+B2EY6riggfBs+1IkLeMTyNuuCIXHX5NuMokzZQPgGNpAz5WL2Y28qNFk0SDRb2hjV35NjjSEOAR5v/+4Laf3PTqk/0AJwQL0pc0dugGI20LzXRDwLdUOoq30If/QXvPZ+cno6sHfC5FZB58dVv/TkGaS5kEw/vMVEI+UoY4SVmU8KLpyljdwOsSAzRUI9X59od7Se4tqG4/hL0UDrAKmOciBJscKJwQ+zMJuvu8X/JfL6dYahHMjg9729pv0K/t/4RY5yKUhKfqHpz3smx1A+Ll8xcMcCZzM+GZghXTeMOsCtR8iyQKxboehdGPzoHw5djItAtKxvXfjGrtQ3oXyTOyIIwLCXpmIxsvtQmh+Tnwk8l5tZZjxT+8OAh2xNhB0fk4mLyAWeo9WzIwGhvr1PxOPrpra9tmEuUy2omv+YgLQL2+tT0iqUR67VBLuGR5mWZPDdThgpf5Gh0iIdWYsfXg9Qj6va0D3mu3GSz1bBXTpMuIK/OL7CvUQXC2auoQCvy21gSYYczWisocSoW7RwGkwHfvTB8J2x4HsuakEXtDjy8n/YcJKxhjtkqyD6GBERrUlqvkhEJ7uJV3n8GIfseWp49swPaabBLCPEUKP3lly+5FDYJI8lQk6TPkJz8cxCDbKHffhlsclep0VjiwhsAJbvKso9nllIonNjvtqw7MNAbtY2SvQL9kv11MNPK8mMTtTGF6HaFKLEVeoz0J3MgUwOG9Lki42KdWWE47zxJ8FBe+X0cIztkd21PcwUC3gx44o759CmgAzuhqKQtqhIbTRg90zklYBXRwtk36zRjAh4uD68YjJc5t8hsS6pYv1OzuDG8rBP+0kM=
+X-Forefront-Antispam-Report: 
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(376002)(396003)(39860400002)(136003)(346002)(451199015)(46966006)(36840700001)(40470700004)(5660300002)(41300700001)(316002)(4326008)(36756003)(36860700001)(7696005)(70206006)(70586007)(6666004)(8676002)(478600001)(2906002)(83380400001)(82310400005)(86362001)(40480700001)(82740400003)(26005)(336012)(16526019)(921005)(1076003)(40460700003)(110136005)(47076005)(2616005)(426003)(81166007)(356005)(186003)(8936002)(83996005)(36900700001)(2101003);DIR:OUT;SFP:1101;
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2022 13:23:25.7492
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1403e0a6-265b-4ea5-c32f-08daac54f1ad
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: 
+	DM6NAM11FT024.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5889
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: ---------
-X-Rspamd-Queue-Id: 627853ECFB
-X-Spamd-Result: default: False [-9.10 / 15.00];
-	DWL_DNSWL_HI(-3.50)[suse.cz:dkim];
+X-Spamd-Bar: -------
+X-Rspamd-Queue-Id: BE1ED3ECD4
+X-Spamd-Result: default: False [-7.00 / 15.00];
+	DWL_DNSWL_HI(-3.50)[amd.com:dkim];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
-	R_SPF_ALLOW(-0.20)[+ip4:195.135.220.0/24];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_DKIM_ALLOW(-0.20)[suse.cz:s=susede2_rsa,suse.cz:s=susede2_ed25519];
+	MID_CONTAINS_FROM(1.00)[];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	MIME_GOOD(-0.10)[text/plain];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
 	NEURAL_HAM(-0.00)[-1.000];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	FROM_EQ_ENVFROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	FROM_EQ_ENVFROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	DKIM_TRACE(0.00)[amd.com:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ASN(0.00)[asn:29298, ipnet:195.135.220.0/23, country:DE];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[suse.cz:+];
+	HAS_XOIP(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	DMARC_NA(0.00)[suse.cz];
-	ARC_NA(0.00)[]
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.236.41:from]
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=suse.cz header.s=susede2_rsa header.b=YWuRC+Tf;
-	dkim=pass header.d=suse.cz header.s=susede2_ed25519 header.b=CehdQSF8;
-	spf=pass (lists.linaro.org: domain of mkubecek@suse.cz designates 195.135.220.28 as permitted sender) smtp.mailfrom=mkubecek@suse.cz;
-	dmarc=none
-X-MailFrom: mkubecek@suse.cz
+	dkim=pass header.d=amd.com header.s=selector1 header.b=nWUO5XNO;
+	spf=pass (lists.linaro.org: domain of Arvind.Yadav@amd.com designates 40.107.236.41 as permitted sender) smtp.mailfrom=Arvind.Yadav@amd.com;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1");
+	dmarc=pass (policy=quarantine) header.from=amd.com
+X-MailFrom: Arvind.Yadav@amd.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: XZQDAYCIFFQDI33TVK6EYUCANAINNBNJ
-X-Message-ID-Hash: XZQDAYCIFFQDI33TVK6EYUCANAINNBNJ
-X-Mailman-Approved-At: Wed, 26 Oct 2022 07:50:04 +0000
-CC: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Arvind Yadav <Arvind.Yadav@amd.com>, andrey.grodzovsky@amd.com, shashank.sharma@amd.com, amaranath.somalapuram@amd.com, Arunpravin.PaneerSelvam@amd.com, sumit.semwal@linaro.org, gustavo@padovan.org, airlied@linux.ie, daniel@ffwll.ch, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, steven.price@arm.com
+Message-ID-Hash: R7VEQ4SAKFJJDXLNHEEODAB5OQGIKQOW
+X-Message-ID-Hash: R7VEQ4SAKFJJDXLNHEEODAB5OQGIKQOW
+X-Mailman-Approved-At: Wed, 26 Oct 2022 07:50:12 +0000
+CC: Arvind Yadav <Arvind.Yadav@amd.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] drm/sched: Fix kernel NULL pointer dereference error
+Subject: [Linaro-mm-sig] [PATCH v2] drm/sched: Fix kernel NULL pointer dereference error
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XZQDAYCIFFQDI33TVK6EYUCANAINNBNJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/R7VEQ4SAKFJJDXLNHEEODAB5OQGIKQOW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============8382803432024084016=="
-
-
---===============8382803432024084016==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="5pgokusjefpgtu4a"
-Content-Disposition: inline
-
-
---5pgokusjefpgtu4a
-Content-Type: text/plain; charset=iso-8859-2
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Sep 30, 2022 at 09:09:56PM +0530, Yadav, Arvind wrote:
->=20
-> On 9/30/2022 4:56 PM, Christian K=F6nig wrote:
-> > Am 30.09.22 um 10:48 schrieb Arvind Yadav:
-> > > BUG: kernel NULL pointer dereference, address: 0000000000000088
-> > > =A0 #PF: supervisor read access in kernel mode
-> > > =A0 #PF: error_code(0x0000) - not-present page
-> > > =A0 PGD 0 P4D 0
-> > > =A0 Oops: 0000 [#1] PREEMPT SMP NOPTI
-> > > =A0 CPU: 2 PID: 0 Comm: swapper/2 Not tainted 6.0.0-rc2-custom #1
-> > > =A0 Arvind : [dma_fence_default_wait _START] timeout =3D -1
-> > > =A0 Hardware name: AMD Dibbler/Dibbler, BIOS RDB1107CC 09/26/2018
-> > > =A0 RIP: 0010:drm_sched_job_done.isra.0+0x11/0x140 [gpu_sched]
-> > > =A0 Code: 8b fe ff ff be 03 00 00 00 e8 7b da b7 e3 e9 d4 fe ff ff 66
-> > > 0f 1f 44 00 00 0f 1f 44 00 00 55 48 89 e5 41 55 41 54 49 89 fc 53
-> > > <48> 8b 9f 88 00 00 00 f0 ff 8b f0 00 00 00 48 8b 83 80 01 00 00 f0
-> > > =A0 RSP: 0018:ffffb1b1801d4d38 EFLAGS: 00010087
-> > > =A0 RAX: ffffffffc0aa48b0 RBX: ffffb1b1801d4d70 RCX: 0000000000000018
-> > > =A0 RDX: 000036c70afb7c1d RSI: ffff8a45ca413c60 RDI: 0000000000000000
-> > > =A0 RBP: ffffb1b1801d4d50 R08: 00000000000000b5 R09: 0000000000000000
-> > > =A0 R10: 0000000000000000 R11: 0000000000000000 R12: 0000000000000000
-> > > =A0 R13: ffffb1b1801d4d70 R14: ffff8a45c4160000 R15: ffff8a45c416a708
-> > > =A0 FS:=A0 0000000000000000(0000) GS:ffff8a48a0a80000(0000)
-> > > knlGS:0000000000000000
-> > > =A0 CS:=A0 0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-> > > =A0 CR2: 0000000000000088 CR3: 000000014ad50000 CR4: 00000000003506e0
-> > > =A0 Call Trace:
-> > > =A0=A0 <IRQ>
-> > > =A0=A0 drm_sched_job_done_cb+0x12/0x20 [gpu_sched]
-> > > =A0=A0 dma_fence_signal_timestamp_locked+0x7e/0x110
-> > > =A0=A0 dma_fence_signal+0x31/0x60
-> > > =A0=A0 amdgpu_fence_process+0xc4/0x140 [amdgpu]
-> > > =A0=A0 gfx_v9_0_eop_irq+0x9d/0xd0 [amdgpu]
-> > > =A0=A0 amdgpu_irq_dispatch+0xb7/0x210 [amdgpu]
-> > > =A0=A0 amdgpu_ih_process+0x86/0x100 [amdgpu]
-> > > =A0=A0 amdgpu_irq_handler+0x24/0x60 [amdgpu]
-> > > =A0=A0 __handle_irq_event_percpu+0x4b/0x190
-> > > =A0=A0 handle_irq_event_percpu+0x15/0x50
-> > > =A0=A0 handle_irq_event+0x39/0x60
-> > > =A0=A0 handle_edge_irq+0xaf/0x210
-> > > =A0=A0 __common_interrupt+0x6e/0x110
-> > > =A0=A0 common_interrupt+0xc1/0xe0
-> > > =A0=A0 </IRQ>
-> > > =A0=A0 <TASK>
-> >=20
-> > How is this triggered any why haven't we seen it before?
->=20
-> IGT has few 'amdgpu' specific testcases which is not related=A0 to fence.
->=20
-> while running those test cases I have got this crash but this crash is not
-> always reproducible.
-
-I've encountered this crash twice (out of two attempts) with kernel
-built from mainline commit 4c86114194e6 when I started firefox.
-
-The patch below fixed the crash and does not seem to introduce any
-apparent issue.
-
-Tested-by: Michal Kubecek <mkubecek@suse.cz>
-
-> > > Signed-off-by: Arvind Yadav <Arvind.Yadav@amd.com>
-> > > ---
-> > > =A0 drivers/gpu/drm/scheduler/sched_main.c | 7 ++++++-
-> > > =A0 1 file changed, 6 insertions(+), 1 deletion(-)
-> > >=20
-> > > diff --git a/drivers/gpu/drm/scheduler/sched_main.c
-> > > b/drivers/gpu/drm/scheduler/sched_main.c
-> > > index 6684d88463b4..390272f6b126 100644
-> > > --- a/drivers/gpu/drm/scheduler/sched_main.c
-> > > +++ b/drivers/gpu/drm/scheduler/sched_main.c
-> > > @@ -172,7 +172,12 @@ drm_sched_rq_select_entity(struct drm_sched_rq *=
-rq)
-> > > =A0 static void drm_sched_job_done(struct drm_sched_job *s_job)
-> > > =A0 {
-> > > =A0=A0=A0=A0=A0 struct drm_sched_fence *s_fence =3D s_job->s_fence;
-> > > -=A0=A0=A0 struct drm_gpu_scheduler *sched =3D s_fence->sched;
-> > > +=A0=A0=A0 struct drm_gpu_scheduler *sched;
-> > > +
-> > > +=A0=A0=A0 if (!s_fence)
-> > > +=A0=A0=A0=A0=A0=A0=A0 return;
-> > > +
-> > > +=A0=A0=A0 sched =3D s_fence->sched;
-> > > =A0 =A0=A0=A0=A0=A0 atomic_dec(&sched->hw_rq_count);
-> > > =A0=A0=A0=A0=A0 atomic_dec(sched->score);
-> >=20
-
---5pgokusjefpgtu4a
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCAAdFiEEWN3j3bieVmp26mKO538sG/LRdpUFAmNA1tYACgkQ538sG/LR
-dpV9Egf/X/c89wk7BGPF4Qfl7wWawuErji4M7g7kcNcN2mIRN0TxhrO0ahZ98tue
-Vk1ajmPKRlf9m7UL4ocommViSSKmdEBVhVc/EXqHXuMspAeZg1mimTZbel5Rmggc
-HCkGa+HaUAqlBHK9WpxuILXw2sRPm6IspfpcltlyUGGawz3bjoGXBz/Uzjle3GuG
-aU2A6bjUELm7t48qA8O9NT0l0z3lez1lgmYEJLgy1zLy8Rkpc3rmwdB9hTrWu1Bm
-7WCjOJ4nJaxHawpCZDpYvRos520nZJO/jDqiue/F/U+PCLS3dPqJGVtJ1GhVHs0q
-PL73Uk8zANEbXFRtnMfcV+b6S/vr/A==
-=xK3o
------END PGP SIGNATURE-----
-
---5pgokusjefpgtu4a--
-
---===============8382803432024084016==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+
+This is purely a timing issue. Here, sometimes Job free
+is happening before the job is done.
+To fix this issue moving 'dma_fence_cb' callback from
+job(struct drm_sched_job) to scheduler fence (struct drm_sched_fence).
+
+BUG: kernel NULL pointer dereference, address: 0000000000000088
+ #PF: supervisor read access in kernel mode
+ #PF: error_code(0x0000) - not-present page
+ PGD 0 P4D 0
+ Oops: 0000 [#1] PREEMPT SMP NOPTI
+ CPU: 2 PID: 0 Comm: swapper/2 Not tainted 6.0.0-rc2-custom #1
+ Arvind : [dma_fence_default_wait _START] timeout = -1
+ Hardware name: AMD Dibbler/Dibbler, BIOS RDB1107CC 09/26/2018
+ RIP: 0010:drm_sched_job_done.isra.0+0x11/0x140 [gpu_sched]
+ Code: 8b fe ff ff be 03 00 00 00 e8 7b da b7 e3 e9 d4 fe ff ff 66 0f 1f 44 00 00 0f 1f 44 00 00 55 48 89 e5 41 55 41 54 49 89 fc 53 <48> 8b 9f 88 00 00 00 f0 ff 8b f0 00 00 00 48 8b 83 80 01 00 00 f0
+ RSP: 0018:ffffb1b1801d4d38 EFLAGS: 00010087
+ RAX: ffffffffc0aa48b0 RBX: ffffb1b1801d4d70 RCX: 0000000000000018
+ RDX: 000036c70afb7c1d RSI: ffff8a45ca413c60 RDI: 0000000000000000
+ RBP: ffffb1b1801d4d50 R08: 00000000000000b5 R09: 0000000000000000
+ R10: 0000000000000000 R11: 0000000000000000 R12: 0000000000000000
+ R13: ffffb1b1801d4d70 R14: ffff8a45c4160000 R15: ffff8a45c416a708
+ FS:  0000000000000000(0000) GS:ffff8a48a0a80000(0000) knlGS:0000000000000000
+ CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+ CR2: 0000000000000088 CR3: 000000014ad50000 CR4: 00000000003506e0
+ Call Trace:
+  <IRQ>
+  drm_sched_job_done_cb+0x12/0x20 [gpu_sched]
+  dma_fence_signal_timestamp_locked+0x7e/0x110
+  dma_fence_signal+0x31/0x60
+  amdgpu_fence_process+0xc4/0x140 [amdgpu]
+  gfx_v9_0_eop_irq+0x9d/0xd0 [amdgpu]
+  amdgpu_irq_dispatch+0xb7/0x210 [amdgpu]
+  amdgpu_ih_process+0x86/0x100 [amdgpu]
+  amdgpu_irq_handler+0x24/0x60 [amdgpu]
+  __handle_irq_event_percpu+0x4b/0x190
+  handle_irq_event_percpu+0x15/0x50
+  handle_irq_event+0x39/0x60
+  handle_edge_irq+0xaf/0x210
+  __common_interrupt+0x6e/0x110
+  common_interrupt+0xc1/0xe0
+  </IRQ>
+  <TASK>
+
+Signed-off-by: Arvind Yadav <Arvind.Yadav@amd.com>
+---
+
+Changes in v2: Moving 'dma_fence_cb' callback from
+job(struct drm_sched_job) to scheduler fence(struct drm_sched_fence)
+instead of adding NULL check for s_fence.
+
+---
+ drivers/gpu/drm/scheduler/sched_main.c | 23 +++++++++++------------
+ include/drm/gpu_scheduler.h            |  6 ++++--
+ 2 files changed, 15 insertions(+), 14 deletions(-)
+
+diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
+index 4cc59bae38dd..62d8eca05b92 100644
+--- a/drivers/gpu/drm/scheduler/sched_main.c
++++ b/drivers/gpu/drm/scheduler/sched_main.c
+@@ -253,13 +253,12 @@ drm_sched_rq_select_entity_fifo(struct drm_sched_rq *rq)
+ 
+ /**
+  * drm_sched_job_done - complete a job
+- * @s_job: pointer to the job which is done
++ * @s_fence: pointer to the fence of a done job
+  *
+  * Finish the job's fence and wake up the worker thread.
+  */
+-static void drm_sched_job_done(struct drm_sched_job *s_job)
++static void drm_sched_job_done(struct drm_sched_fence *s_fence)
+ {
+-	struct drm_sched_fence *s_fence = s_job->s_fence;
+ 	struct drm_gpu_scheduler *sched = s_fence->sched;
+ 
+ 	atomic_dec(&sched->hw_rq_count);
+@@ -280,9 +279,9 @@ static void drm_sched_job_done(struct drm_sched_job *s_job)
+  */
+ static void drm_sched_job_done_cb(struct dma_fence *f, struct dma_fence_cb *cb)
+ {
+-	struct drm_sched_job *s_job = container_of(cb, struct drm_sched_job, cb);
++	struct drm_sched_fence *s_fence = container_of(cb, struct drm_sched_fence, cb);
+ 
+-	drm_sched_job_done(s_job);
++	drm_sched_job_done(s_fence);
+ }
+ 
+ /**
+@@ -506,7 +505,7 @@ void drm_sched_stop(struct drm_gpu_scheduler *sched, struct drm_sched_job *bad)
+ 					 list) {
+ 		if (s_job->s_fence->parent &&
+ 		    dma_fence_remove_callback(s_job->s_fence->parent,
+-					      &s_job->cb)) {
++					      &s_job->s_fence->cb)) {
+ 			dma_fence_put(s_job->s_fence->parent);
+ 			s_job->s_fence->parent = NULL;
+ 			atomic_dec(&sched->hw_rq_count);
+@@ -576,15 +575,15 @@ void drm_sched_start(struct drm_gpu_scheduler *sched, bool full_recovery)
+ 			continue;
+ 
+ 		if (fence) {
+-			r = dma_fence_add_callback(fence, &s_job->cb,
++			r = dma_fence_add_callback(fence, &s_job->s_fence->cb,
+ 						   drm_sched_job_done_cb);
+ 			if (r == -ENOENT)
+-				drm_sched_job_done(s_job);
++				drm_sched_job_done(s_job->s_fence);
+ 			else if (r)
+ 				DRM_DEV_ERROR(sched->dev, "fence add callback failed (%d)\n",
+ 					  r);
+ 		} else
+-			drm_sched_job_done(s_job);
++			drm_sched_job_done(s_job->s_fence);
+ 	}
+ 
+ 	if (full_recovery) {
+@@ -1053,10 +1052,10 @@ static int drm_sched_main(void *param)
+ 			/* Drop for original kref_init of the fence */
+ 			dma_fence_put(fence);
+ 
+-			r = dma_fence_add_callback(fence, &sched_job->cb,
++			r = dma_fence_add_callback(fence, &s_fence->cb,
+ 						   drm_sched_job_done_cb);
+ 			if (r == -ENOENT)
+-				drm_sched_job_done(sched_job);
++				drm_sched_job_done(s_fence);
+ 			else if (r)
+ 				DRM_DEV_ERROR(sched->dev, "fence add callback failed (%d)\n",
+ 					  r);
+@@ -1064,7 +1063,7 @@ static int drm_sched_main(void *param)
+ 			if (IS_ERR(fence))
+ 				dma_fence_set_error(&s_fence->finished, PTR_ERR(fence));
+ 
+-			drm_sched_job_done(sched_job);
++			drm_sched_job_done(s_fence);
+ 		}
+ 
+ 		wake_up(&sched->job_scheduled);
+diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
+index 1f7d9dd1a444..9a96d49dfd75 100644
+--- a/include/drm/gpu_scheduler.h
++++ b/include/drm/gpu_scheduler.h
+@@ -281,6 +281,10 @@ struct drm_sched_fence {
+          * @owner: job owner for debugging
+          */
+ 	void				*owner;
++	/**
++	 * @cb: callback
++	 */
++	struct dma_fence_cb cb;
+ };
+ 
+ struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f);
+@@ -300,7 +304,6 @@ struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f);
+  *         be scheduled further.
+  * @s_priority: the priority of the job.
+  * @entity: the entity to which this job belongs.
+- * @cb: the callback for the parent fence in s_fence.
+  *
+  * A job is created by the driver using drm_sched_job_init(), and
+  * should call drm_sched_entity_push_job() once it wants the scheduler
+@@ -325,7 +328,6 @@ struct drm_sched_job {
+ 	atomic_t			karma;
+ 	enum drm_sched_priority		s_priority;
+ 	struct drm_sched_entity         *entity;
+-	struct dma_fence_cb		cb;
+ 	/**
+ 	 * @dependencies:
+ 	 *
+-- 
+2.25.1
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============8382803432024084016==--
