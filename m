@@ -2,39 +2,44 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B14160DC79
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Oct 2022 09:51:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C8A060DC7C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Oct 2022 09:51:24 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 51D383F4D7
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Oct 2022 07:51:03 +0000 (UTC)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11on2041.outbound.protection.outlook.com [40.107.236.41])
-	by lists.linaro.org (Postfix) with ESMTPS id BE1ED3ECD4
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 12 Oct 2022 13:23:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5E8493F58F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Oct 2022 07:51:23 +0000 (UTC)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com (mail-dm6nam11on2051.outbound.protection.outlook.com [40.107.223.51])
+	by lists.linaro.org (Postfix) with ESMTPS id 6AFCE3EF81
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 17 Oct 2022 14:30:51 +0000 (UTC)
+Authentication-Results: lists.linaro.org;
+	dkim=pass header.d=amd.com header.s=selector1 header.b=s+18xf3i;
+	spf=pass (lists.linaro.org: domain of Arvind.Yadav@amd.com designates 40.107.223.51 as permitted sender) smtp.mailfrom=Arvind.Yadav@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1")
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=eOrTKnlC6Ysz90vTljg+Dw/1kNbkSA47qr6uxuTaK9aa8G0yOAhCju+luThP/TPhDf1UkKKgioR2AMuKuJglLmdy15Xv6G1pdhUlXPzbgbHMpRS2RNGHZnAA1t2Xlsh+goGJC00kBZNkjtNY6vNXJsQH/JpxYBzguWnfjqg3jiX7Ott7V+qW1bliOmXAwsrGW6sifyxYPUwRKGVH3FAu8/510X+Gxyge9S3gQYc3bGnQjmUBfuVfUp+uLzO6UihYo1DSjptXbTbUgP+Ya668e7bwY6UpRxtZg/tB6mfqaYbU/HBBAk+bSvUps41hUvoRvqTpBMBhiQE2I08w4PMlQQ==
+ b=V9SUpivJlrD3OsAWGDFpr2EV4vM/ahcYt6GWFHBeQ8KhMOCsu0+zSvcmAa7mrp15yzszURARVTCVrvOJjj+Tgas8XuYhC8Iq11ena4gyeLJVBLK5ZmXTKO+rj0Sr85UjtegalJC6Dri2yDK6xHOEQozxouJzoXF4FT2ROeIuV05aZIBNmLR7bB9AZVtRYFK7pFH0QupWD/PuZTF0MulNJXqVRc5UEvLvomrf7TvCVK7Xu3hi6I1/fQw4s3/Vldo0HtDETkdqxkR5DWWDO6VxGHotpICOh9U2rs3FaGYveVIsbmMAdL7o3u0n778EnixTg8Awn9r6APtxMoCMUNo1nA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2wEDab7qHqzAJ6/Q++fysSh76DlXf3/D+WICRnB2suE=;
- b=kYZ0IU/elzoAGJ7f1CqLWUC7a/+9uihwUFF3UhujNxy05SO7CYbU6FwioXnAwGDNOk1xR3Eak70lJHpFSczHjYwPIILUmEE42tup/BzoZAsgaxARIaJfn+n1WyF4jEZX9A0CBdGGkD9E1Lc9iQGvbZG/qKk/iJsOdEavMeiaBBOr2B60/Q6C1qNMLDS8Oclfe90O7p/9TwW035HaB3YzzfeaqlzRnBMr+bdrtdXSz2rYEpADPPZl3PLnk6mi6P4I5PdqWXoHcYdfybfOOp5pPnFcQ+49cbeAlQ8bnLujDuiHJQ8GO4xl5KchgUViiaWyMXmFT+b3pBNawYfFP7u95g==
+ bh=rIpHjgteY66lASbjM9lptHFAYmuSsEEa3G5EgPNB0Bg=;
+ b=ISGG3SlgXZxTb+t2oxkuQtANtJjYJLWXuVXrm/NR5wj4frtuHlDjmZHf9xjZ/qyUawwJAt+LIgWc313wT/rpmvHgHjTM6TtsKaxrhYKGS7qXRYwMye30ZNLjIUcZ0QXG7Gs2Sa/xbpX6Is5nuqXnwZ1i1KGa/NMF3OwFgVPinlxPzgX4cp6Rtgoqix5gUunBabGglKnKBaPb16dtTS7oJ+Na4duFbOPKVzpJg6Z4jobFsw3CFq4vkEQ4fLcB3h+4TuyT2vtexfuibq2uYhJWV6SGMyRFgs//HHjk784a2BLNFkfzl8agSC41AylJNXnSSwqoZGnqQvAU4CO9HDz1Yw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=linaro.org smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2wEDab7qHqzAJ6/Q++fysSh76DlXf3/D+WICRnB2suE=;
- b=nWUO5XNOKJ3YyyU7wgQDPzQBRkD3XXXO2TTlmSZq5qsD9i5fpHAE7bDxMLBKdT//nn9AsZPtSxk9dlOyrpJ/OdZ2IzOVu5FdswwefYl1SeqrcdJqawMgOmIp0hiRXzK8MyjElwaUT4PWmHy5mMmSe/ghKKv/6nxIN+b7JuexGvc=
-Received: from DM6PR06CA0032.namprd06.prod.outlook.com (2603:10b6:5:120::45)
- by DM4PR12MB5889.namprd12.prod.outlook.com (2603:10b6:8:65::18) with
+ bh=rIpHjgteY66lASbjM9lptHFAYmuSsEEa3G5EgPNB0Bg=;
+ b=s+18xf3iM3vMIa7AAQpmH9972Wr+VNv64XmRO0xsiwS3siC2p4Wgkb4K7PqDwyL7LULcca/okxESZ0YW8a81imYG2JsMmNsEDEpiK86aS87qBUx3XcadSUuENdiHVfa0+pgJeFUyVFcNAwU6X+nkvQ5MsmrDQpQ/LVwiNWW0A7s=
+Received: from BN9PR03CA0217.namprd03.prod.outlook.com (2603:10b6:408:f8::12)
+ by MW4PR12MB5668.namprd12.prod.outlook.com (2603:10b6:303:16b::13) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5709.19; Wed, 12 Oct
- 2022 13:23:25 +0000
-Received: from DM6NAM11FT024.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:120:cafe::69) by DM6PR06CA0032.outlook.office365.com
- (2603:10b6:5:120::45) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5709.21 via Frontend
- Transport; Wed, 12 Oct 2022 13:23:25 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.29; Mon, 17 Oct
+ 2022 14:30:48 +0000
+Received: from BN8NAM11FT020.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:f8:cafe::24) by BN9PR03CA0217.outlook.office365.com
+ (2603:10b6:408:f8::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.30 via Frontend
+ Transport; Mon, 17 Oct 2022 14:30:48 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -42,13 +47,13 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DM6NAM11FT024.mail.protection.outlook.com (10.13.172.159) with Microsoft SMTP
+ BN8NAM11FT020.mail.protection.outlook.com (10.13.176.223) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.5723.20 via Frontend Transport; Wed, 12 Oct 2022 13:23:25 +0000
+ 15.20.5723.20 via Frontend Transport; Mon, 17 Oct 2022 14:30:48 +0000
 Received: from amd.amd.com (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.28; Wed, 12 Oct
- 2022 08:22:53 -0500
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.31; Mon, 17 Oct
+ 2022 09:30:44 -0500
 From: Arvind Yadav <Arvind.Yadav@amd.com>
 To: <Christian.Koenig@amd.com>, <andrey.grodzovsky@amd.com>,
 	<shashank.sharma@amd.com>, <amaranath.somalapuram@amd.com>,
@@ -57,78 +62,72 @@ To: <Christian.Koenig@amd.com>, <andrey.grodzovsky@amd.com>,
 	<linux-media@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
 	<linaro-mm-sig@lists.linaro.org>, <linux-kernel@vger.kernel.org>,
 	<steven.price@arm.com>
-Date: Wed, 12 Oct 2022 18:52:00 +0530
-Message-ID: <20221012132200.13011-1-Arvind.Yadav@amd.com>
+Date: Mon, 17 Oct 2022 20:00:06 +0530
+Message-ID: <20221017143006.2419-1-Arvind.Yadav@amd.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6NAM11FT024:EE_|DM4PR12MB5889:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1403e0a6-265b-4ea5-c32f-08daac54f1ad
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT020:EE_|MW4PR12MB5668:EE_
+X-MS-Office365-Filtering-Correlation-Id: e29cba0d-cea2-4da8-fa97-08dab04c2f6b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	YQCSgCHaxIi80wXNrOdgIDQI+21Y0+B2EY6riggfBs+1IkLeMTyNuuCIXHX5NuMokzZQPgGNpAz5WL2Y28qNFk0SDRb2hjV35NjjSEOAR5v/+4Laf3PTqk/0AJwQL0pc0dugGI20LzXRDwLdUOoq30If/QXvPZ+cno6sHfC5FZB58dVv/TkGaS5kEw/vMVEI+UoY4SVmU8KLpyljdwOsSAzRUI9X59od7Se4tqG4/hL0UDrAKmOciBJscKJwQ+zMJuvu8X/JfL6dYahHMjg9729pv0K/t/4RY5yKUhKfqHpz3smx1A+Ll8xcMcCZzM+GZghXTeMOsCtR8iyQKxboehdGPzoHw5djItAtKxvXfjGrtQ3oXyTOyIIwLCXpmIxsvtQmh+Tnwk8l5tZZjxT+8OAh2xNhB0fk4mLyAWeo9WzIwGhvr1PxOPrpra9tmEuUy2omv+YgLQL2+tT0iqUR67VBLuGR5mWZPDdThgpf5Gh0iIdWYsfXg9Qj6va0D3mu3GSz1bBXTpMuIK/OL7CvUQXC2auoQCvy21gSYYczWisocSoW7RwGkwHfvTB8J2x4HsuakEXtDjy8n/YcJKxhjtkqyD6GBERrUlqvkhEJ7uJV3n8GIfseWp49swPaabBLCPEUKP3lly+5FDYJI8lQk6TPkJz8cxCDbKHffhlsclep0VjiwhsAJbvKso9nllIonNjvtqw7MNAbtY2SvQL9kv11MNPK8mMTtTGF6HaFKLEVeoz0J3MgUwOG9Lki42KdWWE47zxJ8FBe+X0cIztkd21PcwUC3gx44o759CmgAzuhqKQtqhIbTRg90zklYBXRwtk36zRjAh4uD68YjJc5t8hsS6pYv1OzuDG8rBP+0kM=
+	7JstLCWQn5nlis2vdsm1YkC0QVKaXlGRE12JXfGc9VEULXUWxcRm7nZNwq8iLRZMN27V+zqQeHD30m5c7OgMyShs2z8v+tqa7JMH4ezO9Z3nEZoL+74qbdq2vfmpnO5+ChaymAsjHrTchgwFkmLUeLnNwtadrLw5DAKSZnMA677s0Y19XBX2cjoUSRxU+jg4F+jFe230ZtH3wFrXyjURdrhxzR1HqAoJQ8+2p4g5hOAHrlsw3OlmvWFcsUddl9tVtNkYEFpoor6LYl679ipdnIPJIfnMMWIYZVXGsExqe6nkLQcmw6JpCbuUmib2LAARdxRHj8QGm/mtm2up3rdyRDc19O1LHQMHdEM0QBQA9jg5NEHTRpkI/egY3RGDoYXDtkBKElrFTUMVOzCXhS/5KnLObXvrDeqGn9b9TRnYzTgqy4dQgKCoiNBYgzjpnomwOh/zMInQsqKk5Kt2qB7o3lcnHmWF6+MUvmgqSIwsF3otCPLjFeN7oTKEQNs0slro41pEW74SN6zqdmYy/6ISxkXTE6GSgBlizvwqvLuanqetAGZC+acPxL+cdhE5EIOVz3S3kIx7ChlYcgQNfUIgwtGsRuPMvQboFKC4AnZUMDCLiIDSs0lFnQ34SrVWeiX7WirqH4dgpY0wywSur8ZfLMUvlsT1ZiqyXTNZyLaihsekJfpBih1m0qHpLx4H18dKScE7sl7RqKwNSTBgsOQT6qSh2HRTVm/7Eyz7rXjwYeRl1/Tlgn9HCLWJ2nM1BW6AKupv8zOUVDCcMlM4OytfsDrkD34oNzUmZcRg4ZZQODXhV/tm1Uq6u68nD2gjufK07o1GELwwfmwuhGsp5Vc6wuKqCrR1cYcLPsLIpvjiEhI=
 X-Forefront-Antispam-Report: 
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(376002)(396003)(39860400002)(136003)(346002)(451199015)(46966006)(36840700001)(40470700004)(5660300002)(41300700001)(316002)(4326008)(36756003)(36860700001)(7696005)(70206006)(70586007)(6666004)(8676002)(478600001)(2906002)(83380400001)(82310400005)(86362001)(40480700001)(82740400003)(26005)(336012)(16526019)(921005)(1076003)(40460700003)(110136005)(47076005)(2616005)(426003)(81166007)(356005)(186003)(8936002)(83996005)(36900700001)(2101003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:CAL;SFV:NSPM;H:SATLEXMB04.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230022)(4636009)(396003)(376002)(39860400002)(346002)(136003)(451199015)(36840700001)(46966006)(40470700004)(36756003)(86362001)(356005)(81166007)(921005)(82740400003)(16526019)(1076003)(186003)(47076005)(40460700003)(2906002)(5660300002)(40480700001)(36860700001)(6666004)(26005)(2616005)(7696005)(478600001)(336012)(83380400001)(316002)(426003)(82310400005)(110136005)(70586007)(70206006)(4326008)(41300700001)(8676002)(8936002)(2101003)(83996005)(36900700001);DIR:OUT;SFP:1101;
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2022 13:23:25.7492
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2022 14:30:48.5486
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1403e0a6-265b-4ea5-c32f-08daac54f1ad
+X-MS-Exchange-CrossTenant-Network-Message-Id: e29cba0d-cea2-4da8-fa97-08dab04c2f6b
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: 
-	DM6NAM11FT024.eop-nam11.prod.protection.outlook.com
+	BN8NAM11FT020.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5889
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB5668
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: -------
-X-Rspamd-Queue-Id: BE1ED3ECD4
-X-Spamd-Result: default: False [-7.00 / 15.00];
-	DWL_DNSWL_HI(-3.50)[amd.com:dkim];
+X-Spamd-Bar: ---
+X-Rspamd-Queue-Id: 6AFCE3EF81
+X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
 	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
 	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.923];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
 	FROM_EQ_ENVFROM(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[amd.com:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_FIVE(0.00)[5];
+	DKIM_TRACE(0.00)[amd.com:+];
+	HAS_XOIP(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[15];
 	FROM_HAS_DN(0.00)[];
-	HAS_XOIP(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.236.41:from]
-Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=nWUO5XNO;
-	spf=pass (lists.linaro.org: domain of Arvind.Yadav@amd.com designates 40.107.236.41 as permitted sender) smtp.mailfrom=Arvind.Yadav@amd.com;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1");
-	dmarc=pass (policy=quarantine) header.from=amd.com
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.223.51:from]
 X-MailFrom: Arvind.Yadav@amd.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: R7VEQ4SAKFJJDXLNHEEODAB5OQGIKQOW
-X-Message-ID-Hash: R7VEQ4SAKFJJDXLNHEEODAB5OQGIKQOW
+Message-ID-Hash: Q3F275GHLI37W6PPIOZA5G747AE6AJGB
+X-Message-ID-Hash: Q3F275GHLI37W6PPIOZA5G747AE6AJGB
 X-Mailman-Approved-At: Wed, 26 Oct 2022 07:50:12 +0000
 CC: Arvind Yadav <Arvind.Yadav@amd.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2] drm/sched: Fix kernel NULL pointer dereference error
+Subject: [Linaro-mm-sig] [PATCH v3] drm/sched: Fix kernel NULL pointer dereference error
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/R7VEQ4SAKFJJDXLNHEEODAB5OQGIKQOW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Q3F275GHLI37W6PPIOZA5G747AE6AJGB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -138,10 +137,15 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-This is purely a timing issue. Here, sometimes Job free
+-This is purely a timing issue. Here, sometimes Job free
 is happening before the job is done.
 To fix this issue moving 'dma_fence_cb' callback from
 job(struct drm_sched_job) to scheduler fence (struct drm_sched_fence).
+
+- Added drm_sched_fence_set_parent() function(and others *_parent_cb)
+in sched_fence.c. Moved parent fence intilization and callback 
+installation into this (this just cleanup).
+
 
 BUG: kernel NULL pointer dereference, address: 0000000000000088
  #PF: supervisor read access in kernel mode
@@ -188,13 +192,82 @@ Changes in v2: Moving 'dma_fence_cb' callback from
 job(struct drm_sched_job) to scheduler fence(struct drm_sched_fence)
 instead of adding NULL check for s_fence.
 
----
- drivers/gpu/drm/scheduler/sched_main.c | 23 +++++++++++------------
- include/drm/gpu_scheduler.h            |  6 ++++--
- 2 files changed, 15 insertions(+), 14 deletions(-)
+Changes in v3: Added drm_sched_fence_set_parent() function(and others *_parent_cb)
+in sched_fence.c. Moved parent fence intilization and callback
+installation into this (this just cleanup).
 
+---
+ drivers/gpu/drm/scheduler/sched_fence.c | 53 +++++++++++++++++++++++++
+ drivers/gpu/drm/scheduler/sched_main.c  | 38 +++++-------------
+ include/drm/gpu_scheduler.h             | 12 +++++-
+ 3 files changed, 72 insertions(+), 31 deletions(-)
+
+diff --git a/drivers/gpu/drm/scheduler/sched_fence.c b/drivers/gpu/drm/scheduler/sched_fence.c
+index 7fd869520ef2..f6808f363261 100644
+--- a/drivers/gpu/drm/scheduler/sched_fence.c
++++ b/drivers/gpu/drm/scheduler/sched_fence.c
+@@ -77,6 +77,59 @@ static void drm_sched_fence_free_rcu(struct rcu_head *rcu)
+ 	if (!WARN_ON_ONCE(!fence))
+ 		kmem_cache_free(sched_fence_slab, fence);
+ }
++/**
++ * drm_sched_job_done_cb - the callback for a done job
++ * @f: fence
++ * @cb: fence callbacks
++ */
++static void drm_sched_job_done_cb(struct dma_fence *f, struct dma_fence_cb *cb)
++{
++	struct drm_sched_fence *s_fence = container_of(cb, struct drm_sched_fence,
++						       cb);
++	struct drm_gpu_scheduler *sched = s_fence->sched;
++
++	atomic_dec(&sched->hw_rq_count);
++	atomic_dec(sched->score);
++
++	dma_fence_get(&s_fence->finished);
++	drm_sched_fence_finished(s_fence);
++	dma_fence_put(&s_fence->finished);
++	wake_up_interruptible(&sched->wake_up_worker);
++}
++
++int drm_sched_fence_add_parent_cb(struct dma_fence *fence,
++				  struct drm_sched_fence *s_fence)
++{
++	return dma_fence_add_callback(fence, &s_fence->cb,
++				      drm_sched_job_done_cb);
++}
++
++bool drm_sched_fence_remove_parent_cb(struct drm_sched_fence *s_fence)
++{
++	return dma_fence_remove_callback(s_fence->parent,
++					 &s_fence->cb);
++}
++
++/**
++ * drm_sched_fence_set_parent - set the parent fence and add the callback
++ * fence: pointer to the hw fence
++ * @s_fence: pointer to the fence
++ *
++ * Set the parent fence and intall the callback for a done job.
++ */
++int drm_sched_fence_set_parent(struct dma_fence *fence,
++			       struct drm_sched_fence *s_fence)
++{
++	if (s_fence->parent &&
++	   dma_fence_remove_callback(s_fence->parent, &s_fence->cb))
++		dma_fence_put(s_fence->parent);
++
++	s_fence->parent = dma_fence_get(fence);
++	/* Drop for original kref_init of the fence */
++	dma_fence_put(fence);
++	return dma_fence_add_callback(fence, &s_fence->cb,
++				      drm_sched_job_done_cb);
++}
+ 
+ /**
+  * drm_sched_fence_free - free up an uninitialized fence
 diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
-index 4cc59bae38dd..62d8eca05b92 100644
+index 4cc59bae38dd..cfb52e15f5b0 100644
 --- a/drivers/gpu/drm/scheduler/sched_main.c
 +++ b/drivers/gpu/drm/scheduler/sched_main.c
 @@ -253,13 +253,12 @@ drm_sched_rq_select_entity_fifo(struct drm_sched_rq *rq)
@@ -213,34 +286,42 @@ index 4cc59bae38dd..62d8eca05b92 100644
  	struct drm_gpu_scheduler *sched = s_fence->sched;
  
  	atomic_dec(&sched->hw_rq_count);
-@@ -280,9 +279,9 @@ static void drm_sched_job_done(struct drm_sched_job *s_job)
-  */
- static void drm_sched_job_done_cb(struct dma_fence *f, struct dma_fence_cb *cb)
- {
--	struct drm_sched_job *s_job = container_of(cb, struct drm_sched_job, cb);
-+	struct drm_sched_fence *s_fence = container_of(cb, struct drm_sched_fence, cb);
- 
--	drm_sched_job_done(s_job);
-+	drm_sched_job_done(s_fence);
+@@ -273,18 +272,6 @@ static void drm_sched_job_done(struct drm_sched_job *s_job)
+ 	wake_up_interruptible(&sched->wake_up_worker);
  }
  
+-/**
+- * drm_sched_job_done_cb - the callback for a done job
+- * @f: fence
+- * @cb: fence callbacks
+- */
+-static void drm_sched_job_done_cb(struct dma_fence *f, struct dma_fence_cb *cb)
+-{
+-	struct drm_sched_job *s_job = container_of(cb, struct drm_sched_job, cb);
+-
+-	drm_sched_job_done(s_job);
+-}
+-
  /**
-@@ -506,7 +505,7 @@ void drm_sched_stop(struct drm_gpu_scheduler *sched, struct drm_sched_job *bad)
+  * drm_sched_dependency_optimized - test if the dependency can be optimized
+  *
+@@ -505,8 +492,7 @@ void drm_sched_stop(struct drm_gpu_scheduler *sched, struct drm_sched_job *bad)
+ 	list_for_each_entry_safe_reverse(s_job, tmp, &sched->pending_list,
  					 list) {
  		if (s_job->s_fence->parent &&
- 		    dma_fence_remove_callback(s_job->s_fence->parent,
+-		    dma_fence_remove_callback(s_job->s_fence->parent,
 -					      &s_job->cb)) {
-+					      &s_job->s_fence->cb)) {
++		    drm_sched_fence_remove_parent_cb(s_job->s_fence)) {
  			dma_fence_put(s_job->s_fence->parent);
  			s_job->s_fence->parent = NULL;
  			atomic_dec(&sched->hw_rq_count);
-@@ -576,15 +575,15 @@ void drm_sched_start(struct drm_gpu_scheduler *sched, bool full_recovery)
+@@ -576,15 +562,14 @@ void drm_sched_start(struct drm_gpu_scheduler *sched, bool full_recovery)
  			continue;
  
  		if (fence) {
 -			r = dma_fence_add_callback(fence, &s_job->cb,
-+			r = dma_fence_add_callback(fence, &s_job->s_fence->cb,
- 						   drm_sched_job_done_cb);
+-						   drm_sched_job_done_cb);
++			r = drm_sched_fence_add_parent_cb(fence, s_job->s_fence);
  			if (r == -ENOENT)
 -				drm_sched_job_done(s_job);
 +				drm_sched_job_done(s_job->s_fence);
@@ -253,20 +334,24 @@ index 4cc59bae38dd..62d8eca05b92 100644
  	}
  
  	if (full_recovery) {
-@@ -1053,10 +1052,10 @@ static int drm_sched_main(void *param)
- 			/* Drop for original kref_init of the fence */
- 			dma_fence_put(fence);
+@@ -1049,14 +1034,9 @@ static int drm_sched_main(void *param)
+ 		drm_sched_fence_scheduled(s_fence);
  
+ 		if (!IS_ERR_OR_NULL(fence)) {
+-			s_fence->parent = dma_fence_get(fence);
+-			/* Drop for original kref_init of the fence */
+-			dma_fence_put(fence);
+-
 -			r = dma_fence_add_callback(fence, &sched_job->cb,
-+			r = dma_fence_add_callback(fence, &s_fence->cb,
- 						   drm_sched_job_done_cb);
+-						   drm_sched_job_done_cb);
++			r = drm_sched_fence_set_parent(fence, s_fence);
  			if (r == -ENOENT)
 -				drm_sched_job_done(sched_job);
 +				drm_sched_job_done(s_fence);
  			else if (r)
  				DRM_DEV_ERROR(sched->dev, "fence add callback failed (%d)\n",
  					  r);
-@@ -1064,7 +1063,7 @@ static int drm_sched_main(void *param)
+@@ -1064,7 +1044,7 @@ static int drm_sched_main(void *param)
  			if (IS_ERR(fence))
  				dma_fence_set_error(&s_fence->finished, PTR_ERR(fence));
  
@@ -276,7 +361,7 @@ index 4cc59bae38dd..62d8eca05b92 100644
  
  		wake_up(&sched->job_scheduled);
 diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
-index 1f7d9dd1a444..9a96d49dfd75 100644
+index 1f7d9dd1a444..7258e2fa195f 100644
 --- a/include/drm/gpu_scheduler.h
 +++ b/include/drm/gpu_scheduler.h
 @@ -281,6 +281,10 @@ struct drm_sched_fence {
@@ -306,6 +391,19 @@ index 1f7d9dd1a444..9a96d49dfd75 100644
  	/**
  	 * @dependencies:
  	 *
+@@ -559,6 +561,12 @@ void drm_sched_fence_free(struct drm_sched_fence *fence);
+ void drm_sched_fence_scheduled(struct drm_sched_fence *fence);
+ void drm_sched_fence_finished(struct drm_sched_fence *fence);
+ 
++int drm_sched_fence_add_parent_cb(struct dma_fence *fence,
++				  struct drm_sched_fence *s_fence);
++bool drm_sched_fence_remove_parent_cb(struct drm_sched_fence *s_fence);
++int drm_sched_fence_set_parent(struct dma_fence *fence,
++			       struct drm_sched_fence *s_fence);
++
+ unsigned long drm_sched_suspend_timeout(struct drm_gpu_scheduler *sched);
+ void drm_sched_resume_timeout(struct drm_gpu_scheduler *sched,
+ 		                unsigned long remaining);
 -- 
 2.25.1
 
