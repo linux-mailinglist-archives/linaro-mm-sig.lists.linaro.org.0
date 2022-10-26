@@ -2,181 +2,282 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED34D60F7C5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Oct 2022 14:44:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A1A4260FBB0
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Oct 2022 17:21:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B3C533F58E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Oct 2022 12:44:45 +0000 (UTC)
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
-	by lists.linaro.org (Postfix) with ESMTPS id 1E10A3F1D6
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Oct 2022 12:44:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 882BA3F577
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Oct 2022 15:21:09 +0000 (UTC)
+Received: from mail-il1-f199.google.com (mail-il1-f199.google.com [209.85.166.199])
+	by lists.linaro.org (Postfix) with ESMTPS id 32C1E3ECD4
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Oct 2022 18:29:36 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=agwMaoXK;
-	spf=pass (lists.linaro.org: domain of bagasdotme@gmail.com designates 209.85.214.181 as permitted sender) smtp.mailfrom=bagasdotme@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pl1-f181.google.com with SMTP id d24so1339537pls.4
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Oct 2022 05:44:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=WP+7R/Fr2VMJLa5AXizn+zOIuwCy4AiCbk7L9UfX4Zw=;
-        b=agwMaoXKy9Wbn7+kG/2zoL2ab09hLBHI3OWHuBTISVwNYL2VkJUvzxCRoL49OCshBj
-         vLioT/vawmbM+eFCEGMjfNYBG7euvnY+eyE98TBYycgStlmJnIPInsn8srezL58PDRl3
-         GbQRFNvB+CskWz5NEW4VF4ylYuXxQLQIFGWxPAPRT4aobnXX5r3NioqpU61GBtW1SsyN
-         78gcwnit22wAzscY5gBg5HbZTcffuWqOnD8XVVJwUvz5JS9yy9l/rcL1J9r7YFGn9Tdr
-         T1bD5t0YqlJzWkGgCkwslI3+2L9jbWFoe1V7+E7bwxjo1dJHsQjhJGvfdnoIhxetRjTP
-         9fQw==
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of 3j3xZYwkbABA8EF0q11u7q55yt.w44w1uA8u7s439u39.s42@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.166.199 as permitted sender) smtp.mailfrom=3j3xZYwkbABA8EF0q11u7q55yt.w44w1uA8u7s439u39.s42@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
+	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none)
+Received: by mail-il1-f199.google.com with SMTP id w15-20020a056e021c8f00b003006eca5e09so828835ill.11
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Oct 2022 11:29:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=WP+7R/Fr2VMJLa5AXizn+zOIuwCy4AiCbk7L9UfX4Zw=;
-        b=WxbBtQuf+FDG8yKnvZdGd4G/vSCS52oncRRV/FQ8HWec/F9Zz3z4vn1JlNwQQi6t0f
-         I3TGdTlZLqZ6MpF7bskoS1IQiX3mjUWLqSA8IYxiRDc/nFuPZQXvEjyrcY9VbgeWaZ7I
-         Ekk49XzUV8Qwkc5CvPEMImayM7jxJ0VS+ulWzCjS53tGVYaBMgqxe5LLMDQmDHaXb8Kp
-         hrH7RAR78XwNa1gprL7F0ie3dg1Akmebjamr5atrBRSAsKpYkqSJMkk4j3gX/oRMM8gt
-         qg10OePnv7j8hAiqsr81YfFJZwkpA5zKEPlm7HvS0m8pyvW5aErCzBV7baClWHTyM8Ya
-         TjMA==
-X-Gm-Message-State: ACrzQf3+W4dnvnHamdyS5BqsgEpIupgevgbsfksIsaUbx4CeHKLY8w7L
-	nXIZK7Wzzt8ag+LonpN6iA4=
-X-Google-Smtp-Source: AMsMyM5+O8XthDRDSKyEQ3I1jHlcTzZmKX7d/XfEB3c8kCa+btVU5AIiiGXo52VS5hqEqrrzqoO+lA==
-X-Received: by 2002:a17:902:c20c:b0:186:b3d0:f77 with SMTP id 12-20020a170902c20c00b00186b3d00f77mr17479095pll.26.1666874668179;
-        Thu, 27 Oct 2022 05:44:28 -0700 (PDT)
-Received: from debian.me (subs28-116-206-12-37.three.co.id. [116.206.12.37])
-        by smtp.gmail.com with ESMTPSA id i7-20020a170902c94700b00186b3c3e2dasm1125991pla.155.2022.10.27.05.44.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Oct 2022 05:44:27 -0700 (PDT)
-Received: by debian.me (Postfix, from userid 1000)
-	id 28834103F96; Thu, 27 Oct 2022 19:44:25 +0700 (WIB)
-Date: Thu, 27 Oct 2022 19:44:25 +0700
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-To: Mark-PK Tsai <mark-pk.tsai@mediatek.com>
-Message-ID: <Y1p9KT1ZZ0bqIhdu@debian.me>
-References: <20221027072642.23787-1-mark-pk.tsai@mediatek.com>
+        h=to:from:subject:message-id:in-reply-to:date:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=mbMjITi4oOoj8f0nD7La77apr6x51zwihRrLdJqW5LY=;
+        b=0/oDQrg1+HY3FUDFUq1G++hPKVtcA8VQnYOUlrVP2ERca2ZLec8MSKa6u8YJEoATZv
+         lI762+cYggfYJIm0CSrGYoCaD4mJFrUQ9PjD3QyKsk1XDZklQZoDNlOaEP3D5yYMdz8C
+         l98O6Y0GOdRUYSOEGrlwOkCP/rcS53VaaHHB/9TpFW6NnTC+KU/oTg3Zma7c2e6YlidF
+         g/YQFg2lRZqRZyOuRU6+5DBVJysdEiRQ3EzT/mHVH32wvlL58hVIUlz0j3aYfMCtJI/x
+         ZIyzdBJqsRwRHe4Ml96OcQd64ltbndkCAhupYATDjFDDUu28/neMV7p6Rnd/uVxwpIch
+         HFxg==
+X-Gm-Message-State: ACrzQf2YcXoLL/a/xvrGXqDO9ooheDJQr0bNxlELSgXuX6lqCqSSIlaa
+	DnMHknxrKovH36ckPi1/AYfI1toyUqMux/L1kle/g9V+kzz1
+X-Google-Smtp-Source: AMsMyM7LXY/rUKZdQFAcyEwT7u0LRpIuueS58T6VGZWKlqy6PANZ6N6h1pp/uwuVv2CX/z0EMNi0kVwgsWXHbs62/aCcTKh2v3n+
 MIME-Version: 1.0
-In-Reply-To: <20221027072642.23787-1-mark-pk.tsai@mediatek.com>
+X-Received: by 2002:a05:6638:2589:b0:363:bc7a:19eb with SMTP id
+ s9-20020a056638258900b00363bc7a19ebmr2309280jat.80.1666808975673; Wed, 26 Oct
+ 2022 11:29:35 -0700 (PDT)
+Date: Wed, 26 Oct 2022 11:29:35 -0700
+In-Reply-To: <000000000000fad77705e7fd40fb@google.com>
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <000000000000e7513905ebf4346f@google.com>
+From: syzbot <syzbot+9228d6098455bb209ec8@syzkaller.appspotmail.com>
+To: asml.silence@gmail.com, axboe@kernel.dk, christian.koenig@amd.com,
+	dri-devel@lists.freedesktop.org, dvyukov@google.com, ebiederm@xmission.com,
+	keescook@chromium.org, linaro-mm-sig@lists.linaro.org,
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, luto@kernel.org,
+	netdev@vger.kernel.org, peterz@infradead.org, sumit.semwal@linaro.org,
+	syzkaller-bugs@googlegroups.com, tglx@linutronix.de
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: ------
-X-Rspamd-Queue-Id: 1E10A3F1D6
-X-Spamd-Result: default: False [-6.70 / 15.00];
+X-Spamd-Bar: /
+X-Rspamd-Queue-Id: 32C1E3ECD4
+X-Spamd-Result: default: False [-0.90 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-1.00)[209.85.214.181:from,116.206.12.37:received];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=a66c6c673fb555e8];
+	RCVD_IN_DNSWL_HI(-0.50)[209.85.166.199:from];
+	FORGED_SENDER(0.30)[syzbot@syzkaller.appspotmail.com,3j3xZYwkbABA8EF0q11u7q55yt.w44w1uA8u7s439u39.s42@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.181:from];
-	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-0.993];
+	MIME_GOOD(-0.10)[text/plain];
+	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.166.199:from];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com,kernel.dk,amd.com,lists.freedesktop.org,google.com,xmission.com,chromium.org,lists.linaro.org,vger.kernel.org,kernel.org,infradead.org,linaro.org,googlegroups.com,linutronix.de];
+	R_DKIM_NA(0.00)[];
+	TAGGED_FROM(0.00)[9228d6098455bb209ec8];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,3j3xZYwkbABA8EF0q11u7q55yt.w44w1uA8u7s439u39.s42@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
 	RCPT_COUNT_TWELVE(0.00)[16];
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.908];
 	TAGGED_RCPT(0.00)[];
-	FREEMAIL_CC(0.00)[linaro.org,collabora.com,codeaurora.org,redhat.com,arm.com,google.com,amd.com,gmail.com,mediatek.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.infradead.org];
+	TO_DN_NONE(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DWL_DNSWL_NONE(0.00)[gmail.com:dkim];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCVD_COUNT_THREE(0.00)[4];
-	ARC_NA(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: H7ERVXZUXYFBEVG5NUMSNTCXWXCXYDLL
-X-Message-ID-Hash: H7ERVXZUXYFBEVG5NUMSNTCXWXCXYDLL
-X-MailFrom: bagasdotme@gmail.com
+	RCVD_COUNT_TWO(0.00)[2]
+X-MailFrom: 3j3xZYwkbABA8EF0q11u7q55yt.w44w1uA8u7s439u39.s42@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Matthias Brugger <matthias.bgg@gmail.com>, yj.chiang@mediatek.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org
+Message-ID-Hash: ZBCFVEBOSGKO7IPHJWCP47BSRUYZ6IAR
+X-Message-ID-Hash: ZBCFVEBOSGKO7IPHJWCP47BSRUYZ6IAR
+X-Mailman-Approved-At: Thu, 27 Oct 2022 15:20:53 +0000
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: cma_heap: Fix typo in comment
+Subject: [Linaro-mm-sig] Re: [syzbot] KASAN: use-after-free Read in task_work_run (2)
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/H7ERVXZUXYFBEVG5NUMSNTCXWXCXYDLL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZBCFVEBOSGKO7IPHJWCP47BSRUYZ6IAR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============8845587089901688389=="
-
-
---===============8845587089901688389==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="XHaG62drdJ2C2Nnp"
-Content-Disposition: inline
-
-
---XHaG62drdJ2C2Nnp
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Oct 27, 2022 at 03:26:38PM +0800, Mark-PK Tsai wrote:
-> Fix typo in comment.
->=20
-
-Comment on what function? I had to see the diff context.
-
-> Signed-off-by: Mark-PK Tsai <mark-pk.tsai@mediatek.com>
-> ---
->  drivers/dma-buf/heaps/cma_heap.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma=
-_heap.c
-> index 28fb04eccdd0..cd386ce639f3 100644
-> --- a/drivers/dma-buf/heaps/cma_heap.c
-> +++ b/drivers/dma-buf/heaps/cma_heap.c
-> @@ -316,7 +316,7 @@ static struct dma_buf *cma_heap_allocate(struct dma_h=
-eap *heap,
-
-Oh, you refer to cma_heap_allocate(). Please mention it in the patch
-description.
-
->  			kunmap_atomic(vaddr);
->  			/*
->  			 * Avoid wasting time zeroing memory if the process
-> -			 * has been killed by by SIGKILL
-> +			 * has been killed by SIGKILL
-
-Duplicated "by"?
-
-Thanks.
-
---=20
-An old man doll... just what I always wanted! - Clara
-
---XHaG62drdJ2C2Nnp
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCY1p9JQAKCRD2uYlJVVFO
-o2ycAP4mutv5A+U0sVGBxomMJwORB1VaIuTIp/xeL/6OqueMIQEAq2u8IOVlVke8
-K367ezUx4yUU08CTyQcg97a1puTuqwU=
-=bsZY
------END PGP SIGNATURE-----
-
---XHaG62drdJ2C2Nnp--
-
---===============8845587089901688389==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+
+syzbot has found a reproducer for the following issue on:
+
+HEAD commit:    88619e77b33d net: stmmac: rk3588: Allow multiple gmac cont..
+git tree:       bpf
+console output: https://syzkaller.appspot.com/x/log.txt?x=1646d6f2880000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=a66c6c673fb555e8
+dashboard link: https://syzkaller.appspot.com/bug?extid=9228d6098455bb209ec8
+compiler:       gcc (Debian 10.2.1-6) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=12bc425e880000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=1126516e880000
+
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/f8435d5c2c21/disk-88619e77.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/551d8a013e81/vmlinux-88619e77.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/7d3f5c29064d/bzImage-88619e77.xz
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+9228d6098455bb209ec8@syzkaller.appspotmail.com
+
+==================================================================
+BUG: KASAN: use-after-free in task_work_run+0x1b0/0x270 kernel/task_work.c:178
+Read of size 8 at addr ffff8880752b1c18 by task syz-executor361/3766
+
+CPU: 0 PID: 3766 Comm: syz-executor361 Not tainted 6.1.0-rc2-syzkaller-00073-g88619e77b33d #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 10/11/2022
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xcd/0x134 lib/dump_stack.c:106
+ print_address_description mm/kasan/report.c:284 [inline]
+ print_report+0x15e/0x45d mm/kasan/report.c:395
+ kasan_report+0xbb/0x1f0 mm/kasan/report.c:495
+ task_work_run+0x1b0/0x270 kernel/task_work.c:178
+ exit_task_work include/linux/task_work.h:38 [inline]
+ do_exit+0xb35/0x2a20 kernel/exit.c:820
+ do_group_exit+0xd0/0x2a0 kernel/exit.c:950
+ get_signal+0x21a1/0x2430 kernel/signal.c:2858
+ arch_do_signal_or_restart+0x82/0x2300 arch/x86/kernel/signal.c:869
+ exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+ exit_to_user_mode_prepare+0x15f/0x250 kernel/entry/common.c:203
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:285 [inline]
+ syscall_exit_to_user_mode+0x19/0x50 kernel/entry/common.c:296
+ do_syscall_64+0x42/0xb0 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x63/0xcd
+RIP: 0033:0x7fb9f674b089
+Code: Unable to access opcode bytes at 0x7fb9f674b05f.
+RSP: 002b:00007fb9f66fb318 EFLAGS: 00000246 ORIG_RAX: 00000000000000ca
+RAX: 0000000000000001 RBX: 00007fb9f67da1a8 RCX: 00007fb9f674b089
+RDX: 00000000000f4240 RSI: 0000000000000081 RDI: 00007fb9f67da1ac
+RBP: 00007fb9f67da1a0 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000003100000400
+R13: 00007fff658570cf R14: 00007fb9f66fb400 R15: 0000000000022000
+ </TASK>
+
+Allocated by task 3766:
+ kasan_save_stack+0x1e/0x40 mm/kasan/common.c:45
+ kasan_set_track+0x21/0x30 mm/kasan/common.c:52
+ __kasan_slab_alloc+0x7e/0x80 mm/kasan/common.c:325
+ kasan_slab_alloc include/linux/kasan.h:201 [inline]
+ slab_post_alloc_hook mm/slab.h:737 [inline]
+ slab_alloc_node mm/slub.c:3398 [inline]
+ kmem_cache_alloc_node+0x2fc/0x400 mm/slub.c:3443
+ perf_event_alloc.part.0+0x69/0x3bc0 kernel/events/core.c:11625
+ perf_event_alloc kernel/events/core.c:12174 [inline]
+ __do_sys_perf_event_open+0x4ae/0x32d0 kernel/events/core.c:12272
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x35/0xb0 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x63/0xcd
+
+Freed by task 0:
+ kasan_save_stack+0x1e/0x40 mm/kasan/common.c:45
+ kasan_set_track+0x21/0x30 mm/kasan/common.c:52
+ kasan_save_free_info+0x2a/0x40 mm/kasan/generic.c:511
+ ____kasan_slab_free mm/kasan/common.c:236 [inline]
+ ____kasan_slab_free+0x160/0x1c0 mm/kasan/common.c:200
+ kasan_slab_free include/linux/kasan.h:177 [inline]
+ slab_free_hook mm/slub.c:1724 [inline]
+ slab_free_freelist_hook+0x8b/0x1c0 mm/slub.c:1750
+ slab_free mm/slub.c:3661 [inline]
+ kmem_cache_free+0xea/0x5b0 mm/slub.c:3683
+ rcu_do_batch kernel/rcu/tree.c:2250 [inline]
+ rcu_core+0x81f/0x1980 kernel/rcu/tree.c:2510
+ __do_softirq+0x1f7/0xad8 kernel/softirq.c:571
+
+Last potentially related work creation:
+ kasan_save_stack+0x1e/0x40 mm/kasan/common.c:45
+ __kasan_record_aux_stack+0xbc/0xd0 mm/kasan/generic.c:481
+ call_rcu+0x99/0x820 kernel/rcu/tree.c:2798
+ put_event kernel/events/core.c:5095 [inline]
+ perf_event_release_kernel+0x6f2/0x940 kernel/events/core.c:5210
+ perf_release+0x33/0x40 kernel/events/core.c:5220
+ __fput+0x27c/0xa90 fs/file_table.c:320
+ task_work_run+0x16b/0x270 kernel/task_work.c:179
+ resume_user_mode_work include/linux/resume_user_mode.h:49 [inline]
+ exit_to_user_mode_loop kernel/entry/common.c:171 [inline]
+ exit_to_user_mode_prepare+0x23c/0x250 kernel/entry/common.c:203
+ __syscall_exit_to_user_mode_work kernel/entry/common.c:285 [inline]
+ syscall_exit_to_user_mode+0x19/0x50 kernel/entry/common.c:296
+ do_syscall_64+0x42/0xb0 arch/x86/entry/common.c:86
+ entry_SYSCALL_64_after_hwframe+0x63/0xcd
+
+Second to last potentially related work creation:
+ kasan_save_stack+0x1e/0x40 mm/kasan/common.c:45
+ __kasan_record_aux_stack+0xbc/0xd0 mm/kasan/generic.c:481
+ task_work_add+0x7b/0x2c0 kernel/task_work.c:48
+ event_sched_out+0xe35/0x1190 kernel/events/core.c:2294
+ __perf_remove_from_context+0x87/0xc40 kernel/events/core.c:2359
+ event_function+0x29e/0x3e0 kernel/events/core.c:254
+ remote_function kernel/events/core.c:92 [inline]
+ remote_function+0x11e/0x1a0 kernel/events/core.c:72
+ __flush_smp_call_function_queue+0x205/0x9a0 kernel/smp.c:630
+ __sysvec_call_function_single+0xca/0x4d0 arch/x86/kernel/smp.c:248
+ sysvec_call_function_single+0x8e/0xc0 arch/x86/kernel/smp.c:243
+ asm_sysvec_call_function_single+0x16/0x20 arch/x86/include/asm/idtentry.h:657
+
+The buggy address belongs to the object at ffff8880752b17c0
+ which belongs to the cache perf_event of size 1392
+The buggy address is located 1112 bytes inside of
+ 1392-byte region [ffff8880752b17c0, ffff8880752b1d30)
+
+The buggy address belongs to the physical page:
+page:ffffea0001d4ac00 refcount:1 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x752b0
+head:ffffea0001d4ac00 order:3 compound_mapcount:0 compound_pincount:0
+flags: 0xfff00000010200(slab|head|node=0|zone=1|lastcpupid=0x7ff)
+raw: 00fff00000010200 0000000000000000 dead000000000122 ffff8880118c23c0
+raw: 0000000000000000 0000000080150015 00000001ffffffff 0000000000000000
+page dumped because: kasan: bad access detected
+page_owner tracks the page as allocated
+page last allocated via order 3, migratetype Unmovable, gfp_mask 0xd20c0(__GFP_IO|__GFP_FS|__GFP_NOWARN|__GFP_NORETRY|__GFP_COMP|__GFP_NOMEMALLOC), pid 3754, tgid 3753 (syz-executor361), ts 58662170660, free_ts 58383135648
+ prep_new_page mm/page_alloc.c:2538 [inline]
+ get_page_from_freelist+0x10b5/0x2d50 mm/page_alloc.c:4287
+ __alloc_pages+0x1c7/0x5a0 mm/page_alloc.c:5554
+ alloc_pages+0x1a6/0x270 mm/mempolicy.c:2285
+ alloc_slab_page mm/slub.c:1794 [inline]
+ allocate_slab+0x213/0x300 mm/slub.c:1939
+ new_slab mm/slub.c:1992 [inline]
+ ___slab_alloc+0xa91/0x1400 mm/slub.c:3180
+ __slab_alloc.constprop.0+0x56/0xa0 mm/slub.c:3279
+ slab_alloc_node mm/slub.c:3364 [inline]
+ kmem_cache_alloc_node+0x189/0x400 mm/slub.c:3443
+ perf_event_alloc.part.0+0x69/0x3bc0 kernel/events/core.c:11625
+ perf_event_alloc kernel/events/core.c:12174 [inline]
+ __do_sys_perf_event_open+0x4ae/0x32d0 kernel/events/core.c:12272
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x35/0xb0 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x63/0xcd
+page last free stack trace:
+ reset_page_owner include/linux/page_owner.h:24 [inline]
+ free_pages_prepare mm/page_alloc.c:1458 [inline]
+ free_pcp_prepare+0x65c/0xd90 mm/page_alloc.c:1508
+ free_unref_page_prepare mm/page_alloc.c:3386 [inline]
+ free_unref_page+0x19/0x4d0 mm/page_alloc.c:3482
+ __unfreeze_partials+0x17c/0x1a0 mm/slub.c:2586
+ qlink_free mm/kasan/quarantine.c:168 [inline]
+ qlist_free_all+0x6a/0x170 mm/kasan/quarantine.c:187
+ kasan_quarantine_reduce+0x180/0x200 mm/kasan/quarantine.c:294
+ __kasan_slab_alloc+0x62/0x80 mm/kasan/common.c:302
+ kasan_slab_alloc include/linux/kasan.h:201 [inline]
+ slab_post_alloc_hook mm/slab.h:737 [inline]
+ slab_alloc_node mm/slub.c:3398 [inline]
+ slab_alloc mm/slub.c:3406 [inline]
+ __kmem_cache_alloc_lru mm/slub.c:3413 [inline]
+ kmem_cache_alloc+0x2ac/0x3c0 mm/slub.c:3422
+ kmem_cache_zalloc include/linux/slab.h:702 [inline]
+ alloc_buffer_head+0x20/0x140 fs/buffer.c:2899
+ alloc_page_buffers+0x280/0x790 fs/buffer.c:829
+ create_empty_buffers+0x2c/0xf20 fs/buffer.c:1543
+ ext4_block_write_begin+0x10a7/0x15f0 fs/ext4/inode.c:1074
+ ext4_da_write_begin+0x44c/0xb50 fs/ext4/inode.c:3003
+ generic_perform_write+0x252/0x570 mm/filemap.c:3753
+ ext4_buffered_write_iter+0x15b/0x460 fs/ext4/file.c:285
+ ext4_file_write_iter+0x8b8/0x16e0 fs/ext4/file.c:700
+ __kernel_write_iter+0x25e/0x730 fs/read_write.c:517
+
+Memory state around the buggy address:
+ ffff8880752b1b00: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+ ffff8880752b1b80: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+>ffff8880752b1c00: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+                            ^
+ ffff8880752b1c80: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+ ffff8880752b1d00: fb fb fb fb fb fb fc fc fc fc fc fc fc fc fc fc
+==================================================================
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============8845587089901688389==--
