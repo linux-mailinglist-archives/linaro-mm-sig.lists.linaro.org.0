@@ -2,183 +2,141 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id E410160DC76
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Oct 2022 09:50:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DEA460F6EC
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Oct 2022 14:14:34 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 862E83F58E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Oct 2022 07:50:03 +0000 (UTC)
-Received: from smtp-out-06.comm2000.it (smtp-out-06.comm2000.it [212.97.32.74])
-	by lists.linaro.org (Postfix) with ESMTPS id 97F9B3F2E5
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Oct 2022 16:55:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 31E7A3F59E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Oct 2022 12:14:33 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 2B8F13F1D6
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Oct 2022 12:14:16 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=mailserver.it header.s=mailsrv header.b=PWw9sS0J;
-	spf=none (lists.linaro.org: domain of francesco@dolcini.it has no SPF policy when checking 212.97.32.74) smtp.mailfrom=francesco@dolcini.it;
-	dmarc=none
-Received: from francesco-nb.int.toradex.com (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	(Authenticated sender: francesco@dolcini.it)
-	by smtp-out-06.comm2000.it (Postfix) with ESMTPSA id BEE81563EC3;
-	Wed, 19 Oct 2022 18:55:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=mailserver.it;
-	s=mailsrv; t=1666198504;
-	bh=eNJuvrm0OLE1ElbWzHkO7dbxfd4V9jaQDcr1IyUW5VU=;
-	h=Date:From:To:Cc:Subject;
-	b=PWw9sS0JZ1HZ50UrZLtlQCIFixu6Jz/0rDl3i5mJzHB0ekrRPiEcMlhXAbV+P+Y3x
-	 bcn2YjlpTgWVMr4xHU5Wc5PVJdYza6S1SeH4rYSRI1nJ1NuayEPervxzhTsZiK5jth
-	 lVgXAhvbh099qjbgw7ws5FRdQ/aHvPGsTbk+U4hrxk2kOGBC9kzpAJWpfbsREW/A6W
-	 ctVXA0iYs8ntfa5A847MUGIXoZZKObLYWoHGy1LW1qPez5eMOJwev01HyiOaZC+LqC
-	 ophTsekXwPb9St6/Z8Yc8Yv4rjxGpx2tEU6BZCGxhQbvHsQx1szrH3++pfLxWaXZAP
-	 R57Npd5/ukshQ==
-Date: Wed, 19 Oct 2022 18:54:59 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Lucas Stach <l.stach@pengutronix.de>,
-	Russell King <linux+etnaviv@armlinux.org.uk>,
-	Christian Gmeiner <christian.gmeiner@gmail.com>,
-	etnaviv@lists.freedesktop.org
-Message-ID: <Y1Ar4wnv4zeh9Bmw@francesco-nb.int.toradex.com>
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=PZjRFX7h;
+	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.218.48 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-ej1-f48.google.com with SMTP id bj12so3874879ejb.13
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Oct 2022 05:14:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:in-reply-to:references:to:from
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ozR3pFF6qvev8k9P0jdmPJjlIVCpHvZvFTrYrZyvlug=;
+        b=PZjRFX7hCJSMc+Y64bXTjS1Y0HjMKr7mBuRJEyhLjLFHCu86uE4HnLAuCExy6utvd1
+         FOgBhXiiAJSLrrUG20YbdRvbVsNsZwCbTOPXaDHJFE88JKd+2iypeS1yDOEDzE57VkjJ
+         UqWne/R3v2Wnj8Xa4C6S+5rj0k7XRgR9qoxXW4GzTzZDgcO+MzbvkuT1O61ovT/wJi+D
+         Ha3tj9vLaD9yQYMZ/8SkAKkNiZ/YgGPwpKyMnOgfHSbBlgl4run+/9wq3qhNRVlg17Ki
+         vDrwt6JEo/l/1NL27ZVsNuW2qV7SdZinurpZSn7BRkWNw1fV8rlE01TvkJBC9O4zTpDK
+         1seg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:references:to:from
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=ozR3pFF6qvev8k9P0jdmPJjlIVCpHvZvFTrYrZyvlug=;
+        b=V8oXCg0d/tfRJj9APXFD1Y49Kvz60Hi3YlqC8ASOjfS46rjwqCXIcuyKNWKsvKgK/k
+         hDQ7nPwJwcZLYITV3VQQrfX13+KAYSOtouz7GbQZyPosQWT2MGJEAqBMzhTb5m6rI45B
+         Fb9h8OneMKlbPGUCwbT/G8LQsOdm8/9er2spbpP4IEJd7nCS/aWQCbJ0jTNhpe+JfJ8g
+         dqOnN86OQVuKSjy0fJpuPiiXjG2FU9mQTiqiD+/7Cl+1sDd8GSc1jrjHNN+VYp8hx6sl
+         V7jGYmis1S3v6WdGHKkUarBUvht6zG/5zJWkza27f9LF8eev7Ci/aWrw83KJmyDkso9R
+         oP6A==
+X-Gm-Message-State: ACrzQf0LBNnL1DYvOsZ2Kp38hpNV8qdKuzvs+rC9tubnhb5G1OgJcCLp
+	RiGlsCl2uoyGV/+RRLRpspU=
+X-Google-Smtp-Source: AMsMyM4Sne+rY2Ji3vF5c/d7Ew6GneR38fuCK0QW1XQVz5EfmwMiRau9oJnErgKoc5ml8Y39s8E8kA==
+X-Received: by 2002:a17:907:1dda:b0:7a6:8ffc:7dc with SMTP id og26-20020a1709071dda00b007a68ffc07dcmr20109443ejc.163.1666872855035;
+        Thu, 27 Oct 2022 05:14:15 -0700 (PDT)
+Received: from [192.168.178.21] (p5b0ea229.dip0.t-ipconnect.de. [91.14.162.41])
+        by smtp.gmail.com with ESMTPSA id bm27-20020a0564020b1b00b004615f7495e0sm917790edb.8.2022.10.27.05.14.13
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 27 Oct 2022 05:14:14 -0700 (PDT)
+Message-ID: <59ac9998-a838-abf8-124c-8fd98c4f0f7a@gmail.com>
+Date: Thu, 27 Oct 2022 14:14:12 +0200
 MIME-Version: 1.0
-Content-Disposition: inline
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+To: l.stach@pengutronix.de, nicolas@ndufresne.ca, ppaalanen@gmail.com,
+ sumit.semwal@linaro.org, daniel@ffwll.ch, robdclark@gmail.com,
+ dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+ linux-media@vger.kernel.org
+References: <20221020121316.3946-1-christian.koenig@amd.com>
+In-Reply-To: <20221020121316.3946-1-christian.koenig@amd.com>
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: -
-X-Rspamd-Queue-Id: 97F9B3F2E5
-X-Spamd-Result: default: False [-1.90 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_ALLOW(-0.20)[mailserver.it:s=mailsrv];
+X-Spamd-Bar: ---
+X-Rspamd-Queue-Id: 2B8F13F1D6
+X-Spamd-Result: default: False [-4.00 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[212.97.32.74:from];
-	FREEMAIL_TO(0.00)[pengutronix.de,armlinux.org.uk,gmail.com,lists.freedesktop.org];
-	ASN(0.00)[asn:5602, ipnet:212.97.32.0/19, country:IT];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
-	R_SPF_NA(0.00)[no SPF record];
-	DKIM_TRACE(0.00)[mailserver.it:+];
-	MIME_TRACE(0.00)[0:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DMARC_NA(0.00)[dolcini.it];
-	RCVD_COUNT_TWO(0.00)[2];
 	ARC_NA(0.00)[];
+	DWL_DNSWL_NONE(0.00)[gmail.com:dkim];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[etnaviv];
-	TO_DN_SOME(0.00)[];
-	RCVD_TLS_ALL(0.00)[]
-X-MailFrom: francesco@dolcini.it
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: FQG6NGJGDTB54XQUIJSWR6RYC32M2TWO
-X-Message-ID-Hash: FQG6NGJGDTB54XQUIJSWR6RYC32M2TWO
-X-Mailman-Approved-At: Wed, 26 Oct 2022 07:49:47 +0000
-CC: dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+	TAGGED_FROM(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[3];
+	TO_DN_NONE(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	NEURAL_HAM(-0.00)[-0.837];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	FREEMAIL_TO(0.00)[pengutronix.de,ndufresne.ca,gmail.com,linaro.org,ffwll.ch,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.48:from]
+Message-ID-Hash: SELFA2D67GE72RGKP6D2NEAXQPKXBMGB
+X-Message-ID-Hash: SELFA2D67GE72RGKP6D2NEAXQPKXBMGB
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] etnaviv OOPS, NULL pointer dereference on Linux 6.0.2
+Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FQG6NGJGDTB54XQUIJSWR6RYC32M2TWO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SELFA2D67GE72RGKP6D2NEAXQPKXBMGB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-Hello all,
-I got the following Oops, on a Apalis iMX6 Dual with 512MB RAM,
-running glmark2 tests with the system under memory pressure (OOM
-Killer!).
-
-It's not something systematic and I cannot tell if this is a regression
-or not, any suggestion? The system just froze afterward.
-
-[    0.000000] Booting Linux on physical CPU 0x0
-[    0.000000] Linux version 6.0.2-6.1.0-devel+git.dab08f7eecdf (oe-user@oe-host) (arm-tdx-linux-gnueabi-gcc (GCC) 11.3.0, GNU ld (GNU Binutils) 2.38.20220708) #1 SMP Sat Oct 15 06:02:59 UTC 2022
-[    0.000000] CPU: ARMv7 Processor [412fc09a] revision 10 (ARMv7), cr=10c5387d
-[    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
-[    0.000000] OF: fdt: Machine model: Toradex Apalis iMX6Q/D Module on Ixora Carrier Board V1.1
-
-...
-
-[    1.749471] etnaviv etnaviv: bound 130000.gpu (ops gpu_ops)
-[    1.750527] etnaviv etnaviv: bound 134000.gpu (ops gpu_ops)
-[    1.751522] etnaviv etnaviv: bound 2204000.gpu (ops gpu_ops)
-[    1.751566] etnaviv-gpu 130000.gpu: model: GC2000, revision: 5108
-[    1.753141] etnaviv-gpu 134000.gpu: model: GC320, revision: 5007
-[    1.753392] etnaviv-gpu 2204000.gpu: model: GC355, revision: 1215
-[    1.753421] etnaviv-gpu 2204000.gpu: Ignoring GPU with VG and FE2.0
-[    1.756559] [drm] Initialized etnaviv 1.3.0 20151214 for etnaviv on minor 0
-
-...
-
-[  480.994256] Out of memory: Killed process 1740 (Qt5_CinematicEx) total-vm:242656kB, anon-rss:105212kB, file-rss:9864kB, shmem-rss:1304kB, UID:0 pgtables:192kB oom_score_adj:0
-[  481.068691] 8<--- cut here ---
-[  481.072037] Unable to handle kernel NULL pointer dereference at virtual address 00000004
-[  481.080366] [00000004] *pgd=00000000
-[  481.083994] Internal error: Oops: 805 [#1] SMP ARM
-[  481.088813] Modules linked in: 8021q imx_sdma virt_dma coda_vpu v4l2_jpeg imx_vdoa dw_hdmi_ahb_audio fuse
-[  481.098458] CPU: 1 PID: 1755 Comm: QSGRenderThread Not tainted 6.0.2-6.1.0-devel+git.dab08f7eecdf #1
-[  481.107619] Hardware name: Freescale i.MX6 Quad/DualLite (Device Tree)
-[  481.114157] PC is at etnaviv_gem_free_object+0x40/0x128
-[  481.119412] LR is at lock_is_held_type+0xa4/0x15c
-[  481.124138] pc : [<c0787f90>]    lr : [<c0e46250>]    psr: 60030113
-[  481.130421] sp : e1155da8  ip : 00000000  fp : 0000000c
-[  481.135670] r10: c34ef400  r9 : c262066c  r8 : 00000122
-[  481.140916] r7 : c2153000  r6 : c2153000  r5 : 00000870  r4 : c25f24a0
-[  481.147460] r3 : 00000000  r2 : 00000000  r1 : 00000100  r0 : 00000000
-[  481.153997] Flags: nZCv  IRQs on  FIQs on  Mode SVC_32  ISA ARM  Segment none
-[  481.161143] Control: 10c5387d  Table: 2caf004a  DAC: 00000051
-[  481.166896] Register r0 information: NULL pointer
-[  481.171615] Register r1 information: non-paged memory
-[  481.176694] Register r2 information: NULL pointer
-[  481.181429] Register r3 information: NULL pointer
-[  481.181441] Register r4 information: slab kmalloc-128 start c25f2480 pointer offset 32 size 128
-[  481.186173] Register r5 information: non-paged memory
-[  481.186181] Register r6 information: slab kmalloc-512 start c2153000 pointer offset 0 size 512
-[  481.199953] Register r7 information: slab kmalloc-512 start c2153000 pointer offset 0 size 512
-[  481.199975] Register r8 information: non-paged memory
-[  481.199983] Register r9 information: slab kmalloc-2k start c2620000 pointer offset 1644 size 2048
-[  481.222276] Register r10 information: slab kmalloc-1k start c34ef400 pointer offset 0 size 1024
-[  481.222297] Register r11 information: non-paged memory
-[  481.245038] Register r12 information: NULL pointer
-[  481.245056] Process QSGRenderThread (pid: 1755, stack limit = 0xd30acffa)
-[  481.245070] Stack: (0xe1155da8 to 0xe1156000)
-[  481.245084] 5da0:                   c0787f50 fffffff4 00000870 c8102400 c212f000 c2620000
-[  481.245094] 5dc0: c262066c c34ef400 0000000c c078693c 00000003 00000000 00000000 c07e2960
-[  481.245103] 5de0: c2153000 042beef1 c2153a00 c2620000 c8102400 c8102940 c34ef5e4 c07324ec
-[  481.245112] 5e00: c262066c c34ef400 0000000c c2153a00 c2620000 c34ef400 e1155e6c c0732a5c
-[  481.245121] 5e20: c00c642e 0000000c c212f000 0000000c c0f6d968 e1155e6c c34ef400 c0723448
-[  481.245130] 5e40: 0000e280 00000001 c12b5820 c212f000 aed13e60 e1155e6c 0000002e c2f39000
-[  481.245138] 5e60: c0732e44 00000051 00000000 00000000 00000000 0000000c c212f000 c212f7a0
-[  481.318348] 5e80: 00000000 c018b61c c212f000 c16e0d20 c03514d8 c156155c 60070013 c0193790
-[  481.318369] 5ea0: b28a3000 00000254 c6d00280 00000001 00000000 042beef1 00000009 00004000
-[  481.318378] 5ec0: c212f000 c3caf280 00000001 c2f39000 00000028 c03514f0 00000000 00000000
-[  481.342916] 5ee0: c03513f0 c212f7a0 00000000 042beef1 aed13e60 c00c642e c2f39001 c0100080
-[  481.342928] 5f00: aed13e60 c212f000 c2f39000 c25b8710 00000009 c0342234 00000000 042beef1
-[  481.342938] 5f20: c36866e0 80000007 c212f000 b28a311c c3686680 c36866e0 e1155fb0 80000007
-[  481.342948] 5f40: c212f000 c0e516b0 aefd7cd0 c01d34b0 000001e0 00000000 00000000 00000000
-[  481.342958] 5f60: 00000193 00000007 c160fd90 b28a311c e1155fb0 c0e51500 0000021c 042beef1
-[  481.342969] 5f80: adf87818 aed13e90 aed13e60 c00c642e 00000036 c01002b4 c212f000 00000036
-[  481.342978] 5fa0: adf87818 c0100080 aed13e90 aed13e60 00000009 c00c642e aed13e60 aed13e40
-[  481.342988] 5fc0: aed13e90 aed13e60 c00c642e 00000036 00000001 0000021c 00870000 adf87818
-[  481.408411] 5fe0: 00000036 aed13e28 b6088089 b6001ae6 60070030 00000009 00000000 00000000
-[  481.408431]  etnaviv_gem_free_object from etnaviv_gem_prime_import_sg_table+0x12c/0x160
-[  481.408469]  etnaviv_gem_prime_import_sg_table from drm_gem_prime_import_dev+0x98/0x150
-[  481.408509]  drm_gem_prime_import_dev from drm_gem_prime_fd_to_handle+0x188/0x1f8
-[  481.408528]  drm_gem_prime_fd_to_handle from drm_ioctl+0x1e8/0x3a0
-[  481.408545]  drm_ioctl from sys_ioctl+0x530/0xdbc
-[  481.408571]  sys_ioctl from ret_fast_syscall+0x0/0x1c
-[  481.408587] Exception stack(0xe1155fa8 to 0xe1155ff0)
-[  481.408599] 5fa0:                   aed13e90 aed13e60 00000009 c00c642e aed13e60 aed13e40
-[  481.408608] 5fc0: aed13e90 aed13e60 c00c642e 00000036 00000001 0000021c 00870000 adf87818
-[  481.477625] 5fe0: 00000036 aed13e28 b6088089 b6001ae6
-[  481.477641] Code: e5962174 e59f80e0 e3a01c01 e1a07006 (e5823004)
-[  481.477819] ---[ end trace 0000000000000000 ]---
-
-Francesco
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+QW0gMjAuMTAuMjIgdW0gMTQ6MTMgc2NocmllYiBDaHJpc3RpYW4gS8O2bmlnOg0KPiBIaSBndXlz
+LA0KPg0KPiBhZnRlciBmaW5kaW5nIHRoYXQgd2UgZXNzZW50aWFsbHkgaGF2ZSB0d28gc2VwYXJh
+dGUgd29ybGRzIGZvciBjb2hlcmVudCBzaGFyaW5nDQo+IG9mIGJ1ZmZlciB0aHJvdWdoIERNQS1i
+dWYgSSB0aG91Z2h0IEkgd2lsbCB0YWNrbGUgdGhhdCBwcm9ibGVtIGEgYml0IGFuZCBhdA0KPiBs
+ZWFzdCBhbGxvdyB0aGUgZnJhbWV3b3JrIHRvIHJlamVjdCBhdHRhY2htZW50cyB3aGljaCB3b24n
+dCB3b3JrLg0KPg0KPiBTbyB0aG9zZSBwYXRjaGVzIGhlcmUgYWRkIGEgbmV3IGRtYV9jb2hlcmVu
+dCBmbGFnIHRvIGVhY2ggRE1BLWJ1ZiBvYmplY3QNCj4gdGVsbGluZyB0aGUgZnJhbWV3b3JrIHRo
+YXQgZGV2X2lzX2RtYV9jb2hlcmVudCgpIG5lZWRzIHRvIHJldHVybiB0cnVlIGZvciBhbg0KPiBp
+bXBvcnRpbmcgZGV2aWNlIHRvIGJlIGFibGUgdG8gYXR0YWNoLiBTaW5jZSB3ZSBzaG91bGQgYWx3
+YXlzIGhhdmUgYSBmYWxsYmFjaw0KPiBwYXRoIHRoaXMgc2hvdWxkIGdpdmUgdXNlcnNwYWNlIHRo
+ZSBjaGFuY2UgdG8gc3RpbGwga2VlcCB0aGUgdXNlIGNhc2Ugd29ya2luZywNCj4gZWl0aGVyIGJ5
+IGRvaW5nIGEgQ1BVIGNvcHkgaW5zdGVhZCBvciByZXZlcnNpbmcgdGhlIHJvbGVzIG9mIGV4cG9y
+dGVyIGFuZA0KPiBpbXBvcnRlci4NCj4NCj4gRm9yIERSTSBhbmQgbW9zdCBWNEwyIGRldmljZXMg
+SSB0aGVuIGZpbGwgaW4gdGhlIGRtYV9jb2hlcmVudCBmbGFnIGJhc2VkIG9uIHRoZQ0KPiByZXR1
+cm4gdmFsdWUgb2YgZGV2X2lzX2RtYV9jb2hlcmVudCgpLiBFeHBvcnRpbmcgZHJpdmVycyBhcmUg
+YWxsb3dlZCB0byBjbGVhcg0KPiB0aGUgZmxhZyBmb3IgdGhlaXIgYnVmZmVycyBpZiBzcGVjaWFs
+IGhhbmRsaW5nIGxpa2UgdGhlIFVTV0MgZmxhZyBpbiBhbWRncHUgb3INCj4gdGhlIHVuY2FjaGVk
+IGFsbG9jYXRpb25zIGZvciByYWRlb24vbm91dmVhdSBhcmUgaW4gdXNlLg0KPg0KPiBBZGRpdGlv
+bmFsIHRvIHRoYXQgaW1wb3J0ZXJzIGNhbiBhbHNvIGNoZWNrIHRoZSBmbGFnIGlmIHRoZXkgaGF2
+ZSBzb21lDQo+IG5vbi1zbm9vcGluZyBvcGVyYXRpb25zIGxpa2UgdGhlIHNwZWNpYWwgc2Nhbm91
+dCBjYXNlIGZvciBhbWRncHUgZm9yIGV4YW1wbGUuDQo+DQo+IFRoZSBwYXRjaGVzIGFyZSBvbmx5
+IHNtb2tlIHRlc3RlZCBhbmQgdGhlIHNvbHV0aW9uIGlzbid0IGlkZWFsLCBidXQgYXMgZmFyIGFz
+DQo+IEkgY2FuIHNlZSBzaG91bGQgYXQgbGVhc3Qga2VlcCB0aGluZ3Mgd29ya2luZy4NCg0KR2Vu
+dGxlIHBpbmcgb24gdGhpcy4gTHVjYXMsIERhbmllbCBhbmQgTmljb2xhcyB5b3UgaGF2ZSBiZWVu
+IHJhdGhlciANCmFjdGl2ZSBpbiB0aGUgbGFzdCBkaXNjdXNzaW9uLiBEbyB5b3UgbWluZCB0YWtp
+bmcgYSBsb29rPw0KDQpUaGFua3MsDQpDaHJpc3RpYW4uDQoNCj4NCj4gUGxlYXNlIHJldmlldyBh
+bmQvb3IgY29tbWVudCwNCj4gQ2hyaXN0aWFuLg0KPg0KPg0KDQpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAt
+LSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBl
+bWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
