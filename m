@@ -2,108 +2,97 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E48B60FBBF
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Oct 2022 17:21:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9C3060FB4E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Oct 2022 17:09:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 43EF53F577
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Oct 2022 15:21:52 +0000 (UTC)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-	by lists.linaro.org (Postfix) with ESMTPS id 3C4EA3ECD4
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Oct 2022 08:56:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9ACF13F5A6
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Oct 2022 15:09:29 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id E81E93F4D7
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Oct 2022 15:09:12 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=BBuplJME;
-	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.172 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com;
-	dmarc=pass (policy=none) header.from=collabora.com
-Received: from [192.168.1.100] (2-237-20-237.ip236.fastwebnet.it [2.237.20.237])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of "SRS0=KBNb=24=goodmis.org=rostedt@kernel.org" designates 139.178.84.217 as permitted sender) smtp.mailfrom="SRS0=KBNb=24=goodmis.org=rostedt@kernel.org";
+	dmarc=none
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	(Authenticated sender: kholk11)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id 43D8366028C5;
-	Thu, 27 Oct 2022 09:56:43 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1666861004;
-	bh=a6cv56mnR0Rt8cN4YKAatcPuhZ/rCh1tcmynK4XFuOg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=BBuplJME/3Ry9esnd85HoFScshBaCRJ3gPCteMWzG5cHItSysPoYVvyTxm/ztzz5j
-	 Wds+Y58IPW17ZCZgy6GmiEDamt2BzaHBGx2IEK478u4jtpMgG43BrFEauMA3tZu/Ei
-	 DRA6ATGcfILQBfMyhPLBO+eqQ/oCMQlyXVlJuuPdtSv0E4KUqqIi2g/PPXIMYya+KH
-	 k/7XwwTo/ojIVEYTJwoy+rCxNBRR35O5RNtlPrGiheqky5MKtOIUm3eq4VBfdn/FMA
-	 gvw8IUQvmPi7ryZ5tZiY6MxinnS1cDRqmMG6e3fpPs5cpv4qIiP0jjxIODZL/4HFXH
-	 raqDX+y8f9VSg==
-Message-ID: <54b9bf61-3db0-c2ca-9c30-f2434573be29@collabora.com>
-Date: Thu, 27 Oct 2022 10:56:40 +0200
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 9663A623A2;
+	Thu, 27 Oct 2022 15:09:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 719D7C43142;
+	Thu, 27 Oct 2022 15:09:12 +0000 (UTC)
+Received: from rostedt by gandalf.local.home with local (Exim 4.96)
+	(envelope-from <rostedt@goodmis.org>)
+	id 1oo4Vb-00BvYF-1u;
+	Thu, 27 Oct 2022 11:09:27 -0400
+Message-ID: <20221027150927.371916000@goodmis.org>
+User-Agent: quilt/0.66
+Date: Thu, 27 Oct 2022 11:05:37 -0400
+From: Steven Rostedt <rostedt@goodmis.org>
+To: linux-kernel@vger.kernel.org
+References: <20221027150525.753064657@goodmis.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.3
-Content-Language: en-US
-To: Mark-PK Tsai <mark-pk.tsai@mediatek.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Benjamin Gaignard <benjamin.gaignard@collabora.com>,
- Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>,
- Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Matthias Brugger <matthias.bgg@gmail.com>
-References: <20221027072642.23787-1-mark-pk.tsai@mediatek.com>
-From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
-In-Reply-To: <20221027072642.23787-1-mark-pk.tsai@mediatek.com>
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: ---
-X-Rspamd-Queue-Id: 3C4EA3ECD4
-X-Spamd-Result: default: False [-4.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
-	RCVD_IN_DNSWL_HI(-0.50)[46.235.227.172:from];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
-	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.172];
+X-Spamd-Bar: -
+X-Rspamd-Queue-Id: E81E93F4D7
+X-Spamd-Result: default: False [-1.95 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	R_BAD_CTE_7BIT(1.05)[7bit,utf8];
+	FORGED_SENDER(0.30)[rostedt@goodmis.org,SRS0=KBNb=24=goodmis.org=rostedt@kernel.org];
+	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_TO(0.00)[mediatek.com,linaro.org,collabora.com,codeaurora.org,redhat.com,arm.com,google.com,amd.com,gmail.com];
-	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.997];
+	RCVD_TLS_LAST(0.00)[];
+	R_DKIM_NA(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DMARC_NA(0.00)[goodmis.org];
+	FROM_NEQ_ENVFROM(0.00)[rostedt@goodmis.org,SRS0=KBNb=24=goodmis.org=rostedt@kernel.org];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	ARC_NA(0.00)[];
-	RCVD_TLS_ALL(0.00)[]
-X-MailFrom: angelogioacchino.delregno@collabora.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 2WVA6V4DFENPQ2NHASSJQXKVVXVBG7U6
-X-Message-ID-Hash: 2WVA6V4DFENPQ2NHASSJQXKVVXVBG7U6
-X-Mailman-Approved-At: Thu, 27 Oct 2022 15:21:10 +0000
-CC: yj.chiang@mediatek.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org
+	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[]
+Message-ID-Hash: RZO3MAASHB6N75VZIDBSEHOKMTK6JJ3F
+X-Message-ID-Hash: RZO3MAASHB6N75VZIDBSEHOKMTK6JJ3F
+X-MailFrom: SRS0=KBNb=24=goodmis.org=rostedt@kernel.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Linus Torvalds <torvalds@linux-foundation.org>, Thomas Gleixner <tglx@linutronix.de>, Stephen Boyd <sboyd@kernel.org>, Guenter Roeck <linux@roeck-us.net>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: cma_heap: Fix typo in comment
+Subject: [Linaro-mm-sig] [RFC][PATCH v2 12/31] timers: dma-buf: Use del_timer_shutdown() before freeing timer
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2WVA6V4DFENPQ2NHASSJQXKVVXVBG7U6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RZO3MAASHB6N75VZIDBSEHOKMTK6JJ3F/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Il 27/10/22 09:26, Mark-PK Tsai ha scritto:
-> Fix typo in comment.
-> 
-> Signed-off-by: Mark-PK Tsai <mark-pk.tsai@mediatek.com>
-
-Reviewed-by: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
-
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+RnJvbTogIlN0ZXZlbiBSb3N0ZWR0IChHb29nbGUpIiA8cm9zdGVkdEBnb29kbWlzLm9yZz4NCg0K
+QmVmb3JlIGEgdGltZXIgaXMgZnJlZWQsIGRlbF90aW1lcl9zaHV0ZG93bigpIG11c3QgYmUgY2Fs
+bGVkLg0KDQpMaW5rOiBodHRwczovL2xvcmUua2VybmVsLm9yZy9hbGwvMjAyMjA0MDcxNjE3NDUu
+N2Q2NzU0YjNAZ2FuZGFsZi5sb2NhbC5ob21lLw0KDQpDYzogU3VtaXQgU2Vtd2FsIDxzdW1pdC5z
+ZW13YWxAbGluYXJvLm9yZz4NCkNjOiAiQ2hyaXN0aWFuIEvDtm5pZyIgPGNocmlzdGlhbi5rb2Vu
+aWdAYW1kLmNvbT4NCkNjOiBsaW51eC1tZWRpYUB2Z2VyLmtlcm5lbC5vcmcNCkNjOiBkcmktZGV2
+ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnDQpDYzogbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8u
+b3JnDQpTaWduZWQtb2ZmLWJ5OiBTdGV2ZW4gUm9zdGVkdCAoR29vZ2xlKSA8cm9zdGVkdEBnb29k
+bWlzLm9yZz4NCi0tLQ0KIGRyaXZlcnMvZG1hLWJ1Zi9zdC1kbWEtZmVuY2UuYyB8IDIgKy0NCiAx
+IGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkNCg0KZGlmZiAtLWdp
+dCBhL2RyaXZlcnMvZG1hLWJ1Zi9zdC1kbWEtZmVuY2UuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9zdC1k
+bWEtZmVuY2UuYw0KaW5kZXggZmI2ZTBhNmFlMmM5Li5jNjdiNzAyMDViNmYgMTAwNjQ0DQotLS0g
+YS9kcml2ZXJzL2RtYS1idWYvc3QtZG1hLWZlbmNlLmMNCisrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9z
+dC1kbWEtZmVuY2UuYw0KQEAgLTQxMiw3ICs0MTIsNyBAQCBzdGF0aWMgaW50IHRlc3Rfd2FpdF90
+aW1lb3V0KHZvaWQgKmFyZykNCiANCiAJZXJyID0gMDsNCiBlcnJfZnJlZToNCi0JZGVsX3RpbWVy
+X3N5bmMoJnd0LnRpbWVyKTsNCisJZGVsX3RpbWVyX3NodXRkb3duKCZ3dC50aW1lcik7DQogCWRl
+c3Ryb3lfdGltZXJfb25fc3RhY2soJnd0LnRpbWVyKTsNCiAJZG1hX2ZlbmNlX3NpZ25hbCh3dC5m
+KTsNCiAJZG1hX2ZlbmNlX3B1dCh3dC5mKTsNCi0tIA0KMi4zNS4xDQpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlz
+dCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBh
+biBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
