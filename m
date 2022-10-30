@@ -2,135 +2,210 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FB67613990
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 31 Oct 2022 16:01:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id F243F613994
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 31 Oct 2022 16:01:50 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 513083F5C3
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 31 Oct 2022 15:01:13 +0000 (UTC)
-Received: from alexa-out-sd-01.qualcomm.com (alexa-out-sd-01.qualcomm.com [199.106.114.38])
-	by lists.linaro.org (Postfix) with ESMTPS id 47F1E3ED39
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Oct 2022 13:31:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id F137A3EEC1
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 31 Oct 2022 15:01:49 +0000 (UTC)
+Received: from JPN01-OS0-obe.outbound.protection.outlook.com (mail-os0jpn01olkn2021.outbound.protection.outlook.com [40.92.98.21])
+	by lists.linaro.org (Postfix) with ESMTPS id 794513EA23
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 30 Oct 2022 11:37:16 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=quicinc.com header.s=qcdkim header.b=RWqsj6gf;
-	spf=pass (lists.linaro.org: domain of quic_mojha@quicinc.com designates 199.106.114.38 as permitted sender) smtp.mailfrom=quic_mojha@quicinc.com;
-	dmarc=pass (policy=none) header.from=quicinc.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=quicinc.com; i=@quicinc.com; q=dns/txt; s=qcdkim;
-  t=1666963901; x=1698499901;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=YBApksLTn7y+gqO3vNjJgwg8KdCjEPbw9x496MPqxv8=;
-  b=RWqsj6gf1vne0YGVG9vcwzHGsnBFg3JON9wsjdehfwlzqpvgXZ6B0bOS
-   TsBqhSDEqqY1L7PMQOYip5RUVR+mqfhaWuOZBimZRHNmN9m7i8MMsY7UK
-   YtebVgue50nk1cwifK06ecr/iY6rYrdELj2tcx4SoLVcWa4bilarVll3+
-   w=;
-Received: from unknown (HELO ironmsg-SD-alpha.qualcomm.com) ([10.53.140.30])
-  by alexa-out-sd-01.qualcomm.com with ESMTP; 28 Oct 2022 06:31:39 -0700
-X-QCInternal: smtphost
-Received: from nasanex01c.na.qualcomm.com ([10.45.79.139])
-  by ironmsg-SD-alpha.qualcomm.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Oct 2022 06:31:39 -0700
-Received: from [10.216.13.23] (10.80.80.8) by nasanex01c.na.qualcomm.com
- (10.45.79.139) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.29; Fri, 28 Oct
- 2022 06:31:34 -0700
-Message-ID: <7cdabb64-f165-03be-4121-876736174a34@quicinc.com>
-Date: Fri, 28 Oct 2022 19:01:24 +0530
+	dkim=pass header.d=outlook.com header.s=selector1 header.b=dD6Cda0K;
+	spf=pass (lists.linaro.org: domain of set_pte_at@outlook.com designates 40.92.98.21 as permitted sender) smtp.mailfrom=set_pte_at@outlook.com;
+	dmarc=pass (policy=none) header.from=outlook.com;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=CuTBaEmzOCxjLSJWXzLCCJkrgduIhexB/CjDrjGN4IcDzGO4EQsa6hPlzqXyKIfwDOB4EjY8ALWLvkdIksEzKEU1dEwNhl+mKvm/Oz3uOSbomC+EeXvdweGPmpWnyxOFbAFM25rpQwRnJUZ6yiXJNfg3obVNVX0ESbP/+3F0lssnC8gs8DtprlClQ2vx5ERiER2xWPY9S6fz/EB/4vtAJIm9LrGBcPurOX0+usKII0g4shsBjwj/fUtou9AcTPKTUR4vK/+DVAzzp0ZU/9Chr7Hnx289r9H4oIMYEVSPeyKZNx0tuJRAwMIvjW5khZCOytc7OufNr1DrrS/jic8o/w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=svsL4S9jfk3q5oc4G6+CXyigCp88sv9APcA7xWoQvzk=;
+ b=fVIAlrOXPdSef1NDonDUPfCAVVmFTQAC7FeBD0abt2pGz29C6YOJbbuRFR727HaUUEsDrY7J9DJUjayc+dexDpvdhkr7rkOnWkICf+VUr8eUMkR1KOufXaR7UlTnhha3HfxZIiGffveoXcXIJIL9k6MEnDkYADVRma2M1YmIEx+9Y3Zhn65mTnrit3OVBci/xBCDSi9uHtdNv65OJYlpdGMnH+Q3+Fq1o7CWIevlKuU9cMy97U2wkIurcVDofX9MlS/rq5+Xh227BxE9cIGb+kVNjOmF7XFyEZ5vOadBzZxUGsk0CycAt6FtfiGAXWd1cilfqgym667tar9KR5hGxw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=svsL4S9jfk3q5oc4G6+CXyigCp88sv9APcA7xWoQvzk=;
+ b=dD6Cda0KIGFIL+Rpuh60/dgKbd/WmEZ9DF2ULWpJGXK99mUl4HHGEnJKnScSalvcK2bpVXXw96HnePe0i7qIAmHYvg7ivGCAU2on91qH1kVbnBNd6ntIkwfabAKeCOLF4895avFat2jzXLihTiQqgOuHbn7bn6rlL67eTaVQ8lz15TL0oT/ZBsxATdl+c4JXQWL/o3Ln9XiHfHpYbXh2jCWd72XGzTXawGNHcIw/SBRkBDMFJimM2jrKsg7Z3JWQIOeJ/bx6kCRMU3RU9AGhaQfDY2nAYSC+FqF3dp5YOyaEaytDzHPDqC4st29IZPilKZYkjW33XmaqN532BXUZBQ==
+Received: from TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:152::9)
+ by OS3P286MB2709.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:1fc::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5769.16; Sun, 30 Oct
+ 2022 11:37:12 +0000
+Received: from TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c90e:cbf3:c23d:43a5]) by TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c90e:cbf3:c23d:43a5%7]) with mapi id 15.20.5769.018; Sun, 30 Oct 2022
+ 11:37:12 +0000
+From: Dawei Li <set_pte_at@outlook.com>
+To: sumit.semwal@linaro.org,
+	christian.koenig@amd.com
+Date: Sun, 30 Oct 2022 19:37:00 +0800
+Message-ID: 
+ <TYCP286MB2323950197F60FC3473123B7CA349@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
+X-Mailer: git-send-email 2.25.1
+X-TMN: [Um6xlQbCyYoT19WyxqearVE+xI9G5zJia2KmZRKIW1k=]
+X-ClientProxiedBy: TY1PR01CA0184.jpnprd01.prod.outlook.com (2603:1096:403::14)
+ To TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:152::9)
+X-Microsoft-Original-Message-ID: 
+ <20221030113700.3300-1-set_pte_at@outlook.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.13.1
-Content-Language: en-US
-To: Mark-PK Tsai <mark-pk.tsai@mediatek.com>, Sumit Semwal
-	<sumit.semwal@linaro.org>, Benjamin Gaignard
-	<benjamin.gaignard@collabora.com>, Liam Mark <lmark@codeaurora.org>, Laura
- Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John
- Stultz <jstultz@google.com>, =?UTF-8?Q?Christian_K=c3=b6nig?=
-	<christian.koenig@amd.com>, Matthias Brugger <matthias.bgg@gmail.com>
-References: <20221028065533.23856-1-mark-pk.tsai@mediatek.com>
-From: Mukesh Ojha <quic_mojha@quicinc.com>
-In-Reply-To: <20221028065533.23856-1-mark-pk.tsai@mediatek.com>
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01c.na.qualcomm.com (10.45.79.139)
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TYCP286MB2323:EE_|OS3P286MB2709:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4cdf1d64-4620-4054-bfbc-08daba6b15da
+X-MS-Exchange-SLBlob-MailProps: 
+	70qbaZjg4mv1OqsmyvwVkO5pclI01FVpovJWLvgsAQ8XASbU4UOFaqFZL/PS2XbnOslcIt6Wz0uOSrOC9MGcWkJXC3bdrn+h519oQNbJEaL8MJvXBIOdsh89jAQfeDMMTP5LypWXzKXsx8nlrc/aMGMQfzEhe+Ws6WwLSAnvj0I7dCqywraaYzSvSCw7SxCd733Zr9JOCQPxgKAUs/6Rksg2iItWHErYYFlyGYezzUOKi/inmm0bxARf2o2Rz1/E47PEK37FbCpY8CJBfgqDPLx4nEfEhT6s3t7MW5sfqrS9qJc3wlFMRsDElf355N0PuFG0d/lsg1dFBeTDwXYGm1BcjdCgdBdkmWpgtd0EMxd5T2EXL6/FRB6dfaubfQXoceHEbgRoklqTeOddYl/42zOjEyROZcfZZN254tsOJB7MTyH/XHU0eOTZ1I0d92ANjy92T/UapdclR/SN6T/PgYMRv0XFcB7YQg3Ss/PF6yWMioH/qaCcJrBHqa3nSovpVSlk7Frm8qyvrI7/A+Ip0rSY2JKSJEh4NvycrQVplHqVj8S+/JCMacYgvCJpZSWUp5S3N8UYQuLXjvau2u+gQ5oS1PwXUXEnjdTAjpAkpt/8yPjvh1dQFO+SkAgDDulz9f29ZCremVJX4ghP/k0aF41fQin0jP/tSku/H0mD4TnUKxi8RwwrmnZYdmmf65bPaAFRvfkba30wCx2OhTJvrMcQkN45LyatOaO55nrsaF7w8Xqmb7DOfg==
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	npwPx69ixe1sxoMNDYfYUA7fZtfrSfxK62GQHUd5RopMghybxACdtqy/AS5vsojqtR0RiXMKW4dSNVaRf+QcmHCM3b/acDmxYIdCb9bOhFSyRGRVMJRiCDTdPvBzONPFtKmjE72Q0+PvofWBbuq7+D7o4Fxu1TXsqsWU8ER158ucWBZqR8njxcJOssosbuX7eqZYGKaRXob+PjlSJSFVEvMimh4xh2tPuCblIE1JVqO2mWEg6wkJqH+iOJFJUKbe5/5UFVDFVYrntdhnS1Vj9AXcp2bLLmzjQDWs6jYtO/dTukU67NJkGKPKNZAs30FTW6DYpsn2/wAPuGMHYPWJ1tPOvJwBPq0ZCO5puoKtSzYuPm8EWzZJu/2/plLVh6kwZY5BvRYav9jAaP+8IPZ7cqdvNbm0W6WYCCePbND3wVb7NOCTfSfedOJumn619c8Q9A+0/PfUDY8iKEPTjXp6dc+5nvCkwg/pgEzDY/ZePJNoEPTiHkoJMbtZhwOVnhCl848M2HT6Iow+8C+dUFgB7MiYbeScJHPidJbG8vVZE1YLfcz8ZcNsfaTCiUJrOcfavi/UFVSp7ti4XhDdgzsaa3v1O/uEh3GBo3wr55cqThARCOXpSdAO3mlm5korTby3aHo1zzf/QZfHchiTM2O/N3019oO7Ql+FHV8US4L8xutCFi9hsintRYFe6LxYXSAk
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?uGvSjUt3TnD/upyIr0DnlNx3FB7ZyABhagnJeFMh71SgKZpSUggnwRJhkfPq?=
+ =?us-ascii?Q?3Ax+VfCKY96Rr/rXjby1YpcrReqtb+VkQ/rQHoTSSrQKGdFfRSp9usQCI/1f?=
+ =?us-ascii?Q?456r4J9uD1yrVWmVK7vlKjgp4XgeZ8PWDoTEVMMwZuo+xAC4uSS0LsW/ICke?=
+ =?us-ascii?Q?XDDVgO9FROsVV+wXi2W8Narz2BkkA06QklqdO0GetlhQop3QYOOuOdqzsGqN?=
+ =?us-ascii?Q?DySISNa+RGk5trBSOxxnpTiPRjAURoRYw/hs4ybOgygfj7FrR0bkxFeIUs5P?=
+ =?us-ascii?Q?JfzE6k1r09xuNQp1XAK6gdRc/uVC0XdDmTqrPuc16k4/SKNzliJmxI/tDfUP?=
+ =?us-ascii?Q?z2eVHc4NBufi2AsQfNpJ2slzf3ePbMnN/hCbvtpcYcDwap9X2mTvkx8icXog?=
+ =?us-ascii?Q?pKMPtHt2Ib5kfQrFJtCgcINLpwHf+IHbE54TBfMl8twtxdSLfMguNfzAoOmg?=
+ =?us-ascii?Q?HIkxfujkdhIqO5cf7xfuXwkisj4qVaJxIGP5UHwaimFYZ6zYBk9bvdEwTwEe?=
+ =?us-ascii?Q?f15XX6Vy0Cbp7pX4io4iyc03gAKyUwzdzoCnurJZX46EZ7eemptmm7A7UnZX?=
+ =?us-ascii?Q?d/n8J0I5xW6bE6ogYkOJxGQlt1+LHip7f5YkQ6QM9NXKjPzRILShuYArvwP8?=
+ =?us-ascii?Q?k7HHXUwRHeMFjvRgLYpLYRABTIVUvf0LWPWNHvb7SuV23PXUQduoHkrbpefx?=
+ =?us-ascii?Q?IC4OjrMEGdbYAjTHSGEe7kPT0HgJ1lv9Ay67mhUZPHU3oR6BPgyFoG6WJZEN?=
+ =?us-ascii?Q?gqAEySlKIIBURtw4gtVMyOcbP3TF6R5Dm5EYWypwOdrK+N9Am0Kz/hXJepRV?=
+ =?us-ascii?Q?bFFxBrU7cnWBkXZ2grgxo3kYngX6QpIIVfJ48xloeBE+JuLOPE3xwCaRtepn?=
+ =?us-ascii?Q?yMIAhAXSgMjuZjUBnF4nYsOoahxl85YS2t5andR48zZrlRQRX9vSrF5K1RpQ?=
+ =?us-ascii?Q?R8MPl6ivSS4DUg85IcG9RUiU77YvoxFKt1h0hyQG8fl6XfA5rWOtGNxSaynx?=
+ =?us-ascii?Q?+rNwmrsJE6igCwpWQ1Z4RgLvoEoL0S+MIDVKVa2O10uUaGWq4Cm1LMALyeVc?=
+ =?us-ascii?Q?J0Ex7n9S2XXXLdis0NI48In9Dhb+qC+gS0/JOoz7WeRq56KLw0uI/TsXEuPt?=
+ =?us-ascii?Q?VtUlkT3ZFPYMIBqNwLA0q84nfjeME6v4d9DrfF8GTyWUuvQHtc/7G9Tk0iR0?=
+ =?us-ascii?Q?gMFN/SivhOHCsTQlKLtqGpPl0anElXMf+ZurA70b3sqwhXjs0LVB+1EX3lRn?=
+ =?us-ascii?Q?Tuktl+UcbfH6YqawdQnV61zricy62yny3tSL+39j8A=3D=3D?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4cdf1d64-4620-4054-bfbc-08daba6b15da
+X-MS-Exchange-CrossTenant-AuthSource: TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2022 11:37:12.0082
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 
+	00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS3P286MB2709
 X-Rspamd-Server: lists.linaro.org
 X-Spamd-Bar: --------
-X-Rspamd-Queue-Id: 47F1E3ED39
+X-Rspamd-Queue-Id: 794513EA23
 X-Spamd-Result: default: False [-8.00 / 15.00];
-	REPLY(-4.00)[];
+	DWL_DNSWL_HI(-3.50)[outlook.com:dkim];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[quicinc.com,none];
-	RCVD_IN_DNSWL_HI(-0.50)[199.106.114.38:from];
-	R_SPF_ALLOW(-0.20)[+ip4:199.106.114.38];
-	R_DKIM_ALLOW(-0.20)[quicinc.com:s=qcdkim];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[outlook.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:40.92.0.0/15];
+	R_DKIM_ALLOW(-0.20)[outlook.com:s=selector1];
 	MIME_GOOD(-0.10)[text/plain];
+	NEURAL_HAM(-0.00)[-0.817];
+	FREEMAIL_ENVFROM(0.00)[outlook.com];
 	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_TO(0.00)[mediatek.com,linaro.org,collabora.com,codeaurora.org,redhat.com,arm.com,google.com,amd.com,gmail.com];
+	FREEMAIL_CC(0.00)[collabora.com,codeaurora.org,redhat.com,arm.com,google.com,ti.com,android.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,outlook.com];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:11030, ipnet:199.106.96.0/19, country:US];
-	RCVD_TLS_LAST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.992];
+	ASN(0.00)[asn:8075, ipnet:40.80.0.0/12, country:US];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[quicinc.com:+];
 	FROM_HAS_DN(0.00)[];
-	HAS_XOIP(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	DKIM_TRACE(0.00)[outlook.com:+];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_RCPT(0.00)[];
-	ARC_NA(0.00)[]
-X-MailFrom: quic_mojha@quicinc.com
+	RCVD_COUNT_THREE(0.00)[3];
+	FREEMAIL_FROM(0.00)[outlook.com];
+	RCVD_TLS_LAST(0.00)[]
+X-MailFrom: set_pte_at@outlook.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 7AVVETGGPOA6KIL66F7HPVUCC2NOKP2Q
-X-Message-ID-Hash: 7AVVETGGPOA6KIL66F7HPVUCC2NOKP2Q
-X-Mailman-Approved-At: Mon, 31 Oct 2022 15:00:57 +0000
-CC: yj.chiang@mediatek.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org
+Message-ID-Hash: GVTZZBGI3DWZNZ463KVYTWOBLA6ZBRB4
+X-Message-ID-Hash: GVTZZBGI3DWZNZ463KVYTWOBLA6ZBRB4
+X-Mailman-Approved-At: Mon, 31 Oct 2022 15:01:34 +0000
+CC: benjamin.gaignard@collabora.com, lmark@codeaurora.org, labbott@redhat.com, Brian.Starkey@arm.com, jstultz@google.com, afd@ti.com, sspatil@android.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Dawei Li <set_pte_at@outlook.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3] dma-buf: cma_heap: Remove duplicated 'by' in comment
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: fix racing conflict of dma_heap_add()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7AVVETGGPOA6KIL66F7HPVUCC2NOKP2Q/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MDC6A5L4UKL5IBDQSL7ULUUODVXIYXOG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Racing conflict could be:
+task A                 task B
+list_for_each_entry
+strcmp(h->name))
+                       list_for_each_entry
+                       strcmp(h->name)
+kzalloc                kzalloc
+......                 .....
+device_create          device_create
+list_add
+                       list_add
 
-On 10/28/2022 12:25 PM, Mark-PK Tsai wrote:
-> Remove duplicated 'by' from comment in cma_heap_allocate().
-> 
-> Signed-off-by: Mark-PK Tsai <mark-pk.tsai@mediatek.com>
-> ---
->   drivers/dma-buf/heaps/cma_heap.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/cma_heap.c
-> index 28fb04eccdd0..cd386ce639f3 100644
-> --- a/drivers/dma-buf/heaps/cma_heap.c
-> +++ b/drivers/dma-buf/heaps/cma_heap.c
-> @@ -316,7 +316,7 @@ static struct dma_buf *cma_heap_allocate(struct dma_heap *heap,
->   			kunmap_atomic(vaddr);
->   			/*
->   			 * Avoid wasting time zeroing memory if the process
-> -			 * has been killed by by SIGKILL
-> +			 * has been killed by SIGKILL
->   			 */
->   			if (fatal_signal_pending(current))
->   				goto free_cma;
+The root cause is that task B has no idea about the fact someone
+else(A) has inserted heap with same name when it calls list_add,
+so a potential collision occurs.
 
+Fixes: c02a81fba74f ("dma-buf: Add dma-buf heaps framework")
 
-LGTM.
+base-commit: 447fb14bf07905b880c9ed1ea92c53d6dd0649d7
 
-Reviewed-By: Mukesh Ojha <quic_mojha@quicinc.com>
+Signed-off-by: Dawei Li <set_pte_at@outlook.com>
+---
+ drivers/dma-buf/dma-heap.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
--Mukesh
+diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+index 8f5848aa144f..ff44c2777b04 100644
+--- a/drivers/dma-buf/dma-heap.c
++++ b/drivers/dma-buf/dma-heap.c
+@@ -243,11 +243,12 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+ 			return ERR_PTR(-EINVAL);
+ 		}
+ 	}
+-	mutex_unlock(&heap_list_lock);
+ 
+ 	heap = kzalloc(sizeof(*heap), GFP_KERNEL);
+-	if (!heap)
++	if (!heap) {
++		mutex_unlock(&heap_list_lock);
+ 		return ERR_PTR(-ENOMEM);
++	}
+ 
+ 	heap->name = exp_info->name;
+ 	heap->ops = exp_info->ops;
+@@ -284,7 +285,6 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+ 		goto err2;
+ 	}
+ 	/* Add heap to the list */
+-	mutex_lock(&heap_list_lock);
+ 	list_add(&heap->list, &heap_list);
+ 	mutex_unlock(&heap_list_lock);
+ 
+@@ -296,6 +296,7 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+ 	xa_erase(&dma_heap_minors, minor);
+ err0:
+ 	kfree(heap);
++	mutex_unlock(&heap_list_lock);
+ 	return err_ret;
+ }
+ 
+-- 
+2.25.1
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
