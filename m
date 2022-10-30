@@ -2,196 +2,178 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 555A7611A6E
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Oct 2022 20:47:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58B22612E05
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 31 Oct 2022 00:26:12 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5B3D83F5BA
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Oct 2022 18:47:49 +0000 (UTC)
-Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
-	by lists.linaro.org (Postfix) with ESMTPS id C1B1D3ED39
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Oct 2022 18:47:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0664B3F5C0
+	for <lists+linaro-mm-sig@lfdr.de>; Sun, 30 Oct 2022 23:26:11 +0000 (UTC)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+	by lists.linaro.org (Postfix) with ESMTPS id 7B8003EC2E
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 30 Oct 2022 23:25:52 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=fooishbar-org.20210112.gappssmtp.com header.s=20210112 header.b="QB/yJvyF";
-	spf=none (lists.linaro.org: domain of daniel@fooishbar.org has no SPF policy when checking 209.85.222.171) smtp.mailfrom=daniel@fooishbar.org;
-	dmarc=none
-Received: by mail-qk1-f171.google.com with SMTP id f8so4032094qkg.3
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Oct 2022 11:47:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fooishbar-org.20210112.gappssmtp.com; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=+lIeCqF9MC1plkMaa8w3RYpUvhtv+mOsM3E0K5wP3Sw=;
-        b=QB/yJvyFQct+2OJbnZIA/tDX8ajG1aNWWKiALtUocG5OcgRfSj5xC/jy/KZ58XFRBS
-         BuoopZQTNYIml8YK2WaVS/dNg8od+ainUFxbQl6SXGED3Nc9ESxGIPeys4mFokbGBqoA
-         X1k2vWg4GAnIGwJ2Gt7YFwUtKfcY3CDZkF209ennLJQCEkW96pisjBSBPF6GYq+Gdefv
-         KKz8QAwRWbcDupJKAReMBeisQrYQpSJOO28tUcYJh1Cj0o3ra+lMi4nYhuGOIh1lk23I
-         j0EWoC9xafzFiHR4YkSr35aAzSooNnEeyGZo5mMEie8ckTJuvwP1LFbcr9ublWnwKDa/
-         pr5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=+lIeCqF9MC1plkMaa8w3RYpUvhtv+mOsM3E0K5wP3Sw=;
-        b=HklPprjc/jdyekLJweCkq4Wwq4CufaWrq6LPH9MLKp6kxou/aQMJgykzLMAVgdbyLp
-         jeyX+L9sxcoXvStJDN/5U8+kxFl5bdCAu3NlT7sKMnbImuNgH1pmxMnIhYIAorgPtKRa
-         KQiR9ez5gTFWEu53XgLaIF6EWzATvKsxxd5y/3Gwh8s4rqEidmmIDRMDDnEDf1igx95a
-         jCWz5JvDeM+XtCanffHhaXoFImYiN8hxiij1qGX2l7SEezW3Pps//SP/B26apUge4EUv
-         yuKwCS9O7936mCRiGmltwUdDM+rqYggmEw1LqGEsjHzU8Wel9pWkE+K0/H7rlamVLCxj
-         1GVg==
-X-Gm-Message-State: ACrzQf0CLkXAal3eLOfMXSjqzhd+M/Xt5qDNU/zp+n2VqmRNVwXLzYC3
-	Fo4VFdpMih0fgjdnBl42zN8D/bh1+ZHTSYmjyh5i5w==
-X-Google-Smtp-Source: AMsMyM56bLx8Jr1GOVzvxC6aqvYl/bq/OQWL5kJiTLnKCGyRYb9J4lp/fpUvOmNQDxGiQRuDo8iXQIlZVHQScew44u4=
-X-Received: by 2002:a05:620a:2496:b0:6ee:76ce:4b3e with SMTP id
- i22-20020a05620a249600b006ee76ce4b3emr561552qkn.370.1666982851307; Fri, 28
- Oct 2022 11:47:31 -0700 (PDT)
+	dkim=pass header.d=ti.com header.s=ti-com-17Q1 header.b=klp6m862;
+	spf=pass (lists.linaro.org: domain of afd@ti.com designates 198.47.23.248 as permitted sender) smtp.mailfrom=afd@ti.com;
+	dmarc=pass (policy=quarantine) header.from=ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+	by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 29UNPDiP019973;
+	Sun, 30 Oct 2022 18:25:13 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+	s=ti-com-17Q1; t=1667172313;
+	bh=V6PpPRXChTMfvnSzrScuWIP50LYca9tZ+HJcEcG2FL8=;
+	h=Date:Subject:To:CC:References:From:In-Reply-To;
+	b=klp6m862gHiRbmBxOP5drrax+/jgolHjC7B0uZk5MDWnzAf0HnoA1VZU5aLccjDXg
+	 XptJCJ+aRI2l/iNVGmggGcP5Lk1QL3DxVdrCm7VOkE3gzOeE0RAtLrTIbAC9eXjrWM
+	 PLqEabIHpUeaXxvOrTP9atXd8vRMXsMm1tCLnb1Y=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+	by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 29UNPDqi003091
+	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+	Sun, 30 Oct 2022 18:25:13 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Sun, 30
+ Oct 2022 18:25:12 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6 via
+ Frontend Transport; Sun, 30 Oct 2022 18:25:12 -0500
+Received: from [10.250.35.234] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+	by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 29UNPBfp097440;
+	Sun, 30 Oct 2022 18:25:12 -0500
+Message-ID: <b3073b69-c404-4f3b-8a8e-5a86cf413877@ti.com>
+Date: Sun, 30 Oct 2022 18:25:11 -0500
 MIME-Version: 1.0
-References: <20221020121316.3946-1-christian.koenig@amd.com>
- <3d7353f3fa5905ce18e5b2d92f758f098189bc5a.camel@pengutronix.de>
- <7f5eff36-6886-bb06-061a-dd4263b61605@gmail.com> <f5de84cfe81fee828bbe0d47d379028d28ef6ca6.camel@pengutronix.de>
- <e02cedc2-6741-8813-a7a5-f8769e301745@gmail.com> <a53e5df51ec0f2f9d4c2d377c0cc5ba85f2e58ff.camel@ndufresne.ca>
- <9d716641-55c6-1590-26c2-1c3b14a28226@gmail.com>
-In-Reply-To: <9d716641-55c6-1590-26c2-1c3b14a28226@gmail.com>
-From: Daniel Stone <daniel@fooishbar.org>
-Date: Fri, 28 Oct 2022 19:47:19 +0100
-Message-ID: <CAPj87rMPkmimR_RJHhxYZokH__TVpPArk0h6drOUSx7Z9+oAHA@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+To: Dawei Li <set_pte_at@outlook.com>, <sumit.semwal@linaro.org>,
+        <christian.koenig@amd.com>
+References: <TYCP286MB2323950197F60FC3473123B7CA349@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <TYCP286MB2323950197F60FC3473123B7CA349@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: -----
-X-Rspamd-Queue-Id: C1B1D3ED39
-X-Spamd-Result: default: False [-5.30 / 15.00];
-	DWL_DNSWL_HI(-3.50)[gappssmtp.com:dkim];
+X-Spamd-Bar: ----
+X-Rspamd-Queue-Id: 7B8003EC2E
+X-Spamd-Result: default: False [-4.70 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_ALLOW(-0.20)[fooishbar-org.20210112.gappssmtp.com:s=20210112];
+	RCVD_DKIM_ARC_DNSWL_MED(-0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[ti.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:198.47.23.248/30];
+	R_DKIM_ALLOW(-0.20)[ti.com:s=ti-com-17Q1];
+	RCVD_IN_DNSWL_MED(-0.20)[198.47.23.248:from];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
+	FREEMAIL_TO(0.00)[outlook.com,linaro.org,amd.com];
+	FROM_HAS_DN(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:161, ipnet:198.47.23.0/24, country:US];
 	RCVD_TLS_LAST(0.00)[];
-	R_SPF_NA(0.00)[no SPF record];
-	FREEMAIL_CC(0.00)[ndufresne.ca,pengutronix.de,gmail.com,linaro.org,ffwll.ch,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	NEURAL_HAM(-0.00)[-0.984];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[fooishbar-org.20210112.gappssmtp.com:+];
-	FROM_HAS_DN(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.222.171:from];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	NEURAL_HAM(-0.00)[-0.998];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	DKIM_TRACE(0.00)[ti.com:+];
 	TO_DN_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_RCPT(0.00)[];
-	DMARC_NA(0.00)[fooishbar.org];
-	RCVD_COUNT_TWO(0.00)[2]
-Message-ID-Hash: P2VDUGW3NMXDUWN5OHEGKZ25B5UTLAMV
-X-Message-ID-Hash: P2VDUGW3NMXDUWN5OHEGKZ25B5UTLAMV
-X-MailFrom: daniel@fooishbar.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Nicolas Dufresne <nicolas@ndufresne.ca>, ppaalanen@gmail.com, sumit.semwal@linaro.org, daniel@ffwll.ch, robdclark@gmail.com, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[6];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ARC_NA(0.00)[]
+Message-ID-Hash: 4SYNMHNL2YPEXUO3NOHZC2VSMNASNFYN
+X-Message-ID-Hash: 4SYNMHNL2YPEXUO3NOHZC2VSMNASNFYN
+X-MailFrom: afd@ti.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: benjamin.gaignard@collabora.com, lmark@codeaurora.org, labbott@redhat.com, Brian.Starkey@arm.com, jstultz@google.com, sspatil@android.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: fix racing conflict of dma_heap_add()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/P2VDUGW3NMXDUWN5OHEGKZ25B5UTLAMV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4SYNMHNL2YPEXUO3NOHZC2VSMNASNFYN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-SGkgQ2hyaXN0aWFuLA0KDQpPbiBGcmksIDI4IE9jdCAyMDIyIGF0IDE4OjUwLCBDaHJpc3RpYW4g
-S8O2bmlnDQo8Y2tvZW5pZy5sZWljaHR6dW1lcmtlbkBnbWFpbC5jb20+IHdyb3RlOg0KPiBBbSAy
-OC4xMC4yMiB1bSAxNzo0NiBzY2hyaWViIE5pY29sYXMgRHVmcmVzbmU6DQo+ID4gVGhvdWdoLCBp
-dHMgbm90IGdlbmVyaWNhbGx5IHBvc3NpYmxlIHRvIHJldmVyc2UgdGhlc2Ugcm9sZXMuIElmIHlv
-dSB3YW50IHRvIGRvDQo+ID4gc28sIHlvdSBlbmR1cCBoYXZpbmcgdG8gZG8gbGlrZSBBbmRyb2lk
-IChncmFsbG9jKSBhbmQgQ2hyb21lT1MgKG1pbmlnYm0pLA0KPiA+IGJlY2F1c2UgeW91IHdpbGwg
-aGF2ZSB0byBhbGxvY2F0ZSBEUk0gYnVmZmVycyB0aGF0IGtub3dzIGFib3V0IGltcG9ydGVyIHNw
-ZWNpZmljDQo+ID4gcmVxdWlyZW1lbnRzLiBTZWUgbGluayBbMV0gZm9yIHdoYXQgaXQgbG9va3Mg
-bGlrZSBmb3IgUkszMzk5LCB3aXRoIE1vdGlvbiBWZWN0b3INCj4gPiBzaXplIGNhbGN1bGF0aW9u
-IGNvcGllZCBmcm9tIHRoZSBrZXJuZWwgZHJpdmVyIGludG8gYSB1c2Vyc3BhY2UgbGliIChhcmd1
-YWJseQ0KPiA+IHRoYXQgd2FzIGF2YWlsYWJsZSBmcm9tIFY0TDIgc2l6ZWltYWdlLCBidXQgdGhp
-cyBpcyB0ZWNobmljYWxseSBkaWZmaWN1bHQgdG8NCj4gPiBjb21tdW5pY2F0ZSB3aXRoaW4gdGhl
-IHNvZnR3YXJlIGxheWVycykuIElmIHlvdSBjb3VsZCBsZXQgdGhlIGRlY29kZXIgZXhwb3J0DQo+
-ID4gKHdpdGggcHJvcGVyIGNhY2hlIG1hbmFnZW1lbnQpIHRoZSBub24tZ2VuZXJpYyBjb2RlIHdv
-dWxkIG5vdCBiZSBuZWVkZWQuDQo+DQo+IFllYWgsIGJ1dCBJIGNhbiBhbHNvIHJldmVyc2UgdGhl
-IGFyZ3VtZW50Og0KPg0KPiBHZXR0aW5nIHRoZSBwYXJhbWV0ZXJzIGZvciBWNEwgcmlnaHQgc28g
-dGhhdCB3ZSBjYW4gc2hhcmUgdGhlIGltYWdlIGlzDQo+IHRyaWNreSwgYnV0IGdldHRpbmcgdGhl
-IHBhcmFtZXRlcnMgc28gdGhhdCB0aGUgc3R1ZmYgaXMgYWN0dWFsbHkNCj4gZGlyZWN0bHkgZGlz
-cGxheWFibGUgYnkgR1BVcyBpcyBldmVuIHRyaWNraWVyLg0KPg0KPiBFc3NlbnRpYWxseSB5b3Ug
-bmVlZCB0byBsb29rIGF0IGJvdGggc2lkZXMgYW5kIGludGVyZmVyZW5jZSB0byBnZXQgdG8gYQ0K
-PiBjb21tb24gZ3JvdW5kLCBlLmcuIGFsaWdubWVudCwgcGl0Y2gsIHdpZHRoL2hlaWdodCwgcGFk
-ZGluZywgZXRjLi4uLi4NCj4NCj4gRGVjaWRpbmcgZnJvbSB3aGljaCBzaWRlIHRvIGFsbG9jYXRl
-IGZyb20gaXMganVzdCBvbmUgc3RlcCBpbiB0aGlzDQo+IHByb2Nlc3MuIEZvciBleGFtcGxlIG1v
-c3QgZEdQVXMgY2FuJ3QgZGlzcGxheSBkaXJlY3RseSBmcm9tIHN5c3RlbQ0KPiBtZW1vcnkgYWx0
-b2dldGhlciwgYnV0IGl0IGlzIHBvc3NpYmxlIHRvIGFsbG9jYXRlIHRoZSBETUEtYnVmIHRocm91
-Z2gNCj4gdGhlIEdQVSBkcml2ZXIgYW5kIHRoZW4gd3JpdGUgaW50byBkZXZpY2UgbWVtb3J5IHdp
-dGggUDJQIFBDSSB0cmFuc2ZlcnMuDQo+DQo+IFNvIGFzIGZhciBhcyBJIGNhbiBzZWUgc3dpdGNo
-aW5nIGltcG9ydGVyIGFuZCBleHBvcnRlciByb2xlcyBhbmQgZXZlbg0KPiBoYXZpbmcgcGVyZm9y
-bWFudCBleHRyYSBmYWxsYmFja3Mgc2hvdWxkIGJlIGEgc3RhbmRhcmQgZmVhdHVyZSBvZiB1c2Vy
-c3BhY2UuDQo+DQo+ID4gQW5vdGhlciBjYXNlIHdoZXJlIHJldmVyc2luZyB0aGUgcm9sZSBpcyBk
-aWZmaWN1bHQgaXMgZm9yIGNhc2Ugd2hlcmUgeW91IG5lZWQgdG8NCj4gPiBtdWx0aXBsZXggdGhl
-IHN0cmVhbXMgKGxldCdzIHVzZSBhIGNhbWVyYSB0byBpbGx1c3RyYXRlKSBhbmQgc2hhcmUgdGhh
-dCB3aXRoDQo+ID4gbXVsdGlwbGUgcHJvY2Vzc2VzLiBJbiB0aGVzZSB1c2VzIGNhc2UsIHRoZSBE
-Uk0gaW1wb3J0ZXJzIGFyZSB2b2xhdGlsZSwgd2hpY2gNCj4gPiBvbmUgZG8geW91IGFidXNlIHRv
-IGRvIGFsbG9jYXRpb24gZnJvbSA/IEluIG11bHRpbWVkaWEgc2VydmVyIGxpa2UgUGlwZVdpcmUs
-IHlvdQ0KPiA+IGFyZSBub3QgcmVhbGx5IGF3YXJlIGlmIHRoZSBjYW1lcmEgd2lsbCBiZSB1c2Vk
-IGJ5IERSTSBvciBub3QsIGFuZCBpZiBzb21ldGhpbmcNCj4gPiAic3BlY2lhbCIgaXMgbmVlZGVk
-IGluIHRlcm0gb2Ygcm9sZSBpbnZlcnNpb24uIEl0IGlzIHJlbGF0aXZlbHkgZWFzeSB0byBkZWFs
-DQo+ID4gd2l0aCBtYXRjaGluZyBtb2RpZmllcnMsIGJ1dCB1c2luZyBkb3duc3RyZWFtIChkaXNw
-bGF5L2dwdSkgYXMgYW4gZXhwb3J0ZXIgaXMNCj4gPiBhbHdheXMgZGlmZmljdWx0IChhbmQgcmVx
-dWlyZSBzb21lIGxldmVsIG9mIGFidXNlIGFuZCBndWVzc2luZykuDQo+DQo+IE9oLCB2ZXJ5IGdv
-b2QgcG9pbnQhIFllYWggd2UgZG8gaGF2ZSB1c2UgY2FzZXMgZm9yIHRoaXMgd2hlcmUgYW4gaW5w
-dXQNCj4gYnVmZmVyIGlzIGJvdGggZGlzcGxheWVkIGFzIHdlbGwgYXMgZW5jb2RlZC4NCg0KVGhp
-cyBpcyB0aGUgbWFpbiBpc3N1ZSwgeWVhaC4NCg0KRm9yIGEgc3RhbmRhcmQgbWVkaWEgcGxheWVy
-LCB0aGV5IHdvdWxkIHRyeSB0byBhbGxvY2F0ZSB0aHJvdWdoIFY0TDINCmFuZCBkZWNvZGUgdGhy
-b3VnaCB0aGF0IGludG8gbG9jYWxseS1hbGxvY2F0ZWQgYnVmZmVycy4gQWxsIHRoZXkga25vdw0K
-aXMgdGhhdCB0aGVyZSdzIGEgV2F5bGFuZCBzZXJ2ZXIgYXQgdGhlIG90aGVyIGVuZCBvZiBhIHNv
-Y2tldA0Kc29tZXdoZXJlIHdoaWNoIHdpbGwgd2FudCB0byBpbXBvcnQgdGhlIEZELiBUaGUgc2Vy
-dmVyIGRvZXMgZ2l2ZSB5b3UNCnNvbWUgaGludHMgYWxvbmcgdGhlIHdheTogaXQgd2lsbCB0ZWxs
-IHlvdSB0aGF0IGltcG9ydGluZyBpbnRvIGENCnBhcnRpY3VsYXIgR1BVIHRhcmdldCBkZXZpY2Ug
-aXMgbmVjZXNzYXJ5IGFzIHRoZSB1bHRpbWF0ZSBmYWxsYmFjaywNCmFuZCBpbXBvcnRpbmcgaW50
-byBhIHBhcnRpY3VsYXIgS01TIGRldmljZSBpcyBwcmVmZXJhYmxlIGFzIHRoZQ0Kb3B0aW1hbCBw
-YXRoIHRvIGhpdCBhbiBvdmVybGF5Lg0KDQpTbyBsZXQncyBzYXkgdGhhdCB0aGUgVjRMMiBjbGll
-bnQgZG9lcyB3aGF0IHlvdSdyZSBwcm9wb3Npbmc6IGl0DQphbGxvY2F0ZXMgYSBidWZmZXIgY2hh
-aW4sIHNjaGVkdWxlcyBhIGRlY29kZSBpbnRvIHRoYXQgYnVmZmVyLCBhbmQNCnBhc3NlcyBpdCBh
-bG9uZyB0byB0aGUgc2VydmVyIHRvIGltcG9ydC4gVGhlIHNlcnZlciBmYWlscyB0byBpbXBvcnQN
-CnRoZSBidWZmZXIgaW50byB0aGUgR1BVLCBhbmQgdGVsbHMgdGhlIGNsaWVudCB0aGlzLiBUaGUg
-Y2xpZW50IHRoZW4NCi4uLiB3ZWxsLCBpdCBkb2Vzbid0IGtub3cgdGhhdCBpdCBuZWVkcyB0byBh
-bGxvY2F0ZSB3aXRoaW4gdGhlIEdQVQ0KaW5zdGVhZCwgYnV0IGl0IGtub3dzIHRoYXQgZG9pbmcg
-c28gbWlnaHQgYmUgb25lIHRoaW5nIHdoaWNoIHdvdWxkDQptYWtlIHRoZSByZXF1ZXN0IHN1Y2Nl
-ZWQuDQoNCkJ1dCB0aGUgY2xpZW50IGlzIGp1c3QgYSB2aWRlbyBwbGF5ZXIuIEl0IGRvZXNuJ3Qg
-dW5kZXJzdGFuZCBob3cgdG8NCmFsbG9jYXRlIEJPcyBmb3IgUGFuZnJvc3Qgb3IgQU1EIG9yIGV0
-bmF2aXYuIFNvIHdpdGhvdXQgYSB1bml2ZXJzYWwNCmFsbG9jYXRvciAoYWdhaW4gLi4uKSwgJ2p1
-c3QgYWxsb2NhdGUgb24gdGhlIEdQVScgaXNuJ3QgYSB1c2VmdWwNCnJlc3BvbnNlIHRvIHRoZSBj
-bGllbnQuDQoNCkkgZnVsbHkgdW5kZXJzdGFuZCB5b3VyIHBvaW50IGFib3V0IEFQSXMgbGlrZSBW
-dWxrYW4gbm90IHNlbnNpYmx5DQphbGxvd2luZyBicmFja2V0aW5nLCBhbmQgdGhhdCdzIGZpbmUu
-IE9uIHRoZSBvdGhlciBoYW5kLCBhIGxvdCBvZg0KZXh0YW50IHVzZWNhc2VzIChjYW1lcmEvY29k
-ZWMgLT4gR1BVL2Rpc3BsYXksIEdQVSAtPiBjb2RlYywgZXRjKSBvbg0KQXJtIGp1c3QgY2Fubm90
-IGZ1bGZpbGwgY29tcGxldGUgY29oZXJlbmN5LiBPbiBhIGxvdCBvZiB0aGVzZQ0KcGxhdGZvcm1z
-LCBkZXNwaXRlIHdoYXQgeW91IG1pZ2h0IHRoaW5rIGFib3V0IHRoZSBDUFUvR1BVDQpjYXBhYmls
-aXRpZXMsIHRoZSBib3R0bGVuZWNrIGlzIF9hbHdheXNfIG1lbW9yeSBiYW5kd2lkdGgsIHNvDQpt
-YW5kYXRpbmcgZXh0cmEgY29waWVzIGlzIGFuIGFic29sdXRlIG5vbi1zdGFydGVyLCBhbmQgd291
-bGQgaW5zdGFudGx5DQpjcmlwcGxlIGJpbGxpb25zIG9mIGRldmljZXMuIEx1Y2FzIGhhcyBiZWVu
-IHByZXR0eSBnZW50bGUsIGJ1dCB0byBiZQ0KbW9yZSBjbGVhciwgdGhpcyBpcyBub3QgYW4gb3B0
-aW9uIGFuZCB3b24ndCBiZSBmb3IgYXQgbGVhc3QgdGhlIG5leHQNCmRlY2FkZS4NCg0KU28gd2Ug
-b2J2aW91c2x5IG5lZWQgYSB0aGlyZCB3YXkgYXQgdGhpcyBwb2ludCwgYmVjYXVzZSAnYWxsIGRl
-dmljZXMNCm11c3QgYWx3YXlzIGJlIGNvaGVyZW50JyB2cy4gJ2NhY2hlIG11c3QgYmUgYW4gdW5r
-bm93bicgY2FuJ3Qgd29yay4NCkhvdyBhYm91dCB0aGlzIGFzIGEgc3VnZ2VzdGlvbjogd2UgaGF2
-ZSBzb21lIHVudXNlZCBmbGFncyBpbiB0aGUgUFJJTUUNCmlvY3Rscy4gQ2FuIHdlIGFkZCBhIGZs
-YWcgZm9yICdpbXBvcnQgbXVzdCBiZSBjb2hlcmVudCc/DQoNClRoYXQgZmxhZyB3b3VsZG4ndCBi
-ZSBzZXQgZm9yIHRoZSBleGlzdGluZyBlY29zeXN0ZW0NCkx1Y2FzL05pY29sYXMvbXlzZWxmIGFy
-ZSB0YWxraW5nIGFib3V0LCB3aGVyZSB3ZSBoYXZlIGV4cGxpY2l0DQpoYW5kb3ZlciBwb2ludHMg
-YW5kIHVzZXJzIGFyZSBmdWxseSBhYmxlIHRvIHBlcmZvcm0gY2FjaGUgbWFpbnRlbmFuY2UuDQpG
-b3IgbmV3ZXIgQVBJcyB3aGVyZSBpdCdzIG5vdCBwb3NzaWJsZSB0byBwcm9wZXJseSBleHByZXNz
-IHRoYXQNCmJyYWNrZXRpbmcsIHRoZXkgd291bGQgYWx3YXlzIHNldCB0aGF0IGZsYWcgKHVubGVz
-cyB3ZSBhZGQgYW4gQVBJDQpjYXJ2ZS1vdXQgd2hlcmUgdGhlIGNsaWVudCBwcm9taXNlcyB0byBk
-byB3aGF0ZXZlciBpcyByZXF1aXJlZCB0bw0KbWFpbnRhaW4gdGhhdCkuDQoNCldvdWxkIHRoYXQg
-YmUgdmlhYmxlPw0KDQpDaGVlcnMsDQpEYW5pZWwNCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFy
-by1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRv
-IGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On 10/30/22 6:37 AM, Dawei Li wrote:
+> Racing conflict could be:
+> task A                 task B
+> list_for_each_entry
+> strcmp(h->name))
+>                         list_for_each_entry
+>                         strcmp(h->name)
+> kzalloc                kzalloc
+> ......                 .....
+> device_create          device_create
+> list_add
+>                         list_add
+> 
+> The root cause is that task B has no idea about the fact someone
+> else(A) has inserted heap with same name when it calls list_add,
+> so a potential collision occurs.
+> 
+> Fixes: c02a81fba74f ("dma-buf: Add dma-buf heaps framework")
+> 
+> base-commit: 447fb14bf07905b880c9ed1ea92c53d6dd0649d7
+> 
+> Signed-off-by: Dawei Li <set_pte_at@outlook.com>
+> ---
+>   drivers/dma-buf/dma-heap.c | 7 ++++---
+>   1 file changed, 4 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+> index 8f5848aa144f..ff44c2777b04 100644
+> --- a/drivers/dma-buf/dma-heap.c
+> +++ b/drivers/dma-buf/dma-heap.c
+> @@ -243,11 +243,12 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+>   			return ERR_PTR(-EINVAL);
+>   		}
+>   	}
+> -	mutex_unlock(&heap_list_lock);
+>   
+>   	heap = kzalloc(sizeof(*heap), GFP_KERNEL);
+> -	if (!heap)
+> +	if (!heap) {
+> +		mutex_unlock(&heap_list_lock);
+>   		return ERR_PTR(-ENOMEM);
+> +	}
+>   
+>   	heap->name = exp_info->name;
+>   	heap->ops = exp_info->ops;
+> @@ -284,7 +285,6 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+>   		goto err2;
+>   	}
+>   	/* Add heap to the list */
+> -	mutex_lock(&heap_list_lock);
+
+
+Good catch!
+
+In general I'd like to hold locks for as short a time as possible and
+only bracket the lock associated structure (heap_list). How about we
+move the duplicate name check to down here so they are both inside
+this one locked section here.
+
+I know this will mean we take a longer unwind error path
+if the names are duplicated, but that should be rare and
+this will keep all heap_list accesses together.
+
+Thanks,
+Andrew
+
+
+>   	list_add(&heap->list, &heap_list);
+>   	mutex_unlock(&heap_list_lock);
+>   
+> @@ -296,6 +296,7 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+>   	xa_erase(&dma_heap_minors, minor);
+>   err0:
+>   	kfree(heap);
+> +	mutex_unlock(&heap_list_lock);
+>   	return err_ret;
+>   }
+>   
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
