@@ -2,140 +2,135 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE5D0615463
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  1 Nov 2022 22:40:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79938615609
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Nov 2022 00:21:18 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CB3AE3F5C2
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  1 Nov 2022 21:40:48 +0000 (UTC)
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com [209.85.215.182])
-	by lists.linaro.org (Postfix) with ESMTPS id 15E773E89F
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  1 Nov 2022 21:40:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 68AF63F535
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  1 Nov 2022 23:21:17 +0000 (UTC)
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+	by lists.linaro.org (Postfix) with ESMTPS id 1F2AC3EE5B
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  1 Nov 2022 23:21:01 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=VZJNFuV6;
-	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.215.182 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=W4VJj2Ox;
+	spf=pass (lists.linaro.org: domain of fmdefrancesco@gmail.com designates 209.85.128.45 as permitted sender) smtp.mailfrom=fmdefrancesco@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pg1-f182.google.com with SMTP id e129so14552313pgc.9
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 01 Nov 2022 14:40:32 -0700 (PDT)
+Received: by mail-wm1-f45.google.com with SMTP id t1so6012886wmi.4
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 01 Nov 2022 16:21:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=iWEKtw3qUiAawaOxdqPs0umv7nzkxV855xae9pF938c=;
-        b=VZJNFuV6OqUqkfyPaVBqFRI+HviyopjecL9O6a9KR4Dnv8fxfloSbQqHTlU5JDSJOZ
-         Pcaf0S6s8TcGkbxtKETFXAKgbzTe/IXDkokGzWw0acAPUzDDYfblLW7lLXrvM2LC0/vI
-         x84dmhX0CRy3+gkufw6qBK8XWvFITUYtX0NmO61tuNL1Jjjzln3Np3G1vqLZGXwh9zId
-         7OaeIm9GBk+PK8wQ+66P7wutixk0nL26IhFmix49TwTXFN+2+pWTVTT+4K5uyteDmKpn
-         JuC0iT2Lrr+kGhVth0CVFVoI3rZc/YIVMeaLh2Sofc9hoEVbmuOpZEvkL+vtSlk6+Fzx
-         qNUg==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=wxyxXUAbWcBHc9d21EGasKXnhPYfVJvAuFGJWn1enDs=;
+        b=W4VJj2OxkzduLyb1JVdbRtO0v8jmkBqRu5rWTymTBs2xiND8ig1Kf6Dk6XCJ/2f9ep
+         cQJzoRGlY6/DWX+5JYKcdKIHfr0JS0MdaBQyIDUhRd+FOJaZxF3pHcf2xbHChhlW4rty
+         ILkUYe3cws4PsfmVl+bjjyCH5pdUl/TjK0Gb9vr9EHjpFN12YTCZePl8gviTuDyZCDK8
+         0bez6hGXn81BQtpLrWRp/HB6XLFdulYs7Cg5evyxfNLJKpKuGR4tQyfTfrvvLO+6Uevh
+         tYBaubwq+L0LF2LYlxCace4VZ7EeIJQm7yZYpxUbOkPwwXmHvp+E7J4lRV4blnxjtOVV
+         JqCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=iWEKtw3qUiAawaOxdqPs0umv7nzkxV855xae9pF938c=;
-        b=xUseK8KUaxPL5JkByhlAtmkZBvgS6AcM+qc0i5ALlSMBeDO4GOEPzIVST15HF41OgF
-         q6O96YybVGWrO1QHWAbSzKa+WQ0LubkPrMs2Xl8W+Y5FxVxE0MBU+IK9P7bMJJaswmKH
-         bKTj7Bys+6upGFawqhCu5VvHpX5UO8qWz5I/7Xb73H2nchm/gicm1OvXsj9ld7JY6M9l
-         orYWOraR6QRNHZp3KAiji4MwUBIvHNaCrBDENvk3h4LY3Gbt5JnREL9DCpTZBCmgGKzh
-         r6zZHudcHXXtEfifglrk+t8uKKjx+G12SARY0DTNscYVHCOMppGyzs/Pj/iWEbePKDIh
-         rXDg==
-X-Gm-Message-State: ACrzQf04s0SRXSQAGCBotIET/GQeUOhvsn7Z4UExaAnCDdVzYbPyM5Tv
-	OsSiY9ElHK9jSAj7pgurlfo=
-X-Google-Smtp-Source: AMsMyM7F+3y0j+vNfiWFgdOKBUcgGGtop7epjSDL2dB/w16YWgkhYtADtESEPfIDnchwayqwxrOtJg==
-X-Received: by 2002:a05:6a00:224c:b0:56c:40ff:7709 with SMTP id i12-20020a056a00224c00b0056c40ff7709mr21623319pfu.59.1667338831058;
-        Tue, 01 Nov 2022 14:40:31 -0700 (PDT)
-Received: from localhost ([2a00:79e1:abd:4a00:2703:3c72:eb1a:cffd])
-        by smtp.gmail.com with ESMTPSA id y5-20020aa78f25000000b005544229b992sm6964575pfr.22.2022.11.01.14.40.30
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=wxyxXUAbWcBHc9d21EGasKXnhPYfVJvAuFGJWn1enDs=;
+        b=xSrjTRTrDwrXH5u/JeGya50Kbh8m4nM0EMNtyY5t0a+Ag/7JRbtgs84tZMP+7nvWd7
+         9WPtFTec3nMhdTWTTU/KlejZIsLlLDtgkaNC8V2YNocnd2QkvhsxVUqaJgQMieZRsoe9
+         qxVFUsgEkSKdy8NWLdL8rCtAOt3o7+J7Iv8HxiC6NbBQvQqIt8TEkirZmuJHM7pobt/x
+         TcKRxl+/9ggnYrY1LCxc2CP7e7zLNobPWVOyrMkZ9FOATn80HGkqoqpGpFqW74P4rYEk
+         51O0ad9fnXYLazXLJQIlNcY2N9VdxPYIVD8aKY+9lKs736xzrrA2kQwEdZ3cuoVhBG/n
+         hirg==
+X-Gm-Message-State: ACrzQf13ePZ91WtY3RhobWpZ611OiD0O/WDUERc38pTgPNmYjCTG/erp
+	cW7t81g0aLXOP37kDXs/Ugs=
+X-Google-Smtp-Source: AMsMyM50e+QYw8SxGLXTQQSN/H4evMDT0wK2OPuH/ZtE+ylXd4szu1ziml/ktY5vD0j1TqS9pHNVkw==
+X-Received: by 2002:a05:600c:1c0d:b0:3cf:5fd2:1fd1 with SMTP id j13-20020a05600c1c0d00b003cf5fd21fd1mr15921329wms.8.1667344860058;
+        Tue, 01 Nov 2022 16:21:00 -0700 (PDT)
+Received: from suse.localnet (host-79-43-11-206.retail.telecomitalia.it. [79.43.11.206])
+        by smtp.gmail.com with ESMTPSA id dn12-20020a05600c654c00b003cf537ec2efsm123480wmb.36.2022.11.01.16.20.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 01 Nov 2022 14:40:30 -0700 (PDT)
-From: Rob Clark <robdclark@gmail.com>
-To: dri-devel@lists.freedesktop.org
-Date: Tue,  1 Nov 2022 14:40:51 -0700
-Message-Id: <20221101214051.159988-1-robdclark@gmail.com>
-X-Mailer: git-send-email 2.38.1
+        Tue, 01 Nov 2022 16:20:58 -0700 (PDT)
+From: "Fabio M. De Francesco" <fmdefrancesco@gmail.com>
+To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Alex Deucher <alexdeucher@gmail.com>
+Date: Wed, 02 Nov 2022 00:11:53 +0100
+Message-ID: <1942083.usQuhbGJ8B@suse>
+In-Reply-To: <CADnq5_PP3VCXQ5rbC0-8Qsi5W7Ew87U_bRknz4=qxbrPxVQ+qA@mail.gmail.com>
+References: <20221013210714.16320-1-fmdefrancesco@gmail.com> <fb0b7389-7121-04f8-176d-1ababe0ad8f2@amd.com> <CADnq5_PP3VCXQ5rbC0-8Qsi5W7Ew87U_bRknz4=qxbrPxVQ+qA@mail.gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="iso-8859-1"
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: --
-X-Rspamd-Queue-Id: 15E773E89F
-X-Spamd-Result: default: False [-2.60 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
+X-Spamd-Bar: ---
+X-Rspamd-Queue-Id: 1F2AC3EE5B
+X-Spamd-Result: default: False [-3.31 / 15.00];
+	BAYES_HAM(-2.81)[99.18%];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.215.182:from];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	NEURAL_HAM(-0.00)[-0.921];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCVD_COUNT_THREE(0.00)[3];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,ffwll.ch,chromium.org,gmail.com,quicinc.com,linaro.org,poorly.run,amd.com,lists.linaro.org];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	URIBL_BLOCKED(0.00)[linuxtv.org:url];
 	FROM_HAS_DN(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.45:from];
+	NEURAL_HAM(-0.00)[-0.964];
+	ARC_NA(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[3];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_TLS_LAST(0.00)[]
-Message-ID-Hash: HRBDL5PSBFFY2FAIVHUQQFGO3ENWYHK5
-X-Message-ID-Hash: HRBDL5PSBFFY2FAIVHUQQFGO3ENWYHK5
-X-MailFrom: robdclark@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, Rob Clark <robdclark@chromium.org>, Rob Clark <robdclark@gmail.com>, Abhinav Kumar <quic_abhinavk@quicinc.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Sean Paul <sean@poorly.run>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_TO(0.00)[amd.com,gmail.com];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[amd.com,gmail.com,ffwll.ch,kernel.org,linaro.org,suse.com,roeck-us.net,chromium.org,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,intel.com]
+Message-ID-Hash: AEIYWQNQY56XJCQBKSF7J4C2NN4DJDMQ
+X-Message-ID-Hash: AEIYWQNQY56XJCQBKSF7J4C2NN4DJDMQ
+X-MailFrom: fmdefrancesco@gmail.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Alex Deucher <alexander.deucher@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>, Daniel Vetter <daniel@ffwll.ch>, Christian Brauner <brauner@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Jean Delvare <jdelvare@suse.com>, Guenter Roeck <linux@roeck-us.net>, Kees Cook <keescook@chromium.org>, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, bpf@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-hwmon@vger.kernel.org, linux-hardening@vger.kernel.org, "Venkataramanan, Anirudh" <anirudh.venkataramanan@intel.com>, Ira Weiny <ira.weiny@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] drm/msm: Remove exclusive-fence hack
+Subject: [Linaro-mm-sig] Re: [PATCH] drm/radeon: Replace kmap() with kmap_local_page()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HRBDL5PSBFFY2FAIVHUQQFGO3ENWYHK5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AEIYWQNQY56XJCQBKSF7J4C2NN4DJDMQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-From: Rob Clark <robdclark@chromium.org>
+On luned=EC 17 ottobre 2022 18:52:10 CET Alex Deucher wrote:
+> Applied.  Thanks!
 
-The workaround was initially necessary due to dma_resv having only a
-single exclusive fence slot, yet whe don't necessarily know what order
-the gpu scheduler will schedule jobs.  Unfortunately this workaround
-also has the result of forcing implicit sync, even when userspace does
-not want it.
+Many thanks to you!
 
-However, since commit 047a1b877ed4 ("dma-buf & drm/amdgpu: remove
-dma_resv workaround") the workaround is no longer needed.  So remove
-it.  This effectively reverts commit f1b3f696a084 ("drm/msm: Don't
-break exclusive fence ordering")
+However, about a week ago, I received a report saying that this patch is "N=
+ot=20
+Applicable".=20
 
-Signed-off-by: Rob Clark <robdclark@chromium.org>
----
- drivers/gpu/drm/msm/msm_gem_submit.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+That email was also referring to another patch, for which I'll reply in its=
+=20
+own thread.
 
-diff --git a/drivers/gpu/drm/msm/msm_gem_submit.c b/drivers/gpu/drm/msm/msm_gem_submit.c
-index 5599d93ec0d2..cc48f73adadf 100644
---- a/drivers/gpu/drm/msm/msm_gem_submit.c
-+++ b/drivers/gpu/drm/msm/msm_gem_submit.c
-@@ -334,8 +334,7 @@ static int submit_fence_sync(struct msm_gem_submit *submit, bool no_implicit)
- 		if (ret)
- 			return ret;
- 
--		/* exclusive fences must be ordered */
--		if (no_implicit && !write)
-+		if (no_implicit)
- 			continue;
- 
- 		ret = drm_sched_job_add_implicit_dependencies(&submit->base,
--- 
-2.38.1
+That report has a link to https://patchwork.linuxtv.org/project/linux-media/
+patch/20221013210714.16320-1-fmdefrancesco@gmail.com/
+
+Can you please let me understand why, despite it was applied, this patch la=
+ter=20
+shifted "State" to "Not Applicable"?
+
+Thanks,
+
+Fabio
+
+
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
