@@ -2,192 +2,218 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 96516616124
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Nov 2022 11:47:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2738761619A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Nov 2022 12:18:23 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2D2153F5CA
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Nov 2022 10:47:05 +0000 (UTC)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com (mail-mw2nam12on2041.outbound.protection.outlook.com [40.107.244.41])
-	by lists.linaro.org (Postfix) with ESMTPS id EDB853EE5B
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  2 Nov 2022 10:46:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 13D223F5C6
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Nov 2022 11:18:22 +0000 (UTC)
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+	by lists.linaro.org (Postfix) with ESMTPS id A3A463EEC1
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  2 Nov 2022 11:18:04 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=QAY8B2l7;
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.244.41 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FZxkZKEvT7AcVVKsnrf4LeSfGkkdIJWkGDdb5r63c3bKSGnelFr4hCrU4A6n3JbChASc1AS/vUjMKA5v+dfb+bPksbOinvN9+St4JkFRip7yrGILkVPZSEEl59A7TI7oMKpakVv05cA0S49j2Au82hJvECMmuF9uNlWGrXN6nFxbsdPhltnhGHUwvnGQYtEYodOaRMxtm9bv611gCXUr/KC4sbU2nZm57X+KEOeqyBBuolgLlr1AuptfdqtsqJUS5xru7va0Au2du/KkqjQBxFAXHdCfU+VnxRyBfBJ4bbOU1XTRdVkjUuyldN0PeZNWM/srMKP6YGIyrW8SaMBxNg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CebwblwYi1iZ8kmmVbaslbOL/vZyMFHnlUC+fAqCq5o=;
- b=k0QilX9omTqxGFX6Fo5AzMKqI53gGFHM9qNJFICPEEfMod7jhVyfa8pyavynyhI831GrDh/HpiDCYD6IrsBJTodQykfsZ1nm/rISPP/938jRA02C7ZbTrotmfIJvL/pJRwHl8TltUOdhUed6OS8b852BOZl+ElgFN4V8yRYcc1UMB0xW6IvnPlptTeRs85og5tN9qwIGtGY9volmJUHNHyJwcIPmEjh8xBILzJzSn+z9TFJn2b3FkbhIdKR20fzSKifliZqMOtJkiEonDJgvXwTPVHREbToUGnXGy1EwRCnmd0N3MQEDexrTjij6XtA7Ryu/eIZ3I5j+v0TYjh4vRg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CebwblwYi1iZ8kmmVbaslbOL/vZyMFHnlUC+fAqCq5o=;
- b=QAY8B2l7+YJcYg/NkHlvXwqNr9YUDmre01YzKpG9O+CP0ZfDEd9zonVEpB+BNW8qEa8SRFyT2QCrDkDIwZJ4Lj5z0MMsIaSEq9ZqlCJvOHvQQQiuby/SdLuav9L2cvgMKQP0BQZzkrSn1Sbk2smPaVXHzsuKsyioDFHRZqTEye0=
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by IA1PR12MB6330.namprd12.prod.outlook.com (2603:10b6:208:3e4::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5791.20; Wed, 2 Nov
- 2022 10:46:45 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::7d43:3f30:4caf:7421]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::7d43:3f30:4caf:7421%7]) with mapi id 15.20.5791.020; Wed, 2 Nov 2022
- 10:46:45 +0000
-Message-ID: <044540cc-1d8b-45da-ac8b-ecc133b45dc1@amd.com>
-Date: Wed, 2 Nov 2022 11:46:38 +0100
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=R0aAmd9O;
+	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.218.45 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-ej1-f45.google.com with SMTP id bj12so44277888ejb.13
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 02 Nov 2022 04:18:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=PT7usyHorNc+eagc7++kft1owL4KOrZq2wYnn7g6w4k=;
+        b=R0aAmd9O8wIg+f+au36TUKLxmP6HbcnlZut9V+4GtjQYMXHhaOfwVJkZCjE0wn6d/k
+         fv7zFy22lxPsD2BdHavNoPP3aoitLlFqjhGnrGyOD6xHihe15ovaY52knTCtk2ZbkEKV
+         BBU7fiAxF6MratcizxKWSa0/Zxu//K0adbNpE+L+fYRw0bPsIUdgv+f0kkDiWQUIRj3Z
+         nHxdKRxqaeQvNxumuGtaMZgD1HQZwkqJHMTE9UlB7BtvUkwAApdTjpNmJe7+5JsrvT2o
+         wj2HXqS/4mdt7QB3WlLrmOCc4TU/8gedOYl5OND4mehSqhUbHNaFrDXYTjUtXPhaDmjG
+         EP7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=PT7usyHorNc+eagc7++kft1owL4KOrZq2wYnn7g6w4k=;
+        b=Ybh488deDSE7LLh61SiCkeRRkAOb/gjKkld0/l2SiCl46JjGpCBDdg9byVDFORH7ml
+         gVxW8n859EEN6leIDp9MfE8T1/7GLrKHgyk7jhQRTPEnJs6F6jM0Yg7ZjIVcSo/GTRCK
+         o8K2MXn9eEh0HCjN5N6sVtpuSYRCL34ciAexQrBrTdtoNZA1YhTM6YA9vUw+4fOO1MQD
+         hIwiKTzoxyZt1KtmjFu0rijkOeBCUihLdqVlG/u7DcjU63dlTAfw5ZmJwjj3lYYSPgyn
+         wewkVnf6RkrTqaPMet3MkiDwHFo2JDfm83viA6M0Kb5jHrRivGrmmn88pIl9XdWyr4DZ
+         TnEg==
+X-Gm-Message-State: ACrzQf0U92sOTMRGQPIFIOl2xlreBWz/876MiClEzhazyQhwGh5u4bzE
+	BFueYsph69/m2tHRACrBQiI=
+X-Google-Smtp-Source: AMsMyM7tnylHAI4DN/vGOWi9kX355glWeRJ+uaNDLjf84/JABguIpzkgAyMHiB+ZMWG0adD9cglyKw==
+X-Received: by 2002:a17:907:8b18:b0:7ad:d1f5:2f80 with SMTP id sz24-20020a1709078b1800b007add1f52f80mr15750600ejc.661.1667387883542;
+        Wed, 02 Nov 2022 04:18:03 -0700 (PDT)
+Received: from ?IPV6:2a02:908:1256:79a0:576c:b102:647e:9ffd? ([2a02:908:1256:79a0:576c:b102:647e:9ffd])
+        by smtp.gmail.com with ESMTPSA id ja25-20020a170907989900b0079b9f7509a0sm5328041ejc.52.2022.11.02.04.18.02
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 02 Nov 2022 04:18:02 -0700 (PDT)
+Message-ID: <b422be59-4b4b-2d0d-8e8c-b19f27c6832e@gmail.com>
+Date: Wed, 2 Nov 2022 12:18:01 +0100
+MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.2.2
 Content-Language: en-US
-To: Rob Clark <robdclark@gmail.com>, dri-devel@lists.freedesktop.org
-References: <20221101214051.159988-1-robdclark@gmail.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20221101214051.159988-1-robdclark@gmail.com>
-X-ClientProxiedBy: AM6P192CA0042.EURP192.PROD.OUTLOOK.COM
- (2603:10a6:209:82::19) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|IA1PR12MB6330:EE_
-X-MS-Office365-Filtering-Correlation-Id: d49319c1-5b36-436b-ff55-08dabcbf890a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	InK157GGcNfLeDdWFMPTcDOFn4D3+RrcduMatmivRqUl7Ub6Vo9FuJTpE9Xf3ORkM+h7kSi6L/SFRpu5ZD4+2RG5ueNNCR61CdZ1ADYpRKYvf+TE3Ib/10w+QBvepzvDoW+08NydnY365myJm3ljrRuZ/93vNx6oAcU7MnWZXab78i4Yj2HuvxowOl6ifuyRO7i141AkKRUJ9aQTzLe1UMaqgk0AyI6d3OufElcQA8tp1NiBMZzC2ZpMtMt+TuwVogCy2sJWJmDENSPzlOM3oM+suZx4E+bJ37IkWdaQHc/gpPeAD8zl96wwMYJQxyBvOyr8jg9432Zu3QHvF4SZbbft1vU60LApqZ30b1JuOVCK06+pJo3SWpIFcXMehsUcbvLGOniVnx/txSraKVXOYP2+wjQU3nT8pAuD8OLqh8lYZGcJ4De8UhPF8yDvo/5UocCljLR0urif00AM8m0ecJpLpnV1gPGqdc9OMmz5bfkFdKujTBT2Vka35/E4XMeqRSFsM5KxF0us5SbZMWFKtXVRaklEq+oT6JggQST+7+jpigkqvUmxdLB0UtyzETMf1y3ycgdAW+5TIIHssMtZym3V+yGaRIN7G98XV5Kmc5s3dEJcy2rRLqe5qEyy24EIoJD2xik4ZSF6tkLBwISu2lC8BvFd24QngFXQooSiMqGRcQH+S8x9d3ruF80AwPCCbuZi+78bQ3442PYAeaZjXvr5pPbCFVCvf7uQkFRNQ8EToX9xxrMsMgcGNC7XusvT0efKekk/apF9SfsS3UBDvtHb4gKQDq8S/bkGPooCaFA=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(136003)(346002)(376002)(39860400002)(366004)(396003)(451199015)(478600001)(4326008)(8676002)(66476007)(66946007)(54906003)(5660300002)(66556008)(8936002)(316002)(2906002)(6486002)(41300700001)(83380400001)(7416002)(38100700002)(31696002)(6666004)(6506007)(86362001)(66574015)(2616005)(6512007)(186003)(31686004)(36756003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?OU8wQmJ0NjZuS0YwSHhDNHkyTTRocXNrdjFxSG1iSmhkWW1HM3h3WHR4Rm9R?=
- =?utf-8?B?T0hjWjlJakh2Y0pSZXE2Kzd5elVDMExFZm0wazdaOTJ3Q084UExwWWFXc3V5?=
- =?utf-8?B?ek5VOEhiOHZjOXVaK1NJL3YyWm00alExOFAySks1Vkx0bkd1WUtmNU41czNN?=
- =?utf-8?B?dFByUG9qdHdyVkpHbUpQTTg4ZWJadHhYa3k5Z1ZCM25wTy9zdDRPblA5WW0w?=
- =?utf-8?B?MGlIbGxrdHhGbWVIYzJwcXlRY2llV0RqU1VYZmtRYlQ0RjA3WWpRbVFCU2E4?=
- =?utf-8?B?WjNFVG51QWROSUdzTnJ0by9oVTVwQ1BZem5kTHo3SW1HeGtvbWsyVUxYMXJx?=
- =?utf-8?B?bnFxUDVaaHJjYXpoc1lRN0drRmJRQUxNRGpGK0VXd3kxbHF2aHVrV29naUpG?=
- =?utf-8?B?cUtZbHhDbGJVN282ckFpTS9ZSGlrdWwyZ2k3MjNBcFUwVW02RnJwa1hFL2Uw?=
- =?utf-8?B?Z3J0Yk5WZEFOeFZQTnJOdkZpblAwNm4vUnR0MW5xblI0Rmd3VmlaL2tjR0hY?=
- =?utf-8?B?YmpkREFBeHZyL2JjWWFvQUZzT0tTQzdkaE9NaFBHLzhuc1JzK2llcHlIUU1G?=
- =?utf-8?B?TkNjTFFqYmNjU2ZyZGY4WEtuQitPWlpVRFVzNmpLUkFpVDFPZkZGZTBDdXYz?=
- =?utf-8?B?T1JSbVN6Q1BhVzJpT0tZeFlRemRjdHJlQ1lVTUJBVmFSTG5zSGtUbVZNeUNl?=
- =?utf-8?B?WmFYZytxb0VxTldWNnY2K005alZxS2drVGkvRTFHSlB5cW1DRzRnOUU4VXJy?=
- =?utf-8?B?NmJHa2tPcVJ3SjhkVlg4OEVxUDdjWkFQblVLZWhOSExIeUhMV2dNMy8rY0Vj?=
- =?utf-8?B?WU1rMnlCQXVSWTVIY0RUNTJLN2NrVzgvUHpSZmVvQjFhdGVjR1RXR3g0RXZG?=
- =?utf-8?B?eXpaWExrbVRBZkU1TWladXNzbFVWcU9XcFNSTWVPT0xlQlYvREZrckVzdU5s?=
- =?utf-8?B?czNNWWdYZ3R1VWJOeDNVMDRveEFZQkpzdkRLb1B6MVVlSlMyVXNmUFNoR3ZQ?=
- =?utf-8?B?b2luRkMzZHhwQWRWbERHOFhSQzY0OHZ3NTBicGxnb3hxVGtoQlBnZFUxUkFG?=
- =?utf-8?B?QmI0UzVJU3VIMnk2ajVrREZ2V1l2YldPZVJ5UmdLaXkzRXJYWFRYVG9UR21N?=
- =?utf-8?B?NXdwVCs2c05yRTl1aHNJNHF5VzdaZDB1dU5KYjRBU0tUN250OEVBLzdZUUc5?=
- =?utf-8?B?NHpGTk14VUhCQnVLRjcrQ0VyYXFUeUY2c0k5dDFzME1KRGhTbHVUdlBnUkl5?=
- =?utf-8?B?TUladWUzUUNwR1lwSnV3UDhEQTZEakZma0JWMDMwMTVhTGdudzQ5a1RxT1JM?=
- =?utf-8?B?aTlyUTg5YkJLdlZKT2JOMVNGalhLVUxjYnZ0dkdvQ2pQNVpYWGxiL0JkQlBB?=
- =?utf-8?B?c1J1a3B2dFdacGtOVFFIWkpDcFN3TFFwNXlLbXRONjRUYjd6VDFsR0R6TDZM?=
- =?utf-8?B?eERFYnZXc2RBMjVNZXpBbUdTZlppYjNvbGNtbFdzMzIrUUdEQi9GRlVFRzRZ?=
- =?utf-8?B?ODNneUdXTGd0ZmtFWlhEaXJXMXVSK0FsR3ozY0dxN0g4RHNaai9MMHpud3gx?=
- =?utf-8?B?ZC9acUNJaUtZVm5LSHpPTUd0YnRybzRwZkVPTmJ1anlOelR1UkVUSityOGIz?=
- =?utf-8?B?M3BIMFlDNkJXZE8wOGpVYVpsVzVHcmtKUEUxNWpvQ09sdFM0QmdJa0x0cTFF?=
- =?utf-8?B?bTljRHc1MkRRTHlsYVNNNHh3TUVodnErUWthVFM3Qk1UTGxtVyttL05OS3VT?=
- =?utf-8?B?WUlVOGQrUXBUZGRBQTIxQTlsZXhROTA5dDFtckdMcVd1c1I1VWZreU9leVp5?=
- =?utf-8?B?RzkwUVQ4OTdUOUcyMzNISmlFbUFwaHp4ZmNkWGtrYVBRc0x5ZjhTbEtGYk1B?=
- =?utf-8?B?YjJQWHpzR0lRUS95SFB2TE1lV0RXVGo1L1p1MWVaaWtvY0RQWVpFVEZmQVl2?=
- =?utf-8?B?WnlOUDdISTJiOG9oeWg3UjJuckx4R2xIdWRNYkJNU2xxbm8rVTVJdi9iT2lG?=
- =?utf-8?B?cWM2amZaZ24yd3JrZndNK1ZvOXFnZmFQUERFSkJscDkxTjZPa3ViTFhac09D?=
- =?utf-8?B?WmczTnltZ0tiYUJXb2h6RzdRWDVSQWl4cmtLTzRLV2ZCWmlrWXpGS3ZzbHla?=
- =?utf-8?B?NklPT0ptTnJKRWlJTVhHSnpSZFV1K2x0Snc4dDJ3c01icVBvck9Bckd2Qkx6?=
- =?utf-8?Q?bwz2hLaP+6gyZeDCZ16/pk1kal9gIkPayroElts0thc0?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d49319c1-5b36-436b-ff55-08dabcbf890a
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2022 10:46:45.2821
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Wos84bUjMosLAVG7sRUFJouZPYjyyF0cYSbLZBVSz+iowfnOxYXVDWt4DwwKgKTF
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6330
+To: Nicolas Dufresne <nicolas@ndufresne.ca>,
+ Daniel Stone <daniel@fooishbar.org>
+References: <20221020121316.3946-1-christian.koenig@amd.com>
+ <3d7353f3fa5905ce18e5b2d92f758f098189bc5a.camel@pengutronix.de>
+ <7f5eff36-6886-bb06-061a-dd4263b61605@gmail.com>
+ <f5de84cfe81fee828bbe0d47d379028d28ef6ca6.camel@pengutronix.de>
+ <e02cedc2-6741-8813-a7a5-f8769e301745@gmail.com>
+ <a53e5df51ec0f2f9d4c2d377c0cc5ba85f2e58ff.camel@ndufresne.ca>
+ <9d716641-55c6-1590-26c2-1c3b14a28226@gmail.com>
+ <CAPj87rMPkmimR_RJHhxYZokH__TVpPArk0h6drOUSx7Z9+oAHA@mail.gmail.com>
+ <11a6f97c-e45f-f24b-8a73-48d5a388a2cc@gmail.com>
+ <caf4d6b82843788db97555a58bc9e33915e5b50a.camel@ndufresne.ca>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+In-Reply-To: <caf4d6b82843788db97555a58bc9e33915e5b50a.camel@ndufresne.ca>
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: ---------
-X-Rspamd-Queue-Id: EDB853EE5B
-X-Spamd-Result: default: False [-9.00 / 15.00];
+X-Spamd-Bar: --------
+X-Rspamd-Queue-Id: A3A463EEC1
+X-Spamd-Result: default: False [-8.10 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_EQ_ENVFROM(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,ffwll.ch,chromium.org,quicinc.com,linaro.org,poorly.run,gmail.com,lists.linaro.org];
-	FREEMAIL_TO(0.00)[gmail.com,lists.freedesktop.org];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	NEURAL_HAM(-0.00)[-0.991];
-	DKIM_TRACE(0.00)[amd.com:+];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.45:from];
 	MID_RHS_MATCH_FROM(0.00)[];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	TO_DN_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_FROM(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	MIME_TRACE(0.00)[0:+];
+	NEURAL_HAM(-0.00)[-0.968];
 	RCVD_COUNT_THREE(0.00)[3];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.244.41:from]
-Message-ID-Hash: AOKUKEUI5J3VOPKMIS66J3XVWXXH3QCX
-X-Message-ID-Hash: AOKUKEUI5J3VOPKMIS66J3XVWXXH3QCX
-X-MailFrom: Christian.Koenig@amd.com
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[pengutronix.de,gmail.com,linaro.org,ffwll.ch,lists.freedesktop.org,lists.linaro.org,vger.kernel.org]
+Message-ID-Hash: KLFOR4PDJMT3S66BL7LGO33ZDNGGMGXO
+X-Message-ID-Hash: KLFOR4PDJMT3S66BL7LGO33ZDNGGMGXO
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: freedreno@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, Rob Clark <robdclark@chromium.org>, Abhinav Kumar <quic_abhinavk@quicinc.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Sean Paul <sean@poorly.run>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
+CC: ppaalanen@gmail.com, sumit.semwal@linaro.org, daniel@ffwll.ch, robdclark@gmail.com, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] drm/msm: Remove exclusive-fence hack
+Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AOKUKEUI5J3VOPKMIS66J3XVWXXH3QCX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KLFOR4PDJMT3S66BL7LGO33ZDNGGMGXO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-QW0gMDEuMTEuMjIgdW0gMjI6NDAgc2NocmllYiBSb2IgQ2xhcms6DQo+IEZyb206IFJvYiBDbGFy
-ayA8cm9iZGNsYXJrQGNocm9taXVtLm9yZz4NCj4NCj4gVGhlIHdvcmthcm91bmQgd2FzIGluaXRp
-YWxseSBuZWNlc3NhcnkgZHVlIHRvIGRtYV9yZXN2IGhhdmluZyBvbmx5IGENCj4gc2luZ2xlIGV4
-Y2x1c2l2ZSBmZW5jZSBzbG90LCB5ZXQgd2hlIGRvbid0IG5lY2Vzc2FyaWx5IGtub3cgd2hhdCBv
-cmRlcg0KPiB0aGUgZ3B1IHNjaGVkdWxlciB3aWxsIHNjaGVkdWxlIGpvYnMuICBVbmZvcnR1bmF0
-ZWx5IHRoaXMgd29ya2Fyb3VuZA0KPiBhbHNvIGhhcyB0aGUgcmVzdWx0IG9mIGZvcmNpbmcgaW1w
-bGljaXQgc3luYywgZXZlbiB3aGVuIHVzZXJzcGFjZSBkb2VzDQo+IG5vdCB3YW50IGl0Lg0KPg0K
-PiBIb3dldmVyLCBzaW5jZSBjb21taXQgMDQ3YTFiODc3ZWQ0ICgiZG1hLWJ1ZiAmIGRybS9hbWRn
-cHU6IHJlbW92ZQ0KPiBkbWFfcmVzdiB3b3JrYXJvdW5kIikgdGhlIHdvcmthcm91bmQgaXMgbm8g
-bG9uZ2VyIG5lZWRlZC4gIFNvIHJlbW92ZQ0KPiBpdC4gIFRoaXMgZWZmZWN0aXZlbHkgcmV2ZXJ0
-cyBjb21taXQgZjFiM2Y2OTZhMDg0ICgiZHJtL21zbTogRG9uJ3QNCj4gYnJlYWsgZXhjbHVzaXZl
-IGZlbmNlIG9yZGVyaW5nIikNCj4NCj4gU2lnbmVkLW9mZi1ieTogUm9iIENsYXJrIDxyb2JkY2xh
-cmtAY2hyb21pdW0ub3JnPg0KDQpPaCwgeWVzIHBsZWFzZS4gSSBoYWQgdGhhdCBvbiBteSB0b2Rv
-IGxpc3QgZm9yIGFmdGVyIHRoZSBpbml0aWFsIHBhdGNoIA0KaGFkIGxhbmRlZCwgYnV0IGNvdWxk
-bid0IGZpbmQgdGhlIHRpbWUgdG8gbG9vayBpbnRvIGl0IG9uY2UgbW9yZS4NCg0KVGhlcmUgd2Fz
-IGFub3RoZXIgY2FzZSB3aXRoIG9uZSBvZiB0aGUgb3RoZXIgQVJNIGRyaXZlcnMgd2hpY2ggY291
-bGQgYmUgDQpjbGVhbmVkIHVwIG5vdywgYnV0IEkgY2FuJ3QgZmluZCBpdCBhbnkgbW9yZSBvZiBo
-YW5kLg0KDQpBbnl3YXkgdGhpcyBwYXRjaCBoZXJlIGlzIEFja2VkLWJ5OiBDaHJpc3RpYW4gS8O2
-bmlnIA0KPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4uDQoNClJlZ2FyZHMsDQpDaHJpc3RpYW4u
-DQoNCj4gLS0tDQo+ICAgZHJpdmVycy9ncHUvZHJtL21zbS9tc21fZ2VtX3N1Ym1pdC5jIHwgMyAr
-LS0NCj4gICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDIgZGVsZXRpb25zKC0pDQo+
-DQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vbXNtL21zbV9nZW1fc3VibWl0LmMgYi9k
-cml2ZXJzL2dwdS9kcm0vbXNtL21zbV9nZW1fc3VibWl0LmMNCj4gaW5kZXggNTU5OWQ5M2VjMGQy
-Li5jYzQ4ZjczYWRhZGYgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9tc20vbXNtX2dl
-bV9zdWJtaXQuYw0KPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbXNtL21zbV9nZW1fc3VibWl0LmMN
-Cj4gQEAgLTMzNCw4ICszMzQsNyBAQCBzdGF0aWMgaW50IHN1Ym1pdF9mZW5jZV9zeW5jKHN0cnVj
-dCBtc21fZ2VtX3N1Ym1pdCAqc3VibWl0LCBib29sIG5vX2ltcGxpY2l0KQ0KPiAgIAkJaWYgKHJl
-dCkNCj4gICAJCQlyZXR1cm4gcmV0Ow0KPiAgIA0KPiAtCQkvKiBleGNsdXNpdmUgZmVuY2VzIG11
-c3QgYmUgb3JkZXJlZCAqLw0KPiAtCQlpZiAobm9faW1wbGljaXQgJiYgIXdyaXRlKQ0KPiArCQlp
-ZiAobm9faW1wbGljaXQpDQo+ICAgCQkJY29udGludWU7DQo+ICAgDQo+ICAgCQlyZXQgPSBkcm1f
-c2NoZWRfam9iX2FkZF9pbXBsaWNpdF9kZXBlbmRlbmNpZXMoJnN1Ym1pdC0+YmFzZSwNCg0KX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNp
-ZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vi
-c2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8u
-b3JnCg==
+Am 01.11.22 um 22:09 schrieb Nicolas Dufresne:
+> [SNIP]
+>>> But the client is just a video player. It doesn't understand how to
+>>> allocate BOs for Panfrost or AMD or etnaviv. So without a universal
+>>> allocator (again ...), 'just allocate on the GPU' isn't a useful
+>>> response to the client.
+>> Well exactly that's the point I'm raising: The client *must* understand
+>> that!
+>>
+>> See we need to be able to handle all restrictions here, coherency of the
+>> data is just one of them.
+>>
+>> For example the much more important question is the location of the data
+>> and for this allocating from the V4L2 device is in most cases just not
+>> going to fly.
+> It feels like this is a generic statement and there is no reason it could not be
+> the other way around.
+
+And exactly that's my point. You always need to look at both ways to 
+share the buffer and can't assume that one will always work.
+
+As far as I can see it you guys just allocate a buffer from a V4L2 
+device, fill it with data and send it to Wayland for displaying.
+
+To be honest I'm really surprised that the Wayland guys hasn't pushed 
+back on this practice already.
+
+This only works because the Wayland as well as X display pipeline is 
+smart enough to insert an extra copy when it find that an imported 
+buffer can't be used as a framebuffer directly.
+
+>   I have colleague who integrated PCIe CODEC (Blaize Xplorer
+> X1600P PCIe Accelerator) hosting their own RAM. There was large amount of ways
+> to use it. Of course, in current state of DMABuf, you have to be an exporter to
+> do anything fancy, but it did not have to be like this, its a design choice. I'm
+> not sure in the end what was the final method used, the driver isn't yet
+> upstream, so maybe that is not even final. What I know is that there is various
+> condition you may use the CODEC for which the optimal location will vary. As an
+> example, using the post processor or not, see my next comment for more details.
+
+Yeah, and stuff like this was already discussed multiple times. Local 
+memory of devices can only be made available by the exporter, not the 
+importer.
+
+So in the case of separated camera and encoder you run into exactly the 
+same limitation that some device needs the allocation to happen on the 
+camera while others need it on the encoder.
+
+>> The more common case is that you need to allocate from the GPU and then
+>> import that into the V4L2 device. The background is that all dGPUs I
+>> know of need the data inside local memory (VRAM) to be able to scan out
+>> from it.
+> The reality is that what is common to you, might not be to others. In my work,
+> most ARM SoC have display that just handle direct scannout from cameras and
+> codecs.
+
+> The only case the commonly fails is whenever we try to display UVC
+> created dmabuf,
+
+Well, exactly that's not correct! The whole x86 use cases of direct 
+display for dGPUs are broken because media players think they can do the 
+simple thing and offload all the problematic cases to the display server.
+
+This is absolutely *not* the common use case you describe here, but 
+rather something completely special to ARM.
+
+>   which have dirty CPU write cache and this is the type of thing
+> we'd like to see solved. I think this series was addressing it in principle, but
+> failing the import and the raised point is that this wasn't the optimal way.
+>
+> There is a community project called LibreELEC, if you aren't aware, they run
+> Khodi with direct scanout of video stream on a wide variety of SoC and they use
+> the CODEC as exporter all the time. They simply don't have cases were the
+> opposite is needed (or any kind of remote RAM to deal with). In fact, FFMPEG
+> does not really offer you any API to reverse the allocation.
+
+Ok, let me try to explain it once more. It sounds like I wasn't able to 
+get my point through.
+
+That we haven't heard anybody screaming that x86 doesn't work is just 
+because we handle the case that a buffer isn't directly displayable in 
+X/Wayland anyway, but this is absolutely not the optimal solution.
+
+The argument that you want to keep the allocation on the codec side is 
+completely false as far as I can see.
+
+We already had numerous projects where we reported this practice as bugs 
+to the GStreamer and FFMPEG project because it won't work on x86 with dGPUs.
+
+This is just a software solution which works because of coincident and 
+not because of engineering.
+
+Regards,
+Christian.
+
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
