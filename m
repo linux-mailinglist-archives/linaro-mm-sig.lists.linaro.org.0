@@ -2,284 +2,183 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C9C961630A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Nov 2022 13:50:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C26761632C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Nov 2022 13:56:59 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 670B63F5C6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Nov 2022 12:50:57 +0000 (UTC)
-Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
-	by lists.linaro.org (Postfix) with ESMTPS id 9BDB53EEC1
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  2 Nov 2022 12:50:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 63D433EF32
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Nov 2022 12:56:58 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 850EB3EEC1
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  2 Nov 2022 12:56:38 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=lwmsWbnB;
-	spf=pass (lists.linaro.org: domain of ppaalanen@gmail.com designates 209.85.167.50 as permitted sender) smtp.mailfrom=ppaalanen@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=WUpjROp4;
+	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.218.48 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-lf1-f50.google.com with SMTP id be13so28074139lfb.4
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 02 Nov 2022 05:50:40 -0700 (PDT)
+Received: by mail-ej1-f48.google.com with SMTP id ud5so45087947ejc.4
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 02 Nov 2022 05:56:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=n+S578bZxz2KcommcqJrY31qfDvwV5Xe3fXepG3Q5nQ=;
-        b=lwmsWbnBjj6ItrnYJyQhF59gtMtcsv4sg6n3ptSCmdIXC5oIm46q09bnckTaETBGHl
-         cr49Xd6S3sSZmvBkxCaNsO8Ff3GsihDwcR4GglKs3ByiRLmhVIW14lyjY9X1MQRPnE8b
-         MrbTuK+/z0bVKashGzCxDraaDM5xyr7CI0uFN9UOgdkCeGBS9duUb9awS0QYBy6zfBDX
-         3x26pOmkxIhkLo+SiodrGDoVpqB/vggYqag8xntvglOGNzqGLQ/mzcL72KWCij7M277M
-         Fsy6rjDfPuuv7h28iT1xcNR3SZSO/HgZlhO5kqrf/CKikGuwqPbaU3qZDyw8Ep5576nI
-         f0Zw==
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Q2uaugI2bLKCRBQDyZF1zpLdxkje5gCBBYFZp43Wd6I=;
+        b=WUpjROp47DVLKE/YqCgRwVWs5Ba4KDwfOn2r8qsXcWESSqfu2BfoiODrYoEv32JK7D
+         Yq64ykOaCSc/StqteuzicKY2xX6TuvRx5jDQMW9u5KqEkvvv2RpEuZpfA43kyPwI2/kI
+         C/T5Gf69SJ7KwXPY0DPwUZydoqz2B7dOvTMf7TIb0SFGUnGHFjXeL2JJF66dlWqeAN8X
+         LS/DZIS7d/YjBIqCvN0F+BW3BtuGMl/h3ysA6/L4W+5HemG/GHZy98BTEmBL/TKt4TqS
+         VOwBryFxmUJSCr/WLHpbchAbIRKBK73idnzDvYtJ3MIDhAH/wTlqdxEDZAKaY6vnzNAI
+         Q7/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=n+S578bZxz2KcommcqJrY31qfDvwV5Xe3fXepG3Q5nQ=;
-        b=5Mxh7XKb50FfahW007Fqh0vy9rBA4J1C/R8lVb8e2zsWzbP9fFgRF4VzLY4V6XWuto
-         lR3YKdnh7ozBMy+g8/clncdxsFYuPELycNa9XI8bzmRH2b2j8ahasAkLtvzS7Ki+Try+
-         DDQDkSZ9b2bF+4/roVQKms0rmCs3E9YOK+/+aBPMNNZmhc/0RoFGpjpx6YwahmXkKzE0
-         q1TvYxzgiMuuT/6MQDZpJxbTDm2YgtZVq/1pU1ZszbAxWBpAmkU9lQ/+NZYJnC9v+s2v
-         eysYgSWI/LwFt8O7QK4cU1rWguDfZI3qHzT538VSdXo/qtV7cNgREYKjWC8CtHjwO7u4
-         XOsA==
-X-Gm-Message-State: ACrzQf21r/Jz9PsC9IgAhfHcETTkos8Pd6+CpPjBS5oFDwWyMRlpjRV6
-	iynd2qE/nf87jyEzoKieplo=
-X-Google-Smtp-Source: AMsMyM5bAQWWdC7A5xnHxVhke5uPQGK5MBDVpNQ0iOLOSSOPcu+6wIV3uj1eYQRZLjMri4oPKxX+6A==
-X-Received: by 2002:ac2:4c46:0:b0:4a2:5e0c:d03c with SMTP id o6-20020ac24c46000000b004a25e0cd03cmr8776005lfk.607.1667393439277;
-        Wed, 02 Nov 2022 05:50:39 -0700 (PDT)
-Received: from eldfell ([194.136.85.206])
-        by smtp.gmail.com with ESMTPSA id m2-20020a056512358200b004acff58a951sm2006697lfr.133.2022.11.02.05.50.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 02 Nov 2022 05:50:39 -0700 (PDT)
-Date: Wed, 2 Nov 2022 14:50:36 +0200
-From: Pekka Paalanen <ppaalanen@gmail.com>
-To: Christian =?UTF-8?B?S8O2bmln?= <ckoenig.leichtzumerken@gmail.com>
-Message-ID: <20221102145036.30c70134@eldfell>
-In-Reply-To: <cc470b3d-a611-044f-2b35-cc827c962f9b@gmail.com>
-References: <20221020121316.3946-1-christian.koenig@amd.com>
-	<3d7353f3fa5905ce18e5b2d92f758f098189bc5a.camel@pengutronix.de>
-	<7f5eff36-6886-bb06-061a-dd4263b61605@gmail.com>
-	<f5de84cfe81fee828bbe0d47d379028d28ef6ca6.camel@pengutronix.de>
-	<e02cedc2-6741-8813-a7a5-f8769e301745@gmail.com>
-	<a53e5df51ec0f2f9d4c2d377c0cc5ba85f2e58ff.camel@ndufresne.ca>
-	<9d716641-55c6-1590-26c2-1c3b14a28226@gmail.com>
-	<CAPj87rMPkmimR_RJHhxYZokH__TVpPArk0h6drOUSx7Z9+oAHA@mail.gmail.com>
-	<11a6f97c-e45f-f24b-8a73-48d5a388a2cc@gmail.com>
-	<caf4d6b82843788db97555a58bc9e33915e5b50a.camel@ndufresne.ca>
-	<b422be59-4b4b-2d0d-8e8c-b19f27c6832e@gmail.com>
-	<20221102141954.7d362068@eldfell>
-	<cc470b3d-a611-044f-2b35-cc827c962f9b@gmail.com>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Q2uaugI2bLKCRBQDyZF1zpLdxkje5gCBBYFZp43Wd6I=;
+        b=D9/cTo8r7c7trcqiB33lnlyOXNVH8D+j6XWN8bkxAbb7m+FggTKdR91POChbUW8vAt
+         peLvBABgBxtmbJgsq/pLyfe8Zr+oTi9GIFlpDRmqB9weismlH0TFp9U5+XqhoS0A0NuC
+         Rrt0DtMkgGgVPn4o4NTvBoPBxWcqc6NlhMjfxIeTXvamq9Z+oLrqhH6cR1VgI+Dz525C
+         9QF67rKCjoOqdkRf4vPsqBWChA7PYo5lKjaRiEEddbW0dW4WL+y1jx/Lkh0/3DTpW/9o
+         vTiHXe4bqJqFLd6OH7HvCrXzHQgZ5kfJ6RALf394UuuL9HmE++OsIyRMwd31ctnGmktw
+         OqYQ==
+X-Gm-Message-State: ACrzQf069pODcntLECEsua0Cz/9bFdw5IfgNEvOdGzhXZGL/Zup7AMU0
+	Qj1pyNnwNwDcnbziH8RAGX8=
+X-Google-Smtp-Source: AMsMyM5IIyHjuOylE5jH3gft4kmid2ugmwS2wPXe6BGGQMGneACXLozhaKbdbEpnNQo6DfccibWy3Q==
+X-Received: by 2002:a17:906:9510:b0:7ad:fd3e:124b with SMTP id u16-20020a170906951000b007adfd3e124bmr4478279ejx.502.1667393797560;
+        Wed, 02 Nov 2022 05:56:37 -0700 (PDT)
+Received: from ?IPV6:2a02:908:1256:79a0:576c:b102:647e:9ffd? ([2a02:908:1256:79a0:576c:b102:647e:9ffd])
+        by smtp.gmail.com with ESMTPSA id bo19-20020a170906d05300b007acbac07f07sm5413014ejb.51.2022.11.02.05.56.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 02 Nov 2022 05:56:36 -0700 (PDT)
+Message-ID: <35eeda2b-4570-4871-73f2-18b880b84284@gmail.com>
+Date: Wed, 2 Nov 2022 13:56:36 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+Content-Language: en-US
+To: Pekka Paalanen <ppaalanen@gmail.com>
+References: <20221020121316.3946-1-christian.koenig@amd.com>
+ <3d7353f3fa5905ce18e5b2d92f758f098189bc5a.camel@pengutronix.de>
+ <7f5eff36-6886-bb06-061a-dd4263b61605@gmail.com>
+ <f5de84cfe81fee828bbe0d47d379028d28ef6ca6.camel@pengutronix.de>
+ <e02cedc2-6741-8813-a7a5-f8769e301745@gmail.com>
+ <a53e5df51ec0f2f9d4c2d377c0cc5ba85f2e58ff.camel@ndufresne.ca>
+ <9d716641-55c6-1590-26c2-1c3b14a28226@gmail.com>
+ <CAPj87rMPkmimR_RJHhxYZokH__TVpPArk0h6drOUSx7Z9+oAHA@mail.gmail.com>
+ <11a6f97c-e45f-f24b-8a73-48d5a388a2cc@gmail.com>
+ <caf4d6b82843788db97555a58bc9e33915e5b50a.camel@ndufresne.ca>
+ <b422be59-4b4b-2d0d-8e8c-b19f27c6832e@gmail.com>
+ <20221102141954.7d362068@eldfell>
+ <cc470b3d-a611-044f-2b35-cc827c962f9b@gmail.com>
+ <20221102145036.30c70134@eldfell>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
+In-Reply-To: <20221102145036.30c70134@eldfell>
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: ----
-X-Rspamd-Queue-Id: 9BDB53EEC1
-X-Spamd-Result: default: False [-4.10 / 15.00];
+X-Spamd-Bar: --------
+X-Rspamd-Queue-Id: 850EB3EEC1
+X-Spamd-Result: default: False [-8.00 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-0.997];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.50:from];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	MIME_GOOD(-0.10)[text/plain];
+	MID_RHS_MATCH_FROM(0.00)[];
 	ARC_NA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.982];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[ndufresne.ca,fooishbar.org,pengutronix.de,linaro.org,ffwll.ch,gmail.com,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_THREE(0.00)[3];
-	DKIM_TRACE(0.00)[gmail.com:+];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	FROM_EQ_ENVFROM(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.48:from];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	FREEMAIL_TO(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: MERTUV6N6M66EAHBHKJEOJ3NA3L62MVO
-X-Message-ID-Hash: MERTUV6N6M66EAHBHKJEOJ3NA3L62MVO
-X-MailFrom: ppaalanen@gmail.com
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_CC(0.00)[ndufresne.ca,fooishbar.org,pengutronix.de,linaro.org,ffwll.ch,gmail.com,lists.freedesktop.org,lists.linaro.org,vger.kernel.org]
+Message-ID-Hash: VHJLASFZ654QGZBBWGPB7G3O4UGUKSHR
+X-Message-ID-Hash: VHJLASFZ654QGZBBWGPB7G3O4UGUKSHR
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Nicolas Dufresne <nicolas@ndufresne.ca>, Daniel Stone <daniel@fooishbar.org>, sumit.semwal@linaro.org, daniel@ffwll.ch, robdclark@gmail.com, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MERTUV6N6M66EAHBHKJEOJ3NA3L62MVO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VHJLASFZ654QGZBBWGPB7G3O4UGUKSHR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============3813717500180115569=="
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
---===============3813717500180115569==
-Content-Type: multipart/signed; boundary="Sig_/brihWUWYCZRWXADe2oqnIE7";
- protocol="application/pgp-signature"; micalg=pgp-sha256
-
---Sig_/brihWUWYCZRWXADe2oqnIE7
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, 2 Nov 2022 13:27:18 +0100
-Christian K=C3=B6nig <ckoenig.leichtzumerken@gmail.com> wrote:
-
-> Am 02.11.22 um 13:19 schrieb Pekka Paalanen:
-> > On Wed, 2 Nov 2022 12:18:01 +0100
-> > Christian K=C3=B6nig <ckoenig.leichtzumerken@gmail.com> wrote:
-> > =20
-> >> Am 01.11.22 um 22:09 schrieb Nicolas Dufresne: =20
-> >>> [SNIP] =20
-> >>>>> But the client is just a video player. It doesn't understand how to
-> >>>>> allocate BOs for Panfrost or AMD or etnaviv. So without a universal
-> >>>>> allocator (again ...), 'just allocate on the GPU' isn't a useful
-> >>>>> response to the client. =20
-> >>>> Well exactly that's the point I'm raising: The client *must* underst=
-and
-> >>>> that!
-> >>>>
-> >>>> See we need to be able to handle all restrictions here, coherency of=
- the
-> >>>> data is just one of them.
-> >>>>
-> >>>> For example the much more important question is the location of the =
-data
-> >>>> and for this allocating from the V4L2 device is in most cases just n=
-ot
-> >>>> going to fly. =20
-> >>> It feels like this is a generic statement and there is no reason it c=
-ould not be
-> >>> the other way around. =20
-> >> And exactly that's my point. You always need to look at both ways to
-> >> share the buffer and can't assume that one will always work.
-> >>
-> >> As far as I can see it you guys just allocate a buffer from a V4L2
-> >> device, fill it with data and send it to Wayland for displaying.
-> >>
-> >> To be honest I'm really surprised that the Wayland guys hasn't pushed
-> >> back on this practice already. =20
-> > What should we Wayland people be pushing back on exactly? And where is
-> > our authority and opportunity to do so?
-> >
-> > The Wayland protocol dmabuf extension allows a graceful failure if the
-> > Wayland compositor cannot use the given dmabuf at all, giving the
-> > client an opportunity to try something else. =20
->=20
-> That's exactly what I meant with pushing back :)
->=20
-> I wasn't aware that this handling is already implemented.
-
-Well... it's "optional". The Wayland dmabuf protocol has two cases for
-a client/app:
-
-a) you do the right thing and wait for the compositor to ack that the
-   dmabuf works (the reply should come pretty much immediately, not
-   needing the compositor to actually composite), or
-
-b) you just send the dmabuf and continue as if it always worked. If it
-   doesn't, you might get a protocol error later and be disconnected.
-
-Guess which one Mesa uses?
-
-I've been told Mesa has no way to handle a failure there, so it
-doesn't. I would not be surprised if others just copy that behaviour.
-
-I recall personally being against adding option b) to begin with, but
-there it is, added for Mesa IIRC.
-
-
-> > The Wayland protocol also
-> > tells clients which DRM rendering device at minimum the dmabuf needs to
-> > be compatible with. It even tells which KMS device the dmabuf could be
-> > put on direct scanout if the dmabuf was suitable for that and direct
-> > scanout is otherwise possible. =20
->=20
-> Yeah, perfect. Exactly that's what's needed here.
->=20
-> > What the client (application) does with all that information is up to
-> > the client. That code is not part of Wayland.
-> >
-> > I'm sure we would be happy to add protocol for anything that
-> > https://github.com/cubanismo/allocator needs to become the universal
-> > optimal buffer allocator library. =20
->=20
->  From what you wrote it's already perfectly covered.
-
-Cool. Now if clients would just use it...
-
-
-Thanks,
-pq
-
-> >> This only works because the Wayland as well as X display pipeline is
-> >> smart enough to insert an extra copy when it find that an imported
-> >> buffer can't be used as a framebuffer directly. =20
-> > The only fallback Wayland compositors tend to do is use OpenGL/Vulkan
-> > rendering for composition if direct scanout on a KMS plane does not
-> > work. There are many reasons why direct scanout may not be possible in
-> > addition to hardware and drivers not agreeing to do it with the given
-> > set of buffers.
-> >
-> > A general purpose (read: desktop) Wayland compositor simply cannot live
-> > without being able to fall back from KMS composition to software/GPU
-> > composition.
-> >
-> > But yes, there are use cases where that fallback is as good as failing
-> > completely. Those are not desktops but more like set-top-boxes and TVs.=
- =20
->=20
-> Completely agree to this approach.
->=20
-> The only problem is that media players tend to not implement a way to=20
-> allow direct scanout because of those fallback paths.
->=20
-> But as you said that's their decision.
->=20
-> Thanks,
-> Christian.
->=20
-> >
-> >
-> > Thanks,
-> > pq =20
->=20
-
-
---Sig_/brihWUWYCZRWXADe2oqnIE7
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmNiZ5wACgkQI1/ltBGq
-qqepyA/9GV9P033rXPCFrilvhhuN6shjhxVt6YoTMEwhVB+CLWe7HdpIev6TY58S
-QwGy3o+42LXeMy/JvbQZuGJSi/EmlaMAXwACcp86v2iDgW3w19yolbYU6D/OqhUJ
-7WgeRkn7ecdc3io+UTr8z8nsBCBjJYZvd/0WRmtiLbPm4KUR5f+Mja9BBh7XNoOh
-6ddhKTuvI+zPL+EnCahyuosaesBgApVq+wxThaG457dLMF1j8GgsOhGDpIKpLvGm
-CJ/BhpVLJW4+neDP0qDwWjYks2Pze/9fW+K64J7qyDv2CYa2CxqIV1v2mcU0wRFs
-5wwKDNNpQfpPcZtiGPUuqn39TgNWRj8TGk4DAglC33MY5FN3a+Aj7y6ljpzVGAFR
-df59hBlaPajNOtJxajiFZjcHWU+sKvSV21yYQZRH+8v+eC/2Z3oJToY8P/8fAaWe
-mkcTaECcpN/cHs/bIRo7lCVVwat/vaCJ5eoLgigASgH+Jjl0wAEXXRTUTciiT2Ju
-qlbpmNVHTMEtNfN4stlQoo7eGePT8zKOb4Tg6Ln+97pTB5PTH+kdDFu9mR8uF6qm
-ctpNYXrjwtvGVPYesun1lC1l57suM/RUsxYIxMgpCHedGhplb+th0j3C2XaMcWN4
-RDFbglgw/rAcblzV2xrlLSH7+OWRasM8L8lMGrCRlJqZkQdyiPM=
-=kAMo
------END PGP SIGNATURE-----
-
---Sig_/brihWUWYCZRWXADe2oqnIE7--
-
---===============3813717500180115569==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============3813717500180115569==--
+QW0gMDIuMTEuMjIgdW0gMTM6NTAgc2NocmllYiBQZWtrYSBQYWFsYW5lbjoNCj4gT24gV2VkLCAy
+IE5vdiAyMDIyIDEzOjI3OjE4ICswMTAwDQo+IENocmlzdGlhbiBLw7ZuaWcgPGNrb2VuaWcubGVp
+Y2h0enVtZXJrZW5AZ21haWwuY29tPiB3cm90ZToNCj4NCj4+IEFtIDAyLjExLjIyIHVtIDEzOjE5
+IHNjaHJpZWIgUGVra2EgUGFhbGFuZW46DQo+Pj4gT24gV2VkLCAyIE5vdiAyMDIyIDEyOjE4OjAx
+ICswMTAwDQo+Pj4gQ2hyaXN0aWFuIEvDtm5pZyA8Y2tvZW5pZy5sZWljaHR6dW1lcmtlbkBnbWFp
+bC5jb20+IHdyb3RlOg0KPj4+ICAgDQo+Pj4+IEFtIDAxLjExLjIyIHVtIDIyOjA5IHNjaHJpZWIg
+Tmljb2xhcyBEdWZyZXNuZToNCj4+Pj4+IFtTTklQXQ0KPj4+Pj4+PiBCdXQgdGhlIGNsaWVudCBp
+cyBqdXN0IGEgdmlkZW8gcGxheWVyLiBJdCBkb2Vzbid0IHVuZGVyc3RhbmQgaG93IHRvDQo+Pj4+
+Pj4+IGFsbG9jYXRlIEJPcyBmb3IgUGFuZnJvc3Qgb3IgQU1EIG9yIGV0bmF2aXYuIFNvIHdpdGhv
+dXQgYSB1bml2ZXJzYWwNCj4+Pj4+Pj4gYWxsb2NhdG9yIChhZ2FpbiAuLi4pLCAnanVzdCBhbGxv
+Y2F0ZSBvbiB0aGUgR1BVJyBpc24ndCBhIHVzZWZ1bA0KPj4+Pj4+PiByZXNwb25zZSB0byB0aGUg
+Y2xpZW50Lg0KPj4+Pj4+IFdlbGwgZXhhY3RseSB0aGF0J3MgdGhlIHBvaW50IEknbSByYWlzaW5n
+OiBUaGUgY2xpZW50ICptdXN0KiB1bmRlcnN0YW5kDQo+Pj4+Pj4gdGhhdCENCj4+Pj4+Pg0KPj4+
+Pj4+IFNlZSB3ZSBuZWVkIHRvIGJlIGFibGUgdG8gaGFuZGxlIGFsbCByZXN0cmljdGlvbnMgaGVy
+ZSwgY29oZXJlbmN5IG9mIHRoZQ0KPj4+Pj4+IGRhdGEgaXMganVzdCBvbmUgb2YgdGhlbS4NCj4+
+Pj4+Pg0KPj4+Pj4+IEZvciBleGFtcGxlIHRoZSBtdWNoIG1vcmUgaW1wb3J0YW50IHF1ZXN0aW9u
+IGlzIHRoZSBsb2NhdGlvbiBvZiB0aGUgZGF0YQ0KPj4+Pj4+IGFuZCBmb3IgdGhpcyBhbGxvY2F0
+aW5nIGZyb20gdGhlIFY0TDIgZGV2aWNlIGlzIGluIG1vc3QgY2FzZXMganVzdCBub3QNCj4+Pj4+
+PiBnb2luZyB0byBmbHkuDQo+Pj4+PiBJdCBmZWVscyBsaWtlIHRoaXMgaXMgYSBnZW5lcmljIHN0
+YXRlbWVudCBhbmQgdGhlcmUgaXMgbm8gcmVhc29uIGl0IGNvdWxkIG5vdCBiZQ0KPj4+Pj4gdGhl
+IG90aGVyIHdheSBhcm91bmQuDQo+Pj4+IEFuZCBleGFjdGx5IHRoYXQncyBteSBwb2ludC4gWW91
+IGFsd2F5cyBuZWVkIHRvIGxvb2sgYXQgYm90aCB3YXlzIHRvDQo+Pj4+IHNoYXJlIHRoZSBidWZm
+ZXIgYW5kIGNhbid0IGFzc3VtZSB0aGF0IG9uZSB3aWxsIGFsd2F5cyB3b3JrLg0KPj4+Pg0KPj4+
+PiBBcyBmYXIgYXMgSSBjYW4gc2VlIGl0IHlvdSBndXlzIGp1c3QgYWxsb2NhdGUgYSBidWZmZXIg
+ZnJvbSBhIFY0TDINCj4+Pj4gZGV2aWNlLCBmaWxsIGl0IHdpdGggZGF0YSBhbmQgc2VuZCBpdCB0
+byBXYXlsYW5kIGZvciBkaXNwbGF5aW5nLg0KPj4+Pg0KPj4+PiBUbyBiZSBob25lc3QgSSdtIHJl
+YWxseSBzdXJwcmlzZWQgdGhhdCB0aGUgV2F5bGFuZCBndXlzIGhhc24ndCBwdXNoZWQNCj4+Pj4g
+YmFjayBvbiB0aGlzIHByYWN0aWNlIGFscmVhZHkuDQo+Pj4gV2hhdCBzaG91bGQgd2UgV2F5bGFu
+ZCBwZW9wbGUgYmUgcHVzaGluZyBiYWNrIG9uIGV4YWN0bHk/IEFuZCB3aGVyZSBpcw0KPj4+IG91
+ciBhdXRob3JpdHkgYW5kIG9wcG9ydHVuaXR5IHRvIGRvIHNvPw0KPj4+DQo+Pj4gVGhlIFdheWxh
+bmQgcHJvdG9jb2wgZG1hYnVmIGV4dGVuc2lvbiBhbGxvd3MgYSBncmFjZWZ1bCBmYWlsdXJlIGlm
+IHRoZQ0KPj4+IFdheWxhbmQgY29tcG9zaXRvciBjYW5ub3QgdXNlIHRoZSBnaXZlbiBkbWFidWYg
+YXQgYWxsLCBnaXZpbmcgdGhlDQo+Pj4gY2xpZW50IGFuIG9wcG9ydHVuaXR5IHRvIHRyeSBzb21l
+dGhpbmcgZWxzZS4NCj4+IFRoYXQncyBleGFjdGx5IHdoYXQgSSBtZWFudCB3aXRoIHB1c2hpbmcg
+YmFjayA6KQ0KPj4NCj4+IEkgd2Fzbid0IGF3YXJlIHRoYXQgdGhpcyBoYW5kbGluZyBpcyBhbHJl
+YWR5IGltcGxlbWVudGVkLg0KPiBXZWxsLi4uIGl0J3MgIm9wdGlvbmFsIi4gVGhlIFdheWxhbmQg
+ZG1hYnVmIHByb3RvY29sIGhhcyB0d28gY2FzZXMgZm9yDQo+IGEgY2xpZW50L2FwcDoNCj4NCj4g
+YSkgeW91IGRvIHRoZSByaWdodCB0aGluZyBhbmQgd2FpdCBmb3IgdGhlIGNvbXBvc2l0b3IgdG8g
+YWNrIHRoYXQgdGhlDQo+ICAgICBkbWFidWYgd29ya3MgKHRoZSByZXBseSBzaG91bGQgY29tZSBw
+cmV0dHkgbXVjaCBpbW1lZGlhdGVseSwgbm90DQo+ICAgICBuZWVkaW5nIHRoZSBjb21wb3NpdG9y
+IHRvIGFjdHVhbGx5IGNvbXBvc2l0ZSksIG9yDQo+DQo+IGIpIHlvdSBqdXN0IHNlbmQgdGhlIGRt
+YWJ1ZiBhbmQgY29udGludWUgYXMgaWYgaXQgYWx3YXlzIHdvcmtlZC4gSWYgaXQNCj4gICAgIGRv
+ZXNuJ3QsIHlvdSBtaWdodCBnZXQgYSBwcm90b2NvbCBlcnJvciBsYXRlciBhbmQgYmUgZGlzY29u
+bmVjdGVkLg0KPg0KPiBHdWVzcyB3aGljaCBvbmUgTWVzYSB1c2VzPw0KPg0KPiBJJ3ZlIGJlZW4g
+dG9sZCBNZXNhIGhhcyBubyB3YXkgdG8gaGFuZGxlIGEgZmFpbHVyZSB0aGVyZSwgc28gaXQNCj4g
+ZG9lc24ndC4gSSB3b3VsZCBub3QgYmUgc3VycHJpc2VkIGlmIG90aGVycyBqdXN0IGNvcHkgdGhh
+dCBiZWhhdmlvdXIuDQo+DQo+IEkgcmVjYWxsIHBlcnNvbmFsbHkgYmVpbmcgYWdhaW5zdCBhZGRp
+bmcgb3B0aW9uIGIpIHRvIGJlZ2luIHdpdGgsIGJ1dA0KPiB0aGVyZSBpdCBpcywgYWRkZWQgZm9y
+IE1lc2EgSUlSQy4NCg0KV2VsbCBJJ20gbm90IHN1cmUgaWYgdGhvc2UgcHJvamVjdHMgYWN0dWFs
+bHkgdXNlZCBYIG9yIFdheWxhbmQsIGJ1dCB3ZSANCmRpZCBoYWQgY2FzZXMgd2hlcmUgdGhpcyB3
+YXMgcmVhbGx5IHVzZWQuDQoNCklJUkMgaW4gdGhlIGNhc2Ugb2YgUHJpbWUgb2ZmbG9hZGluZyB3
+ZSBub3cgYWxsb2NhdGUgYSBidWZmZXIgZnJvbSB0aGUgDQpkaXNwbGF5aW5nIGRldmljZSBpbiBN
+ZXNhIGFuZCBkbyB0aGUgY29weSBmcm9tIHRoZSByZW5kZXJpbmcgR1BVIHRvIHRoZSANCmRpc3Bs
+YXlpbmcgR1BVIG9uIHRoZSBjbGllbnQgc2lkZS4NCg0KVGhlIGJhY2tncm91bmQgaXMgdGhhdCB0
+aGlzIGdhdmUgdXMgbXVjaCBiZXR0ZXIgY29udHJvbCB3aGljaCBlbmdpbmUgYW5kIA0KcGFyYW1l
+dGVycyB3aGVyZSB1c2VkIGZvciB0aGUgY29weSByZXN1bHRpbmcgaW4gYSBuaWNlIHBlcmZvcm1h
+bmNlIA0KaW1wcm92ZW1lbnQuDQoNClJlZ2FyZHMsDQpDaHJpc3RpYW4uDQpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcg
+bGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2Vu
+ZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
