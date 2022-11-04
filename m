@@ -2,187 +2,141 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8ACD8619CA2
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Nov 2022 17:10:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C9A9F619DF4
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Nov 2022 18:00:52 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9685B3F5C5
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Nov 2022 16:10:58 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by lists.linaro.org (Postfix) with ESMTPS id 13F543EDA1
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  4 Nov 2022 16:10:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E3B1F3F5C2
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Nov 2022 17:00:51 +0000 (UTC)
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
+	by lists.linaro.org (Postfix) with ESMTPS id 091B93EC14
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  4 Nov 2022 17:00:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ti.com header.s=ti-com-17Q1 header.b=iglOzJpT;
-	spf=pass (lists.linaro.org: domain of afd@ti.com designates 198.47.19.141 as permitted sender) smtp.mailfrom=afd@ti.com;
-	dmarc=pass (policy=quarantine) header.from=ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 2A4GAJ5N025672;
-	Fri, 4 Nov 2022 11:10:19 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1667578219;
-	bh=KxtxHFsnZX9YIDaI0wAJ3iyWAqdOhCP8AGovocZ1JOk=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=iglOzJpT3q300lvNyu4s4lSRe2zhxnlCLVHnNwoRm0xMww3orA7uNjQmYzwZI/kYA
-	 cF/E19SN/mnviN9UnkS4vrKlLm7WdlbwaVTHbpBLz6hkcEYrO50+m2cuf1fjgGhFy8
-	 CXGspE7Q1MuzYsy9boaR/mtMFsvV/ksEnL0sAMgM=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 2A4GAJ9n015161
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Fri, 4 Nov 2022 11:10:19 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6; Fri, 4 Nov
- 2022 11:10:18 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.6 via
- Frontend Transport; Fri, 4 Nov 2022 11:10:18 -0500
-Received: from [10.250.38.44] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
-	by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 2A4GAIkD036385;
-	Fri, 4 Nov 2022 11:10:18 -0500
-Message-ID: <f4a4cb29-55d1-dd4f-e49b-5c6d7a845dda@ti.com>
-Date: Fri, 4 Nov 2022 11:10:17 -0500
+	dkim=pass header.d=linux-foundation.org header.s=google header.b=TyCMiI4A;
+	spf=pass (lists.linaro.org: domain of torvalds@linuxfoundation.org designates 209.85.167.175 as permitted sender) smtp.mailfrom=torvalds@linuxfoundation.org;
+	dmarc=none
+Received: by mail-oi1-f175.google.com with SMTP id m204so5786109oib.6
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 04 Nov 2022 10:00:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linux-foundation.org; s=google;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=/jNIi3NLp/0QE0eLEgGhnlZnXslRxZtVSsauwMnJ52A=;
+        b=TyCMiI4ARMPxd18RVlEv+qm2LWR7zC104Hlivn40qb5lZJslIeDFuCNMNvjneFE/Nj
+         LFwCX5vAwmEX/R8qjGO9x9K9/hgdwoRd2q59WUqMzWoiDvISQjer+tTT1jJ7UfSLA8Vn
+         fR3VeAjk206NeR5DC2lSXJH82ZME8JVM9jplc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/jNIi3NLp/0QE0eLEgGhnlZnXslRxZtVSsauwMnJ52A=;
+        b=3H/v+9aDOYpKhcvcezn+2/KsbSI9JJd05ScOrDXhyb/x9IrJy4GRI94x0y+b307AFK
+         b11iaqgRTGlujA5D5xnc/vfDizXr8eZv77028XGyrRdJnNINxpiZ7JpkULpF1QpBSnoK
+         9OSYkb82o1rJEGeSUvk58JXtEYMixUFdlIA3FzDfTnfLoxoXzx52WQJ9WOUeCiWWa/Pa
+         i5s7cWW2aNqcB/8z8T1WgHZHXWiJGAK6ZpUuX1UPdUnZ64EBtAF9npN4gRgkrSYfKqXH
+         Zip2pRa3jt0SGwSF9+GonKQQiQS2VbdlgyhELt3l97gJcqLN/D5YOBPVOu01yVAICpma
+         pUIA==
+X-Gm-Message-State: ACrzQf3Kv5v0rK4C77rQKQBGMEl64SLziQ7LiIxrxV7uB3OQoUFUhjQo
+	kxyHKgvKEgDZuOwBIavUin4+359BMfsFcw==
+X-Google-Smtp-Source: AMsMyM4u+w4lqwZZm1+5rgVvI6up/HrBMiJEQUgvGIDAmK5waSxjihjsc2oMVGiGZinYubWykav5eA==
+X-Received: by 2002:a05:6808:1204:b0:345:b8ec:6366 with SMTP id a4-20020a056808120400b00345b8ec6366mr20681993oil.139.1667581233827;
+        Fri, 04 Nov 2022 10:00:33 -0700 (PDT)
+Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com. [209.85.210.42])
+        by smtp.gmail.com with ESMTPSA id g18-20020a9d6a12000000b00666a5b5d20fsm1614007otn.32.2022.11.04.10.00.30
+        for <linaro-mm-sig@lists.linaro.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 04 Nov 2022 10:00:31 -0700 (PDT)
+Received: by mail-ot1-f42.google.com with SMTP id d26-20020a05683018fa00b0066ab705617aso2971061otf.13
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 04 Nov 2022 10:00:30 -0700 (PDT)
+X-Received: by 2002:a81:8241:0:b0:370:5fad:47f0 with SMTP id
+ s62-20020a818241000000b003705fad47f0mr27409344ywf.441.1667581219811; Fri, 04
+ Nov 2022 10:00:19 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Content-Language: en-US
-To: Dawei Li <set_pte_at@outlook.com>, <sumit.semwal@linaro.org>,
-        <christian.koenig@amd.com>
-References: <TYCP286MB2323873BBDF88020781FB986CA3B9@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <TYCP286MB2323873BBDF88020781FB986CA3B9@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20221104054053.431922658@goodmis.org>
+In-Reply-To: <20221104054053.431922658@goodmis.org>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Date: Fri, 4 Nov 2022 10:00:03 -0700
+X-Gmail-Original-Message-ID: <CAHk-=whKE5UL+AuCC2wK8oq8D_ueSO_T7-9Acx4POouqVi8ZHg@mail.gmail.com>
+Message-ID: <CAHk-=whKE5UL+AuCC2wK8oq8D_ueSO_T7-9Acx4POouqVi8ZHg@mail.gmail.com>
+To: Steven Rostedt <rostedt@goodmis.org>
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: --------
-X-Rspamd-Queue-Id: 13F543EDA1
-X-Spamd-Result: default: False [-8.00 / 15.00];
+X-Spamd-Bar: -----
+X-Rspamd-Queue-Id: 091B93EC14
+X-Spamd-Result: default: False [-5.65 / 15.00];
 	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[ti.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:198.47.19.0/24];
-	R_DKIM_ALLOW(-0.20)[ti.com:s=ti-com-17Q1];
+	BAYES_HAM(-2.95)[99.77%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	FORGED_SENDER(0.30)[torvalds@linux-foundation.org,torvalds@linuxfoundation.org];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	NEURAL_HAM(-0.00)[-0.997];
-	FREEMAIL_TO(0.00)[outlook.com,linaro.org,amd.com];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail-oi1-f175.google.com:helo,mail-oi1-f175.google.com:rdns];
+	NEURAL_HAM(-0.00)[-0.994];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.175:from];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:161, ipnet:198.47.19.0/24, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ti.com:dkim,ti.com:email,outlook.com:email];
-	DKIM_TRACE(0.00)[ti.com:+];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[43];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[linux-foundation.org:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	FROM_NEQ_ENVFROM(0.00)[torvalds@linux-foundation.org,torvalds@linuxfoundation.org];
 	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[6];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	TO_DN_SOME(0.00)[];
+	ARC_NA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[157.170.170.21:received];
-	ARC_NA(0.00)[]
-Message-ID-Hash: CUUTEYPLALATH6RHG4FN7ARH3COD7GGD
-X-Message-ID-Hash: CUUTEYPLALATH6RHG4FN7ARH3COD7GGD
-X-MailFrom: afd@ti.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: benjamin.gaignard@collabora.com, labbott@redhat.com, Brian.Starkey@arm.com, jstultz@google.com, sspatil@android.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+	TO_DN_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[209.85.210.42:received];
+	DMARC_NA(0.00)[linux-foundation.org];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
+Message-ID-Hash: EPCQWYAETFMECKWKN26SDSUIGZA4DRWZ
+X-Message-ID-Hash: EPCQWYAETFMECKWKN26SDSUIGZA4DRWZ
+X-MailFrom: torvalds@linuxfoundation.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: linux-kernel@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>, Stephen Boyd <sboyd@kernel.org>, Guenter Roeck <linux@roeck-us.net>, Anna-Maria Gleixner <anna-maria@linutronix.de>, Andrew Morton <akpm@linux-foundation.org>, rcu@vger.kernel.org, linux-doc@vger.kernel.org, linux-s390@vger.kernel.org, linux-sh@vger.kernel.org, linux-edac@vger.kernel.org, cgroups@vger.kernel.org, linux-block@vger.kernel.org, linux-acpi@vger.kernel.org, linux-atm-general@lists.sourceforge.net, netdev@vger.kernel.org, linux-pm@vger.kernel.org, drbd-dev@lists.linbit.com, linux-bluetooth@vger.kernel.org, openipmi-developer@lists.sourceforge.net, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org, linux-input@vger.kernel.org, linux-parisc@vger.kernel.org, linux-leds@vger.kernel.org, intel-wired-lan@lists.osuosl.org, linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org, linux-scsi@vger.kernel.org, linux-staging@lists.linux.
+ dev, linux-ext4@vger.kernel.org, linux-nilfs@vger.kernel.org, bridge@lists.linux-foundation.org, netfilter-devel@vger.kernel.org, coreteam@netfilter.org, lvs-devel@vger.kernel.org, linux-afs@lists.infradead.org, linux-nfs@vger.kernel.org, tipc-discussion@lists.sourceforge.net, alsa-devel@alsa-project.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4] dma-buf: fix racing conflict of dma_heap_add()
+Subject: [Linaro-mm-sig] Re: [RFC][PATCH v3 00/33] timers: Use timer_shutdown*() before freeing timers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CUUTEYPLALATH6RHG4FN7ARH3COD7GGD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EPCQWYAETFMECKWKN26SDSUIGZA4DRWZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 11/4/22 11:05 AM, Dawei Li wrote:
-> Racing conflict could be:
-> task A                 task B
-> list_for_each_entry
-> strcmp(h->name))
->                         list_for_each_entry
->                         strcmp(h->name)
-> kzalloc                kzalloc
-> ......                 .....
-> device_create          device_create
-> list_add
->                         list_add
-> 
-> The root cause is that task B has no idea about the fact someone
-> else(A) has inserted heap with same name when it calls list_add,
-> so a potential collision occurs.
-> 
-> Fixes: c02a81fba74f ("dma-buf: Add dma-buf heaps framework")
-> Signed-off-by: Dawei Li <set_pte_at@outlook.com>
+On Thu, Nov 3, 2022 at 10:48 PM Steven Rostedt <rostedt@goodmis.org> wrote:
+>
+> Ideally, I would have the first patch go into this rc cycle, which is mostly
+> non functional as it will allow the other patches to come in via the respective
+> subsystems in the next merge window.
 
-LGTM, Thanks,
+Ack.
 
-Acked-by: Andrew Davis <afd@ti.com>
+I also wonder if we could do the completely trivially correct
+conversions immediately.
 
-> ---
-> v1: https://lore.kernel.org/all/TYCP286MB2323950197F60FC3473123B7CA349@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM/
-> v1->v2: Narrow down locking scope, check the existence of heap before
-> insertion, as suggested by Andrew Davis.
-> v2->v3: Remove double checking.
-> v3->v4: Minor coding style and patch formatting adjustment.
-> ---
->   drivers/dma-buf/dma-heap.c | 28 +++++++++++++++-------------
->   1 file changed, 15 insertions(+), 13 deletions(-)
-> 
-> diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
-> index 8f5848aa144f..59d158873f4c 100644
-> --- a/drivers/dma-buf/dma-heap.c
-> +++ b/drivers/dma-buf/dma-heap.c
-> @@ -233,18 +233,6 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
->   		return ERR_PTR(-EINVAL);
->   	}
->   
-> -	/* check the name is unique */
-> -	mutex_lock(&heap_list_lock);
-> -	list_for_each_entry(h, &heap_list, list) {
-> -		if (!strcmp(h->name, exp_info->name)) {
-> -			mutex_unlock(&heap_list_lock);
-> -			pr_err("dma_heap: Already registered heap named %s\n",
-> -			       exp_info->name);
-> -			return ERR_PTR(-EINVAL);
-> -		}
-> -	}
-> -	mutex_unlock(&heap_list_lock);
-> -
->   	heap = kzalloc(sizeof(*heap), GFP_KERNEL);
->   	if (!heap)
->   		return ERR_PTR(-ENOMEM);
-> @@ -283,13 +271,27 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
->   		err_ret = ERR_CAST(dev_ret);
->   		goto err2;
->   	}
-> -	/* Add heap to the list */
-> +
->   	mutex_lock(&heap_list_lock);
-> +	/* check the name is unique */
-> +	list_for_each_entry(h, &heap_list, list) {
-> +		if (!strcmp(h->name, exp_info->name)) {
-> +			mutex_unlock(&heap_list_lock);
-> +			pr_err("dma_heap: Already registered heap named %s\n",
-> +			       exp_info->name);
-> +			err_ret = ERR_PTR(-EINVAL);
-> +			goto err3;
-> +		}
-> +	}
-> +
-> +	/* Add heap to the list */
->   	list_add(&heap->list, &heap_list);
->   	mutex_unlock(&heap_list_lock);
->   
->   	return heap;
->   
-> +err3:
-> +	device_destroy(dma_heap_class, heap->heap_devt);
->   err2:
->   	cdev_del(&heap->heap_cdev);
->   err1:
+I'm talking about the scripted ones where it's currently a
+"del_timer_sync()", and the very next action is freeing whatever data
+structure the timer is in (possibly with something like free_irq() in
+between - my point is that there's an unconditional free that is very
+clear and unambiguous), so that there is absolutely no question about
+whether they should use "timer_shutdown_sync()" or not.
+
+IOW, things like patches 03, 17 and 31, and at least parts others in
+this series.
+
+This series clearly has several much more complex cases that need
+actual real code review, and I think it would help to have the
+completely unambiguous cases out of the way, just to get rid of noise.
+
+So I'd take that first patch, and a scripted set of "this cannot
+change any semantics" patches early.
+
+                Linus
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
