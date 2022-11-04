@@ -2,157 +2,231 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 523AA619AC8
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Nov 2022 16:00:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65238619C88
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Nov 2022 17:06:24 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6081A3F5C9
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Nov 2022 15:00:35 +0000 (UTC)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
-	by lists.linaro.org (Postfix) with ESMTPS id 285023F061
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  4 Nov 2022 15:00:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5640C3F5C2
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Nov 2022 16:06:23 +0000 (UTC)
+Received: from JPN01-OS0-obe.outbound.protection.outlook.com (mail-os0jpn01olkn2032.outbound.protection.outlook.com [40.92.98.32])
+	by lists.linaro.org (Postfix) with ESMTPS id EDD453EBC8
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  4 Nov 2022 16:06:04 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=K+Nzx7aw;
-	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.218.44 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-ej1-f44.google.com with SMTP id ud5so13997407ejc.4
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 04 Nov 2022 08:00:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=CGBWxjsREcf/mRnaEwnaOQb1KRRlx3tSPPTFXGX4lwM=;
-        b=K+Nzx7awgnEA6rpeESU2hc1sp8CI7+Uqd3AYJ90O1aJTcFOCdVIFkAo5q2L01sK+35
-         fN25CnA/+V/KXRlaq4BmVqPV9UlVZ/AqDlxzCiIVmxYXsrbzRrQehCaCy7t/3I7f6mSF
-         j/mkMOCYLHauH5LiphZmR1SLhAw3RFKaXB76x/K5R5taTrHNJ4Q2+pPWQmmWbQ9ZKH0w
-         C0ElncD8hRhheA4kWeeceaHA6Q8UuDOpVlhPaLEsL9dR5KN/zUF2t0UR9adVv9ARFdkp
-         qh2xplGVQ4J0TvZrGW/Fzw8DXOYYjiR8BK2C8zp4diTLSUIrv46WZ7vGurhi8zSIgfoQ
-         mImg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=CGBWxjsREcf/mRnaEwnaOQb1KRRlx3tSPPTFXGX4lwM=;
-        b=rs0+rAuqa0auMN5riLtlW2yv8WzN1WoR1/BaUpFr+JsKtIiqO01Ci5/oST+/j5djTJ
-         GPE2q+oiXY9CqvX+NNgaNrOM5A5vb9gRiFudSAgz7M93+dJK4O2KeRmPPBdhPz7MluQL
-         R777P65UUMicasyLkssnF0tRG+S2fTIJqzTswyG0HYksMEXSN86ZS+PnEjIeuPHNHhsH
-         2hLbuRxonwf7EsbzieLl3W1sTqfM4xbEPscuObZvcxP8rqFAAvtx89O9khxQM7kfhJzI
-         4PUimpR3PlovcoeHVV3kQb/7sxalmnFgfmEDUmlVrjhzjKSwhQ/ADYD2F9CQp8HsD1Df
-         tJug==
-X-Gm-Message-State: ACrzQf03UjPDb+1PsEyG8pRQ8J0hBFUFI0Wng+rdSNIWPLf1ONsI14wP
-	Y2pV6WH9EqiN1SqL4eMAjCQ=
-X-Google-Smtp-Source: AMsMyM4/6Xrg+nCjBO6Q4ZHslz5bGkJxxYS6HKmG/P5l/wF4GU9nJDNHE3Nygc3YDM6mHOPBDPSytg==
-X-Received: by 2002:a17:907:1188:b0:78d:8267:3379 with SMTP id uz8-20020a170907118800b0078d82673379mr321675ejb.415.1667574018116;
-        Fri, 04 Nov 2022 08:00:18 -0700 (PDT)
-Received: from ?IPV6:2a02:908:1256:79a0:8469:5663:826a:8164? ([2a02:908:1256:79a0:8469:5663:826a:8164])
-        by smtp.gmail.com with ESMTPSA id fq35-20020a1709069da300b007adb67aec1asm1900944ejc.111.2022.11.04.08.00.16
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 04 Nov 2022 08:00:17 -0700 (PDT)
-Message-ID: <6c9a7faf-b967-de0a-a4e9-6d69b4eb4b20@gmail.com>
-Date: Fri, 4 Nov 2022 16:00:15 +0100
+	dkim=pass header.d=outlook.com header.s=selector1 header.b=kpu6IZvy;
+	spf=pass (lists.linaro.org: domain of set_pte_at@outlook.com designates 40.92.98.32 as permitted sender) smtp.mailfrom=set_pte_at@outlook.com;
+	dmarc=pass (policy=none) header.from=outlook.com;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Bbh6U9XHZsCBZcAEmKFfPicrmoZ3BFtWZ4B/HuoXPzQE4JN4zvISmU/2iG5BHi0I/SSB8IXyl8EhRAS5us2k6xTnHzQtrz4rNYLA0LY3ZsISkZ5djjGlRIs8G/AfQHB3gwjbv7O55bxe+YxGKCYF03eLo3w4/KEum58fMVO8qnemW2GOIZTHz6ZU4BVKUntbEYfQLDrF59GobCKg8wYGRuTkgG3W41CIopZYD1EWT20YBRVpBvRI0dY6FWT7njiOnckAAJ3CuNVbyd3BpVphuurbhOeOTlKg4Q1WXxCzMSkoPa8rB9g56lmfqfgjOleY32w01IzkVYLRholPQr0cgQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=EAausU8rFK0NzdqFnWtnDeOC1n9wuoalCC5vsr0tk60=;
+ b=XRmUT06Zb10OBTGPTbLBJSVUfqc3S97PgJXxy6Qo/OJyVF+pGA5it0DhcrRLtRjAML94skEvg/QI53WJXCTFWnqjtvWg3YjojjDfM895amxFBq6HKmODMIVBGf9JzK+OxDQS/+U5hdsOyn7rOiNeEswzlCFUOkyc0tTyk7dEK44lTGXtRmJW02vIPVoIAvNC6YVc9FcDBHaj7jZVRxYzdt6U37zGWxQnYnZo4BoKFXr9ZAezPwWRioRR2yzfac/PKPkzJ3ywSwrcoFNzMRjWvWAZAx2Lp7K366BFnuYSj5nOUs3zgFI+JqwX6SATiVA5bVejWR/bXQRCgQ6KsPgutw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=EAausU8rFK0NzdqFnWtnDeOC1n9wuoalCC5vsr0tk60=;
+ b=kpu6IZvykMTFZzZP6X/TCqTL6ABOODX3ncl87qO7x+CaZUqKCwxJGn/QLFk11+PHmJ2O0m7jQ9MzKOSaP3sNpIJOqnKe0xr0xCeNfOoMUBX3Rvr/VDuNGGyyX6w1aCeHt4xEB0i7w8b4VCYhKSQRr04UUiisfXzKRNiXgfb+V+oIllDIxfYUu1I3LcG9RjUNoyzipxJ2j9KnVMHayGwISKJ8wwdfN5xdUD3AgX1RuniQhckGPwuwmNlFmYASwSuT1PSAjgppWAAsSsewDxolsFo7zzx21guBusAoThX6rSSIcMleRBDe5J8P5iAFYW50ZB3xoXwqR5HwBGXD37VyQg==
+Received: from TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:152::9)
+ by TYWP286MB3223.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:2d6::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5791.24; Fri, 4 Nov
+ 2022 16:06:00 +0000
+Received: from TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c90e:cbf3:c23d:43a5]) by TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c90e:cbf3:c23d:43a5%9]) with mapi id 15.20.5791.024; Fri, 4 Nov 2022
+ 16:06:00 +0000
+From: Dawei Li <set_pte_at@outlook.com>
+To: sumit.semwal@linaro.org,
+	christian.koenig@amd.com
+Date: Sat,  5 Nov 2022 00:05:36 +0800
+Message-ID: 
+ <TYCP286MB2323873BBDF88020781FB986CA3B9@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
+X-Mailer: git-send-email 2.25.1
+X-TMN: [+1ZKHlzTD/1HMwxkcwagGc0cFaIxQTFu]
+X-ClientProxiedBy: TY2PR02CA0041.apcprd02.prod.outlook.com
+ (2603:1096:404:a6::29) To TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:152::9)
+X-Microsoft-Original-Message-ID: 
+ <20221104160536.4123-1-set_pte_at@outlook.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.2.2
-Content-Language: en-US
-To: Rob Clark <robdclark@gmail.com>
-References: <20221020121316.3946-1-christian.koenig@amd.com>
- <3d7353f3fa5905ce18e5b2d92f758f098189bc5a.camel@pengutronix.de>
- <7f5eff36-6886-bb06-061a-dd4263b61605@gmail.com>
- <f5de84cfe81fee828bbe0d47d379028d28ef6ca6.camel@pengutronix.de>
- <e02cedc2-6741-8813-a7a5-f8769e301745@gmail.com>
- <a53e5df51ec0f2f9d4c2d377c0cc5ba85f2e58ff.camel@ndufresne.ca>
- <9d716641-55c6-1590-26c2-1c3b14a28226@gmail.com>
- <CAPj87rMPkmimR_RJHhxYZokH__TVpPArk0h6drOUSx7Z9+oAHA@mail.gmail.com>
- <11a6f97c-e45f-f24b-8a73-48d5a388a2cc@gmail.com>
- <caf4d6b82843788db97555a58bc9e33915e5b50a.camel@ndufresne.ca>
- <b422be59-4b4b-2d0d-8e8c-b19f27c6832e@gmail.com>
- <4fa4e5d3b1f46e46139bad069cbf5e795e63afa8.camel@pengutronix.de>
- <cc091a11-d012-d998-b7e2-8b3d616867a7@gmail.com>
- <CAF6AEGsA_AqMm2csMv_21Y8wFdbnCiYT36AEUszGK63zJM0hqw@mail.gmail.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <CAF6AEGsA_AqMm2csMv_21Y8wFdbnCiYT36AEUszGK63zJM0hqw@mail.gmail.com>
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TYCP286MB2323:EE_|TYWP286MB3223:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4522d9fd-dda1-4cb9-4da5-08dabe7e776c
+X-MS-Exchange-SLBlob-MailProps: 
+	hmxDvsT8QC9IPEq7hVSzi8CjtgIfWrB0P2xvIfdtuKc/0tqlgZnU4lfB0vqmy+0SL8Go1P/nWJhrujpcmWhOviI2CQy5eczzf2P6QlNViAm0524ANVYEC6dqDKm6kJ2AxhuAAXi8sBhW7jYXR2BMn4vuab7PL/w4E7XL9CdzT2f3WtvQprRWeukP6A9/0eP9IX2D59tO/tJSyc4ljYdxd0jMSAjOm3KL70dUpfxR0aGNb/z0xxtn7kQSFVZZnzUSRh4BM3JzRgJF5Z06rHY6CEriSsei6U6B/VR9eF5gestn+qOWSBYM3hbVoSTwzY3NkCssF6QS5Y/WGYGTCVMtOW3xjTQ9tRo8pfp+cAIHB1QxyYS4k/GzNThlc6o/EpqB3TUmL8iSrShs5CH3lfOY5pSQUZAQwxfQMWeUrICw/pnfC3aB+9wqhsub/Pp0S9736UOwHQpDeaF8FMJIP41VoCz0fGDvGbsU6G5wnOmElvHfyjfz8Z1t/49VmY7LBtH+qdiMKGvxRVuO0Vxjr37cqKvh5mSM3U7msGy4BslsAhARaKyuVHSfWOrWuFnmh9+o6TiPUA78SsgBjbX+Q5YEzJ/bBlHpHIgUAfNkDPtzzel9bYH219+U4GiAz91R48UDoMiw+T/OHXwUxvMcA1/Fet8F3NL+FmBOG5YyaQje3iTPcIYAJ3irhwkV9nO3kPnAMTySEiN5C3NRE6jBnhpKvbjbf3JaVOtaerMMR+6zjiI9I9nvaPvNbFqDY0+ecDISfOgLVHveGXA0x766KJafj4DoQXnazHrDDgeDLo+zuRjbzZDoqVAADg==
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	nu7IBIHOlDPhMuaYrdBnvYVRRF0dfixRQuPzejFZIGmybqC9VP66uAHfos7T6MC6Qhnuzou4CoXKofwA3V09fk2XI4kZ9B7Dll8Ou1aOzFIkdTO1P0G9ZLJtNSBTQsVP067Vy7bNHlgP8f2BdQUKMfBOdJiMf0VdkYO1NJbil1dCJGpTRUBpUPVw/btiGNkxNs+d0RZlcAhHEB8/5aP5a7QjO/XcHRnSLqLkC9Ab5IT43/3LVDUAdOL5rvvqfeLZ1XbWA3VxQOtTnQF6HJA71HpxVG9Ei6r/94wk4qeivp4AIMK0rO9jXnWFMwGA1lmbyHjxLRT/0cmDYi09Pg/pnXxxeKhYI6tuTWhi/sdu5uU/d6CM+tbqFO++b6oWGf3AUdRMzMGiT1peaEijDHEP7nD6ztuGD36Bb15cDxul4tL8l8K2YtmKVXHc0vrGPtCLi1qLJUxx7eBf8mOcVg5xhJTv2EdtXZdULozpOVvY7jgU8tGTRP+NzP3X+DEHZ2XzvFB8fw+xjg7fddHRzqResYYJyRTd5FSOR+DRfseHP3ZFL2VfRaeN7b/iR9sR09DMY52mZBmcmaXrReYBlL+13ZAxscjJr6Pz2/0IpZeiy5FrZ6wpTlPPOINzlGIg8c7r22VDocqZ7yraUHk7d+zherd5sRCasIbDoHI8C76XgeuUgFMQch66nzpb4lULetZP
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?us-ascii?Q?ImzAWx0EIQC9SbCxcmZTO3K7PeKDTSWsUrClVGni2cSBGE3GBYoy+M5R31Sn?=
+ =?us-ascii?Q?RRxzypqSm+UjCmNA0+M7fui9ySQFqyCgWBF853lhP9wZbwMivzSL5j2eXzpI?=
+ =?us-ascii?Q?b13NOcYMuTXL3TJy7lbPnoGvTmT13V7MbU0/LS/x+Cmf9nDzu8/pzFTfF77+?=
+ =?us-ascii?Q?hElAP70uef6Iw9hU4zFlAXT8IYrIINWXivXDeM6rulMqc172mlCnmts8dGi4?=
+ =?us-ascii?Q?JWIwsY0sqk8aD+cjMBQ40tsbshZoy3VoVqClHzNRcHXw7tyYD+7TBNHI0Rj6?=
+ =?us-ascii?Q?UXDMtP57nhWpYv+Knqs9WQshm/DkzVMHBzf58KzjTN1VOoXyMesd6As3oJH8?=
+ =?us-ascii?Q?pG+b5hIppMCM8Ns1FChhOQ/UsgWvj341uwJxoBT6KJ0rFjQ1VFshugHHrNZl?=
+ =?us-ascii?Q?eTYSgAXwpVa+nW702C0zCctNnvlcjwUyWEfukn8+EX8oj3Lf7lsiq0yr5sWy?=
+ =?us-ascii?Q?RruKdiUfqv46fseXtdEP0WeYecCqxmCxDxY0hfJFonipMRCqpG5Z/g+E+Ilm?=
+ =?us-ascii?Q?eFSg4kFPq8XzOZaTzdQGwGExxSZMSgE/yJDSvyFEbl0ioNGsdkBpuLhRCIUX?=
+ =?us-ascii?Q?25m994dZV3gSV60uVf0kLJKNLFC72KiFA/CaZ6BiKl2sa/z5GvJbQtqcPT57?=
+ =?us-ascii?Q?UmM7PJHuY4Mir1VfgTgf3PE9psEWCyhfjbY6UHTCI3hqXwnIV4BKBJ7HH+E1?=
+ =?us-ascii?Q?AGerJR6Pbd1LdNkSqJyspWzD1o8zqyrfdqEle/B0pWcyO+4L8ACW98eqT3je?=
+ =?us-ascii?Q?MBu20tGD6ar4Wx5tKucVPQ5Ke76oA8lUdPkuAz38fYlsU7OqBsiqfxvhQWqd?=
+ =?us-ascii?Q?m1J/uoVwPGo1cmM1xeWlKQ7vUGJZIXneVR/XQEtaPWTOwIQuBJIZsP8M9tfK?=
+ =?us-ascii?Q?w+aYi2oZdcrw57bWCyTwSTzgjFbqoFBwHNeYVDOpn2QhtyAtd/kkt2E9pEX/?=
+ =?us-ascii?Q?/7nTN/DDqAzvLVWKWQxOOK4tSqem+lJJPmU4y50YiTt3XKRIWX5mK7eKAJvw?=
+ =?us-ascii?Q?0Cmgf0kATUL2o/FgsM2Iow/vYt5BmBEz0JZcFTwR7IQh4FDG8fXeRjJnztDN?=
+ =?us-ascii?Q?qYE8FCKndlf+kMdfD6LdMIFWI+Ozw1XGFIPSwdVnoZtBNFy8d2aPhODAE45J?=
+ =?us-ascii?Q?TeGPIG1UoknJBj4zxafkqGAoOb6TJGYYCVywoM9tPiBOkyrZVO8NrQrxDQBd?=
+ =?us-ascii?Q?Hwo7wLQowCYbznHMqRreVabdA84rLdh57v08HGEEWpNw7wL9dWJQCFPxClJw?=
+ =?us-ascii?Q?/kDMulpcX9w/YVDvB1XOm9Gh1PIH8nlCFJBVtN1Ajw=3D=3D?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4522d9fd-dda1-4cb9-4da5-08dabe7e776c
+X-MS-Exchange-CrossTenant-AuthSource: TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Nov 2022 16:06:00.7589
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 
+	00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYWP286MB3223
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: -------
-X-Rspamd-Queue-Id: 285023F061
-X-Spamd-Result: default: False [-8.00 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[99.99%];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
+X-Spamd-Bar: ----
+X-Rspamd-Queue-Id: EDD453EBC8
+X-Spamd-Result: default: False [-4.50 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[outlook.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:40.92.0.0/15];
+	R_DKIM_ALLOW(-0.20)[outlook.com:s=selector1];
 	MIME_GOOD(-0.10)[text/plain];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ARC_NA(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	NEURAL_HAM(-0.00)[-0.981];
-	TAGGED_FROM(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail-ej1-f44.google.com:helo,mail-ej1-f44.google.com:rdns];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_DN_SOME(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a02:908:1256:79a0:8469:5663:826a:8164:received];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.44:from];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	RCVD_TLS_LAST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_CC(0.00)[pengutronix.de,ndufresne.ca,fooishbar.org,gmail.com,linaro.org,ffwll.ch,lists.freedesktop.org,lists.linaro.org,vger.kernel.org]
-Message-ID-Hash: 4YLBAYDZ62ZQYW7LHJNFNPXXYJSHSJLN
-X-Message-ID-Hash: 4YLBAYDZ62ZQYW7LHJNFNPXXYJSHSJLN
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Nicolas Dufresne <nicolas@ndufresne.ca>, Daniel Stone <daniel@fooishbar.org>, ppaalanen@gmail.com, sumit.semwal@linaro.org, daniel@ffwll.ch, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
+	NEURAL_HAM(-0.00)[-0.739];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:8075, ipnet:40.80.0.0/12, country:US];
+	FREEMAIL_ENVFROM(0.00)[outlook.com];
+	FREEMAIL_CC(0.00)[collabora.com,redhat.com,arm.com,google.com,ti.com,android.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,outlook.com];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[JPN01-OS0-obe.outbound.protection.outlook.com:helo];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	DKIM_TRACE(0.00)[outlook.com:+];
+	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	FREEMAIL_FROM(0.00)[outlook.com];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[40.92.98.32:from]
+Message-ID-Hash: O436NEZUDJ476L4VQ336WKDQZZSM33OB
+X-Message-ID-Hash: O436NEZUDJ476L4VQ336WKDQZZSM33OB
+X-MailFrom: set_pte_at@outlook.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: benjamin.gaignard@collabora.com, labbott@redhat.com, Brian.Starkey@arm.com, jstultz@google.com, afd@ti.com, sspatil@android.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Dawei Li <set_pte_at@outlook.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
+Subject: [Linaro-mm-sig] [PATCH v4] dma-buf: fix racing conflict of dma_heap_add()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4YLBAYDZ62ZQYW7LHJNFNPXXYJSHSJLN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/G2SIM44Z6PEXRQW55FC7P5TRJZZ6UYTD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-QW0gMDQuMTEuMjIgdW0gMTU6NTggc2NocmllYiBSb2IgQ2xhcms6DQo+IE9uIFdlZCwgTm92IDIs
-IDIwMjIgYXQgNToyMSBBTSBDaHJpc3RpYW4gS8O2bmlnDQo+IDxja29lbmlnLmxlaWNodHp1bWVy
-a2VuQGdtYWlsLmNvbT4gd3JvdGU6DQo+PiBIaSBMdWNhcywNCj4+DQo+PiBBbSAwMi4xMS4yMiB1
-bSAxMjozOSBzY2hyaWViIEx1Y2FzIFN0YWNoOg0KPj4+IEhpIENocmlzdGlhbiwNCj4+Pg0KPj4+
-IGdvaW5nIHRvIHJlcGx5IGluIG1vcmUgZGV0YWlsIHdoZW4gSSBoYXZlIHNvbWUgbW9yZSB0aW1l
-LCBzbyBqdXN0IHNvbWUNCj4+PiBxdWljayB0aG91Z2h0cyBmb3Igbm93Lg0KPj4+DQo+Pj4gQW0g
-TWl0dHdvY2gsIGRlbSAwMi4xMS4yMDIyIHVtIDEyOjE4ICswMTAwIHNjaHJpZWIgQ2hyaXN0aWFu
-IEvDtm5pZzoNCj4+Pj4gQW0gMDEuMTEuMjIgdW0gMjI6MDkgc2NocmllYiBOaWNvbGFzIER1ZnJl
-c25lOg0KPj4+Pj4gW1NOSVBdDQo+Pj4+IEFzIGZhciBhcyBJIGNhbiBzZWUgaXQgeW91IGd1eXMg
-anVzdCBhbGxvY2F0ZSBhIGJ1ZmZlciBmcm9tIGEgVjRMMg0KPj4+PiBkZXZpY2UsIGZpbGwgaXQg
-d2l0aCBkYXRhIGFuZCBzZW5kIGl0IHRvIFdheWxhbmQgZm9yIGRpc3BsYXlpbmcuDQo+Pj4+DQo+
-Pj4+IFRvIGJlIGhvbmVzdCBJJ20gcmVhbGx5IHN1cnByaXNlZCB0aGF0IHRoZSBXYXlsYW5kIGd1
-eXMgaGFzbid0IHB1c2hlZA0KPj4+PiBiYWNrIG9uIHRoaXMgcHJhY3RpY2UgYWxyZWFkeS4NCj4+
-Pj4NCj4+Pj4gVGhpcyBvbmx5IHdvcmtzIGJlY2F1c2UgdGhlIFdheWxhbmQgYXMgd2VsbCBhcyBY
-IGRpc3BsYXkgcGlwZWxpbmUgaXMNCj4+Pj4gc21hcnQgZW5vdWdoIHRvIGluc2VydCBhbiBleHRy
-YSBjb3B5IHdoZW4gaXQgZmluZCB0aGF0IGFuIGltcG9ydGVkDQo+Pj4+IGJ1ZmZlciBjYW4ndCBi
-ZSB1c2VkIGFzIGEgZnJhbWVidWZmZXIgZGlyZWN0bHkuDQo+Pj4+DQo+Pj4gV2l0aCBicmFja2V0
-ZWQgYWNjZXNzIHlvdSBjb3VsZCBldmVuIG1ha2UgdGhpcyBjYXNlIHdvcmssIGFzIHRoZSBkR1BV
-DQo+Pj4gd291bGQgYmUgYWJsZSB0byBzbHVycCBhIGNvcHkgb2YgdGhlIGRtYS1idWYgaW50byBM
-TUVNIGZvciBzY2Fub3V0Lg0KPj4gV2VsbCwgdGhpcyBjb3B5IGlzIHdoYXQgd2UgYXJlIHRyeWlu
-ZyB0byBhdm9pZCBoZXJlLiBUaGUgY29kZWMgc2hvdWxkDQo+PiBwdW1wIHRoZSBkYXRhIGludG8g
-TE1FTSBpbiB0aGUgZmlyc3QgcGxhY2UuDQo+Pg0KPiBGb3IgdGhlIGRHUFUgVlJBTSBjYXNlLCBz
-aG91bGRuJ3QgdGhpcyBiZSBhbWRncHUgcmUtaW1wb3J0aW5nIGl0J3Mgb3duDQo+IGRtYWJ1Ziwg
-d2hpY2ggbW9yZSBvciBsZXNzIGJ5cGFzc2VzIGRtYS1idWYgdG8gZ2V0IGJhY2sgdGhlIGJhY2tp
-bmcNCj4gR0VNIG9iaj8NCg0KV2hlbiB0aGUgY29kZWMgYW5kIHNjYW5vdXQgaXMgb24gdGhlIHNh
-bWUgZGV2aWNlLCB0aGVuIHllcy4NCg0KQnV0IHdlIGFscmVhZHkgaGFkIGNhc2VzIHdoZXJlIHRo
-ZSBjb2RlYyB3YXMgb24gdGhlIGRHUFUgYW5kIHNjYW5vdXQgDQpoYXBwZW5lZCBvbiB0aGUgaW50
-ZWdyYXRlZCBlbmdpbmUuDQoNClJlZ2FyZHMsDQpDaHJpc3RpYW4uDQoNCj4NCj4gQlIsDQo+IC1S
-DQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFy
-by1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpU
-byB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMu
-bGluYXJvLm9yZwo=
+Racing conflict could be:
+task A                 task B
+list_for_each_entry
+strcmp(h->name))
+                       list_for_each_entry
+                       strcmp(h->name)
+kzalloc                kzalloc
+......                 .....
+device_create          device_create
+list_add
+                       list_add
+
+The root cause is that task B has no idea about the fact someone
+else(A) has inserted heap with same name when it calls list_add,
+so a potential collision occurs.
+
+Fixes: c02a81fba74f ("dma-buf: Add dma-buf heaps framework")
+Signed-off-by: Dawei Li <set_pte_at@outlook.com>
+---
+v1: https://lore.kernel.org/all/TYCP286MB2323950197F60FC3473123B7CA349@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM/
+v1->v2: Narrow down locking scope, check the existence of heap before
+insertion, as suggested by Andrew Davis.
+v2->v3: Remove double checking.
+v3->v4: Minor coding style and patch formatting adjustment.
+---
+ drivers/dma-buf/dma-heap.c | 28 +++++++++++++++-------------
+ 1 file changed, 15 insertions(+), 13 deletions(-)
+
+diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+index 8f5848aa144f..59d158873f4c 100644
+--- a/drivers/dma-buf/dma-heap.c
++++ b/drivers/dma-buf/dma-heap.c
+@@ -233,18 +233,6 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+ 		return ERR_PTR(-EINVAL);
+ 	}
+ 
+-	/* check the name is unique */
+-	mutex_lock(&heap_list_lock);
+-	list_for_each_entry(h, &heap_list, list) {
+-		if (!strcmp(h->name, exp_info->name)) {
+-			mutex_unlock(&heap_list_lock);
+-			pr_err("dma_heap: Already registered heap named %s\n",
+-			       exp_info->name);
+-			return ERR_PTR(-EINVAL);
+-		}
+-	}
+-	mutex_unlock(&heap_list_lock);
+-
+ 	heap = kzalloc(sizeof(*heap), GFP_KERNEL);
+ 	if (!heap)
+ 		return ERR_PTR(-ENOMEM);
+@@ -283,13 +271,27 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+ 		err_ret = ERR_CAST(dev_ret);
+ 		goto err2;
+ 	}
+-	/* Add heap to the list */
++
+ 	mutex_lock(&heap_list_lock);
++	/* check the name is unique */
++	list_for_each_entry(h, &heap_list, list) {
++		if (!strcmp(h->name, exp_info->name)) {
++			mutex_unlock(&heap_list_lock);
++			pr_err("dma_heap: Already registered heap named %s\n",
++			       exp_info->name);
++			err_ret = ERR_PTR(-EINVAL);
++			goto err3;
++		}
++	}
++
++	/* Add heap to the list */
+ 	list_add(&heap->list, &heap_list);
+ 	mutex_unlock(&heap_list_lock);
+ 
+ 	return heap;
+ 
++err3:
++	device_destroy(dma_heap_class, heap->heap_devt);
+ err2:
+ 	cdev_del(&heap->heap_cdev);
+ err1:
+-- 
+2.25.1
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
