@@ -2,334 +2,271 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7D18618B3A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  3 Nov 2022 23:16:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0F87D619052
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Nov 2022 06:49:07 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 62D823F5CD
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  3 Nov 2022 22:16:33 +0000 (UTC)
-Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com [209.85.222.175])
-	by lists.linaro.org (Postfix) with ESMTPS id 2DEFA3EC30
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  3 Nov 2022 22:16:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9A3693F5CA
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  4 Nov 2022 05:49:05 +0000 (UTC)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+	by lists.linaro.org (Postfix) with ESMTPS id 4251C3ECBC
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  4 Nov 2022 05:48:48 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ndufresne-ca.20210112.gappssmtp.com header.s=20210112 header.b=LdVvtJYa;
-	spf=none (lists.linaro.org: domain of nicolas@ndufresne.ca has no SPF policy when checking 209.85.222.175) smtp.mailfrom=nicolas@ndufresne.ca;
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of "SRS0=+Cc8=3E=goodmis.org=rostedt@kernel.org" designates 145.40.68.75 as permitted sender) smtp.mailfrom="SRS0=+Cc8=3E=goodmis.org=rostedt@kernel.org";
 	dmarc=none
-Received: by mail-qk1-f175.google.com with SMTP id s20so2103254qkg.5
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 03 Nov 2022 15:16:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ndufresne-ca.20210112.gappssmtp.com; s=20210112;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
-         :date:message-id:reply-to;
-        bh=pODj0/yhwr34aGTdCwiObdgtdTlvnUJq2228nYiFL6g=;
-        b=LdVvtJYajkOV8zBfmUwBjReAAJQsOHJQ/OCaOJRNR81olJ+XlcS/9EXCD84AGwbEOk
-         p3Ksyk8lDXCtYFtDj8OgDND/Nw2S0gnudNmYej/ONzGlKM8CAG9Y/AAR8CVy/dsfj1PY
-         q8nCzJRtnfeWPIdDQdG6kymaxWhXhedHSirR632lAw76Y7yDr06N7SbyBNvAEe8tJEBf
-         r1igoY2W6W9Ix1dqvSx0SaaQHWwg8qcJ5Ce+NuWIdTqvUfyUxp5C7gsQaBXNA/RH0iNR
-         YAebML3EdGkJivf9eV1v/TNMNv34aJcP3mGAGMZKvAF/n6HPb6fEpKfKmcDtFSQnkd91
-         rQWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=mime-version:user-agent:content-transfer-encoding:references
-         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=pODj0/yhwr34aGTdCwiObdgtdTlvnUJq2228nYiFL6g=;
-        b=nELnXftvJ/tMGAAgCTqsUnJTnkC0tFR/eZsSBIQHMKSjQGuXmMDsssrtzWUfM80F7R
-         5n0o9u+GRnbOeHy2MX2KsJ0wZu9Tnvikq2Y/c65trBzQ0BAp6ifi/M2CMvNdn25muDy3
-         51YBdn48KWEMXjunM3t/E0JARvNEvlw0P/ijZ36c3aOB6dEOcjLXO2uaVD5sQcJDFyoj
-         uygZ+nrj15v0HgdTyby0BjLw06tvA/ljv1cVPTy5nruiNwm39hioc5CrMslXZkRJux2V
-         vBcmEFeYYFdMj1asWPSPI/sWgC5MGel/fXZI4YrOK9V8uy8vK/hOx0nWkRGXQDwo8mht
-         seww==
-X-Gm-Message-State: ACrzQf2oK7KdN/UAVtGfm0XfETYfJPQuJzwemW7SyA2gg8uYyX4xdP5L
-	pNh9LgVZsX930J9N8cGt9VPESw==
-X-Google-Smtp-Source: AMsMyM4uaTY2GHWcd0dvxGMAGIJXnuWln4b/4+oGB18CZ2L57bvrG1VBquXjNLw3OMk2uz2dPGDzZg==
-X-Received: by 2002:a05:620a:1122:b0:6fa:63a9:e0bc with SMTP id p2-20020a05620a112200b006fa63a9e0bcmr7609204qkk.105.1667513775699;
-        Thu, 03 Nov 2022 15:16:15 -0700 (PDT)
-Received: from nicolas-tpx395.localdomain (192-222-136-102.qc.cable.ebox.net. [192.222.136.102])
-        by smtp.gmail.com with ESMTPSA id bj22-20020a05620a191600b006f956766f76sm1782416qkb.1.2022.11.03.15.16.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Nov 2022 15:16:14 -0700 (PDT)
-Message-ID: <90a1fb6101483971ef14d22370aac50d494a4752.camel@ndufresne.ca>
-From: Nicolas Dufresne <nicolas@ndufresne.ca>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
-	Daniel Stone <daniel@fooishbar.org>
-Date: Thu, 03 Nov 2022 18:16:13 -0400
-In-Reply-To: <b422be59-4b4b-2d0d-8e8c-b19f27c6832e@gmail.com>
-References: <20221020121316.3946-1-christian.koenig@amd.com>
-	 <3d7353f3fa5905ce18e5b2d92f758f098189bc5a.camel@pengutronix.de>
-	 <7f5eff36-6886-bb06-061a-dd4263b61605@gmail.com>
-	 <f5de84cfe81fee828bbe0d47d379028d28ef6ca6.camel@pengutronix.de>
-	 <e02cedc2-6741-8813-a7a5-f8769e301745@gmail.com>
-	 <a53e5df51ec0f2f9d4c2d377c0cc5ba85f2e58ff.camel@ndufresne.ca>
-	 <9d716641-55c6-1590-26c2-1c3b14a28226@gmail.com>
-	 <CAPj87rMPkmimR_RJHhxYZokH__TVpPArk0h6drOUSx7Z9+oAHA@mail.gmail.com>
-	 <11a6f97c-e45f-f24b-8a73-48d5a388a2cc@gmail.com>
-	 <caf4d6b82843788db97555a58bc9e33915e5b50a.camel@ndufresne.ca>
-	 <b422be59-4b4b-2d0d-8e8c-b19f27c6832e@gmail.com>
-User-Agent: Evolution 3.44.4 (3.44.4-2.fc36) 
-MIME-Version: 1.0
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by ams.source.kernel.org (Postfix) with ESMTPS id 32B4AB82BE6;
+	Fri,  4 Nov 2022 05:48:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B4911C433D6;
+	Fri,  4 Nov 2022 05:48:45 +0000 (UTC)
+Received: from rostedt by gandalf.local.home with local (Exim 4.96)
+	(envelope-from <rostedt@goodmis.org>)
+	id 1oqpZo-0070xm-08;
+	Fri, 04 Nov 2022 01:49:12 -0400
+Message-ID: <20221104054053.431922658@goodmis.org>
+User-Agent: quilt/0.66
+Date: Fri, 04 Nov 2022 01:40:53 -0400
+From: Steven Rostedt <rostedt@goodmis.org>
+To: linux-kernel@vger.kernel.org
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: ---
-X-Rspamd-Queue-Id: 2DEFA3EC30
-X-Spamd-Result: default: False [-3.30 / 15.00];
+X-Spamd-Bar: -
+X-Rspamd-Queue-Id: 4251C3ECBC
+X-Spamd-Result: default: False [-1.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-0.50)[209.85.222.175:from];
-	R_DKIM_ALLOW(-0.20)[ndufresne-ca.20210112.gappssmtp.com:s=20210112];
+	FORGED_SENDER(0.30)[rostedt@goodmis.org,SRS0=@kernel.org];
+	R_SPF_ALLOW(-0.20)[+a:ams.source.kernel.org];
 	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_TO(0.00)[gmail.com,fooishbar.org];
-	DMARC_NA(0.00)[ndufresne.ca];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_RCPT(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	R_SPF_NA(0.00)[no SPF record];
-	NEURAL_HAM(-0.00)[-0.999];
-	FREEMAIL_CC(0.00)[pengutronix.de,gmail.com,linaro.org,ffwll.ch,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.222.175:from];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	TO_DN_SOME(0.00)[];
-	URIBL_BLOCKED(0.00)[mail-qk1-f175.google.com:helo,mail-qk1-f175.google.com:rdns];
-	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[44];
+	R_DKIM_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	DKIM_TRACE(0.00)[ndufresne-ca.20210112.gappssmtp.com:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ASN(0.00)[asn:54825, ipnet:145.40.68.0/24, country:US];
+	RCVD_COUNT_THREE(0.00)[4];
+	DMARC_NA(0.00)[goodmis.org];
 	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: BEORRB4LNGFDKIDPQZV4R4IMGU6PNKL7
-X-Message-ID-Hash: BEORRB4LNGFDKIDPQZV4R4IMGU6PNKL7
-X-MailFrom: nicolas@ndufresne.ca
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: ppaalanen@gmail.com, sumit.semwal@linaro.org, daniel@ffwll.ch, robdclark@gmail.com, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_FROM(0.00)[Cc8=3E=goodmis.org=rostedt];
+	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[rostedt@goodmis.org,SRS0=@kernel.org]
+Message-ID-Hash: MIBIQAQHP4VPKZIVLVTIESAEMDJN32ZN
+X-Message-ID-Hash: MIBIQAQHP4VPKZIVLVTIESAEMDJN32ZN
+X-MailFrom: SRS0=+Cc8=3E=goodmis.org=rostedt@kernel.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Linus Torvalds <torvalds@linux-foundation.org>, Thomas Gleixner <tglx@linutronix.de>, Stephen Boyd <sboyd@kernel.org>, Guenter Roeck <linux@roeck-us.net>, Anna-Maria Gleixner <anna-maria@linutronix.de>, Andrew Morton <akpm@linux-foundation.org>, rcu@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-s390@vger.kernel.org, linux-sh@vger.kernel.org, linux-edac@vger.kernel.org, cgroups@vger.kernel.org, linux-block@vger.kernel.org, linux-acpi@vger.kernel.org, linux-atm-general@lists.sourceforge.net, netdev@vger.kernel.org, linux-pm@vger.kernel.org, drbd-dev@lists.linbit.com, linux-bluetooth@vger.kernel.org, openipmi-developer@lists.sourceforge.net, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org, linux-input@vger.kernel.org, linux-parisc@vger.kernel.org, linux-leds@vger.kernel.org, intel-wired-lan@lists.osuosl.org, linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org, linux-
+ scsi@vger.kernel.org, linux-staging@lists.linux.dev, linux-ext4@vger.kernel.org, linux-nilfs@vger.kernel.org, bridge@lists.linux-foundation.org, netfilter-devel@vger.kernel.org, coreteam@netfilter.org, lvs-devel@vger.kernel.org, linux-afs@lists.infradead.org, linux-nfs@vger.kernel.org, tipc-discussion@lists.sourceforge.net, alsa-devel@alsa-project.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
+Subject: [Linaro-mm-sig] [RFC][PATCH v3 00/33] timers: Use timer_shutdown*() before freeing timers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BEORRB4LNGFDKIDPQZV4R4IMGU6PNKL7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MIBIQAQHP4VPKZIVLVTIESAEMDJN32ZN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-TGUgbWVyY3JlZGkgMDIgbm92ZW1icmUgMjAyMiDDoCAxMjoxOCArMDEwMCwgQ2hyaXN0aWFuIEvD
-tm5pZyBhIMOpY3JpdMKgOg0KPiBBbSAwMS4xMS4yMiB1bSAyMjowOSBzY2hyaWViIE5pY29sYXMg
-RHVmcmVzbmU6DQo+ID4gW1NOSVBdDQo+ID4gPiA+IEJ1dCB0aGUgY2xpZW50IGlzIGp1c3QgYSB2
-aWRlbyBwbGF5ZXIuIEl0IGRvZXNuJ3QgdW5kZXJzdGFuZCBob3cgdG8NCj4gPiA+ID4gYWxsb2Nh
-dGUgQk9zIGZvciBQYW5mcm9zdCBvciBBTUQgb3IgZXRuYXZpdi4gU28gd2l0aG91dCBhIHVuaXZl
-cnNhbA0KPiA+ID4gPiBhbGxvY2F0b3IgKGFnYWluIC4uLiksICdqdXN0IGFsbG9jYXRlIG9uIHRo
-ZSBHUFUnIGlzbid0IGEgdXNlZnVsDQo+ID4gPiA+IHJlc3BvbnNlIHRvIHRoZSBjbGllbnQuDQo+
-ID4gPiBXZWxsIGV4YWN0bHkgdGhhdCdzIHRoZSBwb2ludCBJJ20gcmFpc2luZzogVGhlIGNsaWVu
-dCAqbXVzdCogdW5kZXJzdGFuZA0KPiA+ID4gdGhhdCENCj4gPiA+IA0KPiA+ID4gU2VlIHdlIG5l
-ZWQgdG8gYmUgYWJsZSB0byBoYW5kbGUgYWxsIHJlc3RyaWN0aW9ucyBoZXJlLCBjb2hlcmVuY3kg
-b2YgdGhlDQo+ID4gPiBkYXRhIGlzIGp1c3Qgb25lIG9mIHRoZW0uDQo+ID4gPiANCj4gPiA+IEZv
-ciBleGFtcGxlIHRoZSBtdWNoIG1vcmUgaW1wb3J0YW50IHF1ZXN0aW9uIGlzIHRoZSBsb2NhdGlv
-biBvZiB0aGUgZGF0YQ0KPiA+ID4gYW5kIGZvciB0aGlzIGFsbG9jYXRpbmcgZnJvbSB0aGUgVjRM
-MiBkZXZpY2UgaXMgaW4gbW9zdCBjYXNlcyBqdXN0IG5vdA0KPiA+ID4gZ29pbmcgdG8gZmx5Lg0K
-PiA+IEl0IGZlZWxzIGxpa2UgdGhpcyBpcyBhIGdlbmVyaWMgc3RhdGVtZW50IGFuZCB0aGVyZSBp
-cyBubyByZWFzb24gaXQgY291bGQgbm90IGJlDQo+ID4gdGhlIG90aGVyIHdheSBhcm91bmQuDQo+
-IA0KPiBBbmQgZXhhY3RseSB0aGF0J3MgbXkgcG9pbnQuIFlvdSBhbHdheXMgbmVlZCB0byBsb29r
-IGF0IGJvdGggd2F5cyB0byANCj4gc2hhcmUgdGhlIGJ1ZmZlciBhbmQgY2FuJ3QgYXNzdW1lIHRo
-YXQgb25lIHdpbGwgYWx3YXlzIHdvcmsuDQo+IA0KPiBBcyBmYXIgYXMgSSBjYW4gc2VlIGl0IHlv
-dSBndXlzIGp1c3QgYWxsb2NhdGUgYSBidWZmZXIgZnJvbSBhIFY0TDIgDQo+IGRldmljZSwgZmls
-bCBpdCB3aXRoIGRhdGEgYW5kIHNlbmQgaXQgdG8gV2F5bGFuZCBmb3IgZGlzcGxheWluZy4NCg0K
-VGhhdCBwYXJhZ3JhcGggaXMgYSBiaXQgc2xvcHB5LiBCeSAieW91IGd1eXMiIHlvdSBtZWFuIHdo
-YXQgZXhhY3RseSA/IE5vcm1hbA0KdXNlcnMgd2lsbCBsZXQgVjRMMiBkZXZpY2UgYWxsb2NhdGUg
-YW5kIHdyaXRlIGludG8gdGhlaXIgb3duIG1lbW9yeSAodGhlIGRldmljZQ0KZmlsbCBpdCwgbm90
-ICJ5b3UgZ3V5cyIpLiBUaGlzIGlzIGRvbmUgbGlrZSB0aGlzIHNpbXBseSBiZWNhdXNlIHRoaXMg
-aXMNCmd1YXJhbnRpZWQgdG8gd29yayB3aXRoIHRoZSBWNEwyIGRldmljZS4gTW9zdCBWNEwyIGRl
-dmljZSBwcm9kdWNlcyBrbm93biBieQ0KdXNlcnBzYWNlIHBpeGVsIGZvcm1hdHMgYW5kIGxheW91
-dCwgZm9yIHdoaWNoIHVzZXJzcGFjZSBrbm93IGZvciBzdXJlIGl0IGNhbg0KaW1wbGVtZW50IGEg
-R1BVIHNoYWRlciBvciBzb2Z0d2FyZSBmYWxsYmFjayBmb3IuIEknbSBzdGlsbCB0byBzZWUgb25l
-IG9mIHRoZXNlDQpmb3JtYXQgdGhhdCBjYW5ub3QgYmUgZWZmaWNpZW50bHkgaW1wb3J0ZWQgaW50
-byBhIG1vZGVybiBHUFUgYW5kIGNvbnZlcnRlZCB1c2luZw0Kc2hhZGVycy4gSSdtIG5vdCBlbnRp
-cmVseSBzdXJlIHdoYXQvd2hpY2ggR1BVIGEgZEdQVSBpcyBjb21wYXJlZCB0byBhIEdQVSBidHcu
-DQoNCkluIG1hbnkgY2FzZXMsIGNhbWVyYSBraW5kIG9mIFY0TDIgZGV2aWNlcyB3aWxsIGhhdmUg
-MSBwcm9kdWNlciBmb3IgbWFueQ0KY29uc3VtZXJzLiBDb25zaWRlciB5b3VyIHBob3RvIGFwcGxp
-Y2F0aW9uLCB0aGUgc3RyZWFtcyB3aWxsIGxpa2VseSBiZSBjYXB0dXJlDQphbmQgZGlzcGxheWVk
-IHdoaWxlIGJlaW5nIGVuY29kZWQgYnkgb25lIG9mIG1vcmUgQ09ERUMsIHdoaWxlIGJlaW5nIHN0
-cmVhbWVkIHRvDQphIE1hY2hpbmUgTGVhcm5pbmcgbW9kZWwgZm9yIGFuYWx5c2VzLiBUaGUgc29m
-dHdhcmUgY29tcGxleGl0eSB0byBjb21tdW5pY2F0ZQ0KYmFjayB0aGUgbGlzdCBvZiByZWNlaXZl
-ciBkZXZpY2VzIGFuZCBpbXBsZW1lbnRpbmcgYWxsIHRoZWlyIG5vbi1zdGFuZGFyZCB3YXkgdG8N
-CmFsbG9jYXRlIG1lbW9yeSwgc28gYWxsIHRoZSBjb21iaW5hdGlvbiBvZiB0cmlhbCBhbmQgZXJy
-b3IgaXMganVzdCByaWRpY3Vsb3VzbHkNCmhpZ2guIFJlbWVtYmVyIHRoYXQgZWFjaCBHUFUgaGF2
-ZSB0aGVpciBvd24gYWxsb2NhdGlvbiBtZXRob2RzIGFuZCBjb3JuZXIgY2FzZXMsDQp0aGlzIGlz
-IHNpbXBseSBub3QgbWFuYWdlYWJsZSBieSAieW91IGd1eXMiLCB3aGljaCBJIHByZXR0eSBtdWNo
-IGFzc3VtZSBpcw0KZXZlcnlvbmUgd3JpdGluZyBzb2Z0d2FyZSBmb3IgR2VuZXJpYyBMaW51eCB0
-aGVzZSBkYXlzIChub24tQW5kcm9pZC9DaHJvbWVPUykuDQoNCj4gDQo+IFRvIGJlIGhvbmVzdCBJ
-J20gcmVhbGx5IHN1cnByaXNlZCB0aGF0IHRoZSBXYXlsYW5kIGd1eXMgaGFzbid0IHB1c2hlZCAN
-Cj4gYmFjayBvbiB0aGlzIHByYWN0aWNlIGFscmVhZHkuDQo+IA0KPiBUaGlzIG9ubHkgd29ya3Mg
-YmVjYXVzZSB0aGUgV2F5bGFuZCBhcyB3ZWxsIGFzIFggZGlzcGxheSBwaXBlbGluZSBpcyANCj4g
-c21hcnQgZW5vdWdoIHRvIGluc2VydCBhbiBleHRyYSBjb3B5IHdoZW4gaXQgZmluZCB0aGF0IGFu
-IGltcG9ydGVkIA0KPiBidWZmZXIgY2FuJ3QgYmUgdXNlZCBhcyBhIGZyYW1lYnVmZmVyIGRpcmVj
-dGx5Lg0KDQpUaGlzIGlzIGEgYml0IGluYWNjdXJhdGUuIFRoZSBjb21wb3NpdG9yIEkndmUgd29y
-a2VkIHdpdGggKEdub21lIGFuZCBXZXN0b24pDQp3aWxsIG9ubHkgbWVtY3B5IFNITS4gRm9yIERN
-QUJ1ZiwgdGhleSB3aWxsIGZhaWwgaW1wb3J0YXRpb24gaWYgaXRzIG5vdCB1c2FibGUNCmVpdGhl
-ciBieSB0aGUgZGlzcGxheSBvciB0aGUgR1BVLiBTcGVjaWFsbHkgb24gdGhlIEdQVSBzaWRlIHRo
-b3VnaCAod2hpY2ggaXMgdGhlDQp1bHRpbWF0ZSBjb21wb3NpdG9yIGZhbGxiYWNrKSwgdGhlcmUg
-ZXhpc3RzIGVmZmljaWVudCBIVyBjb3B5IG1lY2hhbmlzbSB0aGF0IG1heQ0KYmUgdXNlZCwgYW5k
-IHRoaXMgaXMgZmluZSwgc2luY2UgdW5saWtlIHlvdXIgc2Nhbm5vdXQgZXhhbXBsZSwgaXQgd29u
-J3QgYmUNCnVwbG9hZGluZyBvdmVyIGFuZCBvdmVyLCBidXQgd2lsbCBkbyBsYXRlciByZS1kaXNw
-bGF5IGZyb20gYSByZW1vdGUgY29weSAob3INCnRyYW5zZm9ybWVkIGNvcHkpLiBPciBpZiB5b3Ug
-cHJlZmVyLCBpdHMgY2FjaGVkIGF0IHRoZSBjb3N0IG9mIGhpZ2hlciBtZW1vcnkNCnVzYWdlLg0K
-DQpJIHRoaW5rIGl0IHdvdWxkIGJlIHByZWZlcmFibGUgdG8gc3BlYWsgYWJvdXQgZGV2aWNlIHRv
-IGRldmljZSBzaGFyaW5nLCBzaW5jZQ0KVjRMMiB2cyBHUFUgaXMgbm90IHJlYWxseSByZXByZXNl
-bnRhdGl2ZSBvZiB0aGUgcHJvZ3JhbS4gSSB0aGluayBWNEwyIHZzIEdQVSBhbmQNCiJ5b3UgZ3V5
-cyIgc2ltcGx5IGNvbnRyaWJ1dGUgdG8gdGhlIG5ldmVyIGVuZGluZywgYW5kIG5lZWRsZXNzIGZy
-aWN0aW9uIGFyb3VuZA0KdGhhdCBkaWZmaWN1bHR5IHRoYXQgZXhpc3RzIHdpdGggY3VycmVudCBz
-dXBwb3J0IGZvciBtZW1vcnkgc2hhcmluZyBpbiBMaW51eC4NCg0KPiANCj4gPiAgIEkgaGF2ZSBj
-b2xsZWFndWUgd2hvIGludGVncmF0ZWQgUENJZSBDT0RFQyAoQmxhaXplIFhwbG9yZXINCj4gPiBY
-MTYwMFAgUENJZSBBY2NlbGVyYXRvcikgaG9zdGluZyB0aGVpciBvd24gUkFNLiBUaGVyZSB3YXMg
-bGFyZ2UgYW1vdW50IG9mIHdheXMNCj4gPiB0byB1c2UgaXQuIE9mIGNvdXJzZSwgaW4gY3VycmVu
-dCBzdGF0ZSBvZiBETUFCdWYsIHlvdSBoYXZlIHRvIGJlIGFuIGV4cG9ydGVyIHRvDQo+ID4gZG8g
-YW55dGhpbmcgZmFuY3ksIGJ1dCBpdCBkaWQgbm90IGhhdmUgdG8gYmUgbGlrZSB0aGlzLCBpdHMg
-YSBkZXNpZ24gY2hvaWNlLiBJJ20NCj4gPiBub3Qgc3VyZSBpbiB0aGUgZW5kIHdoYXQgd2FzIHRo
-ZSBmaW5hbCBtZXRob2QgdXNlZCwgdGhlIGRyaXZlciBpc24ndCB5ZXQNCj4gPiB1cHN0cmVhbSwg
-c28gbWF5YmUgdGhhdCBpcyBub3QgZXZlbiBmaW5hbC4gV2hhdCBJIGtub3cgaXMgdGhhdCB0aGVy
-ZSBpcyB2YXJpb3VzDQo+ID4gY29uZGl0aW9uIHlvdSBtYXkgdXNlIHRoZSBDT0RFQyBmb3Igd2hp
-Y2ggdGhlIG9wdGltYWwgbG9jYXRpb24gd2lsbCB2YXJ5LiBBcyBhbg0KPiA+IGV4YW1wbGUsIHVz
-aW5nIHRoZSBwb3N0IHByb2Nlc3NvciBvciBub3QsIHNlZSBteSBuZXh0IGNvbW1lbnQgZm9yIG1v
-cmUgZGV0YWlscy4NCj4gDQo+IFllYWgsIGFuZCBzdHVmZiBsaWtlIHRoaXMgd2FzIGFscmVhZHkg
-ZGlzY3Vzc2VkIG11bHRpcGxlIHRpbWVzLiBMb2NhbCANCj4gbWVtb3J5IG9mIGRldmljZXMgY2Fu
-IG9ubHkgYmUgbWFkZSBhdmFpbGFibGUgYnkgdGhlIGV4cG9ydGVyLCBub3QgdGhlIA0KPiBpbXBv
-cnRlci4NCj4gDQo+IFNvIGluIHRoZSBjYXNlIG9mIHNlcGFyYXRlZCBjYW1lcmEgYW5kIGVuY29k
-ZXIgeW91IHJ1biBpbnRvIGV4YWN0bHkgdGhlIA0KPiBzYW1lIGxpbWl0YXRpb24gdGhhdCBzb21l
-IGRldmljZSBuZWVkcyB0aGUgYWxsb2NhdGlvbiB0byBoYXBwZW4gb24gdGhlIA0KPiBjYW1lcmEg
-d2hpbGUgb3RoZXJzIG5lZWQgaXQgb24gdGhlIGVuY29kZXIuDQo+IA0KPiA+ID4gVGhlIG1vcmUg
-Y29tbW9uIGNhc2UgaXMgdGhhdCB5b3UgbmVlZCB0byBhbGxvY2F0ZSBmcm9tIHRoZSBHUFUgYW5k
-IHRoZW4NCj4gPiA+IGltcG9ydCB0aGF0IGludG8gdGhlIFY0TDIgZGV2aWNlLiBUaGUgYmFja2dy
-b3VuZCBpcyB0aGF0IGFsbCBkR1BVcyBJDQo+ID4gPiBrbm93IG9mIG5lZWQgdGhlIGRhdGEgaW5z
-aWRlIGxvY2FsIG1lbW9yeSAoVlJBTSkgdG8gYmUgYWJsZSB0byBzY2FuIG91dA0KPiA+ID4gZnJv
-bSBpdC4NCj4gPiBUaGUgcmVhbGl0eSBpcyB0aGF0IHdoYXQgaXMgY29tbW9uIHRvIHlvdSwgbWln
-aHQgbm90IGJlIHRvIG90aGVycy4gSW4gbXkgd29yaywNCj4gPiBtb3N0IEFSTSBTb0MgaGF2ZSBk
-aXNwbGF5IHRoYXQganVzdCBoYW5kbGUgZGlyZWN0IHNjYW5ub3V0IGZyb20gY2FtZXJhcyBhbmQN
-Cj4gPiBjb2RlY3MuDQo+IA0KPiA+IFRoZSBvbmx5IGNhc2UgdGhlIGNvbW1vbmx5IGZhaWxzIGlz
-IHdoZW5ldmVyIHdlIHRyeSB0byBkaXNwbGF5IFVWQw0KPiA+IGNyZWF0ZWQgZG1hYnVmLA0KPiAN
-Cj4gV2VsbCwgZXhhY3RseSB0aGF0J3Mgbm90IGNvcnJlY3QhIFRoZSB3aG9sZSB4ODYgdXNlIGNh
-c2VzIG9mIGRpcmVjdCANCj4gZGlzcGxheSBmb3IgZEdQVXMgYXJlIGJyb2tlbiBiZWNhdXNlIG1l
-ZGlhIHBsYXllcnMgdGhpbmsgdGhleSBjYW4gZG8gdGhlIA0KPiBzaW1wbGUgdGhpbmcgYW5kIG9m
-ZmxvYWQgYWxsIHRoZSBwcm9ibGVtYXRpYyBjYXNlcyB0byB0aGUgZGlzcGxheSBzZXJ2ZXIuDQo+
-IA0KPiBUaGlzIGlzIGFic29sdXRlbHkgKm5vdCogdGhlIGNvbW1vbiB1c2UgY2FzZSB5b3UgZGVz
-Y3JpYmUgaGVyZSwgYnV0IA0KPiByYXRoZXIgc29tZXRoaW5nIGNvbXBsZXRlbHkgc3BlY2lhbCB0
-byBBUk0uDQoNCnNpZ2ggLi4gVGhlIFVWQyBmYWlsdXJlcyB3YXMgZmlyc3QgZGlzY292ZXJlZCBv
-biBteSBJbnRlbCBQQywgYW5kIGxhdGVyDQpyZXByb2R1Y2VkIG9uIEFSTS4gVXNlcnNwYWNlIGV4
-cGVjdGVkIGRyaXZlcihzKSAoVjRMMiBleHBvcnRzLCBEUk0gaW1wb3J0cykNCnNob3VsZCBoYXZl
-IHJlamVjdGVkIHRoZSBETUFCdWYgaW1wb3J0IChJIGtpbmQgb2Yga25vdywgSSB3cm90ZSB0aGlz
-IHBhcnQpLiBGcm9tDQphIHVzZXJzcGFjZSBwb2ludCBvZiB5b3UsIHVubGlrZSB3aGF0IHlvdSBz
-dGlwdWxhdGUgaGVyZSwgdGhlcmUgd2FzIG5vIGZhdWx0Lg0KWW91IHNhaWQgYWxyZWFkeSB0aGF0
-IGltcG9ydGVyIC8gZXhwb3J0ZXIgcm9sZSBpcyB0byBiZSB0cmllZCwgdGhlIG9yZGVyIHlvdSB0
-cnkNCnNob3VsZCBub3QgbWF0dGVyLiBTbyB5ZXMsIHRvZGF5J3MgdXNlcnNwYWNlIG1heSBsYWNr
-IHRoZSBhYmlsaXR5IHRvIGZsaXAgdGhlDQpyb2xlcywgYnV0IGF0IGxlYXN0IGl0IHRyaWVzLCBh
-bmQgaWYgdGhlIGRyaXZlciBkb2VzIG5vdCBmYWlsLCB5b3UgY2FuJ3QgYmxhbWUNCnVzZXJzcGFj
-ZSBmb3IgYXQgbGVhc3QgdHJ5aW5nIHRvIGFjaGlldmUgZGVjZW50IHBlcmZvcm1hbmNlLg0KDQpJ
-J2QgbGlrZSB0byByZW1pbmQgdGhhdCB0aGlzIGlzIGNsZWFybHkgYWxsIGtlcm5lbCBidWdzLCBh
-bmQgd2UgY2Fubm90IHN0YXRlDQp0aGF0IGtlcm5lbCBkcml2ZXJzICJhcmUgYnJva2VuIGJlY2F1
-c2UgbWVkaWEgcGxheWVyIi4gSnVzdCB0aGUgZmFjdCB0aGF0IHRoaXMNCnRocmVhZCBzdGFydHMg
-ZnJvbSBhIGtlcm5lbCBjaGFuZ2VzIGtpbmQgb2YgcHJvdmUgaXQuIFdvdWxkIGJlIG5pY2UgYWxz
-byBmb3IgeW91DQp0byB1bmRlcnN0YW5kIHRoYXQgSSdtIG5vdCBhZ2FpbnN0IHRoZSBtZXRob2Qg
-dXNlZCBpbiB0aGlzIHBhdGNoc2V0LCBidXQgSSdtIG5vdA0KYWdhaW5zdCBhIGJyYWNrZXRpbmcg
-bWVjaGFuaXNtIGVpdGhlciwgYXMgSSB0aGluayB0aGUgZm9ybWVyIGNhbiBpbXByb3ZlLCB3aGVy
-ZQ0KdGhlIGZpcnN0IG9uZSBvbmx5IGdpdmUgbW9yZSAiY29ycmVjdCIgcmVzdWx0cy4NCg0KPiAN
-Cj4gPiAgIHdoaWNoIGhhdmUgZGlydHkgQ1BVIHdyaXRlIGNhY2hlIGFuZCB0aGlzIGlzIHRoZSB0
-eXBlIG9mIHRoaW5nDQo+ID4gd2UnZCBsaWtlIHRvIHNlZSBzb2x2ZWQuIEkgdGhpbmsgdGhpcyBz
-ZXJpZXMgd2FzIGFkZHJlc3NpbmcgaXQgaW4gcHJpbmNpcGxlLCBidXQNCj4gPiBmYWlsaW5nIHRo
-ZSBpbXBvcnQgYW5kIHRoZSByYWlzZWQgcG9pbnQgaXMgdGhhdCB0aGlzIHdhc24ndCB0aGUgb3B0
-aW1hbCB3YXkuDQo+ID4gDQo+ID4gVGhlcmUgaXMgYSBjb21tdW5pdHkgcHJvamVjdCBjYWxsZWQg
-TGlicmVFTEVDLCBpZiB5b3UgYXJlbid0IGF3YXJlLCB0aGV5IHJ1bg0KPiA+IEtob2RpIHdpdGgg
-ZGlyZWN0IHNjYW5vdXQgb2YgdmlkZW8gc3RyZWFtIG9uIGEgd2lkZSB2YXJpZXR5IG9mIFNvQyBh
-bmQgdGhleSB1c2UNCj4gPiB0aGUgQ09ERUMgYXMgZXhwb3J0ZXIgYWxsIHRoZSB0aW1lLiBUaGV5
-IHNpbXBseSBkb24ndCBoYXZlIGNhc2VzIHdlcmUgdGhlDQo+ID4gb3Bwb3NpdGUgaXMgbmVlZGVk
-IChvciBhbnkga2luZCBvZiByZW1vdGUgUkFNIHRvIGRlYWwgd2l0aCkuIEluIGZhY3QsIEZGTVBF
-Rw0KPiA+IGRvZXMgbm90IHJlYWxseSBvZmZlciB5b3UgYW55IEFQSSB0byByZXZlcnNlIHRoZSBh
-bGxvY2F0aW9uLg0KPiANCj4gT2ssIGxldCBtZSB0cnkgdG8gZXhwbGFpbiBpdCBvbmNlIG1vcmUu
-IEl0IHNvdW5kcyBsaWtlIEkgd2Fzbid0IGFibGUgdG8gDQo+IGdldCBteSBwb2ludCB0aHJvdWdo
-Lg0KPiANCj4gVGhhdCB3ZSBoYXZlbid0IGhlYXJkIGFueWJvZHkgc2NyZWFtaW5nIHRoYXQgeDg2
-IGRvZXNuJ3Qgd29yayBpcyBqdXN0IA0KPiBiZWNhdXNlIHdlIGhhbmRsZSB0aGUgY2FzZSB0aGF0
-IGEgYnVmZmVyIGlzbid0IGRpcmVjdGx5IGRpc3BsYXlhYmxlIGluIA0KPiBYL1dheWxhbmQgYW55
-d2F5LCBidXQgdGhpcyBpcyBhYnNvbHV0ZWx5IG5vdCB0aGUgb3B0aW1hbCBzb2x1dGlvbi4NCg0K
-QmFzaWNhbGx5LCB5b3UgYXJlIGNvbXBsYWluaW5nIHRoYXQgY29tcG9zaXRvciB3aWxsIHVzZSBH
-UFUgc2hhZGVycyB0byBhZGFwdCB0aGUNCmJ1ZmZlcnMgZm9yIHRoZSBkaXNwbGF5LiBNb3N0IGRp
-c3BsYXkgZG9uJ3QgZG8gb3IgaGF2ZSBsaW1pdGVkIFlVViBzdXBwb3J0LA0KZmxpcHBpbmcgdGhl
-IHJvbGVzIG9yIGJyYWNrZXRpbmcgd29uJ3QgaGVscCB0aGF0LiBVc2luZyBhIEdQVSBzaGFkZXIg
-dG8gYWRhcHQNCml0LCBsaWtlIGNvbXBvc2l0b3IgYW5kIHVzZXJzcGFjZSBkbyBzZWVtcyBhbGwg
-cmlnaHQuIEFuZCB5ZXMsIHNvbWV0aW1lcyB0aGUNCm1lbW9yeSB3aWxsIGdldCBpbXBvcnRlZCBp
-bnRvIHRoZSBHUFUgdmVyeSBlZmZpY2llbnRseSwgc29tZXRoaW5nIGluIHRoZSBtaWQtDQpyYW5n
-ZSwgYW5kIG90aGVyIHRpbWVzIHNvbWUgR1BVIHN0YWNrICh3aGljaCBpcyB1c2Vyc3BhY2UpIHdp
-bGwgbWVtY3B5LiBCdXQNCnJlbWVtYmVyIHRoYXQgdGhlIEdQVSBzdGFjayBpcyBwcm9ncmFtbWVk
-IHRvIHdvcmsgd2l0aCBhIHNwZWNpZmljIEdQVSwgbm90IHRoZQ0KaGlnaGVyIGxldmVsIHVzZXJs
-YW5kLg0KDQo+IA0KPiBUaGUgYXJndW1lbnQgdGhhdCB5b3Ugd2FudCB0byBrZWVwIHRoZSBhbGxv
-Y2F0aW9uIG9uIHRoZSBjb2RlYyBzaWRlIGlzIA0KPiBjb21wbGV0ZWx5IGZhbHNlIGFzIGZhciBh
-cyBJIGNhbiBzZWUuDQoNCkkgaGF2ZW4ndCBtYWRlIHRoaXMgYXJndW1lbnQsIGFuZCBkb24ndCBp
-bnRlbmQgdG8gZG8gc28uIFRoZXJlIGlzIG5vdGhpbmcgaW4NCnRoaXMgdGhyZWFkIHRoYXQgc2hv
-dWxkIGJlIGludGVycHJldGVkIGFzIEkgd2FudCwgb3Igbm90IHdhbnQuIEkgd2FudCB0aGUgc2Ft
-ZQ0KdGhpbmcgYXMgZXZlcnlvbmUgb24gdGhpcyBsaXN0LCB3aGljaCBpcyBib3RoIHBlcmZvcm1h
-bmNlIGFuZCBjb3JyZWN0IHJlc3VsdHMuDQoNCj4gDQo+IFdlIGFscmVhZHkgaGFkIG51bWVyb3Vz
-IHByb2plY3RzIHdoZXJlIHdlIHJlcG9ydGVkIHRoaXMgcHJhY3RpY2UgYXMgYnVncyANCj4gdG8g
-dGhlIEdTdHJlYW1lciBhbmQgRkZNUEVHIHByb2plY3QgYmVjYXVzZSBpdCB3b24ndCB3b3JrIG9u
-IHg4NiB3aXRoIGRHUFVzLg0KDQpMaW5rcyA/IFJlbWVtYmVyIHRoYXQgSSBkbyByZWFkIGV2ZXJ5
-IHNpbmdsZSBidWdzIGFuZCBlbWFpbHMgYXJvdW5kIEdTdHJlYW1lcg0KcHJvamVjdC4gSSBkbyBt
-YWludGFpbiBvbGRlciBhbmQgbmV3ZXIgVjRMMiBzdXBwb3J0IGluIHRoZXJlLiBJIGFsc28gZGlk
-DQpjb250cmlidXRlIGEgbG90IHRvIHRoZSBtZWNoYW5pc20gR1N0cmVhbWVyIGhhdmUgaW4tcGxh
-Y2UgdG8gcmV2ZXJzZSB0aGUNCmFsbG9jYXRpb24uIEluIGZhY3QsIGl0cyBpbXBsZW1lbnRlZCwg
-dGhlIHByb2JsZW0gYmVpbmcgdGhhdCBvbiBnZW5lcmljIExpbnV4LA0KdGhlIHJlY2VpdmVyIGVs
-ZW1lbnQsIGxpa2UgdGhlIEdMIGVsZW1lbnQgYW5kIHRoZSBkaXNwbGF5IHNpbmsgZG9uJ3QgaGF2
-ZSBhbnkNCkFQSSB0aGV5IGNhbiByZWx5IG9uIHRvIGFsbG9jYXRlIG1lbW9yeS4gVGh1cywgdGhl
-eSBkb24ndCBpbXBsZW1lbnQgd2hhdCB3ZSBjYWxsDQp0aGUgYWxsb2NhdGlvbiBvZmZlciBpbiBH
-U3RyZWFtZXIgdGVybS4gVmVyeSBvZnRlbiB0aG91Z2gsIG9uIG90aGVyIG1vZGVybiBPUywNCm9y
-IEFQSXMgbGlrZSBWQSwgdGhlIG1lbW9yeSBvZmZlciBpcyByZXBsYWNlZCBieSBhIGNvbnRleHQu
-IFNvIHRoZSBhbGxvY2F0aW9uIGlzDQpkb25lIGZyb20gYSAiY29udGV4dCIgd2hpY2ggaXMgbmVp
-dGhlciBhbiBpbXBvcnRlciBvciBhbiBleHBvcnRlci4gVGhpcyBpcw0KbW9zdGx5IGZvdW5kIG9u
-IE1hY09TIGFuZCBXaW5kb3dzLg0KDQpXYXMgdGhlcmUgQVBJcyBzdWdnZXN0ZWQgdG8gYWN0dWFs
-bHkgbWFrZSBpdCBtYW5hZ2VhYmxlIGJ5IHVzZXJsYW5kIHRvIGFsbG9jYXRlDQpmcm9tIHRoZSBH
-UFU/IFllcywgdGhpcyB3aGF0IExpbnV4IERldmljZSBBbGxvY2F0b3IgaWRlYSBpcyBmb3IuIElz
-IHRoYXQgQVBJDQpyZWFkeSwgbm8uDQoNCkNhbiB3ZSBhdCBsZWFzdCBpbXBsZW1lbnQgc29tZSBE
-Uk0gbWVtb3J5IGFsbG9jYXRpb24sIHllcywgYnV0IHJlbWVtYmVyIHRoYXQsDQp1bnRpbCB2ZXJ5
-IHJlY2VudGx5LCB0aGUgRFJNIGRyaXZlcnMgdXNlZCBieSB0aGUgZGlzcGxheSBwYXRoIHdhcyBu
-b3QgZXhwb3NlZA0KdGhyb3VnaCBXYXlsYW5kLiBUaGlzIGlzc3VlIGhhcyBvbmx5IGJlZW4gcmVz
-b2x2ZWQgcmVjZW50bHksIGl0IHdpbGwgdGFrZSBzb21lDQp0aW1lIGJlZm9yZSB0aGlzIHByb3Bh
-Z2F0ZSB0aHJvdWdoIGNvbXBvc2l0b3JzIGNvZGUuIEFuZCB5b3UgbmVlZCBjb21wb3NpdG9yDQpp
-bXBsZW1lbnRhdGlvbiB0byBkbyBHTCBhbmQgbXVsdGltZWRpYSBzdGFjayBpbXBsZW1lbnRhdGlv
-bi4gUGxlYXNlLCBrZWVwIGluDQptaW5kIGJlZm9yZSByYWlzaW5nIGJhZCBwcmFjdGljZSBieSBH
-U3RyZWFtZXIgYW5kIEZGTVBFRyBkZXZlbG9wZXJzIHRoYXQgZ2V0dGluZw0KYWxsIHRoZSBiaXQg
-YW5kIHBpZWNlcyBpbiBwbGFjZSByZXF1aXJlIGJhY2sgYW5kIGZvcnRoLCB0aGVyZSBoYXMgYmVl
-biBodWdlIGdhcHMNCnRoYXQgdGhlc2UgZGV2cyB3ZXJlIG5vdCBhYmxlIHRvIG92ZXJjb21lIHll
-dC4gQWxzbywgcmVtZW1iZXIgdGhhdCB0aGVzZSBzdGFjaw0KZG9uJ3QgaGF2ZSBhbnkgY29udHJh
-Y3QgdG8gc3VwcG9ydCBMaW51eC4gVGhleSBzdXBwb3J0IGl0IHRvIHRoZSBiZXN0IG9mIHRoZWly
-DQprbm93bGVkZ2UgYW5kIGNhcGFiaWxpdGllcywgYWxvbmcgd2l0aCBXaW5kb3dzLCBNYWNPUywg
-SU9TLCBBbmRyb2lkIGFuZCBtb3JlLg0KQW5kIHRvIG15IGV4cGVyaWVuY2UsIG1lbW9yeSBzaGFy
-aW5nIGhhdmUgZGlmZmVyZW50IGNoYWxsZW5nZXMgaW4gYWxsIG9mIHRoZXNlDQpPUy4NCg0KPiAN
-Cj4gVGhpcyBpcyBqdXN0IGEgc29mdHdhcmUgc29sdXRpb24gd2hpY2ggd29ya3MgYmVjYXVzZSBv
-ZiBjb2luY2lkZW50IGFuZCANCj4gbm90IGJlY2F1c2Ugb2YgZW5naW5lZXJpbmcuDQoNCkFub3Ro
-ZXIgYXJndW1lbnQgSSBjYW4ndCByZWFsbHkgYWdyZWUgd2l0aCwgdGhlcmUgaXMgYSBsb3Qgb2Yg
-ZWZmb3J0IHB1dCBpbnRvDQpmYWxsYmFjayAobW9zdGx5IEdQVSBmYWxsYmFjaykgaW4gdmFyaW91
-cyBzb2Z0d2FyZSBzdGFjay4gVGhlc2UgZmFsbGJhY2sgYXJlDQplbmdpbmVlcmVkIHRvIGd1YXJh
-bnR5IHlvdSBjYW4gZGlzcGxheSB5b3VyIGZyYW1lcy4gVGhhdCBjYXNlIEkndmUgcmFpc2VkIHNo
-b3VsZA0KaGF2ZSBlbmRlZCB3ZWxsIHdpdGggYSBHUFUvQ1BVIGZhbGxiYWNrLCBidXQgYSBrZXJu
-ZWwgYnVnIGJyb2tlIHRoZSBhYmlsaXR5IHRvDQpmYWxsYmFjay4gSWYgdGhlIGtlcm5lbCBoYWQg
-cmVqZWN0ZWQgdGhlIGltcG9ydCAoeW91ciBzZXJpZXMgPyksIG9yIG9mZmVyZWQgYQ0KYnJhY2tl
-dGluZyBtZWNoYW5pc20gKGZvciB0aGUgVVZDIGNhc2UsIGJvdGggbWV0aG9kIHdvdWxkIGhhdmUg
-d29ya2VkKSwgdGhlIGVuZA0KcmVzdWx0cyB3b3VsZCBoYXZlIGp1c3Qgd29ya2VkLg0KDQpJIHdv
-dWxkIG5vdCBkaXNhZ3JlZSBpZiBzb21lb25lIHN0YXRlcyB0aGF0IERNQWJ1ZiBpbiBVVkMgZHJp
-dmVyIGlzIGFuIGFidXNlLg0KVGhlIGRyaXZlciBzaW1wbHkgbWVtY3B5IGNodW5rIG9mIHZhcmlh
-YmxlIHNpemUgZGF0YSBzdHJlYW1lZCBieSB0aGUgdXNiIGNhbWVyYQ0KaW50byBhIG5vcm1hbCBt
-ZW1vcnkgYnVmZmVyLiBTbyB3aHkgaXMgdGhhdCBleHBvcnRlZCBhcyBhIGRtYWJ1ZiA/IEkgZG9u
-J3QgaGF2ZQ0KYW4gc3Ryb25nIG9waW5pb24gb24gdGhhdCwgYnV0IGlmIHlvdSB0aGluayB0aGlz
-IGlzIHdyb25nLCB0aGVuIGl0IHByb3ZlcyBteQ0KcG9pbnQgdGhhdCB0aGlzIGlzIGEga2VybmVs
-IGJ1Zy4gVGhlIGNoYWxsZW5nZSBoZXJlIGlzIHRvIGNvbWUgdXAgd2l0aCBob3cgd2UNCndpbGwg
-Zml4IHRoaXMsIGFuZCBzaGFyaW5nIGEgZ29vZCB1bmRlcnN0YW5kaW5nIG9mIHdoYXQgdG9kYXkn
-cyB1c2Vyc3BhY2UgZG8sDQphbmQgd2h5IHRoZXkgZG8gc28gaXMga2V5IHRvIG1ha2UgcHJvcGVy
-IGRlc2lnbnMuIEFzIEkgc3RhcnRlZCwgd3JpdGluZyBjb2RlIGZvcg0KRE1BQnVmIHN1YnN5c3Rl
-bSBpcyBvdXQgb2YgcmVhY2ggZm9yIG1lLCBJIGNhbiBvbmx5IHNoYXJlIHdoYXQgZXhpc3Rpbmcg
-c29mdHdhcmUNCmRvLCBhbmQgd2h5IGl0IGRvZXMgaXQgbGlrZSB0aGlzLg0KDQpOaWNvbGFzDQoN
-Cj4gDQo+IFJlZ2FyZHMsDQo+IENocmlzdGlhbi4NCj4gDQo+IA0KDQpfX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlz
-dCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBh
-biBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+
+Back in April, I posted an RFC patch set to help mitigate a common issue
+where a timer gets armed just before it is freed, and when the timer
+goes off, it crashes in the timer code without any evidence of who the
+culprit was. I got side tracked and never finished up on that patch set.
+Since this type of crash is still our #1 crash we are seeing in the field,
+it has become a priority again to finish it.
+
+This is v3 of that patch set. Thomas Gleixner posted an untested version
+that makes timer->function NULL as the flag that it is shutdown. I took that
+code, tested it (fixed it up), added more comments, and changed the
+name to timer_shutdown_sync(). I also converted it to use WARN_ON_ONCE()
+instead of just WARN_ON() as Linus asked for.
+
+I then created a trivial coccinelle script to find where del_timer*()
+is called before being freed, and converted them all to timer_shutdown*()
+(There was a couple that still used del_timer() instead of del_timer_sync()).
+
+I also updated DEBUG_OBJECTS_TIMERS to check from where the timer is ever
+armed, to calling of timer_shutdown_sync(), and it will trigger if a timer
+is freed in between. The current way is to only check if the timer is armed,
+but that means it only triggers if the race condition is hit, and with
+experience, it's not run on enough machines to catch all of them. By triggering
+it from the time the timer is armed to the time it is shutdown, it catches
+all potential cases even if the race condition is not hit.
+
+I went though the result of the cocinelle script, and updated the locations.
+Some locations were caught by DEBUG_OBJECTS_TIMERS as the coccinelle script
+only checked for timers being freed in the same function as the del_timer*().
+
+Ideally, I would have the first patch go into this rc cycle, which is mostly
+non functional as it will allow the other patches to come in via the respective
+subsystems in the next merge window.
+
+Changes since v2: https://lore.kernel.org/all/20221027150525.753064657@goodmis.org/
+
+ - Talking with Thomas Gleixner, he wanted a better name space and to remove
+   the "del_" portion of the API.
+
+ - Since there's now a shutdown interface that does not synchronize, to keep
+   it closer to del_timer() and del_timer_sync(), the API is now:
+
+    timer_shutdown() - same as del_timer() but deactivates the timer.
+
+    timer_shutdown_sync() - same as del_timer_sync() but deactivates the timer.
+
+ - Added a few more locations that got converted.
+
+  git://git.kernel.org/pub/scm/linux/kernel/git/rostedt/linux-trace.git
+trace/timers
+
+Head SHA1: 25106f0bb7968b3e8c746a7853f44b51840746c3
+
+
+Steven Rostedt (Google) (33):
+      timers: Add timer_shutdown_sync() and timer_shutdown() to be called before freeing timers
+      timers: s390/cmm: Use timer_shutdown_sync() before freeing timer
+      timers: sh: Use timer_shutdown_sync() before freeing timer
+      timers: block: Use timer_shutdown_sync() before freeing timer
+      timers: ACPI: Use timer_shutdown_sync() before freeing timer
+      timers: atm: Use timer_shutdown_sync() before freeing timer
+      timers: PM: Use timer_shutdown_sync()
+      timers: Bluetooth: Use timer_shutdown_sync() before freeing timer
+      timers: hangcheck: Use timer_shutdown_sync() before freeing timer
+      timers: ipmi: Use timer_shutdown_sync() before freeing timer
+      random: use timer_shutdown_sync() before freeing timer
+      timers: dma-buf: Use timer_shutdown_sync() before freeing timer
+      timers: drm: Use timer_shutdown_sync() before freeing timer
+      timers: HID: Use timer_shutdown_sync() before freeing timer
+      timers: Input: Use timer_shutdown_sync() before freeing timer
+      timers: mISDN: Use timer_shutdown_sync() before freeing timer
+      timers: leds: Use timer_shutdown_sync() before freeing timer
+      timers: media: Use timer_shutdown_sync() before freeing timer
+      timers: net: Use timer_shutdown_sync() before freeing timer
+      timers: usb: Use timer_shutdown_sync() before freeing timer
+      timers: cgroup: Use timer_shutdown_sync() before freeing timer
+      timers: workqueue: Use timer_shutdown_sync() before freeing timer
+      timers: nfc: pn533: Use timer_shutdown_sync() before freeing timer
+      timers: pcmcia: Use timer_shutdown_sync() before freeing timer
+      timers: scsi: Use timer_shutdown_sync() and timer_shutdown() before freeing timer
+      timers: tty: Use timer_shutdown_sync() before freeing timer
+      timers: ext4: Use timer_shutdown_sync() before freeing timer
+      timers: fs/nilfs2: Use timer_shutdown_sync() before freeing timer
+      timers: ALSA: Use timer_shutdown_sync() before freeing timer
+      timers: jbd2: Use timer_shutdown() before freeing timer
+      timers: sched/psi: Use timer_shutdown_sync() before freeing timer
+      timers: x86/mce: Use __init_timer() for resetting timers
+      timers: Expand DEBUG_OBJECTS_TIMER to check if it ever was used
+
+----
+ .../RCU/Design/Requirements/Requirements.rst       |   2 +-
+ Documentation/core-api/local_ops.rst               |   2 +-
+ Documentation/kernel-hacking/locking.rst           |   5 +
+ arch/s390/mm/cmm.c                                 |   4 +-
+ arch/sh/drivers/push-switch.c                      |   2 +-
+ arch/x86/kernel/cpu/mce/core.c                     |  14 ++-
+ block/blk-iocost.c                                 |   2 +-
+ block/blk-iolatency.c                              |   2 +-
+ block/blk-stat.c                                   |   2 +-
+ block/blk-throttle.c                               |   2 +-
+ block/kyber-iosched.c                              |   2 +-
+ drivers/acpi/apei/ghes.c                           |   2 +-
+ drivers/atm/idt77105.c                             |   4 +-
+ drivers/atm/idt77252.c                             |   4 +-
+ drivers/atm/iphase.c                               |   2 +-
+ drivers/base/power/wakeup.c                        |   7 +-
+ drivers/block/drbd/drbd_main.c                     |   2 +-
+ drivers/block/loop.c                               |   2 +-
+ drivers/block/sunvdc.c                             |   2 +-
+ drivers/bluetooth/hci_bcsp.c                       |   2 +-
+ drivers/bluetooth/hci_h5.c                         |   2 +-
+ drivers/bluetooth/hci_qca.c                        |   4 +-
+ drivers/char/hangcheck-timer.c                     |   4 +-
+ drivers/char/ipmi/ipmi_msghandler.c                |   2 +-
+ drivers/char/ipmi/ipmi_ssif.c                      |   4 +-
+ drivers/char/random.c                              |   2 +-
+ drivers/dma-buf/st-dma-fence.c                     |   2 +-
+ drivers/gpu/drm/gud/gud_pipe.c                     |   2 +-
+ drivers/gpu/drm/i915/i915_sw_fence.c               |   2 +-
+ drivers/hid/hid-wiimote-core.c                     |   2 +-
+ drivers/input/keyboard/locomokbd.c                 |   2 +-
+ drivers/input/keyboard/omap-keypad.c               |   2 +-
+ drivers/input/mouse/alps.c                         |   2 +-
+ drivers/input/serio/hil_mlc.c                      |   2 +-
+ drivers/input/serio/hp_sdc.c                       |   2 +-
+ drivers/isdn/hardware/mISDN/hfcmulti.c             |   6 +-
+ drivers/isdn/mISDN/l1oip_core.c                    |   4 +-
+ drivers/isdn/mISDN/timerdev.c                      |   4 +-
+ drivers/leds/trigger/ledtrig-activity.c            |   2 +-
+ drivers/leds/trigger/ledtrig-heartbeat.c           |   2 +-
+ drivers/leds/trigger/ledtrig-pattern.c             |   2 +-
+ drivers/leds/trigger/ledtrig-transient.c           |   2 +-
+ drivers/media/pci/ivtv/ivtv-driver.c               |   2 +-
+ drivers/media/usb/pvrusb2/pvrusb2-hdw.c            |  18 ++--
+ drivers/media/usb/s2255/s2255drv.c                 |   4 +-
+ drivers/net/ethernet/intel/i40e/i40e_main.c        |   6 +-
+ drivers/net/ethernet/marvell/sky2.c                |   2 +-
+ drivers/net/ethernet/sun/sunvnet.c                 |   2 +-
+ drivers/net/usb/sierra_net.c                       |   2 +-
+ drivers/net/wireless/intel/iwlwifi/iwl-dbg-tlv.c   |   2 +-
+ drivers/net/wireless/intersil/hostap/hostap_ap.c   |   2 +-
+ drivers/net/wireless/marvell/mwifiex/main.c        |   2 +-
+ drivers/net/wireless/microchip/wilc1000/hif.c      |   8 +-
+ drivers/nfc/pn533/pn533.c                          |   2 +-
+ drivers/nfc/pn533/uart.c                           |   2 +-
+ drivers/pcmcia/bcm63xx_pcmcia.c                    |   2 +-
+ drivers/pcmcia/electra_cf.c                        |   2 +-
+ drivers/pcmcia/omap_cf.c                           |   2 +-
+ drivers/pcmcia/pd6729.c                            |   4 +-
+ drivers/pcmcia/yenta_socket.c                      |   4 +-
+ drivers/scsi/qla2xxx/qla_edif.c                    |   4 +-
+ drivers/scsi/scsi_lib.c                            |   1 +
+ drivers/staging/media/atomisp/i2c/atomisp-lm3554.c |   2 +-
+ drivers/tty/n_gsm.c                                |   2 +-
+ drivers/tty/sysrq.c                                |   2 +-
+ drivers/usb/gadget/udc/m66592-udc.c                |   2 +-
+ drivers/usb/serial/garmin_gps.c                    |   2 +-
+ drivers/usb/serial/mos7840.c                       |   2 +-
+ fs/ext4/super.c                                    |   2 +-
+ fs/jbd2/journal.c                                  |   2 +
+ fs/nilfs2/segment.c                                |   2 +-
+ include/linux/timer.h                              | 100 +++++++++++++++++--
+ include/linux/workqueue.h                          |   4 +-
+ kernel/cgroup/cgroup.c                             |   2 +-
+ kernel/sched/psi.c                                 |   1 +
+ kernel/time/timer.c                                | 106 ++++++++++++++-------
+ kernel/workqueue.c                                 |   4 +-
+ net/802/garp.c                                     |   2 +-
+ net/802/mrp.c                                      |   2 +-
+ net/bridge/br_multicast.c                          |   6 +-
+ net/bridge/br_multicast_eht.c                      |   4 +-
+ net/core/gen_estimator.c                           |   2 +-
+ net/core/neighbour.c                               |   2 +
+ net/ipv4/inet_connection_sock.c                    |   2 +-
+ net/ipv4/inet_timewait_sock.c                      |   3 +-
+ net/ipv4/ipmr.c                                    |   2 +-
+ net/ipv6/ip6mr.c                                   |   2 +-
+ net/mac80211/mesh_pathtbl.c                        |   2 +-
+ net/netfilter/ipset/ip_set_list_set.c              |   2 +-
+ net/netfilter/ipvs/ip_vs_lblc.c                    |   2 +-
+ net/netfilter/ipvs/ip_vs_lblcr.c                   |   2 +-
+ net/netfilter/xt_LED.c                             |   2 +-
+ net/rxrpc/conn_object.c                            |   2 +-
+ net/sched/cls_flow.c                               |   2 +-
+ net/sunrpc/svc.c                                   |   2 +-
+ net/sunrpc/xprt.c                                  |   2 +-
+ net/tipc/discover.c                                |   2 +-
+ net/tipc/monitor.c                                 |   2 +-
+ sound/i2c/other/ak4117.c                           |   2 +-
+ sound/synth/emux/emux.c                            |   2 +-
+ 100 files changed, 310 insertions(+), 175 deletions(-)
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
