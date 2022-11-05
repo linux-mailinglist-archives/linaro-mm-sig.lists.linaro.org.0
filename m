@@ -2,270 +2,99 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2672F61D7AC
-	for <lists+linaro-mm-sig@lfdr.de>; Sat,  5 Nov 2022 07:01:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17AD761D7B3
+	for <lists+linaro-mm-sig@lfdr.de>; Sat,  5 Nov 2022 07:02:11 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B3B6B3F5D2
-	for <lists+linaro-mm-sig@lfdr.de>; Sat,  5 Nov 2022 06:01:48 +0000 (UTC)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-	by lists.linaro.org (Postfix) with ESMTPS id AABA53ECE1
-	for <linaro-mm-sig@lists.linaro.org>; Sat,  5 Nov 2022 06:01:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 31A193F5C2
+	for <lists+linaro-mm-sig@lfdr.de>; Sat,  5 Nov 2022 06:02:10 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id D93583ECE1
+	for <linaro-mm-sig@lists.linaro.org>; Sat,  5 Nov 2022 06:01:32 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
 	dkim=none;
-	spf=pass (lists.linaro.org: domain of "SRS0=G+DL=3F=goodmis.org=rostedt@kernel.org" designates 145.40.68.75 as permitted sender) smtp.mailfrom="SRS0=G+DL=3F=goodmis.org=rostedt@kernel.org";
+	spf=pass (lists.linaro.org: domain of "SRS0=G+DL=3F=goodmis.org=rostedt@kernel.org" designates 139.178.84.217 as permitted sender) smtp.mailfrom="SRS0=G+DL=3F=goodmis.org=rostedt@kernel.org";
 	dmarc=none
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.source.kernel.org (Postfix) with ESMTPS id 6CB25B81CC0;
-	Sat,  5 Nov 2022 06:01:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08B27C433C1;
-	Sat,  5 Nov 2022 06:01:27 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 7F85B60A47;
+	Sat,  5 Nov 2022 06:01:32 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A5C2C43144;
+	Sat,  5 Nov 2022 06:01:32 +0000 (UTC)
 Received: from rostedt by gandalf.local.home with local (Exim 4.96)
 	(envelope-from <rostedt@goodmis.org>)
-	id 1orCFf-007Oer-03;
-	Sat, 05 Nov 2022 02:01:55 -0400
-Message-ID: <20221105060024.598488967@goodmis.org>
+	id 1orCFk-007Ovl-1g;
+	Sat, 05 Nov 2022 02:02:00 -0400
+Message-ID: <20221105060200.357061890@goodmis.org>
 User-Agent: quilt/0.66
-Date: Sat, 05 Nov 2022 02:00:24 -0400
+Date: Sat, 05 Nov 2022 02:00:54 -0400
 From: Steven Rostedt <rostedt@goodmis.org>
 To: linux-kernel@vger.kernel.org
+References: <20221105060024.598488967@goodmis.org>
+MIME-Version: 1.0
 X-Rspamd-Server: lists.linaro.org
 X-Spamd-Bar: -
-X-Rspamd-Queue-Id: AABA53ECE1
-X-Spamd-Result: default: False [-1.50 / 15.00];
+X-Rspamd-Queue-Id: D93583ECE1
+X-Spamd-Result: default: False [-1.95 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
+	R_BAD_CTE_7BIT(1.05)[7bit,utf8];
 	FORGED_SENDER(0.30)[rostedt@goodmis.org,SRS0=G@kernel.org];
-	R_SPF_ALLOW(-0.20)[+a:ams.source.kernel.org];
+	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org:c];
 	MIME_GOOD(-0.10)[text/plain];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_TWELVE(0.00)[44];
-	FROM_NEQ_ENVFROM(0.00)[rostedt@goodmis.org,SRS0=G@kernel.org];
+	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.996];
+	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	R_DKIM_NA(0.00)[];
 	TAGGED_FROM(0.00)[DL=3F=goodmis.org=rostedt];
-	ASN(0.00)[asn:54825, ipnet:145.40.68.0/24, country:US];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DMARC_NA(0.00)[goodmis.org];
-	ARC_NA(0.00)[];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	RCVD_COUNT_THREE(0.00)[4];
+	FROM_NEQ_ENVFROM(0.00)[rostedt@goodmis.org,SRS0=G@kernel.org];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	DMARC_NA(0.00)[goodmis.org];
 	TO_DN_SOME(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[145.40.68.75:from]
-Message-ID-Hash: VLYGNMDPRQGO7SJBPPFA7HSETRFTKFS3
-X-Message-ID-Hash: VLYGNMDPRQGO7SJBPPFA7HSETRFTKFS3
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[139.178.84.217:from]
+Message-ID-Hash: I5RCTYQAY2MQRR5KHJQZYD4NH32ULTUT
+X-Message-ID-Hash: I5RCTYQAY2MQRR5KHJQZYD4NH32ULTUT
 X-MailFrom: SRS0=G+DL=3F=goodmis.org=rostedt@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Linus Torvalds <torvalds@linux-foundation.org>, Thomas Gleixner <tglx@linutronix.de>, Stephen Boyd <sboyd@kernel.org>, Guenter Roeck <linux@roeck-us.net>, Anna-Maria Gleixner <anna-maria@linutronix.de>, Andrew Morton <akpm@linux-foundation.org>, rcu@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-s390@vger.kernel.org, linux-sh@vger.kernel.org, linux-edac@vger.kernel.org, cgroups@vger.kernel.org, linux-block@vger.kernel.org, linux-acpi@vger.kernel.org, linux-atm-general@lists.sourceforge.net, netdev@vger.kernel.org, linux-pm@vger.kernel.org, drbd-dev@lists.linbit.com, linux-bluetooth@vger.kernel.org, openipmi-developer@lists.sourceforge.net, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org, linux-input@vger.kernel.org, linux-parisc@vger.kernel.org, linux-leds@vger.kernel.org, intel-wired-lan@lists.osuosl.org, linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org, linux-
- scsi@vger.kernel.org, linux-staging@lists.linux.dev, linux-ext4@vger.kernel.org, linux-nilfs@vger.kernel.org, bridge@lists.linux-foundation.org, netfilter-devel@vger.kernel.org, coreteam@netfilter.org, lvs-devel@vger.kernel.org, linux-afs@lists.infradead.org, linux-nfs@vger.kernel.org, tipc-discussion@lists.sourceforge.net, alsa-devel@alsa-project.org
+CC: Linus Torvalds <torvalds@linux-foundation.org>, Thomas Gleixner <tglx@linutronix.de>, Stephen Boyd <sboyd@kernel.org>, Guenter Roeck <linux@roeck-us.net>, Anna-Maria Gleixner <anna-maria@linutronix.de>, Andrew Morton <akpm@linux-foundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v4a 00/38] timers: Use timer_shutdown*() before freeing timers
+Subject: [Linaro-mm-sig] [PATCH v4a 30/38] timers: dma-buf: Use timer_shutdown_sync() for on stack timers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VLYGNMDPRQGO7SJBPPFA7HSETRFTKFS3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/I5RCTYQAY2MQRR5KHJQZYD4NH32ULTUT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-
-Back in April, I posted an RFC patch set to help mitigate a common issue
-where a timer gets armed just before it is freed, and when the timer
-goes off, it crashes in the timer code without any evidence of who the
-culprit was. I got side tracked and never finished up on that patch set.
-Since this type of crash is still our #1 crash we are seeing in the field,
-it has become a priority again to finish it.
-
-The last version of that patch set is here:
-
-  https://lore.kernel.org/all/20221104054053.431922658@goodmis.org/
-
-I'm calling this version 4a as it only has obvious changes were the timer that
-is being shutdown is in the same function where it will be freed or released,
-as this series should be "safe" for adding. I'll be calling the other patches
-4b for the next merge window.
-
-Patch 1 fixes an issue with sunrpc/xprt where it incorrectly uses
-del_singleshot_timer_sync() for something that is not a oneshot timer. As this
-will be converted to shutdown, this needs to be fixed first.
-
-Patches 2-4 changes existing timer_shutdown() functions used locally in ARM and
-some drivers to better namespace names.
-
-Patch 5 implements the new timer_shutdown() and timer_shutdown_sync() functions
-that disable re-arming the timer after they are called.
-
-Patches 6-28 change all the locations where there's a kfree(), kfree_rcu(),
-kmem_cache_free() and one call_rcu() call where the RCU function frees the
-timer (the workqueue patch) in the same function as the del_timer{,_sync}() is
-called on that timer, and there's no extra exit path between the del_timer and
-freeing of the timer.
-
-Patches 29-32 add timer_shutdown*() on on-stack timers that are about to be
-released at the end of the function.
-
-Patches 33-37 add timer_shutdown*() on module timers in the module exit code.
-
-Patch 38 simply converts an open coded "shutdown" code into timer_shutdown(),
-as a way timer_shutdown() disables the timer is by setting that timer function
-to NULL.
-
-Linus, I sorted the patches this way to let you see which you would think is
-safe to go into this -rc. I honestly believe that they are all safe, but that's
-just my own opinion.
-
-This series is here:
-
-  git://git.kernel.org/pub/scm/linux/kernel/git/rostedt/linux-trace.git
-timers-start
-
-Head SHA1: f58b516a65bac76f1bfa00126856d6c6c3d24a40
-
-
-Steven Rostedt (Google) (38):
-      SUNRPC/xprt: Use del_timer_sync() instead of del_singleshot_timer_sync()
-      ARM: spear: Do not use timer namespace for timer_shutdown() function
-      clocksource/drivers/arm_arch_timer: Do not use timer namespace for timer_shutdown() function
-      clocksource/drivers/sp804: Do not use timer namespace for timer_shutdown() function
-      timers: Add timer_shutdown_sync() and timer_shutdown() to be called before freeing timers
-      timers: sh: Use timer_shutdown_sync() before freeing timer
-      timers: block: Use timer_shutdown_sync() before freeing timer
-      timers: ACPI: Use timer_shutdown_sync() before freeing timer
-      timers: atm: Use timer_shutdown_sync() before freeing timer
-      timers: Bluetooth: Use timer_shutdown_sync() before freeing timer
-      timers: drm: Use timer_shutdown_sync() before freeing timer
-      timers: HID: Use timer_shutdown_sync() before freeing timer
-      timers: Input: Use timer_shutdown_sync() before freeing timer
-      timers: mISDN: Use timer_shutdown_sync() before freeing timer
-      timers: leds: Use timer_shutdown_sync() before freeing timer
-      timers: media: Use timer_shutdown_sync() before freeing timer
-      timers: net: Use timer_shutdown_sync() before freeing timer
-      timers: usb: Use timer_shutdown_sync() before freeing timer
-      timers: nfc: pn533: Use timer_shutdown_sync() before freeing timer
-      timers: pcmcia: Use timer_shutdown_sync() before freeing timer
-      timers: scsi: Use timer_shutdown_sync() and timer_shutdown() before freeing timer
-      timers: tty: Use timer_shutdown_sync() before freeing timer
-      timers: ext4: Use timer_shutdown_sync() before freeing timer
-      timers: fs/nilfs2: Use timer_shutdown_sync() before freeing timer
-      timers: ALSA: Use timer_shutdown_sync() before freeing timer
-      timers: jbd2: Use timer_shutdown() before freeing timer
-      timers: sched/psi: Use timer_shutdown_sync() before freeing timer
-      timers: workqueue: Use timer_shutdown_sync() before freeing timer
-      random: use timer_shutdown_sync() for on stack timers
-      timers: dma-buf: Use timer_shutdown_sync() for on stack timers
-      timers: drm: Use timer_shutdown_sync() for on stack timers
-      timers: media: Use timer_shutdown_sync() for on stack timers
-      timers: s390/cmm: Use timer_shutdown_sync() before a module is released
-      timers: atm: Use timer_shutdown_sync() before a module is released
-      timers: hangcheck: Use timer_shutdown_sync() before a module is released
-      timers: ipmi: Use timer_shutdown_sync() before a module is released
-      timers: Input: Use timer_shutdown_sync() before a module is released
-      timers: PM: Use timer_shutdown_sync()
-
-----
- .../RCU/Design/Requirements/Requirements.rst       |  2 +-
- Documentation/core-api/local_ops.rst               |  2 +-
- Documentation/kernel-hacking/locking.rst           |  5 ++
- arch/arm/mach-spear/time.c                         |  8 +--
- arch/s390/mm/cmm.c                                 |  4 +-
- arch/sh/drivers/push-switch.c                      |  2 +-
- block/blk-iocost.c                                 |  2 +-
- block/blk-iolatency.c                              |  2 +-
- block/blk-throttle.c                               |  2 +-
- block/kyber-iosched.c                              |  2 +-
- drivers/acpi/apei/ghes.c                           |  2 +-
- drivers/atm/idt77105.c                             |  4 +-
- drivers/atm/idt77252.c                             |  4 +-
- drivers/atm/iphase.c                               |  2 +-
- drivers/base/power/wakeup.c                        |  7 +--
- drivers/block/drbd/drbd_main.c                     |  2 +-
- drivers/block/loop.c                               |  2 +-
- drivers/block/sunvdc.c                             |  2 +-
- drivers/bluetooth/hci_bcsp.c                       |  2 +-
- drivers/bluetooth/hci_h5.c                         |  4 +-
- drivers/bluetooth/hci_qca.c                        |  4 +-
- drivers/char/hangcheck-timer.c                     |  4 +-
- drivers/char/ipmi/ipmi_msghandler.c                |  2 +-
- drivers/char/random.c                              |  2 +-
- drivers/clocksource/arm_arch_timer.c               | 12 ++--
- drivers/clocksource/timer-sp804.c                  |  6 +-
- drivers/dma-buf/st-dma-fence.c                     |  2 +-
- drivers/gpu/drm/gud/gud_pipe.c                     |  2 +-
- drivers/gpu/drm/i915/i915_sw_fence.c               |  2 +-
- drivers/hid/hid-wiimote-core.c                     |  2 +-
- drivers/input/keyboard/locomokbd.c                 |  2 +-
- drivers/input/keyboard/omap-keypad.c               |  2 +-
- drivers/input/mouse/alps.c                         |  2 +-
- drivers/input/serio/hil_mlc.c                      |  2 +-
- drivers/isdn/hardware/mISDN/hfcmulti.c             |  5 +-
- drivers/isdn/mISDN/l1oip_core.c                    |  4 +-
- drivers/isdn/mISDN/timerdev.c                      |  4 +-
- drivers/leds/trigger/ledtrig-pattern.c             |  2 +-
- drivers/leds/trigger/ledtrig-transient.c           |  2 +-
- drivers/media/pci/ivtv/ivtv-driver.c               |  2 +-
- drivers/media/usb/pvrusb2/pvrusb2-hdw.c            | 18 +++---
- drivers/media/usb/s2255/s2255drv.c                 |  4 +-
- drivers/net/ethernet/intel/i40e/i40e_main.c        |  7 +--
- drivers/net/ethernet/marvell/sky2.c                |  2 +-
- drivers/net/ethernet/sun/sunvnet.c                 |  2 +-
- drivers/net/usb/sierra_net.c                       |  2 +-
- drivers/net/wireless/intel/iwlwifi/iwl-dbg-tlv.c   |  2 +-
- drivers/net/wireless/intersil/hostap/hostap_ap.c   |  2 +-
- drivers/net/wireless/marvell/mwifiex/main.c        |  2 +-
- drivers/net/wireless/microchip/wilc1000/hif.c      |  6 +-
- drivers/nfc/pn533/pn533.c                          |  2 +-
- drivers/nfc/pn533/uart.c                           |  2 +-
- drivers/pcmcia/bcm63xx_pcmcia.c                    |  2 +-
- drivers/pcmcia/electra_cf.c                        |  2 +-
- drivers/pcmcia/omap_cf.c                           |  2 +-
- drivers/pcmcia/pd6729.c                            |  4 +-
- drivers/pcmcia/yenta_socket.c                      |  4 +-
- drivers/scsi/qla2xxx/qla_edif.c                    |  4 +-
- drivers/staging/media/atomisp/i2c/atomisp-lm3554.c |  2 +-
- drivers/tty/n_gsm.c                                |  2 +-
- drivers/tty/sysrq.c                                |  2 +-
- drivers/usb/gadget/udc/m66592-udc.c                |  2 +-
- drivers/usb/serial/garmin_gps.c                    |  2 +-
- drivers/usb/serial/mos7840.c                       |  2 +-
- fs/ext4/super.c                                    |  2 +-
- fs/jbd2/journal.c                                  |  2 +
- fs/nilfs2/segment.c                                |  2 +-
- include/linux/timer.h                              | 64 +++++++++++++++++++---
- kernel/sched/psi.c                                 |  1 +
- kernel/time/timer.c                                | 64 ++++++++++++----------
- kernel/workqueue.c                                 |  4 +-
- net/802/garp.c                                     |  2 +-
- net/802/mrp.c                                      |  2 +-
- net/bridge/br_multicast.c                          |  6 +-
- net/bridge/br_multicast_eht.c                      |  4 +-
- net/core/gen_estimator.c                           |  2 +-
- net/core/neighbour.c                               |  2 +
- net/ipv4/inet_timewait_sock.c                      |  1 +
- net/ipv4/ipmr.c                                    |  2 +-
- net/ipv6/ip6mr.c                                   |  2 +-
- net/mac80211/mesh_pathtbl.c                        |  2 +-
- net/netfilter/ipset/ip_set_list_set.c              |  2 +-
- net/netfilter/ipvs/ip_vs_lblc.c                    |  2 +-
- net/netfilter/ipvs/ip_vs_lblcr.c                   |  2 +-
- net/netfilter/xt_LED.c                             |  2 +-
- net/rxrpc/conn_object.c                            |  2 +-
- net/sched/cls_flow.c                               |  2 +-
- net/sunrpc/svc.c                                   |  2 +-
- net/sunrpc/xprt.c                                  |  2 +-
- net/tipc/discover.c                                |  2 +-
- net/tipc/monitor.c                                 |  2 +-
- sound/i2c/other/ak4117.c                           |  2 +-
- sound/synth/emux/emux.c                            |  2 +-
- 93 files changed, 227 insertions(+), 169 deletions(-)
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+RnJvbTogIlN0ZXZlbiBSb3N0ZWR0IChHb29nbGUpIiA8cm9zdGVkdEBnb29kbWlzLm9yZz4NCg0K
+QmVmb3JlIGEgdGltZXIgaXMgcmVsZWFzZWQsIHRpbWVyX3NodXRkb3duX3N5bmMoKSBtdXN0IGJl
+IGNhbGxlZC4NCg0KTGluazogaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvYWxsLzIwMjIxMTA0MDU0
+MDUzLjQzMTkyMjY1OEBnb29kbWlzLm9yZy8NCg0KQ2M6IFN1bWl0IFNlbXdhbCA8c3VtaXQuc2Vt
+d2FsQGxpbmFyby5vcmc+DQpDYzogIkNocmlzdGlhbiBLw7ZuaWciIDxjaHJpc3RpYW4ua29lbmln
+QGFtZC5jb20+DQpDYzogbGludXgtbWVkaWFAdmdlci5rZXJuZWwub3JnDQpDYzogZHJpLWRldmVs
+QGxpc3RzLmZyZWVkZXNrdG9wLm9yZw0KQ2M6IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9y
+Zw0KU2lnbmVkLW9mZi1ieTogU3RldmVuIFJvc3RlZHQgKEdvb2dsZSkgPHJvc3RlZHRAZ29vZG1p
+cy5vcmc+DQotLS0NCiBkcml2ZXJzL2RtYS1idWYvc3QtZG1hLWZlbmNlLmMgfCAyICstDQogMSBm
+aWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pDQoNCmRpZmYgLS1naXQg
+YS9kcml2ZXJzL2RtYS1idWYvc3QtZG1hLWZlbmNlLmMgYi9kcml2ZXJzL2RtYS1idWYvc3QtZG1h
+LWZlbmNlLmMNCmluZGV4IGZiNmUwYTZhZTJjOS4uNWQzZTdiNTAzNTAxIDEwMDY0NA0KLS0tIGEv
+ZHJpdmVycy9kbWEtYnVmL3N0LWRtYS1mZW5jZS5jDQorKysgYi9kcml2ZXJzL2RtYS1idWYvc3Qt
+ZG1hLWZlbmNlLmMNCkBAIC00MTIsNyArNDEyLDcgQEAgc3RhdGljIGludCB0ZXN0X3dhaXRfdGlt
+ZW91dCh2b2lkICphcmcpDQogDQogCWVyciA9IDA7DQogZXJyX2ZyZWU6DQotCWRlbF90aW1lcl9z
+eW5jKCZ3dC50aW1lcik7DQorCXRpbWVyX3NodXRkb3duX3N5bmMoJnd0LnRpbWVyKTsNCiAJZGVz
+dHJveV90aW1lcl9vbl9zdGFjaygmd3QudGltZXIpOw0KIAlkbWFfZmVuY2Vfc2lnbmFsKHd0LmYp
+Ow0KIAlkbWFfZmVuY2VfcHV0KHd0LmYpOw0KLS0gDQoyLjM1LjENCl9fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0
+IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFu
+IGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
