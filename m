@@ -2,111 +2,124 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4951161FB9E
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  7 Nov 2022 18:38:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B69CD6217F9
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  8 Nov 2022 16:21:48 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3CC583F5DA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  7 Nov 2022 17:38:13 +0000 (UTC)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-	by lists.linaro.org (Postfix) with ESMTPS id 7D3C23EBED
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  7 Nov 2022 17:37:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 70EF63F5E6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  8 Nov 2022 15:21:47 +0000 (UTC)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+	by lists.linaro.org (Postfix) with ESMTPS id 6671F3EC30
+	for <linaro-mm-sig@lists.linaro.org>; Sat,  5 Nov 2022 21:03:32 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=miwcwDXp;
-	spf=pass (lists.linaro.org: domain of dmitry.osipenko@collabora.com designates 46.235.227.172 as permitted sender) smtp.mailfrom=dmitry.osipenko@collabora.com;
-	dmarc=pass (policy=none) header.from=collabora.com
-Received: from [192.168.2.123] (109-252-117-140.nat.spd-mgts.ru [109.252.117.140])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass header.d=zx2c4.com header.s=20210105 header.b="Ek158U/I";
+	spf=pass (lists.linaro.org: domain of "SRS0=HBtZ=3F=zx2c4.com=Jason@kernel.org" designates 145.40.68.75 as permitted sender) smtp.mailfrom="SRS0=HBtZ=3F=zx2c4.com=Jason@kernel.org";
+	dmarc=pass (policy=quarantine) header.from=zx2c4.com
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	(Authenticated sender: dmitry.osipenko)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id AB1B366023A6;
-	Mon,  7 Nov 2022 17:37:51 +0000 (GMT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1667842676;
-	bh=UMRS4vM/GE6IwT0ij75XZK2yxYOoTzS0D0RuPVqVLQ0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=miwcwDXpS7Bbvd1kg8ufWW8EYMDu/fgcPle5PVDEc/B45ktlgqIx4KYYA7QJIH0/S
-	 by6GLLPhco/tY89MPdmT/s8ECZUVpumdsyezUNadhVFrBlk2dKSnpRR4YYHs5ifRqx
-	 kuVjLNaEObN6eE/lFu1N0kKKLb+Hg6OZXx6pYEFM8ctFWBT+AgibmceYq8kqFMCEG5
-	 kowqpdeAKxf0CNu91SEfqgK2XcDJWq/xRLM5BkdsTv9wWssGJ9nsGOSCQkZma8qL+/
-	 vHXhwraRJ7N/LdEZD26enrecVwg8djUWKheSt++aa2448mbVzh/odGXyBvPK2wEDIp
-	 kG1p1Gc0TCNDw==
-Message-ID: <daebe990-6032-15a1-175a-84e9e1ce2ca0@collabora.com>
-Date: Mon, 7 Nov 2022 20:37:49 +0300
+	by ams.source.kernel.org (Postfix) with ESMTPS id 5B12CB808C4;
+	Sat,  5 Nov 2022 21:03:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 69FADC433D6;
+	Sat,  5 Nov 2022 21:03:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zx2c4.com; s=20210105;
+	t=1667682204;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=eqdLYS8BDcnZ1CTVSLTL2V9mpBrsInljjeWX569KabI=;
+	b=Ek158U/IwAdzp/7JgxH8/niYIDD2c7iDpM/q00frrsf+kptgL3uCiSQ7Xlb7SIQ9YvTtg5
+	hlBVvQrg9GahoQxIsHXxgh/CGzM4sTACdo/WX2PYJwuZbLx0SZ+njeVN3snq9LgpG5MQMr
+	EBxmnADIwq+lyFhZU+rPI7l5k3bHDuo=
+Received: 
+	by mail.zx2c4.com (ZX2C4 Mail Server) with ESMTPSA id f7ca4808 (TLSv1.3:TLS_AES_256_GCM_SHA384:256:NO);
+	Sat, 5 Nov 2022 21:03:23 +0000 (UTC)
+Date: Sat, 5 Nov 2022 22:03:18 +0100
+From: "Jason A. Donenfeld" <Jason@zx2c4.com>
+To: Steven Rostedt <rostedt@goodmis.org>
+Message-ID: <Y2bPlllkHo5DUmLY@zx2c4.com>
+References: <20221105060024.598488967@goodmis.org>
+ <CAHk-=wi95dGkg7DiuOZ27gGW+mxJipn9ykB6LHB-HrbbLG6OMQ@mail.gmail.com>
+ <20221105123642.596371c7@rorschach.local.home>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.1
-Content-Language: en-US
-To: Daniel Vetter <daniel@ffwll.ch>
-References: <20221017172229.42269-1-dmitry.osipenko@collabora.com>
- <20221017172229.42269-19-dmitry.osipenko@collabora.com>
- <CAKMK7uFFwTfNYT2BrubYvUMrH4fEmtF=yJshUck3-gKYLGqxCg@mail.gmail.com>
-From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-In-Reply-To: <CAKMK7uFFwTfNYT2BrubYvUMrH4fEmtF=yJshUck3-gKYLGqxCg@mail.gmail.com>
+Content-Disposition: inline
+In-Reply-To: <20221105123642.596371c7@rorschach.local.home>
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: ------
-X-Rspamd-Queue-Id: 7D3C23EBED
-X-Spamd-Result: default: False [-6.50 / 15.00];
+X-Spamd-Bar: ---------
+X-Rspamd-Queue-Id: 6671F3EC30
+X-Spamd-Result: default: False [-9.70 / 15.00];
 	REPLY(-4.00)[];
+	DWL_DNSWL_HI(-3.50)[zx2c4.com:dkim];
 	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
-	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.172];
+	DMARC_POLICY_ALLOW(-0.50)[zx2c4.com,quarantine];
+	FORGED_SENDER(0.30)[Jason@zx2c4.com,SRS0=HBtZ=3F=zx2c4.com=Jason@kernel.org];
+	R_SPF_ALLOW(-0.20)[+a:ams.source.kernel.org];
+	R_DKIM_ALLOW(-0.20)[zx2c4.com:s=20210105];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_TLS_ALL(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_CC(0.00)[linux.ie,redhat.com,chromium.org,gmail.com,collabora.com,fooishbar.org,linux.intel.com,kernel.org,suse.de,linaro.org,amd.com,samsung.com,intel.com,shipmail.org,qti.qualcomm.com,ziepe.ca,suse.com,epam.com,armlinux.org.uk,pengutronix.de,lists.freedesktop.org,vger.kernel.org,lists.linaro.org,lists.linux-foundation.org];
-	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[linaro.org:email,amd.com:email];
+	ASN(0.00)[asn:54825, ipnet:145.40.68.0/24, country:US];
+	RCPT_COUNT_TWELVE(0.00)[44];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:+];
 	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[51];
+	DKIM_TRACE(0.00)[zx2c4.com:+];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[Jason@zx2c4.com,SRS0=HBtZ=3F=zx2c4.com=Jason@kernel.org];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2]
-Message-ID-Hash: 74K2ROSTWPV5NAF3XG3KEMEJ2NYXX5OY
-X-Message-ID-Hash: 74K2ROSTWPV5NAF3XG3KEMEJ2NYXX5OY
-X-MailFrom: dmitry.osipenko@collabora.com
+	RCVD_TLS_ALL(0.00)[]
+X-MailFrom: SRS0=HBtZ=3F=zx2c4.com=Jason@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>, Gurchetan Singh <gurchetansingh@chromium.org>, Daniel Almeida <daniel.almeida@collabora.com>, Gert Wollny <gert.wollny@collabora.com>, Gustavo Padovan <gustavo.padovan@collabora.com>, Daniel Stone <daniel@fooishbar.org>, Tomeu Vizoso <tomeu.vizoso@collabora.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Rob Clark <robdclark@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>, Mauro Carvalho Chehab <mchehab@kernel.org>, Alex Deucher <alexander.deucher@amd.com>, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, Qiang Yu <yuq82
- 5@gmail.com>, Srinivas Kandagatla <srinivas.kandagatla@linaro.org>, Amol Maheshwari <amahesh@qti.qualcomm.com>, Jason Gunthorpe <jgg@ziepe.ca>, Leon Romanovsky <leon@kernel.org>, Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Tomi Valkeinen <tomba@kernel.org>, Russell King <linux@armlinux.org.uk>, Christian Gmeiner <christian.gmeiner@gmail.com>, Ruhl Michael J <michael.j.ruhl@intel.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, Dmitry Osipenko <digetx@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, amd-gfx@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, kernel@collabora.com, virtualization@lists.linux-foundation.org, linux-rdma@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Message-ID-Hash: DNGD3OAOINQUG7WLJ7Y7F4XT2BYWSCCF
+X-Message-ID-Hash: DNGD3OAOINQUG7WLJ7Y7F4XT2BYWSCCF
+X-Mailman-Approved-At: Tue, 08 Nov 2022 15:21:32 +0000
+CC: Linus Torvalds <torvalds@linux-foundation.org>, linux-kernel@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>, Stephen Boyd <sboyd@kernel.org>, Guenter Roeck <linux@roeck-us.net>, Anna-Maria Gleixner <anna-maria@linutronix.de>, Andrew Morton <akpm@linux-foundation.org>, rcu@vger.kernel.org, linux-doc@vger.kernel.org, linux-s390@vger.kernel.org, linux-sh@vger.kernel.org, linux-edac@vger.kernel.org, cgroups@vger.kernel.org, linux-block@vger.kernel.org, linux-acpi@vger.kernel.org, linux-atm-general@lists.sourceforge.net, netdev@vger.kernel.org, linux-pm@vger.kernel.org, drbd-dev@lists.linbit.com, linux-bluetooth@vger.kernel.org, openipmi-developer@lists.sourceforge.net, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org, linux-input@vger.kernel.org, linux-parisc@vger.kernel.org, linux-leds@vger.kernel.org, intel-wired-lan@lists.osuosl.org, linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org, linux-
+ scsi@vger.kernel.org, linux-staging@lists.linux.dev, linux-ext4@vger.kernel.org, linux-nilfs@vger.kernel.org, bridge@lists.linux-foundation.org, netfilter-devel@vger.kernel.org, coreteam@netfilter.org, lvs-devel@vger.kernel.org, linux-afs@lists.infradead.org, linux-nfs@vger.kernel.org, tipc-discussion@lists.sourceforge.net, alsa-devel@alsa-project.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v7 18/21] dma-buf: Move dma_buf_mmap() to dynamic locking specification
+Subject: [Linaro-mm-sig] Re: [PATCH v4a 00/38] timers: Use timer_shutdown*() before freeing timers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/74K2ROSTWPV5NAF3XG3KEMEJ2NYXX5OY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DNGD3OAOINQUG7WLJ7Y7F4XT2BYWSCCF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gMTEvNy8yMiAyMDoyNSwgRGFuaWVsIFZldHRlciB3cm90ZToNCj4+IE1vdmUgZG1hX2J1Zl9t
-bWFwKCkgZnVuY3Rpb24gdG8gdGhlIGR5bmFtaWMgbG9ja2luZyBzcGVjaWZpY2F0aW9uIGJ5DQo+
-PiB0YWtpbmcgdGhlIHJlc2VydmF0aW9uIGxvY2suIE5laXRoZXIgb2YgdGhlIHRvZGF5J3MgZHJp
-dmVycyB0YWtlIHRoZQ0KPj4gcmVzZXJ2YXRpb24gbG9jayB3aXRoaW4gdGhlIG1tYXAoKSBjYWxs
-YmFjaywgaGVuY2UgaXQncyBzYWZlIHRvIGVuZm9yY2UNCj4+IHRoZSBsb2NraW5nLg0KPj4NCj4+
-IEFja2VkLWJ5OiBTdW1pdCBTZW13YWwgPHN1bWl0LnNlbXdhbEBsaW5hcm8ub3JnPg0KPj4gQWNr
-ZWQtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCj4+IFNp
-Z25lZC1vZmYtYnk6IERtaXRyeSBPc2lwZW5rbyA8ZG1pdHJ5Lm9zaXBlbmtvQGNvbGxhYm9yYS5j
-b20+DQo+IEp1c3Qgbm90aWNlZCB0aGlzIHdoaWxlIHJlYWRpbmcgY29kZSAuLi4gdGhpcyBwYXRj
-aCBzZWVtcyB0byBoYXZlDQo+IG1pc3NlZCBkbWFfYnVmX21tYXBfaW50ZXJuYWwoKT8NCj4gDQo+
-IE1pZ2h0IGJlIGdvb2QgaWYgYXQgbGVhc3Qgc29tZSBkcml2ZXJzIGdhaW4gYSBkbWFfcmVzdl9h
-c3NlcnRfaGVsZCBpbg0KPiB0aGF0IHBhdGggdG8gbWFrZSBzdXJlIHdlJ3JlIG5vdCBxdWl0ZSB0
-aGlzIGJhZCwgdG9nZXRoZXIgd2l0aCBmaXhpbmcNCj4gdGhpcyBpc3N1ZS4NCg0KR29vZCBjYXRj
-aCEgSSdsbCBwcmVwYXJlIHRoZSBwYXRjaGVzLg0KDQotLSANCkJlc3QgcmVnYXJkcywNCkRtaXRy
-eQ0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5h
-cm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcK
-VG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3Rz
-LmxpbmFyby5vcmcK
+On Sat, Nov 05, 2022 at 12:36:42PM -0400, Steven Rostedt wrote:
+> ----------------------8<------------------------
+> @@
+> identifier ptr, timer, rfield, slab;
+> @@
+> (
+> -	del_timer(&ptr->timer);
+> +	timer_shutdown(&ptr->timer);
+> |
+> -	del_timer_sync(&ptr->timer);
+> +	timer_shutdown_sync(&ptr->timer);
+> )
+>     ...
+> (
+> 	kfree_rcu(ptr, rfield);
+> |
+> 	kmem_cache_free(slab, ptr);
+> |
+> 	kfree(ptr);
+> )
+> ---------------------->8------------------------
+
+Something that might help here is changing the `...` into
+`... when exists` or into `... when != ptr` or similar.
+See this section of the manual:
+https://coccinelle.gitlabpages.inria.fr/website/docs/main_grammar004.html
+
+Jason
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
