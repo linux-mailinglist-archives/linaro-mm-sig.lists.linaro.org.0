@@ -2,71 +2,71 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C334661DC41
-	for <lists+linaro-mm-sig@lfdr.de>; Sat,  5 Nov 2022 17:53:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6579A61DCD3
+	for <lists+linaro-mm-sig@lfdr.de>; Sat,  5 Nov 2022 18:54:00 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D99963F5CA
-	for <lists+linaro-mm-sig@lfdr.de>; Sat,  5 Nov 2022 16:53:55 +0000 (UTC)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-	by lists.linaro.org (Postfix) with ESMTPS id F33C33EC30
-	for <linaro-mm-sig@lists.linaro.org>; Sat,  5 Nov 2022 16:53:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7FE0D3F5D5
+	for <lists+linaro-mm-sig@lfdr.de>; Sat,  5 Nov 2022 17:53:59 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id 8C2C63EC30
+	for <linaro-mm-sig@lists.linaro.org>; Sat,  5 Nov 2022 17:53:42 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
 	dkim=none;
-	spf=pass (lists.linaro.org: domain of "SRS0=G+DL=3F=goodmis.org=rostedt@kernel.org" designates 145.40.68.75 as permitted sender) smtp.mailfrom="SRS0=G+DL=3F=goodmis.org=rostedt@kernel.org";
+	spf=pass (lists.linaro.org: domain of "SRS0=G+DL=3F=goodmis.org=rostedt@kernel.org" designates 139.178.84.217 as permitted sender) smtp.mailfrom="SRS0=G+DL=3F=goodmis.org=rostedt@kernel.org";
 	dmarc=none
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by ams.source.kernel.org (Postfix) with ESMTPS id 09A46B80317;
-	Sat,  5 Nov 2022 16:53:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28704C433D6;
-	Sat,  5 Nov 2022 16:53:35 +0000 (UTC)
-Date: Sat, 5 Nov 2022 12:53:33 -0400
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 2EC1560B2A;
+	Sat,  5 Nov 2022 17:53:42 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 199F5C433D6;
+	Sat,  5 Nov 2022 17:53:40 +0000 (UTC)
+Date: Sat, 5 Nov 2022 13:53:38 -0400
 From: Steven Rostedt <rostedt@goodmis.org>
-To: Julia Lawall <Julia.Lawall@inria.fr>
-Message-ID: <20221105125333.5d718591@rorschach.local.home>
-In-Reply-To: <20221105123642.596371c7@rorschach.local.home>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <20221105135338.14309ea1@rorschach.local.home>
+In-Reply-To: <CAHk-=wi95dGkg7DiuOZ27gGW+mxJipn9ykB6LHB-HrbbLG6OMQ@mail.gmail.com>
 References: <20221105060024.598488967@goodmis.org>
 	<CAHk-=wi95dGkg7DiuOZ27gGW+mxJipn9ykB6LHB-HrbbLG6OMQ@mail.gmail.com>
-	<20221105123642.596371c7@rorschach.local.home>
 X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: --
-X-Rspamd-Queue-Id: F33C33EC30
-X-Spamd-Result: default: False [-2.50 / 15.00];
+X-Spamd-Bar: ------
+X-Rspamd-Queue-Id: 8C2C63EC30
+X-Spamd-Result: default: False [-6.50 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_IN_DNSWL_HI(-1.00)[52.25.139.140:received,145.40.68.75:from];
+	RCVD_IN_DNSWL_HI(-1.00)[52.25.139.140:received,139.178.84.217:from];
 	FORGED_SENDER(0.30)[rostedt@goodmis.org,SRS0=G@kernel.org];
-	R_SPF_ALLOW(-0.20)[+a:ams.source.kernel.org];
+	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org];
 	MIME_GOOD(-0.10)[text/plain];
+	TAGGED_FROM(0.00)[DL=3F=goodmis.org=rostedt];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	R_DKIM_NA(0.00)[];
+	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	NEURAL_HAM(-0.00)[-1.000];
-	R_DKIM_NA(0.00)[];
-	TAGGED_FROM(0.00)[DL=3F=goodmis.org=rostedt];
-	ASN(0.00)[asn:54825, ipnet:145.40.68.0/24, country:US];
-	RCPT_COUNT_TWELVE(0.00)[44];
 	RCVD_COUNT_THREE(0.00)[3];
-	ARC_NA(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_ALL(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[43];
 	FROM_HAS_DN(0.00)[];
 	DMARC_NA(0.00)[goodmis.org];
 	TO_DN_SOME(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[rostedt@goodmis.org,SRS0=G@kernel.org]
-Message-ID-Hash: CORTMCJTXQC2IVMAXAK4QAV3J7RVRRPE
-X-Message-ID-Hash: CORTMCJTXQC2IVMAXAK4QAV3J7RVRRPE
+Message-ID-Hash: GQ7L76RRJCI73SDKNQFEY2IJR547SFWP
+X-Message-ID-Hash: GQ7L76RRJCI73SDKNQFEY2IJR547SFWP
 X-MailFrom: SRS0=G+DL=3F=goodmis.org=rostedt@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Linus Torvalds <torvalds@linux-foundation.org>, linux-kernel@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>, Stephen Boyd <sboyd@kernel.org>, Guenter Roeck <linux@roeck-us.net>, Anna-Maria Gleixner <anna-maria@linutronix.de>, Andrew Morton <akpm@linux-foundation.org>, rcu@vger.kernel.org, linux-doc@vger.kernel.org, linux-s390@vger.kernel.org, linux-sh@vger.kernel.org, linux-edac@vger.kernel.org, cgroups@vger.kernel.org, linux-block@vger.kernel.org, linux-acpi@vger.kernel.org, linux-atm-general@lists.sourceforge.net, netdev@vger.kernel.org, linux-pm@vger.kernel.org, drbd-dev@lists.linbit.com, linux-bluetooth@vger.kernel.org, openipmi-developer@lists.sourceforge.net, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org, linux-input@vger.kernel.org, linux-parisc@vger.kernel.org, linux-leds@vger.kernel.org, intel-wired-lan@lists.osuosl.org, linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org, linux-
- scsi@vger.kernel.org, linux-staging@lists.linux.dev, linux-ext4@vger.kernel.org, linux-nilfs@vger.kernel.org, bridge@lists.linux-foundation.org, netfilter-devel@vger.kernel.org, coreteam@netfilter.org, lvs-devel@vger.kernel.org, linux-afs@lists.infradead.org, linux-nfs@vger.kernel.org, tipc-discussion@lists.sourceforge.net, alsa-devel@alsa-project.org
+CC: linux-kernel@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>, Stephen Boyd <sboyd@kernel.org>, Guenter Roeck <linux@roeck-us.net>, Anna-Maria Gleixner <anna-maria@linutronix.de>, Andrew Morton <akpm@linux-foundation.org>, rcu@vger.kernel.org, linux-doc@vger.kernel.org, linux-s390@vger.kernel.org, linux-sh@vger.kernel.org, linux-edac@vger.kernel.org, cgroups@vger.kernel.org, linux-block@vger.kernel.org, linux-acpi@vger.kernel.org, linux-atm-general@lists.sourceforge.net, netdev@vger.kernel.org, linux-pm@vger.kernel.org, drbd-dev@lists.linbit.com, linux-bluetooth@vger.kernel.org, openipmi-developer@lists.sourceforge.net, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org, linux-input@vger.kernel.org, linux-parisc@vger.kernel.org, linux-leds@vger.kernel.org, intel-wired-lan@lists.osuosl.org, linux-usb@vger.kernel.org, linux-wireless@vger.kernel.org, linux-scsi@vger.kernel.org, linux-staging@lists.linux.
+ dev, linux-ext4@vger.kernel.org, linux-nilfs@vger.kernel.org, bridge@lists.linux-foundation.org, netfilter-devel@vger.kernel.org, coreteam@netfilter.org, lvs-devel@vger.kernel.org, linux-afs@lists.infradead.org, linux-nfs@vger.kernel.org, tipc-discussion@lists.sourceforge.net, alsa-devel@alsa-project.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v4a 00/38] timers: Use timer_shutdown*() before freeing timers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CORTMCJTXQC2IVMAXAK4QAV3J7RVRRPE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GQ7L76RRJCI73SDKNQFEY2IJR547SFWP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -76,222 +76,41 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Sat, 5 Nov 2022 12:36:42 -0400
-Steven Rostedt <rostedt@goodmis.org> wrote:
+On Sat, 5 Nov 2022 08:59:36 -0700
+Linus Torvalds <torvalds@linux-foundation.org> wrote:
 
-> On Sat, 5 Nov 2022 08:59:36 -0700
-> Linus Torvalds <torvalds@linux-foundation.org> wrote:
+> Others in the series were *definitely* not scripted, doing clearly
+> manual cleanups:
 > 
-> > On Fri, Nov 4, 2022 at 11:01 PM Steven Rostedt <rostedt@goodmis.org> wrote:  
-> > >
-> > > Patch 1 fixes an issue with sunrpc/xprt where it incorrectly uses
-> > > del_singleshot_timer_sync() for something that is not a oneshot timer. As this
-> > > will be converted to shutdown, this needs to be fixed first.    
-> > 
-> > So this is the kind of thing that I would *not* want to get eartly.  
+> -    if (dch->timer.function) {
+> -        del_timer(&dch->timer);
+> -        dch->timer.function = NULL;
+> -    }
+> +    timer_shutdown(&dch->timer);
 > 
-> So I'll have to break up patch 5 to not update the
-> del_singleshot_timer_sync() to a timer_shutdown_sync(), because that
-> breaks this code.
-> 
-> Hmm, since that is a functional change, it probably should wait till
-> the merge window. I'll move this patch and that part of patch 5 to the
-> second part of the series for the merge window.
-> 
-> > 
-> > I really would want to get just the infrastructure in to let people
-> > start doing conversions.
-> > 
-> > And then the "mindlessly obvious patches that are done by scripting
-> > and can not possibly matter".
-> > 
-> > The kinds that do not *need* review, because they are mechanical, and
-> > that just cause pointless noise for the rest of the patches that *do*
-> > want review.
-> > 
-> > Not this kind of thing that is so subtle that you have to explain it.
-> > That's not a "scripted patch for no semantic change".
-> > 
-> > So leave the del_singleshot_timer_sync() cases alone, they are
-> > irrelevant for the new infrastructure and for the "mindless scripted
-> > conversion" patches.
-> >   
-> > > Patches 2-4 changes existing timer_shutdown() functions used locally in ARM and
-> > > some drivers to better namespace names.    
-> > 
-> > Ok, these are relevant.
-> >   
-> > > Patch 5 implements the new timer_shutdown() and timer_shutdown_sync() functions
-> > > that disable re-arming the timer after they are called.    
-> > 
-> > This is obviously what I'd want early so that people can start doign
-> > this in their trees.  
-> 
-> But will need to remove the part that it changes del_singleshot_timer_sync().
-> 
-> 
-> >   
-> > > Patches 6-28 change all the locations where there's a kfree(), kfree_rcu(),
-> > > kmem_cache_free() and one call_rcu() call where the RCU function frees the
-> > > timer (the workqueue patch) in the same function as the del_timer{,_sync}() is
-> > > called on that timer, and there's no extra exit path between the del_timer and
-> > > freeing of the timer.    
-> > 
-> > So honestly, I was literally hoping for a "this is the coccinelle
-> > script" kind of patch.  
-> 
-> The above actual was, but I walked through them manually too, because I
-> don't trust my conccinelle skills. All but the call_rcu() one was
-> caught by conccinelle. That's why I pointed out the worqueue one. I'll
-> remove that from this series.
-> 
-> > 
-> > Now there seems to be a number of patches here that are actualyl
-> > really hard to see that they are "obviously correct" and I can't tell
-> > if they are actually scripted or not.  
-> 
-> Yes they are. The script that found these were:
-> 
+> so no, this does *not* make me feel "ok, this is all trivial".
 
-Julia,
+I just ran the script and the above code turned to:
 
-Perhaps you can help me here. I have the following script to find
-places that call del_timer*() that need to be converted to
-timer_shutdown*() if  later on in the same function the timer is being
-freed.
+diff --git a/drivers/isdn/hardware/mISDN/hfcmulti.c b/drivers/isdn/hardware/mISDN/hfcmulti.c
+index 4f7eaa17fb27..2695bbde52db 100644
+--- a/drivers/isdn/hardware/mISDN/hfcmulti.c
++++ b/drivers/isdn/hardware/mISDN/hfcmulti.c
+@@ -4544,7 +4544,7 @@ release_port(struct hfc_multi *hc, struct dchannel *dch)
+        spin_lock_irqsave(&hc->lock, flags);
+ 
+        if (dch->timer.function) {
+-               del_timer(&dch->timer);
++               timer_shutdown(&dch->timer);
+                dch->timer.function = NULL;
+        }
+ 
+Which is silly. Because timer_shutdown() makes timer.function = NULL.
 
-> ----------------------8<------------------------
-> @@
-> identifier ptr, timer, rfield, slab;
-> @@
-> (
-> -	del_timer(&ptr->timer);
-> +	timer_shutdown(&ptr->timer);
-> |
-> -	del_timer_sync(&ptr->timer);
-> +	timer_shutdown_sync(&ptr->timer);
-> )
->     ...
-> (
-> 	kfree_rcu(ptr, rfield);
-> |
-> 	kmem_cache_free(slab, ptr);
-> |
-> 	kfree(ptr);
-> )
-> ---------------------->8------------------------  
-> 
-
-Above is the code I used. But it gets more than it should, see below.
-
-
-> So any function that had a del_timer*(&obj->timer) and then that obj
-> was freed with kfree(), kfree_rcu() or kmem_cache_free() was updated.
-> 
-> What I did manually was to make sure there was no exit of the routine
-> between those two calls. I'm sure coccinelle could do that too, but I'm
-> not good enough at it to add that feature.
-> 
-> The reason the patches don't look obvious is because the distance
-> between the del_timer() and the free may be quite far. I walked through
-> these patches at least 3 times manually to make sure they are all OK.
-> 
-> 
-> > 
-> > They don't *look* scripted, but I can't really tell.  I looked at the
-> > patches with ten lines of context, and I didn't see the immediately
-> > following kfree() even in that expanded patch context, so it's fairly
-> > far away.  
-> 
-> Yes, some are like a 100 lines away.
-> 
-> > 
-> > Others in the series were *definitely* not scripted, doing clearly
-> > manual cleanups:
-> > 
-> > -    if (dch->timer.function) {
-> > -        del_timer(&dch->timer);
-> > -        dch->timer.function = NULL;
-> > -    }
-> > +    timer_shutdown(&dch->timer);
-> > 
-> > so no, this does *not* make me feel "ok, this is all trivial".  
-> 
-> Sorry, I'll remove that. It's basically open-coding the
-> timer_shutdown() as the way it shuts down the timer is simply by
-> setting the timer.function to NULL.
-> 
-> > 
-> > IOW, I'd really want *just* the infrastructure and *just* the provably
-> > trivial stuff. If it wasn't some scripted really obvious thing that
-> > cannot possibly change anything and that wasn't then edited manually
-> > for some reason, I really don't want it early.
-> > 
-> > IOW, any early conversions I'd take are literally about removing pure
-> > mindless noise. Not about doing conversions.
-> > 
-> > And I wouldn't mind it as a single conversion patch that has the
-> > coccinelle script as the explanation.  
-> 
-> I'll need to update the coccinelle script (or ask someone to give me a
-> fix) that catches the case of:
-> 
-> 	del_timer(&obj->timer);
-> 
-> 	if (x)
-> 		goto out;
-> 
-> 	kfree(obj);
-> 
-> out:
-> 	return;
-> 
-
-The above should not be converted.
-
-> 
-> I'm sure it's a trivial change. I'll look into it some more.
-> 
-> I'm guessing you don't care about the case of:
-> 
-> 	del_timer(&obj->timer);
-> 
-> 	if (x)
-> 		goto label;
-> 
-> label:
-> 
-> 	kfree(obj);
-
-Although the above is fine, we probably shouldn't covert it for the rc
-release.
-
-
-I need a way to determine if something gets patched based on what
-happens later, not before. Could you tell me how to go about that in
-Coccinelle?
-
-Thanks!
+That's why I changed it. And it really shouldn't be touching
+timer.function anyway.
 
 -- Steve
-
-
-> 
-> As that's a bit more complex if we avoid the first goto case?
-> Even though the second case is obviously correct.
-> 
-> I believe both of these cases exist in the kernel. I manually removed
-> the places that my script found for the first case.
-> 
-> > 
-> > Really just THAT kind of "100% mindless conversion".  
-> 
-> I'll look at making the most obviously correct case, where del_timer
-> and kfree have no goto or returns between them. We can always add the
-> rest in the merge window.
-> 
-> -- Steve
-
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
