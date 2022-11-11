@@ -2,89 +2,84 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 525FF628175
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Nov 2022 14:37:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7634F62817B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Nov 2022 14:38:29 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 57EC13F0CE
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Nov 2022 13:37:27 +0000 (UTC)
-Received: from m12-14.163.com (m12-14.163.com [220.181.12.14])
-	by lists.linaro.org (Postfix) with ESMTP id 750E03EF90
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 11 Nov 2022 03:39:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 882AC3F60A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Nov 2022 13:38:28 +0000 (UTC)
+Received: from mail-il1-f199.google.com (mail-il1-f199.google.com [209.85.166.199])
+	by lists.linaro.org (Postfix) with ESMTPS id 8127C3EF32
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 11 Nov 2022 11:18:56 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=163.com header.s=s110527 header.b=c5Zqxv7R;
-	spf=pass (lists.linaro.org: domain of tangchunyou@163.com designates 220.181.12.14 as permitted sender) smtp.mailfrom=tangchunyou@163.com;
-	dmarc=pass (policy=none) header.from=163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=8SnPH
-	5Qx6ge1EtKB0f/nVg1sCMMgt2pTaFXFocUqJa8=; b=c5Zqxv7RjLUYIxVx+RVnW
-	DwURkjfLUI5XBmNpLX8cpiPNSs3ueEPl19EMAeGrpTlwsJPfVknBFld3Oc4dILfB
-	ppgfO/V0tg6DzqCfunszw3zq9IFS9zDZfj2GyBcD4INCR8F/ICS6AxsL9+4FdeDm
-	i2hcRxAuX/Qu9K4sQcTd84=
-Received: from localhost.localdomain (unknown [114.221.197.143])
-	by smtp10 (Coremail) with SMTP id DsCowABH7bG4w21jBvxXMA--.32326S2;
-	Fri, 11 Nov 2022 11:38:39 +0800 (CST)
-From: ChunyouTang <tangchunyou@163.com>
-To: maarten.lankhorst@linux.intel.com,
-	mripard@kernel.org,
-	tzimmermann@suse.de,
-	airlied@gmail.com,
-	daniel@ffwll.ch,
-	sumit.semwal@linaro.org,
-	christian.koenig@amd.com
-Date: Fri, 11 Nov 2022 11:38:17 +0800
-Message-Id: <20221111033817.366-1-tangchunyou@163.com>
-X-Mailer: git-send-email 2.30.0.windows.1
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of 3oC9uYwkbANkNTUF5GG9M5KKD8.BJJBG9PN9M7JIO9IO.7JH@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.166.199 as permitted sender) smtp.mailfrom=3oC9uYwkbANkNTUF5GG9M5KKD8.BJJBG9PN9M7JIO9IO.7JH@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
+	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none)
+Received: by mail-il1-f199.google.com with SMTP id n4-20020a056e02140400b00300cc49a4d0so3763750ilo.0
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 11 Nov 2022 03:18:56 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=ydVooePxmDrHayJC7VSqE+6bvJCgNaAZis4ZNWJBQpI=;
+        b=hbVQDU8SVFQvnvMJ2DXK7pfppfzhDqsr2lpy9tlDV9s63xa+i5aCQFlo3xQ3amHGaG
+         LIhLiekEHoVeYUbrfqKj+Gf1UfoV2RY82lZECQHC4z9bG/QIlX12cPgeE5Y5Ng9sPDce
+         dMAH3a/nKD37I2kAcJ7z46ofTbJ+DKcng1uaH9viAHx/oj1Dc0Hs6ppEbjXXJAu9KzBo
+         NwWQZXKoeUSvXLc8towQhCCmhOy/ejLj/Hag5VwSscBVM9wUmdIB0jyxTmX2XMOejUm1
+         +8XZR4s93LYO+mlX7ndfLun2OS4VvQGlrbauQnwgTZpVoU9ToN1HMmBV/rggqoTmj1jj
+         7zMw==
+X-Gm-Message-State: ANoB5pltyBjRInF+0G82BKjXdsNpPeVEpxsPkXckVZ+eqcWtBTt+otdb
+	BHegFZSugbuQm12O6j9HtKpYuhzGpDqpkp5nRL9YZhzELvuJ
+X-Google-Smtp-Source: AA0mqf7OzarPms6yOizs00yfd8/BLnWlraeFLHqq5NrrCa+o9KN2bB3b/Jv0GPVBWwYvPrkNaOqwNEmy0qpKCiOz4sOCKpk5v1Ux
 MIME-Version: 1.0
-X-CM-TRANSID: DsCowABH7bG4w21jBvxXMA--.32326S2
-X-Coremail-Antispam: 1Uf129KBjvJXoWxAw4DXw1ruF43JryxZFW7XFb_yoW5Wryrpa
-	nxAry7KrW8KFZFgrZ7XF4kCa43Gw40gF4xWaySq3yakr10yF1DXFn8Cr1DAFW3Jr17Xr1a
-	q3sFkFySyrWjkF7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0z_6wuUUUUUU=
-X-Originating-IP: [114.221.197.143]
-X-CM-SenderInfo: 5wdqwu5kxq50rx6rljoofrz/1tbiYwC2UVaEMNUQPwAAsc
+X-Received: by 2002:a02:8792:0:b0:363:bb1f:7a03 with SMTP id
+ t18-20020a028792000000b00363bb1f7a03mr540230jai.16.1668165536040; Fri, 11 Nov
+ 2022 03:18:56 -0800 (PST)
+Date: Fri, 11 Nov 2022 03:18:56 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <00000000000033d0f205ed300e3b@google.com>
+From: syzbot <syzbot+6d6c13e35721fb4393fd@syzkaller.appspotmail.com>
+To: christian.koenig@amd.com, dri-devel@lists.freedesktop.org,
+	gustavo@padovan.org, linaro-mm-sig@lists.linaro.org,
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+	sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: ----
-X-Rspamd-Queue-Id: 750E03EF90
-X-Spamd-Result: default: False [-4.50 / 15.00];
+X-Spamd-Bar: --
+X-Rspamd-Queue-Id: 8127C3EF32
+X-Spamd-Result: default: False [-2.40 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-1.00)[114.221.197.143:received,220.181.12.14:from];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[163.com,none];
-	R_DKIM_ALLOW(-0.20)[163.com:s=s110527];
-	R_SPF_ALLOW(-0.20)[+ip4:220.181.12.0/22];
-	RWL_MAILSPIKE_GOOD(-0.10)[220.181.12.14:from];
-	RCVD_NO_TLS_LAST(0.10)[];
+	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=3a4a45d2d827c1e];
+	RCVD_IN_DNSWL_HI(-0.50)[209.85.166.199:from];
+	FORGED_SENDER(0.30)[syzbot@syzkaller.appspotmail.com,3oC9uYwkbANkNTUF5GG9M5KKD8.BJJBG9PN9M7JIO9IO.7JH@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.537];
-	FROM_HAS_DN(0.00)[];
-	HAS_XOIP(0.00)[];
-	ASN(0.00)[asn:23724, ipnet:220.181.0.0/19, country:CN];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,lists.linaro.org,163.com];
-	DKIM_TRACE(0.00)[163.com:+];
-	FREEMAIL_FROM(0.00)[163.com];
-	TO_DN_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.166.199:from];
+	R_DKIM_NA(0.00)[];
+	TAGGED_FROM(0.00)[6d6c13e35721fb4393fd];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[163.com];
+	NEURAL_HAM(-0.00)[-0.680];
+	RCVD_TLS_LAST(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[8];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,3oC9uYwkbANkNTUF5GG9M5KKD8.BJJBG9PN9M7JIO9IO.7JH@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
+	TO_DN_NONE(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2]
-X-MailFrom: tangchunyou@163.com
+X-MailFrom: 3oC9uYwkbANkNTUF5GG9M5KKD8.BJJBG9PN9M7JIO9IO.7JH@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 5BWKWOGUYN5APCDS62MV4NRAOBXEHAAL
-X-Message-ID-Hash: 5BWKWOGUYN5APCDS62MV4NRAOBXEHAAL
-X-Mailman-Approved-At: Mon, 14 Nov 2022 13:37:11 +0000
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, ChunyouTang <tangchunyou@163.com>
+Message-ID-Hash: OM4LZELJ4F5VZHP4D7ZFJJ6MLU6HOV44
+X-Message-ID-Hash: OM4LZELJ4F5VZHP4D7ZFJJ6MLU6HOV44
+X-Mailman-Approved-At: Mon, 14 Nov 2022 13:37:39 +0000
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2] drm/gem-shmem: When drm_gem_object_init failed, should release object
+Subject: [Linaro-mm-sig] [syzbot] inconsistent lock state in trace_hardirqs_on
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5BWKWOGUYN5APCDS62MV4NRAOBXEHAAL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OM4LZELJ4F5VZHP4D7ZFJJ6MLU6HOV44/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -94,88 +89,159 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-when goto err_free, the object had init, so it should be release when fail.
+Hello,
 
-Signed-off-by: ChunyouTang <tangchunyou@163.com>
+syzbot found the following issue on:
+
+HEAD commit:    bbed346d5a96 Merge branch 'for-next/core' into for-kernelci
+git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git for-kernelci
+console output: https://syzkaller.appspot.com/x/log.txt?x=14c82f39880000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=3a4a45d2d827c1e
+dashboard link: https://syzkaller.appspot.com/bug?extid=6d6c13e35721fb4393fd
+compiler:       Debian clang version 13.0.1-++20220126092033+75e33f71c2da-1~exp1~20220126212112.63, GNU ld (GNU Binutils for Debian) 2.35.2
+userspace arch: arm64
+
+Unfortunately, I don't have any reproducer for this issue yet.
+
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/e8e91bc79312/disk-bbed346d.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/c1cb3fb3b77e/vmlinux-bbed346d.xz
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+6d6c13e35721fb4393fd@syzkaller.appspotmail.com
+
+================================
+WARNING: inconsistent lock state
+6.0.0-rc7-syzkaller-18095-gbbed346d5a96 #0 Not tainted
+--------------------------------
+inconsistent {IN-HARDIRQ-W} -> {HARDIRQ-ON-W} usage.
+syz-executor.4/21937 [HC0[0]:SC0[0]:HE0:SE1] takes:
+ffff80000d6384c8 (sync_timeline_list_lock){?...}-{2:2}, at: spin_lock_irq include/linux/spinlock.h:374 [inline]
+ffff80000d6384c8 (sync_timeline_list_lock){?...}-{2:2}, at: sync_info_debugfs_show+0x54/0x2dc drivers/dma-buf/sync_debug.c:147
+{IN-HARDIRQ-W} state was registered at:
+  lock_acquire+0x100/0x1f8 kernel/locking/lockdep.c:5666
+  __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+  _raw_spin_lock_irqsave+0x6c/0xb4 kernel/locking/spinlock.c:162
+  sync_timeline_debug_remove+0x24/0x80 drivers/dma-buf/sync_debug.c:31
+  sync_timeline_free drivers/dma-buf/sw_sync.c:104 [inline]
+  kref_put include/linux/kref.h:65 [inline]
+  sync_timeline_put drivers/dma-buf/sw_sync.c:116 [inline]
+  timeline_fence_release+0xe0/0x15c drivers/dma-buf/sw_sync.c:144
+  dma_fence_release+0x70/0x11c drivers/dma-buf/dma-fence.c:549
+  kref_put include/linux/kref.h:65 [inline]
+  dma_fence_put include/linux/dma-fence.h:276 [inline]
+  dma_fence_array_release+0xac/0x154 drivers/dma-buf/dma-fence-array.c:120
+  dma_fence_release+0x70/0x11c drivers/dma-buf/dma-fence.c:549
+  kref_put include/linux/kref.h:65 [inline]
+  dma_fence_put include/linux/dma-fence.h:276 [inline]
+  irq_dma_fence_array_work+0x84/0x11c drivers/dma-buf/dma-fence-array.c:52
+  irq_work_single kernel/irq_work.c:211 [inline]
+  irq_work_run_list kernel/irq_work.c:242 [inline]
+  irq_work_run+0xc4/0x29c kernel/irq_work.c:251
+  do_handle_IPI arch/arm64/kernel/smp.c:899 [inline]
+  ipi_handler+0x120/0x1a8 arch/arm64/kernel/smp.c:922
+  handle_percpu_devid_irq+0xb0/0x1c8 kernel/irq/chip.c:930
+  generic_handle_irq_desc include/linux/irqdesc.h:158 [inline]
+  handle_irq_desc kernel/irq/irqdesc.c:648 [inline]
+  generic_handle_domain_irq+0x4c/0x6c kernel/irq/irqdesc.c:704
+  __gic_handle_irq drivers/irqchip/irq-gic-v3.c:695 [inline]
+  __gic_handle_irq_from_irqson drivers/irqchip/irq-gic-v3.c:746 [inline]
+  gic_handle_irq+0x78/0x1b4 drivers/irqchip/irq-gic-v3.c:790
+  call_on_irq_stack+0x2c/0x54 arch/arm64/kernel/entry.S:889
+  do_interrupt_handler+0x7c/0xc0 arch/arm64/kernel/entry-common.c:274
+  __el1_irq arch/arm64/kernel/entry-common.c:470 [inline]
+  el1_interrupt+0x34/0x68 arch/arm64/kernel/entry-common.c:485
+  el1h_64_irq_handler+0x18/0x24 arch/arm64/kernel/entry-common.c:490
+  el1h_64_irq+0x64/0x68 arch/arm64/kernel/entry.S:577
+  arch_local_irq_enable arch/arm64/include/asm/irqflags.h:35 [inline]
+  __raw_spin_unlock_irq include/linux/spinlock_api_smp.h:159 [inline]
+  _raw_spin_unlock_irq+0x44/0x70 kernel/locking/spinlock.c:202
+  spin_unlock_irq include/linux/spinlock.h:399 [inline]
+  sw_sync_debugfs_release+0xa8/0x158 drivers/dma-buf/sw_sync.c:321
+  __fput+0x198/0x3dc fs/file_table.c:320
+  ____fput+0x20/0x30 fs/file_table.c:353
+  task_work_run+0xc4/0x14c kernel/task_work.c:177
+  exit_task_work include/linux/task_work.h:38 [inline]
+  do_exit+0x26c/0xbe0 kernel/exit.c:795
+  __arm64_sys_exit_group+0x0/0x18 kernel/exit.c:925
+  __do_sys_exit_group kernel/exit.c:936 [inline]
+  __se_sys_exit_group kernel/exit.c:934 [inline]
+  __wake_up_parent+0x0/0x40 kernel/exit.c:934
+  __invoke_syscall arch/arm64/kernel/syscall.c:38 [inline]
+  invoke_syscall arch/arm64/kernel/syscall.c:52 [inline]
+  el0_svc_common+0x138/0x220 arch/arm64/kernel/syscall.c:142
+  do_el0_svc+0x48/0x164 arch/arm64/kernel/syscall.c:206
+  el0_svc+0x58/0x150 arch/arm64/kernel/entry-common.c:636
+  el0t_64_sync_handler+0x84/0xf0 arch/arm64/kernel/entry-common.c:654
+  el0t_64_sync+0x18c/0x190 arch/arm64/kernel/entry.S:581
+irq event stamp: 872
+hardirqs last  enabled at (871): [<ffff8000085633bc>] mod_objcg_state+0x19c/0x204 mm/memcontrol.c:3158
+hardirqs last disabled at (872): [<ffff80000bfc8834>] __raw_spin_lock_irq include/linux/spinlock_api_smp.h:117 [inline]
+hardirqs last disabled at (872): [<ffff80000bfc8834>] _raw_spin_lock_irq+0x34/0x9c kernel/locking/spinlock.c:170
+softirqs last  enabled at (856): [<ffff80000801c33c>] local_bh_enable+0x10/0x34 include/linux/bottom_half.h:32
+softirqs last disabled at (854): [<ffff80000801c308>] local_bh_disable+0x10/0x34 include/linux/bottom_half.h:19
+
+other info that might help us debug this:
+ Possible unsafe locking scenario:
+
+       CPU0
+       ----
+  lock(sync_timeline_list_lock);
+  <Interrupt>
+    lock(sync_timeline_list_lock);
+
+ *** DEADLOCK ***
+
+3 locks held by syz-executor.4/21937:
+ #0: ffff000128868ee8 (&f->f_pos_lock){+.+.}-{3:3}, at: __fdget_pos+0x12c/0x154 fs/file.c:1036
+ #1: ffff000126e66d50 (&p->lock){+.+.}-{3:3}, at: seq_read_iter+0x5c/0x5e0 fs/seq_file.c:182
+ #2: ffff80000d6384c8 (sync_timeline_list_lock){?...}-{2:2}, at: spin_lock_irq include/linux/spinlock.h:374 [inline]
+ #2: ffff80000d6384c8 (sync_timeline_list_lock){?...}-{2:2}, at: sync_info_debugfs_show+0x54/0x2dc drivers/dma-buf/sync_debug.c:147
+
+stack backtrace:
+CPU: 0 PID: 21937 Comm: syz-executor.4 Not tainted 6.0.0-rc7-syzkaller-18095-gbbed346d5a96 #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 09/30/2022
+Call trace:
+ dump_backtrace+0x1c4/0x1f0 arch/arm64/kernel/stacktrace.c:156
+ show_stack+0x2c/0x54 arch/arm64/kernel/stacktrace.c:163
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0x104/0x16c lib/dump_stack.c:106
+ dump_stack+0x1c/0x58 lib/dump_stack.c:113
+ print_usage_bug+0x39c/0x3cc kernel/locking/lockdep.c:3961
+ mark_lock_irq+0x4a8/0x4b4
+ mark_lock+0x154/0x1b4 kernel/locking/lockdep.c:4632
+ mark_held_locks kernel/locking/lockdep.c:4234 [inline]
+ __trace_hardirqs_on_caller kernel/locking/lockdep.c:4252 [inline]
+ lockdep_hardirqs_on_prepare+0x158/0x2b0 kernel/locking/lockdep.c:4319
+ trace_hardirqs_on+0xc4/0x108 kernel/trace/trace_preemptirq.c:49
+ __raw_spin_unlock_irq include/linux/spinlock_api_smp.h:159 [inline]
+ _raw_spin_unlock_irq+0x3c/0x70 kernel/locking/spinlock.c:202
+ spin_unlock_irq include/linux/spinlock.h:399 [inline]
+ sync_print_obj drivers/dma-buf/sync_debug.c:118 [inline]
+ sync_info_debugfs_show+0xd8/0x2dc drivers/dma-buf/sync_debug.c:153
+ seq_read_iter+0x220/0x5e0 fs/seq_file.c:230
+ seq_read+0x98/0xd0 fs/seq_file.c:162
+ vfs_read+0x19c/0x448 fs/read_write.c:468
+ ksys_read+0xb4/0x160 fs/read_write.c:607
+ __do_sys_read fs/read_write.c:617 [inline]
+ __se_sys_read fs/read_write.c:615 [inline]
+ __arm64_sys_read+0x24/0x34 fs/read_write.c:615
+ __invoke_syscall arch/arm64/kernel/syscall.c:38 [inline]
+ invoke_syscall arch/arm64/kernel/syscall.c:52 [inline]
+ el0_svc_common+0x138/0x220 arch/arm64/kernel/syscall.c:142
+ do_el0_svc+0x48/0x164 arch/arm64/kernel/syscall.c:206
+ el0_svc+0x58/0x150 arch/arm64/kernel/entry-common.c:636
+ el0t_64_sync_handler+0x84/0xf0 arch/arm64/kernel/entry-common.c:654
+ el0t_64_sync+0x18c/0x190 arch/arm64/kernel/entry.S:581
+
+
 ---
- drivers/gpu/drm/drm_gem.c              | 19 ++++++++++++++++---
- drivers/gpu/drm/drm_gem_shmem_helper.c |  4 +++-
- include/drm/drm_gem.h                  |  1 +
- 3 files changed, 20 insertions(+), 4 deletions(-)
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-index 8b68a3c1e6ab..cba32c46bb05 100644
---- a/drivers/gpu/drm/drm_gem.c
-+++ b/drivers/gpu/drm/drm_gem.c
-@@ -169,6 +169,21 @@ void drm_gem_private_object_init(struct drm_device *dev,
- }
- EXPORT_SYMBOL(drm_gem_private_object_init);
- 
-+/**
-+ * drm_gem_private_object_fini - Finalize a failed drm_gem_object
-+ * @obj: drm_gem_object
-+ *
-+ * Uninitialize an already allocated GEM object when it initialized failed
-+ */
-+void drm_gem_private_object_fini(struct drm_gem_object *obj)
-+{
-+	WARN_ON(obj->dma_buf);
-+
-+	dma_resv_fini(&obj->_resv);
-+	drm_gem_lru_remove(obj);
-+}
-+EXPORT_SYMBOL(drm_gem_private_object_fini);
-+
- /**
-  * drm_gem_object_handle_free - release resources bound to userspace handles
-  * @obj: GEM object to clean up.
-@@ -930,14 +945,12 @@ drm_gem_release(struct drm_device *dev, struct drm_file *file_private)
- void
- drm_gem_object_release(struct drm_gem_object *obj)
- {
--	WARN_ON(obj->dma_buf);
-+	drm_gem_private_object_fini(obj);
- 
- 	if (obj->filp)
- 		fput(obj->filp);
- 
--	dma_resv_fini(&obj->_resv);
- 	drm_gem_free_mmap_offset(obj);
--	drm_gem_lru_remove(obj);
- }
- EXPORT_SYMBOL(drm_gem_object_release);
- 
-diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
-index 35138f8a375c..845e3d5d71eb 100644
---- a/drivers/gpu/drm/drm_gem_shmem_helper.c
-+++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
-@@ -79,8 +79,10 @@ __drm_gem_shmem_create(struct drm_device *dev, size_t size, bool private)
- 	} else {
- 		ret = drm_gem_object_init(dev, obj, size);
- 	}
--	if (ret)
-+	if (ret) {
-+		drm_gem_private_object_fini(obj)
- 		goto err_free;
-+	}
- 
- 	ret = drm_gem_create_mmap_offset(obj);
- 	if (ret)
-diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
-index bd42f25e449c..9b1feb03069d 100644
---- a/include/drm/drm_gem.h
-+++ b/include/drm/drm_gem.h
-@@ -405,6 +405,7 @@ int drm_gem_object_init(struct drm_device *dev,
- 			struct drm_gem_object *obj, size_t size);
- void drm_gem_private_object_init(struct drm_device *dev,
- 				 struct drm_gem_object *obj, size_t size);
-+void drm_gem_private_object_fini(struct drm_gem_object *obj);
- void drm_gem_vm_open(struct vm_area_struct *vma);
- void drm_gem_vm_close(struct vm_area_struct *vma);
- int drm_gem_mmap_obj(struct drm_gem_object *obj, unsigned long obj_size,
--- 
-2.25.1
-
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
