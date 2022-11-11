@@ -2,84 +2,106 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7634F62817B
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Nov 2022 14:38:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5754B628178
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Nov 2022 14:37:48 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 882AC3F60A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Nov 2022 13:38:28 +0000 (UTC)
-Received: from mail-il1-f199.google.com (mail-il1-f199.google.com [209.85.166.199])
-	by lists.linaro.org (Postfix) with ESMTPS id 8127C3EF32
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 11 Nov 2022 11:18:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 653533F5F2
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 14 Nov 2022 13:37:47 +0000 (UTC)
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
+	by lists.linaro.org (Postfix) with ESMTPS id 93DBF3EF32
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 11 Nov 2022 11:46:33 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of 3oC9uYwkbANkNTUF5GG9M5KKD8.BJJBG9PN9M7JIO9IO.7JH@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.166.199 as permitted sender) smtp.mailfrom=3oC9uYwkbANkNTUF5GG9M5KKD8.BJJBG9PN9M7JIO9IO.7JH@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none)
-Received: by mail-il1-f199.google.com with SMTP id n4-20020a056e02140400b00300cc49a4d0so3763750ilo.0
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 11 Nov 2022 03:18:56 -0800 (PST)
+	dkim=pass header.d=googlemail.com header.s=20210112 header.b=K5nlJPYQ;
+	spf=pass (lists.linaro.org: domain of lukasz.wiecaszek@googlemail.com designates 209.85.167.50 as permitted sender) smtp.mailfrom=lukasz.wiecaszek@googlemail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-lf1-f50.google.com with SMTP id p8so7919489lfu.11
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 11 Nov 2022 03:46:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=googlemail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=8+TGbcI0QMZONMioawRdiUS9+5vmjoD8ChogAY21Oa0=;
+        b=K5nlJPYQZx78+Mgn7RBBkCqYmu3Rn6ArgOwGOf2XXY7HAgZoJ9QjWVGhyg1cE6r9Rw
+         kEQDEI+qTn83kiYVLHOOLrwoMQ5SCSru6awifHCwiI1tmWgqW7b1oa8ab36hG/fMWV2W
+         ciFYrd6x3q5OcT7sYB9b0as4UqBgI9MAe5/vyuoHAKS+qPV89g6qVnLb3NKIrYMFZye3
+         rxHA0LvaUTUFkaLK+k7im6nbFwPvI3Ek1hPhrTbUpu4WR+sZQoDcnxBXKugB0Le3HpUc
+         TQgeC4cYZWc3HBPSa5vA3e3mgnb2b5GWUkLAmkF2qtIscMbhLPxFP3N2xXIiVGAV8bxm
+         BE0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=ydVooePxmDrHayJC7VSqE+6bvJCgNaAZis4ZNWJBQpI=;
-        b=hbVQDU8SVFQvnvMJ2DXK7pfppfzhDqsr2lpy9tlDV9s63xa+i5aCQFlo3xQ3amHGaG
-         LIhLiekEHoVeYUbrfqKj+Gf1UfoV2RY82lZECQHC4z9bG/QIlX12cPgeE5Y5Ng9sPDce
-         dMAH3a/nKD37I2kAcJ7z46ofTbJ+DKcng1uaH9viAHx/oj1Dc0Hs6ppEbjXXJAu9KzBo
-         NwWQZXKoeUSvXLc8towQhCCmhOy/ejLj/Hag5VwSscBVM9wUmdIB0jyxTmX2XMOejUm1
-         +8XZR4s93LYO+mlX7ndfLun2OS4VvQGlrbauQnwgTZpVoU9ToN1HMmBV/rggqoTmj1jj
-         7zMw==
-X-Gm-Message-State: ANoB5pltyBjRInF+0G82BKjXdsNpPeVEpxsPkXckVZ+eqcWtBTt+otdb
-	BHegFZSugbuQm12O6j9HtKpYuhzGpDqpkp5nRL9YZhzELvuJ
-X-Google-Smtp-Source: AA0mqf7OzarPms6yOizs00yfd8/BLnWlraeFLHqq5NrrCa+o9KN2bB3b/Jv0GPVBWwYvPrkNaOqwNEmy0qpKCiOz4sOCKpk5v1Ux
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=8+TGbcI0QMZONMioawRdiUS9+5vmjoD8ChogAY21Oa0=;
+        b=ffg99gb3g0lZO6p6h8MOx0U4wfufvwfByiS6OoKlsnHrlDm2S9Vos21bSqbXy3tNxU
+         9X3qszcdL5XcZPqS5hSiSXv/G1B0duiuEJJpRlCzYfJrP5tE9d142bGaco7dLnU+gYcM
+         7EDQxSMG4U2GMBpNNCaQDUccKLsY+gQrTUXn0ZI72pLFxsgL53eYxGvt0RHwNjCblIuU
+         16F3OZs5hO/Jo/BtOYLpNQK7Wyqo5mBYSatDvKjQWqTqB+g0P6jSsCtivrJOVXFHyBtz
+         9WAqKsyXsknIMHojZnveXWWkHpMvNXj5Bu4k3Ap3I72NXcuqCyVKG4a8kDQruTbez5gZ
+         LDfg==
+X-Gm-Message-State: ANoB5pmQcvesZ2j8G6nvE4pZXb5QUee5/b91MYVA50F+FinD6rEJB4L/
+	hBux+6DIy48ridbk353wsaE=
+X-Google-Smtp-Source: AA0mqf4wiSpCasQPxQc2XZal1V3LS9Za3jYalQQVWS8JERfMTmHASiNZacgz6jFLRAGzfiUbS2gPpA==
+X-Received: by 2002:a19:e601:0:b0:4a8:e955:77e7 with SMTP id d1-20020a19e601000000b004a8e95577e7mr565011lfh.573.1668167192277;
+        Fri, 11 Nov 2022 03:46:32 -0800 (PST)
+Received: from localhost.localdomain ([78.133.163.249])
+        by smtp.googlemail.com with ESMTPSA id 10-20020ac25f4a000000b004979ec19380sm281616lfz.285.2022.11.11.03.46.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 11 Nov 2022 03:46:31 -0800 (PST)
+From: Lukasz Wiecaszek <lukasz.wiecaszek@googlemail.com>
+X-Google-Original-From: Lukasz Wiecaszek <lukasz.wiecaszek@gmail.com>
+To: kraxel@redhat.com
+Date: Fri, 11 Nov 2022 12:45:28 +0100
+Message-Id: <20221111114528.608801-1-lukasz.wiecaszek@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Received: by 2002:a02:8792:0:b0:363:bb1f:7a03 with SMTP id
- t18-20020a028792000000b00363bb1f7a03mr540230jai.16.1668165536040; Fri, 11 Nov
- 2022 03:18:56 -0800 (PST)
-Date: Fri, 11 Nov 2022 03:18:56 -0800
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <00000000000033d0f205ed300e3b@google.com>
-From: syzbot <syzbot+6d6c13e35721fb4393fd@syzkaller.appspotmail.com>
-To: christian.koenig@amd.com, dri-devel@lists.freedesktop.org,
-	gustavo@padovan.org, linaro-mm-sig@lists.linaro.org,
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-	sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: --
-X-Rspamd-Queue-Id: 8127C3EF32
-X-Spamd-Result: default: False [-2.40 / 15.00];
+X-Spamd-Bar: -------
+X-Rspamd-Queue-Id: 93DBF3EF32
+X-Spamd-Result: default: False [-7.50 / 15.00];
+	DWL_DNSWL_HI(-3.50)[googlemail.com:dkim];
 	BAYES_HAM(-3.00)[100.00%];
-	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=3a4a45d2d827c1e];
-	RCVD_IN_DNSWL_HI(-0.50)[209.85.166.199:from];
-	FORGED_SENDER(0.30)[syzbot@syzkaller.appspotmail.com,3oC9uYwkbANkNTUF5GG9M5KKD8.BJJBG9PN9M7JIO9IO.7JH@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
+	SUSPICIOUS_RECIPS(1.50)[];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	RCVD_IN_DNSWL_HI(-1.00)[78.133.163.249:received,209.85.167.50:from];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[googlemail.com:s=20210112];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.166.199:from];
-	R_DKIM_NA(0.00)[];
-	TAGGED_FROM(0.00)[6d6c13e35721fb4393fd];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	MIME_TRACE(0.00)[0:+];
-	NEURAL_HAM(-0.00)[-0.680];
-	RCVD_TLS_LAST(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	FREEMAIL_CC(0.00)[gmail.com,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.50:from];
 	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.980];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TAGGED_FROM(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	DKIM_TRACE(0.00)[googlemail.com:+];
+	FREEMAIL_FROM(0.00)[googlemail.com];
+	TO_DN_SOME(0.00)[];
 	ARC_NA(0.00)[];
 	RCPT_COUNT_SEVEN(0.00)[8];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,3oC9uYwkbANkNTUF5GG9M5KKD8.BJJBG9PN9M7JIO9IO.7JH@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
-	TO_DN_NONE(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2]
-X-MailFrom: 3oC9uYwkbANkNTUF5GG9M5KKD8.BJJBG9PN9M7JIO9IO.7JH@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
+	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
+X-MailFrom: lukasz.wiecaszek@googlemail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: OM4LZELJ4F5VZHP4D7ZFJJ6MLU6HOV44
-X-Message-ID-Hash: OM4LZELJ4F5VZHP4D7ZFJJ6MLU6HOV44
-X-Mailman-Approved-At: Mon, 14 Nov 2022 13:37:39 +0000
+Message-ID-Hash: WCAEQ7PBSBUPYF4U7KFZRUPA6C22AVOT
+X-Message-ID-Hash: WCAEQ7PBSBUPYF4U7KFZRUPA6C22AVOT
+X-Mailman-Approved-At: Mon, 14 Nov 2022 13:37:19 +0000
+CC: Lukasz Wiecaszek <lukasz.wiecaszek@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [syzbot] inconsistent lock state in trace_hardirqs_on
+Subject: [Linaro-mm-sig] [PATCH] udmabuf: add vmap method to udmabuf_ops
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OM4LZELJ4F5VZHP4D7ZFJJ6MLU6HOV44/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WCAEQ7PBSBUPYF4U7KFZRUPA6C22AVOT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -89,159 +111,83 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hello,
+The reason behind that patch is associated with videobuf2 subsystem
+(or more genrally with v4l2 framework) and user created
+dma buffers (udmabuf). In some circumstances
+when dealing with V4L2_MEMORY_DMABUF buffers videobuf2 subsystem
+wants to use dma_buf_vmap() method on the attached dma buffer.
+As udmabuf does not have .vmap operation implemented,
+such dma_buf_vmap() natually fails.
 
-syzbot found the following issue on:
+videobuf2_common: [cap-000000003473b2f1] __vb2_queue_alloc: allocated 3 buffers, 1 plane(s) each
+videobuf2_common: [cap-000000003473b2f1] __prepare_dmabuf: buffer for plane 0 changed
+videobuf2_common: [cap-000000003473b2f1] __prepare_dmabuf: failed to map dmabuf for plane 0
+videobuf2_common: [cap-000000003473b2f1] __buf_prepare: buffer preparation failed: -14
 
-HEAD commit:    bbed346d5a96 Merge branch 'for-next/core' into for-kernelci
-git tree:       git://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git for-kernelci
-console output: https://syzkaller.appspot.com/x/log.txt?x=14c82f39880000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=3a4a45d2d827c1e
-dashboard link: https://syzkaller.appspot.com/bug?extid=6d6c13e35721fb4393fd
-compiler:       Debian clang version 13.0.1-++20220126092033+75e33f71c2da-1~exp1~20220126212112.63, GNU ld (GNU Binutils for Debian) 2.35.2
-userspace arch: arm64
+The patch itself seems to be strighforward.
+It adds implementation of .vmap method to 'struct dma_buf_ops udmabuf_ops'.
+.vmap method itself uses vm_map_ram() to map pages linearly
+into the kernel virtual address space (only if such mapping
+hasn't been created yet).
 
-Unfortunately, I don't have any reproducer for this issue yet.
-
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/e8e91bc79312/disk-bbed346d.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/c1cb3fb3b77e/vmlinux-bbed346d.xz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+6d6c13e35721fb4393fd@syzkaller.appspotmail.com
-
-================================
-WARNING: inconsistent lock state
-6.0.0-rc7-syzkaller-18095-gbbed346d5a96 #0 Not tainted
---------------------------------
-inconsistent {IN-HARDIRQ-W} -> {HARDIRQ-ON-W} usage.
-syz-executor.4/21937 [HC0[0]:SC0[0]:HE0:SE1] takes:
-ffff80000d6384c8 (sync_timeline_list_lock){?...}-{2:2}, at: spin_lock_irq include/linux/spinlock.h:374 [inline]
-ffff80000d6384c8 (sync_timeline_list_lock){?...}-{2:2}, at: sync_info_debugfs_show+0x54/0x2dc drivers/dma-buf/sync_debug.c:147
-{IN-HARDIRQ-W} state was registered at:
-  lock_acquire+0x100/0x1f8 kernel/locking/lockdep.c:5666
-  __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
-  _raw_spin_lock_irqsave+0x6c/0xb4 kernel/locking/spinlock.c:162
-  sync_timeline_debug_remove+0x24/0x80 drivers/dma-buf/sync_debug.c:31
-  sync_timeline_free drivers/dma-buf/sw_sync.c:104 [inline]
-  kref_put include/linux/kref.h:65 [inline]
-  sync_timeline_put drivers/dma-buf/sw_sync.c:116 [inline]
-  timeline_fence_release+0xe0/0x15c drivers/dma-buf/sw_sync.c:144
-  dma_fence_release+0x70/0x11c drivers/dma-buf/dma-fence.c:549
-  kref_put include/linux/kref.h:65 [inline]
-  dma_fence_put include/linux/dma-fence.h:276 [inline]
-  dma_fence_array_release+0xac/0x154 drivers/dma-buf/dma-fence-array.c:120
-  dma_fence_release+0x70/0x11c drivers/dma-buf/dma-fence.c:549
-  kref_put include/linux/kref.h:65 [inline]
-  dma_fence_put include/linux/dma-fence.h:276 [inline]
-  irq_dma_fence_array_work+0x84/0x11c drivers/dma-buf/dma-fence-array.c:52
-  irq_work_single kernel/irq_work.c:211 [inline]
-  irq_work_run_list kernel/irq_work.c:242 [inline]
-  irq_work_run+0xc4/0x29c kernel/irq_work.c:251
-  do_handle_IPI arch/arm64/kernel/smp.c:899 [inline]
-  ipi_handler+0x120/0x1a8 arch/arm64/kernel/smp.c:922
-  handle_percpu_devid_irq+0xb0/0x1c8 kernel/irq/chip.c:930
-  generic_handle_irq_desc include/linux/irqdesc.h:158 [inline]
-  handle_irq_desc kernel/irq/irqdesc.c:648 [inline]
-  generic_handle_domain_irq+0x4c/0x6c kernel/irq/irqdesc.c:704
-  __gic_handle_irq drivers/irqchip/irq-gic-v3.c:695 [inline]
-  __gic_handle_irq_from_irqson drivers/irqchip/irq-gic-v3.c:746 [inline]
-  gic_handle_irq+0x78/0x1b4 drivers/irqchip/irq-gic-v3.c:790
-  call_on_irq_stack+0x2c/0x54 arch/arm64/kernel/entry.S:889
-  do_interrupt_handler+0x7c/0xc0 arch/arm64/kernel/entry-common.c:274
-  __el1_irq arch/arm64/kernel/entry-common.c:470 [inline]
-  el1_interrupt+0x34/0x68 arch/arm64/kernel/entry-common.c:485
-  el1h_64_irq_handler+0x18/0x24 arch/arm64/kernel/entry-common.c:490
-  el1h_64_irq+0x64/0x68 arch/arm64/kernel/entry.S:577
-  arch_local_irq_enable arch/arm64/include/asm/irqflags.h:35 [inline]
-  __raw_spin_unlock_irq include/linux/spinlock_api_smp.h:159 [inline]
-  _raw_spin_unlock_irq+0x44/0x70 kernel/locking/spinlock.c:202
-  spin_unlock_irq include/linux/spinlock.h:399 [inline]
-  sw_sync_debugfs_release+0xa8/0x158 drivers/dma-buf/sw_sync.c:321
-  __fput+0x198/0x3dc fs/file_table.c:320
-  ____fput+0x20/0x30 fs/file_table.c:353
-  task_work_run+0xc4/0x14c kernel/task_work.c:177
-  exit_task_work include/linux/task_work.h:38 [inline]
-  do_exit+0x26c/0xbe0 kernel/exit.c:795
-  __arm64_sys_exit_group+0x0/0x18 kernel/exit.c:925
-  __do_sys_exit_group kernel/exit.c:936 [inline]
-  __se_sys_exit_group kernel/exit.c:934 [inline]
-  __wake_up_parent+0x0/0x40 kernel/exit.c:934
-  __invoke_syscall arch/arm64/kernel/syscall.c:38 [inline]
-  invoke_syscall arch/arm64/kernel/syscall.c:52 [inline]
-  el0_svc_common+0x138/0x220 arch/arm64/kernel/syscall.c:142
-  do_el0_svc+0x48/0x164 arch/arm64/kernel/syscall.c:206
-  el0_svc+0x58/0x150 arch/arm64/kernel/entry-common.c:636
-  el0t_64_sync_handler+0x84/0xf0 arch/arm64/kernel/entry-common.c:654
-  el0t_64_sync+0x18c/0x190 arch/arm64/kernel/entry.S:581
-irq event stamp: 872
-hardirqs last  enabled at (871): [<ffff8000085633bc>] mod_objcg_state+0x19c/0x204 mm/memcontrol.c:3158
-hardirqs last disabled at (872): [<ffff80000bfc8834>] __raw_spin_lock_irq include/linux/spinlock_api_smp.h:117 [inline]
-hardirqs last disabled at (872): [<ffff80000bfc8834>] _raw_spin_lock_irq+0x34/0x9c kernel/locking/spinlock.c:170
-softirqs last  enabled at (856): [<ffff80000801c33c>] local_bh_enable+0x10/0x34 include/linux/bottom_half.h:32
-softirqs last disabled at (854): [<ffff80000801c308>] local_bh_disable+0x10/0x34 include/linux/bottom_half.h:19
-
-other info that might help us debug this:
- Possible unsafe locking scenario:
-
-       CPU0
-       ----
-  lock(sync_timeline_list_lock);
-  <Interrupt>
-    lock(sync_timeline_list_lock);
-
- *** DEADLOCK ***
-
-3 locks held by syz-executor.4/21937:
- #0: ffff000128868ee8 (&f->f_pos_lock){+.+.}-{3:3}, at: __fdget_pos+0x12c/0x154 fs/file.c:1036
- #1: ffff000126e66d50 (&p->lock){+.+.}-{3:3}, at: seq_read_iter+0x5c/0x5e0 fs/seq_file.c:182
- #2: ffff80000d6384c8 (sync_timeline_list_lock){?...}-{2:2}, at: spin_lock_irq include/linux/spinlock.h:374 [inline]
- #2: ffff80000d6384c8 (sync_timeline_list_lock){?...}-{2:2}, at: sync_info_debugfs_show+0x54/0x2dc drivers/dma-buf/sync_debug.c:147
-
-stack backtrace:
-CPU: 0 PID: 21937 Comm: syz-executor.4 Not tainted 6.0.0-rc7-syzkaller-18095-gbbed346d5a96 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 09/30/2022
-Call trace:
- dump_backtrace+0x1c4/0x1f0 arch/arm64/kernel/stacktrace.c:156
- show_stack+0x2c/0x54 arch/arm64/kernel/stacktrace.c:163
- __dump_stack lib/dump_stack.c:88 [inline]
- dump_stack_lvl+0x104/0x16c lib/dump_stack.c:106
- dump_stack+0x1c/0x58 lib/dump_stack.c:113
- print_usage_bug+0x39c/0x3cc kernel/locking/lockdep.c:3961
- mark_lock_irq+0x4a8/0x4b4
- mark_lock+0x154/0x1b4 kernel/locking/lockdep.c:4632
- mark_held_locks kernel/locking/lockdep.c:4234 [inline]
- __trace_hardirqs_on_caller kernel/locking/lockdep.c:4252 [inline]
- lockdep_hardirqs_on_prepare+0x158/0x2b0 kernel/locking/lockdep.c:4319
- trace_hardirqs_on+0xc4/0x108 kernel/trace/trace_preemptirq.c:49
- __raw_spin_unlock_irq include/linux/spinlock_api_smp.h:159 [inline]
- _raw_spin_unlock_irq+0x3c/0x70 kernel/locking/spinlock.c:202
- spin_unlock_irq include/linux/spinlock.h:399 [inline]
- sync_print_obj drivers/dma-buf/sync_debug.c:118 [inline]
- sync_info_debugfs_show+0xd8/0x2dc drivers/dma-buf/sync_debug.c:153
- seq_read_iter+0x220/0x5e0 fs/seq_file.c:230
- seq_read+0x98/0xd0 fs/seq_file.c:162
- vfs_read+0x19c/0x448 fs/read_write.c:468
- ksys_read+0xb4/0x160 fs/read_write.c:607
- __do_sys_read fs/read_write.c:617 [inline]
- __se_sys_read fs/read_write.c:615 [inline]
- __arm64_sys_read+0x24/0x34 fs/read_write.c:615
- __invoke_syscall arch/arm64/kernel/syscall.c:38 [inline]
- invoke_syscall arch/arm64/kernel/syscall.c:52 [inline]
- el0_svc_common+0x138/0x220 arch/arm64/kernel/syscall.c:142
- do_el0_svc+0x48/0x164 arch/arm64/kernel/syscall.c:206
- el0_svc+0x58/0x150 arch/arm64/kernel/entry-common.c:636
- el0t_64_sync_handler+0x84/0xf0 arch/arm64/kernel/entry-common.c:654
- el0t_64_sync+0x18c/0x190 arch/arm64/kernel/entry.S:581
-
-
+Signed-off-by: Lukasz Wiecaszek <lukasz.wiecaszek@gmail.com>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+ drivers/dma-buf/udmabuf.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
+index 2bcdb935a3ac..8649fcbd05c4 100644
+--- a/drivers/dma-buf/udmabuf.c
++++ b/drivers/dma-buf/udmabuf.c
+@@ -12,6 +12,7 @@
+ #include <linux/slab.h>
+ #include <linux/udmabuf.h>
+ #include <linux/hugetlb.h>
++#include <linux/vmalloc.h>
+ 
+ static int list_limit = 1024;
+ module_param(list_limit, int, 0644);
+@@ -26,6 +27,7 @@ struct udmabuf {
+ 	struct page **pages;
+ 	struct sg_table *sg;
+ 	struct miscdevice *device;
++	void *vaddr;
+ };
+ 
+ static vm_fault_t udmabuf_vm_fault(struct vm_fault *vmf)
+@@ -57,6 +59,21 @@ static int mmap_udmabuf(struct dma_buf *buf, struct vm_area_struct *vma)
+ 	return 0;
+ }
+ 
++static int vmap_udmabuf(struct dma_buf *buf, struct dma_buf_map *map)
++{
++	struct udmabuf *ubuf = buf->priv;
++
++	if (!ubuf->vaddr) {
++		ubuf->vaddr = vm_map_ram(ubuf->pages, ubuf->pagecount, -1);
++		if (!ubuf->vaddr)
++			return -EINVAL;
++	}
++
++	dma_buf_map_set_vaddr(map, ubuf->vaddr);
++
++	return 0;
++}
++
+ static struct sg_table *get_sg_table(struct device *dev, struct dma_buf *buf,
+ 				     enum dma_data_direction direction)
+ {
+@@ -159,6 +176,7 @@ static const struct dma_buf_ops udmabuf_ops = {
+ 	.unmap_dma_buf	   = unmap_udmabuf,
+ 	.release	   = release_udmabuf,
+ 	.mmap		   = mmap_udmabuf,
++	.vmap		   = vmap_udmabuf,
+ 	.begin_cpu_access  = begin_cpu_udmabuf,
+ 	.end_cpu_access    = end_cpu_udmabuf,
+ };
+-- 
+2.25.1
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
