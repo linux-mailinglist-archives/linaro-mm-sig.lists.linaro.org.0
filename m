@@ -2,235 +2,164 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D28D62DD06
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Nov 2022 14:42:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 466A262E012
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Nov 2022 16:38:35 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F0FB03F2E5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Nov 2022 13:42:54 +0000 (UTC)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
-	by lists.linaro.org (Postfix) with ESMTPS id 706903F2E5
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Nov 2022 13:42:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 549BF3F5B2
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Nov 2022 15:38:34 +0000 (UTC)
+Received: from mail-qv1-f49.google.com (mail-qv1-f49.google.com [209.85.219.49])
+	by lists.linaro.org (Postfix) with ESMTPS id 368703EF32
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Nov 2022 15:38:18 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=YEtjOkcf;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=LbAxeefD;
-	spf=pass (lists.linaro.org: domain of tzimmermann@suse.de designates 195.135.220.28 as permitted sender) smtp.mailfrom=tzimmermann@suse.de;
-	dmarc=pass (policy=none) header.from=suse.de
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id 919F2218CE;
-	Thu, 17 Nov 2022 13:42:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1668692557; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Rv7KIu+zKpnF/dI4dgBfOe6okZ4ai9mwlqyxMzSKe5E=;
-	b=YEtjOkcfAC7ikJYWXPgrtTv7RSpioOqDpeNKgkv5PRde0WLTpfQ385HqtpsUpr9aerHrGb
-	JfOeSS8Qwc4Nop+FqVksXGOZdSt8wuYpLMYouPO5NInf6/iDm3TtARjJVm+FppklB1f1nW
-	b35LP5Ws3ByV9bPOlffxS96fDQdMnSw=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1668692557;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=Rv7KIu+zKpnF/dI4dgBfOe6okZ4ai9mwlqyxMzSKe5E=;
-	b=LbAxeefDmhdmIng2KqbjOvs6ew2xrpdLACYeIgFh4XlvS1XfveUaAfrqSNWORt0AN7uYZ4
-	5ksUuwBRiun4q2Dg==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 5303B13A12;
-	Thu, 17 Nov 2022 13:42:37 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-	by imap2.suse-dmz.suse.de with ESMTPSA
-	id 1tMsE006dmMmdAAAMHmgww
-	(envelope-from <tzimmermann@suse.de>); Thu, 17 Nov 2022 13:42:37 +0000
-Message-ID: <2b4e38d8-d0ea-e85c-88f1-bb6a714ee0eb@suse.de>
-Date: Thu, 17 Nov 2022 14:42:36 +0100
+	dkim=pass header.d=ndufresne-ca.20210112.gappssmtp.com header.s=20210112 header.b="nmbivz/k";
+	spf=none (lists.linaro.org: domain of nicolas@ndufresne.ca has no SPF policy when checking 209.85.219.49) smtp.mailfrom=nicolas@ndufresne.ca;
+	dmarc=none
+Received: by mail-qv1-f49.google.com with SMTP id c8so1399100qvn.10
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Nov 2022 07:38:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ndufresne-ca.20210112.gappssmtp.com; s=20210112;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=vyMHbYz7pcCdNisY9D7J4VP8a/I9/qddgBipkibQG+M=;
+        b=nmbivz/kcxfBCLU/jAAuW462IWRidAqpClZ0uFErVGlRdeIegMjlU+eqvz2tbWHaEZ
+         KaPYd4IZp7oHa0C8D6MDHS2KpQLwfrOWt8Pwf/VMl1wf47no3bFde2wi8BBsTAIaub2z
+         rPp1tLD9bcjZErhI+nK6eVwPamcyRRT+JJjsLsPfecDz5AwAs1Sx0WPilMs0xue8sNgg
+         hx/KzzWKbvqCtZ3vPY8dd289I/w5EA1RZRQBqca94LrqHUW42Sohy1FLpwEwvh2z6PWK
+         2cYHwU128Itq9GXd9neoAFK30WSnxFBd97cVRMJ3qhdHOxiPmXv23PjpGPDjhtbfLjVf
+         OmCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=mime-version:user-agent:content-transfer-encoding:references
+         :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=vyMHbYz7pcCdNisY9D7J4VP8a/I9/qddgBipkibQG+M=;
+        b=SnRUYevAixbmdZ0hJACPSF42P8Dej/bHX7l1kR7SMs4/bmITAI/OKPcwhzGQEZSkpa
+         ah3pdQWSxOfe1Qs3GjRGa7x9JDeICADWpMwWOgM0j5iAMiKWpCOmnzVfsMsJGH38t3Fh
+         cEFncCSj4pXtOWzQPFRDwrcDN0MCnfDF/JDaPwE3BNaf/CpY+ydCOv8qS5bKrYlcAb1X
+         8Ma2hLsEss1WzGwmcEkfOy8mQ1ozhMV6C7pchyZ8kmEfzZnHqdzt0eDw+z2uyF0cUFiK
+         jZb5KVdVQPBq+kySLyQ22W7PZji15y7GqGfNVE6prIvLBkAv8smO9UfG2x1g+ZbaaJ5+
+         /2xg==
+X-Gm-Message-State: ANoB5pkpJunbkDKmjoOIwYN6bbxQpTez0BNB1i89iF/VO4d+wAM/R0GC
+	oKi/EKfzDO8YeaJrH5EI1v7EFWuFCPTEXg==
+X-Google-Smtp-Source: AA0mqf5Venn3LzgykvP/AW3ygZYkmxzaUHLCWmhJmw7owC7KwpImB6WDjiRHdsPxXKixU/hzrIG4Hw==
+X-Received: by 2002:ad4:4e42:0:b0:4b8:361:4ca with SMTP id eb2-20020ad44e42000000b004b8036104camr2852335qvb.102.1668699497853;
+        Thu, 17 Nov 2022 07:38:17 -0800 (PST)
+Received: from nicolas-tpx395.localdomain (192-222-136-102.qc.cable.ebox.net. [192.222.136.102])
+        by smtp.gmail.com with ESMTPSA id w9-20020a05620a424900b006ce2c3c48ebsm645891qko.77.2022.11.17.07.38.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 17 Nov 2022 07:38:17 -0800 (PST)
+Message-ID: <346d6ad023ef8697aafd93ac1b100890f3637e44.camel@ndufresne.ca>
+From: Nicolas Dufresne <nicolas@ndufresne.ca>
+To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Tomasz
+	Figa <tfiga@chromium.org>
+Date: Thu, 17 Nov 2022 10:38:16 -0500
+In-Reply-To: <b2dec9b3-03a7-e7ac-306e-1da024af8982@amd.com>
+References: <20221020121316.3946-1-christian.koenig@amd.com>
+	 <3d7353f3fa5905ce18e5b2d92f758f098189bc5a.camel@pengutronix.de>
+	 <7f5eff36-6886-bb06-061a-dd4263b61605@gmail.com>
+	 <f5de84cfe81fee828bbe0d47d379028d28ef6ca6.camel@pengutronix.de>
+	 <e02cedc2-6741-8813-a7a5-f8769e301745@gmail.com>
+	 <a53e5df51ec0f2f9d4c2d377c0cc5ba85f2e58ff.camel@ndufresne.ca>
+	 <9d716641-55c6-1590-26c2-1c3b14a28226@gmail.com>
+	 <CAPj87rMPkmimR_RJHhxYZokH__TVpPArk0h6drOUSx7Z9+oAHA@mail.gmail.com>
+	 <11a6f97c-e45f-f24b-8a73-48d5a388a2cc@gmail.com>
+	 <caf4d6b82843788db97555a58bc9e33915e5b50a.camel@ndufresne.ca>
+	 <b422be59-4b4b-2d0d-8e8c-b19f27c6832e@gmail.com>
+	 <4fa4e5d3b1f46e46139bad069cbf5e795e63afa8.camel@pengutronix.de>
+	 <cc091a11-d012-d998-b7e2-8b3d616867a7@gmail.com>
+	 <0abc6efddb8dfc1888de15a1bedaaac6688fd078.camel@pengutronix.de>
+	 <1e2a6750-9849-e9ee-69d6-e4bfdcfb64f3@gmail.com>
+	 <CAAFQd5B+VHs62M5Wf2L-xOw=_PoaXT+akAySkeZc75HeA3d0jQ@mail.gmail.com>
+	 <b2dec9b3-03a7-e7ac-306e-1da024af8982@amd.com>
+User-Agent: Evolution 3.44.4 (3.44.4-2.fc36) 
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Content-Language: en-US
-To: ChunyouTang <tangchunyou@163.com>, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, airlied@gmail.com, daniel@ffwll.ch,
- sumit.semwal@linaro.org, christian.koenig@amd.com
-References: <20221111033817.366-1-tangchunyou@163.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-In-Reply-To: <20221111033817.366-1-tangchunyou@163.com>
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: -------
-X-Rspamd-Queue-Id: 706903F2E5
-X-Spamd-Result: default: False [-7.50 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
+X-Spamd-Bar: ---------
+X-Rspamd-Queue-Id: 368703EF32
+X-Spamd-Result: default: False [-9.30 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[99.99%];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
-	RCVD_IN_DNSWL_HI(-0.50)[195.135.220.28:from];
-	R_SPF_ALLOW(-0.20)[+ip4:195.135.220.0/27];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
-	MIME_BASE64_TEXT(0.10)[];
-	FREEMAIL_TO(0.00)[163.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch,linaro.org,amd.com];
+	RCVD_IN_DNSWL_HI(-1.00)[192.222.136.102:received,209.85.219.49:from];
+	R_DKIM_ALLOW(-0.20)[ndufresne-ca.20210112.gappssmtp.com:s=20210112];
+	MIME_GOOD(-0.10)[text/plain];
+	R_SPF_NA(0.00)[no SPF record];
 	FROM_EQ_ENVFROM(0.00)[];
-	ASN(0.00)[asn:29298, ipnet:195.135.220.0/23, country:DE];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
-	RCVD_TLS_ALL(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[suse.de:+];
-	MID_RHS_MATCH_FROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.998];
+	FREEMAIL_CC(0.00)[pengutronix.de,fooishbar.org,gmail.com,linaro.org,ffwll.ch,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	RCVD_COUNT_THREE(0.00)[3];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	DKIM_TRACE(0.00)[ndufresne-ca.20210112.gappssmtp.com:+];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	HAS_ATTACHMENT(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: MCJJUUY537J5VE6PJTD3JVJVL25PLHMH
-X-Message-ID-Hash: MCJJUUY537J5VE6PJTD3JVJVL25PLHMH
-X-MailFrom: tzimmermann@suse.de
+	DMARC_NA(0.00)[ndufresne.ca];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.49:from]
+Message-ID-Hash: O6OKWTMDB7BJYMG2EAYGPWOYV3EXSEVF
+X-Message-ID-Hash: O6OKWTMDB7BJYMG2EAYGPWOYV3EXSEVF
+X-MailFrom: nicolas@ndufresne.ca
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: Daniel Stone <daniel@fooishbar.org>, ppaalanen@gmail.com, sumit.semwal@linaro.org, daniel@ffwll.ch, robdclark@gmail.com, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] drm/gem-shmem: When drm_gem_object_init failed, should release object
+Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MCJJUUY537J5VE6PJTD3JVJVL25PLHMH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/O6OKWTMDB7BJYMG2EAYGPWOYV3EXSEVF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============2064539954903122056=="
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============2064539954903122056==
-Content-Language: en-US
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------YymBv3bYm0qkK0gbQfw5E2wE"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------YymBv3bYm0qkK0gbQfw5E2wE
-Content-Type: multipart/mixed; boundary="------------i1OebnKEfkH1cksuJ70L0WZn";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: ChunyouTang <tangchunyou@163.com>, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, airlied@gmail.com, daniel@ffwll.ch,
- sumit.semwal@linaro.org, christian.koenig@amd.com
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
-Message-ID: <2b4e38d8-d0ea-e85c-88f1-bb6a714ee0eb@suse.de>
-Subject: Re: [PATCH v2] drm/gem-shmem: When drm_gem_object_init failed, should
- release object
-References: <20221111033817.366-1-tangchunyou@163.com>
-In-Reply-To: <20221111033817.366-1-tangchunyou@163.com>
-
---------------i1OebnKEfkH1cksuJ70L0WZn
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 
-SGkNCg0KQW0gMTEuMTEuMjIgdW0gMDQ6Mzggc2NocmllYiBDaHVueW91VGFuZzoNCj4gd2hl
-biBnb3RvIGVycl9mcmVlLCB0aGUgb2JqZWN0IGhhZCBpbml0LCBzbyBpdCBzaG91bGQgYmUg
-cmVsZWFzZSB3aGVuIGZhaWwuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBDaHVueW91VGFuZyA8
-dGFuZ2NodW55b3VAMTYzLmNvbT4NCj4gLS0tDQo+ICAgZHJpdmVycy9ncHUvZHJtL2RybV9n
-ZW0uYyAgICAgICAgICAgICAgfCAxOSArKysrKysrKysrKysrKysrLS0tDQo+ICAgZHJpdmVy
-cy9ncHUvZHJtL2RybV9nZW1fc2htZW1faGVscGVyLmMgfCAgNCArKystDQo+ICAgaW5jbHVk
-ZS9kcm0vZHJtX2dlbS5oICAgICAgICAgICAgICAgICAgfCAgMSArDQo+ICAgMyBmaWxlcyBj
-aGFuZ2VkLCAyMCBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAt
-LWdpdCBhL2RyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtLmMgYi9kcml2ZXJzL2dwdS9kcm0vZHJt
-X2dlbS5jDQo+IGluZGV4IDhiNjhhM2MxZTZhYi4uY2JhMzJjNDZiYjA1IDEwMDY0NA0KPiAt
-LS0gYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2dlbS5jDQo+ICsrKyBiL2RyaXZlcnMvZ3B1L2Ry
-bS9kcm1fZ2VtLmMNCj4gQEAgLTE2OSw2ICsxNjksMjEgQEAgdm9pZCBkcm1fZ2VtX3ByaXZh
-dGVfb2JqZWN0X2luaXQoc3RydWN0IGRybV9kZXZpY2UgKmRldiwNCj4gICB9DQo+ICAgRVhQ
-T1JUX1NZTUJPTChkcm1fZ2VtX3ByaXZhdGVfb2JqZWN0X2luaXQpOw0KPiAgIA0KPiArLyoq
-DQo+ICsgKiBkcm1fZ2VtX3ByaXZhdGVfb2JqZWN0X2ZpbmkgLSBGaW5hbGl6ZSBhIGZhaWxl
-ZCBkcm1fZ2VtX29iamVjdA0KPiArICogQG9iajogZHJtX2dlbV9vYmplY3QNCj4gKyAqDQo+
-ICsgKiBVbmluaXRpYWxpemUgYW4gYWxyZWFkeSBhbGxvY2F0ZWQgR0VNIG9iamVjdCB3aGVu
-IGl0IGluaXRpYWxpemVkIGZhaWxlZA0KPiArICovDQo+ICt2b2lkIGRybV9nZW1fcHJpdmF0
-ZV9vYmplY3RfZmluaShzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9iaikNCj4gK3sNCj4gKwlX
-QVJOX09OKG9iai0+ZG1hX2J1Zik7DQoNClJhdGhlciBsZWFzZSB0aGlzIGluIGl0cyBvcmln
-aW5hbCBwbGFjZS4NCg0KPiArDQo+ICsJZG1hX3Jlc3ZfZmluaSgmb2JqLT5fcmVzdik7DQo+
-ICsJZHJtX2dlbV9scnVfcmVtb3ZlKG9iaik7DQoNCkFGQUlDVCBkcm1fZ2VtX2xydV9yZW1v
-dmUoKSBkb2Vzbid0IGJlbG9uZyBpbnRvIHRoaXMgZnVuY3Rpb24uDQoNCj4gK30NCj4gK0VY
-UE9SVF9TWU1CT0woZHJtX2dlbV9wcml2YXRlX29iamVjdF9maW5pKTsNCj4gKw0KPiAgIC8q
-Kg0KPiAgICAqIGRybV9nZW1fb2JqZWN0X2hhbmRsZV9mcmVlIC0gcmVsZWFzZSByZXNvdXJj
-ZXMgYm91bmQgdG8gdXNlcnNwYWNlIGhhbmRsZXMNCj4gICAgKiBAb2JqOiBHRU0gb2JqZWN0
-IHRvIGNsZWFuIHVwLg0KPiBAQCAtOTMwLDE0ICs5NDUsMTIgQEAgZHJtX2dlbV9yZWxlYXNl
-KHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHN0cnVjdCBkcm1fZmlsZSAqZmlsZV9wcml2YXRl
-KQ0KPiAgIHZvaWQNCj4gICBkcm1fZ2VtX29iamVjdF9yZWxlYXNlKHN0cnVjdCBkcm1fZ2Vt
-X29iamVjdCAqb2JqKQ0KPiAgIHsNCj4gLQlXQVJOX09OKG9iai0+ZG1hX2J1Zik7DQo+ICsJ
-ZHJtX2dlbV9wcml2YXRlX29iamVjdF9maW5pKG9iaik7DQo+ICAgDQo+ICAgCWlmIChvYmot
-PmZpbHApDQo+ICAgCQlmcHV0KG9iai0+ZmlscCk7DQo+ICAgDQo+IC0JZG1hX3Jlc3ZfZmlu
-aSgmb2JqLT5fcmVzdik7DQoNClBsZWFzZSBjYWxsIGRybV9nZW1fcHJpdmF0ZV9vYmplY3Rf
-ZmluaSgpIGhlcmUuDQoNCj4gICAJZHJtX2dlbV9mcmVlX21tYXBfb2Zmc2V0KG9iaik7DQo+
-IC0JZHJtX2dlbV9scnVfcmVtb3ZlKG9iaik7DQoNClBsZWFzZSBrZWVwIHRoaXMgbGluZSBo
-ZXJlLg0KDQpCZXN0IHJlZ2FyZHMNClRob21hcw0KDQo+ICAgfQ0KPiAgIEVYUE9SVF9TWU1C
-T0woZHJtX2dlbV9vYmplY3RfcmVsZWFzZSk7DQo+ICAgDQo+IGRpZmYgLS1naXQgYS9kcml2
-ZXJzL2dwdS9kcm0vZHJtX2dlbV9zaG1lbV9oZWxwZXIuYyBiL2RyaXZlcnMvZ3B1L2RybS9k
-cm1fZ2VtX3NobWVtX2hlbHBlci5jDQo+IGluZGV4IDM1MTM4ZjhhMzc1Yy4uODQ1ZTNkNWQ3
-MWViIDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2dlbV9zaG1lbV9oZWxw
-ZXIuYw0KPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2dlbV9zaG1lbV9oZWxwZXIuYw0K
-PiBAQCAtNzksOCArNzksMTAgQEAgX19kcm1fZ2VtX3NobWVtX2NyZWF0ZShzdHJ1Y3QgZHJt
-X2RldmljZSAqZGV2LCBzaXplX3Qgc2l6ZSwgYm9vbCBwcml2YXRlKQ0KPiAgIAl9IGVsc2Ug
-ew0KPiAgIAkJcmV0ID0gZHJtX2dlbV9vYmplY3RfaW5pdChkZXYsIG9iaiwgc2l6ZSk7DQo+
-ICAgCX0NCj4gLQlpZiAocmV0KQ0KPiArCWlmIChyZXQpIHsNCj4gKwkJZHJtX2dlbV9wcml2
-YXRlX29iamVjdF9maW5pKG9iaikNCj4gICAJCWdvdG8gZXJyX2ZyZWU7DQo+ICsJfQ0KPiAg
-IA0KPiAgIAlyZXQgPSBkcm1fZ2VtX2NyZWF0ZV9tbWFwX29mZnNldChvYmopOw0KPiAgIAlp
-ZiAocmV0KQ0KPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9kcm0vZHJtX2dlbS5oIGIvaW5jbHVk
-ZS9kcm0vZHJtX2dlbS5oDQo+IGluZGV4IGJkNDJmMjVlNDQ5Yy4uOWIxZmViMDMwNjlkIDEw
-MDY0NA0KPiAtLS0gYS9pbmNsdWRlL2RybS9kcm1fZ2VtLmgNCj4gKysrIGIvaW5jbHVkZS9k
-cm0vZHJtX2dlbS5oDQo+IEBAIC00MDUsNiArNDA1LDcgQEAgaW50IGRybV9nZW1fb2JqZWN0
-X2luaXQoc3RydWN0IGRybV9kZXZpY2UgKmRldiwNCj4gICAJCQlzdHJ1Y3QgZHJtX2dlbV9v
-YmplY3QgKm9iaiwgc2l6ZV90IHNpemUpOw0KPiAgIHZvaWQgZHJtX2dlbV9wcml2YXRlX29i
-amVjdF9pbml0KHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsDQo+ICAgCQkJCSBzdHJ1Y3QgZHJt
-X2dlbV9vYmplY3QgKm9iaiwgc2l6ZV90IHNpemUpOw0KPiArdm9pZCBkcm1fZ2VtX3ByaXZh
-dGVfb2JqZWN0X2Zpbmkoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmopOw0KPiAgIHZvaWQg
-ZHJtX2dlbV92bV9vcGVuKHN0cnVjdCB2bV9hcmVhX3N0cnVjdCAqdm1hKTsNCj4gICB2b2lk
-IGRybV9nZW1fdm1fY2xvc2Uoc3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEpOw0KPiAgIGlu
-dCBkcm1fZ2VtX21tYXBfb2JqKHN0cnVjdCBkcm1fZ2VtX29iamVjdCAqb2JqLCB1bnNpZ25l
-ZCBsb25nIG9ial9zaXplLA0KDQotLSANClRob21hcyBaaW1tZXJtYW5uDQpHcmFwaGljcyBE
-cml2ZXIgRGV2ZWxvcGVyDQpTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgN
-Ck1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQ0KKEhSQiAzNjgwOSwg
-QUcgTsO8cm5iZXJnKQ0KR2VzY2jDpGZ0c2bDvGhyZXI6IEl2byBUb3Rldg0K
-
---------------i1OebnKEfkH1cksuJ70L0WZn--
-
---------------YymBv3bYm0qkK0gbQfw5E2wE
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmN2OkwFAwAAAAAACgkQlh/E3EQov+Bz
-2BAAmCiDIxrYLK4mniJvoGUcNGv0Nii+v7XTRavBTxixQHTSWU3OySdYUry9BuJ6OyK5ppA7/vgU
-fScR6/a3paG5OBul2worzFrVZ3Yz6qHBkoVSUX1nPqQ6Wzg0KVZDRJ5KN0iIHV8fPJw4rMbkAifq
-kx6d3S6VUfuDJGi/qLgDN5iW+mmSos+hpv5m71IJYtSYOa7pNE0Of4qRCoTQBOPPy3Vfl840nNI4
-Cc4Bjopho3Fm4sNr7Yd5PKyU2XV6A3/Ux4DBcguQZzsUnFzXRZq4ezasNiNqWs5uOENGLYT5Nn+Z
-+T+HnWf0VxstaQ+WpnkomOOOVpH8R9s6zIG4y1SZ//Bvbd5D70PNaMmJKVEZW/cB2H2T/Vlxqwxa
-JMYeLpQnVmir5YoUW3lhD7mf8xBlDVtUq2hgBeA78Pkon/44vvE+tG18qVPWTp4IrYs/4P07YKhm
-kRtb04+V38jn7QVWve9+IocqgqTydCmyyYkOMZ5DxtOMjHFtBakJGzYOKwchCfIOrP6xu/A0i2lY
-lk+TXqc/QPfGPrwxbSQV4djg0MQeI1hMpffWJigS41yumw0rL3SAvuMDFpC91uDezMcxdht2jtjA
-rht+y0gQnb+1uLJ7QQuhUpRGkI9T/gE/bTC5TlnmgCpr+0GzqIlZq4kvZUibf1uSL6Ck0CiJEOfq
-AXY=
-=+j9m
------END PGP SIGNATURE-----
-
---------------YymBv3bYm0qkK0gbQfw5E2wE--
-
---===============2064539954903122056==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============2064539954903122056==--
+TGUgamV1ZGkgMTcgbm92ZW1icmUgMjAyMiDDoCAxMzoxMCArMDEwMCwgQ2hyaXN0aWFuIEvDtm5p
+ZyBhIMOpY3JpdMKgOg0KPiA+ID4gRE1BLUJ1ZiBsZXQncyB0aGUgZXhwb3J0ZXIgc2V0dXAgdGhl
+IERNQSBhZGRyZXNzZXMgdGhlIGltcG9ydGVyIHVzZXMgdG8NCj4gPiA+IGJlIGFibGUgdG8gZGly
+ZWN0bHkgZGVjaWRlZCB3aGVyZSBhIGNlcnRhaW4gb3BlcmF0aW9uIHNob3VsZCBnby4gRS5nLiB3
+ZQ0KPiA+ID4gaGF2ZSBjYXNlcyB3aGVyZSBmb3IgZXhhbXBsZSBhIFAyUCB3cml0ZSBkb2Vzbid0
+IGV2ZW4gZ28gdG8gbWVtb3J5LCBidXQNCj4gPiA+IHJhdGhlciBhIGRvb3JiZWxsIEJBUiB0byB0
+cmlnZ2VyIGFub3RoZXIgb3BlcmF0aW9uLiBUaHJvd2luZyBpbiBDUFUNCj4gPiA+IHJvdW5kIHRy
+aXBzIGZvciBleHBsaWNpdCBvd25lcnNoaXAgdHJhbnNmZXIgY29tcGxldGVseSBicmVha3MgdGhh
+dA0KPiA+ID4gY29uY2VwdC4NCj4gPiBJdCBzb3VuZHMgbGlrZSB3ZSBzaG91bGQgaGF2ZSBhIGRt
+YV9kZXZfaXNfY29oZXJlbnRfd2l0aF9kZXYoKSB3aGljaA0KPiA+IGFjY2VwdHMgdHdvIChvciBh
+biBhcnJheT8pIG9mIGRldmljZXMgYW5kIHRlbGxzIHRoZSBjYWxsZXIgd2hldGhlciB0aGUNCj4g
+PiBkZXZpY2VzIG5lZWQgZXhwbGljaXQgb3duZXJzaGlwIHRyYW5zZmVyLg0KPiANCj4gTm8sIGV4
+YWN0bHkgdGhhdCdzIHRoZSBjb25jZXB0IEknbSBwdXNoaW5nIGJhY2sgb24gdmVyeSBoYXJkIGhl
+cmUuDQo+IA0KPiBJbiBvdGhlciB3b3JkcyBleHBsaWNpdCBvd25lcnNoaXAgdHJhbnNmZXIgaXMg
+bm90IHNvbWV0aGluZyB3ZSB3b3VsZCANCj4gd2FudCBhcyByZXF1aXJlbWVudCBpbiB0aGUgZnJh
+bWV3b3JrLCBjYXVzZSBvdGhlcndpc2Ugd2UgYnJlYWsgdG9ucyBvZiANCj4gdXNlIGNhc2VzIHdo
+aWNoIHJlcXVpcmUgY29uY3VycmVudCBhY2Nlc3MgdG8gdGhlIHVuZGVybHlpbmcgYnVmZmVyLg0K
+DQpJJ20gbm90IHB1c2hpbmcgZm9yIHRoaXMgc29sdXRpb24sIGJ1dCByZWFsbHkgZmVsdCB0aGUg
+bmVlZCB0byBjb3JyZWN0IHlvdSBoZXJlLg0KSSBoYXZlIHF1aXRlIHNvbWUgZXhwZXJpZW5jZSB3
+aXRoIG93bmVyc2hpcCB0cmFuc2ZlciBtZWNoYW5pc20sIGFzIHRoaXMgaXMgaG93DQpHU3RyZWFt
+ZXIgZnJhbWV3b3JrIHdvcmtzIHNpbmNlIDIwMDAuIENvbmN1cnJlbnQgYWNjZXNzIGlzIGEgcmVh
+bGx5IGNvbW1vbiB1c2UNCmNhc2VzIGFuZCBpdCBpcyBxdWl0ZSB3ZWxsIGRlZmluZWQgaW4gdGhh
+dCBjb250ZXh0LiBUaGUgYnJhY2tldGluZyBzeXN0ZW0gKGluDQp0aGlzIGNhc2UgY2FsbGVkIG1h
+cCgpIHVubWFwKCksIHdpdGggZmxhZyBzdGF0aW5nIHRoZSB1c2FnZSBpbnRlbnRpb24gbGlrZSBy
+ZWFkcw0KYW5kIHdyaXRlKSBpcyBjb21iaW5lZCB0aGUgdGhlIHJlZmNvdW50LiBUaGUgYmFzaWMg
+cnVsZXMgYXJlIHNpbXBsZToNCg0KLSBBbiBvYmplY3Qgd2l0aCBhIHJlZmNvdW50IGhpZ2hlciB0
+aGVuIDIgaXMgc2hhcmVkLCBoZW5jZSByZWFkLW9ubHkNCi0gQW4gb2JqZWN0IHdpdGggcmVmY291
+bnQgb2Ygb25lLCBtYXBwZWQgZm9yIHdyaXRlcyBiZWNvbWVzIGV4Y2x1c2l2ZQ0KLSBOb24gZXhj
+bHVzaXZlIHdyaXRlcyBjYW4gYmUgZG9uZSwgYnV0IHRoYXQgaGFzIHRvIGJlIGV4cGxpY2l0IChp
+bnRlbnRpb25hbCksDQp3ZSBkaWRuJ3QgZ28gYXMgZmFyIGFzIFJ1c3QgaW4gdGhhdCBkb21haW4N
+Ci0gV3JhcHBlcnMgYXJvdW5kIHRoZXNlIG9iamVjdCBjYW4gdXNlIG1lY2hhbmlzbSBsaWtlICJj
+b3B5LW9uLXdyaXRlIiBhbmQgY2FuDQphbHNvIG1haW50YWluIHRoZSBzdGF0ZSBvZiBzaGFkb3cg
+YnVmZmVycyAoZS5nLiBHTCB1cGxvYWQgc2xvdyBjYXNlcykgZXZlbiB3aXRoDQpjb25jdXJyZW50
+IGFjY2Vzcy4NCg0KSnVzdCBob3BlIGl0IGNsYXJpZnksIFJ1c3QgbGFuZ3VhZ2Ugd29ya3MsIHll
+dCBpdHMgYWxsIGJhc2VkIG9uIGV4cGxpY2l0DQpvd25lcnNoaXAgdHJhbnNmZXJzLiBJdHMgbm90
+IGxpbWl0aW5nLCBidXQgaXQgcmVxdWlyZXMgYSBkaWZmZXJlbnQgd2F5IG9mDQp0aGlua2luZyBo
+b3cgZGF0YSBpcyB0byBiZSBhY2Nlc3NlZC4NCg0KTmljb2xhcw0KDQpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlz
+dCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBh
+biBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
