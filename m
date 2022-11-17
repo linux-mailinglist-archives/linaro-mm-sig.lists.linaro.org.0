@@ -2,108 +2,87 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 997FD62D45D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Nov 2022 08:48:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63DD662D5CE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Nov 2022 10:04:59 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9E93E3F2E5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Nov 2022 07:48:38 +0000 (UTC)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	by lists.linaro.org (Postfix) with ESMTPS id 653183F2C0
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Nov 2022 07:48:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 566FF3F58E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Nov 2022 09:04:58 +0000 (UTC)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+	by lists.linaro.org (Postfix) with ESMTPS id A375B3EFA4
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Nov 2022 09:04:40 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=quicinc.com header.s=qcppdkim1 header.b=k5zdoItO;
-	spf=pass (lists.linaro.org: domain of quic_charante@quicinc.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=quic_charante@quicinc.com;
-	dmarc=pass (policy=none) header.from=quicinc.com
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2AH6vGWY030397;
-	Thu, 17 Nov 2022 07:48:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=message-id : date :
- mime-version : subject : to : cc : references : from : in-reply-to :
- content-type : content-transfer-encoding; s=qcppdkim1;
- bh=tBzCcWB+FWTWbCRzQPLuDi04qenTt42bi9VpD3R/tks=;
- b=k5zdoItO7JDlN1YZQb7uFaC0sFN/yvrZq1KQpGNHEDXiKq1+/g1JLIiaf7ptpzh0FomQ
- d0XFLuA2aF7PGUQOTwUFGD+DlKhO2PL2pAjFFw9IqFGagOL9u7v2oYMZFzuOtADRkt8O
- NeGXfI5EtCSpJHJX4S+8Ms6OEP85VHO49zyUaoRV9+luuVJHdZ+VbmjGVQRintHz7z2k
- lCf06jUx+MIaCmpNIizxXRQdSHjsCkaSSPwLHCx48FOl2xIs33W5xMFCZvYbR6PcWp3t
- qkiEs59s8EIBlKL5QEA19jihs0ku77YhP6pP0NeZYp2HW7SlxKbWYl0qwmLO03mRxzqr 2Q==
-Received: from nalasppmta04.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3kwg4sg5ve-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 17 Nov 2022 07:48:10 +0000
-Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
-	by NALASPPMTA04.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 2AH7m9pV030059
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 17 Nov 2022 07:48:09 GMT
-Received: from [10.216.46.79] (10.80.80.8) by nalasex01a.na.qualcomm.com
- (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.29; Wed, 16 Nov
- 2022 23:48:05 -0800
-Message-ID: <f12a5dbe-4626-f6c7-236b-30bb16be1dd6@quicinc.com>
-Date: Thu, 17 Nov 2022 13:18:02 +0530
+	dkim=pass header.d=collabora.com header.s=mail header.b=f6GwjHb6;
+	spf=pass (lists.linaro.org: domain of dmitry.osipenko@collabora.com designates 46.235.227.172 as permitted sender) smtp.mailfrom=dmitry.osipenko@collabora.com;
+	dmarc=pass (policy=none) header.from=collabora.com
+Received: from [192.168.2.32] (109-252-117-140.nat.spd-mgts.ru [109.252.117.140])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: dmitry.osipenko)
+	by madras.collabora.co.uk (Postfix) with ESMTPSA id CCB366602A93;
+	Thu, 17 Nov 2022 09:04:38 +0000 (GMT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1668675879;
+	bh=myO5od7Hy8GIA7LiyC3cxVd6NrDXoa1PiKxCCo4rsOo=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=f6GwjHb6vzocRth+JNvAYc2pN8BmnjT1HIKyO0WpgXx0Uzfz5r4DBLdklSRwEIePh
+	 4myD3frJhoPsIahlC8nDpTtKTT5NZQ4UNzVLi9RLQaDJa7XNsOxvu1PumSaX65lip7
+	 0M82mlguMT/WwH7yR/NzfW/t2igHJuUxZI8h+HJ82kS+re66fLRFj8Asx5N87kwvKy
+	 yS18Cz8SVgiWwKIIHculrfu1KFzjZSILxXE7SBNCITGQN+c4DA12kz1O6Jl2KzKb3p
+	 xGfWwmyWKz41NjDbDLB1Cbnk4l2NFLeZ+ME2tGPIMJuB4Arx6sZAv3trwRfDxqkfm9
+	 8IbSUfkmwLV5g==
+Message-ID: <970e798d-ea26-5e1e-ace8-7915a866f7c7@collabora.com>
+Date: Thu, 17 Nov 2022 12:04:35 +0300
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.1
 Content-Language: en-US
-To: Gaosheng Cui <cuigaosheng1@huawei.com>, <sumit.semwal@linaro.org>,
-        <christian.koenig@amd.com>, <tjmercier@google.com>,
-        Dan Carpenter
-	<dan.carpenter@oracle.com>,
-        Pavan Kondeti <quic_pkondeti@quicinc.com>
-References: <20221117062152.3029018-1-cuigaosheng1@huawei.com>
-From: Charan Teja Kalla <quic_charante@quicinc.com>
-In-Reply-To: <20221117062152.3029018-1-cuigaosheng1@huawei.com>
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
- nalasex01a.na.qualcomm.com (10.47.209.196)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
-X-Proofpoint-GUID: OAJK_heCCFjZ6aNynq_IIlIB5nii1D7-
-X-Proofpoint-ORIG-GUID: OAJK_heCCFjZ6aNynq_IIlIB5nii1D7-
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-11-17_04,2022-11-16_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1011
- lowpriorityscore=0 suspectscore=0 mlxlogscore=999 spamscore=0
- priorityscore=1501 impostorscore=0 bulkscore=0 mlxscore=0 malwarescore=0
- adultscore=0 phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2210170000 definitions=main-2211170058
+To: Lukasz Wiecaszek <lukasz.wiecaszek@googlemail.com>,
+ Gerd Hoffmann <kraxel@redhat.com>
+References: <20221117045842.27161-1-lukasz.wiecaszek@gmail.com>
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+In-Reply-To: <20221117045842.27161-1-lukasz.wiecaszek@gmail.com>
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: -----
-X-Rspamd-Queue-Id: 653183F2C0
-X-Spamd-Result: default: False [-5.50 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+X-Spamd-Bar: ---
+X-Rspamd-Queue-Id: A375B3EFA4
+X-Spamd-Result: default: False [-4.00 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	SUSPICIOUS_RECIPS(1.50)[];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[quicinc.com,none];
-	RCVD_IN_DNSWL_HI(-0.50)[205.220.180.131:from];
-	R_SPF_ALLOW(-0.20)[+ip4:205.220.180.131];
-	R_DKIM_ALLOW(-0.20)[quicinc.com:s=qcppdkim1];
+	RCVD_IN_DNSWL_HI(-0.50)[46.235.227.172:from];
+	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
+	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.172];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_EQ_ENVFROM(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:22843, ipnet:205.220.180.0/24, country:US];
-	NEURAL_HAM(-0.00)[-0.996];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[quicinc.com:+];
-	RCVD_COUNT_FIVE(0.00)[5];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	HAS_XOIP(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCVD_IN_DNSWL_FAIL(0.00)[129.46.96.20:server fail]
-Message-ID-Hash: LUK7JECSQ4UOAPUKBDOGXC2VRW4Z5R3O
-X-Message-ID-Hash: LUK7JECSQ4UOAPUKBDOGXC2VRW4Z5R3O
-X-MailFrom: quic_charante@quicinc.com
+	TAGGED_RCPT(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[madras.collabora.co.uk:helo,madras.collabora.co.uk:rdns];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:+];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_TO(0.00)[googlemail.com,redhat.com];
+	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[gmail.com,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org]
+Message-ID-Hash: WVEMWJAVRFPSTOPHM7KJCRBZDTJNFU2F
+X-Message-ID-Hash: WVEMWJAVRFPSTOPHM7KJCRBZDTJNFU2F
+X-MailFrom: dmitry.osipenko@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Lukasz Wiecaszek <lukasz.wiecaszek@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: Fix possible UAF in dma_buf_export
+Subject: [Linaro-mm-sig] Re: [PATCH v4] udmabuf: add vmap and vunmap methods to udmabuf_ops
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LUK7JECSQ4UOAPUKBDOGXC2VRW4Z5R3O/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WVEMWJAVRFPSTOPHM7KJCRBZDTJNFU2F/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -113,52 +92,41 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Sometime back Dan also reported the same issue[1] where I do mentioned
-that fput()-->dma_buf_file_release() will remove it from the list.
+Hi,
 
-But it seems that I failed to notice fput() here calls the
-dma_buf_file_release() asynchronously i.e. dmabuf that is accessed in
-the close path is already freed. Am I wrong here?
+On 11/17/22 07:58, Lukasz Wiecaszek wrote:
+> The reason behind that patch is associated with videobuf2 subsystem
+> (or more genrally with v4l2 framework) and user created
+> dma buffers (udmabuf). In some circumstances
+> when dealing with V4L2_MEMORY_DMABUF buffers videobuf2 subsystem
+> wants to use dma_buf_vmap() method on the attached dma buffer.
+> As udmabuf does not have .vmap operation implemented,
+> such dma_buf_vmap() natually fails.
+> 
+> videobuf2_common: __vb2_queue_alloc: allocated 3 buffers, 1 plane(s) each
+> videobuf2_common: __prepare_dmabuf: buffer for plane 0 changed
+> videobuf2_common: __prepare_dmabuf: failed to map dmabuf for plane 0
+> videobuf2_common: __buf_prepare: buffer preparation failed: -14
+> 
+> The patch itself seems to be strighforward.
+> It adds implementation of .vmap and .vunmap methods
+> to 'struct dma_buf_ops udmabuf_ops'.
+> .vmap method itself uses vm_map_ram() to map pages linearly
+> into the kernel virtual address space.
+> .vunmap removes mapping created earlier by .vmap.
+> All locking and 'vmapping counting' is done in dma_buf.c
+> so it seems to be redundant/unnecessary in .vmap/.vunmap.
+> 
+> Signed-off-by: Lukasz Wiecaszek <lukasz.wiecaszek@gmail.com>
 
-Should we have the __fput_sync(file) here instead of just fput(file)
-which can solve this problem?
+If new patch version doesn't contain significant changes and you got
+acks/reviews for the previous version, then you should add the given
+acked-by and reviewed-by tags to the commit message by yourself.
 
-[1]https://lore.kernel.org/all/20220516084704.GG29930@kadam/
+-- 
+Best regards,
+Dmitry
 
-Thanks,
-Charan
-On 11/17/2022 11:51 AM, Gaosheng Cui wrote:
-> Smatch report warning as follows:
-> 
-> drivers/dma-buf/dma-buf.c:681 dma_buf_export() warn:
->   '&dmabuf->list_node' not removed from list
-> 
-> If dma_buf_stats_setup() fails in dma_buf_export(), goto err_sysfs
-> and dmabuf will be freed, but dmabuf->list_node will not be removed
-> from db_list.head, then list traversal may cause UAF.
-> 
-> Fix by removeing it from db_list.head before free().
-> 
-> Fixes: ef3a6b70507a ("dma-buf: call dma_buf_stats_setup after dmabuf is in valid list")
-> Signed-off-by: Gaosheng Cui <cuigaosheng1@huawei.com>
-> ---
->  drivers/dma-buf/dma-buf.c | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-> index b809513b03fe..6848f50226d5 100644
-> --- a/drivers/dma-buf/dma-buf.c
-> +++ b/drivers/dma-buf/dma-buf.c
-> @@ -675,6 +675,9 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
->  	return dmabuf;
->  
->  err_sysfs:
-> +	mutex_lock(&db_list.lock);
-> +	list_del(&dmabuf->list_node);
-> +	mutex_unlock(&db_list.lock);
->  	/*
->  	 * Set file->f_path.dentry->d_fsdata to NULL so that when
->  	 * dma_buf_release() gets invoked by dentry_ops, it exits
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
