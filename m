@@ -2,74 +2,108 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CFC562D573
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Nov 2022 09:49:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 997FD62D45D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Nov 2022 08:48:39 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 508603F592
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Nov 2022 08:49:52 +0000 (UTC)
-Received: from szxga03-in.huawei.com (szxga03-in.huawei.com [45.249.212.189])
-	by lists.linaro.org (Postfix) with ESMTPS id B304A3F23A
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Nov 2022 06:21:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9E93E3F2E5
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Nov 2022 07:48:38 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	by lists.linaro.org (Postfix) with ESMTPS id 653183F2C0
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Nov 2022 07:48:21 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of cuigaosheng1@huawei.com designates 45.249.212.189 as permitted sender) smtp.mailfrom=cuigaosheng1@huawei.com;
-	dmarc=pass (policy=quarantine) header.from=huawei.com
-Received: from kwepemi500012.china.huawei.com (unknown [172.30.72.54])
-	by szxga03-in.huawei.com (SkyGuard) with ESMTP id 4NCV9J2bx9zJnpN;
-	Thu, 17 Nov 2022 14:18:44 +0800 (CST)
-Received: from cgs.huawei.com (10.244.148.83) by
- kwepemi500012.china.huawei.com (7.221.188.12) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2375.31; Thu, 17 Nov 2022 14:21:53 +0800
-From: Gaosheng Cui <cuigaosheng1@huawei.com>
-To: <sumit.semwal@linaro.org>, <christian.koenig@amd.com>,
-	<tjmercier@google.com>, <quic_charante@quicinc.com>,
-	<cuigaosheng1@huawei.com>
-Date: Thu, 17 Nov 2022 14:21:52 +0800
-Message-ID: <20221117062152.3029018-1-cuigaosheng1@huawei.com>
-X-Mailer: git-send-email 2.25.1
+	dkim=pass header.d=quicinc.com header.s=qcppdkim1 header.b=k5zdoItO;
+	spf=pass (lists.linaro.org: domain of quic_charante@quicinc.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=quic_charante@quicinc.com;
+	dmarc=pass (policy=none) header.from=quicinc.com
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2AH6vGWY030397;
+	Thu, 17 Nov 2022 07:48:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=qcppdkim1;
+ bh=tBzCcWB+FWTWbCRzQPLuDi04qenTt42bi9VpD3R/tks=;
+ b=k5zdoItO7JDlN1YZQb7uFaC0sFN/yvrZq1KQpGNHEDXiKq1+/g1JLIiaf7ptpzh0FomQ
+ d0XFLuA2aF7PGUQOTwUFGD+DlKhO2PL2pAjFFw9IqFGagOL9u7v2oYMZFzuOtADRkt8O
+ NeGXfI5EtCSpJHJX4S+8Ms6OEP85VHO49zyUaoRV9+luuVJHdZ+VbmjGVQRintHz7z2k
+ lCf06jUx+MIaCmpNIizxXRQdSHjsCkaSSPwLHCx48FOl2xIs33W5xMFCZvYbR6PcWp3t
+ qkiEs59s8EIBlKL5QEA19jihs0ku77YhP6pP0NeZYp2HW7SlxKbWYl0qwmLO03mRxzqr 2Q==
+Received: from nalasppmta04.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3kwg4sg5ve-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 17 Nov 2022 07:48:10 +0000
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
+	by NALASPPMTA04.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 2AH7m9pV030059
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 17 Nov 2022 07:48:09 GMT
+Received: from [10.216.46.79] (10.80.80.8) by nalasex01a.na.qualcomm.com
+ (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.29; Wed, 16 Nov
+ 2022 23:48:05 -0800
+Message-ID: <f12a5dbe-4626-f6c7-236b-30bb16be1dd6@quicinc.com>
+Date: Thu, 17 Nov 2022 13:18:02 +0530
 MIME-Version: 1.0
-X-Originating-IP: [10.244.148.83]
-X-ClientProxiedBy: dggems702-chm.china.huawei.com (10.3.19.179) To
- kwepemi500012.china.huawei.com (7.221.188.12)
-X-CFilter-Loop: Reflected
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Content-Language: en-US
+To: Gaosheng Cui <cuigaosheng1@huawei.com>, <sumit.semwal@linaro.org>,
+        <christian.koenig@amd.com>, <tjmercier@google.com>,
+        Dan Carpenter
+	<dan.carpenter@oracle.com>,
+        Pavan Kondeti <quic_pkondeti@quicinc.com>
+References: <20221117062152.3029018-1-cuigaosheng1@huawei.com>
+From: Charan Teja Kalla <quic_charante@quicinc.com>
+In-Reply-To: <20221117062152.3029018-1-cuigaosheng1@huawei.com>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-GUID: OAJK_heCCFjZ6aNynq_IIlIB5nii1D7-
+X-Proofpoint-ORIG-GUID: OAJK_heCCFjZ6aNynq_IIlIB5nii1D7-
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-11-17_04,2022-11-16_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1011
+ lowpriorityscore=0 suspectscore=0 mlxlogscore=999 spamscore=0
+ priorityscore=1501 impostorscore=0 bulkscore=0 mlxscore=0 malwarescore=0
+ adultscore=0 phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2210170000 definitions=main-2211170058
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: --
-X-Rspamd-Queue-Id: B304A3F23A
-X-Spamd-Result: default: False [-2.80 / 15.00];
+X-Spamd-Bar: -----
+X-Rspamd-Queue-Id: 653183F2C0
+X-Spamd-Result: default: False [-5.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	RCVD_IN_DNSWL_HI(-0.50)[45.249.212.189:from];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[huawei.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:45.249.212.187/29];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[quicinc.com,none];
+	RCVD_IN_DNSWL_HI(-0.50)[205.220.180.131:from];
+	R_SPF_ALLOW(-0.20)[+ip4:205.220.180.131];
+	R_DKIM_ALLOW(-0.20)[quicinc.com:s=qcppdkim1];
 	MIME_GOOD(-0.10)[text/plain];
 	FROM_EQ_ENVFROM(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:134543, ipnet:45.249.212.0/24, country:CN];
-	R_DKIM_NA(0.00)[];
+	ARC_NA(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	NEURAL_HAM(-0.00)[-0.819];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	MIME_TRACE(0.00)[0:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:22843, ipnet:205.220.180.0/24, country:US];
+	NEURAL_HAM(-0.00)[-0.996];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[quicinc.com:+];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	HAS_XOIP(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[szxga03-in.huawei.com:helo,szxga03-in.huawei.com:rdns];
+	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_DN_NONE(0.00)[];
-	ARC_NA(0.00)[]
-X-MailFrom: cuigaosheng1@huawei.com
+	RCVD_IN_DNSWL_FAIL(0.00)[129.46.96.20:server fail]
+Message-ID-Hash: LUK7JECSQ4UOAPUKBDOGXC2VRW4Z5R3O
+X-Message-ID-Hash: LUK7JECSQ4UOAPUKBDOGXC2VRW4Z5R3O
+X-MailFrom: quic_charante@quicinc.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 22IZL5GGZ3PSS6TLUL4VTTDPQEQXDNB7
-X-Message-ID-Hash: 22IZL5GGZ3PSS6TLUL4VTTDPQEQXDNB7
-X-Mailman-Approved-At: Thu, 17 Nov 2022 08:49:35 +0000
 CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] dma-buf: Fix possible UAF in dma_buf_export
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: Fix possible UAF in dma_buf_export
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/22IZL5GGZ3PSS6TLUL4VTTDPQEQXDNB7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LUK7JECSQ4UOAPUKBDOGXC2VRW4Z5R3O/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -79,40 +113,52 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Smatch report warning as follows:
+Sometime back Dan also reported the same issue[1] where I do mentioned
+that fput()-->dma_buf_file_release() will remove it from the list.
 
-drivers/dma-buf/dma-buf.c:681 dma_buf_export() warn:
-  '&dmabuf->list_node' not removed from list
+But it seems that I failed to notice fput() here calls the
+dma_buf_file_release() asynchronously i.e. dmabuf that is accessed in
+the close path is already freed. Am I wrong here?
 
-If dma_buf_stats_setup() fails in dma_buf_export(), goto err_sysfs
-and dmabuf will be freed, but dmabuf->list_node will not be removed
-from db_list.head, then list traversal may cause UAF.
+Should we have the __fput_sync(file) here instead of just fput(file)
+which can solve this problem?
 
-Fix by removeing it from db_list.head before free().
+[1]https://lore.kernel.org/all/20220516084704.GG29930@kadam/
 
-Fixes: ef3a6b70507a ("dma-buf: call dma_buf_stats_setup after dmabuf is in valid list")
-Signed-off-by: Gaosheng Cui <cuigaosheng1@huawei.com>
----
- drivers/dma-buf/dma-buf.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-index b809513b03fe..6848f50226d5 100644
---- a/drivers/dma-buf/dma-buf.c
-+++ b/drivers/dma-buf/dma-buf.c
-@@ -675,6 +675,9 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
- 	return dmabuf;
- 
- err_sysfs:
-+	mutex_lock(&db_list.lock);
-+	list_del(&dmabuf->list_node);
-+	mutex_unlock(&db_list.lock);
- 	/*
- 	 * Set file->f_path.dentry->d_fsdata to NULL so that when
- 	 * dma_buf_release() gets invoked by dentry_ops, it exits
--- 
-2.25.1
-
+Thanks,
+Charan
+On 11/17/2022 11:51 AM, Gaosheng Cui wrote:
+> Smatch report warning as follows:
+> 
+> drivers/dma-buf/dma-buf.c:681 dma_buf_export() warn:
+>   '&dmabuf->list_node' not removed from list
+> 
+> If dma_buf_stats_setup() fails in dma_buf_export(), goto err_sysfs
+> and dmabuf will be freed, but dmabuf->list_node will not be removed
+> from db_list.head, then list traversal may cause UAF.
+> 
+> Fix by removeing it from db_list.head before free().
+> 
+> Fixes: ef3a6b70507a ("dma-buf: call dma_buf_stats_setup after dmabuf is in valid list")
+> Signed-off-by: Gaosheng Cui <cuigaosheng1@huawei.com>
+> ---
+>  drivers/dma-buf/dma-buf.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+> index b809513b03fe..6848f50226d5 100644
+> --- a/drivers/dma-buf/dma-buf.c
+> +++ b/drivers/dma-buf/dma-buf.c
+> @@ -675,6 +675,9 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
+>  	return dmabuf;
+>  
+>  err_sysfs:
+> +	mutex_lock(&db_list.lock);
+> +	list_del(&dmabuf->list_node);
+> +	mutex_unlock(&db_list.lock);
+>  	/*
+>  	 * Set file->f_path.dentry->d_fsdata to NULL so that when
+>  	 * dma_buf_release() gets invoked by dentry_ops, it exits
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
