@@ -2,243 +2,396 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42AAF62F392
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 18 Nov 2022 12:21:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B9C3262FB1D
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 18 Nov 2022 18:05:46 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 34A153F5EA
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 18 Nov 2022 11:21:52 +0000 (UTC)
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
-	by lists.linaro.org (Postfix) with ESMTPS id 9589C3EF19
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Nov 2022 11:21:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 78BFF3F5E8
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 18 Nov 2022 17:05:45 +0000 (UTC)
+Received: from mail-yw1-f175.google.com (mail-yw1-f175.google.com [209.85.128.175])
+	by lists.linaro.org (Postfix) with ESMTPS id CFEF03EF19
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Nov 2022 17:05:27 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=wYAotX1b;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=+wzYH9HX;
-	spf=pass (lists.linaro.org: domain of tzimmermann@suse.de designates 195.135.220.29 as permitted sender) smtp.mailfrom=tzimmermann@suse.de;
-	dmarc=pass (policy=none) header.from=suse.de
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id BBBAC1F8D7;
-	Fri, 18 Nov 2022 11:21:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1668770494; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=L3euMKBmPhMy8xs+0Iz9hve6/klsRgyszk94snpweik=;
-	b=wYAotX1b18h44sn2hYO2syv7V4WJnWy4DjyZ6FSE11VpBhJ6yYSPC72B5hOMgiWUFUnLGn
-	aA0AJagr8b1nfmGWgRxRGojh13kAfzPrNJDESaJimUQ6GrPQ02EqoScNQp7P1gG1t9FBL+
-	7PLuEl+nznaW0NTHwL/IzQ9rpFTFanA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1668770494;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=L3euMKBmPhMy8xs+0Iz9hve6/klsRgyszk94snpweik=;
-	b=+wzYH9HXa+M0Ptzkq7AV2wFHscud2W2D1O0r2WSm1IZk7OHfagWckSJPILwt5IzoGOnNWc
-	XzQMc1kGGl3CkTAg==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8CC8A13A66;
-	Fri, 18 Nov 2022 11:21:34 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-	by imap2.suse-dmz.suse.de with ESMTPSA
-	id AFSGIb5qd2MpYwAAMHmgww
-	(envelope-from <tzimmermann@suse.de>); Fri, 18 Nov 2022 11:21:34 +0000
-Message-ID: <b4681075-ea53-637f-0df5-3cc5891a102e@suse.de>
-Date: Fri, 18 Nov 2022 12:21:33 +0100
+	dkim=pass header.d=google.com header.s=20210112 header.b=djHYj3FU;
+	spf=pass (lists.linaro.org: domain of tjmercier@google.com designates 209.85.128.175 as permitted sender) smtp.mailfrom=tjmercier@google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-yw1-f175.google.com with SMTP id 00721157ae682-369426664f9so55159067b3.12
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Nov 2022 09:05:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=pYaO4frsra4fw6h53DPHPnYJpAOilXGJ6vC54BFE2Kk=;
+        b=djHYj3FUbzZdZg37yc4Igv/IRvLcb6mqU5V2Uwm6tOtJRNs0J7H3gpvKqCX9RvzED1
+         0P5LettHbtzsmOpfd1GLqt/g/EXkicFlh/9XKQBWMs/MEGMuBHXk692DkY3ncnY8MBvg
+         XUeD+PzQJ4C+BHG4NYnjEv68I63G9IZ8nt7jwpfsT9lepT5VnCNct98/rOBBIYSpxZGE
+         0W9fU3BfnBtnkjtpj4RAGBLCVUEJ/8NY7ACvvn4d3ydHWzfe9OY9gC/VomcYjI+H8OjC
+         4fQM2c2sHqTkWXRA2YZPpebcyCeI5zt5JcGmGga3n1NeduoRPQYW/4pj0CoNNtOIwWh3
+         vr1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=pYaO4frsra4fw6h53DPHPnYJpAOilXGJ6vC54BFE2Kk=;
+        b=eUBkvKr8b02bV9A1Ecue1Jl9Niw4aRfThRJ490J7FosbP9bdGTPTouSB29sEmKLwEk
+         I/F20tx9VIOsySG1KjVvkHgobLziVrXl5Li5874QcfmEZqIl/AXKp4OnTKntDUO/tBWj
+         vxnkqZ8iIP/Hm150A4gk+VuQaqRmP22Lgg0hyTBOgO2uOi8QlmGlftRVdLIyziXjvdw6
+         SIMLnMN7EX01OQv7PNfXn9kTo2RbGMmtdQO93zFDTVlHaKd9wBJMJBYQQDffSFpl34yH
+         nMUXz/p0eTu6kqYqdbci8VOxX8Thl/8BW/6VUuYtCfR4GDAR8DokkRmmgNTp31SJCU7+
+         rxgw==
+X-Gm-Message-State: ANoB5pkWdI21AZFD9RhHDX8zXMeCXVF4WUOAAOQSQiPm850feI424a9B
+	+GTEKi6jiPs+WZTEjvVOkP5ln2C7685mol/EYjBNjQ==
+X-Google-Smtp-Source: AA0mqf6kYHjsb6cu7KeYD/Mn97m8h6gicsJm1ZP/wL2CBHiJ8/o9DeqQtFcPT83VCJF0cJ84uNPXpCEtXkqxuPA27Xg=
+X-Received: by 2002:a0d:d684:0:b0:36d:2169:3d65 with SMTP id
+ y126-20020a0dd684000000b0036d21693d65mr7131722ywd.317.1668791126861; Fri, 18
+ Nov 2022 09:05:26 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-To: Chunyou Tang <tangchunyou@163.com>
-References: <20221111033817.366-1-tangchunyou@163.com>
- <2b4e38d8-d0ea-e85c-88f1-bb6a714ee0eb@suse.de>
- <20221118183232.00007638@163.com>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-In-Reply-To: <20221118183232.00007638@163.com>
+References: <20221117062152.3029018-1-cuigaosheng1@huawei.com>
+ <f12a5dbe-4626-f6c7-236b-30bb16be1dd6@quicinc.com> <99d3aee6-ba3e-5333-6f79-ddbcfc0e8843@amd.com>
+ <CABdmKX1UMB0L0PmHB59nijReZef6LUQ3XKXitHZo2YnUrJTz9Q@mail.gmail.com> <2c9fa595-e788-5474-4f2b-ffbd08a70d13@amd.com>
+In-Reply-To: <2c9fa595-e788-5474-4f2b-ffbd08a70d13@amd.com>
+From: "T.J. Mercier" <tjmercier@google.com>
+Date: Fri, 18 Nov 2022 09:05:12 -0800
+Message-ID: <CABdmKX0KJJV0iQwy0aUNXcLc1DGyLjmh6_Y53asHEoh-uyHzAA@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: ----------
-X-Rspamd-Queue-Id: 9589C3EF19
-X-Spamd-Result: default: False [-10.00 / 15.00];
+X-Spamd-Bar: --------
+X-Rspamd-Queue-Id: CFEF03EF19
+X-Spamd-Result: default: False [-8.00 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
-	R_SPF_ALLOW(-0.20)[+ip4:195.135.220.0/27];
-	MIME_BASE64_TEXT(0.10)[];
-	FREEMAIL_TO(0.00)[163.com];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	ASN(0.00)[asn:29298, ipnet:195.135.220.0/23, country:DE];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20210112];
+	MIME_GOOD(-0.10)[multipart/alternative,text/plain];
 	FROM_EQ_ENVFROM(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
-	MID_RHS_MATCH_FROM(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
 	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[suse.de:+];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	NEURAL_HAM(-0.00)[-0.658];
+	DKIM_TRACE(0.00)[google.com:+];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	URIBL_BLOCKED(0.00)[amd.com:email,huawei.com:email];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	FROM_HAS_DN(0.00)[];
-	HAS_ATTACHMENT(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RCVD_TLS_ALL(0.00)[]
-Message-ID-Hash: TDMIK6HDUAE3ZXEDXPN2VHWV2D5WNIMF
-X-Message-ID-Hash: TDMIK6HDUAE3ZXEDXPN2VHWV2D5WNIMF
-X-MailFrom: tzimmermann@suse.de
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.175:from]
+Message-ID-Hash: WOJWILOL7G7AZ3EKZFZV4QSC4U6M7XFY
+X-Message-ID-Hash: WOJWILOL7G7AZ3EKZFZV4QSC4U6M7XFY
+X-MailFrom: tjmercier@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: maarten.lankhorst@linux.intel.com, mripard@kernel.org, daniel@ffwll.ch, sumit.semwal@linaro.org, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: Charan Teja Kalla <quic_charante@quicinc.com>, Gaosheng Cui <cuigaosheng1@huawei.com>, sumit.semwal@linaro.org, Dan Carpenter <dan.carpenter@oracle.com>, Pavan Kondeti <quic_pkondeti@quicinc.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] drm/gem-shmem: When drm_gem_object_init failed, should release object
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: Fix possible UAF in dma_buf_export
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TDMIK6HDUAE3ZXEDXPN2VHWV2D5WNIMF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WOJWILOL7G7AZ3EKZFZV4QSC4U6M7XFY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============5171522048839979382=="
+Content-Type: multipart/mixed; boundary="===============3333409154309526907=="
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============5171522048839979382==
-Content-Language: en-US
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------XgM8ETXUekg0EOJsfaSYemnJ"
+--===============3333409154309526907==
+Content-Type: multipart/alternative; boundary="00000000000052805605edc1b6f9"
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------XgM8ETXUekg0EOJsfaSYemnJ
-Content-Type: multipart/mixed; boundary="------------C0QJjKI0qwoGRcl2Yt0IOPHd";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: Chunyou Tang <tangchunyou@163.com>
-Cc: maarten.lankhorst@linux.intel.com, mripard@kernel.org, airlied@gmail.com,
- daniel@ffwll.ch, sumit.semwal@linaro.org, christian.koenig@amd.com,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
-Message-ID: <b4681075-ea53-637f-0df5-3cc5891a102e@suse.de>
-Subject: Re: [PATCH v2] drm/gem-shmem: When drm_gem_object_init failed, should
- release object
-References: <20221111033817.366-1-tangchunyou@163.com>
- <2b4e38d8-d0ea-e85c-88f1-bb6a714ee0eb@suse.de>
- <20221118183232.00007638@163.com>
-In-Reply-To: <20221118183232.00007638@163.com>
+--00000000000052805605edc1b6f9
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
---------------C0QJjKI0qwoGRcl2Yt0IOPHd
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+On Fri, Nov 18, 2022 at 12:27 AM Christian K=C3=B6nig <christian.koenig@amd=
+.com>
+wrote:
 
-SGkNCg0KQW0gMTguMTEuMjIgdW0gMTE6MzIgc2NocmllYiBDaHVueW91IFRhbmc6DQo+IEhp
-IFRob21hcywNCj4gICAgIENhbiBJIGRpc2NhcmQgdGhlIGZpcnN0IHR3byBwYXRjaHMsIGFu
-ZCBwdWxsIHRoZSBuZXcgY29kZSwgdGhlbg0KPiAgICAgbW9kaWZ5IGFuZCBnaXQgc2VuZC1l
-bWFpbCB0aGlzIHBhdGNoPw0KDQpZZXMsIG9mIGNvdXJzZS4gSnVzdCBtYWtlIHN1cmUgdGhh
-dCB0aGUgbmV4dCB2ZXJzaW9uIGlzIG1hcmtlZCBhcyB2Mywgc28gDQppdCdzIG9idmlvdXMg
-d2hhdCBpdCBiZWxvbmdzIHRvLg0KDQpCZXN0IHJlZ2FyZHMNClRob21hcw0KDQo+IA0KPiAN
-Cj4g5LqOIFRodSwgMTcgTm92IDIwMjIgMTQ6NDI6MzYgKzAxMDANCj4gVGhvbWFzIFppbW1l
-cm1hbm4gPHR6aW1tZXJtYW5uQHN1c2UuZGU+IOWGmemBkzoNCj4gDQo+PiBIaQ0KPj4NCj4+
-IEFtIDExLjExLjIyIHVtIDA0OjM4IHNjaHJpZWIgQ2h1bnlvdVRhbmc6DQo+Pj4gd2hlbiBn
-b3RvIGVycl9mcmVlLCB0aGUgb2JqZWN0IGhhZCBpbml0LCBzbyBpdCBzaG91bGQgYmUgcmVs
-ZWFzZQ0KPj4+IHdoZW4gZmFpbC4NCj4+Pg0KPj4+IFNpZ25lZC1vZmYtYnk6IENodW55b3VU
-YW5nIDx0YW5nY2h1bnlvdUAxNjMuY29tPg0KPj4+IC0tLQ0KPj4+ICAgIGRyaXZlcnMvZ3B1
-L2RybS9kcm1fZ2VtLmMgICAgICAgICAgICAgIHwgMTkgKysrKysrKysrKysrKysrKy0tLQ0K
-Pj4+ICAgIGRyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtX3NobWVtX2hlbHBlci5jIHwgIDQgKysr
-LQ0KPj4+ICAgIGluY2x1ZGUvZHJtL2RybV9nZW0uaCAgICAgICAgICAgICAgICAgIHwgIDEg
-Kw0KPj4+ICAgIDMgZmlsZXMgY2hhbmdlZCwgMjAgaW5zZXJ0aW9ucygrKSwgNCBkZWxldGlv
-bnMoLSkNCj4+Pg0KPj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vZHJtX2dlbS5j
-IGIvZHJpdmVycy9ncHUvZHJtL2RybV9nZW0uYw0KPj4+IGluZGV4IDhiNjhhM2MxZTZhYi4u
-Y2JhMzJjNDZiYjA1IDEwMDY0NA0KPj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9kcm1fZ2Vt
-LmMNCj4+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2dlbS5jDQo+Pj4gQEAgLTE2OSw2
-ICsxNjksMjEgQEAgdm9pZCBkcm1fZ2VtX3ByaXZhdGVfb2JqZWN0X2luaXQoc3RydWN0DQo+
-Pj4gZHJtX2RldmljZSAqZGV2LCB9DQo+Pj4gICAgRVhQT1JUX1NZTUJPTChkcm1fZ2VtX3By
-aXZhdGVfb2JqZWN0X2luaXQpOw0KPj4+ICAgIA0KPj4+ICsvKioNCj4+PiArICogZHJtX2dl
-bV9wcml2YXRlX29iamVjdF9maW5pIC0gRmluYWxpemUgYSBmYWlsZWQgZHJtX2dlbV9vYmpl
-Y3QNCj4+PiArICogQG9iajogZHJtX2dlbV9vYmplY3QNCj4+PiArICoNCj4+PiArICogVW5p
-bml0aWFsaXplIGFuIGFscmVhZHkgYWxsb2NhdGVkIEdFTSBvYmplY3Qgd2hlbiBpdA0KPj4+
-IGluaXRpYWxpemVkIGZhaWxlZA0KPj4+ICsgKi8NCj4+PiArdm9pZCBkcm1fZ2VtX3ByaXZh
-dGVfb2JqZWN0X2Zpbmkoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmopDQo+Pj4gK3sNCj4+
-PiArCVdBUk5fT04ob2JqLT5kbWFfYnVmKTsNCj4+DQo+PiBSYXRoZXIgbGVhc2UgdGhpcyBp
-biBpdHMgb3JpZ2luYWwgcGxhY2UuDQo+Pg0KPj4+ICsNCj4+PiArCWRtYV9yZXN2X2Zpbmko
-Jm9iai0+X3Jlc3YpOw0KPj4+ICsJZHJtX2dlbV9scnVfcmVtb3ZlKG9iaik7DQo+Pg0KPj4g
-QUZBSUNUIGRybV9nZW1fbHJ1X3JlbW92ZSgpIGRvZXNuJ3QgYmVsb25nIGludG8gdGhpcyBm
-dW5jdGlvbi4NCj4+DQo+Pj4gK30NCj4+PiArRVhQT1JUX1NZTUJPTChkcm1fZ2VtX3ByaXZh
-dGVfb2JqZWN0X2ZpbmkpOw0KPj4+ICsNCj4+PiAgICAvKioNCj4+PiAgICAgKiBkcm1fZ2Vt
-X29iamVjdF9oYW5kbGVfZnJlZSAtIHJlbGVhc2UgcmVzb3VyY2VzIGJvdW5kIHRvDQo+Pj4g
-dXNlcnNwYWNlIGhhbmRsZXMNCj4+PiAgICAgKiBAb2JqOiBHRU0gb2JqZWN0IHRvIGNsZWFu
-IHVwLg0KPj4+IEBAIC05MzAsMTQgKzk0NSwxMiBAQCBkcm1fZ2VtX3JlbGVhc2Uoc3RydWN0
-IGRybV9kZXZpY2UgKmRldiwNCj4+PiBzdHJ1Y3QgZHJtX2ZpbGUgKmZpbGVfcHJpdmF0ZSkg
-dm9pZA0KPj4+ICAgIGRybV9nZW1fb2JqZWN0X3JlbGVhc2Uoc3RydWN0IGRybV9nZW1fb2Jq
-ZWN0ICpvYmopDQo+Pj4gICAgew0KPj4+IC0JV0FSTl9PTihvYmotPmRtYV9idWYpOw0KPj4+
-ICsJZHJtX2dlbV9wcml2YXRlX29iamVjdF9maW5pKG9iaik7DQo+Pj4gICAgDQo+Pj4gICAg
-CWlmIChvYmotPmZpbHApDQo+Pj4gICAgCQlmcHV0KG9iai0+ZmlscCk7DQo+Pj4gICAgDQo+
-Pj4gLQlkbWFfcmVzdl9maW5pKCZvYmotPl9yZXN2KTsNCj4+DQo+PiBQbGVhc2UgY2FsbCBk
-cm1fZ2VtX3ByaXZhdGVfb2JqZWN0X2ZpbmkoKSBoZXJlLg0KPj4NCj4+PiAgICAJZHJtX2dl
-bV9mcmVlX21tYXBfb2Zmc2V0KG9iaik7DQo+Pj4gLQlkcm1fZ2VtX2xydV9yZW1vdmUob2Jq
-KTsNCj4+DQo+PiBQbGVhc2Uga2VlcCB0aGlzIGxpbmUgaGVyZS4NCj4+DQo+PiBCZXN0IHJl
-Z2FyZHMNCj4+IFRob21hcw0KPj4NCj4+PiAgICB9DQo+Pj4gICAgRVhQT1JUX1NZTUJPTChk
-cm1fZ2VtX29iamVjdF9yZWxlYXNlKTsNCj4+PiAgICANCj4+PiBkaWZmIC0tZ2l0IGEvZHJp
-dmVycy9ncHUvZHJtL2RybV9nZW1fc2htZW1faGVscGVyLmMNCj4+PiBiL2RyaXZlcnMvZ3B1
-L2RybS9kcm1fZ2VtX3NobWVtX2hlbHBlci5jIGluZGV4DQo+Pj4gMzUxMzhmOGEzNzVjLi44
-NDVlM2Q1ZDcxZWIgMTAwNjQ0IC0tLQ0KPj4+IGEvZHJpdmVycy9ncHUvZHJtL2RybV9nZW1f
-c2htZW1faGVscGVyLmMgKysrDQo+Pj4gYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2dlbV9zaG1l
-bV9oZWxwZXIuYyBAQCAtNzksOCArNzksMTAgQEANCj4+PiBfX2RybV9nZW1fc2htZW1fY3Jl
-YXRlKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsIHNpemVfdCBzaXplLCBib29sDQo+Pj4gcHJp
-dmF0ZSkgfSBlbHNlIHsgcmV0ID0gZHJtX2dlbV9vYmplY3RfaW5pdChkZXYsIG9iaiwgc2l6
-ZSk7DQo+Pj4gICAgCX0NCj4+PiAtCWlmIChyZXQpDQo+Pj4gKwlpZiAocmV0KSB7DQo+Pj4g
-KwkJZHJtX2dlbV9wcml2YXRlX29iamVjdF9maW5pKG9iaikNCj4+PiAgICAJCWdvdG8gZXJy
-X2ZyZWU7DQo+Pj4gKwl9DQo+Pj4gICAgDQo+Pj4gICAgCXJldCA9IGRybV9nZW1fY3JlYXRl
-X21tYXBfb2Zmc2V0KG9iaik7DQo+Pj4gICAgCWlmIChyZXQpDQo+Pj4gZGlmZiAtLWdpdCBh
-L2luY2x1ZGUvZHJtL2RybV9nZW0uaCBiL2luY2x1ZGUvZHJtL2RybV9nZW0uaA0KPj4+IGlu
-ZGV4IGJkNDJmMjVlNDQ5Yy4uOWIxZmViMDMwNjlkIDEwMDY0NA0KPj4+IC0tLSBhL2luY2x1
-ZGUvZHJtL2RybV9nZW0uaA0KPj4+ICsrKyBiL2luY2x1ZGUvZHJtL2RybV9nZW0uaA0KPj4+
-IEBAIC00MDUsNiArNDA1LDcgQEAgaW50IGRybV9nZW1fb2JqZWN0X2luaXQoc3RydWN0IGRy
-bV9kZXZpY2UgKmRldiwNCj4+PiAgICAJCQlzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9iaiwg
-c2l6ZV90IHNpemUpOw0KPj4+ICAgIHZvaWQgZHJtX2dlbV9wcml2YXRlX29iamVjdF9pbml0
-KHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsDQo+Pj4gICAgCQkJCSBzdHJ1Y3QgZHJtX2dlbV9v
-YmplY3QgKm9iaiwNCj4+PiBzaXplX3Qgc2l6ZSk7ICt2b2lkIGRybV9nZW1fcHJpdmF0ZV9v
-YmplY3RfZmluaShzdHJ1Y3QNCj4+PiBkcm1fZ2VtX29iamVjdCAqb2JqKTsgdm9pZCBkcm1f
-Z2VtX3ZtX29wZW4oc3RydWN0IHZtX2FyZWFfc3RydWN0DQo+Pj4gKnZtYSk7IHZvaWQgZHJt
-X2dlbV92bV9jbG9zZShzdHJ1Y3Qgdm1fYXJlYV9zdHJ1Y3QgKnZtYSk7DQo+Pj4gICAgaW50
-IGRybV9nZW1fbW1hcF9vYmooc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmosIHVuc2lnbmVk
-IGxvbmcNCj4+PiBvYmpfc2l6ZSwNCj4+DQo+IA0KDQotLSANClRob21hcyBaaW1tZXJtYW5u
-DQpHcmFwaGljcyBEcml2ZXIgRGV2ZWxvcGVyDQpTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBH
-ZXJtYW55IEdtYkgNCk1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQ0K
-KEhSQiAzNjgwOSwgQUcgTsO8cm5iZXJnKQ0KR2VzY2jDpGZ0c2bDvGhyZXI6IEl2byBUb3Rl
-dg0K
+> Am 18.11.22 um 03:36 schrieb T.J. Mercier:
+> > On Thu, Nov 17, 2022 at 2:16 AM Christian K=C3=B6nig
+> > <christian.koenig@amd.com> wrote:
+> >> Am 17.11.22 um 08:48 schrieb Charan Teja Kalla:
+> >>> Sometime back Dan also reported the same issue[1] where I do mentione=
+d
+> >>> that fput()-->dma_buf_file_release() will remove it from the list.
+> >>>
+> >>> But it seems that I failed to notice fput() here calls the
+> >>> dma_buf_file_release() asynchronously i.e. dmabuf that is accessed in
+> >>> the close path is already freed. Am I wrong here?
+> >>>
+> >>> Should we have the __fput_sync(file) here instead of just fput(file)
+> >>> which can solve this problem?
+> >>>
+> >>> [1]
+> https://nam11.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Flore.=
+kernel.org%2Fall%2F20220516084704.GG29930%40kadam%2F&amp;data=3D05%7C01%7Cc=
+hristian.koenig%40amd.com%7C7d87a302d300479ecfa608dac90dc9f4%7C3dd8961fe488=
+4e608e11a82d994e183d%7C0%7C0%7C638043358319479671%7CUnknown%7CTWFpbGZsb3d8e=
+yJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C=
+%7C%7C&amp;sdata=3DerPl1hGdfLbfCxK3J3xiIR9boJbgj6hPUnCBvZFobog%3D&amp;reser=
+ved=3D0
+> >> That doesn't look like the right solution to me either.
+> >>
+> >> Essentially we have two separate tear down methods for the dma_buf
+> >> object here:
+> >>
+> >> 1. It's not completely initialized and we can call kfree()+module_put(=
+)
+> >> to clean up.
+> >>       There is actually a dma_resv_fini() here. That should probably b=
+e
+> >> fixed.
+> >>
+> >> 2. The dma_buf object is fully initialized, but creating the sysfs sta=
+ts
+> >> file failed.
+> >>       In this case we should *not* clean it up like we currently do, b=
+ut
+> >> rather call fput().
+> >>
+> >> So the right thing to do is a) fix the missing dma_resv_fini() call an=
+d
+> >> b) drop the setting d_fsdata=3DNULL hack and properly return after the
+> fput().
+> >>
+> > This looks right to me if by properly return you mean return
+> > ERR_PTR(ret); at the end of err_sysfs after the fput. (letting
+> > dma_buf_file_release and dma_buf_release do the full cleanup)
+>
+> Yes, exactly that's the idea.
+>
+> The only alternatives I can see would be to either move allocating the
+> file and so completing the dma_buf initialization last again or just
+> ignore errors from sysfs.
+>
+> > If we still want to avoid calling dmabuf->ops->release(dmabuf) in
+> > dma_buf_release like the comment says I guess we could use sysfs_entry
+> > and ERR_PTR to flag that, otherwise it looks like we'd need a bit
+> > somewhere.
+>
+> No, this should be dropped as far as I can see. The sysfs cleanup code
+> looks like it can handle not initialized kobj pointers.
+>
 
---------------C0QJjKI0qwoGRcl2Yt0IOPHd--
+Yeah there is also the null check in dma_buf_stats_teardown() that would
+prevent it from running, but I understood the comment to be referring to
+the release() dma_buf_ops call into the exporter which comes right after
+the teardown call. That looks like it's preventing the fput task work
+calling back into the exporter after the exporter already got an error from
+dma_buf_export(). Otherwise the exporter sees a release() for a buffer that
+it doesn't know about / thinks shouldn't exist. So I could imagine an
+exporter trying to double free: once for the failed dma_buf_export() call,
+and again when the release() op is called later.
 
---------------XgM8ETXUekg0EOJsfaSYemnJ
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
+>
+> Regards,
+> Christian.
+>
+> >
+> >   >
+> >> Regards,
+> >> Christian.
+> >>
+> >>> Thanks,
+> >>> Charan
+> >>> On 11/17/2022 11:51 AM, Gaosheng Cui wrote:
+> >>>> Smatch report warning as follows:
+> >>>>
+> >>>> drivers/dma-buf/dma-buf.c:681 dma_buf_export() warn:
+> >>>>     '&dmabuf->list_node' not removed from list
+> >>>>
+> >>>> If dma_buf_stats_setup() fails in dma_buf_export(), goto err_sysfs
+> >>>> and dmabuf will be freed, but dmabuf->list_node will not be removed
+> >>>> from db_list.head, then list traversal may cause UAF.
+> >>>>
+> >>>> Fix by removeing it from db_list.head before free().
+> >>>>
+> >>>> Fixes: ef3a6b70507a ("dma-buf: call dma_buf_stats_setup after dmabuf
+> is in valid list")
+> >>>> Signed-off-by: Gaosheng Cui <cuigaosheng1@huawei.com>
+> >>>> ---
+> >>>>    drivers/dma-buf/dma-buf.c | 3 +++
+> >>>>    1 file changed, 3 insertions(+)
+> >>>>
+> >>>> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+> >>>> index b809513b03fe..6848f50226d5 100644
+> >>>> --- a/drivers/dma-buf/dma-buf.c
+> >>>> +++ b/drivers/dma-buf/dma-buf.c
+> >>>> @@ -675,6 +675,9 @@ struct dma_buf *dma_buf_export(const struct
+> dma_buf_export_info *exp_info)
+> >>>>       return dmabuf;
+> >>>>
+> >>>>    err_sysfs:
+> >>>> +    mutex_lock(&db_list.lock);
+> >>>> +    list_del(&dmabuf->list_node);
+> >>>> +    mutex_unlock(&db_list.lock);
+> >>>>       /*
+> >>>>        * Set file->f_path.dentry->d_fsdata to NULL so that when
+> >>>>        * dma_buf_release() gets invoked by dentry_ops, it exits
+>
+>
 
------BEGIN PGP SIGNATURE-----
+--00000000000052805605edc1b6f9
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmN3ar0FAwAAAAAACgkQlh/E3EQov+AQ
-cxAAj0bf/fYJ3JvbpYSlat9Qo5WZ+4xZ1ypD0on92QLSIWGejH5cUbRoQLhuql2LEWLHThXyM0CG
-P4QMnK2vS8mVyGqVScRQ47LljkmJN9Qd+TomGP5vvMUoHtovhyKDd/yDWZmkGjHw16yJtEon0SBH
-m5vODEgxtB9aK5xex+6MiDJkZg22Div6Pewr1MGTYx4Smu7pxs1SjC7Qzwwf7bDzPhgIVmPsJFVB
-VatoAVlpx9pOFxL79TLR2+6wBCssNK/f+e4BDdObFxnK/zO31oHZ/uf17Ibmxxyak1i0LybQpLvX
-T3Vmh/yvOGDPRuTuTLiASANnJTGR9l1i23rtldVLPAenl9jG3RX4CWmaO7PJCNEBPQbE+rjPLz+U
-/xU/vQoZe3VdX3L44FdS6gMTh4ddqZYgRB+xu9ml9rs6uXiSqRT5dXNwq7/2FppblKqme8FmjKJR
-ts4jfPiS36QkCp8vnsLW+AJ5kzwZU+/giXRUiZVGEIFA//SUB8LHVn1jddfuBLlZHy5Ul0zz4H+G
-Uqmyd24JbbVzm9Nq6ZzXF3ODBln9r351bsY2vjDXaj46JL2kI+rIt9tH2IQi9OWRsilJ9taWafGY
-dngwZ1p7uDmsbBXjslP2wVRGFVxd0n13eA9Sd252mueqomLVtiuvvw+WCK+83XAkbNIkiv2NMaNr
-9ew=
-=SGdM
------END PGP SIGNATURE-----
+<div dir=3D"ltr"><div dir=3D"ltr"><div class=3D"gmail_default" style=3D"fon=
+t-family:arial,sans-serif;font-size:small"><br></div></div><br><div class=
+=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Nov 18, 2022=
+ at 12:27 AM Christian K=C3=B6nig &lt;<a href=3D"mailto:christian.koenig@am=
+d.com">christian.koenig@amd.com</a>&gt; wrote:<br></div><blockquote class=
+=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rg=
+b(204,204,204);padding-left:1ex">Am 18.11.22 um 03:36 schrieb T.J. Mercier:=
+<br>
+&gt; On Thu, Nov 17, 2022 at 2:16 AM Christian K=C3=B6nig<br>
+&gt; &lt;<a href=3D"mailto:christian.koenig@amd.com" target=3D"_blank">chri=
+stian.koenig@amd.com</a>&gt; wrote:<br>
+&gt;&gt; Am 17.11.22 um 08:48 schrieb Charan Teja Kalla:<br>
+&gt;&gt;&gt; Sometime back Dan also reported the same issue[1] where I do m=
+entioned<br>
+&gt;&gt;&gt; that fput()--&gt;dma_buf_file_release() will remove it from th=
+e list.<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; But it seems that I failed to notice fput() here calls the<br>
+&gt;&gt;&gt; dma_buf_file_release() asynchronously i.e. dmabuf that is acce=
+ssed in<br>
+&gt;&gt;&gt; the close path is already freed. Am I wrong here?<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; Should we have the __fput_sync(file) here instead of just fput=
+(file)<br>
+&gt;&gt;&gt; which can solve this problem?<br>
+&gt;&gt;&gt;<br>
+&gt;&gt;&gt; [1]<a href=3D"https://nam11.safelinks.protection.outlook.com/?=
+url=3Dhttps%3A%2F%2Flore.kernel.org%2Fall%2F20220516084704.GG29930%40kadam%=
+2F&amp;amp;data=3D05%7C01%7Cchristian.koenig%40amd.com%7C7d87a302d300479ecf=
+a608dac90dc9f4%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C638043358319479=
+671%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1=
+haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;amp;sdata=3DerPl1hGdfLbfCxK3J3xiIR9=
+boJbgj6hPUnCBvZFobog%3D&amp;amp;reserved=3D0" rel=3D"noreferrer" target=3D"=
+_blank">https://nam11.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2=
+Flore.kernel.org%2Fall%2F20220516084704.GG29930%40kadam%2F&amp;amp;data=3D0=
+5%7C01%7Cchristian.koenig%40amd.com%7C7d87a302d300479ecfa608dac90dc9f4%7C3d=
+d8961fe4884e608e11a82d994e183d%7C0%7C0%7C638043358319479671%7CUnknown%7CTWF=
+pbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D=
+%7C3000%7C%7C%7C&amp;amp;sdata=3DerPl1hGdfLbfCxK3J3xiIR9boJbgj6hPUnCBvZFobo=
+g%3D&amp;amp;reserved=3D0</a><br>
+&gt;&gt; That doesn&#39;t look like the right solution to me either.<br>
+&gt;&gt;<br>
+&gt;&gt; Essentially we have two separate tear down methods for the dma_buf=
+<br>
+&gt;&gt; object here:<br>
+&gt;&gt;<br>
+&gt;&gt; 1. It&#39;s not completely initialized and we can call kfree()+mod=
+ule_put()<br>
+&gt;&gt; to clean up.<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0There is actually a dma_resv_fini() here=
+. That should probably be<br>
+&gt;&gt; fixed.<br>
+&gt;&gt;<br>
+&gt;&gt; 2. The dma_buf object is fully initialized, but creating the sysfs=
+ stats<br>
+&gt;&gt; file failed.<br>
+&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0In this case we should *not* clean it up=
+ like we currently do, but<br>
+&gt;&gt; rather call fput().<br>
+&gt;&gt;<br>
+&gt;&gt; So the right thing to do is a) fix the missing dma_resv_fini() cal=
+l and<br>
+&gt;&gt; b) drop the setting d_fsdata=3DNULL hack and properly return after=
+ the fput().<br>
+&gt;&gt;<br>
+&gt; This looks right to me if by properly return you mean return<br>
+&gt; ERR_PTR(ret); at the end of err_sysfs after the fput. (letting<br>
+&gt; dma_buf_file_release and dma_buf_release do the full cleanup)<br>
+<br>
+Yes, exactly that&#39;s the idea.<br>
+<br>
+The only alternatives I can see would be to either move allocating the <br>
+file and so completing the dma_buf initialization last again or just <br>
+ignore errors from sysfs.<br>
+<br>
+&gt; If we still want to avoid calling dmabuf-&gt;ops-&gt;release(dmabuf) i=
+n<br>
+&gt; dma_buf_release like the comment says I guess we could use sysfs_entry=
+<br>
+&gt; and ERR_PTR to flag that, otherwise it looks like we&#39;d need a bit<=
+br>
+&gt; somewhere.<br>
+<br>
+No, this should be dropped as far as I can see. The sysfs cleanup code <br>
+looks like it can handle not initialized kobj pointers.<br></blockquote><di=
+v><br></div><div class=3D"gmail_default" style=3D"font-family:arial,sans-se=
+rif;font-size:small">Yeah there is also the null check in dma_buf_stats_tea=
+rdown() that would prevent it from running, but I understood the comment to=
+ be referring to the release() dma_buf_ops call into the exporter which com=
+es right after the teardown call. That looks like it&#39;s preventing the f=
+put task work calling back into the exporter after the exporter already got=
+ an error from dma_buf_export(). Otherwise the exporter sees a release() fo=
+r a buffer that it doesn&#39;t know about / thinks shouldn&#39;t exist. So =
+I could imagine an exporter trying to double free: once for the failed dma_=
+buf_export() call, and again when the release() op is called later.=C2=A0</=
+div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
+der-left:1px solid rgb(204,204,204);padding-left:1ex">
+<br>
+Regards,<br>
+Christian.<br>
+<br>
+&gt;<br>
+&gt;=C2=A0 =C2=A0&gt;<br>
+&gt;&gt; Regards,<br>
+&gt;&gt; Christian.<br>
+&gt;&gt;<br>
+&gt;&gt;&gt; Thanks,<br>
+&gt;&gt;&gt; Charan<br>
+&gt;&gt;&gt; On 11/17/2022 11:51 AM, Gaosheng Cui wrote:<br>
+&gt;&gt;&gt;&gt; Smatch report warning as follows:<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; drivers/dma-buf/dma-buf.c:681 dma_buf_export() warn:<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0&#39;&amp;dmabuf-&gt;list_node&#39; not=
+ removed from list<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; If dma_buf_stats_setup() fails in dma_buf_export(), goto e=
+rr_sysfs<br>
+&gt;&gt;&gt;&gt; and dmabuf will be freed, but dmabuf-&gt;list_node will no=
+t be removed<br>
+&gt;&gt;&gt;&gt; from db_list.head, then list traversal may cause UAF.<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; Fix by removeing it from db_list.head before free().<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; Fixes: ef3a6b70507a (&quot;dma-buf: call dma_buf_stats_set=
+up after dmabuf is in valid list&quot;)<br>
+&gt;&gt;&gt;&gt; Signed-off-by: Gaosheng Cui &lt;<a href=3D"mailto:cuigaosh=
+eng1@huawei.com" target=3D"_blank">cuigaosheng1@huawei.com</a>&gt;<br>
+&gt;&gt;&gt;&gt; ---<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 drivers/dma-buf/dma-buf.c | 3 +++<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 1 file changed, 3 insertions(+)<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt; diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/d=
+ma-buf.c<br>
+&gt;&gt;&gt;&gt; index b809513b03fe..6848f50226d5 100644<br>
+&gt;&gt;&gt;&gt; --- a/drivers/dma-buf/dma-buf.c<br>
+&gt;&gt;&gt;&gt; +++ b/drivers/dma-buf/dma-buf.c<br>
+&gt;&gt;&gt;&gt; @@ -675,6 +675,9 @@ struct dma_buf *dma_buf_export(const s=
+truct dma_buf_export_info *exp_info)<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0return dmabuf;<br>
+&gt;&gt;&gt;&gt;<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 err_sysfs:<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 mutex_lock(&amp;db_list.lock);<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 list_del(&amp;dmabuf-&gt;list_node);<br>
+&gt;&gt;&gt;&gt; +=C2=A0 =C2=A0 mutex_unlock(&amp;db_list.lock);<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0/*<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 * Set file-&gt;f_path.dentry-&g=
+t;d_fsdata to NULL so that when<br>
+&gt;&gt;&gt;&gt;=C2=A0 =C2=A0 =C2=A0 =C2=A0 * dma_buf_release() gets invoke=
+d by dentry_ops, it exits<br>
+<br>
+</blockquote></div></div>
 
---------------XgM8ETXUekg0EOJsfaSYemnJ--
+--00000000000052805605edc1b6f9--
 
---===============5171522048839979382==
+--===============3333409154309526907==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -248,4 +401,4 @@ _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
 
---===============5171522048839979382==--
+--===============3333409154309526907==--
