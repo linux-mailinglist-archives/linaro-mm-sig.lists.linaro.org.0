@@ -2,95 +2,84 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C67A3634FBE
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 06:44:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 72DDD634FBF
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 06:44:30 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2DB1E3ECED
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 05:44:09 +0000 (UTC)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
-	by lists.linaro.org (Postfix) with ESMTPS id 1AD493EC4E
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Nov 2022 06:07:37 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5504D3ED1C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 05:44:29 +0000 (UTC)
+Received: from mail-io1-f69.google.com (mail-io1-f69.google.com [209.85.166.69])
+	by lists.linaro.org (Postfix) with ESMTPS id 0B5513EBF7
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Nov 2022 16:59:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=mediatek.com header.s=dk header.b=A5n7sY0e;
-	spf=pass (lists.linaro.org: domain of yongqiang.niu@mediatek.com designates 60.244.123.138 as permitted sender) smtp.mailfrom=yongqiang.niu@mediatek.com;
-	dmarc=pass (policy=quarantine) header.from=mediatek.com
-X-UUID: 94788235810d480c8e2a92849ab3b2af-20221118
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
-	h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:CC:To:From; bh=A1+E6zUcXM7KWUwrCuEohNuT19+u0ZqHVLOlME/NAkE=;
-	b=A5n7sY0eI6YdaZMljcZlASIWmFI80js4CSGHdf9q+iFuAQvzxuhH2m4fncpYjd/yGBfC3UbQxNIzDPNwTN6ba2QA70aIhk4K++XygraVnIxKQGNocV1b7f4nF7QOMc3rNv6PeP5Vp5QD/dGJ76lU5MdcUQgaq2KVtB/sHaVZZlo=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.13,REQID:856b5215-0f28-4000-8ff6-35aaf9cf6516,IP:0,U
-	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:100,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
-	N:release,TS:100
-X-CID-INFO: VERSION:1.1.13,REQID:856b5215-0f28-4000-8ff6-35aaf9cf6516,IP:0,URL
-	:0,TC:0,Content:0,EDM:0,RT:0,SF:100,FILE:0,BULK:0,RULE:Spam_GS981B3D,ACTIO
-	N:quarantine,TS:100
-X-CID-META: VersionHash:d12e911,CLOUDID:6071232f-2938-482e-aafd-98d66723b8a9,B
-	ulkID:221118140732UI5E2ZT3,BulkQuantity:0,Recheck:0,SF:38|28|17|19|48,TC:n
-	il,Content:0,EDM:-3,IP:nil,URL:0,File:nil,Bulk:nil,QS:nil,BEC:nil,COL:0
-X-UUID: 94788235810d480c8e2a92849ab3b2af-20221118
-Received: from mtkcas11.mediatek.inc [(172.21.101.40)] by mailgw01.mediatek.com
-	(envelope-from <yongqiang.niu@mediatek.com>)
-	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-SHA384 256/256)
-	with ESMTP id 23650525; Fri, 18 Nov 2022 14:07:30 +0800
-Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
- mtkmbs11n1.mediatek.inc (172.21.101.185) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.792.15; Fri, 18 Nov 2022 14:07:28 +0800
-Received: from localhost.localdomain (10.17.3.154) by mtkmbs13n2.mediatek.inc
- (172.21.101.73) with Microsoft SMTP Server id 15.2.792.15 via Frontend
- Transport; Fri, 18 Nov 2022 14:07:28 +0800
-From: Yongqiang Niu <yongqiang.niu@mediatek.com>
-To: Chun-Kuang Hu <chunkuang.hu@kernel.org>, Philipp Zabel
-	<p.zabel@pengutronix.de>, David Airlie <airlied@gmail.com>, Daniel Vetter
-	<daniel@ffwll.ch>, Matthias Brugger <matthias.bgg@gmail.com>, Sumit Semwal
-	<sumit.semwal@linaro.org>
-Date: Fri, 18 Nov 2022 14:07:25 +0800
-Message-ID: <20221118060725.13134-1-yongqiang.niu@mediatek.com>
-X-Mailer: git-send-email 2.25.1
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of 39rl3YwkbAGsbhiTJUUNaJYYRM.PXXPUNdbNaLXWcNWc.LXV@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.166.69 as permitted sender) smtp.mailfrom=39rl3YwkbAGsbhiTJUUNaJYYRM.PXXPUNdbNaLXWcNWc.LXV@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
+	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none)
+Received: by mail-io1-f69.google.com with SMTP id c23-20020a6b4e17000000b006db1063fc9aso2878278iob.14
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Nov 2022 08:59:35 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=nAIdMdH6463NYNaPvuJ0GXj9BIsXOzOnZz/otTIkUpI=;
+        b=w2j6CaleZdWSew1mhe+X6r7kTNlBHS2jOn5opnJ+qifVOuevfGb31UCL5ZnLPK1OtQ
+         9feS20v2QieAVRCoqNFW7rzp4eiFG8rd7lv4EEeBNmZD/hlvfiD+GCQKDcQLLJY92gzV
+         5Xc2Pi/QGVk2wu4Ya9tCgeX2nMjlOFtHzdLxGregY2bhsgHBmkSu3viHhBTTE5vJPQkM
+         3JgHBDn/tCHfyl+HZK8swV5mlScznz4qtyqo/xe627KQ0WVp40LGRNXt76pmzpMPsse3
+         Jdt71SpQQl+RFxYflgT0zZW0Y+rmc70cx+GkfeM8XSavMLrGPgS+9P2iS8dTgKlMXx/P
+         /qJA==
+X-Gm-Message-State: ANoB5plzogr6N79TYveWN0+VSLv+MQrFYnVV21FPUOdffC7gz87VklQz
+	k38TuGgrskqvrkXcWKzXOFh+RQybk+2fnZJo+FRr8XLCV8je
+X-Google-Smtp-Source: AA0mqf4eMGC4h077PAYfrXpiQAO7bkeIqqllFOnuyEGCosBdaZUnTPahU6GN6NI4i6l/1SOnOTRVEgt3wi0uht3EIKTHOD04/7e6
 MIME-Version: 1.0
-X-MTK: N
+X-Received: by 2002:a02:c6d1:0:b0:375:5b8d:e565 with SMTP id
+ r17-20020a02c6d1000000b003755b8de565mr3564635jan.121.1668790774497; Fri, 18
+ Nov 2022 08:59:34 -0800 (PST)
+Date: Fri, 18 Nov 2022 08:59:34 -0800
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <000000000000518bf005edc1a1c2@google.com>
+From: syzbot <syzbot+65422ff0767f378aacfb@syzkaller.appspotmail.com>
+To: christian.koenig@amd.com, dri-devel@lists.freedesktop.org,
+	gustavo@padovan.org, linaro-mm-sig@lists.linaro.org,
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+	sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com
 X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: +
-X-Rspamd-Queue-Id: 1AD493EC4E
-X-Spamd-Result: default: False [1.50 / 15.00];
+X-Spamd-Bar: -
+X-Rspamd-Queue-Id: 0B5513EBF7
+X-Spamd-Result: default: False [-1.90 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	HFILTER_HOSTNAME_UNKNOWN(2.50)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[mediatek.com,quarantine];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:60.244.123.138/32];
-	R_DKIM_ALLOW(-0.20)[mediatek.com:s=dk];
+	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=e9039cbe1d7613aa];
+	FORGED_SENDER(0.30)[syzbot@syzkaller.appspotmail.com,39rl3YwkbAGsbhiTJUUNaJYYRM.PXXPUNdbNaLXWcNWc.LXV@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_TO(0.00)[kernel.org,pengutronix.de,gmail.com,ffwll.ch,linaro.org];
-	ARC_NA(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	R_DKIM_NA(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.166.69:from];
 	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	ASN(0.00)[asn:24154, ipnet:60.244.123.0/24, country:TW];
-	NEURAL_HAM(-0.00)[-0.985];
-	DKIM_TRACE(0.00)[mediatek.com:+];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[65422ff0767f378aacfb];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	NEURAL_HAM(-0.00)[-0.684];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[8];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	TAGGED_RCPT(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[60.244.123.138:from]
-X-Spam-Level: *
-X-MailFrom: yongqiang.niu@mediatek.com
+	ARC_NA(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[goo.gl:url,syzkaller.appspot.com:url];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,39rl3YwkbAGsbhiTJUUNaJYYRM.PXXPUNdbNaLXWcNWc.LXV@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
+	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2]
+X-MailFrom: 39rl3YwkbAGsbhiTJUUNaJYYRM.PXXPUNdbNaLXWcNWc.LXV@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: NDG5WAVBT6XGR6GYGGNCEJLYRCVDHJMH
-X-Message-ID-Hash: NDG5WAVBT6XGR6GYGGNCEJLYRCVDHJMH
-X-Mailman-Approved-At: Wed, 23 Nov 2022 05:44:01 +0000
-CC: dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Project_Global_Chrome_Upstream_Group@mediatek.com, Hsin-Yi Wang <hsinyi@chromium.org>, Yongqiang Niu <yongqiang.niu@mediatek.com>
+Message-ID-Hash: 5GHHVQPGQVFRFBK7OUOKPWHJNUZWJFB3
+X-Message-ID-Hash: 5GHHVQPGQVFRFBK7OUOKPWHJNUZWJFB3
+X-Mailman-Approved-At: Wed, 23 Nov 2022 05:44:11 +0000
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v1] drm/mediatek: add dma buffer control for drm plane disable
+Subject: [Linaro-mm-sig] [syzbot] inconsistent lock state in mark_held_locks
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NDG5WAVBT6XGR6GYGGNCEJLYRCVDHJMH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5GHHVQPGQVFRFBK7OUOKPWHJNUZWJFB3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -100,104 +89,147 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-get dma buffer when drm plane disable
-put dma buffer when overlay really disable
+Hello,
 
-Signed-off-by: Yongqiang Niu <yongqiang.niu@mediatek.com>
+syzbot found the following issue on:
+
+HEAD commit:    e01d50cbd6ee Merge tag 'vfio-v6.1-rc6' of https://github.c..
+git tree:       upstream
+console output: https://syzkaller.appspot.com/x/log.txt?x=145f6401880000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=e9039cbe1d7613aa
+dashboard link: https://syzkaller.appspot.com/bug?extid=65422ff0767f378aacfb
+compiler:       gcc (Debian 10.2.1-6) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2
+
+Unfortunately, I don't have any reproducer for this issue yet.
+
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/43fe73693a6c/disk-e01d50cb.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/35e1240adbc1/vmlinux-e01d50cb.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/3b532cce5d0b/bzImage-e01d50cb.xz
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+65422ff0767f378aacfb@syzkaller.appspotmail.com
+
+================================
+WARNING: inconsistent lock state
+6.1.0-rc5-syzkaller-00008-ge01d50cbd6ee #0 Not tainted
+--------------------------------
+inconsistent {IN-HARDIRQ-W} -> {HARDIRQ-ON-W} usage.
+syz-executor.4/7818 [HC0[0]:SC0[0]:HE0:SE1] takes:
+ffffffff8cb76bb8 (sync_timeline_list_lock){?...}-{2:2}, at: spin_lock_irq include/linux/spinlock.h:375 [inline]
+ffffffff8cb76bb8 (sync_timeline_list_lock){?...}-{2:2}, at: sync_info_debugfs_show+0x2d/0x200 drivers/dma-buf/sync_debug.c:147
+{IN-HARDIRQ-W} state was registered at:
+  lock_acquire kernel/locking/lockdep.c:5668 [inline]
+  lock_acquire+0x1df/0x630 kernel/locking/lockdep.c:5633
+  __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
+  _raw_spin_lock_irqsave+0x39/0x50 kernel/locking/spinlock.c:162
+  sync_timeline_debug_remove+0x25/0x190 drivers/dma-buf/sync_debug.c:31
+  sync_timeline_free drivers/dma-buf/sw_sync.c:104 [inline]
+  kref_put include/linux/kref.h:65 [inline]
+  sync_timeline_put drivers/dma-buf/sw_sync.c:116 [inline]
+  timeline_fence_release+0x263/0x340 drivers/dma-buf/sw_sync.c:144
+  dma_fence_release+0x147/0x680 drivers/dma-buf/dma-fence.c:559
+  kref_put include/linux/kref.h:65 [inline]
+  dma_fence_put include/linux/dma-fence.h:276 [inline]
+  dma_fence_array_release+0x1f6/0x2d0 drivers/dma-buf/dma-fence-array.c:120
+  dma_fence_release+0x147/0x680 drivers/dma-buf/dma-fence.c:559
+  kref_put include/linux/kref.h:65 [inline]
+  dma_fence_put include/linux/dma-fence.h:276 [inline]
+  irq_dma_fence_array_work+0xa5/0xd0 drivers/dma-buf/dma-fence-array.c:52
+  irq_work_single+0x120/0x250 kernel/irq_work.c:211
+  irq_work_run_list kernel/irq_work.c:242 [inline]
+  irq_work_run_list+0x91/0xc0 kernel/irq_work.c:225
+  irq_work_run+0x54/0xd0 kernel/irq_work.c:251
+  __sysvec_irq_work+0xca/0x4d0 arch/x86/kernel/irq_work.c:22
+  sysvec_irq_work+0x8e/0xc0 arch/x86/kernel/irq_work.c:17
+  asm_sysvec_irq_work+0x16/0x20 arch/x86/include/asm/idtentry.h:675
+  __raw_spin_unlock_irq include/linux/spinlock_api_smp.h:160 [inline]
+  _raw_spin_unlock_irq+0x25/0x40 kernel/locking/spinlock.c:202
+  spin_unlock_irq include/linux/spinlock.h:400 [inline]
+  sw_sync_debugfs_release+0x15e/0x230 drivers/dma-buf/sw_sync.c:321
+  __fput+0x27c/0xa90 fs/file_table.c:320
+  task_work_run+0x16b/0x270 kernel/task_work.c:179
+  exit_task_work include/linux/task_work.h:38 [inline]
+  do_exit+0xb35/0x2a20 kernel/exit.c:820
+  do_group_exit+0xd0/0x2a0 kernel/exit.c:950
+  get_signal+0x21a1/0x2430 kernel/signal.c:2858
+  arch_do_signal_or_restart+0x82/0x2300 arch/x86/kernel/signal.c:869
+  exit_to_user_mode_loop kernel/entry/common.c:168 [inline]
+  exit_to_user_mode_prepare+0x15f/0x250 kernel/entry/common.c:203
+  __syscall_exit_to_user_mode_work kernel/entry/common.c:285 [inline]
+  syscall_exit_to_user_mode+0x19/0x50 kernel/entry/common.c:296
+  ret_from_fork+0x15/0x30 arch/x86/entry/entry_64.S:299
+irq event stamp: 288
+hardirqs last  enabled at (287): [<ffffffff81d0a451>] mod_objcg_state+0x591/0xa50 mm/memcontrol.c:3213
+hardirqs last disabled at (288): [<ffffffff89922691>] __raw_spin_lock_irq include/linux/spinlock_api_smp.h:117 [inline]
+hardirqs last disabled at (288): [<ffffffff89922691>] _raw_spin_lock_irq+0x41/0x50 kernel/locking/spinlock.c:170
+softirqs last  enabled at (0): [<ffffffff8146e349>] copy_process+0x2129/0x7190 kernel/fork.c:2198
+softirqs last disabled at (0): [<0000000000000000>] 0x0
+
+other info that might help us debug this:
+ Possible unsafe locking scenario:
+
+       CPU0
+       ----
+  lock(sync_timeline_list_lock);
+  <Interrupt>
+    lock(sync_timeline_list_lock);
+
+ *** DEADLOCK ***
+
+3 locks held by syz-executor.4/7818:
+ #0: ffff8880412b59e8 (&f->f_pos_lock){+.+.}-{3:3}, at: __fdget_pos+0xe3/0x100 fs/file.c:1037
+ #1: ffff888017a97418 (&p->lock){+.+.}-{3:3}, at: seq_read_iter+0xdf/0x1280 fs/seq_file.c:182
+ #2: ffffffff8cb76bb8 (sync_timeline_list_lock){?...}-{2:2}, at: spin_lock_irq include/linux/spinlock.h:375 [inline]
+ #2: ffffffff8cb76bb8 (sync_timeline_list_lock){?...}-{2:2}, at: sync_info_debugfs_show+0x2d/0x200 drivers/dma-buf/sync_debug.c:147
+
+stack backtrace:
+CPU: 0 PID: 7818 Comm: syz-executor.4 Not tainted 6.1.0-rc5-syzkaller-00008-ge01d50cbd6ee #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 10/26/2022
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xcd/0x134 lib/dump_stack.c:106
+ print_usage_bug kernel/locking/lockdep.c:3963 [inline]
+ valid_state kernel/locking/lockdep.c:3975 [inline]
+ mark_lock_irq kernel/locking/lockdep.c:4178 [inline]
+ mark_lock.part.0.cold+0x18/0xd8 kernel/locking/lockdep.c:4634
+ mark_lock kernel/locking/lockdep.c:4598 [inline]
+ mark_held_locks+0x9f/0xe0 kernel/locking/lockdep.c:4236
+ __trace_hardirqs_on_caller kernel/locking/lockdep.c:4254 [inline]
+ lockdep_hardirqs_on_prepare kernel/locking/lockdep.c:4321 [inline]
+ lockdep_hardirqs_on_prepare+0x135/0x400 kernel/locking/lockdep.c:4273
+ trace_hardirqs_on+0x2d/0x160 kernel/trace/trace_preemptirq.c:49
+ __raw_spin_unlock_irq include/linux/spinlock_api_smp.h:159 [inline]
+ _raw_spin_unlock_irq+0x1f/0x40 kernel/locking/spinlock.c:202
+ spin_unlock_irq include/linux/spinlock.h:400 [inline]
+ sync_print_obj drivers/dma-buf/sync_debug.c:118 [inline]
+ sync_info_debugfs_show+0xeb/0x200 drivers/dma-buf/sync_debug.c:153
+ seq_read_iter+0x4f5/0x1280 fs/seq_file.c:230
+ seq_read+0x16d/0x210 fs/seq_file.c:162
+ vfs_read+0x257/0x930 fs/read_write.c:468
+ ksys_read+0x127/0x250 fs/read_write.c:613
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x35/0xb0 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x63/0xcd
+RIP: 0033:0x7f8c5028b639
+Code: ff ff c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f8c4f5ff168 EFLAGS: 00000246 ORIG_RAX: 0000000000000000
+RAX: ffffffffffffffda RBX: 00007f8c503ac1f0 RCX: 00007f8c5028b639
+RDX: 0000000000002020 RSI: 0000000020001a00 RDI: 000000000000000b
+RBP: 00007f8c502e6ae9 R08: 0000000000000000 R09: 0000000000000000
+R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007f8c504cfb1f R14: 00007f8c4f5ff300 R15: 0000000000022000
+ </TASK>
+
+
 ---
- drivers/gpu/drm/mediatek/mtk_drm_crtc.c  | 11 +++++++++++
- drivers/gpu/drm/mediatek/mtk_drm_plane.c | 12 ++++++++++++
- drivers/gpu/drm/mediatek/mtk_drm_plane.h |  1 +
- 3 files changed, 24 insertions(+)
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
 
-diff --git a/drivers/gpu/drm/mediatek/mtk_drm_crtc.c b/drivers/gpu/drm/mediatek/mtk_drm_crtc.c
-index 112615817dcb..1b1341b57d62 100644
---- a/drivers/gpu/drm/mediatek/mtk_drm_crtc.c
-+++ b/drivers/gpu/drm/mediatek/mtk_drm_crtc.c
-@@ -4,6 +4,7 @@
-  */
- 
- #include <linux/clk.h>
-+#include <linux/dma-buf.h>
- #include <linux/dma-mapping.h>
- #include <linux/mailbox_controller.h>
- #include <linux/pm_runtime.h>
-@@ -283,6 +284,14 @@ struct mtk_ddp_comp *mtk_drm_ddp_comp_for_plane(struct drm_crtc *crtc,
- }
- 
- #if IS_REACHABLE(CONFIG_MTK_CMDQ)
-+static void mtk_drm_dma_buf_put(struct mtk_plane_state *plane_state)
-+{
-+	if (plane_state && plane_state->pending.dma_buf) {
-+		dma_buf_put(plane_state->pending.dma_buf);
-+		plane_state->pending.dma_buf = NULL;
-+	}
-+}
-+
- static void ddp_cmdq_cb(struct mbox_client *cl, void *mssg)
- {
- 	struct cmdq_cb_data *data = mssg;
-@@ -306,6 +315,7 @@ static void ddp_cmdq_cb(struct mbox_client *cl, void *mssg)
- 			plane_state = to_mtk_plane_state(plane->state);
- 
- 			plane_state->pending.config = false;
-+			mtk_drm_dma_buf_put(plane_state);
- 		}
- 		mtk_crtc->pending_planes = false;
- 	}
-@@ -318,6 +328,7 @@ static void ddp_cmdq_cb(struct mbox_client *cl, void *mssg)
- 			plane_state = to_mtk_plane_state(plane->state);
- 
- 			plane_state->pending.async_config = false;
-+			mtk_drm_dma_buf_put(plane_state);
- 		}
- 		mtk_crtc->pending_async_planes = false;
- 	}
-diff --git a/drivers/gpu/drm/mediatek/mtk_drm_plane.c b/drivers/gpu/drm/mediatek/mtk_drm_plane.c
-index 2f5e007dd380..b67fdf12e237 100644
---- a/drivers/gpu/drm/mediatek/mtk_drm_plane.c
-+++ b/drivers/gpu/drm/mediatek/mtk_drm_plane.c
-@@ -11,6 +11,7 @@
- #include <drm/drm_fourcc.h>
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_gem_atomic_helper.h>
-+#include <linux/dma-buf.h>
- 
- #include "mtk_drm_crtc.h"
- #include "mtk_drm_ddp_comp.h"
-@@ -212,6 +213,17 @@ static void mtk_plane_atomic_disable(struct drm_plane *plane,
- 	struct drm_plane_state *new_state = drm_atomic_get_new_plane_state(state,
- 									   plane);
- 	struct mtk_plane_state *mtk_plane_state = to_mtk_plane_state(new_state);
-+	struct drm_plane_state *old_state = drm_atomic_get_old_plane_state(state,
-+									   plane);
-+
-+	if (old_state && old_state->fb) {
-+		struct drm_gem_object *gem = old_state->fb->obj[0];
-+
-+		if (gem && gem->dma_buf) {
-+			get_dma_buf(gem->dma_buf);
-+			mtk_plane_state->pending.dma_buf = gem->dma_buf;
-+		}
-+	}
- 	mtk_plane_state->pending.enable = false;
- 	wmb(); /* Make sure the above parameter is set before update */
- 	mtk_plane_state->pending.dirty = true;
-diff --git a/drivers/gpu/drm/mediatek/mtk_drm_plane.h b/drivers/gpu/drm/mediatek/mtk_drm_plane.h
-index 2d5ec66e3df1..e0985b107c36 100644
---- a/drivers/gpu/drm/mediatek/mtk_drm_plane.h
-+++ b/drivers/gpu/drm/mediatek/mtk_drm_plane.h
-@@ -25,6 +25,7 @@ struct mtk_plane_pending_state {
- 	bool				async_dirty;
- 	bool				async_config;
- 	enum drm_color_encoding		color_encoding;
-+	struct dma_buf			*dma_buf;
- };
- 
- struct mtk_plane_state {
--- 
-2.25.1
-
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
