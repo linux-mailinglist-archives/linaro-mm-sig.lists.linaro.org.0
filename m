@@ -2,144 +2,177 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C27D762FE04
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 18 Nov 2022 20:32:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04301630C95
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 19 Nov 2022 07:43:21 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7E9C83F5D9
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 18 Nov 2022 19:32:17 +0000 (UTC)
-Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com [209.85.167.179])
-	by lists.linaro.org (Postfix) with ESMTPS id ABF563EC4E
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Nov 2022 19:31:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A78E03EA22
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 19 Nov 2022 06:43:19 +0000 (UTC)
+Received: from m12-11.163.com (m12-11.163.com [220.181.12.11])
+	by lists.linaro.org (Postfix) with ESMTP id 9D3ED3E823
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 19 Nov 2022 06:43:09 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=jM3AmfCW;
-	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.167.179 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-oi1-f179.google.com with SMTP id m204so6418941oib.6
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Nov 2022 11:31:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=S4aUMnezBjeTl1jsDQJ0t2bffjzqiY8JJHUDYwCqwLA=;
-        b=jM3AmfCW/2nHZxFgGS9Heu3pQvdP14z1y35P4H80L5GvxTjhGcP7LFZgivC4gaY60w
-         nN+fDhHzgWT+2NAIbiSfL6Rns9ljZnWLIlo99CYzOUugLbs2wTkpPqm/GQQc12jBVjZR
-         4+9kRbCPA2VzSdqbnS9ygKwPs6bsFRbks995B1w1BCOjrw1RMcFhLHExZZx4o2k8qTgr
-         TjmsbBTlyhwqdXMkFnzdwd9h1r6hFKN8kO0kSFSZO9Ik7Hz28tqbGqJDGyBpyOfRyIOb
-         v1S32k4HE0ADNTZ2XWf1Pm3h52Ya5QeOaA51YlzhXUK1zboM4QvbwyM5ahK1hNR7nmS+
-         qEMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=S4aUMnezBjeTl1jsDQJ0t2bffjzqiY8JJHUDYwCqwLA=;
-        b=sbt1xNDW1B+b0LwDVPr+7DbRotovfT4g0ddJOe73PPLFYnbYUSq9IJX82PxkF1KHuP
-         koiiM1xbytwuGWHMu7fU9V5/FmA0LRzRlef/XHlrmyhUk8EGLi/kFTQ0206kHUW1pkqz
-         qo/WoUat4Qqww57NY1JH62B2qVcPsRXABzchdHiE2XcOL3RkricQzbg3QUBfT5WovcKa
-         DGFA+NtIvqT3RKEdASnuKLpnD7T5ZoNL5SsAF8N87nmTARO/n0s2jixskCXvz8Vm8pJg
-         bIivbgzb6VW7nOB7VV1vVaf+8ucjFsSUjIuLx0pCCN7vYWxut1EurCbYZt8DaT4VogMv
-         +T5A==
-X-Gm-Message-State: ANoB5plhLinENWGsx7dm3OzFTZUwUOXF/4gQBxZ0Ojg6xD2HyLFLYlZw
-	o56gFmkIbZiBe5T7RIhoGj440DsdnE92BU3v0ec=
-X-Google-Smtp-Source: AA0mqf7f2OW5VJGSiFWIbV1iX15MWwqhFk2z0a4peRT5QDLGMcj5gnnNu7gdRSqtSDb5fD6MgxHrYtioX+SoXulEiT4=
-X-Received: by 2002:a05:6808:2086:b0:354:46fc:9bb3 with SMTP id
- s6-20020a056808208600b0035446fc9bb3mr4221461oiw.38.1668799918044; Fri, 18 Nov
- 2022 11:31:58 -0800 (PST)
+	dkim=pass header.d=163.com header.s=s110527 header.b=p4H3AS+N;
+	spf=pass (lists.linaro.org: domain of tangchunyou@163.com designates 220.181.12.11 as permitted sender) smtp.mailfrom=tangchunyou@163.com;
+	dmarc=pass (policy=none) header.from=163.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:Subject:Date:Message-Id:MIME-Version; bh=1llmR
+	ePQ0BZkXZUv/+5vLDGTpWNhrfaeQNFoxHbpgsY=; b=p4H3AS+Navz5n8UOrxv47
+	HDqS0tzL1tbO4F7bic2ERCq2J34uNKbgD5N38WJB4Ftmhei/DL32NAuNZ1F7EhsU
+	SeR3a42MGdWWvY6UPTkoE8r24C6lILK+h2Mr5e0Zc6m2tj4ZyzHg/AMX3w1tlSCD
+	//QfwVLrejUS8cqIDmyBqk=
+Received: from localhost.localdomain (unknown [114.221.197.177])
+	by smtp7 (Coremail) with SMTP id C8CowAAnBxCmenhjaHotSg--.7350S2;
+	Sat, 19 Nov 2022 14:41:47 +0800 (CST)
+From: ChunyouTang <tangchunyou@163.com>
+To: maarten.lankhorst@linux.intel.com,
+	mripard@kernel.org,
+	tzimmermann@suse.de,
+	airlied@gmail.com,
+	daniel@ffwll.ch,
+	sumit.semwal@linaro.org,
+	christian.koenig@amd.com
+Date: Sat, 19 Nov 2022 14:41:31 +0800
+Message-Id: <20221119064131.364-1-tangchunyou@163.com>
+X-Mailer: git-send-email 2.30.0.windows.1
 MIME-Version: 1.0
-References: <20221020121316.3946-1-christian.koenig@amd.com>
- <3d7353f3fa5905ce18e5b2d92f758f098189bc5a.camel@pengutronix.de>
- <7f5eff36-6886-bb06-061a-dd4263b61605@gmail.com> <f5de84cfe81fee828bbe0d47d379028d28ef6ca6.camel@pengutronix.de>
- <e02cedc2-6741-8813-a7a5-f8769e301745@gmail.com> <a53e5df51ec0f2f9d4c2d377c0cc5ba85f2e58ff.camel@ndufresne.ca>
- <9d716641-55c6-1590-26c2-1c3b14a28226@gmail.com> <CAPj87rMPkmimR_RJHhxYZokH__TVpPArk0h6drOUSx7Z9+oAHA@mail.gmail.com>
- <11a6f97c-e45f-f24b-8a73-48d5a388a2cc@gmail.com> <caf4d6b82843788db97555a58bc9e33915e5b50a.camel@ndufresne.ca>
- <b422be59-4b4b-2d0d-8e8c-b19f27c6832e@gmail.com> <4fa4e5d3b1f46e46139bad069cbf5e795e63afa8.camel@pengutronix.de>
- <cc091a11-d012-d998-b7e2-8b3d616867a7@gmail.com> <0abc6efddb8dfc1888de15a1bedaaac6688fd078.camel@pengutronix.de>
- <1e2a6750-9849-e9ee-69d6-e4bfdcfb64f3@gmail.com> <CAAFQd5B+VHs62M5Wf2L-xOw=_PoaXT+akAySkeZc75HeA3d0jQ@mail.gmail.com>
- <b2dec9b3-03a7-e7ac-306e-1da024af8982@amd.com> <346d6ad023ef8697aafd93ac1b100890f3637e44.camel@ndufresne.ca>
-In-Reply-To: <346d6ad023ef8697aafd93ac1b100890f3637e44.camel@ndufresne.ca>
-From: Rob Clark <robdclark@gmail.com>
-Date: Fri, 18 Nov 2022 11:32:19 -0800
-Message-ID: <CAF6AEGuqgWi0T=B9cb+Uy7aoWBPGQmZ3JbwFcK_45GbkY2nHPg@mail.gmail.com>
-To: Nicolas Dufresne <nicolas@ndufresne.ca>
-X-Rspamd-Server: lists.linaro.org
-X-Spamd-Bar: ---
-X-Rspamd-Queue-Id: ABF563EC4E
-X-Spamd-Result: default: False [-4.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
+X-CM-TRANSID: C8CowAAnBxCmenhjaHotSg--.7350S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxCr1UJr1xCF1kCw4UJrWrKrg_yoW5XFy5pa
+	nxAry7KrW8KFZ2grZ7XF4kCa43Gw40gF4xWa4Sq3yakw10yF1DXFn8Cr1DAFW3Jr47Xr1a
+	qwnFkFySyrWjyF7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pNhF7UUUUUU=
+X-Originating-IP: [114.221.197.177]
+X-CM-SenderInfo: 5wdqwu5kxq50rx6rljoofrz/1tbiVgu+UVqzvFdXQwAAsk
+X-Rspamd-Queue-Id: 9D3ED3E823
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.50 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	MID_CONTAINS_FROM(1.00)[];
+	RCVD_IN_DNSWL_HI(-1.00)[220.181.12.11:from,114.221.197.177:received];
+	DMARC_POLICY_ALLOW(-0.50)[163.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[163.com:s=s110527];
+	R_SPF_ALLOW(-0.20)[+ip4:220.181.12.0/22];
+	RWL_MAILSPIKE_GOOD(-0.10)[220.181.12.11:from];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	NEURAL_HAM(-0.00)[-0.676];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[amd.com,chromium.org,pengutronix.de,fooishbar.org,gmail.com,linaro.org,ffwll.ch,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	URIBL_BLOCKED(0.00)[ndufresne.ca:email];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.179:from];
-	ARC_NA(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
+	RCVD_NO_TLS_LAST(0.10)[];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
+	HAS_XOIP(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[163.com];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,lists.linaro.org,163.com];
+	FREEMAIL_FROM(0.00)[163.com];
 	TO_DN_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	ASN(0.00)[asn:23724, ipnet:220.181.0.0/19, country:CN];
+	DKIM_TRACE(0.00)[163.com:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_TWO(0.00)[2]
-Message-ID-Hash: RILXM4YK2BKQPUGKNDFWAC4VDPE5SAH2
-X-Message-ID-Hash: RILXM4YK2BKQPUGKNDFWAC4VDPE5SAH2
-X-MailFrom: robdclark@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Tomasz Figa <tfiga@chromium.org>, Daniel Stone <daniel@fooishbar.org>, ppaalanen@gmail.com, sumit.semwal@linaro.org, daniel@ffwll.ch, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
+X-Rspamd-Action: no action
+X-Rspamd-Server: lists.linaro.org
+Message-ID-Hash: FN5LXTPGTFCGZ4NKVLGUHWBOB5SVHXC6
+X-Message-ID-Hash: FN5LXTPGTFCGZ4NKVLGUHWBOB5SVHXC6
+X-MailFrom: tangchunyou@163.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, ChunyouTang <tangchunyou@163.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
+Subject: [Linaro-mm-sig] [PATCH v2 3/3] drm/gem-shmem: When drm_gem_object_init failed, should release object
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RILXM4YK2BKQPUGKNDFWAC4VDPE5SAH2/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FN5LXTPGTFCGZ4NKVLGUHWBOB5SVHXC6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gVGh1LCBOb3YgMTcsIDIwMjIgYXQgNzozOCBBTSBOaWNvbGFzIER1ZnJlc25lIDxuaWNvbGFz
-QG5kdWZyZXNuZS5jYT4gd3JvdGU6DQo+DQo+IExlIGpldWRpIDE3IG5vdmVtYnJlIDIwMjIgw6Ag
-MTM6MTAgKzAxMDAsIENocmlzdGlhbiBLw7ZuaWcgYSDDqWNyaXQgOg0KPiA+ID4gPiBETUEtQnVm
-IGxldCdzIHRoZSBleHBvcnRlciBzZXR1cCB0aGUgRE1BIGFkZHJlc3NlcyB0aGUgaW1wb3J0ZXIg
-dXNlcyB0bw0KPiA+ID4gPiBiZSBhYmxlIHRvIGRpcmVjdGx5IGRlY2lkZWQgd2hlcmUgYSBjZXJ0
-YWluIG9wZXJhdGlvbiBzaG91bGQgZ28uIEUuZy4gd2UNCj4gPiA+ID4gaGF2ZSBjYXNlcyB3aGVy
-ZSBmb3IgZXhhbXBsZSBhIFAyUCB3cml0ZSBkb2Vzbid0IGV2ZW4gZ28gdG8gbWVtb3J5LCBidXQN
-Cj4gPiA+ID4gcmF0aGVyIGEgZG9vcmJlbGwgQkFSIHRvIHRyaWdnZXIgYW5vdGhlciBvcGVyYXRp
-b24uIFRocm93aW5nIGluIENQVQ0KPiA+ID4gPiByb3VuZCB0cmlwcyBmb3IgZXhwbGljaXQgb3du
-ZXJzaGlwIHRyYW5zZmVyIGNvbXBsZXRlbHkgYnJlYWtzIHRoYXQNCj4gPiA+ID4gY29uY2VwdC4N
-Cj4gPiA+IEl0IHNvdW5kcyBsaWtlIHdlIHNob3VsZCBoYXZlIGEgZG1hX2Rldl9pc19jb2hlcmVu
-dF93aXRoX2RldigpIHdoaWNoDQo+ID4gPiBhY2NlcHRzIHR3byAob3IgYW4gYXJyYXk/KSBvZiBk
-ZXZpY2VzIGFuZCB0ZWxscyB0aGUgY2FsbGVyIHdoZXRoZXIgdGhlDQo+ID4gPiBkZXZpY2VzIG5l
-ZWQgZXhwbGljaXQgb3duZXJzaGlwIHRyYW5zZmVyLg0KPiA+DQo+ID4gTm8sIGV4YWN0bHkgdGhh
-dCdzIHRoZSBjb25jZXB0IEknbSBwdXNoaW5nIGJhY2sgb24gdmVyeSBoYXJkIGhlcmUuDQo+ID4N
-Cj4gPiBJbiBvdGhlciB3b3JkcyBleHBsaWNpdCBvd25lcnNoaXAgdHJhbnNmZXIgaXMgbm90IHNv
-bWV0aGluZyB3ZSB3b3VsZA0KPiA+IHdhbnQgYXMgcmVxdWlyZW1lbnQgaW4gdGhlIGZyYW1ld29y
-aywgY2F1c2Ugb3RoZXJ3aXNlIHdlIGJyZWFrIHRvbnMgb2YNCj4gPiB1c2UgY2FzZXMgd2hpY2gg
-cmVxdWlyZSBjb25jdXJyZW50IGFjY2VzcyB0byB0aGUgdW5kZXJseWluZyBidWZmZXIuDQo+DQo+
-IEknbSBub3QgcHVzaGluZyBmb3IgdGhpcyBzb2x1dGlvbiwgYnV0IHJlYWxseSBmZWx0IHRoZSBu
-ZWVkIHRvIGNvcnJlY3QgeW91IGhlcmUuDQo+IEkgaGF2ZSBxdWl0ZSBzb21lIGV4cGVyaWVuY2Ug
-d2l0aCBvd25lcnNoaXAgdHJhbnNmZXIgbWVjaGFuaXNtLCBhcyB0aGlzIGlzIGhvdw0KPiBHU3Ry
-ZWFtZXIgZnJhbWV3b3JrIHdvcmtzIHNpbmNlIDIwMDAuIENvbmN1cnJlbnQgYWNjZXNzIGlzIGEg
-cmVhbGx5IGNvbW1vbiB1c2UNCj4gY2FzZXMgYW5kIGl0IGlzIHF1aXRlIHdlbGwgZGVmaW5lZCBp
-biB0aGF0IGNvbnRleHQuIFRoZSBicmFja2V0aW5nIHN5c3RlbSAoaW4NCj4gdGhpcyBjYXNlIGNh
-bGxlZCBtYXAoKSB1bm1hcCgpLCB3aXRoIGZsYWcgc3RhdGluZyB0aGUgdXNhZ2UgaW50ZW50aW9u
-IGxpa2UgcmVhZHMNCj4gYW5kIHdyaXRlKSBpcyBjb21iaW5lZCB0aGUgdGhlIHJlZmNvdW50LiBU
-aGUgYmFzaWMgcnVsZXMgYXJlIHNpbXBsZToNCg0KVGhpcyBpcyBhbGwgQ1BVIG9yaWVudGVkLCBJ
-IHRoaW5rIENocmlzdGlhbiBpcyB0YWxraW5nIGFib3V0IHRoZSBjYXNlDQp3aGVyZSBvd25lcnNo
-aXAgdHJhbnNmZXIgaGFwcGVucyB3aXRob3V0IENQVSBpbnZvbHZlbWVudCwgc3VjaCBhcyB2aWEN
-CkdQVSB3YWl0aW5nIG9uIGEgZmVuY2UNCg0KQlIsDQotUg0KX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0g
-bGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1h
-aWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+when goto err_free, the object had init, so it should be release when fail.
+
+Signed-off-by: ChunyouTang <tangchunyou@163.com>
+---
+ drivers/gpu/drm/drm_gem.c              | 19 ++++++++++++++++---
+ drivers/gpu/drm/drm_gem_shmem_helper.c |  4 +++-
+ include/drm/drm_gem.h                  |  1 +
+ 3 files changed, 20 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
+index 8b68a3c1e6ab..3e2e660717c3 100644
+--- a/drivers/gpu/drm/drm_gem.c
++++ b/drivers/gpu/drm/drm_gem.c
+@@ -169,6 +169,20 @@ void drm_gem_private_object_init(struct drm_device *dev,
+ }
+ EXPORT_SYMBOL(drm_gem_private_object_init);
+ 
++/**
++ * drm_gem_private_object_fini - Finalize a failed drm_gem_object
++ * @obj: drm_gem_object
++ *
++ * Uninitialize an already allocated GEM object when it initialized failed
++ */
++void drm_gem_private_object_fini(struct drm_gem_object *obj)
++{
++	WARN_ON(obj->dma_buf);
++
++	dma_resv_fini(&obj->_resv);
++}
++EXPORT_SYMBOL(drm_gem_private_object_fini);
++
+ /**
+  * drm_gem_object_handle_free - release resources bound to userspace handles
+  * @obj: GEM object to clean up.
+@@ -930,12 +944,11 @@ drm_gem_release(struct drm_device *dev, struct drm_file *file_private)
+ void
+ drm_gem_object_release(struct drm_gem_object *obj)
+ {
+-	WARN_ON(obj->dma_buf);
+-
+ 	if (obj->filp)
+ 		fput(obj->filp);
+ 
+-	dma_resv_fini(&obj->_resv);
++	drm_gem_private_object_fini(obj);
++
+ 	drm_gem_free_mmap_offset(obj);
+ 	drm_gem_lru_remove(obj);
+ }
+diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
+index 35138f8a375c..db73234edcbe 100644
+--- a/drivers/gpu/drm/drm_gem_shmem_helper.c
++++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
+@@ -79,8 +79,10 @@ __drm_gem_shmem_create(struct drm_device *dev, size_t size, bool private)
+ 	} else {
+ 		ret = drm_gem_object_init(dev, obj, size);
+ 	}
+-	if (ret)
++	if (ret) {
++		drm_gem_private_object_fini(obj);
+ 		goto err_free;
++	}
+ 
+ 	ret = drm_gem_create_mmap_offset(obj);
+ 	if (ret)
+diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
+index bd42f25e449c..9b1feb03069d 100644
+--- a/include/drm/drm_gem.h
++++ b/include/drm/drm_gem.h
+@@ -405,6 +405,7 @@ int drm_gem_object_init(struct drm_device *dev,
+ 			struct drm_gem_object *obj, size_t size);
+ void drm_gem_private_object_init(struct drm_device *dev,
+ 				 struct drm_gem_object *obj, size_t size);
++void drm_gem_private_object_fini(struct drm_gem_object *obj);
+ void drm_gem_vm_open(struct vm_area_struct *vma);
+ void drm_gem_vm_close(struct vm_area_struct *vma);
+ int drm_gem_mmap_obj(struct drm_gem_object *obj, unsigned long obj_size,
+-- 
+2.25.1
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
