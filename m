@@ -2,231 +2,269 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2545632919
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 21 Nov 2022 17:12:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7C9D1632C01
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 21 Nov 2022 19:24:09 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7E7E43ED8F
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 21 Nov 2022 16:12:42 +0000 (UTC)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
-	by lists.linaro.org (Postfix) with ESMTPS id CD4213EC6B
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 21 Nov 2022 16:12:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id F0E133EC6B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 21 Nov 2022 18:24:07 +0000 (UTC)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2049.outbound.protection.outlook.com [40.107.94.49])
+	by lists.linaro.org (Postfix) with ESMTPS id B981C3EC65
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 21 Nov 2022 18:23:58 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=O1s0wsU7;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=7vqKuxCg;
-	spf=pass (lists.linaro.org: domain of tzimmermann@suse.de designates 195.135.220.28 as permitted sender) smtp.mailfrom=tzimmermann@suse.de;
-	dmarc=pass (policy=none) header.from=suse.de
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by smtp-out1.suse.de (Postfix) with ESMTPS id CE22A220D0;
-	Mon, 21 Nov 2022 16:12:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1669047147; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=eoTtLtRQFJkOuXTGDQgCRnPiZdbkTxUys+1kYjgptDA=;
-	b=O1s0wsU7jaRbS7uwWdjtvpv8yVeyW/G4kGex8BtkT5cDGxmlAtCSy9jC9JEaQKDqNq5UL/
-	nx76hCSr+camGVAE8Cc9m9HJ0irgdZe3Msjc+lEIOsuhvVbLG53vJQdo6pyh0JAg+z7GmB
-	+GuXjFpLt7bj01jx81hhhDHcn9BQ79g=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1669047147;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=eoTtLtRQFJkOuXTGDQgCRnPiZdbkTxUys+1kYjgptDA=;
-	b=7vqKuxCgfP1ONjE5ztkXAk4X8lDcPy2w61Y1alJPxHwjwoSBGbFdZR+p5JlBWo8Nhy4p8Z
-	TIacpRrI54iRtzDQ==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
-	(No client certificate requested)
-	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 949BB1377F;
-	Mon, 21 Nov 2022 16:12:27 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
-	by imap2.suse-dmz.suse.de with ESMTPSA
-	id WY4TI2uje2NyWQAAMHmgww
-	(envelope-from <tzimmermann@suse.de>); Mon, 21 Nov 2022 16:12:27 +0000
-Message-ID: <6d6728a2-03bc-0207-a1af-2df65c601df8@suse.de>
-Date: Mon, 21 Nov 2022 17:12:27 +0100
-MIME-Version: 1.0
+	dkim=pass header.d=amd.com header.s=selector1 header.b=AQI+ZXKd;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1");
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.94.49 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=HayqF3TLbBXrras7ayX89FXEwzVdu2pOXZQg26baejbdFbWXQpqiRHiiAhyI1uUKpLeSefYZZDPacYVFaaHCN+VZ9ufHCocdUPysP1R/z7FzNjFm7ogxHUYQZKgL/qlGastgJ4s+xDOtG736gQLcO3dgO8P47WvR+fJduXTBny9XmmfKYWdp0Z6RLB+mlqVUCv0T0fdNnB8GPowMS0Q05KxzyvufXAutEQV0iM1RQmtn5XMmBT3E60V7UBKuQbh1k34f1UFXJsvMCuM36QuqXvCe/9i+UWlEaQEaTebn24RZxpFSVBmuetKCtrfTkg7mr4U9D5mqxfnV3KB7Q5uU1A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Sd94KIH+sYGgce1JYwwhFgKO/8+i5k7+bIB5l8KNU/s=;
+ b=nZOuktSnQQEjeOvDx2BXcOl+cVtMv3kXeeWcApAF84sC5iuQYxnKCQIWxZkHsG+gfUfBJgUn8F3JyfBcNhTuiGXYw7pFDhLW7QHLlJpyXvanyacU1hP+TtMgOTy2g2UGFdMOa7TBaFJRJ8r5osspAgx/rpW4DDJeycEpBsEwgNVIA3FvYJXhh3MvGTEfZSWtQzGU66YMHEDwC72eq8r1alzWveUlFf0SH2Z5QxOwASQxCffyMTeg8VS0XXPY2AbRoOshdG+1TXzYLXUfbYxwCo2HyaafyjDPbGu4ai/cEUthI/iV/AnBXfFEephE63olm1bGXOtY9H1YMNxfU/RLOw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Sd94KIH+sYGgce1JYwwhFgKO/8+i5k7+bIB5l8KNU/s=;
+ b=AQI+ZXKd6bAOcRtNPJCjVCE+vjmt1MB5mVitzux1c6Rk3iX6ql+secg5Mdn9/leT0XJ3lvckk0tC5BgmZOBy724EbTtAoR/2SyWLAYs4ovhYTPoVJCcluwrUJUoijLIoVI654hW9GWdazVZDYkJMKQt/+MSn5zUlAb0A2tHaRL8=
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by DM8PR12MB5461.namprd12.prod.outlook.com (2603:10b6:8:3a::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5834.15; Mon, 21 Nov
+ 2022 18:23:56 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::7d43:3f30:4caf:7421]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::7d43:3f30:4caf:7421%7]) with mapi id 15.20.5834.009; Mon, 21 Nov 2022
+ 18:23:56 +0000
+Message-ID: <56393e84-485b-42ba-5fce-d4a0d0017653@amd.com>
+Date: Mon, 21 Nov 2022 19:23:49 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.0
+ Thunderbird/102.4.2
 Content-Language: en-US
-To: ChunyouTang <tangchunyou@163.com>, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, airlied@gmail.com, daniel@ffwll.ch,
- sumit.semwal@linaro.org, christian.koenig@amd.com
-References: <20221119064131.364-1-tangchunyou@163.com>
-From: Thomas Zimmermann <tzimmermann@suse.de>
-In-Reply-To: <20221119064131.364-1-tangchunyou@163.com>
-X-Rspamd-Queue-Id: CD4213EC6B
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.00 / 15.00];
+To: Dawei Li <set_pte_at@outlook.com>, sumit.semwal@linaro.org
+References: <TYCP286MB2323873BBDF88020781FB986CA3B9@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
+ <TYCP286MB2323894F9939C27291FD998CCA0A9@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <TYCP286MB2323894F9939C27291FD998CCA0A9@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
+X-ClientProxiedBy: LO2P123CA0080.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:138::13) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|DM8PR12MB5461:EE_
+X-MS-Office365-Filtering-Correlation-Id: e7060fa7-e589-4a13-d494-08dacbed8d10
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	xyjB+20I4dnPfCwVME/1x/S3iDMz9hqJ3Go7e7Z8JkvsZYUympWWEWjQeYJABO/uvvO3fp2f1A1Svl+7UhNKE3P91Jn+VRDfXji+KY6GRi+nGrzoQcFq/ddDKAgUd9+67qa6WgaLJpIzjVCjIR+MncVnyAI/7BF01lSJsoRhs9i5bJ4VunfZxVqAYowxIZ+lCZKrIdY0g4TLrkNhvGvRx+EuZ/86lyaQsLFSlkaTbaKmJ0PRCga9ogQL2aOaIAbf1CbHAcafscHL/uIvhncJ2HaOEW87VDz0xevgxqnfNAJnNi/AM8zXZtucxiW9qqTEn1RfhPE0xYWzJCHRdbtPJoYK5fF5A5vISYpuwCj3Kvv3rhTLPU5DX9N82T4E4fv+k0KA7PDC8rmWDhRsypDUy+ho01jZaHxhGnsqRadl6KwxsZqqK41k5hNAMfPBn0yOqEgst/563UTMUdWNfDlcOtBxQvE617sRu2WonappkcWBEYlJFacfi3IeeroLygDbAlV+m3wJ/p5R3mVSJeMEwFSAVQP+wYRedcapJSL4EccuyXFw1B/Sw8JnB4fVLvC2Sf9oFQAxfsc5lLCkOypy0pSXm26qJWAHq4nTpYOjQoVh6850kPo0etJurTQ4J0AaA9451+2CY9QOtM2vuQyJH0RxTsoa9n9WmDYBG/aJ3lajQhhqrFw5TgH69ym44SaPElncfNVq9kdKlcUigaaff34gd/EFOE0CyiUSFSSWPxm/tGLnhnmqULAMrxO9wz8fBHndBtUTly2fsZIwvRgMqA==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(136003)(396003)(366004)(39860400002)(376002)(346002)(451199015)(38100700002)(31696002)(31686004)(2906002)(41300700001)(8676002)(66556008)(66476007)(4326008)(316002)(66946007)(7416002)(6486002)(966005)(36756003)(45080400002)(478600001)(6666004)(6512007)(6506007)(86362001)(8936002)(5660300002)(2616005)(83380400001)(186003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?bWY4ZUluOWowcmVYTjI1bjRVT0FLbkExa29tMHNxUEtLTDFRcFhmWEhaVXhU?=
+ =?utf-8?B?UWRFWUs1bnh5bUFCbi9xVFp5bDVTZ0pUTS94OHBTNlBpdjhkTWdRUDV5Y2c4?=
+ =?utf-8?B?RFVrK2Z4bnRlOGp1RUFRMXFEczQ5NkNkNmsvZE5DMnFTOW9DZWNnZGR1K2Zz?=
+ =?utf-8?B?L1F5WFFXdVVTOFZJRm9QZ2UwL1B2OTlLTUlDaDBVK1BxdksrUVFRc2NvOUFr?=
+ =?utf-8?B?UUEwZ3JNV2dBUDRZcGNDMHEyY2RwMERMVkh1RDlXaW9BMFl6WkdrcGF4eVlG?=
+ =?utf-8?B?TVZzT3BDMjRjYW4yWUtUVHpyZWhQUHBiVFpXRHJnZjB5Mm1TOHhKa1RFKzBV?=
+ =?utf-8?B?QnlLQU1jRDVVbWR1N2tmdGFyRFM4UGNVRU9salVDRXlYMWRZK0x3Zy85NTly?=
+ =?utf-8?B?WURRUkpOVXNCQkhtVWZwNGxkdXNxTkVYS0xpME84M1V1aXBnRXNOejE0c251?=
+ =?utf-8?B?aTJtNlBPYWdUWWVYMUtnMll3ZTh2T3dMNmZXRjhvQ3lGdWxWOWVUTm1xblY2?=
+ =?utf-8?B?ZE5WOUtEVFhXK3BVYXFXUm1mSTMvbFNobFZnR0tEaTQzU2dJWVQ4bHl3Y09q?=
+ =?utf-8?B?SjZFRlU3YTZrY0h1YkFCUEUxUlVvRUREVmRWbFVlMFluRTdmalJDUmhndW1E?=
+ =?utf-8?B?U2lnN0pldlViNElpZlExT3FmQnU4SzQ0MXlrdTNGVTlIVkMxai8yTXpXRWFB?=
+ =?utf-8?B?UHB4OFZPMzNUU1p6bzNnYUFaUHptQXJObmdkUTYzWEpaazRndXdKTGtYZHpN?=
+ =?utf-8?B?K21GRTY5VGlrUStNVy90WEJTaW9YMk5hNUtsMjdsWGtSRVQvMVpQcU1YNytK?=
+ =?utf-8?B?R2cxTWMyQkplL0J3MzJaV1JwSTFLcWhQbUF1ODRsUUJEQ0tMWEErMmE0dXRt?=
+ =?utf-8?B?WCtwY1VueDRBc0xQRlYveWxhK2tGc1B4YUc1MEVZSGhsN0owcnNOZnlDUUNH?=
+ =?utf-8?B?NUJjNkxvRFlSejdwMkRPalpTQnFvM0pxcXduejFVeGNoQUNKZzArNys0Vm1z?=
+ =?utf-8?B?REVBZXBDOVBqREQxdVRwRFZaNkJQd01kQ1F1d1BpYzFnWjJRNGhpOGRRckda?=
+ =?utf-8?B?RFBZWHF4Q3dFeW9aWXpLdFh1Y0YvUWVEQ094MDNDMWlFd0w1MHBaSlp3RFVl?=
+ =?utf-8?B?MkZ2clR1UkJLbWl5T256RUdPY0tqaHU5NS9Pc045UDR5N25GcSs5SjUxcWdP?=
+ =?utf-8?B?TnQ4aUxVc1dneU9pSGZXaVZ2czVLOGc5bFBzL3B2WjArUjNUS2JTSFNrL3Yv?=
+ =?utf-8?B?dzkxdnNZbkxWMnRPSkVpbVpDTEhwNDRjT3NmRjJDY0lUOVdTK0g3aWwzdmJz?=
+ =?utf-8?B?bU5BV0lZcnVuSmxaWElmbDBpdndKWjFXSWs0UEFaL3EwQy93WnJCZWJRdFMw?=
+ =?utf-8?B?OUg1Q2NCc08zeTVhM2NNVEZZWEFGS1ZoaWNLRUpSNTFhK0tBMUNZOWdyVkdy?=
+ =?utf-8?B?RTZlaGhOZHd0KzFjdUlRL05nT3hHYXM3cjVJSGd3eVZhNGMrSUZjV3R0eC9K?=
+ =?utf-8?B?azJqOW5ySEpRc2xEM0VnUXVHS0lMUHIrN2x3T0JVZ1Fuc3dlWHJFWDNXZnlU?=
+ =?utf-8?B?UW45ZmNyS1FDWWVNZzBFMktpWmpIQVFlN2FHRUpMM2lQcnpBQlBGMkRmYjRO?=
+ =?utf-8?B?SU00dnQ1eENjVExhLzEzZW9UeFN3ZlVnMUFQUURVMnRZdEoycE5EUDRCZ2Ux?=
+ =?utf-8?B?SFhZQzFUSEo1NVVPR0RKSXFvUjNDVFg4RmEwSHZ3Z2ppYUhCcXBadHRTMTQz?=
+ =?utf-8?B?a0FHR3VpTDNVSEkxcWRaWHlYOElYN2MvK0tXY3FSZGkzOFN2WTYvbUdYbXkx?=
+ =?utf-8?B?aWU1alZiai9mbWQxNy9CSTZ5Q2hwTTdwZ2U0RTFwcG1HZjJ4cXo5WkIzc2h2?=
+ =?utf-8?B?M3doV1JlMmpvNHN1cVlPS3pPbFJxbXBvRkFaUlk1amIycXJ4TjQvUU1DQjVU?=
+ =?utf-8?B?MWs5d3lSOTc0dXB3eUFINUc2OHlCVkkyWkMrenlkc000emgvUTh1aFhES1RC?=
+ =?utf-8?B?UEFiT0JqazZoblRIT3ZPTVpQVU9ZenQ1MldhOW5VSmFvM0pDYm9BWGNwd0xG?=
+ =?utf-8?B?SWhUTVpnOG9qY01KNGJ4MmVUeEh3R2Q3dVZDa2doTnlzcHh0QXdJVDNzRnRB?=
+ =?utf-8?B?L1k2Z0Zqc3dMbGNxRFo0MWRBc05oMkc1TzBwZzJ0amN3SGFRRjFTTWJuVm5q?=
+ =?utf-8?Q?+6qu3D3rESEtxpi+wQHC4sQ7JoqirLyhabDkGbfhh6Wo?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7060fa7-e589-4a13-d494-08dacbed8d10
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Nov 2022 18:23:56.2287
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Nat/OP+eE1/vj+0q2oWKzshzQs1Hx1fP2MNYhhBGLFxS1/YEofYZQNmxCapP1h3+
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM8PR12MB5461
+X-Rspamd-Queue-Id: B981C3EC65
+X-Spamd-Bar: ---------
+X-Spamd-Result: default: False [-9.00 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
-	R_SPF_ALLOW(-0.20)[+ip4:195.135.220.0/27];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
-	MIME_BASE64_TEXT(0.10)[];
-	FREEMAIL_TO(0.00)[163.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch,linaro.org,amd.com];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	MIME_GOOD(-0.10)[text/plain];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	ASN(0.00)[asn:29298, ipnet:195.135.220.0/23, country:DE];
-	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[suse.de:+];
 	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[outlook.com,linaro.org];
+	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	RCVD_COUNT_THREE(0.00)[3];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	HAS_ATTACHMENT(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[NAM10-MW2-obe.outbound.protection.outlook.com:helo];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_IN_DNSWL_FAIL(0.00)[195.135.220.28:query timed out]
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[amd.com:+];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.94.49:from]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 5FL6XIMERDUVWDBDJFOS5XAJCCBEPQDV
-X-Message-ID-Hash: 5FL6XIMERDUVWDBDJFOS5XAJCCBEPQDV
-X-MailFrom: tzimmermann@suse.de
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: OUPVPXK6VILCLZWRFOILE3F3WXSEOUXS
+X-Message-ID-Hash: OUPVPXK6VILCLZWRFOILE3F3WXSEOUXS
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: benjamin.gaignard@collabora.com, labbott@redhat.com, Brian.Starkey@arm.com, jstultz@google.com, afd@ti.com, sspatil@android.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 3/3] drm/gem-shmem: When drm_gem_object_init failed, should release object
+Subject: [Linaro-mm-sig] Re: [PATCH v4] dma-buf: fix racing conflict of dma_heap_add()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5FL6XIMERDUVWDBDJFOS5XAJCCBEPQDV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OUPVPXK6VILCLZWRFOILE3F3WXSEOUXS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============4010901806887295235=="
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---===============4010901806887295235==
-Content-Language: en-US
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------178vOI27ZMnlsZ4D0f2x8z52"
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------178vOI27ZMnlsZ4D0f2x8z52
-Content-Type: multipart/mixed; boundary="------------BSq1CN0WqfyR8W7YHLAcqEGh";
- protected-headers="v1"
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: ChunyouTang <tangchunyou@163.com>, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, airlied@gmail.com, daniel@ffwll.ch,
- sumit.semwal@linaro.org, christian.koenig@amd.com
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
-Message-ID: <6d6728a2-03bc-0207-a1af-2df65c601df8@suse.de>
-Subject: Re: [PATCH v2 3/3] drm/gem-shmem: When drm_gem_object_init failed,
- should release object
-References: <20221119064131.364-1-tangchunyou@163.com>
-In-Reply-To: <20221119064131.364-1-tangchunyou@163.com>
-
---------------BSq1CN0WqfyR8W7YHLAcqEGh
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
-
-SGkNCg0KQW0gMTkuMTEuMjIgdW0gMDc6NDEgc2NocmllYiBDaHVueW91VGFuZzoNCj4gd2hl
-biBnb3RvIGVycl9mcmVlLCB0aGUgb2JqZWN0IGhhZCBpbml0LCBzbyBpdCBzaG91bGQgYmUg
-cmVsZWFzZSB3aGVuIGZhaWwuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBDaHVueW91VGFuZyA8
-dGFuZ2NodW55b3VAMTYzLmNvbT4NCg0KVGhhbmtzIGEgbG90LiBJIG1lcmdlZCB0aGUgcGF0
-Y2ggaW50byBkcm0tbWlzYy1uZXh0Lg0KDQpCZXN0IHJlZ2FyZHMNClRob21hcw0KDQo+IC0t
-LQ0KPiAgIGRyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtLmMgICAgICAgICAgICAgIHwgMTkgKysr
-KysrKysrKysrKysrKy0tLQ0KPiAgIGRyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtX3NobWVtX2hl
-bHBlci5jIHwgIDQgKysrLQ0KPiAgIGluY2x1ZGUvZHJtL2RybV9nZW0uaCAgICAgICAgICAg
-ICAgICAgIHwgIDEgKw0KPiAgIDMgZmlsZXMgY2hhbmdlZCwgMjAgaW5zZXJ0aW9ucygrKSwg
-NCBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vZHJt
-X2dlbS5jIGIvZHJpdmVycy9ncHUvZHJtL2RybV9nZW0uYw0KPiBpbmRleCA4YjY4YTNjMWU2
-YWIuLjNlMmU2NjA3MTdjMyAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL2RybV9n
-ZW0uYw0KPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2dlbS5jDQo+IEBAIC0xNjksNiAr
-MTY5LDIwIEBAIHZvaWQgZHJtX2dlbV9wcml2YXRlX29iamVjdF9pbml0KHN0cnVjdCBkcm1f
-ZGV2aWNlICpkZXYsDQo+ICAgfQ0KPiAgIEVYUE9SVF9TWU1CT0woZHJtX2dlbV9wcml2YXRl
-X29iamVjdF9pbml0KTsNCj4gICANCj4gKy8qKg0KPiArICogZHJtX2dlbV9wcml2YXRlX29i
-amVjdF9maW5pIC0gRmluYWxpemUgYSBmYWlsZWQgZHJtX2dlbV9vYmplY3QNCj4gKyAqIEBv
-Ymo6IGRybV9nZW1fb2JqZWN0DQo+ICsgKg0KPiArICogVW5pbml0aWFsaXplIGFuIGFscmVh
-ZHkgYWxsb2NhdGVkIEdFTSBvYmplY3Qgd2hlbiBpdCBpbml0aWFsaXplZCBmYWlsZWQNCj4g
-KyAqLw0KPiArdm9pZCBkcm1fZ2VtX3ByaXZhdGVfb2JqZWN0X2Zpbmkoc3RydWN0IGRybV9n
-ZW1fb2JqZWN0ICpvYmopDQo+ICt7DQo+ICsJV0FSTl9PTihvYmotPmRtYV9idWYpOw0KPiAr
-DQo+ICsJZG1hX3Jlc3ZfZmluaSgmb2JqLT5fcmVzdik7DQo+ICt9DQo+ICtFWFBPUlRfU1lN
-Qk9MKGRybV9nZW1fcHJpdmF0ZV9vYmplY3RfZmluaSk7DQo+ICsNCj4gICAvKioNCj4gICAg
-KiBkcm1fZ2VtX29iamVjdF9oYW5kbGVfZnJlZSAtIHJlbGVhc2UgcmVzb3VyY2VzIGJvdW5k
-IHRvIHVzZXJzcGFjZSBoYW5kbGVzDQo+ICAgICogQG9iajogR0VNIG9iamVjdCB0byBjbGVh
-biB1cC4NCj4gQEAgLTkzMCwxMiArOTQ0LDExIEBAIGRybV9nZW1fcmVsZWFzZShzdHJ1Y3Qg
-ZHJtX2RldmljZSAqZGV2LCBzdHJ1Y3QgZHJtX2ZpbGUgKmZpbGVfcHJpdmF0ZSkNCj4gICB2
-b2lkDQo+ICAgZHJtX2dlbV9vYmplY3RfcmVsZWFzZShzdHJ1Y3QgZHJtX2dlbV9vYmplY3Qg
-Km9iaikNCj4gICB7DQo+IC0JV0FSTl9PTihvYmotPmRtYV9idWYpOw0KPiAtDQo+ICAgCWlm
-IChvYmotPmZpbHApDQo+ICAgCQlmcHV0KG9iai0+ZmlscCk7DQo+ICAgDQo+IC0JZG1hX3Jl
-c3ZfZmluaSgmb2JqLT5fcmVzdik7DQo+ICsJZHJtX2dlbV9wcml2YXRlX29iamVjdF9maW5p
-KG9iaik7DQo+ICsNCj4gICAJZHJtX2dlbV9mcmVlX21tYXBfb2Zmc2V0KG9iaik7DQo+ICAg
-CWRybV9nZW1fbHJ1X3JlbW92ZShvYmopOw0KPiAgIH0NCj4gZGlmZiAtLWdpdCBhL2RyaXZl
-cnMvZ3B1L2RybS9kcm1fZ2VtX3NobWVtX2hlbHBlci5jIGIvZHJpdmVycy9ncHUvZHJtL2Ry
-bV9nZW1fc2htZW1faGVscGVyLmMNCj4gaW5kZXggMzUxMzhmOGEzNzVjLi5kYjczMjM0ZWRj
-YmUgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtX3NobWVtX2hlbHBl
-ci5jDQo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9kcm1fZ2VtX3NobWVtX2hlbHBlci5jDQo+
-IEBAIC03OSw4ICs3OSwxMCBAQCBfX2RybV9nZW1fc2htZW1fY3JlYXRlKHN0cnVjdCBkcm1f
-ZGV2aWNlICpkZXYsIHNpemVfdCBzaXplLCBib29sIHByaXZhdGUpDQo+ICAgCX0gZWxzZSB7
-DQo+ICAgCQlyZXQgPSBkcm1fZ2VtX29iamVjdF9pbml0KGRldiwgb2JqLCBzaXplKTsNCj4g
-ICAJfQ0KPiAtCWlmIChyZXQpDQo+ICsJaWYgKHJldCkgew0KPiArCQlkcm1fZ2VtX3ByaXZh
-dGVfb2JqZWN0X2Zpbmkob2JqKTsNCj4gICAJCWdvdG8gZXJyX2ZyZWU7DQo+ICsJfQ0KPiAg
-IA0KPiAgIAlyZXQgPSBkcm1fZ2VtX2NyZWF0ZV9tbWFwX29mZnNldChvYmopOw0KPiAgIAlp
-ZiAocmV0KQ0KPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9kcm0vZHJtX2dlbS5oIGIvaW5jbHVk
-ZS9kcm0vZHJtX2dlbS5oDQo+IGluZGV4IGJkNDJmMjVlNDQ5Yy4uOWIxZmViMDMwNjlkIDEw
-MDY0NA0KPiAtLS0gYS9pbmNsdWRlL2RybS9kcm1fZ2VtLmgNCj4gKysrIGIvaW5jbHVkZS9k
-cm0vZHJtX2dlbS5oDQo+IEBAIC00MDUsNiArNDA1LDcgQEAgaW50IGRybV9nZW1fb2JqZWN0
-X2luaXQoc3RydWN0IGRybV9kZXZpY2UgKmRldiwNCj4gICAJCQlzdHJ1Y3QgZHJtX2dlbV9v
-YmplY3QgKm9iaiwgc2l6ZV90IHNpemUpOw0KPiAgIHZvaWQgZHJtX2dlbV9wcml2YXRlX29i
-amVjdF9pbml0KHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsDQo+ICAgCQkJCSBzdHJ1Y3QgZHJt
-X2dlbV9vYmplY3QgKm9iaiwgc2l6ZV90IHNpemUpOw0KPiArdm9pZCBkcm1fZ2VtX3ByaXZh
-dGVfb2JqZWN0X2Zpbmkoc3RydWN0IGRybV9nZW1fb2JqZWN0ICpvYmopOw0KPiAgIHZvaWQg
-ZHJtX2dlbV92bV9vcGVuKHN0cnVjdCB2bV9hcmVhX3N0cnVjdCAqdm1hKTsNCj4gICB2b2lk
-IGRybV9nZW1fdm1fY2xvc2Uoc3RydWN0IHZtX2FyZWFfc3RydWN0ICp2bWEpOw0KPiAgIGlu
-dCBkcm1fZ2VtX21tYXBfb2JqKHN0cnVjdCBkcm1fZ2VtX29iamVjdCAqb2JqLCB1bnNpZ25l
-ZCBsb25nIG9ial9zaXplLA0KDQotLSANClRob21hcyBaaW1tZXJtYW5uDQpHcmFwaGljcyBE
-cml2ZXIgRGV2ZWxvcGVyDQpTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgN
-Ck1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQ0KKEhSQiAzNjgwOSwg
-QUcgTsO8cm5iZXJnKQ0KR2VzY2jDpGZ0c2bDvGhyZXI6IEl2byBUb3Rldg0K
-
---------------BSq1CN0WqfyR8W7YHLAcqEGh--
-
---------------178vOI27ZMnlsZ4D0f2x8z52
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmN7o2sFAwAAAAAACgkQlh/E3EQov+A/
-cw/+OskibjtV/WFpXmKmO5DqHHMvgaSmrDZnnXTNtqEddrnW1cDSa2iwX/8Lj8LbiFF1viiBNQ/k
-7GQ1OSCGLo8R6nHFtwqOzL6oJiPhg+5odV0yNEZsF1qXLWkt/oIAU2jUUItQP0l+BqxuaA9BIVkZ
-RxCAqAF7Vmkr0BnGLNslvQ9mbj9wi/qtFQZsMEL1b5uZQnflnXvWfWfWEwRCAC8PfLL/oCNEmU4X
-OAfcyaQQgG76Fk3S+VJXlUx8aZgHbrZHnOY6YciV/8hwtTTHu+KHw1Mmk7MVrCVkZH7j4RAmMevJ
-kYJ3BbpPXWFQryBTdcf/fcFx2gvTE5YgoXXJLPULJONSBP6OqgyCSDw9ylksDoqM2/jGV5YU2I36
-Ke556SeB04wROSk/+uIi2k1NDtSZEeRt2AzGICkLe5eenSeEKRqqZ7G5xpGP/lAESrud1KfrHf1L
-nR2yWK4VSpycrUYt7X1nbKr9X76d+SpC780GWKHhmj9NBxeEIyOnyCgUU7BOVE54R1cbA4k/WK+8
-2tVTxPkIYDAXyLPvq3715hgoDkM7nhcGLwoSmqbUz0bENN47tiPNkViCjvSTn72fxDMmMZ8vuwyN
-ZVX28A58Dhs/lVGmB/ehga4QylzbeE0tOYrv+y01L1XqIh5KirzTBX8/LMvDNYSErlbCQ+Jz/3cH
-RHw=
-=gwHh
------END PGP SIGNATURE-----
-
---------------178vOI27ZMnlsZ4D0f2x8z52--
-
---===============4010901806887295235==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+
+Hi Dawei,
+
+from the technical description, coding style etc.. it looks clean to me, 
+but I'm the completely wrong person to ask for a background check.
+
+I have a high level understanding of how dma-heaps work, but not a 
+single line of this code is from me.
+
+Feel free to add my Acked-by, but Laura, John and others do you have any 
+opinion?
+
+Regards,
+Christian.
+
+Am 21.11.22 um 16:28 schrieb Dawei Li:
+> On Sat, Nov 05, 2022 at 12:05:36AM +0800, Dawei Li wrote:
+>
+> Hi Christian,
+> May I have your opinion on this change?
+>
+> Thanks,
+> Dawei
+>
+>> Racing conflict could be:
+>> task A                 task B
+>> list_for_each_entry
+>> strcmp(h->name))
+>>                         list_for_each_entry
+>>                         strcmp(h->name)
+>> kzalloc                kzalloc
+>> ......                 .....
+>> device_create          device_create
+>> list_add
+>>                         list_add
+>>
+>> The root cause is that task B has no idea about the fact someone
+>> else(A) has inserted heap with same name when it calls list_add,
+>> so a potential collision occurs.
+>>
+>> Fixes: c02a81fba74f ("dma-buf: Add dma-buf heaps framework")
+>> Signed-off-by: Dawei Li <set_pte_at@outlook.com>
+>> ---
+>> v1: https://nam11.safelinks.protection.outlook.com/?url=https%3A%2F%2Flore.kernel.org%2Fall%2FTYCP286MB2323950197F60FC3473123B7CA349%40TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM%2F&amp;data=05%7C01%7Cchristian.koenig%40amd.com%7C1989f31257fc458a27c508dacbd5078e%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C638046413707443203%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=OWPUPrIHGnzwXyQE4WlIthThwSuSK2y3Eq2Wq5zAzbo%3D&amp;reserved=0
+>> v1->v2: Narrow down locking scope, check the existence of heap before
+>> insertion, as suggested by Andrew Davis.
+>> v2->v3: Remove double checking.
+>> v3->v4: Minor coding style and patch formatting adjustment.
+>> ---
+>>   drivers/dma-buf/dma-heap.c | 28 +++++++++++++++-------------
+>>   1 file changed, 15 insertions(+), 13 deletions(-)
+>>
+>> diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+>> index 8f5848aa144f..59d158873f4c 100644
+>> --- a/drivers/dma-buf/dma-heap.c
+>> +++ b/drivers/dma-buf/dma-heap.c
+>> @@ -233,18 +233,6 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+>>   		return ERR_PTR(-EINVAL);
+>>   	}
+>>   
+>> -	/* check the name is unique */
+>> -	mutex_lock(&heap_list_lock);
+>> -	list_for_each_entry(h, &heap_list, list) {
+>> -		if (!strcmp(h->name, exp_info->name)) {
+>> -			mutex_unlock(&heap_list_lock);
+>> -			pr_err("dma_heap: Already registered heap named %s\n",
+>> -			       exp_info->name);
+>> -			return ERR_PTR(-EINVAL);
+>> -		}
+>> -	}
+>> -	mutex_unlock(&heap_list_lock);
+>> -
+>>   	heap = kzalloc(sizeof(*heap), GFP_KERNEL);
+>>   	if (!heap)
+>>   		return ERR_PTR(-ENOMEM);
+>> @@ -283,13 +271,27 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+>>   		err_ret = ERR_CAST(dev_ret);
+>>   		goto err2;
+>>   	}
+>> -	/* Add heap to the list */
+>> +
+>>   	mutex_lock(&heap_list_lock);
+>> +	/* check the name is unique */
+>> +	list_for_each_entry(h, &heap_list, list) {
+>> +		if (!strcmp(h->name, exp_info->name)) {
+>> +			mutex_unlock(&heap_list_lock);
+>> +			pr_err("dma_heap: Already registered heap named %s\n",
+>> +			       exp_info->name);
+>> +			err_ret = ERR_PTR(-EINVAL);
+>> +			goto err3;
+>> +		}
+>> +	}
+>> +
+>> +	/* Add heap to the list */
+>>   	list_add(&heap->list, &heap_list);
+>>   	mutex_unlock(&heap_list_lock);
+>>   
+>>   	return heap;
+>>   
+>> +err3:
+>> +	device_destroy(dma_heap_class, heap->heap_devt);
+>>   err2:
+>>   	cdev_del(&heap->heap_cdev);
+>>   err1:
+>> -- 
+>> 2.25.1
+>>
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============4010901806887295235==--
