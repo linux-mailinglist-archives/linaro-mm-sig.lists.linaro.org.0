@@ -2,259 +2,158 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11D2F633F58
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 15:51:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 65CC3634232
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 18:08:16 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0D7F63ED11
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 14:51:27 +0000 (UTC)
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
-	by lists.linaro.org (Postfix) with ESMTPS id 26D533E9D6
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 14:51:18 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1FC3F3EDA2
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 17:08:15 +0000 (UTC)
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+	by lists.linaro.org (Postfix) with ESMTPS id 3DA473E9D6
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 17:08:05 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b=Kpk19b2G;
-	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.221.47) smtp.mailfrom=daniel@ffwll.ch;
+	dkim=pass header.d=ffwll.ch header.s=google header.b=UTgjIRpL;
+	spf=none (lists.linaro.org: domain of daniel.vetter@ffwll.ch has no SPF policy when checking 209.85.221.46) smtp.mailfrom=daniel.vetter@ffwll.ch;
 	dmarc=none
-Received: by mail-wr1-f47.google.com with SMTP id s5so7876497wru.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 06:51:18 -0800 (PST)
+Received: by mail-wr1-f46.google.com with SMTP id bs21so25718303wrb.4
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 09:08:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ffwll.ch; s=google;
-        h=in-reply-to:content-disposition:mime-version:references
-         :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=BvxfKUBEbZtm/9q2PXpeTYs+sX6KUk9fkZeJnGMjw9w=;
-        b=Kpk19b2GUmYhNh3v56qB0t7QkAgI8q0rTt8RSQvpWwpYb7JQmeuyh2EvbDjSGFjSdL
-         sGgHsmN+j3Pp+opqB/x5/xejEg0XZiAgyx8+nXMm49lyYbJjQLqaxdaPRUhjFedxh8r/
-         OOY7q7ShSLkPHxt23hrkaRf8JNS1rOEYFFQ38=
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=Ve9qToTAjko4Xn5/rlkROCfUSo37Rgk78oiOnmwUwAU=;
+        b=UTgjIRpLOL/7otFlPM7wX91GWVEbyelUoIOfxeC6ZhL8WuxwL4Nb7rXb4HD1EytWRF
+         fM6S4/NXWz/8WrAreoT9cPW/bjXslVl/BKUmEg5pyx6M4Uaclx3FjX7vn4vXq8ig0wzL
+         rCBB7/W7XRNLC+tcLw3TAl4no/GdXkQLmuKTA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=in-reply-to:content-disposition:mime-version:references
-         :mail-followup-to:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=BvxfKUBEbZtm/9q2PXpeTYs+sX6KUk9fkZeJnGMjw9w=;
-        b=Sr6nicCIhd+Vh/f/g1f8T/0A86HYPyjWwvNdu8sWSiD0R3lMDhdhBNIjOhqu6Iz1RO
-         L7Piad1lTh01xXOkcaKkO7HPuVnDIFRZmLI8a5Kkzp83aQ9BDrjggvw+UUX7N/PcP+k4
-         V1wryduTG9nOhkCICrXZ6br71WH1ukzunSqQda+yv7NLbCHnMTJKZ56oXLWkFilVeFma
-         OMH8vLBp0XMNcdJxAulmBEkdpJQl5EUd8fyU4TV5YFEOolBMvAzzfFgD+j9qQ9/GmyMw
-         dczLyZAtjpI8TpCY6HWU8Db+5TJF2vxPD+vZqFaUddqtZNlX4FQzWdEdBrl1pTlyhzzK
-         EXaA==
-X-Gm-Message-State: ANoB5plCqiRUMB72dxsfy34v4k2LyPvwLF/Hbzu30rDu3yaK09vQXs+s
-	OR/rfpLyD6obZ1kgp2Ws2tqHGg==
-X-Google-Smtp-Source: AA0mqf5vH7ZJ1XkzTC/CSVVQJm4aSKBNGCyrRsjp98SHsh8Sm737KIa/Vbj8njUNZ4F/ML+KAl+5yw==
-X-Received: by 2002:a5d:6b46:0:b0:236:56a6:823e with SMTP id x6-20020a5d6b46000000b0023656a6823emr14295283wrw.495.1669128677199;
-        Tue, 22 Nov 2022 06:51:17 -0800 (PST)
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=Ve9qToTAjko4Xn5/rlkROCfUSo37Rgk78oiOnmwUwAU=;
+        b=QattJgO4pbmQ8UVns6EqC3yt7DP+55nQnOJ9LaDTSH/zS+g1SuZ2jKu76+H2xvqXLj
+         /Egf51VKtEB1uPonSqFxxWf3fyHOGq5Fnj+v/ia2p42BGlpEmiK9BusJtRBF5drBvE8I
+         ZvnaKCLMUd2IkDxixTcNqQS18b/Gm9uwr9cPIMRkogs3gFhS27CbAc/6rHC7qC1BBtaF
+         v0BRt+5BUq2CaFlr+NCZYTh+ToDZ3mbds05WcdZiNbo5AC9ecbvyTDK+kBuvzdYr1+OF
+         ikQdum0lIAHJpMTG8OKngAlPUzVGcdb0oQgva3VCN77djmRKol7ujv5yiF/Ram/C1cQe
+         iqDw==
+X-Gm-Message-State: ANoB5pnbzxuXj8pty7aCLYWG6sA2b4d7Bq2GnxoFdCj1tYlexOwiSd4V
+	fY1BI31geENZn9bersZhWP8Odw==
+X-Google-Smtp-Source: AA0mqf74IZLJygrpyRzf5qHhhvP3A1tbMBtTE6ln+kXNQdMnkp0LHZho99MMNt+23oEZ2UGDXNYLyA==
+X-Received: by 2002:a5d:6547:0:b0:241:e4cc:f044 with SMTP id z7-20020a5d6547000000b00241e4ccf044mr2164424wrv.457.1669136884287;
+        Tue, 22 Nov 2022 09:08:04 -0800 (PST)
 Received: from phenom.ffwll.local (212-51-149-33.fiber7.init7.net. [212.51.149.33])
-        by smtp.gmail.com with ESMTPSA id s2-20020adff802000000b00241c712916fsm12896669wrp.0.2022.11.22.06.51.16
+        by smtp.gmail.com with ESMTPSA id m42-20020a05600c3b2a00b003cf47556f21sm24861760wms.2.2022.11.22.09.08.03
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 22 Nov 2022 06:51:16 -0800 (PST)
-Date: Tue, 22 Nov 2022 15:51:14 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: syzbot <syzbot+007bfe0f3330f6e1e7d1@syzkaller.appspotmail.com>
-Message-ID: <Y3zh4naNB+nZ0YTd@phenom.ffwll.local>
-Mail-Followup-To: syzbot <syzbot+007bfe0f3330f6e1e7d1@syzkaller.appspotmail.com>,
-	christian.koenig@amd.com, dri-devel@lists.freedesktop.org,
-	gustavo@padovan.org, linaro-mm-sig-bounces@lists.linaro.org,
-	linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
-	linux-media@vger.kernel.org, sumit.semwal@linaro.org,
-	syzkaller-bugs@googlegroups.com
-References: <00000000000021719805d692e035@google.com>
- <000000000000d5b3af05edc9d445@google.com>
+        Tue, 22 Nov 2022 09:08:03 -0800 (PST)
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: DRI Development <dri-devel@lists.freedesktop.org>
+Date: Tue, 22 Nov 2022 18:08:00 +0100
+Message-Id: <20221122170801.842766-1-daniel.vetter@ffwll.ch>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <000000000000d5b3af05edc9d445@google.com>
-X-Operating-System: Linux phenom 5.19.0-2-amd64 
-X-Rspamd-Queue-Id: 26D533E9D6
-X-Spamd-Bar: /
-X-Spamd-Result: default: False [-0.80 / 15.00];
+X-Rspamd-Queue-Id: 3DA473E9D6
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.30 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=6f4e5e9899396248];
+	MID_CONTAINS_FROM(1.00)[];
 	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	NEURAL_HAM(-0.00)[-1.000];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail-wr1-f47.google.com:rdns,mail-wr1-f47.google.com:helo];
 	R_SPF_NA(0.00)[no SPF record];
+	NEURAL_HAM(-0.00)[-0.999];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	FROM_EQ_ENVFROM(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_THREE(0.00)[3];
-	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	ARC_NA(0.00)[];
 	DKIM_TRACE(0.00)[ffwll.ch:+];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[212.51.149.33:received];
+	TO_DN_SOME(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_RCPT(0.00)[007bfe0f3330f6e1e7d1];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[212.51.149.33:received];
 	DMARC_NA(0.00)[ffwll.ch];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.221.47:from]
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.221.46:from]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 5SWDKSRJUHNIQSEXO4FN3QLL5NLEG4RW
-X-Message-ID-Hash: 5SWDKSRJUHNIQSEXO4FN3QLL5NLEG4RW
-X-MailFrom: daniel@ffwll.ch
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: christian.koenig@amd.com, dri-devel@lists.freedesktop.org, gustavo@padovan.org, linaro-mm-sig-bounces@lists.linaro.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com
+Message-ID-Hash: HB5Q3YCF6KX6YM4C3IFQ7PRFX5T6VI5P
+X-Message-ID-Hash: HB5Q3YCF6KX6YM4C3IFQ7PRFX5T6VI5P
+X-MailFrom: daniel.vetter@ffwll.ch
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Intel Graphics Development <intel-gfx@lists.freedesktop.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Thomas Zimmermann <tzimmermann@suse.de>, Jason Gunthorpe <jgg@ziepe.ca>, Suren Baghdasaryan <surenb@google.com>, Matthew Wilcox <willy@infradead.org>, John Stultz <john.stultz@linaro.org>, Daniel Vetter <daniel.vetter@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [syzbot] inconsistent lock state in sync_info_debugfs_show
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: Require VM_PFNMAP vma for mmap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5SWDKSRJUHNIQSEXO4FN3QLL5NLEG4RW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HB5Q3YCF6KX6YM4C3IFQ7PRFX5T6VI5P/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Fri, Nov 18, 2022 at 06:46:38PM -0800, syzbot wrote:
-> syzbot has found a reproducer for the following issue on:
-> 
-> HEAD commit:    84368d882b96 Merge tag 'soc-fixes-6.1-3' of git://git.kern..
-> git tree:       upstream
-> console+strace: https://syzkaller.appspot.com/x/log.txt?x=1670fb65880000
-> kernel config:  https://syzkaller.appspot.com/x/.config?x=6f4e5e9899396248
-> dashboard link: https://syzkaller.appspot.com/bug?extid=007bfe0f3330f6e1e7d1
-> compiler:       gcc (Debian 10.2.1-6) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2
-> syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=164376f9880000
-> C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=16cf0965880000
-> 
-> Downloadable assets:
-> disk image: https://storage.googleapis.com/syzbot-assets/031b6e68785d/disk-84368d88.raw.xz
-> vmlinux: https://storage.googleapis.com/syzbot-assets/cff5e66b90e8/vmlinux-84368d88.xz
-> kernel image: https://storage.googleapis.com/syzbot-assets/e75525784a66/bzImage-84368d88.xz
-> 
-> IMPORTANT: if you fix the issue, please add the following tag to the commit:
-> Reported-by: syzbot+007bfe0f3330f6e1e7d1@syzkaller.appspotmail.com
-> 
-> ================================
-> WARNING: inconsistent lock state
-> 6.1.0-rc5-syzkaller-00144-g84368d882b96 #0 Not tainted
-> --------------------------------
-> inconsistent {IN-HARDIRQ-W} -> {HARDIRQ-ON-W} usage.
-> syz-executor333/3645 [HC0[0]:SC0[0]:HE0:SE1] takes:
-> ffffffff8d295c38 (sync_timeline_list_lock){?...}-{2:2}, at: spin_lock_irq include/linux/spinlock.h:375 [inline]
-> ffffffff8d295c38 (sync_timeline_list_lock){?...}-{2:2}, at: sync_info_debugfs_show+0x31/0x200 drivers/dma-buf/sync_debug.c:147
-> {IN-HARDIRQ-W} state was registered at:
->   lock_acquire kernel/locking/lockdep.c:5668 [inline]
->   lock_acquire+0x1e3/0x630 kernel/locking/lockdep.c:5633
->   __raw_spin_lock_irqsave include/linux/spinlock_api_smp.h:110 [inline]
->   _raw_spin_lock_irqsave+0x3d/0x60 kernel/locking/spinlock.c:162
->   sync_timeline_debug_remove+0x29/0x1a0 drivers/dma-buf/sync_debug.c:31
->   sync_timeline_free drivers/dma-buf/sw_sync.c:104 [inline]
->   kref_put include/linux/kref.h:65 [inline]
->   sync_timeline_put drivers/dma-buf/sw_sync.c:116 [inline]
->   timeline_fence_release+0x267/0x340 drivers/dma-buf/sw_sync.c:144
->   dma_fence_release+0x14b/0x690 drivers/dma-buf/dma-fence.c:559
-
-Do we need to just generally push all dma_fence_release finalization to an
-irq work to untangle this mess once and for all? Or is this not just plain
-old recursion? Christian, any good ideas?
--Daniel
-
->   kref_put include/linux/kref.h:65 [inline]
->   dma_fence_put include/linux/dma-fence.h:276 [inline]
->   dma_fence_array_release+0x1fa/0x2d0 drivers/dma-buf/dma-fence-array.c:120
->   dma_fence_release+0x14b/0x690 drivers/dma-buf/dma-fence.c:559
->   kref_put include/linux/kref.h:65 [inline]
->   dma_fence_put include/linux/dma-fence.h:276 [inline]
->   irq_dma_fence_array_work+0xa9/0xd0 drivers/dma-buf/dma-fence-array.c:52
->   irq_work_single+0x124/0x260 kernel/irq_work.c:211
->   irq_work_run_list kernel/irq_work.c:242 [inline]
->   irq_work_run_list+0x91/0xc0 kernel/irq_work.c:225
->   irq_work_run+0x58/0xd0 kernel/irq_work.c:251
->   __sysvec_irq_work+0xce/0x4e0 arch/x86/kernel/irq_work.c:22
->   sysvec_irq_work+0x92/0xc0 arch/x86/kernel/irq_work.c:17
->   asm_sysvec_irq_work+0x1a/0x20 arch/x86/include/asm/idtentry.h:675
->   __raw_spin_unlock_irq include/linux/spinlock_api_smp.h:160 [inline]
->   _raw_spin_unlock_irq+0x29/0x50 kernel/locking/spinlock.c:202
->   spin_unlock_irq include/linux/spinlock.h:400 [inline]
->   sw_sync_debugfs_release+0x162/0x240 drivers/dma-buf/sw_sync.c:321
->   __fput+0x27c/0xa90 fs/file_table.c:320
->   task_work_run+0x16f/0x270 kernel/task_work.c:179
->   ptrace_notify+0x118/0x140 kernel/signal.c:2354
->   ptrace_report_syscall include/linux/ptrace.h:420 [inline]
->   ptrace_report_syscall_exit include/linux/ptrace.h:482 [inline]
->   syscall_exit_work kernel/entry/common.c:251 [inline]
->   syscall_exit_to_user_mode_prepare+0x129/0x280 kernel/entry/common.c:278
->   __syscall_exit_to_user_mode_work kernel/entry/common.c:283 [inline]
->   syscall_exit_to_user_mode+0xd/0x50 kernel/entry/common.c:296
->   do_syscall_64+0x46/0xb0 arch/x86/entry/common.c:86
->   entry_SYSCALL_64_after_hwframe+0x63/0xcd
-> irq event stamp: 638
-> hardirqs last  enabled at (637): [<ffffffff81cc6530>] ___slab_alloc+0xca0/0x1400 mm/slub.c:3132
-> hardirqs last disabled at (638): [<ffffffff89f47e95>] __raw_spin_lock_irq include/linux/spinlock_api_smp.h:117 [inline]
-> hardirqs last disabled at (638): [<ffffffff89f47e95>] _raw_spin_lock_irq+0x45/0x50 kernel/locking/spinlock.c:170
-> softirqs last  enabled at (538): [<ffffffff814c1d03>] invoke_softirq kernel/softirq.c:445 [inline]
-> softirqs last  enabled at (538): [<ffffffff814c1d03>] __irq_exit_rcu+0x123/0x180 kernel/softirq.c:650
-> softirqs last disabled at (505): [<ffffffff814c1d03>] invoke_softirq kernel/softirq.c:445 [inline]
-> softirqs last disabled at (505): [<ffffffff814c1d03>] __irq_exit_rcu+0x123/0x180 kernel/softirq.c:650
-> 
-> other info that might help us debug this:
->  Possible unsafe locking scenario:
-> 
->        CPU0
->        ----
->   lock(sync_timeline_list_lock);
->   <Interrupt>
->     lock(sync_timeline_list_lock);
-> 
->  *** DEADLOCK ***
-> 
-> 2 locks held by syz-executor333/3645:
->  #0: ffff888021f8c8b8 (&p->lock){+.+.}-{3:3}, at: seq_read_iter+0xe3/0x1280 fs/seq_file.c:182
->  #1: ffffffff8d295c38 (sync_timeline_list_lock){?...}-{2:2}, at: spin_lock_irq include/linux/spinlock.h:375 [inline]
->  #1: ffffffff8d295c38 (sync_timeline_list_lock){?...}-{2:2}, at: sync_info_debugfs_show+0x31/0x200 drivers/dma-buf/sync_debug.c:147
-> 
-> stack backtrace:
-> CPU: 1 PID: 3645 Comm: syz-executor333 Not tainted 6.1.0-rc5-syzkaller-00144-g84368d882b96 #0
-> Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 10/26/2022
-> Call Trace:
->  <TASK>
->  __dump_stack lib/dump_stack.c:88 [inline]
->  dump_stack_lvl+0xd1/0x138 lib/dump_stack.c:106
->  print_usage_bug kernel/locking/lockdep.c:3963 [inline]
->  valid_state kernel/locking/lockdep.c:3975 [inline]
->  mark_lock_irq kernel/locking/lockdep.c:4178 [inline]
->  mark_lock.part.0.cold+0x18/0xd8 kernel/locking/lockdep.c:4634
->  mark_lock kernel/locking/lockdep.c:4598 [inline]
->  mark_held_locks+0x9f/0xe0 kernel/locking/lockdep.c:4236
->  __trace_hardirqs_on_caller kernel/locking/lockdep.c:4254 [inline]
->  lockdep_hardirqs_on_prepare kernel/locking/lockdep.c:4321 [inline]
->  lockdep_hardirqs_on_prepare+0x139/0x410 kernel/locking/lockdep.c:4273
->  trace_hardirqs_on+0x31/0x160 kernel/trace/trace_preemptirq.c:49
->  __raw_spin_unlock_irq include/linux/spinlock_api_smp.h:159 [inline]
->  _raw_spin_unlock_irq+0x23/0x50 kernel/locking/spinlock.c:202
->  spin_unlock_irq include/linux/spinlock.h:400 [inline]
->  sync_print_obj drivers/dma-buf/sync_debug.c:118 [inline]
->  sync_info_debugfs_show+0xef/0x200 drivers/dma-buf/sync_debug.c:153
->  seq_read_iter+0x4f9/0x1280 fs/seq_file.c:230
->  seq_read+0x171/0x210 fs/seq_file.c:162
->  vfs_read+0x25b/0x930 fs/read_write.c:468
->  ksys_read+0x12b/0x250 fs/read_write.c:613
->  do_syscall_x64 arch/x86/entry/common.c:50 [inline]
->  do_syscall_64+0x39/0xb0 arch/x86/entry/common.c:80
->  entry_SYSCALL_64_after_hwframe+0x63/0xcd
-> RIP: 0033:0x7f7cb1bbb049
-> Code: 28 00 00 00 75 05 48 83 c4 28 c3 e8 b1 14 00 00 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 c0 ff ff ff f7 d8 64 89 01 48
-> RSP: 002b:00007ffd52951818 EFLAGS: 00000246 ORIG_RAX: 0000000000000000
-> RAX: ffffffffffffffda RBX: 00000000000f4240 RCX: 00007f7cb1bbb049
-> RDX: 0000000000002020 RSI: 0000000020002200 RDI: 0000000000000003
-> RBP: 0000000000000000 R08: 0000000000000001 R09: 0000000000000001
-> R10: 00007ffd52951290 R11: 0000000000000246 R12: 000000000000e32c
-> R13: 00007ffd5295182c R14: 00007ffd52951840 R15: 00007ffd52951830
->  </TASK>
-> 
-
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+dGxkcjsgRE1BIGJ1ZmZlcnMgYXJlbid0IG5vcm1hbCBtZW1vcnksIGV4cGVjdGluZyB0aGF0IHlv
+dSBjYW4gdXNlDQp0aGVtIGxpa2UgdGhhdCAobGlrZSBjYWxsaW5nIGdldF91c2VyX3BhZ2VzIHdv
+cmtzLCBvciB0aGF0IHRoZXkncmUNCmFjY291bnRpbmcgbGlrZSBhbnkgb3RoZXIgbm9ybWFsIG1l
+bW9yeSkgY2Fubm90IGJlIGd1YXJhbnRlZWQuDQoNClNpbmNlIHNvbWUgdXNlcnNwYWNlIG9ubHkg
+cnVucyBvbiBpbnRlZ3JhdGVkIGRldmljZXMsIHdoZXJlIGFsbA0KYnVmZmVycyBhcmUgYWN0dWFs
+bHkgYWxsIHJlc2lkZW50IHN5c3RlbSBtZW1vcnksIHRoZXJlJ3MgYSBodWdlDQp0ZW1wdGF0aW9u
+IHRvIGFzc3VtZSB0aGF0IGEgc3RydWN0IHBhZ2UgaXMgYWx3YXlzIHByZXNlbnQgYW5kIHVzZWFi
+bGUNCmxpa2UgZm9yIGFueSBtb3JlIHBhZ2VjYWNoZSBiYWNrZWQgbW1hcC4gVGhpcyBoYXMgdGhl
+IHBvdGVudGlhbCB0bw0KcmVzdWx0IGluIGEgdWFwaSBuaWdodG1hcmUuDQoNClRvIHN0b3AgdGhp
+cyBnYXAgcmVxdWlyZSB0aGF0IERNQSBidWZmZXIgbW1hcHMgYXJlIFZNX1BGTk1BUCwgd2hpY2gN
+CmJsb2NrcyBnZXRfdXNlcl9wYWdlcyBhbmQgYWxsIHRoZSBvdGhlciBzdHJ1Y3QgcGFnZSBiYXNl
+ZA0KaW5mcmFzdHJ1Y3R1cmUgZm9yIGV2ZXJ5b25lLiBJbiBzcGlyaXQgdGhpcyBpcyB0aGUgdWFw
+aSBjb3VudGVycGFydCB0bw0KdGhlIGtlcm5lbC1pbnRlcm5hbCBDT05GSUdfRE1BQlVGX0RFQlVH
+Lg0KDQpNb3RpdmF0ZWQgYnkgYSByZWNlbnQgcGF0Y2ggd2hpY2ggd2FudGVkIHRvIHN3aWNoIHRo
+ZSBzeXN0ZW0gZG1hLWJ1Zg0KaGVhcCB0byB2bV9pbnNlcnRfcGFnZSBpbnN0ZWFkIG9mIHZtX2lu
+c2VydF9wZm4uDQoNCnYyOg0KDQpKYXNvbiBicm91Z2h0IHVwIHRoYXQgd2UgYWxzbyB3YW50IHRv
+IGd1YXJhbnRlZSB0aGF0IGFsbCBwdGVzIGhhdmUgdGhlDQpwdGVfc3BlY2lhbCBmbGFnIHNldCwg
+dG8gY2F0Y2ggZmFzdCBnZXRfdXNlcl9wYWdlcyAob24gYXJjaGl0ZWN0dXJlcw0KdGhhdCBzdXBw
+b3J0IHRoaXMpLiBBbGxvd2luZyBWTV9NSVhFRE1BUCAobGlrZSBWTV9TUEVDSUFMIGRvZXMpIHdv
+dWxkDQpzdGlsbCBhbGxvdyB2bV9pbnNlcnRfcGFnZSwgYnV0IGxpbWl0aW5nIHRvIFZNX1BGTk1B
+UCB3aWxsIGNhdGNoIHRoYXQuDQoNCj5Gcm9tIGF1ZGl0aW5nIHRoZSB2YXJpb3VzIGZ1bmN0aW9u
+cyB0byBpbnNlcnQgcGZuIHB0ZSBlbnRpcmVzDQoodm1faW5zZXJ0X3Bmbl9wcm90LCByZW1hcF9w
+Zm5fcmFuZ2UgYW5kIGFsbCBpdCdzIGNhbGxlcnMgbGlrZQ0KZG1hX21tYXBfd2MpIGl0IGxvb2tz
+IGxpa2UgVk1fUEZOTUFQIGlzIGFscmVhZHkgcmVxdWlyZWQgYW55d2F5LCBzbw0KdGhpcyBzaG91
+bGQgYmUgdGhlIGNvcnJlY3QgZmxhZyB0byBjaGVjayBmb3IuDQoNCnYzOiBDaGFuZ2UgdG8gV0FS
+Tl9PTl9PTkNFIChUaG9tYXMgWmltbWVybWFubikNCg0KUmVmZXJlbmNlczogaHR0cHM6Ly9sb3Jl
+Lmtlcm5lbC5vcmcvbGttbC9DQUtNSzd1SGkrbUcwejBIVW1OdDEzUUNDdnV0dVJWanBjUjBOalJM
+MTJrLVdiV3prUmdAbWFpbC5nbWFpbC5jb20vDQpBY2tlZC1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8
+Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KQWNrZWQtYnk6IFRob21hcyBaaW1tZXJtYW5uIDx0
+emltbWVybWFubkBzdXNlLmRlPg0KQ2M6IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBz
+dXNlLmRlPg0KQ2M6IEphc29uIEd1bnRob3JwZSA8amdnQHppZXBlLmNhPg0KQ2M6IFN1cmVuIEJh
+Z2hkYXNhcnlhbiA8c3VyZW5iQGdvb2dsZS5jb20+DQpDYzogTWF0dGhldyBXaWxjb3ggPHdpbGx5
+QGluZnJhZGVhZC5vcmc+DQpDYzogSm9obiBTdHVsdHogPGpvaG4uc3R1bHR6QGxpbmFyby5vcmc+
+DQpTaWduZWQtb2ZmLWJ5OiBEYW5pZWwgVmV0dGVyIDxkYW5pZWwudmV0dGVyQGludGVsLmNvbT4N
+CkNjOiBTdW1pdCBTZW13YWwgPHN1bWl0LnNlbXdhbEBsaW5hcm8ub3JnPg0KQ2M6ICJDaHJpc3Rp
+YW4gS8O2bmlnIiA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KQ2M6IGxpbnV4LW1lZGlhQHZn
+ZXIua2VybmVsLm9yZw0KQ2M6IGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZw0KLS0NCk9r
+IEkgZW50aXJlbHkgZm9yZ290IGFib3V0IHRoaXMgcGF0Y2ggYnV0IHN0dW1ibGVkIG92ZXIgaXQg
+YW5kIGNoZWNrZWQNCndoYXQncyB1cCB3aXRoIGl0IG5vLiBJIHRoaW5rIGl0J3MgcmVhZHkgbm93
+IGZvciBtZXJnaW5nOg0KLSBzaG1lbSBoZWxwZXIgcGF0Y2hlcyB0byBmaXggdXAgdmdlbSBsYW5k
+ZWQNCi0gdHRtIGhhcyBiZWVuIGZpeGVkIHNpbmNlIGEgd2hpbGUNCi0gSSBkb24ndCB0aGluayB3
+ZSd2ZSBoYWQgYW55IG90aGVyIG9wZW4gaXNzdWVzDQoNClRpbWUgdG8gbG9jayBkb3duIHRoaXMg
+dWFwaSBjb250cmFjdCBmb3IgcmVhbD8NCi1EYW5pZWwNCi0tLQ0KIGRyaXZlcnMvZG1hLWJ1Zi9k
+bWEtYnVmLmMgfCA0ICsrKysNCiAxIGZpbGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspDQoNCmRp
+ZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jIGIvZHJpdmVycy9kbWEtYnVmL2Rt
+YS1idWYuYw0KaW5kZXggYjZjMzY5MTRlN2M2Li44ODcxODY2NWMzYzMgMTAwNjQ0DQotLS0gYS9k
+cml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQorKysgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5j
+DQpAQCAtMTUwLDYgKzE1MCw4IEBAIHN0YXRpYyBpbnQgZG1hX2J1Zl9tbWFwX2ludGVybmFsKHN0
+cnVjdCBmaWxlICpmaWxlLCBzdHJ1Y3Qgdm1fYXJlYV9zdHJ1Y3QgKnZtYSkNCiAJcmV0ID0gZG1h
+YnVmLT5vcHMtPm1tYXAoZG1hYnVmLCB2bWEpOw0KIAlkbWFfcmVzdl91bmxvY2soZG1hYnVmLT5y
+ZXN2KTsNCiANCisJV0FSTl9PTl9PTkNFKCEodm1hLT52bV9mbGFncyAmIFZNX1BGTk1BUCkpOw0K
+Kw0KIAlyZXR1cm4gcmV0Ow0KIH0NCiANCkBAIC0xNDk1LDYgKzE0OTcsOCBAQCBpbnQgZG1hX2J1
+Zl9tbWFwKHN0cnVjdCBkbWFfYnVmICpkbWFidWYsIHN0cnVjdCB2bV9hcmVhX3N0cnVjdCAqdm1h
+LA0KIAlyZXQgPSBkbWFidWYtPm9wcy0+bW1hcChkbWFidWYsIHZtYSk7DQogCWRtYV9yZXN2X3Vu
+bG9jayhkbWFidWYtPnJlc3YpOw0KIA0KKwlXQVJOX09OX09OQ0UoISh2bWEtPnZtX2ZsYWdzICYg
+Vk1fUEZOTUFQKSk7DQorDQogCXJldHVybiByZXQ7DQogfQ0KIEVYUE9SVF9TWU1CT0xfTlNfR1BM
+KGRtYV9idWZfbW1hcCwgRE1BX0JVRik7DQotLSANCjIuMzcuMg0KDQpfX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlz
+dCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBh
+biBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
