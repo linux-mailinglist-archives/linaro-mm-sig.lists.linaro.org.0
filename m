@@ -2,93 +2,108 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95DC663448E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 20:29:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 50D7C6344A8
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 20:34:15 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7359C3ECF8
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 19:29:27 +0000 (UTC)
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com [209.85.208.41])
-	by lists.linaro.org (Postfix) with ESMTPS id 6BFCB3E9D6
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 19:29:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5E22A3ED0D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 19:34:14 +0000 (UTC)
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com [209.85.160.175])
+	by lists.linaro.org (Postfix) with ESMTPS id A41173EC65
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 19:34:05 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b=F6JQcHUs;
-	spf=none (lists.linaro.org: domain of daniel.vetter@ffwll.ch has no SPF policy when checking 209.85.208.41) smtp.mailfrom=daniel.vetter@ffwll.ch;
+	dkim=pass header.d=ziepe.ca header.s=google header.b=CPzftK7v;
+	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.160.175 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
 	dmarc=none
-Received: by mail-ed1-f41.google.com with SMTP id z63so3014285ede.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 11:29:17 -0800 (PST)
+Received: by mail-qt1-f175.google.com with SMTP id l2so9947649qtq.11
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 11:34:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=NVDnmC2dKJqAUSDipNMGo0RTknLwbcl5eyAafViq/zw=;
-        b=F6JQcHUsspYdGaSt4ieZNwOMZpEsONnlt9o3YWjXlEPIa0eIcgJ24H9S942F8Q4aMc
-         g+39K4DM+a7d2RygbPWquSET+BAUOl/CuMuwn+gW+NMmdBYH2TajHT6E0wgDLsvyRn8Q
-         Oyjdw7OWDhgLbC7P9JZW0uMGCjhOePfyWsSdI=
+        d=ziepe.ca; s=google;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=gK4Hv+hqSXYYQhPJs2BourCuWSPOf2CqiS0ROx9Lxc8=;
+        b=CPzftK7vuA/xYmMuEz95P61nJcTJe12hw3MBpezd1074VzPH8xTgyqV0FUaxEEJksa
+         76E8WmyHAbWkclqEsxLZyw2K028d+6oeTL/GrVbXvbaep1xle3bCI/IIXbt14Y0jSeae
+         hwFxUpR331wfRKiGtv00NJCgbCSjlwlkaG0f+J1hdhZjyqfzc8T5JlYUGLtO5RVxeXRt
+         1uZY0cRWubIqaMorhSYTMqS9yvP45WenKnS+Ug0bOR3i2oIV+EV4Zeh/dcqaRWE8XTev
+         /Fdlk5XmoTs+Ej2i8M3uHFhC0B7/BkSvQSjlFsw6fF+5LmOoJQmP6i77iWjxk70IJ0t1
+         pZYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NVDnmC2dKJqAUSDipNMGo0RTknLwbcl5eyAafViq/zw=;
-        b=UDnG7BZvtydzubxcP3vfsCotkEBkBD602JUCy9oo6Nzvvpm279cUQ6M+8h0Db1vs5d
-         /pgZDh5zMJfLG7kY5yd3DncyljvGs1VU7UTuqHZZmnoucuTIwqcb96F0KRgk+u9pDVLG
-         HfLX1hv7BIJqzC5qzAhkbRyWoTqblrjkVyN4RAX/6pGnb0zbJhfRS6XvZoN1HfJb9nuW
-         T0nAgAd7HndTlN5SCIH2CmhV6Ta6Y8rf/4lC6qMwgkMXZ2Od/pSE+UYnMuXOuFzcxOf3
-         VAv0G35AwF/fk/uo+K5rr5nPmx8MSBhlJUZwDnUwZCijNHsBvxvZ4HdaNbOoWsp/S3of
-         cN+A==
-X-Gm-Message-State: ANoB5pkXnBOrdCcCvX2v8Y+jhvyhFXshHNjcoe8W+w7vUzVvNwNf/FXR
-	kPFOxXaWqSlt3j8UItyEv4kZ/EaqLXmBewvLiyaHrA==
-X-Google-Smtp-Source: AA0mqf7IcusChboGRGGt1s/cB7q39wPkujHV5XTXD9uN+GJhpblKvI9MCtZZtq2mwcwYehW0Unnkdw9V4tf6ONn4w74=
-X-Received: by 2002:a05:6402:c0b:b0:463:a83c:e0af with SMTP id
- co11-20020a0564020c0b00b00463a83ce0afmr21647244edb.158.1669145356462; Tue, 22
- Nov 2022 11:29:16 -0800 (PST)
-MIME-Version: 1.0
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=gK4Hv+hqSXYYQhPJs2BourCuWSPOf2CqiS0ROx9Lxc8=;
+        b=qRGLbwjExp0K61LKXOHY6CB6AVXkiaTxmBw0AVed8Dz+nnPPc5tt0yftZfFR8qyYVa
+         XvRXoLEEkimYHT0oLN0Qx3LKhm07foY0QNE1sT0pHC3x4bDS9beI4EvOCO7nANbSj6da
+         mZfQuBvqIlxmAIF6QZfaoWoFNb8JjbMneN8jMl32CtX6t7YYPr6r4o1GOmZMSKbB9O07
+         E8ZXVJxf3CgkAFmN1m4X94RsnN7RbQHAYMG0Wo1DO5RA3nWF5jeUrElzm6lvMWScOvbT
+         jX7evPhgguHKrIavc16D7nYavtGgdMpIHsqoYF3wjNMq6crF69/pBHtM2gxyKlv287Ie
+         RD2A==
+X-Gm-Message-State: ANoB5plXYz1nuPoT9STpaaXjghCxN7opTIby4ugeGuSpF681jucmILZ6
+	HW10wXsvUyPkC0vI/hl/siJ9LQ==
+X-Google-Smtp-Source: AA0mqf6itFyBYcobfUpRF0+IzeljS0J+Jfi+RUYvR39ErLilLCE/4r/HMIncmxqXwEdfvSrcmm2y1g==
+X-Received: by 2002:ac8:1019:0:b0:3a5:42b9:d7aa with SMTP id z25-20020ac81019000000b003a542b9d7aamr23027660qti.58.1669145645365;
+        Tue, 22 Nov 2022 11:34:05 -0800 (PST)
+Received: from ziepe.ca (hlfxns017vw-47-55-122-23.dhcp-dynamic.fibreop.ns.bellaliant.net. [47.55.122.23])
+        by smtp.gmail.com with ESMTPSA id ay20-20020a05620a179400b006faa88ba2b5sm10743137qkb.7.2022.11.22.11.34.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 22 Nov 2022 11:34:04 -0800 (PST)
+Received: from jgg by wakko with local (Exim 4.95)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1oxZ1v-009xu2-IB;
+	Tue, 22 Nov 2022 15:34:03 -0400
+Date: Tue, 22 Nov 2022 15:34:03 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+Message-ID: <Y30kK6dsssSLJVgp@ziepe.ca>
 References: <20221122170801.842766-1-daniel.vetter@ffwll.ch>
- <Y30PDdsvHIJo5YHR@ziepe.ca> <CAKMK7uEccwYTNwDYQazmZvTfBFQOikZt5A6BmegweyO-inKYbQ@mail.gmail.com>
+ <Y30PDdsvHIJo5YHR@ziepe.ca>
+ <CAKMK7uEccwYTNwDYQazmZvTfBFQOikZt5A6BmegweyO-inKYbQ@mail.gmail.com>
  <Y30Z4VxT7Wdoc1Lc@ziepe.ca>
-In-Reply-To: <Y30Z4VxT7Wdoc1Lc@ziepe.ca>
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-Date: Tue, 22 Nov 2022 20:29:05 +0100
-Message-ID: <CAKMK7uE=8eqyh9BKg_+7B1jjMi6K4wrmPyi9xeLVvVYFxBgF9g@mail.gmail.com>
-To: Jason Gunthorpe <jgg@ziepe.ca>
-X-Rspamd-Queue-Id: 6BFCB3E9D6
+ <CAKMK7uE=8eqyh9BKg_+7B1jjMi6K4wrmPyi9xeLVvVYFxBgF9g@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAKMK7uE=8eqyh9BKg_+7B1jjMi6K4wrmPyi9xeLVvVYFxBgF9g@mail.gmail.com>
+X-Rspamd-Queue-Id: A41173EC65
 X-Spamd-Bar: --------
-X-Spamd-Result: default: False [-8.80 / 15.00];
+X-Spamd-Result: default: False [-9.00 / 15.00];
 	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
+	BAYES_HAM(-3.00)[99.99%];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-0.50)[209.85.208.41:from];
-	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
+	RCVD_IN_DNSWL_HI(-0.50)[209.85.160.175:from];
+	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	NEURAL_HAM(-0.00)[-0.953];
-	R_SPF_NA(0.00)[no SPF record];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ziepe.ca:dkim];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail-ed1-f41.google.com:rdns,mail-ed1-f41.google.com:helo,ffwll.ch:url,ffwll.ch:dkim];
-	DKIM_TRACE(0.00)[ffwll.ch:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.41:from];
+	MID_RHS_MATCH_FROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	NEURAL_HAM(-0.00)[-0.999];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[12];
-	TO_DN_SOME(0.00)[];
-	DMARC_NA(0.00)[ffwll.ch];
+	RCVD_COUNT_THREE(0.00)[4];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.160.175:from];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[ziepe.ca:+];
+	FROM_HAS_DN(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	ARC_NA(0.00)[]
+	TO_DN_SOME(0.00)[];
+	DMARC_NA(0.00)[ziepe.ca];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: YOVSA4BVFWFQQKZFEGD7JAB6TT4QEVFE
-X-Message-ID-Hash: YOVSA4BVFWFQQKZFEGD7JAB6TT4QEVFE
-X-MailFrom: daniel.vetter@ffwll.ch
+Message-ID-Hash: PTRAURVXQC4PETLOJN6WW3KOJJXUP2KX
+X-Message-ID-Hash: PTRAURVXQC4PETLOJN6WW3KOJJXUP2KX
+X-MailFrom: jgg@ziepe.ca
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: DRI Development <dri-devel@lists.freedesktop.org>, Intel Graphics Development <intel-gfx@lists.freedesktop.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Thomas Zimmermann <tzimmermann@suse.de>, Suren Baghdasaryan <surenb@google.com>, Matthew Wilcox <willy@infradead.org>, John Stultz <john.stultz@linaro.org>, Daniel Vetter <daniel.vetter@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: DRI Development <dri-devel@lists.freedesktop.org>, Intel Graphics Development <intel-gfx@lists.freedesktop.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Thomas Zimmermann <tzimmermann@suse.de>, Suren Baghdasaryan <surenb@google.com>, Matthew Wilcox <willy@infradead.org>, John Stultz <john.stultz@linaro.org>, Daniel Vetter <daniel.vetter@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: Require VM_PFNMAP vma for mmap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YOVSA4BVFWFQQKZFEGD7JAB6TT4QEVFE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PTRAURVXQC4PETLOJN6WW3KOJJXUP2KX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -98,68 +113,17 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, 22 Nov 2022 at 19:50, Jason Gunthorpe <jgg@ziepe.ca> wrote:
->
-> On Tue, Nov 22, 2022 at 07:08:25PM +0100, Daniel Vetter wrote:
-> > On Tue, 22 Nov 2022 at 19:04, Jason Gunthorpe <jgg@ziepe.ca> wrote:
-> > >
-> > > On Tue, Nov 22, 2022 at 06:08:00PM +0100, Daniel Vetter wrote:
-> > > > tldr; DMA buffers aren't normal memory, expecting that you can use
-> > > > them like that (like calling get_user_pages works, or that they're
-> > > > accounting like any other normal memory) cannot be guaranteed.
-> > > >
-> > > > Since some userspace only runs on integrated devices, where all
-> > > > buffers are actually all resident system memory, there's a huge
-> > > > temptation to assume that a struct page is always present and useable
-> > > > like for any more pagecache backed mmap. This has the potential to
-> > > > result in a uapi nightmare.
-> > > >
-> > > > To stop this gap require that DMA buffer mmaps are VM_PFNMAP, which
-> > > > blocks get_user_pages and all the other struct page based
-> > > > infrastructure for everyone. In spirit this is the uapi counterpart to
-> > > > the kernel-internal CONFIG_DMABUF_DEBUG.
-> > > >
-> > > > Motivated by a recent patch which wanted to swich the system dma-buf
-> > > > heap to vm_insert_page instead of vm_insert_pfn.
-> > > >
-> > > > v2:
-> > > >
-> > > > Jason brought up that we also want to guarantee that all ptes have the
-> > > > pte_special flag set, to catch fast get_user_pages (on architectures
-> > > > that support this). Allowing VM_MIXEDMAP (like VM_SPECIAL does) would
-> > > > still allow vm_insert_page, but limiting to VM_PFNMAP will catch that.
-> > > >
-> > > > From auditing the various functions to insert pfn pte entires
-> > > > (vm_insert_pfn_prot, remap_pfn_range and all it's callers like
-> > > > dma_mmap_wc) it looks like VM_PFNMAP is already required anyway, so
-> > > > this should be the correct flag to check for.
-> > >
-> > > I didn't look at how this actually gets used, but it is a bit of a
-> > > pain to insert a lifetime controlled object like a struct page as a
-> > > special PTE/VM_PFNMAP
-> > >
-> > > How is the lifetime model implemented here? How do you know when
-> > > userspace has finally unmapped the page?
-> >
-> > The vma has a filp which is the refcounted dma_buf. With dma_buf you
-> > never get an individual page it's always the entire object. And it's
-> > up to the allocator how exactly it wants to use or not use the page's
-> > refcount. So if gup goes in and elevates the refcount, you can break
-> > stuff, which is why I'm doing this.
->
-> But how does move work?
+On Tue, Nov 22, 2022 at 08:29:05PM +0100, Daniel Vetter wrote:
 
-You nuke all the ptes. Drivers that move have slightly more than a
-bare struct file, they also have a struct address_space so that
-invalidate_mapping_range() works. Refaulting and any coherency issues
-when a refault races against a dma-buf migration is up to the
-driver/exporter to handle correctly. None rely on struct page like mm/
-moving stuff around for compaction/ksm/numa-balancing/whateverr.
--Daniel
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+> You nuke all the ptes. Drivers that move have slightly more than a
+> bare struct file, they also have a struct address_space so that
+> invalidate_mapping_range() works.
+
+Okay, this is one of the ways that this can be made to work correctly,
+as long as you never allow GUP/GUP_fast to succeed on the PTEs. (this
+was the DAX mistake)
+
+Jason
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
