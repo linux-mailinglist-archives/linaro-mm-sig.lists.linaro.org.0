@@ -2,93 +2,92 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 505776344D4
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 20:48:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EE68F6344DD
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 20:50:44 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F32153ED8F
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 19:48:26 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
-	by lists.linaro.org (Postfix) with ESMTPS id 4F0B83E9D6
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 19:48:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 002AC3ED2C
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 19:50:44 +0000 (UTC)
+Received: from mail-ed1-f44.google.com (mail-ed1-f44.google.com [209.85.208.44])
+	by lists.linaro.org (Postfix) with ESMTPS id 5D80A3EC65
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 19:50:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b=ZpmZGbA0;
-	spf=none (lists.linaro.org: domain of daniel.vetter@ffwll.ch has no SPF policy when checking 209.85.218.41) smtp.mailfrom=daniel.vetter@ffwll.ch;
+	dkim=pass header.d=ffwll.ch header.s=google header.b=Ikboz0C2;
+	spf=none (lists.linaro.org: domain of daniel.vetter@ffwll.ch has no SPF policy when checking 209.85.208.44) smtp.mailfrom=daniel.vetter@ffwll.ch;
 	dmarc=none
-Received: by mail-ej1-f41.google.com with SMTP id m22so38100822eji.10
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 11:48:17 -0800 (PST)
+Received: by mail-ed1-f44.google.com with SMTP id z20so20603514edc.13
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 11:50:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ffwll.ch; s=google;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=lVbDlvvtZ6kOnIDHKIHd3lgjSqvnp2Onmrr/hjcCiKI=;
-        b=ZpmZGbA0yEeAQcmw1YRD+tH2k3dpJ2h+GQqA2nTW/+AmrJijfthJJ1JBDQ4b17naWX
-         Gc/gxxKP+B5FUvV3VGk2W0G9ETX/IIVaM8yBzDUKEelLWQEv8b4KysweuE9QpJ6XQVSd
-         wJVG2oDQ+oPdHYZz0NjKMihQlfjjhbkia8/Wg=
+        bh=IK8SDZ/jZDyLJEsuxR9xFz2htJfz3q3gT5kjSS+oWR4=;
+        b=Ikboz0C29tilFV0hIGZnqAFHVvjMHxJd7InyRfuuUNzPVIQJVPxl+VrH7NhH/ytm4G
+         RWtJ1mNRaTbK+4nxOJGwbeGTQd2rBQaylYCLcPR4p+roHyKFHeGySiCf7z6+9reUN/KE
+         Z35zUt6yUcHWUuMbzpCmLZk16iNI+2Px8gy2A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=lVbDlvvtZ6kOnIDHKIHd3lgjSqvnp2Onmrr/hjcCiKI=;
-        b=0mpOSvyKFUkkCcq/vEJfV9LEZMJNrpqTaJ3BnHiIMxXzEYiC8F5GSEaPRpjB29E19+
-         eRw53ty8tMnbIhsl3YP76vBe10Yc+ISwAG/Ki2Lhk2Fm4CjW7c0KwSDAL4xr8SyVYQSU
-         ifPNI/61Ps692lteZCabN0Jvtdbz0EDpiTYRsmTOP3V4aqBVHB/X3GxFXG7WLCKsD6KV
-         poFjZUUyvz+gqA43eSCloO2asuIojcUj1fo0ZSslntxhI0919avaXKlBCGbYScd7RHNi
-         VDUiV1tdbXeFLrMHQcpDA8xtrBM2bxfRQi82NBDENExtF3vR/snAfpwBzDqOKxqaeIpf
-         VL5g==
-X-Gm-Message-State: ANoB5pnYRGltrTfadzTcByG0iwfVawAnHF9ckRqmIf2gohisEtNxAFSx
-	arl7vtstxg8JxORiWys1Z8jN8iqpfYJNODbatgyf2Q==
-X-Google-Smtp-Source: AA0mqf7G2K2KCHsUYtNjGbSQRIe5kptdRvJjIPo2u6XacsktiIWjTo1Gtdxekg6+ahn0rSaoqbcgPDkabc4jvu8znZE=
-X-Received: by 2002:a17:906:d7b8:b0:79f:9ff6:6576 with SMTP id
- pk24-20020a170906d7b800b0079f9ff66576mr20147812ejb.414.1669146496324; Tue, 22
- Nov 2022 11:48:16 -0800 (PST)
+        bh=IK8SDZ/jZDyLJEsuxR9xFz2htJfz3q3gT5kjSS+oWR4=;
+        b=HD6SHvQsuGvzWsEgkFxmilDCOUB3PWTn2/3+dUH/POw1eLnNMcQnwRce/ESLNonR3t
+         71CFdxbKAnI8dNKS2JaiVH/9/42SjF8C6VXcC5COykFjLw+npJV6noYLlwm5PmJYUJWp
+         6lIyiWQyI0gGBBu20lVljT4e1CaHLiRG6yurWLSK3VHcdqU1JJR10T+9ns7Nug3/zOUr
+         06MR1O+4tHM5w7k01ncZWrJqGGyaFs3vy6qSwNuhIiWIhQ++9EiF7/LM/CYdNqaRasg6
+         ajwBkqqvfIhJtbFVwE0j/GyOnr7k7IGSXO55Tk4YQhlg/z7spK3qZQLBIwU9UbpkMOS6
+         MozA==
+X-Gm-Message-State: ANoB5pnpbg8Am3IHKoEtqJxFKF2geG04GxNeSbPvAeiApiXcgT5SFcJ+
+	XlEbsqNUEccWBJJqakwmJUPfla4qOwP5YX1XU14IYw==
+X-Google-Smtp-Source: AA0mqf7XUsswVblhhNThn/Wsg7nr0LQvlQk2QY03yhXme2ouSPPWSkV9vt2apDAQVVRdw98Fl27y+13qz8Y7qsxsG1Q=
+X-Received: by 2002:a05:6402:28a9:b0:461:f5ce:a478 with SMTP id
+ eg41-20020a05640228a900b00461f5cea478mr22342384edb.304.1669146634381; Tue, 22
+ Nov 2022 11:50:34 -0800 (PST)
 MIME-Version: 1.0
-References: <00000000000021719805d692e035@google.com> <000000000000cbce8405eded1951@google.com>
-In-Reply-To: <000000000000cbce8405eded1951@google.com>
-From: Daniel Vetter <daniel@ffwll.ch>
-Date: Tue, 22 Nov 2022 20:48:05 +0100
-Message-ID: <CAKMK7uFj2oouRmLyTZH5YLsk_V8FE=XUR-o0QkoMk1macyPDOg@mail.gmail.com>
-To: syzbot <syzbot+007bfe0f3330f6e1e7d1@syzkaller.appspotmail.com>
-X-Rspamd-Queue-Id: 4F0B83E9D6
-X-Spamd-Bar: /
-X-Spamd-Result: default: False [-0.60 / 15.00];
+References: <20221122170801.842766-1-daniel.vetter@ffwll.ch>
+ <Y30PDdsvHIJo5YHR@ziepe.ca> <CAKMK7uEccwYTNwDYQazmZvTfBFQOikZt5A6BmegweyO-inKYbQ@mail.gmail.com>
+ <Y30Z4VxT7Wdoc1Lc@ziepe.ca> <CAKMK7uE=8eqyh9BKg_+7B1jjMi6K4wrmPyi9xeLVvVYFxBgF9g@mail.gmail.com>
+ <Y30kK6dsssSLJVgp@ziepe.ca>
+In-Reply-To: <Y30kK6dsssSLJVgp@ziepe.ca>
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+Date: Tue, 22 Nov 2022 20:50:23 +0100
+Message-ID: <CAKMK7uFQQkG82PzuSTGQTnN3ZNps5N_4TjR5NRWo0LaJkEaNew@mail.gmail.com>
+To: Jason Gunthorpe <jgg@ziepe.ca>
+X-Rspamd-Queue-Id: 5D80A3EC65
+X-Spamd-Bar: -------
+X-Spamd-Result: default: False [-7.30 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[99.99%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=6f4e5e9899396248];
-	FORGED_SENDER(0.30)[daniel@ffwll.ch,daniel.vetter@ffwll.ch];
 	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.41:from];
 	MIME_GOOD(-0.10)[text/plain];
+	ARC_NA(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
 	R_SPF_NA(0.00)[no SPF record];
 	MIME_TRACE(0.00)[0:+];
-	FROM_NEQ_ENVFROM(0.00)[daniel@ffwll.ch,daniel.vetter@ffwll.ch];
 	RCVD_TLS_LAST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_CC(0.00)[alien8.de,amd.com,lists.freedesktop.org,padovan.org,sina.com,zytor.com,google.com,8bytes.org,vger.kernel.org,lists.linaro.org,arm.com,redhat.com,infradead.org,linaro.org,googlegroups.com,linutronix.de,tencent.com,kernel.org];
+	RCVD_COUNT_TWO(0.00)[2];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[syzkaller.appspot.com:url,goo.gl:url,arm.com:email];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.965];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	DKIM_TRACE(0.00)[ffwll.ch:+];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
 	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ffwll.ch:url,ffwll.ch:dkim,ziepe.ca:email,mail-ed1-f44.google.com:rdns,mail-ed1-f44.google.com:helo];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_RCPT(0.00)[007bfe0f3330f6e1e7d1];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	DMARC_NA(0.00)[ffwll.ch];
-	RCVD_COUNT_TWO(0.00)[2]
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.44:from]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 4RYGHOX6KWEYPOHQ2QMOF2HCNR7YPJOQ
-X-Message-ID-Hash: 4RYGHOX6KWEYPOHQ2QMOF2HCNR7YPJOQ
+Message-ID-Hash: KAKUGURQFYFNR236IHD7LAMKY2XYDBCZ
+X-Message-ID-Hash: KAKUGURQFYFNR236IHD7LAMKY2XYDBCZ
 X-MailFrom: daniel.vetter@ffwll.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: bp@alien8.de, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, gustavo@padovan.org, hdanton@sina.com, hpa@zytor.com, jmattson@google.com, joro@8bytes.org, kvm@vger.kernel.org, linaro-mm-sig-bounces@lists.linaro.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, mark.rutland@arm.com, mingo@redhat.com, pbonzini@redhat.com, peterz@infradead.org, seanjc@google.com, sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com, tglx@linutronix.de, vkuznets@redhat.com, wanpengli@tencent.com, will@kernel.org, x86@kernel.org
+CC: DRI Development <dri-devel@lists.freedesktop.org>, Intel Graphics Development <intel-gfx@lists.freedesktop.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Thomas Zimmermann <tzimmermann@suse.de>, Suren Baghdasaryan <surenb@google.com>, Matthew Wilcox <willy@infradead.org>, John Stultz <john.stultz@linaro.org>, Daniel Vetter <daniel.vetter@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [syzbot] inconsistent lock state in sync_info_debugfs_show
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: Require VM_PFNMAP vma for mmap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4RYGHOX6KWEYPOHQ2QMOF2HCNR7YPJOQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KAKUGURQFYFNR236IHD7LAMKY2XYDBCZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -98,39 +97,22 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Sun, 20 Nov 2022 at 21:51, syzbot
-<syzbot+007bfe0f3330f6e1e7d1@syzkaller.appspotmail.com> wrote:
+On Tue, 22 Nov 2022 at 20:34, Jason Gunthorpe <jgg@ziepe.ca> wrote:
+> On Tue, Nov 22, 2022 at 08:29:05PM +0100, Daniel Vetter wrote:
+> > You nuke all the ptes. Drivers that move have slightly more than a
+> > bare struct file, they also have a struct address_space so that
+> > invalidate_mapping_range() works.
 >
-> syzbot has bisected this issue to:
->
-> commit 997acaf6b4b59c6a9c259740312a69ea549cc684
-> Author: Mark Rutland <mark.rutland@arm.com>
-> Date:   Mon Jan 11 15:37:07 2021 +0000
->
->     lockdep: report broken irq restoration
+> Okay, this is one of the ways that this can be made to work correctly,
+> as long as you never allow GUP/GUP_fast to succeed on the PTEs. (this
+> was the DAX mistake)
 
-Ok this looks funny. I'm pretty sure the code in
-drivers/dma-buf/sw_sync.c around sync_timeline_fence_lock is correct.
-And we don't do anything that this patch claims to catch, it's all
-just plain spin_lock_irq and spin_lock_irqsave usage. Only thing that
-crossed my mind here is that maybe lockdep somehow ends up with two
-different keys for the same spinlock? I'm really confused ...
+Hence this patch, to enforce that no dma-buf exporter gets this wrong.
+Which some did, and then blamed bug reporters for the resulting splats
+:-) One of the things we've reverted was the ttm huge pte support,
+since that doesn't have the pmd_special flag (yet) and so would let
+gup_fast through.
 -Daniel
-
-> bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=115b350d880000
-> start commit:   84368d882b96 Merge tag 'soc-fixes-6.1-3' of git://git.kern..
-> git tree:       upstream
-> final oops:     https://syzkaller.appspot.com/x/report.txt?x=135b350d880000
-> console output: https://syzkaller.appspot.com/x/log.txt?x=155b350d880000
-> kernel config:  https://syzkaller.appspot.com/x/.config?x=6f4e5e9899396248
-> dashboard link: https://syzkaller.appspot.com/bug?extid=007bfe0f3330f6e1e7d1
-> syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=164376f9880000
-> C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=16cf0965880000
->
-> Reported-by: syzbot+007bfe0f3330f6e1e7d1@syzkaller.appspotmail.com
-> Fixes: 997acaf6b4b5 ("lockdep: report broken irq restoration")
->
-> For information about bisection process see: https://goo.gl/tpsmEJ#bisection
 -- 
 Daniel Vetter
 Software Engineer, Intel Corporation
