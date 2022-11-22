@@ -2,187 +2,189 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A170B6339AA
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 11:18:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9D748633F0A
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 15:36:31 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 194C03EC65
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 10:18:07 +0000 (UTC)
-Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com [209.85.219.171])
-	by lists.linaro.org (Postfix) with ESMTPS id A7D123EC62
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 10:17:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7F69D3ECFB
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 22 Nov 2022 14:36:30 +0000 (UTC)
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+	by lists.linaro.org (Postfix) with ESMTPS id 232A13EB80
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 14:36:22 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=I8sHtJ1V;
-	spf=pass (lists.linaro.org: domain of sumit.semwal@linaro.org designates 209.85.219.171 as permitted sender) smtp.mailfrom=sumit.semwal@linaro.org;
-	dmarc=pass (policy=none) header.from=linaro.org
-Received: by mail-yb1-f171.google.com with SMTP id p81so9072025yba.4
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 02:17:57 -0800 (PST)
+	dkim=pass header.d=ffwll.ch header.s=google header.b=cIyvgEbX;
+	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.221.43) smtp.mailfrom=daniel@ffwll.ch;
+	dmarc=none
+Received: by mail-wr1-f43.google.com with SMTP id i12so21147609wrb.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 22 Nov 2022 06:36:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=eAU3eLi14ypt2c7b62+uOHX4p+XY4P0OQzHd4hzoaDg=;
-        b=I8sHtJ1VMGWbKADlghW+RXorMBoSoGjLES4pamIlTJ84wNBgwc8sYMtmY465DWhztX
-         8T6TnLw+/ULQud/T+NeuVkPEFI2IbCg9VAga/SULPq5Nq/ZrU1KWxBjhWgSV7d+TikqR
-         vploUK08ERDl4Ku/AOx/5xoK2Qou94qqW0nOH63KbmfBRr5L4kAsvt1aWsX12n58DwZZ
-         JNVKU17khlLyeudPe3qFAs5NIKyB4B3OV41S7mlmAziAJmVlcvJGVMv5AWfcgNwIM8Qo
-         PcS4IxvqboaMcDSFM1z5mbr1Fcdsb4U2c985YnUeuWjIRWww8+Cs2B5likipDQqp4fag
-         lDtw==
+        d=ffwll.ch; s=google;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=JJAX9bh44USRdwqCCs1XRembKQE+7Zn41PI7dnWPC7c=;
+        b=cIyvgEbXTJlKKpJ5dS3YZLtxi9nJcf1bLVSWFgPYiWNAfO4UjcYaJulhMczfGqPe6K
+         m8bS6+WO/fHS+xvAhObz2CUed/99J/g/zZJJdO3qQH4go4Nogj7z3xa/xFvpuatC5MP9
+         qJ2eMHD28sUV+BMVuv547L7hpGp30MJ2QcBjU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=eAU3eLi14ypt2c7b62+uOHX4p+XY4P0OQzHd4hzoaDg=;
-        b=rXmsjX06HI5xf/Lr0i93Jy9Nvg950rcqcprLD89t6MbcClt5aibaCTvsi+opnwCN5c
-         UsSS1XRgmokiSEpy5pAiB/xyNbTYsqVM2eyZ960QocIyJewqEq2mcLjo4R+tdPgrCHam
-         YsybNIl7SEGyuBgMb16xphF8UJrwjoFgFY6M1q+FJ9cGaQFN7ZL5/K8sb4rA2KwVLjyx
-         Hh6syPn6AqtLzd2FP69YzDHsxfH/x0gVvGmgimr4blUQV1q/390cmnUH4P6HD8hl7OXm
-         k19D7aKyRVjssnOYolv0dC+8IqGH4doW+Pky/VdSFATRQjkm4IMU0oWxzDtU4BYXxcmE
-         IVsg==
-X-Gm-Message-State: ANoB5pm0JbeaCHTn8eZ87x8Ye6uSzjkBcqZyW2h4vnVS2VZVug2zogau
-	ZOtE39ax0oqUBVJlr6NKsRSKrbSf/e2v8IIOibFcQlmp
-X-Google-Smtp-Source: AA0mqf4EfspKpQlvvPQVNU9csb2/qWXEm/ETQb7S4hZogc+BxdwSf49gtnOks6esC5AGsgUhblJGlve+hpHsdaKYmCs=
-X-Received: by 2002:a25:cc0a:0:b0:6e6:f85a:da48 with SMTP id
- l10-20020a25cc0a000000b006e6f85ada48mr19451585ybf.369.1669112277056; Tue, 22
- Nov 2022 02:17:57 -0800 (PST)
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=JJAX9bh44USRdwqCCs1XRembKQE+7Zn41PI7dnWPC7c=;
+        b=6wvk9coauUezKUdjg5y3bsGmoKVflLqQ651tadZ0Ae8XdXj6jtm9suH8ktfXXjYjR+
+         Vl2eKaEYG1jsQpFclokHx/7Hev1UPgXjjDrkHGUTuEDU4gnOpJZtqZNMH4UqdSnCA7LA
+         KpYR+Z25qQni8HHmiLTI6GOI/QOW9tprZ77kk0EQgGI/jIhPlMfanp/ZYXOokCa9VAx0
+         jlwulyU8P64KYsoHQE0pMiNyNvHUZOqnhshmT/rpIIcCmqel5c802grB9T4ZzKQfgWRc
+         DspBBLqLHeJpxLEVaVPorccmMwSUBCGqZTTUVLvvYcX0A63N8y6GMaZLoaBWwCARPS5W
+         GQOQ==
+X-Gm-Message-State: ANoB5pkSS1sGy8wy8BFWCj9MNqgPFpCjvd8gZ+QqV0ukhuavFLGy6sQE
+	uRByKN2aPkn8TKkS15SlwkaHnQ==
+X-Google-Smtp-Source: AA0mqf40CZNOgsBdGjKcG0OTGUB1GivriUFnhQB4elBdUJ8Ho+SYd7WuislfYUUdfraPuU4/cfTTxw==
+X-Received: by 2002:a5d:6284:0:b0:236:64b1:bd30 with SMTP id k4-20020a5d6284000000b0023664b1bd30mr14342309wru.667.1669127781096;
+        Tue, 22 Nov 2022 06:36:21 -0800 (PST)
+Received: from phenom.ffwll.local (212-51-149-33.fiber7.init7.net. [212.51.149.33])
+        by smtp.gmail.com with ESMTPSA id d9-20020adfef89000000b00241dd5de644sm4063176wro.97.2022.11.22.06.36.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 22 Nov 2022 06:36:20 -0800 (PST)
+Date: Tue, 22 Nov 2022 15:36:18 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Rob Clark <robdclark@gmail.com>
+Message-ID: <Y3zeYnufgXJHQAbN@phenom.ffwll.local>
+References: <caf4d6b82843788db97555a58bc9e33915e5b50a.camel@ndufresne.ca>
+ <b422be59-4b4b-2d0d-8e8c-b19f27c6832e@gmail.com>
+ <4fa4e5d3b1f46e46139bad069cbf5e795e63afa8.camel@pengutronix.de>
+ <cc091a11-d012-d998-b7e2-8b3d616867a7@gmail.com>
+ <0abc6efddb8dfc1888de15a1bedaaac6688fd078.camel@pengutronix.de>
+ <1e2a6750-9849-e9ee-69d6-e4bfdcfb64f3@gmail.com>
+ <CAAFQd5B+VHs62M5Wf2L-xOw=_PoaXT+akAySkeZc75HeA3d0jQ@mail.gmail.com>
+ <b2dec9b3-03a7-e7ac-306e-1da024af8982@amd.com>
+ <346d6ad023ef8697aafd93ac1b100890f3637e44.camel@ndufresne.ca>
+ <CAF6AEGuqgWi0T=B9cb+Uy7aoWBPGQmZ3JbwFcK_45GbkY2nHPg@mail.gmail.com>
 MIME-Version: 1.0
-References: <TYCP286MB2323873BBDF88020781FB986CA3B9@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
- <TYCP286MB2323894F9939C27291FD998CCA0A9@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
- <56393e84-485b-42ba-5fce-d4a0d0017653@amd.com>
-In-Reply-To: <56393e84-485b-42ba-5fce-d4a0d0017653@amd.com>
-From: Sumit Semwal <sumit.semwal@linaro.org>
-Date: Tue, 22 Nov 2022 15:47:42 +0530
-Message-ID: <CAO_48GFU+bWBm5BmzZx1r5z4U+7pME3MVtsCu73FHSNy0KDx0A@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-X-Rspamd-Queue-Id: A7D123EC62
-X-Spamd-Bar: --------
-X-Spamd-Result: default: False [-8.00 / 15.00];
-	REPLY(-4.00)[];
+Content-Disposition: inline
+In-Reply-To: <CAF6AEGuqgWi0T=B9cb+Uy7aoWBPGQmZ3JbwFcK_45GbkY2nHPg@mail.gmail.com>
+X-Operating-System: Linux phenom 5.19.0-2-amd64 
+X-Rspamd-Queue-Id: 232A13EB80
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.30 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
+	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
 	FROM_EQ_ENVFROM(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_TO(0.00)[gmail.com];
+	R_SPF_NA(0.00)[no SPF record];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[outlook.com,collabora.com,redhat.com,arm.com,google.com,ti.com,android.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	NEURAL_HAM(-0.00)[-0.993];
-	DKIM_TRACE(0.00)[linaro.org:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.171:from];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[ndufresne.ca,amd.com,chromium.org,pengutronix.de,fooishbar.org,gmail.com,linaro.org,ffwll.ch,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	RCPT_COUNT_TWELVE(0.00)[12];
+	DKIM_TRACE(0.00)[ffwll.ch:+];
+	RCVD_COUNT_THREE(0.00)[3];
 	FROM_HAS_DN(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	ARC_NA(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2]
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[212.51.149.33:received];
+	DMARC_NA(0.00)[ffwll.ch];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.221.43:from]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: EDFPMXG5FVAVDXSV42R7MMDBONN75GLI
-X-Message-ID-Hash: EDFPMXG5FVAVDXSV42R7MMDBONN75GLI
-X-MailFrom: sumit.semwal@linaro.org
+Message-ID-Hash: JWPTPZCZULXKGDCPU7LZMFAV4EWAKDYA
+X-Message-ID-Hash: JWPTPZCZULXKGDCPU7LZMFAV4EWAKDYA
+X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Dawei Li <set_pte_at@outlook.com>, benjamin.gaignard@collabora.com, labbott@redhat.com, Brian.Starkey@arm.com, jstultz@google.com, afd@ti.com, sspatil@android.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+CC: Nicolas Dufresne <nicolas@ndufresne.ca>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Tomasz Figa <tfiga@chromium.org>, Daniel Stone <daniel@fooishbar.org>, ppaalanen@gmail.com, sumit.semwal@linaro.org, daniel@ffwll.ch, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4] dma-buf: fix racing conflict of dma_heap_add()
+Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EDFPMXG5FVAVDXSV42R7MMDBONN75GLI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JWPTPZCZULXKGDCPU7LZMFAV4EWAKDYA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-SGkgRGF3ZWkgTGksDQoNCk9uIE1vbiwgMjEgTm92IDIwMjIgYXQgMjM6NTMsIENocmlzdGlhbiBL
-w7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4gd3JvdGU6DQo+DQo+IEhpIERhd2VpLA0K
-Pg0KPiBmcm9tIHRoZSB0ZWNobmljYWwgZGVzY3JpcHRpb24sIGNvZGluZyBzdHlsZSBldGMuLiBp
-dCBsb29rcyBjbGVhbiB0byBtZSwNCj4gYnV0IEknbSB0aGUgY29tcGxldGVseSB3cm9uZyBwZXJz
-b24gdG8gYXNrIGZvciBhIGJhY2tncm91bmQgY2hlY2suDQo+DQo+IEkgaGF2ZSBhIGhpZ2ggbGV2
-ZWwgdW5kZXJzdGFuZGluZyBvZiBob3cgZG1hLWhlYXBzIHdvcmssIGJ1dCBub3QgYQ0KPiBzaW5n
-bGUgbGluZSBvZiB0aGlzIGNvZGUgaXMgZnJvbSBtZS4NCj4NCj4gRmVlbCBmcmVlIHRvIGFkZCBt
-eSBBY2tlZC1ieSwgYnV0IExhdXJhLCBKb2huIGFuZCBvdGhlcnMgZG8geW91IGhhdmUgYW55DQo+
-IG9waW5pb24/DQo+DQo+IFJlZ2FyZHMsDQo+IENocmlzdGlhbi4NCj4NCj4gQW0gMjEuMTEuMjIg
-dW0gMTY6Mjggc2NocmllYiBEYXdlaSBMaToNCj4gPiBPbiBTYXQsIE5vdiAwNSwgMjAyMiBhdCAx
-MjowNTozNkFNICswODAwLCBEYXdlaSBMaSB3cm90ZToNCj4gPg0KPiA+IEhpIENocmlzdGlhbiwN
-Cj4gPiBNYXkgSSBoYXZlIHlvdXIgb3BpbmlvbiBvbiB0aGlzIGNoYW5nZT8NCj4gPg0KPiA+IFRo
-YW5rcywNCj4gPiBEYXdlaQ0KPiA+DQo+ID4+IFJhY2luZyBjb25mbGljdCBjb3VsZCBiZToNCj4g
-Pj4gdGFzayBBICAgICAgICAgICAgICAgICB0YXNrIEINCj4gPj4gbGlzdF9mb3JfZWFjaF9lbnRy
-eQ0KPiA+PiBzdHJjbXAoaC0+bmFtZSkpDQo+ID4+ICAgICAgICAgICAgICAgICAgICAgICAgIGxp
-c3RfZm9yX2VhY2hfZW50cnkNCj4gPj4gICAgICAgICAgICAgICAgICAgICAgICAgc3RyY21wKGgt
-Pm5hbWUpDQo+ID4+IGt6YWxsb2MgICAgICAgICAgICAgICAga3phbGxvYw0KPiA+PiAuLi4uLi4g
-ICAgICAgICAgICAgICAgIC4uLi4uDQo+ID4+IGRldmljZV9jcmVhdGUgICAgICAgICAgZGV2aWNl
-X2NyZWF0ZQ0KPiA+PiBsaXN0X2FkZA0KPiA+PiAgICAgICAgICAgICAgICAgICAgICAgICBsaXN0
-X2FkZA0KPiA+Pg0KPiA+PiBUaGUgcm9vdCBjYXVzZSBpcyB0aGF0IHRhc2sgQiBoYXMgbm8gaWRl
-YSBhYm91dCB0aGUgZmFjdCBzb21lb25lDQo+ID4+IGVsc2UoQSkgaGFzIGluc2VydGVkIGhlYXAg
-d2l0aCBzYW1lIG5hbWUgd2hlbiBpdCBjYWxscyBsaXN0X2FkZCwNCj4gPj4gc28gYSBwb3RlbnRp
-YWwgY29sbGlzaW9uIG9jY3Vycy4NCj4gPj4NCj4gPj4gRml4ZXM6IGMwMmE4MWZiYTc0ZiAoImRt
-YS1idWY6IEFkZCBkbWEtYnVmIGhlYXBzIGZyYW1ld29yayIpDQo+ID4+IFNpZ25lZC1vZmYtYnk6
-IERhd2VpIExpIDxzZXRfcHRlX2F0QG91dGxvb2suY29tPg0KDQpMb29rcyBnb29kIHRvIG1lIGFz
-IHdlbGwuIEkgd2lsbCBhcHBseSBpdCBvdmVyIG9uIGRybS1taXNjLg0KDQpCZXN0LA0KU3VtaXQu
-DQo+ID4+IC0tLQ0KPiA+PiB2MTogaHR0cHM6Ly9uYW0xMS5zYWZlbGlua3MucHJvdGVjdGlvbi5v
-dXRsb29rLmNvbS8/dXJsPWh0dHBzJTNBJTJGJTJGbG9yZS5rZXJuZWwub3JnJTJGYWxsJTJGVFlD
-UDI4Nk1CMjMyMzk1MDE5N0Y2MEZDMzQ3MzEyM0I3Q0EzNDklNDBUWUNQMjg2TUIyMzIzLkpQTlAy
-ODYuUFJPRC5PVVRMT09LLkNPTSUyRiZhbXA7ZGF0YT0wNSU3QzAxJTdDY2hyaXN0aWFuLmtvZW5p
-ZyU0MGFtZC5jb20lN0MxOTg5ZjMxMjU3ZmM0NThhMjdjNTA4ZGFjYmQ1MDc4ZSU3QzNkZDg5NjFm
-ZTQ4ODRlNjA4ZTExYTgyZDk5NGUxODNkJTdDMCU3QzAlN0M2MzgwNDY0MTM3MDc0NDMyMDMlN0NV
-bmtub3duJTdDVFdGcGJHWnNiM2Q4ZXlKV0lqb2lNQzR3TGpBd01EQWlMQ0pRSWpvaVYybHVNeklp
-TENKQlRpSTZJazFoYVd3aUxDSlhWQ0k2TW4wJTNEJTdDMzAwMCU3QyU3QyU3QyZhbXA7c2RhdGE9
-T1dQVVBySUhHbnp3WHlRRTRXbEl0aFRod1N1U0syeTNFcTJXcTV6QXpibyUzRCZhbXA7cmVzZXJ2
-ZWQ9MA0KPiA+PiB2MS0+djI6IE5hcnJvdyBkb3duIGxvY2tpbmcgc2NvcGUsIGNoZWNrIHRoZSBl
-eGlzdGVuY2Ugb2YgaGVhcCBiZWZvcmUNCj4gPj4gaW5zZXJ0aW9uLCBhcyBzdWdnZXN0ZWQgYnkg
-QW5kcmV3IERhdmlzLg0KPiA+PiB2Mi0+djM6IFJlbW92ZSBkb3VibGUgY2hlY2tpbmcuDQo+ID4+
-IHYzLT52NDogTWlub3IgY29kaW5nIHN0eWxlIGFuZCBwYXRjaCBmb3JtYXR0aW5nIGFkanVzdG1l
-bnQuDQo+ID4+IC0tLQ0KPiA+PiAgIGRyaXZlcnMvZG1hLWJ1Zi9kbWEtaGVhcC5jIHwgMjggKysr
-KysrKysrKysrKysrLS0tLS0tLS0tLS0tLQ0KPiA+PiAgIDEgZmlsZSBjaGFuZ2VkLCAxNSBpbnNl
-cnRpb25zKCspLCAxMyBkZWxldGlvbnMoLSkNCj4gPj4NCj4gPj4gZGlmZiAtLWdpdCBhL2RyaXZl
-cnMvZG1hLWJ1Zi9kbWEtaGVhcC5jIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1oZWFwLmMNCj4gPj4g
-aW5kZXggOGY1ODQ4YWExNDRmLi41OWQxNTg4NzNmNGMgMTAwNjQ0DQo+ID4+IC0tLSBhL2RyaXZl
-cnMvZG1hLWJ1Zi9kbWEtaGVhcC5jDQo+ID4+ICsrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtaGVh
-cC5jDQo+ID4+IEBAIC0yMzMsMTggKzIzMyw2IEBAIHN0cnVjdCBkbWFfaGVhcCAqZG1hX2hlYXBf
-YWRkKGNvbnN0IHN0cnVjdCBkbWFfaGVhcF9leHBvcnRfaW5mbyAqZXhwX2luZm8pDQo+ID4+ICAg
-ICAgICAgICAgICByZXR1cm4gRVJSX1BUUigtRUlOVkFMKTsNCj4gPj4gICAgICB9DQo+ID4+DQo+
-ID4+IC0gICAgLyogY2hlY2sgdGhlIG5hbWUgaXMgdW5pcXVlICovDQo+ID4+IC0gICAgbXV0ZXhf
-bG9jaygmaGVhcF9saXN0X2xvY2spOw0KPiA+PiAtICAgIGxpc3RfZm9yX2VhY2hfZW50cnkoaCwg
-JmhlYXBfbGlzdCwgbGlzdCkgew0KPiA+PiAtICAgICAgICAgICAgaWYgKCFzdHJjbXAoaC0+bmFt
-ZSwgZXhwX2luZm8tPm5hbWUpKSB7DQo+ID4+IC0gICAgICAgICAgICAgICAgICAgIG11dGV4X3Vu
-bG9jaygmaGVhcF9saXN0X2xvY2spOw0KPiA+PiAtICAgICAgICAgICAgICAgICAgICBwcl9lcnIo
-ImRtYV9oZWFwOiBBbHJlYWR5IHJlZ2lzdGVyZWQgaGVhcCBuYW1lZCAlc1xuIiwNCj4gPj4gLSAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIGV4cF9pbmZvLT5uYW1lKTsNCj4gPj4gLSAgICAgICAg
-ICAgICAgICAgICAgcmV0dXJuIEVSUl9QVFIoLUVJTlZBTCk7DQo+ID4+IC0gICAgICAgICAgICB9
-DQo+ID4+IC0gICAgfQ0KPiA+PiAtICAgIG11dGV4X3VubG9jaygmaGVhcF9saXN0X2xvY2spOw0K
-PiA+PiAtDQo+ID4+ICAgICAgaGVhcCA9IGt6YWxsb2Moc2l6ZW9mKCpoZWFwKSwgR0ZQX0tFUk5F
-TCk7DQo+ID4+ICAgICAgaWYgKCFoZWFwKQ0KPiA+PiAgICAgICAgICAgICAgcmV0dXJuIEVSUl9Q
-VFIoLUVOT01FTSk7DQo+ID4+IEBAIC0yODMsMTMgKzI3MSwyNyBAQCBzdHJ1Y3QgZG1hX2hlYXAg
-KmRtYV9oZWFwX2FkZChjb25zdCBzdHJ1Y3QgZG1hX2hlYXBfZXhwb3J0X2luZm8gKmV4cF9pbmZv
-KQ0KPiA+PiAgICAgICAgICAgICAgZXJyX3JldCA9IEVSUl9DQVNUKGRldl9yZXQpOw0KPiA+PiAg
-ICAgICAgICAgICAgZ290byBlcnIyOw0KPiA+PiAgICAgIH0NCj4gPj4gLSAgICAvKiBBZGQgaGVh
-cCB0byB0aGUgbGlzdCAqLw0KPiA+PiArDQo+ID4+ICAgICAgbXV0ZXhfbG9jaygmaGVhcF9saXN0
-X2xvY2spOw0KPiA+PiArICAgIC8qIGNoZWNrIHRoZSBuYW1lIGlzIHVuaXF1ZSAqLw0KPiA+PiAr
-ICAgIGxpc3RfZm9yX2VhY2hfZW50cnkoaCwgJmhlYXBfbGlzdCwgbGlzdCkgew0KPiA+PiArICAg
-ICAgICAgICAgaWYgKCFzdHJjbXAoaC0+bmFtZSwgZXhwX2luZm8tPm5hbWUpKSB7DQo+ID4+ICsg
-ICAgICAgICAgICAgICAgICAgIG11dGV4X3VubG9jaygmaGVhcF9saXN0X2xvY2spOw0KPiA+PiAr
-ICAgICAgICAgICAgICAgICAgICBwcl9lcnIoImRtYV9oZWFwOiBBbHJlYWR5IHJlZ2lzdGVyZWQg
-aGVhcCBuYW1lZCAlc1xuIiwNCj4gPj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgIGV4cF9p
-bmZvLT5uYW1lKTsNCj4gPj4gKyAgICAgICAgICAgICAgICAgICAgZXJyX3JldCA9IEVSUl9QVFIo
-LUVJTlZBTCk7DQo+ID4+ICsgICAgICAgICAgICAgICAgICAgIGdvdG8gZXJyMzsNCj4gPj4gKyAg
-ICAgICAgICAgIH0NCj4gPj4gKyAgICB9DQo+ID4+ICsNCj4gPj4gKyAgICAvKiBBZGQgaGVhcCB0
-byB0aGUgbGlzdCAqLw0KPiA+PiAgICAgIGxpc3RfYWRkKCZoZWFwLT5saXN0LCAmaGVhcF9saXN0
-KTsNCj4gPj4gICAgICBtdXRleF91bmxvY2soJmhlYXBfbGlzdF9sb2NrKTsNCj4gPj4NCj4gPj4g
-ICAgICByZXR1cm4gaGVhcDsNCj4gPj4NCj4gPj4gK2VycjM6DQo+ID4+ICsgICAgZGV2aWNlX2Rl
-c3Ryb3koZG1hX2hlYXBfY2xhc3MsIGhlYXAtPmhlYXBfZGV2dCk7DQo+ID4+ICAgZXJyMjoNCj4g
-Pj4gICAgICBjZGV2X2RlbCgmaGVhcC0+aGVhcF9jZGV2KTsNCj4gPj4gICBlcnIxOg0KPiA+PiAt
-LQ0KPiA+PiAyLjI1LjENCj4gPj4NCj4NCg0KDQotLSANClRoYW5rcyBhbmQgcmVnYXJkcywNCg0K
-U3VtaXQgU2Vtd2FsIChoZSAvIGhpbSkNClRlY2ggTGVhZCAtIExDRywgVmVydGljYWwgVGVjaG5v
-bG9naWVzDQpMaW5hcm8ub3JnIOKUgiBPcGVuIHNvdXJjZSBzb2Z0d2FyZSBmb3IgQVJNIFNvQ3MN
-Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1t
-bS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1
-bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGlu
-YXJvLm9yZwo=
+On Fri, Nov 18, 2022 at 11:32:19AM -0800, Rob Clark wrote:
+> On Thu, Nov 17, 2022 at 7:38 AM Nicolas Dufresne <nicolas@ndufresne.ca> w=
+rote:
+> >
+> > Le jeudi 17 novembre 2022 =E0 13:10 +0100, Christian K=F6nig a =E9crit :
+> > > > > DMA-Buf let's the exporter setup the DMA addresses the importer u=
+ses to
+> > > > > be able to directly decided where a certain operation should go. =
+E.g. we
+> > > > > have cases where for example a P2P write doesn't even go to memor=
+y, but
+> > > > > rather a doorbell BAR to trigger another operation. Throwing in C=
+PU
+> > > > > round trips for explicit ownership transfer completely breaks that
+> > > > > concept.
+> > > > It sounds like we should have a dma_dev_is_coherent_with_dev() which
+> > > > accepts two (or an array?) of devices and tells the caller whether =
+the
+> > > > devices need explicit ownership transfer.
+> > >
+> > > No, exactly that's the concept I'm pushing back on very hard here.
+> > >
+> > > In other words explicit ownership transfer is not something we would
+> > > want as requirement in the framework, cause otherwise we break tons of
+> > > use cases which require concurrent access to the underlying buffer.
+> >
+> > I'm not pushing for this solution, but really felt the need to correct =
+you here.
+> > I have quite some experience with ownership transfer mechanism, as this=
+ is how
+> > GStreamer framework works since 2000. Concurrent access is a really com=
+mon use
+> > cases and it is quite well defined in that context. The bracketing syst=
+em (in
+> > this case called map() unmap(), with flag stating the usage intention l=
+ike reads
+> > and write) is combined the the refcount. The basic rules are simple:
+>=20
+> This is all CPU oriented, I think Christian is talking about the case
+> where ownership transfer happens without CPU involvement, such as via
+> GPU waiting on a fence
+
+Yeah for pure device2device handover the rule pretty much has to be that
+any coherency management that needs to be done must be done from the
+device side (flushing device side caches and stuff like that) only. But
+under the assumption that _all_ cpu side management has been done already
+before the first device access started.
+
+And then the map/unmap respectively begin/end_cpu_access can be used what
+it was meant for with cpu side invalidation/flushing and stuff like that,
+while having pretty clear handover/ownership rules and hopefully not doing
+no unecessary flushes. And all that while allowing device acces to be
+pipelined. Worst case the exporter has to insert some pipelined cache
+flushes as a dma_fence pipelined work of its own between the device access
+when moving from one device to the other. That last part sucks a bit right
+now, because we don't have any dma_buf_attachment method which does this
+syncing without recreating the mapping, but in reality this is solved by
+caching mappings in the exporter (well dma-buf layer) nowadays.
+
+True concurrent access like vk/compute expects is still a model that
+dma-buf needs to support on top, but that's a special case and pretty much
+needs hw that supports such concurrent access without explicit handover
+and fencing.
+
+Aside from some historical accidents and still a few warts, I do think
+dma-buf does support both of these models. Of course in the case of
+gpu/drm drivers, userspace must know whats possible and act accordingly,
+otherwise you just get to keep all the pieces.
+-Daniel
+--=20
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
