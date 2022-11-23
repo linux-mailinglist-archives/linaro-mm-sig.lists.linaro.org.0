@@ -2,178 +2,175 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id E0A306361ED
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 15:35:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BED36362B0
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 16:04:39 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E707A3EE66
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 14:35:14 +0000 (UTC)
-Received: from mail-ed1-f48.google.com (mail-ed1-f48.google.com [209.85.208.48])
-	by lists.linaro.org (Postfix) with ESMTPS id B2F3F3ECED
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 14:35:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 268B33EE89
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 15:04:38 +0000 (UTC)
+Received: from mail-qv1-f49.google.com (mail-qv1-f49.google.com [209.85.219.49])
+	by lists.linaro.org (Postfix) with ESMTPS id F400F3ECED
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 15:04:28 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b=LCgYuwgH;
-	spf=none (lists.linaro.org: domain of daniel.vetter@ffwll.ch has no SPF policy when checking 209.85.208.48) smtp.mailfrom=daniel.vetter@ffwll.ch;
+	dkim=pass header.d=ziepe.ca header.s=google header.b="KbvhaD/O";
+	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.219.49 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
 	dmarc=none
-Received: by mail-ed1-f48.google.com with SMTP id l11so25091564edb.4
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 06:35:06 -0800 (PST)
+Received: by mail-qv1-f49.google.com with SMTP id h10so12282241qvq.7
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 07:04:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=GPLrYyNidI//auSaKwI6GvkJsgMtKAF3UqEyle3yeOc=;
-        b=LCgYuwgHx1K9mYWM1mR96CB8NCe3P5sA090XVr26hcLHmss5Pn5J/t2cO8h6lx4fxM
-         NrVrC9uNEWT85JXwD2PphfxsHBPSLrKCtF+8CDf7CfTVxK+1ZAfjuESMhMdxfgz16nQC
-         OhdLPv1zPYaj+Xd3f+P4oBTT3hHdUfKNrSlak=
+        d=ziepe.ca; s=google;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=FBEH7FU3hds/tvKbXdMlXPtYdkYQK2zhDrcZFkrz0mE=;
+        b=KbvhaD/OFUhW+1OPwGfqfp9mQ5zjYM5Yc3gcYSNfC0GNXLuvDL6Tt9tkh6TO6Q/M+e
+         MPgnHS9/c+nXmkVvB0y+LvWp1Yg4X/GBbBaNettvziGu79P/qHdJWhmD1yDQsjIOPzfe
+         HX1V+FBxFpvFta6LJiUWXtALCwxl1RaSpmdhNQUSaBXPCKJ7BUeKj8L5AfxcGhQYXt9r
+         4Y0uneLWW86LvWjmM6Z8keD/8toP38iA5CPOlGq0eqX859PaMBK4R6S9XK+13DwqF0U2
+         cIjGBN2XTpw58MVf2q4r64z5xLMIIFSO6I57I/RmQdleSVDnMQ1IAT+TJruJ+BHv3Cf5
+         23uA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=GPLrYyNidI//auSaKwI6GvkJsgMtKAF3UqEyle3yeOc=;
-        b=v26/zySWKW4AptULTzu0O3PLHF2e/rvvuW+FGZoDvaHRKXNvmQM+HXOTE38/M7P+f+
-         jYtWAaRocQQIL8PFB+wz8BvKpQQR4+kHoIOcu20oSg6L/MhyffUPq9NwDDQMdbjiZ7jN
-         9MWU8KSHZ8thf4KPAlYqCeRvA2rZT/BnQrDGBJe1DLVZMC6DNESoLphGFjVUDUunlpTP
-         vHXDRDLMhPPTP7r5GOOPQVUuCYIc1ZiKUCphYlOrPTBqsuWVM1nCAiiRVnfHSkDFZUf7
-         UFw5T/vUTC0mkh1KIXEal8wI5o6MtYYDKp0yEPXJLSDvHNgZhVOqFHHC26Krv1cuA9NM
-         sLDQ==
-X-Gm-Message-State: ANoB5pnjOa+tL9odoskUfhQ5FtomePzn1QlWf0zWnkvHnIZkU94e1jbE
-	n90ww1xJiti62uMb40oAex0Lb56hjOQ/suhj6lpKHw==
-X-Google-Smtp-Source: AA0mqf7s0gxKVbGsXYgPrF7eJBIPRffTj7CXpmrJ+fnJeN9pvA50Kh54G/8S5Pm78H/FeFz/JpA02ODuJr2OR5DElm8=
-X-Received: by 2002:a05:6402:d69:b0:46a:392b:2440 with SMTP id
- ec41-20020a0564020d6900b0046a392b2440mr2032045edb.341.1669214105779; Wed, 23
- Nov 2022 06:35:05 -0800 (PST)
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=FBEH7FU3hds/tvKbXdMlXPtYdkYQK2zhDrcZFkrz0mE=;
+        b=oKu0D6xyRdGJdXW15+WHmq3iwclkUPN0ra7wcnCJiJfMP7oM/yzKYiI+75bRueXi7Q
+         hGsMMZIuS24ZSDna0lIcId1SKFy1q7R7Bou1pwE2Bg2KlheSVdfupDDDAYYSW2FzWMFN
+         /+QVGFNmoK9EPybKiXHW8aUhw24Zsr8rRLO8l2FzYANWkeAVOQHQJQlrNWHrCUj0ZYua
+         16iqOU1MvEFCBk+cDC3YEbae6PdHMnB+qN1NeTsMVn1OWlAMIQvHoolTiT4t8nwQVcHu
+         J4Th843faAplovDe+otBzdv/6wBYPu/zWR85XikdHj8YmQRfL3MaJ3xR4BdXSFHz4jzP
+         ZShg==
+X-Gm-Message-State: ANoB5pkJW1thgz3WKn9Rh0oJLnOg5L46P8SVjs8Cpn2l9d0pIMJwCBMU
+	RX/8euUorgPacMb/bDxBNz+cGNdAKRj9ag==
+X-Google-Smtp-Source: AA0mqf56pidAa3YTB06LY1QYSMl3063l/28XS7JhvQ9qi9gepPYorNcNhgDN/VcYdvMsrmMwORDsaQ==
+X-Received: by 2002:ad4:5445:0:b0:4c6:62af:5e14 with SMTP id h5-20020ad45445000000b004c662af5e14mr10912011qvt.95.1669215868434;
+        Wed, 23 Nov 2022 07:04:28 -0800 (PST)
+Received: from ziepe.ca (hlfxns017vw-47-55-122-23.dhcp-dynamic.fibreop.ns.bellaliant.net. [47.55.122.23])
+        by smtp.gmail.com with ESMTPSA id ey10-20020a05622a4c0a00b003a5fb681ae7sm9891959qtb.3.2022.11.23.07.04.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 23 Nov 2022 07:04:27 -0800 (PST)
+Received: from jgg by wakko with local (Exim 4.95)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1oxrIY-00AMYp-BS;
+	Wed, 23 Nov 2022 11:04:26 -0400
+Date: Wed, 23 Nov 2022 11:04:26 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+Message-ID: <Y342emkzKHXLQvsN@ziepe.ca>
+References: <3d8607b4-973d-945d-c184-260157ade7c3@amd.com>
+ <CAKMK7uHVGgGHTiXYOfseXXda2Ug992nYvhPsL+4z18ssqeHXHQ@mail.gmail.com>
+ <b05e6091-4e07-1e32-773d-f603ac9ac98b@gmail.com>
+ <CAKMK7uFjmzewqv3r4hL9hvLADwV536n2n6xbAWaUvmAcStr5KQ@mail.gmail.com>
+ <Y34WI9SZdiH/p1tA@ziepe.ca>
+ <f8f844a5-0910-d19a-5aea-df7a1d83b1d3@gmail.com>
+ <Y34XvmtHfb4ZwopN@ziepe.ca>
+ <dc2a9d7f-192b-e9d8-b1d1-3b868cb1fd44@gmail.com>
+ <Y34gBUl0m+j1JdFk@ziepe.ca>
+ <CAKMK7uHWyOcZ77-+GY7hxFUA65uQYFe0fw2rww6Y-rLXvHFAYw@mail.gmail.com>
 MIME-Version: 1.0
-References: <Y30kK6dsssSLJVgp@ziepe.ca> <CAKMK7uFQQkG82PzuSTGQTnN3ZNps5N_4TjR5NRWo0LaJkEaNew@mail.gmail.com>
- <3d8607b4-973d-945d-c184-260157ade7c3@amd.com> <CAKMK7uHVGgGHTiXYOfseXXda2Ug992nYvhPsL+4z18ssqeHXHQ@mail.gmail.com>
- <b05e6091-4e07-1e32-773d-f603ac9ac98b@gmail.com> <CAKMK7uFjmzewqv3r4hL9hvLADwV536n2n6xbAWaUvmAcStr5KQ@mail.gmail.com>
- <Y34WI9SZdiH/p1tA@ziepe.ca> <f8f844a5-0910-d19a-5aea-df7a1d83b1d3@gmail.com>
- <Y34XvmtHfb4ZwopN@ziepe.ca> <dc2a9d7f-192b-e9d8-b1d1-3b868cb1fd44@gmail.com> <Y34gBUl0m+j1JdFk@ziepe.ca>
-In-Reply-To: <Y34gBUl0m+j1JdFk@ziepe.ca>
-From: Daniel Vetter <daniel.vetter@ffwll.ch>
-Date: Wed, 23 Nov 2022 15:34:54 +0100
-Message-ID: <CAKMK7uEzaUjroODbWe4DtxHQ+gmr7_DVK+fUJjAgMsgP61uGSQ@mail.gmail.com>
-To: Jason Gunthorpe <jgg@ziepe.ca>
-X-Rspamd-Queue-Id: B2F3F3ECED
-X-Spamd-Bar: ---------
-X-Spamd-Result: default: False [-9.30 / 15.00];
+Content-Disposition: inline
+In-Reply-To: <CAKMK7uHWyOcZ77-+GY7hxFUA65uQYFe0fw2rww6Y-rLXvHFAYw@mail.gmail.com>
+X-Rspamd-Queue-Id: F400F3ECED
+X-Spamd-Bar: -----------
+X-Spamd-Result: default: False [-11.50 / 15.00];
 	REPLY(-4.00)[];
-	DWL_DNSWL_HI(-3.50)[ffwll.ch:dkim];
-	BAYES_HAM(-3.00)[100.00%];
+	DWL_DNSWL_HI(-3.50)[ziepe.ca:dkim];
+	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
+	RCVD_IN_DNSWL_HI(-1.00)[47.55.122.23:received,209.85.219.49:from];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ffwll.ch:url,ffwll.ch:dkim,nvidia.com:email];
-	R_SPF_NA(0.00)[no SPF record];
-	NEURAL_HAM(-0.00)[-0.997];
-	FREEMAIL_CC(0.00)[gmail.com,amd.com,lists.freedesktop.org,suse.de,google.com,infradead.org,linaro.org,intel.com,vger.kernel.org,lists.linaro.org];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.48:from];
-	DMARC_NA(0.00)[ffwll.ch];
-	TAGGED_RCPT(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[ffwll.ch:+];
+	DMARC_NA(0.00)[ziepe.ca];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_TLS_LAST(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ziepe.ca:dkim,mail-qv1-f49.google.com:rdns,mail-qv1-f49.google.com:helo];
+	FREEMAIL_CC(0.00)[gmail.com,amd.com,lists.freedesktop.org,suse.de,google.com,infradead.org,linaro.org,intel.com,vger.kernel.org,lists.linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.49:from];
+	NEURAL_HAM(-0.00)[-0.999];
+	TAGGED_RCPT(0.00)[];
+	URIBL_BLOCKED(0.00)[ziepe.ca:dkim];
 	ARC_NA(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	DKIM_TRACE(0.00)[ziepe.ca:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	URIBL_BLOCKED(0.00)[intel.com:email,mail-ed1-f48.google.com:rdns,mail-ed1-f48.google.com:helo,ziepe.ca:email];
-	TO_DN_SOME(0.00)[]
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 5UH4OD3LXIMVWZOKXGB4SYHMCSDJYD65
-X-Message-ID-Hash: 5UH4OD3LXIMVWZOKXGB4SYHMCSDJYD65
-X-MailFrom: daniel.vetter@ffwll.ch
+Message-ID-Hash: 3EN4DDXDS4AGWZ3P4HACH2COGOASOI22
+X-Message-ID-Hash: 3EN4DDXDS4AGWZ3P4HACH2COGOASOI22
+X-MailFrom: jgg@ziepe.ca
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, DRI Development <dri-devel@lists.freedesktop.org>, Intel Graphics Development <intel-gfx@lists.freedesktop.org>, Thomas Zimmermann <tzimmermann@suse.de>, Suren Baghdasaryan <surenb@google.com>, Matthew Wilcox <willy@infradead.org>, John Stultz <john.stultz@linaro.org>, Daniel Vetter <daniel.vetter@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, DRI Development <dri-devel@lists.freedesktop.org>, Intel Graphics Development <intel-gfx@lists.freedesktop.org>, Thomas Zimmermann <tzimmermann@suse.de>, Suren Baghdasaryan <surenb@google.com>, Matthew Wilcox <willy@infradead.org>, John Stultz <john.stultz@linaro.org>, Daniel Vetter <daniel.vetter@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: Require VM_PFNMAP vma for mmap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5UH4OD3LXIMVWZOKXGB4SYHMCSDJYD65/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3EN4DDXDS4AGWZ3P4HACH2COGOASOI22/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gV2VkLCAyMyBOb3YgMjAyMiBhdCAxNDoyOCwgSmFzb24gR3VudGhvcnBlIDxqZ2dAemllcGUu
-Y2E+IHdyb3RlOg0KPg0KPiBPbiBXZWQsIE5vdiAyMywgMjAyMiBhdCAwMjoxMjoyNVBNICswMTAw
-LCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPiA+IEFtIDIzLjExLjIyIHVtIDEzOjUzIHNjaHJp
-ZWIgSmFzb24gR3VudGhvcnBlOg0KPiA+ID4gT24gV2VkLCBOb3YgMjMsIDIwMjIgYXQgMDE6NDk6
-NDFQTSArMDEwMCwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToNCj4gPiA+ID4gQW0gMjMuMTEuMjIg
-dW0gMTM6NDYgc2NocmllYiBKYXNvbiBHdW50aG9ycGU6DQo+ID4gPiA+ID4gT24gV2VkLCBOb3Yg
-MjMsIDIwMjIgYXQgMTE6MDY6NTVBTSArMDEwMCwgRGFuaWVsIFZldHRlciB3cm90ZToNCj4gPiA+
-ID4gPg0KPiA+ID4gPiA+ID4gPiBNYXliZSBhIEdGUCBmbGFnIHRvIHNldCB0aGUgcGFnZSByZWZl
-cmVuY2UgY291bnQgdG8gemVybyBvciBzb21ldGhpbmcNCj4gPiA+ID4gPiA+ID4gbGlrZSB0aGlz
-Pw0KPiA+ID4gPiA+ID4gSG0geWVhaCB0aGF0IG1pZ2h0IHdvcmsuIEknbSBub3Qgc3VyZSB3aGF0
-IGl0IHdpbGwgYWxsIGJyZWFrIHRob3VnaD8NCj4gPiA+ID4gPiA+IEFuZCB3ZSdkIG5lZWQgdG8g
-bWFrZSBzdXJlIHRoYXQgdW5kZXJmbG93aW5nIHRoZSBwYWdlIHJlZmNvdW50IGRpZXMgaW4NCj4g
-PiA+ID4gPiA+IGEgYmFja3RyYWNlLg0KPiA+ID4gPiA+IE11Y2tpbmcgd2l0aCB0aGUgcmVmY291
-bnQgbGlrZSB0aGlzIHRvIHByb3RlY3QgYWdhaW5zdCBjcmF6eSBvdXQgb2YNCj4gPiA+ID4gPiB0
-cmVlIGRyaXZlcyBzZWVtcyBob3JyaWJsZS4uDQo+ID4gPiA+IFdlbGwgbm90IG9ubHkgb3V0IG9m
-IHRyZWUgZHJpdmVycy4gVGhlIGludHJlZSBLVk0gZ290IHRoYXQgaG9ycmlibGUNCj4gPiA+ID4g
-d3JvbmcgYXMgd2VsbCwgdGhvc2Ugd2hlcmUgdGhlIGxhdGVzdCBndXlzIGNvbXBsYWluaW5nIGFi
-b3V0IGl0Lg0KPiA+ID4ga3ZtIHdhcyB0YWtpbmcgcmVmcyBvbiBzcGVjaWFsIFBURXM/IFRoYXQg
-c2VlbXMgcmVhbGx5IHVubGlrZWx5Pw0KPiA+DQo+ID4gV2VsbCB0aGVuIGxvb2sgYXQgdGhpcyBj
-b2RlIGhlcmU6DQo+ID4NCj4gPiBjb21taXQgYWRkNmEwY2QxYzViYTUxYjIwMWUxMzYxYjA1YTVk
-ZjgxNzA4MzYxOA0KPiA+IEF1dGhvcjogUGFvbG8gQm9uemluaSA8cGJvbnppbmlAcmVkaGF0LmNv
-bT4NCj4gPiBEYXRlOiAgIFR1ZSBKdW4gNyAxNzo1MToxOCAyMDE2ICswMjAwDQo+ID4NCj4gPiAg
-ICAgS1ZNOiBNTVU6IHRyeSB0byBmaXggdXAgcGFnZSBmYXVsdHMgYmVmb3JlIGdpdmluZyB1cA0K
-PiA+DQo+ID4gICAgIFRoZSB2R1BVIGZvbGtzIHdvdWxkIGxpa2UgdG8gdHJhcCB0aGUgZmlyc3Qg
-YWNjZXNzIHRvIGEgQkFSIGJ5IHNldHRpbmcNCj4gPiAgICAgdm1fb3BzIG9uIHRoZSBWTUFzIHBy
-b2R1Y2VkIGJ5IG1tYXAtaW5nIGEgVkZJTyBkZXZpY2UuICBUaGUgZmF1bHQNCj4gPiBoYW5kbGVy
-DQo+ID4gICAgIHRoZW4gY2FuIHVzZSByZW1hcF9wZm5fcmFuZ2UgdG8gcGxhY2Ugc29tZSBub24t
-cmVzZXJ2ZWQgcGFnZXMgaW4gdGhlDQo+ID4gVk1BLg0KPiA+DQo+ID4gICAgIFRoaXMga2luZCBv
-ZiBWTV9QRk5NQVAgbWFwcGluZyBpcyBub3QgaGFuZGxlZCBieSBLVk0sIGJ1dCBmb2xsb3dfcGZu
-DQo+ID4gICAgIGFuZCBmaXh1cF91c2VyX2ZhdWx0IHRvZ2V0aGVyIGhlbHAgc3VwcG9ydGluZyBp
-dC4gIFRoZSBwYXRjaCBhbHNvDQo+ID4gc3VwcG9ydHMNCj4gPiAgICAgVk1fTUlYRURNQVAgdm1h
-cyB3aGVyZSB0aGUgcGZucyBhcmUgbm90IHJlc2VydmVkIGFuZCB0aHVzIHN1YmplY3QgdG8NCj4g
-PiAgICAgcmVmZXJlbmNlIGNvdW50aW5nLg0KPiA+DQo+ID4gICAgIENjOiBYaWFvIEd1YW5ncm9u
-ZyA8Z3Vhbmdyb25nLnhpYW9AbGludXguaW50ZWwuY29tPg0KPiA+ICAgICBDYzogQW5kcmVhIEFy
-Y2FuZ2VsaSA8YWFyY2FuZ2VAcmVkaGF0LmNvbT4NCj4gPiAgICAgQ2M6IFJhZGltIEtyxI1tw6HF
-mSA8cmtyY21hckByZWRoYXQuY29tPg0KPiA+ICAgICBUZXN0ZWQtYnk6IE5lbyBKaWEgPGNqaWFA
-bnZpZGlhLmNvbT4NCj4gPiAgICAgUmVwb3J0ZWQtYnk6IEtpcnRpIFdhbmtoZWRlIDxrd2Fua2hl
-ZGVAbnZpZGlhLmNvbT4NCj4gPiAgICAgU2lnbmVkLW9mZi1ieTogUGFvbG8gQm9uemluaSA8cGJv
-bnppbmlAcmVkaGF0LmNvbT4NCj4NCj4gVGhpcyBwYXRjaCBpcyBrbm93biB0byBiZSBicm9rZW4g
-aW4gc28gbWFueSB3YXlzLiBJdCBhbHNvIGhhcyBhIG1ham9yDQo+IHNlY3VyaXR5IGhvbGUgdGhh
-dCBpdCBpZ25vcmVzIHRoZSBQVEUgZmxhZ3MgbWFraW5nIHRoZSBwYWdlDQo+IFJPLiBJZ25vcmlu
-ZyB0aGUgc3BlY2lhbCBiaXQgaXMgc29tZWhvdyBub3Qgc3VycHJpc2luZyA6KA0KPg0KPiBUaGlz
-IHByb2JhYmx5IGRvZXNuJ3Qgd29yaywgYnV0IGlzIHRoZSBnZW5lcmFsIGlkZWEgb2Ygd2hhdCBL
-Vk0gbmVlZHMNCj4gdG8gZG86DQo+DQo+IGRpZmYgLS1naXQgYS92aXJ0L2t2bS9rdm1fbWFpbi5j
-IGIvdmlydC9rdm0va3ZtX21haW4uYw0KPiBpbmRleCAxMzc2YTQ3ZmVkZWVkYi4uNDE2MTI0MWZj
-MzIyOGMgMTAwNjQ0DQo+IC0tLSBhL3ZpcnQva3ZtL2t2bV9tYWluLmMNCj4gKysrIGIvdmlydC9r
-dm0va3ZtX21haW4uYw0KPiBAQCAtMjU5OCw2ICsyNTk4LDE5IEBAIHN0YXRpYyBpbnQgaHZhX3Rv
-X3Bmbl9yZW1hcHBlZChzdHJ1Y3Qgdm1fYXJlYV9zdHJ1Y3QgKnZtYSwNCj4gICAgICAgICAgICAg
-ICAgICAgICAgICAgcmV0dXJuIHI7DQo+ICAgICAgICAgfQ0KPg0KPiArICAgICAgIC8qDQo+ICsg
-ICAgICAgICogU3BlY2lhbCBQVEVzIGFyZSBuZXZlciBjb252ZXJ0aWJsZSBpbnRvIGEgc3RydWN0
-IHBhZ2UsIGV2ZW4gaWYgdGhlDQo+ICsgICAgICAgICogZHJpdmVyIHRoYXQgb3ducyB0aGVtIG1p
-Z2h0IGhhdmUgcHV0IGEgUEZOIHdpdGggYSBzdHJ1Y3QgcGFnZSBpbnRvDQo+ICsgICAgICAgICog
-dGhlIFBGTk1BUC4gSWYgdGhlIGFyY2ggZG9lc24ndCBzdXBwb3J0IHNwZWNpYWwgdGhlbiB3ZSBj
-YW5ub3QNCj4gKyAgICAgICAgKiBzYWZlbHkgcHJvY2VzcyB0aGVzZSBwYWdlcy4NCj4gKyAgICAg
-ICAgKi8NCj4gKyNpZmRlZiBDT05GSUdfQVJDSF9IQVNfUFRFX1NQRUNJQUwNCj4gKyAgICAgICBp
-ZiAocHRlX3NwZWNpYWwoKnB0ZXApKQ0KPiArICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7
-DQoNCk9uIHNlY29uZCB0aG91Z2h0IHRoaXMgd29udCB3b3JrLCBiZWNhdXNlIGl0IGNvbXBsZXRl
-bHkgZGVmZWF0cyB0aGUNCnBvaW50IG9mIHdoeSB0aGlzIGNvZGUgaGVyZSBleGlzdHMuIHJlbWFw
-X3Bmbl9yYW5nZSgpICh3aGljaCBpcyB3aGF0DQp0aGUgdmFyaW91cyBkbWFfbW1hcCBmdW5jdGlv
-bnMgYW5kIHRoZSBpb3JlbWFwIGZ1bmN0aW9ucyBhcmUgYnVpbHQgb24NCnRvcCBvZiB0b28pIHNl
-dHMgVk1fUEZOTUFQIHRvbywgc28gdGhpcyBjaGVjayB3b3VsZCBldmVuIGNhdGNoIHRoZQ0Kc3Rh
-dGljIG1hcHBpbmdzLg0KDQpQbHVzIHRoZXNlIHN0YXRpYyBtYXBwaW5ncyBhcmVuJ3QgYWxsIHRo
-YXQgc3RhdGljIGVpdGhlciwgZS5nLiBwY2kNCmFjY2VzcyBhbHNvIGNhbiByZXZva2UgYmFyIG1h
-cHBpbmdzIG5vd2FkYXlzLg0KDQpJIHRoaW5rIG5vdGhpbmcgZXhjZXB0IGZ1bGwgbW11X25vdGlm
-aWVyIHdpbGwgYWN0dWFsbHkgZml4IHRoaXMuDQotRGFuaWVsDQoNCj4gKyNlbHNlDQo+ICsgICAg
-ICAgcmV0dXJuIC1FSU5WQUw7DQo+ICsjZW5kaWYNCj4gKw0KPiAgICAgICAgIGlmICh3cml0ZV9m
-YXVsdCAmJiAhcHRlX3dyaXRlKCpwdGVwKSkgew0KPiAgICAgICAgICAgICAgICAgcGZuID0gS1ZN
-X1BGTl9FUlJfUk9fRkFVTFQ7DQo+ICAgICAgICAgICAgICAgICBnb3RvIG91dDsNCj4NCj4gSmFz
-b24NCg0KDQoNCi0tIA0KRGFuaWVsIFZldHRlcg0KU29mdHdhcmUgRW5naW5lZXIsIEludGVsIENv
-cnBvcmF0aW9uDQpodHRwOi8vYmxvZy5mZndsbC5jaA0KX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
-YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
-dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+On Wed, Nov 23, 2022 at 03:28:27PM +0100, Daniel Vetter wrote:
+
+> > This patch is known to be broken in so many ways. It also has a major
+> > security hole that it ignores the PTE flags making the page
+> > RO. Ignoring the special bit is somehow not surprising :(
+> >
+> > This probably doesn't work, but is the general idea of what KVM needs
+> > to do:
+> 
+> Oh dear, when I dug around in there I entirely missed that
+> kvm_try_get_pfn exists, and it's very broken indeed. kvm really needs
+> to grow a proper mmu notifier.
+> 
+> Another thing I'm wondering right now, the follow_pte();
+> fixup_user_fault(); follow_pte(); approach does not make any
+> guarantees of actually being right. If you're sufficiently unlucky you
+> might race against an immediate pte invalidate between the fixup and
+> the 2nd follow_pte(). But you can also not loop, because that would
+> fail to catch permanent faults.
+
+Yes, it is pretty broken.
+
+kvm already has support for mmu notifiers and uses it for other
+stuff. I can't remember what exactly this code path was for, IIRC
+Paolo talked about having a big rework/fix for it when we last talked
+about the missing write protect. I also vauagely recall he had some
+explanation why this might be safe.
+
+> I think the iommu fault drivers have a similar pattern.
+
+Where? It shouldn't
+
+The common code for SVA just calls handle_mm_fault() and restarts the
+PRI. Since the page table is physically shared there is no issue with
+a stale copy.
+
+> What am I missing here? Or is that also just broken. gup works around
+> this with the slow path that takes the mmap sem and walking the vma
+> tree, follow_pte/fixup_user_fautl users dont.
+
+follow_pte() is just fundamentally broken, things must not use it.
+
+> Maybe mmu notifier based restarting would help with this too, if
+> done properly.
+
+That is called hmm_range_fault()
+
+Jason
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
