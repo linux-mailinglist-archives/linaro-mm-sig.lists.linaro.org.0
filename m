@@ -2,232 +2,162 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3509F636310
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 16:15:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D7346365A0
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 17:23:14 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2D09B3EE66
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 15:15:24 +0000 (UTC)
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com (mail-dm6nam04on2053.outbound.protection.outlook.com [40.107.102.53])
-	by lists.linaro.org (Postfix) with ESMTPS id 856263ECED
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 15:15:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E3BAD3EE6D
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 16:23:12 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+	by lists.linaro.org (Postfix) with ESMTPS id D38333ECED
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 16:23:03 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=JzBLwm+w;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1");
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.102.53 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=W4U3EthDStDyP5R3lgHOW6+IaaN+sbsjX1+3RFWqEROJ6VdqCC4VWKTmnFqAv/i9LU7nkLqqRci2uVM2gFqV0ci+Ii7YP/aepCIM2MFqDF03zJmA/xByshrp1kyQDQQecEseYVfT3d6SozbTW9Ju2piCvgQbvcox8n7x6FU9ruGiYiYR4ur6LqSosu15RUIt/zZzUY9+Xp7aGcHv1f4TEY7j092dclMNY3+wO+AMMOlPsIr0SsnazJLLTjDwmZvlxJQabmM9Esekmp5qgBJZaLyNSO0ef0uS6ZykrAF+xMSuhLhF4yoJZcl5x+nqSp13TttLIHON5zWNQEe8dC+Izw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wKTVsOCxfb0T9lrZNGy66XsnGztNm3F5bVbRBCgXcxI=;
- b=K7jtU7KF6Q3DeqDbXyTSPqGIBhhEm8GvA4/nX1e4Na+IFX12Ir+WtyCGmgkdepOOOBYk04I1olTpipfClc940sxLVQIO1/01XebAcC5r+xL09RKKViu7CGZclvWcZy5WCo9P9iJzFquue7+XoHsfb9afCEkiBKKj87dqCBFtMPltILvmmCVR4Wlk9VuTcyzM3zvgc2w6HRkKec6q49x0mIBJ2eUAddeSuKpU3vL7PweCvp5mN1YnLMsXWZXuqUWeTD2a+aQ9lRu9n775NWSiY9Gkko+7q1UQoiZmjg5SO2TBmkI7JPaU67ECNW7s8sCoU1+TTmaWji8l3mgSQ8FJRQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wKTVsOCxfb0T9lrZNGy66XsnGztNm3F5bVbRBCgXcxI=;
- b=JzBLwm+w6g+w/aI3wf+UKNsQFWmh1rcVPyQqtR4ymVmWmBw3OoGAiiQOLHRuvMNq910Xl9OR1EjTzmHCZSXyLZ2GqbVqBgbU15BUCo1SbPxG/4yI2RxllCW3+UYskcBCdna238pkVtbEdqWwCOzRL4ZBhA9OmHjujWMkqNwmdgg=
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by DS0PR12MB7748.namprd12.prod.outlook.com (2603:10b6:8:130::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5857.8; Wed, 23 Nov
- 2022 15:15:11 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::7d43:3f30:4caf:7421]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::7d43:3f30:4caf:7421%7]) with mapi id 15.20.5834.015; Wed, 23 Nov 2022
- 15:15:11 +0000
-Message-ID: <dcb88724-c68e-6f2a-03d5-0641d2e68ec6@amd.com>
-Date: Wed, 23 Nov 2022 16:15:05 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Content-Language: en-US
-To: Jason Gunthorpe <jgg@ziepe.ca>, Daniel Vetter <daniel.vetter@ffwll.ch>
-References: <3d8607b4-973d-945d-c184-260157ade7c3@amd.com>
- <CAKMK7uHVGgGHTiXYOfseXXda2Ug992nYvhPsL+4z18ssqeHXHQ@mail.gmail.com>
- <b05e6091-4e07-1e32-773d-f603ac9ac98b@gmail.com>
- <CAKMK7uFjmzewqv3r4hL9hvLADwV536n2n6xbAWaUvmAcStr5KQ@mail.gmail.com>
+	dkim=pass header.d=ffwll.ch header.s=google header.b=MdK7M0Vz;
+	spf=none (lists.linaro.org: domain of daniel.vetter@ffwll.ch has no SPF policy when checking 209.85.208.42) smtp.mailfrom=daniel.vetter@ffwll.ch;
+	dmarc=none
+Received: by mail-ed1-f42.google.com with SMTP id x2so25570733edd.2
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 08:23:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ffwll.ch; s=google;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=iTqTgZZVPcHur4ir72Zm6jriTBFysIHApeXSgPETKzY=;
+        b=MdK7M0VzmZomTsVbTF5VbNsJh1nEKpsEXsHKhmrxjl/ibRYPHUUU639yOwXeAFFKE/
+         d5+Yx24UTr8EuPay2xBO2QkSphdbrLFPSkqmd351ooGBqm+1CnMAD8DdMkfb7NerISxP
+         7mkvjLZxrCmbInMgkOvRsf1/xXov6LDHvpROg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=iTqTgZZVPcHur4ir72Zm6jriTBFysIHApeXSgPETKzY=;
+        b=luC7gg8lkwvbBvBvoVUa2pOsoJif0BZWOWowPoiJYkyCPDMe7/a6CzbPR5g94Jhnxs
+         2y16t8XrIS3CWOet8Se6V5JA8naxTYicfhS++CYBFri5L2DnESpLtP8p1sPi1dBZk0Y5
+         13qbIp2Jnlj5BvC2imfFYRIxu1fzi7+4k/DzQmnTZ43gkMaSPV7/6VuEKxRyu4fDJcOC
+         P3FGnR2udnym3hRrKNQM7MP6L/BGiLxT8rJopUVGrYWTgvp5KGZgfccwCKSfoDetI0D4
+         FQdRQed0ctbe9eG1H3sVwgizuSfrm/EJLQMo6kalD9HKAtabpgh0ElPRZN6emLYsPMxx
+         dOvg==
+X-Gm-Message-State: ANoB5pnZJEpfOQJr1Cbwn8fa9MxrudBLiR3iC9dqTTLbyN0w0pRFRehS
+	64b6WBoIabTVXOON5O38F/HTYu7ps8N/SE9N0kCOKw==
+X-Google-Smtp-Source: AA0mqf4uJK6xmmkcy0DbmopiWQIfYRWzSsGguvQ75ijiLZdjrbFVHaDuEpUfzy2ywAK59n9HUhAbmq2ai7zD1+42AAU=
+X-Received: by 2002:a05:6402:d69:b0:46a:392b:2440 with SMTP id
+ ec41-20020a0564020d6900b0046a392b2440mr2475553edb.341.1669220582842; Wed, 23
+ Nov 2022 08:23:02 -0800 (PST)
+MIME-Version: 1.0
+References: <3d8607b4-973d-945d-c184-260157ade7c3@amd.com> <CAKMK7uHVGgGHTiXYOfseXXda2Ug992nYvhPsL+4z18ssqeHXHQ@mail.gmail.com>
+ <b05e6091-4e07-1e32-773d-f603ac9ac98b@gmail.com> <CAKMK7uFjmzewqv3r4hL9hvLADwV536n2n6xbAWaUvmAcStr5KQ@mail.gmail.com>
  <Y34WI9SZdiH/p1tA@ziepe.ca> <f8f844a5-0910-d19a-5aea-df7a1d83b1d3@gmail.com>
  <Y34XvmtHfb4ZwopN@ziepe.ca> <dc2a9d7f-192b-e9d8-b1d1-3b868cb1fd44@gmail.com>
- <Y34gBUl0m+j1JdFk@ziepe.ca>
- <CAKMK7uEzaUjroODbWe4DtxHQ+gmr7_DVK+fUJjAgMsgP61uGSQ@mail.gmail.com>
- <Y343ijGoqyf73d+I@ziepe.ca>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <Y343ijGoqyf73d+I@ziepe.ca>
-X-ClientProxiedBy: FR3P281CA0186.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a4::13) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|DS0PR12MB7748:EE_
-X-MS-Office365-Filtering-Correlation-Id: 46590196-1c59-45a3-2e74-08dacd6583a6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	Oz1A8FIRpS09GuvpCsMrYyZfB2dAfQsFIsluNVW/pVT2yav2jAof6fP+HrPdunD2Rcq9NjtFQCHJadcENXvE8w5R85kuTfFgigDSQHecCha+XAXPg/wt3kj1FNEr8CEItDD3QT3rG2M/K6rO2upvAyK8J5rE5QQstaiJjjpW6nMnr+N6VMzNIDy3s4C7uwaw3OmFKgLAiVs77TPPnbmLMNDhEvBr87g8Rm0clljCAsB/l6B5UNlM+sXRHmf+YkIx3z/rY0wg0s/IDIW8SzHz7ZxyFAhFZumrZj4BeoBQHmRpgOAO1DxG1pSDny3+ab4sHijlsI5ZNuE1okG/eMd4ykWeIXiRXkuNgXNVbeFP7h03rvjXDyRzuuFXrCIE1mKEEE8cu2sJ8DRLkI8T5d+JUWKDRcop8qxn+MxBOyaEH2qdkniYZJpwrQvzZoSndcFLHbYQn9qERB892pM629kGspWWcuINR5U4LCweTZIJg7nkLSrAnMedonGFiV2TP8AYVf0W+kJ7dsSUO2nD1JrGpJHJ6+6Fgd4N/6hh+B2JO3y6cz/eDgbizo0L/rW0RdGWgHbxaqYqM2zMZQoG9YBCJwprWnxQT+XQsSBcbBX0PaVTqyAp5Y3tV5LQX7LxmWJycpYTkTLR+0U29SLsLECZ5w4ClHJZWlkFi3ayFpo85K9/ofEzAjTl42rlljWo6ze8nn+U38ElgCeAtVppjAPx/X4F6S+R3yNeinOJaXpgmn4=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(346002)(376002)(136003)(396003)(366004)(451199015)(31686004)(8936002)(7416002)(4326008)(8676002)(5660300002)(54906003)(316002)(41300700001)(66476007)(66946007)(66556008)(2906002)(36756003)(6512007)(2616005)(6506007)(478600001)(6666004)(110136005)(186003)(86362001)(38100700002)(31696002)(6486002)(83380400001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?SFh3UmZRU3NGMVozRkhsMnNibW5mV21qNHdUK3d4eVdXcElzQ3R1ZFhRbGtW?=
- =?utf-8?B?RWtVWVR6d3NmdWpCYkRSMnI0QU9RR3B1V2NBdDBYWUdVaFgwZVlTaUNuOTA0?=
- =?utf-8?B?YnMxQmU0Uit0bHdIb0ZxM1hjaDdMclR3RnRoR2dhNVEzay9YWTZFNERRV2RY?=
- =?utf-8?B?QkNZbUxGUDFtaW5HK1R1UVlLVkdGb1hLMjJWaDU2Q1pEa2trMThRQjYwbXow?=
- =?utf-8?B?K1BhQ21Ba1h3QlJmamxvQWVBa2FRUXdqVUZXL1dDc0gvZVJPVmQzZlBEd2wx?=
- =?utf-8?B?UnVkMk1hWnBjNG85QWZ0c3RNTk5SREZpVHd3Tlp6MXBKZmFzd3p6bEtiTWho?=
- =?utf-8?B?KytJeG1OSjgwZmp2TVVsaW42dE5zcmVJbVR5WVlFZVNNd1REbW5BcHQvaThW?=
- =?utf-8?B?a3dGVFhCaGx5eE1XYTNzOEdzV2IrbHJ0dXNyblBUenMxQmZKZ0lnNS8rK1lu?=
- =?utf-8?B?RUlIc0FuQjNuRXFIcnlOVXQ1WkRnMUR3RmNnQ1BHTHVjdlVwMWpCMmVndm9p?=
- =?utf-8?B?SjBnaFBIRSs5WDhyaytlWXZha3BBNzdWRFo4dFkvOFRPZ0tBS0dPUGgxVXVH?=
- =?utf-8?B?STVYZ2tWTkxVRktuSFlwNWtjcWRKZ1c5QWl5TUorN1JwU1NlNkFObVYzWFNO?=
- =?utf-8?B?TXBDTkVja052MjNDQ0RhVVovdjZLR3ZNTnl3eGJQZEhPWGZvdnE3bnVjYTNl?=
- =?utf-8?B?OVdCOHFNMmFKYUd5V1FYM3cyZlI1S0lueVlJUXRteGRLUVpYb3BKSmk0QjJq?=
- =?utf-8?B?SG5aejV0a3lURU9kbXJnZFpNVTAxam1KT2pMZjE3NlQwcUNPa3NNUE03YlFl?=
- =?utf-8?B?K2FRYmdkQm55dElrUlVqVEU3RksrYU1oVm8vRUdGc2tibmFtTHV5NURDK0k1?=
- =?utf-8?B?a05wUnNjYzZrQjdMSTRkb0ZIb3JQUHpudDFKSHhPSzhzVmJTeC9hZDAxTEFJ?=
- =?utf-8?B?SHc5MW9jbXpzVVNUa2FEcWxUQ09IV203bkU5aWZEOHhwUWRwMzNRTGdKOGhl?=
- =?utf-8?B?M0pvSzgvdis1c25Rc2RXOHNIQm9QR0ZVN0VLU0hDWU52ZWpSNS8rTVJ3amVR?=
- =?utf-8?B?Qk96aDRGaU9LT1FqaWRhMzBZRXBxSFJvQlBzc3FBczNUM0NiNWlLM3ZWbGZJ?=
- =?utf-8?B?dmtBWjQ0N05pcDBnRHIxMDlSUlJoaE1qWmlpYjJ2d0JxRjBiNUtFdlY5cm5U?=
- =?utf-8?B?YUpPTGZidlpzdjE4TzRLRTZFSU92WGdGNk1IZDRHMk92THNGMHBnc0NUUjI0?=
- =?utf-8?B?eGxoV0NwSHQ5ckdUVExpNGpFOVpEQTlpd1A0WGtIRDVxeHZDTEdzelVLNThS?=
- =?utf-8?B?U2VGMk0rdnkzajdKZ0tjT040YTh1V2lTcWhIM3VMbE0waERpMlBoOTN6ZzNU?=
- =?utf-8?B?dUlRQ0dqNHpHNUZHNlprTmIrSzZSc0RhRGV6ZTdOQWZuMzF6anV4K24zQjVt?=
- =?utf-8?B?bC9TZEYxcW9EQUVzdTlNbXZNaGo0cFoxNDB1ckgwVmh3WHcvN0R3aUh3Kzl2?=
- =?utf-8?B?dHRaM09abkdEVGU3Z3ArNEFhcllYN0dBYkJPV2VuaC9QU3RnMUQ5U0JUaXgy?=
- =?utf-8?B?dGpqOHNoSG1KbFBHa052NHNyUkh4OGhZc29iL0s1ZXJSQnduRFVrYUN4dExX?=
- =?utf-8?B?ZzlzSUpiLzIzbDVvV1doeFk0QkNiV0FEWlp3K0ZhS3llSVhCb3dOUnFxZmgz?=
- =?utf-8?B?d3ZQdGRERlpBTjd1a2RQTVNhWEcrSXEwbkI3cG1weDlOLzNyZ1hHRlk3SU95?=
- =?utf-8?B?Ykp3VWZuL2pHekVZZDY4VDlOZmYrMXFIc0dnYWdYYUJrcFF6ZjRydGo3SVFB?=
- =?utf-8?B?SEdLVU8va1g3SEJCUXdEUVBGeTNCZHJTUUFGbUhjREtOTlI4Wjl0N1FVRUIw?=
- =?utf-8?B?MC9QTzBwM2xkbjI0OFpJUTk2QnVKOTNBaDRiSjlsSllsejJZZEkxdEUvSnJ4?=
- =?utf-8?B?TG1jbDhYWTdhN1dLMjBGMmpqT1BoTTFmSG9GR2RxZ1BwU1lteVJxT2FSZ3kv?=
- =?utf-8?B?NFQrK0I3d3pMK1hGTzZGUlhJc3JPTzkvUUUwVmkyZGpmSnU1YW9JTEowUkIz?=
- =?utf-8?B?YVpPWVFsZVNsZWI0SFYzTFhETUdFTEhpZlgvZnFtOVRzNUIxRThNVFE2QUlO?=
- =?utf-8?B?RkxUTzFqZ0VqTDRlQk5XWkRNU3BUUDFWZWhHV2xFQ1g1c1ZubGZ2d0VidVBI?=
- =?utf-8?Q?65xnkd/kAydxkzm3nXMOYhyILfVzG82uvvC0T2QHM22Z?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 46590196-1c59-45a3-2e74-08dacd6583a6
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Nov 2022 15:15:11.2787
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: f3kHoREcOQahquNHsiHZbXlPeplWeY9y8faoUo8Qgh2+78vkXtJD4Sg77zshlGef
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7748
-X-Rspamd-Queue-Id: 856263ECED
-X-Spamd-Bar: ---------
-X-Spamd-Result: default: False [-9.00 / 15.00];
+ <Y34gBUl0m+j1JdFk@ziepe.ca> <CAKMK7uHWyOcZ77-+GY7hxFUA65uQYFe0fw2rww6Y-rLXvHFAYw@mail.gmail.com>
+ <Y342emkzKHXLQvsN@ziepe.ca>
+In-Reply-To: <Y342emkzKHXLQvsN@ziepe.ca>
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+Date: Wed, 23 Nov 2022 17:22:50 +0100
+Message-ID: <CAKMK7uEXybD3iV7dDjcaP=joY-kE8aZZ5odCsjUBpatJe=Sd=Q@mail.gmail.com>
+To: Jason Gunthorpe <jgg@ziepe.ca>
+X-Rspamd-Queue-Id: D38333ECED
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.80 / 15.00];
 	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	BAYES_HAM(-3.00)[99.99%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.951];
+	ARC_NA(0.00)[];
+	R_SPF_NA(0.00)[no SPF record];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:dkim];
-	DKIM_TRACE(0.00)[amd.com:+];
+	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.998];
+	FREEMAIL_CC(0.00)[gmail.com,amd.com,lists.freedesktop.org,suse.de,google.com,infradead.org,linaro.org,intel.com,vger.kernel.org,lists.linaro.org];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail-ed1-f42.google.com:rdns,mail-ed1-f42.google.com:helo];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	URIBL_BLOCKED(0.00)[amd.com:dkim];
-	RCPT_COUNT_TWELVE(0.00)[13];
+	DKIM_TRACE(0.00)[ffwll.ch:+];
 	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.42:from];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	TO_DN_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.102.53:from]
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_RCPT(0.00)[];
+	DMARC_NA(0.00)[ffwll.ch];
+	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: FCSRUFAOPHOHWB5XG2EFM5FSIM6GTSK3
-X-Message-ID-Hash: FCSRUFAOPHOHWB5XG2EFM5FSIM6GTSK3
-X-MailFrom: Christian.Koenig@amd.com
+Message-ID-Hash: PFXWT3Y24CT6KXTVGKD5AKRZ3T7QP4MX
+X-Message-ID-Hash: PFXWT3Y24CT6KXTVGKD5AKRZ3T7QP4MX
+X-MailFrom: daniel.vetter@ffwll.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, DRI Development <dri-devel@lists.freedesktop.org>, Intel Graphics Development <intel-gfx@lists.freedesktop.org>, Thomas Zimmermann <tzimmermann@suse.de>, Suren Baghdasaryan <surenb@google.com>, Matthew Wilcox <willy@infradead.org>, John Stultz <john.stultz@linaro.org>, Daniel Vetter <daniel.vetter@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, DRI Development <dri-devel@lists.freedesktop.org>, Intel Graphics Development <intel-gfx@lists.freedesktop.org>, Thomas Zimmermann <tzimmermann@suse.de>, Suren Baghdasaryan <surenb@google.com>, Matthew Wilcox <willy@infradead.org>, John Stultz <john.stultz@linaro.org>, Daniel Vetter <daniel.vetter@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: Require VM_PFNMAP vma for mmap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FCSRUFAOPHOHWB5XG2EFM5FSIM6GTSK3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PFXWT3Y24CT6KXTVGKD5AKRZ3T7QP4MX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Am 23.11.22 um 16:08 schrieb Jason Gunthorpe:
-> On Wed, Nov 23, 2022 at 03:34:54PM +0100, Daniel Vetter wrote:
->>> diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
->>> index 1376a47fedeedb..4161241fc3228c 100644
->>> --- a/virt/kvm/kvm_main.c
->>> +++ b/virt/kvm/kvm_main.c
->>> @@ -2598,6 +2598,19 @@ static int hva_to_pfn_remapped(struct vm_area_struct *vma,
->>>                          return r;
->>>          }
->>>
->>> +       /*
->>> +        * Special PTEs are never convertible into a struct page, even if the
->>> +        * driver that owns them might have put a PFN with a struct page into
->>> +        * the PFNMAP. If the arch doesn't support special then we cannot
->>> +        * safely process these pages.
->>> +        */
->>> +#ifdef CONFIG_ARCH_HAS_PTE_SPECIAL
->>> +       if (pte_special(*ptep))
->>> +               return -EINVAL;
->> On second thought this wont work, because it completely defeats the
->> point of why this code here exists. remap_pfn_range() (which is what
->> the various dma_mmap functions and the ioremap functions are built on
->> top of too) sets VM_PFNMAP too, so this check would even catch the
->> static mappings.
-> The problem with the way this code is designed is how it allows
-> returning the pfn without taking any reference based on things like
-> !pfn_valid or page_reserved. This allows it to then conditionally put
-> back the reference based on the same reasoning. It is impossible to
-> thread pte special into that since it is a PTE flag, not a property of
-> the PFN.
+On Wed, 23 Nov 2022 at 16:04, Jason Gunthorpe <jgg@ziepe.ca> wrote:
 >
-> I don't entirely understand why it needs the page reference at all,
-
-That's exactly what I've pointed out in the previous discussion about 
-that code as well.
-
-As far as I can see it this is just another case where people assumed 
-that grabbing a page reference somehow magically prevents the pte from 
-changing.
-
-I have not the slightest idea how people got this impression, but I have 
-heard it so many time from so many different sources that there must be 
-some common cause to this. Is the maybe some book or tutorial how to 
-sophisticate break the kernel or something like this?
-
-Anyway as far as I can see only correct approach would be to use an MMU 
-notifier or more high level hmm_range_fault()+seq number.
-
-Regards,
-Christian.
-
-> even if it is available - so I can't guess why it is OK to ignore the
-> page reference in other cases, or why it is OK to be racy..
+> On Wed, Nov 23, 2022 at 03:28:27PM +0100, Daniel Vetter wrote:
 >
-> Eg hmm_range_fault() does not obtain page references and implements a
-> very similar algorithm to kvm.
+> > > This patch is known to be broken in so many ways. It also has a major
+> > > security hole that it ignores the PTE flags making the page
+> > > RO. Ignoring the special bit is somehow not surprising :(
+> > >
+> > > This probably doesn't work, but is the general idea of what KVM needs
+> > > to do:
+> >
+> > Oh dear, when I dug around in there I entirely missed that
+> > kvm_try_get_pfn exists, and it's very broken indeed. kvm really needs
+> > to grow a proper mmu notifier.
+> >
+> > Another thing I'm wondering right now, the follow_pte();
+> > fixup_user_fault(); follow_pte(); approach does not make any
+> > guarantees of actually being right. If you're sufficiently unlucky you
+> > might race against an immediate pte invalidate between the fixup and
+> > the 2nd follow_pte(). But you can also not loop, because that would
+> > fail to catch permanent faults.
 >
->> Plus these static mappings aren't all that static either, e.g. pci
->> access also can revoke bar mappings nowadays.
-> And there are already mmu notifiers to handle that, AFAIK.
+> Yes, it is pretty broken.
 >
-> Jason
+> kvm already has support for mmu notifiers and uses it for other
+> stuff. I can't remember what exactly this code path was for, IIRC
+> Paolo talked about having a big rework/fix for it when we last talked
+> about the missing write protect. I also vauagely recall he had some
+> explanation why this might be safe.
+>
+> > I think the iommu fault drivers have a similar pattern.
+>
+> Where? It shouldn't
+>
+> The common code for SVA just calls handle_mm_fault() and restarts the
+> PRI. Since the page table is physically shared there is no issue with
+> a stale copy.
+>
+> > What am I missing here? Or is that also just broken. gup works around
+> > this with the slow path that takes the mmap sem and walking the vma
+> > tree, follow_pte/fixup_user_fautl users dont.
+>
+> follow_pte() is just fundamentally broken, things must not use it.
+>
+> > Maybe mmu notifier based restarting would help with this too, if
+> > done properly.
+>
+> That is called hmm_range_fault()
 
+Ah right I mixed that up on a quick grep, thanks for pointing me in
+the right direction. Worries appeased.
+-Daniel
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
