@@ -2,144 +2,116 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0AA606365E5
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 17:34:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E111E6369C6
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 20:19:45 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AFABC3EE73
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 16:34:06 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
-	by lists.linaro.org (Postfix) with ESMTPS id D1D933EC37
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 16:33:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2E5E73EE88
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 19:19:44 +0000 (UTC)
+Received: from mail-ua1-f45.google.com (mail-ua1-f45.google.com [209.85.222.45])
+	by lists.linaro.org (Postfix) with ESMTPS id 3FA6A3EBF7
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 19:19:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b=LTaFlYw0;
-	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.208.53) smtp.mailfrom=daniel@ffwll.ch;
-	dmarc=none
-Received: by mail-ed1-f53.google.com with SMTP id s5so25546676edc.12
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 08:33:57 -0800 (PST)
+	dkim=pass header.d=google.com header.s=20210112 header.b="g/nn420R";
+	spf=pass (lists.linaro.org: domain of jstultz@google.com designates 209.85.222.45 as permitted sender) smtp.mailfrom=jstultz@google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-ua1-f45.google.com with SMTP id p1so6617729uak.11
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 11:19:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=vQ8nm6+WyKeJ4NSkaQqYp2teKXcJsmSR2OlnL5nJCng=;
-        b=LTaFlYw0Pm8utr+zS/UXk0FrQTM6S4ZrXc7dE2wTm7nTS9rZ8ucryQq8shd4RhG9kc
-         r71lmcHkASsmyfN1/CaYdQBfvLaqjDdGshMjTLB6NY6FGg2bX5UtJmqsuDDXnT6Fjk47
-         ERYCfdANhr7rbF2w+N6ES5m3u7CEOUYzqV9sw=
+        d=google.com; s=20210112;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=SwMzuEDw937D1BNWUA0+s7FH/Sv/GWnLAgn8jMy5G/0=;
+        b=g/nn420R1OojaK+ZrP5yWqCPRWhqBR3yJ1bGeZnSy5rk1jJk4NsK6VjXpTG+jsegam
+         dBm2h9744Pvni4Tx3Vg54pqwd9DZjb1z22H0MRPKB+9jQeP56FN28EFvVyFJz2E5LBJ9
+         oImZsEE9BVhSfGNwgLNk2FshAC5d0BF1yGL9i7WxmEAZHKb39SwzeGlFMlYz+KbBSU/1
+         OBcH6y45lXdKxud/yud4DKrczBhWp7gVspfwxvN5+bANrEhxzl32kMonJcRnomPu/vRA
+         fHY4Ktf8hzgF8/QRtPHetAsVza0ZL9CslbOCwPxxHRp9lsOejr9Lr8cvglm0ml7YP14v
+         LTmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=vQ8nm6+WyKeJ4NSkaQqYp2teKXcJsmSR2OlnL5nJCng=;
-        b=58g20c9uiJ/tJPsguA+wLrQGtHVnRvNNmeK3XaTb8Ce3WwOFIUlMakaVP2n5ssaVyS
-         vrwcyuD97dVKx/K/isd5CKSu3LKOswBN6UjddIyIVJotcGHFgDPzZMRNSnljMyI3dokh
-         WZekclQg69RDJsX0YJi+h2JXvX/KwoTmgiflpQBalvr42kEYpc/PZsUiRoLwBT8yxe6v
-         AphxSwGAgOa/jxDDRfwjqi192+KKhWbdQRJ5VLSC2sTPNJBBOBENbm7VP8TwDwJAKzDD
-         +A2gPpcabYdXadibhAmHSDQ1kJqgdFe75KWY3jTyq7iOE77y+vw0jqIml28o38FB/Lye
-         nuhg==
-X-Gm-Message-State: ANoB5pn1CO7wu4iSHRXwnX4u75IOuTzJzG16xiDTT7xrv0pVRBLDjMLt
-	ZVMfb0bM9kPYI+7LlotVcKOTJA==
-X-Google-Smtp-Source: AA0mqf4Enr1qM6eoPL9aF0axGh9DxgF+M99FiwcrAbYtdUzrx2lqXegdh98KtI4edE32ukwrcdXh6Q==
-X-Received: by 2002:a05:6402:3719:b0:461:4f34:d8f4 with SMTP id ek25-20020a056402371900b004614f34d8f4mr26937012edb.144.1669221236923;
-        Wed, 23 Nov 2022 08:33:56 -0800 (PST)
-Received: from phenom.ffwll.local (212-51-149-33.fiber7.init7.net. [212.51.149.33])
-        by smtp.gmail.com with ESMTPSA id ez6-20020a056402450600b004643f1524f3sm7770969edb.44.2022.11.23.08.33.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Nov 2022 08:33:56 -0800 (PST)
-Date: Wed, 23 Nov 2022 17:33:54 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Pekka Paalanen <ppaalanen@gmail.com>
-Message-ID: <Y35LcspZ385IC4lJ@phenom.ffwll.local>
-References: <cc091a11-d012-d998-b7e2-8b3d616867a7@gmail.com>
- <0abc6efddb8dfc1888de15a1bedaaac6688fd078.camel@pengutronix.de>
- <1e2a6750-9849-e9ee-69d6-e4bfdcfb64f3@gmail.com>
- <CAAFQd5B+VHs62M5Wf2L-xOw=_PoaXT+akAySkeZc75HeA3d0jQ@mail.gmail.com>
- <b2dec9b3-03a7-e7ac-306e-1da024af8982@amd.com>
- <346d6ad023ef8697aafd93ac1b100890f3637e44.camel@ndufresne.ca>
- <CAF6AEGuqgWi0T=B9cb+Uy7aoWBPGQmZ3JbwFcK_45GbkY2nHPg@mail.gmail.com>
- <Y3zeYnufgXJHQAbN@phenom.ffwll.local>
- <ae9ba9ba-3ad3-af23-be66-1540862bf571@amd.com>
- <20221123103338.238571e1@eldfell>
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=SwMzuEDw937D1BNWUA0+s7FH/Sv/GWnLAgn8jMy5G/0=;
+        b=s91f1in3G9UFLz0e6+3iWPf6oE5wwZK2ev7X6+nfZJV9X6j7KJGpRA7WGlskIxd6da
+         guFLlJ6ITDL09gKZoqHAmuXSoLRFVcBWfEU286rH84rKlJDEb5CzmxsyaQXDzuCPUzjQ
+         YBmZ7Dy7SjqHaGFDabgL6VycHrXNVz8296YhLtz/o7A96uuhx7lTkI6xwAuuzuG8+GfF
+         GurLAsxtR2fj45qTvBePtXSr/AgcvFzLq4nzUhNZAyeMy6YPWyZEPnYrhTRUwiNz80qa
+         kG7ZPtz/TGSUAHBf7dZ+pLPMTkh6RgC07ahweUPG35a8mARQGU4+N+YgSixXGWlAUmaI
+         rhVg==
+X-Gm-Message-State: ANoB5pmOftFldxfAelbmzH5FE5g4QUEZCWmlhvQB3/8uV5NWlGgaLOhp
+	vQ8M629QzQkwSxFG3bnPH9/PXhY3YuAA8uL0PTJI
+X-Google-Smtp-Source: AA0mqf7ymL6DaildKXguHmgnNFyFiHrXAqeOVxwz1oN82oZWA+QVsylDv6FEwr3OYMAtZxhB6iEMFSrnXPfn7MTN3I8=
+X-Received: by 2002:ab0:4986:0:b0:414:4bb5:3e54 with SMTP id
+ e6-20020ab04986000000b004144bb53e54mr6742748uad.121.1669231174806; Wed, 23
+ Nov 2022 11:19:34 -0800 (PST)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20221123103338.238571e1@eldfell>
-X-Operating-System: Linux phenom 5.19.0-2-amd64 
-X-Rspamd-Queue-Id: D1D933EC37
-X-Spamd-Bar: -------
-X-Spamd-Result: default: False [-7.30 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[99.99%];
-	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
+References: <TYCP286MB2323873BBDF88020781FB986CA3B9@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
+ <TYCP286MB2323894F9939C27291FD998CCA0A9@TYCP286MB2323.JPNP286.PROD.OUTLOOK.COM>
+ <56393e84-485b-42ba-5fce-d4a0d0017653@amd.com>
+In-Reply-To: <56393e84-485b-42ba-5fce-d4a0d0017653@amd.com>
+From: John Stultz <jstultz@google.com>
+Date: Wed, 23 Nov 2022 11:19:24 -0800
+Message-ID: <CANDhNCrKaa580Hb-w5GcGxo-h5xr9_GSq86JUSfR+meVLqiY1g@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+X-Rspamd-Queue-Id: 3FA6A3EBF7
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.78 / 15.00];
+	BAYES_HAM(-2.78)[99.04%];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20210112];
 	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_TO(0.00)[gmail.com];
-	R_SPF_NA(0.00)[no SPF record];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[amd.com,ffwll.ch,gmail.com,ndufresne.ca,chromium.org,pengutronix.de,fooishbar.org,linaro.org,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ffwll.ch:url,ffwll.ch:dkim,amd.com:email];
-	DKIM_TRACE(0.00)[ffwll.ch:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[209.85.208.53:from];
+	NEURAL_HAM(-0.00)[-0.997];
+	FROM_EQ_ENVFROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[outlook.com,linaro.org,collabora.com,redhat.com,arm.com,ti.com,android.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail-ua1-f45.google.com:rdns,mail-ua1-f45.google.com:helo];
 	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+];
+	FROM_HAS_DN(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.222.45:from];
 	RCPT_COUNT_TWELVE(0.00)[12];
 	TO_DN_SOME(0.00)[];
-	DMARC_NA(0.00)[ffwll.ch];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_COUNT_THREE(0.00)[3];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.53:from]
+	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: IVZ3CDZPGCOT74QW775SRENETVXAD4WG
-X-Message-ID-Hash: IVZ3CDZPGCOT74QW775SRENETVXAD4WG
-X-MailFrom: daniel@ffwll.ch
+Message-ID-Hash: JX5PC7A44O5AH3GMWHYXX44RQ2QQDMI2
+X-Message-ID-Hash: JX5PC7A44O5AH3GMWHYXX44RQ2QQDMI2
+X-MailFrom: jstultz@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Daniel Vetter <daniel@ffwll.ch>, Rob Clark <robdclark@gmail.com>, Nicolas Dufresne <nicolas@ndufresne.ca>, Tomasz Figa <tfiga@chromium.org>, Daniel Stone <daniel@fooishbar.org>, sumit.semwal@linaro.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
+CC: Dawei Li <set_pte_at@outlook.com>, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, labbott@redhat.com, Brian.Starkey@arm.com, afd@ti.com, sspatil@android.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
+Subject: [Linaro-mm-sig] Re: [PATCH v4] dma-buf: fix racing conflict of dma_heap_add()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IVZ3CDZPGCOT74QW775SRENETVXAD4WG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JX5PC7A44O5AH3GMWHYXX44RQ2QQDMI2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Wed, Nov 23, 2022 at 10:33:38AM +0200, Pekka Paalanen wrote:
-> On Tue, 22 Nov 2022 18:33:59 +0100
-> Christian K=F6nig <christian.koenig@amd.com> wrote:
->=20
-> > We should have come up with dma-heaps earlier and make it clear that=20
-> > exporting a DMA-buf from a device gives you something device specific=20
-> > which might or might not work with others.
-> >=20
-> > Apart from that I agree, DMA-buf should be capable of handling this.=20
-> > Question left is what documentation is missing to make it clear how=20
-> > things are supposed to work?
->=20
-> Perhaps somewhat related from Daniel Stone that seems to have been
-> forgotten:
-> https://lore.kernel.org/dri-devel/20210905122742.86029-1-daniels@collabor=
-a.com/
->=20
-> It aimed mostly at userspace, but sounds to me like the coherency stuff
-> could use a section of its own there?
-
-Hm yeah it would be great to land that and then eventually extend. Daniel?
--Daniel
---=20
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gTW9uLCBOb3YgMjEsIDIwMjIgYXQgMTA6MjQgQU0gQ2hyaXN0aWFuIEvDtm5pZw0KPGNocmlz
+dGlhbi5rb2VuaWdAYW1kLmNvbT4gd3JvdGU6DQo+DQo+IEhpIERhd2VpLA0KPg0KPiBmcm9tIHRo
+ZSB0ZWNobmljYWwgZGVzY3JpcHRpb24sIGNvZGluZyBzdHlsZSBldGMuLiBpdCBsb29rcyBjbGVh
+biB0byBtZSwNCj4gYnV0IEknbSB0aGUgY29tcGxldGVseSB3cm9uZyBwZXJzb24gdG8gYXNrIGZv
+ciBhIGJhY2tncm91bmQgY2hlY2suDQo+DQo+IEkgaGF2ZSBhIGhpZ2ggbGV2ZWwgdW5kZXJzdGFu
+ZGluZyBvZiBob3cgZG1hLWhlYXBzIHdvcmssIGJ1dCBub3QgYQ0KPiBzaW5nbGUgbGluZSBvZiB0
+aGlzIGNvZGUgaXMgZnJvbSBtZS4NCj4NCj4gRmVlbCBmcmVlIHRvIGFkZCBteSBBY2tlZC1ieSwg
+YnV0IExhdXJhLCBKb2huIGFuZCBvdGhlcnMgZG8geW91IGhhdmUgYW55DQo+IG9waW5pb24/DQoN
+Ck5vIG9iamVjdGlvbiBmcm9tIG1lLg0KVGhhbmtzIERhd2VpIGZvciBzdWJtaXR0aW5nIHRoaXMg
+aW1wcm92ZW1lbnQhDQoNCkFja2VkLWJ5OiBKb2huIFN0dWx0eiA8anN0dWx0ekBnb29nbGUuY29t
+Pg0KDQp0aGFua3MNCi1qb2huDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxp
+c3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0t
+c2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
