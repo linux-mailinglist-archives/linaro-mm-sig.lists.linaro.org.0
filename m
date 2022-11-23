@@ -2,183 +2,203 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2E506352C2
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 09:33:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E9BA635462
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 10:06:20 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E9F003EE5F
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 08:33:57 +0000 (UTC)
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
-	by lists.linaro.org (Postfix) with ESMTPS id 713E53EC70
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 08:33:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2EFCC3EDA2
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 09:06:19 +0000 (UTC)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (mail-mw2nam12on2076.outbound.protection.outlook.com [40.107.244.76])
+	by lists.linaro.org (Postfix) with ESMTPS id 415183EC70
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 09:06:09 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=grLXygJZ;
-	spf=pass (lists.linaro.org: domain of ppaalanen@gmail.com designates 209.85.167.54 as permitted sender) smtp.mailfrom=ppaalanen@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-lf1-f54.google.com with SMTP id d6so27096038lfs.10
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 00:33:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=GP8l1iGGwn4fXZb322yNmXnMhiWxUfGRTbBa+6nT3ag=;
-        b=grLXygJZO0Bx8iiadWbvlKJmmflKTxZ5vzxphVjLy81hMM1SgiQzoo0Shg5BZVXx/F
-         da240dF2jq2j4Xp8zhJTt1v1Jp2vVfQQmzJEFar5V/atAsnyb3GcT/KJL6W1fvHu1nW8
-         yw+r3yFPUSqyC6iH0gRMvHdIGp68AvndzFoWLI5ly0HDfvbESRyJzKKJGfmNjBTiKPRY
-         MAjRWilMYt0kEY66xv3G13NkdGJKnX0Myfa3Xdv/CVzu3UAG96GERGexZo/vVFqtGj7W
-         dbqaz/9Bn9UKFTv8CDXCNPVox0sk3G+lAWuuapn8n2/IR9asGZqZbBzzVKA6EbidNFOo
-         dDEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=GP8l1iGGwn4fXZb322yNmXnMhiWxUfGRTbBa+6nT3ag=;
-        b=pJdjTQmiEw/9wT1LhOGjGwTgbWyhq184X2OpBmon8yH6Uwh+AsfTXHIg946q/cHxAp
-         cIc248//RkJiXcdUuaK49LVOBXehNNzOV3E0MMPhq7lro3+wa0pOG6I6GOnP5JoYuqfk
-         p5MbxcFTJgW9dmmVoodanamgth/ZtB5GSiadIENOpe4Bbr6nmCTgcZjTlD9B/2dD4wR7
-         1cV3kB839ufXDKYVF/HoTbXMeCqonOmCA4nhIh8Y5OWntYuJcT7LLq2TnpNiasy5BI1I
-         JxXY2DK0F45H67T9C+p1zyGK54xhJvthZpdiiCQlwistgUEP6qCRTMaJmLN7IKL9+XAT
-         uFzA==
-X-Gm-Message-State: ANoB5pmILchNmWV28gDRfDtQkNmCuHUmV5AmawkZ/crHia6EIhmacPRm
-	Eb4UXZyhTCwTnlCcmWh72I0=
-X-Google-Smtp-Source: AA0mqf4IYpzUuisugu07V7ZumpJ7U+9y3CR2RHG/v3U5LmMwrWA44BlVBzqXWZzDZxlQVrY6JNPJDA==
-X-Received: by 2002:a19:ca1b:0:b0:4a7:7d62:2807 with SMTP id a27-20020a19ca1b000000b004a77d622807mr10479283lfg.77.1669192427925;
-        Wed, 23 Nov 2022 00:33:47 -0800 (PST)
-Received: from eldfell ([194.136.85.206])
-        by smtp.gmail.com with ESMTPSA id p24-20020a2ea4d8000000b002790d8012cfsm2121782ljm.139.2022.11.23.00.33.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Nov 2022 00:33:47 -0800 (PST)
-Date: Wed, 23 Nov 2022 10:33:38 +0200
-From: Pekka Paalanen <ppaalanen@gmail.com>
-To: Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>
-Message-ID: <20221123103338.238571e1@eldfell>
-In-Reply-To: <ae9ba9ba-3ad3-af23-be66-1540862bf571@amd.com>
-References: <caf4d6b82843788db97555a58bc9e33915e5b50a.camel@ndufresne.ca>
-	<b422be59-4b4b-2d0d-8e8c-b19f27c6832e@gmail.com>
-	<4fa4e5d3b1f46e46139bad069cbf5e795e63afa8.camel@pengutronix.de>
-	<cc091a11-d012-d998-b7e2-8b3d616867a7@gmail.com>
-	<0abc6efddb8dfc1888de15a1bedaaac6688fd078.camel@pengutronix.de>
-	<1e2a6750-9849-e9ee-69d6-e4bfdcfb64f3@gmail.com>
-	<CAAFQd5B+VHs62M5Wf2L-xOw=_PoaXT+akAySkeZc75HeA3d0jQ@mail.gmail.com>
-	<b2dec9b3-03a7-e7ac-306e-1da024af8982@amd.com>
-	<346d6ad023ef8697aafd93ac1b100890f3637e44.camel@ndufresne.ca>
-	<CAF6AEGuqgWi0T=B9cb+Uy7aoWBPGQmZ3JbwFcK_45GbkY2nHPg@mail.gmail.com>
-	<Y3zeYnufgXJHQAbN@phenom.ffwll.local>
-	<ae9ba9ba-3ad3-af23-be66-1540862bf571@amd.com>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	dkim=pass header.d=amd.com header.s=selector1 header.b=0UCsCT8h;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1");
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.244.76 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=T9Pqia4gohCWY42uH//2a1zz8NLY42BjDx2/HCdQXm5GNHJ9CCz4barXULK+yBbbm68XP5WPBoOOWj0uEoCoF+fxwmTlz4j1sGUtcaxq0qKomRnt+m61qRlazGer4i5D+1O7+AsVT+c6qIAhbHp5mpojzt5jTSdGkgy5kyLCC0rqko+mBVEh++TRugV4BkDoX9hTHOV5C1gD2IIgy9i6mk67VUtKjSxWq89ixYVUxiibSKkI4WQ8ldzZ3sD9qfiFjUb/fCZNPIoWeuD6itwEgljySsbXL5IzfxmOrTb37IKuVto1PluSATWs4quqLdoecbDyVkv+D7tpgnH14rnl1Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=GiIpqkoBIHW9U0YkLhhuENsDbAsUd4QW4welcq2ADWc=;
+ b=bdE8libEJ0KAVVHb3UzDYEkEQWQrdnhQ7Emx0WlV7cmNzeXq2Nr7cjA43QnRJh7HX7tygcFN5o7+nK/e6taALVe6+C528TZFpj1yDjnWqUj33cuC6Kpj4jaPECPj6v8grLraALxhZQGxyn5eVD1Nv3rawO1wIX5htSFB+OzSxflfhwI3zvteN8ftu0WxzUkOS75JUrJ7TgVsGF55n1w6DgcuuYr5pUU6LRC3h/U2u3kxV0KCQf7q8iEGFTOWdiYIkip0Qkj8APpidXduT7BSrsZCMvZKPsK+feN5++7fNGpmGsdhwA3Sqia0naSS4Q0hvxpNQOohAp37Nch+qP/FdQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=GiIpqkoBIHW9U0YkLhhuENsDbAsUd4QW4welcq2ADWc=;
+ b=0UCsCT8hoIo7KQz/ZtZHnHC4JmeFabHfpnuLCt44DVfo+3aJ5Oa1qkmt3rZ9NNABTOZwP8Zx8aLHcfufEYmPhOGjV/BTPcdKK3AOhVverMLa9ChVYWagvkFk0cux1xV0s2Oes1nkv7iOKd6HdYqN1oXi0DnLNqoa6TVOvk+dMUA=
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by MN0PR12MB5763.namprd12.prod.outlook.com (2603:10b6:208:376::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5834.15; Wed, 23 Nov
+ 2022 09:06:06 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::7d43:3f30:4caf:7421]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::7d43:3f30:4caf:7421%7]) with mapi id 15.20.5834.015; Wed, 23 Nov 2022
+ 09:06:06 +0000
+Message-ID: <3d8607b4-973d-945d-c184-260157ade7c3@amd.com>
+Date: Wed, 23 Nov 2022 10:06:00 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Content-Language: en-US
+To: Daniel Vetter <daniel.vetter@ffwll.ch>, Jason Gunthorpe <jgg@ziepe.ca>
+References: <20221122170801.842766-1-daniel.vetter@ffwll.ch>
+ <Y30PDdsvHIJo5YHR@ziepe.ca>
+ <CAKMK7uEccwYTNwDYQazmZvTfBFQOikZt5A6BmegweyO-inKYbQ@mail.gmail.com>
+ <Y30Z4VxT7Wdoc1Lc@ziepe.ca>
+ <CAKMK7uE=8eqyh9BKg_+7B1jjMi6K4wrmPyi9xeLVvVYFxBgF9g@mail.gmail.com>
+ <Y30kK6dsssSLJVgp@ziepe.ca>
+ <CAKMK7uFQQkG82PzuSTGQTnN3ZNps5N_4TjR5NRWo0LaJkEaNew@mail.gmail.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <CAKMK7uFQQkG82PzuSTGQTnN3ZNps5N_4TjR5NRWo0LaJkEaNew@mail.gmail.com>
+X-ClientProxiedBy: FR2P281CA0018.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a::28) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: 713E53EC70
-X-Spamd-Bar: ---------
-X-Spamd-Result: default: False [-9.60 / 15.00];
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|MN0PR12MB5763:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4e586f35-34cc-4ae0-e1bb-08dacd31f46a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	sFe2JIgTa3ajRVCNX+L6tykFaKgpJLsmZGNc4FVn0n+2eMxz35FjoXzFxq1HpN2hRd5pjCkYQP1uTNKh+IRnHzGTirQTBL+lPdwT5PuA6dV1ICY/NfsSQsuiBDA5usv/2jaqixYTfxBdy14re1pPV/3LqiBFFAbVXO0FtT+noKnYMrQ7MT78c2XxWfosKoDputZqGnCrOVMMxZvVQqMYDX4boM8GQGmsVoIOWKtz4/iipUYJmfvn1DWOHixbFXT1EzBjA4k7FXbUBnIoai8H2xMcLA1bgahWqjkmggakiQtKJH/dpBSZPaLY451SmArgKJEi4Y500ZhYjVCq3QwgxDOEDQ2xdorJcmR0hcBI2I+fg+fHaAo015CZHcDPR96tGenqvtRwanTVxdM5yTLf/O5d3iy65Pc1Lv0WVqpBDmDiNoqfTq67HilysYNn0aBZerH5RAdEhk8KqyP1nMJfdXeA7XepwhOWDNkR1O75YS0qPnoWrd89uGLQ0FLFqjDoMQqI4c8kpshwRRFv43y+Pu37t6W02FIoqPtvcyE+yl/jWBwDK+CwO5nNd7bcDlxNCC2NW7jJWrCLCtBJV2xtvpqyaK882LUNkIjkcJ0/8Mlx9SPCzmWjZ8q5h8W5swG4B7AvcCWTbu820uNgdzt3x5NE7ua8FT35Jz1YWz2XRpv1BHFwIe1xkPoXgnd2NC5ajIlhjp7tgx9BOKQ60qC1qxVVQrrarJAJSDBkKHKis4/+3muPSzfhCssQSqG8iHgZPaikrHW38iiaqIcrGREM3w==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(346002)(366004)(136003)(376002)(396003)(451199015)(31696002)(7416002)(5660300002)(6666004)(8936002)(83380400001)(6512007)(6506007)(966005)(478600001)(6486002)(4326008)(54906003)(36756003)(66946007)(66556008)(8676002)(110136005)(2616005)(66476007)(186003)(38100700002)(86362001)(316002)(41300700001)(2906002)(31686004)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?VWo4SURDTzJSSXNPaThUZ3RzenF5aUFwNDNjL0tmV1RibWVtSm5UWUVTallG?=
+ =?utf-8?B?TlJFT2FlaTBSUFRNQmx3aHM2bk9ETjZOTUpvRUgwTHVZcEtoY1o1ZGZjZ1Bj?=
+ =?utf-8?B?OTdWZUR0OHo1aTJEY3FadjN3TVUvblVUNFNKL1lkSmVlWWFRVjg1RlJnOFBn?=
+ =?utf-8?B?Ukd1TXNBNHBVOGJvMDFIL3VYSkExUDBqZ3IwalJ6bFFwMW95S3o4dTZVVGVS?=
+ =?utf-8?B?bXZzN2Nod3A0a1QyaWp2eUNua1RTWmhHbDVoZkNnL2R5RXFCTU1uMVFOWitM?=
+ =?utf-8?B?VzBubVptTGNyZ2dHRDRlZHp6czJseXQ0VUdxUWZBc0luZGo0dGx3V2lNNklI?=
+ =?utf-8?B?QTR3YVpzc2tHR2xsYStPUWVXL3J0Q0F5YTFRU1NEMmFiTFdoOG1WNjhNaVdp?=
+ =?utf-8?B?MUg1cXJ6WWpUdkVBSjQyOVhDNm9SYWVFb0FhMjBaMmxlQjY0ZHBRSndCK2E4?=
+ =?utf-8?B?Ui9sdGFsWTZSRUdwdXBGdE9icUdrTjltQUxjais0MFpqb0ZsRDVlaDFSeFZK?=
+ =?utf-8?B?aFBXQ2JEaERoVHlWTnZUYzEvbXY5ajduRGVRbUhGcGZTRXJiSlkzZXg1NDB0?=
+ =?utf-8?B?YjlGZFVyNncramk3eEhmRGVGNWh0anowWWZKcmg4SXVCeWNxQ2RFb21qeitP?=
+ =?utf-8?B?QVRTSjRsanhISWd6ZTN4ZDRGdnphTU9ySDZUVlA2b1dKWExZSnd1dW5iK0pw?=
+ =?utf-8?B?Nk5IRStWL29SNUxUS3FTQUVzZGtJV21BQ05WazlrYlRPYno3c3IrNWg5dGl6?=
+ =?utf-8?B?a2NPSURWUXpUMU5vWGhSbU9ybUxKRVFvYWpJZHJSUnFjNXE1alAzZVE0NlFm?=
+ =?utf-8?B?Rm9RRzdiMERtQXlHOHpFelpCN3MxajkvdWZvOEtJdEwxY2gzQ3A3WnpBbzJS?=
+ =?utf-8?B?bmtoMU5nQnpVSko0SlJSREhLa3daMStNNFJvYWkraGNMT1RDTTRERW9xbjNs?=
+ =?utf-8?B?RmxMNHE2akNaMkJmK0FxdkR3S1ExZTNFUDB4TEVKM1FJOFhFZVBqNUp6a1Zk?=
+ =?utf-8?B?bzhuWTc5TGxHUDRqVVY4WURkcDY3ckp3eDI2OVpRNlhiVGwzanFlTWk4d0ta?=
+ =?utf-8?B?MHA3V3c5UkpiTEtRVXN1bFhFanVEVWtEZytpeWpEdk9DRHBRdlpDaFZoSVM5?=
+ =?utf-8?B?SDgxTXZPNDlXUGxlNUhkSmhSM29SbFB3QVNKemNzTk1keXBxdENXV05aNkJN?=
+ =?utf-8?B?aHBrbFMySW9yNE0zUVovVitIK0tmK0pXS210SlJxemxLalc3ZmhKME1QNmd0?=
+ =?utf-8?B?WFloQTRGdTgvSXJrSlIyc1pURWFWUml5b05hZzZkNklqNXZjclF0ZlNpMmkw?=
+ =?utf-8?B?NHBJR0lwNXBoQnB4QkhETUdTbWNBTjB2WTBHOXNPV081YXU2TE92QUJrYTNz?=
+ =?utf-8?B?N01DQXRtaDFHd1pSb3JvTlJQWXNJR2ZXbWNhOGkybjJqaFgxQ201MXF1SkFi?=
+ =?utf-8?B?N1Q5Y3JBazIzRlBNUUlGcWUzbURDWG9BbTFUdUFQcHBjS2dYRlJJU1BNcW1N?=
+ =?utf-8?B?YXFVTVhsRS94UjU0R1kwaGRZdXZCakJ6ZzNPOEVrV2ZXTHRXVjNGYXlDVVdn?=
+ =?utf-8?B?bnJ4S0RDb3NrMmljQ0xIcFI4ejRVM0wrNVBiZzZzS1A3bHVhdTM3bnJmbXJD?=
+ =?utf-8?B?dExrb0hvdlBQamg1T1FkNzNtZDdrem5OSGpZNWZENytDdUtjS0FIRm5kV0or?=
+ =?utf-8?B?eXMySGw3WHgxYVpvV210cmZaOVNCNXNvd3ZKdGJGWWUxNHZtcUp5aFJRQSti?=
+ =?utf-8?B?OXpLcmRibDR1RCtHMG90OXlSZEtUZktWOUxUOVJrNmNWTit5dGVrcU5OamJk?=
+ =?utf-8?B?RHM2eEU0RTNnWnVwTmV6eHN4MGo0WmJvQzBUUzNjelI3RjRWUmFHV1FTTXp6?=
+ =?utf-8?B?R2V6a2pHcEtpTnZqTDEyTjdhdHA2czRWZW9qa29oNDhVVEs1Z2w5L2Z6L0JX?=
+ =?utf-8?B?bng2VnY1MDdQWEhrUUdRNTdMbURTZXNkYjU4N2twSEEydlc4aDRLVU0vQ1E1?=
+ =?utf-8?B?RWhrQk9PZVp1L0JtMHVFMk9KWnQvWWRHYkZmTGE0WTNVODFJcVcxOEZsS3NS?=
+ =?utf-8?B?UVNKbnBYcHI5VEp5UWhnWUdrdTFuVVFTNEtpYmlBTGNHc1V5NHMzanNhNGpQ?=
+ =?utf-8?B?MjNOL0JLY21ySWd1MnJTUnI3VVIxSlBDeGxwVHprWUVpZzNDQkNRUDlyNnJG?=
+ =?utf-8?Q?plcoQ7f1+izleEHWG4AVFbXBg2CQ3U/4rZMBTHQuYJzl?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4e586f35-34cc-4ae0-e1bb-08dacd31f46a
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Nov 2022 09:06:06.5958
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Rdj/gSweRQ1u7YOt2+ArEn0Y6CKcsr5MuqoghqhztFDrT1ZPAWsekucwt3+sID4C
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB5763
+X-Rspamd-Queue-Id: 415183EC70
+X-Spamd-Bar: --------
+X-Spamd-Result: default: False [-9.00 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[99.99%];
-	SIGNED_PGP(-2.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[amd.com:email];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.54:from];
-	NEURAL_HAM(-0.00)[-1.000];
-	DWL_DNSWL_NONE(0.00)[gmail.com:dkim];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	RCVD_COUNT_THREE(0.00)[3];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	MIME_GOOD(-0.10)[text/plain];
+	MIME_TRACE(0.00)[0:+];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[ffwll.ch,gmail.com,ndufresne.ca,chromium.org,pengutronix.de,fooishbar.org,linaro.org,lists.freedesktop.org,lists.linaro.org,vger.kernel.org]
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	FROM_HAS_DN(0.00)[];
+	NEURAL_HAM(-0.00)[-0.990];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	RCVD_COUNT_THREE(0.00)[3];
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.244.76:from];
+	DKIM_TRACE(0.00)[amd.com:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mail-mw2nam12on2076.outbound.protection.outlook.com:rdns,ziepe.ca:email]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: YG5W6U6BXQYZ6EU5BFQEGFBN4OVYHAV7
-X-Message-ID-Hash: YG5W6U6BXQYZ6EU5BFQEGFBN4OVYHAV7
-X-MailFrom: ppaalanen@gmail.com
+Message-ID-Hash: RZNKXAGBTF5PYHROLKWF2SN2RU6TMODT
+X-Message-ID-Hash: RZNKXAGBTF5PYHROLKWF2SN2RU6TMODT
+X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Daniel Vetter <daniel@ffwll.ch>, Rob Clark <robdclark@gmail.com>, Nicolas Dufresne <nicolas@ndufresne.ca>, Tomasz Figa <tfiga@chromium.org>, Daniel Stone <daniel@fooishbar.org>, sumit.semwal@linaro.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
+CC: DRI Development <dri-devel@lists.freedesktop.org>, Intel Graphics Development <intel-gfx@lists.freedesktop.org>, Thomas Zimmermann <tzimmermann@suse.de>, Suren Baghdasaryan <surenb@google.com>, Matthew Wilcox <willy@infradead.org>, John Stultz <john.stultz@linaro.org>, Daniel Vetter <daniel.vetter@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: Require VM_PFNMAP vma for mmap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YG5W6U6BXQYZ6EU5BFQEGFBN4OVYHAV7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RZNKXAGBTF5PYHROLKWF2SN2RU6TMODT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============8380313957501102315=="
-
---===============8380313957501102315==
-Content-Type: multipart/signed; boundary="Sig_/cajiis7amej/mZobkBvjUIf";
- protocol="application/pgp-signature"; micalg=pgp-sha256
-
---Sig_/cajiis7amej/mZobkBvjUIf
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 22 Nov 2022 18:33:59 +0100
-Christian K=C3=B6nig <christian.koenig@amd.com> wrote:
-
-> We should have come up with dma-heaps earlier and make it clear that=20
-> exporting a DMA-buf from a device gives you something device specific=20
-> which might or might not work with others.
->=20
-> Apart from that I agree, DMA-buf should be capable of handling this.=20
-> Question left is what documentation is missing to make it clear how=20
-> things are supposed to work?
-
-Perhaps somewhat related from Daniel Stone that seems to have been
-forgotten:
-https://lore.kernel.org/dri-devel/20210905122742.86029-1-daniels@collabora.=
-com/
-
-It aimed mostly at userspace, but sounds to me like the coherency stuff
-could use a section of its own there?
-
-
-Thanks,
-pq
-
---Sig_/cajiis7amej/mZobkBvjUIf
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmN92uIACgkQI1/ltBGq
-qqeufxAArV/1qNM1iUdpazc77pVkdR39lQLHZ5KUA/NcbdEnLh1WkJfTIRjChTEO
-EuXBSUYEPBxiwU9ig405p8W5fqIzVneFY4yjtHzB1ugVWwxYSrIVvyljQwihEn8g
-X4aB+nwsf2Z23UQEcP4Ov+QlzE34zoMS9JDe9JJ7R8TdUbWWRfR0aJKK5ifNcYGi
-6YFW12O6XdNRoJ2mwAqiqIGHO5tlP6ADQHOuhEykrn55oAAwsgLkCpDdxTtcwAbz
-r98SgI6Km7S8cnQD5y7yR2gPHENM5P5xhS9SU1Wqc7K2pmgVkT22vgtDP3O+yb2h
-cy9ASGQw6Eu71V4Gpz8wnVDzGniqCfnug3fC/HpaO/VSbFG1ahI3eb7fGozDOpTc
-sOfmr/72BZvq8rkkVroC/psgmY+j8OS8+y/z+ICD6yItPTwIH+EYOLACSINSkx4k
-3hQBs2QH2zyBZMg2LbnjYSYJNwVPbboQme15A0y6bCGYKd6ipxr3Gx35x8EC2+jN
-B+HQEfKq5K/dXPL8Aiql/sMcjyo16ejQnBbfwMa9UHwUGG9KhWDxYnCB3CrW1z+Q
-eDcROSwnY84xDwApp0aIU+4qMST1QMF1oxf5OIjm1JZcVB4Bv7w6RveUa33aCKeb
-SJN5+Ot13ubVvPAaEns8vcw9iRdyy50+i9q7MdBHqtTSrJvO1Vg=
-=m2RZ
------END PGP SIGNATURE-----
-
---Sig_/cajiis7amej/mZobkBvjUIf--
-
---===============8380313957501102315==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+
+Am 22.11.22 um 20:50 schrieb Daniel Vetter:
+> On Tue, 22 Nov 2022 at 20:34, Jason Gunthorpe <jgg@ziepe.ca> wrote:
+>> On Tue, Nov 22, 2022 at 08:29:05PM +0100, Daniel Vetter wrote:
+>>> You nuke all the ptes. Drivers that move have slightly more than a
+>>> bare struct file, they also have a struct address_space so that
+>>> invalidate_mapping_range() works.
+>> Okay, this is one of the ways that this can be made to work correctly,
+>> as long as you never allow GUP/GUP_fast to succeed on the PTEs. (this
+>> was the DAX mistake)
+> Hence this patch, to enforce that no dma-buf exporter gets this wrong.
+> Which some did, and then blamed bug reporters for the resulting splats
+> :-) One of the things we've reverted was the ttm huge pte support,
+> since that doesn't have the pmd_special flag (yet) and so would let
+> gup_fast through.
+
+The problem is not only gup, a lot of people seem to assume that when 
+you are able to grab a reference to a page that the ptes pointing to 
+that page can't change any more. And that's obviously incorrect.
+
+I witnessed tons of discussions about that already. Some customers even 
+modified our code assuming that and then wondered why the heck they ran 
+into data corruption.
+
+It's gotten so bad that I've even proposed intentionally mangling the 
+page reference count on TTM allocated pages: 
+https://patchwork.kernel.org/project/dri-devel/patch/20220927143529.135689-1-christian.koenig@amd.com/
+
+I think it would be better that instead of having special flags in the 
+ptes and vmas that you can't follow them to a page structure we would 
+add something to the page indicating that you can't grab a reference to 
+it. But this might break some use cases as well.
+
+Regards,
+Christian.
+
+> -Daniel
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============8380313957501102315==--
