@@ -2,84 +2,84 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8DAA63A15D
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Nov 2022 07:39:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 359C963A15E
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Nov 2022 07:40:04 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C94013EF33
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Nov 2022 06:39:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 42A9D3ED82
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Nov 2022 06:40:03 +0000 (UTC)
 Received: from wnew2-smtp.messagingengine.com (wnew2-smtp.messagingengine.com [64.147.123.27])
-	by lists.linaro.org (Postfix) with ESMTPS id 3FC163EDA2
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 15:29:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 6DB733ED34
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 15:30:04 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=cerno.tech header.s=fm2 header.b="I oIxyIj";
-	dkim=pass header.d=messagingengine.com header.s=fm1 header.b="t OXWuwr";
+	dkim=pass header.d=cerno.tech header.s=fm2 header.b="l /iGN1G";
+	dkim=pass header.d=messagingengine.com header.s=fm1 header.b="A ZTn/Ae";
 	spf=pass (lists.linaro.org: domain of maxime@cerno.tech designates 64.147.123.27 as permitted sender) smtp.mailfrom=maxime@cerno.tech;
 	dmarc=pass (policy=none) header.from=cerno.tech
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-	by mailnew.west.internal (Postfix) with ESMTP id F3FA12B06A7A;
-	Wed, 23 Nov 2022 10:29:55 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute4.internal (MEProxy); Wed, 23 Nov 2022 10:29:58 -0500
+Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
+	by mailnew.west.internal (Postfix) with ESMTP id 1DC022B069B3;
+	Wed, 23 Nov 2022 10:30:01 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute3.internal (MEProxy); Wed, 23 Nov 2022 10:30:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
 	:cc:content-transfer-encoding:content-type:date:date:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to; s=fm2; t=1669217395; x=
-	1669224595; bh=xa2Xr2XPoRVUUkfnytxj0Crl7ldzQeXde8zWUWNPEc8=; b=I
-	oIxyIj72uCvm/XjjJENT3wqIDO6NxuUF4Fz81i2dPW1PJLibP2AdgKufei1FMdpu
-	5gcyFC/q9+abuEkgOn/AfrjsEN1nJf8JpSuxTeBQ+eAa+HCiJkJY72z8MhadfDHn
-	nzUzM+EGqYEzeHjDxqtMdJVxr5VzBKd6A8pI7+hD3OJDJCnuPbeM4PGm130pBW9T
-	I7Xt31qTJ/ias/KN37RxkLRz3epuXEmGjR/tk+LEFQ2qDvps1WoOTmJf3lWZJ+55
-	/iCPQ0qNqIx510B+xgpa1lgbg7Xfqx3UbTGoQ8fsl792+T7p/m6T/DH0SGyfTJuH
-	5lobAtvOfJ2XiKuXUDcwA==
+	:reply-to:sender:subject:subject:to:to; s=fm2; t=1669217400; x=
+	1669224600; bh=ChYI1M6Z54togdHh/dr/ukigKVcIk1SA7Zu3mho3dqM=; b=l
+	/iGN1GKplSE+Cw/ezbuqzZiNTwbPvsC3rd0djiTIh82VitgOmPH7aV3+z/3CRaXw
+	REhuh7+QPoJ9GhS4GQu+7IW0OavaN+v920KBSPVQxnxRuqnuQzwcixJoUD3aEyMd
+	5MOWP+tafxVMyQu/zDR68FC2k/QJY3kBRBdVfGHGzK/pncjB87vdu3Wf52vrYiJf
+	TNjfOzdyrzkic4kDSUQ+o5MR4Fj/Foo4b49akevs3NsJtu9EhNYDedqA1S2jkv2d
+	Z4NoX9Q76boem/NS3Ns3a1P9lVi88J+eCoYIV8KXS2XFbvEplPKzZS53IXAZe4RZ
+	uiHK069quGGxob7498gkg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1669217395; x=
-	1669224595; bh=xa2Xr2XPoRVUUkfnytxj0Crl7ldzQeXde8zWUWNPEc8=; b=t
-	OXWuwrUE36xuza4nA/00BWxCwgo7A0skuCWcP5x7iNQerc0WhfihX3C9MvY54fc+
-	Kfyv2bszolIZ5Wcbhg8HYPkLE2myzbXIJ1PgAHIV1bVJ4zVn+jhmqMFf6gzAVi1Q
-	t4NFJgsjhgz+RQXsFiXCuxaNZPdb7ZixBRIBE6WgFVvMCHtlxofyXpU0/jYLk8bZ
-	1I37nmtb6YXt4VxA4e0Q6sel4AC/L6daN1QYo82NETae+bjzkLrEg0KCP61dpxcB
-	ycllPU9srbacvrxh/nTIOnl/c2afnpAeH4XazK6N7q2c3SI8f9C5Sq6gitNWq0LK
-	KZplW40hF8VLzrGyq+kZw==
-X-ME-Sender: <xms:czx-YwQShn4eeqEAgBQ8cqQHN6UczS133vk65w5LHEbykN8lEDDLiQ>
-    <xme:czx-Y9xf664-vRcRmcpgq4BYE6Fbt1Wtfkl2LNzWtyWhzdG0-7sPq6TYaewtld_-H
-    ymn-6BP9JsjUpfc4a4>
-X-ME-Received: <xmr:czx-Y93QhxBdD8n8ykaeGPnQ6e6zWJz5qc6ji_hRksR-Lk8XZ1ER0yay7XyjDQNefiQBSWH1h7bgLkAjScD7c03qmlaxs-b5YerfcLCCU2XTBw>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1669217400; x=
+	1669224600; bh=ChYI1M6Z54togdHh/dr/ukigKVcIk1SA7Zu3mho3dqM=; b=A
+	ZTn/AeH3GLMXTY4WVoT2gKRf4kdKF5MK4rwm9NpQbZqxa6WvzrbUska5QQDddEEg
+	g/vT/6L3STApxE64TU7Z6e0rz8B4sxP38wmTMLOwdxo1Q06wICU8QxG6D4Ei2uh4
+	oMQ1joFGM7MX0w7Fz20dKHITsuOdz4oGDjnbdGAXmqHXYHPfULOny+ezdnRxmowq
+	ANhuIZb9Hq0jgofZbaWwiAD4uVg++k+9TQwGwAmLI0Rzs3qEQHcz8rZHlQjjx5ar
+	nkfr/hM1D4lYh61iVu3LgYOIbFi+nZRe4J7j4gmXgkzXvULwho6rQdO15hASYOrJ
+	YS0JzDE27mBcGnc+Wn8BQ==
+X-ME-Sender: <xms:eDx-Y9OOmc4_s3cAq_j0mdnOqX4BiqY5crWdNF4NKZxLHHy-UUoK2w>
+    <xme:eDx-Y_99Ldq5YD_MPl7Thdr20cjyC6uPGB805t58P65Nm2FnJqeV5VBgJTJxa3hZ4
+    R9KqZnsPyhVLK-FIro>
+X-ME-Received: <xmr:eDx-Y8QXBgWuuSXXC8kGANxx3IKsvYYGfM5EoHqVMwbDyiSChqa3yNc4SIxEww9NBYX-cPpu86yaR2VWElWfuKwpeWeianR84TXJT-eRj-0ECw>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedriedugdejgecutefuodetggdotefrodftvf
     curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
     uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
     fjughrpefhfffugggtgffkfhgjvfevofesthekredtredtjeenucfhrhhomhepofgrgihi
     mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
     htthgvrhhnpeduudduhfevjeetfeegvdffvdevvdejudegudekjeehtdelhfffveethfej
-    ledtveenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+    ledtveenucevlhhushhtvghrufhiiigvpeeinecurfgrrhgrmhepmhgrihhlfhhrohhmpe
     hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:czx-Y0DoGYav10OrIvKlenqCdA_vyYrKvhiUDQgGM3hlLrWvM23a4w>
-    <xmx:czx-Y5gn9TbtuUMo1McKrDELtZ6HOPPhEKVRe4L_LVoo34LEGSDYCQ>
-    <xmx:czx-YwoI-3iBArWo0LrzH4NdbuMDJ_H2XOgLC28tDGyYZDYavjhJtw>
-    <xmx:czx-YyBnc1SupCF6-1WnzqAiGzc1_o13Q4WgIeE0eRVs_DW6dM_wVxG1VUs>
+X-ME-Proxy: <xmx:eDx-Y5uihcKJpjlhmfoRY5jcUnXzqVFeN22hDv_dwmCcGgetmTc2Rw>
+    <xmx:eDx-Y1dCJXCwj__z8-MgKE6Ujk1C6M740Gmcv5pXJXT2pZ13FUg2fw>
+    <xmx:eDx-Y10FklRlTjKOEl_0qgZ_Ab0WoLFkuU1elANdZS2SJJOvUihIVA>
+    <xmx:eDx-Yz-2I0YJS720_cu4LUfzdJHd9COqRmWNaN2zVAek89_89_tp4Jf1zfc>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 23 Nov 2022 10:29:54 -0500 (EST)
+ 23 Nov 2022 10:29:59 -0500 (EST)
 From: Maxime Ripard <maxime@cerno.tech>
-Date: Wed, 23 Nov 2022 16:25:58 +0100
+Date: Wed, 23 Nov 2022 16:25:59 +0100
 MIME-Version: 1.0
-Message-Id: <20221123-rpi-kunit-tests-v1-16-051a0bb60a16@cerno.tech>
+Message-Id: <20221123-rpi-kunit-tests-v1-17-051a0bb60a16@cerno.tech>
 References: <20221123-rpi-kunit-tests-v1-0-051a0bb60a16@cerno.tech>
 In-Reply-To: <20221123-rpi-kunit-tests-v1-0-051a0bb60a16@cerno.tech>
 To: Maxime Ripard <mripard@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@gmail.com>, Thomas Zimmermann <tzimmermann@suse.de>
 X-Mailer: b4 0.11.0-dev-d416f
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1254; i=maxime@cerno.tech;
- h=from:subject:message-id; bh=aR4vqMsUMqYTxLScBcRnhlhUq2A/EuG6aDorDcg05no=;
- b=owGbwMvMwCX2+D1vfrpE4FHG02pJDMl11tU63QpH/qj+5+FbXf2IYUnBZ5MOxpM/Fee/usTrN/VR
- hZFRRykLgxgXg6yYIkuMsPmSuFOzXney8c2DmcPKBDKEgYtTACZygpOR4WLw/1nOmtv67GcvZEtzXP
- 5wyXrNbPelz18+3WgtcFBL4yojw7RvWb35hwvml97aspj35jPfU//91fd3mjRYZ4kLHV6gxQUA
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4204; i=maxime@cerno.tech;
+ h=from:subject:message-id; bh=8IMW90exgcOHa0pomJ4hHcxuKwRM2yEBQaUql6lBc2M=;
+ b=owGbwMvMwCX2+D1vfrpE4FHG02pJDMl11tVZLx7+WirWU/0+ljt17wOZ7ecu3PuusXnLtBXpOyPj
+ LgYf6yhlYRDjYpAVU2SJETZfEndq1utONr55MHNYmUCGMHBxCsBEVlUwMnyxmLX/wNYQ++a7qw83OD
+ gem/pg2gODbV91NTmq9H9+n3ma4a8kt8OG6w78f78f3fk3ovB2hP6Onyme5x4vW+Dx5JCR/nxuAA==
 X-Developer-Key: i=maxime@cerno.tech; a=openpgp;
  fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
-X-Rspamd-Queue-Id: 3FC163EDA2
+X-Rspamd-Queue-Id: 6DB733ED34
 X-Spamd-Bar: ----
 X-Spamd-Result: default: False [-4.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
@@ -109,15 +109,15 @@ X-Rspamd-Server: lists.linaro.org
 X-MailFrom: maxime@cerno.tech
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: VQENB3K5HOD6CWZRZEBQ3SLHK64XOWD4
-X-Message-ID-Hash: VQENB3K5HOD6CWZRZEBQ3SLHK64XOWD4
-X-Mailman-Approved-At: Mon, 28 Nov 2022 06:33:53 +0000
+Message-ID-Hash: 3E45X5LVJO7XB4PNF3FY67FDMEND2DK3
+X-Message-ID-Hash: 3E45X5LVJO7XB4PNF3FY67FDMEND2DK3
+X-Mailman-Approved-At: Mon, 28 Nov 2022 06:33:54 +0000
 CC: David Gow <davidgow@google.com>, linaro-mm-sig@lists.linaro.org, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-kselftest@vger.kernel.org, =?utf-8?b?TWHvv73vv71yYSBDYW5hbA==?= <mairacanal@riseup.net>, Maxime Ripard <maxime@cerno.tech>, linux-media@vger.kernel.org, Javier Martinez Canillas <javierm@redhat.com>, kunit-dev@googlegroups.com, dri-devel@lists.freedesktop.org, Brendan Higgins <brendan.higgins@linux.dev>, linux-kernel@vger.kernel.org, Dave Stevenson <dave.stevenson@raspberrypi.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 16/24] drm/vc4: txp: Initialise the CRTC before the encoder and connector
+Subject: [Linaro-mm-sig] [PATCH 17/24] drm/vc4: crtc: Pass the device and data in vc4_crtc_init
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VQENB3K5HOD6CWZRZEBQ3SLHK64XOWD4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3E45X5LVJO7XB4PNF3FY67FDMEND2DK3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -127,42 +127,107 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-It makes more sense to register the CRTC before the encoder and
-connectors, so let's move our call around.
+Both users of vc4_crtc_init need the same extra initialization to set
+the pointer to the platform_device and the CRTC data. Since it's
+mandatory, let's make them both arguments of vc4_crtc_init().
 
 Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 ---
- drivers/gpu/drm/vc4/vc4_txp.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ drivers/gpu/drm/vc4/vc4_crtc.c | 17 +++++++++++------
+ drivers/gpu/drm/vc4/vc4_drv.h  |  6 ++++--
+ drivers/gpu/drm/vc4/vc4_txp.c  |  7 ++-----
+ 3 files changed, 17 insertions(+), 13 deletions(-)
 
+diff --git a/drivers/gpu/drm/vc4/vc4_crtc.c b/drivers/gpu/drm/vc4/vc4_crtc.c
+index 0108613e79d5..1ea190dffe87 100644
+--- a/drivers/gpu/drm/vc4/vc4_crtc.c
++++ b/drivers/gpu/drm/vc4/vc4_crtc.c
+@@ -1278,9 +1278,12 @@ static void vc4_set_crtc_possible_masks(struct drm_device *drm,
+ 	}
+ }
+ 
+-int vc4_crtc_init(struct drm_device *drm, struct vc4_crtc *vc4_crtc,
++int vc4_crtc_init(struct drm_device *drm, struct platform_device *pdev,
++		  struct vc4_crtc *vc4_crtc,
++		  const struct vc4_crtc_data *data,
+ 		  const struct drm_crtc_funcs *crtc_funcs,
+-		  const struct drm_crtc_helper_funcs *crtc_helper_funcs)
++		  const struct drm_crtc_helper_funcs *crtc_helper_funcs,
++		  bool feeds_txp)
+ {
+ 	struct vc4_dev *vc4 = to_vc4_dev(drm);
+ 	struct drm_crtc *crtc = &vc4_crtc->base;
+@@ -1300,6 +1303,9 @@ int vc4_crtc_init(struct drm_device *drm, struct vc4_crtc *vc4_crtc,
+ 		return PTR_ERR(primary_plane);
+ 	}
+ 
++	vc4_crtc->data = data;
++	vc4_crtc->pdev = pdev;
++	vc4_crtc->feeds_txp = feeds_txp;
+ 	spin_lock_init(&vc4_crtc->irq_lock);
+ 	ret = drmm_crtc_init_with_planes(drm, crtc, primary_plane, NULL,
+ 					 crtc_funcs, NULL);
+@@ -1345,8 +1351,6 @@ static int vc4_crtc_bind(struct device *dev, struct device *master, void *data)
+ 	pv_data = of_device_get_match_data(dev);
+ 	if (!pv_data)
+ 		return -ENODEV;
+-	vc4_crtc->data = &pv_data->base;
+-	vc4_crtc->pdev = pdev;
+ 
+ 	vc4_crtc->regs = vc4_ioremap_regs(pdev, 0);
+ 	if (IS_ERR(vc4_crtc->regs))
+@@ -1356,8 +1360,9 @@ static int vc4_crtc_bind(struct device *dev, struct device *master, void *data)
+ 	vc4_crtc->regset.regs = crtc_regs;
+ 	vc4_crtc->regset.nregs = ARRAY_SIZE(crtc_regs);
+ 
+-	ret = vc4_crtc_init(drm, vc4_crtc,
+-			    &vc4_crtc_funcs, &vc4_crtc_helper_funcs);
++	ret = vc4_crtc_init(drm, pdev, vc4_crtc, &pv_data->base,
++			    &vc4_crtc_funcs, &vc4_crtc_helper_funcs,
++			    false);
+ 	if (ret)
+ 		return ret;
+ 	vc4_set_crtc_possible_masks(drm, crtc);
+diff --git a/drivers/gpu/drm/vc4/vc4_drv.h b/drivers/gpu/drm/vc4/vc4_drv.h
+index 31228d4cf080..599d24f1f55a 100644
+--- a/drivers/gpu/drm/vc4/vc4_drv.h
++++ b/drivers/gpu/drm/vc4/vc4_drv.h
+@@ -886,9 +886,11 @@ int vc4_bo_debugfs_init(struct drm_minor *minor);
+ /* vc4_crtc.c */
+ extern struct platform_driver vc4_crtc_driver;
+ int vc4_crtc_disable_at_boot(struct drm_crtc *crtc);
+-int vc4_crtc_init(struct drm_device *drm, struct vc4_crtc *vc4_crtc,
++int vc4_crtc_init(struct drm_device *drm, struct platform_device *pdev,
++		  struct vc4_crtc *vc4_crtc, const struct vc4_crtc_data *data,
+ 		  const struct drm_crtc_funcs *crtc_funcs,
+-		  const struct drm_crtc_helper_funcs *crtc_helper_funcs);
++		  const struct drm_crtc_helper_funcs *crtc_helper_funcs,
++		  bool feeds_txp);
+ int vc4_page_flip(struct drm_crtc *crtc,
+ 		  struct drm_framebuffer *fb,
+ 		  struct drm_pending_vblank_event *event,
 diff --git a/drivers/gpu/drm/vc4/vc4_txp.c b/drivers/gpu/drm/vc4/vc4_txp.c
-index 0bb8e97d7891..c2a6bea6fd96 100644
+index c2a6bea6fd96..841da240d93a 100644
 --- a/drivers/gpu/drm/vc4/vc4_txp.c
 +++ b/drivers/gpu/drm/vc4/vc4_txp.c
-@@ -516,6 +516,11 @@ static int vc4_txp_bind(struct device *dev, struct device *master, void *data)
+@@ -509,15 +509,12 @@ static int vc4_txp_bind(struct device *dev, struct device *master, void *data)
+ 		return PTR_ERR(txp->regs);
+ 
+ 	vc4_crtc = &txp->base;
+-	vc4_crtc->pdev = pdev;
+-	vc4_crtc->data = &vc4_txp_crtc_data;
+-	vc4_crtc->feeds_txp = true;
+ 	vc4_crtc->regset.base = txp->regs;
  	vc4_crtc->regset.regs = txp_regs;
  	vc4_crtc->regset.nregs = ARRAY_SIZE(txp_regs);
  
-+	ret = vc4_crtc_init(drm, vc4_crtc,
-+			    &vc4_txp_crtc_funcs, &vc4_txp_crtc_helper_funcs);
-+	if (ret)
-+		return ret;
-+
- 	vc4_encoder = &txp->encoder;
- 	txp->encoder.type = VC4_ENCODER_TYPE_TXP;
- 
-@@ -537,11 +542,6 @@ static int vc4_txp_bind(struct device *dev, struct device *master, void *data)
+-	ret = vc4_crtc_init(drm, vc4_crtc,
+-			    &vc4_txp_crtc_funcs, &vc4_txp_crtc_helper_funcs);
++	ret = vc4_crtc_init(drm, pdev, vc4_crtc, &vc4_txp_crtc_data,
++			    &vc4_txp_crtc_funcs, &vc4_txp_crtc_helper_funcs, true);
  	if (ret)
  		return ret;
  
--	ret = vc4_crtc_init(drm, vc4_crtc,
--			    &vc4_txp_crtc_funcs, &vc4_txp_crtc_helper_funcs);
--	if (ret)
--		return ret;
--
- 	ret = devm_request_irq(dev, irq, vc4_txp_interrupt, 0,
- 			       dev_name(dev), txp);
- 	if (ret)
 
 -- 
 2.38.1-b4-0.11.0-dev-d416f
