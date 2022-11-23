@@ -2,60 +2,60 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BED36362B0
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 16:04:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B5236362E3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 16:09:11 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 268B33EE89
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 15:04:38 +0000 (UTC)
-Received: from mail-qv1-f49.google.com (mail-qv1-f49.google.com [209.85.219.49])
-	by lists.linaro.org (Postfix) with ESMTPS id F400F3ECED
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 15:04:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 69A8D3ED34
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 23 Nov 2022 15:09:10 +0000 (UTC)
+Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com [209.85.219.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 28FF53ED34
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 15:09:01 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ziepe.ca header.s=google header.b="KbvhaD/O";
-	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.219.49 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
+	dkim=pass header.d=ziepe.ca header.s=google header.b=UZ90yvpY;
+	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.219.48 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
 	dmarc=none
-Received: by mail-qv1-f49.google.com with SMTP id h10so12282241qvq.7
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 07:04:28 -0800 (PST)
+Received: by mail-qv1-f48.google.com with SMTP id h10so12291625qvq.7
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 23 Nov 2022 07:09:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=ziepe.ca; s=google;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=FBEH7FU3hds/tvKbXdMlXPtYdkYQK2zhDrcZFkrz0mE=;
-        b=KbvhaD/OFUhW+1OPwGfqfp9mQ5zjYM5Yc3gcYSNfC0GNXLuvDL6Tt9tkh6TO6Q/M+e
-         MPgnHS9/c+nXmkVvB0y+LvWp1Yg4X/GBbBaNettvziGu79P/qHdJWhmD1yDQsjIOPzfe
-         HX1V+FBxFpvFta6LJiUWXtALCwxl1RaSpmdhNQUSaBXPCKJ7BUeKj8L5AfxcGhQYXt9r
-         4Y0uneLWW86LvWjmM6Z8keD/8toP38iA5CPOlGq0eqX859PaMBK4R6S9XK+13DwqF0U2
-         cIjGBN2XTpw58MVf2q4r64z5xLMIIFSO6I57I/RmQdleSVDnMQ1IAT+TJruJ+BHv3Cf5
-         23uA==
+        bh=yl5EWh2LPGXKg4ZX+0uMGR+SP4+5g4wansDQ2racGIw=;
+        b=UZ90yvpYHpAD2wJFcceeqxHp5n/1J/IMdboyjPLp9xSvgX7lhd9bIH3J7mYPJrCrgH
+         tIUHI5mfCyqHqL/FPnEKA2O3D4UL7ejl7s4SZWtCiLkQMQ0C9Vp59OLuPUd9l9rtsP/H
+         5KMfSJskvLx0jvavXd2BcujWMJkK2mF1Y/bBE2Auf5ZuOkr+OEzP+TYvNGzpLDMh1E/b
+         /tk+XGOAsg1BHi8GoUKfhHIo0iTmbkce9zo9I7xuGjeffWnbCQMDz+hFZmGT49zCWuvX
+         8So0XmT6Euoi53OroYVLDNKa4yZxbJs5xlXojPLsNHKLC7aadu52zmFmfAidIVRVxdfh
+         /nVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=FBEH7FU3hds/tvKbXdMlXPtYdkYQK2zhDrcZFkrz0mE=;
-        b=oKu0D6xyRdGJdXW15+WHmq3iwclkUPN0ra7wcnCJiJfMP7oM/yzKYiI+75bRueXi7Q
-         hGsMMZIuS24ZSDna0lIcId1SKFy1q7R7Bou1pwE2Bg2KlheSVdfupDDDAYYSW2FzWMFN
-         /+QVGFNmoK9EPybKiXHW8aUhw24Zsr8rRLO8l2FzYANWkeAVOQHQJQlrNWHrCUj0ZYua
-         16iqOU1MvEFCBk+cDC3YEbae6PdHMnB+qN1NeTsMVn1OWlAMIQvHoolTiT4t8nwQVcHu
-         J4Th843faAplovDe+otBzdv/6wBYPu/zWR85XikdHj8YmQRfL3MaJ3xR4BdXSFHz4jzP
-         ZShg==
-X-Gm-Message-State: ANoB5pkJW1thgz3WKn9Rh0oJLnOg5L46P8SVjs8Cpn2l9d0pIMJwCBMU
-	RX/8euUorgPacMb/bDxBNz+cGNdAKRj9ag==
-X-Google-Smtp-Source: AA0mqf56pidAa3YTB06LY1QYSMl3063l/28XS7JhvQ9qi9gepPYorNcNhgDN/VcYdvMsrmMwORDsaQ==
-X-Received: by 2002:ad4:5445:0:b0:4c6:62af:5e14 with SMTP id h5-20020ad45445000000b004c662af5e14mr10912011qvt.95.1669215868434;
-        Wed, 23 Nov 2022 07:04:28 -0800 (PST)
+        bh=yl5EWh2LPGXKg4ZX+0uMGR+SP4+5g4wansDQ2racGIw=;
+        b=dIfheMyxuo7i26PmI92fChETayojHSccZOGMr6vGHBxze582Lv/Upw3m7GMK3cpWgQ
+         69qMbEGGJYb9GCN568Oi7GlhQT1sTsex/aXchOovbVWKxzdQNIR6sHijzJaphfCrk4QC
+         HHpk0P7ZBAL71VDsmMI6l1PnVwAF/hghXUFCPXP5Ti11iJGONx930m24CWJ3kulcpMPz
+         oN34YG5fEIo/2pvCtQU38JYUswm6QIiSRsO0eIVBZjYAc6eKQPHivPa0d0CWkYZ8hH5Y
+         M6IcqjQf1JxgH66yR6BC6YIM8+Ze2S1Fy095U5Ijaku/tZFzYIul1d8Q6wlkI5pjHSeu
+         Ktgw==
+X-Gm-Message-State: ANoB5plEVNghT2WoZjnN693T+FxustaCJxodgrGg6TJpA/uMYTYnYtf3
+	WSdVA2p43WoRufm3ch4zmi8CAw==
+X-Google-Smtp-Source: AA0mqf7e8Ogh/ZJOSZP+2cSLpyEbwDySY9r7p8UtFKlyBZNWj/XPJyjVbU2TWKfbCouXJyhbUXJI9w==
+X-Received: by 2002:a0c:b405:0:b0:4bb:666c:384d with SMTP id u5-20020a0cb405000000b004bb666c384dmr27071486qve.91.1669216140695;
+        Wed, 23 Nov 2022 07:09:00 -0800 (PST)
 Received: from ziepe.ca (hlfxns017vw-47-55-122-23.dhcp-dynamic.fibreop.ns.bellaliant.net. [47.55.122.23])
-        by smtp.gmail.com with ESMTPSA id ey10-20020a05622a4c0a00b003a5fb681ae7sm9891959qtb.3.2022.11.23.07.04.26
+        by smtp.gmail.com with ESMTPSA id ca9-20020a05622a1f0900b00398a7c860c2sm10023130qtb.4.2022.11.23.07.08.59
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 23 Nov 2022 07:04:27 -0800 (PST)
+        Wed, 23 Nov 2022 07:08:59 -0800 (PST)
 Received: from jgg by wakko with local (Exim 4.95)
 	(envelope-from <jgg@ziepe.ca>)
-	id 1oxrIY-00AMYp-BS;
-	Wed, 23 Nov 2022 11:04:26 -0400
-Date: Wed, 23 Nov 2022 11:04:26 -0400
+	id 1oxrMw-00AMdR-Vh;
+	Wed, 23 Nov 2022 11:08:58 -0400
+Date: Wed, 23 Nov 2022 11:08:58 -0400
 From: Jason Gunthorpe <jgg@ziepe.ca>
 To: Daniel Vetter <daniel.vetter@ffwll.ch>
-Message-ID: <Y342emkzKHXLQvsN@ziepe.ca>
+Message-ID: <Y343ijGoqyf73d+I@ziepe.ca>
 References: <3d8607b4-973d-945d-c184-260157ade7c3@amd.com>
  <CAKMK7uHVGgGHTiXYOfseXXda2Ug992nYvhPsL+4z18ssqeHXHQ@mail.gmail.com>
  <b05e6091-4e07-1e32-773d-f603ac9ac98b@gmail.com>
@@ -65,47 +65,44 @@ References: <3d8607b4-973d-945d-c184-260157ade7c3@amd.com>
  <Y34XvmtHfb4ZwopN@ziepe.ca>
  <dc2a9d7f-192b-e9d8-b1d1-3b868cb1fd44@gmail.com>
  <Y34gBUl0m+j1JdFk@ziepe.ca>
- <CAKMK7uHWyOcZ77-+GY7hxFUA65uQYFe0fw2rww6Y-rLXvHFAYw@mail.gmail.com>
+ <CAKMK7uEzaUjroODbWe4DtxHQ+gmr7_DVK+fUJjAgMsgP61uGSQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAKMK7uHWyOcZ77-+GY7hxFUA65uQYFe0fw2rww6Y-rLXvHFAYw@mail.gmail.com>
-X-Rspamd-Queue-Id: F400F3ECED
-X-Spamd-Bar: -----------
-X-Spamd-Result: default: False [-11.50 / 15.00];
+In-Reply-To: <CAKMK7uEzaUjroODbWe4DtxHQ+gmr7_DVK+fUJjAgMsgP61uGSQ@mail.gmail.com>
+X-Rspamd-Queue-Id: 28FF53ED34
+X-Spamd-Bar: ------
+X-Spamd-Result: default: False [-6.00 / 15.00];
 	REPLY(-4.00)[];
-	DWL_DNSWL_HI(-3.50)[ziepe.ca:dkim];
-	BAYES_HAM(-3.00)[99.99%];
+	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_IN_DNSWL_HI(-1.00)[47.55.122.23:received,209.85.219.49:from];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
 	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	MIME_GOOD(-0.10)[text/plain];
 	DMARC_NA(0.00)[ziepe.ca];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[ziepe.ca:dkim,mail-qv1-f49.google.com:rdns,mail-qv1-f49.google.com:helo];
-	FREEMAIL_CC(0.00)[gmail.com,amd.com,lists.freedesktop.org,suse.de,google.com,infradead.org,linaro.org,intel.com,vger.kernel.org,lists.linaro.org];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.49:from];
-	NEURAL_HAM(-0.00)[-0.999];
 	TAGGED_RCPT(0.00)[];
-	URIBL_BLOCKED(0.00)[ziepe.ca:dkim];
-	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[ziepe.ca:+];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[ziepe.ca:dkim];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.48:from];
+	NEURAL_HAM(-0.00)[-0.999];
 	RCVD_COUNT_THREE(0.00)[4];
-	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,amd.com,lists.freedesktop.org,suse.de,google.com,infradead.org,linaro.org,intel.com,vger.kernel.org,lists.linaro.org];
 	MIME_TRACE(0.00)[0:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_TRACE(0.00)[ziepe.ca:+];
+	URIBL_BLOCKED(0.00)[ziepe.ca:dkim];
+	RCVD_TLS_LAST(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 3EN4DDXDS4AGWZ3P4HACH2COGOASOI22
-X-Message-ID-Hash: 3EN4DDXDS4AGWZ3P4HACH2COGOASOI22
+Message-ID-Hash: AI5HDTENN32O5V7KKWY2HRDY4XRFASB2
+X-Message-ID-Hash: AI5HDTENN32O5V7KKWY2HRDY4XRFASB2
 X-MailFrom: jgg@ziepe.ca
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, DRI Development <dri-devel@lists.freedesktop.org>, Intel Graphics Development <intel-gfx@lists.freedesktop.org>, Thomas Zimmermann <tzimmermann@suse.de>, Suren Baghdasaryan <surenb@google.com>, Matthew Wilcox <willy@infradead.org>, John Stultz <john.stultz@linaro.org>, Daniel Vetter <daniel.vetter@intel.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
@@ -113,7 +110,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: Require VM_PFNMAP vma for mmap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3EN4DDXDS4AGWZ3P4HACH2COGOASOI22/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AI5HDTENN32O5V7KKWY2HRDY4XRFASB2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -123,52 +120,49 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Wed, Nov 23, 2022 at 03:28:27PM +0100, Daniel Vetter wrote:
-
-> > This patch is known to be broken in so many ways. It also has a major
-> > security hole that it ignores the PTE flags making the page
-> > RO. Ignoring the special bit is somehow not surprising :(
+On Wed, Nov 23, 2022 at 03:34:54PM +0100, Daniel Vetter wrote:
+> > diff --git a/virt/kvm/kvm_main.c b/virt/kvm/kvm_main.c
+> > index 1376a47fedeedb..4161241fc3228c 100644
+> > --- a/virt/kvm/kvm_main.c
+> > +++ b/virt/kvm/kvm_main.c
+> > @@ -2598,6 +2598,19 @@ static int hva_to_pfn_remapped(struct vm_area_struct *vma,
+> >                         return r;
+> >         }
 > >
-> > This probably doesn't work, but is the general idea of what KVM needs
-> > to do:
+> > +       /*
+> > +        * Special PTEs are never convertible into a struct page, even if the
+> > +        * driver that owns them might have put a PFN with a struct page into
+> > +        * the PFNMAP. If the arch doesn't support special then we cannot
+> > +        * safely process these pages.
+> > +        */
+> > +#ifdef CONFIG_ARCH_HAS_PTE_SPECIAL
+> > +       if (pte_special(*ptep))
+> > +               return -EINVAL;
 > 
-> Oh dear, when I dug around in there I entirely missed that
-> kvm_try_get_pfn exists, and it's very broken indeed. kvm really needs
-> to grow a proper mmu notifier.
-> 
-> Another thing I'm wondering right now, the follow_pte();
-> fixup_user_fault(); follow_pte(); approach does not make any
-> guarantees of actually being right. If you're sufficiently unlucky you
-> might race against an immediate pte invalidate between the fixup and
-> the 2nd follow_pte(). But you can also not loop, because that would
-> fail to catch permanent faults.
+> On second thought this wont work, because it completely defeats the
+> point of why this code here exists. remap_pfn_range() (which is what
+> the various dma_mmap functions and the ioremap functions are built on
+> top of too) sets VM_PFNMAP too, so this check would even catch the
+> static mappings.
 
-Yes, it is pretty broken.
+The problem with the way this code is designed is how it allows
+returning the pfn without taking any reference based on things like
+!pfn_valid or page_reserved. This allows it to then conditionally put
+back the reference based on the same reasoning. It is impossible to
+thread pte special into that since it is a PTE flag, not a property of
+the PFN.
 
-kvm already has support for mmu notifiers and uses it for other
-stuff. I can't remember what exactly this code path was for, IIRC
-Paolo talked about having a big rework/fix for it when we last talked
-about the missing write protect. I also vauagely recall he had some
-explanation why this might be safe.
+I don't entirely understand why it needs the page reference at all,
+even if it is available - so I can't guess why it is OK to ignore the
+page reference in other cases, or why it is OK to be racy..
 
-> I think the iommu fault drivers have a similar pattern.
+Eg hmm_range_fault() does not obtain page references and implements a
+very similar algorithm to kvm.
 
-Where? It shouldn't
+> Plus these static mappings aren't all that static either, e.g. pci
+> access also can revoke bar mappings nowadays.
 
-The common code for SVA just calls handle_mm_fault() and restarts the
-PRI. Since the page table is physically shared there is no issue with
-a stale copy.
-
-> What am I missing here? Or is that also just broken. gup works around
-> this with the slow path that takes the mmap sem and walking the vma
-> tree, follow_pte/fixup_user_fautl users dont.
-
-follow_pte() is just fundamentally broken, things must not use it.
-
-> Maybe mmu notifier based restarting would help with this too, if
-> done properly.
-
-That is called hmm_range_fault()
+And there are already mmu notifiers to handle that, AFAIK.
 
 Jason
 _______________________________________________
