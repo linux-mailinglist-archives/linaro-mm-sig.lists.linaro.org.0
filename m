@@ -2,246 +2,145 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC8F663A168
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Nov 2022 07:42:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C184363A170
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Nov 2022 07:43:21 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EC1663ED82
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Nov 2022 06:42:56 +0000 (UTC)
-Received: from wnew3-smtp.messagingengine.com (wnew3-smtp.messagingengine.com [64.147.123.17])
-	by lists.linaro.org (Postfix) with ESMTPS id 1078C3ECBE
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Nov 2022 14:01:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D17183EF89
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Nov 2022 06:43:20 +0000 (UTC)
+Received: from mx1.riseup.net (mx1.riseup.net [198.252.153.129])
+	by lists.linaro.org (Postfix) with ESMTPS id 34F883EA4F
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Nov 2022 14:10:13 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=cerno.tech header.s=fm2 header.b="e qE3tHP";
-	dkim=pass header.d=messagingengine.com header.s=fm1 header.b="l T/mRiR";
-	spf=pass (lists.linaro.org: domain of maxime@cerno.tech designates 64.147.123.17 as permitted sender) smtp.mailfrom=maxime@cerno.tech;
-	dmarc=pass (policy=none) header.from=cerno.tech
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
-	by mailnew.west.internal (Postfix) with ESMTP id 10C032B06842;
-	Thu, 24 Nov 2022 09:01:06 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute2.internal (MEProxy); Thu, 24 Nov 2022 09:01:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
-	:cc:content-transfer-encoding:content-type:date:date:from:from
-	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to; s=fm2; t=1669298466; x=
-	1669305666; bh=4jIAn2lueWeOwVkOG/WC5OUeXxRyuqGWxy80FbSFYkU=; b=e
-	qE3tHPPtqSf2ZlRLKRvMe8490eUorbxIPbR0H4ULV8nQghhKqp5ss/9vTme8mymX
-	Wa3py471Rdh+fPeIAzMVkoQl6aeMBnfzjwQFfmit3QF0c0tpDpOImZXbCmkvYpqH
-	0Mgh+v2jXIpsIhJ2kuRbfTwJ5OpmdaDdnugMwWgjP6RbGOcH0dKgu0q2txkgDEUA
-	YvcogazJb1A/8UAuHke2hu4dbEfN+BJz7QoK/h3OPExqr19VR7oXa8bfSl+2eu+E
-	8nw3hafR0oekv2iU1RwuNptkZycN/KvvC6RTAtHTDLBJHUrk8tG3RAf/NETJwYbu
-	3+DqHJoEWbVAyFO9ceiGQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:date:date:feedback-id:feedback-id:from:from
-	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1669298466; x=
-	1669305666; bh=4jIAn2lueWeOwVkOG/WC5OUeXxRyuqGWxy80FbSFYkU=; b=l
-	T/mRiRFHe9A8a30ZwTwRCn7Atjq0eCn00PtFaChL5BXbD1p2ENm1wDe21wcAksFs
-	auGh1enyGhzlnelBo3eNDJ/uOpMX9J7tZYgRt/nAPlONro6RUYbhccaaXtzH1JCS
-	tNomDb+/7p9NVkzhX4q4xrvcnHo3rSKNvC8Kqv2dvMeP72TG8Hi33RrYo4iPlVQf
-	0Rw+qlK9SEYrojPSnFEOOZmhPRDc/BVN6IsGgOp6x0Q3Q1tqvCZUTKZh2VdD5yYX
-	Uiz8Mf5s8/XhZDbZ8ZnTIPD8A7UDSKlBTXyNx8tHLlINbYpknGbuveNLDrkXeTPl
-	QZ1nWcu2JE5j3/iErJSYw==
-X-ME-Sender: <xms:IXl_Y8j8Pe5Kk__SG2mhP6Ann5BycT9QheZVDYH0GgCUUz1-S3PoIw>
-    <xme:IXl_Y1Bt1uFmB6JyuOfMwn6vEA3YAiWsGT7JkPaH5ohuANNBfvlK25MaXKQTtlgJr
-    janSOgWnauP2n6XCWU>
-X-ME-Received: <xmr:IXl_Y0HDout03brAXwQ6rGHhIWie8H1A4aEUjHEsrRDck1m_dtNePnHLK1fnb2v4QWzN6-8JB5qZ1R4k2NU_cCLPtXy8gV0PZJWQWbOKeB_Yyg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrieefgdeitdcutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpeffhffvvefukfhfgggtugfgjgesthhqredttddtvdenucfhrhhomhepofgrgihi
-    mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
-    htthgvrhhnpeeitdeuffevieeufedtuddvffffffegfffgkeeihfelleektdelhfevhfdu
-    udfhgfenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivg
-    eptdenucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegtvghrnhhordhtvggt
-    hh
-X-ME-Proxy: <xmx:IXl_Y9T0iDI5dOBpGDqiUte33CYb-6DYmvKVj6GMWZvMZq_q6Slzgg>
-    <xmx:IXl_Y5x6-leO15H1x3BYXERG-NZ1OIul1ZuFOsSHXaUf-ev4qS7_oA>
-    <xmx:IXl_Y774hFD8EI4QojFjc2Ebo_3IkTfGg2cRx-NYbi3kHg_rZ6DQ7g>
-    <xmx:Inl_Yy9vQHMkcwqNo4mOrRhHdbYgg7s5FDAU5jV92omxMq0_BXkDnnVR5m8>
-Feedback-ID: i8771445c:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 24 Nov 2022 09:01:04 -0500 (EST)
-Date: Thu, 24 Nov 2022 15:01:03 +0100
-From: Maxime Ripard <maxime@cerno.tech>
-To: David Gow <davidgow@google.com>
-Message-ID: <20221124140103.saf2fyal75dscoot@houat>
-References: <20221123-rpi-kunit-tests-v1-0-051a0bb60a16@cerno.tech>
- <CABVgOSmtiPMd+GB40_o=eDPg3cKVA3qPNbbYFoRJvJRxQBDj5A@mail.gmail.com>
+	dkim=pass header.d=riseup.net header.s=squak header.b=hmhdwpA3;
+	spf=pass (lists.linaro.org: domain of mairacanal@riseup.net designates 198.252.153.129 as permitted sender) smtp.mailfrom=mairacanal@riseup.net;
+	dmarc=pass (policy=none) header.from=riseup.net
+Received: from fews1.riseup.net (fews1-pn.riseup.net [10.0.1.83])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256
+	 client-signature RSA-PSS (2048 bits) client-digest SHA256)
+	(Client CN "mail.riseup.net", Issuer "R3" (not verified))
+	by mx1.riseup.net (Postfix) with ESMTPS id 4NJcFb5ZXkzDrVl;
+	Fri, 25 Nov 2022 14:10:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
+	t=1669385412; bh=URYH0IzqLdcTRk2nEZuYkw52NB+0goWIxpVAqrktmWk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=hmhdwpA3y7+ljO6AAmdV08S1hROra14B1YqTtMA/+M0I4UE38BCbPQogQs+32v9j6
+	 rM4cxEOLFa0LYx0se2bUnQzMWeAdvXBYr3aeYVBYDFwmFmKpgNKG3CzzEEmrC0q9bf
+	 Ylr1XPmwiZX1oFMkGAN6UKii9hQ/lIvgcelTj00o=
+X-Riseup-User-ID: 71B09A1F920CD941466DEE4BA3A0B31413D3BD54FB7AA6B05413A8EB5A9CC69A
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	 by fews1.riseup.net (Postfix) with ESMTPSA id 4NJcFV4BCfz5vbk;
+	Fri, 25 Nov 2022 14:10:06 +0000 (UTC)
+Message-ID: <6a817cad-df46-42ac-3c14-dbdce681cde6@riseup.net>
+Date: Fri, 25 Nov 2022 11:10:02 -0300
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CABVgOSmtiPMd+GB40_o=eDPg3cKVA3qPNbbYFoRJvJRxQBDj5A@mail.gmail.com>
-X-Rspamd-Queue-Id: 1078C3ECBE
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.50 / 15.00];
+To: Maxime Ripard <maxime@cerno.tech>, Maxime Ripard <mripard@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@gmail.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>
+References: <20221123-rpi-kunit-tests-v1-0-051a0bb60a16@cerno.tech>
+ <20221123-rpi-kunit-tests-v1-1-051a0bb60a16@cerno.tech>
+Content-Language: en-US
+From: =?UTF-8?Q?Ma=c3=adra_Canal?= <mairacanal@riseup.net>
+In-Reply-To: <20221123-rpi-kunit-tests-v1-1-051a0bb60a16@cerno.tech>
+X-Rspamd-Queue-Id: 34F883EA4F
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.60 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[cerno.tech,none];
-	R_SPF_ALLOW(-0.20)[+ip4:64.147.123.17];
-	R_DKIM_ALLOW(-0.20)[cerno.tech:s=fm2,messagingengine.com:s=fm1];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[riseup.net,none];
+	RCVD_IN_DNSWL_HI(-0.50)[198.252.153.129:from];
+	R_SPF_ALLOW(-0.20)[+mx];
+	R_DKIM_ALLOW(-0.20)[riseup.net:s=squak];
+	RWL_MAILSPIKE_GOOD(-0.10)[198.252.153.129:from];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[wnew3-smtp.messagingengine.com:rdns,wnew3-smtp.messagingengine.com:helo,cerno.tech:email,cerno.tech:dkim];
-	FROM_EQ_ENVFROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.998];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:29838, ipnet:64.147.123.0/24, country:US];
-	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_TO(0.00)[cerno.tech,kernel.org,linux.intel.com,ffwll.ch,gmail.com,suse.de];
+	RCVD_TLS_ALL(0.00)[];
+	ASN(0.00)[asn:16652, ipnet:198.252.153.0/24, country:US];
+	FROM_EQ_ENVFROM(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[riseup.net:email,riseup.net:dkim,cerno.tech:email];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[linux.intel.com,ffwll.ch,gmail.com,suse.de,lists.linaro.org,linuxfoundation.org,vger.kernel.org,riseup.net,redhat.com,googlegroups.com,lists.freedesktop.org,linux.dev,raspberrypi.com];
-	URIBL_BLOCKED(0.00)[messagingengine.com:dkim,wnew3-smtp.messagingengine.com:rdns,wnew3-smtp.messagingengine.com:helo];
-	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[cerno.tech:+,messagingengine.com:+];
+	DKIM_TRACE(0.00)[riseup.net:+];
 	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-MailFrom: maxime@cerno.tech
+X-MailFrom: mairacanal@riseup.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: QEH4JVQ2BI7CTPPA2GJMQUJEAKBQMG72
-X-Message-ID-Hash: QEH4JVQ2BI7CTPPA2GJMQUJEAKBQMG72
-X-Mailman-Approved-At: Mon, 28 Nov 2022 06:33:55 +0000
-CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Daniel Vetter <daniel@ffwll.ch>, Thomas Zimmermann <tzimmermann@suse.de>, linaro-mm-sig@lists.linaro.org, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-kselftest@vger.kernel.org, =?utf-8?B?TWHDrXJh?= Canal <mairacanal@riseup.net>, linux-media@vger.kernel.org, Javier Martinez Canillas <javierm@redhat.com>, kunit-dev@googlegroups.com, dri-devel@lists.freedesktop.org, Brendan Higgins <brendan.higgins@linux.dev>, linux-kernel@vger.kernel.org, Dave Stevenson <dave.stevenson@raspberrypi.com>
+Message-ID-Hash: KPYO4PERTLRVZCZXKYUKA2Y52PJSWUA2
+X-Message-ID-Hash: KPYO4PERTLRVZCZXKYUKA2Y52PJSWUA2
+X-Mailman-Approved-At: Mon, 28 Nov 2022 06:34:02 +0000
+CC: David Gow <davidgow@google.com>, Brendan Higgins <brendan.higgins@linux.dev>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Dave Stevenson <dave.stevenson@raspberrypi.com>, Javier Martinez Canillas <javierm@redhat.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 00/24] drm: Introduce Kunit Tests to VC4
+Subject: [Linaro-mm-sig] Re: [PATCH 01/24] drm/tests: helpers: Rename the device init helper
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QEH4JVQ2BI7CTPPA2GJMQUJEAKBQMG72/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KPYO4PERTLRVZCZXKYUKA2Y52PJSWUA2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-Hi David,
-
-On Thu, Nov 24, 2022 at 04:31:14PM +0800, David Gow wrote:
-> On Wed, Nov 23, 2022 at 11:28 PM Maxime Ripard <maxime@cerno.tech> wrote:
-> >
-> > Hi,
-> >
-> > This series introduce Kunit tests to the vc4 KMS driver, but unlike what we
-> > have been doing so far in KMS, it actually tests the atomic modesetting code.
-> >
-> > In order to do so, I've had to improve a fair bit on the Kunit helpers already
-> > found in the tree in order to register a full blown and somewhat functional KMS
-> > driver.
-> >
-> > It's of course relying on a mock so that we can test it anywhere. The mocking
-> > approach created a number of issues, the main one being that we need to create
-> > a decent mock in the first place, see patch 22. The basic idea is that I
-> > created some structures to provide a decent approximation of the actual
-> > hardware, and that would support both major architectures supported by vc4.
-> >
-> > This is of course meant to evolve over time and support more tests, but I've
-> > focused on testing the HVS FIFO assignment code which is fairly tricky (and the
-> > tests have actually revealed one more bug with our current implementation). I
-> > used to have a userspace implementation of those tests, where I would copy and
-> > paste the kernel code and run the tests on a regular basis. It's was obviously
-> > fairly suboptimal, so it seemed like the perfect testbed for that series.
->
-> Thanks very much for this! I'm really excited to see these sorts of
-> tests being written.
-> 
-> I was able to successfully run these under qemu with:
-> ./tools/testing/kunit/kunit.py run --kunitconfig
-> drivers/gpu/drm/vc4/tests --arch arm64
-> --cross_compile=aarch64-linux-gnu-
-> (and also with clang, using --make_options LLVM=1 instead of the
-> --cross_compile flag)
-> 
-> On the other hand, they don't compile as a module:
-> ERROR: modpost: missing MODULE_LICENSE() in drivers/gpu/drm/vc4/tests/vc4_mock.o
-> ERROR: modpost: missing MODULE_LICENSE() in
-> drivers/gpu/drm/vc4/tests/vc4_mock_crtc.o
-> ERROR: modpost: missing MODULE_LICENSE() in
-> drivers/gpu/drm/vc4/tests/vc4_mock_output.o
-> ERROR: modpost: missing MODULE_LICENSE() in
-> drivers/gpu/drm/vc4/tests/vc4_mock_plane.o
-> ERROR: modpost: missing MODULE_LICENSE() in
-> drivers/gpu/drm/vc4/tests/vc4_test_pv_muxing.o
-> ERROR: modpost: missing MODULE_LICENSE() in
-> drivers/gpu/drm/tests/drm_managed_test.o
-> ERROR: modpost: "vc4_drm_driver"
-> [drivers/gpu/drm/vc4/tests/vc4_mock.ko] undefined!
-> ERROR: modpost: "vc5_drm_driver"
-> [drivers/gpu/drm/vc4/tests/vc4_mock.ko] undefined!
-> ERROR: modpost: "drm_kunit_helper_alloc_device"
-> [drivers/gpu/drm/vc4/tests/vc4_mock.ko] undefined!
-> ERROR: modpost: "__drm_kunit_helper_alloc_drm_device_with_driver"
-> [drivers/gpu/drm/vc4/tests/vc4_mock.ko] undefined!
-> ERROR: modpost: "__vc4_hvs_alloc"
-> [drivers/gpu/drm/vc4/tests/vc4_mock.ko] undefined!
-> ERROR: modpost: "vc4_dummy_plane"
-> [drivers/gpu/drm/vc4/tests/vc4_mock.ko] undefined!
-> ERROR: modpost: "vc4_mock_pv" [drivers/gpu/drm/vc4/tests/vc4_mock.ko] undefined!
-> ERROR: modpost: "vc4_dummy_output"
-> [drivers/gpu/drm/vc4/tests/vc4_mock.ko] undefined!
-> ERROR: modpost: "vc4_kms_load" [drivers/gpu/drm/vc4/tests/vc4_mock.ko]
-> undefined!
-> ERROR: modpost: "vc4_txp_crtc_data"
-> [drivers/gpu/drm/vc4/tests/vc4_mock.ko] undefined!
-> WARNING: modpost: suppressed 17 unresolved symbol warnings because
-> there were too many)
-
-Thanks I'll fix it
-
-> Most of those are just the need to export some symbols. There's some
-> work underway to support conditionally exporting symbols only if KUnit
-> is enabled, which may help:
-> https://lore.kernel.org/linux-kselftest/20221102175959.2921063-1-rmoar@google.com/
-
-That's awesome :)
-
-The current solution to include the test implementation is not ideal, so
-it's great to see a nicer solution being worked on.
-
-> Otherwise, I suspect the better short-term solution would just be to
-> require that the tests are built-in (or at least compiled into
-> whatever of the drm/vc4 modules makes most sense).
-> 
-> The only other thing which has me a little confused is the naming of
-> some of the functions, specifically with the __ prefix. Is it just for
-> internal functions (many of them aren't static, but maybe they could
-> use the VISIBLE_IF_KUNIT macro if that makes sense), or for versions
-> of functions which accept extra arguments?
-
-It was for internal functions that would definitely benefit from
-VISIBLE_IF_KUNIT indeed
-
-> Not a big deal (and maybe it's a DRM naming convention I'm ignorant
-> of), but I couldn't quite find a pattern on my first read through.
-> 
-> But on the whole, these look good from a KUnit point-of-view. It's
-> really to see some solid mocking and driver testing, too. There would
-> be ways to avoid passing the 'struct kunit' around in more places (or
-> to store extra data as a kunit_resource), but I think it's better
-> overall to pass it around like you have in this case -- it's certainly
-> more compatible with things which might span threads (e.g. the
-> workqueues).
-
-One thing I'm really unsure about and would like your input on is
-basically the entire device instantiation code in drm_kunit_helpers.c
-
-It's a little fishy since it will allocate a platform_device while the
-driver might expect some other bus device. And the code to bind the
-driver based around probe and workqueues seems like a hack.
-
-This is something that would benefit from having proper functions in
-kunit to allocate a proper device for a given test. This is already
-something that other unit test suites seems to get wrong, and I'm sure
-there's some bugs somewhere in the helpers I did for DRM. What do you
-think?
-
-Maxime
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gMTEvMjMvMjIgMTI6MjUsIE1heGltZSBSaXBhcmQgd3JvdGU6DQo+IFRoZSBuYW1lIGRvZXNu
+J3QgcmVhbGx5IGZpdCB0aGUgY29udmVudGlvbnMgZm9yIHRoZSBvdGhlciBoZWxwZXJzIGluDQo+
+IERSTS9LTVMsIHNvIGxldCdzIHJlbmFtZSBpdCB0byBtYWtlIGl0IG9idmlvdXMgdGhhdCB3ZSBh
+bGxvY2F0ZSBhIG5ldw0KPiBEUk0gZGV2aWNlLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogTWF4aW1l
+IFJpcGFyZCA8bWF4aW1lQGNlcm5vLnRlY2g+DQoNCkFsdGhvdWdoIEkgYmVsaWV2ZSB1c2luZyAi
+ZHJtX2RldmljZSIgb24gdGhlIGZ1bmN0aW9uIG5hbWUgaXMgYSBiaXQgDQpyZWR1bmRhbnQgKG1h
+eWJlIGRybV9rdW5pdF9oZWxwZXJfYWxsb2NfZGV2IG9yIA0KZHJtX2t1bml0X2hlbHBlcl9hbGxv
+Y19kZXZpY2Ugd291bGQgYmUgY2xlYW5lciksDQoNClJldmlld2VkLWJ5OiBNYcOtcmEgQ2FuYWwg
+PG1haXJhY2FuYWxAcmlzZXVwLm5ldD4NCg0KQmVzdCBSZWdhcmRzLA0KLSBNYcOtcmEgQ2FuYWwN
+Cg0KPiAtLS0NCj4gICBkcml2ZXJzL2dwdS9kcm0vdGVzdHMvZHJtX2NsaWVudF9tb2Rlc2V0X3Rl
+c3QuYyB8IDIgKy0NCj4gICBkcml2ZXJzL2dwdS9kcm0vdGVzdHMvZHJtX2t1bml0X2hlbHBlcnMu
+YyAgICAgICB8IDQgKysrLQ0KPiAgIGRyaXZlcnMvZ3B1L2RybS90ZXN0cy9kcm1fa3VuaXRfaGVs
+cGVycy5oICAgICAgIHwgNSArKysrLQ0KPiAgIDMgZmlsZXMgY2hhbmdlZCwgOCBpbnNlcnRpb25z
+KCspLCAzIGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1L2RybS90
+ZXN0cy9kcm1fY2xpZW50X21vZGVzZXRfdGVzdC5jIGIvZHJpdmVycy9ncHUvZHJtL3Rlc3RzL2Ry
+bV9jbGllbnRfbW9kZXNldF90ZXN0LmMNCj4gaW5kZXggMzYyYTVmYmQ4MmY1Li5lNDY5ZDE2MzRl
+MmQgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS90ZXN0cy9kcm1fY2xpZW50X21vZGVz
+ZXRfdGVzdC5jDQo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS90ZXN0cy9kcm1fY2xpZW50X21vZGVz
+ZXRfdGVzdC5jDQo+IEBAIC00MSw3ICs0MSw3IEBAIHN0YXRpYyBpbnQgZHJtX2NsaWVudF9tb2Rl
+c2V0X3Rlc3RfaW5pdChzdHJ1Y3Qga3VuaXQgKnRlc3QpDQo+ICAgDQo+ICAgCXRlc3QtPnByaXYg
+PSBwcml2Ow0KPiAgIA0KPiAtCXByaXYtPmRybSA9IGRybV9rdW5pdF9kZXZpY2VfaW5pdCh0ZXN0
+LCBEUklWRVJfTU9ERVNFVCwgImRybS1jbGllbnQtbW9kZXNldC10ZXN0Iik7DQo+ICsJcHJpdi0+
+ZHJtID0gZHJtX2t1bml0X2hlbHBlcl9hbGxvY19kcm1fZGV2aWNlKHRlc3QsIERSSVZFUl9NT0RF
+U0VULCAiZHJtLWNsaWVudC1tb2Rlc2V0LXRlc3QiKTsNCj4gICAJS1VOSVRfQVNTRVJUX05PVF9F
+UlJfT1JfTlVMTCh0ZXN0LCBwcml2LT5kcm0pOw0KPiAgIA0KPiAgIAlyZXQgPSBkcm1tX2Nvbm5l
+Y3Rvcl9pbml0KHByaXYtPmRybSwgJnByaXYtPmNvbm5lY3RvciwNCj4gZGlmZiAtLWdpdCBhL2Ry
+aXZlcnMvZ3B1L2RybS90ZXN0cy9kcm1fa3VuaXRfaGVscGVycy5jIGIvZHJpdmVycy9ncHUvZHJt
+L3Rlc3RzL2RybV9rdW5pdF9oZWxwZXJzLmMNCj4gaW5kZXggZjE2NjIwOTFmMjUwLi5hNGFkMDMw
+ZWQxMDEgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS90ZXN0cy9kcm1fa3VuaXRfaGVs
+cGVycy5jDQo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS90ZXN0cy9kcm1fa3VuaXRfaGVscGVycy5j
+DQo+IEBAIC0zNiw3ICszNiw5IEBAIHN0YXRpYyB2b2lkIGRldl9mcmVlKHN0cnVjdCBrdW5pdF9y
+ZXNvdXJjZSAqcmVzKQ0KPiAgIAlyb290X2RldmljZV91bnJlZ2lzdGVyKGRldik7DQo+ICAgfQ0K
+PiAgIA0KPiAtc3RydWN0IGRybV9kZXZpY2UgKmRybV9rdW5pdF9kZXZpY2VfaW5pdChzdHJ1Y3Qg
+a3VuaXQgKnRlc3QsIHUzMiBmZWF0dXJlcywgY2hhciAqbmFtZSkNCj4gK3N0cnVjdCBkcm1fZGV2
+aWNlICoNCj4gK2RybV9rdW5pdF9oZWxwZXJfYWxsb2NfZHJtX2RldmljZShzdHJ1Y3Qga3VuaXQg
+KnRlc3QsDQo+ICsJCQkJICB1MzIgZmVhdHVyZXMsIGNoYXIgKm5hbWUpDQo+ICAgew0KPiAgIAlz
+dHJ1Y3Qga3VuaXRfZGV2ICprZGV2Ow0KPiAgIAlzdHJ1Y3QgZHJtX2RldmljZSAqZHJtOw0KPiBk
+aWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3Rlc3RzL2RybV9rdW5pdF9oZWxwZXJzLmggYi9k
+cml2ZXJzL2dwdS9kcm0vdGVzdHMvZHJtX2t1bml0X2hlbHBlcnMuaA0KPiBpbmRleCAyMGFiNmVl
+YzRjODkuLmU5ODcwYzc5MTFmZSAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3Rlc3Rz
+L2RybV9rdW5pdF9oZWxwZXJzLmgNCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3Rlc3RzL2RybV9r
+dW5pdF9oZWxwZXJzLmgNCj4gQEAgLTYsNiArNiw5IEBADQo+ICAgc3RydWN0IGRybV9kZXZpY2U7
+DQo+ICAgc3RydWN0IGt1bml0Ow0KPiAgIA0KPiAtc3RydWN0IGRybV9kZXZpY2UgKmRybV9rdW5p
+dF9kZXZpY2VfaW5pdChzdHJ1Y3Qga3VuaXQgKnRlc3QsIHUzMiBmZWF0dXJlcywgY2hhciAqbmFt
+ZSk7DQo+ICtzdHJ1Y3QgZHJtX2RldmljZSAqDQo+ICtkcm1fa3VuaXRfaGVscGVyX2FsbG9jX2Ry
+bV9kZXZpY2Uoc3RydWN0IGt1bml0ICp0ZXN0LA0KPiArCQkJCSAgdTMyIGZlYXR1cmVzLA0KPiAr
+CQkJCSAgY2hhciAqbmFtZSk7DQo+ICAgDQo+ICAgI2VuZGlmIC8vIERSTV9LVU5JVF9IRUxQRVJT
+X0hfDQo+IA0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+TGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8u
+b3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBs
+aXN0cy5saW5hcm8ub3JnCg==
