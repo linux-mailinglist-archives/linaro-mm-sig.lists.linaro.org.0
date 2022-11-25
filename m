@@ -2,61 +2,61 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56121638821
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Nov 2022 12:02:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A0FD638835
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Nov 2022 12:04:59 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 64B213EF17
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Nov 2022 11:02:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 27E473EF09
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 25 Nov 2022 11:04:58 +0000 (UTC)
 Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by lists.linaro.org (Postfix) with ESMTPS id D5CA93ED3C
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Nov 2022 11:01:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id BB5AC3ED3C
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Nov 2022 11:04:49 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=CvYH19UJ;
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=J0htrsI1;
 	spf=pass (lists.linaro.org: domain of javierm@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=javierm@redhat.com;
 	dmarc=pass (policy=none) header.from=redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1669374113;
+	s=mimecast20190719; t=1669374289;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=TfA9A7l0JYE/L8ETH4uO/o+2VqeJpw2uLOXbWd1Oacg=;
-	b=CvYH19UJaMPJqGoLIoAUHp0HMz57MuFdBt2ncJWc0neAYZbYbpMR013kfVpqFyqkKxgcd0
-	qRIQ1MRj7ZW6WRoNKNIKwyuzX6zrg8UxAXiks7O83j2RosYenoDxZtSKgAX3LRr4sISw05
-	pVv1/fhOqb66S5ZWoAqXrgDqYyghU4Y=
+	bh=EIsNFOFnhjxNTgJU/2vZA8CiSz+sEWLC1ebQetbQ8TI=;
+	b=J0htrsI1iMMNBauhUT0okw92P+dAo8l747W15LzbGnsKa5o8mG9ZkrJU1cpQIZJvDmfVGy
+	bayY9gZ8m0YWbtykscUEstjzE7kQJ4P2SFc6hrcEUSzHGNmGQMBEHb6eFPlaZx1Xlnbr2I
+	bTb0YfV08XcC2LVc/cBAPYn3ISbTW6k=
 Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
  [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-335-3y5qDNOsNmCjjZXnM5fnRQ-1; Fri, 25 Nov 2022 06:01:52 -0500
-X-MC-Unique: 3y5qDNOsNmCjjZXnM5fnRQ-1
-Received: by mail-wm1-f70.google.com with SMTP id z15-20020a1c4c0f000000b003cf6f80007cso1682145wmf.3
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Nov 2022 03:01:52 -0800 (PST)
+ us-mta-537-BePpJOunPr-kVBzSGe1O0g-1; Fri, 25 Nov 2022 06:04:48 -0500
+X-MC-Unique: BePpJOunPr-kVBzSGe1O0g-1
+Received: by mail-wm1-f70.google.com with SMTP id b47-20020a05600c4aaf00b003d031aeb1b6so3992727wmp.9
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 25 Nov 2022 03:04:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:in-reply-to:from:references:cc:to
          :content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=TfA9A7l0JYE/L8ETH4uO/o+2VqeJpw2uLOXbWd1Oacg=;
-        b=1GQHbAzQTXu9wC+j9OAEaMWn0DwKPVKzwaLNAUDMIKXo90K4mKbQ5OATkAf/csjW/U
-         HIp4pULGXq98cZyHCnsUE8fL+gS8AZSKudvn2IY872PuP75JnJOPJlurOjCFS2XHC95F
-         YIZxz3TkoL5CuXhdzeNP8KAHJhqfPpd8NcY/jVa4xIwb4qgxX27WOZlElToCvDvNhqEh
-         OaOyW76crJS/KpFIWSQl+zz0iv81E1nCGjtICglSZVCRgmxHnQojNVASeGjq5CxL5GsY
-         MJzKC3JNO+t0Mi+TOyHHCPXArN/heOtTT0MMpAKbsfSg1H9GHrJFU/VEXO5YPHKNlNIP
-         QqiQ==
-X-Gm-Message-State: ANoB5pn0rKmiNB7CE2kzfAhjX9j7ZB9/yGYjLjOPVVLW2+zb64riWN4r
-	GLev59DLkiDAG//h17+csKv+NOK3iyghVQz/PGBwyIxnBCIY23jLlMSWu33da5plF5P4DE+viuy
-	LFk7YUFVzfSVIixSeb7TFI8+Kgdk=
-X-Received: by 2002:a7b:c456:0:b0:3a5:f600:502e with SMTP id l22-20020a7bc456000000b003a5f600502emr18311879wmi.39.1669374111319;
-        Fri, 25 Nov 2022 03:01:51 -0800 (PST)
-X-Google-Smtp-Source: AA0mqf54zF2uRxU4RbTU39UVEvJ1RZet14YgzdlvBFjd7gpCV0KEEizmQ7IkJumuXXzHwnc2Bml0/Q==
-X-Received: by 2002:a7b:c456:0:b0:3a5:f600:502e with SMTP id l22-20020a7bc456000000b003a5f600502emr18311846wmi.39.1669374111092;
-        Fri, 25 Nov 2022 03:01:51 -0800 (PST)
+        bh=EIsNFOFnhjxNTgJU/2vZA8CiSz+sEWLC1ebQetbQ8TI=;
+        b=Ek4SUh+PzRpecGLYratgK2mEfxol9l8k++yb9Ak4lyoCOsxd1V4Q1O22+MnASWeySb
+         Uh9t8dIqk/7fvt9OZQmlpa8z2UMM4JQmV/LbX0xl0U1ZG+gv4fgq1seXjQ0bAaqu1rnV
+         2bNrhfgbBZ4d4zz5ztFrosxPDuk+pUENiMVTeCOfez/6ijwZOzDihnOGWDcPU928RaeD
+         +eIQcNnEtsrb21b6wpKrKRO9HM3wFLXAQjqC60FD2133FTKWpCdoFUvI9NQzmb8hqux8
+         kzip+BCOLG9DkpmlaKXpMqubPqH8LO5bwCTzGu0ALiP1pBgo3jQDMuz2wzB1mbFFsiEY
+         pP5Q==
+X-Gm-Message-State: ANoB5pmAi7LwcVzIK1srajwQzcckRV3vslWkI8opWlvCnW/y5Z9B4V4X
+	bR22LHAiYJlNfGNdYGPbAIKZ7aW75oz4Ug5JgevI5jQVCQNi/thd5eNXS8LqSz2ZcS4JMQdDEV+
+	LADCheXvVq2ZXwkYTHtlARhrwZTo=
+X-Received: by 2002:adf:f6d1:0:b0:241:e2af:444f with SMTP id y17-20020adff6d1000000b00241e2af444fmr10706114wrp.676.1669374287048;
+        Fri, 25 Nov 2022 03:04:47 -0800 (PST)
+X-Google-Smtp-Source: AA0mqf4ai6UB7oIeeI+sRTVyelphEoAhUUiZPfWL2SD5YRQotSiu7iQrCPjltzySG4CbRwXoVo/zjA==
+X-Received: by 2002:adf:f6d1:0:b0:241:e2af:444f with SMTP id y17-20020adff6d1000000b00241e2af444fmr10706084wrp.676.1669374286732;
+        Fri, 25 Nov 2022 03:04:46 -0800 (PST)
 Received: from [192.168.1.130] (205.pool92-176-231.dynamic.orange.es. [92.176.231.205])
-        by smtp.gmail.com with ESMTPSA id r11-20020a05600c35cb00b003a84375d0d1sm9723651wmq.44.2022.11.25.03.01.49
+        by smtp.gmail.com with ESMTPSA id f14-20020a05600c154e00b003c6f3e5ba42sm10164544wmg.46.2022.11.25.03.04.44
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 25 Nov 2022 03:01:50 -0800 (PST)
-Message-ID: <8df31d1d-1ed9-eb6e-80bd-1f82adfb0185@redhat.com>
-Date: Fri, 25 Nov 2022 12:01:49 +0100
+        Fri, 25 Nov 2022 03:04:45 -0800 (PST)
+Message-ID: <d5451d30-be68-c492-6ec8-41681db400e2@redhat.com>
+Date: Fri, 25 Nov 2022 12:04:44 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.1
@@ -65,13 +65,13 @@ To: Maxime Ripard <maxime@cerno.tech>, Maxime Ripard <mripard@kernel.org>,
  Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@gmail.com>,
  Thomas Zimmermann <tzimmermann@suse.de>
 References: <20221123-rpi-kunit-tests-v1-0-051a0bb60a16@cerno.tech>
- <20221123-rpi-kunit-tests-v1-11-051a0bb60a16@cerno.tech>
+ <20221123-rpi-kunit-tests-v1-12-051a0bb60a16@cerno.tech>
 From: Javier Martinez Canillas <javierm@redhat.com>
-In-Reply-To: <20221123-rpi-kunit-tests-v1-11-051a0bb60a16@cerno.tech>
+In-Reply-To: <20221123-rpi-kunit-tests-v1-12-051a0bb60a16@cerno.tech>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-X-Rspamd-Queue-Id: D5CA93ED3C
+X-Rspamd-Queue-Id: BB5AC3ED3C
 X-Spamd-Bar: -----
 X-Spamd-Result: default: False [-6.00 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
@@ -102,17 +102,17 @@ X-Spamd-Result: default: False [-6.00 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: R7EZRTDFNGSMQFJQEXIA7UAB5ZLDUTKT
-X-Message-ID-Hash: R7EZRTDFNGSMQFJQEXIA7UAB5ZLDUTKT
+Message-ID-Hash: 3PTEJZDHWO42YT4YUKADWQTR35Q6E43D
+X-Message-ID-Hash: 3PTEJZDHWO42YT4YUKADWQTR35Q6E43D
 X-MailFrom: javierm@redhat.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: David Gow <davidgow@google.com>, linaro-mm-sig@lists.linaro.org, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-kselftest@vger.kernel.org, =?UTF-8?Q?Ma=c3=adra_Canal?= <mairacanal@riseup.net>, linux-media@vger.kernel.org, kunit-dev@googlegroups.com, dri-devel@lists.freedesktop.org, Brendan Higgins <brendan.higgins@linux.dev>, linux-kernel@vger.kernel.org, Dave Stevenson <dave.stevenson@raspberrypi.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 11/24] drm/vc4: Constify container_of wrappers
+Subject: [Linaro-mm-sig] Re: [PATCH 12/24] drm/vc4: Move HVS state to main header
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/R7EZRTDFNGSMQFJQEXIA7UAB5ZLDUTKT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3PTEJZDHWO42YT4YUKADWQTR35Q6E43D/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -123,10 +123,11 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
 On 11/23/22 16:25, Maxime Ripard wrote:
-> None of our wrappers around container_of to access our objects from the
-> DRM object pointer actually modify the latter.
+> In order to introduce unit tests for the HVS state computation, we'll
+> need access to the vc4_hvs_state struct definition and its associated
+> helpers.
 > 
-> Let's make them const.
+> Let's move them in our driver header.
 > 
 > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
 > ---
