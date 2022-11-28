@@ -2,179 +2,128 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A55263D371
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Nov 2022 11:31:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BB88463D87C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Nov 2022 15:48:15 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 62BF23EF52
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Nov 2022 10:31:08 +0000 (UTC)
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
-	by lists.linaro.org (Postfix) with ESMTPS id 757D03EA37
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 30 Nov 2022 10:30:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BACD13EF90
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 30 Nov 2022 14:48:14 +0000 (UTC)
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+	by lists.linaro.org (Postfix) with ESMTPS id B5C9D3EBC0
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Nov 2022 19:31:18 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b="cFwn//sQ";
-	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.128.43) smtp.mailfrom=daniel@ffwll.ch;
+	dkim=pass header.d=igalia.com header.s=20170329 header.b=QYDjpAPH;
+	spf=pass (lists.linaro.org: domain of mcanal@igalia.com designates 213.97.179.56 as permitted sender) smtp.mailfrom=mcanal@igalia.com;
 	dmarc=none
-Received: by mail-wm1-f43.google.com with SMTP id l39-20020a05600c1d2700b003cf93c8156dso1038351wms.4
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 30 Nov 2022 02:30:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=YXQc9XEWwXQO5oC1YosCl7efmTS9cTKVl0+Fl9Ojos8=;
-        b=cFwn//sQuJyEF+Xqojf4F3dtCdu6AOypSnbLJkW3w/W2bvEbw3MBgE85Rlo8X/E9Hn
-         vwQOJMOLxK031tjfVgULjfK7VQth9G9gdUafF2gebgGPWDePmMoHlZn/U4SxZldtR0Ml
-         tNjZx9/SU8X1YZWdqC9XDCSlsM6k1qJVhaoQ8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=YXQc9XEWwXQO5oC1YosCl7efmTS9cTKVl0+Fl9Ojos8=;
-        b=b+EJbU0fQLg4mu6x3PIUeGWTdi/i0j/2P979I9JMN/CcrXo9gCy++4RZQsCNuU7/9x
-         jg4HFkDAylLndLmO1JUU7w2YAGI1tADG6+A5+KsLizsLydxrX8Mqyuu5QFWlTOl+08GC
-         bYNfS28TTHg7uXJVcHhm4UK5/DxD426HbrQ44lGNM20mmfpQuIHEB0lHO3lFIw2iQGmC
-         mG7qAOiRZbr+OHIyeONgrhwc5rHSH35JNpGmfj7leJ5aY7V8cdwx/5+AoTpXc0JOf98W
-         TIgLQ33m92fTMG+VR59TH59+kWNj0fI7u69wqE8p0GGlGnMD36nac7bNMO9v3OWg/BS5
-         +WNg==
-X-Gm-Message-State: ANoB5pmyu9FpRfAzwMUw9Uk4oFaJzB9UOQJKvHX6Gvu6PRVPkuT3FMPr
-	JnXljfxqaM0ZjIcGAG8XSzSWGQ==
-X-Google-Smtp-Source: AA0mqf6SRJsk/MKKc9HQxdUZJsG0RmKyyQXTtpD31OSl0Vlst25pFdkXAN5H9o19tdez0HxXD0c9+A==
-X-Received: by 2002:a05:600c:5407:b0:3cf:774b:ce5a with SMTP id he7-20020a05600c540700b003cf774bce5amr36233164wmb.0.1669804258491;
-        Wed, 30 Nov 2022 02:30:58 -0800 (PST)
-Received: from phenom.ffwll.local (212-51-149-33.fiber7.init7.net. [212.51.149.33])
-        by smtp.gmail.com with ESMTPSA id u18-20020adfed52000000b00241d2df4960sm1109971wro.17.2022.11.30.02.30.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 30 Nov 2022 02:30:57 -0800 (PST)
-Date: Wed, 30 Nov 2022 11:30:55 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Nicolas Dufresne <nicolas@ndufresne.ca>
-Message-ID: <Y4cw36MUO+ftP468@phenom.ffwll.local>
-References: <1e2a6750-9849-e9ee-69d6-e4bfdcfb64f3@gmail.com>
- <CAAFQd5B+VHs62M5Wf2L-xOw=_PoaXT+akAySkeZc75HeA3d0jQ@mail.gmail.com>
- <b2dec9b3-03a7-e7ac-306e-1da024af8982@amd.com>
- <346d6ad023ef8697aafd93ac1b100890f3637e44.camel@ndufresne.ca>
- <CAF6AEGuqgWi0T=B9cb+Uy7aoWBPGQmZ3JbwFcK_45GbkY2nHPg@mail.gmail.com>
- <Y3zeYnufgXJHQAbN@phenom.ffwll.local>
- <ae9ba9ba-3ad3-af23-be66-1540862bf571@amd.com>
- <20221123103338.238571e1@eldfell>
- <Y35LcspZ385IC4lJ@phenom.ffwll.local>
- <ba6e42f04c436d93bfa71d5dee7fd35ef2245073.camel@ndufresne.ca>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender:Reply-To:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=79D1N/wvlSFl18BNsKU0k/is/jrD25t41qoW9u3UtNQ=; b=QYDjpAPHhLoF6BlYY/NN/zcF72
+	FetOordi88yKv+vvVBN5IdCIWm8y6lE5krrM28WdRwivYaIvy1nvRVdf801nGkEA8sBAmv83H1/LI
+	HOzFGfTkz7jkUHeTUx7KAHWhKyPUv4Cc+4t02ITyJlRKeF49A3vCVsFs4FJtX6xyZTbrToOuF4TtQ
+	KT35xJLL+dcnCungBjAXZk+yxgX0ic3rDnT0XWLE56wnO0v73HcrBbFAcR0SEdGg/zBcwH2yuTDho
+	2vs7/Wuf1cE6b56WFrBYOr4cruTInuSO52wu5oHjKop41y4S4aa9l/SCj8ydRB1XFGCS4ds3xW3eP
+	DoEXCVUg==;
+Received: from [177.34.169.227] (helo=[192.168.0.8])
+	by fanzine2.igalia.com with esmtpsa
+	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
+	id 1ozjq1-00AbB7-Eo; Mon, 28 Nov 2022 20:30:45 +0100
+Message-ID: <264ee4eb-4385-d9b2-bcfa-fcc5dc27f611@igalia.com>
+Date: Mon, 28 Nov 2022 16:30:37 -0300
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <ba6e42f04c436d93bfa71d5dee7fd35ef2245073.camel@ndufresne.ca>
-X-Operating-System: Linux phenom 5.19.0-2-amd64 
-X-Rspamd-Queue-Id: 757D03EA37
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.30 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.5.0
+To: Maxime Ripard <maxime@cerno.tech>, Daniel Vetter <daniel@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
+ Thomas Zimmermann <tzimmermann@suse.de>
+References: <20221123-rpi-kunit-tests-v2-0-efe5ed518b63@cerno.tech>
+ <20221123-rpi-kunit-tests-v2-2-efe5ed518b63@cerno.tech>
+Content-Language: en-US
+From: =?UTF-8?Q?Ma=c3=adra_Canal?= <mcanal@igalia.com>
+In-Reply-To: <20221123-rpi-kunit-tests-v2-2-efe5ed518b63@cerno.tech>
+X-Rspamd-Queue-Id: B5C9D3EBC0
+X-Spamd-Bar: -------
+X-Spamd-Result: default: False [-7.50 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[100.00%];
+	R_DKIM_ALLOW(-0.20)[igalia.com:s=20170329];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_EQ_ENVFROM(0.00)[];
-	R_SPF_NA(0.00)[no SPF record];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[fanzine2.igalia.com:rdns,fanzine2.igalia.com:helo,igalia.com:email,igalia.com:dkim,cerno.tech:email];
 	NEURAL_HAM(-0.00)[-1.000];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[ffwll.ch,gmail.com,amd.com,chromium.org,pengutronix.de,fooishbar.org,linaro.org,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[209.85.128.43:from];
-	DKIM_TRACE(0.00)[ffwll.ch:+];
+	FREEMAIL_TO(0.00)[cerno.tech,ffwll.ch,linux.intel.com,kernel.org,gmail.com,suse.de];
+	ASN(0.00)[asn:3352, ipnet:213.97.0.0/16, country:ES];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_TRACE(0.00)[igalia.com:+];
+	DMARC_NA(0.00)[igalia.com];
+	RCVD_COUNT_TWO(0.00)[2];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ARC_NA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
+	URIBL_BLOCKED(0.00)[igalia.com:email,igalia.com:dkim,fanzine2.igalia.com:rdns,fanzine2.igalia.com:helo,cerno.tech:email];
 	TO_DN_SOME(0.00)[];
-	DMARC_NA(0.00)[ffwll.ch];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_COUNT_THREE(0.00)[3];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.43:from]
+	RCVD_TLS_ALL(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: YXFNHD5TOFSUOBHQ5QZKR3CMOU6PGBYA
-X-Message-ID-Hash: YXFNHD5TOFSUOBHQ5QZKR3CMOU6PGBYA
-X-MailFrom: daniel@ffwll.ch
+X-MailFrom: mcanal@igalia.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Daniel Vetter <daniel@ffwll.ch>, Pekka Paalanen <ppaalanen@gmail.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Rob Clark <robdclark@gmail.com>, Tomasz Figa <tfiga@chromium.org>, Daniel Stone <daniel@fooishbar.org>, sumit.semwal@linaro.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
+Message-ID-Hash: X5CC2TAHHHQO7GUIDIPRNJH5LE4FDGJN
+X-Message-ID-Hash: X5CC2TAHHHQO7GUIDIPRNJH5LE4FDGJN
+X-Mailman-Approved-At: Wed, 30 Nov 2022 14:48:06 +0000
+CC: David Gow <davidgow@google.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Dave Stevenson <dave.stevenson@raspberrypi.com>, Javier Martinez Canillas <javierm@redhat.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Brendan Higgins <brendan.higgins@linux.dev>, linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
+Subject: [Linaro-mm-sig] Re: [PATCH v2 02/17] drm/tests: helpers: Document drm_kunit_device_init()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YXFNHD5TOFSUOBHQ5QZKR3CMOU6PGBYA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/X5CC2TAHHHQO7GUIDIPRNJH5LE4FDGJN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Fri, Nov 25, 2022 at 11:40:04AM -0500, Nicolas Dufresne wrote:
-> Le mercredi 23 novembre 2022 =E0 17:33 +0100, Daniel Vetter a =E9crit=A0:
-> > On Wed, Nov 23, 2022 at 10:33:38AM +0200, Pekka Paalanen wrote:
-> > > On Tue, 22 Nov 2022 18:33:59 +0100
-> > > Christian K=F6nig <christian.koenig@amd.com> wrote:
-> > >=20
-> > > > We should have come up with dma-heaps earlier and make it clear tha=
-t=20
-> > > > exporting a DMA-buf from a device gives you something device specif=
-ic=20
-> > > > which might or might not work with others.
-> > > >=20
-> > > > Apart from that I agree, DMA-buf should be capable of handling this=
-.=20
-> > > > Question left is what documentation is missing to make it clear how=
-=20
-> > > > things are supposed to work?
-> > >=20
-> > > Perhaps somewhat related from Daniel Stone that seems to have been
-> > > forgotten:
-> > > https://lore.kernel.org/dri-devel/20210905122742.86029-1-daniels@coll=
-abora.com/
-> > >=20
-> > > It aimed mostly at userspace, but sounds to me like the coherency stu=
-ff
-> > > could use a section of its own there?
-> >=20
-> > Hm yeah it would be great to land that and then eventually extend. Dani=
-el?
->=20
-> There is a lot of things documented in this document that have been said =
-to be
-> completely wrong user-space behaviour in this thread. But it seems to pre=
--date
-> the DMA Heaps. The document also assume that DMA Heaps completely solves =
-the CMA
-> vs system memory issue. But it also underline a very important aspect, th=
-at
-> userland is not aware which one to use. What this document suggest though=
- seems
-> more realist then what has been said here.
->=20
-> Its overall a great document, it unfortunate that it only makes it into t=
-he DRM
-> mailing list.
-
-The doc is more about document the current status quo/best practices,
-which is very much not using dma-heaps.
-
-The issue there is that currently userspace has no idea which dma-heap to
-use for shared buffers, plus not all allocators are exposed through heaps
-to begin with. We had this noted as a todo item (add some device->heap
-sysfs links was the idea), until that's done all you can do is hardcode
-the right heaps for the right usage in userspace, which is what android
-does. Plus android doesn't have dgpu, so doesn't need the missing ttm
-heap.
-
-But yeah the long-term aspiration also hasn't changed, because the
-dma-heap todo list is also very, very old by now :-/
--Daniel
---=20
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gMTEvMjgvMjIgMTE6NTMsIE1heGltZSBSaXBhcmQgd3JvdGU6DQo+IENvbW1pdCA0NGEzOTI4
+MzI0ZTkgKCJkcm0vdGVzdHM6IEFkZCBLdW5pdCBIZWxwZXJzIikgaW50cm9kdWNlZCB0aGUNCj4g
+ZHJtX2t1bml0X2RldmljZV9pbml0KCkgZnVuY3Rpb24gYnV0IGRpZG4ndCBkb2N1bWVudCBpdCBw
+cm9wZXJseS4gQWRkDQo+IHRoYXQgZG9jdW1lbnRhdGlvbi4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6
+IE1heGltZSBSaXBhcmQgPG1heGltZUBjZXJuby50ZWNoPg0KDQpKdXN0IGEgbWlub3Igbml0IG9u
+IG5hbWluZywgYmVzaWRlcyB0aGF0Og0KDQpSZXZpZXdlZC1ieTogTWHDrXJhIENhbmFsIDxtY2Fu
+YWxAaWdhbGlhLmNvbT4NCg0KPiAtLS0NCj4gIGRyaXZlcnMvZ3B1L2RybS90ZXN0cy9kcm1fa3Vu
+aXRfaGVscGVycy5jIHwgMTcgKysrKysrKysrKysrKysrKysNCj4gIDEgZmlsZSBjaGFuZ2VkLCAx
+NyBpbnNlcnRpb25zKCspDQo+IA0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3Rlc3Rz
+L2RybV9rdW5pdF9oZWxwZXJzLmMgYi9kcml2ZXJzL2dwdS9kcm0vdGVzdHMvZHJtX2t1bml0X2hl
+bHBlcnMuYw0KPiBpbmRleCA2NjAwYTRkYjMxNTguLjQ2YTY4YzJmZDgwYyAxMDA2NDQNCj4gLS0t
+IGEvZHJpdmVycy9ncHUvZHJtL3Rlc3RzL2RybV9rdW5pdF9oZWxwZXJzLmMNCj4gKysrIGIvZHJp
+dmVycy9ncHUvZHJtL3Rlc3RzL2RybV9rdW5pdF9oZWxwZXJzLmMNCj4gQEAgLTM1LDYgKzM1LDIz
+IEBAIHN0YXRpYyB2b2lkIGRldl9mcmVlKHN0cnVjdCBrdW5pdF9yZXNvdXJjZSAqcmVzKQ0KPiAg
+CXJvb3RfZGV2aWNlX3VucmVnaXN0ZXIoZGV2KTsNCj4gIH0NCj4gIA0KPiArLyoqDQo+ICsgKiBk
+cm1fa3VuaXRfZGV2aWNlX2luaXQgLSBBbGxvY2F0ZXMgYSBtb2NrIERSTSBkZXZpY2UgZm9yIEt1
+bml0IHRlc3RzDQoNCnMvS3VuaXQvS1VuaXQNCg0KQmVzdCBSZWdhcmRzLA0KLSBNYcOtcmEgQ2Fu
+YWwNCg0KPiArICogQHRlc3Q6IFRoZSB0ZXN0IGNvbnRleHQgb2JqZWN0DQo+ICsgKiBAZmVhdHVy
+ZXM6IE1vY2tlZCBEUk0gZGV2aWNlIGRyaXZlciBmZWF0dXJlcw0KPiArICogQG5hbWU6IE5hbWUg
+b2YgdGhlIHN0cnVjdCAmZGV2aWNlIHRvIGFsbG9jYXRlDQo+ICsgKg0KPiArICogVGhpcyBmdW5j
+dGlvbiBhbGxvY2F0ZXMgYSBuZXcgc3RydWN0ICZkZXZpY2UsIGNyZWF0ZXMgYSBzdHJ1Y3QNCj4g
+KyAqICZkcm1fZHJpdmVyIGFuZCB3aWxsIGNyZWF0ZSBhIHN0cnVjdCAmZHJtX2RldmljZSB1c2lu
+ZyBib3RoLg0KPiArICoNCj4gKyAqIFRoZSBkZXZpY2UgYW5kIGRyaXZlciBhcmUgdGllZCB0byB0
+aGUgQHRlc3QgY29udGV4dCBhbmQgd2lsbCBnZXQNCj4gKyAqIGNsZWFuZWQgYXQgdGhlIGVuZCBv
+ZiB0aGUgdGVzdC4gVGhlIGRybV9kZXZpY2UgaXMgYWxsb2NhdGVkIHRocm91Z2gNCj4gKyAqIGRl
+dm1fZHJtX2Rldl9hbGxvYygpIGFuZCB3aWxsIHRodXMgYmUgZnJlZWQgdGhyb3VnaCBhIGRldmlj
+ZS1tYW5hZ2VkDQo+ICsgKiByZXNvdXJjZS4NCj4gKyAqDQo+ICsgKiBSZXR1cm5zOg0KPiArICog
+QSBwb2ludGVyIHRvIHRoZSBuZXcgZHJtX2RldmljZSwgb3IgYW4gRVJSX1BUUigpIG90aGVyd2lz
+ZS4NCj4gKyAqLw0KPiAgc3RydWN0IGRybV9kZXZpY2UgKmRybV9rdW5pdF9kZXZpY2VfaW5pdChz
+dHJ1Y3Qga3VuaXQgKnRlc3QsIHUzMiBmZWF0dXJlcywgY2hhciAqbmFtZSkNCj4gIHsNCj4gIAlz
+dHJ1Y3Qga3VuaXRfZGV2ICprZGV2Ow0KPiANCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1t
+bS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxp
+bmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
