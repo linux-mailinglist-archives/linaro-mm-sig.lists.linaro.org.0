@@ -2,53 +2,53 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03CFF63A6AA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Nov 2022 12:05:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6287463A6B2
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Nov 2022 12:06:00 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 097CC3ED82
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Nov 2022 11:05:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 741B93EF94
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 28 Nov 2022 11:05:59 +0000 (UTC)
 Received: from new1-smtp.messagingengine.com (new1-smtp.messagingengine.com [66.111.4.221])
-	by lists.linaro.org (Postfix) with ESMTPS id 662D43EE32
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Nov 2022 11:05:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 6D0B03ED82
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 28 Nov 2022 11:05:11 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=cerno.tech header.s=fm2 header.b="S zoy7dC";
-	dkim=pass header.d=messagingengine.com header.s=fm1 header.b="J MQCIX1";
+	dkim=pass header.d=cerno.tech header.s=fm2 header.b="Y LhvGao";
+	dkim=pass header.d=messagingengine.com header.s=fm1 header.b="l kURNat";
 	spf=pass (lists.linaro.org: domain of maxime@cerno.tech designates 66.111.4.221 as permitted sender) smtp.mailfrom=maxime@cerno.tech;
 	dmarc=pass (policy=none) header.from=cerno.tech
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
-	by mailnew.nyi.internal (Postfix) with ESMTP id 48CBF5803D8;
-	Mon, 28 Nov 2022 06:05:09 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
-  by compute2.internal (MEProxy); Mon, 28 Nov 2022 06:05:09 -0500
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+	by mailnew.nyi.internal (Postfix) with ESMTP id 42FBF5803DA;
+	Mon, 28 Nov 2022 06:05:11 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute5.internal (MEProxy); Mon, 28 Nov 2022 06:05:11 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
 	:cc:content-transfer-encoding:content-type:date:date:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to; s=fm2; t=1669633509; x=
-	1669640709; bh=9KW+v1Zm5o9jjtnNYe44GqrcuqH32RH+LlZRtrF9EjQ=; b=S
-	zoy7dCAbEgNDEoprk0rxTCle5W8dBL+z+rgWZBVCTk+sxJC78+AO5cXciRIkKswK
-	y44AJlhRGG0VCxXd4bDql4i43YVW0iRCy3CbGJBG0ij8MoKqO052fbNoBAKmEriH
-	FVSJa/O8qNbAOhtCswoJIfyDxy4vONgyPy4jzZ6cWu4uKWkrWWLNmMSKtJII4YzM
-	az8EcxBjsXTDU3kD8wKLwKJBoHXdvhX67oCAVCpeJmmrq6Q5U4NGRabUm763U73n
-	xmAWrgj2VNT2IAuX2nX1P+oJ1P139pJldzq5aP3ycrNwT1EigB5Xr8WozGlWNExu
-	dbpH98UUCorLXNvEw+LUQ==
+	:reply-to:sender:subject:subject:to:to; s=fm2; t=1669633511; x=
+	1669640711; bh=n7MXFL9CidPfBtwAJuLJLGulzgpAqtA68nQIGwSX5U0=; b=Y
+	LhvGaoW+idR9a0NMekJf3035vwPAzcTE0qbgvcqtju0C2Y7RqPCbPcWMn8HxAb3h
+	WgAQtCjnLWbPOIw/55j6BP1Jnl61HT8spx1G5ixDXwexWpRGaBvH665tUiXoLb6v
+	QyCMmO/wdGygZnsw+M/Mrt7iIQyPpA7jcZQTDW0sx5/Oyl0nCPBYDaw3Ugu/eSfK
+	r+vra/2owmHvWeX0gIj1drk//+5wAQVLZLtnQ/cInByRdKW+mQVMBjEcWqNfpbxS
+	f+0Xm2hPw2fcD/FIoUsz4DpYnD7EVM1yDiTinmJn4WhVK8//weVaTWVGbqueKIt2
+	ZZK48JPSFYPE4dhe9krfA==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1669633509; x=
-	1669640709; bh=9KW+v1Zm5o9jjtnNYe44GqrcuqH32RH+LlZRtrF9EjQ=; b=J
-	MQCIX1rYkxoh7A7rTmuzz6YS3sJohkGT2B6vYJciK4iBwP20YhftyZckv/Xnpvfr
-	P89sOYQgv+J2M7veayfvThJtl0jwJ8JteTNjHinpkc8Caf98ej+8G/0j6R2H+DCA
-	6ijhf/1Jp6rI62orFswQf3V6hpR7frNK/7T+Pmri2y4L70PH83bVns6CwsJzrpzJ
-	E3HinWqu0FccDhFdFA8zxHK9A/gQgpdmscD836x+iZ63/rimfonoMLfi9ojfmmKK
-	8QCLi6OvHv7mhSy9Sl3b9iGUkHK9FQvYSBb5qcKx3EO3wXnL8C5snWguw91vGKWc
-	q+ZW2caaC7Cx0RO7RuSsA==
-X-ME-Sender: <xms:5JWEY6JToVv9hCJyDpW64NjhSEG5pxTegaf7kiQYmJvqCgSUEuwx3w>
-    <xme:5JWEYyJEItKI6PIDhH30nj_aMFSrAReCE3lypORUdQeaC_uMTXFiTaye_fKH-vD89
-    eqzgSRJjqmdDUO92Jw>
-X-ME-Received: <xmr:5JWEY6vmhYSax2sMv3MexNTtp32j8M2crZcWmgU_qeVsb3NsL9repanFc0B4nyOGchdYdzG4hto_g7gp2_nRfRr6alxpBLkGF-g1NJp8xfZaOw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrjedvgddvhecutefuodetggdotefrodftvf
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1669633511; x=
+	1669640711; bh=n7MXFL9CidPfBtwAJuLJLGulzgpAqtA68nQIGwSX5U0=; b=l
+	kURNatGt/+nUJY6JCHV/dLWlrqmdPO1uj8vGG8bj7EgElGirj8zxWdbmJ7Hj5YwB
+	uG9MvDDW2Si4/NdZ3Ldra2i5i6AsE32MwB8KaRZfhxy0CIYFG7dsPmIcfcB+Y/Rx
+	XeTfc5+9zwTeJlJaZ44Qcon40vFcRL6sAjTuDsNhuhR2mty/Dl42cqu3ErZBlMEP
+	iBEF+Xi+vEfxyP6dCbo7+im6MrbkCRnOYnTWLYcStt/MXLtcdfXa0zmEC/3+dHdk
+	/yQDTWxv1xydgXYYgwr+BDDloUGKwfU4LtA4R9C8TQhfDoUgWouhSEMJsVt+s48v
+	S6JwCUQe9Flkf4ItWtwtQ==
+X-ME-Sender: <xms:55WEY1RAQA0p-YRenusxfENmGOsaiAbJO0izM13zDUbwpJ2cAIDi4w>
+    <xme:55WEY-z3jMuJzM0SnrOeFYjmI8dN-nk6EOUdPWFBKUtzm42LdI0DggsbhuY6hvzYU
+    Na8k8470JCbFJfOn0E>
+X-ME-Received: <xmr:55WEY63vs37113DYZ4A1totcpBt2wnnGHvUGcIDjDHydJkwRTtDQSuVoH4eTtUPgsmdyNGUyg1cJXVCuOBtjw2A6Nqlcn1Qh4JsqvBQBf-sJ5w>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrjedvgddvgecutefuodetggdotefrodftvf
     curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
     uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
     fjughrpefhvfevufffkffojghfgggtgfesthekredtredtjeenucfhrhhomhepofgrgihi
@@ -56,13 +56,13 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvgedrjedvgddvhecutefuodetggdote
     htthgvrhhnpeeuieeggffhffffieefheduieeuvdetgeeufeffvefgtedvffehheekffev
     udefieenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpe
     hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:5JWEY_ZEyO5Kbizi7oZVgSg__5DEr0xlNzSyvfyKopgUUCjFrEQAfQ>
-    <xmx:5JWEYxYlRrxYbQOMTl53zA-gIOHWhzHsEIkobPIUyQUyaPEH3k_Ldw>
-    <xmx:5JWEY7AqXvSAgbOg8Ssd3ugceraRvIIt2eGCjzNimVccp-aagzHfGQ>
-    <xmx:5ZWEY17NmQnxgziJTIvGBWLzeWnIvXv-AlA3dfr9zb0nNI8OpdmYZQ>
+X-ME-Proxy: <xmx:55WEY9DmUdplkV_omtyXS_HCDtURWgL02-0BjmqLVXgJaG7b0kvnbw>
+    <xmx:55WEY-jqQe7cf-cBWrHVsLWNWqbfK0iXBh20QJ7OSZyOB2tou_PC6g>
+    <xmx:55WEYxoR5Omz3Mo-gga9VOGGjMWbZIrCgkex48dnY0Wa61JMqWpD5A>
+    <xmx:55WEY3AsgD_JGCj3YT3gRi4a-C9X_panRLzaqbQMsVkSSZ0P6GqaLQ>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 28 Nov 2022 06:05:08 -0500 (EST)
+ 28 Nov 2022 06:05:10 -0500 (EST)
 From: Maxime Ripard <maxime@cerno.tech>
 To: Daniel Vetter <daniel@ffwll.ch>,
 	David Airlie <airlied@gmail.com>,
@@ -70,13 +70,13 @@ To: Daniel Vetter <daniel@ffwll.ch>,
 	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
 	Maxime Ripard <maxime@cerno.tech>,
 	Maxime Ripard <mripard@kernel.org>
-Date: Mon, 28 Nov 2022 12:04:54 +0100
-Message-Id: <166963342297.56696.14963100604547824820.b4-ty@cerno.tech>
+Date: Mon, 28 Nov 2022 12:04:55 +0100
+Message-Id: <166963342297.56696.14557106661575377639.b4-ty@cerno.tech>
 X-Mailer: git-send-email 2.38.1
-In-Reply-To: <20221123-rpi-kunit-tests-v1-10-051a0bb60a16@cerno.tech>
-References: <20221123-rpi-kunit-tests-v1-0-051a0bb60a16@cerno.tech> <20221123-rpi-kunit-tests-v1-10-051a0bb60a16@cerno.tech>
+In-Reply-To: <20221123-rpi-kunit-tests-v1-11-051a0bb60a16@cerno.tech>
+References: <20221123-rpi-kunit-tests-v1-0-051a0bb60a16@cerno.tech> <20221123-rpi-kunit-tests-v1-11-051a0bb60a16@cerno.tech>
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: 662D43EE32
+X-Rspamd-Queue-Id: 6D0B03ED82
 X-Spamd-Bar: ---------
 X-Spamd-Result: default: False [-9.60 / 15.00];
 	REPLY(-4.00)[];
@@ -105,17 +105,17 @@ X-Spamd-Result: default: False [-9.60 / 15.00];
 	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: T6MVRHQNBHSGYZYVD4246I6SSGVWBZZS
-X-Message-ID-Hash: T6MVRHQNBHSGYZYVD4246I6SSGVWBZZS
+Message-ID-Hash: 4T2YVBCBH6ARLO73PMDEOCZ2RYMFHISI
+X-Message-ID-Hash: 4T2YVBCBH6ARLO73PMDEOCZ2RYMFHISI
 X-MailFrom: maxime@cerno.tech
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, Javier Martinez Canillas <javierm@redhat.com>, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, David Gow <davidgow@google.com>, linux-media@vger.kernel.org, =?UTF-8?q?Ma=EF=BF=BD=EF=BF=BDra=20Canal?= <mairacanal@riseup.net>, linux-kselftest@vger.kernel.org, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Brendan Higgins <brendan.higgins@linux.dev>, kunit-dev@googlegroups.com, Dave Stevenson <dave.stevenson@raspberrypi.com>
+CC: linaro-mm-sig@lists.linaro.org, Javier Martinez Canillas <javierm@redhat.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, David Gow <davidgow@google.com>, linux-media@vger.kernel.org, =?UTF-8?q?Ma=EF=BF=BD=EF=BF=BDra=20Canal?= <mairacanal@riseup.net>, linux-kselftest@vger.kernel.org, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Brendan Higgins <brendan.higgins@linux.dev>, kunit-dev@googlegroups.com, Dave Stevenson <dave.stevenson@raspberrypi.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: (subset) [PATCH 10/24] drm/vc4: kms: Sort the CRTCs by output before assigning them
+Subject: [Linaro-mm-sig] Re: (subset) [PATCH 11/24] drm/vc4: Constify container_of wrappers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/T6MVRHQNBHSGYZYVD4246I6SSGVWBZZS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4T2YVBCBH6ARLO73PMDEOCZ2RYMFHISI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -125,16 +125,13 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Wed, 23 Nov 2022 16:25:52 +0100, Maxime Ripard wrote:
-> On the vc4 devices (and later), the blending is done by a single device
-> called the HVS. The HVS has three FIFO that can operate in parallel, and
-> route their output to 6 CRTCs and 7 encoders on the BCM2711.
+On Wed, 23 Nov 2022 16:25:53 +0100, Maxime Ripard wrote:
+> None of our wrappers around container_of to access our objects from the
+> DRM object pointer actually modify the latter.
 > 
-> Each of these CRTCs and encoders have some contraints on which FIFO they
-> can feed from, so we need some code to take all those constraints into
-> account and assign FIFOs to CRTCs.
+> Let's make them const.
 > 
-> [...]
+> 
 
 Applied to drm/drm-misc (drm-misc-next).
 
