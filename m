@@ -2,274 +2,240 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8F1463F122
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Dec 2022 14:03:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C191263F364
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Dec 2022 16:14:51 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 80E0A3F3ED
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Dec 2022 13:03:58 +0000 (UTC)
-Received: from new1-smtp.messagingengine.com (new1-smtp.messagingengine.com [66.111.4.221])
-	by lists.linaro.org (Postfix) with ESMTPS id 313173F208
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  1 Dec 2022 13:03:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A85D43F30D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Dec 2022 15:14:50 +0000 (UTC)
+Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com [66.111.4.230])
+	by lists.linaro.org (Postfix) with ESMTPS id CA1053EA28
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  1 Dec 2022 15:14:40 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=cerno.tech header.s=fm2 header.b=PiY7ewqe;
-	dkim=pass header.d=messagingengine.com header.s=fm1 header.b=aAJII91d;
-	spf=pass (lists.linaro.org: domain of maxime@cerno.tech designates 66.111.4.221 as permitted sender) smtp.mailfrom=maxime@cerno.tech;
+	dkim=pass header.d=cerno.tech header.s=fm2 header.b=gFsDqtWc;
+	dkim=pass header.d=messagingengine.com header.s=fm1 header.b=rcPIMGLi;
+	spf=pass (lists.linaro.org: domain of maxime@cerno.tech designates 66.111.4.230 as permitted sender) smtp.mailfrom=maxime@cerno.tech;
 	dmarc=pass (policy=none) header.from=cerno.tech
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
-	by mailnew.nyi.internal (Postfix) with ESMTP id E32BA5803D4;
-	Thu,  1 Dec 2022 08:03:49 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute2.internal (MEProxy); Thu, 01 Dec 2022 08:03:49 -0500
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
+	by mailnew.nyi.internal (Postfix) with ESMTP id 73DC858026A;
+	Thu,  1 Dec 2022 10:14:40 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute6.internal (MEProxy); Thu, 01 Dec 2022 10:14:40 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
-	:cc:content-type:date:date:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:sender:subject
-	:subject:to:to; s=fm2; t=1669899829; x=1669907029; bh=WNe2ZaoFKQ
-	D4oljvp7EpbhZ90+6/RSN0zGkVNyucd3E=; b=PiY7ewqeYTYUyhKSenMQ1lm1h+
-	wDE0YujOYyzgUtA9SIpAK/QYIq12uaQQb7gwtxutN0C39O/UJVc/Hy9EKt3eXfid
-	abLLarhbQWHb46EE2b7jjLfKKx9C9AQRZHE8d8SUhTss5HnXFe8JVA/xuHCpPtJu
-	Pk/EGC8VkA4ImFxzhsL9lPKp8lu5I32N3a2xCKZbsLuqfGSQIyBrvJ+5UoG9reUc
-	gKHZtokIHwBXeatVXex1/9FvRqGJfoYqzqRoQ2iTXLk5ryI9R2rVv4Dj0fy09bZF
-	VvJKHPI1T0dJIxfx9+VJ8tUT+BLlq8aCDlB4jbuBpTGGyYzEgmzoLWlfuRrA==
+	:cc:content-transfer-encoding:content-type:date:date:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to; s=fm2; t=1669907680; x=1669914880; bh=DTOyFy9mgY
+	6K0EmS3p5o015O+QaYiDsF9aJUFI4jKho=; b=gFsDqtWcwGD8wM2YLWHsusuQ6f
+	7cyVd58FEIdFJz/nXZbXwRGlY4KT5y0nqspUIr22+HPZG+ImenU2xO/ijQUZmqP+
+	YI9S5dONVf/CiG48qlvBdc308bHUCa5TZdwtmQD+2/54ZHrvpci/5zaKZuStMKlf
+	5ejBeoou7dtCAl8Zh8Zbu4pusEdM1qtXsolwyvP0j/0g522xN6uC/VBCPCIDJxUC
+	lUzRqIm/aU/p8d1Lwu1mJHUTdBsRhNNDzSfrbdAoJrJRfSuV6hCw5aUrFGpDscpR
+	r4Po0ZR3d4qJ1R46/m0D2S7nRPpl8rpoR0zV7EtyGykkwGXLRBe8E2oK4f6g==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
-	:feedback-id:from:from:in-reply-to:in-reply-to:message-id
-	:mime-version:references:reply-to:sender:subject:subject:to:to
-	:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm1; t=1669899829; x=1669907029; bh=WNe2ZaoFKQD4oljvp7EpbhZ90+6/
-	RSN0zGkVNyucd3E=; b=aAJII91dFUut4+tFeFDIaHX/zw1TswvxVzirq5xfC9sI
-	4DRkGBYNW4NQrQbo81OubswB53Vkr517gNeAoVcoqHcjeY9iMFpeP7TZUsYWxkwa
-	JaLwouDclYT+rEnP+JQZwF8Zt5Qx2wjbtQ36XnjejzbWTRXyGJ0PpB6nxLDFWDZK
-	u17a9KhSO++J/w6+pJgI+BkB1objEr6QwZaKGFbhvVfBEiIQVEP5jQaN8Xehyf0w
-	Vmnigb05vA+EooAus7koUwMqaiWDoP147VAXWkA+cjEFebkFSVRHfKDjwjZbRssL
-	u7MB8cafidTaIVo/p5TXKoLTq0B4UByrMm5dMWMzpw==
-X-ME-Sender: <xms:NaaIY0zKMydcp742u4piLoUn2nVmWv2VtZJXkFrf9Nzsq3uMHZNFKA>
-    <xme:NaaIY4SG0-Z0uYTAntKh6-bVjlD64kJaVC79_a68zu4KXouj84zSqnZ_bzGDZaykm
-    zmSQsjSP25G45h7MJY>
-X-ME-Received: <xmr:NaaIY2U2-8Nni73vnFjAwTD7Sbb94JQMW3noJVIHEjlOi_BDpCXnsM10VFfOMvTZLEu1C194MxRKx1Z_LjNxA6rhgyl4y3TO5SQ_L6eDVdNOew>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrtdehgdegkecutefuodetggdotefrodftvf
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:date:date:feedback-id:feedback-id:from:from
+	:in-reply-to:message-id:mime-version:reply-to:sender:subject
+	:subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+	:x-sasl-enc; s=fm1; t=1669907680; x=1669914880; bh=DTOyFy9mgY6K0
+	EmS3p5o015O+QaYiDsF9aJUFI4jKho=; b=rcPIMGLiSVI31GkQoa3NLrTIbqYMK
+	P/Ld8m/3k+pFSNMOG3Q+z/ACoO9Hf9jAMnJE4Nwq2evHQHQKue7HeMDyNHd0r/D1
+	Th3yl9+AYcXfpWCVOKhTNu1BDkD/sve+57PumKzqLAMcjD6slsRkyvJGDPoPfgTl
+	psSDQuS7o1ulbgP+vX8nvI4XnKvKPUkO31mkAGErcroeM8cJRC0QO4QP+iUP6KiR
+	apdMcijhZFhtVJp9EmeUPc17RF3x5t7PbqOI5IUZJXh0WIObuO6RGAK9Za+VmoDz
+	iwvYFnRjAFVrenNWzJLwxlIB7p1E+QRoSbBLGOfvPf12I4sTu3/Rp9VQA==
+X-ME-Sender: <xms:38SIY19kIQt1m6KnSXalUn_5vWvqszRGrCoXMUEdlxVBJUmKybjF0A>
+    <xme:38SIY5sy7-4p1UyLgRMe-LhSdrCM1DsB0YwEyYRN5crA2pMfOo7ARWtwSor0PXwil
+    cBdlInvDw6a6FeVDTE>
+X-ME-Received: <xmr:38SIYzAmlKuCA7Nq8BlUkYtaIZCBi-7iojjTzG5mYDhiZovNxRJtr0SwejkXg6jQ3ub6EYoBsRYXPx1YayripmVbz4p3TFBbFwn5AR0HbIFF7Q>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrtdehgdejhecutefuodetggdotefrodftvf
     curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
     uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpeffhffvvefukfhfgggtuggjsehgtderredttddunecuhfhrohhmpeforgigihhm
-    vgcutfhiphgrrhguuceomhgrgihimhgvsegtvghrnhhordhtvggthheqnecuggftrfgrth
-    htvghrnhepleejuefggeevteelveekteffgeduveeiteeiueegueegiedvtdejjedvfeef
-    tefgnecuffhomhgrihhnpehkvghrnhgvlhdrohhrghenucevlhhushhtvghrufhiiigvpe
-    dtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:NaaIYyhT1CT3FzKzlTfkLLwYoznI71Dh_zUCGbAn_dbaig-Uy5cxPg>
-    <xmx:NaaIY2AcQQbBj2Q5acelH2UUf2tx9bBvfw2PNC0NoPyz4cqbkwfL8Q>
-    <xmx:NaaIYzLxnRIJogEa25sEETalVvr4mHp--x6OzM94fkIy5qK0NSNRjQ>
-    <xmx:NaaIYzM7IqG8zbbp3GPImPxmK1wzC7ls6Hpwi4dJB_XcJlPIqwP_hA>
+    fjughrpefugggtgffhfffkvfevofesthekredtredtjeenucfhrhhomhepofgrgihimhgv
+    ucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrghtth
+    gvrhhnpeelueevteetffdvveelgfffleegudeufeelveefvddugeehkeefkeehjeeikeeg
+    udenucffohhmrghinhepkhgvrhhnvghlrdhorhhgnecuvehluhhsthgvrhfuihiivgeptd
+    enucfrrghrrghmpehmrghilhhfrhhomhepmhgrgihimhgvsegtvghrnhhordhtvggthh
+X-ME-Proxy: <xmx:38SIY5fOhkF77oKPr4rQxgZV_gtr6berdqXWn5Qsau22fxPfenKCrw>
+    <xmx:38SIY6NkeaUC2Wq5mjLFGBH5PCTHBUm4c4mL5VTlluGU-zuOAN_OPg>
+    <xmx:38SIY7nnRCYX6GgztTOP2uw_Y1Qh-dvKO-ZKf25ZTaYaiYSM-9WnUQ>
+    <xmx:4MSIYyN_yOKAKE3q8H4m2CLZJXEAToTtLrW67twN1WoZ8e5gmU6Wgw>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 1 Dec 2022 08:03:48 -0500 (EST)
-Date: Thu, 1 Dec 2022 14:03:46 +0100
-From: Maxime Ripard <maxime@cerno.tech>
-To: Javier Martinez Canillas <javierm@redhat.com>
-Message-ID: <20221201130346.by6zzfdbuyidwekb@houat>
-References: <20221123-rpi-kunit-tests-v2-0-efe5ed518b63@cerno.tech>
- <20221123-rpi-kunit-tests-v2-15-efe5ed518b63@cerno.tech>
- <98d47486-d04c-b81a-6ae4-fa7f62828a0e@redhat.com>
+ 1 Dec 2022 10:14:38 -0500 (EST)
 MIME-Version: 1.0
-In-Reply-To: <98d47486-d04c-b81a-6ae4-fa7f62828a0e@redhat.com>
-X-Rspamd-Queue-Id: 313173F208
-X-Spamd-Bar: --------
-X-Spamd-Result: default: False [-8.20 / 15.00];
+Content-Type: text/plain; charset="utf-8"
+X-b4-tracking: H4sIACPEiGMC/4XNTQrCMBAF4KuUrB3Jj22jK+8hLibtaIMlkSQNSOndHdy5EFfDe/C+WUWm5CmLU7
+ OKRNVnHwMHs2vEMGG4E/iRs9BSa6W0gfT08FiCL1Aolwy2R2Pt4aixN4JXDjOBSxiGiXdhmWcuJ59L
+ TK/Pl6r4XH6DVYEE2SqUznUSVXceKIW4L8TilbGq/wCaAbpRS2OrrOvMF7Bt2xvyO93N9QAAAA==
+From: Maxime Ripard <maxime@cerno.tech>
+Date: Thu, 01 Dec 2022 16:11:31 +0100
+Message-Id: <20221123-rpi-kunit-tests-v3-0-4615a663a84a@cerno.tech>
+To: Maxime Ripard <mripard@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Daniel Vetter <daniel@ffwll.ch>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>
+X-Mailer: b4 0.10.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6304; i=maxime@cerno.tech;
+ h=from:subject:message-id; bh=QwXN0BjifN+XFp8m2Z2UT3ezZprFcYlKKcC3I7smYoY=;
+ b=owGbwMvMwCX2+D1vfrpE4FHG02pJDMkdR9STn567vySxepHlycyjTuISc5wn7NZbVXZ+Um6Cx787
+ ckITOkpZGMS4GGTFFFlihM2XxJ2a9bqTjW8ezBxWJpAhDFycAjCRmHJGhg8LuT3yO+MaCpw+mHSkiN
+ U6vmFVE7qpw3Kq5LL9jtQ71gz/Cw+d0VvI0XT47sR9/2/UCx5/cmWblevnsCNtb6NakrR6OQA=
+X-Developer-Key: i=maxime@cerno.tech; a=openpgp;
+ fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
+X-Rspamd-Queue-Id: CA1053EA28
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.10 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
-	DWL_DNSWL_LOW(-1.00)[messagingengine.com:dkim];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[cerno.tech,none];
-	RCVD_IN_DNSWL_HI(-0.50)[66.111.4.221:from];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:66.111.4.221];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	R_DKIM_ALLOW(-0.20)[cerno.tech:s=fm2,messagingengine.com:s=fm1];
-	RWL_MAILSPIKE_GOOD(-0.10)[66.111.4.221:from];
+	R_SPF_ALLOW(-0.20)[+ip4:66.111.4.230];
+	MIME_GOOD(-0.10)[text/plain];
+	RCVD_IN_DNSWL_LOW(-0.10)[66.111.4.230:from];
+	RCVD_TLS_LAST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[kernel.org,linux.intel.com,ffwll.ch,suse.de,gmail.com];
+	ASN(0.00)[asn:19151, ipnet:66.111.4.0/24, country:US];
+	FROM_EQ_ENVFROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[new1-smtp.messagingengine.com:rdns,new1-smtp.messagingengine.com:helo,messagingengine.com:dkim];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[ffwll.ch,linux.intel.com,gmail.com,suse.de,lists.freedesktop.org,linuxfoundation.org,googlegroups.com,vger.kernel.org,lists.linaro.org,linux.dev,riseup.net,raspberrypi.com,google.com];
 	DKIM_TRACE(0.00)[cerno.tech:+,messagingengine.com:+];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	URIBL_BLOCKED(0.00)[new4-smtp.messagingengine.com:rdns,new4-smtp.messagingengine.com:helo];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	FROM_HAS_DN(0.00)[];
 	RCVD_COUNT_THREE(0.00)[4];
 	TO_DN_SOME(0.00)[];
-	URIBL_BLOCKED(0.00)[messagingengine.com:dkim,cerno.tech:email,cerno.tech:dkim];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	ASN(0.00)[asn:19151, ipnet:66.111.4.0/24, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 3NKJV3KFXT624LHN7BDTUWQU2PXSHYEF
-X-Message-ID-Hash: 3NKJV3KFXT624LHN7BDTUWQU2PXSHYEF
+Message-ID-Hash: ZXESUVOPFJY4MIKV3V7K3ASDGCA7RNXN
+X-Message-ID-Hash: ZXESUVOPFJY4MIKV3V7K3ASDGCA7RNXN
 X-MailFrom: maxime@cerno.tech
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Daniel Vetter <daniel@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, kunit-dev@googlegroups.com, linux-media@vger.kernel.org, linux-kselftest@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Brendan Higgins <brendan.higgins@linux.dev>, =?utf-8?B?TWHDrXJh?= Canal <mairacanal@riseup.net>, Dave Stevenson <dave.stevenson@raspberrypi.com>, linux-kernel@vger.kernel.org, David Gow <davidgow@google.com>
+CC: linux-kselftest@vger.kernel.org, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, dri-devel@lists.freedesktop.org, Maxime Ripard <maxime@cerno.tech>, =?utf-8?b?TWHvv73vv71yYSBDYW5hbA==?= <mcanal@igalia.com>, Javier Martinez Canillas <javierm@redhat.com>, linux-kernel@vger.kernel.org, Brendan Higgins <brendan.higgins@linux.dev>, Dave Stevenson <dave.stevenson@raspberrypi.com>, linux-media@vger.kernel.org, David Gow <davidgow@google.com>, linaro-mm-sig@lists.linaro.org, kunit-dev@googlegroups.com, =?utf-8?b?TWHvv73vv71yYSBDYW5hbA==?= <mairacanal@riseup.net>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 15/17] drm/vc4: tests: Introduce a mocking infrastructure
+Subject: [Linaro-mm-sig] [PATCH v3 00/20] drm: Introduce Kunit Tests to VC4
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3NKJV3KFXT624LHN7BDTUWQU2PXSHYEF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZXESUVOPFJY4MIKV3V7K3ASDGCA7RNXN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============5709666659724592597=="
+Content-Transfer-Encoding: base64
 
-
---===============5709666659724592597==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="jln5wp2b5zhcs7vh"
-Content-Disposition: inline
-
-
---jln5wp2b5zhcs7vh
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi Javier,
-
-On Wed, Nov 30, 2022 at 10:59:37AM +0100, Javier Martinez Canillas wrote:
-> On 11/28/22 15:53, Maxime Ripard wrote:
-> > In order to test the current atomic_check hooks we need to have a DRM
-> > device that has roughly the same capabilities and layout that the actual
-> > hardware. We'll also need a bunch of functions to create arbitrary
-> > atomic states.
-> >=20
-> > Let's create some helpers to create a device that behaves like the real
-> > one, and some helpers to maintain the atomic state we want to check.
-> >=20
-> > Signed-off-by: Maxime Ripard <maxime@cerno.tech>
-> > ---
->=20
-> [...]
->=20
-> > +
-> > +config DRM_VC4_KUNIT_TEST
-> > +	bool "KUnit tests for VC4" if !KUNIT_ALL_TESTS
-> > +	depends on DRM_VC4 && KUNIT
->=20
-> shouldn't this depend on DRM_KUNIT_TEST instead ?
->=20
-> [...]
-
-You're right, but the rework suggested by Ma=EDra will add a select to the
-helpers Kconfig symbol there so we should be safe.
-
-> > +static struct vc4_dev *__mock_device(struct kunit *test, bool is_vc5)
-> > +{
-> > +	struct drm_device *drm;
-> > +	const struct drm_driver *drv =3D is_vc5 ? &vc5_drm_driver : &vc4_drm_=
-driver;
-> > +	const struct vc4_mock_desc *desc =3D is_vc5 ? &vc5_mock : &vc4_mock;
-> > +	struct vc4_dev *vc4;
->=20
-> Since it could be vc4 or vc5, maybe can be renamed to just struct vc_dev =
-*vc ?
-
-vc4_dev is the main structure in the driver for the DRM device, so we
-can't rename it easily.
-
-Generally speaking the driver was (and still is) called vc4 after the IP
-name in the original RaspberryPi SoC.
-
-There's been a new generation since, but we supported it through the vc4
-driver. Even if it's a bit ambiguous, vc4 refers to both the driver name
-and is used extensively in the infrastructure, but also refers to the
-initial generation we supported. vc5 is only the new generation.
-
-I'm not sure removing the number would be less confusing.
-
-> > +struct vc4_dummy_plane *vc4_dummy_plane(struct kunit *test,
-> > +					struct drm_device *drm,
-> > +					enum drm_plane_type type)
-> > +{
-> > +	struct vc4_dummy_plane *dummy_plane;
-> > +	struct drm_plane *plane;
-> > +
-> > +	dummy_plane =3D drmm_universal_plane_alloc(drm,
-> > +						 struct vc4_dummy_plane, plane.base,
-> > +						 0,
-> > +						 &vc4_dummy_plane_funcs,
-> > +						 vc4_dummy_plane_formats,
-> > +						 ARRAY_SIZE(vc4_dummy_plane_formats),
-> > +						 NULL,
-> > +						 DRM_PLANE_TYPE_PRIMARY,
-> > +						 NULL);
-> > +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, dummy_plane);
-> > +
-> > +	plane =3D &dummy_plane->plane.base;
-> > +	drm_plane_helper_add(plane, &vc4_dummy_plane_helper_funcs);
-> > +
-> > +	return dummy_plane;
-> > +}
->=20
-> I guess many of these helpers could grow to be generic, like this one sin=
-ce
-> most drivers support the DRM_FORMAT_XRGB8888 format for their primary pla=
-ne.
-
-Yeah, that's what I'd expect at some point as well :)
-
-> > +extern const struct vc4_pv_data bcm2835_pv0_data;
-> > +extern const struct vc4_pv_data bcm2835_pv1_data;
-> > +extern const struct vc4_pv_data bcm2835_pv2_data;
-> > +extern const struct vc4_pv_data bcm2711_pv0_data;
-> > +extern const struct vc4_pv_data bcm2711_pv1_data;
-> > +extern const struct vc4_pv_data bcm2711_pv2_data;
-> > +extern const struct vc4_pv_data bcm2711_pv3_data;
-> > +extern const struct vc4_pv_data bcm2711_pv4_data;
-> > +
->=20
-> Maybe the driver could expose a helper function to get the pixelvalve data
-> and avoid having to expose all of these variables? For example you could
-> define an enum vc4_pixelvalve type and have something like the following:
->=20
-> const struct vc4_pv_data *vc4_crtc_get_pixelvalve_data(enum vc4_pixelvalv=
-e pv);
->=20
-> All these are small nits though, the patch looks great to me and I think =
-is
-> awesome to have this level of testing with KUnit. Hope other drivers foll=
-ow
-> your lead.
-
-I'm not sure. It adds an interface for something we don't really need,
-so I'm not sure if it's really beneficial.
-
-David pointed at that patch though, which seems more promising:
-https://lore.kernel.org/linux-kselftest/20221102175959.2921063-1-rmoar@goog=
-le.com/
-
-Maxime
-
---jln5wp2b5zhcs7vh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCY4imMgAKCRDj7w1vZxhR
-xcrRAQDU2AjAdKl8Lz9EVmvZL0MtLMtF6tuSl/Al2cKN4Nlc0wD/cRAIduKDlxZi
-pjemK6JK1GLDi6UiLchHE6nBdkPySw4=
-=F2NM
------END PGP SIGNATURE-----
-
---jln5wp2b5zhcs7vh--
-
---===============5709666659724592597==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============5709666659724592597==--
+SGksDQoNClRoaXMgc2VyaWVzIGludHJvZHVjZSBLdW5pdCB0ZXN0cyB0byB0aGUgdmM0IEtNUyBk
+cml2ZXIsIGJ1dCB1bmxpa2Ugd2hhdCB3ZQ0KaGF2ZSBiZWVuIGRvaW5nIHNvIGZhciBpbiBLTVMs
+IGl0IGFjdHVhbGx5IHRlc3RzIHRoZSBhdG9taWMgbW9kZXNldHRpbmcgY29kZS4NCg0KSW4gb3Jk
+ZXIgdG8gZG8gc28sIEkndmUgaGFkIHRvIGltcHJvdmUgYSBmYWlyIGJpdCBvbiB0aGUgS3VuaXQg
+aGVscGVycyBhbHJlYWR5DQpmb3VuZCBpbiB0aGUgdHJlZSBpbiBvcmRlciB0byByZWdpc3RlciBh
+IGZ1bGwgYmxvd24gYW5kIHNvbWV3aGF0IGZ1bmN0aW9uYWwgS01TDQpkcml2ZXIuDQoNCkl0J3Mg
+b2YgY291cnNlIHJlbHlpbmcgb24gYSBtb2NrIHNvIHRoYXQgd2UgY2FuIHRlc3QgaXQgYW55d2hl
+cmUuIFRoZSBtb2NraW5nDQphcHByb2FjaCBjcmVhdGVkIGEgbnVtYmVyIG9mIGlzc3VlcywgdGhl
+IG1haW4gb25lIGJlaW5nIHRoYXQgd2UgbmVlZCB0byBjcmVhdGUNCmEgZGVjZW50IG1vY2sgaW4g
+dGhlIGZpcnN0IHBsYWNlLCBzZWUgcGF0Y2ggMjIuIFRoZSBiYXNpYyBpZGVhIGlzIHRoYXQgSQ0K
+Y3JlYXRlZCBzb21lIHN0cnVjdHVyZXMgdG8gcHJvdmlkZSBhIGRlY2VudCBhcHByb3hpbWF0aW9u
+IG9mIHRoZSBhY3R1YWwNCmhhcmR3YXJlLCBhbmQgdGhhdCB3b3VsZCBzdXBwb3J0IGJvdGggbWFq
+b3IgYXJjaGl0ZWN0dXJlcyBzdXBwb3J0ZWQgYnkgdmM0Lg0KDQpUaGlzIGlzIG9mIGNvdXJzZSBt
+ZWFudCB0byBldm9sdmUgb3ZlciB0aW1lIGFuZCBzdXBwb3J0IG1vcmUgdGVzdHMsIGJ1dCBJJ3Zl
+DQpmb2N1c2VkIG9uIHRlc3RpbmcgdGhlIEhWUyBGSUZPIGFzc2lnbm1lbnQgY29kZSB3aGljaCBp
+cyBmYWlybHkgdHJpY2t5IChhbmQgdGhlDQp0ZXN0cyBoYXZlIGFjdHVhbGx5IHJldmVhbGVkIG9u
+ZSBtb3JlIGJ1ZyB3aXRoIG91ciBjdXJyZW50IGltcGxlbWVudGF0aW9uKS4gSQ0KdXNlZCB0byBo
+YXZlIGEgdXNlcnNwYWNlIGltcGxlbWVudGF0aW9uIG9mIHRob3NlIHRlc3RzLCB3aGVyZSBJIHdv
+dWxkIGNvcHkgYW5kDQpwYXN0ZSB0aGUga2VybmVsIGNvZGUgYW5kIHJ1biB0aGUgdGVzdHMgb24g
+YSByZWd1bGFyIGJhc2lzLiBJdCdzIHdhcyBvYnZpb3VzbHkNCmZhaXJseSBzdWJvcHRpbWFsLCBz
+byBpdCBzZWVtZWQgbGlrZSB0aGUgcGVyZmVjdCB0ZXN0YmVkIGZvciB0aGF0IHNlcmllcy4NCg0K
+SXQgY2FuIGJlIHJ1biB1c2luZzoNCi4vdG9vbHMvdGVzdGluZy9rdW5pdC9rdW5pdC5weSBydW4g
+XA0KICAgICAgICAtLWt1bml0Y29uZmlnPWRyaXZlcnMvZ3B1L2RybS92YzQvdGVzdHMvLmt1bml0
+Y29uZmlnIFwNCiAgICAgICAgLS1jcm9zc19jb21waWxlIGFhcmNoNjQtbGludXgtZ251LSAtLWFy
+Y2ggYXJtNjQNCg0KTGV0IG1lIGtub3cgd2hhdCB5b3UgdGhpbmssDQpNYXhpbWUNCg0KVG86IERh
+dmlkIEFpcmxpZSA8YWlybGllZEBnbWFpbC5jb20+DQpUbzogRGFuaWVsIFZldHRlciA8ZGFuaWVs
+QGZmd2xsLmNoPg0KVG86IE1hYXJ0ZW4gTGFua2hvcnN0IDxtYWFydGVuLmxhbmtob3JzdEBsaW51
+eC5pbnRlbC5jb20+DQpUbzogTWF4aW1lIFJpcGFyZCA8bXJpcGFyZEBrZXJuZWwub3JnPg0KVG86
+IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPg0KQ2M6IERhdmUgU3RldmVu
+c29uIDxkYXZlLnN0ZXZlbnNvbkByYXNwYmVycnlwaS5jb20+DQpDYzogSmF2aWVyIE1hcnRpbmV6
+IENhbmlsbGFzIDxqYXZpZXJtQHJlZGhhdC5jb20+DQpDYzogR3JlZyBLcm9haC1IYXJ0bWFuIDxn
+cmVna2hAbGludXhmb3VuZGF0aW9uLm9yZz4NCkNjOiBNYcOtcmEgQ2FuYWwgPG1haXJhY2FuYWxA
+cmlzZXVwLm5ldD4NCkNjOiBCcmVuZGFuIEhpZ2dpbnMgPGJyZW5kYW4uaGlnZ2luc0BsaW51eC5k
+ZXY+DQpDYzogRGF2aWQgR293IDxkYXZpZGdvd0Bnb29nbGUuY29tPg0KQ2M6IGxpbnV4LWtzZWxm
+dGVzdEB2Z2VyLmtlcm5lbC5vcmcNCkNjOiBrdW5pdC1kZXZAZ29vZ2xlZ3JvdXBzLmNvbQ0KQ2M6
+IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcNCkNjOiBsaW51eC1rZXJuZWxAdmdlci5r
+ZXJuZWwub3JnDQpDYzogbGludXgtbWVkaWFAdmdlci5rZXJuZWwub3JnDQpDYzogbGluYXJvLW1t
+LXNpZ0BsaXN0cy5saW5hcm8ub3JnDQpTaWduZWQtb2ZmLWJ5OiBNYXhpbWUgUmlwYXJkIDxtYXhp
+bWVAY2Vybm8udGVjaD4NCg0KLS0tDQpDaGFuZ2VzIGluIHYzOg0KLSBBZGQgYSBLY29uZmlnIG9w
+dGlvbiBmb3IgdGhlIEtVbml0IGhlbHBlcnMNCi0gU3dpdGNoIHRvIEVYUE9SVF9TWU1CT0xfR1BM
+IGZvciB0aGUgaGVscGVycw0KLSBBZGQgc29tZSBkb2N1bWVudGF0aW9uIG9uIGhvdyB0byBydW4g
+dGhlIHRlc3RzDQotIEFkZCBzb21lIGRvY3VtZW50YXRpb24gZm9yIF9fdmM0X2NydGNfaW5pdA0K
+LSBGaXggS1VuaXQgY2FzaW5nDQotIExpbmsgdG8gdjI6IGh0dHBzOi8vbG9yZS5rZXJuZWwub3Jn
+L3IvMjAyMjExMjMtcnBpLWt1bml0LXRlc3RzLXYyLTAtZWZlNWVkNTE4YjYzQGNlcm5vLnRlY2gN
+Cg0KQ2hhbmdlcyBpbiB2MjoNCi0gQWRkZWQgc29tZSBkb2N1bWVudGF0aW9uIGZvciBwdWJsaWMg
+ZnVuY3Rpb25zDQotIFJlbW92ZWQgdGhlIGZha2UgZGV2aWNlIHByb2JlL3JlbW92ZSB3b3JrcXVl
+dWUgDQotIE1hZGUgc3VyZSB0aGUgdGVzdHMgY291bGQgYmUgY29tcGlsZWQgYXMgbW9kdWxlcw0K
+LSBNb3ZlZCB0aGUgdmM0IHRlc3RzIGluIHRoZSB2YzQgbW9kdWxlDQotIEFwcGxpZWQgc29tZSBv
+ZiB0aGUgcHJlbGltaW5hcnkgcGF0Y2hlcw0KLSBSZWJhc2VkIG9uIHRvcCBvZiBjdXJyZW50IGRy
+bS1taXNjLW5leHQgYnJhbmNoDQotIEZpeGVkIGNoZWNrcGF0Y2ggaXNzdWVzDQotIEludHJvZHVj
+ZWQgQkNNMjgzNSAoUGkwLTMpIHRlc3RzIGZvciBtdXhpbmcNCi0gSW50cm9kdWNlZCB0ZXN0cyB0
+byBjb3ZlciBwYXN0IGJ1Z3Mgd2UgaGFkDQotIExpbmsgdG8gdjE6IGh0dHBzOi8vbG9yZS5rZXJu
+ZWwub3JnL3IvMjAyMjExMjMtcnBpLWt1bml0LXRlc3RzLXYxLTAtMDUxYTBiYjYwYTE2QGNlcm5v
+LnRlY2gNCg0KLS0tDQpNYXhpbWUgUmlwYXJkICgyMCk6DQogICAgICBkcm0vdGVzdHM6IGhlbHBl
+cnM6IE1vdmUgdGhlIGhlbHBlciBoZWFkZXIgdG8gaW5jbHVkZS9kcm0NCiAgICAgIGRybS90ZXN0
+czogSW50cm9kdWNlIGEgY29uZmlnIG9wdGlvbiBmb3IgdGhlIEtVbml0IGhlbHBlcnMNCiAgICAg
+IGRybS90ZXN0czogaGVscGVyczogRG9jdW1lbnQgZHJtX2t1bml0X2RldmljZV9pbml0KCkNCiAg
+ICAgIGRybS90ZXN0czogaGVscGVyczogU3dpdGNoIHRvIEVYUE9SVF9TWU1CT0xfR1BMDQogICAg
+ICBkcm0vdGVzdHM6IGhlbHBlcnM6IFJlbmFtZSB0aGUgZGV2aWNlIGluaXQgaGVscGVyDQogICAg
+ICBkcm0vdGVzdHM6IGhlbHBlcnM6IFJlbW92ZSB0aGUgbmFtZSBwYXJhbWV0ZXINCiAgICAgIGRy
+bS90ZXN0czogaGVscGVyczogQ3JlYXRlIHRoZSBkZXZpY2UgaW4gYW5vdGhlciBmdW5jdGlvbg0K
+ICAgICAgZHJtL3Rlc3RzOiBoZWxwZXJzOiBTd2l0Y2ggdG8gYSBwbGF0Zm9ybV9kZXZpY2UNCiAg
+ICAgIGRybS90ZXN0czogaGVscGVyczogTWFrZSBzdXJlIHRoZSBkZXZpY2UgaXMgYm91bmQNCiAg
+ICAgIGRybS90ZXN0czogaGVscGVyczogQWxsb3cgZm9yIGEgY3VzdG9tIGRldmljZSBzdHJ1Y3Qg
+dG8gYmUgYWxsb2NhdGVkDQogICAgICBkcm0vdGVzdHM6IGhlbHBlcnM6IEFsbG93IHRvIHBhc3Mg
+YSBjdXN0b20gZHJtX2RyaXZlcg0KICAgICAgZHJtL3Rlc3RzOiBBZGQgYSB0ZXN0IGZvciBEUk0g
+bWFuYWdlZCBhY3Rpb25zDQogICAgICBkcm0vdmM0OiBNb3ZlIEhWUyBzdGF0ZSB0byBtYWluIGhl
+YWRlcg0KICAgICAgZHJtL3ZjNDogY3J0YzogSW50cm9kdWNlIGEgbG93ZXItbGV2ZWwgY3J0YyBp
+bml0IGhlbHBlcg0KICAgICAgZHJtL3ZjNDogY3J0YzogTWFrZSBlbmNvZGVyIGxvb2t1cCBoZWxw
+ZXIgcHVibGljDQogICAgICBkcm0vdmM0OiBodnM6IFByb3ZpZGUgYSBmdW5jdGlvbiB0byBpbml0
+aWFsaXplIHRoZSBIVlMgc3RydWN0dXJlDQogICAgICBkcm0vdmM0OiB0ZXN0czogSW50cm9kdWNl
+IGEgbW9ja2luZyBpbmZyYXN0cnVjdHVyZQ0KICAgICAgZHJtL3ZjNDogdGVzdHM6IEZhaWwgdGhl
+IGN1cnJlbnQgdGVzdCBpZiB3ZSBhY2Nlc3MgYSByZWdpc3Rlcg0KICAgICAgZHJtL3ZjNDogdGVz
+dHM6IEFkZCB1bml0IHRlc3Qgc3VpdGUgZm9yIHRoZSBQViBtdXhpbmcNCiAgICAgIERvY3VtZW50
+YXRpb246IGdwdTogdmM0OiBBZGQgS1VuaXQgVGVzdHMgU2VjdGlvbg0KDQogRG9jdW1lbnRhdGlv
+bi9ncHUvdmM0LnJzdCAgICAgICAgICAgICAgICAgICAgICAgfCAgIDE2ICsNCiBkcml2ZXJzL2dw
+dS9kcm0vS2NvbmZpZyAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDcgKw0KIGRyaXZlcnMv
+Z3B1L2RybS9NYWtlZmlsZSAgICAgICAgICAgICAgICAgICAgICAgIHwgICAgMiArLQ0KIGRyaXZl
+cnMvZ3B1L2RybS90ZXN0cy9NYWtlZmlsZSAgICAgICAgICAgICAgICAgIHwgICAgNSArLQ0KIGRy
+aXZlcnMvZ3B1L2RybS90ZXN0cy9kcm1fY2xpZW50X21vZGVzZXRfdGVzdC5jIHwgICAxOSArLQ0K
+IGRyaXZlcnMvZ3B1L2RybS90ZXN0cy9kcm1fa3VuaXRfaGVscGVycy5jICAgICAgIHwgIDEwNiAr
+Ky0NCiBkcml2ZXJzL2dwdS9kcm0vdGVzdHMvZHJtX2t1bml0X2hlbHBlcnMuaCAgICAgICB8ICAg
+MTEgLQ0KIGRyaXZlcnMvZ3B1L2RybS90ZXN0cy9kcm1fbWFuYWdlZF90ZXN0LmMgICAgICAgIHwg
+ICA3MSArKw0KIGRyaXZlcnMvZ3B1L2RybS90ZXN0cy9kcm1fbW9kZXNfdGVzdC5jICAgICAgICAg
+IHwgICAxOSArLQ0KIGRyaXZlcnMvZ3B1L2RybS90ZXN0cy9kcm1fcHJvYmVfaGVscGVyX3Rlc3Qu
+YyAgIHwgICAyMCArLQ0KIGRyaXZlcnMvZ3B1L2RybS92YzQvS2NvbmZpZyAgICAgICAgICAgICAg
+ICAgICAgIHwgICAxNiArDQogZHJpdmVycy9ncHUvZHJtL3ZjNC9NYWtlZmlsZSAgICAgICAgICAg
+ICAgICAgICAgfCAgICA3ICsNCiBkcml2ZXJzL2dwdS9kcm0vdmM0L3Rlc3RzLy5rdW5pdGNvbmZp
+ZyAgICAgICAgICB8ICAgMTMgKw0KIGRyaXZlcnMvZ3B1L2RybS92YzQvdGVzdHMvdmM0X21vY2su
+YyAgICAgICAgICAgIHwgIDIwMCArKysrKw0KIGRyaXZlcnMvZ3B1L2RybS92YzQvdGVzdHMvdmM0
+X21vY2suaCAgICAgICAgICAgIHwgICA2MyArKw0KIGRyaXZlcnMvZ3B1L2RybS92YzQvdGVzdHMv
+dmM0X21vY2tfY3J0Yy5jICAgICAgIHwgICA0MSArDQogZHJpdmVycy9ncHUvZHJtL3ZjNC90ZXN0
+cy92YzRfbW9ja19vdXRwdXQuYyAgICAgfCAgMTM4ICsrKw0KIGRyaXZlcnMvZ3B1L2RybS92YzQv
+dGVzdHMvdmM0X21vY2tfcGxhbmUuYyAgICAgIHwgICA0NyArDQogZHJpdmVycy9ncHUvZHJtL3Zj
+NC90ZXN0cy92YzRfdGVzdF9wdl9tdXhpbmcuYyAgfCAxMDM5ICsrKysrKysrKysrKysrKysrKysr
+KysrDQogZHJpdmVycy9ncHUvZHJtL3ZjNC92YzRfY3J0Yy5jICAgICAgICAgICAgICAgICAgfCAg
+MTIwICsrLQ0KIGRyaXZlcnMvZ3B1L2RybS92YzQvdmM0X2RwaS5jICAgICAgICAgICAgICAgICAg
+IHwgICAxMyArLQ0KIGRyaXZlcnMvZ3B1L2RybS92YzQvdmM0X2Rydi5jICAgICAgICAgICAgICAg
+ICAgIHwgICAgNCArLQ0KIGRyaXZlcnMvZ3B1L2RybS92YzQvdmM0X2Rydi5oICAgICAgICAgICAg
+ICAgICAgIHwgICA5MSArLQ0KIGRyaXZlcnMvZ3B1L2RybS92YzQvdmM0X2RzaS5jICAgICAgICAg
+ICAgICAgICAgIHwgICAgOSArLQ0KIGRyaXZlcnMvZ3B1L2RybS92YzQvdmM0X2hkbWlfcmVncy5o
+ICAgICAgICAgICAgIHwgICAgNCArDQogZHJpdmVycy9ncHUvZHJtL3ZjNC92YzRfaHZzLmMgICAg
+ICAgICAgICAgICAgICAgfCAgIDgxICstDQogZHJpdmVycy9ncHUvZHJtL3ZjNC92YzRfa21zLmMg
+ICAgICAgICAgICAgICAgICAgfCAgIDI1ICstDQogZHJpdmVycy9ncHUvZHJtL3ZjNC92YzRfdHhw
+LmMgICAgICAgICAgICAgICAgICAgfCAgIDE1ICstDQogZHJpdmVycy9ncHUvZHJtL3ZjNC92YzRf
+dmVjLmMgICAgICAgICAgICAgICAgICAgfCAgIDEzICstDQogaW5jbHVkZS9kcm0vZHJtX2t1bml0
+X2hlbHBlcnMuaCAgICAgICAgICAgICAgICAgfCAgIDkxICsrDQogMzAgZmlsZXMgY2hhbmdlZCwg
+MjEzMiBpbnNlcnRpb25zKCspLCAxNzQgZGVsZXRpb25zKC0pDQotLS0NCmJhc2UtY29tbWl0OiAx
+OTk1NTdmYWI5MjU0OGY4ZTlkNTIwN2UzODUwOTcyMTNhYmUwY2FiDQpjaGFuZ2UtaWQ6IDIwMjIx
+MTIzLXJwaS1rdW5pdC10ZXN0cy04N2EzODg0OTJhNzMNCg0KQmVzdCByZWdhcmRzLA0KLS0gDQpN
+YXhpbWUgUmlwYXJkIDxtYXhpbWVAY2Vybm8udGVjaD4NCl9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxp
+bmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWls
+IHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
