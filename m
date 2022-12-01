@@ -2,85 +2,84 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 252A763F391
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Dec 2022 16:17:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5501B63F395
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Dec 2022 16:18:20 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3551A3F2E5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Dec 2022 15:17:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 635363F2E7
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Dec 2022 15:18:19 +0000 (UTC)
 Received: from new4-smtp.messagingengine.com (new4-smtp.messagingengine.com [66.111.4.230])
-	by lists.linaro.org (Postfix) with ESMTPS id 73E253F493
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  1 Dec 2022 15:15:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 80A163F493
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  1 Dec 2022 15:15:03 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=cerno.tech header.s=fm2 header.b="J VR7l8l";
-	dkim=pass header.d=messagingengine.com header.s=fm1 header.b="s azvw4L";
+	dkim=pass header.d=cerno.tech header.s=fm2 header.b="U s/Aa4q";
+	dkim=pass header.d=messagingengine.com header.s=fm1 header.b="t /3nDy/";
 	spf=pass (lists.linaro.org: domain of maxime@cerno.tech designates 66.111.4.230 as permitted sender) smtp.mailfrom=maxime@cerno.tech;
 	dmarc=pass (policy=none) header.from=cerno.tech
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
-	by mailnew.nyi.internal (Postfix) with ESMTP id 57D5C58039C;
-	Thu,  1 Dec 2022 10:15:01 -0500 (EST)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+	by mailnew.nyi.internal (Postfix) with ESMTP id 61B895803A4;
+	Thu,  1 Dec 2022 10:15:03 -0500 (EST)
 Received: from mailfrontend2 ([10.202.2.163])
-  by compute4.internal (MEProxy); Thu, 01 Dec 2022 10:15:01 -0500
+  by compute5.internal (MEProxy); Thu, 01 Dec 2022 10:15:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cerno.tech; h=cc
 	:cc:content-transfer-encoding:content-type:date:date:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
-	:reply-to:sender:subject:subject:to:to; s=fm2; t=1669907701; x=
-	1669914901; bh=qBaPjNlhfE/YsxDnTij+FTizhNUE0G6itXL5vBTjAgk=; b=J
-	VR7l8lzIidl9UfjFTfDJb2brNDPhKm0kR2CaE3a7Syj31pHXGL7gvuDluJJBFuTU
-	dshXclsY23T9WKOmrdON75rKQvXw36WQ0vKLiP+/HechKj21t4KM1lKjZinyvR8Q
-	hTaAhMLvBxQKlt5rYUoMx3if4U9in7Yowc1C+lDHMad6uOVohKujChxmVK7AlQAo
-	a8gmGVBoATF+0DBW7ZBzhhrJRI/kkcnAPH5eIedihpZYm1WuBi99LvCcdDKufZjI
-	etsk8HneWcnKzvmwmKb10CHeQOL2HeJcdWlQTmL77LtnuhKTRThHSaY9vCvG99hl
-	dD+DdlzxyI5l/LaenjwiQ==
+	:reply-to:sender:subject:subject:to:to; s=fm2; t=1669907703; x=
+	1669914903; bh=o1GxoIy9tIGkpYGQd3V+71hjw8YMfiHPDUsOz+6prAk=; b=U
+	s/Aa4qSPGjjBYQdUKZyywumcGXy7JUyGiCv2AMO76R/rdRRwR9oG4ZmwGxms97bn
+	R6ISVlofR2V6X1TZWfKfDJRTPlKUdWp9ZAv8O5UCen3kSn5oK//rDAlHaVYC+Lt6
+	VJsETGXyOElL8Y5nmcSx3d6pmgkNGTiu6kVMT42mcgW+P+q+Zh4uy6SQl3yT4yOP
+	G5WBO52JJ7Fds2t9t/WWjJsySZgF1+xDpzllQw8XfF2+vKN64MDPwSJH1jFIo65T
+	uFhSfFH50Saq0akHWnBloyltnfAiYVko99StoA9j9fh5LApzQi4om89jgrsYmmC6
+	AdwP+y2gCTC4+SCxxDolQ==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:cc:content-transfer-encoding
 	:content-type:date:date:feedback-id:feedback-id:from:from
 	:in-reply-to:in-reply-to:message-id:mime-version:references
 	:reply-to:sender:subject:subject:to:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1669907701; x=
-	1669914901; bh=qBaPjNlhfE/YsxDnTij+FTizhNUE0G6itXL5vBTjAgk=; b=s
-	azvw4LtEiLDfu0bdWTSHGQjCZCW6RLe3daKUDcUvPyZ1Kg0SV8PPwRiwco01o4ln
-	dLRKNRcrFrNmQOoE7vnMenmzedCBQ55C0I5lcioONwcMgIxMeWFuIVG81V1DukDQ
-	97WbOQd8L5/TNc2EsyyL0YkU5e43hgUcGAWV+oRiTcFN0iQBOfA8vpPIdMBDNFCz
-	836YoSwR0y27rRRGLt1sYEdS3rYs2osfqtG3h4JSUUdQXm812HML6aMBVKXqu+ac
-	op99jJvU6h6DaS4LXJAOTyUuQgggMfMyWTiO8Sfwms2d4GGU1h7XVH6kLhPQzGKB
-	7P9FYrQ5dXozpYoU/MOdg==
-X-ME-Sender: <xms:9cSIY2IZbAIyyguxO-6jQITqmrpYphvq09OqzeoOJk8tOYon_d8vfA>
-    <xme:9cSIY-L2ItExkoNBlUMiZ-rq-K7_-aADsAjzqK4xQfNIJAwh7U684faToLs9AE3VF
-    aY5cY-JybfZ5Kze2iY>
-X-ME-Received: <xmr:9cSIY2uCagEpRn8sWtDFTOqVPAOFjyB1GwC5Op15D2XvyWyPpOqM1nImnK8lA_FY2Lhbfhdhwtlkuw_7qW6nMTmEKncXoArWhygzpw1_3FdiOw>
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1669907703; x=
+	1669914903; bh=o1GxoIy9tIGkpYGQd3V+71hjw8YMfiHPDUsOz+6prAk=; b=t
+	/3nDy/nVrRe6MR8Nebexr396fs72petQEmb4sWrmzxBQIjbEil2WN0Le4NRg8z1g
+	4a5nvUbyX1DIPxd3ee2lvPZUzjdgIjRu/UYb55sdkjrUQhRDMeoGUEhaFf3c1i1h
+	aLHkLbk28ca0xIPA4Up7CPW18Hr7+4ZtTLA1087YwHr5k38yp4FkfxkvHuPATAUN
+	8JNeNfl4dhSqHK7OY3GaEeoGArmi76ve2RimiBkRtESox22PBY0dMZev+badhbkz
+	Bwc/bksNcrG7KVbxeboRLEFNT4oUiJDA94v60vI560m5UZwRCKDSJmN5qOLR8TVp
+	dNhrtRTGNvOMgUIySm2wA==
+X-ME-Sender: <xms:98SIY9D1MKOoVd3_zMdyRtlDWJf_89zF_O1zZ14yxdYXo_s3QwHdDQ>
+    <xme:98SIY7ilZ7y5xPbWP1WoRGiFtZCmoKTJ4eL5jvNFU1AYiMX0GGzn11wW00XjKxbSf
+    we2dR0CLcXM3RaOY5s>
+X-ME-Received: <xmr:98SIY4k3BaQAc3W8jHzbHyaaG5qWAxYriCm8QtxuGYmALX2HRGD2Y3hEwvyL4A3rd7xMZrAACxRwow3J5pPZ6Op4LCJtEzONo8kDNY-cr8Xu0Q>
 X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrtdehgdejgecutefuodetggdotefrodftvf
     curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
     uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpefhfffuggfgtgfkfhgjvfevofesthekredtredtjeenucfhrhhomhepofgrgihi
+    fjughrpefhfffugggtgffkfhgjvfevofesthekredtredtjeenucfhrhhomhepofgrgihi
     mhgvucftihhprghrugcuoehmrgigihhmvgestggvrhhnohdrthgvtghhqeenucggtffrrg
-    htthgvrhhnpedvgfevjefhtdetveevhfelieeuueetgfdvgeevkeegudejffegfffgtedt
-    leelhfenucevlhhushhtvghrufhiiigvpedunecurfgrrhgrmhepmhgrihhlfhhrohhmpe
+    htthgvrhhnpeduudduhfevjeetfeegvdffvdevvdejudegudekjeehtdelhfffveethfej
+    ledtveenucevlhhushhtvghrufhiiigvpedunecurfgrrhgrmhepmhgrihhlfhhrohhmpe
     hmrgigihhmvgestggvrhhnohdrthgvtghh
-X-ME-Proxy: <xmx:9cSIY7YVDZUJSnysa9LgSbAJ9VZouSuN_jF5ElfXAMdvgoHukk7f-g>
-    <xmx:9cSIY9aGH0w73WzaVkFAcKbLTTRHQsq6vWEZx5lNmc7KgicwOq-0vg>
-    <xmx:9cSIY3BJvx4tq_qP2xkxHxqT04IXyV1fHg2BEYR_UwlpgkflHf0o5Q>
-    <xmx:9cSIY-6XtDZS_hlm5J6XGTi_7RqY7UtwbVBQKeEBDi5hEZhl10VfOQ>
+X-ME-Proxy: <xmx:98SIY3wnTcuQAo9462LxxpV1fgqBldr4GVGlsR2JRGNPVCLDS_f6_Q>
+    <xmx:98SIYyT85gt-pzMuL1IataCMiljsJwaRRpZelHTlNFN-6-N8BIhn4w>
+    <xmx:98SIY6ZP-MGwiP-Rpc49wylQnFPDRSdJ9NqqMwEBJmpzbpBYg9GbnA>
+    <xmx:98SIY6zZS2XLU3L8ntV_f1izkSOubqyhPan5pMRn7cWhYUweFecqHw>
 Feedback-ID: i8771445c:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 1 Dec 2022 10:15:00 -0500 (EST)
+ 1 Dec 2022 10:15:02 -0500 (EST)
 From: Maxime Ripard <maxime@cerno.tech>
-Date: Thu, 01 Dec 2022 16:11:40 +0100
+Date: Thu, 01 Dec 2022 16:11:41 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20221123-rpi-kunit-tests-v3-9-4615a663a84a@cerno.tech>
+Message-Id: <20221123-rpi-kunit-tests-v3-10-4615a663a84a@cerno.tech>
 References: <20221123-rpi-kunit-tests-v3-0-4615a663a84a@cerno.tech>
 In-Reply-To: <20221123-rpi-kunit-tests-v3-0-4615a663a84a@cerno.tech>
 To: Maxime Ripard <mripard@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Daniel Vetter <daniel@ffwll.ch>, Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>
 X-Mailer: b4 0.10.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2324; i=maxime@cerno.tech;
- h=from:subject:message-id; bh=yYpdpN4Z7ig+2ZlJ/roXFAY7P6KOCPfO+JwX1aWrG0I=;
- b=owGbwMvMwCX2+D1vfrpE4FHG02pJDMkdRzQcXvsLsQce4FRpmRmSbbLohnvmpyKTFYkHtuzlOJXQ
- GK7SUcrCIMbFICumyBIjbL4k7tSs151sfPNg5rAygQxh4OIUgIm8fcPI8Db13+MnbZ/5bpdtXaGyon
- JD2/UjNnyc/55ekWAUDS3dw8XwV1x3Vf7qnULiidHRC3YpXPQxCvgQfjl0d3YYt/nHXLUH/AA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7490; i=maxime@cerno.tech;
+ h=from:subject:message-id; bh=oWQyHlFlEMO6tU/Tk/1H5+OEylpKqL1EgYaUned7kZA=;
+ b=owGbwMvMwCX2+D1vfrpE4FHG02pJDMkdRzQcza8sTFjCvvxt9JkzU5ddn1W+bGVLxU33kwbqbqkT
+ 70o1dJSyMIhxMciKKbLECJsviTs163UnG988mDmsTCBDGLg4BWAi+6czMrS0r5lrvS32vMuP22Up5W
+ 6ffsiYfhR4WXlI2nehsbbt+TmMDGtXTw6v3eqbwy+SLuoi8KVhienlXCfVT8v/aTezf45vZQcA
 X-Developer-Key: i=maxime@cerno.tech; a=openpgp;
  fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
-X-Rspamd-Queue-Id: 73E253F493
+X-Rspamd-Queue-Id: 80A163F493
 X-Spamd-Bar: -----------
 X-Spamd-Result: default: False [-11.60 / 15.00];
 	REPLY(-4.00)[];
@@ -101,7 +100,7 @@ X-Spamd-Result: default: False [-11.60 / 15.00];
 	DBL_BLOCKED_OPENRESOLVER(0.00)[new4-smtp.messagingengine.com:rdns,new4-smtp.messagingengine.com:helo,cerno.tech:email,cerno.tech:dkim,messagingengine.com:dkim];
 	DKIM_TRACE(0.00)[cerno.tech:+,messagingengine.com:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	URIBL_BLOCKED(0.00)[new4-smtp.messagingengine.com:rdns,new4-smtp.messagingengine.com:helo,cerno.tech:email,cerno.tech:dkim,igalia.com:email,messagingengine.com:dkim];
+	URIBL_BLOCKED(0.00)[cerno.tech:email,cerno.tech:dkim,new4-smtp.messagingengine.com:rdns,new4-smtp.messagingengine.com:helo,messagingengine.com:dkim];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[19];
 	FROM_HAS_DN(0.00)[];
@@ -110,66 +109,212 @@ X-Spamd-Result: default: False [-11.60 / 15.00];
 	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: JW2WTIUDQFNAOTB6NZO5ABGMEGH3LD7Q
-X-Message-ID-Hash: JW2WTIUDQFNAOTB6NZO5ABGMEGH3LD7Q
+Message-ID-Hash: 7Y4MPAURBR7367AZKQBHX56U7VFL2RE6
+X-Message-ID-Hash: 7Y4MPAURBR7367AZKQBHX56U7VFL2RE6
 X-MailFrom: maxime@cerno.tech
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-kselftest@vger.kernel.org, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, dri-devel@lists.freedesktop.org, Maxime Ripard <maxime@cerno.tech>, =?utf-8?b?TWHvv73vv71yYSBDYW5hbA==?= <mcanal@igalia.com>, Javier Martinez Canillas <javierm@redhat.com>, linux-kernel@vger.kernel.org, Brendan Higgins <brendan.higgins@linux.dev>, Dave Stevenson <dave.stevenson@raspberrypi.com>, linux-media@vger.kernel.org, David Gow <davidgow@google.com>, linaro-mm-sig@lists.linaro.org, kunit-dev@googlegroups.com, =?utf-8?b?TWHvv73vv71yYSBDYW5hbA==?= <mairacanal@riseup.net>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 09/20] drm/tests: helpers: Make sure the device is bound
+Subject: [Linaro-mm-sig] [PATCH v3 10/20] drm/tests: helpers: Allow for a custom device struct to be allocated
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JW2WTIUDQFNAOTB6NZO5ABGMEGH3LD7Q/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7Y4MPAURBR7367AZKQBHX56U7VFL2RE6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-VGhlIGRldmljZSBtYW5hZ2VkIHJlc291cmNlcyBhcmUgZnJlZWQgd2hlbiB0aGUgZGV2aWNlIGlz
-IGRldGFjaGVkLCBzbw0KaXQgaGFzIHRvIGJlIGJvdW5kIGluIHRoZSBmaXJzdCBwbGFjZS4NCg0K
-TGV0J3MgY3JlYXRlIGEgZmFrZSBkcml2ZXIgdGhhdCB3ZSB3aWxsIGJpbmQgdG8gb3VyIGZha2Ug
-ZGV2aWNlIHRvDQpiZW5lZml0IGZyb20gdGhlIGRldmljZSBtYW5hZ2VkIGNsZWFudXBzIGluIG91
-ciB0ZXN0cy4NCg0KUmV2aWV3ZWQtYnk6IE1hw61yYSBDYW5hbCA8bWNhbmFsQGlnYWxpYS5jb20+
-DQpTaWduZWQtb2ZmLWJ5OiBNYXhpbWUgUmlwYXJkIDxtYXhpbWVAY2Vybm8udGVjaD4NCi0tLQ0K
-IGRyaXZlcnMvZ3B1L2RybS90ZXN0cy9kcm1fa3VuaXRfaGVscGVycy5jIHwgMjYgKysrKysrKysr
-KysrKysrKysrKysrKysrKy0NCiAxIGZpbGUgY2hhbmdlZCwgMjUgaW5zZXJ0aW9ucygrKSwgMSBk
-ZWxldGlvbigtKQ0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3Rlc3RzL2RybV9rdW5p
-dF9oZWxwZXJzLmMgYi9kcml2ZXJzL2dwdS9kcm0vdGVzdHMvZHJtX2t1bml0X2hlbHBlcnMuYw0K
-aW5kZXggYjY2Y2U3Nzk1MTFiLi45YmZkM2NiOWNkZTEgMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2dw
-dS9kcm0vdGVzdHMvZHJtX2t1bml0X2hlbHBlcnMuYw0KKysrIGIvZHJpdmVycy9ncHUvZHJtL3Rl
-c3RzL2RybV9rdW5pdF9oZWxwZXJzLmMNCkBAIC0xOCwxMiArMTgsMzIgQEAgc3RydWN0IGt1bml0
-X2RldiB7DQogc3RhdGljIGNvbnN0IHN0cnVjdCBkcm1fbW9kZV9jb25maWdfZnVuY3MgZHJtX21v
-ZGVfY29uZmlnX2Z1bmNzID0gew0KIH07DQogDQorc3RhdGljIGludCBmYWtlX3Byb2JlKHN0cnVj
-dCBwbGF0Zm9ybV9kZXZpY2UgKnBkZXYpDQorew0KKwlyZXR1cm4gMDsNCit9DQorDQorc3RhdGlj
-IGludCBmYWtlX3JlbW92ZShzdHJ1Y3QgcGxhdGZvcm1fZGV2aWNlICpwZGV2KQ0KK3sNCisJcmV0
-dXJuIDA7DQorfQ0KKw0KK3N0YXRpYyBzdHJ1Y3QgcGxhdGZvcm1fZHJpdmVyIGZha2VfcGxhdGZv
-cm1fZHJpdmVyID0gew0KKwkucHJvYmUJPSBmYWtlX3Byb2JlLA0KKwkucmVtb3ZlCT0gZmFrZV9y
-ZW1vdmUsDQorCS5kcml2ZXIgPSB7DQorCQkubmFtZQk9IEtVTklUX0RFVklDRV9OQU1FLA0KKwl9
-LA0KK307DQorDQogLyoqDQogICogZHJtX2t1bml0X2hlbHBlcl9hbGxvY19kZXZpY2UgLSBBbGxv
-Y2F0ZSBhIG1vY2sgZGV2aWNlIGZvciBhIEtVbml0IHRlc3QNCiAgKiBAdGVzdDogVGhlIHRlc3Qg
-Y29udGV4dCBvYmplY3QNCiAgKg0KICAqIFRoaXMgYWxsb2NhdGVzIGEgZmFrZSBzdHJ1Y3QgJmRl
-dmljZSB0byBjcmVhdGUgYSBtb2NrIGZvciBhIEtVbml0DQotICogdGVzdC4NCisgKiB0ZXN0LiBU
-aGUgZGV2aWNlIHdpbGwgYWxzbyBiZSBib3VuZCB0byBhIGZha2UgZHJpdmVyLiBJdCB3aWxsIHRo
-dXMgYmUNCisgKiBhYmxlIHRvIGxldmVyYWdlIHRoZSB1c3VhbCBpbmZyYXN0cnVjdHVyZSBhbmQg
-bW9zdCBub3RhYmx5IHRoZQ0KKyAqIGRldmljZS1tYW5hZ2VkIHJlc291cmNlcyBqdXN0IGxpa2Ug
-YSAicmVhbCIgZGV2aWNlLg0KICAqDQogICogQ2FsbGVycyBuZWVkIHRvIG1ha2Ugc3VyZSBkcm1f
-a3VuaXRfaGVscGVyX2ZyZWVfZGV2aWNlKCkgb24gdGhlDQogICogZGV2aWNlIHdoZW4gZG9uZS4N
-CkBAIC0zNiw2ICs1Niw5IEBAIHN0cnVjdCBkZXZpY2UgKmRybV9rdW5pdF9oZWxwZXJfYWxsb2Nf
-ZGV2aWNlKHN0cnVjdCBrdW5pdCAqdGVzdCkNCiAJc3RydWN0IHBsYXRmb3JtX2RldmljZSAqcGRl
-djsNCiAJaW50IHJldDsNCiANCisJcmV0ID0gcGxhdGZvcm1fZHJpdmVyX3JlZ2lzdGVyKCZmYWtl
-X3BsYXRmb3JtX2RyaXZlcik7DQorCUtVTklUX0FTU0VSVF9FUSh0ZXN0LCByZXQsIDApOw0KKw0K
-IAlwZGV2ID0gcGxhdGZvcm1fZGV2aWNlX2FsbG9jKEtVTklUX0RFVklDRV9OQU1FLCBQTEFURk9S
-TV9ERVZJRF9OT05FKTsNCiAJS1VOSVRfQVNTRVJUX05PVF9FUlJfT1JfTlVMTCh0ZXN0LCBwZGV2
-KTsNCiANCkBAIC01OCw2ICs4MSw3IEBAIHZvaWQgZHJtX2t1bml0X2hlbHBlcl9mcmVlX2Rldmlj
-ZShzdHJ1Y3Qga3VuaXQgKnRlc3QsIHN0cnVjdCBkZXZpY2UgKmRldikNCiAJc3RydWN0IHBsYXRm
-b3JtX2RldmljZSAqcGRldiA9IHRvX3BsYXRmb3JtX2RldmljZShkZXYpOw0KIA0KIAlwbGF0Zm9y
-bV9kZXZpY2VfdW5yZWdpc3RlcihwZGV2KTsNCisJcGxhdGZvcm1fZHJpdmVyX3VucmVnaXN0ZXIo
-JmZha2VfcGxhdGZvcm1fZHJpdmVyKTsNCiB9DQogRVhQT1JUX1NZTUJPTF9HUEwoZHJtX2t1bml0
-X2hlbHBlcl9mcmVlX2RldmljZSk7DQogDQoNCi0tIA0KYjQgMC4xMC4xDQpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcg
-bGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2Vu
-ZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+The current helper to allocate a DRM device doesn't allow for any
+subclassing by drivers, which is going to be troublesome as we work on
+getting some kunit testing on atomic modesetting code.
+
+Let's use a similar pattern to the other allocation helpers by providing
+the structure size and offset as arguments.
+
+Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
+Signed-off-by: Maxime Ripard <maxime@cerno.tech>
+---
+ drivers/gpu/drm/tests/drm_client_modeset_test.c |  4 ++-
+ drivers/gpu/drm/tests/drm_kunit_helpers.c       | 40 ++++++-------------------
+ drivers/gpu/drm/tests/drm_modes_test.c          |  5 ++--
+ drivers/gpu/drm/tests/drm_probe_helper_test.c   |  5 ++--
+ include/drm/drm_kunit_helpers.h                 | 32 ++++++++++++++++++--
+ 5 files changed, 48 insertions(+), 38 deletions(-)
+
+diff --git a/drivers/gpu/drm/tests/drm_client_modeset_test.c b/drivers/gpu/drm/tests/drm_client_modeset_test.c
+index 053dbc0106d9..416a279b6dae 100644
+--- a/drivers/gpu/drm/tests/drm_client_modeset_test.c
++++ b/drivers/gpu/drm/tests/drm_client_modeset_test.c
+@@ -63,7 +63,9 @@ static int drm_client_modeset_test_init(struct kunit *test)
+ 	priv->dev = drm_kunit_helper_alloc_device(test);
+ 	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, priv->dev);
+ 
+-	priv->drm = drm_kunit_helper_alloc_drm_device(test, priv->dev, DRIVER_MODESET);
++	priv->drm = __drm_kunit_helper_alloc_drm_device(test, priv->dev,
++							sizeof(*priv->drm), 0,
++							DRIVER_MODESET);
+ 	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, priv->drm);
+ 
+ 	ret = drmm_connector_init(priv->drm, &priv->connector,
+diff --git a/drivers/gpu/drm/tests/drm_kunit_helpers.c b/drivers/gpu/drm/tests/drm_kunit_helpers.c
+index 9bfd3cb9cde1..b5485ab8fbf9 100644
+--- a/drivers/gpu/drm/tests/drm_kunit_helpers.c
++++ b/drivers/gpu/drm/tests/drm_kunit_helpers.c
+@@ -11,10 +11,6 @@
+ 
+ #define KUNIT_DEVICE_NAME	"drm-kunit-mock-device"
+ 
+-struct kunit_dev {
+-	struct drm_device base;
+-};
+-
+ static const struct drm_mode_config_funcs drm_mode_config_funcs = {
+ };
+ 
+@@ -85,32 +81,14 @@ void drm_kunit_helper_free_device(struct kunit *test, struct device *dev)
+ }
+ EXPORT_SYMBOL_GPL(drm_kunit_helper_free_device);
+ 
+-/**
+- * drm_kunit_helper_alloc_drm_device - Allocates a mock DRM device for KUnit tests
+- * @test: The test context object
+- * @dev: The parent device object
+- * @features: Mocked DRM device driver features
+- *
+- * This function creates a struct &drm_driver and will create a struct
+- * &drm_device from @dev and that driver.
+- *
+- * @dev should be allocated using drm_kunit_helper_alloc_device().
+- *
+- * The driver is tied to the @test context and will get cleaned at the
+- * end of the test. The drm_device is allocated through
+- * devm_drm_dev_alloc() and will thus be freed through a device-managed
+- * resource.
+- *
+- * Returns:
+- * A pointer to the new drm_device, or an ERR_PTR() otherwise.
+- */
+ struct drm_device *
+-drm_kunit_helper_alloc_drm_device(struct kunit *test, struct device *dev,
+-				  u32 features)
++__drm_kunit_helper_alloc_drm_device(struct kunit *test, struct device *dev,
++				    size_t size, size_t offset,
++				    u32 features)
+ {
+-	struct kunit_dev *kdev;
+ 	struct drm_device *drm;
+ 	struct drm_driver *driver;
++	void *container;
+ 	int ret;
+ 
+ 	driver = kunit_kzalloc(test, sizeof(*driver), GFP_KERNEL);
+@@ -118,11 +96,11 @@ drm_kunit_helper_alloc_drm_device(struct kunit *test, struct device *dev,
+ 		return ERR_PTR(-ENOMEM);
+ 
+ 	driver->driver_features = features;
+-	kdev = devm_drm_dev_alloc(dev, driver, struct kunit_dev, base);
+-	if (IS_ERR(kdev))
+-		return ERR_CAST(kdev);
++	container = __devm_drm_dev_alloc(dev, driver, size, offset);
++	if (IS_ERR(container))
++		return ERR_CAST(container);
+ 
+-	drm = &kdev->base;
++	drm = container + offset;
+ 	drm->mode_config.funcs = &drm_mode_config_funcs;
+ 
+ 	ret = drmm_mode_config_init(drm);
+@@ -131,7 +109,7 @@ drm_kunit_helper_alloc_drm_device(struct kunit *test, struct device *dev,
+ 
+ 	return drm;
+ }
+-EXPORT_SYMBOL_GPL(drm_kunit_helper_alloc_drm_device);
++EXPORT_SYMBOL_GPL(__drm_kunit_helper_alloc_drm_device);
+ 
+ MODULE_AUTHOR("Maxime Ripard <maxime@cerno.tech>");
+ MODULE_LICENSE("GPL");
+diff --git a/drivers/gpu/drm/tests/drm_modes_test.c b/drivers/gpu/drm/tests/drm_modes_test.c
+index d1e9f3c0433a..bc4aa2ce78be 100644
+--- a/drivers/gpu/drm/tests/drm_modes_test.c
++++ b/drivers/gpu/drm/tests/drm_modes_test.c
+@@ -26,8 +26,9 @@ static int drm_test_modes_init(struct kunit *test)
+ 	priv->dev = drm_kunit_helper_alloc_device(test);
+ 	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, priv->dev);
+ 
+-	priv->drm = drm_kunit_helper_alloc_drm_device(test, priv->dev,
+-						      DRIVER_MODESET);
++	priv->drm = __drm_kunit_helper_alloc_drm_device(test, priv->dev,
++							sizeof(*priv->drm), 0,
++							DRIVER_MODESET);
+ 	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, priv->drm);
+ 
+ 	test->priv = priv;
+diff --git a/drivers/gpu/drm/tests/drm_probe_helper_test.c b/drivers/gpu/drm/tests/drm_probe_helper_test.c
+index 63a3bd1a6e4d..e5bd967fe8af 100644
+--- a/drivers/gpu/drm/tests/drm_probe_helper_test.c
++++ b/drivers/gpu/drm/tests/drm_probe_helper_test.c
+@@ -43,8 +43,9 @@ static int drm_probe_helper_test_init(struct kunit *test)
+ 	priv->dev = drm_kunit_helper_alloc_device(test);
+ 	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, priv->dev);
+ 
+-	priv->drm = drm_kunit_helper_alloc_drm_device(test, priv->dev,
+-						      DRIVER_MODESET | DRIVER_ATOMIC);
++	priv->drm = __drm_kunit_helper_alloc_drm_device(test, priv->dev,
++							sizeof(*priv->drm), 0,
++							DRIVER_MODESET | DRIVER_ATOMIC);
+ 	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, priv->drm);
+ 
+ 	connector = &priv->connector;
+diff --git a/include/drm/drm_kunit_helpers.h b/include/drm/drm_kunit_helpers.h
+index b4277fe92c38..df99fda95e89 100644
+--- a/include/drm/drm_kunit_helpers.h
++++ b/include/drm/drm_kunit_helpers.h
+@@ -10,7 +10,35 @@ struct device *drm_kunit_helper_alloc_device(struct kunit *test);
+ void drm_kunit_helper_free_device(struct kunit *test, struct device *dev);
+ 
+ struct drm_device *
+-drm_kunit_helper_alloc_drm_device(struct kunit *test, struct device *dev,
+-				  u32 features);
++__drm_kunit_helper_alloc_drm_device(struct kunit *test, struct device *dev,
++				    size_t size, size_t offset,
++				    u32 features);
++
++/**
++ * drm_kunit_helper_alloc_drm_device - Allocates a mock DRM device for KUnit tests
++ * @_test: The test context object
++ * @_dev: The parent device object
++ * @_type: the type of the struct which contains struct &drm_device
++ * @_member: the name of the &drm_device within @_type.
++ * @_features: Mocked DRM device driver features
++ *
++ * This function creates a struct &drm_driver and will create a struct
++ * &drm_device from @_dev and that driver.
++ *
++ * @_dev should be allocated using drm_kunit_helper_alloc_device().
++ *
++ * The driver is tied to the @_test context and will get cleaned at the
++ * end of the test. The drm_device is allocated through
++ * devm_drm_dev_alloc() and will thus be freed through a device-managed
++ * resource.
++ *
++ * Returns:
++ * A pointer to the new drm_device, or an ERR_PTR() otherwise.
++ */
++#define drm_kunit_helper_alloc_drm_device(_test, _dev, _type, _member, _feat)	\
++	((_type *)__drm_kunit_helper_alloc_drm_device(_test, _dev,		\
++						      sizeof(_type),		\
++						      offsetof(_type, _member),	\
++						      _feat))
+ 
+ #endif // DRM_KUNIT_HELPERS_H_
+
+-- 
+b4 0.10.1
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
