@@ -2,562 +2,194 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C3BB564434C
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Dec 2022 13:41:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5707F644390
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Dec 2022 13:56:21 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4C5CE3E894
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Dec 2022 12:41:46 +0000 (UTC)
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com (mail-bn8nam04on2061.outbound.protection.outlook.com [40.107.100.61])
-	by lists.linaro.org (Postfix) with ESMTPS id 92C2F3E894
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Dec 2022 12:41:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 001663EF23
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Dec 2022 12:56:20 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	by lists.linaro.org (Postfix) with ESMTPS id 81DF93EA17
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Dec 2022 12:56:10 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=d5TNAgx5;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1");
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.100.61 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hCiugxuR9ESyBJXEBFKEGvaprdXakmTn+rp3uAHmOscom1hh34aRmhPKO1D26ep2GP8Gx6cNGPm+gvQITYIPy3R6dgB+oGHWJ7w1m2tZcGm45lQEQO1mU4cRSas8rUq2vy0+8ARGwWVn3jsseCu0sPh47h5dIq0ASUhJPVtzUYrQpR8+eAq6tkYLoaMBWLiPEvzO2qxWKaMVP++be1nBqCl9dwSZJi3M33o9rbxg/PvIIvFZkOjiXaypzHCirgn+xkyRv40KAAFU5Zju3g/KBfvI3AH5B4HXMgQP0GsC6IhLZ6Bi3dYafZ5PdFDIVPXdi4ISMfTA2SpGvjC7hrTZ/Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=coBPA6Di1/t1eo8iyLBYtWPd8VUhxltt2JP94tQ52O8=;
- b=gOFhVLdxWAtBo23Vqf526mABJ9goOXDFx+sLuBOvj7qSwbcMf7+G19WJK/VBecHfiD0wY/xSuJuBV0JfnBGDYToGFe2spEgr/q0suLZ7c0DJTZAciHkVTyfwyBqxqXUmyIiYR+Qvrhs8DZxKREeJ8fDKz2i1mhuRGWwPkoimUgjzQWjsIhmRkRXiPVoHzVnTPL4qSDH45V/PoS/ICRpGJlLytlQosZ+WXnn8CUgTlRXyHSIWkw6LjWGMZAtc1Sj7vhji5MYJ6X4JTTX2Dt2jA21ATKIOJYv8qz5ODK2P5iKXa8K1qfpc1LvhUJwXWO6RZjSFBAFw/hDIKEo7u8pifQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=coBPA6Di1/t1eo8iyLBYtWPd8VUhxltt2JP94tQ52O8=;
- b=d5TNAgx5LVOdH5UDms+pvfRePpdv95dvhTTeuFsub6PYb+lX0lKpwTfOdm45PyxhxkH/KDoFekciSo+7xmh6OD6UVS72U5/QgTeSrBhh8lV0LE32491DgfsmjXJb7CoiNy6FPgndxXrMD8gfZglwFxrBxghepwtIVSZodPwFX7I=
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by SJ0PR12MB5636.namprd12.prod.outlook.com (2603:10b6:a03:42b::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.14; Tue, 6 Dec
- 2022 12:41:32 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::7d43:3f30:4caf:7421]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::7d43:3f30:4caf:7421%7]) with mapi id 15.20.5880.014; Tue, 6 Dec 2022
- 12:41:32 +0000
-Message-ID: <78b23ccf-f50f-a793-ae6a-0a70faa2fb06@amd.com>
-Date: Tue, 6 Dec 2022 13:41:26 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.4.2
-Content-Language: en-US
-To: Rijo Thomas <Rijo-john.Thomas@amd.com>,
- Tom Lendacky <thomas.lendacky@amd.com>, John Allen <john.allen@amd.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- "David S . Miller" <davem@davemloft.net>,
- Sumit Semwal <sumit.semwal@linaro.org>, linux-kernel@vger.kernel.org,
- linux-crypto@vger.kernel.org, linux-media@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
-References: <43568d5e6395fcab48262fa5b3d1a5112918fbe8.1669372199.git.Rijo-john.Thomas@amd.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <43568d5e6395fcab48262fa5b3d1a5112918fbe8.1669372199.git.Rijo-john.Thomas@amd.com>
-X-ClientProxiedBy: FR3P281CA0122.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:94::6) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
+	dkim=pass header.d=quicinc.com header.s=qcppdkim1 header.b=PjiIWcH5;
+	spf=pass (lists.linaro.org: domain of quic_charante@quicinc.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=quic_charante@quicinc.com;
+	dmarc=pass (policy=none) header.from=quicinc.com
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 2B6C21If028261;
+	Tue, 6 Dec 2022 12:55:57 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=qcppdkim1;
+ bh=tH9ebQTUTGg5MhqISV0alVchqVg/SsibRHJIe86lDPI=;
+ b=PjiIWcH5s8GcZNHOvZuo2sel6OmAXplsv6O8xSJWup5CPWYXDe0OPgWrRHIIFJSMfxYd
+ Bht2QdhFNUitPIDm0HMwdOdkKlwhgpXRMgvhimYp3PVEP/s4YGI4p7pbTvhImPQZ00WV
+ uY33WXmAFrK4RUjDtywSHRxdmQoF9uYMuVsuckJfemozo3WMRqjnva2ALAYoUAX0J+jD
+ K8L93budHn3RLuxNdTskZa58YoTVs5TlYKP2iHmoTalEuXl/HoR5TwHJVs4FcPE/5n1Y
+ RytQnae1/F502cZLw5Af1GnL2BzzQjEwNPXWjLH1EMrJsRhJogway4lbWnEUZrhRkRdy RQ==
+Received: from nalasppmta03.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3m9e61kdan-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 06 Dec 2022 12:55:57 +0000
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
+	by NALASPPMTA03.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 2B6CtuAN016224
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Tue, 6 Dec 2022 12:55:56 GMT
+Received: from [10.216.21.230] (10.80.80.8) by nalasex01a.na.qualcomm.com
+ (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.36; Tue, 6 Dec 2022
+ 04:55:52 -0800
+Message-ID: <866708a4-9f31-b5e5-fbda-10b2a6c948bf@quicinc.com>
+Date: Tue, 6 Dec 2022 18:25:08 +0530
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|SJ0PR12MB5636:EE_
-X-MS-Office365-Filtering-Correlation-Id: d35067d3-5d7e-4441-fded-08dad787343d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	1jGbA7t3Y2SVEtQH7AMckDROzD6BqQ63ohSw0xuMsqq5VQ9L0E81M6P+5VjXLUDKH4dCdygsZwpp1mex66I7FM3UpUecU6spY49mhpwZgeate25yaG4mZItX5CjigC3y+3U/oNQA+BBnuAK12Ky4Ju3KJZmDvkAElC4pUywp+gARl9MpJzHMMeGuGw33fva/lLUpqJbSGHaoXrNGXx9Etyzb+qTs1HVXU8rC5eU2BaKEaCFf1t4WBtAh8Chjjm0pO0I3Ht+l79SFcp2/7MTytKyhneaz+RHVKZjIOZQsQjS7oFf4ujNcThjflcCJIJPa+ZejqEVM/Ma5pj+4hPCYmrL8UHwuvTUOrWpsc9rnpqbr6UbGYgG6ultU0uqWbLXzSzDPtGVvPWfodfAgCgSCa+7ua96XgMjH42+1unkYmgYPU84sh2XldSjA5X7XngYrkGTL0zY9LauMfMYthj1Oqjebusg0CL4yP2yyRFvztgCReOfN3vRIiI6eKbtj19mCd4DWbLKeVBNchde+PYMwEHJBr3UEPwhTjozAZcWUOb2dAG0qIsrwyDogAW2JsQ7nPvFBzBUR9YSZJtl0wEp7aSaBxKOyJod7F/Ve7bNxH05Z0GspfAHRsJH3NXhF2bGwX8SdNI4IlYKB034nce2p1zE0iAmojDJQgBcrRwjnpiljzp/eqt4NSVvwxY2abf+9mNTGuVC5B1NHAswer6zdksfwvyYdsrtTgZoPnMKHPDSA14DPXwVgDDoO1AVeu2Ku
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(346002)(366004)(396003)(136003)(376002)(39860400002)(451199015)(478600001)(6486002)(66476007)(2906002)(66946007)(66556008)(110136005)(38100700002)(6666004)(54906003)(83380400001)(2616005)(6506007)(4326008)(8676002)(6512007)(86362001)(36756003)(31696002)(186003)(41300700001)(5660300002)(7416002)(66899015)(921005)(316002)(31686004)(30864003)(8936002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?blh3R1JWcExSU0kvMHRqVXBERnNhZHZzVkUwL0I4elFWUU9KS1R3aTJsNlFo?=
- =?utf-8?B?bWdqMzhhRjhIcDNiQS9jMFRPWUVwY0Z4VjRvZTAySHgrcHBvZmdCRmxwR3BE?=
- =?utf-8?B?MEdiTngrUkdsY2NhdUFZdG1JZS9QNllrb1lkV1ZtK0x6V05ZeHlKYmd6TW01?=
- =?utf-8?B?QU5ZRk1LV2FaSmF4U2dEcGRWYk44S2RJTG03dml4bFhhdFBXSHNFVW8yUHdX?=
- =?utf-8?B?a3BMRnVqZVA4SzYvM3ErbHdpQUx3OHIrZTROY0lRUzhwV0t0aXBmMXlZaWY5?=
- =?utf-8?B?cGV0aEZldXdOaktiRTNQMmJ5N2YyWXU3aUhKbWVoc040azBDd3NMYS95Nzc4?=
- =?utf-8?B?ejZhSEpTOTRqL0diWEFJM2gyQnBlVXdtSHJ6b1FXeWNZbDVQWU83SWptRDhV?=
- =?utf-8?B?emZWS1l4ZElRT2xrU1RjbzVHbVArTURCakMxdVJzK2pxZEpUMVZockIyTFdt?=
- =?utf-8?B?OFFqN21wR1NMNVFZV2dXTWZpYVRlbFR0SlAzaEZWK3RkSHZSTTdyc2ZXRHB2?=
- =?utf-8?B?aktBU1VZc2NnSGxxRE9laUFwcHRWdUhSZC9Pc3M4bmpKV2RHaHhMeGRadzR1?=
- =?utf-8?B?eDUxTzdscXI0MSsrQlpicWYvcDV3aWIzZk8wV2xFYlFBRE5zaUw5UGlRd2g0?=
- =?utf-8?B?TGUwUkNSM1QyL0FKUHZOYVo4NUFvZ0JmbUV1MjRSdHlOcTkzYjdtNGNqSzVB?=
- =?utf-8?B?RHFOYzBnOUFrOVdUTGkwd25Vb0c1ekU2Nno5L3dqeWJsb3JMcncyRXhkaGtH?=
- =?utf-8?B?VTFubXZkWWI5OEJnSWRERWl1bmszSU5rYkpoVzdFWGkvTW4yR0MwZ29GN2xz?=
- =?utf-8?B?L21SK3hOT2UwMEY4b1NiWE5YRTNhSWtPY0twc0Q4M09mMmNraVhMbDRyTEc1?=
- =?utf-8?B?VnI2TytmUC9yNFg2TmlJSWRJL2xaak1zUWVuTTdJeG9yY3lWMGcraWtBODFp?=
- =?utf-8?B?cVpPdXZoNGhLTTVqb2I1a0hmWXNOeWZ6V1k2WFdYYmpNZ1dZV2JmZTNNNUVn?=
- =?utf-8?B?RlZUbWZhMy9RSWxtY05SUlhVUmJoVGxyM0ZhWnZKRnlQdUt6ZC9odXp6dnhz?=
- =?utf-8?B?Sk9SWGZ0d3J3ckpFZjRUaGNxYTY5S05obmMwY0cwcmxwcUFWQktlaGdOR09r?=
- =?utf-8?B?S0dqSUVVdWo4TE03eW1HQ3pJSFFaRFRqTndJRXNmUytGaXRoTWlnZHIweW1l?=
- =?utf-8?B?Y2hGQkcwQUZ4ZG9qUWxzNGZsR1hIOWZIYW93aXhVcG45SkRXWHV1WlBlSU1r?=
- =?utf-8?B?T2RnTHd3bWljNE53c2hrNm5PUStua3BGNTlTVWNaa2Z6cVQranVVRndJOGRF?=
- =?utf-8?B?VGlkTFJEcS9MMDZaRnVQbjNhVFFEeTROd0NzNlVYUnBwbmFQKzNIWFJ0akdi?=
- =?utf-8?B?L1lIcjdVeEg2RE83ZVIyZXNEZHZ4TTFMVFFJcUxMTzJyTEU2KzBoYTg4aDVQ?=
- =?utf-8?B?VUtqUnhhbEo0WTM5OU9paStyTTNKZlJza3huUXlxRXI5M2c2RXlDdGhmRGI0?=
- =?utf-8?B?QWNlUDRCcWpTRnc5TVd2OTBybk4wNEZxS3ZFQllTSEU2d09xNXRUbHIwL1pn?=
- =?utf-8?B?TDF2MHo2K1ZhQUlNMEc5dUNPaHVUTERYSFJNUi9OUVZZTllQb3A1SERMUXJx?=
- =?utf-8?B?c0ZIRDY1b3FEVm5uTEZZbzNTbHhORUJXNE1zNUVGUXdnbFlTQkxqRmRIUmpL?=
- =?utf-8?B?Z3BZSHJpL1pIMmdxYWE0Ums4cnduMVM4T01xaVhSRUNxcm5iZHVNajJlbHhs?=
- =?utf-8?B?ck9lSVlvTzFDTVRpWURJL2k5aWN5UVBYa0ZZUDhTb0Y2ZUJ2VCt2ZVQxNmlt?=
- =?utf-8?B?VU5QVkZmQ2l3aFYrRTFCdTJWT0pEQ01SQUF3UjJnV2FGNGlsclFab1VXT1R2?=
- =?utf-8?B?eXRYTmgvYVRPQm9QbHFhVEpoNmlsTVJ6M1E1dnM4bDZSRm9hWlAraDY4ZHVz?=
- =?utf-8?B?QTR4SXREV3FHaXdvcHExVFg4QkNRTWlWaXlINkpBeHVaVXNKaGRvSXZHM3d4?=
- =?utf-8?B?cmVDV0VLamdYNVArRmkxdkphODVPcmt1TElnYVNPY0h1eXZ6VmV1cllJcHlL?=
- =?utf-8?B?bFQ5RDZUdGJCYUdyWmpsTzdTZjNkZElSV3dTbm5yTFdKUEIvUkNnaDNpcGZk?=
- =?utf-8?B?Rmo0aVFMNmJGelZTQ3duTHZTY2dHMmcxMDNmNHcyMDdRYnBweTVUZ0JuNEIr?=
- =?utf-8?Q?o002MyY6AKAgYntjqTtB4n8FXi5WtsxJlG2dgjbiJ0IK?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d35067d3-5d7e-4441-fded-08dad787343d
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Dec 2022 12:41:32.5881
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zm+AsoB7dMFAzThlN+F9gMX20IQu7+9zjosxM/Qz/cGwz9FFIlJ5bPEZ9iHLvHy+
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB5636
-X-Rspamd-Queue-Id: 92C2F3E894
-X-Spamd-Bar: ----------
-X-Spamd-Result: default: False [-10.50 / 15.00];
-	REPLY(-4.00)[];
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Content-Language: en-US
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>,
+        cuigaosheng <cuigaosheng1@huawei.com>,
+        =?UTF-8?Q?Christian_K=c3=b6nig?=
+	<christian.koenig@amd.com>,
+        "T.J. Mercier" <tjmercier@google.com>
+References: <20221117062152.3029018-1-cuigaosheng1@huawei.com>
+ <f12a5dbe-4626-f6c7-236b-30bb16be1dd6@quicinc.com>
+ <99d3aee6-ba3e-5333-6f79-ddbcfc0e8843@amd.com>
+ <CABdmKX1UMB0L0PmHB59nijReZef6LUQ3XKXitHZo2YnUrJTz9Q@mail.gmail.com>
+ <2c9fa595-e788-5474-4f2b-ffbd08a70d13@amd.com>
+ <CABdmKX0KJJV0iQwy0aUNXcLc1DGyLjmh6_Y53asHEoh-uyHzAA@mail.gmail.com>
+ <83944425-c177-7918-bcde-9cf7296a613f@amd.com>
+ <e12784da-b3e3-ddec-0e84-f968d60097c4@quicinc.com>
+ <b2d5d904-99f2-7974-a22d-63a6cf864973@huawei.com>
+ <689ad89b-0e34-3743-24c9-3f92856720f8@amd.com>
+ <a87e407c-f858-28f1-c5ea-ca69b39db53a@huawei.com>
+ <3de513b2-8ec3-2ff4-136d-0f56ac07c0ff@gmail.com>
+From: Charan Teja Kalla <quic_charante@quicinc.com>
+In-Reply-To: <3de513b2-8ec3-2ff4-136d-0f56ac07c0ff@gmail.com>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: GQnB74ySEOxHXNZTF5sxudZXdkSM6bdB
+X-Proofpoint-GUID: GQnB74ySEOxHXNZTF5sxudZXdkSM6bdB
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.923,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-12-06_08,2022-12-06_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 suspectscore=0
+ mlxscore=0 priorityscore=1501 mlxlogscore=999 adultscore=0 spamscore=0
+ malwarescore=0 clxscore=1011 impostorscore=0 lowpriorityscore=0
+ phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2210170000 definitions=main-2212060104
+X-Rspamd-Queue-Id: 81DF93EA17
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	RCVD_IN_DNSWL_HI(-0.50)[2603:10b6:408:43::13:received];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	RCVD_IN_DNSWL_HI(-0.50)[205.220.180.131:from];
+	DMARC_POLICY_ALLOW(-0.50)[quicinc.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:205.220.180.131];
+	R_DKIM_ALLOW(-0.20)[quicinc.com:s=qcppdkim1];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,huawei.com,amd.com,google.com];
+	ARC_NA(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	NEURAL_HAM(-0.00)[-0.969];
-	DKIM_TRACE(0.00)[amd.com:+];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	FROM_HAS_DN(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.100.61:from];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail-bn8nam04on2061.outbound.protection.outlook.com:rdns];
-	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:22843, ipnet:205.220.180.0/24, country:US];
+	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCVD_IN_DNSWL_FAIL(0.00)[40.107.100.61:server fail]
+	DKIM_TRACE(0.00)[quicinc.com:+];
+	HAS_XOIP(0.00)[];
+	RCVD_COUNT_FIVE(0.00)[5];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_IN_DNSWL_FAIL(0.00)[129.46.96.20:server fail]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: XU5R2B3KWVDZC6OAHYRQBHAKDWHPGZXW
-X-Message-ID-Hash: XU5R2B3KWVDZC6OAHYRQBHAKDWHPGZXW
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Mythri PK <Mythri.Pandeshwarakrishna@amd.com>, Jeshwanth <JESHWANTHKUMAR.NK@amd.com>, Devaraj Rangasamy <Devaraj.Rangasamy@amd.com>, stable@vger.kernel.org, Jens Wiklander <jens.wiklander@linaro.org>
+Message-ID-Hash: CJT3EXYBLFS62SO7UCDQVBEHYVUV32IP
+X-Message-ID-Hash: CJT3EXYBLFS62SO7UCDQVBEHYVUV32IP
+X-MailFrom: quic_charante@quicinc.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: sumit.semwal@linaro.org, Dan Carpenter <dan.carpenter@oracle.com>, Pavan Kondeti <quic_pkondeti@quicinc.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/1] crypto: ccp - Allocate TEE ring and cmd buffer using DMA APIs
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: Fix possible UAF in dma_buf_export
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XU5R2B3KWVDZC6OAHYRQBHAKDWHPGZXW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CJT3EXYBLFS62SO7UCDQVBEHYVUV32IP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Am 06.12.22 um 13:30 schrieb Rijo Thomas:
-> For AMD Secure Processor (ASP) to map and access TEE ring buffer, the
-> ring buffer address sent by host to ASP must be a real physical
-> address and the pages must be physically contiguous.
->
-> In a virtualized environment though, when the driver is running in a
-> guest VM, the pages allocated by __get_free_pages() may not be
-> contiguous in the host (or machine) physical address space. Guests
-> will see a guest (or pseudo) physical address and not the actual host
-> (or machine) physical address. The TEE running on ASP cannot decipher
-> pseudo physical addresses. It needs host or machine physical address.
->
-> To resolve this problem, use DMA APIs for allocating buffers that must
-> be shared with TEE. This will ensure that the pages are contiguous in
-> host (or machine) address space. If the DMA handle is an IOVA,
-> translate it into a physical address before sending it to ASP.
->
-> This patch also exports two APIs (one for buffer allocation and
-> another to free the buffer). This API can be used by AMD-TEE driver to
-> share buffers with TEE.
-
-Maybe use some other name than dma_buffer for your structure, cause that 
-is usually something completely different in the Linux kernel.
-
-Regards,
-Christian.
-
->
-> Fixes: 33960acccfbd ("crypto: ccp - add TEE support for Raven Ridge")
-> Cc: Tom Lendacky <thomas.lendacky@amd.com>
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Rijo Thomas <Rijo-john.Thomas@amd.com>
-> Co-developed-by: Jeshwanth <JESHWANTHKUMAR.NK@amd.com>
-> Signed-off-by: Jeshwanth <JESHWANTHKUMAR.NK@amd.com>
-> Reviewed-by: Devaraj Rangasamy <Devaraj.Rangasamy@amd.com>
-> ---
->   drivers/crypto/ccp/psp-dev.c |   6 +-
->   drivers/crypto/ccp/tee-dev.c | 116 ++++++++++++++++++++++-------------
->   drivers/crypto/ccp/tee-dev.h |   9 +--
->   include/linux/psp-tee.h      |  47 ++++++++++++++
->   4 files changed, 127 insertions(+), 51 deletions(-)
->
-> diff --git a/drivers/crypto/ccp/psp-dev.c b/drivers/crypto/ccp/psp-dev.c
-> index c9c741ac8442..2b86158d7435 100644
-> --- a/drivers/crypto/ccp/psp-dev.c
-> +++ b/drivers/crypto/ccp/psp-dev.c
-> @@ -161,13 +161,13 @@ int psp_dev_init(struct sp_device *sp)
->   		goto e_err;
->   	}
->   
-> +	if (sp->set_psp_master_device)
-> +		sp->set_psp_master_device(sp);
-> +
->   	ret = psp_init(psp);
->   	if (ret)
->   		goto e_irq;
->   
-> -	if (sp->set_psp_master_device)
-> -		sp->set_psp_master_device(sp);
-> -
->   	/* Enable interrupt */
->   	iowrite32(-1, psp->io_regs + psp->vdata->inten_reg);
->   
-> diff --git a/drivers/crypto/ccp/tee-dev.c b/drivers/crypto/ccp/tee-dev.c
-> index 5c9d47f3be37..1631d9851e54 100644
-> --- a/drivers/crypto/ccp/tee-dev.c
-> +++ b/drivers/crypto/ccp/tee-dev.c
-> @@ -12,8 +12,9 @@
->   #include <linux/mutex.h>
->   #include <linux/delay.h>
->   #include <linux/slab.h>
-> +#include <linux/dma-direct.h>
-> +#include <linux/iommu.h>
->   #include <linux/gfp.h>
-> -#include <linux/psp-sev.h>
->   #include <linux/psp-tee.h>
->   
->   #include "psp-dev.h"
-> @@ -21,25 +22,64 @@
->   
->   static bool psp_dead;
->   
-> +struct dma_buffer *psp_tee_alloc_dmabuf(unsigned long size, gfp_t gfp)
-> +{
-> +	struct psp_device *psp = psp_get_master_device();
-> +	struct dma_buffer *dma_buf;
-> +	struct iommu_domain *dom;
-> +
-> +	if (!psp || !size)
-> +		return NULL;
-> +
-> +	dma_buf = kzalloc(sizeof(*dma_buf), GFP_KERNEL);
-> +	if (!dma_buf)
-> +		return NULL;
-> +
-> +	dma_buf->vaddr = dma_alloc_coherent(psp->dev, size, &dma_buf->dma, gfp);
-> +	if (!dma_buf->vaddr || !dma_buf->dma) {
-> +		kfree(dma_buf);
-> +		return NULL;
-> +	}
-> +
-> +	dma_buf->size = size;
-> +
-> +	dom = iommu_get_domain_for_dev(psp->dev);
-> +	if (dom)
-> +		dma_buf->paddr = iommu_iova_to_phys(dom, dma_buf->dma);
-> +	else
-> +		dma_buf->paddr = dma_buf->dma;
-> +
-> +	return dma_buf;
-> +}
-> +EXPORT_SYMBOL(psp_tee_alloc_dmabuf);
-> +
-> +void psp_tee_free_dmabuf(struct dma_buffer *dma_buf)
-> +{
-> +	struct psp_device *psp = psp_get_master_device();
-> +
-> +	if (!psp || !dma_buf)
-> +		return;
-> +
-> +	dma_free_coherent(psp->dev, dma_buf->size,
-> +			  dma_buf->vaddr, dma_buf->dma);
-> +
-> +	kfree(dma_buf);
-> +}
-> +EXPORT_SYMBOL(psp_tee_free_dmabuf);
-> +
->   static int tee_alloc_ring(struct psp_tee_device *tee, int ring_size)
->   {
->   	struct ring_buf_manager *rb_mgr = &tee->rb_mgr;
-> -	void *start_addr;
->   
->   	if (!ring_size)
->   		return -EINVAL;
->   
-> -	/* We need actual physical address instead of DMA address, since
-> -	 * Trusted OS running on AMD Secure Processor will map this region
-> -	 */
-> -	start_addr = (void *)__get_free_pages(GFP_KERNEL, get_order(ring_size));
-> -	if (!start_addr)
-> +	rb_mgr->ring_buf = psp_tee_alloc_dmabuf(ring_size,
-> +						GFP_KERNEL | __GFP_ZERO);
-> +	if (!rb_mgr->ring_buf) {
-> +		dev_err(tee->dev, "ring allocation failed\n");
->   		return -ENOMEM;
-> -
-> -	memset(start_addr, 0x0, ring_size);
-> -	rb_mgr->ring_start = start_addr;
-> -	rb_mgr->ring_size = ring_size;
-> -	rb_mgr->ring_pa = __psp_pa(start_addr);
-> +	}
->   	mutex_init(&rb_mgr->mutex);
->   
->   	return 0;
-> @@ -49,15 +89,8 @@ static void tee_free_ring(struct psp_tee_device *tee)
->   {
->   	struct ring_buf_manager *rb_mgr = &tee->rb_mgr;
->   
-> -	if (!rb_mgr->ring_start)
-> -		return;
-> +	psp_tee_free_dmabuf(rb_mgr->ring_buf);
->   
-> -	free_pages((unsigned long)rb_mgr->ring_start,
-> -		   get_order(rb_mgr->ring_size));
-> -
-> -	rb_mgr->ring_start = NULL;
-> -	rb_mgr->ring_size = 0;
-> -	rb_mgr->ring_pa = 0;
->   	mutex_destroy(&rb_mgr->mutex);
->   }
->   
-> @@ -81,35 +114,36 @@ static int tee_wait_cmd_poll(struct psp_tee_device *tee, unsigned int timeout,
->   	return -ETIMEDOUT;
->   }
->   
-> -static
-> -struct tee_init_ring_cmd *tee_alloc_cmd_buffer(struct psp_tee_device *tee)
-> +struct dma_buffer *tee_alloc_cmd_buffer(struct psp_tee_device *tee)
->   {
->   	struct tee_init_ring_cmd *cmd;
-> +	struct dma_buffer *cmd_buffer;
->   
-> -	cmd = kzalloc(sizeof(*cmd), GFP_KERNEL);
-> -	if (!cmd)
-> +	cmd_buffer = psp_tee_alloc_dmabuf(sizeof(*cmd),
-> +					  GFP_KERNEL | __GFP_ZERO);
-> +	if (!cmd_buffer)
->   		return NULL;
->   
-> -	cmd->hi_addr = upper_32_bits(tee->rb_mgr.ring_pa);
-> -	cmd->low_addr = lower_32_bits(tee->rb_mgr.ring_pa);
-> -	cmd->size = tee->rb_mgr.ring_size;
-> +	cmd = (struct tee_init_ring_cmd *)cmd_buffer->vaddr;
-> +	cmd->hi_addr = upper_32_bits(tee->rb_mgr.ring_buf->paddr);
-> +	cmd->low_addr = lower_32_bits(tee->rb_mgr.ring_buf->paddr);
-> +	cmd->size = tee->rb_mgr.ring_buf->size;
->   
->   	dev_dbg(tee->dev, "tee: ring address: high = 0x%x low = 0x%x size = %u\n",
->   		cmd->hi_addr, cmd->low_addr, cmd->size);
->   
-> -	return cmd;
-> +	return cmd_buffer;
->   }
->   
-> -static inline void tee_free_cmd_buffer(struct tee_init_ring_cmd *cmd)
-> +static inline void tee_free_cmd_buffer(struct dma_buffer *cmd_buffer)
->   {
-> -	kfree(cmd);
-> +	psp_tee_free_dmabuf(cmd_buffer);
->   }
->   
->   static int tee_init_ring(struct psp_tee_device *tee)
->   {
->   	int ring_size = MAX_RING_BUFFER_ENTRIES * sizeof(struct tee_ring_cmd);
-> -	struct tee_init_ring_cmd *cmd;
-> -	phys_addr_t cmd_buffer;
-> +	struct dma_buffer *cmd_buffer;
->   	unsigned int reg;
->   	int ret;
->   
-> @@ -123,21 +157,19 @@ static int tee_init_ring(struct psp_tee_device *tee)
->   
->   	tee->rb_mgr.wptr = 0;
->   
-> -	cmd = tee_alloc_cmd_buffer(tee);
-> -	if (!cmd) {
-> +	cmd_buffer = tee_alloc_cmd_buffer(tee);
-> +	if (!cmd_buffer) {
->   		tee_free_ring(tee);
->   		return -ENOMEM;
->   	}
->   
-> -	cmd_buffer = __psp_pa((void *)cmd);
-> -
->   	/* Send command buffer details to Trusted OS by writing to
->   	 * CPU-PSP message registers
->   	 */
->   
-> -	iowrite32(lower_32_bits(cmd_buffer),
-> +	iowrite32(lower_32_bits(cmd_buffer->paddr),
->   		  tee->io_regs + tee->vdata->cmdbuff_addr_lo_reg);
-> -	iowrite32(upper_32_bits(cmd_buffer),
-> +	iowrite32(upper_32_bits(cmd_buffer->paddr),
->   		  tee->io_regs + tee->vdata->cmdbuff_addr_hi_reg);
->   	iowrite32(TEE_RING_INIT_CMD,
->   		  tee->io_regs + tee->vdata->cmdresp_reg);
-> @@ -157,7 +189,7 @@ static int tee_init_ring(struct psp_tee_device *tee)
->   	}
->   
->   free_buf:
-> -	tee_free_cmd_buffer(cmd);
-> +	tee_free_cmd_buffer(cmd_buffer);
->   
->   	return ret;
->   }
-> @@ -167,7 +199,7 @@ static void tee_destroy_ring(struct psp_tee_device *tee)
->   	unsigned int reg;
->   	int ret;
->   
-> -	if (!tee->rb_mgr.ring_start)
-> +	if (!tee->rb_mgr.ring_buf->vaddr)
->   		return;
->   
->   	if (psp_dead)
-> @@ -256,7 +288,7 @@ static int tee_submit_cmd(struct psp_tee_device *tee, enum tee_cmd_id cmd_id,
->   	do {
->   		/* Get pointer to ring buffer command entry */
->   		cmd = (struct tee_ring_cmd *)
-> -			(tee->rb_mgr.ring_start + tee->rb_mgr.wptr);
-> +			(tee->rb_mgr.ring_buf->vaddr + tee->rb_mgr.wptr);
->   
->   		rptr = ioread32(tee->io_regs + tee->vdata->ring_rptr_reg);
->   
-> @@ -305,7 +337,7 @@ static int tee_submit_cmd(struct psp_tee_device *tee, enum tee_cmd_id cmd_id,
->   
->   	/* Update local copy of write pointer */
->   	tee->rb_mgr.wptr += sizeof(struct tee_ring_cmd);
-> -	if (tee->rb_mgr.wptr >= tee->rb_mgr.ring_size)
-> +	if (tee->rb_mgr.wptr >= tee->rb_mgr.ring_buf->size)
->   		tee->rb_mgr.wptr = 0;
->   
->   	/* Trigger interrupt to Trusted OS */
-> diff --git a/drivers/crypto/ccp/tee-dev.h b/drivers/crypto/ccp/tee-dev.h
-> index 49d26158b71e..9238487ee8bf 100644
-> --- a/drivers/crypto/ccp/tee-dev.h
-> +++ b/drivers/crypto/ccp/tee-dev.h
-> @@ -16,6 +16,7 @@
->   
->   #include <linux/device.h>
->   #include <linux/mutex.h>
-> +#include <linux/psp-tee.h>
->   
->   #define TEE_DEFAULT_TIMEOUT		10
->   #define MAX_BUFFER_SIZE			988
-> @@ -48,17 +49,13 @@ struct tee_init_ring_cmd {
->   
->   /**
->    * struct ring_buf_manager - Helper structure to manage ring buffer.
-> - * @ring_start:  starting address of ring buffer
-> - * @ring_size:   size of ring buffer in bytes
-> - * @ring_pa:     physical address of ring buffer
->    * @wptr:        index to the last written entry in ring buffer
-> + * @ring_buf:    ring buffer allocated using DMA api
->    */
->   struct ring_buf_manager {
->   	struct mutex mutex;	/* synchronizes access to ring buffer */
-> -	void *ring_start;
-> -	u32 ring_size;
-> -	phys_addr_t ring_pa;
->   	u32 wptr;
-> +	struct dma_buffer *ring_buf;
->   };
->   
->   struct psp_tee_device {
-> diff --git a/include/linux/psp-tee.h b/include/linux/psp-tee.h
-> index cb0c95d6d76b..c0fa922f24d4 100644
-> --- a/include/linux/psp-tee.h
-> +++ b/include/linux/psp-tee.h
-> @@ -13,6 +13,7 @@
->   
->   #include <linux/types.h>
->   #include <linux/errno.h>
-> +#include <linux/dma-mapping.h>
->   
->   /* This file defines the Trusted Execution Environment (TEE) interface commands
->    * and the API exported by AMD Secure Processor driver to communicate with
-> @@ -40,6 +41,20 @@ enum tee_cmd_id {
->   	TEE_CMD_ID_UNMAP_SHARED_MEM,
->   };
->   
-> +/**
-> + * struct dma_buffer - Structure for a DMA buffer.
-> + * @dma:    DMA buffer address
-> + * @paddr:  Physical address of DMA buffer
-> + * @vaddr:  CPU virtual address of DMA buffer
-> + * @size:   Size of DMA buffer in bytes
-> + */
-> +struct dma_buffer {
-> +	dma_addr_t dma;
-> +	phys_addr_t paddr;
-> +	void *vaddr;
-> +	unsigned long size;
-> +};
-> +
->   #ifdef CONFIG_CRYPTO_DEV_SP_PSP
->   /**
->    * psp_tee_process_cmd() - Process command in Trusted Execution Environment
-> @@ -75,6 +90,28 @@ int psp_tee_process_cmd(enum tee_cmd_id cmd_id, void *buf, size_t len,
->    */
->   int psp_check_tee_status(void);
->   
-> +/**
-> + * psp_tee_alloc_dmabuf() - Allocates memory of requested size and flags using
-> + * dma_alloc_coherent() API.
-> + *
-> + * This function can be used to allocate a shared memory region between the
-> + * host and PSP TEE.
-> + *
-> + * Returns:
-> + * non-NULL   a valid pointer to struct dma_buffer
-> + * NULL       on failure
-> + */
-> +struct dma_buffer *psp_tee_alloc_dmabuf(unsigned long size, gfp_t gfp);
-> +
-> +/**
-> + * psp_tee_free_dmabuf() - Deallocates memory using dma_free_coherent() API.
-> + *
-> + * This function can be used to release shared memory region between host
-> + * and PSP TEE.
-> + *
-> + */
-> +void psp_tee_free_dmabuf(struct dma_buffer *dma_buffer);
-> +
->   #else /* !CONFIG_CRYPTO_DEV_SP_PSP */
->   
->   static inline int psp_tee_process_cmd(enum tee_cmd_id cmd_id, void *buf,
-> @@ -87,5 +124,15 @@ static inline int psp_check_tee_status(void)
->   {
->   	return -ENODEV;
->   }
-> +
-> +static inline
-> +struct dma_buffer *psp_tee_alloc_dmabuf(unsigned long size, gfp_t gfp)
-> +{
-> +	return NULL;
-> +}
-> +
-> +static inline void psp_tee_free_dmabuf(struct dma_buffer *dma_buffer)
-> +{
-> +}
->   #endif /* CONFIG_CRYPTO_DEV_SP_PSP */
->   #endif /* __PSP_TEE_H_ */
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+VGhhbmtzIENocmlzdGlhbi9USiBmb3IgYWxsIHlvdXIgaW5wdXRzISENCg0KT24gMTEvMjQvMjAy
+MiA2OjI1IFBNLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPj4+IEkgd2FzIGFscmVhZHkgd29u
+ZGVyaW5nIHdoeSB0aGUgb3JkZXIgaXMgdGhpcyB3YXkuDQo+Pj4NCj4+PiBXaHkgaXMgZG1hX2J1
+Zl9zdGF0c19zZXR1cCgpIG5lZWRpbmcgdGhlIGZpbGUgaW4gdGhlIGZpcnN0IHBsYWNlPyANCj4+
+DQo+PiBkbWFidWYtPmZpbGUgd2lsbCBiZSB1c2VkIGluIGRtYV9idWZfc3RhdHNfc2V0dXAoKSwg
+dGhlDQo+PiBkbWFfYnVmX3N0YXRzX3NldHVwKCkgYXMgZm9sbG93czoNCj4+DQo+Pj4gMTcxIGlu
+dCBkbWFfYnVmX3N0YXRzX3NldHVwKHN0cnVjdCBkbWFfYnVmICpkbWFidWYpDQo+Pj4gMTcyIHsN
+Cj4+PiAxNzPCoMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBkbWFfYnVmX3N5c2ZzX2VudHJ5ICpzeXNm
+c19lbnRyeTsNCj4+PiAxNzTCoMKgwqDCoMKgwqDCoMKgIGludCByZXQ7DQo+Pj4gMTc1DQo+Pj4g
+MTc2wqDCoMKgwqDCoMKgwqDCoCBpZiAoIWRtYWJ1ZiB8fCAhZG1hYnVmLT5maWxlKQ0KPj4+IDE3
+N8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHJldHVybiAtRUlOVkFMOw0KPj4+IDE3
+OA0KPj4+IDE3OcKgwqDCoMKgwqDCoMKgwqAgaWYgKCFkbWFidWYtPmV4cF9uYW1lKSB7DQo+Pj4g
+MTgwwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgcHJfZXJyKCJleHBvcnRlciBuYW1l
+IG11c3Qgbm90IGJlIGVtcHR5IGlmIHN0YXRzDQo+Pj4gbmVlZGVkXG4iKTsNCj4+PiAxODHCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVJTlZBTDsNCj4+PiAxODLCoMKg
+wqDCoMKgwqDCoMKgIH0NCj4+PiAxODMNCj4+PiAxODTCoMKgwqDCoMKgwqDCoMKgIHN5c2ZzX2Vu
+dHJ5ID0ga3phbGxvYyhzaXplb2Yoc3RydWN0IGRtYV9idWZfc3lzZnNfZW50cnkpLA0KPj4+IEdG
+UF9LRVJORUwpOw0KPj4+IDE4NcKgwqDCoMKgwqDCoMKgwqAgaWYgKCFzeXNmc19lbnRyeSkNCj4+
+PiAxODbCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCByZXR1cm4gLUVOT01FTTsNCj4+
+PiAxODcNCj4+PiAxODjCoMKgwqDCoMKgwqDCoMKgIHN5c2ZzX2VudHJ5LT5rb2JqLmtzZXQgPSBk
+bWFfYnVmX3Blcl9idWZmZXJfc3RhdHNfa3NldDsNCj4+PiAxODnCoMKgwqDCoMKgwqDCoMKgIHN5
+c2ZzX2VudHJ5LT5kbWFidWYgPSBkbWFidWY7DQo+Pj4gMTkwDQo+Pj4gMTkxwqDCoMKgwqDCoMKg
+wqDCoCBkbWFidWYtPnN5c2ZzX2VudHJ5ID0gc3lzZnNfZW50cnk7DQo+Pj4gMTkyDQo+Pj4gMTkz
+wqDCoMKgwqDCoMKgwqDCoCAvKiBjcmVhdGUgdGhlIGRpcmVjdG9yeSBmb3IgYnVmZmVyIHN0YXRz
+ICovDQo+Pj4gMTk0wqDCoMKgwqDCoMKgwqDCoCByZXQgPSBrb2JqZWN0X2luaXRfYW5kX2FkZCgm
+c3lzZnNfZW50cnktPmtvYmosDQo+Pj4gJmRtYV9idWZfa3R5cGUsIE5VTEwsDQo+Pj4gMTk1wqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCAiJWx1IiwNCj4+PiBmaWxlX2lub2RlKGRtYWJ1Zi0+ZmlsZSktPmlfaW5vKTsN
+Cj4gDQo+IEFoLCBzbyBpdCB1c2VzIHRoZSBpX2lubyBvZiB0aGUgZmlsZSBmb3IgdGhlIHN5c2Zz
+IHVuaXF1ZSBuYW1lLg0KPiANCj4gSSdtIGdvaW5nIHRvIHRha2UgYW5vdGhlciBsb29rIGhvdyB0
+byBwcm9wZXJseSBjbGVhbiB0aGlzIHVwLg0KPiANCg0KSG93IGFib3V0IGRlbGV0aW5nIHRoZSBk
+bWFidWYgZnJvbSB0aGUgZGJfbGlzdCBkaXJlY3RseSBpbiB0aGUgZXJyb3INCnBhdGggKHdoaWNo
+IGlzIHVzdWFsbHkgZG9uZSBieSB0aGUgZnB1dCgpKSBhbmQgdGhlbiBjb250aW51ZSB3aXRoIHRo
+ZQ0Kbm9ybWFsIGZwdXQoKSBoZXJlLg0KDQpKdXN0IGNvbXBpbGUgdGVzdGVkIHRoZSBiZWxvdyBj
+b2RlIGFuZCBJZiB0aGUgbG9naWMgbWFrZSBzZW5zZSBmb3IgeW91LA0Kd2lsbCBzZW5kIHRoZSBm
+aW5hbCB0ZXN0ZWQgcGF0Y2guDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tPjwtLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCg0KZGlmZiAtLWdpdCBhL2RyaXZlcnMv
+ZG1hLWJ1Zi9kbWEtYnVmLmMgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQppbmRleCBlNmYz
+NmMwLi4xMGExNzI3IDEwMDY0NA0KLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYw0KKysr
+IGIvZHJpdmVycy9kbWEtYnVmL2RtYS1idWYuYw0KQEAgLTg3LDE5ICs4NywyOCBAQCBzdGF0aWMg
+dm9pZCBkbWFfYnVmX3JlbGVhc2Uoc3RydWN0IGRlbnRyeSAqZGVudHJ5KQ0KICAgICAgICBrZnJl
+ZShkbWFidWYpOw0KIH0NCg0KLXN0YXRpYyBpbnQgZG1hX2J1Zl9maWxlX3JlbGVhc2Uoc3RydWN0
+IGlub2RlICppbm9kZSwgc3RydWN0IGZpbGUgKmZpbGUpDQorc3RhdGljIHZvaWQgZG1hX2J1Zl9k
+Yl9saXN0X3JlbW92ZShzdHJ1Y3QgZmlsZSAqZmlsZSkNCiB7DQogICAgICAgIHN0cnVjdCBkbWFf
+YnVmICpkbWFidWY7DQoNCi0gICAgICAgaWYgKCFpc19kbWFfYnVmX2ZpbGUoZmlsZSkpDQotICAg
+ICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQotDQogICAgICAgIGRtYWJ1ZiA9IGZpbGUtPnBy
+aXZhdGVfZGF0YTsNCisgICAgICAgaWYgKCFkbWFidWYpDQorICAgICAgICAgICAgICAgcmV0dXJu
+Ow0KDQogICAgICAgIG11dGV4X2xvY2soJmRiX2xpc3QubG9jayk7DQogICAgICAgIGxpc3RfZGVs
+KCZkbWFidWYtPmxpc3Rfbm9kZSk7DQogICAgICAgIG11dGV4X3VubG9jaygmZGJfbGlzdC5sb2Nr
+KTsNCg0KKyAgICAgICBmaWxlLT5wcml2YXRlX2RhdGEgPSBOVUxMOw0KK30NCisNCitzdGF0aWMg
+aW50IGRtYV9idWZfZmlsZV9yZWxlYXNlKHN0cnVjdCBpbm9kZSAqaW5vZGUsIHN0cnVjdCBmaWxl
+ICpmaWxlKQ0KK3sNCisgICAgICAgaWYgKCFpc19kbWFfYnVmX2ZpbGUoZmlsZSkpDQorICAgICAg
+ICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQorDQorICAgICAgIGRtYV9idWZfZGJfbGlzdF9yZW1v
+dmUoZmlsZSk7DQorDQogICAgICAgIHJldHVybiAwOw0KIH0NCg0KQEAgLTY4OCw2ICs2OTcsOCBA
+QCBzdHJ1Y3QgZG1hX2J1ZiAqZG1hX2J1Zl9leHBvcnQoY29uc3Qgc3RydWN0DQpkbWFfYnVmX2V4
+cG9ydF9pbmZvICpleHBfaW5mbykNCiAgICAgICAgICogZWFybHkgYmVmb3JlIGNhbGxpbmcgdGhl
+IHJlbGVhc2UoKSBkbWFfYnVmIG9wLg0KICAgICAgICAgKi8NCiAgICAgICAgZmlsZS0+Zl9wYXRo
+LmRlbnRyeS0+ZF9mc2RhdGEgPSBOVUxMOw0KKw0KKyAgICAgICBkbWFfYnVmX2RiX2xpc3RfcmVt
+b3ZlKGZpbGUpOw0KICAgICAgICBmcHV0KGZpbGUpOw0KIGVycl9kbWFidWY6DQogICAgICAgIGtm
+cmVlKGRtYWJ1Zik7DQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tPjwtLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLQ0KDQoNCj4gVGhhbmtzIGZvciBwb2ludGluZyB0aGlzIG91dCwNCj4gQ2hyaXN0
+aWFuLg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGlu
+YXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3Jn
+ClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0
+cy5saW5hcm8ub3JnCg==
