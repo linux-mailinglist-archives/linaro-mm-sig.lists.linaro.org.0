@@ -2,188 +2,179 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0620B648024
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  9 Dec 2022 10:32:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 689666480F8
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  9 Dec 2022 11:28:02 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C959F3E984
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  9 Dec 2022 09:32:16 +0000 (UTC)
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
-	by lists.linaro.org (Postfix) with ESMTPS id E9C4D3E976
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  9 Dec 2022 09:32:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 50BC53E976
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  9 Dec 2022 10:28:01 +0000 (UTC)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10on2071.outbound.protection.outlook.com [40.107.94.71])
+	by lists.linaro.org (Postfix) with ESMTPS id E74D43E976
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  9 Dec 2022 10:27:52 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=Pt1tN4LL;
-	spf=pass (lists.linaro.org: domain of ppaalanen@gmail.com designates 209.85.167.51 as permitted sender) smtp.mailfrom=ppaalanen@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-lf1-f51.google.com with SMTP id cf42so6171652lfb.1
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 09 Dec 2022 01:32:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=oBdOhyWntKFG7A7buaQENCm2gJ4+Uao0OtTP8lGjEYk=;
-        b=Pt1tN4LLjM3pQdMO6+3KGfQD0ui5OO9swavw/W05uifn6444OrMkD80QqunlIdbg0b
-         lrL5hmTo1LZNv5bosX0pHD42JwDmSm6Plg9G1vTpf39wiHL2IX4ikrdwmhP88tY9IFkQ
-         RlMQXzTX52EK4x+n9hdegrGjbDNZdejhMI/iI5hTVNCWwO1bvV/9ZIgJzTHV7irAHs3L
-         OnqaYcK6rUa20SJ7iZM1GNEfeRUTF37Ah8sIzd/wGm83RyMN2N6lb6GylOpbZj2Yhp6m
-         qqfRgK8drCgBYe6MpdGJbQ1RASoobdmVP21oaewIDKIMNCPC6ZYZ3JP851g0M8dpwMFm
-         nWIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=oBdOhyWntKFG7A7buaQENCm2gJ4+Uao0OtTP8lGjEYk=;
-        b=x/qoRXkpLpV1CrR5Sb4ns7LxJp5X5zk5cMPBr1ABYbXxmb52Ij9IM3vrLwUTRZ7vA9
-         unGcYKV+HgXKvOZwPYsgBuKZqaO8ZFhzVtwOCDLmuH8ikTemQgCXkRCa+qLEq6FHQXhN
-         544/t6H0JcN0HSIjk1Js8h2/5wkM4ud6BupTLy4LkzDGQ20jjAy7sLvOb6wATphNDLdq
-         ZrZ+/bWeiE3L95v7ShFE3Kx9I6ND7h6zQRsea1z+kYV2I0kf3ph0th+PZvtWyerZS3Bk
-         zLvXVRuizSH9Z3A9fh0gZd4+7nMhI283tZTNrYnGH5UZrzBZ8QARS78VMtSC7prjGqxB
-         /sMA==
-X-Gm-Message-State: ANoB5plmFfUoYMQlf54LvFoQoe4vN0m9EctCllc+bBEcLg8QO8cM/eQL
-	VRDCqrJ6NboiaN6FFjgAz5k=
-X-Google-Smtp-Source: AA0mqf5FAG9RMuqHBYYGt13U3LScyBDaOHnpfHLdwXQlIrpc2hgxZULYt2E01CJa10sDmf7nLfXnNw==
-X-Received: by 2002:a05:6512:2622:b0:4b5:41fa:69d8 with SMTP id bt34-20020a056512262200b004b541fa69d8mr2231721lfb.16.1670578326379;
-        Fri, 09 Dec 2022 01:32:06 -0800 (PST)
-Received: from eldfell ([194.136.85.206])
-        by smtp.gmail.com with ESMTPSA id c6-20020a056512324600b004ab52b0bcf9sm181105lfr.207.2022.12.09.01.32.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Dec 2022 01:32:06 -0800 (PST)
-Date: Fri, 9 Dec 2022 11:32:02 +0200
-From: Pekka Paalanen <ppaalanen@gmail.com>
+	dkim=pass header.d=amd.com header.s=selector1 header.b=crusg1Av;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1");
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.94.71 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=miDU+slRLmKSkWpSiIoSCp92jZQo9T3NJhoquMSrGFxNuvQUcH8xI10WK+sX5iIo2eIvss6m9ZVbaJUE1oIxMyjkXpvhp+qf5JfxU9EjRp+SB4Lidde1QS/XHH++s6YFNK4HgSU4dhuTm/k0GWlbvpS1oQ7D8tpWmSUT+H3gux9FQtrkU4sK74FtWBCDT/bzuALMRf86nv6T81tYG6iscX86FopYwA7LmICtPza4YnM4ZrqRD+6+zqR0R0xSIHajImauhmuR/qpomS1eSWQapWJ1zT1bHwP2L8ssKP5Mof/3DhrnfCYs4XF4HTwpYncUZUCq8qKiNvLJ4NBE8p8UnQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=VacTkpZdOWSwOp1I3RbrcweqEw8LYWJcnCbjup4qfIM=;
+ b=h4JQXgVrbhIFO0XFRfVqqNqvaEe27n7GKzdzdlsBdtY0vftLNPZ/Y05YUpoQ4S5cHUfNK0+ERVRbm/uud7249DfjPn8hCgn1XK16uvyIrK64kYCpGSstNxRs5xxgfOymC+M8NhFlU1/PZiOtiJbkwSJGLwgY+GnWiwBFSYvHJMN6axEuyITc51Hd+xTreog5aEelszg5uhOIxsq+KmQ61n69YkZCY6VEFt4nwrasu/Ulx1cE8olaze539G/CIbFXh5AW+y2dxIZOu1biIdKR/vMlMXwZqZpZe0Qvfkcmv+5CnnY2rxwj9fVv1QTG38G/D1FW27xOxXXGMVmH0fa29g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=VacTkpZdOWSwOp1I3RbrcweqEw8LYWJcnCbjup4qfIM=;
+ b=crusg1AvXTFvEIOQMB2cUzs2Ci645LWs+tyDyah4Ba+3J3jsIFWrhI1/uktQBr5y82mlyA0JFtFdQotBodSzYjemp2Wf8pinLL9KyD+IKojvw2zgcEXmCqMFsRoxYPY3NSgONcx5IUlnrfAOq4DTdJOeS0xnmE/gZHrCPX8a2a4=
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by SA1PR12MB5616.namprd12.prod.outlook.com (2603:10b6:806:22a::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5880.14; Fri, 9 Dec
+ 2022 10:27:50 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::7d43:3f30:4caf:7421]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::7d43:3f30:4caf:7421%7]) with mapi id 15.20.5880.016; Fri, 9 Dec 2022
+ 10:27:50 +0000
+Message-ID: <a4f56b61-7609-5424-b04c-9462764ac73b@amd.com>
+Date: Fri, 9 Dec 2022 11:27:44 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.4.2
+Content-Language: en-US
 To: Tomasz Figa <tfiga@chromium.org>
-Message-ID: <20221209113202.234b413a@eldfell>
-In-Reply-To: <CAAFQd5CJZ3RLTcS53=s81xAMZ=sG7A=CRUa6gKKuewbFG45Q8w@mail.gmail.com>
 References: <20221020121316.3946-1-christian.koenig@amd.com>
-	<e02cedc2-6741-8813-a7a5-f8769e301745@gmail.com>
-	<a53e5df51ec0f2f9d4c2d377c0cc5ba85f2e58ff.camel@ndufresne.ca>
-	<9d716641-55c6-1590-26c2-1c3b14a28226@gmail.com>
-	<CAPj87rMPkmimR_RJHhxYZokH__TVpPArk0h6drOUSx7Z9+oAHA@mail.gmail.com>
-	<11a6f97c-e45f-f24b-8a73-48d5a388a2cc@gmail.com>
-	<caf4d6b82843788db97555a58bc9e33915e5b50a.camel@ndufresne.ca>
-	<b422be59-4b4b-2d0d-8e8c-b19f27c6832e@gmail.com>
-	<4fa4e5d3b1f46e46139bad069cbf5e795e63afa8.camel@pengutronix.de>
-	<cc091a11-d012-d998-b7e2-8b3d616867a7@gmail.com>
-	<0abc6efddb8dfc1888de15a1bedaaac6688fd078.camel@pengutronix.de>
-	<1e2a6750-9849-e9ee-69d6-e4bfdcfb64f3@gmail.com>
-	<CAAFQd5B+VHs62M5Wf2L-xOw=_PoaXT+akAySkeZc75HeA3d0jQ@mail.gmail.com>
-	<b2dec9b3-03a7-e7ac-306e-1da024af8982@amd.com>
-	<CAAFQd5B7JQ4efCoVXEv_OQCmER6jPLPTyJdO7HrC2-Wfo+jMXQ@mail.gmail.com>
-	<e2f8b6ff-c843-cc8a-a496-72e25608c223@amd.com>
-	<CAAFQd5CJZ3RLTcS53=s81xAMZ=sG7A=CRUa6gKKuewbFG45Q8w@mail.gmail.com>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ <e02cedc2-6741-8813-a7a5-f8769e301745@gmail.com>
+ <a53e5df51ec0f2f9d4c2d377c0cc5ba85f2e58ff.camel@ndufresne.ca>
+ <9d716641-55c6-1590-26c2-1c3b14a28226@gmail.com>
+ <CAPj87rMPkmimR_RJHhxYZokH__TVpPArk0h6drOUSx7Z9+oAHA@mail.gmail.com>
+ <11a6f97c-e45f-f24b-8a73-48d5a388a2cc@gmail.com>
+ <caf4d6b82843788db97555a58bc9e33915e5b50a.camel@ndufresne.ca>
+ <b422be59-4b4b-2d0d-8e8c-b19f27c6832e@gmail.com>
+ <4fa4e5d3b1f46e46139bad069cbf5e795e63afa8.camel@pengutronix.de>
+ <cc091a11-d012-d998-b7e2-8b3d616867a7@gmail.com>
+ <0abc6efddb8dfc1888de15a1bedaaac6688fd078.camel@pengutronix.de>
+ <1e2a6750-9849-e9ee-69d6-e4bfdcfb64f3@gmail.com>
+ <CAAFQd5B+VHs62M5Wf2L-xOw=_PoaXT+akAySkeZc75HeA3d0jQ@mail.gmail.com>
+ <b2dec9b3-03a7-e7ac-306e-1da024af8982@amd.com>
+ <CAAFQd5B7JQ4efCoVXEv_OQCmER6jPLPTyJdO7HrC2-Wfo+jMXQ@mail.gmail.com>
+ <e2f8b6ff-c843-cc8a-a496-72e25608c223@amd.com>
+ <CAAFQd5CJZ3RLTcS53=s81xAMZ=sG7A=CRUa6gKKuewbFG45Q8w@mail.gmail.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <CAAFQd5CJZ3RLTcS53=s81xAMZ=sG7A=CRUa6gKKuewbFG45Q8w@mail.gmail.com>
+X-ClientProxiedBy: FR2P281CA0014.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a::24) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: E9C4D3E976
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|SA1PR12MB5616:EE_
+X-MS-Office365-Filtering-Correlation-Id: 92045ee8-a364-4bdb-4d9e-08dad9d0059e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	fd405KGiXX+HA6N3C8Lth1x6fYviI7mCgpRXwec9xCiQD8uaRJnmFdcPFImimeSz7S/BYrP2b7bRA54C/jk61zUGPw6uxk9yW97HOL91cTYKgBCv+OWthPD/bvs9WuodaoBmf5vxqShwBwFbEfvxV0ezJWOpjMuTT4AlMcyMJkeYdkyqMMDI9UgPYswG15fFF9Tr4gmBTxoNS4Lt7oCRMp+8Zq0q0aXlH7h/24W3hEC2rfUV4boPKo0ijTGg8aawrPMCSFhktzEDGiYQm3n+E7uO2XM3XYtQ9jfmZpctCzCLYAj1eNyBhv5fEAGHIEq01y/Y8Gj/aDfp3FPFmL2UclOUjFMRZWmffvxEDQu3LbKYR53QrYS+4th8eQN7gu1gjoGGVZXulYOIXOWmz0Qb73qpPqiJsQprNB0x0a2D9dioqK67NTner5+R2O8QxWKtHb8zE/3CSl1OkHduNvau/gkwwLRwZkDNQdvw4ZhS+LbyrLA0eZ5/G3A2+vzllpnHBsaqzSdHw0CkdQcwmq4rp5wELMBRD7osc2AwZSGSVwL8/wJTxqOhan5uvOVLomOIIPn150I/sO/Q7d2IBjk/QVsczSbxnlfNjGksCZn3zLZCHtgxqTZRntDdI/U90oiCS0CZ5zledWgAt4ku0IeeLaj7iDDzkfcwfdUNyP2DbvwGzZuc5XlVPXo11gCTdUnuNQ3XNPk5sKBYqkHb8alvK+63PsMGdqVjEhkpkKpQ4uQ=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(366004)(136003)(346002)(376002)(396003)(451199015)(7416002)(30864003)(31686004)(5660300002)(478600001)(6666004)(6486002)(38100700002)(6506007)(41300700001)(66574015)(36756003)(31696002)(86362001)(186003)(83380400001)(8936002)(6512007)(2906002)(66899015)(6916009)(66476007)(66946007)(66556008)(2616005)(316002)(8676002)(54906003)(4326008)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?RWt4bEdVcVQ2K2kxa0JGUXhHZVBXeWRaMFprYjA1OWNOUStsYzd6QTFHZWpz?=
+ =?utf-8?B?b0JtOG90WkMzK0ZrTWxyVHVrbFgvMXRPbjBuWDYwNmJwbWgyNFFDbjZGTEEx?=
+ =?utf-8?B?YTFOU1BIQ001MVUwUTNyNmo0QTd2RkpvbG8zRTJzVFh0TjVTZDdoc2JyMWxQ?=
+ =?utf-8?B?RDlMRERldm9UVmF3T1FTUTY0dXc0djZlckk2NzRkNEg1V3B6ZHBhZ1FyMHV6?=
+ =?utf-8?B?Yzl4KzUyRkYwMytLWHEzOER2Y1huUUhwYVRGMG5aWmNHdHNWRGZuRmdWME10?=
+ =?utf-8?B?V0paa3NuQUloNUdzb2hOZzh2YjB0amVUbjFCSnBTVUFHSjVRczVTVmNuTTJn?=
+ =?utf-8?B?MGNCalpCMXpSVHg4bmtxcllIRVpQaE11YlArVEMxQnFuVzc1V2tQbFZRdU90?=
+ =?utf-8?B?TjZtYnRFazZGT2lvbFpQMExyYWw2ZDl3NDJHZ3VhdTR5blZpS0hIZW9GQkF5?=
+ =?utf-8?B?ZjFFcGxlck9VUW1jeGhFTldaekhXekJJWG1XVXc4c0QrUFJCclNOUjJ5SUYw?=
+ =?utf-8?B?L1hoVmhPTTNJdjM0MHI3RzFLUktHczBKYnFpVUpRTHdRRFdqbUhCL1NoMTZ0?=
+ =?utf-8?B?eWtjVi9FYWJGTkxLNGNGNHRCaVFnUzVVV3pnTzRSb3pRS2F4ejhwYUh5aE1N?=
+ =?utf-8?B?RjFYQkpQSWd2SndKaDJ4bExwN2F4bFM4bTJqSWRETGN3d1JsOUJUSXcraVVQ?=
+ =?utf-8?B?NWErVHBsMFBDQytDN1hwS2RJaVhCZU1nWm5FTmtER1gyWFByVzNwZWt0V0Mx?=
+ =?utf-8?B?RFVVT2ZVaGllc2lzeVJKemVPUUlKRUptQ1NOUnRWRSs5dHBOWElsM1V6Njkw?=
+ =?utf-8?B?dnRaNjZCdTd4eGJmZUNPUzFYRDFscWprbGxhaWtGY3B5STluMlZVd1JVWHFX?=
+ =?utf-8?B?eWRiOUJMRmQxdGdBVi9rZzV5bVlycW43MWZSOXpoSkh1V1VTUHFXSThUOC8v?=
+ =?utf-8?B?aDZ5SnVDbHY4YzlmQmxTQ2VNMHptcHhLL01tcHYxY29DK0g5cndpME5PNDVm?=
+ =?utf-8?B?MTQrV3FLSnY4RHJWbnNvR0UySlNxcDZ6QUQ5VkdvVTAwWTJYUVVub0lRYTJU?=
+ =?utf-8?B?QTF3SnJFbFVFWU81YjYvOEp0SnZlMFMzQVFFZ0hZbnhDRXZXbFlXTVY5cVQ0?=
+ =?utf-8?B?QlQvcmUyNmYrSTJiUFhRcFZId3gxSVcwRktENTJUdm5CaE4rM0k2Mmo0Qlo4?=
+ =?utf-8?B?S09wRGRSNTJqZmtlMzFqMDJtR3BzTnNTUHZqLzl4L1dFaFpLUmNLdHlheVhX?=
+ =?utf-8?B?WUJqOGFHcmpnc0lhdzlObzFxSFhwRlEzK3AvcXlVbkV6L2hnRSs0LzA5NlpL?=
+ =?utf-8?B?Wm5FZkRNZnZCc2VNNUI4aFhnUFgwamFTWnNZQ1ZnNjN2SlBiN2RMcmVMeE5O?=
+ =?utf-8?B?STUzbjkvM3N4eXpOMFUvbURpZ0s0NFJiSW9mT09TOGpyMk1qRlN3RFNWUVph?=
+ =?utf-8?B?RUdUejlGSVlTZnRsUS8rVUhERE5mSGdVZ0FoTU9wTDNpa3hHbHRrbnZZenUy?=
+ =?utf-8?B?dlZKY2N5MGttRFQ1MTMyQ3IvUnZsY1VRd2t4c1FIeGlWQkh3UHZla0RKMHVT?=
+ =?utf-8?B?OTZXOFpPMDd5bEp1RG9hYnJDSEJ0WkZWc0p2dHF4aSs3SklYRjdYYkdibGJu?=
+ =?utf-8?B?OFppN1EyKzROSnR2WlpMVlNENmZtVElWTkxROVdRRjlFTnRFL0paNHR6VVRm?=
+ =?utf-8?B?R3NDY2RoT2U3cVhtNHU3Rys5S0dXZ2gxWDZsWVZEQlZsMFY0M1lPb2JTNXRZ?=
+ =?utf-8?B?Q2FBZW5xRm40anc1NXl3Nmh5akc5TWtjRDU2YTBxOU8xOUZjYm9VcWhmWEVv?=
+ =?utf-8?B?ZDNMRTdhWDBzVFRHRnRsZTJpK0loMHFwWDdSbVY0M0Z5SENpazNYM2l1WWVC?=
+ =?utf-8?B?eXdSMW5YVi9lT1pjT1hkZFF1V0EzNkNabFMvelAyRHZld29GTVROMTg5ajRh?=
+ =?utf-8?B?OUE5Rkt3WnBuVzcrTDJ4NW40cmNrWXdROWFZUTAvT1FGdkNZdDQvaHZhMksx?=
+ =?utf-8?B?dm5PdnB0Q0Z1aVdtdVN0aUI0TzlnVUpRME0zSXp6Rmx3R1hCNGU0ZjVSVUVF?=
+ =?utf-8?B?c2lJVjd1SUtLaTFYc1RTdHB1UU5sdUU3UHJZU1dvYW90emxpa3ZZd3djVWhG?=
+ =?utf-8?B?QWNQcW5pVHdHaHRpUlV5d0ZwMnV6bEVLVFNNdmVTNGt5QXhKcVpnYU5jYzhE?=
+ =?utf-8?Q?emUnwiT7ApDe31T4zG73i6JeKgWUe2g5wlObwGb1E1vL?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 92045ee8-a364-4bdb-4d9e-08dad9d0059e
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2022 10:27:49.9375
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: QuvQ6vg+vJYH+OhjzaqJY23omEuo21EIzM6NzlRjtxHzu2afm5/CLt+3TpLOwBTs
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB5616
+X-Rspamd-Queue-Id: E74D43E976
 X-Spamd-Bar: ---------
-X-Spamd-Result: default: False [-9.60 / 15.00];
+X-Spamd-Result: default: False [-9.00 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.51:from];
-	URIBL_BLOCKED(0.00)[mail-lf1-f51.google.com:rdns,mail-lf1-f51.google.com:helo,amd.com:email];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	RCVD_COUNT_THREE(0.00)[3];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	MIME_GOOD(-0.10)[text/plain];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	NEURAL_HAM(-0.00)[-0.967];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[amd.com,pengutronix.de,ndufresne.ca,fooishbar.org,linaro.org,ffwll.ch,gmail.com,lists.freedesktop.org,lists.linaro.org,vger.kernel.org]
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_CC(0.00)[pengutronix.de,ndufresne.ca,fooishbar.org,gmail.com,linaro.org,ffwll.ch,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	URIBL_BLOCKED(0.00)[mail-mw2nam10on2071.outbound.protection.outlook.com:rdns,NAM10-MW2-obe.outbound.protection.outlook.com:helo];
+	DKIM_TRACE(0.00)[amd.com:+];
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	TO_DN_SOME(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.94.71:from]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: NL4QBWBWAKDM6RLTBXCAC6XQ5XV5SP44
-X-Message-ID-Hash: NL4QBWBWAKDM6RLTBXCAC6XQ5XV5SP44
-X-MailFrom: ppaalanen@gmail.com
+Message-ID-Hash: L6XZXRXYE5U462IQV3YYKQEOYFPART5M
+X-Message-ID-Hash: L6XZXRXYE5U462IQV3YYKQEOYFPART5M
+X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Nicolas Dufresne <nicolas@ndufresne.ca>, Daniel Stone <daniel@fooishbar.org>, sumit.semwal@linaro.org, daniel@ffwll.ch, robdclark@gmail.com, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
+CC: Nicolas Dufresne <nicolas@ndufresne.ca>, Daniel Stone <daniel@fooishbar.org>, ppaalanen@gmail.com, sumit.semwal@linaro.org, daniel@ffwll.ch, robdclark@gmail.com, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NL4QBWBWAKDM6RLTBXCAC6XQ5XV5SP44/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/L6XZXRXYE5U462IQV3YYKQEOYFPART5M/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============7988551132317863220=="
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
---===============7988551132317863220==
-Content-Type: multipart/signed; boundary="Sig_/yutxZO4OuBJeupqc9eAt.=X";
- protocol="application/pgp-signature"; micalg=pgp-sha256
-
---Sig_/yutxZO4OuBJeupqc9eAt.=X
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, 9 Dec 2022 17:26:06 +0900
-Tomasz Figa <tfiga@chromium.org> wrote:
-
-> On Mon, Dec 5, 2022 at 5:29 PM Christian K=C3=B6nig <christian.koenig@amd=
-.com> wrote:
-> >
-> > Hi Tomasz,
-> >
-> > Am 05.12.22 um 07:41 schrieb Tomasz Figa: =20
-> > > [SNIP] =20
-> > >> In other words explicit ownership transfer is not something we would
-> > >> want as requirement in the framework, cause otherwise we break tons =
-of
-> > >> use cases which require concurrent access to the underlying buffer.
-> > >>
-> > >> When a device driver needs explicit ownership transfer it's perfectly
-> > >> possible to implement this using the dma_fence objects mentioned abo=
-ve.
-> > >> E.g. drivers can already look at who is accessing a buffer currently=
- and
-> > >> can even grab explicit ownership of it by adding their own dma_fence
-> > >> objects.
-> > >>
-> > >> The only exception is CPU based access, e.g. when something is writt=
-en
-> > >> with the CPU a cache flush might be necessary and when something is =
-read
-> > >> with the CPU a cache invalidation might be necessary.
-> > >> =20
-> > > Okay, that's much clearer now, thanks for clarifying this. So we
-> > > should be covered for the cache maintenance needs originating from CPU
-> > > accesses already, +/- the broken cases which don't call the begin/end
-> > > CPU access routines that I mentioned above.
-> > >
-> > > Similarly, for any ownership transfer between different DMA engines,
-> > > we should be covered either by the userspace explicitly flushing the
-> > > hardware pipeline or attaching a DMA-buf fence to the buffer.
-> > >
-> > > But then, what's left to be solved? :) (Besides the cases of missing
-> > > begin/end CPU access calls.) =20
-> >
-> > Well there are multiple problems here:
-> >
-> > 1. A lot of userspace applications/frameworks assume that it can
-> > allocate the buffer anywhere and it just works.
-> >
-> > This isn't true at all, we have tons of cases where device can only
-> > access their special memory for certain use cases.
-> > Just look at scanout for displaying on dGPU, neither AMD nor NVidia
-> > supports system memory here. Similar cases exists for audio/video codecs
-> > where intermediate memory is only accessible by certain devices because
-> > of content protection. =20
->=20
-> Ack.
->=20
+Am 09.12.22 um 09:26 schrieb Tomasz Figa:
+> [SNIP]
 > Although I think the most common case on mainstream Linux today is
 > properly allocating for device X (e.g. V4L2 video decoder or DRM-based
 > GPU) and hoping that other devices would accept the buffers just fine,
@@ -193,110 +184,84 @@ read
 > gralloc that act as the central point of knowledge on buffer
 > allocation.
 
-Hi,
+Yeah, completely agree. The crux is really that we need to improve those 
+user space allocators by providing more information from the kernel.
 
-as an anecdote, when I was improving Mutter's cross-DRM-device handling
-(for DisplayLink uses) a few years ago, I implemented several different
-approaches of where to allocate, to try until going for the slowest but
-guaranteed to work case of copying every update into and out of sysram.
-
-It seems there are two different approaches in general for allocation
-and sharing:
-
-1. Try different things until it works or you run out of options
-
-pro:
-- no need for a single software component to know everything about
-  every device in the system
-
-con:
-- who bothers with fallbacks, if the first try works on my system for
-  my use case I test with? I.e. cost of code in users.
-- trial-and-error can be very laborious (allocate, share with all
-  devices, populate, test)
-- the search space might be huge
-
-
-2. Have a central component that knows what to do
-
-pro:
-- It might work on the first attempt, so no fallbacks in users.
-- It might be optimal.
-
-con:
-- You need a software component that knows everything about every
-  single combination of hardware in existence, multiplied by use cases.
-
-
-Neither seems good, which brings us back to https://github.com/cubanismo/al=
-locator .
-
-
-> > 2. We don't properly communicate allocation requirements to userspace.
-> >
-> > E.g. even if you allocate from DMA-Heaps userspace can currently only
-> > guess if normal, CMA or even device specific memory is needed. =20
->=20
+>> 2. We don't properly communicate allocation requirements to userspace.
+>>
+>> E.g. even if you allocate from DMA-Heaps userspace can currently only
+>> guess if normal, CMA or even device specific memory is needed.
 > DMA-buf heaps actually make it even more difficult for the userspace,
 > because now it needs to pick the right heap. With allocation built
 > into the specific UAPI (like V4L2), it's at least possible to allocate
 > for one specific device without having any knowledge about allocation
 > constraints in the userspace.
->=20
-> >
-> > 3. We seem to lack some essential parts of those restrictions in the
-> > documentation.
-> > =20
->=20
-> Ack.
->=20
-> > >>>> So if a device driver uses cached system memory on an architecture=
- which
-> > >>>> devices which can't access it the right approach is clearly to rej=
-ect
-> > >>>> the access. =20
-> > >>> I'd like to accent the fact that "requires cache maintenance" !=3D =
-"can't access". =20
-> > >> Well that depends. As said above the exporter exports the buffer as =
-it
-> > >> was allocated.
-> > >>
-> > >> If that means the the exporter provides a piece of memory which requ=
-ires
-> > >> CPU cache snooping to access correctly then the best thing we can do=
- is
-> > >> to prevent an importer which can't do this from attaching. =20
-> > > Could you elaborate more about this case? Does it exist in practice?
-> > > Do I assume correctly that it's about sharing a buffer between one DMA
-> > > engine that is cache-coherent and another that is non-coherent, where
-> > > the first one ends up having its accesses always go through some kind
-> > > of a cache (CPU cache, L2/L3/... cache, etc.)? =20
-> >
-> > Yes, exactly that. What happens in this particular use case is that one
-> > device driver wrote to it's internal buffer with the CPU (so some cache
-> > lines where dirty) and then a device which couldn't deal with that tried
-> > to access it. =20
->=20
+
+Yes, same what Daniel said as well. We need to provide some more hints 
+which allocator to use from the kernel.
+
+>>>>>> So if a device driver uses cached system memory on an architecture which
+>>>>>> devices which can't access it the right approach is clearly to reject
+>>>>>> the access.
+>>>>> I'd like to accent the fact that "requires cache maintenance" != "can't access".
+>>>> Well that depends. As said above the exporter exports the buffer as it
+>>>> was allocated.
+>>>>
+>>>> If that means the the exporter provides a piece of memory which requires
+>>>> CPU cache snooping to access correctly then the best thing we can do is
+>>>> to prevent an importer which can't do this from attaching.
+>>> Could you elaborate more about this case? Does it exist in practice?
+>>> Do I assume correctly that it's about sharing a buffer between one DMA
+>>> engine that is cache-coherent and another that is non-coherent, where
+>>> the first one ends up having its accesses always go through some kind
+>>> of a cache (CPU cache, L2/L3/... cache, etc.)?
+>> Yes, exactly that. What happens in this particular use case is that one
+>> device driver wrote to it's internal buffer with the CPU (so some cache
+>> lines where dirty) and then a device which couldn't deal with that tried
+>> to access it.
 > If so, shouldn't that driver surround its CPU accesses with
 > begin/end_cpu_access() in the first place?
->=20
+
+The problem is that the roles are reversed. The callbacks let the 
+exporter knows that it needs to flush the caches when the importer is 
+done accessing the buffer with the CPU.
+
+But here the exporter is the one accessing the buffer with the CPU and 
+the importer then accesses stale data because it doesn't snoop the caches.
+
+What we could do is to force all exporters to use begin/end_cpu_access() 
+even on it's own buffers and look at all the importers when the access 
+is completed. But that would increase the complexity of the handling in 
+the exporter.
+
+In other words we would then have code in the exporters which is only 
+written for handling the constrains of the importers. This has a wide 
+variety of consequences, especially that this functionality of the 
+exporter can't be tested without a proper importer.
+
+I was also thinking about reversing the role of exporter and importer in 
+the kernel, but came to the conclusion that doing this under the hood 
+without userspace knowing about it is probably not going to work either.
+
 > The case that I was suggesting was of a hardware block that actually
 > sits behind the CPU cache and thus dirties it on writes, not the
 > driver doing that. (I haven't personally encountered such a system,
 > though.)
->=20
-> >
-> > We could say that all device drivers must always look at the coherency
-> > of the devices which want to access their buffers. But that would
-> > horrible complicate things for maintaining the drivers because then
-> > drivers would need to take into account requirements from other drivers
-> > while allocating their internal buffers. =20
->=20
+
+Never heard of anything like that either, but who knows.
+
+>> We could say that all device drivers must always look at the coherency
+>> of the devices which want to access their buffers. But that would
+>> horrible complicate things for maintaining the drivers because then
+>> drivers would need to take into account requirements from other drivers
+>> while allocating their internal buffers.
 > I think it's partially why we have the allocation part of the DMA
 > mapping API, but currently it's only handling requirements of one
 > device. And we don't have any information from the userspace what
 > other devices the buffer would be used with...
->=20
+
+Exactly that, yes.
+
 > Actually, do we even have such information in the userspace today?
 > Let's say I do a video call in a web browser on a typical Linux
 > system. I have a V4L2 camera, VAAPI video encoder and X11 display. The
@@ -305,55 +270,143 @@ ires
 > a buffer needs to be allocated that works with the producer and all
 > consumers?
 
-I have a vague belief that many, many years ago, in the early days of
-dmabuf development, there was the idea of the sequence:
-- create a dmabuf handle
-- share the handle with all devices that would need access
-- *then* do the allocation with kernel-internal negotiation to fill all
-  devices' needs, if at all possible
+Both X11 and Wayland have protocols which can be used to display a 
+certain DMA-buf handle, their feedback packages contain information how 
+ideal your configuration is, e.g. if the DMA-buf handle could be used or 
+if an extra copy was needed etc...
 
-Obviously that didn't happen. I think today's dmabuf Wayland protocol
-would support this though.
+Similar exists between VAAPI and V4L2 as far as I know, but as you noted 
+as well here it's indeed more about negotiating pixel format, stride, 
+padding, alignment etc...
 
-Anyway, Wayland can tell the app which DRM devices a buffer
-needs to work with as a GPU texture and potentially on same/another
-DRM device as a KMS framebuffer, so theoretically the app could know.
+The best we can do is to reject combinations which won't work in the 
+kernel and then userspace could react accordingly.
 
+>> That's essentially the reason why we have DMA-buf heaps. Those heaps
+>> expose system memory buffers with certain properties (size, CMA, DMA bit
+>> restrictions etc...) and also implement the callback functions for CPU
+>> cache maintenance.
+>>
+> How do DMA-buf heaps change anything here? We already have CPU cache
+> maintenance callbacks in the DMA-buf API - the begin/end_cpu_access()
+> for CPU accesses and dmabuf_map/unmap_attachment() for device accesses
+> (which arguably shouldn't actually do CPU cache maintenance, unless
+> that's implied by how either of the involved DMA engines work).
 
-Thanks,
-pq
+DMA-buf heaps are the neutral man in the middle.
 
---Sig_/yutxZO4OuBJeupqc9eAt.=X
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
+The implementation keeps track of all the attached importers and should 
+make sure that the allocated memory fits the need of everyone. 
+Additional to that calls to the cache DMA-api cache management functions 
+are inserted whenever CPU access begins/ends.
 
------BEGIN PGP SIGNATURE-----
+That's the best we can do for system memory sharing, only device 
+specific memory can't be allocated like this.
 
-iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmOTAJIACgkQI1/ltBGq
-qqe6Kg//YTqIVuEJp0EYrN6L4eafpQG+YNYEQlkALBw5zzM/x+07PD8XjsXygl0x
-TouoRVm19By9IaP/BJGt9TYAEvP1WChIlaF0mApfROuAq3i0/t5UFMzu+pdEUlZj
-AY7J1QgsvImlQd6kpAPVkTWFtpN6H9FO+gQM5G/aQsUY82gk+RWRV+AQft9to86F
-mns8+HnGd5aHanFAUq3IzEZOgxejzKK5pKcYyJDrdstpDKq/dBMglUtXRlE4SJE5
-1yHMnHdV7qC2wfEn+8tF0ZQqWCmKYf5Iyu3o0tjDvAe6qgeRa7VnZWBXLzwaSEVr
-q7a0LCBoIi6nHN+Xu/fJdJ9M2cEDj4pLlnyTx/POFatEzsvuwy2dzAVreHBEd6B/
-3i2ZPxcvhdPzZ8FjbYf2MisGDpgYre0f+48aLaGsbXW2zvyZ44yGX1QTMwF1jKTM
-yECACZ6MIWlLdzFvh0GEsHPW8StUxfOPvSBBf+S3jDhniIyvFwUxCF7dRhSjTnJ3
-5FNth/1RHHARUqJ8UXSi/MGEMUCmt4aYosu6fFucRu3FAszRPeaoHG5UciKrROEd
-HMc7XbbpWTyYhHjYUETd5/wnysXeALFJEdhF9JnuALzM03h8qyCDMUxeUjDtrg1L
-f3MUA5WVipSzqRBZDO2PHDuET1vp9qwtMVaY9QuHjf9lNM8xb+A=
-=6yHb
------END PGP SIGNATURE-----
+>>>> We do have the system and CMA dma-buf heap for cases where a device
+>>>> driver which wants to access the buffer with caches enabled. So this is
+>>>> not a limitation in functionality, it's just a matter of correctly using it.
+>>>>
+>>> V4L2 also has the ability to allocate buffers and map them with caches enabled.
+>> Yeah, when that's a requirement for the V4L2 device it also makes
+>> perfect sense.
+>>
+>> It's just that we shouldn't force any specific allocation behavior on a
+>> device driver because of the requirements of a different device.
+>>
+>> Giving an example a V4L2 device shouldn't be forced to use
+>> videobuf2-dma-contig because some other device needs CMA. Instead we
+>> should use the common DMA-buf heaps which implement this as neutral
+>> supplier of system memory buffers.
+> Agreed, but that's only possible if we have a central entity that
+> understands what devices the requested buffer would be used with. My
+> understanding is that we're nowhere close to that with mainstream
+> Linux today.
+>
+> // As a side note, videobuf2-dma-contig can actually allocate
+> discontiguous memory, if the device is behind an IOMMU. Actually with
+> the recent DMA API improvements, we could probably coalesce
+> vb2-dma-contig and vb2-dma-sg into one vb2-dma backend.
 
---Sig_/yutxZO4OuBJeupqc9eAt.=X--
+That would probably make live a little bit simpler, yes.
 
---===============7988551132317863220==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+>>>> The problem is that in this particular case the exporter provides the
+>>>> buffer as is, e.g. with dirty CPU caches. And the importer can't deal
+>>>> with that.
+>>> Why does the exporter leave the buffer with dirty CPU caches?
+>> Because exporters always export the buffers as they would use it. And in
+>> this case that means writing with the CPU to it.
+>>
+> Sorry for the question not being very clear. I meant: How do the CPU
+> caches get dirty in that case?
+
+The exporter wrote to it. As far as I understand the exporter just 
+copies things from A to B with memcpy to construct the buffer content.
+
+> [SNIP]
+>> Yes, totally agree. The problem is really that we moved bunch of MM and
+>> DMA functions in one API.
+>>
+>> The bounce buffers are something we should really have in a separate
+>> component.
+>>
+>> Then the functionality of allocating system memory for a specific device
+>> or devices should be something provided by the MM.
+>>
+>> And finally making this memory or any other CPU address accessible to a
+>> device (IOMMU programming etc..) should then be part of an DMA API.
+>>
+> Remember that actually making the memory accessible to a device often
+> needs to be handled already as a part of the allocation (e.g. dma_mask
+> in the non-IOMMU case). So I tend to think that the current division
+> of responsibilities is mostly fine - the dma_alloc family should be
+> seen as a part of MM already, especially with all the recent
+> improvements from Christoph, like dma_alloc_pages().
+
+Yes, that's indeed a very interesting development which as far as I can 
+see goes into the right direction.
+
+> That said, it may indeed make sense to move things like IOMMU mapping
+> management out of the dma_alloc() and just reduce those functions to
+> simply returning a set of pages that satisfy the allocation
+> constraints. One would need to call dma_map() after the allocation,
+> but that's actually a fair expectation. Sometimes it might be
+> preferred to pre-allocate the memory, but only map it into the device
+> address space when it's really necessary.
+
+What I'm still missing is the functionality to allocate pages for 
+multiple devices and proper error codes when dma_map() can't make the 
+page accessible to a device.
+
+Regards,
+Christian.
+
+>>>>>>> It's a use-case that is working fine today with many devices (e.g. network
+>>>>>>> adapters) in the ARM world, exactly because the architecture specific
+>>>>>>> implementation of the DMA API inserts the cache maintenance operations
+>>>>>>> on buffer ownership transfer.
+>>>>>> Yeah, I'm perfectly aware of that. The problem is that exactly that
+>>>>>> design totally breaks GPUs on Xen DOM0 for example.
+>>>>>>
+>>>>>> And Xen is just one example, I can certainly say from experience that
+>>>>>> this design was a really really bad idea because it favors just one use
+>>>>>> case while making other use cases practically impossible if not really
+>>>>>> hard to implement.
+>>>>> Sorry, I haven't worked with Xen. Could you elaborate what's the
+>>>>> problem that this introduces for it?
+>>>> That's a bit longer topic. The AMD XEN devs are already working on this
+>>>> as far as I know. I can ping internally how far they got with sending
+>>>> the patches out to avoid this problem.
+>>> Hmm, I see. It might be a good data point to understand in which
+>>> direction we should be going, but I guess we can wait until they send
+>>> some patches.
+>> There was just recently a longer thread on the amd-gfx mailing list
+>> about that. I think looking in there as well might be beneficial.
+> Okay, let me check. Thanks,
+>
+> Best regards,
+> Tomasz
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============7988551132317863220==--
