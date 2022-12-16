@@ -2,82 +2,95 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8385264DB30
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 15 Dec 2022 13:32:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A770A64F09C
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 16 Dec 2022 18:48:28 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3823D3EC24
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 15 Dec 2022 12:32:03 +0000 (UTC)
-Received: from cstnet.cn (smtp25.cstnet.cn [159.226.251.25])
-	by lists.linaro.org (Postfix) with ESMTP id 70BE23E95F
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 15 Dec 2022 12:31:52 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 49E473EE92
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 16 Dec 2022 17:48:27 +0000 (UTC)
+Received: from mail-oa1-f48.google.com (mail-oa1-f48.google.com [209.85.160.48])
+	by lists.linaro.org (Postfix) with ESMTPS id AECE83EBF4
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 16 Dec 2022 17:48:16 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of jiasheng@iscas.ac.cn designates 159.226.251.25 as permitted sender) smtp.mailfrom=jiasheng@iscas.ac.cn;
-	dmarc=none
-Received: from localhost.localdomain (unknown [124.16.138.125])
-	by APP-05 (Coremail) with SMTP id zQCowABXXfGSE5tjPQddBw--.8722S2;
-	Thu, 15 Dec 2022 20:31:15 +0800 (CST)
-From: Jiasheng Jiang <jiasheng@iscas.ac.cn>
-To: gregkh@linuxfoundation.org
-Date: Thu, 15 Dec 2022 20:31:12 +0800
-Message-Id: <20221215123112.20553-1-jiasheng@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=Tq0ybDf8;
+	spf=pass (lists.linaro.org: domain of alexdeucher@gmail.com designates 209.85.160.48 as permitted sender) smtp.mailfrom=alexdeucher@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-oa1-f48.google.com with SMTP id 586e51a60fabf-144b21f5e5fso4117728fac.12
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 16 Dec 2022 09:48:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=do3Z4/hAMQVkQodUCOYB/hJ2aATCK/w0rFJKLIUXoDU=;
+        b=Tq0ybDf8GqL94RsKaMSNjCFFt5GLpFfZThhTwrf6hKpyQlLPIzpcZT9zfuXr+StWkL
+         Vt6dYgvsxaMUdOXNJdHGEPTtPkUd/F6Ezpfs55HHBqe6FohLDRKVS8In3+K/GmXNeICA
+         1su8JnGtvq6A6GHi1AcX2vRDU4lEHKArVskSaFvF8bcs5p1//S0YkutfA3H1b9N9Sr0a
+         jU3ojtTFoVkCVOOFkHW98RWK8Wjl0wUNi8LbUxRfvsWwqTtj2RoGmk8O6uwSarllp6ai
+         saUk+FkRz+7DZvJ+EGoGf0wWhXrIgfQjMDN5RRKLVj3/Px/Uvyn7uWMrKl9ip8smxIsm
+         Xz6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=do3Z4/hAMQVkQodUCOYB/hJ2aATCK/w0rFJKLIUXoDU=;
+        b=IUKB2phmES1c+uBdEdAdjg/s5weWgGdQlon2xb8lDBceNjt4SjKX642PxGmWTvVTFq
+         4RQa3qgZMP89O9ElgTEaopdVTrHOsx6Kcv0ULGCn/TGZuHKuww8Qu81UBQAZ9QakRwww
+         Ojv6Fcd99AMuXUWmQD1ifT4IKkv8voBZD5H3WATI1ddBiJgqWWOwGKAHeqIoonJltotE
+         dy+G7vMnPD8YNNfroazYtj3uwo1ECugZ4C7Jlqs1bMehWygMsyyygXYQzuJgIucuU1RG
+         w+7frzERI1E/GfrL1TG4C65QJpik58AvAfEH1anjR1lb8E7h1BbfuWp8zJByqlzxOANI
+         y+RA==
+X-Gm-Message-State: AFqh2krjwDqAin/CFj9iLV61YdlKtU1qEJf/qML85RPJ5QQS2Zsnf3QE
+	Sjtr9UJaiwA4a87mR0bEm/Q9ODBo5dUs2LPU6v4=
+X-Google-Smtp-Source: AMrXdXvuc6R3ZTZ/oApoLGblrEpZbywtPib18Mzb9sA9w3nnKcRlXNSTHdHBj3oZ6tMkGGF1L+PuoYv9ctA0jAAKtos=
+X-Received: by 2002:a05:6870:8091:b0:148:3c8f:15ab with SMTP id
+ q17-20020a056870809100b001483c8f15abmr748017oab.46.1671212895993; Fri, 16 Dec
+ 2022 09:48:15 -0800 (PST)
 MIME-Version: 1.0
-X-CM-TRANSID: zQCowABXXfGSE5tjPQddBw--.8722S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7GrWfGw4fZF4Uur1rZry8Grg_yoW8Jr4Upa
-	17JrW7XrW5ZasYy3yUJa4DZF15Xa98GFZ0grZrta1UZFnxZrZxAry5t34YgFW8CFy3AFW2
-	vFnIgr4rArykArJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUv014x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-	1l84ACjcxK6xIIjxv20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
-	6F4UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr
-	1j6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj
-	6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr
-	0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E
-	8cxan2IY04v7MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I
-	8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8
-	ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x
-	0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_
-	Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUb
-	0D73UUUUU==
-X-Originating-IP: [124.16.138.125]
-X-CM-SenderInfo: pmld2xxhqjqxpvfd2hldfou0/
-X-Rspamd-Queue-Id: 70BE23E95F
-X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.70 / 15.00];
+References: <651349f55060767a9a51316c966c1e5daa57a644.1670919979.git.Rijo-john.Thomas@amd.com>
+ <20221215132917.GA11061@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
+In-Reply-To: <20221215132917.GA11061@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
+From: Alex Deucher <alexdeucher@gmail.com>
+Date: Fri, 16 Dec 2022 12:48:03 -0500
+Message-ID: <CADnq5_Nd6bzgqTBKwG=zZr2YO60SL92xiE1MzH-c1MfkFKqzqQ@mail.gmail.com>
+To: Jeremi Piotrowski <jpiotrowski@linux.microsoft.com>
+X-Rspamd-Queue-Id: AECE83EBF4
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:159.226.251.0/25];
-	RCVD_NO_TLS_LAST(0.10)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	R_DKIM_NA(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	NEURAL_HAM(-0.00)[-0.991];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	FROM_EQ_ENVFROM(0.00)[];
-	ASN(0.00)[asn:7497, ipnet:159.226.0.0/16, country:CN];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	NEURAL_SPAM(0.00)[0.146];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_HAS_DN(0.00)[];
-	HAS_XOIP(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	TO_DN_SOME(0.00)[];
-	DMARC_NA(0.00)[iscas.ac.cn];
-	URIBL_BLOCKED(0.00)[smtp25.cstnet.cn:rdns,cstnet.cn:helo];
-	ARC_NA(0.00)[]
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[209.85.160.48:from];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.160.48:from]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: TGR5Z2AWRTAHMFMXPO6AFCDQUFR3TWCV
-X-Message-ID-Hash: TGR5Z2AWRTAHMFMXPO6AFCDQUFR3TWCV
-X-MailFrom: jiasheng@iscas.ac.cn
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: neal_liu@aspeedtech.com, andrew@aj.id.au, sumit.semwal@linaro.org, christian.koenig@amd.com, linux-aspeed@lists.ozlabs.org, linux-usb@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Jiasheng Jiang <jiasheng@iscas.ac.cn>
+Message-ID-Hash: JYP56Z6TVLNGHVL4FRQXN47ACYKS5XFV
+X-Message-ID-Hash: JYP56Z6TVLNGHVL4FRQXN47ACYKS5XFV
+X-MailFrom: alexdeucher@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Rijo Thomas <Rijo-john.Thomas@amd.com>, John Allen <john.allen@amd.com>, Tom Lendacky <thomas.lendacky@amd.com>, Devaraj Rangasamy <Devaraj.Rangasamy@amd.com>, Herbert Xu <herbert@gondor.apana.org.au>, "David S . Miller" <davem@davemloft.net>, Jeshwanth <JESHWANTHKUMAR.NK@amd.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org, Jens Wiklander <jens.wiklander@linaro.org>, linux-crypto@vger.kernel.org, stable@vger.kernel.org, Mythri PK <Mythri.Pandeshwarakrishna@amd.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3] usb: gadget: aspeed_udc: Add check for dma_alloc_coherent
+Subject: [Linaro-mm-sig] Re: [PATCH v2] crypto: ccp - Allocate TEE ring and cmd buffer using DMA APIs
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TGR5Z2AWRTAHMFMXPO6AFCDQUFR3TWCV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JYP56Z6TVLNGHVL4FRQXN47ACYKS5XFV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -87,49 +100,186 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Add the check for the return value of dma_alloc_coherent in order to
-avoid NULL pointer dereference.
+On Fri, Dec 16, 2022 at 3:20 AM Jeremi Piotrowski
+<jpiotrowski@linux.microsoft.com> wrote:
+>
+> On Tue, Dec 13, 2022 at 04:40:27PM +0530, Rijo Thomas wrote:
+> > For AMD Secure Processor (ASP) to map and access TEE ring buffer, the
+> > ring buffer address sent by host to ASP must be a real physical
+> > address and the pages must be physically contiguous.
+> >
+> > In a virtualized environment though, when the driver is running in a
+> > guest VM, the pages allocated by __get_free_pages() may not be
+> > contiguous in the host (or machine) physical address space. Guests
+> > will see a guest (or pseudo) physical address and not the actual host
+> > (or machine) physical address. The TEE running on ASP cannot decipher
+> > pseudo physical addresses. It needs host or machine physical address.
+> >
+> > To resolve this problem, use DMA APIs for allocating buffers that must
+> > be shared with TEE. This will ensure that the pages are contiguous in
+> > host (or machine) address space. If the DMA handle is an IOVA,
+> > translate it into a physical address before sending it to ASP.
+> >
+> > This patch also exports two APIs (one for buffer allocation and
+> > another to free the buffer). This API can be used by AMD-TEE driver to
+> > share buffers with TEE.
+> >
+> > Fixes: 33960acccfbd ("crypto: ccp - add TEE support for Raven Ridge")
+> > Cc: Tom Lendacky <thomas.lendacky@amd.com>
+> > Cc: stable@vger.kernel.org
+> > Signed-off-by: Rijo Thomas <Rijo-john.Thomas@amd.com>
+> > Co-developed-by: Jeshwanth <JESHWANTHKUMAR.NK@amd.com>
+> > Signed-off-by: Jeshwanth <JESHWANTHKUMAR.NK@amd.com>
+> > Reviewed-by: Devaraj Rangasamy <Devaraj.Rangasamy@amd.com>
+> > ---
+> > v2:
+> >  * Removed references to dma_buffer.
+> >  * If psp_init() fails, clear reference to master device.
+> >  * Handle gfp flags within psp_tee_alloc_buffer() instead of passing it as
+> >    a function argument.
+> >  * Added comments within psp_tee_alloc_buffer() to serve as future
+> >    documentation.
+> >
+> >  drivers/crypto/ccp/psp-dev.c |  13 ++--
+> >  drivers/crypto/ccp/tee-dev.c | 124 +++++++++++++++++++++++------------
+> >  drivers/crypto/ccp/tee-dev.h |   9 +--
+> >  include/linux/psp-tee.h      |  49 ++++++++++++++
+> >  4 files changed, 142 insertions(+), 53 deletions(-)
+> >
+> > diff --git a/drivers/crypto/ccp/psp-dev.c b/drivers/crypto/ccp/psp-dev.c
+> > index c9c741ac8442..380f5caaa550 100644
+> > --- a/drivers/crypto/ccp/psp-dev.c
+> > +++ b/drivers/crypto/ccp/psp-dev.c
+> > @@ -161,13 +161,13 @@ int psp_dev_init(struct sp_device *sp)
+> >               goto e_err;
+> >       }
+> >
+> > -     ret = psp_init(psp);
+> > -     if (ret)
+> > -             goto e_irq;
+> > -
+> >       if (sp->set_psp_master_device)
+> >               sp->set_psp_master_device(sp);
+> >
+> > +     ret = psp_init(psp);
+> > +     if (ret)
+> > +             goto e_clear;
+> > +
+> >       /* Enable interrupt */
+> >       iowrite32(-1, psp->io_regs + psp->vdata->inten_reg);
+> >
+> > @@ -175,7 +175,10 @@ int psp_dev_init(struct sp_device *sp)
+> >
+> >       return 0;
+> >
+> > -e_irq:
+> > +e_clear:
+> > +     if (sp->clear_psp_master_device)
+> > +             sp->clear_psp_master_device(sp);
+> > +
+> >       sp_free_psp_irq(psp->sp, psp);
+> >  e_err:
+> >       sp->psp_data = NULL;
+> > diff --git a/drivers/crypto/ccp/tee-dev.c b/drivers/crypto/ccp/tee-dev.c
+> > index 5c9d47f3be37..5c43e6e166f1 100644
+> > --- a/drivers/crypto/ccp/tee-dev.c
+> > +++ b/drivers/crypto/ccp/tee-dev.c
+> > @@ -12,8 +12,9 @@
+> >  #include <linux/mutex.h>
+> >  #include <linux/delay.h>
+> >  #include <linux/slab.h>
+> > +#include <linux/dma-direct.h>
+> > +#include <linux/iommu.h>
+> >  #include <linux/gfp.h>
+> > -#include <linux/psp-sev.h>
+> >  #include <linux/psp-tee.h>
+> >
+> >  #include "psp-dev.h"
+> > @@ -21,25 +22,73 @@
+> >
+> >  static bool psp_dead;
+> >
+> > +struct psp_tee_buffer *psp_tee_alloc_buffer(unsigned long size)
+> > +{
+> > +     struct psp_device *psp = psp_get_master_device();
+> > +     struct psp_tee_buffer *buf;
+> > +     struct iommu_domain *dom;
+> > +
+> > +     if (!psp || !size)
+> > +             return NULL;
+> > +
+> > +     buf = kzalloc(sizeof(*buf), GFP_KERNEL);
+> > +     if (!buf)
+> > +             return NULL;
+> > +
+> > +     /* The pages allocated for PSP Trusted OS must be physically
+> > +      * contiguous in host (or machine) address space. Therefore,
+> > +      * use DMA API to allocate memory.
+> > +      */
+> > +
+> > +     buf->vaddr = dma_alloc_coherent(psp->dev, size, &buf->dma,
+> > +                                     GFP_KERNEL | __GFP_ZERO);
+>
+> dma_alloc_coherent memory is just as contiguous as __get_free_pages, and
+> calling dma_alloc_coherent from a guest does not guarantee that the memory is
+> contiguous in host memory either. The memory would look contiguous from the
+> device point of view thanks to the IOMMU though (in both cases). So this is not
+> about being contiguous but other properties that you might rely on (dma mask
+> most likely, or coherent if you're not running this on x86?).
+>
+> Can you confirm why this fixes things and update the comment to reflect that.
+>
+> > +     if (!buf->vaddr || !buf->dma) {
+> > +             kfree(buf);
+> > +             return NULL;
+> > +     }
+> > +
+> > +     buf->size = size;
+> > +
+> > +     /* Check whether IOMMU is present. If present, convert IOVA to
+> > +      * physical address. In the absence of IOMMU, the DMA address
+> > +      * is actually the physical address.
+> > +      */
+> > +
+> > +     dom = iommu_get_domain_for_dev(psp->dev);
+> > +     if (dom)
+> > +             buf->paddr = iommu_iova_to_phys(dom, buf->dma);
+> > +     else
+> > +             buf->paddr = buf->dma;
+>
+> This is confusing: you're storing GPA for the guest and HPA in case of the
+> host, to pass to the device. Let's talk about the host case.
+>
+> a) the device is behind an IOMMU. The DMA API gives you an IOVA, and the device
+> should be using the IOVA to access memory (because it's behind an IOMMU).
+> b) the device is not behind an IOMMU. The DMA API gives you a PA, the device
+> uses a PA.
+>
+> But in case a) you're extracting the PA, which means your device can bypass the
+> IOMMU, in which case the system should not think that it is behind an IOMMU. So
+> how does this work?
 
-This flaw was found using an experimental static analysis tool we are
-developing, APP-Miner, which has not been disclosed.
+IIRC, as per the AMD IOMMU spec[1], there is an ACPI IVRS table which
+details the devices on the platform and whether or not they
+participate with IOMMU.  This should carry through to the DMA API.  If
+the ACPI tables do not reflect this correctly we should add a quirk to
+the AMD IOMMU to properly handle the device.
 
-The allyesconfig build using GCC 9.3.0 shows no new warning. As we
-don't have a UDC device to test with, no runtime testing was able to
-be performed.
+Alex
 
-Signed-off-by: Jiasheng Jiang <jiasheng@iscas.ac.cn>
----
-Changelog:
+[1] - https://www.amd.com/en/support/tech-docs/amd-io-virtualization-technology-iommu-specification
 
-v2 -> v3:
+Alex
 
-1. Add information of finding tool and tests to commit message.
-
-v1 -> v2:
-
-1. Add "goto err;" when allocation fails.
----
- drivers/usb/gadget/udc/aspeed_udc.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/drivers/usb/gadget/udc/aspeed_udc.c b/drivers/usb/gadget/udc/aspeed_udc.c
-index 01968e2167f9..7dc2457c7460 100644
---- a/drivers/usb/gadget/udc/aspeed_udc.c
-+++ b/drivers/usb/gadget/udc/aspeed_udc.c
-@@ -1516,6 +1516,10 @@ static int ast_udc_probe(struct platform_device *pdev)
- 					  AST_UDC_EP_DMA_SIZE *
- 					  AST_UDC_NUM_ENDPOINTS,
- 					  &udc->ep0_buf_dma, GFP_KERNEL);
-+	if (!udc->ep0_buf) {
-+		rc = -ENOMEM;
-+		goto err;
-+	}
- 
- 	udc->gadget.speed = USB_SPEED_UNKNOWN;
- 	udc->gadget.max_speed = USB_SPEED_HIGH;
--- 
-2.25.1
-
+>
+> Jeremi
+>
+> > +
+> > +     return buf;
+> > +}
+> > +EXPORT_SYMBOL(psp_tee_alloc_buffer);
+> > +
+>
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
