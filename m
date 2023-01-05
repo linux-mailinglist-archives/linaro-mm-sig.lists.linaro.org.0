@@ -2,192 +2,224 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A8EA365CCBA
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Jan 2023 07:00:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B74EA65EA21
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Jan 2023 12:46:42 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 54BF23EF87
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Jan 2023 06:00:33 +0000 (UTC)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11on2040.outbound.protection.outlook.com [40.107.236.40])
-	by lists.linaro.org (Postfix) with ESMTPS id 6FDAC3E970
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 Jan 2023 06:00:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AB1323F045
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  5 Jan 2023 11:46:41 +0000 (UTC)
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+	by lists.linaro.org (Postfix) with ESMTPS id 4CC4E3EF9A
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  5 Jan 2023 11:46:37 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=hf3foG5q;
-	spf=pass (lists.linaro.org: domain of Rijo-john.Thomas@amd.com designates 40.107.236.40 as permitted sender) smtp.mailfrom=Rijo-john.Thomas@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mTyJUF3wD0ekX4hJegEAejwdaaKgz8puX2UiFXSGpYwjtBrtuStu5hhsfO78aPvcrc4tPN/T7u2joebOgSDAftyPJiBGGTbTgk0zZf/2PQgeshqBiNdBzzs1EH3GXTOj+CQGVTGVsFC+6I66Yj8xZvNiQbniqMLUGYJGuwDYFf7fdrzHAtinGLIu2Jh/aGC2m3JJxIrOV8Sj+nrL/8w7aQPpKB63+mlR12YZDeseKlzOnBSSa4nhyVdEfYdilW4NwWgiTqouQ7PYwkG8yKeSl9VmtZX+/qnV1i+QRqok6M2YTrXVGRvWLk5RHuayTh54tt8f17raOaw1YPyo/ZKRIg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ckGsqiQm5DW85wcy3gc0I5fViwbr2oFsS03UZr394pI=;
- b=J7Jnqso/BU7/J+xtTIg8PkiNcPLOEbdb8BbUXL/5NNuCO0V/L/4KFv1EGX0Pmzukbwi9Crzpbr1Z6d9ls+229q+ygSczFN2GcMD3I7QvcFhfxO2HjSBxfrNwNZu/N9/hIiWFtc5KmH5d704Yww6xSuvc6FRPwmce7qzT+RlVXIcPUysnP8/cQNeesKu9XGJqhG3vJ6/bgwF/DaT7SCNcLnoSsEJR9q4PY+Q8FkVGOr1hNE4DXkZBtkzakKrOwujkulrL9eRPHL1+Od2jYilPhY3uYI6imcbVc8l+RFWEZn2Jf5w5AtH5l+ohzXSNrpfQYBZATBa/UFFzqKaabS8IaQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ckGsqiQm5DW85wcy3gc0I5fViwbr2oFsS03UZr394pI=;
- b=hf3foG5q8Fc2K/Ah/dLXt/Bfro/FPB5LUFMPhf6pIqKjlRkzqIohT4Eu+DJ8lplhVCWCEcjy+MWClHeHv77Wgs2Nap43qz/RlSLjZGBNAnvbq/qaMP3h95C3Q0Zvwg7dGGB/AVA/93kCeDnh/FuaRz+peWoJvkSlUaXlZOu2DXM=
-Received: from CH0PR12MB5346.namprd12.prod.outlook.com (2603:10b6:610:d5::24)
- by BN9PR12MB5382.namprd12.prod.outlook.com (2603:10b6:408:103::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5944.19; Wed, 4 Jan
- 2023 06:00:27 +0000
-Received: from CH0PR12MB5346.namprd12.prod.outlook.com
- ([fe80::90bb:a277:ad67:6881]) by CH0PR12MB5346.namprd12.prod.outlook.com
- ([fe80::90bb:a277:ad67:6881%5]) with mapi id 15.20.5944.019; Wed, 4 Jan 2023
- 06:00:27 +0000
-Message-ID: <9d8e5548-cb5e-ffd7-72e3-b65dbcf74938@amd.com>
-Date: Wed, 4 Jan 2023 11:30:14 +0530
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.5.0
-To: Herbert Xu <herbert@gondor.apana.org.au>
-References: <651349f55060767a9a51316c966c1e5daa57a644.1670919979.git.Rijo-john.Thomas@amd.com>
- <20221215132917.GA11061@linuxonhyperv3.guj3yctzbm1etfxqx2vob5hsef.xx.internal.cloudapp.net>
- <5771ea99-eef7-7321-dd67-4c42c0cbb721@amd.com>
- <Y66gTtjZf5ZT0lP0@gondor.apana.org.au>
-Content-Language: en-US
-From: Rijo Thomas <Rijo-john.Thomas@amd.com>
-In-Reply-To: <Y66gTtjZf5ZT0lP0@gondor.apana.org.au>
-X-ClientProxiedBy: PN2PR01CA0212.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:ea::11) To CH0PR12MB5346.namprd12.prod.outlook.com
- (2603:10b6:610:d5::24)
+	dkim=pass header.d=ffwll.ch header.s=google header.b=GgmdHZf5;
+	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.221.41) smtp.mailfrom=daniel@ffwll.ch;
+	dmarc=none
+Received: by mail-wr1-f41.google.com with SMTP id co23so35870243wrb.4
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 05 Jan 2023 03:46:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ffwll.ch; s=google;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date:from:to
+         :cc:subject:date:message-id:reply-to;
+        bh=pOH8zi6RR/eYdWs9hLvLYkO27payH15xQ5o2JpEneN0=;
+        b=GgmdHZf5pmfo56symx+obJQB4jM3Rgz0vzH8laXYFoP4a2USJe8vM+l6iSETZFrl2Q
+         KcnnF8V+BUV4WySvRf1baceB71BkjA3SuwLuAYzP8bO3kLKD/mjHYN//hHIj4p39LmIW
+         /TlpUph5nVBMquBDEH2D0zm3HCtyPOyvqFVa8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=pOH8zi6RR/eYdWs9hLvLYkO27payH15xQ5o2JpEneN0=;
+        b=gT3RQEOL/NPX8Isy6JNC0SZA2pUFRPbmmqqQuHJNabNXgXvgTpJbq0Cwd4amab+tXy
+         UemyJVoqsouaqzTVxWQ/2NPYL/ImMeErx8gXKLfBsjdzuLQ9dBOLee1FAK3a8p/zWRKa
+         FNp+cLiVvkYoPNDXpZxLjTyXV63uWQmo7Fh395KRhH1DBlj1dHF7q0rfubQp4mqHSdGH
+         wPePgfWGQAga6VuyOaJDlkuMpFv99JNwy2xkTr+P1siGyd4bgXmRYnD6Ufx4+URagC6h
+         NYH7vUs6jP7GKH2KYRAWs/AakpiT1AST/ViHswz7z96Poxz/K3SV8J542wkHljmnE7xS
+         IWgw==
+X-Gm-Message-State: AFqh2kqmWj/qZdk3k+TiWc+AzinPNbmQD1Qux3tWb/T5EFmNhcNeqqWs
+	OEBHU910sDgyBqs6Y3Z3GUNzvQ==
+X-Google-Smtp-Source: AMrXdXuT1Ef/DURzQUPyUJiBfHJ9nC/lNGhv8tRkVkHajAgK8zACdpVtvcC+U0CawWYRbxYeWy9v4Q==
+X-Received: by 2002:adf:ed47:0:b0:28f:6fe6:f963 with SMTP id u7-20020adfed47000000b0028f6fe6f963mr15613610wro.22.1672919196343;
+        Thu, 05 Jan 2023 03:46:36 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id x16-20020a5d6510000000b002755e301eeasm34321842wru.100.2023.01.05.03.46.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 05 Jan 2023 03:46:35 -0800 (PST)
+Date: Thu, 5 Jan 2023 12:46:33 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <Y7a4mWBE1j/B46JP@phenom.ffwll.local>
+References: <b2dec9b3-03a7-e7ac-306e-1da024af8982@amd.com>
+ <346d6ad023ef8697aafd93ac1b100890f3637e44.camel@ndufresne.ca>
+ <CAF6AEGuqgWi0T=B9cb+Uy7aoWBPGQmZ3JbwFcK_45GbkY2nHPg@mail.gmail.com>
+ <Y3zeYnufgXJHQAbN@phenom.ffwll.local>
+ <ae9ba9ba-3ad3-af23-be66-1540862bf571@amd.com>
+ <20221123103338.238571e1@eldfell>
+ <Y35LcspZ385IC4lJ@phenom.ffwll.local>
+ <ba6e42f04c436d93bfa71d5dee7fd35ef2245073.camel@ndufresne.ca>
+ <Y4cw36MUO+ftP468@phenom.ffwll.local>
+ <24b660e2-ea38-7038-c182-156e1371fdcb@amd.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH0PR12MB5346:EE_|BN9PR12MB5382:EE_
-X-MS-Office365-Filtering-Correlation-Id: b086656b-d5ad-40f5-9667-08daee18fa34
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	bDfY8op8BBWlJs4yjPBe+Ypo56uLy5Xj6SABTN+8ckebfO6M/O0f19oUDDjkkGTN3bgBctFqUrCqs41wU3HCklOCD+KnkhFhd/ZW168QUtN2JqyMC2h1mKYWL+x7OhfNJp5R3Gho/XFGc/Ahqv2oets8wk26mroBXrDj+lqKlk9v6q0QFnNRGmp117g5KDpE/+QCkdrtkLO9azRqjVj5snj6g9SHkak0Ys5U+w2MCOJdfVUkovloCcY/fig4Qrgsc+ErcSkelWEJV3S1JETMgkmSJ+57sEfvslnERBSqmxuYSU1CaQ/JO22ENi0SwC+Esl8q7bMPZA5BoHE5juMm2skSRLLZjYl08tJG+d8MPE+XDMXVsTVfNf3ycP7n++OdfIDwXBovanH5+t6DOyQlu+nftLTZ+iAsRofQT1slgGcMt9wxZo+lUeSvz1LCEVXHgEOvSxTmjdXRk/3SdJAosLsR0Pvjg7M5r9Z3UTCk6j/WQWtQIska1iCpblDRud0vvJIxYTl69yfOciJbZLXy01pT6rZGJ4tVofMWDUpnjnA964KtzM/Pq76lMZLPk7VOB0h9nsI5dte8FiCvd0AUgcq0IV6/9qkscO/RPxvLo/0sYdkw+TO3t0xJgfLzEPnScytfTIyMDQvprAHjjdcZ144Ce2TZifFcZO1Tsf1zpzttbh/C+hDJrZQvU1sBtYEBvInys0agEkoCjcDWBUzqYTakpjfu9vGr5LI3AMdInHo=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH0PR12MB5346.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230022)(4636009)(39860400002)(136003)(396003)(366004)(346002)(376002)(451199015)(83380400001)(38100700002)(5660300002)(86362001)(2906002)(8936002)(7416002)(41300700001)(31696002)(6666004)(4326008)(6512007)(478600001)(53546011)(6506007)(186003)(316002)(26005)(8676002)(2616005)(6916009)(6486002)(66476007)(31686004)(66556008)(54906003)(66946007)(36756003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?ZjFtZHp4VDR2SWE5bjRaTXZjOXVUVGx2SmNIU3JNQVR4d1hpSWNpaHlEUXI0?=
- =?utf-8?B?QnEwWFNCeGRNVnpyN01PWW1EVW0vc1VmeEFQV1dmWVRMT25CRG9HR0dUL2RM?=
- =?utf-8?B?eDhKZXJIZDhTMnJ4b1JLa3NSekJ5ZGMzWGRxb05TdEZVVVc0YUZYNnFldGlp?=
- =?utf-8?B?M3BOY0FkbmFheFU2YjJER0lIRHBjRlJJNy9yMVNQd2JEWTN3VG1VTDRvYW52?=
- =?utf-8?B?Q2xTaUlEYU9aMVNGbXZOM3VlbUkxN3I2VjA2b3ZjTHM1SUpldmxxTVBXczc4?=
- =?utf-8?B?SXRnNmNHN1JJaHdlVTNQQkxxbDhmWjVaVjZqVS9sZDRROTNSWnIzdFlkWElz?=
- =?utf-8?B?ZzBjWUJmSTZsRnY1MVlHb0tlSFMwcGplOFI1TVF5ZjVCL2M2SDRDZGdSdks3?=
- =?utf-8?B?SnQxN1BBWFVZMTlVa1lYNkpMTDRJZHQzR2lxSEZHWU5sT2NwMU4rLy8yQW0x?=
- =?utf-8?B?ZDl2OVVmenUyYm4wQmtIcG5nY3NRZFNXeE43dXVVTk01WThjQ2dhNzMrM2tD?=
- =?utf-8?B?aFR4eDBvNCtYV1hCWi9pVW5NTWlwYlo0SFloS0RZZjhZOWxiMnQwVy90YVdH?=
- =?utf-8?B?S1VHU0VLTkUwVWozTmE3b3AyQ25YUWh0NTd2cklQN1FUNGNvWDZBcUFFQVNh?=
- =?utf-8?B?UzYrem9DMW1sY2ZIaDNVdlZ1MlFnazh5aXZ3VktHY3QxOTlDSkVnZ2llSFlE?=
- =?utf-8?B?RS9aTFBUekF4dHlzK2hWSXRXRm01NjdrSHQyUWJYTDh1Q2poTDRZVzhsOWZ0?=
- =?utf-8?B?MzBZMzdkL1FycHhnNWY4c3I4MUY3Uk1qMDh2RGFyQyt3WW13cy9iYkxiSHNq?=
- =?utf-8?B?Q20zN1ZaTFU3dEFmdTNjNTRSb3FBZFdWb3lMVjVMeDB0YXF5T1Z0dnoxTThs?=
- =?utf-8?B?ZFQyeE1nSXNWTnF3WHVkMFVxdnB1N2ZPNThzWmx1cVRMSHE0TXNFeDN3akxr?=
- =?utf-8?B?K28zVXpDaGhOWXBnaElNQTMvSkhnS1ZmVzJ4ekw3TjdnQXpPcGhuQmkvZFM3?=
- =?utf-8?B?ZTR2SFprNDNvd2lDREF4NXpUMCtIY2E0dnRUMkFTcHp2QXQ0S0Q4cjJxYUFh?=
- =?utf-8?B?SEdCSXZMb1JBTzBoVXBtTXpCODJDVFlSQ1lCbi93d1k3aVpNZ3c5cWttMDBa?=
- =?utf-8?B?WlhySnNWUFpGb0pCM1o1dHdqckdnMS92SEdXemwxRkp1by9LSU5JZlhsL1hp?=
- =?utf-8?B?OElmMlNQMENRTHNSa1JBR3pRdHI0YjhleVZiNVVxS1lwcWVNVjFOdWxmcTds?=
- =?utf-8?B?bUhlbHNrMGlKUlVjV3c5bDFFZmZzYjBkL2hwLzVVbUIyU0Q0cmZ5LzZnditT?=
- =?utf-8?B?WWJVSmRiTEthTUxTVk1DOVo3R2t2alBOZUxybU5BY2gvcW9Edm5VYTRpbldy?=
- =?utf-8?B?RXFhSnV0VG8vbXNnZ0g3b2lJeEVFZFduV3ZTVlZXbEVrRVFzZ3Z3K1B6Qjdv?=
- =?utf-8?B?MjFoRDIveTQvekl0MzRRVWpKcktsMGN4dW1zQS9ncU5FYTBlOWVWbThXVXEx?=
- =?utf-8?B?L04ycU5aRXA1Y2czVk82NG1wNStGZThHMThLVU1xcisxTVVlQXBtVktONll0?=
- =?utf-8?B?azRZS05xZHdDL3pUUHcxcy9BYVRra1VEdlBhZDNkTEFWNzRnSHZ0czRoRkVk?=
- =?utf-8?B?U1cyb1JFOXM1cG12QUVJU2hvK3h3amhybXM1VlFCalJVcTlCZzJuZjZIVy9Z?=
- =?utf-8?B?eGVNVDMwY2N6bm40M2VGRDcrRGphNlZEUEVqTnJxTUFXVWdwQU5iL0lXSFFk?=
- =?utf-8?B?R1J4blBsZVhpQ2w4Y1VlNzR0bjJyMVlaQmVGeS9BaDk4cUNHenpvZEZmdUto?=
- =?utf-8?B?Tkt3Z1l4RlMwb3JtZGMzQlVYdm5GdlNhcVcvQng3cGlMTWFaYmg3M2I3UHA3?=
- =?utf-8?B?QTllYkpkaUlQMjJiYWFndS9XQVhNK1Fud3ErTzdoNVlTWjRicFFJQ2g4QUhh?=
- =?utf-8?B?b2NTbE9UNE9vMDZaSGNLVGJMTXV1ZnlZNnIrQ08xL2l4ZkNmQzRYc2RrR1Fu?=
- =?utf-8?B?S2x5bXBsdzJKcDZsWnZkc1orajJsMnhHcWdOVCtFN2VnbGJWTjg2SFo1czJa?=
- =?utf-8?B?OFFNMzJUTkwzTjVvTDNXcmtXMGdkeUl5UTd1c3JDRkxGWXdQNlZMYlBhOEJ4?=
- =?utf-8?Q?I5q3t1iwHsxt9yRvvU3Ec0htZ?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b086656b-d5ad-40f5-9667-08daee18fa34
-X-MS-Exchange-CrossTenant-AuthSource: CH0PR12MB5346.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Jan 2023 06:00:27.4315
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +V1TbRXLxm9puRt/WlLtCxFwa3NIk71uuOxRpppgBdgE+TLyWUXPgXkBP5AsGnUZkK32bCze8zjV+p+t/c/G/Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR12MB5382
-X-Spamd-Result: default: False [-5.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+Content-Disposition: inline
+In-Reply-To: <24b660e2-ea38-7038-c182-156e1371fdcb@amd.com>
+X-Operating-System: Linux phenom 5.19.0-2-amd64 
+X-Spamd-Result: default: False [-3.30 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	MID_RHS_MATCH_FROM(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.980];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.236.40:from];
-	RCVD_COUNT_THREE(0.00)[3];
-	FROM_HAS_DN(0.00)[];
+	R_SPF_NA(0.00)[no SPF record];
+	NEURAL_HAM(-0.00)[-1.000];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[ffwll.ch,ndufresne.ca,gmail.com,chromium.org,pengutronix.de,fooishbar.org,linaro.org,lists.freedesktop.org,lists.linaro.org,vger.kernel.org];
+	RCVD_IN_DNSWL_NONE(0.00)[209.85.221.41:from];
+	DKIM_TRACE(0.00)[ffwll.ch:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[amd.com:+];
-	TO_DN_SOME(0.00)[]
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	TO_DN_SOME(0.00)[];
+	DMARC_NA(0.00)[ffwll.ch];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[3];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.221.41:from]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 6FDAC3E970
-X-Spamd-Bar: ----
-Message-ID-Hash: UHI2TVBZ3QIBMR2K6WGNUS7IQTYDO6XX
-X-Message-ID-Hash: UHI2TVBZ3QIBMR2K6WGNUS7IQTYDO6XX
-X-MailFrom: Rijo-john.Thomas@amd.com
+X-Rspamd-Queue-Id: 4CC4E3EF9A
+X-Spamd-Bar: ---
+Message-ID-Hash: DCYOILBM5AUISPIW75UWBYSHAZTIPAIH
+X-Message-ID-Hash: DCYOILBM5AUISPIW75UWBYSHAZTIPAIH
+X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jeremi Piotrowski <jpiotrowski@linux.microsoft.com>, Tom Lendacky <thomas.lendacky@amd.com>, John Allen <john.allen@amd.com>, "David S . Miller" <davem@davemloft.net>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, linux-crypto@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Mythri PK <Mythri.Pandeshwarakrishna@amd.com>, Jeshwanth <JESHWANTHKUMAR.NK@amd.com>, Devaraj Rangasamy <Devaraj.Rangasamy@amd.com>, stable@vger.kernel.org, Jens Wiklander <jens.wiklander@linaro.org>
+CC: Daniel Vetter <daniel@ffwll.ch>, Nicolas Dufresne <nicolas@ndufresne.ca>, Pekka Paalanen <ppaalanen@gmail.com>, Rob Clark <robdclark@gmail.com>, Tomasz Figa <tfiga@chromium.org>, Daniel Stone <daniel@fooishbar.org>, sumit.semwal@linaro.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] crypto: ccp - Allocate TEE ring and cmd buffer using DMA APIs
+Subject: [Linaro-mm-sig] Re: Try to address the DMA-buf coherency problem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UHI2TVBZ3QIBMR2K6WGNUS7IQTYDO6XX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DCYOILBM5AUISPIW75UWBYSHAZTIPAIH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, Dec 02, 2022 at 04:27:08PM +0100, Christian K=F6nig wrote:
+> Am 30.11.22 um 11:30 schrieb Daniel Vetter:
+> > On Fri, Nov 25, 2022 at 11:40:04AM -0500, Nicolas Dufresne wrote:
+> > > Le mercredi 23 novembre 2022 =E0 17:33 +0100, Daniel Vetter a =E9crit=
+=A0:
+> > > > On Wed, Nov 23, 2022 at 10:33:38AM +0200, Pekka Paalanen wrote:
+> > > > > On Tue, 22 Nov 2022 18:33:59 +0100
+> > > > > Christian K=F6nig <christian.koenig@amd.com> wrote:
+> > > > >=20
+> > > > > > We should have come up with dma-heaps earlier and make it clear=
+ that
+> > > > > > exporting a DMA-buf from a device gives you something device sp=
+ecific
+> > > > > > which might or might not work with others.
+> > > > > >=20
+> > > > > > Apart from that I agree, DMA-buf should be capable of handling =
+this.
+> > > > > > Question left is what documentation is missing to make it clear=
+ how
+> > > > > > things are supposed to work?
+> > > > > Perhaps somewhat related from Daniel Stone that seems to have been
+> > > > > forgotten:
+> > > > > https://nam11.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F=
+%2Flore.kernel.org%2Fdri-devel%2F20210905122742.86029-1-daniels%40collabora=
+.com%2F&amp;data=3D05%7C01%7Cchristian.koenig%40amd.com%7C45786a08e6dc4af28=
+16508dad2bdf957%7C3dd8961fe4884e608e11a82d994e183d%7C0%7C0%7C63805401129352=
+1624%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik=
+1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=3DGjsoJGNoPozTS2SWeeirURzQat=
+I5vfl9%2B%2BfzoavgTbw%3D&amp;reserved=3D0
+> > > > >=20
+> > > > > It aimed mostly at userspace, but sounds to me like the coherency=
+ stuff
+> > > > > could use a section of its own there?
+> > > > Hm yeah it would be great to land that and then eventually extend. =
+Daniel?
+> > > There is a lot of things documented in this document that have been s=
+aid to be
+> > > completely wrong user-space behaviour in this thread. But it seems to=
+ pre-date
+> > > the DMA Heaps. The document also assume that DMA Heaps completely sol=
+ves the CMA
+> > > vs system memory issue. But it also underline a very important aspect=
+, that
+> > > userland is not aware which one to use. What this document suggest th=
+ough seems
+> > > more realist then what has been said here.
+> > >=20
+> > > Its overall a great document, it unfortunate that it only makes it in=
+to the DRM
+> > > mailing list.
+> > The doc is more about document the current status quo/best practices,
+> > which is very much not using dma-heaps.
+> >=20
+> > The issue there is that currently userspace has no idea which dma-heap =
+to
+> > use for shared buffers, plus not all allocators are exposed through hea=
+ps
+> > to begin with. We had this noted as a todo item (add some device->heap
+> > sysfs links was the idea), until that's done all you can do is hardcode
+> > the right heaps for the right usage in userspace, which is what android
+> > does. Plus android doesn't have dgpu, so doesn't need the missing ttm
+> > heap.
+>=20
+> Hui? Why do you think we should have a TTM heap in the first place?
 
+[sorry for the really late reply]
 
-On 12/30/2022 1:54 PM, Herbert Xu wrote:
-> On Fri, Dec 23, 2022 at 05:45:24PM +0530, Rijo Thomas wrote:
->>
->>> dma_alloc_coherent memory is just as contiguous as __get_free_pages, and
->>> calling dma_alloc_coherent from a guest does not guarantee that the memory is
->>> contiguous in host memory either. The memory would look contiguous from the
->>> device point of view thanks to the IOMMU though (in both cases). So this is not
->>> about being contiguous but other properties that you might rely on (dma mask
->>> most likely, or coherent if you're not running this on x86?).
->>>
->>> Can you confirm why this fixes things and update the comment to reflect that.
->>
->> I see what you are saying.
->>
->> We verified this in Xen Dom0 PV guest, where dma_alloc_coherent() returned a memory
->> that is contiguous in machine address space, and the machine address was returned
->> in the dma handle (buf->dma).
-> 
-> So is this even relevant to the mainstream kernel or is this patch
-> only needed for Xen Dom0?
-> 
-> Thanks,
+Extremely late reply, but p2p buffer sharing when you want it in vram is
+only something ttm can provide you. And if the goal is to have all buffer
+sharing needs served by dma-heaps, then eventually that'll be needed too.
 
-Herbert,
+But probably totally fine to just not have it for another few years
+(decades?).
 
-This patch is no longer relevant to the mainstream kernel.
+> As far as I can see we need three different ways of allocation:
+> 1. Normal system memory.
+> 2. CMA based.
+> 3. Device specific.
+>=20
+> When any of the participating devices needs CMA then user space must use =
+the
+> CMA heap, when any of the participating devices needs device specific mem=
+ory
+> then user space must use device specific memory (from that device).
+>=20
+> It still can be that two devices can't talk with each other because both
+> needs the buffer to be allocated from device specific memory for a
+> particular use case, but at least all the cases for both none CPU cache
+> coherent ARM devices as well as device specific memory for scanout should=
+ be
+> handled with this.
 
-Thanks,
-Rijo
+Yeah on ARM this should be enough.
+-Daniel
+
+>=20
+> Regards,
+> Christian.
+>=20
+> >=20
+> > But yeah the long-term aspiration also hasn't changed, because the
+> > dma-heap todo list is also very, very old by now :-/
+> > -Daniel
+>=20
+
+--=20
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
