@@ -2,106 +2,94 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E025663338
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 Jan 2023 22:39:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 17A00664BFD
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Jan 2023 20:08:20 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9763C3F244
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  9 Jan 2023 21:39:28 +0000 (UTC)
-Received: from mail-oi1-f202.google.com (mail-oi1-f202.google.com [209.85.167.202])
-	by lists.linaro.org (Postfix) with ESMTPS id 856943EF9F
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  9 Jan 2023 21:38:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9B1073EEAE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 10 Jan 2023 19:08:18 +0000 (UTC)
+Received: from mail-yw1-f171.google.com (mail-yw1-f171.google.com [209.85.128.171])
+	by lists.linaro.org (Postfix) with ESMTPS id 271D23EC0F
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Jan 2023 19:08:16 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20210112 header.b="B/4nGCkb";
-	spf=pass (lists.linaro.org: domain of 3V4m8YwkKDYAxnqivgmivksskpi.gsqpmrevs-qq-wmkpmwxw.pmrevs.svk@flex--tjmercier.bounces.google.com designates 209.85.167.202 as permitted sender) smtp.mailfrom=3V4m8YwkKDYAxnqivgmivksskpi.gsqpmrevs-qq-wmkpmwxw.pmrevs.svk@flex--tjmercier.bounces.google.com;
+	dkim=pass header.d=google.com header.s=20210112 header.b=kNneCXnU;
+	spf=pass (lists.linaro.org: domain of tjmercier@google.com designates 209.85.128.171 as permitted sender) smtp.mailfrom=tjmercier@google.com;
 	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-oi1-f202.google.com with SMTP id ex11-20020a056808298b00b003612dac2af8so3085995oib.5
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 09 Jan 2023 13:38:32 -0800 (PST)
+Received: by mail-yw1-f171.google.com with SMTP id 00721157ae682-4c24993965eso160325017b3.12
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 10 Jan 2023 11:08:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=bWOMIyzYML+GnCVLadZ/bfKF2vZbEfEtiwoUNHe8I8g=;
-        b=B/4nGCkbSar9JPAjXdE2nMB2agrlgj7EbvSmEmaJ+FSJY/iiSdTcvg5MdvBrbYHsHT
-         aJRIFm3Wr5pW8VLrvwXyFhP3E3TT9U5sZcpJvG8FV1JDpbHJwB7rtgFFGgNK9LDaVjog
-         Pxt5yN9L6hOC7uq/3GfuD7+lUUQyPP+3VSsa17lsU0G2BkfMYQpcL3C/SsXM7xi372Zn
-         fNO5FJJkb2PUBmghvakzxN8uNK9UFoT5CrG30MTZzLQBuir0MX/aQWG2h1G8i+8H8PX5
-         4fz1y8odBf62yg98vv3M9x+vuJXu9iZH5joEdWq+vYgTfLpmFQLvIEwSeteAmim8RvJX
-         MOWw==
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=eB6zDLr3jptFznjCY+cJ6LV+lGxSv6mlgWXUb4GRVLE=;
+        b=kNneCXnUbGtaezFZly8EELiFvrMI8uCxra4hUNp5F8h55KzRcraX6HTcL/eoX2slxU
+         5eIut2BW8V2KxE4ECFGrtM+afRxG/KTeduZVHs5S8WSaTnrTAKUpQ9LGjuGWxJrrW+Rb
+         HL3W/mk5/ZWXlu153IFY6bWd5ku/c5DQ1P/WEPBZYa8NWqLe/FC6eZ+nVcj+NfNmapAJ
+         hhVfZ0STKoz+rrAswTAQZmVDSFu+39MDK4KoXl6hbj290qVSa10/hwUiXT3+ysS6+4M+
+         Fn8gtLHQRlRNe7nlS5w5XbzHPW/6rq2M3KUaxPGuT+9WamrHs6La624Sedcyvl8v1GSa
+         pxXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=bWOMIyzYML+GnCVLadZ/bfKF2vZbEfEtiwoUNHe8I8g=;
-        b=7nRD5UcIVOhm+SITbNEq5N0AoREu+q9N0fOIIHB4FX/iMNew+S3iVNrIFmDUwshKUT
-         vHHUcikRBMywxD0LAHugg1dej6prjsgSDLLE6Iaf1TFZVoj8DgQtGcEBFMFuCtMugNnb
-         75oo9K06hbRR6mFPtfL3glC6y6yHT/hq5urDRM4d2tnk9Tc/+a9A+JWhsKhGBxiQQyt3
-         qWTdQLZ0nBWSbNXQDfPScah4k0xjy9rZhGK3uzNULdRiZ3O/0bW4nMdNDzi193dhVU1o
-         zXhPXdf47dSQQVvhMWf95sDtGIZvgroft6RT20l1wmsLVbt4Rk5zzFYxFn4bS0fWZcKY
-         qHfQ==
-X-Gm-Message-State: AFqh2kpqHJ+xkVbtd+E5DqNzk5w7SY0R//PnfFPKhEw1gzsjs0gZEwDP
-	LwSysjpcpRerCc89N1AlSv0A1rbJRerDnWc=
-X-Google-Smtp-Source: AMrXdXt2b4GmnQbBAnictl+P9Qid5OxsP4Aa+Rreix4gjPXQPZYSTzo2urBLSPG5NnFGp9zwycV58Z5FT1JxcHQ=
-X-Received: from tj.c.googlers.com ([fda3:e722:ac3:cc00:20:ed76:c0a8:53a])
- (user=tjmercier job=sendgmr) by 2002:a05:6870:6327:b0:15b:d2e:d059 with SMTP
- id s39-20020a056870632700b0015b0d2ed059mr587093oao.179.1673300311796; Mon, 09
- Jan 2023 13:38:31 -0800 (PST)
-Date: Mon,  9 Jan 2023 21:38:06 +0000
-In-Reply-To: <20230109213809.418135-1-tjmercier@google.com>
-Mime-Version: 1.0
-References: <20230109213809.418135-1-tjmercier@google.com>
-X-Mailer: git-send-email 2.39.0.314.g84b9a713c41-goog
-Message-ID: <20230109213809.418135-4-tjmercier@google.com>
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=eB6zDLr3jptFznjCY+cJ6LV+lGxSv6mlgWXUb4GRVLE=;
+        b=1I2ctDCxkRK1xQXfLE398FnN0ay/M6NsF7IjgyLESCiemxV/bPNlNpbLq+HtfWNshk
+         X8H9FOGwh3SjR45OdrqiGbe+pgeZ5hLm3f8Uhf5UJUyiWL5eaJj3Lbl3ALc+xQH9oqj/
+         7wVapfIEQJCCuh5Vt4gtjS/hIKET/nL82kxezHy2FujVWCzCTZBbwhJFgpi0Z8tVOmHd
+         LlfwQROgl5hWvXzTI7pBW6CJv6CJYR7lslesVYy1PwSsQaBf1PSVAutSJzJFpvH+9MNC
+         l506tuKgFY5T2GnUYsv6zNCiPbZawFxEPttHSicUmLwhusUO7JFFD84b3FzphT5VZRDQ
+         wLog==
+X-Gm-Message-State: AFqh2koFvKm1RCQCCCSwG67Rb5K6r+lvY1IlDZ26JUWouXqJNcZ+WPQh
+	n3ulF5BGK1PPKk5sj3gcLSCWW1zOXcj0k9qTYulxbw==
+X-Google-Smtp-Source: AMrXdXuWt8GL2cvwM/11siCYrRBKZLbeyNUoNJAwEvUjJQicN0t0jFrxPGHJ56q+FKvR1iOeW+XS0IBv7xTbyCMXxzs=
+X-Received: by 2002:a05:690c:b88:b0:3e3:866c:a51b with SMTP id
+ ck8-20020a05690c0b8800b003e3866ca51bmr218703ywb.439.1673377695560; Tue, 10
+ Jan 2023 11:08:15 -0800 (PST)
+MIME-Version: 1.0
+References: <20230109213809.418135-1-tjmercier@google.com> <20230109213809.418135-2-tjmercier@google.com>
+ <Y70oqxejnUqkJVPx@dhcp22.suse.cz>
+In-Reply-To: <Y70oqxejnUqkJVPx@dhcp22.suse.cz>
 From: "T.J. Mercier" <tjmercier@google.com>
-To: tjmercier@google.com, Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
-	Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"=?UTF-8?q?Arve=20Hj=C3=B8nnev=C3=A5g?=" <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>,
-	Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>,
-	Carlos Llamas <cmllamas@google.com>, Suren Baghdasaryan <surenb@google.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>
-X-Spamd-Result: default: False [-7.70 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
+Date: Tue, 10 Jan 2023 11:08:04 -0800
+Message-ID: <CABdmKX3hBX1O8fJ2Zz0ajL=f+tROqWe-Kzr7oPjs46qBYBXV1g@mail.gmail.com>
+To: Michal Hocko <mhocko@suse.com>
+X-Spamd-Result: default: False [-5.50 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	MV_CASE(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	RCVD_IN_DNSWL_HI(-0.50)[209.85.167.202:from];
-	FORGED_SENDER(0.30)[tjmercier@google.com,3V4m8YwkKDYAxnqivgmivksskpi.gsqpmrevs-qq-wmkpmwxw.pmrevs.svk@flex--tjmercier.bounces.google.com];
+	RCVD_IN_DNSWL_HI(-0.50)[209.85.128.171:from];
 	R_DKIM_ALLOW(-0.20)[google.com:s=20210112];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mail-oi1-f202.google.com:rdns,mail-oi1-f202.google.com:helo];
-	NEURAL_HAM(-0.00)[-0.506];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.202:from];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	ARC_NA(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[tjmercier@google.com,3V4m8YwkKDYAxnqivgmivksskpi.gsqpmrevs-qq-wmkpmwxw.pmrevs.svk@flex--tjmercier.bounces.google.com];
-	DKIM_TRACE(0.00)[google.com:+];
-	FROM_HAS_DN(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_COUNT_TWO(0.00)[2];
 	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2]
+	FROM_EQ_ENVFROM(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	NEURAL_HAM(-0.00)[-0.996];
+	DKIM_TRACE(0.00)[google.com:+];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.171:from];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	FROM_HAS_DN(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
+	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 856943EF9F
-X-Spamd-Bar: -------
-Message-ID-Hash: MR53H4EJSILION27DM6JUIO7ALOMT2EC
-X-Message-ID-Hash: MR53H4EJSILION27DM6JUIO7ALOMT2EC
-X-MailFrom: 3V4m8YwkKDYAxnqivgmivksskpi.gsqpmrevs-qq-wmkpmwxw.pmrevs.svk@flex--tjmercier.bounces.google.com
+X-Rspamd-Queue-Id: 271D23EC0F
+X-Spamd-Bar: -----
+Message-ID-Hash: Z7CMRTEENIE7PIAMHWRIT4KMBNVRM7B3
+X-Message-ID-Hash: Z7CMRTEENIE7PIAMHWRIT4KMBNVRM7B3
+X-MailFrom: tjmercier@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: android-mm@google.com, jstultz@google.com, Hridya Valsaraju <hridya@google.com>, cgroups@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>, Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Roman Gushchin <roman.gushchin@linux.dev>, Shakeel Butt <shakeelb@google.com>, Muchun Song <muchun.song@linux.dev>, Andrew Morton <akpm@linux-foundation.org>, android-mm@google.com, jstultz@google.com, cgroups@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 3/4] binder: Add flags to relinquish ownership of fds
+Subject: [Linaro-mm-sig] Re: [PATCH 1/4] memcg: Track exported dma-buffers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MR53H4EJSILION27DM6JUIO7ALOMT2EC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Z7CMRTEENIE7PIAMHWRIT4KMBNVRM7B3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -111,240 +99,43 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-From: Hridya Valsaraju <hridya@google.com>
+On Tue, Jan 10, 2023 at 12:58 AM Michal Hocko <mhocko@suse.com> wrote:
+>
+> On Mon 09-01-23 21:38:04, T.J. Mercier wrote:
+> > When a buffer is exported to userspace, use memcg to attribute the
+> > buffer to the allocating cgroup until all buffer references are
+> > released.
+> >
+> > Unlike the dmabuf sysfs stats implementation, this memcg accounting
+> > avoids contention over the kernfs_rwsem incurred when creating or
+> > removing nodes.
+>
+> I am not familiar with dmabuf infrastructure so please bear with me.
+> AFAIU this patch adds a dmabuf specific counter to find out the amount
+> of dmabuf memory used. But I do not see any actual charging implemented
+> for that memory.
+>
+> I have looked at two random users of dma_buf_export cma_heap_allocate
+> and it allocates pages to back the dmabuf (AFAIU) by cma_alloc
+> which doesn't account to memcg, system_heap_allocate uses
+> alloc_largest_available which relies on order_flags which doesn't seem
+> to ever use __GFP_ACCOUNT.
+>
+> This would mean that the counter doesn't represent any actual memory
+> reflected in the overall memory consumption of a memcg. I believe this
+> is rather unexpected and confusing behavior. While some counters
+> overlap and their sum would exceed the charged memory we do not have any
+> that doesn't correspond to any memory (at least not for non-root memcgs).
+>
+> --
+> Michal Hocko
+> SUSE Labs
 
-This patch introduces flags BINDER_FD_FLAG_XFER_CHARGE, and
-BINDER_FD_FLAG_XFER_CHARGE that a process sending an individual fd or
-fd array to another process over binder IPC can set to relinquish
-ownership of the fd(s) being sent for memory accounting purposes. If the
-flag is found to be set during the fd or fd array translation and the
-fd is for a DMA-BUF, the buffer is uncharged from the sender's cgroup
-and charged to the receiving process's cgroup instead.
-
-It is up to the sending process to ensure that it closes the fds
-regardless of whether the transfer failed or succeeded.
-
-Most graphics shared memory allocations in Android are done by the
-graphics allocator HAL process. On requests from clients, the HAL
-process allocates memory and sends the fds to the clients over binder
-IPC. The graphics allocator HAL will not retain any references to the
-buffers. When the HAL sets *_FLAG_XFER_CHARGE for fd arrays holding
-DMA-BUF fds, or individual fd objects, binder will transfer the charge
-for the buffer from the allocator process cgroup to the client process
-cgroup.
-
-The pad [1] and pad_flags [2] fields of binder_fd_object and
-binder_fda_array_object come from alignment with flat_binder_object and
-have never been exposed for use from userspace. This new flags use
-follows the pattern set by binder_buffer_object.
-
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/include/uapi/linux/android/binder.h?id=feba3900cabb8e7c87368faa28e7a6936809ba22
-[2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/include/uapi/linux/android/binder.h?id=5cdcf4c6a638591ec0e98c57404a19e7f9997567
-
-Signed-off-by: Hridya Valsaraju <hridya@google.com>
-Signed-off-by: T.J. Mercier <tjmercier@google.com>
----
- Documentation/admin-guide/cgroup-v2.rst |  3 ++-
- drivers/android/binder.c                | 31 +++++++++++++++++++++----
- drivers/dma-buf/dma-buf.c               |  4 +---
- include/linux/dma-buf.h                 |  1 +
- include/uapi/linux/android/binder.h     | 23 ++++++++++++++----
- 5 files changed, 50 insertions(+), 12 deletions(-)
-
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index 538ae22bc514..d225295932c0 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -1457,7 +1457,8 @@ PAGE_SIZE multiple when read back.
- 
- 	  dmabuf (npn)
- 		Amount of memory used for exported DMA buffers allocated by the cgroup.
--		Stays with the allocating cgroup regardless of how the buffer is shared.
-+		Stays with the allocating cgroup regardless of how the buffer is shared
-+		unless explicitly transferred.
- 
- 	  workingset_refault_anon
- 		Number of refaults of previously evicted anonymous pages.
-diff --git a/drivers/android/binder.c b/drivers/android/binder.c
-index 880224ec6abb..9830848c8d25 100644
---- a/drivers/android/binder.c
-+++ b/drivers/android/binder.c
-@@ -42,6 +42,7 @@
- 
- #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
- 
-+#include <linux/dma-buf.h>
- #include <linux/fdtable.h>
- #include <linux/file.h>
- #include <linux/freezer.h>
-@@ -2237,7 +2238,7 @@ static int binder_translate_handle(struct flat_binder_object *fp,
- 	return ret;
- }
- 
--static int binder_translate_fd(u32 fd, binder_size_t fd_offset,
-+static int binder_translate_fd(u32 fd, binder_size_t fd_offset, __u32 flags,
- 			       struct binder_transaction *t,
- 			       struct binder_thread *thread,
- 			       struct binder_transaction *in_reply_to)
-@@ -2275,6 +2276,26 @@ static int binder_translate_fd(u32 fd, binder_size_t fd_offset,
- 		goto err_security;
- 	}
- 
-+	if (IS_ENABLED(CONFIG_MEMCG) && (flags & BINDER_FD_FLAG_XFER_CHARGE)) {
-+		struct dma_buf *dmabuf;
-+
-+		if (unlikely(!is_dma_buf_file(file))) {
-+			binder_user_error(
-+				"%d:%d got transaction with XFER_CHARGE for non-dmabuf fd, %d\n",
-+				proc->pid, thread->pid, fd);
-+			ret = -EINVAL;
-+			goto err_dmabuf;
-+		}
-+
-+		dmabuf = file->private_data;
-+		ret = dma_buf_transfer_charge(dmabuf, target_proc->tsk);
-+		if (ret) {
-+			pr_warn("%d:%d Unable to transfer DMA-BUF fd charge to %d\n",
-+				proc->pid, thread->pid, target_proc->pid);
-+			goto err_xfer;
-+		}
-+	}
-+
- 	/*
- 	 * Add fixup record for this transaction. The allocation
- 	 * of the fd in the target needs to be done from a
-@@ -2294,6 +2315,8 @@ static int binder_translate_fd(u32 fd, binder_size_t fd_offset,
- 	return ret;
- 
- err_alloc:
-+err_xfer:
-+err_dmabuf:
- err_security:
- 	fput(file);
- err_fget:
-@@ -2604,7 +2627,7 @@ static int binder_translate_fd_array(struct list_head *pf_head,
- 
- 		ret = copy_from_user(&fd, sender_ufda_base + sender_uoffset, sizeof(fd));
- 		if (!ret)
--			ret = binder_translate_fd(fd, offset, t, thread,
-+			ret = binder_translate_fd(fd, offset, fda->flags, t, thread,
- 						  in_reply_to);
- 		if (ret)
- 			return ret > 0 ? -EINVAL : ret;
-@@ -3383,8 +3406,8 @@ static void binder_transaction(struct binder_proc *proc,
- 			struct binder_fd_object *fp = to_binder_fd_object(hdr);
- 			binder_size_t fd_offset = object_offset +
- 				(uintptr_t)&fp->fd - (uintptr_t)fp;
--			int ret = binder_translate_fd(fp->fd, fd_offset, t,
--						      thread, in_reply_to);
-+			int ret = binder_translate_fd(fp->fd, fd_offset, fp->flags,
-+						      t, thread, in_reply_to);
- 
- 			fp->pad_binder = 0;
- 			if (ret < 0 ||
-diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-index fd6c5002032b..a65b42433099 100644
---- a/drivers/dma-buf/dma-buf.c
-+++ b/drivers/dma-buf/dma-buf.c
-@@ -34,8 +34,6 @@
- 
- #include "dma-buf-sysfs-stats.h"
- 
--static inline int is_dma_buf_file(struct file *);
--
- struct dma_buf_list {
- 	struct list_head head;
- 	struct mutex lock;
-@@ -527,7 +525,7 @@ static const struct file_operations dma_buf_fops = {
- /*
-  * is_dma_buf_file - Check if struct file* is associated with dma_buf
-  */
--static inline int is_dma_buf_file(struct file *file)
-+int is_dma_buf_file(struct file *file)
- {
- 	return file->f_op == &dma_buf_fops;
- }
-diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
-index 6aa128d76aa7..092d572ce528 100644
---- a/include/linux/dma-buf.h
-+++ b/include/linux/dma-buf.h
-@@ -595,6 +595,7 @@ dma_buf_attachment_is_dynamic(struct dma_buf_attachment *attach)
- 	return !!attach->importer_ops;
- }
- 
-+int is_dma_buf_file(struct file *file);
- struct dma_buf_attachment *dma_buf_attach(struct dma_buf *dmabuf,
- 					  struct device *dev);
- struct dma_buf_attachment *
-diff --git a/include/uapi/linux/android/binder.h b/include/uapi/linux/android/binder.h
-index e72e4de8f452..696c2bdb8a7e 100644
---- a/include/uapi/linux/android/binder.h
-+++ b/include/uapi/linux/android/binder.h
-@@ -91,14 +91,14 @@ struct flat_binder_object {
- /**
-  * struct binder_fd_object - describes a filedescriptor to be fixed up.
-  * @hdr:	common header structure
-- * @pad_flags:	padding to remain compatible with old userspace code
-+ * @flags:	One or more BINDER_FD_FLAG_* flags
-  * @pad_binder:	padding to remain compatible with old userspace code
-  * @fd:		file descriptor
-  * @cookie:	opaque data, used by user-space
-  */
- struct binder_fd_object {
- 	struct binder_object_header	hdr;
--	__u32				pad_flags;
-+	__u32				flags;
- 	union {
- 		binder_uintptr_t	pad_binder;
- 		__u32			fd;
-@@ -107,6 +107,17 @@ struct binder_fd_object {
- 	binder_uintptr_t		cookie;
- };
- 
-+enum {
-+	/**
-+	 * @BINDER_FD_FLAG_XFER_CHARGE
-+	 *
-+	 * When set, the sender of a binder_fd_object wishes to relinquish ownership of the fd for
-+	 * memory accounting purposes. If the fd is for a DMA-BUF, the buffer is uncharged from the
-+	 * sender's cgroup and charged to the receiving process's cgroup instead.
-+	 */
-+	BINDER_FD_FLAG_XFER_CHARGE = 0x01,
-+};
-+
- /* struct binder_buffer_object - object describing a userspace buffer
-  * @hdr:		common header structure
-  * @flags:		one or more BINDER_BUFFER_* flags
-@@ -141,7 +152,7 @@ enum {
- 
- /* struct binder_fd_array_object - object describing an array of fds in a buffer
-  * @hdr:		common header structure
-- * @pad:		padding to ensure correct alignment
-+ * @flags:		One or more BINDER_FDA_FLAG_* flags
-  * @num_fds:		number of file descriptors in the buffer
-  * @parent:		index in offset array to buffer holding the fd array
-  * @parent_offset:	start offset of fd array in the buffer
-@@ -162,12 +173,16 @@ enum {
-  */
- struct binder_fd_array_object {
- 	struct binder_object_header	hdr;
--	__u32				pad;
-+	__u32				flags;
- 	binder_size_t			num_fds;
- 	binder_size_t			parent;
- 	binder_size_t			parent_offset;
- };
- 
-+enum {
-+	BINDER_FDA_FLAG_XFER_CHARGE = BINDER_FD_FLAG_XFER_CHARGE,
-+};
-+
- /*
-  * On 64-bit platforms where user code may run in 32-bits the driver must
-  * translate the buffer (and local binder) addresses appropriately.
--- 
-2.39.0.314.g84b9a713c41-goog
-
+Thank you, that behavior is not intentional. I'm not looking at the
+overall memcg charge yet otherwise I would have noticed this. I think
+I understand what's needed for the charging part, but Shakeel
+mentioned some additional work for "reclaim, OOM and charge context
+and failure cases" on the cover letter which I need to look into.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
