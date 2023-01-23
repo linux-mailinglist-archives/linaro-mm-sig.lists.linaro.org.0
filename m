@@ -2,222 +2,258 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE1B1678610
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 20:18:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0965A678C5C
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 24 Jan 2023 00:59:53 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E0303443F5
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 19:18:45 +0000 (UTC)
-Received: from mail-yb1-f201.google.com (mail-yb1-f201.google.com [209.85.219.201])
-	by lists.linaro.org (Postfix) with ESMTPS id 9E94C443FB
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Jan 2023 19:18:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7E87244445
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 23:59:51 +0000 (UTC)
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+	by lists.linaro.org (Postfix) with ESMTPS id 370864443A
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Jan 2023 23:59:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20210112 header.b="CLJ2JxK/";
-	spf=pass (lists.linaro.org: domain of 3a93OYwkKDYY3two1mso1qyyqvo.mywvsxk1y-ww-2sqvs232.vsxk1y.y1q@flex--tjmercier.bounces.google.com designates 209.85.219.201 as permitted sender) smtp.mailfrom=3a93OYwkKDYY3two1mso1qyyqvo.mywvsxk1y-ww-2sqvs232.vsxk1y.y1q@flex--tjmercier.bounces.google.com;
-	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-yb1-f201.google.com with SMTP id r8-20020a252b08000000b007b989d5e105so14080466ybr.11
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Jan 2023 11:18:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20210112;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=9WOZzSEfhu/PT9TWBWMQDCCNsrofWV34oFDU/0sj1mQ=;
-        b=CLJ2JxK/Tm4oa2T67r1/7AoCewa4cPoaCpXx/gVHbZ1m+FYlbdBISpcie92wke9qiT
-         ywnZGTRRWgUyvtV2GeIN6CSF1A1BpACoPsOvCJSqkdka36IG7lwA9jHJB0/1Y37BiDn6
-         UZyz4QR44eh7OHGKOjLnRuXG7qELlMRlfRNYaxnDlTMYAnQZZAKF7GLGFraikV5q7pPa
-         PqEGE55YfXGgQoOaL42PCJmSLM5OLIrr2pXTamoSK+ZBJQZ3xablgI1e6ZxykShX+C1V
-         OGCeujU9/+VSQurUIb0N4LKyFw0PX0Xvt3l2bOlWDy6qNiZqzVXsJcA5m/zeCrF4rUUR
-         ohNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=9WOZzSEfhu/PT9TWBWMQDCCNsrofWV34oFDU/0sj1mQ=;
-        b=vO5GnTY+eR8Un/E3AEsdfGhUCxpsiahtZUog13/nvR7wZwpCDFNikN6bqD7SncPFC1
-         ZBKPImDiJNoHMj2ZJbELT+w3CBiGotz+++UPUIoTPcAWPU6hSGh9BlGiK++VCo0EFiKY
-         uxs9/W/gAHr9JiNHuipmjrZk55f3ZWKoy1LRGW/y6meHblvoDDWROSK9iwyz1D/2hfwi
-         GgFeCB0Tizg6Opo3E95oOiEQyMXj60tC86sqrLNd6J8ePrUTxyEuX5LCvf1lW86pvief
-         WMYej8UN/rjvYdPMessYhVWzb5OAi4JDI47/LhXBMYdP2Fm62IEkPK/byzI5nyoPvwQa
-         HKxw==
-X-Gm-Message-State: AFqh2kop6aunsaxY/GLIk52ldYKKSvRrXnxHFypGzsQ/g9t52auYPScv
-	G0u+lsThdMv3uTp62OffuE65IzYrSCOLBjg=
-X-Google-Smtp-Source: AMrXdXt5UsJV8XnGROzCqwUjMEtxGJTY0AAa2SUnm4rAwiP8wDQKiwcGvs1ceYITQIG6UCVtpU2h3/VNxLbuwi8=
-X-Received: from tj.c.googlers.com ([fda3:e722:ac3:cc00:20:ed76:c0a8:53a])
- (user=tjmercier job=sendgmr) by 2002:a25:dc92:0:b0:7b0:3379:9c00 with SMTP id
- y140-20020a25dc92000000b007b033799c00mr3149691ybe.359.1674501483256; Mon, 23
- Jan 2023 11:18:03 -0800 (PST)
-Date: Mon, 23 Jan 2023 19:17:24 +0000
-In-Reply-To: <20230123191728.2928839-1-tjmercier@google.com>
-Mime-Version: 1.0
-References: <20230123191728.2928839-1-tjmercier@google.com>
-X-Mailer: git-send-email 2.39.0.246.g2a6d74b583-goog
-Message-ID: <20230123191728.2928839-3-tjmercier@google.com>
-From: "T.J. Mercier" <tjmercier@google.com>
-To: tjmercier@google.com, Sumit Semwal <sumit.semwal@linaro.org>,
-	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>
+	dkim=pass header.d=intel.com header.s=Intel header.b=RmmmPo38;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 134.134.136.100 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1674518375; x=1706054375;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:content-transfer-encoding:in-reply-to;
+  bh=QAMUQ1C9nh+0FsG2N/002dB6YDeAObemhBwJPCkLwIw=;
+  b=RmmmPo38SOGHP++wGow05ZgqbsbzC6XFb4gqSMjky3c56m9HEMhwPsf3
+   mA51S6SUskZy2Im8JqGLYWgD1rZjur0NOQmq+L6wMCt37gLM8MFV0CE52
+   I31NBD05K3mfa/QCqall/QdcSVyu5MKTLd9V+vUMQcGVqdkiz5M2/IBzN
+   LWUa5SQBE7E6TBx8Lpl6/Q3WpbJPLl8ughh6FPEu3NKzI3oZVEKLIso53
+   EsoCRiWkI7WFb5oGht+yj+rty8qg5kxpu2Yb74WbQs+kN4YvB6SxKimVo
+   oWa2h7BUgzVaM7L1Dz0eaibCBkw1LI4rvJmsr4Ur3VJr/HWn0GxrKjTRg
+   A==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10599"; a="390698561"
+X-IronPort-AV: E=Sophos;i="5.97,240,1669104000";
+   d="scan'208";a="390698561"
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Jan 2023 15:59:33 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6500,9779,10599"; a="694139295"
+X-IronPort-AV: E=Sophos;i="5.97,240,1669104000";
+   d="scan'208";a="694139295"
+Received: from lkp-server01.sh.intel.com (HELO 5646d64e7320) ([10.239.97.150])
+  by orsmga001.jf.intel.com with ESMTP; 23 Jan 2023 15:59:27 -0800
+Received: from kbuild by 5646d64e7320 with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1pK6ik-0005xg-39;
+	Mon, 23 Jan 2023 23:59:27 +0000
+Date: Tue, 24 Jan 2023 07:58:37 +0800
+From: kernel test robot <lkp@intel.com>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+	l.stach@pengutronix.de, nicolas@ndufresne.ca, ppaalanen@gmail.com,
+	sumit.semwal@linaro.org, daniel@ffwll.ch, robdclark@gmail.com,
+	tfiga@chromium.org, sebastian.wick@redhat.com, hverkuil@xs4all.nl,
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+	linux-media@vger.kernel.org, benjamin.gaignard@collabora.com,
+	lmark@codeaurora.org, labbott@redhat.com, Brian.Starkey@arm.com,
+	jstultz@google.com, laurent.pinchart@ideasonboard.com,
+	mchehab@kernel.org
+Message-ID: <202301240717.tim1ggHo-lkp@intel.com>
+References: <20230123123756.401692-3-christian.koenig@amd.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20230123123756.401692-3-christian.koenig@amd.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 9E94C443FB
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.20 / 15.00];
-	REPLY(-4.00)[];
+X-Rspamd-Queue-Id: 370864443A
+X-Spamd-Bar: --------
+X-Spamd-Result: default: False [-8.00 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	BAYES_HAM(-3.00)[100.00%];
+	DWL_DNSWL_MED(-2.00)[intel.com:dkim];
+	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	MV_CASE(0.50)[];
-	FORGED_SENDER(0.30)[tjmercier@google.com,3a93OYwkKDYY3two1mso1qyyqvo.mywvsxk1y-ww-2sqvs232.vsxk1y.y1q@flex--tjmercier.bounces.google.com];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20210112];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	RCVD_IN_DNSWL_HI(-0.50)[134.134.136.100:from];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:134.134.136.100/32];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.201:from];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com,pengutronix.de,ndufresne.ca,linaro.org,ffwll.ch,chromium.org,redhat.com,xs4all.nl,lists.freedesktop.org,lists.linaro.org,vger.kernel.org,collabora.com,codeaurora.org,arm.com,google.com,ideasonboard.com,kernel.org];
 	MIME_TRACE(0.00)[0:+];
-	FROM_NEQ_ENVFROM(0.00)[tjmercier@google.com,3a93OYwkKDYY3two1mso1qyyqvo.mywvsxk1y-ww-2sqvs232.vsxk1y.y1q@flex--tjmercier.bounces.google.com];
-	NEURAL_HAM(-0.00)[-0.985];
-	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:4983, ipnet:134.134.136.0/24, country:US];
+	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.997];
+	DKIM_TRACE(0.00)[intel.com:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_COUNT_TWO(0.00)[2]
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[4];
+	TAGGED_RCPT(0.00)[];
+	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: KQT2FXJA2I3TTAMXG2WJ7X7LNSGV353O
-X-Message-ID-Hash: KQT2FXJA2I3TTAMXG2WJ7X7LNSGV353O
-X-MailFrom: 3a93OYwkKDYY3two1mso1qyyqvo.mywvsxk1y-ww-2sqvs232.vsxk1y.y1q@flex--tjmercier.bounces.google.com
+Message-ID-Hash: NVSFYBSCKEDMBUGWCXSURYCOHAIA7FSW
+X-Message-ID-Hash: NVSFYBSCKEDMBUGWCXSURYCOHAIA7FSW
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: hannes@cmpxchg.org, android-mm@google.com, jstultz@google.com, jeffv@google.com, cmllamas@google.com, linux-security-module@vger.kernel.org, selinux@vger.kernel.org, cgroups@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 2/4] dmabuf: Add cgroup charge transfer function
+Subject: [Linaro-mm-sig] Re: [PATCH 2/2] media: uvcvideo: expose dma-heap hint to userspace
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KQT2FXJA2I3TTAMXG2WJ7X7LNSGV353O/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NVSFYBSCKEDMBUGWCXSURYCOHAIA7FSW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-The dma_buf_transfer_charge function provides a way for processes to
-transfer charge of a buffer to a different cgroup. This is essential
-for the cases where a central allocator process does allocations for
-various subsystems, hands over the fd to the client who requested the
-memory, and drops all references to the allocated memory.
+Hi Christian,
 
-Signed-off-by: T.J. Mercier <tjmercier@google.com>
----
- drivers/dma-buf/dma-buf.c  | 56 ++++++++++++++++++++++++++++++++++++++
- include/linux/dma-buf.h    |  1 +
- include/linux/memcontrol.h |  5 ++++
- 3 files changed, 62 insertions(+)
+I love your patch! Perhaps something to improve:
 
-diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-index a6a8cb5cb32d..ac3d02a7ecf8 100644
---- a/drivers/dma-buf/dma-buf.c
-+++ b/drivers/dma-buf/dma-buf.c
-@@ -11,6 +11,7 @@
-  * refining of this idea.
-  */
- 
-+#include <linux/atomic.h>
- #include <linux/fs.h>
- #include <linux/slab.h>
- #include <linux/dma-buf.h>
-@@ -1626,6 +1627,61 @@ void dma_buf_vunmap_unlocked(struct dma_buf *dmabuf, struct iosys_map *map)
- }
- EXPORT_SYMBOL_NS_GPL(dma_buf_vunmap_unlocked, DMA_BUF);
- 
-+/**
-+ * dma_buf_transfer_charge - Change the cgroup to which the provided dma_buf is charged.
-+ * @dmabuf_file:	[in]	file for buffer whose charge will be migrated to a different cgroup
-+ * @target:		[in]	the task_struct of the destination process for the cgroup charge
-+ *
-+ * Only tasks that belong to the same cgroup the buffer is currently charged to
-+ * may call this function, otherwise it will return -EPERM.
-+ *
-+ * Returns 0 on success, or a negative errno code otherwise.
-+ */
-+int dma_buf_transfer_charge(struct file *dmabuf_file, struct task_struct *target)
-+{
-+	struct mem_cgroup *current_cg, *target_cg;
-+	struct dma_buf *dmabuf;
-+	unsigned int nr_pages;
-+	int ret = 0;
-+
-+	if (!IS_ENABLED(CONFIG_MEMCG))
-+		return 0;
-+
-+	if (WARN_ON(!dmabuf_file) || WARN_ON(!target))
-+		return -EINVAL;
-+
-+	if (!is_dma_buf_file(dmabuf_file))
-+		return -EBADF;
-+	dmabuf = dmabuf_file->private_data;
-+
-+	nr_pages = PAGE_ALIGN(dmabuf->size) / PAGE_SIZE;
-+	current_cg = mem_cgroup_from_task(current);
-+	target_cg = get_mem_cgroup_from_mm(target->mm);
-+
-+	if (current_cg == target_cg)
-+		goto skip_transfer;
-+
-+	if (!mem_cgroup_charge_dmabuf(target_cg, nr_pages, GFP_KERNEL)) {
-+		ret = -ENOMEM;
-+		goto skip_transfer;
-+	}
-+
-+	if (cmpxchg(&dmabuf->memcg, current_cg, target_cg) != current_cg) {
-+		/* Only the current owner can transfer the charge */
-+		ret = -EPERM;
-+		mem_cgroup_uncharge_dmabuf(target_cg, nr_pages);
-+		goto skip_transfer;
-+	}
-+
-+	mem_cgroup_uncharge_dmabuf(current_cg, nr_pages);
-+	mem_cgroup_put(current_cg); /* unref from buffer - buffer keeps new ref to target_cg */
-+	return 0;
-+
-+skip_transfer:
-+	mem_cgroup_put(target_cg);
-+	return ret;
-+}
-+
- #ifdef CONFIG_DEBUG_FS
- static int dma_buf_debug_show(struct seq_file *s, void *unused)
- {
-diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
-index 1f0ffb8e4bf5..f25eb8e60fb2 100644
---- a/include/linux/dma-buf.h
-+++ b/include/linux/dma-buf.h
-@@ -634,4 +634,5 @@ int dma_buf_vmap(struct dma_buf *dmabuf, struct iosys_map *map);
- void dma_buf_vunmap(struct dma_buf *dmabuf, struct iosys_map *map);
- int dma_buf_vmap_unlocked(struct dma_buf *dmabuf, struct iosys_map *map);
- void dma_buf_vunmap_unlocked(struct dma_buf *dmabuf, struct iosys_map *map);
-+int dma_buf_transfer_charge(struct file *dmabuf_file, struct task_struct *target);
- #endif /* __DMA_BUF_H__ */
-diff --git a/include/linux/memcontrol.h b/include/linux/memcontrol.h
-index c10b8565fdbf..009298a446fe 100644
---- a/include/linux/memcontrol.h
-+++ b/include/linux/memcontrol.h
-@@ -1335,6 +1335,11 @@ struct mem_cgroup *mem_cgroup_from_css(struct cgroup_subsys_state *css)
- 	return NULL;
- }
- 
-+static inline struct mem_cgroup *mem_cgroup_from_task(struct task_struct *p)
-+{
-+	return NULL;
-+}
-+
- static inline void obj_cgroup_put(struct obj_cgroup *objcg)
- {
- }
--- 
-2.39.0.246.g2a6d74b583-goog
+[auto build test WARNING on drm-misc/drm-misc-next]
+[also build test WARNING on media-tree/master drm-tip/drm-tip linus/master =
+v6.2-rc5]
+[cannot apply to next-20230123]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
+url:    https://github.com/intel-lab-lkp/linux/commits/Christian-K-nig/medi=
+a-uvcvideo-expose-dma-heap-hint-to-userspace/20230123-213836
+base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
+patch link:    https://lore.kernel.org/r/20230123123756.401692-3-christian.=
+koenig%40amd.com
+patch subject: [PATCH 2/2] media: uvcvideo: expose dma-heap hint to userspa=
+ce
+config: hexagon-randconfig-r032-20230123 (https://download.01.org/0day-ci/a=
+rchive/20230124/202301240717.tim1ggHo-lkp@intel.com/config)
+compiler: clang version 16.0.0 (https://github.com/llvm/llvm-project 4196ca=
+3278f78c6e19246e54ab0ecb364e37d66a)
+reproduce (this is a W=3D1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/=
+make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/intel-lab-lkp/linux/commit/adc04dccd892eec7f84=
+c6ec112b48df376172e48
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Christian-K-nig/media-uvcvideo-exp=
+ose-dma-heap-hint-to-userspace/20230123-213836
+        git checkout adc04dccd892eec7f84c6ec112b48df376172e48
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=3D$HOME/0day COMPILER=3Dclang make.cross W=3D=
+1 O=3Dbuild_dir ARCH=3Dhexagon olddefconfig
+        COMPILER_INSTALL_PATH=3D$HOME/0day COMPILER=3Dclang make.cross W=3D=
+1 O=3Dbuild_dir ARCH=3Dhexagon SHELL=3D/bin/bash drivers/media/usb/uvc/
+
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
+
+All warnings (new ones prefixed by >>):
+
+   In file included from drivers/media/usb/uvc/uvc_driver.c:10:
+>> include/linux/dma-heap.h:92:5: warning: no previous prototype for functi=
+on 'dma_heap_create_device_link' [-Wmissing-prototypes]
+   int dma_heap_create_device_link(struct device *dev, const char *heap)
+       ^
+   include/linux/dma-heap.h:92:1: note: declare 'static' if the function is=
+ not intended to be used outside of this translation unit
+   int dma_heap_create_device_link(struct device *dev, const char *heap)
+   ^
+   static=20
+>> include/linux/dma-heap.h:97:6: warning: no previous prototype for functi=
+on 'dma_heap_remove_device_link' [-Wmissing-prototypes]
+   void dma_heap_remove_device_link(struct device *dev)
+        ^
+   include/linux/dma-heap.h:97:1: note: declare 'static' if the function is=
+ not intended to be used outside of this translation unit
+   void dma_heap_remove_device_link(struct device *dev)
+   ^
+   static=20
+   In file included from drivers/media/usb/uvc/uvc_driver.c:16:
+   In file included from include/linux/usb.h:16:
+   In file included from include/linux/interrupt.h:11:
+   In file included from include/linux/hardirq.h:11:
+   In file included from ./arch/hexagon/include/generated/asm/hardirq.h:1:
+   In file included from include/asm-generic/hardirq.h:17:
+   In file included from include/linux/irq.h:20:
+   In file included from include/linux/io.h:13:
+   In file included from arch/hexagon/include/asm/io.h:334:
+   include/asm-generic/io.h:547:31: warning: performing pointer arithmetic =
+on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+           val =3D __raw_readb(PCI_IOBASE + addr);
+                             ~~~~~~~~~~ ^
+   include/asm-generic/io.h:560:61: warning: performing pointer arithmetic =
+on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+           val =3D __le16_to_cpu((__le16 __force)__raw_readw(PCI_IOBASE + a=
+ddr));
+                                                           ~~~~~~~~~~ ^
+   include/uapi/linux/byteorder/little_endian.h:37:51: note: expanded from =
+macro '__le16_to_cpu'
+   #define __le16_to_cpu(x) ((__force __u16)(__le16)(x))
+                                                     ^
+   In file included from drivers/media/usb/uvc/uvc_driver.c:16:
+   In file included from include/linux/usb.h:16:
+   In file included from include/linux/interrupt.h:11:
+   In file included from include/linux/hardirq.h:11:
+   In file included from ./arch/hexagon/include/generated/asm/hardirq.h:1:
+   In file included from include/asm-generic/hardirq.h:17:
+   In file included from include/linux/irq.h:20:
+   In file included from include/linux/io.h:13:
+   In file included from arch/hexagon/include/asm/io.h:334:
+   include/asm-generic/io.h:573:61: warning: performing pointer arithmetic =
+on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+           val =3D __le32_to_cpu((__le32 __force)__raw_readl(PCI_IOBASE + a=
+ddr));
+                                                           ~~~~~~~~~~ ^
+   include/uapi/linux/byteorder/little_endian.h:35:51: note: expanded from =
+macro '__le32_to_cpu'
+   #define __le32_to_cpu(x) ((__force __u32)(__le32)(x))
+                                                     ^
+   In file included from drivers/media/usb/uvc/uvc_driver.c:16:
+   In file included from include/linux/usb.h:16:
+   In file included from include/linux/interrupt.h:11:
+   In file included from include/linux/hardirq.h:11:
+   In file included from ./arch/hexagon/include/generated/asm/hardirq.h:1:
+   In file included from include/asm-generic/hardirq.h:17:
+   In file included from include/linux/irq.h:20:
+   In file included from include/linux/io.h:13:
+   In file included from arch/hexagon/include/asm/io.h:334:
+   include/asm-generic/io.h:584:33: warning: performing pointer arithmetic =
+on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+           __raw_writeb(value, PCI_IOBASE + addr);
+                               ~~~~~~~~~~ ^
+   include/asm-generic/io.h:594:59: warning: performing pointer arithmetic =
+on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+           __raw_writew((u16 __force)cpu_to_le16(value), PCI_IOBASE + addr);
+                                                         ~~~~~~~~~~ ^
+   include/asm-generic/io.h:604:59: warning: performing pointer arithmetic =
+on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
+           __raw_writel((u32 __force)cpu_to_le32(value), PCI_IOBASE + addr);
+                                                         ~~~~~~~~~~ ^
+   8 warnings generated.
+
+
+vim +/dma_heap_create_device_link +92 include/linux/dma-heap.h
+
+4ce5c5c0cf31f4 Christian K=F6nig 2023-01-23   91 =20
+4ce5c5c0cf31f4 Christian K=F6nig 2023-01-23  @92  int dma_heap_create_devic=
+e_link(struct device *dev, const char *heap)
+4ce5c5c0cf31f4 Christian K=F6nig 2023-01-23   93  {
+4ce5c5c0cf31f4 Christian K=F6nig 2023-01-23   94  	return 0;
+4ce5c5c0cf31f4 Christian K=F6nig 2023-01-23   95  }
+4ce5c5c0cf31f4 Christian K=F6nig 2023-01-23   96 =20
+4ce5c5c0cf31f4 Christian K=F6nig 2023-01-23  @97  void dma_heap_remove_devi=
+ce_link(struct device *dev)
+4ce5c5c0cf31f4 Christian K=F6nig 2023-01-23   98  {
+4ce5c5c0cf31f4 Christian K=F6nig 2023-01-23   99  }
+4ce5c5c0cf31f4 Christian K=F6nig 2023-01-23  100 =20
+
+--=20
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
