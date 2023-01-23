@@ -2,196 +2,190 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6D33678266
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 17:58:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2504C678600
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 20:18:07 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 688533EE47
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 16:58:21 +0000 (UTC)
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
-	by lists.linaro.org (Postfix) with ESMTPS id 753123ED2C
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Jan 2023 16:58:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D85BB3EE47
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 19:18:05 +0000 (UTC)
+Received: from mail-yb1-f201.google.com (mail-yb1-f201.google.com [209.85.219.201])
+	by lists.linaro.org (Postfix) with ESMTPS id 8D7923EB7D
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Jan 2023 19:17:50 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ideasonboard.com header.s=mail header.b=MRRBRkfU;
-	spf=pass (lists.linaro.org: domain of laurent.pinchart@ideasonboard.com designates 213.167.242.64 as permitted sender) smtp.mailfrom=laurent.pinchart@ideasonboard.com;
-	dmarc=none
-Received: from pendragon.ideasonboard.com (213-243-189-158.bb.dnainternet.fi [213.243.189.158])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 6A5462D9;
-	Mon, 23 Jan 2023 17:58:03 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1674493083;
-	bh=kDKF4A6ZDyQHXFMYN9w6HQo5DdaJO5wDDeNan4zyVis=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=MRRBRkfUzEvjWDKjwqzWZTvn8a4ZYKkv/eFBndQyv2QuIbZnj9YbDn2ZoZwoFMeMX
-	 Wdv4ezHrHRnjSX9Ob9umakxP+6FYAH1MfJBCWdgEQV8w1ZwXKSddjCwC1IpaSkg5XL
-	 reHgdDwtZf0djBxV+06O7vfOhyDYHvl+JtlSC3OQ=
-Date: Mon, 23 Jan 2023 18:58:00 +0200
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
-Message-ID: <Y868mG7Oa5bI1wB7@pendragon.ideasonboard.com>
-References: <20230123123756.401692-1-christian.koenig@amd.com>
- <Y86R3vQX+vW0+oxw@pendragon.ideasonboard.com>
- <1f4a1a5c-e0d5-7f0e-353c-daa89f1369ea@amd.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1f4a1a5c-e0d5-7f0e-353c-daa89f1369ea@amd.com>
+	dkim=pass header.d=google.com header.s=20210112 header.b=btfBgj1o;
+	spf=pass (lists.linaro.org: domain of 3Xt3OYwkKDXkqgjboZfbodlldib.ZljifkXol-jj-pfdifpqp.ifkXol.lod@flex--tjmercier.bounces.google.com designates 209.85.219.201 as permitted sender) smtp.mailfrom=3Xt3OYwkKDXkqgjboZfbodlldib.ZljifkXol-jj-pfdifpqp.ifkXol.lod@flex--tjmercier.bounces.google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-yb1-f201.google.com with SMTP id y66-20020a253245000000b007cb4f1e3e57so13991070yby.8
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Jan 2023 11:17:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20210112;
+        h=cc:to:from:subject:message-id:mime-version:date:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=N+YvoWM7hVZLP7f3mNekEgTLNrfGSz/VUTj8ZELQtN0=;
+        b=btfBgj1oagL/EjdEgeCa/LpL00/84F14njHYxfZbVx8eK5EnmK1Ttj9sO31U4EmSM8
+         1MznIrLgPijCnSyvvb8XtI6YXLZ78NHWa/H/mNm31bw5LcdVJksSSGGO2dzPHlgU3buz
+         /p9eEQbQt8x8MWRR7X+Ry+0Y58RX018tAsy1ZXD0QRf9P7CPtLAoftSzjvCACGDXGEgM
+         o15+ngRvubcFDwfKC4626oWwr6aoB3/30CZULYiYPJpCKGXHpUDBYU1vHVotztxTUlup
+         U435Wlbrn0vhCQELYo1hK06QeiCc3qfIoJ83+mV0bqqYDPZ4ySJ6H5OvU4sUwT2bCQY8
+         tDxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=cc:to:from:subject:message-id:mime-version:date:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=N+YvoWM7hVZLP7f3mNekEgTLNrfGSz/VUTj8ZELQtN0=;
+        b=rp6LzF+zGrqBqmPSzU8lMLvf9Q2emsyVDp+DiTB4lRvOAgO1ezSPAwV53+b0xdTa0i
+         /7FYVBkNwoeCOMyMxBmS8Du+rKXVaxn1tujQf1epYsf+w22h64wAxbs1iuFOM/YaKeuW
+         4e7xCbZgq8pbSFLYcvPAz982imyb3S5ZEsjaYcrwG0s6cZ/Tli1uelGp/0pD7eMqnhRp
+         MV7ZKhTA3shkqzVRgfvqykehH5n/CwbaAWxk4oRdiN62RIKS1wWt6uM32k+AWwj9/sn4
+         07zKVghRY2wxgSYx1iI5YwatmsSKL0CF8nGlboly8zB7u9oghax6sJTjlL2z9bVzni38
+         YdBQ==
+X-Gm-Message-State: AFqh2ko94IfDFy+TXHHTwHCU17bdoH9kDxw/GUBYXgIwBlOI3cwGG5VP
+	+7hILFcvyK1kdGVmnLgSs3W6cmyfHfTlR+8=
+X-Google-Smtp-Source: AMrXdXtnP/Gl6EBzYGNvoAMXHOPKf8g2vx7ry4RLQdGRDJzjzoV9sc3vvEsAv/i0LJexRseYywCPKePifcMKipA=
+X-Received: from tj.c.googlers.com ([fda3:e722:ac3:cc00:20:ed76:c0a8:53a])
+ (user=tjmercier job=sendgmr) by 2002:a25:bdca:0:b0:7ca:14e:be6d with SMTP id
+ g10-20020a25bdca000000b007ca014ebe6dmr3007629ybk.415.1674501470074; Mon, 23
+ Jan 2023 11:17:50 -0800 (PST)
+Date: Mon, 23 Jan 2023 19:17:22 +0000
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.39.0.246.g2a6d74b583-goog
+Message-ID: <20230123191728.2928839-1-tjmercier@google.com>
+From: "T.J. Mercier" <tjmercier@google.com>
+To: tjmercier@google.com, Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
+	Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"=?UTF-8?q?Arve=20Hj=C3=B8nnev=C3=A5g?=" <arve@android.com>, Todd Kjos <tkjos@android.com>, Martijn Coenen <maco@android.com>,
+	Joel Fernandes <joel@joelfernandes.org>, Christian Brauner <brauner@kernel.org>,
+	Carlos Llamas <cmllamas@google.com>, Suren Baghdasaryan <surenb@google.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>, Michal Hocko <mhocko@kernel.org>,
+	Roman Gushchin <roman.gushchin@linux.dev>, Shakeel Butt <shakeelb@google.com>,
+	Muchun Song <muchun.song@linux.dev>, Andrew Morton <akpm@linux-foundation.org>,
+	Paul Moore <paul@paul-moore.com>, James Morris <jmorris@namei.org>,
+	"Serge E. Hallyn" <serge@hallyn.com>, Stephen Smalley <stephen.smalley.work@gmail.com>,
+	Eric Paris <eparis@parisplace.org>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 753123ED2C
-X-Spamd-Bar: ------------
-X-Spamd-Result: default: False [-12.50 / 15.00];
-	REPLY(-4.00)[];
-	DWL_DNSWL_HI(-3.50)[ideasonboard.com:dkim];
+X-Rspamd-Queue-Id: 8D7923EB7D
+X-Spamd-Bar: /
+X-Spamd-Result: default: False [-0.70 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-0.50)[213.243.189.158:received];
-	R_SPF_ALLOW(-0.20)[+mx];
-	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	MV_CASE(0.50)[];
+	FORGED_SENDER(0.30)[tjmercier@google.com,3Xt3OYwkKDXkqgjboZfbodlldib.ZljifkXol-jj-pfdifpqp.ifkXol.lod@flex--tjmercier.bounces.google.com];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20210112];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_EQ_ENVFROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_TO(0.00)[google.com,kernel.org,bytedance.com,cmpxchg.org,lwn.net,linuxfoundation.org,android.com,joelfernandes.org,linaro.org,amd.com,linux.dev,linux-foundation.org,paul-moore.com,namei.org,hallyn.com,gmail.com,parisplace.org];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.201:from];
+	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	FREEMAIL_CC(0.00)[pengutronix.de,ndufresne.ca,gmail.com,linaro.org,ffwll.ch,chromium.org,redhat.com,xs4all.nl,lists.freedesktop.org,lists.linaro.org,vger.kernel.org,collabora.com,codeaurora.org,arm.com,google.com,kernel.org,nvidia.com];
-	ASN(0.00)[asn:29169, ipnet:213.167.240.0/20, country:FR];
-	DKIM_TRACE(0.00)[ideasonboard.com:+];
-	DMARC_NA(0.00)[ideasonboard.com];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[tjmercier@google.com,3Xt3OYwkKDXkqgjboZfbodlldib.ZljifkXol-jj-pfdifpqp.ifkXol.lod@flex--tjmercier.bounces.google.com];
+	NEURAL_HAM(-0.00)[-0.995];
 	ARC_NA(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+];
 	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[38];
+	TAGGED_RCPT(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
-Message-ID-Hash: UAISYTGOAQELLVD72SYY76PH43CH5BLN
-X-Message-ID-Hash: UAISYTGOAQELLVD72SYY76PH43CH5BLN
-X-MailFrom: laurent.pinchart@ideasonboard.com
+Message-ID-Hash: LQT2SYWL4H6OUFIFXJGSTK6D2AA4VLQZ
+X-Message-ID-Hash: LQT2SYWL4H6OUFIFXJGSTK6D2AA4VLQZ
+X-MailFrom: 3Xt3OYwkKDXkqgjboZfbodlldib.ZljifkXol-jj-pfdifpqp.ifkXol.lod@flex--tjmercier.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: nicolas@ndufresne.ca, ppaalanen@gmail.com, sumit.semwal@linaro.org, daniel@ffwll.ch, robdclark@gmail.com, tfiga@chromium.org, sebastian.wick@redhat.com, hverkuil@xs4all.nl, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, benjamin.gaignard@collabora.com, lmark@codeaurora.org, labbott@redhat.com, Brian.Starkey@arm.com, jstultz@google.com, mchehab@kernel.org, James Jones <jajones@nvidia.com>
+CC: android-mm@google.com, jstultz@google.com, jeffv@google.com, linux-security-module@vger.kernel.org, selinux@vger.kernel.org, cgroups@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: DMA-heap driver hints
+Subject: [Linaro-mm-sig] [PATCH v2 0/4] Track exported dma-buffers with memcg
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UAISYTGOAQELLVD72SYY76PH43CH5BLN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LQT2SYWL4H6OUFIFXJGSTK6D2AA4VLQZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGkgQ2hyaXN0aWFuLA0KDQpPbiBNb24sIEphbiAyMywgMjAyMyBhdCAwNToyOToxOFBNICswMTAw
-LCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPiBBbSAyMy4wMS4yMyB1bSAxNDo1NSBzY2hyaWVi
-IExhdXJlbnQgUGluY2hhcnQ6DQo+ID4gSGkgQ2hyaXN0aWFuLA0KPiA+DQo+ID4gQ0MnaW5nIEph
-bWVzIGFzIEkgdGhpbmsgdGhpcyBpcyByZWxhdGVkIHRvIGhpcyB3b3JrIG9uIHRoZSB1bml4IGRl
-dmljZQ0KPiA+IG1lbW9yeSBhbGxvY2F0b3IgKFsxXSkuDQo+ID4NCj4gPiBbMV0gaHR0cHM6Ly9s
-b3JlLmtlcm5lbC5vcmcvZHJpLWRldmVsLzhiNTU1Njc0LTFjNWItYzc5MS00NTQ3LTJlYTdjMTZh
-ZWU2Y0BudmlkaWEuY29tLw0KPiA+DQo+ID4gT24gTW9uLCBKYW4gMjMsIDIwMjMgYXQgMDE6Mzc6
-NTRQTSArMDEwMCwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToNCj4gPj4gSGkgZ3V5cywNCj4gPj4N
-Cj4gPj4gdGhpcyBpcyBqdXN0IGFuIFJGQyEgVGhlIGxhc3QgdGltZSB3ZSBkaXNjdXNzZWQgdGhl
-IERNQS1idWYgY29oZXJlbmN5DQo+ID4+IHByb2JsZW0gWzFdIHdlIGNvbmNsdWRlZCB0aGF0IERN
-QS1oZWFwIGZpcnN0IG5lZWRzIGEgYmV0dGVyIHdheSB0bw0KPiA+PiBjb21tdW5pY2F0ZSB0byB1
-c2Vyc3BhY2Ugd2hpY2ggaGVhcCB0byB1c2UgZm9yIGEgY2VydGFpbiBkZXZpY2UuDQo+ID4+DQo+
-ID4+IEFzIGZhciBhcyBJIGtub3cgdXNlcnNwYWNlIGN1cnJlbnRseSBqdXN0IGhhcmQgY29kZXMg
-dGhhdCBpbmZvcm1hdGlvbg0KPiA+PiB3aGljaCBpcyBjZXJ0YWlubHkgbm90IGRlc2lyYWJsZSBj
-b25zaWRlcmluZyB0aGF0IHdlIHNob3VsZCBoYXZlIHRoaXMNCj4gPj4gaW5zaWRlIHRoZSBrZXJu
-ZWwgYXMgd2VsbC4NCj4gPj4NCj4gPj4gU28gd2hhdCB0aG9zZSB0d28gcGF0Y2hlcyBoZXJlIGRv
-IGlzIHRvIGZpcnN0IGFkZCBzb21lDQo+ID4+IGRtYV9oZWFwX2NyZWF0ZV9kZXZpY2VfbGluaygp
-IGFuZCAgZG1hX2hlYXBfcmVtb3ZlX2RldmljZV9saW5rKCkNCj4gPj4gZnVuY3Rpb24gYW5kIHRo
-ZW4gZGVtb25zdHJhdGluZyB0aGUgZnVuY3Rpb25hbGl0eSB3aXRoIHV2Y3ZpZGVvDQo+ID4+IGRy
-aXZlci4NCj4gPj4NCj4gPj4gVGhlIHByZWZlcnJlZCBETUEtaGVhcCBpcyByZXByZXNlbnRlZCB3
-aXRoIGEgc3ltbGluayBpbiBzeXNmcyBiZXR3ZWVuDQo+ID4+IHRoZSBkZXZpY2UgYW5kIHRoZSB2
-aXJ0dWFsIERNQS1oZWFwIGRldmljZSBub2RlLg0KPiA+DQo+ID4gSSdsbCBzdGFydCB3aXRoIGEg
-ZmV3IGhpZ2gtbGV2ZWwgY29tbWVudHMvcXVlc3Rpb25zOg0KPiA+DQo+ID4gLSBJbnN0ZWFkIG9m
-IHR5aW5nIGRyaXZlcnMgdG8gaGVhcHMsIGhhdmUgeW91IGNvbnNpZGVyZWQgYSBzeXN0ZW0gd2hl
-cmUNCj4gPiAgICBhIGRyaXZlciB3b3VsZCBleHBvc2UgY29uc3RyYWludHMsIGFuZCBhIGhlYXAg
-d291bGQgdGhlbiBiZSBzZWxlY3RlZA0KPiA+ICAgIGJhc2VkIG9uIHRob3NlIGNvbnN0cmFpbnRz
-ID8gQSB0aWdodCBjb3VwbGluZyBiZXR3ZWVuIGhlYXBzIGFuZA0KPiA+ICAgIGRyaXZlcnMgbWVh
-bnMgZG93bnN0cmVhbSBwYXRjaGVzIHRvIGRyaXZlcnMgaW4gb3JkZXIgdG8gdXNlDQo+ID4gICAg
-dmVuZG9yLXNwZWNpZmljIGhlYXBzLCB0aGF0IHNvdW5kcyBwYWluZnVsLg0KPiANCj4gSSB3YXMg
-d29uZGVyaW5nIHRoZSBzYW1lIHRoaW5nIGFzIHdlbGwsIGJ1dCBjYW1lIHRvIHRoZSBjb25jbHVz
-aW9uIHRoYXQgDQo+IGp1c3QgdGhlIG90aGVyIHdheSBhcm91bmQgaXMgdGhlIGxlc3MgcGFpbmZ1
-bCBhcHByb2FjaC4NCg0KPkZyb20gYSBrZXJuZWwgcG9pbnQgb2Ygdmlldywgc3VyZSwgaXQncyBz
-aW1wbGVyIGFuZCB0aHVzIGxlc3MgcGFpbmZ1bC4NCj5Gcm9tIHRoZSBwb2ludCBvZiB2aWV3IG9m
-IHNvbHZpbmcgdGhlIHdob2xlIGlzc3VlLCBJJ20gbm90IHN1cmUgOi0pDQoNCj4gVGhlIHByb2Js
-ZW0gaXMgdGhhdCB0aGVyZSBhcmUgc28gbWFueSBkcml2ZXIgc3BlY2lmaWMgY29uc3RyYWlucyB0
-aGF0IEkgDQo+IGRvbid0IGV2ZW4ga25vdyB3aGVyZSB0byBzdGFydCBmcm9tLg0KDQpUaGF0J3Mg
-d2hlcmUgSSB3YXMgaG9waW5nIEphbWVzIHdvdWxkIGhhdmUgc29tZSBmZWVkYmFjayBmb3IgdXMs
-IGJhc2VkDQpvbiB0aGUgd29yayBoZSBkaWQgb24gdGhlIFVuaXggZGV2aWNlIG1lbW9yeSBhbGxv
-Y2F0b3IuIElmIHRoYXQncyBub3QNCnRoZSBjYXNlLCB3ZSBjYW4gYnJhaW5zdG9ybSB0aGlzIGZy
-b20gc2NyYXRjaC4NCg0KPiA+ICAgIEEgY29uc3RyYWludC1iYXNlZCBzeXN0ZW0gd291bGQgYWxz
-bywgSSB0aGluaywgYmUgZWFzaWVyIHRvIGV4dGVuZA0KPiA+ICAgIHdpdGggYWRkaXRpb25hbCBj
-b25zdHJhaW50cyBpbiB0aGUgZnV0dXJlLg0KPiA+DQo+ID4gLSBJIGFzc3VtZSBzb21lIGRyaXZl
-cnMgd2lsbCBiZSBhYmxlIHRvIHN1cHBvcnQgbXVsdGlwbGUgaGVhcHMuIEhvdyBkbw0KPiA+ICAg
-IHlvdSBlbnZpc2lvbiB0aGlzIGJlaW5nIGltcGxlbWVudGVkID8NCj4gDQo+IEkgZG9uJ3QgcmVh
-bGx5IHNlZSBhbiB1c2UgY2FzZSBmb3IgdGhpcy4NCj4gDQo+IFdlIGRvIGhhdmUgc29tZSBkcml2
-ZXJzIHdoaWNoIHNheTogZm9yIHRoaXMgdXNlIGNhc2UgeW91IGNhbiB1c2UgDQo+IHdoYXRldmVy
-IHlvdSB3YW50LCBidXQgZm9yIHRoYXQgdXNlIGNhc2UgeW91IG5lZWQgdG8gdXNlIHNwZWNpZmlj
-IG1lbW9yeSANCj4gKHNjYW4gb3V0IG9uIEdQVXMgZm9yIGV4YW1wbGUgd29ya3MgbGlrZSB0aGlz
-KS4NCj4gDQo+IEJ1dCB0aG9zZSBzcGVjaWZpYyB1c2UgY2FzZXMgYXJlIGV4YWN0bHkgdGhhdCwg
-dmVyeSBzcGVjaWZpYy4gQW5kIA0KPiBleHBvc2luZyBhbGwgdGhlIGNvbnN0cmFpbnMgZm9yIHRo
-ZW0gaW5zaWRlIGEga2VybmVsIFVBUEkgaXMgYSBmdXRpbGUgDQo+IGVmZm9ydCAoYXQgbGVhc3Qg
-Zm9yIHRoZSBHUFUgc2NhbiBvdXQgY2FzZSkuIEluIHRob3NlIHNpdHVhdGlvbnMgaXQncyANCj4g
-anVzdCBiZXR0ZXIgdG8gaGF2ZSB0aGUgYWxsb2NhdG9yIGluIHVzZXJzcGFjZSBkZWFsIHdpdGgg
-ZGV2aWNlIHNwZWNpZmljIA0KPiBzdHVmZi4NCg0KV2hpbGUgdGhlIGV4YWN0IGNvbnN0cmFpbnRz
-IHdpbGwgY2VydGFpbmx5IGJlIGRldmljZS1zcGVjaWZpYywgaXMgdGhhdA0KYWxzbyB0cnVlIG9m
-IHRoZSB0eXBlIG9mIGNvbnN0cmFpbnRzLCBvciB0aGUgZXhpc3RlbmNlIG9mIGNvbnN0cmFpbnRz
-IGluDQp0aGUgZmlyc3QgcGxhY2UgPyBUbyBnaXZlIGFuIGV4YW1wbGUsIHdpdGggYSB2aWRlbyBk
-ZWNvZGVyIHByb2R1Y2luZw0KZnJhbWVzIHRoYXQgYXJlIHRoZW4gcmVuZGVyZWQgYnkgYSBHUFUs
-IHRoZSB0aWxpbmcgZm9ybWF0IHRoYXQgd291bGQNCnByb2R1Y2UgdGhlIGJlc3QgcmVzdWx0IGlz
-IGRldmljZS1zcGVjaWZpYywgYnV0IHRoZSBmYWN0IHRoYXQgdGhlDQpkZWNvZGVyIGNhbiBwcm9k
-dWNlIGEgdGlsZWQgZm9ybWF0IHRoYXQgd291bGQgd29yayBiZXR0ZXIgZm9yIHRoZSBHUFUsDQpv
-ciBhIG5vbi10aWxlZCBmb3JtYXQgZm9yIG90aGVyIGNvbnN1bWVycywgaXMgYSB2ZXJ5IGNvbW1v
-biBjb25zdHJhaW50Lg0KSSBkb24ndCB0aGluayB3ZSdsbCBiZSBhYmxlIHRvIGRvIGF3YXkgY29t
-cGxldGVseSB3aXRoIHRoZQ0KZGV2aWNlLXNwZWNpZmljIGNvZGUgaW4gdXNlcnNwYWNlLCBidXQg
-SSB0aGluayB3ZSBzaG91bGQgYmUgYWJsZSB0bw0KZXhwb3NlIGNvbnN0cmFpbnRzIGluIGEgZ2Vu
-ZXJpYy1lbm91Z2ggd2F5IHRoYXQgbWFueSBzaW1wbGUgdXNlIGNhc2VzDQp3aWxsIGJlIGNvdmVy
-ZWQgYnkgZ2VuZXJpYyBjb2RlLg0KDQo+IFdoYXQgSSB3YW50IHRvIGRvIGlzIHRvIHNlcGFyYXRl
-IHRoZSBwcm9ibGVtLiBUaGUga2VybmVsIG9ubHkgcHJvdmlkZXMgDQo+IHRoZSBpbmZvcm1hdGlv
-biB3aGVyZSB0byBhbGxvY2F0ZSBmcm9tLCBmaWd1cmluZyBvdXQgdGhlIGRldGFpbHMgbGlrZSAN
-Cj4gaG93IG1hbnkgYnl0ZXMsIHdoaWNoIGZvcm1hdCwgcGxhbmUgbGF5b3V0IGV0Yy4uIGlzIHN0
-aWxsIHRoZSBqb2Igb2YgDQo+IHVzZXJzcGFjZS4NCg0KRXZlbiB3aXRoIFVWQywgd2hlcmUgdG8g
-YWxsb2NhdGUgbWVtb3J5IGZyb20gd2lsbCBkZXBlbmQgb24gdGhlIHVzZQ0KY2FzZS4gSWYgdGhl
-IGNvbnN1bWVyIGlzIGEgZGV2aWNlIHRoYXQgZG9lc24ndCBzdXBwb3J0IG5vbi1jb250aWd1b3Vz
-DQpETUEsIHRoZSBzeXN0ZW0gaGVhcCB3b24ndCB3b3JrLg0KDQpBY3R1YWxseSwgY291bGQgeW91
-IGV4cGxhaW4gd2h5IFVWQyB3b3JrcyBiZXR0ZXIgd2l0aCB0aGUgc3lzdGVtIGhlYXAgPw0KSSdt
-IGxvb2tpbmcgYXQgdmlkZW9idWYyIGFzIGFuIGltcG9ydGVyLCBhbmQgaXQgZG9lc24ndCBjYWxs
-IHRoZSBkbWFidWYNCmFzIGZhciBhcyBJIGNhbiB0ZWxsLCBzbyBjYWNoZSBtYW5hZ2VtZW50IHBy
-b3ZpZGVkIGJ5IHRoZSBleHBvcnRlciBzZWVtcw0KdG8gYmUgYnlwYXNzZWQgaW4gYW55IGNhc2Uu
-DQoNCj4gV2hhdCB3ZSBkbyBoYXZlIGlzIGNvbXBhdGliaWxpdHkgYmV0d2VlbiBoZWFwcy4gRS5n
-LiBhIENNQSBoZWFwIGlzIA0KPiB1c3VhbGx5IGNvbXBhdGlibGUgd2l0aCB0aGUgc3lzdGVtIGhl
-YXAgb3IgbWlnaHQgZXZlbiBiZSBhIHN1YnNldCBvZiANCj4gYW5vdGhlciBDTUEgaGVhcC4gQnV0
-IEkgd2FudGVkIHRvIGFkZCB0aGF0IGFzIG5leHQgc3RlcCB0byB0aGUgaGVhcHMgDQo+IGZyYW1l
-d29yayBpdHNlbGYuDQo+IA0KPiA+IC0gRGV2aWNlcyBjb3VsZCBoYXZlIGRpZmZlcmVudCBjb25z
-dHJhaW50cyBiYXNlZCBvbiBwYXJ0aWN1bGFyDQo+ID4gICAgY29uZmlndXJhdGlvbnMuIEZvciBp
-bnN0YW5jZSwgYSBkZXZpY2UgbWF5IHJlcXVpcmUgc3BlY2lmaWMgbWVtb3J5DQo+ID4gICAgbGF5
-b3V0IGZvciBtdWx0aS1wbGFuYXIgWVVWIGZvcm1hdHMgb25seSAoYXMgaW4gYWxsb2NhdGluZyB0
-aGUgWSBhbmQgQw0KPiA+ICAgIHBsYW5lcyBvZiBOVjEyIGZyb20gZGlmZmVyZW50IG1lbW9yeSBi
-YW5rcykuIEEgZHluYW1pYyBBUEkgbWF5IHRodXMgYmUNCj4gPiAgICBuZWVkZWQgKGJ1dCBtYXkg
-YWxzbyBiZSB2ZXJ5IHBhaW5mdWwgdG8gdXNlIGZyb20gdXNlcnNwYWNlKS4NCj4gDQo+IFVmZiwg
-Z29vZCB0byBrbm93LiBCdXQgSSdtIG5vdCBzdXJlIGhvdyB0byBleHBvc2Ugc3R1ZmYgbGlrZSB0
-aGF0Lg0KDQpMZXQncyBzZWUgaWYgSmFtZXMgaGFzIGFueXRoaW5nIHRvIHNoYXJlIHdpdGggdXMg
-Oi0pIFdpdGggYSBiaXQgb2YgbHVjaw0Kd2Ugd29uJ3QgaGF2ZSB0byBzdGFydCBmcm9tIHNjcmF0
-Y2guDQoNCj4gPj4gV2hhdCdzIHN0aWxsIG1pc3NpbmcgaXMgY2VydGFpbmx5IG1hdGNoaW5nIHVz
-ZXJzcGFjZSBmb3IgdGhpcyBzaW5jZSBJDQo+ID4+IHdhbnRlZCB0byBkaXNjdXNzIHRoZSBpbml0
-aWFsIGtlcm5lbCBhcHByb2FjaCBmaXJzdC4NCj4gPg0KPiA+IGh0dHBzOi8vZ2l0LmxpYmNhbWVy
-YS5vcmcvbGliY2FtZXJhL2xpYmNhbWVyYS5naXQvIHdvdWxkIGJlIGEgZ29vZCBwbGFjZQ0KPiA+
-IHRvIHByb3RvdHlwZSB1c2Vyc3BhY2Ugc3VwcG9ydCA6LSkNCj4gDQo+IFRoYW5rcyBmb3IgdGhl
-IHBvaW50ZXIgYW5kIHRoZSByZXZpZXcsDQoNCkJ5IHRoZSB3YXksIHNpZGUgcXVlc3Rpb24sIGRv
-ZXMgYW55b25lIGtub3cgd2hhdCB0aGUgc3RhdHVzIG9mIGRtYSBoZWFwcw0Kc3VwcG9ydCBpcyBp
-biBtYWpvciBkaXN0cmlidXRpb25zID8gT24gbXkgR2VudG9vIGJveCwNCi9kZXYvZG1hX2hlYXAv
-c3lzdGVtIGlzIDA2MDAgcm9vdDpyb290LiBUaGF0J3MgZWFzeSB0byBjaGFuZ2UgZm9yIGENCmRl
-dmVsb3BlciwgYnV0IG5vdCBmcmllbmRseSB0byBlbmQtdXNlcnMuIElmIHdlIHdhbnQgdG8gbW92
-ZSBmb3J3YXJkDQp3aXRoIGRtYSBoZWFwcyBhcyBzdGFuZGFyZCBtdWx0aW1lZGlhIGFsbG9jYXRv
-cnMgKGFuZCBJIHdvdWxkIHJlYWxseQ0KbGlrZSB0byBzZWUgdGhhdCBoYXBwZW5pbmcpLCB3ZSBo
-YXZlIHRvIG1ha2Ugc3VyZSB0aGV5IGNhbiBiZSB1c2VkLg0KDQo+ID4+IFBsZWFzZSB0YWtlIGEg
-bG9vayBhbmQgY29tbWVudC4NCj4gPj4NCj4gPj4gVGhhbmtzLA0KPiA+PiBDaHJpc3RpYW4uDQo+
-ID4+DQo+ID4+IFsxXSBodHRwczovL2xvcmUua2VybmVsLm9yZy9hbGwvMTFhNmY5N2MtZTQ1Zi1m
-MjRiLThhNzMtNDhkNWEzODhhMmNjQGdtYWlsLmNvbS9ULw0KDQotLSANClJlZ2FyZHMsDQoNCkxh
-dXJlbnQgUGluY2hhcnQNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMu
-bGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWct
-bGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+Based on discussions at LPC, this series adds a memory.stat counter for
+exported dmabufs. This counter allows us to continue tracking
+system-wide total exported buffer sizes which there is no longer any
+way to get without DMABUF_SYSFS_STATS, and adds a new capability to
+track per-cgroup exported buffer sizes. The total (root counter) is
+helpful for accounting in-kernel dmabuf use (by comparing with the sum
+of child nodes or with the sum of sizes of mapped buffers or FD
+references in procfs) in addition to helping identify driver memory
+leaks when in-kernel use continually increases over time. With
+per-application cgroups, the per-cgroup counter allows us to quickly
+see how much dma-buf memory an application has caused to be allocated.
+This avoids the need to read through all of procfs which can be a
+lengthy process, and causes the charge to "stick" to the allocating
+process/cgroup as long as the buffer is alive, regardless of how the
+buffer is shared (unless the charge is transferred).
+
+The first patch adds the counter to memcg. The next two patches allow
+the charge for a buffer to be transferred across cgroups which is
+necessary because of the way most dmabufs are allocated from a central
+process on Android. The fourth patch adds the binder object flags to
+the existing selinux_binder_transfer_file LSM hook and a SELinux
+permission for charge transfers.
+
+[1] https://lore.kernel.org/all/20220617085702.4298-1-christian.koenig@amd.com/
+
+v2:
+Actually charge memcg vs just mutate the stat counter per Shakeel Butt
+and Michal Hocko. Shakeel pointed me at the skmem functions which
+turned out to be very similar to how I was thinking the dmabuf tracking
+should work. So I've added a pair of dmabuf functions that do
+essentially the same thing, except conditionally implemented behind
+CONFIG_MEMCG alongside the other charge/uncharge functions.
+
+Drop security_binder_transfer_charge per Casey Schaufler and Paul Moore
+
+Drop BINDER_FDA_FLAG_XFER_CHARGE (and fix commit message) per Carlos
+Llamas
+
+Don't expose is_dma_buf_file for use by binder per Hillf Danton
+
+Call dma_buf_stats_teardown in dma_buf_export error handling
+
+Rebase onto v6.2-rc5
+
+Hridya Valsaraju (1):
+  binder: Add flags to relinquish ownership of fds
+
+T.J. Mercier (3):
+  memcg: Track exported dma-buffers
+  dmabuf: Add cgroup charge transfer function
+  security: binder: Add binder object flags to
+    selinux_binder_transfer_file
+
+ Documentation/admin-guide/cgroup-v2.rst |  5 ++
+ drivers/android/binder.c                | 27 ++++++++--
+ drivers/dma-buf/dma-buf.c               | 69 +++++++++++++++++++++++++
+ include/linux/dma-buf.h                 |  4 ++
+ include/linux/lsm_hook_defs.h           |  2 +-
+ include/linux/lsm_hooks.h               |  5 +-
+ include/linux/memcontrol.h              | 43 +++++++++++++++
+ include/linux/security.h                |  6 ++-
+ include/uapi/linux/android/binder.h     | 19 +++++--
+ mm/memcontrol.c                         | 19 +++++++
+ security/security.c                     |  4 +-
+ security/selinux/hooks.c                | 13 ++++-
+ security/selinux/include/classmap.h     |  2 +-
+ 13 files changed, 201 insertions(+), 17 deletions(-)
+
+
+base-commit: 2241ab53cbb5cdb08a6b2d4688feb13971058f65
+-- 
+2.39.0.246.g2a6d74b583-goog
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
