@@ -2,74 +2,117 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C9946777D1
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 10:51:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id EA5A8677B1B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 13:38:18 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AC05244384
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 09:51:44 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 604413EBC6
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Jan 2023 09:51:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AEF5C4437A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 12:38:17 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 57D514437A
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Jan 2023 12:38:01 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linuxfoundation.org header.s=korg header.b=KUjTYbl3;
-	spf=pass (lists.linaro.org: domain of gregkh@linuxfoundation.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=gregkh@linuxfoundation.org;
-	dmarc=pass (policy=none) header.from=linuxfoundation.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id D193C60E00;
-	Mon, 23 Jan 2023 09:51:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B19F0C433EF;
-	Mon, 23 Jan 2023 09:51:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1674467488;
-	bh=I1TFqfaAYrE67AWuhwWFFkrdbPVOTogsIu0uGhqZTMc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=KUjTYbl3HSo04F7350eYhPO++nuP3ClQEi4/mYv1LTVeS1HcAahmC6f3QiKxhUSK0
-	 cLhlfWr9Tgcf8Fn8o9sDFM23S4fteDSwKEB7WdAOV2uJCMLLeH4TuKVCzlUPB6zwq+
-	 mmhUIZWAHUv1EUx8mlzjIDzcy0s4w25PHrPB6w+0=
-Date: Mon, 23 Jan 2023 10:51:25 +0100
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: Li Chen <lchen@ambarella.com>
-Message-ID: <Y85YncUCtRyVnpvt@kroah.com>
-References: <20230123073305.149940-1-lchen@ambarella.com>
- <20230123073305.149940-11-lchen@ambarella.com>
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=GpXuLr1s;
+	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.221.48 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-wr1-f48.google.com with SMTP id h12so6664210wrv.10
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Jan 2023 04:38:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:from:to:cc:subject:date:message-id:reply-to;
+        bh=k0SDGOj6yXybPWOXI0fMP8pl7SI76y6qCgJVOq7wd3Y=;
+        b=GpXuLr1s89IbQNq8YVP7+aIEkWj2M9QCXLnURqJrGDOtNn+MiDcvF6CwMsX1JRRdFu
+         gFTGtAzA624j5SspxiuoxqAM4PF+iDIQUYU47W5mDccUa0mJi/T8tEP/plPESBcr9EeM
+         6llyFwmbjOMjJyFzZ4yGyUA/3W7XAnW8ZcTHfMFUw+xwbDeoKqiV9G88ZOe/a3ouVY2w
+         /NLmmQSy/5TqabrQ6K/qazq0IBgnOZZgX4pnRGin+9nIGubhsSQdsl1Tl6hUeE5Nrm2O
+         56fEqC2T4h1ZBwlmIBAA90LU2bSoaVSgd3AgYnU77aEVJbbMZjaj3zNA2XJTNmUgPAKm
+         kQIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:to
+         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=k0SDGOj6yXybPWOXI0fMP8pl7SI76y6qCgJVOq7wd3Y=;
+        b=yZ+NGgzoZLt0nDrMf9QMOjHluVYjKoilJyeGOD2k2AOUHU7530W7MtjeThxadR6fxs
+         Ixos2jLx7i532shyOImo+RTkHSJLdeWO7K5W/VK8KThcElFk06NvbtVc2/8o7QuVvJGl
+         f/63zuMPyr7vTLeTrhRN6CWANp6M7Y+JwZN10T3Y3BwuTX8h9vA1V7PhOvVgoqW2hq/J
+         3pkSwwdpjHR/RjDSRTNsftSEX3BCdC6pdXgbbquV4NXVMOs6uTji3dA7nH4e1oaNtvGp
+         0FO+L7GEirqwvTXF62rsFk7UfEE8PlKJVWtIhrb8LJ3y5PETBsvZWXosb9oMMMhYaI/T
+         81aQ==
+X-Gm-Message-State: AFqh2kq+OtYJRPtRztoTJstEHbwWNtbbZaCQlPN65Yrh0ctUToPDo8vg
+	jOvVFzJBHVx+e8eZdRXjnYk=
+X-Google-Smtp-Source: AMrXdXuhWpkg1xDO4DN/sJG6IqAq8RqKHMaDkKgR7drCIolSUNpdc6T1YBCDkNoHWnR9meWkZB4XQw==
+X-Received: by 2002:a05:6000:98f:b0:2be:296:3b5 with SMTP id by15-20020a056000098f00b002be029603b5mr23468134wrb.17.1674477480330;
+        Mon, 23 Jan 2023 04:38:00 -0800 (PST)
+Received: from able.fritz.box (p5b0ea2e7.dip0.t-ipconnect.de. [91.14.162.231])
+        by smtp.gmail.com with ESMTPSA id k3-20020a5d6e83000000b00289bdda07b7sm4284510wrz.92.2023.01.23.04.37.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 Jan 2023 04:37:59 -0800 (PST)
+From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
+X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+To: l.stach@pengutronix.de,
+	nicolas@ndufresne.ca,
+	ppaalanen@gmail.com,
+	sumit.semwal@linaro.org,
+	daniel@ffwll.ch,
+	robdclark@gmail.com,
+	tfiga@chromium.org,
+	sebastian.wick@redhat.com,
+	hverkuil@xs4all.nl,
+	dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	linux-media@vger.kernel.org,
+	benjamin.gaignard@collabora.com,
+	lmark@codeaurora.org,
+	labbott@redhat.com,
+	Brian.Starkey@arm.com,
+	jstultz@google.com,
+	laurent.pinchart@ideasonboard.com,
+	mchehab@kernel.org
+Date: Mon, 23 Jan 2023 13:37:54 +0100
+Message-Id: <20230123123756.401692-1-christian.koenig@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230123073305.149940-11-lchen@ambarella.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 604413EBC6
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.00 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
-	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+X-Rspamd-Queue-Id: 57D514437A
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.17 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	RCVD_IN_DNSWL_HI(-1.00)[91.14.162.231:received,209.85.221.48:from];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	R_MIXED_CHARSET(0.83)[subject];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
 	MIME_GOOD(-0.10)[text/plain];
-	NEURAL_HAM(-0.00)[-1.000];
-	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TO_DN_ALL(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[linuxfoundation.org:+];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	NEURAL_HAM(-0.00)[-0.693];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	FROM_HAS_DN(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	RCVD_COUNT_THREE(0.00)[3];
+	TO_DN_NONE(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.221.48:from];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_TO(0.00)[pengutronix.de,ndufresne.ca,gmail.com,linaro.org,ffwll.ch,chromium.org,redhat.com,xs4all.nl,lists.freedesktop.org,lists.linaro.org,vger.kernel.org,collabora.com,codeaurora.org,arm.com,google.com,ideasonboard.com,kernel.org];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: USDW7FJPB6J5UY4XJFIXLZIURZ5JXKWR
-X-Message-ID-Hash: USDW7FJPB6J5UY4XJFIXLZIURZ5JXKWR
-X-MailFrom: gregkh@linuxfoundation.org
+Message-ID-Hash: D5IJDXPL25FXU52C7JDMRQ7A4HXAJONQ
+X-Message-ID-Hash: D5IJDXPL25FXU52C7JDMRQ7A4HXAJONQ
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Jiri Slaby <jirislaby@kernel.org>, Li Chen <me@linux.beauty>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, open list <linux-kernel@vger.kernel.org>, "open list:SERIAL DRIVERS" <linux-serial@vger.kernel.org>, "moderated list:ARM/Ambarella SoC support" <linux-arm-kernel@lists.infradead.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <dri-devel@lists.freedesktop.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 10/15] serial: ambarella: add support for Ambarella uart_port
+Subject: [Linaro-mm-sig] DMA-heap driver hints
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/USDW7FJPB6J5UY4XJFIXLZIURZ5JXKWR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/D5IJDXPL25FXU52C7JDMRQ7A4HXAJONQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -79,27 +122,35 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon, Jan 23, 2023 at 03:32:25PM +0800, Li Chen wrote:
-> This driver add support for Ambarella's uart, which
-> can be used for console and etc.
-> 
-> Signed-off-by: Li Chen <lchen@ambarella.com>
-> Change-Id: Ie68af7ad2187e21853e58d52cd97fd7145303730
-> ---
->  MAINTAINERS                         |    1 +
->  drivers/tty/serial/Kconfig          |   16 +
->  drivers/tty/serial/Makefile         |    1 +
->  drivers/tty/serial/ambarella_uart.c | 1581 +++++++++++++++++++++++++++
->  drivers/tty/serial/ambarella_uart.h |  120 ++
+Hi guys,
 
-Why do you need a .h file for a single .c file?  They should all be in
-one file please.
+this is just an RFC! The last time we discussed the DMA-buf coherency
+problem [1] we concluded that DMA-heap first needs a better way to
+communicate to userspace which heap to use for a certain device.
 
-Also, no change-id, you know this...
+As far as I know userspace currently just hard codes that information
+which is certainly not desirable considering that we should have this
+inside the kernel as well.
 
-thanks,
+So what those two patches here do is to first add some
+dma_heap_create_device_link() and  dma_heap_remove_device_link()
+function and then demonstrating the functionality with uvcvideo
+driver.
 
-greg k-h
+The preferred DMA-heap is represented with a symlink in sysfs between
+the device and the virtual DMA-heap device node.
+
+What's still missing is certainly matching userspace for this since I
+wanted to discuss the initial kernel approach first.
+
+Please take a look and comment.
+
+Thanks,
+Christian.
+
+[1] https://lore.kernel.org/all/11a6f97c-e45f-f24b-8a73-48d5a388a2cc@gmail.com/T/
+
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
