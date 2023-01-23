@@ -2,64 +2,60 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 25EE667860A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 20:18:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE1B1678610
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 20:18:46 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 373B03EE47
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 19:18:26 +0000 (UTC)
-Received: from mail-yw1-f202.google.com (mail-yw1-f202.google.com [209.85.128.202])
-	by lists.linaro.org (Postfix) with ESMTPS id 0FBD33F051
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Jan 2023 19:17:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E0303443F5
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Jan 2023 19:18:45 +0000 (UTC)
+Received: from mail-yb1-f201.google.com (mail-yb1-f201.google.com [209.85.219.201])
+	by lists.linaro.org (Postfix) with ESMTPS id 9E94C443FB
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Jan 2023 19:18:03 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20210112 header.b=Subdt7mb;
-	spf=pass (lists.linaro.org: domain of 3ZN3OYwkKDX8wmphuflhujrrjoh.frpolqdur-pp-vljolvwv.olqdur.ruj@flex--tjmercier.bounces.google.com designates 209.85.128.202 as permitted sender) smtp.mailfrom=3ZN3OYwkKDX8wmphuflhujrrjoh.frpolqdur-pp-vljolvwv.olqdur.ruj@flex--tjmercier.bounces.google.com;
+	dkim=pass header.d=google.com header.s=20210112 header.b="CLJ2JxK/";
+	spf=pass (lists.linaro.org: domain of 3a93OYwkKDYY3two1mso1qyyqvo.mywvsxk1y-ww-2sqvs232.vsxk1y.y1q@flex--tjmercier.bounces.google.com designates 209.85.219.201 as permitted sender) smtp.mailfrom=3a93OYwkKDYY3two1mso1qyyqvo.mywvsxk1y-ww-2sqvs232.vsxk1y.y1q@flex--tjmercier.bounces.google.com;
 	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-yw1-f202.google.com with SMTP id 00721157ae682-4fee82718afso98304967b3.5
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Jan 2023 11:17:57 -0800 (PST)
+Received: by mail-yb1-f201.google.com with SMTP id r8-20020a252b08000000b007b989d5e105so14080466ybr.11
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Jan 2023 11:18:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20210112;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=29eNHuXkN4Biw7YjDro7DKxD9MLgh2JPpCUKKyMlqpA=;
-        b=Subdt7mbpSJ3q++6bJrXZjJZZw2B5aXVhcYIOjpWp1e7w65W6r5oAUZpnmuhuuxtGC
-         m6yHwVIfAM74kNHnxjivy2kMGAg6vCfv+3hhWBYw2BJN0Dja1Y7NQKOgWr6COa+8oUkk
-         rUnUidJgv1sRL2Bt6YdHCPqVzpfizdrAy9YnM1stYfRMcfzP4DXyiUe0ObHRm1rO0ZdX
-         Z1ZA/fI74arWwHwvDOYrrcmDZGCsMH3Nq+OQolvzt4CNc9tJFsaB0vn3Yw+H2aqetp8n
-         bmppFH7vBRP4aW++HEHSq4uD8ir3GpzrY/G/loULfk/4Fe0e7jWIDY4IGgw0L9zKW6Fz
-         9YCg==
+        bh=9WOZzSEfhu/PT9TWBWMQDCCNsrofWV34oFDU/0sj1mQ=;
+        b=CLJ2JxK/Tm4oa2T67r1/7AoCewa4cPoaCpXx/gVHbZ1m+FYlbdBISpcie92wke9qiT
+         ywnZGTRRWgUyvtV2GeIN6CSF1A1BpACoPsOvCJSqkdka36IG7lwA9jHJB0/1Y37BiDn6
+         UZyz4QR44eh7OHGKOjLnRuXG7qELlMRlfRNYaxnDlTMYAnQZZAKF7GLGFraikV5q7pPa
+         PqEGE55YfXGgQoOaL42PCJmSLM5OLIrr2pXTamoSK+ZBJQZ3xablgI1e6ZxykShX+C1V
+         OGCeujU9/+VSQurUIb0N4LKyFw0PX0Xvt3l2bOlWDy6qNiZqzVXsJcA5m/zeCrF4rUUR
+         ohNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=cc:to:from:subject:message-id:references:mime-version:in-reply-to
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=29eNHuXkN4Biw7YjDro7DKxD9MLgh2JPpCUKKyMlqpA=;
-        b=kucB5zMLZBAzdR7X3r6A8ZL0UxeYo8VjUGZNcwkQD+6viEQ+WX4bx/FhEvG/7ccbny
-         fbsRES+TW1ujOej4hMAwanef+ThSLG6l+uiwIUUNqU80EhGL+VIZKZmimWUG9i3U62wo
-         4ic/n21Fe1d/Uhvr09hpI8wsf7LWD5hboXluIjIdV15CG+ZR7378QCzr81o7ixHQXWO4
-         9F3M8UqaO3vd+omRSxRUvQToIZQb+aKp3wCK8snJ7t5LeitSSn6X9f37muKhwlbVLJNz
-         Gew9BXYxGO+xp61205PleljuukSIBRaMhBKbabHnRnLuJde0K4iAdXMLbUXbQAAC01lM
-         Fjag==
-X-Gm-Message-State: AFqh2kr1QbUSRs/6Legf1lSuoZZZtjIkN6fjM28/Xpfa1U9OsCaEKCKJ
-	XrNKFMRCArwvu23URXBzkG2oQ+R6AAQpUfE=
-X-Google-Smtp-Source: AMrXdXuIEmBCRRQ29mCX2Lz8F60RAV61DpR49m4PqdkPLl3Fou0sh8htd5KZF+eNK2HXmLDFr4FD/qKGK/2gVtE=
+        bh=9WOZzSEfhu/PT9TWBWMQDCCNsrofWV34oFDU/0sj1mQ=;
+        b=vO5GnTY+eR8Un/E3AEsdfGhUCxpsiahtZUog13/nvR7wZwpCDFNikN6bqD7SncPFC1
+         ZBKPImDiJNoHMj2ZJbELT+w3CBiGotz+++UPUIoTPcAWPU6hSGh9BlGiK++VCo0EFiKY
+         uxs9/W/gAHr9JiNHuipmjrZk55f3ZWKoy1LRGW/y6meHblvoDDWROSK9iwyz1D/2hfwi
+         GgFeCB0Tizg6Opo3E95oOiEQyMXj60tC86sqrLNd6J8ePrUTxyEuX5LCvf1lW86pvief
+         WMYej8UN/rjvYdPMessYhVWzb5OAi4JDI47/LhXBMYdP2Fm62IEkPK/byzI5nyoPvwQa
+         HKxw==
+X-Gm-Message-State: AFqh2kop6aunsaxY/GLIk52ldYKKSvRrXnxHFypGzsQ/g9t52auYPScv
+	G0u+lsThdMv3uTp62OffuE65IzYrSCOLBjg=
+X-Google-Smtp-Source: AMrXdXt5UsJV8XnGROzCqwUjMEtxGJTY0AAa2SUnm4rAwiP8wDQKiwcGvs1ceYITQIG6UCVtpU2h3/VNxLbuwi8=
 X-Received: from tj.c.googlers.com ([fda3:e722:ac3:cc00:20:ed76:c0a8:53a])
- (user=tjmercier job=sendgmr) by 2002:a81:5553:0:b0:4d1:959d:fa49 with SMTP id
- j80-20020a815553000000b004d1959dfa49mr3602848ywb.33.1674501476646; Mon, 23
- Jan 2023 11:17:56 -0800 (PST)
-Date: Mon, 23 Jan 2023 19:17:23 +0000
+ (user=tjmercier job=sendgmr) by 2002:a25:dc92:0:b0:7b0:3379:9c00 with SMTP id
+ y140-20020a25dc92000000b007b033799c00mr3149691ybe.359.1674501483256; Mon, 23
+ Jan 2023 11:18:03 -0800 (PST)
+Date: Mon, 23 Jan 2023 19:17:24 +0000
 In-Reply-To: <20230123191728.2928839-1-tjmercier@google.com>
 Mime-Version: 1.0
 References: <20230123191728.2928839-1-tjmercier@google.com>
 X-Mailer: git-send-email 2.39.0.246.g2a6d74b583-goog
-Message-ID: <20230123191728.2928839-2-tjmercier@google.com>
+Message-ID: <20230123191728.2928839-3-tjmercier@google.com>
 From: "T.J. Mercier" <tjmercier@google.com>
-To: tjmercier@google.com, Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
-	Johannes Weiner <hannes@cmpxchg.org>, Jonathan Corbet <corbet@lwn.net>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>, Michal Hocko <mhocko@kernel.org>,
-	Roman Gushchin <roman.gushchin@linux.dev>, Shakeel Butt <shakeelb@google.com>,
-	Muchun Song <muchun.song@linux.dev>, Andrew Morton <akpm@linux-foundation.org>
+To: tjmercier@google.com, Sumit Semwal <sumit.semwal@linaro.org>,
+	"=?UTF-8?q?Christian=20K=C3=B6nig?=" <christian.koenig@amd.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 0FBD33F051
+X-Rspamd-Queue-Id: 9E94C443FB
 X-Spamd-Bar: ------
 X-Spamd-Result: default: False [-6.20 / 15.00];
 	REPLY(-4.00)[];
@@ -67,36 +63,36 @@ X-Spamd-Result: default: False [-6.20 / 15.00];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
 	MV_CASE(0.50)[];
-	FORGED_SENDER(0.30)[tjmercier@google.com,3ZN3OYwkKDX8wmphuflhujrrjoh.frpolqdur-pp-vljolvwv.olqdur.ruj@flex--tjmercier.bounces.google.com];
+	FORGED_SENDER(0.30)[tjmercier@google.com,3a93OYwkKDYY3two1mso1qyyqvo.mywvsxk1y-ww-2sqvs232.vsxk1y.y1q@flex--tjmercier.bounces.google.com];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	R_DKIM_ALLOW(-0.20)[google.com:s=20210112];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.202:from];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.201:from];
 	RCVD_TLS_LAST(0.00)[];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	MIME_TRACE(0.00)[0:+];
-	FROM_NEQ_ENVFROM(0.00)[tjmercier@google.com,3ZN3OYwkKDX8wmphuflhujrrjoh.frpolqdur-pp-vljolvwv.olqdur.ruj@flex--tjmercier.bounces.google.com];
-	NEURAL_HAM(-0.00)[-0.987];
+	FROM_NEQ_ENVFROM(0.00)[tjmercier@google.com,3a93OYwkKDYY3two1mso1qyyqvo.mywvsxk1y-ww-2sqvs232.vsxk1y.y1q@flex--tjmercier.bounces.google.com];
+	NEURAL_HAM(-0.00)[-0.985];
 	ARC_NA(0.00)[];
 	DKIM_TRACE(0.00)[google.com:+];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	TO_DN_SOME(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
-Message-ID-Hash: ZKLI773SXQF4RVVRLUELNNOYHD64KNBW
-X-Message-ID-Hash: ZKLI773SXQF4RVVRLUELNNOYHD64KNBW
-X-MailFrom: 3ZN3OYwkKDX8wmphuflhujrrjoh.frpolqdur-pp-vljolvwv.olqdur.ruj@flex--tjmercier.bounces.google.com
+Message-ID-Hash: KQT2FXJA2I3TTAMXG2WJ7X7LNSGV353O
+X-Message-ID-Hash: KQT2FXJA2I3TTAMXG2WJ7X7LNSGV353O
+X-MailFrom: 3a93OYwkKDYY3two1mso1qyyqvo.mywvsxk1y-ww-2sqvs232.vsxk1y.y1q@flex--tjmercier.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: android-mm@google.com, jstultz@google.com, jeffv@google.com, cmllamas@google.com, linux-security-module@vger.kernel.org, selinux@vger.kernel.org, cgroups@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-mm@kvack.org
+CC: hannes@cmpxchg.org, android-mm@google.com, jstultz@google.com, jeffv@google.com, cmllamas@google.com, linux-security-module@vger.kernel.org, selinux@vger.kernel.org, cgroups@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 1/4] memcg: Track exported dma-buffers
+Subject: [Linaro-mm-sig] [PATCH v2 2/4] dmabuf: Add cgroup charge transfer function
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZKLI773SXQF4RVVRLUELNNOYHD64KNBW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KQT2FXJA2I3TTAMXG2WJ7X7LNSGV353O/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -106,225 +102,119 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-When a buffer is exported to userspace, use memcg to attribute the
-buffer to the allocating cgroup until all buffer references are
-released.
-
-Unlike the dmabuf sysfs stats implementation, this memcg accounting
-avoids contention over the kernfs_rwsem incurred when creating or
-removing nodes.
+The dma_buf_transfer_charge function provides a way for processes to
+transfer charge of a buffer to a different cgroup. This is essential
+for the cases where a central allocator process does allocations for
+various subsystems, hands over the fd to the client who requested the
+memory, and drops all references to the allocated memory.
 
 Signed-off-by: T.J. Mercier <tjmercier@google.com>
 ---
- Documentation/admin-guide/cgroup-v2.rst |  4 +++
- drivers/dma-buf/dma-buf.c               | 13 +++++++++
- include/linux/dma-buf.h                 |  3 ++
- include/linux/memcontrol.h              | 38 +++++++++++++++++++++++++
- mm/memcontrol.c                         | 19 +++++++++++++
- 5 files changed, 77 insertions(+)
+ drivers/dma-buf/dma-buf.c  | 56 ++++++++++++++++++++++++++++++++++++++
+ include/linux/dma-buf.h    |  1 +
+ include/linux/memcontrol.h |  5 ++++
+ 3 files changed, 62 insertions(+)
 
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index c8ae7c897f14..538ae22bc514 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -1455,6 +1455,10 @@ PAGE_SIZE multiple when read back.
- 		Amount of memory used for storing in-kernel data
- 		structures.
- 
-+	  dmabuf (npn)
-+		Amount of memory used for exported DMA buffers allocated by the cgroup.
-+		Stays with the allocating cgroup regardless of how the buffer is shared.
-+
- 	  workingset_refault_anon
- 		Number of refaults of previously evicted anonymous pages.
- 
 diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-index e6528767efc7..a6a8cb5cb32d 100644
+index a6a8cb5cb32d..ac3d02a7ecf8 100644
 --- a/drivers/dma-buf/dma-buf.c
 +++ b/drivers/dma-buf/dma-buf.c
-@@ -75,6 +75,9 @@ static void dma_buf_release(struct dentry *dentry)
- 	 */
- 	BUG_ON(dmabuf->cb_in.active || dmabuf->cb_out.active);
+@@ -11,6 +11,7 @@
+  * refining of this idea.
+  */
  
-+	mem_cgroup_uncharge_dmabuf(dmabuf->memcg, PAGE_ALIGN(dmabuf->size) / PAGE_SIZE);
-+	mem_cgroup_put(dmabuf->memcg);
++#include <linux/atomic.h>
+ #include <linux/fs.h>
+ #include <linux/slab.h>
+ #include <linux/dma-buf.h>
+@@ -1626,6 +1627,61 @@ void dma_buf_vunmap_unlocked(struct dma_buf *dmabuf, struct iosys_map *map)
+ }
+ EXPORT_SYMBOL_NS_GPL(dma_buf_vunmap_unlocked, DMA_BUF);
+ 
++/**
++ * dma_buf_transfer_charge - Change the cgroup to which the provided dma_buf is charged.
++ * @dmabuf_file:	[in]	file for buffer whose charge will be migrated to a different cgroup
++ * @target:		[in]	the task_struct of the destination process for the cgroup charge
++ *
++ * Only tasks that belong to the same cgroup the buffer is currently charged to
++ * may call this function, otherwise it will return -EPERM.
++ *
++ * Returns 0 on success, or a negative errno code otherwise.
++ */
++int dma_buf_transfer_charge(struct file *dmabuf_file, struct task_struct *target)
++{
++	struct mem_cgroup *current_cg, *target_cg;
++	struct dma_buf *dmabuf;
++	unsigned int nr_pages;
++	int ret = 0;
 +
- 	dma_buf_stats_teardown(dmabuf);
- 	dmabuf->ops->release(dmabuf);
- 
-@@ -673,6 +676,13 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
- 	if (ret)
- 		goto err_dmabuf;
- 
-+	dmabuf->memcg = get_mem_cgroup_from_mm(current->mm);
-+	if (!mem_cgroup_charge_dmabuf(dmabuf->memcg, PAGE_ALIGN(dmabuf->size) / PAGE_SIZE,
-+				      GFP_KERNEL)) {
++	if (!IS_ENABLED(CONFIG_MEMCG))
++		return 0;
++
++	if (WARN_ON(!dmabuf_file) || WARN_ON(!target))
++		return -EINVAL;
++
++	if (!is_dma_buf_file(dmabuf_file))
++		return -EBADF;
++	dmabuf = dmabuf_file->private_data;
++
++	nr_pages = PAGE_ALIGN(dmabuf->size) / PAGE_SIZE;
++	current_cg = mem_cgroup_from_task(current);
++	target_cg = get_mem_cgroup_from_mm(target->mm);
++
++	if (current_cg == target_cg)
++		goto skip_transfer;
++
++	if (!mem_cgroup_charge_dmabuf(target_cg, nr_pages, GFP_KERNEL)) {
 +		ret = -ENOMEM;
-+		goto err_memcg;
++		goto skip_transfer;
 +	}
 +
- 	file->private_data = dmabuf;
- 	file->f_path.dentry->d_fsdata = dmabuf;
- 	dmabuf->file = file;
-@@ -683,6 +693,9 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
- 
- 	return dmabuf;
- 
-+err_memcg:
-+	mem_cgroup_put(dmabuf->memcg);
-+	dma_buf_stats_teardown(dmabuf);
- err_dmabuf:
- 	if (!resv)
- 		dma_resv_fini(dmabuf->resv);
++	if (cmpxchg(&dmabuf->memcg, current_cg, target_cg) != current_cg) {
++		/* Only the current owner can transfer the charge */
++		ret = -EPERM;
++		mem_cgroup_uncharge_dmabuf(target_cg, nr_pages);
++		goto skip_transfer;
++	}
++
++	mem_cgroup_uncharge_dmabuf(current_cg, nr_pages);
++	mem_cgroup_put(current_cg); /* unref from buffer - buffer keeps new ref to target_cg */
++	return 0;
++
++skip_transfer:
++	mem_cgroup_put(target_cg);
++	return ret;
++}
++
+ #ifdef CONFIG_DEBUG_FS
+ static int dma_buf_debug_show(struct seq_file *s, void *unused)
+ {
 diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
-index 6fa8d4e29719..1f0ffb8e4bf5 100644
+index 1f0ffb8e4bf5..f25eb8e60fb2 100644
 --- a/include/linux/dma-buf.h
 +++ b/include/linux/dma-buf.h
-@@ -22,6 +22,7 @@
- #include <linux/fs.h>
- #include <linux/dma-fence.h>
- #include <linux/wait.h>
-+#include <linux/memcontrol.h>
- 
- struct device;
- struct dma_buf;
-@@ -446,6 +447,8 @@ struct dma_buf {
- 		struct dma_buf *dmabuf;
- 	} *sysfs_entry;
- #endif
-+	/* The cgroup to which this buffer is currently attributed */
-+	struct mem_cgroup *memcg;
- };
- 
- /**
+@@ -634,4 +634,5 @@ int dma_buf_vmap(struct dma_buf *dmabuf, struct iosys_map *map);
+ void dma_buf_vunmap(struct dma_buf *dmabuf, struct iosys_map *map);
+ int dma_buf_vmap_unlocked(struct dma_buf *dmabuf, struct iosys_map *map);
+ void dma_buf_vunmap_unlocked(struct dma_buf *dmabuf, struct iosys_map *map);
++int dma_buf_transfer_charge(struct file *dmabuf_file, struct task_struct *target);
+ #endif /* __DMA_BUF_H__ */
 diff --git a/include/linux/memcontrol.h b/include/linux/memcontrol.h
-index d3c8203cab6c..c10b8565fdbf 100644
+index c10b8565fdbf..009298a446fe 100644
 --- a/include/linux/memcontrol.h
 +++ b/include/linux/memcontrol.h
-@@ -37,6 +37,7 @@ enum memcg_stat_item {
- 	MEMCG_KMEM,
- 	MEMCG_ZSWAP_B,
- 	MEMCG_ZSWAPPED,
-+	MEMCG_DMABUF,
- 	MEMCG_NR_STAT,
- };
- 
-@@ -673,6 +674,25 @@ static inline int mem_cgroup_charge(struct folio *folio, struct mm_struct *mm,
- 
- int mem_cgroup_swapin_charge_folio(struct folio *folio, struct mm_struct *mm,
- 				  gfp_t gfp, swp_entry_t entry);
-+
-+/**
-+ * mem_cgroup_charge_dmabuf - Charge dma-buf memory to a cgroup and update stat counter
-+ * @memcg: memcg to charge
-+ * @nr_pages: number of pages to charge
-+ * @gfp_mask: reclaim mode
-+ *
-+ * Charges @nr_pages to @memcg. Returns %true if the charge fit within
-+ * @memcg's configured limit, %false if it doesn't.
-+ */
-+bool __mem_cgroup_charge_dmabuf(struct mem_cgroup *memcg, unsigned int nr_pages, gfp_t gfp_mask);
-+static inline bool mem_cgroup_charge_dmabuf(struct mem_cgroup *memcg, unsigned int nr_pages,
-+					    gfp_t gfp_mask)
-+{
-+	if (mem_cgroup_disabled())
-+		return 0;
-+	return __mem_cgroup_charge_dmabuf(memcg, nr_pages, gfp_mask);
-+}
-+
- void mem_cgroup_swapin_uncharge_swap(swp_entry_t entry);
- 
- void __mem_cgroup_uncharge(struct folio *folio);
-@@ -690,6 +710,14 @@ static inline void mem_cgroup_uncharge(struct folio *folio)
- 	__mem_cgroup_uncharge(folio);
+@@ -1335,6 +1335,11 @@ struct mem_cgroup *mem_cgroup_from_css(struct cgroup_subsys_state *css)
+ 	return NULL;
  }
  
-+void __mem_cgroup_uncharge_dmabuf(struct mem_cgroup *memcg, unsigned int nr_pages);
-+static inline void mem_cgroup_uncharge_dmabuf(struct mem_cgroup *memcg, unsigned int nr_pages)
++static inline struct mem_cgroup *mem_cgroup_from_task(struct task_struct *p)
 +{
-+	if (mem_cgroup_disabled())
-+		return;
-+	__mem_cgroup_uncharge_dmabuf(memcg, nr_pages);
++	return NULL;
 +}
 +
- void __mem_cgroup_uncharge_list(struct list_head *page_list);
- static inline void mem_cgroup_uncharge_list(struct list_head *page_list)
- {
-@@ -1242,6 +1270,12 @@ static inline int mem_cgroup_swapin_charge_folio(struct folio *folio,
- 	return 0;
- }
- 
-+static inline bool mem_cgroup_charge_dmabuf(struct mem_cgroup *memcg, unsigned int nr_pages,
-+					    gfp_t gfp_mask)
-+{
-+	return true;
-+}
-+
- static inline void mem_cgroup_swapin_uncharge_swap(swp_entry_t entry)
+ static inline void obj_cgroup_put(struct obj_cgroup *objcg)
  {
  }
-@@ -1250,6 +1284,10 @@ static inline void mem_cgroup_uncharge(struct folio *folio)
- {
- }
- 
-+static inline void mem_cgroup_uncharge_dmabuf(struct mem_cgroup *memcg, unsigned int nr_pages)
-+{
-+}
-+
- static inline void mem_cgroup_uncharge_list(struct list_head *page_list)
- {
- }
-diff --git a/mm/memcontrol.c b/mm/memcontrol.c
-index ab457f0394ab..375d18370f4b 100644
---- a/mm/memcontrol.c
-+++ b/mm/memcontrol.c
-@@ -1502,6 +1502,7 @@ static const struct memory_stat memory_stats[] = {
- 	{ "unevictable",		NR_UNEVICTABLE			},
- 	{ "slab_reclaimable",		NR_SLAB_RECLAIMABLE_B		},
- 	{ "slab_unreclaimable",		NR_SLAB_UNRECLAIMABLE_B		},
-+	{ "dmabuf",			MEMCG_DMABUF			},
- 
- 	/* The memory events */
- 	{ "workingset_refault_anon",	WORKINGSET_REFAULT_ANON		},
-@@ -4042,6 +4043,7 @@ static const unsigned int memcg1_stats[] = {
- 	WORKINGSET_REFAULT_ANON,
- 	WORKINGSET_REFAULT_FILE,
- 	MEMCG_SWAP,
-+	MEMCG_DMABUF,
- };
- 
- static const char *const memcg1_stat_names[] = {
-@@ -4057,6 +4059,7 @@ static const char *const memcg1_stat_names[] = {
- 	"workingset_refault_anon",
- 	"workingset_refault_file",
- 	"swap",
-+	"dmabuf",
- };
- 
- /* Universal VM events cgroup1 shows, original sort order */
-@@ -7299,6 +7302,22 @@ void mem_cgroup_uncharge_skmem(struct mem_cgroup *memcg, unsigned int nr_pages)
- 	refill_stock(memcg, nr_pages);
- }
- 
-+bool __mem_cgroup_charge_dmabuf(struct mem_cgroup *memcg, unsigned int nr_pages, gfp_t gfp_mask)
-+{
-+	if (try_charge(memcg, gfp_mask, nr_pages) == 0) {
-+		mod_memcg_state(memcg, MEMCG_DMABUF, nr_pages);
-+		return true;
-+	}
-+
-+	return false;
-+}
-+
-+void __mem_cgroup_uncharge_dmabuf(struct mem_cgroup *memcg, unsigned int nr_pages)
-+{
-+	mod_memcg_state(memcg, MEMCG_DMABUF, -nr_pages);
-+	refill_stock(memcg, nr_pages);
-+}
-+
- static int __init cgroup_memory(char *s)
- {
- 	char *token;
 -- 
 2.39.0.246.g2a6d74b583-goog
 
