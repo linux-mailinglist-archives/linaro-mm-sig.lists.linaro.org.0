@@ -2,47 +2,48 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 545A4686828
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Feb 2023 15:23:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3318E6868EF
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Feb 2023 15:52:48 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4B4893EA3E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Feb 2023 14:23:56 +0000 (UTC)
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
-	by lists.linaro.org (Postfix) with ESMTPS id C84DF3EA3E
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Feb 2023 14:23:37 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DF3D13F193
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Feb 2023 14:52:46 +0000 (UTC)
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+	by lists.linaro.org (Postfix) with ESMTPS id 72DD93F193
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Feb 2023 14:52:29 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=PrERx5gf;
-	spf=none (lists.linaro.org: domain of tvrtko.ursulin@linux.intel.com has no SPF policy when checking 192.55.52.151) smtp.mailfrom=tvrtko.ursulin@linux.intel.com;
+	dkim=pass header.d=intel.com header.s=Intel header.b=OWnX7nJ3;
+	spf=none (lists.linaro.org: domain of tvrtko.ursulin@linux.intel.com has no SPF policy when checking 192.55.52.136) smtp.mailfrom=tvrtko.ursulin@linux.intel.com;
 	dmarc=pass (policy=none) header.from=intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1675261417; x=1706797417;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=8sZMEHk8pe9rMkHcroXBwwvy+4dmtJw9gS0wdi+sTdY=;
-  b=PrERx5gfAgGMChnJIoY8Tth0rwywNIM9UgCexv+XDeHMxTZF9EjHXfTc
-   XNNQ0Dwr2FQiX//GrbFiRvob5DjlHQvHCzbKLcXGlkef4+b/6FnPM8HCr
-   d8M+Q5tPkEW316siXhTxzKpPic5JEKQCmF8s+DvTy1JGu9tzFwn+F7wfd
-   4IojU4u1DmMM5t8A8V57vsoRBEk4E/6C/mX3v4QjtZXeERbNIJrxYPbmG
-   3ldRoIguCWVPSQ8wK2Ranu7HUaxp/nqofsBIqiB20cvP+RCKTdYr+iNz8
-   IVxxkh7VpolucmP2/1rMu8s1TdF+NnyRvzlQEE5znMlaEmoD6OXhEXG1g
-   Q==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10608"; a="308493818"
+  t=1675263149; x=1706799149;
+  h=message-id:date:mime-version:subject:from:to:cc:
+   references:in-reply-to:content-transfer-encoding;
+  bh=p5JLGSY+xh7O+QALHStHA8rQ1cRH0/6+QGVy/kv3w0U=;
+  b=OWnX7nJ3qPlsclDI6f0aR6r8moNvi1lhZvB0kxoDuZCJLvupvHxN9Wjz
+   iN2toBMMxr1iYwNCJuosPOEUZDbxcahKoLUMh1ctqZ1hJq/gvLWtcgRLw
+   uNvQcKDaIFJOjMqXJwTkAeeUGENz0BPvGj/eh0xcC2KSKgNZlGFUWiSqS
+   CMWMHPYxttism07ahEqgUcO57PuNQk+shbrwPYoUHqZVGVtiy7lkjk1XU
+   I0hbB8NhPuObJNs99BxWaJSna6wDNT+WIEq9OnsFEc2yBGny/jb7MrhcZ
+   KWJfWjBAQrq5bKLfxmmqQIvLohIlIaBK3k+zJajrQ9d1YYKdroJsEEFqY
+   w==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10608"; a="307821276"
 X-IronPort-AV: E=Sophos;i="5.97,263,1669104000";
-   d="scan'208";a="308493818"
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Feb 2023 06:23:36 -0800
-X-IronPort-AV: E=McAfee;i="6500,9779,10608"; a="807578398"
+   d="scan'208";a="307821276"
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Feb 2023 06:52:28 -0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10608"; a="697280714"
 X-IronPort-AV: E=Sophos;i="5.97,263,1669104000";
-   d="scan'208";a="807578398"
+   d="scan'208";a="697280714"
 Received: from jazminsx-mobl1.ger.corp.intel.com (HELO [10.213.218.124]) ([10.213.218.124])
-  by fmsmga001-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Feb 2023 06:23:30 -0800
-Message-ID: <15adf130-61f7-2423-2a48-883e611e3304@linux.intel.com>
-Date: Wed, 1 Feb 2023 14:23:28 +0000
+  by orsmga001-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Feb 2023 06:52:22 -0800
+Message-ID: <b1e1777b-2392-872b-7306-045b923f7360@linux.intel.com>
+Date: Wed, 1 Feb 2023 14:52:20 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.6.1
 Content-Language: en-US
+From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
 To: "T.J. Mercier" <tjmercier@google.com>
 References: <20230123191728.2928839-1-tjmercier@google.com>
  <20230123191728.2928839-2-tjmercier@google.com>
@@ -53,36 +54,35 @@ References: <20230123191728.2928839-1-tjmercier@google.com>
  <CABdmKX09S3bYzX+xBkhfkFULk2BtzS11RhzrvWv94j+cHSezPA@mail.gmail.com>
  <ad6bd448-91bd-d47e-5b54-8755fe0e0340@linux.intel.com>
  <CABdmKX3VSdF3jmktpw9VH4k+J+ZtQCLCPdNN6uye4XnZGPhG5g@mail.gmail.com>
-From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+ <15adf130-61f7-2423-2a48-883e611e3304@linux.intel.com>
 Organization: Intel Corporation UK Plc
-In-Reply-To: <CABdmKX3VSdF3jmktpw9VH4k+J+ZtQCLCPdNN6uye4XnZGPhG5g@mail.gmail.com>
+In-Reply-To: <15adf130-61f7-2423-2a48-883e611e3304@linux.intel.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: C84DF3EA3E
-X-Spamd-Bar: -------
-X-Spamd-Result: default: False [-7.80 / 15.00];
-	REPLY(-4.00)[];
+X-Rspamd-Queue-Id: 72DD93F193
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.80 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:4983, ipnet:192.55.52.0/24, country:US];
-	NEURAL_HAM(-0.00)[-1.000];
-	R_SPF_NA(0.00)[no SPF record];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
+	R_SPF_NA(0.00)[no SPF record];
+	NEURAL_HAM(-0.00)[-1.000];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:4983, ipnet:192.55.52.0/24, country:US];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[26];
 	DKIM_TRACE(0.00)[intel.com:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	MID_RHS_MATCH_FROM(0.00)[];
 	HAS_ORG_HEADER(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: Z7P4UHRF6SQFZ7TYTF72MC5OHDT2OWOZ
-X-Message-ID-Hash: Z7P4UHRF6SQFZ7TYTF72MC5OHDT2OWOZ
+Message-ID-Hash: 4V74UAHODVQGGPC5DRRGSQ56MONHXXKF
+X-Message-ID-Hash: 4V74UAHODVQGGPC5DRRGSQ56MONHXXKF
 X-MailFrom: tvrtko.ursulin@linux.intel.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Michal Hocko <mhocko@suse.com>, Shakeel Butt <shakeelb@google.com>, linux-doc@vger.kernel.org, Roman Gushchin <roman.gushchin@linux.dev>, cmllamas@google.com, dri-devel@lists.freedesktop.org, linux-mm@kvack.org, jstultz@google.com, Zefan Li <lizefan.x@bytedance.com>, Sumit Semwal <sumit.semwal@linaro.org>, android-mm@google.com, Jonathan Corbet <corbet@lwn.net>, jeffv@google.com, linux-media@vger.kernel.org, selinux@vger.kernel.org, linaro-mm-sig@lists.linaro.org, cgroups@vger.kernel.org, Muchun Song <muchun.song@linux.dev>, linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org, Johannes Weiner <hannes@cmpxchg.org>, Tejun Heo <tj@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
@@ -90,212 +90,225 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v2 1/4] memcg: Track exported dma-buffers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Z7P4UHRF6SQFZ7TYTF72MC5OHDT2OWOZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4V74UAHODVQGGPC5DRRGSQ56MONHXXKF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-
-On 01/02/2023 01:49, T.J. Mercier wrote:
-> On Tue, Jan 31, 2023 at 6:01 AM Tvrtko Ursulin
-> <tvrtko.ursulin@linux.intel.com> wrote:
->>
->>
->> On 25/01/2023 20:04, T.J. Mercier wrote:
->>> On Wed, Jan 25, 2023 at 9:31 AM Tvrtko Ursulin
->>> <tvrtko.ursulin@linux.intel.com> wrote:
->>>>
->>>>
->>>> Hi,
->>>>
->>>> On 25/01/2023 11:52, Michal Hocko wrote:
->>>>> On Tue 24-01-23 19:46:28, Shakeel Butt wrote:
->>>>>> On Tue, Jan 24, 2023 at 03:59:58PM +0100, Michal Hocko wrote:
->>>>>>> On Mon 23-01-23 19:17:23, T.J. Mercier wrote:
->>>>>>>> When a buffer is exported to userspace, use memcg to attribute the
->>>>>>>> buffer to the allocating cgroup until all buffer references are
->>>>>>>> released.
->>>>>>>
->>>>>>> Is there any reason why this memory cannot be charged during the
->>>>>>> allocation (__GFP_ACCOUNT used)?
->>>>>>> Also you do charge and account the memory but underlying pages do not
->>>>>>> know about their memcg (this is normally done with commit_charge for
->>>>>>> user mapped pages). This would become a problem if the memory is
->>>>>>> migrated for example.
->>>>>>
->>>>>> I don't think this is movable memory.
->>>>>>
->>>>>>> This also means that you have to maintain memcg
->>>>>>> reference outside of the memcg proper which is not really nice either.
->>>>>>> This mimicks tcp kmem limit implementation which I really have to say I
->>>>>>> am not a great fan of and this pattern shouldn't be coppied.
->>>>>>>
->>>>>>
->>>>>> I think we should keep the discussion on technical merits instead of
->>>>>> personal perference. To me using skmem like interface is totally fine
->>>>>> but the pros/cons need to be very explicit and the clear reasons to
->>>>>> select that option should be included.
->>>>>
->>>>> I do agree with that. I didn't want sound to be personal wrt tcp kmem
->>>>> accounting but the overall code maintenance cost is higher because
->>>>> of how tcp take on accounting differs from anything else in the memcg
->>>>> proper. I would prefer to not grow another example like that.
->>>>>
->>>>>> To me there are two options:
->>>>>>
->>>>>> 1. Using skmem like interface as this patch series:
->>>>>>
->>>>>> The main pros of this option is that it is very simple. Let me list down
->>>>>> the cons of this approach:
->>>>>>
->>>>>> a. There is time window between the actual memory allocation/free and
->>>>>> the charge and uncharge and [un]charge happen when the whole memory is
->>>>>> allocated or freed. I think for the charge path that might not be a big
->>>>>> issue but on the uncharge, this can cause issues. The application and
->>>>>> the potential shrinkers have freed some of this dmabuf memory but until
->>>>>> the whole dmabuf is freed, the memcg uncharge will not happen. This can
->>>>>> consequences on reclaim and oom behavior of the application.
->>>>>>
->>>>>> b. Due to the usage model i.e. a central daemon allocating the dmabuf
->>>>>> memory upfront, there is a requirement to have a memcg charge transfer
->>>>>> functionality to transfer the charge from the central daemon to the
->>>>>> client applications. This does introduce complexity and avenues of weird
->>>>>> reclaim and oom behavior.
->>>>>>
->>>>>>
->>>>>> 2. Allocate and charge the memory on page fault by actual user
->>>>>>
->>>>>> In this approach, the memory is not allocated upfront by the central
->>>>>> daemon but rather on the page fault by the client application and the
->>>>>> memcg charge happen at the same time.
->>>>>>
->>>>>> The only cons I can think of is this approach is more involved and may
->>>>>> need some clever tricks to track the page on the free patch i.e. we to
->>>>>> decrement the dmabuf memcg stat on free path. Maybe a page flag.
->>>>>>
->>>>>> The pros of this approach is there is no need have a charge transfer
->>>>>> functionality and the charge/uncharge being closely tied to the actual
->>>>>> memory allocation and free.
->>>>>>
->>>>>> Personally I would prefer the second approach but I don't want to just
->>>>>> block this work if the dmabuf folks are ok with the cons mentioned of
->>>>>> the first approach.
->>>>>
->>>>> I am not familiar with dmabuf internals to judge complexity on their end
->>>>> but I fully agree that charge-when-used is much more easier to reason
->>>>> about and it should have less subtle surprises.
->>>>
->>>> Disclaimer that I don't seem to see patches 3&4 on dri-devel so maybe I
->>>> am missing something, but in principle yes, I agree that the 2nd option
->>>> (charge the user, not exporter) should be preferred. Thing being that at
->>>> export time there may not be any backing store allocated, plus if the
->>>> series is restricting the charge transfer to just Android clients then
->>>> it seems it has the potential to miss many other use cases. At least
->>>> needs to outline a description on how the feature will be useful outside
->>>> Android.
->>>>
->>> There is no restriction like that. It's available to anybody who wants
->>> to call dma_buf_charge_transfer if they actually have a need for that,
->>> which I don't really expect to be common since most users/owners of
->>> the buffers will be the ones causing the export in the first place.
->>> It's just not like that on Android with the extra allocator process in
->>> the middle most of the time.
->>
->> Yeah I used the wrong term "restrict", apologies. What I meant was, if
->> the idea was to allow spotting memory leaks, with the charge transfer
->> being optional and in the series only wired up for Android Binder, then
->> it obviously only fully works for that one case. So a step back..
->>
-> Oh, spotting kernel memory leaks is a side-benefit of accounting
-> kernel-only buffers in the root cgroup. The primary goal is to
-> attribute buffers to applications that originated them (via
-> per-application cgroups) simply for accounting purposes. Buffers are
-> using memory on the system, and we want to know who created them and
-> how much memory is used. That information is/will no longer available
-> with the recent deprecation of the dmabuf sysfs statistics.
-> 
->> .. For instance, it is not feasible to transfer the charge when dmabuf
->> is attached, or imported? That would attribute the usage to the
->> user/importer so give better visibility on who is actually causing the
->> memory leak.
->>
-> Instead of accounting at export, we could account at attach. That just
-> turns out not to be very useful when the majority of our
-> heap-allocated buffers don't have attachments at any particular point
-> in time. :\ But again it's less about leaks and more about knowing
-> which buffers exist in the first place.
-> 
->> Further more, if above is feasible, then could it also be implemented in
->> the common layer so it would automatically cover all drivers?
->>
-> Which common layer code specifically? The dmabuf interface appears to
-> be the most central/common place to me.
-
-Yes, I meant dma_buf_attach / detach. More below.
->>>> Also stepping back for a moment - is a new memory category really
->>>> needed, versus perhaps attempting to charge the actual backing store
->>>> memory to the correct client? (There might have been many past
->>>> discussions on this so it's okay to point me towards something in the
->>>> archives.)
->>>>
->>> Well the dmabuf counter for the stat file is really just a subcategory
->>> of memory that is charged. Its existence is not related to getting the
->>> charge attributed to the right process/cgroup. We do want to know how
->>> much of the memory attributed to a process is for dmabufs, which is
->>> the main point of this series.
->>
->> Then I am probably missing something because the statement how proposal
->> is not intended to charge to the right process, but wants to know how
->> much dmabuf "size" is attributed to a process, confuses me due a seeming
->> contradiction. And the fact it would not be externally observable how
->> much of the stats is accurate and how much is not (without knowing the
->> implementation detail of which drivers implement charge transfer and
->> when). Maybe I completely misunderstood the use case.
->>
-> Hmm, did I clear this up above or no? The current proposal is for the
-> process causing the export of a buffer to be charged for it,
-> regardless of whatever happens afterwards. (Unless that process is
-> like gralloc on Android, in which case the charge is transferred from
-> gralloc to whoever called gralloc to allocate the buffer on their
-> behalf.)
-
-Main problem for me is that charging at export time has no relation to memory used. But I am not familiar with the memcg counters to know if any other counter sets that same precedent. If all other are about real memory use then IMO this does not fit that well. I mean specifically this:
-
-+	  dmabuf (npn)
-+		Amount of memory used for exported DMA buffers allocated by the cgroup.
-+		Stays with the allocating cgroup regardless of how the buffer is shared.
-+
-
-I think that "Amount of memory used for exported..." is not correct. As implemented it is more akin the virtual address space size in the cpu space - it can have no relation to the actual usage since backing store is not allocated until the attachment is made.
-
-Then also this:
-
-@@ -446,6 +447,8 @@ struct dma_buf {
-  		struct dma_buf *dmabuf;
-  	} *sysfs_entry;
-  #endif
-+	/* The cgroup to which this buffer is currently attributed */
-+	struct mem_cgroup *memcg;
-  };
-
-Does not conceptually fit in my mind. Dmabufs are not associated with one cgroup at a time.
-
-So if you would place tracking into dma_buf_attach/detach you would be able to charge to correct cgroup regardless of a driver and since by contract at this stage there is backing store, the reflected memory usage counter would be truthful.
-
-But then you state a problem, that majority of the time there are no attachments in your setup, and you also say the proposal is not so much about leaks but more about knowing what is exported.
-
-In this case you could additionally track that via dma_buf_getfile / dma_buf_file_release as a separate category like dmabuf-exported? But again, I personally don't know if such "may not really be using memory" counters fit in memcg.
-
-(Hm you'd probably still need dmabuf->export_memcg to store who was the original caller of dma_buf_getfile, in case last reference is dropped from a different process/context. Even dmabuf->attach_memcg for attach/detach to work correctly for the same reason.)
-
-Regards,
-
-Tvrtko
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+DQpPbiAwMS8wMi8yMDIzIDE0OjIzLCBUdnJ0a28gVXJzdWxpbiB3cm90ZToNCj4gDQo+IE9uIDAx
+LzAyLzIwMjMgMDE6NDksIFQuSi4gTWVyY2llciB3cm90ZToNCj4+IE9uIFR1ZSwgSmFuIDMxLCAy
+MDIzIGF0IDY6MDEgQU0gVHZydGtvIFVyc3VsaW4NCj4+IDx0dnJ0a28udXJzdWxpbkBsaW51eC5p
+bnRlbC5jb20+IHdyb3RlOg0KPj4+DQo+Pj4NCj4+PiBPbiAyNS8wMS8yMDIzIDIwOjA0LCBULkou
+IE1lcmNpZXIgd3JvdGU6DQo+Pj4+IE9uIFdlZCwgSmFuIDI1LCAyMDIzIGF0IDk6MzEgQU0gVHZy
+dGtvIFVyc3VsaW4NCj4+Pj4gPHR2cnRrby51cnN1bGluQGxpbnV4LmludGVsLmNvbT4gd3JvdGU6
+DQo+Pj4+Pg0KPj4+Pj4NCj4+Pj4+IEhpLA0KPj4+Pj4NCj4+Pj4+IE9uIDI1LzAxLzIwMjMgMTE6
+NTIsIE1pY2hhbCBIb2NrbyB3cm90ZToNCj4+Pj4+PiBPbiBUdWUgMjQtMDEtMjMgMTk6NDY6Mjgs
+IFNoYWtlZWwgQnV0dCB3cm90ZToNCj4+Pj4+Pj4gT24gVHVlLCBKYW4gMjQsIDIwMjMgYXQgMDM6
+NTk6NThQTSArMDEwMCwgTWljaGFsIEhvY2tvIHdyb3RlOg0KPj4+Pj4+Pj4gT24gTW9uIDIzLTAx
+LTIzIDE5OjE3OjIzLCBULkouIE1lcmNpZXIgd3JvdGU6DQo+Pj4+Pj4+Pj4gV2hlbiBhIGJ1ZmZl
+ciBpcyBleHBvcnRlZCB0byB1c2Vyc3BhY2UsIHVzZSBtZW1jZyB0byBhdHRyaWJ1dGUgdGhlDQo+
+Pj4+Pj4+Pj4gYnVmZmVyIHRvIHRoZSBhbGxvY2F0aW5nIGNncm91cCB1bnRpbCBhbGwgYnVmZmVy
+IHJlZmVyZW5jZXMgYXJlDQo+Pj4+Pj4+Pj4gcmVsZWFzZWQuDQo+Pj4+Pj4+Pg0KPj4+Pj4+Pj4g
+SXMgdGhlcmUgYW55IHJlYXNvbiB3aHkgdGhpcyBtZW1vcnkgY2Fubm90IGJlIGNoYXJnZWQgZHVy
+aW5nIHRoZQ0KPj4+Pj4+Pj4gYWxsb2NhdGlvbiAoX19HRlBfQUNDT1VOVCB1c2VkKT8NCj4+Pj4+
+Pj4+IEFsc28geW91IGRvIGNoYXJnZSBhbmQgYWNjb3VudCB0aGUgbWVtb3J5IGJ1dCB1bmRlcmx5
+aW5nIHBhZ2VzIA0KPj4+Pj4+Pj4gZG8gbm90DQo+Pj4+Pj4+PiBrbm93IGFib3V0IHRoZWlyIG1l
+bWNnICh0aGlzIGlzIG5vcm1hbGx5IGRvbmUgd2l0aCBjb21taXRfY2hhcmdlIA0KPj4+Pj4+Pj4g
+Zm9yDQo+Pj4+Pj4+PiB1c2VyIG1hcHBlZCBwYWdlcykuIFRoaXMgd291bGQgYmVjb21lIGEgcHJv
+YmxlbSBpZiB0aGUgbWVtb3J5IGlzDQo+Pj4+Pj4+PiBtaWdyYXRlZCBmb3IgZXhhbXBsZS4NCj4+
+Pj4+Pj4NCj4+Pj4+Pj4gSSBkb24ndCB0aGluayB0aGlzIGlzIG1vdmFibGUgbWVtb3J5Lg0KPj4+
+Pj4+Pg0KPj4+Pj4+Pj4gVGhpcyBhbHNvIG1lYW5zIHRoYXQgeW91IGhhdmUgdG8gbWFpbnRhaW4g
+bWVtY2cNCj4+Pj4+Pj4+IHJlZmVyZW5jZSBvdXRzaWRlIG9mIHRoZSBtZW1jZyBwcm9wZXIgd2hp
+Y2ggaXMgbm90IHJlYWxseSBuaWNlIA0KPj4+Pj4+Pj4gZWl0aGVyLg0KPj4+Pj4+Pj4gVGhpcyBt
+aW1pY2tzIHRjcCBrbWVtIGxpbWl0IGltcGxlbWVudGF0aW9uIHdoaWNoIEkgcmVhbGx5IGhhdmUg
+DQo+Pj4+Pj4+PiB0byBzYXkgSQ0KPj4+Pj4+Pj4gYW0gbm90IGEgZ3JlYXQgZmFuIG9mIGFuZCB0
+aGlzIHBhdHRlcm4gc2hvdWxkbid0IGJlIGNvcHBpZWQuDQo+Pj4+Pj4+Pg0KPj4+Pj4+Pg0KPj4+
+Pj4+PiBJIHRoaW5rIHdlIHNob3VsZCBrZWVwIHRoZSBkaXNjdXNzaW9uIG9uIHRlY2huaWNhbCBt
+ZXJpdHMgaW5zdGVhZCBvZg0KPj4+Pj4+PiBwZXJzb25hbCBwZXJmZXJlbmNlLiBUbyBtZSB1c2lu
+ZyBza21lbSBsaWtlIGludGVyZmFjZSBpcyB0b3RhbGx5IA0KPj4+Pj4+PiBmaW5lDQo+Pj4+Pj4+
+IGJ1dCB0aGUgcHJvcy9jb25zIG5lZWQgdG8gYmUgdmVyeSBleHBsaWNpdCBhbmQgdGhlIGNsZWFy
+IHJlYXNvbnMgdG8NCj4+Pj4+Pj4gc2VsZWN0IHRoYXQgb3B0aW9uIHNob3VsZCBiZSBpbmNsdWRl
+ZC4NCj4+Pj4+Pg0KPj4+Pj4+IEkgZG8gYWdyZWUgd2l0aCB0aGF0LiBJIGRpZG4ndCB3YW50IHNv
+dW5kIHRvIGJlIHBlcnNvbmFsIHdydCB0Y3Aga21lbQ0KPj4+Pj4+IGFjY291bnRpbmcgYnV0IHRo
+ZSBvdmVyYWxsIGNvZGUgbWFpbnRlbmFuY2UgY29zdCBpcyBoaWdoZXIgYmVjYXVzZQ0KPj4+Pj4+
+IG9mIGhvdyB0Y3AgdGFrZSBvbiBhY2NvdW50aW5nIGRpZmZlcnMgZnJvbSBhbnl0aGluZyBlbHNl
+IGluIHRoZSBtZW1jZw0KPj4+Pj4+IHByb3Blci4gSSB3b3VsZCBwcmVmZXIgdG8gbm90IGdyb3cg
+YW5vdGhlciBleGFtcGxlIGxpa2UgdGhhdC4NCj4+Pj4+Pg0KPj4+Pj4+PiBUbyBtZSB0aGVyZSBh
+cmUgdHdvIG9wdGlvbnM6DQo+Pj4+Pj4+DQo+Pj4+Pj4+IDEuIFVzaW5nIHNrbWVtIGxpa2UgaW50
+ZXJmYWNlIGFzIHRoaXMgcGF0Y2ggc2VyaWVzOg0KPj4+Pj4+Pg0KPj4+Pj4+PiBUaGUgbWFpbiBw
+cm9zIG9mIHRoaXMgb3B0aW9uIGlzIHRoYXQgaXQgaXMgdmVyeSBzaW1wbGUuIExldCBtZSANCj4+
+Pj4+Pj4gbGlzdCBkb3duDQo+Pj4+Pj4+IHRoZSBjb25zIG9mIHRoaXMgYXBwcm9hY2g6DQo+Pj4+
+Pj4+DQo+Pj4+Pj4+IGEuIFRoZXJlIGlzIHRpbWUgd2luZG93IGJldHdlZW4gdGhlIGFjdHVhbCBt
+ZW1vcnkgYWxsb2NhdGlvbi9mcmVlIA0KPj4+Pj4+PiBhbmQNCj4+Pj4+Pj4gdGhlIGNoYXJnZSBh
+bmQgdW5jaGFyZ2UgYW5kIFt1bl1jaGFyZ2UgaGFwcGVuIHdoZW4gdGhlIHdob2xlIA0KPj4+Pj4+
+PiBtZW1vcnkgaXMNCj4+Pj4+Pj4gYWxsb2NhdGVkIG9yIGZyZWVkLiBJIHRoaW5rIGZvciB0aGUg
+Y2hhcmdlIHBhdGggdGhhdCBtaWdodCBub3QgYmUgDQo+Pj4+Pj4+IGEgYmlnDQo+Pj4+Pj4+IGlz
+c3VlIGJ1dCBvbiB0aGUgdW5jaGFyZ2UsIHRoaXMgY2FuIGNhdXNlIGlzc3Vlcy4gVGhlIGFwcGxp
+Y2F0aW9uIA0KPj4+Pj4+PiBhbmQNCj4+Pj4+Pj4gdGhlIHBvdGVudGlhbCBzaHJpbmtlcnMgaGF2
+ZSBmcmVlZCBzb21lIG9mIHRoaXMgZG1hYnVmIG1lbW9yeSBidXQgDQo+Pj4+Pj4+IHVudGlsDQo+
+Pj4+Pj4+IHRoZSB3aG9sZSBkbWFidWYgaXMgZnJlZWQsIHRoZSBtZW1jZyB1bmNoYXJnZSB3aWxs
+IG5vdCBoYXBwZW4uIA0KPj4+Pj4+PiBUaGlzIGNhbg0KPj4+Pj4+PiBjb25zZXF1ZW5jZXMgb24g
+cmVjbGFpbSBhbmQgb29tIGJlaGF2aW9yIG9mIHRoZSBhcHBsaWNhdGlvbi4NCj4+Pj4+Pj4NCj4+
+Pj4+Pj4gYi4gRHVlIHRvIHRoZSB1c2FnZSBtb2RlbCBpLmUuIGEgY2VudHJhbCBkYWVtb24gYWxs
+b2NhdGluZyB0aGUgDQo+Pj4+Pj4+IGRtYWJ1Zg0KPj4+Pj4+PiBtZW1vcnkgdXBmcm9udCwgdGhl
+cmUgaXMgYSByZXF1aXJlbWVudCB0byBoYXZlIGEgbWVtY2cgY2hhcmdlIA0KPj4+Pj4+PiB0cmFu
+c2Zlcg0KPj4+Pj4+PiBmdW5jdGlvbmFsaXR5IHRvIHRyYW5zZmVyIHRoZSBjaGFyZ2UgZnJvbSB0
+aGUgY2VudHJhbCBkYWVtb24gdG8gdGhlDQo+Pj4+Pj4+IGNsaWVudCBhcHBsaWNhdGlvbnMuIFRo
+aXMgZG9lcyBpbnRyb2R1Y2UgY29tcGxleGl0eSBhbmQgYXZlbnVlcyANCj4+Pj4+Pj4gb2Ygd2Vp
+cmQNCj4+Pj4+Pj4gcmVjbGFpbSBhbmQgb29tIGJlaGF2aW9yLg0KPj4+Pj4+Pg0KPj4+Pj4+Pg0K
+Pj4+Pj4+PiAyLiBBbGxvY2F0ZSBhbmQgY2hhcmdlIHRoZSBtZW1vcnkgb24gcGFnZSBmYXVsdCBi
+eSBhY3R1YWwgdXNlcg0KPj4+Pj4+Pg0KPj4+Pj4+PiBJbiB0aGlzIGFwcHJvYWNoLCB0aGUgbWVt
+b3J5IGlzIG5vdCBhbGxvY2F0ZWQgdXBmcm9udCBieSB0aGUgY2VudHJhbA0KPj4+Pj4+PiBkYWVt
+b24gYnV0IHJhdGhlciBvbiB0aGUgcGFnZSBmYXVsdCBieSB0aGUgY2xpZW50IGFwcGxpY2F0aW9u
+IGFuZCANCj4+Pj4+Pj4gdGhlDQo+Pj4+Pj4+IG1lbWNnIGNoYXJnZSBoYXBwZW4gYXQgdGhlIHNh
+bWUgdGltZS4NCj4+Pj4+Pj4NCj4+Pj4+Pj4gVGhlIG9ubHkgY29ucyBJIGNhbiB0aGluayBvZiBp
+cyB0aGlzIGFwcHJvYWNoIGlzIG1vcmUgaW52b2x2ZWQgDQo+Pj4+Pj4+IGFuZCBtYXkNCj4+Pj4+
+Pj4gbmVlZCBzb21lIGNsZXZlciB0cmlja3MgdG8gdHJhY2sgdGhlIHBhZ2Ugb24gdGhlIGZyZWUg
+cGF0Y2ggaS5lLiANCj4+Pj4+Pj4gd2UgdG8NCj4+Pj4+Pj4gZGVjcmVtZW50IHRoZSBkbWFidWYg
+bWVtY2cgc3RhdCBvbiBmcmVlIHBhdGguIE1heWJlIGEgcGFnZSBmbGFnLg0KPj4+Pj4+Pg0KPj4+
+Pj4+PiBUaGUgcHJvcyBvZiB0aGlzIGFwcHJvYWNoIGlzIHRoZXJlIGlzIG5vIG5lZWQgaGF2ZSBh
+IGNoYXJnZSB0cmFuc2Zlcg0KPj4+Pj4+PiBmdW5jdGlvbmFsaXR5IGFuZCB0aGUgY2hhcmdlL3Vu
+Y2hhcmdlIGJlaW5nIGNsb3NlbHkgdGllZCB0byB0aGUgDQo+Pj4+Pj4+IGFjdHVhbA0KPj4+Pj4+
+PiBtZW1vcnkgYWxsb2NhdGlvbiBhbmQgZnJlZS4NCj4+Pj4+Pj4NCj4+Pj4+Pj4gUGVyc29uYWxs
+eSBJIHdvdWxkIHByZWZlciB0aGUgc2Vjb25kIGFwcHJvYWNoIGJ1dCBJIGRvbid0IHdhbnQgdG8g
+DQo+Pj4+Pj4+IGp1c3QNCj4+Pj4+Pj4gYmxvY2sgdGhpcyB3b3JrIGlmIHRoZSBkbWFidWYgZm9s
+a3MgYXJlIG9rIHdpdGggdGhlIGNvbnMgDQo+Pj4+Pj4+IG1lbnRpb25lZCBvZg0KPj4+Pj4+PiB0
+aGUgZmlyc3QgYXBwcm9hY2guDQo+Pj4+Pj4NCj4+Pj4+PiBJIGFtIG5vdCBmYW1pbGlhciB3aXRo
+IGRtYWJ1ZiBpbnRlcm5hbHMgdG8ganVkZ2UgY29tcGxleGl0eSBvbiANCj4+Pj4+PiB0aGVpciBl
+bmQNCj4+Pj4+PiBidXQgSSBmdWxseSBhZ3JlZSB0aGF0IGNoYXJnZS13aGVuLXVzZWQgaXMgbXVj
+aCBtb3JlIGVhc2llciB0byByZWFzb24NCj4+Pj4+PiBhYm91dCBhbmQgaXQgc2hvdWxkIGhhdmUg
+bGVzcyBzdWJ0bGUgc3VycHJpc2VzLg0KPj4+Pj4NCj4+Pj4+IERpc2NsYWltZXIgdGhhdCBJIGRv
+bid0IHNlZW0gdG8gc2VlIHBhdGNoZXMgMyY0IG9uIGRyaS1kZXZlbCBzbyANCj4+Pj4+IG1heWJl
+IEkNCj4+Pj4+IGFtIG1pc3Npbmcgc29tZXRoaW5nLCBidXQgaW4gcHJpbmNpcGxlIHllcywgSSBh
+Z3JlZSB0aGF0IHRoZSAybmQgDQo+Pj4+PiBvcHRpb24NCj4+Pj4+IChjaGFyZ2UgdGhlIHVzZXIs
+IG5vdCBleHBvcnRlcikgc2hvdWxkIGJlIHByZWZlcnJlZC4gVGhpbmcgYmVpbmcgDQo+Pj4+PiB0
+aGF0IGF0DQo+Pj4+PiBleHBvcnQgdGltZSB0aGVyZSBtYXkgbm90IGJlIGFueSBiYWNraW5nIHN0
+b3JlIGFsbG9jYXRlZCwgcGx1cyBpZiB0aGUNCj4+Pj4+IHNlcmllcyBpcyByZXN0cmljdGluZyB0
+aGUgY2hhcmdlIHRyYW5zZmVyIHRvIGp1c3QgQW5kcm9pZCBjbGllbnRzIHRoZW4NCj4+Pj4+IGl0
+IHNlZW1zIGl0IGhhcyB0aGUgcG90ZW50aWFsIHRvIG1pc3MgbWFueSBvdGhlciB1c2UgY2FzZXMu
+IEF0IGxlYXN0DQo+Pj4+PiBuZWVkcyB0byBvdXRsaW5lIGEgZGVzY3JpcHRpb24gb24gaG93IHRo
+ZSBmZWF0dXJlIHdpbGwgYmUgdXNlZnVsIA0KPj4+Pj4gb3V0c2lkZQ0KPj4+Pj4gQW5kcm9pZC4N
+Cj4+Pj4+DQo+Pj4+IFRoZXJlIGlzIG5vIHJlc3RyaWN0aW9uIGxpa2UgdGhhdC4gSXQncyBhdmFp
+bGFibGUgdG8gYW55Ym9keSB3aG8gd2FudHMNCj4+Pj4gdG8gY2FsbCBkbWFfYnVmX2NoYXJnZV90
+cmFuc2ZlciBpZiB0aGV5IGFjdHVhbGx5IGhhdmUgYSBuZWVkIGZvciB0aGF0LA0KPj4+PiB3aGlj
+aCBJIGRvbid0IHJlYWxseSBleHBlY3QgdG8gYmUgY29tbW9uIHNpbmNlIG1vc3QgdXNlcnMvb3du
+ZXJzIG9mDQo+Pj4+IHRoZSBidWZmZXJzIHdpbGwgYmUgdGhlIG9uZXMgY2F1c2luZyB0aGUgZXhw
+b3J0IGluIHRoZSBmaXJzdCBwbGFjZS4NCj4+Pj4gSXQncyBqdXN0IG5vdCBsaWtlIHRoYXQgb24g
+QW5kcm9pZCB3aXRoIHRoZSBleHRyYSBhbGxvY2F0b3IgcHJvY2VzcyBpbg0KPj4+PiB0aGUgbWlk
+ZGxlIG1vc3Qgb2YgdGhlIHRpbWUuDQo+Pj4NCj4+PiBZZWFoIEkgdXNlZCB0aGUgd3JvbmcgdGVy
+bSAicmVzdHJpY3QiLCBhcG9sb2dpZXMuIFdoYXQgSSBtZWFudCB3YXMsIGlmDQo+Pj4gdGhlIGlk
+ZWEgd2FzIHRvIGFsbG93IHNwb3R0aW5nIG1lbW9yeSBsZWFrcywgd2l0aCB0aGUgY2hhcmdlIHRy
+YW5zZmVyDQo+Pj4gYmVpbmcgb3B0aW9uYWwgYW5kIGluIHRoZSBzZXJpZXMgb25seSB3aXJlZCB1
+cCBmb3IgQW5kcm9pZCBCaW5kZXIsIHRoZW4NCj4+PiBpdCBvYnZpb3VzbHkgb25seSBmdWxseSB3
+b3JrcyBmb3IgdGhhdCBvbmUgY2FzZS4gU28gYSBzdGVwIGJhY2suLg0KPj4+DQo+PiBPaCwgc3Bv
+dHRpbmcga2VybmVsIG1lbW9yeSBsZWFrcyBpcyBhIHNpZGUtYmVuZWZpdCBvZiBhY2NvdW50aW5n
+DQo+PiBrZXJuZWwtb25seSBidWZmZXJzIGluIHRoZSByb290IGNncm91cC4gVGhlIHByaW1hcnkg
+Z29hbCBpcyB0bw0KPj4gYXR0cmlidXRlIGJ1ZmZlcnMgdG8gYXBwbGljYXRpb25zIHRoYXQgb3Jp
+Z2luYXRlZCB0aGVtICh2aWENCj4+IHBlci1hcHBsaWNhdGlvbiBjZ3JvdXBzKSBzaW1wbHkgZm9y
+IGFjY291bnRpbmcgcHVycG9zZXMuIEJ1ZmZlcnMgYXJlDQo+PiB1c2luZyBtZW1vcnkgb24gdGhl
+IHN5c3RlbSwgYW5kIHdlIHdhbnQgdG8ga25vdyB3aG8gY3JlYXRlZCB0aGVtIGFuZA0KPj4gaG93
+IG11Y2ggbWVtb3J5IGlzIHVzZWQuIFRoYXQgaW5mb3JtYXRpb24gaXMvd2lsbCBubyBsb25nZXIg
+YXZhaWxhYmxlDQo+PiB3aXRoIHRoZSByZWNlbnQgZGVwcmVjYXRpb24gb2YgdGhlIGRtYWJ1ZiBz
+eXNmcyBzdGF0aXN0aWNzLg0KPj4NCj4+PiAuLiBGb3IgaW5zdGFuY2UsIGl0IGlzIG5vdCBmZWFz
+aWJsZSB0byB0cmFuc2ZlciB0aGUgY2hhcmdlIHdoZW4gZG1hYnVmDQo+Pj4gaXMgYXR0YWNoZWQs
+IG9yIGltcG9ydGVkPyBUaGF0IHdvdWxkIGF0dHJpYnV0ZSB0aGUgdXNhZ2UgdG8gdGhlDQo+Pj4g
+dXNlci9pbXBvcnRlciBzbyBnaXZlIGJldHRlciB2aXNpYmlsaXR5IG9uIHdobyBpcyBhY3R1YWxs
+eSBjYXVzaW5nIHRoZQ0KPj4+IG1lbW9yeSBsZWFrLg0KPj4+DQo+PiBJbnN0ZWFkIG9mIGFjY291
+bnRpbmcgYXQgZXhwb3J0LCB3ZSBjb3VsZCBhY2NvdW50IGF0IGF0dGFjaC4gVGhhdCBqdXN0DQo+
+PiB0dXJucyBvdXQgbm90IHRvIGJlIHZlcnkgdXNlZnVsIHdoZW4gdGhlIG1ham9yaXR5IG9mIG91
+cg0KPj4gaGVhcC1hbGxvY2F0ZWQgYnVmZmVycyBkb24ndCBoYXZlIGF0dGFjaG1lbnRzIGF0IGFu
+eSBwYXJ0aWN1bGFyIHBvaW50DQo+PiBpbiB0aW1lLiA6XCBCdXQgYWdhaW4gaXQncyBsZXNzIGFi
+b3V0IGxlYWtzIGFuZCBtb3JlIGFib3V0IGtub3dpbmcNCj4+IHdoaWNoIGJ1ZmZlcnMgZXhpc3Qg
+aW4gdGhlIGZpcnN0IHBsYWNlLg0KPj4NCj4+PiBGdXJ0aGVyIG1vcmUsIGlmIGFib3ZlIGlzIGZl
+YXNpYmxlLCB0aGVuIGNvdWxkIGl0IGFsc28gYmUgaW1wbGVtZW50ZWQgaW4NCj4+PiB0aGUgY29t
+bW9uIGxheWVyIHNvIGl0IHdvdWxkIGF1dG9tYXRpY2FsbHkgY292ZXIgYWxsIGRyaXZlcnM/DQo+
+Pj4NCj4+IFdoaWNoIGNvbW1vbiBsYXllciBjb2RlIHNwZWNpZmljYWxseT8gVGhlIGRtYWJ1ZiBp
+bnRlcmZhY2UgYXBwZWFycyB0bw0KPj4gYmUgdGhlIG1vc3QgY2VudHJhbC9jb21tb24gcGxhY2Ug
+dG8gbWUuDQo+IA0KPiBZZXMsIEkgbWVhbnQgZG1hX2J1Zl9hdHRhY2ggLyBkZXRhY2guIE1vcmUg
+YmVsb3cuDQo+Pj4+PiBBbHNvIHN0ZXBwaW5nIGJhY2sgZm9yIGEgbW9tZW50IC0gaXMgYSBuZXcg
+bWVtb3J5IGNhdGVnb3J5IHJlYWxseQ0KPj4+Pj4gbmVlZGVkLCB2ZXJzdXMgcGVyaGFwcyBhdHRl
+bXB0aW5nIHRvIGNoYXJnZSB0aGUgYWN0dWFsIGJhY2tpbmcgc3RvcmUNCj4+Pj4+IG1lbW9yeSB0
+byB0aGUgY29ycmVjdCBjbGllbnQ/IChUaGVyZSBtaWdodCBoYXZlIGJlZW4gbWFueSBwYXN0DQo+
+Pj4+PiBkaXNjdXNzaW9ucyBvbiB0aGlzIHNvIGl0J3Mgb2theSB0byBwb2ludCBtZSB0b3dhcmRz
+IHNvbWV0aGluZyBpbiB0aGUNCj4+Pj4+IGFyY2hpdmVzLikNCj4+Pj4+DQo+Pj4+IFdlbGwgdGhl
+IGRtYWJ1ZiBjb3VudGVyIGZvciB0aGUgc3RhdCBmaWxlIGlzIHJlYWxseSBqdXN0IGEgc3ViY2F0
+ZWdvcnkNCj4+Pj4gb2YgbWVtb3J5IHRoYXQgaXMgY2hhcmdlZC4gSXRzIGV4aXN0ZW5jZSBpcyBu
+b3QgcmVsYXRlZCB0byBnZXR0aW5nIHRoZQ0KPj4+PiBjaGFyZ2UgYXR0cmlidXRlZCB0byB0aGUg
+cmlnaHQgcHJvY2Vzcy9jZ3JvdXAuIFdlIGRvIHdhbnQgdG8ga25vdyBob3cNCj4+Pj4gbXVjaCBv
+ZiB0aGUgbWVtb3J5IGF0dHJpYnV0ZWQgdG8gYSBwcm9jZXNzIGlzIGZvciBkbWFidWZzLCB3aGlj
+aCBpcw0KPj4+PiB0aGUgbWFpbiBwb2ludCBvZiB0aGlzIHNlcmllcy4NCj4+Pg0KPj4+IFRoZW4g
+SSBhbSBwcm9iYWJseSBtaXNzaW5nIHNvbWV0aGluZyBiZWNhdXNlIHRoZSBzdGF0ZW1lbnQgaG93
+IHByb3Bvc2FsDQo+Pj4gaXMgbm90IGludGVuZGVkIHRvIGNoYXJnZSB0byB0aGUgcmlnaHQgcHJv
+Y2VzcywgYnV0IHdhbnRzIHRvIGtub3cgaG93DQo+Pj4gbXVjaCBkbWFidWYgInNpemUiIGlzIGF0
+dHJpYnV0ZWQgdG8gYSBwcm9jZXNzLCBjb25mdXNlcyBtZSBkdWUgYSBzZWVtaW5nDQo+Pj4gY29u
+dHJhZGljdGlvbi4gQW5kIHRoZSBmYWN0IGl0IHdvdWxkIG5vdCBiZSBleHRlcm5hbGx5IG9ic2Vy
+dmFibGUgaG93DQo+Pj4gbXVjaCBvZiB0aGUgc3RhdHMgaXMgYWNjdXJhdGUgYW5kIGhvdyBtdWNo
+IGlzIG5vdCAod2l0aG91dCBrbm93aW5nIHRoZQ0KPj4+IGltcGxlbWVudGF0aW9uIGRldGFpbCBv
+ZiB3aGljaCBkcml2ZXJzIGltcGxlbWVudCBjaGFyZ2UgdHJhbnNmZXIgYW5kDQo+Pj4gd2hlbiku
+IE1heWJlIEkgY29tcGxldGVseSBtaXN1bmRlcnN0b29kIHRoZSB1c2UgY2FzZS4NCj4+Pg0KPj4g
+SG1tLCBkaWQgSSBjbGVhciB0aGlzIHVwIGFib3ZlIG9yIG5vPyBUaGUgY3VycmVudCBwcm9wb3Nh
+bCBpcyBmb3IgdGhlDQo+PiBwcm9jZXNzIGNhdXNpbmcgdGhlIGV4cG9ydCBvZiBhIGJ1ZmZlciB0
+byBiZSBjaGFyZ2VkIGZvciBpdCwNCj4+IHJlZ2FyZGxlc3Mgb2Ygd2hhdGV2ZXIgaGFwcGVucyBh
+ZnRlcndhcmRzLiAoVW5sZXNzIHRoYXQgcHJvY2VzcyBpcw0KPj4gbGlrZSBncmFsbG9jIG9uIEFu
+ZHJvaWQsIGluIHdoaWNoIGNhc2UgdGhlIGNoYXJnZSBpcyB0cmFuc2ZlcnJlZCBmcm9tDQo+PiBn
+cmFsbG9jIHRvIHdob2V2ZXIgY2FsbGVkIGdyYWxsb2MgdG8gYWxsb2NhdGUgdGhlIGJ1ZmZlciBv
+biB0aGVpcg0KPj4gYmVoYWxmLikNCj4gDQo+IE1haW4gcHJvYmxlbSBmb3IgbWUgaXMgdGhhdCBj
+aGFyZ2luZyBhdCBleHBvcnQgdGltZSBoYXMgbm8gcmVsYXRpb24gdG8gDQo+IG1lbW9yeSB1c2Vk
+LiBCdXQgSSBhbSBub3QgZmFtaWxpYXIgd2l0aCB0aGUgbWVtY2cgY291bnRlcnMgdG8ga25vdyBp
+ZiANCj4gYW55IG90aGVyIGNvdW50ZXIgc2V0cyB0aGF0IHNhbWUgcHJlY2VkZW50LiBJZiBhbGwg
+b3RoZXIgYXJlIGFib3V0IHJlYWwgDQo+IG1lbW9yeSB1c2UgdGhlbiBJTU8gdGhpcyBkb2VzIG5v
+dCBmaXQgdGhhdCB3ZWxsLiBJIG1lYW4gc3BlY2lmaWNhbGx5IHRoaXM6DQo+IA0KPiArwqDCoMKg
+wqDCoCBkbWFidWYgKG5wbikNCj4gK8KgwqDCoMKgwqDCoMKgIEFtb3VudCBvZiBtZW1vcnkgdXNl
+ZCBmb3IgZXhwb3J0ZWQgRE1BIGJ1ZmZlcnMgYWxsb2NhdGVkIGJ5IHRoZSANCj4gY2dyb3VwLg0K
+PiArwqDCoMKgwqDCoMKgwqAgU3RheXMgd2l0aCB0aGUgYWxsb2NhdGluZyBjZ3JvdXAgcmVnYXJk
+bGVzcyBvZiBob3cgdGhlIGJ1ZmZlciANCj4gaXMgc2hhcmVkLg0KPiArDQo+IA0KPiBJIHRoaW5r
+IHRoYXQgIkFtb3VudCBvZiBtZW1vcnkgdXNlZCBmb3IgZXhwb3J0ZWQuLi4iIGlzIG5vdCBjb3Jy
+ZWN0LiBBcyANCj4gaW1wbGVtZW50ZWQgaXQgaXMgbW9yZSBha2luIHRoZSB2aXJ0dWFsIGFkZHJl
+c3Mgc3BhY2Ugc2l6ZSBpbiB0aGUgY3B1IA0KPiBzcGFjZSAtIGl0IGNhbiBoYXZlIG5vIHJlbGF0
+aW9uIHRvIHRoZSBhY3R1YWwgdXNhZ2Ugc2luY2UgYmFja2luZyBzdG9yZSANCj4gaXMgbm90IGFs
+bG9jYXRlZCB1bnRpbCB0aGUgYXR0YWNobWVudCBpcyBtYWRlLg0KPiANCj4gVGhlbiBhbHNvIHRo
+aXM6DQo+IA0KPiBAQCAtNDQ2LDYgKzQ0Nyw4IEBAIHN0cnVjdCBkbWFfYnVmIHsNCj4gIMKgwqDC
+oMKgwqDCoMKgwqAgc3RydWN0IGRtYV9idWYgKmRtYWJ1ZjsNCj4gIMKgwqDCoMKgIH0gKnN5c2Zz
+X2VudHJ5Ow0KPiAgwqAjZW5kaWYNCj4gK8KgwqDCoCAvKiBUaGUgY2dyb3VwIHRvIHdoaWNoIHRo
+aXMgYnVmZmVyIGlzIGN1cnJlbnRseSBhdHRyaWJ1dGVkICovDQo+ICvCoMKgwqAgc3RydWN0IG1l
+bV9jZ3JvdXAgKm1lbWNnOw0KPiAgwqB9Ow0KPiANCj4gRG9lcyBub3QgY29uY2VwdHVhbGx5IGZp
+dCBpbiBteSBtaW5kLiBEbWFidWZzIGFyZSBub3QgYXNzb2NpYXRlZCB3aXRoIA0KPiBvbmUgY2dy
+b3VwIGF0IGEgdGltZS4NCj4gDQo+IFNvIGlmIHlvdSB3b3VsZCBwbGFjZSB0cmFja2luZyBpbnRv
+IGRtYV9idWZfYXR0YWNoL2RldGFjaCB5b3Ugd291bGQgYmUgDQo+IGFibGUgdG8gY2hhcmdlIHRv
+IGNvcnJlY3QgY2dyb3VwIHJlZ2FyZGxlc3Mgb2YgYSBkcml2ZXIgYW5kIHNpbmNlIGJ5IA0KPiBj
+b250cmFjdCBhdCB0aGlzIHN0YWdlIHRoZXJlIGlzIGJhY2tpbmcgc3RvcmUsIHRoZSByZWZsZWN0
+ZWQgbWVtb3J5IA0KPiB1c2FnZSBjb3VudGVyIHdvdWxkIGJlIHRydXRoZnVsLg0KPiANCj4gQnV0
+IHRoZW4geW91IHN0YXRlIGEgcHJvYmxlbSwgdGhhdCBtYWpvcml0eSBvZiB0aGUgdGltZSB0aGVy
+ZSBhcmUgbm8gDQo+IGF0dGFjaG1lbnRzIGluIHlvdXIgc2V0dXAsIGFuZCB5b3UgYWxzbyBzYXkg
+dGhlIHByb3Bvc2FsIGlzIG5vdCBzbyBtdWNoIA0KPiBhYm91dCBsZWFrcyBidXQgbW9yZSBhYm91
+dCBrbm93aW5nIHdoYXQgaXMgZXhwb3J0ZWQuDQo+IA0KPiBJbiB0aGlzIGNhc2UgeW91IGNvdWxk
+IGFkZGl0aW9uYWxseSB0cmFjayB0aGF0IHZpYSBkbWFfYnVmX2dldGZpbGUgLyANCj4gZG1hX2J1
+Zl9maWxlX3JlbGVhc2UgYXMgYSBzZXBhcmF0ZSBjYXRlZ29yeSBsaWtlIGRtYWJ1Zi1leHBvcnRl
+ZD8gQnV0IA0KPiBhZ2FpbiwgSSBwZXJzb25hbGx5IGRvbid0IGtub3cgaWYgc3VjaCAibWF5IG5v
+dCByZWFsbHkgYmUgdXNpbmcgbWVtb3J5IiANCj4gY291bnRlcnMgZml0IGluIG1lbWNnLg0KPiAN
+Cj4gKEhtIHlvdSdkIHByb2JhYmx5IHN0aWxsIG5lZWQgZG1hYnVmLT5leHBvcnRfbWVtY2cgdG8g
+c3RvcmUgd2hvIHdhcyB0aGUgDQo+IG9yaWdpbmFsIGNhbGxlciBvZiBkbWFfYnVmX2dldGZpbGUs
+IGluIGNhc2UgbGFzdCByZWZlcmVuY2UgaXMgZHJvcHBlZCANCj4gZnJvbSBhIGRpZmZlcmVudCBw
+cm9jZXNzL2NvbnRleHQuIEV2ZW4gZG1hYnVmLT5hdHRhY2hfbWVtY2cgZm9yIA0KPiBhdHRhY2gv
+ZGV0YWNoIHRvIHdvcmsgY29ycmVjdGx5IGZvciB0aGUgc2FtZSByZWFzb24uKQ0KDQpPciB0byB3
+b3JrIGFyb3VuZCB0aGUgIm1heSBub3QgcmVhbGx5IGJlIHVzaW5nIG1lbW9yeSIgcHJvYmxlbSB3
+aXRoIHRoZSANCmV4cG9ydGVkIHRyYWNraW5nLCBwZXJoYXBzIHlvdSBjb3VsZCByZWNvcmQgZG1h
+YnVmLT5leHBvcnRfbWVtY2cgYXQgDQpkbWFfYnVmX2V4cG9ydCB0aW1lLCBidXQgb25seSBjaGFy
+Z2UgYWdhaW5zdCBpdCBhdCBkbWFfYnVmX2dldGZpbGUgdGltZS4gDQpBc3N1bWluZyBpdCBpcyBw
+b3NzaWJsZSB0byBrZWVwIHJlZmVyZW5jZXMgdG8gdGhvc2UgbWVtY2cncyBvdmVyIHRoZSANCmRt
+YWJ1ZiBsaWZldGltZSB3aXRob3V0IGFueSBpc3N1ZXMuDQoNClRoYXQgd2F5IHdlIGNvdWxkIGhh
+dmUgZG1hYnVmLWV4cG9ydGVkIGFuZCBkbWFidWYtaW1wb3J0ZWQgbWVtY2cgDQpjYXRlZ29yaWVz
+IHdoaWNoIHdvdWxkIGJldHRlciBjb3JyZWxhdGUgd2l0aCByZWFsIG1lbW9yeSB1c2FnZS4gSSBz
+YXkgDQpiZXR0ZXIsIGJlY2F1c2UgSSBkb24ndCB0aGluayBpdCB3b3VsZCBzdGlsbCBiZSBwZXJm
+ZWN0IHNpbmNlIGluZGl2aWR1YWwgDQpkcml2ZXJzIGFyZSBhbGxvd2VkIHRvIGhvbGQgb250byB0
+aGUgYmFja2luZyBzdG9yZSBwb3N0IGRldGFjaCBhbmQgdGhhdCANCmlzIGludmlzaWJsZSB0byBk
+bWFidWYgQVBJLiBCdXQgdGhhdCBwcm9iYWJseSBpcyBhIGRpZmZlcmVudCBwcm9ibGVtLg0KDQpS
+ZWdhcmRzLA0KDQpUdnJ0a28NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlz
+dHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1z
+aWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
