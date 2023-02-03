@@ -2,335 +2,740 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B5ADB689445
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 Feb 2023 10:46:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7044868976E
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 Feb 2023 12:01:25 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9BE294118D
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 Feb 2023 09:46:57 +0000 (UTC)
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by lists.linaro.org (Postfix) with ESMTPS id 97AD03ECF6
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  3 Feb 2023 09:46:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 406A1413FD
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 Feb 2023 11:01:24 +0000 (UTC)
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com (mail-vi1eur04on2047.outbound.protection.outlook.com [40.107.8.47])
+	by lists.linaro.org (Postfix) with ESMTPS id BEBC73EC2E
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  3 Feb 2023 11:01:07 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=TgvntGkv;
-	spf=none (lists.linaro.org: domain of tvrtko.ursulin@linux.intel.com has no SPF policy when checking 192.55.52.93) smtp.mailfrom=tvrtko.ursulin@linux.intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1675417600; x=1706953600;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=xdffIUHA+7+J+16AG2rhvVGHZkGMMU1Otb3Wlnns3A8=;
-  b=TgvntGkvy5kqR4jubw4RH5HFclqJnSRU0pq0Hb8n674JnBLXnkE0R0/m
-   a/5NFTwamTt2lClxg7RnVuYOCI9qt+rAqG1DRitl59ttQjMh5lSNJ/jDB
-   TsYKqaRlvN0JoyjMWL7X3uumF8ZL1F3AXWKR6hdGk8FvTVjey3Htj0TXr
-   A/Uo9o+w0EABU56XaV3/cbsvmC9Y7954YW4llMRbYLiGexQnu74O9ep0R
-   tNvJ5M3M0aBfp9e8pnd9ZVASk2LpNNSFdns7KPU3TCI2vkNLGAS1DHDq5
-   BgzRBfvjXXdKjkh1ICUj9nCta7bvotgxkwbGS2xcj2yEfBb90G5ggi4Ga
-   Q==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10609"; a="326401871"
-X-IronPort-AV: E=Sophos;i="5.97,270,1669104000";
-   d="scan'208";a="326401871"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Feb 2023 01:46:37 -0800
-X-IronPort-AV: E=McAfee;i="6500,9779,10609"; a="643210973"
-X-IronPort-AV: E=Sophos;i="5.97,270,1669104000";
-   d="scan'208";a="643210973"
-Received: from lhime-mobl1.ger.corp.intel.com (HELO [10.213.220.100]) ([10.213.220.100])
-  by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Feb 2023 01:46:31 -0800
-Message-ID: <fd4d20c3-de97-6da0-3b95-32c830726716@linux.intel.com>
-Date: Fri, 3 Feb 2023 09:46:29 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.6.1
+	dkim=pass header.d=nxp.com header.s=selector2 header.b=gujc7amH;
+	spf=pass (lists.linaro.org: domain of olivier.masse@nxp.com designates 40.107.8.47 as permitted sender) smtp.mailfrom=olivier.masse@nxp.com;
+	dmarc=pass (policy=none) header.from=nxp.com;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Gkk5MnhUOSY4d/fprafhj57cpyciosG3ZoN8jG+i/58huW7j76PTl09IatLzEEHaXvOQk05KAHegRS/LIl5cKtORcRAmG5qfk/+0gaFP2KB8TskXW6h4dtpT5OjN5IO+XxE3j5hL0Bj3qBdY4MytMkgZ1J1u0Z8P9pHsWb160UQH3WETurQoCvrXMn6XX8lk0UcsboafEL8dTIV9jmOXybROGuEHjX6DglbOMZzC6ledBf/YLj39QAWFPimr3bLyE7BmN/kUPGu88Fjc0dXiTNR71ZhOof68j0X0Xz1Zf7TopEcEaUm3Kxq0VXRNMtzL5w9XJ8A3PSJC7V0ekvha5Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=W5M650e+Gzx1Jf/kYVnzNa81rXvthm2xMCZX+i6MMbI=;
+ b=GtjK0UFv+NGCdUEBdM7dVyhXFwxLD8BCU81dTP+OnUlo6qUXSrm+bkBiH9BkLFBXR7e4i1v06vShbVobOU6mPiGpfj9B+3d2md4OrRY9yuZf+kTzvFuWS/1WDmaB/eYaNnOcTIZ8P4TDEXPjDNF96ypkAUeRdgF9fMogqnCaIlqw6rh+a3DGKDKktRF3OUmRVY71AP5hjM38u9E2kS4LsyC03QSpxy9pOTX9cMMRlr6pg8Tr2QUaY9vAlmb8gNiOWWRoT60V3CtiOVnL3K55YycRIaU3GXU9V12lljai+554fkH2pvxg3o4XU2c+LFVzJZesF8cmyLho3ing4ip2mg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=W5M650e+Gzx1Jf/kYVnzNa81rXvthm2xMCZX+i6MMbI=;
+ b=gujc7amHQ1X97gGUpARqreXfLXzNBAINAhS2IrEBnZuRm3naV0AYYp2eCE4q2oiYSBOtB3qDG6/V3iBGAZPdCwvr6hXMSqgShmlZtELYTeExO+0XXMquFHMaL6CDYXRuIi1sxnQQHuvS3k+2ncP6yOzsdupvu+AbAo1/9mlaQmg=
+Received: from DB8PR04MB6746.eurprd04.prod.outlook.com (2603:10a6:10:10f::23)
+ by AS8PR04MB9094.eurprd04.prod.outlook.com (2603:10a6:20b:445::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.23; Fri, 3 Feb
+ 2023 11:01:04 +0000
+Received: from DB8PR04MB6746.eurprd04.prod.outlook.com
+ ([fe80::9b97:45f4:f45f:e97e]) by DB8PR04MB6746.eurprd04.prod.outlook.com
+ ([fe80::9b97:45f4:f45f:e97e%6]) with mapi id 15.20.6064.031; Fri, 3 Feb 2023
+ 11:01:04 +0000
+From: Olivier Masse <olivier.masse@nxp.com>
+To: "sumit.garg@linaro.org" <sumit.garg@linaro.org>,
+	"etienne.carriere@linaro.org" <etienne.carriere@linaro.org>
+Thread-Topic: [EXT] Re: [PATCH v2 1/1] tee: new ioctl to a register tee_shm
+ from a dmabuf file descriptor
+Thread-Index: AQHZMj2sccQANWLIb0CkERLUIPuRua65mRQAgAG6IQCAAArRgIAAF0mAgAGj0oA=
+Date: Fri, 3 Feb 2023 11:01:04 +0000
+Message-ID: <c86d1a46af6e076038b3f0c2dd68213ff1e8b254.camel@nxp.com>
+References: <20220812143055.12938-1-olivier.masse@nxp.com>
+	 <20220812143055.12938-2-olivier.masse@nxp.com>
+	 <30534fadb8172088eddef46ae71d87c167cbf32e.camel@nxp.com>
+	 <CAFA6WYOMCswgHHxsgc9Hgi7rmTPaZDqce=BixvYoFTfL0bTFDQ@mail.gmail.com>
+	 <PA4PR04MB75204E8D2B959893A04D55F388D69@PA4PR04MB7520.eurprd04.prod.outlook.com>
+	 <CAFA6WYPGT8xZnB1idcxcHT1bvM=0kwFssBQbn063-qg=czM-ZQ@mail.gmail.com>
+	 <CAN5uoS8XgvAKVwKHx-uOe3hAa4Jrd5FJt6xNOG5s-simkRND9w@mail.gmail.com>
+In-Reply-To: 
+ <CAN5uoS8XgvAKVwKHx-uOe3hAa4Jrd5FJt6xNOG5s-simkRND9w@mail.gmail.com>
+Accept-Language: fr-FR, en-US
 Content-Language: en-US
-To: "T.J. Mercier" <tjmercier@google.com>
-References: <20230123191728.2928839-1-tjmercier@google.com>
- <20230123191728.2928839-2-tjmercier@google.com>
- <Y8/ybgp2FW+e3bjc@dhcp22.suse.cz>
- <20230124194628.d44rtcfsv23fndxw@google.com>
- <Y9EX+usSpAjZ/8LS@dhcp22.suse.cz>
- <347560bc-d06a-92b7-8003-133d2b8af2df@linux.intel.com>
- <CABdmKX09S3bYzX+xBkhfkFULk2BtzS11RhzrvWv94j+cHSezPA@mail.gmail.com>
- <ad6bd448-91bd-d47e-5b54-8755fe0e0340@linux.intel.com>
- <CABdmKX3VSdF3jmktpw9VH4k+J+ZtQCLCPdNN6uye4XnZGPhG5g@mail.gmail.com>
- <15adf130-61f7-2423-2a48-883e611e3304@linux.intel.com>
- <CABdmKX181c21dbFGR+F=n_tF1MUeNPhXZXTNkAcW5FNRcLfxaQ@mail.gmail.com>
-From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-Organization: Intel Corporation UK Plc
-In-Reply-To: <CABdmKX181c21dbFGR+F=n_tF1MUeNPhXZXTNkAcW5FNRcLfxaQ@mail.gmail.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DB8PR04MB6746:EE_|AS8PR04MB9094:EE_
+x-ms-office365-filtering-correlation-id: 9cfbb0f6-2556-48d3-a161-08db05d5f1b5
+x-ld-processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 
+ r7DvtGb5tAarR81/reZ5DxWG1KzY0pEvtEJ+1VpBtVDVs+poD/eAQ14tSQyVku9Qw3W6axzzxKC9MVb2yTP9otBxvnGpa4VxcfYLf4hVTsbcg5yEZ+gjToUF1KL3wAaAHMH2Su+mQN2W6fR0nYsILaeWz4ktMeoFi7Yko2BC02cGv3fo8DCXjxXy0JyvYAQjwdGMTtLGhUor2fBMm9mYHGqe0JjpJQ6iwI6+HgpRuMTpJY8+eS8jAJZrkeFZVqHxjYaKLwn0TPQGpuEspn3uiAMwgMcujHvWjmQDBj77vHHDreHlYMHBL8PSC2k8DYP9fylXIGa0G246F6cJBcLAPVNV9WktAWRHM9uOi9LiIDfbqH+oX/af68MpL8EV1O5nUaTqBvbJ1iixpV3/rBwTMe4nUd8y6WLl8buL2TtxZuUkViLUg+MSaZqzVjirkfZfnnYOBIPNV2mcaKMIA0sTbqPgRbehFzHBZ9/7cqtlcPFFrmF0oV8p41+LjDl62KVM5eCQNgK9wHWUSwqjWeePoSRqp7IIPn6HTgvDwDS1WjJJTQ6MOVwaO3ZQFLDWP6xjCeGOzLHzphw+w8xry8Kn3f84k4zleBksBuELcvtcNopnfVS/h8ZNFoKjlLxz6Fb+RJ7tZsbQVjfq9u7USqajXSCac/R1/zD7vdLXcPSWtj7bCTR7NYK1J+0nut8LHy/j1mmNYUMXUoBh2bCDWJeeLcdXJuEk/AVBw7p72MCsD5rZ7aCIT5I6zsBvhrGh+6c2xE5Z8fVPS1F0nf40fRGsZg==
+x-forefront-antispam-report: 
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB8PR04MB6746.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(396003)(376002)(346002)(39860400002)(136003)(366004)(451199018)(36756003)(91956017)(478600001)(83380400001)(8676002)(38100700002)(4326008)(76116006)(45080400002)(64756008)(66446008)(66476007)(66556008)(66946007)(54906003)(110136005)(122000001)(316002)(6506007)(6512007)(5660300002)(26005)(186003)(53546011)(966005)(44832011)(6486002)(7416002)(66574015)(41300700001)(38070700005)(86362001)(71200400001)(2616005)(8936002)(2906002)(30864003)(579004);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: 
+ =?iso-8859-15?Q?ClEfbs77COojnhHMUtfNM1iVJizgrlBybERqJ0N0h4KHx/lP8Xdw23kS8?=
+ =?iso-8859-15?Q?2ox3C1GlTRaJQy0oDPnJghZmcJOzYHk7p5t/Lz673GMEDw0/KR76Mfyrg?=
+ =?iso-8859-15?Q?XyZdVjzn4Hka9QqyjlZFR5Fa/Clhhv1DMziYMz4EzzEUSNPWlAMrY/nSM?=
+ =?iso-8859-15?Q?S2jE4WASjvYSCWlCd9p5kqg9cHlUsuxns6lrb8VpLSpZCBCluORKu139D?=
+ =?iso-8859-15?Q?f2ZIgDoXIY/Fl0epvr71Ficv/Jy1jfaUH3O4Mma9vreZSR+iuN9EXaCMw?=
+ =?iso-8859-15?Q?vZOpDRaioerr7Eh5cGdOcldu9ThUtXZhc9q+kYuOseLti26tasx5H4zqk?=
+ =?iso-8859-15?Q?QsLN4JdJej3rlDuOatImNi4WVTWIJlDhF8mgellrt/pPzxvsWmWpymAPB?=
+ =?iso-8859-15?Q?xAaH0u7s8NYZ/QHKhC9RjTbuH13IUuEzGMcnand9tqf9hkf2+zDfWGr57?=
+ =?iso-8859-15?Q?INT+oqUoVzM1pXfpI512MMZpGD3CjdJqKsdUR9Xzndh5suPJnl5vDuIbn?=
+ =?iso-8859-15?Q?jSuGQ32iRwEjKpcbwSUcruGwKbzsFSM1oxLrPfXhR5/JDD2P/wKIk7adu?=
+ =?iso-8859-15?Q?dBryKreb8vzDWQrJsE0lsLwN4HiyaQyesFW6htQA6cnRw42NJNLjLkfTz?=
+ =?iso-8859-15?Q?Y0neXzTkYSlNz4edxsSW9oPMMC8NDqIQx7Yo1C48cglE7wKtEJEOUago0?=
+ =?iso-8859-15?Q?uxuwbVM64cObTHxq8Psy6PmmIjxEZU6TfAluALSeFUpSv06zqcQRbYc4L?=
+ =?iso-8859-15?Q?1u6QBaZHy6JysPBRrCKZ80Xkbuu7m2wWYImgyhnrAqgmgDH522EivFiWq?=
+ =?iso-8859-15?Q?Zw1Ep3NBC0rjK1SnqD+8x9iPb7LTJwECmoBPCcfgFnM41WGm+o41juo8U?=
+ =?iso-8859-15?Q?dcan4xNyogh0Q062IJnG9cj6QFpqckZDQqYeif//BaYDbdJN7eokvbrS0?=
+ =?iso-8859-15?Q?L6X8IY24O3yWdR7PQ0X3oAWsN3pPfkoky1BSaIDAN0MCh9h6aTMYDXs8u?=
+ =?iso-8859-15?Q?5ZWOdtOO9fUfdmR30x3FRl0PQEQsTvLihrLrAlAnVVjrbjVTK7nxhlZFA?=
+ =?iso-8859-15?Q?NCFy1ro82+qm1SvSk8LbF7T7RjWbDjWcu3n81lNpyOqa7bjYG7Lbj37rc?=
+ =?iso-8859-15?Q?ThwbMmix+QMdy4/Z/xzVGSpKQzdklPxkGCzPLmI71nsmaDS6XJ7jPegFW?=
+ =?iso-8859-15?Q?alpcGrOoYCjdq+n5CvH0aXUDnsBoGcJVr7wKxBJxcpJXigbBvcqbhGkyK?=
+ =?iso-8859-15?Q?kzCNrRSORh7BMg76A6lasBYGnfUwWE8xOFWC3LZC8q1iB+BsXf2Pb7B0+?=
+ =?iso-8859-15?Q?ywGoJ94o1nC+emmYuaFlK725mw3SALb61h+UyIfS2StCJ2ZWVMyN4aZ+N?=
+ =?iso-8859-15?Q?BD6PRfEaOiCQcN1E+NFuF+OCl/nMnAvJDmpaahQr272d/I9vgkAUYI1xS?=
+ =?iso-8859-15?Q?JRsRBn7rfHMAycSVRwBnh+hhnvOACxxsaHo/DK9mCWhyDu0ZzWhd5Fy65?=
+ =?iso-8859-15?Q?HX0Ckv6+bmuYJsa+wRgTJ8D5vcsKYFuEBjeEBEbS8G3hkSNt8XsxnuD3r?=
+ =?iso-8859-15?Q?n+ecFKPzbtlSVQAWH5BzhEu0pAhJn9cjbWn4gefQYCttWrBtu2fk4c34E?=
+ =?iso-8859-15?Q?k9xwvXqH7f9DtC34r7nWqoJvgZ0asTN3g3ieL8bRN18F189JLJsJ4A1dE?=
+ =?iso-8859-15?Q?FJ/SYQmWzjW2hGJk66tOXt/icQ=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-15"
+Content-ID: <FEA56E79BE3AEB4E9952A906272B381D@eurprd04.prod.outlook.com>
+MIME-Version: 1.0
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DB8PR04MB6746.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9cfbb0f6-2556-48d3-a161-08db05d5f1b5
+X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Feb 2023 11:01:04.3973
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: sjd2F96VfBg0vyefRPiyOeQXoTOEu9dqq5sdkVukf6MfXKmjPS8Y9jeZS4y5689P4T7XdQ28u/zHw9PhAd1JYA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB9094
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 97AD03ECF6
-X-Spamd-Bar: -------
-X-Spamd-Result: default: False [-7.80 / 15.00];
-	REPLY(-4.00)[];
+X-Rspamd-Queue-Id: BEBC73EC2E
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[nxp.com,none];
+	R_DKIM_ALLOW(-0.20)[nxp.com:s=selector2];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:4983, ipnet:192.55.52.0/24, country:US];
-	NEURAL_HAM(-0.00)[-1.000];
-	R_SPF_NA(0.00)[no SPF record];
-	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.993];
+	MIME_TRACE(0.00)[0:+];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	DKIM_TRACE(0.00)[intel.com:+];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	DKIM_TRACE(0.00)[nxp.com:+];
+	RCVD_COUNT_THREE(0.00)[3];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.8.47:from];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	URIBL_BLOCKED(0.00)[mail-vi1eur04on2047.outbound.protection.outlook.com:rdns,EUR04-VI1-obe.outbound.protection.outlook.com:helo];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	HAS_ORG_HEADER(0.00)[];
-	ARC_NA(0.00)[]
+	TO_DN_EQ_ADDR_SOME(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: ES6X2OQCW3R4D6YHI5UADEQCZQXZ2D6T
-X-Message-ID-Hash: ES6X2OQCW3R4D6YHI5UADEQCZQXZ2D6T
-X-MailFrom: tvrtko.ursulin@linux.intel.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Michal Hocko <mhocko@suse.com>, Shakeel Butt <shakeelb@google.com>, linux-doc@vger.kernel.org, Roman Gushchin <roman.gushchin@linux.dev>, cmllamas@google.com, dri-devel@lists.freedesktop.org, linux-mm@kvack.org, jstultz@google.com, Zefan Li <lizefan.x@bytedance.com>, Sumit Semwal <sumit.semwal@linaro.org>, android-mm@google.com, Jonathan Corbet <corbet@lwn.net>, jeffv@google.com, linux-media@vger.kernel.org, selinux@vger.kernel.org, linaro-mm-sig@lists.linaro.org, cgroups@vger.kernel.org, Muchun Song <muchun.song@linux.dev>, linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org, Johannes Weiner <hannes@cmpxchg.org>, Tejun Heo <tj@kernel.org>, Andrew Morton <akpm@linux-foundation.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+Message-ID-Hash: 7YLL55PUUN73TERCCLJNM2KLZTXTHFDP
+X-Message-ID-Hash: 7YLL55PUUN73TERCCLJNM2KLZTXTHFDP
+X-MailFrom: olivier.masse@nxp.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "fredgc@google.com" <fredgc@google.com>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "afd@ti.com" <afd@ti.com>, "op-tee@lists.trustedfirmware.org" <op-tee@lists.trustedfirmware.org>, "jens.wiklander@linaro.org" <jens.wiklander@linaro.org>, "joakim.bech@linaro.org" <joakim.bech@linaro.org>, "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, Cyrille Fleury <cyrille.fleury@nxp.com>, Peter Griffin <peter.griffin@linaro.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, =?iso-8859-15?Q?Cl=E9ment_Faure?= <clement.faure@nxp.com>, "christian.koenig@amd.com" <christian.koenig@amd.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 1/4] memcg: Track exported dma-buffers
+Subject: [Linaro-mm-sig] Re: [EXT] Re: [PATCH v2 1/1] tee: new ioctl to a register tee_shm from a dmabuf file descriptor
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ES6X2OQCW3R4D6YHI5UADEQCZQXZ2D6T/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7YLL55PUUN73TERCCLJNM2KLZTXTHFDP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+
+On jeu., 2023-02-02 at 10:58 +0100, Etienne Carriere wrote:
+> Caution: EXT Email
+>=20
+> On Thu, 2 Feb 2023 at 09:35, Sumit Garg <sumit.garg@linaro.org>
+> wrote:
+> > Hi Cyrille,
+> >=20
+> > Please don't top post as it makes it harder to follow-up.
+> >=20
+> > On Thu, 2 Feb 2023 at 13:26, Cyrille Fleury <cyrille.fleury@nxp.com
+> > > wrote:
+> > > Hi Sumit, all
+> > >=20
+> > > Upstream OP-TEE should support registering a dmabuf since a
+> > > while, given how widely dmabuf is used in Linux for passing
+> > > buffers around between devices.
+> > >=20
+> > > Purpose of the new register_tee_shm ioctl is to allow OPTEE to
+> > > use memory allocated from the exiting linux dma buffer. We don't
+> > > need to have secure dma-heap up streamed.
+> > >=20
+> > > You mentioned secure dma-buffer, but secure dma-buffer is a dma-
+> > > buffer, so the work to be done for secure or "regular" dma
+> > > buffers by the register_tee_shm ioctl is 100% the same.
+> > >=20
+> > > The scope of this ioctl is limited to what existing upstream dma-
+> > > buffers are:
+> > >         -> sharing buffers for hardware (DMA) access across
+> > > multiple device drivers and subsystems, and for synchronizing
+> > > asynchronous hardware access.
+> > >        -> It means continuous memory only.
+> > >=20
+> > > So if we reduce the scope of register tee_shm to exiting dma-
+> > > buffer area, the current patch does the job.
+> >=20
+> > Do you have a corresponding real world use-case supported by
+> > upstream
+> > OP-TEE? AFAIK, the Secure Data Path (SDP) use-case is the one
+> > supported in OP-TEE upstream but without secure dmabuf heap [1]
+> > available, the new ioctl can't be exercised.
+> >=20
+> > [1]=20
+> > https://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fgit=
+hub.com%2FOP-TEE%2Foptee_test%2Fblob%2Fmaster%2Fhost%2Fxtest%2Fsdp_basic.h%=
+23L15&data=3D05%7C01%7Colivier.masse%40nxp.com%7Ca27f690d9d7244c2bcff08db05=
+040f11%7C686ea1d3bc2b4c6fa92cd99c5c301635%7C0%7C0%7C638109287211847995%7CUn=
+known%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJ=
+XVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DeNUbc0uaKjfmxau8L7ZB8u%2BtYdUxT4pIS%2Fh=
+t29uwRKg%3D&reserved=3D0
+>=20
+> OP-TEE has some SDP test taht can exercice SDP: 'xtest
+> regression_1014'.
+> https://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fgithu=
+b.com%2FOP-TEE%2Foptee_test%2Fblob%2F3.20.0%2Fhost%2Fxtest%2Fregression_100=
+0.c%23L1256&data=3D05%7C01%7Colivier.masse%40nxp.com%7Ca27f690d9d7244c2bcff=
+08db05040f11%7C686ea1d3bc2b4c6fa92cd99c5c301635%7C0%7C0%7C63810928721184799=
+5%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1ha=
+WwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3D%2BOtAlVOq7%2Fi6SloSTZuwa5VtlC5Rq=
+tcJ4fGtio0YI8A%3D&reserved=3D0
+>=20
+> The test relies on old staged ION + local secure dmabuf heaps no more
+> maintained, so this test is currently not functional.
+> If we upgrade the test to mainline dmabuf alloc means, and apply the
+> change discussed here, we should be able to regularly test SDP in
+> OP-TEE project CI.
+> The part to update is the userland allocation of the dmabuf:
+> https://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fgithu=
+b.com%2FOP-TEE%2Foptee_test%2Fblob%2F3.20.0%2Fhost%2Fxtest%2Fsdp_basic.c%23=
+L91&data=3D05%7C01%7Colivier.masse%40nxp.com%7Ca27f690d9d7244c2bcff08db0504=
+0f11%7C686ea1d3bc2b4c6fa92cd99c5c301635%7C0%7C0%7C638109287211847995%7CUnkn=
+own%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXV=
+CI6Mn0%3D%7C3000%7C%7C%7C&sdata=3DK2NB2Bj7V3CXNsM9fZy95OEjF3EzqU4mgmM1PTY3J=
+1Y%3D&reserved=3D0
+>=20
+>=20
+
+the test was already updated to support secure dma heap with Kernel
+version 5.11 and higher. the userland allocation could be find here:
+https://github.com/OP-TEE/optee_test/blob/3.20.0/host/xtest/sdp_basic.c#L153
+
+This upgrade need a Linux dma-buf patch:
+https://lore.kernel.org/all/20220805154139.2qkqxwklufjpsfdx@000377403353/T/
 
 
-On 02/02/2023 23:43, T.J. Mercier wrote:
-> On Wed, Feb 1, 2023 at 6:23 AM Tvrtko Ursulin
-> <tvrtko.ursulin@linux.intel.com> wrote:
->>
->>
->> On 01/02/2023 01:49, T.J. Mercier wrote:
->>> On Tue, Jan 31, 2023 at 6:01 AM Tvrtko Ursulin
->>> <tvrtko.ursulin@linux.intel.com> wrote:
->>>>
->>>>
->>>> On 25/01/2023 20:04, T.J. Mercier wrote:
->>>>> On Wed, Jan 25, 2023 at 9:31 AM Tvrtko Ursulin
->>>>> <tvrtko.ursulin@linux.intel.com> wrote:
->>>>>>
->>>>>>
->>>>>> Hi,
->>>>>>
->>>>>> On 25/01/2023 11:52, Michal Hocko wrote:
->>>>>>> On Tue 24-01-23 19:46:28, Shakeel Butt wrote:
->>>>>>>> On Tue, Jan 24, 2023 at 03:59:58PM +0100, Michal Hocko wrote:
->>>>>>>>> On Mon 23-01-23 19:17:23, T.J. Mercier wrote:
->>>>>>>>>> When a buffer is exported to userspace, use memcg to attribute the
->>>>>>>>>> buffer to the allocating cgroup until all buffer references are
->>>>>>>>>> released.
->>>>>>>>>
->>>>>>>>> Is there any reason why this memory cannot be charged during the
->>>>>>>>> allocation (__GFP_ACCOUNT used)?
->>>>>>>>> Also you do charge and account the memory but underlying pages do not
->>>>>>>>> know about their memcg (this is normally done with commit_charge for
->>>>>>>>> user mapped pages). This would become a problem if the memory is
->>>>>>>>> migrated for example.
->>>>>>>>
->>>>>>>> I don't think this is movable memory.
->>>>>>>>
->>>>>>>>> This also means that you have to maintain memcg
->>>>>>>>> reference outside of the memcg proper which is not really nice either.
->>>>>>>>> This mimicks tcp kmem limit implementation which I really have to say I
->>>>>>>>> am not a great fan of and this pattern shouldn't be coppied.
->>>>>>>>>
->>>>>>>>
->>>>>>>> I think we should keep the discussion on technical merits instead of
->>>>>>>> personal perference. To me using skmem like interface is totally fine
->>>>>>>> but the pros/cons need to be very explicit and the clear reasons to
->>>>>>>> select that option should be included.
->>>>>>>
->>>>>>> I do agree with that. I didn't want sound to be personal wrt tcp kmem
->>>>>>> accounting but the overall code maintenance cost is higher because
->>>>>>> of how tcp take on accounting differs from anything else in the memcg
->>>>>>> proper. I would prefer to not grow another example like that.
->>>>>>>
->>>>>>>> To me there are two options:
->>>>>>>>
->>>>>>>> 1. Using skmem like interface as this patch series:
->>>>>>>>
->>>>>>>> The main pros of this option is that it is very simple. Let me list down
->>>>>>>> the cons of this approach:
->>>>>>>>
->>>>>>>> a. There is time window between the actual memory allocation/free and
->>>>>>>> the charge and uncharge and [un]charge happen when the whole memory is
->>>>>>>> allocated or freed. I think for the charge path that might not be a big
->>>>>>>> issue but on the uncharge, this can cause issues. The application and
->>>>>>>> the potential shrinkers have freed some of this dmabuf memory but until
->>>>>>>> the whole dmabuf is freed, the memcg uncharge will not happen. This can
->>>>>>>> consequences on reclaim and oom behavior of the application.
->>>>>>>>
->>>>>>>> b. Due to the usage model i.e. a central daemon allocating the dmabuf
->>>>>>>> memory upfront, there is a requirement to have a memcg charge transfer
->>>>>>>> functionality to transfer the charge from the central daemon to the
->>>>>>>> client applications. This does introduce complexity and avenues of weird
->>>>>>>> reclaim and oom behavior.
->>>>>>>>
->>>>>>>>
->>>>>>>> 2. Allocate and charge the memory on page fault by actual user
->>>>>>>>
->>>>>>>> In this approach, the memory is not allocated upfront by the central
->>>>>>>> daemon but rather on the page fault by the client application and the
->>>>>>>> memcg charge happen at the same time.
->>>>>>>>
->>>>>>>> The only cons I can think of is this approach is more involved and may
->>>>>>>> need some clever tricks to track the page on the free patch i.e. we to
->>>>>>>> decrement the dmabuf memcg stat on free path. Maybe a page flag.
->>>>>>>>
->>>>>>>> The pros of this approach is there is no need have a charge transfer
->>>>>>>> functionality and the charge/uncharge being closely tied to the actual
->>>>>>>> memory allocation and free.
->>>>>>>>
->>>>>>>> Personally I would prefer the second approach but I don't want to just
->>>>>>>> block this work if the dmabuf folks are ok with the cons mentioned of
->>>>>>>> the first approach.
->>>>>>>
->>>>>>> I am not familiar with dmabuf internals to judge complexity on their end
->>>>>>> but I fully agree that charge-when-used is much more easier to reason
->>>>>>> about and it should have less subtle surprises.
->>>>>>
->>>>>> Disclaimer that I don't seem to see patches 3&4 on dri-devel so maybe I
->>>>>> am missing something, but in principle yes, I agree that the 2nd option
->>>>>> (charge the user, not exporter) should be preferred. Thing being that at
->>>>>> export time there may not be any backing store allocated, plus if the
->>>>>> series is restricting the charge transfer to just Android clients then
->>>>>> it seems it has the potential to miss many other use cases. At least
->>>>>> needs to outline a description on how the feature will be useful outside
->>>>>> Android.
->>>>>>
->>>>> There is no restriction like that. It's available to anybody who wants
->>>>> to call dma_buf_charge_transfer if they actually have a need for that,
->>>>> which I don't really expect to be common since most users/owners of
->>>>> the buffers will be the ones causing the export in the first place.
->>>>> It's just not like that on Android with the extra allocator process in
->>>>> the middle most of the time.
->>>>
->>>> Yeah I used the wrong term "restrict", apologies. What I meant was, if
->>>> the idea was to allow spotting memory leaks, with the charge transfer
->>>> being optional and in the series only wired up for Android Binder, then
->>>> it obviously only fully works for that one case. So a step back..
->>>>
->>> Oh, spotting kernel memory leaks is a side-benefit of accounting
->>> kernel-only buffers in the root cgroup. The primary goal is to
->>> attribute buffers to applications that originated them (via
->>> per-application cgroups) simply for accounting purposes. Buffers are
->>> using memory on the system, and we want to know who created them and
->>> how much memory is used. That information is/will no longer available
->>> with the recent deprecation of the dmabuf sysfs statistics.
->>>
->>>> .. For instance, it is not feasible to transfer the charge when dmabuf
->>>> is attached, or imported? That would attribute the usage to the
->>>> user/importer so give better visibility on who is actually causing the
->>>> memory leak.
->>>>
->>> Instead of accounting at export, we could account at attach. That just
->>> turns out not to be very useful when the majority of our
->>> heap-allocated buffers don't have attachments at any particular point
->>> in time. :\ But again it's less about leaks and more about knowing
->>> which buffers exist in the first place.
->>>
->>>> Further more, if above is feasible, then could it also be implemented in
->>>> the common layer so it would automatically cover all drivers?
->>>>
->>> Which common layer code specifically? The dmabuf interface appears to
->>> be the most central/common place to me.
->>
->> Yes, I meant dma_buf_attach / detach. More below.
->>>>>> Also stepping back for a moment - is a new memory category really
->>>>>> needed, versus perhaps attempting to charge the actual backing store
->>>>>> memory to the correct client? (There might have been many past
->>>>>> discussions on this so it's okay to point me towards something in the
->>>>>> archives.)
->>>>>>
->>>>> Well the dmabuf counter for the stat file is really just a subcategory
->>>>> of memory that is charged. Its existence is not related to getting the
->>>>> charge attributed to the right process/cgroup. We do want to know how
->>>>> much of the memory attributed to a process is for dmabufs, which is
->>>>> the main point of this series.
->>>>
->>>> Then I am probably missing something because the statement how proposal
->>>> is not intended to charge to the right process, but wants to know how
->>>> much dmabuf "size" is attributed to a process, confuses me due a seeming
->>>> contradiction. And the fact it would not be externally observable how
->>>> much of the stats is accurate and how much is not (without knowing the
->>>> implementation detail of which drivers implement charge transfer and
->>>> when). Maybe I completely misunderstood the use case.
->>>>
->>> Hmm, did I clear this up above or no? The current proposal is for the
->>> process causing the export of a buffer to be charged for it,
->>> regardless of whatever happens afterwards. (Unless that process is
->>> like gralloc on Android, in which case the charge is transferred from
->>> gralloc to whoever called gralloc to allocate the buffer on their
->>> behalf.)
->>
->> Main problem for me is that charging at export time has no relation to memory used. But I am not familiar with the memcg counters to know if any other counter sets that same precedent. If all other are about real memory use then IMO this does not fit that well. I mean specifically this:
->>
->> +         dmabuf (npn)
->> +               Amount of memory used for exported DMA buffers allocated by the cgroup.
->> +               Stays with the allocating cgroup regardless of how the buffer is shared.
->> +
->>
->> I think that "Amount of memory used for exported..." is not correct. As implemented it is more akin the virtual address space size in the cpu space - it can have no relation to the actual usage since backing store is not allocated until the attachment is made.
->>
->> Then also this:
->>
->> @@ -446,6 +447,8 @@ struct dma_buf {
->>                  struct dma_buf *dmabuf;
->>          } *sysfs_entry;
->>    #endif
->> +       /* The cgroup to which this buffer is currently attributed */
->> +       struct mem_cgroup *memcg;
->>    };
->>
->> Does not conceptually fit in my mind. Dmabufs are not associated with one cgroup at a time.
->>
-> It's true that a dmabuf could be shared among processes in different
-> cgroups, but this refers to the one that's charged for it. Similar to
-> how the shmem pages that back memfds which can be similarly shared get
-> charged to the first cgroup that touches each page, here it's the
-> entire buffer instead of each individual page. Maybe it'd be possible
-> to charge whoever attaches / maps first, but I have to point out
-> there'd be a gap between then and export where we'd have no accounting
-> of the memory for cases where pages actually do get allocated during
-> export (like in the system_heap).
-
-Okay I wasn't familiar with heaps until now - indeed - allocating a dma 
-buf from there is allocation and export in one, no delayed/lazy anything 
-on neither edge. Therefore charge at exports works there.
-
-One option - rename the proposed memcg category to be clear it is only 
-for dma buf heaps?
-
-But does it not create double accounting btw? Since there are both 
-pages/cma allocations that would be tracked and the new dma buf category.
-
-Another option was allow each "backend" to specify if export charge 
-needs to happen on export or import to be more accurate? (Like a flag 
-for dma_buf_export_info maybe.)
-
-Regards,
-
-Tvrtko
-
->> So if you would place tracking into dma_buf_attach/detach you would be able to charge to correct cgroup regardless of a driver and since by contract at this stage there is backing store, the reflected memory usage counter would be truthful.
->>
->> But then you state a problem, that majority of the time there are no attachments in your setup, and you also say the proposal is not so much about leaks but more about knowing what is exported.
->>
->> In this case you could additionally track that via dma_buf_getfile / dma_buf_file_release as a separate category like dmabuf-exported? But again, I personally don't know if such "may not really be using memory" counters fit in memcg.
->>
->> (Hm you'd probably still need dmabuf->export_memcg to store who was the original caller of dma_buf_getfile, in case last reference is dropped from a different process/context. Even dmabuf->attach_memcg for attach/detach to work correctly for the same reason.)
->>
->> Regards,
->>
->> Tvrtko
+> br,
+> etienne
+>=20
+>=20
+> > -Sumit
+> >=20
+> > > Regards.
+> > >=20
+> > > -----Original Message-----
+> > > From: Sumit Garg <sumit.garg@linaro.org>
+> > > Sent: Wednesday, February 1, 2023 6:34 AM
+> > > To: Olivier Masse <olivier.masse@nxp.com>
+> > > Cc: fredgc@google.com; linux-media@vger.kernel.org;=20
+> > > linaro-mm-sig@lists.linaro.org; afd@ti.com;=20
+> > > op-tee@lists.trustedfirmware.org; jens.wiklander@linaro.org;=20
+> > > joakim.bech@linaro.org; sumit.semwal@linaro.org; Peter Griffin <
+> > > peter.griffin@linaro.org>; linux-kernel@vger.kernel.org;=20
+> > > etienne.carriere@linaro.org; dri-devel@lists.freedesktop.org;=20
+> > > christian.koenig@amd.com; Cl=E9ment Faure <clement.faure@nxp.com>;
+> > > Cyrille Fleury <cyrille.fleury@nxp.com>
+> > > Subject: [EXT] Re: [PATCH v2 1/1] tee: new ioctl to a register
+> > > tee_shm from a dmabuf file descriptor
+> > >=20
+> > > Caution: EXT Email
+> > >=20
+> > > Hi Olivier,
+> > >=20
+> > > On Fri, 27 Jan 2023 at 16:24, Olivier Masse <
+> > > olivier.masse@nxp.com> wrote:
+> > > > Hi Joakim,
+> > > > Hi Etienne,
+> > > >=20
+> > > > Let me bring back this pull request for OPTEE Linux driver.
+> > > >=20
+> > > > Last feedback was from Christian K=F6nig and Sumit Garg.
+> > > > From Christian:
+> > > > > Just two comments:
+> > > > >=20
+> > > > > 1. Dmitry is working on a change which renames some functions
+> > > > > and
+> > > > > makes it mandatory to call them with the dma_resv lock held.
+> > > > >=20
+> > > > > Depending on how you want to upstream this change you will
+> > > > > certainly
+> > > > > run into conflicts with that.
+> > > >=20
+> > > > Is there any update on these changes ?
+> > > >=20
+> > > > > 2. Would it be possible to do this dynamically? In other
+> > > > > words does
+> > > > > the tee driver has a concept of buffers moving around?
+> > > >=20
+> > > > We do not support dynamic secure memory heap.
+> > > >=20
+> > > > From Sumit:
+> > > > > What limits you to extend this feature to non-contiguous
+> > > > > memory
+> > > > > buffers? I believe that should be possible with OP-TEE
+> > > > > dynamic
+> > > > > shared memory which gives you the granularity to register a
+> > > > > list of pages.
+> > > >=20
+> > > > Our solution use a fixed protected reserved memory region and
+> > > > do not
+> > > > rely on a dynamic protection managed in secure.
+> > > >=20
+> > > > The scope of this implementation rely on a static memory region
+> > > > handled by a specific DMA Heap type.
+> > > >=20
+> > >=20
+> > > AFAIR, the last review for v2 is here [1]. So we need to have
+> > > this secure DMA heap upstream in order for ioctl added by this
+> > > patch to be usable.
+> > >=20
+> > > [1]=20
+> > > https://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Fl=
+ists.trustedfirmware.org%2Farchives%2Flist%2Fop-tee%40lists.trustedfirmware=
+.org%2Fmessage%2FM3WLO7RNG22OR4744BY6XNG2GLIYMNHN%2F&data=3D05%7C01%7Colivi=
+er.masse%40nxp.com%7Ca27f690d9d7244c2bcff08db05040f11%7C686ea1d3bc2b4c6fa92=
+cd99c5c301635%7C0%7C0%7C638109287211847995%7CUnknown%7CTWFpbGZsb3d8eyJWIjoi=
+MC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&=
+sdata=3D3ur7F71QnW6r15GdYR2e2YyoZLTONtTQvLHigH3uJsk%3D&reserved=3D0
+> > >=20
+> > > -Sumit
+> > >=20
+> > > > Best regards,
+> > > > Olivier MASSE
+> > > >=20
+> > > >=20
+> > > > On ven., 2022-08-12 at 16:30 +0200, Olivier Masse wrote:
+> > > > > From: Etienne Carriere <etienne.carriere@linaro.org>
+> > > > >=20
+> > > > > This change allows userland to create a tee_shm object that
+> > > > > refers
+> > > > > to a dmabuf reference.
+> > > > >=20
+> > > > > Userland provides a dmabuf file descriptor as buffer
+> > > > > reference.
+> > > > > The created tee_shm object exported as a brand new dmabuf
+> > > > > reference
+> > > > > used to provide a clean fd to userland. Userland shall closed
+> > > > > this
+> > > > > new fd to release the tee_shm object resources. The initial
+> > > > > dmabuf
+> > > > > resources are tracked independently through original dmabuf
+> > > > > file
+> > > > > descriptor.
+> > > > >=20
+> > > > > Once the buffer is registered and until it is released, TEE
+> > > > > driver
+> > > > > keeps a refcount on the registered dmabuf structure.
+> > > > >=20
+> > > > > This change only support dmabuf references that relates to
+> > > > > physically contiguous memory buffers.
+> > > > >=20
+> > > > > New tee_shm flag to identify tee_shm objects built from a
+> > > > > registered
+> > > > > dmabuf: TEE_SHM_EXT_DMA_BUF. Such tee_shm structures are
+> > > > > flagged
+> > > > > with TEE_SHM_EXT_DMA_BUF.
+> > > > >=20
+> > > > > Co-Developed-by: Etienne Carriere <
+> > > > > etienne.carriere@linaro.org>
+> > > > > Signed-off-by: Olivier Masse <olivier.masse@nxp.com>
+> > > > > Reported-by: kernel test robot <lkp@intel.com>
+> > > > > From:
+> > > > > https://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F=
+%2Fgi%2F&data=3D05%7C01%7Colivier.masse%40nxp.com%7Ca27f690d9d7244c2bcff08d=
+b05040f11%7C686ea1d3bc2b4c6fa92cd99c5c301635%7C0%7C0%7C638109287211847995%7=
+CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwi=
+LCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=3D7LNWTr4TWQoB0OLqasXT05o%2BUkodxsOqpc=
+UcvoeiZ74%3D&reserved=3D0
+> > > > > thub.com%2Flinaro-
+> > > > > swg%2Flinux.git&data=3D05%7C01%7Ccyrille.fleury%40nx
+> > > > > p.com%7Cb24461a4e7284314dff408db0415f23e%7C686ea1d3bc2b4c6fa9
+> > > > > 2cd99c5
+> > > > > c301635%7C0%7C0%7C638108264533221384%7CUnknown%7CTWFpbGZsb3d8
+> > > > > eyJWIjo
+> > > > > iMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7
+> > > > > C3000%7
+> > > > > C%7C%7C&sdata=3D8jbFPaF%2B5JBed4Uvo1hsJiB%2BP71KUgJmnW%2BIi3zLf
+> > > > > ok%3D&r
+> > > > > eserved=3D0 (cherry picked from commit
+> > > > > 41e21e5c405530590dc2dd10b2a8dbe64589840f)
+> > > > > ---
+> > > > >  drivers/tee/tee_core.c   | 38 +++++++++++++++
+> > > > >  drivers/tee/tee_shm.c    | 99
+> > > > > +++++++++++++++++++++++++++++++++++++++-
+> > > > >  include/linux/tee_drv.h  | 11
+> > > > > +++++  include/uapi/linux/tee.h | 29
+> > > > > ++++++++++++
+> > > > >  4 files changed, 175 insertions(+), 2 deletions(-)
+> > > > >=20
+> > > > > diff --git a/drivers/tee/tee_core.c b/drivers/tee/tee_core.c
+> > > > > index
+> > > > > 8aa1a4836b92..7c45cbf85eb9 100644
+> > > > > --- a/drivers/tee/tee_core.c
+> > > > > +++ b/drivers/tee/tee_core.c
+> > > > > @@ -355,6 +355,42 @@ tee_ioctl_shm_register(struct
+> > > > > tee_context *ctx,
+> > > > >       return ret;
+> > > > >  }
+> > > > >=20
+> > > > > +static int tee_ioctl_shm_register_fd(struct tee_context
+> > > > > *ctx,
+> > > > > +                                  struct
+> > > > > tee_ioctl_shm_register_fd_data __user *udata)
+> > > > > +{
+> > > > > +     struct tee_ioctl_shm_register_fd_data data;
+> > > > > +     struct tee_shm *shm;
+> > > > > +     long ret;
+> > > > > +
+> > > > > +     if (copy_from_user(&data, udata, sizeof(data)))
+> > > > > +             return -EFAULT;
+> > > > > +
+> > > > > +     /* Currently no input flags are supported */
+> > > > > +     if (data.flags)
+> > > > > +             return -EINVAL;
+> > > > > +
+> > > > > +     shm =3D tee_shm_register_fd(ctx, data.fd);
+> > > > > +     if (IS_ERR(shm))
+> > > > > +             return -EINVAL;
+> > > > > +
+> > > > > +     data.id =3D shm->id;
+> > > > > +     data.flags =3D shm->flags;
+> > > > > +     data.size =3D shm->size;
+> > > > > +
+> > > > > +     if (copy_to_user(udata, &data, sizeof(data)))
+> > > > > +             ret =3D -EFAULT;
+> > > > > +     else
+> > > > > +             ret =3D tee_shm_get_fd(shm);
+> > > > > +
+> > > > > +     /*
+> > > > > +      * When user space closes the file descriptor the
+> > > > > shared memory
+> > > > > +      * should be freed or if tee_shm_get_fd() failed then
+> > > > > it will
+> > > > > +      * be freed immediately.
+> > > > > +      */
+> > > > > +     tee_shm_put(shm);
+> > > > > +     return ret;
+> > > > > +}
+> > > > > +
+> > > > >  static int params_from_user(struct tee_context *ctx, struct
+> > > > > tee_param *params,
+> > > > >                           size_t num_params,
+> > > > >                           struct tee_ioctl_param __user
+> > > > > *uparams) @@
+> > > > > -829,6 +865,8 @@ static long tee_ioctl(struct file *filp,
+> > > > > unsigned
+> > > > > int cmd, unsigned long arg)
+> > > > >               return tee_ioctl_shm_alloc(ctx, uarg);
+> > > > >       case TEE_IOC_SHM_REGISTER:
+> > > > >               return tee_ioctl_shm_register(ctx, uarg);
+> > > > > +     case TEE_IOC_SHM_REGISTER_FD:
+> > > > > +             return tee_ioctl_shm_register_fd(ctx, uarg);
+> > > > >       case TEE_IOC_OPEN_SESSION:
+> > > > >               return tee_ioctl_open_session(ctx, uarg);
+> > > > >       case TEE_IOC_INVOKE:
+> > > > > diff --git a/drivers/tee/tee_shm.c b/drivers/tee/tee_shm.c
+> > > > > index
+> > > > > 836872467dc6..55a3fbbb022e 100644
+> > > > > --- a/drivers/tee/tee_shm.c
+> > > > > +++ b/drivers/tee/tee_shm.c
+> > > > > @@ -4,6 +4,7 @@
+> > > > >   */
+> > > > >  #include <linux/anon_inodes.h>
+> > > > >  #include <linux/device.h>
+> > > > > +#include <linux/dma-buf.h>
+> > > > >  #include <linux/idr.h>
+> > > > >  #include <linux/mm.h>
+> > > > >  #include <linux/sched.h>
+> > > > > @@ -12,6 +13,14 @@
+> > > > >  #include <linux/uio.h>
+> > > > >  #include "tee_private.h"
+> > > > >=20
+> > > > > +/* extra references appended to shm object for registered
+> > > > > shared
+> > > > > memory */
+> > > > > +struct tee_shm_dmabuf_ref {
+> > > > > +     struct tee_shm shm;
+> > > > > +     struct dma_buf *dmabuf;
+> > > > > +     struct dma_buf_attachment *attach;
+> > > > > +     struct sg_table *sgt;
+> > > > > +};
+> > > > > +
+> > > > >  static void shm_put_kernel_pages(struct page **pages, size_t
+> > > > > page_count)
+> > > > >  {
+> > > > >       size_t n;
+> > > > > @@ -71,7 +80,16 @@ static void
+> > > > > release_registered_pages(struct
+> > > > > tee_shm *shm)
+> > > > >=20
+> > > > >  static void tee_shm_release(struct tee_device *teedev,
+> > > > > struct
+> > > > > tee_shm *shm)  {
+> > > > > -     if (shm->flags & TEE_SHM_POOL) {
+> > > > > +     if (shm->flags & TEE_SHM_EXT_DMA_BUF) {
+> > > > > +             struct tee_shm_dmabuf_ref *ref;
+> > > > > +
+> > > > > +             ref =3D container_of(shm, struct
+> > > > > tee_shm_dmabuf_ref,
+> > > > > shm);
+> > > > > +             dma_buf_unmap_attachment(ref->attach, ref->sgt,
+> > > > > +                                      DMA_BIDIRECTIONAL);
+> > > > > +
+> > > > > +             dma_buf_detach(ref->dmabuf, ref->attach);
+> > > > > +             dma_buf_put(ref->dmabuf);
+> > > > > +     } else if (shm->flags & TEE_SHM_POOL) {
+> > > > >               teedev->pool->ops->free(teedev->pool, shm);
+> > > > >       } else if (shm->flags & TEE_SHM_DYNAMIC) {
+> > > > >               int rc =3D teedev->desc->ops->shm_unregister(shm-
+> > > > > >ctx,
+> > > > > shm);
+> > > > > @@ -195,7 +213,7 @@ struct tee_shm
+> > > > > *tee_shm_alloc_user_buf(struct
+> > > > > tee_context *ctx, size_t size)
+> > > > >   * tee_client_invoke_func(). The memory allocated is later
+> > > > > freed
+> > > > > with a
+> > > > >   * call to tee_shm_free().
+> > > > >   *
+> > > > > - * @returns a pointer to 'struct tee_shm'
+> > > > > + * @returns a pointer to 'struct tee_shm' on success, and
+> > > > > ERR_PTR
+> > > > > + on
+> > > > > failure
+> > > > >   */
+> > > > >  struct tee_shm *tee_shm_alloc_kernel_buf(struct tee_context
+> > > > > *ctx,
+> > > > > size_t size)  { @@ -229,6 +247,83 @@ struct tee_shm
+> > > > > *tee_shm_alloc_priv_buf(struct tee_context *ctx, size_t
+> > > > > size)  }
+> > > > > EXPORT_SYMBOL_GPL(tee_shm_alloc_priv_buf);
+> > > > >=20
+> > > > > +struct tee_shm *tee_shm_register_fd(struct tee_context *ctx,
+> > > > > int
+> > > > > +fd) {
+> > > > > +     struct tee_shm_dmabuf_ref *ref;
+> > > > > +     int rc;
+> > > > > +
+> > > > > +     if (!tee_device_get(ctx->teedev))
+> > > > > +             return ERR_PTR(-EINVAL);
+> > > > > +
+> > > > > +     teedev_ctx_get(ctx);
+> > > > > +
+> > > > > +     ref =3D kzalloc(sizeof(*ref), GFP_KERNEL);
+> > > > > +     if (!ref) {
+> > > > > +             rc =3D -ENOMEM;
+> > > > > +             goto err_put_tee;
+> > > > > +     }
+> > > > > +
+> > > > > +     refcount_set(&ref->shm.refcount, 1);
+> > > > > +     ref->shm.ctx =3D ctx;
+> > > > > +     ref->shm.id =3D -1;
+> > > > > +
+> > > > > +     ref->dmabuf =3D dma_buf_get(fd);
+> > > > > +     if (IS_ERR(ref->dmabuf)) {
+> > > > > +             rc =3D PTR_ERR(ref->dmabuf);
+> > > > > +             goto err_put_dmabuf;
+> > > > > +     }
+> > > > > +
+> > > > > +     ref->attach =3D dma_buf_attach(ref->dmabuf, &ref-
+> > > > > >shm.ctx-
+> > > > > > teedev->dev);
+> > > > > +     if (IS_ERR(ref->attach)) {
+> > > > > +             rc =3D PTR_ERR(ref->attach);
+> > > > > +             goto err_detach;
+> > > > > +     }
+> > > > > +
+> > > > > +     ref->sgt =3D dma_buf_map_attachment(ref->attach,
+> > > > > DMA_BIDIRECTIONAL);
+> > > > > +     if (IS_ERR(ref->sgt)) {
+> > > > > +             rc =3D PTR_ERR(ref->sgt);
+> > > > > +             goto err_unmap_attachement;
+> > > > > +     }
+> > > > > +
+> > > > > +     if (sg_nents(ref->sgt->sgl) !=3D 1) {
+> > > > > +             rc =3D PTR_ERR(ref->sgt->sgl);
+> > > > > +             goto err_unmap_attachement;
+> > > > > +     }
+> > > > > +
+> > > > > +     ref->shm.paddr =3D sg_dma_address(ref->sgt->sgl);
+> > > > > +     ref->shm.size =3D sg_dma_len(ref->sgt->sgl);
+> > > > > +     ref->shm.flags =3D TEE_SHM_EXT_DMA_BUF;
+> > > > > +
+> > > > > +     mutex_lock(&ref->shm.ctx->teedev->mutex);
+> > > > > +     ref->shm.id =3D idr_alloc(&ref->shm.ctx->teedev->idr,
+> > > > > &ref->shm,
+> > > > > +                             1, 0, GFP_KERNEL);
+> > > > > +     mutex_unlock(&ref->shm.ctx->teedev->mutex);
+> > > > > +     if (ref->shm.id < 0) {
+> > > > > +             rc =3D ref->shm.id;
+> > > > > +             goto err_idr_remove;
+> > > > > +     }
+> > > > > +
+> > > > > +     return &ref->shm;
+> > > > > +
+> > > > > +err_idr_remove:
+> > > > > +     mutex_lock(&ctx->teedev->mutex);
+> > > > > +     idr_remove(&ctx->teedev->idr, ref->shm.id);
+> > > > > +     mutex_unlock(&ctx->teedev->mutex);
+> > > > > +err_unmap_attachement:
+> > > > > +     dma_buf_unmap_attachment(ref->attach, ref->sgt,
+> > > > > DMA_BIDIRECTIONAL);
+> > > > > +err_detach:
+> > > > > +     dma_buf_detach(ref->dmabuf, ref->attach);
+> > > > > +err_put_dmabuf:
+> > > > > +     dma_buf_put(ref->dmabuf);
+> > > > > +     kfree(ref);
+> > > > > +err_put_tee:
+> > > > > +     teedev_ctx_put(ctx);
+> > > > > +     tee_device_put(ctx->teedev);
+> > > > > +
+> > > > > +     return ERR_PTR(rc);
+> > > > > +}
+> > > > > +EXPORT_SYMBOL_GPL(tee_shm_register_fd);
+> > > > > +
+> > > > >  static struct tee_shm *
+> > > > >  register_shm_helper(struct tee_context *ctx, unsigned long
+> > > > > addr,
+> > > > >                   size_t length, u32 flags, int id) diff --
+> > > > > git
+> > > > > a/include/linux/tee_drv.h b/include/linux/tee_drv.h index
+> > > > > 911cad324acc..40ddd5376c2d 100644
+> > > > > --- a/include/linux/tee_drv.h
+> > > > > +++ b/include/linux/tee_drv.h
+> > > > > @@ -25,6 +25,7 @@
+> > > > >  #define TEE_SHM_USER_MAPPED  BIT(1)  /* Memory mapped in
+> > > > > user space
+> > > > > */
+> > > > >  #define TEE_SHM_POOL         BIT(2)  /* Memory allocated
+> > > > > from pool
+> > > > > */
+> > > > >  #define TEE_SHM_PRIV         BIT(3)  /* Memory private to
+> > > > > TEE driver
+> > > > > */
+> > > > > +#define TEE_SHM_EXT_DMA_BUF     BIT(4)  /* Memory with dma-
+> > > > > buf
+> > > > > handle */
+> > > > >=20
+> > > > >  struct device;
+> > > > >  struct tee_device;
+> > > > > @@ -276,6 +277,16 @@ struct tee_shm
+> > > > > *tee_shm_alloc_kernel_buf(struct
+> > > > > tee_context *ctx, size_t size);  struct tee_shm
+> > > > > *tee_shm_register_kernel_buf(struct tee_context *ctx,
+> > > > >                                           void *addr, size_t
+> > > > > length);
+> > > > >=20
+> > > > > +/**
+> > > > > + * tee_shm_register_fd() - Register shared memory from file
+> > > > > descriptor
+> > > > > + *
+> > > > > + * @ctx:     Context that allocates the shared memory
+> > > > > + * @fd:              Shared memory file descriptor reference
+> > > > > + *
+> > > > > + * @returns a pointer to 'struct tee_shm' on success, and
+> > > > > ERR_PTR
+> > > > > + on
+> > > > > failure
+> > > > > + */
+> > > > > +struct tee_shm *tee_shm_register_fd(struct tee_context *ctx,
+> > > > > int
+> > > > > fd);
+> > > > > +
+> > > > >  /**
+> > > > >   * tee_shm_is_dynamic() - Check if shared memory object is
+> > > > > of the
+> > > > > dynamic kind
+> > > > >   * @shm:     Shared memory handle
+> > > > > diff --git a/include/uapi/linux/tee.h
+> > > > > b/include/uapi/linux/tee.h
+> > > > > index 25a6c534beb1..baf3cd7cfdac 100644
+> > > > > --- a/include/uapi/linux/tee.h
+> > > > > +++ b/include/uapi/linux/tee.h
+> > > > > @@ -121,6 +121,35 @@ struct tee_ioctl_shm_alloc_data {
+> > > > >  #define TEE_IOC_SHM_ALLOC    _IOWR(TEE_IOC_MAGIC,
+> > > > > TEE_IOC_BASE + 1,
+> > > > > \
+> > > > >                                    struct
+> > > > > tee_ioctl_shm_alloc_data)
+> > > > >=20
+> > > > > +/**
+> > > > > + * struct tee_ioctl_shm_register_fd_data - Shared memory
+> > > > > +registering
+> > > > > argument
+> > > > > + * @fd:              [in] File descriptor identifying the
+> > > > > shared
+> > > > > memory
+> > > > > + * @size:    [out] Size of shared memory to allocate
+> > > > > + * @flags:   [in] Flags to/from allocation.
+> > > > > + * @id:              [out] Identifier of the shared memory
+> > > > > + *
+> > > > > + * The flags field should currently be zero as input.
+> > > > > Updated by
+> > > > > + the
+> > > > > call
+> > > > > + * with actual flags as defined by TEE_IOCTL_SHM_* above.
+> > > > > + * This structure is used as argument for
+> > > > > TEE_IOC_SHM_REGISTER_FD
+> > > > > below.
+> > > > > + */
+> > > > > +struct tee_ioctl_shm_register_fd_data {
+> > > > > +     __s64 fd;
+> > > > > +     __u64 size;
+> > > > > +     __u32 flags;
+> > > > > +     __s32 id;
+> > > > > +} __attribute__ ((aligned (8)));
+> > > > > +
+> > > > > +/**
+> > > > > + * TEE_IOC_SHM_REGISTER_FD - register a shared memory from a
+> > > > > file
+> > > > > descriptor
+> > > > > + *
+> > > > > + * Returns a file descriptor on success or < 0 on failure
+> > > > > + *
+> > > > > + * The returned file descriptor refers to the shared memory
+> > > > > object
+> > > > > in kernel
+> > > > > + * land. The shared memory is freed when the descriptor is
+> > > > > closed.
+> > > > > + */
+> > > > > +#define TEE_IOC_SHM_REGISTER_FD      _IOWR(TEE_IOC_MAGIC,
+> > > > > TEE_IOC_BASE + 8, \
+> > > > > +                                  struct
+> > > > > tee_ioctl_shm_register_fd_data)
+> > > > > +
+> > > > >  /**
+> > > > >   * struct tee_ioctl_buf_data - Variable sized buffer
+> > > > >   * @buf_ptr: [in] A __user pointer to a buffer
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
