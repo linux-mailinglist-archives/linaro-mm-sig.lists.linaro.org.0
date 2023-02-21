@@ -2,221 +2,232 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BCA3069E67D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 Feb 2023 18:55:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BAA669EF10
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 08:02:36 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C92093EC75
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 Feb 2023 17:55:43 +0000 (UTC)
-Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com [209.85.167.175])
-	by lists.linaro.org (Postfix) with ESMTPS id DD7643EC75
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Feb 2023 17:55:22 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 98C0B3EA56
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 07:02:35 +0000 (UTC)
+Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com [209.85.208.170])
+	by lists.linaro.org (Postfix) with ESMTPS id E7BB23E95A
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Feb 2023 08:38:46 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=MhVB0NJN;
-	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.167.175 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=oYDbVFfF;
+	spf=pass (lists.linaro.org: domain of ppaalanen@gmail.com designates 209.85.208.170 as permitted sender) smtp.mailfrom=ppaalanen@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-oi1-f175.google.com with SMTP id y8so5315546oiy.6
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Feb 2023 09:55:22 -0800 (PST)
+Received: by mail-lj1-f170.google.com with SMTP id b13so4455103ljf.6
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Feb 2023 00:38:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=xv2uXYHt3XeROXyJVL9lk52fVmsfLTFU5mqvJC9GYu4=;
-        b=MhVB0NJNs21YP6mxc5cr02QCii/6IswZclKK87JSAP6SkTvs9pBd4T1VG0NGWeKOqn
-         khNHQFzG9sv5NWCllEUe045lNPhbXKoS5hJpFJEOw0pb/hb9rxIOY5mdDfr95+wZJoKJ
-         wdkFsLjnOsG5IzJO6BFsGAfqli+GQYGm5jfBJCtSIeTNWhtsTelZ1FZzANQX5TuFfI5b
-         uRtl4Q9C7kbV5tR7hBfdO9f4th/zmVjuvbBgCh9zAwAPHmb68tnTuBFWDHtJlkQtMN2e
-         u/NqNnndQi2evJpRyuAgtqBxtD7jsrq1LpjnfjcXkEHq9eWAdvGyaWRWWiLlUMKq0HWD
-         8mVA==
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=1W8pZijqLGcNat/8G5OTCx6Y7aJUY3oODAmVHl137tw=;
+        b=oYDbVFfFxhPkNyBf3v0ZYWsr1JhfHZRJkrawAzncV8YLAcKF9mC7dIpjDLlPfPDpEY
+         z32ja1Z48yPU8skaeXw/SOoNy3iqNg2w9PaiFwsIKu1f1A0QSxPjU2Q9pX0mUBo/igyZ
+         SgCqHcKO5yCaAXvPv1S/4aC87m87Nn9OUvXE4mMMIaXEFJdfCCqykVwEGNznzcA84ErV
+         W8m4IBZR/I/5tfiAFLEA7YJpZ89xvxobL71KKVFacS7n18fMoSG/2wpRoqgbi8H3Po3r
+         obLYMrJoBcH8DqoDCZsUV9DO7gKgOYJ68lfbXOisjkwpBjzcPoPxgUGhDxy4SXQlirXW
+         U1zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=xv2uXYHt3XeROXyJVL9lk52fVmsfLTFU5mqvJC9GYu4=;
-        b=HDEG9XNYLLGHu8lKdt1oEkQb7pWK83/iJtyxU/brmoEYpp7YS0OyDgpcWBaWjehzW0
-         4ddVSVxW1RdKVc0xlqawgze5b8jXxTL6evx4Yi1lenQ0/ux7OOg+1QmBHg174LiKADcD
-         tzdNnAuovyild8OsuKSWi3q+F64KVK7ZcBkNSXcZZZArAQBCQ0OEn4tUhXx38fPtLBTX
-         iptiix62q29JpFg+BpyBBD1rPNsVHdkHsV7iogR/kBU7YyJNyQwewwJ37guUVr0hr5wy
-         GhfuFAmfqweYmQsxy6FlmtM52BFVoxRDvBxUlno8L6Iktr3ZM9ohVIJAjn3q1lzH03QW
-         Nydg==
-X-Gm-Message-State: AO0yUKX9sYMmh+vnHw04OpzH1VXE/1AiGJpYlTXX+BFRNslG/T9Ho1Ch
-	S1myPFAAm90MwFfeqXOJnlXZhylVWpTD+297EO8=
-X-Google-Smtp-Source: AK7set+3plPstNNrlEwndFRmB7Ghv+pP145J/q5VwaYQKMVG1IyDbrvqIsIdzdj2oJvtdlMI0LV5ATP51GZWdQwW8zg=
-X-Received: by 2002:a05:6808:ec7:b0:364:c0a5:1fcf with SMTP id
- q7-20020a0568080ec700b00364c0a51fcfmr1405745oiv.58.1677002122311; Tue, 21 Feb
- 2023 09:55:22 -0800 (PST)
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=1W8pZijqLGcNat/8G5OTCx6Y7aJUY3oODAmVHl137tw=;
+        b=WnMPgUCCllzm7ZcvSwuVp5F10v9pBkofDLrd7sN1Z3b1kzxxN9oAlpMHJKw6dW+pfX
+         o3ri6Kg+fMwdUGwxYI1fRsuUFOk9RZGrRoiywe2c+OjOCYWneREzHBNms4DUvlkF3T9l
+         TX8YuB1xwPJcvZIpHB9jnAuuuzkzTrZRWduA5lqhxfs75xFlAz9CLbtQCToqPaNfJOvo
+         CPEa/8WgBhktOBg8tTWkCV+OAAyTWdDGRo7XNHnqo40ZecyJhuYt0+8bid41XhZDvnGT
+         wvrDNRJ6B+s3zSjekXdPG0t03gHWYdq8Qv6xFO+hExjMy73vDnC1RWnAqRE3SUPHcdCB
+         gZfQ==
+X-Gm-Message-State: AO0yUKXx+lex7iJfLaZzbONPM4JfWk9yxC8V7aQe88o/WLGdUtJu2zxj
+	e3i0FPv80+p3zeiQHMVLGkQ=
+X-Google-Smtp-Source: AK7set92xE2QliPenlOzZe7t3tGVIknuNqqFpK1dHTQNre8Li8krArc7FA0WGNeY8l24sfghKtkwPw==
+X-Received: by 2002:a2e:8346:0:b0:28d:2cf8:9341 with SMTP id l6-20020a2e8346000000b0028d2cf89341mr1578505ljh.23.1676968725545;
+        Tue, 21 Feb 2023 00:38:45 -0800 (PST)
+Received: from eldfell ([194.136.85.206])
+        by smtp.gmail.com with ESMTPSA id y1-20020a2e3201000000b00294a1275192sm296299ljy.110.2023.02.21.00.38.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 21 Feb 2023 00:38:45 -0800 (PST)
+Date: Tue, 21 Feb 2023 10:38:41 +0200
+From: Pekka Paalanen <ppaalanen@gmail.com>
+To: Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>
+Message-ID: <20230221103841.0d501f01@eldfell>
+In-Reply-To: <2e6e9581-6de8-6aca-3e73-946fbc6ad2a3@amd.com>
+References: <20230218211608.1630586-1-robdclark@gmail.com>
+	<20230218211608.1630586-7-robdclark@gmail.com>
+	<2e6e9581-6de8-6aca-3e73-946fbc6ad2a3@amd.com>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <20230218211608.1630586-1-robdclark@gmail.com> <20230218211608.1630586-7-robdclark@gmail.com>
- <20230220105345.70e46fa5@eldfell> <CAF6AEGv9fLQCD65ytRTGp=EkNB1QoZYH5ArphgGQALV9J08Cmw@mail.gmail.com>
- <20230221103753.205082d3@eldfell> <CA+hFU4xexaHAYsbGm6PdNfVFHBgOS4WiMo=AU0Gi5cYt566aTg@mail.gmail.com>
-In-Reply-To: <CA+hFU4xexaHAYsbGm6PdNfVFHBgOS4WiMo=AU0Gi5cYt566aTg@mail.gmail.com>
-From: Rob Clark <robdclark@gmail.com>
-Date: Tue, 21 Feb 2023 09:55:12 -0800
-Message-ID: <CAF6AEGvXJkmwn8M6ThCx0bLwDFqqHmjp5fkDuDa7g2e8i3eM_w@mail.gmail.com>
-To: Sebastian Wick <sebastian.wick@redhat.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: DD7643EC75
+X-Rspamd-Queue-Id: E7BB23E95A
 X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.50 / 15.00];
-	REPLY(-4.00)[];
+X-Spamd-Result: default: False [-6.10 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
+	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	RCVD_IN_DNSWL_HI(-1.00)[194.136.85.206:received,209.85.208.170:from];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_COUNT_TWO(0.00)[2];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	TAGGED_RCPT(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.175:from];
-	NEURAL_HAM(-0.00)[-0.899];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,lists.freedesktop.org,ffwll.ch,daenzer.net,intel.com,amd.com,emersion.fr,chromium.org,linaro.org,padovan.org,vger.kernel.org,lists.linaro.org];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.170:from];
 	FROM_HAS_DN(0.00)[];
-	RCVD_IN_DNSWL_NONE(0.00)[209.85.167.175:from];
-	DWL_DNSWL_NONE(0.00)[gmail.com:dkim];
-	FREEMAIL_CC(0.00)[gmail.com,chromium.org,padovan.org,intel.com,daenzer.net,vger.kernel.org,lists.freedesktop.org,amd.com,lists.linaro.org,linaro.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	ARC_NA(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	TO_DN_SOME(0.00)[]
-Message-ID-Hash: 72CUQLTDU6F447JBRPAJ7OFRBFE5EXUJ
-X-Message-ID-Hash: 72CUQLTDU6F447JBRPAJ7OFRBFE5EXUJ
-X-MailFrom: robdclark@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Pekka Paalanen <ppaalanen@gmail.com>, Rob Clark <robdclark@chromium.org>, Gustavo Padovan <gustavo@padovan.org>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, =?UTF-8?Q?Michel_D=C3=A4nzer?= <michel@daenzer.net>, open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>
+	RCVD_COUNT_THREE(0.00)[3];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
+X-MailFrom: ppaalanen@gmail.com
+X-Mailman-Rule-Hits: implicit-dest
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+Message-ID-Hash: DLFGNADO4TS5TX7BZSNCLQQQK2IS5IKF
+X-Message-ID-Hash: DLFGNADO4TS5TX7BZSNCLQQQK2IS5IKF
+X-Mailman-Approved-At: Wed, 22 Feb 2023 07:02:18 +0000
+CC: Rob Clark <robdclark@gmail.com>, dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, Michel =?UTF-8?B?RMOkbnplcg==?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Simon Ser <contact@emersion.fr>, Rob Clark <robdclark@chromium.org>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v4 06/14] dma-buf/sync_file: Support (E)POLLPRI
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/72CUQLTDU6F447JBRPAJ7OFRBFE5EXUJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DLFGNADO4TS5TX7BZSNCLQQQK2IS5IKF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: multipart/mixed; boundary="===============4700678229807261201=="
+
+--===============4700678229807261201==
+Content-Type: multipart/signed; boundary="Sig_/PboreIUuM6gO6KQswv5Gd=N";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
+
+--Sig_/PboreIUuM6gO6KQswv5Gd=N
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, 20 Feb 2023 09:31:41 +0100
+Christian K=C3=B6nig <christian.koenig@amd.com> wrote:
+
+> Am 18.02.23 um 22:15 schrieb Rob Clark:
+> > From: Rob Clark <robdclark@chromium.org>
+> >
+> > Allow userspace to use the EPOLLPRI/POLLPRI flag to indicate an urgent
+> > wait (as opposed to a "housekeeping" wait to know when to cleanup after
+> > some work has completed).  Usermode components of GPU driver stacks
+> > often poll() on fence fd's to know when it is safe to do things like
+> > free or reuse a buffer, but they can also poll() on a fence fd when
+> > waiting to read back results from the GPU.  The EPOLLPRI/POLLPRI flag
+> > lets the kernel differentiate these two cases.
+> >
+> > Signed-off-by: Rob Clark <robdclark@chromium.org> =20
+>=20
+> The code looks clean, but the different poll flags and their meaning are=
+=20
+> certainly not my field of expertise.
+
+
+A good question. epoll_ctl manual refers to poll(2) which says:
+
+       POLLPRI
+              There is some exceptional condition on the file descriptor.  =
+Possibilities include:
+
+              =E2=80=A2 There is out-of-band data on a TCP socket (see tcp(=
+7)).
+
+              =E2=80=A2 A pseudoterminal master in packet mode has seen a s=
+tate change on the slave (see ioctl_tty(2)).
+
+              =E2=80=A2 A cgroup.events file has been modified (see cgroups=
+(7)).
+
+It seems to be about selecting what events will trigger the poll,
+more than how (fast) to poll. At least it is not documented to be
+ignored in 'events', so I guess it should work.
+
+
+Thanks,
+pq
+
+> Feel free to add Acked-by: Christian K=C3=B6nig <christian.koenig@amd.com=
+>,=20
+> somebody with more background in this should probably take a look as well.
+>=20
+> Regards,
+> Christian.
+>=20
+> > ---
+> >   drivers/dma-buf/sync_file.c | 8 ++++++++
+> >   1 file changed, 8 insertions(+)
+> >
+> > diff --git a/drivers/dma-buf/sync_file.c b/drivers/dma-buf/sync_file.c
+> > index fb6ca1032885..c30b2085ee0a 100644
+> > --- a/drivers/dma-buf/sync_file.c
+> > +++ b/drivers/dma-buf/sync_file.c
+> > @@ -192,6 +192,14 @@ static __poll_t sync_file_poll(struct file *file, =
+poll_table *wait)
+> >   {
+> >   	struct sync_file *sync_file =3D file->private_data;
+> >  =20
+> > +	/*
+> > +	 * The POLLPRI/EPOLLPRI flag can be used to signal that
+> > +	 * userspace wants the fence to signal ASAP, express this
+> > +	 * as an immediate deadline.
+> > +	 */
+> > +	if (poll_requested_events(wait) & EPOLLPRI)
+> > +		dma_fence_set_deadline(sync_file->fence, ktime_get());
+> > +
+> >   	poll_wait(file, &sync_file->wq, wait);
+> >  =20
+> >   	if (list_empty(&sync_file->cb.node) && =20
+>=20
+
+
+--Sig_/PboreIUuM6gO6KQswv5Gd=N
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmP0gxEACgkQI1/ltBGq
+qqcMzA//UBA8OmgaplusdV3EYDrlm1XXYsndvhAJV/IPY3tPzwkjjE7dpf1TGYc+
+Wh1kvzNelRPlU0RESGQSvNyKwwp+eipZ+ug3HzO6axTf5Rh9ptuUZaSok5mrX7do
+U1fsZhDed9gsN/OqxOUoXgFnim0nOhFoyCRalgV6qQPmeiv18aExgbtV40bP8Qfw
+h79kSBGfsW2tQOjY4qr4tVPWyL31lIABLdYY3dlxib/OAe1cjIR7Dc51yNMC2TUg
+6jZetg0uDjv43YXnIqx/9kpv4RRt0kxUIukX5AiWQq7VIk0rXRKRORLXR1ri5u6m
+VZglgER6KZnEZBN9Fy6GMgV6QlnUWcQ/kFY1Hz+nd2EQEYzwBX4Eclf2q5GtArYP
++ShkIkfXWNisIJ7q6f2xYITQ5cbYK7D1baTyHXKgsUBZnltomwaMqmkKOimhQTFB
+5tXTTGqLjkwh2R1Sq9a+RklAMVn8IWgLn+dJw1CL69opfja5yLzpCplKgYgKCX6N
+9fqPC0IH56Om+a+wD+QgzWMFvguhbAk57IWVeEMgu4Qv2urtMNVCN2Jz2qpKafYq
+HKvfh7l900bwrndWtayCN+937hPhgtH/8lWB+0UmlG1EYwa4PK8lH2YNywnYi8ss
+rkXY5kqLS3izynKUaRLfjysAVzC2LZYJBO3Hik6g/fjdh62JH0U=
+=eI1y
+-----END PGP SIGNATURE-----
+
+--Sig_/PboreIUuM6gO6KQswv5Gd=N--
+
+--===============4700678229807261201==
 Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Tue, Feb 21, 2023 at 8:01 AM Sebastian Wick
-<sebastian.wick@redhat.com> wrote:
->
-> On Tue, Feb 21, 2023 at 9:38 AM Pekka Paalanen <ppaalanen@gmail.com> wrote:
-> >
-> > On Mon, 20 Feb 2023 08:14:47 -0800
-> > Rob Clark <robdclark@gmail.com> wrote:
-> >
-> > > On Mon, Feb 20, 2023 at 12:53 AM Pekka Paalanen <ppaalanen@gmail.com> wrote:
-> > > >
-> > > > On Sat, 18 Feb 2023 13:15:49 -0800
-> > > > Rob Clark <robdclark@gmail.com> wrote:
-> > > >
-> > > > > From: Rob Clark <robdclark@chromium.org>
-> > > > >
-> > > > > Allow userspace to use the EPOLLPRI/POLLPRI flag to indicate an urgent
-> > > > > wait (as opposed to a "housekeeping" wait to know when to cleanup after
-> > > > > some work has completed).  Usermode components of GPU driver stacks
-> > > > > often poll() on fence fd's to know when it is safe to do things like
-> > > > > free or reuse a buffer, but they can also poll() on a fence fd when
-> > > > > waiting to read back results from the GPU.  The EPOLLPRI/POLLPRI flag
-> > > > > lets the kernel differentiate these two cases.
-> > > > >
-> > > > > Signed-off-by: Rob Clark <robdclark@chromium.org>
-> > > >
-> > > > Hi,
-> > > >
-> > > > where would the UAPI documentation of this go?
-> > > > It seems to be missing.
-> > >
-> > > Good question, I am not sure.  The poll() man page has a description,
-> > > but my usage doesn't fit that _exactly_ (but OTOH the description is a
-> > > bit vague).
-> > >
-> > > > If a Wayland compositor is polling application fences to know which
-> > > > client buffer to use in its rendering, should the compositor poll with
-> > > > PRI or not? If a compositor polls with PRI, then all fences from all
-> > > > applications would always be PRI. Would that be harmful somehow or
-> > > > would it be beneficial?
-> > >
-> > > I think a compositor would rather use the deadline ioctl and then poll
-> > > without PRI.  Otherwise you are giving an urgency signal to the fence
-> > > signaller which might not necessarily be needed.
-> > >
-> > > The places where I expect PRI to be useful is more in mesa (things
-> > > like glFinish(), readpix, and other similar sorts of blocking APIs)
-> >
-> > Sounds good. Docs... ;-)
-> >
-> > Hmm, so a compositor should set the deadline when it processes the
-> > wl_surface.commit, and not when it actually starts repainting, to give
-> > time for the driver to react and the GPU to do some more work. The
-> > deadline would be the time when the compositor starts its repaint, so
-> > it knows if the buffer is ready or not.
->
-> Technically we don't know when the commit is supposed to be shown.
-> Just passing a deadline of the next possible deadline however is
-> probably a good enough guess for this feature to be useful.
->
-> One thing that neither API allows us to do is tell the kernel in
-> advance when we're going to submit work and what the deadline for it
-> is and unfortunately that work is the most timing sensitive.
-
-Presumably you are talking about the final compositing step?
-Elsewhere in this series that atomic wait-for-fences step sets the
-deadline hint.
-
-BR,
--R
-
-> >
-> >
-> > Thanks,
-> > pq
-> >
-> >
-> > >
-> > > BR,
-> > > -R
-> > >
-> > > >
-> > > >
-> > > > Thanks,
-> > > > pq
-> > > >
-> > > > > ---
-> > > > >  drivers/dma-buf/sync_file.c | 8 ++++++++
-> > > > >  1 file changed, 8 insertions(+)
-> > > > >
-> > > > > diff --git a/drivers/dma-buf/sync_file.c b/drivers/dma-buf/sync_file.c
-> > > > > index fb6ca1032885..c30b2085ee0a 100644
-> > > > > --- a/drivers/dma-buf/sync_file.c
-> > > > > +++ b/drivers/dma-buf/sync_file.c
-> > > > > @@ -192,6 +192,14 @@ static __poll_t sync_file_poll(struct file *file, poll_table *wait)
-> > > > >  {
-> > > > >       struct sync_file *sync_file = file->private_data;
-> > > > >
-> > > > > +     /*
-> > > > > +      * The POLLPRI/EPOLLPRI flag can be used to signal that
-> > > > > +      * userspace wants the fence to signal ASAP, express this
-> > > > > +      * as an immediate deadline.
-> > > > > +      */
-> > > > > +     if (poll_requested_events(wait) & EPOLLPRI)
-> > > > > +             dma_fence_set_deadline(sync_file->fence, ktime_get());
-> > > > > +
-> > > > >       poll_wait(file, &sync_file->wq, wait);
-> > > > >
-> > > > >       if (list_empty(&sync_file->cb.node) &&
-> > > >
-> >
->
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============4700678229807261201==--
