@@ -2,160 +2,157 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E5B269EF12
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 08:03:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A824369EF13
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 08:03:34 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5F2C13EA2E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 07:03:09 +0000 (UTC)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2049.outbound.protection.outlook.com [40.107.93.49])
-	by lists.linaro.org (Postfix) with ESMTPS id 1A2393EF16
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Feb 2023 16:48:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B8ADB3EA56
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 07:03:33 +0000 (UTC)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com (mail-sn1nam02on2041.outbound.protection.outlook.com [40.107.96.41])
+	by lists.linaro.org (Postfix) with ESMTPS id D7BEA3E95A
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Feb 2023 19:40:05 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=QACBvZ0P;
-	spf=pass (lists.linaro.org: domain of Luben.Tuikov@amd.com designates 40.107.93.49 as permitted sender) smtp.mailfrom=Luben.Tuikov@amd.com;
+	dkim=pass header.d=amd.com header.s=selector1 header.b=mzlHx225;
+	spf=pass (lists.linaro.org: domain of Luben.Tuikov@amd.com designates 40.107.96.41 as permitted sender) smtp.mailfrom=Luben.Tuikov@amd.com;
 	dmarc=pass (policy=quarantine) header.from=amd.com;
 	arc=pass ("microsoft.com:s=arcselector9901:i=1")
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FuClGxJ0ESJBHYMhb3Lk28AUn8H29k6ztdCS/GkVboq9tjSZgHcZcHOzi1/JW/dCHhD1XFuvWHoaj5OvOG148+WOq9ml7OHykZVNUjcPIZEafI5GIGVmJ7NieNgcOyLUf5mEyaGl9mtYdi9pJa/n9dFn3mwdoFyB6V9DwPCvdWVS7eyTi7qsJI2hpSYgEoIkI2+JexMyQ/z6ijepYefegyMu0qlrGYsYXdJYvNih5MTsQ8lYS1v7H/SlqrZWqRpQb+VE7UXF55QpVdhL236CJQYrGiyslauC7kEl2uDG55IGG36to6eDFKEcIXDTLdkw2vZkUPJHqgahU7yXX97T5w==
+ b=fwdvHTmJKX5JbLkIXhDNsHbTdrHyeDdBkT8c/Mhnlgijgl4zLtGAKyhBKI++49fpSVdrIdeiyClwvzuRgWnNYLC95jBfv9l8c2icSr/dmYQyZBFu27NbZxEw7JXvzzlvh12KQ7vB/AwztVBQ8HSYfwFWhrsK8epW8inbztGh12exqq1+hhXr20HL8h34m2k8W7VYIuWuzjmD4wEnigbASjKOBmQ27qPmUcCgzuz/f1p4CZpxnT5Jk/DoEzxi6h0N8mV2YRn+M7nLkgw2qprifrfqF0FJGokVoHV9hVh3m7u22aT5nYOWI83QvTmm+GI2OnhjZqLZmCENlxkTxEvWFw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=CJZHDkctBifI3hhpp9wotdwYZQaCyl+N2Ft0yK0J29o=;
- b=de6VjBL+g/XFtKikUQtd++ZZrwh1cwuycksC4gO0/dlg+++2y/bOF5CNEQPJ6phyDMlSyT47M0eGQnH8mlUsEGHGaoh+d07VnUy0WQ+1wq/LMGr5+cO9DwCcKhATgf4rh/QGDwstyoCoKTOQYPH2DQaF3hEH8kRcjmWVF8otu7Zrjou+WTa67p9EoSs8ClZhwMZmDbBzMnhc1gk9VBxZzgX7WQQ8bQpB9eFxq4N3GU5xMjrbBnCZp2CWxczVEnMyKAccGJa5tT6zdqFEgVsxAIlPEDShFouP7MGEw3Fk5tApFTdf6rP205biVG7SM9Io1FSgUO3qcnmwhdVoBnuuFQ==
+ bh=1xp+gxamV+PWsFQh/1Bw1ioRLDwnPxBqbFOy78zM2XY=;
+ b=cxEhYahqPAF0VPCWu7Jm91XH2gdrONlSnfvlHAMc6pY4GNJRnLIAgqe7qVR2oL18+FHUIEgH1QllJXszUq8AzamAIVVeOh+bgcVogHXG5UdDr8uWorIvnzIAdcZrWE5P2pp5rBBF7s4DhpJoPjkwcblGZkOJAilJGLUAtECqIhjiwsvWxmZok5HqxUH+gFv+ET7bAyP3W+PXTYgS1/eS4gkDbOnKpw1ck4WL5h2htHXoZGremvezZf7tcAAww9tOiIop/b5H+BFUG3xusQKXxfbsEkNn1PhdrHwIE96h019BdYBSfcLwc5Xb46c6Xguk+SI2YAyTy87vOVXN304Z4A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=CJZHDkctBifI3hhpp9wotdwYZQaCyl+N2Ft0yK0J29o=;
- b=QACBvZ0PdzmpbbozXQXIW8eV9pHWCFIXOCQl2126Urdnv1P/VlJ+GvBF1VD+5XbS/f25rZvdTwasIso++fKM7vNQvDfHkSr6myh+8+z6dASXN2EaCrMIt53KSE7sEGa8D+K+QeqzPsKz+kolcKn6vn4rYyKDvA0MOjFYXyKLdHY=
+ bh=1xp+gxamV+PWsFQh/1Bw1ioRLDwnPxBqbFOy78zM2XY=;
+ b=mzlHx225/FzZw1yTFrKXGNd4Qlwsyv3Z44pgoMSjyLAXcvR9f4ahafnuplPlehfzBogjgELbSfBLDjHxWVBHRXt0yrhgpn+utylQXCovYpZ3YFRrvThdJf7sh0uSMhAqpe67TvgNDfUyDk4B798zK1YtvxS76fWnqKo4a4MupWA=
 Received: from DM6PR12MB3370.namprd12.prod.outlook.com (2603:10b6:5:38::25) by
- PH7PR12MB6588.namprd12.prod.outlook.com (2603:10b6:510:210::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6111.20; Tue, 21 Feb
- 2023 16:48:38 +0000
+ DM6PR12MB4436.namprd12.prod.outlook.com (2603:10b6:5:2a3::20) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6111.21; Tue, 21 Feb 2023 19:40:02 +0000
 Received: from DM6PR12MB3370.namprd12.prod.outlook.com
  ([fe80::4df2:b32a:e628:c57e]) by DM6PR12MB3370.namprd12.prod.outlook.com
  ([fe80::4df2:b32a:e628:c57e%7]) with mapi id 15.20.6111.021; Tue, 21 Feb 2023
- 16:48:38 +0000
-Message-ID: <cdd5f892-49b9-1e22-4dc1-95a8a733c453@amd.com>
-Date: Tue, 21 Feb 2023 11:48:35 -0500
+ 19:40:02 +0000
+Message-ID: <1da7a010-eb22-0044-b68a-44ffd76dc471@amd.com>
+Date: Tue, 21 Feb 2023 14:40:00 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.2
 Content-Language: en-CA
-To: Rob Clark <robdclark@gmail.com>, Pekka Paalanen <ppaalanen@gmail.com>
+To: Rob Clark <robdclark@gmail.com>, dri-devel@lists.freedesktop.org
 References: <20230218211608.1630586-1-robdclark@gmail.com>
- <20230218211608.1630586-7-robdclark@gmail.com>
- <20230220105345.70e46fa5@eldfell>
- <CAF6AEGv9fLQCD65ytRTGp=EkNB1QoZYH5ArphgGQALV9J08Cmw@mail.gmail.com>
+ <20230218211608.1630586-9-robdclark@gmail.com>
 From: Luben Tuikov <luben.tuikov@amd.com>
-In-Reply-To: <CAF6AEGv9fLQCD65ytRTGp=EkNB1QoZYH5ArphgGQALV9J08Cmw@mail.gmail.com>
-X-ClientProxiedBy: YT4PR01CA0150.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:ac::17) To DM6PR12MB3370.namprd12.prod.outlook.com
+In-Reply-To: <20230218211608.1630586-9-robdclark@gmail.com>
+X-ClientProxiedBy: YT4P288CA0090.CANP288.PROD.OUTLOOK.COM
+ (2603:10b6:b01:d0::23) To DM6PR12MB3370.namprd12.prod.outlook.com
  (2603:10b6:5:38::25)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR12MB3370:EE_|PH7PR12MB6588:EE_
-X-MS-Office365-Filtering-Correlation-Id: 30f2e10b-1160-409b-e4ee-08db142b7afc
+X-MS-TrafficTypeDiagnostic: DM6PR12MB3370:EE_|DM6PR12MB4436:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7dcf29d6-ad4b-49d8-a5d9-08db14436cc2
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	yFQNF+rv4rOPDu6B024wjoayrum8XLyq97vPc0HNATPwpKJ32dfIHc3mkDZ5brZfZF4ObsfdCg1I9IiLfYDquzgi0ZLO+arENpfkoGzERby0EQzF5BlnAMj4Xe4yirmYlMd2cwq0kV22RmkHduaY9U084Egkyqm6ZJ/jo0sF+oYWh4IFXHTGV7r+Qg3TRAJtTm/VkEWwc6olOe6EGNCECUD0JcmdoIKRc0MFpdEGHVV4oOh/gnATXM6y3CR3ilOcrPdLkB6MT9Ni3iR6Rr0CKQ7nsgNWsdqe9a1O3kwkjJJjrBFqWgeLrSdJiXdOfSEzNhQSN2ucjuXfMawL5ZphKL2Jt10lYe/t4B5TMHJtPw46w2f7S8neiJbnZ0wvtW9ABVKTq4GwYK31EMjFn9DwRWDizj7EdnZnw+3mj6Cxdr9UN1+Jbi/dGZjIPQiOk4BNaxJkGZdjmvrAWiHZArNH+ZCCZ4l3oTKnxMkq+W5f7uwlNRoUJbpczxRce11JnJWkAXpRS9ea4hYUMggGADlK9P4VAYbhWm5ZJyHwSslo0p/iEluZ5zRu5X2xcGvlsoQnYPIAPFEcd6dm+YztE80tzUPTUd74lqBQPloz4MazAbvSF8uZtpAIMHIdZYJW/EtaG9yD4/xmPXhySnwpli7QK2oLUSDtZbLFINuFNEbmF9jW8tAx8LTWbjJD8NgMhjbvNgMxbJlY2PZh4p/pHO5shdV8vXAqlLkgaOWePK2W83Y=
+	za94yaP9jRmjzOBxSx5Pppt3dGNWThxcjeuZonqJ2sr5npQoIv+qE0nmzxmiGwzS6Onjfk3ETV7Wrp3jM9hEztXo8fFDK6d5k5yBTRRlCUIslGwDCXhH14Fku740WK9DX2SXRXv5DtpBYNMhLRmSfrLakVLLAqtCjyvuDjv9m0sbfFHobxjlcQbUa4cxBIVWNc2dV2mNU1kp0jdNiZz5Am+Z5TZ00YE4ku3adRM0x9nDUgsy9Dfbf4ZqMTHLf6mkxkAE/RNRq3Av3z7RpU5hOwbIVZ48vhqtBvaA1lo34WpG011nvAo4E4A3N3feKJRGVCvnCO4rn7TQjD0R7J6RuhdUl2rpfxJ7SXZRtlYTGzTG5utmo9Qo91Zy4VlULUG903lxv9VEqblzEX+nYWrdqKhAAmi+7+Pu084n4icMPKEsfQEAMI1MwSHn+42Blq62WcnYaOJdVobjWgotdtgck81YlZRt+uIqwHYSGybbaOkpVlGCUY6OP2l2n3KrJCkTvEGqHx7J5osxHTwyK0SBszVRxyp2XFa4RnRmQ3e37vkFHvPXJZvH33ysyCrLqNmHGdbMZ6nmmz+gJDsK7BFDCyefJJAFRYClx2MBEZPNTRH0KaIUeEJz7fDn3TskNLd5gWr6nGJ0lRQL1vsmRbEGc06arIZjKycGuKfzk3snizeKatv61/mw08bG6xBUNDDH33q+kEn+gBMQUtLNZ/oMElET8X+1vj4wf1QuUPnLvlY=
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB3370.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(346002)(396003)(366004)(376002)(136003)(451199018)(6486002)(36756003)(316002)(54906003)(110136005)(186003)(478600001)(8936002)(2616005)(26005)(7416002)(2906002)(5660300002)(44832011)(41300700001)(86362001)(6506007)(66946007)(53546011)(6666004)(4326008)(83380400001)(31696002)(8676002)(66476007)(55236004)(66556008)(38100700002)(6512007)(31686004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB3370.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(376002)(366004)(396003)(136003)(346002)(451199018)(31686004)(8936002)(31696002)(36756003)(86362001)(41300700001)(5660300002)(44832011)(7416002)(2906002)(83380400001)(38100700002)(66946007)(66556008)(66476007)(478600001)(8676002)(6486002)(54906003)(316002)(26005)(55236004)(53546011)(186003)(6512007)(2616005)(4326008)(6506007)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?a09JSE5XRGMrUFNySDlFeHRVTkhoYVdiaUJqeGxndUpLOTU5YVM0eXM4TDlz?=
- =?utf-8?B?MEpxTlRFdndNSnJ3ZmZFM3RSWVo4WXVpMGFJcUMzOEdTMmNwZVF4U0pWa2VX?=
- =?utf-8?B?ZVdyS25vb2Q3RW14VkIweHlLVnJEWVRGV0hpcHVESWV3Wlh1ZUZ3WVZTd1JJ?=
- =?utf-8?B?RndGcGY3dmdKUG5NUDJzRmtlQmxtMGVVczUwZUQ3SVJJNmhqQWRlK3hhOERx?=
- =?utf-8?B?VnZ0dDRubGhoaDQwSXpvT3N1THlTVk1jMGhOcnpEeks5cmprdVlUYks0UE9X?=
- =?utf-8?B?bjMwQWtENFZrYlFGRnY1eHhHU05yaWNKa2NpZDQrWGU2a2w0Z0ppK3N4RWhk?=
- =?utf-8?B?QkNFWkNnSVN3K21IRE42bndpeXU2U0I5SCtLMXRmTm4wc0RreS9ZbkZxYTI3?=
- =?utf-8?B?eEw0TjRWamhsVXl0MktmTVhWbVRaN3VlM2FaRHZ3UnlWT2IzUjhFYjFSOFow?=
- =?utf-8?B?V2tyMUlMMWU4WktESlJVbGNJeVVPdHYwQW5yMUxDYjg5NGZ1S25iTGZnTzlX?=
- =?utf-8?B?MmZvMFVQY3lpamliNkMwd09WU24vSXFEOXlwdHp1OXRTWmRZUmFqR0hjNzBC?=
- =?utf-8?B?K2hBVEw0ajRveko5ckpyeS9ld1JnVlp2YUQ0R0wydzlvRVFxVTdkY1NrY2xa?=
- =?utf-8?B?RVFSQnpZVVllZmM3R3Q5MFd1QU9LSnVvZlR0aXlLaWlxN2o1NzZOUnVZMmdo?=
- =?utf-8?B?Y0lWVkM4MkhkWUk0anRETXAwNmhoYTVSM1hQa3NwQmp6TkhsdW5oc2Y4cE9s?=
- =?utf-8?B?aTRiRkVyUlRPY1VLc3VlSjFhSy9GUkx1eHM2RzUzL1JxMks2ZVZOYmpRdlE4?=
- =?utf-8?B?ODJ1VDc3enhTRy9HZnp1eGlmVlIwSHYyN1hRUnViOUh3OXJ1dGM2OXlaeXd2?=
- =?utf-8?B?eFdFSWd1aWNxS3M1Qmc5dGtKMGRJTHFxcXhGaUtRUm5POExqZFhVanZUY0hz?=
- =?utf-8?B?RnJjMlNyVVV1T0JRWW1COUpxL0ljU2ZBeWZSanBxTTBEMi95RWJEOHR0OWYx?=
- =?utf-8?B?bkdjQmhiVDhyNnRaTmx6YlYwNTY1V0JPdmRvNzRHUVRveW80Q3UzSnlLWGNu?=
- =?utf-8?B?YTVoTW9TVU0yaUtKaWFBdW1uck5zbVBJN2M5ZUtaRjdtcFNGYWN4Q0VTMCtQ?=
- =?utf-8?B?aW52ZSs3WkRuamV3UzRaNldHZyttdGNiaEZJbWVQbFByblhjWW40bFM3TE9H?=
- =?utf-8?B?Q2pmblRDeU1qblZqdVhFemdrby95T1I0TTF4YnVJUlFXSmtza0doNE9hYjdX?=
- =?utf-8?B?VW5QU09TQTlNakRqaUpVNjdZell1SU9uN1NQQ2NaZW5OTndEK01xeFlTdC9t?=
- =?utf-8?B?V2k3OU9XWjdxNlFGRERyK3pjRzhjeDNHc2ZpRzZFbm1GTVpMRXBwY2VCY3FK?=
- =?utf-8?B?NkoxMmk5aU9tVDZEcTQvR1VKM0ZGSDJsTTJQVXc3MTBFQU9qUTBObWczSHdO?=
- =?utf-8?B?Z1RQd2tSUzRsUnlaQ1NTVUQraTM1TEhDc1dtamxYY2FVekpadjJwaUZrRFJ3?=
- =?utf-8?B?WG52b0c0Nmd0aGRVUnBHTDN6U05oazIxMjd4RWo0R2l2R1U0RXNDU3hpQjdQ?=
- =?utf-8?B?dnZwVzRuR0JSZXFZLzEwUjlGK2NxTnBLc0ZaVXpKRGtPaFhqSmZtNWEwNDlM?=
- =?utf-8?B?dms5dGtmOWpFeGRwWjZJVHBHdTZFRFM3VVFyeGsxSkh1QVFZZTI3THphMDZO?=
- =?utf-8?B?UGtMeTVuUzlvR21NYUV2bHFOUU04WG8vb1d1bDdiZHRwTlFaK2MxQ1JaUXlF?=
- =?utf-8?B?SDI3d2ZJcmFzNTRHVmVhcDB3OUtqVVBubm5NTEt0Q0JBK3hhWTVCekhMSjRm?=
- =?utf-8?B?N1pKV0lVUjJJVy9KeC9UeXRicnFmZXhGYlZxNHFGU25xYUd0dHpBazFZNmhm?=
- =?utf-8?B?WDRSSEh1Q3ZYbDQ2TEt3NUNWS2dybTljb0w0ZjhnMUsvRENMYmF2dnNXMnJy?=
- =?utf-8?B?Y1ZxYXlpWUJxbTN3NS92YjdDLzBKb0w4MlI4bWJubTNaS2I3NDg1cXcxNUxF?=
- =?utf-8?B?NlhUYVBBenlPa3kyQ2dBR0VURS9TVndOTVBGaTBZS2llQnpRdmdoLy9iN3V2?=
- =?utf-8?B?NUNtWHlJbnJkTjEvTlpDM3J6WnRBTHZ6a29lZlBPMFA0aGpUdlBWTGRCN21l?=
- =?utf-8?Q?vTG0E68I6Xlabs/t1i4PUtOf3?=
+	=?utf-8?B?a0tVU3MvWEpZVHFYb05TZ3pqRVAraWE4R0tPNWt2RGdZdHhhQlRRWGVFTFFP?=
+ =?utf-8?B?VHJNdnN5cWMxTlZIanlJdUJ1dTl3bWlUMXpTZGV1cUJGTk5aUlRlbngrNUQ0?=
+ =?utf-8?B?V3Q0MU12eVhJdkYybFI1SFUvVU04aGhGSzJXQmRQcUptNGNrQS9OQW9zbWJr?=
+ =?utf-8?B?TE9IZWFaby9ESVIremVJenkrUWlNbnJ4TStUSnVBdFNGMkl3ZkJSa05TWERz?=
+ =?utf-8?B?Q3phOE9Fb3pmM1FRTTBMdE81Tm5DbVVpYXpnSElRR3ZMMFlKdEpSM1FFTlVj?=
+ =?utf-8?B?bGVjRmZpdFM0dkRzYlNOVW5uaWV4UzB2UVNIdzFIRVppMmRxZElJdjB0VUdh?=
+ =?utf-8?B?UXlTSkRWeGRKRngxTVQ1UmVMaTFvYkFqdGFZWmdYaGpTbzh6REpBbFUwWUEr?=
+ =?utf-8?B?MEZWbWw0SHl0d09XaXppenBIS2hHNE1MeXExN3Y0SHJNK0tPYXdhMGRMT1BJ?=
+ =?utf-8?B?czFJb2lkK3QzUGRybWZSajEwS25OUmYycGEyc29hMW9yOFUwT3BOc25UV0xo?=
+ =?utf-8?B?KytCSXJSRWxrMDAveExyTEJkTmFpVTBSeDVYNDE0WUxOdnFwc2RVdkpPUjlS?=
+ =?utf-8?B?WEl6OFdnK25IRFlaMFYxS20zVCsyNkRRTGppQUJiRCtsTUM2R0RUdE1BbG9X?=
+ =?utf-8?B?R0VRdEQwSWJSYVVRRU0xcnRFK3Q5QmtScG9oR2t2M0JIelVaOXlxRVBuRUoy?=
+ =?utf-8?B?TkJpTG8zcVBSRW02MzRnOHcvS2RYT3grR1FoT0lEVzRyQlgrMmVzWkNjSTJ4?=
+ =?utf-8?B?dnFtYWZQalhDZW9QZlNOTHcyeHJQa3ZQa08venZGVU1lcWM3OUNnNjNNWmgw?=
+ =?utf-8?B?bWVid0V2RFByc0s1Nko5VGRFTGJFY3lwVnZWdU1Wbno2cTJCamZ2VFJkSWds?=
+ =?utf-8?B?K2xwVFRPWktQNmFTZks0T1llc3lQQzRKZlJENk1kM2pYVXJvR2VnNTVJRklk?=
+ =?utf-8?B?dmZTM1FqcG1FcmxFdkJ0TGs2OHk2aUZFVElBL25kc0VYamcxSEdTT25iQmtz?=
+ =?utf-8?B?Qm1iTmFlWHl2eVpCaDBPUHMyUmVteWJLQ3pOMTc0UXBxbUpSM1cwczUySXVi?=
+ =?utf-8?B?YlFCeW51WHp1YS9hK0FDY0xXS3Q0K0VENUFkeDA4Ly8zRlBBVDlqWmtjdS9s?=
+ =?utf-8?B?NGNJa1VsdElvdDdTMER6bVV4UXpMWkw3YnI5eTU1QVorRXlKVXFlZGFtQUx0?=
+ =?utf-8?B?YWI4NVp1U2IrM0NObG8xSnhkTnZxS3hJZ2pIdDJYOHpGOEJtdEE4REcvMTYr?=
+ =?utf-8?B?Y1JBVy9TcnF6V29uTjdqMUlPbHNqeWxjSy9nNDN3VWlqSTYxZkp3S21wY0xp?=
+ =?utf-8?B?bkduQTkvT0pIdndmMU9zUWhpTmEyZWZhUmNpSjQ2SnYycS9CTU9DUFRRbjNk?=
+ =?utf-8?B?dTc2UHJ6dUF4MFdweWp6RWd1Ky9zREtGTzcrRWpSZWVzWENCRW1FZjN5aDRP?=
+ =?utf-8?B?azYvQzQxelNzS2sxV1RqNUJtVGNZaWZqdFJRbFRzYURaUE80N1hNR0Q1a2Z2?=
+ =?utf-8?B?M2pqWHhBaWxHNVgzWUtrNVNub1VCZ3VWV1ZTWlh0czNCZENVYlV2QmpBZW5H?=
+ =?utf-8?B?RHZWQVNkN3h5dWlHSFVTaGxwaXJyd3JVRS9PbWtIdnc1V2FnVDJ6YUNpYUR3?=
+ =?utf-8?B?ODJJZCtWVmZUTkZhVy9XdXRCbnNnTUtwbmUvMDJuQ1hkTEwzdDhJbEh4WnZT?=
+ =?utf-8?B?YkhvY0d6QUtJZkJnVUdwRmUvbFZXbVdTS0Z1YU5ZWkpTZStkNHk1a0NyKzd3?=
+ =?utf-8?B?QWozb055QU9KblpCclVCZ2luZ3JhNTM2MGxVVkoraDhVQjJIeERQbm1oY2dF?=
+ =?utf-8?B?NDJMRXB4WG9hSk1WYnRiak1yTWxwbmd4RTZDTkRKQ0FwRWNGSXh1NlJlREM0?=
+ =?utf-8?B?Vk9mWGdaWEZQMlIvQ1I3NkdqOTU4em9yTVRTL0dvby9PRmgza096NVF5cGtQ?=
+ =?utf-8?B?VHJrZC8yK2JkSWJUcUh0VkVrc2RENzAwRFZwVzlaSjNFcm9wa3E2YnlaSFkz?=
+ =?utf-8?B?dE43UjBRVFlBeEMzZkxBbXRoS1d3Q3NTbUJVcDdhbFd4ZGpWb1BoQzZDZGNj?=
+ =?utf-8?B?VmtGaGVybkQ4UlBYcEJ2K0ZCRTRsVGUrUUI3ck9qdzVJK3BVaTJqTjRhNk8z?=
+ =?utf-8?Q?eJUPXnmemCAW45gsZ1NZTrfKe?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 30f2e10b-1160-409b-e4ee-08db142b7afc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7dcf29d6-ad4b-49d8-a5d9-08db14436cc2
 X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3370.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Feb 2023 16:48:38.4475
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Feb 2023 19:40:02.5148
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nmR+XZqpMTaH2HfQJs0XGtHIDK2e8/0jDJNHjCwiQcYNU9EtwM44lbfglsB0pDpT
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6588
+X-MS-Exchange-CrossTenant-UserPrincipalName: 5+2/yJ+fN3SNWmkii9gfmSXnUyIRe/CjyeHugHrKqp2cUtbTDBLixBhxf4ARD1gN
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4436
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 1A2393EF16
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-5.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+X-Rspamd-Queue-Id: D7BEA3E95A
+X-Spamd-Bar: --------
+X-Spamd-Result: default: False [-8.50 / 15.00];
+	DWL_DNSWL_HI(-3.50)[amd.com:dkim];
+	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
 	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	RCVD_IN_DNSWL_HI(-0.50)[2603:10b6:5:38::25:received];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	RCVD_IN_DNSWL_HI(-0.50)[40.107.96.41:from];
 	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	RCVD_IN_DNSWL_NONE(0.00)[40.107.93.49:from];
-	FREEMAIL_CC(0.00)[chromium.org,padovan.org,intel.com,gmail.com,daenzer.net,vger.kernel.org,lists.freedesktop.org,amd.com,lists.linaro.org,linaro.org];
+	FREEMAIL_TO(0.00)[gmail.com,lists.freedesktop.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.93.49:from];
 	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,ffwll.ch,gmail.com,daenzer.net,intel.com,amd.com,emersion.fr,chromium.org,linaro.org,vger.kernel.org,lists.linaro.org];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.96.41:from];
 	TAGGED_RCPT(0.00)[];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DKIM_TRACE(0.00)[amd.com:+];
-	RCVD_COUNT_THREE(0.00)[3];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
+	DKIM_TRACE(0.00)[amd.com:+];
 	MIME_TRACE(0.00)[0:+];
 	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
 	RCVD_TLS_LAST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
 	TO_DN_SOME(0.00)[]
 X-MailFrom: Luben.Tuikov@amd.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: O4QUEE7IEUEEG6Y4RG5QPLZTBYR2X6AX
-X-Message-ID-Hash: O4QUEE7IEUEEG6Y4RG5QPLZTBYR2X6AX
-X-Mailman-Approved-At: Wed, 22 Feb 2023 07:02:50 +0000
-CC: Rob Clark <robdclark@chromium.org>, Gustavo Padovan <gustavo@padovan.org>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>, open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>
+Message-ID-Hash: ZT6Q2EKZB7U4EKFWMRBRD5VWVEIOZOT6
+X-Message-ID-Hash: ZT6Q2EKZB7U4EKFWMRBRD5VWVEIOZOT6
+X-Mailman-Approved-At: Wed, 22 Feb 2023 07:03:16 +0000
+CC: freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Pekka Paalanen <ppaalanen@gmail.com>, Simon Ser <contact@emersion.fr>, Rob Clark <robdclark@chromium.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 06/14] dma-buf/sync_file: Support (E)POLLPRI
+Subject: [Linaro-mm-sig] Re: [PATCH v4 08/14] drm/scheduler: Add fence deadline support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/O4QUEE7IEUEEG6Y4RG5QPLZTBYR2X6AX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZT6Q2EKZB7U4EKFWMRBRD5VWVEIOZOT6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -165,55 +162,142 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 2023-02-20 11:14, Rob Clark wrote:
-> On Mon, Feb 20, 2023 at 12:53 AM Pekka Paalanen <ppaalanen@gmail.com> wrote:
->>
->> On Sat, 18 Feb 2023 13:15:49 -0800
->> Rob Clark <robdclark@gmail.com> wrote:
->>
->>> From: Rob Clark <robdclark@chromium.org>
->>>
->>> Allow userspace to use the EPOLLPRI/POLLPRI flag to indicate an urgent
->>> wait (as opposed to a "housekeeping" wait to know when to cleanup after
->>> some work has completed).  Usermode components of GPU driver stacks
->>> often poll() on fence fd's to know when it is safe to do things like
->>> free or reuse a buffer, but they can also poll() on a fence fd when
->>> waiting to read back results from the GPU.  The EPOLLPRI/POLLPRI flag
->>> lets the kernel differentiate these two cases.
->>>
->>> Signed-off-by: Rob Clark <robdclark@chromium.org>
->>
->> Hi,
->>
->> where would the UAPI documentation of this go?
->> It seems to be missing.
+On 2023-02-18 16:15, Rob Clark wrote:
+> As the finished fence is the one that is exposed to userspace, and
+> therefore the one that other operations, like atomic update, would
+> block on, we need to propagate the deadline from from the finished
+> fence to the actual hw fence.
 > 
-> Good question, I am not sure.  The poll() man page has a description,
-> but my usage doesn't fit that _exactly_ (but OTOH the description is a
-> bit vague).
+> v2: Split into drm_sched_fence_set_parent() (ckoenig)
+> v3: Ensure a thread calling drm_sched_fence_set_deadline_finished() sees
+>     fence->parent set before drm_sched_fence_set_parent() does this
+>     test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT).
 > 
->> If a Wayland compositor is polling application fences to know which
->> client buffer to use in its rendering, should the compositor poll with
->> PRI or not? If a compositor polls with PRI, then all fences from all
->> applications would always be PRI. Would that be harmful somehow or
->> would it be beneficial?
-> 
-> I think a compositor would rather use the deadline ioctl and then poll
-> without PRI.  Otherwise you are giving an urgency signal to the fence
-> signaller which might not necessarily be needed.
-> 
-> The places where I expect PRI to be useful is more in mesa (things
-> like glFinish(), readpix, and other similar sorts of blocking APIs)
-Hi,
+> Signed-off-by: Rob Clark <robdclark@chromium.org>
 
-Hmm, but then user-space could do the opposite, namely, submit work as usual--never 
-using the SET_DEADLINE ioctl, and then at the end, poll using (E)POLLPRI. That seems
-like a possible usage pattern, unintended--maybe, but possible. Do we want to discourage
-this? Wouldn't SET_DEADLINE be enough? I mean, one can call SET_DEADLINE with the current
-time, and then wouldn't that be equivalent to (E)POLLPRI?
+Looks good.
+
+This patch is Acked-by: Luben Tuikov <luben.tuikov@amd.com>
 -- 
 Regards,
 Luben
+
+> ---
+>  drivers/gpu/drm/scheduler/sched_fence.c | 46 +++++++++++++++++++++++++
+>  drivers/gpu/drm/scheduler/sched_main.c  |  2 +-
+>  include/drm/gpu_scheduler.h             |  8 +++++
+>  3 files changed, 55 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/scheduler/sched_fence.c b/drivers/gpu/drm/scheduler/sched_fence.c
+> index 7fd869520ef2..43e2d4f5fe3b 100644
+> --- a/drivers/gpu/drm/scheduler/sched_fence.c
+> +++ b/drivers/gpu/drm/scheduler/sched_fence.c
+> @@ -123,6 +123,37 @@ static void drm_sched_fence_release_finished(struct dma_fence *f)
+>  	dma_fence_put(&fence->scheduled);
+>  }
+>  
+> +static void drm_sched_fence_set_deadline_finished(struct dma_fence *f,
+> +						  ktime_t deadline)
+> +{
+> +	struct drm_sched_fence *fence = to_drm_sched_fence(f);
+> +	struct dma_fence *parent;
+> +	unsigned long flags;
+> +
+> +	spin_lock_irqsave(&fence->lock, flags);
+> +
+> +	/* If we already have an earlier deadline, keep it: */
+> +	if (test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT, &f->flags) &&
+> +	    ktime_before(fence->deadline, deadline)) {
+> +		spin_unlock_irqrestore(&fence->lock, flags);
+> +		return;
+> +	}
+> +
+> +	fence->deadline = deadline;
+> +	set_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT, &f->flags);
+> +
+> +	spin_unlock_irqrestore(&fence->lock, flags);
+> +
+> +	/*
+> +	 * smp_load_aquire() to ensure that if we are racing another
+> +	 * thread calling drm_sched_fence_set_parent(), that we see
+> +	 * the parent set before it calls test_bit(HAS_DEADLINE_BIT)
+> +	 */
+> +	parent = smp_load_acquire(&fence->parent);
+> +	if (parent)
+> +		dma_fence_set_deadline(parent, deadline);
+> +}
+> +
+>  static const struct dma_fence_ops drm_sched_fence_ops_scheduled = {
+>  	.get_driver_name = drm_sched_fence_get_driver_name,
+>  	.get_timeline_name = drm_sched_fence_get_timeline_name,
+> @@ -133,6 +164,7 @@ static const struct dma_fence_ops drm_sched_fence_ops_finished = {
+>  	.get_driver_name = drm_sched_fence_get_driver_name,
+>  	.get_timeline_name = drm_sched_fence_get_timeline_name,
+>  	.release = drm_sched_fence_release_finished,
+> +	.set_deadline = drm_sched_fence_set_deadline_finished,
+>  };
+>  
+>  struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f)
+> @@ -147,6 +179,20 @@ struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f)
+>  }
+>  EXPORT_SYMBOL(to_drm_sched_fence);
+>  
+> +void drm_sched_fence_set_parent(struct drm_sched_fence *s_fence,
+> +				struct dma_fence *fence)
+> +{
+> +	/*
+> +	 * smp_store_release() to ensure another thread racing us
+> +	 * in drm_sched_fence_set_deadline_finished() sees the
+> +	 * fence's parent set before test_bit()
+> +	 */
+> +	smp_store_release(&s_fence->parent, dma_fence_get(fence));
+> +	if (test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT,
+> +		     &s_fence->finished.flags))
+> +		dma_fence_set_deadline(fence, s_fence->deadline);
+> +}
+> +
+>  struct drm_sched_fence *drm_sched_fence_alloc(struct drm_sched_entity *entity,
+>  					      void *owner)
+>  {
+> diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
+> index 4e6ad6e122bc..007f98c48f8d 100644
+> --- a/drivers/gpu/drm/scheduler/sched_main.c
+> +++ b/drivers/gpu/drm/scheduler/sched_main.c
+> @@ -1019,7 +1019,7 @@ static int drm_sched_main(void *param)
+>  		drm_sched_fence_scheduled(s_fence);
+>  
+>  		if (!IS_ERR_OR_NULL(fence)) {
+> -			s_fence->parent = dma_fence_get(fence);
+> +			drm_sched_fence_set_parent(s_fence, fence);
+>  			/* Drop for original kref_init of the fence */
+>  			dma_fence_put(fence);
+>  
+> diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
+> index 9db9e5e504ee..8b31a954a44d 100644
+> --- a/include/drm/gpu_scheduler.h
+> +++ b/include/drm/gpu_scheduler.h
+> @@ -280,6 +280,12 @@ struct drm_sched_fence {
+>           */
+>  	struct dma_fence		finished;
+>  
+> +	/**
+> +	 * @deadline: deadline set on &drm_sched_fence.finished which
+> +	 * potentially needs to be propagated to &drm_sched_fence.parent
+> +	 */
+> +	ktime_t				deadline;
+> +
+>          /**
+>           * @parent: the fence returned by &drm_sched_backend_ops.run_job
+>           * when scheduling the job on hardware. We signal the
+> @@ -568,6 +574,8 @@ void drm_sched_entity_set_priority(struct drm_sched_entity *entity,
+>  				   enum drm_sched_priority priority);
+>  bool drm_sched_entity_is_ready(struct drm_sched_entity *entity);
+>  
+> +void drm_sched_fence_set_parent(struct drm_sched_fence *s_fence,
+> +				struct dma_fence *fence);
+>  struct drm_sched_fence *drm_sched_fence_alloc(
+>  	struct drm_sched_entity *s_entity, void *owner);
+>  void drm_sched_fence_init(struct drm_sched_fence *fence,
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
