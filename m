@@ -2,303 +2,250 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A824369EF13
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 08:03:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA63A69F228
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 10:49:33 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B8ADB3EA56
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 07:03:33 +0000 (UTC)
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com (mail-sn1nam02on2041.outbound.protection.outlook.com [40.107.96.41])
-	by lists.linaro.org (Postfix) with ESMTPS id D7BEA3E95A
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Feb 2023 19:40:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 913403E96B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 09:49:32 +0000 (UTC)
+Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
+	by lists.linaro.org (Postfix) with ESMTPS id C5C793E96B
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Feb 2023 09:49:13 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=mzlHx225;
-	spf=pass (lists.linaro.org: domain of Luben.Tuikov@amd.com designates 40.107.96.41 as permitted sender) smtp.mailfrom=Luben.Tuikov@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fwdvHTmJKX5JbLkIXhDNsHbTdrHyeDdBkT8c/Mhnlgijgl4zLtGAKyhBKI++49fpSVdrIdeiyClwvzuRgWnNYLC95jBfv9l8c2icSr/dmYQyZBFu27NbZxEw7JXvzzlvh12KQ7vB/AwztVBQ8HSYfwFWhrsK8epW8inbztGh12exqq1+hhXr20HL8h34m2k8W7VYIuWuzjmD4wEnigbASjKOBmQ27qPmUcCgzuz/f1p4CZpxnT5Jk/DoEzxi6h0N8mV2YRn+M7nLkgw2qprifrfqF0FJGokVoHV9hVh3m7u22aT5nYOWI83QvTmm+GI2OnhjZqLZmCENlxkTxEvWFw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1xp+gxamV+PWsFQh/1Bw1ioRLDwnPxBqbFOy78zM2XY=;
- b=cxEhYahqPAF0VPCWu7Jm91XH2gdrONlSnfvlHAMc6pY4GNJRnLIAgqe7qVR2oL18+FHUIEgH1QllJXszUq8AzamAIVVeOh+bgcVogHXG5UdDr8uWorIvnzIAdcZrWE5P2pp5rBBF7s4DhpJoPjkwcblGZkOJAilJGLUAtECqIhjiwsvWxmZok5HqxUH+gFv+ET7bAyP3W+PXTYgS1/eS4gkDbOnKpw1ck4WL5h2htHXoZGremvezZf7tcAAww9tOiIop/b5H+BFUG3xusQKXxfbsEkNn1PhdrHwIE96h019BdYBSfcLwc5Xb46c6Xguk+SI2YAyTy87vOVXN304Z4A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1xp+gxamV+PWsFQh/1Bw1ioRLDwnPxBqbFOy78zM2XY=;
- b=mzlHx225/FzZw1yTFrKXGNd4Qlwsyv3Z44pgoMSjyLAXcvR9f4ahafnuplPlehfzBogjgELbSfBLDjHxWVBHRXt0yrhgpn+utylQXCovYpZ3YFRrvThdJf7sh0uSMhAqpe67TvgNDfUyDk4B798zK1YtvxS76fWnqKo4a4MupWA=
-Received: from DM6PR12MB3370.namprd12.prod.outlook.com (2603:10b6:5:38::25) by
- DM6PR12MB4436.namprd12.prod.outlook.com (2603:10b6:5:2a3::20) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6111.21; Tue, 21 Feb 2023 19:40:02 +0000
-Received: from DM6PR12MB3370.namprd12.prod.outlook.com
- ([fe80::4df2:b32a:e628:c57e]) by DM6PR12MB3370.namprd12.prod.outlook.com
- ([fe80::4df2:b32a:e628:c57e%7]) with mapi id 15.20.6111.021; Tue, 21 Feb 2023
- 19:40:02 +0000
-Message-ID: <1da7a010-eb22-0044-b68a-44ffd76dc471@amd.com>
-Date: Tue, 21 Feb 2023 14:40:00 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.2
-Content-Language: en-CA
-To: Rob Clark <robdclark@gmail.com>, dri-devel@lists.freedesktop.org
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=UfBONU13;
+	spf=pass (lists.linaro.org: domain of ppaalanen@gmail.com designates 209.85.167.54 as permitted sender) smtp.mailfrom=ppaalanen@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-lf1-f54.google.com with SMTP id n2so5971170lfb.12
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Feb 2023 01:49:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112;
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=hUTsw3c3dGl69gFjc2IPLlLseEpyU+BsJ/tXKcVGvJE=;
+        b=UfBONU13JoaYcQsCFIsDBmRdKbIhPk9GiK9bQJCcqCj2Ual6SFTndJ5DNxei8DGVF2
+         e++IlSQgRPd082iwJLNPlCKrVKSedW6SWbYAuV8YKIHlZ3V9Osm0jKf6NaDa5/8MJaBd
+         dARDXUEScOKGsXYEccBP+IM3wQl9Z7YBT97phvyqPa7mbNswkoq56FnN0EqG1/wCpvVS
+         WbVvCW1KAwboDqSdHVl5cwoWYAs22XWxmMCCtL9nXEc8tAP7nRJnbVwcUCRHXPzb9SlB
+         2EMEtSQSvoqHCQOSNKsUXLBJGt6nKI+wU9q4pINS72LopCt4c3RVZMg0PPSMuQhqA05X
+         ENCg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112;
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=hUTsw3c3dGl69gFjc2IPLlLseEpyU+BsJ/tXKcVGvJE=;
+        b=xTGgOvuI08jsSAqJvS696XaUKyRN/hYmx+G0fIfuuiL6VLJMWi+4pEmUd6jQdovEPk
+         TThWG+AJ3BXo2uokPlZ0MoRG2hV36gma6fC2Jl3s+T0MXu4m4/wptmpuaVNQo6fIzYiN
+         qLJd7C38yix2sNdY+fT418KO0gPDE7xbLqRcHo5vayBpB+zUD9L6H7c0cAAwtHGqI1xa
+         IBX243/fV5HCI0o3rX3KhGXK3/GDODuqGZGE8wW7sDQgg75oqZGYHPayxCW7DAgv8D3X
+         WH0LzP/zzj5dHMT/XgTgZrmneNMamcirQCVuDZ+CMqTBAFgqYzv0Fl/sz/yxiXBdwmcQ
+         3OQw==
+X-Gm-Message-State: AO0yUKVh6T6VEj4V/EMKwWndkmawJdizGg+odNEeFAHRSAwGLrxYo5gf
+	Wa1S3TbYzaj06hciYO6dJpw=
+X-Google-Smtp-Source: AK7set+/N70WpQDEBCEnI2DY3oZ18dabG3BI02ASZ7Aq5pjZT+kZQ8aYZsNj2eWwNwtMnlKRydoyCg==
+X-Received: by 2002:ac2:5494:0:b0:4db:3605:9bdd with SMTP id t20-20020ac25494000000b004db36059bddmr2770417lfk.5.1677059352364;
+        Wed, 22 Feb 2023 01:49:12 -0800 (PST)
+Received: from eldfell ([194.136.85.206])
+        by smtp.gmail.com with ESMTPSA id q13-20020ac25a0d000000b004b578e52d81sm2121394lfn.176.2023.02.22.01.49.11
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Feb 2023 01:49:11 -0800 (PST)
+Date: Wed, 22 Feb 2023 11:49:00 +0200
+From: Pekka Paalanen <ppaalanen@gmail.com>
+To: Rob Clark <robdclark@gmail.com>
+Message-ID: <20230222114900.1b6baf95@eldfell>
+In-Reply-To: <CAF6AEGuMn3FywPkEtfJ7oZ16A0Bk2aiaRvj4si4od1d3wzXkPw@mail.gmail.com>
 References: <20230218211608.1630586-1-robdclark@gmail.com>
- <20230218211608.1630586-9-robdclark@gmail.com>
-From: Luben Tuikov <luben.tuikov@amd.com>
-In-Reply-To: <20230218211608.1630586-9-robdclark@gmail.com>
-X-ClientProxiedBy: YT4P288CA0090.CANP288.PROD.OUTLOOK.COM
- (2603:10b6:b01:d0::23) To DM6PR12MB3370.namprd12.prod.outlook.com
- (2603:10b6:5:38::25)
+	<20230218211608.1630586-7-robdclark@gmail.com>
+	<20230220105345.70e46fa5@eldfell>
+	<CAF6AEGv9fLQCD65ytRTGp=EkNB1QoZYH5ArphgGQALV9J08Cmw@mail.gmail.com>
+	<cdd5f892-49b9-1e22-4dc1-95a8a733c453@amd.com>
+	<CAF6AEGuMn3FywPkEtfJ7oZ16A0Bk2aiaRvj4si4od1d3wzXkPw@mail.gmail.com>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR12MB3370:EE_|DM6PR12MB4436:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7dcf29d6-ad4b-49d8-a5d9-08db14436cc2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	za94yaP9jRmjzOBxSx5Pppt3dGNWThxcjeuZonqJ2sr5npQoIv+qE0nmzxmiGwzS6Onjfk3ETV7Wrp3jM9hEztXo8fFDK6d5k5yBTRRlCUIslGwDCXhH14Fku740WK9DX2SXRXv5DtpBYNMhLRmSfrLakVLLAqtCjyvuDjv9m0sbfFHobxjlcQbUa4cxBIVWNc2dV2mNU1kp0jdNiZz5Am+Z5TZ00YE4ku3adRM0x9nDUgsy9Dfbf4ZqMTHLf6mkxkAE/RNRq3Av3z7RpU5hOwbIVZ48vhqtBvaA1lo34WpG011nvAo4E4A3N3feKJRGVCvnCO4rn7TQjD0R7J6RuhdUl2rpfxJ7SXZRtlYTGzTG5utmo9Qo91Zy4VlULUG903lxv9VEqblzEX+nYWrdqKhAAmi+7+Pu084n4icMPKEsfQEAMI1MwSHn+42Blq62WcnYaOJdVobjWgotdtgck81YlZRt+uIqwHYSGybbaOkpVlGCUY6OP2l2n3KrJCkTvEGqHx7J5osxHTwyK0SBszVRxyp2XFa4RnRmQ3e37vkFHvPXJZvH33ysyCrLqNmHGdbMZ6nmmz+gJDsK7BFDCyefJJAFRYClx2MBEZPNTRH0KaIUeEJz7fDn3TskNLd5gWr6nGJ0lRQL1vsmRbEGc06arIZjKycGuKfzk3snizeKatv61/mw08bG6xBUNDDH33q+kEn+gBMQUtLNZ/oMElET8X+1vj4wf1QuUPnLvlY=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB3370.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(376002)(366004)(396003)(136003)(346002)(451199018)(31686004)(8936002)(31696002)(36756003)(86362001)(41300700001)(5660300002)(44832011)(7416002)(2906002)(83380400001)(38100700002)(66946007)(66556008)(66476007)(478600001)(8676002)(6486002)(54906003)(316002)(26005)(55236004)(53546011)(186003)(6512007)(2616005)(4326008)(6506007)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?a0tVU3MvWEpZVHFYb05TZ3pqRVAraWE4R0tPNWt2RGdZdHhhQlRRWGVFTFFP?=
- =?utf-8?B?VHJNdnN5cWMxTlZIanlJdUJ1dTl3bWlUMXpTZGV1cUJGTk5aUlRlbngrNUQ0?=
- =?utf-8?B?V3Q0MU12eVhJdkYybFI1SFUvVU04aGhGSzJXQmRQcUptNGNrQS9OQW9zbWJr?=
- =?utf-8?B?TE9IZWFaby9ESVIremVJenkrUWlNbnJ4TStUSnVBdFNGMkl3ZkJSa05TWERz?=
- =?utf-8?B?Q3phOE9Fb3pmM1FRTTBMdE81Tm5DbVVpYXpnSElRR3ZMMFlKdEpSM1FFTlVj?=
- =?utf-8?B?bGVjRmZpdFM0dkRzYlNOVW5uaWV4UzB2UVNIdzFIRVppMmRxZElJdjB0VUdh?=
- =?utf-8?B?UXlTSkRWeGRKRngxTVQ1UmVMaTFvYkFqdGFZWmdYaGpTbzh6REpBbFUwWUEr?=
- =?utf-8?B?MEZWbWw0SHl0d09XaXppenBIS2hHNE1MeXExN3Y0SHJNK0tPYXdhMGRMT1BJ?=
- =?utf-8?B?czFJb2lkK3QzUGRybWZSajEwS25OUmYycGEyc29hMW9yOFUwT3BOc25UV0xo?=
- =?utf-8?B?KytCSXJSRWxrMDAveExyTEJkTmFpVTBSeDVYNDE0WUxOdnFwc2RVdkpPUjlS?=
- =?utf-8?B?WEl6OFdnK25IRFlaMFYxS20zVCsyNkRRTGppQUJiRCtsTUM2R0RUdE1BbG9X?=
- =?utf-8?B?R0VRdEQwSWJSYVVRRU0xcnRFK3Q5QmtScG9oR2t2M0JIelVaOXlxRVBuRUoy?=
- =?utf-8?B?TkJpTG8zcVBSRW02MzRnOHcvS2RYT3grR1FoT0lEVzRyQlgrMmVzWkNjSTJ4?=
- =?utf-8?B?dnFtYWZQalhDZW9QZlNOTHcyeHJQa3ZQa08venZGVU1lcWM3OUNnNjNNWmgw?=
- =?utf-8?B?bWVid0V2RFByc0s1Nko5VGRFTGJFY3lwVnZWdU1Wbno2cTJCamZ2VFJkSWds?=
- =?utf-8?B?K2xwVFRPWktQNmFTZks0T1llc3lQQzRKZlJENk1kM2pYVXJvR2VnNTVJRklk?=
- =?utf-8?B?dmZTM1FqcG1FcmxFdkJ0TGs2OHk2aUZFVElBL25kc0VYamcxSEdTT25iQmtz?=
- =?utf-8?B?Qm1iTmFlWHl2eVpCaDBPUHMyUmVteWJLQ3pOMTc0UXBxbUpSM1cwczUySXVi?=
- =?utf-8?B?YlFCeW51WHp1YS9hK0FDY0xXS3Q0K0VENUFkeDA4Ly8zRlBBVDlqWmtjdS9s?=
- =?utf-8?B?NGNJa1VsdElvdDdTMER6bVV4UXpMWkw3YnI5eTU1QVorRXlKVXFlZGFtQUx0?=
- =?utf-8?B?YWI4NVp1U2IrM0NObG8xSnhkTnZxS3hJZ2pIdDJYOHpGOEJtdEE4REcvMTYr?=
- =?utf-8?B?Y1JBVy9TcnF6V29uTjdqMUlPbHNqeWxjSy9nNDN3VWlqSTYxZkp3S21wY0xp?=
- =?utf-8?B?bkduQTkvT0pIdndmMU9zUWhpTmEyZWZhUmNpSjQ2SnYycS9CTU9DUFRRbjNk?=
- =?utf-8?B?dTc2UHJ6dUF4MFdweWp6RWd1Ky9zREtGTzcrRWpSZWVzWENCRW1FZjN5aDRP?=
- =?utf-8?B?azYvQzQxelNzS2sxV1RqNUJtVGNZaWZqdFJRbFRzYURaUE80N1hNR0Q1a2Z2?=
- =?utf-8?B?M2pqWHhBaWxHNVgzWUtrNVNub1VCZ3VWV1ZTWlh0czNCZENVYlV2QmpBZW5H?=
- =?utf-8?B?RHZWQVNkN3h5dWlHSFVTaGxwaXJyd3JVRS9PbWtIdnc1V2FnVDJ6YUNpYUR3?=
- =?utf-8?B?ODJJZCtWVmZUTkZhVy9XdXRCbnNnTUtwbmUvMDJuQ1hkTEwzdDhJbEh4WnZT?=
- =?utf-8?B?YkhvY0d6QUtJZkJnVUdwRmUvbFZXbVdTS0Z1YU5ZWkpTZStkNHk1a0NyKzd3?=
- =?utf-8?B?QWozb055QU9KblpCclVCZ2luZ3JhNTM2MGxVVkoraDhVQjJIeERQbm1oY2dF?=
- =?utf-8?B?NDJMRXB4WG9hSk1WYnRiak1yTWxwbmd4RTZDTkRKQ0FwRWNGSXh1NlJlREM0?=
- =?utf-8?B?Vk9mWGdaWEZQMlIvQ1I3NkdqOTU4em9yTVRTL0dvby9PRmgza096NVF5cGtQ?=
- =?utf-8?B?VHJrZC8yK2JkSWJUcUh0VkVrc2RENzAwRFZwVzlaSjNFcm9wa3E2YnlaSFkz?=
- =?utf-8?B?dE43UjBRVFlBeEMzZkxBbXRoS1d3Q3NTbUJVcDdhbFd4ZGpWb1BoQzZDZGNj?=
- =?utf-8?B?VmtGaGVybkQ4UlBYcEJ2K0ZCRTRsVGUrUUI3ck9qdzVJK3BVaTJqTjRhNk8z?=
- =?utf-8?Q?eJUPXnmemCAW45gsZ1NZTrfKe?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7dcf29d6-ad4b-49d8-a5d9-08db14436cc2
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3370.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Feb 2023 19:40:02.5148
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 5+2/yJ+fN3SNWmkii9gfmSXnUyIRe/CjyeHugHrKqp2cUtbTDBLixBhxf4ARD1gN
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4436
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: D7BEA3E95A
-X-Spamd-Bar: --------
-X-Spamd-Result: default: False [-8.50 / 15.00];
-	DWL_DNSWL_HI(-3.50)[amd.com:dkim];
-	BAYES_HAM(-3.00)[100.00%];
+X-Rspamd-Queue-Id: C5C793E96B
+X-Spamd-Bar: ----------
+X-Spamd-Result: default: False [-10.10 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[99.99%];
+	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	RCVD_IN_DNSWL_HI(-0.50)[40.107.96.41:from];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_TO(0.00)[gmail.com,lists.freedesktop.org];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_IN_DNSWL_HI(-1.00)[194.136.85.206:received,209.85.167.54:from];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,ffwll.ch,gmail.com,daenzer.net,intel.com,amd.com,emersion.fr,chromium.org,linaro.org,vger.kernel.org,lists.linaro.org];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.96.41:from];
-	TAGGED_RCPT(0.00)[];
+	FREEMAIL_CC(0.00)[amd.com,chromium.org,padovan.org,intel.com,gmail.com,daenzer.net,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,linaro.org];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[amd.com:+];
-	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	TAGGED_RCPT(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.54:from];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	RCVD_COUNT_THREE(0.00)[3];
+	ARC_NA(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	TO_DN_SOME(0.00)[]
-X-MailFrom: Luben.Tuikov@amd.com
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
+Message-ID-Hash: 2IIUD3W5I5WJS6GZLVLAULMUZ7VF3T3O
+X-Message-ID-Hash: 2IIUD3W5I5WJS6GZLVLAULMUZ7VF3T3O
+X-MailFrom: ppaalanen@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: ZT6Q2EKZB7U4EKFWMRBRD5VWVEIOZOT6
-X-Message-ID-Hash: ZT6Q2EKZB7U4EKFWMRBRD5VWVEIOZOT6
-X-Mailman-Approved-At: Wed, 22 Feb 2023 07:03:16 +0000
-CC: freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Pekka Paalanen <ppaalanen@gmail.com>, Simon Ser <contact@emersion.fr>, Rob Clark <robdclark@chromium.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
+CC: Luben Tuikov <luben.tuikov@amd.com>, Rob Clark <robdclark@chromium.org>, Gustavo Padovan <gustavo@padovan.org>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Michel =?UTF-8?B?RMOkbnplcg==?= <michel@daenzer.net>, open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 08/14] drm/scheduler: Add fence deadline support
+Subject: [Linaro-mm-sig] Re: [PATCH v4 06/14] dma-buf/sync_file: Support (E)POLLPRI
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZT6Q2EKZB7U4EKFWMRBRD5VWVEIOZOT6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2IIUD3W5I5WJS6GZLVLAULMUZ7VF3T3O/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: multipart/mixed; boundary="===============4152921927837211060=="
+
+--===============4152921927837211060==
+Content-Type: multipart/signed; boundary="Sig_/vMp1DRNCFLeCBFsykIrKQNo";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
+
+--Sig_/vMp1DRNCFLeCBFsykIrKQNo
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, 21 Feb 2023 09:53:56 -0800
+Rob Clark <robdclark@gmail.com> wrote:
+
+> On Tue, Feb 21, 2023 at 8:48 AM Luben Tuikov <luben.tuikov@amd.com> wrote:
+> >
+> > On 2023-02-20 11:14, Rob Clark wrote: =20
+> > > On Mon, Feb 20, 2023 at 12:53 AM Pekka Paalanen <ppaalanen@gmail.com>=
+ wrote: =20
+> > >>
+> > >> On Sat, 18 Feb 2023 13:15:49 -0800
+> > >> Rob Clark <robdclark@gmail.com> wrote:
+> > >> =20
+> > >>> From: Rob Clark <robdclark@chromium.org>
+> > >>>
+> > >>> Allow userspace to use the EPOLLPRI/POLLPRI flag to indicate an urg=
+ent
+> > >>> wait (as opposed to a "housekeeping" wait to know when to cleanup a=
+fter
+> > >>> some work has completed).  Usermode components of GPU driver stacks
+> > >>> often poll() on fence fd's to know when it is safe to do things like
+> > >>> free or reuse a buffer, but they can also poll() on a fence fd when
+> > >>> waiting to read back results from the GPU.  The EPOLLPRI/POLLPRI fl=
+ag
+> > >>> lets the kernel differentiate these two cases.
+> > >>>
+> > >>> Signed-off-by: Rob Clark <robdclark@chromium.org> =20
+> > >>
+> > >> Hi,
+> > >>
+> > >> where would the UAPI documentation of this go?
+> > >> It seems to be missing. =20
+> > >
+> > > Good question, I am not sure.  The poll() man page has a description,
+> > > but my usage doesn't fit that _exactly_ (but OTOH the description is a
+> > > bit vague).
+> > > =20
+> > >> If a Wayland compositor is polling application fences to know which
+> > >> client buffer to use in its rendering, should the compositor poll wi=
+th
+> > >> PRI or not? If a compositor polls with PRI, then all fences from all
+> > >> applications would always be PRI. Would that be harmful somehow or
+> > >> would it be beneficial? =20
+> > >
+> > > I think a compositor would rather use the deadline ioctl and then poll
+> > > without PRI.  Otherwise you are giving an urgency signal to the fence
+> > > signaller which might not necessarily be needed.
+> > >
+> > > The places where I expect PRI to be useful is more in mesa (things
+> > > like glFinish(), readpix, and other similar sorts of blocking APIs) =
+=20
+> > Hi,
+> >
+> > Hmm, but then user-space could do the opposite, namely, submit work as =
+usual--never
+> > using the SET_DEADLINE ioctl, and then at the end, poll using (E)POLLPR=
+I. That seems
+> > like a possible usage pattern, unintended--maybe, but possible. Do we w=
+ant to discourage
+> > this? Wouldn't SET_DEADLINE be enough? I mean, one can call SET_DEADLIN=
+E with the current
+> > time, and then wouldn't that be equivalent to (E)POLLPRI? =20
+>=20
+> Yeah, (E)POLLPRI isn't strictly needed if we have SET_DEADLINE.  It is
+> slightly more convenient if you want an immediate deadline (single
+> syscall instead of two), but not strictly needed.  OTOH it piggy-backs
+> on existing UABI.
+
+In that case, I would be conservative, and not add the POLLPRI
+semantics. An UAPI addition that is not strictly needed and somewhat
+unclear if it violates any design principles is best not done, until it
+is proven to be beneficial.
+
+Besides, a Wayland compositor does not necessary need to add the fd
+to its main event loop for poll. It could just SET_DEADLINE, and then
+when it renders simply check if the fence passed or not already. Not
+polling means the compositor does not need to wake up at the moment the
+fence signals to just record a flag.
+
+On another matter, if the application uses SET_DEADLINE with one
+timestamp, and the compositor uses SET_DEADLINE on the same thing with
+another timestamp, what should happen?
+
+Maybe it's a soft-realtime app whose primary goal is not display, and
+it needs the result faster than the window server?
+
+Maybe SET_DEADLINE should set the deadline only to an earlier timestamp
+and never later?
+
+
+Thanks,
+pq
+
+--Sig_/vMp1DRNCFLeCBFsykIrKQNo
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmP15QwACgkQI1/ltBGq
+qqfMTQ/9FH4Z7EQ5jdc+1jGvO29uR7Ih0y1/k/wFFU3l7XCftBRKTn040aMGRnq7
+fQTG3rTSC47mHT2FlwO+gXfwHpW1z80FOy9tD/fl2CDmqxqJbHE6DyGYdFMjzK5y
+920v4kfJFeJ99CLssA6yQwxlfobHP+M3rbX0cFTOJ0YGeP8ZY3DyQng4lZgwa2wD
+/MYnAs+589mU93gBEB/rUWKbHIFnZFv7psLpf7iP3aRU7muQAieSMpJGWtW1f/M4
+YMPMAAJagplQAfwDhbBFMBNz2dJpzUFiCk4uPYSLh+ysD6KhR4K+LYBrlC237Obe
+9dSrnuaL0hfzkedElz/edHetggNhvPzoYgJlf+VqjoXwNwDN1IFYW9RGeikAvFhr
+7tK+yxIDHwB/grglQFEiaF8+BrUMAuXWc2IgIuZvG0blE/6JxEvfeh7mBT+R2kF0
+1xAdrFGrPw7/ALH5bvGLfOCkY8pTC+QBkwknGDZGszr1pP6gs0tUHI0uqonAPQ6k
+b+TmMJA8OtC/Te6fk7NSDvvxNjtRupS+M0c9avOVc3LrWpIK0SDi5RSIz0MSzXfr
+/2lo3AUYiY6GYt59msHwnNPK8jVvSLxs3yR0q6LE/2MICreclpVXxiUsP7SfBNR0
+VWlFWhFMQjiZWdS4m3ZZBoEn8JR7fTBPIXVCUQgX0+X7D6oQlJg=
+=+sLE
+-----END PGP SIGNATURE-----
+
+--Sig_/vMp1DRNCFLeCBFsykIrKQNo--
+
+--===============4152921927837211060==
 Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-
-On 2023-02-18 16:15, Rob Clark wrote:
-> As the finished fence is the one that is exposed to userspace, and
-> therefore the one that other operations, like atomic update, would
-> block on, we need to propagate the deadline from from the finished
-> fence to the actual hw fence.
-> 
-> v2: Split into drm_sched_fence_set_parent() (ckoenig)
-> v3: Ensure a thread calling drm_sched_fence_set_deadline_finished() sees
->     fence->parent set before drm_sched_fence_set_parent() does this
->     test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT).
-> 
-> Signed-off-by: Rob Clark <robdclark@chromium.org>
-
-Looks good.
-
-This patch is Acked-by: Luben Tuikov <luben.tuikov@amd.com>
--- 
-Regards,
-Luben
-
-> ---
->  drivers/gpu/drm/scheduler/sched_fence.c | 46 +++++++++++++++++++++++++
->  drivers/gpu/drm/scheduler/sched_main.c  |  2 +-
->  include/drm/gpu_scheduler.h             |  8 +++++
->  3 files changed, 55 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/scheduler/sched_fence.c b/drivers/gpu/drm/scheduler/sched_fence.c
-> index 7fd869520ef2..43e2d4f5fe3b 100644
-> --- a/drivers/gpu/drm/scheduler/sched_fence.c
-> +++ b/drivers/gpu/drm/scheduler/sched_fence.c
-> @@ -123,6 +123,37 @@ static void drm_sched_fence_release_finished(struct dma_fence *f)
->  	dma_fence_put(&fence->scheduled);
->  }
->  
-> +static void drm_sched_fence_set_deadline_finished(struct dma_fence *f,
-> +						  ktime_t deadline)
-> +{
-> +	struct drm_sched_fence *fence = to_drm_sched_fence(f);
-> +	struct dma_fence *parent;
-> +	unsigned long flags;
-> +
-> +	spin_lock_irqsave(&fence->lock, flags);
-> +
-> +	/* If we already have an earlier deadline, keep it: */
-> +	if (test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT, &f->flags) &&
-> +	    ktime_before(fence->deadline, deadline)) {
-> +		spin_unlock_irqrestore(&fence->lock, flags);
-> +		return;
-> +	}
-> +
-> +	fence->deadline = deadline;
-> +	set_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT, &f->flags);
-> +
-> +	spin_unlock_irqrestore(&fence->lock, flags);
-> +
-> +	/*
-> +	 * smp_load_aquire() to ensure that if we are racing another
-> +	 * thread calling drm_sched_fence_set_parent(), that we see
-> +	 * the parent set before it calls test_bit(HAS_DEADLINE_BIT)
-> +	 */
-> +	parent = smp_load_acquire(&fence->parent);
-> +	if (parent)
-> +		dma_fence_set_deadline(parent, deadline);
-> +}
-> +
->  static const struct dma_fence_ops drm_sched_fence_ops_scheduled = {
->  	.get_driver_name = drm_sched_fence_get_driver_name,
->  	.get_timeline_name = drm_sched_fence_get_timeline_name,
-> @@ -133,6 +164,7 @@ static const struct dma_fence_ops drm_sched_fence_ops_finished = {
->  	.get_driver_name = drm_sched_fence_get_driver_name,
->  	.get_timeline_name = drm_sched_fence_get_timeline_name,
->  	.release = drm_sched_fence_release_finished,
-> +	.set_deadline = drm_sched_fence_set_deadline_finished,
->  };
->  
->  struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f)
-> @@ -147,6 +179,20 @@ struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f)
->  }
->  EXPORT_SYMBOL(to_drm_sched_fence);
->  
-> +void drm_sched_fence_set_parent(struct drm_sched_fence *s_fence,
-> +				struct dma_fence *fence)
-> +{
-> +	/*
-> +	 * smp_store_release() to ensure another thread racing us
-> +	 * in drm_sched_fence_set_deadline_finished() sees the
-> +	 * fence's parent set before test_bit()
-> +	 */
-> +	smp_store_release(&s_fence->parent, dma_fence_get(fence));
-> +	if (test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT,
-> +		     &s_fence->finished.flags))
-> +		dma_fence_set_deadline(fence, s_fence->deadline);
-> +}
-> +
->  struct drm_sched_fence *drm_sched_fence_alloc(struct drm_sched_entity *entity,
->  					      void *owner)
->  {
-> diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
-> index 4e6ad6e122bc..007f98c48f8d 100644
-> --- a/drivers/gpu/drm/scheduler/sched_main.c
-> +++ b/drivers/gpu/drm/scheduler/sched_main.c
-> @@ -1019,7 +1019,7 @@ static int drm_sched_main(void *param)
->  		drm_sched_fence_scheduled(s_fence);
->  
->  		if (!IS_ERR_OR_NULL(fence)) {
-> -			s_fence->parent = dma_fence_get(fence);
-> +			drm_sched_fence_set_parent(s_fence, fence);
->  			/* Drop for original kref_init of the fence */
->  			dma_fence_put(fence);
->  
-> diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
-> index 9db9e5e504ee..8b31a954a44d 100644
-> --- a/include/drm/gpu_scheduler.h
-> +++ b/include/drm/gpu_scheduler.h
-> @@ -280,6 +280,12 @@ struct drm_sched_fence {
->           */
->  	struct dma_fence		finished;
->  
-> +	/**
-> +	 * @deadline: deadline set on &drm_sched_fence.finished which
-> +	 * potentially needs to be propagated to &drm_sched_fence.parent
-> +	 */
-> +	ktime_t				deadline;
-> +
->          /**
->           * @parent: the fence returned by &drm_sched_backend_ops.run_job
->           * when scheduling the job on hardware. We signal the
-> @@ -568,6 +574,8 @@ void drm_sched_entity_set_priority(struct drm_sched_entity *entity,
->  				   enum drm_sched_priority priority);
->  bool drm_sched_entity_is_ready(struct drm_sched_entity *entity);
->  
-> +void drm_sched_fence_set_parent(struct drm_sched_fence *s_fence,
-> +				struct dma_fence *fence);
->  struct drm_sched_fence *drm_sched_fence_alloc(
->  	struct drm_sched_entity *s_entity, void *owner);
->  void drm_sched_fence_init(struct drm_sched_fence *fence,
+Content-Disposition: inline
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============4152921927837211060==--
