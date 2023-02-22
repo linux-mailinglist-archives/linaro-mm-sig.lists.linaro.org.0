@@ -2,250 +2,184 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA63A69F228
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 10:49:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 178B969F29E
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 11:23:36 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 913403E96B
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 09:49:32 +0000 (UTC)
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
-	by lists.linaro.org (Postfix) with ESMTPS id C5C793E96B
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Feb 2023 09:49:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E1C303EC67
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 10:23:34 +0000 (UTC)
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by lists.linaro.org (Postfix) with ESMTPS id F2E973E96B
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Feb 2023 10:23:15 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=UfBONU13;
-	spf=pass (lists.linaro.org: domain of ppaalanen@gmail.com designates 209.85.167.54 as permitted sender) smtp.mailfrom=ppaalanen@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-lf1-f54.google.com with SMTP id n2so5971170lfb.12
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Feb 2023 01:49:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112;
-        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=hUTsw3c3dGl69gFjc2IPLlLseEpyU+BsJ/tXKcVGvJE=;
-        b=UfBONU13JoaYcQsCFIsDBmRdKbIhPk9GiK9bQJCcqCj2Ual6SFTndJ5DNxei8DGVF2
-         e++IlSQgRPd082iwJLNPlCKrVKSedW6SWbYAuV8YKIHlZ3V9Osm0jKf6NaDa5/8MJaBd
-         dARDXUEScOKGsXYEccBP+IM3wQl9Z7YBT97phvyqPa7mbNswkoq56FnN0EqG1/wCpvVS
-         WbVvCW1KAwboDqSdHVl5cwoWYAs22XWxmMCCtL9nXEc8tAP7nRJnbVwcUCRHXPzb9SlB
-         2EMEtSQSvoqHCQOSNKsUXLBJGt6nKI+wU9q4pINS72LopCt4c3RVZMg0PPSMuQhqA05X
-         ENCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112;
-        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
-         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=hUTsw3c3dGl69gFjc2IPLlLseEpyU+BsJ/tXKcVGvJE=;
-        b=xTGgOvuI08jsSAqJvS696XaUKyRN/hYmx+G0fIfuuiL6VLJMWi+4pEmUd6jQdovEPk
-         TThWG+AJ3BXo2uokPlZ0MoRG2hV36gma6fC2Jl3s+T0MXu4m4/wptmpuaVNQo6fIzYiN
-         qLJd7C38yix2sNdY+fT418KO0gPDE7xbLqRcHo5vayBpB+zUD9L6H7c0cAAwtHGqI1xa
-         IBX243/fV5HCI0o3rX3KhGXK3/GDODuqGZGE8wW7sDQgg75oqZGYHPayxCW7DAgv8D3X
-         WH0LzP/zzj5dHMT/XgTgZrmneNMamcirQCVuDZ+CMqTBAFgqYzv0Fl/sz/yxiXBdwmcQ
-         3OQw==
-X-Gm-Message-State: AO0yUKVh6T6VEj4V/EMKwWndkmawJdizGg+odNEeFAHRSAwGLrxYo5gf
-	Wa1S3TbYzaj06hciYO6dJpw=
-X-Google-Smtp-Source: AK7set+/N70WpQDEBCEnI2DY3oZ18dabG3BI02ASZ7Aq5pjZT+kZQ8aYZsNj2eWwNwtMnlKRydoyCg==
-X-Received: by 2002:ac2:5494:0:b0:4db:3605:9bdd with SMTP id t20-20020ac25494000000b004db36059bddmr2770417lfk.5.1677059352364;
-        Wed, 22 Feb 2023 01:49:12 -0800 (PST)
-Received: from eldfell ([194.136.85.206])
-        by smtp.gmail.com with ESMTPSA id q13-20020ac25a0d000000b004b578e52d81sm2121394lfn.176.2023.02.22.01.49.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Feb 2023 01:49:11 -0800 (PST)
-Date: Wed, 22 Feb 2023 11:49:00 +0200
-From: Pekka Paalanen <ppaalanen@gmail.com>
-To: Rob Clark <robdclark@gmail.com>
-Message-ID: <20230222114900.1b6baf95@eldfell>
-In-Reply-To: <CAF6AEGuMn3FywPkEtfJ7oZ16A0Bk2aiaRvj4si4od1d3wzXkPw@mail.gmail.com>
-References: <20230218211608.1630586-1-robdclark@gmail.com>
-	<20230218211608.1630586-7-robdclark@gmail.com>
-	<20230220105345.70e46fa5@eldfell>
-	<CAF6AEGv9fLQCD65ytRTGp=EkNB1QoZYH5ArphgGQALV9J08Cmw@mail.gmail.com>
-	<cdd5f892-49b9-1e22-4dc1-95a8a733c453@amd.com>
-	<CAF6AEGuMn3FywPkEtfJ7oZ16A0Bk2aiaRvj4si4od1d3wzXkPw@mail.gmail.com>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+	dkim=pass header.d=intel.com header.s=Intel header.b=n2lhYr3y;
+	spf=none (lists.linaro.org: domain of tvrtko.ursulin@linux.intel.com has no SPF policy when checking 192.55.52.93) smtp.mailfrom=tvrtko.ursulin@linux.intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1677061396; x=1708597396;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=dVAnUDy/qeaH7ic3s2Fok+Gc1I+0bKwabb4CdLxWZeo=;
+  b=n2lhYr3ysu43309AgNwED4rbgJpd+OcqdkPsWk4KQDeroEfWmw9gwDzM
+   wrj4g0qQMfuJHwbujhiryf/p3o9IaPD81ijLYb+RfRpR/sNymM35GLlVM
+   0fsTRrLVZ9S+++6bwjwQPg+XVuOOlMsSg4DliXkvKjAeuXSotgglNJsTk
+   6rjAevartCkn2zY6W7bLEEO0ttjtvOFP6TVzCPj7ATTyz6me3zZl8O6kS
+   ASDONzDrPHBI/aLb8ZHBH052f4c9gDrDcs0SqGJYv9U6/qFd4mYp7Svu/
+   YoywCnXBSL00uU6J0QAWDPcHE/+w+fp3oe3JtYrA1Y9Jk7P3cYGBHw9D0
+   g==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10628"; a="330614957"
+X-IronPort-AV: E=Sophos;i="5.97,318,1669104000";
+   d="scan'208";a="330614957"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Feb 2023 02:23:14 -0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10628"; a="814881408"
+X-IronPort-AV: E=Sophos;i="5.97,318,1669104000";
+   d="scan'208";a="814881408"
+Received: from hhammad-mobl1.ger.corp.intel.com (HELO [10.213.231.87]) ([10.213.231.87])
+  by fmsmga001-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Feb 2023 02:23:11 -0800
+Message-ID: <b65a2fe2-6f68-2116-9599-2940e66d166b@linux.intel.com>
+Date: Wed, 22 Feb 2023 10:23:09 +0000
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Content-Language: en-US
+To: Rob Clark <robdclark@gmail.com>, dri-devel@lists.freedesktop.org
+References: <20230218211608.1630586-1-robdclark@gmail.com>
+ <20230218211608.1630586-2-robdclark@gmail.com>
+From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+Organization: Intel Corporation UK Plc
+In-Reply-To: <20230218211608.1630586-2-robdclark@gmail.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: C5C793E96B
-X-Spamd-Bar: ----------
-X-Spamd-Result: default: False [-10.10 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[99.99%];
-	SIGNED_PGP(-2.00)[];
+X-Rspamd-Queue-Id: F2E973E96B
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.80 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-1.00)[194.136.85.206:received,209.85.167.54:from];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
-	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_CC(0.00)[amd.com,chromium.org,padovan.org,intel.com,gmail.com,daenzer.net,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,linaro.org];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	TAGGED_RCPT(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.54:from];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCVD_COUNT_THREE(0.00)[3];
-	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RCVD_TLS_LAST(0.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	RCVD_IN_DNSWL_HI(-0.50)[192.55.52.93:from];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	MIME_GOOD(-0.10)[text/plain];
+	R_SPF_NA(0.00)[no SPF record];
+	FREEMAIL_TO(0.00)[gmail.com,lists.freedesktop.org];
 	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: 2IIUD3W5I5WJS6GZLVLAULMUZ7VF3T3O
-X-Message-ID-Hash: 2IIUD3W5I5WJS6GZLVLAULMUZ7VF3T3O
-X-MailFrom: ppaalanen@gmail.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Luben Tuikov <luben.tuikov@amd.com>, Rob Clark <robdclark@chromium.org>, Gustavo Padovan <gustavo@padovan.org>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Michel =?UTF-8?B?RMOkbnplcg==?= <michel@daenzer.net>, open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:4983, ipnet:192.55.52.0/24, country:US];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[chromium.org,padovan.org,intel.com,gmail.com,daenzer.net,vger.kernel.org,linaro.org,lists.linaro.org,amd.com,lists.freedesktop.org];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[intel.com:+];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	TO_DN_SOME(0.00)[];
+	HAS_ORG_HEADER(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	MID_RHS_MATCH_FROM(0.00)[]
+Message-ID-Hash: QG4QJHOVJJCMIUORKSUS4A26CZGMTIZ6
+X-Message-ID-Hash: QG4QJHOVJJCMIUORKSUS4A26CZGMTIZ6
+X-MailFrom: tvrtko.ursulin@linux.intel.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Rob Clark <robdclark@chromium.org>, Gustavo Padovan <gustavo@padovan.org>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>, open list <linux-kernel@vger.kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Pekka Paalanen <ppaalanen@gmail.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 06/14] dma-buf/sync_file: Support (E)POLLPRI
+Subject: [Linaro-mm-sig] Re: [PATCH v4 01/14] dma-buf/dma-fence: Add deadline awareness
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2IIUD3W5I5WJS6GZLVLAULMUZ7VF3T3O/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QG4QJHOVJJCMIUORKSUS4A26CZGMTIZ6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============4152921927837211060=="
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
---===============4152921927837211060==
-Content-Type: multipart/signed; boundary="Sig_/vMp1DRNCFLeCBFsykIrKQNo";
- protocol="application/pgp-signature"; micalg=pgp-sha256
-
---Sig_/vMp1DRNCFLeCBFsykIrKQNo
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, 21 Feb 2023 09:53:56 -0800
-Rob Clark <robdclark@gmail.com> wrote:
-
-> On Tue, Feb 21, 2023 at 8:48 AM Luben Tuikov <luben.tuikov@amd.com> wrote:
-> >
-> > On 2023-02-20 11:14, Rob Clark wrote: =20
-> > > On Mon, Feb 20, 2023 at 12:53 AM Pekka Paalanen <ppaalanen@gmail.com>=
- wrote: =20
-> > >>
-> > >> On Sat, 18 Feb 2023 13:15:49 -0800
-> > >> Rob Clark <robdclark@gmail.com> wrote:
-> > >> =20
-> > >>> From: Rob Clark <robdclark@chromium.org>
-> > >>>
-> > >>> Allow userspace to use the EPOLLPRI/POLLPRI flag to indicate an urg=
-ent
-> > >>> wait (as opposed to a "housekeeping" wait to know when to cleanup a=
-fter
-> > >>> some work has completed).  Usermode components of GPU driver stacks
-> > >>> often poll() on fence fd's to know when it is safe to do things like
-> > >>> free or reuse a buffer, but they can also poll() on a fence fd when
-> > >>> waiting to read back results from the GPU.  The EPOLLPRI/POLLPRI fl=
-ag
-> > >>> lets the kernel differentiate these two cases.
-> > >>>
-> > >>> Signed-off-by: Rob Clark <robdclark@chromium.org> =20
-> > >>
-> > >> Hi,
-> > >>
-> > >> where would the UAPI documentation of this go?
-> > >> It seems to be missing. =20
-> > >
-> > > Good question, I am not sure.  The poll() man page has a description,
-> > > but my usage doesn't fit that _exactly_ (but OTOH the description is a
-> > > bit vague).
-> > > =20
-> > >> If a Wayland compositor is polling application fences to know which
-> > >> client buffer to use in its rendering, should the compositor poll wi=
-th
-> > >> PRI or not? If a compositor polls with PRI, then all fences from all
-> > >> applications would always be PRI. Would that be harmful somehow or
-> > >> would it be beneficial? =20
-> > >
-> > > I think a compositor would rather use the deadline ioctl and then poll
-> > > without PRI.  Otherwise you are giving an urgency signal to the fence
-> > > signaller which might not necessarily be needed.
-> > >
-> > > The places where I expect PRI to be useful is more in mesa (things
-> > > like glFinish(), readpix, and other similar sorts of blocking APIs) =
-=20
-> > Hi,
-> >
-> > Hmm, but then user-space could do the opposite, namely, submit work as =
-usual--never
-> > using the SET_DEADLINE ioctl, and then at the end, poll using (E)POLLPR=
-I. That seems
-> > like a possible usage pattern, unintended--maybe, but possible. Do we w=
-ant to discourage
-> > this? Wouldn't SET_DEADLINE be enough? I mean, one can call SET_DEADLIN=
-E with the current
-> > time, and then wouldn't that be equivalent to (E)POLLPRI? =20
->=20
-> Yeah, (E)POLLPRI isn't strictly needed if we have SET_DEADLINE.  It is
-> slightly more convenient if you want an immediate deadline (single
-> syscall instead of two), but not strictly needed.  OTOH it piggy-backs
-> on existing UABI.
-
-In that case, I would be conservative, and not add the POLLPRI
-semantics. An UAPI addition that is not strictly needed and somewhat
-unclear if it violates any design principles is best not done, until it
-is proven to be beneficial.
-
-Besides, a Wayland compositor does not necessary need to add the fd
-to its main event loop for poll. It could just SET_DEADLINE, and then
-when it renders simply check if the fence passed or not already. Not
-polling means the compositor does not need to wake up at the moment the
-fence signals to just record a flag.
-
-On another matter, if the application uses SET_DEADLINE with one
-timestamp, and the compositor uses SET_DEADLINE on the same thing with
-another timestamp, what should happen?
-
-Maybe it's a soft-realtime app whose primary goal is not display, and
-it needs the result faster than the window server?
-
-Maybe SET_DEADLINE should set the deadline only to an earlier timestamp
-and never later?
-
-
-Thanks,
-pq
-
---Sig_/vMp1DRNCFLeCBFsykIrKQNo
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmP15QwACgkQI1/ltBGq
-qqfMTQ/9FH4Z7EQ5jdc+1jGvO29uR7Ih0y1/k/wFFU3l7XCftBRKTn040aMGRnq7
-fQTG3rTSC47mHT2FlwO+gXfwHpW1z80FOy9tD/fl2CDmqxqJbHE6DyGYdFMjzK5y
-920v4kfJFeJ99CLssA6yQwxlfobHP+M3rbX0cFTOJ0YGeP8ZY3DyQng4lZgwa2wD
-/MYnAs+589mU93gBEB/rUWKbHIFnZFv7psLpf7iP3aRU7muQAieSMpJGWtW1f/M4
-YMPMAAJagplQAfwDhbBFMBNz2dJpzUFiCk4uPYSLh+ysD6KhR4K+LYBrlC237Obe
-9dSrnuaL0hfzkedElz/edHetggNhvPzoYgJlf+VqjoXwNwDN1IFYW9RGeikAvFhr
-7tK+yxIDHwB/grglQFEiaF8+BrUMAuXWc2IgIuZvG0blE/6JxEvfeh7mBT+R2kF0
-1xAdrFGrPw7/ALH5bvGLfOCkY8pTC+QBkwknGDZGszr1pP6gs0tUHI0uqonAPQ6k
-b+TmMJA8OtC/Te6fk7NSDvvxNjtRupS+M0c9avOVc3LrWpIK0SDi5RSIz0MSzXfr
-/2lo3AUYiY6GYt59msHwnNPK8jVvSLxs3yR0q6LE/2MICreclpVXxiUsP7SfBNR0
-VWlFWhFMQjiZWdS4m3ZZBoEn8JR7fTBPIXVCUQgX0+X7D6oQlJg=
-=+sLE
------END PGP SIGNATURE-----
-
---Sig_/vMp1DRNCFLeCBFsykIrKQNo--
-
---===============4152921927837211060==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============4152921927837211060==--
+DQpPbiAxOC8wMi8yMDIzIDIxOjE1LCBSb2IgQ2xhcmsgd3JvdGU6DQo+IEZyb206IFJvYiBDbGFy
+ayA8cm9iZGNsYXJrQGNocm9taXVtLm9yZz4NCj4gDQo+IEFkZCBhIHdheSB0byBoaW50IHRvIHRo
+ZSBmZW5jZSBzaWduYWxlciBvZiBhbiB1cGNvbWluZyBkZWFkbGluZSwgc3VjaCBhcw0KPiB2Ymxh
+bmssIHdoaWNoIHRoZSBmZW5jZSB3YWl0ZXIgd291bGQgcHJlZmVyIG5vdCB0byBtaXNzLiAgVGhp
+cyBpcyB0byBhaWQNCj4gdGhlIGZlbmNlIHNpZ25hbGVyIGluIG1ha2luZyBwb3dlciBtYW5hZ2Vt
+ZW50IGRlY2lzaW9ucywgbGlrZSBib29zdGluZw0KPiBmcmVxdWVuY3kgYXMgdGhlIGRlYWRsaW5l
+IGFwcHJvYWNoZXMgYW5kIGF3YXJlbmVzcyBvZiBtaXNzaW5nIGRlYWRsaW5lcw0KPiBzbyB0aGF0
+IGNhbiBiZSBmYWN0b3JlZCBpbiB0byB0aGUgZnJlcXVlbmN5IHNjYWxpbmcuDQo+IA0KPiB2Mjog
+RHJvcCBkbWFfZmVuY2U6OmRlYWRsaW5lIGFuZCByZWxhdGVkIGxvZ2ljIHRvIGZpbHRlciBkdXBs
+aWNhdGUNCj4gICAgICBkZWFkbGluZXMsIHRvIGF2b2lkIGluY3JlYXNpbmcgZG1hX2ZlbmNlIHNp
+emUuICBUaGUgZmVuY2UtY29udGV4dA0KPiAgICAgIGltcGxlbWVudGF0aW9uIHdpbGwgbmVlZCBz
+aW1pbGFyIGxvZ2ljIHRvIHRyYWNrIGRlYWRsaW5lcyBvZiBhbGwNCj4gICAgICB0aGUgZmVuY2Vz
+IG9uIHRoZSBzYW1lIHRpbWVsaW5lLiAgW2Nrb2VuaWddDQo+IHYzOiBDbGFyaWZ5IGxvY2tpbmcg
+d3J0LiBzZXRfZGVhZGxpbmUgY2FsbGJhY2sNCj4gDQo+IFNpZ25lZC1vZmYtYnk6IFJvYiBDbGFy
+ayA8cm9iZGNsYXJrQGNocm9taXVtLm9yZz4NCj4gUmV2aWV3ZWQtYnk6IENocmlzdGlhbiBLw7Zu
+aWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCj4gLS0tDQo+ICAgZHJpdmVycy9kbWEtYnVm
+L2RtYS1mZW5jZS5jIHwgMjAgKysrKysrKysrKysrKysrKysrKysNCj4gICBpbmNsdWRlL2xpbnV4
+L2RtYS1mZW5jZS5oICAgfCAyMCArKysrKysrKysrKysrKysrKysrKw0KPiAgIDIgZmlsZXMgY2hh
+bmdlZCwgNDAgaW5zZXJ0aW9ucygrKQ0KPiANCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1
+Zi9kbWEtZmVuY2UuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYw0KPiBpbmRleCAwZGUw
+NDgyY2QzNmUuLjc2M2IzMjYyNzY4NCAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2Rt
+YS1mZW5jZS5jDQo+ICsrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYw0KPiBAQCAtOTEy
+LDYgKzkxMiwyNiBAQCBkbWFfZmVuY2Vfd2FpdF9hbnlfdGltZW91dChzdHJ1Y3QgZG1hX2ZlbmNl
+ICoqZmVuY2VzLCB1aW50MzJfdCBjb3VudCwNCj4gICB9DQo+ICAgRVhQT1JUX1NZTUJPTChkbWFf
+ZmVuY2Vfd2FpdF9hbnlfdGltZW91dCk7DQo+ICAgDQo+ICsNCj4gKy8qKg0KPiArICogZG1hX2Zl
+bmNlX3NldF9kZWFkbGluZSAtIHNldCBkZXNpcmVkIGZlbmNlLXdhaXQgZGVhZGxpbmUNCj4gKyAq
+IEBmZW5jZTogICAgdGhlIGZlbmNlIHRoYXQgaXMgdG8gYmUgd2FpdGVkIG9uDQo+ICsgKiBAZGVh
+ZGxpbmU6IHRoZSB0aW1lIGJ5IHdoaWNoIHRoZSB3YWl0ZXIgaG9wZXMgZm9yIHRoZSBmZW5jZSB0
+byBiZQ0KPiArICogICAgICAgICAgICBzaWduYWxlZA0KPiArICoNCj4gKyAqIEluZm9ybSB0aGUg
+ZmVuY2Ugc2lnbmFsZXIgb2YgYW4gdXBjb21pbmcgZGVhZGxpbmUsIHN1Y2ggYXMgdmJsYW5rLCBi
+eQ0KPiArICogd2hpY2ggcG9pbnQgdGhlIHdhaXRlciB3b3VsZCBwcmVmZXIgdGhlIGZlbmNlIHRv
+IGJlIHNpZ25hbGVkIGJ5LiAgVGhpcw0KPiArICogaXMgaW50ZW5kZWQgdG8gZ2l2ZSBmZWVkYmFj
+ayB0byB0aGUgZmVuY2Ugc2lnbmFsZXIgdG8gYWlkIGluIHBvd2VyDQo+ICsgKiBtYW5hZ2VtZW50
+IGRlY2lzaW9ucywgc3VjaCBhcyBib29zdGluZyBHUFUgZnJlcXVlbmN5IGlmIGEgcGVyaW9kaWMN
+Cj4gKyAqIHZibGFuayBkZWFkbGluZSBpcyBhcHByb2FjaGluZy4NCj4gKyAqLw0KPiArdm9pZCBk
+bWFfZmVuY2Vfc2V0X2RlYWRsaW5lKHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlLCBrdGltZV90IGRl
+YWRsaW5lKQ0KPiArew0KPiArCWlmIChmZW5jZS0+b3BzLT5zZXRfZGVhZGxpbmUgJiYgIWRtYV9m
+ZW5jZV9pc19zaWduYWxlZChmZW5jZSkpDQo+ICsJCWZlbmNlLT5vcHMtPnNldF9kZWFkbGluZShm
+ZW5jZSwgZGVhZGxpbmUpOw0KPiArfQ0KPiArRVhQT1JUX1NZTUJPTChkbWFfZmVuY2Vfc2V0X2Rl
+YWRsaW5lKTsNCj4gKw0KPiAgIC8qKg0KPiAgICAqIGRtYV9mZW5jZV9kZXNjcmliZSAtIER1bXAg
+ZmVuY2UgZGVzY3JpYnRpb24gaW50byBzZXFfZmlsZQ0KPiAgICAqIEBmZW5jZTogdGhlIDZmZW5j
+ZSB0byBkZXNjcmliZQ0KPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC9kbWEtZmVuY2UuaCBi
+L2luY2x1ZGUvbGludXgvZG1hLWZlbmNlLmgNCj4gaW5kZXggNzc1Y2RjMGI0ZjI0Li5kNzdmNjU5
+MWM0NTMgMTAwNjQ0DQo+IC0tLSBhL2luY2x1ZGUvbGludXgvZG1hLWZlbmNlLmgNCj4gKysrIGIv
+aW5jbHVkZS9saW51eC9kbWEtZmVuY2UuaA0KPiBAQCAtOTksNiArOTksNyBAQCBlbnVtIGRtYV9m
+ZW5jZV9mbGFnX2JpdHMgew0KPiAgIAlETUFfRkVOQ0VfRkxBR19TSUdOQUxFRF9CSVQsDQo+ICAg
+CURNQV9GRU5DRV9GTEFHX1RJTUVTVEFNUF9CSVQsDQo+ICAgCURNQV9GRU5DRV9GTEFHX0VOQUJM
+RV9TSUdOQUxfQklULA0KPiArCURNQV9GRU5DRV9GTEFHX0hBU19ERUFETElORV9CSVQsDQoNCldv
+dWxkIHRoaXMgYml0IGJlIGJldHRlciBsZWZ0IG91dCBmcm9tIGNvcmUgaW1wbGVtZW50YXRpb24s
+IGdpdmVuIGhvdyANCnRoZSBhcHByb2FjaCBpcyB0aGUgY29tcG9uZW50IHdoaWNoIGltcGxlbWVu
+dHMgZG1hLWZlbmNlIGhhcyB0byB0cmFjayANCnRoZSBhY3R1YWwgZGVhZGxpbmUgYW5kIGFsbD8N
+Cg0KQWxzbyB0YWtpbmcgYSBzdGVwIGJhY2sgLSBhcmUgd2UgYWxsIG9rYXkgd2l0aCBzdGFydGlu
+ZyB0byBleHBhbmQgdGhlIA0KcmVsYXRpdmVseSBzaW1wbGUgY29yZSBzeW5jaHJvbmlzYXRpb24g
+cHJpbWl0aXZlIHdpdGggc2lkZSBjaGFubmVsIGRhdGEgDQpsaWtlIHRoaXM/IFdoYXQgd291bGQg
+YmUgdGhlIGNyaXRlcmlhIGZvciB3aGF0IHNpZGUgY2hhbm5lbCBkYXRhIHdvdWxkIA0KYmUgYWNj
+ZXB0YWJsZT8gVGFraW5nIG5vdGUgdGhlIHRoaW5nIGxpdmVzIG91dHNpZGUgZHJpdmVycy9ncHUv
+Lg0KDQpSZWdhcmRzLA0KDQpUdnJ0a28NCg0KPiAgIAlETUFfRkVOQ0VfRkxBR19VU0VSX0JJVFMs
+IC8qIG11c3QgYWx3YXlzIGJlIGxhc3QgbWVtYmVyICovDQo+ICAgfTsNCj4gICANCj4gQEAgLTI1
+Nyw2ICsyNTgsMjMgQEAgc3RydWN0IGRtYV9mZW5jZV9vcHMgew0KPiAgIAkgKi8NCj4gICAJdm9p
+ZCAoKnRpbWVsaW5lX3ZhbHVlX3N0cikoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UsDQo+ICAgCQkJ
+CSAgIGNoYXIgKnN0ciwgaW50IHNpemUpOw0KPiArDQo+ICsJLyoqDQo+ICsJICogQHNldF9kZWFk
+bGluZToNCj4gKwkgKg0KPiArCSAqIENhbGxiYWNrIHRvIGFsbG93IGEgZmVuY2Ugd2FpdGVyIHRv
+IGluZm9ybSB0aGUgZmVuY2Ugc2lnbmFsZXIgb2YNCj4gKwkgKiBhbiB1cGNvbWluZyBkZWFkbGlu
+ZSwgc3VjaCBhcyB2YmxhbmssIGJ5IHdoaWNoIHBvaW50IHRoZSB3YWl0ZXINCj4gKwkgKiB3b3Vs
+ZCBwcmVmZXIgdGhlIGZlbmNlIHRvIGJlIHNpZ25hbGVkIGJ5LiAgVGhpcyBpcyBpbnRlbmRlZCB0
+bw0KPiArCSAqIGdpdmUgZmVlZGJhY2sgdG8gdGhlIGZlbmNlIHNpZ25hbGVyIHRvIGFpZCBpbiBw
+b3dlciBtYW5hZ2VtZW50DQo+ICsJICogZGVjaXNpb25zLCBzdWNoIGFzIGJvb3N0aW5nIEdQVSBm
+cmVxdWVuY3kuDQo+ICsJICoNCj4gKwkgKiBUaGlzIGlzIGNhbGxlZCB3aXRob3V0ICZkbWFfZmVu
+Y2UubG9jayBoZWxkLCBpdCBjYW4gYmUgY2FsbGVkDQo+ICsJICogbXVsdGlwbGUgdGltZXMgYW5k
+IGZyb20gYW55IGNvbnRleHQuICBMb2NraW5nIGlzIHVwIHRvIHRoZSBjYWxsZWUNCj4gKwkgKiBp
+ZiBpdCBoYXMgc29tZSBzdGF0ZSB0byBtYW5hZ2UuDQo+ICsJICoNCj4gKwkgKiBUaGlzIGNhbGxi
+YWNrIGlzIG9wdGlvbmFsLg0KPiArCSAqLw0KPiArCXZvaWQgKCpzZXRfZGVhZGxpbmUpKHN0cnVj
+dCBkbWFfZmVuY2UgKmZlbmNlLCBrdGltZV90IGRlYWRsaW5lKTsNCj4gICB9Ow0KPiAgIA0KPiAg
+IHZvaWQgZG1hX2ZlbmNlX2luaXQoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UsIGNvbnN0IHN0cnVj
+dCBkbWFfZmVuY2Vfb3BzICpvcHMsDQo+IEBAIC01ODMsNiArNjAxLDggQEAgc3RhdGljIGlubGlu
+ZSBzaWduZWQgbG9uZyBkbWFfZmVuY2Vfd2FpdChzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSwgYm9v
+bCBpbnRyKQ0KPiAgIAlyZXR1cm4gcmV0IDwgMCA/IHJldCA6IDA7DQo+ICAgfQ0KPiAgIA0KPiAr
+dm9pZCBkbWFfZmVuY2Vfc2V0X2RlYWRsaW5lKHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlLCBrdGlt
+ZV90IGRlYWRsaW5lKTsNCj4gKw0KPiAgIHN0cnVjdCBkbWFfZmVuY2UgKmRtYV9mZW5jZV9nZXRf
+c3R1Yih2b2lkKTsNCj4gICBzdHJ1Y3QgZG1hX2ZlbmNlICpkbWFfZmVuY2VfYWxsb2NhdGVfcHJp
+dmF0ZV9zdHViKHZvaWQpOw0KPiAgIHU2NCBkbWFfZmVuY2VfY29udGV4dF9hbGxvYyh1bnNpZ25l
+ZCBudW0pOw0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
+TGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8u
+b3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBs
+aXN0cy5saW5hcm8ub3JnCg==
