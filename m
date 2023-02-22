@@ -2,240 +2,136 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DCD169F2AE
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 11:27:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 66C3169F2B3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 11:27:26 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6B3C63E95C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 10:27:02 +0000 (UTC)
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com (mail-sn1nam02on2074.outbound.protection.outlook.com [40.107.96.74])
-	by lists.linaro.org (Postfix) with ESMTPS id 366833EA27
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Feb 2023 10:26:43 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6DE933EC67
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Feb 2023 10:27:25 +0000 (UTC)
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by lists.linaro.org (Postfix) with ESMTPS id EAFB13EC4C
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 22 Feb 2023 10:27:06 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=5DGbZ62b;
-	spf=pass (lists.linaro.org: domain of Luben.Tuikov@amd.com designates 40.107.96.74 as permitted sender) smtp.mailfrom=Luben.Tuikov@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=n02WvV+5Rs/VhV/P+Z9n8RCpCFwGRWvKqvUv1FYEBvVIFpXch0yHXTygUq6oU1UMrpPEh6XQ7Im/+3XzLSsPageK4PxjjiRTid5Uu5lTzc2P7NqvkzJz/DQVPso4pZMWUu881HtZA9hpTbOSAieEeN0HbJAvnm9n5P3zFBwRKBPjNPX2GF4xRCOhsaosfvJtcGJxaCtj1+O8oOXJkdecLyCDxjnYQNTcwWREygwzQPZeFcShO3lq+Vjx6sqKWz4cj6YAvuARiEfQ/6V42ZqcdQz9zg5vD87pyZuw3uI5EQpMfn1IThPqMKIiJoRMAc2n8v+OeW5jpMRZ9j118T+SbQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=C8IlzZW2eCqQVMbpjg88fLluzaKQls9HWkgwQOmqzv0=;
- b=MrpbhALPbrivflP9K7VjiZPCPK9Zi8+5VLFCwTd/M2Ja3wBOeQsrgJo2uI3UemXIa0TP1h8ZmdN5BnfHnE/Y+6fu2/1tLMoDmGLkkWPwWjcxF2EeCAxMFIuV1yEAKmrPXluf4HeqHPBtmwVFQv7LR6WHUg7afS8xZkF7nV9ri168uZ2TP86ATwViJFVNkcGN+8b3QmgGQvb7Bczm8gfkt0GVAvTHAcZQl82IbLRjbLLiX6TREyzRcrZtSY5Qgy8B4cdURQAXJ2p42fgaxG8MNuRUr3/meIvLe5wS6vUx/w4YvEVyqd71AGTOZDXJxS9Ik9D7jqahwQ5o5FJDvXHRbg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=C8IlzZW2eCqQVMbpjg88fLluzaKQls9HWkgwQOmqzv0=;
- b=5DGbZ62b1RfkKo6ybIeiELCL8XFSdgDVkLVla7YDCRvT7uKUGbwX4FUkvFZ7q0O72hrMTX1Y32JsPcnYVcBr9ekKEmJmOOGH0VicT4R5/rMScsc/kMLTkEHtBDya/aDpyz86XcBcX3KOXdwM6MzqnbI74LbrAtoYukQrw/k1/KI=
-Received: from DM6PR12MB3370.namprd12.prod.outlook.com (2603:10b6:5:38::25) by
- IA1PR12MB8192.namprd12.prod.outlook.com (2603:10b6:208:3f9::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6111.20; Wed, 22 Feb
- 2023 10:26:40 +0000
-Received: from DM6PR12MB3370.namprd12.prod.outlook.com
- ([fe80::4df2:b32a:e628:c57e]) by DM6PR12MB3370.namprd12.prod.outlook.com
- ([fe80::4df2:b32a:e628:c57e%7]) with mapi id 15.20.6134.019; Wed, 22 Feb 2023
- 10:26:40 +0000
-Message-ID: <0e781fd6-5188-35c6-6cdb-09ce8c0035dd@amd.com>
-Date: Wed, 22 Feb 2023 05:26:37 -0500
+	dkim=pass header.d=intel.com header.s=Intel header.b=bCjVQJUX;
+	spf=none (lists.linaro.org: domain of tvrtko.ursulin@linux.intel.com has no SPF policy when checking 192.55.52.93) smtp.mailfrom=tvrtko.ursulin@linux.intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1677061627; x=1708597627;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=ROYBNvdshjuHZw4os+dyBA0uMZJ7aJNn9ECIXz0QvQo=;
+  b=bCjVQJUXWbLAWpbo0roP6zGLvrPG7enSs7LOxYxUrpbJlmskK6jFPx2D
+   qB+l9LwxgTuANJEQz7tGr5YiuVfuqqRdZ+9KWM/rSBaE1xT2qqOjtLeGO
+   4zc/+3ZeybtBtgyGCXEtujaGYevbpcS+TEduErXAfpEoq8ltm0dLnfpMC
+   5EXBYYDe1cHHCKP65A8S/r9OlADeVlNW3PhuhpfePfRWli+zIhTNEutfr
+   xpeKDyUisTRW4/PdmZSVQra8m0uxzFCBL3n0ZMBg7a39nBDwDnkBCYZ9G
+   GGSIM4io8lNhUcQqLAblXjBFgZvOH1PyfLGdUXrwhXr9CEOqhPd9YRei1
+   A==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10628"; a="330615652"
+X-IronPort-AV: E=Sophos;i="5.97,318,1669104000";
+   d="scan'208";a="330615652"
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Feb 2023 02:27:06 -0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10628"; a="846081123"
+X-IronPort-AV: E=Sophos;i="5.97,318,1669104000";
+   d="scan'208";a="846081123"
+Received: from hhammad-mobl1.ger.corp.intel.com (HELO [10.213.231.87]) ([10.213.231.87])
+  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Feb 2023 02:27:02 -0800
+Message-ID: <b056a87c-b6b2-25e0-25c7-f7d422793a3e@linux.intel.com>
+Date: Wed, 22 Feb 2023 10:27:00 +0000
+MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Content-Language: en-CA
-To: Pekka Paalanen <ppaalanen@gmail.com>, Rob Clark <robdclark@gmail.com>
+Content-Language: en-US
+To: Rob Clark <robdclark@gmail.com>, dri-devel@lists.freedesktop.org
 References: <20230218211608.1630586-1-robdclark@gmail.com>
- <20230218211608.1630586-7-robdclark@gmail.com>
- <20230220105345.70e46fa5@eldfell>
- <CAF6AEGv9fLQCD65ytRTGp=EkNB1QoZYH5ArphgGQALV9J08Cmw@mail.gmail.com>
- <cdd5f892-49b9-1e22-4dc1-95a8a733c453@amd.com>
- <CAF6AEGuMn3FywPkEtfJ7oZ16A0Bk2aiaRvj4si4od1d3wzXkPw@mail.gmail.com>
- <20230222114900.1b6baf95@eldfell>
-From: Luben Tuikov <luben.tuikov@amd.com>
-In-Reply-To: <20230222114900.1b6baf95@eldfell>
-X-ClientProxiedBy: YT4PR01CA0014.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:d1::6) To DM6PR12MB3370.namprd12.prod.outlook.com
- (2603:10b6:5:38::25)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR12MB3370:EE_|IA1PR12MB8192:EE_
-X-MS-Office365-Filtering-Correlation-Id: a9dc5304-f6d7-4154-b13c-08db14bf48f2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	E+/P0x8M6UCE55B71e5uA5UqWayD13TSOs5Z+YCmXQbn40DMEA4Y6dxtTV9Sh92g3KTeurMCOvydLbkoJ5B9DcN+PC66B2DoPWWDo//hHMp8D/XSj2mMrWvFz0EntbS9N/QbZFDinTxkzDdR+LKt7cI4VxQbrPD6kYK8cWCOl+u/O0lW69/W8xKLRBKAXLgO3AkM6AmYhBjNemjh1YFjiIF6n7/rclD7nA6evCac8XCOx2IS/HSaDr5zVll3+aORw1zZFPYD9IYHdYSy7Fd5H5P40DkWK4oPAC/bBCEqIBDLF+gXck3zZOPd2HNMpvawsPqXIe4KUb1rak2HTWyl5uYAypZwsQuGcLI2rnSbuHo3GG5pxAlKvxWWkTaeUc3nB70Kn0prWVFldaTqmfZRfovts8R8CxY8+LvID6sjrMQ5GlQ0gujlYIXpw/vICU/0usCUYlkATb2huQegUgg44KgPSQUljApLq2DDzIPbyGq+YXMpDcStmOONGq6YYmV/AuETr7v7Rz9Hci9eMJjAqZarFvQg2I1ZR+Kzy6C6ej0Dji8mg9tJKWVpUgsmeMfe4DME6foQsyynZnTB0bN6ObTFwJlbL5ezSKWROa7XynGDGGX1joOId+dYvJa+2CvdUfvTmOrpz/DwgNkeWY5Ut6jQPvIaM/0rUUUN6GCBYaxrOqX7iOiU9/utQ1QDUQpnMkYu3J0AdwFxff691aQ8wS9amnvOoa7RGi23yHdhnFI=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB3370.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(136003)(366004)(376002)(346002)(396003)(39860400002)(451199018)(66476007)(66556008)(31696002)(316002)(66946007)(53546011)(4326008)(41300700001)(8676002)(5660300002)(86362001)(2616005)(31686004)(83380400001)(6512007)(186003)(55236004)(26005)(6506007)(6666004)(6486002)(54906003)(110136005)(36756003)(2906002)(478600001)(38100700002)(8936002)(7416002)(44832011)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?RUp5WlNMaTNNTmVIUTE4Z3BVY1Q3RUljaW43cEk0aW5CWE8vdG03NjdnZ3NH?=
- =?utf-8?B?Tk1RcmtYNVQ1SlJWRkVDYVk2VklnL21mSmxnUFdUNE1nSCt4b1V2TFJiQWY0?=
- =?utf-8?B?bVZoU3ZVcHZNaUh4LzBFZURhYUtFdzdRN04zRi94ejUvNTVsQ1U3RW5lTHpz?=
- =?utf-8?B?WEgxQkFmbUt1N1JzcU95Tm9xRjBWY1hCOWc0YTR6NlZJR1FwQnBBRXZuZjdv?=
- =?utf-8?B?QWpFM1ZUdWFnd25nNUM3dUNmUzZYOEZtZ2hZTWYvQ2UxRlduci9RRGNhTTRq?=
- =?utf-8?B?b3RNZEY0MVBHUFhFQ0pMWGhaZXM2dW1MblRqbFc2RGh2dVR3SFNtOXJhQXdP?=
- =?utf-8?B?SjEvL0l0ZE5LVTBRUVU3eURFNTgzREtoR0xIM1BlNUk1M0NPRXl1RmpYTU1n?=
- =?utf-8?B?NjJUMFUxaXZ2MVBkc29EbHFxTFBiejJvZ2ZLMkZKZWp6Wjl0M3E3VHdzNlVP?=
- =?utf-8?B?c3kwbVZMR0RtZmRGc000V05UaG9iZjllYnoremdXQ1BvN3pETC9zZGZEeXVl?=
- =?utf-8?B?eXBSbFhleXpZbXNXektiakx0QmU5UHhCbkRLTDJ6WU1jNTM1aEF3eVh6NHY4?=
- =?utf-8?B?L3g4SkM0VmpDZGxJd1VqZlB0WXpoTFd6cmRTVHgydzY4cG5GTnp2blhJeUd0?=
- =?utf-8?B?dWlvcUNvSEpjcWtaa3hWV2gxMGo2M2pPS3R0SUtCVnB3dzIzMENVdytlOHUx?=
- =?utf-8?B?Qi9mc3h0M0EzdjlObk9iR3lOS2hBZFZyRjB3L09xN2xBY3FRRWRENXFjVVJr?=
- =?utf-8?B?elRrWDJTanJFdk9HeWtVeXI0TGFzZk1TS2Q4cTBVNG0xZTVpT004MFVIZ1Fu?=
- =?utf-8?B?REhDQ0k5MmlHc0hERFV4UVRHRnZodXFiMjBkd3BDbzBJeHFwM0M2bkh4TkNO?=
- =?utf-8?B?MUJyZnN1SWRiNGdSd21uZm5iVVdTdjhMcEo1USt0clVrOFRjSm5ISVZYVUpj?=
- =?utf-8?B?SlMrYnpES0hRUC9Fd0xDemlvK1lYMk5weTNIOE1KZFFSbU0rb2Urb0UrSVVs?=
- =?utf-8?B?ckJmdG5jaytPSjFDdFFJYW1DL2NZcWR3V3oxRytGRThYTmJuNUhLdXY5NHYr?=
- =?utf-8?B?ZXVjRkFuVERsU3RGRkFaU1Y0WEc1YzFHNytnNGFlaUhOMlNQMVNrZEZOVVF4?=
- =?utf-8?B?VnpZbEpqODArK0FHMlVRLzduS01FVzNwODRTVFBKU1UzRlJGaTFGWFBueVdn?=
- =?utf-8?B?N1hQMmhpZTRJamk1UENnNmRJK1NHWXBkZWJCV2ZCQjcyVXN6dDN1Y2dsWW81?=
- =?utf-8?B?MTlWSDE1UEFWOGZzSWhZNEJnUzdkZzN0ZmphTHRrZS9EMEtOTHRJUGVDMW8z?=
- =?utf-8?B?NUU5bHpHejRiNEtGUVl5VEl6dmdBcXlzL3pLV1dIYm1mY1JKbTc5KzltcWdU?=
- =?utf-8?B?Q1ZVYkxML3Jwb2J2NGdSREVRNjZyMGNPM0hvTC9oWHg0dFZBd1lpQVlJaWdq?=
- =?utf-8?B?WDErRTFiUHJma2FTZ3hxalhhT3FDcXo3czU0c0oxaVdQUzBnYW11L1BEZERw?=
- =?utf-8?B?SnV5MmpaazI5WUhNSVg0UFMyV1RHdzNUeWJnTVV3akFpalNwQWxlWnFWVlhn?=
- =?utf-8?B?YzZ4MU1nRGNqMXZYZ0NOM2NNTjk2Q0hPclc5QUZSR0gvZ0ZGeUlQTW5FdlJC?=
- =?utf-8?B?YjZtRG1Id21ialppSE8zelBVNTlBa2J3U1UzbTNKaDd2b0xKOUNXVnRLQVI4?=
- =?utf-8?B?Nm40Y01uWjVKTmpoOXBHTVFnR2J6M3NweVlOcGtPalJDNzJrVEpwY1p1ZlRH?=
- =?utf-8?B?WkVySjF1cEhIYnBYSDJpZ0pBZGhJVmdMaUhCK3N5d0NyUGlueCtiWXprcjJ3?=
- =?utf-8?B?Ylo3VUVEcDFiSFVZLzJja1hxZk5rSHo3K0RJYVgwdEVSenhYeVFyekFMYlQz?=
- =?utf-8?B?bHJmMW50cVY2SllUcUtqNFBzM21ISm4zVzBsRmtCNXc5VnRObTNGNjJURWFT?=
- =?utf-8?B?N1diblZqZWVnV1Z3YW1PSHEra29UWVFKRU0rOUFzaGJLdFhOaE5mS2puSW5a?=
- =?utf-8?B?L2RwTXJ3V1Ryd3gwWHpnbE04aFhJVjc1NFNrNDkrUEcwVy9BN0V1U0tRb1Ur?=
- =?utf-8?B?RnZQdlBqWjNwVUZITVBBd2dqOVNiUXFLdy9GbC9xV3VXb0lobmtyMDgwRHNt?=
- =?utf-8?Q?ovZmXCTRDt6SmvYEyS8cxfV65?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a9dc5304-f6d7-4154-b13c-08db14bf48f2
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3370.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Feb 2023 10:26:39.9949
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NqkvvL9Unu1qtP/BpC75XnGs2mqot8RGT06REukqBokpvgqOXTgi4tBexaT13OON
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8192
+ <20230218211608.1630586-4-robdclark@gmail.com>
+From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+Organization: Intel Corporation UK Plc
+In-Reply-To: <20230218211608.1630586-4-robdclark@gmail.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 366833EA27
-X-Spamd-Bar: --------
-X-Spamd-Result: default: False [-9.00 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[99.99%];
+X-Rspamd-Queue-Id: EAFB13EC4C
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.80 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	RCVD_IN_DNSWL_HI(-0.50)[40.107.96.74:from];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	RCVD_IN_DNSWL_HI(-0.50)[192.55.52.93:from];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MIME_GOOD(-0.10)[text/plain];
-	TAGGED_RCPT(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	FREEMAIL_CC(0.00)[chromium.org,padovan.org,intel.com,gmail.com,daenzer.net,vger.kernel.org,lists.freedesktop.org,amd.com,lists.linaro.org,linaro.org];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.96.74:from];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	DKIM_TRACE(0.00)[amd.com:+];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	R_SPF_NA(0.00)[no SPF record];
+	FREEMAIL_TO(0.00)[gmail.com,lists.freedesktop.org];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[]
-Message-ID-Hash: TGTAVL7JP44YJLW5AUEJVT7SSRX7WX77
-X-Message-ID-Hash: TGTAVL7JP44YJLW5AUEJVT7SSRX7WX77
-X-MailFrom: Luben.Tuikov@amd.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Rob Clark <robdclark@chromium.org>, Gustavo Padovan <gustavo@padovan.org>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>, open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>
+	ASN(0.00)[asn:4983, ipnet:192.55.52.0/24, country:US];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[chromium.org,padovan.org,intel.com,gmail.com,daenzer.net,vger.kernel.org,linaro.org,lists.linaro.org,amd.com,lists.freedesktop.org];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[intel.com:+];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	TO_DN_SOME(0.00)[];
+	HAS_ORG_HEADER(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	MID_RHS_MATCH_FROM(0.00)[]
+Message-ID-Hash: OKTYM4KCZTW6MPUUIB3LUWH5BUH77XEJ
+X-Message-ID-Hash: OKTYM4KCZTW6MPUUIB3LUWH5BUH77XEJ
+X-MailFrom: tvrtko.ursulin@linux.intel.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Rob Clark <robdclark@chromium.org>, Gustavo Padovan <gustavo@padovan.org>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>, open list <linux-kernel@vger.kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Pekka Paalanen <ppaalanen@gmail.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 06/14] dma-buf/sync_file: Support (E)POLLPRI
+Subject: [Linaro-mm-sig] Re: [PATCH v4 03/14] dma-buf/fence-chain: Add fence deadline support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TGTAVL7JP44YJLW5AUEJVT7SSRX7WX77/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OKTYM4KCZTW6MPUUIB3LUWH5BUH77XEJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-On 2023-02-22 04:49, Pekka Paalanen wrote:
-> On Tue, 21 Feb 2023 09:53:56 -0800
-> Rob Clark <robdclark@gmail.com> wrote:
-> 
->> On Tue, Feb 21, 2023 at 8:48 AM Luben Tuikov <luben.tuikov@amd.com> wrote:
->>>
->>> On 2023-02-20 11:14, Rob Clark wrote:  
->>>> On Mon, Feb 20, 2023 at 12:53 AM Pekka Paalanen <ppaalanen@gmail.com> wrote:  
->>>>>
->>>>> On Sat, 18 Feb 2023 13:15:49 -0800
->>>>> Rob Clark <robdclark@gmail.com> wrote:
->>>>>  
->>>>>> From: Rob Clark <robdclark@chromium.org>
->>>>>>
->>>>>> Allow userspace to use the EPOLLPRI/POLLPRI flag to indicate an urgent
->>>>>> wait (as opposed to a "housekeeping" wait to know when to cleanup after
->>>>>> some work has completed).  Usermode components of GPU driver stacks
->>>>>> often poll() on fence fd's to know when it is safe to do things like
->>>>>> free or reuse a buffer, but they can also poll() on a fence fd when
->>>>>> waiting to read back results from the GPU.  The EPOLLPRI/POLLPRI flag
->>>>>> lets the kernel differentiate these two cases.
->>>>>>
->>>>>> Signed-off-by: Rob Clark <robdclark@chromium.org>  
->>>>>
->>>>> Hi,
->>>>>
->>>>> where would the UAPI documentation of this go?
->>>>> It seems to be missing.  
->>>>
->>>> Good question, I am not sure.  The poll() man page has a description,
->>>> but my usage doesn't fit that _exactly_ (but OTOH the description is a
->>>> bit vague).
->>>>  
->>>>> If a Wayland compositor is polling application fences to know which
->>>>> client buffer to use in its rendering, should the compositor poll with
->>>>> PRI or not? If a compositor polls with PRI, then all fences from all
->>>>> applications would always be PRI. Would that be harmful somehow or
->>>>> would it be beneficial?  
->>>>
->>>> I think a compositor would rather use the deadline ioctl and then poll
->>>> without PRI.  Otherwise you are giving an urgency signal to the fence
->>>> signaller which might not necessarily be needed.
->>>>
->>>> The places where I expect PRI to be useful is more in mesa (things
->>>> like glFinish(), readpix, and other similar sorts of blocking APIs)  
->>> Hi,
->>>
->>> Hmm, but then user-space could do the opposite, namely, submit work as usual--never
->>> using the SET_DEADLINE ioctl, and then at the end, poll using (E)POLLPRI. That seems
->>> like a possible usage pattern, unintended--maybe, but possible. Do we want to discourage
->>> this? Wouldn't SET_DEADLINE be enough? I mean, one can call SET_DEADLINE with the current
->>> time, and then wouldn't that be equivalent to (E)POLLPRI?  
->>
->> Yeah, (E)POLLPRI isn't strictly needed if we have SET_DEADLINE.  It is
->> slightly more convenient if you want an immediate deadline (single
->> syscall instead of two), but not strictly needed.  OTOH it piggy-backs
->> on existing UABI.
-> 
-> In that case, I would be conservative, and not add the POLLPRI
-> semantics. An UAPI addition that is not strictly needed and somewhat
-> unclear if it violates any design principles is best not done, until it
-> is proven to be beneficial.
-
-That is my sentiment as well. Moreover, on hard-realtime systems,
-one would want to set the deadline at the outset and not at poll time.
--- 
-Regards,
-Luben
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+DQpPbiAxOC8wMi8yMDIzIDIxOjE1LCBSb2IgQ2xhcmsgd3JvdGU6DQo+IEZyb206IFJvYiBDbGFy
+ayA8cm9iZGNsYXJrQGNocm9taXVtLm9yZz4NCj4gDQo+IFByb3BhZ2F0ZSB0aGUgZGVhZGxpbmUg
+dG8gYWxsIHRoZSBmZW5jZXMgaW4gdGhlIGNoYWluLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogUm9i
+IENsYXJrIDxyb2JkY2xhcmtAY2hyb21pdW0ub3JnPg0KPiBSZXZpZXdlZC1ieTogQ2hyaXN0aWFu
+IEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPiBmb3IgdGhpcyBvbmUuDQo+IC0tLQ0K
+PiAgIGRyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UtY2hhaW4uYyB8IDEzICsrKysrKysrKysrKysN
+Cj4gICAxIGZpbGUgY2hhbmdlZCwgMTMgaW5zZXJ0aW9ucygrKQ0KPiANCj4gZGlmZiAtLWdpdCBh
+L2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UtY2hhaW4uYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEt
+ZmVuY2UtY2hhaW4uYw0KPiBpbmRleCBhMGQ5MjA1NzZiYTYuLjQ2ODQ4NzRhZjYxMiAxMDA2NDQN
+Cj4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS1jaGFpbi5jDQo+ICsrKyBiL2RyaXZl
+cnMvZG1hLWJ1Zi9kbWEtZmVuY2UtY2hhaW4uYw0KPiBAQCAtMjA2LDYgKzIwNiwxOCBAQCBzdGF0
+aWMgdm9pZCBkbWFfZmVuY2VfY2hhaW5fcmVsZWFzZShzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSkN
+Cj4gICAJZG1hX2ZlbmNlX2ZyZWUoZmVuY2UpOw0KPiAgIH0NCj4gICANCj4gKw0KPiArc3RhdGlj
+IHZvaWQgZG1hX2ZlbmNlX2NoYWluX3NldF9kZWFkbGluZShzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5j
+ZSwNCj4gKwkJCQkJIGt0aW1lX3QgZGVhZGxpbmUpDQo+ICt7DQo+ICsJZG1hX2ZlbmNlX2NoYWlu
+X2Zvcl9lYWNoKGZlbmNlLCBmZW5jZSkgew0KPiArCQlzdHJ1Y3QgZG1hX2ZlbmNlX2NoYWluICpj
+aGFpbiA9IHRvX2RtYV9mZW5jZV9jaGFpbihmZW5jZSk7DQo+ICsJCXN0cnVjdCBkbWFfZmVuY2Ug
+KmYgPSBjaGFpbiA/IGNoYWluLT5mZW5jZSA6IGZlbmNlOw0KDQpMb3cgbGV2ZWwgY29tbWVudCAt
+IGFib3ZlIHR3byBsaW5lcyBjb3VsZCBiZSByZXBsYWNlZCB3aXRoOg0KDQoJc3RydWN0IGRtYV9m
+ZW5jZSAqZiA9IGRtYV9mZW5jZV9jaGFpbl9jb250YWluZWQoZmVuY2UpOw0KDQpBbHRob3VnaCB0
+byBiZSBmYWlyIEkgYW0gbm90IHN1cmUgdGhhdCB3b3VsZG4ndCBiZSBtYWtpbmcgaXQgbGVzcyAN
+CnJlYWRhYmxlLiBGcm9tIHRoZSBwb2ludCBvZiB2aWV3IHRoYXQgZmVuY2UgbWlnaHQgbm90IGJl
+IGEgY2hhaW4sIHNvIA0KZG1hX2ZlbmNlX2NoYWluX2NvbnRhaW5lZCgpIHJlYWRzIGEgYml0IGRv
+ZGd5IGFzIGFuIEFQSS4NCg0KUmVnYXJkcywNCg0KVHZydGtvDQoNCj4gKw0KPiArCQlkbWFfZmVu
+Y2Vfc2V0X2RlYWRsaW5lKGYsIGRlYWRsaW5lKTsNCj4gKwl9DQo+ICt9DQo+ICsNCj4gICBjb25z
+dCBzdHJ1Y3QgZG1hX2ZlbmNlX29wcyBkbWFfZmVuY2VfY2hhaW5fb3BzID0gew0KPiAgIAkudXNl
+XzY0Yml0X3NlcW5vID0gdHJ1ZSwNCj4gICAJLmdldF9kcml2ZXJfbmFtZSA9IGRtYV9mZW5jZV9j
+aGFpbl9nZXRfZHJpdmVyX25hbWUsDQo+IEBAIC0yMTMsNiArMjI1LDcgQEAgY29uc3Qgc3RydWN0
+IGRtYV9mZW5jZV9vcHMgZG1hX2ZlbmNlX2NoYWluX29wcyA9IHsNCj4gICAJLmVuYWJsZV9zaWdu
+YWxpbmcgPSBkbWFfZmVuY2VfY2hhaW5fZW5hYmxlX3NpZ25hbGluZywNCj4gICAJLnNpZ25hbGVk
+ID0gZG1hX2ZlbmNlX2NoYWluX3NpZ25hbGVkLA0KPiAgIAkucmVsZWFzZSA9IGRtYV9mZW5jZV9j
+aGFpbl9yZWxlYXNlLA0KPiArCS5zZXRfZGVhZGxpbmUgPSBkbWFfZmVuY2VfY2hhaW5fc2V0X2Rl
+YWRsaW5lLA0KPiAgIH07DQo+ICAgRVhQT1JUX1NZTUJPTChkbWFfZmVuY2VfY2hhaW5fb3BzKTsN
+Cj4gICANCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxp
+bmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9y
+ZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlz
+dHMubGluYXJvLm9yZwo=
