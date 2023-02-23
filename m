@@ -2,199 +2,277 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD08C6A04A6
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Feb 2023 10:20:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8E2D6A0511
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Feb 2023 10:38:45 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9088C3F499
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Feb 2023 09:20:04 +0000 (UTC)
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
-	by lists.linaro.org (Postfix) with ESMTPS id 4AE203EC4B
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Feb 2023 09:19:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C441C41452
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 23 Feb 2023 09:38:44 +0000 (UTC)
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
+	by lists.linaro.org (Postfix) with ESMTPS id 8591B3EC4B
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Feb 2023 09:38:26 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b="gV3Nvd/I";
-	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.128.47 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=oiUx4lyn;
+	spf=pass (lists.linaro.org: domain of ppaalanen@gmail.com designates 209.85.167.46 as permitted sender) smtp.mailfrom=ppaalanen@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-wm1-f47.google.com with SMTP id o4-20020a05600c4fc400b003e1f5f2a29cso9419077wmq.4
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Feb 2023 01:19:45 -0800 (PST)
+Received: by mail-lf1-f46.google.com with SMTP id r27so10954764lfe.10
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 23 Feb 2023 01:38:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=aXb7GwfUN0cPM9ffS/TJOhN7coUOiUmAkZkN563cZ0A=;
-        b=gV3Nvd/I3sLagNtoe/0Nixb+GwdroCY8lEBmFhyEcjhaUSbT1MEjcQh8FvqXLxuU1V
-         88aqzk0OEArNRcvloLJBr5VvDZTR73SwtEpwh3tuxYARFyqfObt8DChHh4fnsb9qVj3c
-         EbNVB1O87gI2d4wJwCI3MpuOz3i3e0iuCUSXh/EWYbHrhaVXGpWKJcsNowaZFHQS/a8/
-         Rnw2npFalAOXK8yOWYfmjmPp97R5FiZGCCCWi1JUWoVfkT4Yo9Ug/hGphKZxXNGGCx0M
-         Oq+KlketkfabePRdMX5ybr/+v1bXmHn5xwY4zg7LNhUUQE+0VcP0YEBVdzJhiBZxS54y
-         qadA==
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=sPJZBdfYeiYu/pEVqIhxArG88zkDX05D9LrUBcw0tmY=;
+        b=oiUx4lyn6HwlWfwtbIkuzYOQpQHwCBEOkvxI6mbne9YnTqZrzK6lOzscy820qCilLr
+         Es4GlevUX3jCf60Xs63cZ+w0L0UcDNjcPUQQrtD8VZWcxJlhiUSP0geMFMsDqWbiv4vr
+         xJ65sjNhM0B+Sz6bV/f1U4acs9ZJEDlrbCWjSsb3vkdV/QDDIhnEfvLnUdJkbBrcdZQo
+         pv+2LjxBEBimaeyI2Q6b5eCYdXEvson0sbFuRcA7bChk/ZMce+toClOTIEv/uQ15jDQ5
+         r9KAp+KCWtjpUXhyXlz6vA6XM1IpBfCwwWO2wI7kfItQCaA0m5RKDZsfGxieRH6DHv1h
+         qauQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=aXb7GwfUN0cPM9ffS/TJOhN7coUOiUmAkZkN563cZ0A=;
-        b=Tn7zYvrcvysTHhdt7YhyxMI/QPfcHg+pxPDyzdh/d33sGWYPzCgIQXualBmampAqso
-         q5ug85Iiepb5l6tRubN0JkOh0WYceq4Tvds3HfwnnfHIEJ/ygmC4YytXLgpwGfCzGd1S
-         r7eTdhoO42aUfkEnjilJHWrBdcJa3HS6yAo+9qchMYR1nlGVi6UW2YRvEIXifaasuJ0c
-         B5ZsXt8kq8gEIWQSl7rJBn8zZGSusmvpEpL0RcFUdyBXp1RhTdwLp7miz20/pe5E8e8Y
-         +BqKlvysir5ly/KIU5C1jE0toLNGD6JDYn4yZ0hEquCWXfLoug8ed4DuYcoTiI/iVFj1
-         LCAA==
-X-Gm-Message-State: AO0yUKWmdqahjzhk8O4tq3TB9mLZESDGT+26XQOX1f+DWcdlZxX5Em4g
-	qdMq4ym+sRcRCUFLrSvYMts=
-X-Google-Smtp-Source: AK7set8Da8KLBgwP2TWYEXBmUT5TzKxe8bZF7sIVo4a4wryItNeUSucRY7Yf2Jh1alUa+EB0mBx+Xg==
-X-Received: by 2002:a05:600c:2a08:b0:3dc:5deb:40a0 with SMTP id w8-20020a05600c2a0800b003dc5deb40a0mr8297512wme.8.1677143984188;
-        Thu, 23 Feb 2023 01:19:44 -0800 (PST)
-Received: from [192.168.178.21] (p5b0ea2e7.dip0.t-ipconnect.de. [91.14.162.231])
-        by smtp.gmail.com with ESMTPSA id k18-20020a05600c409200b003db06224953sm11610441wmh.41.2023.02.23.01.19.41
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 23 Feb 2023 01:19:43 -0800 (PST)
-Message-ID: <5e66efbf-b33b-a3a2-9723-ea2be30a567d@gmail.com>
-Date: Thu, 23 Feb 2023 10:19:40 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Content-Language: en-US
-To: Rob Clark <robdclark@gmail.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=sPJZBdfYeiYu/pEVqIhxArG88zkDX05D9LrUBcw0tmY=;
+        b=ffRkbE0iDwDnJqtiXgjTcQhu2WKeSOQL/jdimHQDMZjonFLM5ndJ5QDby2Nl6dxIvK
+         R/335/rnKGbsfmlpwplCvB9o0hvMAJO0auY0voLKwgi5uRmHjVU1FNF/NXFlwCoRpBPw
+         bCnVny4mHTVpXX0pDiXZHuZ3pg2viM/1rVk1zaPl8A2wni8T62SLmZHUQZ0LMH1XmZj3
+         DPszePLys1ODm04HzwsI1mjb4aqB6DU2OGz+lw4KmQ/bP0pr+t2ReQY9TxMu9m/c7AWj
+         7qWJas5u7ESFiBbOh8TC61LRD8A1fwslnITzt1JfOu+/7lGjG19JjOJ77sTdU6AQ55Tr
+         mlwQ==
+X-Gm-Message-State: AO0yUKUEwsaxZ66CdAnyk1fkE8gxyQDByA1OjCzlz41tByWJIYDJvYnJ
+	2MBWVbz76V8Ue7AAVE3ng+k=
+X-Google-Smtp-Source: AK7set8Mpr0bKr4ysKLBDdby2vHXHBvOVJd3KSxqCOe2AAvE9AeUhmo4KeI0p+mIVlOGRAJQw8Uz4Q==
+X-Received: by 2002:ac2:491d:0:b0:4c0:2ddc:4559 with SMTP id n29-20020ac2491d000000b004c02ddc4559mr4065277lfi.69.1677145104953;
+        Thu, 23 Feb 2023 01:38:24 -0800 (PST)
+Received: from eldfell ([194.136.85.206])
+        by smtp.gmail.com with ESMTPSA id s10-20020a19ad4a000000b004cc5e97d356sm690498lfd.148.2023.02.23.01.38.24
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 23 Feb 2023 01:38:24 -0800 (PST)
+Date: Thu, 23 Feb 2023 11:38:14 +0200
+From: Pekka Paalanen <ppaalanen@gmail.com>
+To: Rob Clark <robdclark@gmail.com>
+Message-ID: <20230223113814.3010cedc@eldfell>
+In-Reply-To: <CAF6AEGs1_75gg+LCBj6=PH8Jn60PXiE+Kx_2636nP-+pajN8Hg@mail.gmail.com>
 References: <20230218211608.1630586-1-robdclark@gmail.com>
- <20230218211608.1630586-6-robdclark@gmail.com>
- <37ec0125-8d0b-7d87-321d-ed4c7c7b32a7@amd.com>
- <CAF6AEGtAHXQ05tWoXdbx3_TK+11+XN6J9wuXssSh3PswUhvwgg@mail.gmail.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <CAF6AEGtAHXQ05tWoXdbx3_TK+11+XN6J9wuXssSh3PswUhvwgg@mail.gmail.com>
+	<20230218211608.1630586-7-robdclark@gmail.com>
+	<20230220105345.70e46fa5@eldfell>
+	<CAF6AEGv9fLQCD65ytRTGp=EkNB1QoZYH5ArphgGQALV9J08Cmw@mail.gmail.com>
+	<cdd5f892-49b9-1e22-4dc1-95a8a733c453@amd.com>
+	<CAF6AEGuMn3FywPkEtfJ7oZ16A0Bk2aiaRvj4si4od1d3wzXkPw@mail.gmail.com>
+	<20230222114900.1b6baf95@eldfell>
+	<CAF6AEGs1_75gg+LCBj6=PH8Jn60PXiE+Kx_2636nP-+pajN8Hg@mail.gmail.com>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4AE203EC4B
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.00 / 15.00];
+X-Rspamd-Queue-Id: 8591B3EC4B
+X-Spamd-Bar: --------
+X-Spamd-Result: default: False [-8.10 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-1.00)[91.14.162.231:received,209.85.128.47:from];
+	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
-	MIME_GOOD(-0.10)[text/plain];
 	FROM_HAS_DN(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TAGGED_RCPT(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.46:from];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.47:from];
 	NEURAL_HAM(-0.00)[-1.000];
 	ARC_NA(0.00)[];
-	TAGGED_FROM(0.00)[];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
 	RCVD_COUNT_THREE(0.00)[3];
-	DKIM_TRACE(0.00)[gmail.com:+];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,amd.com];
-	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[amd.com,chromium.org,padovan.org,intel.com,gmail.com,daenzer.net,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,linaro.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,ffwll.ch,daenzer.net,intel.com,amd.com,gmail.com,emersion.fr,chromium.org,linaro.org,padovan.org,vger.kernel.org,lists.linaro.org]
-Message-ID-Hash: MDEOWUTGVUYCNUJCPI6JSOISNHIHKIER
-X-Message-ID-Hash: MDEOWUTGVUYCNUJCPI6JSOISNHIHKIER
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Pekka Paalanen <ppaalanen@gmail.com>, Simon Ser <contact@emersion.fr>, Rob Clark <robdclark@chromium.org>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>
+	FREEMAIL_TO(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
+Message-ID-Hash: IDRH2USM6G42KDAJMNAQ6ZS7SDL6EBBQ
+X-Message-ID-Hash: IDRH2USM6G42KDAJMNAQ6ZS7SDL6EBBQ
+X-MailFrom: ppaalanen@gmail.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Luben Tuikov <luben.tuikov@amd.com>, Rob Clark <robdclark@chromium.org>, Gustavo Padovan <gustavo@padovan.org>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Michel =?UTF-8?B?RMOkbnplcg==?= <michel@daenzer.net>, open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 05/14] dma-buf/sync_file: Add SET_DEADLINE ioctl
+Subject: [Linaro-mm-sig] Re: [PATCH v4 06/14] dma-buf/sync_file: Support (E)POLLPRI
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MDEOWUTGVUYCNUJCPI6JSOISNHIHKIER/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IDRH2USM6G42KDAJMNAQ6ZS7SDL6EBBQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4038614531358611265=="
 
-QW0gMjAuMDIuMjMgdW0gMTc6MDkgc2NocmllYiBSb2IgQ2xhcms6DQo+IE9uIE1vbiwgRmViIDIw
-LCAyMDIzIGF0IDEyOjI3IEFNIENocmlzdGlhbiBLw7ZuaWcNCj4gPGNocmlzdGlhbi5rb2VuaWdA
-YW1kLmNvbT4gd3JvdGU6DQo+PiBBbSAxOC4wMi4yMyB1bSAyMjoxNSBzY2hyaWViIFJvYiBDbGFy
-azoNCj4+PiBGcm9tOiBSb2IgQ2xhcmsgPHJvYmRjbGFya0BjaHJvbWl1bS5vcmc+DQo+Pj4NCj4+
-PiBUaGUgaW5pdGlhbCBwdXJwb3NlIGlzIGZvciBpZ3QgdGVzdHMsIGJ1dCB0aGlzIHdvdWxkIGFs
-c28gYmUgdXNlZnVsIGZvcg0KPj4+IGNvbXBvc2l0b3JzIHRoYXQgd2FpdCB1bnRpbCBjbG9zZSB0
-byB2YmxhbmsgZGVhZGxpbmUgdG8gbWFrZSBkZWNpc2lvbnMNCj4+PiBhYm91dCB3aGljaCBmcmFt
-ZSB0byBzaG93Lg0KPj4+DQo+Pj4gVGhlIGlndCB0ZXN0cyBjYW4gYmUgZm91bmQgYXQ6DQo+Pj4N
-Cj4+PiBodHRwczovL2dpdGxhYi5mcmVlZGVza3RvcC5vcmcvcm9iY2xhcmsvaWd0LWdwdS10b29s
-cy8tL2NvbW1pdHMvZmVuY2UtZGVhZGxpbmUNCj4+Pg0KPj4+IHYyOiBDbGFyaWZ5IHRoZSB0aW1l
-YmFzZSwgYWRkIGxpbmsgdG8gaWd0IHRlc3RzDQo+Pj4NCj4+PiBTaWduZWQtb2ZmLWJ5OiBSb2Ig
-Q2xhcmsgPHJvYmRjbGFya0BjaHJvbWl1bS5vcmc+DQo+Pj4gLS0tDQo+Pj4gICAgZHJpdmVycy9k
-bWEtYnVmL3N5bmNfZmlsZS5jICAgIHwgMTkgKysrKysrKysrKysrKysrKysrKw0KPj4+ICAgIGlu
-Y2x1ZGUvdWFwaS9saW51eC9zeW5jX2ZpbGUuaCB8IDIyICsrKysrKysrKysrKysrKysrKysrKysN
-Cj4+PiAgICAyIGZpbGVzIGNoYW5nZWQsIDQxIGluc2VydGlvbnMoKykNCj4+Pg0KPj4+IGRpZmYg
-LS1naXQgYS9kcml2ZXJzL2RtYS1idWYvc3luY19maWxlLmMgYi9kcml2ZXJzL2RtYS1idWYvc3lu
-Y19maWxlLmMNCj4+PiBpbmRleCBhZjU3Nzk5Yzg2Y2UuLmZiNmNhMTAzMjg4NSAxMDA2NDQNCj4+
-PiAtLS0gYS9kcml2ZXJzL2RtYS1idWYvc3luY19maWxlLmMNCj4+PiArKysgYi9kcml2ZXJzL2Rt
-YS1idWYvc3luY19maWxlLmMNCj4+PiBAQCAtMzUwLDYgKzM1MCwyMiBAQCBzdGF0aWMgbG9uZyBz
-eW5jX2ZpbGVfaW9jdGxfZmVuY2VfaW5mbyhzdHJ1Y3Qgc3luY19maWxlICpzeW5jX2ZpbGUsDQo+
-Pj4gICAgICAgIHJldHVybiByZXQ7DQo+Pj4gICAgfQ0KPj4+DQo+Pj4gK3N0YXRpYyBpbnQgc3lu
-Y19maWxlX2lvY3RsX3NldF9kZWFkbGluZShzdHJ1Y3Qgc3luY19maWxlICpzeW5jX2ZpbGUsDQo+
-Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBsb25nIGFy
-ZykNCj4+PiArew0KPj4+ICsgICAgIHN0cnVjdCBzeW5jX3NldF9kZWFkbGluZSB0czsNCj4+PiAr
-DQo+Pj4gKyAgICAgaWYgKGNvcHlfZnJvbV91c2VyKCZ0cywgKHZvaWQgX191c2VyICopYXJnLCBz
-aXplb2YodHMpKSkNCj4+PiArICAgICAgICAgICAgIHJldHVybiAtRUZBVUxUOw0KPj4+ICsNCj4+
-PiArICAgICBpZiAodHMucGFkKQ0KPj4+ICsgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQo+
-Pj4gKw0KPj4+ICsgICAgIGRtYV9mZW5jZV9zZXRfZGVhZGxpbmUoc3luY19maWxlLT5mZW5jZSwg
-a3RpbWVfc2V0KHRzLnR2X3NlYywgdHMudHZfbnNlYykpOw0KPj4+ICsNCj4+PiArICAgICByZXR1
-cm4gMDsNCj4+PiArfQ0KPj4+ICsNCj4+PiAgICBzdGF0aWMgbG9uZyBzeW5jX2ZpbGVfaW9jdGwo
-c3RydWN0IGZpbGUgKmZpbGUsIHVuc2lnbmVkIGludCBjbWQsDQo+Pj4gICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgdW5zaWduZWQgbG9uZyBhcmcpDQo+Pj4gICAgew0KPj4+IEBAIC0zNjIsNiAr
-Mzc4LDkgQEAgc3RhdGljIGxvbmcgc3luY19maWxlX2lvY3RsKHN0cnVjdCBmaWxlICpmaWxlLCB1
-bnNpZ25lZCBpbnQgY21kLA0KPj4+ICAgICAgICBjYXNlIFNZTkNfSU9DX0ZJTEVfSU5GTzoNCj4+
-PiAgICAgICAgICAgICAgICByZXR1cm4gc3luY19maWxlX2lvY3RsX2ZlbmNlX2luZm8oc3luY19m
-aWxlLCBhcmcpOw0KPj4+DQo+Pj4gKyAgICAgY2FzZSBTWU5DX0lPQ19TRVRfREVBRExJTkU6DQo+
-Pj4gKyAgICAgICAgICAgICByZXR1cm4gc3luY19maWxlX2lvY3RsX3NldF9kZWFkbGluZShzeW5j
-X2ZpbGUsIGFyZyk7DQo+Pj4gKw0KPj4+ICAgICAgICBkZWZhdWx0Og0KPj4+ICAgICAgICAgICAg
-ICAgIHJldHVybiAtRU5PVFRZOw0KPj4+ICAgICAgICB9DQo+Pj4gZGlmZiAtLWdpdCBhL2luY2x1
-ZGUvdWFwaS9saW51eC9zeW5jX2ZpbGUuaCBiL2luY2x1ZGUvdWFwaS9saW51eC9zeW5jX2ZpbGUu
-aA0KPj4+IGluZGV4IGVlMmRjZmIzZDY2MC4uYzg2NjY1ODA4MTZmIDEwMDY0NA0KPj4+IC0tLSBh
-L2luY2x1ZGUvdWFwaS9saW51eC9zeW5jX2ZpbGUuaA0KPj4+ICsrKyBiL2luY2x1ZGUvdWFwaS9s
-aW51eC9zeW5jX2ZpbGUuaA0KPj4+IEBAIC02Nyw2ICs2NywyMCBAQCBzdHJ1Y3Qgc3luY19maWxl
-X2luZm8gew0KPj4+ICAgICAgICBfX3U2NCAgIHN5bmNfZmVuY2VfaW5mbzsNCj4+PiAgICB9Ow0K
-Pj4+DQo+Pj4gKy8qKg0KPj4+ICsgKiBzdHJ1Y3Qgc3luY19zZXRfZGVhZGxpbmUgLSBzZXQgYSBk
-ZWFkbGluZSBvbiBhIGZlbmNlDQo+Pj4gKyAqIEB0dl9zZWM6ICBzZWNvbmRzIGVsYXBzZWQgc2lu
-Y2UgZXBvY2gNCj4+PiArICogQHR2X25zZWM6IG5hbm9zZWNvbmRzIGVsYXBzZWQgc2luY2UgdGhl
-IHRpbWUgZ2l2ZW4gYnkgdGhlIHR2X3NlYw0KPj4+ICsgKiBAcGFkOiAgICAgbXVzdCBiZSB6ZXJv
-DQo+Pj4gKyAqDQo+Pj4gKyAqIFRoZSB0aW1lYmFzZSBmb3IgdGhlIGRlYWRsaW5lIGlzIENMT0NL
-X01PTk9UT05JQyAoc2FtZSBhcyB2YmxhbmspDQo+Pj4gKyAqLw0KPj4+ICtzdHJ1Y3Qgc3luY19z
-ZXRfZGVhZGxpbmUgew0KPj4+ICsgICAgIF9fczY0ICAgdHZfc2VjOw0KPj4+ICsgICAgIF9fczMy
-ICAgdHZfbnNlYzsNCj4+PiArICAgICBfX3UzMiAgIHBhZDsNCj4+IElJUkMgc3RydWN0IHRpbWVz
-cGVjIGRlZmluZWQgdGhpcyBhcyB0aW1lX3QvbG9uZyAod2hpY2ggaXMgaG9ycmlibGUgZm9yDQo+
-PiBhbiBVQVBJIGJlY2F1c2Ugb2YgdGhlIHNpemVvZihsb25nKSBkZXBlbmRlbmN5KSwgb25lIHBv
-c3NpYmxlDQo+PiBhbHRlcm5hdGl2ZSBpcyB0byB1c2UgNjRiaXQgbmFub3NlY29uZHMgZnJvbSBD
-TE9DS19NT05PVE9OSUMgKHdoaWNoIGlzDQo+PiBlc3NlbnRpYWxseSBrdGltZSkuDQo+Pg0KPj4g
-Tm90IDEwMCUgc3VyZSBpZiB0aGVyZSBpcyBhbnkgcHJlZmVyZW5jZXMgZG9jdW1lbnRlZCwgYnV0
-IEkgdGhpbmsgdGhlDQo+PiBsYXRlciBtaWdodCBiZSBiZXR0ZXIuDQo+IFRoZSBvcmlnaW5hbCB0
-aG91Z2h0IGlzIHRoYXQgdGhpcyBtYXBzIGRpcmVjdGx5IHRvIGNsb2NrX2dldHRpbWUoKQ0KPiB3
-aXRob3V0IGV4dHJhIGNvbnZlcnNpb24gbmVlZGVkLCBhbmQgaXMgc2ltaWxhciB0byBvdGhlciBw
-cmUta3RpbWVfdA0KPiBVQVBJLiAgQnV0IE9UT0ggaWYgdXNlcnNwYWNlIHdhbnRzIHRvIGFkZCBh
-biBvZmZzZXQsIGl0IGlzIG1heWJlDQo+IGJldHRlciB0byBjb252ZXJ0IGNvbXBsZXRlbHkgdG8g
-bnMgaW4gdXNlcnNwYWNlIGFuZCB1c2UgYSB1NjQgKGFzIHRoYXQNCj4gaXMgd2hhdCBuc190b19r
-dGltZSgpIHVzZXMpLi4gKGFuZCBPRkMgd2hhdGV2ZXIgZGVjaXNpb24gaGVyZSBhbHNvDQo+IGFw
-cGxpZXMgdG8gdGhlIHN5bmNvYmogd2FpdCBpb2N0bHMpDQo+DQo+IEknbSBsZWFuaW5nIHRvd2Fy
-ZHMgdTY0IENMT0NLX01PTk9UT05JQyBucyBpZiBubyBvbmUgaGFzIGEgZ29vZA0KPiBhcmd1bWVu
-dCBhZ2FpbnN0IHRoYXQuDQoNCisxIGZvciB0aGF0Lg0KDQpSZWdhcmRzLA0KQ2hyaXN0aWFuLg0K
-DQo+DQo+IEJSLA0KPiAtUg0KPg0KPj4gRWl0aGVyIHdheSB0aGUgcGF0Y2ggaXMgQWNrZWQtYnk6
-IENocmlzdGlhbiBLw7ZuaWcNCj4+IDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+IGZvciB0aGlz
-IHBhdGNoLg0KPj4NCj4+IFJlZ2FyZHMsDQo+PiBDaHJpc3RpYW4uDQo+Pg0KPj4+ICt9Ow0KPj4+
-ICsNCj4+PiAgICAjZGVmaW5lIFNZTkNfSU9DX01BR0lDICAgICAgICAgICAgICAnPicNCj4+Pg0K
-Pj4+ICAgIC8qKg0KPj4+IEBAIC05NSw0ICsxMDksMTIgQEAgc3RydWN0IHN5bmNfZmlsZV9pbmZv
-IHsNCj4+PiAgICAgKi8NCj4+PiAgICAjZGVmaW5lIFNZTkNfSU9DX0ZJTEVfSU5GTyAgX0lPV1Io
-U1lOQ19JT0NfTUFHSUMsIDQsIHN0cnVjdCBzeW5jX2ZpbGVfaW5mbykNCj4+Pg0KPj4+ICsNCj4+
-PiArLyoqDQo+Pj4gKyAqIERPQzogU1lOQ19JT0NfU0VUX0RFQURMSU5FIC0gc2V0IGEgZGVhZGxp
-bmUgb24gYSBmZW5jZQ0KPj4+ICsgKg0KPj4+ICsgKiBBbGxvd3MgdXNlcnNwYWNlIHRvIHNldCBh
-IGRlYWRsaW5lIG9uIGEgZmVuY2UsIHNlZSBkbWFfZmVuY2Vfc2V0X2RlYWRsaW5lKCkNCj4+PiAr
-ICovDQo+Pj4gKyNkZWZpbmUgU1lOQ19JT0NfU0VUX0RFQURMSU5FICAgICAgICBfSU9XKFNZTkNf
-SU9DX01BR0lDLCA1LCBzdHJ1Y3Qgc3luY19zZXRfZGVhZGxpbmUpDQo+Pj4gKw0KPj4+ICAgICNl
-bmRpZiAvKiBfVUFQSV9MSU5VWF9TWU5DX0ggKi8NCg0KX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
-YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
-dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+--===============4038614531358611265==
+Content-Type: multipart/signed; boundary="Sig_/U5GhkigZ0.xToxt1kXriC3K";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
+
+--Sig_/U5GhkigZ0.xToxt1kXriC3K
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 22 Feb 2023 07:37:26 -0800
+Rob Clark <robdclark@gmail.com> wrote:
+
+> On Wed, Feb 22, 2023 at 1:49 AM Pekka Paalanen <ppaalanen@gmail.com> wrot=
+e:
+> >
+> > On Tue, 21 Feb 2023 09:53:56 -0800
+> > Rob Clark <robdclark@gmail.com> wrote:
+> > =20
+> > > On Tue, Feb 21, 2023 at 8:48 AM Luben Tuikov <luben.tuikov@amd.com> w=
+rote: =20
+> > > >
+> > > > On 2023-02-20 11:14, Rob Clark wrote: =20
+> > > > > On Mon, Feb 20, 2023 at 12:53 AM Pekka Paalanen <ppaalanen@gmail.=
+com> wrote: =20
+> > > > >>
+> > > > >> On Sat, 18 Feb 2023 13:15:49 -0800
+> > > > >> Rob Clark <robdclark@gmail.com> wrote:
+> > > > >> =20
+> > > > >>> From: Rob Clark <robdclark@chromium.org>
+> > > > >>>
+> > > > >>> Allow userspace to use the EPOLLPRI/POLLPRI flag to indicate an=
+ urgent
+> > > > >>> wait (as opposed to a "housekeeping" wait to know when to clean=
+up after
+> > > > >>> some work has completed).  Usermode components of GPU driver st=
+acks
+> > > > >>> often poll() on fence fd's to know when it is safe to do things=
+ like
+> > > > >>> free or reuse a buffer, but they can also poll() on a fence fd =
+when
+> > > > >>> waiting to read back results from the GPU.  The EPOLLPRI/POLLPR=
+I flag
+> > > > >>> lets the kernel differentiate these two cases.
+> > > > >>>
+> > > > >>> Signed-off-by: Rob Clark <robdclark@chromium.org> =20
+> > > > >>
+> > > > >> Hi,
+> > > > >>
+> > > > >> where would the UAPI documentation of this go?
+> > > > >> It seems to be missing. =20
+> > > > >
+> > > > > Good question, I am not sure.  The poll() man page has a descript=
+ion,
+> > > > > but my usage doesn't fit that _exactly_ (but OTOH the description=
+ is a
+> > > > > bit vague).
+> > > > > =20
+> > > > >> If a Wayland compositor is polling application fences to know wh=
+ich
+> > > > >> client buffer to use in its rendering, should the compositor pol=
+l with
+> > > > >> PRI or not? If a compositor polls with PRI, then all fences from=
+ all
+> > > > >> applications would always be PRI. Would that be harmful somehow =
+or
+> > > > >> would it be beneficial? =20
+> > > > >
+> > > > > I think a compositor would rather use the deadline ioctl and then=
+ poll
+> > > > > without PRI.  Otherwise you are giving an urgency signal to the f=
+ence
+> > > > > signaller which might not necessarily be needed.
+> > > > >
+> > > > > The places where I expect PRI to be useful is more in mesa (things
+> > > > > like glFinish(), readpix, and other similar sorts of blocking API=
+s) =20
+> > > > Hi,
+> > > >
+> > > > Hmm, but then user-space could do the opposite, namely, submit work=
+ as usual--never
+> > > > using the SET_DEADLINE ioctl, and then at the end, poll using (E)PO=
+LLPRI. That seems
+> > > > like a possible usage pattern, unintended--maybe, but possible. Do =
+we want to discourage
+> > > > this? Wouldn't SET_DEADLINE be enough? I mean, one can call SET_DEA=
+DLINE with the current
+> > > > time, and then wouldn't that be equivalent to (E)POLLPRI? =20
+> > >
+> > > Yeah, (E)POLLPRI isn't strictly needed if we have SET_DEADLINE.  It is
+> > > slightly more convenient if you want an immediate deadline (single
+> > > syscall instead of two), but not strictly needed.  OTOH it piggy-backs
+> > > on existing UABI. =20
+> >
+> > In that case, I would be conservative, and not add the POLLPRI
+> > semantics. An UAPI addition that is not strictly needed and somewhat
+> > unclear if it violates any design principles is best not done, until it
+> > is proven to be beneficial.
+> >
+> > Besides, a Wayland compositor does not necessary need to add the fd
+> > to its main event loop for poll. It could just SET_DEADLINE, and then
+> > when it renders simply check if the fence passed or not already. Not
+> > polling means the compositor does not need to wake up at the moment the
+> > fence signals to just record a flag. =20
+>=20
+> poll(POLLPRI) isn't intended for wayland.. but is a thing I want in
+> mesa for fence waits.  I _could_ use SET_DEADLINE but it is two
+> syscalls and correspondingly more code ;-)
+
+But is it actually beneficial? "More code" seems quite irrelevant.
+
+Would there be a hundred or more of those per frame? Or would it be
+always limited to one or two? Or totally depend on what the application
+is doing? Is it a significant impact?
+
+> > On another matter, if the application uses SET_DEADLINE with one
+> > timestamp, and the compositor uses SET_DEADLINE on the same thing with
+> > another timestamp, what should happen? =20
+>=20
+> The expectation is that many deadline hints can be set on a fence.
+> The fence signaller should track the soonest deadline.
+
+You need to document that as UAPI, since it is observable to userspace.
+It would be bad if drivers or subsystems would differ in behaviour.
+
+
+Thanks,
+pq
+
+--Sig_/U5GhkigZ0.xToxt1kXriC3K
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmP3NAYACgkQI1/ltBGq
+qqff8A/9G6+OivbsMcWdii/lgqMRuLh9kjfM9HGWCDafIaGcPYGYWlmAngPH21zf
+jGCaxCwxAFwcRiCN90Tcbze65Z/UrrXTBTA5PuFWEeUJtI1i8lX4cdlNvMg+8wrF
+xrNUKKjA3cFC/pFqpncOLnsoWPakhP6N4A3RSGiO0DoUl5q6eWcLNKAxDWyYjQYL
+ACdWZ5KPwufoAXdzjitk6/BSKydF3q5vD9OPO/ENR+HwG1kqgegrXL0SSZbvbgOB
+6G7XJqUkkGZC0IVRyaA2D/oITXtUJbe4D6f8OGRACwZpuDrjd4Lya+mw3KltvbmD
+i5VxTv2NTftKqk3+bZ5kVZ1burNqaQSJdr6ykFN14lqRSw0dnkhAWv9o9auvSoBP
+6PvNjve80mPTJAT/NfWCQjvTXqgJ89XPap9ph+UREjFhty+blpOWAGqYQ2QD03FQ
+/cgYAlNrtR6XMMn1MIBkbmAFNXFrqY6ZGfad3M0FsaJk0fgFq+R7h5Dan4Wzq13G
+0Ys57ORmqbg4iMiKyoX+rTiY7/UUnHi295RjYGIqu+k1mlfhJv2rnVXGctHfyVkF
+OQSwYI5tMdp4/1alPQzYPPnWEnUw1J64/iqlN1MH/rOYTriRLAEHxEW3umzbFVcS
+vtXXGVrA2vQXt2JufGLSfen95D0GzDRO+YOn12g1jvY27xCA4g8=
+=aFdB
+-----END PGP SIGNATURE-----
+
+--Sig_/U5GhkigZ0.xToxt1kXriC3K--
+
+--===============4038614531358611265==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============4038614531358611265==--
