@@ -2,82 +2,82 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B2A1B6A22FF
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Feb 2023 21:05:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D224C6A2302
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Feb 2023 21:05:30 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C37E344248
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Feb 2023 20:05:10 +0000 (UTC)
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
-	by lists.linaro.org (Postfix) with ESMTPS id 46CE44424D
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Feb 2023 20:02:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D70D74424C
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Feb 2023 20:05:29 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+	by lists.linaro.org (Postfix) with ESMTPS id AA3824424B
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Feb 2023 20:02:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=R6Y5fX2p;
-	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.216.45 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=SEUldU24;
+	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.214.178 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pj1-f45.google.com with SMTP id x20-20020a17090a8a9400b00233ba727724so6908141pjn.1
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Feb 2023 12:02:16 -0800 (PST)
+Received: by mail-pl1-f178.google.com with SMTP id c1so647879plg.4
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Feb 2023 12:02:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=Fry4TP6AIquyUeVXSm7W0PXZtEhE3hkfU2dLB2bew7U=;
-        b=R6Y5fX2prxxWZSqVWnV1KwKEOTck5rKd12Wlu84XhyNW8xcya5lXiDBwkQxsr3JICX
-         GSu6VJTWv99+yiszHAERrvpBdOEnyyHczlgOarR2yPGmyr0c4UxIZFgcJdZCpphUADDF
-         Y1uEDORynTdDsry5WxnwjrtYd0dPXoqVukNuSS6YfikqyjAUH3ExKITUEM7lLCIZQi7z
-         FZWn9sbRkv6dfOxY+w9l2amsXyMzlvpdk83MpDaoR8Ui9xfXPwOzXRzyW4EU6GFvGibC
-         SDL5l8twUjW/km1KhL1T5OGovksm36XdoH6LsIy8rgsKcHzfrib6oAOchENtjZg8vL0S
-         4hAQ==
+        bh=uqyHMdEv/I4h+kB4S5EmXwyYyPXw9FA0QD7a4XeiZZ4=;
+        b=SEUldU24NUQ96Q/rcB+ZFvIcP/WMtYvyxDgcXRS310W0AVsCF29kBti4/qKWVNcTjF
+         c1M8MtGwPie8KHEMNliRr4oD+wGcNVDKTjKdDFcq09Y14UXVWW7rL+nhw6iMRdpC9mv8
+         FSkMLoH68+RJzPTddCHJutPX4Gal6Bqc88DPmkkLgix+uE++ZGDswbuTpMc3ilT55Yri
+         4HeyCNpv46vAwsxrSuKN/eBTn4mmZ6exEkXdo3hFXD4HaH6oyGuvYCWdZhMCHy1ASlz8
+         1vFvLcHhpsK50aStuV/urt/97eGSk4KLHa9IEf875x4lZqonHdahiadhHerru57gTf1M
+         cUBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20210112;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=Fry4TP6AIquyUeVXSm7W0PXZtEhE3hkfU2dLB2bew7U=;
-        b=MFMUmG39r+DIwE6WVxTssrwiuqSIsV+/sjEzl2wM/b5FmxXCmrKXPWlJ6NW9+nsGwB
-         qzr8d/OUYYrDN0TA8tKgFe9Xl/anun9y4S815SQ/yIcoxZ16gNpzP0t45zrzHDiGfhqE
-         qjEWiBDhgtwlFWGeRCVzxwckHqWrJH8lM65ipUzUcrP6W5peFuKtdkeb+/IZBBFimLD+
-         VjdJQqdO6UnDvMKF2Fo1ptMspO9r3V5/qDKtgBlfLNjVaMkAWpMDvzDQYtHVDjDO+D3N
-         oiAcR+3Z/lAcaGJc0FlkpSffh4UEC8NaeV7uuim75VlvtLWhdCa3pHcAJy7d3WZtqUN5
-         IghA==
-X-Gm-Message-State: AO0yUKVT1NcDZgQIYIyS/mpqAUP9HjD1RrI7sR/T6dO2awus5wwowStR
-	wo8dcB+hzqrsrO3RO8O8988=
-X-Google-Smtp-Source: AK7set9E0T3k/vmCX9p2A40BTpin2uh3tlkhUnxMwy/kBbyJvK+8LjMOcyjPi7agZGKJ7dfXF/aBYw==
-X-Received: by 2002:a17:902:e80e:b0:198:f8e2:2e33 with SMTP id u14-20020a170902e80e00b00198f8e22e33mr729349plg.30.1677268935357;
-        Fri, 24 Feb 2023 12:02:15 -0800 (PST)
+        bh=uqyHMdEv/I4h+kB4S5EmXwyYyPXw9FA0QD7a4XeiZZ4=;
+        b=rna93Hf0B5Vrou5lMAB8ptdKpLQe+bhzC/t6+ttXsqNYFXkXv8McLDvZPCbFLid4Z7
+         YfQajvzudHjzpaZTGV7FQq2r9F9nzno9kUAAvGShYCmvTzCmlPFupKOprHFm+bFQpwNU
+         N7aLIfH2T2z7igYqLtradHBqiKHJfLpFLbi7Dkboy8LLVAPFBlwvEd9EbjBndOmCCx/X
+         zEvZaiO9S9bofowL4WLWjE4ii9fG99KwWhl4D6EqcTzKT6aW0atz6v4pgP2fTxBm3wbO
+         dEysSdnXZXWaAP99Hk7snWMK8Gt3Ls4rYl4Hx37pm5+D3P1bnsuSnFQNrzdUZ3RvOB7K
+         9b9Q==
+X-Gm-Message-State: AO0yUKVllGuJOXR0UyS8Xd4zT3LWaxc/6lqe+RrtplRuCYXEYAlcZp3i
+	xQ6gLgftt7Vp2IvozL75UgQ=
+X-Google-Smtp-Source: AK7set98dgIQ8msujxfe68cFoAclG58VVrOf0qwayMOAPVed0AfIeF+jCMVegwMREp/Od6qW3HFxow==
+X-Received: by 2002:a17:903:283:b0:19c:c87b:473a with SMTP id j3-20020a170903028300b0019cc87b473amr6033026plr.17.1677268942678;
+        Fri, 24 Feb 2023 12:02:22 -0800 (PST)
 Received: from localhost ([2a00:79e1:abd:4a00:61b:48ed:72ab:435b])
-        by smtp.gmail.com with ESMTPSA id d28-20020a63735c000000b004f2c088328bsm7919739pgn.43.2023.02.24.12.02.14
+        by smtp.gmail.com with ESMTPSA id y1-20020a1709027c8100b0019cbb055a95sm3868807pll.94.2023.02.24.12.02.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Feb 2023 12:02:14 -0800 (PST)
+        Fri, 24 Feb 2023 12:02:22 -0800 (PST)
 From: Rob Clark <robdclark@gmail.com>
 To: dri-devel@lists.freedesktop.org
-Date: Fri, 24 Feb 2023 12:01:36 -0800
-Message-Id: <20230224200155.2510320-9-robdclark@gmail.com>
+Date: Fri, 24 Feb 2023 12:01:40 -0800
+Message-Id: <20230224200155.2510320-13-robdclark@gmail.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230224200155.2510320-1-robdclark@gmail.com>
 References: <20230224200155.2510320-1-robdclark@gmail.com>
 MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 46CE44424D
+X-Rspamd-Queue-Id: AA3824424B
 X-Spamd-Bar: -------
 X-Spamd-Result: default: False [-7.10 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
-	RCVD_IN_DNSWL_HI(-1.00)[2a00:79e1:abd:4a00:61b:48ed:72ab:435b:received,209.85.216.45:from];
+	RCVD_IN_DNSWL_HI(-1.00)[2a00:79e1:abd:4a00:61b:48ed:72ab:435b:received,209.85.214.178:from];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_MISSING_CHARSET(0.50)[];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.216.45:from];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.178:from];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	FROM_HAS_DN(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,ffwll.ch,gmail.com,daenzer.net,intel.com,amd.com,emersion.fr,chromium.org,linaro.org,vger.kernel.org,lists.linaro.org];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,ffwll.ch,gmail.com,daenzer.net,intel.com,amd.com,emersion.fr,chromium.org,quicinc.com,linaro.org,poorly.run,vger.kernel.org,lists.linaro.org];
 	TAGGED_RCPT(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
@@ -92,16 +92,16 @@ X-Spamd-Result: default: False [-7.10 / 15.00];
 	FROM_EQ_ENVFROM(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: S7NSTHO2UBEWANWC2OJW7YPXTERVDHGW
-X-Message-ID-Hash: S7NSTHO2UBEWANWC2OJW7YPXTERVDHGW
+Message-ID-Hash: 324GQRLEP2V7W754R6XIFK3KMNMWHO7Z
+X-Message-ID-Hash: 324GQRLEP2V7W754R6XIFK3KMNMWHO7Z
 X-MailFrom: robdclark@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, =?UTF-8?q?Michel=20D=C3=A4nzer?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Pekka Paalanen <ppaalanen@gmail.com>, Simon Ser <contact@emersion.fr>, Luben Tuikov <luben.tuikov@amd.com>, Rob Clark <robdclark@gmail.com>, Rob Clark <robdclark@chromium.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
+CC: freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, =?UTF-8?q?Michel=20D=C3=A4nzer?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Pekka Paalanen <ppaalanen@gmail.com>, Simon Ser <contact@emersion.fr>, Luben Tuikov <luben.tuikov@amd.com>, Rob Clark <robdclark@chromium.org>, Rob Clark <robdclark@gmail.com>, Abhinav Kumar <quic_abhinavk@quicinc.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Sean Paul <sean@poorly.run>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, "open list:DRM DRIVER FOR MSM ADRENO GPU" <linux-arm-msm@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v6 08/15] drm/scheduler: Add fence deadline support
+Subject: [Linaro-mm-sig] [PATCH v6 12/15] drm/msm: Add deadline based boost support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/S7NSTHO2UBEWANWC2OJW7YPXTERVDHGW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/324GQRLEP2V7W754R6XIFK3KMNMWHO7Z/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -111,150 +111,160 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-As the finished fence is the one that is exposed to userspace, and
-therefore the one that other operations, like atomic update, would
-block on, we need to propagate the deadline from from the finished
-fence to the actual hw fence.
+From: Rob Clark <robdclark@chromium.org>
 
-v2: Split into drm_sched_fence_set_parent() (ckoenig)
-v3: Ensure a thread calling drm_sched_fence_set_deadline_finished() sees
-    fence->parent set before drm_sched_fence_set_parent() does this
-    test_bit(DMA_FENCE_FLAG_HAS_DEADLINE_BIT).
+Track the nearest deadline on a fence timeline and set a timer to expire
+shortly before to trigger boost if the fence has not yet been signaled.
+
+v2: rebase
 
 Signed-off-by: Rob Clark <robdclark@chromium.org>
-Acked-by: Luben Tuikov <luben.tuikov@amd.com>
 ---
- drivers/gpu/drm/scheduler/sched_fence.c | 46 +++++++++++++++++++++++++
- drivers/gpu/drm/scheduler/sched_main.c  |  2 +-
- include/drm/gpu_scheduler.h             | 17 +++++++++
- 3 files changed, 64 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/msm/msm_fence.c | 74 +++++++++++++++++++++++++++++++++
+ drivers/gpu/drm/msm/msm_fence.h | 20 +++++++++
+ 2 files changed, 94 insertions(+)
 
-diff --git a/drivers/gpu/drm/scheduler/sched_fence.c b/drivers/gpu/drm/scheduler/sched_fence.c
-index 7fd869520ef2..fe9c6468e440 100644
---- a/drivers/gpu/drm/scheduler/sched_fence.c
-+++ b/drivers/gpu/drm/scheduler/sched_fence.c
-@@ -123,6 +123,37 @@ static void drm_sched_fence_release_finished(struct dma_fence *f)
- 	dma_fence_put(&fence->scheduled);
+diff --git a/drivers/gpu/drm/msm/msm_fence.c b/drivers/gpu/drm/msm/msm_fence.c
+index 56641408ea74..51b461f32103 100644
+--- a/drivers/gpu/drm/msm/msm_fence.c
++++ b/drivers/gpu/drm/msm/msm_fence.c
+@@ -8,6 +8,35 @@
+ 
+ #include "msm_drv.h"
+ #include "msm_fence.h"
++#include "msm_gpu.h"
++
++static struct msm_gpu *fctx2gpu(struct msm_fence_context *fctx)
++{
++	struct msm_drm_private *priv = fctx->dev->dev_private;
++	return priv->gpu;
++}
++
++static enum hrtimer_restart deadline_timer(struct hrtimer *t)
++{
++	struct msm_fence_context *fctx = container_of(t,
++			struct msm_fence_context, deadline_timer);
++
++	kthread_queue_work(fctx2gpu(fctx)->worker, &fctx->deadline_work);
++
++	return HRTIMER_NORESTART;
++}
++
++static void deadline_work(struct kthread_work *work)
++{
++	struct msm_fence_context *fctx = container_of(work,
++			struct msm_fence_context, deadline_work);
++
++	/* If deadline fence has already passed, nothing to do: */
++	if (msm_fence_completed(fctx, fctx->next_deadline_fence))
++		return;
++
++	msm_devfreq_boost(fctx2gpu(fctx), 2);
++}
+ 
+ 
+ struct msm_fence_context *
+@@ -36,6 +65,13 @@ msm_fence_context_alloc(struct drm_device *dev, volatile uint32_t *fenceptr,
+ 	fctx->completed_fence = fctx->last_fence;
+ 	*fctx->fenceptr = fctx->last_fence;
+ 
++	hrtimer_init(&fctx->deadline_timer, CLOCK_MONOTONIC, HRTIMER_MODE_ABS);
++	fctx->deadline_timer.function = deadline_timer;
++
++	kthread_init_work(&fctx->deadline_work, deadline_work);
++
++	fctx->next_deadline = ktime_get();
++
+ 	return fctx;
  }
  
-+static void drm_sched_fence_set_deadline_finished(struct dma_fence *f,
-+						  ktime_t deadline)
+@@ -62,6 +98,8 @@ void msm_update_fence(struct msm_fence_context *fctx, uint32_t fence)
+ 	spin_lock_irqsave(&fctx->spinlock, flags);
+ 	if (fence_after(fence, fctx->completed_fence))
+ 		fctx->completed_fence = fence;
++	if (msm_fence_completed(fctx, fctx->next_deadline_fence))
++		hrtimer_cancel(&fctx->deadline_timer);
+ 	spin_unlock_irqrestore(&fctx->spinlock, flags);
+ }
+ 
+@@ -92,10 +130,46 @@ static bool msm_fence_signaled(struct dma_fence *fence)
+ 	return msm_fence_completed(f->fctx, f->base.seqno);
+ }
+ 
++static void msm_fence_set_deadline(struct dma_fence *fence, ktime_t deadline)
 +{
-+	struct drm_sched_fence *fence = to_drm_sched_fence(f);
-+	struct dma_fence *parent;
++	struct msm_fence *f = to_msm_fence(fence);
++	struct msm_fence_context *fctx = f->fctx;
 +	unsigned long flags;
++	ktime_t now;
 +
-+	spin_lock_irqsave(&fence->lock, flags);
++	spin_lock_irqsave(&fctx->spinlock, flags);
++	now = ktime_get();
 +
-+	/* If we already have an earlier deadline, keep it: */
-+	if (test_bit(DRM_SCHED_FENCE_FLAG_HAS_DEADLINE_BIT, &f->flags) &&
-+	    ktime_before(fence->deadline, deadline)) {
-+		spin_unlock_irqrestore(&fence->lock, flags);
-+		return;
++	if (ktime_after(now, fctx->next_deadline) ||
++			ktime_before(deadline, fctx->next_deadline)) {
++		fctx->next_deadline = deadline;
++		fctx->next_deadline_fence =
++			max(fctx->next_deadline_fence, (uint32_t)fence->seqno);
++
++		/*
++		 * Set timer to trigger boost 3ms before deadline, or
++		 * if we are already less than 3ms before the deadline
++		 * schedule boost work immediately.
++		 */
++		deadline = ktime_sub(deadline, ms_to_ktime(3));
++
++		if (ktime_after(now, deadline)) {
++			kthread_queue_work(fctx2gpu(fctx)->worker,
++					&fctx->deadline_work);
++		} else {
++			hrtimer_start(&fctx->deadline_timer, deadline,
++					HRTIMER_MODE_ABS);
++		}
 +	}
 +
-+	fence->deadline = deadline;
-+	set_bit(DRM_SCHED_FENCE_FLAG_HAS_DEADLINE_BIT, &f->flags);
-+
-+	spin_unlock_irqrestore(&fence->lock, flags);
-+
-+	/*
-+	 * smp_load_aquire() to ensure that if we are racing another
-+	 * thread calling drm_sched_fence_set_parent(), that we see
-+	 * the parent set before it calls test_bit(HAS_DEADLINE_BIT)
-+	 */
-+	parent = smp_load_acquire(&fence->parent);
-+	if (parent)
-+		dma_fence_set_deadline(parent, deadline);
++	spin_unlock_irqrestore(&fctx->spinlock, flags);
 +}
 +
- static const struct dma_fence_ops drm_sched_fence_ops_scheduled = {
- 	.get_driver_name = drm_sched_fence_get_driver_name,
- 	.get_timeline_name = drm_sched_fence_get_timeline_name,
-@@ -133,6 +164,7 @@ static const struct dma_fence_ops drm_sched_fence_ops_finished = {
- 	.get_driver_name = drm_sched_fence_get_driver_name,
- 	.get_timeline_name = drm_sched_fence_get_timeline_name,
- 	.release = drm_sched_fence_release_finished,
-+	.set_deadline = drm_sched_fence_set_deadline_finished,
+ static const struct dma_fence_ops msm_fence_ops = {
+ 	.get_driver_name = msm_fence_get_driver_name,
+ 	.get_timeline_name = msm_fence_get_timeline_name,
+ 	.signaled = msm_fence_signaled,
++	.set_deadline = msm_fence_set_deadline,
  };
  
- struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f)
-@@ -147,6 +179,20 @@ struct drm_sched_fence *to_drm_sched_fence(struct dma_fence *f)
- }
- EXPORT_SYMBOL(to_drm_sched_fence);
+ struct dma_fence *
+diff --git a/drivers/gpu/drm/msm/msm_fence.h b/drivers/gpu/drm/msm/msm_fence.h
+index 7f1798c54cd1..cdaebfb94f5c 100644
+--- a/drivers/gpu/drm/msm/msm_fence.h
++++ b/drivers/gpu/drm/msm/msm_fence.h
+@@ -52,6 +52,26 @@ struct msm_fence_context {
+ 	volatile uint32_t *fenceptr;
  
-+void drm_sched_fence_set_parent(struct drm_sched_fence *s_fence,
-+				struct dma_fence *fence)
-+{
+ 	spinlock_t spinlock;
++
 +	/*
-+	 * smp_store_release() to ensure another thread racing us
-+	 * in drm_sched_fence_set_deadline_finished() sees the
-+	 * fence's parent set before test_bit()
++	 * TODO this doesn't really deal with multiple deadlines, like
++	 * if userspace got multiple frames ahead.. OTOH atomic updates
++	 * don't queue, so maybe that is ok
 +	 */
-+	smp_store_release(&s_fence->parent, dma_fence_get(fence));
-+	if (test_bit(DRM_SCHED_FENCE_FLAG_HAS_DEADLINE_BIT,
-+		     &s_fence->finished.flags))
-+		dma_fence_set_deadline(fence, s_fence->deadline);
-+}
 +
- struct drm_sched_fence *drm_sched_fence_alloc(struct drm_sched_entity *entity,
- 					      void *owner)
- {
-diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
-index 4e6ad6e122bc..007f98c48f8d 100644
---- a/drivers/gpu/drm/scheduler/sched_main.c
-+++ b/drivers/gpu/drm/scheduler/sched_main.c
-@@ -1019,7 +1019,7 @@ static int drm_sched_main(void *param)
- 		drm_sched_fence_scheduled(s_fence);
- 
- 		if (!IS_ERR_OR_NULL(fence)) {
--			s_fence->parent = dma_fence_get(fence);
-+			drm_sched_fence_set_parent(s_fence, fence);
- 			/* Drop for original kref_init of the fence */
- 			dma_fence_put(fence);
- 
-diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
-index 9db9e5e504ee..99584e457153 100644
---- a/include/drm/gpu_scheduler.h
-+++ b/include/drm/gpu_scheduler.h
-@@ -41,6 +41,15 @@
-  */
- #define DRM_SCHED_FENCE_DONT_PIPELINE	DMA_FENCE_FLAG_USER_BITS
- 
-+/**
-+ * DRM_SCHED_FENCE_FLAG_HAS_DEADLINE_BIT - A fence deadline hint has been set
-+ *
-+ * Because we could have a deadline hint can be set before the backing hw
-+ * fence is created, we need to keep track of whether a deadline has already
-+ * been set.
-+ */
-+#define DRM_SCHED_FENCE_FLAG_HAS_DEADLINE_BIT	(DMA_FENCE_FLAG_USER_BITS + 1)
++	/** next_deadline: Time of next deadline */
++	ktime_t next_deadline;
 +
- enum dma_resv_usage;
- struct dma_resv;
- struct drm_gem_object;
-@@ -280,6 +289,12 @@ struct drm_sched_fence {
-          */
- 	struct dma_fence		finished;
- 
 +	/**
-+	 * @deadline: deadline set on &drm_sched_fence.finished which
-+	 * potentially needs to be propagated to &drm_sched_fence.parent
++	 * next_deadline_fence:
++	 *
++	 * Fence value for next pending deadline.  The deadline timer is
++	 * canceled when this fence is signaled.
 +	 */
-+	ktime_t				deadline;
++	uint32_t next_deadline_fence;
 +
-         /**
-          * @parent: the fence returned by &drm_sched_backend_ops.run_job
-          * when scheduling the job on hardware. We signal the
-@@ -568,6 +583,8 @@ void drm_sched_entity_set_priority(struct drm_sched_entity *entity,
- 				   enum drm_sched_priority priority);
- bool drm_sched_entity_is_ready(struct drm_sched_entity *entity);
++	struct hrtimer deadline_timer;
++	struct kthread_work deadline_work;
+ };
  
-+void drm_sched_fence_set_parent(struct drm_sched_fence *s_fence,
-+				struct dma_fence *fence);
- struct drm_sched_fence *drm_sched_fence_alloc(
- 	struct drm_sched_entity *s_entity, void *owner);
- void drm_sched_fence_init(struct drm_sched_fence *fence,
+ struct msm_fence_context * msm_fence_context_alloc(struct drm_device *dev,
 -- 
 2.39.1
 
