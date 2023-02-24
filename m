@@ -2,48 +2,49 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C88D6A1B78
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Feb 2023 12:37:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id A048F6A1E86
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Feb 2023 16:27:27 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7470144248
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Feb 2023 11:37:38 +0000 (UTC)
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by lists.linaro.org (Postfix) with ESMTPS id 490183F50D
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Feb 2023 11:37:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A648944240
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 24 Feb 2023 15:27:26 +0000 (UTC)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (mail-dm6nam12on2070.outbound.protection.outlook.com [40.107.243.70])
+	by lists.linaro.org (Postfix) with ESMTPS id 98EB33EC4E
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 24 Feb 2023 15:27:05 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=dssZGPQo;
-	spf=none (lists.linaro.org: domain of tvrtko.ursulin@linux.intel.com has no SPF policy when checking 134.134.136.24) smtp.mailfrom=tvrtko.ursulin@linux.intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1677238637; x=1708774637;
-  h=message-id:date:mime-version:subject:to:cc:references:
-   from:in-reply-to:content-transfer-encoding;
-  bh=dWAgl/tdtfg2TnhXEjmoFDyF9GDJI776Z7KeMzUMu5w=;
-  b=dssZGPQotmj8GOJ+iDchx4TUPYr4snp/libNDtBOwhm7UkRYh/9+klnb
-   HXK+hVZeRj1t0mSnAetyuK6v8di1q8lBatNkj1s23nBIyNHFmdsC8wgZX
-   GsVgV8AgyqjBHVWUO25YVp334zNF7SQFGcU+49+SZ7yhfXSwxG0kwn8Fr
-   0olzNVpIcbQD1h1yxRDw/zmmmHDB2dbFcINe+Orq9W9l2UVuPqY8qwfeR
-   C2Kr8O1K7PJcaB0nA5dYNjJQeu4CG9+R1v9jOky2ThE9/I7VKInowwKoA
-   71qDSLKUQpK8md2S9a6ODlfEgJjB30oJwEgv9AGzDOym9k1Ywev5c6sVB
-   A==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10630"; a="334876203"
-X-IronPort-AV: E=Sophos;i="5.97,324,1669104000";
-   d="scan'208";a="334876203"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Feb 2023 03:37:14 -0800
-X-IronPort-AV: E=McAfee;i="6500,9779,10630"; a="761759786"
-X-IronPort-AV: E=Sophos;i="5.97,324,1669104000";
-   d="scan'208";a="761759786"
-Received: from wmao-mobl.amr.corp.intel.com (HELO [10.212.63.133]) ([10.212.63.133])
-  by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Feb 2023 03:37:09 -0800
-Message-ID: <c5d046d6-ab8e-2bc7-5110-dba78b91348b@linux.intel.com>
-Date: Fri, 24 Feb 2023 11:37:07 +0000
-MIME-Version: 1.0
+	dkim=pass header.d=amd.com header.s=selector1 header.b=4dFuoOhb;
+	spf=pass (lists.linaro.org: domain of Luben.Tuikov@amd.com designates 40.107.243.70 as permitted sender) smtp.mailfrom=Luben.Tuikov@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=L5A2QaH8MfGKuLniApuxIi/nm0wfJU0ArP8T7UcUFjukwK5IgHdJ7goTYXvJtG7tXNc5HwKNKcVarIpoc1tdDtAZ5OogGdGErZilzT6zqvOYRSfgc5WoxIWNH2AtK6E4Tsu5ANQcFIud53pZbr/qzr6RAnk5MfKRx27QbtpGc76+i678Vi+VQa5csUfvVe4jWJnIw2tvce8mFmjwSo7pwvqN1LWs8Tf0IbGpRHi6fhYOTg0tcU85TI6WalXIO32wj0Ne+OHdngD2gZgk9GEyKlfTClfgT82tDoTYITOIhaMhG2N2RXB0JCQxtcA7QIXbfF+wVZHJ6IXa5zVr3xnAqw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=NtMrzFSv4TSxFdiHTBiz41BYecQhL7PVRiS5AGt+uho=;
+ b=MKRSJBBK7b7jP8MFBdDay+BpkCFOi7e5f4w5j+Koq03Y+UkZ3aXatrY/vGthAKevN5D5ie7VTNTzipFZrOQeacEV5nIfJlvI4YhLpEU6ucs/4i3gk5J1Y69BpQrFjTnRvKHq1OkwwV4elGwYLqPNC4YKwyLm7hYhAAWfuPmLswXqHeCcy3W49SqEmU/sXUj2oln4Myl1D2Mt8N6OZu8nAt1iKPys8HjN/FvwLsLpvOc8N9msQYllTsG68j3V1C6j+FLqvcBvp+hrPr09VVPsKV6eulWt1pdeHoovtylyFfr1JQFwnySzlzQjrV5dSKf89aRA3vCWozRLvgOzVJzsTg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=NtMrzFSv4TSxFdiHTBiz41BYecQhL7PVRiS5AGt+uho=;
+ b=4dFuoOhbRpDr1ISHMl0tDXAA2taEpMmwf26m8cOBDj0QZXkMYDIF0tc5QrpkttzsVqQMwLS0OLVpgVlLXgSmsKt7wlU5nLeF634dQZ/PFWw/WZTefBK0fRRQjULgup9yTbRboaNmunhIBqCSpInTQ+W1F3TRqJJj84h/UBuLcMg=
+Received: from DM6PR12MB3370.namprd12.prod.outlook.com (2603:10b6:5:38::25) by
+ SA0PR12MB7001.namprd12.prod.outlook.com (2603:10b6:806:2c0::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6086.26; Fri, 24 Feb
+ 2023 15:27:01 +0000
+Received: from DM6PR12MB3370.namprd12.prod.outlook.com
+ ([fe80::4df2:b32a:e628:c57e]) by DM6PR12MB3370.namprd12.prod.outlook.com
+ ([fe80::4df2:b32a:e628:c57e%7]) with mapi id 15.20.6134.021; Fri, 24 Feb 2023
+ 15:27:00 +0000
+Message-ID: <74e409dc-b642-779e-a755-b793c378e43a@amd.com>
+Date: Fri, 24 Feb 2023 10:26:56 -0500
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Content-Language: en-US
-To: Pekka Paalanen <ppaalanen@gmail.com>
+Content-Language: en-CA
+To: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
+ Pekka Paalanen <ppaalanen@gmail.com>
 References: <20230218211608.1630586-1-robdclark@gmail.com>
  <20230218211608.1630586-7-robdclark@gmail.com>
  <20230220105345.70e46fa5@eldfell>
@@ -59,195 +60,260 @@ References: <20230218211608.1630586-1-robdclark@gmail.com>
  <20230224122403.6a088da1@eldfell>
  <582a9b92-d246-fce2-cf39-539d9a2db17f@linux.intel.com>
  <20230224130053.3f8939e2@eldfell>
-From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
-Organization: Intel Corporation UK Plc
-In-Reply-To: <20230224130053.3f8939e2@eldfell>
+ <c5d046d6-ab8e-2bc7-5110-dba78b91348b@linux.intel.com>
+From: Luben Tuikov <luben.tuikov@amd.com>
+In-Reply-To: <c5d046d6-ab8e-2bc7-5110-dba78b91348b@linux.intel.com>
+X-ClientProxiedBy: YT1PR01CA0139.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:b01:2f::18) To DM6PR12MB3370.namprd12.prod.outlook.com
+ (2603:10b6:5:38::25)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6PR12MB3370:EE_|SA0PR12MB7001:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6cff8928-2e0c-4c75-309d-08db167b92f5
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	C8JoZ888Oxgh6Aez15P2/dcQAR2dEBJCdYPx5/IPgQWgBhqpnotZgFZaoBJqUrphgE2o1VATaPPQpxAK66RFGk2S+a2A5xHOnuh74bqmkHEAmdCJQoIdENWm058YKjtXeEJleRuc8/u5kkEw1ao9kcb0upTyp1tFHa0whPJzYA8D8yAhdZkHT0kAbkTrby3+JrZ6jLhLLzuTsx1FFNVnszSMB1gNtSE17+EgPxZBlTvtcPzwPaQYe7WtinOdklWZc8+M+M23TS5Ovd1rUKXME9A8zb8KGXzC4KizdFN/8I3MLYVB1H5irZsHrjmM2Qxvzx1iJJdxEm4tj9sBPvZ2F0QNrmz514mS/rsgiwu/mPstLkoP8M7R+9WThhiNJybaglGFZfB9T35XJplXJ2XEBWTl1qTfBBbCHlKk1A3QKJ0oat3QeDhhi4ylfscWBC8kePQ4KqKwkpJ/dX2v19U3av1kg+JwOlvTYxnHc8TVC82geM98f9YIQtXDPLg7vVfyrQlqeforf+yxXKnd0KtqkfAToc9KfQYQb+jyIh82QCdrSntNKDUykngvUmOAaBreWrROcSUx7gBB9TDzlBZr/2YNbgNI+KY5bjZuIrpzYQSz9aNsCRfEaLU65GNCIWmXumdaowsmNEDmbR1X01LKVpZATMKD4m/VUc47lOTjBypCg3nGRmNXXceNp4L3fnnPELOPPO7oNJnkrQMeMo3RGYCGScqfJ4Mi59dfiGdzfoI=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB3370.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(136003)(376002)(366004)(396003)(346002)(39860400002)(451199018)(83380400001)(55236004)(5660300002)(7416002)(41300700001)(36756003)(478600001)(31696002)(4326008)(6512007)(316002)(66556008)(54906003)(38100700002)(86362001)(8676002)(8936002)(6506007)(6486002)(186003)(53546011)(2616005)(66476007)(26005)(6666004)(110136005)(66946007)(31686004)(2906002)(44832011)(66899018)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?VzQ4bjd6T1VBQjB5eFdSVVFmMmI5NmE5aWlhYTJKV2lVZS91ZWwxZzlxRXE2?=
+ =?utf-8?B?dUVnakMvN3pLYkRsYytCcHRDd2ZocmtwOWdQdUpMRzZ4V0hoc1RrOWlaUzFF?=
+ =?utf-8?B?K0YrNCtiQXJPcG1qM2w3cU1ZRGl3bkZOMFh3OUh6cGRZOUlLdzhXeUNmdDBn?=
+ =?utf-8?B?SlJ0MnRCNHd3b1U3b0Vjclp1WmNUMW1iWTd3M28zdlhTcTB0c3Z6Q203cHo1?=
+ =?utf-8?B?bFZEaHh6SlNkRHhXUFBoWXdSNTlKbGNrMHlvS2hGb1NZUGI3OEptUnZ0RUFv?=
+ =?utf-8?B?M1JYQnMyWTBoOW9aakkxc3JBVVQ0UzBKU2pHbDBRdlkrMU9NZW5mZFdNbGdV?=
+ =?utf-8?B?WEdQMDFGZ0lKOWs0a0ZSWjE0RUJjaWtNWitHSG5PUGVaQkd5NmgrMnY3RWQ4?=
+ =?utf-8?B?ZlVpT1E5bFlSNWNNUGt4aGhqM1UwTWlNelpnQzZZOGszeVlCWHZEK25RODV3?=
+ =?utf-8?B?Zi90SFpISUp3NlFucmZLQmk1YkRucDFWSlFrYlFYaW9lWE14Z3dxZzFPNWJV?=
+ =?utf-8?B?bUFab0hoS0w0TnpuMmZBTUNwdHdzWk9mYzRNY1k5YVU4TTBkQm9ic2xRaWZ5?=
+ =?utf-8?B?UEZDZllWR3V1SERZU0dqNlpxZEkrUGdKUlo4SVA2NldEaVNiM1RWaHM1ZGYx?=
+ =?utf-8?B?NVd4aDBxd0pmWHJjL1E2b0ltUWQwMDFWb3Q4T21KZ1RhMFpza2srZnZuRmZj?=
+ =?utf-8?B?QXoxWUdpaWVIRGVvMWs0eHJDOHkwZXRDUStHVXozYlI3NkZNc1c3cFA3VzZ3?=
+ =?utf-8?B?SWVZRi94bkxqcTVRRU5XQ2pZY2I3M1lCN2NqTlN0Vi82S1FGaEFvK0tMQUxX?=
+ =?utf-8?B?OWhsbHlOMkRrQlE1bFMwSzRHUnNOd2I5YUp2L0xEcnU0T3E2b2E2ZHpIeWd6?=
+ =?utf-8?B?YjhEdHJ3YlBPZFFJQ1UwejNEUjFydWpyYWZ1azBSNG1FejlaSjltcXBkTGhl?=
+ =?utf-8?B?cE5VOFU0am0ra1R0a1ZwRWF5dlZnd2RGQm9tajQ4R2JRT3BMeHdiaUlyTkpF?=
+ =?utf-8?B?cVlITmg3Zk9TWmxCOEdCdWx6N0Vhazl4S3dib3kzd29ITnRISnZsOVBJUUVl?=
+ =?utf-8?B?SXpUUFpZQ3BlNWsyNlg2VXdkKzhlS3pMS3IzajByRUF3c2ZEYzU1ekVTc2FZ?=
+ =?utf-8?B?Qy9tcm1wb01uQnBrdVhuN3pyaEl1S3N2aW1Nc1F6VWF5aUIzL1phazcxNnE2?=
+ =?utf-8?B?c0dObFBIeEdOS1dFYkFrNWJxUVdCdzljSnliK1VlL3ZSYkVSV3NSTnJxSFV3?=
+ =?utf-8?B?eVVGQXU5SWphVTkyQTdsVGxoWWovUW9ubTNoV2poeDZpcTBjb2ZJYUQ0NmRs?=
+ =?utf-8?B?VCszdkVicnpTR3h2dlRrRmF5SzlCRTY1T1YvZER3MTR5MnJEcGZYUVk0dnUx?=
+ =?utf-8?B?WXdqcXdDc0V2WFlVN3RkaXd2ZFdaQ1RLVEtnWml5QTRLWmszZ25MaUlOd0FB?=
+ =?utf-8?B?S2UxTmQ0RWFyTUhLZVFXUDJMOW5UYk84RThOTm9lNEx1RmlobXMzeE1GMkNj?=
+ =?utf-8?B?NEoyT2tkcEcyRjZadUNsd25Ha3g3dUxneEYvL2g0K2puU0xPNzFqNm9TS1h4?=
+ =?utf-8?B?WGVBa2dUTnVnWlk1TFk2V2FpQmt0bVFMajFENkdLdE1lR2NZMy92MnkzUk1j?=
+ =?utf-8?B?cFBCT3UyZ3F0MWU1a3JwMXJIMit6dDgzaGJCM3JIMW56Yldlam1vRFcxcWcv?=
+ =?utf-8?B?R3RLbFJxTkdOVDJyNTNMQVkyemR5QnBtc3V5TlVjK2xSQmV6L2Q3UTNzRVBQ?=
+ =?utf-8?B?TC96NkxjNHBwMHg4WHFGOFNJOHJxQ0F0Syt3YWI1T0JmSXJTSmtUaEpsaU1D?=
+ =?utf-8?B?R1BOZzV5ZzlyOE1KMTNYWk8vUVZwVWZRUWE3TXE3Y1lIbmtiRG1DY3IxQ3RO?=
+ =?utf-8?B?d2JGTEdrSyt4a1VLWGlFWnd2SVZtTVhuTG0vSTdiOHVqODcwT3pWRmliZnlW?=
+ =?utf-8?B?dmpjVFFhbWZiN1VwTjh6eXJhaE53M3dyRlF6aEt2ZG1EQ09EQ0FXL1c4NVVQ?=
+ =?utf-8?B?QnhYb2l2UEhDZS9BUTF1NU9ZZU5uKzVXYU5nOEViRTJzaCtkVDVuak5JYUw2?=
+ =?utf-8?B?b0F6MHVmUjhhY0FjRk5yd1VYUE54aGk1Zmg0dTJQcS9reVU5alZNZVBtVTNL?=
+ =?utf-8?Q?b/nCpw50nmAH8qAu+uY9OkiFv?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6cff8928-2e0c-4c75-309d-08db167b92f5
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3370.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2023 15:27:00.7575
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: A/gn2P8lgkVW/lQBW9WX/IpdFDzc9+ewXxEM2PlwGWl8a/yI2xJkfwuMN/vtukQc
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB7001
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 490183F50D
-X-Spamd-Bar: -----------
-X-Spamd-Result: default: False [-11.40 / 15.00];
+X-Rspamd-Queue-Id: 98EB33EC4E
+X-Spamd-Bar: ---------
+X-Spamd-Result: default: False [-9.50 / 15.00];
 	REPLY(-4.00)[];
-	DWL_DNSWL_HI(-3.50)[intel.com:dkim];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	RCVD_IN_DNSWL_HI(-1.00)[40.107.243.70:from,2603:10b6:5:38::25:received];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-0.50)[134.134.136.24:from];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[134.134.136.24:from];
-	FREEMAIL_CC(0.00)[gmail.com,chromium.org,intel.com,padovan.org,daenzer.net,vger.kernel.org,lists.freedesktop.org,linaro.org,lists.linaro.org,amd.com];
 	TAGGED_RCPT(0.00)[];
-	R_SPF_NA(0.00)[no SPF record];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_TWELVE(0.00)[17];
+	FREEMAIL_CC(0.00)[gmail.com,chromium.org,intel.com,padovan.org,daenzer.net,vger.kernel.org,lists.freedesktop.org,linaro.org,lists.linaro.org,amd.com];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.243.70:from];
 	FROM_HAS_DN(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_THREE(0.00)[3];
-	ARC_NA(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	DKIM_TRACE(0.00)[intel.com:+];
-	HAS_ORG_HEADER(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:4983, ipnet:134.134.136.0/24, country:US];
-	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	FREEMAIL_TO(0.00)[linux.intel.com,gmail.com];
+	DKIM_TRACE(0.00)[amd.com:+];
 	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	TO_DN_SOME(0.00)[]
-Message-ID-Hash: 5UHRSZH3D6UX3ZNCI6F2A6XUC3JZ4QUQ
-X-Message-ID-Hash: 5UHRSZH3D6UX3ZNCI6F2A6XUC3JZ4QUQ
-X-MailFrom: tvrtko.ursulin@linux.intel.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Rob Clark <robdclark@gmail.com>, Rob Clark <robdclark@chromium.org>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Gustavo Padovan <gustavo@padovan.org>, =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>, Rodrigo Vivi <rodrigo.vivi@intel.com>, open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Luben Tuikov <luben.tuikov@amd.com>, Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>
+Message-ID-Hash: ATZIXVD5JGYQ3KTULM3Q57MECL44EJFF
+X-Message-ID-Hash: ATZIXVD5JGYQ3KTULM3Q57MECL44EJFF
+X-MailFrom: Luben.Tuikov@amd.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Rob Clark <robdclark@gmail.com>, Rob Clark <robdclark@chromium.org>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Gustavo Padovan <gustavo@padovan.org>, =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>, Rodrigo Vivi <rodrigo.vivi@intel.com>, open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Alex Deucher <alexander.deucher@amd.com>, freedreno@lists.freedesktop.org, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v4 06/14] dma-buf/sync_file: Support (E)POLLPRI
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5UHRSZH3D6UX3ZNCI6F2A6XUC3JZ4QUQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ATZIXVD5JGYQ3KTULM3Q57MECL44EJFF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-
-On 24/02/2023 11:00, Pekka Paalanen wrote:
-> On Fri, 24 Feb 2023 10:50:51 +0000
-> Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com> wrote:
+On 2023-02-24 06:37, Tvrtko Ursulin wrote:
 > 
->> On 24/02/2023 10:24, Pekka Paalanen wrote:
->>> On Fri, 24 Feb 2023 09:41:46 +0000
->>> Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com> wrote:
->>>    
->>>> On 24/02/2023 09:26, Pekka Paalanen wrote:
->>>>> On Thu, 23 Feb 2023 10:51:48 -0800
->>>>> Rob Clark <robdclark@gmail.com> wrote:
->>>>>       
->>>>>> On Thu, Feb 23, 2023 at 1:38 AM Pekka Paalanen <ppaalanen@gmail.com> wrote:
->>>>>>>
->>>>>>> On Wed, 22 Feb 2023 07:37:26 -0800
->>>>>>> Rob Clark <robdclark@gmail.com> wrote:
->>>>>>>         
->>>>>>>> On Wed, Feb 22, 2023 at 1:49 AM Pekka Paalanen <ppaalanen@gmail.com> wrote:
->>>>>
->>>>> ...
->>>>>       
->>>>>>>>> On another matter, if the application uses SET_DEADLINE with one
->>>>>>>>> timestamp, and the compositor uses SET_DEADLINE on the same thing with
->>>>>>>>> another timestamp, what should happen?
+> On 24/02/2023 11:00, Pekka Paalanen wrote:
+>> On Fri, 24 Feb 2023 10:50:51 +0000
+>> Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com> wrote:
+>>
+>>> On 24/02/2023 10:24, Pekka Paalanen wrote:
+>>>> On Fri, 24 Feb 2023 09:41:46 +0000
+>>>> Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com> wrote:
+>>>>    
+>>>>> On 24/02/2023 09:26, Pekka Paalanen wrote:
+>>>>>> On Thu, 23 Feb 2023 10:51:48 -0800
+>>>>>> Rob Clark <robdclark@gmail.com> wrote:
+>>>>>>       
+>>>>>>> On Thu, Feb 23, 2023 at 1:38 AM Pekka Paalanen <ppaalanen@gmail.com> wrote:
 >>>>>>>>
->>>>>>>> The expectation is that many deadline hints can be set on a fence.
->>>>>>>> The fence signaller should track the soonest deadline.
->>>>>>>
->>>>>>> You need to document that as UAPI, since it is observable to userspace.
->>>>>>> It would be bad if drivers or subsystems would differ in behaviour.
->>>>>>>         
+>>>>>>>> On Wed, 22 Feb 2023 07:37:26 -0800
+>>>>>>>> Rob Clark <robdclark@gmail.com> wrote:
+>>>>>>>>         
+>>>>>>>>> On Wed, Feb 22, 2023 at 1:49 AM Pekka Paalanen <ppaalanen@gmail.com> wrote:
 >>>>>>
->>>>>> It is in the end a hint.  It is about giving the driver more
->>>>>> information so that it can make better choices.  But the driver is
->>>>>> even free to ignore it.  So maybe "expectation" is too strong of a
->>>>>> word.  Rather, any other behavior doesn't really make sense.  But it
->>>>>> could end up being dictated by how the hw and/or fw works.
+>>>>>> ...
+>>>>>>       
+>>>>>>>>>> On another matter, if the application uses SET_DEADLINE with one
+>>>>>>>>>> timestamp, and the compositor uses SET_DEADLINE on the same thing with
+>>>>>>>>>> another timestamp, what should happen?
+>>>>>>>>>
+>>>>>>>>> The expectation is that many deadline hints can be set on a fence.
+>>>>>>>>> The fence signaller should track the soonest deadline.
+>>>>>>>>
+>>>>>>>> You need to document that as UAPI, since it is observable to userspace.
+>>>>>>>> It would be bad if drivers or subsystems would differ in behaviour.
+>>>>>>>>         
+>>>>>>>
+>>>>>>> It is in the end a hint.  It is about giving the driver more
+>>>>>>> information so that it can make better choices.  But the driver is
+>>>>>>> even free to ignore it.  So maybe "expectation" is too strong of a
+>>>>>>> word.  Rather, any other behavior doesn't really make sense.  But it
+>>>>>>> could end up being dictated by how the hw and/or fw works.
+>>>>>>
+>>>>>> It will stop being a hint once it has been implemented and used in the
+>>>>>> wild long enough. The kernel userspace regression rules make sure of
+>>>>>> that.
 >>>>>
->>>>> It will stop being a hint once it has been implemented and used in the
->>>>> wild long enough. The kernel userspace regression rules make sure of
->>>>> that.
+>>>>> Yeah, tricky and maybe a gray area in this case. I think we eluded
+>>>>> elsewhere in the thread that renaming the thing might be an option.
+>>>>>
+>>>>> So maybe instead of deadline, which is a very strong word, use something
+>>>>> along the lines of "present time hint", or "signalled time hint"? Maybe
+>>>>> reads clumsy. Just throwing some ideas for a start.
 >>>>
->>>> Yeah, tricky and maybe a gray area in this case. I think we eluded
->>>> elsewhere in the thread that renaming the thing might be an option.
+>>>> You can try, but I fear that if it ever changes behaviour and
+>>>> someone notices that, it's labelled as a kernel regression. I don't
+>>>> think documentation has ever been the authoritative definition of UABI
+>>>> in Linux, it just guides drivers and userspace towards a common
+>>>> understanding and common usage patterns.
 >>>>
->>>> So maybe instead of deadline, which is a very strong word, use something
->>>> along the lines of "present time hint", or "signalled time hint"? Maybe
->>>> reads clumsy. Just throwing some ideas for a start.
+>>>> So even if the UABI contract is not documented (ugh), you need to be
+>>>> prepared to set the UABI contract through kernel implementation.
 >>>
->>> You can try, but I fear that if it ever changes behaviour and
->>> someone notices that, it's labelled as a kernel regression. I don't
->>> think documentation has ever been the authoritative definition of UABI
->>> in Linux, it just guides drivers and userspace towards a common
->>> understanding and common usage patterns.
+>>> To be the devil's advocate it probably wouldn't be an ABI regression but
+>>> just an regression. Same way as what nice(2) priorities mean hasn't
+>>> always been the same over the years, I don't think there is a strict
+>>> contract.
 >>>
->>> So even if the UABI contract is not documented (ugh), you need to be
->>> prepared to set the UABI contract through kernel implementation.
->>
->> To be the devil's advocate it probably wouldn't be an ABI regression but
->> just an regression. Same way as what nice(2) priorities mean hasn't
->> always been the same over the years, I don't think there is a strict
->> contract.
->>
->> Having said that, it may be different with latency sensitive stuff such
->> as UIs though since it is very observable and can be very painful to users.
->>
->>> If you do not document the UABI contract, then different drivers are
->>> likely to implement it differently, leading to differing behaviour.
->>> Also userspace will invent wild ways to abuse the UABI if there is no
->>> documentation guiding it on proper use. If userspace or end users
->>> observe different behaviour, that's bad even if it's not a regression.
+>>> Having said that, it may be different with latency sensitive stuff such
+>>> as UIs though since it is very observable and can be very painful to users.
 >>>
->>> I don't like the situation either, but it is what it is. UABI stability
->>> trumps everything regardless of whether it was documented or not.
+>>>> If you do not document the UABI contract, then different drivers are
+>>>> likely to implement it differently, leading to differing behaviour.
+>>>> Also userspace will invent wild ways to abuse the UABI if there is no
+>>>> documentation guiding it on proper use. If userspace or end users
+>>>> observe different behaviour, that's bad even if it's not a regression.
+>>>>
+>>>> I don't like the situation either, but it is what it is. UABI stability
+>>>> trumps everything regardless of whether it was documented or not.
+>>>>
+>>>> I bet userspace is going to use this as a "make it faster, make it
+>>>> hotter" button. I would not be surprised if someone wrote a LD_PRELOAD
+>>>> library that stamps any and all fences with an expired deadline to
+>>>> just squeeze out a little more through some weird side-effect.
+>>>>
+>>>> Well, that's hopefully overboard in scaring, but in the end, I would
+>>>> like to see UABI documented so I can have a feeling of what it is for
+>>>> and how it was intended to be used. That's all.
 >>>
->>> I bet userspace is going to use this as a "make it faster, make it
->>> hotter" button. I would not be surprised if someone wrote a LD_PRELOAD
->>> library that stamps any and all fences with an expired deadline to
->>> just squeeze out a little more through some weird side-effect.
+>>> We share the same concern. If you read elsewhere in these threads you
+>>> will notice I have been calling this an "arms race". If the ability to
+>>> make yourself go faster does not required additional privilege I also
+>>> worry everyone will do it at which point it becomes pointless. So yes, I
+>>> do share this concern about exposing any of this as an unprivileged uapi.
 >>>
->>> Well, that's hopefully overboard in scaring, but in the end, I would
->>> like to see UABI documented so I can have a feeling of what it is for
->>> and how it was intended to be used. That's all.
+>>> Is it possible to limit access to only compositors in some sane way?
+>>> Sounds tricky when dma-fence should be disconnected from DRM..
 >>
->> We share the same concern. If you read elsewhere in these threads you
->> will notice I have been calling this an "arms race". If the ability to
->> make yourself go faster does not required additional privilege I also
->> worry everyone will do it at which point it becomes pointless. So yes, I
->> do share this concern about exposing any of this as an unprivileged uapi.
->>
->> Is it possible to limit access to only compositors in some sane way?
->> Sounds tricky when dma-fence should be disconnected from DRM..
+>> Maybe it's not that bad in this particular case, because we are talking
+>> only about boosting GPU clocks which benefits everyone (except
+>> battery life) and it does not penalize other programs like e.g.
+>> job priorities do.
 > 
-> Maybe it's not that bad in this particular case, because we are talking
-> only about boosting GPU clocks which benefits everyone (except
-> battery life) and it does not penalize other programs like e.g.
-> job priorities do.
-
-Apart from efficiency that you mentioned, which does not always favor 
-higher clocks, sometimes thermal budget is also shared between CPU and 
-GPU. So more GPU clocks can mean fewer CPU clocks. It's really hard to 
-make optimal choices without the full coordination between both schedulers.
-
-But that is even not the main point, which is that if everyone sets the 
-immediate deadline then having the deadline API is a bit pointless. For 
-instance there is a reason negative nice needs CAP_SYS_ADMIN.
-
-However Rob has also pointed out the existence of uclamp.min via 
-sched_setattr which is unprivileged and can influence frequency 
-selection in the CPU world, so I conceded on that point. If CPU world 
-has accepted it so can we I guess.
-
-So IMO we are back to whether we can agree defining it is a hint is good 
-enough, be in via the name of the ioctl/flag itself or via documentation.
-
-> Drivers are not going to use the deadline for scheduling priorities,
-> right? I don't recall seeing any mention of that.
+> Apart from efficiency that you mentioned, which does not always favor 
+> higher clocks, sometimes thermal budget is also shared between CPU and 
+> GPU. So more GPU clocks can mean fewer CPU clocks. It's really hard to 
+> make optimal choices without the full coordination between both schedulers.
 > 
-> ...right?
-
-I wouldn't have thought it would be beneficial to preclude that, or 
-assume what drivers would do with the info to begin with.
-
-For instance in i915 we almost had a deadline based scheduler which was 
-much fairer than the current priority sorted fifo and in an ideal world 
-we would either revive or re-implement that idea. In which case 
-considering the fence deadline would naturally slot in and give true 
-integration with compositor deadlines (not just boost clocks and pray it 
-helps).
-
+> But that is even not the main point, which is that if everyone sets the 
+> immediate deadline then having the deadline API is a bit pointless. For 
+> instance there is a reason negative nice needs CAP_SYS_ADMIN.
+> 
+> However Rob has also pointed out the existence of uclamp.min via 
+> sched_setattr which is unprivileged and can influence frequency 
+> selection in the CPU world, so I conceded on that point. If CPU world 
+> has accepted it so can we I guess.
+> 
+> So IMO we are back to whether we can agree defining it is a hint is good 
+> enough, be in via the name of the ioctl/flag itself or via documentation.
+> 
+>> Drivers are not going to use the deadline for scheduling priorities,
+>> right? I don't recall seeing any mention of that.
+>>
+>> ...right?
+> 
+> I wouldn't have thought it would be beneficial to preclude that, or 
+> assume what drivers would do with the info to begin with.
+> 
+> For instance in i915 we almost had a deadline based scheduler which was 
+> much fairer than the current priority sorted fifo and in an ideal world 
+> we would either revive or re-implement that idea. In which case 
+> considering the fence deadline would naturally slot in and give true 
+> integration with compositor deadlines (not just boost clocks and pray it 
+> helps).
+How is user-space to decide whether to use ioctl(SET_DEADLINE) or
+poll(POLLPRI)?
+-- 
 Regards,
+Luben
 
-Tvrtko
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
