@@ -2,63 +2,63 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D3EC46A5590
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 28 Feb 2023 10:23:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 457C86A5596
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 28 Feb 2023 10:23:34 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E528D4424A
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 28 Feb 2023 09:23:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 52B064424D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 28 Feb 2023 09:23:33 +0000 (UTC)
 Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com [209.85.167.52])
-	by lists.linaro.org (Postfix) with ESMTPS id 67B8D44247
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 28 Feb 2023 09:22:43 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 2627C44244
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 28 Feb 2023 09:23:15 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=GUWDqdPG;
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=WLPbn+kw;
 	spf=pass (lists.linaro.org: domain of ppaalanen@gmail.com designates 209.85.167.52 as permitted sender) smtp.mailfrom=ppaalanen@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-lf1-f52.google.com with SMTP id s20so12221187lfb.11
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 28 Feb 2023 01:22:43 -0800 (PST)
+Received: by mail-lf1-f52.google.com with SMTP id g17so12271599lfv.4
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 28 Feb 2023 01:23:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1677576162;
+        d=gmail.com; s=20210112; t=1677576194;
         h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=wsQK0hNV4XmU0F6XjhscNf54T4h8GnwUQ061Wlk9Tzk=;
-        b=GUWDqdPGpjrjvibZS8Qv1BxmyT4O4yPEJ0NuSN8ZUTq6nkLWr1MMcq37zCYG+Mu1Mn
-         Y2FtWyKbcQu4OBnNTgY5mFNG9JQab6+uqIwbzitC6Fp4eFeOAB7uawQc5PV0B6umBPSf
-         K/3Cf7zrOoqaRTpWRxg+r4Qu5XXRrrxT+OxCkfvIZ2YPL2BtDJBBJGtJHjk0NlshiDvB
-         f9ggJHxIZZUZEB8QZJOgc67arafHI7poxZ4XRxJEGE79Nj5tLy9VaRmJW23mrzgW930A
-         pRz9CiKsfCkEu78pwvPxNfupEb5pHoT7lmXaYBl1wpNPBJj7ncgf0ruRLsuApNgDKwLt
-         TdrA==
+        bh=npzAjHtm5Aug8QOfbJ5dztAADOLzeyYlASny4nFL7nA=;
+        b=WLPbn+kwyy5ORuAFd/3EiqfumHpfaM6rnMcaibOSwSZVt0+KqRUQZEThXo5XUlaXIj
+         cZuIw6H/OqTktALRUwXmZ7/zwE4qXJFUO+I9XLvG+IQGgL7Mi3UTFhmrtCaXh6r9sPbJ
+         XyPdBzkjscLuYBwX9ZwKh62WuRPYbYfpyz0yNLO5b1cpJCTTxMS4nNiSUfnwCzbyWi1E
+         iHvSAWOEhoBlj+gRWPFzNM/LY6ojiBWUJ52ZJczHTKwX+J9YOm7luVtxksqaIe7qSXE1
+         IFi0HwDDMPe3rN7oNsnOWMMPtfWEFbID1sGprpzkoHluJcFGj2l2LusSeV2oajAJETFx
+         RjwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1677576162;
+        d=1e100.net; s=20210112; t=1677576194;
         h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=wsQK0hNV4XmU0F6XjhscNf54T4h8GnwUQ061Wlk9Tzk=;
-        b=jOZ6YzqDc43uNWon82UL9WnBZW+mbMc+DWD6FSlnbqULx1WMNtnWWEXS/yNN+zgtSw
-         4TxkizKrp/+tF/RcfQpGN4iOv554stjQWwst6aDrresKhPlg6P8CjVrdlZTa6LfjJs19
-         o8VnHEBTKmtTbq9jhR9N4ol3887Y7egMB9Ekv9T1FqCaI23NccnxhbQ7i60Hit9Jt3vu
-         drT2uHoLCnoPfJPuibl4fwc5nHymPjqupK3sMwogovzczUCx/k0m7VtBQGUdC2HiJIyr
-         AQ6sNES5/D40j+nnFFWYoHBd78+SVUd8OQSpwOUE4GyBiht0CjkwLQtc1PqrdU6LHesF
-         oqJA==
-X-Gm-Message-State: AO0yUKXHxgAAkd3zoG6wGAY3FHPJu+yEwNtruAkE4BGoIYkxF2KyXE3V
-	g9qmOrPnokCp+4eU/3dluK0=
-X-Google-Smtp-Source: AK7set9XRi6D4mXG0XyHlnfXEgQSLKmwmc5W+YD31WYJ95pcPak+8Jvf19/aj6JG0bKTDHKIlBQyxA==
-X-Received: by 2002:ac2:5197:0:b0:4db:38a2:e989 with SMTP id u23-20020ac25197000000b004db38a2e989mr509397lfi.63.1677576162165;
-        Tue, 28 Feb 2023 01:22:42 -0800 (PST)
+        bh=npzAjHtm5Aug8QOfbJ5dztAADOLzeyYlASny4nFL7nA=;
+        b=iecFAWHElM/k6x2AzuCFXdVmVHtxD1x+HolgSS28FlA4KFbtHIhKAxM7yHiKf/0H/d
+         K3b4erauZcUvDkdb9A0MHyueC5RJ7GlLx2U7xzet/dfm3LxUc0PZWvXq8SgshWVYlJ+G
+         Cz/fA1lV6zzK0l5kJRyrQPsjyWdSNeGB+Dc8Xq+rlt8/JDyaRK+H/L6Vxr321SlisE5x
+         Ek3R+spxmPyho/hXwKFubEgadYoKUzmCRYIIBZfLrolg8I/wyOGfGA93UIq4USP7l0db
+         p8hgqOHrSO4lOgN5REdwCbNj+MYwtUXEVeP8n9eIb38JSNYoqWmcTJ5wXaqhCrlK6lgJ
+         /lPQ==
+X-Gm-Message-State: AO0yUKUHKspR7WEMsYWMOLIAG3ShYPrchz+/YmtU4wmdRszYfTSoxdPm
+	YgKRq8hSGEIQZkk+PLgsplo=
+X-Google-Smtp-Source: AK7set9mdzfycnAPOkQV6+lzwV3/EwkFTPfCVDBUrije806Gw9JGtAIGIjLIbxRVPQP92RCNiQ3KAQ==
+X-Received: by 2002:a05:6512:2203:b0:4d8:51e7:9f23 with SMTP id h3-20020a056512220300b004d851e79f23mr741318lfu.34.1677576193727;
+        Tue, 28 Feb 2023 01:23:13 -0800 (PST)
 Received: from eldfell ([194.136.85.206])
-        by smtp.gmail.com with ESMTPSA id k11-20020a2ea26b000000b00293cc5f83b4sm1113668ljm.27.2023.02.28.01.22.41
+        by smtp.gmail.com with ESMTPSA id g4-20020a19ac04000000b004cb3fbc7925sm1253133lfc.77.2023.02.28.01.23.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Feb 2023 01:22:41 -0800 (PST)
-Date: Tue, 28 Feb 2023 11:22:38 +0200
+        Tue, 28 Feb 2023 01:23:13 -0800 (PST)
+Date: Tue, 28 Feb 2023 11:23:10 +0200
 From: Pekka Paalanen <ppaalanen@gmail.com>
 To: Rob Clark <robdclark@gmail.com>
-Message-ID: <20230228112238.40e2ad43@eldfell>
-In-Reply-To: <20230227193535.2822389-7-robdclark@gmail.com>
+Message-ID: <20230228112310.39274fcf@eldfell>
+In-Reply-To: <20230227193535.2822389-8-robdclark@gmail.com>
 References: <20230227193535.2822389-1-robdclark@gmail.com>
-	<20230227193535.2822389-7-robdclark@gmail.com>
+	<20230227193535.2822389-8-robdclark@gmail.com>
 X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 67B8D44247
+X-Rspamd-Queue-Id: 2627C44244
 X-Spamd-Bar: --------
 X-Spamd-Result: default: False [-8.10 / 15.00];
 	REPLY(-4.00)[];
@@ -90,110 +90,250 @@ X-Spamd-Result: default: False [-8.10 / 15.00];
 	MIME_TRACE(0.00)[0:+,1:+,2:~];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: 4WMMGSCEKMTN5ZD3LFFJFWFISWBVBYN6
-X-Message-ID-Hash: 4WMMGSCEKMTN5ZD3LFFJFWFISWBVBYN6
+Message-ID-Hash: PEND7ZA7JPEAMRVYE3K2OMRVZ4WZSEEG
+X-Message-ID-Hash: PEND7ZA7JPEAMRVYE3K2OMRVZ4WZSEEG
 X-MailFrom: ppaalanen@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, Michel =?UTF-8?B?RMOkbnplcg==?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Simon Ser <contact@emersion.fr>, Luben Tuikov <luben.tuikov@amd.com>, Rob Clark <robdclark@chromium.org>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>
+CC: dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, Michel =?UTF-8?B?RMOkbnplcg==?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Simon Ser <contact@emersion.fr>, Luben Tuikov <luben.tuikov@amd.com>, Rob Clark <robdclark@chromium.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v7 06/15] dma-buf/sync_file: Support (E)POLLPRI
+Subject: [Linaro-mm-sig] Re: [PATCH v7 07/15] dma-buf/sw_sync: Add fence deadline support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4WMMGSCEKMTN5ZD3LFFJFWFISWBVBYN6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PEND7ZA7JPEAMRVYE3K2OMRVZ4WZSEEG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============1061258265340164573=="
+Content-Type: multipart/mixed; boundary="===============4010592073988209710=="
 
---===============1061258265340164573==
-Content-Type: multipart/signed; boundary="Sig_/4g4mIUnoEruvrvGrMqxjkCL";
+--===============4010592073988209710==
+Content-Type: multipart/signed; boundary="Sig_/8aE4tGFLiLpdo+6qg3s=3bO";
  protocol="application/pgp-signature"; micalg=pgp-sha256
 
---Sig_/4g4mIUnoEruvrvGrMqxjkCL
-Content-Type: text/plain; charset=US-ASCII
+--Sig_/8aE4tGFLiLpdo+6qg3s=3bO
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, 27 Feb 2023 11:35:12 -0800
+On Mon, 27 Feb 2023 11:35:13 -0800
 Rob Clark <robdclark@gmail.com> wrote:
 
 > From: Rob Clark <robdclark@chromium.org>
 >=20
-> Allow userspace to use the EPOLLPRI/POLLPRI flag to indicate an urgent
-> wait (as opposed to a "housekeeping" wait to know when to cleanup after
-> some work has completed).  Usermode components of GPU driver stacks
-> often poll() on fence fd's to know when it is safe to do things like
-> free or reuse a buffer, but they can also poll() on a fence fd when
-> waiting to read back results from the GPU.  The EPOLLPRI/POLLPRI flag
-> lets the kernel differentiate these two cases.
+> This consists of simply storing the most recent deadline, and adding an
+> ioctl to retrieve the deadline.  This can be used in conjunction with
+> the SET_DEADLINE ioctl on a fence fd for testing.  Ie. create various
+> sw_sync fences, merge them into a fence-array, set deadline on the
+> fence-array and confirm that it is propagated properly to each fence.
+>=20
+> v2: Switch UABI to express deadline as u64
+> v3: More verbose UAPI docs, show how to convert from timespec
 >=20
 > Signed-off-by: Rob Clark <robdclark@chromium.org>
+> Reviewed-by: Christian K=C3=B6nig <christian.koenig@amd.com>
 > ---
->  drivers/dma-buf/sync_file.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
+>  drivers/dma-buf/sw_sync.c      | 58 ++++++++++++++++++++++++++++++++++
+>  drivers/dma-buf/sync_debug.h   |  2 ++
+>  include/uapi/linux/sync_file.h |  6 +++-
+>  3 files changed, 65 insertions(+), 1 deletion(-)
 >=20
-> diff --git a/drivers/dma-buf/sync_file.c b/drivers/dma-buf/sync_file.c
-> index 418021cfb87c..cbe96295373b 100644
-> --- a/drivers/dma-buf/sync_file.c
-> +++ b/drivers/dma-buf/sync_file.c
-> @@ -192,6 +192,14 @@ static __poll_t sync_file_poll(struct file *file, po=
-ll_table *wait)
->  {
->  	struct sync_file *sync_file =3D file->private_data;
+> diff --git a/drivers/dma-buf/sw_sync.c b/drivers/dma-buf/sw_sync.c
+> index 348b3a9170fa..3e2315ee955b 100644
+> --- a/drivers/dma-buf/sw_sync.c
+> +++ b/drivers/dma-buf/sw_sync.c
+> @@ -52,12 +52,28 @@ struct sw_sync_create_fence_data {
+>  	__s32	fence; /* fd of new fence */
+>  };
 > =20
-> +	/*
-> +	 * The POLLPRI/EPOLLPRI flag can be used to signal that
-> +	 * userspace wants the fence to signal ASAP, express this
-> +	 * as an immediate deadline.
-> +	 */
-> +	if (poll_requested_events(wait) & EPOLLPRI)
-> +		dma_fence_set_deadline(sync_file->fence, ktime_get());
+> +/**
+> + * struct sw_sync_get_deadline - get the deadline hint of a sw_sync fence
+> + * @deadline_ns: absolute time of the deadline
+> + * @pad:	must be zero
+> + * @fence_fd:	the sw_sync fence fd (in)
+> + *
+> + * The timebase for the deadline is CLOCK_MONOTONIC (same as vblank)
 
 Hi,
 
-I don't think this doc will appear anywhere where it could be found,
-maybe not in kernel HTML doc at all?
+the commit message explains this returns the "most recent" deadline,
+but the doc here forgets to mention that. I suppose that means the
+most recently set deadline and not the deadline furthest forward in
+time (largest value).
 
-I also think this is not a good idea, but not my call.
+Is "most recent" the appropriate behaviour when multiple deadlines have
+been set? Would you not want the earliest deadline set so far instead?
+
+What if none has been set?
+
+> + */
+> +struct sw_sync_get_deadline {
+> +	__u64	deadline_ns;
+> +	__u32	pad;
+> +	__s32	fence_fd;
+> +};
+> +
+>  #define SW_SYNC_IOC_MAGIC	'W'
+> =20
+>  #define SW_SYNC_IOC_CREATE_FENCE	_IOWR(SW_SYNC_IOC_MAGIC, 0,\
+>  		struct sw_sync_create_fence_data)
+> =20
+>  #define SW_SYNC_IOC_INC			_IOW(SW_SYNC_IOC_MAGIC, 1, __u32)
+> +#define SW_SYNC_GET_DEADLINE		_IOWR(SW_SYNC_IOC_MAGIC, 2, \
+> +		struct sw_sync_get_deadline)
+> =20
+>  static const struct dma_fence_ops timeline_fence_ops;
+> =20
+> @@ -171,6 +187,13 @@ static void timeline_fence_timeline_value_str(struct=
+ dma_fence *fence,
+>  	snprintf(str, size, "%d", parent->value);
+>  }
+> =20
+> +static void timeline_fence_set_deadline(struct dma_fence *fence, ktime_t=
+ deadline)
+> +{
+> +	struct sync_pt *pt =3D dma_fence_to_sync_pt(fence);
+> +
+> +	pt->deadline =3D deadline;
+> +}
+> +
+>  static const struct dma_fence_ops timeline_fence_ops =3D {
+>  	.get_driver_name =3D timeline_fence_get_driver_name,
+>  	.get_timeline_name =3D timeline_fence_get_timeline_name,
+> @@ -179,6 +202,7 @@ static const struct dma_fence_ops timeline_fence_ops =
+=3D {
+>  	.release =3D timeline_fence_release,
+>  	.fence_value_str =3D timeline_fence_value_str,
+>  	.timeline_value_str =3D timeline_fence_timeline_value_str,
+> +	.set_deadline =3D timeline_fence_set_deadline,
+>  };
+> =20
+>  /**
+> @@ -387,6 +411,37 @@ static long sw_sync_ioctl_inc(struct sync_timeline *=
+obj, unsigned long arg)
+>  	return 0;
+>  }
+> =20
+> +static int sw_sync_ioctl_get_deadline(struct sync_timeline *obj, unsigne=
+d long arg)
+> +{
+> +	struct sw_sync_get_deadline data;
+> +	struct dma_fence *fence;
+> +	struct sync_pt *pt;
+> +
+> +	if (copy_from_user(&data, (void __user *)arg, sizeof(data)))
+> +		return -EFAULT;
+> +
+> +	if (data.deadline_ns || data.pad)
+> +		return -EINVAL;
+> +
+> +	fence =3D sync_file_get_fence(data.fence_fd);
+> +	if (!fence)
+> +		return -EINVAL;
+> +
+> +	pt =3D dma_fence_to_sync_pt(fence);
+> +	if (!pt)
+> +		return -EINVAL;
+> +
+> +
+> +	data.deadline_ns =3D ktime_to_ns(pt->deadline);
+> +
+> +	dma_fence_put(fence);
+> +
+> +	if (copy_to_user((void __user *)arg, &data, sizeof(data)))
+> +		return -EFAULT;
+> +
+> +	return 0;
+> +}
+> +
+>  static long sw_sync_ioctl(struct file *file, unsigned int cmd,
+>  			  unsigned long arg)
+>  {
+> @@ -399,6 +454,9 @@ static long sw_sync_ioctl(struct file *file, unsigned=
+ int cmd,
+>  	case SW_SYNC_IOC_INC:
+>  		return sw_sync_ioctl_inc(obj, arg);
+> =20
+> +	case SW_SYNC_GET_DEADLINE:
+> +		return sw_sync_ioctl_get_deadline(obj, arg);
+> +
+>  	default:
+>  		return -ENOTTY;
+>  	}
+> diff --git a/drivers/dma-buf/sync_debug.h b/drivers/dma-buf/sync_debug.h
+> index 6176e52ba2d7..2e0146d0bdbb 100644
+> --- a/drivers/dma-buf/sync_debug.h
+> +++ b/drivers/dma-buf/sync_debug.h
+> @@ -55,11 +55,13 @@ static inline struct sync_timeline *dma_fence_parent(=
+struct dma_fence *fence)
+>   * @base: base fence object
+>   * @link: link on the sync timeline's list
+>   * @node: node in the sync timeline's tree
+> + * @deadline: the most recently set fence deadline
+>   */
+>  struct sync_pt {
+>  	struct dma_fence base;
+>  	struct list_head link;
+>  	struct rb_node node;
+> +	ktime_t deadline;
+>  };
+> =20
+>  extern const struct file_operations sw_sync_debugfs_fops;
+> diff --git a/include/uapi/linux/sync_file.h b/include/uapi/linux/sync_fil=
+e.h
+> index 49325cf6749b..dc6645b2598b 100644
+> --- a/include/uapi/linux/sync_file.h
+> +++ b/include/uapi/linux/sync_file.h
+> @@ -72,7 +72,11 @@ struct sync_file_info {
+>   * @deadline_ns: absolute time of the deadline
+>   * @pad:	must be zero
+>   *
+> - * The timebase for the deadline is CLOCK_MONOTONIC (same as vblank)
+> + * The timebase for the deadline is CLOCK_MONOTONIC (same as vblank).  F=
+or
+> + * example:
+> + *
+> + *     clock_gettime(CLOCK_MONOTONIC, &t);
+> + *     deadline_ns =3D (t.tv_sec * 1000000000L) + t.tv_nsec + duration_ns
+
+Shouldn't this hunk be in patch 5 instead?
+
+What's duration_ns? Maybe ns_until_my_deadline would be more clear that
+it is something userspace freely chooses?
+
+>   */
+>  struct sync_set_deadline {
+>  	__u64	deadline_ns;
 
 
 Thanks,
 pq
 
-
-> +
->  	poll_wait(file, &sync_file->wq, wait);
-> =20
->  	if (list_empty(&sync_file->cb.node) &&
-
-
---Sig_/4g4mIUnoEruvrvGrMqxjkCL
+--Sig_/8aE4tGFLiLpdo+6qg3s=3bO
 Content-Type: application/pgp-signature
 Content-Description: OpenPGP digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmP9x94ACgkQI1/ltBGq
-qqcKcRAAg5Pur+aKyhVVpZKHRYWfXoeqKBZEkhvsWa15fq6LTXk22BghXfokd1N2
-c381QCbhigGI0bovn9MPDu2/nJrLNpqKLGwyd+vFxDTqByHorplcZZGgb26Mg0wM
-hkkXktzemleNfjt+uVeG9T8dtXqdbgBH6v4GlCLEZj3weXkNslNe+DPkJ1850L6Q
-eAysExnpk48OlBvF1Cbj28sd9ejXQdRU7+gTZutDk959gHAb1JMGyEHfP0Km9iBD
-0gJo+lwDVjIYUlVxoq/gBRQStWtDG2kQ8mNsTLKOKQo8oyc1ocFCzrFVyJW5+bmm
-gUxJBOyIvIdphde1zH9Ba7aA2/pi6dUCxHjMBnQP6nU8qu+FXXd1HZYByJpNicvF
-s22Yd0sWjEQ+LDpt6XmjaHhB7jphANx49sCdA+K3X1v7e8IBELzRFmiJJYfv17fN
-mAeyEn96ldcUxDjrQzWboL2w0KsEK4MkOsZozVG189Z1iKH+uXmUNMsySRDHd+ig
-+EQ3gp326zylALGQUzK0nJFOlJq2CNYnkK/HixYvLLw1fNp3M7g5WeaBUWLkcfHg
-eiSjSPWatT7wNmhjLe4tT/FNlFp4Wwe3ZuTbpQE86IK80rbY77k0zoErHcjEP71a
-6AtO1z8VQNeBsFviNgmwufeFiq9LExsu2n8WEKNcwrIWq/aE2m4=
-=JLUn
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmP9x/4ACgkQI1/ltBGq
+qqcv6hAAkgjLuM8MZAr36UgGjARjMLvWOcq9adsey/FJJhu4S2+Ly3b/hDU9ZAMZ
+Ri5QlZusfpYcpMdBK5xKUceapgPL9hmtbLkp2nQ8I70Bs9GL8qxnRDfXZNBSD+dD
+8u5bHRVZy0TtmAfx7mTz/9EgQURTaHTmiQIHIwyMquQXFUep7H9EpA3YqlJFvPte
+xPMVgQTJ+s/VT0aIkRwf4yGmPoBGTiRYrhJgMfZedP2huV1E3NXuPRRHDDxhIcbH
+ODKSi7HOzuF3nmbsENPKL8TEpi7jblkUj3hVnrXdbzKpSfGlcK1PQ36n3X1SwKEJ
+zQb5s6Qm3vWjkTYNljTfNDGv/w2DkJDQBYq6VkvkNoYB0IxJAEXVMYj1G1pTLPZy
+bwVD3GC+gLdOrs9kAkbodzzRVAjEfer7RqrIQIfiB59MkWAl22zWWue65zU6jBIl
+yIHahMl6JiCXSEdgBGeyLqDkba/WBD+hBic4ooI3JODFRH6xmcs2/zeLr2voY28T
+lnAiQMh5JkPuuWdtd0w5HpeqzfMEPdWeEBWeScPXE3jX7utXf/aoHqDXvauH9PFl
+xgH6JBqt1RX2e3QQ9IDZvZY6SyA7DeCutZJV0uJ24EoKhdFXjZO7pC0HUmblWo8J
+vjgIIfjisKX3+B2tVlOMNYHvTzdkdmbWFV9Q8xf2nhwUpvMtakg=
+=5sgc
 -----END PGP SIGNATURE-----
 
---Sig_/4g4mIUnoEruvrvGrMqxjkCL--
+--Sig_/8aE4tGFLiLpdo+6qg3s=3bO--
 
---===============1061258265340164573==
+--===============4010592073988209710==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -203,4 +343,4 @@ _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
 
---===============1061258265340164573==--
+--===============4010592073988209710==--
