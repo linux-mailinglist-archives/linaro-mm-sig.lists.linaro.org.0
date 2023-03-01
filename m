@@ -2,145 +2,300 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B99316A68EF
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Mar 2023 09:28:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5126B6A6922
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Mar 2023 09:52:53 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C21EB40E0D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Mar 2023 08:28:30 +0000 (UTC)
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
-	by lists.linaro.org (Postfix) with ESMTPS id F357C40E04
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Mar 2023 08:28:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 558CC40E08
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  1 Mar 2023 08:52:52 +0000 (UTC)
+Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
+	by lists.linaro.org (Postfix) with ESMTPS id 608773ED3C
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  1 Mar 2023 08:52:33 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b="E/+sjHiN";
-	spf=pass (lists.linaro.org: domain of bagasdotme@gmail.com designates 209.85.214.171 as permitted sender) smtp.mailfrom=bagasdotme@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20210112 header.b="We/+XByQ";
+	spf=pass (lists.linaro.org: domain of ppaalanen@gmail.com designates 209.85.167.41 as permitted sender) smtp.mailfrom=ppaalanen@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pl1-f171.google.com with SMTP id i3so13208559plg.6
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Mar 2023 00:28:11 -0800 (PST)
+Received: by mail-lf1-f41.google.com with SMTP id f18so16683219lfa.3
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 01 Mar 2023 00:52:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1677659291;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=7sZ5QMejw6iYZe3voviTFum1T1dofKPjV1mBViIgC/U=;
-        b=E/+sjHiN+X5ygvglxuZ8/nnSHxEAHz/HVcpSuWxVf17Q/8mk5CioW0pyKTi1qxGpvn
-         r9lXC2Czoa8DLgEY5iI8+wnnKTHdNCUsO4ezS1ygiTn6tWtksLUQ9Nz3a2sWX5dQj8c0
-         XVLSeAkYBRgla4jvIbrFS6xneXuGoN5ox7wNeVDKVNPeMEDBQf+bfIzLuuiFZhQ+7i3I
-         4+KNf1BXoPA5R4BBkIRWe8nv6Nqai4z1kSJolcVNMnoOCnZKbkcdRTx9Eimx0L/o+MLL
-         xH+YZALu0z79b645yC/PMHm2aoUN0M8emzviiVAPIBLU3N4gtsPRaS1HFddEpCphSP55
-         ATLg==
+        d=gmail.com; s=20210112; t=1677660752;
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=+Sc7R93Vye3mpIiqGm/sTZE1S1mMTzOqecl8VR/6i5w=;
+        b=We/+XByQj51OwuMtzo1J8sU3vteGlaLW8DMv18hF0wnUTjhawv5IigTp13f64LUqvH
+         +Jg9aAZHhXLu2RlGtRVTLm7ldApSVcJDgS2KcCUeoO1jEIygdgM0BxSLCD/Iuy/y1zmg
+         p7hDuc5JeYlOolGffsZhL8ln07YoD79hx6xwKYhr+VYR3qkabLKWeyai66UNZIDRR4KQ
+         1NgRz+kjLfoXlBryoEjPFBLD13bmR6W6mGsZFBsu0UsslwquU7R3K3IAE1xBXoJUzAlP
+         E+F+Vm/jC7m5DvyEHneBOCO0WAe7R0poYdcbIMSm2qW2GaFjFLl7+zhmfSEE7VIgkwVd
+         9WEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1677659291;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=7sZ5QMejw6iYZe3voviTFum1T1dofKPjV1mBViIgC/U=;
-        b=ZjfJll3LBxsQxXVHHFZr1hRHspHJLiVAQjvYXHQJRwPfzwKEQdtTk4m6jtpFNC6IIL
-         sQ9otC+j4FUhCY3k36WF1kxGkwaDPDmfYw3xp2l12lXnM+N0TpZuaesr1vBs3GXIsdh2
-         19TvKsGIb2SUHUAygWA5EZiD9uy0LIgN1y/1fcPzDb3Pk33xUNN5T3cjr3b0XZLaEM3P
-         7Rv2QzvGHAC+wQ+hlFreOZjSSc7UrjV6ORN1wTVupsKFl1fdNB0lS/YRp7r3wNUUptRh
-         hOYgfgH6DJgWUP/J4yZoWWN8ycoMsAh2t7zNF4BD3Jp3n2CaWVSL5YSuA1kRq5lFi58s
-         feJQ==
-X-Gm-Message-State: AO0yUKUnzptBSJm4Q52q76MZGjp9/xrdhXjXApGN5j+aGPt3IfipJDeC
-	DHPDgrn3GQudXSbRnluFMqU=
-X-Google-Smtp-Source: AK7set+f85af+gXx0M8VaSMb/VOvinKTLPhYimAmMWJMRIThpaCS0eXbsQbHbmRqFMbxDMhAgNHb7A==
-X-Received: by 2002:a05:6a21:6d8a:b0:cc:c69b:f7f1 with SMTP id wl10-20020a056a216d8a00b000ccc69bf7f1mr7161371pzb.15.1677659291078;
-        Wed, 01 Mar 2023 00:28:11 -0800 (PST)
-Received: from [192.168.43.80] (subs03-180-214-233-68.three.co.id. [180.214.233.68])
-        by smtp.gmail.com with ESMTPSA id b15-20020aa7810f000000b005b6f63c6cf4sm7321262pfi.30.2023.03.01.00.28.05
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 01 Mar 2023 00:28:10 -0800 (PST)
-Message-ID: <635a2923-b69a-4ce9-f37d-6fe50b6dd164@gmail.com>
-Date: Wed, 1 Mar 2023 15:28:02 +0700
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-To: Rob Clark <robdclark@gmail.com>, dri-devel@lists.freedesktop.org
+        d=1e100.net; s=20210112; t=1677660752;
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=+Sc7R93Vye3mpIiqGm/sTZE1S1mMTzOqecl8VR/6i5w=;
+        b=vph8+I5oz9yvDL1u5PWS9Bi6lbfn455/j8f0GFYDlLJMUuS8mvIIYvPQTMwbESlo53
+         vk6ESzUH+0LmRYRatlWw0g8sS06QT/fMhu9KbGYYCKL6hhBMkhha5oNc0LWvZznqz9j2
+         wxPiG1wSV5hM4R7QZRzs6ExxAgVhoa+7Y6lNl2SE6GQJCdlUeZiOOjV8AidpEFiyfxLQ
+         DeA0gQ0kegifxvxK1Yaf2RCTnC5VEU/fHpcQPvMk7fNSZ1fdKlvRqm7Lc3A5yEOXBaEP
+         hnE6FDxRCwD9QQVqm4KSoAcXVarPyRRDGr0XJT/BzC02iX45qDhfloHldPCvl2lLcC6c
+         RXbg==
+X-Gm-Message-State: AO0yUKXgTb2p4FhY35oZywfYGXCzUOB4vsz7CO0Xhw2vDchr2PomTVFe
+	4KzTmL1yPbQEgSk45GbZuFk=
+X-Google-Smtp-Source: AK7set+bK3jEXGfKvOjlWIdZkErjWWdTxTgfRBKMCHVlfMK/DQ5iVZ13MyF9tEJf5qVGe5BAKc82cA==
+X-Received: by 2002:ac2:5119:0:b0:4d1:7923:3b92 with SMTP id q25-20020ac25119000000b004d179233b92mr1637229lfb.50.1677660751960;
+        Wed, 01 Mar 2023 00:52:31 -0800 (PST)
+Received: from eldfell ([194.136.85.206])
+        by smtp.gmail.com with ESMTPSA id v21-20020a197415000000b004db250355a2sm1646963lfe.103.2023.03.01.00.52.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 01 Mar 2023 00:52:31 -0800 (PST)
+Date: Wed, 1 Mar 2023 10:52:27 +0200
+From: Pekka Paalanen <ppaalanen@gmail.com>
+To: Rob Clark <robdclark@gmail.com>
+Message-ID: <20230301105227.756021aa@eldfell>
+In-Reply-To: <20230228225833.2920879-6-robdclark@gmail.com>
 References: <20230228225833.2920879-1-robdclark@gmail.com>
- <20230228225833.2920879-2-robdclark@gmail.com>
-Content-Language: en-US
-From: Bagas Sanjaya <bagasdotme@gmail.com>
-In-Reply-To: <20230228225833.2920879-2-robdclark@gmail.com>
+	<20230228225833.2920879-6-robdclark@gmail.com>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: F357C40E04
-X-Spamd-Bar: -----------
-X-Spamd-Result: default: False [-12.00 / 15.00];
+X-Rspamd-Queue-Id: 608773ED3C
+X-Spamd-Bar: ----------
+X-Spamd-Result: default: False [-10.10 / 15.00];
 	REPLY(-4.00)[];
-	DWL_DNSWL_HI(-3.50)[gmail.com:dkim];
-	BAYES_HAM(-3.00)[99.99%];
+	BAYES_HAM(-3.00)[100.00%];
+	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-1.00)[209.85.214.171:from,180.214.233.68:received];
+	RCVD_IN_DNSWL_HI(-1.00)[194.136.85.206:received,209.85.167.41:from];
+	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
-	MIME_GOOD(-0.10)[text/plain];
 	FROM_HAS_DN(0.00)[];
 	TAGGED_RCPT(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.214.171:from];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,ffwll.ch,gmail.com,daenzer.net,intel.com,amd.com,emersion.fr,chromium.org,collabora.com,linaro.org,lwn.net,padovan.org,vger.kernel.org,lists.linaro.org];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_TWELVE(0.00)[22];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,ffwll.ch,gmail.com,daenzer.net,intel.com,amd.com,emersion.fr,chromium.org,linaro.org,lwn.net,padovan.org,vger.kernel.org,lists.linaro.org];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.41:from];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	ARC_NA(0.00)[];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_COUNT_THREE(0.00)[3];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,lists.freedesktop.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_COUNT_THREE(0.00)[3];
+	DWL_DNSWL_NONE(0.00)[gmail.com:dkim];
+	FREEMAIL_TO(0.00)[gmail.com];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: KZDGL7MSJSPO3SUELJ6TJZU2U5VD2FUZ
-X-Message-ID-Hash: KZDGL7MSJSPO3SUELJ6TJZU2U5VD2FUZ
-X-MailFrom: bagasdotme@gmail.com
+Message-ID-Hash: CZF3WKNGAUNAKN2XY2ZUWR5ST3LFNJPR
+X-Message-ID-Hash: CZF3WKNGAUNAKN2XY2ZUWR5ST3LFNJPR
+X-MailFrom: ppaalanen@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, =?UTF-8?Q?Michel_D=c3=a4nzer?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Pekka Paalanen <ppaalanen@gmail.com>, Simon Ser <contact@emersion.fr>, Luben Tuikov <luben.tuikov@amd.com>, Rob Clark <robdclark@chromium.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, Pekka Paalanen <pekka.paalanen@collabora.com>, Sumit Semwal <sumit.semwal@linaro.org>, Jonathan Corbet <corbet@lwn.net>, Gustavo Padovan <gustavo@padovan.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>
+CC: dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, Michel =?UTF-8?B?RMOkbnplcg==?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Simon Ser <contact@emersion.fr>, Luben Tuikov <luben.tuikov@amd.com>, Rob Clark <robdclark@chromium.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Gustavo Padovan <gustavo@padovan.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v8 01/16] dma-buf/dma-fence: Add deadline awareness
+Subject: [Linaro-mm-sig] Re: [PATCH v8 05/16] dma-buf/sync_file: Surface sync-file uABI
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KZDGL7MSJSPO3SUELJ6TJZU2U5VD2FUZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CZF3WKNGAUNAKN2XY2ZUWR5ST3LFNJPR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============6369164133644633580=="
 
-T24gMy8xLzIzIDA1OjU4LCBSb2IgQ2xhcmsgd3JvdGU6DQo+IEZyb206IFJvYiBDbGFyayA8cm9i
-ZGNsYXJrQGNocm9taXVtLm9yZz4NCj4gDQo+IEFkZCBhIHdheSB0byBoaW50IHRvIHRoZSBmZW5j
-ZSBzaWduYWxlciBvZiBhbiB1cGNvbWluZyBkZWFkbGluZSwgc3VjaCBhcw0KPiB2YmxhbmssIHdo
-aWNoIHRoZSBmZW5jZSB3YWl0ZXIgd291bGQgcHJlZmVyIG5vdCB0byBtaXNzLiAgVGhpcyBpcyB0
-byBhaWQNCj4gdGhlIGZlbmNlIHNpZ25hbGVyIGluIG1ha2luZyBwb3dlciBtYW5hZ2VtZW50IGRl
-Y2lzaW9ucywgbGlrZSBib29zdGluZw0KPiBmcmVxdWVuY3kgYXMgdGhlIGRlYWRsaW5lIGFwcHJv
-YWNoZXMgYW5kIGF3YXJlbmVzcyBvZiBtaXNzaW5nIGRlYWRsaW5lcw0KPiBzbyB0aGF0IGNhbiBi
-ZSBmYWN0b3JlZCBpbiB0byB0aGUgZnJlcXVlbmN5IHNjYWxpbmcuDQo+IA0KPiB2MjogRHJvcCBk
-bWFfZmVuY2U6OmRlYWRsaW5lIGFuZCByZWxhdGVkIGxvZ2ljIHRvIGZpbHRlciBkdXBsaWNhdGUN
-Cj4gICAgIGRlYWRsaW5lcywgdG8gYXZvaWQgaW5jcmVhc2luZyBkbWFfZmVuY2Ugc2l6ZS4gIFRo
-ZSBmZW5jZS1jb250ZXh0DQo+ICAgICBpbXBsZW1lbnRhdGlvbiB3aWxsIG5lZWQgc2ltaWxhciBs
-b2dpYyB0byB0cmFjayBkZWFkbGluZXMgb2YgYWxsDQo+ICAgICB0aGUgZmVuY2VzIG9uIHRoZSBz
-YW1lIHRpbWVsaW5lLiAgW2Nrb2VuaWddDQo+IHYzOiBDbGFyaWZ5IGxvY2tpbmcgd3J0LiBzZXRf
-ZGVhZGxpbmUgY2FsbGJhY2sNCj4gdjQ6IENsYXJpZnkgaW4gZG9jcyBjb21tZW50IHRoYXQgdGhp
-cyBpcyBhIGhpbnQNCj4gdjU6IERyb3AgRE1BX0ZFTkNFX0ZMQUdfSEFTX0RFQURMSU5FX0JJVC4N
-Cj4gdjY6IE1vcmUgZG9jcw0KPiB2NzogRml4IHR5cG8sIGNsYXJpZnkgcGFzdCBkZWFkbGluZXMN
-Cj4gDQo+IFNpZ25lZC1vZmYtYnk6IFJvYiBDbGFyayA8cm9iZGNsYXJrQGNocm9taXVtLm9yZz4N
-Cj4gUmV2aWV3ZWQtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNv
-bT4NCj4gQWNrZWQtYnk6IFBla2thIFBhYWxhbmVuIDxwZWtrYS5wYWFsYW5lbkBjb2xsYWJvcmEu
-Y29tPg0KDQpJIGhhdmUgZ2l2ZW4gbXkgUmV2aWV3ZWQtYnkgZnJvbSB2NyBbMV0sIGJ1dCBpdCBk
-aWRuJ3QgZ2V0IHBpY2tlZCB1cCwNCnRodXMgZ2l2aW5nIGl0IGFnYWluOg0KDQpSZXZpZXdlZC1i
-eTogQmFnYXMgU2FuamF5YSA8YmFnYXNkb3RtZUBnbWFpbC5jb20+DQoNClRoYW5rcy4NCg0KWzFd
-OiBodHRwczovL2xvcmUua2VybmVsLm9yZy9saW51eC1kb2MvWSUyRjdMZkx4aElqRHBENEQzQGRl
-Ymlhbi5tZS8NCg0KLS0gDQpBbiBvbGQgbWFuIGRvbGwuLi4ganVzdCB3aGF0IEkgYWx3YXlzIHdh
-bnRlZCEgLSBDbGFyYQ0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3Rz
-LmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2ln
-LWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+--===============6369164133644633580==
+Content-Type: multipart/signed; boundary="Sig_/pdLdVdi+WgC8j5E+G3oBH8=";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
+
+--Sig_/pdLdVdi+WgC8j5E+G3oBH8=
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, 28 Feb 2023 14:58:09 -0800
+Rob Clark <robdclark@gmail.com> wrote:
+
+> From: Rob Clark <robdclark@chromium.org>
+>=20
+> We had all of the internal driver APIs, but not the all important
+> userspace uABI, in the dma-buf doc.  Fix that.  And re-arrange the
+> comments slightly as otherwise the comments for the ioctl nr defines
+> would not show up.
+>=20
+> Signed-off-by: Rob Clark <robdclark@chromium.org>
+> ---
+>  Documentation/driver-api/dma-buf.rst | 10 ++++++--
+>  include/uapi/linux/sync_file.h       | 35 +++++++++++-----------------
+>  2 files changed, 22 insertions(+), 23 deletions(-)
+>=20
+
+Sounds good.
+Acked-by: Pekka Paalanen <pekka.paalanen@collabora.com>
+
+
+Thanks,
+pq
+
+> diff --git a/Documentation/driver-api/dma-buf.rst b/Documentation/driver-=
+api/dma-buf.rst
+> index 183e480d8cea..ff3f8da296af 100644
+> --- a/Documentation/driver-api/dma-buf.rst
+> +++ b/Documentation/driver-api/dma-buf.rst
+> @@ -203,8 +203,8 @@ DMA Fence unwrap
+>  .. kernel-doc:: include/linux/dma-fence-unwrap.h
+>     :internal:
+> =20
+> -DMA Fence uABI/Sync File
+> -~~~~~~~~~~~~~~~~~~~~~~~~
+> +DMA Fence Sync File
+> +~~~~~~~~~~~~~~~~~~~
+> =20
+>  .. kernel-doc:: drivers/dma-buf/sync_file.c
+>     :export:
+> @@ -212,6 +212,12 @@ DMA Fence uABI/Sync File
+>  .. kernel-doc:: include/linux/sync_file.h
+>     :internal:
+> =20
+> +DMA Fence Sync File uABI
+> +~~~~~~~~~~~~~~~~~~~~~~~~
+> +
+> +.. kernel-doc:: include/uapi/linux/sync_file.h
+> +   :internal:
+> +
+>  Indefinite DMA Fences
+>  ~~~~~~~~~~~~~~~~~~~~~
+> =20
+> diff --git a/include/uapi/linux/sync_file.h b/include/uapi/linux/sync_fil=
+e.h
+> index ee2dcfb3d660..eced40c204d7 100644
+> --- a/include/uapi/linux/sync_file.h
+> +++ b/include/uapi/linux/sync_file.h
+> @@ -16,12 +16,16 @@
+>  #include <linux/types.h>
+> =20
+>  /**
+> - * struct sync_merge_data - data passed to merge ioctl
+> + * struct sync_merge_data - SYNC_IOC_MERGE: merge two fences
+>   * @name:	name of new fence
+>   * @fd2:	file descriptor of second fence
+>   * @fence:	returns the fd of the new fence to userspace
+>   * @flags:	merge_data flags
+>   * @pad:	padding for 64-bit alignment, should always be zero
+> + *
+> + * Creates a new fence containing copies of the sync_pts in both
+> + * the calling fd and sync_merge_data.fd2.  Returns the new fence's
+> + * fd in sync_merge_data.fence
+>   */
+>  struct sync_merge_data {
+>  	char	name[32];
+> @@ -34,8 +38,8 @@ struct sync_merge_data {
+>  /**
+>   * struct sync_fence_info - detailed fence information
+>   * @obj_name:		name of parent sync_timeline
+> -* @driver_name:	name of driver implementing the parent
+> -* @status:		status of the fence 0:active 1:signaled <0:error
+> + * @driver_name:	name of driver implementing the parent
+> + * @status:		status of the fence 0:active 1:signaled <0:error
+>   * @flags:		fence_info flags
+>   * @timestamp_ns:	timestamp of status change in nanoseconds
+>   */
+> @@ -48,14 +52,19 @@ struct sync_fence_info {
+>  };
+> =20
+>  /**
+> - * struct sync_file_info - data returned from fence info ioctl
+> + * struct sync_file_info - SYNC_IOC_FILE_INFO: get detailed information =
+on a sync_file
+>   * @name:	name of fence
+>   * @status:	status of fence. 1: signaled 0:active <0:error
+>   * @flags:	sync_file_info flags
+>   * @num_fences	number of fences in the sync_file
+>   * @pad:	padding for 64-bit alignment, should always be zero
+> - * @sync_fence_info: pointer to array of structs sync_fence_info with all
+> + * @sync_fence_info: pointer to array of struct &sync_fence_info with all
+>   *		 fences in the sync_file
+> + *
+> + * Takes a struct sync_file_info. If num_fences is 0, the field is updat=
+ed
+> + * with the actual number of fences. If num_fences is > 0, the system wi=
+ll
+> + * use the pointer provided on sync_fence_info to return up to num_fence=
+s of
+> + * struct sync_fence_info, with detailed fence information.
+>   */
+>  struct sync_file_info {
+>  	char	name[32];
+> @@ -76,23 +85,7 @@ struct sync_file_info {
+>   * no upstream users available.
+>   */
+> =20
+> -/**
+> - * DOC: SYNC_IOC_MERGE - merge two fences
+> - *
+> - * Takes a struct sync_merge_data.  Creates a new fence containing copie=
+s of
+> - * the sync_pts in both the calling fd and sync_merge_data.fd2.  Returns=
+ the
+> - * new fence's fd in sync_merge_data.fence
+> - */
+>  #define SYNC_IOC_MERGE		_IOWR(SYNC_IOC_MAGIC, 3, struct sync_merge_data)
+> -
+> -/**
+> - * DOC: SYNC_IOC_FILE_INFO - get detailed information on a sync_file
+> - *
+> - * Takes a struct sync_file_info. If num_fences is 0, the field is updat=
+ed
+> - * with the actual number of fences. If num_fences is > 0, the system wi=
+ll
+> - * use the pointer provided on sync_fence_info to return up to num_fence=
+s of
+> - * struct sync_fence_info, with detailed fence information.
+> - */
+>  #define SYNC_IOC_FILE_INFO	_IOWR(SYNC_IOC_MAGIC, 4, struct sync_file_inf=
+o)
+> =20
+>  #endif /* _UAPI_LINUX_SYNC_H */
+
+
+--Sig_/pdLdVdi+WgC8j5E+G3oBH8=
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmP/EkwACgkQI1/ltBGq
+qqdUKA/+I1j5vdvPjYXQZQ+DoS7zE1P9c4jnXG17sSyBGZkPwmZW+P7ULtei9h2q
+nfjeWQgVfNHSB2e4rQps+6fXx5LvdwDIiEpDyP+2xPcLmbfLx2452cS+UtzeqZIi
+cm6eTBFQK3YcG1+D0NFbjPiKbpk7i99FprWwO/XREi02BRKpcSSGzT4wZyysBMSu
+Ok+GmJdeMnWAzLi7p9DepoG0TKjnzi8e45ovFdieHym0MSstzeLsHe1dokYHfOjv
+kOkQCHEzwlWfeZKUnuNXd2VCU3VPmfpst0AAiTgdqz3QWui900Q0S0kdVI/xEqEW
+6tekiPHlA+PYf5n6PCc7hpxqiLWB6pr7EadS5fwbjFJaF2gWByGz2q3slURt0Xnf
+NAiH7fHsbxBzSkM4KSJrD2kng8iSX3DWYo/L0DesmjhX/RX/nXRpVX7c5uHgQSNY
+1sl90g0JRM86o+DU6OUPGO07ZKBe1MlJmsKVcxNnVU+d5YqrDroGsw/ocJlT7zZO
+c7QyqIh8qp/Oy8bWWuOgrG2CyEjwiFaB2t0wVnJhnG2BnOrWfF+rpBdU/+SB4AaH
+bzy+bvdKaxIJvzUW4GYSu+rO0icdj+VnsGW8/8Ho0aFNYQRS9aq/EDGpBX4CKZ7t
+rnzbVZFqzpkat+L+u8tLQkG8LGK9iE63ZS5mg4MfpAlugoDzb6I=
+=yVJf
+-----END PGP SIGNATURE-----
+
+--Sig_/pdLdVdi+WgC8j5E+G3oBH8=--
+
+--===============6369164133644633580==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============6369164133644633580==--
