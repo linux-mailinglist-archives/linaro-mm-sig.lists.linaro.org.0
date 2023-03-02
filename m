@@ -2,152 +2,247 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 602A36A8DAA
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 Mar 2023 00:55:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 766846A8DAB
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 Mar 2023 00:56:00 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 67CFA3F205
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Mar 2023 23:55:40 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
-	by lists.linaro.org (Postfix) with ESMTPS id 3C3163E941
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Mar 2023 23:54:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7AC5F40E1B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Mar 2023 23:55:59 +0000 (UTC)
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
+	by lists.linaro.org (Postfix) with ESMTPS id 13DE83F546
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Mar 2023 23:54:11 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=n4k1ckMh;
-	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.214.174 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=BTpenYir;
+	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.216.50 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pl1-f174.google.com with SMTP id p6so1059664plf.0
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 02 Mar 2023 15:54:09 -0800 (PST)
+Received: by mail-pj1-f50.google.com with SMTP id y2so801691pjg.3
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 02 Mar 2023 15:54:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1677801248;
+        d=gmail.com; s=20210112; t=1677801250;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=MUhwCn+Xf/Lh0tYXdZ7kyW7NLgJoG2FRHZEn6JIAUnU=;
-        b=n4k1ckMh3giJvFe1dSs5mXbnyBq7dAtRHbbnbnKXFhK8PYZk8pogyMlFcsBynV1L1H
-         l4mvD5qCNioTI2SDCz7INN0q4TWt30+OYzpKAn1SmwUEi6BdXLTh3tqON+zQ34mXNGfC
-         lHMc4nJKUOoLL3ZaL9xzGryyZ7zjmnJnIltjSZgzIQH1mC/ZJ4dM0gU/sh0kP7XOZWxq
-         BMKsYDWtGLQrZJZZfFXpiM++ER1vgYTvKaPvg39gORhAW1Oqwg/CazEiPjm7a46m1HX/
-         N64iIVGysWdZDNdXUCupajwqTLy/tPShN2EL+skRmxJ9mVH5aC8tWqdNyxpSBrZj76av
-         +kNQ==
+        bh=8o/IEZdj8Cn2a3a2Ro5nT/fmWKdys9Z3WQ6bWICIcGU=;
+        b=BTpenYirnz4B8q7/2hN50ThrX4yr6wisyKtR0dg+ykWdMMSjRplIQedNS07kRpwOvE
+         oS5zaZMyezMv1QZS05SYGcbaZjUBoH0xKKwVx6GKehJY5YiZ8K2JH0+ndECFS/RUaG2r
+         DHNjfNzYIe0eNltaGLpjDJoDDIEyfcKnomK3w8cWLAWz6igd8g6+7wvB9sjCANYLcZf0
+         tIQexWr5zqLe80Cu4bMF8p854n/bHA9sqwpy93jBqwKuIF+diaYnpzJX0Y/9529Tpc4t
+         1n22/beRF/gIHxxyo9Dmu7LlZhHs6jPw7LXUza4Ozi0Xqr9w4AucOv8svDIlKBJsCKI4
+         kbbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1677801248;
+        d=1e100.net; s=20210112; t=1677801250;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=MUhwCn+Xf/Lh0tYXdZ7kyW7NLgJoG2FRHZEn6JIAUnU=;
-        b=VrOzHYTwA9myzZjzW6tTALg0r5/JVYght6OsD/QEd0kx4YLBnIXDLNKivv7SrXYaC6
-         ntVB1jHhd9+NVQi4/3BxcH4Oj0HnZ/dBcYIz2cG/EddmOskvoqD2aL6l5RgQQl7RAadf
-         cY+YgFUhLMqBuAsS7bUic0C/nnhxK0yqxHXgW1xXQKI8pb/NnooyByei6M4oeq7WGzTd
-         CEulfvzCaGCfvrYrLGojQhaZOoL/C0mpGi6xchayU1cme9p/XwbfECVGnrVhMPknBkii
-         RVPbZGKBYyKLHvfm9Be88BgPvCuFIeUotDxULnd0hhg/29eDQVBCKxMctwa/mVKLLHLy
-         bhvw==
-X-Gm-Message-State: AO0yUKXaj3aaN/fD6ga2epdpdVW8vjnsUHBubskDrYi/Xs7lAQ6mIMdJ
-	LYkwzVgqmLrv64XcE6RcYg8=
-X-Google-Smtp-Source: AK7set921xfMXVsnYw9T4RPmUpLjAtAtAEqhwoqAHYp2Un6T9E9TKJIZ0DgU5t2RL257s06BxTvP2Q==
-X-Received: by 2002:a17:902:7594:b0:19e:6659:90db with SMTP id j20-20020a170902759400b0019e665990dbmr26033pll.45.1677801248258;
-        Thu, 02 Mar 2023 15:54:08 -0800 (PST)
+        bh=8o/IEZdj8Cn2a3a2Ro5nT/fmWKdys9Z3WQ6bWICIcGU=;
+        b=kLFJpgaSUpxglg4d4+JmMWFSnNwAczLQc/Y53vdXnry7qAV1BdtcGlw5awRBK0PTJP
+         L6rvM0euyq+S+UD/4OAhVcHU/eoEagxOoqruS5gommQ1ZnrYbdTYgJ5AiuhWlioN4uXn
+         qz+hsuMfXtH10oHYJBHl4dpd1pWJAwaLikzdmDkFL0uKj2wmrMZ4DKqAkCYjrEN79EMb
+         LeOfjNlrbiMQbHzP1tH2m9ku9YXLPHiFZ/Gp80S+LRWuwJubPTLAv8TMjASb/zUhxsc6
+         gf0SN8GwbQ0PTS6jwlWb9ndT/nuHnqOihX9s00RFWu0XpcCKSXpYHE88XwKGbc4T4BX0
+         SKjw==
+X-Gm-Message-State: AO0yUKXxzlNZijIqs5wyYJG+GXY1pYUUf/pBGUvkVIIzAqCDCnLpP+6a
+	A4DLRrYEuW3GRbJcbQbE/qVZbsl1s0Q=
+X-Google-Smtp-Source: AK7set9xw6yYcUpQ834HKf0gFqVGnZ9bcMz7tqmaYidGEmTy7owSmE0clFs6hA13pZ4gnYdVcsFIUg==
+X-Received: by 2002:a17:902:ed11:b0:19d:af21:dc2f with SMTP id b17-20020a170902ed1100b0019daf21dc2fmr31301pld.33.1677801250107;
+        Thu, 02 Mar 2023 15:54:10 -0800 (PST)
 Received: from localhost ([2a00:79e1:abd:4a00:61b:48ed:72ab:435b])
-        by smtp.gmail.com with ESMTPSA id kj15-20020a17090306cf00b0019aa8149cb9sm226754plb.79.2023.03.02.15.54.07
+        by smtp.gmail.com with ESMTPSA id kp14-20020a170903280e00b0019e31e5f7f9sm230346plb.71.2023.03.02.15.54.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Mar 2023 15:54:07 -0800 (PST)
+        Thu, 02 Mar 2023 15:54:09 -0800 (PST)
 From: Rob Clark <robdclark@gmail.com>
 To: dri-devel@lists.freedesktop.org
-Date: Thu,  2 Mar 2023 15:53:26 -0800
-Message-Id: <20230302235356.3148279-5-robdclark@gmail.com>
+Date: Thu,  2 Mar 2023 15:53:27 -0800
+Message-Id: <20230302235356.3148279-6-robdclark@gmail.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230302235356.3148279-1-robdclark@gmail.com>
 References: <20230302235356.3148279-1-robdclark@gmail.com>
 MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 3C3163E941
+X-Rspamd-Queue-Id: 13DE83F546
 X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.60 / 15.00];
+X-Spamd-Result: default: False [-1.10 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_MISSING_CHARSET(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.216.50:from];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.174:from];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_RCPT(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[17];
 	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCVD_COUNT_THREE(0.00)[3];
 	ARC_NA(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	RCVD_COUNT_THREE(0.00)[3];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,ffwll.ch,gmail.com,daenzer.net,intel.com,amd.com,emersion.fr,chromium.org,collabora.com,linaro.org,lwn.net,padovan.org,vger.kernel.org,lists.linaro.org];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,ffwll.ch,gmail.com,daenzer.net,intel.com,amd.com,emersion.fr,chromium.org,linaro.org,vger.kernel.org,lists.linaro.org];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: FOS7G4SJLV7JB6MCKIWFDE7PBYJVWN7A
-X-Message-ID-Hash: FOS7G4SJLV7JB6MCKIWFDE7PBYJVWN7A
+Message-ID-Hash: 7UV7GSUJSOP4FJOBT52LRM4AVSYCGSPS
+X-Message-ID-Hash: 7UV7GSUJSOP4FJOBT52LRM4AVSYCGSPS
 X-MailFrom: robdclark@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, =?UTF-8?q?Michel=20D=C3=A4nzer?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Pekka Paalanen <ppaalanen@gmail.com>, Simon Ser <contact@emersion.fr>, Luben Tuikov <luben.tuikov@amd.com>, Rob Clark <robdclark@chromium.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Sumit Semwal <sumit.semwal@linaro.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>
+CC: freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, =?UTF-8?q?Michel=20D=C3=A4nzer?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Pekka Paalanen <ppaalanen@gmail.com>, Simon Ser <contact@emersion.fr>, Luben Tuikov <luben.tuikov@amd.com>, Rob Clark <robdclark@chromium.org>, Pekka Paalanen <pekka.paalanen@collabora.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Gustavo Padovan <gustavo@padovan.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v9 04/15] dma-buf/dma-resv: Add a way to set fence deadline
+Subject: [Linaro-mm-sig] [PATCH v9 05/15] dma-buf/sync_file: Surface sync-file uABI
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FOS7G4SJLV7JB6MCKIWFDE7PBYJVWN7A/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7UV7GSUJSOP4FJOBT52LRM4AVSYCGSPS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-RnJvbTogUm9iIENsYXJrIDxyb2JkY2xhcmtAY2hyb21pdW0ub3JnPg0KDQpBZGQgYSB3YXkgdG8g
-c2V0IGEgZGVhZGxpbmUgb24gcmVtYWluaW5nIHJlc3YgZmVuY2VzIGFjY29yZGluZyB0byB0aGUN
-CnJlcXVlc3RlZCB1c2FnZS4NCg0KU2lnbmVkLW9mZi1ieTogUm9iIENsYXJrIDxyb2JkY2xhcmtA
-Y2hyb21pdW0ub3JnPg0KUmV2aWV3ZWQtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5r
-b2VuaWdAYW1kLmNvbT4NCi0tLQ0KIGRyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jIHwgMjIgKysr
-KysrKysrKysrKysrKysrKysrKw0KIGluY2x1ZGUvbGludXgvZG1hLXJlc3YuaCAgIHwgIDIgKysN
-CiAyIGZpbGVzIGNoYW5nZWQsIDI0IGluc2VydGlvbnMoKykNCg0KZGlmZiAtLWdpdCBhL2RyaXZl
-cnMvZG1hLWJ1Zi9kbWEtcmVzdi5jIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1yZXN2LmMNCmluZGV4
-IDFjNzZhZWQ4ZTI2Mi4uMmE1OTRiNzU0YWYxIDEwMDY0NA0KLS0tIGEvZHJpdmVycy9kbWEtYnVm
-L2RtYS1yZXN2LmMNCisrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jDQpAQCAtNjg0LDYg
-KzY4NCwyOCBAQCBsb25nIGRtYV9yZXN2X3dhaXRfdGltZW91dChzdHJ1Y3QgZG1hX3Jlc3YgKm9i
-aiwgZW51bSBkbWFfcmVzdl91c2FnZSB1c2FnZSwNCiB9DQogRVhQT1JUX1NZTUJPTF9HUEwoZG1h
-X3Jlc3Zfd2FpdF90aW1lb3V0KTsNCiANCisvKioNCisgKiBkbWFfcmVzdl9zZXRfZGVhZGxpbmUg
-LSBTZXQgYSBkZWFkbGluZSBvbiByZXNlcnZhdGlvbidzIG9iamVjdHMgZmVuY2VzDQorICogQG9i
-ajogdGhlIHJlc2VydmF0aW9uIG9iamVjdA0KKyAqIEB1c2FnZTogY29udHJvbHMgd2hpY2ggZmVu
-Y2VzIHRvIGluY2x1ZGUsIHNlZSBlbnVtIGRtYV9yZXN2X3VzYWdlLg0KKyAqIEBkZWFkbGluZTog
-dGhlIHJlcXVlc3RlZCBkZWFkbGluZSAoTU9OT1RPTklDKQ0KKyAqDQorICogTWF5IGJlIGNhbGxl
-ZCB3aXRob3V0IGhvbGRpbmcgdGhlIGRtYV9yZXN2IGxvY2suICBTZXRzIEBkZWFkbGluZSBvbg0K
-KyAqIGFsbCBmZW5jZXMgZmlsdGVyZWQgYnkgQHVzYWdlLg0KKyAqLw0KK3ZvaWQgZG1hX3Jlc3Zf
-c2V0X2RlYWRsaW5lKHN0cnVjdCBkbWFfcmVzdiAqb2JqLCBlbnVtIGRtYV9yZXN2X3VzYWdlIHVz
-YWdlLA0KKwkJCSAgIGt0aW1lX3QgZGVhZGxpbmUpDQorew0KKwlzdHJ1Y3QgZG1hX3Jlc3ZfaXRl
-ciBjdXJzb3I7DQorCXN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlOw0KKw0KKwlkbWFfcmVzdl9pdGVy
-X2JlZ2luKCZjdXJzb3IsIG9iaiwgdXNhZ2UpOw0KKwlkbWFfcmVzdl9mb3JfZWFjaF9mZW5jZV91
-bmxvY2tlZCgmY3Vyc29yLCBmZW5jZSkgew0KKwkJZG1hX2ZlbmNlX3NldF9kZWFkbGluZShmZW5j
-ZSwgZGVhZGxpbmUpOw0KKwl9DQorCWRtYV9yZXN2X2l0ZXJfZW5kKCZjdXJzb3IpOw0KK30NCitF
-WFBPUlRfU1lNQk9MX0dQTChkbWFfcmVzdl9zZXRfZGVhZGxpbmUpOw0KIA0KIC8qKg0KICAqIGRt
-YV9yZXN2X3Rlc3Rfc2lnbmFsZWQgLSBUZXN0IGlmIGEgcmVzZXJ2YXRpb24gb2JqZWN0J3MgZmVu
-Y2VzIGhhdmUgYmVlbg0KZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvZG1hLXJlc3YuaCBiL2lu
-Y2x1ZGUvbGludXgvZG1hLXJlc3YuaA0KaW5kZXggMDYzNzY1OWE3MDJjLi44ZDBlMzRkYWQ0NDYg
-MTAwNjQ0DQotLS0gYS9pbmNsdWRlL2xpbnV4L2RtYS1yZXN2LmgNCisrKyBiL2luY2x1ZGUvbGlu
-dXgvZG1hLXJlc3YuaA0KQEAgLTQ3OSw2ICs0NzksOCBAQCBpbnQgZG1hX3Jlc3ZfZ2V0X3Npbmds
-ZXRvbihzdHJ1Y3QgZG1hX3Jlc3YgKm9iaiwgZW51bSBkbWFfcmVzdl91c2FnZSB1c2FnZSwNCiBp
-bnQgZG1hX3Jlc3ZfY29weV9mZW5jZXMoc3RydWN0IGRtYV9yZXN2ICpkc3QsIHN0cnVjdCBkbWFf
-cmVzdiAqc3JjKTsNCiBsb25nIGRtYV9yZXN2X3dhaXRfdGltZW91dChzdHJ1Y3QgZG1hX3Jlc3Yg
-Km9iaiwgZW51bSBkbWFfcmVzdl91c2FnZSB1c2FnZSwNCiAJCQkgICBib29sIGludHIsIHVuc2ln
-bmVkIGxvbmcgdGltZW91dCk7DQordm9pZCBkbWFfcmVzdl9zZXRfZGVhZGxpbmUoc3RydWN0IGRt
-YV9yZXN2ICpvYmosIGVudW0gZG1hX3Jlc3ZfdXNhZ2UgdXNhZ2UsDQorCQkJICAga3RpbWVfdCBk
-ZWFkbGluZSk7DQogYm9vbCBkbWFfcmVzdl90ZXN0X3NpZ25hbGVkKHN0cnVjdCBkbWFfcmVzdiAq
-b2JqLCBlbnVtIGRtYV9yZXN2X3VzYWdlIHVzYWdlKTsNCiB2b2lkIGRtYV9yZXN2X2Rlc2NyaWJl
-KHN0cnVjdCBkbWFfcmVzdiAqb2JqLCBzdHJ1Y3Qgc2VxX2ZpbGUgKnNlcSk7DQogDQotLSANCjIu
-MzkuMQ0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpM
-aW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5v
-cmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxp
-c3RzLmxpbmFyby5vcmcK
+From: Rob Clark <robdclark@chromium.org>
+
+We had all of the internal driver APIs, but not the all important
+userspace uABI, in the dma-buf doc.  Fix that.  And re-arrange the
+comments slightly as otherwise the comments for the ioctl nr defines
+would not show up.
+
+v2: Fix docs build warning coming from newly including the uabi header
+    in the docs build
+
+Signed-off-by: Rob Clark <robdclark@chromium.org>
+Acked-by: Pekka Paalanen <pekka.paalanen@collabora.com>
+---
+ Documentation/driver-api/dma-buf.rst | 10 ++++++--
+ include/uapi/linux/sync_file.h       | 37 +++++++++++-----------------
+ 2 files changed, 23 insertions(+), 24 deletions(-)
+
+diff --git a/Documentation/driver-api/dma-buf.rst b/Documentation/driver-api/dma-buf.rst
+index 183e480d8cea..ff3f8da296af 100644
+--- a/Documentation/driver-api/dma-buf.rst
++++ b/Documentation/driver-api/dma-buf.rst
+@@ -203,8 +203,8 @@ DMA Fence unwrap
+ .. kernel-doc:: include/linux/dma-fence-unwrap.h
+    :internal:
+ 
+-DMA Fence uABI/Sync File
+-~~~~~~~~~~~~~~~~~~~~~~~~
++DMA Fence Sync File
++~~~~~~~~~~~~~~~~~~~
+ 
+ .. kernel-doc:: drivers/dma-buf/sync_file.c
+    :export:
+@@ -212,6 +212,12 @@ DMA Fence uABI/Sync File
+ .. kernel-doc:: include/linux/sync_file.h
+    :internal:
+ 
++DMA Fence Sync File uABI
++~~~~~~~~~~~~~~~~~~~~~~~~
++
++.. kernel-doc:: include/uapi/linux/sync_file.h
++   :internal:
++
+ Indefinite DMA Fences
+ ~~~~~~~~~~~~~~~~~~~~~
+ 
+diff --git a/include/uapi/linux/sync_file.h b/include/uapi/linux/sync_file.h
+index ee2dcfb3d660..7e42a5b7558b 100644
+--- a/include/uapi/linux/sync_file.h
++++ b/include/uapi/linux/sync_file.h
+@@ -16,12 +16,16 @@
+ #include <linux/types.h>
+ 
+ /**
+- * struct sync_merge_data - data passed to merge ioctl
++ * struct sync_merge_data - SYNC_IOC_MERGE: merge two fences
+  * @name:	name of new fence
+  * @fd2:	file descriptor of second fence
+  * @fence:	returns the fd of the new fence to userspace
+  * @flags:	merge_data flags
+  * @pad:	padding for 64-bit alignment, should always be zero
++ *
++ * Creates a new fence containing copies of the sync_pts in both
++ * the calling fd and sync_merge_data.fd2.  Returns the new fence's
++ * fd in sync_merge_data.fence
+  */
+ struct sync_merge_data {
+ 	char	name[32];
+@@ -34,8 +38,8 @@ struct sync_merge_data {
+ /**
+  * struct sync_fence_info - detailed fence information
+  * @obj_name:		name of parent sync_timeline
+-* @driver_name:	name of driver implementing the parent
+-* @status:		status of the fence 0:active 1:signaled <0:error
++ * @driver_name:	name of driver implementing the parent
++ * @status:		status of the fence 0:active 1:signaled <0:error
+  * @flags:		fence_info flags
+  * @timestamp_ns:	timestamp of status change in nanoseconds
+  */
+@@ -48,14 +52,19 @@ struct sync_fence_info {
+ };
+ 
+ /**
+- * struct sync_file_info - data returned from fence info ioctl
++ * struct sync_file_info - SYNC_IOC_FILE_INFO: get detailed information on a sync_file
+  * @name:	name of fence
+  * @status:	status of fence. 1: signaled 0:active <0:error
+  * @flags:	sync_file_info flags
+  * @num_fences	number of fences in the sync_file
+  * @pad:	padding for 64-bit alignment, should always be zero
+- * @sync_fence_info: pointer to array of structs sync_fence_info with all
++ * @sync_fence_info: pointer to array of struct &sync_fence_info with all
+  *		 fences in the sync_file
++ *
++ * Takes a struct sync_file_info. If num_fences is 0, the field is updated
++ * with the actual number of fences. If num_fences is > 0, the system will
++ * use the pointer provided on sync_fence_info to return up to num_fences of
++ * struct sync_fence_info, with detailed fence information.
+  */
+ struct sync_file_info {
+ 	char	name[32];
+@@ -69,30 +78,14 @@ struct sync_file_info {
+ 
+ #define SYNC_IOC_MAGIC		'>'
+ 
+-/**
++/*
+  * Opcodes  0, 1 and 2 were burned during a API change to avoid users of the
+  * old API to get weird errors when trying to handling sync_files. The API
+  * change happened during the de-stage of the Sync Framework when there was
+  * no upstream users available.
+  */
+ 
+-/**
+- * DOC: SYNC_IOC_MERGE - merge two fences
+- *
+- * Takes a struct sync_merge_data.  Creates a new fence containing copies of
+- * the sync_pts in both the calling fd and sync_merge_data.fd2.  Returns the
+- * new fence's fd in sync_merge_data.fence
+- */
+ #define SYNC_IOC_MERGE		_IOWR(SYNC_IOC_MAGIC, 3, struct sync_merge_data)
+-
+-/**
+- * DOC: SYNC_IOC_FILE_INFO - get detailed information on a sync_file
+- *
+- * Takes a struct sync_file_info. If num_fences is 0, the field is updated
+- * with the actual number of fences. If num_fences is > 0, the system will
+- * use the pointer provided on sync_fence_info to return up to num_fences of
+- * struct sync_fence_info, with detailed fence information.
+- */
+ #define SYNC_IOC_FILE_INFO	_IOWR(SYNC_IOC_MAGIC, 4, struct sync_file_info)
+ 
+ #endif /* _UAPI_LINUX_SYNC_H */
+-- 
+2.39.1
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
