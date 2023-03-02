@@ -2,227 +2,204 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 081C56A8DAC
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 Mar 2023 00:56:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E6CF16A8DAD
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 Mar 2023 00:56:47 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0B83840E1D
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Mar 2023 23:56:23 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
-	by lists.linaro.org (Postfix) with ESMTPS id CA1C940E20
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Mar 2023 23:54:12 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 00CF440E17
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  2 Mar 2023 23:56:47 +0000 (UTC)
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+	by lists.linaro.org (Postfix) with ESMTPS id 4BB7340E27
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  2 Mar 2023 23:54:15 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=Wg55OsvU;
-	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.214.174 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=hX79zaQY;
+	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.216.52 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pl1-f174.google.com with SMTP id y11so1020183plg.1
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 02 Mar 2023 15:54:12 -0800 (PST)
+Received: by mail-pj1-f52.google.com with SMTP id me6-20020a17090b17c600b0023816b0c7ceso4470819pjb.2
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 02 Mar 2023 15:54:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1677801252;
+        d=gmail.com; s=20210112; t=1677801254;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ETqCmTHSSqXnNZWKuQdc5aqtsOAoStUjUTTw9xnexgU=;
-        b=Wg55OsvUwXVKaQjNDTz/HaotujJ91bf00LrX0Y2jNCT07MxMYSqkxfirm/mIkshtNr
-         8tONL6g+r2yVJldmiMA1cqBIOanTPf9jJ/G9h8BHoC3qLzh8/FMuGFge2z1PDr4nM8OU
-         +mJsenGKeB4rf27qQwYfeDsqBSzf+B83m2vRQrGNCvDkK4HGgJRy87cvWqJcTxkGMqjD
-         qF8rEvrm9eAMcUUfQUkrN2W+xhZfQ7D1XVjGyhoQY49ujoynUK3relJ7EqTJSMNf6Xfg
-         P9nRqP/xAxPECncv/2+hnxYoeyok4ZjO8yvgdx9KefDLkN5PUtCRTrEXQ0DsQ91nP0Si
-         TOPw==
+        bh=A2i/fpR85GsnM4yvTxGbXQcoI9FVWW3WSsWX/ebUCbg=;
+        b=hX79zaQYLdhushZgE5GCBxVIrRIwBhDh2nqI3ggE9QSTHH+J0nrl6T0PoY35zccMuU
+         hX+S20CpnmXXkzxXBbr7hc6/gTjn+vyZ+US8C3t5+zbp8bnR0ZgPHDc6L9du1r84B9i2
+         otn4tpdcPX80hGvzjIvI44OxqY82h339d1laK4TddPx4/I7/sThvNig/a9zt5buqR/HH
+         bkO8gbLcpv6IyT0TzIlzv8dhyZjemYmM94M8clpJ5RV50JadB2hTsNTp+hi7K7l4LmLM
+         k+hNhZX5NxLNHrds97TF7dB+WmMipcnXEgjXAq6Ud/pQG7eenE921A4/tzEOSPsOvVNC
+         mh5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1677801252;
+        d=1e100.net; s=20210112; t=1677801254;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=ETqCmTHSSqXnNZWKuQdc5aqtsOAoStUjUTTw9xnexgU=;
-        b=TlmPw7oBuRtVOS/SxvtUia3yMZXY5PlZKrz3gbMRON8CtQnlain3AN1PziOCbPJ1y8
-         dRaMvJdlPFko+m18HjTwYnGleDi8IwUOiiZ0sCU8Rndk4d+r6mlAkF0sgtY81/FwqCG+
-         LFHIacXtutVWKC9KHu+pE5VgfcvQ9yNpLEHxM5pgsFSGdb28WfYNj2ueojzUIWOssVO+
-         ub9JWYTK/GKyRwrSUc8rSPMAv/V/pqfi4HP6SysZ0gvPUGB2V/j9oNAJfsVdeg3mwKYY
-         xaxptpI6HGJfcGF36G2HW8WCVJntY4c+t0mybkdyw/Ynl/5PGkWYVpk9gaWz/l2PuuES
-         GbnA==
-X-Gm-Message-State: AO0yUKU0yYpzqSdZTEWYnUlJ8YmyiWEqqRxkYtKFzs2+gEvSqztwDYBk
-	sW09XekVBPqBMbsgrdFTcyA=
-X-Google-Smtp-Source: AK7set+2NAy/RATNaAwh/ZUEbbMdlGMTUwyYU6TOy47ebkL3RE8iMUJiZwtUW9kAfHidx5nat7Hs9A==
-X-Received: by 2002:a17:902:d511:b0:19c:e9c4:cc13 with SMTP id b17-20020a170902d51100b0019ce9c4cc13mr68168plg.25.1677801251933;
-        Thu, 02 Mar 2023 15:54:11 -0800 (PST)
+        bh=A2i/fpR85GsnM4yvTxGbXQcoI9FVWW3WSsWX/ebUCbg=;
+        b=butDMnFeccMnee7oWdcF6y+LjKNGHsi5Ciwag5JbnkpGLcEH7LMBboK6HHsj7PZCcW
+         Xe7QslmD6U0nCQG+nC/IduEi7EF6v1RmuBE9ZokEsOn5zWyZGdL5moxcCMNtQZoD/5BY
+         XbI3YTmujwkWIqwOyu6iJaz19i/3rDvIQ77G5mLmht1B7ckazsW/+gCpS6agD4bILg+F
+         eyA+8llYi+MSZ2aDMmVwuUvFt3om1LmWQ5EfJj4zlvNw3lZergkfqcau30zJkQX6JhxP
+         P5K8+zFDv0IeGK5u4L90449awhrZFdAMkLbEsFlZyLCvbjk9ptVTDc28P35VdyuuyYQx
+         ipcA==
+X-Gm-Message-State: AO0yUKV2BhJi5olf+GfwBAoEX6SwM0jIz14NjaOMqj4LrEqqm2Luq1fp
+	DfRjzdZaKXGHFHvlpEgIDtI=
+X-Google-Smtp-Source: AK7set8OtMhbZ6+gJB+18MZDCQ80d9oazy7eSm2vCZwccHjkNGvq9087B6+X0msRRrBWT5EwKDdDIA==
+X-Received: by 2002:a17:902:c94b:b0:19a:c65d:f93 with SMTP id i11-20020a170902c94b00b0019ac65d0f93mr19253pla.53.1677801254310;
+        Thu, 02 Mar 2023 15:54:14 -0800 (PST)
 Received: from localhost ([2a00:79e1:abd:4a00:61b:48ed:72ab:435b])
-        by smtp.gmail.com with ESMTPSA id s7-20020a170902988700b00198fb25d09bsm204948plp.237.2023.03.02.15.54.11
+        by smtp.gmail.com with ESMTPSA id b2-20020a170903228200b001964c8164aasm216400plh.129.2023.03.02.15.54.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 02 Mar 2023 15:54:11 -0800 (PST)
+        Thu, 02 Mar 2023 15:54:13 -0800 (PST)
 From: Rob Clark <robdclark@gmail.com>
 To: dri-devel@lists.freedesktop.org
-Date: Thu,  2 Mar 2023 15:53:28 -0800
-Message-Id: <20230302235356.3148279-7-robdclark@gmail.com>
+Date: Thu,  2 Mar 2023 15:53:29 -0800
+Message-Id: <20230302235356.3148279-8-robdclark@gmail.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230302235356.3148279-1-robdclark@gmail.com>
 References: <20230302235356.3148279-1-robdclark@gmail.com>
 MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: CA1C940E20
+X-Rspamd-Queue-Id: 4BB7340E27
 X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.10 / 15.00];
+X-Spamd-Result: default: False [-1.60 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_MISSING_CHARSET(0.50)[];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.174:from];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.216.52:from];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_RCPT(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	FROM_HAS_DN(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	RCVD_COUNT_THREE(0.00)[3];
 	FREEMAIL_FROM(0.00)[gmail.com];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,ffwll.ch,gmail.com,daenzer.net,intel.com,amd.com,emersion.fr,chromium.org,collabora.com,linaro.org,padovan.org,vger.kernel.org,lists.linaro.org];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	RCVD_TLS_LAST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	RCVD_COUNT_THREE(0.00)[3];
+	ARC_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,ffwll.ch,gmail.com,daenzer.net,intel.com,amd.com,emersion.fr,chromium.org,collabora.com,linaro.org,padovan.org,vger.kernel.org,lists.linaro.org];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: 7AKLYVWQZJAB7J6FKTZVSRMWKTJZGOQ4
-X-Message-ID-Hash: 7AKLYVWQZJAB7J6FKTZVSRMWKTJZGOQ4
+Message-ID-Hash: 7O6KXFQHMNWDBPHRV2NLDPQ6QA3TU7JT
+X-Message-ID-Hash: 7O6KXFQHMNWDBPHRV2NLDPQ6QA3TU7JT
 X-MailFrom: robdclark@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, =?UTF-8?q?Michel=20D=C3=A4nzer?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Pekka Paalanen <ppaalanen@gmail.com>, Simon Ser <contact@emersion.fr>, Luben Tuikov <luben.tuikov@amd.com>, Rob Clark <robdclark@chromium.org>, Pekka Paalanen <pekka.paalanen@collabora.com>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>
+CC: freedreno@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, =?UTF-8?q?Michel=20D=C3=A4nzer?= <michel@daenzer.net>, Tvrtko Ursulin <tvrtko.ursulin@intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Alex Deucher <alexander.deucher@amd.com>, Pekka Paalanen <ppaalanen@gmail.com>, Simon Ser <contact@emersion.fr>, Luben Tuikov <luben.tuikov@amd.com>, Rob Clark <robdclark@chromium.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Pekka Paalanen <pekka.paalanen@collabora.com>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v9 06/15] dma-buf/sync_file: Add SET_DEADLINE ioctl
+Subject: [Linaro-mm-sig] [PATCH v9 07/15] dma-buf/sw_sync: Add fence deadline support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7AKLYVWQZJAB7J6FKTZVSRMWKTJZGOQ4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7O6KXFQHMNWDBPHRV2NLDPQ6QA3TU7JT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: Rob Clark <robdclark@chromium.org>
-
-The initial purpose is for igt tests, but this would also be useful for
-compositors that wait until close to vblank deadline to make decisions
-about which frame to show.
-
-The igt tests can be found at:
-
-https://gitlab.freedesktop.org/robclark/igt-gpu-tools/-/commits/fence-deadline
-
-v2: Clarify the timebase, add link to igt tests
-v3: Use u64 value in ns to express deadline.
-v4: More doc
-
-Signed-off-by: Rob Clark <robdclark@chromium.org>
-Acked-by: Pekka Paalanen <pekka.paalanen@collabora.com>
----
- drivers/dma-buf/dma-fence.c    |  3 ++-
- drivers/dma-buf/sync_file.c    | 19 +++++++++++++++++++
- include/uapi/linux/sync_file.h | 22 ++++++++++++++++++++++
- 3 files changed, 43 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
-index f177c56269bb..74e36f6d05b0 100644
---- a/drivers/dma-buf/dma-fence.c
-+++ b/drivers/dma-buf/dma-fence.c
-@@ -933,7 +933,8 @@ EXPORT_SYMBOL(dma_fence_wait_any_timeout);
-  *   the GPU's devfreq to reduce frequency, when in fact the opposite is what is
-  *   needed.
-  *
-- * To this end, deadline hint(s) can be set on a &dma_fence via &dma_fence_set_deadline.
-+ * To this end, deadline hint(s) can be set on a &dma_fence via &dma_fence_set_deadline
-+ * (or indirectly via userspace facing ioctls like &sync_set_deadline).
-  * The deadline hint provides a way for the waiting driver, or userspace, to
-  * convey an appropriate sense of urgency to the signaling driver.
-  *
-diff --git a/drivers/dma-buf/sync_file.c b/drivers/dma-buf/sync_file.c
-index af57799c86ce..418021cfb87c 100644
---- a/drivers/dma-buf/sync_file.c
-+++ b/drivers/dma-buf/sync_file.c
-@@ -350,6 +350,22 @@ static long sync_file_ioctl_fence_info(struct sync_file *sync_file,
- 	return ret;
- }
- 
-+static int sync_file_ioctl_set_deadline(struct sync_file *sync_file,
-+					unsigned long arg)
-+{
-+	struct sync_set_deadline ts;
-+
-+	if (copy_from_user(&ts, (void __user *)arg, sizeof(ts)))
-+		return -EFAULT;
-+
-+	if (ts.pad)
-+		return -EINVAL;
-+
-+	dma_fence_set_deadline(sync_file->fence, ns_to_ktime(ts.deadline_ns));
-+
-+	return 0;
-+}
-+
- static long sync_file_ioctl(struct file *file, unsigned int cmd,
- 			    unsigned long arg)
- {
-@@ -362,6 +378,9 @@ static long sync_file_ioctl(struct file *file, unsigned int cmd,
- 	case SYNC_IOC_FILE_INFO:
- 		return sync_file_ioctl_fence_info(sync_file, arg);
- 
-+	case SYNC_IOC_SET_DEADLINE:
-+		return sync_file_ioctl_set_deadline(sync_file, arg);
-+
- 	default:
- 		return -ENOTTY;
- 	}
-diff --git a/include/uapi/linux/sync_file.h b/include/uapi/linux/sync_file.h
-index 7e42a5b7558b..d61752dca4c6 100644
---- a/include/uapi/linux/sync_file.h
-+++ b/include/uapi/linux/sync_file.h
-@@ -76,6 +76,27 @@ struct sync_file_info {
- 	__u64	sync_fence_info;
- };
- 
-+/**
-+ * struct sync_set_deadline - SYNC_IOC_SET_DEADLINE - set a deadline hint on a fence
-+ * @deadline_ns: absolute time of the deadline
-+ * @pad:	must be zero
-+ *
-+ * Allows userspace to set a deadline on a fence, see &dma_fence_set_deadline
-+ *
-+ * The timebase for the deadline is CLOCK_MONOTONIC (same as vblank).  For
-+ * example
-+ *
-+ *     clock_gettime(CLOCK_MONOTONIC, &t);
-+ *     deadline_ns = (t.tv_sec * 1000000000L) + t.tv_nsec + ns_until_deadline
-+ */
-+struct sync_set_deadline {
-+	__u64	deadline_ns;
-+	/* Not strictly needed for alignment but gives some possibility
-+	 * for future extension:
-+	 */
-+	__u64	pad;
-+};
-+
- #define SYNC_IOC_MAGIC		'>'
- 
- /*
-@@ -87,5 +108,6 @@ struct sync_file_info {
- 
- #define SYNC_IOC_MERGE		_IOWR(SYNC_IOC_MAGIC, 3, struct sync_merge_data)
- #define SYNC_IOC_FILE_INFO	_IOWR(SYNC_IOC_MAGIC, 4, struct sync_file_info)
-+#define SYNC_IOC_SET_DEADLINE	_IOW(SYNC_IOC_MAGIC, 5, struct sync_set_deadline)
- 
- #endif /* _UAPI_LINUX_SYNC_H */
--- 
-2.39.1
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+RnJvbTogUm9iIENsYXJrIDxyb2JkY2xhcmtAY2hyb21pdW0ub3JnPg0KDQpUaGlzIGNvbnNpc3Rz
+IG9mIHNpbXBseSBzdG9yaW5nIHRoZSBtb3N0IHJlY2VudCBkZWFkbGluZSwgYW5kIGFkZGluZyBh
+bg0KaW9jdGwgdG8gcmV0cmlldmUgdGhlIGRlYWRsaW5lLiAgVGhpcyBjYW4gYmUgdXNlZCBpbiBj
+b25qdW5jdGlvbiB3aXRoDQp0aGUgU0VUX0RFQURMSU5FIGlvY3RsIG9uIGEgZmVuY2UgZmQgZm9y
+IHRlc3RpbmcuICBJZS4gY3JlYXRlIHZhcmlvdXMNCnN3X3N5bmMgZmVuY2VzLCBtZXJnZSB0aGVt
+IGludG8gYSBmZW5jZS1hcnJheSwgc2V0IGRlYWRsaW5lIG9uIHRoZQ0KZmVuY2UtYXJyYXkgYW5k
+IGNvbmZpcm0gdGhhdCBpdCBpcyBwcm9wYWdhdGVkIHByb3Blcmx5IHRvIGVhY2ggZmVuY2UuDQoN
+CnYyOiBTd2l0Y2ggVUFCSSB0byBleHByZXNzIGRlYWRsaW5lIGFzIHU2NA0KdjM6IE1vcmUgdmVy
+Ym9zZSBVQVBJIGRvY3MsIHNob3cgaG93IHRvIGNvbnZlcnQgZnJvbSB0aW1lc3BlYw0KdjQ6IEJl
+dHRlciBjb21tZW50cywgdHJhY2sgdGhlIHNvb25lc3QgZGVhZGxpbmUsIGFzIGEgbm9ybWFsIGZl
+bmNlDQogICAgaW1wbGVtZW50YXRpb24gd291bGQsIHJldHVybiBhbiBlcnJvciBpZiBubyBkZWFk
+bGluZSBzZXQuDQoNClNpZ25lZC1vZmYtYnk6IFJvYiBDbGFyayA8cm9iZGNsYXJrQGNocm9taXVt
+Lm9yZz4NClJldmlld2VkLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFt
+ZC5jb20+DQpBY2tlZC1ieTogUGVra2EgUGFhbGFuZW4gPHBla2thLnBhYWxhbmVuQGNvbGxhYm9y
+YS5jb20+DQotLS0NCiBkcml2ZXJzL2RtYS1idWYvc3dfc3luYy5jICAgIHwgODEgKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrDQogZHJpdmVycy9kbWEtYnVmL3N5bmNfZGVidWcu
+aCB8ICAyICsNCiAyIGZpbGVzIGNoYW5nZWQsIDgzIGluc2VydGlvbnMoKykNCg0KZGlmZiAtLWdp
+dCBhL2RyaXZlcnMvZG1hLWJ1Zi9zd19zeW5jLmMgYi9kcml2ZXJzL2RtYS1idWYvc3dfc3luYy5j
+DQppbmRleCAzNDhiM2E5MTcwZmEuLmY1MzA3MWJjYTNhZiAxMDA2NDQNCi0tLSBhL2RyaXZlcnMv
+ZG1hLWJ1Zi9zd19zeW5jLmMNCisrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9zd19zeW5jLmMNCkBAIC01
+MiwxMiArNTIsMzMgQEAgc3RydWN0IHN3X3N5bmNfY3JlYXRlX2ZlbmNlX2RhdGEgew0KIAlfX3Mz
+MglmZW5jZTsgLyogZmQgb2YgbmV3IGZlbmNlICovDQogfTsNCiANCisvKioNCisgKiBzdHJ1Y3Qg
+c3dfc3luY19nZXRfZGVhZGxpbmUgLSBnZXQgdGhlIGRlYWRsaW5lIGhpbnQgb2YgYSBzd19zeW5j
+IGZlbmNlDQorICogQGRlYWRsaW5lX25zOiBhYnNvbHV0ZSB0aW1lIG9mIHRoZSBkZWFkbGluZQ0K
+KyAqIEBwYWQ6CW11c3QgYmUgemVybw0KKyAqIEBmZW5jZV9mZDoJdGhlIHN3X3N5bmMgZmVuY2Ug
+ZmQgKGluKQ0KKyAqDQorICogUmV0dXJuIHRoZSBlYXJsaWVzdCBkZWFkbGluZSBzZXQgb24gdGhl
+IGZlbmNlLiAgVGhlIHRpbWViYXNlIGZvciB0aGUNCisgKiBkZWFkbGluZSBpcyBDTE9DS19NT05P
+VE9OSUMgKHNhbWUgYXMgdmJsYW5rKS4gIElmIHRoZXJlIGlzIG5vIGRlYWRsaW5lDQorICogc2V0
+IG9uIHRoZSBmZW5jZSwgdGhpcyBpb2N0bCB3aWxsIHJldHVybiAtRU5PRU5ULg0KKyAqLw0KK3N0
+cnVjdCBzd19zeW5jX2dldF9kZWFkbGluZSB7DQorCV9fdTY0CWRlYWRsaW5lX25zOw0KKwlfX3Uz
+MglwYWQ7DQorCV9fczMyCWZlbmNlX2ZkOw0KK307DQorDQogI2RlZmluZSBTV19TWU5DX0lPQ19N
+QUdJQwknVycNCiANCiAjZGVmaW5lIFNXX1NZTkNfSU9DX0NSRUFURV9GRU5DRQlfSU9XUihTV19T
+WU5DX0lPQ19NQUdJQywgMCxcDQogCQlzdHJ1Y3Qgc3dfc3luY19jcmVhdGVfZmVuY2VfZGF0YSkN
+CiANCiAjZGVmaW5lIFNXX1NZTkNfSU9DX0lOQwkJCV9JT1coU1dfU1lOQ19JT0NfTUFHSUMsIDEs
+IF9fdTMyKQ0KKyNkZWZpbmUgU1dfU1lOQ19HRVRfREVBRExJTkUJCV9JT1dSKFNXX1NZTkNfSU9D
+X01BR0lDLCAyLCBcDQorCQlzdHJ1Y3Qgc3dfc3luY19nZXRfZGVhZGxpbmUpDQorDQorDQorI2Rl
+ZmluZSBTV19TWU5DX0hBU19ERUFETElORV9CSVQJRE1BX0ZFTkNFX0ZMQUdfVVNFUl9CSVRTDQog
+DQogc3RhdGljIGNvbnN0IHN0cnVjdCBkbWFfZmVuY2Vfb3BzIHRpbWVsaW5lX2ZlbmNlX29wczsN
+CiANCkBAIC0xNzEsNiArMTkyLDIyIEBAIHN0YXRpYyB2b2lkIHRpbWVsaW5lX2ZlbmNlX3RpbWVs
+aW5lX3ZhbHVlX3N0cihzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSwNCiAJc25wcmludGYoc3RyLCBz
+aXplLCAiJWQiLCBwYXJlbnQtPnZhbHVlKTsNCiB9DQogDQorc3RhdGljIHZvaWQgdGltZWxpbmVf
+ZmVuY2Vfc2V0X2RlYWRsaW5lKHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlLCBrdGltZV90IGRlYWRs
+aW5lKQ0KK3sNCisJc3RydWN0IHN5bmNfcHQgKnB0ID0gZG1hX2ZlbmNlX3RvX3N5bmNfcHQoZmVu
+Y2UpOw0KKwl1bnNpZ25lZCBsb25nIGZsYWdzOw0KKw0KKwlzcGluX2xvY2tfaXJxc2F2ZShmZW5j
+ZS0+bG9jaywgZmxhZ3MpOw0KKwlpZiAodGVzdF9iaXQoU1dfU1lOQ19IQVNfREVBRExJTkVfQklU
+LCAmZmVuY2UtPmZsYWdzKSkgew0KKwkJaWYgKGt0aW1lX2JlZm9yZShkZWFkbGluZSwgcHQtPmRl
+YWRsaW5lKSkNCisJCQlwdC0+ZGVhZGxpbmUgPSBkZWFkbGluZTsNCisJfSBlbHNlIHsNCisJCXB0
+LT5kZWFkbGluZSA9IGRlYWRsaW5lOw0KKwkJc2V0X2JpdChTV19TWU5DX0hBU19ERUFETElORV9C
+SVQsICZmZW5jZS0+ZmxhZ3MpOw0KKwl9DQorCXNwaW5fdW5sb2NrX2lycXJlc3RvcmUoZmVuY2Ut
+PmxvY2ssIGZsYWdzKTsNCit9DQorDQogc3RhdGljIGNvbnN0IHN0cnVjdCBkbWFfZmVuY2Vfb3Bz
+IHRpbWVsaW5lX2ZlbmNlX29wcyA9IHsNCiAJLmdldF9kcml2ZXJfbmFtZSA9IHRpbWVsaW5lX2Zl
+bmNlX2dldF9kcml2ZXJfbmFtZSwNCiAJLmdldF90aW1lbGluZV9uYW1lID0gdGltZWxpbmVfZmVu
+Y2VfZ2V0X3RpbWVsaW5lX25hbWUsDQpAQCAtMTc5LDYgKzIxNiw3IEBAIHN0YXRpYyBjb25zdCBz
+dHJ1Y3QgZG1hX2ZlbmNlX29wcyB0aW1lbGluZV9mZW5jZV9vcHMgPSB7DQogCS5yZWxlYXNlID0g
+dGltZWxpbmVfZmVuY2VfcmVsZWFzZSwNCiAJLmZlbmNlX3ZhbHVlX3N0ciA9IHRpbWVsaW5lX2Zl
+bmNlX3ZhbHVlX3N0ciwNCiAJLnRpbWVsaW5lX3ZhbHVlX3N0ciA9IHRpbWVsaW5lX2ZlbmNlX3Rp
+bWVsaW5lX3ZhbHVlX3N0ciwNCisJLnNldF9kZWFkbGluZSA9IHRpbWVsaW5lX2ZlbmNlX3NldF9k
+ZWFkbGluZSwNCiB9Ow0KIA0KIC8qKg0KQEAgLTM4Nyw2ICs0MjUsNDYgQEAgc3RhdGljIGxvbmcg
+c3dfc3luY19pb2N0bF9pbmMoc3RydWN0IHN5bmNfdGltZWxpbmUgKm9iaiwgdW5zaWduZWQgbG9u
+ZyBhcmcpDQogCXJldHVybiAwOw0KIH0NCiANCitzdGF0aWMgaW50IHN3X3N5bmNfaW9jdGxfZ2V0
+X2RlYWRsaW5lKHN0cnVjdCBzeW5jX3RpbWVsaW5lICpvYmosIHVuc2lnbmVkIGxvbmcgYXJnKQ0K
+K3sNCisJc3RydWN0IHN3X3N5bmNfZ2V0X2RlYWRsaW5lIGRhdGE7DQorCXN0cnVjdCBkbWFfZmVu
+Y2UgKmZlbmNlOw0KKwlzdHJ1Y3Qgc3luY19wdCAqcHQ7DQorCWludCByZXQgPSAwOw0KKw0KKwlp
+ZiAoY29weV9mcm9tX3VzZXIoJmRhdGEsICh2b2lkIF9fdXNlciAqKWFyZywgc2l6ZW9mKGRhdGEp
+KSkNCisJCXJldHVybiAtRUZBVUxUOw0KKw0KKwlpZiAoZGF0YS5kZWFkbGluZV9ucyB8fCBkYXRh
+LnBhZCkNCisJCXJldHVybiAtRUlOVkFMOw0KKw0KKwlmZW5jZSA9IHN5bmNfZmlsZV9nZXRfZmVu
+Y2UoZGF0YS5mZW5jZV9mZCk7DQorCWlmICghZmVuY2UpDQorCQlyZXR1cm4gLUVJTlZBTDsNCisN
+CisJcHQgPSBkbWFfZmVuY2VfdG9fc3luY19wdChmZW5jZSk7DQorCWlmICghcHQpDQorCQlyZXR1
+cm4gLUVJTlZBTDsNCisNCisJc3Bpbl9sb2NrKGZlbmNlLT5sb2NrKTsNCisJaWYgKHRlc3RfYml0
+KFNXX1NZTkNfSEFTX0RFQURMSU5FX0JJVCwgJmZlbmNlLT5mbGFncykpIHsNCisJCWRhdGEuZGVh
+ZGxpbmVfbnMgPSBrdGltZV90b19ucyhwdC0+ZGVhZGxpbmUpOw0KKwl9IGVsc2Ugew0KKwkJcmV0
+ID0gLUVOT0VOVDsNCisJfQ0KKwlzcGluX3VubG9jayhmZW5jZS0+bG9jayk7DQorDQorCWRtYV9m
+ZW5jZV9wdXQoZmVuY2UpOw0KKw0KKwlpZiAocmV0KQ0KKwkJcmV0dXJuIHJldDsNCisNCisJaWYg
+KGNvcHlfdG9fdXNlcigodm9pZCBfX3VzZXIgKilhcmcsICZkYXRhLCBzaXplb2YoZGF0YSkpKQ0K
+KwkJcmV0dXJuIC1FRkFVTFQ7DQorDQorCXJldHVybiAwOw0KK30NCisNCiBzdGF0aWMgbG9uZyBz
+d19zeW5jX2lvY3RsKHN0cnVjdCBmaWxlICpmaWxlLCB1bnNpZ25lZCBpbnQgY21kLA0KIAkJCSAg
+dW5zaWduZWQgbG9uZyBhcmcpDQogew0KQEAgLTM5OSw2ICs0NzcsOSBAQCBzdGF0aWMgbG9uZyBz
+d19zeW5jX2lvY3RsKHN0cnVjdCBmaWxlICpmaWxlLCB1bnNpZ25lZCBpbnQgY21kLA0KIAljYXNl
+IFNXX1NZTkNfSU9DX0lOQzoNCiAJCXJldHVybiBzd19zeW5jX2lvY3RsX2luYyhvYmosIGFyZyk7
+DQogDQorCWNhc2UgU1dfU1lOQ19HRVRfREVBRExJTkU6DQorCQlyZXR1cm4gc3dfc3luY19pb2N0
+bF9nZXRfZGVhZGxpbmUob2JqLCBhcmcpOw0KKw0KIAlkZWZhdWx0Og0KIAkJcmV0dXJuIC1FTk9U
+VFk7DQogCX0NCmRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvc3luY19kZWJ1Zy5oIGIvZHJp
+dmVycy9kbWEtYnVmL3N5bmNfZGVidWcuaA0KaW5kZXggNjE3NmU1MmJhMmQ3Li5hMWJkZDYyZWZj
+Y2QgMTAwNjQ0DQotLS0gYS9kcml2ZXJzL2RtYS1idWYvc3luY19kZWJ1Zy5oDQorKysgYi9kcml2
+ZXJzL2RtYS1idWYvc3luY19kZWJ1Zy5oDQpAQCAtNTUsMTEgKzU1LDEzIEBAIHN0YXRpYyBpbmxp
+bmUgc3RydWN0IHN5bmNfdGltZWxpbmUgKmRtYV9mZW5jZV9wYXJlbnQoc3RydWN0IGRtYV9mZW5j
+ZSAqZmVuY2UpDQogICogQGJhc2U6IGJhc2UgZmVuY2Ugb2JqZWN0DQogICogQGxpbms6IGxpbmsg
+b24gdGhlIHN5bmMgdGltZWxpbmUncyBsaXN0DQogICogQG5vZGU6IG5vZGUgaW4gdGhlIHN5bmMg
+dGltZWxpbmUncyB0cmVlDQorICogQGRlYWRsaW5lOiB0aGUgZWFybGllc3QgZmVuY2UgZGVhZGxp
+bmUgaGludA0KICAqLw0KIHN0cnVjdCBzeW5jX3B0IHsNCiAJc3RydWN0IGRtYV9mZW5jZSBiYXNl
+Ow0KIAlzdHJ1Y3QgbGlzdF9oZWFkIGxpbms7DQogCXN0cnVjdCByYl9ub2RlIG5vZGU7DQorCWt0
+aW1lX3QgZGVhZGxpbmU7DQogfTsNCiANCiBleHRlcm4gY29uc3Qgc3RydWN0IGZpbGVfb3BlcmF0
+aW9ucyBzd19zeW5jX2RlYnVnZnNfZm9wczsNCi0tIA0KMi4zOS4xDQoNCl9fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBs
+aXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5k
+IGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
