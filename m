@@ -2,290 +2,275 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 291516BBA97
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 18:11:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 080956BBA8A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 18:09:56 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 374263E965
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 17:11:20 +0000 (UTC)
-Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
-	by lists.linaro.org (Postfix) with ESMTPS id AEE273EBF5
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Mar 2023 16:18:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 162263F456
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 17:09:55 +0000 (UTC)
+Received: from mail-4325.protonmail.ch (mail-4325.protonmail.ch [185.70.43.25])
+	by lists.linaro.org (Postfix) with ESMTPS id 7A4663F1CE
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Mar 2023 17:34:30 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=asahilina.net header.s=default header.b=Bq5PvOWN;
-	spf=pass (lists.linaro.org: domain of lina@asahilina.net designates 212.63.210.85 as permitted sender) smtp.mailfrom=lina@asahilina.net;
-	dmarc=pass (policy=quarantine) header.from=asahilina.net
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: lina@asahilina.net)
-	by mail.marcansoft.com (Postfix) with ESMTPSA id 048F541DF4;
-	Tue,  7 Mar 2023 16:17:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=asahilina.net;
-	s=default; t=1678205882;
-	bh=Qw94FegwAslJUaCniB68UUeUX0OwCWRdd88BzdgPXQE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=Bq5PvOWNwJHYFmQhlxM7mXUiwYE4dpW4OGTiXLi0dz4416AAQi8EIVK020edvpeoI
-	 MRmpbh+Fg9QzKeLgMX2oVPVeJGkAA+yCUHZfyQRMuLdLMzMybsWEgSllQqjrK2obvb
-	 uuhWDg57cQUvWnPK9qbJbKJlj6ztFWRi5xyfm4xXtfdQTksQxfx7yahzy47cDf6IHl
-	 EmJ0kxZYA6+x3n9X9YkPOtyYRB9otB/Czkj+vCGPFKh85Dc4nPmn+46I+5huY5GE9+
-	 DmJT+qSOcFyA0rh43AJ7DTVxDsXimY9L8YcZ51TS+cAM/7x4yspjeM8gSRXAEK2IPc
-	 D+HcWcb6Nl4gw==
-Message-ID: <687b54e7-b9a6-f37b-e5e6-8972e3670cc1@asahilina.net>
-Date: Wed, 8 Mar 2023 01:17:54 +0900
+	dkim=pass header.d=protonmail.com header.s=protonmail3 header.b=bUt03tBY;
+	spf=pass (lists.linaro.org: domain of bjorn3_gh@protonmail.com designates 185.70.43.25 as permitted sender) smtp.mailfrom=bjorn3_gh@protonmail.com;
+	dmarc=pass (policy=quarantine) header.from=protonmail.com
+Date: Tue, 07 Mar 2023 17:34:21 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+	s=protonmail3; t=1678210468; x=1678469668;
+	bh=8OZWBaubQuoarrG6jpZ95qDxehDJejucdLPuF5MOp3M=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=bUt03tBYnJoUKg8MnJvg7z9HQpfFvZX7S4++QQTsXHM1NqB94GwS0lmrXUP64L3Fa
+	 vflhoh4N9ws9+4MmnfcFzK+ci9z91GcRiGi+h8TdGp6/7ibuiV4eeXOmXMXAdtLLzG
+	 +IsUKYbiNy4En5xtoajOEkZ7tt0HmKaC2X2DDXlxW7ew8xFvWInzetjP3MzKxS5zSe
+	 tk/16eVsaDX7+dJn7TstItNAVOVIh5obsrqqhU4f2kt1AcB7W+UyG1GETwQwDoV6G2
+	 6wvELg9dPl7X4c6RQaC4DftQcjWRzSpd/+yRJv9CvBJUZKRCiWp11pabvglmXVXwnT
+	 DF8zVB+62PaBg==
+To: Asahi Lina <lina@asahilina.net>
+From: =?utf-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>
+Message-ID: <D9Cyx-9kbjaeb8QVBFqapDyctoDdVyu5uXEJDR41sdXUDXM1VgdRicV5huJDwfC3-T2J-R_DYHH8JZ1_aRdgbeYZFT78J9QveeeYbiTq4yU=@protonmail.com>
+In-Reply-To: <20230307-rust-drm-v1-1-917ff5bc80a8@asahilina.net>
+References: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net> <20230307-rust-drm-v1-1-917ff5bc80a8@asahilina.net>
+Feedback-ID: 27884398:user:proton
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.9.1
-Content-Language: en-US
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Wedson Almeida Filho <wedsonaf@gmail.com>, Boqun Feng
- <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?UTF-8?Q?Bj=c3=b6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Luben Tuikov <luben.tuikov@amd.com>, Jarkko Sakkinen <jarkko@kernel.org>,
- Dave Hansen <dave.hansen@linux.intel.com>
-References: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net>
-From: Asahi Lina <lina@asahilina.net>
-In-Reply-To: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: AEE273EBF5
+X-Rspamd-Queue-Id: 7A4663F1CE
 X-Spamd-Bar: --
 X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[asahilina.net,quarantine];
-	R_SPF_ALLOW(-0.20)[+mx];
-	R_DKIM_ALLOW(-0.20)[asahilina.net:s=default];
+	DMARC_POLICY_ALLOW(-0.50)[protonmail.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:185.70.43.0/24];
+	R_DKIM_ALLOW(-0.20)[protonmail.com:s=protonmail3];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	MIME_TRACE(0.00)[0:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,protonmail.com,linaro.org,amd.com];
-	ASN(0.00)[asn:30880, ipnet:212.63.192.0/19, country:SE];
-	DKIM_TRACE(0.00)[asahilina.net:+];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_ZERO(0.00)[0];
+	FROM_EQ_ENVFROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:62371, ipnet:185.70.43.0/24, country:CH];
+	FREEMAIL_ENVFROM(0.00)[protonmail.com];
+	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,linaro.org,amd.com,rosenzweig.io,redhat.com,iglunix.org,collabora.com,mary.zone,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[protonmail.com:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[28];
 	TO_DN_SOME(0.00)[];
-	RCVD_TLS_ALL(0.00)[]
-X-MailFrom: lina@asahilina.net
+	TAGGED_RCPT(0.00)[];
+	FREEMAIL_FROM(0.00)[protonmail.com];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[185.70.43.25:from]
+X-MailFrom: bjorn3_gh@protonmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: QBBCM6USEFITPQCEZMOUJVA5AIRKTGH4
-X-Message-ID-Hash: QBBCM6USEFITPQCEZMOUJVA5AIRKTGH4
-X-Mailman-Approved-At: Wed, 15 Mar 2023 17:03:59 +0000
-CC: Alyssa Rosenzweig <alyssa@rosenzweig.io>, Karol Herbst <kherbst@redhat.com>, Ella Stanforth <ella@iglunix.org>, Faith Ekstrand <faith.ekstrand@collabora.com>, Mary <mary@mary.zone>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-sgx@vger.kernel.org, asahi@lists.linux.dev
+Message-ID-Hash: Y72BBFKKNDXX2ONLYB6FAV7H5DDRTP43
+X-Message-ID-Hash: Y72BBFKKNDXX2ONLYB6FAV7H5DDRTP43
+X-Mailman-Approved-At: Wed, 15 Mar 2023 17:03:19 +0000
+CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, Wedson Almeida Filho <wedsonaf@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, Sumit Semwal <sumit.semwal@linaro.org>, =?utf-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Luben Tuikov <luben.tuikov@amd.com>, Jarkko Sakkinen <jarkko@kernel.org>, Dave Hansen <dave.hansen@linux.intel.com>, Alyssa Rosenzweig <alyssa@rosenzweig.io>, Karol Herbst <kherbst@redhat.com>, Ella Stanforth <ella@iglunix.org>, Faith Ekstrand <faith.ekstrand@collabora.com>, Mary <mary@mary.zone>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-sgx@vger.kernel.org, asahi@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 00/18] Rust DRM subsystem abstractions (& preview AGX driver)
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 01/18] rust: drm: ioctl: Add DRM ioctl abstraction
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QBBCM6USEFITPQCEZMOUJVA5AIRKTGH4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Y72BBFKKNDXX2ONLYB6FAV7H5DDRTP43/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-That was supposed to have Markdown-style section headings, but I forgot
-that b4 considers a leading # as a comment... sorry for the abrupt topic
-changes...
-
-The intended headings are below.
-
-On 07/03/2023 23.25, Asahi Lina wrote:
-> Hi everyone!
-> 
-> This is my first take on the Rust abstractions for the DRM
-> subsystem. It includes the abstractions themselves, some minor
-> prerequisite changes to the C side, as well as the drm-asahi GPU driver
-> (for reference on how the abstractions are used, but not necessarily
-> intended to land together).
-> 
-> These patches apply on top of the tree at [1], which is based on
-> 6.3-rc1 with a large number of Rust abstraction/support commits added on
-> top. Most of these are not prerequisites for the DRM abstractions
-> themselves, but rather only of the driver.
-> 
-> * #1-12 introduce the abstractions, module by module, with minor C
->   changes before the dependent abstraction.
->   * Patch 10 is a little addition to drm_sched that I ended up needing,
->     but I can pull it out of the abstraction into its own patch if
->     needed.
-> * #13-14 add a minor feature to drm/gem and its abstraction used
->   by the driver.
-> * #15-16 introduce the (unstable) asahi UAPI. This is obviously not
->   ready for merge yet, but comments are welcome!
-> * #17 adds a Rust helper macro to handle GPU core/firmware differences.
->   This probably belongs in the driver at this point, but right now it
->   has to live in rust/macros since there is no mechanism for per-driver
->   proc macros.
-> * #18 adds the driver proper, in one big commit, for reference purposes.
-
-## Background
-
-> I've been working since mid last year on an Apple AGX GPU driver for
-> Linux, using the (at the time) out-of-tree Rust support. As part of this
-> effort, I've been writing safe Rust abstractions for portions of the DRM
-> subsystem.
-> 
-> Now that Rust itself is upstream, I'd like to get all the abstractions
-> upstreamed so we can eventually get the driver upstreamed!
-> 
-> These abstractions have been used by the driver since our release in
-> December [2], in a simpler synchronous-submission form:
-> 
-> * drm::ioctl
-> * drm::device
-> * drm::drv
-> * drm::file
-> * drm::{gem, gem::shmem}
-> * drm::mm
-> 
-> This series adds these too, which are used by the explicit sync refactor
-> of the driver (the version in this series):
-> 
-> * drm::syncobj
-> * drm::sched
-> * dma_fence
-> 
-> The major dependencies for the DRM abstractions themselves are:
-> 
-> * [3] rust: error: Add missing wrappers to convert to/from kernel error codes
-> * [4] rust: Miscellaneous macro improvements
-> * [5] rust: Add a Sealed trait
-> * [6] rust: device: Add a minimal RawDevice trait
-> * [7] rust: Enable the new_uninit feature for kernel and driver crates
-> * [8] rust: ioctl: Add ioctl number manipulation functions
-> * [9] rust: sync: Arc: Any downcasting and assume_init()
-> *     rust: Add `container_of` and `offset_of` macros
-> *     kernel::sync::mutex and dependencies
-> 
-> Most of these (the ones with links) have already been submitted, and I
-> expect all of them to land for 6.4 (the mutex one will likely be last,
-> since there is some refactoring that will happen over the current state
-> to make it more ergonomic to use). The mutex dep is only necessary for
-> drm::mm and dma_fence, and transitively drm::syncobj and drm::sched.
-
-## State
-
-> Things work! We've had most of the abstractions in production edge
-> kernels with the driver, and the new explicit sync stuff has passed
-> quite a few torture tests (this is how we found the drm_sched issue,
-> patch 11).
-> 
-> The abstractions are intended to be safe (safety review very welcome!).
-> While writing them, I tried to avoid making any changes to the C side
-> unless absolutely necessary. I understand that it will probably make
-> sense to adjust the C side to make some things easier, but I wanted to
-> start from this as a baseline.
-> 
-> Known issues:
-> 
-> - The existing Rust integration does not currently allow building
->   abstractions as modules, so the Rust abstractions are only available
->   for DRM components that are built in. I added some extra Kconfig
->   symbols to deal with this, so a driver built as a module can depende
->   on having those built in. This should go away in the future (but may
->   not be ready in time for submission... I understand this probably
->   shouldn't be a blocker though?).
-> 
-> - DRM relies heavily on the "subclassing" pattern for driver objects,
->   and this doesn't map well to Rust. I tried several approaches for
->   various bits, so we can see how they work out. In particular, whether
->   wrapper types should pretend to be smart pointers and Deref to their
->   inner driver-specific types, and whether they should be marked as
->   method receivers (Yuck, internal rustc implementation hacks! But
->   Arc<T> already does the same thing and it makes usage in
->   driver-implemented callbacks as `self` possible) are things I'd love
->   to discuss ^^.
-> 
-> - Only what I need for my driver is implemented (plus a small amount of
->   obvious extras where better API completeness makes sense). I think the
->   general idea with Rust abstractions is that we add things as they
->   become necessary.
-> 
-> - The plain GEM vs. GEM-shmem duality ended up with quite a hairy type
->   hierarchy. I'd love to figure out how to make this simpler...
-> 
-> - drm::mm ends up requiring a built-in mutex in the abstraction, instead
->   of delegating that to the user with the usual Rust mutability rules.
->   This is because nodes can be dropped at any time, and those operations
->   need to be synchronized. We could try to avoid forbidding those drops
->   or mark the node type !Send, but that would make it a lot less
->   ergonomic to use...
-> 
-> I'm looking for feedback on the abstractions of all kinds, so we can
-> move towards an upstreamable version. Optimistically, I'd love to get
-> this upstream for 6.5, and the driver for 6.6.
-> 
-> Please feel free to ask any questions about the Rust bits, since I know
-> a lot of this is new to many of the C folks!
-
-## About the drm-asahi driver
-
-> This is a fairly complete driver for Apple AGX G13 and G14 series GPUs.
-> 
-> The driver today supports the Apple M1, M1 Pro, M1 Max, M1 Ultra, and M2
-> SoCs, across two firmware revisions each. It has an explicit sync UAPI
-> heavily inspired by the upcoming Intel Xe UAPI, designed with Vulkan
-> support in mind. On the Mesa side we currently have a Gallium driver
-> that is mostly already upstream (missing the UAPI bits mostly) and
-> passes the dEQP GLES2/EGL tests, with most of GLES3.0 passing in
-> downstream work-in-progress branches. This is a reverse engineered
-> community driver (we have no hardware documentation of any kind, other
-> than some hints from aspects shared with PowerVR).
-> 
-> While developing the driver, I tried to make use of Rust's safety and
-> lifetime features to provide not just CPU-side safety, but also
-> partial firmware-ABI safety. Thanks to this, it has turned out to be
-> a very stable driver even though GPU firmware crashes are fatal (no
-> restart capability, need to reboot!) and the FW/driver interface is a
-> huge mess of unsafe shared memory structures with complex pointer
-> chains. There are over 70 ABI types and 3000+ lines of firmware ABI type
-> definitions that vary between firmware builds and GPU cores...
-> 
-> In a simpler blocking-submission form, it has been shipping in Asahi
-> Linux edge kernels since December [2], with lots of users and zero (!)
-> reported oopses (and only a couple reports of GPU firmware crashes,
-> though that issue should now be fixed). It has survived OOM scenarios
-> (Rust makes error cleanup easy!), UAPI-level fuzzing, countless broken
-> Mesa builds, uptimes of 40+ days, and more.
-> 
-> The explicit sync refactor significantly increases performance (and
-> potential problems), but this version has survived a lot of torture
-> with dEQP/piglit tests and some manual corner case testing.
-> 
-> In other words, Rust works! ^^
-> 
-> There are some design notes on the driver and further links at [10].
-
-## Links
-
-> [1] https://github.com/AsahiLinux/linux.git drm-rfc-base-20230307
-> [2] https://asahilinux.org/2022/12/gpu-drivers-now-in-asahi-linux/
-> [3] https://lore.kernel.org/rust-for-linux/20230224-rust-error-v1-0-f8f9a9a87303@asahilina.net/T/
-> [4] https://lore.kernel.org/rust-for-linux/20230224-rust-macros-v1-0-b39fae46e102@asahilina.net/T/
-> [5] https://lore.kernel.org/rust-for-linux/20230224-rust-iopt-rtkit-v1-0-49ced3391295@asahilina.net/T/#m515bad2cff7f5a46f55897e6b73c6c2f1fb2c638
-> [6] https://lore.kernel.org/rust-for-linux/20230224-rust-iopt-rtkit-v1-0-49ced3391295@asahilina.net/T/#m4c64e390c43b3ff1b8470fc8b37eaf87f6e12c94
-> [7] https://lore.kernel.org/rust-for-linux/CQV7ZNT6LMXI.1XG4YXSH8I7JK@vincent-arch/T/
-> [8] https://lore.kernel.org/rust-for-linux/61f734d6-1497-755f-3632-3f261b890846@asahilina.net/T/
-> [9] https://lore.kernel.org/rust-for-linux/20230224-rust-arc-v1-0-568eea613a41@asahilina.net/T/
-> [10] https://github.com/AsahiLinux/docs/wiki/SW:AGX-driver-notes
-
-~~ Lina
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+LS0tLS0tLSBPcmlnaW5hbCBNZXNzYWdlIC0tLS0tLS0NCk9uIFR1ZXNkYXksIE1hcmNoIDd0aCwg
+MjAyMyBhdCAxNToyNSwgQXNhaGkgTGluYSA8bGluYUBhc2FoaWxpbmEubmV0PiB3cm90ZToNCg0K
+PiBEUk0gZHJpdmVycyBuZWVkIHRvIGJlIGFibGUgdG8gZGVjbGFyZSB3aGljaCBkcml2ZXItc3Bl
+Y2lmaWMgaW9jdGxzIHRoZXkNCj4gc3VwcG9ydC4gVGhpcyBhYnN0cmFjdGlvbiBhZGRzIHRoZSBy
+ZXF1aXJlZCB0eXBlcyBhbmQgYSBoZWxwZXIgbWFjcm8gdG8NCj4gZ2VuZXJhdGUgdGhlIGlvY3Rs
+IGRlZmluaXRpb24gaW5zaWRlIHRoZSBEUk0gZHJpdmVyLg0KPiANCj4gTm90ZSB0aGF0IHRoaXMg
+bWFjcm8gaXMgbm90IHVzYWJsZSB1bnRpbCBmdXJ0aGVyIGJpdHMgb2YgdGhlDQo+IGFic3RyYWN0
+aW9uIGFyZSBpbiBwbGFjZSAoYnV0IGl0IHdpbGwgbm90IGZhaWwgdG8gY29tcGlsZSBvbiBpdHMg
+b3duLCBpZg0KPiBub3QgY2FsbGVkKS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IEFzYWhpIExpbmEg
+bGluYUBhc2FoaWxpbmEubmV0DQo+IA0KPiAtLS0NCj4gIGRyaXZlcnMvZ3B1L2RybS9LY29uZmln
+ICAgICAgICAgfCAgIDcgKysNCj4gIHJ1c3QvYmluZGluZ3MvYmluZGluZ3NfaGVscGVyLmggfCAg
+IDIgKw0KPiAgcnVzdC9rZXJuZWwvZHJtL2lvY3RsLnJzICAgICAgICB8IDE0NyArKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+ICBydXN0L2tlcm5lbC9kcm0vbW9kLnJz
+ICAgICAgICAgIHwgICA1ICsrDQo+ICBydXN0L2tlcm5lbC9saWIucnMgICAgICAgICAgICAgIHwg
+ICAyICsNCj4gIDUgZmlsZXMgY2hhbmdlZCwgMTYzIGluc2VydGlvbnMoKykNCj4gDQo+IGRpZmYg
+LS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vS2NvbmZpZyBiL2RyaXZlcnMvZ3B1L2RybS9LY29uZmln
+DQo+IGluZGV4IGRjMGY5NGYwMmE4Mi4uZGFiOGYwZjlhYTk2IDEwMDY0NA0KPiAtLS0gYS9kcml2
+ZXJzL2dwdS9kcm0vS2NvbmZpZw0KPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vS2NvbmZpZw0KPiBA
+QCAtMjcsNiArMjcsMTMgQEAgbWVudWNvbmZpZyBEUk0NCj4gIAkgIGRldGFpbHMuICBZb3Ugc2hv
+dWxkIGFsc28gc2VsZWN0IGFuZCBjb25maWd1cmUgQUdQDQo+ICAJICAoL2Rldi9hZ3BnYXJ0KSBz
+dXBwb3J0IGlmIGl0IGlzIGF2YWlsYWJsZSBmb3IgeW91ciBwbGF0Zm9ybS4NCj4gDQo+ICsjIFJ1
+c3QgYWJzdHJhY3Rpb25zIGNhbm5vdCBiZSBidWlsdCBhcyBtb2R1bGVzIGN1cnJlbnRseSwgc28g
+Zm9yY2UgdGhlbSBhcw0KPiArIyBib29sIGJ5IHVzaW5nIHRoZXNlIGludGVybWVkaWF0ZSBzeW1i
+b2xzLiBJbiB0aGUgZnV0dXJlIHRoZXNlIGNvdWxkIGJlDQo+ICsjIHRyaXN0YXRlIG9uY2UgYWJz
+dHJhY3Rpb25zIHRoZW1zZWx2ZXMgY2FuIGJlIGJ1aWx0IGFzIG1vZHVsZXMuDQo+ICtjb25maWcg
+UlVTVF9EUk0NCj4gKwlib29sICJSdXN0IHN1cHBvcnQgZm9yIHRoZSBEUk0gc3Vic3lzdGVtIg0K
+PiArCWRlcGVuZHMgb24gRFJNPXkNCj4gKw0KPiAgY29uZmlnIERSTV9NSVBJX0RCSQ0KPiAgCXRy
+aXN0YXRlDQo+ICAJZGVwZW5kcyBvbiBEUk0NCj4gZGlmZiAtLWdpdCBhL3J1c3QvYmluZGluZ3Mv
+YmluZGluZ3NfaGVscGVyLmggYi9ydXN0L2JpbmRpbmdzL2JpbmRpbmdzX2hlbHBlci5oDQo+IGlu
+ZGV4IDkxYmI3OTA2Y2E1YS4uMjY4N2JlZjE2NzZmIDEwMDY0NA0KPiAtLS0gYS9ydXN0L2JpbmRp
+bmdzL2JpbmRpbmdzX2hlbHBlci5oDQo+ICsrKyBiL3J1c3QvYmluZGluZ3MvYmluZGluZ3NfaGVs
+cGVyLmgNCj4gQEAgLTYsNiArNiw3IEBADQo+ICAgKiBTb3J0ZWQgYWxwaGFiZXRpY2FsbHkuDQo+
+ICAgKi8NCj4gDQo+ICsjaW5jbHVkZSA8ZHJtL2RybV9pb2N0bC5oPg0KPiAgI2luY2x1ZGUgPGxp
+bnV4L2RlbGF5Lmg+DQo+ICAjaW5jbHVkZSA8bGludXgvZGV2aWNlLmg+DQo+ICAjaW5jbHVkZSA8
+bGludXgvZG1hLW1hcHBpbmcuaD4NCj4gQEAgLTIzLDYgKzI0LDcgQEANCj4gICNpbmNsdWRlIDxs
+aW51eC9zeXNjdGwuaD4NCj4gICNpbmNsdWRlIDxsaW51eC90aW1la2VlcGluZy5oPg0KPiAgI2lu
+Y2x1ZGUgPGxpbnV4L3hhcnJheS5oPg0KPiArI2luY2x1ZGUgPHVhcGkvZHJtL2RybS5oPg0KPiAN
+Cj4gIC8qIGBiaW5kZ2VuYCBnZXRzIGNvbmZ1c2VkIGF0IGNlcnRhaW4gdGhpbmdzLiAqLw0KPiAg
+Y29uc3QgZ2ZwX3QgQklORElOR1NfR0ZQX0tFUk5FTCA9IEdGUF9LRVJORUw7DQo+IGRpZmYgLS1n
+aXQgYS9ydXN0L2tlcm5lbC9kcm0vaW9jdGwucnMgYi9ydXN0L2tlcm5lbC9kcm0vaW9jdGwucnMN
+Cj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gaW5kZXggMDAwMDAwMDAwMDAwLi4xMDMwNGVmYmQ1
+ZjENCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9ydXN0L2tlcm5lbC9kcm0vaW9jdGwucnMNCj4g
+QEAgLTAsMCArMSwxNDcgQEANCj4gKy8vIFNQRFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4w
+IE9SIE1JVA0KPiArIyFbYWxsb3cobm9uX3NuYWtlX2Nhc2UpXQ0KPiArDQo+ICsvLyEgRFJNIElP
+Q1RMIGRlZmluaXRpb25zLg0KPiArLy8hDQo+ICsvLyEgQyBoZWFkZXI6IFtgaW5jbHVkZS9saW51
+eC9kcm0vZHJtX2lvY3RsLmhgXSguLi8uLi8uLi8uLi9pbmNsdWRlL2xpbnV4L2RybS9kcm1faW9j
+dGwuaCkNCj4gKw0KPiArdXNlIGNyYXRlOjppb2N0bDsNCj4gKw0KPiArY29uc3QgQkFTRTogdTMy
+ID0gYmluZGluZ3M6OkRSTV9JT0NUTF9CQVNFIGFzIHUzMjsNCj4gKw0KPiArLy8vIENvbnN0cnVj
+dCBhIERSTSBpb2N0bCBudW1iZXIgd2l0aCBubyBhcmd1bWVudC4NCj4gK3B1YiBjb25zdCBmbiBJ
+TyhucjogdTMyKSAtPiB1MzIgew0KPiArICAgIGlvY3RsOjpfSU8oQkFTRSwgbnIpDQo+ICt9DQo+
+ICsNCj4gKy8vLyBDb25zdHJ1Y3QgYSBEUk0gaW9jdGwgbnVtYmVyIHdpdGggYSByZWFkLW9ubHkg
+YXJndW1lbnQuDQo+ICtwdWIgY29uc3QgZm4gSU9SPFQ+KG5yOiB1MzIpIC0+IHUzMiB7DQo+ICsg
+ICAgaW9jdGw6Ol9JT1I6OjxUPihCQVNFLCBucikNCj4gK30NCj4gKw0KPiArLy8vIENvbnN0cnVj
+dCBhIERSTSBpb2N0bCBudW1iZXIgd2l0aCBhIHdyaXRlLW9ubHkgYXJndW1lbnQuDQo+ICtwdWIg
+Y29uc3QgZm4gSU9XPFQ+KG5yOiB1MzIpIC0+IHUzMiB7DQo+ICsgICAgaW9jdGw6Ol9JT1c6OjxU
+PihCQVNFLCBucikNCj4gK30NCj4gKw0KPiArLy8vIENvbnN0cnVjdCBhIERSTSBpb2N0bCBudW1i
+ZXIgd2l0aCBhIHJlYWQtd3JpdGUgYXJndW1lbnQuDQo+ICtwdWIgY29uc3QgZm4gSU9XUjxUPihu
+cjogdTMyKSAtPiB1MzIgew0KPiArICAgIGlvY3RsOjpfSU9XUjo6PFQ+KEJBU0UsIG5yKQ0KPiAr
+fQ0KPiArDQo+ICsvLy8gRGVzY3JpcHRvciB0eXBlIGZvciBEUk0gaW9jdGxzLiBVc2UgdGhlIGBk
+ZWNsYXJlX2RybV9pb2N0bHMhe31gIG1hY3JvIHRvIGNvbnN0cnVjdCB0aGVtLg0KPiArcHViIHR5
+cGUgRHJtSW9jdGxEZXNjcmlwdG9yID0gYmluZGluZ3M6OmRybV9pb2N0bF9kZXNjOw0KPiArDQo+
+ICsvLy8gVGhpcyBpcyBmb3IgaW9jdGwgd2hpY2ggYXJlIHVzZWQgZm9yIHJlbmRlcmluZywgYW5k
+IHJlcXVpcmUgdGhhdCB0aGUgZmlsZSBkZXNjcmlwdG9yIGlzIGVpdGhlcg0KPiArLy8vIGZvciBh
+IHJlbmRlciBub2RlLCBvciBpZiBpdOKAmXMgYSBsZWdhY3kvcHJpbWFyeSBub2RlLCB0aGVuIGl0
+IG11c3QgYmUgYXV0aGVudGljYXRlZC4NCj4gK3B1YiBjb25zdCBBVVRIOiB1MzIgPSBiaW5kaW5n
+czo6ZHJtX2lvY3RsX2ZsYWdzX0RSTV9BVVRIOw0KPiArDQo+ICsvLy8gVGhpcyBtdXN0IGJlIHNl
+dCBmb3IgYW55IGlvY3RsIHdoaWNoIGNhbiBjaGFuZ2UgdGhlIG1vZGVzZXQgb3IgZGlzcGxheSBz
+dGF0ZS4gVXNlcnNwYWNlIG11c3QNCj4gKy8vLyBjYWxsIHRoZSBpb2N0bCB0aHJvdWdoIGEgcHJp
+bWFyeSBub2RlLCB3aGlsZSBpdCBpcyB0aGUgYWN0aXZlIG1hc3Rlci4NCj4gKy8vLw0KPiArLy8v
+IE5vdGUgdGhhdCByZWFkLW9ubHkgbW9kZXNldCBpb2N0bCBjYW4gYWxzbyBiZSBjYWxsZWQgYnkg
+dW5hdXRoZW50aWNhdGVkIGNsaWVudHMsIG9yIHdoZW4gYQ0KPiArLy8vIG1hc3RlciBpcyBub3Qg
+dGhlIGN1cnJlbnRseSBhY3RpdmUgb25lLg0KPiArcHViIGNvbnN0IE1BU1RFUjogdTMyID0gYmlu
+ZGluZ3M6OmRybV9pb2N0bF9mbGFnc19EUk1fTUFTVEVSOw0KPiArDQo+ICsvLy8gQW55dGhpbmcg
+dGhhdCBjb3VsZCBwb3RlbnRpYWxseSB3cmVhayBhIG1hc3RlciBmaWxlIGRlc2NyaXB0b3IgbmVl
+ZHMgdG8gaGF2ZSB0aGlzIGZsYWcgc2V0Lg0KPiArLy8vDQo+ICsvLy8gQ3VycmVudCB0aGF04oCZ
+cyBvbmx5IGZvciB0aGUgU0VUTUFTVEVSIGFuZCBEUk9QTUFTVEVSIGlvY3RsLCB3aGljaCBlLmcu
+IGxvZ2luZCBjYW4gY2FsbCB0byBmb3JjZQ0KPiArLy8vIGEgbm9uLWJlaGF2aW5nIG1hc3RlciAo
+ZGlzcGxheSBjb21wb3NpdG9yKSBpbnRvIGNvbXBsaWFuY2UuDQo+ICsvLy8NCj4gKy8vLyBUaGlz
+IGlzIGVxdWl2YWxlbnQgdG8gY2FsbGVycyB3aXRoIHRoZSBTWVNBRE1JTiBjYXBhYmlsaXR5Lg0K
+PiArcHViIGNvbnN0IFJPT1RfT05MWTogdTMyID0gYmluZGluZ3M6OmRybV9pb2N0bF9mbGFnc19E
+Uk1fUk9PVF9PTkxZOw0KPiArDQo+ICsvLy8gV2hldGhlciBkcm1faW9jdGxfZGVzYy5mdW5jIHNo
+b3VsZCBiZSBjYWxsZWQgd2l0aCB0aGUgRFJNIEJLTCBoZWxkIG9yIG5vdC4gRW5mb3JjZWQgYXMg
+dGhlDQo+ICsvLy8gZGVmYXVsdCBmb3IgYWxsIG1vZGVybiBkcml2ZXJzLCBoZW5jZSB0aGVyZSBz
+aG91bGQgbmV2ZXIgYmUgYSBuZWVkIHRvIHNldCB0aGlzIGZsYWcuDQo+ICsvLy8NCj4gKy8vLyBE
+byBub3QgdXNlIGFueXdoZXJlIGVsc2UgdGhhbiBmb3IgdGhlIFZCTEFOS19XQUlUIElPQ1RMLCB3
+aGljaCBpcyB0aGUgb25seSBsZWdhY3kgSU9DVEwgd2hpY2gNCj4gKy8vLyBuZWVkcyB0aGlzLg0K
+PiArcHViIGNvbnN0IFVOTE9DS0VEOiB1MzIgPSBiaW5kaW5nczo6ZHJtX2lvY3RsX2ZsYWdzX0RS
+TV9VTkxPQ0tFRDsNCj4gKw0KPiArLy8vIFRoaXMgaXMgdXNlZCBmb3IgYWxsIGlvY3RsIG5lZWRl
+ZCBmb3IgcmVuZGVyaW5nIG9ubHksIGZvciBkcml2ZXJzIHdoaWNoIHN1cHBvcnQgcmVuZGVyIG5v
+ZGVzLg0KPiArLy8vIFRoaXMgc2hvdWxkIGJlIGFsbCBuZXcgcmVuZGVyIGRyaXZlcnMsIGFuZCBo
+ZW5jZSBpdCBzaG91bGQgYmUgYWx3YXlzIHNldCBmb3IgYW55IGlvY3RsIHdpdGgNCj4gKy8vLyBg
+QVVUSGAgc2V0LiBOb3RlIHRob3VnaCB0aGF0IHJlYWQtb25seSBxdWVyeSBpb2N0bCBtaWdodCBo
+YXZlIHRoaXMgc2V0LCBidXQgaGF2ZSBub3Qgc2V0DQo+ICsvLy8gRFJNX0FVVEggYmVjYXVzZSB0
+aGV5IGRvIG5vdCByZXF1aXJlIGF1dGhlbnRpY2F0aW9uLg0KPiArcHViIGNvbnN0IFJFTkRFUl9B
+TExPVzogdTMyID0gYmluZGluZ3M6OmRybV9pb2N0bF9mbGFnc19EUk1fUkVOREVSX0FMTE9XOw0K
+PiArDQo+ICsvLy8gRGVjbGFyZSB0aGUgRFJNIGlvY3RscyBmb3IgYSBkcml2ZXIuDQo+ICsvLy8N
+Cj4gKy8vLyBFYWNoIGVudHJ5IGluIHRoZSBsaXN0IHNob3VsZCBoYXZlIHRoZSBmb3JtOg0KPiAr
+Ly8vDQo+ICsvLy8gYChpb2N0bF9udW1iZXIsIGFyZ3VtZW50X3R5cGUsIGZsYWdzLCB1c2VyX2Nh
+bGxiYWNrKSxgDQo+ICsvLy8NCj4gKy8vLyBgYXJndW1lbnRfdHlwZWAgaXMgdGhlIHR5cGUgbmFt
+ZSB3aXRoaW4gdGhlIGBiaW5kaW5nc2AgY3JhdGUuDQo+ICsvLy8gYHVzZXJfY2FsbGJhY2tgIHNo
+b3VsZCBoYXZlIHRoZSBmb2xsb3dpbmcgcHJvdG90eXBlOg0KPiArLy8vDQo+ICsvLy8gYGBgDQo+
+ICsvLy8gZm4gZm9vKGRldmljZTogJmtlcm5lbDo6ZHJtOjpkZXZpY2U6OkRldmljZTxTZWxmPiwN
+Cj4gKy8vLyAgICAgICAgZGF0YTogJm11dCBiaW5kaW5nczo6YXJndW1lbnRfdHlwZSwNCj4gKy8v
+LyAgICAgICAgZmlsZTogJmtlcm5lbDo6ZHJtOjpmaWxlOjpGaWxlPFNlbGY6OkZpbGU+LA0KPiAr
+Ly8vICkNCj4gKy8vLyBgYGANCj4gKy8vLyB3aGVyZSBgU2VsZmAgaXMgdGhlIGRybTo6ZHJ2OjpE
+cml2ZXIgaW1wbGVtZW50YXRpb24gdGhlc2UgaW9jdGxzIGFyZSBiZWluZyBkZWNsYXJlZCB3aXRo
+aW4uDQo+ICsvLy8NCj4gKy8vLyAjIEV4YW1wbGVzDQo+ICsvLy8NCj4gKy8vLyBgYGANCj4gKy8v
+LyBrZXJuZWw6OmRlY2xhcmVfZHJtX2lvY3RscyEgew0KPiArLy8vICAgICAoRk9PX0dFVF9QQVJB
+TSwgZHJtX2Zvb19nZXRfcGFyYW0sIGlvY3RsOjpSRU5ERVJfQUxMT1csIG15X2dldF9wYXJhbV9o
+YW5kbGVyKSwNCj4gKy8vLyB9DQo+ICsvLy8gYGBgDQo+ICsvLy8NCj4gKyNbbWFjcm9fZXhwb3J0
+XQ0KPiArbWFjcm9fcnVsZXMhIGRlY2xhcmVfZHJtX2lvY3RscyB7DQo+ICsgICAgKCAkKCgkY21k
+OmlkZW50LCAkc3RydWN0OmlkZW50LCAkZmxhZ3M6ZXhwciwgJGZ1bmM6ZXhwcikpLCogJCgsKT8g
+KSA9PiB7DQo+ICsgICAgICAgIGNvbnN0IElPQ1RMUzogJidzdGF0aWMgWyRjcmF0ZTo6ZHJtOjpp
+b2N0bDo6RHJtSW9jdGxEZXNjcmlwdG9yXSA9IHsNCj4gKyAgICAgICAgICAgIGNvbnN0IF86KCkg
+PSB7DQo+ICsgICAgICAgICAgICAgICAgbGV0IGk6IHUzMiA9ICRjcmF0ZTo6YmluZGluZ3M6OkRS
+TV9DT01NQU5EX0JBU0U7DQo+ICsgICAgICAgICAgICAgICAgLy8gQXNzZXJ0IHRoYXQgYWxsIHRo
+ZSBJT0NUTHMgYXJlIGluIHRoZSByaWdodCBvcmRlciBhbmQgdGhlcmUgYXJlIG5vIGdhcHMsDQo+
+ICsgICAgICAgICAgICAgICAgLy8gYW5kIHRoYXQgdGhlIHNpemVvZiBvZiB0aGUgc3BlY2lmaWVk
+IHR5cGUgaXMgY29ycmVjdC4NCj4gKyAgICAgICAgICAgICAgICAkKA0KPiArICAgICAgICAgICAg
+ICAgICAgICBsZXQgY21kOiB1MzIgPSAkY3JhdGU6Om1hY3Jvczo6Y29uY2F0X2lkZW50cyEoJGNy
+YXRlOjpiaW5kaW5nczo6RFJNX0lPQ1RMXywgJGNtZCk7DQo+ICsgICAgICAgICAgICAgICAgICAg
+IDo6Y29yZTo6YXNzZXJ0IShpID09ICRjcmF0ZTo6aW9jdGw6Ol9JT0NfTlIoY21kKSk7DQo+ICsg
+ICAgICAgICAgICAgICAgICAgIDo6Y29yZTo6YXNzZXJ0IShjb3JlOjptZW06OnNpemVfb2Y6Ojwk
+Y3JhdGU6OmJpbmRpbmdzOjokc3RydWN0PigpID09ICRjcmF0ZTo6aW9jdGw6Ol9JT0NfU0laRShj
+bWQpKTsNCj4gKyAgICAgICAgICAgICAgICAgICAgbGV0IGk6IHUzMiA9IGkgKyAxOw0KPiArICAg
+ICAgICAgICAgICAgICkqDQo+ICsgICAgICAgICAgICB9Ow0KPiArDQo+ICsgICAgICAgICAgICBs
+ZXQgaW9jdGxzID0gJlskKA0KPiArICAgICAgICAgICAgICAgICRjcmF0ZTo6YmluZGluZ3M6OmRy
+bV9pb2N0bF9kZXNjIHsNCj4gKyAgICAgICAgICAgICAgICAgICAgY21kOiAkY3JhdGU6Om1hY3Jv
+czo6Y29uY2F0X2lkZW50cyEoJGNyYXRlOjpiaW5kaW5nczo6RFJNX0lPQ1RMXywgJGNtZCkgYXMg
+dTMyLA0KPiArICAgICAgICAgICAgICAgICAgICBmdW5jOiB7DQo+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAjW2FsbG93KG5vbl9zbmFrZV9jYXNlKV0NCj4gKyAgICAgICAgICAgICAgICAgICAg
+ICAgIHVuc2FmZSBleHRlcm4gIkMiIGZuICRjbWQoDQo+ICsgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIHJhd19kZXY6ICptdXQgJGNyYXRlOjpiaW5kaW5nczo6ZHJtX2RldmljZSwNCj4g
+KyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmF3X2RhdGE6ICptdXQgOjpjb3JlOjpm
+Zmk6OmNfdm9pZCwNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmF3X2ZpbGVf
+cHJpdjogKm11dCAkY3JhdGU6OmJpbmRpbmdzOjpkcm1fZmlsZSwNCj4gKyAgICAgICAgICAgICAg
+ICAgICAgICAgICkgLT4gY29yZTo6ZmZpOjpjX2ludCB7DQo+ICsgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgLy8gU0FGRVRZOiBXZSBuZXZlciBkcm9wIHRoaXMsIGFuZCB0aGUgRFJNIGNvcmUg
+ZW5zdXJlcyB0aGUgZGV2aWNlIGxpdmVzDQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+Ly8gd2hpbGUgY2FsbGJhY2tzIGFyZSBiZWluZyBjYWxsZWQuDQo+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgLy8NCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAvLyBGSVhNRTog
+Q3VycmVudGx5IHRoZXJlIGlzIG5vdGhpbmcgZW5mb3JjaW5nIHRoYXQgdGhlIHR5cGVzIG9mIHRo
+ZQ0KPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIGRldi9maWxlIG1hdGNoIHRoZSBj
+dXJyZW50IGRyaXZlciB0aGVzZSBpb2N0bHMgYXJlIGJlaW5nIGRlY2xhcmVkDQo+ICsgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgLy8gZm9yLCBhbmQgaXQncyBub3QgY2xlYXIgaG93IHRvIGVu
+Zm9yY2UgdGhpcyB3aXRoaW4gdGhlIHR5cGUgc3lzdGVtLg0KPiArICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIGxldCBkZXYgPSA6OmNvcmU6Om1lbTo6TWFudWFsbHlEcm9wOjpuZXcodW5zYWZl
+IHsNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJGNyYXRlOjpkcm06OmRldmlj
+ZTo6RGV2aWNlOjpmcm9tX3JhdyhyYXdfZGV2KQ0KPiArICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIH0pOw0KPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIFNBRkVUWTogVGhpcyBp
+cyBqdXN0IHRoZSBpb2N0bCBhcmd1bWVudCwgd2hpY2ggaG9wZWZ1bGx5IGhhcyB0aGUgcmlnaHQg
+dHlwZQ0KPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vICh3ZSd2ZSBkb25lIG91ciBi
+ZXN0IGNoZWNraW5nIHRoZSBzaXplKS4NCg0KSW4gdGhlIHJ1c3QgdHJlZSB0aGVyZSBpcyB0aGUg
+UmVhZGFibGVGcm9tQnl0ZXMgWzFdIHRyYWl0IHdoaWNoIGluZGljYXRlcyB0aGF0IGl0IGlzIHNh
+ZmUgdG8gcmVhZCBhcmJpdHJhcnkgYnl0ZXMgaW50byB0aGUgdHlwZS4gTWF5YmUgeW91IGNvdWxk
+IGFkZCBpdCBhcyBib3VuZCBvbiB0aGUgYXJndW1lbnQgdHlwZSB3aGVuIGl0IGxhbmRzIGluIHJ1
+c3QtbmV4dD8gVGhpcyB3YXkgeW91IGNhbid0IGVuZCB1cCB3aXRoIGZvciBleGFtcGxlIGEgc3Ry
+dWN0IGNvbnRhaW5pbmcgYSBib29sIHdpdGggdGhlIGJ5dGUgdmFsdWUgMiwgd2hpY2ggaXMgVUIu
+DQoNCmh0dHBzOi8vcnVzdC1mb3ItbGludXguZ2l0aHViLmlvL2RvY3Mva2VybmVsL2lvX2J1ZmZl
+ci90cmFpdC5SZWFkYWJsZUZyb21CeXRlcy5odG1sIFsxXQ0KDQo+ICsgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgbGV0IGRhdGEgPSB1bnNhZmUgeyAmbXV0ICoocmF3X2RhdGEgYXMgKm11dCAk
+Y3JhdGU6OmJpbmRpbmdzOjokc3RydWN0KSB9Ow0KPiArICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIC8vIFNBRkVUWTogVGhpcyBpcyBqdXN0IHRoZSBEUk0gZmlsZSBzdHJ1Y3R1cmUNCj4gKyAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICBsZXQgZmlsZSA9IHVuc2FmZSB7ICRjcmF0ZTo6ZHJt
+OjpmaWxlOjpGaWxlOjpmcm9tX3JhdyhyYXdfZmlsZV9wcml2KSB9Ow0KPiArDQo+ICsgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgbWF0Y2ggJGZ1bmMoJipkZXYsIGRhdGEsICZmaWxlKSB7DQo+
+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEVycihlKSA9PiBlLnRvX2tlcm5lbF9l
+cnJubygpLA0KPiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBPayhpKSA9PiBpLnRy
+eV9pbnRvKCkudW53cmFwX29yKEVSQU5HRS50b19rZXJuZWxfZXJybm8oKSksDQo+ICsgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgfQ0KPiArICAgICAgICAgICAgICAgICAgICAgICAgfQ0KPiAr
+ICAgICAgICAgICAgICAgICAgICAgICAgU29tZSgkY21kKQ0KPiArICAgICAgICAgICAgICAgICAg
+ICB9LA0KPiArICAgICAgICAgICAgICAgICAgICBmbGFnczogJGZsYWdzLA0KPiArICAgICAgICAg
+ICAgICAgICAgICBuYW1lOiAkY3JhdGU6OmNfc3RyISg6OmNvcmU6OnN0cmluZ2lmeSEoJGNtZCkp
+LmFzX2NoYXJfcHRyKCksDQo+ICsgICAgICAgICAgICAgICAgfQ0KPiArICAgICAgICAgICAgKSwq
+XTsNCj4gKyAgICAgICAgICAgIGlvY3Rscw0KPiArICAgICAgICB9Ow0KPiArICAgIH07DQo+ICt9
+DQo+IGRpZmYgLS1naXQgYS9ydXN0L2tlcm5lbC9kcm0vbW9kLnJzIGIvcnVzdC9rZXJuZWwvZHJt
+L21vZC5ycw0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAwMDAwMDAwMDAuLjll
+YzZkN2NiY2FmMw0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL3J1c3Qva2VybmVsL2RybS9tb2Qu
+cnMNCj4gQEAgLTAsMCArMSw1IEBADQo+ICsvLyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BM
+LTIuMCBPUiBNSVQNCj4gKw0KPiArLy8hIERSTSBzdWJzeXN0ZW0gYWJzdHJhY3Rpb25zLg0KPiAr
+DQo+ICtwdWIgbW9kIGlvY3RsOw0KPiBkaWZmIC0tZ2l0IGEvcnVzdC9rZXJuZWwvbGliLnJzIGIv
+cnVzdC9rZXJuZWwvbGliLnJzDQo+IGluZGV4IDc5MDM0OTA4MTZiZi4uY2IyM2QyNGM2NzE4IDEw
+MDY0NA0KPiAtLS0gYS9ydXN0L2tlcm5lbC9saWIucnMNCj4gKysrIGIvcnVzdC9rZXJuZWwvbGli
+LnJzDQo+IEBAIC0zNyw2ICszNyw4IEBAIG1vZCBidWlsZF9hc3NlcnQ7DQo+ICBwdWIgbW9kIGRl
+bGF5Ow0KPiAgcHViIG1vZCBkZXZpY2U7DQo+ICBwdWIgbW9kIGRyaXZlcjsNCj4gKyNbY2ZnKENP
+TkZJR19SVVNUX0RSTSldDQo+ICtwdWIgbW9kIGRybTsNCj4gIHB1YiBtb2QgZXJyb3I7DQo+ICBw
+dWIgbW9kIGlvX2J1ZmZlcjsNCj4gIHB1YiBtb2QgaW9fbWVtOw0KPiANCj4gLS0NCj4gMi4zNS4x
+DQoNCkNoZWVycywNCkJqb3JuDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxp
+c3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0t
+c2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
