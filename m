@@ -2,44 +2,44 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 581106B11D9
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Mar 2023 20:13:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6C81D6B12BF
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Mar 2023 21:15:06 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5E4F93F0C0
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Mar 2023 19:13:11 +0000 (UTC)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com (mail-mw2nam04on2048.outbound.protection.outlook.com [40.107.101.48])
-	by lists.linaro.org (Postfix) with ESMTPS id A4AF13F0A8
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Mar 2023 19:12:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5C6953F0BC
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Mar 2023 20:15:05 +0000 (UTC)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (mail-dm6nam12on2075.outbound.protection.outlook.com [40.107.243.75])
+	by lists.linaro.org (Postfix) with ESMTPS id 65A943EF9C
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Mar 2023 20:14:45 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=GO9o37qx;
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.101.48 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dkim=pass header.d=amd.com header.s=selector1 header.b=rIfnn+Bd;
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.243.75 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
 	dmarc=pass (policy=quarantine) header.from=amd.com;
 	arc=pass ("microsoft.com:s=arcselector9901:i=1")
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hsIzhhhJhNQJI+GgAD5LPIkN74pb1OqvQ8WZts6NYi3PXBEgSBrpn23KfBpwzYUTBh4lb8iZDcnDzFvxU2BdSaWXaHg1/nmLYcaRiUSzP27piqiIdbVacQAjg9Rk70ob3jgdblJV2uEcl18V1303k5cGmKOIJbUsa3X1FuJ4oGGufQFeUiaX7XcUbDh45n5Dk4TaAJXYaut3jXFvmjMugBGmwYEh+WLj0QbnObkZFameSlmlWFTOGKYXCLkJaVfOl3isDPX8/Ap8cObFqKJM9ybpTyPox9BSFaoYcWUcURFmJS2aCaxtuUQOfI0XeMw/hT+WFkQiFji8SiW4u8rr6w==
+ b=esIjJmtQdYpCPE44oWJkw7qZmfzzO3CAB4I7oR7x3XTsO7iT7BF+AogpkcwHDUzmlR8iJmH7BwYvnXUYKMkN8LqfjvCE2ctJNIgERM/eH0U7m+5sjwY3NUAlemcN4XM5JqdMT1nHigMvDqG0rgiIXJZZe+6lmRu0BE0HeTcT1UyjB4FqEVpx2re6FBRY3255lum8Cy/G2z0mW2DjmPoneyAUUaZhgp/i/7p0IeIMQLGJ0kZ6BO85Ua6HGxCtPz235yo/kOT/bl7AuOld9OQzIFGOfiqO9WcLt8x7YQPLzIdHa2NpmI9CVOnK6FLddcd5rCyiqjknSucg1E+eL+oVVA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PvMD3rZpKrsRWBRWHQxk8uzdVjcRQHwxZeP2qm9YdQI=;
- b=GCbtaxV85Pa0NCjJYYJAW/g1zjtB07LRbAfyTZMJRWTH2x1h3VOYbeskoAcib6pP6At7aKw+9OfwnArXMP4VAGUXsU0m0L/Pxl+fC6rzSGxVo+erXvcE7b1BneHoACLBkx81DSJWitHPxaOa6pc9VkpgC39InTfadmurqKx66ys+OYLqggGMhxByG2p0ZJ0wK/L6YjYZayMwaOqI5AXXnnRcj7HgxhuDiFCFYsrKZiUF7jcWBXF9FT+fk60fRIMFBvavkMf8oOvJQGCVENFmIQWyffA54xrQfVK3CVicF0y0tskX5L0bYFl8gVW8b+m4E86M030uYe875d+QbL//HA==
+ bh=lpA7O7fIP3RA1upVpzgmgS6JZclbBj33qtdxmgRvRUI=;
+ b=IQ8QOU405ek5UelhvCa/6G/wrUfRSK+3g8duz4i6PyjxUKGKw6VWHYLMvYVeUYhkBykQ70O+EYP8JCcV6Vh/deFmlhfK4nxUcx+hM8hRnuUCx/Z2/A7bu7DXSImcOiGAcQwdkT37mGyAoWxHPKssQ7Mpawa9bozkvBS5XzBWtvi43z6uW+Px24TkG8L05HnHRhrHT5iwAacxjzA5rr/t0PobBEv8XzDWUQ0mx1BByM3I417BJnYaSYl80f0L8fW6pBHeaftj+81IF2qQftFfpIiTeaBJc8VrgT1JWVDsMbXUJ6dFqXbP9flNkiWcqmCqCSXknryL4EHSWmMBw+Lfmg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PvMD3rZpKrsRWBRWHQxk8uzdVjcRQHwxZeP2qm9YdQI=;
- b=GO9o37qxNf8WTfuQ/HddSTq8UUgIIrzWu/OIcmGw+dhABcA4NEwkTptby2m80kb2V+KSdGkU9f15iXrx4I1Ii+OUDu6JPAKb9zxTHWAF4SHcHsEJgFIME9HlxSiYxh7hlhtqt9zItFCpS3cy51rioVBBrKp4UppvfwYQ2GaCQro=
+ bh=lpA7O7fIP3RA1upVpzgmgS6JZclbBj33qtdxmgRvRUI=;
+ b=rIfnn+Bdb1LfHSQXaMlDL0XriYEb+R34KHWw21BE7ECDColi1OahANYCERtEMw3xW5Fw0pHHPpKF0Fs4r5tpY5YFOvmtWU3c/ZIcHrs8KmmblYHZnDJ81eXV9dxWkVScEzOjyRSoNSDXRs2NL9Hoo0bVZA8dUqJLPFcafx/osNk=
 Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by DM6PR12MB4973.namprd12.prod.outlook.com (2603:10b6:5:1b7::14) with
+ by MW4PR12MB6825.namprd12.prod.outlook.com (2603:10b6:303:20d::17) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.17; Wed, 8 Mar
- 2023 19:12:47 +0000
+ 2023 20:14:42 +0000
 Received: from BN8PR12MB3587.namprd12.prod.outlook.com
  ([fe80::d23f:bb1:df95:3918]) by BN8PR12MB3587.namprd12.prod.outlook.com
  ([fe80::d23f:bb1:df95:3918%4]) with mapi id 15.20.6178.017; Wed, 8 Mar 2023
- 19:12:46 +0000
-Message-ID: <d1fccceb-ca77-f653-17fc-63168e0da884@amd.com>
-Date: Wed, 8 Mar 2023 20:12:38 +0100
+ 20:14:42 +0000
+Message-ID: <d544748c-8a2b-7c08-f199-182a56af22be@amd.com>
+Date: Wed, 8 Mar 2023 21:14:34 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.1
 Content-Language: en-US
@@ -64,103 +64,103 @@ References: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net>
  <4bbfc1a3-cfc3-87f4-897b-b6637bac3bd0@asahilina.net>
  <b0aa78b2-b432-200a-8953-a80c462fa6ee@amd.com>
  <c0624252-070e-bd44-2116-93a1d63a1359@asahilina.net>
+ <d1fccceb-ca77-f653-17fc-63168e0da884@amd.com>
+ <9c3dc2ad-11e4-6004-7230-8ca752e3d9f7@asahilina.net>
 From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <c0624252-070e-bd44-2116-93a1d63a1359@asahilina.net>
-X-ClientProxiedBy: FR3P281CA0087.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1f::9) To BN8PR12MB3587.namprd12.prod.outlook.com
+In-Reply-To: <9c3dc2ad-11e4-6004-7230-8ca752e3d9f7@asahilina.net>
+X-ClientProxiedBy: FR2P281CA0045.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:92::17) To BN8PR12MB3587.namprd12.prod.outlook.com
  (2603:10b6:408:43::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|DM6PR12MB4973:EE_
-X-MS-Office365-Filtering-Correlation-Id: df2adce0-35d2-4c67-92d7-08db20091a09
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|MW4PR12MB6825:EE_
+X-MS-Office365-Filtering-Correlation-Id: fbcf49ec-2237-4335-b8a7-08db2011c0b9
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	QcjVi5hmeuvy/3DWBIYqNlbwa4ui/wb8QJv1MXE5XLCSq3hx+er3+afflHmlbc+zspZKGiT7cpcuV0EfgtDZs7qbQ57EbVylJidHC8G5nPxD0c+XubWJsvbnAombmap1AA2rXvjKtKX3E+Th30Ak9abLI6p/jvGwmgvshiFrNwufSS4TbZiqfLHOeTU0vJ2zhuUj/EgfVHAvrXHzvZCcbDNiQOnMHL1R6r0TGxRHq4J10fXQNnsPM+VQ8Md6TJujuajhSk7RQeUxxGdebZ8FtO9WOzCToZISqUqUIRMZ3DNixsVcjA9yD7btNQcls60ojz1Mx/EQltune4rvI8e4PajlHBlX0L3QpZuvo10nChLiiTa+7Q/+E1SYhQAHMyjX4knZmQV3xBNlV+76ndWOIqDG+hMrxa2RxqWxJ0f9IM/ZAFNSBnpqCHpu60331GJFb08WRg01gqYrjESYPNUkzE58uv/K9lo18NyYwstHyScyLv4HoTqWHiv0CvUvmMaRwCzugUtXcfIsV7kLmTc8FDPsYENyi7x1LAIs8fyvRHEEwcTQM7e+M+GW5AYPxndtHScfEA1D1sJCTCUw6XkQaLm5x7UKB9eRpSG+7ndWPBGFme6pw9wHrbLmnTnTaOLHcxQDkadzKqdVAm8tE94uWFXgg9cYSVJl0Kdw2wZCcCHLebsS72VDjtCJl6UwVn5CiEkIJ7jduaQorVnx5nvHfQPMJ74i8WkYM76swemqyKejGo3vxZ4nhYnAWZ2xZPUr
+	IYV+CQJC/iGsBfyKnpAitTKZzvYY52tgHe3NLKSIAg6usnQOWjEAZB39BVPyELuTmKfMLX7F7RlG/n0agVikY+fNOTIEQ2gOwg/zjkoF3B7+855PEQBzE2QhBIgg1t3vZEAK7be9NUxJ4uFbl/Nudf9cr9sBrlwo5JmRnlgbadhooL9RKBh0Qbat8uuxPiD3qCdUcPW96qobIN7HBhplAYNz1OxNE1RbROu9D3b19bybIFDyah3uU+dWlEkOdKrQqXCeqjrPHqTu53a82IDfkx7Cu1s0cXxfD03LdEb1fZS5Xm/gnzrGLN6qd2timJABm7Ds+GrDasDEVCOAO2AiAWvSEkzx/MCj5QBX4TFg44JHxidmISM6OgZnADj2NAQqtZ5qH9dSdnxMbmQlTpRdxVvI9jbI3D1W8fRBV6BguSZPEWIoCIKtdoe7r+KgPFc66OACMBofPx1QX5mHnDdTJvT3IKFR4RCvAJDOQMkUNK4OtPf3vT5XgwsqkWS1hyKUnCPrMoq50vyQ413ke0wtilM2e39mhz4hCjOFuZxYMXlr02nmfRdrj6fa4KTZOOo88I9QqI68c6a1bZ85MPljgYWl0PXNvsGyaBgKbEXuPtrGkmuJGtO+9MLD4Ik5UkhHJ0zlDIltBFVgdhxVWiE/XRGCldgzVxM2zADDzXueixZuaq04u1gePSU06OXNSe6ChdIz1U6WvGf95hW+YtAhdVM/2EG24xlRPgCOOR48V9gzXd2+6dGO2Gg7J6OooijE
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(136003)(376002)(396003)(39860400002)(346002)(366004)(451199018)(921005)(186003)(2906002)(38100700002)(31696002)(2616005)(31686004)(6506007)(6512007)(5660300002)(6666004)(7416002)(8936002)(41300700001)(66476007)(110136005)(6486002)(86362001)(66946007)(66556008)(4326008)(8676002)(478600001)(316002)(36756003)(83380400001)(54906003)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(396003)(346002)(366004)(376002)(39860400002)(136003)(451199018)(478600001)(5660300002)(7416002)(186003)(83380400001)(6666004)(6506007)(6512007)(31696002)(66574015)(86362001)(2616005)(36756003)(6486002)(921005)(2906002)(316002)(41300700001)(8676002)(4326008)(66946007)(66476007)(66556008)(31686004)(38100700002)(54906003)(8936002)(110136005)(45980500001)(43740500002);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?dG5EQllEM3VXWFAxZUhTb0FtMEIwYVlreFFkVXRndWJQVUFhcWRlVTRLSlNk?=
- =?utf-8?B?NXlHN3RFbzFqSExVZmRSWGU2eDk1bDd4RDkvNEM4b3RkMG8yanBHTHJmdUgx?=
- =?utf-8?B?SmludkZ4WTk0ODU4TUxtUTJ2QUg0czZ5YWFzc1ViOUlsd2ZUMEVpdFBqUlJ0?=
- =?utf-8?B?Mkd4bHpMbHFWOWo2SDN4VUN5QmZIMU44UUNYU2Nod21oZDNZUlIya0JBVHd5?=
- =?utf-8?B?ejNsRG5taGNLQzM1SnRqR2drUFlGOWQvSFl1bStROXpFRzFES29GWjhWYi83?=
- =?utf-8?B?S3RmbytoNTdLM3R1ZFo3bG1td0wyUnVRVW9OZkNsUGU3YXBoQ3NRNU45ZUJ0?=
- =?utf-8?B?cnJYbkp0akdxcUdoZDFtNmNudUE5YUwxUCtmRmYwdkEvL1pGdTErUFpWY2pK?=
- =?utf-8?B?RzJSRW1pT29mUWdtT1lZZkdmK3Y1dUZJaXFRSkdwY0Iyakw5YVoxMnkvTEdq?=
- =?utf-8?B?Tms1d0NzcjRGbXZ4cDdvcGR6aDNZcDJVWnVwb1RLQ2kxQnRpSmF5MS9KM004?=
- =?utf-8?B?OUwrSDBmWEhSYWkzck9JNlhoVldSanFkM1kzdjIyd2NrOUxOekpPTGxjRnU2?=
- =?utf-8?B?WWllYXhkYjN4aUt5VXlyVnQxcUdOeXFrSEtzQTFqbkgrUlZXOU5lYWg4YW1X?=
- =?utf-8?B?Nmp5RTQ2b1NjaTVuNVdTVUljRmI0QzhLMUFxWS9oYkd0WmgrZDF3K3FEZ3RY?=
- =?utf-8?B?Szc5ckhSMi9NQ25tVnFqcXcyU1BiS2lyL0pTcEowNnJ0ZkFLZXVGMU9JV0c4?=
- =?utf-8?B?VlRRUkgyUVVReTE0ZHg2aGxYU2Y2V1l3dFZxSSsyR2xIM2NrbDg4blJwcHJl?=
- =?utf-8?B?UGZpbCs4bWNmQ3BCK3RsR1M4cHZMSVlNMHp4UytFcjJGcDhDTkNYTU0zOFp0?=
- =?utf-8?B?cVViNzFDQ2xNd1JoWFVmMFovdHcxZXBreWhleEd0QnRCNEltQU9OUlpBalR5?=
- =?utf-8?B?S2hVd003cmxjT2t6VlV2cGJTMktWTjZ1WkhaOWhnVEdlbWs1TnlUYW5mSUVk?=
- =?utf-8?B?SFVwZ0hMUjhUaFRhOFgxRVBqVG1memZtRDRWUmg0SUI3aGwwbEk4cGlIVEhq?=
- =?utf-8?B?clB5eTZIVy83SG1nQU00ZE5tTjZYTmN5aDA5RGlEb1FkNUZ3SmtqcTJrdzFD?=
- =?utf-8?B?Q1JuUnVHSFQ3MGZnSVhIdnFQMHQzZmE3dURnY3R0anBYTzczMmNhRVNsTDQ1?=
- =?utf-8?B?QjJ1VlQvZVhveDI5eGpIeEg3alNBNGNZN1dqWUZQbXhtR2tDemhOZkRDNHFP?=
- =?utf-8?B?eXdMZSs5bXc1KzBMSnFuYnJLMjZrMzk0aGs5dFJlKzA2RFVKTmw4TndRZTdk?=
- =?utf-8?B?ZEUvS0JYZVNQUWVxTnpZU2FIckdLdmlKZDFhekhKc2FhZkd0Rys4NEQ5L2Nh?=
- =?utf-8?B?YzJGS2p0NjRpWnFsU2JJZTByMmhHY1hTTDBoWld1WkJ4SXNVM1k1bThXY0E2?=
- =?utf-8?B?K0hrNTdkYzdLOTZXRTRTV1NiNURrK1Z0eExGNVFvSzZmNHUwMmxJWnhOcFRv?=
- =?utf-8?B?SkNpemU0YXYxcGJ3VUN0RUE3VDlSTzg1a1BkWmxoaUxYUXdLVEJEZ3o5OUpO?=
- =?utf-8?B?cEU0Rzd5Y3N4S2NvY2FPUkU5aDBEZ3V2a21RK2JXRlQyN05pL09GTCtLTnE2?=
- =?utf-8?B?aXBVd1doUjRSd2swWDhOY2NGZjJKcVYyNHZ4NXBFSURabUNjb09UTzFXSnl6?=
- =?utf-8?B?RGpsN1M2Vk1JQ3hGSTl0eDFLS1ByUVM4ZERROVhBRjBHUElPLzFqdVZITnJ1?=
- =?utf-8?B?Syt6OUNuVEhrWnAvUUlBeFZpSjFEeFVTWkFBa0VuaGdFNm5wQkw5THh1YkZL?=
- =?utf-8?B?VzV4K204MTZjbU80M3BGNm1FcXJUVFp1emZJeWlCblFTQ3hKRkxxUVVSNlJn?=
- =?utf-8?B?OFA2a3BJRUQ0M1dIRzZhYzF4dHFKVDNsS2ZMUStKaGRVQUFzUXdyT2p6UlZH?=
- =?utf-8?B?SGNLQjcyYk1iN2V1OVZOTjlINWNCa0szS0lxaitnc0JqTDJ4NlU4VTVKSXlF?=
- =?utf-8?B?UEpxZ21FcEtIK1puazIzVEkvTTQ2M3dNZWV0UnR4cEZKMzZtWFIxVHZNSnlr?=
- =?utf-8?B?KytidWRIaFo2ekI4NHhjc083dGFrMWNSTlB4bmZGVGdQamErUG9sa0JiTWdo?=
- =?utf-8?B?djdZWXp5cDJWc0IxMXlZQkhHVm96ZTdTbzJyNXhkRWdiZnhEYS8vR01QZnhX?=
- =?utf-8?Q?zRezKXKqu/PLtbjsJKW7L98v6z0s7WST1D9kXGNF2Nkz?=
+	=?utf-8?B?RTBvQ3YwY294RTkwWWdSVno0aEl6R1FFblJXMWRyNGVwY2VDKzZyL0k1TjJ2?=
+ =?utf-8?B?dFFNcGdxZm93cU5sMHdtQXZyWURpR3RKVTVFUXpCQ2JLKzBMbitGRno1cnBx?=
+ =?utf-8?B?N0VtOXcrUmRGTTduMXA1Y1FXdUh4LzdOT21NK1ltSERjREd6WnVxSnBCelc5?=
+ =?utf-8?B?WGZ6dGhDY0VCRVV6RHBlcGMwWGN3SFdwWkZOTXhFWWtURmxMWUd2OUU2Vi90?=
+ =?utf-8?B?cTlnSEVZNGxWM2E5M2I3eStLWjFiYVYwZnFObkZ0Ry9tV0t0LzVaQzBpdWpL?=
+ =?utf-8?B?VTBTc3Y4aitkbUIwVE45a3ExZmVVRjFNbmRKQXZBMWpja25OMjhWRStTdzA3?=
+ =?utf-8?B?L0ttWUdNWTZZbTdOVXdndy9HaHB6TnlxWlhydVE5QmRlR3BpSVROVDgxRVZr?=
+ =?utf-8?B?RmRJcVZpb0J1N0NCbVBoZmFKNHFya0s1bjJsYjh2UHFIeTJqb1BhSTB0T3ZW?=
+ =?utf-8?B?Z0NMbXI1NnVjZWVncUZWYzRSb3oydDY4c2ZQQ28zMDE4VjkzcWFac1lDUmo1?=
+ =?utf-8?B?QmcrWXJzU3o2U0pRNS9CWmQ5TTJZbVlwai85TUpJbUhKSWQ5MXZrcDh6dFBR?=
+ =?utf-8?B?RDZwbWFxbm43bExqalpaVmlweHNHTzR6WjRqNlZiQ2dRSUJmeXVXZm11bDJD?=
+ =?utf-8?B?K0dxSkJqTnFtSmQxQlQ2MGJxbkZWdktlS2xWWTJWeGFvdjVoejhwWFVFWmFk?=
+ =?utf-8?B?aWxIK3B1NjBsZkZVbDdEUW5VUkNtS1U0a2JvMnhCL201ZVp6VkFKWnJXUnVG?=
+ =?utf-8?B?ek9keC9KdDdBTDVWeVJpc0dtaGdWZWlKY3RCbWdDalhnSG0vN3JZZDlTOFpa?=
+ =?utf-8?B?NEM0YjR3M0VySC9GU3ZwUEFzV3J6Z2xJV3l0TkpaVS85RXNpUVNaVmlZb0tK?=
+ =?utf-8?B?aHVXNzRiN1JYeU1MRUZSaU1wMU85Tnc3a252KzhBR29VbkhPMmhrS1FSbC9w?=
+ =?utf-8?B?eStJYmd6bW8ya1BvdmhBMVZtZTVCUlZmM1RlUVNZWWZxMXI4UWZCSHZ0TVZJ?=
+ =?utf-8?B?TEhJcTRjUmR4ME1Saml0N2t5ajRSRDNZUWVaT2RMM0RlTFRzM1dmMDg5MzQ4?=
+ =?utf-8?B?NnVpc0l3eDd4Z3prUnVIMjc5VytQT0lYUThQNjJGVXhaUXczQXF1TTJLYlZY?=
+ =?utf-8?B?M3hlYmJ6VVNwK3UydVF1SVVYWkwvcUZNUUt0NisyWGxHb2RMbVFrek5FOEpr?=
+ =?utf-8?B?WTB2OTkybXB2ZDNpaHJwdm1Qd1JBY3VzY00xdE1qUjJIMW1qaUtFS01iazFs?=
+ =?utf-8?B?WTNzV1BMUHJMM3ovQ2hjWVVEN3hGRmh4MWVhZGd5T2ZWR3BMMENXVjJ4Z2xT?=
+ =?utf-8?B?QnVnODl1d2dRRHZJbW5nZUFIQk5iSFhmZFhiQysxN09mQUZmQVRhOGRYalIw?=
+ =?utf-8?B?YjIyMlNHNTI2SFFJT2xyUkN1SUFmNnh6dmR4RW1aRzNsWGxGeTdRa3N6bWFW?=
+ =?utf-8?B?YTJhY2phRkhtcXM3bnVjWDhrUFpkY3RLSzJYS052TzBvV3FCUWhSZFFDV3VD?=
+ =?utf-8?B?V3RyVmZFUVFpTHFQL3A4WXdIaXZpWHNvQW4wZnZwL2tWdGMvanpTckJlRVls?=
+ =?utf-8?B?bnd3ZU5wL3RZTkxGYUVScEhhVjBHRVB2N3pqZ1M3VzlLa3I0VjVLbDJILzZq?=
+ =?utf-8?B?ZFhlV3RiMEd1bU5YM1haNmVYanNFSmtuQmJjcnJyQmVySU5WT1E2TFlTeGtN?=
+ =?utf-8?B?aU5vTXNRZWU5RW5oaGNuZUZnN2EwS2NpbXJCZkJwVWp1ZUFVR1NhMDBYSjQy?=
+ =?utf-8?B?N243aEF0cHIrYjBaWXFuQW15SHByNlc0UVV6UHNxeVlPK0RBV3B4UkljbU5R?=
+ =?utf-8?B?MlR6SFdFZlhQLzF2bWtCb201TlZIOTNtdHlYQ1hWTldXWkdXTjlxbzVIVFkr?=
+ =?utf-8?B?UkZ4eVhVOTJnZ2FMT0NpQmRJTGdMKzU0UjlkckJMVXlMNGdEMDhvU3laeEtS?=
+ =?utf-8?B?bUpUeURLRkM0Sm9rRmU5dG4zUG53SXNkbTRrSmpsYThnVE1pMUo3cGN2M1RE?=
+ =?utf-8?B?Q3hIeWpVQnBJZHdnYmU3M1dLTE8zVGk1UnUyWFUrVWxoNUk1NWk1V08vcE5D?=
+ =?utf-8?B?eTBEUStBdzdHdnE4ZFlBT1lubUgyOEZCNnROTEIvbnVVTFlPSDUzNHhPdTU2?=
+ =?utf-8?B?UHEwTzZrOXJiT1c3bTREZ3RBSzd2Q3lZK1lQbHlPbEllNGwzQ2phZXYyUTBs?=
+ =?utf-8?Q?OJfr959AYem0/txJLRM8T/IUW0Eh3TprdgueUf/zdvq4?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: df2adce0-35d2-4c67-92d7-08db20091a09
+X-MS-Exchange-CrossTenant-Network-Message-Id: fbcf49ec-2237-4335-b8a7-08db2011c0b9
 X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2023 19:12:46.7936
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Mar 2023 20:14:42.5799
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: lPTO/QENqHbzUqYfdSbRXNkNSbPt17YR4XkDt1mTXHc9cydJINFqy0/9JphLz9fS
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4973
+X-MS-Exchange-CrossTenant-UserPrincipalName: Xs368j1z5Zs285u7IWMwIuZXbvo0gqecIVDI7W45fBRHwN0Vyi5NxSPooy8EGoUo
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB6825
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: A4AF13F0A8
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.50 / 15.00];
+X-Rspamd-Queue-Id: 65A943EF9C
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
 	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	RCVD_IN_DNSWL_HI(-1.00)[40.107.101.48:from,2603:10b6:408:43::13:received];
 	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
 	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
 	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_TO(0.00)[asahilina.net,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,protonmail.com,linaro.org,amd.com];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	RCVD_TLS_LAST(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	DKIM_TRACE(0.00)[amd.com:+];
-	TAGGED_RCPT(0.00)[];
-	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	FROM_EQ_ENVFROM(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FREEMAIL_TO(0.00)[asahilina.net,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,protonmail.com,linaro.org,amd.com];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.243.75:from];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_THREE(0.00)[3];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.101.48:from];
-	TO_MATCH_ENVRCPT_SOME(0.00)[]
-Message-ID-Hash: G3FCIKDOP2TSJU5SFSOBR6HQVG6XX5JT
-X-Message-ID-Hash: G3FCIKDOP2TSJU5SFSOBR6HQVG6XX5JT
+	DKIM_TRACE(0.00)[amd.com:+]
+Message-ID-Hash: SAA2EP66BZZP2WEX2FLGN37MWYZHFPF5
+X-Message-ID-Hash: SAA2EP66BZZP2WEX2FLGN37MWYZHFPF5
 X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Alyssa Rosenzweig <alyssa@rosenzweig.io>, Karol Herbst <kherbst@redhat.com>, Ella Stanforth <ella@iglunix.org>, Faith Ekstrand <faith.ekstrand@collabora.com>, Mary <mary@mary.zone>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-sgx@vger.kernel.org, asahi@lists.linux.dev
@@ -168,194 +168,103 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH RFC 10/18] drm/scheduler: Add can_run_job callback
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/G3FCIKDOP2TSJU5SFSOBR6HQVG6XX5JT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SAA2EP66BZZP2WEX2FLGN37MWYZHFPF5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-Am 08.03.23 um 20:05 schrieb Asahi Lina:
-> [SNIP]
->> Well it's not the better way, it's the only way that works.
->>
->> I have to admit that my bet on your intentions was wrong, but even that
->> use case doesn't work correctly.
->>
->> See when your callback returns false it is perfectly possible that all
->> hw fences are signaled between returning that information and processing it.
->>
->> The result would be that the scheduler goes to sleep and never wakes up
->> again.
-> That can't happen, because it will just go into another iteration of the
-> drm_sched main loop since there is an entity available still.
->
-> Rather there is probably the opposite bug in this patch: the can_run_job
-> logic should be moved into the wait_event_interruptible() condition
-> check, otherwise I think it can end up busy-looping since the condition
-> itself can be true even when the can_run_job check blocks it.
->
-> But there is no risk of it going to sleep and never waking up because
-> job completions will wake up the waitqueue by definition, and that
-> happens after the driver-side queues are popped. If this problem could
-> happen, then the existing hw_submission_limit logic would be broken in
-> the same way. It is logically equivalent in how it works.
->
-> Basically, if properly done in wait_event_interruptible, it is exactly
-> the logic of that macro that prevents this race condition and makes
-> everything work at all. Without it, drm_sched would be completely broken.
->
->> As I said we exercised those ideas before and yes this approach here
->> came up before as well and no it doesn't work.
-> It can never deadlock with this patch as it stands (though it could busy
-> loop), and if properly moved into the wait_event_interruptible(), it
-> would also never busy loop and work entirely as intended. The actual API
-> change is sound.
->
-> I don't know why you're trying so hard to convince everyone that this
-> approach is fundamentally broken... It might be a bad idea for other
-> reasons, it might encourage incorrect usage, it might not be the best
-> option, there are plenty of arguments you can make... but you just keep
-> trying to make an argument that it just can't work at all for some
-> reason. Why? I already said I'm happy dropping it in favor of the fences...
-
-Well because it is broken.
-
-When you move the check into the wait_event_interruptible condition then 
-who is going to call wait_event_interruptible when the condition changes?
-
-As I said this idea came up before and was rejected multiple times.
-
-Regards,
-Christian.
-
->
-> It's intended to mirror the hw_submission_limit logic. If you think this
-> is broken, then that's broken too. They are equivalent mechanisms.
->
->>> This particular issue aside, fairness in global resource allocation is a
->>> conversation I'd love to have! Right now the driver doesn't try to
->>> ensure that, a queue can easily monopolize certain hardware resources
->>> (though one queue can only monopolize one of each, so you'd need
->>> something like 63 queues with 63 distinct VMs all submitting
->>> free-running jobs back to back in order to starve other queues of
->>> resources forever). For starters, one thing I'm thinking of doing is
->>> reserving certain subsets of hardware resources for queues with a given
->>> priority, so you can at least guarantee forward progress of
->>> higher-priority queues when faced with misbehaving lower-priority
->>> queues. But if we want to guarantee proper fairness, I think I'll have
->>> to start doing things like switching to a CPU-roundtrip submission model
->>> when resources become scarce (to guarantee that queues actually release
->>> the resources once in a while) and then figure out how to add fairness
->>> to the allocation code...
->>>
->>> But let's have that conversation when we talk about the driver (or maybe
->>> on IRC or something?), right now I'm more interested in getting the
->>> abstractions reviewed ^^
->> Well that stuff is highly problematic as well. The fairness aside you
->> risk starvation which in turn breaks the guarantee of forward progress.
->>
->> In this particular case you can catch this with a timeout for the hw
->> operation, but you should consider blocking that from the sw side as well.
-> In the current state I actually think it's not really that problematic,
-> because the resources are acquired directly in the ioctl path. So that
-> can block if starved, but if that can cause overall forward progress to
-> stop because some fence doesn't get signaled, then so can just not doing
-> the ioctl in the first place, so there's not much point (userspace can
-> always misbehave with its fence usage...). By the time anything gets
-> submitted to drm_sched, the resources are already guaranteed to be
-> acquired, we never block in the run callback.
->
-> It needs to be fixed of course, but if the threat model is a malicious
-> GPU process, well, there are many other ways to DoS your system... and I
-> don't think it's very likely that 63+ queues (which usually means 63+
-> processes with OpenGL) will end up accidentally starving the GPU in a
-> tight loop at the same time. I'd love to hear about real-world scenarios
-> where this kind of thing has been a real problem and not just a
-> theoretical one though... maybe I'm missing something?
->
-> Basically my priorities with the driver are:
->
-> 1. Make sure it never crashes
-> 2. Make sure it works well for real users
-> 3. Make it work smoothly for real users under reasonable load
-> (priorities, CPU scheduler interactions, etc.)
-> 4. Make it handle accidental problems more gracefully (OOMs etc, I need
-> to look into private GEM BO accounting to processes so the OOM killer
-> has better data to work with)
-> 5. Make it more robust against deliberate abuse/starvation (this should
-> matter more once we have some kind of paravirtualization solution...)
->
-> And right now we're somewhere between 2 and 3. So if there are cases
-> where this resource acquisition stuff can cause a problem for real
-> users, I'll want to fix it earlier. But if this is more theoretical than
-> anything (with the resource limits of AGX GPUs), I'd rather focus on
-> things like memory accounting and shrinker support first.
->
->>> We don't even have a shrinker yet, and I'm sure that's going to be a lot
->>> of fun when we add it too... but yes, if we can't do any memory
->>> allocations in some of these callbacks (is this documented anywhere?),
->>> that's going to be interesting...
->> Yes, that is all part of the dma_fence documentation. It's just
->> absolutely not obvious what all this means.
-> I mean is there any documentation on how this interacts with drm_sched?
-> Like, am I not allowed to allocate memory in prepare()? What about
-> run()? What about GPU interrupt work? (not a raw IRQ handler context, I
-> mean the execution path from GPU IRQ to drm_sched run() fences getting
-> signaled)
->
->>> It's not all bad news though! All memory allocations are fallible in
->>> kernel Rust (and therefore explicit, and also failures have to be
->>> explicitly handled or propagated), so it's pretty easy to point out
->>> where they are, and there are already discussions of higher-level
->>> tooling to enforce rules like that (and things like wait contexts).
->>> Also, Rust makes it a lot easier to refactor code in general and not be
->>> scared that you're going to regress everything, so I'm not really
->>> worried if I need to turn a chunk of the driver on its head to solve
->>> some of these problems in the future ^^ (I already did that when I
->>> switched it from the "demo" synchronous submission model to the proper
->>> explicit sync + fences one.)
->> Yeah, well the problem isn't that you run into memory allocation failure.
-> What I mean is that the mandatory failure handling means it's relatively
-> easy to audit where memory allocations can actually happen.
->
->> The problem is rather something like this:
->> 1. You try to allocate memory to signal your fence.
->> 2. This memory allocation can't be fulfilled and goes to sleep to wait
->> for reclaim.
->> 3. On another CPU reclaim is running and through the general purpose
->> shrinker, page fault or MMU notifier ends up wait for your dma_fence.
->>
->> You don't even need to implement the shrinker for this to go boom
->> extremely easy.
-> Hmm, can you actually get something waiting on a dma_fence like that
-> today with this driver? We don't have a shrinker, we don't have
-> synchronous page faults or MMU notifications for the GPU, and this is
-> explicit sync so all in/out fences cross over into userspace so surely
-> they can't be trusted anyway?
->
-> I'm definitely not familiar with the intricacies of DMA fences and how
-> they interact with everything else yet, but it's starting to sound like
-> either this isn't quite broken for our simple driver yet, or it must be
-> broken pretty much everywhere in some way...
->
->> So everything involved with signaling the fence can allocate memory only
->> with GFP_ATOMIC and only if you absolutely have to.
-> I don't think we even have a good story for passing around gfp_flags in
-> Rust code so that will be interesting... though I need to actually audit
-> the code paths and see how many allocations we really do. I know I alloc
-> some vectors for holding completed commands and stuff like that, but I'm
-> pretty sure I can fix that one with some reworking, and I'm not sure how
-> many other random things there really are...? Obviously most allocations
-> happen at command creation time, on completion you mostly get a lot of
-> freeing, so maybe I can just eliminate all allocs and not worry about
-> GFP_ATOMIC.
->
-> ~~ Lina
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+QW0gMDguMDMuMjMgdW0gMjA6NDUgc2NocmllYiBBc2FoaSBMaW5hOg0KPiBPbiAwOS8wMy8yMDIz
+IDA0LjEyLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPj4gQW0gMDguMDMuMjMgdW0gMjA6MDUg
+c2NocmllYiBBc2FoaSBMaW5hOg0KPj4+IFtTTklQXQ0KPj4+PiBXZWxsIGl0J3Mgbm90IHRoZSBi
+ZXR0ZXIgd2F5LCBpdCdzIHRoZSBvbmx5IHdheSB0aGF0IHdvcmtzLg0KPj4+Pg0KPj4+PiBJIGhh
+dmUgdG8gYWRtaXQgdGhhdCBteSBiZXQgb24geW91ciBpbnRlbnRpb25zIHdhcyB3cm9uZywgYnV0
+IGV2ZW4gdGhhdA0KPj4+PiB1c2UgY2FzZSBkb2Vzbid0IHdvcmsgY29ycmVjdGx5Lg0KPj4+Pg0K
+Pj4+PiBTZWUgd2hlbiB5b3VyIGNhbGxiYWNrIHJldHVybnMgZmFsc2UgaXQgaXMgcGVyZmVjdGx5
+IHBvc3NpYmxlIHRoYXQgYWxsDQo+Pj4+IGh3IGZlbmNlcyBhcmUgc2lnbmFsZWQgYmV0d2VlbiBy
+ZXR1cm5pbmcgdGhhdCBpbmZvcm1hdGlvbiBhbmQgcHJvY2Vzc2luZyBpdC4NCj4+Pj4NCj4+Pj4g
+VGhlIHJlc3VsdCB3b3VsZCBiZSB0aGF0IHRoZSBzY2hlZHVsZXIgZ29lcyB0byBzbGVlcCBhbmQg
+bmV2ZXIgd2FrZXMgdXANCj4+Pj4gYWdhaW4uDQo+Pj4gVGhhdCBjYW4ndCBoYXBwZW4sIGJlY2F1
+c2UgaXQgd2lsbCBqdXN0IGdvIGludG8gYW5vdGhlciBpdGVyYXRpb24gb2YgdGhlDQo+Pj4gZHJt
+X3NjaGVkIG1haW4gbG9vcCBzaW5jZSB0aGVyZSBpcyBhbiBlbnRpdHkgYXZhaWxhYmxlIHN0aWxs
+Lg0KPj4+DQo+Pj4gUmF0aGVyIHRoZXJlIGlzIHByb2JhYmx5IHRoZSBvcHBvc2l0ZSBidWcgaW4g
+dGhpcyBwYXRjaDogdGhlIGNhbl9ydW5fam9iDQo+Pj4gbG9naWMgc2hvdWxkIGJlIG1vdmVkIGlu
+dG8gdGhlIHdhaXRfZXZlbnRfaW50ZXJydXB0aWJsZSgpIGNvbmRpdGlvbg0KPj4+IGNoZWNrLCBv
+dGhlcndpc2UgSSB0aGluayBpdCBjYW4gZW5kIHVwIGJ1c3ktbG9vcGluZyBzaW5jZSB0aGUgY29u
+ZGl0aW9uDQo+Pj4gaXRzZWxmIGNhbiBiZSB0cnVlIGV2ZW4gd2hlbiB0aGUgY2FuX3J1bl9qb2Ig
+Y2hlY2sgYmxvY2tzIGl0Lg0KPj4+DQo+Pj4gQnV0IHRoZXJlIGlzIG5vIHJpc2sgb2YgaXQgZ29p
+bmcgdG8gc2xlZXAgYW5kIG5ldmVyIHdha2luZyB1cCBiZWNhdXNlDQo+Pj4gam9iIGNvbXBsZXRp
+b25zIHdpbGwgd2FrZSB1cCB0aGUgd2FpdHF1ZXVlIGJ5IGRlZmluaXRpb24sIGFuZCB0aGF0DQo+
+Pj4gaGFwcGVucyBhZnRlciB0aGUgZHJpdmVyLXNpZGUgcXVldWVzIGFyZSBwb3BwZWQuIElmIHRo
+aXMgcHJvYmxlbSBjb3VsZA0KPj4+IGhhcHBlbiwgdGhlbiB0aGUgZXhpc3RpbmcgaHdfc3VibWlz
+c2lvbl9saW1pdCBsb2dpYyB3b3VsZCBiZSBicm9rZW4gaW4NCj4+PiB0aGUgc2FtZSB3YXkuIEl0
+IGlzIGxvZ2ljYWxseSBlcXVpdmFsZW50IGluIGhvdyBpdCB3b3Jrcy4NCj4+Pg0KPj4+IEJhc2lj
+YWxseSwgaWYgcHJvcGVybHkgZG9uZSBpbiB3YWl0X2V2ZW50X2ludGVycnVwdGlibGUsIGl0IGlz
+IGV4YWN0bHkNCj4+PiB0aGUgbG9naWMgb2YgdGhhdCBtYWNybyB0aGF0IHByZXZlbnRzIHRoaXMg
+cmFjZSBjb25kaXRpb24gYW5kIG1ha2VzDQo+Pj4gZXZlcnl0aGluZyB3b3JrIGF0IGFsbC4gV2l0
+aG91dCBpdCwgZHJtX3NjaGVkIHdvdWxkIGJlIGNvbXBsZXRlbHkgYnJva2VuLg0KPj4+DQo+Pj4+
+IEFzIEkgc2FpZCB3ZSBleGVyY2lzZWQgdGhvc2UgaWRlYXMgYmVmb3JlIGFuZCB5ZXMgdGhpcyBh
+cHByb2FjaCBoZXJlDQo+Pj4+IGNhbWUgdXAgYmVmb3JlIGFzIHdlbGwgYW5kIG5vIGl0IGRvZXNu
+J3Qgd29yay4NCj4+PiBJdCBjYW4gbmV2ZXIgZGVhZGxvY2sgd2l0aCB0aGlzIHBhdGNoIGFzIGl0
+IHN0YW5kcyAodGhvdWdoIGl0IGNvdWxkIGJ1c3kNCj4+PiBsb29wKSwgYW5kIGlmIHByb3Blcmx5
+IG1vdmVkIGludG8gdGhlIHdhaXRfZXZlbnRfaW50ZXJydXB0aWJsZSgpLCBpdA0KPj4+IHdvdWxk
+IGFsc28gbmV2ZXIgYnVzeSBsb29wIGFuZCB3b3JrIGVudGlyZWx5IGFzIGludGVuZGVkLiBUaGUg
+YWN0dWFsIEFQSQ0KPj4+IGNoYW5nZSBpcyBzb3VuZC4NCj4+Pg0KPj4+IEkgZG9uJ3Qga25vdyB3
+aHkgeW91J3JlIHRyeWluZyBzbyBoYXJkIHRvIGNvbnZpbmNlIGV2ZXJ5b25lIHRoYXQgdGhpcw0K
+Pj4+IGFwcHJvYWNoIGlzIGZ1bmRhbWVudGFsbHkgYnJva2VuLi4uIEl0IG1pZ2h0IGJlIGEgYmFk
+IGlkZWEgZm9yIG90aGVyDQo+Pj4gcmVhc29ucywgaXQgbWlnaHQgZW5jb3VyYWdlIGluY29ycmVj
+dCB1c2FnZSwgaXQgbWlnaHQgbm90IGJlIHRoZSBiZXN0DQo+Pj4gb3B0aW9uLCB0aGVyZSBhcmUg
+cGxlbnR5IG9mIGFyZ3VtZW50cyB5b3UgY2FuIG1ha2UuLi4gYnV0IHlvdSBqdXN0IGtlZXANCj4+
+PiB0cnlpbmcgdG8gbWFrZSBhbiBhcmd1bWVudCB0aGF0IGl0IGp1c3QgY2FuJ3Qgd29yayBhdCBh
+bGwgZm9yIHNvbWUNCj4+PiByZWFzb24uIFdoeT8gSSBhbHJlYWR5IHNhaWQgSSdtIGhhcHB5IGRy
+b3BwaW5nIGl0IGluIGZhdm9yIG9mIHRoZSBmZW5jZXMuLi4NCj4+IFdlbGwgYmVjYXVzZSBpdCBp
+cyBicm9rZW4uDQo+Pg0KPj4gV2hlbiB5b3UgbW92ZSB0aGUgY2hlY2sgaW50byB0aGUgd2FpdF9l
+dmVudF9pbnRlcnJ1cHRpYmxlIGNvbmRpdGlvbiB0aGVuDQo+PiB3aG8gaXMgZ29pbmcgdG8gY2Fs
+bCB3YWl0X2V2ZW50X2ludGVycnVwdGlibGUgd2hlbiB0aGUgY29uZGl0aW9uIGNoYW5nZXM/DQo+
+IEkgdGhpbmsgeW91IG1lYW4gd2FrZV91cF9pbnRlcnJ1cHRpYmxlKCkuIFRoYXQgd291bGQgYmUN
+Cj4gZHJtX3NjaGVkX2pvYl9kb25lKCksIG9uIHRoZSBmZW5jZSBjYWxsYmFjayB3aGVuIGEgam9i
+IGNvbXBsZXRlcywgd2hpY2gNCj4gYXMgSSBrZWVwIHNheWluZyBpcyB0aGUgc2FtZSBsb2dpYyB1
+c2VkIGZvcg0KPiBod19ycV9jb3VudC9od19zdWJtaXNzaW9uX2xpbWl0IHRyYWNraW5nLg0KDQpB
+cyB0aGUgZG9jdW1lbnRhdGlvbiB0byB3YWl0X2V2ZW50IHNheXM6DQoNCiDCoCogd2FrZV91cCgp
+IGhhcyB0byBiZSBjYWxsZWQgYWZ0ZXIgY2hhbmdpbmcgYW55IHZhcmlhYmxlIHRoYXQgY291bGQN
+CiDCoCogY2hhbmdlIHRoZSByZXN1bHQgb2YgdGhlIHdhaXQgY29uZGl0aW9uLg0KDQpTbyB3aGF0
+IHlvdSBlc3NlbnRpYWxseSB0cnkgdG8gZG8gaGVyZSBpcyB0byBza2lwIHRoYXQgYW5kIHNheSAN
+CmRybV9zY2hlZF9qb2JfZG9uZSgpIHdvdWxkIGNhbGwgdGhhdCBhbnl3YXksIGJ1dCB3aGVuIHlv
+dSByZWFkIGFueSANCnZhcmlhYmxlIHRvIGRldGVybWluZSB0aGF0IHN0YXRlIHRoZW4gYXMgZmFy
+IGFzIEkgY2FuIHNlZSBub3RoaW5nIGlzIA0KZ3VhcmFudHlpbmcgdGhhdCBvcmRlci4NCg0KVGhl
+IG9ubHkgb3RoZXIgcG9zc2liaWxpdHkgaG93IHlvdSBjb3VsZCB1c2UgdGhlIGNhbGxiYWNrIGNv
+cnJlY3RseSANCndvdWxkIGJlIHRvIGNhbGwgZHJtX2ZlbmNlX2lzX3NpZ25hbGVkKCkgdG8gcXVl
+cnkgdGhlIHN0YXRlIG9mIHlvdXIgaHcgDQpzdWJtaXNzaW9uIGZyb20gdGhlIHNhbWUgZmVuY2Ug
+d2hpY2ggaXMgdGhlbiBzaWduYWxlZC4gQnV0IHRoZW4gdGhlIA0KcXVlc3Rpb24gaXMgb25jZSBt
+b3JlIHdoeSB5b3UgZG9uJ3QgZ2l2ZSB0aGF0IGZlbmNlIGRpcmVjdGx5IHRvIHRoZSANCnNjaGVk
+dWxlcj8NCg0KPiBQbGVhc2UgdGhpbmsgYWJvdXQgaXQgZm9yIGEgc2Vjb25kLA0KDQpZZWFoLCBJ
+J20gdHJ5aW5nIHRvIHJlYWxseSBmb2xsb3cgeW91ciBpbnRlbnRpb25zIGhlcmUuIEJ1dCB0aGF0
+IGRvZXNuJ3QgDQpyZWFsbHkgbWFrZXMgc2Vuc2UuDQoNCkVpdGhlciB5b3UgYXJlIHRyeWluZyB0
+byBkbyBzb21ldGhpbmcgaW52YWxpZCBvciB5b3UgYXJlIHRyeWluZyB0byANCmNpcmN1bXZlbnQg
+dGhlIG9iamVjdCBtb2RlbCBzb21laG93IGFuZCBhZGQgYSBzaG9ydGN1dCBmb3IgdGhlIHNpZ25h
+bGluZyANCkFQSS4gQm90aCB3b3VsZCBiZSBtb3JlIHRoYW4gZmlzaHkuDQoNClJlZ2FyZHMsDQpD
+aHJpc3RpYW4uDQoNCj4gICBpdCdzIHJlYWxseSBub3QgdGhhdCBjb21wbGljYXRlZCB0bw0KPiBz
+ZWUgd2h5IGl0IHdvcmtzOg0KPg0KPiAtIERyaXZlciBwb3BzIG9mZiBjb21wbGV0ZWQgY29tbWFu
+ZHMgPC0tIGNhbl9ydW5fam9iIGNvbmRpdGlvbiBzYXRpc2ZpZWQNCj4gLSBEcml2ZXIgc2lnbmFs
+cyBmZW5jZQ0KPiAgIC0gZHJtX3NjaGVkX2pvYl9kb25lX2NiKCkNCj4gICAgLSBkcm1fc2NoZWRf
+am9iX2RvbmUoKQ0KPiAgICAgLSBhdG9taWNfZGVjKCZzY2hlZC0+aHdfcnFfY291bnQpOyA8LS0g
+aHdfc3VibWlzc2lvbl9saW1pdCBzYXRpc2ZpZWQNCj4gICAgIC0gLi4uDQo+ICAgICAtIHdha2Vf
+dXBfaW50ZXJydXB0aWJsZSgmc2NoZWQtPndha2VfdXBfd29ya2VyKTsNCj4gICAgICAgIF4tIGhh
+cHBlbnMgYWZ0ZXIgYm90aCBjb25kaXRpb25zIGFyZSBwb3RlbnRpYWxseSBzYXRpc2ZpZWQNCj4N
+Cj4gSXQgcmVhbGx5IGlzIGNvbXBsZXRlbHkgZXF1aXZhbGVudCB0byBqdXN0IG1ha2luZyB0aGUg
+aHdfcnFfY291bnQgbG9naWMNCj4gY3VzdG9taXphYmxlIGJ5IHRoZSBkcml2ZXIuIFRoZSBhY3R1
+YWwgZmxvdyBpcyB0aGUgc2FtZS4gQXMgbG9uZyBhcyB0aGUNCj4gZHJpdmVyIGd1YXJhbnRlZXMg
+aXQgc2F0aXNmaWVzIHRoZSBjYW5fcnVuX2pvYigpIGNvbmRpdGlvbiBiZWZvcmUNCj4gc2lnbmFs
+aW5nIHRoZSBjb21wbGV0aW9uIGZlbmNlIHRoYXQgdHJpZ2dlcmVkIHRoYXQgY2hhbmdlLCBpdCB3
+b3JrcyBmaW5lLg0KPg0KPj4gQXMgSSBzYWlkIHRoaXMgaWRlYSBjYW1lIHVwIGJlZm9yZSBhbmQg
+d2FzIHJlamVjdGVkIG11bHRpcGxlIHRpbWVzLg0KPiBNYXliZSBpdCB3YXMgYSBkaWZmZXJlbnQg
+aWRlYSwgb3IgbWF5YmUgaXQgd2FzIHJlamVjdGVkIGZvciBvdGhlcg0KPiByZWFzb25zLCBvciBt
+YXliZSBpdCB3YXMgd3JvbmdseSByZWplY3RlZCBmb3IgYmVpbmcgYnJva2VuIHdoZW4gaXQgaXNu
+J3QgXl4NCj4NCj4gfn4gTGluYQ0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2ln
+QGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8t
+bW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
