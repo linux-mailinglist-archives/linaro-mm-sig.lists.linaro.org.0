@@ -2,569 +2,149 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74F026BBA8E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 18:10:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E1B56BBA9A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 18:11:42 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 82C533F32B
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 17:10:20 +0000 (UTC)
-Received: from mail-4318.protonmail.ch (mail-4318.protonmail.ch [185.70.43.18])
-	by lists.linaro.org (Postfix) with ESMTPS id 391DF3F0B2
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Mar 2023 18:20:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 75EEF3E965
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 17:11:41 +0000 (UTC)
+Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
+	by lists.linaro.org (Postfix) with ESMTPS id 79CF33E942
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Mar 2023 09:41:43 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=protonmail.com header.s=protonmail3 header.b=VQ0fH7sd;
-	spf=pass (lists.linaro.org: domain of bjorn3_gh@protonmail.com designates 185.70.43.18 as permitted sender) smtp.mailfrom=bjorn3_gh@protonmail.com;
-	dmarc=pass (policy=quarantine) header.from=protonmail.com
-Date: Tue, 07 Mar 2023 18:19:56 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
-	s=protonmail3; t=1678213207; x=1678472407;
-	bh=81yotlRkinPt+LgDPonYCzQeaxo1RZaEBv5T44I7zyc=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=VQ0fH7sd/cb/l+Ncxodj/10+Hes9nE5Kj3LVjit+cnzjtGOg15BfeIrjNy29i0gCZ
-	 GqBQsdZeMqk6QQYFpx/o17WGsj05txE7A5syzBI2EfX5F51GA0UXuNLI6h1TiDdFwa
-	 kuN7dWGB1KKWlQGQxVWsI5kqEF25/bpCKY6kLig1JEh/OvYEBuAquOaYU6RMofhpOT
-	 KAIWNZRQxT503z12fzKC6JNnnSfTvCqzkd/jz/MLimACKJFuiUCDicWglgc+C8+2vQ
-	 KPnlF76GC/5TsBtCbjWfD12AKvgZ50iF4Q91muaW71o0ZqLJX6DtXHkuD2o0BbN38L
-	 xldiF2qEpGRZA==
-To: Asahi Lina <lina@asahilina.net>
-From: =?utf-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>
-Message-ID: <LgJBjn9Sl_vEeMPI8yvQkT5yQzZGk3eC8zdazRRupvjTuysDp8AJU1KY937LoPXugI78XH35UbTxn5tQzunr_pnr63bV_4HC_Ft6VW_mRL8=@protonmail.com>
-In-Reply-To: <20230307-rust-drm-v1-2-917ff5bc80a8@asahilina.net>
-References: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net> <20230307-rust-drm-v1-2-917ff5bc80a8@asahilina.net>
-Feedback-ID: 27884398:user:proton
+	dkim=pass header.d=asahilina.net header.s=default header.b=CZvuPPNT;
+	spf=pass (lists.linaro.org: domain of lina@asahilina.net designates 212.63.210.85 as permitted sender) smtp.mailfrom=lina@asahilina.net;
+	dmarc=pass (policy=quarantine) header.from=asahilina.net
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: lina@asahilina.net)
+	by mail.marcansoft.com (Postfix) with ESMTPSA id C77F841DF4;
+	Wed,  8 Mar 2023 09:41:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=asahilina.net;
+	s=default; t=1678268501;
+	bh=vBxMB571C2rYbZLVgeBfcGW/6kjKGp2NbaNwD343XB8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=CZvuPPNTVPZ5UeTvxDAPbq9istc0FQHAa695VyMpBbgJYwBKq3BYCxH5vGYEznwtD
+	 UsWvCb0Ck28/YE43ouuknNNtGFuJNUkPqCqzeTq0B0WPCl3ukEFiPQ6YtGUBmgH6FP
+	 JVxP/pFvVRc7toKHMIxyf/6IBkguOIsyZLC3baI8xwmQVvp2ZAZUWBaWDGdY7Lp2u8
+	 7NRARO6WbHzFBDxxIcKxob80EOdD2n5kb7qWnM6/OipZBy36VF9gJQUUpOm8fOOoFw
+	 6pGiB0Lx3DCNA5Xv/Xq8ckvcr4AF7O0bnR2ObjTc6cxxhcJXFAYmvJlvCXiMctnt6v
+	 nxYUr1kjdPP2g==
+Message-ID: <a075d886-0820-b6fb-fcd0-45bfdc75e37d@asahilina.net>
+Date: Wed, 8 Mar 2023 18:41:32 +0900
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Content-Language: en-US
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
+ Wedson Almeida Filho <wedsonaf@gmail.com>, Boqun Feng
+ <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?UTF-8?Q?Bj=c3=b6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>, Luben Tuikov <luben.tuikov@amd.com>,
+ Jarkko Sakkinen <jarkko@kernel.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>
+References: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net>
+ <20230307-rust-drm-v1-10-917ff5bc80a8@asahilina.net>
+ <cd788ccf-0cf1-85d5-1bf8-efc259bd7e11@amd.com>
+From: Asahi Lina <lina@asahilina.net>
+In-Reply-To: <cd788ccf-0cf1-85d5-1bf8-efc259bd7e11@amd.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 391DF3F0B2
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+X-Rspamd-Queue-Id: 79CF33E942
+X-Spamd-Bar: ------
+X-Spamd-Result: default: False [-6.50 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[protonmail.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:185.70.43.0/24];
-	R_DKIM_ALLOW(-0.20)[protonmail.com:s=protonmail3];
+	DMARC_POLICY_ALLOW(-0.50)[asahilina.net,quarantine];
+	R_SPF_ALLOW(-0.20)[+mx];
+	R_DKIM_ALLOW(-0.20)[asahilina.net:s=default];
 	MIME_GOOD(-0.10)[text/plain];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_ZERO(0.00)[0];
-	ASN(0.00)[asn:62371, ipnet:185.70.43.0/24, country:CH];
-	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:30880, ipnet:212.63.192.0/19, country:SE];
+	ARC_NA(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[28];
-	FREEMAIL_ENVFROM(0.00)[protonmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[amd.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,protonmail.com,linaro.org];
 	FROM_EQ_ENVFROM(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,linaro.org,amd.com,rosenzweig.io,redhat.com,iglunix.org,collabora.com,mary.zone,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
+	RCVD_COUNT_TWO(0.00)[2];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_TRACE(0.00)[asahilina.net:+];
 	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[protonmail.com:+];
-	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[];
-	FREEMAIL_FROM(0.00)[protonmail.com];
-	MID_RHS_MATCH_FROM(0.00)[]
-X-MailFrom: bjorn3_gh@protonmail.com
+	TO_DN_SOME(0.00)[];
+	RCVD_TLS_ALL(0.00)[]
+X-MailFrom: lina@asahilina.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: A22Q46VLCQCMA7F3T7B4FCI3JQAUMUPJ
-X-Message-ID-Hash: A22Q46VLCQCMA7F3T7B4FCI3JQAUMUPJ
-X-Mailman-Approved-At: Wed, 15 Mar 2023 17:03:45 +0000
-CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, Wedson Almeida Filho <wedsonaf@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, Sumit Semwal <sumit.semwal@linaro.org>, =?utf-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Luben Tuikov <luben.tuikov@amd.com>, Jarkko Sakkinen <jarkko@kernel.org>, Dave Hansen <dave.hansen@linux.intel.com>, Alyssa Rosenzweig <alyssa@rosenzweig.io>, Karol Herbst <kherbst@redhat.com>, Ella Stanforth <ella@iglunix.org>, Faith Ekstrand <faith.ekstrand@collabora.com>, Mary <mary@mary.zone>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-sgx@vger.kernel.org, asahi@lists.linux.dev
+Message-ID-Hash: PG4JUMSXE33U7EBPXWIZ44IW6HMGPPRH
+X-Message-ID-Hash: PG4JUMSXE33U7EBPXWIZ44IW6HMGPPRH
+X-Mailman-Approved-At: Wed, 15 Mar 2023 17:03:59 +0000
+CC: Alyssa Rosenzweig <alyssa@rosenzweig.io>, Karol Herbst <kherbst@redhat.com>, Ella Stanforth <ella@iglunix.org>, Faith Ekstrand <faith.ekstrand@collabora.com>, Mary <mary@mary.zone>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-sgx@vger.kernel.org, asahi@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 02/18] rust: drm: Add Device and Driver abstractions
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 10/18] drm/scheduler: Add can_run_job callback
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/A22Q46VLCQCMA7F3T7B4FCI3JQAUMUPJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PG4JUMSXE33U7EBPXWIZ44IW6HMGPPRH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-------- Original Message -------
-On Tuesday, March 7th, 2023 at 15:25, Asahi Lina <lina@asahilina.net> wrote:
-
-> Add the initial abstractions for DRM drivers and devices. These go
-> together in one commit since they are fairly tightly coupled types.
-> 
-> A few things have been stubbed out, to be implemented as further bits of
-> the DRM subsystem are introduced.
-> 
-> Signed-off-by: Asahi Lina lina@asahilina.net
-> 
-> ---
->  rust/bindings/bindings_helper.h |   3 +
->  rust/kernel/drm/device.rs       |  76 +++++++++
->  rust/kernel/drm/drv.rs          | 339 ++++++++++++++++++++++++++++++++++++++++
->  rust/kernel/drm/mod.rs          |   2 +
->  4 files changed, 420 insertions(+)
-> 
-> diff --git a/rust/bindings/bindings_helper.h b/rust/bindings/bindings_helper.h
-> index 2687bef1676f..2a999138c4ae 100644
-> --- a/rust/bindings/bindings_helper.h
-> +++ b/rust/bindings/bindings_helper.h
-> @@ -6,10 +6,13 @@
->   * Sorted alphabetically.
->   */
-> 
-> +#include <drm/drm_device.h>
-> +#include <drm/drm_drv.h>
->  #include <drm/drm_ioctl.h>
->  #include <linux/delay.h>
->  #include <linux/device.h>
->  #include <linux/dma-mapping.h>
-> +#include <linux/fs.h>
->  #include <linux/ioctl.h>
->  #include <linux/io-pgtable.h>
->  #include <linux/ktime.h>
-> diff --git a/rust/kernel/drm/device.rs b/rust/kernel/drm/device.rs
-> new file mode 100644
-> index 000000000000..6007f941137a
-> --- /dev/null
-> +++ b/rust/kernel/drm/device.rs
-> @@ -0,0 +1,76 @@
-> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> +
-> +//! DRM device.
-> +//!
-> +//! C header: [`include/linux/drm/drm_device.h`](../../../../include/linux/drm/drm_device.h)
-> +
-> +use crate::{bindings, device, drm, types::ForeignOwnable};
-> +use core::marker::PhantomData;
-> +
-> +/// Represents a reference to a DRM device. The device is reference-counted and is guaranteed to
-> +/// not be dropped while this object is alive.
-> +pub struct Device<T: drm::drv::Driver> {
-> +    // Type invariant: ptr must be a valid and initialized drm_device,
-> +    // and this value must either own a reference to it or the caller
-> +    // must ensure that it is never dropped if the reference is borrowed.
-> +    pub(super) ptr: *mut bindings::drm_device,
-> +    _p: PhantomData<T>,
-> +}
-> +
-> +impl<T: drm::drv::Driver> Device<T> {
-> +    // Not intended to be called externally, except via declare_drm_ioctls!()
-> +    #[doc(hidden)]
-> +    pub unsafe fn from_raw(raw: *mut bindings::drm_device) -> Device<T> {
-> +        Device {
-> +            ptr: raw,
-> +            _p: PhantomData,
-> +        }
-> +    }
-> +
-> +    #[allow(dead_code)]
-> +    pub(crate) fn raw(&self) -> *const bindings::drm_device {
-> +        self.ptr
-> +    }
-> +
-> +    pub(crate) fn raw_mut(&mut self) -> *mut bindings::drm_device {
-> +        self.ptr
-> +    }
-> +
-> +    /// Returns a borrowed reference to the user data associated with this Device.
-> +    pub fn data(&self) -> <T::Data as ForeignOwnable>::Borrowed<'_> {
-> +        unsafe { T::Data::borrow((*self.ptr).dev_private) }
-> +    }
-> +}
-> +
-> +impl<T: drm::drv::Driver> Drop for Device<T> {
-> +    fn drop(&mut self) {
-> +        // SAFETY: By the type invariants, we know that `self` owns a reference, so it is safe to
-> +        // relinquish it now.
-> +        unsafe { bindings::drm_dev_put(self.ptr) };
-> +    }
-> +}
-> +
-> +impl<T: drm::drv::Driver> Clone for Device<T> {
-> +    fn clone(&self) -> Self {
-> +        // SAFETY: We get a new reference and then create a new owning object from the raw pointer
-> +        unsafe {
-> +            bindings::drm_dev_get(self.ptr);
-> +            Device::from_raw(self.ptr)
-> +        }
-> +    }
-> +}
-> +
-> +// SAFETY: `Device` only holds a pointer to a C device, which is safe to be used from any thread.
-> +unsafe impl<T: drm::drv::Driver> Send for Device<T> {}
-> +
-> +// SAFETY: `Device` only holds a pointer to a C device, references to which are safe to be used
-> +// from any thread.
-> +unsafe impl<T: drm::drv::Driver> Sync for Device<T> {}
-> +
-> +// Make drm::Device work for dev_info!() and friends
-> +unsafe impl<T: drm::drv::Driver> device::RawDevice for Device<T> {
-> +    fn raw_device(&self) -> *mut bindings::device {
-> +        // SAFETY: ptr must be valid per the type invariant
-> +        unsafe { (*self.ptr).dev }
-> +    }
-> +}
-> diff --git a/rust/kernel/drm/drv.rs b/rust/kernel/drm/drv.rs
-> new file mode 100644
-> index 000000000000..29a465515dc9
-> --- /dev/null
-> +++ b/rust/kernel/drm/drv.rs
-> @@ -0,0 +1,339 @@
-> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> +
-> +//! DRM driver core.
-> +//!
-> +//! C header: [`include/linux/drm/drm_drv.h`](../../../../include/linux/drm/drm_drv.h)
-> +
-> +use crate::{
-> +    bindings, device, drm,
-> +    error::code::*,
-> +    error::from_kernel_err_ptr,
-> +    error::{Error, Result},
-> +    prelude::*,
-> +    private::Sealed,
-> +    str::CStr,
-> +    types::ForeignOwnable,
-> +    ThisModule,
-> +};
-> +use core::{
-> +    marker::{PhantomData, PhantomPinned},
-> +    pin::Pin,
-> +};
-> +use macros::vtable;
-> +
-> +/// Driver use the GEM memory manager. This should be set for all modern drivers.
-> +pub const FEAT_GEM: u32 = bindings::drm_driver_feature_DRIVER_GEM;
-> +/// Driver supports mode setting interfaces (KMS).
-> +pub const FEAT_MODESET: u32 = bindings::drm_driver_feature_DRIVER_MODESET;
-> +/// Driver supports dedicated render nodes.
-> +pub const FEAT_RENDER: u32 = bindings::drm_driver_feature_DRIVER_RENDER;
-> +/// Driver supports the full atomic modesetting userspace API.
-> +///
-> +/// Drivers which only use atomic internally, but do not support the full userspace API (e.g. not
-> +/// all properties converted to atomic, or multi-plane updates are not guaranteed to be tear-free)
-> +/// should not set this flag.
-> +pub const FEAT_ATOMIC: u32 = bindings::drm_driver_feature_DRIVER_ATOMIC;
-> +/// Driver supports DRM sync objects for explicit synchronization of command submission.
-> +pub const FEAT_SYNCOBJ: u32 = bindings::drm_driver_feature_DRIVER_SYNCOBJ;
-> +/// Driver supports the timeline flavor of DRM sync objects for explicit synchronization of command
-> +/// submission.
-> +pub const FEAT_SYNCOBJ_TIMELINE: u32 = bindings::drm_driver_feature_DRIVER_SYNCOBJ_TIMELINE;
-> +
-> +/// Information data for a DRM Driver.
-> +pub struct DriverInfo {
-> +    /// Driver major version.
-> +    pub major: i32,
-> +    /// Driver minor version.
-> +    pub minor: i32,
-> +    /// Driver patchlevel version.
-> +    pub patchlevel: i32,
-> +    /// Driver name.
-> +    pub name: &'static CStr,
-> +    /// Driver description.
-> +    pub desc: &'static CStr,
-> +    /// Driver date.
-> +    pub date: &'static CStr,
-> +}
-> +
-
-Could you please add an Invariants section to the doc comments indicating what requirements these function pointers must satisfy?
-
-> +/// Internal memory management operation set, normally created by memory managers (e.g. GEM).
-> +///
-> +/// See `kernel::drm::gem` and `kernel::drm::gem::shmem`.
-> +pub struct AllocOps {
-> +    pub(crate) gem_create_object: Option<
-> +        unsafe extern "C" fn(
-> +            dev: *mut bindings::drm_device,
-> +            size: usize,
-> +        ) -> *mut bindings::drm_gem_object,
-> +    >,
-> +    pub(crate) prime_handle_to_fd: Option<
-> +        unsafe extern "C" fn(
-> +            dev: *mut bindings::drm_device,
-> +            file_priv: *mut bindings::drm_file,
-> +            handle: u32,
-> +            flags: u32,
-> +            prime_fd: *mut core::ffi::c_int,
-> +        ) -> core::ffi::c_int,
-> +    >,
-> +    pub(crate) prime_fd_to_handle: Option<
-> +        unsafe extern "C" fn(
-> +            dev: *mut bindings::drm_device,
-> +            file_priv: *mut bindings::drm_file,
-> +            prime_fd: core::ffi::c_int,
-> +            handle: *mut u32,
-> +        ) -> core::ffi::c_int,
-> +    >,
-> +    pub(crate) gem_prime_import: Option<
-> +        unsafe extern "C" fn(
-> +            dev: *mut bindings::drm_device,
-> +            dma_buf: *mut bindings::dma_buf,
-> +        ) -> *mut bindings::drm_gem_object,
-> +    >,
-> +    pub(crate) gem_prime_import_sg_table: Option<
-> +        unsafe extern "C" fn(
-> +            dev: *mut bindings::drm_device,
-> +            attach: *mut bindings::dma_buf_attachment,
-> +            sgt: *mut bindings::sg_table,
-> +        ) -> *mut bindings::drm_gem_object,
-> +    >,
-> +    pub(crate) gem_prime_mmap: Option<
-> +        unsafe extern "C" fn(
-> +            obj: *mut bindings::drm_gem_object,
-> +            vma: *mut bindings::vm_area_struct,
-> +        ) -> core::ffi::c_int,
-> +    >,
-> +    pub(crate) dumb_create: Option<
-> +        unsafe extern "C" fn(
-> +            file_priv: *mut bindings::drm_file,
-> +            dev: *mut bindings::drm_device,
-> +            args: *mut bindings::drm_mode_create_dumb,
-> +        ) -> core::ffi::c_int,
-> +    >,
-> +    pub(crate) dumb_map_offset: Option<
-> +        unsafe extern "C" fn(
-> +            file_priv: *mut bindings::drm_file,
-> +            dev: *mut bindings::drm_device,
-> +            handle: u32,
-> +            offset: *mut u64,
-> +        ) -> core::ffi::c_int,
-> +    >,
-> +    pub(crate) dumb_destroy: Option<
-> +        unsafe extern "C" fn(
-> +            file_priv: *mut bindings::drm_file,
-> +            dev: *mut bindings::drm_device,
-> +            handle: u32,
-> +        ) -> core::ffi::c_int,
-> +    >,
-> +}
-> +
-> +/// Trait for memory manager implementations. Implemented internally.
-> +pub trait AllocImpl: Sealed {
-> +    /// The C callback operations for this memory manager.
-> +    const ALLOC_OPS: AllocOps;
-> +}
-> +
-> +/// A DRM driver implementation.
-> +#[vtable]
-> +pub trait Driver {
-> +    /// Context data associated with the DRM driver
-> +    ///
-> +    /// Determines the type of the context data passed to each of the methods of the trait.
-> +    type Data: ForeignOwnable + Sync + Send;
-> +
-> +    /// The type used to manage memory for this driver.
-> +    ///
-> +    /// Should be either `drm::gem::Object<T>` or `drm::gem::shmem::Object<T>`.
-> +    type Object: AllocImpl;
-> +
-> +    /// Driver metadata
-> +    const INFO: DriverInfo;
-> +
-> +    /// Feature flags
-> +    const FEATURES: u32;
-> +
-> +    /// IOCTL list. See `kernel::drm::ioctl::declare_drm_ioctls!{}`.
-> +    const IOCTLS: &'static [drm::ioctl::DrmIoctlDescriptor];
-> +}
-> +
-> +/// A registration of a DRM device
-> +///
-> +/// # Invariants:
-> +///
-> +/// drm is always a valid pointer to an allocated drm_device
-> +pub struct Registration<T: Driver> {
-> +    drm: drm::device::Device<T>,
-> +    registered: bool,
-> +    fops: bindings::file_operations,
-> +    vtable: Pin<Box<bindings::drm_driver>>,
-> +    _p: PhantomData<T>,
-> +    _pin: PhantomPinned,
-> +}
-> +
-> +#[cfg(CONFIG_DRM_LEGACY)]
-> +macro_rules! drm_legacy_fields {
-> +    ( $($field:ident: $val:expr),* $(,)? ) => {
-> +        bindings::drm_driver {
-> +            $( $field: $val ),*,
-> +            firstopen: None,
-> +            preclose: None,
-> +            dma_ioctl: None,
-> +            dma_quiescent: None,
-> +            context_dtor: None,
-> +            irq_handler: None,
-> +            irq_preinstall: None,
-> +            irq_postinstall: None,
-> +            irq_uninstall: None,
-> +            get_vblank_counter: None,
-> +            enable_vblank: None,
-> +            disable_vblank: None,
-> +            dev_priv_size: 0,
-> +        }
-> +    }
-> +}
-> +
-> +#[cfg(not(CONFIG_DRM_LEGACY))]
-> +macro_rules! drm_legacy_fields {
-> +    ( $($field:ident: $val:expr),* $(,)? ) => {
-> +        bindings::drm_driver {
-> +            $( $field: $val ),*
-> +        }
-> +    }
-> +}
-> +
-> +/// Registers a DRM device with the rest of the kernel.
-> +///
-> +/// It automatically picks up THIS_MODULE.
-> +#[allow(clippy::crate_in_macro_def)]
-> +#[macro_export]
-> +macro_rules! drm_device_register {
-> +    ($reg:expr, $data:expr, $flags:expr $(,)?) => {{
-> +        $crate::drm::drv::Registration::register($reg, $data, $flags, &crate::THIS_MODULE)
-> +    }};
-> +}
-> +
-> +impl<T: Driver> Registration<T> {
-> +    const VTABLE: bindings::drm_driver = drm_legacy_fields! {
-> +        load: None,
-> +        open: None, // TODO: File abstraction
-> +        postclose: None, // TODO: File abstraction
-> +        lastclose: None,
-> +        unload: None,
-> +        release: None,
-> +        master_set: None,
-> +        master_drop: None,
-> +        debugfs_init: None,
-> +        gem_create_object: T::Object::ALLOC_OPS.gem_create_object,
-> +        prime_handle_to_fd: T::Object::ALLOC_OPS.prime_handle_to_fd,
-> +        prime_fd_to_handle: T::Object::ALLOC_OPS.prime_fd_to_handle,
-> +        gem_prime_import: T::Object::ALLOC_OPS.gem_prime_import,
-> +        gem_prime_import_sg_table: T::Object::ALLOC_OPS.gem_prime_import_sg_table,
-> +        gem_prime_mmap: T::Object::ALLOC_OPS.gem_prime_mmap,
-> +        dumb_create: T::Object::ALLOC_OPS.dumb_create,
-> +        dumb_map_offset: T::Object::ALLOC_OPS.dumb_map_offset,
-> +        dumb_destroy: T::Object::ALLOC_OPS.dumb_destroy,
-> +
-> +        major: T::INFO.major,
-> +        minor: T::INFO.minor,
-> +        patchlevel: T::INFO.patchlevel,
-> +        name: T::INFO.name.as_char_ptr() as *mut _,
-> +        desc: T::INFO.desc.as_char_ptr() as *mut _,
-> +        date: T::INFO.date.as_char_ptr() as *mut _,
-> +
-> +        driver_features: T::FEATURES,
-> +        ioctls: T::IOCTLS.as_ptr(),
-> +        num_ioctls: T::IOCTLS.len() as i32,
-> +        fops: core::ptr::null_mut(),
-> +    };
-> +
-> +    /// Creates a new [`Registration`] but does not register it yet.
-> +    ///
-> +    /// It is allowed to move.
-> +    pub fn new(parent: &dyn device::RawDevice) -> Result<Self> {
-> +        let vtable = Pin::new(Box::try_new(Self::VTABLE)?);
-> +        let raw_drm = unsafe { bindings::drm_dev_alloc(&*vtable, parent.raw_device()) };
-> +        let raw_drm = from_kernel_err_ptr(raw_drm)?;
-> +
-> +        // The reference count is one, and now we take ownership of that reference as a
-> +        // drm::device::Device.
-> +        let drm = unsafe { drm::device::Device::from_raw(raw_drm) };
-> +
-> +        Ok(Self {
-> +            drm,
-> +            registered: false,
-> +            vtable,
-> +            fops: Default::default(), // TODO: GEM abstraction
-> +            _pin: PhantomPinned,
-> +            _p: PhantomData,
-> +        })
-> +    }
-> +
-> +    /// Registers a DRM device with the rest of the kernel.
-> +    ///
-> +    /// Users are encouraged to use the [`drm_device_register!()`] macro because it automatically
-> +    /// picks up the current module.
-> +    pub fn register(
-> +        self: Pin<&mut Self>,
-> +        data: T::Data,
-> +        flags: usize,
-> +        module: &'static ThisModule,
-> +    ) -> Result {
-> +        if self.registered {
-> +            // Already registered.
-> +            return Err(EINVAL);
-> +        }
-> +
-> +        // SAFETY: We never move out of `this`.
-> +        let this = unsafe { self.get_unchecked_mut() };
-> +        let data_pointer = <T::Data as ForeignOwnable>::into_foreign(data);
-> +        // SAFETY: `drm` is valid per the type invariant
-> +        unsafe {
-> +            (*this.drm.raw_mut()).dev_private = data_pointer as *mut _;
-> +        }
-> +
-> +        this.fops.owner = module.0;
-> +        this.vtable.fops = &this.fops;
-> +
-> +        // SAFETY: The device is now initialized and ready to be registered.
-> +        let ret = unsafe { bindings::drm_dev_register(this.drm.raw_mut(), flags as u64) };
-> +        if ret < 0 {
-> +            // SAFETY: `data_pointer` was returned by `into_foreign` above.
-> +            unsafe { T::Data::from_foreign(data_pointer) };
-> +            return Err(Error::from_kernel_errno(ret));
-> +        }
-> +
-> +        this.registered = true;
-> +        Ok(())
-> +    }
-> +
-> +    /// Returns a reference to the `Device` instance for this registration.
-> +    pub fn device(&self) -> &drm::device::Device<T> {
-> +        &self.drm
-> +    }
-> +}
-> +
-> +// SAFETY: `Registration` doesn't offer any methods or access to fields when shared between threads
-> +// or CPUs, so it is safe to share it.
-> +unsafe impl<T: Driver> Sync for Registration<T> {}
-> +
-> +// SAFETY: Registration with and unregistration from the drm subsystem can happen from any thread.
-> +// Additionally, `T::Data` (which is dropped during unregistration) is `Send`, so it is ok to move
-> +// `Registration` to different threads.
-> +#[allow(clippy::non_send_fields_in_send_ty)]
-> +unsafe impl<T: Driver> Send for Registration<T> {}
-> +
-> +impl<T: Driver> Drop for Registration<T> {
-> +    /// Removes the registration from the kernel if it has completed successfully before.
-> +    fn drop(&mut self) {
-> +        if self.registered {
-> +            // Get a pointer to the data stored in device before destroying it.
-> +            // SAFETY: `drm` is valid per the type invariant
-> +            let data_pointer = unsafe { (*self.drm.raw_mut()).dev_private };
-> +
-> +            // SAFETY: Since `registered` is true, `self.drm` is both valid and registered.
-> +            unsafe { bindings::drm_dev_unregister(self.drm.raw_mut()) };
-> +
-> +            // Free data as well.
-> +            // SAFETY: `data_pointer` was returned by `into_foreign` during registration.
-> +            unsafe { <T::Data as ForeignOwnable>::from_foreign(data_pointer) };
-> +        }
-> +    }
-> +}
-> diff --git a/rust/kernel/drm/mod.rs b/rust/kernel/drm/mod.rs
-> index 9ec6d7cbcaf3..69376b3c6db9 100644
-> --- a/rust/kernel/drm/mod.rs
-> +++ b/rust/kernel/drm/mod.rs
-> @@ -2,4 +2,6 @@
-> 
->  //! DRM subsystem abstractions.
-> 
-> +pub mod device;
-> +pub mod drv;
->  pub mod ioctl;
-> 
-> --
-> 2.35.1
-
-Cheers,
-Bjorn
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gMDgvMDMvMjAyMyAxNy40NiwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToNCj4gQW0gMDcuMDMu
+MjMgdW0gMTU6MjUgc2NocmllYiBBc2FoaSBMaW5hOg0KPj4gU29tZSBoYXJkd2FyZSBtYXkgcmVx
+dWlyZSBtb3JlIGNvbXBsZXggcmVzb3VyY2UgdXRpbGl6YXRpb24gYWNjb3VudGluZw0KPj4gdGhh
+biB0aGUgc2ltcGxlIGpvYiBjb3VudCBzdXBwb3J0ZWQgYnkgZHJtX3NjaGVkIGludGVybmFsbHku
+IEFkZCBhDQo+PiBjYW5fcnVuX2pvYiBjYWxsYmFjayB0byBhbGxvdyBkcml2ZXJzIHRvIGltcGxl
+bWVudCBtb3JlIGxvZ2ljIGJlZm9yZQ0KPj4gZGVjaWRpbmcgd2hldGhlciB0byBydW4gYSBHUFUg
+am9iLg0KPiANCj4gV2VsbCBjb21wbGV0ZSBOQUsuDQo+IA0KPiBUaGlzIGlzIGNsZWFybHkgZ29p
+bmcgYWdhaW5zdCB0aGUgaWRlYSBvZiBoYXZpbmcgam9icyBvbmx5IGRlcGVuZCBvbiANCj4gZmVu
+Y2VzIGFuZCBub3RoaW5nIGVsc2Ugd2hpY2ggaXMgbWFuZGF0b3J5IGZvciBjb3JyZWN0IG1lbW9y
+eSBtYW5hZ2VtZW50Lg0KPiANCj4gSWYgdGhlIGh3IGlzIGJ1c3kgd2l0aCBzb21ldGhpbmcgeW91
+IG5lZWQgdG8gcmV0dXJuIHRoZSBmZW5jZSBmb3IgdGhpcyANCj4gZnJvbSB0aGUgcHJlcGFyZV9q
+b2IgY2FsbGJhY2sgc28gdGhhdCB0aGUgc2NoZWR1bGVyIGNhbiBiZSBub3RpZmllZCB3aGVuIA0K
+PiB0aGUgaHcgaXMgYXZhaWxhYmxlIGFnYWluLg0KDQpJIHRoaW5rIHlvdSBtaXN1bmRlcnN0b29k
+IHRoZSBpbnRlbnQgaGVyZS4uLiBUaGlzIGlzbid0IGFib3V0IGpvYg0KZGVwZW5kZW5jaWVzLCBp
+dCdzIGFib3V0IGluLWZsaWdodCByZXNvdXJjZSBsaW1pdHMuDQoNCmRybV9zY2hlZCBhbHJlYWR5
+IGhhcyBhIGh3X3N1Ym1pc3Npb25fbGltaXQgdGhhdCBzcGVjaWZpZXMgdGhlIG51bWJlciBvZg0K
+c3VibWlzc2lvbnMgdGhhdCBjYW4gYmUgaW4gZmxpZ2h0LCBidXQgdGhhdCBkb2Vzbid0IHdvcmsg
+Zm9yIHVzIGJlY2F1c2UNCmVhY2ggam9iIGZyb20gZHJtX3NjaGVkJ3MgcG9pbnQgb2YgdmlldyBj
+b25zaXN0cyBvZiBtdWx0aXBsZSBjb21tYW5kcw0Kc3BsaXQgYW1vbmcgMyBmaXJtd2FyZSBxdWV1
+ZXMuIFRoZSBmaXJtd2FyZSBjYW4gb25seSBzdXBwb3J0IHVwIHRvIDEyOA0Kd29yayBjb21tYW5k
+cyBpbiBmbGlnaHQgcGVyIHF1ZXVlIChiYXJyaWVycyBkb24ndCBjb3VudCksIG90aGVyd2lzZSBp
+dA0Kb3ZlcmZsb3dzIGEgZml4ZWQtc2l6ZSBidWZmZXIuDQoNClNvIHdlIG5lZWQgbW9yZSBjb21w
+bGV4IGFjY291bnRpbmcgb2YgaG93IG1hbnkgdW5kZXJseWluZyBjb21tYW5kcyBhcmUNCmluIGZs
+aWdodCBwZXIgcXVldWUgdG8gZGV0ZXJtaW5lIHdoZXRoZXIgaXQgaXMgc2FmZSB0byBydW4gYSBu
+ZXcgam9iLA0KYW5kIHRoYXQgaXMgd2hhdCB0aGlzIGNhbGxiYWNrIGFjY29tcGxpc2hlcy4gVGhp
+cyBoYXMgdG8gaGFwcGVuIGV2ZW4NCndoZW4gaW5kaXZpZHVhbCBqb2JzIGhhdmUgbm8gYnVmZmVy
+L3Jlc291cmNlIGRlcGVuZGVuY2llcyBiZXR3ZWVuIHRoZW0NCih3aGljaCBpcyB3aGF0IHRoZSBm
+ZW5jZXMgd291bGQgZXhwcmVzcykuDQoNCllvdSBjYW4gc2VlIHRoZSBkcml2ZXIgaW1wbGVtZW50
+YXRpb24gb2YgdGhhdCBjYWxsYmFjayBpbg0KZHJpdmVycy9ncHUvZHJtL2FzYWhpL3F1ZXVlL21v
+ZC5ycyAoUXVldWVKb2I6OmNhbl9ydW4oKSksIHdoaWNoIHRoZW4NCmNhbGxzIGludG8gZHJpdmVy
+cy9ncHUvZHJtL2FzYWhpL3dvcmtxdWV1ZS5ycyAoSm9iOjpjYW5fc3VibWl0KCkpIHRoYXQNCmRv
+ZXMgdGhlIGFjdHVhbCBhdmFpbGFibGUgc2xvdCBjb3VudCBjaGVja3MuDQoNClRoZSBjYW5fcnVu
+X2pvYiBsb2dpYyBpcyB3cml0dGVuIHRvIG1pcnJvciB0aGUgaHdfc3VibWlzc2lvbl9saW1pdCBs
+b2dpYw0KKGp1c3QgYSBiaXQgbGF0ZXIgaW4gdGhlIHNjaGVkIG1haW4gbG9vcCBzaW5jZSB3ZSBu
+ZWVkIHRvIGFjdHVhbGx5IHBpY2sNCmEgam9iIHRvIGRvIHRoZSBjaGVjayksIGFuZCBqdXN0IGxp
+a2UgZm9yIHRoYXQgY2FzZSwgY29tcGxldGlvbiBvZiBhbnkNCmpvYiBpbiB0aGUgc2FtZSBzY2hl
+ZHVsZXIgd2lsbCBjYXVzZSBhbm90aGVyIHJ1biBvZiB0aGUgbWFpbiBsb29wIGFuZA0KYW5vdGhl
+ciBjaGVjayAod2hpY2ggaXMgZXhhY3RseSB3aGF0IHdlIHdhbnQgaGVyZSkuDQoNClRoaXMgY2Fz
+ZSAocG90ZW50aWFsbHkgc2NoZWR1bGluZyBtb3JlIHRoYW4gdGhlIEZXIGpvYiBsaW1pdCkgaXMg
+cmFyZQ0KYnV0IGhhbmRsaW5nIGl0IGlzIG5lY2Vzc2FyeSwgc2luY2Ugb3RoZXJ3aXNlIHRoZSBl
+bnRpcmUgam9iDQpjb21wbGV0aW9uL3RyYWNraW5nIGxvZ2ljIGdldHMgc2NyZXdlZCB1cCBvbiB0
+aGUgZmlybXdhcmUgZW5kIGFuZCBxdWV1ZXMNCmVuZCB1cCBzdHVjayAoSSd2ZSBtYW5hZ2VkIHRv
+IHRyaWdnZXIgdGhpcyBiZWZvcmUpLg0KDQp+fiBMaW5hDQpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBs
+aW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFp
+bCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
