@@ -2,349 +2,183 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7DCD6BBAF0
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 18:32:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C0D396BBAF2
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 18:32:47 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AF43F3F32B
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 17:32:21 +0000 (UTC)
-Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
-	by lists.linaro.org (Postfix) with ESMTPS id 4F3893F0BD
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Mar 2023 15:45:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BED763F0A0
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 17:32:46 +0000 (UTC)
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
+	by lists.linaro.org (Postfix) with ESMTPS id 9D6B93F499
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Mar 2023 18:57:39 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=VEz9ohMu;
-	spf=pass (lists.linaro.org: domain of jadahl@gmail.com designates 209.85.167.42 as permitted sender) smtp.mailfrom=jadahl@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=X08bB+yk;
+	spf=pass (lists.linaro.org: domain of boqun.feng@gmail.com designates 209.85.160.174 as permitted sender) smtp.mailfrom=boqun.feng@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-lf1-f42.google.com with SMTP id t11so7173884lfr.1
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Mar 2023 07:45:59 -0800 (PST)
+Received: by mail-qt1-f174.google.com with SMTP id l13so6856806qtv.3
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Mar 2023 10:57:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678463158;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=0AGkxAlBYXX/Z2S16SKpXnZXTnF2Z5IaHkyIEFDi/ME=;
-        b=VEz9ohMuno+DEbnSf4WW21JokIcYlbj2EJU+8DEQSOSi0Pxfjd/6xLH4vNXSRGf9H0
-         QZk4achaOlWOedHmxfWjYy1PR1i0E0QqIsZw/WPEmk2P7oHhvff5Y/Kmg2fFAnUkp592
-         n81tWygRoF+b95Cr24Cb4ekDWujuXuSuFD1R66txhW5gLTx7SqLRdvqX+WRBfubTlpxs
-         f+9yWFImjDIKgevYqYHwKEhE1gaKHcX/hKoT2UoS1Q057myCAjZJ8ELiRR4rBAQqO37Y
-         sUy4hJH29SPxhN1ww9RmweIrZUpizpLXeA8Z6mQbrlmZpX+IIL8rZbRGO28KpDrdIMid
-         bnJg==
+        d=gmail.com; s=20210112; t=1678474659;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:feedback-id:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=iYsCaNsSgngNKZcdLQcf6Ufpk9ToxZLFdwVZ9rpQa4I=;
+        b=X08bB+yklbWwlcTtt2aeNgmaxess2TPKnELiAEk9OTqJPHuz+3/M9Tmq+KpCSIfM0f
+         jD0APM2OhnjVRgXxux5Jran0ExHQPN0mQlneMTl6sIrkmKBwNPbgnNqDlrZ0e9vmTRda
+         vjNSQQJBQJ+r7zirpHMIeDU/udZbkxHbku0star9P0mSAMUORFbrWFRMAJcJzUAcYotm
+         Uti2604Hf+UKs07gy9+nPPywgNaEIbCrcDdotdF7kCvsZH9Eapmykh+3okNVcDPNrDdi
+         OD9nWY2u/J4phmSp18O6CqUa5+TewrEkVAjwF7LWgvHms4ak00DKbbJpNhxXOO7NCOM/
+         XZmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678463158;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=0AGkxAlBYXX/Z2S16SKpXnZXTnF2Z5IaHkyIEFDi/ME=;
-        b=CNPRhCze+6fW2fLq5Kyn+R9ZUYjgsPZz0pTQsmcBaLSsiF7UOEHdSae2NY8SBwAhbC
-         ZX1Fxh87+GQpFQy+mvOZJ8PJgpsN0XK1AXiL49xpHBr5TcAjbWVn4SAo5Phk2+v4i1hh
-         DiVW4vn5tpD6XQSTqY4qysd+LrrO0B3Vj5NRbtX2c8ePkADjM9EvmgL0u1HdoMqUJemA
-         c6Wye7KdZ1eJdJTLp0MRBET4hTM/qLJo84Yh05FD8+PVpyiRGHoQPvn1kEg3pUFnJ4gL
-         6Ktma5KchpbITcNM+HAOHDcPEy3EV8LeXSUxrLlYSwygq3SuTAfZLdTq/3Kxxf/J4mZ/
-         qulw==
-X-Gm-Message-State: AO0yUKVoZG6QVjswNHc/EEZUbg3aYpJmVV8zc7dBV8FguuADldlCqADi
-	gT0WdFpxpFOqFSVURYplkc4=
-X-Google-Smtp-Source: AK7set8SLblBVupI+yVdlPp0ni+W1a7WVdI12StisJp4d6ODMGYLfW8aS9MEVe4/AXMoJXkFELJQ6A==
-X-Received: by 2002:ac2:5238:0:b0:4d8:6e26:c74c with SMTP id i24-20020ac25238000000b004d86e26c74cmr7520718lfl.53.1678463157768;
-        Fri, 10 Mar 2023 07:45:57 -0800 (PST)
-Received: from gmail.com (host-95-193-64-255.mobileonline.telia.com. [95.193.64.255])
-        by smtp.gmail.com with ESMTPSA id q11-20020a19a40b000000b004a6f66eed7fsm24181lfc.165.2023.03.10.07.45.56
+        d=1e100.net; s=20210112; t=1678474659;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:feedback-id:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=iYsCaNsSgngNKZcdLQcf6Ufpk9ToxZLFdwVZ9rpQa4I=;
+        b=bAJUQ290/OkXBkulItQQId3u8oDRhpSGso0mRxlgxKwKGl5Yj3XGnT49T+Y71QjCXj
+         5XKS79Tg0UBKRF/bfDRQTODekhUUZaoEqKIh7M7qFI1DGAA45Ep5rKSCl+7jvAw1zvOg
+         fhds7jAhgkliVo2pronMT7tJLq0tONZrgrhQNoyf/RYJl27xQ4Ub0ig0P5PaqPPIEh2u
+         7ewXAS2XaOabkI+7hTwdb3s/vZ+KF0PFiE2/fUe6tLPjJrGQZ7kPKBOEk4Vl/kmXhaLR
+         V0CQWKpH65bSdt3Hy+2N9ag5mYhR7b+6wNHPTwqXvG8bGgenPeb6QpH2eWLqdJP4jnZM
+         q0lw==
+X-Gm-Message-State: AO0yUKWga8PeQs0NdqV7HbClzIotGHSWGrbUHQ2Ge6jhL4IkpSE1KT2V
+	PJYNKlKGzWESghW1qhzygjI=
+X-Google-Smtp-Source: AK7set+4zSWuXwAS3gf17d063Xj+Ph3v0EPqWJGTs3qx7Dqyh0WAYgbNyBItJeOyToWCKILdkt9WAA==
+X-Received: by 2002:ac8:5e4a:0:b0:3b8:2ea9:a09c with SMTP id i10-20020ac85e4a000000b003b82ea9a09cmr11028163qtx.1.1678474659251;
+        Fri, 10 Mar 2023 10:57:39 -0800 (PST)
+Received: from auth1-smtp.messagingengine.com (auth1-smtp.messagingengine.com. [66.111.4.227])
+        by smtp.gmail.com with ESMTPSA id a8-20020aed2788000000b003b62e8b77e7sm342021qtd.68.2023.03.10.10.57.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 10 Mar 2023 07:45:57 -0800 (PST)
-Date: Fri, 10 Mar 2023 16:45:54 +0100
-From: Jonas =?iso-8859-1?Q?=C5dahl?= <jadahl@gmail.com>
-To: Rob Clark <robdclark@gmail.com>
-Message-ID: <ZAtQspuFjPtGy7ze@gmail.com>
-References: <20230308155322.344664-1-robdclark@gmail.com>
- <20230308155322.344664-2-robdclark@gmail.com>
+        Fri, 10 Mar 2023 10:57:38 -0800 (PST)
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+	by mailauth.nyi.internal (Postfix) with ESMTP id BD05F27C0054;
+	Fri, 10 Mar 2023 13:57:37 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute4.internal (MEProxy); Fri, 10 Mar 2023 13:57:37 -0500
+X-ME-Sender: <xms:oH0LZKRLdsP7S-ODRUr5NQxPKLRM043tk4HBpFPML5ny56aOMc1WKA>
+    <xme:oH0LZPyoebzZatMZAuu6P_73GVuEHtNN69KxZr64O2-UPfZdk1ohaIHA1YNTOmA_r
+    KAkwArw5YzolSql6g>
+X-ME-Received: <xmr:oH0LZH2zT9VTIey8ILSfvM1iTiewrf9ia19JsONvub11ZyqXtExdx7oEEi8>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrvddukedguddujecutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+    enucfjughrpeffhffvvefukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpeeuohhq
+    uhhnucfhvghnghcuoegsohhquhhnrdhfvghnghesghhmrghilhdrtghomheqnecuggftrf
+    grthhtvghrnhepfeduvddvleeigeeugfevffdvffduieeujeeivdduhfeljeeghfegffev
+    fffhkeffnecuffhomhgrihhnpehpthhrrdguvghvnecuvehluhhsthgvrhfuihiivgeptd
+    enucfrrghrrghmpehmrghilhhfrhhomhepsghoqhhunhdomhgvshhmthhprghuthhhphgv
+    rhhsohhnrghlihhthidqieelvdeghedtieegqddujeejkeehheehvddqsghoqhhunhdrfh
+    gvnhhgpeepghhmrghilhdrtghomhesfhhigihmvgdrnhgrmhgv
+X-ME-Proxy: <xmx:oH0LZGAmUZAA0WaAkOpaN91r1NTQfHex41rDqaXOgp7XltObtE-y4Q>
+    <xmx:oH0LZDhbyzfoZ9B-1L4Zs_Qb4Brv9uR5ds8IbGPyn9TAqabJ4deWLw>
+    <xmx:oH0LZCrDEJ4ut9DJmmL9U5wz_K5XqnyQlUZYnc_Ay2xgLVJ4PQ1cMQ>
+    <xmx:oX0LZPDMVZoKkaOWLRxjIng7KbgqOLDTOoYJ_0CZLCFD9tpM_5bBfg>
+Feedback-ID: iad51458e:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 10 Mar 2023 13:57:36 -0500 (EST)
+Date: Fri, 10 Mar 2023 10:56:31 -0800
+From: Boqun Feng <boqun.feng@gmail.com>
+To: Asahi Lina <lina@asahilina.net>
+Message-ID: <ZAt9X8qDUHQ/YnW8@boqun-archlinux>
+References: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net>
+ <20230307-rust-drm-v1-2-917ff5bc80a8@asahilina.net>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230308155322.344664-2-robdclark@gmail.com>
+In-Reply-To: <20230307-rust-drm-v1-2-917ff5bc80a8@asahilina.net>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4F3893F0BD
+X-Rspamd-Queue-Id: 9D6B93F499
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+X-Spamd-Result: default: False [-2.10 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
+	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.160.174:from];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	RCPT_COUNT_TWELVE(0.00)[28];
 	FROM_HAS_DN(0.00)[];
-	URIBL_BLOCKED(0.00)[amd.com:email];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.42:from];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_RCPT(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_COUNT_FIVE(0.00)[6];
+	TAGGED_RCPT(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	ARC_NA(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_COUNT_THREE(0.00)[3];
+	TAGGED_FROM(0.00)[];
 	DKIM_TRACE(0.00)[gmail.com:+];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,chromium.org,collabora.com,lwn.net,gmail.com,vger.kernel.org,linaro.org,lists.linaro.org,amd.com,intel.com,padovan.org];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,protonmail.com,linaro.org,amd.com,rosenzweig.io,redhat.com,iglunix.org,collabora.com,mary.zone,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
 	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
-X-MailFrom: jadahl@gmail.com
+X-MailFrom: boqun.feng@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: BMDDASSEFCKBREPA4XSWROSEJVWUFAZR
-X-Message-ID-Hash: BMDDASSEFCKBREPA4XSWROSEJVWUFAZR
-X-Mailman-Approved-At: Wed, 15 Mar 2023 17:25:05 +0000
-CC: dri-devel@lists.freedesktop.org, Rob Clark <robdclark@chromium.org>, Pekka Paalanen <pekka.paalanen@collabora.com>, Jonathan Corbet <corbet@lwn.net>, intel-gfx@lists.freedesktop.org, "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Luben Tuikov <luben.tuikov@amd.com>, Bagas Sanjaya <bagasdotme@gmail.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Gustavo Padovan <gustavo@padovan.org>, Matt Turner <mattst88@gmail.com>, freedreno@lists.freedesktop.org, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
+Message-ID-Hash: FC2LI67FR4LUYNBWI7G4IY2VQVYRUX6K
+X-Message-ID-Hash: FC2LI67FR4LUYNBWI7G4IY2VQVYRUX6K
+X-Mailman-Approved-At: Wed, 15 Mar 2023 17:26:42 +0000
+CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, Wedson Almeida Filho <wedsonaf@gmail.com>, Gary Guo <gary@garyguo.net>, =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Luben Tuikov <luben.tuikov@amd.com>, Jarkko Sakkinen <jarkko@kernel.org>, Dave Hansen <dave.hansen@linux.intel.com>, Alyssa Rosenzweig <alyssa@rosenzweig.io>, Karol Herbst <kherbst@redhat.com>, Ella Stanforth <ella@iglunix.org>, Faith Ekstrand <faith.ekstrand@collabora.com>, Mary <mary@mary.zone>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-sgx@vger.kernel.org, asahi@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v10 01/15] dma-buf/dma-fence: Add deadline awareness
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 02/18] rust: drm: Add Device and Driver abstractions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BMDDASSEFCKBREPA4XSWROSEJVWUFAZR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FC2LI67FR4LUYNBWI7G4IY2VQVYRUX6K/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Wed, Mar 08, 2023 at 07:52:52AM -0800, Rob Clark wrote:
-> From: Rob Clark <robdclark@chromium.org>
->=20
-> Add a way to hint to the fence signaler of an upcoming deadline, such as
-> vblank, which the fence waiter would prefer not to miss.  This is to aid
-> the fence signaler in making power management decisions, like boosting
-> frequency as the deadline approaches and awareness of missing deadlines
-> so that can be factored in to the frequency scaling.
->=20
-> v2: Drop dma_fence::deadline and related logic to filter duplicate
->     deadlines, to avoid increasing dma_fence size.  The fence-context
->     implementation will need similar logic to track deadlines of all
->     the fences on the same timeline.  [ckoenig]
-> v3: Clarify locking wrt. set_deadline callback
-> v4: Clarify in docs comment that this is a hint
-> v5: Drop DMA_FENCE_FLAG_HAS_DEADLINE_BIT.
-> v6: More docs
-> v7: Fix typo, clarify past deadlines
->=20
-> Signed-off-by: Rob Clark <robdclark@chromium.org>
-> Reviewed-by: Christian K=F6nig <christian.koenig@amd.com>
-> Acked-by: Pekka Paalanen <pekka.paalanen@collabora.com>
-> Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
-> ---
-
-Hi Rob!
-
->  Documentation/driver-api/dma-buf.rst |  6 +++
->  drivers/dma-buf/dma-fence.c          | 59 ++++++++++++++++++++++++++++
->  include/linux/dma-fence.h            | 22 +++++++++++
->  3 files changed, 87 insertions(+)
->=20
-> diff --git a/Documentation/driver-api/dma-buf.rst b/Documentation/driver-=
-api/dma-buf.rst
-> index 622b8156d212..183e480d8cea 100644
-> --- a/Documentation/driver-api/dma-buf.rst
-> +++ b/Documentation/driver-api/dma-buf.rst
-> @@ -164,6 +164,12 @@ DMA Fence Signalling Annotations
->  .. kernel-doc:: drivers/dma-buf/dma-fence.c
->     :doc: fence signalling annotation
-> =20
-> +DMA Fence Deadline Hints
-> +~~~~~~~~~~~~~~~~~~~~~~~~
+On Tue, Mar 07, 2023 at 11:25:27PM +0900, Asahi Lina wrote:
+[...]
 > +
-> +.. kernel-doc:: drivers/dma-buf/dma-fence.c
-> +   :doc: deadline hints
+> +// SAFETY: `Device` only holds a pointer to a C device, which is safe to be used from any thread.
+> +unsafe impl<T: drm::drv::Driver> Send for Device<T> {}
 > +
->  DMA Fences Functions Reference
->  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> =20
-> diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
-> index 0de0482cd36e..f177c56269bb 100644
-> --- a/drivers/dma-buf/dma-fence.c
-> +++ b/drivers/dma-buf/dma-fence.c
-> @@ -912,6 +912,65 @@ dma_fence_wait_any_timeout(struct dma_fence **fences=
-, uint32_t count,
->  }
->  EXPORT_SYMBOL(dma_fence_wait_any_timeout);
-> =20
-> +/**
-> + * DOC: deadline hints
-> + *
-> + * In an ideal world, it would be possible to pipeline a workload suffic=
-iently
-> + * that a utilization based device frequency governor could arrive at a =
-minimum
-> + * frequency that meets the requirements of the use-case, in order to mi=
-nimize
-> + * power consumption.  But in the real world there are many workloads wh=
-ich
-> + * defy this ideal.  For example, but not limited to:
-> + *
-> + * * Workloads that ping-pong between device and CPU, with alternating p=
-eriods
-> + *   of CPU waiting for device, and device waiting on CPU.  This can res=
-ult in
-> + *   devfreq and cpufreq seeing idle time in their respective domains an=
-d in
-> + *   result reduce frequency.
-> + *
-> + * * Workloads that interact with a periodic time based deadline, such a=
-s double
-> + *   buffered GPU rendering vs vblank sync'd page flipping.  In this sce=
-nario,
-> + *   missing a vblank deadline results in an *increase* in idle time on =
-the GPU
-> + *   (since it has to wait an additional vblank period), sending a signa=
-l to
-> + *   the GPU's devfreq to reduce frequency, when in fact the opposite is=
- what is
-> + *   needed.
-
-This is the use case I'd like to get some better understanding about how
-this series intends to work, as the problematic scheduling behavior
-triggered by missed deadlines has plagued compositing display servers
-for a long time.
-
-I apologize, I'm not a GPU driver developer, nor an OpenGL driver
-developer, so I will need some hand holding when it comes to
-understanding exactly what piece of software is responsible for
-communicating what piece of information.
-
-> + *
-> + * To this end, deadline hint(s) can be set on a &dma_fence via &dma_fen=
-ce_set_deadline.
-> + * The deadline hint provides a way for the waiting driver, or userspace=
-, to
-> + * convey an appropriate sense of urgency to the signaling driver.
-> + *
-> + * A deadline hint is given in absolute ktime (CLOCK_MONOTONIC for users=
-pace
-> + * facing APIs).  The time could either be some point in the future (suc=
-h as
-> + * the vblank based deadline for page-flipping, or the start of a compos=
-itor's
-> + * composition cycle), or the current time to indicate an immediate dead=
-line
-> + * hint (Ie. forward progress cannot be made until this fence is signale=
-d).
-
-Is it guaranteed that a GPU driver will use the actual start of the
-vblank as the effective deadline? I have some memories of seing
-something about vblank evasion browsing driver code, which I might have
-misunderstood, but I have yet to find whether this is something
-userspace can actually expect to be something it can rely on.
-
-Can userspace set a deadline that targets the next vblank deadline
-before GPU work has been flushed e.g. at the start of a paint cycle, and
-still be sure that the kernel has the information it needs to know it should
-make its clocks increase their speed in time for when the actual work
-has been actually flushed? Or is it needed that the this deadline is set
-at the end?
-
-What I'm more or less trying to ask is, will a mode setting compositor
-be able to tell the kernel to boost its clocks at the time it knows is
-best, and how will it in practice achieve this?
-
-For example relying on the atomic mode setting commit setting the
-deadline is fundamentally flawed, since user space will at times want to
-purposefully delay committing until as late as possible, without doing
-so causing an increased risk of missing the deadline due to the kernel
-not speeding up clocks at the right time for GPU work that has already
-been flushed long ago.
-
-Relying on commits also has no effect on GPU work queued by
-a compositor drawing only to dma-bufs that are never intended to be
-presented using mode setting. How can we make sure a compositor can
-provide hints that the kernel will know to respect despite the
-compositor not being drm master?
-
-
-Jonas
-
-> + *
-> + * Multiple deadlines may be set on a given fence, even in parallel.  Se=
-e the
-> + * documentation for &dma_fence_ops.set_deadline.
-> + *
-> + * The deadline hint is just that, a hint.  The driver that created the =
-fence
-> + * may react by increasing frequency, making different scheduling choice=
-s, etc.
-> + * Or doing nothing at all.
-> + */
+> +// SAFETY: `Device` only holds a pointer to a C device, references to which are safe to be used
+> +// from any thread.
+> +unsafe impl<T: drm::drv::Driver> Sync for Device<T> {}
 > +
-> +/**
-> + * dma_fence_set_deadline - set desired fence-wait deadline hint
-> + * @fence:    the fence that is to be waited on
-> + * @deadline: the time by which the waiter hopes for the fence to be
-> + *            signaled
-> + *
-> + * Give the fence signaler a hint about an upcoming deadline, such as
-> + * vblank, by which point the waiter would prefer the fence to be
-> + * signaled by.  This is intended to give feedback to the fence signaler
-> + * to aid in power management decisions, such as boosting GPU frequency
-> + * if a periodic vblank deadline is approaching but the fence is not
-> + * yet signaled..
-> + */
-> +void dma_fence_set_deadline(struct dma_fence *fence, ktime_t deadline)
-> +{
-> +	if (fence->ops->set_deadline && !dma_fence_is_signaled(fence))
-> +		fence->ops->set_deadline(fence, deadline);
+
+Here is the mind model I use to check whether a type is `Send` or
+`Sync`
+
+*	If an object of a type can be created on one thread and dropped
+	on the another thread, then it's `Send`.
+
+*	If multiple threads can call the immutable functions (i.e.
+	functions with `&self`) of the same object of a type, then the
+	it's `Sync`.
+
+Maybe it's incomplete, but at least I find it useful to determine
+whether a type is `Send` or `Sync`: it's not just the struct
+representation, the behaviors (functions) of the struct also matter.
+
+If that looks reasonable to you, maybe update the "SAFETY" comments in
+the future version? Thanks ;-)
+
+(I know you brought this up in the meeting, sorry I guess I wasn't fully
+woken when answering you ;-))
+
+Regards,
+Boqun
+
+> +// Make drm::Device work for dev_info!() and friends
+> +unsafe impl<T: drm::drv::Driver> device::RawDevice for Device<T> {
+> +    fn raw_device(&self) -> *mut bindings::device {
+> +        // SAFETY: ptr must be valid per the type invariant
+> +        unsafe { (*self.ptr).dev }
+> +    }
 > +}
-> +EXPORT_SYMBOL(dma_fence_set_deadline);
-> +
->  /**
->   * dma_fence_describe - Dump fence describtion into seq_file
->   * @fence: the 6fence to describe
-> diff --git a/include/linux/dma-fence.h b/include/linux/dma-fence.h
-> index 775cdc0b4f24..d54b595a0fe0 100644
-> --- a/include/linux/dma-fence.h
-> +++ b/include/linux/dma-fence.h
-> @@ -257,6 +257,26 @@ struct dma_fence_ops {
->  	 */
->  	void (*timeline_value_str)(struct dma_fence *fence,
->  				   char *str, int size);
-> +
-> +	/**
-> +	 * @set_deadline:
-> +	 *
-> +	 * Callback to allow a fence waiter to inform the fence signaler of
-> +	 * an upcoming deadline, such as vblank, by which point the waiter
-> +	 * would prefer the fence to be signaled by.  This is intended to
-> +	 * give feedback to the fence signaler to aid in power management
-> +	 * decisions, such as boosting GPU frequency.
-> +	 *
-> +	 * This is called without &dma_fence.lock held, it can be called
-> +	 * multiple times and from any context.  Locking is up to the callee
-> +	 * if it has some state to manage.  If multiple deadlines are set,
-> +	 * the expectation is to track the soonest one.  If the deadline is
-> +	 * before the current time, it should be interpreted as an immediate
-> +	 * deadline.
-> +	 *
-> +	 * This callback is optional.
-> +	 */
-> +	void (*set_deadline)(struct dma_fence *fence, ktime_t deadline);
->  };
-> =20
->  void dma_fence_init(struct dma_fence *fence, const struct dma_fence_ops =
-*ops,
-> @@ -583,6 +603,8 @@ static inline signed long dma_fence_wait(struct dma_f=
-ence *fence, bool intr)
->  	return ret < 0 ? ret : 0;
->  }
-> =20
-> +void dma_fence_set_deadline(struct dma_fence *fence, ktime_t deadline);
-> +
->  struct dma_fence *dma_fence_get_stub(void);
->  struct dma_fence *dma_fence_allocate_private_stub(void);
->  u64 dma_fence_context_alloc(unsigned num);
-> --=20
-> 2.39.2
->=20
+[...]
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
