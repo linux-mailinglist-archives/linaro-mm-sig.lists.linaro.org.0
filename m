@@ -2,100 +2,103 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BAC06B5F10
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Mar 2023 18:36:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16A8A6B5F13
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Mar 2023 18:36:28 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 51DF03F4A4
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Mar 2023 17:35:59 +0000 (UTC)
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
-	by lists.linaro.org (Postfix) with ESMTPS id 98FB33ED86
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 11 Mar 2023 17:35:21 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B20953F062
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Mar 2023 17:36:18 +0000 (UTC)
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+	by lists.linaro.org (Postfix) with ESMTPS id 8906F3F032
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 11 Mar 2023 17:35:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=qozX8RZW;
-	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.214.180 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=mwbGIJuu;
+	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.216.53 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pl1-f180.google.com with SMTP id ix20so2280481plb.3
-        for <linaro-mm-sig@lists.linaro.org>; Sat, 11 Mar 2023 09:35:21 -0800 (PST)
+Received: by mail-pj1-f53.google.com with SMTP id cp7-20020a17090afb8700b0023756229427so13042458pjb.1
+        for <linaro-mm-sig@lists.linaro.org>; Sat, 11 Mar 2023 09:35:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678556121;
+        d=gmail.com; s=20210112; t=1678556122;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=/hNSHVjc/0wTeCW3nY6/+a9GNb2nn01SoihN24q763w=;
-        b=qozX8RZWE3nHsqGuYQWSGXKqdwuAcYURpfSiPFM9IP29zTKQOtipy8O/GmxSMJd7GU
-         G2eiwcoB+mZyXyLDDUXpvQ7FntLF34u0AGf6oVPRNvrgFPSQwnLthOpkXclgCkzIqykt
-         XsFgRCjAXEqj4EvvpW6GGf+KBFrVNZHFygWILrctRWcxZJnKTE9DyEZcwP1YvleOa+DC
-         2VgJC3j67jilPpeIrAebn3TD7PpNA+M808wXx+2MqDd0zqNtlM6oAtz198FTC6Q43b3b
-         YUVGwybEQz8Kyf3aPaizKZdRKVASFecfZMRWiPpeNxvucRWy6vbAyz/rshPX/NcgukYy
-         vGoQ==
+        bh=TnIxfCw144yfXhUrE1m8cICNvDN0xmW/oT+E2UQNkiY=;
+        b=mwbGIJuu+qFmtrd5lIyJUqzeXolhOvlnAYrl6saT8EzOKoJwwD7OwpP4jeAs4vCtiW
+         BP9HAuYM6bDU2cAuiZ70j2vZpn8KPBmbls+KdHFvh8FNC7Zxm3ylP6oo9rbuyB2AE3vR
+         I2OWJnH3wnXmQLeorbY/C2Xg8ho/471e96o7kIVCkzjWfJrTdcwKlIHRLB7HBg1R8mmX
+         IiJONtEM8rZSzFAmdQtZnKHIWJqZlob8Zclz79OUxeNJWyOrPKdvcj93evphzMr8bW4O
+         MqxVrZeQ8RHBgtFbP2qoGFf++77XPXrXNByvjjwPzY8oVXOU7+QJ3bTRN0d170dhNhLu
+         etjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678556121;
+        d=1e100.net; s=20210112; t=1678556122;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=/hNSHVjc/0wTeCW3nY6/+a9GNb2nn01SoihN24q763w=;
-        b=Vnayq87ZQf7N9Zij5QDixMBG6NdnOmcs1J/KD6d0sk0a0PyEJINmoYLiWvoOBHHM3r
-         abtxSfshl/6bIAuGgisC8V9gHej+g9q5U5G+b5thuaa5d92Hyu6x84lVExKv2PWd/ZiM
-         2W9fBhA6p6qoRO0aEoIvKMsbIdbibrePHedKp5m/veSQHH0QdA60U091FFwwuQgAaGMq
-         D7OOxXfmZfkXr6KLR1LzG9Nlqcm+WNIS2e+iwOfTmRoZGGMd8gwdgawiu/6neJtAoCJ2
-         Ru1BQ6FBa9A4gN9tggGDjH1JPX4S1XVOsZS9Cuj78qgJeycM51PzXFg+tvfNbuv6KE3A
-         l/Kg==
-X-Gm-Message-State: AO0yUKUX365jjRMuBPNxnXrCGVGNh3vwGLBw7eTcQTerxyWzmI3OeG9A
-	gvHK9s5yNn24XZYAZvt8nto=
-X-Google-Smtp-Source: AK7set/92Kp+D6kfQAUn3G1hZMxs+D8jdl0o6Nhu2rBS+JMWAaAnTBNrnC1jHmBus8UctLlXZ2k6Xw==
-X-Received: by 2002:a05:6a20:1589:b0:cc:3f87:a80c with SMTP id h9-20020a056a20158900b000cc3f87a80cmr33316270pzj.3.1678556120656;
-        Sat, 11 Mar 2023 09:35:20 -0800 (PST)
+        bh=TnIxfCw144yfXhUrE1m8cICNvDN0xmW/oT+E2UQNkiY=;
+        b=E8Dg5QrHt5ZmPAtwpDvpXjQ7B+kVqppFUklCwjgKVvEn8n+Je1ZBrxAzfUvW1sPE79
+         o93xObCYYTo6mZPBfJAvyA/pev0+9M/0NolUmHy3UWYfQI7OKf1Io/p+7jrNdCOWxUFA
+         h4BFqjB/eaLnQHAXFF2lcK6Udaq0CkbdnCwdh+COAQ7O3B9K9C7FyaVdRqE6O+wraO/4
+         UbFPvbQU0pIytitGneuBD7TwGjWTEOdCLoS5USqATqIgleGcAp+wHd6ustWgdWuET+Ei
+         BZz8ZALQSDT39JQq4z4LG+Qqwe+1LDCvTDu8Ce3upb4cqFJSMBldY/CTemK0wN+yoYyF
+         A8Bg==
+X-Gm-Message-State: AO0yUKUoSt1w+K0L5POTZAPirwItv2v14aADNvrwlPMGvFPZCHmFKhI9
+	FHkh4n4Ykf4f9nZeuag/gxo=
+X-Google-Smtp-Source: AK7set/ix6MrtzZsH++pe1KrHnjRQ1RKUNEqnAjgGsLIgXlSDEBp5+edn21q7QAJmH83Ry1c7qcuYw==
+X-Received: by 2002:a17:90b:38c2:b0:23a:333c:6ba6 with SMTP id nn2-20020a17090b38c200b0023a333c6ba6mr28706914pjb.16.1678556122634;
+        Sat, 11 Mar 2023 09:35:22 -0800 (PST)
 Received: from localhost ([2601:1c0:5080:d9fa:9b45:95de:f47d:f85e])
-        by smtp.gmail.com with ESMTPSA id d26-20020aa7815a000000b005d72e54a7e1sm1702285pfn.215.2023.03.11.09.35.20
+        by smtp.gmail.com with ESMTPSA id h2-20020a170902b94200b0019c90f8c831sm1771790pls.242.2023.03.11.09.35.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 11 Mar 2023 09:35:20 -0800 (PST)
+        Sat, 11 Mar 2023 09:35:21 -0800 (PST)
 From: Rob Clark <robdclark@gmail.com>
 To: dri-devel@lists.freedesktop.org
-Date: Sat, 11 Mar 2023 09:35:11 -0800
-Message-Id: <20230311173513.1080397-2-robdclark@gmail.com>
+Date: Sat, 11 Mar 2023 09:35:12 -0800
+Message-Id: <20230311173513.1080397-3-robdclark@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230311173513.1080397-1-robdclark@gmail.com>
 References: <20230311173513.1080397-1-robdclark@gmail.com>
 MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 98FB33ED86
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.60 / 15.00];
+X-Rspamd-Queue-Id: 8906F3F032
+X-Spamd-Bar: ------
+X-Spamd-Result: default: False [-6.60 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.180:from];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.216.53:from];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TO_DN_SOME(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	ARC_NA(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[patchwork.freedesktop.org:url,mail-pj1-f53.google.com:rdns,mail-pj1-f53.google.com:helo];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_THREE(0.00)[3];
 	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_SOME(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	RCVD_TLS_LAST(0.00)[];
-	ARC_NA(0.00)[]
-Message-ID-Hash: JC4GK4CIKTV5KU7PPVUZM557E7CEP4XH
-X-Message-ID-Hash: JC4GK4CIKTV5KU7PPVUZM557E7CEP4XH
+	FROM_EQ_ENVFROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,chromium.org,gmail.com,quicinc.com,linaro.org,poorly.run,ffwll.ch,amd.com,lists.linaro.org]
+Message-ID-Hash: XT7YWOOUN7ABIFHXKJBGZ3RQA4ZAKXJE
+X-Message-ID-Hash: XT7YWOOUN7ABIFHXKJBGZ3RQA4ZAKXJE
 X-MailFrom: robdclark@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, Rob Clark <robdclark@chromium.org>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>
+CC: linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, Rob Clark <robdclark@chromium.org>, Rob Clark <robdclark@gmail.com>, Abhinav Kumar <quic_abhinavk@quicinc.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Sean Paul <sean@poorly.run>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 1/2] dma-buf/dma-fence: Add dma_fence_init_noref()
+Subject: [Linaro-mm-sig] [PATCH 2/2] drm/msm: Embed the hw_fence in msm_gem_submit
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JC4GK4CIKTV5KU7PPVUZM557E7CEP4XH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XT7YWOOUN7ABIFHXKJBGZ3RQA4ZAKXJE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -107,101 +110,241 @@ Content-Transfer-Encoding: 7bit
 
 From: Rob Clark <robdclark@chromium.org>
 
-Add a way to initialize a fence without touching the refcount.  This is
-useful, for example, if the fence is embedded in a drm_sched_job.  In
-this case the refcount will be initialized before the job is queued.
-But the seqno of the hw_fence is not known until job_run().
+Avoid allocating memory in job_run() by embedding the fence in the
+submit object.  Since msm gpu fences are always 1:1 with msm_gem_submit
+we can just use the fence's refcnt to track the submit.  And since we
+can get the fence ctx from the submit we can just drop the msm_fence
+struct altogether.  This uses the new dma_fence_init_noref() to deal
+with the fact that the fence's refcnt is initialized when the submit is
+created, long before job_run().
 
 Signed-off-by: Rob Clark <robdclark@chromium.org>
 ---
- drivers/dma-buf/dma-fence.c | 43 ++++++++++++++++++++++++++++---------
- include/linux/dma-fence.h   |  2 ++
- 2 files changed, 35 insertions(+), 10 deletions(-)
+Note that this applies on top of https://patchwork.freedesktop.org/series/93035/
+out of convenience for myself, but I can re-work it to go before
+depending on the order that things land.
 
-diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/dma-fence.c
-index 74e36f6d05b0..97c05a465cb4 100644
---- a/drivers/dma-buf/dma-fence.c
-+++ b/drivers/dma-buf/dma-fence.c
-@@ -989,28 +989,27 @@ void dma_fence_describe(struct dma_fence *fence, struct seq_file *seq)
- EXPORT_SYMBOL(dma_fence_describe);
- 
- /**
-- * dma_fence_init - Initialize a custom fence.
-+ * dma_fence_init_noref - Initialize a custom fence without initializing refcount.
-  * @fence: the fence to initialize
-  * @ops: the dma_fence_ops for operations on this fence
-  * @lock: the irqsafe spinlock to use for locking this fence
-  * @context: the execution context this fence is run on
-  * @seqno: a linear increasing sequence number for this context
-  *
-- * Initializes an allocated fence, the caller doesn't have to keep its
-- * refcount after committing with this fence, but it will need to hold a
-- * refcount again if &dma_fence_ops.enable_signaling gets called.
-- *
-- * context and seqno are used for easy comparison between fences, allowing
-- * to check which fence is later by simply using dma_fence_later().
-+ * Like &dma_fence_init but does not initialize the refcount.  Suitable
-+ * for cases where the fence is embedded in another struct which has it's
-+ * refcount initialized before the fence is initialized.  Such as embedding
-+ * in a &drm_sched_job, where the job is created before knowing the seqno
-+ * of the hw_fence.
-  */
- void
--dma_fence_init(struct dma_fence *fence, const struct dma_fence_ops *ops,
--	       spinlock_t *lock, u64 context, u64 seqno)
-+dma_fence_init_noref(struct dma_fence *fence, const struct dma_fence_ops *ops,
-+		     spinlock_t *lock, u64 context, u64 seqno)
- {
- 	BUG_ON(!lock);
- 	BUG_ON(!ops || !ops->get_driver_name || !ops->get_timeline_name);
-+	BUG_ON(!kref_read(&fence->refcount));
- 
--	kref_init(&fence->refcount);
- 	fence->ops = ops;
- 	INIT_LIST_HEAD(&fence->cb_list);
- 	fence->lock = lock;
-@@ -1021,4 +1020,28 @@ dma_fence_init(struct dma_fence *fence, const struct dma_fence_ops *ops,
- 
- 	trace_dma_fence_init(fence);
+ drivers/gpu/drm/msm/msm_fence.c      | 45 +++++++++++-----------------
+ drivers/gpu/drm/msm/msm_fence.h      |  2 +-
+ drivers/gpu/drm/msm/msm_gem.h        | 10 +++----
+ drivers/gpu/drm/msm/msm_gem_submit.c |  8 ++---
+ drivers/gpu/drm/msm/msm_gpu.c        |  4 +--
+ drivers/gpu/drm/msm/msm_ringbuffer.c |  4 +--
+ 6 files changed, 31 insertions(+), 42 deletions(-)
+
+diff --git a/drivers/gpu/drm/msm/msm_fence.c b/drivers/gpu/drm/msm/msm_fence.c
+index 51b461f32103..51f9f1f0cb66 100644
+--- a/drivers/gpu/drm/msm/msm_fence.c
++++ b/drivers/gpu/drm/msm/msm_fence.c
+@@ -103,14 +103,9 @@ void msm_update_fence(struct msm_fence_context *fctx, uint32_t fence)
+ 	spin_unlock_irqrestore(&fctx->spinlock, flags);
  }
-+EXPORT_SYMBOL(dma_fence_init_noref);
-+
-+/**
-+ * dma_fence_init - Initialize a custom fence.
-+ * @fence: the fence to initialize
-+ * @ops: the dma_fence_ops for operations on this fence
-+ * @lock: the irqsafe spinlock to use for locking this fence
-+ * @context: the execution context this fence is run on
-+ * @seqno: a linear increasing sequence number for this context
-+ *
-+ * Initializes an allocated fence, the caller doesn't have to keep its
-+ * refcount after committing with this fence, but it will need to hold a
-+ * refcount again if &dma_fence_ops.enable_signaling gets called.
-+ *
-+ * context and seqno are used for easy comparison between fences, allowing
-+ * to check which fence is later by simply using dma_fence_later().
-+ */
-+void
-+dma_fence_init(struct dma_fence *fence, const struct dma_fence_ops *ops,
-+	       spinlock_t *lock, u64 context, u64 seqno)
+ 
+-struct msm_fence {
+-	struct dma_fence base;
+-	struct msm_fence_context *fctx;
+-};
+-
+-static inline struct msm_fence *to_msm_fence(struct dma_fence *fence)
++static inline struct msm_gem_submit *fence_to_submit(struct dma_fence *fence)
+ {
+-	return container_of(fence, struct msm_fence, base);
++	return container_of(fence, struct msm_gem_submit, hw_fence);
+ }
+ 
+ static const char *msm_fence_get_driver_name(struct dma_fence *fence)
+@@ -120,20 +115,20 @@ static const char *msm_fence_get_driver_name(struct dma_fence *fence)
+ 
+ static const char *msm_fence_get_timeline_name(struct dma_fence *fence)
+ {
+-	struct msm_fence *f = to_msm_fence(fence);
+-	return f->fctx->name;
++	struct msm_gem_submit *submit = fence_to_submit(fence);
++	return submit->ring->fctx->name;
+ }
+ 
+ static bool msm_fence_signaled(struct dma_fence *fence)
+ {
+-	struct msm_fence *f = to_msm_fence(fence);
+-	return msm_fence_completed(f->fctx, f->base.seqno);
++	struct msm_gem_submit *submit = fence_to_submit(fence);
++	return msm_fence_completed(submit->ring->fctx, fence->seqno);
+ }
+ 
+ static void msm_fence_set_deadline(struct dma_fence *fence, ktime_t deadline)
+ {
+-	struct msm_fence *f = to_msm_fence(fence);
+-	struct msm_fence_context *fctx = f->fctx;
++	struct msm_gem_submit *submit = fence_to_submit(fence);
++	struct msm_fence_context *fctx = submit->ring->fctx;
+ 	unsigned long flags;
+ 	ktime_t now;
+ 
+@@ -165,26 +160,22 @@ static void msm_fence_set_deadline(struct dma_fence *fence, ktime_t deadline)
+ 	spin_unlock_irqrestore(&fctx->spinlock, flags);
+ }
+ 
++static void msm_fence_release(struct dma_fence *fence)
 +{
-+	kref_init(&fence->refcount);
-+	dma_fence_init_noref(fence, ops, lock, context, seqno);
++	__msm_gem_submit_destroy(fence_to_submit(fence));
 +}
- EXPORT_SYMBOL(dma_fence_init);
-diff --git a/include/linux/dma-fence.h b/include/linux/dma-fence.h
-index d54b595a0fe0..f617c78a2e0a 100644
---- a/include/linux/dma-fence.h
-+++ b/include/linux/dma-fence.h
-@@ -279,6 +279,8 @@ struct dma_fence_ops {
- 	void (*set_deadline)(struct dma_fence *fence, ktime_t deadline);
++
+ static const struct dma_fence_ops msm_fence_ops = {
+ 	.get_driver_name = msm_fence_get_driver_name,
+ 	.get_timeline_name = msm_fence_get_timeline_name,
+ 	.signaled = msm_fence_signaled,
+ 	.set_deadline = msm_fence_set_deadline,
++	.release = msm_fence_release,
  };
  
-+void dma_fence_init_noref(struct dma_fence *fence, const struct dma_fence_ops *ops,
-+			  spinlock_t *lock, u64 context, u64 seqno);
- void dma_fence_init(struct dma_fence *fence, const struct dma_fence_ops *ops,
- 		    spinlock_t *lock, u64 context, u64 seqno);
+-struct dma_fence *
+-msm_fence_alloc(struct msm_fence_context *fctx)
++void
++msm_fence_init(struct msm_fence_context *fctx, struct dma_fence *f)
+ {
+-	struct msm_fence *f;
+-
+-	f = kzalloc(sizeof(*f), GFP_KERNEL);
+-	if (!f)
+-		return ERR_PTR(-ENOMEM);
+-
+-	f->fctx = fctx;
+-
+-	dma_fence_init(&f->base, &msm_fence_ops, &fctx->spinlock,
+-		       fctx->context, ++fctx->last_fence);
+-
+-	return &f->base;
++	dma_fence_init_noref(f, &msm_fence_ops, &fctx->spinlock,
++			     fctx->context, ++fctx->last_fence);
+ }
+diff --git a/drivers/gpu/drm/msm/msm_fence.h b/drivers/gpu/drm/msm/msm_fence.h
+index cdaebfb94f5c..8fca37e9773b 100644
+--- a/drivers/gpu/drm/msm/msm_fence.h
++++ b/drivers/gpu/drm/msm/msm_fence.h
+@@ -81,7 +81,7 @@ void msm_fence_context_free(struct msm_fence_context *fctx);
+ bool msm_fence_completed(struct msm_fence_context *fctx, uint32_t fence);
+ void msm_update_fence(struct msm_fence_context *fctx, uint32_t fence);
  
+-struct dma_fence * msm_fence_alloc(struct msm_fence_context *fctx);
++void msm_fence_init(struct msm_fence_context *fctx, struct dma_fence *f);
+ 
+ static inline bool
+ fence_before(uint32_t a, uint32_t b)
+diff --git a/drivers/gpu/drm/msm/msm_gem.h b/drivers/gpu/drm/msm/msm_gem.h
+index c4844cf3a585..e06afed99d5b 100644
+--- a/drivers/gpu/drm/msm/msm_gem.h
++++ b/drivers/gpu/drm/msm/msm_gem.h
+@@ -259,10 +259,10 @@ struct msm_gem_submit {
+ 	struct ww_acquire_ctx ticket;
+ 	uint32_t seqno;		/* Sequence number of the submit on the ring */
+ 
+-	/* Hw fence, which is created when the scheduler executes the job, and
++	/* Hw fence, which is initialized when the scheduler executes the job, and
+ 	 * is signaled when the hw finishes (via seqno write from cmdstream)
+ 	 */
+-	struct dma_fence *hw_fence;
++	struct dma_fence hw_fence;
+ 
+ 	/* Userspace visible fence, which is signaled by the scheduler after
+ 	 * the hw_fence is signaled.
+@@ -309,16 +309,16 @@ static inline struct msm_gem_submit *to_msm_submit(struct drm_sched_job *job)
+ 	return container_of(job, struct msm_gem_submit, base);
+ }
+ 
+-void __msm_gem_submit_destroy(struct kref *kref);
++void __msm_gem_submit_destroy(struct msm_gem_submit *submit);
+ 
+ static inline void msm_gem_submit_get(struct msm_gem_submit *submit)
+ {
+-	kref_get(&submit->ref);
++	dma_fence_get(&submit->hw_fence);
+ }
+ 
+ static inline void msm_gem_submit_put(struct msm_gem_submit *submit)
+ {
+-	kref_put(&submit->ref, __msm_gem_submit_destroy);
++	dma_fence_put(&submit->hw_fence);
+ }
+ 
+ void msm_submit_retire(struct msm_gem_submit *submit);
+diff --git a/drivers/gpu/drm/msm/msm_gem_submit.c b/drivers/gpu/drm/msm/msm_gem_submit.c
+index be4bf77103cd..522c8c82e827 100644
+--- a/drivers/gpu/drm/msm/msm_gem_submit.c
++++ b/drivers/gpu/drm/msm/msm_gem_submit.c
+@@ -47,7 +47,7 @@ static struct msm_gem_submit *submit_create(struct drm_device *dev,
+ 		return ERR_PTR(ret);
+ 	}
+ 
+-	kref_init(&submit->ref);
++	kref_init(&submit->hw_fence.refcount);
+ 	submit->dev = dev;
+ 	submit->aspace = queue->ctx->aspace;
+ 	submit->gpu = gpu;
+@@ -65,10 +65,9 @@ static struct msm_gem_submit *submit_create(struct drm_device *dev,
+ 	return submit;
+ }
+ 
+-void __msm_gem_submit_destroy(struct kref *kref)
++/* Called when the hw_fence is destroyed: */
++void __msm_gem_submit_destroy(struct msm_gem_submit *submit)
+ {
+-	struct msm_gem_submit *submit =
+-			container_of(kref, struct msm_gem_submit, ref);
+ 	unsigned i;
+ 
+ 	if (submit->fence_id) {
+@@ -78,7 +77,6 @@ void __msm_gem_submit_destroy(struct kref *kref)
+ 	}
+ 
+ 	dma_fence_put(submit->user_fence);
+-	dma_fence_put(submit->hw_fence);
+ 
+ 	put_pid(submit->pid);
+ 	msm_submitqueue_put(submit->queue);
+diff --git a/drivers/gpu/drm/msm/msm_gpu.c b/drivers/gpu/drm/msm/msm_gpu.c
+index 380249500325..a82d11dd5fcf 100644
+--- a/drivers/gpu/drm/msm/msm_gpu.c
++++ b/drivers/gpu/drm/msm/msm_gpu.c
+@@ -716,7 +716,7 @@ static void retire_submits(struct msm_gpu *gpu)
+ 			 * been signalled, then later submits are not signalled
+ 			 * either, so we are also done.
+ 			 */
+-			if (submit && dma_fence_is_signaled(submit->hw_fence)) {
++			if (submit && dma_fence_is_signaled(&submit->hw_fence)) {
+ 				retire_submit(gpu, ring, submit);
+ 			} else {
+ 				break;
+@@ -760,7 +760,7 @@ void msm_gpu_submit(struct msm_gpu *gpu, struct msm_gem_submit *submit)
+ 
+ 	msm_gpu_hw_init(gpu);
+ 
+-	submit->seqno = submit->hw_fence->seqno;
++	submit->seqno = submit->hw_fence.seqno;
+ 
+ 	msm_rd_dump_submit(priv->rd, submit, NULL);
+ 
+diff --git a/drivers/gpu/drm/msm/msm_ringbuffer.c b/drivers/gpu/drm/msm/msm_ringbuffer.c
+index 57a8e9564540..5c54befa2427 100644
+--- a/drivers/gpu/drm/msm/msm_ringbuffer.c
++++ b/drivers/gpu/drm/msm/msm_ringbuffer.c
+@@ -18,7 +18,7 @@ static struct dma_fence *msm_job_run(struct drm_sched_job *job)
+ 	struct msm_gpu *gpu = submit->gpu;
+ 	int i;
+ 
+-	submit->hw_fence = msm_fence_alloc(fctx);
++	msm_fence_init(fctx, &submit->hw_fence);
+ 
+ 	for (i = 0; i < submit->nr_bos; i++) {
+ 		struct drm_gem_object *obj = &submit->bos[i].obj->base;
+@@ -37,7 +37,7 @@ static struct dma_fence *msm_job_run(struct drm_sched_job *job)
+ 
+ 	mutex_unlock(&gpu->lock);
+ 
+-	return dma_fence_get(submit->hw_fence);
++	return dma_fence_get(&submit->hw_fence);
+ }
+ 
+ static void msm_job_free(struct drm_sched_job *job)
 -- 
 2.39.2
 
