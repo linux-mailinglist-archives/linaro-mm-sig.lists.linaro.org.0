@@ -2,279 +2,401 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC8EE6C42D7
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 07:17:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2DFC06C42DC
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 07:17:48 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EB9C03ED7B
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 06:17:23 +0000 (UTC)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-	by lists.linaro.org (Postfix) with ESMTPS id A40CA3EEF8
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Mar 2023 20:11:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3B85C3ED7B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 06:17:47 +0000 (UTC)
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com [209.85.160.175])
+	by lists.linaro.org (Postfix) with ESMTPS id 86B7F3E8F3
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 14 Mar 2023 02:08:28 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=krDlgSyt;
-	spf=pass (lists.linaro.org: domain of faith.ekstrand@collabora.com designates 46.235.227.172 as permitted sender) smtp.mailfrom=faith.ekstrand@collabora.com;
-	dmarc=pass (policy=quarantine) header.from=collabora.com
-Received: from 2603-8080-2102-63d7-c4a8-7e10-0391-f3ff.res6.spectrum.com (2603-8080-2102-63d7-c4a8-7e10-0391-f3ff.res6.spectrum.com [IPv6:2603:8080:2102:63d7:c4a8:7e10:391:f3ff])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: gfxstrand)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id 140006603082;
-	Mon, 13 Mar 2023 20:11:18 +0000 (GMT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1678738283;
-	bh=/Hk85AyfI2+qDYVuOaAdIFIbZ8GVt1D5Rz/mY9nD+bc=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
-	b=krDlgSytWz0sq/iTTW2SXDHQwmmoR/jFvL+iPFDdhh+hBIMSZibRB3CXnlKa9F73H
-	 qSp4p37r52VSbu5JqPRO+6CeH+2sk+i78khJsZnBycxcIrTvDo8qv/bjRU9Z5dwqsB
-	 cytuIQG6xpVV5NAG3rsqqmDySlodqud00MVf9uaoYXvyHaDEEGF7Qmfg09x1oeVlTu
-	 chvk9g2gtKNj4gr2PwF9BOt+P0uT+Yt8KVCPZdN6FUTOrgeTM6bnIG0xC4EG2F7ZdP
-	 1k/YwrgTIB3VubeTEAqsHGvPSYtRE5FoqNHOqF6OHYR7YjT4P3FIs82xL5tPXu8Dj9
-	 FYdqe2qpyxCNg==
-Message-ID: <4b7101104e6775a4cbe5a0be9ad7f27fe1e28cdb.camel@collabora.com>
-From: Faith Ekstrand <faith.ekstrand@collabora.com>
-To: Asahi Lina <lina@asahilina.net>, Christian =?ISO-8859-1?Q?K=F6nig?=
- <christian.koenig@amd.com>, Maarten Lankhorst
- <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>, Alex
- Gaynor <alex.gaynor@gmail.com>, Wedson Almeida Filho <wedsonaf@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?ISO-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>, Sumit Semwal
- <sumit.semwal@linaro.org>, Luben Tuikov <luben.tuikov@amd.com>, Jarkko
- Sakkinen <jarkko@kernel.org>, Dave Hansen <dave.hansen@linux.intel.com>
-Date: Mon, 13 Mar 2023 15:11:14 -0500
-In-Reply-To: <25349030-5cc6-90a2-f1d2-4f9a67c4f194@asahilina.net>
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=n9GX7fgK;
+	spf=pass (lists.linaro.org: domain of boqun.feng@gmail.com designates 209.85.160.175 as permitted sender) smtp.mailfrom=boqun.feng@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-qt1-f175.google.com with SMTP id r16so15351165qtx.9
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Mar 2023 19:08:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1678759708;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :feedback-id:from:to:cc:subject:date:message-id:reply-to;
+        bh=EWTJH0CSLNac6UVipxWuVXfQaQBNmUQAslbEyp9pC7k=;
+        b=n9GX7fgKLXEEUCs308GhW0N9wL9c7lItfOWri36b1p4qKLfQX8nSK2JNFWDhziddb/
+         AG2xDnaJeKtvJSLJGf2ELiNQrebE5A6RKC3pvYYwyTBsQkUfwtPlbJNFVDEY3+I8FYOX
+         C9ipdeUIRneIBtaCZMFDgPzPWSMBSICHLsBp1/mJHpv7PYjlWjHgIzXOT/e7/5CwIpN0
+         ivpON3P9Hj6WTvo7Z+H2aav1CroOXkqWMLa09WEeSeA9rRRGccjT1r+IjUKV8Th37baN
+         095PMsTEDXI5JtoeqS7WLBp/SlK3HYUmZRoX8Q4qZYDdEw39Es36utttFc8lPfYT0YmQ
+         8KFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1678759708;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:message-id:subject:cc:to:from:date
+         :feedback-id:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=EWTJH0CSLNac6UVipxWuVXfQaQBNmUQAslbEyp9pC7k=;
+        b=iVkYghTm2wSNCTY9GKs0i77ZnGnWGmRMQ0L+FNCSdRMs7XxH7yW788eiC2i5AIPFGd
+         p79OuuLZcGWHOCLGLFfHtDZbM4BUd2fjWtgbSCh6VXYCoVyCFiE5zT/QUwHf/smioqXh
+         tm1KZov0Bv+Gto3Z+tXSL8J35NuIjfGnUgRSyIkqOpyhV/GdCbtYzd0rXvfFGWGDX6QS
+         OZ8G2w8SaFqI+YJeB3gqnk3wiOWsjIuhdNrcgIy5b9jHTC3Ed+uwRmy41DDYJk1xzpES
+         YnbjhyRdgEWvGwh5BiOX02Kt6lESX4t6y/jO/mkyR7uS3pK3WrpBdl/e52gNf12CXJam
+         LgBA==
+X-Gm-Message-State: AO0yUKXYcKiyiowswhC/ttPhezFvIFusf35Q+q7oFhCJUpVHnG3Unky3
+	jEAr9JRSs648SdFDEnQT4mY7dHZ8fEU=
+X-Google-Smtp-Source: AK7set/2hv3q6fM3gm5E6q08d2RY+ZIQxFg1BAiQ2LhwTR2QsVn7phoYK2hVcgRM5RAlkcRMukImhA==
+X-Received: by 2002:a05:622a:4d1:b0:3b8:5bc6:deab with SMTP id q17-20020a05622a04d100b003b85bc6deabmr59233513qtx.8.1678759708045;
+        Mon, 13 Mar 2023 19:08:28 -0700 (PDT)
+Received: from auth1-smtp.messagingengine.com (auth1-smtp.messagingengine.com. [66.111.4.227])
+        by smtp.gmail.com with ESMTPSA id y13-20020a37f60d000000b00745a27b4b30sm837945qkj.67.2023.03.13.19.08.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 13 Mar 2023 19:08:27 -0700 (PDT)
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+	by mailauth.nyi.internal (Postfix) with ESMTP id 8D3AE27C0054;
+	Mon, 13 Mar 2023 22:08:25 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute2.internal (MEProxy); Mon, 13 Mar 2023 22:08:26 -0400
+X-ME-Sender: <xms:GdcPZJt1YWkkqoCYsYDBkVPciDc8T6htlkbPl662zwk4Fjvvk5nUMw>
+    <xme:GdcPZCdxAovOAOsvq8KslU1q6mRf03lt6uelSCEuHQZd51DVM7y9rNTd3FuvDxr0s
+    0Iws7wunS22ZN0Z_w>
+X-ME-Received: <xmr:GdcPZMyPB3t3_-MbUVlPY3eDeI9Pm3y84orFviyII-Jivc6kYOfBl5jBU38>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvhedrvddvhedggedvucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    goufhushhpvggtthffohhmrghinhculdegledmnegfrhhlucfvnfffucdlfedmnecujfgu
+    rhepfffhvfevuffkfhggtggugfgjsehtkeertddttddunecuhfhrohhmpeeuohhquhhnuc
+    fhvghnghcuoegsohhquhhnrdhfvghnghesghhmrghilhdrtghomheqnecuggftrfgrthht
+    vghrnhepteekvddvjeehvdfhvdetkeekffehveetiedtvdfhvdfhuddvteefgeegtdfggf
+    etnecuffhomhgrihhnpehkvghrnhgvlhdrohhrghdpghhithhhuhgsrdhiohenucevlhhu
+    shhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegsohhquhhnodhmvg
+    hsmhhtphgruhhthhhpvghrshhonhgrlhhithihqdeiledvgeehtdeigedqudejjeekheeh
+    hedvqdgsohhquhhnrdhfvghngheppehgmhgrihhlrdgtohhmsehfihigmhgvrdhnrghmvg
+X-ME-Proxy: <xmx:GdcPZAPuXOrudqbZH1oRHHJIqo5O15dXvhOwWcrEOLBkSpwQfnqduw>
+    <xmx:GdcPZJ_Nb4gzwL0G7nqYXNkAYL3diWg3KQjjxns4i11ZFOArGJOCIg>
+    <xmx:GdcPZAUD0nv8GVxtZKDXmZBo8VBMtJTuftlKZEuxoNyk4QTgfdyqIA>
+    <xmx:GdcPZEsWc10LHl0QgSP2y3Qz_LsrA2Kd2pQxiWkqMc2fCFtBh5XUFA>
+Feedback-ID: iad51458e:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
+ 13 Mar 2023 22:08:23 -0400 (EDT)
+Date: Mon, 13 Mar 2023 19:07:09 -0700
+From: Boqun Feng <boqun.feng@gmail.com>
+To: Faith Ekstrand <faith.ekstrand@collabora.com>
+Message-ID: <ZA/WzQj97lI2rNeK@boqun-archlinux>
 References: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net>
-	 <20230307-rust-drm-v1-11-917ff5bc80a8@asahilina.net>
-	 <bbd7c5ee-c2f0-3e19-757d-a9aff1a26d3d@linux.intel.com>
-	 <585fa052-4eff-940e-b307-2415c315686a@amd.com>
-	 <3320e497-09c0-6eb6-84c5-bab2e63f28ec@asahilina.net>
-	 <7b39ef96-3ec5-c492-6e1b-bf065b7c90a2@amd.com>
-	 <0f14c1ae-0c39-106c-9563-7c1c672154c0@asahilina.net>
-	 <e18500b5-21a0-77fd-8434-86258cefce5a@amd.com>
-	 <8696d00a-c642-b080-c19a-b0e619e4b585@asahilina.net>
-	 <5f0814a3-4be3-a609-d3b3-dd51a4f459a1@amd.com>
-	 <9403e89d-a78f-8abd-2869-20da23d89475@asahilina.net>
-	 <777dea65ef81c402d0765b1244b40633c483f4b2.camel@collabora.com>
-	 <25349030-5cc6-90a2-f1d2-4f9a67c4f194@asahilina.net>
-User-Agent: Evolution 3.46.4 (3.46.4-1.fc37) 
+ <20230307-rust-drm-v1-3-917ff5bc80a8@asahilina.net>
+ <9ba89e97155400fb379f5101ccb8960d0bcbc025.camel@collabora.com>
+ <28fa3f97-4c7c-212e-2be2-fb1c05f7f576@asahilina.net>
+ <5a0db63c043adc47b289b3f1d22935a0a63c926e.camel@collabora.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <5a0db63c043adc47b289b3f1d22935a0a63c926e.camel@collabora.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: A40CA3EEF8
+X-Rspamd-Queue-Id: 86B7F3E8F3
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
+X-Spamd-Result: default: False [-2.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
-	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.172];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[28];
-	MIME_TRACE(0.00)[0:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_TO(0.00)[asahilina.net,amd.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,protonmail.com,linaro.org];
-	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
-	DKIM_TRACE(0.00)[collabora.com:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[];
-	URIBL_BLOCKED(0.00)[collabora.com:dkim];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.160.175:from];
+	NEURAL_HAM(-0.00)[-0.999];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[28];
+	RCVD_COUNT_FIVE(0.00)[6];
 	ARC_NA(0.00)[];
-	RCVD_TLS_ALL(0.00)[]
-X-MailFrom: faith.ekstrand@collabora.com
+	DKIM_TRACE(0.00)[gmail.com:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[asahilina.net,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,protonmail.com,linaro.org,amd.com,rosenzweig.io,redhat.com,iglunix.org,mary.zone,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_FROM(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
+X-MailFrom: boqun.feng@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 6DBKCA5MGAQSC4DDSJNJULCBFXGLCKSV
-X-Message-ID-Hash: 6DBKCA5MGAQSC4DDSJNJULCBFXGLCKSV
-X-Mailman-Approved-At: Wed, 22 Mar 2023 06:17:14 +0000
-CC: Alyssa Rosenzweig <alyssa@rosenzweig.io>, Karol Herbst <kherbst@redhat.com>, Ella Stanforth <ella@iglunix.org>, Mary <mary@mary.zone>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-sgx@vger.kernel.org, asahi@lists.linux.dev
+Message-ID-Hash: CVYXHZU7ZL3DOIYXNDAHFOM5GJL2IPK3
+X-Message-ID-Hash: CVYXHZU7ZL3DOIYXNDAHFOM5GJL2IPK3
+X-Mailman-Approved-At: Wed, 22 Mar 2023 06:17:25 +0000
+CC: Asahi Lina <lina@asahilina.net>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, Wedson Almeida Filho <wedsonaf@gmail.com>, Gary Guo <gary@garyguo.net>, =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Luben Tuikov <luben.tuikov@amd.com>, Jarkko Sakkinen <jarkko@kernel.org>, Dave Hansen <dave.hansen@linux.intel.com>, Alyssa Rosenzweig <alyssa@rosenzweig.io>, Karol Herbst <kherbst@redhat.com>, Ella Stanforth <ella@iglunix.org>, Mary <mary@mary.zone>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-sgx@vger.kernel.org, asahi@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 11/18] drm/scheduler: Clean up jobs when the scheduler is torn down
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 03/18] rust: drm: file: Add File abstraction
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6DBKCA5MGAQSC4DDSJNJULCBFXGLCKSV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CVYXHZU7ZL3DOIYXNDAHFOM5GJL2IPK3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-T24gRnJpLCAyMDIzLTAzLTEwIGF0IDE4OjU4ICswOTAwLCBBc2FoaSBMaW5hIHdyb3RlOg0KPiBP
-biAxMC8wMy8yMDIzIDA0LjU5LCBGYWl0aCBFa3N0cmFuZCB3cm90ZToNCj4gPiBPbiBUaHUsIDIw
-MjMtMDMtMDkgYXQgMTg6NDMgKzA5MDAsIEFzYWhpIExpbmEgd3JvdGU6DQo+ID4gPiBPbiAwOS8w
-My8yMDIzIDE3LjQyLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPiA+ID4gPiBMb25nIHN0b3J5
-IHNob3J0OiBEb24ndCBkbyB0aGlzISBUaGlzIGlzIHdoYXQgdGhlIFdpbmRvd3MNCj4gPiA+ID4g
-ZHJpdmVycw0KPiA+ID4gPiBoYXZlIA0KPiA+ID4gPiBiZWVuIGRvaW5nIGFuZCBpdCBjcmVhdGVz
-IHRvbnMgb2YgcHJvYmxlbXMuDQo+ID4gDQo+ID4gWWVhaCwgd2UgdHJpZWQgdG8gZG8gYSBiaXQg
-b2YgdGhhdCBpbiB0aGUgR0wgZGF5cy7CoCBJdCB3YXMgYSBiYWQNCj4gPiBpZGVhLg0KPiANCj4g
-SSB0aGluayBJIHNob3VsZCBjbGFyaWZ5OiBJIHdhcyBwcm9wb3NpbmcgcmUtcXVldWVpbmcgaW5u
-b2NlbnQgam9icw0KPiBmcm9tDQo+IGlubm9jZW50IHF1ZXVlcy9WTXMgdGhhdCB3ZXJlIGltcGFj
-dGVkIGJ5IGEgZmF1bHQuIFRoZSByZWFzb24gaXMgdGhhdA0KPiB3ZQ0KPiBtYXkgYmUgYWJsZSB0
-byB0d2VhayBmaXJtd2FyZSBzdGF0ZSB0byBmb3JjZSBpdCB0byBkbyB0aGF0IHNhZmVseSwNCj4g
-ZHVyaW5nIHRoZSBmaXJtd2FyZSByZWNvdmVyeSBjeWNsZSwgc3VjaCB0aGF0IGFuIGFib3J0ZWQg
-am9iIHJlc3RhcnRzDQo+IGFuZCB0aGVuIHN1YnNlcXVlbnQgam9icy9jb21tYW5kcyBjb250aW51
-ZSBhcyBub3JtYWwuIFdlIGNhbid0IGxlYXZlDQo+IGl0DQo+IHRvIHVzZXJzcGFjZSBiZWNhdXNl
-IGlmIHdlIGRvIG5vdGhpbmcsIHRoZSBhZmZlY3RlZCBqb2IgZW5kcyB1cA0KPiBpbmNvbXBsZXRl
-IGJ1dCB0aGVuIGV2ZXJ5dGhpbmcgYWZ0ZXIgaXQgdGhhdCBpcyBhbHJlYWR5IHF1ZXVlZCBzdGls
-bA0KPiBydW5zLCBhbmQgdGhhdCBpcyBkZWZpbml0ZWx5IGEgcmVjaXBlIGZvciBhIGJpZ2dlciBt
-ZXNzIGlmIHVzZXJzcGFjZQ0KPiB3YW50cyB0byBzZWFtbGVzc2x5IHJlY292ZXIuIFRoZSBmaXJt
-d2FyZSByZWNvdmVyeSBjeWNsZSBpcyBhDQo+ICJzdG9wLXRoZS13b3JsZCIgc2l0dWF0aW9uIGZv
-ciB0aGUgR1BVICh0aGUgZmlybXdhcmUgbGl0ZXJhbGx5DQo+IGJ1c3ktbG9vcHMgd2FpdGluZyBm
-b3IgdGhlIGRyaXZlciB0byBzZXQgYSBjb250aW51ZSBmbGFnIGluDQo+IG1lbW9yeS4uLiksDQo+
-IHNvIHRoYXQncyB0aGUgb25seSByZWFsIGNoYW5jZSB0aGF0IHRoZSBkcml2ZXIgZ2V0cyB0byBt
-YWtlIGRlY2lzaW9ucw0KPiBhYm91dCB3aGF0IGlzIGdvaW5nIHRvIGhhcHBlbiBuZXh0Lg0KDQpP
-aywgdGhhdCBtYWtlcyBzZW5zZS4gIFllcywgaWYgeW91IGhhdmUgb3RoZXIgam9icyBvbiBvdGhl
-ciBxdWV1ZXMgYW5kDQphcmUgYWJsZSB0byByZWNvdmVyIGV2ZXJ5dGhpbmcgdGhhdCBpc24ndCBp
-biB0aGUgZmF1bHRpbmcgVk0sIHRoYXQncyBhDQpnb29kIHRoaW5nLiAgSSB3YXNuJ3Qgc3VyZSBo
-b3cgaGFuZy9mYXVsdCByZWNvdmVyeSB3b3JrZWQgb24gQUdYLiAgSW4NCnRhdCBjYXNlLCBJIGRv
-bid0IHRoaW5rIHRoZXJlJ3MgYSBkbWFfZmVuY2UgcHJvYmxlbS4gIEFzIGxvbmcgYXMgeW91DQpr
-ZWVwIHJlY292ZXJpbmcgYW5kIGtpbGxpbmcgb2ZmIGFueSBmYXVsdGluZyBjb250ZXh0cywgZXZl
-bnR1YWxseSB0aGUNCmdvb2QgY29udGV4dHMgc2hvdWxkIG1ha2UgcHJvZ3Jlc3MgYW5kIHRob3Nl
-IGZlbmNlcyBzaG91bGQgc2lnbmFsLg0KDQpPZiBjb3Vyc2UsIHRoZSBmaXJtd2FyZSByZWNvdmVy
-eSBjeWNsZSBtYXkgYmUgY29tcGxleCBhbmQgbmVlZCAob3IgYXQNCmxlYXN0IGFwcGVhciB0bykg
-bWVtb3J5IGFsbG9jYXRpb24gb3Igc2ltaWxhciBhbmQgdGhhdCdzIHdoZXJlDQpldmVyeXRoaW5n
-IGdldHMgaGFpcnkuICBIb3BlZnVsbHksIHRob3VnaCwgaWYgeW91J3ZlIGFscmVhZHkgZ290IHRo
-ZQ0KcmVzb3VyY2VzIGZyb20gdGhlIG9sZCBjb250ZXh0LCB5b3UgY2FuIHJlLXVzZSB0aGVtIGFm
-dGVyIGEgYml0IG9mDQpjbGVhbi11cCB3b3JrIGFuZCBzdGlsbCBnZXQgZGV0ZXJtaW5pc3RpYyBh
-bmQgcmVsaWFibGUgcmVjb3ZlcnkgY3ljbGVzLg0KDQo+IE9mIGNvdXJzZSwgdGhhdCBvbmx5IHdv
-cmtzIGlmIGluZGl2aWR1YWwgcG9zc2libHkgY29uY3VycmVudGx5DQo+IHJ1bm5pbmcNCj4gY29t
-bWFuZHMgYXJlIGlkZW1wb3RlbnQsIGJ1dCBJIHRoaW5rIGEgbG90IG9mIHR5cGljYWwgR1BVIHdv
-cmsgaXM/DQoNCk5vLCB0aGF0J3Mgbm90IGEgdmFsaWQgYXNzdW1wdGlvbi4gIEZvciBhIHNpbmds
-ZSAzRCByZW5kZXIgcGFzcyB3aGljaA0KZG9lc24ndCBkbyBhbnkgaW1hZ2Ugb3IgU1NCTyBhY2Nl
-c3MsIGl0IG1heSBiZSBwb3NzaWJsZSB0byByZS1ydW4gaXQuIA0KSG93ZXZlciwgdGhhdCB3b24n
-dCBiZSB0cnVlIG9mIGNvbXB1dGUgd29yayBhbmQgaXNuJ3QgbmVjZXNzYXJpbHkgdHJ1ZQ0Kb2Yg
-YmFjay10by1iYWNrIHBhc3Nlcy4gTG90cyBvZiBtb2Rlcm4gYXBwcyBkbyB0ZW1wb3JhbCBzdHVm
-ZiB3aGVyZSBvbmUNCmZyYW1lIGRlcGVuZHMgb24gdGhlIHByZXZpb3VzIGFuZCBhIHJlLXJ1biBt
-aWdodCBzY3JldyB0aGF0IHVwLiBBbHNvLA0Kd2l0aCBWdWxrYW4ncyBtZW1vcnkgYWxpYXNpbmcs
-IGl0J3MgaGFyZCB0byB0ZWxsIGp1c3QgZnJvbSB3aGljaA0KcmVzb3VyY2VzIGFyZSBhY2Nlc3Nl
-ZCB3aGV0aGVyIG9yIG5vdCBhIGNvbW1hbmQgYnVmZmVyIGxlYXZlcyBpdHMgaW5wdXQNCm1lbW9y
-eSB1bmRhbWFnZWQuDQoNCj4gKEUuZy4NCj4gYW55IHJlbmRlciBwYXNzIHdpdGhvdXQgc2lkZSBl
-ZmZlY3RzIG90aGVyIHRoYW4gdGhlIHJlbmRlciB0YXJnZXRzDQo+IGFuZA0KPiB3aGVyZSB0aGUg
-YmFja2dyb3VuZCBzaGFkZXIgZG9lcyBubyBsb2Fkcywgb3IgZXZlbiByZW5kZXIgcGFzc2VzIHRo
-YXQNCj4gZG8NCj4gbG9hZHMgYnV0IHdoZXJlIGFsbCBkcmF3cyBhcmUgb3BhcXVlLCB3aGljaCBh
-cmUgYWxsIHRoaW5ncyB0aGUNCj4gY3VycmVudA0KPiBHYWxsaXVtIGRyaXZlciBpcyBpbnRpbWF0
-ZWx5IGZhbWlsaWFyIHdpdGggc2luY2UgQ3JhenkgVGlsZXINCj4gT3B0aW1pemF0aW9uc+KEoiBu
-ZWVkIHRoYXQgaW5mbyB0byBiZSBwcm92aWRlZCBhbnl3YXkpLiBTbyBJIHdhcw0KPiB3b25kZXJp
-bmcNCj4gd2hldGhlciBpdCdkIG1ha2Ugc2Vuc2UgdG8gaGF2ZSBzdWNoIGFuIGlkZW1wb3RlbmN5
-L3Jlc3RhcnRhYmxlIGZsYWcNCj4gb24NCj4gam9iIHN1Ym1pc3Npb24sIGFuZCB0aGVuIHRoZSBk
-cml2ZXIgd291bGQgZG8gaXRzIGJlc3QgdG8gcmVjb3ZlciBhbmQNCj4gcmVydW4gaXQgaWYgaXQg
-Z2V0cyBraWxsZWQgYnkgYW4gdW5yZWxhdGVkIGNvbmN1cnJlbnQgYmFkIGpvYi4NCj4gDQo+IFRo
-ZW4gYWdhaW4gdGhpcyBhbGwgZGVwZW5kcyBvbiBhbiBpbnZlc3RpZ2F0aW9uIGludG8gd2hhdCB3
-ZSAqY2FuKiBkbw0KPiBkdXJpbmcgZmlybXdhcmUgcmVjb3ZlcnkgdGhhdCBoYXNuJ3QgaGFwcGVu
-ZWQgYXQgYWxsIHlldC4gSXQgbWlnaHQgYmUNCj4gdGhhdCBpdCBpc24ndCBzYWZlIHRvIGRvIGFu
-eXRoaW5nIHJlYWxseSwgb3IgdGhhdCBkb2luZyB0aGluZ3MNCj4gZGVwZW5kcw0KPiBvbiB0b3Vj
-aGluZyBldmVuIGRlZXBlciBmaXJtd2FyZSBzdGF0ZSBzdHJ1Y3RzIHRoYXQgd2UgdHJlYXQgYXMN
-Cj4gb3BhcXVlDQo+IHJpZ2h0IG5vdyBhbmQgd2UgcmVhbGx5IGRvbid0IHdhbnQgdG8gaGF2ZSB0
-byB0b3VjaC4uLg0KPiANCj4gQnV0IG1heWJlIG5vbmUgb2YgdGhpcyBpcyB3b3J0aCBpdCBpbiBw
-cmFjdGljZSwgaXQganVzdCBzb3VuZGVkIGxpa2UNCj4gaXQNCj4gY291bGQgYmUgdXNlZnVsIG1h
-eWJlPw0KDQpNYXliZT8gSXQncyBub3QgY2xlYXIgdG8gbWUgdGhhdCBzdWNoIGEgZmxhZyB3b3Vs
-ZCBiZSB1c2VmdWwgb3IgZXZlbg0KcHJhY3RpY2FsIHRvIHByb3ZpZGUgZnJvbSB0aGUgTWVzYSBz
-aWRlLiAgSWRlYWxseSwgeW91J2QgYmUgYWJsZSB0bw0KZmlndXJlIG91dCB3aGVuIGEgZmF1bHQg
-aGFwcGVucywgd2hhdCBWTSBpdCBoYXBwZW5lZCBpbiBhbmQgZXhhY3RseQ0Kd2hhdCB3b3JrIHdh
-cyBpbi1mbGlnaHQgd2hlbiBpdCBoYXBwZW5lZCBhbmQgb25seSBraWxsIHRoZSBvbmUgZ3VpbHR5
-DQpWTS4gIEhvd2V2ZXIsIGl0IHNvdW5kcyBsaWtlIHlvdXIgdW5kZXJzdGFuZGluZyBvZiB0aGUg
-ZmlybXdhcmUgaXMNCmN1cnJlbnRseSByb3VnaCBlbm91Z2ggdGhhdCBkb2luZyBzbyBtYXkgbm90
-IGJlIHByYWN0aWNhbC4gIEluIHRoYXQNCmNhc2UsIHRoZSBiZXN0IHRoaW5nIHRvIGRvIGlzIHRv
-IGtpbGwgYW55IFZNcyB3aGljaCB3ZXJlIG9uIHRoZSBHUFUgYXQNCnRoZSB0aW1lIGFuZCBob3Bl
-IHRoZSBpbmRpdmlkdWFsIGFwcHMgYXJlIGFibGUgdG8gcmVjb3Zlci4NCg0KPiBOb3cgdGhhdCBJ
-IGxvb2sgYXQgaXQsIHdlIGhhdmUgYSBsb3ZlbHkgIndoYXQgaXMgdGhpcyBmbGFnIGRvaW5nDQo+
-IGFueXdheSINCj4gYml0IGFscmVhZHkgcGFzc2VkIGZyb20gTWVzYSB0aHJvdWdoIHRvIHRoZSBm
-aXJtd2FyZSB3ZSBjYWxsZWQNCj4gQVNBSElfUkVOREVSX1NFVF9XSEVOX1JFTE9BRElOR19aX09S
-X1Mgd2hpY2gsIG5vdyB0aGF0IEkgbG9vayBhdCBpdCwNCj4gaXMNCj4gYWN0dWFsbHkgZ2V0dGlu
-ZyBzZXQgd2hlbiBhbnkgYXR0YWNobWVudCAoYW55IGNvbG9yLCBaLCBTKSBpcyBub3QNCj4gYmVp
-bmcNCj4gY2xlYXJlZCBmb3IgdGhhdCBwYXNzIChzbyBpdCdzIGxvYWRlZCkuIFRoYXQgY291bGQg
-dmVyeSB3ZWxsIGJlIGFuDQo+ICJpcw0KPiBub3QgaWRlbXBvdGVudCIgZmxhZy4uLiBhbmQgbWF5
-YmUgdGhhdCBtZWFucyB0aGUgZmlybXdhcmUgZG9lcyB0aGlzDQo+IGZvcg0KPiB1cyBhbHJlYWR5
-PyBTb3VuZHMgbGlrZSBzb21ldGhpbmcgdG8gdGVzdC4uLiBJIG1pZ2h0IGhhdmUgc29tZQ0KPiAx
-Nkt4MTZLDQo+IEdMbWFyayBydW5zIHRvIGRvIGNvbmN1cnJlbnQgd2l0aCBhbiBldmlsIGZhdWx0
-aW5nIGpvYiBub3cgXl4gKGFuZA0KPiB0aGVuDQo+IHRoYXQgYWxzbyBtZWFucyB3ZSBuZWVkIHRv
-IHNldCBpdCB3aGVuIHNoYWRlcnMgaGF2ZSBzaWRlIGVmZmVjdHMgYW5kDQo+IHN0dWZmLCB3aGlj
-aCByaWdodCBub3cgd2UgZG9uJ3QpLg0KPiANCj4gPiA+ID4gSnVzdCBzaWduYWwgdGhlIHByb2Js
-ZW0gYmFjayB0byB1c2Vyc3BhY2UgYW5kIGxldCB0aGUgdXNlcg0KPiA+ID4gPiBzcGFjZQ0KPiA+
-ID4gPiBkcml2ZXIgDQo+ID4gPiA+IGRlY2lkZSB3aGF0IHRvIGRvLg0KPiA+ID4gPiANCj4gPiA+
-ID4gVGhlIGJhY2tncm91bmQgaXMgdGhhdCBtb3N0IGdyYXBoaWNzIGFwcGxpY2F0aW9ucyAoZ2Ft
-ZXMgZXRjLi4pDQo+ID4gPiA+IHRoZW4gDQo+ID4gPiA+IHJhdGhlciBzdGFydCBvbiB0aGUgbmV4
-dCBmcmFtZSBpbnN0ZWFkIG9mIHN1Ym1pdHRpbmcgdGhlDQo+ID4gPiA+IGN1cnJlbnQNCj4gPiA+
-ID4gb25lIA0KPiA+ID4gPiBhZ2FpbiB3aGlsZSBjb21wdXRlIGFwcGxpY2F0aW9ucyBtYWtlIHN1
-cmUgdGhhdCB0aGUgYWJvcnQgYW5kDQo+ID4gPiA+IHRlbGwNCj4gPiA+ID4gdGhlIA0KPiA+ID4g
-PiB1c2VyIHRoYXQgdGhlIGNhbGN1bGF0aW9ucyBtaWdodCBiZSBjb3JydXB0ZWQgYW5kIG5lZWQg
-dG8gYmUNCj4gPiA+ID4gcmVkb25lLg0KPiA+IA0KPiA+IFRoZSBndWFyYW50ZWUgdGhhdCBWdWxr
-YW4gbWFrZXMgaXMgdGhhdCwgaWYgeW91IGlkbGUgdGhlIEdQVSBhbmQNCj4gPiB5b3UNCj4gPiBo
-YXZlbid0IGdvdHRlbiBhIERFVklDRV9MT1NUIHlldCwgeW91ciBkYXRhIGlzIGdvb2QuwqAgSWYg
-eW91IGdldCBhDQo+ID4gREVWSUNFX0xPU1QsIGFsbCBiZXRzIGFyZSBvZmYuwqAgVGhlIHByb2Js
-ZW0gaXMgdGhhdCwgbm8gbWF0dGVyIGhvdw0KPiA+IGZhc3QNCj4gPiB0aGUgZXJyb3IgcHJvcGFn
-YXRpb24gbWF5IGJlIGluIHRoZSBrZXJuZWwgb3IgdXNlcnNwYWNlIGRyaXZlciwNCj4gPiBlcnJv
-cnMNCj4gPiBjYW4gc3RpbGwgc2hvdyB1cCBpbiBzdHJhbmdlIHdheXMuwqAgQW4gT09CIGJ1ZmZl
-ciBhY2Nlc3MgY291bGQgZW5kDQo+ID4gdXANCj4gPiBtb2RpZnlpbmcgYSBzaGFkZXIgYmluYXJ5
-IHdoaWNoIGdldHMgcnVuIDMgZnJhbWVzIGxhdGVyIGFuZCBjYXVzZXMNCj4gPiBhDQo+ID4gY29y
-cnVwdGlvbi7CoCBPbmNlIHlvdSd2ZSBmYXVsdGVkLCB5b3UgcmVhbGx5IGhhdmUgbm8gaWRlYSBo
-b3cgZmFyDQo+ID4gYmFjaw0KPiA+IGlzIGdvb2Qgb3Igd2hhdCBtZW1vcnkgaXMgY29ycnVwdGVk
-LsKgIFlvdSBoYXZlIHRvIGFzc3VtZSB0aGF0DQo+ID4gZXZlcnl0aGluZyBtYXBwZWQgdG8gdGhl
-IEdQVSBWQSBzcGFjZSBpcyBwb3RlbnRpYWxseSB0b2FzdC4NCj4gDQo+IFllcyBvZiBjb3Vyc2Us
-IGZvciB0aGUgYWN0dWFsbHkgZmF1bHRpbmcgVk0gYWxsIGJldHMgYXJlIG9mZiBhZnRlciBhDQo+
-IGZhdWx0ICh0aG91Z2ggd2UgY2FuIHRyeSBhIGJpdCBoYXJkZXIgYXQgbGVhc3QuLi4gSSBoYXZl
-IGEgUkVBRF9PTkxZDQo+IEJPDQo+IGZsYWcgbm93LCBJIHNob3VsZCBzZXQgaXQgb24gdGhlIHNo
-YWRlciBwb29scyEpLg0KPiANCj4gPiA+IEFjdHVhbGx5IEkgd2FudGVkIHRvIGFzayBhYm91dCBl
-cnJvciBub3RpZmljYXRpb25zLiBSaWdodCBub3cgd2UNCj4gPiA+IGhhdmUNCj4gPiA+IGFuDQo+
-ID4gPiBvdXQtb2YtYmFuZCBtZWNoYW5pc20gdG8gcHJvdmlkZSBkZXRhaWxlZCBmYXVsdCBpbmZv
-IHRvIHVzZXJzcGFjZQ0KPiA+ID4gd2hpY2gNCj4gPiA+IHdvcmtzIGZpbmUsIGJ1dCBpbiBwcmlu
-Y2lwbGUgaXQncyBvcHRpb25hbC4NCj4gPiANCj4gPiBUaGlzIGlzIGZpbmUsIGluIHByaW5jaXBh
-bC7CoCBCZWNhdXNlIG9mIHRoZSBuYXR1cmUgb2YgZXJyb3JzLCBhc3luYw0KPiA+IGlzDQo+ID4g
-ZmluZSBhcyBsb25nIGFzIHRoZSBlcnJvciBzaG93cyB1cCBldmVudHVhbGx5LsKgIEZhc3RlciBp
-cyBiZXR0ZXIsDQo+ID4gZm9yDQo+ID4gc3VyZSwgYnV0IGVycm9yIGxhdGVuY3kgZG9lc24ndCBy
-ZWFsbHkgbWF0dGVyIGluIHByYWN0aWNlLg0KPiA+IA0KPiA+ID4gSG93ZXZlciwgSSBhbHNvIG1h
-cmsgdGhlIGh3DQo+ID4gPiDCoGZlbmNlcyBhcyBlcnJvcmVkIHdoZW4gYSBmYXVsdCBoYXBwZW5z
-ICh3aXRoIGFuIGVycm5vIHRoYXQNCj4gPiA+IGRlc2NyaWJlcw0KPiA+ID4gdGhlIG92ZXJhbGwg
-c2l0dWF0aW9uKSwgYnV0IHRoYXQgbmV2ZXIgbWFrZXMgaXQgaW50byB0aGUNCj4gPiA+IGRybV9z
-Y2hlZA0KPiA+ID4gam9iDQo+ID4gPiBjb21wbGV0ZSBmZW5jZS4gSSBsb29rZWQgYXQgdGhlIGRy
-bV9zY2hlZCBjb2RlIGFuZCBJIGRpZG4ndCBzZWUNCj4gPiA+IGFueQ0KPiA+ID4gZXJyb3IgcHJv
-cGFnYXRpb24uIElzIHRoYXQgc3VwcG9zZWQgdG8gd29yaywgb3IgYW0gSSBzdXBwb3NlZCB0bw0K
-PiA+ID4gZGlyZWN0bHkgbWFyayB0aGUgZHJtX3NjaGVkIHNpZGUgZmVuY2UgYXMgY29tcGxldGUs
-IG9yIGRpZCBJDQo+ID4gPiBtaXN1bmRlcnN0YW5kIGFsbCB0aGlzPyBJIGdldCB0aGUgZmVlbGlu
-ZyBtYXliZSBleGlzdGluZyBkcml2ZXJzDQo+ID4gPiBqdXN0DQo+ID4gPiByZWx5IG9uIHRoZSBy
-ZWNvdmVyeS90aW1lb3V0L2V0YyBwYXRocyB0byBtYXJrIGpvYnMgYXMgZXJyb3JlZA0KPiA+ID4g
-KHNpbmNlDQo+ID4gPiB0aG9zZSBkbyBpdCBleHBsaWNpdGx5KSBhbmQgbmV2ZXIgbmVlZCBlcnJv
-ciBmb3J3YXJkaW5nIGZyb20gdGhlDQo+ID4gPiBodw0KPiA+ID4gZmVuY2U/DQo+ID4gDQo+ID4g
-VGhlIGVuZCBiZWhhdmlvciBuZWVkcyB0byBiZSB0aGF0IGFsbCBmZW5jZXMgZm9yIGFsbCBqb2Jz
-IHN1Ym1pdHRlZA0KPiA+IHRvDQo+ID4gdGhlIHF1ZXVlIGdldCBzaWduYWxlZC7CoCBUaGF0J3Mg
-bmVlZGVkIHRvIHNhdGlzZnkgdGhlIGZpbml0ZSB0aW1lDQo+ID4gZ3VhcmFudGVlcyBvZiBkbWFf
-ZmVuY2UuwqAgRXhhY3RseSBob3cgdGhhdCBoYXBwZW5zIChsZXQgdGhlIGpvYg0KPiA+IHJ1biwN
-Cj4gPiBhYm9ydCBhbGwgdGhlIGpvYnMsIGV0Yy4pIGlzIGFuIGltcGxlbWVudGF0aW9uIGRldGFp
-bCBmb3IgdGhlDQo+ID4gZHJpdmVyIHRvDQo+ID4gZGVjaWRlLsKgIElmIHlvdSB3YW50LCB5b3Ug
-Y2FuIGFsc28gc2V0IGEgYml0IG9uIHRoZSBjb250ZXh0IChvcg0KPiA+IHF1ZXVlKQ0KPiA+IHRv
-IG1hcmsgaXQgYXMgZGVhZCBhbmQgc3RhcnQgcmV0dXJuaW5nIEVJTyBvciBzaW1pbGFyIGZyb20g
-YW55DQo+ID4gaW9jdGxzDQo+ID4gdHJ5aW5nIHRvIHN1Ym1pdCBtb3JlIHdvcmsgaWYgeW91IHdh
-bnRlZC7CoCBOb3QgcmVxdWlyZWQgYnV0IHlvdQ0KPiA+IGNhbi4NCj4gDQo+IEZlbmNlcyBoYXZl
-IGFuIGVycm9yIGZsYWcgdGhvdWdoLCBkb2VzIHRoYXQgZ2V0IHJlcG9ydGVkIHRvIHVzZXJzcGFj
-ZQ0KPiBzb21laG93PyBJIHRob3VnaHQgaXQgZGlkLCBidXQgbWF5YmUgbm90LCBvciBtYXliZSBv
-bmx5IGRybV9zY2hlZCBub3QNCj4gcHJvcGFnYXRpbmcgaXQgaXMgdGhlIGlzc3VlPw0KPiANCj4g
-SW4gb3RoZXIgd29yZHMsIGFic2VudCBteSBmYW5jeSBzdGF0cyByZXBvcnRpbmcgQk8gc3lzdGVt
-LCB3aGF0IGlzDQo+IHRoZQ0KPiBub3JtYWwgd2F5IHRoYXQgYW4gZXhwbGljaXQgc3luYyBkcml2
-ZXIgc2lnbmFscyB0byB1c2Vyc3BhY2UgdGhhdCB0aGUNCj4gam9iIGFzc29jaWF0ZWQgd2l0aCBh
-IHN5bmNvYmogaGFzIGZhaWxlZD8NCg0KT25lIGlzIHZpYSB0aGUgcmV0dXJuIHZhbHVlIGZyb20g
-ZXhlYy9zdWJtaXQuICBPZnRlbiB0aGVyZSdzIGFsc28gYQ0KcXVlcnkgbWVjaGFuaXNtIGZvciBt
-b3JlIGRldGFpbGVkIGluZm9ybWF0aW9uLiAgSXQncyBub3QgcGFydGljdWxhcmx5DQpzdGFuZGFy
-ZCBhdCB0aGUgbW9tZW50LCBJJ20gYWZyYWlkLiAgSSBjb3VsZCBwb2ludCB5b3UgYXQgaTkxNSBi
-dXQgSQ0Kd291bGRuJ3QgY2FsbCB0aGF0IHVBUEkgc29tZXRoaW5nIHRvIGJlIGVtdWxhdGVkLCBp
-biBnZW5lcmFsLg0KDQo+IChJZiB0aGVyZSBpcyBubyB3YXksIHRoZW4gSSdsbCBwcm9iYWJseSB3
-YW50IHRvIGNoYW5nZSB0aGUgc3RhdHMgQk8NCj4gc3lzdGVtIHRvIGJlIGNvbmZpZ3VyYWJsZSwg
-c28gaWYgeW91IGFzayBmb3Igbm8gc3RhdHMvdGltZSBpbmZvLCB5b3UNCj4gb25seSBnZXQgb3Zl
-cmFsbCBqb2Igc3RhdHVzIGFuZCBmYXVsdHMsIHdoaWNoIGhhcyBsZXNzIG92ZXJoZWFkLikNCg0K
-VGhlcmUgaXMgYW4gZXJyb3IgYnV0IGl0IGRvZXNuJ3QgYXV0b21hdGljYWxseSBnZXQgcHJvcGFn
-YXRlZCB0bw0KdXNlcnNwYWNlLiAgU28sIGZvciBpbnN0YW5jZSwgYSBTWU5DT0JKX1dBSVQgaW9j
-dGwgd29uJ3QgcmV0dXJuIGFuDQplcnJvciBpZiBpdCBzZWVzIGEgZmVuY2UgZXJyb3IuICBJdCBu
-ZWVkcyB0byBnZXQgY2F1Z2h0IGJ5IHRoZSBkcml2ZXINCmFuZCByZXR1cm5lZCB0aHJvdWdoIGEg
-ZHJpdmVyIGlvY3RsIHNvbWVob3cuDQoNCn5GYWl0aA0KDQpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBs
-aW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFp
-bCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Mon, Mar 13, 2023 at 12:49:57PM -0500, Faith Ekstrand wrote:
+> On Fri, 2023-03-10 at 07:16 +0900, Asahi Lina wrote:
+> > On 10/03/2023 06.16, Faith Ekstrand wrote:
+> > > On Tue, 2023-03-07 at 23:25 +0900, Asahi Lina wrote:
+> > > > A DRM File is the DRM counterpart to a kernel file structure,
+> > > > representing an open DRM file descriptor. Add a Rust abstraction
+> > > > to
+> > > > allow drivers to implement their own File types that implement
+> > > > the
+> > > > DriverFile trait.
+> > > >=20
+> > > > Signed-off-by: Asahi Lina <lina@asahilina.net>
+> > > > ---
+> > > > =A0rust/bindings/bindings_helper.h |=A0=A0 1 +
+> > > > =A0rust/kernel/drm/drv.rs=A0=A0=A0=A0=A0=A0=A0=A0=A0 |=A0=A0 7 ++-
+> > > > =A0rust/kernel/drm/file.rs=A0=A0=A0=A0=A0=A0=A0=A0 | 113
+> > > > ++++++++++++++++++++++++++++++++++++++++
+> > > > =A0rust/kernel/drm/mod.rs=A0=A0=A0=A0=A0=A0=A0=A0=A0 |=A0=A0 1 +
+> > > > =A04 files changed, 120 insertions(+), 2 deletions(-)
+> > > >=20
+> > > > diff --git a/rust/bindings/bindings_helper.h
+> > > > b/rust/bindings/bindings_helper.h
+> > > > index 2a999138c4ae..7d7828faf89c 100644
+> > > > --- a/rust/bindings/bindings_helper.h
+> > > > +++ b/rust/bindings/bindings_helper.h
+> > > > @@ -8,6 +8,7 @@
+> > > > =A0
+> > > > =A0#include <drm/drm_device.h>
+> > > > =A0#include <drm/drm_drv.h>
+> > > > +#include <drm/drm_file.h>
+> > > > =A0#include <drm/drm_ioctl.h>
+> > > > =A0#include <linux/delay.h>
+> > > > =A0#include <linux/device.h>
+> > > > diff --git a/rust/kernel/drm/drv.rs b/rust/kernel/drm/drv.rs
+> > > > index 29a465515dc9..1dcb651e1417 100644
+> > > > --- a/rust/kernel/drm/drv.rs
+> > > > +++ b/rust/kernel/drm/drv.rs
+> > > > @@ -144,6 +144,9 @@ pub trait Driver {
+> > > > =A0=A0=A0=A0 /// Should be either `drm::gem::Object<T>` or
+> > > > `drm::gem::shmem::Object<T>`.
+> > > > =A0=A0=A0=A0 type Object: AllocImpl;
+> > > > =A0
+> > > > +=A0=A0=A0 /// The type used to represent a DRM File (client)
+> > > > +=A0=A0=A0 type File: drm::file::DriverFile;
+> > > > +
+> > > > =A0=A0=A0=A0 /// Driver metadata
+> > > > =A0=A0=A0=A0 const INFO: DriverInfo;
+> > > > =A0
+> > > > @@ -213,8 +216,8 @@ macro_rules! drm_device_register {
+> > > > =A0impl<T: Driver> Registration<T> {
+> > > > =A0=A0=A0=A0 const VTABLE: bindings::drm_driver =3D drm_legacy_fiel=
+ds! {
+> > > > =A0=A0=A0=A0=A0=A0=A0=A0 load: None,
+> > > > -=A0=A0=A0=A0=A0=A0=A0 open: None, // TODO: File abstraction
+> > > > -=A0=A0=A0=A0=A0=A0=A0 postclose: None, // TODO: File abstraction
+> > > > +=A0=A0=A0=A0=A0=A0=A0 open: Some(drm::file::open_callback::<T::Fil=
+e>),
+> > > > +=A0=A0=A0=A0=A0=A0=A0 postclose:
+> > > > Some(drm::file::postclose_callback::<T::File>),
+> > > > =A0=A0=A0=A0=A0=A0=A0=A0 lastclose: None,
+> > > > =A0=A0=A0=A0=A0=A0=A0=A0 unload: None,
+> > > > =A0=A0=A0=A0=A0=A0=A0=A0 release: None,
+> > > > diff --git a/rust/kernel/drm/file.rs b/rust/kernel/drm/file.rs
+> > > > new file mode 100644
+> > > > index 000000000000..48751e93c38a
+> > > > --- /dev/null
+> > > > +++ b/rust/kernel/drm/file.rs
+> > > > @@ -0,0 +1,113 @@
+> > > > +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> > > > +
+> > > > +//! DRM File objects.
+> > > > +//!
+> > > > +//! C header:
+> > > > [`include/linux/drm/drm_file.h`](../../../../include/linux/drm/dr
+> > > > m_fi
+> > > > le.h)
+> > > > +
+> > > > +use crate::{bindings, drm, error::Result};
+> > > > +use alloc::boxed::Box;
+> > > > +use core::marker::PhantomData;
+> > > > +use core::ops::Deref;
+> > > > +
+> > > > +/// Trait that must be implemented by DRM drivers to represent a
+> > > > DRM
+> > > > File (a client instance).
+> > > > +pub trait DriverFile {
+> > > > +=A0=A0=A0 /// The parent `Driver` implementation for this
+> > > > `DriverFile`.
+> > > > +=A0=A0=A0 type Driver: drm::drv::Driver;
+> > > > +
+> > > > +=A0=A0=A0 /// Open a new file (called when a client opens the DRM
+> > > > device).
+> > > > +=A0=A0=A0 fn open(device: &drm::device::Device<Self::Driver>) ->
+> > > > Result<Box<Self>>;
+> > > > +}
+> > > > +
+> > > > +/// An open DRM File.
+> > > > +///
+> > > > +/// # Invariants
+> > > > +/// `raw` is a valid pointer to a `drm_file` struct.
+> > > > +#[repr(transparent)]
+> > > > +pub struct File<T: DriverFile> {
+> > > > +=A0=A0=A0 raw: *mut bindings::drm_file,
+> > > > +=A0=A0=A0 _p: PhantomData<T>,
+> > > > +}
+> > > > +
+> > > > +pub(super) unsafe extern "C" fn open_callback<T: DriverFile>(
+> > > > +=A0=A0=A0 raw_dev: *mut bindings::drm_device,
+> > > > +=A0=A0=A0 raw_file: *mut bindings::drm_file,
+> > > > +) -> core::ffi::c_int {
+> > > > +=A0=A0=A0 let drm =3D core::mem::ManuallyDrop::new(unsafe {
+> > > > drm::device::Device::from_raw(raw_dev) });
+> > >=20
+> > > Maybe you can help educate me a bit here... This feels like a
+> > > really
+> > > sketchy pattern.=A0 We're creating a Device from a pointer, an
+> > > operation
+> > > which inherently consumes a reference but then marking it
+> > > ManuallyDrop
+> > > so drm_device_put() never gets called.=A0 It took me a while but I
+> > > think
+> > > I figured out what you're trying to do: Make it so all the Rust
+> > > stuff
+> > > works with Device, not drm_device but it still feels really wrong.=A0
+> > > It
+> > > works, it just feels like there's a lot of unsafe abstraction
+> > > juggling
+> > > happening here and I expect this operation is going to be pretty
+> > > common
+> > > in the Rust abstraction layer.
+> >=20
+> > So I think this is going to be a pretty common pattern in this kind
+> > of
+> > abstraction. The problem is that, of course, in C there is no
+> > distinction between an owned reference and a borrowed one. Here we
+> > have
+> > a borrowed reference to a struct drm_device, and we need to turn it
+> > into
+> > a &Device (which is the Rust equivalent type). But for &Device to
+> > exist
+> > we need a Device to exist in the first place, and Device normally
+> > implies ownership of the underlying drm_device.
+>=20
+> Thanks! Putting it in terms of borrow really helps clear up the
+> difference.
+>=20
+> > We could just acquire a reference here, but then we're needlessly
+> > grabbing a ref only to drop it at the end of the function, which is
+> > pointless when the caller is holding another reference for us while
+> > the
+> > callback runs. And of course Rust likes to claim to offer zero-cost
+> > abstractions, so it would be kind of sad to have to do that... ^^
+>=20
+> Yeah, I agree we don't want to take extra references.
+>=20
+> > Just doing drm::device::Device::from_raw(raw_dev) is a ticking time
+> > bomb, because we haven't acquired a reference (which would normally
+> > be
+> > required). If that Device ever gets dropped, we've messed up the
+> > refcounting and stolen the caller's reference. We could try to ensure
+> > it
+> > gets passed to core::mem::forget in all paths out, but that gets
+> > error-prone very quickly when trying to cover error paths. So
+> > instead,
+> > we put it into a ManuallyDrop. That takes care of neutering the ref
+> > drop, so we don't have to worry about messing that up. Then the only
+> > remaining safety requirement is that that the ManuallyDrop<Device>
+> > never
+> > escape the callback function, and that's easy to ensure: we only pass
+> > a
+> > &ref to the user (which via auto-deref ends up being a &Device), and
+> > then nothing bad can happen. If the user wants an owned reference to
+> > the
+> > device to keep around, they can call .clone() on it and that's when
+> > the
+> > incref happens.
+> >=20
+> > Basically, ManuallyDrop<T> where T is a reference counted type
+> > represents a borrowed reference to a T coming from the C side. You
+> > can
+> > see another use of this pattern in gem::Object, which contains a
+> > ManuallyDrop<Device> that represents a borrowed reference to the
+> > device
+> > that owns that object. The DRM core (as far as I know!) guarantees
+> > that
+> > DRM devices outlive all of their GEM objects, so we can materialize a
+> > borrowed reference and as long as it never leaves the GEM object, it
+> > will be sound. Then we can take &Device references from it whenever
+> > we
+> > want, and the usual Rust borrow checker rules ensure we can't do
+> > something illegal.
+>=20
+> Ok, that all matches my understanding of what I thought was going on. I
+> do wonder if it would be good to wrap this up in a
+>=20
+> struct DeviceBorrow {
+>    dev: ManuallyDrop<Device>
+> }
+>=20
+> impl DeviceBorrow {
+>    pub unsafe fn from_raw(*mut bindings::drm_device) -> DeviceBorrow;
+> }
+>=20
+> impl Deref<Device> for DeviceBorrow {
+>    ...
+> }
+>=20
+> with documentation, etc.  Seeing a ManuallyDrop which is never dropped
+> sets my rust senses tingling.  Maybe that's too much typing for each
+> object?  I don't want to add a bunch of extra work but this seems like
+> a pretty common pattern we're going to hit everywhere.
+>=20
+
+I just want to mention, there is a different way to do the abstraction
+here:
+
+similar to https://lore.kernel.org/rust-for-linux/ZA9l0EHCRRr%2Fmyoq@boqun-=
+archlinux
+
+* Define Device as tranparent represention of struct drm_device:
+
+	#[repr(transparent)]
+	struct Device(Opaque<bindings::drm_device>);
+
+* impl `AlwaysRefCounted`[1] for `Device`, therefore we can use
+  `ARef<Device>`[2] as a smart pointer to `drm_device`.
+
+* drm_device related methods are still implemented in `impl Device`
+
+* In `open_callback`, we can just get a `&Device` from `*mut
+  bindings::drm_device` unsafely, and that's all. Or introduce a helper
+  function if we want:
+
+    pub unsafe fn with_device<F>(ptr: *mut drm_device, f: F) -> Result
+    where
+      F: FnOnce(&Device) -> Result
+    {
+    	let d =3D unsafe { &*ptr };
+	f(d)
+    }
+
+The main difference is that we now treat a pointer to drm_device as a
+reference to the device, not the owner.
+
+It seems we need to also change our driver/device framework to use this
+approach, but it looks better to me.
+
+Regards,
+Boqun
+
+[1]: https://rust-for-linux.github.io/docs/kernel/trait.AlwaysRefCounted.ht=
+ml
+[2]: https://rust-for-linux.github.io/docs/kernel/struct.ARef.html
+
+> ~Faith
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
