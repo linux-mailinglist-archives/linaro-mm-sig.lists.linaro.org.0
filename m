@@ -2,364 +2,711 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id E4CF66B81A4
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Mar 2023 20:21:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7F3596B9273
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Mar 2023 13:00:09 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 00E6E3F503
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Mar 2023 19:21:26 +0000 (UTC)
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
-	by lists.linaro.org (Postfix) with ESMTPS id 26DCD3F0B2
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Mar 2023 19:21:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4F2433F52B
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 14 Mar 2023 12:00:08 +0000 (UTC)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2089.outbound.protection.outlook.com [40.107.237.89])
+	by lists.linaro.org (Postfix) with ESMTPS id 51C723EC68
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 14 Mar 2023 11:59:48 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=I+8ES40A;
-	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.208.45 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-ed1-f45.google.com with SMTP id ek18so21884719edb.6
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Mar 2023 12:21:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1678735266;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=DgRaKTqE1rxLC9XenG0jwsoM702XmOq7V3PQDrUGur4=;
-        b=I+8ES40AkjMYBzrGwmgVwjn5pxMuIk1xg2p+BRylmHmPxsH4j1984uNz1Rrbogi3sG
-         otFl4ODwNtURr8RwSQ0remtWcQOJJ6hh4v9NDYoqad9NtjCx6OFvsgibIrRKcQEwNpsc
-         9RVrgqIWQxh7z05h++izCp6Dy2lIKYxiZDXNjGXxdDshVOPpVLOMhgTkWxBVCBoQ6Rtd
-         DWMNAcHOOFSYEbDnmjl2lMm+YUTJddTkT2cLRdeo3YvkX20HO6YYAv54PTO7oL0N7eoN
-         X+sHBILIj7FmEXn+dIuH9vG+fPCFyWvaBxHObMBfBjVcN5uhVleoCDl0m5dzupuEarNx
-         CBRw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1678735266;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=DgRaKTqE1rxLC9XenG0jwsoM702XmOq7V3PQDrUGur4=;
-        b=QvOmmhsy4KSJoxQc7rsRnvnpE6FniHHuBtjrX6dOcc5tXV+9ZFmkQ0YJ3cfOtXCPjW
-         KMfEVnJkF8rYKEqX0BKJyfCMaJXlzjnMSDTHZHo7Airy99ngsSbiUydQnt1bdpBIGH+d
-         cEns4cBia9myAJwQ4bCGP1hzus0VBxr3/7l8aODJ4YgvdoWcD01i2VgQpBy6WjyaRoj+
-         KOhPrUZPgyAPKgcgA86S4Dd81gSk3Gx0lWw1WaW409bg+cBcY+dKgQzdirnHzu9yj2WW
-         25rUTexGB7mBDvp6GOQQVvz4CIYhbsqO/NwIn9yKkjamF1x/9ys6EPK2zYNr4sDiEMtR
-         L8UQ==
-X-Gm-Message-State: AO0yUKVKQsHhQEe/FUySx+afO2gD3wtPdsgTLj9qND510RPCYnmPsufj
-	nfmit2RhbKZYlV6V7ro/MAk=
-X-Google-Smtp-Source: AK7set8WSgtxMQ1XTeg1HrK7CkFq2qBLpl1zSMNBnNwjnO7AYQH4gRtbqn7OTeRgOs4y29K1rpRrcQ==
-X-Received: by 2002:a17:906:8a6d:b0:928:d4f6:6f77 with SMTP id hy13-20020a1709068a6d00b00928d4f66f77mr5859062ejc.29.1678735265944;
-        Mon, 13 Mar 2023 12:21:05 -0700 (PDT)
-Received: from ?IPV6:2a02:908:1256:79a0:bd43:b1f4:2a82:c42b? ([2a02:908:1256:79a0:bd43:b1f4:2a82:c42b])
-        by smtp.gmail.com with ESMTPSA id w11-20020a1709062f8b00b00923bb9f0c36sm146491eji.127.2023.03.13.12.21.04
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 13 Mar 2023 12:21:05 -0700 (PDT)
-Message-ID: <88b3960d-41a6-068a-28a7-7afd0c1551c1@gmail.com>
-Date: Mon, 13 Mar 2023 20:21:03 +0100
-MIME-Version: 1.0
+	dkim=pass header.d=amd.com header.s=selector1 header.b=tHk9DSAI;
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.237.89 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=kM1Dk4YORMS4+boq5fx5c3U5sPGumrfyPJpsG0jtcL0YTTjBRSkSLVRExp4OgR2xbus3nazJi8mwHd7hCi12tknxkbh7qrCp3+eVrBOb3QzE9LjOsiOE/iBro+uqRI+4fhUEDYs/Ii57n59nPAjb9aMJy21bj20ZKqsKh8iQw0oWpQJF+eXNiGFTbXfVKDbeZlx6v3sEdUXCP2Ljg/92nPhz9bzaJhzslUcJhL4aX2I6i0BfttbKUA7/pc/D5sMya+XkYRusXY5VFuGF90MOTRN6zoSzAfxrdGSVaCpYNrHzD3sdsZ0e4ukJzC6GVJ63IH/ukF2BlGj0nckYVqr5Kg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qhVJSI/qi4/kLOB2+GwdSkwIkMbpb2sAbXVqTtoU3+w=;
+ b=RZHLb2OJsQItkMYPsJ8RM6EgFYfkdb25JBeuXs0OGc4jUhG0pFUVox+UC1OBTw4XBTUb7CnEENIpvE+uhcS5pM+Vi/vJoz9cC4HANAyvl19ZN1AFeDuuXMJh56ShOPnPXaGRLlecDMp40Gs/OzKaSbxctNsNBG/jKenZdWcQUy8R/hkLZ1stUUiC6QpRT3vEkdEMKYAtqd7JUcS2Sb6hklAjZOsmIHgR4lCxb+HHAIM0tsMgbWIWZREs4zHIiF9YotvRbDGV97URyuu1lyOpzhdESYyVcsgdeF4sNSCbsP/7BsKo4k/w4t8Yesd2pyrFyHxnCmPmChOOAGNskISTTQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qhVJSI/qi4/kLOB2+GwdSkwIkMbpb2sAbXVqTtoU3+w=;
+ b=tHk9DSAI/QVsDSN6nVugw9sscPYolF5n9K5OcPszkSA893roKL3hPltkdAz2Pkav8wISjq4vVD6vflgpiGufMpHQ7jzFjqURVYZuohtIlglXwtDy2rbe62DvYK0e/qPm1QyWjG2MHIZMqPrCT6bVXeee7y8pwEqCxQgNM7zfLyQ=
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by DS0PR12MB8217.namprd12.prod.outlook.com (2603:10b6:8:f1::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.26; Tue, 14 Mar
+ 2023 11:59:46 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::d23f:bb1:df95:3918]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::d23f:bb1:df95:3918%4]) with mapi id 15.20.6178.024; Tue, 14 Mar 2023
+ 11:59:46 +0000
+Message-ID: <0f81dac5-a0bb-9881-d418-85b2cb59b615@amd.com>
+Date: Tue, 14 Mar 2023 12:59:40 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.1
 Content-Language: en-US
-To: Rob Clark <robdclark@gmail.com>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-References: <20230311173513.1080397-1-robdclark@gmail.com>
- <20230311173513.1080397-3-robdclark@gmail.com>
- <b846101c-e6ef-2d3e-9db9-077003b72e57@amd.com>
- <CAF6AEGvH==PPLpdxim4Pi=Q7RA8Ou4NYxvYBW=N8sh9amEqQVQ@mail.gmail.com>
- <0bc78dea-72cb-cadf-5708-39c765f2b7a8@amd.com>
- <CAF6AEGv_UVPLpH4H5083FaQYTEkRz4AbyMq9441ZXZjVbuwH7w@mail.gmail.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <CAF6AEGv_UVPLpH4H5083FaQYTEkRz4AbyMq9441ZXZjVbuwH7w@mail.gmail.com>
+To: Paul Cercueil <paul@crapouillou.net>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Sumit Semwal <sumit.semwal@linaro.org>
+References: <20230314105257.17345-1-paul@crapouillou.net>
+ <20230314105257.17345-3-paul@crapouillou.net>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20230314105257.17345-3-paul@crapouillou.net>
+X-ClientProxiedBy: FR3P281CA0093.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a1::13) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|DS0PR12MB8217:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3fc2defa-853a-48fb-94f4-08db24839abc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	97kl/IrUyWSHpmNcvV/+TBxXdb4i+bmIRwbGS6RVQfwPxe6Qc5EMEgwNCLzY+s+YKkhhmpadm4BSGxSXzZM2HAlS8mSDI6ARLUCHkM9LvnA+AAZaJEoMjQGtyW2diE3sLWq2gzi2aTaog0cWayLI9X6jn1N6MHgrlFPorrMAFgq8o0Z96sGpcqAlU+0jh09KN4HAwzv9EsOmqOgbZGySwiC4jAAmMFcHEtcmn3w8H5bTmYPnrHBqprIDwure/B3CzXSP7ItsuzK5WR+fW9fr9QUi/OEvCIO8eVMfTNuwngnHMohpPzZoUJOAaiS5B6tSEYqYL2DP3vrPT2saIs9rQ/J2gOEaG198im27xp+YBtEI/P2gAMtbyxi7JyM/DK7sFw2HcR9SA7l4L8qxD9pkw+XiDU+L5a7kkywp9RTmCeX/ldjLxhWpacCgiBV5J/yCiAGzO05sqWcvUQeBttv9jZjK9J5pbTYDmRSH7Ia1YCgITCX6P5jnIRQ0Ye6tAQDpQln2y/uq4GuoSvP3riuS4u+c9O7FOZFYYfy6KAu9JiUh+ML6nKDThqkMx1edSe2Ns/DPFW/5Yr+YbVa26R1WGq0/LESn9k6gVBBOU7yxPM7KEwXbB+ohlDdBU+EB/4JVn9T/LOdoHTZOlD8wYlNO170hrXZT9mhUsF6QsqFfJ9zexKphbE4GOFa0EsXwyk0i2Y9fiiHubZe6WqxSh86gve6cwW+/SSFwVQdy7it70KY=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(39860400002)(396003)(136003)(366004)(346002)(376002)(451199018)(86362001)(36756003)(38100700002)(31696002)(2906002)(7416002)(30864003)(41300700001)(8936002)(5660300002)(4326008)(6512007)(2616005)(186003)(26005)(6506007)(83380400001)(316002)(110136005)(8676002)(66556008)(66476007)(66946007)(6666004)(6486002)(478600001)(31686004)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?T0NxNXd3N0hIWWNUeUZUVllYd3ZUWFppbm00VmZLbEdzQWZoOW1yVnAwbTdh?=
+ =?utf-8?B?S3ZyVFFnNDdscGdKMHdKREowR3ROK2pkV01VMkpUSVlicnc5RWY3R1Mra2RE?=
+ =?utf-8?B?eCs2b0NRM05HdDhWSi9GYnRTNUp3M3AyZkdzb1NKa2pWTlJtWDlxaHV2Vzdi?=
+ =?utf-8?B?VmVXS1I2WS83MjRJQ2RrSnpsVnR5ZXozaWJZbndVSC9vNitJU0pPUStGYW1m?=
+ =?utf-8?B?UHVtUU14ZDJtU1R5MXBiVXZBL2ZDcGhUeTBjY3hFUmMyS2tPbFNxQW9mVDJN?=
+ =?utf-8?B?VXBqcFpZT0N5UDd6aWhMMnFQbldrRHFtaTV1V3dIVnJ4S2k1SERjTXNLanBz?=
+ =?utf-8?B?Y01jZzJBeE4wSHJhWmRaL2hIRmJkdXNZSXUvUUhhcE4zZC9MUk45b0Y4MFB2?=
+ =?utf-8?B?Qmw4TzN3QnJyZTl3RXd5c0R0TWRTT3pZbTcxeGViWGpsRHFLWVllMGw4cUxK?=
+ =?utf-8?B?RmVkM04vMHZ3YmYyK0hEcGVlQjBOcFp1cTkrYk44Tk5PeVYzOG5VcjhpYU1X?=
+ =?utf-8?B?NjJ4bzA2b3plK21RWVR2KzVNcGx6Vnl6MC9sVys0V0VSOEE4bUpHcS9JZWhh?=
+ =?utf-8?B?U3hBV2NXNUdLclM0aU5KZlBiaTdrWFphZ2VQcG10ZnlYRG9NQktzSTYveHJy?=
+ =?utf-8?B?S3lnTzRRd1loY3RPTHRzeFdkWEQxdXJybTJyUnFwWDhCRkJpMXJoRzgyMHlL?=
+ =?utf-8?B?Y0dFRDB2RE9KekpzWURJWkNRVXZlNitseFJzMlVMSTVpaXo5NXl2K0JyRkxG?=
+ =?utf-8?B?VkVjRnduV3FRWW9lUGJPdTFwS054V1I0ZlRjTnAyVWpSZGVpWktSc1BYVmRT?=
+ =?utf-8?B?Zng2S0g3OFgzVzUxcnlNOXdxeW1DNkVtTWlKNVpXdGdtYkRxanBoZmFlZFMy?=
+ =?utf-8?B?SHMyWHdyQmxiYUFzYmQ0TDBUeDBjR1E1clFoNDNOcFpZNCtLdzV3SjBMVjFp?=
+ =?utf-8?B?LzR5MDRpMEtnQmlicUxUeFNQcTY2QTNnVHFKbFRhY1VSeTQ2TmsyOWx3bGVT?=
+ =?utf-8?B?aWY4KzBjbExsK3BoZHR0TFQ4dTJwM1BrejhIbHlVZ3NWeHhIVXBRMDlid3BP?=
+ =?utf-8?B?UWRRZ3E4YjYzUS9DLzM4RzczUjFxRXRqRDFWY3g5RUJubzgrQVpQWFJ1aFQx?=
+ =?utf-8?B?enhkd0JyTDdBeDlmaHQzcWFTT2dTcVJLVWpWQlgvVkMybVRiYXRPU1JZRTMw?=
+ =?utf-8?B?TnFyRDQ2bjZHK2dITHl2aGVwZ3BXQ0MyMnVSc1JkWHFXUmtreEh5NklqdUJ0?=
+ =?utf-8?B?ZDBPUG5GZ1ZzWDhuM2tYMUVXWGNNc1A0K25xdVJRTHJwOG9iY3FmREFiRllt?=
+ =?utf-8?B?M0VTenlIcmF2MjN1a3ByZ2thSzdDdkFrR3dWaWx1Y2NWUnRwUC9SSDN6Q1ZV?=
+ =?utf-8?B?NERrc1JrTVJVb1JKeFJTR0trOUV0NzN1MFgrdVNROEJCZ0xLWlppNmQzSGla?=
+ =?utf-8?B?YWRyR21Damdpem9RUFFTUTc0QlNPendac3BMNFlWeG1CREcrUDNaa3VCY0Ey?=
+ =?utf-8?B?R05XVHNacUh4Ujh2b1ZwRE52RlVlV0U3aXlFWDlOamRWd0NZaWZzeWd4WEpG?=
+ =?utf-8?B?d0MrVEQ5OGc0dWxaOGw2YXM5TVpnaS9CTUUxdmJNTXB2ZGhQeFE2bU1lVzdN?=
+ =?utf-8?B?KzhhZ1F3RUdBOWY5cWE0M1Y4OFVtb1NjTkovTVk4TXRDMC9MeFBQMFNWL2lG?=
+ =?utf-8?B?NktJei9KcG1tQW51ZkhNQWxnN1FLZlN2WmdtU2dGRG81cEZFdjQ4YkFqaGdn?=
+ =?utf-8?B?a0R2eVNZVzJ5SXdjYmlsU09PMCtZbmw2ZVRUcTBOaXA0TWlaOVgxRCtBcUFZ?=
+ =?utf-8?B?QnN4SkYzVFZ3MUdkRHFuTk5nR3NsSGh2QVo5RExvVkM2YTdiRCtvczBLNkFY?=
+ =?utf-8?B?WWZWYkN3WkRnSSs5WlBtVVhQWnE1ODZIMlhNVFBxV0QvblQ1REFjeWh3cXY1?=
+ =?utf-8?B?NWN3dGE1TXE0MUJ2cnNxVzhlZ3lVNlQ5U0NwSFhzRVpYYXBJRVdCNDdWaWNt?=
+ =?utf-8?B?VlcyeHQxZ2hQMnlDMVpITFBGVTF3bDMrb1pvR29STjdaemtYenR5c0JNVENi?=
+ =?utf-8?B?MVkzcmxwb3JjZ1VudDJNemxwcWJZRHdUcFB0U1RJVGx3QXpOYnhOSTV0VlQ4?=
+ =?utf-8?Q?L6TO713AtJH7QqSKiIDSCdv/e?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3fc2defa-853a-48fb-94f4-08db24839abc
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Mar 2023 11:59:46.0766
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: bs2rf00qRfOnKlfAVl7zvSg+KqhpG/V0Q2+6oKBMYpnkPDhr+/TSVveEH4e0fINt
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8217
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 26DCD3F0B2
-X-Spamd-Bar: --------
-X-Spamd-Result: default: False [-8.00 / 15.00];
-	REPLY(-4.00)[];
+X-Rspamd-Queue-Id: 51C723EC68
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	URIBL_BLOCKED(0.00)[linaro.org:email];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	TAGGED_FROM(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	RCVD_COUNT_THREE(0.00)[3];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,amd.com];
 	MIME_TRACE(0.00)[0:+];
+	FROM_EQ_ENVFROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.45:from]
-Message-ID-Hash: 5TWRMRPZWYJ452ZP4K27COQBMYTSAPIN
-X-Message-ID-Hash: 5TWRMRPZWYJ452ZP4K27COQBMYTSAPIN
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.988];
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[amd.com:+];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.237.89:from]
+Message-ID-Hash: 5S4YB6CXCQPYLJYX6PCQYSJW2NT7UOFE
+X-Message-ID-Hash: 5S4YB6CXCQPYLJYX6PCQYSJW2NT7UOFE
+X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: dri-devel@lists.freedesktop.org, "Tuikov, Luben" <Luben.Tuikov@amd.com>, linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, Rob Clark <robdclark@chromium.org>, Abhinav Kumar <quic_abhinavk@quicinc.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Sean Paul <sean@poorly.run>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>
+CC: michael.hennerich@analog.com, nuno.sa@analog.com, linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 2/2] drm/msm: Embed the hw_fence in msm_gem_submit
+Subject: [Linaro-mm-sig] Re: [PATCH 2/2] usb: gadget: functionfs: Add DMABUF import interface
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5TWRMRPZWYJ452ZP4K27COQBMYTSAPIN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5S4YB6CXCQPYLJYX6PCQYSJW2NT7UOFE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-QW0gMTMuMDMuMjMgdW0gMTc6NDMgc2NocmllYiBSb2IgQ2xhcms6DQo+IE9uIE1vbiwgTWFyIDEz
-LCAyMDIzIGF0IDk6MTXigK9BTSBDaHJpc3RpYW4gS8O2bmlnDQo+IDxjaHJpc3RpYW4ua29lbmln
-QGFtZC5jb20+IHdyb3RlOg0KPj4gQW0gMTMuMDMuMjMgdW0gMTU6NDUgc2NocmllYiBSb2IgQ2xh
-cms6DQo+Pj4gT24gTW9uLCBNYXIgMTMsIDIwMjMgYXQgMTI6MTnigK9BTSBDaHJpc3RpYW4gS8O2
-bmlnDQo+Pj4gPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4gd3JvdGU6DQo+Pj4+IEFtIDExLjAz
-LjIzIHVtIDE4OjM1IHNjaHJpZWIgUm9iIENsYXJrOg0KPj4+Pj4gRnJvbTogUm9iIENsYXJrIDxy
-b2JkY2xhcmtAY2hyb21pdW0ub3JnPg0KPj4+Pj4NCj4+Pj4+IEF2b2lkIGFsbG9jYXRpbmcgbWVt
-b3J5IGluIGpvYl9ydW4oKSBieSBlbWJlZGRpbmcgdGhlIGZlbmNlIGluIHRoZQ0KPj4+Pj4gc3Vi
-bWl0IG9iamVjdC4gIFNpbmNlIG1zbSBncHUgZmVuY2VzIGFyZSBhbHdheXMgMToxIHdpdGggbXNt
-X2dlbV9zdWJtaXQNCj4+Pj4+IHdlIGNhbiBqdXN0IHVzZSB0aGUgZmVuY2UncyByZWZjbnQgdG8g
-dHJhY2sgdGhlIHN1Ym1pdC4gIEFuZCBzaW5jZSB3ZQ0KPj4+Pj4gY2FuIGdldCB0aGUgZmVuY2Ug
-Y3R4IGZyb20gdGhlIHN1Ym1pdCB3ZSBjYW4ganVzdCBkcm9wIHRoZSBtc21fZmVuY2UNCj4+Pj4+
-IHN0cnVjdCBhbHRvZ2V0aGVyLiAgVGhpcyB1c2VzIHRoZSBuZXcgZG1hX2ZlbmNlX2luaXRfbm9y
-ZWYoKSB0byBkZWFsDQo+Pj4+PiB3aXRoIHRoZSBmYWN0IHRoYXQgdGhlIGZlbmNlJ3MgcmVmY250
-IGlzIGluaXRpYWxpemVkIHdoZW4gdGhlIHN1Ym1pdCBpcw0KPj4+Pj4gY3JlYXRlZCwgbG9uZyBi
-ZWZvcmUgam9iX3J1bigpLg0KPj4+PiBXZWxsIHRoaXMgaXMgYSB2ZXJ5IHZlcnkgYmFkIGlkZWEs
-IHdlIG1hZGUgdGhlIHNhbWUgbWlzdGFrZSB3aXRoIGFtZGdwdQ0KPj4+PiBhcyB3ZWxsLg0KPj4+
-Pg0KPj4+PiBJdCdzIHRydWUgdGhhdCB5b3Ugc2hvdWxkIG5vdCBoYXZlIGFueSBtZW1vcnkgYWxs
-b2NhdGlvbiBpbiB5b3VyIHJ1bl9qb2INCj4+Pj4gY2FsbGJhY2ssIGJ1dCB5b3UgY291bGQgYWxz
-byBqdXN0IGFsbG9jYXRlIHRoZSBodyBmZW5jZSBkdXJpbmcgam9iDQo+Pj4+IGNyZWF0aW9uIGFu
-ZCBpbml0aWFsaXppbmcgaXQgbGF0ZXIgb24uDQo+Pj4+DQo+Pj4+IEkndmUgc3VnZ2VzdGVkIHRv
-IGVtYmVkIHRoZSBmZW5jZSBpbnRvIHRoZSBqb2IgZm9yIGFtZGdwdSBiZWNhdXNlIHNvbWUNCj4+
-Pj4gcGVvcGxlIGluc2lzdGVkIG9mIHJlLXN1Ym1pdHRpbmcgam9icyBkdXJpbmcgdGltZW91dCBh
-bmQgR1BVIHJlc2V0LiBUaGlzDQo+Pj4+IHR1cm5lZCBpbnRvIGEgbmlnaHRtYXJlIHdpdGggdG9u
-cyBvZiBidWcgZml4ZXMgb24gdG9wIG9mIGJ1ZyBmaXhlcyBvbg0KPj4+PiB0b3Agb2YgYnVnIGZp
-eGVzIGJlY2F1c2UgaXQgbWVzc2VzIHVwIHRoZSBqb2IgYW5kIGZlbmNlIGxpZmV0aW1lIGFzDQo+
-Pj4+IGRlZmluZWQgYnkgdGhlIERSTSBzY2hlZHVsZXIgYW5kIERNQS1idWYgZnJhbWV3b3JrLg0K
-Pj4+Pg0KPj4+PiBMdWJlbiBpcyBjdXJyZW50bHkgd29ya2luZyBvbiBjbGVhbmluZyBhbGwgdGhp
-cyB1cC4NCj4+PiBUaGlzIGFjdHVhbGx5IHNob3VsZG4ndCBiZSBhIHByb2JsZW0gd2l0aCBtc20s
-IGFzIHRoZSBmZW5jZSBkb2Vzbid0DQo+Pj4gY2hhbmdlIGlmIHRoZXJlIGlzIGEgZ3B1IHJlc2V0
-LiAgV2Ugc2ltcGx5IHNpZ25hbCB0aGUgZmVuY2UgZm9yIHRoZQ0KPj4+IG9mZmVuZGluZyBqb2Is
-IHJlc2V0IHRoZSBHUFUsIGFuZCByZS1wbGF5IHRoZSByZW1haW5pbmcgaW4tZmxpZ2h0IGpvYnMN
-Cj4+PiAoaWUuIHRoaW5ncyB0aGF0IGFscmVhZHkgaGFkIHRoZWlyIGpvYl9ydW4oKSBjYWxsZWQp
-IHdpdGggdGhlIG9yaWdpbmFsDQo+Pj4gZmVuY2VzLiAgKFdlIGRvbid0IHVzZSBncHUgc2NoZWQn
-cyByZXNldC90aW1lb3V0IGhhbmRsaW5nLi4gd2hlbiBJDQo+Pj4gbWlncmF0ZWQgdG8gZ3B1IHNj
-aGVkIEkga2VwdCBvdXIgZXhpc3RpbmcgaGFuZ2NoZWNrL3JlY292ZXJ5DQo+Pj4gbWVjaGFuaXNt
-LikNCj4+IFRoYXQgc291bmRzIG11Y2ggc2FuZXIgdGhhbiB3aGF0IHdlIGRpZC4NCj4+DQo+PiBT
-byB5b3UgYmFzaWNhbGx5IG5lZWQgdGhlIGRtYV9mZW5jZSByZWZlcmVuY2UgY291bnRpbmcgc2Vw
-YXJhdGUgdG8NCj4+IGluaXRpYWxpemluZyB0aGUgb3RoZXIgZG1hX2ZlbmNlIGZpZWxkcz8NCj4g
-eWVhaCwgdGhhdCB3YXMgdGhlIGlkZWENCj4NCj4+IFdoYXQgd291bGQgaGFwcGVuIGlmIGEgZG1h
-X2ZlbmNlIHdoaWNoIGlzIG5vdCBjb21wbGV0ZWx5IGluaXRpYWxpemVkDQo+PiBnZXRzIGZyZWVk
-PyBFLmcuIGJlY2F1c2Ugb2YgYW4gZXJyb3I/DQo+IGhtbSwgeWVzLCB0aGlzIHdvdWxkIGJlIGEg
-cHJvYmxlbSBzaW5jZSBvcHMtPnJlbGVhc2UgaXMgbm90IHNldCB5ZXQuLg0KPiBhbmQgSSdtIHJl
-bHlpbmcgb24gdGhhdCB0byBmcmVlIHRoZSBzdWJtaXQNCj4NCj4+IFdvdWxkIGl0IGJlIHRvIG11
-Y2ggdG8ganVzdCBrZWVwIHRoZSBoYW5kbGluZyBhcyBpdCBpcyB0b2RheSBhbmQgb25seQ0KPj4g
-YWxsb2NhdGUgdGhlIGRtYV9mZW5jZSB3aXRob3V0IGluaXRpYWxpemluZyBpdD8gSWYgbmVjZXNz
-YXJ5IHdlIGNvdWxkDQo+PiBlYXNpbHkgYWRkIGEgZG1hX2ZlbmNlX2lzX2luaXRpYWxpemVkKCkg
-ZnVuY3Rpb24gd2hpY2ggY2hlY2tzIHRoZQ0KPj4gZmVuY2Vfb3BzIGZvciBOVUxMLg0KPiBZZWFo
-LCB0aGF0IHdvdWxkIGFsc28gYmUgcG9zc2libGUNCj4NCj4gSSBndWVzcyB3ZSBjb3VsZCBzcGxp
-dCBjcmVhdGlvbiBvZiB0aGUgZmVuY2UgKGluaXRpYWxpemluZyBvcHMsDQo+IHJlZmNvdW50KSBh
-bmQgImFybWluZyIgaXQgbGF0ZXIgd2hlbiB0aGUgc2Vxbm8gaXMga25vd24/ICBCdXQgbWF5YmUN
-Cj4gdGhhdCBpcyBnb2luZyB0byB0b28gbWFueSBsZW5ndGhzIHRvIGF2b2lkIGEgc2VwYXJhdGUg
-YWxsb2NhdGlvbi4uDQoNCkkgd291bGQgcmVhbGx5IGxpa2UgdG8gYXZvaWQgdGhhdC4gSXQgZ2l2
-ZSBwZW9wbGUgdGhlIG9wcG9ydHVuaXR5IG9uY2UgDQptb3JlIHRvIGRvIG11bHRpcGxlICJhcm0i
-IG9wZXJhdGlvbnMgb24gdGhlIHNhbWUgZmVuY2UsIGFuZCB0aGF0IHdhcyBhIA0KcmVhbGx5IGJh
-ZCBpZGVhIGZvciB1cy4NCg0KU28geWVhaCBpZiB0aGF0J3MganVzdCB0byBhdm9pZCB0aGUgZXh0
-cmEgYWxsb2NhdGlvbiBpdCdzIHByb2JhYmx5IG5vdCANCndvcnRoIGl0Lg0KDQpDaHJpc3RpYW4u
-DQoNCj4NCj4gQlIsDQo+IC1SDQo+DQo+PiBUaGFua3MsDQo+PiBDaHJpc3RpYW4uDQo+Pg0KPj4+
-IEJSLA0KPj4+IC1SDQo+Pj4NCj4+Pj4gUmVnYXJkcywNCj4+Pj4gQ2hyaXN0aWFuLg0KPj4+Pg0K
-Pj4+Pj4gU2lnbmVkLW9mZi1ieTogUm9iIENsYXJrIDxyb2JkY2xhcmtAY2hyb21pdW0ub3JnPg0K
-Pj4+Pj4gLS0tDQo+Pj4+PiBOb3RlIHRoYXQgdGhpcyBhcHBsaWVzIG9uIHRvcCBvZiBodHRwczov
-L3BhdGNod29yay5mcmVlZGVza3RvcC5vcmcvc2VyaWVzLzkzMDM1Lw0KPj4+Pj4gb3V0IG9mIGNv
-bnZlbmllbmNlIGZvciBteXNlbGYsIGJ1dCBJIGNhbiByZS13b3JrIGl0IHRvIGdvIGJlZm9yZQ0K
-Pj4+Pj4gZGVwZW5kaW5nIG9uIHRoZSBvcmRlciB0aGF0IHRoaW5ncyBsYW5kLg0KPj4+Pj4NCj4+
-Pj4+ICAgICBkcml2ZXJzL2dwdS9kcm0vbXNtL21zbV9mZW5jZS5jICAgICAgfCA0NSArKysrKysr
-KysrKy0tLS0tLS0tLS0tLS0tLS0tDQo+Pj4+PiAgICAgZHJpdmVycy9ncHUvZHJtL21zbS9tc21f
-ZmVuY2UuaCAgICAgIHwgIDIgKy0NCj4+Pj4+ICAgICBkcml2ZXJzL2dwdS9kcm0vbXNtL21zbV9n
-ZW0uaCAgICAgICAgfCAxMCArKystLS0tDQo+Pj4+PiAgICAgZHJpdmVycy9ncHUvZHJtL21zbS9t
-c21fZ2VtX3N1Ym1pdC5jIHwgIDggKystLS0NCj4+Pj4+ICAgICBkcml2ZXJzL2dwdS9kcm0vbXNt
-L21zbV9ncHUuYyAgICAgICAgfCAgNCArLS0NCj4+Pj4+ICAgICBkcml2ZXJzL2dwdS9kcm0vbXNt
-L21zbV9yaW5nYnVmZmVyLmMgfCAgNCArLS0NCj4+Pj4+ICAgICA2IGZpbGVzIGNoYW5nZWQsIDMx
-IGluc2VydGlvbnMoKyksIDQyIGRlbGV0aW9ucygtKQ0KPj4+Pj4NCj4+Pj4+IGRpZmYgLS1naXQg
-YS9kcml2ZXJzL2dwdS9kcm0vbXNtL21zbV9mZW5jZS5jIGIvZHJpdmVycy9ncHUvZHJtL21zbS9t
-c21fZmVuY2UuYw0KPj4+Pj4gaW5kZXggNTFiNDYxZjMyMTAzLi41MWY5ZjFmMGNiNjYgMTAwNjQ0
-DQo+Pj4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vbXNtL21zbV9mZW5jZS5jDQo+Pj4+PiArKysg
-Yi9kcml2ZXJzL2dwdS9kcm0vbXNtL21zbV9mZW5jZS5jDQo+Pj4+PiBAQCAtMTAzLDE0ICsxMDMs
-OSBAQCB2b2lkIG1zbV91cGRhdGVfZmVuY2Uoc3RydWN0IG1zbV9mZW5jZV9jb250ZXh0ICpmY3R4
-LCB1aW50MzJfdCBmZW5jZSkNCj4+Pj4+ICAgICAgICAgc3Bpbl91bmxvY2tfaXJxcmVzdG9yZSgm
-ZmN0eC0+c3BpbmxvY2ssIGZsYWdzKTsNCj4+Pj4+ICAgICB9DQo+Pj4+Pg0KPj4+Pj4gLXN0cnVj
-dCBtc21fZmVuY2Ugew0KPj4+Pj4gLSAgICAgc3RydWN0IGRtYV9mZW5jZSBiYXNlOw0KPj4+Pj4g
-LSAgICAgc3RydWN0IG1zbV9mZW5jZV9jb250ZXh0ICpmY3R4Ow0KPj4+Pj4gLX07DQo+Pj4+PiAt
-DQo+Pj4+PiAtc3RhdGljIGlubGluZSBzdHJ1Y3QgbXNtX2ZlbmNlICp0b19tc21fZmVuY2Uoc3Ry
-dWN0IGRtYV9mZW5jZSAqZmVuY2UpDQo+Pj4+PiArc3RhdGljIGlubGluZSBzdHJ1Y3QgbXNtX2dl
-bV9zdWJtaXQgKmZlbmNlX3RvX3N1Ym1pdChzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSkNCj4+Pj4+
-ICAgICB7DQo+Pj4+PiAtICAgICByZXR1cm4gY29udGFpbmVyX29mKGZlbmNlLCBzdHJ1Y3QgbXNt
-X2ZlbmNlLCBiYXNlKTsNCj4+Pj4+ICsgICAgIHJldHVybiBjb250YWluZXJfb2YoZmVuY2UsIHN0
-cnVjdCBtc21fZ2VtX3N1Ym1pdCwgaHdfZmVuY2UpOw0KPj4+Pj4gICAgIH0NCj4+Pj4+DQo+Pj4+
-PiAgICAgc3RhdGljIGNvbnN0IGNoYXIgKm1zbV9mZW5jZV9nZXRfZHJpdmVyX25hbWUoc3RydWN0
-IGRtYV9mZW5jZSAqZmVuY2UpDQo+Pj4+PiBAQCAtMTIwLDIwICsxMTUsMjAgQEAgc3RhdGljIGNv
-bnN0IGNoYXIgKm1zbV9mZW5jZV9nZXRfZHJpdmVyX25hbWUoc3RydWN0IGRtYV9mZW5jZSAqZmVu
-Y2UpDQo+Pj4+Pg0KPj4+Pj4gICAgIHN0YXRpYyBjb25zdCBjaGFyICptc21fZmVuY2VfZ2V0X3Rp
-bWVsaW5lX25hbWUoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UpDQo+Pj4+PiAgICAgew0KPj4+Pj4g
-LSAgICAgc3RydWN0IG1zbV9mZW5jZSAqZiA9IHRvX21zbV9mZW5jZShmZW5jZSk7DQo+Pj4+PiAt
-ICAgICByZXR1cm4gZi0+ZmN0eC0+bmFtZTsNCj4+Pj4+ICsgICAgIHN0cnVjdCBtc21fZ2VtX3N1
-Ym1pdCAqc3VibWl0ID0gZmVuY2VfdG9fc3VibWl0KGZlbmNlKTsNCj4+Pj4+ICsgICAgIHJldHVy
-biBzdWJtaXQtPnJpbmctPmZjdHgtPm5hbWU7DQo+Pj4+PiAgICAgfQ0KPj4+Pj4NCj4+Pj4+ICAg
-ICBzdGF0aWMgYm9vbCBtc21fZmVuY2Vfc2lnbmFsZWQoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2Up
-DQo+Pj4+PiAgICAgew0KPj4+Pj4gLSAgICAgc3RydWN0IG1zbV9mZW5jZSAqZiA9IHRvX21zbV9m
-ZW5jZShmZW5jZSk7DQo+Pj4+PiAtICAgICByZXR1cm4gbXNtX2ZlbmNlX2NvbXBsZXRlZChmLT5m
-Y3R4LCBmLT5iYXNlLnNlcW5vKTsNCj4+Pj4+ICsgICAgIHN0cnVjdCBtc21fZ2VtX3N1Ym1pdCAq
-c3VibWl0ID0gZmVuY2VfdG9fc3VibWl0KGZlbmNlKTsNCj4+Pj4+ICsgICAgIHJldHVybiBtc21f
-ZmVuY2VfY29tcGxldGVkKHN1Ym1pdC0+cmluZy0+ZmN0eCwgZmVuY2UtPnNlcW5vKTsNCj4+Pj4+
-ICAgICB9DQo+Pj4+Pg0KPj4+Pj4gICAgIHN0YXRpYyB2b2lkIG1zbV9mZW5jZV9zZXRfZGVhZGxp
-bmUoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UsIGt0aW1lX3QgZGVhZGxpbmUpDQo+Pj4+PiAgICAg
-ew0KPj4+Pj4gLSAgICAgc3RydWN0IG1zbV9mZW5jZSAqZiA9IHRvX21zbV9mZW5jZShmZW5jZSk7
-DQo+Pj4+PiAtICAgICBzdHJ1Y3QgbXNtX2ZlbmNlX2NvbnRleHQgKmZjdHggPSBmLT5mY3R4Ow0K
-Pj4+Pj4gKyAgICAgc3RydWN0IG1zbV9nZW1fc3VibWl0ICpzdWJtaXQgPSBmZW5jZV90b19zdWJt
-aXQoZmVuY2UpOw0KPj4+Pj4gKyAgICAgc3RydWN0IG1zbV9mZW5jZV9jb250ZXh0ICpmY3R4ID0g
-c3VibWl0LT5yaW5nLT5mY3R4Ow0KPj4+Pj4gICAgICAgICB1bnNpZ25lZCBsb25nIGZsYWdzOw0K
-Pj4+Pj4gICAgICAgICBrdGltZV90IG5vdzsNCj4+Pj4+DQo+Pj4+PiBAQCAtMTY1LDI2ICsxNjAs
-MjIgQEAgc3RhdGljIHZvaWQgbXNtX2ZlbmNlX3NldF9kZWFkbGluZShzdHJ1Y3QgZG1hX2ZlbmNl
-ICpmZW5jZSwga3RpbWVfdCBkZWFkbGluZSkNCj4+Pj4+ICAgICAgICAgc3Bpbl91bmxvY2tfaXJx
-cmVzdG9yZSgmZmN0eC0+c3BpbmxvY2ssIGZsYWdzKTsNCj4+Pj4+ICAgICB9DQo+Pj4+Pg0KPj4+
-Pj4gK3N0YXRpYyB2b2lkIG1zbV9mZW5jZV9yZWxlYXNlKHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNl
-KQ0KPj4+Pj4gK3sNCj4+Pj4+ICsgICAgIF9fbXNtX2dlbV9zdWJtaXRfZGVzdHJveShmZW5jZV90
-b19zdWJtaXQoZmVuY2UpKTsNCj4+Pj4+ICt9DQo+Pj4+PiArDQo+Pj4+PiAgICAgc3RhdGljIGNv
-bnN0IHN0cnVjdCBkbWFfZmVuY2Vfb3BzIG1zbV9mZW5jZV9vcHMgPSB7DQo+Pj4+PiAgICAgICAg
-IC5nZXRfZHJpdmVyX25hbWUgPSBtc21fZmVuY2VfZ2V0X2RyaXZlcl9uYW1lLA0KPj4+Pj4gICAg
-ICAgICAuZ2V0X3RpbWVsaW5lX25hbWUgPSBtc21fZmVuY2VfZ2V0X3RpbWVsaW5lX25hbWUsDQo+
-Pj4+PiAgICAgICAgIC5zaWduYWxlZCA9IG1zbV9mZW5jZV9zaWduYWxlZCwNCj4+Pj4+ICAgICAg
-ICAgLnNldF9kZWFkbGluZSA9IG1zbV9mZW5jZV9zZXRfZGVhZGxpbmUsDQo+Pj4+PiArICAgICAu
-cmVsZWFzZSA9IG1zbV9mZW5jZV9yZWxlYXNlLA0KPj4+Pj4gICAgIH07DQo+Pj4+Pg0KPj4+Pj4g
-LXN0cnVjdCBkbWFfZmVuY2UgKg0KPj4+Pj4gLW1zbV9mZW5jZV9hbGxvYyhzdHJ1Y3QgbXNtX2Zl
-bmNlX2NvbnRleHQgKmZjdHgpDQo+Pj4+PiArdm9pZA0KPj4+Pj4gK21zbV9mZW5jZV9pbml0KHN0
-cnVjdCBtc21fZmVuY2VfY29udGV4dCAqZmN0eCwgc3RydWN0IGRtYV9mZW5jZSAqZikNCj4+Pj4+
-ICAgICB7DQo+Pj4+PiAtICAgICBzdHJ1Y3QgbXNtX2ZlbmNlICpmOw0KPj4+Pj4gLQ0KPj4+Pj4g
-LSAgICAgZiA9IGt6YWxsb2Moc2l6ZW9mKCpmKSwgR0ZQX0tFUk5FTCk7DQo+Pj4+PiAtICAgICBp
-ZiAoIWYpDQo+Pj4+PiAtICAgICAgICAgICAgIHJldHVybiBFUlJfUFRSKC1FTk9NRU0pOw0KPj4+
-Pj4gLQ0KPj4+Pj4gLSAgICAgZi0+ZmN0eCA9IGZjdHg7DQo+Pj4+PiAtDQo+Pj4+PiAtICAgICBk
-bWFfZmVuY2VfaW5pdCgmZi0+YmFzZSwgJm1zbV9mZW5jZV9vcHMsICZmY3R4LT5zcGlubG9jaywN
-Cj4+Pj4+IC0gICAgICAgICAgICAgICAgICAgIGZjdHgtPmNvbnRleHQsICsrZmN0eC0+bGFzdF9m
-ZW5jZSk7DQo+Pj4+PiAtDQo+Pj4+PiAtICAgICByZXR1cm4gJmYtPmJhc2U7DQo+Pj4+PiArICAg
-ICBkbWFfZmVuY2VfaW5pdF9ub3JlZihmLCAmbXNtX2ZlbmNlX29wcywgJmZjdHgtPnNwaW5sb2Nr
-LA0KPj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgZmN0eC0+Y29udGV4dCwgKytmY3R4
-LT5sYXN0X2ZlbmNlKTsNCj4+Pj4+ICAgICB9DQo+Pj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9n
-cHUvZHJtL21zbS9tc21fZmVuY2UuaCBiL2RyaXZlcnMvZ3B1L2RybS9tc20vbXNtX2ZlbmNlLmgN
-Cj4+Pj4+IGluZGV4IGNkYWViZmI5NGY1Yy4uOGZjYTM3ZTk3NzNiIDEwMDY0NA0KPj4+Pj4gLS0t
-IGEvZHJpdmVycy9ncHUvZHJtL21zbS9tc21fZmVuY2UuaA0KPj4+Pj4gKysrIGIvZHJpdmVycy9n
-cHUvZHJtL21zbS9tc21fZmVuY2UuaA0KPj4+Pj4gQEAgLTgxLDcgKzgxLDcgQEAgdm9pZCBtc21f
-ZmVuY2VfY29udGV4dF9mcmVlKHN0cnVjdCBtc21fZmVuY2VfY29udGV4dCAqZmN0eCk7DQo+Pj4+
-PiAgICAgYm9vbCBtc21fZmVuY2VfY29tcGxldGVkKHN0cnVjdCBtc21fZmVuY2VfY29udGV4dCAq
-ZmN0eCwgdWludDMyX3QgZmVuY2UpOw0KPj4+Pj4gICAgIHZvaWQgbXNtX3VwZGF0ZV9mZW5jZShz
-dHJ1Y3QgbXNtX2ZlbmNlX2NvbnRleHQgKmZjdHgsIHVpbnQzMl90IGZlbmNlKTsNCj4+Pj4+DQo+
-Pj4+PiAtc3RydWN0IGRtYV9mZW5jZSAqIG1zbV9mZW5jZV9hbGxvYyhzdHJ1Y3QgbXNtX2ZlbmNl
-X2NvbnRleHQgKmZjdHgpOw0KPj4+Pj4gK3ZvaWQgbXNtX2ZlbmNlX2luaXQoc3RydWN0IG1zbV9m
-ZW5jZV9jb250ZXh0ICpmY3R4LCBzdHJ1Y3QgZG1hX2ZlbmNlICpmKTsNCj4+Pj4+DQo+Pj4+PiAg
-ICAgc3RhdGljIGlubGluZSBib29sDQo+Pj4+PiAgICAgZmVuY2VfYmVmb3JlKHVpbnQzMl90IGEs
-IHVpbnQzMl90IGIpDQo+Pj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL21zbS9tc21f
-Z2VtLmggYi9kcml2ZXJzL2dwdS9kcm0vbXNtL21zbV9nZW0uaA0KPj4+Pj4gaW5kZXggYzQ4NDRj
-ZjNhNTg1Li5lMDZhZmVkOTlkNWIgMTAwNjQ0DQo+Pj4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0v
-bXNtL21zbV9nZW0uaA0KPj4+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL21zbS9tc21fZ2VtLmgN
-Cj4+Pj4+IEBAIC0yNTksMTAgKzI1OSwxMCBAQCBzdHJ1Y3QgbXNtX2dlbV9zdWJtaXQgew0KPj4+
-Pj4gICAgICAgICBzdHJ1Y3Qgd3dfYWNxdWlyZV9jdHggdGlja2V0Ow0KPj4+Pj4gICAgICAgICB1
-aW50MzJfdCBzZXFubzsgICAgICAgICAvKiBTZXF1ZW5jZSBudW1iZXIgb2YgdGhlIHN1Ym1pdCBv
-biB0aGUgcmluZyAqLw0KPj4+Pj4NCj4+Pj4+IC0gICAgIC8qIEh3IGZlbmNlLCB3aGljaCBpcyBj
-cmVhdGVkIHdoZW4gdGhlIHNjaGVkdWxlciBleGVjdXRlcyB0aGUgam9iLCBhbmQNCj4+Pj4+ICsg
-ICAgIC8qIEh3IGZlbmNlLCB3aGljaCBpcyBpbml0aWFsaXplZCB3aGVuIHRoZSBzY2hlZHVsZXIg
-ZXhlY3V0ZXMgdGhlIGpvYiwgYW5kDQo+Pj4+PiAgICAgICAgICAqIGlzIHNpZ25hbGVkIHdoZW4g
-dGhlIGh3IGZpbmlzaGVzICh2aWEgc2Vxbm8gd3JpdGUgZnJvbSBjbWRzdHJlYW0pDQo+Pj4+PiAg
-ICAgICAgICAqLw0KPj4+Pj4gLSAgICAgc3RydWN0IGRtYV9mZW5jZSAqaHdfZmVuY2U7DQo+Pj4+
-PiArICAgICBzdHJ1Y3QgZG1hX2ZlbmNlIGh3X2ZlbmNlOw0KPj4+Pj4NCj4+Pj4+ICAgICAgICAg
-LyogVXNlcnNwYWNlIHZpc2libGUgZmVuY2UsIHdoaWNoIGlzIHNpZ25hbGVkIGJ5IHRoZSBzY2hl
-ZHVsZXIgYWZ0ZXINCj4+Pj4+ICAgICAgICAgICogdGhlIGh3X2ZlbmNlIGlzIHNpZ25hbGVkLg0K
-Pj4+Pj4gQEAgLTMwOSwxNiArMzA5LDE2IEBAIHN0YXRpYyBpbmxpbmUgc3RydWN0IG1zbV9nZW1f
-c3VibWl0ICp0b19tc21fc3VibWl0KHN0cnVjdCBkcm1fc2NoZWRfam9iICpqb2IpDQo+Pj4+PiAg
-ICAgICAgIHJldHVybiBjb250YWluZXJfb2Yoam9iLCBzdHJ1Y3QgbXNtX2dlbV9zdWJtaXQsIGJh
-c2UpOw0KPj4+Pj4gICAgIH0NCj4+Pj4+DQo+Pj4+PiAtdm9pZCBfX21zbV9nZW1fc3VibWl0X2Rl
-c3Ryb3koc3RydWN0IGtyZWYgKmtyZWYpOw0KPj4+Pj4gK3ZvaWQgX19tc21fZ2VtX3N1Ym1pdF9k
-ZXN0cm95KHN0cnVjdCBtc21fZ2VtX3N1Ym1pdCAqc3VibWl0KTsNCj4+Pj4+DQo+Pj4+PiAgICAg
-c3RhdGljIGlubGluZSB2b2lkIG1zbV9nZW1fc3VibWl0X2dldChzdHJ1Y3QgbXNtX2dlbV9zdWJt
-aXQgKnN1Ym1pdCkNCj4+Pj4+ICAgICB7DQo+Pj4+PiAtICAgICBrcmVmX2dldCgmc3VibWl0LT5y
-ZWYpOw0KPj4+Pj4gKyAgICAgZG1hX2ZlbmNlX2dldCgmc3VibWl0LT5od19mZW5jZSk7DQo+Pj4+
-PiAgICAgfQ0KPj4+Pj4NCj4+Pj4+ICAgICBzdGF0aWMgaW5saW5lIHZvaWQgbXNtX2dlbV9zdWJt
-aXRfcHV0KHN0cnVjdCBtc21fZ2VtX3N1Ym1pdCAqc3VibWl0KQ0KPj4+Pj4gICAgIHsNCj4+Pj4+
-IC0gICAgIGtyZWZfcHV0KCZzdWJtaXQtPnJlZiwgX19tc21fZ2VtX3N1Ym1pdF9kZXN0cm95KTsN
-Cj4+Pj4+ICsgICAgIGRtYV9mZW5jZV9wdXQoJnN1Ym1pdC0+aHdfZmVuY2UpOw0KPj4+Pj4gICAg
-IH0NCj4+Pj4+DQo+Pj4+PiAgICAgdm9pZCBtc21fc3VibWl0X3JldGlyZShzdHJ1Y3QgbXNtX2dl
-bV9zdWJtaXQgKnN1Ym1pdCk7DQo+Pj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL21z
-bS9tc21fZ2VtX3N1Ym1pdC5jIGIvZHJpdmVycy9ncHUvZHJtL21zbS9tc21fZ2VtX3N1Ym1pdC5j
-DQo+Pj4+PiBpbmRleCBiZTRiZjc3MTAzY2QuLjUyMmM4YzgyZTgyNyAxMDA2NDQNCj4+Pj4+IC0t
-LSBhL2RyaXZlcnMvZ3B1L2RybS9tc20vbXNtX2dlbV9zdWJtaXQuYw0KPj4+Pj4gKysrIGIvZHJp
-dmVycy9ncHUvZHJtL21zbS9tc21fZ2VtX3N1Ym1pdC5jDQo+Pj4+PiBAQCAtNDcsNyArNDcsNyBA
-QCBzdGF0aWMgc3RydWN0IG1zbV9nZW1fc3VibWl0ICpzdWJtaXRfY3JlYXRlKHN0cnVjdCBkcm1f
-ZGV2aWNlICpkZXYsDQo+Pj4+PiAgICAgICAgICAgICAgICAgcmV0dXJuIEVSUl9QVFIocmV0KTsN
-Cj4+Pj4+ICAgICAgICAgfQ0KPj4+Pj4NCj4+Pj4+IC0gICAgIGtyZWZfaW5pdCgmc3VibWl0LT5y
-ZWYpOw0KPj4+Pj4gKyAgICAga3JlZl9pbml0KCZzdWJtaXQtPmh3X2ZlbmNlLnJlZmNvdW50KTsN
-Cj4+Pj4+ICAgICAgICAgc3VibWl0LT5kZXYgPSBkZXY7DQo+Pj4+PiAgICAgICAgIHN1Ym1pdC0+
-YXNwYWNlID0gcXVldWUtPmN0eC0+YXNwYWNlOw0KPj4+Pj4gICAgICAgICBzdWJtaXQtPmdwdSA9
-IGdwdTsNCj4+Pj4+IEBAIC02NSwxMCArNjUsOSBAQCBzdGF0aWMgc3RydWN0IG1zbV9nZW1fc3Vi
-bWl0ICpzdWJtaXRfY3JlYXRlKHN0cnVjdCBkcm1fZGV2aWNlICpkZXYsDQo+Pj4+PiAgICAgICAg
-IHJldHVybiBzdWJtaXQ7DQo+Pj4+PiAgICAgfQ0KPj4+Pj4NCj4+Pj4+IC12b2lkIF9fbXNtX2dl
-bV9zdWJtaXRfZGVzdHJveShzdHJ1Y3Qga3JlZiAqa3JlZikNCj4+Pj4+ICsvKiBDYWxsZWQgd2hl
-biB0aGUgaHdfZmVuY2UgaXMgZGVzdHJveWVkOiAqLw0KPj4+Pj4gK3ZvaWQgX19tc21fZ2VtX3N1
-Ym1pdF9kZXN0cm95KHN0cnVjdCBtc21fZ2VtX3N1Ym1pdCAqc3VibWl0KQ0KPj4+Pj4gICAgIHsN
-Cj4+Pj4+IC0gICAgIHN0cnVjdCBtc21fZ2VtX3N1Ym1pdCAqc3VibWl0ID0NCj4+Pj4+IC0gICAg
-ICAgICAgICAgICAgICAgICBjb250YWluZXJfb2Yoa3JlZiwgc3RydWN0IG1zbV9nZW1fc3VibWl0
-LCByZWYpOw0KPj4+Pj4gICAgICAgICB1bnNpZ25lZCBpOw0KPj4+Pj4NCj4+Pj4+ICAgICAgICAg
-aWYgKHN1Ym1pdC0+ZmVuY2VfaWQpIHsNCj4+Pj4+IEBAIC03OCw3ICs3Nyw2IEBAIHZvaWQgX19t
-c21fZ2VtX3N1Ym1pdF9kZXN0cm95KHN0cnVjdCBrcmVmICprcmVmKQ0KPj4+Pj4gICAgICAgICB9
-DQo+Pj4+Pg0KPj4+Pj4gICAgICAgICBkbWFfZmVuY2VfcHV0KHN1Ym1pdC0+dXNlcl9mZW5jZSk7
-DQo+Pj4+PiAtICAgICBkbWFfZmVuY2VfcHV0KHN1Ym1pdC0+aHdfZmVuY2UpOw0KPj4+Pj4NCj4+
-Pj4+ICAgICAgICAgcHV0X3BpZChzdWJtaXQtPnBpZCk7DQo+Pj4+PiAgICAgICAgIG1zbV9zdWJt
-aXRxdWV1ZV9wdXQoc3VibWl0LT5xdWV1ZSk7DQo+Pj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9n
-cHUvZHJtL21zbS9tc21fZ3B1LmMgYi9kcml2ZXJzL2dwdS9kcm0vbXNtL21zbV9ncHUuYw0KPj4+
-Pj4gaW5kZXggMzgwMjQ5NTAwMzI1Li5hODJkMTFkZDVmY2YgMTAwNjQ0DQo+Pj4+PiAtLS0gYS9k
-cml2ZXJzL2dwdS9kcm0vbXNtL21zbV9ncHUuYw0KPj4+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJt
-L21zbS9tc21fZ3B1LmMNCj4+Pj4+IEBAIC03MTYsNyArNzE2LDcgQEAgc3RhdGljIHZvaWQgcmV0
-aXJlX3N1Ym1pdHMoc3RydWN0IG1zbV9ncHUgKmdwdSkNCj4+Pj4+ICAgICAgICAgICAgICAgICAg
-ICAgICAgICAqIGJlZW4gc2lnbmFsbGVkLCB0aGVuIGxhdGVyIHN1Ym1pdHMgYXJlIG5vdCBzaWdu
-YWxsZWQNCj4+Pj4+ICAgICAgICAgICAgICAgICAgICAgICAgICAqIGVpdGhlciwgc28gd2UgYXJl
-IGFsc28gZG9uZS4NCj4+Pj4+ICAgICAgICAgICAgICAgICAgICAgICAgICAqLw0KPj4+Pj4gLSAg
-ICAgICAgICAgICAgICAgICAgIGlmIChzdWJtaXQgJiYgZG1hX2ZlbmNlX2lzX3NpZ25hbGVkKHN1
-Ym1pdC0+aHdfZmVuY2UpKSB7DQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgaWYgKHN1Ym1p
-dCAmJiBkbWFfZmVuY2VfaXNfc2lnbmFsZWQoJnN1Ym1pdC0+aHdfZmVuY2UpKSB7DQo+Pj4+PiAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldGlyZV9zdWJtaXQoZ3B1LCByaW5nLCBz
-dWJtaXQpOw0KPj4+Pj4gICAgICAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHsNCj4+Pj4+ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnJlYWs7DQo+Pj4+PiBAQCAtNzYwLDcgKzc2
-MCw3IEBAIHZvaWQgbXNtX2dwdV9zdWJtaXQoc3RydWN0IG1zbV9ncHUgKmdwdSwgc3RydWN0IG1z
-bV9nZW1fc3VibWl0ICpzdWJtaXQpDQo+Pj4+Pg0KPj4+Pj4gICAgICAgICBtc21fZ3B1X2h3X2lu
-aXQoZ3B1KTsNCj4+Pj4+DQo+Pj4+PiAtICAgICBzdWJtaXQtPnNlcW5vID0gc3VibWl0LT5od19m
-ZW5jZS0+c2Vxbm87DQo+Pj4+PiArICAgICBzdWJtaXQtPnNlcW5vID0gc3VibWl0LT5od19mZW5j
-ZS5zZXFubzsNCj4+Pj4+DQo+Pj4+PiAgICAgICAgIG1zbV9yZF9kdW1wX3N1Ym1pdChwcml2LT5y
-ZCwgc3VibWl0LCBOVUxMKTsNCj4+Pj4+DQo+Pj4+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUv
-ZHJtL21zbS9tc21fcmluZ2J1ZmZlci5jIGIvZHJpdmVycy9ncHUvZHJtL21zbS9tc21fcmluZ2J1
-ZmZlci5jDQo+Pj4+PiBpbmRleCA1N2E4ZTk1NjQ1NDAuLjVjNTRiZWZhMjQyNyAxMDA2NDQNCj4+
-Pj4+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9tc20vbXNtX3JpbmdidWZmZXIuYw0KPj4+Pj4gKysr
-IGIvZHJpdmVycy9ncHUvZHJtL21zbS9tc21fcmluZ2J1ZmZlci5jDQo+Pj4+PiBAQCAtMTgsNyAr
-MTgsNyBAQCBzdGF0aWMgc3RydWN0IGRtYV9mZW5jZSAqbXNtX2pvYl9ydW4oc3RydWN0IGRybV9z
-Y2hlZF9qb2IgKmpvYikNCj4+Pj4+ICAgICAgICAgc3RydWN0IG1zbV9ncHUgKmdwdSA9IHN1Ym1p
-dC0+Z3B1Ow0KPj4+Pj4gICAgICAgICBpbnQgaTsNCj4+Pj4+DQo+Pj4+PiAtICAgICBzdWJtaXQt
-Pmh3X2ZlbmNlID0gbXNtX2ZlbmNlX2FsbG9jKGZjdHgpOw0KPj4+Pj4gKyAgICAgbXNtX2ZlbmNl
-X2luaXQoZmN0eCwgJnN1Ym1pdC0+aHdfZmVuY2UpOw0KPj4+Pj4NCj4+Pj4+ICAgICAgICAgZm9y
-IChpID0gMDsgaSA8IHN1Ym1pdC0+bnJfYm9zOyBpKyspIHsNCj4+Pj4+ICAgICAgICAgICAgICAg
-ICBzdHJ1Y3QgZHJtX2dlbV9vYmplY3QgKm9iaiA9ICZzdWJtaXQtPmJvc1tpXS5vYmotPmJhc2U7
-DQo+Pj4+PiBAQCAtMzcsNyArMzcsNyBAQCBzdGF0aWMgc3RydWN0IGRtYV9mZW5jZSAqbXNtX2pv
-Yl9ydW4oc3RydWN0IGRybV9zY2hlZF9qb2IgKmpvYikNCj4+Pj4+DQo+Pj4+PiAgICAgICAgIG11
-dGV4X3VubG9jaygmZ3B1LT5sb2NrKTsNCj4+Pj4+DQo+Pj4+PiAtICAgICByZXR1cm4gZG1hX2Zl
-bmNlX2dldChzdWJtaXQtPmh3X2ZlbmNlKTsNCj4+Pj4+ICsgICAgIHJldHVybiBkbWFfZmVuY2Vf
-Z2V0KCZzdWJtaXQtPmh3X2ZlbmNlKTsNCj4+Pj4+ICAgICB9DQo+Pj4+Pg0KPj4+Pj4gICAgIHN0
-YXRpYyB2b2lkIG1zbV9qb2JfZnJlZShzdHJ1Y3QgZHJtX3NjaGVkX2pvYiAqam9iKQ0KPiBfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiBMaW5hcm8tbW0t
-c2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcNCj4gVG8g
-dW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxp
-bmFyby5vcmcNCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5h
-cm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2
-ZUBsaXN0cy5saW5hcm8ub3JnCg==
+Am 14.03.23 um 11:52 schrieb Paul Cercueil:
+> This patch introduces three new ioctls. They all should be called on a
+> data endpoint (ie. not ep0). They are:
+>
+> - FUNCTIONFS_DMABUF_ATTACH, which takes the file descriptor of a DMABUF
+>    object to attach to the endpoint.
+>
+> - FUNCTIONFS_DMABUF_DETACH, which takes the file descriptor of the
+>    DMABUF to detach from the endpoint. Note that closing the endpoint's
+>    file descriptor will automatically detach all attached DMABUFs.
+>
+> - FUNCTIONFS_DMABUF_TRANSFER, which requests a data transfer from / to
+>    the given DMABUF. Its argument is a structure that packs the DMABUF's
+>    file descriptor, the size in bytes to transfer (which should generally
+>    be set to the size of the DMABUF), and a 'flags' field which is unused
+>    for now.
+>    Before this ioctl can be used, the related DMABUF must be attached
+>    with FUNCTIONFS_DMABUF_ATTACH.
+>
+> These three ioctls enable the FunctionFS code to transfer data between
+> the USB stack and a DMABUF object, which can be provided by a driver
+> from a completely different subsystem, in a zero-copy fashion.
+>
+> Signed-off-by: Paul Cercueil <paul@crapouillou.net>
+> ---
+>   drivers/usb/gadget/function/f_fs.c  | 398 ++++++++++++++++++++++++++++
+>   include/uapi/linux/usb/functionfs.h |  14 +-
+>   2 files changed, 411 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/usb/gadget/function/f_fs.c b/drivers/usb/gadget/function/f_fs.c
+> index ddfc537c7526..365fb716f0ad 100644
+> --- a/drivers/usb/gadget/function/f_fs.c
+> +++ b/drivers/usb/gadget/function/f_fs.c
+> @@ -15,6 +15,9 @@
+>   /* #define VERBOSE_DEBUG */
+>   
+>   #include <linux/blkdev.h>
+> +#include <linux/dma-buf.h>
+> +#include <linux/dma-fence.h>
+> +#include <linux/dma-resv.h>
+>   #include <linux/pagemap.h>
+>   #include <linux/export.h>
+>   #include <linux/fs_parser.h>
+> @@ -124,6 +127,26 @@ struct ffs_ep {
+>   	u8				num;
+>   };
+>   
+> +struct ffs_dmabuf_priv {
+> +	struct list_head entry;
+> +	struct kref ref;
+> +	struct dma_buf_attachment *attach;
+> +	spinlock_t lock;
+> +	u64 context;
+> +};
+> +
+> +struct ffs_dma_fence {
+> +	struct dma_fence base;
+> +	struct ffs_dmabuf_priv *priv;
+> +	struct sg_table *sgt;
+> +	enum dma_data_direction dir;
+> +};
+> +
+> +static inline struct ffs_dma_fence *to_ffs_dma_fence(struct dma_fence *fence)
+> +{
+> +	return container_of(fence, struct ffs_dma_fence, base);
+> +}
+> +
+>   struct ffs_epfile {
+>   	/* Protects ep->ep and ep->req. */
+>   	struct mutex			mutex;
+> @@ -197,6 +220,8 @@ struct ffs_epfile {
+>   	unsigned char			isoc;	/* P: ffs->eps_lock */
+>   
+>   	unsigned char			_pad;
+> +
+> +	struct list_head		dmabufs;
+>   };
+>   
+>   struct ffs_buffer {
+> @@ -1279,19 +1304,354 @@ static ssize_t ffs_epfile_read_iter(struct kiocb *kiocb, struct iov_iter *to)
+>   	return res;
+>   }
+>   
+> +static void ffs_dmabuf_release(struct kref *ref)
+> +{
+> +	struct ffs_dmabuf_priv *priv = container_of(ref, struct ffs_dmabuf_priv, ref);
+> +	struct dma_buf_attachment *attach = priv->attach;
+> +	struct dma_buf *dmabuf = attach->dmabuf;
+> +
+> +	pr_debug("FFS DMABUF release\n");
+> +	dma_buf_detach(attach->dmabuf, attach);
+> +	dma_buf_put(dmabuf);
+> +
+> +	list_del(&priv->entry);
+> +	kfree(priv);
+> +}
+> +
+> +static void ffs_dmabuf_get(struct dma_buf_attachment *attach)
+> +{
+> +	struct ffs_dmabuf_priv *priv = attach->importer_priv;
+> +
+> +	kref_get(&priv->ref);
+> +}
+> +
+> +static void ffs_dmabuf_put(struct dma_buf_attachment *attach)
+> +{
+> +	struct ffs_dmabuf_priv *priv = attach->importer_priv;
+> +
+> +	kref_put(&priv->ref, ffs_dmabuf_release);
+> +}
+> +
+>   static int
+>   ffs_epfile_release(struct inode *inode, struct file *file)
+>   {
+>   	struct ffs_epfile *epfile = inode->i_private;
+> +	struct ffs_dmabuf_priv *priv, *tmp;
+>   
+>   	ENTER();
+>   
+> +	/* Close all attached DMABUFs */
+> +	list_for_each_entry_safe(priv, tmp, &epfile->dmabufs, entry) {
+> +		ffs_dmabuf_put(priv->attach);
+> +	}
+> +
+>   	__ffs_epfile_read_buffer_free(epfile);
+>   	ffs_data_closed(epfile->ffs);
+>   
+>   	return 0;
+>   }
+>   
+> +static void ffs_dmabuf_signal_done(struct ffs_dma_fence *dma_fence, int ret)
+> +{
+> +	struct ffs_dmabuf_priv *priv = dma_fence->priv;
+> +	struct dma_fence *fence = &dma_fence->base;
+> +
+> +	dma_fence_get(fence);
+> +	fence->error = ret;
+> +	dma_fence_signal(fence);
+> +
+> +	dma_buf_unmap_attachment(priv->attach, dma_fence->sgt, dma_fence->dir);
+> +	dma_fence_put(fence);
+> +	ffs_dmabuf_put(priv->attach);
+> +}
+> +
+> +static void ffs_epfile_dmabuf_io_complete(struct usb_ep *ep,
+> +					  struct usb_request *req)
+> +{
+> +	ENTER();
+> +
+> +	pr_debug("FFS: DMABUF transfer complete, status=%d\n", req->status);
+> +	ffs_dmabuf_signal_done(req->context, req->status);
+> +	usb_ep_free_request(ep, req);
+> +}
+> +
+> +static const char *ffs_dmabuf_get_driver_name(struct dma_fence *fence)
+> +{
+> +	return "functionfs";
+> +}
+> +
+> +static const char *ffs_dmabuf_get_timeline_name(struct dma_fence *fence)
+> +{
+> +	return "";
+> +}
+> +
+> +static void ffs_dmabuf_fence_release(struct dma_fence *fence)
+> +{
+> +	struct ffs_dma_fence *dma_fence = to_ffs_dma_fence(fence);
+> +
+> +	kfree(dma_fence);
+> +}
+> +
+> +static const struct dma_fence_ops ffs_dmabuf_fence_ops = {
+> +	.get_driver_name	= ffs_dmabuf_get_driver_name,
+> +	.get_timeline_name	= ffs_dmabuf_get_timeline_name,
+> +	.release		= ffs_dmabuf_fence_release,
+> +};
+> +
+> +int ffs_dma_resv_lock(struct dma_buf *dmabuf, bool nonblock)
+> +{
+> +	int ret;
+> +
+> +	ret = dma_resv_lock_interruptible(dmabuf->resv, NULL);
+> +	if (ret) {
+> +		if (ret != -EDEADLK)
+> +			goto out;
+> +		if (nonblock) {
+> +			ret = -EBUSY;
+> +			goto out;
+> +		}
+> +
+> +		ret = dma_resv_lock_slow_interruptible(dmabuf->resv, NULL);
+> +	}
+> +
+> +out:
+> +	return ret;
+> +}
+> +
+> +static struct dma_buf_attachment *
+> +ffs_dmabuf_find_attachment(struct device *dev, struct dma_buf *dmabuf,
+> +			   bool nonblock)
+> +{
+> +	struct dma_buf_attachment *elm, *attach = NULL;
+> +	int ret;
+> +
+> +	ret = ffs_dma_resv_lock(dmabuf, nonblock);
+> +	if (ret)
+> +		return ERR_PTR(ret);
+> +
+> +	list_for_each_entry(elm, &dmabuf->attachments, node) {
+> +		if (elm->dev == dev) {
+> +			attach = elm;
+> +			break;
+> +		}
+> +	}
+> +
+> +	if (attach)
+> +		ffs_dmabuf_get(elm);
+> +
+> +	dma_resv_unlock(dmabuf->resv);
+> +
+> +	return attach ?: ERR_PTR(-EPERM);
+> +}
+> +
+> +static int ffs_dmabuf_attach(struct file *file, int fd)
+> +{
+> +	struct ffs_epfile *epfile = file->private_data;
+> +	struct usb_gadget *gadget = epfile->ffs->gadget;
+> +	struct dma_buf_attachment *attach;
+> +	struct ffs_dmabuf_priv *priv;
+> +	struct dma_buf *dmabuf;
+> +	int err;
+> +
+> +	if (!gadget || !gadget->sg_supported)
+> +		return -EPERM;
+> +
+> +	dmabuf = dma_buf_get(fd);
+> +	if (IS_ERR(dmabuf))
+> +		return PTR_ERR(dmabuf);
+> +
+> +	attach = dma_buf_attach(dmabuf, gadget->dev.parent);
+> +	if (IS_ERR(attach)) {
+> +		err = PTR_ERR(attach);
+> +		goto err_dmabuf_put;
+> +	}
+> +
+> +	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
+> +	if (!priv) {
+> +		err = -ENOMEM;
+> +		goto err_dmabuf_detach;
+> +	}
+> +
+> +	attach->importer_priv = priv;
+> +
+> +	priv->attach = attach;
+> +	spin_lock_init(&priv->lock);
+> +	kref_init(&priv->ref);
+> +	priv->context = dma_fence_context_alloc(1);
+> +
+> +	list_add(&priv->entry, &epfile->dmabufs);
+> +
+> +	return 0;
+> +
+> +err_dmabuf_detach:
+> +	dma_buf_detach(dmabuf, attach);
+> +err_dmabuf_put:
+> +	dma_buf_put(dmabuf);
+> +
+> +	return err;
+> +}
+> +
+> +static int ffs_dmabuf_detach(struct file *file, int fd)
+> +{
+> +	struct ffs_epfile *epfile = file->private_data;
+> +	struct usb_gadget *gadget = epfile->ffs->gadget;
+> +	bool nonblock = file->f_flags & O_NONBLOCK;
+> +	struct dma_buf_attachment *attach;
+> +	struct dma_buf *dmabuf;
+> +	int ret = 0;
+> +
+> +	dmabuf = dma_buf_get(fd);
+> +	if (IS_ERR(dmabuf))
+> +		return PTR_ERR(dmabuf);
+> +
+> +	attach = ffs_dmabuf_find_attachment(gadget->dev.parent,
+> +					    dmabuf, nonblock);
+> +	if (IS_ERR(attach)) {
+> +		ret = PTR_ERR(attach);
+> +		goto out_dmabuf_put;
+> +	}
+> +
+> +	ffs_dmabuf_put(attach);
+> +	ffs_dmabuf_put(attach);
+> +
+> +out_dmabuf_put:
+> +	dma_buf_put(dmabuf);
+> +	return ret;
+> +}
+> +
+> +static int ffs_dmabuf_transfer(struct file *file,
+> +			       const struct usb_ffs_dmabuf_transfer_req *req)
+> +{
+> +	bool dma_to_ram, nonblock = file->f_flags & O_NONBLOCK;
+> +	struct ffs_epfile *epfile = file->private_data;
+> +	struct usb_gadget *gadget = epfile->ffs->gadget;
+> +	struct dma_buf_attachment *attach;
+> +	struct ffs_dmabuf_priv *priv;
+> +	enum dma_data_direction dir;
+> +	struct ffs_dma_fence *fence;
+> +	struct usb_request *usb_req;
+> +	struct sg_table *sg_table;
+> +	struct dma_buf *dmabuf;
+> +	struct ffs_ep *ep = epfile->ep;
+> +	int ret;
+> +
+> +	if (req->flags & ~USB_FFS_DMABUF_TRANSFER_MASK)
+> +		return -EINVAL;
+> +
+> +	dmabuf = dma_buf_get(req->fd);
+> +	if (IS_ERR(dmabuf))
+> +		return PTR_ERR(dmabuf);
+> +
+> +	if (req->length > dmabuf->size || req->length == 0) {
+> +		ret = -EINVAL;
+> +		goto err_dmabuf_put;
+> +	}
+> +
+> +	attach = ffs_dmabuf_find_attachment(gadget->dev.parent,
+> +					    dmabuf, nonblock);
+> +	if (IS_ERR(attach)) {
+> +		ret = PTR_ERR(attach);
+> +		goto err_dmabuf_put;
+> +	}
+> +
+> +	priv = attach->importer_priv;
+> +
+> +	if (epfile->in)
+> +		dir = DMA_FROM_DEVICE;
+> +	else
+> +		dir = DMA_TO_DEVICE;
+> +
+> +	sg_table = dma_buf_map_attachment(attach, dir);
+> +	if (IS_ERR(sg_table)) {
+> +		ret = PTR_ERR(sg_table);
+> +		goto err_attachment_put;
+> +	}
+> +
+> +	fence = kmalloc(sizeof(*fence), GFP_KERNEL);
+> +	if (!fence) {
+> +		ret = -ENOMEM;
+> +		goto err_unmap_attachment;
+> +	}
+> +
+> +	fence->sgt = sg_table;
+> +	fence->dir = dir;
+> +	fence->priv = priv;
+> +
+> +	dma_fence_init(&fence->base, &ffs_dmabuf_fence_ops,
+> +		       &priv->lock, priv->context, 0);
+
+Sequence numbers must be unique, so constantly using 0 here is quite 
+questionable.
+
+If you set the use_64bit_seqno flag in your fence ops structure you can 
+simply use a 64bit counter.
+
+> +
+> +	usb_req = usb_ep_alloc_request(ep->ep, GFP_ATOMIC);
+> +	if (!usb_req) {
+> +		ret = -ENOMEM;
+> +		goto err_fence_put;
+> +	}
+> +
+> +	ret = ffs_dma_resv_lock(dmabuf, nonblock);
+> +	if (ret)
+> +		goto err_free_request;
+> +
+> +	/* Make sure we don't have writers */
+> +	if (!dma_resv_test_signaled(dmabuf->resv, DMA_RESV_USAGE_WRITE)) {
+> +		pr_debug("FFS WRITE fence is not signaled\n");
+> +		ret = -EBUSY;
+> +		goto err_resv_unlock;
+> +	}
+> +
+> +	dma_to_ram = dir == DMA_FROM_DEVICE;
+> +
+> +	/* If we're writing to the DMABUF, make sure we don't have readers */
+> +	if (dma_to_ram &&
+> +	    !dma_resv_test_signaled(dmabuf->resv, DMA_RESV_USAGE_READ)) {
+> +		pr_debug("FFS READ fence is not signaled\n");
+> +		ret = -EBUSY;
+> +		goto err_resv_unlock;
+> +	}
+> +
+> +	ret = dma_resv_reserve_fences(dmabuf->resv, 1);
+> +	if (ret)
+> +		goto err_resv_unlock;
+
+A dma_fence should only be published if nothing can go wrong with the 
+request any more.
+
+You are doing that correctly here, but it is good practice that you also 
+don't allocate and initialize the fence before you publish it.
+
+In other words reorder this and move the allocation and call to 
+dma_fence_init() here if possible.
+
+> +
+> +	dma_resv_add_fence(dmabuf->resv, &fence->base,
+> +			   dma_resv_usage_rw(dma_to_ram));
+> +	dma_resv_unlock(dmabuf->resv);
+> +
+> +	/* Now that the dma_fence is in place, queue the transfer. */
+> +
+> +	usb_req->length = req->length;
+> +	usb_req->buf = NULL;
+> +	usb_req->sg = sg_table->sgl;
+> +	usb_req->num_sgs = sg_nents_for_len(sg_table->sgl, req->length);
+> +	usb_req->sg_was_mapped = true;
+> +	usb_req->context  = fence;
+> +	usb_req->complete = ffs_epfile_dmabuf_io_complete;
+> +
+> +	ret = usb_ep_queue(ep->ep, usb_req, GFP_ATOMIC);
+
+Already using GFP_ATOMIC gets you a lot of bonus points for this patch 
+:) Background is that as soon as you have published a fence you can't 
+use GFP_KERNEL that easily any more because that memory allocation might 
+wait for the fence.
+
+But even better would be to try to avoid memory allocation in the 
+critical code path altogether. Would it be possible to call this 
+function with the dma_resv_lock held?
+
+Regards,
+Christian.
+
+
+> +	if (ret) {
+> +		pr_warn("FFS: Failed to queue DMABUF: %d\n", ret);
+> +		ffs_dmabuf_signal_done(fence, ret);
+> +		usb_ep_free_request(ep->ep, usb_req);
+> +	}
+> +
+> +	dma_buf_put(dmabuf);
+> +
+> +	return ret;
+> +
+> +err_resv_unlock:
+> +	dma_resv_unlock(dmabuf->resv);
+> +err_free_request:
+> +	usb_ep_free_request(ep->ep, usb_req);
+> +err_fence_put:
+> +	dma_fence_put(&fence->base);
+> +err_unmap_attachment:
+> +	dma_buf_unmap_attachment(attach, sg_table, dir);
+> +err_attachment_put:
+> +	ffs_dmabuf_put(attach);
+> +err_dmabuf_put:
+> +	dma_buf_put(dmabuf);
+> +
+> +	return ret;
+> +}
+> +
+>   static long ffs_epfile_ioctl(struct file *file, unsigned code,
+>   			     unsigned long value)
+>   {
+> @@ -1364,8 +1724,45 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
+>   			ret = -EFAULT;
+>   		return ret;
+>   	}
+> +	case FUNCTIONFS_DMABUF_ATTACH:
+> +	{
+> +		int fd;
+> +
+> +		if (copy_from_user(&fd, (void __user *)value, sizeof(fd))) {
+> +			ret = -EFAULT;
+> +			break;
+> +		}
+> +
+> +		ret = ffs_dmabuf_attach(file, fd);
+> +		break;
+> +	}
+> +	case FUNCTIONFS_DMABUF_DETACH:
+> +	{
+> +		int fd;
+> +
+> +		if (copy_from_user(&fd, (void __user *)value, sizeof(fd))) {
+> +			ret = -EFAULT;
+> +			break;
+> +		}
+> +
+> +		ret = ffs_dmabuf_detach(file, fd);
+> +		break;
+> +	}
+> +	case FUNCTIONFS_DMABUF_TRANSFER:
+> +	{
+> +		struct usb_ffs_dmabuf_transfer_req req;
+> +
+> +		if (copy_from_user(&req, (void __user *)value, sizeof(req))) {
+> +			ret = -EFAULT;
+> +			break;
+> +		}
+> +
+> +		ret = ffs_dmabuf_transfer(file, &req);
+> +		break;
+> +	}
+>   	default:
+>   		ret = -ENOTTY;
+> +		break;
+>   	}
+>   	spin_unlock_irq(&epfile->ffs->eps_lock);
+>   
+> @@ -1925,6 +2322,7 @@ static int ffs_epfiles_create(struct ffs_data *ffs)
+>   	for (i = 1; i <= count; ++i, ++epfile) {
+>   		epfile->ffs = ffs;
+>   		mutex_init(&epfile->mutex);
+> +		INIT_LIST_HEAD(&epfile->dmabufs);
+>   		if (ffs->user_flags & FUNCTIONFS_VIRTUAL_ADDR)
+>   			sprintf(epfile->name, "ep%02x", ffs->eps_addrmap[i]);
+>   		else
+> diff --git a/include/uapi/linux/usb/functionfs.h b/include/uapi/linux/usb/functionfs.h
+> index d77ee6b65328..1412ab9f8ccc 100644
+> --- a/include/uapi/linux/usb/functionfs.h
+> +++ b/include/uapi/linux/usb/functionfs.h
+> @@ -84,6 +84,15 @@ struct usb_ext_prop_desc {
+>   	__le16	wPropertyNameLength;
+>   } __attribute__((packed));
+>   
+> +/* Flags for usb_ffs_dmabuf_transfer_req->flags (none for now) */
+> +#define USB_FFS_DMABUF_TRANSFER_MASK	0x0
+> +
+> +struct usb_ffs_dmabuf_transfer_req {
+> +	int fd;
+> +	__u32 flags;
+> +	__u64 length;
+> +} __attribute__((packed));
+> +
+>   #ifndef __KERNEL__
+>   
+>   /*
+> @@ -288,6 +297,9 @@ struct usb_functionfs_event {
+>   #define	FUNCTIONFS_ENDPOINT_DESC	_IOR('g', 130, \
+>   					     struct usb_endpoint_descriptor)
+>   
+> -
+> +#define FUNCTIONFS_DMABUF_ATTACH	_IOW('g', 131, int)
+> +#define FUNCTIONFS_DMABUF_DETACH	_IOW('g', 132, int)
+> +#define FUNCTIONFS_DMABUF_TRANSFER	_IOW('g', 133, \
+> +					     struct usb_ffs_dmabuf_transfer_req)
+>   
+>   #endif /* _UAPI__LINUX_FUNCTIONFS_H__ */
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
