@@ -2,603 +2,149 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3ECA6C42E6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 07:18:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 358BD6C42E8
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 07:19:06 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B8A56443E3
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 06:18:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 388793F330
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 06:19:05 +0000 (UTC)
 Received: from aposti.net (aposti.net [89.234.176.197])
-	by lists.linaro.org (Postfix) with ESMTPS id B03163E963
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 14 Mar 2023 10:53:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id A29933EA31
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 14 Mar 2023 13:45:33 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=crapouillou.net header.s=mail header.b=1sYz4+5O;
+	dkim=pass header.d=crapouillou.net header.s=mail header.b=sWxk1PG1;
 	spf=pass (lists.linaro.org: domain of paul@crapouillou.net designates 89.234.176.197 as permitted sender) smtp.mailfrom=paul@crapouillou.net;
 	dmarc=pass (policy=none) header.from=crapouillou.net
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
-	s=mail; t=1678791193;
+	s=mail; t=1678801532;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Vmeoq86YHeoBlPdg8TzdXyyxvnIRLUPrCjGVmMezCCk=;
-	b=1sYz4+5OggGkBtMkDkOztVBdzZfq/6U0Wxpw2kPriHOSVqZ/qmxkWYKMWc4kQb5qJcJ5/s
-	XRuymywztMhwGAXMN7u8+N5WU7WCOxw15wYfXNdYIzD69dFjjMTj5rsTgxOODPe2fgNEtT
-	ZP3zIRuEpHjNDvwTgbE8dzMyoFciGGM=
+	bh=i/T9c4oh6jhKm3lkBJe8ywcuorjh7EGMXCUOVMZ96g4=;
+	b=sWxk1PG1Pj5OVsatfswgHlPo2d7i9shtR7gtMsjiz0b3pgfUVFGMhR2XguF0dGXLfgqxIv
+	/pfjgergo3cA2BFSzTGr63cEfraGKSOVTaMjche3PqXUT+mf+gub+YwDmRsRR4MZ4x1GVR
+	+kEJB+xpbYLyHUxAVLKOkW1SwEmjG28=
+Message-ID: <861288e8c685eb9cbbf9f71cd031e7015de3aced.camel@crapouillou.net>
 From: Paul Cercueil <paul@crapouillou.net>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Date: Tue, 14 Mar 2023 11:52:57 +0100
-Message-Id: <20230314105257.17345-3-paul@crapouillou.net>
-In-Reply-To: <20230314105257.17345-1-paul@crapouillou.net>
-References: <20230314105257.17345-1-paul@crapouillou.net>
+To: kernel test robot <lkp@intel.com>, Greg Kroah-Hartman
+	 <gregkh@linuxfoundation.org>, Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?ISO-8859-1?Q?K=F6nig?=
+	 <christian.koenig@amd.com>
+Date: Tue, 14 Mar 2023 14:45:19 +0100
+In-Reply-To: <202303142140.ZQsw4C4V-lkp@intel.com>
+References: <20230314105257.17345-3-paul@crapouillou.net>
+	 <202303142140.ZQsw4C4V-lkp@intel.com>
 MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: B03163E963
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
+X-Rspamd-Queue-Id: A29933EA31
+X-Spamd-Bar: -------
+X-Spamd-Result: default: False [-7.90 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[crapouillou.net,none];
 	R_DKIM_ALLOW(-0.20)[crapouillou.net:s=mail];
-	R_SPF_ALLOW(-0.20)[+a:c];
+	R_SPF_ALLOW(-0.20)[+a];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_COUNT_ZERO(0.00)[0];
-	FROM_EQ_ENVFROM(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	NEURAL_HAM(-0.00)[-0.995];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[crapouillou.net:dkim,crapouillou.net:email,aposti.net:rdns,aposti.net:helo];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
+	MIME_BASE64_TEXT(0.10)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[crapouillou.net:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_ZERO(0.00)[0];
+	MIME_TRACE(0.00)[0:+];
 	ASN(0.00)[asn:203432, ipnet:89.234.176.0/23, country:FR];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[01.org:url,intel.com:email,git-scm.com:url,raw.githubusercontent.com:url,aposti.net:rdns,aposti.net:helo];
+	DKIM_TRACE(0.00)[crapouillou.net:+];
+	FROM_HAS_DN(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	ARC_NA(0.00)[]
 X-MailFrom: paul@crapouillou.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 77UKS3WBUHO73SCRPW2GDS6FX7BWG4U5
-X-Message-ID-Hash: 77UKS3WBUHO73SCRPW2GDS6FX7BWG4U5
+Message-ID-Hash: CW7736GMHYC7ATE2QHGJUFLVJWWGBNUT
+X-Message-ID-Hash: CW7736GMHYC7ATE2QHGJUFLVJWWGBNUT
 X-Mailman-Approved-At: Wed, 22 Mar 2023 06:17:47 +0000
-CC: michael.hennerich@analog.com, nuno.sa@analog.com, linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Paul Cercueil <paul@crapouillou.net>
+CC: oe-kbuild-all@lists.linux.dev, michael.hennerich@analog.com, linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, nuno.sa@analog.com, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 2/2] usb: gadget: functionfs: Add DMABUF import interface
+Subject: [Linaro-mm-sig] Re: [PATCH 2/2] usb: gadget: functionfs: Add DMABUF import interface
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/77UKS3WBUHO73SCRPW2GDS6FX7BWG4U5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CW7736GMHYC7ATE2QHGJUFLVJWWGBNUT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-This patch introduces three new ioctls. They all should be called on a
-data endpoint (ie. not ep0). They are:
-
-- FUNCTIONFS_DMABUF_ATTACH, which takes the file descriptor of a DMABUF
-  object to attach to the endpoint.
-
-- FUNCTIONFS_DMABUF_DETACH, which takes the file descriptor of the
-  DMABUF to detach from the endpoint. Note that closing the endpoint's
-  file descriptor will automatically detach all attached DMABUFs.
-
-- FUNCTIONFS_DMABUF_TRANSFER, which requests a data transfer from / to
-  the given DMABUF. Its argument is a structure that packs the DMABUF's
-  file descriptor, the size in bytes to transfer (which should generally
-  be set to the size of the DMABUF), and a 'flags' field which is unused
-  for now.
-  Before this ioctl can be used, the related DMABUF must be attached
-  with FUNCTIONFS_DMABUF_ATTACH.
-
-These three ioctls enable the FunctionFS code to transfer data between
-the USB stack and a DMABUF object, which can be provided by a driver
-from a completely different subsystem, in a zero-copy fashion.
-
-Signed-off-by: Paul Cercueil <paul@crapouillou.net>
----
- drivers/usb/gadget/function/f_fs.c  | 398 ++++++++++++++++++++++++++++
- include/uapi/linux/usb/functionfs.h |  14 +-
- 2 files changed, 411 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/usb/gadget/function/f_fs.c b/drivers/usb/gadget/function/f_fs.c
-index ddfc537c7526..365fb716f0ad 100644
---- a/drivers/usb/gadget/function/f_fs.c
-+++ b/drivers/usb/gadget/function/f_fs.c
-@@ -15,6 +15,9 @@
- /* #define VERBOSE_DEBUG */
- 
- #include <linux/blkdev.h>
-+#include <linux/dma-buf.h>
-+#include <linux/dma-fence.h>
-+#include <linux/dma-resv.h>
- #include <linux/pagemap.h>
- #include <linux/export.h>
- #include <linux/fs_parser.h>
-@@ -124,6 +127,26 @@ struct ffs_ep {
- 	u8				num;
- };
- 
-+struct ffs_dmabuf_priv {
-+	struct list_head entry;
-+	struct kref ref;
-+	struct dma_buf_attachment *attach;
-+	spinlock_t lock;
-+	u64 context;
-+};
-+
-+struct ffs_dma_fence {
-+	struct dma_fence base;
-+	struct ffs_dmabuf_priv *priv;
-+	struct sg_table *sgt;
-+	enum dma_data_direction dir;
-+};
-+
-+static inline struct ffs_dma_fence *to_ffs_dma_fence(struct dma_fence *fence)
-+{
-+	return container_of(fence, struct ffs_dma_fence, base);
-+}
-+
- struct ffs_epfile {
- 	/* Protects ep->ep and ep->req. */
- 	struct mutex			mutex;
-@@ -197,6 +220,8 @@ struct ffs_epfile {
- 	unsigned char			isoc;	/* P: ffs->eps_lock */
- 
- 	unsigned char			_pad;
-+
-+	struct list_head		dmabufs;
- };
- 
- struct ffs_buffer {
-@@ -1279,19 +1304,354 @@ static ssize_t ffs_epfile_read_iter(struct kiocb *kiocb, struct iov_iter *to)
- 	return res;
- }
- 
-+static void ffs_dmabuf_release(struct kref *ref)
-+{
-+	struct ffs_dmabuf_priv *priv = container_of(ref, struct ffs_dmabuf_priv, ref);
-+	struct dma_buf_attachment *attach = priv->attach;
-+	struct dma_buf *dmabuf = attach->dmabuf;
-+
-+	pr_debug("FFS DMABUF release\n");
-+	dma_buf_detach(attach->dmabuf, attach);
-+	dma_buf_put(dmabuf);
-+
-+	list_del(&priv->entry);
-+	kfree(priv);
-+}
-+
-+static void ffs_dmabuf_get(struct dma_buf_attachment *attach)
-+{
-+	struct ffs_dmabuf_priv *priv = attach->importer_priv;
-+
-+	kref_get(&priv->ref);
-+}
-+
-+static void ffs_dmabuf_put(struct dma_buf_attachment *attach)
-+{
-+	struct ffs_dmabuf_priv *priv = attach->importer_priv;
-+
-+	kref_put(&priv->ref, ffs_dmabuf_release);
-+}
-+
- static int
- ffs_epfile_release(struct inode *inode, struct file *file)
- {
- 	struct ffs_epfile *epfile = inode->i_private;
-+	struct ffs_dmabuf_priv *priv, *tmp;
- 
- 	ENTER();
- 
-+	/* Close all attached DMABUFs */
-+	list_for_each_entry_safe(priv, tmp, &epfile->dmabufs, entry) {
-+		ffs_dmabuf_put(priv->attach);
-+	}
-+
- 	__ffs_epfile_read_buffer_free(epfile);
- 	ffs_data_closed(epfile->ffs);
- 
- 	return 0;
- }
- 
-+static void ffs_dmabuf_signal_done(struct ffs_dma_fence *dma_fence, int ret)
-+{
-+	struct ffs_dmabuf_priv *priv = dma_fence->priv;
-+	struct dma_fence *fence = &dma_fence->base;
-+
-+	dma_fence_get(fence);
-+	fence->error = ret;
-+	dma_fence_signal(fence);
-+
-+	dma_buf_unmap_attachment(priv->attach, dma_fence->sgt, dma_fence->dir);
-+	dma_fence_put(fence);
-+	ffs_dmabuf_put(priv->attach);
-+}
-+
-+static void ffs_epfile_dmabuf_io_complete(struct usb_ep *ep,
-+					  struct usb_request *req)
-+{
-+	ENTER();
-+
-+	pr_debug("FFS: DMABUF transfer complete, status=%d\n", req->status);
-+	ffs_dmabuf_signal_done(req->context, req->status);
-+	usb_ep_free_request(ep, req);
-+}
-+
-+static const char *ffs_dmabuf_get_driver_name(struct dma_fence *fence)
-+{
-+	return "functionfs";
-+}
-+
-+static const char *ffs_dmabuf_get_timeline_name(struct dma_fence *fence)
-+{
-+	return "";
-+}
-+
-+static void ffs_dmabuf_fence_release(struct dma_fence *fence)
-+{
-+	struct ffs_dma_fence *dma_fence = to_ffs_dma_fence(fence);
-+
-+	kfree(dma_fence);
-+}
-+
-+static const struct dma_fence_ops ffs_dmabuf_fence_ops = {
-+	.get_driver_name	= ffs_dmabuf_get_driver_name,
-+	.get_timeline_name	= ffs_dmabuf_get_timeline_name,
-+	.release		= ffs_dmabuf_fence_release,
-+};
-+
-+int ffs_dma_resv_lock(struct dma_buf *dmabuf, bool nonblock)
-+{
-+	int ret;
-+
-+	ret = dma_resv_lock_interruptible(dmabuf->resv, NULL);
-+	if (ret) {
-+		if (ret != -EDEADLK)
-+			goto out;
-+		if (nonblock) {
-+			ret = -EBUSY;
-+			goto out;
-+		}
-+
-+		ret = dma_resv_lock_slow_interruptible(dmabuf->resv, NULL);
-+	}
-+
-+out:
-+	return ret;
-+}
-+
-+static struct dma_buf_attachment *
-+ffs_dmabuf_find_attachment(struct device *dev, struct dma_buf *dmabuf,
-+			   bool nonblock)
-+{
-+	struct dma_buf_attachment *elm, *attach = NULL;
-+	int ret;
-+
-+	ret = ffs_dma_resv_lock(dmabuf, nonblock);
-+	if (ret)
-+		return ERR_PTR(ret);
-+
-+	list_for_each_entry(elm, &dmabuf->attachments, node) {
-+		if (elm->dev == dev) {
-+			attach = elm;
-+			break;
-+		}
-+	}
-+
-+	if (attach)
-+		ffs_dmabuf_get(elm);
-+
-+	dma_resv_unlock(dmabuf->resv);
-+
-+	return attach ?: ERR_PTR(-EPERM);
-+}
-+
-+static int ffs_dmabuf_attach(struct file *file, int fd)
-+{
-+	struct ffs_epfile *epfile = file->private_data;
-+	struct usb_gadget *gadget = epfile->ffs->gadget;
-+	struct dma_buf_attachment *attach;
-+	struct ffs_dmabuf_priv *priv;
-+	struct dma_buf *dmabuf;
-+	int err;
-+
-+	if (!gadget || !gadget->sg_supported)
-+		return -EPERM;
-+
-+	dmabuf = dma_buf_get(fd);
-+	if (IS_ERR(dmabuf))
-+		return PTR_ERR(dmabuf);
-+
-+	attach = dma_buf_attach(dmabuf, gadget->dev.parent);
-+	if (IS_ERR(attach)) {
-+		err = PTR_ERR(attach);
-+		goto err_dmabuf_put;
-+	}
-+
-+	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
-+	if (!priv) {
-+		err = -ENOMEM;
-+		goto err_dmabuf_detach;
-+	}
-+
-+	attach->importer_priv = priv;
-+
-+	priv->attach = attach;
-+	spin_lock_init(&priv->lock);
-+	kref_init(&priv->ref);
-+	priv->context = dma_fence_context_alloc(1);
-+
-+	list_add(&priv->entry, &epfile->dmabufs);
-+
-+	return 0;
-+
-+err_dmabuf_detach:
-+	dma_buf_detach(dmabuf, attach);
-+err_dmabuf_put:
-+	dma_buf_put(dmabuf);
-+
-+	return err;
-+}
-+
-+static int ffs_dmabuf_detach(struct file *file, int fd)
-+{
-+	struct ffs_epfile *epfile = file->private_data;
-+	struct usb_gadget *gadget = epfile->ffs->gadget;
-+	bool nonblock = file->f_flags & O_NONBLOCK;
-+	struct dma_buf_attachment *attach;
-+	struct dma_buf *dmabuf;
-+	int ret = 0;
-+
-+	dmabuf = dma_buf_get(fd);
-+	if (IS_ERR(dmabuf))
-+		return PTR_ERR(dmabuf);
-+
-+	attach = ffs_dmabuf_find_attachment(gadget->dev.parent,
-+					    dmabuf, nonblock);
-+	if (IS_ERR(attach)) {
-+		ret = PTR_ERR(attach);
-+		goto out_dmabuf_put;
-+	}
-+
-+	ffs_dmabuf_put(attach);
-+	ffs_dmabuf_put(attach);
-+
-+out_dmabuf_put:
-+	dma_buf_put(dmabuf);
-+	return ret;
-+}
-+
-+static int ffs_dmabuf_transfer(struct file *file,
-+			       const struct usb_ffs_dmabuf_transfer_req *req)
-+{
-+	bool dma_to_ram, nonblock = file->f_flags & O_NONBLOCK;
-+	struct ffs_epfile *epfile = file->private_data;
-+	struct usb_gadget *gadget = epfile->ffs->gadget;
-+	struct dma_buf_attachment *attach;
-+	struct ffs_dmabuf_priv *priv;
-+	enum dma_data_direction dir;
-+	struct ffs_dma_fence *fence;
-+	struct usb_request *usb_req;
-+	struct sg_table *sg_table;
-+	struct dma_buf *dmabuf;
-+	struct ffs_ep *ep = epfile->ep;
-+	int ret;
-+
-+	if (req->flags & ~USB_FFS_DMABUF_TRANSFER_MASK)
-+		return -EINVAL;
-+
-+	dmabuf = dma_buf_get(req->fd);
-+	if (IS_ERR(dmabuf))
-+		return PTR_ERR(dmabuf);
-+
-+	if (req->length > dmabuf->size || req->length == 0) {
-+		ret = -EINVAL;
-+		goto err_dmabuf_put;
-+	}
-+
-+	attach = ffs_dmabuf_find_attachment(gadget->dev.parent,
-+					    dmabuf, nonblock);
-+	if (IS_ERR(attach)) {
-+		ret = PTR_ERR(attach);
-+		goto err_dmabuf_put;
-+	}
-+
-+	priv = attach->importer_priv;
-+
-+	if (epfile->in)
-+		dir = DMA_FROM_DEVICE;
-+	else
-+		dir = DMA_TO_DEVICE;
-+
-+	sg_table = dma_buf_map_attachment(attach, dir);
-+	if (IS_ERR(sg_table)) {
-+		ret = PTR_ERR(sg_table);
-+		goto err_attachment_put;
-+	}
-+
-+	fence = kmalloc(sizeof(*fence), GFP_KERNEL);
-+	if (!fence) {
-+		ret = -ENOMEM;
-+		goto err_unmap_attachment;
-+	}
-+
-+	fence->sgt = sg_table;
-+	fence->dir = dir;
-+	fence->priv = priv;
-+
-+	dma_fence_init(&fence->base, &ffs_dmabuf_fence_ops,
-+		       &priv->lock, priv->context, 0);
-+
-+	usb_req = usb_ep_alloc_request(ep->ep, GFP_ATOMIC);
-+	if (!usb_req) {
-+		ret = -ENOMEM;
-+		goto err_fence_put;
-+	}
-+
-+	ret = ffs_dma_resv_lock(dmabuf, nonblock);
-+	if (ret)
-+		goto err_free_request;
-+
-+	/* Make sure we don't have writers */
-+	if (!dma_resv_test_signaled(dmabuf->resv, DMA_RESV_USAGE_WRITE)) {
-+		pr_debug("FFS WRITE fence is not signaled\n");
-+		ret = -EBUSY;
-+		goto err_resv_unlock;
-+	}
-+
-+	dma_to_ram = dir == DMA_FROM_DEVICE;
-+
-+	/* If we're writing to the DMABUF, make sure we don't have readers */
-+	if (dma_to_ram &&
-+	    !dma_resv_test_signaled(dmabuf->resv, DMA_RESV_USAGE_READ)) {
-+		pr_debug("FFS READ fence is not signaled\n");
-+		ret = -EBUSY;
-+		goto err_resv_unlock;
-+	}
-+
-+	ret = dma_resv_reserve_fences(dmabuf->resv, 1);
-+	if (ret)
-+		goto err_resv_unlock;
-+
-+	dma_resv_add_fence(dmabuf->resv, &fence->base,
-+			   dma_resv_usage_rw(dma_to_ram));
-+	dma_resv_unlock(dmabuf->resv);
-+
-+	/* Now that the dma_fence is in place, queue the transfer. */
-+
-+	usb_req->length = req->length;
-+	usb_req->buf = NULL;
-+	usb_req->sg = sg_table->sgl;
-+	usb_req->num_sgs = sg_nents_for_len(sg_table->sgl, req->length);
-+	usb_req->sg_was_mapped = true;
-+	usb_req->context  = fence;
-+	usb_req->complete = ffs_epfile_dmabuf_io_complete;
-+
-+	ret = usb_ep_queue(ep->ep, usb_req, GFP_ATOMIC);
-+	if (ret) {
-+		pr_warn("FFS: Failed to queue DMABUF: %d\n", ret);
-+		ffs_dmabuf_signal_done(fence, ret);
-+		usb_ep_free_request(ep->ep, usb_req);
-+	}
-+
-+	dma_buf_put(dmabuf);
-+
-+	return ret;
-+
-+err_resv_unlock:
-+	dma_resv_unlock(dmabuf->resv);
-+err_free_request:
-+	usb_ep_free_request(ep->ep, usb_req);
-+err_fence_put:
-+	dma_fence_put(&fence->base);
-+err_unmap_attachment:
-+	dma_buf_unmap_attachment(attach, sg_table, dir);
-+err_attachment_put:
-+	ffs_dmabuf_put(attach);
-+err_dmabuf_put:
-+	dma_buf_put(dmabuf);
-+
-+	return ret;
-+}
-+
- static long ffs_epfile_ioctl(struct file *file, unsigned code,
- 			     unsigned long value)
- {
-@@ -1364,8 +1724,45 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
- 			ret = -EFAULT;
- 		return ret;
- 	}
-+	case FUNCTIONFS_DMABUF_ATTACH:
-+	{
-+		int fd;
-+
-+		if (copy_from_user(&fd, (void __user *)value, sizeof(fd))) {
-+			ret = -EFAULT;
-+			break;
-+		}
-+
-+		ret = ffs_dmabuf_attach(file, fd);
-+		break;
-+	}
-+	case FUNCTIONFS_DMABUF_DETACH:
-+	{
-+		int fd;
-+
-+		if (copy_from_user(&fd, (void __user *)value, sizeof(fd))) {
-+			ret = -EFAULT;
-+			break;
-+		}
-+
-+		ret = ffs_dmabuf_detach(file, fd);
-+		break;
-+	}
-+	case FUNCTIONFS_DMABUF_TRANSFER:
-+	{
-+		struct usb_ffs_dmabuf_transfer_req req;
-+
-+		if (copy_from_user(&req, (void __user *)value, sizeof(req))) {
-+			ret = -EFAULT;
-+			break;
-+		}
-+
-+		ret = ffs_dmabuf_transfer(file, &req);
-+		break;
-+	}
- 	default:
- 		ret = -ENOTTY;
-+		break;
- 	}
- 	spin_unlock_irq(&epfile->ffs->eps_lock);
- 
-@@ -1925,6 +2322,7 @@ static int ffs_epfiles_create(struct ffs_data *ffs)
- 	for (i = 1; i <= count; ++i, ++epfile) {
- 		epfile->ffs = ffs;
- 		mutex_init(&epfile->mutex);
-+		INIT_LIST_HEAD(&epfile->dmabufs);
- 		if (ffs->user_flags & FUNCTIONFS_VIRTUAL_ADDR)
- 			sprintf(epfile->name, "ep%02x", ffs->eps_addrmap[i]);
- 		else
-diff --git a/include/uapi/linux/usb/functionfs.h b/include/uapi/linux/usb/functionfs.h
-index d77ee6b65328..1412ab9f8ccc 100644
---- a/include/uapi/linux/usb/functionfs.h
-+++ b/include/uapi/linux/usb/functionfs.h
-@@ -84,6 +84,15 @@ struct usb_ext_prop_desc {
- 	__le16	wPropertyNameLength;
- } __attribute__((packed));
- 
-+/* Flags for usb_ffs_dmabuf_transfer_req->flags (none for now) */
-+#define USB_FFS_DMABUF_TRANSFER_MASK	0x0
-+
-+struct usb_ffs_dmabuf_transfer_req {
-+	int fd;
-+	__u32 flags;
-+	__u64 length;
-+} __attribute__((packed));
-+
- #ifndef __KERNEL__
- 
- /*
-@@ -288,6 +297,9 @@ struct usb_functionfs_event {
- #define	FUNCTIONFS_ENDPOINT_DESC	_IOR('g', 130, \
- 					     struct usb_endpoint_descriptor)
- 
--
-+#define FUNCTIONFS_DMABUF_ATTACH	_IOW('g', 131, int)
-+#define FUNCTIONFS_DMABUF_DETACH	_IOW('g', 132, int)
-+#define FUNCTIONFS_DMABUF_TRANSFER	_IOW('g', 133, \
-+					     struct usb_ffs_dmabuf_transfer_req)
- 
- #endif /* _UAPI__LINUX_FUNCTIONFS_H__ */
--- 
-2.39.2
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+TGUgbWFyZGkgMTQgbWFycyAyMDIzIMOgIDIxOjQxICswODAwLCBrZXJuZWwgdGVzdCByb2JvdCBh
+IMOpY3JpdMKgOgo+IEhpIFBhdWwsCj4gCj4gSSBsb3ZlIHlvdXIgcGF0Y2ghIFBlcmhhcHMgc29t
+ZXRoaW5nIHRvIGltcHJvdmU6Cj4gCj4gW2F1dG8gYnVpbGQgdGVzdCBXQVJOSU5HIG9uIHVzYi91
+c2ItdGVzdGluZ10KPiBbYWxzbyBidWlsZCB0ZXN0IFdBUk5JTkcgb24gdXNiL3VzYi1uZXh0IHVz
+Yi91c2ItbGludXMgbGludXMvbWFzdGVyCj4gdjYuMy1yYzIgbmV4dC0yMDIzMDMxNF0KPiBbSWYg
+eW91ciBwYXRjaCBpcyBhcHBsaWVkIHRvIHRoZSB3cm9uZyBnaXQgdHJlZSwga2luZGx5IGRyb3Ag
+dXMgYQo+IG5vdGUuCj4gQW5kIHdoZW4gc3VibWl0dGluZyBwYXRjaCwgd2Ugc3VnZ2VzdCB0byB1
+c2UgJy0tYmFzZScgYXMgZG9jdW1lbnRlZAo+IGluCj4gaHR0cHM6Ly9naXQtc2NtLmNvbS9kb2Nz
+L2dpdC1mb3JtYXQtcGF0Y2gjX2Jhc2VfdHJlZV9pbmZvcm1hdGlvbl0KPiAKPiB1cmw6wqDCoMKg
+Cj4gaHR0cHM6Ly9naXRodWIuY29tL2ludGVsLWxhYi1sa3AvbGludXgvY29tbWl0cy9QYXVsLUNl
+cmN1ZWlsL3VzYi1nYWRnZXQtU3VwcG9ydC1hbHJlYWR5LW1hcHBlZC1ETUEtU0dzLzIwMjMwMzE0
+LTE4NTUyMgo+IGJhc2U6wqDCoAo+IGh0dHBzOi8vZ2l0Lmtlcm5lbC5vcmcvcHViL3NjbS9saW51
+eC9rZXJuZWwvZ2l0L2dyZWdraC91c2IuZ2l0wqB1c2ItCj4gdGVzdGluZwo+IHBhdGNoIGxpbms6
+wqDCoMKgCj4gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvci8yMDIzMDMxNDEwNTI1Ny4xNzM0NS0z
+LXBhdWwlNDBjcmFwb3VpbGxvdS5uZXQKPiBwYXRjaCBzdWJqZWN0OiBbUEFUQ0ggMi8yXSB1c2I6
+IGdhZGdldDogZnVuY3Rpb25mczogQWRkIERNQUJVRiBpbXBvcnQKPiBpbnRlcmZhY2UKPiBjb25m
+aWc6IG02OGstYWxseWVzY29uZmlnCj4gKGh0dHBzOi8vZG93bmxvYWQuMDEub3JnLzBkYXktY2kv
+YXJjaGl2ZS8yMDIzMDMxNC8yMDIzMDMxNDIxNDAuWlFzdzRDCj4gNFYtbGtwQGludGVsLmNvbS9j
+b25maWcpCj4gY29tcGlsZXI6IG02OGstbGludXgtZ2NjIChHQ0MpIDEyLjEuMAo+IHJlcHJvZHVj
+ZSAodGhpcyBpcyBhIFc9MSBidWlsZCk6Cj4gwqDCoMKgwqDCoMKgwqAgd2dldAo+IGh0dHBzOi8v
+cmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbS9pbnRlbC9sa3AtdGVzdHMvbWFzdGVyL3NiaW4vbWFr
+ZS5jcm9zcwo+IMKgLU8gfi9iaW4vbWFrZS5jcm9zcwo+IMKgwqDCoMKgwqDCoMKgIGNobW9kICt4
+IH4vYmluL21ha2UuY3Jvc3MKPiDCoMKgwqDCoMKgwqDCoCAjCj4gaHR0cHM6Ly9naXRodWIuY29t
+L2ludGVsLWxhYi1sa3AvbGludXgvY29tbWl0LzRlZTM2NGVkNWQxMTJjNDU1MDM0NGZkMDM3ZjRl
+MWVmN2NjNDE4NzgKPiDCoMKgwqDCoMKgwqDCoCBnaXQgcmVtb3RlIGFkZCBsaW51eC1yZXZpZXcK
+PiBodHRwczovL2dpdGh1Yi5jb20vaW50ZWwtbGFiLWxrcC9saW51eAo+IMKgwqDCoMKgwqDCoMKg
+IGdpdCBmZXRjaCAtLW5vLXRhZ3MgbGludXgtcmV2aWV3IFBhdWwtQ2VyY3VlaWwvdXNiLWdhZGdl
+dC0KPiBTdXBwb3J0LWFscmVhZHktbWFwcGVkLURNQS1TR3MvMjAyMzAzMTQtMTg1NTIyCj4gwqDC
+oMKgwqDCoMKgwqAgZ2l0IGNoZWNrb3V0IDRlZTM2NGVkNWQxMTJjNDU1MDM0NGZkMDM3ZjRlMWVm
+N2NjNDE4NzgKPiDCoMKgwqDCoMKgwqDCoCAjIHNhdmUgdGhlIGNvbmZpZyBmaWxlCj4gwqDCoMKg
+wqDCoMKgwqAgbWtkaXIgYnVpbGRfZGlyICYmIGNwIGNvbmZpZyBidWlsZF9kaXIvLmNvbmZpZwo+
+IMKgwqDCoMKgwqDCoMKgIENPTVBJTEVSX0lOU1RBTExfUEFUSD0kSE9NRS8wZGF5IENPTVBJTEVS
+PWdjYy0xMi4xLjAKPiBtYWtlLmNyb3NzIFc9MSBPPWJ1aWxkX2RpciBBUkNIPW02OGsgb2xkZGVm
+Y29uZmlnCj4gwqDCoMKgwqDCoMKgwqAgQ09NUElMRVJfSU5TVEFMTF9QQVRIPSRIT01FLzBkYXkg
+Q09NUElMRVI9Z2NjLTEyLjEuMAo+IG1ha2UuY3Jvc3MgVz0xIE89YnVpbGRfZGlyIEFSQ0g9bTY4
+ayBTSEVMTD0vYmluL2Jhc2ggZHJpdmVycy91c2IvCj4gCj4gSWYgeW91IGZpeCB0aGUgaXNzdWUs
+IGtpbmRseSBhZGQgZm9sbG93aW5nIHRhZyB3aGVyZSBhcHBsaWNhYmxlCj4gPiBSZXBvcnRlZC1i
+eToga2VybmVsIHRlc3Qgcm9ib3QgPGxrcEBpbnRlbC5jb20+Cj4gPiBMaW5rOgo+ID4gaHR0cHM6
+Ly9sb3JlLmtlcm5lbC5vcmcvb2Uta2J1aWxkLWFsbC8yMDIzMDMxNDIxNDAuWlFzdzRDNFYtbGtw
+QGludGVsLmNvbS8KPiAKPiBBbGwgd2FybmluZ3MgKG5ldyBvbmVzIHByZWZpeGVkIGJ5ID4+KToK
+PiAKPiA+ID4gZHJpdmVycy91c2IvZ2FkZ2V0L2Z1bmN0aW9uL2ZfZnMuYzoxNDAxOjU6IHdhcm5p
+bmc6IG5vIHByZXZpb3VzCj4gPiA+IHByb3RvdHlwZSBmb3IgJ2Zmc19kbWFfcmVzdl9sb2NrJyBb
+LVdtaXNzaW5nLXByb3RvdHlwZXNdCj4gwqDCoMKgIDE0MDEgfCBpbnQgZmZzX2RtYV9yZXN2X2xv
+Y2soc3RydWN0IGRtYV9idWYgKmRtYWJ1ZiwgYm9vbAo+IG5vbmJsb2NrKQo+IMKgwqDCoMKgwqDC
+oMKgwqAgfMKgwqDCoMKgIF5+fn5+fn5+fn5+fn5+fn5+CgpJbmRlZWQsIG1pc3NpbmcgYSAic3Rh
+dGljIiBoZXJlLiBUaGFuayB5b3UgUm9ib3QuCgpDaGVlcnMsCi1QYXVsCgo+IAo+IAo+IHZpbSAr
+L2Zmc19kbWFfcmVzdl9sb2NrICsxNDAxIGRyaXZlcnMvdXNiL2dhZGdldC9mdW5jdGlvbi9mX2Zz
+LmMKPiAKPiDCoCAxNDAwwqDCoAo+ID4gMTQwMcKgwqDCoMKgaW50IGZmc19kbWFfcmVzdl9sb2Nr
+KHN0cnVjdCBkbWFfYnVmICpkbWFidWYsIGJvb2wKPiA+IG5vbmJsb2NrKQo+IMKgIDE0MDLCoMKg
+ewo+IMKgIDE0MDPCoMKgwqDCoMKgwqDCoMKgwqDCoGludCByZXQ7Cj4gwqAgMTQwNMKgwqAKPiDC
+oCAxNDA1wqDCoMKgwqDCoMKgwqDCoMKgwqByZXQgPSBkbWFfcmVzdl9sb2NrX2ludGVycnVwdGli
+bGUoZG1hYnVmLT5yZXN2LAo+IE5VTEwpOwo+IMKgIDE0MDbCoMKgwqDCoMKgwqDCoMKgwqDCoGlm
+IChyZXQpIHsKPiDCoCAxNDA3wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgaWYg
+KHJldCAhPSAtRURFQURMSykKPiDCoCAxNDA4wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoGdvdG8gb3V0Owo+IMKgIDE0MDnCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqBpZiAobm9uYmxvY2spIHsKPiDCoCAxNDEwwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoHJldCA9IC1FQlVTWTsKPiDC
+oCAxNDExwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oGdvdG8gb3V0Owo+IMKgIDE0MTLCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqB9
+Cj4gwqAgMTQxM8KgwqAKPiDCoCAxNDE0wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgcmV0ID0KPiBkbWFfcmVzdl9sb2NrX3Nsb3dfaW50ZXJydXB0aWJsZShkbWFidWYtPnJlc3Ys
+IE5VTEwpOwo+IMKgIDE0MTXCoMKgwqDCoMKgwqDCoMKgwqDCoH0KPiDCoCAxNDE2wqDCoAo+IMKg
+IDE0MTfCoMKgb3V0Ogo+IMKgIDE0MTjCoMKgwqDCoMKgwqDCoMKgwqDCoHJldHVybiByZXQ7Cj4g
+wqAgMTQxOcKgwqB9Cj4gwqAgMTQyMMKgwqAKPiAKCl9fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFy
+by1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRv
+IGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
