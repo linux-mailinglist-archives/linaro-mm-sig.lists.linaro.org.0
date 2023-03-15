@@ -2,582 +2,392 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6784E6BBA65
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 18:03:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87D646BB98A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 17:20:23 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 747AC3F52C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 17:03:04 +0000 (UTC)
-Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
-	by lists.linaro.org (Postfix) with ESMTPS id 1AD9E3F09B
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Mar 2023 14:26:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5F1D23F45A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 16:20:22 +0000 (UTC)
+Received: from mail-oi1-f170.google.com (mail-oi1-f170.google.com [209.85.167.170])
+	by lists.linaro.org (Postfix) with ESMTPS id 1F3523EB82
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 15 Mar 2023 16:20:03 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=asahilina.net header.s=default header.b=OpjjgA7L;
-	spf=pass (lists.linaro.org: domain of lina@asahilina.net designates 212.63.210.85 as permitted sender) smtp.mailfrom=lina@asahilina.net;
-	dmarc=pass (policy=quarantine) header.from=asahilina.net
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: linasend@asahilina.net)
-	by mail.marcansoft.com (Postfix) with ESMTPSA id EFF01420D8;
-	Tue,  7 Mar 2023 14:26:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=asahilina.net;
-	s=default; t=1678199215;
-	bh=ybXc676YDutsjlMaSuuenGoZJO/fukuHqULLdgV/v/M=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=OpjjgA7LC7q4Glsexbn+nW/mRuBv6rhD+pd1NYciXMLw6u+H1RakS8DC5sXggG0cG
-	 Yd7SjxsIlxh0AkS1OthspkDO4sz81hphi9x5hXBrb9l/LKUV4XxP5Dr6x0Bv1VN7QJ
-	 JPOYSKEkvlAHwMATnLAjSaRiCKmnokEd6OTQ0Mu0ay6GhsN1g+hUgG/simriZqZCsB
-	 XPcBmLMCgB8rUy+OQn8gKjvKQg1SAGrorvM6lQgXslEQ3cdS94LXjOjhrOIoaeqrUB
-	 ASxFLNkLA2ydu5CGN9DDkJlr3E2Ck/1gD0mzAb3jDjmuc4YM1C3WPKe/AianXlSmwS
-	 Cg3r/1An4X4Dg==
-From: Asahi Lina <lina@asahilina.net>
-Date: Tue, 07 Mar 2023 23:25:27 +0900
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=N1zVk2hv;
+	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.167.170 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-oi1-f170.google.com with SMTP id c11so14567206oiw.2
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 15 Mar 2023 09:20:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1678897202;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=YHm8aqZXbOB1dA6dvL7Y2xb5VTwjaZrSc/p9oBx6dEA=;
+        b=N1zVk2hvrNavXuOp0eZ0S4QTNcjyoK6izz5OUnEZk+5s+0TkciqgNkLnRBqoarIbX6
+         SjjexBoVyhEIdOhye2JxUIf0Mo+o5kKesS35vENEbwVrqP1Xy/L90MQF+qh1FkFR4abX
+         rNpEXXTNdmuLdlOMqNxRXn2/86iVspJ5+AZzfD631Zqp69XWWUV4dKmVSLiBywNyesv3
+         kU3Y2Z0F7sairDCIBO59D5dxzMX6Fmz3l5UM7IWncS3muFlT118Y7oX8XF92Mp686n7/
+         L5hNSiDUWL76PtdwgnKigbR6CIkiH5ygY+dzJ0Ak/2W1PgON3FSeGR1CDMJri3Vjpwtp
+         uyYA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1678897202;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=YHm8aqZXbOB1dA6dvL7Y2xb5VTwjaZrSc/p9oBx6dEA=;
+        b=a/GmVjTFBd+O68PRsJcKBs6ya6H/XowHKmnyP6fvj+cNGvnpfuDc2WLDhl07lDjFV/
+         LnJuRgrJl5qy2FxiMNvxBa9Jl95qhq/4BCDRnnwYYMA6GW3S1g4kz6XMfYW65N9fMXr7
+         F+2BcfiI4dc0ivoLSc2aW2+3o7gqYFOj78qZxnJ8UT/0uGPE3tl92jR2UszOwK+SuOyW
+         wShq5rcEAMOSU17uiyOD+yiMZswKPuEsTZUaWQ8hnq8tk7nsfOF/uwAIsOPi0B71PqRW
+         ksvgWWwvGsnrJ5M+bzQyoLReJ6YjAyzJdYrBwAe71xD5P0vBM6b9y0KO/ruqFwC5JUcE
+         v3tQ==
+X-Gm-Message-State: AO0yUKVHve6y0WZj2qxpsBxSsVJrUqNPaY/tiDk7V5z0nG8x1N9QrgpB
+	oI4Feoz3IvvBU22oJfOUUgxoRWMV99/PJMzU9jc=
+X-Google-Smtp-Source: AK7set/to1bUzC/px7kYh7s+6isGsQUlr2afjdXliyX/Wzg0C7yiYiykegtboodu2VHL6L5D5MlRKKSUEmHzJDeR9eY=
+X-Received: by 2002:aca:654b:0:b0:384:1cf9:912e with SMTP id
+ j11-20020aca654b000000b003841cf9912emr1028109oiw.5.1678897202265; Wed, 15 Mar
+ 2023 09:20:02 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <20230307-rust-drm-v1-2-917ff5bc80a8@asahilina.net>
-References: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net>
-In-Reply-To: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>,
- Wedson Almeida Filho <wedsonaf@gmail.com>,
- Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
- =?utf-8?q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Luben Tuikov <luben.tuikov@amd.com>, Jarkko Sakkinen <jarkko@kernel.org>,
- Dave Hansen <dave.hansen@linux.intel.com>
-X-Mailer: b4 0.12.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1678199191; l=16844;
- i=lina@asahilina.net; s=20230221; h=from:subject:message-id;
- bh=ybXc676YDutsjlMaSuuenGoZJO/fukuHqULLdgV/v/M=;
- b=ZAJvSXMpknOJW8GmoecAuTMvhH+w8WU/LojoH//ra2xRSLnc2949i7/QPHqsvsnwzxoW56X/r
- CCeFhXwJVd9AxNJFrQPow+MTQsL1NH1jvQhvrIsCC5yTlyWY2NPGHs8
-X-Developer-Key: i=lina@asahilina.net; a=ed25519;
- pk=Qn8jZuOtR1m5GaiDfTrAoQ4NE1XoYVZ/wmt5YtXWFC4=
+References: <20230308155322.344664-1-robdclark@gmail.com> <20230308155322.344664-2-robdclark@gmail.com>
+ <ZAtQspuFjPtGy7ze@gmail.com> <CAF6AEGsGOr5+Q10wX=5ttrWCSUJfn7gzHW8QhxFC0GDLgagMHg@mail.gmail.com>
+ <ZBHNvT3BLgS3qvV5@gmail.com>
+In-Reply-To: <ZBHNvT3BLgS3qvV5@gmail.com>
+From: Rob Clark <robdclark@gmail.com>
+Date: Wed, 15 Mar 2023 09:19:49 -0700
+Message-ID: <CAF6AEGu1S2CXzRxV_c5tE_H+XUGiO=n0tXjLZ_u_tW-eMqMsQw@mail.gmail.com>
+To: =?UTF-8?B?Sm9uYXMgw4VkYWhs?= <jadahl@gmail.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 1AD9E3F09B
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
+X-Rspamd-Queue-Id: 1F3523EB82
+X-Spamd-Bar: -------
+X-Spamd-Result: default: False [-7.50 / 15.00];
+	DWL_DNSWL_HI(-3.50)[gmail.com:dkim];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[asahilina.net,quarantine];
-	R_SPF_ALLOW(-0.20)[+mx:c];
-	R_DKIM_ALLOW(-0.20)[asahilina.net:s=default];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	RCVD_IN_DNSWL_HI(-0.50)[209.85.167.170:from];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,protonmail.com,linaro.org,amd.com];
-	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	ASN(0.00)[asn:30880, ipnet:212.63.192.0/19, country:SE];
-	DKIM_TRACE(0.00)[asahilina.net:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.170:from];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,chromium.org,collabora.com,lwn.net,gmail.com,vger.kernel.org,linaro.org,lists.linaro.org,amd.com,intel.com,padovan.org];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TAGGED_RCPT(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ARC_NA(0.00)[]
-X-MailFrom: lina@asahilina.net
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: NWMHXBT5T5XBSQKDBG4JB7YLRY3PC6SJ
-X-Message-ID-Hash: NWMHXBT5T5XBSQKDBG4JB7YLRY3PC6SJ
-X-Mailman-Approved-At: Wed, 15 Mar 2023 17:02:20 +0000
-CC: Alyssa Rosenzweig <alyssa@rosenzweig.io>, Karol Herbst <kherbst@redhat.com>, Ella Stanforth <ella@iglunix.org>, Faith Ekstrand <faith.ekstrand@collabora.com>, Mary <mary@mary.zone>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-sgx@vger.kernel.org, asahi@lists.linux.dev, Asahi Lina <lina@asahilina.net>
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	TO_DN_SOME(0.00)[]
+Message-ID-Hash: 223VDWJ7JRRGQWJETODJBIS5VZUYRW5D
+X-Message-ID-Hash: 223VDWJ7JRRGQWJETODJBIS5VZUYRW5D
+X-MailFrom: robdclark@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: dri-devel@lists.freedesktop.org, Rob Clark <robdclark@chromium.org>, Pekka Paalanen <pekka.paalanen@collabora.com>, Jonathan Corbet <corbet@lwn.net>, intel-gfx@lists.freedesktop.org, "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>, open list <linux-kernel@vger.kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Luben Tuikov <luben.tuikov@amd.com>, Bagas Sanjaya <bagasdotme@gmail.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Gustavo Padovan <gustavo@padovan.org>, Matt Turner <mattst88@gmail.com>, freedreno@lists.freedesktop.org, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH RFC 02/18] rust: drm: Add Device and Driver abstractions
+Subject: [Linaro-mm-sig] Re: [PATCH v10 01/15] dma-buf/dma-fence: Add deadline awareness
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NWMHXBT5T5XBSQKDBG4JB7YLRY3PC6SJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/223VDWJ7JRRGQWJETODJBIS5VZUYRW5D/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Add the initial abstractions for DRM drivers and devices. These go
-together in one commit since they are fairly tightly coupled types.
-
-A few things have been stubbed out, to be implemented as further bits of
-the DRM subsystem are introduced.
-
-Signed-off-by: Asahi Lina <lina@asahilina.net>
----
- rust/bindings/bindings_helper.h |   3 +
- rust/kernel/drm/device.rs       |  76 +++++++++
- rust/kernel/drm/drv.rs          | 339 ++++++++++++++++++++++++++++++++++++++++
- rust/kernel/drm/mod.rs          |   2 +
- 4 files changed, 420 insertions(+)
-
-diff --git a/rust/bindings/bindings_helper.h b/rust/bindings/bindings_helper.h
-index 2687bef1676f..2a999138c4ae 100644
---- a/rust/bindings/bindings_helper.h
-+++ b/rust/bindings/bindings_helper.h
-@@ -6,10 +6,13 @@
-  * Sorted alphabetically.
-  */
- 
-+#include <drm/drm_device.h>
-+#include <drm/drm_drv.h>
- #include <drm/drm_ioctl.h>
- #include <linux/delay.h>
- #include <linux/device.h>
- #include <linux/dma-mapping.h>
-+#include <linux/fs.h>
- #include <linux/ioctl.h>
- #include <linux/io-pgtable.h>
- #include <linux/ktime.h>
-diff --git a/rust/kernel/drm/device.rs b/rust/kernel/drm/device.rs
-new file mode 100644
-index 000000000000..6007f941137a
---- /dev/null
-+++ b/rust/kernel/drm/device.rs
-@@ -0,0 +1,76 @@
-+// SPDX-License-Identifier: GPL-2.0 OR MIT
-+
-+//! DRM device.
-+//!
-+//! C header: [`include/linux/drm/drm_device.h`](../../../../include/linux/drm/drm_device.h)
-+
-+use crate::{bindings, device, drm, types::ForeignOwnable};
-+use core::marker::PhantomData;
-+
-+/// Represents a reference to a DRM device. The device is reference-counted and is guaranteed to
-+/// not be dropped while this object is alive.
-+pub struct Device<T: drm::drv::Driver> {
-+    // Type invariant: ptr must be a valid and initialized drm_device,
-+    // and this value must either own a reference to it or the caller
-+    // must ensure that it is never dropped if the reference is borrowed.
-+    pub(super) ptr: *mut bindings::drm_device,
-+    _p: PhantomData<T>,
-+}
-+
-+impl<T: drm::drv::Driver> Device<T> {
-+    // Not intended to be called externally, except via declare_drm_ioctls!()
-+    #[doc(hidden)]
-+    pub unsafe fn from_raw(raw: *mut bindings::drm_device) -> Device<T> {
-+        Device {
-+            ptr: raw,
-+            _p: PhantomData,
-+        }
-+    }
-+
-+    #[allow(dead_code)]
-+    pub(crate) fn raw(&self) -> *const bindings::drm_device {
-+        self.ptr
-+    }
-+
-+    pub(crate) fn raw_mut(&mut self) -> *mut bindings::drm_device {
-+        self.ptr
-+    }
-+
-+    /// Returns a borrowed reference to the user data associated with this Device.
-+    pub fn data(&self) -> <T::Data as ForeignOwnable>::Borrowed<'_> {
-+        unsafe { T::Data::borrow((*self.ptr).dev_private) }
-+    }
-+}
-+
-+impl<T: drm::drv::Driver> Drop for Device<T> {
-+    fn drop(&mut self) {
-+        // SAFETY: By the type invariants, we know that `self` owns a reference, so it is safe to
-+        // relinquish it now.
-+        unsafe { bindings::drm_dev_put(self.ptr) };
-+    }
-+}
-+
-+impl<T: drm::drv::Driver> Clone for Device<T> {
-+    fn clone(&self) -> Self {
-+        // SAFETY: We get a new reference and then create a new owning object from the raw pointer
-+        unsafe {
-+            bindings::drm_dev_get(self.ptr);
-+            Device::from_raw(self.ptr)
-+        }
-+    }
-+}
-+
-+// SAFETY: `Device` only holds a pointer to a C device, which is safe to be used from any thread.
-+unsafe impl<T: drm::drv::Driver> Send for Device<T> {}
-+
-+// SAFETY: `Device` only holds a pointer to a C device, references to which are safe to be used
-+// from any thread.
-+unsafe impl<T: drm::drv::Driver> Sync for Device<T> {}
-+
-+// Make drm::Device work for dev_info!() and friends
-+unsafe impl<T: drm::drv::Driver> device::RawDevice for Device<T> {
-+    fn raw_device(&self) -> *mut bindings::device {
-+        // SAFETY: ptr must be valid per the type invariant
-+        unsafe { (*self.ptr).dev }
-+    }
-+}
-diff --git a/rust/kernel/drm/drv.rs b/rust/kernel/drm/drv.rs
-new file mode 100644
-index 000000000000..29a465515dc9
---- /dev/null
-+++ b/rust/kernel/drm/drv.rs
-@@ -0,0 +1,339 @@
-+// SPDX-License-Identifier: GPL-2.0 OR MIT
-+
-+//! DRM driver core.
-+//!
-+//! C header: [`include/linux/drm/drm_drv.h`](../../../../include/linux/drm/drm_drv.h)
-+
-+use crate::{
-+    bindings, device, drm,
-+    error::code::*,
-+    error::from_kernel_err_ptr,
-+    error::{Error, Result},
-+    prelude::*,
-+    private::Sealed,
-+    str::CStr,
-+    types::ForeignOwnable,
-+    ThisModule,
-+};
-+use core::{
-+    marker::{PhantomData, PhantomPinned},
-+    pin::Pin,
-+};
-+use macros::vtable;
-+
-+/// Driver use the GEM memory manager. This should be set for all modern drivers.
-+pub const FEAT_GEM: u32 = bindings::drm_driver_feature_DRIVER_GEM;
-+/// Driver supports mode setting interfaces (KMS).
-+pub const FEAT_MODESET: u32 = bindings::drm_driver_feature_DRIVER_MODESET;
-+/// Driver supports dedicated render nodes.
-+pub const FEAT_RENDER: u32 = bindings::drm_driver_feature_DRIVER_RENDER;
-+/// Driver supports the full atomic modesetting userspace API.
-+///
-+/// Drivers which only use atomic internally, but do not support the full userspace API (e.g. not
-+/// all properties converted to atomic, or multi-plane updates are not guaranteed to be tear-free)
-+/// should not set this flag.
-+pub const FEAT_ATOMIC: u32 = bindings::drm_driver_feature_DRIVER_ATOMIC;
-+/// Driver supports DRM sync objects for explicit synchronization of command submission.
-+pub const FEAT_SYNCOBJ: u32 = bindings::drm_driver_feature_DRIVER_SYNCOBJ;
-+/// Driver supports the timeline flavor of DRM sync objects for explicit synchronization of command
-+/// submission.
-+pub const FEAT_SYNCOBJ_TIMELINE: u32 = bindings::drm_driver_feature_DRIVER_SYNCOBJ_TIMELINE;
-+
-+/// Information data for a DRM Driver.
-+pub struct DriverInfo {
-+    /// Driver major version.
-+    pub major: i32,
-+    /// Driver minor version.
-+    pub minor: i32,
-+    /// Driver patchlevel version.
-+    pub patchlevel: i32,
-+    /// Driver name.
-+    pub name: &'static CStr,
-+    /// Driver description.
-+    pub desc: &'static CStr,
-+    /// Driver date.
-+    pub date: &'static CStr,
-+}
-+
-+/// Internal memory management operation set, normally created by memory managers (e.g. GEM).
-+///
-+/// See `kernel::drm::gem` and `kernel::drm::gem::shmem`.
-+pub struct AllocOps {
-+    pub(crate) gem_create_object: Option<
-+        unsafe extern "C" fn(
-+            dev: *mut bindings::drm_device,
-+            size: usize,
-+        ) -> *mut bindings::drm_gem_object,
-+    >,
-+    pub(crate) prime_handle_to_fd: Option<
-+        unsafe extern "C" fn(
-+            dev: *mut bindings::drm_device,
-+            file_priv: *mut bindings::drm_file,
-+            handle: u32,
-+            flags: u32,
-+            prime_fd: *mut core::ffi::c_int,
-+        ) -> core::ffi::c_int,
-+    >,
-+    pub(crate) prime_fd_to_handle: Option<
-+        unsafe extern "C" fn(
-+            dev: *mut bindings::drm_device,
-+            file_priv: *mut bindings::drm_file,
-+            prime_fd: core::ffi::c_int,
-+            handle: *mut u32,
-+        ) -> core::ffi::c_int,
-+    >,
-+    pub(crate) gem_prime_import: Option<
-+        unsafe extern "C" fn(
-+            dev: *mut bindings::drm_device,
-+            dma_buf: *mut bindings::dma_buf,
-+        ) -> *mut bindings::drm_gem_object,
-+    >,
-+    pub(crate) gem_prime_import_sg_table: Option<
-+        unsafe extern "C" fn(
-+            dev: *mut bindings::drm_device,
-+            attach: *mut bindings::dma_buf_attachment,
-+            sgt: *mut bindings::sg_table,
-+        ) -> *mut bindings::drm_gem_object,
-+    >,
-+    pub(crate) gem_prime_mmap: Option<
-+        unsafe extern "C" fn(
-+            obj: *mut bindings::drm_gem_object,
-+            vma: *mut bindings::vm_area_struct,
-+        ) -> core::ffi::c_int,
-+    >,
-+    pub(crate) dumb_create: Option<
-+        unsafe extern "C" fn(
-+            file_priv: *mut bindings::drm_file,
-+            dev: *mut bindings::drm_device,
-+            args: *mut bindings::drm_mode_create_dumb,
-+        ) -> core::ffi::c_int,
-+    >,
-+    pub(crate) dumb_map_offset: Option<
-+        unsafe extern "C" fn(
-+            file_priv: *mut bindings::drm_file,
-+            dev: *mut bindings::drm_device,
-+            handle: u32,
-+            offset: *mut u64,
-+        ) -> core::ffi::c_int,
-+    >,
-+    pub(crate) dumb_destroy: Option<
-+        unsafe extern "C" fn(
-+            file_priv: *mut bindings::drm_file,
-+            dev: *mut bindings::drm_device,
-+            handle: u32,
-+        ) -> core::ffi::c_int,
-+    >,
-+}
-+
-+/// Trait for memory manager implementations. Implemented internally.
-+pub trait AllocImpl: Sealed {
-+    /// The C callback operations for this memory manager.
-+    const ALLOC_OPS: AllocOps;
-+}
-+
-+/// A DRM driver implementation.
-+#[vtable]
-+pub trait Driver {
-+    /// Context data associated with the DRM driver
-+    ///
-+    /// Determines the type of the context data passed to each of the methods of the trait.
-+    type Data: ForeignOwnable + Sync + Send;
-+
-+    /// The type used to manage memory for this driver.
-+    ///
-+    /// Should be either `drm::gem::Object<T>` or `drm::gem::shmem::Object<T>`.
-+    type Object: AllocImpl;
-+
-+    /// Driver metadata
-+    const INFO: DriverInfo;
-+
-+    /// Feature flags
-+    const FEATURES: u32;
-+
-+    /// IOCTL list. See `kernel::drm::ioctl::declare_drm_ioctls!{}`.
-+    const IOCTLS: &'static [drm::ioctl::DrmIoctlDescriptor];
-+}
-+
-+/// A registration of a DRM device
-+///
-+/// # Invariants:
-+///
-+/// drm is always a valid pointer to an allocated drm_device
-+pub struct Registration<T: Driver> {
-+    drm: drm::device::Device<T>,
-+    registered: bool,
-+    fops: bindings::file_operations,
-+    vtable: Pin<Box<bindings::drm_driver>>,
-+    _p: PhantomData<T>,
-+    _pin: PhantomPinned,
-+}
-+
-+#[cfg(CONFIG_DRM_LEGACY)]
-+macro_rules! drm_legacy_fields {
-+    ( $($field:ident: $val:expr),* $(,)? ) => {
-+        bindings::drm_driver {
-+            $( $field: $val ),*,
-+            firstopen: None,
-+            preclose: None,
-+            dma_ioctl: None,
-+            dma_quiescent: None,
-+            context_dtor: None,
-+            irq_handler: None,
-+            irq_preinstall: None,
-+            irq_postinstall: None,
-+            irq_uninstall: None,
-+            get_vblank_counter: None,
-+            enable_vblank: None,
-+            disable_vblank: None,
-+            dev_priv_size: 0,
-+        }
-+    }
-+}
-+
-+#[cfg(not(CONFIG_DRM_LEGACY))]
-+macro_rules! drm_legacy_fields {
-+    ( $($field:ident: $val:expr),* $(,)? ) => {
-+        bindings::drm_driver {
-+            $( $field: $val ),*
-+        }
-+    }
-+}
-+
-+/// Registers a DRM device with the rest of the kernel.
-+///
-+/// It automatically picks up THIS_MODULE.
-+#[allow(clippy::crate_in_macro_def)]
-+#[macro_export]
-+macro_rules! drm_device_register {
-+    ($reg:expr, $data:expr, $flags:expr $(,)?) => {{
-+        $crate::drm::drv::Registration::register($reg, $data, $flags, &crate::THIS_MODULE)
-+    }};
-+}
-+
-+impl<T: Driver> Registration<T> {
-+    const VTABLE: bindings::drm_driver = drm_legacy_fields! {
-+        load: None,
-+        open: None, // TODO: File abstraction
-+        postclose: None, // TODO: File abstraction
-+        lastclose: None,
-+        unload: None,
-+        release: None,
-+        master_set: None,
-+        master_drop: None,
-+        debugfs_init: None,
-+        gem_create_object: T::Object::ALLOC_OPS.gem_create_object,
-+        prime_handle_to_fd: T::Object::ALLOC_OPS.prime_handle_to_fd,
-+        prime_fd_to_handle: T::Object::ALLOC_OPS.prime_fd_to_handle,
-+        gem_prime_import: T::Object::ALLOC_OPS.gem_prime_import,
-+        gem_prime_import_sg_table: T::Object::ALLOC_OPS.gem_prime_import_sg_table,
-+        gem_prime_mmap: T::Object::ALLOC_OPS.gem_prime_mmap,
-+        dumb_create: T::Object::ALLOC_OPS.dumb_create,
-+        dumb_map_offset: T::Object::ALLOC_OPS.dumb_map_offset,
-+        dumb_destroy: T::Object::ALLOC_OPS.dumb_destroy,
-+
-+        major: T::INFO.major,
-+        minor: T::INFO.minor,
-+        patchlevel: T::INFO.patchlevel,
-+        name: T::INFO.name.as_char_ptr() as *mut _,
-+        desc: T::INFO.desc.as_char_ptr() as *mut _,
-+        date: T::INFO.date.as_char_ptr() as *mut _,
-+
-+        driver_features: T::FEATURES,
-+        ioctls: T::IOCTLS.as_ptr(),
-+        num_ioctls: T::IOCTLS.len() as i32,
-+        fops: core::ptr::null_mut(),
-+    };
-+
-+    /// Creates a new [`Registration`] but does not register it yet.
-+    ///
-+    /// It is allowed to move.
-+    pub fn new(parent: &dyn device::RawDevice) -> Result<Self> {
-+        let vtable = Pin::new(Box::try_new(Self::VTABLE)?);
-+        let raw_drm = unsafe { bindings::drm_dev_alloc(&*vtable, parent.raw_device()) };
-+        let raw_drm = from_kernel_err_ptr(raw_drm)?;
-+
-+        // The reference count is one, and now we take ownership of that reference as a
-+        // drm::device::Device.
-+        let drm = unsafe { drm::device::Device::from_raw(raw_drm) };
-+
-+        Ok(Self {
-+            drm,
-+            registered: false,
-+            vtable,
-+            fops: Default::default(), // TODO: GEM abstraction
-+            _pin: PhantomPinned,
-+            _p: PhantomData,
-+        })
-+    }
-+
-+    /// Registers a DRM device with the rest of the kernel.
-+    ///
-+    /// Users are encouraged to use the [`drm_device_register!()`] macro because it automatically
-+    /// picks up the current module.
-+    pub fn register(
-+        self: Pin<&mut Self>,
-+        data: T::Data,
-+        flags: usize,
-+        module: &'static ThisModule,
-+    ) -> Result {
-+        if self.registered {
-+            // Already registered.
-+            return Err(EINVAL);
-+        }
-+
-+        // SAFETY: We never move out of `this`.
-+        let this = unsafe { self.get_unchecked_mut() };
-+        let data_pointer = <T::Data as ForeignOwnable>::into_foreign(data);
-+        // SAFETY: `drm` is valid per the type invariant
-+        unsafe {
-+            (*this.drm.raw_mut()).dev_private = data_pointer as *mut _;
-+        }
-+
-+        this.fops.owner = module.0;
-+        this.vtable.fops = &this.fops;
-+
-+        // SAFETY: The device is now initialized and ready to be registered.
-+        let ret = unsafe { bindings::drm_dev_register(this.drm.raw_mut(), flags as u64) };
-+        if ret < 0 {
-+            // SAFETY: `data_pointer` was returned by `into_foreign` above.
-+            unsafe { T::Data::from_foreign(data_pointer) };
-+            return Err(Error::from_kernel_errno(ret));
-+        }
-+
-+        this.registered = true;
-+        Ok(())
-+    }
-+
-+    /// Returns a reference to the `Device` instance for this registration.
-+    pub fn device(&self) -> &drm::device::Device<T> {
-+        &self.drm
-+    }
-+}
-+
-+// SAFETY: `Registration` doesn't offer any methods or access to fields when shared between threads
-+// or CPUs, so it is safe to share it.
-+unsafe impl<T: Driver> Sync for Registration<T> {}
-+
-+// SAFETY: Registration with and unregistration from the drm subsystem can happen from any thread.
-+// Additionally, `T::Data` (which is dropped during unregistration) is `Send`, so it is ok to move
-+// `Registration` to different threads.
-+#[allow(clippy::non_send_fields_in_send_ty)]
-+unsafe impl<T: Driver> Send for Registration<T> {}
-+
-+impl<T: Driver> Drop for Registration<T> {
-+    /// Removes the registration from the kernel if it has completed successfully before.
-+    fn drop(&mut self) {
-+        if self.registered {
-+            // Get a pointer to the data stored in device before destroying it.
-+            // SAFETY: `drm` is valid per the type invariant
-+            let data_pointer = unsafe { (*self.drm.raw_mut()).dev_private };
-+
-+            // SAFETY: Since `registered` is true, `self.drm` is both valid and registered.
-+            unsafe { bindings::drm_dev_unregister(self.drm.raw_mut()) };
-+
-+            // Free data as well.
-+            // SAFETY: `data_pointer` was returned by `into_foreign` during registration.
-+            unsafe { <T::Data as ForeignOwnable>::from_foreign(data_pointer) };
-+        }
-+    }
-+}
-diff --git a/rust/kernel/drm/mod.rs b/rust/kernel/drm/mod.rs
-index 9ec6d7cbcaf3..69376b3c6db9 100644
---- a/rust/kernel/drm/mod.rs
-+++ b/rust/kernel/drm/mod.rs
-@@ -2,4 +2,6 @@
- 
- //! DRM subsystem abstractions.
- 
-+pub mod device;
-+pub mod drv;
- pub mod ioctl;
-
--- 
-2.35.1
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gV2VkLCBNYXIgMTUsIDIwMjMgYXQgNjo1M+KAr0FNIEpvbmFzIMOFZGFobCA8amFkYWhsQGdt
+YWlsLmNvbT4gd3JvdGU6DQo+DQo+IE9uIEZyaSwgTWFyIDEwLCAyMDIzIGF0IDA5OjM4OjE4QU0g
+LTA4MDAsIFJvYiBDbGFyayB3cm90ZToNCj4gPiBPbiBGcmksIE1hciAxMCwgMjAyMyBhdCA3OjQ1
+4oCvQU0gSm9uYXMgw4VkYWhsIDxqYWRhaGxAZ21haWwuY29tPiB3cm90ZToNCj4gPiA+DQo+ID4g
+PiBPbiBXZWQsIE1hciAwOCwgMjAyMyBhdCAwNzo1Mjo1MkFNIC0wODAwLCBSb2IgQ2xhcmsgd3Jv
+dGU6DQo+ID4gPiA+IEZyb206IFJvYiBDbGFyayA8cm9iZGNsYXJrQGNocm9taXVtLm9yZz4NCj4g
+PiA+ID4NCj4gPiA+ID4gQWRkIGEgd2F5IHRvIGhpbnQgdG8gdGhlIGZlbmNlIHNpZ25hbGVyIG9m
+IGFuIHVwY29taW5nIGRlYWRsaW5lLCBzdWNoIGFzDQo+ID4gPiA+IHZibGFuaywgd2hpY2ggdGhl
+IGZlbmNlIHdhaXRlciB3b3VsZCBwcmVmZXIgbm90IHRvIG1pc3MuICBUaGlzIGlzIHRvIGFpZA0K
+PiA+ID4gPiB0aGUgZmVuY2Ugc2lnbmFsZXIgaW4gbWFraW5nIHBvd2VyIG1hbmFnZW1lbnQgZGVj
+aXNpb25zLCBsaWtlIGJvb3N0aW5nDQo+ID4gPiA+IGZyZXF1ZW5jeSBhcyB0aGUgZGVhZGxpbmUg
+YXBwcm9hY2hlcyBhbmQgYXdhcmVuZXNzIG9mIG1pc3NpbmcgZGVhZGxpbmVzDQo+ID4gPiA+IHNv
+IHRoYXQgY2FuIGJlIGZhY3RvcmVkIGluIHRvIHRoZSBmcmVxdWVuY3kgc2NhbGluZy4NCj4gPiA+
+ID4NCj4gPiA+ID4gdjI6IERyb3AgZG1hX2ZlbmNlOjpkZWFkbGluZSBhbmQgcmVsYXRlZCBsb2dp
+YyB0byBmaWx0ZXIgZHVwbGljYXRlDQo+ID4gPiA+ICAgICBkZWFkbGluZXMsIHRvIGF2b2lkIGlu
+Y3JlYXNpbmcgZG1hX2ZlbmNlIHNpemUuICBUaGUgZmVuY2UtY29udGV4dA0KPiA+ID4gPiAgICAg
+aW1wbGVtZW50YXRpb24gd2lsbCBuZWVkIHNpbWlsYXIgbG9naWMgdG8gdHJhY2sgZGVhZGxpbmVz
+IG9mIGFsbA0KPiA+ID4gPiAgICAgdGhlIGZlbmNlcyBvbiB0aGUgc2FtZSB0aW1lbGluZS4gIFtj
+a29lbmlnXQ0KPiA+ID4gPiB2MzogQ2xhcmlmeSBsb2NraW5nIHdydC4gc2V0X2RlYWRsaW5lIGNh
+bGxiYWNrDQo+ID4gPiA+IHY0OiBDbGFyaWZ5IGluIGRvY3MgY29tbWVudCB0aGF0IHRoaXMgaXMg
+YSBoaW50DQo+ID4gPiA+IHY1OiBEcm9wIERNQV9GRU5DRV9GTEFHX0hBU19ERUFETElORV9CSVQu
+DQo+ID4gPiA+IHY2OiBNb3JlIGRvY3MNCj4gPiA+ID4gdjc6IEZpeCB0eXBvLCBjbGFyaWZ5IHBh
+c3QgZGVhZGxpbmVzDQo+ID4gPiA+DQo+ID4gPiA+IFNpZ25lZC1vZmYtYnk6IFJvYiBDbGFyayA8
+cm9iZGNsYXJrQGNocm9taXVtLm9yZz4NCj4gPiA+ID4gUmV2aWV3ZWQtYnk6IENocmlzdGlhbiBL
+w7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCj4gPiA+ID4gQWNrZWQtYnk6IFBla2th
+IFBhYWxhbmVuIDxwZWtrYS5wYWFsYW5lbkBjb2xsYWJvcmEuY29tPg0KPiA+ID4gPiBSZXZpZXdl
+ZC1ieTogQmFnYXMgU2FuamF5YSA8YmFnYXNkb3RtZUBnbWFpbC5jb20+DQo+ID4gPiA+IC0tLQ0K
+PiA+ID4NCj4gPiA+IEhpIFJvYiENCj4gPiA+DQo+ID4gPiA+ICBEb2N1bWVudGF0aW9uL2RyaXZl
+ci1hcGkvZG1hLWJ1Zi5yc3QgfCAgNiArKysNCj4gPiA+ID4gIGRyaXZlcnMvZG1hLWJ1Zi9kbWEt
+ZmVuY2UuYyAgICAgICAgICB8IDU5ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysNCj4gPiA+
+ID4gIGluY2x1ZGUvbGludXgvZG1hLWZlbmNlLmggICAgICAgICAgICB8IDIyICsrKysrKysrKysr
+DQo+ID4gPiA+ICAzIGZpbGVzIGNoYW5nZWQsIDg3IGluc2VydGlvbnMoKykNCj4gPiA+ID4NCj4g
+PiA+ID4gZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRpb24vZHJpdmVyLWFwaS9kbWEtYnVmLnJzdCBi
+L0RvY3VtZW50YXRpb24vZHJpdmVyLWFwaS9kbWEtYnVmLnJzdA0KPiA+ID4gPiBpbmRleCA2MjJi
+ODE1NmQyMTIuLjE4M2U0ODBkOGNlYSAxMDA2NDQNCj4gPiA+ID4gLS0tIGEvRG9jdW1lbnRhdGlv
+bi9kcml2ZXItYXBpL2RtYS1idWYucnN0DQo+ID4gPiA+ICsrKyBiL0RvY3VtZW50YXRpb24vZHJp
+dmVyLWFwaS9kbWEtYnVmLnJzdA0KPiA+ID4gPiBAQCAtMTY0LDYgKzE2NCwxMiBAQCBETUEgRmVu
+Y2UgU2lnbmFsbGluZyBBbm5vdGF0aW9ucw0KPiA+ID4gPiAgLi4ga2VybmVsLWRvYzo6IGRyaXZl
+cnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYw0KPiA+ID4gPiAgICAgOmRvYzogZmVuY2Ugc2lnbmFsbGlu
+ZyBhbm5vdGF0aW9uDQo+ID4gPiA+DQo+ID4gPiA+ICtETUEgRmVuY2UgRGVhZGxpbmUgSGludHMN
+Cj4gPiA+ID4gK35+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fg0KPiA+ID4gPiArDQo+ID4gPiA+ICsu
+LiBrZXJuZWwtZG9jOjogZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jDQo+ID4gPiA+ICsgICA6
+ZG9jOiBkZWFkbGluZSBoaW50cw0KPiA+ID4gPiArDQo+ID4gPiA+ICBETUEgRmVuY2VzIEZ1bmN0
+aW9ucyBSZWZlcmVuY2UNCj4gPiA+ID4gIH5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fg0K
+PiA+ID4gPg0KPiA+ID4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5j
+IGIvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jDQo+ID4gPiA+IGluZGV4IDBkZTA0ODJjZDM2
+ZS4uZjE3N2M1NjI2OWJiIDEwMDY0NA0KPiA+ID4gPiAtLS0gYS9kcml2ZXJzL2RtYS1idWYvZG1h
+LWZlbmNlLmMNCj4gPiA+ID4gKysrIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jDQo+ID4g
+PiA+IEBAIC05MTIsNiArOTEyLDY1IEBAIGRtYV9mZW5jZV93YWl0X2FueV90aW1lb3V0KHN0cnVj
+dCBkbWFfZmVuY2UgKipmZW5jZXMsIHVpbnQzMl90IGNvdW50LA0KPiA+ID4gPiAgfQ0KPiA+ID4g
+PiAgRVhQT1JUX1NZTUJPTChkbWFfZmVuY2Vfd2FpdF9hbnlfdGltZW91dCk7DQo+ID4gPiA+DQo+
+ID4gPiA+ICsvKioNCj4gPiA+ID4gKyAqIERPQzogZGVhZGxpbmUgaGludHMNCj4gPiA+ID4gKyAq
+DQo+ID4gPiA+ICsgKiBJbiBhbiBpZGVhbCB3b3JsZCwgaXQgd291bGQgYmUgcG9zc2libGUgdG8g
+cGlwZWxpbmUgYSB3b3JrbG9hZCBzdWZmaWNpZW50bHkNCj4gPiA+ID4gKyAqIHRoYXQgYSB1dGls
+aXphdGlvbiBiYXNlZCBkZXZpY2UgZnJlcXVlbmN5IGdvdmVybm9yIGNvdWxkIGFycml2ZSBhdCBh
+IG1pbmltdW0NCj4gPiA+ID4gKyAqIGZyZXF1ZW5jeSB0aGF0IG1lZXRzIHRoZSByZXF1aXJlbWVu
+dHMgb2YgdGhlIHVzZS1jYXNlLCBpbiBvcmRlciB0byBtaW5pbWl6ZQ0KPiA+ID4gPiArICogcG93
+ZXIgY29uc3VtcHRpb24uICBCdXQgaW4gdGhlIHJlYWwgd29ybGQgdGhlcmUgYXJlIG1hbnkgd29y
+a2xvYWRzIHdoaWNoDQo+ID4gPiA+ICsgKiBkZWZ5IHRoaXMgaWRlYWwuICBGb3IgZXhhbXBsZSwg
+YnV0IG5vdCBsaW1pdGVkIHRvOg0KPiA+ID4gPiArICoNCj4gPiA+ID4gKyAqICogV29ya2xvYWRz
+IHRoYXQgcGluZy1wb25nIGJldHdlZW4gZGV2aWNlIGFuZCBDUFUsIHdpdGggYWx0ZXJuYXRpbmcg
+cGVyaW9kcw0KPiA+ID4gPiArICogICBvZiBDUFUgd2FpdGluZyBmb3IgZGV2aWNlLCBhbmQgZGV2
+aWNlIHdhaXRpbmcgb24gQ1BVLiAgVGhpcyBjYW4gcmVzdWx0IGluDQo+ID4gPiA+ICsgKiAgIGRl
+dmZyZXEgYW5kIGNwdWZyZXEgc2VlaW5nIGlkbGUgdGltZSBpbiB0aGVpciByZXNwZWN0aXZlIGRv
+bWFpbnMgYW5kIGluDQo+ID4gPiA+ICsgKiAgIHJlc3VsdCByZWR1Y2UgZnJlcXVlbmN5Lg0KPiA+
+ID4gPiArICoNCj4gPiA+ID4gKyAqICogV29ya2xvYWRzIHRoYXQgaW50ZXJhY3Qgd2l0aCBhIHBl
+cmlvZGljIHRpbWUgYmFzZWQgZGVhZGxpbmUsIHN1Y2ggYXMgZG91YmxlDQo+ID4gPiA+ICsgKiAg
+IGJ1ZmZlcmVkIEdQVSByZW5kZXJpbmcgdnMgdmJsYW5rIHN5bmMnZCBwYWdlIGZsaXBwaW5nLiAg
+SW4gdGhpcyBzY2VuYXJpbywNCj4gPiA+ID4gKyAqICAgbWlzc2luZyBhIHZibGFuayBkZWFkbGlu
+ZSByZXN1bHRzIGluIGFuICppbmNyZWFzZSogaW4gaWRsZSB0aW1lIG9uIHRoZSBHUFUNCj4gPiA+
+ID4gKyAqICAgKHNpbmNlIGl0IGhhcyB0byB3YWl0IGFuIGFkZGl0aW9uYWwgdmJsYW5rIHBlcmlv
+ZCksIHNlbmRpbmcgYSBzaWduYWwgdG8NCj4gPiA+ID4gKyAqICAgdGhlIEdQVSdzIGRldmZyZXEg
+dG8gcmVkdWNlIGZyZXF1ZW5jeSwgd2hlbiBpbiBmYWN0IHRoZSBvcHBvc2l0ZSBpcyB3aGF0IGlz
+DQo+ID4gPiA+ICsgKiAgIG5lZWRlZC4NCj4gPiA+DQo+ID4gPiBUaGlzIGlzIHRoZSB1c2UgY2Fz
+ZSBJJ2QgbGlrZSB0byBnZXQgc29tZSBiZXR0ZXIgdW5kZXJzdGFuZGluZyBhYm91dCBob3cNCj4g
+PiA+IHRoaXMgc2VyaWVzIGludGVuZHMgdG8gd29yaywgYXMgdGhlIHByb2JsZW1hdGljIHNjaGVk
+dWxpbmcgYmVoYXZpb3INCj4gPiA+IHRyaWdnZXJlZCBieSBtaXNzZWQgZGVhZGxpbmVzIGhhcyBw
+bGFndWVkIGNvbXBvc2l0aW5nIGRpc3BsYXkgc2VydmVycw0KPiA+ID4gZm9yIGEgbG9uZyB0aW1l
+Lg0KPiA+ID4NCj4gPiA+IEkgYXBvbG9naXplLCBJJ20gbm90IGEgR1BVIGRyaXZlciBkZXZlbG9w
+ZXIsIG5vciBhbiBPcGVuR0wgZHJpdmVyDQo+ID4gPiBkZXZlbG9wZXIsIHNvIEkgd2lsbCBuZWVk
+IHNvbWUgaGFuZCBob2xkaW5nIHdoZW4gaXQgY29tZXMgdG8NCj4gPiA+IHVuZGVyc3RhbmRpbmcg
+ZXhhY3RseSB3aGF0IHBpZWNlIG9mIHNvZnR3YXJlIGlzIHJlc3BvbnNpYmxlIGZvcg0KPiA+ID4g
+Y29tbXVuaWNhdGluZyB3aGF0IHBpZWNlIG9mIGluZm9ybWF0aW9uLg0KPiA+ID4NCj4gPiA+ID4g
+KyAqDQo+ID4gPiA+ICsgKiBUbyB0aGlzIGVuZCwgZGVhZGxpbmUgaGludChzKSBjYW4gYmUgc2V0
+IG9uIGEgJmRtYV9mZW5jZSB2aWEgJmRtYV9mZW5jZV9zZXRfZGVhZGxpbmUuDQo+ID4gPiA+ICsg
+KiBUaGUgZGVhZGxpbmUgaGludCBwcm92aWRlcyBhIHdheSBmb3IgdGhlIHdhaXRpbmcgZHJpdmVy
+LCBvciB1c2Vyc3BhY2UsIHRvDQo+ID4gPiA+ICsgKiBjb252ZXkgYW4gYXBwcm9wcmlhdGUgc2Vu
+c2Ugb2YgdXJnZW5jeSB0byB0aGUgc2lnbmFsaW5nIGRyaXZlci4NCj4gPiA+ID4gKyAqDQo+ID4g
+PiA+ICsgKiBBIGRlYWRsaW5lIGhpbnQgaXMgZ2l2ZW4gaW4gYWJzb2x1dGUga3RpbWUgKENMT0NL
+X01PTk9UT05JQyBmb3IgdXNlcnNwYWNlDQo+ID4gPiA+ICsgKiBmYWNpbmcgQVBJcykuICBUaGUg
+dGltZSBjb3VsZCBlaXRoZXIgYmUgc29tZSBwb2ludCBpbiB0aGUgZnV0dXJlIChzdWNoIGFzDQo+
+ID4gPiA+ICsgKiB0aGUgdmJsYW5rIGJhc2VkIGRlYWRsaW5lIGZvciBwYWdlLWZsaXBwaW5nLCBv
+ciB0aGUgc3RhcnQgb2YgYSBjb21wb3NpdG9yJ3MNCj4gPiA+ID4gKyAqIGNvbXBvc2l0aW9uIGN5
+Y2xlKSwgb3IgdGhlIGN1cnJlbnQgdGltZSB0byBpbmRpY2F0ZSBhbiBpbW1lZGlhdGUgZGVhZGxp
+bmUNCj4gPiA+ID4gKyAqIGhpbnQgKEllLiBmb3J3YXJkIHByb2dyZXNzIGNhbm5vdCBiZSBtYWRl
+IHVudGlsIHRoaXMgZmVuY2UgaXMgc2lnbmFsZWQpLg0KPiA+ID4NCj4gPiA+IElzIGl0IGd1YXJh
+bnRlZWQgdGhhdCBhIEdQVSBkcml2ZXIgd2lsbCB1c2UgdGhlIGFjdHVhbCBzdGFydCBvZiB0aGUN
+Cj4gPiA+IHZibGFuayBhcyB0aGUgZWZmZWN0aXZlIGRlYWRsaW5lPyBJIGhhdmUgc29tZSBtZW1v
+cmllcyBvZiBzZWluZw0KPiA+ID4gc29tZXRoaW5nIGFib3V0IHZibGFuayBldmFzaW9uIGJyb3dz
+aW5nIGRyaXZlciBjb2RlLCB3aGljaCBJIG1pZ2h0IGhhdmUNCj4gPiA+IG1pc3VuZGVyc3Rvb2Qs
+IGJ1dCBJIGhhdmUgeWV0IHRvIGZpbmQgd2hldGhlciB0aGlzIGlzIHNvbWV0aGluZw0KPiA+ID4g
+dXNlcnNwYWNlIGNhbiBhY3R1YWxseSBleHBlY3QgdG8gYmUgc29tZXRoaW5nIGl0IGNhbiByZWx5
+IG9uLg0KPiA+DQo+ID4gSSBndWVzcyB5b3UgbWVhbiBzL0dQVSBkcml2ZXIvZGlzcGxheSBkcml2
+ZXIvID8gIEl0IG1ha2VzIHRoaW5ncyBtb3JlDQo+ID4gY2xlYXIgaWYgd2UgdGFsayBhYm91dCB0
+aGVtIHNlcGFyYXRlbHkgZXZlbiBpZiB0aGV5IGhhcHBlbiB0byBiZSB0aGUNCj4gPiBzYW1lIGRl
+dmljZS4NCj4NCj4gU3VyZSwgc29ycnkgYWJvdXQgYmVpbmcgdW5jbGVhciBhYm91dCB0aGF0Lg0K
+Pg0KPiA+DQo+ID4gQXNzdW1pbmcgdGhhdCBpcyB3aGF0IHlvdSBtZWFuLCBub3RoaW5nIHN0cm9u
+Z2x5IGRlZmluZXMgd2hhdCB0aGUNCj4gPiBkZWFkbGluZSBpcy4gIEluIHByYWN0aWNlIHRoZXJl
+IGlzIHByb2JhYmx5IHNvbWUgYnVmZmVyaW5nIGluIHRoZQ0KPiA+IGRpc3BsYXkgY29udHJvbGxl
+ci4gIEZvciBleCwgYmxvY2sgYmFzZWQgKGluY2x1ZGluZyBiYW5kd2lkdGgNCj4gPiBjb21wcmVz
+c2VkKSBmb3JtYXRzLCB5b3UgbmVlZCB0byBidWZmZXIgdXAgYSByb3cgb2YgYmxvY2tzIHRvDQo+
+ID4gZWZmaWNpZW50bHkgbGluZWFyaXplIGZvciBzY2Fub3V0LiAgU28geW91IHByb2JhYmx5IG5l
+ZWQgdG8gbGF0Y2ggc29tZQ0KPiA+IHRpbWUgYmVmb3JlIHlvdSBzdGFydCBzZW5kaW5nIHBpeGVs
+IGRhdGEgdG8gdGhlIGRpc3BsYXkuICBCdXQgZGV0YWlscw0KPiA+IGxpa2UgdGhpcyBhcmUgaGVh
+dmlseSBpbXBsZW1lbnRhdGlvbiBkZXBlbmRlbnQuICBJIHRoaW5rIHRoZSBtb3N0DQo+ID4gcmVh
+c29uYWJsZSB0aGluZyB0byB0YXJnZXQgaXMgc3RhcnQgb2YgdmJsYW5rLg0KPg0KPiBUaGUgZHJp
+dmVyIGV4cG9zaW5nIHRob3NlIGRldGFpbHMgd291bGQgYmUgcXVpdGUgdXNlZnVsIGZvciB1c2Vy
+c3BhY2UNCj4gdGhvdWdoLCBzbyB0aGF0IGl0IGNhbiBkZWxheSBjb21taXR0aW5nIHVwZGF0ZXMg
+dG8gbGF0ZSwgYnV0IG5vdCB0b28NCj4gbGF0ZS4gU2V0dGluZyBhIGRlYWRsaW5lIHRvIGJlIHRo
+ZSB2Ymxhbmsgc2VlbXMgZWFzeSBlbm91Z2gsIGJ1dCBpdA0KPiBpc24ndCBlbm91Z2ggZm9yIHNj
+aGVkdWxpbmcgdGhlIGFjdHVhbCBjb21taXQuDQoNCkknbSBub3QgZW50aXJlbHkgc3VyZSBob3cg
+dGhhdCB3b3VsZCBldmVuIHdvcmsuLiBidXQgT1RPSCBJIHRoaW5rIHlvdQ0KYXJlIHRhbGtpbmcg
+YWJvdXQgc29tZXRoaW5nIG9uIHRoZSBvcmRlciBvZiAxMDB1cz8gIEJ1dCB0aGF0IGlzIGEgYml0
+DQpvZiBhbm90aGVyIHRvcGljLg0KDQo+ID4NCj4gPiBBbHNvLCBrZWVwIGluIG1pbmQgdGhlIGRl
+YWRsaW5lIGhpbnQgaXMganVzdCB0aGF0LiAgSXQgd29uJ3QgbWFnaWNhbGx5DQo+ID4gbWFrZSB0
+aGUgR1BVIGZpbmlzaCBieSB0aGF0IGRlYWRsaW5lLCBidXQgaXQgZ2l2ZXMgdGhlIEdQVSBkcml2
+ZXINCj4gPiBpbmZvcm1hdGlvbiBhYm91dCBsYXRlbmVzcyBzbyBpdCBjYW4gcmVhbGl6ZSBpZiBp
+dCBuZWVkcyB0byBjbG9jayB1cC4NCj4NCj4gU3VyZSwgZXZlbiBpZiB0aGUgR1BVIHJhbXBlZCB1
+cCBjbG9ja3MgdG8gdGhlIG1heCwgaWYgdGhlIGpvYiBxdWV1ZSBpcw0KPiB0b28gbGFyZ2UsIGl0
+IHdvbid0IG1hZ2ljYWxseSBpbnZlbnQgbW9yZSBjeWNsZXMgdG8gc3F1ZWV6ZSBpbi4NCj4NCj4g
+Pg0KPiA+ID4gQ2FuIHVzZXJzcGFjZSBzZXQgYSBkZWFkbGluZSB0aGF0IHRhcmdldHMgdGhlIG5l
+eHQgdmJsYW5rIGRlYWRsaW5lDQo+ID4gPiBiZWZvcmUgR1BVIHdvcmsgaGFzIGJlZW4gZmx1c2hl
+ZCBlLmcuIGF0IHRoZSBzdGFydCBvZiBhIHBhaW50IGN5Y2xlLCBhbmQNCj4gPiA+IHN0aWxsIGJl
+IHN1cmUgdGhhdCB0aGUga2VybmVsIGhhcyB0aGUgaW5mb3JtYXRpb24gaXQgbmVlZHMgdG8ga25v
+dyBpdCBzaG91bGQNCj4gPiA+IG1ha2UgaXRzIGNsb2NrcyBpbmNyZWFzZSB0aGVpciBzcGVlZCBp
+biB0aW1lIGZvciB3aGVuIHRoZSBhY3R1YWwgd29yaw0KPiA+ID4gaGFzIGJlZW4gYWN0dWFsbHkg
+Zmx1c2hlZD8gT3IgaXMgaXQgbmVlZGVkIHRoYXQgdGhlIHRoaXMgZGVhZGxpbmUgaXMgc2V0DQo+
+ID4gPiBhdCB0aGUgZW5kPw0KPiA+DQo+ID4gWW91IG5lZWQgYSBmZW5jZSB0byBzZXQgdGhlIGRl
+YWRsaW5lLCBhbmQgZm9yIHRoYXQgd29yayBuZWVkcyB0byBiZQ0KPiA+IGZsdXNoZWQuICBCdXQg
+eW91IGNhbid0IGFzc29jaWF0ZSBhIGRlYWRsaW5lIHdpdGggd29yayB0aGF0IHRoZSBrZXJuZWwN
+Cj4gPiBpcyB1bmF3YXJlIG9mIGFueXdheXMuDQo+DQo+IFRoYXQgbWFrZXMgc2Vuc2UsIGJ1dCBp
+dCBtaWdodCBhbHNvIGEgYml0IGluYWRlcXVhdGUgdG8gaGF2ZSBpdCBhcyB0aGUNCj4gb25seSB3
+YXkgdG8gdGVsbCB0aGUga2VybmVsIGl0IHNob3VsZCBzcGVlZCB0aGluZ3MgdXAuIEV2ZW4gd2l0
+aCB0aGUNCj4gdHJpY2sgaTkxNSBkb2VzLCB3aXRoIEdOT01FIFNoZWxsLCB3ZSBzdGlsbCBlbmQg
+dXAgd2l0aCB0aGUgZmVlZGJhY2sNCj4gbG9vcCB0aGlzIHNlcmllcyBhaW1zIHRvIG1pdGlnYXRl
+LiBEb2luZyB0cmlwbGUgYnVmZmVyaW5nLCBpLmUuIGRlbGF5aW5nDQo+IG9yIGRyb3BwaW5nIHRo
+ZSBmaXJzdCBmcmFtZSBpcyBzbyBmYXIgdGhlIGJlc3Qgd29yayBhcm91bmQgdGhhdCB3b3JrcywN
+Cj4gZXhjZXB0IGRvaW5nIG90aGVyIHRyaWNrcyB0aGF0IG1ha2VzIHRoZSBrZXJuZWwgdG8gcmFt
+cCB1cCBpdHMgY2xvY2suDQo+IEhhdmluZyB0byByZWx5IG9uIGNob29zaW5nIGJldHdlZW4gbGF0
+ZW5jeSBhbmQgZnJhbWUgZHJvcHMgc2hvdWxkDQo+IGlkZWFsbHkgbm90IGhhdmUgdG8gYmUgbWFk
+ZS4NCg0KQmVmb3JlIHlvdSBoYXZlIGEgZmVuY2UsIHRoZSB0aGluZyB5b3Ugd2FudCB0byBiZSBz
+cGVlZGluZyB1cCBpcyB0aGUNCkNQVSwgbm90IHRoZSBHUFUuICBUaGVyZSBhcmUgZXhpc3Rpbmcg
+bWVjaGFuaXNtcyBmb3IgdGhhdC4NCg0KVEJGIEknbSBvZiB0aGUgYmVsaWVmIHRoYXQgdGhlcmUg
+aXMgc3RpbGwgYSBuZWVkIGZvciBpbnB1dCBiYXNlZCBjcHUNCmJvb3N0IChhbmQgZWFybHkgd2Fr
+ZS11cCB0cmlnZ2VyIGZvciBHUFUpLi4gd2UgaGF2ZSBzb21ldGhpbmcgbGlrZQ0KdGhpcyBpbiBD
+ck9TIGtlcm5lbC4gIFRoYXQgaXMgYSBiaXQgb2YgYSBkaWZmZXJlbnQgdG9waWMsIGJ1dCBteSBw
+b2ludA0KaXMgdGhhdCBmZW5jZSBkZWFkbGluZXMgYXJlIGp1c3Qgb25lIG9mIHNldmVyYWwgdGhp
+bmdzIHdlIG5lZWQgdG8NCm9wdGltaXplIHBvd2VyL3BlcmYgYW5kIHJlc3BvbnNpdmVuZXNzLCBy
+YXRoZXIgdGhhbiB0aGUgc2luZ2xlIHRoaW5nDQp0aGF0IHNvbHZlcyBldmVyeSBwcm9ibGVtIHVu
+ZGVyIHRoZSBzdW4gOy0pDQoNCj4gPg0KPiA+ID4gV2hhdCBJJ20gbW9yZSBvciBsZXNzIHRyeWlu
+ZyB0byBhc2sgaXMsIHdpbGwgYSBtb2RlIHNldHRpbmcgY29tcG9zaXRvcg0KPiA+ID4gYmUgYWJs
+ZSB0byB0ZWxsIHRoZSBrZXJuZWwgdG8gYm9vc3QgaXRzIGNsb2NrcyBhdCB0aGUgdGltZSBpdCBr
+bm93cyBpcw0KPiA+ID4gYmVzdCwgYW5kIGhvdyB3aWxsIGl0IGluIHByYWN0aWNlIGFjaGlldmUg
+dGhpcz8NCj4gPg0KPiA+IFRoZSBhbnRpY2lwYXRlZCB1c2FnZSBmb3IgYSBjb21wb3NpdG9yIGlz
+IHRoYXQsIHdoZW4geW91IHJlY2VpdmUgYQ0KPiA+IDxidWYsIGZlbmNlPiBwYWlyIGZyb20gYW4g
+YXBwLCB5b3UgaW1tZWRpYXRlbHkgc2V0IGEgZGVhZGxpbmUgZm9yDQo+ID4gdXBjb21pbmcgc3Rh
+cnQtb2YtdmJsYW5rIG9uIHRoZSBmZW5jZSBmZCBwYXNzZWQgZnJvbSB0aGUgYXBwLiAgKE9yIGZv
+cg0KPiA+IGltcGxpY2l0IHN5bmMgeW91IGNhbiB1c2UgRE1BX0JVRl9JT0NUTF9FWFBPUlRfU1lO
+Q19GSUxFKS4gIEZvciB0aGUNCj4gPiBjb21wb3NpdGUgc3RlcCwgbm8gbmVlZCB0byBzZXQgYSBk
+ZWFkbGluZSBhcyB0aGlzIGlzIGFscmVhZHkgZG9uZSBvbg0KPiA+IHRoZSBrZXJuZWwgc2lkZSBp
+biBkcm1fYXRvbWljX2hlbHBlcl93YWl0X2Zvcl9mZW5jZXMoKS4NCj4NCj4gU28gaXQgc291bmRz
+IGxpa2UgdGhlIG5ldyB1YXBpIHdpbGwgaGVscCBjb21wb3NpdG9ycyB0aGF0IGRvIG5vdCBkcmF3
+DQo+IHdpdGggdGhlIGludGVudGlvbiBvZiBwYWdlIGZsaXBwaW5nIGFueXRoaW5nLCBhbmQgY29t
+cG9zaXRvcnMgdGhhdA0KPiBkZWxpYmVyYXRlbHkgZGVsYXkgdGhlIGNvbW1pdC4gSSBzdXBwb3Nl
+IHdpdGggcHJvcGVyIHRhcmdldCBwcmVzZW50YXRpb24NCj4gdGltZSBpbnRlZ3JhdGlvbiBFR0wv
+VnVsa2FuIFdTSSBjYW4gc2V0IGRlYWRsaW5lcyB0aGVtIGFzIHdlbGwuIEFsbCB0aGF0DQo+IHNv
+dW5kcyBsaWtlIGEgd2VsY29tZWQgaW1wcm92ZW1lbnQsIGJ1dCBJJ20gbm90IGNvbnZpbmNlZCBp
+dCdzIGVub3VnaCB0bw0KPiBzb2x2ZSB0aGUgcHJvYmxlbXMgd2UgY3VycmVudGx5IGZhY2UuDQoN
+ClllYWgsIGxpa2UgSSBtZW50aW9uZWQgdGhpcyBhZGRyZXNzZXMgb25lIGlzc3VlLCBnaXZpbmcg
+dGhlIEdQVSBrZXJuZWwNCmRyaXZlciBiZXR0ZXIgaW5mb3JtYXRpb24gZm9yIGZyZXEgbWdtdC4g
+IEJ1dCB0aGVyZSBwcm9iYWJseSBpc24ndCBvbmUNCnNpbmdsZSBzb2x1dGlvbiBmb3IgZXZlcnl0
+aGluZy4NCg0KPiA+DQo+ID4gPiBGb3IgZXhhbXBsZSByZWx5aW5nIG9uIHRoZSBhdG9taWMgbW9k
+ZSBzZXR0aW5nIGNvbW1pdCBzZXR0aW5nIHRoZQ0KPiA+ID4gZGVhZGxpbmUgaXMgZnVuZGFtZW50
+YWxseSBmbGF3ZWQsIHNpbmNlIHVzZXIgc3BhY2Ugd2lsbCBhdCB0aW1lcyB3YW50IHRvDQo+ID4g
+PiBwdXJwb3NlZnVsbHkgZGVsYXkgY29tbWl0dGluZyB1bnRpbCBhcyBsYXRlIGFzIHBvc3NpYmxl
+LCB3aXRob3V0IGRvaW5nDQo+ID4gPiBzbyBjYXVzaW5nIGFuIGluY3JlYXNlZCByaXNrIG9mIG1p
+c3NpbmcgdGhlIGRlYWRsaW5lIGR1ZSB0byB0aGUga2VybmVsDQo+ID4gPiBub3Qgc3BlZWRpbmcg
+dXAgY2xvY2tzIGF0IHRoZSByaWdodCB0aW1lIGZvciBHUFUgd29yayB0aGF0IGhhcyBhbHJlYWR5
+DQo+ID4gPiBiZWVuIGZsdXNoZWQgbG9uZyBhZ28uDQo+ID4NCj4gPiBSaWdodCwgdGhpcyBpcyB0
+aGUgcG9pbnQgZm9yIGV4cG9zaW5nIHRoZSBpb2N0bCB0byB1c2Vyc3BhY2UuDQo+ID4NCj4gPiA+
+IFJlbHlpbmcgb24gY29tbWl0cyBhbHNvIGhhcyBubyBlZmZlY3Qgb24gR1BVIHdvcmsgcXVldWVk
+IGJ5DQo+ID4gPiBhIGNvbXBvc2l0b3IgZHJhd2luZyBvbmx5IHRvIGRtYS1idWZzIHRoYXQgYXJl
+IG5ldmVyIGludGVuZGVkIHRvIGJlDQo+ID4gPiBwcmVzZW50ZWQgdXNpbmcgbW9kZSBzZXR0aW5n
+LiBIb3cgY2FuIHdlIG1ha2Ugc3VyZSBhIGNvbXBvc2l0b3IgY2FuDQo+ID4gPiBwcm92aWRlIGhp
+bnRzIHRoYXQgdGhlIGtlcm5lbCB3aWxsIGtub3cgdG8gcmVzcGVjdCBkZXNwaXRlIHRoZQ0KPiA+
+ID4gY29tcG9zaXRvciBub3QgYmVpbmcgZHJtIG1hc3Rlcj8NCj4gPg0KPiA+IEl0IGRvZXNuJ3Qg
+bWF0dGVyIGlmIHRoZXJlIGFyZSBpbmRpcmVjdCBkZXBlbmRlbmNpZXMuICBFdmVuIGlmIHRoZQ0K
+PiA+IGNvbXBvc2l0b3IgY29tcGxldGVseSBpZ25vcmVzIGRlYWRsaW5lIGhpbnRzIGFuZCBmYW5j
+eSB0cmlja3MgbGlrZQ0KPiA+IGRlbGF5aW5nIGNvbXBvc2l0ZSBkZWNpc2lvbnMsIHRoZSBpbmRp
+cmVjdCBkZXBlbmRlbmN5IChhcHAgcmVuZGVyaW5nKQ0KPiA+IHdpbGwgZGVsYXkgdGhlIGRpcmVj
+dCBkZXBlbmRlbmN5IChjb21wb3NpdG9yIHJlbmRlcmluZykgb2YgdGhlIHBhZ2UNCj4gPiBmbGlw
+LiAgU28gdGhlIGRyaXZlciB3aWxsIHN0aWxsIHNlZSB3aGV0aGVyIGl0IGlzIGxhdGUgb3IgZWFy
+bHkNCj4gPiBjb21wYXJlZCB0byB0aGUgZGVhZGxpbmUsIGFsbG93aW5nIGl0IHRvIGFkanVzdCBm
+cmVxIGluIHRoZQ0KPiA+IGFwcHJvcHJpYXRlIGRpcmVjdGlvbiBmb3IgdGhlIG5leHQgZnJhbWUu
+DQo+DQo+IElzIGl0IGV4cGVjdGVkIHRoYXQgV1NJJ3Mgd2lsbCBzZXQgdGhlaXIgb3duIGRlYWRs
+aW5lcywgb3Igc2hvdWxkIHRoYXQNCj4gYmUgdGhlIGpvYiBvZiB0aGUgY29tcG9zaXRvcj8gRm9y
+IGV4YW1wbGUgYnkgdXNpbmcgY29tcG9zaXRvcnMgdXNpbmcNCj4gRE1BX0JVRl9JT0NUTF9FWFBP
+UlRfU1lOQ19GSUxFIHRoYXQgeW91IG1lbnRpb25lZCwgdXNpbmcgaXQgdG8gc2V0IGENCj4gZGVh
+ZGxpbmUgbWF0Y2hpbmcgdGhlIHZzeW5jIGl0IG1vc3QgaWRlYWxseSB3aWxsIGJlIGNvbW1pdHRl
+ZCB0bz8NCj4NCg0KSSdtIGtpbmQgb2YgYXNzdW1pbmcgY29tcG9zaXRvcnMsIGJ1dCBpZiB0aGUg
+V1NJIHNvbWVob3cgaGFzIG1vcmUNCmluZm9ybWF0aW9uIGFib3V0IGlkZWFsIHByZXNlbnRhdGlv
+biB0aW1lLCB0aGVuIEkgc3VwcG9zZSBpdCBjb3VsZCBiZQ0KaW4gdGhlIFdTST8gIEknbGwgZGVm
+ZXIgdG8gZm9sa3Mgd2hvIHNwZW5kIG1vcmUgdGltZSBvbiBXU0kgYW5kDQpjb21wb3NpdG9ycyB0
+byBoYXNoIG91dCB0aGUgZGV0YWlscyA7LSkNCg0KQlIsDQotUg0KDQo+DQo+IEpvbmFzDQo+DQo+
+ID4NCj4gPiBCUiwNCj4gPiAtUg0KPiA+DQo+ID4gPg0KPiA+ID4gSm9uYXMNCj4gPiA+DQo+ID4g
+PiA+ICsgKg0KPiA+ID4gPiArICogTXVsdGlwbGUgZGVhZGxpbmVzIG1heSBiZSBzZXQgb24gYSBn
+aXZlbiBmZW5jZSwgZXZlbiBpbiBwYXJhbGxlbC4gIFNlZSB0aGUNCj4gPiA+ID4gKyAqIGRvY3Vt
+ZW50YXRpb24gZm9yICZkbWFfZmVuY2Vfb3BzLnNldF9kZWFkbGluZS4NCj4gPiA+ID4gKyAqDQo+
+ID4gPiA+ICsgKiBUaGUgZGVhZGxpbmUgaGludCBpcyBqdXN0IHRoYXQsIGEgaGludC4gIFRoZSBk
+cml2ZXIgdGhhdCBjcmVhdGVkIHRoZSBmZW5jZQ0KPiA+ID4gPiArICogbWF5IHJlYWN0IGJ5IGlu
+Y3JlYXNpbmcgZnJlcXVlbmN5LCBtYWtpbmcgZGlmZmVyZW50IHNjaGVkdWxpbmcgY2hvaWNlcywg
+ZXRjLg0KPiA+ID4gPiArICogT3IgZG9pbmcgbm90aGluZyBhdCBhbGwuDQo+ID4gPiA+ICsgKi8N
+Cj4gPiA+ID4gKw0KPiA+ID4gPiArLyoqDQo+ID4gPiA+ICsgKiBkbWFfZmVuY2Vfc2V0X2RlYWRs
+aW5lIC0gc2V0IGRlc2lyZWQgZmVuY2Utd2FpdCBkZWFkbGluZSBoaW50DQo+ID4gPiA+ICsgKiBA
+ZmVuY2U6ICAgIHRoZSBmZW5jZSB0aGF0IGlzIHRvIGJlIHdhaXRlZCBvbg0KPiA+ID4gPiArICog
+QGRlYWRsaW5lOiB0aGUgdGltZSBieSB3aGljaCB0aGUgd2FpdGVyIGhvcGVzIGZvciB0aGUgZmVu
+Y2UgdG8gYmUNCj4gPiA+ID4gKyAqICAgICAgICAgICAgc2lnbmFsZWQNCj4gPiA+ID4gKyAqDQo+
+ID4gPiA+ICsgKiBHaXZlIHRoZSBmZW5jZSBzaWduYWxlciBhIGhpbnQgYWJvdXQgYW4gdXBjb21p
+bmcgZGVhZGxpbmUsIHN1Y2ggYXMNCj4gPiA+ID4gKyAqIHZibGFuaywgYnkgd2hpY2ggcG9pbnQg
+dGhlIHdhaXRlciB3b3VsZCBwcmVmZXIgdGhlIGZlbmNlIHRvIGJlDQo+ID4gPiA+ICsgKiBzaWdu
+YWxlZCBieS4gIFRoaXMgaXMgaW50ZW5kZWQgdG8gZ2l2ZSBmZWVkYmFjayB0byB0aGUgZmVuY2Ug
+c2lnbmFsZXINCj4gPiA+ID4gKyAqIHRvIGFpZCBpbiBwb3dlciBtYW5hZ2VtZW50IGRlY2lzaW9u
+cywgc3VjaCBhcyBib29zdGluZyBHUFUgZnJlcXVlbmN5DQo+ID4gPiA+ICsgKiBpZiBhIHBlcmlv
+ZGljIHZibGFuayBkZWFkbGluZSBpcyBhcHByb2FjaGluZyBidXQgdGhlIGZlbmNlIGlzIG5vdA0K
+PiA+ID4gPiArICogeWV0IHNpZ25hbGVkLi4NCj4gPiA+ID4gKyAqLw0KPiA+ID4gPiArdm9pZCBk
+bWFfZmVuY2Vfc2V0X2RlYWRsaW5lKHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlLCBrdGltZV90IGRl
+YWRsaW5lKQ0KPiA+ID4gPiArew0KPiA+ID4gPiArICAgICBpZiAoZmVuY2UtPm9wcy0+c2V0X2Rl
+YWRsaW5lICYmICFkbWFfZmVuY2VfaXNfc2lnbmFsZWQoZmVuY2UpKQ0KPiA+ID4gPiArICAgICAg
+ICAgICAgIGZlbmNlLT5vcHMtPnNldF9kZWFkbGluZShmZW5jZSwgZGVhZGxpbmUpOw0KPiA+ID4g
+PiArfQ0KPiA+ID4gPiArRVhQT1JUX1NZTUJPTChkbWFfZmVuY2Vfc2V0X2RlYWRsaW5lKTsNCj4g
+PiA+ID4gKw0KPiA+ID4gPiAgLyoqDQo+ID4gPiA+ICAgKiBkbWFfZmVuY2VfZGVzY3JpYmUgLSBE
+dW1wIGZlbmNlIGRlc2NyaWJ0aW9uIGludG8gc2VxX2ZpbGUNCj4gPiA+ID4gICAqIEBmZW5jZTog
+dGhlIDZmZW5jZSB0byBkZXNjcmliZQ0KPiA+ID4gPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51
+eC9kbWEtZmVuY2UuaCBiL2luY2x1ZGUvbGludXgvZG1hLWZlbmNlLmgNCj4gPiA+ID4gaW5kZXgg
+Nzc1Y2RjMGI0ZjI0Li5kNTRiNTk1YTBmZTAgMTAwNjQ0DQo+ID4gPiA+IC0tLSBhL2luY2x1ZGUv
+bGludXgvZG1hLWZlbmNlLmgNCj4gPiA+ID4gKysrIGIvaW5jbHVkZS9saW51eC9kbWEtZmVuY2Uu
+aA0KPiA+ID4gPiBAQCAtMjU3LDYgKzI1NywyNiBAQCBzdHJ1Y3QgZG1hX2ZlbmNlX29wcyB7DQo+
+ID4gPiA+ICAgICAgICAqLw0KPiA+ID4gPiAgICAgICB2b2lkICgqdGltZWxpbmVfdmFsdWVfc3Ry
+KShzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSwNCj4gPiA+ID4gICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgY2hhciAqc3RyLCBpbnQgc2l6ZSk7DQo+ID4gPiA+ICsNCj4gPiA+ID4gKyAg
+ICAgLyoqDQo+ID4gPiA+ICsgICAgICAqIEBzZXRfZGVhZGxpbmU6DQo+ID4gPiA+ICsgICAgICAq
+DQo+ID4gPiA+ICsgICAgICAqIENhbGxiYWNrIHRvIGFsbG93IGEgZmVuY2Ugd2FpdGVyIHRvIGlu
+Zm9ybSB0aGUgZmVuY2Ugc2lnbmFsZXIgb2YNCj4gPiA+ID4gKyAgICAgICogYW4gdXBjb21pbmcg
+ZGVhZGxpbmUsIHN1Y2ggYXMgdmJsYW5rLCBieSB3aGljaCBwb2ludCB0aGUgd2FpdGVyDQo+ID4g
+PiA+ICsgICAgICAqIHdvdWxkIHByZWZlciB0aGUgZmVuY2UgdG8gYmUgc2lnbmFsZWQgYnkuICBU
+aGlzIGlzIGludGVuZGVkIHRvDQo+ID4gPiA+ICsgICAgICAqIGdpdmUgZmVlZGJhY2sgdG8gdGhl
+IGZlbmNlIHNpZ25hbGVyIHRvIGFpZCBpbiBwb3dlciBtYW5hZ2VtZW50DQo+ID4gPiA+ICsgICAg
+ICAqIGRlY2lzaW9ucywgc3VjaCBhcyBib29zdGluZyBHUFUgZnJlcXVlbmN5Lg0KPiA+ID4gPiAr
+ICAgICAgKg0KPiA+ID4gPiArICAgICAgKiBUaGlzIGlzIGNhbGxlZCB3aXRob3V0ICZkbWFfZmVu
+Y2UubG9jayBoZWxkLCBpdCBjYW4gYmUgY2FsbGVkDQo+ID4gPiA+ICsgICAgICAqIG11bHRpcGxl
+IHRpbWVzIGFuZCBmcm9tIGFueSBjb250ZXh0LiAgTG9ja2luZyBpcyB1cCB0byB0aGUgY2FsbGVl
+DQo+ID4gPiA+ICsgICAgICAqIGlmIGl0IGhhcyBzb21lIHN0YXRlIHRvIG1hbmFnZS4gIElmIG11
+bHRpcGxlIGRlYWRsaW5lcyBhcmUgc2V0LA0KPiA+ID4gPiArICAgICAgKiB0aGUgZXhwZWN0YXRp
+b24gaXMgdG8gdHJhY2sgdGhlIHNvb25lc3Qgb25lLiAgSWYgdGhlIGRlYWRsaW5lIGlzDQo+ID4g
+PiA+ICsgICAgICAqIGJlZm9yZSB0aGUgY3VycmVudCB0aW1lLCBpdCBzaG91bGQgYmUgaW50ZXJw
+cmV0ZWQgYXMgYW4gaW1tZWRpYXRlDQo+ID4gPiA+ICsgICAgICAqIGRlYWRsaW5lLg0KPiA+ID4g
+PiArICAgICAgKg0KPiA+ID4gPiArICAgICAgKiBUaGlzIGNhbGxiYWNrIGlzIG9wdGlvbmFsLg0K
+PiA+ID4gPiArICAgICAgKi8NCj4gPiA+ID4gKyAgICAgdm9pZCAoKnNldF9kZWFkbGluZSkoc3Ry
+dWN0IGRtYV9mZW5jZSAqZmVuY2UsIGt0aW1lX3QgZGVhZGxpbmUpOw0KPiA+ID4gPiAgfTsNCj4g
+PiA+ID4NCj4gPiA+ID4gIHZvaWQgZG1hX2ZlbmNlX2luaXQoc3RydWN0IGRtYV9mZW5jZSAqZmVu
+Y2UsIGNvbnN0IHN0cnVjdCBkbWFfZmVuY2Vfb3BzICpvcHMsDQo+ID4gPiA+IEBAIC01ODMsNiAr
+NjAzLDggQEAgc3RhdGljIGlubGluZSBzaWduZWQgbG9uZyBkbWFfZmVuY2Vfd2FpdChzdHJ1Y3Qg
+ZG1hX2ZlbmNlICpmZW5jZSwgYm9vbCBpbnRyKQ0KPiA+ID4gPiAgICAgICByZXR1cm4gcmV0IDwg
+MCA/IHJldCA6IDA7DQo+ID4gPiA+ICB9DQo+ID4gPiA+DQo+ID4gPiA+ICt2b2lkIGRtYV9mZW5j
+ZV9zZXRfZGVhZGxpbmUoc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UsIGt0aW1lX3QgZGVhZGxpbmUp
+Ow0KPiA+ID4gPiArDQo+ID4gPiA+ICBzdHJ1Y3QgZG1hX2ZlbmNlICpkbWFfZmVuY2VfZ2V0X3N0
+dWIodm9pZCk7DQo+ID4gPiA+ICBzdHJ1Y3QgZG1hX2ZlbmNlICpkbWFfZmVuY2VfYWxsb2NhdGVf
+cHJpdmF0ZV9zdHViKHZvaWQpOw0KPiA+ID4gPiAgdTY0IGRtYV9mZW5jZV9jb250ZXh0X2FsbG9j
+KHVuc2lnbmVkIG51bSk7DQo+ID4gPiA+IC0tDQo+ID4gPiA+IDIuMzkuMg0KPiA+ID4gPg0KX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNp
+ZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vi
+c2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8u
+b3JnCg==
