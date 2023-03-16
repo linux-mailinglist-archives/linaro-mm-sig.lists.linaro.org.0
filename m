@@ -2,206 +2,178 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B8AEB6C42F9
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 07:20:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1187F6C42FC
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 07:20:50 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BE6813F330
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 06:20:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 22DE33F4F0
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 06:20:49 +0000 (UTC)
 Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-	by lists.linaro.org (Postfix) with ESMTP id 51D133E974
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Mar 2023 10:12:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A9C1E3E974
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Mar 2023 10:17:56 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
 	dkim=none;
 	spf=pass (lists.linaro.org: domain of suijingfeng@loongson.cn designates 114.242.206.163 as permitted sender) smtp.mailfrom=suijingfeng@loongson.cn;
 	dmarc=none
 Received: from loongson.cn (unknown [10.20.42.133])
-	by gateway (Coremail) with SMTP id _____8AxJMSf6xJkJeAMAA--.7048S3;
-	Thu, 16 Mar 2023 18:12:47 +0800 (CST)
+	by gateway (Coremail) with SMTP id _____8DxE4TT7BJkkuAMAA--.18470S3;
+	Thu, 16 Mar 2023 18:17:55 +0800 (CST)
 Received: from [10.20.42.133] (unknown [10.20.42.133])
-	by localhost.localdomain (Coremail) with SMTP id AQAAf8AxT+Se6xJkgfEBAA--.10052S3;
-	Thu, 16 Mar 2023 18:12:46 +0800 (CST)
-Message-ID: <f795709e-e06a-daee-968b-b1cd0c1b5587@loongson.cn>
-Date: Thu, 16 Mar 2023 18:12:46 +0800
+	by localhost.localdomain (Coremail) with SMTP id AQAAf8AxIL_O7BJkE_MBAA--.9498S3;
+	Thu, 16 Mar 2023 18:17:50 +0800 (CST)
+Message-ID: <b674a6ae-05bc-c6e3-7179-293741cbe510@loongson.cn>
+Date: Thu, 16 Mar 2023 18:17:50 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-From: Sui jingfeng <suijingfeng@loongson.cn>
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Sui Jingfeng <15330273260@189.cn>,
+Content-Language: en-US
+To: kernel test robot <lkp@intel.com>, Sui Jingfeng <15330273260@189.cn>,
  Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
  Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
  David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>
-References: <20230315211550.2620818-1-15330273260@189.cn>
- <20230315211550.2620818-3-15330273260@189.cn>
- <efcc3a66-78ca-4e0a-c0fb-527da376fc06@amd.com>
- <62f955de-6352-a0b1-ecab-52b854ba6839@loongson.cn>
-Content-Language: en-US
-In-Reply-To: <62f955de-6352-a0b1-ecab-52b854ba6839@loongson.cn>
-X-CM-TRANSID: AQAAf8AxT+Se6xJkgfEBAA--.10052S3
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Christian Koenig <christian.koenig@amd.com>
+References: <20230315211550.2620818-3-15330273260@189.cn>
+ <202303161727.8HnBf6cW-lkp@intel.com>
+From: Sui jingfeng <suijingfeng@loongson.cn>
+In-Reply-To: <202303161727.8HnBf6cW-lkp@intel.com>
+X-CM-TRANSID: AQAAf8AxIL_O7BJkE_MBAA--.9498S3
 X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
-X-Coremail-Antispam: 1Uk129KBjvJXoW3JryxXFyxZr45Gw15XF1rtFb_yoW7Zr47pF
-	Z3Kay5trZ8Gr4kAr1qyw1UJryYq34rA3WDJr90yryI939xKFn0grWjqr4q9a47Zr4rGF1j
-	vFWUXrW29F17Gw7anT9S1TB71UUUUjDqnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
+X-Coremail-Antispam: 1Uk129KBjvJXoWxWw4DAFWkZw1UKF4rJr13Jwb_yoW5tr1kpa
+	13Aa9IkrWrXr4UGFWkGa97u3Waqws5X34UXry3Gw1Yva42vFWqgrn2kFW5ursrKFnrKFW2
+	yrZ3u3WkW3ZrZaDanT9S1TB71UUUUbUqnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
 	qI5I8CrVACY4xI64kE6c02F40Ex7xfYxn0WfASr-VFAUDa7-sFnT9fnUUIcSsGvfJTRUUU
-	bqkYFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s
+	bqxYFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s
 	1l1IIY67AEw4v_Jrv_JF1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
-	wVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwA2z4
-	x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1l
-	n4kS14v26r126r1DM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6x
-	ACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r126r1DMcIj6I8E
-	87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7I2V7IY0V
-	AS07AlzVAYIcxG8wCY1x0262kKe7AKxVWUAVWUtwCF04k20xvY0x0EwIxGrwCFx2IqxVCF
-	s4IE7xkEbVWUJVW8JwCFI7km07C267AKxVWUAVWUtwC20s026c02F40E14v26r1j6r18MI
-	8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41l
-	IxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIx
-	AIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2
-	jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07jFApnUUUUU=
+	wVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwA2z4
+	x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F4UJVW0owAa
+	w2AFwI0_JF0_Jw1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0cIa020Ex4CE44
+	I27wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jw0_WrylYx0Ex4A2
+	jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCYjI0SjxkI62
+	AI1cAE67vIY487MxkF7I0En4kS14v26r126r1DMxAIw28IcxkI7VAKI48JMxC20s026xCa
+	FVCjc4AY6r1j6r4UMxCIbckI1I0E14v26r4a6rW5MI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2
+	IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI
+	42IY6xIIjxv20xvE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42
+	IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280
+	aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8_gA5UUUUU==
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 51D133E974
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.20 / 15.00];
+X-Rspamd-Queue-Id: A9C1E3E974
+X-Spamd-Bar: -------
+X-Spamd-Result: default: False [-7.20 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	R_SPF_ALLOW(-0.20)[+ip4:114.242.206.163];
+	R_SPF_ALLOW(-0.20)[+ip4:114.242.206.163:c];
 	RCVD_NO_TLS_LAST(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_TO(0.00)[amd.com,189.cn,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org];
-	ASN(0.00)[asn:4808, ipnet:114.242.192.0/18, country:CN];
-	MIME_TRACE(0.00)[0:+];
 	FROM_EQ_ENVFROM(0.00)[];
 	R_DKIM_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[intel.com,189.cn,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com];
+	ASN(0.00)[asn:4808, ipnet:114.242.192.0/18, country:CN];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_THREE(0.00)[3];
 	FROM_HAS_DN(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
-	NEURAL_SPAM(0.00)[0.752];
+	NEURAL_SPAM(0.00)[0.612];
 	DMARC_NA(0.00)[loongson.cn];
 	ARC_NA(0.00)[]
 X-MailFrom: suijingfeng@loongson.cn
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 6CBA34CEWVMIC72XP5CX3OKMZCX5GXKP
-X-Message-ID-Hash: 6CBA34CEWVMIC72XP5CX3OKMZCX5GXKP
+Message-ID-Hash: 5CVDQGVLX2MVQUNCAOILV5S47SU34TVD
+X-Message-ID-Hash: 5CVDQGVLX2MVQUNCAOILV5S47SU34TVD
 X-Mailman-Approved-At: Wed, 22 Mar 2023 06:20:18 +0000
-CC: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Li Yi <liyi@loongson.cn>
+CC: oe-kbuild-all@lists.linux.dev, linaro-mm-sig@lists.linaro.org, Li Yi <liyi@loongson.cn>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v7 2/2] drm: add kms driver for loongson display controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6CBA34CEWVMIC72XP5CX3OKMZCX5GXKP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5CVDQGVLX2MVQUNCAOILV5S47SU34TVD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-DQpPbiAyMDIzLzMvMTYgMTY6NDYsIFN1aSBqaW5nZmVuZyB3cm90ZToNCj4NCj4gT24gMjAyMy8z
-LzE2IDE1OjE4LCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPj4NCj4+DQo+PiBBbSAxNS4wMy4y
-MyB1bSAyMjoxNSBzY2hyaWViIFN1aSBKaW5nZmVuZzoNCj4+PiBGcm9tOiBzdWlqaW5nZmVuZyA8
-c3VpamluZ2ZlbmdAbG9vbmdzb24uY24+DQo+Pj4NCj4+PiBMb29uZ3NvbiBkaXNwbGF5IGNvbnRy
-b2xsZXIgSVAgaGFzIGJlZW4gaW50ZWdyYXRlZCBpbiBib3RoIExvb25nc29uDQo+Pj4gTm9ydGgg
-QnJpZGdlIGNoaXBzZXQobHM3YTEwMDAgYW5kIGxzN2EyMDAwKSBhbmQgTG9vbmdzb24gU29Dcyhs
-czJrMTAwMA0KPj4+IGFuZCBsczJrMjAwMCBldGMpLCBpdCBldmVuIGhhcyBiZWVuIGluY2x1ZGVk
-IGluIExvb25nc29uIEJNQyBwcm9kdWN0cy4NCj4+Pg0KPj4+IFRoaXMgZGlzcGxheSBjb250cm9s
-bGVyIGlzIGEgUENJIGRldmljZSwgaXQgaGFzIHR3byBkaXNwbGF5IHBpcGUuIEZvcg0KPj4+IHRo
-ZSBEQyBpbiBMUzdBMTAwMCBhbmQgTFMySzEwMDAgZWFjaCB3YXkgaGFzIGEgRFZPIG91dHB1dCBp
-bnRlcmZhY2UNCj4+PiB3aGljaCBwcm92aWRlIFJHQjg4OCBzaWduYWxzLCB2ZXJ0aWNhbCAmIGhv
-cml6b250YWwgc3luY2hyb25pc2F0aW9ucywNCj4+PiBhbmQgdGhlIHBpeGVsIGNsb2NrLiBFYWNo
-IENSVEMgaXMgYWJsZSB0byBzdXBwb3J0IDE5MjB4MTA4MEA2MEh6LA0KPj4+IHRoZSBtYXhpbXVt
-IHJlc29sdXRpb24gaXMgMjA0OHgyMDQ4IGFjY29yZGluZyB0byB0aGUgaGFyZHdhcmUgc3BlYy4N
-Cj4+Pg0KPj4+IEZvciB0aGUgREMgaW4gTFM3QTIwMDAsIGVhY2ggZGlzcGxheSBwaXBlIGlzIGVx
-dWlwcGVkIHdpdGggYSBidWlsdC1pbg0KPj4+IEhETUkgZW5jb2RlciB3aGljaCBpcyBjb21wbGlh
-bnQgd2l0aCBIRE1JIDEuNCBzcGVjaWZpY2F0aW9uLCB0aHVzIGl0DQo+Pj4gc3VwcG9ydCAzODQw
-eDIxNjBAMzBIei4gVGhlIGZpcnN0IGRpc3BsYXkgcGlwZSBpcyBhbHNvIGVxdWlwcGVkIHdpdGgN
-Cj4+PiBhIHRyYW5zcGFyZW50IHZnYSBlbmNvZGVyIHdoaWNoIGlzIHBhcmFsbGVsIHdpdGggdGhl
-IEhETUkgZW5jb2Rlci4NCj4+PiBUaGUgREMgaW4gTFM3QTIwMDAgaXMgbW9yZSBjb21wbGV0ZSwg
-YmVzaWRlcyBhYm92ZSBmZWF0dXJlLCBpdCBoYXMNCj4+PiB0d28gaGFyZHdhcmUgY3Vyc29ycywg
-dHdvIGhhcmR3YXJlIHZibGFuayBjb3VudGVyIGFuZCB0d28gc2Nhbm91dA0KPj4+IHBvc2l0aW9u
-IHJlY29yZGVycy4NCj4+Pg0KPj4+IMKgIHYxIC0+IHYyOg0KPj4+IMKgwqAgMSkgVXNlIGhwZCBz
-dGF0dXMgcmVnIHdoZW4gcG9sbGluZyBmb3IgbHM3YTIwMDANCj4+PiDCoMKgIDIpIEZpeCBhbGwg
-d2FybmluZ3MgZW1lcmdlZCB3aGVuIGNvbXBpbGUgd2l0aCBXPTENCj4+Pg0KPj4+IMKgIHYyIC0+
-IHYzOg0KPj4+IMKgwqAgMSkgQWRkIENPTVBJTEVfVEVTVCBpbiBLY29uZmlnIGFuZCBtYWtlIHRo
-ZSBkcml2ZXIgb2ZmIGJ5IGRlZmF1bHQNCj4+PiDCoMKgIDIpIEFscGhhYmV0aWNhbCBzb3J0aW5n
-IGhlYWRlcnMgKFRob21hcykNCj4+PiDCoMKgIDMpIFVudGFuZ2xlIHJlZ2lzdGVyIGFjY2VzcyBm
-dW5jdGlvbnMgYXMgbXVjaCBhcyBwb3NzaWJsZSAoVGhvbWFzKQ0KPj4+IMKgwqAgNCkgU3dpdGNo
-IHRvIFRUTSBiYXNlZCBtZW1vcnkgbWFuYWdlciBhbmQgcHJlZmVyIGNhY2hlZCBtYXBwaW5nDQo+
-Pj4gwqDCoMKgwqDCoCBmb3IgTG9vbmdzb24gU29DIChUaG9tYXMpDQo+Pj4gwqDCoCA1KSBBZGQg
-Y2hpcCBpZCBkZXRlY3Rpb24gbWV0aG9kLCBub3cgYWxsIG1vZGVscyBhcmUgZGlzdGluZ3Vpc2hh
-YmxlLg0KPj4+IMKgwqAgNikgUmV2aXNlIGJ1aWx0aW4gSERNSSBwaHkgZHJpdmVyLCBuZWFybHkg
-YWxsIG1haW4gc3RyZWFtIG1vZGUNCj4+PiDCoMKgwqDCoMKgIGJlbG93IDRLQDMwSHogaXMgdGVz
-dGVkLCB0aGlzIGRyaXZlciBzdXBwb3J0ZWQgdGhlc2UgbW9kZSB2ZXJ5DQo+Pj4gwqDCoMKgwqDC
-oCB3ZWxsIGluY2x1ZGluZyBjbG9uZSBkaXNwbGF5IG1vZGUgYW5kIGV4dGVuZCBkaXNwbGF5IG1v
-ZGUuDQo+Pj4NCj4+PiDCoCB2MyAtPiB2NDoNCj4+PiDCoMKgIDEpIFF1aWNrbHkgZml4IGEgc21h
-bGwgbWlzdGFrZS4NCj4+Pg0KPj4+IMKgIHY0IC0+IHY1Og0KPj4+IMKgwqAgMSkgRHJvcCBwb3Rl
-bnRpYWwgc3VwcG9ydCBmb3IgTG9vbmdzb24gMksgc2VyaWVzIFNvQyB0ZW1wb3JhcnksDQo+Pj4g
-wqDCoMKgwqDCoCB0aGlzIHBhcnQgc2hvdWxkIGJlIHJlc2VuZCB3aXRoIHRoZSBEVCBiaW5kaW5n
-IHBhdGNoIGluIHRoZSANCj4+PiBmdXR1cmUuDQo+Pj4gwqDCoCAyKSBBZGQgcGVyIGRpc3BsYXkg
-cGlwZSBkZWJ1Z2ZzIHN1cHBvcnQgdG8gdGhlIGJ1aWx0aW4gSERNSSBlbmNvZGVyLg0KPj4+IMKg
-wqAgMykgUmV3cml0ZSBhdG9taWNfdXBkYXRlKCkgZm9yIGhhcmR3YXJlIGN1cnNvcnMgcGxhbmUo
-VGhvbWFzKQ0KPj4+IMKgwqAgNCkgUmV3cml0ZSBlbmNvZGVyIGFuZCBjb25uZWN0b3IgaW5pdGlh
-bGl6YXRpb24gcGFydCwgdW50YW5nbGUgaXQNCj4+PiDCoMKgwqDCoMKgIGFjY29yZGluZyB0byB0
-aGUgY2hpcChUaG9tYXMpLg0KPj4+DQo+Pj4gwqAgdjUgLT4gdjY6DQo+Pj4gwqDCoCAxKSBSZW1v
-dmUgc3RyYXkgY29kZSB3aGljaCBkaWRuJ3QgZ2V0IHVzZWQsIHNheSANCj4+PiBsc2RjX29mX2dl
-dF9yZXNlcnZlZF9yYW0NCj4+PiDCoMKgIDIpIEZpeCBhbGwgdHlwb3MgSSBjb3VsZCBmb3VuZCwg
-bWFrZSBzZW50ZW5jZXMgYW5kIGNvZGUgbW9yZSANCj4+PiByZWFkYWJsZQ0KPj4+IMKgwqAgMykg
-VW50YW5nZSBsc2RjX2hkbWkqX2Nvbm5lY3Rvcl9kZXRlY3QoKSBmdW5jdGlvbiBhY2NvcmRpbmcg
-dG8gDQo+Pj4gdGhlIHBpcGUNCj4+PiDCoMKgIDQpIEFmdGVyIGEgc2VyaW91cyBjb25zaWRlcmF0
-aW9uLCB3ZSByZW5hbWUgdGhpcyBkcml2ZXIgYXMgbG9vbmdzb24uDQo+Pj4gwqDCoMKgwqDCoCBC
-ZWNhdXNlIHdlIGFsc28gaGF2ZSBkcml2ZXJzIHRvd2FyZCB0aGUgTG9vbmdHUFUgSVAgaW4gDQo+
-Pj4gTFM3QTIwMDAgYW5kDQo+Pj4gwqDCoMKgwqDCoCBMUzJLMjAwMC4gQmVzaWRlcywgdGhlcmUg
-YXJlIGFsc28gZHJpdmVycyBhYm91dCB0aGUgZXh0ZXJuYWwgDQo+Pj4gZW5jb2RlciwNCj4+PiDC
-oMKgwqDCoMKgIEhETUkgYXVkaW8gZHJpdmVyIGFuZCB2YmlvcyBzdXBwb3J0IGV0Yy4gVGhpcyBw
-YXRjaCBvbmx5IA0KPj4+IHByb3ZpZGUgREMNCj4+PiDCoMKgwqDCoMKgIGRyaXZlciBwYXJ0LCBt
-eSB0ZWFtbWF0ZSBMaSBZaSBiZWxpZXZlIHRoYXQgbG9vbmdzb24gd2lsbCBiZSBtb3JlDQo+Pj4g
-wqDCoMKgwqDCoCBzdWl0YWJsZSBmb3IgbG9vbmdzb24gZ3JhcGhpY3MgdGhhbiBsc2RjIGluIHRo
-ZSBsb25nIHJ1bi4NCj4+Pg0KPj4+IMKgwqDCoMKgwqAgbG9vbmdzb24ua28gPSBMU0RDICsgTG9v
-bmdHUFUgKyBlbmNvZGVycyBkcml2ZXIgKyB2Ymlvcy9EVCAuLi4NCj4+Pg0KPj4+IMKgwqAgdjYg
-LT4gdjc6DQo+Pj4gwqDCoCAxKSBBZGQgcHJpbWUgc3VwcG9ydCwgc2VsZi1zaGFyaW5nIGlzIHdv
-cmtzLiBzaGFyaW5nIGJ1ZmZlciB3aXRoIA0KPj4+IGV0bmF2aXYNCj4+PiDCoMKgwqDCoMKgIGlz
-IGFsc28gdGVzdGVkLCBhbmQgaXRzIHdvcmtzIHdpdGggbGltaXRhdGlvbi4NCj4+PiDCoMKgIDIp
-IEltcGxlbWVudCBidWZmZXIgb2JqZWN0cyB0cmFja2luZyB3aXRoIGxpc3RfaGVhZC4NCj4+PiDC
-oMKgIDMpIFMzKHNsZWVwIHRvIFJBTSkgaXMgdGVzdGVkIG9uIGxzM2E1MDAwK2xzN2EyMDAwIGV2
-YiBhbmQgaXQgd29ya3MuDQo+Pj4gwqDCoCA0KSBSZXdyaXRlIGxzZGNfYm9fbW92ZSwgc2luY2Ug
-dHRtIGNvcmUgc3RvcCBhbGxvY2F0aW5nIHJlc291cmNlcw0KPj4+IMKgwqDCoMKgwqAgZHVyaW5n
-IEJPIGNyZWF0aW9uLiBQYXRjaCBWMSB+IFY2IG9mIHRoaXMgc2VyaWVzIG5vIGxvbmdlciB3b3Jr
-cw0KPj4+IMKgwqDCoMKgwqAgb24gbGF0ZXN0IGtlcm5lbC4gVGh1cywgd2Ugc2VuZCBWNy4NCj4+
-Pg0KPj4+IFNpZ25lZC1vZmYtYnk6IExpIFlpIDxsaXlpQGxvb25nc29uLmNuPg0KPj4+IFNpZ25l
-ZC1vZmYtYnk6IHN1aWppbmdmZW5nIDxzdWlqaW5nZmVuZ0Bsb29uZ3Nvbi5jbj4NCj4+PiBTaWdu
-ZWQtb2ZmLWJ5OiBTdWkgSmluZ2ZlbmcgPDE1MzMwMjczMjYwQDE4OS5jbj4NCj4+DQo+PiBbU05J
-UF0NCj4+DQo+IEhpLA0KPg0KPiBJIHNlbmQgbXkgcGF0Y2ggc2VyaWVzIHdpdGjCoCBteSBwZXJz
-b25hbCBlbWFpbCAoMTUzMzAyNzMyNjBAMTg5LmNuKSwgDQo+IGJlY2F1c2UgaXQgaXMgbW9yZSBy
-ZWxpYWJsZS4NCj4NCj4gSSBkb24ndCBtaW5kIHJlbW92ZSBpdCB3aGVuIHRoaXMgZHJpdmVyIGlz
-IGFwcGxpZWQuDQo+DQoNCldlIGtub3cgdGhhdCB3ZSBzaG91bGQgZG8gdGhpcyBqb2IgY2xlYW5s
-eS4NCg0KQnV0IGkgYW0gd29ycnkgYWJvdXQgdGhlIHRyb3VibGVzIGl0IG1heSBjYXVzZSB3aGVu
-wqAgc2VuZCBwYXRjaCB3aXRoIG15IA0KY29tcGFueSBlbWFpbChzdWlqaW5nZmVuZyA8c3Vpamlu
-Z2ZlbmdAbG9vbmdzb24uY24+KQ0KDQpTbyBJIGp1c3QgZm9sbG93IHRoZSBteSBjb252ZW50aW9u
-YWwgd2F5IG9mIHNlbmRpbmcgcGF0Y2ggYWJvdXQgdGhpcyANCnNlcmllcywNCg0KSSB3aWxsIHVz
-ZSBteSBjb21wYW55IGVtYWlsKHN1aWppbmdmZW5nIDxzdWlqaW5nZmVuZ0Bsb29uZ3Nvbi5jbj4p
-IGluIA0KdGhlIGZ1dHVyZS4NCg0KPj4+ICt1NjQgbHNkY19ib19ncHVfb2Zmc2V0KHN0cnVjdCB0
-dG1fYnVmZmVyX29iamVjdCAqdGJvKQ0KPj4+ICt7DQo+Pj4gK8KgwqDCoCBzdHJ1Y3QgZHJtX2Rl
-dmljZSAqZGRldiA9IHRiby0+YmFzZS5kZXY7DQo+Pj4gK8KgwqDCoCBzdHJ1Y3QgdHRtX3Jlc291
-cmNlICpyZXNvdXJjZSA9IHRiby0+cmVzb3VyY2U7DQo+Pj4gKw0KPj4+ICvCoMKgwqAgaWYgKGRy
-bV9XQVJOX09OKGRkZXYsICF0Ym8tPnBpbl9jb3VudCkpDQo+Pj4gK8KgwqDCoMKgwqDCoMKgIHJl
-dHVybiAtRU5PREVWOw0KPj4NCj4+IFJldHVybmluZyAtRU5PREVWIHdoZW4gdGhlIGZ1bmN0aW9u
-IHJldHVybiB2YWx1ZSBpcyB1bnNpZ25lZCBkb2Vzbid0IA0KPj4gbWFrZSBtdWNoIHNlbnNlLiBJ
-IHdvdWxkIGFsc28gdXNlIDAgaGVyZS4NCj4+DQo+IE9LLA0KPg0KPiBUbyBtYWtlIHNlbnNlLCB0
-aGUgY2FsbGVyIGNhbiBjYXN0IHRoZSByZXR1cm4gdG8gczY0LiBVc2UgMCBpcyBhbHNvIG9rLg0K
-Pg0KPiBJbiBvdXIgZGFpbHkgdXNhZ2UswqAgdGJvLT5waW5fY291bnQgPT0wwqAgbmV2ZXIgaGFw
-cGVucy7CoCBBIHdhcm5pbmcgDQo+IG1lc3NhZ2UgaXMgZW5vdWdoLg0KPg0KPiBJIHdpbGwgcmV2
-aXNlIHRoaXMgYXQgbmV4dCB2ZXJzaW9uLg0KPg0KPg0KPj4gQXBhcnQgZnJvbSB0aGF0IEkgYnJp
-ZWZseSBza2ltbWVkIG92ZXIgdGhlIHByaW1lIGFuZCBUVE0gaGFuZGxpbmcgYW5kIA0KPj4gY291
-bGRuJ3QgZmluZCBhbnl0aGluZyBvYnZpb3VzbHkgd3JvbmcuDQo+Pg0KPj4gSSBvYnZpb3VzbHkg
-Y2FuJ3QgcmV2aWV3IHRoZSBodyBzcGVjaWZpYyBzdHVmZiwgYnV0IG92ZXIgYWxsIGxvb2tzIA0K
-Pj4gcHJldHR5IGdvb2QgdG8gbWUuDQo+IE1heWJlIHlvdSBjb3VsZCBkbyBtZSBhIGZhdm9yLCBn
-aXZlIG1lIGEgcmV2aWV3ZWQtYnkgZm9yIHRoZSBUVE0gYW5kIA0KPiBQUklNRSBwYXJ0IDopDQo+
-DQpIZXJlIG1pc3NpbmcgYSAnPycgYXQgdGhlIGVuZC4NCg0KPg0KPj4gUmVnYXJkcywNCj4+IENo
-cmlzdGlhbi4NCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5h
-cm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2
-ZUBsaXN0cy5saW5hcm8ub3JnCg==
+
+On 2023/3/16 17:53, kernel test robot wrote:
+> Hi Sui,
+>
+> I love your patch! Perhaps something to improve:
+>
+> [auto build test WARNING on drm-misc/drm-misc-next]
+> [also build test WARNING on linus/master v6.3-rc2 next-20230316]
+> [If your patch is applied to the wrong git tree, kindly drop us a note.
+> And when submitting patch, we suggest to use '--base' as documented in
+> https://git-scm.com/docs/git-format-patch#_base_tree_information]
+>
+> url:    https://github.com/intel-lab-lkp/linux/commits/Sui-Jingfeng/MAINTAINERS-add-maintainers-for-DRM-LOONGSON-driver/20230316-051724
+> base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
+> patch link:    https://lore.kernel.org/r/20230315211550.2620818-3-15330273260%40189.cn
+> patch subject: [PATCH v7 2/2] drm: add kms driver for loongson display controller
+> config: arm-allmodconfig (https://download.01.org/0day-ci/archive/20230316/202303161727.8HnBf6cW-lkp@intel.com/config)
+> compiler: arm-linux-gnueabi-gcc (GCC) 12.1.0
+> reproduce (this is a W=1 build):
+>          wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+>          chmod +x ~/bin/make.cross
+>          # https://github.com/intel-lab-lkp/linux/commit/ba899dba3475b9612f212e3b1daedc3d9a299458
+>          git remote add linux-review https://github.com/intel-lab-lkp/linux
+>          git fetch --no-tags linux-review Sui-Jingfeng/MAINTAINERS-add-maintainers-for-DRM-LOONGSON-driver/20230316-051724
+>          git checkout ba899dba3475b9612f212e3b1daedc3d9a299458
+>          # save the config file
+>          mkdir build_dir && cp config build_dir/.config
+>          COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=arm olddefconfig
+>          COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=arm SHELL=/bin/bash drivers/gpu/drm/loongson/
+>
+> If you fix the issue, kindly add following tag where applicable
+> | Reported-by: kernel test robot <lkp@intel.com>
+> | Link: https://lore.kernel.org/oe-kbuild-all/202303161727.8HnBf6cW-lkp@intel.com/
+>
+> All warnings (new ones prefixed by >>):
+>
+>     drivers/gpu/drm/loongson/lsdc_gem.c: In function 'lsdc_show_buffer_object':
+>>> drivers/gpu/drm/loongson/lsdc_gem.c:280:51: warning: format '%lu' expects argument of type 'long unsigned int', but argument 4 has type 'size_t' {aka 'unsigned int'} [-Wformat=]
+>       280 |                 seq_printf(m, "bo[%04u]: size: %8lukB %s\n",
+>           |                                                ~~~^
+>           |                                                   |
+>           |                                                   long unsigned int
+>           |                                                %8u
+>       281 |                            i,
+>       282 |                            lsdc_bo_size(tbo) >> 10,
+>           |                            ~~~~~~~~~~~~~~~~~~~~~~~
+>           |                                              |
+>           |                                              size_t {aka unsigned int}
+>
+>
+> vim +280 drivers/gpu/drm/loongson/lsdc_gem.c
+>
+>     264	
+>     265	int lsdc_show_buffer_object(struct seq_file *m, void *arg)
+>     266	{
+>     267	#ifdef CONFIG_DEBUG_FS
+>     268		struct drm_info_node *node = (struct drm_info_node *)m->private;
+>     269		struct drm_device *ddev = node->minor->dev;
+>     270		struct lsdc_device *ldev = to_lsdc(ddev);
+>     271		struct lsdc_bo *lbo;
+>     272		unsigned int i = 0;
+>     273	
+>     274		mutex_lock(&ldev->gem.mutex);
+>     275	
+>     276		list_for_each_entry(lbo, &ldev->gem.objects, list) {
+>     277			struct ttm_buffer_object *tbo = &lbo->tbo;
+>     278			struct ttm_resource *resource = tbo->resource;
+>     279	
+>   > 280			seq_printf(m, "bo[%04u]: size: %8lukB %s\n",
+>
+Hi,
+
+Do i need fix this?
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
