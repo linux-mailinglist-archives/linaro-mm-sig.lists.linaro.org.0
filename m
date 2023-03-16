@@ -2,146 +2,260 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D22196BBF37
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 22:38:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BDBFC6BC6E3
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Mar 2023 08:18:40 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D71223F456
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Mar 2023 21:38:44 +0000 (UTC)
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by lists.linaro.org (Postfix) with ESMTPS id 4A17B3F05F
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 15 Mar 2023 21:38:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C9C973F466
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 Mar 2023 07:18:39 +0000 (UTC)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com (mail-sn1nam02on2057.outbound.protection.outlook.com [40.107.96.57])
+	by lists.linaro.org (Postfix) with ESMTPS id 314FC3EC04
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 16 Mar 2023 07:18:21 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=k+qzvlE2;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 134.134.136.100 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1678916303; x=1710452303;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=bN4ryWZxzvEFPRc6DSLUskI5Lq1cF0UDC0McBXRKWV0=;
-  b=k+qzvlE2cx6ayfx7wRKNSfLveOpwOJM9zH1H0EM+fT4jcVCwqgd7UEte
-   ju3LwOPRFA3wSHgwJlzPBJpesSJZczXazPE0cKqg3bWwvlpoAOJD/F+xR
-   4p487+NNm9HH5PqzB0TQpsP2In+0FyhMSmBJkO5HU+dmKI5b7rBuI85lm
-   QTpq9LrUSOTBUYcE1Dsxg4AStPu1QJM3dZh/GhtGK/OzynQ+HW0Ka3G+Z
-   qyrcd5hTQ5l474WaqQe4ndsH27b3tUofMCoedl/zi/v3/4ID7YiLWqfi7
-   ZYUcfFCzgi9OtBs36D9BbKJa3OkZRDwilpsl0XPScoKUB7HXZ+n7wgdVA
-   w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10650"; a="402693623"
-X-IronPort-AV: E=Sophos;i="5.98,262,1673942400";
-   d="scan'208";a="402693623"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Mar 2023 14:36:12 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10650"; a="709822609"
-X-IronPort-AV: E=Sophos;i="5.98,262,1673942400";
-   d="scan'208";a="709822609"
-Received: from lkp-server01.sh.intel.com (HELO b613635ddfff) ([10.239.97.150])
-  by orsmga008.jf.intel.com with ESMTP; 15 Mar 2023 14:36:09 -0700
-Received: from kbuild by b613635ddfff with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1pcYn2-00083D-1R;
-	Wed, 15 Mar 2023 21:36:08 +0000
-Date: Thu, 16 Mar 2023 05:36:05 +0800
-From: kernel test robot <lkp@intel.com>
-To: Paul Cercueil <paul@crapouillou.net>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <202303160514.ZHer8I6t-lkp@intel.com>
-References: <20230314105257.17345-3-paul@crapouillou.net>
+	dkim=pass header.d=amd.com header.s=selector1 header.b=v64ER0Gn;
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.96.57 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=LmgF+OPbkpDcxYEPAr2Hy4aYBxfFgBpF+jw+9NBunnvkmmojAVNF+P1Wzr86EHB/JFlTWSFFn++7L5PxL5m4znnXBflVeHimptKfRO6bxoxA2ZG2qcrUZsnHTNSXNBRDxuqjOWeanIouUZglYYCrr6eXatpStglOTTHLjGu1muY8oStxuJ0XKD6o+z00bnHGZXRNNy3NNy63nc+pFSMfQ3fArhX4CQD5hOl14E2y022sccVcLeTADaYrN0R3OBSSCM9q70HMrLXx0aDjuGm5DrhgKMkYKM2g9w0BURvwTclngVScEwlBiUztwkWy3JuvsO50mrZKWIflzxIIsYah6A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=YsgXCsEQruP4GT3+9xiP1Dnq1tZlwOuzJ9237Cdukb0=;
+ b=BS7yxySC8tmG4PubcjKl5yOU0JaEmeinhHiMZ9/cVWyghEe3oeuDmccC64rMs1m9LqORmSVjzjCHa13f7A9Saa5s0d/2cZ3Yn3dLrYc1ptCfUJUBZPPcQVrCtsZ2XcFeNYIJJDMfvv3L6bzaxec6M201kzmcbCtNQBpZdzeZGnksbSpFQtBQSdd0UcU2hlxMIo+hg65HilDviWalLNm8M/A/WpeVO6a4FTbtbcfyg8/MjCjKvF1Y4XF1XRCkno2kRNo3v/JmblntCF0btJF/yBWLkbtMZySVbwXqdS2RmvOxbftExqxK4kXw7eblPDWaX9l0a19KUk76GtJmHV76yg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=YsgXCsEQruP4GT3+9xiP1Dnq1tZlwOuzJ9237Cdukb0=;
+ b=v64ER0Gne1EdG3t7M9SHIrIUfCu8Skl745kaLZiSABJ4hgzO4TJq43GZZmPg2dnuCzJBte59dgTVZYsM3W9Fcucq/FJQM06BigcRoIoiicMhVpxS6gXnmpptT+442QnzWkmIaj4XAbfP7orFqaJN2XAK5QEzAWW2gX4LPpLpfHE=
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by SA1PR12MB6774.namprd12.prod.outlook.com (2603:10b6:806:259::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.31; Thu, 16 Mar
+ 2023 07:18:19 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::d23f:bb1:df95:3918]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::d23f:bb1:df95:3918%4]) with mapi id 15.20.6178.024; Thu, 16 Mar 2023
+ 07:18:19 +0000
+Message-ID: <efcc3a66-78ca-4e0a-c0fb-527da376fc06@amd.com>
+Date: Thu, 16 Mar 2023 08:18:13 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Content-Language: en-US
+To: Sui Jingfeng <15330273260@189.cn>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ suijingfeng <suijingfeng@loongson.cn>, Sumit Semwal <sumit.semwal@linaro.org>
+References: <20230315211550.2620818-1-15330273260@189.cn>
+ <20230315211550.2620818-3-15330273260@189.cn>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20230315211550.2620818-3-15330273260@189.cn>
+X-ClientProxiedBy: FR2P281CA0157.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:99::18) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230314105257.17345-3-paul@crapouillou.net>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|SA1PR12MB6774:EE_
+X-MS-Office365-Filtering-Correlation-Id: e7816308-f93c-485c-e3ac-08db25ee9e18
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	PZYO3CIXIl6+vJpPyQUbwwoqavitu8KnKoLbLcJRbF6X0VRi3yCHBjam1ShEl5FF9BUdI5PWFDk5SEzRnMuc1ccf/RptIcjtyeOV3PoQRdT9jvRwxkgRHR1TwdqBnzakvJf3vxUC6A1VQso7eAWsRG8p1SMPpcl2JeShr0sBruWP2o7V+W9hzMai0J/PNJKSIf+/fZi9oQQBaCY83tyKC5GG+w9925/C0I93QAZ5CFeYn2P+KdWO+zU+N8yo6SxOmf0FTTOoXhXw2rh3Yn+FUR9k/z7U1TXEoe3VtMizMay0uSOriyqpZz4WiCFcFVoTtDarDhJ8r5mrrN137zItnRsG5kte8oh+dH8vgVJl5K/UNlzA8pqF0ZCAE0piTeVXmXgIQ9NbSWCG8TYoFt4gVIFkG8JEfAHOboSjJxhtk6xS3j4Rpf2IXBPTtjvebTfU6qsbDQaHlxhyAJVwTeV0R7tlsIbSV1db8bwCSUjr9KM3vQNN5rPpzla6Eb5W/Unya/E73CRryRbG/g6UQRFRATj5PUIICU9BgxvPy1oOiupmgVzbxyHafzy/kO6stdYgDWvbdCqevlfVZf0fBgFx7shPi6MVAjoXQ4Z2salmTm3HFYYzoP14S2pUiHf1OJPkpXY5oaa5XE85V/AcQn8FLFJpF9wWx5ih0kYoFVxJJVgTWTzikiLoL1bvRElN3pqRAlaYQcl0nFlbVnJifBzrBYYQZ7GEIPlyzlFVRCMLrzM=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(396003)(346002)(376002)(136003)(366004)(39860400002)(451199018)(31686004)(83380400001)(2616005)(38100700002)(7416002)(5660300002)(186003)(66946007)(8676002)(66476007)(66556008)(41300700001)(6666004)(2906002)(6512007)(36756003)(6506007)(26005)(4326008)(478600001)(31696002)(6486002)(8936002)(86362001)(316002)(110136005)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?V28zL05DTTZYcG52R2tvbHZ0a2svL2hPY0l4K3owY3I3NGQ5Q2t1eENKSld6?=
+ =?utf-8?B?UGtSb1lFbEFmeXpnTm1SMDRSaTNxZWJ0RE5GWnJzQ0lPZndlVTB3OUJSSWsz?=
+ =?utf-8?B?ZENuV2JmNXlOaElVWHh0V3hzOXNNREtjRlR5RHg2M2tCMVZWY29iUU9xNXZo?=
+ =?utf-8?B?ZjlIWWFDMHpQSzl3NXVONytOWmpSRzBjUzZDVWNnaDU0WWdocGpoYTFxYUNY?=
+ =?utf-8?B?ak00a3NRMnR4cU03cE13aTd4TTVGSGdJMzdFcFVxMGxSMnpxbXgxTHdoWTB5?=
+ =?utf-8?B?RDc1RlRvVFhNU3cxZnIzWTBWeHNYai9hUjF5NzlZWU0rd0w4cEdqMXcxakJj?=
+ =?utf-8?B?Vmo2RXJHYzQ0Y2U5ZnMwVDhkNDIvZkNMWEZoME9xZ0NodlAyazhRS3lIRkdN?=
+ =?utf-8?B?Y0ZtV3FWMi9GM3h2TjZlVjAxTktZbWtpYVZ6YmhWZGRKY3JEaS9DUGxqS0xq?=
+ =?utf-8?B?RHNkTVIxM25xRVFTeFZrUUIrKzZYMk5vYzhwczVVaGhXYWJWRjYwZndxTWs2?=
+ =?utf-8?B?eGY2QkZqZHpoZW1XUlM1RWFJdm5abnVvOFgwMCs5eEk2VFg4M1RyVGxiQS9X?=
+ =?utf-8?B?RjlKcGcyVXZwdWVQWUNtNmgxZ05RVnJGMGk0T2lXWjZFeWliUlZVZXF3akh2?=
+ =?utf-8?B?SWpHNXo1QXR2UFlRdlZEdXdGVmd1MklTYzY1dkJtWm42RytlTFkybE1UaFZY?=
+ =?utf-8?B?UEc0cGFZcGhqbGJCaXd4eGxacmlpbEtMTUE2NDNBdVg4YXBCbWlIT3FlaUNT?=
+ =?utf-8?B?TG1IUTNtUDlqdFY3NGFyS0VTYnNRcG5MQlRsYjdkQjJnL3hNK2grT05CeC9p?=
+ =?utf-8?B?cGZveURBTi9pYko3a01FL0ZubnVYSklUVkhYSXJqQVpaaFdXS3BuTEhYMnNx?=
+ =?utf-8?B?L2RJNnRLb0NCUzdJODRtNkVRNXdKMzVJVXZmS3RjQzNhbGk3aTdXNE5LY0tW?=
+ =?utf-8?B?cTFpNkNQcHdzalByaXVqZCtRTWxJRW5MdXJkK2p5c25YVTZwWFl0b2ZBMXds?=
+ =?utf-8?B?Tm9za2ZGdTY3dDBEQ2hOcE0wWTQ4NjNFVnZTUkhjRXp5MWlLNVdmYk9jdUVR?=
+ =?utf-8?B?cE1oNm5lckNwdWpoWlJNQ0RwUFA4U1NZMGl2RXRGVGU4Q0szdHZVaGJFMmhx?=
+ =?utf-8?B?Rm1KMFZpazQ5Sk8vcVZwOUYyTUlDU0N1YjR0MHNJdzJkTkVjVE1YeVFYVG51?=
+ =?utf-8?B?Y0lCZFlyU29lZGFOaU81TDF6RUZpZFZLbUc1MzcvR3hTTXB5SkJ2WklLZnBk?=
+ =?utf-8?B?S04vWlFxK05WeEVXY2N6SC9iYnlLRGNZa0svSGhPaSt6RkZLTU5rWFhGUWlN?=
+ =?utf-8?B?VENYWjltSjlRSHlydDROTXU2VGJXVW10Zit5bkFTL1NrK0RhcUVLZEpZblpu?=
+ =?utf-8?B?d3RTVm9DR1hVU1dlOXhnY0xRQTQyRURKU040aFhoNm5hcXZMWE1Lc0lUM1pL?=
+ =?utf-8?B?S20yWUdKUEpMNUxvNWJqKzY1YzBEVjNJeDl1M3JMUFZuZmR2aVVRbnk2cTNi?=
+ =?utf-8?B?cndGdlZ6SEIyL1U0Y1Jjb2JLS3BLbGRSWVltWGY4MDB6WEozN0MyVXZkR1p3?=
+ =?utf-8?B?cnViQXhKY21GdGFITzRYaERQMDdIOXkrR0RGdGFJRURyYng3bDRxampSeWxo?=
+ =?utf-8?B?R0lOOGtWd3FWMDlRZ2Y3bzdWNkpMRmxJczBQL2paL1NUSFBwUElOT2xBajRm?=
+ =?utf-8?B?NzV3NVhpRmVCNi9UYndTZlplWHNkMlQwU203SmNqRCtUSnBhaUhDVm1KbzVK?=
+ =?utf-8?B?VW0yZzR0OUoyMWFmZnJZazQwM0tUbmZNby85RXFWekZRRWVPMVRWWHgrTUdN?=
+ =?utf-8?B?Y09Fc2VpemhxcTNSQmppK2ZyeGVXL3FkTnlBaXljRU9qVytZeFZmZnBPS0p2?=
+ =?utf-8?B?WmpXdlU3K21hOW9LV041V1pyem5rZ0dESHo5RTNHcjJnVU5zbmpDZFhESWo4?=
+ =?utf-8?B?VWw1R3hsSmlDMDNvNFBRRUltTk1Nb2JocytTTnBrV09MS2NLa0NnTGZYY3dF?=
+ =?utf-8?B?a3NQanpLUUdaWXMrUlZpRkNrVzNrbnVDajA4M0xZRGFhTzVsTStYZmN2NGpk?=
+ =?utf-8?B?Z2w0RzV3eUpWWlQvUDNzVDhwZWpRNWtUT2lIdHViTFlWWUJlUG5iYVZyL2lq?=
+ =?utf-8?Q?FZGy/8uDEgAUGInfXz9Iod0Tr?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7816308-f93c-485c-e3ac-08db25ee9e18
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Mar 2023 07:18:19.0901
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ONDbNlZZs4/ajhD0BFcng/30/P4S88cWKsmk3niEOWLWvKWBWlsZaXRpWQ56n9LS
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6774
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4A17B3F05F
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.00 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+X-Rspamd-Queue-Id: 314FC3EC04
+X-Spamd-Bar: ---------
+X-Spamd-Result: default: False [-9.00 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:134.134.136.100/32];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MIME_GOOD(-0.10)[text/plain];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:4983, ipnet:134.134.136.0/24, country:US];
-	NEURAL_HAM(-0.00)[-0.995];
-	RCVD_TLS_LAST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	FREEMAIL_TO(0.00)[189.cn,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,loongson.cn,linaro.org];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	RCVD_COUNT_THREE(0.00)[3];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[4];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[134.134.136.100:from]
-Message-ID-Hash: N4WF2H6UBDPO4WOKY3JMVKNOC2DLBXKQ
-X-Message-ID-Hash: N4WF2H6UBDPO4WOKY3JMVKNOC2DLBXKQ
-X-MailFrom: lkp@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, Paul Cercueil <paul@crapouillou.net>, michael.hennerich@analog.com, linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, nuno.sa@analog.com, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.96.57:from];
+	DKIM_TRACE(0.00)[amd.com:+];
+	NEURAL_HAM(-0.00)[-0.980]
+Message-ID-Hash: 227HJOZTKYN363QGQ6UBU6IWLWQZ2DQQ
+X-Message-ID-Hash: 227HJOZTKYN363QGQ6UBU6IWLWQZ2DQQ
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Li Yi <liyi@loongson.cn>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 2/2] usb: gadget: functionfs: Add DMABUF import interface
+Subject: [Linaro-mm-sig] Re: [PATCH v7 2/2] drm: add kms driver for loongson display controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N4WF2H6UBDPO4WOKY3JMVKNOC2DLBXKQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/227HJOZTKYN363QGQ6UBU6IWLWQZ2DQQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-Hi Paul,
 
-I love your patch! Yet something to improve:
 
-[auto build test ERROR on usb/usb-testing]
-[also build test ERROR on usb/usb-next usb/usb-linus linus/master v6.3-rc2 next-20230315]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Am 15.03.23 um 22:15 schrieb Sui Jingfeng:
+> From: suijingfeng <suijingfeng@loongson.cn>
+>
+> Loongson display controller IP has been integrated in both Loongson
+> North Bridge chipset(ls7a1000 and ls7a2000) and Loongson SoCs(ls2k1000
+> and ls2k2000 etc), it even has been included in Loongson BMC products.
+>
+> This display controller is a PCI device, it has two display pipe. For
+> the DC in LS7A1000 and LS2K1000 each way has a DVO output interface
+> which provide RGB888 signals, vertical & horizontal synchronisations,
+> and the pixel clock. Each CRTC is able to support 1920x1080@60Hz,
+> the maximum resolution is 2048x2048 according to the hardware spec.
+>
+> For the DC in LS7A2000, each display pipe is equipped with a built-in
+> HDMI encoder which is compliant with HDMI 1.4 specification, thus it
+> support 3840x2160@30Hz. The first display pipe is also equipped with
+> a transparent vga encoder which is parallel with the HDMI encoder.
+> The DC in LS7A2000 is more complete, besides above feature, it has
+> two hardware cursors, two hardware vblank counter and two scanout
+> position recorders.
+>
+>   v1 -> v2:
+>    1) Use hpd status reg when polling for ls7a2000
+>    2) Fix all warnings emerged when compile with W=1
+>
+>   v2 -> v3:
+>    1) Add COMPILE_TEST in Kconfig and make the driver off by default
+>    2) Alphabetical sorting headers (Thomas)
+>    3) Untangle register access functions as much as possible (Thomas)
+>    4) Switch to TTM based memory manager and prefer cached mapping
+>       for Loongson SoC (Thomas)
+>    5) Add chip id detection method, now all models are distinguishable.
+>    6) Revise builtin HDMI phy driver, nearly all main stream mode
+>       below 4K@30Hz is tested, this driver supported these mode very
+>       well including clone display mode and extend display mode.
+>
+>   v3 -> v4:
+>    1) Quickly fix a small mistake.
+>
+>   v4 -> v5:
+>    1) Drop potential support for Loongson 2K series SoC temporary,
+>       this part should be resend with the DT binding patch in the future.
+>    2) Add per display pipe debugfs support to the builtin HDMI encoder.
+>    3) Rewrite atomic_update() for hardware cursors plane(Thomas)
+>    4) Rewrite encoder and connector initialization part, untangle it
+>       according to the chip(Thomas).
+>
+>   v5 -> v6:
+>    1) Remove stray code which didn't get used, say lsdc_of_get_reserved_ram
+>    2) Fix all typos I could found, make sentences and code more readable
+>    3) Untange lsdc_hdmi*_connector_detect() function according to the pipe
+>    4) After a serious consideration, we rename this driver as loongson.
+>       Because we also have drivers toward the LoongGPU IP in LS7A2000 and
+>       LS2K2000. Besides, there are also drivers about the external encoder,
+>       HDMI audio driver and vbios support etc. This patch only provide DC
+>       driver part, my teammate Li Yi believe that loongson will be more
+>       suitable for loongson graphics than lsdc in the long run.
+>
+>       loongson.ko = LSDC + LoongGPU + encoders driver + vbios/DT ...
+>
+>    v6 -> v7:
+>    1) Add prime support, self-sharing is works. sharing buffer with etnaviv
+>       is also tested, and its works with limitation.
+>    2) Implement buffer objects tracking with list_head.
+>    3) S3(sleep to RAM) is tested on ls3a5000+ls7a2000 evb and it works.
+>    4) Rewrite lsdc_bo_move, since ttm core stop allocating resources
+>       during BO creation. Patch V1 ~ V6 of this series no longer works
+>       on latest kernel. Thus, we send V7.
+>
+> Signed-off-by: Li Yi <liyi@loongson.cn>
+> Signed-off-by: suijingfeng <suijingfeng@loongson.cn>
+> Signed-off-by: Sui Jingfeng <15330273260@189.cn>
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Paul-Cercueil/usb-gadget-Support-already-mapped-DMA-SGs/20230314-185522
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/usb.git usb-testing
-patch link:    https://lore.kernel.org/r/20230314105257.17345-3-paul%40crapouillou.net
-patch subject: [PATCH 2/2] usb: gadget: functionfs: Add DMABUF import interface
-config: i386-randconfig-a014-20230313 (https://download.01.org/0day-ci/archive/20230316/202303160514.ZHer8I6t-lkp@intel.com/config)
-compiler: clang version 14.0.6 (https://github.com/llvm/llvm-project f28c006a5895fc0e329fe15fead81e37457cb1d1)
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://github.com/intel-lab-lkp/linux/commit/4ee364ed5d112c4550344fd037f4e1ef7cc41878
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Paul-Cercueil/usb-gadget-Support-already-mapped-DMA-SGs/20230314-185522
-        git checkout 4ee364ed5d112c4550344fd037f4e1ef7cc41878
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=i386 olddefconfig
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=i386 SHELL=/bin/bash
+[SNIP]
 
-If you fix the issue, kindly add following tag where applicable
-| Reported-by: kernel test robot <lkp@intel.com>
-| Link: https://lore.kernel.org/oe-kbuild-all/202303160514.ZHer8I6t-lkp@intel.com/
+> +u64 lsdc_bo_gpu_offset(struct ttm_buffer_object *tbo)
+> +{
+> +	struct drm_device *ddev = tbo->base.dev;
+> +	struct ttm_resource *resource = tbo->resource;
+> +
+> +	if (drm_WARN_ON(ddev, !tbo->pin_count))
+> +		return -ENODEV;
 
-All errors (new ones prefixed by >>, old ones prefixed by <<):
+Returning -ENODEV when the function return value is unsigned doesn't 
+make much sense. I would also use 0 here.
 
->> ERROR: modpost: module usb_f_fs uses symbol dma_buf_get from namespace DMA_BUF, but does not import it.
->> ERROR: modpost: module usb_f_fs uses symbol dma_buf_attach from namespace DMA_BUF, but does not import it.
->> ERROR: modpost: module usb_f_fs uses symbol dma_buf_detach from namespace DMA_BUF, but does not import it.
->> ERROR: modpost: module usb_f_fs uses symbol dma_buf_put from namespace DMA_BUF, but does not import it.
->> ERROR: modpost: module usb_f_fs uses symbol dma_buf_map_attachment from namespace DMA_BUF, but does not import it.
->> ERROR: modpost: module usb_f_fs uses symbol dma_buf_unmap_attachment from namespace DMA_BUF, but does not import it.
+Apart from that I briefly skimmed over the prime and TTM handling and 
+couldn't find anything obviously wrong.
 
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests
+I obviously can't review the hw specific stuff, but over all looks 
+pretty good to me.
+
+Regards,
+Christian.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
