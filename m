@@ -2,200 +2,406 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C9BF6BE402
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Mar 2023 09:41:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D97A6BE509
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Mar 2023 10:10:55 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8ECF53F4A9
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Mar 2023 08:41:20 +0000 (UTC)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com (mail-mw2nam04on2075.outbound.protection.outlook.com [40.107.101.75])
-	by lists.linaro.org (Postfix) with ESMTPS id 76FB53E975
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Mar 2023 08:41:00 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8C9473F528
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Mar 2023 09:10:54 +0000 (UTC)
+Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
+	by lists.linaro.org (Postfix) with ESMTPS id EA24B3EA46
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Mar 2023 09:10:32 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=P2erWaRK;
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.101.75 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gS0z08DCSTBbabB+n732/gvEZlvl9E8eZPmbTWLpVZKP9w46EgyYkpeQX+OeJMv2/r8Q5uhukMUWOlX1KJ/iNGskFH/nrg4HUr7jQTTtVrO6/+jLf5aPzv5HJhd65kXK4uelaG0fYMk+doqcs09Oxtn7PgkYzuw46hur2TfO14OBX7xJmSotB5iqnP7GSlzNrSliK4ljIaRIBRBABE+jleDPcD1X0GNol7/MFOz9jFiAVwoE80Ljq3xeywWurzIw/mAIZnzCltAiDpH5A20wquxA+QwXY51XirzD3Hpx0XYrE15AOI9cEHt4xPNBsIb/D3ppOFV9wUnfYJzixb37Xg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=p9sczkb/yl8HH2CtHvR6g5bT18OAJjP3EB479yPVeVo=;
- b=e+IuuhWBwz98UIFGtdtmEMA7FDryCnI0sJGWqBsexZJRe9dIu0h/PnipATYQSijvKUVCOx3I7+2MpBmGdgfU5QnQMmYrZR1cNQ/u26HZTGw3cAYEgTpK9WLp09qB+tlASK+Jic06cRAgzJyOBcODRxKcV2BgrwRTF2ah8yZEhGyxcsGCTJ7uLYZaJapbPZQsN8xQJkhWfUu0Zw8fUNwkI5tC+yWePeOKgvHAdX9hUEvZYnupjKcXqk0TTUoMaHV5bU/Ahg6VQhD/9wddCnhp41rVYl5qm8cS9jeE0o7v1TAQ/fbtnFd95qtT9iKmZEtzUcKEJa2UdZB7kues7luEbQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=p9sczkb/yl8HH2CtHvR6g5bT18OAJjP3EB479yPVeVo=;
- b=P2erWaRKubVDt9Dm+7K26P0R5/6/lH6FxjWlDO3LSCyxKPqjoHzBuOYthLm0fUcyhMUgx6sIGl2Btyivf7gVpydVzk02njeMmCjVwbKMJaEVZH7bkIL4sBwZpXubyTdMqK6zF+JiGdInQRW0smT2tZjiGxEF6fnmfEHPhtyYd4U=
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by SN7PR12MB6929.namprd12.prod.outlook.com (2603:10b6:806:263::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.26; Fri, 17 Mar
- 2023 08:40:56 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::d23f:bb1:df95:3918]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::d23f:bb1:df95:3918%4]) with mapi id 15.20.6178.024; Fri, 17 Mar 2023
- 08:40:56 +0000
-Message-ID: <30f75b09-fdc6-bb3c-0785-f7b0f3183192@amd.com>
-Date: Fri, 17 Mar 2023 09:40:49 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Content-Language: en-US
-To: Lee Jones <lee@kernel.org>, dri-devel@lists.freedesktop.org
-References: <20230317081718.2650744-1-lee@kernel.org>
- <20230317081718.2650744-6-lee@kernel.org>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20230317081718.2650744-6-lee@kernel.org>
-X-ClientProxiedBy: FR2P281CA0131.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9e::14) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=UXiNXVfz;
+	spf=pass (lists.linaro.org: domain of ppaalanen@gmail.com designates 209.85.167.54 as permitted sender) smtp.mailfrom=ppaalanen@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-lf1-f54.google.com with SMTP id s8so5361620lfr.8
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Mar 2023 02:10:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20210112; t=1679044231;
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=DcxwPLMgH8TQvzlH8rslSljIPEdXp59TytSjgtEqxgE=;
+        b=UXiNXVfzWXyugAmhGN4PL73XDWIJVmfNU2K5VaEQtO31gFlKYO2y3s/ZXpux8ZSOFl
+         yr2LdOozjgxjpXJnO0DHi+PFh30H9Xma06doq7Y6OYny1ORI67GX8kpSKW4s9vfgtBZN
+         /qfAANaSLsfBY6fVEHigttZMmc3pY33fpAaeQJ2xUzOenylk6ZlGGTsGNfCVw8tx5rWt
+         Y0WA4AIOw+A0gwswwCLIQVzupbtt+/BV7D8M1LWh/0FV3HOJ4LarBbnHW0AV2Rx+o990
+         VWbsGm8gAPF+RQ9sfqPUgg20IOk1dxeMQbr25EjZL8J70mMGlBff+5g25GTPbC14/0ZZ
+         kY5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1679044231;
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=DcxwPLMgH8TQvzlH8rslSljIPEdXp59TytSjgtEqxgE=;
+        b=mFNRPSYC/pMdUP5FTt2ApiPmvoDjnvc/wujucG03xaM1eSVxCWM2Aep35tdANYzXvr
+         11QBa4fsakgQ/2cUwt7meH/RFLaP40JtqWh4SvNLPnUiiPKfaFJ4BWuvaBWHeIuqDNWc
+         ZN/qEaILAJAX/BPnBNpYa2KIksh6922YLW92lXVhO7fEVep47V+r9c7W/hPwivTmpUBZ
+         5zBv3dgTGyM/K1ftxlbJjs6hlRY7GbB0oIHo2k8zlPCGBegEXRjUjx8tBK2dHhkAy45Z
+         TB4YPJuaFIsIjteuFi9oe98HAOVaMcu9/H5VD/pkG0pF7PnOafioOtaZmdeR7YUeL3pi
+         aBWg==
+X-Gm-Message-State: AO0yUKXFd5WnJ+LBfHRGmT9B3YHJNuPtIilG4rdGemsSuRQTHuFH18Qs
+	yn/Ck9VznRy4YwU4bEQgwrY=
+X-Google-Smtp-Source: AK7set+oNmLKucfTTmZPZLKOwpJSCLRqf5YmI+zqSLnhx0Oex/d2yplo+kNj6JxqcI/WWfg2h7PmdA==
+X-Received: by 2002:ac2:5f10:0:b0:4d8:4f46:f0b9 with SMTP id 16-20020ac25f10000000b004d84f46f0b9mr3810695lfq.23.1679044231458;
+        Fri, 17 Mar 2023 02:10:31 -0700 (PDT)
+Received: from eldfell ([194.136.85.206])
+        by smtp.gmail.com with ESMTPSA id h9-20020a05651211c900b004d545f1e0ccsm275379lfr.187.2023.03.17.02.09.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 17 Mar 2023 02:09:54 -0700 (PDT)
+Date: Fri, 17 Mar 2023 11:09:21 +0200
+From: Pekka Paalanen <ppaalanen@gmail.com>
+To: Sebastian Wick <sebastian.wick@redhat.com>
+Message-ID: <20230317110921.0862cc8b@eldfell>
+In-Reply-To: <CA+hFU4xbssR+=Sf4ia5kPdsSb4y9SQUd4nx_2p1Szcbtna28CA@mail.gmail.com>
+References: <20230308155322.344664-1-robdclark@gmail.com>
+	<20230308155322.344664-2-robdclark@gmail.com>
+	<ZAtQspuFjPtGy7ze@gmail.com>
+	<CAF6AEGsGOr5+Q10wX=5ttrWCSUJfn7gzHW8QhxFC0GDLgagMHg@mail.gmail.com>
+	<ZBHNvT3BLgS3qvV5@gmail.com>
+	<CAF6AEGu1S2CXzRxV_c5tE_H+XUGiO=n0tXjLZ_u_tW-eMqMsQw@mail.gmail.com>
+	<ZBLg0t0tTVvuPuiJ@gmail.com>
+	<CAF6AEGvV5arZThTyju_=xFFDWRbMaexgO_kkdKZuK-zeCxrN7Q@mail.gmail.com>
+	<CA+hFU4xbssR+=Sf4ia5kPdsSb4y9SQUd4nx_2p1Szcbtna28CA@mail.gmail.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.24; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|SN7PR12MB6929:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2a04f609-2c30-4462-8f05-08db26c3536f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	yUXwD0t9fGuvVGpuVfDpEEPQr89XjJ+fWqRb6qPXIvc5UGk78jr7ktORcGleNX0s7MqFNDTEPywXu78Xo8esAiZEWMrzCNo229jW6KnzXtz9INHLG/KpW98bg5C90ZP40I+grsofdHcBx6TfVgQTT8Q3kRybi2MoAJFlDcR4QB8yif+m2cwoHbccTMfrF/ZqjmwdZrBbA9L61TMQeZazbug1M4hc/2CtrJbsUBthCxPwfWTl52bB8LwrOgYPIhrCzKRQvmqbXzQFFRM/Pb27sTvIYb1k8tFzXMlVbjjt4o2LxasunkS5FUgkojkIyFpzzQoe9XDVvv1MSDDbZ0IGg7qm1te6s77PfpiKIxVbu6G8duAgIeJUtZyBk7ro/5b0bCvgydWiKDrZk09LWUwVn/pdxDEC2TlsFRRf1WuKuM7VMDclvmPHeRDXHWbg0/NwhZhmKYodsCMsG5jPBVN/dLUPdjUEkzJ8dduPILjFyp2UZbOMMcZOFom3WbM5GX0fpZSQHcS5C5IFWPwjQs2+jzuYrl345aFbbHbaOMx+qPVDrcIisJ+UR0jmRZaGBpqn2TtcSIxpysiZhoLjJqoVc/LT+TUHPx0fD0mYN1td0cJR2J2qaobXzlKmrKkjVuIwFDLMWdIQ4ObE7qmHoAiaH67qhF2pW3M9sBXyB/BdQWW/7H/JJa9uug8/HodWX1OxWOdlceh5pJ+XUNnWBWxVhA65oOJ67nUC/aBOScxdwCE=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230025)(4636009)(396003)(376002)(136003)(346002)(366004)(39860400002)(451199018)(36756003)(478600001)(54906003)(316002)(86362001)(6506007)(5660300002)(6486002)(8676002)(41300700001)(66476007)(66946007)(66556008)(2906002)(6666004)(8936002)(4326008)(83380400001)(31696002)(6512007)(2616005)(38100700002)(186003)(66574015)(31686004)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?a0crWmhOYWt0RU9CMDMzZU5yVmhiZ3IrYjFCWm1HQUlsNXFuMDRtWVNwWVZP?=
- =?utf-8?B?TTVQNGRHeG9vOUlPU3d6VE5HaDZ2TndQY2tzc2dmcnBFSjRqb0ZtOC85cUMv?=
- =?utf-8?B?L1dBeUJUdis5d1ZKVlVubkFHdTBpWE1MMllHU01aYmd0VFEzcnFmN3RpY2xZ?=
- =?utf-8?B?WEFlamdRbytNemNpd3J1czJzR0U5WnZwdFRXYnlEQ01MZjB0dk5FY3FpWFdZ?=
- =?utf-8?B?Vi9DQW9OT09tdXNFUDlnTTZyQkRKbEFsZTlvM2JRT2NRSy93VHROemhuL3ZS?=
- =?utf-8?B?YWdhMURGeURIRHB5aS9GT21FYWN3b0lPa1RwQzdXV3Y5NDZkY04vOVZsKys4?=
- =?utf-8?B?YTR3cnV1d21pME1PS0hzcVVvYzR4RCtycWRpeEVlbTZHcktHYitvTW9Ua2tu?=
- =?utf-8?B?S3RvYWlPUjk3RGprVUdTb0JpZWo4dkVnRk45TXZ2bThEa2pNZ1Z6N2dPeEtC?=
- =?utf-8?B?SkZCUS92TVBqWWJJV1NabTZiLzVVbEQzb0IybDZVUmVwRTErT0xYQzlwaW14?=
- =?utf-8?B?YmV5SGd2aURwbU00MTlNR0swTCtuVDdhdGJ0YzJlRGtRdENXeGRzUmh0T1pB?=
- =?utf-8?B?bi9vOFppMmk4MDVOVUYyUVhpd25scjI5ekEzV0k5TFlPdTN6OWRaT3JvRXBo?=
- =?utf-8?B?MFgwU01tTWZYcnpRZlZHcCsxSUFNN2ZPOUUzcUlVMUw4dEd3cmo2R01ZNjB6?=
- =?utf-8?B?TWxrdWh6TWJxRkYvWGFIZ0txZCt4dDNlRzZpSnl1dW00Tlg2TDByQ1pOc053?=
- =?utf-8?B?bnR6a2NPei9kNXdxOUZTYjlGV1BUYlVOUDNLcCt4bWsrN1pMd204aGRnRUlv?=
- =?utf-8?B?RldzWVdjTU1TWUlsSUZianF5OTliYkd1N2JIMzBiNjVpejR0VC9XbklUWFRR?=
- =?utf-8?B?aWtoWG1CZWUxOU1nT2FITGdGV2h1cnBKeFNqMGtvSW4vdk1VZ2w0QnptOU40?=
- =?utf-8?B?eFB5ckNUZ2ZHZE5MaHpDbEVMZ3p2RmwzcmJla3JvdExVMWRja3UrWVl4aGQy?=
- =?utf-8?B?Ny9KU3N6ZWQ0S3RLQ0dNUFlUNXMxeXVDcm1RMVRGR2FuZWo0MmdKSVFiRFYw?=
- =?utf-8?B?bzJMWUo2YzNyL0NPUmZxQURGVXA4aWhhUUZzSjBUWDB3a3F5QlRTc3ZDSUFq?=
- =?utf-8?B?NGVraEhmY0I4ZEhnYlVnUnBnVXJ4ak0wVWhFbmpEalB6Yy9kNFZyQ1Z4emdq?=
- =?utf-8?B?bmxuQWpONjltN3llZm5XN1JJWURXc0dyQm5xc2hIbW04N3g4THVtS2hSYy9p?=
- =?utf-8?B?OXpzRTFQcmVSdUFTZ2dqSGcwVHlDNllBZ0pGeGoyTmNrbG1rbXFmNlRtREYx?=
- =?utf-8?B?VnIzbFBOZC9CNTFHdWhoTjVrcnZaZVBVbVAzQ2k0WU8wcmNHV3hmT2kyQXB6?=
- =?utf-8?B?Y0xrcVJRUitpR0lqOUxrNjlHejhvOXJ2RDVta3Uzcy9ibjZLMW0xei9zNENz?=
- =?utf-8?B?Q1c4aEhWcWZoVnByNVl3Yi80YXduenducnJXZTNIZXR2QlF1MlQ5RkE3akFk?=
- =?utf-8?B?MXVBWDNGMko3WWpvNUJiTmdTRy8ybGdzN3ZHQnptcTZPL25YbUZkQitCQllY?=
- =?utf-8?B?VkN3RENYd212dlBWN1pzT3pzS1Z6SGlhVVdQa0tFSzdmVjJlTk4yU0NOenhZ?=
- =?utf-8?B?UkNxMk0vMkxOZDNJdEJ2S214NklJb1FvVFE1NHJBQWxYalBEdzJETlBMaFFR?=
- =?utf-8?B?R3BaUlNSbCt2S0RvRnU3bkNvNlVoOTJGVk1YL09JRVY5Vzd5dzN2TDRGOFQx?=
- =?utf-8?B?Rng4MndzdHZWWUlRM1QxOVNJZThOZ2dkYVUzZENmY2RDV0ZtM3hneUJPUE9v?=
- =?utf-8?B?Y3hURkEwbWdTTGQvNmJPVndzdlg0Vk1hbE1jMnFjaTMvMXNCNkI4LzZmWDZz?=
- =?utf-8?B?ZHhiOWZGSWZFdFUrK0hRYVptTE43TEFLakJ0clUyemJHd3ZPRVBXVE00bFIw?=
- =?utf-8?B?K2FIZ2NXbTZNTllwNis0cDdmWUNRTGU2R1hOcm9zdXZINlFiU04yanVMaWRo?=
- =?utf-8?B?enBSeFVTMTJoNUFvNzA3aGtqQ1ladXpEajYvUHE4WEtuZ0poNkIzY1dVazFC?=
- =?utf-8?B?bnJISUZnWEVFeUN0QWxrTUxCTk9zaWhRU2YybmZGOVB5UU5YejIvODREc3c2?=
- =?utf-8?B?b1pyZUNGSXc4NTNOLytYaG9qeE9vRG1HN2RTb2Q3VXJRbnZqaTRrQUNRclFW?=
- =?utf-8?Q?LEKMJ02FMEXcS2ctzxfz5/bvPHYaKBZq6ak2wnc5w1pZ?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2a04f609-2c30-4462-8f05-08db26c3536f
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Mar 2023 08:40:56.4136
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: pWtrPYw5m3ptsCABbws/EeDRQuZwtBQy22ruwx1xITzUDqXuEfzpIOdrxtKT6UX8
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6929
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 76FB53E975
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.00 / 15.00];
+X-Rspamd-Queue-Id: EA24B3EA46
+X-Spamd-Bar: ------
+X-Spamd-Result: default: False [-6.10 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
-	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	NEURAL_HAM(-0.00)[-0.967];
+	FORGED_RECIPIENTS(2.00)[m:sebastian.wick@redhat.com,m:robdclark@gmail.com,m:jadahl@gmail.com,m:robdclark@chromium.org,m:pekka.paalanen@collabora.com,m:corbet@lwn.net,m:ckoenig.leichtzumerken@gmail.com,m:intel-gfx@lists.freedesktop.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:christian.koenig@amd.com,m:linux-media@vger.kernel.org,m:ckoenigleichtzumerken@gmail.com,s:linaro-mm-sig@lists.linaro.org];
+	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	NEURAL_HAM(-0.00)[-0.991];
+	URIBL_BLOCKED(0.00)[amd.com:email,collabora.com:email];
+	TAGGED_RCPT(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.54:from];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	ARC_NA(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	RCVD_COUNT_THREE(0.00)[3];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,chromium.org,collabora.com,lwn.net,lists.freedesktop.org,vger.kernel.org,amd.com];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,amd.com,gmail.com,ffwll.ch,linaro.org,lists.linaro.org];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	DKIM_TRACE(0.00)[amd.com:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	URIBL_BLOCKED(0.00)[linaro.org:email,lists.freedesktop.org:email,amd.com:dkim,amd.com:email,ffwll.ch:email];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_DN_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.101.75:from]
-Message-ID-Hash: VJACKGSU7BEHZ76GPDQW6ISFNEDNWIP5
-X-Message-ID-Hash: VJACKGSU7BEHZ76GPDQW6ISFNEDNWIP5
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linux-kernel@vger.kernel.org, Huang Rui <ray.huang@amd.com>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
+Message-ID-Hash: 5P4OV26JCBTRVDA2KVFEZNBEN5757XPJ
+X-Message-ID-Hash: 5P4OV26JCBTRVDA2KVFEZNBEN5757XPJ
+X-MailFrom: ppaalanen@gmail.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Rob Clark <robdclark@gmail.com>,
+	Jonas =?UTF-8?B?w4VkYWhs?= <jadahl@gmail.com>,
+	Rob Clark <robdclark@chromium.org>,
+	Pekka Paalanen <pekka.paalanen@collabora.com>,
+	Jonathan Corbet <corbet@lwn.net>, intel-gfx@lists.freedesktop.org,
+	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+	open list <linux-kernel@vger.kernel.org>,
+	dri-devel@lists.freedesktop.org,
+	Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+	DMA@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 05/37] drm/ttm/ttm_bo: Provide a missing 'bulk' description and correct misnaming of 'placement'
+Subject: [Linaro-mm-sig] Re: [PATCH v10 01/15] dma-buf/dma-fence: Add deadline awareness
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VJACKGSU7BEHZ76GPDQW6ISFNEDNWIP5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5P4OV26JCBTRVDA2KVFEZNBEN5757XPJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============8774495817473107861=="
 
-QW0gMTcuMDMuMjMgdW0gMDk6MTYgc2NocmllYiBMZWUgSm9uZXM6DQo+ICdidWxrJyBkZXNjcmlw
-dGlvbiB0YWtlbiBmcm9tIGFub3RoZXIgaW4gdGhlIHNhbWUgZmlsZS4NCj4NCj4gRml4ZXMgdGhl
-IGZvbGxvd2luZyBXPTEga2VybmVsIGJ1aWxkIHdhcm5pbmcocyk6DQo+DQo+ICAgZHJpdmVycy9n
-cHUvZHJtL3R0bS90dG1fYm8uYzo5ODogd2FybmluZzogRnVuY3Rpb24gcGFyYW1ldGVyIG9yIG1l
-bWJlciAnYnVsaycgbm90IGRlc2NyaWJlZCBpbiAndHRtX2JvX3NldF9idWxrX21vdmUnDQo+ICAg
-ZHJpdmVycy9ncHUvZHJtL3R0bS90dG1fYm8uYzo3Njg6IHdhcm5pbmc6IEZ1bmN0aW9uIHBhcmFt
-ZXRlciBvciBtZW1iZXIgJ3BsYWNlbWVudCcgbm90IGRlc2NyaWJlZCBpbiAndHRtX2JvX21lbV9z
-cGFjZScNCj4gICBkcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV9iby5jOjc2ODogd2FybmluZzogRXhj
-ZXNzIGZ1bmN0aW9uIHBhcmFtZXRlciAncHJvcG9zZWRfcGxhY2VtZW50JyBkZXNjcmlwdGlvbiBp
-biAndHRtX2JvX21lbV9zcGFjZScNCj4NCj4gQ2M6IENocmlzdGlhbiBLb2VuaWcgPGNocmlzdGlh
-bi5rb2VuaWdAYW1kLmNvbT4NCj4gQ2M6IEh1YW5nIFJ1aSA8cmF5Lmh1YW5nQGFtZC5jb20+DQo+
-IENjOiBEYXZpZCBBaXJsaWUgPGFpcmxpZWRAZ21haWwuY29tPg0KPiBDYzogRGFuaWVsIFZldHRl
-ciA8ZGFuaWVsQGZmd2xsLmNoPg0KPiBDYzogU3VtaXQgU2Vtd2FsIDxzdW1pdC5zZW13YWxAbGlu
-YXJvLm9yZz4NCj4gQ2M6IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcNCj4gQ2M6IGxp
-bnV4LW1lZGlhQHZnZXIua2VybmVsLm9yZw0KPiBDYzogbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5h
-cm8ub3JnDQo+IFNpZ25lZC1vZmYtYnk6IExlZSBKb25lcyA8bGVlQGtlcm5lbC5vcmc+DQoNClJl
-dmlld2VkLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQoN
-CkdvaW5nIHRvIHVwc3RyZWFtIHRoYXQgdGhyb3VnaCBkcm0tbWlzYy1uZXh0IGluIGEgbWludXRl
-Lg0KDQpUaGFua3MsDQpDaHJpc3RpYW4uDQoNCj4gLS0tDQo+ICAgZHJpdmVycy9ncHUvZHJtL3R0
-bS90dG1fYm8uYyB8IDMgKystDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKSwg
-MSBkZWxldGlvbigtKQ0KPg0KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL3R0bS90dG1f
-Ym8uYyBiL2RyaXZlcnMvZ3B1L2RybS90dG0vdHRtX2JvLmMNCj4gaW5kZXggNDU5ZjFiNDQ0MGRh
-YS4uZDA1NmQyOGY4NzU4YSAxMDA2NDQNCj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL3R0bS90dG1f
-Ym8uYw0KPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vdHRtL3R0bV9iby5jDQo+IEBAIC04NCw2ICs4
-NCw3IEBAIEVYUE9SVF9TWU1CT0wodHRtX2JvX21vdmVfdG9fbHJ1X3RhaWwpOw0KPiAgICAqIHR0
-bV9ib19zZXRfYnVsa19tb3ZlIC0gdXBkYXRlIEJPcyBidWxrIG1vdmUgb2JqZWN0DQo+ICAgICoN
-Cj4gICAgKiBAYm86IFRoZSBidWZmZXIgb2JqZWN0Lg0KPiArICogQGJ1bGs6IGJ1bGsgbW92ZSBz
-dHJ1Y3R1cmUNCj4gICAgKg0KPiAgICAqIFVwZGF0ZSB0aGUgQk9zIGJ1bGsgbW92ZSBvYmplY3Qs
-IG1ha2luZyBzdXJlIHRoYXQgcmVzb3VyY2VzIGFyZSBhZGRlZC9yZW1vdmVkDQo+ICAgICogYXMg
-d2VsbC4gQSBidWxrIG1vdmUgYWxsb3dzIHRvIG1vdmUgbWFueSByZXNvdXJjZSBvbiB0aGUgTFJV
-IGF0IG9uY2UsDQo+IEBAIC03NDgsNyArNzQ5LDcgQEAgc3RhdGljIGludCB0dG1fYm9fbWVtX2Zv
-cmNlX3NwYWNlKHN0cnVjdCB0dG1fYnVmZmVyX29iamVjdCAqYm8sDQo+ICAgICoNCj4gICAgKiBA
-Ym86IFBvaW50ZXIgdG8gYSBzdHJ1Y3QgdHRtX2J1ZmZlcl9vYmplY3QuIHRoZSBkYXRhIG9mIHdo
-aWNoDQo+ICAgICogd2Ugd2FudCB0byBhbGxvY2F0ZSBzcGFjZSBmb3IuDQo+IC0gKiBAcHJvcG9z
-ZWRfcGxhY2VtZW50OiBQcm9wb3NlZCBuZXcgcGxhY2VtZW50IGZvciB0aGUgYnVmZmVyIG9iamVj
-dC4NCj4gKyAqIEBwbGFjZW1lbnQ6IFByb3Bvc2VkIG5ldyBwbGFjZW1lbnQgZm9yIHRoZSBidWZm
-ZXIgb2JqZWN0Lg0KPiAgICAqIEBtZW06IEEgc3RydWN0IHR0bV9yZXNvdXJjZS4NCj4gICAgKiBA
-Y3R4OiBpZiBhbmQgaG93IHRvIHNsZWVwLCBsb2NrIGJ1ZmZlcnMgYW5kIGFsbG9jIG1lbW9yeQ0K
-PiAgICAqDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-CkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJv
-Lm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVA
-bGlzdHMubGluYXJvLm9yZwo=
+--===============8774495817473107861==
+Content-Type: multipart/signed; boundary="Sig_/PQu+8_PwJg02nK.t.l_MdDX";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
+
+--Sig_/PQu+8_PwJg02nK.t.l_MdDX
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, 16 Mar 2023 23:22:24 +0100
+Sebastian Wick <sebastian.wick@redhat.com> wrote:
+
+> On Thu, Mar 16, 2023 at 5:29=E2=80=AFPM Rob Clark <robdclark@gmail.com> w=
+rote:
+> >
+> > On Thu, Mar 16, 2023 at 2:26=E2=80=AFAM Jonas =C3=85dahl <jadahl@gmail.=
+com> wrote: =20
+> > >
+> > > On Wed, Mar 15, 2023 at 09:19:49AM -0700, Rob Clark wrote: =20
+> > > > On Wed, Mar 15, 2023 at 6:53=E2=80=AFAM Jonas =C3=85dahl <jadahl@gm=
+ail.com> wrote: =20
+> > > > >
+> > > > > On Fri, Mar 10, 2023 at 09:38:18AM -0800, Rob Clark wrote: =20
+> > > > > > On Fri, Mar 10, 2023 at 7:45=E2=80=AFAM Jonas =C3=85dahl <jadah=
+l@gmail.com> wrote: =20
+> > > > > > >
+> > > > > > > On Wed, Mar 08, 2023 at 07:52:52AM -0800, Rob Clark wrote: =20
+> > > > > > > > From: Rob Clark <robdclark@chromium.org>
+> > > > > > > >
+> > > > > > > > Add a way to hint to the fence signaler of an upcoming dead=
+line, such as
+> > > > > > > > vblank, which the fence waiter would prefer not to miss.  T=
+his is to aid
+> > > > > > > > the fence signaler in making power management decisions, li=
+ke boosting
+> > > > > > > > frequency as the deadline approaches and awareness of missi=
+ng deadlines
+> > > > > > > > so that can be factored in to the frequency scaling.
+> > > > > > > >
+> > > > > > > > v2: Drop dma_fence::deadline and related logic to filter du=
+plicate
+> > > > > > > >     deadlines, to avoid increasing dma_fence size.  The fen=
+ce-context
+> > > > > > > >     implementation will need similar logic to track deadlin=
+es of all
+> > > > > > > >     the fences on the same timeline.  [ckoenig]
+> > > > > > > > v3: Clarify locking wrt. set_deadline callback
+> > > > > > > > v4: Clarify in docs comment that this is a hint
+> > > > > > > > v5: Drop DMA_FENCE_FLAG_HAS_DEADLINE_BIT.
+> > > > > > > > v6: More docs
+> > > > > > > > v7: Fix typo, clarify past deadlines
+> > > > > > > >
+> > > > > > > > Signed-off-by: Rob Clark <robdclark@chromium.org>
+> > > > > > > > Reviewed-by: Christian K=C3=B6nig <christian.koenig@amd.com>
+> > > > > > > > Acked-by: Pekka Paalanen <pekka.paalanen@collabora.com>
+> > > > > > > > Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
+> > > > > > > > --- =20
+> > > > > > >
+> > > > > > > Hi Rob!
+> > > > > > > =20
+> > > > > > > >  Documentation/driver-api/dma-buf.rst |  6 +++
+> > > > > > > >  drivers/dma-buf/dma-fence.c          | 59 ++++++++++++++++=
+++++++++++++
+> > > > > > > >  include/linux/dma-fence.h            | 22 +++++++++++
+> > > > > > > >  3 files changed, 87 insertions(+)
+> > > > > > > >
+> > > > > > > > diff --git a/Documentation/driver-api/dma-buf.rst b/Documen=
+tation/driver-api/dma-buf.rst
+> > > > > > > > index 622b8156d212..183e480d8cea 100644
+> > > > > > > > --- a/Documentation/driver-api/dma-buf.rst
+> > > > > > > > +++ b/Documentation/driver-api/dma-buf.rst
+> > > > > > > > @@ -164,6 +164,12 @@ DMA Fence Signalling Annotations
+> > > > > > > >  .. kernel-doc:: drivers/dma-buf/dma-fence.c
+> > > > > > > >     :doc: fence signalling annotation
+> > > > > > > >
+> > > > > > > > +DMA Fence Deadline Hints
+> > > > > > > > +~~~~~~~~~~~~~~~~~~~~~~~~
+> > > > > > > > +
+> > > > > > > > +.. kernel-doc:: drivers/dma-buf/dma-fence.c
+> > > > > > > > +   :doc: deadline hints
+> > > > > > > > +
+> > > > > > > >  DMA Fences Functions Reference
+> > > > > > > >  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> > > > > > > >
+> > > > > > > > diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/=
+dma-fence.c
+> > > > > > > > index 0de0482cd36e..f177c56269bb 100644
+> > > > > > > > --- a/drivers/dma-buf/dma-fence.c
+> > > > > > > > +++ b/drivers/dma-buf/dma-fence.c
+> > > > > > > > @@ -912,6 +912,65 @@ dma_fence_wait_any_timeout(struct dma_=
+fence **fences, uint32_t count,
+> > > > > > > >  }
+> > > > > > > >  EXPORT_SYMBOL(dma_fence_wait_any_timeout);
+> > > > > > > >
+> > > > > > > > +/**
+> > > > > > > > + * DOC: deadline hints
+> > > > > > > > + *
+> > > > > > > > + * In an ideal world, it would be possible to pipeline a w=
+orkload sufficiently
+> > > > > > > > + * that a utilization based device frequency governor coul=
+d arrive at a minimum
+> > > > > > > > + * frequency that meets the requirements of the use-case, =
+in order to minimize
+> > > > > > > > + * power consumption.  But in the real world there are man=
+y workloads which
+> > > > > > > > + * defy this ideal.  For example, but not limited to:
+> > > > > > > > + *
+> > > > > > > > + * * Workloads that ping-pong between device and CPU, with=
+ alternating periods
+> > > > > > > > + *   of CPU waiting for device, and device waiting on CPU.=
+  This can result in
+> > > > > > > > + *   devfreq and cpufreq seeing idle time in their respect=
+ive domains and in
+> > > > > > > > + *   result reduce frequency.
+> > > > > > > > + *
+> > > > > > > > + * * Workloads that interact with a periodic time based de=
+adline, such as double
+> > > > > > > > + *   buffered GPU rendering vs vblank sync'd page flipping=
+.  In this scenario,
+> > > > > > > > + *   missing a vblank deadline results in an *increase* in=
+ idle time on the GPU
+> > > > > > > > + *   (since it has to wait an additional vblank period), s=
+ending a signal to
+> > > > > > > > + *   the GPU's devfreq to reduce frequency, when in fact t=
+he opposite is what is
+> > > > > > > > + *   needed. =20
+> > > > > > >
+> > > > > > > This is the use case I'd like to get some better understandin=
+g about how
+> > > > > > > this series intends to work, as the problematic scheduling be=
+havior
+> > > > > > > triggered by missed deadlines has plagued compositing display=
+ servers
+> > > > > > > for a long time.
+> > > > > > >
+> > > > > > > I apologize, I'm not a GPU driver developer, nor an OpenGL dr=
+iver
+> > > > > > > developer, so I will need some hand holding when it comes to
+> > > > > > > understanding exactly what piece of software is responsible f=
+or
+> > > > > > > communicating what piece of information.
+> > > > > > > =20
+> > > > > > > > + *
+> > > > > > > > + * To this end, deadline hint(s) can be set on a &dma_fenc=
+e via &dma_fence_set_deadline.
+> > > > > > > > + * The deadline hint provides a way for the waiting driver=
+, or userspace, to
+> > > > > > > > + * convey an appropriate sense of urgency to the signaling=
+ driver.
+> > > > > > > > + *
+> > > > > > > > + * A deadline hint is given in absolute ktime (CLOCK_MONOT=
+ONIC for userspace
+> > > > > > > > + * facing APIs).  The time could either be some point in t=
+he future (such as
+> > > > > > > > + * the vblank based deadline for page-flipping, or the sta=
+rt of a compositor's
+> > > > > > > > + * composition cycle), or the current time to indicate an =
+immediate deadline
+> > > > > > > > + * hint (Ie. forward progress cannot be made until this fe=
+nce is signaled). =20
+> > > > > > >
+> > > > > > > Is it guaranteed that a GPU driver will use the actual start =
+of the
+> > > > > > > vblank as the effective deadline? I have some memories of sei=
+ng
+> > > > > > > something about vblank evasion browsing driver code, which I =
+might have
+> > > > > > > misunderstood, but I have yet to find whether this is somethi=
+ng
+> > > > > > > userspace can actually expect to be something it can rely on.=
+ =20
+> > > > > >
+> > > > > > I guess you mean s/GPU driver/display driver/ ?  It makes thing=
+s more
+> > > > > > clear if we talk about them separately even if they happen to b=
+e the
+> > > > > > same device. =20
+> > > > >
+> > > > > Sure, sorry about being unclear about that.
+> > > > > =20
+> > > > > >
+> > > > > > Assuming that is what you mean, nothing strongly defines what t=
+he
+> > > > > > deadline is.  In practice there is probably some buffering in t=
+he
+> > > > > > display controller.  For ex, block based (including bandwidth
+> > > > > > compressed) formats, you need to buffer up a row of blocks to
+> > > > > > efficiently linearize for scanout.  So you probably need to lat=
+ch some
+> > > > > > time before you start sending pixel data to the display.  But d=
+etails
+> > > > > > like this are heavily implementation dependent.  I think the mo=
+st
+> > > > > > reasonable thing to target is start of vblank. =20
+> > > > >
+> > > > > The driver exposing those details would be quite useful for users=
+pace
+> > > > > though, so that it can delay committing updates to late, but not =
+too
+> > > > > late. Setting a deadline to be the vblank seems easy enough, but =
+it
+> > > > > isn't enough for scheduling the actual commit. =20
+> > > >
+> > > > I'm not entirely sure how that would even work.. but OTOH I think y=
+ou
+> > > > are talking about something on the order of 100us?  But that is a b=
+it
+> > > > of another topic. =20
+> > >
+> > > Yes, something like that. But yea, it's not really related. Scheduling
+> > > commits closer to the deadline has more complex behavior than that to=
+o,
+> > > e.g. the need for real time scheduling, and knowing how long it usual=
+ly
+> > > takes to create and commit and for the kernel to process. =20
+>=20
+> Vblank can be really long, especially with VRR where the additional
+> time you get to finish the frame comes from making vblank longer.
+> Using the start of vblank as a deadline makes VRR useless. It really
+> would be nice to have some feedback about the actual deadline from the
+> kernel, maybe in `struct drm_event_vblank`.
+
+Hi Sebastian,
+
+why would deadline at vblank beginning not be exactly what you want
+also with VRR?
+
+Let's say the frame misses that deadline on a VRR system, but the frame
+still completes and the flip makes it to the intended scanout cycle,
+thanks to VRR giving it more time. Why should that miss not be
+classified as a miss?
+
+If it is classified as a miss, then GPU freq and whatnot will be
+increased, which will increase the effective update rate of VRR.
+
+If it is not classified as a miss, then GPU might not speed up, and you
+end up with low update rate, even though you still don't skip scanout
+cycles thanks to VRR.
+
+I guess if you actually *want* VRR to run at a low rate in order to
+keep the GPU in a lower power demand, you could compute your "late
+deadline" from the minimum rate VRR timings, subtracting the vblank
+period from the estimated next flip completion timestamp?
+
+
+Thanks,
+pq
+
+--Sig_/PQu+8_PwJg02nK.t.l_MdDX
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmQULkEACgkQI1/ltBGq
+qqcflQ/7Bcf2sjwi33//OE29jdqtYajW5YPQL7aC7KSwacbDqXPeh3Yq/4wsqmAg
+pJLB+4rwZsxeo6D+SuXPyr+pSqKWG/Q881QWtwUTHxg5eCiJzwf+AwgCFvQsgkag
+JbjXnmWjufzV4CGiO/cAHBPVyfAwZ65xNRno6YcnL5cqqmL7I+qUNTecFn/qaB1j
+BFSX1E+/U3p7uxp8LmwkNMaL/ZrnITDXJq9ikHmseXdvL/6UVYjFhbkq4+xV+P3R
+3oYqmwz/k6IsXmTk47vh62yvTJhseo77JgI/GR7jtynX77+lrCfe3KSIwONhpI0o
+jWFV9Csdin/rJiIAe6lfMuGOO5zt9H5qIRS7nQyoThX6u1PpwOZuMWzcMNpYilFu
+DF5rcSIK0u2TdnsKJjQAjW7N5fpTENYdHxhMvjsYAht5nx3jEev6zN6Xr8MXA0PE
+3y+BL4NIX6sRmr3CDao4vzE3/MTyLNGnVRu8dpQedIgcRsFfN0H3ZITJ2+4oo2Re
+3GgTXaZFViaJYmlH9tyuzi7gj/GZWfN0J/A6RET5NGRfAIhQvWjb/QFR5ixPpP7z
+k35cKda/TDToFacWKzhUXOk+tCxvUaIcBTYd3ZGXfF++4asGXF+P5ZOK5aeTGNoi
+E2xSiSRFngaeawwANXrLib5DhW0jgc8VgxKXjdFNFz3Jp6d8BSc=
+=n4+V
+-----END PGP SIGNATURE-----
+
+--Sig_/PQu+8_PwJg02nK.t.l_MdDX--
+
+--===============8774495817473107861==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============8774495817473107861==--
