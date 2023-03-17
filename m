@@ -2,56 +2,56 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D97A6BE509
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Mar 2023 10:10:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3AD0C6BE55B
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Mar 2023 10:18:04 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8C9473F528
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Mar 2023 09:10:54 +0000 (UTC)
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
-	by lists.linaro.org (Postfix) with ESMTPS id EA24B3EA46
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Mar 2023 09:10:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1725E3F4CA
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 17 Mar 2023 09:18:03 +0000 (UTC)
+Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
+	by lists.linaro.org (Postfix) with ESMTPS id 3F6473E955
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Mar 2023 09:17:43 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20210112 header.b=UXiNXVfz;
-	spf=pass (lists.linaro.org: domain of ppaalanen@gmail.com designates 209.85.167.54 as permitted sender) smtp.mailfrom=ppaalanen@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20210112 header.b=ThkJ4upO;
+	spf=pass (lists.linaro.org: domain of ppaalanen@gmail.com designates 209.85.208.169 as permitted sender) smtp.mailfrom=ppaalanen@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-lf1-f54.google.com with SMTP id s8so5361620lfr.8
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Mar 2023 02:10:32 -0700 (PDT)
+Received: by mail-lj1-f169.google.com with SMTP id z42so4344811ljq.13
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 17 Mar 2023 02:17:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20210112; t=1679044231;
+        d=gmail.com; s=20210112; t=1679044662;
         h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
          :date:from:to:cc:subject:date:message-id:reply-to;
-        bh=DcxwPLMgH8TQvzlH8rslSljIPEdXp59TytSjgtEqxgE=;
-        b=UXiNXVfzWXyugAmhGN4PL73XDWIJVmfNU2K5VaEQtO31gFlKYO2y3s/ZXpux8ZSOFl
-         yr2LdOozjgxjpXJnO0DHi+PFh30H9Xma06doq7Y6OYny1ORI67GX8kpSKW4s9vfgtBZN
-         /qfAANaSLsfBY6fVEHigttZMmc3pY33fpAaeQJ2xUzOenylk6ZlGGTsGNfCVw8tx5rWt
-         Y0WA4AIOw+A0gwswwCLIQVzupbtt+/BV7D8M1LWh/0FV3HOJ4LarBbnHW0AV2Rx+o990
-         VWbsGm8gAPF+RQ9sfqPUgg20IOk1dxeMQbr25EjZL8J70mMGlBff+5g25GTPbC14/0ZZ
-         kY5A==
+        bh=3uLwGBxnZ1mAAqp3kTFoVsk1Zncv2fMmnt4yJjzaSC8=;
+        b=ThkJ4upO2U9CB7ruJSqqqRCeWvmgm8ZAj4QsOTm1eC4gVChNyzDjQlKVuwvk1pO1Fw
+         xt7F2HUHYa0c/ylvlXnMBydDEKBF6iDyMDFGwBfHgSp4mHudp+up9hMsJ6HgiUK1EFOY
+         pUkT03WY1yR7BwkS4KhtxBEQTsqrR6kGVXk9Cytg4D3yo1j2ojLdWH5oE8RZHoJXgF2x
+         Kd1CBEoJEqNmdG9tBeHLiowK59HhG6w+afImzrcdPPUKxmomDpY69VWFAs9DiyBq4zbt
+         njWqSx1+A4HuZHg4uS+TAYcgNDOaHLpJFor6KennsYkCUG4gcAa6kw3mk1bxPTAzIaBN
+         iGgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1679044231;
+        d=1e100.net; s=20210112; t=1679044662;
         h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
          :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=DcxwPLMgH8TQvzlH8rslSljIPEdXp59TytSjgtEqxgE=;
-        b=mFNRPSYC/pMdUP5FTt2ApiPmvoDjnvc/wujucG03xaM1eSVxCWM2Aep35tdANYzXvr
-         11QBa4fsakgQ/2cUwt7meH/RFLaP40JtqWh4SvNLPnUiiPKfaFJ4BWuvaBWHeIuqDNWc
-         ZN/qEaILAJAX/BPnBNpYa2KIksh6922YLW92lXVhO7fEVep47V+r9c7W/hPwivTmpUBZ
-         5zBv3dgTGyM/K1ftxlbJjs6hlRY7GbB0oIHo2k8zlPCGBegEXRjUjx8tBK2dHhkAy45Z
-         TB4YPJuaFIsIjteuFi9oe98HAOVaMcu9/H5VD/pkG0pF7PnOafioOtaZmdeR7YUeL3pi
-         aBWg==
-X-Gm-Message-State: AO0yUKXFd5WnJ+LBfHRGmT9B3YHJNuPtIilG4rdGemsSuRQTHuFH18Qs
-	yn/Ck9VznRy4YwU4bEQgwrY=
-X-Google-Smtp-Source: AK7set+oNmLKucfTTmZPZLKOwpJSCLRqf5YmI+zqSLnhx0Oex/d2yplo+kNj6JxqcI/WWfg2h7PmdA==
-X-Received: by 2002:ac2:5f10:0:b0:4d8:4f46:f0b9 with SMTP id 16-20020ac25f10000000b004d84f46f0b9mr3810695lfq.23.1679044231458;
-        Fri, 17 Mar 2023 02:10:31 -0700 (PDT)
+        bh=3uLwGBxnZ1mAAqp3kTFoVsk1Zncv2fMmnt4yJjzaSC8=;
+        b=ymSVMNpYN/GTO6KAMi2fyq8TizwjH5EMRhB9JjK8U9QXNHR5MsdASa9m+63yTk0GGY
+         heFXZsfd+f+9t7GMbB2XlfD3cqXvz2zwpa3pG6aZbm058WYbxR39tmggDg3srZadFrVZ
+         nAQVD55oekKZ6YzsJqUww523CdIl/zGolreOGTvygijB9pGMtkkka7evtjlh9Vph36Gj
+         DiaPe1CFHmpBt8iaIFN/UcBDuJEXuC/GU1vDOdhrJf/GoZrA2EMlrQDPj2e5Yo6ivH+N
+         aiRxnSStlupVa4Dz1xbC7r20pROE7y0WqKUPYBHYXgtsBfwbWEbhmy+t6wLcz9hqS3pA
+         7woA==
+X-Gm-Message-State: AO0yUKWy8E0H8pwfFq9ZsqnL5ztuj6GMk8ohF1c8u0CN+MMdONIQ4gt3
+	uMnZXti/lLn/LR1jz+8WjRQ=
+X-Google-Smtp-Source: AK7set8Wy+EAASUZlw92CKWNn4SHSF73SNcbsJZangV3rMR/ZtM8l7f1OxSnUfUPci3N1EtDFWGHmg==
+X-Received: by 2002:a2e:6816:0:b0:299:ac58:1c4 with SMTP id c22-20020a2e6816000000b00299ac5801c4mr1330636lja.1.1679044661786;
+        Fri, 17 Mar 2023 02:17:41 -0700 (PDT)
 Received: from eldfell ([194.136.85.206])
-        by smtp.gmail.com with ESMTPSA id h9-20020a05651211c900b004d545f1e0ccsm275379lfr.187.2023.03.17.02.09.27
+        by smtp.gmail.com with ESMTPSA id v5-20020a056512048500b004db513b0175sm280708lfq.136.2023.03.17.02.17.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Mar 2023 02:09:54 -0700 (PDT)
-Date: Fri, 17 Mar 2023 11:09:21 +0200
+        Fri, 17 Mar 2023 02:17:41 -0700 (PDT)
+Date: Fri, 17 Mar 2023 11:17:37 +0200
 From: Pekka Paalanen <ppaalanen@gmail.com>
 To: Sebastian Wick <sebastian.wick@redhat.com>
-Message-ID: <20230317110921.0862cc8b@eldfell>
-In-Reply-To: <CA+hFU4xbssR+=Sf4ia5kPdsSb4y9SQUd4nx_2p1Szcbtna28CA@mail.gmail.com>
+Message-ID: <20230317111737.48702bca@eldfell>
+In-Reply-To: <20230317110921.0862cc8b@eldfell>
 References: <20230308155322.344664-1-robdclark@gmail.com>
 	<20230308155322.344664-2-robdclark@gmail.com>
 	<ZAtQspuFjPtGy7ze@gmail.com>
@@ -61,51 +61,49 @@ References: <20230308155322.344664-1-robdclark@gmail.com>
 	<ZBLg0t0tTVvuPuiJ@gmail.com>
 	<CAF6AEGvV5arZThTyju_=xFFDWRbMaexgO_kkdKZuK-zeCxrN7Q@mail.gmail.com>
 	<CA+hFU4xbssR+=Sf4ia5kPdsSb4y9SQUd4nx_2p1Szcbtna28CA@mail.gmail.com>
+	<20230317110921.0862cc8b@eldfell>
 X-Mailer: Claws Mail 4.1.1 (GTK 3.24.24; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: EA24B3EA46
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.10 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	FORGED_RECIPIENTS(2.00)[m:sebastian.wick@redhat.com,m:robdclark@gmail.com,m:jadahl@gmail.com,m:robdclark@chromium.org,m:pekka.paalanen@collabora.com,m:corbet@lwn.net,m:ckoenig.leichtzumerken@gmail.com,m:intel-gfx@lists.freedesktop.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:christian.koenig@amd.com,m:linux-media@vger.kernel.org,m:ckoenigleichtzumerken@gmail.com,s:linaro-mm-sig@lists.linaro.org];
+X-Rspamd-Queue-Id: 3F6473E955
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.91 / 15.00];
+	BAYES_HAM(-2.81)[99.16%];
+	FORGED_RECIPIENTS(2.00)[m:sebastian.wick@redhat.com,m:robdclark@gmail.com,m:jadahl@gmail.com,m:robdclark@chromium.org,m:corbet@lwn.net,m:ckoenig.leichtzumerken@gmail.com,m:intel-gfx@lists.freedesktop.org,m:linux-doc@vger.kernel.org,m:linux-kernel@vger.kernel.org,m:dri-devel@lists.freedesktop.org,m:christian.koenig@amd.com,m:linux-media@vger.kernel.org,m:ckoenigleichtzumerken@gmail.com,s:linaro-mm-sig@lists.linaro.org];
 	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20210112];
 	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	NEURAL_HAM(-0.00)[-0.991];
-	URIBL_BLOCKED(0.00)[amd.com:email,collabora.com:email];
-	TAGGED_RCPT(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.54:from];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	NEURAL_HAM(-0.00)[-0.995];
+	TAGGED_RCPT(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.169:from];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	FREEMAIL_ENVFROM(0.00)[gmail.com];
 	RCVD_COUNT_THREE(0.00)[3];
 	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,chromium.org,collabora.com,lwn.net,lists.freedesktop.org,vger.kernel.org,amd.com];
+	FREEMAIL_CC(0.00)[gmail.com,chromium.org,lwn.net,lists.freedesktop.org,vger.kernel.org,amd.com];
 	DKIM_TRACE(0.00)[gmail.com:+];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	MIME_TRACE(0.00)[0:+,1:+,2:~];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: 5P4OV26JCBTRVDA2KVFEZNBEN5757XPJ
-X-Message-ID-Hash: 5P4OV26JCBTRVDA2KVFEZNBEN5757XPJ
+Message-ID-Hash: 5WOCVLGQFDGMSUESL4IHF4MQQF3H7JW3
+X-Message-ID-Hash: 5WOCVLGQFDGMSUESL4IHF4MQQF3H7JW3
 X-MailFrom: ppaalanen@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Rob Clark <robdclark@gmail.com>,
 	Jonas =?UTF-8?B?w4VkYWhs?= <jadahl@gmail.com>,
-	Rob Clark <robdclark@chromium.org>,
-	Pekka Paalanen <pekka.paalanen@collabora.com>,
-	Jonathan Corbet <corbet@lwn.net>, intel-gfx@lists.freedesktop.org,
+	Rob Clark <robdclark@chromium.org>, Jonathan Corbet <corbet@lwn.net>,
+	intel-gfx@lists.freedesktop.org,
 	"open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
 	open list <linux-kernel@vger.kernel.org>,
 	dri-devel@lists.freedesktop.org,
@@ -115,286 +113,62 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v10 01/15] dma-buf/dma-fence: Add deadline awareness
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5P4OV26JCBTRVDA2KVFEZNBEN5757XPJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5WOCVLGQFDGMSUESL4IHF4MQQF3H7JW3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============8774495817473107861=="
+Content-Type: multipart/mixed; boundary="===============6258753650487114195=="
 
---===============8774495817473107861==
-Content-Type: multipart/signed; boundary="Sig_/PQu+8_PwJg02nK.t.l_MdDX";
+--===============6258753650487114195==
+Content-Type: multipart/signed; boundary="Sig_/Q5zE_g6+8PZb=tpp8CN.PRC";
  protocol="application/pgp-signature"; micalg=pgp-sha256
 
---Sig_/PQu+8_PwJg02nK.t.l_MdDX
-Content-Type: text/plain; charset=UTF-8
+--Sig_/Q5zE_g6+8PZb=tpp8CN.PRC
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, 16 Mar 2023 23:22:24 +0100
-Sebastian Wick <sebastian.wick@redhat.com> wrote:
+On Fri, 17 Mar 2023 11:09:21 +0200
+Pekka Paalanen <ppaalanen@gmail.com> wrote:
 
-> On Thu, Mar 16, 2023 at 5:29=E2=80=AFPM Rob Clark <robdclark@gmail.com> w=
-rote:
-> >
-> > On Thu, Mar 16, 2023 at 2:26=E2=80=AFAM Jonas =C3=85dahl <jadahl@gmail.=
-com> wrote: =20
-> > >
-> > > On Wed, Mar 15, 2023 at 09:19:49AM -0700, Rob Clark wrote: =20
-> > > > On Wed, Mar 15, 2023 at 6:53=E2=80=AFAM Jonas =C3=85dahl <jadahl@gm=
-ail.com> wrote: =20
-> > > > >
-> > > > > On Fri, Mar 10, 2023 at 09:38:18AM -0800, Rob Clark wrote: =20
-> > > > > > On Fri, Mar 10, 2023 at 7:45=E2=80=AFAM Jonas =C3=85dahl <jadah=
-l@gmail.com> wrote: =20
-> > > > > > >
-> > > > > > > On Wed, Mar 08, 2023 at 07:52:52AM -0800, Rob Clark wrote: =20
-> > > > > > > > From: Rob Clark <robdclark@chromium.org>
-> > > > > > > >
-> > > > > > > > Add a way to hint to the fence signaler of an upcoming dead=
-line, such as
-> > > > > > > > vblank, which the fence waiter would prefer not to miss.  T=
-his is to aid
-> > > > > > > > the fence signaler in making power management decisions, li=
-ke boosting
-> > > > > > > > frequency as the deadline approaches and awareness of missi=
-ng deadlines
-> > > > > > > > so that can be factored in to the frequency scaling.
-> > > > > > > >
-> > > > > > > > v2: Drop dma_fence::deadline and related logic to filter du=
-plicate
-> > > > > > > >     deadlines, to avoid increasing dma_fence size.  The fen=
-ce-context
-> > > > > > > >     implementation will need similar logic to track deadlin=
-es of all
-> > > > > > > >     the fences on the same timeline.  [ckoenig]
-> > > > > > > > v3: Clarify locking wrt. set_deadline callback
-> > > > > > > > v4: Clarify in docs comment that this is a hint
-> > > > > > > > v5: Drop DMA_FENCE_FLAG_HAS_DEADLINE_BIT.
-> > > > > > > > v6: More docs
-> > > > > > > > v7: Fix typo, clarify past deadlines
-> > > > > > > >
-> > > > > > > > Signed-off-by: Rob Clark <robdclark@chromium.org>
-> > > > > > > > Reviewed-by: Christian K=C3=B6nig <christian.koenig@amd.com>
-> > > > > > > > Acked-by: Pekka Paalanen <pekka.paalanen@collabora.com>
-> > > > > > > > Reviewed-by: Bagas Sanjaya <bagasdotme@gmail.com>
-> > > > > > > > --- =20
-> > > > > > >
-> > > > > > > Hi Rob!
-> > > > > > > =20
-> > > > > > > >  Documentation/driver-api/dma-buf.rst |  6 +++
-> > > > > > > >  drivers/dma-buf/dma-fence.c          | 59 ++++++++++++++++=
-++++++++++++
-> > > > > > > >  include/linux/dma-fence.h            | 22 +++++++++++
-> > > > > > > >  3 files changed, 87 insertions(+)
-> > > > > > > >
-> > > > > > > > diff --git a/Documentation/driver-api/dma-buf.rst b/Documen=
-tation/driver-api/dma-buf.rst
-> > > > > > > > index 622b8156d212..183e480d8cea 100644
-> > > > > > > > --- a/Documentation/driver-api/dma-buf.rst
-> > > > > > > > +++ b/Documentation/driver-api/dma-buf.rst
-> > > > > > > > @@ -164,6 +164,12 @@ DMA Fence Signalling Annotations
-> > > > > > > >  .. kernel-doc:: drivers/dma-buf/dma-fence.c
-> > > > > > > >     :doc: fence signalling annotation
-> > > > > > > >
-> > > > > > > > +DMA Fence Deadline Hints
-> > > > > > > > +~~~~~~~~~~~~~~~~~~~~~~~~
-> > > > > > > > +
-> > > > > > > > +.. kernel-doc:: drivers/dma-buf/dma-fence.c
-> > > > > > > > +   :doc: deadline hints
-> > > > > > > > +
-> > > > > > > >  DMA Fences Functions Reference
-> > > > > > > >  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> > > > > > > >
-> > > > > > > > diff --git a/drivers/dma-buf/dma-fence.c b/drivers/dma-buf/=
-dma-fence.c
-> > > > > > > > index 0de0482cd36e..f177c56269bb 100644
-> > > > > > > > --- a/drivers/dma-buf/dma-fence.c
-> > > > > > > > +++ b/drivers/dma-buf/dma-fence.c
-> > > > > > > > @@ -912,6 +912,65 @@ dma_fence_wait_any_timeout(struct dma_=
-fence **fences, uint32_t count,
-> > > > > > > >  }
-> > > > > > > >  EXPORT_SYMBOL(dma_fence_wait_any_timeout);
-> > > > > > > >
-> > > > > > > > +/**
-> > > > > > > > + * DOC: deadline hints
-> > > > > > > > + *
-> > > > > > > > + * In an ideal world, it would be possible to pipeline a w=
-orkload sufficiently
-> > > > > > > > + * that a utilization based device frequency governor coul=
-d arrive at a minimum
-> > > > > > > > + * frequency that meets the requirements of the use-case, =
-in order to minimize
-> > > > > > > > + * power consumption.  But in the real world there are man=
-y workloads which
-> > > > > > > > + * defy this ideal.  For example, but not limited to:
-> > > > > > > > + *
-> > > > > > > > + * * Workloads that ping-pong between device and CPU, with=
- alternating periods
-> > > > > > > > + *   of CPU waiting for device, and device waiting on CPU.=
-  This can result in
-> > > > > > > > + *   devfreq and cpufreq seeing idle time in their respect=
-ive domains and in
-> > > > > > > > + *   result reduce frequency.
-> > > > > > > > + *
-> > > > > > > > + * * Workloads that interact with a periodic time based de=
-adline, such as double
-> > > > > > > > + *   buffered GPU rendering vs vblank sync'd page flipping=
-.  In this scenario,
-> > > > > > > > + *   missing a vblank deadline results in an *increase* in=
- idle time on the GPU
-> > > > > > > > + *   (since it has to wait an additional vblank period), s=
-ending a signal to
-> > > > > > > > + *   the GPU's devfreq to reduce frequency, when in fact t=
-he opposite is what is
-> > > > > > > > + *   needed. =20
-> > > > > > >
-> > > > > > > This is the use case I'd like to get some better understandin=
-g about how
-> > > > > > > this series intends to work, as the problematic scheduling be=
-havior
-> > > > > > > triggered by missed deadlines has plagued compositing display=
- servers
-> > > > > > > for a long time.
-> > > > > > >
-> > > > > > > I apologize, I'm not a GPU driver developer, nor an OpenGL dr=
-iver
-> > > > > > > developer, so I will need some hand holding when it comes to
-> > > > > > > understanding exactly what piece of software is responsible f=
-or
-> > > > > > > communicating what piece of information.
-> > > > > > > =20
-> > > > > > > > + *
-> > > > > > > > + * To this end, deadline hint(s) can be set on a &dma_fenc=
-e via &dma_fence_set_deadline.
-> > > > > > > > + * The deadline hint provides a way for the waiting driver=
-, or userspace, to
-> > > > > > > > + * convey an appropriate sense of urgency to the signaling=
- driver.
-> > > > > > > > + *
-> > > > > > > > + * A deadline hint is given in absolute ktime (CLOCK_MONOT=
-ONIC for userspace
-> > > > > > > > + * facing APIs).  The time could either be some point in t=
-he future (such as
-> > > > > > > > + * the vblank based deadline for page-flipping, or the sta=
-rt of a compositor's
-> > > > > > > > + * composition cycle), or the current time to indicate an =
-immediate deadline
-> > > > > > > > + * hint (Ie. forward progress cannot be made until this fe=
-nce is signaled). =20
-> > > > > > >
-> > > > > > > Is it guaranteed that a GPU driver will use the actual start =
-of the
-> > > > > > > vblank as the effective deadline? I have some memories of sei=
-ng
-> > > > > > > something about vblank evasion browsing driver code, which I =
-might have
-> > > > > > > misunderstood, but I have yet to find whether this is somethi=
-ng
-> > > > > > > userspace can actually expect to be something it can rely on.=
- =20
-> > > > > >
-> > > > > > I guess you mean s/GPU driver/display driver/ ?  It makes thing=
-s more
-> > > > > > clear if we talk about them separately even if they happen to b=
-e the
-> > > > > > same device. =20
-> > > > >
-> > > > > Sure, sorry about being unclear about that.
-> > > > > =20
-> > > > > >
-> > > > > > Assuming that is what you mean, nothing strongly defines what t=
-he
-> > > > > > deadline is.  In practice there is probably some buffering in t=
-he
-> > > > > > display controller.  For ex, block based (including bandwidth
-> > > > > > compressed) formats, you need to buffer up a row of blocks to
-> > > > > > efficiently linearize for scanout.  So you probably need to lat=
-ch some
-> > > > > > time before you start sending pixel data to the display.  But d=
-etails
-> > > > > > like this are heavily implementation dependent.  I think the mo=
-st
-> > > > > > reasonable thing to target is start of vblank. =20
-> > > > >
-> > > > > The driver exposing those details would be quite useful for users=
-pace
-> > > > > though, so that it can delay committing updates to late, but not =
-too
-> > > > > late. Setting a deadline to be the vblank seems easy enough, but =
-it
-> > > > > isn't enough for scheduling the actual commit. =20
-> > > >
-> > > > I'm not entirely sure how that would even work.. but OTOH I think y=
-ou
-> > > > are talking about something on the order of 100us?  But that is a b=
-it
-> > > > of another topic. =20
-> > >
-> > > Yes, something like that. But yea, it's not really related. Scheduling
-> > > commits closer to the deadline has more complex behavior than that to=
-o,
-> > > e.g. the need for real time scheduling, and knowing how long it usual=
-ly
-> > > takes to create and commit and for the kernel to process. =20
->=20
-> Vblank can be really long, especially with VRR where the additional
-> time you get to finish the frame comes from making vblank longer.
-> Using the start of vblank as a deadline makes VRR useless. It really
-> would be nice to have some feedback about the actual deadline from the
-> kernel, maybe in `struct drm_event_vblank`.
+> On Thu, 16 Mar 2023 23:22:24 +0100
+> Sebastian Wick <sebastian.wick@redhat.com> wrote:
 
-Hi Sebastian,
+> > Vblank can be really long, especially with VRR where the additional
+> > time you get to finish the frame comes from making vblank longer.
 
-why would deadline at vblank beginning not be exactly what you want
-also with VRR?
-
-Let's say the frame misses that deadline on a VRR system, but the frame
-still completes and the flip makes it to the intended scanout cycle,
-thanks to VRR giving it more time. Why should that miss not be
-classified as a miss?
-
-If it is classified as a miss, then GPU freq and whatnot will be
-increased, which will increase the effective update rate of VRR.
-
-If it is not classified as a miss, then GPU might not speed up, and you
-end up with low update rate, even though you still don't skip scanout
-cycles thanks to VRR.
-
-I guess if you actually *want* VRR to run at a low rate in order to
-keep the GPU in a lower power demand, you could compute your "late
-deadline" from the minimum rate VRR timings, subtracting the vblank
-period from the estimated next flip completion timestamp?
+Btw. VRR extends front porch, not vblank.
 
 
 Thanks,
 pq
 
---Sig_/PQu+8_PwJg02nK.t.l_MdDX
+--Sig_/Q5zE_g6+8PZb=tpp8CN.PRC
 Content-Type: application/pgp-signature
 Content-Description: OpenPGP digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmQULkEACgkQI1/ltBGq
-qqcflQ/7Bcf2sjwi33//OE29jdqtYajW5YPQL7aC7KSwacbDqXPeh3Yq/4wsqmAg
-pJLB+4rwZsxeo6D+SuXPyr+pSqKWG/Q881QWtwUTHxg5eCiJzwf+AwgCFvQsgkag
-JbjXnmWjufzV4CGiO/cAHBPVyfAwZ65xNRno6YcnL5cqqmL7I+qUNTecFn/qaB1j
-BFSX1E+/U3p7uxp8LmwkNMaL/ZrnITDXJq9ikHmseXdvL/6UVYjFhbkq4+xV+P3R
-3oYqmwz/k6IsXmTk47vh62yvTJhseo77JgI/GR7jtynX77+lrCfe3KSIwONhpI0o
-jWFV9Csdin/rJiIAe6lfMuGOO5zt9H5qIRS7nQyoThX6u1PpwOZuMWzcMNpYilFu
-DF5rcSIK0u2TdnsKJjQAjW7N5fpTENYdHxhMvjsYAht5nx3jEev6zN6Xr8MXA0PE
-3y+BL4NIX6sRmr3CDao4vzE3/MTyLNGnVRu8dpQedIgcRsFfN0H3ZITJ2+4oo2Re
-3GgTXaZFViaJYmlH9tyuzi7gj/GZWfN0J/A6RET5NGRfAIhQvWjb/QFR5ixPpP7z
-k35cKda/TDToFacWKzhUXOk+tCxvUaIcBTYd3ZGXfF++4asGXF+P5ZOK5aeTGNoi
-E2xSiSRFngaeawwANXrLib5DhW0jgc8VgxKXjdFNFz3Jp6d8BSc=
-=n4+V
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmQUMDEACgkQI1/ltBGq
+qqdONw//Rgotd8hOFTtCdsTpbSF7YOFikuzzzDIDxuXPRDAkMFSndLcsdjesT/3L
+KZqIPV4Ep1pelG71zllYvYB/cRQ9tMa8iITUhMVcAwYCp7I1645/1yhOJ2HHDiFZ
+sWHoek/TEIB46ReOidtjFo2xHX4xWMF5+MNqOevoo3ZB54nqvCTmNZSbisuGaBsn
+IVtV98giR2ioxwxsPmrhKufULtu+DP2eQmZv8Y9SIQBIIqlAr6dqF5Z0jwaITRsw
+/XK1o0CpJv/L1SEo5Of8XhT7YCU5l16cpUXA4OjPQsHZdIiZ/1+4wcm7seJNSM6Q
+D/HKZuvmmE5FJV8M6O7rhKeYmxRefMntg5wngAxwqpuu80PxZa3MRH0dk1wcuvei
+EinMcr4IukkOijVlQQ05yDy6SpNUGTOaez0zWy6ftLUI7bNk8jL2DVsgyfU9zkUZ
+7QT5CDKTIUtLuCs+5QT7iphcGo+iBq1M9bgQyM2MU26oOOnP95dIFAEXw5Ofcuab
+ZxcQDNE22dJlDOj5zGz2r9B30zzaX6E+Tw2CFq6Tm58BBRBv9o9MuM3StNUNuOQ8
+lsF9q7BZiuBDr3pFks+YIWt6Ia5Wz/LMw92UYkSx+vnNKcZO3k/kcAYYnpU0izfH
+gd082Gvt7zd/rjURoruKFxaG6hQOIzqHZuRukX6Oj4rTSva/mPQ=
+=kkpl
 -----END PGP SIGNATURE-----
 
---Sig_/PQu+8_PwJg02nK.t.l_MdDX--
+--Sig_/Q5zE_g6+8PZb=tpp8CN.PRC--
 
---===============8774495817473107861==
+--===============6258753650487114195==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -404,4 +178,4 @@ _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
 
---===============8774495817473107861==--
+--===============6258753650487114195==--
