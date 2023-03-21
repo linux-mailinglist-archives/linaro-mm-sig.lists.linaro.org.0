@@ -2,189 +2,231 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F6886C4314
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 07:23:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D6FE6C4318
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 07:24:16 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2FBF23EBC6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 06:23:56 +0000 (UTC)
-Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-	by lists.linaro.org (Postfix) with ESMTP id 7D7453E963
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 20 Mar 2023 06:59:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 724A93ED7B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 22 Mar 2023 06:24:15 +0000 (UTC)
+Received: from mail-il1-f200.google.com (mail-il1-f200.google.com [209.85.166.200])
+	by lists.linaro.org (Postfix) with ESMTPS id 8E2463EC46
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Mar 2023 17:04:47 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
 	dkim=none;
-	spf=pass (lists.linaro.org: domain of suijingfeng@loongson.cn designates 114.242.206.163 as permitted sender) smtp.mailfrom=suijingfeng@loongson.cn;
-	dmarc=none
-Received: from loongson.cn (unknown [10.20.42.133])
-	by gateway (Coremail) with SMTP id _____8BxYU9OBBhksrkOAA--.21515S3;
-	Mon, 20 Mar 2023 14:59:26 +0800 (CST)
-Received: from [10.20.42.133] (unknown [10.20.42.133])
-	by localhost.localdomain (Coremail) with SMTP id AQAAf8Cxfb5MBBhkkR0HAA--.19729S3;
-	Mon, 20 Mar 2023 14:59:24 +0800 (CST)
-Message-ID: <ac06cfa4-e6f8-a0ca-3181-86cd53f5d1af@loongson.cn>
-Date: Mon, 20 Mar 2023 14:59:24 +0800
+	spf=pass (lists.linaro.org: domain of 3r-MZZAkbAAYy45qgrrkxgvvoj.muumrk0ykxiutzktz.ius@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.166.200 as permitted sender) smtp.mailfrom=3r-MZZAkbAAYy45qgrrkxgvvoj.muumrk0ykxiutzktz.ius@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
+	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none)
+Received: by mail-il1-f200.google.com with SMTP id d3-20020a056e02050300b00317999dcfb1so8180119ils.4
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 21 Mar 2023 10:04:47 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1679418287;
+        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=+zTrQymw8nWm1LaYS6yQZNEVKZFLl6piGpgaLk7/4RE=;
+        b=A8hViW54ZIkjTAOtAKb+xSmnflpgwD2tJ1pFXeIsI+JDN4Gf+EwOy4GAQ2gaOgdOXs
+         EPcVdzaGjaI1SGdfBLbYF0etfkLURTOblbSOZF4pJMFVqTwFz3Q3O5WnAjeLQXKAU6i7
+         mYDvRlDYjstkmdLhw0aWfWTV+DR+uxknNSXkbgw11fM8Z8ytgrgWkjC+RRtYSu6qMxpZ
+         /eAnvxLpyTqLClDJ+oQ9Io4FGT9O9mCvjaIfnbmpGPvQ/JXKJTdr3vNVHzqUFckMC6LO
+         cWqisZpyLMT27BTl7Llthc+1Na+oT6mnWxsFalIWno3P9IdVj7isftPgFRdGQ70nMFY5
+         am3A==
+X-Gm-Message-State: AO0yUKW9KVJyIgaE2hjnUXjh6lYbOu7IQ2W0+0MDvvDqUvlJtiltmVYQ
+	6B0XHY8M3J1PRS2fsmMzrAsLGcICGPvuewyAEbsx8OoXrtnX
+X-Google-Smtp-Source: AK7set9ZLrfktTpmIZ42olW6S9WFaixJFSMx4jgpyGAZsTz4YqTTPuheLv3NxoBXl0MTeXnwBNJY/zeGRCozfMx2sV1x9SBu/ngM
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Sui Jingfeng <15330273260@189.cn>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Sumit Semwal <sumit.semwal@linaro.org>
-References: <20230315211550.2620818-1-15330273260@189.cn>
- <20230315211550.2620818-3-15330273260@189.cn>
- <efcc3a66-78ca-4e0a-c0fb-527da376fc06@amd.com>
-From: Sui jingfeng <suijingfeng@loongson.cn>
-In-Reply-To: <efcc3a66-78ca-4e0a-c0fb-527da376fc06@amd.com>
-X-CM-TRANSID: AQAAf8Cxfb5MBBhkkR0HAA--.19729S3
-X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
-X-Coremail-Antispam: 1Uk129KBjvJXoWxurWkCry8KryxKrWDZr48Xrb_yoWrtw4fpF
-	Z5Kay3trZ8CF4kAr1DAw1UGFWYq3yrJa1DJryYyFyjk398GFnYqrWjqr1q9a47Zr4rWF1j
-	yF4UXrW29F17Aw7anT9S1TB71UUUUjDqnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
-	qI5I8CrVACY4xI64kE6c02F40Ex7xfYxn0WfASr-VFAUDa7-sFnT9fnUUIcSsGvfJTRUUU
-	bqxYFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s
-	1l1IIY67AEw4v_Jrv_JF1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
-	wVC0I7IYx2IY67AKxVW8JVW5JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwA2z4
-	x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1l
-	n4kS14v26r126r1DM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6x
-	ACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r126r1DMcIj6I8E
-	87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc7I2V7IY0V
-	AS07AlzVAYIcxG8wCY1x0262kKe7AKxVWUAVWUtwCF04k20xvY0x0EwIxGrwCFx2IqxVCF
-	s4IE7xkEbVWUJVW8JwCFI7km07C267AKxVWUAVWUtwC20s026c02F40E14v26r1j6r18MI
-	8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41l
-	IxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIx
-	AIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2
-	jsIEc7CjxVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7IU8Dl1DUUUUU==
+X-Received: by 2002:a05:6e02:f13:b0:313:c399:73c8 with SMTP id
+ x19-20020a056e020f1300b00313c39973c8mr1279881ilj.4.1679418287044; Tue, 21 Mar
+ 2023 10:04:47 -0700 (PDT)
+Date: Tue, 21 Mar 2023 10:04:47 -0700
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <0000000000006dc0c105f76c0a72@google.com>
+From: syzbot <syzbot+a9a2bb6afe9eb31efc56@syzkaller.appspotmail.com>
+To: airlied@gmail.com, christian.koenig@amd.com, daniel@ffwll.ch,
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+	sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com, tzimmermann@suse.de
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 7D7453E963
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.20 / 15.00];
+X-Rspamd-Queue-Id: 8E2463EC46
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.90 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	R_SPF_ALLOW(-0.20)[+ip4:114.242.206.163];
-	RCVD_NO_TLS_LAST(0.10)[];
+	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=f22105589e896af1];
+	FORGED_SENDER(0.30)[syzbot@syzkaller.appspotmail.com,3r-MZZAkbAAYy45qgrrkxgvvoj.muumrk0ykxiutzktz.ius@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
-	R_DKIM_NA(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:4808, ipnet:114.242.192.0/18, country:CN];
+	RCVD_COUNT_ONE(0.00)[1];
+	TAGGED_FROM(0.00)[a9a2bb6afe9eb31efc56];
+	FREEMAIL_TO(0.00)[gmail.com,amd.com,ffwll.ch,lists.freedesktop.org,lists.linaro.org,vger.kernel.org,linux.intel.com,kernel.org,linaro.org,googlegroups.com,suse.de];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[amd.com,189.cn,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	RCVD_COUNT_TWO(0.00)[2];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	R_DKIM_NA(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.166.200:from];
+	NEURAL_HAM(-0.00)[-0.988];
+	RCVD_TLS_LAST(0.00)[];
+	SUBJECT_HAS_QUESTION(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-0.995];
-	TO_DN_SOME(0.00)[];
+	URIBL_BLOCKED(0.00)[mail-il1-f200.google.com:helo,mail-il1-f200.google.com:rdns];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DMARC_NA(0.00)[loongson.cn];
-	MID_RHS_MATCH_FROM(0.00)[]
-X-MailFrom: suijingfeng@loongson.cn
+	TO_DN_NONE(0.00)[];
+	REDIRECTOR_URL(0.00)[goo.gl];
+	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,3r-MZZAkbAAYy45qgrrkxgvvoj.muumrk0ykxiutzktz.ius@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com]
+X-MailFrom: 3r-MZZAkbAAYy45qgrrkxgvvoj.muumrk0ykxiutzktz.ius@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: TGKTP2PI3EDJPNKMH2WULIOTSQ2CPXPB
-X-Message-ID-Hash: TGKTP2PI3EDJPNKMH2WULIOTSQ2CPXPB
-X-Mailman-Approved-At: Wed, 22 Mar 2023 06:21:30 +0000
-CC: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Li Yi <liyi@loongson.cn>
+Message-ID-Hash: EWBMO2XF5BJKMU5FPDG3Z2BANEM6HZXJ
+X-Message-ID-Hash: EWBMO2XF5BJKMU5FPDG3Z2BANEM6HZXJ
+X-Mailman-Approved-At: Wed, 22 Mar 2023 06:21:42 +0000
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v7 2/2] drm: add kms driver for loongson display controller
+Subject: [Linaro-mm-sig] [syzbot] [dri?] BUG: sleeping function called from invalid context in _vm_unmap_aliases
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TGKTP2PI3EDJPNKMH2WULIOTSQ2CPXPB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EWBMO2XF5BJKMU5FPDG3Z2BANEM6HZXJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-DQpPbiAyMDIzLzMvMTYgMTU6MTgsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6DQo+DQo+DQo+IEFt
-IDE1LjAzLjIzIHVtIDIyOjE1IHNjaHJpZWIgU3VpIEppbmdmZW5nOg0KPj4gRnJvbTogc3Vpamlu
-Z2ZlbmcgPHN1aWppbmdmZW5nQGxvb25nc29uLmNuPg0KPj4NCj4+IExvb25nc29uIGRpc3BsYXkg
-Y29udHJvbGxlciBJUCBoYXMgYmVlbiBpbnRlZ3JhdGVkIGluIGJvdGggTG9vbmdzb24NCj4+IE5v
-cnRoIEJyaWRnZSBjaGlwc2V0KGxzN2ExMDAwIGFuZCBsczdhMjAwMCkgYW5kIExvb25nc29uIFNv
-Q3MobHMyazEwMDANCj4+IGFuZCBsczJrMjAwMCBldGMpLCBpdCBldmVuIGhhcyBiZWVuIGluY2x1
-ZGVkIGluIExvb25nc29uIEJNQyBwcm9kdWN0cy4NCj4+DQo+PiBUaGlzIGRpc3BsYXkgY29udHJv
-bGxlciBpcyBhIFBDSSBkZXZpY2UsIGl0IGhhcyB0d28gZGlzcGxheSBwaXBlLiBGb3INCj4+IHRo
-ZSBEQyBpbiBMUzdBMTAwMCBhbmQgTFMySzEwMDAgZWFjaCB3YXkgaGFzIGEgRFZPIG91dHB1dCBp
-bnRlcmZhY2UNCj4+IHdoaWNoIHByb3ZpZGUgUkdCODg4IHNpZ25hbHMsIHZlcnRpY2FsICYgaG9y
-aXpvbnRhbCBzeW5jaHJvbmlzYXRpb25zLA0KPj4gYW5kIHRoZSBwaXhlbCBjbG9jay4gRWFjaCBD
-UlRDIGlzIGFibGUgdG8gc3VwcG9ydCAxOTIweDEwODBANjBIeiwNCj4+IHRoZSBtYXhpbXVtIHJl
-c29sdXRpb24gaXMgMjA0OHgyMDQ4IGFjY29yZGluZyB0byB0aGUgaGFyZHdhcmUgc3BlYy4NCj4+
-DQo+PiBGb3IgdGhlIERDIGluIExTN0EyMDAwLCBlYWNoIGRpc3BsYXkgcGlwZSBpcyBlcXVpcHBl
-ZCB3aXRoIGEgYnVpbHQtaW4NCj4+IEhETUkgZW5jb2RlciB3aGljaCBpcyBjb21wbGlhbnQgd2l0
-aCBIRE1JIDEuNCBzcGVjaWZpY2F0aW9uLCB0aHVzIGl0DQo+PiBzdXBwb3J0IDM4NDB4MjE2MEAz
-MEh6LiBUaGUgZmlyc3QgZGlzcGxheSBwaXBlIGlzIGFsc28gZXF1aXBwZWQgd2l0aA0KPj4gYSB0
-cmFuc3BhcmVudCB2Z2EgZW5jb2RlciB3aGljaCBpcyBwYXJhbGxlbCB3aXRoIHRoZSBIRE1JIGVu
-Y29kZXIuDQo+PiBUaGUgREMgaW4gTFM3QTIwMDAgaXMgbW9yZSBjb21wbGV0ZSwgYmVzaWRlcyBh
-Ym92ZSBmZWF0dXJlLCBpdCBoYXMNCj4+IHR3byBoYXJkd2FyZSBjdXJzb3JzLCB0d28gaGFyZHdh
-cmUgdmJsYW5rIGNvdW50ZXIgYW5kIHR3byBzY2Fub3V0DQo+PiBwb3NpdGlvbiByZWNvcmRlcnMu
-DQo+Pg0KPj4gwqAgdjEgLT4gdjI6DQo+PiDCoMKgIDEpIFVzZSBocGQgc3RhdHVzIHJlZyB3aGVu
-IHBvbGxpbmcgZm9yIGxzN2EyMDAwDQo+PiDCoMKgIDIpIEZpeCBhbGwgd2FybmluZ3MgZW1lcmdl
-ZCB3aGVuIGNvbXBpbGUgd2l0aCBXPTENCj4+DQo+PiDCoCB2MiAtPiB2MzoNCj4+IMKgwqAgMSkg
-QWRkIENPTVBJTEVfVEVTVCBpbiBLY29uZmlnIGFuZCBtYWtlIHRoZSBkcml2ZXIgb2ZmIGJ5IGRl
-ZmF1bHQNCj4+IMKgwqAgMikgQWxwaGFiZXRpY2FsIHNvcnRpbmcgaGVhZGVycyAoVGhvbWFzKQ0K
-Pj4gwqDCoCAzKSBVbnRhbmdsZSByZWdpc3RlciBhY2Nlc3MgZnVuY3Rpb25zIGFzIG11Y2ggYXMg
-cG9zc2libGUgKFRob21hcykNCj4+IMKgwqAgNCkgU3dpdGNoIHRvIFRUTSBiYXNlZCBtZW1vcnkg
-bWFuYWdlciBhbmQgcHJlZmVyIGNhY2hlZCBtYXBwaW5nDQo+PiDCoMKgwqDCoMKgIGZvciBMb29u
-Z3NvbiBTb0MgKFRob21hcykNCj4+IMKgwqAgNSkgQWRkIGNoaXAgaWQgZGV0ZWN0aW9uIG1ldGhv
-ZCwgbm93IGFsbCBtb2RlbHMgYXJlIGRpc3Rpbmd1aXNoYWJsZS4NCj4+IMKgwqAgNikgUmV2aXNl
-IGJ1aWx0aW4gSERNSSBwaHkgZHJpdmVyLCBuZWFybHkgYWxsIG1haW4gc3RyZWFtIG1vZGUNCj4+
-IMKgwqDCoMKgwqAgYmVsb3cgNEtAMzBIeiBpcyB0ZXN0ZWQsIHRoaXMgZHJpdmVyIHN1cHBvcnRl
-ZCB0aGVzZSBtb2RlIHZlcnkNCj4+IMKgwqDCoMKgwqAgd2VsbCBpbmNsdWRpbmcgY2xvbmUgZGlz
-cGxheSBtb2RlIGFuZCBleHRlbmQgZGlzcGxheSBtb2RlLg0KPj4NCj4+IMKgIHYzIC0+IHY0Og0K
-Pj4gwqDCoCAxKSBRdWlja2x5IGZpeCBhIHNtYWxsIG1pc3Rha2UuDQo+Pg0KPj4gwqAgdjQgLT4g
-djU6DQo+PiDCoMKgIDEpIERyb3AgcG90ZW50aWFsIHN1cHBvcnQgZm9yIExvb25nc29uIDJLIHNl
-cmllcyBTb0MgdGVtcG9yYXJ5LA0KPj4gwqDCoMKgwqDCoCB0aGlzIHBhcnQgc2hvdWxkIGJlIHJl
-c2VuZCB3aXRoIHRoZSBEVCBiaW5kaW5nIHBhdGNoIGluIHRoZSANCj4+IGZ1dHVyZS4NCj4+IMKg
-wqAgMikgQWRkIHBlciBkaXNwbGF5IHBpcGUgZGVidWdmcyBzdXBwb3J0IHRvIHRoZSBidWlsdGlu
-IEhETUkgZW5jb2Rlci4NCj4+IMKgwqAgMykgUmV3cml0ZSBhdG9taWNfdXBkYXRlKCkgZm9yIGhh
-cmR3YXJlIGN1cnNvcnMgcGxhbmUoVGhvbWFzKQ0KPj4gwqDCoCA0KSBSZXdyaXRlIGVuY29kZXIg
-YW5kIGNvbm5lY3RvciBpbml0aWFsaXphdGlvbiBwYXJ0LCB1bnRhbmdsZSBpdA0KPj4gwqDCoMKg
-wqDCoCBhY2NvcmRpbmcgdG8gdGhlIGNoaXAoVGhvbWFzKS4NCj4+DQo+PiDCoCB2NSAtPiB2NjoN
-Cj4+IMKgwqAgMSkgUmVtb3ZlIHN0cmF5IGNvZGUgd2hpY2ggZGlkbid0IGdldCB1c2VkLCBzYXkg
-DQo+PiBsc2RjX29mX2dldF9yZXNlcnZlZF9yYW0NCj4+IMKgwqAgMikgRml4IGFsbCB0eXBvcyBJ
-IGNvdWxkIGZvdW5kLCBtYWtlIHNlbnRlbmNlcyBhbmQgY29kZSBtb3JlIHJlYWRhYmxlDQo+PiDC
-oMKgIDMpIFVudGFuZ2UgbHNkY19oZG1pKl9jb25uZWN0b3JfZGV0ZWN0KCkgZnVuY3Rpb24gYWNj
-b3JkaW5nIHRvIHRoZSANCj4+IHBpcGUNCj4+IMKgwqAgNCkgQWZ0ZXIgYSBzZXJpb3VzIGNvbnNp
-ZGVyYXRpb24sIHdlIHJlbmFtZSB0aGlzIGRyaXZlciBhcyBsb29uZ3Nvbi4NCj4+IMKgwqDCoMKg
-wqAgQmVjYXVzZSB3ZSBhbHNvIGhhdmUgZHJpdmVycyB0b3dhcmQgdGhlIExvb25nR1BVIElQIGlu
-IExTN0EyMDAwIA0KPj4gYW5kDQo+PiDCoMKgwqDCoMKgIExTMksyMDAwLiBCZXNpZGVzLCB0aGVy
-ZSBhcmUgYWxzbyBkcml2ZXJzIGFib3V0IHRoZSBleHRlcm5hbCANCj4+IGVuY29kZXIsDQo+PiDC
-oMKgwqDCoMKgIEhETUkgYXVkaW8gZHJpdmVyIGFuZCB2YmlvcyBzdXBwb3J0IGV0Yy4gVGhpcyBw
-YXRjaCBvbmx5IA0KPj4gcHJvdmlkZSBEQw0KPj4gwqDCoMKgwqDCoCBkcml2ZXIgcGFydCwgbXkg
-dGVhbW1hdGUgTGkgWWkgYmVsaWV2ZSB0aGF0IGxvb25nc29uIHdpbGwgYmUgbW9yZQ0KPj4gwqDC
-oMKgwqDCoCBzdWl0YWJsZSBmb3IgbG9vbmdzb24gZ3JhcGhpY3MgdGhhbiBsc2RjIGluIHRoZSBs
-b25nIHJ1bi4NCj4+DQo+PiDCoMKgwqDCoMKgIGxvb25nc29uLmtvID0gTFNEQyArIExvb25nR1BV
-ICsgZW5jb2RlcnMgZHJpdmVyICsgdmJpb3MvRFQgLi4uDQo+Pg0KPj4gwqDCoCB2NiAtPiB2NzoN
-Cj4+IMKgwqAgMSkgQWRkIHByaW1lIHN1cHBvcnQsIHNlbGYtc2hhcmluZyBpcyB3b3Jrcy4gc2hh
-cmluZyBidWZmZXIgd2l0aCANCj4+IGV0bmF2aXYNCj4+IMKgwqDCoMKgwqAgaXMgYWxzbyB0ZXN0
-ZWQsIGFuZCBpdHMgd29ya3Mgd2l0aCBsaW1pdGF0aW9uLg0KPj4gwqDCoCAyKSBJbXBsZW1lbnQg
-YnVmZmVyIG9iamVjdHMgdHJhY2tpbmcgd2l0aCBsaXN0X2hlYWQuDQo+PiDCoMKgIDMpIFMzKHNs
-ZWVwIHRvIFJBTSkgaXMgdGVzdGVkIG9uIGxzM2E1MDAwK2xzN2EyMDAwIGV2YiBhbmQgaXQgd29y
-a3MuDQo+PiDCoMKgIDQpIFJld3JpdGUgbHNkY19ib19tb3ZlLCBzaW5jZSB0dG0gY29yZSBzdG9w
-IGFsbG9jYXRpbmcgcmVzb3VyY2VzDQo+PiDCoMKgwqDCoMKgIGR1cmluZyBCTyBjcmVhdGlvbi4g
-UGF0Y2ggVjEgfiBWNiBvZiB0aGlzIHNlcmllcyBubyBsb25nZXIgd29ya3MNCj4+IMKgwqDCoMKg
-wqAgb24gbGF0ZXN0IGtlcm5lbC4gVGh1cywgd2Ugc2VuZCBWNy4NCj4+DQo+PiBTaWduZWQtb2Zm
-LWJ5OiBMaSBZaSA8bGl5aUBsb29uZ3Nvbi5jbj4NCj4+IFNpZ25lZC1vZmYtYnk6IHN1aWppbmdm
-ZW5nIDxzdWlqaW5nZmVuZ0Bsb29uZ3Nvbi5jbj4NCj4+IFNpZ25lZC1vZmYtYnk6IFN1aSBKaW5n
-ZmVuZyA8MTUzMzAyNzMyNjBAMTg5LmNuPg0KPg0KPiBbU05JUF0NCj4NCj4+ICt1NjQgbHNkY19i
-b19ncHVfb2Zmc2V0KHN0cnVjdCB0dG1fYnVmZmVyX29iamVjdCAqdGJvKQ0KPj4gK3sNCj4+ICvC
-oMKgwqAgc3RydWN0IGRybV9kZXZpY2UgKmRkZXYgPSB0Ym8tPmJhc2UuZGV2Ow0KPj4gK8KgwqDC
-oCBzdHJ1Y3QgdHRtX3Jlc291cmNlICpyZXNvdXJjZSA9IHRiby0+cmVzb3VyY2U7DQo+PiArDQo+
-PiArwqDCoMKgIGlmIChkcm1fV0FSTl9PTihkZGV2LCAhdGJvLT5waW5fY291bnQpKQ0KPj4gK8Kg
-wqDCoMKgwqDCoMKgIHJldHVybiAtRU5PREVWOw0KPg0KPiBSZXR1cm5pbmcgLUVOT0RFViB3aGVu
-IHRoZSBmdW5jdGlvbiByZXR1cm4gdmFsdWUgaXMgdW5zaWduZWQgZG9lc24ndCANCj4gbWFrZSBt
-dWNoIHNlbnNlLiBJIHdvdWxkIGFsc28gdXNlIDAgaGVyZS4NCj4NCj4gQXBhcnQgZnJvbSB0aGF0
-IEkgYnJpZWZseSBza2ltbWVkIG92ZXIgdGhlIHByaW1lIGFuZCBUVE0gaGFuZGxpbmcgYW5kIA0K
-PiBjb3VsZG4ndCBmaW5kIGFueXRoaW5nIG9idmlvdXNseSB3cm9uZy4NCj4NCj4gSSBvYnZpb3Vz
-bHkgY2FuJ3QgcmV2aWV3IHRoZSBodyBzcGVjaWZpYyBzdHVmZiwgYnV0IG92ZXIgYWxsIGxvb2tz
-IA0KPiBwcmV0dHkgZ29vZCB0byBtZS4NCj4NClllYWgsIHRoaXMgaXMgdmVyeSBuaWNlIGNvbW1l
-bnRzIGFjdHVhbGx5Lg0KDQptdWNoIGJldHRlciB0aGFuIE5BSywgY29tcGxldGUgTkFLLCBiaWcg
-TkFLIG9yIHNvbWV0aGluZ3MgbGlrZSB0aGF0Lg0KDQpUaGFua3MgYSBsb3QuDQoNCj4gUmVnYXJk
-cywNCj4gQ2hyaXN0aWFuLg0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxp
-c3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0t
-c2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+Hello,
+
+syzbot found the following issue on:
+
+HEAD commit:    f3594f0204b7 Add linux-next specific files for 20230321
+git tree:       linux-next
+console output: https://syzkaller.appspot.com/x/log.txt?x=161552eec80000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=f22105589e896af1
+dashboard link: https://syzkaller.appspot.com/bug?extid=a9a2bb6afe9eb31efc56
+compiler:       gcc (Debian 10.2.1-6) 10.2.1 20210110, GNU ld (GNU Binutils for Debian) 2.35.2
+
+Unfortunately, I don't have any reproducer for this issue yet.
+
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/0b755145006a/disk-f3594f02.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/fca26e328a81/vmlinux-f3594f02.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/39744d7d289f/bzImage-f3594f02.xz
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+a9a2bb6afe9eb31efc56@syzkaller.appspotmail.com
+
+BUG: sleeping function called from invalid context at kernel/locking/mutex.c:580
+in_atomic(): 0, irqs_disabled(): 0, non_block: 0, pid: 10028, name: syz-executor.4
+preempt_count: 0, expected: 0
+RCU nest depth: 1, expected: 0
+3 locks held by syz-executor.4/10028:
+ #0: ffff88807597afd8 (&mm->mmap_lock){++++}-{3:3}, at: mmap_write_lock_killable include/linux/mmap_lock.h:110 [inline]
+ #0: ffff88807597afd8 (&mm->mmap_lock){++++}-{3:3}, at: vm_mmap_pgoff+0x158/0x3b0 mm/util.c:541
+ #1: ffff888081123270 (&shmem->pages_lock){+.+.}-{3:3}, at: drm_gem_shmem_get_pages+0x53/0x180 drivers/gpu/drm/drm_gem_shmem_helper.c:216
+ #2: ffffffff8c796500 (rcu_read_lock){....}-{1:2}, at: _vm_unmap_aliases.part.0+0x138/0x560 mm/vmalloc.c:2182
+CPU: 1 PID: 10028 Comm: syz-executor.4 Not tainted 6.3.0-rc3-next-20230321-syzkaller #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 03/02/2023
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0x136/0x150 lib/dump_stack.c:106
+ __might_resched+0x358/0x580 kernel/sched/core.c:10059
+ __mutex_lock_common kernel/locking/mutex.c:580 [inline]
+ __mutex_lock+0x9f/0x1350 kernel/locking/mutex.c:747
+ _vm_unmap_aliases.part.0+0x1ca/0x560 mm/vmalloc.c:2187
+ _vm_unmap_aliases mm/vmalloc.c:2181 [inline]
+ vm_unmap_aliases+0x49/0x50 mm/vmalloc.c:2230
+ change_page_attr_set_clr+0x226/0x470 arch/x86/mm/pat/set_memory.c:1837
+ cpa_set_pages_array arch/x86/mm/pat/set_memory.c:1892 [inline]
+ _set_pages_array+0x1c6/0x220 arch/x86/mm/pat/set_memory.c:2230
+ drm_gem_shmem_get_pages_locked+0x155/0x240 drivers/gpu/drm/drm_gem_shmem_helper.c:191
+ drm_gem_shmem_get_pages+0x71/0x180 drivers/gpu/drm/drm_gem_shmem_helper.c:219
+ drm_gem_shmem_mmap drivers/gpu/drm/drm_gem_shmem_helper.c:636 [inline]
+ drm_gem_shmem_mmap+0x153/0x540 drivers/gpu/drm/drm_gem_shmem_helper.c:620
+ drm_gem_mmap_obj+0x1b6/0x6c0 drivers/gpu/drm/drm_gem.c:1046
+ drm_gem_mmap+0x41d/0x780 drivers/gpu/drm/drm_gem.c:1124
+ call_mmap include/linux/fs.h:1859 [inline]
+ mmap_region+0x694/0x28d0 mm/mmap.c:2652
+ do_mmap+0x831/0xf60 mm/mmap.c:1438
+ vm_mmap_pgoff+0x1a2/0x3b0 mm/util.c:543
+ ksys_mmap_pgoff+0x41f/0x5a0 mm/mmap.c:1484
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x39/0xb0 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x63/0xcd
+RIP: 0033:0x7f905968c0f9
+Code: 28 00 00 00 75 05 48 83 c4 28 c3 e8 f1 19 00 00 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f905a3fa168 EFLAGS: 00000246 ORIG_RAX: 0000000000000009
+RAX: ffffffffffffffda RBX: 00007f90597abf80 RCX: 00007f905968c0f9
+RDX: 0000000000000000 RSI: 0000000000003028 RDI: 0000000020ffc000
+RBP: 00007f90596e7b39 R08: 0000000000000004 R09: 0000000100000000
+R10: 0000000000000012 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007ffcde03503f R14: 00007f905a3fa300 R15: 0000000000022000
+ </TASK>
+
+=============================
+[ BUG: Invalid wait context ]
+6.3.0-rc3-next-20230321-syzkaller #0 Tainted: G        W         
+-----------------------------
+syz-executor.4/10028 is trying to lock:
+ffff888027c7a068 (&vb->lock){+.+.}-{3:3}, at: _vm_unmap_aliases.part.0+0x1ca/0x560 mm/vmalloc.c:2187
+other info that might help us debug this:
+context-{4:4}
+3 locks held by syz-executor.4/10028:
+ #0: ffff88807597afd8 (&mm->mmap_lock){++++}-{3:3}, at: mmap_write_lock_killable include/linux/mmap_lock.h:110 [inline]
+ #0: ffff88807597afd8 (&mm->mmap_lock){++++}-{3:3}, at: vm_mmap_pgoff+0x158/0x3b0 mm/util.c:541
+ #1: ffff888081123270 (&shmem->pages_lock){+.+.}-{3:3}, at: drm_gem_shmem_get_pages+0x53/0x180 drivers/gpu/drm/drm_gem_shmem_helper.c:216
+ #2: ffffffff8c796500 (rcu_read_lock){....}-{1:2}, at: _vm_unmap_aliases.part.0+0x138/0x560 mm/vmalloc.c:2182
+stack backtrace:
+CPU: 1 PID: 10028 Comm: syz-executor.4 Tainted: G        W          6.3.0-rc3-next-20230321-syzkaller #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 03/02/2023
+Call Trace:
+ <TASK>
+ __dump_stack lib/dump_stack.c:88 [inline]
+ dump_stack_lvl+0xd9/0x150 lib/dump_stack.c:106
+ print_lock_invalid_wait_context kernel/locking/lockdep.c:4724 [inline]
+ check_wait_context kernel/locking/lockdep.c:4785 [inline]
+ __lock_acquire+0x159e/0x5df0 kernel/locking/lockdep.c:5024
+ lock_acquire.part.0+0x11c/0x370 kernel/locking/lockdep.c:5691
+ __mutex_lock_common kernel/locking/mutex.c:603 [inline]
+ __mutex_lock+0x12f/0x1350 kernel/locking/mutex.c:747
+ _vm_unmap_aliases.part.0+0x1ca/0x560 mm/vmalloc.c:2187
+ _vm_unmap_aliases mm/vmalloc.c:2181 [inline]
+ vm_unmap_aliases+0x49/0x50 mm/vmalloc.c:2230
+ change_page_attr_set_clr+0x226/0x470 arch/x86/mm/pat/set_memory.c:1837
+ cpa_set_pages_array arch/x86/mm/pat/set_memory.c:1892 [inline]
+ _set_pages_array+0x1c6/0x220 arch/x86/mm/pat/set_memory.c:2230
+ drm_gem_shmem_get_pages_locked+0x155/0x240 drivers/gpu/drm/drm_gem_shmem_helper.c:191
+ drm_gem_shmem_get_pages+0x71/0x180 drivers/gpu/drm/drm_gem_shmem_helper.c:219
+ drm_gem_shmem_mmap drivers/gpu/drm/drm_gem_shmem_helper.c:636 [inline]
+ drm_gem_shmem_mmap+0x153/0x540 drivers/gpu/drm/drm_gem_shmem_helper.c:620
+ drm_gem_mmap_obj+0x1b6/0x6c0 drivers/gpu/drm/drm_gem.c:1046
+ drm_gem_mmap+0x41d/0x780 drivers/gpu/drm/drm_gem.c:1124
+ call_mmap include/linux/fs.h:1859 [inline]
+ mmap_region+0x694/0x28d0 mm/mmap.c:2652
+ do_mmap+0x831/0xf60 mm/mmap.c:1438
+ vm_mmap_pgoff+0x1a2/0x3b0 mm/util.c:543
+ ksys_mmap_pgoff+0x41f/0x5a0 mm/mmap.c:1484
+ do_syscall_x64 arch/x86/entry/common.c:50 [inline]
+ do_syscall_64+0x39/0xb0 arch/x86/entry/common.c:80
+ entry_SYSCALL_64_after_hwframe+0x63/0xcd
+RIP: 0033:0x7f905968c0f9
+Code: 28 00 00 00 75 05 48 83 c4 28 c3 e8 f1 19 00 00 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007f905a3fa168 EFLAGS: 00000246 ORIG_RAX: 0000000000000009
+RAX: ffffffffffffffda RBX: 00007f90597abf80 RCX: 00007f905968c0f9
+RDX: 0000000000000000 RSI: 0000000000003028 RDI: 0000000020ffc000
+RBP: 00007f90596e7b39 R08: 0000000000000004 R09: 0000000100000000
+R10: 0000000000000012 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007ffcde03503f R14: 00007f905a3fa300 R15: 0000000000022000
+ </TASK>
+
+
+---
+This report is generated by a bot. It may contain errors.
+See https://goo.gl/tpsmEJ for more information about syzbot.
+syzbot engineers can be reached at syzkaller@googlegroups.com.
+
+syzbot will keep track of this issue. See:
+https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
