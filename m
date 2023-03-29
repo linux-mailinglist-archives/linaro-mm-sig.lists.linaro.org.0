@@ -2,13 +2,13 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 37E136CED81
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Mar 2023 17:51:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 582936CED79
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Mar 2023 17:51:02 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4945E3F66A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Mar 2023 15:51:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5155F3EC5F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Mar 2023 15:51:01 +0000 (UTC)
 Received: from 189.cn (ptr.189.cn [183.61.185.101])
-	by lists.linaro.org (Postfix) with ESMTP id 160D83EC5F
+	by lists.linaro.org (Postfix) with ESMTP id BDB693F658
 	for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Mar 2023 15:50:46 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
 	dkim=none;
@@ -18,12 +18,12 @@ HMM_SOURCE_IP: 10.64.8.41:58922.1411433373
 HMM_ATTACHE_NUM: 0000
 HMM_SOURCE_TYPE: SMTP
 Received: from clientip-114.242.206.180 (unknown [10.64.8.41])
-	by 189.cn (HERMES) with SMTP id CF745100211;
-	Wed, 29 Mar 2023 23:50:39 +0800 (CST)
+	by 189.cn (HERMES) with SMTP id B5F0C1002C4;
+	Wed, 29 Mar 2023 23:50:40 +0800 (CST)
 Received: from  ([114.242.206.180])
-	by gateway-151646-dep-7b48884fd-bkw2h with ESMTP id 126a1573416742bdbdd4f32dbe181f51 for maarten.lankhorst@linux.intel.com;
-	Wed, 29 Mar 2023 23:50:40 CST
-X-Transaction-ID: 126a1573416742bdbdd4f32dbe181f51
+	by gateway-151646-dep-7b48884fd-bkw2h with ESMTP id eb6e9529e38f423c95b77fa78b2c7ae2 for maarten.lankhorst@linux.intel.com;
+	Wed, 29 Mar 2023 23:50:41 CST
+X-Transaction-ID: eb6e9529e38f423c95b77fa78b2c7ae2
 X-Real-From: 15330273260@189.cn
 X-Receive-IP: 114.242.206.180
 X-MEDUSA-Status: 0
@@ -37,13 +37,15 @@ To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
 	suijingfeng <suijingfeng@loongson.cn>,
 	Sumit Semwal <sumit.semwal@linaro.org>,
 	Christian Koenig <christian.koenig@amd.com>
-Date: Wed, 29 Mar 2023 23:50:31 +0800
-Message-Id: <20230329155033.1303550-1-15330273260@189.cn>
+Date: Wed, 29 Mar 2023 23:50:32 +0800
+Message-Id: <20230329155033.1303550-2-15330273260@189.cn>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230329155033.1303550-1-15330273260@189.cn>
+References: <20230329155033.1303550-1-15330273260@189.cn>
 MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 160D83EC5F
+X-Rspamd-Queue-Id: BDB693F658
 X-Spamd-Bar: -
 X-Spamd-Result: default: False [-1.70 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
@@ -62,22 +64,22 @@ X-Spamd-Result: default: False [-1.70 / 15.00];
 	RCPT_COUNT_TWELVE(0.00)[14];
 	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-0.796];
+	NEURAL_HAM(-0.00)[-0.573];
 	FREEMAIL_FROM(0.00)[189.cn];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	DMARC_NA(0.00)[189.cn];
 	RCVD_COUNT_TWO(0.00)[2]
-Message-ID-Hash: FRRE33ICUBDJGGCWMF5MGBD3LQE6WREW
-X-Message-ID-Hash: FRRE33ICUBDJGGCWMF5MGBD3LQE6WREW
+Message-ID-Hash: 7F55V2RVZWMNZRWPDHF4XYWKQBOLHXEL
+X-Message-ID-Hash: 7F55V2RVZWMNZRWPDHF4XYWKQBOLHXEL
 X-MailFrom: 15330273260@189.cn
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: nathan@kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, loongson-kernel@lists.loongnix.cn
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v9 0/2] drm: add kms driver for loongson display controller
+Subject: [Linaro-mm-sig] [PATCH v9 1/2] MAINTAINERS: add maintainers for DRM LOONGSON driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FRRE33ICUBDJGGCWMF5MGBD3LQE6WREW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7F55V2RVZWMNZRWPDHF4XYWKQBOLHXEL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -89,150 +91,31 @@ Content-Transfer-Encoding: 7bit
 
 From: Sui Jingfeng <suijingfeng@loongson.cn>
 
-Loongson display controller IP has been integrated in both Loongson
-North Bridge chipset(ls7a1000 and ls7a2000) and Loongson SoCs(ls2k1000
-and ls2k2000 etc), it even has been included in Loongson BMC products.
+ This patch add myself as maintainer to drm loongson driver
 
-This display controller is a PCI device, it has two display pipe. For
-the DC in LS7A1000 and LS2K1000 each way has a DVO output interface
-which provide RGB888 signals, vertical & horizontal synchronisations,
-and the pixel clock. Each CRTC is able to support 1920x1080@60Hz,
-the maximum resolution is 2048x2048 according to the hardware spec.
+Signed-off-by: Sui Jingfeng <suijingfeng@loongson.cn>
+---
+ MAINTAINERS | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-For the DC in LS7A2000, each display pipe is equipped with a built-in
-HDMI encoder which is compliant with HDMI 1.4 specification, thus it
-support 3840x2160@30Hz. The first display pipe is also equipped with
-a transparent vga encoder which is parallel with the HDMI encoder.
-The DC in LS7A2000 is more complete, besides above feature, it has
-two hardware cursors, two hardware vblank counter and two scanout
-position recorders.
-
- v1 -> v2:
-  1) Use hpd status reg when polling for ls7a2000
-  2) Fix all warnings emerged when compile with W=1
-
- v2 -> v3:
-  1) Add COMPILE_TEST in Kconfig and make the driver off by default
-  2) Alphabetical sorting headers (Thomas)
-  3) Untangle register access functions as much as possible (Thomas)
-  4) Switch to TTM based memory manager and prefer cached mapping
-     for Loongson SoC (Thomas)
-  5) Add chip id detection method, now all models are distinguishable.
-  6) Revise builtin HDMI phy driver, nearly all main stream mode
-     below 4K@30Hz is tested, this driver supported these mode very
-     well including clone display mode and extend display mode.
-
- v3 -> v4:
-  1) Quickly fix a small mistake.
-
- v4 -> v5:
-  1) Drop potential support for Loongson 2K series SoC temporary,
-     this part should be resend with the DT binding patch in the future.
-  2) Add per display pipe debugfs support to the builtin HDMI encoder.
-  3) Rewrite atomic_update() for hardware cursors plane(Thomas)
-  4) Rewrite encoder and connector initialization part, untangle it
-     according to the chip(Thomas).
-
- v5 -> v6:
-  1) Remove stray code which didn't get used, say lsdc_of_get_reserved_ram
-  2) Fix all typos I could found, make sentences and code more readable
-  3) Untangle lsdc_hdmi*_connector_detect() function according to the pipe
-  4) After a serious consideration, we rename this driver as loongson.
-     Because we also have drivers toward the LoongGPU IP in LS7A2000 and
-     LS2K2000. Besides, there are also drivers about the external encoder,
-     HDMI audio driver and vbios support etc. This patch only provide DC
-     driver part, my teammate Li Yi believe that loongson will be more
-     suitable for loongson graphics than lsdc in the long run.
-
-     loongson.ko = LSDC + LoongGPU + encoders driver + vbios/DT ...
-
-  v6 -> v7:
-   1) Add prime support, self-sharing is works. sharing buffer with etnaviv
-      is also tested, and its works with limitation.
-   2) Implement buffer objects tracking with list_head.
-   3) S3(sleep to RAM) is tested on ls3a5000+ls7a2000 evb and it works.
-   4) Rewrite lsdc_bo_move, since ttm core stop allocating resources
-      during BO creation. Patch V1 ~ V6 of this series no longer works
-      on latest kernel. Thus, we send V7 to revival them.
-
-  v7 -> v8:
-   1) Zero a compile warnnings on 32-bit platform, compile with W=1
-   2) Revise lsdc_bo_gpu_offset() and minor cleanup
-   3) Pageflip tested on the virtual terminal with following commands
-
-      modetest -M loongson -s 32:1920x1080 -v
-      modetest -M loongson -s 34:1920x1080 -v -F tiles
-
-     It works like a charm, when running pageflip test with dual screnn
-     configuration, another two additional bo created by the modetest
-     emerged, VRAM usage up to 40+MB, well we have at least 64MB, still
-     enough.
-
-     # cat bos
-
-         bo[0000]: size:     8112kB VRAM
-         bo[0001]: size:       16kB VRAM
-         bo[0002]: size:       16kB VRAM
-         bo[0003]: size:    16208kB VRAM
-         bo[0004]: size:     8112kB VRAM
-         bo[0005]: size:     8112kB VRAM
-
-  v8 -> v9:
-   1) Select I2C and I2C_ALGOBIT in Kconfig and should depend on MMU.
-   2) Using pci_get_domain_bus_and_slot to get the GPU device.
-   3) Other minor improvements.
-
-Sui Jingfeng (2):
-  MAINTAINERS: add maintainers for DRM LOONGSON driver
-  drm: add kms driver for loongson display controller
-
- MAINTAINERS                             |   7 +
- drivers/gpu/drm/Kconfig                 |   2 +
- drivers/gpu/drm/Makefile                |   1 +
- drivers/gpu/drm/loongson/Kconfig        |  17 +
- drivers/gpu/drm/loongson/Makefile       |  16 +
- drivers/gpu/drm/loongson/lsdc_crtc.c    | 381 ++++++++++++++++
- drivers/gpu/drm/loongson/lsdc_debugfs.c | 261 +++++++++++
- drivers/gpu/drm/loongson/lsdc_drv.c     | 508 +++++++++++++++++++++
- drivers/gpu/drm/loongson/lsdc_drv.h     | 324 ++++++++++++++
- drivers/gpu/drm/loongson/lsdc_gem.c     | 294 +++++++++++++
- drivers/gpu/drm/loongson/lsdc_gem.h     |  26 ++
- drivers/gpu/drm/loongson/lsdc_i2c.c     | 171 +++++++
- drivers/gpu/drm/loongson/lsdc_irq.c     |  86 ++++
- drivers/gpu/drm/loongson/lsdc_irq.h     |  12 +
- drivers/gpu/drm/loongson/lsdc_output.c  | 563 ++++++++++++++++++++++++
- drivers/gpu/drm/loongson/lsdc_output.h  |  14 +
- drivers/gpu/drm/loongson/lsdc_plane.c   | 432 ++++++++++++++++++
- drivers/gpu/drm/loongson/lsdc_pll.c     | 338 ++++++++++++++
- drivers/gpu/drm/loongson/lsdc_pll.h     |  76 ++++
- drivers/gpu/drm/loongson/lsdc_probe.c   |  86 ++++
- drivers/gpu/drm/loongson/lsdc_probe.h   |  11 +
- drivers/gpu/drm/loongson/lsdc_regs.h    | 370 ++++++++++++++++
- drivers/gpu/drm/loongson/lsdc_ttm.c     | 426 ++++++++++++++++++
- drivers/gpu/drm/loongson/lsdc_ttm.h     |  71 +++
- 24 files changed, 4493 insertions(+)
- create mode 100644 drivers/gpu/drm/loongson/Kconfig
- create mode 100644 drivers/gpu/drm/loongson/Makefile
- create mode 100644 drivers/gpu/drm/loongson/lsdc_crtc.c
- create mode 100644 drivers/gpu/drm/loongson/lsdc_debugfs.c
- create mode 100644 drivers/gpu/drm/loongson/lsdc_drv.c
- create mode 100644 drivers/gpu/drm/loongson/lsdc_drv.h
- create mode 100644 drivers/gpu/drm/loongson/lsdc_gem.c
- create mode 100644 drivers/gpu/drm/loongson/lsdc_gem.h
- create mode 100644 drivers/gpu/drm/loongson/lsdc_i2c.c
- create mode 100644 drivers/gpu/drm/loongson/lsdc_irq.c
- create mode 100644 drivers/gpu/drm/loongson/lsdc_irq.h
- create mode 100644 drivers/gpu/drm/loongson/lsdc_output.c
- create mode 100644 drivers/gpu/drm/loongson/lsdc_output.h
- create mode 100644 drivers/gpu/drm/loongson/lsdc_plane.c
- create mode 100644 drivers/gpu/drm/loongson/lsdc_pll.c
- create mode 100644 drivers/gpu/drm/loongson/lsdc_pll.h
- create mode 100644 drivers/gpu/drm/loongson/lsdc_probe.c
- create mode 100644 drivers/gpu/drm/loongson/lsdc_probe.h
- create mode 100644 drivers/gpu/drm/loongson/lsdc_regs.h
- create mode 100644 drivers/gpu/drm/loongson/lsdc_ttm.c
- create mode 100644 drivers/gpu/drm/loongson/lsdc_ttm.h
-
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 9736e04d3bd3..d258c5b54407 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -6919,6 +6919,13 @@ T:	git git://anongit.freedesktop.org/drm/drm-misc
+ F:	drivers/gpu/drm/lima/
+ F:	include/uapi/drm/lima_drm.h
+ 
++DRM DRIVERS FOR LOONGSON
++M:	Sui Jingfeng <suijingfeng@loongson.cn>
++L:	dri-devel@lists.freedesktop.org
++S:	Supported
++T:	git git://anongit.freedesktop.org/drm/drm-misc
++F:	drivers/gpu/drm/loongson/
++
+ DRM DRIVERS FOR MEDIATEK
+ M:	Chun-Kuang Hu <chunkuang.hu@kernel.org>
+ M:	Philipp Zabel <p.zabel@pengutronix.de>
 -- 
 2.25.1
 
