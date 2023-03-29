@@ -2,269 +2,189 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BCEEA6CD176
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Mar 2023 07:17:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9DAC26CDAC2
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Mar 2023 15:27:11 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A2BD03F18E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Mar 2023 05:17:56 +0000 (UTC)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-	by lists.linaro.org (Postfix) with ESMTPS id 5EF3B3ED9A
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 28 Mar 2023 17:06:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8327F3EC5F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 29 Mar 2023 13:27:10 +0000 (UTC)
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+	by lists.linaro.org (Postfix) with ESMTPS id 3616C3EC33
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 29 Mar 2023 13:26:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=BzVDmw43;
-	spf=pass (lists.linaro.org: domain of nathan@kernel.org designates 145.40.68.75 as permitted sender) smtp.mailfrom=nathan@kernel.org;
-	dmarc=pass (policy=none) header.from=kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by ams.source.kernel.org (Postfix) with ESMTPS id 475F4B81DB5;
-	Tue, 28 Mar 2023 17:06:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E436C433D2;
-	Tue, 28 Mar 2023 17:06:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1680023198;
-	bh=mSJs5c0u+mvYERTVXLbz2yaNg7v/fMoz0d2LwP4Amgk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=BzVDmw43m60lvH0Y3KjAIrZm6woD7+AuyL5jMqZObEtFgYW0wKZ620dZ4j9la6GKr
-	 VH8ZHy/40ROZYD+wpguyi+Hnrz60lue9UANRUfwDWT/XbZvuIjg+BtjmxcvuJFM0ua
-	 1/dAgwGGnlprh119IPhnzAFOQwKOkEQBbBkalAwVG2eSKm3HK2LifA8O54SAtv0OrM
-	 Q2Imm1uVHmcTk5A4PFzt+qUwbo+dHHPbScXOewUOlstrb1u7MWsTKJsUqKlg2vlWQd
-	 YoFG0MgDzpeekikZ/MLrmC269nUqCEwWEpjubIXnIc3R2OyHsl3hwsR4CkmRyAcYF8
-	 vzeSM9lwScGGA==
-Date: Tue, 28 Mar 2023 10:06:36 -0700
-From: Nathan Chancellor <nathan@kernel.org>
-To: Sui Jingfeng <15330273260@189.cn>
-Message-ID: <20230328170636.GA1986005@dev-arch.thelio-3990X>
-References: <20230320100131.1277034-3-15330273260@189.cn>
- <202303281754.jWI20j2C-lkp@intel.com>
- <027cf6d5-6de2-3424-7a81-a43ab689c3d4@189.cn>
+	dkim=pass header.d=intel.com header.s=Intel header.b=ibjDglRP;
+	spf=none (lists.linaro.org: domain of tvrtko.ursulin@linux.intel.com has no SPF policy when checking 134.134.136.126) smtp.mailfrom=tvrtko.ursulin@linux.intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1680096419; x=1711632419;
+  h=message-id:date:mime-version:subject:to:cc:references:
+   from:in-reply-to:content-transfer-encoding;
+  bh=m6FLnDpgkhlXNUMmZtqLdiaUxH+Hm0aC8mTZPwF4soE=;
+  b=ibjDglRPyxXmsLurcUlzvV/V+fDNdnuvjXePQzFWIGI/G/d2znJVAjl6
+   NKD34/fq+moa6Ug0/Gs/M48FdTW3Sd9amzAJB0r/ON9R7bcTf63ZOLdL4
+   xomTFB4W8bIMv/tFI/kU3zVoulruDWw5ehLf9b4CLkv/aYhoQ7H+6L01x
+   ECKZjptUdTjlgZ9FzLT1C9cPqJ4gr9Hgv4LgswBlzIS49Wkxyc1Yyb9pK
+   enUjGdE4MT3Jd1krYoXxMncqBPuUVm4kjkMu/ybz/UrhZJJI1jEaCgIkL
+   0efSd3BYNk00xhn/3uBhwHGp4SEC2QKSO709G89BwQ/iEbD+rHnhsuB1n
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10664"; a="324778084"
+X-IronPort-AV: E=Sophos;i="5.98,300,1673942400";
+   d="scan'208";a="324778084"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Mar 2023 06:26:58 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10664"; a="930323217"
+X-IronPort-AV: E=Sophos;i="5.98,300,1673942400";
+   d="scan'208";a="930323217"
+Received: from jabolger-mobl2.ger.corp.intel.com (HELO [10.213.199.158]) ([10.213.199.158])
+  by fmsmga006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Mar 2023 06:26:56 -0700
+Message-ID: <80f5338a-30de-86fe-d316-25d3c4e357fa@linux.intel.com>
+Date: Wed, 29 Mar 2023 14:26:54 +0100
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <027cf6d5-6de2-3424-7a81-a43ab689c3d4@189.cn>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Content-Language: en-US
+To: Daniel Vetter <daniel@ffwll.ch>, Rob Clark <robdclark@gmail.com>
+References: <CAF6AEGvoP9_FERdL6U8S2O-BVt-oAUgAytbE6RvygsoAOwOHvw@mail.gmail.com>
+ <ZCMhhToEdWVAEtBh@phenom.ffwll.local>
+From: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+Organization: Intel Corporation UK Plc
+In-Reply-To: <ZCMhhToEdWVAEtBh@phenom.ffwll.local>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 5EF3B3ED9A
-X-Spamd-Bar: --------
-X-Spamd-Result: default: False [-8.00 / 15.00];
+X-Rspamd-Queue-Id: 3616C3EC33
+X-Spamd-Bar: ---------
+X-Spamd-Result: default: False [-9.30 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	R_SPF_ALLOW(-0.20)[+a:ams.source.kernel.org];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	RCVD_IN_DNSWL_HI(-0.50)[134.134.136.126:from];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MIME_GOOD(-0.10)[text/plain];
+	FREEMAIL_TO(0.00)[ffwll.ch,gmail.com];
+	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_TO(0.00)[189.cn];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:4983, ipnet:134.134.136.0/24, country:US];
+	R_SPF_NA(0.00)[no SPF record];
 	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_CC(0.00)[intel.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.linux.dev,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,loongson.cn];
-	ASN(0.00)[asn:54825, ipnet:145.40.68.0/24, country:US];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[git-scm.com:url,raw.githubusercontent.com:url];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	RCVD_TLS_ALL(0.00)[];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	DKIM_TRACE(0.00)[intel.com:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_THREE(0.00)[4];
 	FROM_HAS_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[intel.com:dkim];
+	HAS_ORG_HEADER(0.00)[];
+	TO_DN_ALL(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2]
-X-MailFrom: nathan@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: OSNVAAMK43JD6Q2YYJPRVBI4B3JT4K4X
-X-Message-ID-Hash: OSNVAAMK43JD6Q2YYJPRVBI4B3JT4K4X
-X-Mailman-Approved-At: Wed, 29 Mar 2023 05:17:46 +0000
-CC: kernel test robot <lkp@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian Koenig <christian.koenig@amd.com>, llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Li Yi <liyi@loongson.cn>
+	ARC_NA(0.00)[]
+Message-ID-Hash: RHCY6UXSEBQ4SLOKPUJFVSYDLURYCO4Q
+X-Message-ID-Hash: RHCY6UXSEBQ4SLOKPUJFVSYDLURYCO4Q
+X-MailFrom: tvrtko.ursulin@linux.intel.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, dri-devel <dri-devel@lists.freedesktop.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v8 2/2] drm: add kms driver for loongson display controller
+Subject: [Linaro-mm-sig] Re: [pull] drm: dma-fence-deadline-core for v6.4
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OSNVAAMK43JD6Q2YYJPRVBI4B3JT4K4X/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RHCY6UXSEBQ4SLOKPUJFVSYDLURYCO4Q/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 28, 2023 at 11:22:50PM +0800, Sui Jingfeng wrote:
-> HI,
->=20
-> On 2023/3/28 17:27, kernel test robot wrote:
-> > Hi Sui,
-> >=20
-> > Thank you for the patch! Perhaps something to improve:
-> >=20
-> > [auto build test WARNING on drm-misc/drm-misc-next]
-> > [also build test WARNING on linus/master v6.3-rc4 next-20230328]
-> > [If your patch is applied to the wrong git tree, kindly drop us a note.
-> > And when submitting patch, we suggest to use '--base' as documented in
-> > https://git-scm.com/docs/git-format-patch#_base_tree_information]
-> >=20
-> > url:    https://github.com/intel-lab-lkp/linux/commits/Sui-Jingfeng/MAI=
-NTAINERS-add-maintainers-for-DRM-LOONGSON-driver/20230320-180408
-> > base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
-> > patch link:    https://lore.kernel.org/r/20230320100131.1277034-3-15330=
-273260%40189.cn
-> > patch subject: [PATCH v8 2/2] drm: add kms driver for loongson display =
-controller
-> > config: i386-allyesconfig (https://download.01.org/0day-ci/archive/2023=
-0328/202303281754.jWI20j2C-lkp@intel.com/config)
-> > compiler: clang version 14.0.6 (https://github.com/llvm/llvm-project f2=
-8c006a5895fc0e329fe15fead81e37457cb1d1)
-> > reproduce (this is a W=3D1 build):
-> >          wget https://raw.githubusercontent.com/intel/lkp-tests/master/=
-sbin/make.cross -O ~/bin/make.cross
-> >          chmod +x ~/bin/make.cross
-> >          # https://github.com/intel-lab-lkp/linux/commit/80b4115f44993f=
-4ebf47b1cb9e8f02953575b977
-> >          git remote add linux-review https://github.com/intel-lab-lkp/l=
-inux
-> >          git fetch --no-tags linux-review Sui-Jingfeng/MAINTAINERS-add-=
-maintainers-for-DRM-LOONGSON-driver/20230320-180408
-> >          git checkout 80b4115f44993f4ebf47b1cb9e8f02953575b977
-> >          # save the config file
-> >          mkdir build_dir && cp config build_dir/.config
-> >          COMPILER_INSTALL_PATH=3D$HOME/0day COMPILER=3Dclang make.cross=
- W=3D1 O=3Dbuild_dir ARCH=3Di386 olddefconfig
-> >          COMPILER_INSTALL_PATH=3D$HOME/0day COMPILER=3Dclang make.cross=
- W=3D1 O=3Dbuild_dir ARCH=3Di386 SHELL=3D/bin/bash drivers/accel/ drivers/g=
-pu/drm/loongson/ drivers/iio/light/ drivers/media/pci/intel/
-> >=20
-> > If you fix the issue, kindly add following tag where applicable
-> > | Reported-by: kernel test robot <lkp@intel.com>
-> > | Link: https://lore.kernel.org/oe-kbuild-all/202303281754.jWI20j2C-lkp=
-@intel.com/
-> >=20
-> > All warnings (new ones prefixed by >>):
-> >=20
-> > > > drivers/gpu/drm/loongson/lsdc_drv.c:232:11: warning: variable 'gpu'=
- is used uninitialized whenever 'if' condition is false [-Wsometimes-uninit=
-ialized]
-> >             else if (descp->chip =3D=3D CHIP_LS7A2000)
-> >                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> >     drivers/gpu/drm/loongson/lsdc_drv.c:235:7: note: uninitialized use =
-occurs here
-> >             if (!gpu) {
-> >                  ^~~
-> >     drivers/gpu/drm/loongson/lsdc_drv.c:232:7: note: remove the 'if' if=
- its condition is always true
-> >             else if (descp->chip =3D=3D CHIP_LS7A2000)
-> >                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> >     drivers/gpu/drm/loongson/lsdc_drv.c:217:21: note: initialize the va=
-riable 'gpu' to silence this warning
-> >             struct pci_dev *gpu;
-> >                                ^
-> >                                 =3D NULL
-> >     1 warning generated.
-> > --
->=20
-> In practice,=A0 either=A0 descp->chip =3D=3D CHIP_LS7A2000 or descp->chip=
- =3D=3D
-> CHIP_LS7A1000 will be happened at runtime.
->=20
-> the variable 'gpu' is guaranteed to be initialized when code run at=A0
-> drivers/gpu/drm/loongson/lsdc_drv.c:235
->=20
-> This warnning is almost wrong here.
 
-Clang's semantic analysis happens before optimizations, meaning it does
-not perform interprocedural analysis, so it does not have enough
-information at this point to tell that. Either just initialize gpu to
-NULL and let the existing 'if (!gpu)' handle it or add a separate else
-branch that warns about an unhandled chip value so that it is obvious
-what needs to be done if someone forgets to update this statement when a
-new chip is supported by this driver.
+On 28/03/2023 18:19, Daniel Vetter wrote:
+> On Sat, Mar 25, 2023 at 11:24:56AM -0700, Rob Clark wrote:
+>> Hi Dave and Daniel,
+>>
+>> Here is the series for dma-fence deadline hint, without driver
+>> specific patches, with the intent that it can be merged into drm-next
+>> as well as -driver next trees to enable landing driver specific
+>> support through their corresponding -next trees.
+>>
+>> The following changes since commit eeac8ede17557680855031c6f305ece2378af326:
+>>
+>>    Linux 6.3-rc2 (2023-03-12 16:36:44 -0700)
+>>
+>> are available in the Git repository at:
+>>
+>>    https://gitlab.freedesktop.org/drm/msm.git tags/dma-fence-deadline-core
+>>
+>> for you to fetch changes up to 0bcc8f52a8d9d1f9cd5af7f88c6599a89e64284a:
+>>
+>>    drm/atomic-helper: Set fence deadline for vblank (2023-03-25 10:55:08 -0700)
+> 
+> Ok apparently there's only igts for the sync_file uabi and the only only
+> userspace for syncobj is the mesa mr that is still under discussion :-/
+> 
+> Yes I know there's a clearly established need for something like this, but
+> also in drm we don't merge conjectured uabi. Especially with tricky stuff
+> that's meant to improve best effort performance/tuning problems, where you
+> really have to benchmark the entire thing and make sure you didn't screw
+> up some interaction.
 
-> > > > drivers/gpu/drm/loongson/lsdc_pll.c:188:14: warning: variable 'diff=
-' is used uninitialized whenever 'if' condition is false [-Wsometimes-unini=
-tialized]
-> >                                     else if (clock_khz < computed)
-> >                                              ^~~~~~~~~~~~~~~~~~~~
-> >     drivers/gpu/drm/loongson/lsdc_pll.c:191:9: note: uninitialized use =
-occurs here
-> >                                     if (diff < min) {
-> >                                         ^~~~
-> >     drivers/gpu/drm/loongson/lsdc_pll.c:188:10: note: remove the 'if' i=
-f its condition is always true
-> >                                     else if (clock_khz < computed)
-> >                                          ^~~~~~~~~~~~~~~~~~~~~~~~~
-> >     drivers/gpu/drm/loongson/lsdc_pll.c:177:22: note: initialize the va=
-riable 'diff' to silence this warning
-> >                                     unsigned int diff;
-> >                                                      ^
-> >                                                       =3D 0
-> >     1 warning generated.
->=20
-> Here the robot is also wrong here in practice,
->=20
-> because either=A0 if (clock_khz >=3D computed) or else if (clock_khz < co=
-mputed)
-> will be happen.
->=20
-> 'diff' variable is guaranteed to be initialized.
+Would we consider bypassing any ABI concerns by going with my proposal* 
+for the wait boost specific case?
 
-Make that clearer by turning 'else if (clock_khz < computed)' into just
-'else' as the warning suggests? I do not see why the condition is
-specified at all if it is just an 'else' in practice.
+Regards,
 
-Cheers,
-Nathan
+Tvrtko
 
-> >=20
-> > vim +232 drivers/gpu/drm/loongson/lsdc_drv.c
-> >=20
-> >     212=09
-> >     213	static int lsdc_get_dedicated_vram(struct lsdc_device *ldev,
-> >     214					   const struct lsdc_desc *descp)
-> >     215	{
-> >     216		struct drm_device *ddev =3D &ldev->base;
-> >     217		struct pci_dev *gpu;
-> >     218		resource_size_t base, size;
-> >     219=09
-> >     220		/*
-> >     221		 * The GPU and display controller in LS7A1000/LS7A2000 are sep=
-arated
-> >     222		 * PCIE devices, they are two devices not one. The DC does not=
- has a
-> >     223		 * dedicate VRAM bar, because the BIOS engineer choose to assi=
-gn the
-> >     224		 * VRAM to the GPU device. Sadly, after years application, thi=
-s form
-> >     225		 * as a convention for loongson integrated graphics. Bar 2 of =
-the GPU
-> >     226		 * device contain the base address and size of the VRAM, both =
-the GPU
-> >     227		 * and the DC can access the on-board VRAM as long as the DMA =
-address
-> >     228		 * emitted fall in [base, base + size).
-> >     229		 */
-> >     230		if (descp->chip =3D=3D CHIP_LS7A1000)
-> >     231			gpu =3D pci_get_device(PCI_VENDOR_ID_LOONGSON, 0x7A15, NULL);
-> >   > 232		else if (descp->chip =3D=3D CHIP_LS7A2000)
-> >     233			gpu =3D pci_get_device(PCI_VENDOR_ID_LOONGSON, 0x7A25, NULL);
-> >     234=09
-> >     235		if (!gpu) {
-> >     236			drm_warn(ddev, "No GPU device found\n");
-> >     237			return -ENODEV;
-> >     238		}
-> >     239=09
-> >     240		base =3D pci_resource_start(gpu, 2);
-> >     241		size =3D pci_resource_len(gpu, 2);
-> >     242=09
-> >     243		ldev->vram_base =3D base;
-> >     244		ldev->vram_size =3D size;
-> >     245=09
-> >     246		drm_info(ddev, "dedicated vram start: 0x%llx, size: %uMB\n",
-> >     247			 (u64)base, (u32)(size >> 20));
-> >     248=09
-> >     249		return 0;
-> >     250	}
-> >     251=09
-> >=20
->=20
+*) https://patchwork.freedesktop.org/series/113846/
+
+
+> 
+> To make sure this isn't stuck another full cycle, is there a way to wittle
+> this just down to the kms atomic flip boosting parts? That way we could at
+> least start landing the core&driver bits ...
+> -Daniel
+> 
+>>
+>> ----------------------------------------------------------------
+>> Immutable branch with dma-fence deadline hint support between drm-next
+>> and driver -next trees.
+>>
+>> ----------------------------------------------------------------
+>> Rob Clark (11):
+>>        dma-buf/dma-fence: Add deadline awareness
+>>        dma-buf/fence-array: Add fence deadline support
+>>        dma-buf/fence-chain: Add fence deadline support
+>>        dma-buf/dma-resv: Add a way to set fence deadline
+>>        dma-buf/sync_file: Surface sync-file uABI
+>>        dma-buf/sync_file: Add SET_DEADLINE ioctl
+>>        dma-buf/sw_sync: Add fence deadline support
+>>        drm/scheduler: Add fence deadline support
+>>        drm/syncobj: Add deadline support for syncobj waits
+>>        drm/vblank: Add helper to get next vblank time
+>>        drm/atomic-helper: Set fence deadline for vblank
+>>
+>>   Documentation/driver-api/dma-buf.rst    | 16 ++++++-
+>>   drivers/dma-buf/dma-fence-array.c       | 11 +++++
+>>   drivers/dma-buf/dma-fence-chain.c       | 12 +++++
+>>   drivers/dma-buf/dma-fence.c             | 60 ++++++++++++++++++++++++
+>>   drivers/dma-buf/dma-resv.c              | 22 +++++++++
+>>   drivers/dma-buf/sw_sync.c               | 81 +++++++++++++++++++++++++++++++++
+>>   drivers/dma-buf/sync_debug.h            |  2 +
+>>   drivers/dma-buf/sync_file.c             | 19 ++++++++
+>>   drivers/gpu/drm/drm_atomic_helper.c     | 37 +++++++++++++++
+>>   drivers/gpu/drm/drm_syncobj.c           | 64 ++++++++++++++++++++------
+>>   drivers/gpu/drm/drm_vblank.c            | 53 +++++++++++++++++----
+>>   drivers/gpu/drm/scheduler/sched_fence.c | 46 +++++++++++++++++++
+>>   drivers/gpu/drm/scheduler/sched_main.c  |  2 +-
+>>   include/drm/drm_vblank.h                |  1 +
+>>   include/drm/gpu_scheduler.h             | 17 +++++++
+>>   include/linux/dma-fence.h               | 22 +++++++++
+>>   include/linux/dma-resv.h                |  2 +
+>>   include/uapi/drm/drm.h                  | 17 +++++++
+>>   include/uapi/linux/sync_file.h          | 59 +++++++++++++++---------
+>>   19 files changed, 496 insertions(+), 47 deletions(-)
+> 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
