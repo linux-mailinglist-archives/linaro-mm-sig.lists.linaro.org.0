@@ -2,91 +2,78 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 911BE6CFB83
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 30 Mar 2023 08:29:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BA4D26CFBD9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 30 Mar 2023 08:47:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 45D7A3F4ED
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 30 Mar 2023 06:29:05 +0000 (UTC)
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
-	by lists.linaro.org (Postfix) with ESMTPS id 4F7853E802
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Mar 2023 06:28:52 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8A9D13E966
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 30 Mar 2023 06:47:09 +0000 (UTC)
+Received: from 189.cn (ptr.189.cn [183.61.185.101])
+	by lists.linaro.org (Postfix) with ESMTP id 1BC4D3E89F
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 30 Mar 2023 06:46:56 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=IRkrJN4I;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 134.134.136.126 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1680157732; x=1711693732;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=dMIpxtZhNrHRgy4hDqTvo4WSn4xHgM65jT7zx1crFVs=;
-  b=IRkrJN4IkE7IsajBZDzT1orXgVFa7GtjdEQE0ySR/nSdW1atKVVq/FSa
-   9V/5Tq50EAKZzp+Ig4+wJpDWIpiDT2ew6rwiyw5HKObEpROz95B21qgnZ
-   crWuflnSb9vLFKbpCeHKIsmi467sx3gnBRxcRdmyy/es+3tEaxCSiaw/o
-   CxwakpSTZ6LovqKcO7yTEOtUsI6O1v6OjbVH89d2WfKqY35TCNzYRhtkC
-   VS6CDaD+srS1TngN9AVnot9LYAHFQAU/O2IQbu0qiyYLSzhz04deqAe6o
-   +uV8hKrRE/4N8c31kGYFButXIX8XNtrYeoCXAYT9V3hHsdABOCa0vJiTB
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10664"; a="325003972"
-X-IronPort-AV: E=Sophos;i="5.98,303,1673942400";
-   d="scan'208";a="325003972"
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Mar 2023 23:28:38 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10664"; a="753872371"
-X-IronPort-AV: E=Sophos;i="5.98,303,1673942400";
-   d="scan'208";a="753872371"
-Received: from lkp-server01.sh.intel.com (HELO b613635ddfff) ([10.239.97.150])
-  by fmsmga004.fm.intel.com with ESMTP; 29 Mar 2023 23:28:34 -0700
-Received: from kbuild by b613635ddfff with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1phllx-000KRQ-35;
-	Thu, 30 Mar 2023 06:28:33 +0000
-Date: Thu, 30 Mar 2023 14:28:11 +0800
-From: kernel test robot <lkp@intel.com>
-To: Sui Jingfeng <15330273260@189.cn>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
-	suijingfeng <suijingfeng@loongson.cn>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian Koenig <christian.koenig@amd.com>
-Message-ID: <202303301403.lRjtbd5K-lkp@intel.com>
-References: <20230329155033.1303550-3-15330273260@189.cn>
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of 15330273260@189.cn designates 183.61.185.101 as permitted sender) smtp.mailfrom=15330273260@189.cn;
+	dmarc=none
+HMM_SOURCE_IP: 10.64.8.43:49992.1004970275
+HMM_ATTACHE_NUM: 0000
+HMM_SOURCE_TYPE: SMTP
+Received: from clientip-114.242.206.180 (unknown [10.64.8.43])
+	by 189.cn (HERMES) with SMTP id 05A171002CF;
+	Thu, 30 Mar 2023 14:46:51 +0800 (CST)
+Received: from  ([114.242.206.180])
+	by gateway-151646-dep-7b48884fd-tj646 with ESMTP id 8848f98944564ef38c37ea117c5c5e46 for lkp@intel.com;
+	Thu, 30 Mar 2023 14:46:53 CST
+X-Transaction-ID: 8848f98944564ef38c37ea117c5c5e46
+X-Real-From: 15330273260@189.cn
+X-Receive-IP: 114.242.206.180
+X-MEDUSA-Status: 0
+Sender: 15330273260@189.cn
+Message-ID: <83c392c9-52de-d819-70e5-651106341f20@189.cn>
+Date: Thu, 30 Mar 2023 14:46:50 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230329155033.1303550-3-15330273260@189.cn>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+To: kernel test robot <lkp@intel.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ suijingfeng <suijingfeng@loongson.cn>, Sumit Semwal
+ <sumit.semwal@linaro.org>, Christian Koenig <christian.koenig@amd.com>
+References: <20230329155033.1303550-3-15330273260@189.cn>
+ <202303301403.lRjtbd5K-lkp@intel.com>
+Content-Language: en-US
+From: Sui Jingfeng <15330273260@189.cn>
+In-Reply-To: <202303301403.lRjtbd5K-lkp@intel.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4F7853E802
-X-Spamd-Bar: ----------
-X-Spamd-Result: default: False [-10.00 / 15.00];
+X-Rspamd-Queue-Id: 1BC4D3E89F
+X-Spamd-Bar: -------
+X-Spamd-Result: default: False [-7.20 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:134.134.136.126/32];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:183.61.185.0/24];
+	RCVD_NO_TLS_LAST(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_TO(0.00)[189.cn,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,loongson.cn,linaro.org,amd.com];
-	ASN(0.00)[asn:4983, ipnet:134.134.136.0/24, country:US];
 	FROM_EQ_ENVFROM(0.00)[];
+	R_DKIM_NA(0.00)[];
+	ARC_NA(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[189.cn];
+	FREEMAIL_TO(0.00)[intel.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,loongson.cn,linaro.org,amd.com];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[git-scm.com:url];
+	ASN(0.00)[asn:4134, ipnet:183.0.0.0/10, country:CN];
+	NEURAL_HAM(-0.00)[-0.964];
 	RCPT_COUNT_TWELVE(0.00)[18];
-	RCVD_COUNT_THREE(0.00)[3];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[raw.githubusercontent.com:url,01.org:url,intel.com:email,ptr.189.cn:rdns,189.cn:helo];
+	FREEMAIL_FROM(0.00)[189.cn];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[intel.com:+];
-	ARC_NA(0.00)[]
-Message-ID-Hash: WTWV5YLAMKZEBJFB664FWF5HBTFOZ6YW
-X-Message-ID-Hash: WTWV5YLAMKZEBJFB664FWF5HBTFOZ6YW
-X-MailFrom: lkp@intel.com
+	DMARC_NA(0.00)[189.cn];
+	RCVD_COUNT_TWO(0.00)[2]
+Message-ID-Hash: 55TKYA6WUVYEBLRG3IWR3KRYBUINNNGD
+X-Message-ID-Hash: 55TKYA6WUVYEBLRG3IWR3KRYBUINNNGD
+X-MailFrom: 15330273260@189.cn
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, linaro-mm-sig@lists.linaro.org, loongson-kernel@lists.loongnix.cn, Li Yi <liyi@loongson.cn>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, nathan@kernel.org, linux-media@vger.kernel.org
@@ -94,134 +81,118 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v9 2/2] drm: add kms driver for loongson display controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WTWV5YLAMKZEBJFB664FWF5HBTFOZ6YW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/55TKYA6WUVYEBLRG3IWR3KRYBUINNNGD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-Hi Sui,
-
-I love your patch! Perhaps something to improve:
-
-[auto build test WARNING on drm-misc/drm-misc-next]
-[also build test WARNING on linus/master v6.3-rc4 next-20230329]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Sui-Jingfeng/MAINTAINERS-add-maintainers-for-DRM-LOONGSON-driver/20230329-235338
-base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
-patch link:    https://lore.kernel.org/r/20230329155033.1303550-3-15330273260%40189.cn
-patch subject: [PATCH v9 2/2] drm: add kms driver for loongson display controller
-config: x86_64-allyesconfig (https://download.01.org/0day-ci/archive/20230330/202303301403.lRjtbd5K-lkp@intel.com/config)
-compiler: clang version 14.0.6 (https://github.com/llvm/llvm-project f28c006a5895fc0e329fe15fead81e37457cb1d1)
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://github.com/intel-lab-lkp/linux/commit/ed6a57085a2dc87999193a71c28399a56e29097b
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Sui-Jingfeng/MAINTAINERS-add-maintainers-for-DRM-LOONGSON-driver/20230329-235338
-        git checkout ed6a57085a2dc87999193a71c28399a56e29097b
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=x86_64 olddefconfig
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=x86_64 SHELL=/bin/bash drivers/fpga/ drivers/gpu/drm/loongson/
-
-If you fix the issue, kindly add following tag where applicable
-| Reported-by: kernel test robot <lkp@intel.com>
-| Link: https://lore.kernel.org/oe-kbuild-all/202303301403.lRjtbd5K-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
->> drivers/gpu/drm/loongson/lsdc_drv.c:342:11: warning: variable 'ddev' is uninitialized when used here [-Wuninitialized]
-                   drm_err(ddev, "Not known device, the driver need update!\n");
-                           ^~~~
-   include/drm/drm_print.h:469:16: note: expanded from macro 'drm_err'
-           __drm_printk((drm), err,, "*ERROR* " fmt, ##__VA_ARGS__)
-                         ^~~
-   include/drm/drm_print.h:456:21: note: expanded from macro '__drm_printk'
-           dev_##level##type((drm)->dev, "[drm] " fmt, ##__VA_ARGS__)
-                              ^~~
-   include/linux/dev_printk.h:144:44: note: expanded from macro 'dev_err'
-           dev_printk_index_wrap(_dev_err, KERN_ERR, dev, dev_fmt(fmt), ##__VA_ARGS__)
-                                                     ^~~
-   include/linux/dev_printk.h:110:11: note: expanded from macro 'dev_printk_index_wrap'
-                   _p_func(dev, fmt, ##__VA_ARGS__);                       \
-                           ^~~
-   drivers/gpu/drm/loongson/lsdc_drv.c:326:25: note: initialize the variable 'ddev' to silence this warning
-           struct drm_device *ddev;
-                                  ^
-                                   = NULL
-   1 warning generated.
-
-
-vim +/ddev +342 drivers/gpu/drm/loongson/lsdc_drv.c
-
-   321	
-   322	static int lsdc_pci_probe(struct pci_dev *pdev,
-   323				  const struct pci_device_id *ent)
-   324	{
-   325		const struct lsdc_desc *descp;
-   326		struct drm_device *ddev;
-   327		struct lsdc_device *ldev;
-   328		int ret;
-   329	
-   330		ret = pcim_enable_device(pdev);
-   331		if (ret)
-   332			return ret;
-   333	
-   334		pci_set_master(pdev);
-   335	
-   336		ret = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(40));
-   337		if (ret)
-   338			return ret;
-   339	
-   340		descp = lsdc_detect_chip(pdev, ent);
-   341		if (IS_ERR_OR_NULL(descp)) {
- > 342			drm_err(ddev, "Not known device, the driver need update!\n");
-   343			return -ENODEV;
-   344		}
-   345	
-   346		dev_info(&pdev->dev, "%s found, revision: %u",
-   347			 chip_to_str(descp->chip), pdev->revision);
-   348	
-   349		ldev = lsdc_create_device(pdev, descp, &lsdc_drm_driver);
-   350		if (IS_ERR(ldev))
-   351			return PTR_ERR(ldev);
-   352	
-   353		ddev = &ldev->base;
-   354	
-   355		pci_set_drvdata(pdev, ddev);
-   356	
-   357		ret = devm_request_irq(&pdev->dev,
-   358				       pdev->irq,
-   359				       lsdc_get_irq_handler(descp),
-   360				       IRQF_SHARED,
-   361				       dev_name(&pdev->dev),
-   362				       ddev);
-   363		if (ret) {
-   364			drm_err(ddev, "Failed to register interrupt: %d\n", ret);
-   365			return ret;
-   366		}
-   367	
-   368		ret = drm_dev_register(ddev, 0);
-   369		if (ret)
-   370			return ret;
-   371	
-   372		drm_fbdev_generic_setup(ddev, 32);
-   373	
-   374		return 0;
-   375	}
-   376	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+DQpPbiAyMDIzLzMvMzAgMTQ6MjgsIGtlcm5lbCB0ZXN0IHJvYm90IHdyb3RlOg0KPiBIaSBTdWks
+DQo+DQo+IEkgbG92ZSB5b3VyIHBhdGNoISBQZXJoYXBzIHNvbWV0aGluZyB0byBpbXByb3ZlOg0K
+Pg0KPiBbYXV0byBidWlsZCB0ZXN0IFdBUk5JTkcgb24gZHJtLW1pc2MvZHJtLW1pc2MtbmV4dF0N
+Cj4gW2Fsc28gYnVpbGQgdGVzdCBXQVJOSU5HIG9uIGxpbnVzL21hc3RlciB2Ni4zLXJjNCBuZXh0
+LTIwMjMwMzI5XQ0KPiBbSWYgeW91ciBwYXRjaCBpcyBhcHBsaWVkIHRvIHRoZSB3cm9uZyBnaXQg
+dHJlZSwga2luZGx5IGRyb3AgdXMgYSBub3RlLg0KPiBBbmQgd2hlbiBzdWJtaXR0aW5nIHBhdGNo
+LCB3ZSBzdWdnZXN0IHRvIHVzZSAnLS1iYXNlJyBhcyBkb2N1bWVudGVkIGluDQo+IGh0dHBzOi8v
+Z2l0LXNjbS5jb20vZG9jcy9naXQtZm9ybWF0LXBhdGNoI19iYXNlX3RyZWVfaW5mb3JtYXRpb25d
+DQo+DQo+IHVybDogICAgaHR0cHM6Ly9naXRodWIuY29tL2ludGVsLWxhYi1sa3AvbGludXgvY29t
+bWl0cy9TdWktSmluZ2ZlbmcvTUFJTlRBSU5FUlMtYWRkLW1haW50YWluZXJzLWZvci1EUk0tTE9P
+TkdTT04tZHJpdmVyLzIwMjMwMzI5LTIzNTMzOA0KPiBiYXNlOiAgIGdpdDovL2Fub25naXQuZnJl
+ZWRlc2t0b3Aub3JnL2RybS9kcm0tbWlzYyBkcm0tbWlzYy1uZXh0DQo+IHBhdGNoIGxpbms6ICAg
+IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL3IvMjAyMzAzMjkxNTUwMzMuMTMwMzU1MC0zLTE1MzMw
+MjczMjYwJTQwMTg5LmNuDQo+IHBhdGNoIHN1YmplY3Q6IFtQQVRDSCB2OSAyLzJdIGRybTogYWRk
+IGttcyBkcml2ZXIgZm9yIGxvb25nc29uIGRpc3BsYXkgY29udHJvbGxlcg0KPiBjb25maWc6IHg4
+Nl82NC1hbGx5ZXNjb25maWcgKGh0dHBzOi8vZG93bmxvYWQuMDEub3JnLzBkYXktY2kvYXJjaGl2
+ZS8yMDIzMDMzMC8yMDIzMDMzMDE0MDMubFJqdGJkNUstbGtwQGludGVsLmNvbS9jb25maWcpDQo+
+IGNvbXBpbGVyOiBjbGFuZyB2ZXJzaW9uIDE0LjAuNiAoaHR0cHM6Ly9naXRodWIuY29tL2xsdm0v
+bGx2bS1wcm9qZWN0IGYyOGMwMDZhNTg5NWZjMGUzMjlmZTE1ZmVhZDgxZTM3NDU3Y2IxZDEpDQo+
+IHJlcHJvZHVjZSAodGhpcyBpcyBhIFc9MSBidWlsZCk6DQo+ICAgICAgICAgIHdnZXQgaHR0cHM6
+Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2ludGVsL2xrcC10ZXN0cy9tYXN0ZXIvc2Jpbi9t
+YWtlLmNyb3NzIC1PIH4vYmluL21ha2UuY3Jvc3MNCj4gICAgICAgICAgY2htb2QgK3ggfi9iaW4v
+bWFrZS5jcm9zcw0KPiAgICAgICAgICAjIGh0dHBzOi8vZ2l0aHViLmNvbS9pbnRlbC1sYWItbGtw
+L2xpbnV4L2NvbW1pdC9lZDZhNTcwODVhMmRjODc5OTkxOTNhNzFjMjgzOTlhNTZlMjkwOTdiDQo+
+ICAgICAgICAgIGdpdCByZW1vdGUgYWRkIGxpbnV4LXJldmlldyBodHRwczovL2dpdGh1Yi5jb20v
+aW50ZWwtbGFiLWxrcC9saW51eA0KPiAgICAgICAgICBnaXQgZmV0Y2ggLS1uby10YWdzIGxpbnV4
+LXJldmlldyBTdWktSmluZ2ZlbmcvTUFJTlRBSU5FUlMtYWRkLW1haW50YWluZXJzLWZvci1EUk0t
+TE9PTkdTT04tZHJpdmVyLzIwMjMwMzI5LTIzNTMzOA0KPiAgICAgICAgICBnaXQgY2hlY2tvdXQg
+ZWQ2YTU3MDg1YTJkYzg3OTk5MTkzYTcxYzI4Mzk5YTU2ZTI5MDk3Yg0KPiAgICAgICAgICAjIHNh
+dmUgdGhlIGNvbmZpZyBmaWxlDQo+ICAgICAgICAgIG1rZGlyIGJ1aWxkX2RpciAmJiBjcCBjb25m
+aWcgYnVpbGRfZGlyLy5jb25maWcNCj4gICAgICAgICAgQ09NUElMRVJfSU5TVEFMTF9QQVRIPSRI
+T01FLzBkYXkgQ09NUElMRVI9Y2xhbmcgbWFrZS5jcm9zcyBXPTEgTz1idWlsZF9kaXIgQVJDSD14
+ODZfNjQgb2xkZGVmY29uZmlnDQo+ICAgICAgICAgIENPTVBJTEVSX0lOU1RBTExfUEFUSD0kSE9N
+RS8wZGF5IENPTVBJTEVSPWNsYW5nIG1ha2UuY3Jvc3MgVz0xIE89YnVpbGRfZGlyIEFSQ0g9eDg2
+XzY0IFNIRUxMPS9iaW4vYmFzaCBkcml2ZXJzL2ZwZ2EvIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nv
+bi8NCj4NCj4gSWYgeW91IGZpeCB0aGUgaXNzdWUsIGtpbmRseSBhZGQgZm9sbG93aW5nIHRhZyB3
+aGVyZSBhcHBsaWNhYmxlDQo+IHwgUmVwb3J0ZWQtYnk6IGtlcm5lbCB0ZXN0IHJvYm90IDxsa3BA
+aW50ZWwuY29tPg0KPiB8IExpbms6IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL29lLWtidWlsZC1h
+bGwvMjAyMzAzMzAxNDAzLmxSanRiZDVLLWxrcEBpbnRlbC5jb20vDQo+DQo+IEFsbCB3YXJuaW5n
+cyAobmV3IG9uZXMgcHJlZml4ZWQgYnkgPj4pOg0KPg0KPj4+IGRyaXZlcnMvZ3B1L2RybS9sb29u
+Z3Nvbi9sc2RjX2Rydi5jOjM0MjoxMTogd2FybmluZzogdmFyaWFibGUgJ2RkZXYnIGlzIHVuaW5p
+dGlhbGl6ZWQgd2hlbiB1c2VkIGhlcmUgWy1XdW5pbml0aWFsaXplZF0NCj4gICAgICAgICAgICAg
+ICAgICAgICBkcm1fZXJyKGRkZXYsICJOb3Qga25vd24gZGV2aWNlLCB0aGUgZHJpdmVyIG5lZWQg
+dXBkYXRlIVxuIik7DQo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBefn5+DQo+ICAgICBp
+bmNsdWRlL2RybS9kcm1fcHJpbnQuaDo0Njk6MTY6IG5vdGU6IGV4cGFuZGVkIGZyb20gbWFjcm8g
+J2RybV9lcnInDQo+ICAgICAgICAgICAgIF9fZHJtX3ByaW50aygoZHJtKSwgZXJyLCwgIipFUlJP
+UiogIiBmbXQsICMjX19WQV9BUkdTX18pDQo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgXn5+
+DQo+ICAgICBpbmNsdWRlL2RybS9kcm1fcHJpbnQuaDo0NTY6MjE6IG5vdGU6IGV4cGFuZGVkIGZy
+b20gbWFjcm8gJ19fZHJtX3ByaW50aycNCj4gICAgICAgICAgICAgZGV2XyMjbGV2ZWwjI3R5cGUo
+KGRybSktPmRldiwgIltkcm1dICIgZm10LCAjI19fVkFfQVJHU19fKQ0KPiAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgXn5+DQo+ICAgICBpbmNsdWRlL2xpbnV4L2Rldl9wcmludGsuaDox
+NDQ6NDQ6IG5vdGU6IGV4cGFuZGVkIGZyb20gbWFjcm8gJ2Rldl9lcnInDQo+ICAgICAgICAgICAg
+IGRldl9wcmludGtfaW5kZXhfd3JhcChfZGV2X2VyciwgS0VSTl9FUlIsIGRldiwgZGV2X2ZtdChm
+bXQpLCAjI19fVkFfQVJHU19fKQ0KPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICBefn4NCj4gICAgIGluY2x1ZGUvbGludXgvZGV2X3ByaW50ay5o
+OjExMDoxMTogbm90ZTogZXhwYW5kZWQgZnJvbSBtYWNybyAnZGV2X3ByaW50a19pbmRleF93cmFw
+Jw0KPiAgICAgICAgICAgICAgICAgICAgIF9wX2Z1bmMoZGV2LCBmbXQsICMjX19WQV9BUkdTX18p
+OyAgICAgICAgICAgICAgICAgICAgICAgXA0KPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+Xn5+DQo+ICAgICBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19kcnYuYzozMjY6MjU6IG5v
+dGU6IGluaXRpYWxpemUgdGhlIHZhcmlhYmxlICdkZGV2JyB0byBzaWxlbmNlIHRoaXMgd2Fybmlu
+Zw0KPiAgICAgICAgICAgICBzdHJ1Y3QgZHJtX2RldmljZSAqZGRldjsNCj4gICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICBeDQo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgID0gTlVMTA0KPiAgICAgMSB3YXJuaW5nIGdlbmVyYXRlZC4NCj4NCj4NCj4gdmltICsv
+ZGRldiArMzQyIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX2Rydi5jDQo+DQo+ICAgICAz
+MjEJDQo+ICAgICAzMjIJc3RhdGljIGludCBsc2RjX3BjaV9wcm9iZShzdHJ1Y3QgcGNpX2RldiAq
+cGRldiwNCj4gICAgIDMyMwkJCQkgIGNvbnN0IHN0cnVjdCBwY2lfZGV2aWNlX2lkICplbnQpDQo+
+ICAgICAzMjQJew0KPiAgICAgMzI1CQljb25zdCBzdHJ1Y3QgbHNkY19kZXNjICpkZXNjcDsNCj4g
+ICAgIDMyNgkJc3RydWN0IGRybV9kZXZpY2UgKmRkZXY7DQo+ICAgICAzMjcJCXN0cnVjdCBsc2Rj
+X2RldmljZSAqbGRldjsNCj4gICAgIDMyOAkJaW50IHJldDsNCj4gICAgIDMyOQkNCj4gICAgIDMz
+MAkJcmV0ID0gcGNpbV9lbmFibGVfZGV2aWNlKHBkZXYpOw0KPiAgICAgMzMxCQlpZiAocmV0KQ0K
+PiAgICAgMzMyCQkJcmV0dXJuIHJldDsNCj4gICAgIDMzMwkNCj4gICAgIDMzNAkJcGNpX3NldF9t
+YXN0ZXIocGRldik7DQo+ICAgICAzMzUJDQo+ICAgICAzMzYJCXJldCA9IGRtYV9zZXRfbWFza19h
+bmRfY29oZXJlbnQoJnBkZXYtPmRldiwgRE1BX0JJVF9NQVNLKDQwKSk7DQo+ICAgICAzMzcJCWlm
+IChyZXQpDQo+ICAgICAzMzgJCQlyZXR1cm4gcmV0Ow0KPiAgICAgMzM5CQ0KPiAgICAgMzQwCQlk
+ZXNjcCA9IGxzZGNfZGV0ZWN0X2NoaXAocGRldiwgZW50KTsNCj4gICAgIDM0MQkJaWYgKElTX0VS
+Ul9PUl9OVUxMKGRlc2NwKSkgew0KPiAgID4gMzQyCQkJZHJtX2VycihkZGV2LCAiTm90IGtub3du
+IGRldmljZSwgdGhlIGRyaXZlciBuZWVkIHVwZGF0ZSFcbiIpOw0KPiAgICAgMzQzCQkJcmV0dXJu
+IC1FTk9ERVY7DQo+ICAgICAzNDQJCX0NCj4gICAgIDM0NQkNCg0KUmlnaHQsIGkgYWRtaXQgdGhp
+cy4NCg0KDQpJIG1vdmXCoCBsc2RjX2RldGVjdF9jaGlwKCkgZnVuY3Rpb24gb3V0IGZyb20gbHNk
+Y19jcmVhdGVfZGV2aWNlKCkgdG8gDQpoZXJlIGluIHY5Lg0KDQpTaW5jZSBpIHRoaW5rIHRoZSBj
+aGlwIHByb2JlIHNob3VsZCBiZSBydW4gYXMgZWFybHkgYXMgcG9zc2libGUuDQoNClJlbW92ZcKg
+IGxpbmUgMzQyIGBkcm1fZXJyKGRkZXYsICJOb3Qga25vd24gZGV2aWNlLCB0aGUgZHJpdmVyIG5l
+ZWQgDQp1cGRhdGUhXG4iKTtgIHdvdWxkIHNvbHZlIHRoZSBwcm9ibGVtLg0KDQpUaGlzIHRpbWUg
+cm9ib3Qgd2luLg0KDQpJIHdpbGwgd2FpdCBvbmUgb3IgdHdvIGRheSBiZWZvcmUgc2VuZCBuZXh0
+IHZlcnNpb24sIG9rPw0KDQo+ICAgICAzNDYJCWRldl9pbmZvKCZwZGV2LT5kZXYsICIlcyBmb3Vu
+ZCwgcmV2aXNpb246ICV1IiwNCj4gICAgIDM0NwkJCSBjaGlwX3RvX3N0cihkZXNjcC0+Y2hpcCks
+IHBkZXYtPnJldmlzaW9uKTsNCj4gICAgIDM0OAkNCj4gICAgIDM0OQkJbGRldiA9IGxzZGNfY3Jl
+YXRlX2RldmljZShwZGV2LCBkZXNjcCwgJmxzZGNfZHJtX2RyaXZlcik7DQo+ICAgICAzNTAJCWlm
+IChJU19FUlIobGRldikpDQo+ICAgICAzNTEJCQlyZXR1cm4gUFRSX0VSUihsZGV2KTsNCj4gICAg
+IDM1MgkNCj4gICAgIDM1MwkJZGRldiA9ICZsZGV2LT5iYXNlOw0KPiAgICAgMzU0CQ0KPiAgICAg
+MzU1CQlwY2lfc2V0X2RydmRhdGEocGRldiwgZGRldik7DQo+ICAgICAzNTYJDQo+ICAgICAzNTcJ
+CXJldCA9IGRldm1fcmVxdWVzdF9pcnEoJnBkZXYtPmRldiwNCj4gICAgIDM1OAkJCQkgICAgICAg
+cGRldi0+aXJxLA0KPiAgICAgMzU5CQkJCSAgICAgICBsc2RjX2dldF9pcnFfaGFuZGxlcihkZXNj
+cCksDQo+ICAgICAzNjAJCQkJICAgICAgIElSUUZfU0hBUkVELA0KPiAgICAgMzYxCQkJCSAgICAg
+ICBkZXZfbmFtZSgmcGRldi0+ZGV2KSwNCj4gICAgIDM2MgkJCQkgICAgICAgZGRldik7DQo+ICAg
+ICAzNjMJCWlmIChyZXQpIHsNCj4gICAgIDM2NAkJCWRybV9lcnIoZGRldiwgIkZhaWxlZCB0byBy
+ZWdpc3RlciBpbnRlcnJ1cHQ6ICVkXG4iLCByZXQpOw0KPiAgICAgMzY1CQkJcmV0dXJuIHJldDsN
+Cj4gICAgIDM2NgkJfQ0KPiAgICAgMzY3CQ0KPiAgICAgMzY4CQlyZXQgPSBkcm1fZGV2X3JlZ2lz
+dGVyKGRkZXYsIDApOw0KPiAgICAgMzY5CQlpZiAocmV0KQ0KPiAgICAgMzcwCQkJcmV0dXJuIHJl
+dDsNCj4gICAgIDM3MQkNCj4gICAgIDM3MgkJZHJtX2ZiZGV2X2dlbmVyaWNfc2V0dXAoZGRldiwg
+MzIpOw0KPiAgICAgMzczCQ0KPiAgICAgMzc0CQlyZXR1cm4gMDsNCj4gICAgIDM3NQl9DQo+ICAg
+ICAzNzYJDQo+DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFy
+by5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZl
+QGxpc3RzLmxpbmFyby5vcmcK
