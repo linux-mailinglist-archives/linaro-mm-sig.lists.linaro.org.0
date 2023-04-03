@@ -2,28 +2,28 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 16DA96D4D02
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  3 Apr 2023 18:02:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 263B76D4D03
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  3 Apr 2023 18:02:49 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 27EEA3F5E1
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  3 Apr 2023 16:02:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2A6203F5E1
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  3 Apr 2023 16:02:48 +0000 (UTC)
 Received: from aposti.net (aposti.net [89.234.176.197])
-	by lists.linaro.org (Postfix) with ESMTPS id B14723F5E6
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  3 Apr 2023 16:02:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id B90B53F5E7
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  3 Apr 2023 16:02:07 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=crapouillou.net header.s=mail header.b=FeodDPhq;
+	dkim=pass header.d=crapouillou.net header.s=mail header.b=HqsAH+p5;
 	spf=pass (lists.linaro.org: domain of paul@crapouillou.net designates 89.234.176.197 as permitted sender) smtp.mailfrom=paul@crapouillou.net;
 	dmarc=pass (policy=none) header.from=crapouillou.net
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
-	s=mail; t=1680536898;
+	s=mail; t=1680536899;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=uVat1y3nUPAGrRVYX0c87LmQAN3Bo767mwQaGSvhkEU=;
-	b=FeodDPhqhSrgCY931wbpHE6ejF5oHVHcNN9LKo1irGAdS332/J9BWW1vxmLi9f6cPCDxUu
-	BJmbaFoOLXJOLPjOx3Glsg+4nu0jshD/V6BZHWfI9pi6vy1psy5D0Q5+tCxIlOulXsLEk6
-	56bq7XLlenzXWg3DS2+///eQUHm2/HY=
+	bh=nz7fAmV2pnrsQXoD+Pm7KxzmimP2P/9gJ/rPeNI46aA=;
+	b=HqsAH+p5v6BE+qZRaoUswP1MfXOIFXLtc+6jkhPXjbKrcpw+1NRONU/W5dPkQVcIc9I+nB
+	otO1GZ2kHVZfgMn2EGZc0Il3mv0+pdsg5rvM/1zA8c2EcGd+YnmvGmyK3iF0Pd8E8lEMIo
+	19O2WWzsR+0Kf1S5nbS64f0UWCt4di4=
 From: Paul Cercueil <paul@crapouillou.net>
 To: Jonathan Cameron <jic23@kernel.org>,
 	Lars-Peter Clausen <lars@metafoo.de>,
@@ -32,14 +32,14 @@ To: Jonathan Cameron <jic23@kernel.org>,
 	=?UTF-8?q?Nuno=20S=C3=A1?= <noname.nuno@gmail.com>,
 	Sumit Semwal <sumit.semwal@linaro.org>,
 	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Date: Mon,  3 Apr 2023 17:47:55 +0200
-Message-Id: <20230403154800.215924-7-paul@crapouillou.net>
+Date: Mon,  3 Apr 2023 17:47:56 +0200
+Message-Id: <20230403154800.215924-8-paul@crapouillou.net>
 In-Reply-To: <20230403154800.215924-1-paul@crapouillou.net>
 References: <20230403154800.215924-1-paul@crapouillou.net>
 MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: B14723F5E6
+X-Rspamd-Queue-Id: B90B53F5E7
 X-Spamd-Bar: /
 X-Spamd-Result: default: False [-0.00 / 15.00];
 	SPAM_FLAG(5.00)[];
@@ -47,36 +47,35 @@ X-Spamd-Result: default: False [-0.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[crapouillou.net,none];
 	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[crapouillou.net,none];
 	R_DKIM_ALLOW(-0.20)[crapouillou.net:s=mail];
-	R_SPF_ALLOW(-0.20)[+a];
+	R_SPF_ALLOW(-0.20)[+a:c];
 	MIME_GOOD(-0.10)[text/plain];
 	FREEMAIL_TO(0.00)[kernel.org,metafoo.de,analog.com,gmail.com,linaro.org,amd.com];
-	RCVD_COUNT_ZERO(0.00)[0];
-	FROM_EQ_ENVFROM(0.00)[];
 	ASN(0.00)[asn:203432, ipnet:89.234.176.0/23, country:FR];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	NEURAL_SPAM(0.00)[0.800];
+	RCVD_COUNT_ZERO(0.00)[0];
+	FROM_EQ_ENVFROM(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[crapouillou.net:+];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,crapouillou.net,gmail.com];
+	NEURAL_SPAM(0.00)[0.909];
 	TAGGED_RCPT(0.00)[];
 	ARC_NA(0.00)[]
-Message-ID-Hash: MJGRAS3JDRC5X32CUJIVR7V7LZ7UPL6L
-X-Message-ID-Hash: MJGRAS3JDRC5X32CUJIVR7V7LZ7UPL6L
+Message-ID-Hash: OFUMNCHP27MN5D5J7UCHPO4AKVLQAWKS
+X-Message-ID-Hash: OFUMNCHP27MN5D5J7UCHPO4AKVLQAWKS
 X-MailFrom: paul@crapouillou.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-iio@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Paul Cercueil <paul@crapouillou.net>, Alexandru Ardelean <ardeleanalex@gmail.com>
+CC: linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-iio@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Paul Cercueil <paul@crapouillou.net>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 06/11] iio: buffer-dmaengine: Enable write support
+Subject: [Linaro-mm-sig] [PATCH v3 07/11] iio: core: Add new DMABUF interface infrastructure
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MJGRAS3JDRC5X32CUJIVR7V7LZ7UPL6L/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OFUMNCHP27MN5D5J7UCHPO4AKVLQAWKS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -86,35 +85,620 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Use the iio_dma_buffer_write() and iio_dma_buffer_space_available()
-functions provided by the buffer-dma core, to enable write support in
-the buffer-dmaengine code.
+Add the necessary infrastructure to the IIO core to support a new
+optional DMABUF based interface.
+
+With this new interface, DMABUF objects (externally created) can be
+attached to a IIO buffer, and subsequently used for data transfer.
+
+A userspace application can then use this interface to share DMABUF
+objects between several interfaces, allowing it to transfer data in a
+zero-copy fashion, for instance between IIO and the USB stack.
+
+The userspace application can also memory-map the DMABUF objects, and
+access the sample data directly. The advantage of doing this vs. the
+read() interface is that it avoids an extra copy of the data between the
+kernel and userspace. This is particularly userful for high-speed
+devices which produce several megabytes or even gigabytes of data per
+second.
+
+As part of the interface, 3 new IOCTLs have been added:
+
+IIO_BUFFER_DMABUF_ATTACH_IOCTL(int fd):
+ Attach the DMABUF object identified by the given file descriptor to the
+ buffer.
+
+IIO_BUFFER_DMABUF_DETACH_IOCTL(int fd):
+ Detach the DMABUF object identified by the given file descriptor from
+ the buffer. Note that closing the IIO buffer's file descriptor will
+ automatically detach all previously attached DMABUF objects.
+
+IIO_BUFFER_DMABUF_ENQUEUE_IOCTL(struct iio_dmabuf *):
+ Request a data transfer to/from the given DMABUF object. Its file
+ descriptor, as well as the transfer size and flags are provided in the
+ "iio_dmabuf" structure.
+
+These three IOCTLs have to be performed on the IIO buffer's file
+descriptor, obtained using the IIO_BUFFER_GET_FD_IOCTL() ioctl.
 
 Signed-off-by: Paul Cercueil <paul@crapouillou.net>
-Reviewed-by: Alexandru Ardelean <ardeleanalex@gmail.com>
----
- drivers/iio/buffer/industrialio-buffer-dmaengine.c | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/iio/buffer/industrialio-buffer-dmaengine.c b/drivers/iio/buffer/industrialio-buffer-dmaengine.c
-index 592d2aa9044c..866c8b84bb24 100644
---- a/drivers/iio/buffer/industrialio-buffer-dmaengine.c
-+++ b/drivers/iio/buffer/industrialio-buffer-dmaengine.c
-@@ -123,12 +123,14 @@ static void iio_dmaengine_buffer_release(struct iio_buffer *buf)
+---
+v2: Only allow the new IOCTLs on the buffer FD created with
+    IIO_BUFFER_GET_FD_IOCTL().
+
+v3: - Get rid of the old IOCTLs. The IIO subsystem does not create or
+    manage DMABUFs anymore, and only attaches/detaches externally
+    created DMABUFs.
+    - Add IIO_BUFFER_DMABUF_CYCLIC to the supported flags.
+---
+ drivers/iio/industrialio-buffer.c | 402 ++++++++++++++++++++++++++++++
+ include/linux/iio/buffer_impl.h   |  22 ++
+ include/uapi/linux/iio/buffer.h   |  22 ++
+ 3 files changed, 446 insertions(+)
+
+diff --git a/drivers/iio/industrialio-buffer.c b/drivers/iio/industrialio-buffer.c
+index 80c78bd6bbef..5d88e098b3e7 100644
+--- a/drivers/iio/industrialio-buffer.c
++++ b/drivers/iio/industrialio-buffer.c
+@@ -13,10 +13,14 @@
+ #include <linux/kernel.h>
+ #include <linux/export.h>
+ #include <linux/device.h>
++#include <linux/dma-buf.h>
++#include <linux/dma-fence.h>
++#include <linux/dma-resv.h>
+ #include <linux/file.h>
+ #include <linux/fs.h>
+ #include <linux/cdev.h>
+ #include <linux/slab.h>
++#include <linux/mm.h>
+ #include <linux/poll.h>
+ #include <linux/sched/signal.h>
  
- static const struct iio_buffer_access_funcs iio_dmaengine_buffer_ops = {
- 	.read = iio_dma_buffer_read,
-+	.write = iio_dma_buffer_write,
- 	.set_bytes_per_datum = iio_dma_buffer_set_bytes_per_datum,
- 	.set_length = iio_dma_buffer_set_length,
- 	.request_update = iio_dma_buffer_request_update,
- 	.enable = iio_dma_buffer_enable,
- 	.disable = iio_dma_buffer_disable,
- 	.data_available = iio_dma_buffer_data_available,
-+	.space_available = iio_dma_buffer_space_available,
- 	.release = iio_dmaengine_buffer_release,
+@@ -28,11 +32,41 @@
+ #include <linux/iio/buffer.h>
+ #include <linux/iio/buffer_impl.h>
  
- 	.modes = INDIO_BUFFER_HARDWARE,
++#define DMABUF_ENQUEUE_TIMEOUT_MS 5000
++
++struct iio_dma_fence;
++
++struct iio_dmabuf_priv {
++	struct list_head entry;
++	struct kref ref;
++
++	struct iio_buffer *buffer;
++	struct iio_dma_buffer_block *block;
++
++	u64 context;
++	spinlock_t lock;
++
++	struct dma_buf_attachment *attach;
++	struct iio_dma_fence *fence;
++};
++
++struct iio_dma_fence {
++	struct dma_fence base;
++	struct iio_dmabuf_priv *priv;
++	struct sg_table *sgt;
++	enum dma_data_direction dir;
++};
++
+ static const char * const iio_endian_prefix[] = {
+ 	[IIO_BE] = "be",
+ 	[IIO_LE] = "le",
+ };
+ 
++static inline struct iio_dma_fence *to_iio_dma_fence(struct dma_fence *fence)
++{
++	return container_of(fence, struct iio_dma_fence, base);
++}
++
+ static bool iio_buffer_is_active(struct iio_buffer *buf)
+ {
+ 	return !list_empty(&buf->buffer_list);
+@@ -329,6 +363,7 @@ void iio_buffer_init(struct iio_buffer *buffer)
+ {
+ 	INIT_LIST_HEAD(&buffer->demux_list);
+ 	INIT_LIST_HEAD(&buffer->buffer_list);
++	INIT_LIST_HEAD(&buffer->dmabufs);
+ 	init_waitqueue_head(&buffer->pollq);
+ 	kref_init(&buffer->ref);
+ 	if (!buffer->watermark)
+@@ -1500,14 +1535,55 @@ static void iio_buffer_unregister_legacy_sysfs_groups(struct iio_dev *indio_dev)
+ 	kfree(iio_dev_opaque->legacy_scan_el_group.attrs);
+ }
+ 
++static void iio_buffer_dmabuf_release(struct kref *ref)
++{
++	struct iio_dmabuf_priv *priv = container_of(ref, struct iio_dmabuf_priv, ref);
++	struct dma_buf_attachment *attach = priv->attach;
++	struct iio_buffer *buffer = priv->buffer;
++	struct dma_buf *dmabuf = attach->dmabuf;
++
++	buffer->access->detach_dmabuf(buffer, priv->block);
++
++	dma_buf_detach(attach->dmabuf, attach);
++	dma_buf_put(dmabuf);
++	kfree(priv);
++}
++
++void iio_buffer_dmabuf_get(struct dma_buf_attachment *attach)
++{
++	struct iio_dmabuf_priv *priv = attach->importer_priv;
++
++	kref_get(&priv->ref);
++}
++EXPORT_SYMBOL_GPL(iio_buffer_dmabuf_get);
++
++void iio_buffer_dmabuf_put(struct dma_buf_attachment *attach)
++{
++	struct iio_dmabuf_priv *priv = attach->importer_priv;
++
++	kref_put(&priv->ref, iio_buffer_dmabuf_release);
++}
++EXPORT_SYMBOL_GPL(iio_buffer_dmabuf_put);
++
+ static int iio_buffer_chrdev_release(struct inode *inode, struct file *filep)
+ {
+ 	struct iio_dev_buffer_pair *ib = filep->private_data;
+ 	struct iio_dev *indio_dev = ib->indio_dev;
+ 	struct iio_buffer *buffer = ib->buffer;
++	struct iio_dmabuf_priv *priv, *tmp;
+ 
+ 	wake_up(&buffer->pollq);
+ 
++	/* Close all attached DMABUFs */
++	list_for_each_entry_safe(priv, tmp, &buffer->dmabufs, entry) {
++		list_del_init(&priv->entry);
++		iio_buffer_dmabuf_put(priv->attach);
++	}
++
++	/* TODO: Is it safe? Can "ib" be freed here? */
++	if (!list_empty(&buffer->dmabufs))
++		dev_warn(&indio_dev->dev, "Buffer FD closed with active transfers\n");
++
+ 	kfree(ib);
+ 	clear_bit(IIO_BUSY_BIT_POS, &buffer->flags);
+ 	iio_device_put(indio_dev);
+@@ -1515,11 +1591,337 @@ static int iio_buffer_chrdev_release(struct inode *inode, struct file *filep)
+ 	return 0;
+ }
+ 
++int iio_dma_resv_lock(struct dma_buf *dmabuf, bool nonblock)
++{
++	int ret;
++
++	ret = dma_resv_lock_interruptible(dmabuf->resv, NULL);
++	if (ret) {
++		if (ret != -EDEADLK)
++			goto out;
++		if (nonblock) {
++			ret = -EBUSY;
++			goto out;
++		}
++
++		ret = dma_resv_lock_slow_interruptible(dmabuf->resv, NULL);
++	}
++
++out:
++	return ret;
++}
++EXPORT_SYMBOL_GPL(iio_dma_resv_lock);
++
++static struct dma_buf_attachment *
++iio_buffer_find_attachment(struct iio_dev *indio_dev, struct dma_buf *dmabuf)
++{
++	struct dma_buf_attachment *elm, *attach = NULL;
++	int ret;
++
++	ret = iio_dma_resv_lock(dmabuf, false);
++	if (ret)
++		return ERR_PTR(ret);
++
++	list_for_each_entry(elm, &dmabuf->attachments, node) {
++		if (elm->dev == indio_dev->dev.parent) {
++			attach = elm;
++			break;
++		}
++	}
++
++	if (attach)
++		iio_buffer_dmabuf_get(elm);
++
++	dma_resv_unlock(dmabuf->resv);
++
++	return attach ?: ERR_PTR(-EPERM);
++}
++
++static int iio_buffer_attach_dmabuf(struct iio_dev_buffer_pair *ib,
++				    int __user *user_fd)
++{
++	struct iio_dev *indio_dev = ib->indio_dev;
++	struct iio_buffer *buffer = ib->buffer;
++	struct dma_buf_attachment *attach;
++	struct iio_dmabuf_priv *priv;
++	struct dma_buf *dmabuf;
++	int err, fd;
++
++	if (!buffer->access->attach_dmabuf
++	    || !buffer->access->detach_dmabuf
++	    || !buffer->access->enqueue_dmabuf)
++		return -EPERM;
++
++	if (copy_from_user(&fd, user_fd, sizeof(fd)))
++		return -EFAULT;
++
++	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
++	if (!priv)
++		return -ENOMEM;
++
++	spin_lock_init(&priv->lock);
++	priv->context = dma_fence_context_alloc(1);
++
++	dmabuf = dma_buf_get(fd);
++	if (IS_ERR(dmabuf)) {
++		err = PTR_ERR(dmabuf);
++		goto err_free_priv;
++	}
++
++	attach = dma_buf_attach(dmabuf, indio_dev->dev.parent);
++	if (IS_ERR(attach)) {
++		err = PTR_ERR(attach);
++		goto err_dmabuf_put;
++	}
++
++	kref_init(&priv->ref);
++	priv->buffer = buffer;
++	priv->attach = attach;
++	attach->importer_priv = priv;
++
++	priv->block = buffer->access->attach_dmabuf(buffer, attach);
++	if (IS_ERR(priv->block)) {
++		err = PTR_ERR(priv->block);
++		goto err_dmabuf_detach;
++	}
++
++	list_add(&priv->entry, &buffer->dmabufs);
++
++	return 0;
++
++err_dmabuf_detach:
++	dma_buf_detach(dmabuf, attach);
++err_dmabuf_put:
++	dma_buf_put(dmabuf);
++err_free_priv:
++	kfree(priv);
++
++	return err;
++}
++
++static int iio_buffer_detach_dmabuf(struct iio_dev_buffer_pair *ib, int *user_req)
++{
++	struct dma_buf_attachment *attach;
++	struct iio_dmabuf_priv *priv;
++	struct dma_buf *dmabuf;
++	int dmabuf_fd, ret = 0;
++
++	if (copy_from_user(&dmabuf_fd, user_req, sizeof(dmabuf_fd)))
++		return -EFAULT;
++
++	dmabuf = dma_buf_get(dmabuf_fd);
++	if (IS_ERR(dmabuf))
++		return PTR_ERR(dmabuf);
++
++	attach = iio_buffer_find_attachment(ib->indio_dev, dmabuf);
++	if (IS_ERR(attach)) {
++		ret = PTR_ERR(attach);
++		goto out_dmabuf_put;
++	}
++
++	priv = attach->importer_priv;
++	list_del_init(&priv->entry);
++
++	iio_buffer_dmabuf_put(attach);
++	iio_buffer_dmabuf_put(attach);
++
++out_dmabuf_put:
++	dma_buf_put(dmabuf);
++
++	return ret;
++}
++
++static const char *
++iio_buffer_dma_fence_get_driver_name(struct dma_fence *fence)
++{
++	return "iio";
++}
++
++static void iio_buffer_dma_fence_release(struct dma_fence *fence)
++{
++	struct iio_dma_fence *iio_fence = to_iio_dma_fence(fence);
++
++	kfree(iio_fence);
++}
++
++static const struct dma_fence_ops iio_buffer_dma_fence_ops = {
++	.get_driver_name	= iio_buffer_dma_fence_get_driver_name,
++	.get_timeline_name	= iio_buffer_dma_fence_get_driver_name,
++	.release		= iio_buffer_dma_fence_release,
++};
++
++static int iio_buffer_enqueue_dmabuf(struct iio_dev_buffer_pair *ib,
++				     struct iio_dmabuf __user *iio_dmabuf_req,
++				     bool nonblock)
++{
++	struct iio_buffer *buffer = ib->buffer;
++	struct iio_dmabuf iio_dmabuf;
++	struct dma_buf_attachment *attach;
++	struct iio_dmabuf_priv *priv;
++	enum dma_data_direction dir;
++	struct iio_dma_fence *fence;
++	struct dma_buf *dmabuf;
++	struct sg_table *sgt;
++	unsigned long timeout;
++	bool dma_to_ram;
++	bool cyclic;
++	int ret;
++
++	if (copy_from_user(&iio_dmabuf, iio_dmabuf_req, sizeof(iio_dmabuf)))
++		return -EFAULT;
++
++	if (iio_dmabuf.flags & ~IIO_BUFFER_DMABUF_SUPPORTED_FLAGS)
++		return -EINVAL;
++
++	cyclic = iio_dmabuf.flags & IIO_BUFFER_DMABUF_CYCLIC;
++
++	/* Cyclic flag is only supported on output buffers */
++	if (cyclic && buffer->direction != IIO_BUFFER_DIRECTION_OUT)
++		return -EINVAL;
++
++	dmabuf = dma_buf_get(iio_dmabuf.fd);
++	if (IS_ERR(dmabuf))
++		return PTR_ERR(dmabuf);
++
++	if (!iio_dmabuf.bytes_used || iio_dmabuf.bytes_used > dmabuf->size) {
++		ret = -EINVAL;
++		goto err_dmabuf_put;
++	}
++
++	attach = iio_buffer_find_attachment(ib->indio_dev, dmabuf);
++	if (IS_ERR(attach)) {
++		ret = PTR_ERR(attach);
++		goto err_dmabuf_put;
++	}
++
++	priv = attach->importer_priv;
++
++	dma_to_ram = buffer->direction == IIO_BUFFER_DIRECTION_IN;
++	dir = dma_to_ram ? DMA_FROM_DEVICE : DMA_TO_DEVICE;
++
++	sgt = dma_buf_map_attachment(attach, dir);
++	if (IS_ERR(sgt)) {
++		ret = PTR_ERR(sgt);
++		pr_err("Unable to map attachment: %d\n", ret);
++		goto err_attachment_put;
++	}
++
++	fence = kmalloc(sizeof(*fence), GFP_KERNEL);
++	if (!fence) {
++		ret = -ENOMEM;
++		goto err_unmap_attachment;
++	}
++
++	fence->priv = priv;
++	fence->sgt = sgt;
++	fence->dir = dir;
++	priv->fence = fence;
++
++	dma_fence_init(&fence->base, &iio_buffer_dma_fence_ops,
++		       &priv->lock, priv->context, 0);
++
++	ret = iio_dma_resv_lock(dmabuf, nonblock);
++	if (ret)
++		goto err_fence_put;
++
++	timeout = nonblock ? 0 : msecs_to_jiffies(DMABUF_ENQUEUE_TIMEOUT_MS);
++
++	/* Make sure we don't have writers */
++	ret = (int) dma_resv_wait_timeout(dmabuf->resv, DMA_RESV_USAGE_WRITE,
++					  true, timeout);
++	if (ret == 0)
++		ret = -EBUSY;
++	if (ret < 0)
++		goto err_resv_unlock;
++
++	if (dma_to_ram) {
++		/*
++		 * If we're writing to the DMABUF, make sure we don't have
++		 * readers
++		 */
++		ret = (int) dma_resv_wait_timeout(dmabuf->resv,
++						  DMA_RESV_USAGE_READ, true,
++						  timeout);
++		if (ret == 0)
++			ret = -EBUSY;
++		if (ret < 0)
++			goto err_resv_unlock;
++	}
++
++	ret = dma_resv_reserve_fences(dmabuf->resv, 1);
++	if (ret)
++		goto err_resv_unlock;
++
++	dma_resv_add_fence(dmabuf->resv, &fence->base,
++			   dma_resv_usage_rw(dma_to_ram));
++	dma_resv_unlock(dmabuf->resv);
++
++	ret = buffer->access->enqueue_dmabuf(buffer, priv->block, sgt,
++					     iio_dmabuf.bytes_used, cyclic);
++	if (ret)
++		iio_buffer_signal_dmabuf_done(attach, ret);
++
++	dma_buf_put(dmabuf);
++
++	return ret;
++
++err_resv_unlock:
++	dma_resv_unlock(dmabuf->resv);
++err_fence_put:
++	dma_fence_put(&fence->base);
++err_unmap_attachment:
++	dma_buf_unmap_attachment(attach, sgt, dir);
++err_attachment_put:
++	iio_buffer_dmabuf_put(attach);
++err_dmabuf_put:
++	dma_buf_put(dmabuf);
++
++	return ret;
++}
++
++void iio_buffer_signal_dmabuf_done(struct dma_buf_attachment *attach, int ret)
++{
++	struct iio_dmabuf_priv *priv = attach->importer_priv;
++	struct iio_dma_fence *fence = priv->fence;
++	enum dma_data_direction dir = fence->dir;
++	struct sg_table *sgt = fence->sgt;
++
++	dma_fence_get(&fence->base);
++	fence->base.error = ret;
++	dma_fence_signal(&fence->base);
++	dma_fence_put(&fence->base);
++
++	dma_buf_unmap_attachment(attach, sgt, dir);
++	iio_buffer_dmabuf_put(attach);
++}
++EXPORT_SYMBOL_GPL(iio_buffer_signal_dmabuf_done);
++
++static long iio_buffer_chrdev_ioctl(struct file *filp,
++				    unsigned int cmd, unsigned long arg)
++{
++	struct iio_dev_buffer_pair *ib = filp->private_data;
++	void __user *_arg = (void __user *)arg;
++
++	switch (cmd) {
++	case IIO_BUFFER_DMABUF_ATTACH_IOCTL:
++		return iio_buffer_attach_dmabuf(ib, _arg);
++	case IIO_BUFFER_DMABUF_DETACH_IOCTL:
++		return iio_buffer_detach_dmabuf(ib, _arg);
++	case IIO_BUFFER_DMABUF_ENQUEUE_IOCTL:
++		return iio_buffer_enqueue_dmabuf(ib, _arg,
++						 filp->f_flags & O_NONBLOCK);
++	default:
++		return IIO_IOCTL_UNHANDLED;
++	}
++}
++
+ static const struct file_operations iio_buffer_chrdev_fileops = {
+ 	.owner = THIS_MODULE,
+ 	.llseek = noop_llseek,
+ 	.read = iio_buffer_read,
+ 	.write = iio_buffer_write,
++	.unlocked_ioctl = iio_buffer_chrdev_ioctl,
++	.compat_ioctl = compat_ptr_ioctl,
+ 	.poll = iio_buffer_poll,
+ 	.release = iio_buffer_chrdev_release,
+ };
+diff --git a/include/linux/iio/buffer_impl.h b/include/linux/iio/buffer_impl.h
+index 89c3fd7c29ca..a8a490091277 100644
+--- a/include/linux/iio/buffer_impl.h
++++ b/include/linux/iio/buffer_impl.h
+@@ -9,8 +9,11 @@
+ #include <uapi/linux/iio/buffer.h>
+ #include <linux/iio/buffer.h>
+ 
++struct dma_buf_attachment;
+ struct iio_dev;
++struct iio_dma_buffer_block;
+ struct iio_buffer;
++struct sg_table;
+ 
+ /**
+  * INDIO_BUFFER_FLAG_FIXED_WATERMARK - Watermark level of the buffer can not be
+@@ -39,6 +42,9 @@ struct iio_buffer;
+  *                      device stops sampling. Calles are balanced with @enable.
+  * @release:		called when the last reference to the buffer is dropped,
+  *			should free all resources allocated by the buffer.
++ * @alloc_dmabuf:	called from userspace via ioctl to allocate one DMABUF.
++ * @enqueue_dmabuf:	called from userspace via ioctl to queue this DMABUF
++ *			object to this buffer. Requires a valid DMABUF fd.
+  * @modes:		Supported operating modes by this buffer type
+  * @flags:		A bitmask combination of INDIO_BUFFER_FLAG_*
+  *
+@@ -68,6 +74,14 @@ struct iio_buffer_access_funcs {
+ 
+ 	void (*release)(struct iio_buffer *buffer);
+ 
++	struct iio_dma_buffer_block * (*attach_dmabuf)(struct iio_buffer *buffer,
++						       struct dma_buf_attachment *attach);
++	void (*detach_dmabuf)(struct iio_buffer *buffer,
++			      struct iio_dma_buffer_block *block);
++	int (*enqueue_dmabuf)(struct iio_buffer *buffer,
++			      struct iio_dma_buffer_block *block,
++			      struct sg_table *sgt, size_t size, bool cyclic);
++
+ 	unsigned int modes;
+ 	unsigned int flags;
+ };
+@@ -136,6 +150,9 @@ struct iio_buffer {
+ 
+ 	/* @ref: Reference count of the buffer. */
+ 	struct kref ref;
++
++	/* @dmabufs: List of DMABUF attachments */
++	struct list_head dmabufs;
+ };
+ 
+ /**
+@@ -156,9 +173,14 @@ int iio_update_buffers(struct iio_dev *indio_dev,
+  **/
+ void iio_buffer_init(struct iio_buffer *buffer);
+ 
++void iio_buffer_dmabuf_get(struct dma_buf_attachment *attach);
++void iio_buffer_dmabuf_put(struct dma_buf_attachment *attach);
++
+ struct iio_buffer *iio_buffer_get(struct iio_buffer *buffer);
+ void iio_buffer_put(struct iio_buffer *buffer);
+ 
++void iio_buffer_signal_dmabuf_done(struct dma_buf_attachment *attach, int ret);
++
+ #else /* CONFIG_IIO_BUFFER */
+ 
+ static inline void iio_buffer_get(struct iio_buffer *buffer) {}
+diff --git a/include/uapi/linux/iio/buffer.h b/include/uapi/linux/iio/buffer.h
+index 13939032b3f6..c666aa95e532 100644
+--- a/include/uapi/linux/iio/buffer.h
++++ b/include/uapi/linux/iio/buffer.h
+@@ -5,6 +5,28 @@
+ #ifndef _UAPI_IIO_BUFFER_H_
+ #define _UAPI_IIO_BUFFER_H_
+ 
++#include <linux/types.h>
++
++/* Flags for iio_dmabuf.flags */
++#define IIO_BUFFER_DMABUF_CYCLIC		(1 << 0)
++#define IIO_BUFFER_DMABUF_SUPPORTED_FLAGS	0x00000001
++
++/**
++ * struct iio_dmabuf - Descriptor for a single IIO DMABUF object
++ * @fd:		file descriptor of the DMABUF object
++ * @flags:	one or more IIO_BUFFER_DMABUF_* flags
++ * @bytes_used:	number of bytes used in this DMABUF for the data transfer.
++ *		Should generally be set to the DMABUF's size.
++ */
++struct iio_dmabuf {
++	__u32 fd;
++	__u32 flags;
++	__u64 bytes_used;
++};
++
+ #define IIO_BUFFER_GET_FD_IOCTL			_IOWR('i', 0x91, int)
++#define IIO_BUFFER_DMABUF_ATTACH_IOCTL		_IOW('i', 0x92, int)
++#define IIO_BUFFER_DMABUF_DETACH_IOCTL		_IOW('i', 0x93, int)
++#define IIO_BUFFER_DMABUF_ENQUEUE_IOCTL		_IOW('i', 0x94, struct iio_dmabuf)
+ 
+ #endif /* _UAPI_IIO_BUFFER_H_ */
 -- 
 2.39.2
 
