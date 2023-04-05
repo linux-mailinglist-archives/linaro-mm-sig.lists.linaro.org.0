@@ -2,54 +2,54 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DA2F6D7DE8
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 15:40:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DC2D16D7E1C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 15:53:00 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6ABD13EE30
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 13:40:33 +0000 (UTC)
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
-	by lists.linaro.org (Postfix) with ESMTPS id C7E0A3EE12
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  5 Apr 2023 13:40:22 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E4BD73F90A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 13:52:59 +0000 (UTC)
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
+	by lists.linaro.org (Postfix) with ESMTPS id 801273EE12
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  5 Apr 2023 13:52:48 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b=I5E2dILR;
-	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.208.52) smtp.mailfrom=daniel@ffwll.ch;
+	dkim=pass header.d=ffwll.ch header.s=google header.b=P+Lx3ar4;
+	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.208.46) smtp.mailfrom=daniel@ffwll.ch;
 	dmarc=none
-Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-5029d4d90fbso54153a12.0
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 05 Apr 2023 06:40:22 -0700 (PDT)
+Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-4fd1f2a0f82so56340a12.1
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 05 Apr 2023 06:52:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google; t=1680702022; x=1683294022;
+        d=ffwll.ch; s=google; t=1680702767; x=1683294767;
         h=in-reply-to:content-disposition:mime-version:references
          :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=b9JAWiy7ir3X1MkEG4eNi/e4F+J8Za1YQw6cD7xkcWQ=;
-        b=I5E2dILRk/qwr/JqR3XN+WpGsAtsDJaxeFQY1kUaSs0iN97G9an9tQIRfByNhSo3Fv
-         Ff7L1Qa6nX+1WNgzPrDJCXNhBjfKdK+ltAGeuDGEIOao3yXMv9PbqZW75aBC3kcWfhHT
-         GgTwkxsMaG6WpXcP3/tIq5SA+L5RLr7H0a6uQ=
+        bh=gXtQjGw17H5KOM9fCmdg0BPHMgZVeRXg+E6JWWNf2fI=;
+        b=P+Lx3ar4PUX0HJk98OXE7iFGrn7nhB+lYPUC8wXGiqKRy6S70N3Ng45OxWoAGkfH1s
+         bNGpklNDiWeffGTYk5+TLlWg/ifLkO87VVaScR4HmPnJwhm+ZkQqXXkQwIS1t6bm72zP
+         mSLYN71g8EKZQ6qxtP5GskYiCOT405XyL84Mg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680702022; x=1683294022;
+        d=1e100.net; s=20210112; t=1680702767; x=1683294767;
         h=in-reply-to:content-disposition:mime-version:references
          :mail-followup-to:message-id:subject:cc:to:from:date
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=b9JAWiy7ir3X1MkEG4eNi/e4F+J8Za1YQw6cD7xkcWQ=;
-        b=C8BrYzpoOL711pvITNz7QnaFkhE/qcRif/KRwiv976Syzoi95+Z0O3lpXutgd9fSTo
-         wIqAUWRW4Y6Q3+159ZESNFJCteMvGEMyKQMikfOWQEGDdLFMjhm65WUaaGXTHGSuYM9g
-         67VfEfCTVvPPS6YXmyQTsLi7akZ2SgK9xJFI+5GZRUWksKBpRXu2l2fBAMGAQThQ3p3P
-         2ZWDv0a+yiKXB2wMvMVZRtnsFs8C4Wl7JGr4FlOrI8C1clQnVx+o0iv5msj7LWF6xiRX
-         +e6KoyfQW3IKq7a9pIFGsTTfqaGf9cWva7SQB/3umXxdxCTufvBJ5Q2foELKmR3ekge7
-         BN4g==
-X-Gm-Message-State: AAQBX9eyaK1fehkIP7ff+B32vzyOaP40so1JS51YifLM0aZzYSYQSoDP
-	aURcVZjt5eZmoRom7QlqseJ7dA==
-X-Google-Smtp-Source: AKy350b3xCy9gL5DOFrdll8pOoEph0xjt04z4AL+Sh79KZNLfnPVo8bTbbVanjj+1/+QMr0G8qmUvA==
-X-Received: by 2002:a05:6402:4413:b0:502:1f7b:f0a6 with SMTP id y19-20020a056402441300b005021f7bf0a6mr2233711eda.0.1680702021702;
-        Wed, 05 Apr 2023 06:40:21 -0700 (PDT)
+        bh=gXtQjGw17H5KOM9fCmdg0BPHMgZVeRXg+E6JWWNf2fI=;
+        b=rZw8vmuNVkwzekVPSfzKjIkndyjdzhiH7GYrVj5+iNSkCvwXh2kYsdDlkZ6cscanIN
+         ZtF0ToJyN7gCH4KYTeY+VYSoxYjmAB6eYTw2qiRUjdTfK+ipOS33v00muUgB12euLYu3
+         VBQACBo74px6YhL3RQZEbeBPzgegHanwHBRIi6Id+MuXMgOnMsCyt84g3abLrMudzkSA
+         qJ/uabDq25lwTswn3BtHoeHsx1Txa/z85V1Hip8IXNYVbGhRATwfkchWIbeAqkt+DAC+
+         XpThPo+m7VkQA+roGkxqulhRu9Sny1PbiIjan3TPoiKhgNvLWz4kPGBobnYTWQvMjJAY
+         yyCA==
+X-Gm-Message-State: AAQBX9dv8/DLx8cpDGX0YZZpaXt4ewZPXdITZZ0v8x2NIR5HbnKBna1z
+	ZUU2KYN2e3FIe4iBFLqsSWHDkg==
+X-Google-Smtp-Source: AKy350YRt7QlO0W2+ZPyrVbabYLe9e11BeFrLSx/MNYzH+68ns/TWKRF8HkPS+0QYOxACPnonTzaJA==
+X-Received: by 2002:a05:6402:524e:b0:4fd:2978:d80 with SMTP id t14-20020a056402524e00b004fd29780d80mr2100686edd.1.1680702767368;
+        Wed, 05 Apr 2023 06:52:47 -0700 (PDT)
 Received: from phenom.ffwll.local (212-51-149-33.fiber7.init7.net. [212.51.149.33])
-        by smtp.gmail.com with ESMTPSA id s25-20020a50d499000000b005027dd7c403sm6937947edi.66.2023.04.05.06.40.20
+        by smtp.gmail.com with ESMTPSA id ee55-20020a056402293700b004aef147add6sm7218800edb.47.2023.04.05.06.52.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Apr 2023 06:40:21 -0700 (PDT)
-Date: Wed, 5 Apr 2023 15:40:19 +0200
+        Wed, 05 Apr 2023 06:52:46 -0700 (PDT)
+Date: Wed, 5 Apr 2023 15:52:44 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
 To: Asahi Lina <lina@asahilina.net>
-Message-ID: <ZC16Q8MhHEcutX1b@phenom.ffwll.local>
+Message-ID: <ZC19LIsNlhFC+7ME@phenom.ffwll.local>
 Mail-Followup-To: Asahi Lina <lina@asahilina.net>,
 	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
 	Maxime Ripard <mripard@kernel.org>,
@@ -73,33 +73,33 @@ Mail-Followup-To: Asahi Lina <lina@asahilina.net>,
 	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
 	linux-sgx@vger.kernel.org, asahi@lists.linux.dev
 References: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net>
- <20230307-rust-drm-v1-10-917ff5bc80a8@asahilina.net>
+ <20230307-rust-drm-v1-11-917ff5bc80a8@asahilina.net>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230307-rust-drm-v1-10-917ff5bc80a8@asahilina.net>
-X-Operating-System: Linux phenom 6.1.0-7-amd64
+In-Reply-To: <20230307-rust-drm-v1-11-917ff5bc80a8@asahilina.net>
+X-Operating-System: Linux phenom 6.1.0-7-amd64 
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: C7E0A3EE12
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.30 / 15.00];
-	DWL_DNSWL_HI(-3.50)[ffwll.ch:dkim];
+X-Rspamd-Queue-Id: 801273EE12
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.80 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
 	NEURAL_HAM(-0.00)[-1.000];
 	R_SPF_NA(0.00)[no SPF record];
-	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,protonmail.com,linaro.org,amd.com,rosenzweig.io,redhat.com,iglunix.org,collabora.com,mary.zone,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
 	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,protonmail.com,linaro.org,amd.com,rosenzweig.io,redhat.com,iglunix.org,collabora.com,mary.zone,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
 	RCPT_COUNT_TWELVE(0.00)[29];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[ffwll.ch:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[209.85.208.46:from];
 	DMARC_NA(0.00)[ffwll.ch];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.52:from];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.46:from];
 	ARC_NA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
@@ -107,8 +107,8 @@ X-Spamd-Result: default: False [-5.30 / 15.00];
 	TO_DN_SOME(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	RCVD_COUNT_TWO(0.00)[2]
-Message-ID-Hash: 5DTLE65XKNCBZXSNMVBXNROIBFENR5YV
-X-Message-ID-Hash: 5DTLE65XKNCBZXSNMVBXNROIBFENR5YV
+Message-ID-Hash: ODVUSKVNNTK54U74OAOA2B56QBSLURFC
+X-Message-ID-Hash: ODVUSKVNNTK54U74OAOA2B56QBSLURFC
 X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -116,9 +116,9 @@ CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripar
  i@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 10/18] drm/scheduler: Add can_run_job callback
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 11/18] drm/scheduler: Clean up jobs when the scheduler is torn down
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5DTLE65XKNCBZXSNMVBXNROIBFENR5YV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ODVUSKVNNTK54U74OAOA2B56QBSLURFC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -128,99 +128,102 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 07, 2023 at 11:25:35PM +0900, Asahi Lina wrote:
-> Some hardware may require more complex resource utilization accounting
-> than the simple job count supported by drm_sched internally. Add a
-> can_run_job callback to allow drivers to implement more logic before
-> deciding whether to run a GPU job.
+On Tue, Mar 07, 2023 at 11:25:36PM +0900, Asahi Lina wrote:
+> drm_sched_fini() currently leaves any pending jobs dangling, which
+> causes segfaults and other badness when job completion fences are
+> signaled after the scheduler is torn down.
+> 
+> Explicitly detach all jobs from their completion callbacks and free
+> them. This makes it possible to write a sensible safe abstraction for
+> drm_sched, without having to externally duplicate the tracking of
+> in-flight jobs.
+> 
+> This shouldn't regress any existing drivers, since calling
+> drm_sched_fini() with any pending jobs is broken and this change should
+> be a no-op if there are no pending jobs.
 > 
 > Signed-off-by: Asahi Lina <lina@asahilina.net>
-
-Ok scheduler rules, or trying to summarize the entire discussion:
-
-dma_fence rules are very tricky. The two main chapters in the docs are
-
-https://dri.freedesktop.org/docs/drm/driver-api/dma-buf.html?highlight=dma_buf#dma-fence-cross-driver-contract
-https://dri.freedesktop.org/docs/drm/driver-api/dma-buf.html?highlight=dma_buf#indefinite-dma-fences
-
-Unforutunately I don't think it's possible to check this at compile time,
-thus far all we can do is validate at runtime. I've posted two patches for
-this:
-
-https://lore.kernel.org/dri-devel/20201023122216.2373294-17-daniel.vetter@ffwll.ch/
-https://lore.kernel.org/dri-devel/20201023122216.2373294-20-daniel.vetter@ffwll.ch/
-
-Unfortunately most drivers are buggy and get this completely wrong, so
-realistically we'd need to make this a per-driver opt-out and annotate all
-current drivers. Well except amdgpu is correct by now I think (they'd
-still need to test that). And Rob Clark is working on patches to fix up
-msm.
-
-I think best here is if you work together with Rob to make sure these
-annotations are mandatory for any rust drivers (I don't want new buggy
-drivers at least). Would also be great to improve the kerneldoc for all
-the driver hooks to explain these restrictions and link to the relevant
-kerneldocs (there's also one for the dma_fence signalling annotations
-which might be worth linking too).
-
-I don't see any way to make this explicit in rust types, it's really only
-something runtime tests (using lockdep) can catch. Somewhat disappointing.
-
-For the other things discussed here:
-
-- Option<Dma_Fence> as the return value for ->prepare_job makes sense to
-  me.
-
-- I don't see any way a driver can use ->can_run_job without breaking the
-  above rules, that really doesn't sound like a good idea to me.
-
-Cheers, Daniel
-
 > ---
->  drivers/gpu/drm/scheduler/sched_main.c | 10 ++++++++++
->  include/drm/gpu_scheduler.h            |  8 ++++++++
->  2 files changed, 18 insertions(+)
+>  drivers/gpu/drm/scheduler/sched_main.c | 27 +++++++++++++++++++++++++--
+>  1 file changed, 25 insertions(+), 2 deletions(-)
 > 
 > diff --git a/drivers/gpu/drm/scheduler/sched_main.c b/drivers/gpu/drm/scheduler/sched_main.c
-> index 4e6ad6e122bc..5c0add2c7546 100644
+> index 5c0add2c7546..0aab1e0aebdd 100644
 > --- a/drivers/gpu/drm/scheduler/sched_main.c
 > +++ b/drivers/gpu/drm/scheduler/sched_main.c
-> @@ -1001,6 +1001,16 @@ static int drm_sched_main(void *param)
->  		if (!entity)
->  			continue;
+> @@ -1119,10 +1119,33 @@ EXPORT_SYMBOL(drm_sched_init);
+>  void drm_sched_fini(struct drm_gpu_scheduler *sched)
+>  {
+>  	struct drm_sched_entity *s_entity;
+> +	struct drm_sched_job *s_job, *tmp;
+>  	int i;
 >  
-> +		if (sched->ops->can_run_job) {
-> +			sched_job = to_drm_sched_job(spsc_queue_peek(&entity->job_queue));
-> +			if (!sched_job) {
-> +				complete_all(&entity->entity_idle);
-> +				continue;
-> +			}
-> +			if (!sched->ops->can_run_job(sched_job))
-> +				continue;
-> +		}
+> -	if (sched->thread)
+> -		kthread_stop(sched->thread);
+> +	if (!sched->thread)
+> +		return;
 > +
->  		sched_job = drm_sched_entity_pop_job(entity);
->  
->  		if (!sched_job) {
-> diff --git a/include/drm/gpu_scheduler.h b/include/drm/gpu_scheduler.h
-> index 9db9e5e504ee..bd89ea9507b9 100644
-> --- a/include/drm/gpu_scheduler.h
-> +++ b/include/drm/gpu_scheduler.h
-> @@ -396,6 +396,14 @@ struct drm_sched_backend_ops {
->  	struct dma_fence *(*prepare_job)(struct drm_sched_job *sched_job,
->  					 struct drm_sched_entity *s_entity);
->  
-> +	/**
-> +	 * @can_run_job: Called before job execution to check whether the
-> +	 * hardware is free enough to run the job.  This can be used to
-> +	 * implement more complex hardware resource policies than the
-> +	 * hw_submission limit.
+> +	/*
+> +	 * Stop the scheduler, detaching all jobs from their hardware callbacks
+> +	 * and cleaning up complete jobs.
 > +	 */
-> +	bool (*can_run_job)(struct drm_sched_job *sched_job);
+> +	drm_sched_stop(sched, NULL);
 > +
->  	/**
->           * @run_job: Called to execute the job once all of the dependencies
->           * have been resolved.  This may be called multiple times, if
+> +	/*
+> +	 * Iterate through the pending job list and free all jobs.
+> +	 * This assumes the driver has either guaranteed jobs are already stopped, or that
+> +	 * otherwise it is responsible for keeping any necessary data structures for
+> +	 * in-progress jobs alive even when the free_job() callback is called early (e.g. by
+> +	 * putting them in its own queue or doing its own refcounting).
+> +	 */
+
+This comment makes me wonder whether we shouldn't go one step further and
+have a drm_sched_quiescent, which waits for any in-flight jobs to complete
+and cancels everything else. Because even if rust guarantees that you
+don't have any memory bugs, if you just leak things by sprinkling
+reference-counted pointer wrappers everywhere you still have a semantic
+bug.
+
+Except now it's much harder to realize that because there's no Oops and
+KASAN doesn't tell you about it either. I think it would be much better if
+the scheduler code and rust abstraction provider drivers the correct
+lifetimes and very strongly encourage them to only have borrowed
+references and not additional refcounting of their own.
+
+I think Christian mentioned that this would block in close() or context
+destruction, which is no good at all. And with the 1:1
+drm_scheduler:drm_sched_entity design for there's no other place. This is
+way I've suggested in the Xe threads that we should make the current
+drm_scheduler an implementation detail hidden from drivers, with a new
+drm_scheduler which is always per-engine for all cases as the driver api
+interface.  And the internal scheduler attached to either that (for
+current drivers) or drm_sched_entity (for fw scheduling drivers) as
+needed. With that
+- the sched_entity cleanup could take care of this code here for the fw
+  scheduler case
+- the drm_sched_fini could take care of blocking appropriately before the
+  driver is unloaded for any lagging in-flight jobs, without blocking
+  userspace
+- drivers should not end up with any need to reference-count either
+  per-ctx/drm_sched_entity or per-drm_sched_job data, ever
+
+Because any comment that's along the lines of "drivers need to refcount"
+is bad business, because it either means leaks (rust) or crashes (C). I
+much prefer when drivers have to put in extra effort to get things wrong
+because by default the lifetimes are Just Right(tm).
+-Daniel
+
+> +	list_for_each_entry_safe(s_job, tmp, &sched->pending_list, list) {
+> +		spin_lock(&sched->job_list_lock);
+> +		list_del_init(&s_job->list);
+> +		spin_unlock(&sched->job_list_lock);
+> +		sched->ops->free_job(s_job);
+> +	}
+> +
+> +	kthread_stop(sched->thread);
+>  
+>  	for (i = DRM_SCHED_PRIORITY_COUNT - 1; i >= DRM_SCHED_PRIORITY_MIN; i--) {
+>  		struct drm_sched_rq *rq = &sched->sched_rq[i];
 > 
 > -- 
 > 2.35.1
