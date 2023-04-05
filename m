@@ -2,632 +2,396 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6A69A6D8248
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 17:43:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A9A76D83E8
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 18:40:39 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 766F63F584
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 15:43:18 +0000 (UTC)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
-	by lists.linaro.org (Postfix) with ESMTPS id C03D03F580
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  5 Apr 2023 15:43:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9D0E83EA3E
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 16:40:38 +0000 (UTC)
+Received: from 189.cn (ptr.189.cn [183.61.185.101])
+	by lists.linaro.org (Postfix) with ESMTP id 2A67B3EA3E
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  5 Apr 2023 16:40:24 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b=d6ElVG1P;
-	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.218.41) smtp.mailfrom=daniel@ffwll.ch;
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of 15330273260@189.cn designates 183.61.185.101 as permitted sender) smtp.mailfrom=15330273260@189.cn;
 	dmarc=none
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-947a47eb908so56698366b.0
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 05 Apr 2023 08:43:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google; t=1680709385;
-        h=in-reply-to:content-disposition:mime-version:references
-         :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=evQ2yt2QmFRI6ww4FTLAtNNICgBtWk0wPp/MFca+oo4=;
-        b=d6ElVG1P0SdrkQdNgcvG2N6daZAsB0SEIM1nYmVJD3/ZgWqd8eO+UDha65uvLpKDx3
-         //DYLSgCcndYT+S5nitB9hdezoBhSPy2v2ugdYCDFrFd60xSVys0uUXJYD4hiFpRSuFB
-         U2hv8yP6KSohzY8Si6LKNgrnv2/Olld1kNvck=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680709385;
-        h=in-reply-to:content-disposition:mime-version:references
-         :mail-followup-to:message-id:subject:cc:to:from:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=evQ2yt2QmFRI6ww4FTLAtNNICgBtWk0wPp/MFca+oo4=;
-        b=RgwBY02ILNuBRjhHz+tPj+P+4pZYR8yasqBV5eFtcu5pH4aa7YtBNOHvutGljsSFHC
-         7XbCSF38aa0HllRNaHnpT+tQ37qkMCjQmKnYdkw0u+2h68i+x6zgfVl+4EYgFvffIicl
-         wxcV3teVdfOrxOv5XVY7q0aueMDJKnlIIZoHJAiKd27Gd3PGRR9SAgyvJtsPe81QucSR
-         iiDnEUTaToHsQRnl8nSq8F+CZFJsdf/eejnGZ5ZgoPoQ1YHhtZPHfBjnnkaUhfFdphoL
-         jJ6k9hvul8PkLHK5G4Pp37dbFSya3T0twB/GQbxD/+OSiTS3xA+ItA+vEGtqTFbs+o3L
-         HYug==
-X-Gm-Message-State: AAQBX9cvkDBwsXTFoFPgJt+KD3CRkcIuvPD8WusjQFCHN83l0TO12bNJ
-	j6uL3gUnAO4oHP0eP3lkLBl0Kw==
-X-Google-Smtp-Source: AKy350YDEEUMqgbUE9rf7HmvKkCImjgAbHnXINZlBloS8ybCPK8XeweKhbseZPLcMMxRyaxh6iFQxw==
-X-Received: by 2002:a17:906:13:b0:8f0:ba09:4abe with SMTP id 19-20020a170906001300b008f0ba094abemr3333657eja.2.1680709384604;
-        Wed, 05 Apr 2023 08:43:04 -0700 (PDT)
-Received: from phenom.ffwll.local (212-51-149-33.fiber7.init7.net. [212.51.149.33])
-        by smtp.gmail.com with ESMTPSA id z9-20020a17090665c900b0093fa8c2e877sm7432869ejn.80.2023.04.05.08.43.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Apr 2023 08:43:03 -0700 (PDT)
-Date: Wed, 5 Apr 2023 17:43:01 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Asahi Lina <lina@asahilina.net>
-Message-ID: <ZC2XBfJGAdNMQjpZ@phenom.ffwll.local>
-Mail-Followup-To: Asahi Lina <lina@asahilina.net>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Miguel Ojeda <ojeda@kernel.org>,
-	Alex Gaynor <alex.gaynor@gmail.com>,
-	Wedson Almeida Filho <wedsonaf@gmail.com>,
-	Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
-	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	Luben Tuikov <luben.tuikov@amd.com>,
-	Jarkko Sakkinen <jarkko@kernel.org>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Alyssa Rosenzweig <alyssa@rosenzweig.io>,
-	Karol Herbst <kherbst@redhat.com>,
-	Ella Stanforth <ella@iglunix.org>,
-	Faith Ekstrand <faith.ekstrand@collabora.com>,
-	Mary <mary@mary.zone>, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
-	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
-	linux-sgx@vger.kernel.org, asahi@lists.linux.dev
-References: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net>
- <20230307-rust-drm-v1-12-917ff5bc80a8@asahilina.net>
+HMM_SOURCE_IP: 10.64.8.43:49358.1442670072
+HMM_ATTACHE_NUM: 0000
+HMM_SOURCE_TYPE: SMTP
+Received: from clientip-114.242.206.180 (unknown [10.64.8.43])
+	by 189.cn (HERMES) with SMTP id ACFAB100212;
+	Thu,  6 Apr 2023 00:40:17 +0800 (CST)
+Received: from  ([114.242.206.180])
+	by gateway-151646-dep-7b48884fd-tj646 with ESMTP id df0d463a81a442a0b10347c0bc8a8624 for emil.l.velikov@gmail.com;
+	Thu, 06 Apr 2023 00:40:20 CST
+X-Transaction-ID: df0d463a81a442a0b10347c0bc8a8624
+X-Real-From: 15330273260@189.cn
+X-Receive-IP: 114.242.206.180
+X-MEDUSA-Status: 0
+Sender: 15330273260@189.cn
+Message-ID: <ad715c40-70de-0fa8-37e9-2d80ee0ebe36@189.cn>
+Date: Thu, 6 Apr 2023 00:40:17 +0800
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230307-rust-drm-v1-12-917ff5bc80a8@asahilina.net>
-X-Operating-System: Linux phenom 6.1.0-7-amd64 
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Content-Language: en-US
+To: Emil Velikov <emil.l.velikov@gmail.com>
+References: <20230403171304.2157326-1-suijingfeng@loongson.cn>
+ <20230403171304.2157326-3-suijingfeng@loongson.cn>
+ <CACvgo53h+X26wngVmxpn3oVb9kbJezTHx61p3rZDR7sw1AQrWQ@mail.gmail.com>
+From: Sui Jingfeng <15330273260@189.cn>
+In-Reply-To: <CACvgo53h+X26wngVmxpn3oVb9kbJezTHx61p3rZDR7sw1AQrWQ@mail.gmail.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: C03D03F580
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.40 / 15.00];
-	DWL_DNSWL_HI(-3.50)[ffwll.ch:dkim];
+X-Rspamd-Queue-Id: 2A67B3EA3E
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.70 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
+	RCVD_IN_DNSWL_HI(-1.00)[183.61.185.101:from,114.242.206.180:received];
+	R_SPF_ALLOW(-0.20)[+ip4:183.61.185.0/24];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.41:from];
-	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,protonmail.com,linaro.org,amd.com,rosenzweig.io,redhat.com,iglunix.org,collabora.com,mary.zone,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
-	RCVD_TLS_LAST(0.00)[];
-	R_SPF_NA(0.00)[no SPF record];
-	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[29];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[ffwll.ch:+];
-	TO_DN_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_NO_TLS_LAST(0.10)[];
 	TAGGED_RCPT(0.00)[];
-	DMARC_NA(0.00)[ffwll.ch];
+	DMARC_NA(0.00)[189.cn];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[loongson.cn:email,189.cn:helo];
+	NEURAL_HAM(-0.00)[-0.989];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.linaro.org,loongson.cn,vger.kernel.org,lists.freedesktop.org];
+	URIBL_BLOCKED(0.00)[ptr.189.cn:rdns,189.cn:helo];
+	TO_DN_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	FREEMAIL_FROM(0.00)[189.cn];
+	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_ENVFROM(0.00)[189.cn];
+	R_DKIM_NA(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:4134, ipnet:183.0.0.0/10, country:CN];
 	RCVD_COUNT_TWO(0.00)[2]
-Message-ID-Hash: C2HUBCKWIND5UD6K5QUJXEX4H6YMNLQZ
-X-Message-ID-Hash: C2HUBCKWIND5UD6K5QUJXEX4H6YMNLQZ
-X-MailFrom: daniel@ffwll.ch
+Message-ID-Hash: RMZMEQQANOAO6BZOCO2OOZNVWLJZEHWE
+X-Message-ID-Hash: RMZMEQQANOAO6BZOCO2OOZNVWLJZEHWE
+X-MailFrom: 15330273260@189.cn
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, Wedson Almeida Filho <wedsonaf@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Luben Tuikov <luben.tuikov@amd.com>, Jarkko Sakkinen <jarkko@kernel.org>, Dave Hansen <dave.hansen@linux.intel.com>, Alyssa Rosenzweig <alyssa@rosenzweig.io>, Karol Herbst <kherbst@redhat.com>, Ella Stanforth <ella@iglunix.org>, Faith Ekstrand <faith.ekstrand@collabora.com>, Mary <mary@mary.zone>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-sgx@vger.kernel.org, asah
- i@lists.linux.dev
+CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian Koenig <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org, Li Yi <liyi@loongson.cn>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, nathan@kernel.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 12/18] rust: drm: sched: Add GPU scheduler abstraction
+Subject: [Linaro-mm-sig] Re: [PATCH v10 2/2] drm: add kms driver for loongson display controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/C2HUBCKWIND5UD6K5QUJXEX4H6YMNLQZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RMZMEQQANOAO6BZOCO2OOZNVWLJZEHWE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 07, 2023 at 11:25:37PM +0900, Asahi Lina wrote:
-> The GPU scheduler manages scheduling GPU jobs and dependencies between
-> them. This Rust abstraction allows Rust DRM drivers to use this
-> functionality.
-> 
-> Signed-off-by: Asahi Lina <lina@asahilina.net>
+Hi,
 
-Overall (with my limited rust knowledge) I really like this, it nicely
-encodes the state transitions of jobs and anything else I looked into.
-Some thoughts/questions below.
+On 2023/4/4 22:10, Emil Velikov wrote:
+> Greetings Sui Jingfeng,
+>
+> I haven't been around drm-land for a while and this is the first
+> driver I skim through in a few years. So take the following
+> suggestions with a healthy pinch of salt.
+>
+> Hope that helps o/
+Emil, we love your reviews,
+> On Mon, 3 Apr 2023 at 18:13, Sui Jingfeng <suijingfeng@loongson.cn> wrote:
+>
+>>    v7 -> v8:
+>>     1) Zero a compile warnnings on 32-bit platform, compile with W=1
+>>     2) Revise lsdc_bo_gpu_offset() and minor cleanup
+>>     3) Pageflip tested on the virtual terminal with following commands
+>>
+>>        modetest -M loongson -s 32:1920x1080 -v
+>>        modetest -M loongson -s 34:1920x1080 -v -F tiles
+>>
+> I could be wrong, but my understanding is that new drivers should be
+> capable of running under Xorg and/or Wayland compositor. There is also
+> the IGT test suite, which can help verify and validate the driver's
+> behaviour:
+>
+> https://www.kernel.org/doc/html/latest/gpu/drm-uapi.html
+>
+Yet it may take more time to give full answer for all of your concerns.
 
-> ---
->  drivers/gpu/drm/Kconfig         |   5 +
->  rust/bindings/bindings_helper.h |   1 +
->  rust/helpers.c                  |   6 +
->  rust/kernel/drm/mod.rs          |   2 +
->  rust/kernel/drm/sched.rs        | 358 ++++++++++++++++++++++++++++++++++++++++
->  5 files changed, 372 insertions(+)
-> 
-> diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
-> index 70a983a17ac2..8b5ad6aee126 100644
-> --- a/drivers/gpu/drm/Kconfig
-> +++ b/drivers/gpu/drm/Kconfig
-> @@ -39,6 +39,11 @@ config RUST_DRM_GEM_SHMEM_HELPER
->  	depends on RUST_DRM
->  	select DRM_GEM_SHMEM_HELPER
->  
-> +config RUST_DRM_SCHED
-> +	bool
-> +	depends on RUST_DRM
-> +	select DRM_SCHED
-> +
->  config DRM_MIPI_DBI
->  	tristate
->  	depends on DRM
-> diff --git a/rust/bindings/bindings_helper.h b/rust/bindings/bindings_helper.h
-> index b6696011f3a4..dc01be08676e 100644
-> --- a/rust/bindings/bindings_helper.h
-> +++ b/rust/bindings/bindings_helper.h
-> @@ -13,6 +13,7 @@
->  #include <drm/drm_gem_shmem_helper.h>
->  #include <drm/drm_ioctl.h>
->  #include <drm/drm_syncobj.h>
-> +#include <drm/gpu_scheduler.h>
->  #include <linux/delay.h>
->  #include <linux/device.h>
->  #include <linux/dma-fence.h>
-> diff --git a/rust/helpers.c b/rust/helpers.c
-> index 11965b1e2f4e..1b33ed602090 100644
-> --- a/rust/helpers.c
-> +++ b/rust/helpers.c
-> @@ -408,6 +408,12 @@ void rust_helper___spin_lock_init(spinlock_t *lock, const char *name,
->  }
->  EXPORT_SYMBOL_GPL(rust_helper___spin_lock_init);
->  
-> +unsigned long rust_helper_msecs_to_jiffies(const unsigned int m)
-> +{
-> +	return msecs_to_jiffies(m);
-> +}
-> +EXPORT_SYMBOL_GPL(rust_helper_msecs_to_jiffies);
-> +
->  #ifdef CONFIG_DMA_SHARED_BUFFER
->  
->  void rust_helper_dma_fence_get(struct dma_fence *fence)
-> diff --git a/rust/kernel/drm/mod.rs b/rust/kernel/drm/mod.rs
-> index dae98826edfd..3ddf7712aab3 100644
-> --- a/rust/kernel/drm/mod.rs
-> +++ b/rust/kernel/drm/mod.rs
-> @@ -8,4 +8,6 @@ pub mod file;
->  pub mod gem;
->  pub mod ioctl;
->  pub mod mm;
-> +#[cfg(CONFIG_RUST_DRM_SCHED)]
-> +pub mod sched;
->  pub mod syncobj;
-> diff --git a/rust/kernel/drm/sched.rs b/rust/kernel/drm/sched.rs
-> new file mode 100644
-> index 000000000000..a5275cc16179
-> --- /dev/null
-> +++ b/rust/kernel/drm/sched.rs
-> @@ -0,0 +1,358 @@
-> +// SPDX-License-Identifier: GPL-2.0 OR MIT
-> +
-> +//! DRM Scheduler
-> +//!
-> +//! C header: [`include/linux/drm/gpu_scheduler.h`](../../../../include/linux/drm/gpu_scheduler.h)
-> +
-> +use crate::{
-> +    bindings, device,
-> +    dma_fence::*,
-> +    error::{to_result, Result},
-> +    prelude::*,
-> +    sync::{Arc, UniqueArc},
-> +};
-> +use alloc::boxed::Box;
-> +use core::marker::PhantomData;
-> +use core::mem::MaybeUninit;
-> +use core::ops::{Deref, DerefMut};
-> +use core::ptr::addr_of_mut;
-> +
-> +/// Scheduler status after timeout recovery
-> +#[repr(u32)]
-> +pub enum Status {
-> +    /// Device recovered from the timeout and can execute jobs again
-> +    Nominal = bindings::drm_gpu_sched_stat_DRM_GPU_SCHED_STAT_NOMINAL,
-> +    /// Device is no longer available
-> +    NoDevice = bindings::drm_gpu_sched_stat_DRM_GPU_SCHED_STAT_ENODEV,
-> +}
-> +
-> +/// Scheduler priorities
-> +#[repr(i32)]
-> +pub enum Priority {
-> +    /// Low userspace priority
-> +    Min = bindings::drm_sched_priority_DRM_SCHED_PRIORITY_MIN,
-> +    /// Normal userspace priority
-> +    Normal = bindings::drm_sched_priority_DRM_SCHED_PRIORITY_NORMAL,
-> +    /// High userspace priority
-> +    High = bindings::drm_sched_priority_DRM_SCHED_PRIORITY_HIGH,
-> +    /// Kernel priority (highest)
-> +    Kernel = bindings::drm_sched_priority_DRM_SCHED_PRIORITY_KERNEL,
-> +}
-> +
-> +/// Trait to be implemented by driver job objects.
-> +pub trait JobImpl: Sized {
-> +    /// Called when the scheduler is considering scheduling this job next, to get another Fence
-> +    /// for this job to block on. Once it returns None, run() may be called.
-> +    fn prepare(_job: &mut Job<Self>) -> Option<Fence> {
+Currently, drm/loongson driver do works under Xorg(X server),
 
-So if I get this all right then Job<T> allows us to nicely parametrize the
-job with the driver structure itself, but not really anything else. I do
-wonder whether this needs a bit more with a type both for the job and
-entity and the drm/sched code + rust wrapper guaranteeing that the
-lifetimes of these make sense. With just the job parametrized drivers need
-to make sure they refcount anything else hanging of that properly which
-means if they get some detail wrong there might be an unintentional leak.
+link[1] is a short video which can prove that the driver actually works 
+very well.
 
-If we instead also give a parametrized entity where the driver can stuff
-anything necessary and sched code guarantees that it'll clean up the any
-mess on teardown and guarantee that the entity survives, I think a lot of
-drivers could benefit from that and it would be easier for them to have
-the right lifetimes for everything and no leaks.
+Note that it use the generic modesetting driver on userspace.
+
+We could provide more videos if necessary.
 
 
-> +        None // Equivalent to NULL function pointer
-> +    }
-> +
-> +    /// Called before job execution to check whether the hardware is free enough to run the job.
-> +    /// This can be used to implement more complex hardware resource policies than the hw_submission
-> +    /// limit.
-> +    fn can_run(_job: &mut Job<Self>) -> bool {
-> +        true
-> +    }
-> +
-> +    /// Called to execute the job once all of the dependencies have been resolved. This may be
-> +    /// called multiple times, if timed_out() has happened and drm_sched_job_recovery() decides
-> +    /// to try it again.
-> +    fn run(job: &mut Job<Self>) -> Result<Option<Fence>>;
-> +
-> +    /// Called when a job has taken too long to execute, to trigger GPU recovery.
-> +    ///
-> +    /// This method is called in a workqueue context.
-> +    fn timed_out(job: &mut Job<Self>) -> Status;
-> +}
-> +
-> +unsafe extern "C" fn prepare_job_cb<T: JobImpl>(
-> +    sched_job: *mut bindings::drm_sched_job,
-> +    _s_entity: *mut bindings::drm_sched_entity,
-> +) -> *mut bindings::dma_fence {
-> +    // SAFETY: All of our jobs are Job<T>.
-> +    let p = crate::container_of!(sched_job, Job<T>, job) as *mut Job<T>;
-> +
-> +    match T::prepare(unsafe { &mut *p }) {
-> +        None => core::ptr::null_mut(),
-> +        Some(fence) => fence.into_raw(),
-> +    }
-> +}
-> +
-> +unsafe extern "C" fn run_job_cb<T: JobImpl>(
-> +    sched_job: *mut bindings::drm_sched_job,
-> +) -> *mut bindings::dma_fence {
-> +    // SAFETY: All of our jobs are Job<T>.
-> +    let p = crate::container_of!(sched_job, Job<T>, job) as *mut Job<T>;
-> +
-> +    match T::run(unsafe { &mut *p }) {
-> +        Err(e) => e.to_ptr(),
-> +        Ok(None) => core::ptr::null_mut(),
-> +        Ok(Some(fence)) => fence.into_raw(),
-> +    }
-> +}
-> +
-> +unsafe extern "C" fn can_run_job_cb<T: JobImpl>(sched_job: *mut bindings::drm_sched_job) -> bool {
-> +    // SAFETY: All of our jobs are Job<T>.
-> +    let p = crate::container_of!(sched_job, Job<T>, job) as *mut Job<T>;
-> +
-> +    T::can_run(unsafe { &mut *p })
-> +}
-> +
-> +unsafe extern "C" fn timedout_job_cb<T: JobImpl>(
-> +    sched_job: *mut bindings::drm_sched_job,
-> +) -> bindings::drm_gpu_sched_stat {
-> +    // SAFETY: All of our jobs are Job<T>.
-> +    let p = crate::container_of!(sched_job, Job<T>, job) as *mut Job<T>;
-> +
-> +    T::timed_out(unsafe { &mut *p }) as bindings::drm_gpu_sched_stat
-> +}
-> +
-> +unsafe extern "C" fn free_job_cb<T: JobImpl>(sched_job: *mut bindings::drm_sched_job) {
-> +    // SAFETY: All of our jobs are Job<T>.
-> +    let p = crate::container_of!(sched_job, Job<T>, job) as *mut Job<T>;
-> +
-> +    // Convert the job back to a Box and drop it
-> +    // SAFETY: All of our Job<T>s are created inside a box.
-> +    unsafe { Box::from_raw(p) };
-> +}
-> +
-> +/// A DRM scheduler job.
-> +pub struct Job<T: JobImpl> {
-> +    job: bindings::drm_sched_job,
-> +    inner: T,
-> +}
-> +
-> +impl<T: JobImpl> Deref for Job<T> {
-> +    type Target = T;
-> +
-> +    fn deref(&self) -> &Self::Target {
-> +        &self.inner
-> +    }
-> +}
-> +
-> +impl<T: JobImpl> DerefMut for Job<T> {
-> +    fn deref_mut(&mut self) -> &mut Self::Target {
-> +        &mut self.inner
-> +    }
-> +}
-> +
-> +impl<T: JobImpl> Drop for Job<T> {
-> +    fn drop(&mut self) {
-> +        // SAFETY: At this point the job has either been submitted and this is being called from
-> +        // `free_job_cb` above, or it hasn't and it is safe to call `drm_sched_job_cleanup`.
-> +        unsafe { bindings::drm_sched_job_cleanup(&mut self.job) };
-> +    }
-> +}
-> +
-> +/// A pending DRM scheduler job (not yet armed)
-> +pub struct PendingJob<'a, T: JobImpl>(Box<Job<T>>, PhantomData<&'a T>);
-> +
-> +impl<'a, T: JobImpl> PendingJob<'a, T> {
-> +    /// Add a fence as a dependency to the job
-> +    pub fn add_dependency(&mut self, fence: Fence) -> Result {
-> +        to_result(unsafe {
-> +            bindings::drm_sched_job_add_dependency(&mut self.0.job, fence.into_raw())
-> +        })
-> +    }
-> +
-> +    /// Arm the job to make it ready for execution
-> +    pub fn arm(mut self) -> ArmedJob<'a, T> {
-> +        unsafe { bindings::drm_sched_job_arm(&mut self.0.job) };
-> +        ArmedJob(self.0, PhantomData)
-> +    }
-> +}
-> +
-> +impl<'a, T: JobImpl> Deref for PendingJob<'a, T> {
-> +    type Target = Job<T>;
-> +
-> +    fn deref(&self) -> &Self::Target {
-> +        &self.0
-> +    }
-> +}
-> +
-> +impl<'a, T: JobImpl> DerefMut for PendingJob<'a, T> {
-> +    fn deref_mut(&mut self) -> &mut Self::Target {
-> +        &mut self.0
-> +    }
-> +}
-> +
-> +/// An armed DRM scheduler job (not yet submitted)
-> +pub struct ArmedJob<'a, T: JobImpl>(Box<Job<T>>, PhantomData<&'a T>);
-> +
-> +impl<'a, T: JobImpl> ArmedJob<'a, T> {
-> +    /// Returns the job fences
-> +    pub fn fences(&self) -> JobFences<'_> {
-> +        JobFences(unsafe { &mut *self.0.job.s_fence })
-> +    }
-> +
-> +    /// Push the job for execution into the scheduler
-> +    pub fn push(self) {
-> +        // After this point, the job is submitted and owned by the scheduler
-> +        let ptr = match self {
-> +            ArmedJob(job, _) => Box::<Job<T>>::into_raw(job),
-> +        };
+We are carry on the IGT test suite, we feedback the test result once it 
+finished on our platform.
 
-If I get this all right then this all makes sure that drivers can't use
-the job after push and they don't forgot to call arm.
+I'm not familiar with it before, previously we only focus on the basic 
+unit tests came with libdrm.
 
-What I'm not seeing is how we force drivers to call push once they've
-called arm? I haven't check what the code does, but from the docs it
-sounds like if you don't call push then drop will get called. Which wreaks
-the book-keeping on an armed job. Or is there someting that prevents
-ArmedJob<T> from having the Drop trait and so the only way to not go boom
-is by pushing it?
 
-Googling for "rust undroppable" seems to indicate that this isn't a thing
-rust can do?
+I will answer rest questions in a latter time, please wait a moment.
 
-> +
-> +        // SAFETY: We are passing in ownership of a valid Box raw pointer.
-> +        unsafe { bindings::drm_sched_entity_push_job(addr_of_mut!((*ptr).job)) };
-> +    }
-> +}
-> +impl<'a, T: JobImpl> Deref for ArmedJob<'a, T> {
-> +    type Target = Job<T>;
-> +
-> +    fn deref(&self) -> &Self::Target {
-> +        &self.0
-> +    }
-> +}
-> +
-> +impl<'a, T: JobImpl> DerefMut for ArmedJob<'a, T> {
-> +    fn deref_mut(&mut self) -> &mut Self::Target {
-> +        &mut self.0
-> +    }
-> +}
-> +
-> +/// Reference to the bundle of fences attached to a DRM scheduler job
-> +pub struct JobFences<'a>(&'a mut bindings::drm_sched_fence);
-> +
-> +impl<'a> JobFences<'a> {
-> +    /// Returns a new reference to the job scheduled fence.
-> +    pub fn scheduled(&mut self) -> Fence {
-> +        unsafe { Fence::get_raw(&mut self.0.scheduled) }
-
-This feels a bit murky, because the safety of this relies on the safety of
-the ArmedJob and the guarantee (promise?) that the driver will push it.
-I'd just have two functions scheduled_fence and finished_fence in the
-ArmedJob impl and one safety note explaining why we can wrap it in the
-refcounted Fence.
-
-> +    }
-> +
-> +    /// Returns a new reference to the job finished fence.
-> +    pub fn finished(&mut self) -> Fence {
-> +        unsafe { Fence::get_raw(&mut self.0.finished) }
-> +    }
-> +}
-> +
-> +struct EntityInner<T: JobImpl> {
-> +    entity: bindings::drm_sched_entity,
-> +    // TODO: Allow users to share guilty flag between entities
-> +    sched: Arc<SchedulerInner<T>>,
-> +    guilty: bindings::atomic_t,
-> +    _p: PhantomData<T>,
-> +}
-> +
-> +impl<T: JobImpl> Drop for EntityInner<T> {
-> +    fn drop(&mut self) {
-> +        // SAFETY: The EntityInner is initialized. This will cancel/free all jobs.
-> +        unsafe { bindings::drm_sched_entity_destroy(&mut self.entity) };
-> +    }
-> +}
-> +
-> +// SAFETY: TODO
-> +unsafe impl<T: JobImpl> Sync for EntityInner<T> {}
-> +unsafe impl<T: JobImpl> Send for EntityInner<T> {}
-> +
-> +/// A DRM scheduler entity.
-> +pub struct Entity<T: JobImpl>(Pin<Box<EntityInner<T>>>);
-> +
-> +impl<T: JobImpl> Entity<T> {
-> +    /// Create a new scheduler entity.
-> +    pub fn new(sched: &Scheduler<T>, priority: Priority) -> Result<Self> {
-> +        let mut entity: Box<MaybeUninit<EntityInner<T>>> = Box::try_new_zeroed()?;
-> +
-> +        let mut sched_ptr = &sched.0.sched as *const _ as *mut _;
-> +
-> +        // SAFETY: The Box is allocated above and valid.
-> +        unsafe {
-> +            bindings::drm_sched_entity_init(
-> +                addr_of_mut!((*entity.as_mut_ptr()).entity),
-> +                priority as _,
-> +                &mut sched_ptr,
-> +                1,
-> +                addr_of_mut!((*entity.as_mut_ptr()).guilty),
-> +            )
-> +        };
-> +
-> +        // SAFETY: The Box is allocated above and valid.
-> +        unsafe { addr_of_mut!((*entity.as_mut_ptr()).sched).write(sched.0.clone()) };
-> +
-> +        // SAFETY: entity is now initialized.
-> +        Ok(Self(Pin::from(unsafe { entity.assume_init() })))
-> +    }
-> +
-> +    /// Create a new job on this entity.
-> +    ///
-> +    /// The entity must outlive the pending job until it transitions into the submitted state,
-> +    /// after which the scheduler owns it.
-> +    pub fn new_job(&self, inner: T) -> Result<PendingJob<'_, T>> {
-> +        let mut job: Box<MaybeUninit<Job<T>>> = Box::try_new_zeroed()?;
-> +
-> +        // SAFETY: We hold a reference to the entity (which is a valid pointer),
-> +        // and the job object was just allocated above.
-> +        to_result(unsafe {
-> +            bindings::drm_sched_job_init(
-> +                addr_of_mut!((*job.as_mut_ptr()).job),
-> +                &self.0.as_ref().get_ref().entity as *const _ as *mut _,
-> +                core::ptr::null_mut(),
-> +            )
-> +        })?;
-> +
-> +        // SAFETY: The Box pointer is valid, and this initializes the inner member.
-> +        unsafe { addr_of_mut!((*job.as_mut_ptr()).inner).write(inner) };
-> +
-> +        // SAFETY: All fields of the Job<T> are now initialized.
-> +        Ok(PendingJob(unsafe { job.assume_init() }, PhantomData))
-> +    }
-> +}
-> +
-> +/// DRM scheduler inner data
-> +pub struct SchedulerInner<T: JobImpl> {
-> +    sched: bindings::drm_gpu_scheduler,
-> +    _p: PhantomData<T>,
-> +}
-> +
-> +impl<T: JobImpl> Drop for SchedulerInner<T> {
-> +    fn drop(&mut self) {
-> +        // SAFETY: The scheduler is valid. This assumes drm_sched_fini() will take care of
-> +        // freeing all in-progress jobs.
-> +        unsafe { bindings::drm_sched_fini(&mut self.sched) };
-> +    }
-> +}
-> +
-> +// SAFETY: TODO
-> +unsafe impl<T: JobImpl> Sync for SchedulerInner<T> {}
-> +unsafe impl<T: JobImpl> Send for SchedulerInner<T> {}
-> +
-> +/// A DRM Scheduler
-> +pub struct Scheduler<T: JobImpl>(Arc<SchedulerInner<T>>);
-> +
-> +impl<T: JobImpl> Scheduler<T> {
-> +    const OPS: bindings::drm_sched_backend_ops = bindings::drm_sched_backend_ops {
-> +        prepare_job: Some(prepare_job_cb::<T>),
-> +        can_run_job: Some(can_run_job_cb::<T>),
-> +        run_job: Some(run_job_cb::<T>),
-> +        timedout_job: Some(timedout_job_cb::<T>),
-> +        free_job: Some(free_job_cb::<T>),
-
-Two general questions with no relevance here really, just about vtable
-best practices:
-
-So the trait has default impls for exactly the functions that are optional
-here, but either way we always end up with non-NULL function pointers. I
-guess there's no way to avoid that when you have a nice wrapping with
-traits and all that like here?
-
-Another unrelated thing: How const is const? The C code side generally
-uses ops pointers for runtime time casting, so if the const is less const
-that a naive C hacker would expect, it might result in some fun.
-
-Cheers, Daniel
-
-> +    };
-> +    /// Creates a new DRM Scheduler object
-> +    // TODO: Shared timeout workqueues & scores
-> +    pub fn new(
-> +        device: &impl device::RawDevice,
-> +        hw_submission: u32,
-> +        hang_limit: u32,
-> +        timeout_ms: usize,
-> +        name: &'static CStr,
-> +    ) -> Result<Scheduler<T>> {
-> +        let mut sched: UniqueArc<MaybeUninit<SchedulerInner<T>>> = UniqueArc::try_new_uninit()?;
-> +
-> +        // SAFETY: The drm_sched pointer is valid and pinned as it was just allocated above.
-> +        to_result(unsafe {
-> +            bindings::drm_sched_init(
-> +                addr_of_mut!((*sched.as_mut_ptr()).sched),
-> +                &Self::OPS,
-> +                hw_submission,
-> +                hang_limit,
-> +                bindings::msecs_to_jiffies(timeout_ms.try_into()?).try_into()?,
-> +                core::ptr::null_mut(),
-> +                core::ptr::null_mut(),
-> +                name.as_char_ptr(),
-> +                device.raw_device(),
-> +            )
-> +        })?;
-> +
-> +        // SAFETY: All fields of SchedulerInner are now initialized.
-> +        Ok(Scheduler(unsafe { sched.assume_init() }.into()))
-> +    }
-> +}
-> 
-> -- 
-> 2.35.1
-> 
-
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+>
+>> +static void lsdc_crtc_reset(struct drm_crtc *crtc)
+>> +{
+>> +       struct lsdc_display_pipe *dispipe = crtc_to_display_pipe(crtc);
+>> +       struct drm_device *ddev = crtc->dev;
+>> +       struct lsdc_device *ldev = to_lsdc(ddev);
+>> +       struct lsdc_crtc_state *priv_crtc_state;
+>> +       unsigned int index = dispipe->index;
+>> +       u32 val;
+>> +
+>> +       val = LSDC_PF_XRGB8888 | CFG_RESET_N;
+>> +       if (ldev->descp->chip == CHIP_LS7A2000)
+>> +               val |= LSDC_DMA_STEP_64_BYTES;
+>> +
+>> +       lsdc_crtc_wreg32(ldev, LSDC_CRTC0_CFG_REG, index, val);
+>> +
+>> +       if (ldev->descp->chip == CHIP_LS7A2000) {
+>> +               val = PHY_CLOCK_EN | PHY_DATA_EN;
+>> +               lsdc_crtc_wreg32(ldev, LSDC_CRTC0_PANEL_CONF_REG, index, val);
+>> +       }
+>> +
+> AFAICT no other driver touches the HW in their reset callback. Should
+> the above be moved to another callback?
+>
+>
+>
+>> +static void lsdc_crtc_atomic_enable(struct drm_crtc *crtc,
+>> +                                   struct drm_atomic_state *state)
+>> +{
+>> +       val = lsdc_crtc_rreg32(ldev, LSDC_CRTC0_CFG_REG, index);
+>> +       /* clear old dma step settings */
+>> +       val &= ~CFG_DMA_STEP_MASK;
+>> +
+>> +       if (descp->chip == CHIP_LS7A2000) {
+>> +               /*
+>> +                * Using large dma step as much as possible,
+>> +                * for improve hardware DMA efficiency.
+>> +                */
+>> +               if (width_in_bytes % 256 == 0)
+>> +                       val |= LSDC_DMA_STEP_256_BYTES;
+>> +               else if (width_in_bytes % 128 == 0)
+>> +                       val |= LSDC_DMA_STEP_128_BYTES;
+>> +               else if (width_in_bytes % 64 == 0)
+>> +                       val |= LSDC_DMA_STEP_64_BYTES;
+>> +               else  /* width_in_bytes % 32 == 0 */
+>> +                       val |= LSDC_DMA_STEP_32_BYTES;
+>> +       }
+>> +
+>> +       clk_func->update(pixpll, &priv_state->pparms);
+>> +
+> Without knowing the hardware, the clk_func abstraction seems quite
+> arbitrary and unnecessary. It should be introduced when there is a
+> use-case for it.
+>
+>
+>> +       lsdc_crtc_wreg32(ldev, LSDC_CRTC0_CFG_REG, index, val | CFG_OUTPUT_EN);
+>> +
+>> +       drm_crtc_vblank_on(crtc);
+>> +}
+>> +
+>
+>> --- /dev/null
+>> +++ b/drivers/gpu/drm/loongson/lsdc_debugfs.c
+>> +void lsdc_debugfs_init(struct drm_minor *minor)
+>> +{
+>> +#ifdef CONFIG_DEBUG_FS
+>> +       drm_debugfs_create_files(lsdc_debugfs_list,
+>> +                                ARRAY_SIZE(lsdc_debugfs_list),
+>> +                                minor->debugfs_root,
+>> +                                minor);
+>> +#endif
+>> +}
+> Should probably build the file when debugfs is enabled and provide
+> no-op stub in the header. See nouveau for an example.
+>
+>
+>> --- /dev/null
+>> +++ b/drivers/gpu/drm/loongson/lsdc_drv.c
+>> +static const struct lsdc_desc dc_in_ls7a1000 = {
+>> +       .chip = CHIP_LS7A1000,
+>> +       .num_of_crtc = LSDC_NUM_CRTC,
+>> +       .max_pixel_clk = 200000,
+>> +       .max_width = 2048,
+>> +       .max_height = 2048,
+>> +       .num_of_hw_cursor = 1,
+>> +       .hw_cursor_w = 32,
+>> +       .hw_cursor_h = 32,
+>> +       .pitch_align = 256,
+>> +       .mc_bits = 40,
+>> +       .has_vblank_counter = false,
+>> +       .has_scan_pos = true,
+>> +       .has_builtin_i2c = true,
+>> +       .has_vram = true,
+>> +       .has_hpd_reg = false,
+>> +       .is_soc = false,
+>> +};
+>> +
+>> +static const struct lsdc_desc dc_in_ls7a2000 = {
+>> +       .chip = CHIP_LS7A2000,
+>> +       .num_of_crtc = LSDC_NUM_CRTC,
+>> +       .max_pixel_clk = 350000,
+>> +       .max_width = 4096,
+>> +       .max_height = 4096,
+>> +       .num_of_hw_cursor = 2,
+>> +       .hw_cursor_w = 64,
+>> +       .hw_cursor_h = 64,
+>> +       .pitch_align = 64,
+>> +       .mc_bits = 40, /* support 48, but use 40 for backward compatibility */
+>> +       .has_vblank_counter = true,
+>> +       .has_scan_pos = true,
+>> +       .has_builtin_i2c = true,
+>> +       .has_vram = true,
+>> +       .has_hpd_reg = true,
+>> +       .is_soc = false,
+>> +};
+>> +
+> Roughly a quarter of the above are identical. It might be better to
+> drop them for now and re-introduce as needed with future code.
+>
+>> +const char *chip_to_str(enum loongson_chip_family chip)
+>> +{
+>> +       if (chip == CHIP_LS7A2000)
+>> +               return "LS7A2000";
+>> +
+>> +       if (chip == CHIP_LS7A1000)
+>> +               return "LS7A1000";
+>> +
+> If it were me, I would add the name into the lsdc_desc.
+>
+>
+>> +static enum drm_mode_status
+>> +lsdc_mode_config_mode_valid(struct drm_device *ddev,
+>> +                           const struct drm_display_mode *mode)
+>> +{
+>> +       struct lsdc_device *ldev = to_lsdc(ddev);
+>> +       const struct drm_format_info *info = drm_format_info(DRM_FORMAT_XRGB8888);
+> Short-term hard coding a format is fine, but there should be a comment
+> describing why.
+>
+>> +       u64 min_pitch = drm_format_info_min_pitch(info, 0, mode->hdisplay);
+>> +       u64 fb_size = min_pitch * mode->vdisplay;
+>> +
+>> +       if (fb_size * 3 > ldev->vram_size) {
+> Why are we using 3 here? Please add an inline comment.
+>
+>
+>> +static const struct dev_pm_ops lsdc_pm_ops = {
+>> +       .suspend = lsdc_pm_suspend,
+>> +       .resume = lsdc_pm_resume,
+>> +       .freeze = lsdc_pm_freeze,
+>> +       .thaw = lsdc_pm_thaw,
+>> +       .poweroff = lsdc_pm_freeze,
+>> +       .restore = lsdc_pm_resume,
+>> +};
+>> +
+> The above section (and functions) should probably be wrapped in a
+> CONFIG_PM_SLEEP block.
+>
+>
+>
+>> +static const struct pci_device_id lsdc_pciid_list[] = {
+>> +       {PCI_VENDOR_ID_LOONGSON, 0x7a06, PCI_ANY_ID, PCI_ANY_ID, 0, 0, CHIP_LS7A1000},
+>> +       {PCI_VENDOR_ID_LOONGSON, 0x7a36, PCI_ANY_ID, PCI_ANY_ID, 0, 0, CHIP_LS7A2000},
+>> +       {0, 0, 0, 0, 0, 0, 0}
+>> +};
+>> +
+>> +static int __init loongson_module_init(void)
+>> +{
+>> +       while ((pdev = pci_get_class(PCI_CLASS_DISPLAY_VGA << 8, pdev))) {
+>> +               if (pdev->vendor != PCI_VENDOR_ID_LOONGSON) {
+>> +                       pr_info("Discrete graphic card detected, abort\n");
+>> +                       return 0;
+>> +               }
+>> +       }
+> You can set the class/class_mask in the lsdc_pciid_list and drop this
+> loop. The vendor is already listed above and checked by core.
+>
+>
+>
+>> +++ b/drivers/gpu/drm/loongson/lsdc_drv.h
+>> @@ -0,0 +1,324 @@
+>> +/* SPDX-License-Identifier: GPL-2.0 */
+>> +/*
+>> + * Copyright (C) 2022 Loongson Corporation
+>> + *
+> We're in 2023, update the year across the files?
+>
+>
+>
+>> +struct lsdc_gem {
+>> +       /* @mutex: protect objects list */
+>> +       struct mutex mutex;
+>> +       struct list_head objects;
+>> +};
+>> +
+>> +struct lsdc_device {
+>> +       struct drm_device base;
+>> +       struct ttm_device bdev;
+>> +
+>> +       /* @descp: features description of the DC variant */
+>> +       const struct lsdc_desc *descp;
+>> +
+>> +       struct pci_dev *gpu;
+>> +
+>> +       /* @reglock: protects concurrent access */
+>> +       spinlock_t reglock;
+>> +       void __iomem *reg_base;
+>> +       resource_size_t vram_base;
+>> +       resource_size_t vram_size;
+>> +
+>> +       resource_size_t gtt_size;
+>> +
+>> +       struct lsdc_display_pipe dispipe[LSDC_NUM_CRTC];
+>> +
+>> +       struct lsdc_gem gem;
+>> +
+> Last time I looked there was no other driver with a list of gem
+> objects (and a mutex) in its device struct. Are you sure we need this?
+>
+> Very few drivers use TTM directly and I think you want to use
+> drm_gem_vram_helper or drm_gem_ttm_helper instead.
+>
+>
+>
+>> +static int ls7a1000_pixpll_param_update(struct lsdc_pll * const this,
+>> +                                       struct lsdc_pll_parms const *pin)
+>> +{
+>> +       void __iomem *reg = this->mmio;
+>> +       unsigned int counter = 0;
+>> +       bool locked;
+>> +       u32 val;
+>> +
+>> +       /* Bypass the software configured PLL, using refclk directly */
+>> +       val = readl(reg + 0x4);
+>> +       val &= ~(1 << 8);
+>> +       writel(val, reg + 0x4);
+>> +
+> There are a lot of magic numbers in this function. Let's define them
+> properly in the header.
+>
+>
+>
+>> +/* Helpers for chip detection */
+>> +bool lsdc_is_ls2k2000(void);
+>> +bool lsdc_is_ls2k1000(void);
+>> +unsigned int loongson_cpu_get_prid(u8 *impl, u8 *rev);
+>
+> Since this revision does pci_devices only, we don't need this detection right?
+>
+>
+> Hope that helps,
+> Emil
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
