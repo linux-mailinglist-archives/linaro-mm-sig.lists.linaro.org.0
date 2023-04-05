@@ -2,77 +2,76 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A9A76D83E8
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 18:40:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2B3BE6D8439
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 18:56:20 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9D0E83EA3E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 16:40:38 +0000 (UTC)
-Received: from 189.cn (ptr.189.cn [183.61.185.101])
-	by lists.linaro.org (Postfix) with ESMTP id 2A67B3EA3E
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  5 Apr 2023 16:40:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 078143F580
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 16:56:19 +0000 (UTC)
+Received: from 189.cn (ptr.189.cn [183.61.185.103])
+	by lists.linaro.org (Postfix) with ESMTP id 96FB93F348
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  5 Apr 2023 16:56:05 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
 	dkim=none;
-	spf=pass (lists.linaro.org: domain of 15330273260@189.cn designates 183.61.185.101 as permitted sender) smtp.mailfrom=15330273260@189.cn;
+	spf=pass (lists.linaro.org: domain of 15330273260@189.cn designates 183.61.185.103 as permitted sender) smtp.mailfrom=15330273260@189.cn;
 	dmarc=none
-HMM_SOURCE_IP: 10.64.8.43:49358.1442670072
+HMM_SOURCE_IP: 10.64.8.41:43120.1312103682
 HMM_ATTACHE_NUM: 0000
 HMM_SOURCE_TYPE: SMTP
-Received: from clientip-114.242.206.180 (unknown [10.64.8.43])
-	by 189.cn (HERMES) with SMTP id ACFAB100212;
-	Thu,  6 Apr 2023 00:40:17 +0800 (CST)
+Received: from clientip-114.242.206.180 (unknown [10.64.8.41])
+	by 189.cn (HERMES) with SMTP id AD987100133;
+	Thu,  6 Apr 2023 00:56:00 +0800 (CST)
 Received: from  ([114.242.206.180])
-	by gateway-151646-dep-7b48884fd-tj646 with ESMTP id df0d463a81a442a0b10347c0bc8a8624 for emil.l.velikov@gmail.com;
-	Thu, 06 Apr 2023 00:40:20 CST
-X-Transaction-ID: df0d463a81a442a0b10347c0bc8a8624
+	by gateway-151646-dep-7b48884fd-bkw2h with ESMTP id 215b7ac0545b4287bac99a04f52209a6 for emil.l.velikov@gmail.com;
+	Thu, 06 Apr 2023 00:56:02 CST
+X-Transaction-ID: 215b7ac0545b4287bac99a04f52209a6
 X-Real-From: 15330273260@189.cn
 X-Receive-IP: 114.242.206.180
 X-MEDUSA-Status: 0
 Sender: 15330273260@189.cn
-Message-ID: <ad715c40-70de-0fa8-37e9-2d80ee0ebe36@189.cn>
-Date: Thu, 6 Apr 2023 00:40:17 +0800
+Message-ID: <33afce11-8ccc-5e98-749b-5e6aa80b82f1@189.cn>
+Date: Thu, 6 Apr 2023 00:55:58 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.9.0
-Content-Language: en-US
+From: Sui Jingfeng <15330273260@189.cn>
 To: Emil Velikov <emil.l.velikov@gmail.com>
 References: <20230403171304.2157326-1-suijingfeng@loongson.cn>
  <20230403171304.2157326-3-suijingfeng@loongson.cn>
  <CACvgo53h+X26wngVmxpn3oVb9kbJezTHx61p3rZDR7sw1AQrWQ@mail.gmail.com>
-From: Sui Jingfeng <15330273260@189.cn>
-In-Reply-To: <CACvgo53h+X26wngVmxpn3oVb9kbJezTHx61p3rZDR7sw1AQrWQ@mail.gmail.com>
+ <ad715c40-70de-0fa8-37e9-2d80ee0ebe36@189.cn>
+Content-Language: en-US
+In-Reply-To: <ad715c40-70de-0fa8-37e9-2d80ee0ebe36@189.cn>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 2A67B3EA3E
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.70 / 15.00];
+X-Rspamd-Queue-Id: 96FB93F348
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.70 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_IN_DNSWL_HI(-1.00)[183.61.185.101:from,114.242.206.180:received];
 	R_SPF_ALLOW(-0.20)[+ip4:183.61.185.0/24];
-	MIME_GOOD(-0.10)[text/plain];
 	RCVD_NO_TLS_LAST(0.10)[];
-	TAGGED_RCPT(0.00)[];
-	DMARC_NA(0.00)[189.cn];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[loongson.cn:email,189.cn:helo];
-	NEURAL_HAM(-0.00)[-0.989];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.linaro.org,loongson.cn,vger.kernel.org,lists.freedesktop.org];
-	URIBL_BLOCKED(0.00)[ptr.189.cn:rdns,189.cn:helo];
-	TO_DN_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	MIME_GOOD(-0.10)[text/plain];
 	FREEMAIL_TO(0.00)[gmail.com];
-	FREEMAIL_FROM(0.00)[189.cn];
-	FROM_HAS_DN(0.00)[];
+	NEURAL_HAM(-0.00)[-0.910];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_ENVFROM(0.00)[189.cn];
 	R_DKIM_NA(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.linaro.org,loongson.cn,vger.kernel.org,lists.freedesktop.org];
+	FROM_EQ_ENVFROM(0.00)[];
 	ASN(0.00)[asn:4134, ipnet:183.0.0.0/10, country:CN];
+	FREEMAIL_ENVFROM(0.00)[189.cn];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	URIBL_BLOCKED(0.00)[ptr.189.cn:rdns,189.cn:helo,loongson.cn:email];
+	DMARC_NA(0.00)[189.cn];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ARC_NA(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_FROM(0.00)[189.cn];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2]
-Message-ID-Hash: RMZMEQQANOAO6BZOCO2OOZNVWLJZEHWE
-X-Message-ID-Hash: RMZMEQQANOAO6BZOCO2OOZNVWLJZEHWE
+Message-ID-Hash: XDCOQ5Z7LTM2CNGO2DUTLMO2XU257BZ7
+X-Message-ID-Hash: XDCOQ5Z7LTM2CNGO2DUTLMO2XU257BZ7
 X-MailFrom: 15330273260@189.cn
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -81,317 +80,227 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v10 2/2] drm: add kms driver for loongson display controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RMZMEQQANOAO6BZOCO2OOZNVWLJZEHWE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XDCOQ5Z7LTM2CNGO2DUTLMO2XU257BZ7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-Hi,
-
-On 2023/4/4 22:10, Emil Velikov wrote:
-> Greetings Sui Jingfeng,
->
-> I haven't been around drm-land for a while and this is the first
-> driver I skim through in a few years. So take the following
-> suggestions with a healthy pinch of salt.
->
-> Hope that helps o/
-Emil, we love your reviews,
-> On Mon, 3 Apr 2023 at 18:13, Sui Jingfeng <suijingfeng@loongson.cn> wrote:
->
->>    v7 -> v8:
->>     1) Zero a compile warnnings on 32-bit platform, compile with W=1
->>     2) Revise lsdc_bo_gpu_offset() and minor cleanup
->>     3) Pageflip tested on the virtual terminal with following commands
->>
->>        modetest -M loongson -s 32:1920x1080 -v
->>        modetest -M loongson -s 34:1920x1080 -v -F tiles
->>
-> I could be wrong, but my understanding is that new drivers should be
-> capable of running under Xorg and/or Wayland compositor. There is also
-> the IGT test suite, which can help verify and validate the driver's
-> behaviour:
->
-> https://www.kernel.org/doc/html/latest/gpu/drm-uapi.html
->
-Yet it may take more time to give full answer for all of your concerns.
-
-Currently, drm/loongson driver do works under Xorg(X server),
-
-link[1] is a short video which can prove that the driver actually works 
-very well.
-
-Note that it use the generic modesetting driver on userspace.
-
-We could provide more videos if necessary.
-
-
-We are carry on the IGT test suite, we feedback the test result once it 
-finished on our platform.
-
-I'm not familiar with it before, previously we only focus on the basic 
-unit tests came with libdrm.
-
-
-I will answer rest questions in a latter time, please wait a moment.
-
->
->> +static void lsdc_crtc_reset(struct drm_crtc *crtc)
->> +{
->> +       struct lsdc_display_pipe *dispipe = crtc_to_display_pipe(crtc);
->> +       struct drm_device *ddev = crtc->dev;
->> +       struct lsdc_device *ldev = to_lsdc(ddev);
->> +       struct lsdc_crtc_state *priv_crtc_state;
->> +       unsigned int index = dispipe->index;
->> +       u32 val;
->> +
->> +       val = LSDC_PF_XRGB8888 | CFG_RESET_N;
->> +       if (ldev->descp->chip == CHIP_LS7A2000)
->> +               val |= LSDC_DMA_STEP_64_BYTES;
->> +
->> +       lsdc_crtc_wreg32(ldev, LSDC_CRTC0_CFG_REG, index, val);
->> +
->> +       if (ldev->descp->chip == CHIP_LS7A2000) {
->> +               val = PHY_CLOCK_EN | PHY_DATA_EN;
->> +               lsdc_crtc_wreg32(ldev, LSDC_CRTC0_PANEL_CONF_REG, index, val);
->> +       }
->> +
-> AFAICT no other driver touches the HW in their reset callback. Should
-> the above be moved to another callback?
->
->
->
->> +static void lsdc_crtc_atomic_enable(struct drm_crtc *crtc,
->> +                                   struct drm_atomic_state *state)
->> +{
->> +       val = lsdc_crtc_rreg32(ldev, LSDC_CRTC0_CFG_REG, index);
->> +       /* clear old dma step settings */
->> +       val &= ~CFG_DMA_STEP_MASK;
->> +
->> +       if (descp->chip == CHIP_LS7A2000) {
->> +               /*
->> +                * Using large dma step as much as possible,
->> +                * for improve hardware DMA efficiency.
->> +                */
->> +               if (width_in_bytes % 256 == 0)
->> +                       val |= LSDC_DMA_STEP_256_BYTES;
->> +               else if (width_in_bytes % 128 == 0)
->> +                       val |= LSDC_DMA_STEP_128_BYTES;
->> +               else if (width_in_bytes % 64 == 0)
->> +                       val |= LSDC_DMA_STEP_64_BYTES;
->> +               else  /* width_in_bytes % 32 == 0 */
->> +                       val |= LSDC_DMA_STEP_32_BYTES;
->> +       }
->> +
->> +       clk_func->update(pixpll, &priv_state->pparms);
->> +
-> Without knowing the hardware, the clk_func abstraction seems quite
-> arbitrary and unnecessary. It should be introduced when there is a
-> use-case for it.
->
->
->> +       lsdc_crtc_wreg32(ldev, LSDC_CRTC0_CFG_REG, index, val | CFG_OUTPUT_EN);
->> +
->> +       drm_crtc_vblank_on(crtc);
->> +}
->> +
->
->> --- /dev/null
->> +++ b/drivers/gpu/drm/loongson/lsdc_debugfs.c
->> +void lsdc_debugfs_init(struct drm_minor *minor)
->> +{
->> +#ifdef CONFIG_DEBUG_FS
->> +       drm_debugfs_create_files(lsdc_debugfs_list,
->> +                                ARRAY_SIZE(lsdc_debugfs_list),
->> +                                minor->debugfs_root,
->> +                                minor);
->> +#endif
->> +}
-> Should probably build the file when debugfs is enabled and provide
-> no-op stub in the header. See nouveau for an example.
->
->
->> --- /dev/null
->> +++ b/drivers/gpu/drm/loongson/lsdc_drv.c
->> +static const struct lsdc_desc dc_in_ls7a1000 = {
->> +       .chip = CHIP_LS7A1000,
->> +       .num_of_crtc = LSDC_NUM_CRTC,
->> +       .max_pixel_clk = 200000,
->> +       .max_width = 2048,
->> +       .max_height = 2048,
->> +       .num_of_hw_cursor = 1,
->> +       .hw_cursor_w = 32,
->> +       .hw_cursor_h = 32,
->> +       .pitch_align = 256,
->> +       .mc_bits = 40,
->> +       .has_vblank_counter = false,
->> +       .has_scan_pos = true,
->> +       .has_builtin_i2c = true,
->> +       .has_vram = true,
->> +       .has_hpd_reg = false,
->> +       .is_soc = false,
->> +};
->> +
->> +static const struct lsdc_desc dc_in_ls7a2000 = {
->> +       .chip = CHIP_LS7A2000,
->> +       .num_of_crtc = LSDC_NUM_CRTC,
->> +       .max_pixel_clk = 350000,
->> +       .max_width = 4096,
->> +       .max_height = 4096,
->> +       .num_of_hw_cursor = 2,
->> +       .hw_cursor_w = 64,
->> +       .hw_cursor_h = 64,
->> +       .pitch_align = 64,
->> +       .mc_bits = 40, /* support 48, but use 40 for backward compatibility */
->> +       .has_vblank_counter = true,
->> +       .has_scan_pos = true,
->> +       .has_builtin_i2c = true,
->> +       .has_vram = true,
->> +       .has_hpd_reg = true,
->> +       .is_soc = false,
->> +};
->> +
-> Roughly a quarter of the above are identical. It might be better to
-> drop them for now and re-introduce as needed with future code.
->
->> +const char *chip_to_str(enum loongson_chip_family chip)
->> +{
->> +       if (chip == CHIP_LS7A2000)
->> +               return "LS7A2000";
->> +
->> +       if (chip == CHIP_LS7A1000)
->> +               return "LS7A1000";
->> +
-> If it were me, I would add the name into the lsdc_desc.
->
->
->> +static enum drm_mode_status
->> +lsdc_mode_config_mode_valid(struct drm_device *ddev,
->> +                           const struct drm_display_mode *mode)
->> +{
->> +       struct lsdc_device *ldev = to_lsdc(ddev);
->> +       const struct drm_format_info *info = drm_format_info(DRM_FORMAT_XRGB8888);
-> Short-term hard coding a format is fine, but there should be a comment
-> describing why.
->
->> +       u64 min_pitch = drm_format_info_min_pitch(info, 0, mode->hdisplay);
->> +       u64 fb_size = min_pitch * mode->vdisplay;
->> +
->> +       if (fb_size * 3 > ldev->vram_size) {
-> Why are we using 3 here? Please add an inline comment.
->
->
->> +static const struct dev_pm_ops lsdc_pm_ops = {
->> +       .suspend = lsdc_pm_suspend,
->> +       .resume = lsdc_pm_resume,
->> +       .freeze = lsdc_pm_freeze,
->> +       .thaw = lsdc_pm_thaw,
->> +       .poweroff = lsdc_pm_freeze,
->> +       .restore = lsdc_pm_resume,
->> +};
->> +
-> The above section (and functions) should probably be wrapped in a
-> CONFIG_PM_SLEEP block.
->
->
->
->> +static const struct pci_device_id lsdc_pciid_list[] = {
->> +       {PCI_VENDOR_ID_LOONGSON, 0x7a06, PCI_ANY_ID, PCI_ANY_ID, 0, 0, CHIP_LS7A1000},
->> +       {PCI_VENDOR_ID_LOONGSON, 0x7a36, PCI_ANY_ID, PCI_ANY_ID, 0, 0, CHIP_LS7A2000},
->> +       {0, 0, 0, 0, 0, 0, 0}
->> +};
->> +
->> +static int __init loongson_module_init(void)
->> +{
->> +       while ((pdev = pci_get_class(PCI_CLASS_DISPLAY_VGA << 8, pdev))) {
->> +               if (pdev->vendor != PCI_VENDOR_ID_LOONGSON) {
->> +                       pr_info("Discrete graphic card detected, abort\n");
->> +                       return 0;
->> +               }
->> +       }
-> You can set the class/class_mask in the lsdc_pciid_list and drop this
-> loop. The vendor is already listed above and checked by core.
->
->
->
->> +++ b/drivers/gpu/drm/loongson/lsdc_drv.h
->> @@ -0,0 +1,324 @@
->> +/* SPDX-License-Identifier: GPL-2.0 */
->> +/*
->> + * Copyright (C) 2022 Loongson Corporation
->> + *
-> We're in 2023, update the year across the files?
->
->
->
->> +struct lsdc_gem {
->> +       /* @mutex: protect objects list */
->> +       struct mutex mutex;
->> +       struct list_head objects;
->> +};
->> +
->> +struct lsdc_device {
->> +       struct drm_device base;
->> +       struct ttm_device bdev;
->> +
->> +       /* @descp: features description of the DC variant */
->> +       const struct lsdc_desc *descp;
->> +
->> +       struct pci_dev *gpu;
->> +
->> +       /* @reglock: protects concurrent access */
->> +       spinlock_t reglock;
->> +       void __iomem *reg_base;
->> +       resource_size_t vram_base;
->> +       resource_size_t vram_size;
->> +
->> +       resource_size_t gtt_size;
->> +
->> +       struct lsdc_display_pipe dispipe[LSDC_NUM_CRTC];
->> +
->> +       struct lsdc_gem gem;
->> +
-> Last time I looked there was no other driver with a list of gem
-> objects (and a mutex) in its device struct. Are you sure we need this?
->
-> Very few drivers use TTM directly and I think you want to use
-> drm_gem_vram_helper or drm_gem_ttm_helper instead.
->
->
->
->> +static int ls7a1000_pixpll_param_update(struct lsdc_pll * const this,
->> +                                       struct lsdc_pll_parms const *pin)
->> +{
->> +       void __iomem *reg = this->mmio;
->> +       unsigned int counter = 0;
->> +       bool locked;
->> +       u32 val;
->> +
->> +       /* Bypass the software configured PLL, using refclk directly */
->> +       val = readl(reg + 0x4);
->> +       val &= ~(1 << 8);
->> +       writel(val, reg + 0x4);
->> +
-> There are a lot of magic numbers in this function. Let's define them
-> properly in the header.
->
->
->
->> +/* Helpers for chip detection */
->> +bool lsdc_is_ls2k2000(void);
->> +bool lsdc_is_ls2k1000(void);
->> +unsigned int loongson_cpu_get_prid(u8 *impl, u8 *rev);
->
-> Since this revision does pci_devices only, we don't need this detection right?
->
->
-> Hope that helps,
-> Emil
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+DQpPbiAyMDIzLzQvNiAwMDo0MCwgU3VpIEppbmdmZW5nIHdyb3RlOg0KPiBIaSwNCj4NCj4gT24g
+MjAyMy80LzQgMjI6MTAsIEVtaWwgVmVsaWtvdiB3cm90ZToNCj4+IEdyZWV0aW5ncyBTdWkgSmlu
+Z2ZlbmcsDQo+Pg0KPj4gSSBoYXZlbid0IGJlZW4gYXJvdW5kIGRybS1sYW5kIGZvciBhIHdoaWxl
+IGFuZCB0aGlzIGlzIHRoZSBmaXJzdA0KPj4gZHJpdmVyIEkgc2tpbSB0aHJvdWdoIGluIGEgZmV3
+IHllYXJzLiBTbyB0YWtlIHRoZSBmb2xsb3dpbmcNCj4+IHN1Z2dlc3Rpb25zIHdpdGggYSBoZWFs
+dGh5IHBpbmNoIG9mIHNhbHQuDQo+Pg0KPj4gSG9wZSB0aGF0IGhlbHBzIG8vDQo+IEVtaWwsIHdl
+IGxvdmUgeW91ciByZXZpZXdzLA0KPj4gT24gTW9uLCAzIEFwciAyMDIzIGF0IDE4OjEzLCBTdWkg
+SmluZ2ZlbmcgPHN1aWppbmdmZW5nQGxvb25nc29uLmNuPiANCj4+IHdyb3RlOg0KPj4NCj4+PiDC
+oMKgIHY3IC0+IHY4Og0KPj4+IMKgwqDCoCAxKSBaZXJvIGEgY29tcGlsZSB3YXJubmluZ3Mgb24g
+MzItYml0IHBsYXRmb3JtLCBjb21waWxlIHdpdGggVz0xDQo+Pj4gwqDCoMKgIDIpIFJldmlzZSBs
+c2RjX2JvX2dwdV9vZmZzZXQoKSBhbmQgbWlub3IgY2xlYW51cA0KPj4+IMKgwqDCoCAzKSBQYWdl
+ZmxpcCB0ZXN0ZWQgb24gdGhlIHZpcnR1YWwgdGVybWluYWwgd2l0aCBmb2xsb3dpbmcgY29tbWFu
+ZHMNCj4+Pg0KPj4+IMKgwqDCoMKgwqDCoCBtb2RldGVzdCAtTSBsb29uZ3NvbiAtcyAzMjoxOTIw
+eDEwODAgLXYNCj4+PiDCoMKgwqDCoMKgwqAgbW9kZXRlc3QgLU0gbG9vbmdzb24gLXMgMzQ6MTky
+MHgxMDgwIC12IC1GIHRpbGVzDQo+Pj4NCj4+IEkgY291bGQgYmUgd3JvbmcsIGJ1dCBteSB1bmRl
+cnN0YW5kaW5nIGlzIHRoYXQgbmV3IGRyaXZlcnMgc2hvdWxkIGJlDQo+PiBjYXBhYmxlIG9mIHJ1
+bm5pbmcgdW5kZXIgWG9yZyBhbmQvb3IgV2F5bGFuZCBjb21wb3NpdG9yLiBUaGVyZSBpcyBhbHNv
+DQo+PiB0aGUgSUdUIHRlc3Qgc3VpdGUsIHdoaWNoIGNhbiBoZWxwIHZlcmlmeSBhbmQgdmFsaWRh
+dGUgdGhlIGRyaXZlcidzDQo+PiBiZWhhdmlvdXI6DQo+Pg0KPj4gaHR0cHM6Ly93d3cua2VybmVs
+Lm9yZy9kb2MvaHRtbC9sYXRlc3QvZ3B1L2RybS11YXBpLmh0bWwNCj4+DQo+IFlldCBpdCBtYXkg
+dGFrZSBtb3JlIHRpbWUgdG8gZ2l2ZSBmdWxsIGFuc3dlciBmb3IgYWxsIG9mIHlvdXIgY29uY2Vy
+bnMuDQo+DQo+IEN1cnJlbnRseSwgZHJtL2xvb25nc29uIGRyaXZlciBkbyB3b3JrcyB1bmRlciBY
+b3JnKFggc2VydmVyKSwNCj4NCj4gbGlua1sxXSBpcyBhIHNob3J0IHZpZGVvIHdoaWNoIGNhbiBw
+cm92ZSB0aGF0IHRoZSBkcml2ZXIgYWN0dWFsbHkgDQo+IHdvcmtzIHZlcnkgd2VsbC4NCj4NCj4g
+Tm90ZSB0aGF0IGl0IHVzZSB0aGUgZ2VuZXJpYyBtb2Rlc2V0dGluZyBkcml2ZXIgb24gdXNlcnNw
+YWNlLg0KPg0KPiBXZSBjb3VsZCBwcm92aWRlIG1vcmUgdmlkZW9zIGlmIG5lY2Vzc2FyeS4NCj4N
+Cj4NCj4gV2UgYXJlIGNhcnJ5IG9uIHRoZSBJR1QgdGVzdCBzdWl0ZSwgd2UgZmVlZGJhY2sgdGhl
+IHRlc3QgcmVzdWx0IG9uY2UgDQo+IGl0IGZpbmlzaGVkIG9uIG91ciBwbGF0Zm9ybS4NCj4NCldl
+IHdpbGwgZmVlZGJhY2sgdGhlIHJlc3VsdHMgb25jZSB3ZSBmaW5pc2hlIHRoZSBpZ3QgdGVzdCwg
+dGhhbmtzIGZvciANCnByb3ZpZGluZyBzdWNoIGEgdmFsdWFibGUNCg0KaW5mb3JtYXRpb24uDQoN
+Cg0KWzFdIA0KaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2xvb25nc29uLWdmeC9s
+b29uZ3Nvbl9ib2FyZHMvbWFpbi92aWRlb3MvZHJtX2xvb25nc29uX3VuZGVyX3hzZXJ2ZXIubXA0
+DQoNCg0KPiBJJ20gbm90IGZhbWlsaWFyIHdpdGggaXQgYmVmb3JlLCBwcmV2aW91c2x5IHdlIG9u
+bHkgZm9jdXMgb24gdGhlIGJhc2ljIA0KPiB1bml0IHRlc3RzIGNhbWUgd2l0aCBsaWJkcm0uDQo+
+DQo+DQo+IEkgd2lsbCBhbnN3ZXIgcmVzdCBxdWVzdGlvbnMgaW4gYSBsYXR0ZXIgdGltZSwgcGxl
+YXNlIHdhaXQgYSBtb21lbnQuDQo+DQo+Pg0KPj4+ICtzdGF0aWMgdm9pZCBsc2RjX2NydGNfcmVz
+ZXQoc3RydWN0IGRybV9jcnRjICpjcnRjKQ0KPj4+ICt7DQo+Pj4gK8KgwqDCoMKgwqDCoCBzdHJ1
+Y3QgbHNkY19kaXNwbGF5X3BpcGUgKmRpc3BpcGUgPSBjcnRjX3RvX2Rpc3BsYXlfcGlwZShjcnRj
+KTsNCj4+PiArwqDCoMKgwqDCoMKgIHN0cnVjdCBkcm1fZGV2aWNlICpkZGV2ID0gY3J0Yy0+ZGV2
+Ow0KPj4+ICvCoMKgwqDCoMKgwqAgc3RydWN0IGxzZGNfZGV2aWNlICpsZGV2ID0gdG9fbHNkYyhk
+ZGV2KTsNCj4+PiArwqDCoMKgwqDCoMKgIHN0cnVjdCBsc2RjX2NydGNfc3RhdGUgKnByaXZfY3J0
+Y19zdGF0ZTsNCj4+PiArwqDCoMKgwqDCoMKgIHVuc2lnbmVkIGludCBpbmRleCA9IGRpc3BpcGUt
+PmluZGV4Ow0KPj4+ICvCoMKgwqDCoMKgwqAgdTMyIHZhbDsNCj4+PiArDQo+Pj4gK8KgwqDCoMKg
+wqDCoCB2YWwgPSBMU0RDX1BGX1hSR0I4ODg4IHwgQ0ZHX1JFU0VUX047DQo+Pj4gK8KgwqDCoMKg
+wqDCoCBpZiAobGRldi0+ZGVzY3AtPmNoaXAgPT0gQ0hJUF9MUzdBMjAwMCkNCj4+PiArwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB2YWwgfD0gTFNEQ19ETUFfU1RFUF82NF9CWVRFUzsNCj4+
+PiArDQo+Pj4gK8KgwqDCoMKgwqDCoCBsc2RjX2NydGNfd3JlZzMyKGxkZXYsIExTRENfQ1JUQzBf
+Q0ZHX1JFRywgaW5kZXgsIHZhbCk7DQo+Pj4gKw0KPj4+ICvCoMKgwqDCoMKgwqAgaWYgKGxkZXYt
+PmRlc2NwLT5jaGlwID09IENISVBfTFM3QTIwMDApIHsNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCB2YWwgPSBQSFlfQ0xPQ0tfRU4gfCBQSFlfREFUQV9FTjsNCj4+PiArwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBsc2RjX2NydGNfd3JlZzMyKGxkZXYsIExTRENfQ1JUQzBf
+UEFORUxfQ09ORl9SRUcsIA0KPj4+IGluZGV4LCB2YWwpOw0KPj4+ICvCoMKgwqDCoMKgwqAgfQ0K
+Pj4+ICsNCj4+IEFGQUlDVCBubyBvdGhlciBkcml2ZXIgdG91Y2hlcyB0aGUgSFcgaW4gdGhlaXIg
+cmVzZXQgY2FsbGJhY2suIFNob3VsZA0KPj4gdGhlIGFib3ZlIGJlIG1vdmVkIHRvIGFub3RoZXIg
+Y2FsbGJhY2s/DQo+Pg0KPj4NCj4+DQo+Pj4gK3N0YXRpYyB2b2lkIGxzZGNfY3J0Y19hdG9taWNf
+ZW5hYmxlKHN0cnVjdCBkcm1fY3J0YyAqY3J0YywNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IGRy
+bV9hdG9taWNfc3RhdGUgKnN0YXRlKQ0KPj4+ICt7DQo+Pj4gK8KgwqDCoMKgwqDCoCB2YWwgPSBs
+c2RjX2NydGNfcnJlZzMyKGxkZXYsIExTRENfQ1JUQzBfQ0ZHX1JFRywgaW5kZXgpOw0KPj4+ICvC
+oMKgwqDCoMKgwqAgLyogY2xlYXIgb2xkIGRtYSBzdGVwIHNldHRpbmdzICovDQo+Pj4gK8KgwqDC
+oMKgwqDCoCB2YWwgJj0gfkNGR19ETUFfU1RFUF9NQVNLOw0KPj4+ICsNCj4+PiArwqDCoMKgwqDC
+oMKgIGlmIChkZXNjcC0+Y2hpcCA9PSBDSElQX0xTN0EyMDAwKSB7DQo+Pj4gK8KgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqAgLyoNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+ICogVXNpbmcgbGFyZ2UgZG1hIHN0ZXAgYXMgbXVjaCBhcyBwb3NzaWJsZSwNCj4+PiArwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICogZm9yIGltcHJvdmUgaGFyZHdhcmUgRE1BIGVmZmlj
+aWVuY3kuDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAqLw0KPj4+ICvCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmICh3aWR0aF9pbl9ieXRlcyAlIDI1NiA9PSAwKQ0K
+Pj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB2YWwgfD0g
+TFNEQ19ETUFfU1RFUF8yNTZfQllURVM7DQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgZWxzZSBpZiAod2lkdGhfaW5fYnl0ZXMgJSAxMjggPT0gMCkNCj4+PiArwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdmFsIHw9IExTRENfRE1BX1NURVBfMTI4
+X0JZVEVTOw0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGVsc2UgaWYgKHdpZHRo
+X2luX2J5dGVzICUgNjQgPT0gMCkNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqAgdmFsIHw9IExTRENfRE1BX1NURVBfNjRfQllURVM7DQo+Pj4gK8KgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZWxzZcKgIC8qIHdpZHRoX2luX2J5dGVzICUgMzIgPT0g
+MCAqLw0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB2
+YWwgfD0gTFNEQ19ETUFfU1RFUF8zMl9CWVRFUzsNCj4+PiArwqDCoMKgwqDCoMKgIH0NCj4+PiAr
+DQo+Pj4gK8KgwqDCoMKgwqDCoCBjbGtfZnVuYy0+dXBkYXRlKHBpeHBsbCwgJnByaXZfc3RhdGUt
+PnBwYXJtcyk7DQo+Pj4gKw0KPj4gV2l0aG91dCBrbm93aW5nIHRoZSBoYXJkd2FyZSwgdGhlIGNs
+a19mdW5jIGFic3RyYWN0aW9uIHNlZW1zIHF1aXRlDQo+PiBhcmJpdHJhcnkgYW5kIHVubmVjZXNz
+YXJ5LiBJdCBzaG91bGQgYmUgaW50cm9kdWNlZCB3aGVuIHRoZXJlIGlzIGENCj4+IHVzZS1jYXNl
+IGZvciBpdC4NCj4+DQo+Pg0KPj4+ICvCoMKgwqDCoMKgwqAgbHNkY19jcnRjX3dyZWczMihsZGV2
+LCBMU0RDX0NSVEMwX0NGR19SRUcsIGluZGV4LCB2YWwgfCANCj4+PiBDRkdfT1VUUFVUX0VOKTsN
+Cj4+PiArDQo+Pj4gK8KgwqDCoMKgwqDCoCBkcm1fY3J0Y192Ymxhbmtfb24oY3J0Yyk7DQo+Pj4g
+K30NCj4+PiArDQo+Pg0KPj4+IC0tLSAvZGV2L251bGwNCj4+PiArKysgYi9kcml2ZXJzL2dwdS9k
+cm0vbG9vbmdzb24vbHNkY19kZWJ1Z2ZzLmMNCj4+PiArdm9pZCBsc2RjX2RlYnVnZnNfaW5pdChz
+dHJ1Y3QgZHJtX21pbm9yICptaW5vcikNCj4+PiArew0KPj4+ICsjaWZkZWYgQ09ORklHX0RFQlVH
+X0ZTDQo+Pj4gK8KgwqDCoMKgwqDCoCBkcm1fZGVidWdmc19jcmVhdGVfZmlsZXMobHNkY19kZWJ1
+Z2ZzX2xpc3QsDQo+Pj4gKyBBUlJBWV9TSVpFKGxzZGNfZGVidWdmc19saXN0KSwNCj4+PiArwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgbWlub3ItPmRlYnVnZnNfcm9vdCwNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbWlub3IpOw0KPj4+ICsjZW5kaWYN
+Cj4+PiArfQ0KPj4gU2hvdWxkIHByb2JhYmx5IGJ1aWxkIHRoZSBmaWxlIHdoZW4gZGVidWdmcyBp
+cyBlbmFibGVkIGFuZCBwcm92aWRlDQo+PiBuby1vcCBzdHViIGluIHRoZSBoZWFkZXIuIFNlZSBu
+b3V2ZWF1IGZvciBhbiBleGFtcGxlLg0KPj4NCj4+DQo+Pj4gLS0tIC9kZXYvbnVsbA0KPj4+ICsr
+KyBiL2RyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX2Rydi5jDQo+Pj4gK3N0YXRpYyBjb25z
+dCBzdHJ1Y3QgbHNkY19kZXNjIGRjX2luX2xzN2ExMDAwID0gew0KPj4+ICvCoMKgwqDCoMKgwqAg
+LmNoaXAgPSBDSElQX0xTN0ExMDAwLA0KPj4+ICvCoMKgwqDCoMKgwqAgLm51bV9vZl9jcnRjID0g
+TFNEQ19OVU1fQ1JUQywNCj4+PiArwqDCoMKgwqDCoMKgIC5tYXhfcGl4ZWxfY2xrID0gMjAwMDAw
+LA0KPj4+ICvCoMKgwqDCoMKgwqAgLm1heF93aWR0aCA9IDIwNDgsDQo+Pj4gK8KgwqDCoMKgwqDC
+oCAubWF4X2hlaWdodCA9IDIwNDgsDQo+Pj4gK8KgwqDCoMKgwqDCoCAubnVtX29mX2h3X2N1cnNv
+ciA9IDEsDQo+Pj4gK8KgwqDCoMKgwqDCoCAuaHdfY3Vyc29yX3cgPSAzMiwNCj4+PiArwqDCoMKg
+wqDCoMKgIC5od19jdXJzb3JfaCA9IDMyLA0KPj4+ICvCoMKgwqDCoMKgwqAgLnBpdGNoX2FsaWdu
+ID0gMjU2LA0KPj4+ICvCoMKgwqDCoMKgwqAgLm1jX2JpdHMgPSA0MCwNCj4+PiArwqDCoMKgwqDC
+oMKgIC5oYXNfdmJsYW5rX2NvdW50ZXIgPSBmYWxzZSwNCj4+PiArwqDCoMKgwqDCoMKgIC5oYXNf
+c2Nhbl9wb3MgPSB0cnVlLA0KPj4+ICvCoMKgwqDCoMKgwqAgLmhhc19idWlsdGluX2kyYyA9IHRy
+dWUsDQo+Pj4gK8KgwqDCoMKgwqDCoCAuaGFzX3ZyYW0gPSB0cnVlLA0KPj4+ICvCoMKgwqDCoMKg
+wqAgLmhhc19ocGRfcmVnID0gZmFsc2UsDQo+Pj4gK8KgwqDCoMKgwqDCoCAuaXNfc29jID0gZmFs
+c2UsDQo+Pj4gK307DQo+Pj4gKw0KPj4+ICtzdGF0aWMgY29uc3Qgc3RydWN0IGxzZGNfZGVzYyBk
+Y19pbl9sczdhMjAwMCA9IHsNCj4+PiArwqDCoMKgwqDCoMKgIC5jaGlwID0gQ0hJUF9MUzdBMjAw
+MCwNCj4+PiArwqDCoMKgwqDCoMKgIC5udW1fb2ZfY3J0YyA9IExTRENfTlVNX0NSVEMsDQo+Pj4g
+K8KgwqDCoMKgwqDCoCAubWF4X3BpeGVsX2NsayA9IDM1MDAwMCwNCj4+PiArwqDCoMKgwqDCoMKg
+IC5tYXhfd2lkdGggPSA0MDk2LA0KPj4+ICvCoMKgwqDCoMKgwqAgLm1heF9oZWlnaHQgPSA0MDk2
+LA0KPj4+ICvCoMKgwqDCoMKgwqAgLm51bV9vZl9od19jdXJzb3IgPSAyLA0KPj4+ICvCoMKgwqDC
+oMKgwqAgLmh3X2N1cnNvcl93ID0gNjQsDQo+Pj4gK8KgwqDCoMKgwqDCoCAuaHdfY3Vyc29yX2gg
+PSA2NCwNCj4+PiArwqDCoMKgwqDCoMKgIC5waXRjaF9hbGlnbiA9IDY0LA0KPj4+ICvCoMKgwqDC
+oMKgwqAgLm1jX2JpdHMgPSA0MCwgLyogc3VwcG9ydCA0OCwgYnV0IHVzZSA0MCBmb3IgYmFja3dh
+cmQgDQo+Pj4gY29tcGF0aWJpbGl0eSAqLw0KPj4+ICvCoMKgwqDCoMKgwqAgLmhhc192Ymxhbmtf
+Y291bnRlciA9IHRydWUsDQo+Pj4gK8KgwqDCoMKgwqDCoCAuaGFzX3NjYW5fcG9zID0gdHJ1ZSwN
+Cj4+PiArwqDCoMKgwqDCoMKgIC5oYXNfYnVpbHRpbl9pMmMgPSB0cnVlLA0KPj4+ICvCoMKgwqDC
+oMKgwqAgLmhhc192cmFtID0gdHJ1ZSwNCj4+PiArwqDCoMKgwqDCoMKgIC5oYXNfaHBkX3JlZyA9
+IHRydWUsDQo+Pj4gK8KgwqDCoMKgwqDCoCAuaXNfc29jID0gZmFsc2UsDQo+Pj4gK307DQo+Pj4g
+Kw0KPj4gUm91Z2hseSBhIHF1YXJ0ZXIgb2YgdGhlIGFib3ZlIGFyZSBpZGVudGljYWwuIEl0IG1p
+Z2h0IGJlIGJldHRlciB0bw0KPj4gZHJvcCB0aGVtIGZvciBub3cgYW5kIHJlLWludHJvZHVjZSBh
+cyBuZWVkZWQgd2l0aCBmdXR1cmUgY29kZS4NCj4+DQo+Pj4gK2NvbnN0IGNoYXIgKmNoaXBfdG9f
+c3RyKGVudW0gbG9vbmdzb25fY2hpcF9mYW1pbHkgY2hpcCkNCj4+PiArew0KPj4+ICvCoMKgwqDC
+oMKgwqAgaWYgKGNoaXAgPT0gQ0hJUF9MUzdBMjAwMCkNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoCByZXR1cm4gIkxTN0EyMDAwIjsNCj4+PiArDQo+Pj4gK8KgwqDCoMKgwqDCoCBp
+ZiAoY2hpcCA9PSBDSElQX0xTN0ExMDAwKQ0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgIHJldHVybiAiTFM3QTEwMDAiOw0KPj4+ICsNCj4+IElmIGl0IHdlcmUgbWUsIEkgd291bGQg
+YWRkIHRoZSBuYW1lIGludG8gdGhlIGxzZGNfZGVzYy4NCj4+DQo+Pg0KPj4+ICtzdGF0aWMgZW51
+bSBkcm1fbW9kZV9zdGF0dXMNCj4+PiArbHNkY19tb2RlX2NvbmZpZ19tb2RlX3ZhbGlkKHN0cnVj
+dCBkcm1fZGV2aWNlICpkZGV2LA0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlICptb2Rl
+KQ0KPj4+ICt7DQo+Pj4gK8KgwqDCoMKgwqDCoCBzdHJ1Y3QgbHNkY19kZXZpY2UgKmxkZXYgPSB0
+b19sc2RjKGRkZXYpOw0KPj4+ICvCoMKgwqDCoMKgwqAgY29uc3Qgc3RydWN0IGRybV9mb3JtYXRf
+aW5mbyAqaW5mbyA9IA0KPj4+IGRybV9mb3JtYXRfaW5mbyhEUk1fRk9STUFUX1hSR0I4ODg4KTsN
+Cj4+IFNob3J0LXRlcm0gaGFyZCBjb2RpbmcgYSBmb3JtYXQgaXMgZmluZSwgYnV0IHRoZXJlIHNo
+b3VsZCBiZSBhIGNvbW1lbnQNCj4+IGRlc2NyaWJpbmcgd2h5Lg0KPj4NCj4+PiArwqDCoMKgwqDC
+oMKgIHU2NCBtaW5fcGl0Y2ggPSBkcm1fZm9ybWF0X2luZm9fbWluX3BpdGNoKGluZm8sIDAsIA0K
+Pj4+IG1vZGUtPmhkaXNwbGF5KTsNCj4+PiArwqDCoMKgwqDCoMKgIHU2NCBmYl9zaXplID0gbWlu
+X3BpdGNoICogbW9kZS0+dmRpc3BsYXk7DQo+Pj4gKw0KPj4+ICvCoMKgwqDCoMKgwqAgaWYgKGZi
+X3NpemUgKiAzID4gbGRldi0+dnJhbV9zaXplKSB7DQo+PiBXaHkgYXJlIHdlIHVzaW5nIDMgaGVy
+ZT8gUGxlYXNlIGFkZCBhbiBpbmxpbmUgY29tbWVudC4NCj4+DQo+Pg0KPj4+ICtzdGF0aWMgY29u
+c3Qgc3RydWN0IGRldl9wbV9vcHMgbHNkY19wbV9vcHMgPSB7DQo+Pj4gK8KgwqDCoMKgwqDCoCAu
+c3VzcGVuZCA9IGxzZGNfcG1fc3VzcGVuZCwNCj4+PiArwqDCoMKgwqDCoMKgIC5yZXN1bWUgPSBs
+c2RjX3BtX3Jlc3VtZSwNCj4+PiArwqDCoMKgwqDCoMKgIC5mcmVlemUgPSBsc2RjX3BtX2ZyZWV6
+ZSwNCj4+PiArwqDCoMKgwqDCoMKgIC50aGF3ID0gbHNkY19wbV90aGF3LA0KPj4+ICvCoMKgwqDC
+oMKgwqAgLnBvd2Vyb2ZmID0gbHNkY19wbV9mcmVlemUsDQo+Pj4gK8KgwqDCoMKgwqDCoCAucmVz
+dG9yZSA9IGxzZGNfcG1fcmVzdW1lLA0KPj4+ICt9Ow0KPj4+ICsNCj4+IFRoZSBhYm92ZSBzZWN0
+aW9uIChhbmQgZnVuY3Rpb25zKSBzaG91bGQgcHJvYmFibHkgYmUgd3JhcHBlZCBpbiBhDQo+PiBD
+T05GSUdfUE1fU0xFRVAgYmxvY2suDQo+Pg0KPj4NCj4+DQo+Pj4gK3N0YXRpYyBjb25zdCBzdHJ1
+Y3QgcGNpX2RldmljZV9pZCBsc2RjX3BjaWlkX2xpc3RbXSA9IHsNCj4+PiArwqDCoMKgwqDCoMKg
+IHtQQ0lfVkVORE9SX0lEX0xPT05HU09OLCAweDdhMDYsIFBDSV9BTllfSUQsIFBDSV9BTllfSUQs
+IDAsIA0KPj4+IDAsIENISVBfTFM3QTEwMDB9LA0KPj4+ICvCoMKgwqDCoMKgwqAge1BDSV9WRU5E
+T1JfSURfTE9PTkdTT04sIDB4N2EzNiwgUENJX0FOWV9JRCwgUENJX0FOWV9JRCwgMCwgDQo+Pj4g
+MCwgQ0hJUF9MUzdBMjAwMH0sDQo+Pj4gK8KgwqDCoMKgwqDCoCB7MCwgMCwgMCwgMCwgMCwgMCwg
+MH0NCj4+PiArfTsNCj4+PiArDQo+Pj4gK3N0YXRpYyBpbnQgX19pbml0IGxvb25nc29uX21vZHVs
+ZV9pbml0KHZvaWQpDQo+Pj4gK3sNCj4+PiArwqDCoMKgwqDCoMKgIHdoaWxlICgocGRldiA9IHBj
+aV9nZXRfY2xhc3MoUENJX0NMQVNTX0RJU1BMQVlfVkdBIDw8IDgsIA0KPj4+IHBkZXYpKSkgew0K
+Pj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChwZGV2LT52ZW5kb3IgIT0gUENJ
+X1ZFTkRPUl9JRF9MT09OR1NPTikgew0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqDCoMKgwqDCoCBwcl9pbmZvKCJEaXNjcmV0ZSBncmFwaGljIGNhcmQgZGV0ZWN0ZWQs
+IA0KPj4+IGFib3J0XG4iKTsNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqAgcmV0dXJuIDA7DQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+fQ0KPj4+ICvCoMKgwqDCoMKgwqAgfQ0KPj4gWW91IGNhbiBzZXQgdGhlIGNsYXNzL2NsYXNzX21h
+c2sgaW4gdGhlIGxzZGNfcGNpaWRfbGlzdCBhbmQgZHJvcCB0aGlzDQo+PiBsb29wLiBUaGUgdmVu
+ZG9yIGlzIGFscmVhZHkgbGlzdGVkIGFib3ZlIGFuZCBjaGVja2VkIGJ5IGNvcmUuDQo+Pg0KPj4N
+Cj4+DQo+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfZHJ2LmgNCj4+PiBA
+QCAtMCwwICsxLDMyNCBAQA0KPj4+ICsvKiBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIu
+MCAqLw0KPj4+ICsvKg0KPj4+ICsgKiBDb3B5cmlnaHQgKEMpIDIwMjIgTG9vbmdzb24gQ29ycG9y
+YXRpb24NCj4+PiArICoNCj4+IFdlJ3JlIGluIDIwMjMsIHVwZGF0ZSB0aGUgeWVhciBhY3Jvc3Mg
+dGhlIGZpbGVzPw0KPj4NCj4+DQo+Pg0KPj4+ICtzdHJ1Y3QgbHNkY19nZW0gew0KPj4+ICvCoMKg
+wqDCoMKgwqAgLyogQG11dGV4OiBwcm90ZWN0IG9iamVjdHMgbGlzdCAqLw0KPj4+ICvCoMKgwqDC
+oMKgwqAgc3RydWN0IG11dGV4IG11dGV4Ow0KPj4+ICvCoMKgwqDCoMKgwqAgc3RydWN0IGxpc3Rf
+aGVhZCBvYmplY3RzOw0KPj4+ICt9Ow0KPj4+ICsNCj4+PiArc3RydWN0IGxzZGNfZGV2aWNlIHsN
+Cj4+PiArwqDCoMKgwqDCoMKgIHN0cnVjdCBkcm1fZGV2aWNlIGJhc2U7DQo+Pj4gK8KgwqDCoMKg
+wqDCoCBzdHJ1Y3QgdHRtX2RldmljZSBiZGV2Ow0KPj4+ICsNCj4+PiArwqDCoMKgwqDCoMKgIC8q
+IEBkZXNjcDogZmVhdHVyZXMgZGVzY3JpcHRpb24gb2YgdGhlIERDIHZhcmlhbnQgKi8NCj4+PiAr
+wqDCoMKgwqDCoMKgIGNvbnN0IHN0cnVjdCBsc2RjX2Rlc2MgKmRlc2NwOw0KPj4+ICsNCj4+PiAr
+wqDCoMKgwqDCoMKgIHN0cnVjdCBwY2lfZGV2ICpncHU7DQo+Pj4gKw0KPj4+ICvCoMKgwqDCoMKg
+wqAgLyogQHJlZ2xvY2s6IHByb3RlY3RzIGNvbmN1cnJlbnQgYWNjZXNzICovDQo+Pj4gK8KgwqDC
+oMKgwqDCoCBzcGlubG9ja190IHJlZ2xvY2s7DQo+Pj4gK8KgwqDCoMKgwqDCoCB2b2lkIF9faW9t
+ZW0gKnJlZ19iYXNlOw0KPj4+ICvCoMKgwqDCoMKgwqAgcmVzb3VyY2Vfc2l6ZV90IHZyYW1fYmFz
+ZTsNCj4+PiArwqDCoMKgwqDCoMKgIHJlc291cmNlX3NpemVfdCB2cmFtX3NpemU7DQo+Pj4gKw0K
+Pj4+ICvCoMKgwqDCoMKgwqAgcmVzb3VyY2Vfc2l6ZV90IGd0dF9zaXplOw0KPj4+ICsNCj4+PiAr
+wqDCoMKgwqDCoMKgIHN0cnVjdCBsc2RjX2Rpc3BsYXlfcGlwZSBkaXNwaXBlW0xTRENfTlVNX0NS
+VENdOw0KPj4+ICsNCj4+PiArwqDCoMKgwqDCoMKgIHN0cnVjdCBsc2RjX2dlbSBnZW07DQo+Pj4g
+Kw0KPj4gTGFzdCB0aW1lIEkgbG9va2VkIHRoZXJlIHdhcyBubyBvdGhlciBkcml2ZXIgd2l0aCBh
+IGxpc3Qgb2YgZ2VtDQo+PiBvYmplY3RzIChhbmQgYSBtdXRleCkgaW4gaXRzIGRldmljZSBzdHJ1
+Y3QuIEFyZSB5b3Ugc3VyZSB3ZSBuZWVkIHRoaXM/DQo+Pg0KPj4gVmVyeSBmZXcgZHJpdmVycyB1
+c2UgVFRNIGRpcmVjdGx5IGFuZCBJIHRoaW5rIHlvdSB3YW50IHRvIHVzZQ0KPj4gZHJtX2dlbV92
+cmFtX2hlbHBlciBvciBkcm1fZ2VtX3R0bV9oZWxwZXIgaW5zdGVhZC4NCj4+DQo+Pg0KPj4NCj4+
+PiArc3RhdGljIGludCBsczdhMTAwMF9waXhwbGxfcGFyYW1fdXBkYXRlKHN0cnVjdCBsc2RjX3Bs
+bCAqIGNvbnN0IHRoaXMsDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
+oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IGxzZGNfcGxs
+X3Bhcm1zIGNvbnN0IA0KPj4+ICpwaW4pDQo+Pj4gK3sNCj4+PiArwqDCoMKgwqDCoMKgIHZvaWQg
+X19pb21lbSAqcmVnID0gdGhpcy0+bW1pbzsNCj4+PiArwqDCoMKgwqDCoMKgIHVuc2lnbmVkIGlu
+dCBjb3VudGVyID0gMDsNCj4+PiArwqDCoMKgwqDCoMKgIGJvb2wgbG9ja2VkOw0KPj4+ICvCoMKg
+wqDCoMKgwqAgdTMyIHZhbDsNCj4+PiArDQo+Pj4gK8KgwqDCoMKgwqDCoCAvKiBCeXBhc3MgdGhl
+IHNvZnR3YXJlIGNvbmZpZ3VyZWQgUExMLCB1c2luZyByZWZjbGsgZGlyZWN0bHkgKi8NCj4+PiAr
+wqDCoMKgwqDCoMKgIHZhbCA9IHJlYWRsKHJlZyArIDB4NCk7DQo+Pj4gK8KgwqDCoMKgwqDCoCB2
+YWwgJj0gfigxIDw8IDgpOw0KPj4+ICvCoMKgwqDCoMKgwqAgd3JpdGVsKHZhbCwgcmVnICsgMHg0
+KTsNCj4+PiArDQo+PiBUaGVyZSBhcmUgYSBsb3Qgb2YgbWFnaWMgbnVtYmVycyBpbiB0aGlzIGZ1
+bmN0aW9uLiBMZXQncyBkZWZpbmUgdGhlbQ0KPj4gcHJvcGVybHkgaW4gdGhlIGhlYWRlci4NCj4+
+DQo+Pg0KPj4NCj4+PiArLyogSGVscGVycyBmb3IgY2hpcCBkZXRlY3Rpb24gKi8NCj4+PiArYm9v
+bCBsc2RjX2lzX2xzMmsyMDAwKHZvaWQpOw0KPj4+ICtib29sIGxzZGNfaXNfbHMyazEwMDAodm9p
+ZCk7DQo+Pj4gK3Vuc2lnbmVkIGludCBsb29uZ3Nvbl9jcHVfZ2V0X3ByaWQodTggKmltcGwsIHU4
+ICpyZXYpOw0KPj4NCj4+IFNpbmNlIHRoaXMgcmV2aXNpb24gZG9lcyBwY2lfZGV2aWNlcyBvbmx5
+LCB3ZSBkb24ndCBuZWVkIHRoaXMgDQo+PiBkZXRlY3Rpb24gcmlnaHQ/DQo+Pg0KPj4NCj4+IEhv
+cGUgdGhhdCBoZWxwcywNCj4+IEVtaWwNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1z
+aWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFy
+by1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
