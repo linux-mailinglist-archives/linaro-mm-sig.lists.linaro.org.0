@@ -2,305 +2,753 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B3BE6D8439
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 18:56:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DB6A6D8491
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 19:10:22 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 078143F580
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 16:56:19 +0000 (UTC)
-Received: from 189.cn (ptr.189.cn [183.61.185.103])
-	by lists.linaro.org (Postfix) with ESMTP id 96FB93F348
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  5 Apr 2023 16:56:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DA7C03F963
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Apr 2023 17:10:20 +0000 (UTC)
+Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+	by lists.linaro.org (Postfix) with ESMTPS id D9F903EBED
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  5 Apr 2023 17:10:09 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of 15330273260@189.cn designates 183.61.185.103 as permitted sender) smtp.mailfrom=15330273260@189.cn;
+	dkim=pass header.d=ffwll.ch header.s=google header.b=AIepK3u1;
+	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.218.49) smtp.mailfrom=daniel@ffwll.ch;
 	dmarc=none
-HMM_SOURCE_IP: 10.64.8.41:43120.1312103682
-HMM_ATTACHE_NUM: 0000
-HMM_SOURCE_TYPE: SMTP
-Received: from clientip-114.242.206.180 (unknown [10.64.8.41])
-	by 189.cn (HERMES) with SMTP id AD987100133;
-	Thu,  6 Apr 2023 00:56:00 +0800 (CST)
-Received: from  ([114.242.206.180])
-	by gateway-151646-dep-7b48884fd-bkw2h with ESMTP id 215b7ac0545b4287bac99a04f52209a6 for emil.l.velikov@gmail.com;
-	Thu, 06 Apr 2023 00:56:02 CST
-X-Transaction-ID: 215b7ac0545b4287bac99a04f52209a6
-X-Real-From: 15330273260@189.cn
-X-Receive-IP: 114.242.206.180
-X-MEDUSA-Status: 0
-Sender: 15330273260@189.cn
-Message-ID: <33afce11-8ccc-5e98-749b-5e6aa80b82f1@189.cn>
-Date: Thu, 6 Apr 2023 00:55:58 +0800
+Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-93b8c095335so3612466b.0
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 05 Apr 2023 10:10:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ffwll.ch; s=google; t=1680714609;
+        h=in-reply-to:content-disposition:mime-version:references
+         :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=Hb0s11wzWUtncbdbj1+tJGRJTpj0TLkIHZg2ChvIYvU=;
+        b=AIepK3u1s3NY52wFU0VpMZvX2NKO+NsK4/OuLn3pWaxT/kbRpMn2pPm2RDRoAs9H1Q
+         r78d6VKmoz/o52L5nGumO00t5txi23tC0S6+HCYSVU5Qg3B+PD5siZRuIEpkSZ2BPmZ6
+         G2s2mC3moD8U//YHMlyb8n+RQcerj0M/2FLys=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20210112; t=1680714609;
+        h=in-reply-to:content-disposition:mime-version:references
+         :mail-followup-to:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=Hb0s11wzWUtncbdbj1+tJGRJTpj0TLkIHZg2ChvIYvU=;
+        b=vvEl7MNoCrdsTQGVc2Hq0OlcVBA2Lw/tR/eJJJ54ak6g/gUO1py1zx5hw84biTJx95
+         B05izl6KlNzxekXeui+03xc5SJDnbAtDj2QC5fd74S1eC9z9Nk445/X9ncQHCdxuCpO0
+         3fr07vqxD+QuGyDhwyTOjvfGjJ+pd5SxhC9jraLuhn8JwhfbcX8B+fceJyUMpftIQx1Q
+         dWWmypFaxK0bfBYMkaun286TMR6shm22uZA9RgpZGZfukoHRyja9L4IYViwpjq3/A/qg
+         QOoxXDHeT/BxafYQlxyE4jspxRGcePa3tnNe4Ed0EHP/k0WiryPr3iio+cMFWwLZPAET
+         Qnng==
+X-Gm-Message-State: AAQBX9ednc97AfOjw6FgLJmKwcc10Ivqt92ayJ3tMyME2SbAKknnop8n
+	ADSOfGfv2FTshAbePJrzMvk32g==
+X-Google-Smtp-Source: AKy350ZCiVwHTUx+2dgaPIvaAFhh9EdAw+52UQeR48M9LnuKBPf1LtMAP5BhHlf7cEoZUQl4Bkru1Q==
+X-Received: by 2002:a05:6402:2811:b0:502:465:28e1 with SMTP id h17-20020a056402281100b00502046528e1mr3106022ede.0.1680714608441;
+        Wed, 05 Apr 2023 10:10:08 -0700 (PDT)
+Received: from phenom.ffwll.local (212-51-149-33.fiber7.init7.net. [212.51.149.33])
+        by smtp.gmail.com with ESMTPSA id tq24-20020a170907c51800b00947abb70c93sm7264820ejc.112.2023.04.05.10.10.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 05 Apr 2023 10:10:07 -0700 (PDT)
+Date: Wed, 5 Apr 2023 19:10:05 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Asahi Lina <lina@asahilina.net>
+Message-ID: <ZC2rbZzho2YMi5cq@phenom.ffwll.local>
+Mail-Followup-To: Asahi Lina <lina@asahilina.net>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>, Miguel Ojeda <ojeda@kernel.org>,
+	Alex Gaynor <alex.gaynor@gmail.com>,
+	Wedson Almeida Filho <wedsonaf@gmail.com>,
+	Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Luben Tuikov <luben.tuikov@amd.com>,
+	Jarkko Sakkinen <jarkko@kernel.org>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	Alyssa Rosenzweig <alyssa@rosenzweig.io>,
+	Karol Herbst <kherbst@redhat.com>,
+	Ella Stanforth <ella@iglunix.org>,
+	Faith Ekstrand <faith.ekstrand@collabora.com>,
+	Mary <mary@mary.zone>, linux-kernel@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
+	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
+	linux-sgx@vger.kernel.org, asahi@lists.linux.dev
+References: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net>
+ <20230307-rust-drm-v1-2-917ff5bc80a8@asahilina.net>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-From: Sui Jingfeng <15330273260@189.cn>
-To: Emil Velikov <emil.l.velikov@gmail.com>
-References: <20230403171304.2157326-1-suijingfeng@loongson.cn>
- <20230403171304.2157326-3-suijingfeng@loongson.cn>
- <CACvgo53h+X26wngVmxpn3oVb9kbJezTHx61p3rZDR7sw1AQrWQ@mail.gmail.com>
- <ad715c40-70de-0fa8-37e9-2d80ee0ebe36@189.cn>
-Content-Language: en-US
-In-Reply-To: <ad715c40-70de-0fa8-37e9-2d80ee0ebe36@189.cn>
+Content-Disposition: inline
+In-Reply-To: <20230307-rust-drm-v1-2-917ff5bc80a8@asahilina.net>
+X-Operating-System: Linux phenom 6.1.0-7-amd64 
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 96FB93F348
+X-Rspamd-Queue-Id: D9F903EBED
 X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.70 / 15.00];
+X-Spamd-Result: default: False [-1.90 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:183.61.185.0/24];
-	RCVD_NO_TLS_LAST(0.10)[];
+	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_TO(0.00)[gmail.com];
-	NEURAL_HAM(-0.00)[-0.910];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.49:from];
 	MIME_TRACE(0.00)[0:+];
-	R_DKIM_NA(0.00)[];
-	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.linaro.org,loongson.cn,vger.kernel.org,lists.freedesktop.org];
+	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,garyguo.net,protonmail.com,linaro.org,amd.com,rosenzweig.io,redhat.com,iglunix.org,collabora.com,mary.zone,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
+	RCVD_TLS_LAST(0.00)[];
+	R_SPF_NA(0.00)[no SPF record];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	FROM_EQ_ENVFROM(0.00)[];
-	ASN(0.00)[asn:4134, ipnet:183.0.0.0/10, country:CN];
-	FREEMAIL_ENVFROM(0.00)[189.cn];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	URIBL_BLOCKED(0.00)[ptr.189.cn:rdns,189.cn:helo,loongson.cn:email];
-	DMARC_NA(0.00)[189.cn];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[29];
+	DKIM_TRACE(0.00)[ffwll.ch:+];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DMARC_NA(0.00)[ffwll.ch];
+	URIBL_BLOCKED(0.00)[mail-ej1-f49.google.com:helo,mail-ej1-f49.google.com:rdns,ffwll.ch:dkim,ffwll.ch:url];
 	ARC_NA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[189.cn];
-	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	RCVD_COUNT_TWO(0.00)[2]
-Message-ID-Hash: XDCOQ5Z7LTM2CNGO2DUTLMO2XU257BZ7
-X-Message-ID-Hash: XDCOQ5Z7LTM2CNGO2DUTLMO2XU257BZ7
-X-MailFrom: 15330273260@189.cn
+Message-ID-Hash: F726GJEUAIYGJ2TKWHDN4CU7AZCTEHGJ
+X-Message-ID-Hash: F726GJEUAIYGJ2TKWHDN4CU7AZCTEHGJ
+X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian Koenig <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org, Li Yi <liyi@loongson.cn>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, nathan@kernel.org, linux-media@vger.kernel.org
+CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, Wedson Almeida Filho <wedsonaf@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Luben Tuikov <luben.tuikov@amd.com>, Jarkko Sakkinen <jarkko@kernel.org>, Dave Hansen <dave.hansen@linux.intel.com>, Alyssa Rosenzweig <alyssa@rosenzweig.io>, Karol Herbst <kherbst@redhat.com>, Ella Stanforth <ella@iglunix.org>, Faith Ekstrand <faith.ekstrand@collabora.com>, Mary <mary@mary.zone>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-sgx@vger.kernel.org, asah
+ i@lists.linux.dev
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v10 2/2] drm: add kms driver for loongson display controller
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 02/18] rust: drm: Add Device and Driver abstractions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XDCOQ5Z7LTM2CNGO2DUTLMO2XU257BZ7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/F726GJEUAIYGJ2TKWHDN4CU7AZCTEHGJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-DQpPbiAyMDIzLzQvNiAwMDo0MCwgU3VpIEppbmdmZW5nIHdyb3RlOg0KPiBIaSwNCj4NCj4gT24g
-MjAyMy80LzQgMjI6MTAsIEVtaWwgVmVsaWtvdiB3cm90ZToNCj4+IEdyZWV0aW5ncyBTdWkgSmlu
-Z2ZlbmcsDQo+Pg0KPj4gSSBoYXZlbid0IGJlZW4gYXJvdW5kIGRybS1sYW5kIGZvciBhIHdoaWxl
-IGFuZCB0aGlzIGlzIHRoZSBmaXJzdA0KPj4gZHJpdmVyIEkgc2tpbSB0aHJvdWdoIGluIGEgZmV3
-IHllYXJzLiBTbyB0YWtlIHRoZSBmb2xsb3dpbmcNCj4+IHN1Z2dlc3Rpb25zIHdpdGggYSBoZWFs
-dGh5IHBpbmNoIG9mIHNhbHQuDQo+Pg0KPj4gSG9wZSB0aGF0IGhlbHBzIG8vDQo+IEVtaWwsIHdl
-IGxvdmUgeW91ciByZXZpZXdzLA0KPj4gT24gTW9uLCAzIEFwciAyMDIzIGF0IDE4OjEzLCBTdWkg
-SmluZ2ZlbmcgPHN1aWppbmdmZW5nQGxvb25nc29uLmNuPiANCj4+IHdyb3RlOg0KPj4NCj4+PiDC
-oMKgIHY3IC0+IHY4Og0KPj4+IMKgwqDCoCAxKSBaZXJvIGEgY29tcGlsZSB3YXJubmluZ3Mgb24g
-MzItYml0IHBsYXRmb3JtLCBjb21waWxlIHdpdGggVz0xDQo+Pj4gwqDCoMKgIDIpIFJldmlzZSBs
-c2RjX2JvX2dwdV9vZmZzZXQoKSBhbmQgbWlub3IgY2xlYW51cA0KPj4+IMKgwqDCoCAzKSBQYWdl
-ZmxpcCB0ZXN0ZWQgb24gdGhlIHZpcnR1YWwgdGVybWluYWwgd2l0aCBmb2xsb3dpbmcgY29tbWFu
-ZHMNCj4+Pg0KPj4+IMKgwqDCoMKgwqDCoCBtb2RldGVzdCAtTSBsb29uZ3NvbiAtcyAzMjoxOTIw
-eDEwODAgLXYNCj4+PiDCoMKgwqDCoMKgwqAgbW9kZXRlc3QgLU0gbG9vbmdzb24gLXMgMzQ6MTky
-MHgxMDgwIC12IC1GIHRpbGVzDQo+Pj4NCj4+IEkgY291bGQgYmUgd3JvbmcsIGJ1dCBteSB1bmRl
-cnN0YW5kaW5nIGlzIHRoYXQgbmV3IGRyaXZlcnMgc2hvdWxkIGJlDQo+PiBjYXBhYmxlIG9mIHJ1
-bm5pbmcgdW5kZXIgWG9yZyBhbmQvb3IgV2F5bGFuZCBjb21wb3NpdG9yLiBUaGVyZSBpcyBhbHNv
-DQo+PiB0aGUgSUdUIHRlc3Qgc3VpdGUsIHdoaWNoIGNhbiBoZWxwIHZlcmlmeSBhbmQgdmFsaWRh
-dGUgdGhlIGRyaXZlcidzDQo+PiBiZWhhdmlvdXI6DQo+Pg0KPj4gaHR0cHM6Ly93d3cua2VybmVs
-Lm9yZy9kb2MvaHRtbC9sYXRlc3QvZ3B1L2RybS11YXBpLmh0bWwNCj4+DQo+IFlldCBpdCBtYXkg
-dGFrZSBtb3JlIHRpbWUgdG8gZ2l2ZSBmdWxsIGFuc3dlciBmb3IgYWxsIG9mIHlvdXIgY29uY2Vy
-bnMuDQo+DQo+IEN1cnJlbnRseSwgZHJtL2xvb25nc29uIGRyaXZlciBkbyB3b3JrcyB1bmRlciBY
-b3JnKFggc2VydmVyKSwNCj4NCj4gbGlua1sxXSBpcyBhIHNob3J0IHZpZGVvIHdoaWNoIGNhbiBw
-cm92ZSB0aGF0IHRoZSBkcml2ZXIgYWN0dWFsbHkgDQo+IHdvcmtzIHZlcnkgd2VsbC4NCj4NCj4g
-Tm90ZSB0aGF0IGl0IHVzZSB0aGUgZ2VuZXJpYyBtb2Rlc2V0dGluZyBkcml2ZXIgb24gdXNlcnNw
-YWNlLg0KPg0KPiBXZSBjb3VsZCBwcm92aWRlIG1vcmUgdmlkZW9zIGlmIG5lY2Vzc2FyeS4NCj4N
-Cj4NCj4gV2UgYXJlIGNhcnJ5IG9uIHRoZSBJR1QgdGVzdCBzdWl0ZSwgd2UgZmVlZGJhY2sgdGhl
-IHRlc3QgcmVzdWx0IG9uY2UgDQo+IGl0IGZpbmlzaGVkIG9uIG91ciBwbGF0Zm9ybS4NCj4NCldl
-IHdpbGwgZmVlZGJhY2sgdGhlIHJlc3VsdHMgb25jZSB3ZSBmaW5pc2hlIHRoZSBpZ3QgdGVzdCwg
-dGhhbmtzIGZvciANCnByb3ZpZGluZyBzdWNoIGEgdmFsdWFibGUNCg0KaW5mb3JtYXRpb24uDQoN
-Cg0KWzFdIA0KaHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2xvb25nc29uLWdmeC9s
-b29uZ3Nvbl9ib2FyZHMvbWFpbi92aWRlb3MvZHJtX2xvb25nc29uX3VuZGVyX3hzZXJ2ZXIubXA0
-DQoNCg0KPiBJJ20gbm90IGZhbWlsaWFyIHdpdGggaXQgYmVmb3JlLCBwcmV2aW91c2x5IHdlIG9u
-bHkgZm9jdXMgb24gdGhlIGJhc2ljIA0KPiB1bml0IHRlc3RzIGNhbWUgd2l0aCBsaWJkcm0uDQo+
-DQo+DQo+IEkgd2lsbCBhbnN3ZXIgcmVzdCBxdWVzdGlvbnMgaW4gYSBsYXR0ZXIgdGltZSwgcGxl
-YXNlIHdhaXQgYSBtb21lbnQuDQo+DQo+Pg0KPj4+ICtzdGF0aWMgdm9pZCBsc2RjX2NydGNfcmVz
-ZXQoc3RydWN0IGRybV9jcnRjICpjcnRjKQ0KPj4+ICt7DQo+Pj4gK8KgwqDCoMKgwqDCoCBzdHJ1
-Y3QgbHNkY19kaXNwbGF5X3BpcGUgKmRpc3BpcGUgPSBjcnRjX3RvX2Rpc3BsYXlfcGlwZShjcnRj
-KTsNCj4+PiArwqDCoMKgwqDCoMKgIHN0cnVjdCBkcm1fZGV2aWNlICpkZGV2ID0gY3J0Yy0+ZGV2
-Ow0KPj4+ICvCoMKgwqDCoMKgwqAgc3RydWN0IGxzZGNfZGV2aWNlICpsZGV2ID0gdG9fbHNkYyhk
-ZGV2KTsNCj4+PiArwqDCoMKgwqDCoMKgIHN0cnVjdCBsc2RjX2NydGNfc3RhdGUgKnByaXZfY3J0
-Y19zdGF0ZTsNCj4+PiArwqDCoMKgwqDCoMKgIHVuc2lnbmVkIGludCBpbmRleCA9IGRpc3BpcGUt
-PmluZGV4Ow0KPj4+ICvCoMKgwqDCoMKgwqAgdTMyIHZhbDsNCj4+PiArDQo+Pj4gK8KgwqDCoMKg
-wqDCoCB2YWwgPSBMU0RDX1BGX1hSR0I4ODg4IHwgQ0ZHX1JFU0VUX047DQo+Pj4gK8KgwqDCoMKg
-wqDCoCBpZiAobGRldi0+ZGVzY3AtPmNoaXAgPT0gQ0hJUF9MUzdBMjAwMCkNCj4+PiArwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB2YWwgfD0gTFNEQ19ETUFfU1RFUF82NF9CWVRFUzsNCj4+
-PiArDQo+Pj4gK8KgwqDCoMKgwqDCoCBsc2RjX2NydGNfd3JlZzMyKGxkZXYsIExTRENfQ1JUQzBf
-Q0ZHX1JFRywgaW5kZXgsIHZhbCk7DQo+Pj4gKw0KPj4+ICvCoMKgwqDCoMKgwqAgaWYgKGxkZXYt
-PmRlc2NwLT5jaGlwID09IENISVBfTFM3QTIwMDApIHsNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCB2YWwgPSBQSFlfQ0xPQ0tfRU4gfCBQSFlfREFUQV9FTjsNCj4+PiArwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBsc2RjX2NydGNfd3JlZzMyKGxkZXYsIExTRENfQ1JUQzBf
-UEFORUxfQ09ORl9SRUcsIA0KPj4+IGluZGV4LCB2YWwpOw0KPj4+ICvCoMKgwqDCoMKgwqAgfQ0K
-Pj4+ICsNCj4+IEFGQUlDVCBubyBvdGhlciBkcml2ZXIgdG91Y2hlcyB0aGUgSFcgaW4gdGhlaXIg
-cmVzZXQgY2FsbGJhY2suIFNob3VsZA0KPj4gdGhlIGFib3ZlIGJlIG1vdmVkIHRvIGFub3RoZXIg
-Y2FsbGJhY2s/DQo+Pg0KPj4NCj4+DQo+Pj4gK3N0YXRpYyB2b2lkIGxzZGNfY3J0Y19hdG9taWNf
-ZW5hYmxlKHN0cnVjdCBkcm1fY3J0YyAqY3J0YywNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IGRy
-bV9hdG9taWNfc3RhdGUgKnN0YXRlKQ0KPj4+ICt7DQo+Pj4gK8KgwqDCoMKgwqDCoCB2YWwgPSBs
-c2RjX2NydGNfcnJlZzMyKGxkZXYsIExTRENfQ1JUQzBfQ0ZHX1JFRywgaW5kZXgpOw0KPj4+ICvC
-oMKgwqDCoMKgwqAgLyogY2xlYXIgb2xkIGRtYSBzdGVwIHNldHRpbmdzICovDQo+Pj4gK8KgwqDC
-oMKgwqDCoCB2YWwgJj0gfkNGR19ETUFfU1RFUF9NQVNLOw0KPj4+ICsNCj4+PiArwqDCoMKgwqDC
-oMKgIGlmIChkZXNjcC0+Y2hpcCA9PSBDSElQX0xTN0EyMDAwKSB7DQo+Pj4gK8KgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqAgLyoNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-ICogVXNpbmcgbGFyZ2UgZG1hIHN0ZXAgYXMgbXVjaCBhcyBwb3NzaWJsZSwNCj4+PiArwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgICogZm9yIGltcHJvdmUgaGFyZHdhcmUgRE1BIGVmZmlj
-aWVuY3kuDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCAqLw0KPj4+ICvCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmICh3aWR0aF9pbl9ieXRlcyAlIDI1NiA9PSAwKQ0K
-Pj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB2YWwgfD0g
-TFNEQ19ETUFfU1RFUF8yNTZfQllURVM7DQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgZWxzZSBpZiAod2lkdGhfaW5fYnl0ZXMgJSAxMjggPT0gMCkNCj4+PiArwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgdmFsIHw9IExTRENfRE1BX1NURVBfMTI4
-X0JZVEVTOw0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGVsc2UgaWYgKHdpZHRo
-X2luX2J5dGVzICUgNjQgPT0gMCkNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgdmFsIHw9IExTRENfRE1BX1NURVBfNjRfQllURVM7DQo+Pj4gK8KgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgZWxzZcKgIC8qIHdpZHRoX2luX2J5dGVzICUgMzIgPT0g
-MCAqLw0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB2
-YWwgfD0gTFNEQ19ETUFfU1RFUF8zMl9CWVRFUzsNCj4+PiArwqDCoMKgwqDCoMKgIH0NCj4+PiAr
-DQo+Pj4gK8KgwqDCoMKgwqDCoCBjbGtfZnVuYy0+dXBkYXRlKHBpeHBsbCwgJnByaXZfc3RhdGUt
-PnBwYXJtcyk7DQo+Pj4gKw0KPj4gV2l0aG91dCBrbm93aW5nIHRoZSBoYXJkd2FyZSwgdGhlIGNs
-a19mdW5jIGFic3RyYWN0aW9uIHNlZW1zIHF1aXRlDQo+PiBhcmJpdHJhcnkgYW5kIHVubmVjZXNz
-YXJ5LiBJdCBzaG91bGQgYmUgaW50cm9kdWNlZCB3aGVuIHRoZXJlIGlzIGENCj4+IHVzZS1jYXNl
-IGZvciBpdC4NCj4+DQo+Pg0KPj4+ICvCoMKgwqDCoMKgwqAgbHNkY19jcnRjX3dyZWczMihsZGV2
-LCBMU0RDX0NSVEMwX0NGR19SRUcsIGluZGV4LCB2YWwgfCANCj4+PiBDRkdfT1VUUFVUX0VOKTsN
-Cj4+PiArDQo+Pj4gK8KgwqDCoMKgwqDCoCBkcm1fY3J0Y192Ymxhbmtfb24oY3J0Yyk7DQo+Pj4g
-K30NCj4+PiArDQo+Pg0KPj4+IC0tLSAvZGV2L251bGwNCj4+PiArKysgYi9kcml2ZXJzL2dwdS9k
-cm0vbG9vbmdzb24vbHNkY19kZWJ1Z2ZzLmMNCj4+PiArdm9pZCBsc2RjX2RlYnVnZnNfaW5pdChz
-dHJ1Y3QgZHJtX21pbm9yICptaW5vcikNCj4+PiArew0KPj4+ICsjaWZkZWYgQ09ORklHX0RFQlVH
-X0ZTDQo+Pj4gK8KgwqDCoMKgwqDCoCBkcm1fZGVidWdmc19jcmVhdGVfZmlsZXMobHNkY19kZWJ1
-Z2ZzX2xpc3QsDQo+Pj4gKyBBUlJBWV9TSVpFKGxzZGNfZGVidWdmc19saXN0KSwNCj4+PiArwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqAgbWlub3ItPmRlYnVnZnNfcm9vdCwNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbWlub3IpOw0KPj4+ICsjZW5kaWYN
-Cj4+PiArfQ0KPj4gU2hvdWxkIHByb2JhYmx5IGJ1aWxkIHRoZSBmaWxlIHdoZW4gZGVidWdmcyBp
-cyBlbmFibGVkIGFuZCBwcm92aWRlDQo+PiBuby1vcCBzdHViIGluIHRoZSBoZWFkZXIuIFNlZSBu
-b3V2ZWF1IGZvciBhbiBleGFtcGxlLg0KPj4NCj4+DQo+Pj4gLS0tIC9kZXYvbnVsbA0KPj4+ICsr
-KyBiL2RyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX2Rydi5jDQo+Pj4gK3N0YXRpYyBjb25z
-dCBzdHJ1Y3QgbHNkY19kZXNjIGRjX2luX2xzN2ExMDAwID0gew0KPj4+ICvCoMKgwqDCoMKgwqAg
-LmNoaXAgPSBDSElQX0xTN0ExMDAwLA0KPj4+ICvCoMKgwqDCoMKgwqAgLm51bV9vZl9jcnRjID0g
-TFNEQ19OVU1fQ1JUQywNCj4+PiArwqDCoMKgwqDCoMKgIC5tYXhfcGl4ZWxfY2xrID0gMjAwMDAw
-LA0KPj4+ICvCoMKgwqDCoMKgwqAgLm1heF93aWR0aCA9IDIwNDgsDQo+Pj4gK8KgwqDCoMKgwqDC
-oCAubWF4X2hlaWdodCA9IDIwNDgsDQo+Pj4gK8KgwqDCoMKgwqDCoCAubnVtX29mX2h3X2N1cnNv
-ciA9IDEsDQo+Pj4gK8KgwqDCoMKgwqDCoCAuaHdfY3Vyc29yX3cgPSAzMiwNCj4+PiArwqDCoMKg
-wqDCoMKgIC5od19jdXJzb3JfaCA9IDMyLA0KPj4+ICvCoMKgwqDCoMKgwqAgLnBpdGNoX2FsaWdu
-ID0gMjU2LA0KPj4+ICvCoMKgwqDCoMKgwqAgLm1jX2JpdHMgPSA0MCwNCj4+PiArwqDCoMKgwqDC
-oMKgIC5oYXNfdmJsYW5rX2NvdW50ZXIgPSBmYWxzZSwNCj4+PiArwqDCoMKgwqDCoMKgIC5oYXNf
-c2Nhbl9wb3MgPSB0cnVlLA0KPj4+ICvCoMKgwqDCoMKgwqAgLmhhc19idWlsdGluX2kyYyA9IHRy
-dWUsDQo+Pj4gK8KgwqDCoMKgwqDCoCAuaGFzX3ZyYW0gPSB0cnVlLA0KPj4+ICvCoMKgwqDCoMKg
-wqAgLmhhc19ocGRfcmVnID0gZmFsc2UsDQo+Pj4gK8KgwqDCoMKgwqDCoCAuaXNfc29jID0gZmFs
-c2UsDQo+Pj4gK307DQo+Pj4gKw0KPj4+ICtzdGF0aWMgY29uc3Qgc3RydWN0IGxzZGNfZGVzYyBk
-Y19pbl9sczdhMjAwMCA9IHsNCj4+PiArwqDCoMKgwqDCoMKgIC5jaGlwID0gQ0hJUF9MUzdBMjAw
-MCwNCj4+PiArwqDCoMKgwqDCoMKgIC5udW1fb2ZfY3J0YyA9IExTRENfTlVNX0NSVEMsDQo+Pj4g
-K8KgwqDCoMKgwqDCoCAubWF4X3BpeGVsX2NsayA9IDM1MDAwMCwNCj4+PiArwqDCoMKgwqDCoMKg
-IC5tYXhfd2lkdGggPSA0MDk2LA0KPj4+ICvCoMKgwqDCoMKgwqAgLm1heF9oZWlnaHQgPSA0MDk2
-LA0KPj4+ICvCoMKgwqDCoMKgwqAgLm51bV9vZl9od19jdXJzb3IgPSAyLA0KPj4+ICvCoMKgwqDC
-oMKgwqAgLmh3X2N1cnNvcl93ID0gNjQsDQo+Pj4gK8KgwqDCoMKgwqDCoCAuaHdfY3Vyc29yX2gg
-PSA2NCwNCj4+PiArwqDCoMKgwqDCoMKgIC5waXRjaF9hbGlnbiA9IDY0LA0KPj4+ICvCoMKgwqDC
-oMKgwqAgLm1jX2JpdHMgPSA0MCwgLyogc3VwcG9ydCA0OCwgYnV0IHVzZSA0MCBmb3IgYmFja3dh
-cmQgDQo+Pj4gY29tcGF0aWJpbGl0eSAqLw0KPj4+ICvCoMKgwqDCoMKgwqAgLmhhc192Ymxhbmtf
-Y291bnRlciA9IHRydWUsDQo+Pj4gK8KgwqDCoMKgwqDCoCAuaGFzX3NjYW5fcG9zID0gdHJ1ZSwN
-Cj4+PiArwqDCoMKgwqDCoMKgIC5oYXNfYnVpbHRpbl9pMmMgPSB0cnVlLA0KPj4+ICvCoMKgwqDC
-oMKgwqAgLmhhc192cmFtID0gdHJ1ZSwNCj4+PiArwqDCoMKgwqDCoMKgIC5oYXNfaHBkX3JlZyA9
-IHRydWUsDQo+Pj4gK8KgwqDCoMKgwqDCoCAuaXNfc29jID0gZmFsc2UsDQo+Pj4gK307DQo+Pj4g
-Kw0KPj4gUm91Z2hseSBhIHF1YXJ0ZXIgb2YgdGhlIGFib3ZlIGFyZSBpZGVudGljYWwuIEl0IG1p
-Z2h0IGJlIGJldHRlciB0bw0KPj4gZHJvcCB0aGVtIGZvciBub3cgYW5kIHJlLWludHJvZHVjZSBh
-cyBuZWVkZWQgd2l0aCBmdXR1cmUgY29kZS4NCj4+DQo+Pj4gK2NvbnN0IGNoYXIgKmNoaXBfdG9f
-c3RyKGVudW0gbG9vbmdzb25fY2hpcF9mYW1pbHkgY2hpcCkNCj4+PiArew0KPj4+ICvCoMKgwqDC
-oMKgwqAgaWYgKGNoaXAgPT0gQ0hJUF9MUzdBMjAwMCkNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoCByZXR1cm4gIkxTN0EyMDAwIjsNCj4+PiArDQo+Pj4gK8KgwqDCoMKgwqDCoCBp
-ZiAoY2hpcCA9PSBDSElQX0xTN0ExMDAwKQ0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgIHJldHVybiAiTFM3QTEwMDAiOw0KPj4+ICsNCj4+IElmIGl0IHdlcmUgbWUsIEkgd291bGQg
-YWRkIHRoZSBuYW1lIGludG8gdGhlIGxzZGNfZGVzYy4NCj4+DQo+Pg0KPj4+ICtzdGF0aWMgZW51
-bSBkcm1fbW9kZV9zdGF0dXMNCj4+PiArbHNkY19tb2RlX2NvbmZpZ19tb2RlX3ZhbGlkKHN0cnVj
-dCBkcm1fZGV2aWNlICpkZGV2LA0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgIGNvbnN0IHN0cnVjdCBkcm1fZGlzcGxheV9tb2RlICptb2Rl
-KQ0KPj4+ICt7DQo+Pj4gK8KgwqDCoMKgwqDCoCBzdHJ1Y3QgbHNkY19kZXZpY2UgKmxkZXYgPSB0
-b19sc2RjKGRkZXYpOw0KPj4+ICvCoMKgwqDCoMKgwqAgY29uc3Qgc3RydWN0IGRybV9mb3JtYXRf
-aW5mbyAqaW5mbyA9IA0KPj4+IGRybV9mb3JtYXRfaW5mbyhEUk1fRk9STUFUX1hSR0I4ODg4KTsN
-Cj4+IFNob3J0LXRlcm0gaGFyZCBjb2RpbmcgYSBmb3JtYXQgaXMgZmluZSwgYnV0IHRoZXJlIHNo
-b3VsZCBiZSBhIGNvbW1lbnQNCj4+IGRlc2NyaWJpbmcgd2h5Lg0KPj4NCj4+PiArwqDCoMKgwqDC
-oMKgIHU2NCBtaW5fcGl0Y2ggPSBkcm1fZm9ybWF0X2luZm9fbWluX3BpdGNoKGluZm8sIDAsIA0K
-Pj4+IG1vZGUtPmhkaXNwbGF5KTsNCj4+PiArwqDCoMKgwqDCoMKgIHU2NCBmYl9zaXplID0gbWlu
-X3BpdGNoICogbW9kZS0+dmRpc3BsYXk7DQo+Pj4gKw0KPj4+ICvCoMKgwqDCoMKgwqAgaWYgKGZi
-X3NpemUgKiAzID4gbGRldi0+dnJhbV9zaXplKSB7DQo+PiBXaHkgYXJlIHdlIHVzaW5nIDMgaGVy
-ZT8gUGxlYXNlIGFkZCBhbiBpbmxpbmUgY29tbWVudC4NCj4+DQo+Pg0KPj4+ICtzdGF0aWMgY29u
-c3Qgc3RydWN0IGRldl9wbV9vcHMgbHNkY19wbV9vcHMgPSB7DQo+Pj4gK8KgwqDCoMKgwqDCoCAu
-c3VzcGVuZCA9IGxzZGNfcG1fc3VzcGVuZCwNCj4+PiArwqDCoMKgwqDCoMKgIC5yZXN1bWUgPSBs
-c2RjX3BtX3Jlc3VtZSwNCj4+PiArwqDCoMKgwqDCoMKgIC5mcmVlemUgPSBsc2RjX3BtX2ZyZWV6
-ZSwNCj4+PiArwqDCoMKgwqDCoMKgIC50aGF3ID0gbHNkY19wbV90aGF3LA0KPj4+ICvCoMKgwqDC
-oMKgwqAgLnBvd2Vyb2ZmID0gbHNkY19wbV9mcmVlemUsDQo+Pj4gK8KgwqDCoMKgwqDCoCAucmVz
-dG9yZSA9IGxzZGNfcG1fcmVzdW1lLA0KPj4+ICt9Ow0KPj4+ICsNCj4+IFRoZSBhYm92ZSBzZWN0
-aW9uIChhbmQgZnVuY3Rpb25zKSBzaG91bGQgcHJvYmFibHkgYmUgd3JhcHBlZCBpbiBhDQo+PiBD
-T05GSUdfUE1fU0xFRVAgYmxvY2suDQo+Pg0KPj4NCj4+DQo+Pj4gK3N0YXRpYyBjb25zdCBzdHJ1
-Y3QgcGNpX2RldmljZV9pZCBsc2RjX3BjaWlkX2xpc3RbXSA9IHsNCj4+PiArwqDCoMKgwqDCoMKg
-IHtQQ0lfVkVORE9SX0lEX0xPT05HU09OLCAweDdhMDYsIFBDSV9BTllfSUQsIFBDSV9BTllfSUQs
-IDAsIA0KPj4+IDAsIENISVBfTFM3QTEwMDB9LA0KPj4+ICvCoMKgwqDCoMKgwqAge1BDSV9WRU5E
-T1JfSURfTE9PTkdTT04sIDB4N2EzNiwgUENJX0FOWV9JRCwgUENJX0FOWV9JRCwgMCwgDQo+Pj4g
-MCwgQ0hJUF9MUzdBMjAwMH0sDQo+Pj4gK8KgwqDCoMKgwqDCoCB7MCwgMCwgMCwgMCwgMCwgMCwg
-MH0NCj4+PiArfTsNCj4+PiArDQo+Pj4gK3N0YXRpYyBpbnQgX19pbml0IGxvb25nc29uX21vZHVs
-ZV9pbml0KHZvaWQpDQo+Pj4gK3sNCj4+PiArwqDCoMKgwqDCoMKgIHdoaWxlICgocGRldiA9IHBj
-aV9nZXRfY2xhc3MoUENJX0NMQVNTX0RJU1BMQVlfVkdBIDw8IDgsIA0KPj4+IHBkZXYpKSkgew0K
-Pj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIGlmIChwZGV2LT52ZW5kb3IgIT0gUENJ
-X1ZFTkRPUl9JRF9MT09OR1NPTikgew0KPj4+ICvCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqDCoCBwcl9pbmZvKCJEaXNjcmV0ZSBncmFwaGljIGNhcmQgZGV0ZWN0ZWQs
-IA0KPj4+IGFib3J0XG4iKTsNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqAgcmV0dXJuIDA7DQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
-fQ0KPj4+ICvCoMKgwqDCoMKgwqAgfQ0KPj4gWW91IGNhbiBzZXQgdGhlIGNsYXNzL2NsYXNzX21h
-c2sgaW4gdGhlIGxzZGNfcGNpaWRfbGlzdCBhbmQgZHJvcCB0aGlzDQo+PiBsb29wLiBUaGUgdmVu
-ZG9yIGlzIGFscmVhZHkgbGlzdGVkIGFib3ZlIGFuZCBjaGVja2VkIGJ5IGNvcmUuDQo+Pg0KPj4N
-Cj4+DQo+Pj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfZHJ2LmgNCj4+PiBA
-QCAtMCwwICsxLDMyNCBAQA0KPj4+ICsvKiBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIu
-MCAqLw0KPj4+ICsvKg0KPj4+ICsgKiBDb3B5cmlnaHQgKEMpIDIwMjIgTG9vbmdzb24gQ29ycG9y
-YXRpb24NCj4+PiArICoNCj4+IFdlJ3JlIGluIDIwMjMsIHVwZGF0ZSB0aGUgeWVhciBhY3Jvc3Mg
-dGhlIGZpbGVzPw0KPj4NCj4+DQo+Pg0KPj4+ICtzdHJ1Y3QgbHNkY19nZW0gew0KPj4+ICvCoMKg
-wqDCoMKgwqAgLyogQG11dGV4OiBwcm90ZWN0IG9iamVjdHMgbGlzdCAqLw0KPj4+ICvCoMKgwqDC
-oMKgwqAgc3RydWN0IG11dGV4IG11dGV4Ow0KPj4+ICvCoMKgwqDCoMKgwqAgc3RydWN0IGxpc3Rf
-aGVhZCBvYmplY3RzOw0KPj4+ICt9Ow0KPj4+ICsNCj4+PiArc3RydWN0IGxzZGNfZGV2aWNlIHsN
-Cj4+PiArwqDCoMKgwqDCoMKgIHN0cnVjdCBkcm1fZGV2aWNlIGJhc2U7DQo+Pj4gK8KgwqDCoMKg
-wqDCoCBzdHJ1Y3QgdHRtX2RldmljZSBiZGV2Ow0KPj4+ICsNCj4+PiArwqDCoMKgwqDCoMKgIC8q
-IEBkZXNjcDogZmVhdHVyZXMgZGVzY3JpcHRpb24gb2YgdGhlIERDIHZhcmlhbnQgKi8NCj4+PiAr
-wqDCoMKgwqDCoMKgIGNvbnN0IHN0cnVjdCBsc2RjX2Rlc2MgKmRlc2NwOw0KPj4+ICsNCj4+PiAr
-wqDCoMKgwqDCoMKgIHN0cnVjdCBwY2lfZGV2ICpncHU7DQo+Pj4gKw0KPj4+ICvCoMKgwqDCoMKg
-wqAgLyogQHJlZ2xvY2s6IHByb3RlY3RzIGNvbmN1cnJlbnQgYWNjZXNzICovDQo+Pj4gK8KgwqDC
-oMKgwqDCoCBzcGlubG9ja190IHJlZ2xvY2s7DQo+Pj4gK8KgwqDCoMKgwqDCoCB2b2lkIF9faW9t
-ZW0gKnJlZ19iYXNlOw0KPj4+ICvCoMKgwqDCoMKgwqAgcmVzb3VyY2Vfc2l6ZV90IHZyYW1fYmFz
-ZTsNCj4+PiArwqDCoMKgwqDCoMKgIHJlc291cmNlX3NpemVfdCB2cmFtX3NpemU7DQo+Pj4gKw0K
-Pj4+ICvCoMKgwqDCoMKgwqAgcmVzb3VyY2Vfc2l6ZV90IGd0dF9zaXplOw0KPj4+ICsNCj4+PiAr
-wqDCoMKgwqDCoMKgIHN0cnVjdCBsc2RjX2Rpc3BsYXlfcGlwZSBkaXNwaXBlW0xTRENfTlVNX0NS
-VENdOw0KPj4+ICsNCj4+PiArwqDCoMKgwqDCoMKgIHN0cnVjdCBsc2RjX2dlbSBnZW07DQo+Pj4g
-Kw0KPj4gTGFzdCB0aW1lIEkgbG9va2VkIHRoZXJlIHdhcyBubyBvdGhlciBkcml2ZXIgd2l0aCBh
-IGxpc3Qgb2YgZ2VtDQo+PiBvYmplY3RzIChhbmQgYSBtdXRleCkgaW4gaXRzIGRldmljZSBzdHJ1
-Y3QuIEFyZSB5b3Ugc3VyZSB3ZSBuZWVkIHRoaXM/DQo+Pg0KPj4gVmVyeSBmZXcgZHJpdmVycyB1
-c2UgVFRNIGRpcmVjdGx5IGFuZCBJIHRoaW5rIHlvdSB3YW50IHRvIHVzZQ0KPj4gZHJtX2dlbV92
-cmFtX2hlbHBlciBvciBkcm1fZ2VtX3R0bV9oZWxwZXIgaW5zdGVhZC4NCj4+DQo+Pg0KPj4NCj4+
-PiArc3RhdGljIGludCBsczdhMTAwMF9waXhwbGxfcGFyYW1fdXBkYXRlKHN0cnVjdCBsc2RjX3Bs
-bCAqIGNvbnN0IHRoaXMsDQo+Pj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDC
-oMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgc3RydWN0IGxzZGNfcGxs
-X3Bhcm1zIGNvbnN0IA0KPj4+ICpwaW4pDQo+Pj4gK3sNCj4+PiArwqDCoMKgwqDCoMKgIHZvaWQg
-X19pb21lbSAqcmVnID0gdGhpcy0+bW1pbzsNCj4+PiArwqDCoMKgwqDCoMKgIHVuc2lnbmVkIGlu
-dCBjb3VudGVyID0gMDsNCj4+PiArwqDCoMKgwqDCoMKgIGJvb2wgbG9ja2VkOw0KPj4+ICvCoMKg
-wqDCoMKgwqAgdTMyIHZhbDsNCj4+PiArDQo+Pj4gK8KgwqDCoMKgwqDCoCAvKiBCeXBhc3MgdGhl
-IHNvZnR3YXJlIGNvbmZpZ3VyZWQgUExMLCB1c2luZyByZWZjbGsgZGlyZWN0bHkgKi8NCj4+PiAr
-wqDCoMKgwqDCoMKgIHZhbCA9IHJlYWRsKHJlZyArIDB4NCk7DQo+Pj4gK8KgwqDCoMKgwqDCoCB2
-YWwgJj0gfigxIDw8IDgpOw0KPj4+ICvCoMKgwqDCoMKgwqAgd3JpdGVsKHZhbCwgcmVnICsgMHg0
-KTsNCj4+PiArDQo+PiBUaGVyZSBhcmUgYSBsb3Qgb2YgbWFnaWMgbnVtYmVycyBpbiB0aGlzIGZ1
-bmN0aW9uLiBMZXQncyBkZWZpbmUgdGhlbQ0KPj4gcHJvcGVybHkgaW4gdGhlIGhlYWRlci4NCj4+
-DQo+Pg0KPj4NCj4+PiArLyogSGVscGVycyBmb3IgY2hpcCBkZXRlY3Rpb24gKi8NCj4+PiArYm9v
-bCBsc2RjX2lzX2xzMmsyMDAwKHZvaWQpOw0KPj4+ICtib29sIGxzZGNfaXNfbHMyazEwMDAodm9p
-ZCk7DQo+Pj4gK3Vuc2lnbmVkIGludCBsb29uZ3Nvbl9jcHVfZ2V0X3ByaWQodTggKmltcGwsIHU4
-ICpyZXYpOw0KPj4NCj4+IFNpbmNlIHRoaXMgcmV2aXNpb24gZG9lcyBwY2lfZGV2aWNlcyBvbmx5
-LCB3ZSBkb24ndCBuZWVkIHRoaXMgDQo+PiBkZXRlY3Rpb24gcmlnaHQ/DQo+Pg0KPj4NCj4+IEhv
-cGUgdGhhdCBoZWxwcywNCj4+IEVtaWwNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1z
-aWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFy
-by1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On Tue, Mar 07, 2023 at 11:25:27PM +0900, Asahi Lina wrote:
+> Add the initial abstractions for DRM drivers and devices. These go
+> together in one commit since they are fairly tightly coupled types.
+> 
+> A few things have been stubbed out, to be implemented as further bits of
+> the DRM subsystem are introduced.
+> 
+> Signed-off-by: Asahi Lina <lina@asahilina.net>
+
+Ok so this is fairly fundamental lifetime fun and might be fairly
+orthogonal to most of the things you actually want to do with a drm driver
+(like implement gem or whatever). So separate mail.
+
+So upfront short intro. There's 3 different lifetimes involved in building
+a drm driver:
+
+- struct drm_driver. It's refcounted because it's fundamentally an uapi
+  interface thing, and all the various uapi interfaces that build on top
+  of this (drm_file, dma_buf, ...) need to hold references on it. It's
+  supposed to survive for as long as userspace needs it or the underlying
+  driver is bound, whichever is longer.
+
+- struct device. Refcounted and good for dmesg printing, nothing else.
+  Yes, because ...
+
+- ... the actual hardware resource, in many places also represented by struct
+  device. Not refcounted, instead it's limited by hotunplug or more
+  precisiely, how long your driver is bound to the struct device. You
+  could make a case that in C this is represented by the bus specific type
+  (e.g. platform_device), and the bus-specific hooks delineate the
+  lifetime (for platform devices that's that's from ->probe to ->remove).
+  Since there's no C type for this I'll call this hwdevice.
+
+I think for rust it would be good if we model a bit more precisely in
+rust. It might be possible to use the bus-specific types as the hwdevice,
+but that's not entirely right either because each bus device is both
+representing the hwdevice and the refcounted struct device.
+
+Now onto lifetimes, or at least how this is usually handled.
+
+- struct device should be obvious, the important part really is that the
+  rust wrappers should not allow anything to be done with that which is
+  tied to the hwdevice lifetime. Which is almost everything you want to do
+  with a struct (platform_)device (aside from pure sw stuff like dmesg
+  printing).
+
+- the hwdevice is _not_ refcounted. I think in rust this maps to borrow
+  semantics, to make sure that the reference only stays valid during a
+  driver callback. The driver core/bus driver ensure that all the various
+  callbacks (pm_ops, platform_driver, ...) finish before the ->remove
+  callback starts.
+
+- usually the the link from hwdevice to drm_device is done with a
+  refcounted drm_device stored with dev_set_drvdata. For rust it'd be nice
+  if that's the Driver and fully typesafe and automatically cleaned up.
+
+- which brings us to how hwdevice cleanup works in C: That's done with all
+  the devm_ helpers for practically anything you might want to set up for
+  hw access: mappings, interrupts, .... Note that there's also
+  devm_*malloc functions, when drivers use them that's almost always a bug
+  because generally allocations should stick around with the drm_device
+  and not go down with the non-refcounted hwdevice lifetime.
+
+  For added fun the bus/driver core also uses devm_ to mange things tied
+  to the refcounted struct device, which works because devm_ nests and
+  ->probe opens up a new devm_ bucket which is torn down at ->remove time.
+  But luckily drivers should never deal with that, so for them (on the C
+  side at least) devm_ is the right lifetime model for things tied to the
+  hwdevice lifetime.
+
+  For rust this means that we really should try to tie all the hw related
+  things into devm or equivalent, and make both sure it's automatically
+  cleaned up at that point, but also no later (because if you clean up hw
+  stuff after ->remove you have a driver bug).
+
+- Similarly on the drm_device side we have drmm_. You can have some
+  refcounted things within the lifetime of drm_device (like dma_buf), but
+  if things the driver creates survive past the point of drm_device, then
+  probably something went really wrong. Either a leak or you'll blow up in
+  the C code.
+
+  So again for rust I think we should try to model this, and make sure
+  (with borrow semantics and avoiding full refcounting like the plague in
+  driver code) that driver structs and other sw things can't outlive the
+  drm_device, but also don't hold it alive unduly.
+
+- Since the point of a drm_device is to drive hardware, you need to be
+  able to safely dereference the drm_device->dev pointer and know whether
+  it's still a hwdevice (i.e. useful) or just a struct device because the
+  hw is gone. That's done with drm_dev_enter/exit and making sure that
+  ->remove calls drm_dev_unplug as the very first thing, before it starts
+  tearing down hw resources like mappings, interrupts, ...
+
+  On the C side we entirely rely on review for this, and it just doesn't
+  work. Unless exhaustively tested, hotunplug just dies, and I think for
+  more complex drivers this is something where Rust type enforcement could
+  really shine: We'd need to make sure that a driver can only get at the
+  hwtype where it's safe (bus/driver core callbacks or drm_dev_enter/exit
+  as a mutex-guard thing). Furthermore we need to ensure that that
+  drm_dev_unplug really is the first thing done in ->remove (and by
+  symmetry drm_dev_register the last thing probe does). I think a neat way
+  would be if ->probe would return a container of things that implement a
+  Uapi trait, which has register and unplug functions, and then the rust
+  glue calls that.
+
+  More aggressively would be to outright not implement ->remove for rust
+  drivers and entirely rely on the devm stack of cleanup actions. This
+  would still need a type trick to ensure that drm_dev_register is the
+  very last thing that's called (to make sure the matching drm_dev_unplug
+  is the first thing).
+
+- Despite that we have refcounted pointers going both ways from
+  drm_device<->device there's no loop, because the device->drm_device
+  reference is dropped with hwdevice lifetime (through devm if you're
+  using devm_drm_dev_alloc in a C driver), which breaks the loop. Note
+  that the drm_device->device refcount/pointer stays until the very end of
+  drm_device (need that for dmesg printing), but outside of
+  drm_dev_enter/exit it's really just a temption for bugs.
+
+- I think ideally drivers themselves should not even try to refcount
+  drm_device or device, but instead have all it all tied directly. The
+  exceptions really are only for when you have separate, free-standing
+  uapi objects (like dma_buf or dma_fence or drm_file), and in those cases
+  the combo of C code + rust glue should ensure that the refcounting is
+  done right. If a rust driver has any additional refcounting need for
+  these structs then I think we've screwed up the data lifetime model.
+
+Apologies for the wall of text. I hope I didn't forget anything crucial,
+I've been pondering this for a few weeks now :-)
+
+Imo this doesn't need to be fixed before we merge asahi, but it is
+something that I think really should fix because despite years of effort
+and all the auto-cleanup infrastructure like devm_ and drmm_ C drivers are
+still buggy by default, there's no clear understanding outside of a select
+few about the problems ("devm_kmalloc considered harmful" is some actual
+talk title), and I think this is something where Rust typing and borrow
+checker really could substantially improve the state of the art.
+
+And yes for a soc driver that's all fairly irrelevant, because it's
+physically not possible to remove a device, but for most drm drivers it is
+absolutely possible to burn them with a hotunplug (hotunplug of device
+pass-through to a vm if you can't physically hotunplug the device itself),
+so this isn't academic at all.
+
+I'll try and type up the separate mail about semantics of gem drivers and
+all that stuff tomorrow.
+
+Cheers, Daniel
+
+> ---
+>  rust/bindings/bindings_helper.h |   3 +
+>  rust/kernel/drm/device.rs       |  76 +++++++++
+>  rust/kernel/drm/drv.rs          | 339 ++++++++++++++++++++++++++++++++++++++++
+>  rust/kernel/drm/mod.rs          |   2 +
+>  4 files changed, 420 insertions(+)
+> 
+> diff --git a/rust/bindings/bindings_helper.h b/rust/bindings/bindings_helper.h
+> index 2687bef1676f..2a999138c4ae 100644
+> --- a/rust/bindings/bindings_helper.h
+> +++ b/rust/bindings/bindings_helper.h
+> @@ -6,10 +6,13 @@
+>   * Sorted alphabetically.
+>   */
+>  
+> +#include <drm/drm_device.h>
+> +#include <drm/drm_drv.h>
+>  #include <drm/drm_ioctl.h>
+>  #include <linux/delay.h>
+>  #include <linux/device.h>
+>  #include <linux/dma-mapping.h>
+> +#include <linux/fs.h>
+>  #include <linux/ioctl.h>
+>  #include <linux/io-pgtable.h>
+>  #include <linux/ktime.h>
+> diff --git a/rust/kernel/drm/device.rs b/rust/kernel/drm/device.rs
+> new file mode 100644
+> index 000000000000..6007f941137a
+> --- /dev/null
+> +++ b/rust/kernel/drm/device.rs
+> @@ -0,0 +1,76 @@
+> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> +
+> +//! DRM device.
+> +//!
+> +//! C header: [`include/linux/drm/drm_device.h`](../../../../include/linux/drm/drm_device.h)
+> +
+> +use crate::{bindings, device, drm, types::ForeignOwnable};
+> +use core::marker::PhantomData;
+> +
+> +/// Represents a reference to a DRM device. The device is reference-counted and is guaranteed to
+> +/// not be dropped while this object is alive.
+> +pub struct Device<T: drm::drv::Driver> {
+> +    // Type invariant: ptr must be a valid and initialized drm_device,
+> +    // and this value must either own a reference to it or the caller
+> +    // must ensure that it is never dropped if the reference is borrowed.
+> +    pub(super) ptr: *mut bindings::drm_device,
+> +    _p: PhantomData<T>,
+> +}
+> +
+> +impl<T: drm::drv::Driver> Device<T> {
+> +    // Not intended to be called externally, except via declare_drm_ioctls!()
+> +    #[doc(hidden)]
+> +    pub unsafe fn from_raw(raw: *mut bindings::drm_device) -> Device<T> {
+> +        Device {
+> +            ptr: raw,
+> +            _p: PhantomData,
+> +        }
+> +    }
+> +
+> +    #[allow(dead_code)]
+> +    pub(crate) fn raw(&self) -> *const bindings::drm_device {
+> +        self.ptr
+> +    }
+> +
+> +    pub(crate) fn raw_mut(&mut self) -> *mut bindings::drm_device {
+> +        self.ptr
+> +    }
+> +
+> +    /// Returns a borrowed reference to the user data associated with this Device.
+> +    pub fn data(&self) -> <T::Data as ForeignOwnable>::Borrowed<'_> {
+> +        unsafe { T::Data::borrow((*self.ptr).dev_private) }
+> +    }
+> +}
+> +
+> +impl<T: drm::drv::Driver> Drop for Device<T> {
+> +    fn drop(&mut self) {
+> +        // SAFETY: By the type invariants, we know that `self` owns a reference, so it is safe to
+> +        // relinquish it now.
+> +        unsafe { bindings::drm_dev_put(self.ptr) };
+> +    }
+> +}
+> +
+> +impl<T: drm::drv::Driver> Clone for Device<T> {
+> +    fn clone(&self) -> Self {
+> +        // SAFETY: We get a new reference and then create a new owning object from the raw pointer
+> +        unsafe {
+> +            bindings::drm_dev_get(self.ptr);
+> +            Device::from_raw(self.ptr)
+> +        }
+> +    }
+> +}
+> +
+> +// SAFETY: `Device` only holds a pointer to a C device, which is safe to be used from any thread.
+> +unsafe impl<T: drm::drv::Driver> Send for Device<T> {}
+> +
+> +// SAFETY: `Device` only holds a pointer to a C device, references to which are safe to be used
+> +// from any thread.
+> +unsafe impl<T: drm::drv::Driver> Sync for Device<T> {}
+> +
+> +// Make drm::Device work for dev_info!() and friends
+> +unsafe impl<T: drm::drv::Driver> device::RawDevice for Device<T> {
+> +    fn raw_device(&self) -> *mut bindings::device {
+> +        // SAFETY: ptr must be valid per the type invariant
+> +        unsafe { (*self.ptr).dev }
+> +    }
+> +}
+> diff --git a/rust/kernel/drm/drv.rs b/rust/kernel/drm/drv.rs
+> new file mode 100644
+> index 000000000000..29a465515dc9
+> --- /dev/null
+> +++ b/rust/kernel/drm/drv.rs
+> @@ -0,0 +1,339 @@
+> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+> +
+> +//! DRM driver core.
+> +//!
+> +//! C header: [`include/linux/drm/drm_drv.h`](../../../../include/linux/drm/drm_drv.h)
+> +
+> +use crate::{
+> +    bindings, device, drm,
+> +    error::code::*,
+> +    error::from_kernel_err_ptr,
+> +    error::{Error, Result},
+> +    prelude::*,
+> +    private::Sealed,
+> +    str::CStr,
+> +    types::ForeignOwnable,
+> +    ThisModule,
+> +};
+> +use core::{
+> +    marker::{PhantomData, PhantomPinned},
+> +    pin::Pin,
+> +};
+> +use macros::vtable;
+> +
+> +/// Driver use the GEM memory manager. This should be set for all modern drivers.
+> +pub const FEAT_GEM: u32 = bindings::drm_driver_feature_DRIVER_GEM;
+> +/// Driver supports mode setting interfaces (KMS).
+> +pub const FEAT_MODESET: u32 = bindings::drm_driver_feature_DRIVER_MODESET;
+> +/// Driver supports dedicated render nodes.
+> +pub const FEAT_RENDER: u32 = bindings::drm_driver_feature_DRIVER_RENDER;
+> +/// Driver supports the full atomic modesetting userspace API.
+> +///
+> +/// Drivers which only use atomic internally, but do not support the full userspace API (e.g. not
+> +/// all properties converted to atomic, or multi-plane updates are not guaranteed to be tear-free)
+> +/// should not set this flag.
+> +pub const FEAT_ATOMIC: u32 = bindings::drm_driver_feature_DRIVER_ATOMIC;
+> +/// Driver supports DRM sync objects for explicit synchronization of command submission.
+> +pub const FEAT_SYNCOBJ: u32 = bindings::drm_driver_feature_DRIVER_SYNCOBJ;
+> +/// Driver supports the timeline flavor of DRM sync objects for explicit synchronization of command
+> +/// submission.
+> +pub const FEAT_SYNCOBJ_TIMELINE: u32 = bindings::drm_driver_feature_DRIVER_SYNCOBJ_TIMELINE;
+> +
+> +/// Information data for a DRM Driver.
+> +pub struct DriverInfo {
+> +    /// Driver major version.
+> +    pub major: i32,
+> +    /// Driver minor version.
+> +    pub minor: i32,
+> +    /// Driver patchlevel version.
+> +    pub patchlevel: i32,
+> +    /// Driver name.
+> +    pub name: &'static CStr,
+> +    /// Driver description.
+> +    pub desc: &'static CStr,
+> +    /// Driver date.
+> +    pub date: &'static CStr,
+> +}
+> +
+> +/// Internal memory management operation set, normally created by memory managers (e.g. GEM).
+> +///
+> +/// See `kernel::drm::gem` and `kernel::drm::gem::shmem`.
+> +pub struct AllocOps {
+> +    pub(crate) gem_create_object: Option<
+> +        unsafe extern "C" fn(
+> +            dev: *mut bindings::drm_device,
+> +            size: usize,
+> +        ) -> *mut bindings::drm_gem_object,
+> +    >,
+> +    pub(crate) prime_handle_to_fd: Option<
+> +        unsafe extern "C" fn(
+> +            dev: *mut bindings::drm_device,
+> +            file_priv: *mut bindings::drm_file,
+> +            handle: u32,
+> +            flags: u32,
+> +            prime_fd: *mut core::ffi::c_int,
+> +        ) -> core::ffi::c_int,
+> +    >,
+> +    pub(crate) prime_fd_to_handle: Option<
+> +        unsafe extern "C" fn(
+> +            dev: *mut bindings::drm_device,
+> +            file_priv: *mut bindings::drm_file,
+> +            prime_fd: core::ffi::c_int,
+> +            handle: *mut u32,
+> +        ) -> core::ffi::c_int,
+> +    >,
+> +    pub(crate) gem_prime_import: Option<
+> +        unsafe extern "C" fn(
+> +            dev: *mut bindings::drm_device,
+> +            dma_buf: *mut bindings::dma_buf,
+> +        ) -> *mut bindings::drm_gem_object,
+> +    >,
+> +    pub(crate) gem_prime_import_sg_table: Option<
+> +        unsafe extern "C" fn(
+> +            dev: *mut bindings::drm_device,
+> +            attach: *mut bindings::dma_buf_attachment,
+> +            sgt: *mut bindings::sg_table,
+> +        ) -> *mut bindings::drm_gem_object,
+> +    >,
+> +    pub(crate) gem_prime_mmap: Option<
+> +        unsafe extern "C" fn(
+> +            obj: *mut bindings::drm_gem_object,
+> +            vma: *mut bindings::vm_area_struct,
+> +        ) -> core::ffi::c_int,
+> +    >,
+> +    pub(crate) dumb_create: Option<
+> +        unsafe extern "C" fn(
+> +            file_priv: *mut bindings::drm_file,
+> +            dev: *mut bindings::drm_device,
+> +            args: *mut bindings::drm_mode_create_dumb,
+> +        ) -> core::ffi::c_int,
+> +    >,
+> +    pub(crate) dumb_map_offset: Option<
+> +        unsafe extern "C" fn(
+> +            file_priv: *mut bindings::drm_file,
+> +            dev: *mut bindings::drm_device,
+> +            handle: u32,
+> +            offset: *mut u64,
+> +        ) -> core::ffi::c_int,
+> +    >,
+> +    pub(crate) dumb_destroy: Option<
+> +        unsafe extern "C" fn(
+> +            file_priv: *mut bindings::drm_file,
+> +            dev: *mut bindings::drm_device,
+> +            handle: u32,
+> +        ) -> core::ffi::c_int,
+> +    >,
+> +}
+> +
+> +/// Trait for memory manager implementations. Implemented internally.
+> +pub trait AllocImpl: Sealed {
+> +    /// The C callback operations for this memory manager.
+> +    const ALLOC_OPS: AllocOps;
+> +}
+> +
+> +/// A DRM driver implementation.
+> +#[vtable]
+> +pub trait Driver {
+> +    /// Context data associated with the DRM driver
+> +    ///
+> +    /// Determines the type of the context data passed to each of the methods of the trait.
+> +    type Data: ForeignOwnable + Sync + Send;
+> +
+> +    /// The type used to manage memory for this driver.
+> +    ///
+> +    /// Should be either `drm::gem::Object<T>` or `drm::gem::shmem::Object<T>`.
+> +    type Object: AllocImpl;
+> +
+> +    /// Driver metadata
+> +    const INFO: DriverInfo;
+> +
+> +    /// Feature flags
+> +    const FEATURES: u32;
+> +
+> +    /// IOCTL list. See `kernel::drm::ioctl::declare_drm_ioctls!{}`.
+> +    const IOCTLS: &'static [drm::ioctl::DrmIoctlDescriptor];
+> +}
+> +
+> +/// A registration of a DRM device
+> +///
+> +/// # Invariants:
+> +///
+> +/// drm is always a valid pointer to an allocated drm_device
+> +pub struct Registration<T: Driver> {
+> +    drm: drm::device::Device<T>,
+> +    registered: bool,
+> +    fops: bindings::file_operations,
+> +    vtable: Pin<Box<bindings::drm_driver>>,
+> +    _p: PhantomData<T>,
+> +    _pin: PhantomPinned,
+> +}
+> +
+> +#[cfg(CONFIG_DRM_LEGACY)]
+> +macro_rules! drm_legacy_fields {
+> +    ( $($field:ident: $val:expr),* $(,)? ) => {
+> +        bindings::drm_driver {
+> +            $( $field: $val ),*,
+> +            firstopen: None,
+> +            preclose: None,
+> +            dma_ioctl: None,
+> +            dma_quiescent: None,
+> +            context_dtor: None,
+> +            irq_handler: None,
+> +            irq_preinstall: None,
+> +            irq_postinstall: None,
+> +            irq_uninstall: None,
+> +            get_vblank_counter: None,
+> +            enable_vblank: None,
+> +            disable_vblank: None,
+> +            dev_priv_size: 0,
+> +        }
+> +    }
+> +}
+> +
+> +#[cfg(not(CONFIG_DRM_LEGACY))]
+> +macro_rules! drm_legacy_fields {
+> +    ( $($field:ident: $val:expr),* $(,)? ) => {
+> +        bindings::drm_driver {
+> +            $( $field: $val ),*
+> +        }
+> +    }
+> +}
+> +
+> +/// Registers a DRM device with the rest of the kernel.
+> +///
+> +/// It automatically picks up THIS_MODULE.
+> +#[allow(clippy::crate_in_macro_def)]
+> +#[macro_export]
+> +macro_rules! drm_device_register {
+> +    ($reg:expr, $data:expr, $flags:expr $(,)?) => {{
+> +        $crate::drm::drv::Registration::register($reg, $data, $flags, &crate::THIS_MODULE)
+> +    }};
+> +}
+> +
+> +impl<T: Driver> Registration<T> {
+> +    const VTABLE: bindings::drm_driver = drm_legacy_fields! {
+> +        load: None,
+> +        open: None, // TODO: File abstraction
+> +        postclose: None, // TODO: File abstraction
+> +        lastclose: None,
+> +        unload: None,
+> +        release: None,
+> +        master_set: None,
+> +        master_drop: None,
+> +        debugfs_init: None,
+> +        gem_create_object: T::Object::ALLOC_OPS.gem_create_object,
+> +        prime_handle_to_fd: T::Object::ALLOC_OPS.prime_handle_to_fd,
+> +        prime_fd_to_handle: T::Object::ALLOC_OPS.prime_fd_to_handle,
+> +        gem_prime_import: T::Object::ALLOC_OPS.gem_prime_import,
+> +        gem_prime_import_sg_table: T::Object::ALLOC_OPS.gem_prime_import_sg_table,
+> +        gem_prime_mmap: T::Object::ALLOC_OPS.gem_prime_mmap,
+> +        dumb_create: T::Object::ALLOC_OPS.dumb_create,
+> +        dumb_map_offset: T::Object::ALLOC_OPS.dumb_map_offset,
+> +        dumb_destroy: T::Object::ALLOC_OPS.dumb_destroy,
+> +
+> +        major: T::INFO.major,
+> +        minor: T::INFO.minor,
+> +        patchlevel: T::INFO.patchlevel,
+> +        name: T::INFO.name.as_char_ptr() as *mut _,
+> +        desc: T::INFO.desc.as_char_ptr() as *mut _,
+> +        date: T::INFO.date.as_char_ptr() as *mut _,
+> +
+> +        driver_features: T::FEATURES,
+> +        ioctls: T::IOCTLS.as_ptr(),
+> +        num_ioctls: T::IOCTLS.len() as i32,
+> +        fops: core::ptr::null_mut(),
+> +    };
+> +
+> +    /// Creates a new [`Registration`] but does not register it yet.
+> +    ///
+> +    /// It is allowed to move.
+> +    pub fn new(parent: &dyn device::RawDevice) -> Result<Self> {
+> +        let vtable = Pin::new(Box::try_new(Self::VTABLE)?);
+> +        let raw_drm = unsafe { bindings::drm_dev_alloc(&*vtable, parent.raw_device()) };
+> +        let raw_drm = from_kernel_err_ptr(raw_drm)?;
+> +
+> +        // The reference count is one, and now we take ownership of that reference as a
+> +        // drm::device::Device.
+> +        let drm = unsafe { drm::device::Device::from_raw(raw_drm) };
+> +
+> +        Ok(Self {
+> +            drm,
+> +            registered: false,
+> +            vtable,
+> +            fops: Default::default(), // TODO: GEM abstraction
+> +            _pin: PhantomPinned,
+> +            _p: PhantomData,
+> +        })
+> +    }
+> +
+> +    /// Registers a DRM device with the rest of the kernel.
+> +    ///
+> +    /// Users are encouraged to use the [`drm_device_register!()`] macro because it automatically
+> +    /// picks up the current module.
+> +    pub fn register(
+> +        self: Pin<&mut Self>,
+> +        data: T::Data,
+> +        flags: usize,
+> +        module: &'static ThisModule,
+> +    ) -> Result {
+> +        if self.registered {
+> +            // Already registered.
+> +            return Err(EINVAL);
+> +        }
+> +
+> +        // SAFETY: We never move out of `this`.
+> +        let this = unsafe { self.get_unchecked_mut() };
+> +        let data_pointer = <T::Data as ForeignOwnable>::into_foreign(data);
+> +        // SAFETY: `drm` is valid per the type invariant
+> +        unsafe {
+> +            (*this.drm.raw_mut()).dev_private = data_pointer as *mut _;
+> +        }
+> +
+> +        this.fops.owner = module.0;
+> +        this.vtable.fops = &this.fops;
+> +
+> +        // SAFETY: The device is now initialized and ready to be registered.
+> +        let ret = unsafe { bindings::drm_dev_register(this.drm.raw_mut(), flags as u64) };
+> +        if ret < 0 {
+> +            // SAFETY: `data_pointer` was returned by `into_foreign` above.
+> +            unsafe { T::Data::from_foreign(data_pointer) };
+> +            return Err(Error::from_kernel_errno(ret));
+> +        }
+> +
+> +        this.registered = true;
+> +        Ok(())
+> +    }
+> +
+> +    /// Returns a reference to the `Device` instance for this registration.
+> +    pub fn device(&self) -> &drm::device::Device<T> {
+> +        &self.drm
+> +    }
+> +}
+> +
+> +// SAFETY: `Registration` doesn't offer any methods or access to fields when shared between threads
+> +// or CPUs, so it is safe to share it.
+> +unsafe impl<T: Driver> Sync for Registration<T> {}
+> +
+> +// SAFETY: Registration with and unregistration from the drm subsystem can happen from any thread.
+> +// Additionally, `T::Data` (which is dropped during unregistration) is `Send`, so it is ok to move
+> +// `Registration` to different threads.
+> +#[allow(clippy::non_send_fields_in_send_ty)]
+> +unsafe impl<T: Driver> Send for Registration<T> {}
+> +
+> +impl<T: Driver> Drop for Registration<T> {
+> +    /// Removes the registration from the kernel if it has completed successfully before.
+> +    fn drop(&mut self) {
+> +        if self.registered {
+> +            // Get a pointer to the data stored in device before destroying it.
+> +            // SAFETY: `drm` is valid per the type invariant
+> +            let data_pointer = unsafe { (*self.drm.raw_mut()).dev_private };
+> +
+> +            // SAFETY: Since `registered` is true, `self.drm` is both valid and registered.
+> +            unsafe { bindings::drm_dev_unregister(self.drm.raw_mut()) };
+> +
+> +            // Free data as well.
+> +            // SAFETY: `data_pointer` was returned by `into_foreign` during registration.
+> +            unsafe { <T::Data as ForeignOwnable>::from_foreign(data_pointer) };
+> +        }
+> +    }
+> +}
+> diff --git a/rust/kernel/drm/mod.rs b/rust/kernel/drm/mod.rs
+> index 9ec6d7cbcaf3..69376b3c6db9 100644
+> --- a/rust/kernel/drm/mod.rs
+> +++ b/rust/kernel/drm/mod.rs
+> @@ -2,4 +2,6 @@
+>  
+>  //! DRM subsystem abstractions.
+>  
+> +pub mod device;
+> +pub mod drv;
+>  pub mod ioctl;
+> 
+> -- 
+> 2.35.1
+> 
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
