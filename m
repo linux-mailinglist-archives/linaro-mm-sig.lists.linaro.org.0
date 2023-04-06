@@ -2,266 +2,608 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F24A6D9C9A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  6 Apr 2023 17:45:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 908896D9CC9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  6 Apr 2023 17:54:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3DA293F332
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  6 Apr 2023 15:45:51 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
-	by lists.linaro.org (Postfix) with ESMTPS id 9515E3F09B
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  6 Apr 2023 15:45:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 97E9C3EBA5
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  6 Apr 2023 15:54:08 +0000 (UTC)
+Received: from mail.marcansoft.com (marcansoft.com [212.63.210.85])
+	by lists.linaro.org (Postfix) with ESMTPS id F33F43EBA5
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  6 Apr 2023 15:53:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b=UwgzXrcR;
-	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.218.47) smtp.mailfrom=daniel@ffwll.ch;
-	dmarc=none
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-930bc91df7bso133761366b.1
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 06 Apr 2023 08:45:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google; t=1680795937;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:mail-followup-to:message-id:subject:cc:to
-         :from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=o4s/AMWTHPQ0Z3regicJnZ+4belPQ4UloMO8BfOKLAI=;
-        b=UwgzXrcRFsm3HAZ3tj9A9ayYh9opklvikGWNzA8Zs+rKhFCMFyPJ3nM9Qe0o/WrOnt
-         QGdzJUijU5vlI/c0ZV/2+Pr0ECTnQcPIwR+GS0O90gg/zsWfdQg1FJEg/Wu1PTcSUNMK
-         WssImuOUr7pyYoGsDK49IQmNh66lQt8/KxJ7s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20210112; t=1680795937;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:mail-followup-to:message-id:subject:cc:to
-         :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=o4s/AMWTHPQ0Z3regicJnZ+4belPQ4UloMO8BfOKLAI=;
-        b=Yr7nGw5ylch9UTihIv1QTiQ8zIp8UQuv9fiTNB2hlJmENkrPmdiOfiCUe1Al507g55
-         xXH8cmXUPK8j1nSRVFyBGYgQRAHLb8FSiybIYPyNBlGhygQdeawoWtJOoZEl7jO5IxAl
-         8o0iCisnzdtpBf8S7VZ9FdGrq6gRDjkS6gPNA7yupZkVohHtU2h51DicNw703CDy0Cme
-         UB9Iu2uYSnS8kI8+GDFHudFfUoiTg6nfZurGCFpqDCt4YWmSxIhPe76Q9fRflYL+KA8J
-         wdNVf/JV7lLcBXtgaqm7+sjVsZEsJAob9xEISOiYk/rQ4bCL4QQwk6QSDv+L8T+rS8l6
-         jOUg==
-X-Gm-Message-State: AAQBX9dVN9TYoS8t8ecWKuJiE4AishuBeFjWiG0xRXgUwERBrt/MbthW
-	66dRvZcgaVbSZerPGKVKAagdYg==
-X-Google-Smtp-Source: AKy350YwqwW1z5k7uN136V0I41uI+PtWwRyr9V7ixGL/0ewgSzzeYzSvJkplfR8X5tYH4vq2nignvA==
-X-Received: by 2002:a17:906:2cd:b0:92f:27c2:13c0 with SMTP id 13-20020a17090602cd00b0092f27c213c0mr5772280ejk.6.1680795937501;
-        Thu, 06 Apr 2023 08:45:37 -0700 (PDT)
-Received: from phenom.ffwll.local (212-51-149-33.fiber7.init7.net. [212.51.149.33])
-        by smtp.gmail.com with ESMTPSA id cw10-20020a170906478a00b009486efb9192sm990297ejc.11.2023.04.06.08.45.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 06 Apr 2023 08:45:36 -0700 (PDT)
-Date: Thu, 6 Apr 2023 17:45:34 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Message-ID: <ZC7pHlLFutMWJF1s@phenom.ffwll.local>
-Mail-Followup-To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
-	Asahi Lina <lina@asahilina.net>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Miguel Ojeda <ojeda@kernel.org>,
-	Alex Gaynor <alex.gaynor@gmail.com>,
-	Wedson Almeida Filho <wedsonaf@gmail.com>,
-	Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
-	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	Luben Tuikov <luben.tuikov@amd.com>,
-	Jarkko Sakkinen <jarkko@kernel.org>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	Alyssa Rosenzweig <alyssa@rosenzweig.io>,
-	Karol Herbst <kherbst@redhat.com>,
-	Ella Stanforth <ella@iglunix.org>,
-	Faith Ekstrand <faith.ekstrand@collabora.com>,
-	Mary <mary@mary.zone>, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
-	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
-	linux-sgx@vger.kernel.org, asahi@lists.linux.dev
+	dkim=pass header.d=asahilina.net header.s=default header.b=VGPkywpE;
+	spf=pass (lists.linaro.org: domain of lina@asahilina.net designates 212.63.210.85 as permitted sender) smtp.mailfrom=lina@asahilina.net;
+	dmarc=pass (policy=quarantine) header.from=asahilina.net
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: lina@asahilina.net)
+	by mail.marcansoft.com (Postfix) with ESMTPSA id D921642529;
+	Thu,  6 Apr 2023 15:53:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=asahilina.net;
+	s=default; t=1680796436;
+	bh=u/0wcm36nXuVm02z3BKP1S61gAbmdYMqyw/tOYXHGbg=;
+	h=Date:Subject:To:References:From:In-Reply-To;
+	b=VGPkywpELPrOy5WERRqLKqfXnUFWiyXfd71Z81jN0DPy6tH/JsyHIpymO1c6+ZhN/
+	 wj8XGnA9i2tWyHN4ayd5wTh/CXmSDk5aV7gZhmRplM7utDTkCSqyNgBKtTHjx9sM61
+	 2fgTxpiCrbOZkGYSaVxAEkR5tnShBmV8aGJAfxMOvDehTuw/aZxuFvwadAlkOLdFuO
+	 CYXoafc6kkIgWFDJYkK6y9siZPGDTvGI8ETsKJ1WRWpUxVjMV5BIU9eYc0+cpBB7f/
+	 yeKt0vRxQLpC9keXqLG3eeHamhEymrjHecYNq8oYnkT8qLYgMyl1NFaEQcZwwi9kDC
+	 xH8CLjK1n9dWA==
+Message-ID: <2a419eff-3566-0aa3-7185-951edde22abb@asahilina.net>
+Date: Fri, 7 Apr 2023 00:53:47 +0900
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Content-Language: en-US
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Miguel Ojeda <ojeda@kernel.org>,
+ Alex Gaynor <alex.gaynor@gmail.com>,
+ Wedson Almeida Filho <wedsonaf@gmail.com>, Boqun Feng
+ <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+ =?UTF-8?Q?Bj=c3=b6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+ Luben Tuikov <luben.tuikov@amd.com>, Jarkko Sakkinen <jarkko@kernel.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>,
+ Alyssa Rosenzweig <alyssa@rosenzweig.io>, Karol Herbst <kherbst@redhat.com>,
+ Ella Stanforth <ella@iglunix.org>,
+ Faith Ekstrand <faith.ekstrand@collabora.com>, Mary <mary@mary.zone>,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org, linux-sgx@vger.kernel.org,
+ asahi@lists.linux.dev
 References: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net>
  <20230307-rust-drm-v1-7-917ff5bc80a8@asahilina.net>
  <ZC7T92F7K9XTZPZ1@phenom.ffwll.local>
- <CANiq72=E2k7+_cwYw_EjVezk0mWCRqbH4MUjsEmxWgJMh=3AEQ@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CANiq72=E2k7+_cwYw_EjVezk0mWCRqbH4MUjsEmxWgJMh=3AEQ@mail.gmail.com>
-X-Operating-System: Linux phenom 6.1.0-7-amd64 
+From: Asahi Lina <lina@asahilina.net>
+In-Reply-To: <ZC7T92F7K9XTZPZ1@phenom.ffwll.local>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 9515E3F09B
-X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.80 / 15.00];
+X-Rspamd-Queue-Id: F33F43EBA5
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.40 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
+	DMARC_POLICY_ALLOW(-0.50)[asahilina.net,quarantine];
+	R_DKIM_ALLOW(-0.20)[asahilina.net:s=default];
+	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
-	R_SPF_NA(0.00)[no SPF record];
-	FREEMAIL_TO(0.00)[gmail.com];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[asahilina.net,linux.intel.com,kernel.org,suse.de,gmail.com,garyguo.net,protonmail.com,linaro.org,amd.com,rosenzweig.io,redhat.com,iglunix.org,collabora.com,mary.zone,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev,ffwll.ch];
+	ONCE_RECEIVED(0.10)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[30];
+	ASN(0.00)[asn:30880, ipnet:212.63.192.0/19, country:SE];
+	RCVD_TLS_ALL(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
+	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,garyguo.net,protonmail.com,linaro.org,amd.com,rosenzweig.io,redhat.com,iglunix.org,collabora.com,mary.zone,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
+	MIME_TRACE(0.00)[0:+];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[asahilina.net:dkim,asahilina.net:email,marcansoft.com:rdns];
+	DKIM_TRACE(0.00)[asahilina.net:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DMARC_NA(0.00)[ffwll.ch];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.47:from];
+	MID_RHS_MATCH_FROM(0.00)[];
 	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[ffwll.ch:+];
+	RCPT_COUNT_TWELVE(0.00)[27];
 	FROM_HAS_DN(0.00)[];
 	TAGGED_RCPT(0.00)[];
 	TO_DN_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_COUNT_TWO(0.00)[2]
-Message-ID-Hash: 4SSULLPY52LNVI2BOIPDZURW747QSPFS
-X-Message-ID-Hash: 4SSULLPY52LNVI2BOIPDZURW747QSPFS
-X-MailFrom: daniel@ffwll.ch
+	RCVD_VIA_SMTP_AUTH(0.00)[]
+Message-ID-Hash: EVI4OMN74QCP4GCWLS5ZEGKZGO4DNHXC
+X-Message-ID-Hash: EVI4OMN74QCP4GCWLS5ZEGKZGO4DNHXC
+X-MailFrom: lina@asahilina.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Asahi Lina <lina@asahilina.net>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Miguel Ojeda <ojeda@kernel.org>, Alex Gaynor <alex.gaynor@gmail.com>, Wedson Almeida Filho <wedsonaf@gmail.com>, Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>, =?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Luben Tuikov <luben.tuikov@amd.com>, Jarkko Sakkinen <jarkko@kernel.org>, Dave Hansen <dave.hansen@linux.intel.com>, Alyssa Rosenzweig <alyssa@rosenzweig.io>, Karol Herbst <kherbst@redhat.com>, Ella Stanforth <ella@iglunix.org>, Faith Ekstrand <faith.ekstrand@collabora.com>, Mary <mary@mary.zone>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-sgx@vger.kernel.org, asah
- i@lists.linux.dev, Daniel Vetter <daniel@ffwll.ch>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH RFC 07/18] rust: drm: mm: Add DRM MM Range Allocator abstraction
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4SSULLPY52LNVI2BOIPDZURW747QSPFS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EVI4OMN74QCP4GCWLS5ZEGKZGO4DNHXC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-T24gVGh1LCBBcHIgMDYsIDIwMjMgYXQgMDU6Mjg6NTlQTSArMDIwMCwgTWlndWVsIE9qZWRhIHdy
-b3RlOg0KPiBPbiBUaHUsIEFwciA2LCAyMDIzIGF0IDQ6MTXigK9QTSBEYW5pZWwgVmV0dGVyIDxk
-YW5pZWxAZmZ3bGwuY2g+IHdyb3RlOg0KPiA+DQo+ID4gRG9jdW1lbnRhdGlvbjoNCj4gPg0KPiA+
-IEluIGRybSB3ZSB0cnkgdG8gZG9jdW1lbnQgYWxsIHRoZSBpbnRlcmZhY2VzIHRoYXQgZHJpdmVy
-cyB1c2Ugd2l0aCBmb3JtYWwNCj4gPiBkb2NzLiBZZXMgdGhlcmUncyBzb21lIGFyZWFzIHRoYXQg
-YXJlIG5vdCBncmVhdCBmb3IgaGlzdG9yaWNhbCByZWFzb25zLA0KPiA+IGJ1dCBmb3IgbmV3IHN0
-dWZmIGFuZCBuZXcgd3JhcHBlcnMgd2UncmUgcmVhbGx5IHRyeWluZzoNCj4gPg0KPiA+IC0gVGhp
-cyBoZWxwcyBpbiB0ZWxsaW5nIGludGVybmFsIChldmVuIGFjcm9zcyAuYyBmaWxlcyBvciBpbiBy
-dXN0IGFjcm9zcw0KPiA+ICAgbW9kdWxlcyB3aXRoaW4gYSBjcmF0ZSkgZnJvbSBzdHVmZiBkcml2
-ZXJzIGFjY2Vzcy4gU3VyZSB5b3UgaGF2ZSBzdGF0aWMNCj4gPiAgIGluIEMgb3IgcHViIGluIHJ1
-c3QsIGJ1dCB0aGF0IGRvZXNuJ3QgdGVsbCB5b3Ugd2hldGhlciBpdCdzIHB1YmxpYyBhbGwNCj4g
-PiAgIHRoZSB3YXkgdG8gZHJpdmVycy4NCj4gDQo+IEkgdGhpbmsgeW91IG1heSBiZSB0YWxraW5n
-IGFib3V0IHRoZSB2YWx1ZSBoaWdoLWxldmVsIGRvY3MgaGVyZSwgYnV0DQo+IGp1c3QgaW4gY2Fz
-ZSwgdmlzaWJpbGl0eSBpbiBSdXN0IGlzIGZsZXhpYmxlIGVub3VnaCB0byBleHBvc2UgKG9yIG5v
-dCkNCj4gQVBJcyB0byB0aG9zZSB0aGF0IHlvdSBuZWVkLiBJbiBvdGhlciB3b3JkcywgaXQgZG9l
-cyB0ZWxsIHlvdSAoYW5kDQo+IGVuZm9yY2VzISkgd2hldGhlciBpdCBpcyBwdWJsaWMgYWxsIHRo
-ZSB3YXkgdG8gZHJpdmVycy4NCj4gDQo+IFRoZXJlIGlzIGFsc28gdGhlIHBvc3NpYmlsaXR5IG9m
-IGV2ZW4gbW9yZSBmYW5jeSB2aXNpYmlsaXR5LCBidXQgc28NCj4gZmFyIHdlIGp1c3QgbmVlZGVk
-IGBwdWIoY3JhdGUpYC4NCj4gDQo+IGBydXN0ZG9jYCBhbHNvIHNob3dzL2hpZGVzIHRoaW5ncyBh
-cyBuZWVkZWQsIHRodXMgdGhlIGdlbmVyYXRlZCBkb2NzDQo+IGZvciB0aGUgY3JhdGUgc2hvdWxk
-IG9ubHkgc2hvdyB3aGF0IGlzIHVzYWJsZSBieSBvdGhlcnMuDQo+IA0KPiBUaGVuIHRoZXJlIGlz
-IHRoZSBga2VybmVsYCBjcmF0ZSBzcGxpdCwgdG9vLg0KPiANCj4gPiAtIGlkZWFsbHkgZG9jcyBo
-YXZlIGEgc2hvcnQgaW50cm8gc2VjdGlvbiB0aGF0IGV4cGxhaW5zIHRoZSBtYWluIGNvbmNlcHRz
-DQo+ID4gICBhbmQgbGlua3MgdG8gdGhlIG1haW4gZGF0YSBzdHJ1Y3R1cmVzIGFuZCBmdW5jdGlv
-bnMuIEp1c3QgdG8gZ2l2ZQ0KPiA+ICAgcmVhZGVycyBhIGdvb2Qgc3RhcnRpbmcgcG9pbnQgdG8g
-ZXhwbG9yZS4NCj4gDQo+IEFncmVlZCwgdGhpcyBpcyB0eXBpY2FsbHkgZG9uZSBpbiBSdXN0IGlu
-IHRoZSB0b3AtbGV2ZWwgZG9jIGNvbW1lbnRzDQo+IChtb2R1bGUgb3IgY3JhdGUpLiBGb3IgdGhl
-IFJ1c3Qgc2lkZSBvZiB0aGUga2VybmVsLCB3ZSBhcmUgZGVmaW5pdGVseQ0KPiB0cnlpbmcgdG8g
-ZW1waGFzaXplIHRoZSBxdWFsaXR5IG9mIHRoZSBkb2NzLCBpbmNsdWRpbmcgY29tcGlsZS0gYW5k
-DQo+IHJ1bnRpbWUtdGVzdGVkIGV4YW1wbGVzLg0KPiANCj4gUmVnYXJkaW5nIGxpbmtpbmcsIGBy
-dXN0ZG9jYCBhbHJlYWR5IGdlbmVyYXRlcyBhIGxpc3Rpbmcgd2l0aCB0aGUNCj4gY29udGVudHMg
-b2YgZWFjaCBjcmF0ZS9tb2R1bGUgZXZlbiBpZiB0aGVyZSBpcyBubyBvdGhlciBkb2NzLiBTbyBh
-cw0KPiBsb25nIGFzIHRoZSBzaG9ydCBkZXNjcmlwdGlvbnMgb2YgdGhlIGl0ZW1zIGFyZSBnb29k
-LCBpdCBtYXkgYmUgZmFpcmx5DQo+IHJlYWRhYmxlIGFscmVhZHksIGUuZy4gc2VlDQo+IGh0dHBz
-Oi8vcnVzdC1mb3ItbGludXguZ2l0aHViLmlvL2RvY3MvcnVzdC9rZXJuZWwvc3luYy9pbmRleC5o
-dG1sIGZvcg0KPiBhbiBleGFtcGxlIGluIG91ciBvbGQgYHJ1c3RgIGJyYW5jaC4gQnV0LCBvZiBj
-b3Vyc2UsIHlvdSBjYW4gYWRkIGV4dHJhDQo+IGRvY3MgYXQgdGhhdCBsZXZlbCB0b28gd2hlbiB0
-aGVyZSBhcmUgbWFueSB0aGluZ3Mgb3IgaXMgdW5jbGVhciB3aGF0DQo+IHNob3VsZCBiZSB1c2Vk
-Lg0KPiANCj4gQWxzbyBub3RlIHRoYXQsIHNvbWV0aW1lcywgdGhlIGRvY3Mgd2Ugd3JpdGUgYXJl
-IGluIHRoZSB0eXBlLCByYXRoZXINCj4gdGhhbiB0aGUgbW9kdWxlLCBlLmcuIHNlZSB0aGUgbmlj
-ZSBleGFtcGxlcyBXZWRzb24gd3JvdGUgZm9yIGBSQlRyZWVgOg0KPiBodHRwczovL3J1c3QtZm9y
-LWxpbnV4LmdpdGh1Yi5pby9kb2NzL3J1c3Qva2VybmVsL3JidHJlZS9zdHJ1Y3QuUkJUcmVlLmh0
-bWwuDQoNClllYWggdGhpcyBhbGwgbG9va3MgZ3JlYXQgYW5kIHZlcnkgaHlwZXJsaW5rZWQuDQoN
-CkkgdGhpbmsgdGhlIG9ubHkgbml0IEkgaGF2ZSBpcyB0aGF0IGZvciB0eXBlcyB3aXRoIHR3byBv
-ciBtb3JlIHR5cGUNCnZhcmlhYmxlcyAobGlrZSB0aGUgcmJ0cmVlKSB3aGF0IGVhY2ggb2YgdGhl
-bSBzaG91bGQgcmVwcmVzZW50IGluIHRoZSB0b3ANCmludHJvLiBJIGNhbiBndWVzcyBpdCdzIDxL
-ZXksIFZhbHVlPiBhbmQgbm90IHRoZSBvdGhlciB3YXkgcm91bmQsIGJ1dA0KY29uZmlybWF0aW9u
-IHRha2VzIHF1aXRlIGEgYml0IG9mIHNjcm9sbGluZyB0byBjaGVjayB3aXRoIHRoZSBmdW5jdGlv
-bg0KdHlwZXMuDQoNCk90aGVyd2lzZSBJIHRoaW5rIHBlcmZlY3QgYXBpIGRvY3MuDQoNCj4gPiAt
-IExpbmtpbmcgYWxsIHRoZSB0aGluZ3MsIHNvIHRoYXQgcmVhZGVycyBjYW4gY29ubmVjdCB0aGUg
-ZGlmZmVyZW50IHBhcnRzLg0KPiA+ICAgVGhpcyBpcyByZWFsbHkgaW1wb3J0YW50IGluIEMgd2hl
-cmUgZS5nLiBnZXQvcHV0KCkgb3IgYW55IHN1Y2ggZnVuY3Rpb24NCj4gPiAgIHBhaXJzIGFsbCBu
-ZWVkZWQgdG8gYmUgbGlua2VkIHRvZ2V0aGVyLiBXaXRoIHJ1c3QgSSdtIGhvcGluZyB0aGF0DQo+
-ID4gICBydXN0ZG9jIGxpYmVyYWxseSBzcHJpbmtsZXMgbGlua3MgYWxyZWFkeSBhbmQgd2UgZG9u
-J3QgaGF2ZSB0byBkbyB0aGlzDQo+ID4gICBhcyBtdWNoLg0KPiANCj4gSWYgeW91IG1lYW4gd2l0
-aGluIGRvYyBjb21tZW50cywgaXQgZG9lcyEgOikgSXQgaXMgY2FsbGVkICJpbnRyYS1kb2MNCj4g
-bGlua3MiLiBCYXNpY2FsbHksIHlvdSBqdXN0IHdyaXRlIHNvbWV0aGluZyBpbi1iZXR3ZWVuIHNx
-dWFyZQ0KPiBicmFja2V0cywgYW5kIGl0IGlzIGFibGUgdG8gY3JlYXRlIHRoZSBsaW5rIHRvIHRo
-ZSByaWdodCB0aGluZyAoaW4NCj4gbW9zdCBjYXNlcywgb3RoZXJ3aXNlIHlvdSBjYW4gaGVscCBp
-dCBtb3JlKSwgZS5nLg0KPiANCj4gICAgIC8vLyBSZXR1cm5zIGEgbmV3IFtgRm9vYF0uDQo+IA0K
-PiBBbmQsIG9mIGNvdXJzZSwgZm9yIHRoZSByZXN0IG9mIHRoaW5ncyB0aGF0IGFyZW4ndCBpbnNp
-ZGUgY29tbWVudHMsIGl0DQo+IGF1dG9tYXRpY2FsbHkgcHJvdmlkZXMgbGlua3MgZXRjLg0KPiAN
-Cj4gVGhlcmUgaGFzIGJlZW4gd29yayBvbiBgcnVzdGRvY2Agb24gZ2V0dGluZyAiSnVtcCB0byBE
-ZWZpbml0aW9uIiBhbmQNCj4gc2ltaWxhciBmZWF0dXJlcyB0byB3b3JrIG9uIHRoZSBzb3VyY2Ug
-dmlldywgdG9vLg0KPiANCj4gPiAtIFNob3J0IGV4cGxhaW5lcnMgZm9yIHBhcmFtZXRlcnMuIEZv
-ciBydXN0IHRoaXMgYWxzbyBtZWFucyB0eXBlDQo+ID4gICBwYXJhbWV0ZXJzLCBmb3IgdGhvc2Ug
-ZXZlbiBzaW1wbGlmaWVkIGV4YW1wbGVzIG9mIGhvdyBkcml2ZXJzIGFyZQ0KPiA+ICAgc3VwcG9z
-ZWQgdG8gdXNlIHRoZW0gd291bGQgaGVscCBhIGxvdCBpbiByZWFkaW5nIGRvY3MgJiB1bmRlcnN0
-YW5kaW5nDQo+ID4gICBjb25jZXB0cy4NCj4gDQo+IEZvciBwYXJhbWV0ZXJzLCB3ZSBhcmUgbm90
-IGZvcmNpbmcgdG8gd3JpdGUgZXhwbGFuYXRpb25zIGZvciBldmVyeQ0KPiBwYXJhbWV0ZXIgKGFz
-IGluIHByb3ZpZGluZyBhIGxpc3QpLCBidXQgcmF0aGVyIHdyaXRpbmcgd2hhdCBpcw0KPiBhY3R1
-YWxseSB1c2VmdWwgdG8ga25vdyAocmVmZXJyaW5nIHRvIHRoZSBwYXJhbWV0ZXJzIGFzIG5lZWRl
-ZCkuIFNvIGl0DQo+IGRlcGVuZHMgb24gYSBjYXNlLWJ5LWNhc2UuDQo+IA0KPiBJbiBhbnkgY2Fz
-ZSwgaW4gZ2VuZXJhbCBpcyBjbGVhcmVyIHdoYXQgcGFyYW1ldGVycyBhcmUgY29tcGFyZWQgdG8g
-QywNCj4gZHVlIHRvIHRoZSBzdHJvbmdlciB0eXBpbmcuIE9mIGNvdXJzZSwgaWYgb25lIHVzZXMg
-aW50ZWdlcnMNCj4gZXZlcnl3aGVyZSwgaXQgaXMgYXMgY29uZnVzaW5nIGFzIEMuIEJ1dCBpZiBv
-bmUgaGFzIGEgdHlwZSwgaXQgaXMNCj4gZWFzaWVyIHRvIHRlbGwsIHBsdXMgb25lIG1heSBqdW1w
-IHdpdGggYSBjbGljayBpbnRvIHRoZSBleHBsYW5hdGlvbiBvZg0KPiB0aGF0IHR5cGUgZXRjLg0K
-PiANCj4gUmVnYXJkaW5nIGV4YW1wbGVzLCAxMDAlIGFncmVlZC4gQW5kIG5vdCBvbmx5IHRoYXQs
-IHRoZSBleGFtcGxlcyBhcmUNCj4gZW5mb3JjZWQgdG8gYmUga2VwdCB1cCB0byBkYXRlIGJ5IGNv
-bXBpbGluZyBhbmQgcnVubmluZyB0aGVtIHZpYSBLVW5pdA0KPiAobm90IHlldCBzdWJtaXR0ZWQg
-Zm9yIG1haW5saW5lLCBidXQgd2UgaGF2ZSBiZWVuIGVuZm9yY2luZyBpdCBmb3Igb3VyDQo+IG9s
-ZCBgcnVzdGAgYnJhbmNoIGZvciBhIGxvbmcgdGltZSkuDQo+IA0KPiA+IC0gSWRlYWxseSBsaW5r
-cyBmcm9tIHRoZSBydXN0IHRvIHRoZSBzcGhpbnggc2lkZSB0byBsaW5rZSByZWxldmFudA0KPiA+
-ICAgY2hhcHRlcnMgdG9nZXRoZXIuIE9mdGVuIHRoZSBiaWdnZXIgZXhwbGFuYXRpb25zIGFyZSBp
-biAucnN0IGZpbGVzIHdpdGgNCj4gPiAgIERPVCBncmFwaHMgKGttcyBoYXMgYSBidW5jaCBJJ3Zl
-IGFkZGVkKSBvciBzaW1pbGFyLCBhbmQgaXQgZG9lc24ndCBtYWtlDQo+ID4gICB0aGF0IG11Y2gg
-c2Vuc2UgdG8gZHVwbGljYXRlIGFsbCB0aGF0IG9uIHRoZSBydXN0IHNpZGUgSSBndWVzcy4gQnV0
-IGl0DQo+ID4gICBuZWVkcyB0byBiZSBkaXNjb3ZlcmFibGUuDQo+IA0KPiBEZWZpbml0ZWx5LiBP
-bmUgbmV4dCBzdGVwIGlzIGhhdmluZyBlYXN5LXRvLXdyaXRlIGxpbmtzIHRvIHRoZSByU1QNCj4g
-ZG9jcy4gRm9yIHRoaXMsIGEgY291cGxlIHllYXJzIGFnbyBJIHRhbGtlZCB3aXRoIHRoZSBgcnVz
-dGRvY2ANCj4gbWFpbnRhaW5lcnMgYWJvdXQgaGF2aW5nIGEgIkV4dGVybmFsIHJlZmVyZW5jZXMg
-bWFwIGZpbGUiIGZlYXR1cmUsIHNvDQo+IHRoYXQgd2UgY2FuIGxpbmsgclNUIGRvY3VtZW50cyBm
-cm9tIHRoZSBSdXN0IGRvY3MsIGluY2x1ZGluZyBnZW5lcmF0ZWQNCj4gQyBkb2NzIHRvby4gRm9y
-IGluc3RhbmNlLCBpZGVhbGx5IHdlIHdvdWxkIGJlIGFibGUgdG8gdXNlIHRoZSBzcXVhcmUNCj4g
-YnJhY2tldHMgYXJvdW5kIGEgQyB0eXBlIGFuZCBoYXZlIGl0IHdvcms6DQo+IA0KPiAgICAgLy8v
-IEV4cG9zZXMgdGhlIGtlcm5lbOKAmXMgW2BzdHJ1Y3Qgd2FpdF9xdWV1ZV9oZWFkYF0gYXMgYSBj
-b25kaXRpb24gdmFyaWFibGUuDQo+IA0KPiBSZWdhcmRpbmcgdGhlIGJpZ2dlciBleHBsYW5hdGlv
-bnM6IHdlIGFyZSB0cnlpbmcgdG8ga2VlcCBtb3N0IG9mIHRoZQ0KPiBkb2NzIGNsb3NlIHRvIHRo
-ZSBSdXN0IGNvZGUgd2hlcmUgaXQgbWFrZXMgc2Vuc2UsIGFzDQo+IG1vZHVsZS1sZXZlbC9jcmF0
-ZS1sZXZlbCBkb2NzLCByYXRoZXIgdGhhbiBhcyByU1QgZG9jcy4gVGhpcyBoYXMNCj4gc2V2ZXJh
-bCBiZW5lZml0cywgbGlrZSBrZWVwaW5nIHRoZW0gY2xvc2VyIHRvIHRoZSBjb2RlLCB0aGUgbGlu
-a2luZw0KPiBmZWF0dXJlcywgaGF2aW5nIHRoZW0gb3JnYW5pemVkIGVxdWFsbHkgYXMgdGhlIGNv
-ZGUsIG5vIG5lZWQgdG8ga25vdw0KPiB3aGV0aGVyIHRoZXJlIGlzIGEgZG9jIHNvbWV3aGVyZSBv
-ciBub3QgKGUuZy4gaWYgaXQgaXMsIGl0IGlzIG5lYXIgdGhlDQo+IGNvZGUpLCBleGFtcGxlcyBh
-cmUgY29tcGlsZWQsIGV0Yy4NCg0KSnVzdCBhIHF1aWNrIGNvbW1lbnQgb24gdGhpcywgdGhhdCdz
-IHRoZSBzYW1lIHdlIGRvIG9uIHRoZSBDIHNpZGUuIE1vc3QNCm92ZXJ2aWV3IGNoYXB0ZXJzIGFy
-ZSBhY3R1YWxseSBET0M6IHNlY3Rpb25zIHB1bGxlZCBpbiBmcm9tIHRoZSBjb2RlLg0KDQpXaGF0
-IEkgbWVhbnQgaGVyZSBpcyB0aGF0IGZvciBiaWcgb3ZlcnZpZXcgc3R1ZmYgKGxpa2UgZm9yIG1v
-ZGVzZXR0aW5nIGhvdw0KdGhlIGRpc3BsYXkgcGlwZSBzdHJ1Y3R1cmVzIHRpZSB0b2dldGhlciBh
-cyBhbiBleGFtcGxlOg0KaHR0cHM6Ly9kcmkuZnJlZWRlc2t0b3Aub3JnL2RvY3MvZHJtL2dwdS9k
-cm0ta21zLmh0bWwjb3ZlcnZpZXcpDQppdCBkb2Vzbid0IG1ha2Ugc2Vuc2UgdG8gZHVwbGljYXRl
-IHRoYXQgaW4gcnVzdGRvYyBvbmNlIG1vcmUuDQoNCj4gT2YgY291cnNlLCBzb21ldGltZXMgbG9u
-Z2VyLWZvcm0gZG9jcyBhbmQgb3RoZXIgZG9jdW1lbnRzIG1heSBub3QgbWFrZQ0KPiBzZW5zZSBh
-cyBwYXJ0IG9mIGFueSBjb2RlIGluIHBhcnRpY3VsYXIsIG9yIG1heSBiZSBzaGFyZWQgYWNyb3Nz
-IEMgYW5kDQo+IFJ1c3QsIGV0Yy4sIGFuZCB0aGVyZSBpdCBtYXkgbW9yZSBzZW5zZSB0byB1c2Ug
-YERvY3VtZW50YXRpb24vYCBmaWxlcw0KPiBpbnN0ZWFkLg0KPiANCj4gQnV0LCBpbiBnZW5lcmFs
-LCB0aGUgaWRlYSBpcyB0aGF0LCBjb21wYXJlZCB0byBDLCBtb3N0IG9mIHRoZSBkb2NzIGdvDQo+
-IGludG8gdGhlIGNvZGUuIFRvIGdpdmUgYW4gaWRlYSBvZiB0aGUgZGlmZmVyZW5jZTogc28gZmFy
-LCBpbiBvdXIgb2xkDQo+IGBydXN0YCBicmFuY2gsIHdlIG9ubHkgbmVlZGVkIGEgZmV3IGRvY3Vt
-ZW50cyBpbiBgRG9jdW1lbnRhdGlvbi9gDQo+IChlLmcuIHRoZSBRdWljayBTdGFydCBndWlkZSBl
-dGMuKSwgYW5kIGV2ZXJ5dGhpbmcgZWxzZSB3ZW50IGludG8gdGhlDQo+IGNvZGUgaXRzZWxmLg0K
-DQpNYXliZSBkcm0gaXMgdGhlIGV4Y2VwdGlvbiwgYnV0IGlmIHlvdSBsb29rIGF0IG91ciAucnN0
-IGZpbGVzIHdlIGFsc28gaGF2ZQ0KbW9zdCBvZiBvdXIgZG9jcyBpbiB0aGUgY29kZToNCg0KaHR0
-cHM6Ly9jZ2l0LmZyZWVkZXNrdG9wLm9yZy9kcm0vZHJtL3RyZWUvRG9jdW1lbnRhdGlvbi9ncHUv
-ZHJtLWttcy1oZWxwZXJzLnJzdA0KDQpUaGUgcnN0IGZpbGVzIGp1c3QgcHJvdmlkZSB0aGUgc2Nh
-ZmZvbGRpbmcgYmVjYXVzZSBDIGRvc24ndCBoYXZlDQpjcmF0ZXMvbW9kdWxlcyBoaWVyYXJjaHkg
-dGhhdCB3b3VsZCBkbyB0aGlzIGZvciB5b3UgYXV0b21hdGljYWxseS4NCg0KQ2hlZXJzLCBEYW5p
-ZWwNCi0tIA0KRGFuaWVsIFZldHRlcg0KU29mdHdhcmUgRW5naW5lZXIsIEludGVsIENvcnBvcmF0
-aW9uDQpodHRwOi8vYmxvZy5mZndsbC5jaA0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1t
-LXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGlu
-YXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+On 06/04/2023 23.15, Daniel Vetter wrote:
+> On Tue, Mar 07, 2023 at 11:25:32PM +0900, Asahi Lina wrote:
+>> drm_mm provides a simple range allocator, useful for managing virtual
+>> address ranges. Add a Rust abstraction to expose this module to Rust
+>> drivers.
+>>
+>> Signed-off-by: Asahi Lina <lina@asahilina.net>
+> 
+> In the cover letter you mentioned the design open about embedded the lock
+> into the rust wrappers.
+> 
+> I think for a first step that's perfectly fine.
+> 
+> Longer term we might want to ramp up some "proof of locking"
+> infrastructure in Rust, where callers can supply a lock guard and ideally
+> rust validates at compile time that it's for the right type, and at
+> runtime (like lockdep) that it's consistent and the callers don't mix up
+> locks (like using different locks for the same drm_mm allocator).
+
+That proof-of-lock tuff works in Rust too as far as I know.
+
+But the general thread safety story in Rust is much simpler, you just 
+use methods that take &mut self when locking is the caller's 
+responsibility. That effectively implies that there can only be one 
+reference that can call those methods at any given time, thanks to the 
+borrow checker. Shared references only give you &self, a locked Mutex 
+upgrades that to &mut self, and that's how you get proof of locking at 
+compile time, through and through, not just for the type but for the 
+specific object.
+
+> There's a lot of libraries in the kernel that have this "caller ensures
+> locking" pattern. drm/sched also has these requirements.
+
+Yup, that all usually maps nicely to &mut self in Rust... except for the 
+issue below.
+
+> There's two other things I'd like to bring up on this patch though, just
+> because it's a good example. But they're both really general points that
+> apply for all the rust wrappers.
+> 
+> Documentation:
+> 
+> In drm we try to document all the interfaces that drivers use with formal
+> docs. Yes there's some areas that are not great for historical reasons,
+> but for new stuff and new wrappers we're really trying:
+> 
+> - This helps in telling internal (even across .c files or in rust across
+>    modules within a crate) from stuff drivers access. Sure you have static
+>    in C or pub in rust, but that doesn't tell you whether it's public all
+>    the way to drivers.
+> 
+> - ideally docs have a short intro section that explains the main concepts
+>    and links to the main data structures and functions. Just to give
+>    readers a good starting point to explore.
+> 
+> - Linking all the things, so that readers can connect the different parts.
+>    This is really important in C where e.g. get/put() or any such function
+>    pairs all needed to be linked together. With rust I'm hoping that
+>    rustdoc liberally sprinkles links already and we don't have to do this
+>    as much.
+> 
+> - Short explainers for parameters. For rust this also means type
+>    parameters, for those even simplified examples of how drivers are
+>    supposed to use them would help a lot in reading docs & understanding
+>    concepts.
+> 
+> - Ideally links from the rust to the sphinx side to linke relevant
+>    chapters together. Often the bigger explanations are in .rst files with
+>    DOT graphs (kms has a bunch I've added) or similar, and it doesn't make
+>    that much sense to duplicate all that on the rust side I guess. But it
+>    needs to be discoverable.
+> 
+> This might be more a discussion topic for the rust people than you
+> directly. Still needed for the merge-ready patches eventually.
+
+I don't know much about the doc gen stuff on the Rust side so yeah, this 
+is something I need to look into to make it pretty and complete...
+
+> Refcounting vs borrowing:
+> 
+> This is honestly much more the eyebrow raising one than the locking. Very
+> often on the C side these datastructures all work with borrow semantics,
+> and you need to explicitly upgrade to a full reference (kref_get or
+> kref_get_unless_zero, depending whether it's a strong or weak reference)
+> if you need the object outside of the mutex/lock guard section.
+> 
+> Again I think for now it's ok, but the sales pitch of rust is that it
+> enables borrow lifetime checking with no runtime cost. Plus viz the vm
+> cleanup example, if you have too many strong backreferences the cleanup
+> flow gets complicated. And it would suck if rust drivers have to add
+> complexity like the openrefcount for the vm example simply because we
+> can't model the borrow semantics well enough to be safe.
+> 
+> So not something that's really bad here, but if we need to resort to full
+> refcounting already for simple datastructures then I'm getting a bit
+> worried about how well rust will cope with the really nasty borrowed
+> reference tricks we're playing in other areas.
+> 
+> Again more a topic for the rust folks I think than specifically here about
+> drm_mm wrapping. Just to get things going I think this is fine.
+
+Yeeeeah... this is a *specific* problem. Drop.
+
+The Allocator<T> itself is perfectly safe to implement without any 
+locking, refcounting, or anything. You just make the methods take &mut 
+self (as they already do), the caller can use it with a single reference 
+or wrap it in an Arc<Mutex<T>> and share it, or whatever.
+
+The problem is the Node<A, T>. When you Drop that, it has to go back to 
+the Allocator. But now you're a different object, so no thread safety 
+guarantees. And you need to keep the Allocator alive. So now to make a 
+safe abstraction, you need refcounting and a mutex.
+
+Lifetimes just don't work here, sadly. Not for a useful abstraction.
+
+I'd love to hear from the other Rust folks whether they have any better 
+ideas...
+
+One thing that *can* be done is making the Drop illegal (Rust can't do 
+this "natively" but Linux already has hacks for that, we can make it 
+fail to link if the Drop is ever called). Then you'd have to actively 
+return the Node to the Allocator with a free function. Since Drop is 
+forbidden, and Node is pinned, you'd always have to either return Node 
+objects to the Allocator or leak them. You could drop the Allocator 
+before its nodes, but as far as I know drm_mm can safely handle that 
+(though it will complain), and then due to the previous guarantees the 
+*only* thing you could do with orphan nodes is leak their memory, which 
+is safe.
+
+It would work... but it breaks the whole Rust automagic Drop stuff.
+
+Thinking about this a bit, I think I want the current mutex/arc 
+semantics for something like a memory allocator (which is one of my 
+primary use cases for drm_mm), since I definitely don't want to be 
+manually returning objects to their allocator all over the place, nor 
+have overarching lifetime requirements that the allocator outlive its 
+objects for safety (that sounds like a can of worms I don't want to 
+open, I'd much rather use a refcount even if I "think" I can prove the 
+lifetime bounds ad-hoc). But for something like a drm_mm that is 
+tracking VA ranges within a VM with all Nodes held internally, maybe I 
+could manage it all internally and have all node destruction be handled 
+via an explicit call into the Allocator.
+
+Maybe the mm abstraction should offer both options? The extra locking 
+can be implemented in terms of the base unlocked version I think 
+(perhaps with some Deref abuse for ergonomics)... I definitely want to 
+hear more opinions about this from other Rust folks, since there are 
+probably other options I haven't considered...
+
+Aside: This, and all the other DRM abstractions, were written before the 
+pin_init stuff from y86 that is in review right now was ready. That may 
+open up more interesting/ergonomic/efficient APIs for some cases, 
+especially where Pin and embedding C types into user objects in some way 
+are involved. So maybe there's room for improvement here. Just a sidenote.
+
+> 
+> Cheers, Daniel
+> 
+> 
+>> ---
+>>   rust/kernel/drm/mm.rs  | 309 +++++++++++++++++++++++++++++++++++++++++++++++++
+>>   rust/kernel/drm/mod.rs |   1 +
+>>   2 files changed, 310 insertions(+)
+>>
+>> diff --git a/rust/kernel/drm/mm.rs b/rust/kernel/drm/mm.rs
+>> new file mode 100644
+>> index 000000000000..83e27a7dcc7e
+>> --- /dev/null
+>> +++ b/rust/kernel/drm/mm.rs
+>> @@ -0,0 +1,309 @@
+>> +// SPDX-License-Identifier: GPL-2.0 OR MIT
+>> +
+>> +//! DRM MM range allocator
+>> +//!
+>> +//! C header: [`include/linux/drm/drm_mm.h`](../../../../include/linux/drm/drm_mm.h)
+>> +
+>> +use crate::{
+>> +    bindings,
+>> +    error::{to_result, Result},
+>> +    str::CStr,
+>> +    sync::{Arc, LockClassKey, LockIniter, Mutex, UniqueArc},
+>> +    types::Opaque,
+>> +};
+>> +
+>> +use alloc::boxed::Box;
+>> +
+>> +use core::{
+>> +    marker::{PhantomData, PhantomPinned},
+>> +    ops::Deref,
+>> +    pin::Pin,
+>> +};
+>> +
+>> +/// Type alias representing a DRM MM node.
+>> +pub type Node<A, T> = Pin<Box<NodeData<A, T>>>;
+>> +
+>> +/// Trait which must be implemented by the inner allocator state type provided by the user.
+>> +pub trait AllocInner<T> {
+>> +    /// Notification that a node was dropped from the allocator.
+>> +    fn drop_object(&mut self, _start: u64, _size: u64, _color: usize, _object: &mut T) {}
+>> +}
+>> +
+>> +impl<T> AllocInner<T> for () {}
+>> +
+>> +/// Wrapper type for a `struct drm_mm` plus user AllocInner object.
+>> +///
+>> +/// # Invariants
+>> +/// The `drm_mm` struct is valid and initialized.
+>> +struct MmInner<A: AllocInner<T>, T>(Opaque<bindings::drm_mm>, A, PhantomData<T>);
+>> +
+>> +/// Represents a single allocated node in the MM allocator
+>> +pub struct NodeData<A: AllocInner<T>, T> {
+>> +    node: bindings::drm_mm_node,
+>> +    mm: Arc<Mutex<MmInner<A, T>>>,
+>> +    valid: bool,
+>> +    /// A drm_mm_node needs to be pinned because nodes reference each other in a linked list.
+>> +    _pin: PhantomPinned,
+>> +    inner: T,
+>> +}
+>> +
+>> +// SAFETY: Allocator ops take the mutex, and there are no mutable actions on the node.
+>> +unsafe impl<A: Send + AllocInner<T>, T: Send> Send for NodeData<A, T> {}
+>> +unsafe impl<A: Send + AllocInner<T>, T: Sync> Sync for NodeData<A, T> {}
+>> +
+>> +/// Available MM node insertion modes
+>> +#[repr(u32)]
+>> +pub enum InsertMode {
+>> +    /// Search for the smallest hole (within the search range) that fits the desired node.
+>> +    ///
+>> +    /// Allocates the node from the bottom of the found hole.
+>> +    Best = bindings::drm_mm_insert_mode_DRM_MM_INSERT_BEST,
+>> +
+>> +    /// Search for the lowest hole (address closest to 0, within the search range) that fits the
+>> +    /// desired node.
+>> +    ///
+>> +    /// Allocates the node from the bottom of the found hole.
+>> +    Low = bindings::drm_mm_insert_mode_DRM_MM_INSERT_LOW,
+>> +
+>> +    /// Search for the highest hole (address closest to U64_MAX, within the search range) that fits
+>> +    /// the desired node.
+>> +    ///
+>> +    /// Allocates the node from the top of the found hole. The specified alignment for the node is
+>> +    /// applied to the base of the node (`Node.start()`).
+>> +    High = bindings::drm_mm_insert_mode_DRM_MM_INSERT_HIGH,
+>> +
+>> +    /// Search for the most recently evicted hole (within the search range) that fits the desired
+>> +    /// node. This is appropriate for use immediately after performing an eviction scan and removing
+>> +    /// the selected nodes to form a hole.
+>> +    ///
+>> +    /// Allocates the node from the bottom of the found hole.
+>> +    Evict = bindings::drm_mm_insert_mode_DRM_MM_INSERT_EVICT,
+>> +}
+>> +
+>> +/// A clonable, interlocked reference to the allocator state.
+>> +///
+>> +/// This is useful to perform actions on the user-supplied `AllocInner<T>` type given just a Node,
+>> +/// without immediately taking the lock.
+>> +#[derive(Clone)]
+>> +pub struct InnerRef<A: AllocInner<T>, T>(Arc<Mutex<MmInner<A, T>>>);
+>> +
+>> +impl<A: AllocInner<T>, T> InnerRef<A, T> {
+>> +    /// Operate on the user `AllocInner<T>` implementation, taking the lock.
+>> +    pub fn with<RetVal>(&self, cb: impl FnOnce(&mut A) -> RetVal) -> RetVal {
+>> +        let mut l = self.0.lock();
+>> +        cb(&mut l.1)
+>> +    }
+>> +}
+>> +
+>> +impl<A: AllocInner<T>, T> NodeData<A, T> {
+>> +    /// Returns the color of the node (an opaque value)
+>> +    pub fn color(&self) -> usize {
+>> +        self.node.color as usize
+>> +    }
+>> +
+>> +    /// Returns the start address of the node
+>> +    pub fn start(&self) -> u64 {
+>> +        self.node.start
+>> +    }
+>> +
+>> +    /// Returns the size of the node in bytes
+>> +    pub fn size(&self) -> u64 {
+>> +        self.node.size
+>> +    }
+>> +
+>> +    /// Operate on the user `AllocInner<T>` implementation associated with this node's allocator.
+>> +    pub fn with_inner<RetVal>(&self, cb: impl FnOnce(&mut A) -> RetVal) -> RetVal {
+>> +        let mut l = self.mm.lock();
+>> +        cb(&mut l.1)
+>> +    }
+>> +
+>> +    /// Return a clonable, detached reference to the allocator inner data.
+>> +    pub fn alloc_ref(&self) -> InnerRef<A, T> {
+>> +        InnerRef(self.mm.clone())
+>> +    }
+>> +
+>> +    /// Return a mutable reference to the inner data.
+>> +    pub fn inner_mut(self: Pin<&mut Self>) -> &mut T {
+>> +        // SAFETY: This is okay because inner is not structural
+>> +        unsafe { &mut self.get_unchecked_mut().inner }
+>> +    }
+>> +}
+>> +
+>> +impl<A: AllocInner<T>, T> Deref for NodeData<A, T> {
+>> +    type Target = T;
+>> +
+>> +    fn deref(&self) -> &Self::Target {
+>> +        &self.inner
+>> +    }
+>> +}
+>> +
+>> +impl<A: AllocInner<T>, T> Drop for NodeData<A, T> {
+>> +    fn drop(&mut self) {
+>> +        if self.valid {
+>> +            let mut guard = self.mm.lock();
+>> +
+>> +            // Inform the user allocator that a node is being dropped.
+>> +            guard
+>> +                .1
+>> +                .drop_object(self.start(), self.size(), self.color(), &mut self.inner);
+>> +            // SAFETY: The MM lock is still taken, so we can safely remove the node.
+>> +            unsafe { bindings::drm_mm_remove_node(&mut self.node) };
+>> +        }
+>> +    }
+>> +}
+>> +
+>> +/// An instance of a DRM MM range allocator.
+>> +pub struct Allocator<A: AllocInner<T>, T> {
+>> +    mm: Arc<Mutex<MmInner<A, T>>>,
+>> +    _p: PhantomData<T>,
+>> +}
+>> +
+>> +impl<A: AllocInner<T>, T> Allocator<A, T> {
+>> +    /// Create a new range allocator for the given start and size range of addresses.
+>> +    ///
+>> +    /// The user may optionally provide an inner object representing allocator state, which will
+>> +    /// be protected by the same lock. If not required, `()` can be used.
+>> +    pub fn new(
+>> +        start: u64,
+>> +        size: u64,
+>> +        inner: A,
+>> +        name: &'static CStr,
+>> +        lock_key: &'static LockClassKey,
+>> +    ) -> Result<Allocator<A, T>> {
+>> +        // SAFETY: We call `Mutex::init_lock` below.
+>> +        let mut mm: Pin<UniqueArc<Mutex<MmInner<A, T>>>> = UniqueArc::try_new(unsafe {
+>> +            Mutex::new(MmInner(Opaque::uninit(), inner, PhantomData))
+>> +        })?
+>> +        .into();
+>> +
+>> +        mm.as_mut().init_lock(name, lock_key);
+>> +
+>> +        unsafe {
+>> +            // SAFETY: The Opaque instance provides a valid pointer, and it is initialized after
+>> +            // this call.
+>> +            bindings::drm_mm_init(mm.lock().0.get(), start, size);
+>> +        }
+>> +
+>> +        Ok(Allocator {
+>> +            mm: mm.into(),
+>> +            _p: PhantomData,
+>> +        })
+>> +    }
+>> +
+>> +    /// Insert a new node into the allocator of a given size.
+>> +    ///
+>> +    /// `node` is the user `T` type data to store into the node.
+>> +    pub fn insert_node(&mut self, node: T, size: u64) -> Result<Node<A, T>> {
+>> +        self.insert_node_generic(node, size, 0, 0, InsertMode::Best)
+>> +    }
+>> +
+>> +    /// Insert a new node into the allocator of a given size, with configurable alignment,
+>> +    /// color, and insertion mode.
+>> +    ///
+>> +    /// `node` is the user `T` type data to store into the node.
+>> +    pub fn insert_node_generic(
+>> +        &mut self,
+>> +        node: T,
+>> +        size: u64,
+>> +        alignment: u64,
+>> +        color: usize,
+>> +        mode: InsertMode,
+>> +    ) -> Result<Node<A, T>> {
+>> +        self.insert_node_in_range(node, size, alignment, color, 0, u64::MAX, mode)
+>> +    }
+>> +
+>> +    /// Insert a new node into the allocator of a given size, with configurable alignment,
+>> +    /// color, insertion mode, and sub-range to allocate from.
+>> +    ///
+>> +    /// `node` is the user `T` type data to store into the node.
+>> +    #[allow(clippy::too_many_arguments)]
+>> +    pub fn insert_node_in_range(
+>> +        &mut self,
+>> +        node: T,
+>> +        size: u64,
+>> +        alignment: u64,
+>> +        color: usize,
+>> +        start: u64,
+>> +        end: u64,
+>> +        mode: InsertMode,
+>> +    ) -> Result<Node<A, T>> {
+>> +        let mut mm_node = Box::try_new(NodeData {
+>> +            // SAFETY: This C struct should be zero-initialized.
+>> +            node: unsafe { core::mem::zeroed() },
+>> +            valid: false,
+>> +            inner: node,
+>> +            mm: self.mm.clone(),
+>> +            _pin: PhantomPinned,
+>> +        })?;
+>> +
+>> +        let guard = self.mm.lock();
+>> +        // SAFETY: We hold the lock and all pointers are valid.
+>> +        to_result(unsafe {
+>> +            bindings::drm_mm_insert_node_in_range(
+>> +                guard.0.get(),
+>> +                &mut mm_node.node,
+>> +                size,
+>> +                alignment,
+>> +                color as core::ffi::c_ulong,
+>> +                start,
+>> +                end,
+>> +                mode as u32,
+>> +            )
+>> +        })?;
+>> +
+>> +        mm_node.valid = true;
+>> +
+>> +        Ok(Pin::from(mm_node))
+>> +    }
+>> +
+>> +    /// Insert a node into the allocator at a fixed start address.
+>> +    ///
+>> +    /// `node` is the user `T` type data to store into the node.
+>> +    pub fn reserve_node(
+>> +        &mut self,
+>> +        node: T,
+>> +        start: u64,
+>> +        size: u64,
+>> +        color: usize,
+>> +    ) -> Result<Node<A, T>> {
+>> +        let mut mm_node = Box::try_new(NodeData {
+>> +            // SAFETY: This C struct should be zero-initialized.
+>> +            node: unsafe { core::mem::zeroed() },
+>> +            valid: false,
+>> +            inner: node,
+>> +            mm: self.mm.clone(),
+>> +            _pin: PhantomPinned,
+>> +        })?;
+>> +
+>> +        mm_node.node.start = start;
+>> +        mm_node.node.size = size;
+>> +        mm_node.node.color = color as core::ffi::c_ulong;
+>> +
+>> +        let guard = self.mm.lock();
+>> +        // SAFETY: We hold the lock and all pointers are valid.
+>> +        to_result(unsafe { bindings::drm_mm_reserve_node(guard.0.get(), &mut mm_node.node) })?;
+>> +
+>> +        mm_node.valid = true;
+>> +
+>> +        Ok(Pin::from(mm_node))
+>> +    }
+>> +
+>> +    /// Operate on the inner user type `A`, taking the allocator lock
+>> +    pub fn with_inner<RetVal>(&self, cb: impl FnOnce(&mut A) -> RetVal) -> RetVal {
+>> +        let mut guard = self.mm.lock();
+>> +        cb(&mut guard.1)
+>> +    }
+>> +}
+>> +
+>> +impl<A: AllocInner<T>, T> Drop for MmInner<A, T> {
+>> +    fn drop(&mut self) {
+>> +        // SAFETY: If the MmInner is dropped then all nodes are gone (since they hold references),
+>> +        // so it is safe to tear down the allocator.
+>> +        unsafe {
+>> +            bindings::drm_mm_takedown(self.0.get());
+>> +        }
+>> +    }
+>> +}
+>> +
+>> +// MmInner is safely Send if the AllocInner user type is Send.
+>> +unsafe impl<A: Send + AllocInner<T>, T> Send for MmInner<A, T> {}
+>> diff --git a/rust/kernel/drm/mod.rs b/rust/kernel/drm/mod.rs
+>> index c44760a1332f..73fab2dee3af 100644
+>> --- a/rust/kernel/drm/mod.rs
+>> +++ b/rust/kernel/drm/mod.rs
+>> @@ -7,3 +7,4 @@ pub mod drv;
+>>   pub mod file;
+>>   pub mod gem;
+>>   pub mod ioctl;
+>> +pub mod mm;
+>>
+>> -- 
+>> 2.35.1
+>>
+> 
+
+~~ Lina
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
