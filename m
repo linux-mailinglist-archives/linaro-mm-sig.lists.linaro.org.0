@@ -2,112 +2,119 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DCD336DD57D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 11 Apr 2023 10:30:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B69E56DD03A
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 11 Apr 2023 05:34:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F07773E975
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 11 Apr 2023 08:30:38 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 79CDF3E8F3
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  7 Apr 2023 17:38:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5830A3F5AD
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 11 Apr 2023 03:34:03 +0000 (UTC)
+Received: from 189.cn (ptr.189.cn [183.61.185.103])
+	by lists.linaro.org (Postfix) with ESMTP id 5BA583E944
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 11 Apr 2023 03:33:45 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=M0dcZC1P;
-	spf=pass (lists.linaro.org: domain of andersson@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=andersson@kernel.org;
-	dmarc=pass (policy=none) header.from=kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id 1124B652B1;
-	Fri,  7 Apr 2023 17:38:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F1B8EC4339E;
-	Fri,  7 Apr 2023 17:38:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1680889123;
-	bh=ShYE/NmpoSW62Nvk+UDzbzXRAyY8hKK3U9ol2L/cDjg=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=M0dcZC1PwRN2HkRpAf18Y8Sc3xtdV99EC+vxYRCkvNNAP+f919nIOyOf5C1k+lysA
-	 DsIPR1Qt8nC4oUYnjInR8TIxqXfTv7etNNAZFIr8N3Z4pgJcnzOnfgGSt+8WWdyUnl
-	 AtCK3R+vmetr+XaPeV8TeeBy7ElBS52aIWcd/f+6IC92wBZ6VtySpHzS+akBWGLAPm
-	 9FGQ7rTD0MB43HTwT8UqysfMbMPTFlPqN0cgjcBIFUJ0L4OURVzzGJE92PFWqiUUkv
-	 QzbufEidnsWI3M3Syk9Vjk2T1AbA0NyhHej5ZBtJs+zEboLXJ09NMin4l6aPtNNsSc
-	 ndslYUpGWzB9w==
-From: Bjorn Andersson <andersson@kernel.org>
-To: dri-devel@lists.freedesktop.org,
-	Rob Clark <robdclark@gmail.com>
-Date: Fri,  7 Apr 2023 10:41:19 -0700
-Message-Id: <168088927578.2561591.14585371270684166515.b4-ty@kernel.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230320144356.803762-1-robdclark@gmail.com>
-References: <20230320144356.803762-1-robdclark@gmail.com>
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of 15330273260@189.cn designates 183.61.185.103 as permitted sender) smtp.mailfrom=15330273260@189.cn;
+	dmarc=none
+HMM_SOURCE_IP: 10.64.8.41:8615.1212641597
+HMM_ATTACHE_NUM: 0000
+HMM_SOURCE_TYPE: SMTP
+Received: from clientip-114.242.206.180 (unknown [10.64.8.41])
+	by 189.cn (HERMES) with SMTP id 47F091002B2;
+	Tue, 11 Apr 2023 11:33:40 +0800 (CST)
+Received: from  ([114.242.206.180])
+	by gateway-151646-dep-7b48884fd-ljp89 with ESMTP id eb8c5b28e13a40fbb0aae97340f6b575 for emil.l.velikov@gmail.com;
+	Tue, 11 Apr 2023 11:33:43 CST
+X-Transaction-ID: eb8c5b28e13a40fbb0aae97340f6b575
+X-Real-From: 15330273260@189.cn
+X-Receive-IP: 114.242.206.180
+X-MEDUSA-Status: 0
+Sender: 15330273260@189.cn
+Message-ID: <2833ed06-7f8a-b8c1-404e-b481b2fedb3f@189.cn>
+Date: Tue, 11 Apr 2023 11:33:39 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.9.0
+Content-Language: en-US
+To: Emil Velikov <emil.l.velikov@gmail.com>
+References: <20230403171304.2157326-1-suijingfeng@loongson.cn>
+ <20230403171304.2157326-3-suijingfeng@loongson.cn>
+ <CACvgo53h+X26wngVmxpn3oVb9kbJezTHx61p3rZDR7sw1AQrWQ@mail.gmail.com>
+From: Sui Jingfeng <15330273260@189.cn>
+In-Reply-To: <CACvgo53h+X26wngVmxpn3oVb9kbJezTHx61p3rZDR7sw1AQrWQ@mail.gmail.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 79CDF3E8F3
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-4.00 / 15.00];
+X-Rspamd-Queue-Id: 5BA583E944
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.70 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:183.61.185.0/24];
+	RCVD_NO_TLS_LAST(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_TO(0.00)[lists.freedesktop.org,gmail.com];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	NEURAL_HAM(-0.00)[-0.991];
 	MIME_TRACE(0.00)[0:+];
+	R_DKIM_NA(0.00)[];
+	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.linaro.org,loongson.cn,vger.kernel.org,lists.freedesktop.org];
 	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_CC(0.00)[linux-m68k.org,gmail.com,linaro.org,quicinc.com,somainline.org,chromium.org,z3ntu.xyz,poorly.run,kernel.org,vger.kernel.org,lists.linaro.org,ffwll.ch,lists.freedesktop.org,joelfernandes.org];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	ASN(0.00)[asn:4134, ipnet:183.0.0.0/10, country:CN];
+	FREEMAIL_ENVFROM(0.00)[189.cn];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
+	DMARC_NA(0.00)[189.cn];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	BLOCKLISTDE_FAIL(0.00)[183.61.185.103:query timed out,114.242.206.180:query timed out];
 	FROM_HAS_DN(0.00)[];
+	FREEMAIL_FROM(0.00)[189.cn];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2]
-X-MailFrom: andersson@kernel.org
+Message-ID-Hash: HED5VW2Y2JNZC2RSM4UELI2TEOKJ4HSD
+X-Message-ID-Hash: HED5VW2Y2JNZC2RSM4UELI2TEOKJ4HSD
+X-MailFrom: 15330273260@189.cn
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: UKAJ4MT26HF5ZL2J2Z3OLH3W2SIDGXFT
-X-Message-ID-Hash: UKAJ4MT26HF5ZL2J2Z3OLH3W2SIDGXFT
-X-Mailman-Approved-At: Tue, 11 Apr 2023 08:30:22 +0000
-CC: Geert Uytterhoeven <geert@linux-m68k.org>, Maximilian Luz <luzmaximilian@gmail.com>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Akhil P Oommen <quic_akhilpo@quicinc.com>, Konrad Dybcio <konrad.dybcio@somainline.org>, Douglas Anderson <dianders@chromium.org>, Luca Weiss <luca@z3ntu.xyz>, Sean Paul <sean@poorly.run>, Nathan Chancellor <nathan@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>, "open list:DEVICE FREQUENCY DEVFREQ" <linux-pm@vger.kernel.org>, Rob Clark <robdclark@chromium.org>, Konrad Dybcio <konrad.dybcio@linaro.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, Daniel Vetter <daniel@ffwll.ch>, freedreno@lists.freedesktop.org, "Joel Fernandes (Google)" <joel@joelfernandes.org>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK" <linux-media@vger.kernel.org>, linux-arm-msm@vger.kernel.org
+CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian Koenig <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org, Li Yi <liyi@loongson.cn>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, nathan@kernel.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: (subset) [PATCH v2 00/23] drm/msm+PM+icc: Make job_run() reclaim-safe
+Subject: [Linaro-mm-sig] Re: [PATCH v10 2/2] drm: add kms driver for loongson display controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UKAJ4MT26HF5ZL2J2Z3OLH3W2SIDGXFT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HED5VW2Y2JNZC2RSM4UELI2TEOKJ4HSD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-On Mon, 20 Mar 2023 07:43:22 -0700, Rob Clark wrote:
-> From: Rob Clark <robdclark@chromium.org>
-> 
-> Inspired by https://lore.kernel.org/dri-devel/20200604081224.863494-10-daniel.vetter@ffwll.ch/
-> it seemed like a good idea to get rid of memory allocation in job_run()
-> fence signaling path, and use lockdep annotations to yell at us about
-> anything that could deadlock against shrinker/reclaim.  Anything that
-> can trigger reclaim, or block on any other thread that has triggered
-> reclaim, can block the GPU shrinker from releasing memory if it is
-> waiting the job to complete, causing deadlock.
-> 
-> [...]
-
-Applied, thanks!
-
-[20/23] soc: qcom: smd-rpm: Use GFP_ATOMIC in write path
-        commit: 5808c532ca0a983d643319caca44f2bcb148298f
-
-Best regards,
--- 
-Bjorn Andersson <andersson@kernel.org>
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SGksDQoNCk9uIDIwMjMvNC80IDIyOjEwLCBFbWlsIFZlbGlrb3Ygd3JvdGU6DQo+PiAtLS0gL2Rl
+di9udWxsDQo+PiArKysgYi9kcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19kZWJ1Z2ZzLmMN
+Cj4+ICt2b2lkIGxzZGNfZGVidWdmc19pbml0KHN0cnVjdCBkcm1fbWlub3IgKm1pbm9yKQ0KPj4g
+K3sNCj4+ICsjaWZkZWYgQ09ORklHX0RFQlVHX0ZTDQo+PiArICAgICAgIGRybV9kZWJ1Z2ZzX2Ny
+ZWF0ZV9maWxlcyhsc2RjX2RlYnVnZnNfbGlzdCwNCj4+ICsgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgIEFSUkFZX1NJWkUobHNkY19kZWJ1Z2ZzX2xpc3QpLA0KPj4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgbWlub3ItPmRlYnVnZnNfcm9vdCwNCj4+ICsgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIG1pbm9yKTsNCj4+ICsjZW5kaWYNCj4+ICt9DQo+IFNob3Vs
+ZCBwcm9iYWJseSBidWlsZCB0aGUgZmlsZSB3aGVuIGRlYnVnZnMgaXMgZW5hYmxlZCBhbmQgcHJv
+dmlkZQ0KPiBuby1vcCBzdHViIGluIHRoZSBoZWFkZXIuIFNlZSBub3V2ZWF1IGZvciBhbiBleGFt
+cGxlLg0KPg0KQnV0IGRvaW5nIHRoYXQgd2F5IGludHJvZHVjZSBkdXBsaWNhdGlvbizCoCB5b3Ug
+YWN0dWFsbHkgd3JpdGUgdHdvIA0KaW1wbGVtZW50cyBmb3IgdGhlIHNhbWUgZnVuY3Rpb24gcHJv
+dG90eXBlLg0KDQpPbmUgZm9yIHRoZSByZWFsLCBhbm90aGVyIG9uZSBmb3IgdGhlIGR1bW15Lg0K
+DQpUeXBpY2FsbHkgc2tpbGxlZCBjb3JlIGZyYW1ld29yayBwcm9ncmFtbWVyL3dyaXRlciBsaWtl
+IGl0LCBmb3IgbXVsdGlwbGUgDQpiYWNrZW5kIGFuZCBtdWx0aXBsZSBhcmNoIHN1cHBvcnQNCg0K
+QmVjYXVzZSB0aGUgZnVuY3Rpb25zIHNldCBuZWVkIHRvIGJlIGltcGxlbWVudGVkIGlzIGxhcmdl
+IGZvciB0aG9zZSBjYXNlcy4NCg0KV2hpbGUgd2UgYXJlIGp1c3QgYSBkcml2ZXIgaW1wbGVtZW50
+IGJhc2VkIHRoZSBkcm0gY29yZSBhbmQgb25seSBvbmUgDQpzaW5nbGUgZnVuY3Rpb24gaGVyZSwN
+Cg0KREVCVUdfRlMgaXMgZW5hYmxlZCBieSBkZWZhdWx0IG9uIG91ciBNaXBzIGFuZCBMb29uZ2Fy
+Y2guIEl0IGlzIG5vdCANCnN1ZmZlciBmcm9tIGhpZ2ggZnJlcXVlbmN5IGNoYW5nZXMuDQoNCklu
+IHRoaXMgY2FzZSAsIENPTkZJR19ERUJVR19GUyBqdXN0IGJvaWxzIGRvd24gdG8gInRydWUiLCBh
+IG5lYXJseSANCmFsd2F5cyBlbmFibGVkIGRlY29yYXRpb24uDQoNCg0KV2UgZG8gaW1wbGVtZW50
+IGRlYnVnZnMgc3VwcG9ydCB0aGF0IHdheSBpbiB0aGUgYmVmb3JlWzFdLCBidXQgd2UgcHVyc3Vl
+IA0KY29tcGFjdCBpbiB0aGUgYWZ0ZXJ3YXJkcy4NCg0KV2UgY291bGQgcmV2aXNlIG91ciBkcml2
+ZXIgaWYgdGhhdCBpcyBzdHJvbmdseSByZWNvbW1lbmRlZC4NCg0KDQpbMV0gaHR0cHM6Ly9wYXRj
+aHdvcmsuZnJlZWRlc2t0b3Aub3JnL3BhdGNoLzQ4MDUyMS8NCg0KX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3Qg
+LS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4g
+ZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
