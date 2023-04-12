@@ -2,96 +2,85 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F0016EF597
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Apr 2023 15:37:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0DCE76F55AB
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 12:13:23 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 635863F634
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Apr 2023 13:37:56 +0000 (UTC)
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
-	by lists.linaro.org (Postfix) with ESMTPS id DE7833E9D6
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Apr 2023 13:37:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CBEF83F959
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 10:13:21 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id E25B63EB81
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 12 Apr 2023 17:23:30 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=G8cWJfek;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.55.52.151 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1682516270; x=1714052270;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=mATRcWr0aXBkhLDJViNyss0Ax7HbjLO0ufWDkBE/ZRI=;
-  b=G8cWJfekjFr/xW1Y+E7UCzDJq6Iq/GtRSi2XiTe1k296Jh0ciVKUcU4q
-   pylWsaD+9RgfKW8TXxUINBHLfuHln4HFAtZdLcYq7rlnFiLY5bzEIiTB6
-   fZ1EOBmp581r/mHM3UO5eRnZAMzw9UaMWmYeWJr2I6ThK4Y8ieXn0jgo7
-   Mj1IskuWUGZRWhTWqJRpDgl+n5upsuKMQgzBn3sFPFfO/zxDbLXE/DCKS
-   4xCK3a7bFA0/w1uTDfgCodBYNt0NeRhTZHNyZBeLRp9ED6AJhF+NmhN+k
-   VKe8ORjz2Ut/fdunpR4on/zA/gNmE7WGhgGItOE7vCx5isYxVxkdyAXV5
-   w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10691"; a="327432231"
-X-IronPort-AV: E=Sophos;i="5.99,228,1677571200";
-   d="scan'208";a="327432231"
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Apr 2023 06:37:39 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10691"; a="726524482"
-X-IronPort-AV: E=Sophos;i="5.99,228,1677571200";
-   d="scan'208";a="726524482"
-Received: from lkp-server01.sh.intel.com (HELO 041f065c1b1b) ([10.239.97.150])
-  by orsmga001.jf.intel.com with ESMTP; 26 Apr 2023 06:37:35 -0700
-Received: from kbuild by 041f065c1b1b with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1prfKx-0000EK-0h;
-	Wed, 26 Apr 2023 13:37:35 +0000
-Date: Wed, 26 Apr 2023 21:37:19 +0800
-From: kernel test robot <lkp@intel.com>
-To: Arseniy Krasnov <AVKrasnov@sberdevices.ru>,
-	Miquel Raynal <miquel.raynal@bootlin.com>,
-	Richard Weinberger <richard@nod.at>,
-	Vignesh Raghavendra <vigneshr@ti.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <202304262101.pP2ae1ol-lkp@intel.com>
-References: <20230426072455.3887717-1-AVKrasnov@sberdevices.ru>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=UtCKNUkJ;
+	spf=pass (lists.linaro.org: domain of vkoul@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=vkoul@kernel.org;
+	dmarc=pass (policy=none) header.from=kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 791606111D;
+	Wed, 12 Apr 2023 17:23:30 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 687D7C433EF;
+	Wed, 12 Apr 2023 17:23:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1681320209;
+	bh=wMn7qeUFacSworH32ghtZecf85ca3gEEa1FOPqctaOs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=UtCKNUkJ1fWxyC3Ue+qYiqPBVuXsOtAJBrv6CAyb19WO6wRiD55elkG5mecRp41Lm
+	 GS1sFGz9igYMfsGC1Vd0zivXoEqjILDQPp2i9fyrKd+KmZIe4T9lVKtuS2nPo7+Ys+
+	 0/ZPgDNtiQcUb/ONHlQ24q1iT2BJ4t3zTZaQzPwpcL7t+BLt9hNGGXimubXbPU9+pc
+	 pgAl1ZOEphhvIuG6WXH242+8x3cZ6Vce3cajzsSX0DM2FW5gwziq0P/49CWqtUsu0r
+	 PriJDV3vvgo4XR+5PWpf+g4ZtC7ocEV63DnrrdkHDQOIFVel/ppvrgRmIL73vv6Trz
+	 DoJjzZvfsu01w==
+Date: Wed, 12 Apr 2023 22:53:26 +0530
+From: Vinod Koul <vkoul@kernel.org>
+To: Paul Cercueil <paul@crapouillou.net>
+Message-ID: <ZDbpDptOcuBLFctc@matsya>
+References: <20230403154800.215924-1-paul@crapouillou.net>
+ <20230403154800.215924-2-paul@crapouillou.net>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230426072455.3887717-1-AVKrasnov@sberdevices.ru>
-X-Spamd-Result: default: False [-8.00 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
-	BAYES_HAM(-3.00)[100.00%];
-	DWL_DNSWL_MED(-2.00)[intel.com:dkim];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:192.55.52.151/32];
-	MIME_GOOD(-0.10)[text/plain];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:4983, ipnet:192.55.52.0/24, country:US];
-	FREEMAIL_CC(0.00)[lists.linux.dev,gmail.com,sberdevices.ru,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	RCVD_COUNT_THREE(0.00)[3];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	ARC_NA(0.00)[]
+In-Reply-To: <20230403154800.215924-2-paul@crapouillou.net>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: DE7833E9D6
-X-Spamd-Bar: --------
-Message-ID-Hash: FNDOL7E2IFTFADRZUIR67Q45XXYHWOZH
-X-Message-ID-Hash: FNDOL7E2IFTFADRZUIR67Q45XXYHWOZH
-X-MailFrom: lkp@intel.com
+X-Rspamd-Queue-Id: E25B63EB81
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.00 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	RCVD_IN_DNSWL_HI(-1.00)[52.25.139.140:received,139.178.84.217:from];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
+	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	MIME_GOOD(-0.10)[text/plain];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	FREEMAIL_CC(0.00)[kernel.org,metafoo.de,analog.com,gmail.com,linaro.org,amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	MIME_TRACE(0.00)[0:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2]
+X-MailFrom: vkoul@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, oxffffaa@gmail.com, kernel@sberdevices.ru, linux-mtd@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: 4PCQ3UR2DUR6AAGJZ2RI3D2ZAO3A3GIV
+X-Message-ID-Hash: 4PCQ3UR2DUR6AAGJZ2RI3D2ZAO3A3GIV
+X-Mailman-Approved-At: Wed, 03 May 2023 10:13:19 +0000
+CC: Jonathan Cameron <jic23@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>, Michael Hennerich <Michael.Hennerich@analog.com>, Nuno =?iso-8859-1?Q?S=E1?= <noname.nuno@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-iio@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v1] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
+Subject: [Linaro-mm-sig] Re: [PATCH v3 01/11] dmaengine: Add API function dmaengine_prep_slave_dma_array()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FNDOL7E2IFTFADRZUIR67Q45XXYHWOZH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4PCQ3UR2DUR6AAGJZ2RI3D2ZAO3A3GIV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -101,166 +90,66 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi Arseniy,
+On 03-04-23, 17:47, Paul Cercueil wrote:
+> This function can be used to initiate a scatter-gather DMA transfer
+> where the DMA addresses and lengths are located inside arrays.
+> 
+> The major difference with dmaengine_prep_slave_sg() is that it supports
+> specifying the lengths of each DMA transfer; as trying to override the
+> length of the transfer with dmaengine_prep_slave_sg() is a very tedious
+> process. The introduction of a new API function is also justified by the
+> fact that scatterlists are on their way out.
 
-kernel test robot noticed the following build errors:
+Do we need a new API for this? why not use device_prep_interleaved_dma?
 
-[auto build test ERROR on mtd/nand/next]
-[also build test ERROR on linus/master v6.3 next-20230425]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Arseniy-Krasnov/mtd-rawnand-macronix-OTP-access-for-MX30LFxG18AC/20230426-153143
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/mtd/linux.git nand/next
-patch link:    https://lore.kernel.org/r/20230426072455.3887717-1-AVKrasnov%40sberdevices.ru
-patch subject: [PATCH v1] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
-config: hexagon-randconfig-r041-20230425 (https://download.01.org/0day-ci/archive/20230426/202304262101.pP2ae1ol-lkp@intel.com/config)
-compiler: clang version 17.0.0 (https://github.com/llvm/llvm-project 437b7602e4a998220871de78afcb020b9c14a661)
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://github.com/intel-lab-lkp/linux/commit/3529f3465e99379489b59c035a8a0506c3756ef4
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Arseniy-Krasnov/mtd-rawnand-macronix-OTP-access-for-MX30LFxG18AC/20230426-153143
-        git checkout 3529f3465e99379489b59c035a8a0506c3756ef4
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=hexagon olddefconfig
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=hexagon SHELL=/bin/bash drivers/mtd/nand/raw/
-
-If you fix the issue, kindly add following tag where applicable
-| Reported-by: kernel test robot <lkp@intel.com>
-| Link: https://lore.kernel.org/oe-kbuild-all/202304262101.pP2ae1ol-lkp@intel.com/
-
-All error/warnings (new ones prefixed by >>):
-
->> drivers/mtd/nand/raw/nand_macronix.c:384:12: error: call to undeclared function 'kmalloc'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-           dma_buf = kmalloc(MACRONIX_30LFXG18AC_OTP_PAGE_SIZE, GFP_KERNEL);
-                     ^
-   drivers/mtd/nand/raw/nand_macronix.c:384:12: note: did you mean 'mm_alloc'?
-   include/linux/sched/mm.h:16:26: note: 'mm_alloc' declared here
-   extern struct mm_struct *mm_alloc(void);
-                            ^
->> drivers/mtd/nand/raw/nand_macronix.c:384:10: error: incompatible integer to pointer conversion assigning to 'void *' from 'int' [-Wint-conversion]
-           dma_buf = kmalloc(MACRONIX_30LFXG18AC_OTP_PAGE_SIZE, GFP_KERNEL);
-                   ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->> drivers/mtd/nand/raw/nand_macronix.c:397:17: warning: comparison of distinct pointer types ('typeof ((page)) *' (aka 'unsigned long *') and 'uint64_t *' (aka 'unsigned long long *')) [-Wcompare-distinct-pointer-types]
-           offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
-                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   include/asm-generic/div64.h:222:28: note: expanded from macro 'do_div'
-           (void)(((typeof((n)) *)0) == ((uint64_t *)0));  \
-                  ~~~~~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~~~~~
->> drivers/mtd/nand/raw/nand_macronix.c:397:17: error: incompatible pointer types passing 'unsigned long *' to parameter of type 'uint64_t *' (aka 'unsigned long long *') [-Werror,-Wincompatible-pointer-types]
-           offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
-                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   include/asm-generic/div64.h:238:22: note: expanded from macro 'do_div'
-                   __rem = __div64_32(&(n), __base);       \
-                                      ^~~~
-   include/asm-generic/div64.h:213:38: note: passing argument to parameter 'dividend' here
-   extern uint32_t __div64_32(uint64_t *dividend, uint32_t divisor);
-                                        ^
->> drivers/mtd/nand/raw/nand_macronix.c:437:2: error: call to undeclared function 'kfree'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-           kfree(dma_buf);
-           ^
-   drivers/mtd/nand/raw/nand_macronix.c:437:2: note: did you mean 'kvfree'?
-   include/linux/rcutiny.h:99:13: note: 'kvfree' declared here
-   extern void kvfree(const void *addr);
-               ^
->> drivers/mtd/nand/raw/nand_macronix.c:397:17: warning: shift count >= width of type [-Wshift-count-overflow]
-           offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
-                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   include/asm-generic/div64.h:234:25: note: expanded from macro 'do_div'
-           } else if (likely(((n) >> 32) == 0)) {          \
-                                  ^  ~~
-   include/linux/compiler.h:77:40: note: expanded from macro 'likely'
-   # define likely(x)      __builtin_expect(!!(x), 1)
-                                               ^
-   2 warnings and 4 errors generated.
-
-
-vim +/kmalloc +384 drivers/mtd/nand/raw/nand_macronix.c
-
-   366	
-   367	static int __macronix_30lfxg18ac_rw_otp(struct mtd_info *mtd,
-   368						loff_t offs_in_flash,
-   369						size_t len, size_t *retlen,
-   370						u_char *buf, bool write)
-   371	{
-   372		struct nand_chip *nand;
-   373		size_t bytes_handled;
-   374		unsigned long page;
-   375		off_t offs_in_page;
-   376		void *dma_buf;
-   377		int ret;
-   378	
-   379		/* 'nand_prog/read_page_op()' may use 'buf' as DMA buffer,
-   380		 * so allocate properly aligned memory for it. This is
-   381		 * needed because cross page accesses may lead to unaligned
-   382		 * buffer address for DMA.
-   383		 */
- > 384		dma_buf = kmalloc(MACRONIX_30LFXG18AC_OTP_PAGE_SIZE, GFP_KERNEL);
-   385		if (!dma_buf)
-   386			return -ENOMEM;
-   387	
-   388		nand = mtd_to_nand(mtd);
-   389		nand_select_target(nand, 0);
-   390	
-   391		ret = macronix_30lfxg18ac_otp_enable(nand);
-   392		if (ret)
-   393			goto out_otp;
-   394	
-   395		page = offs_in_flash;
-   396		/* 'page' will be result of division. */
- > 397		offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
-   398		bytes_handled = 0;
-   399	
-   400		while (bytes_handled < len &&
-   401		       page < MACRONIX_30LFXG18AC_OTP_PAGES) {
-   402			size_t bytes_to_handle;
-   403	
-   404			bytes_to_handle = min_t(size_t, len - bytes_handled,
-   405						MACRONIX_30LFXG18AC_OTP_PAGE_SIZE -
-   406						offs_in_page);
-   407	
-   408			if (write) {
-   409				memcpy(dma_buf, &buf[bytes_handled], bytes_to_handle);
-   410				ret = nand_prog_page_op(nand, page, offs_in_page,
-   411							dma_buf, bytes_to_handle);
-   412			} else {
-   413				ret = nand_read_page_op(nand, page, offs_in_page,
-   414							dma_buf, bytes_to_handle);
-   415				if (!ret)
-   416					memcpy(&buf[bytes_handled], dma_buf,
-   417					       bytes_to_handle);
-   418			}
-   419			if (ret)
-   420				goto out_otp;
-   421	
-   422			bytes_handled += bytes_to_handle;
-   423			offs_in_page = 0;
-   424			page++;
-   425		}
-   426	
-   427		*retlen = bytes_handled;
-   428	
-   429	out_otp:
-   430		if (ret)
-   431			dev_err(&mtd->dev, "failed to perform OTP IO: %i\n", ret);
-   432	
-   433		ret = macronix_30lfxg18ac_otp_disable(nand);
-   434		WARN(ret, "failed to leave OTP mode after %s\n",
-   435		     write ? "write" : "read");
-   436		nand_deselect_target(nand);
- > 437		kfree(dma_buf);
-   438	
-   439		return ret;
-   440	}
-   441	
+> 
+> Signed-off-by: Paul Cercueil <paul@crapouillou.net>
+> 
+> ---
+> v3: New patch
+> ---
+>  include/linux/dmaengine.h | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+> 
+> diff --git a/include/linux/dmaengine.h b/include/linux/dmaengine.h
+> index c3656e590213..62efa28c009a 100644
+> --- a/include/linux/dmaengine.h
+> +++ b/include/linux/dmaengine.h
+> @@ -912,6 +912,11 @@ struct dma_device {
+>  	struct dma_async_tx_descriptor *(*device_prep_dma_interrupt)(
+>  		struct dma_chan *chan, unsigned long flags);
+>  
+> +	struct dma_async_tx_descriptor *(*device_prep_slave_dma_array)(
+> +		struct dma_chan *chan, dma_addr_t *addrs,
+> +		size_t *lengths, size_t nb,
+> +		enum dma_transfer_direction direction,
+> +		unsigned long flags);
+>  	struct dma_async_tx_descriptor *(*device_prep_slave_sg)(
+>  		struct dma_chan *chan, struct scatterlist *sgl,
+>  		unsigned int sg_len, enum dma_transfer_direction direction,
+> @@ -974,6 +979,17 @@ static inline struct dma_async_tx_descriptor *dmaengine_prep_slave_single(
+>  						  dir, flags, NULL);
+>  }
+>  
+> +static inline struct dma_async_tx_descriptor *dmaengine_prep_slave_dma_array(
+> +	struct dma_chan *chan, dma_addr_t *addrs, size_t *lengths,
+> +	size_t nb, enum dma_transfer_direction dir, unsigned long flags)
+> +{
+> +	if (!chan || !chan->device || !chan->device->device_prep_slave_dma_array)
+> +		return NULL;
+> +
+> +	return chan->device->device_prep_slave_dma_array(chan, addrs, lengths,
+> +							 nb, dir, flags);
+> +}
+> +
+>  static inline struct dma_async_tx_descriptor *dmaengine_prep_slave_sg(
+>  	struct dma_chan *chan, struct scatterlist *sgl,	unsigned int sg_len,
+>  	enum dma_transfer_direction dir, unsigned long flags)
+> -- 
+> 2.39.2
 
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests
+~Vinod
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
