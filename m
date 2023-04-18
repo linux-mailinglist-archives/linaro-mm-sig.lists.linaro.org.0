@@ -2,117 +2,214 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4ACA6E5BA1
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Apr 2023 10:08:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F9426E5C5F
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Apr 2023 10:45:42 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8D36A3F700
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Apr 2023 08:08:29 +0000 (UTC)
-Received: from aposti.net (aposti.net [89.234.176.197])
-	by lists.linaro.org (Postfix) with ESMTPS id 1AEED3E948
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Apr 2023 08:08:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1BDC63E9D4
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Apr 2023 08:45:41 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 73F273E948
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Apr 2023 08:45:37 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=crapouillou.net header.s=mail header.b=i2y5XYqQ;
-	spf=pass (lists.linaro.org: domain of paul@crapouillou.net designates 89.234.176.197 as permitted sender) smtp.mailfrom=paul@crapouillou.net;
-	dmarc=pass (policy=none) header.from=crapouillou.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
-	s=mail; t=1681805303;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=8DTc/oRJhMEBa33wB3TaMgkNKc15dOmlHK8alGfdcJk=;
-	b=i2y5XYqQS4KdTNNlpdITBztyfUED78n/aM0a3L19IR0dztlNgHD4h8kG3hHLJb6PE4BHyh
-	BHoN5d/SlAU8cwhrU+rUiz49RLxT/CSXxujr6Onaz2R1d5d35D14IgL/OTfA4/HlL3/KGZ
-	wp5ZiCeGY69eCgNlIg3o3Qf0vNWzzVk=
-Message-ID: <1f63ffced9ed18309401af9a885310e1715b6538.camel@crapouillou.net>
-From: Paul Cercueil <paul@crapouillou.net>
-To: Jonathan Cameron <jic23@kernel.org>
-Date: Tue, 18 Apr 2023 10:08:21 +0200
-In-Reply-To: <20230416152422.477ecf67@jic23-huawei>
-References: <20230403154800.215924-1-paul@crapouillou.net>
-	 <20230403154800.215924-4-paul@crapouillou.net>
-	 <20230416152422.477ecf67@jic23-huawei>
+	dkim=pass header.d=ffwll.ch header.s=google header.b=FanzCFjo;
+	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.128.48) smtp.mailfrom=daniel@ffwll.ch;
+	dmarc=none
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-3f167d0cbb7so5632345e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Apr 2023 01:45:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ffwll.ch; s=google; t=1681807536; x=1684399536;
+        h=in-reply-to:content-disposition:mime-version:references
+         :mail-followup-to:message-id:subject:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=oT5P+C8jhcnVktHuaT8CaiAl2LYwjoUSuguqcQQFtp4=;
+        b=FanzCFjomRlpL2OEofMz+oVxq6i4uNv2gnUp26WfZ6CbrvGoNxpyzRO9DB2aHjvVIJ
+         4FuOuc/fGLggIde9ottv4hvvZ79pRU1XLEWxMvks+oPAJDypRw0e29W4MMGhJ9zamOBp
+         J180c50wDd4N8ucvs5m1gzu/gaE1gGElKXC40=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1681807536; x=1684399536;
+        h=in-reply-to:content-disposition:mime-version:references
+         :mail-followup-to:message-id:subject:to:from:date:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=oT5P+C8jhcnVktHuaT8CaiAl2LYwjoUSuguqcQQFtp4=;
+        b=GocF2aOPf0jLXEC9um12sBoDgJzSUIbPJrDrp5UiRbcwlvRRQsRPCgMzh69JvrdoVG
+         7abx24TBC/BJg6/xCZJvOi2S72o7Z2oBMP8gIiEkwrNBsGrEFmtOwk595uieO4WTOW8M
+         mi/0cvRpQiA2Y0erc133AyArJg8DZK/w8+/avyrehetY6XbgDU898NPWmXRZmwVLFkHz
+         WpSJgWJbczuq9DDR9Dq5U5sSLKYQwnFyET1r+9bBmXEo4804OLexjPRKuv/TNwUU0CQ8
+         H9t6n/0sTn/qp2tThwsXoUV3JrgM6/vHUTPmF4WMYJszJZkUn14pjyqOBxs0R6jq/x5f
+         2fyA==
+X-Gm-Message-State: AAQBX9d1wx3PEKmzZeS6eCn3BlNY0KIyb1yRby7N86omma7FiquFyF0A
+	uy/wobXScOjltIHY8idMVPg8Ng==
+X-Google-Smtp-Source: AKy350YvSEYDzOeKn9KFoIbnr6WuwyMxchvWtx3lAPsn13XE0E7uVmL1Lmr9GjC6iusO9jxxDaLSeA==
+X-Received: by 2002:a05:600c:3d18:b0:3f1:7490:e595 with SMTP id bh24-20020a05600c3d1800b003f17490e595mr3737876wmb.2.1681807536442;
+        Tue, 18 Apr 2023 01:45:36 -0700 (PDT)
+Received: from phenom.ffwll.local (212-51-149-33.fiber7.init7.net. [212.51.149.33])
+        by smtp.gmail.com with ESMTPSA id u7-20020a7bcb07000000b003ee70225ed2sm14293806wmj.15.2023.04.18.01.45.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 18 Apr 2023 01:45:35 -0700 (PDT)
+Date: Tue, 18 Apr 2023 10:45:33 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Asahi Lina <lina@asahilina.net>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>, Miguel Ojeda <ojeda@kernel.org>,
+	Alex Gaynor <alex.gaynor@gmail.com>,
+	Wedson Almeida Filho <wedsonaf@gmail.com>,
+	Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Luben Tuikov <luben.tuikov@amd.com>,
+	Jarkko Sakkinen <jarkko@kernel.org>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	Alyssa Rosenzweig <alyssa@rosenzweig.io>,
+	Karol Herbst <kherbst@redhat.com>,
+	Ella Stanforth <ella@iglunix.org>,
+	Faith Ekstrand <faith.ekstrand@collabora.com>,
+	Mary <mary@mary.zone>, linux-kernel@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
+	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
+	linux-sgx@vger.kernel.org, asahi@lists.linux.dev
+Message-ID: <ZD5YrQ52Yn1np8ve@phenom.ffwll.local>
+Mail-Followup-To: Asahi Lina <lina@asahilina.net>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>, Miguel Ojeda <ojeda@kernel.org>,
+	Alex Gaynor <alex.gaynor@gmail.com>,
+	Wedson Almeida Filho <wedsonaf@gmail.com>,
+	Boqun Feng <boqun.feng@gmail.com>, Gary Guo <gary@garyguo.net>,
+	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Luben Tuikov <luben.tuikov@amd.com>,
+	Jarkko Sakkinen <jarkko@kernel.org>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	Alyssa Rosenzweig <alyssa@rosenzweig.io>,
+	Karol Herbst <kherbst@redhat.com>,
+	Ella Stanforth <ella@iglunix.org>,
+	Faith Ekstrand <faith.ekstrand@collabora.com>,
+	Mary <mary@mary.zone>, linux-kernel@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, rust-for-linux@vger.kernel.org,
+	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
+	linux-sgx@vger.kernel.org, asahi@lists.linux.dev
+References: <20230307-rust-drm-v1-0-917ff5bc80a8@asahilina.net>
+ <20230307-rust-drm-v1-12-917ff5bc80a8@asahilina.net>
+ <ZC2XBfJGAdNMQjpZ@phenom.ffwll.local>
+ <ZC3L/uinmOwI+FbI@phenom.ffwll.local>
 MIME-Version: 1.0
-X-Spamd-Result: default: False [-4.00 / 15.00];
+Content-Disposition: inline
+In-Reply-To: <ZC3L/uinmOwI+FbI@phenom.ffwll.local>
+X-Operating-System: Linux phenom 6.1.0-7-amd64 
+X-Spamd-Result: default: False [-1.80 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-0.50)[89.234.176.197:from];
-	DMARC_POLICY_ALLOW(-0.50)[crapouillou.net,none];
-	R_SPF_ALLOW(-0.20)[+a];
-	R_DKIM_ALLOW(-0.20)[crapouillou.net:s=mail];
+	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_COUNT_ZERO(0.00)[0];
-	FREEMAIL_CC(0.00)[metafoo.de,kernel.org,analog.com,gmail.com,linaro.org,amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	ASN(0.00)[asn:203432, ipnet:89.234.176.0/23, country:FR];
+	FREEMAIL_TO(0.00)[asahilina.net,linux.intel.com,kernel.org,suse.de,gmail.com,garyguo.net,protonmail.com,linaro.org,amd.com,rosenzweig.io,redhat.com,iglunix.org,collabora.com,mary.zone,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.linux.dev];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	R_SPF_NA(0.00)[no SPF record];
 	FROM_EQ_ENVFROM(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	NEURAL_HAM(-0.00)[-0.998];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[ffwll.ch:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[crapouillou.net:+];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[28];
 	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[]
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_RCPT(0.00)[];
+	DMARC_NA(0.00)[ffwll.ch];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.48:from]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 1AEED3E948
-X-Spamd-Bar: ---
-Message-ID-Hash: RYHBVATMXBCLU2VUHN5KJQBVJ3CFS647
-X-Message-ID-Hash: RYHBVATMXBCLU2VUHN5KJQBVJ3CFS647
-X-MailFrom: paul@crapouillou.net
+X-Rspamd-Queue-Id: 73F273E948
+X-Spamd-Bar: -
+Message-ID-Hash: G63ORBUWZKLG5KHW4KE5JVKIFQP4YQXQ
+X-Message-ID-Hash: G63ORBUWZKLG5KHW4KE5JVKIFQP4YQXQ
+X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Lars-Peter Clausen <lars@metafoo.de>, Vinod Koul <vkoul@kernel.org>, Michael Hennerich <Michael.Hennerich@analog.com>, Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-iio@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 03/11] iio: buffer-dma: Get rid of outgoing queue
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 12/18] rust: drm: sched: Add GPU scheduler abstraction
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RYHBVATMXBCLU2VUHN5KJQBVJ3CFS647/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/G63ORBUWZKLG5KHW4KE5JVKIFQP4YQXQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGkgSm9uYXRoYW4sDQoNCkxlIGRpbWFuY2hlIDE2IGF2cmlsIDIwMjMgw6AgMTU6MjQgKzAxMDAs
-IEpvbmF0aGFuIENhbWVyb24gYSDDqWNyaXTCoDoNCj4gT24gTW9uLMKgIDMgQXByIDIwMjMgMTc6
-NDc6NTIgKzAyMDANCj4gUGF1bCBDZXJjdWVpbCA8cGF1bEBjcmFwb3VpbGxvdS5uZXQ+IHdyb3Rl
-Og0KPiANCj4gPiBUaGUgYnVmZmVyLWRtYSBjb2RlIHdhcyB1c2luZyB0d28gcXVldWVzLCBpbmNv
-bWluZyBhbmQgb3V0Z29pbmcsIHRvDQo+ID4gbWFuYWdlIHRoZSBzdGF0ZSBvZiB0aGUgYmxvY2tz
-IGluIHVzZS4NCj4gPiANCj4gPiBXaGlsZSB0aGlzIHRvdGFsbHkgd29ya3MsIGl0IGFkZHMgc29t
-ZSBjb21wbGV4aXR5IHRvIHRoZSBjb2RlLA0KPiA+IGVzcGVjaWFsbHkgc2luY2UgdGhlIGNvZGUg
-b25seSBtYW5hZ2VzIDIgYmxvY2tzLiBJdCBpcyBtdWNoIGVhc2llcg0KPiA+IHRvDQo+ID4ganVz
-dCBjaGVjayBlYWNoIGJsb2NrJ3Mgc3RhdGUgbWFudWFsbHksIGFuZCBrZWVwIGEgY291bnRlciBm
-b3IgdGhlDQo+ID4gbmV4dA0KPiA+IGJsb2NrIHRvIGRlcXVldWUuDQo+ID4gDQo+ID4gU2luY2Ug
-dGhlIG5ldyBETUFCVUYgYmFzZWQgQVBJIHdvdWxkbid0IHVzZSB0aGUgb3V0Z29pbmcgcXVldWUN
-Cj4gPiBhbnl3YXksDQo+ID4gZ2V0dGluZyByaWQgb2YgaXQgbm93IG1ha2VzIHRoZSB1cGNvbWlu
-ZyBjaGFuZ2VzIHNpbXBsZXIuDQo+ID4gDQo+ID4gV2l0aCB0aGlzIGNoYW5nZSwgdGhlIElJT19C
-TE9DS19TVEFURV9ERVFVRVVFRCBpcyBub3cgdXNlbGVzcywgYW5kDQo+ID4gY2FuDQo+ID4gYmUg
-cmVtb3ZlZC4NCj4gPiANCj4gPiBTaWduZWQtb2ZmLWJ5OiBQYXVsIENlcmN1ZWlsIDxwYXVsQGNy
-YXBvdWlsbG91Lm5ldD4NCj4gPiANCj4gPiAtLS0NCj4gPiB2MjogLSBPbmx5IHJlbW92ZSB0aGUg
-b3V0Z29pbmcgcXVldWUsIGFuZCBrZWVwIHRoZSBpbmNvbWluZyBxdWV1ZSwNCj4gPiBhcyB3ZQ0K
-PiA+IMKgwqDCoMKgwqAgd2FudCB0aGUgYnVmZmVyIHRvIHN0YXJ0IHN0cmVhbWluZyBkYXRhIGFz
-IHNvb24gYXMgaXQgaXMNCj4gPiBlbmFibGVkLg0KPiA+IMKgwqDCoCAtIFJlbW92ZSBJSU9fQkxP
-Q0tfU1RBVEVfREVRVUVVRUQsIHNpbmNlIGl0IGlzIG5vdyBmdW5jdGlvbmFsbHkNCj4gPiB0aGUN
-Cj4gPiDCoMKgwqDCoMKgIHNhbWUgYXMgSUlPX0JMT0NLX1NUQVRFX0RPTkUuDQo+IA0KPiBJJ20g
-bm90IHRoYXQgZmFtaWxpYXIgd2l0aCB0aGlzIGNvZGUsIGJ1dCB3aXRoIG15IHVuZGVyc3RhbmRp
-bmcgdGhpcw0KPiBtYWtlcw0KPiBzZW5zZS7CoMKgIEkgdGhpbmsgaXQgaXMgaW5kZXBlbmRlbnQg
-b2YgdGhlIGVhcmxpZXIgcGF0Y2hlcyBhbmQgaXMgYQ0KPiB1c2VmdWwNCj4gY2hhbmdlIGluIGl0
-J3Mgb3duIHJpZ2h0LsKgIEFzIHN1Y2gsIGRvZXMgaXQgbWFrZSBzZW5zZSB0byBwaWNrIHRoaXMN
-Cj4gdXANCj4gYWhlYWQgb2YgdGhlIHJlc3Qgb2YgdGhlIHNlcmllcz8gSSdtIGFzc3VtaW5nIHRo
-YXQgZGlzY3Vzc2lvbiBvbiB0aGUNCj4gcmVzdCB3aWxsIHRha2UgYSB3aGlsZS7CoCBObyBncmVh
-dCBydXNoIGFzIHRvbyBsYXRlIGZvciB0aGUgY29taW5nDQo+IG1lcmdlDQo+IHdpbmRvdyBhbnl3
-YXkuDQoNCkFjdHVhbGx5LCB5b3UgY2FuIHBpY2sgcGF0Y2hlcyAzIHRvIDYgKHdoZW4gYWxsIGhh
-dmUgYmVlbiBhY2tlZCkuIFRoZXkNCmFkZCB3cml0ZSBzdXBwb3J0IGZvciBidWZmZXItZG1hIGlt
-cGxlbWVudGF0aW9uczsgd2hpY2ggaXMgYSBkZXBlbmRlbmN5DQpmb3IgdGhlIHJlc3Qgb2YgdGhl
-IHBhdGNoc2V0LCBidXQgdGhleSBjYW4gbGl2ZSBvbiB0aGVpciBvd24uDQoNCkNoZWVycywNCi1Q
-YXVsDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5h
-cm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcK
-VG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3Rz
-LmxpbmFyby5vcmcK
+On Wed, Apr 05, 2023 at 09:29:02PM +0200, Daniel Vetter wrote:
+> On Wed, Apr 05, 2023 at 05:43:01PM +0200, Daniel Vetter wrote:
+> > On Tue, Mar 07, 2023 at 11:25:37PM +0900, Asahi Lina wrote:
+> > > +/// An armed DRM scheduler job (not yet submitted)
+> > > +pub struct ArmedJob<'a, T: JobImpl>(Box<Job<T>>, PhantomData<&'a T>);
+> > > +
+> > > +impl<'a, T: JobImpl> ArmedJob<'a, T> {
+> > > +    /// Returns the job fences
+> > > +    pub fn fences(&self) -> JobFences<'_> {
+> > > +        JobFences(unsafe { &mut *self.0.job.s_fence })
+> > > +    }
+> > > +
+> > > +    /// Push the job for execution into the scheduler
+> > > +    pub fn push(self) {
+> > > +        // After this point, the job is submitted and owned by the scheduler
+> > > +        let ptr = match self {
+> > > +            ArmedJob(job, _) => Box::<Job<T>>::into_raw(job),
+> > > +        };
+> > 
+> > If I get this all right then this all makes sure that drivers can't use
+> > the job after push and they don't forgot to call arm.
+> > 
+> > What I'm not seeing is how we force drivers to call push once they've
+> > called arm? I haven't check what the code does, but from the docs it
+> > sounds like if you don't call push then drop will get called. Which wreaks
+> > the book-keeping on an armed job. Or is there someting that prevents
+> > ArmedJob<T> from having the Drop trait and so the only way to not go boom
+> > is by pushing it?
+> > 
+> > Googling for "rust undroppable" seems to indicate that this isn't a thing
+> > rust can do?
+> 
+> Another thing that I just realized: The driver must ensure that the
+> arm->push sequence on a given drm_sched_entity isn't interrupte by another
+> thread doing the same, i.e. you need to wrap it all in a lock, and it
+> always needs to be the same lock for a given entity.
+> 
+> I have no idea how to guarantee that, but I guess somehow we should?
+
+Ok I was wrong here, pushing the job is optional, but the locking rules
+are still the same.
+
+I think we can solve this in rust with:
+- passing &mut Entity to a new submit_job function. that way locking rules
+  are left to the driver, which I think is best.
+- the submit_job also takes a closure, and passes the armed job as a &mut
+  ArmedJob to it. That way we guarantee that the armed job never survives
+  longer than the mutex guard (or whatever trick the driver is using) for
+  the Entity
+- that closure probably should have Result return type which submit_job
+  just passes on, because some drivers (when you support userptr that is)
+  need to be able to bail out. since the ArmedJob is borred it shouldn't
+  be able to escape through the return value
+- only ArmedJob has push_job
+
+I think with that we fully uphold the drm_sched arm/push_job contract on
+the rust side?
+-Daniel
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
