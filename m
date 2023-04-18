@@ -2,109 +2,117 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF9896E4110
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 17 Apr 2023 09:32:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D4ACA6E5BA1
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Apr 2023 10:08:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CE5433F98D
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 17 Apr 2023 07:32:15 +0000 (UTC)
-Received: from 189.cn (ptr.189.cn [183.61.185.103])
-	by lists.linaro.org (Postfix) with ESMTP id 2BAD33EC06
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 17 Apr 2023 07:32:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8D36A3F700
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Apr 2023 08:08:29 +0000 (UTC)
+Received: from aposti.net (aposti.net [89.234.176.197])
+	by lists.linaro.org (Postfix) with ESMTPS id 1AEED3E948
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Apr 2023 08:08:25 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of 15330273260@189.cn designates 183.61.185.103 as permitted sender) smtp.mailfrom=15330273260@189.cn;
-	dmarc=none
-HMM_SOURCE_IP: 10.64.8.43:33518.461400368
-HMM_ATTACHE_NUM: 0000
-HMM_SOURCE_TYPE: SMTP
-Received: from clientip-114.242.206.180 (unknown [10.64.8.43])
-	by 189.cn (HERMES) with SMTP id 9940B100248;
-	Mon, 17 Apr 2023 15:32:04 +0800 (CST)
-Received: from  ([114.242.206.180])
-	by gateway-151646-dep-7b48884fd-tj646 with ESMTP id 3150ac44627a4b4cb80ece4c13008730 for christian.koenig@amd.com;
-	Mon, 17 Apr 2023 15:32:07 CST
-X-Transaction-ID: 3150ac44627a4b4cb80ece4c13008730
-X-Real-From: 15330273260@189.cn
-X-Receive-IP: 114.242.206.180
-X-MEDUSA-Status: 0
-Sender: 15330273260@189.cn
-Message-ID: <35ebedcb-cec7-54ea-2d60-8a8db19269ea@189.cn>
-Date: Mon, 17 Apr 2023 15:32:04 +0800
+	dkim=pass header.d=crapouillou.net header.s=mail header.b=i2y5XYqQ;
+	spf=pass (lists.linaro.org: domain of paul@crapouillou.net designates 89.234.176.197 as permitted sender) smtp.mailfrom=paul@crapouillou.net;
+	dmarc=pass (policy=none) header.from=crapouillou.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
+	s=mail; t=1681805303;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=8DTc/oRJhMEBa33wB3TaMgkNKc15dOmlHK8alGfdcJk=;
+	b=i2y5XYqQS4KdTNNlpdITBztyfUED78n/aM0a3L19IR0dztlNgHD4h8kG3hHLJb6PE4BHyh
+	BHoN5d/SlAU8cwhrU+rUiz49RLxT/CSXxujr6Onaz2R1d5d35D14IgL/OTfA4/HlL3/KGZ
+	wp5ZiCeGY69eCgNlIg3o3Qf0vNWzzVk=
+Message-ID: <1f63ffced9ed18309401af9a885310e1715b6538.camel@crapouillou.net>
+From: Paul Cercueil <paul@crapouillou.net>
+To: Jonathan Cameron <jic23@kernel.org>
+Date: Tue, 18 Apr 2023 10:08:21 +0200
+In-Reply-To: <20230416152422.477ecf67@jic23-huawei>
+References: <20230403154800.215924-1-paul@crapouillou.net>
+	 <20230403154800.215924-4-paul@crapouillou.net>
+	 <20230416152422.477ecf67@jic23-huawei>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- Sumit Semwal <sumit.semwal@linaro.org>, David Airlie <airlied@gmail.com>,
- Li Yi <liyi@loongson.cn>
-References: <20230416143849.1142779-1-suijingfeng@loongson.cn>
- <a8ca8691-5507-a80d-357c-43d45a44d799@amd.com>
-Content-Language: en-US
-From: Sui Jingfeng <15330273260@189.cn>
-In-Reply-To: <a8ca8691-5507-a80d-357c-43d45a44d799@amd.com>
-X-Spamd-Result: default: False [-7.20 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	R_SPF_ALLOW(-0.20)[+ip4:183.61.185.0/24];
-	RCVD_NO_TLS_LAST(0.10)[];
+X-Spamd-Result: default: False [-4.00 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	RCVD_IN_DNSWL_HI(-0.50)[89.234.176.197:from];
+	DMARC_POLICY_ALLOW(-0.50)[crapouillou.net,none];
+	R_SPF_ALLOW(-0.20)[+a];
+	R_DKIM_ALLOW(-0.20)[crapouillou.net:s=mail];
 	MIME_GOOD(-0.10)[text/plain];
+	RCVD_COUNT_ZERO(0.00)[0];
+	FREEMAIL_CC(0.00)[metafoo.de,kernel.org,analog.com,gmail.com,linaro.org,amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	ASN(0.00)[asn:203432, ipnet:89.234.176.0/23, country:FR];
 	FROM_EQ_ENVFROM(0.00)[];
-	R_DKIM_NA(0.00)[];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:4134, ipnet:183.0.0.0/10, country:CN];
-	FREEMAIL_ENVFROM(0.00)[189.cn];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[amd.com,linaro.org,gmail.com,loongson.cn];
+	NEURAL_HAM(-0.00)[-0.998];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[crapouillou.net:+];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
+	TAGGED_RCPT(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DMARC_NA(0.00)[189.cn];
-	FREEMAIL_FROM(0.00)[189.cn];
-	RCVD_COUNT_TWO(0.00)[2]
+	MID_RHS_MATCH_FROM(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 2BAD33EC06
-X-Spamd-Bar: -------
-Message-ID-Hash: R6XBJVHPLBIKK62H6ZAB7TZQPSCSPOUJ
-X-Message-ID-Hash: R6XBJVHPLBIKK62H6ZAB7TZQPSCSPOUJ
-X-MailFrom: 15330273260@189.cn
+X-Rspamd-Queue-Id: 1AEED3E948
+X-Spamd-Bar: ---
+Message-ID-Hash: RYHBVATMXBCLU2VUHN5KJQBVJ3CFS647
+X-Message-ID-Hash: RYHBVATMXBCLU2VUHN5KJQBVJ3CFS647
+X-MailFrom: paul@crapouillou.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, loongson-kernel@lists.loongnix.cn
+CC: Lars-Peter Clausen <lars@metafoo.de>, Vinod Koul <vkoul@kernel.org>, Michael Hennerich <Michael.Hennerich@analog.com>, Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-iio@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf/dma-resv.c: fix a typo
+Subject: [Linaro-mm-sig] Re: [PATCH v3 03/11] iio: buffer-dma: Get rid of outgoing queue
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/R6XBJVHPLBIKK62H6ZAB7TZQPSCSPOUJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RYHBVATMXBCLU2VUHN5KJQBVJ3CFS647/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: base64
 
-SGksDQoNCk9uIDIwMjMvNC8xNyAxNDo1OCwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToNCj4gQW0g
-MTYuMDQuMjMgdW0gMTY6Mzggc2NocmllYiBTdWkgSmluZ2Zlbmc6DQo+PiBUaGUgZG1hX3Jlc3Zf
-d2FpdF90aW1lb3V0KCkgZnVuY3Rpb24gcmV0dXJuIGEgdmFsdWUgZ3JlYXRlciB0aGFuIHplcm8N
-Cj4+IG9uIHN1Y2Nlc3MuDQo+Pg0KPj4gU2lnbmVkLW9mZi1ieTogU3VpIEppbmdmZW5nIDxzdWlq
-aW5nZmVuZ0Bsb29uZ3Nvbi5jbj4NCj4NCj4gUmV2aWV3ZWQgYW5kIHB1c2hlZCB0byBkcm0tbWlz
-Yy1uZXh0Lg0KPg0KVGhhbmtzLg0KDQo+IFRoYW5rcywNCj4gQ2hyaXN0aWFuLg0KPg0KPj4gLS0t
-DQo+PiDCoCBkcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYyB8IDIgKy0NCj4+IMKgIDEgZmlsZSBj
-aGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQ0KPj4NCj4+IGRpZmYgLS1naXQg
-YS9kcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5j
-DQo+PiBpbmRleCAyYTU5NGI3NTRhZjEuLmI2ZjcxZWIwMDg2NiAxMDA2NDQNCj4+IC0tLSBhL2Ry
-aXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jDQo+PiArKysgYi9kcml2ZXJzL2RtYS1idWYvZG1hLXJl
-c3YuYw0KPj4gQEAgLTY2MCw3ICs2NjAsNyBAQCBFWFBPUlRfU1lNQk9MX0dQTChkbWFfcmVzdl9n
-ZXRfc2luZ2xldG9uKTsNCj4+IMKgwqAgKiBkbWFfcmVzdl9sb2NrKCkgYWxyZWFkeQ0KPj4gwqDC
-oCAqIFJFVFVSTlMNCj4+IMKgwqAgKiBSZXR1cm5zIC1FUkVTVEFSVFNZUyBpZiBpbnRlcnJ1cHRl
-ZCwgMCBpZiB0aGUgd2FpdCB0aW1lZCBvdXQsIG9yDQo+PiAtICogZ3JlYXRlciB0aGFuIHplciBv
-biBzdWNjZXNzLg0KPj4gKyAqIGdyZWF0ZXIgdGhhbiB6ZXJvIG9uIHN1Y2Nlc3MuDQo+PiDCoMKg
-ICovDQo+PiDCoCBsb25nIGRtYV9yZXN2X3dhaXRfdGltZW91dChzdHJ1Y3QgZG1hX3Jlc3YgKm9i
-aiwgZW51bSANCj4+IGRtYV9yZXN2X3VzYWdlIHVzYWdlLA0KPj4gwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgYm9vbCBpbnRyLCB1bnNpZ25lZCBsb25nIHRpbWVvdXQpDQpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1h
-aWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3Jp
-YmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+SGkgSm9uYXRoYW4sDQoNCkxlIGRpbWFuY2hlIDE2IGF2cmlsIDIwMjMgw6AgMTU6MjQgKzAxMDAs
+IEpvbmF0aGFuIENhbWVyb24gYSDDqWNyaXTCoDoNCj4gT24gTW9uLMKgIDMgQXByIDIwMjMgMTc6
+NDc6NTIgKzAyMDANCj4gUGF1bCBDZXJjdWVpbCA8cGF1bEBjcmFwb3VpbGxvdS5uZXQ+IHdyb3Rl
+Og0KPiANCj4gPiBUaGUgYnVmZmVyLWRtYSBjb2RlIHdhcyB1c2luZyB0d28gcXVldWVzLCBpbmNv
+bWluZyBhbmQgb3V0Z29pbmcsIHRvDQo+ID4gbWFuYWdlIHRoZSBzdGF0ZSBvZiB0aGUgYmxvY2tz
+IGluIHVzZS4NCj4gPiANCj4gPiBXaGlsZSB0aGlzIHRvdGFsbHkgd29ya3MsIGl0IGFkZHMgc29t
+ZSBjb21wbGV4aXR5IHRvIHRoZSBjb2RlLA0KPiA+IGVzcGVjaWFsbHkgc2luY2UgdGhlIGNvZGUg
+b25seSBtYW5hZ2VzIDIgYmxvY2tzLiBJdCBpcyBtdWNoIGVhc2llcg0KPiA+IHRvDQo+ID4ganVz
+dCBjaGVjayBlYWNoIGJsb2NrJ3Mgc3RhdGUgbWFudWFsbHksIGFuZCBrZWVwIGEgY291bnRlciBm
+b3IgdGhlDQo+ID4gbmV4dA0KPiA+IGJsb2NrIHRvIGRlcXVldWUuDQo+ID4gDQo+ID4gU2luY2Ug
+dGhlIG5ldyBETUFCVUYgYmFzZWQgQVBJIHdvdWxkbid0IHVzZSB0aGUgb3V0Z29pbmcgcXVldWUN
+Cj4gPiBhbnl3YXksDQo+ID4gZ2V0dGluZyByaWQgb2YgaXQgbm93IG1ha2VzIHRoZSB1cGNvbWlu
+ZyBjaGFuZ2VzIHNpbXBsZXIuDQo+ID4gDQo+ID4gV2l0aCB0aGlzIGNoYW5nZSwgdGhlIElJT19C
+TE9DS19TVEFURV9ERVFVRVVFRCBpcyBub3cgdXNlbGVzcywgYW5kDQo+ID4gY2FuDQo+ID4gYmUg
+cmVtb3ZlZC4NCj4gPiANCj4gPiBTaWduZWQtb2ZmLWJ5OiBQYXVsIENlcmN1ZWlsIDxwYXVsQGNy
+YXBvdWlsbG91Lm5ldD4NCj4gPiANCj4gPiAtLS0NCj4gPiB2MjogLSBPbmx5IHJlbW92ZSB0aGUg
+b3V0Z29pbmcgcXVldWUsIGFuZCBrZWVwIHRoZSBpbmNvbWluZyBxdWV1ZSwNCj4gPiBhcyB3ZQ0K
+PiA+IMKgwqDCoMKgwqAgd2FudCB0aGUgYnVmZmVyIHRvIHN0YXJ0IHN0cmVhbWluZyBkYXRhIGFz
+IHNvb24gYXMgaXQgaXMNCj4gPiBlbmFibGVkLg0KPiA+IMKgwqDCoCAtIFJlbW92ZSBJSU9fQkxP
+Q0tfU1RBVEVfREVRVUVVRUQsIHNpbmNlIGl0IGlzIG5vdyBmdW5jdGlvbmFsbHkNCj4gPiB0aGUN
+Cj4gPiDCoMKgwqDCoMKgIHNhbWUgYXMgSUlPX0JMT0NLX1NUQVRFX0RPTkUuDQo+IA0KPiBJJ20g
+bm90IHRoYXQgZmFtaWxpYXIgd2l0aCB0aGlzIGNvZGUsIGJ1dCB3aXRoIG15IHVuZGVyc3RhbmRp
+bmcgdGhpcw0KPiBtYWtlcw0KPiBzZW5zZS7CoMKgIEkgdGhpbmsgaXQgaXMgaW5kZXBlbmRlbnQg
+b2YgdGhlIGVhcmxpZXIgcGF0Y2hlcyBhbmQgaXMgYQ0KPiB1c2VmdWwNCj4gY2hhbmdlIGluIGl0
+J3Mgb3duIHJpZ2h0LsKgIEFzIHN1Y2gsIGRvZXMgaXQgbWFrZSBzZW5zZSB0byBwaWNrIHRoaXMN
+Cj4gdXANCj4gYWhlYWQgb2YgdGhlIHJlc3Qgb2YgdGhlIHNlcmllcz8gSSdtIGFzc3VtaW5nIHRo
+YXQgZGlzY3Vzc2lvbiBvbiB0aGUNCj4gcmVzdCB3aWxsIHRha2UgYSB3aGlsZS7CoCBObyBncmVh
+dCBydXNoIGFzIHRvbyBsYXRlIGZvciB0aGUgY29taW5nDQo+IG1lcmdlDQo+IHdpbmRvdyBhbnl3
+YXkuDQoNCkFjdHVhbGx5LCB5b3UgY2FuIHBpY2sgcGF0Y2hlcyAzIHRvIDYgKHdoZW4gYWxsIGhh
+dmUgYmVlbiBhY2tlZCkuIFRoZXkNCmFkZCB3cml0ZSBzdXBwb3J0IGZvciBidWZmZXItZG1hIGlt
+cGxlbWVudGF0aW9uczsgd2hpY2ggaXMgYSBkZXBlbmRlbmN5DQpmb3IgdGhlIHJlc3Qgb2YgdGhl
+IHBhdGNoc2V0LCBidXQgdGhleSBjYW4gbGl2ZSBvbiB0aGVpciBvd24uDQoNCkNoZWVycywNCi1Q
+YXVsDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5h
+cm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcK
+VG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3Rz
+LmxpbmFyby5vcmcK
