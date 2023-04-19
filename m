@@ -2,16 +2,16 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA3076E709D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 03:05:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D4BB66E709E
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 03:05:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 684833F983
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 01:05:34 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DA2C33F984
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 01:05:56 +0000 (UTC)
 Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
-	by lists.linaro.org (Postfix) with ESMTPS id ACBDE3E923
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Apr 2023 01:05:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 385E63F986
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Apr 2023 01:05:53 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=lunn.ch header.s=20171124 header.b=vzFjDspC;
+	dkim=pass header.d=lunn.ch header.s=20171124 header.b=X5gYsZIM;
 	spf=pass (lists.linaro.org: domain of andrew@lunn.ch designates 156.67.10.101 as permitted sender) smtp.mailfrom=andrew@lunn.ch;
 	dmarc=pass (policy=none) header.from=lunn.ch
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
@@ -19,27 +19,27 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
 	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
 	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=Q8o0qgq8+xO90jhfN2O1+TkcR9RHUp7q+rece25IGKQ=; b=vzFjDspCtyNwSp7WO7eWEWRXzm
-	clxr4eASwMedDPBHy56+ZhGtab9hLd5EHBqsJo8MpEgTMA6ZJK04ITfC/408psYHNM3QU7dbEHoAU
-	XtIsAasnSEBRcnyJJ8vhRdz0sPC0s0lPQ8BrgSUE4QNM3dZ6FqUFu/xgbMPE9KxofPHw=;
+	bh=kaHMdFAtseWFy3AgpXa0OQ5r/GCD/Wq4MIRcfvKEg20=; b=X5gYsZIM9nxJfXXG+Ovc5A/Zd3
+	ZNUKXftiOhTFwEGP07qD0Rb5hnM9FW/TEohasAxXY4TOJPAqkfTo5IOzrfI4YTBC5WduUHOdtG49U
+	umSPJA51quiYO3P5TJpRXXpsy0YvOaKTyPgu3MQN1XYl81x9YMv5i/kOkIDxGM1pda8Y=;
 Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
 	(envelope-from <andrew@lunn.ch>)
-	id 1powGA-00AeZi-LD; Wed, 19 Apr 2023 03:05:22 +0200
-Date: Wed, 19 Apr 2023 03:05:22 +0200
+	id 1powGb-00Aead-Vt; Wed, 19 Apr 2023 03:05:49 +0200
+Date: Wed, 19 Apr 2023 03:05:49 +0200
 From: Andrew Lunn <andrew@lunn.ch>
 To: Justin Chen <justinpopo6@gmail.com>
-Message-ID: <66b0064e-48ec-429e-91bf-77e4c0009291@lunn.ch>
+Message-ID: <7af226ea-3aef-447c-81b3-fa3576534b33@lunn.ch>
 References: <1681863018-28006-1-git-send-email-justinpopo6@gmail.com>
- <1681863018-28006-4-git-send-email-justinpopo6@gmail.com>
+ <1681863018-28006-5-git-send-email-justinpopo6@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1681863018-28006-4-git-send-email-justinpopo6@gmail.com>
+In-Reply-To: <1681863018-28006-5-git-send-email-justinpopo6@gmail.com>
 X-Spamd-Result: default: False [-2.40 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
+	R_SPF_ALLOW(-0.20)[+mx:c];
 	R_DKIM_ALLOW(-0.20)[lunn.ch:s=20171124];
-	R_SPF_ALLOW(-0.20)[+mx];
 	MIME_GOOD(-0.10)[text/plain];
 	ONCE_RECEIVED(0.10)[];
 	TAGGED_RCPT(0.00)[dt];
@@ -53,25 +53,25 @@ X-Spamd-Result: default: False [-2.40 / 15.00];
 	RCVD_COUNT_ONE(0.00)[1];
 	RCPT_COUNT_TWELVE(0.00)[22];
 	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-0.516];
+	NEURAL_HAM(-0.00)[-0.592];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ARC_NA(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	DKIM_TRACE(0.00)[lunn.ch:+];
-	MID_RHS_MATCH_FROM(0.00)[]
+	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: ACBDE3E923
+X-Rspamd-Queue-Id: 385E63F986
 X-Spamd-Bar: --
-Message-ID-Hash: 7Z3LV3F6SOE4ACR2Y3JYCBJRJVGG6TGI
-X-Message-ID-Hash: 7Z3LV3F6SOE4ACR2Y3JYCBJRJVGG6TGI
+Message-ID-Hash: DET6FLA7ZPXXLBTOYLGZPBP52LQOTX74
+X-Message-ID-Hash: DET6FLA7ZPXXLBTOYLGZPBP52LQOTX74
 X-MailFrom: andrew@lunn.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: netdev@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, bcm-kernel-feedback-list@broadcom.com, justin.chen@broadcom.com, f.fainelli@gmail.com, davem@davemloft.net, edumazet@google.com, kuba@kernel.org, pabeni@redhat.com, robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, opendmb@gmail.com, hkallweit1@gmail.com, linux@armlinux.org.uk, richardcochran@gmail.com, sumit.semwal@linaro.org, christian.koenig@amd.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH net-next 3/6] net: bcmasp: Add support for ASP2.0 Ethernet controller
+Subject: [Linaro-mm-sig] Re: [PATCH net-next 4/6] net: phy: mdio-bcm-unimac: Add asp v2.0 support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7Z3LV3F6SOE4ACR2Y3JYCBJRJVGG6TGI/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DET6FLA7ZPXXLBTOYLGZPBP52LQOTX74/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -81,264 +81,15 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, Apr 18, 2023 at 05:10:15PM -0700, Justin Chen wrote:
-> Add support for the Broadcom ASP 2.0 Ethernet controller which is first
-> introduced with 72165. This controller features two distinct Ethernet
-> ports that can be independently operated.
-> 
-> This patch supports:
-> 
-> - Wake-on-LAN using magic packets
-> - basic ethtool operations (link, counters, message level)
-> - MAC destination address filtering (promiscuous, ALL_MULTI, etc.)
+On Tue, Apr 18, 2023 at 05:10:16PM -0700, Justin Chen wrote:
+> Add mdio compat string for ASP 2.0 ethernet driver.
 > 
 > Signed-off-by: Justin Chen <justinpopo6@gmail.com>
 > Signed-off-by: Florian Fainelli <f.fainelli@gmail.com>
 
-Hi Justin
+Reviewed-by: Andrew Lunn <andrew@lunn.ch>
 
-Since you are submitting this, your Signed-off-by: needs to be last
-here.
-
-
-> ---
->  drivers/net/ethernet/broadcom/Kconfig              |   11 +
->  drivers/net/ethernet/broadcom/Makefile             |    1 +
->  drivers/net/ethernet/broadcom/asp2/Makefile        |    2 +
->  drivers/net/ethernet/broadcom/asp2/bcmasp.c        | 1527 ++++++++++++++++++++
->  drivers/net/ethernet/broadcom/asp2/bcmasp.h        |  636 ++++++++
->  .../net/ethernet/broadcom/asp2/bcmasp_ethtool.c    |  620 ++++++++
->  drivers/net/ethernet/broadcom/asp2/bcmasp_intf.c   | 1425 ++++++++++++++++++
->  .../net/ethernet/broadcom/asp2/bcmasp_intf_defs.h  |  238 +++
->  8 files changed, 4460 insertions(+)
->  create mode 100644 drivers/net/ethernet/broadcom/asp2/Makefile
->  create mode 100644 drivers/net/ethernet/broadcom/asp2/bcmasp.c
->  create mode 100644 drivers/net/ethernet/broadcom/asp2/bcmasp.h
->  create mode 100644 drivers/net/ethernet/broadcom/asp2/bcmasp_ethtool.c
->  create mode 100644 drivers/net/ethernet/broadcom/asp2/bcmasp_intf.c
->  create mode 100644 drivers/net/ethernet/broadcom/asp2/bcmasp_intf_defs.h
-> 
-> diff --git a/drivers/net/ethernet/broadcom/Kconfig b/drivers/net/ethernet/broadcom/Kconfig
-> index 948586bf1b5b..d4166141145d 100644
-> --- a/drivers/net/ethernet/broadcom/Kconfig
-> +++ b/drivers/net/ethernet/broadcom/Kconfig
-> @@ -255,4 +255,15 @@ config BNXT_HWMON
->  	  Say Y if you want to expose the thermal sensor data on NetXtreme-C/E
->  	  devices, via the hwmon sysfs interface.
->  
-> +config BCMASP
-> +	tristate "Broadcom ASP 2.0 Ethernet support"
-> +	default ARCH_BRCMSTB
-> +	depends on OF
-> +	select MII
-> +	select PHYLIB
-> +	select MDIO_BCM_UNIMAC
-> +	help
-> +	  This configuration enables the Broadcom ASP 2.0 Ethernet controller
-> +	  driver which is present in Broadcom STB SoCs such as 72165.
-> +
->  endif # NET_VENDOR_BROADCOM
-> diff --git a/drivers/net/ethernet/broadcom/Makefile b/drivers/net/ethernet/broadcom/Makefile
-> index 0ddfb5b5d53c..bac5cb6ad0cd 100644
-> --- a/drivers/net/ethernet/broadcom/Makefile
-> +++ b/drivers/net/ethernet/broadcom/Makefile
-> @@ -17,3 +17,4 @@ obj-$(CONFIG_BGMAC_BCMA) += bgmac-bcma.o bgmac-bcma-mdio.o
->  obj-$(CONFIG_BGMAC_PLATFORM) += bgmac-platform.o
->  obj-$(CONFIG_SYSTEMPORT) += bcmsysport.o
->  obj-$(CONFIG_BNXT) += bnxt/
-> +obj-$(CONFIG_BCMASP) += asp2/
-> diff --git a/drivers/net/ethernet/broadcom/asp2/Makefile b/drivers/net/ethernet/broadcom/asp2/Makefile
-> new file mode 100644
-> index 000000000000..e07550315f83
-> --- /dev/null
-> +++ b/drivers/net/ethernet/broadcom/asp2/Makefile
-> @@ -0,0 +1,2 @@
-> +obj-$(CONFIG_BCMASP) += bcm-asp.o
-> +bcm-asp-objs := bcmasp.o bcmasp_intf.o bcmasp_ethtool.o
-> diff --git a/drivers/net/ethernet/broadcom/asp2/bcmasp.c b/drivers/net/ethernet/broadcom/asp2/bcmasp.c
-> new file mode 100644
-> index 000000000000..9cf5f4d6dd0d
-> --- /dev/null
-> +++ b/drivers/net/ethernet/broadcom/asp2/bcmasp.c
-> @@ -0,0 +1,1527 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Broadcom STB ASP 2.0 Driver
-> + *
-> + * Copyright (c) 2020 Broadcom
-> + */
-> +#include <linux/etherdevice.h>
-> +#include <linux/if_vlan.h>
-> +#include <linux/init.h>
-> +#include <linux/interrupt.h>
-> +#include <linux/module.h>
-> +#include <linux/kernel.h>
-> +#include <linux/platform_device.h>
-> +#include <linux/of.h>
-> +#include <linux/of_address.h>
-> +#include <linux/of_platform.h>
-> +#include <linux/clk.h>
-> +
-> +#include "bcmasp.h"
-> +#include "bcmasp_intf_defs.h"
-> +
-> +static inline void _intr2_mask_clear(struct bcmasp_priv *priv, u32 mask)
-> +{
-> +	intr2_core_wl(priv, mask, ASP_INTR2_MASK_CLEAR);
-> +	priv->irq_mask &= ~mask;
-> +}
-
-No inline functions in .c files. Let the compiler decide.
-
-> +static inline void bcmasp_intr2_handling(struct bcmasp_intf *intf, u32 status)
-> +{
-> +	if (unlikely(!intf))
-> +		return;
-
-Can it even happen? An interrupt from an interface which does not
-exist?
-
-> +static void bcmasp_set_mda_filter(struct bcmasp_intf *intf,
-> +				  const unsigned char *addr,
-> +				  unsigned char *mask,
-> +				  unsigned int i)
-> +{
-> +	struct bcmasp_priv *priv = intf->parent;
-> +	u32 addr_h, addr_l, mask_h, mask_l;
-> +
-> +	/* Set local copy */
-> +	memcpy(priv->mda_filters[i].mask, mask, ETH_ALEN);
-> +	memcpy(priv->mda_filters[i].addr, addr, ETH_ALEN);
-
-eth_addr_copy() ?
-
-> +static inline void u64_to_mac(unsigned char *addr, u64 val)
-> +{
-> +	addr[0] = (u8)(val >> 40);
-> +	addr[1] = (u8)(val >> 32);
-> +	addr[2] = (u8)(val >> 24);
-> +	addr[3] = (u8)(val >> 16);
-> +	addr[4] = (u8)(val >> 8);
-> +	addr[5] = (u8)val;
-> +}
-
-u64_to_ether_addr() ?
-
-> +
-> +#define mac_to_u64(a)		((((u64)a[0]) << 40) | \
-> +				(((u64)a[1]) << 32) | \
-> +				(((u64)a[2]) << 24) | \
-> +				(((u64)a[3]) << 16) | \
-> +				(((u64)a[4]) << 8) | \
-> +				((u64)a[5]))
-> +
-
-ether_addr_to_u64()
-
-You might want to read that include file and see if there is anything
-else you can replace.
-
-> +static int bcmasp_probe(struct platform_device *pdev)
-> +{
-> +	struct bcmasp_priv *priv;
-> +	struct device_node *ports_node, *intf_node;
-> +	struct device *dev = &pdev->dev;
-> +	const struct bcmasp_plat_data *pdata;
-> +	int ret, i, count = 0, port;
-> +	struct bcmasp_intf *intf;
-
-Reverse christmass tree.
-
-> +	priv->clk = devm_clk_get(dev, "sw_asp");
-> +	if (IS_ERR(priv->clk)) {
-> +		if (PTR_ERR(priv->clk) == -EPROBE_DEFER)
-> +			return -EPROBE_DEFER;
-> +		dev_warn(dev, "failed to request clock\n");
-> +		priv->clk = NULL;
-> +	}
-
-Maybe devm_clk_get_optional() ??
-
-> +
-> +	/* Base from parent node */
-> +	priv->base = devm_platform_ioremap_resource(pdev, 0);
-> +	if (IS_ERR(priv->base)) {
-> +		dev_err(dev, "failed to iomap\n");
-> +		return PTR_ERR(priv->base);
-> +	}
-> +
-> +	ret = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(40));
-> +	if (ret)
-> +		ret = dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(32));
-> +	if (ret) {
-> +		dev_err(&pdev->dev, "unable to set DMA mask: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	dev_set_drvdata(&pdev->dev, priv);
-> +	priv->pdev = pdev;
-> +	spin_lock_init(&priv->mda_lock);
-> +	spin_lock_init(&priv->clk_lock);
-> +	mutex_init(&priv->net_lock);
-> +	mutex_init(&priv->wol_lock);
-> +
-> +	pdata = device_get_match_data(&pdev->dev);
-> +	if (pdata) {
-> +		priv->init_wol = pdata->init_wol;
-> +		priv->enable_wol = pdata->enable_wol;
-> +		priv->destroy_wol = pdata->destroy_wol;
-> +		priv->hw_info = pdata->hw_info;
-> +	} else {
-> +		dev_err(&pdev->dev, "unable to find platform data\n");
-> +		return ret;
-> +	}
-> +
-> +	ret = clk_prepare_enable(priv->clk);
-> +	if (ret)
-> +		return ret;
-
-I think there is also a devm_clk_get_enable_optional().
-
-> +static void bcmasp_get_drvinfo(struct net_device *dev,
-> +			       struct ethtool_drvinfo *info)
-> +{
-> +	strscpy(info->driver, "bcmasp", sizeof(info->driver));
-> +	strscpy(info->version, "v2.0", sizeof(info->version));
-
-Don't fill in the version, it is useless. The core will insert the git
-hash which has more value.
-
-> +	strscpy(info->bus_info, dev_name(dev->dev.parent),
-> +		sizeof(info->bus_info));
-> +}
-> +
-> +static int bcmasp_get_link_ksettings(struct net_device *dev,
-> +				     struct ethtool_link_ksettings *cmd)
-> +{
-> +	if (!netif_running(dev))
-> +		return -EINVAL;
-> +
-> +	if (!dev->phydev)
-> +		return -ENODEV;
-
-I skipped the PHY handling section. Is it possible to not have a PHY?
-Normally you have a fixed-link if their is not a real PHY.
-
-There is also phy_ethtool_set_link_ksettings()
-
-> +static int bcmasp_nway_reset(struct net_device *dev)
-> +{
-> +	if (!dev->phydev)
-> +		return -ENODEV;
-> +
-> +	return genphy_restart_aneg(dev->phydev);
-
-phy_ethtool_nway_reset().
-
-I get the feeling this code was written against an old kernel version,
-and has not been updated to use all the new helpers.
-
-	Andrew
+    Andrew
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
