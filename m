@@ -2,16 +2,16 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4BB66E709E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 03:05:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 796216E70A3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 03:06:32 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DA2C33F984
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 01:05:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 89FF73F985
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 01:06:31 +0000 (UTC)
 Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
-	by lists.linaro.org (Postfix) with ESMTPS id 385E63F986
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Apr 2023 01:05:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 8D7303E923
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Apr 2023 01:06:28 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=lunn.ch header.s=20171124 header.b=X5gYsZIM;
+	dkim=pass header.d=lunn.ch header.s=20171124 header.b=XU4aeWxt;
 	spf=pass (lists.linaro.org: domain of andrew@lunn.ch designates 156.67.10.101 as permitted sender) smtp.mailfrom=andrew@lunn.ch;
 	dmarc=pass (policy=none) header.from=lunn.ch
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
@@ -19,23 +19,23 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
 	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
 	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=kaHMdFAtseWFy3AgpXa0OQ5r/GCD/Wq4MIRcfvKEg20=; b=X5gYsZIM9nxJfXXG+Ovc5A/Zd3
-	ZNUKXftiOhTFwEGP07qD0Rb5hnM9FW/TEohasAxXY4TOJPAqkfTo5IOzrfI4YTBC5WduUHOdtG49U
-	umSPJA51quiYO3P5TJpRXXpsy0YvOaKTyPgu3MQN1XYl81x9YMv5i/kOkIDxGM1pda8Y=;
+	bh=Lms0C4cT+76fgagWleJqEZcrYl+boMnYrcMJr37IMKM=; b=XU4aeWxty1DBSslTGWkRcU1mrm
+	T0cqHBLDYAbr7oK0uIUwI/s3ejCbybWEj1WbaM2EsGGK7koPF+irsx4ouxGne/f/FxPXILPpHrRcj
+	6H/6VxYeNU3I2FptzANzwq3XyNC6OCxyZUCIwvuN3zuPTCS++SgiFq/lGwcY5BxkjGYQ=;
 Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
 	(envelope-from <andrew@lunn.ch>)
-	id 1powGb-00Aead-Vt; Wed, 19 Apr 2023 03:05:49 +0200
-Date: Wed, 19 Apr 2023 03:05:49 +0200
+	id 1powHB-00AebN-CS; Wed, 19 Apr 2023 03:06:25 +0200
+Date: Wed, 19 Apr 2023 03:06:25 +0200
 From: Andrew Lunn <andrew@lunn.ch>
 To: Justin Chen <justinpopo6@gmail.com>
-Message-ID: <7af226ea-3aef-447c-81b3-fa3576534b33@lunn.ch>
+Message-ID: <c967927d-c9ec-4453-8452-6e90f797bcfc@lunn.ch>
 References: <1681863018-28006-1-git-send-email-justinpopo6@gmail.com>
- <1681863018-28006-5-git-send-email-justinpopo6@gmail.com>
+ <1681863018-28006-6-git-send-email-justinpopo6@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <1681863018-28006-5-git-send-email-justinpopo6@gmail.com>
+In-Reply-To: <1681863018-28006-6-git-send-email-justinpopo6@gmail.com>
 X-Spamd-Result: default: False [-2.40 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[lunn.ch,none];
 	R_SPF_ALLOW(-0.20)[+mx:c];
@@ -53,25 +53,25 @@ X-Spamd-Result: default: False [-2.40 / 15.00];
 	RCVD_COUNT_ONE(0.00)[1];
 	RCPT_COUNT_TWELVE(0.00)[22];
 	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-0.592];
+	NEURAL_HAM(-0.00)[-0.583];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	MID_RHS_MATCH_FROM(0.00)[];
 	DKIM_TRACE(0.00)[lunn.ch:+];
 	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 385E63F986
+X-Rspamd-Queue-Id: 8D7303E923
 X-Spamd-Bar: --
-Message-ID-Hash: DET6FLA7ZPXXLBTOYLGZPBP52LQOTX74
-X-Message-ID-Hash: DET6FLA7ZPXXLBTOYLGZPBP52LQOTX74
+Message-ID-Hash: PWJYIL7L6O55BPGERFFVUIIAGCKPPPIP
+X-Message-ID-Hash: PWJYIL7L6O55BPGERFFVUIIAGCKPPPIP
 X-MailFrom: andrew@lunn.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: netdev@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, bcm-kernel-feedback-list@broadcom.com, justin.chen@broadcom.com, f.fainelli@gmail.com, davem@davemloft.net, edumazet@google.com, kuba@kernel.org, pabeni@redhat.com, robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, opendmb@gmail.com, hkallweit1@gmail.com, linux@armlinux.org.uk, richardcochran@gmail.com, sumit.semwal@linaro.org, christian.koenig@amd.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH net-next 4/6] net: phy: mdio-bcm-unimac: Add asp v2.0 support
+Subject: [Linaro-mm-sig] Re: [PATCH net-next 5/6] net: phy: bcm7xxx: Add EPHY entry for 74165
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DET6FLA7ZPXXLBTOYLGZPBP52LQOTX74/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PWJYIL7L6O55BPGERFFVUIIAGCKPPPIP/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -81,11 +81,14 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, Apr 18, 2023 at 05:10:16PM -0700, Justin Chen wrote:
-> Add mdio compat string for ASP 2.0 ethernet driver.
+On Tue, Apr 18, 2023 at 05:10:17PM -0700, Justin Chen wrote:
+> From: Florian Fainelli <f.fainelli@gmail.com>
 > 
-> Signed-off-by: Justin Chen <justinpopo6@gmail.com>
+> 74165 is a 16nm process SoC with a 10/100 integrated Ethernet PHY,
+> utilize the recently defined 16nm EPHY macro to configure that PHY.
+> 
 > Signed-off-by: Florian Fainelli <f.fainelli@gmail.com>
+> Signed-off-by: Justin Chen <justin.chen@broadcom.com>
 
 Reviewed-by: Andrew Lunn <andrew@lunn.ch>
 
