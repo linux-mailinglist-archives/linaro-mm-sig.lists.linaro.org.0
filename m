@@ -2,238 +2,158 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 375066F55BD
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 12:15:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 140E16F55C0
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 12:16:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4B2633F6F7
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 10:15:46 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id BA7653EC76
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 16 Apr 2023 15:15:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2320F3F95B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 10:16:09 +0000 (UTC)
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
+	by lists.linaro.org (Postfix) with ESMTPS id 3DBAB3E923
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Apr 2023 00:10:29 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=YdbRFGq8;
-	spf=pass (lists.linaro.org: domain of jic23@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=jic23@kernel.org;
-	dmarc=pass (policy=none) header.from=kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id 4746F61B20;
-	Sun, 16 Apr 2023 15:15:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 29733C433EF;
-	Sun, 16 Apr 2023 15:15:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1681658126;
-	bh=vg7a+9DCnudCadywsW+LfZkYC34HIPkJONEpTnE3IgA=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=YdbRFGq8XX9t0ik/azOkzc9EKI0CmzqXbczuMupYZnuOWGoKjaTyzlIhAw/DyfaiQ
-	 P//0oUjd/Me3pFl5u/6zxLgHHr+SFlpVunFRA9K86f7bHCLf5NLdu/QyxFp7SpHlhn
-	 PgVXQm/s2Uuc39C8V9GcaWQxWjw2Gpl3RmlasxbB9RQ3KQRAGPKUSLFOt6HMyxVi3L
-	 ltiIKU3FP0Hz3geJtpvvKV3Lh+b0ljO8P/dURRzfzP+Zq7z3aVaIOAqoO6ZG1B/+7B
-	 prJppVDKgixqKXJGBV33f7rZsWOYcM1N7LJpGtEbzygqC3WfXs7zXixTo/GFKdu4U7
-	 bm485htkgzjiQ==
-Date: Sun, 16 Apr 2023 16:15:27 +0100
-From: Jonathan Cameron <jic23@kernel.org>
-To: Paul Cercueil <paul@crapouillou.net>
-Message-ID: <20230416161527.6e7021f1@jic23-huawei>
-In-Reply-To: <20230403154955.216148-1-paul@crapouillou.net>
-References: <20230403154800.215924-1-paul@crapouillou.net>
-	<20230403154955.216148-1-paul@crapouillou.net>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.37; x86_64-pc-linux-gnu)
-MIME-Version: 1.0
-X-Spamd-Result: default: False [-6.00 / 15.00];
+	dkim=pass header.d=gmail.com header.s=20221208 header.b=ZHXM1vJB;
+	spf=pass (lists.linaro.org: domain of justinpopo6@gmail.com designates 209.85.160.174 as permitted sender) smtp.mailfrom=justinpopo6@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-qt1-f174.google.com with SMTP id l11so31842422qtj.4
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Apr 2023 17:10:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1681863029; x=1684455029;
+        h=message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=rE1EEDO+fEqLoZiLrhfSx85AyW8A+vdoa/Snn4cvZO8=;
+        b=ZHXM1vJBIY5/tmjJT0bVpzwkzgcuj3UqE6ZuAM+WopWTizO0zDdpKa7LVRnsmGTn1d
+         dNzyQC1wJv2vOr86Nkl6+DausEEP53FrPRiRv4UhVQurNRPpO1CmxFUxHDSvYCh0/r4L
+         STAJGBMIzP8mz/nBypYUlSeBjFBmmgYZ34WTb9Sd6ekjELm6Sq0Us2ZOuGOcqa6R7okN
+         2jNHKJT6OPVZCX1v4iC9zXkRhVV+lHS8I1FE7A1UBj5sBxKKNp3qwrF86F1KMEggt5SN
+         XY0Sxw8Awni/NHCWXYhwkKcyE6nH1rM9D1QcXbrpE5pYEXAY0ipeoblBZlUd07Kvxxbt
+         q+Jw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1681863029; x=1684455029;
+        h=message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=rE1EEDO+fEqLoZiLrhfSx85AyW8A+vdoa/Snn4cvZO8=;
+        b=EpNl9D2HSVwM4f1Id5Nulkc1X2kaSWvTVgGO/KFabB4SgaKenNiiU849sEKfCb7ybS
+         CkzVaeRy+1QoiAjoeVJf3p0lIgBNMmA+pEv21uj6q/7yadPFKw435BAv93AqdiGDCvsE
+         o4g65AQGMmI4FQI4pIF42PBq3RkG5Xr7g5Zo6dRgoGWzQ0X4i+JavyTzQ4peJE2JZxtq
+         KYskWVPMUMv4uPGgIawbC5JQRLW1wRjbAnjk9J23Pha9KUBCxGtDt2ciGIjn/2N7gVV2
+         LSeV/qwyswA61XMlHHD2lYDxGTC2f3290QOt1qntR5Pg6K32TmLB2BNMNZJgPYTPEI2C
+         UUEw==
+X-Gm-Message-State: AAQBX9fr1weSTO6dQf9OiDTF6uUA5JY4wo93CT/3jIcHdvb3caUZYnSY
+	3Z2/KTSj642Oadfh3hyzHcI=
+X-Google-Smtp-Source: AKy350aJZdwTEBQKh+v50v7gsPOE+8maA9oyygbdcVRFgplCIK6a3+p7/GpmoeTI1M2smoh5fZHNFg==
+X-Received: by 2002:ac8:5e4d:0:b0:3e6:4fab:478e with SMTP id i13-20020ac85e4d000000b003e64fab478emr3325666qtx.33.1681863028798;
+        Tue, 18 Apr 2023 17:10:28 -0700 (PDT)
+Received: from stbirv-lnx-2.igp.broadcom.net ([192.19.223.252])
+        by smtp.gmail.com with ESMTPSA id d14-20020a37680e000000b0074d1b6a8187sm2639035qkc.130.2023.04.18.17.10.26
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 18 Apr 2023 17:10:28 -0700 (PDT)
+From: Justin Chen <justinpopo6@gmail.com>
+To: netdev@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	bcm-kernel-feedback-list@broadcom.com
+Date: Tue, 18 Apr 2023 17:10:12 -0700
+Message-Id: <1681863018-28006-1-git-send-email-justinpopo6@gmail.com>
+X-Mailer: git-send-email 2.7.4
+X-Spamd-Result: default: False [-1.60 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	DWL_DNSWL_MED(-2.00)[kernel.org:dkim];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-1.00)[52.25.139.140:received,139.178.84.217:from];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20221208];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_CC(0.00)[metafoo.de,kernel.org,analog.com,gmail.com,linaro.org,amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	RCVD_TLS_ALL(0.00)[];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.160.174:from];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_RCPT(0.00)[dt];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FREEMAIL_CC(0.00)[broadcom.com,gmail.com,davemloft.net,google.com,kernel.org,redhat.com,linaro.org,lunn.ch,armlinux.org.uk,amd.com];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2]
+	ARC_NA(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: BA7653EC76
-X-Spamd-Bar: ------
-X-MailFrom: jic23@kernel.org
+X-Rspamd-Queue-Id: 3DBAB3E923
+X-Spamd-Bar: -
+X-MailFrom: justinpopo6@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: L3GZ7NX3NGUY47E7MG2TLEX6FQVOEKDX
-X-Message-ID-Hash: L3GZ7NX3NGUY47E7MG2TLEX6FQVOEKDX
-X-Mailman-Approved-At: Wed, 03 May 2023 10:14:15 +0000
-CC: Lars-Peter Clausen <lars@metafoo.de>, Vinod Koul <vkoul@kernel.org>, Michael Hennerich <Michael.Hennerich@analog.com>, Nuno =?UTF-8?B?U8Oh?= <noname.nuno@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-iio@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: WK3WIOM35U2IO64FR5VZHIJP6NF5UR5X
+X-Message-ID-Hash: WK3WIOM35U2IO64FR5VZHIJP6NF5UR5X
+X-Mailman-Approved-At: Wed, 03 May 2023 10:14:31 +0000
+CC: justin.chen@broadcom.com, f.fainelli@gmail.com, davem@davemloft.net, edumazet@google.com, kuba@kernel.org, pabeni@redhat.com, robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, opendmb@gmail.com, andrew@lunn.ch, hkallweit1@gmail.com, linux@armlinux.org.uk, richardcochran@gmail.com, sumit.semwal@linaro.org, christian.koenig@amd.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 10/11] iio: buffer-dmaengine: Support new DMABUF based userspace API
+Subject: [Linaro-mm-sig] [PATCH net-next 0/6] Brcm ASP 2.0 Ethernet controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/L3GZ7NX3NGUY47E7MG2TLEX6FQVOEKDX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WK3WIOM35U2IO64FR5VZHIJP6NF5UR5X/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon,  3 Apr 2023 17:49:54 +0200
-Paul Cercueil <paul@crapouillou.net> wrote:
+From: Justin Chen <justin.chen@broadcom.com>
 
-> Use the functions provided by the buffer-dma core to implement the
-> DMABUF userspace API in the buffer-dmaengine IIO buffer implementation.
-> 
-> Since we want to be able to transfer an arbitrary number of bytes and
-> not necesarily the full DMABUF, the associated scatterlist is converted
-> to an array of DMA addresses + lengths, which is then passed to
-> dmaengine_prep_slave_dma_array().
-> 
-> Signed-off-by: Paul Cercueil <paul@crapouillou.net>
-A few things inline.
+Add support for the Broadcom ASP 2.0 Ethernet controller which is first
+introduced with 72165.
 
-Thanks,
+Add support for 74165 10/100 integrated Ethernet PHY which also uses
+the ASP 2.0 Ethernet controller.
 
-Jonathan
+Florian Fainelli (2):
+  dt-bindings: net: Brcm ASP 2.0 Ethernet controller
+  net: phy: bcm7xxx: Add EPHY entry for 74165
 
-> 
-> ---
-> v3: Use the new dmaengine_prep_slave_dma_array(), and adapt the code to
->     work with the new functions introduced in industrialio-buffer-dma.c.
-> ---
->  .../buffer/industrialio-buffer-dmaengine.c    | 69 ++++++++++++++++---
->  include/linux/iio/buffer-dma.h                |  2 +
->  2 files changed, 60 insertions(+), 11 deletions(-)
-> 
-> diff --git a/drivers/iio/buffer/industrialio-buffer-dmaengine.c b/drivers/iio/buffer/industrialio-buffer-dmaengine.c
-> index 866c8b84bb24..faed9c2b089c 100644
-> --- a/drivers/iio/buffer/industrialio-buffer-dmaengine.c
-> +++ b/drivers/iio/buffer/industrialio-buffer-dmaengine.c
-> @@ -65,25 +65,68 @@ static int iio_dmaengine_buffer_submit_block(struct iio_dma_buffer_queue *queue,
->  		iio_buffer_to_dmaengine_buffer(&queue->buffer);
->  	struct dma_async_tx_descriptor *desc;
->  	enum dma_transfer_direction dma_dir;
-> +	unsigned int i, nents, *lenghts;
-> +	struct scatterlist *sgl;
-> +	unsigned long flags;
-> +	dma_addr_t *addrs;
->  	size_t max_size;
->  	dma_cookie_t cookie;
-> +	size_t len_total;
->  
-> -	max_size = min(block->size, dmaengine_buffer->max_size);
-> -	max_size = round_down(max_size, dmaengine_buffer->align);
-> +	if (!block->bytes_used)
-> +		return -EINVAL;
->  
-> -	if (queue->buffer.direction == IIO_BUFFER_DIRECTION_IN) {
-> -		block->bytes_used = max_size;
-> +	if (queue->buffer.direction == IIO_BUFFER_DIRECTION_IN)
->  		dma_dir = DMA_DEV_TO_MEM;
-> -	} else {
-> +	else
->  		dma_dir = DMA_MEM_TO_DEV;
-> -	}
->  
-> -	if (!block->bytes_used || block->bytes_used > max_size)
-> -		return -EINVAL;
+Justin Chen (4):
+  dt-bindings: net: brcm,unimac-mdio: Add asp-v2.0
+  net: bcmasp: Add support for ASP2.0 Ethernet controller
+  net: phy: mdio-bcm-unimac: Add asp v2.0 support
+  MAINTAINERS: ASP 2.0 Ethernet driver maintainers
 
-Ah this is dropping the code I moaned about earlier.  I'll probably
-forget though so maybe add a note to that patch saying it goes
-away later anyway so I don't keep moaning about it in future versions.
+ .../devicetree/bindings/net/brcm,asp-v2.0.yaml     |  146 ++
+ .../devicetree/bindings/net/brcm,unimac-mdio.yaml  |    2 +
+ MAINTAINERS                                        |    9 +
+ drivers/net/ethernet/broadcom/Kconfig              |   11 +
+ drivers/net/ethernet/broadcom/Makefile             |    1 +
+ drivers/net/ethernet/broadcom/asp2/Makefile        |    2 +
+ drivers/net/ethernet/broadcom/asp2/bcmasp.c        | 1527 ++++++++++++++++++++
+ drivers/net/ethernet/broadcom/asp2/bcmasp.h        |  636 ++++++++
+ .../net/ethernet/broadcom/asp2/bcmasp_ethtool.c    |  620 ++++++++
+ drivers/net/ethernet/broadcom/asp2/bcmasp_intf.c   | 1425 ++++++++++++++++++
+ .../net/ethernet/broadcom/asp2/bcmasp_intf_defs.h  |  238 +++
+ drivers/net/mdio/mdio-bcm-unimac.c                 |    2 +
+ drivers/net/phy/bcm7xxx.c                          |    1 +
+ include/linux/brcmphy.h                            |    1 +
+ 14 files changed, 4621 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/net/brcm,asp-v2.0.yaml
+ create mode 100644 drivers/net/ethernet/broadcom/asp2/Makefile
+ create mode 100644 drivers/net/ethernet/broadcom/asp2/bcmasp.c
+ create mode 100644 drivers/net/ethernet/broadcom/asp2/bcmasp.h
+ create mode 100644 drivers/net/ethernet/broadcom/asp2/bcmasp_ethtool.c
+ create mode 100644 drivers/net/ethernet/broadcom/asp2/bcmasp_intf.c
+ create mode 100644 drivers/net/ethernet/broadcom/asp2/bcmasp_intf_defs.h
 
-> +	if (block->sg_table) {
-> +		sgl = block->sg_table->sgl;
-> +		nents = sg_nents_for_len(sgl, block->bytes_used);
-> +
-> +		addrs = kmalloc_array(nents, sizeof(*addrs), GFP_KERNEL);
-> +		if (!addrs)
-> +			return -ENOMEM;
-> +
-> +		lenghts = kmalloc_array(nents, sizeof(*lenghts), GFP_KERNEL);
-
-lengths?
-
-> +		if (!lenghts) {
-> +			kfree(addrs);
-> +			return -ENOMEM;
-> +		}
-> +
-> +		len_total = block->bytes_used;
->  
-> -	desc = dmaengine_prep_slave_single(dmaengine_buffer->chan,
-> -		block->phys_addr, block->bytes_used, dma_dir,
-> -		DMA_PREP_INTERRUPT);
-> +		for (i = 0; i < nents; i++) {
-> +			addrs[i] = sg_dma_address(sgl);
-> +			lenghts[i] = min(sg_dma_len(sgl), len_total);
-> +			len_total -= lenghts[i];
-> +
-> +			sgl = sg_next(sgl);
-> +		}
-> +
-> +		flags = block->cyclic ? DMA_PREP_REPEAT : DMA_PREP_INTERRUPT;
-> +
-> +		desc = dmaengine_prep_slave_dma_array(dmaengine_buffer->chan,
-> +						      addrs, lenghts, nents,
-> +						      dma_dir, flags);
-> +		kfree(addrs);
-> +		kfree(lenghts);
-> +	} else {
-> +		max_size = min(block->size, dmaengine_buffer->max_size);
-> +		max_size = round_down(max_size, dmaengine_buffer->align);
-> +
-> +		if (queue->buffer.direction == IIO_BUFFER_DIRECTION_IN)
-> +			block->bytes_used = max_size;
-> +
-> +		if (block->bytes_used > max_size)
-> +			return -EINVAL;
-> +
-> +		desc = dmaengine_prep_slave_single(dmaengine_buffer->chan,
-> +						   block->phys_addr,
-> +						   block->bytes_used, dma_dir,
-> +						   DMA_PREP_INTERRUPT);
-> +	}
-
-
-> diff --git a/include/linux/iio/buffer-dma.h b/include/linux/iio/buffer-dma.h
-> index e5e5817e99db..48f7ffaf0867 100644
-> --- a/include/linux/iio/buffer-dma.h
-> +++ b/include/linux/iio/buffer-dma.h
-> @@ -43,6 +43,7 @@ enum iio_block_state {
->   * @queue: Parent DMA buffer queue
->   * @kref: kref used to manage the lifetime of block
->   * @state: Current state of the block
-> + * @cyclic: True if this is a cyclic buffer
->   * @fileio: True if this buffer is used for fileio mode
-
-I might have commented on it earlier (I've lost track) but
-attach should be documented as well.   Worth sanity checking
-by either building with W=1 or running kernel-doc over
-the files and fixing the warnings.
-
->   */
->  struct iio_dma_buffer_block {
-> @@ -67,6 +68,7 @@ struct iio_dma_buffer_block {
->  	 */
->  	enum iio_block_state state;
->  
-> +	bool cyclic;
->  	bool fileio;
->  
->  	struct dma_buf_attachment *attach;
+-- 
+2.7.4
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
