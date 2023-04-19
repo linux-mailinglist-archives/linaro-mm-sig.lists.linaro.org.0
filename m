@@ -2,191 +2,300 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8030C6E75DA
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 10:59:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DA016E77A0
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 12:44:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7CA483F63B
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 08:59:29 +0000 (UTC)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (mail-dm6nam12on2077.outbound.protection.outlook.com [40.107.243.77])
-	by lists.linaro.org (Postfix) with ESMTPS id 9C3F83F08F
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Apr 2023 08:59:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 784D33F546
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 10:44:57 +0000 (UTC)
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+	by lists.linaro.org (Postfix) with ESMTPS id 3C19A3E923
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Apr 2023 10:44:53 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=kt6C86Wc;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1");
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.243.77 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZiBWOvSHQWxG8UPrJe5csHY0RWfeajI+7Qsh0E4Mlf4/pByJRmFqSC+wx2AUgpmhgIAIQWNq2GokemABnHlLrbSqPq8nPV5qHqIOAZ1FBML1paFH7eIp1jB+//QfYVNch0VI9pLsxxxIolkTbeL3oiJiV617dNjzSAPapmT8n+qNziPswQp+DsBYmjZqaGjQWZnhZG5bOcmfUbDtOnrcIH2GPZwFSyCO3xvcI8dUtHTf0WQaBc9i2pWuowR1gNJ0kzMwJuT8xQCzhqGNqhkHP7tCjGRY/ouwcpB0LaBxjG1hh6st08LCgI4/4c8ichXzdwQ/1rGdKSnO1knc1Ecdzg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=k4iQ74Rd+sLxA7sWzlqQrXYdIH3XXH402mx7jcQab6E=;
- b=m2TXpptw3OJvI6U8OPum/lQK0ofuqnR53X2F2YV0aTmjO4Jq17k5apxrSqS2fLsCl4Gz2G6LRv/ub3dgTiHBi4gEc/6/lYVRsgb6AcWS4VleRUSoJjtOuOauwoK9BZWNOo3BcISubmeuxTZwAp4AU/B6Q7q0WZOdsj7zebvfbIKV8hfMLfrhiroZRw+gRF1PpbpCH2z5ObnVBUSsArdZUyVXaLXh0QCgQx4/EkIyZUtAadBJG2IZdpqsaQo4en7174lRX8YLOA8pR+E4FoL+JWQX3wTJifjZJNi87Jmeim5+nncxe+3ywbriNsyl8aTikQB5nmYVmE5YI86zRIwiVg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=k4iQ74Rd+sLxA7sWzlqQrXYdIH3XXH402mx7jcQab6E=;
- b=kt6C86WcGGNIV9Y4t1PdV8FnGTHQLt3YzHgBvpyEouhQuO4ChbDJJkBp/byfgbpF1pVqHa/ODB/VvalS3TK2otfx37nhRqBpktNj//8Mv5si266pxgmjLlSvOFZc90OfIQa7SDurvHQ6gQzWMbqU91ppQ2cGOiFYr/xKYQ6Ro9o=
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by PH7PR12MB7844.namprd12.prod.outlook.com (2603:10b6:510:27b::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6298.45; Wed, 19 Apr
- 2023 08:59:23 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::d2f8:7388:39c1:bbed]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::d2f8:7388:39c1:bbed%3]) with mapi id 15.20.6319.020; Wed, 19 Apr 2023
- 08:59:23 +0000
-Message-ID: <655e2eb7-0cfa-a488-ddde-e2507073dced@amd.com>
-Date: Wed, 19 Apr 2023 10:59:18 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Content-Language: en-US
+	dkim=pass header.d=intel.com header.s=Intel header.b="h/Mgxyi2";
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.55.52.151 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1681901093; x=1713437093;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=XnfoaCcH3MWyJZkIKskW2BAZXpZylboTWI3thPO1+Yo=;
+  b=h/Mgxyi2l6ACF0t3/U239JN6LARn86F6Q8rr/qGtD06x6aUr6vP0sE2j
+   JOYawY+LfunYjU1KBUUvazwEMffrCJFqC0jDp+d58fw3db9tUUKB40ZZx
+   Hbi76SuSKXeeVR6F0KwYEiZPMpcsCzZw6zrDiz9GNG73+d4jV0Ttw7xkg
+   hEfqb/+TbYU2C3NTtyAVy85G4OF3+R8tLnoRgk1g9RA5TzCRQJV8hM0zy
+   zqjkzYFvY+HTezT79RP42CecSqAlKqPXYbVUcUtcOWwKjmbeTh6KYD6YX
+   LWbFqEEsD/L66lTWadH56zbSf2VcB6iJ35JARw7qczXtevyRtsAb3heun
+   Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10684"; a="325748504"
+X-IronPort-AV: E=Sophos;i="5.99,208,1677571200";
+   d="scan'208";a="325748504"
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Apr 2023 03:44:52 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10684"; a="691462456"
+X-IronPort-AV: E=Sophos;i="5.99,208,1677571200";
+   d="scan'208";a="691462456"
+Received: from lkp-server01.sh.intel.com (HELO b613635ddfff) ([10.239.97.150])
+  by orsmga002.jf.intel.com with ESMTP; 19 Apr 2023 03:44:48 -0700
+Received: from kbuild by b613635ddfff with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1pp5It-000ep9-16;
+	Wed, 19 Apr 2023 10:44:47 +0000
+Date: Wed, 19 Apr 2023 18:44:37 +0800
+From: kernel test robot <lkp@intel.com>
 To: hackyzh002 <hackyzh002@gmail.com>, alexander.deucher@amd.com
-References: <20230419085747.4720-1-hackyzh002@gmail.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20230419085747.4720-1-hackyzh002@gmail.com>
-X-ClientProxiedBy: FR2P281CA0054.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:93::8) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
+Message-ID: <202304191814.1O8ppodq-lkp@intel.com>
+References: <20230419045157.69829-1-hackyzh002@gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|PH7PR12MB7844:EE_
-X-MS-Office365-Filtering-Correlation-Id: d1422192-4f3a-4493-12c4-08db40b45ed2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	m107qqvEtTV2qi//9x4itw3Fy8FoqJTmpk/JiMKjQrDn+FM3QE1XGFVxfp3WoEs9AMZ/YKycfwdeyZia5G8OmHqDzodBM2XfGVr6P5MPvmeofKdZWnUAk62PzoBC3nVjI/vfuwmarhamRMo5So2AcCbOJczPHJ88xOFBsEbXr+V5aI3/3J25aNSP1qCFayDb7jk5LhHXgNU3F1LrVzgsrRf9szDIVsM4RnyVjZhBLUFCoUTEwyQc3QNl4+xY34zmCADbhzOWNhl8ojUZMIEBfHQpYn5fSJmuw8G4jzPYVRj+36nwJol0DKJz8ydNtvsZzBJw5IMmo4EJeLMCOa+phwRBMx/MkbWO/9svQFn3XD0kLQUqrJnTOj3F5MM04sr1UDpywho+smTzEmIAhRxcOlDuqa/BRUMRxPxAdNjVL532M7d30kAFa+QvqvKJaTwMCBGAkY5c7GBpk7ZGFiq2Utr0hE0qIhoB4iW3jiV+26eEVsBxwCBxRpFIVI3g6eV1bbwvshu9u58bBaef+qgqN87wj3SuDzCNRXXmsFU6olVse0G30Sc3hrG77JI8S+BFmP6Qh2ukTBcdNAN2SJRj5qtcdyPGPB315i/n1wX7nFWWF7PCZg72dEAfNDFoJNvFug31hwVLqUavMHeaGNSaNg==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(376002)(39860400002)(396003)(136003)(346002)(366004)(451199021)(66476007)(478600001)(6666004)(38100700002)(8936002)(8676002)(316002)(41300700001)(6636002)(4326008)(66946007)(66556008)(186003)(4744005)(2906002)(6512007)(36756003)(83380400001)(6506007)(86362001)(31696002)(2616005)(31686004)(5660300002)(6486002)(43740500002)(45980500001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?YUJ4dHNGOVV3VjZtM2pEUUhLRDM4OEtjcm9LWWpXUEFMb2g1cXBCVHlEMlU2?=
- =?utf-8?B?WHY3WGI0dVJYZXVQVCtrb2dKeThVeFM1ZmcyWk1XeG1jOURFeUM3UjNJanZ5?=
- =?utf-8?B?TjV5bHo5SEpiT2ZkamlIS2IwRFc3ejJFYlIzS0tKZ3NDUWxJK3lhOVlHQndu?=
- =?utf-8?B?VW9DWDNuQWZVS3BvamVpUTdqVnpUTkdCZTJ5S0RjeGZNQ0UvRk5oWnFaRDhm?=
- =?utf-8?B?VnZLMTZ2bzZ6aEZvS3hOc2tRYU44cmVSeDIydGMya1hyQ25rZ09ZYktGRHlR?=
- =?utf-8?B?K3FmMEVzVWxrZVRhQTlpNlMrQTYyUU02ZG9xNi8xV2tmTTNsd0ZnZi9KL1dZ?=
- =?utf-8?B?UC9uTVVjT3ZlMCtsVDAycFR6SjFQMy9mU3FLMDNvRkhyc2VnNVNNc0tTNndn?=
- =?utf-8?B?Qis5bWZIUlh6M29ta2JmMXIyOTByMk5nVVRxbDFUSEVMZXA0alBoRFFRaDUv?=
- =?utf-8?B?YzliN2JXMld4MnpUbGZTa251ZDFwR1BVOHh3OE5iYmdkazNiVmI2VFRUSmMy?=
- =?utf-8?B?eG4yTFh6TXYvaU1qWlhWOUhteTduempyWEc1K3lkaDlCYVI5YitsempNazRI?=
- =?utf-8?B?NE8zakp0cFNhNFVjQ3VvWTJua2xWeDUwaVA4bW9UcTU3bkZoYjkrd2Zrc01R?=
- =?utf-8?B?VExPVHlIWlRaMUkvOS8vZWt4UkNkOEptdlkwbHNsNTl4YkpDQjNVVGxuTW5W?=
- =?utf-8?B?Q1pOVVdsMHZ0U09obzVualdwZkxrZkswTkk4UkNVTy9OMGgyell3cmZZMEtp?=
- =?utf-8?B?bnpkMk5pdkxKRlB0dlNWeFhPNWxxTWRpMm5JV21XWUNURWcvWlVsS3R0UDNp?=
- =?utf-8?B?N01ZQ1YyMUszMVBoVWJIbjF0ZHdaM25XZWkxQlkrS1ZFQm1PRU5jclRackoy?=
- =?utf-8?B?bkdwQW5sc3k5d1RIajQyMy8xeUVQeFpsMm5TOExkYlh4TkNPaGNWcmZkUCtN?=
- =?utf-8?B?QU5QUzJ5RHpaMFFaSVA4YjBKNU9Qd1BIcXFHRmpyQmhseDRMa2dYU2tscVZI?=
- =?utf-8?B?V3B2eUY5YjhaZ0JiSHA4Z1hIWWMycm1QSHdlWlVEcktibUVILzZUei9RdlFB?=
- =?utf-8?B?ekRTbFBGZzJnWU5LL3ZDSU44QTlHWVdYaXc5bnBRMGo0ZEZWVUxUR0R6VnNx?=
- =?utf-8?B?dVZ2VXRvK1NiTFNsVWJZMmZJbVhaQUR5eUZoMUZoNzVaVzk4S2Z6OTBySDl4?=
- =?utf-8?B?SHZVMUhaaUNiamRkczY1Nng3L3RhVlRDOHV5RzRIZzNtcERZdG8wSXpkejJO?=
- =?utf-8?B?azJDWEhBV290MlE5eHZjRm45TjVQWG0rcXY4bk91VVhGVHpvM240aTRoUHB4?=
- =?utf-8?B?bXVBOHJvM3htN3ZodkNFOTEwcXR6NHN0bzhFT3lnMVI2OHBDRFNRWEF6T0FL?=
- =?utf-8?B?aFRxbStpQ3VFSDR2RzQ1TkZ6RW9FbW5FSFVidUJpR0ppV295aW5vakk1QlZl?=
- =?utf-8?B?NE1DNDRnMCtLa1RCWGlGa3lJMElWUFN4OFhQTTRBcE9FQm9LdXoyWmlDNnJV?=
- =?utf-8?B?S3Vab0YyaXlkcmVOMXROaFdMSUtLQjVXU0NnNHJ4V0lkZHlTQnMyTmNTZ3Ar?=
- =?utf-8?B?VnQxR3NjRFNrbDU1eGhmL3hDbVg3R1dxU3JiSDdWQ2xzTGFoVEVHeDZGZFYx?=
- =?utf-8?B?UjVHdmE4N0l2OHBRYlF2dFoza1dQeTIzeTUvbmprVEJBbnF6b0ZYU0JNRC9u?=
- =?utf-8?B?QTlyK3d1K1NBaUREai9KL3pjVGhuejM0ZWczaVhXT3ZpWXptMGxOdk83L01s?=
- =?utf-8?B?UnF2dzBiSEFiVytTK0VVN2xIelM4dU95d1BpYWI3ZnFhUHZQMTBHV254ZDM1?=
- =?utf-8?B?czhHYXAySDQ5ejE4SlJhR2YyMHpXRUl6Rk45eXBQTU5DMnd1SE5uMGhVZHhC?=
- =?utf-8?B?d0d5aHp0SlZCekhkNWk3clV1aUZ4YzhmOFBrZ3VOdjN1UWlIOFMzSWpoUzQ2?=
- =?utf-8?B?THlPSFp5YXM4akdoRFhMRzVKYlFmclkwTnYyT0ZURlRkMHFkZndVc2JLYXha?=
- =?utf-8?B?SFk4U2tMdHI1K0pkbUNWTDhqZGN2TUVyZmpRYS9GMTJENVZ0VWZvOVROTVVP?=
- =?utf-8?B?N3YrWWdFVnloYzRMQXR1SXNXV2JUZDlZNVE0K2xEamFFK2FZTlRxeVYrODJX?=
- =?utf-8?B?azdCVzZOMitPdmlZTTQrR3VKR2FrbHM2NjZzeWx3NFdWN094bWpqZnZESlRQ?=
- =?utf-8?Q?1kvv0UHXfJiKxN6NOjlYLp+5XVy+7JibGBxwLm7XPMr7?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d1422192-4f3a-4493-12c4-08db40b45ed2
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Apr 2023 08:59:23.4361
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WYyLFSR2l+wfcEg6uabcP2T6qlu+ASwwplWqlhzDvscMmTVYK3Rov+3RaAR22lF4
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7844
-X-Spamd-Result: default: False [-5.00 / 15.00];
+Content-Disposition: inline
+In-Reply-To: <20230419045157.69829-1-hackyzh002@gmail.com>
+X-Spamd-Result: default: False [-6.00 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	BAYES_HAM(-3.00)[100.00%];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:192.55.52.151/32];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[amd.com,gmail.com,ffwll.ch,linaro.org,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
 	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:4983, ipnet:192.55.52.0/24, country:US];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[lists.linux.dev,amd.com,gmail.com,ffwll.ch,linaro.org,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
 	FREEMAIL_TO(0.00)[gmail.com,amd.com];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.243.77:from];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	DKIM_TRACE(0.00)[intel.com:+];
+	FROM_HAS_DN(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_SOME(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DKIM_TRACE(0.00)[amd.com:+];
-	RCVD_COUNT_TWO(0.00)[2]
+	RCVD_COUNT_THREE(0.00)[3];
+	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 9C3F83F08F
-X-Spamd-Bar: -----
-Message-ID-Hash: ZLMDGCXEMJSGSUPWB7SBZOIC6DET4T5M
-X-Message-ID-Hash: ZLMDGCXEMJSGSUPWB7SBZOIC6DET4T5M
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Xinhui.Pan@amd.com, daniel@ffwll.ch, sumit.semwal@linaro.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+X-Rspamd-Queue-Id: 3C19A3E923
+X-Spamd-Bar: ------
+Message-ID-Hash: CWP3BWRVRX2FZQR6OJ7UQEHMJ27PJ3OR
+X-Message-ID-Hash: CWP3BWRVRX2FZQR6OJ7UQEHMJ27PJ3OR
+X-MailFrom: lkp@intel.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, christian.koenig@amd.com, Xinhui.Pan@amd.com, daniel@ffwll.ch, sumit.semwal@linaro.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, hackyzh002 <hackyzh002@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 1/2] drm/radeon: Fix integer overflow in radeon_cs_parser_init
+Subject: [Linaro-mm-sig] Re: [PATCH 2/2] drm/amdgpu: Fix integer overflow in amdgpu_cs_pass1
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZLMDGCXEMJSGSUPWB7SBZOIC6DET4T5M/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CWP3BWRVRX2FZQR6OJ7UQEHMJ27PJ3OR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Am 19.04.23 um 10:57 schrieb hackyzh002:
-> The type of size is unsigned, if size is 0x40000000, there will be an
-> integer overflow, size will be zero after size *= sizeof(uint32_t),
-> will cause uninitialized memory to be referenced later
->
-> Signed-off-by: hackyzh002 <hackyzh002@gmail.com>
-> ---
->   drivers/gpu/drm/radeon/radeon_cs.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/gpu/drm/radeon/radeon_cs.c b/drivers/gpu/drm/radeon/radeon_cs.c
-> index 46a27ebf4..8e12b406e 100644
-> --- a/drivers/gpu/drm/radeon/radeon_cs.c
-> +++ b/drivers/gpu/drm/radeon/radeon_cs.c
-> @@ -270,7 +270,7 @@ int radeon_cs_parser_init(struct radeon_cs_parser *p, void *data)
->   {
->   	struct drm_radeon_cs *cs = data;
->   	uint64_t *chunk_array_ptr;
-> -	unsigned size, i;
-> +	u64 size, i;
+Hi hackyzh002,
 
-Ok, once more: Please only change the type of the "size" variable" and 
-not the type of "i".
+kernel test robot noticed the following build errors:
 
-Otherwise the patch looks good to me,
-Christian.
+[auto build test ERROR on drm-misc/drm-misc-next]
+[also build test ERROR on linus/master v6.3-rc7 next-20230418]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
->   	u32 ring = RADEON_CS_RING_GFX;
->   	s32 priority = 0;
->   
+url:    https://github.com/intel-lab-lkp/linux/commits/hackyzh002/drm-amdgpu-Fix-integer-overflow-in-amdgpu_cs_pass1/20230419-125344
+base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
+patch link:    https://lore.kernel.org/r/20230419045157.69829-1-hackyzh002%40gmail.com
+patch subject: [PATCH 2/2] drm/amdgpu: Fix integer overflow in amdgpu_cs_pass1
+config: arm64-buildonly-randconfig-r004-20230416 (https://download.01.org/0day-ci/archive/20230419/202304191814.1O8ppodq-lkp@intel.com/config)
+compiler: clang version 17.0.0 (https://github.com/llvm/llvm-project 437b7602e4a998220871de78afcb020b9c14a661)
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # install arm64 cross compiling tool for clang build
+        # apt-get install binutils-aarch64-linux-gnu
+        # https://github.com/intel-lab-lkp/linux/commit/c4a89869bcb6b68ad0e1eed0dd4f18c8cc7fbfc5
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review hackyzh002/drm-amdgpu-Fix-integer-overflow-in-amdgpu_cs_pass1/20230419-125344
+        git checkout c4a89869bcb6b68ad0e1eed0dd4f18c8cc7fbfc5
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=arm64 olddefconfig
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=arm64 SHELL=/bin/bash drivers/gpu/drm/amd/amdgpu/
 
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
+| Link: https://lore.kernel.org/oe-kbuild-all/202304191814.1O8ppodq-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+>> drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c:195:11: error: cannot combine with previous 'type-name' declaration specifier
+           uint64_t int size;
+                    ^
+   1 error generated.
+
+
+vim +195 drivers/gpu/drm/amd/amdgpu/amdgpu_cs.c
+
+   184	
+   185	/* Copy the data from userspace and go over it the first time */
+   186	static int amdgpu_cs_pass1(struct amdgpu_cs_parser *p,
+   187				   union drm_amdgpu_cs *cs)
+   188	{
+   189		struct amdgpu_fpriv *fpriv = p->filp->driver_priv;
+   190		unsigned int num_ibs[AMDGPU_CS_GANG_SIZE] = { };
+   191		struct amdgpu_vm *vm = &fpriv->vm;
+   192		uint64_t *chunk_array_user;
+   193		uint64_t *chunk_array;
+   194		uint32_t uf_offset = 0;
+ > 195		uint64_t int size;
+   196		int ret;
+   197		int i;
+   198	
+   199		chunk_array = kvmalloc_array(cs->in.num_chunks, sizeof(uint64_t),
+   200					     GFP_KERNEL);
+   201		if (!chunk_array)
+   202			return -ENOMEM;
+   203	
+   204		/* get chunks */
+   205		chunk_array_user = u64_to_user_ptr(cs->in.chunks);
+   206		if (copy_from_user(chunk_array, chunk_array_user,
+   207				   sizeof(uint64_t)*cs->in.num_chunks)) {
+   208			ret = -EFAULT;
+   209			goto free_chunk;
+   210		}
+   211	
+   212		p->nchunks = cs->in.num_chunks;
+   213		p->chunks = kvmalloc_array(p->nchunks, sizeof(struct amdgpu_cs_chunk),
+   214				    GFP_KERNEL);
+   215		if (!p->chunks) {
+   216			ret = -ENOMEM;
+   217			goto free_chunk;
+   218		}
+   219	
+   220		for (i = 0; i < p->nchunks; i++) {
+   221			struct drm_amdgpu_cs_chunk __user **chunk_ptr = NULL;
+   222			struct drm_amdgpu_cs_chunk user_chunk;
+   223			uint32_t __user *cdata;
+   224	
+   225			chunk_ptr = u64_to_user_ptr(chunk_array[i]);
+   226			if (copy_from_user(&user_chunk, chunk_ptr,
+   227					       sizeof(struct drm_amdgpu_cs_chunk))) {
+   228				ret = -EFAULT;
+   229				i--;
+   230				goto free_partial_kdata;
+   231			}
+   232			p->chunks[i].chunk_id = user_chunk.chunk_id;
+   233			p->chunks[i].length_dw = user_chunk.length_dw;
+   234	
+   235			size = p->chunks[i].length_dw;
+   236			cdata = u64_to_user_ptr(user_chunk.chunk_data);
+   237	
+   238			p->chunks[i].kdata = kvcalloc(size, sizeof(uint32_t),
+   239							    GFP_KERNEL);
+   240			if (p->chunks[i].kdata == NULL) {
+   241				ret = -ENOMEM;
+   242				i--;
+   243				goto free_partial_kdata;
+   244			}
+   245			size *= sizeof(uint32_t);
+   246			if (copy_from_user(p->chunks[i].kdata, cdata, size)) {
+   247				ret = -EFAULT;
+   248				goto free_partial_kdata;
+   249			}
+   250	
+   251			/* Assume the worst on the following checks */
+   252			ret = -EINVAL;
+   253			switch (p->chunks[i].chunk_id) {
+   254			case AMDGPU_CHUNK_ID_IB:
+   255				if (size < sizeof(struct drm_amdgpu_cs_chunk_ib))
+   256					goto free_partial_kdata;
+   257	
+   258				ret = amdgpu_cs_p1_ib(p, p->chunks[i].kdata, num_ibs);
+   259				if (ret)
+   260					goto free_partial_kdata;
+   261				break;
+   262	
+   263			case AMDGPU_CHUNK_ID_FENCE:
+   264				if (size < sizeof(struct drm_amdgpu_cs_chunk_fence))
+   265					goto free_partial_kdata;
+   266	
+   267				ret = amdgpu_cs_p1_user_fence(p, p->chunks[i].kdata,
+   268							      &uf_offset);
+   269				if (ret)
+   270					goto free_partial_kdata;
+   271				break;
+   272	
+   273			case AMDGPU_CHUNK_ID_BO_HANDLES:
+   274				if (size < sizeof(struct drm_amdgpu_bo_list_in))
+   275					goto free_partial_kdata;
+   276	
+   277				ret = amdgpu_cs_p1_bo_handles(p, p->chunks[i].kdata);
+   278				if (ret)
+   279					goto free_partial_kdata;
+   280				break;
+   281	
+   282			case AMDGPU_CHUNK_ID_DEPENDENCIES:
+   283			case AMDGPU_CHUNK_ID_SYNCOBJ_IN:
+   284			case AMDGPU_CHUNK_ID_SYNCOBJ_OUT:
+   285			case AMDGPU_CHUNK_ID_SCHEDULED_DEPENDENCIES:
+   286			case AMDGPU_CHUNK_ID_SYNCOBJ_TIMELINE_WAIT:
+   287			case AMDGPU_CHUNK_ID_SYNCOBJ_TIMELINE_SIGNAL:
+   288				break;
+   289	
+   290			default:
+   291				goto free_partial_kdata;
+   292			}
+   293		}
+   294	
+   295		if (!p->gang_size) {
+   296			ret = -EINVAL;
+   297			goto free_partial_kdata;
+   298		}
+   299	
+   300		for (i = 0; i < p->gang_size; ++i) {
+   301			ret = amdgpu_job_alloc(p->adev, vm, p->entities[i], vm,
+   302					       num_ibs[i], &p->jobs[i]);
+   303			if (ret)
+   304				goto free_all_kdata;
+   305		}
+   306		p->gang_leader = p->jobs[p->gang_leader_idx];
+   307	
+   308		if (p->ctx->vram_lost_counter != p->gang_leader->vram_lost_counter) {
+   309			ret = -ECANCELED;
+   310			goto free_all_kdata;
+   311		}
+   312	
+   313		if (p->uf_entry.tv.bo)
+   314			p->gang_leader->uf_addr = uf_offset;
+   315		kvfree(chunk_array);
+   316	
+   317		/* Use this opportunity to fill in task info for the vm */
+   318		amdgpu_vm_set_task_info(vm);
+   319	
+   320		return 0;
+   321	
+   322	free_all_kdata:
+   323		i = p->nchunks - 1;
+   324	free_partial_kdata:
+   325		for (; i >= 0; i--)
+   326			kvfree(p->chunks[i].kdata);
+   327		kvfree(p->chunks);
+   328		p->chunks = NULL;
+   329		p->nchunks = 0;
+   330	free_chunk:
+   331		kvfree(chunk_array);
+   332	
+   333		return ret;
+   334	}
+   335	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
