@@ -2,151 +2,181 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B1FB6E7985
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 14:20:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BF1816E79A7
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 14:24:02 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E8CEC3F5B9
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 12:20:31 +0000 (UTC)
-Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
-	by lists.linaro.org (Postfix) with ESMTPS id 9C24B3EBC6
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Apr 2023 12:20:24 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D445C3F546
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Apr 2023 12:24:01 +0000 (UTC)
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (mail-dm6nam12on2065.outbound.protection.outlook.com [40.107.243.65])
+	by lists.linaro.org (Postfix) with ESMTPS id 553023E923
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Apr 2023 12:23:58 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of robherring2@gmail.com designates 209.85.160.51 as permitted sender) smtp.mailfrom=robherring2@gmail.com;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=kernel.org (policy=none)
-Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-18785c2f39fso866426fac.3
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Apr 2023 05:20:24 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1681906824; x=1684498824;
-        h=date:subject:message-id:references:in-reply-to:cc:to:from
-         :mime-version:content-transfer-encoding:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=vDWn7LWX55rdAgK8lkZTjI/cl/gmcQIjVsQZmuaFPok=;
-        b=gDL05zy/LHiCMvJV85dMXtFiRdb/pkKnTCePYsWjYwyBhmoQ0zYP9GA/xngkfIUQmX
-         4oNa721G4tYskbXDp0zgZ20CxAUuVNKKH8sMqedDo8rGD6hZKGHEtmgSiJi7VMLZX2Uy
-         6MfP4xlxuSkNheA3ZwrkF4NR4ZIwfVhHoO/9yT4Rj5EZ0qw024eGnCQWuddZDjMDq4y9
-         2zXV8raM5q76URQdczJgie4OXJGdGmC7r7yIy4K4Dv5QG1B4IQ8NlXCz8++V+fvsciid
-         55nufABbLTGYc3585zRxmWVcx1yAzO6Q1tq8Or1m8XWvqTKMFr8qEk86NtVInZyKwyyx
-         PJkg==
-X-Gm-Message-State: AAQBX9cUsPauw4lCGPPsRyYMdgEX44vDXC/21MHFmXJvDyBbLuPR/K3q
-	mSvEEn/jD+MzRPcmTTrlxg==
-X-Google-Smtp-Source: AKy350achMGLsukLbt5lzLwN1OM7sY4Y18eDzdY5EhXFZgcfFGxbh3Xvp0buod3QAyAniCdmJL8Ycg==
-X-Received: by 2002:a05:6870:f295:b0:17f:e768:60fb with SMTP id u21-20020a056870f29500b0017fe76860fbmr3024069oap.54.1681906823992;
-        Wed, 19 Apr 2023 05:20:23 -0700 (PDT)
-Received: from robh_at_kernel.org (66-90-144-107.dyn.grandenetworks.net. [66.90.144.107])
-        by smtp.gmail.com with ESMTPSA id 64-20020a4a0143000000b00529cc3986c8sm6920510oor.40.2023.04.19.05.20.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Apr 2023 05:20:23 -0700 (PDT)
-Received: (nullmailer pid 3779626 invoked by uid 1000);
-	Wed, 19 Apr 2023 12:20:22 -0000
-Content-Type: text/plain; charset="us-ascii"
+	dkim=pass header.d=amd.com header.s=selector1 header.b=inV7iwwD;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1");
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.243.65 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ePrukuU6MYVsCZ7jztdaaduXJCBHjDDB8RLTs6m5/hgcGBr9PMCGOw49Yha8vRnkPJkQkI8v3j4SOfonC0LYKpB1Ln4xTu19SV7kLT/xuHTbHufpCN/aloR3iMtrE0Kiqz1CLOg/EwjEaBil6Y11zcpCmZ1xvfLtThLVpOwJFMbL69hgm+cYGpQVAj8Yfz3LkXyrbXm2rHbdYOaechLrDwxdu+X6N0uju3hh2Ma424V9UKu6n5hk4l4aqwxGPneT95N74wgbe2wi5hGEJF96EmQvy8Z83YbD5vtWWxnt8RXLUVBk5qgMFzfjazKzcUQ3SCmLIOzLn2hlRks5Ft9/Vw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OMOgPBKlG1ui4XqzOmPKAEix97cRLrKEn4w4syOFHRM=;
+ b=NBYu+3XcREbz+X2GbVAPRBlPHcW0mAXDXyzbvA/sM0QnhpfessAzmT3tDToXisMm8pUnF2WX9jQDbUOkx7lVT0bClbjxCg2o5iTimtFHFlbzgKaOz0V3AhCPO882x/KdwXeZBwKUQ+DLx/mHJhTagiGCiAndmtZwAydrvPWnL6kosr8HQ9qy0m8ahOmmF1cvMd3+frXPUSHJBw8d9ogkq98fsCH96p9Cfv1fFk77zfnQD5TVApYs6shhndbFM+tZ6Lgh8lHytzs9sjKbpFkgtaKOnfNOCpEEQERgyx53aNC5f+T5+4CMV8CwaxESal+lFQ5ZFhIG7bD13uQwYl2ocw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OMOgPBKlG1ui4XqzOmPKAEix97cRLrKEn4w4syOFHRM=;
+ b=inV7iwwDHSXgksM/PvNPilJ9s5S9+Kcof//Q6DiWMp0iFe9wWfwRK0NgP9rsAtxDu0gP/qLCut4UKuaue2YJ9vM0zoLGCfibP2NcLpjQ4O78j6vNj90t1MfIjeTP6A4KqCIUpsbXH8kcxpXe6vqt97kJFrPdjvzPe3yHVfNS85o=
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by SA0PR12MB4558.namprd12.prod.outlook.com (2603:10b6:806:72::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6298.45; Wed, 19 Apr
+ 2023 12:23:56 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::d2f8:7388:39c1:bbed]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::d2f8:7388:39c1:bbed%3]) with mapi id 15.20.6319.020; Wed, 19 Apr 2023
+ 12:23:56 +0000
+Message-ID: <62ae58cb-9fec-37ca-fd40-12bf0c1c5ba3@amd.com>
+Date: Wed, 19 Apr 2023 14:23:49 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Content-Language: en-US
+To: hackyzh002 <hackyzh002@gmail.com>, alexander.deucher@amd.com
+References: <20230419122058.3420-1-hackyzh002@gmail.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <20230419122058.3420-1-hackyzh002@gmail.com>
+X-ClientProxiedBy: FR0P281CA0133.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:97::11) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
 MIME-Version: 1.0
-From: Rob Herring <robh@kernel.org>
-To: Justin Chen <justinpopo6@gmail.com>
-In-Reply-To: <1681863018-28006-2-git-send-email-justinpopo6@gmail.com>
-References: <1681863018-28006-1-git-send-email-justinpopo6@gmail.com>
- <1681863018-28006-2-git-send-email-justinpopo6@gmail.com>
-Message-Id: <168190678873.3778743.3635324500677416742.robh@kernel.org>
-Date: Wed, 19 Apr 2023 07:20:22 -0500
-X-Spamd-Result: default: False [-1.50 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	RCVD_IN_DNSWL_HI(-1.00)[66.90.144.107:received,209.85.160.51:from];
-	FORGED_SENDER(0.30)[robh@kernel.org,robherring2@gmail.com];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.160.51:from];
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|SA0PR12MB4558:EE_
+X-MS-Office365-Filtering-Correlation-Id: cd612fe6-04b4-4bb8-f82d-08db40d0f1c6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	W+lsjVkH4CGZHza0arSKpBs5Re3wSP3QwejS5bjWGlX8RtNPAoMh20MPlZdZcHqKX/lgELkXnjNA+oZMJaIKdkHQg0H9BSjzYsAHlQcW72G2KUKeVSmGkfRV5JuKof1GOstaGaF05SVFa05wzw0fr8v/fqsK17zkIpLl0J5Ksp6j4WMem0D1i4zWvscHq8Kw+MtrGeHKdiprs3Dc0E7rMxfvWHhyr7AXO/fKtdBwZRZfCvjn8Ah+r6axh6VMLFfj2qZkRUlu5OQyjLq7WfzzRzpa7M/okIYviL0N/KCT/nl8mKGff7JOGgNOTc6Hfj6bBpcwA8xy6pIUn0rMYb+m3shtepVi7PsUts9QKg4QvFSN54DHozddBkajggxE+X+gebDMq6v4Ytk/sgInhcu+4JWZW3zCeVSL3vJ8K+4ODMP5neLtiVk41I/62WLxs+lbfHba/GJdvWjVrOPMEqzm4sarNbkIUPW96Bps5pweFqE5ndQOp9OFLqS8cLeudxN9e65rB4UE0i65hltKmkGr4gaf305hLhiIO8kOmaPmA/Z6qimKro0hbX+iLC2SK9socgtnG+mT2iskQtt0/qR+BTyKuC4yQc2lEPskAiSxOE6Q111SFLBotiMbiDZhOTcuamylFSR7X5TP52pOXBvpLg==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(396003)(136003)(376002)(366004)(346002)(39860400002)(451199021)(36756003)(86362001)(31696002)(38100700002)(478600001)(6506007)(6666004)(6512007)(6486002)(5660300002)(41300700001)(66556008)(4326008)(316002)(8676002)(8936002)(2906002)(6636002)(66476007)(66946007)(4744005)(31686004)(83380400001)(2616005)(66574015)(186003)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?cUd1L1hrUGt4RWZuRnZDMGtQN3J4WHRqTnQ1NksyUzRpNkFJSUlWOEd1U3FQ?=
+ =?utf-8?B?WFgyMWdGRWJLUUVYYUdIajFSZi9ZSTVsRFVURU5jRVlzbGhwMy9iZHFNVVg3?=
+ =?utf-8?B?RVROcVpNL1pIVGRFZ2pIbWtRNmFqYnozSm5Dd09SUzMrVnRvMHdNMjV0MU85?=
+ =?utf-8?B?ZXpBWmVJUnZFeUkzWFNMaEZFeVh2bXNWYlVqMVFKWlpTR1dhQ0dmU1EvWFI0?=
+ =?utf-8?B?bnFHVnFIL0YwSUR3SzRPejRUR2JsWEtHT21vS2c0QlFlNDgxZmVDUlFsblg4?=
+ =?utf-8?B?TEh1UEp0cDNzakNNOHdmeUFSTjkydzllVzZnYzJESGtPYThpVkZlcjR3Zy9v?=
+ =?utf-8?B?SlpVWTd6cWo5SGo5emNUSE5KdnFqOTVEbDgwUFVmeUJ3QWtiZzFidDErQVpQ?=
+ =?utf-8?B?MENFUTBRYS81S25hVlUrMmxldHlSLzltc2xnYXUwa2R5K1hpZVZqUjRHSFhI?=
+ =?utf-8?B?cTZhd1JxZ0M5YUVkZTF4bG40TTA2R1R6bmtRQjlZYi9oTWJDbW9CUjRTdWtJ?=
+ =?utf-8?B?RjBrWkxyaGN5OU9MUm9NR1h6cW5EcjJ0UlZsa09NbDM4SHd4MGREeVEyQnJi?=
+ =?utf-8?B?b2IvZVhtdFZuRnVaTUkrVUZhamRoRFJVc29SazREZXFWM2UyTEVBNGFYUEZB?=
+ =?utf-8?B?ZDBySWdXTUp6cjFxVmROUXQybHhyV3dDMzZNUEF3RTdPWU9PWC9QOGx4RUVQ?=
+ =?utf-8?B?dWtFMWtSaVFydFVRcWNKdEVkYzN6bGN1UUxqK0o5dWdocDd6Y2I1RDZINFps?=
+ =?utf-8?B?Ui91TEFqaXRCZk9DNldPQXkyNXdKSHlxZm93Zk5aMTl2UitUQURmcFU5RmlB?=
+ =?utf-8?B?Uk5lbHFqcDlYMngyRG8rMXVWOGJxLytXN3pKbi9DcFRlOWhrM3M3emdkVDNj?=
+ =?utf-8?B?WFRlbmRhSHROZWI3dGMrZUU1RnJlVlU1L0x6WDExcXhaNDJpNStNZTBVVDVT?=
+ =?utf-8?B?T1QvRTdKSFlLUXZMOFZoRFNJQjFPZEtjQW1iTDFZTTliZ2hJZW1yYUtmU0hY?=
+ =?utf-8?B?UEMwZzNMNDhmN2dlN2h0c2lkL1A3WFNjQklobzhCbHZQN0oyc3B0MnBYeWZj?=
+ =?utf-8?B?QlpyVkxScXZ5MW44enBGWjRWUnppTnJiWklIN0RmUzQyNUxuMktTY28xUUVT?=
+ =?utf-8?B?eGlyQ3JtMUVnU3hMQ2c0cU5HSENXZUhnTTJGTGtaRWxVRzdtbk5MRHgxYkJY?=
+ =?utf-8?B?S2JQTTBoRytINzJHN2RjOUtCOHNMdjhlVFltUEZNdkI4VytCTFhpWjZXN09w?=
+ =?utf-8?B?RU5kUjdyYVBYa1hPd3BPS0Zta1dsZlRpTHFldkw2M3p5ZTZmSTIxalpSSElu?=
+ =?utf-8?B?NEIrOVNIVHE5c09kdU9veDJKaHpvSUZOdHVzVU8xT2hORHcvbUJRQnhzejBp?=
+ =?utf-8?B?UDBPdGVuYjh5UG5KSkFVUkVjWldLdFRTZEVjNERxZ0p6UHlEc1RlWXJoRXNk?=
+ =?utf-8?B?b2xIOWY5a1RQeUp6R2xOcWZ2eHRnRFpYNU83dlBvK2Y2MjF0U1lsN0t6elRX?=
+ =?utf-8?B?M3pqemQvWFZzekZmREpHeFhhRXFvbDVMekwrVWZ5c0FkSXdWaHBXdmhXYTVn?=
+ =?utf-8?B?M0YyZWF6UHdLdEZKSVZMNWJueE1tbEhDMTk4OWhXZFVHNUc1Rm1NcWlybHBu?=
+ =?utf-8?B?OWc2VGRUL0ViRjRSZjZVOFVuNDdyRnZ3bjR1Z0pXSEh2cHF3NG9tRGw5QXhy?=
+ =?utf-8?B?bkliSlBZNGx4Zkk4Mk1Jc29JMERqaFdzc3JKSHBBTHEwMkV5ai8rM0dueUdQ?=
+ =?utf-8?B?eStVNjNucmZ5TWRnZEZQNkZWaUNMV2ZiZFYwNEh4N0lWMFFpWWxYUFh1bEhZ?=
+ =?utf-8?B?UTB2Vm41U1hSRlNmeHU0NE1SM1dvMVErbUFIWmRZY1ZpKy9WMkpJaEs3WHFu?=
+ =?utf-8?B?QzVLdnVjVzYrK2Y5Uml0WnlwUWpYd2psQm81MWJ4aEl0bThXbys3OGFlZ0pK?=
+ =?utf-8?B?Y0xrTHlZeDlndWM3aUZPR2ptelhVVXd0bWdUTlh2VEloNkI3Mkh3aDJYT0VB?=
+ =?utf-8?B?dGsrVU42UEVYcHRhL0t6T2hpNitEWE9NamRoc2tLQVhDL3cycUE1TGVUMjJH?=
+ =?utf-8?B?bEFHZlNnbFNHZWNqdU9iYVV4UjNta1BhbnhsTFRjdGJ2amk0ZUVuaVZYSDMz?=
+ =?utf-8?B?MXpyS082bjd6dVlRc1pVc0hOUWJYMTlrYTZ5M1J6ME43RTBlUGV6ZTdxc3Rm?=
+ =?utf-8?Q?Ke5APOLAfZUYehj57I618+R0rn6GrvkwsGREdrEyW9xP?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: cd612fe6-04b4-4bb8-f82d-08db40d0f1c6
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Apr 2023 12:23:55.9863
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: JnPSZlcEs/j3ltlFDAi4Kkn3yHRiMY7GQJXahg4Cm8DRYEnCpU6cRG6lCMjsK08k
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB4558
+X-Spamd-Result: default: False [-6.50 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	RCVD_IN_DNSWL_HI(-0.50)[40.107.243.65:from];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[kernel.org : SPF not aligned (relaxed), No valid DKIM,none];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com,davemloft.net,broadcom.com,lists.freedesktop.org,armlinux.org.uk,lists.linaro.org,redhat.com,google.com,kernel.org,linaro.org,amd.com,lunn.ch];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCVD_COUNT_TWO(0.00)[2];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	ARC_NA(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[gmail.com];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	FREEMAIL_TO(0.00)[gmail.com,amd.com];
+	FREEMAIL_CC(0.00)[amd.com,gmail.com,ffwll.ch,linaro.org,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
+	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[amd.com:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_IN_DNSWL_FAIL(0.00)[2603:10b6:408:43::13:server fail];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
-	R_DKIM_NA(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[robh@kernel.org,robherring2@gmail.com];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.243.65:from];
+	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 9C24B3EBC6
-X-Spamd-Bar: -
-Message-ID-Hash: PZ3J5JJPJ347I6XJUHFN44ACWHQFMS5T
-X-Message-ID-Hash: PZ3J5JJPJ347I6XJUHFN44ACWHQFMS5T
-X-MailFrom: robherring2@gmail.com
+X-Rspamd-Queue-Id: 553023E923
+X-Spamd-Bar: ------
+Message-ID-Hash: 6PT5EANDB2L4LNEFLWLOD66ONSZICWRV
+X-Message-ID-Hash: 6PT5EANDB2L4LNEFLWLOD66ONSZICWRV
+X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, linux-media@vger.kernel.org, hkallweit1@gmail.com, davem@davemloft.net, netdev@vger.kernel.org, bcm-kernel-feedback-list@broadcom.com, dri-devel@lists.freedesktop.org, linux@armlinux.org.uk, f.fainelli@gmail.com, opendmb@gmail.com, linaro-mm-sig@lists.linaro.org, pabeni@redhat.com, edumazet@google.com, robh+dt@kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com, andrew@lunn.ch, richardcochran@gmail.com, kuba@kernel.org, krzysztof.kozlowski+dt@linaro.org, justin.chen@broadcom.com
+CC: Xinhui.Pan@amd.com, daniel@ffwll.ch, sumit.semwal@linaro.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH net-next 1/6] dt-bindings: net: Brcm ASP 2.0 Ethernet controller
+Subject: [Linaro-mm-sig] Re: [PATCH V3 1/2] drm/radeon: Fix integer overflow in radeon_cs_parser_init
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PZ3J5JJPJ347I6XJUHFN44ACWHQFMS5T/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6PT5EANDB2L4LNEFLWLOD66ONSZICWRV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-
-On Tue, 18 Apr 2023 17:10:13 -0700, Justin Chen wrote:
-> From: Florian Fainelli <f.fainelli@gmail.com>
-> 
-> Add a binding document for the Broadcom ASP 2.0 Ethernet
-> controller.
-> 
-> Signed-off-by: Florian Fainelli <f.fainelli@gmail.com>
-> Signed-off-by: Justin Chen <justinpopo6@gmail.com>
-> ---
->  .../devicetree/bindings/net/brcm,asp-v2.0.yaml     | 146 +++++++++++++++++++++
->  1 file changed, 146 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/net/brcm,asp-v2.0.yaml
-> 
-
-My bot found errors running 'make DT_CHECKER_FLAGS=-m dt_binding_check'
-on your patch (DT_CHECKER_FLAGS is new in v5.13):
-
-yamllint warnings/errors:
-
-dtschema/dtc warnings/errors:
-/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/net/brcm,asp-v2.0.example.dtb: asp@9c00000: mdio@c614:compatible:0: 'brcm,asp-v2.0-mdio' is not one of ['brcm,genet-mdio-v1', 'brcm,genet-mdio-v2', 'brcm,genet-mdio-v3', 'brcm,genet-mdio-v4', 'brcm,genet-mdio-v5', 'brcm,unimac-mdio']
-	From schema: /builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/net/brcm,asp-v2.0.yaml
-/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/net/brcm,asp-v2.0.example.dtb: asp@9c00000: mdio@c614: Unevaluated properties are not allowed ('compatible' was unexpected)
-	From schema: /builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/net/brcm,asp-v2.0.yaml
-/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/net/brcm,asp-v2.0.example.dtb: asp@9c00000: mdio@ce14:compatible:0: 'brcm,asp-v2.0-mdio' is not one of ['brcm,genet-mdio-v1', 'brcm,genet-mdio-v2', 'brcm,genet-mdio-v3', 'brcm,genet-mdio-v4', 'brcm,genet-mdio-v5', 'brcm,unimac-mdio']
-	From schema: /builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/net/brcm,asp-v2.0.yaml
-/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/net/brcm,asp-v2.0.example.dtb: asp@9c00000: mdio@ce14: Unevaluated properties are not allowed ('compatible' was unexpected)
-	From schema: /builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/net/brcm,asp-v2.0.yaml
-Documentation/devicetree/bindings/net/brcm,asp-v2.0.example.dtb: /example-0/asp@9c00000/mdio@c614: failed to match any schema with compatible: ['brcm,asp-v2.0-mdio']
-Documentation/devicetree/bindings/net/brcm,asp-v2.0.example.dtb: /example-0/asp@9c00000/mdio@ce14: failed to match any schema with compatible: ['brcm,asp-v2.0-mdio']
-
-doc reference errors (make refcheckdocs):
-
-See https://patchwork.ozlabs.org/project/devicetree-bindings/patch/1681863018-28006-2-git-send-email-justinpopo6@gmail.com
-
-The base for the series is generally the latest rc1. A different dependency
-should be noted in *this* patch.
-
-If you already ran 'make dt_binding_check' and didn't see the above
-error(s), then make sure 'yamllint' is installed and dt-schema is up to
-date:
-
-pip3 install dtschema --upgrade
-
-Please check and re-submit after running the above command yourself. Note
-that DT_SCHEMA_FILES can be set to your schema file to speed up checking
-your schema. However, it must be unset to test all examples with your schema.
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+QW0gMTkuMDQuMjMgdW0gMTQ6MjAgc2NocmllYiBoYWNreXpoMDAyOg0KPiBUaGUgdHlwZSBvZiBz
+aXplIGlzIHVuc2lnbmVkLCBpZiBzaXplIGlzIDB4NDAwMDAwMDAsIHRoZXJlIHdpbGwgYmUgYW4N
+Cj4gaW50ZWdlciBvdmVyZmxvdywgc2l6ZSB3aWxsIGJlIHplcm8gYWZ0ZXIgc2l6ZSAqPSBzaXpl
+b2YodWludDMyX3QpLA0KPiB3aWxsIGNhdXNlIHVuaW5pdGlhbGl6ZWQgbWVtb3J5IHRvIGJlIHJl
+ZmVyZW5jZWQgbGF0ZXINCj4NCj4gU2lnbmVkLW9mZi1ieTogaGFja3l6aDAwMiA8aGFja3l6aDAw
+MkBnbWFpbC5jb20+DQoNClJldmlld2VkLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4u
+a29lbmlnQGFtZC5jb20+IGZvciB0aGUgc2VyaWVzLg0KDQo+IC0tLQ0KPiAgIGRyaXZlcnMvZ3B1
+L2RybS9yYWRlb24vcmFkZW9uX2NzLmMgfCAzICsrLQ0KPiAgIDEgZmlsZSBjaGFuZ2VkLCAyIGlu
+c2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkNCj4NCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZ3B1
+L2RybS9yYWRlb24vcmFkZW9uX2NzLmMgYi9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9j
+cy5jDQo+IGluZGV4IDQ2YTI3ZWJmNC4uYTY3MDBkNzI3IDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJz
+L2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9jcy5jDQo+ICsrKyBiL2RyaXZlcnMvZ3B1L2RybS9yYWRl
+b24vcmFkZW9uX2NzLmMNCj4gQEAgLTI3MCw3ICsyNzAsOCBAQCBpbnQgcmFkZW9uX2NzX3BhcnNl
+cl9pbml0KHN0cnVjdCByYWRlb25fY3NfcGFyc2VyICpwLCB2b2lkICpkYXRhKQ0KPiAgIHsNCj4g
+ICAJc3RydWN0IGRybV9yYWRlb25fY3MgKmNzID0gZGF0YTsNCj4gICAJdWludDY0X3QgKmNodW5r
+X2FycmF5X3B0cjsNCj4gLQl1bnNpZ25lZCBzaXplLCBpOw0KPiArCXU2NCBzaXplOw0KPiArCXVu
+c2lnbmVkIGk7DQo+ICAgCXUzMiByaW5nID0gUkFERU9OX0NTX1JJTkdfR0ZYOw0KPiAgIAlzMzIg
+cHJpb3JpdHkgPSAwOw0KPiAgIA0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2ln
+QGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8t
+bW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
