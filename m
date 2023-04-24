@@ -2,151 +2,129 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28F116F55F1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 12:21:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D7FF76F55F8
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 12:22:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 32D37402AD
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 10:21:25 +0000 (UTC)
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
-	by lists.linaro.org (Postfix) with ESMTPS id BD2593E923
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Apr 2023 16:33:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E46283F6F7
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 10:22:08 +0000 (UTC)
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+	by lists.linaro.org (Postfix) with ESMTPS id 16E693EC73
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Apr 2023 05:59:21 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20221208 header.b=otvUaF7e;
-	spf=pass (lists.linaro.org: domain of f.fainelli@gmail.com designates 209.85.210.180 as permitted sender) smtp.mailfrom=f.fainelli@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-pf1-f180.google.com with SMTP id d2e1a72fcca58-63b5c830d5eso62391b3a.2
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Apr 2023 09:33:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1681922039; x=1684514039;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=Hejd87Jll0E8NOGuMljt4taTMik1yKpFSOJV8ogm+QU=;
-        b=otvUaF7ejsijSly4r1bE5p0DcDAEY+dCK+KVYM+TKOnGIRDPkokhlWhv1Y4lwB+ZkJ
-         J+rF08EQd1xv3uuCAYfuKfepDM3Eusu6Uzl+SkCDbVx4j8Kn6sz+XuG7ALq2caYTgvj8
-         08wPhYvwIHTxLDZdYdxa2Xd5iDpIHEpZDQQLzd8+mvwCpOCz+WsrdOTTJ2/6cA9LYgzN
-         7NDAmo86b0SDi1sLACOkw9YxuxQHprwevC+PiLw6AfCihrx2IR9ovUWUsBFPeUWvsix0
-         FhdUPHDgv7r1UhOtdh8KkQQQN/cNQEWYyJrQZ1/9O7ON5XBMjvxAcMuAzNGWcDRBFKOz
-         QhGA==
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of sukrut.bellary@gmail.com designates 209.85.214.180 as permitted sender) smtp.mailfrom=sukrut.bellary@gmail.com;
+	dmarc=none
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-1a66911f5faso34058235ad.0
+        for <linaro-mm-sig@lists.linaro.org>; Sun, 23 Apr 2023 22:59:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1681922039; x=1684514039;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=Hejd87Jll0E8NOGuMljt4taTMik1yKpFSOJV8ogm+QU=;
-        b=JtgefYQPNeB8JSxKnOSCW0/J5vrwnYB8EZZcSXMKMjqoHrAbE39Iy4y3/+Rlvjpea/
-         LAQNLoK0q0NDhNQMW1k1hpjjMbpCARNwON0W9le8GQeBkNAOoVEx6z0h16e9QUbEm81e
-         Bg18iKZpIfGISzyf0OiOR6kPIK5YKEs4iu0b8PCPK/XuMgaGiiJRP8v2uxZ4RE53dbpk
-         OZ7d65Vp7Qy89u7pFaVUbW1SdkLAPq/sIc2isdGFp+jSVy1HySblLQZXnlHAgHAz0gVc
-         KpNqMUMiCIwso0kUc1sdYCMf6ZGd+h56A6KPdklMJsPasPHu9PmOJg+8DUf/oiZBpbKs
-         U+5A==
-X-Gm-Message-State: AAQBX9de6b6qFqn16IkX5BBpnNVuZIpYaaPxFBwEpq/PxipHYQxq3MUO
-	SmSqawc/IHZy8rQzIfORs3Q=
-X-Google-Smtp-Source: AKy350Yh+6NbKPw4KD+UsFvenBCaCDaUcheuDcqPn53EST9vXg5qyuw0UcOKYiNkqaXz2dPOz64XMQ==
-X-Received: by 2002:a17:902:f689:b0:1a6:f5d5:b80a with SMTP id l9-20020a170902f68900b001a6f5d5b80amr7744678plg.38.1681922038707;
-        Wed, 19 Apr 2023 09:33:58 -0700 (PDT)
-Received: from [10.67.48.245] ([192.19.223.252])
-        by smtp.googlemail.com with ESMTPSA id p10-20020a1709026b8a00b0019a6cce2060sm11631338plk.57.2023.04.19.09.33.52
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 19 Apr 2023 09:33:58 -0700 (PDT)
-Message-ID: <932bb2c6-71ce-525f-fbb2-a0a742ee8e12@gmail.com>
-Date: Wed, 19 Apr 2023 09:33:50 -0700
+        d=1e100.net; s=20221208; t=1682315960; x=1684907960;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=rZ2SfSlApMPG0JQkvL0AAuqyfaSDxsc4TPleUHWHX54=;
+        b=lAQj050KpT8P5vn83RGwvlkdPsG4VXi6dh1/exNVjDezX8aPInVOHVZLw73nYiK5vs
+         Pkrfd+PHTm2P9DJChw1maolBkMfv1uGFFOeE22ktH74pg9S4uMwaOqAuDXWc07bsCUvr
+         1IfSn2OCbdN1N5YTOVtUBSymT/piMziPjM2HcQfE5sB7r+0MRv4Fg81RZJwusYXzwNU/
+         D7E/ElGS0MdbqXbXBeVzsKVoBy0/v8iK3nUgjC4DSgRS2x/ISFLffepcg1S2y0eQ2ksB
+         RIc85OWU4qwW+jg9n8GahLpZfKrUdD2hbGg756VvLe2qEsRHe8Z1y599UaS7QXM1Hx60
+         VJgQ==
+X-Gm-Message-State: AAQBX9fjD1nhVeW5LukwtRpxeQjOwESARB5U2SKwgJpp+XUQEV+TEwRa
+	afj82CxDw+CYBlBqK49dhfU=
+X-Google-Smtp-Source: AKy350bZL1arZEunooIRRXsnKZi0bPLlYztinlCxzZ/LrCosNr+NxtGmjW+3SAzNg1ES3iuKdejZ3A==
+X-Received: by 2002:a17:903:30c3:b0:1a6:f1f3:e475 with SMTP id s3-20020a17090330c300b001a6f1f3e475mr10319987plc.55.1682315960069;
+        Sun, 23 Apr 2023 22:59:20 -0700 (PDT)
+Received: from dev-linux.lan (cpe-70-95-21-110.san.res.rr.com. [70.95.21.110])
+        by smtp.gmail.com with ESMTPSA id y7-20020a170902d64700b001a979121444sm850808plh.207.2023.04.23.22.59.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 23 Apr 2023 22:59:19 -0700 (PDT)
+From: Sukrut Bellary <sukrut.bellary@linux.com>
+To: daniel@ffwll.ch,
+	airlied@gmail.com,
+	sumit.semwal@linaro.org,
+	Hawking.Zhang@amd.com,
+	Julia.Lawall@inria.fr,
+	dri-devel@lists.freedesktop.org
+Date: Sun, 23 Apr 2023 22:59:10 -0700
+Message-Id: <20230424055910.15683-1-sukrut.bellary@linux.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.10.0
-Content-Language: en-US
-To: Heiner Kallweit <hkallweit1@gmail.com>,
- Justin Chen <justinpopo6@gmail.com>, netdev@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linaro-mm-sig@lists.linaro.org, bcm-kernel-feedback-list@broadcom.com
-References: <1681863018-28006-1-git-send-email-justinpopo6@gmail.com>
- <1681863018-28006-4-git-send-email-justinpopo6@gmail.com>
- <03dadae3-3a89-cdb0-7cd1-591d62735836@gmail.com>
-From: Florian Fainelli <f.fainelli@gmail.com>
-In-Reply-To: <03dadae3-3a89-cdb0-7cd1-591d62735836@gmail.com>
-X-Spamd-Result: default: False [-4.60 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_IN_DNSWL_HI(-1.00)[192.19.223.252:received,209.85.210.180:from];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20221208];
+X-Spamd-Result: default: False [-1.60 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	FORGED_SENDER(0.30)[sukrut.bellary@linux.com,sukrutbellary@gmail.com];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.180:from];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.210.180:from];
-	FREEMAIL_CC(0.00)[broadcom.com,gmail.com,davemloft.net,google.com,kernel.org,redhat.com,linaro.org,lunn.ch,armlinux.org.uk,amd.com];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	TAGGED_RCPT(0.00)[dt];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.305];
 	TAGGED_FROM(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	FREEMAIL_TO(0.00)[gmail.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,broadcom.com];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	TO_DN_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
+	R_DKIM_NA(0.00)[];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
+	FREEMAIL_TO(0.00)[ffwll.ch,gmail.com,linaro.org,amd.com,inria.fr,lists.freedesktop.org];
+	MIME_TRACE(0.00)[0:+];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sukrut.bellary@linux.com,sukrutbellary@gmail.com];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	FROM_HAS_DN(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TO_DN_SOME(0.00)[];
+	DMARC_NA(0.00)[linux.com];
+	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: BD2593E923
-X-Spamd-Bar: ----
-X-MailFrom: f.fainelli@gmail.com
+X-Rspamd-Queue-Id: 16E693EC73
+X-Spamd-Bar: -
+X-MailFrom: sukrut.bellary@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: FRVNQFO4U4ALJQMT567K36TNZGP3ORKX
-X-Message-ID-Hash: FRVNQFO4U4ALJQMT567K36TNZGP3ORKX
-X-Mailman-Approved-At: Wed, 03 May 2023 10:16:14 +0000
-CC: justin.chen@broadcom.com, f.fainelli@gmail.com, davem@davemloft.net, edumazet@google.com, kuba@kernel.org, pabeni@redhat.com, robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, opendmb@gmail.com, andrew@lunn.ch, linux@armlinux.org.uk, richardcochran@gmail.com, sumit.semwal@linaro.org, christian.koenig@amd.com
+Message-ID-Hash: WHV6BFGV3HDH7NSXBNBOXP6GSMGDMKLE
+X-Message-ID-Hash: WHV6BFGV3HDH7NSXBNBOXP6GSMGDMKLE
+X-Mailman-Approved-At: Wed, 03 May 2023 10:16:51 +0000
+CC: Sukrut Bellary <sukrut.bellary@linux.com>, alexander.deucher@amd.com, christian.koenig@amd.com, Xinhui.Pan@amd.com, amd-gfx@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH net-next 3/6] net: bcmasp: Add support for ASP2.0 Ethernet controller
+Subject: [Linaro-mm-sig] [PATCH] drm:amd:amdgpu: Fix missing bo unlock in failure path
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FRVNQFO4U4ALJQMT567K36TNZGP3ORKX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WHV6BFGV3HDH7NSXBNBOXP6GSMGDMKLE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 4/18/23 23:35, Heiner Kallweit wrote:
-> On 19.04.2023 02:10, Justin Chen wrote:
->> Add support for the Broadcom ASP 2.0 Ethernet controller which is first
->> introduced with 72165. This controller features two distinct Ethernet
->> ports that can be independently operated.
->>
->> This patch supports:
-[snip]
->> +	intf->tx_spb_index = spb_index;
->> +	intf->tx_spb_dma_valid = valid;
->> +	bcmasp_intf_tx_write(intf, intf->tx_spb_dma_valid);
->> +
->> +	if (tx_spb_ring_full(intf, MAX_SKB_FRAGS + 1))
->> +		netif_stop_queue(dev);
->> +
-> 
-> Here it may be better to use the new macros from include/net/netdev_queues.h.
-> It seems your code (together with the related part in tx_poll) doesn't consider
-> the queue restart case.
-> In addition you should check whether using READ_ONCE()/WRITE_ONCE() is needed,
-> e.g. in ring_full().
+smatch warning - inconsistent handling of buffer object reserve
+and unreserve.
 
-Thanks Heiner. Can you trim the parts you are not quoting otherwise one 
-has to scroll all the way down to where you responded. Thanks!
+Signed-off-by: Sukrut Bellary <sukrut.bellary@linux.com>
+---
+ drivers/gpu/drm/amd/amdgpu/gfx_v8_0.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/gpu/drm/amd/amdgpu/gfx_v8_0.c b/drivers/gpu/drm/amd/amdgpu/gfx_v8_0.c
+index 278416acf060..5de44d7e92de 100644
+--- a/drivers/gpu/drm/amd/amdgpu/gfx_v8_0.c
++++ b/drivers/gpu/drm/amd/amdgpu/gfx_v8_0.c
+@@ -4686,8 +4686,10 @@ static int gfx_v8_0_kiq_resume(struct amdgpu_device *adev)
+ 		return r;
+ 
+ 	r = amdgpu_bo_kmap(ring->mqd_obj, &ring->mqd_ptr);
+-	if (unlikely(r != 0))
++	if (unlikely(r != 0)) {
++		amdgpu_bo_unreserve(ring->mqd_obj);
+ 		return r;
++	}
+ 
+ 	gfx_v8_0_kiq_init_queue(ring);
+ 	amdgpu_bo_kunmap(ring->mqd_obj);
 -- 
-Florian
+2.34.1
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
