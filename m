@@ -2,96 +2,94 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BD7C6F5603
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 12:23:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE5FA6F55FA
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 12:22:28 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 444A23F952
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 10:23:26 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CE8603F630
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 10:22:27 +0000 (UTC)
 Received: from mx.sberdevices.ru (mx.sberdevices.ru [45.89.227.171])
-	by lists.linaro.org (Postfix) with ESMTPS id DD7A33ECC8
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Apr 2023 07:29:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id D1B463EC16
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Apr 2023 17:29:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=sberdevices.ru header.s=mail header.b="Msu/wEcb";
+	dkim=pass header.d=sberdevices.ru header.s=mail header.b=NxtU3kmz;
 	spf=pass (lists.linaro.org: domain of AVKrasnov@sberdevices.ru designates 45.89.227.171 as permitted sender) smtp.mailfrom=AVKrasnov@sberdevices.ru;
 	dmarc=pass (policy=quarantine) header.from=sberdevices.ru
 Received: from s-lin-edge02.sberdevices.ru (localhost [127.0.0.1])
-	by mx.sberdevices.ru (Postfix) with ESMTP id 586EF5FD6E;
-	Wed, 26 Apr 2023 10:29:49 +0300 (MSK)
+	by mx.sberdevices.ru (Postfix) with ESMTP id 210FD5FD08;
+	Wed, 26 Apr 2023 20:29:58 +0300 (MSK)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
-	s=mail; t=1682494189;
-	bh=dHg7xkBb0HnprALeBYDMhRRSgdMSlw6mHB6uPNDkV88=;
+	s=mail; t=1682530198;
+	bh=yYMp0nqdQTnb85rhKLWY/qAY6uNIHIoPw8ISDzD6Ge4=;
 	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
-	b=Msu/wEcbvYUHe8F7DZlH1U9d7kSCIGKdKqtabrjPgcowqH3dmFdHNEKyHPCcxo55i
-	 ps5J1CqZhwpGN+txNgtF7qxGSKb25ZJvYcBZMvjIPedilZaNk5IRwtYg3hiBHfRhNL
-	 SRLvoM7ENjJHRkQS+vHcb9anIr2TLRi/Vs4MEzESPK1GiKep7nBTeHJJBvAyKSup3v
-	 Y2T76DXCjkpBGw8F7qBnMPeaVSylFev9aF/Kt0F+avTAwHTQvdh+kDoplSWozOEVte
-	 PIrZpJaCSvOEdH4hrWjTIaozJJClqGlFOxT8vdd9+KHbDkhSXXa6wK1y4TrgAwPRxD
-	 rzaxeHPagOvqw==
+	b=NxtU3kmzG0xQrV/kCSUJl/guJuYu3tMBEDN2qoCPt1sM+xJW1JhGIgBcGeBhdgjop
+	 6WCNBgl0UVGopZ56sLO0LMv4jZi0828auBX//djn0cox1ZfnGNn9baAKzUpGmVAxcB
+	 MYfMTY1iABQE3ytiRd03gb8TseFQQOmm8sGynmteN+K5MmZ6qByNnlVd78hi5CF/YD
+	 TsHv5nd9PFuuDra6pam7OC+YKDG/DSdIfnQB00lF1yb3IqCtYEVJVhWN1JnjZ+N6Wz
+	 kjSveKSce6jZSP4n5IuktcZeBticLb7YrXP6jpKWrfrdgjvouZ3yks91edjMKJU4AT
+	 6t9JCkGdHdLYg==
 Received: from S-MS-EXCH01.sberdevices.ru (S-MS-EXCH01.sberdevices.ru [172.16.1.4])
 	by mx.sberdevices.ru (Postfix) with ESMTP;
-	Wed, 26 Apr 2023 10:29:47 +0300 (MSK)
+	Wed, 26 Apr 2023 20:29:56 +0300 (MSK)
 From: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
 To: Miquel Raynal <miquel.raynal@bootlin.com>, Richard Weinberger
 	<richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, Sumit Semwal
 	<sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?=
 	<christian.koenig@amd.com>, Arseniy Krasnov <AVKrasnov@sberdevices.ru>
-Date: Wed, 26 Apr 2023 10:24:52 +0300
-Message-ID: <20230426072455.3887717-1-AVKrasnov@sberdevices.ru>
+Date: Wed, 26 Apr 2023 20:25:14 +0300
+Message-ID: <20230426172520.2004711-1-AVKrasnov@sberdevices.ru>
 X-Mailer: git-send-email 2.35.0
 MIME-Version: 1.0
 X-Originating-IP: [172.16.1.6]
-X-ClientProxiedBy: S-MS-EXCH01.sberdevices.ru (172.16.1.4) To
+X-ClientProxiedBy: S-MS-EXCH02.sberdevices.ru (172.16.1.5) To
  S-MS-EXCH01.sberdevices.ru (172.16.1.4)
 X-KSMG-Rule-ID: 4
 X-KSMG-Message-Action: clean
 X-KSMG-AntiSpam-Status: not scanned, disabled by settings
 X-KSMG-AntiSpam-Interceptor-Info: not scanned
 X-KSMG-AntiPhishing: not scanned, disabled by settings
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 1.1.2.30, bases: 2023/04/26 04:45:00 #21166225
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 1.1.2.30, bases: 2023/04/26 14:03:00 #21167528
 X-KSMG-AntiVirus-Status: Clean, skipped
-X-Spamd-Result: default: False [-2.20 / 15.00];
+X-Spamd-Result: default: False [3.00 / 15.00];
 	RSPAMD_URIBL(4.50)[sberdevices.ru:email,sberdevices.ru:dkim];
-	DWL_DNSWL_HI(-3.50)[sberdevices.ru:dkim];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-0.50)[45.89.227.171:from];
 	R_MISSING_CHARSET(0.50)[];
-	R_DKIM_ALLOW(-0.20)[sberdevices.ru:s=mail];
 	MIME_GOOD(-0.10)[text/plain];
 	BAD_REP_POLICIES(0.10)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	HAS_XOIP(0.00)[];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:208677, ipnet:45.89.224.0/22, country:RU];
-	DKIM_TRACE(0.00)[sberdevices.ru:+];
-	R_SPF_ALLOW(0.00)[+ip4:45.89.227.171];
-	TO_DN_SOME(0.00)[];
 	FREEMAIL_CC(0.00)[gmail.com,sberdevices.ru,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	DMARC_POLICY_ALLOW(0.00)[sberdevices.ru,quarantine];
-	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:208677, ipnet:45.89.224.0/22, country:RU];
+	NEURAL_HAM(-0.00)[-0.969];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	DKIM_TRACE(0.00)[sberdevices.ru:+];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	R_DKIM_ALLOW(0.00)[sberdevices.ru:s=mail];
+	ARC_NA(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[sberdevices.ru,quarantine];
+	HAS_XOIP(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	R_SPF_ALLOW(0.00)[+ip4:45.89.227.171];
 	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: DD7A33ECC8
-X-Spamd-Bar: --
+X-Spam-Level: ***
+X-Rspamd-Queue-Id: D1B463EC16
+X-Spamd-Bar: +++
 X-MailFrom: AVKrasnov@sberdevices.ru
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: N4KYA62QVOZT4IMDTUSJSOFMNS524J4U
-X-Message-ID-Hash: N4KYA62QVOZT4IMDTUSJSOFMNS524J4U
-X-Mailman-Approved-At: Wed, 03 May 2023 10:17:46 +0000
+Message-ID-Hash: 3WF7WISYLUZG4NW6FBQFAU7UOX2GCUEV
+X-Message-ID-Hash: 3WF7WISYLUZG4NW6FBQFAU7UOX2GCUEV
+X-Mailman-Approved-At: Wed, 03 May 2023 10:17:17 +0000
 CC: oxffffaa@gmail.com, kernel@sberdevices.ru, linux-mtd@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v1] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
+Subject: [Linaro-mm-sig] [PATCH v2] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N4KYA62QVOZT4IMDTUSJSOFMNS524J4U/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3WF7WISYLUZG4NW6FBQFAU7UOX2GCUEV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -103,16 +101,28 @@ Content-Transfer-Encoding: 7bit
 
 This adds support for OTP area access on MX30LFxG18AC chip series.
 
+Changelog:
+  v1 -> v2:
+  * Add slab.h include due to kernel test robot error.
+
 Signed-off-by: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
 ---
- drivers/mtd/nand/raw/nand_macronix.c | 212 +++++++++++++++++++++++++++
- 1 file changed, 212 insertions(+)
+ drivers/mtd/nand/raw/nand_macronix.c | 213 +++++++++++++++++++++++++++
+ 1 file changed, 213 insertions(+)
 
 diff --git a/drivers/mtd/nand/raw/nand_macronix.c b/drivers/mtd/nand/raw/nand_macronix.c
-index 1472f925f386..c0d12979933a 100644
+index 1472f925f386..5232cf48c350 100644
 --- a/drivers/mtd/nand/raw/nand_macronix.c
 +++ b/drivers/mtd/nand/raw/nand_macronix.c
-@@ -31,6 +31,20 @@
+@@ -6,6 +6,7 @@
+  * Author: Boris Brezillon <boris.brezillon@free-electrons.com>
+  */
+ 
++#include <linux/slab.h>
+ #include "linux/delay.h"
+ #include "internals.h"
+ 
+@@ -31,6 +32,20 @@
  
  #define MXIC_CMD_POWER_DOWN 0xB9
  
@@ -133,7 +143,7 @@ index 1472f925f386..c0d12979933a 100644
  struct nand_onfi_vendor_macronix {
  	u8 reserved;
  	u8 reliability_func;
-@@ -316,6 +330,203 @@ static void macronix_nand_deep_power_down_support(struct nand_chip *chip)
+@@ -316,6 +331,203 @@ static void macronix_nand_deep_power_down_support(struct nand_chip *chip)
  	chip->ops.resume = mxic_nand_resume;
  }
  
@@ -337,7 +347,7 @@ index 1472f925f386..c0d12979933a 100644
  static int macronix_nand_init(struct nand_chip *chip)
  {
  	if (nand_is_slc(chip))
-@@ -325,6 +536,7 @@ static int macronix_nand_init(struct nand_chip *chip)
+@@ -325,6 +537,7 @@ static int macronix_nand_init(struct nand_chip *chip)
  	macronix_nand_onfi_init(chip);
  	macronix_nand_block_protection_support(chip);
  	macronix_nand_deep_power_down_support(chip);
