@@ -2,47 +2,47 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E4C46EF509
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Apr 2023 15:06:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F0016EF597
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Apr 2023 15:37:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B754F3F635
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Apr 2023 13:06:43 +0000 (UTC)
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by lists.linaro.org (Postfix) with ESMTPS id 909F73E9D6
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Apr 2023 13:06:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 635863F634
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Apr 2023 13:37:56 +0000 (UTC)
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+	by lists.linaro.org (Postfix) with ESMTPS id DE7833E9D6
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Apr 2023 13:37:49 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=cZ1CJFmm;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 134.134.136.24 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dkim=pass header.d=intel.com header.s=Intel header.b=G8cWJfek;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.55.52.151 as permitted sender) smtp.mailfrom=lkp@intel.com;
 	dmarc=pass (policy=none) header.from=intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1682514398; x=1714050398;
+  t=1682516270; x=1714052270;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=oVxuTR4A/wrlt9G6C/zKK3j09fIf1TBLj219Iy+IWg4=;
-  b=cZ1CJFmmJ8Tt1hKvS6cEQc1IySVLcvIP8wh6e41qv/0X4X/pgeThcTz3
-   cAl+qwWKE4AuVCW8PPHQVhgfRKMZqSZeACKslaB4RN8Z5x64l7dso3zoQ
-   r7rv6ov9YiWvOP0SDb3QF34n1Zs8xnF9Tq5pcZBo1Pf8EMGhMb6EoEIyZ
-   h6mufUH3JtMTZu/lpkxZFxaXLA1M0VIrILq4ZIk081Em7rzgVdxbSoJna
-   23x+i1Z3yNpjc9r2CNmQrsdnEbkAfddTQ3kVD3hV8nCu/ycfYIdH6vQmR
-   cMXTumocwcVs/+eIl800bI7Zo0Gg6d/da+fv1kDmcUalWcW+h+T2uKfz3
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10691"; a="349033780"
+  bh=mATRcWr0aXBkhLDJViNyss0Ax7HbjLO0ufWDkBE/ZRI=;
+  b=G8cWJfekjFr/xW1Y+E7UCzDJq6Iq/GtRSi2XiTe1k296Jh0ciVKUcU4q
+   pylWsaD+9RgfKW8TXxUINBHLfuHln4HFAtZdLcYq7rlnFiLY5bzEIiTB6
+   fZ1EOBmp581r/mHM3UO5eRnZAMzw9UaMWmYeWJr2I6ThK4Y8ieXn0jgo7
+   Mj1IskuWUGZRWhTWqJRpDgl+n5upsuKMQgzBn3sFPFfO/zxDbLXE/DCKS
+   4xCK3a7bFA0/w1uTDfgCodBYNt0NeRhTZHNyZBeLRp9ED6AJhF+NmhN+k
+   VKe8ORjz2Ut/fdunpR4on/zA/gNmE7WGhgGItOE7vCx5isYxVxkdyAXV5
+   w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10691"; a="327432231"
 X-IronPort-AV: E=Sophos;i="5.99,228,1677571200";
-   d="scan'208";a="349033780"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Apr 2023 06:06:37 -0700
+   d="scan'208";a="327432231"
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Apr 2023 06:37:39 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10691"; a="783323577"
+X-IronPort-AV: E=McAfee;i="6600,9927,10691"; a="726524482"
 X-IronPort-AV: E=Sophos;i="5.99,228,1677571200";
-   d="scan'208";a="783323577"
+   d="scan'208";a="726524482"
 Received: from lkp-server01.sh.intel.com (HELO 041f065c1b1b) ([10.239.97.150])
-  by FMSMGA003.fm.intel.com with ESMTP; 26 Apr 2023 06:06:33 -0700
+  by orsmga001.jf.intel.com with ESMTP; 26 Apr 2023 06:37:35 -0700
 Received: from kbuild by 041f065c1b1b with local (Exim 4.96)
 	(envelope-from <lkp@intel.com>)
-	id 1preqv-0000AU-0U;
-	Wed, 26 Apr 2023 13:06:33 +0000
-Date: Wed, 26 Apr 2023 21:06:23 +0800
+	id 1prfKx-0000EK-0h;
+	Wed, 26 Apr 2023 13:37:35 +0000
+Date: Wed, 26 Apr 2023 21:37:19 +0800
 From: kernel test robot <lkp@intel.com>
 To: Arseniy Krasnov <AVKrasnov@sberdevices.ru>,
 	Miquel Raynal <miquel.raynal@bootlin.com>,
@@ -50,42 +50,39 @@ To: Arseniy Krasnov <AVKrasnov@sberdevices.ru>,
 	Vignesh Raghavendra <vigneshr@ti.com>,
 	Sumit Semwal <sumit.semwal@linaro.org>,
 	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <202304262003.Lzpyh2BA-lkp@intel.com>
+Message-ID: <202304262101.pP2ae1ol-lkp@intel.com>
 References: <20230426072455.3887717-1-AVKrasnov@sberdevices.ru>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <20230426072455.3887717-1-AVKrasnov@sberdevices.ru>
-X-Spamd-Result: default: False [-9.60 / 15.00];
+X-Spamd-Result: default: False [-8.00 / 15.00];
 	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	BAYES_HAM(-3.00)[100.00%];
 	DWL_DNSWL_MED(-2.00)[intel.com:dkim];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	RCVD_IN_DNSWL_HI(-0.50)[134.134.136.24:from];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:134.134.136.24/32];
-	RWL_MAILSPIKE_GOOD(-0.10)[134.134.136.24:from];
+	R_SPF_ALLOW(-0.20)[+ip4:192.55.52.151/32];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_EQ_ENVFROM(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[lists.linux.dev,gmail.com,sberdevices.ru,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	ASN(0.00)[asn:4983, ipnet:134.134.136.0/24, country:US];
-	RCVD_TLS_LAST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:4983, ipnet:192.55.52.0/24, country:US];
+	FREEMAIL_CC(0.00)[lists.linux.dev,gmail.com,sberdevices.ru,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[3];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
 	DKIM_TRACE(0.00)[intel.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
 	FROM_HAS_DN(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[15];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
 	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 909F73E9D6
-X-Spamd-Bar: ---------
-Message-ID-Hash: VC4VVKPLA4HP5DBGA5YVHHD7MB57GU2N
-X-Message-ID-Hash: VC4VVKPLA4HP5DBGA5YVHHD7MB57GU2N
+X-Rspamd-Queue-Id: DE7833E9D6
+X-Spamd-Bar: --------
+Message-ID-Hash: FNDOL7E2IFTFADRZUIR67Q45XXYHWOZH
+X-Message-ID-Hash: FNDOL7E2IFTFADRZUIR67Q45XXYHWOZH
 X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -94,7 +91,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v1] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VC4VVKPLA4HP5DBGA5YVHHD7MB57GU2N/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FNDOL7E2IFTFADRZUIR67Q45XXYHWOZH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -118,8 +115,8 @@ url:    https://github.com/intel-lab-lkp/linux/commits/Arseniy-Krasnov/mtd-rawna
 base:   https://git.kernel.org/pub/scm/linux/kernel/git/mtd/linux.git nand/next
 patch link:    https://lore.kernel.org/r/20230426072455.3887717-1-AVKrasnov%40sberdevices.ru
 patch subject: [PATCH v1] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
-config: i386-randconfig-a001-20230424 (https://download.01.org/0day-ci/archive/20230426/202304262003.Lzpyh2BA-lkp@intel.com/config)
-compiler: clang version 14.0.6 (https://github.com/llvm/llvm-project f28c006a5895fc0e329fe15fead81e37457cb1d1)
+config: hexagon-randconfig-r041-20230425 (https://download.01.org/0day-ci/archive/20230426/202304262101.pP2ae1ol-lkp@intel.com/config)
+compiler: clang version 17.0.0 (https://github.com/llvm/llvm-project 437b7602e4a998220871de78afcb020b9c14a661)
 reproduce (this is a W=1 build):
         wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
         chmod +x ~/bin/make.cross
@@ -129,29 +126,57 @@ reproduce (this is a W=1 build):
         git checkout 3529f3465e99379489b59c035a8a0506c3756ef4
         # save the config file
         mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=i386 olddefconfig
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=i386 SHELL=/bin/bash drivers/mtd/nand/raw/
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=hexagon olddefconfig
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=hexagon SHELL=/bin/bash drivers/mtd/nand/raw/
 
 If you fix the issue, kindly add following tag where applicable
 | Reported-by: kernel test robot <lkp@intel.com>
-| Link: https://lore.kernel.org/oe-kbuild-all/202304262003.Lzpyh2BA-lkp@intel.com/
+| Link: https://lore.kernel.org/oe-kbuild-all/202304262101.pP2ae1ol-lkp@intel.com/
 
 All error/warnings (new ones prefixed by >>):
 
->> drivers/mtd/nand/raw/nand_macronix.c:384:12: error: implicit declaration of function 'kmalloc' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
+>> drivers/mtd/nand/raw/nand_macronix.c:384:12: error: call to undeclared function 'kmalloc'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
            dma_buf = kmalloc(MACRONIX_30LFXG18AC_OTP_PAGE_SIZE, GFP_KERNEL);
                      ^
    drivers/mtd/nand/raw/nand_macronix.c:384:12: note: did you mean 'mm_alloc'?
    include/linux/sched/mm.h:16:26: note: 'mm_alloc' declared here
    extern struct mm_struct *mm_alloc(void);
                             ^
->> drivers/mtd/nand/raw/nand_macronix.c:384:10: warning: incompatible integer to pointer conversion assigning to 'void *' from 'int' [-Wint-conversion]
+>> drivers/mtd/nand/raw/nand_macronix.c:384:10: error: incompatible integer to pointer conversion assigning to 'void *' from 'int' [-Wint-conversion]
            dma_buf = kmalloc(MACRONIX_30LFXG18AC_OTP_PAGE_SIZE, GFP_KERNEL);
                    ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->> drivers/mtd/nand/raw/nand_macronix.c:437:2: error: implicit declaration of function 'kfree' is invalid in C99 [-Werror,-Wimplicit-function-declaration]
+>> drivers/mtd/nand/raw/nand_macronix.c:397:17: warning: comparison of distinct pointer types ('typeof ((page)) *' (aka 'unsigned long *') and 'uint64_t *' (aka 'unsigned long long *')) [-Wcompare-distinct-pointer-types]
+           offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
+                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   include/asm-generic/div64.h:222:28: note: expanded from macro 'do_div'
+           (void)(((typeof((n)) *)0) == ((uint64_t *)0));  \
+                  ~~~~~~~~~~~~~~~~~~ ^  ~~~~~~~~~~~~~~~
+>> drivers/mtd/nand/raw/nand_macronix.c:397:17: error: incompatible pointer types passing 'unsigned long *' to parameter of type 'uint64_t *' (aka 'unsigned long long *') [-Werror,-Wincompatible-pointer-types]
+           offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
+                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   include/asm-generic/div64.h:238:22: note: expanded from macro 'do_div'
+                   __rem = __div64_32(&(n), __base);       \
+                                      ^~~~
+   include/asm-generic/div64.h:213:38: note: passing argument to parameter 'dividend' here
+   extern uint32_t __div64_32(uint64_t *dividend, uint32_t divisor);
+                                        ^
+>> drivers/mtd/nand/raw/nand_macronix.c:437:2: error: call to undeclared function 'kfree'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
            kfree(dma_buf);
            ^
-   1 warning and 2 errors generated.
+   drivers/mtd/nand/raw/nand_macronix.c:437:2: note: did you mean 'kvfree'?
+   include/linux/rcutiny.h:99:13: note: 'kvfree' declared here
+   extern void kvfree(const void *addr);
+               ^
+>> drivers/mtd/nand/raw/nand_macronix.c:397:17: warning: shift count >= width of type [-Wshift-count-overflow]
+           offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
+                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   include/asm-generic/div64.h:234:25: note: expanded from macro 'do_div'
+           } else if (likely(((n) >> 32) == 0)) {          \
+                                  ^  ~~
+   include/linux/compiler.h:77:40: note: expanded from macro 'likely'
+   # define likely(x)      __builtin_expect(!!(x), 1)
+                                               ^
+   2 warnings and 4 errors generated.
 
 
 vim +/kmalloc +384 drivers/mtd/nand/raw/nand_macronix.c
@@ -187,7 +212,7 @@ vim +/kmalloc +384 drivers/mtd/nand/raw/nand_macronix.c
    394	
    395		page = offs_in_flash;
    396		/* 'page' will be result of division. */
-   397		offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
+ > 397		offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
    398		bytes_handled = 0;
    399	
    400		while (bytes_handled < len &&
