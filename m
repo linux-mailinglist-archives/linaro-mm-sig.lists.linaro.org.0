@@ -2,134 +2,238 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A15BD6ED0DE
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 24 Apr 2023 17:01:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F1CE6EF101
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Apr 2023 11:23:03 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 779D13F615
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 24 Apr 2023 15:01:52 +0000 (UTC)
-Received: from mail-oo1-f43.google.com (mail-oo1-f43.google.com [209.85.161.43])
-	by lists.linaro.org (Postfix) with ESMTPS id A25BE3ED8E
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Apr 2023 15:01:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D86AA3F632
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Apr 2023 09:23:01 +0000 (UTC)
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+	by lists.linaro.org (Postfix) with ESMTPS id CC02C3E9D6
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Apr 2023 09:22:55 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20221208 header.b=mYAIPmZK;
-	spf=pass (lists.linaro.org: domain of alexdeucher@gmail.com designates 209.85.161.43 as permitted sender) smtp.mailfrom=alexdeucher@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-oo1-f43.google.com with SMTP id 006d021491bc7-541eee15ef5so2762249eaf.1
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Apr 2023 08:01:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1682348507; x=1684940507;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=FmLuhgTYqL7Xf1ZepLBDAcM7hZYQ8z1fOMJDQ+E6+Q0=;
-        b=mYAIPmZK2HzigLPQnMKqFBzHiCRJzh7PWtt5JMNeP8zkDk0iStFDPcONj7vM6KhEyL
-         HCyZZsMG2eE8JfrqiYm+J9IhyJWUR7aXjTnN4HZ810PynVIwAcAFrd6lhQOd9YiKku9E
-         GB6WUNx7pr5xOZv5DRXezmkCvghwLh3A2aCQ8cM/rF/b8mWPyuASArcorF3r5Nb9jTmQ
-         YS9bijCxrJ0HHv2FslnHzofstv7Oa7DbKr1fqrQ14huqZss3Es3iID0hjCuS+qjBonvK
-         NkfPV7rH+J+RdlGt4GuFfPnK5JwHQSEPbsW72audoadCmG6thCBjQ03Zk+IwC9oKZhWL
-         UzyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682348507; x=1684940507;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=FmLuhgTYqL7Xf1ZepLBDAcM7hZYQ8z1fOMJDQ+E6+Q0=;
-        b=ars4Zfhyh6wcMkoK5dZ0eIuOVlZzfDxu1LwoOJdDX40cOUu0NIbx0RY6BpvQW7JI67
-         tlSGJWnSnZpRO8oUtx9dDSmefIwXLMe7/pEXAq8agA/dlhvjOpBLJYn3B5AZ4wKebssN
-         W+qRPb06PfnqUDfjp6TefMMKLweC/KtvWhunHVTxqxLg2g0SDMMy10oV5uzr5LCYgIRJ
-         T9F7v6Fc1MipGCCFQ2eJZjSmdjvY9rtQfxyV/bAAvW6s3ZYtVWWU2f3kVXVwmJjiJVN/
-         KA8L7vPMkC0nKlaRXBUWJgg1kpKjBGkdmj/dr940yu87QHsAtJYxKtc1cACrCH7LSZFt
-         eUnA==
-X-Gm-Message-State: AAQBX9eSj4qVVSQgFRVdzUVwJj9H1wTL0fOx0gXkBb/LjgiMXmHh37Bh
-	f5db4DkMgQPHM6Qhn8iUpOqMj9sNWY0eFhMhLWo=
-X-Google-Smtp-Source: AKy350bvySqFfk+PN5/1/SUO2+TYGz4oCIBT7UtP95XTbp0gi4oyh+p1bcsbgrNCQzfiJIm7L2v9LQ1nM5oR6v7S8qo=
-X-Received: by 2002:a4a:a3c3:0:b0:547:7574:b89a with SMTP id
- t3-20020a4aa3c3000000b005477574b89amr3806308ool.1.1682348507067; Mon, 24 Apr
- 2023 08:01:47 -0700 (PDT)
+	dkim=pass header.d=intel.com header.s=Intel header.b=OQ8zbAJG;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.55.52.151 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1682500975; x=1714036975;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=HVuw8vWnuoZFgy6Fr249eVM+tSLfwKH1nh0CZ35C6dk=;
+  b=OQ8zbAJGG6DRAP/8V4jIK+fJaO+mTea7IIX+FaNbpnA6u4QpkuVhXWcY
+   yGGzEyy9Kb6v7N8cudE6sUwG2lfZjEAPepWvlQt1c8SHptWKUVMpCjqa8
+   3BWK+FmUEptWc6mChC4YfqVh2A7g4sNCKB4B9jj3/tEX7Om2O9sU7QR5v
+   5I9GrSdyf4kdxNOrXw+IkyGUhJTxIhnCPCXIOSJl/M97sh6KC+bBR5c1t
+   DFQtaIWgN+BqJD3EyBiUXZXZbPpOvQgljXXjm2XmDntufRk8aU8wCLnUI
+   eHOHeMqoe1bf/yYWcvpB3PsY/MwrJ9rL413mDfEl/OkYMEpbLhKbyNexg
+   A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10691"; a="327375960"
+X-IronPort-AV: E=Sophos;i="5.99,227,1677571200";
+   d="scan'208";a="327375960"
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Apr 2023 02:22:47 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10691"; a="687874590"
+X-IronPort-AV: E=Sophos;i="5.99,227,1677571200";
+   d="scan'208";a="687874590"
+Received: from lkp-server01.sh.intel.com (HELO 98ee5a99fc83) ([10.239.97.150])
+  by orsmga007.jf.intel.com with ESMTP; 26 Apr 2023 02:22:43 -0700
+Received: from kbuild by 98ee5a99fc83 with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1prbMI-0000Kg-1L;
+	Wed, 26 Apr 2023 09:22:42 +0000
+Date: Wed, 26 Apr 2023 17:21:55 +0800
+From: kernel test robot <lkp@intel.com>
+To: Arseniy Krasnov <AVKrasnov@sberdevices.ru>,
+	Miquel Raynal <miquel.raynal@bootlin.com>,
+	Richard Weinberger <richard@nod.at>,
+	Vignesh Raghavendra <vigneshr@ti.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <202304261704.eyrD5KVk-lkp@intel.com>
+References: <20230426072455.3887717-1-AVKrasnov@sberdevices.ru>
 MIME-Version: 1.0
-References: <20230424055910.15683-1-sukrut.bellary@linux.com> <ecc972c1-cf7d-cd99-805b-38dbf04adc79@amd.com>
-In-Reply-To: <ecc972c1-cf7d-cd99-805b-38dbf04adc79@amd.com>
-From: Alex Deucher <alexdeucher@gmail.com>
-Date: Mon, 24 Apr 2023 11:01:35 -0400
-Message-ID: <CADnq5_OmRnsKkCE2OVcp-6kYww92-DKybg0=hM1tO-GaUAGLEw@mail.gmail.com>
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-X-Spamd-Result: default: False [-8.10 / 15.00];
-	REPLY(-4.00)[];
+Content-Disposition: inline
+In-Reply-To: <20230426072455.3887717-1-AVKrasnov@sberdevices.ru>
+X-Spamd-Result: default: False [-10.20 / 15.00];
+	DWL_DNSWL_HI(-3.50)[intel.com:dkim];
 	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20221208];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	RCVD_DKIM_ARC_DNSWL_MED(-0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:192.55.52.151/32];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	RCVD_IN_DNSWL_MED(-0.20)[192.55.52.151:from];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.161.43:from];
-	NEURAL_HAM(-0.00)[-0.968];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_COUNT_ONE(0.00)[1];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	ASN(0.00)[asn:4983, ipnet:192.55.52.0/24, country:US];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_CC(0.00)[lists.linux.dev,gmail.com,sberdevices.ru,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[intel.com:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	TO_DN_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_CC(0.00)[linux.com,ffwll.ch,gmail.com,linaro.org,amd.com,inria.fr,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
-	RCVD_TLS_LAST(0.00)[]
+	RCVD_COUNT_THREE(0.00)[3];
+	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: A25BE3ED8E
-X-Spamd-Bar: --------
-Message-ID-Hash: X772VNTW7FFOU5X7ZTBYHPVEGHHGRUKE
-X-Message-ID-Hash: X772VNTW7FFOU5X7ZTBYHPVEGHHGRUKE
-X-MailFrom: alexdeucher@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Sukrut Bellary <sukrut.bellary@linux.com>, daniel@ffwll.ch, sumit.semwal@linaro.org, Hawking.Zhang@amd.com, Julia.Lawall@inria.fr, dri-devel@lists.freedesktop.org, Xinhui.Pan@amd.com, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, alexander.deucher@amd.com, linux-media@vger.kernel.org
+X-Rspamd-Queue-Id: CC02C3E9D6
+X-Spamd-Bar: ----------
+Message-ID-Hash: Z3O3X6JGLANN22TZCHKDV7XQRUYJXNVK
+X-Message-ID-Hash: Z3O3X6JGLANN22TZCHKDV7XQRUYJXNVK
+X-MailFrom: lkp@intel.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: oe-kbuild-all@lists.linux.dev, oxffffaa@gmail.com, kernel@sberdevices.ru, linux-mtd@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] drm:amd:amdgpu: Fix missing bo unlock in failure path
+Subject: [Linaro-mm-sig] Re: [PATCH v1] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/X772VNTW7FFOU5X7ZTBYHPVEGHHGRUKE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Z3O3X6JGLANN22TZCHKDV7XQRUYJXNVK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gTW9uLCBBcHIgMjQsIDIwMjMgYXQgMzowN+KAr0FNIENocmlzdGlhbiBLw7ZuaWcNCjxjaHJp
-c3RpYW4ua29lbmlnQGFtZC5jb20+IHdyb3RlOg0KPg0KPiBBbSAyNC4wNC4yMyB1bSAwNzo1OSBz
-Y2hyaWViIFN1a3J1dCBCZWxsYXJ5Og0KPiA+IHNtYXRjaCB3YXJuaW5nIC0gaW5jb25zaXN0ZW50
-IGhhbmRsaW5nIG9mIGJ1ZmZlciBvYmplY3QgcmVzZXJ2ZQ0KPiA+IGFuZCB1bnJlc2VydmUuDQo+
-ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBTdWtydXQgQmVsbGFyeSA8c3VrcnV0LmJlbGxhcnlAbGlu
-dXguY29tPg0KPg0KPiBGb3Igbm93IHRoYXQgcGF0Y2ggaXMgUmV2aWV3ZWQtYnk6IENocmlzdGlh
-biBLw7ZuaWcNCj4gPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4uDQoNCkFwcGxpZWQuICBUaGFu
-a3MuDQoNCj4NCj4gQnV0IGZvciB0aGUgcmVjb3JkIG1hcHBpbmcvdW5tYXBwaW5nIHRoZSBNUUQg
-bGlrZSB0aGlzIGlzIGEgdmVyeSBiYWQNCj4gaWRlYSBpbiB0aGUgZmlyc3QgcGxhY2UuDQo+DQo+
-IFdlIGNvdWxkIG5lZWQgdG8gc2h1ZmZsZSBtZW1vcnkgYXJvdW5kIGZvciB0aGF0IGR1cmluZyBy
-ZXN1bWUgYW5kIHRoYXQNCj4gaXMgbm90IHNvbWV0aGluZyB3ZSByZWFsbHkgd2FudCB0byBkby4N
-Cg0KV2Ugc2hvdWxkIHByb2JhYmx5IGp1c3Qga2VlcCB0aGUgTVFEcyBtYXBwZWQuICBPbiBzdXNw
-ZW5kIHdlIG5lZWQgdG8NCnNhdmUgb3V0IHRoZSBNUUQgc3RhdGUgc28gaXQgY2FuIGJlIHJlc3Rv
-cmVkIG9uIHJlc3VtZSB3aGVuIHRoZSBNUURzDQphcmUgaW4gdnJhbS4NCg0KQWxleA0KDQo+DQo+
-IENocmlzdGlhbi4NCj4NCj4gPiAtLS0NCj4gPiAgIGRyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1
-L2dmeF92OF8wLmMgfCA0ICsrKy0NCj4gPiAgIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMo
-KyksIDEgZGVsZXRpb24oLSkNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0v
-YW1kL2FtZGdwdS9nZnhfdjhfMC5jIGIvZHJpdmVycy9ncHUvZHJtL2FtZC9hbWRncHUvZ2Z4X3Y4
-XzAuYw0KPiA+IGluZGV4IDI3ODQxNmFjZjA2MC4uNWRlNDRkN2U5MmRlIDEwMDY0NA0KPiA+IC0t
-LSBhL2RyaXZlcnMvZ3B1L2RybS9hbWQvYW1kZ3B1L2dmeF92OF8wLmMNCj4gPiArKysgYi9kcml2
-ZXJzL2dwdS9kcm0vYW1kL2FtZGdwdS9nZnhfdjhfMC5jDQo+ID4gQEAgLTQ2ODYsOCArNDY4Niwx
-MCBAQCBzdGF0aWMgaW50IGdmeF92OF8wX2tpcV9yZXN1bWUoc3RydWN0IGFtZGdwdV9kZXZpY2Ug
-KmFkZXYpDQo+ID4gICAgICAgICAgICAgICByZXR1cm4gcjsNCj4gPg0KPiA+ICAgICAgIHIgPSBh
-bWRncHVfYm9fa21hcChyaW5nLT5tcWRfb2JqLCAmcmluZy0+bXFkX3B0cik7DQo+ID4gLSAgICAg
-aWYgKHVubGlrZWx5KHIgIT0gMCkpDQo+ID4gKyAgICAgaWYgKHVubGlrZWx5KHIgIT0gMCkpIHsN
-Cj4gPiArICAgICAgICAgICAgIGFtZGdwdV9ib191bnJlc2VydmUocmluZy0+bXFkX29iaik7DQo+
-ID4gICAgICAgICAgICAgICByZXR1cm4gcjsNCj4gPiArICAgICB9DQo+ID4NCj4gPiAgICAgICBn
-ZnhfdjhfMF9raXFfaW5pdF9xdWV1ZShyaW5nKTsNCj4gPiAgICAgICBhbWRncHVfYm9fa3VubWFw
-KHJpbmctPm1xZF9vYmopOw0KPg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0Bs
-aXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1t
-LXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+Hi Arseniy,
+
+kernel test robot noticed the following build errors:
+
+[auto build test ERROR on mtd/nand/next]
+[also build test ERROR on linus/master v6.3 next-20230425]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Arseniy-Krasnov/mtd-rawnand-macronix-OTP-access-for-MX30LFxG18AC/20230426-153143
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/mtd/linux.git nand/next
+patch link:    https://lore.kernel.org/r/20230426072455.3887717-1-AVKrasnov%40sberdevices.ru
+patch subject: [PATCH v1] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
+config: m68k-allyesconfig (https://download.01.org/0day-ci/archive/20230426/202304261704.eyrD5KVk-lkp@intel.com/config)
+compiler: m68k-linux-gcc (GCC) 12.1.0
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/intel-lab-lkp/linux/commit/3529f3465e99379489b59c035a8a0506c3756ef4
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Arseniy-Krasnov/mtd-rawnand-macronix-OTP-access-for-MX30LFxG18AC/20230426-153143
+        git checkout 3529f3465e99379489b59c035a8a0506c3756ef4
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=m68k olddefconfig
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=m68k SHELL=/bin/bash drivers/mtd/
+
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
+| Link: https://lore.kernel.org/oe-kbuild-all/202304261704.eyrD5KVk-lkp@intel.com/
+
+All error/warnings (new ones prefixed by >>):
+
+   drivers/mtd/nand/raw/nand_macronix.c: In function '__macronix_30lfxg18ac_rw_otp':
+>> drivers/mtd/nand/raw/nand_macronix.c:384:19: error: implicit declaration of function 'kmalloc'; did you mean 'mm_alloc'? [-Werror=implicit-function-declaration]
+     384 |         dma_buf = kmalloc(MACRONIX_30LFXG18AC_OTP_PAGE_SIZE, GFP_KERNEL);
+         |                   ^~~~~~~
+         |                   mm_alloc
+>> drivers/mtd/nand/raw/nand_macronix.c:384:17: warning: assignment to 'void *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+     384 |         dma_buf = kmalloc(MACRONIX_30LFXG18AC_OTP_PAGE_SIZE, GFP_KERNEL);
+         |                 ^
+>> drivers/mtd/nand/raw/nand_macronix.c:437:9: error: implicit declaration of function 'kfree'; did you mean 'kvfree'? [-Werror=implicit-function-declaration]
+     437 |         kfree(dma_buf);
+         |         ^~~~~
+         |         kvfree
+   cc1: some warnings being treated as errors
+
+
+vim +384 drivers/mtd/nand/raw/nand_macronix.c
+
+   366	
+   367	static int __macronix_30lfxg18ac_rw_otp(struct mtd_info *mtd,
+   368						loff_t offs_in_flash,
+   369						size_t len, size_t *retlen,
+   370						u_char *buf, bool write)
+   371	{
+   372		struct nand_chip *nand;
+   373		size_t bytes_handled;
+   374		unsigned long page;
+   375		off_t offs_in_page;
+   376		void *dma_buf;
+   377		int ret;
+   378	
+   379		/* 'nand_prog/read_page_op()' may use 'buf' as DMA buffer,
+   380		 * so allocate properly aligned memory for it. This is
+   381		 * needed because cross page accesses may lead to unaligned
+   382		 * buffer address for DMA.
+   383		 */
+ > 384		dma_buf = kmalloc(MACRONIX_30LFXG18AC_OTP_PAGE_SIZE, GFP_KERNEL);
+   385		if (!dma_buf)
+   386			return -ENOMEM;
+   387	
+   388		nand = mtd_to_nand(mtd);
+   389		nand_select_target(nand, 0);
+   390	
+   391		ret = macronix_30lfxg18ac_otp_enable(nand);
+   392		if (ret)
+   393			goto out_otp;
+   394	
+   395		page = offs_in_flash;
+   396		/* 'page' will be result of division. */
+   397		offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
+   398		bytes_handled = 0;
+   399	
+   400		while (bytes_handled < len &&
+   401		       page < MACRONIX_30LFXG18AC_OTP_PAGES) {
+   402			size_t bytes_to_handle;
+   403	
+   404			bytes_to_handle = min_t(size_t, len - bytes_handled,
+   405						MACRONIX_30LFXG18AC_OTP_PAGE_SIZE -
+   406						offs_in_page);
+   407	
+   408			if (write) {
+   409				memcpy(dma_buf, &buf[bytes_handled], bytes_to_handle);
+   410				ret = nand_prog_page_op(nand, page, offs_in_page,
+   411							dma_buf, bytes_to_handle);
+   412			} else {
+   413				ret = nand_read_page_op(nand, page, offs_in_page,
+   414							dma_buf, bytes_to_handle);
+   415				if (!ret)
+   416					memcpy(&buf[bytes_handled], dma_buf,
+   417					       bytes_to_handle);
+   418			}
+   419			if (ret)
+   420				goto out_otp;
+   421	
+   422			bytes_handled += bytes_to_handle;
+   423			offs_in_page = 0;
+   424			page++;
+   425		}
+   426	
+   427		*retlen = bytes_handled;
+   428	
+   429	out_otp:
+   430		if (ret)
+   431			dev_err(&mtd->dev, "failed to perform OTP IO: %i\n", ret);
+   432	
+   433		ret = macronix_30lfxg18ac_otp_disable(nand);
+   434		WARN(ret, "failed to leave OTP mode after %s\n",
+   435		     write ? "write" : "read");
+   436		nand_deselect_target(nand);
+ > 437		kfree(dma_buf);
+   438	
+   439		return ret;
+   440	}
+   441	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
