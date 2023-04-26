@@ -2,141 +2,352 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 123406F55FF
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 12:23:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2BD7C6F5603
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 12:23:27 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1DBEC3F630
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 10:23:07 +0000 (UTC)
-Received: from mail-yb1-f178.google.com (mail-yb1-f178.google.com [209.85.219.178])
-	by lists.linaro.org (Postfix) with ESMTPS id 4806D3EC75
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Apr 2023 21:19:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 444A23F952
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 10:23:26 +0000 (UTC)
+Received: from mx.sberdevices.ru (mx.sberdevices.ru [45.89.227.171])
+	by lists.linaro.org (Postfix) with ESMTPS id DD7A33ECC8
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Apr 2023 07:29:50 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20221208 header.b=WI1XsKYM;
-	spf=pass (lists.linaro.org: domain of justinpopo6@gmail.com designates 209.85.219.178 as permitted sender) smtp.mailfrom=justinpopo6@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-yb1-f178.google.com with SMTP id 3f1490d57ef6-b9554ad3721so7453678276.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 24 Apr 2023 14:19:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20221208; t=1682371145; x=1684963145;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=8ELNYGHZIHKIFqJnEo8rrxCvQcGZL8aQd25lTdSNpTU=;
-        b=WI1XsKYMpgoFidFg4IhkX3e7yhAD7vjHTBtPnW2dFXLaRH0nNpnghSEw5/otikrx8T
-         hmY0Ty0T6EnnQ8G/InQB0UUTwbsnO0RnnwZwir5BMQtxj0wcIndwKMJGhJX5US5qQ89r
-         DvI66B6LVvdHu7pKMbiuZfcbCfIUufQ1TjzxqQfB8ybEfByWvL1gzFqTQgF1uURlOAN6
-         zFb5PkwiTJi4KLuiAOF6J6gfquGxErPE0y30MTrNcxS6hztoSqia14YX0zcn6HxroEvG
-         KkdeoxqJP3m9y/KsOmLunn+brG+SGkhYrLClxoLb54KITdHIp/Bj/5A71br/IQcSXrmK
-         5W7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1682371145; x=1684963145;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=8ELNYGHZIHKIFqJnEo8rrxCvQcGZL8aQd25lTdSNpTU=;
-        b=BoLjba4ds/ZuTWXN2gVxZ0gnlzTZx8fGdKOiXw2B8GI1HqFxXN/qxyjmBAgTEBJTTp
-         FewWTKF8SR3MerIn7/ozXNtdZsK1y59OfrVPb1dzV/rSEVUH3DhLeosCLJfzZCBD9HZ0
-         dEXWK7Xc+6+2+WJBtw5ci8DBKLDbjm2gS4Nnj2HAq8xqjwaj9fplpD7io4rpiui3yA1F
-         QxA+7nAZcEAvDRm41Kg82litlBD7EnR/DGGgTsUPk63sSpWvJq8WpKJr76QEWsKLAbiR
-         g11H1VE5+Hg3JG+28FePIw2EkouLsmTYXA/Fo08mbDjFYIeVQ0+2O+87IKCyyt12RoPk
-         wZqA==
-X-Gm-Message-State: AAQBX9ftxx0I70jtXFYsrWnpKkdSYWh9ocAWK17j9MiZMpiJZtOvkUFD
-	2CauF9EbrUZtJXgT1bm1cN9a18xluPwTL1LGnzY=
-X-Google-Smtp-Source: AKy350bIutNAx2s3uim7XhIGk4I/A1SpruAMfqxCi3BtHANN2gnfUfyRu2mDo2WKaDgILlZ4O/PjnkSdWyuqzRO1kL8=
-X-Received: by 2002:a25:ccd6:0:b0:b95:72cf:8c80 with SMTP id
- l205-20020a25ccd6000000b00b9572cf8c80mr12196588ybf.51.1682371144597; Mon, 24
- Apr 2023 14:19:04 -0700 (PDT)
+	dkim=pass header.d=sberdevices.ru header.s=mail header.b="Msu/wEcb";
+	spf=pass (lists.linaro.org: domain of AVKrasnov@sberdevices.ru designates 45.89.227.171 as permitted sender) smtp.mailfrom=AVKrasnov@sberdevices.ru;
+	dmarc=pass (policy=quarantine) header.from=sberdevices.ru
+Received: from s-lin-edge02.sberdevices.ru (localhost [127.0.0.1])
+	by mx.sberdevices.ru (Postfix) with ESMTP id 586EF5FD6E;
+	Wed, 26 Apr 2023 10:29:49 +0300 (MSK)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
+	s=mail; t=1682494189;
+	bh=dHg7xkBb0HnprALeBYDMhRRSgdMSlw6mHB6uPNDkV88=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=Msu/wEcbvYUHe8F7DZlH1U9d7kSCIGKdKqtabrjPgcowqH3dmFdHNEKyHPCcxo55i
+	 ps5J1CqZhwpGN+txNgtF7qxGSKb25ZJvYcBZMvjIPedilZaNk5IRwtYg3hiBHfRhNL
+	 SRLvoM7ENjJHRkQS+vHcb9anIr2TLRi/Vs4MEzESPK1GiKep7nBTeHJJBvAyKSup3v
+	 Y2T76DXCjkpBGw8F7qBnMPeaVSylFev9aF/Kt0F+avTAwHTQvdh+kDoplSWozOEVte
+	 PIrZpJaCSvOEdH4hrWjTIaozJJClqGlFOxT8vdd9+KHbDkhSXXa6wK1y4TrgAwPRxD
+	 rzaxeHPagOvqw==
+Received: from S-MS-EXCH01.sberdevices.ru (S-MS-EXCH01.sberdevices.ru [172.16.1.4])
+	by mx.sberdevices.ru (Postfix) with ESMTP;
+	Wed, 26 Apr 2023 10:29:47 +0300 (MSK)
+From: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
+To: Miquel Raynal <miquel.raynal@bootlin.com>, Richard Weinberger
+	<richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, Sumit Semwal
+	<sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?=
+	<christian.koenig@amd.com>, Arseniy Krasnov <AVKrasnov@sberdevices.ru>
+Date: Wed, 26 Apr 2023 10:24:52 +0300
+Message-ID: <20230426072455.3887717-1-AVKrasnov@sberdevices.ru>
+X-Mailer: git-send-email 2.35.0
 MIME-Version: 1.0
-References: <1681863018-28006-1-git-send-email-justinpopo6@gmail.com>
- <1681863018-28006-4-git-send-email-justinpopo6@gmail.com> <03dadae3-3a89-cdb0-7cd1-591d62735836@gmail.com>
- <932bb2c6-71ce-525f-fbb2-a0a742ee8e12@gmail.com>
-In-Reply-To: <932bb2c6-71ce-525f-fbb2-a0a742ee8e12@gmail.com>
-From: Justin Chen <justinpopo6@gmail.com>
-Date: Mon, 24 Apr 2023 14:18:53 -0700
-Message-ID: <CAJx26kXf0QOvOPRG+nPpJ2rfNcuX68oqejbzOG4awe6feTvMyg@mail.gmail.com>
-To: Florian Fainelli <f.fainelli@gmail.com>
-X-Spamd-Result: default: False [-4.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SUSPICIOUS_RECIPS(1.50)[];
+X-Originating-IP: [172.16.1.6]
+X-ClientProxiedBy: S-MS-EXCH01.sberdevices.ru (172.16.1.4) To
+ S-MS-EXCH01.sberdevices.ru (172.16.1.4)
+X-KSMG-Rule-ID: 4
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Status: not scanned, disabled by settings
+X-KSMG-AntiSpam-Interceptor-Info: not scanned
+X-KSMG-AntiPhishing: not scanned, disabled by settings
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 1.1.2.30, bases: 2023/04/26 04:45:00 #21166225
+X-KSMG-AntiVirus-Status: Clean, skipped
+X-Spamd-Result: default: False [-2.20 / 15.00];
+	RSPAMD_URIBL(4.50)[sberdevices.ru:email,sberdevices.ru:dkim];
+	DWL_DNSWL_HI(-3.50)[sberdevices.ru:dkim];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	RCVD_IN_DNSWL_HI(-0.50)[209.85.219.178:from];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20221208];
+	RCVD_IN_DNSWL_HI(-0.50)[45.89.227.171:from];
+	R_MISSING_CHARSET(0.50)[];
+	R_DKIM_ALLOW(-0.20)[sberdevices.ru:s=mail];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	FREEMAIL_CC(0.00)[gmail.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,broadcom.com,davemloft.net,google.com,kernel.org,redhat.com,linaro.org,lunn.ch,armlinux.org.uk,amd.com];
-	NEURAL_HAM(-0.00)[-0.996];
-	TAGGED_RCPT(0.00)[dt];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.178:from];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	BAD_REP_POLICIES(0.10)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	HAS_XOIP(0.00)[];
 	ARC_NA(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_COUNT_ONE(0.00)[1];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	ASN(0.00)[asn:208677, ipnet:45.89.224.0/22, country:RU];
+	DKIM_TRACE(0.00)[sberdevices.ru:+];
+	R_SPF_ALLOW(0.00)[+ip4:45.89.227.171];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,sberdevices.ru,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	DMARC_POLICY_ALLOW(0.00)[sberdevices.ru,quarantine];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[]
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4806D3EC75
-X-Spamd-Bar: ---
-X-MailFrom: justinpopo6@gmail.com
+X-Rspamd-Queue-Id: DD7A33ECC8
+X-Spamd-Bar: --
+X-MailFrom: AVKrasnov@sberdevices.ru
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: CKMW7A46XEOYRVEYVTI6GZMWKGIDOZY4
-X-Message-ID-Hash: CKMW7A46XEOYRVEYVTI6GZMWKGIDOZY4
+Message-ID-Hash: N4KYA62QVOZT4IMDTUSJSOFMNS524J4U
+X-Message-ID-Hash: N4KYA62QVOZT4IMDTUSJSOFMNS524J4U
 X-Mailman-Approved-At: Wed, 03 May 2023 10:17:46 +0000
-CC: Heiner Kallweit <hkallweit1@gmail.com>, netdev@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, bcm-kernel-feedback-list@broadcom.com, justin.chen@broadcom.com, davem@davemloft.net, edumazet@google.com, kuba@kernel.org, pabeni@redhat.com, robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, opendmb@gmail.com, andrew@lunn.ch, linux@armlinux.org.uk, richardcochran@gmail.com, sumit.semwal@linaro.org, christian.koenig@amd.com
+CC: oxffffaa@gmail.com, kernel@sberdevices.ru, linux-mtd@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH net-next 3/6] net: bcmasp: Add support for ASP2.0 Ethernet controller
+Subject: [Linaro-mm-sig] [PATCH v1] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CKMW7A46XEOYRVEYVTI6GZMWKGIDOZY4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/N4KYA62QVOZT4IMDTUSJSOFMNS524J4U/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gV2VkLCBBcHIgMTksIDIwMjMgYXQgOTozM+KAr0FNIEZsb3JpYW4gRmFpbmVsbGkgPGYuZmFp
-bmVsbGlAZ21haWwuY29tPiB3cm90ZToNCj4NCj4gT24gNC8xOC8yMyAyMzozNSwgSGVpbmVyIEth
-bGx3ZWl0IHdyb3RlOg0KPiA+IE9uIDE5LjA0LjIwMjMgMDI6MTAsIEp1c3RpbiBDaGVuIHdyb3Rl
-Og0KPiA+PiBBZGQgc3VwcG9ydCBmb3IgdGhlIEJyb2FkY29tIEFTUCAyLjAgRXRoZXJuZXQgY29u
-dHJvbGxlciB3aGljaCBpcyBmaXJzdA0KPiA+PiBpbnRyb2R1Y2VkIHdpdGggNzIxNjUuIFRoaXMg
-Y29udHJvbGxlciBmZWF0dXJlcyB0d28gZGlzdGluY3QgRXRoZXJuZXQNCj4gPj4gcG9ydHMgdGhh
-dCBjYW4gYmUgaW5kZXBlbmRlbnRseSBvcGVyYXRlZC4NCj4gPj4NCj4gPj4gVGhpcyBwYXRjaCBz
-dXBwb3J0czoNCj4gW3NuaXBdDQo+ID4+ICsgICAgaW50Zi0+dHhfc3BiX2luZGV4ID0gc3BiX2lu
-ZGV4Ow0KPiA+PiArICAgIGludGYtPnR4X3NwYl9kbWFfdmFsaWQgPSB2YWxpZDsNCj4gPj4gKyAg
-ICBiY21hc3BfaW50Zl90eF93cml0ZShpbnRmLCBpbnRmLT50eF9zcGJfZG1hX3ZhbGlkKTsNCj4g
-Pj4gKw0KPiA+PiArICAgIGlmICh0eF9zcGJfcmluZ19mdWxsKGludGYsIE1BWF9TS0JfRlJBR1Mg
-KyAxKSkNCj4gPj4gKyAgICAgICAgICAgIG5ldGlmX3N0b3BfcXVldWUoZGV2KTsNCj4gPj4gKw0K
-PiA+DQo+ID4gSGVyZSBpdCBtYXkgYmUgYmV0dGVyIHRvIHVzZSB0aGUgbmV3IG1hY3JvcyBmcm9t
-IGluY2x1ZGUvbmV0L25ldGRldl9xdWV1ZXMuaC4NCj4gPiBJdCBzZWVtcyB5b3VyIGNvZGUgKHRv
-Z2V0aGVyIHdpdGggdGhlIHJlbGF0ZWQgcGFydCBpbiB0eF9wb2xsKSBkb2Vzbid0IGNvbnNpZGVy
-DQo+ID4gdGhlIHF1ZXVlIHJlc3RhcnQgY2FzZS4NCj4gPiBJbiBhZGRpdGlvbiB5b3Ugc2hvdWxk
-IGNoZWNrIHdoZXRoZXIgdXNpbmcgUkVBRF9PTkNFKCkvV1JJVEVfT05DRSgpIGlzIG5lZWRlZCwN
-Cj4gPiBlLmcuIGluIHJpbmdfZnVsbCgpLg0KPg0KPiBUaGFua3MgSGVpbmVyLiBDYW4geW91IHRy
-aW0gdGhlIHBhcnRzIHlvdSBhcmUgbm90IHF1b3Rpbmcgb3RoZXJ3aXNlIG9uZQ0KPiBoYXMgdG8g
-c2Nyb2xsIGFsbCB0aGUgd2F5IGRvd24gdG8gd2hlcmUgeW91IHJlc3BvbmRlZC4gVGhhbmtzIQ0K
-PiAtLQ0KPiBGbG9yaWFuDQo+DQoNCkhlbGxvIEhlaW5lciwNCg0KVGhlIGltcGxlbWVudGF0aW9u
-IGlzIGEgbG9ja2VkIHNpbmdsZSBxdWV1ZSB4bWl0LiBOb3Qgc3VyZSBob3cNCm5ldGRldl9xdWV1
-ZXMuaCBmaXRzIGludG8gdGhlIHBpY3R1cmUgaGVyZS4gSSBiZWxpZXZlIEkgYW0gaGFuZGxpbmcN
-CnRoZSBxdWV1ZSByZXN0YXJ0IGhlcmUuDQorc3RhdGljIGludCBiY21hc3BfdHhfcG9sbChzdHJ1
-Y3QgbmFwaV9zdHJ1Y3QgKm5hcGksIGludCBidWRnZXQpDQorew0KW3NuaXBdDQorIGlmIChyZWxl
-YXNlZCkNCisgbmV0aWZfd2FrZV9xdWV1ZShpbnRmLT5uZGV2KTsNCisNCisgcmV0dXJuIDA7DQor
-fQ0KTGV0IG1lIGtub3cgaWYgSSBhbSBtaXN1bmRlcnN0YW5kaW5nIHRoZSBmZWVkYmFjayBoZXJl
-Lg0KDQpUaGFua3MsDQpKdXN0aW4NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdA
-bGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1t
-bS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+This adds support for OTP area access on MX30LFxG18AC chip series.
+
+Signed-off-by: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
+---
+ drivers/mtd/nand/raw/nand_macronix.c | 212 +++++++++++++++++++++++++++
+ 1 file changed, 212 insertions(+)
+
+diff --git a/drivers/mtd/nand/raw/nand_macronix.c b/drivers/mtd/nand/raw/nand_macronix.c
+index 1472f925f386..c0d12979933a 100644
+--- a/drivers/mtd/nand/raw/nand_macronix.c
++++ b/drivers/mtd/nand/raw/nand_macronix.c
+@@ -31,6 +31,20 @@
+ 
+ #define MXIC_CMD_POWER_DOWN 0xB9
+ 
++#define ONFI_FEATURE_ADDR_30LFXG18AC_OTP	0x90
++#define MACRONIX_30LFXG18AC_OTP_START_PAGE	0
++#define MACRONIX_30LFXG18AC_OTP_PAGES		30
++#define MACRONIX_30LFXG18AC_OTP_PAGE_SIZE	2112
++#define MACRONIX_30LFXG18AC_OTP_START_BYTE	\
++	(MACRONIX_30LFXG18AC_OTP_START_PAGE *	\
++	 MACRONIX_30LFXG18AC_OTP_PAGE_SIZE)
++#define MACRONIX_30LFXG18AC_OTP_SIZE_BYTES	\
++	(MACRONIX_30LFXG18AC_OTP_PAGES *	\
++	 MACRONIX_30LFXG18AC_OTP_PAGE_SIZE)
++
++#define MACRONIX_30LFXG18AC_OTP_EN		BIT(0)
++#define MACRONIX_30LFXG18AC_OTP_LOCKED		BIT(1)
++
+ struct nand_onfi_vendor_macronix {
+ 	u8 reserved;
+ 	u8 reliability_func;
+@@ -316,6 +330,203 @@ static void macronix_nand_deep_power_down_support(struct nand_chip *chip)
+ 	chip->ops.resume = mxic_nand_resume;
+ }
+ 
++static int macronix_30lfxg18ac_get_otp_info(struct mtd_info *mtd, size_t len,
++					    size_t *retlen,
++					    struct otp_info *buf)
++{
++	if (len < sizeof(*buf))
++		return -EINVAL;
++
++	/* Don't know how to check that OTP is locked. */
++	buf->locked = 0;
++	buf->start = MACRONIX_30LFXG18AC_OTP_START_BYTE;
++	buf->length = MACRONIX_30LFXG18AC_OTP_SIZE_BYTES;
++
++	*retlen = sizeof(*buf);
++
++	return 0;
++}
++
++static int macronix_30lfxg18ac_otp_enable(struct nand_chip *nand)
++{
++	uint8_t feature_buf[ONFI_SUBFEATURE_PARAM_LEN] = { 0 };
++
++	feature_buf[0] = MACRONIX_30LFXG18AC_OTP_EN;
++	return nand_set_features(nand, ONFI_FEATURE_ADDR_30LFXG18AC_OTP,
++				 feature_buf);
++}
++
++static int macronix_30lfxg18ac_otp_disable(struct nand_chip *nand)
++{
++	uint8_t feature_buf[ONFI_SUBFEATURE_PARAM_LEN] = { 0 };
++
++	return nand_set_features(nand, ONFI_FEATURE_ADDR_30LFXG18AC_OTP,
++				 feature_buf);
++}
++
++static int __macronix_30lfxg18ac_rw_otp(struct mtd_info *mtd,
++					loff_t offs_in_flash,
++					size_t len, size_t *retlen,
++					u_char *buf, bool write)
++{
++	struct nand_chip *nand;
++	size_t bytes_handled;
++	unsigned long page;
++	off_t offs_in_page;
++	void *dma_buf;
++	int ret;
++
++	/* 'nand_prog/read_page_op()' may use 'buf' as DMA buffer,
++	 * so allocate properly aligned memory for it. This is
++	 * needed because cross page accesses may lead to unaligned
++	 * buffer address for DMA.
++	 */
++	dma_buf = kmalloc(MACRONIX_30LFXG18AC_OTP_PAGE_SIZE, GFP_KERNEL);
++	if (!dma_buf)
++		return -ENOMEM;
++
++	nand = mtd_to_nand(mtd);
++	nand_select_target(nand, 0);
++
++	ret = macronix_30lfxg18ac_otp_enable(nand);
++	if (ret)
++		goto out_otp;
++
++	page = offs_in_flash;
++	/* 'page' will be result of division. */
++	offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
++	bytes_handled = 0;
++
++	while (bytes_handled < len &&
++	       page < MACRONIX_30LFXG18AC_OTP_PAGES) {
++		size_t bytes_to_handle;
++
++		bytes_to_handle = min_t(size_t, len - bytes_handled,
++					MACRONIX_30LFXG18AC_OTP_PAGE_SIZE -
++					offs_in_page);
++
++		if (write) {
++			memcpy(dma_buf, &buf[bytes_handled], bytes_to_handle);
++			ret = nand_prog_page_op(nand, page, offs_in_page,
++						dma_buf, bytes_to_handle);
++		} else {
++			ret = nand_read_page_op(nand, page, offs_in_page,
++						dma_buf, bytes_to_handle);
++			if (!ret)
++				memcpy(&buf[bytes_handled], dma_buf,
++				       bytes_to_handle);
++		}
++		if (ret)
++			goto out_otp;
++
++		bytes_handled += bytes_to_handle;
++		offs_in_page = 0;
++		page++;
++	}
++
++	*retlen = bytes_handled;
++
++out_otp:
++	if (ret)
++		dev_err(&mtd->dev, "failed to perform OTP IO: %i\n", ret);
++
++	ret = macronix_30lfxg18ac_otp_disable(nand);
++	WARN(ret, "failed to leave OTP mode after %s\n",
++	     write ? "write" : "read");
++	nand_deselect_target(nand);
++	kfree(dma_buf);
++
++	return ret;
++}
++
++static int macronix_30lfxg18ac_write_otp(struct mtd_info *mtd, loff_t to,
++					 size_t len, size_t *rlen,
++					 const u_char *buf)
++{
++	return __macronix_30lfxg18ac_rw_otp(mtd, to, len, rlen, (u_char *)buf,
++					    true);
++}
++
++static int macronix_30lfxg18ac_read_otp(struct mtd_info *mtd, loff_t from,
++					size_t len, size_t *rlen,
++					u_char *buf)
++{
++	return __macronix_30lfxg18ac_rw_otp(mtd, from, len, rlen, buf, false);
++}
++
++static int macronix_30lfxg18ac_lock_otp(struct mtd_info *mtd, loff_t from,
++					size_t len)
++{
++	uint8_t feature_buf[ONFI_SUBFEATURE_PARAM_LEN] = { 0 };
++	struct nand_chip *nand;
++	int ret;
++
++	if (from != MACRONIX_30LFXG18AC_OTP_START_BYTE ||
++	    len != MACRONIX_30LFXG18AC_OTP_SIZE_BYTES)
++		return -EINVAL;
++
++	dev_dbg(&mtd->dev, "locking OTP\n");
++
++	nand = mtd_to_nand(mtd);
++	nand_select_target(nand, 0);
++
++	feature_buf[0] = MACRONIX_30LFXG18AC_OTP_EN |
++			 MACRONIX_30LFXG18AC_OTP_LOCKED;
++	ret = nand_set_features(nand, ONFI_FEATURE_ADDR_30LFXG18AC_OTP,
++				feature_buf);
++	if (ret) {
++		dev_err(&mtd->dev,
++			"failed to lock OTP (set features): %i\n", ret);
++		nand_deselect_target(nand);
++		return ret;
++	}
++
++	/* Do dummy page prog with zero address. */
++	feature_buf[0] = 0;
++	ret = nand_prog_page_op(nand, 0, 0, feature_buf, 1);
++	if (ret)
++		dev_err(&mtd->dev,
++			"failed to lock OTP (page prog): %i\n", ret);
++
++	ret = macronix_30lfxg18ac_otp_disable(nand);
++	WARN(ret, "failed to leave OTP mode after lock\n");
++
++	nand_deselect_target(nand);
++
++	return ret;
++}
++
++static void macronix_nand_setup_otp(struct nand_chip *chip)
++{
++	static const char * const supported_otp_models[] = {
++		"MX30LF1G18AC",
++		"MX30LF2G18AC",
++		"MX30LF4G18AC",
++	};
++	struct mtd_info *mtd;
++
++	if (!chip->parameters.supports_set_get_features)
++		return;
++
++	if (match_string(supported_otp_models,
++			 ARRAY_SIZE(supported_otp_models),
++			 chip->parameters.model) < 0)
++		return;
++
++	bitmap_set(chip->parameters.get_feature_list,
++		   ONFI_FEATURE_ADDR_30LFXG18AC_OTP, 1);
++	bitmap_set(chip->parameters.set_feature_list,
++		   ONFI_FEATURE_ADDR_30LFXG18AC_OTP, 1);
++
++	mtd = nand_to_mtd(chip);
++	mtd->_get_fact_prot_info = macronix_30lfxg18ac_get_otp_info;
++	mtd->_read_fact_prot_reg = macronix_30lfxg18ac_read_otp;
++	mtd->_get_user_prot_info = macronix_30lfxg18ac_get_otp_info;
++	mtd->_read_user_prot_reg = macronix_30lfxg18ac_read_otp;
++	mtd->_write_user_prot_reg = macronix_30lfxg18ac_write_otp;
++	mtd->_lock_user_prot_reg = macronix_30lfxg18ac_lock_otp;
++}
++
+ static int macronix_nand_init(struct nand_chip *chip)
+ {
+ 	if (nand_is_slc(chip))
+@@ -325,6 +536,7 @@ static int macronix_nand_init(struct nand_chip *chip)
+ 	macronix_nand_onfi_init(chip);
+ 	macronix_nand_block_protection_support(chip);
+ 	macronix_nand_deep_power_down_support(chip);
++	macronix_nand_setup_otp(chip);
+ 
+ 	return 0;
+ }
+-- 
+2.35.0
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
