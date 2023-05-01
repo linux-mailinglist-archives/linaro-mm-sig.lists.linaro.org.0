@@ -2,95 +2,96 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD36E6F298D
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 30 Apr 2023 18:49:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 81E636F5612
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 12:25:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 748E53F953
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 30 Apr 2023 16:49:51 +0000 (UTC)
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by lists.linaro.org (Postfix) with ESMTPS id 2CD373EC1E
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 30 Apr 2023 16:49:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 966F13F952
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  3 May 2023 10:25:09 +0000 (UTC)
+Received: from mx.sberdevices.ru (mx.sberdevices.ru [45.89.227.171])
+	by lists.linaro.org (Postfix) with ESMTPS id 0A6983ED5E
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  1 May 2023 13:15:08 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=K7bWVqp7;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.55.52.43 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1682873386; x=1714409386;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=/4lkaS66d7RfmGVcMxrZaN3B5HIVuHYecoGKid+YWlo=;
-  b=K7bWVqp7L6mH+mSsWjKnoWDxmm4xXyTYmsFVCcCi+qYAgibYZjCXH4Oj
-   gmFWJo6wWt2zjilqAZnIZl0CecD2Ez6wwZRF9MzGlb2ab1phVEwAG7nU4
-   2jRkwA8EHqfA6eMi4i3LUfaflVadP7UfNbPR8utl7qbfUxnpo10z/DR7r
-   sdsvlWNJvn6um0Rj9ycqCG5/tsb1vRr/+6JKNePRrQp487kS0EKYHif00
-   B0t/94OsUvbnsc/QtF6MB625OmlRsEpl6CUlJrWWgO/29t9FOZEtvLFr7
-   MW0wOPsqesHqYJSw5A/hPWTkS83fP3t64CI5ynKcLHi9bn+/K3UvqWOt6
-   Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10696"; a="434351242"
-X-IronPort-AV: E=Sophos;i="5.99,239,1677571200";
-   d="scan'208";a="434351242"
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 30 Apr 2023 09:49:44 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10696"; a="695545916"
-X-IronPort-AV: E=Sophos;i="5.99,239,1677571200";
-   d="scan'208";a="695545916"
-Received: from lkp-server01.sh.intel.com (HELO e3434d64424d) ([10.239.97.150])
-  by orsmga002.jf.intel.com with ESMTP; 30 Apr 2023 09:49:41 -0700
-Received: from kbuild by e3434d64424d with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1ptAF2-000033-0v;
-	Sun, 30 Apr 2023 16:49:40 +0000
-Date: Mon, 1 May 2023 00:49:13 +0800
-From: kernel test robot <lkp@intel.com>
-To: Arseniy Krasnov <AVKrasnov@sberdevices.ru>,
-	Miquel Raynal <miquel.raynal@bootlin.com>,
-	Richard Weinberger <richard@nod.at>,
-	Vignesh Raghavendra <vigneshr@ti.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <202305010034.uh2F9KeO-lkp@intel.com>
-References: <20230426172520.2004711-1-AVKrasnov@sberdevices.ru>
+	dkim=pass header.d=sberdevices.ru header.s=mail header.b=CKSDHDYI;
+	spf=pass (lists.linaro.org: domain of AVKrasnov@sberdevices.ru designates 45.89.227.171 as permitted sender) smtp.mailfrom=AVKrasnov@sberdevices.ru;
+	dmarc=pass (policy=quarantine) header.from=sberdevices.ru
+Received: from s-lin-edge02.sberdevices.ru (localhost [127.0.0.1])
+	by mx.sberdevices.ru (Postfix) with ESMTP id 526A65FD14;
+	Mon,  1 May 2023 16:15:06 +0300 (MSK)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
+	s=mail; t=1682946906;
+	bh=CLzqYTcujARq4NJQtsx22VCX1wovz6DLx4a2PMX1RH8=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=CKSDHDYIbx0CfnsXKFUMJ5n8v+4d/FVIeHvuvwyL9N7UeFQgBDae/Hu5qkUcZ9LrI
+	 vteyRI/tMxuH3ENgqFy3aoigHck4Pn2gFaxUKGG7hgnxNvW8HUB4ZbumbZHlRpR3q+
+	 LCmtT8hbloPhJSGIWZMOpOm+RD7kG4vM2sKzXphpFYipJCf22WP9ZFWioRI1n07her
+	 W6KZjpqxGI06GRKi5mLKCECRuz9WvZBa+cWhmpC6v+njFoo12ZUhk5LMPVUuTBcnfK
+	 qgrsYTPeqFssXVu/zE4Wi/OKOs0EMaxvJ3yGiBSH8BGO/hQt2J4U3q0SXagupWL21s
+	 73jyj1w6SNqtw==
+Received: from S-MS-EXCH01.sberdevices.ru (S-MS-EXCH01.sberdevices.ru [172.16.1.4])
+	by mx.sberdevices.ru (Postfix) with ESMTP;
+	Mon,  1 May 2023 16:15:03 +0300 (MSK)
+From: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
+To: Miquel Raynal <miquel.raynal@bootlin.com>, Richard Weinberger
+	<richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, Sumit Semwal
+	<sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?=
+	<christian.koenig@amd.com>, Arseniy Krasnov <AVKrasnov@sberdevices.ru>
+Date: Mon, 1 May 2023 16:10:21 +0300
+Message-ID: <20230501131025.754958-1-AVKrasnov@sberdevices.ru>
+X-Mailer: git-send-email 2.35.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230426172520.2004711-1-AVKrasnov@sberdevices.ru>
-X-Spamd-Result: default: False [-6.00 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+X-Originating-IP: [172.16.1.6]
+X-ClientProxiedBy: S-MS-EXCH02.sberdevices.ru (172.16.1.5) To
+ S-MS-EXCH01.sberdevices.ru (172.16.1.4)
+X-KSMG-Rule-ID: 4
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Status: not scanned, disabled by settings
+X-KSMG-AntiSpam-Interceptor-Info: not scanned
+X-KSMG-AntiPhishing: not scanned, disabled by settings
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 1.1.2.30, bases: 2023/05/01 09:34:00 #21199322
+X-KSMG-AntiVirus-Status: Clean, skipped
+X-Spamd-Result: default: False [3.00 / 15.00];
+	RSPAMD_URIBL(4.50)[sberdevices.ru:email,sberdevices.ru:dkim];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:192.55.52.43/32];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_MISSING_CHARSET(0.50)[];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
+	BAD_REP_POLICIES(0.10)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	DMARC_POLICY_ALLOW(0.00)[sberdevices.ru,quarantine];
 	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[lists.linux.dev,gmail.com,sberdevices.ru,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	ASN(0.00)[asn:4983, ipnet:192.55.52.0/24, country:US];
-	RCVD_COUNT_THREE(0.00)[3];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:208677, ipnet:45.89.224.0/22, country:RU];
+	FREEMAIL_CC(0.00)[gmail.com,sberdevices.ru,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_TRACE(0.00)[sberdevices.ru:+];
+	RCVD_IN_DNSWL_FAIL(0.00)[45.89.227.171:server fail];
+	NEURAL_SPAM(0.00)[0.882];
+	HAS_XOIP(0.00)[];
+	R_DKIM_ALLOW(0.00)[sberdevices.ru:s=mail];
+	ARC_NA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
 	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[]
+	R_SPF_ALLOW(0.00)[+ip4:45.89.227.171];
+	TO_DN_SOME(0.00)[];
+	URIBL_BLOCKED(0.00)[mx.sberdevices.ru:rdns,mx.sberdevices.ru:helo,sberdevices.ru:email,sberdevices.ru:dkim,free-electrons.com:email];
+	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 2CD373EC1E
-X-Spamd-Bar: ------
-Message-ID-Hash: P47TPIN7SJWF6GWFK5NIFHBXS5OO6GBG
-X-Message-ID-Hash: P47TPIN7SJWF6GWFK5NIFHBXS5OO6GBG
-X-MailFrom: lkp@intel.com
+X-Spam-Level: ***
+X-Rspamd-Queue-Id: 0A6983ED5E
+X-Spamd-Bar: +++
+X-MailFrom: AVKrasnov@sberdevices.ru
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, oxffffaa@gmail.com, kernel@sberdevices.ru, linux-mtd@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: 64DVLJIJ7WO2PSRUSIJEBXIUJOG3ZWCA
+X-Message-ID-Hash: 64DVLJIJ7WO2PSRUSIJEBXIUJOG3ZWCA
+X-Mailman-Approved-At: Wed, 03 May 2023 10:18:36 +0000
+CC: oxffffaa@gmail.com, kernel@sberdevices.ru, linux-mtd@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
+Subject: [Linaro-mm-sig] [PATCH v3] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/P47TPIN7SJWF6GWFK5NIFHBXS5OO6GBG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/64DVLJIJ7WO2PSRUSIJEBXIUJOG3ZWCA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -100,122 +101,268 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi Arseniy,
+This adds support for OTP area access on MX30LFxG18AC chip series.
 
-kernel test robot noticed the following build errors:
+Changelog:
+  v1 -> v2:
+  * Add slab.h include due to kernel test robot error.
+  v2 -> v3:
+  * Use 'uint64_t' as input argument for 'do_div()' instead
+    of 'unsigned long' due to kernel test robot error.
 
-[auto build test ERROR on mtd/nand/next]
-[also build test ERROR on linus/master v6.3 next-20230428]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Signed-off-by: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
+---
+ drivers/mtd/nand/raw/nand_macronix.c | 213 +++++++++++++++++++++++++++
+ 1 file changed, 213 insertions(+)
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Arseniy-Krasnov/mtd-rawnand-macronix-OTP-access-for-MX30LFxG18AC/20230427-013216
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/mtd/linux.git nand/next
-patch link:    https://lore.kernel.org/r/20230426172520.2004711-1-AVKrasnov%40sberdevices.ru
-patch subject: [PATCH v2] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
-config: sparc-randconfig-c042-20230430 (https://download.01.org/0day-ci/archive/20230501/202305010034.uh2F9KeO-lkp@intel.com/config)
-compiler: sparc-linux-gcc (GCC) 12.1.0
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://github.com/intel-lab-lkp/linux/commit/923eca7325935e1120923aeca0177cc0acc61475
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Arseniy-Krasnov/mtd-rawnand-macronix-OTP-access-for-MX30LFxG18AC/20230427-013216
-        git checkout 923eca7325935e1120923aeca0177cc0acc61475
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=sparc olddefconfig
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.1.0 make.cross W=1 O=build_dir ARCH=sparc SHELL=/bin/bash drivers/mtd/nand/raw/
-
-If you fix the issue, kindly add following tag where applicable
-| Reported-by: kernel test robot <lkp@intel.com>
-| Link: https://lore.kernel.org/oe-kbuild-all/202305010034.uh2F9KeO-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   In file included from ./arch/sparc/include/generated/asm/div64.h:1,
-                    from include/linux/math.h:6,
-                    from include/linux/math64.h:6,
-                    from include/linux/time64.h:5,
-                    from include/linux/restart_block.h:10,
-                    from include/linux/thread_info.h:14,
-                    from include/asm-generic/preempt.h:5,
-                    from ./arch/sparc/include/generated/asm/preempt.h:1,
-                    from include/linux/preempt.h:78,
-                    from include/linux/spinlock.h:56,
-                    from include/linux/mmzone.h:8,
-                    from include/linux/gfp.h:7,
-                    from include/linux/slab.h:15,
-                    from drivers/mtd/nand/raw/nand_macronix.c:9:
-   drivers/mtd/nand/raw/nand_macronix.c: In function '__macronix_30lfxg18ac_rw_otp':
-   include/asm-generic/div64.h:222:35: warning: comparison of distinct pointer types lacks a cast
-     222 |         (void)(((typeof((n)) *)0) == ((uint64_t *)0));  \
-         |                                   ^~
-   drivers/mtd/nand/raw/nand_macronix.c:398:24: note: in expansion of macro 'do_div'
-     398 |         offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
-         |                        ^~~~~~
-   In file included from include/linux/build_bug.h:5,
-                    from include/linux/container_of.h:5,
-                    from include/linux/list.h:5,
-                    from include/linux/preempt.h:11:
-   include/asm-generic/div64.h:234:32: warning: right shift count >= width of type [-Wshift-count-overflow]
-     234 |         } else if (likely(((n) >> 32) == 0)) {          \
-         |                                ^~
-   include/linux/compiler.h:77:45: note: in definition of macro 'likely'
-      77 | # define likely(x)      __builtin_expect(!!(x), 1)
-         |                                             ^
-   drivers/mtd/nand/raw/nand_macronix.c:398:24: note: in expansion of macro 'do_div'
-     398 |         offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
-         |                        ^~~~~~
->> include/asm-generic/div64.h:238:36: error: passing argument 1 of '__div64_32' from incompatible pointer type [-Werror=incompatible-pointer-types]
-     238 |                 __rem = __div64_32(&(n), __base);       \
-         |                                    ^~~~
-         |                                    |
-         |                                    long unsigned int *
-   drivers/mtd/nand/raw/nand_macronix.c:398:24: note: in expansion of macro 'do_div'
-     398 |         offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
-         |                        ^~~~~~
-   include/asm-generic/div64.h:213:38: note: expected 'uint64_t *' {aka 'long long unsigned int *'} but argument is of type 'long unsigned int *'
-     213 | extern uint32_t __div64_32(uint64_t *dividend, uint32_t divisor);
-         |                            ~~~~~~~~~~^~~~~~~~
-   cc1: some warnings being treated as errors
-
-
-vim +/__div64_32 +238 include/asm-generic/div64.h
-
-^1da177e4c3f415 Linus Torvalds     2005-04-16  215  
-^1da177e4c3f415 Linus Torvalds     2005-04-16  216  /* The unnecessary pointer compare is there
-^1da177e4c3f415 Linus Torvalds     2005-04-16  217   * to check for type safety (n must be 64bit)
-^1da177e4c3f415 Linus Torvalds     2005-04-16  218   */
-^1da177e4c3f415 Linus Torvalds     2005-04-16  219  # define do_div(n,base) ({				\
-^1da177e4c3f415 Linus Torvalds     2005-04-16  220  	uint32_t __base = (base);			\
-^1da177e4c3f415 Linus Torvalds     2005-04-16  221  	uint32_t __rem;					\
-^1da177e4c3f415 Linus Torvalds     2005-04-16  222  	(void)(((typeof((n)) *)0) == ((uint64_t *)0));	\
-911918aa7ef6f86 Nicolas Pitre      2015-11-02  223  	if (__builtin_constant_p(__base) &&		\
-911918aa7ef6f86 Nicolas Pitre      2015-11-02  224  	    is_power_of_2(__base)) {			\
-911918aa7ef6f86 Nicolas Pitre      2015-11-02  225  		__rem = (n) & (__base - 1);		\
-911918aa7ef6f86 Nicolas Pitre      2015-11-02  226  		(n) >>= ilog2(__base);			\
-c747ce4706190ef Geert Uytterhoeven 2021-08-11  227  	} else if (__builtin_constant_p(__base) &&	\
-461a5e51060c93f Nicolas Pitre      2015-10-30  228  		   __base != 0) {			\
-461a5e51060c93f Nicolas Pitre      2015-10-30  229  		uint32_t __res_lo, __n_lo = (n);	\
-461a5e51060c93f Nicolas Pitre      2015-10-30  230  		(n) = __div64_const32(n, __base);	\
-461a5e51060c93f Nicolas Pitre      2015-10-30  231  		/* the remainder can be computed with 32-bit regs */ \
-461a5e51060c93f Nicolas Pitre      2015-10-30  232  		__res_lo = (n);				\
-461a5e51060c93f Nicolas Pitre      2015-10-30  233  		__rem = __n_lo - __res_lo * __base;	\
-911918aa7ef6f86 Nicolas Pitre      2015-11-02 @234  	} else if (likely(((n) >> 32) == 0)) {		\
-^1da177e4c3f415 Linus Torvalds     2005-04-16  235  		__rem = (uint32_t)(n) % __base;		\
-^1da177e4c3f415 Linus Torvalds     2005-04-16  236  		(n) = (uint32_t)(n) / __base;		\
-c747ce4706190ef Geert Uytterhoeven 2021-08-11  237  	} else {					\
-^1da177e4c3f415 Linus Torvalds     2005-04-16 @238  		__rem = __div64_32(&(n), __base);	\
-c747ce4706190ef Geert Uytterhoeven 2021-08-11  239  	}						\
-^1da177e4c3f415 Linus Torvalds     2005-04-16  240  	__rem;						\
-^1da177e4c3f415 Linus Torvalds     2005-04-16  241   })
-^1da177e4c3f415 Linus Torvalds     2005-04-16  242  
-
+diff --git a/drivers/mtd/nand/raw/nand_macronix.c b/drivers/mtd/nand/raw/nand_macronix.c
+index 1472f925f386..2301f990678e 100644
+--- a/drivers/mtd/nand/raw/nand_macronix.c
++++ b/drivers/mtd/nand/raw/nand_macronix.c
+@@ -6,6 +6,7 @@
+  * Author: Boris Brezillon <boris.brezillon@free-electrons.com>
+  */
+ 
++#include <linux/slab.h>
+ #include "linux/delay.h"
+ #include "internals.h"
+ 
+@@ -31,6 +32,20 @@
+ 
+ #define MXIC_CMD_POWER_DOWN 0xB9
+ 
++#define ONFI_FEATURE_ADDR_30LFXG18AC_OTP	0x90
++#define MACRONIX_30LFXG18AC_OTP_START_PAGE	0
++#define MACRONIX_30LFXG18AC_OTP_PAGES		30
++#define MACRONIX_30LFXG18AC_OTP_PAGE_SIZE	2112
++#define MACRONIX_30LFXG18AC_OTP_START_BYTE	\
++	(MACRONIX_30LFXG18AC_OTP_START_PAGE *	\
++	 MACRONIX_30LFXG18AC_OTP_PAGE_SIZE)
++#define MACRONIX_30LFXG18AC_OTP_SIZE_BYTES	\
++	(MACRONIX_30LFXG18AC_OTP_PAGES *	\
++	 MACRONIX_30LFXG18AC_OTP_PAGE_SIZE)
++
++#define MACRONIX_30LFXG18AC_OTP_EN		BIT(0)
++#define MACRONIX_30LFXG18AC_OTP_LOCKED		BIT(1)
++
+ struct nand_onfi_vendor_macronix {
+ 	u8 reserved;
+ 	u8 reliability_func;
+@@ -316,6 +331,203 @@ static void macronix_nand_deep_power_down_support(struct nand_chip *chip)
+ 	chip->ops.resume = mxic_nand_resume;
+ }
+ 
++static int macronix_30lfxg18ac_get_otp_info(struct mtd_info *mtd, size_t len,
++					    size_t *retlen,
++					    struct otp_info *buf)
++{
++	if (len < sizeof(*buf))
++		return -EINVAL;
++
++	/* Don't know how to check that OTP is locked. */
++	buf->locked = 0;
++	buf->start = MACRONIX_30LFXG18AC_OTP_START_BYTE;
++	buf->length = MACRONIX_30LFXG18AC_OTP_SIZE_BYTES;
++
++	*retlen = sizeof(*buf);
++
++	return 0;
++}
++
++static int macronix_30lfxg18ac_otp_enable(struct nand_chip *nand)
++{
++	uint8_t feature_buf[ONFI_SUBFEATURE_PARAM_LEN] = { 0 };
++
++	feature_buf[0] = MACRONIX_30LFXG18AC_OTP_EN;
++	return nand_set_features(nand, ONFI_FEATURE_ADDR_30LFXG18AC_OTP,
++				 feature_buf);
++}
++
++static int macronix_30lfxg18ac_otp_disable(struct nand_chip *nand)
++{
++	uint8_t feature_buf[ONFI_SUBFEATURE_PARAM_LEN] = { 0 };
++
++	return nand_set_features(nand, ONFI_FEATURE_ADDR_30LFXG18AC_OTP,
++				 feature_buf);
++}
++
++static int __macronix_30lfxg18ac_rw_otp(struct mtd_info *mtd,
++					loff_t offs_in_flash,
++					size_t len, size_t *retlen,
++					u_char *buf, bool write)
++{
++	struct nand_chip *nand;
++	size_t bytes_handled;
++	off_t offs_in_page;
++	uint64_t page;
++	void *dma_buf;
++	int ret;
++
++	/* 'nand_prog/read_page_op()' may use 'buf' as DMA buffer,
++	 * so allocate properly aligned memory for it. This is
++	 * needed because cross page accesses may lead to unaligned
++	 * buffer address for DMA.
++	 */
++	dma_buf = kmalloc(MACRONIX_30LFXG18AC_OTP_PAGE_SIZE, GFP_KERNEL);
++	if (!dma_buf)
++		return -ENOMEM;
++
++	nand = mtd_to_nand(mtd);
++	nand_select_target(nand, 0);
++
++	ret = macronix_30lfxg18ac_otp_enable(nand);
++	if (ret)
++		goto out_otp;
++
++	page = offs_in_flash;
++	/* 'page' will be result of division. */
++	offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
++	bytes_handled = 0;
++
++	while (bytes_handled < len &&
++	       page < MACRONIX_30LFXG18AC_OTP_PAGES) {
++		size_t bytes_to_handle;
++
++		bytes_to_handle = min_t(size_t, len - bytes_handled,
++					MACRONIX_30LFXG18AC_OTP_PAGE_SIZE -
++					offs_in_page);
++
++		if (write) {
++			memcpy(dma_buf, &buf[bytes_handled], bytes_to_handle);
++			ret = nand_prog_page_op(nand, page, offs_in_page,
++						dma_buf, bytes_to_handle);
++		} else {
++			ret = nand_read_page_op(nand, page, offs_in_page,
++						dma_buf, bytes_to_handle);
++			if (!ret)
++				memcpy(&buf[bytes_handled], dma_buf,
++				       bytes_to_handle);
++		}
++		if (ret)
++			goto out_otp;
++
++		bytes_handled += bytes_to_handle;
++		offs_in_page = 0;
++		page++;
++	}
++
++	*retlen = bytes_handled;
++
++out_otp:
++	if (ret)
++		dev_err(&mtd->dev, "failed to perform OTP IO: %i\n", ret);
++
++	ret = macronix_30lfxg18ac_otp_disable(nand);
++	WARN(ret, "failed to leave OTP mode after %s\n",
++	     write ? "write" : "read");
++	nand_deselect_target(nand);
++	kfree(dma_buf);
++
++	return ret;
++}
++
++static int macronix_30lfxg18ac_write_otp(struct mtd_info *mtd, loff_t to,
++					 size_t len, size_t *rlen,
++					 const u_char *buf)
++{
++	return __macronix_30lfxg18ac_rw_otp(mtd, to, len, rlen, (u_char *)buf,
++					    true);
++}
++
++static int macronix_30lfxg18ac_read_otp(struct mtd_info *mtd, loff_t from,
++					size_t len, size_t *rlen,
++					u_char *buf)
++{
++	return __macronix_30lfxg18ac_rw_otp(mtd, from, len, rlen, buf, false);
++}
++
++static int macronix_30lfxg18ac_lock_otp(struct mtd_info *mtd, loff_t from,
++					size_t len)
++{
++	uint8_t feature_buf[ONFI_SUBFEATURE_PARAM_LEN] = { 0 };
++	struct nand_chip *nand;
++	int ret;
++
++	if (from != MACRONIX_30LFXG18AC_OTP_START_BYTE ||
++	    len != MACRONIX_30LFXG18AC_OTP_SIZE_BYTES)
++		return -EINVAL;
++
++	dev_dbg(&mtd->dev, "locking OTP\n");
++
++	nand = mtd_to_nand(mtd);
++	nand_select_target(nand, 0);
++
++	feature_buf[0] = MACRONIX_30LFXG18AC_OTP_EN |
++			 MACRONIX_30LFXG18AC_OTP_LOCKED;
++	ret = nand_set_features(nand, ONFI_FEATURE_ADDR_30LFXG18AC_OTP,
++				feature_buf);
++	if (ret) {
++		dev_err(&mtd->dev,
++			"failed to lock OTP (set features): %i\n", ret);
++		nand_deselect_target(nand);
++		return ret;
++	}
++
++	/* Do dummy page prog with zero address. */
++	feature_buf[0] = 0;
++	ret = nand_prog_page_op(nand, 0, 0, feature_buf, 1);
++	if (ret)
++		dev_err(&mtd->dev,
++			"failed to lock OTP (page prog): %i\n", ret);
++
++	ret = macronix_30lfxg18ac_otp_disable(nand);
++	WARN(ret, "failed to leave OTP mode after lock\n");
++
++	nand_deselect_target(nand);
++
++	return ret;
++}
++
++static void macronix_nand_setup_otp(struct nand_chip *chip)
++{
++	static const char * const supported_otp_models[] = {
++		"MX30LF1G18AC",
++		"MX30LF2G18AC",
++		"MX30LF4G18AC",
++	};
++	struct mtd_info *mtd;
++
++	if (!chip->parameters.supports_set_get_features)
++		return;
++
++	if (match_string(supported_otp_models,
++			 ARRAY_SIZE(supported_otp_models),
++			 chip->parameters.model) < 0)
++		return;
++
++	bitmap_set(chip->parameters.get_feature_list,
++		   ONFI_FEATURE_ADDR_30LFXG18AC_OTP, 1);
++	bitmap_set(chip->parameters.set_feature_list,
++		   ONFI_FEATURE_ADDR_30LFXG18AC_OTP, 1);
++
++	mtd = nand_to_mtd(chip);
++	mtd->_get_fact_prot_info = macronix_30lfxg18ac_get_otp_info;
++	mtd->_read_fact_prot_reg = macronix_30lfxg18ac_read_otp;
++	mtd->_get_user_prot_info = macronix_30lfxg18ac_get_otp_info;
++	mtd->_read_user_prot_reg = macronix_30lfxg18ac_read_otp;
++	mtd->_write_user_prot_reg = macronix_30lfxg18ac_write_otp;
++	mtd->_lock_user_prot_reg = macronix_30lfxg18ac_lock_otp;
++}
++
+ static int macronix_nand_init(struct nand_chip *chip)
+ {
+ 	if (nand_is_slc(chip))
+@@ -325,6 +537,7 @@ static int macronix_nand_init(struct nand_chip *chip)
+ 	macronix_nand_onfi_init(chip);
+ 	macronix_nand_block_protection_support(chip);
+ 	macronix_nand_deep_power_down_support(chip);
++	macronix_nand_setup_otp(chip);
+ 
+ 	return 0;
+ }
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests
+2.35.0
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
