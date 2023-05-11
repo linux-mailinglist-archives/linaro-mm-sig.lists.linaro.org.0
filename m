@@ -2,142 +2,364 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4CABA6FEBD6
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 May 2023 08:41:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E013A6FF5DF
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 May 2023 17:26:27 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2565644234
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 May 2023 06:41:10 +0000 (UTC)
-Received: from zeniv.linux.org.uk (zeniv.linux.org.uk [62.89.141.173])
-	by lists.linaro.org (Postfix) with ESMTPS id 0E8F03EB80
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 May 2023 06:41:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9674A4439C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 May 2023 15:26:26 +0000 (UTC)
+Received: from mx.sberdevices.ru (mx.sberdevices.ru [45.89.227.171])
+	by lists.linaro.org (Postfix) with ESMTPS id 6D1963F05F
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 May 2023 15:26:22 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linux.org.uk header.s=zeniv-20220401 header.b="jw/mMH9q";
-	spf=none (lists.linaro.org: domain of viro@ftp.linux.org.uk has no SPF policy when checking 62.89.141.173) smtp.mailfrom=viro@ftp.linux.org.uk;
-	dmarc=pass (policy=none) header.from=zeniv.linux.org.uk
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:
-	Content-Transfer-Encoding:Content-Type:MIME-Version:References:Message-ID:
-	Subject:Cc:To:From:Date:Reply-To:Content-ID:Content-Description;
-	bh=RtWxN7e4QjgKeMqyRm8+weDfqFq3jfnkuzd3W1qjtiM=; b=jw/mMH9qT+/rpGk7mfI4YGlPGe
-	uWTb2lZmqfZIuwVdgWuQnLtmQkWFasYr7kqa7CUIFVCLKRFtUvi1n8Qd+6fMBYIIAbvrl/GdFxv2J
-	lqAmLygNJHA+XCTSh+mldXiQG+o7dI8T8FS5MrntPj1B3P2ekHWFpwYFdC4tjvXb2QUArkaE0igA9
-	oZtyK6diEXw40KxwmYst51pwkoEifoIuQGmWWNdXLmKJ3cCOtTTeK1EclD5jXQT9bgdhOYp/vs0Fz
-	UBoWWTUbFlQsarbW1h9IC4EJZW1ubTxAV15CCwSdzwFvYrZWcxDjqD9Lezep+zRrsTgNjjVxyMM2m
-	zJpZGunw==;
-Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat Linux))
-	id 1pwzyw-001dzq-0x;
-	Thu, 11 May 2023 06:40:54 +0000
-Date: Thu, 11 May 2023 07:40:54 +0100
-From: Al Viro <viro@zeniv.linux.org.uk>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <20230511064054.GM3390869@ZenIV>
-References: <202305051103396748797@zte.com.cn>
- <b9ceed26-bf64-6314-3ec5-562542b2b1c6@amd.com>
+	dkim=pass header.d=sberdevices.ru header.s=mail header.b=QrTKlw7J;
+	spf=pass (lists.linaro.org: domain of AVKrasnov@sberdevices.ru designates 45.89.227.171 as permitted sender) smtp.mailfrom=AVKrasnov@sberdevices.ru;
+	dmarc=pass (policy=quarantine) header.from=sberdevices.ru
+Received: from s-lin-edge02.sberdevices.ru (localhost [127.0.0.1])
+	by mx.sberdevices.ru (Postfix) with ESMTP id 97CA55FD5F;
+	Thu, 11 May 2023 18:26:20 +0300 (MSK)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
+	s=mail; t=1683818780;
+	bh=CLzqYTcujARq4NJQtsx22VCX1wovz6DLx4a2PMX1RH8=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type;
+	b=QrTKlw7J5Gzzkx3Qobltq6T2Dr7NZOt/8o6qPD/ClpUEg50r7WB+MabC6gHAya3b3
+	 zBoTKsHsHc7JpvM7A4Gom0uySbZGIm3I7HjnvcsTGkIxPe4qpONwfKy4OZGqq0TXQX
+	 Ix5plf6jmNioA2FaLlMP3e77Mr3+cWNPswFWBR81qbe8woTromaFu/5D8vfbcKPY0S
+	 W6TO2urTgSwoFxwiurUQIks8UzTCifKYMqx5z11Hvo+q5h9hXNpwZZlvSoca/tc39A
+	 KddmTDbYGx4PoajmKmvqwUsSexyU5cPtdaGBUQm0R+0pk3rhW+m0dAdyqY0TJ5CA9L
+	 pDi0/bw+u6+gQ==
+Received: from S-MS-EXCH01.sberdevices.ru (S-MS-EXCH01.sberdevices.ru [172.16.1.4])
+	by mx.sberdevices.ru (Postfix) with ESMTP;
+	Thu, 11 May 2023 18:26:18 +0300 (MSK)
+From: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
+To: Miquel Raynal <miquel.raynal@bootlin.com>, Richard Weinberger
+	<richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, Sumit Semwal
+	<sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?=
+	<christian.koenig@amd.com>, Arseniy Krasnov <AVKrasnov@sberdevices.ru>
+Date: Thu, 11 May 2023 18:21:16 +0300
+Message-ID: <20230511152120.3297853-1-AVKrasnov@sberdevices.ru>
+X-Mailer: git-send-email 2.35.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <b9ceed26-bf64-6314-3ec5-562542b2b1c6@amd.com>
-Sender: Al Viro <viro@ftp.linux.org.uk>
-X-Spamd-Result: default: False [-2.90 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	DMARC_POLICY_ALLOW(-0.50)[zeniv.linux.org.uk,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	FORGED_SENDER(0.30)[viro@zeniv.linux.org.uk,viro@ftp.linux.org.uk];
-	R_DKIM_ALLOW(-0.20)[linux.org.uk:s=zeniv-20220401];
+X-Originating-IP: [172.16.1.6]
+X-ClientProxiedBy: S-MS-EXCH02.sberdevices.ru (172.16.1.5) To
+ S-MS-EXCH01.sberdevices.ru (172.16.1.4)
+X-KSMG-Rule-ID: 4
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Status: not scanned, disabled by settings
+X-KSMG-AntiSpam-Interceptor-Info: not scanned
+X-KSMG-AntiPhishing: not scanned, disabled by settings
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 1.1.2.30, bases: 2023/05/11 10:21:00 #21259776
+X-KSMG-AntiVirus-Status: Clean, skipped
+X-Spamd-Result: default: False [3.00 / 15.00];
+	RSPAMD_URIBL(4.50)[sberdevices.ru:email,sberdevices.ru:dkim];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
 	MIME_GOOD(-0.10)[text/plain];
-	ONCE_RECEIVED(0.10)[];
-	DKIM_TRACE(0.00)[linux.org.uk:+];
+	BAD_REP_POLICIES(0.10)[];
+	FREEMAIL_CC(0.00)[gmail.com,sberdevices.ru,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
 	RCVD_TLS_LAST(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:8419, ipnet:62.89.128.0/19, country:GB];
-	FROM_NEQ_ENVFROM(0.00)[viro@zeniv.linux.org.uk,viro@ftp.linux.org.uk];
+	ASN(0.00)[asn:208677, ipnet:45.89.224.0/22, country:RU];
+	NEURAL_HAM(-0.00)[-0.957];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	DKIM_TRACE(0.00)[sberdevices.ru:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	R_SPF_NA(0.00)[no SPF record];
-	RCVD_COUNT_ONE(0.00)[1];
-	TO_DN_SOME(0.00)[];
+	R_DKIM_ALLOW(0.00)[sberdevices.ru:s=mail];
 	ARC_NA(0.00)[];
+	DMARC_POLICY_ALLOW(0.00)[sberdevices.ru,quarantine];
+	HAS_XOIP(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-0.712];
-	RCPT_COUNT_SEVEN(0.00)[8]
+	R_SPF_ALLOW(0.00)[+ip4:45.89.227.171];
+	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 0E8F03EB80
-X-Spamd-Bar: --
-Message-ID-Hash: HEXLHIJ64CK45K7QCRTQVT23NULY5U77
-X-Message-ID-Hash: HEXLHIJ64CK45K7QCRTQVT23NULY5U77
-X-MailFrom: viro@ftp.linux.org.uk
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: ye.xingchen@zte.com.cn, sumit.semwal@linaro.org, gustavo@padovan.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+X-Spam-Level: ***
+X-Rspamd-Queue-Id: 6D1963F05F
+X-Spamd-Bar: +++
+Message-ID-Hash: TWD5NPC5WM7YQLPOZRSPXIUU4JQ54LAG
+X-Message-ID-Hash: TWD5NPC5WM7YQLPOZRSPXIUU4JQ54LAG
+X-MailFrom: AVKrasnov@sberdevices.ru
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: oxffffaa@gmail.com, kernel@sberdevices.ru, linux-mtd@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf/sync_file: Use fdget()
+Subject: [Linaro-mm-sig] [RESEND PATCH v3] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HEXLHIJ64CK45K7QCRTQVT23NULY5U77/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TWD5NPC5WM7YQLPOZRSPXIUU4JQ54LAG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Fri, May 05, 2023 at 10:22:09AM +0200, Christian K=F6nig wrote:
-> Am 05.05.23 um 05:03 schrieb ye.xingchen@zte.com.cn:
-> > From: Ye Xingchen <ye.xingchen@zte.com.cn>
-> >=20
-> > convert the fget() use to fdget().
->=20
-> Well the rational is missing. Why should we do that?
+This adds support for OTP area access on MX30LFxG18AC chip series.
 
-We very definitely should not.  The series appears to be
-pure cargo-culting and it's completely wrong.
+Changelog:
+  v1 -> v2:
+  * Add slab.h include due to kernel test robot error.
+  v2 -> v3:
+  * Use 'uint64_t' as input argument for 'do_div()' instead
+    of 'unsigned long' due to kernel test robot error.
 
-There is such thing as unwarranted use of fget().  Under some
-conditions converting to fdget() is legitimate *and* is an
-improvement.  HOWEVER, those conditions are not met in this case.
+Signed-off-by: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
+---
+ drivers/mtd/nand/raw/nand_macronix.c | 213 +++++++++++++++++++++++++++
+ 1 file changed, 213 insertions(+)
 
-Background: references in descriptor table do contribute to
-struct file refcount.  fget() finds the reference by descriptor
-and returns it, having bumped the refcount.  In case when
-descriptor table is shared, we must do that - otherwise e.g.
-close() or dup2() from another thread could very well have
-destroyed the struct file we'd just found.  However, if
-descriptor table is *NOT* shared, there's no need to mess
-with refcount at all.  Provided that
-	* we are not grabbing the reference to keep it (stash
-into some data structure, etc.); as soon as we return from
-syscall, the reference in descriptor table is fair game for
-e.g. close(2).  Or exit(2), for that matter.
-	* we remember whether it was shared or not - we can't
-just recheck that when we are done with the file; after all,
-descriptor table might have been shared when we looked the file up,
-but another thread might've died since then and left it not
-shared anymore.
-	* we do not rip the same reference out of our descriptor
-table ourselves - not without seriously convoluted precautions.
-Very few places in the kernel can lead to closing descriptors,
-so in practice it only becomes a problem when a particularly
-ugly ioctl decides that it would be neat to close some descriptor(s).
-Example of such convolutions: binder_deferred_fd_close().
+diff --git a/drivers/mtd/nand/raw/nand_macronix.c b/drivers/mtd/nand/raw/nand_macronix.c
+index 1472f925f386..2301f990678e 100644
+--- a/drivers/mtd/nand/raw/nand_macronix.c
++++ b/drivers/mtd/nand/raw/nand_macronix.c
+@@ -6,6 +6,7 @@
+  * Author: Boris Brezillon <boris.brezillon@free-electrons.com>
+  */
+ 
++#include <linux/slab.h>
+ #include "linux/delay.h"
+ #include "internals.h"
+ 
+@@ -31,6 +32,20 @@
+ 
+ #define MXIC_CMD_POWER_DOWN 0xB9
+ 
++#define ONFI_FEATURE_ADDR_30LFXG18AC_OTP	0x90
++#define MACRONIX_30LFXG18AC_OTP_START_PAGE	0
++#define MACRONIX_30LFXG18AC_OTP_PAGES		30
++#define MACRONIX_30LFXG18AC_OTP_PAGE_SIZE	2112
++#define MACRONIX_30LFXG18AC_OTP_START_BYTE	\
++	(MACRONIX_30LFXG18AC_OTP_START_PAGE *	\
++	 MACRONIX_30LFXG18AC_OTP_PAGE_SIZE)
++#define MACRONIX_30LFXG18AC_OTP_SIZE_BYTES	\
++	(MACRONIX_30LFXG18AC_OTP_PAGES *	\
++	 MACRONIX_30LFXG18AC_OTP_PAGE_SIZE)
++
++#define MACRONIX_30LFXG18AC_OTP_EN		BIT(0)
++#define MACRONIX_30LFXG18AC_OTP_LOCKED		BIT(1)
++
+ struct nand_onfi_vendor_macronix {
+ 	u8 reserved;
+ 	u8 reliability_func;
+@@ -316,6 +331,203 @@ static void macronix_nand_deep_power_down_support(struct nand_chip *chip)
+ 	chip->ops.resume = mxic_nand_resume;
+ }
+ 
++static int macronix_30lfxg18ac_get_otp_info(struct mtd_info *mtd, size_t len,
++					    size_t *retlen,
++					    struct otp_info *buf)
++{
++	if (len < sizeof(*buf))
++		return -EINVAL;
++
++	/* Don't know how to check that OTP is locked. */
++	buf->locked = 0;
++	buf->start = MACRONIX_30LFXG18AC_OTP_START_BYTE;
++	buf->length = MACRONIX_30LFXG18AC_OTP_SIZE_BYTES;
++
++	*retlen = sizeof(*buf);
++
++	return 0;
++}
++
++static int macronix_30lfxg18ac_otp_enable(struct nand_chip *nand)
++{
++	uint8_t feature_buf[ONFI_SUBFEATURE_PARAM_LEN] = { 0 };
++
++	feature_buf[0] = MACRONIX_30LFXG18AC_OTP_EN;
++	return nand_set_features(nand, ONFI_FEATURE_ADDR_30LFXG18AC_OTP,
++				 feature_buf);
++}
++
++static int macronix_30lfxg18ac_otp_disable(struct nand_chip *nand)
++{
++	uint8_t feature_buf[ONFI_SUBFEATURE_PARAM_LEN] = { 0 };
++
++	return nand_set_features(nand, ONFI_FEATURE_ADDR_30LFXG18AC_OTP,
++				 feature_buf);
++}
++
++static int __macronix_30lfxg18ac_rw_otp(struct mtd_info *mtd,
++					loff_t offs_in_flash,
++					size_t len, size_t *retlen,
++					u_char *buf, bool write)
++{
++	struct nand_chip *nand;
++	size_t bytes_handled;
++	off_t offs_in_page;
++	uint64_t page;
++	void *dma_buf;
++	int ret;
++
++	/* 'nand_prog/read_page_op()' may use 'buf' as DMA buffer,
++	 * so allocate properly aligned memory for it. This is
++	 * needed because cross page accesses may lead to unaligned
++	 * buffer address for DMA.
++	 */
++	dma_buf = kmalloc(MACRONIX_30LFXG18AC_OTP_PAGE_SIZE, GFP_KERNEL);
++	if (!dma_buf)
++		return -ENOMEM;
++
++	nand = mtd_to_nand(mtd);
++	nand_select_target(nand, 0);
++
++	ret = macronix_30lfxg18ac_otp_enable(nand);
++	if (ret)
++		goto out_otp;
++
++	page = offs_in_flash;
++	/* 'page' will be result of division. */
++	offs_in_page = do_div(page, MACRONIX_30LFXG18AC_OTP_PAGE_SIZE);
++	bytes_handled = 0;
++
++	while (bytes_handled < len &&
++	       page < MACRONIX_30LFXG18AC_OTP_PAGES) {
++		size_t bytes_to_handle;
++
++		bytes_to_handle = min_t(size_t, len - bytes_handled,
++					MACRONIX_30LFXG18AC_OTP_PAGE_SIZE -
++					offs_in_page);
++
++		if (write) {
++			memcpy(dma_buf, &buf[bytes_handled], bytes_to_handle);
++			ret = nand_prog_page_op(nand, page, offs_in_page,
++						dma_buf, bytes_to_handle);
++		} else {
++			ret = nand_read_page_op(nand, page, offs_in_page,
++						dma_buf, bytes_to_handle);
++			if (!ret)
++				memcpy(&buf[bytes_handled], dma_buf,
++				       bytes_to_handle);
++		}
++		if (ret)
++			goto out_otp;
++
++		bytes_handled += bytes_to_handle;
++		offs_in_page = 0;
++		page++;
++	}
++
++	*retlen = bytes_handled;
++
++out_otp:
++	if (ret)
++		dev_err(&mtd->dev, "failed to perform OTP IO: %i\n", ret);
++
++	ret = macronix_30lfxg18ac_otp_disable(nand);
++	WARN(ret, "failed to leave OTP mode after %s\n",
++	     write ? "write" : "read");
++	nand_deselect_target(nand);
++	kfree(dma_buf);
++
++	return ret;
++}
++
++static int macronix_30lfxg18ac_write_otp(struct mtd_info *mtd, loff_t to,
++					 size_t len, size_t *rlen,
++					 const u_char *buf)
++{
++	return __macronix_30lfxg18ac_rw_otp(mtd, to, len, rlen, (u_char *)buf,
++					    true);
++}
++
++static int macronix_30lfxg18ac_read_otp(struct mtd_info *mtd, loff_t from,
++					size_t len, size_t *rlen,
++					u_char *buf)
++{
++	return __macronix_30lfxg18ac_rw_otp(mtd, from, len, rlen, buf, false);
++}
++
++static int macronix_30lfxg18ac_lock_otp(struct mtd_info *mtd, loff_t from,
++					size_t len)
++{
++	uint8_t feature_buf[ONFI_SUBFEATURE_PARAM_LEN] = { 0 };
++	struct nand_chip *nand;
++	int ret;
++
++	if (from != MACRONIX_30LFXG18AC_OTP_START_BYTE ||
++	    len != MACRONIX_30LFXG18AC_OTP_SIZE_BYTES)
++		return -EINVAL;
++
++	dev_dbg(&mtd->dev, "locking OTP\n");
++
++	nand = mtd_to_nand(mtd);
++	nand_select_target(nand, 0);
++
++	feature_buf[0] = MACRONIX_30LFXG18AC_OTP_EN |
++			 MACRONIX_30LFXG18AC_OTP_LOCKED;
++	ret = nand_set_features(nand, ONFI_FEATURE_ADDR_30LFXG18AC_OTP,
++				feature_buf);
++	if (ret) {
++		dev_err(&mtd->dev,
++			"failed to lock OTP (set features): %i\n", ret);
++		nand_deselect_target(nand);
++		return ret;
++	}
++
++	/* Do dummy page prog with zero address. */
++	feature_buf[0] = 0;
++	ret = nand_prog_page_op(nand, 0, 0, feature_buf, 1);
++	if (ret)
++		dev_err(&mtd->dev,
++			"failed to lock OTP (page prog): %i\n", ret);
++
++	ret = macronix_30lfxg18ac_otp_disable(nand);
++	WARN(ret, "failed to leave OTP mode after lock\n");
++
++	nand_deselect_target(nand);
++
++	return ret;
++}
++
++static void macronix_nand_setup_otp(struct nand_chip *chip)
++{
++	static const char * const supported_otp_models[] = {
++		"MX30LF1G18AC",
++		"MX30LF2G18AC",
++		"MX30LF4G18AC",
++	};
++	struct mtd_info *mtd;
++
++	if (!chip->parameters.supports_set_get_features)
++		return;
++
++	if (match_string(supported_otp_models,
++			 ARRAY_SIZE(supported_otp_models),
++			 chip->parameters.model) < 0)
++		return;
++
++	bitmap_set(chip->parameters.get_feature_list,
++		   ONFI_FEATURE_ADDR_30LFXG18AC_OTP, 1);
++	bitmap_set(chip->parameters.set_feature_list,
++		   ONFI_FEATURE_ADDR_30LFXG18AC_OTP, 1);
++
++	mtd = nand_to_mtd(chip);
++	mtd->_get_fact_prot_info = macronix_30lfxg18ac_get_otp_info;
++	mtd->_read_fact_prot_reg = macronix_30lfxg18ac_read_otp;
++	mtd->_get_user_prot_info = macronix_30lfxg18ac_get_otp_info;
++	mtd->_read_user_prot_reg = macronix_30lfxg18ac_read_otp;
++	mtd->_write_user_prot_reg = macronix_30lfxg18ac_write_otp;
++	mtd->_lock_user_prot_reg = macronix_30lfxg18ac_lock_otp;
++}
++
+ static int macronix_nand_init(struct nand_chip *chip)
+ {
+ 	if (nand_is_slc(chip))
+@@ -325,6 +537,7 @@ static int macronix_nand_init(struct nand_chip *chip)
+ 	macronix_nand_onfi_init(chip);
+ 	macronix_nand_block_protection_support(chip);
+ 	macronix_nand_deep_power_down_support(chip);
++	macronix_nand_setup_otp(chip);
+ 
+ 	return 0;
+ }
+-- 
+2.35.0
 
-fdget() returns a pair that consists of struct file reference
-*AND* indication whether we have grabbed a reference.  fdput()
-takes such pair.
-
-Both are inlined, and compiler is smart enough to split the
-pair into two separate local variables.  The underlying
-primitive actually stashes the "have grabbed the refcount"
-into the LSB of returned word; see __to_fd() in include/linux/file.h
-for details.  It really generates a decent code and a plenty of
-places where we want a file by descriptor are just fine with it.
-
-This patch is flat-out broken, since it loses the "have we bumped
-the refcount" information - the callers do not get it.
-
-It might be possible to massage the calling conventions to enable
-the conversion to fdget(), but it's not obvious that result would
-be cleaner and in any case, the patch in question doesn't even
-try that.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
