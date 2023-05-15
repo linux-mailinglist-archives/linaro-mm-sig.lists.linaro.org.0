@@ -2,97 +2,92 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 163BC703204
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 May 2023 17:58:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 937737040FA
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 16 May 2023 00:27:41 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 24BF444352
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 May 2023 15:58:03 +0000 (UTC)
-Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
-	by lists.linaro.org (Postfix) with ESMTP id E56A044237
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 May 2023 15:57:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 451EC3F072
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 May 2023 22:27:40 +0000 (UTC)
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+	by lists.linaro.org (Postfix) with ESMTPS id BC4773E963
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 May 2023 22:27:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
 	dkim=none;
-	spf=pass (lists.linaro.org: domain of suijingfeng@loongson.cn designates 114.242.206.163 as permitted sender) smtp.mailfrom=suijingfeng@loongson.cn;
+	spf=pass (lists.linaro.org: domain of sukrut.bellary@gmail.com designates 209.85.215.173 as permitted sender) smtp.mailfrom=sukrut.bellary@gmail.com;
 	dmarc=none
-Received: from loongson.cn (unknown [10.20.42.43])
-	by gateway (Coremail) with SMTP id _____8AxmOlzVmJk+t0IAA--.15254S3;
-	Mon, 15 May 2023 23:57:39 +0800 (CST)
-Received: from openarena.loongson.cn (unknown [10.20.42.43])
-	by localhost.localdomain (Coremail) with SMTP id AQAAf8BxBMVuVmJkr6lgAA--.36828S4;
-	Mon, 15 May 2023 23:57:37 +0800 (CST)
-From: Sui Jingfeng <suijingfeng@loongson.cn>
-To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Daniel Vetter <daniel@ffwll.ch>,
-	Sui Jingfeng <suijingfeng@loongson.cn>,
-	suijingfeng <15330273260@189.cn>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian Koenig <christian.koenig@amd.com>,
-	Emil Velikov <emil.l.velikov@gmail.com>
-Date: Mon, 15 May 2023 23:57:34 +0800
-Message-Id: <20230515155734.2954149-3-suijingfeng@loongson.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230515155734.2954149-1-suijingfeng@loongson.cn>
-References: <20230515155734.2954149-1-suijingfeng@loongson.cn>
+Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-53202149ae2so1922196a12.3
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 15 May 2023 15:27:35 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1684189655; x=1686781655;
+        h=content-transfer-encoding:in-reply-to:from:references:cc:to
+         :content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=c63nnhTmzNCcDDPrXmodqbHJR7oOiORNS/8H1q+iK6g=;
+        b=aIHh6/8OHCYXfMQrpc74ZYmnhPojNEkycRBTPMzGGAoCAT6kUH+Q9T0tSYJ/Zm3TXo
+         6CEVillSiv5zmH+TCl2Juc5Eckv8chTgf1nZrTpd5Iy2MolIp+9gQaEuDN6fJ2YpIDCp
+         UuzA95ffJ+FbYnLGFAFk3gL3NhEpPoWEweSt7H+6n0I86qc8Jf0gVAU4MToVoYiYcx5S
+         8w4fzy8/yyJU5fyLd2EiO9Vz6DG5C0vdDqp6id8c2RnOURsaCwHOCIdNQJ0WM3h5dJf3
+         dwn+32Jxi+sOCVCEyvdCQQWvUaWj+zd7i1BTx1Sy7dAmTGZjCHHcWZgZk1bDCQ4s+qWd
+         Jr5Q==
+X-Gm-Message-State: AC+VfDyczf23HnDl7utGW78y7P+SbNtlGf6x7jQc3OfgZoo0Gm3akWQ9
+	BDkVqmeqsnoALD5Cvd59fWw=
+X-Google-Smtp-Source: ACHHUZ654Qpgl50uQ0TTsz+Sm+yXhr0g/S0spaoX5NDpQanCAD2nDXcpydjHPB8lZdE6LMp1HwPPLA==
+X-Received: by 2002:a05:6a20:54a4:b0:101:1951:d491 with SMTP id i36-20020a056a2054a400b001011951d491mr32720818pzk.6.1684189654681;
+        Mon, 15 May 2023 15:27:34 -0700 (PDT)
+Received: from [192.168.86.26] (cpe-70-95-21-110.san.res.rr.com. [70.95.21.110])
+        by smtp.gmail.com with ESMTPSA id l23-20020a62be17000000b006460751222asm8024272pff.38.2023.05.15.15.27.32
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 15 May 2023 15:27:34 -0700 (PDT)
+Message-ID: <0df418ad-3492-4241-1837-55ed89b77e10@linux.com>
+Date: Mon, 15 May 2023 15:27:31 -0700
 MIME-Version: 1.0
-X-CM-TRANSID: AQAAf8BxBMVuVmJkr6lgAA--.36828S4
-X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
-X-Coremail-Antispam: 1Uk129KBjvdXoW7XF1rAFWDWF43urW3uF4UJwb_yoWfJrb_Ga
-	yUJ393Zr1UWF9FkaykZFsrGryayrW3tF4Sg3Zrtan5Aa4qyryDJrZrK347KFy5Ar1xK3Z8
-	tayrGrySkFs3WjkaLaAFLSUrUUUUeb8apTn2vfkv8UJUUUU8wcxFpf9Il3svdxBIdaVrn0
-	xqx4xG64xvF2IEw4CE5I8CrVC2j2Jv73VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUY
-	X7kC6x804xWl14x267AKxVWUJVW8JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0rVWrJVCq3w
-	AFIxvE14AKwVWUAVWUZwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK
-	6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM28EF7
-	xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAaw2AF
-	wI0_JF0_Jw1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0cIa020Ex4CE44I27w
-	Aqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jw0_WrylYx0Ex4A2jsIE
-	14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwCY1x0262kKe7
-	AKxVWUAVWUtwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwCFI7km07C2
-	67AKxVWUAVWUtwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI
-	8E67AF67kF1VAFwI0_GFv_WrylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW5JVW7
-	JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r
-	1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBI
-	daVFxhVjvjDU0xZFpf9x07jr6p9UUUUU=
-X-Spamd-Result: default: False [-0.20 / 15.00];
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.0
+Content-Language: en-US
+To: alexander.deucher@amd.com, christian.koenig@amd.com, airlied@gmail.com,
+ daniel@ffwll.ch, Xinhui.Pan@amd.com
+References: <20230503231507.279172-1-sukrut.bellary@linux.com>
+From: Sukrut Bellary <sukrut.bellary@linux.com>
+In-Reply-To: <20230503231507.279172-1-sukrut.bellary@linux.com>
+X-Spamd-Result: default: False [-3.10 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:114.242.206.163:c];
-	RCVD_NO_TLS_LAST(0.10)[];
+	FORGED_SENDER(0.30)[sukrut.bellary@linux.com,sukrutbellary@gmail.com];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:4808, ipnet:114.242.192.0/18, country:CN];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.215.173:from];
 	R_DKIM_NA(0.00)[];
-	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,loongson.cn,189.cn,linaro.org,amd.com];
-	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[amd.com,gmail.com,ffwll.ch];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	NEURAL_HAM(-0.00)[-0.999];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_DN_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[sukrut.bellary@linux.com,sukrutbellary@gmail.com];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	TAGGED_RCPT(0.00)[];
-	NEURAL_SPAM(0.00)[0.416];
-	DMARC_NA(0.00)[loongson.cn];
-	ARC_NA(0.00)[]
+	TO_DN_NONE(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	DMARC_NA(0.00)[linux.com];
+	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: E56A044237
-X-Spamd-Bar: /
-Message-ID-Hash: UCITGGPOIKXRKXPZOEA6QZFLJFNXIH4I
-X-Message-ID-Hash: UCITGGPOIKXRKXPZOEA6QZFLJFNXIH4I
-X-MailFrom: suijingfeng@loongson.cn
+X-Rspamd-Queue-Id: BC4773E963
+X-Spamd-Bar: ---
+Message-ID-Hash: HA2N4ONWTRDTO3WNZLPZ4NWK37GTHT2K
+X-Message-ID-Hash: HA2N4ONWTRDTO3WNZLPZ4NWK37GTHT2K
+X-MailFrom: sukrut.bellary@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Nathan Chancellor <nathan@kernel.org>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, loongson-kernel@lists.loongnix.cn
+CC: sumit.semwal@linaro.org, Hawking.Zhang@amd.com, Jiadong.Zhu@amd.com, ray.huang@amd.com, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v13 2/2] MAINTAINERS: add maintainers for DRM LOONGSON driver
+Subject: [Linaro-mm-sig] Re: [PATCH] drm:amd:amdgpu: Fix missing buffer object unlock in failure path
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UCITGGPOIKXRKXPZOEA6QZFLJFNXIH4I/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HA2N4ONWTRDTO3WNZLPZ4NWK37GTHT2K/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -102,35 +97,61 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-This patch add Li Yi and Sui Jingfeng as maintainer to drm/loongson driver
 
-Signed-off-by: Sui Jingfeng <suijingfeng@loongson.cn>
----
- MAINTAINERS | 8 ++++++++
- 1 file changed, 8 insertions(+)
+On 5/3/23 16:15, Sukrut Bellary wrote:
+> smatch warning -
+> 1) drivers/gpu/drm/amd/amdgpu/gfx_v9_0.c:3615 gfx_v9_0_kiq_resume()
+> warn: inconsistent returns 'ring->mqd_obj->tbo.base.resv'.
+> 
+> 2) drivers/gpu/drm/amd/amdgpu/gfx_v10_0.c:6901 gfx_v10_0_kiq_resume()
+> warn: inconsistent returns 'ring->mqd_obj->tbo.base.resv'.
+> 
+> Signed-off-by: Sukrut Bellary <sukrut.bellary@linux.com>
+> ---
+>  drivers/gpu/drm/amd/amdgpu/gfx_v10_0.c | 4 +++-
+>  drivers/gpu/drm/amd/amdgpu/gfx_v9_0.c  | 4 +++-
+>  2 files changed, 6 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/amd/amdgpu/gfx_v10_0.c b/drivers/gpu/drm/amd/amdgpu/gfx_v10_0.c
+> index 8bd07ff59671..66d5c5d68454 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/gfx_v10_0.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/gfx_v10_0.c
+> @@ -6891,8 +6891,10 @@ static int gfx_v10_0_kiq_resume(struct amdgpu_device *adev)
+>  		return r;
+>  
+>  	r = amdgpu_bo_kmap(ring->mqd_obj, (void **)&ring->mqd_ptr);
+> -	if (unlikely(r != 0))
+> +	if (unlikely(r != 0)) {
+> +		amdgpu_bo_unreserve(ring->mqd_obj);
+>  		return r;
+> +	}
+>  
+>  	gfx_v10_0_kiq_init_queue(ring);
+>  	amdgpu_bo_kunmap(ring->mqd_obj);
+> diff --git a/drivers/gpu/drm/amd/amdgpu/gfx_v9_0.c b/drivers/gpu/drm/amd/amdgpu/gfx_v9_0.c
+> index bce6919d666a..d5715d8a4128 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/gfx_v9_0.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/gfx_v9_0.c
+> @@ -3617,8 +3617,10 @@ static int gfx_v9_0_kiq_resume(struct amdgpu_device *adev)
+>  		return r;
+>  
+>  	r = amdgpu_bo_kmap(ring->mqd_obj, (void **)&ring->mqd_ptr);
+> -	if (unlikely(r != 0))
+> +	if (unlikely(r != 0)) {
+> +		amdgpu_bo_unreserve(ring->mqd_obj);
+>  		return r;
+> +	}
+>  
+>  	gfx_v9_0_kiq_init_queue(ring);
+>  	amdgpu_bo_kunmap(ring->mqd_obj);
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 402e26d0cdbc..8cdb75f653bc 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -6945,6 +6945,14 @@ T:	git git://anongit.freedesktop.org/drm/drm-misc
- F:	drivers/gpu/drm/lima/
- F:	include/uapi/drm/lima_drm.h
- 
-+DRM DRIVERS FOR LOONGSON
-+M:	Li Yi <liyi@loongson.cn>
-+M:	Sui Jingfeng <suijingfeng@loongson.cn>
-+L:	dri-devel@lists.freedesktop.org
-+S:	Supported
-+T:	git git://anongit.freedesktop.org/drm/drm-misc
-+F:	drivers/gpu/drm/loongson/
-+
- DRM DRIVERS FOR MEDIATEK
- M:	Chun-Kuang Hu <chunkuang.hu@kernel.org>
- M:	Philipp Zabel <p.zabel@pengutronix.de>
--- 
-2.25.1
+Follow-up.
+Could you please review this patch?
 
+
+--
+Regards,
+Sukrut
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
