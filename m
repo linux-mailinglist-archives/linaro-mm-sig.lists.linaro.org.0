@@ -2,138 +2,237 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BA541706C0E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 May 2023 17:04:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 584CE706C1F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 May 2023 17:05:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 61DCA411F5
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 May 2023 15:04:10 +0000 (UTC)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-	by lists.linaro.org (Postfix) with ESMTPS id 151353EA46
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 May 2023 15:04:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6783C411B9
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 May 2023 15:05:56 +0000 (UTC)
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+	by lists.linaro.org (Postfix) with ESMTPS id B65B23EA46
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 May 2023 15:05:52 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=oKXUwZG9;
-	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.172 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com;
-	dmarc=pass (policy=quarantine) header.from=collabora.com
-Received: from [IPV6:2001:b07:2ed:14ed:a962:cd4d:a84:1eab] (unknown [IPv6:2001:b07:2ed:14ed:a962:cd4d:a84:1eab])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits))
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=ID03M4eG;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=QY3dQekx;
+	spf=pass (lists.linaro.org: domain of tzimmermann@suse.de designates 195.135.220.28 as permitted sender) smtp.mailfrom=tzimmermann@suse.de;
+	dmarc=pass (policy=none) header.from=suse.de
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
 	(No client certificate requested)
-	(Authenticated sender: kholk11)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id 670CD660588A;
-	Wed, 17 May 2023 16:04:03 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1684335844;
-	bh=15/GPkh3GbUYvzSc+PhVVCS+jBcNyePbbCQd7vQAmVA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=oKXUwZG9/NNSqz2qObRQWaH8It+qDv2WRxyA1jEfwjltkbIPLkPXAWMzt9rlK4n6U
-	 508s0+CEm0QAUFmbpUaJfba/+2WjZQkSIaSI0q+ZKhwDjxTbM3bnjpwTCnY970gNTW
-	 M2x+b67vXcnj1n3FTh+1b5JyPjsKMfoK2uaFs3vALadtC/Np4dMXRMkADa8zE7+vK0
-	 +KqbNVfPLFHwHOH3jWtaxDB8SrcrU27c11pSCx+eCyzl/ZTEl0c+ZU6YOYz56j4rad
-	 hit+TkEHkn3KPk1c9uTpq+nllv/yuAXEmqVhI6CynmLCmcJAOYz8azGU3rkbosmCgQ
-	 hMvQnoCCX+2tA==
-Message-ID: <c32f0c3f-b43a-7045-38cc-2c11c7bb571e@collabora.com>
-Date: Wed, 17 May 2023 17:04:00 +0200
+	by smtp-out1.suse.de (Postfix) with ESMTPS id C601E22326;
+	Wed, 17 May 2023 15:05:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1684335951; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1CQ41ixeN2lCI6YEUo78oOOB3ssZOYerTAq/UhbIO6o=;
+	b=ID03M4eGcZSMtvsnpcTNqKFquOeohwroO+yoQ4/VsBdsKoblAEuMQQUe8PDlJEjk9vkKG2
+	RWHN0E5F11RF/UCirkDArPAoQfaPdiXymw6RYDtfBfOVLcXWpyUr9JlOmD8R/vo2p2YWma
+	AT/6frLX1BV7kB2F26y3ATaueFx2pDk=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1684335951;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=1CQ41ixeN2lCI6YEUo78oOOB3ssZOYerTAq/UhbIO6o=;
+	b=QY3dQekxMp005Ui+hzGlEX2IaryAj0pI161/byoeTqvgOkXFoIBkz1KL3Lf7Bux6xrIIA2
+	E/DV0wRnmv76dhCQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3A58913358;
+	Wed, 17 May 2023 15:05:51 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+	by imap2.suse-dmz.suse.de with ESMTPSA
+	id KbAxDU/tZGSaeQAAMHmgww
+	(envelope-from <tzimmermann@suse.de>); Wed, 17 May 2023 15:05:51 +0000
+Message-ID: <de2a6105-ab4d-3c1f-1564-f621d81e641d@suse.de>
+Date: Wed, 17 May 2023 17:05:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.1
-Content-Language: en-US
 To: Alexandre Bailon <abailon@baylibre.com>, airlied@gmail.com,
- daniel@ffwll.ch, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de
+ daniel@ffwll.ch, maarten.lankhorst@linux.intel.com, mripard@kernel.org
 References: <20230517145237.295461-1-abailon@baylibre.com>
- <20230517145237.295461-8-abailon@baylibre.com>
-From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
-In-Reply-To: <20230517145237.295461-8-abailon@baylibre.com>
-X-Spamd-Result: default: False [-2.40 / 15.00];
+Content-Language: en-US
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <20230517145237.295461-1-abailon@baylibre.com>
+X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
+	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.172];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
-	ONCE_RECEIVED(0.10)[];
-	MIME_GOOD(-0.10)[text/plain];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_ONE(0.00)[1];
-	FREEMAIL_CC(0.00)[kernel.org,linaro.org,gmail.com,amd.com,baylibre.com,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,lists.linaro.org];
-	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	URIBL_BLOCKED(0.00)[collabora.com:dkim,devicetree.org:url];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:+];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
+	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
+	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	R_SPF_ALLOW(-0.20)[+ip4:195.135.220.0/27];
+	MIME_BASE64_TEXT(0.10)[];
 	FROM_HAS_DN(0.00)[];
+	URIBL_BLOCKED(0.00)[baylibre.com:url,suse.de:dkim,smtp-out1.suse.de:rdns,smtp-out1.suse.de:helo];
 	TAGGED_RCPT(0.00)[dt];
-	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	FREEMAIL_CC(0.00)[kernel.org,linaro.org,gmail.com,collabora.com,amd.com,baylibre.com,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,lists.linaro.org];
+	NEURAL_HAM(-0.00)[-1.000];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	ARC_NA(0.00)[];
-	RCVD_TLS_ALL(0.00)[]
+	ASN(0.00)[asn:29298, ipnet:195.135.220.0/23, country:DE];
+	RCVD_TLS_ALL(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	HAS_ATTACHMENT(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[suse.de:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 151353EA46
-X-Spamd-Bar: --
-Message-ID-Hash: 3CRGNH6FOITN54OARY6AUIHQMSD4Z2QE
-X-Message-ID-Hash: 3CRGNH6FOITN54OARY6AUIHQMSD4Z2QE
-X-MailFrom: angelogioacchino.delregno@collabora.com
+X-Rspamd-Queue-Id: B65B23EA46
+X-Spamd-Bar: ---
+Message-ID-Hash: DY7X6Q4F6NFELHDJGITBEQVTZXFLRLSU
+X-Message-ID-Hash: DY7X6Q4F6NFELHDJGITBEQVTZXFLRLSU
+X-MailFrom: tzimmermann@suse.de
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org, matthias.bgg@gmail.com, sumit.semwal@linaro.org, christian.koenig@amd.com, jstephan@baylibre.com, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, khilman@baylibre.com, nbelin@baylibre.com, bero@baylibre.com
+CC: robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org, matthias.bgg@gmail.com, angelogioacchino.delregno@collabora.com, sumit.semwal@linaro.org, christian.koenig@amd.com, jstephan@baylibre.com, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, khilman@baylibre.com, nbelin@baylibre.com, bero@baylibre.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 7/7] dt-bindings: Add bidings for mtk,apu-drm
+Subject: [Linaro-mm-sig] Re: [PATCH 0/7] Add a DRM driver to support AI Processing Unit (APU)
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3CRGNH6FOITN54OARY6AUIHQMSD4Z2QE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DY7X6Q4F6NFELHDJGITBEQVTZXFLRLSU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: multipart/mixed; boundary="===============6501640239321006004=="
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============6501640239321006004==
+Content-Language: en-US
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------3ncrOiZi2JhHUm00qxwLJpfV"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------3ncrOiZi2JhHUm00qxwLJpfV
+Content-Type: multipart/mixed; boundary="------------AbqRIMn4WI6qY8GL9obWCuXH";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Alexandre Bailon <abailon@baylibre.com>, airlied@gmail.com,
+ daniel@ffwll.ch, maarten.lankhorst@linux.intel.com, mripard@kernel.org
+Cc: robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org,
+ conor+dt@kernel.org, matthias.bgg@gmail.com,
+ angelogioacchino.delregno@collabora.com, sumit.semwal@linaro.org,
+ christian.koenig@amd.com, jstephan@baylibre.com,
+ dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org, khilman@baylibre.com, nbelin@baylibre.com,
+ bero@baylibre.com
+Message-ID: <de2a6105-ab4d-3c1f-1564-f621d81e641d@suse.de>
+Subject: Re: [PATCH 0/7] Add a DRM driver to support AI Processing Unit (APU)
+References: <20230517145237.295461-1-abailon@baylibre.com>
+In-Reply-To: <20230517145237.295461-1-abailon@baylibre.com>
+
+--------------AbqRIMn4WI6qY8GL9obWCuXH
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+
+SGksDQoNCml0IGxvb2tzIGxpa2UgdGhpcyBkcml2ZXIgYmVsb25ncyBpbnRvIGRyaXZlci9h
+Y2NlbC4NCg0KQmVzdCByZWdhcmRzDQpUaG9tYXMNCg0KQW0gMTcuMDUuMjMgdW0gMTY6NTIg
+c2NocmllYiBBbGV4YW5kcmUgQmFpbG9uOg0KPiBUaGlzIGFkZHMgYSBEUk0gZHJpdmVyIHRo
+YXQgaW1wbGVtZW50cyBjb21tdW5pY2F0aW9uIGJldHdlZW4gdGhlIENQVSBhbmQgYW4NCj4g
+QVBVLiBUaGUgZHJpdmVyIHRhcmdldCBlbWJlZGRlZCBkZXZpY2UgdGhhdCB1c3VhbGx5IHJ1
+biBpbmZlcmVuY2UgdXNpbmcgc29tZQ0KPiBwcmVidWlsdCBtb2RlbHMuIFRoZSBnb2FsIGlz
+IHRvIHByb3ZpZGUgY29tbW9uIGluZnJhc3RydWN0dXJlIHRoYXQgY291bGQgYmUNCj4gcmUt
+dXNlZCB0byBzdXBwb3J0IG1hbnkgYWNjZWxlcmF0b3JzLiBCb3RoIGtlcm5lbCwgdXNlcnNw
+YWNlIGFuZCBmaXJtd2FyZSB0cmllcw0KPiB0byB1c2Ugc3RhbmRhcmQgYW5kIGV4aXN0aW5n
+IHRvIGxldmVyYWdlIHRoZSBkZXZlbG9wbWVudCBhbmQgbWFpbnRlbmFuY2UgZWZmb3J0Lg0K
+PiBUaGUgc2VyaWVzIGltcGxlbWVudHMgdHdvIHBsYXRmb3JtIGRyaXZlcnMsIG9uZSBmb3Ig
+c2ltdWxhdGlvbiBhbmQgYW5vdGhlciBvbmUgZm9yDQo+IHRoZSBtdDgxODMgKGNvbXBhdGli
+bGUgd2l0aCBtdDgzNjUpLg0KPiANCj4gRm9yIHRoZSBwZW9wbGUgaW50ZXJlc3RlZCBieSB0
+aGUgZmlybXdhcmUgb3IgdXNlcnNwYWNlIGxpYnJhcnksDQo+IHRoZSBzb3VyY2VzIGFyZSBh
+dmFpbGFibGUgaGVyZToNCj4gaHR0cHM6Ly9naXRsYWIuYmF5bGlicmUuY29tL2JheWxpYnJl
+L2xpYmFwdS9saWJhcHUNCj4gDQo+IFRoZSBzdXBwb3J0IG9mIEFQVSBoYXMgdG8gYmUgdXBz
+dHJlYW1lZCB0byBsaWJkcm0uDQo+IFVudGlsIHRoaXMgaXMgZG9uZSwgeW91IGNvdWxkIGZp
+bmQgdGhlIHNvdXJjZSBoZXJlOg0KPiBodHRwczovL2dpdGxhYi5iYXlsaWJyZS5jb20vYmF5
+bGlicmUvbGliYXB1L2xpYmRybS8tL3RyZWUvYWJhaWxvbi9tYWluDQo+IA0KPiBUaGUgZHJp
+dmVyIGZvciBtdDgxODMgZGVwZW5kcyBvbiB0aGlzIHNlcmllcyAod2hpY2ggaXMgY3VycmVu
+dGx5IGJsb2NrZWQpOg0KPiBodHRwczovL3BhdGNod29yay5rZXJuZWwub3JnL3Byb2plY3Qv
+bGludXgtYXJtLWtlcm5lbC9saXN0Lz9zZXJpZXM9NjIwNDI5DQo+IA0KPiBBbGV4YW5kcmUg
+QmFpbG9uICg1KToNCj4gICAgZHJtOiBBZGQgc3VwcG9ydCBvZiBBSSBQcm9jZXNzb3IgVW5p
+dCAoQVBVKQ0KPiAgICBkcm0vYXB1OiBBZGQgbWVtb3J5IGFsbG9jYXRvcg0KPiAgICBkcm0v
+YXB1OiBBZGQgc3VwcG9ydCBvZiByZXF1ZXN0cw0KPiAgICBkcm0vYXB1OiBBZGQgc3VwcG9y
+dCBvZiBJT01NVQ0KPiAgICBkdC1iaW5kaW5nczogQWRkIGJpZGluZ3MgZm9yIG10ayxhcHUt
+ZHJtDQo+IA0KPiBKdWxpZW4gU3RlcGhhbiAoMik6DQo+ICAgIGRybS9hcHU6IGFsbG93IHBs
+YXRmb3JtIGRyaXZlciB0byBpbXBsZW1lbnQgdGhlaXIgb3duIG1tYXAgZnVuY3Rpb24NCj4g
+ICAgZHJtL2FwdTogQWRkIHN1cHBvcnQgZm9yIGEgc2ltdWxhdGVkIEFQVQ0KPiANCj4gICAu
+Li4vZGV2aWNldHJlZS9iaW5kaW5ncy9ncHUvbXRrLGFwdS1kcm0ueWFtbCAgfCAgMzggKysN
+Cj4gICBkcml2ZXJzL2dwdS9kcm0vS2NvbmZpZyAgICAgICAgICAgICAgICAgICAgICAgfCAg
+IDIgKw0KPiAgIGRyaXZlcnMvZ3B1L2RybS9NYWtlZmlsZSAgICAgICAgICAgICAgICAgICAg
+ICB8ICAgMSArDQo+ICAgZHJpdmVycy9ncHUvZHJtL2FwdS9LY29uZmlnICAgICAgICAgICAg
+ICAgICAgIHwgIDIyICsNCj4gICBkcml2ZXJzL2dwdS9kcm0vYXB1L01ha2VmaWxlICAgICAg
+ICAgICAgICAgICAgfCAgMTAgKw0KPiAgIGRyaXZlcnMvZ3B1L2RybS9hcHUvYXB1X2Rydi5j
+ICAgICAgICAgICAgICAgICB8IDI4MiArKysrKysrKysNCj4gICBkcml2ZXJzL2dwdS9kcm0v
+YXB1L2FwdV9nZW0uYyAgICAgICAgICAgICAgICAgfCAyMzAgKysrKysrKw0KPiAgIGRyaXZl
+cnMvZ3B1L2RybS9hcHUvYXB1X2ludGVybmFsLmggICAgICAgICAgICB8IDIwNSArKysrKysN
+Cj4gICBkcml2ZXJzL2dwdS9kcm0vYXB1L2FwdV9zY2hlZC5jICAgICAgICAgICAgICAgfCA1
+OTIgKysrKysrKysrKysrKysrKysrDQo+ICAgZHJpdmVycy9ncHUvZHJtL2FwdS9zaW11X2Fw
+dS5jICAgICAgICAgICAgICAgIHwgMzEzICsrKysrKysrKw0KPiAgIGluY2x1ZGUvdWFwaS9k
+cm0vYXB1X2RybS5oICAgICAgICAgICAgICAgICAgICB8ICA4MSArKysNCj4gICAxMSBmaWxl
+cyBjaGFuZ2VkLCAxNzc2IGluc2VydGlvbnMoKykNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQg
+RG9jdW1lbnRhdGlvbi9kZXZpY2V0cmVlL2JpbmRpbmdzL2dwdS9tdGssYXB1LWRybS55YW1s
+DQo+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9hcHUvS2NvbmZpZw0K
+PiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vYXB1L01ha2VmaWxlDQo+
+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9hcHUvYXB1X2Rydi5jDQo+
+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9hcHUvYXB1X2dlbS5jDQo+
+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9hcHUvYXB1X2ludGVybmFs
+LmgNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2FwdS9hcHVfc2No
+ZWQuYw0KPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vYXB1L3NpbXVf
+YXB1LmMNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgaW5jbHVkZS91YXBpL2RybS9hcHVfZHJt
+LmgNCj4gDQoNCi0tIA0KVGhvbWFzIFppbW1lcm1hbm4NCkdyYXBoaWNzIERyaXZlciBEZXZl
+bG9wZXINClNVU0UgU29mdHdhcmUgU29sdXRpb25zIEdlcm1hbnkgR21iSA0KRnJhbmtlbnN0
+cmFzc2UgMTQ2LCA5MDQ2MSBOdWVybmJlcmcsIEdlcm1hbnkNCkdGOiBJdm8gVG90ZXYsIEFu
+ZHJldyBNeWVycywgQW5kcmV3IE1jRG9uYWxkLCBCb3VkaWVuIE1vZXJtYW4NCkhSQiAzNjgw
+OSAoQUcgTnVlcm5iZXJnKQ0K
+
+--------------AbqRIMn4WI6qY8GL9obWCuXH--
+
+--------------3ncrOiZi2JhHUm00qxwLJpfV
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmRk7U4FAwAAAAAACgkQlh/E3EQov+Cb
+tg/+Mw9nPevKsZrpAHKT2KpTKI72La7N9DWB82x51M59+Ye9js9hvSe02GYTaNNBMK8LnER4Pdxe
+PK3BI3M8A9kHvtKLkx1QPpmZ9glA7tPIavl12oVw/mT52U8lLnqs6QQZbJM8lJK5LZZRKiN5x0ko
+Z5D6D77HGWxune35pSwjh/Am73O0jITYWGiV+TYoBZ5XbVr9O53319rw/ZE54Qn+Bq5VNz917C6Z
+eOF5CbTWEAa0Fk10OlEiOlftFL7L+bS2u/QIPM8qxyc0h4ysXorAAveHfpY8hMMNLlbvl3U3TJO2
+zLPBLwzIOMqH3h2if0efzBnYX3HcXqyt54mrIlRLuKmSH+8CGlsZRNdl90WuGIiPk/CaoWwoME2h
+oB0QIxDlpsF7FpaJUBUJ8R7w0b1tnCz7ASKSueK/oRZUNwOgPTBz5B9LIC8jFcfN0yOkf0ZCVjEQ
+Revw5BYB2uNQxqZP8qcTQ18K4+xp8v7IQF66xLxshLEVvh9Z/R1B1pczNmeZAOPrXLPpLEkrYI9I
+QeCgRzyVap8n6DOzeH8IJZng3aCw/AjrjRiVH3ZgNVGujFoJ3vXGMDmK1nz4PG2MNJa8LYpiyqLQ
+7423fLxH/oL8gTSV7WL3P8gdPHQAaAUuE5erXzfDV/yujBpH47q/DsG1JN7W2sEqKTUk0DP57O77
+0Fc=
+=Xyw7
+-----END PGP SIGNATURE-----
+
+--------------3ncrOiZi2JhHUm00qxwLJpfV--
+
+--===============6501640239321006004==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-
-Il 17/05/23 16:52, Alexandre Bailon ha scritto:
-> This adds the device tree bindings for the APU DRM driver.
-> 
-> Signed-off-by: Alexandre Bailon <abailon@baylibre.com>
-> Reviewed-by: Julien Stephan <jstephan@baylibre.com>
-> ---
->   .../devicetree/bindings/gpu/mtk,apu-drm.yaml  | 38 +++++++++++++++++++
-
-mediatek,mt(model)-apu.yaml
-
->   1 file changed, 38 insertions(+)
->   create mode 100644 Documentation/devicetree/bindings/gpu/mtk,apu-drm.yaml
-> 
-> diff --git a/Documentation/devicetree/bindings/gpu/mtk,apu-drm.yaml b/Documentation/devicetree/bindings/gpu/mtk,apu-drm.yaml
-> new file mode 100644
-> index 000000000000..6f432d3ea478
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/gpu/mtk,apu-drm.yaml
-> @@ -0,0 +1,38 @@
-> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/gpu/mediatek,apu-drm.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: AI Processor Unit DRM
-> +
-> +properties:
-> +  compatible:
-> +    const: mediatek,apu-drm
-
-const: mediatek,mt8195-apu (or whatever else).
-
-...besides, I don't think that this patch even belongs to this series? :-)
-Spoiler alert! :-)
-
-Cheers,
-Angelo
-
+Content-Disposition: inline
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============6501640239321006004==--
