@@ -2,139 +2,518 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 490EA707284
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 May 2023 21:45:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E1239708293
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 May 2023 15:25:06 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4C5C63F241
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 May 2023 19:45:28 +0000 (UTC)
-Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
-	by lists.linaro.org (Postfix) with ESMTPS id B50453E963
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 May 2023 19:45:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A07F73F49E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 May 2023 13:25:05 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by lists.linaro.org (Postfix) with ESMTP id 501483F49E
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 18 May 2023 13:25:01 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=pv0XlTzQ;
-	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.218.46 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org;
-	dmarc=pass (policy=none) header.from=linaro.org
-Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-965d2749e2eso184538666b.1
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 17 May 2023 12:45:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1684352722; x=1686944722;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=DE2bkq/ui14lTBLwtUifajE1EvCpc5Pz1BLS66HrLtI=;
-        b=pv0XlTzQm0AHDjnYWXA2DFOwY89iONL+pcihwOPnY2/55ELz63O65AuRo8sYRyVtfY
-         j4tyirV1rIXbj4sCHOWqTTlOuOSMW2jmK6+rtIOpV7Ka2tulKz/6eWhdbUWijx9Bu6Gb
-         ByIIf6pn51KS6teavMyaKat3eWK8I4nOHiWfDQvcdP/Uw0gfXBXnQIrIc/pz6cz6nVR5
-         Iy4x6JykOjawxDUZa1NyETS4srgGmwuaVLOaP/oJC0+uKgaPHr9cFO+fpRAAlIcMNtcy
-         nhs72woQacj+sq+ZLnu7DXHUJfQ74vtfFxKgtJUnmVCafSnNEWvepe5r3nD9pz3VWUP9
-         vy6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684352722; x=1686944722;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=DE2bkq/ui14lTBLwtUifajE1EvCpc5Pz1BLS66HrLtI=;
-        b=OKTVbk8ZNrI3tjeoKBg4tnGtA10Kec87SfBuwGoEm8Twp83XEg+idnNmLL/o/Ac1T1
-         DtKBh2Qm0SPhqCDjipF+2gLAefBrIg4VTT2Ne8XBjxebIESSUHbiGF6vkd7wJO6HdFmn
-         V7cadYJr97LfI07ltT67H4eJ5+dSqlCfPd4SMLof0ZU+Nx0JBiWpuY6OvUdjXZpLzUhD
-         X6E3CCpXkGKUJtcK8qxLfJGQ3guK8CQb4HVHPB/uNpIMrQbEqw3/dJmzDPM0nC6MtaDe
-         Ub/Dd5//+gzAtqKDU/p4AxwvRSX111zFHt6fDltexjfglTKHofzMKiaZUml+IpieDkFm
-         l33w==
-X-Gm-Message-State: AC+VfDzhjM0GTAjEc2eWuxWzZyatGlc5S9qroipylO+FTA1WF1v39zy6
-	zKWLhT5HY9hy2M0ureFZxvR+l+fi
-X-Google-Smtp-Source: ACHHUZ6Tj8zelM2VZpR/AEzeGAQ8zj37niuO6NRBJvg0WI4NbhdxMvKTFTAAd3TJm0rHrq+VS/nWuA==
-X-Received: by 2002:a17:906:eec9:b0:94f:73db:b390 with SMTP id wu9-20020a170906eec900b0094f73dbb390mr34695874ejb.65.1684352722678;
-        Wed, 17 May 2023 12:45:22 -0700 (PDT)
-Received: from ?IPV6:2a02:810d:15c0:828:d7a:e7cc:21b3:c435? ([2a02:810d:15c0:828:d7a:e7cc:21b3:c435])
-        by smtp.gmail.com with ESMTPSA id tf8-20020a1709078d8800b0096a2b6de3a4sm10504747ejc.122.2023.05.17.12.45.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 17 May 2023 12:45:22 -0700 (PDT)
-Message-ID: <032699a0-9a43-953a-60e9-59a515a26cef@linaro.org>
-Date: Wed, 17 May 2023 21:45:20 +0200
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of robin.murphy@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=robin.murphy@arm.com;
+	dmarc=pass (policy=none) header.from=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9F2041FB;
+	Thu, 18 May 2023 06:25:45 -0700 (PDT)
+Received: from [10.57.82.163] (unknown [10.57.82.163])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2CFDC3F7BD;
+	Thu, 18 May 2023 06:24:57 -0700 (PDT)
+Message-ID: <33cf3d3e-1f3c-0f92-aff1-2441e4bfb793@arm.com>
+Date: Thu, 18 May 2023 14:24:53 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: en-US
+User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101
+ Thunderbird/102.10.1
+Content-Language: en-GB
 To: Alexandre Bailon <abailon@baylibre.com>, airlied@gmail.com,
  daniel@ffwll.ch, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
  tzimmermann@suse.de
 References: <20230517145237.295461-1-abailon@baylibre.com>
- <20230517145237.295461-6-abailon@baylibre.com>
-From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-In-Reply-To: <20230517145237.295461-6-abailon@baylibre.com>
-X-Spamd-Result: default: False [-2.60 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+ <20230517145237.295461-5-abailon@baylibre.com>
+From: Robin Murphy <robin.murphy@arm.com>
+In-Reply-To: <20230517145237.295461-5-abailon@baylibre.com>
+X-Spamd-Result: default: False [-2.70 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.46:from];
+	RCVD_IN_DNSWL_HI(-0.50)[217.140.110.172:from];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:217.140.96.0/20];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	TAGGED_RCPT(0.00)[dt];
-	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	URIBL_BLOCKED(0.00)[linaro.org:dkim];
-	FREEMAIL_CC(0.00)[kernel.org,linaro.org,gmail.com,collabora.com,amd.com,baylibre.com,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,lists.linaro.org];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_NO_TLS_LAST(0.10)[];
 	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de];
-	DKIM_TRACE(0.00)[linaro.org:+];
-	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	R_DKIM_NA(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,linaro.org,gmail.com,collabora.com,amd.com,baylibre.com,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,lists.linaro.org];
+	FROM_EQ_ENVFROM(0.00)[];
+	ASN(0.00)[asn:28939, ipnet:217.140.110.0/24, country:GB];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_TLS_LAST(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[dt];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	FROM_HAS_DN(0.00)[];
+	URIBL_BLOCKED(0.00)[baylibre.com:email];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: B50453E963
+X-Rspamd-Queue-Id: 501483F49E
 X-Spamd-Bar: --
-Message-ID-Hash: ZF4WC4QTQJOQG3JS4CWR44AIQYVLOOGB
-X-Message-ID-Hash: ZF4WC4QTQJOQG3JS4CWR44AIQYVLOOGB
-X-MailFrom: krzysztof.kozlowski@linaro.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: YWWD7ANCX2W4O5NHWTX4BMVNZGEAOJHQ
+X-Message-ID-Hash: YWWD7ANCX2W4O5NHWTX4BMVNZGEAOJHQ
+X-MailFrom: robin.murphy@arm.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org, matthias.bgg@gmail.com, angelogioacchino.delregno@collabora.com, sumit.semwal@linaro.org, christian.koenig@amd.com, jstephan@baylibre.com, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, khilman@baylibre.com, nbelin@baylibre.com, bero@baylibre.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 5/7] drm/apu: allow platform driver to implement their own mmap function
+Subject: [Linaro-mm-sig] Re: [PATCH 4/7] drm/apu: Add support of IOMMU
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZF4WC4QTQJOQG3JS4CWR44AIQYVLOOGB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YWWD7ANCX2W4O5NHWTX4BMVNZGEAOJHQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-On 17/05/2023 16:52, Alexandre Bailon wrote:
-> From: Julien Stephan <jstephan@baylibre.com>
+On 2023-05-17 15:52, Alexandre Bailon wrote:
+> Some APU devices are behind an IOMMU.
+> For some of these devices, we can't use DMA API because
+> they use static addresses so we have to manually use
+> IOMMU API to correctly map the buffers.
+
+Except you still need to use the DMA for the sake of cache coherency and 
+any other aspects :(
+
+> This adds support of IOMMU.
 > 
-> By default we will call drm_gem_mmap() unless the apu driver has
-> declared it's own mmap handler.
-> 
-> Signed-off-by: Julien Stephan <jstephan@baylibre.com>
+> Signed-off-by: Alexandre Bailon <abailon@baylibre.com>
 > Reviewed-by: Julien Stephan <jstephan@baylibre.com>
+> ---
+>   drivers/gpu/drm/apu/apu_drv.c      |   4 +
+>   drivers/gpu/drm/apu/apu_gem.c      | 174 +++++++++++++++++++++++++++++
+>   drivers/gpu/drm/apu/apu_internal.h |  16 +++
+>   drivers/gpu/drm/apu/apu_sched.c    |  28 +++++
+>   include/uapi/drm/apu_drm.h         |  12 +-
+>   5 files changed, 233 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/gpu/drm/apu/apu_drv.c b/drivers/gpu/drm/apu/apu_drv.c
+> index b6bd340b2bc8..a0dce785a02a 100644
+> --- a/drivers/gpu/drm/apu/apu_drv.c
+> +++ b/drivers/gpu/drm/apu/apu_drv.c
+> @@ -23,6 +23,10 @@ static const struct drm_ioctl_desc ioctls[] = {
+>   			  DRM_RENDER_ALLOW),
+>   	DRM_IOCTL_DEF_DRV(APU_GEM_DEQUEUE, ioctl_gem_dequeue,
+>   			  DRM_RENDER_ALLOW),
+> +	DRM_IOCTL_DEF_DRV(APU_GEM_IOMMU_MAP, ioctl_gem_iommu_map,
+> +			  DRM_RENDER_ALLOW),
+> +	DRM_IOCTL_DEF_DRV(APU_GEM_IOMMU_UNMAP, ioctl_gem_iommu_unmap,
+> +			  DRM_RENDER_ALLOW),
+>   };
+>   
+>   DEFINE_DRM_GEM_DMA_FOPS(apu_drm_ops);
+> diff --git a/drivers/gpu/drm/apu/apu_gem.c b/drivers/gpu/drm/apu/apu_gem.c
+> index 0e7b3b27942c..0a91363754c5 100644
+> --- a/drivers/gpu/drm/apu/apu_gem.c
+> +++ b/drivers/gpu/drm/apu/apu_gem.c
+> @@ -2,6 +2,9 @@
+>   //
+>   // Copyright 2020 BayLibre SAS
+>   
+> +#include <linux/iommu.h>
+> +#include <linux/iova.h>
+> +
+>   #include <drm/drm_gem_dma_helper.h>
+>   
+>   #include <uapi/drm/apu_drm.h>
+> @@ -42,6 +45,7 @@ int ioctl_gem_new(struct drm_device *dev, void *data,
+>   	 */
+>   	apu_obj->size = args->size;
+>   	apu_obj->offset = 0;
+> +	apu_obj->iommu_refcount = 0;
+>   	mutex_init(&apu_obj->mutex);
+>   
+>   	ret = drm_gem_handle_create(file_priv, gem_obj, &args->handle);
+> @@ -54,3 +58,173 @@ int ioctl_gem_new(struct drm_device *dev, void *data,
+>   
+>   	return 0;
+>   }
+> +
+> +void apu_bo_iommu_unmap(struct apu_drm *apu_drm, struct apu_gem_object *obj)
+> +{
+> +	int iova_pfn;
+> +	int i;
+> +
+> +	if (!obj->iommu_sgt)
+> +		return;
+> +
+> +	mutex_lock(&obj->mutex);
+> +	obj->iommu_refcount--;
+> +	if (obj->iommu_refcount) {
+> +		mutex_unlock(&obj->mutex);
+> +		return;
+> +	}
+> +
+> +	iova_pfn = PHYS_PFN(obj->iova);
 
-One does not have to review own code. We all assume that we send good
-code which we do not have to review by ourselves (by the author). We
-also assume we make mistakes, which we cannot find, thus other person's
-review is important.
+Using mm layer operations on IOVAs looks wrong. In practice I don't 
+think it's ultimately harmful, other than potentially making less 
+efficient use of IOVA space if the CPU page size is larger than the 
+IOMMU page size, but it's still a bad code smell when you're using an 
+IOVA abstraction that is deliberately decoupled from CPU pages.
 
-Adding own review tag suggests you added them mechanically, so I doubt
-that they really happened.
+> +	for (i = 0; i < obj->iommu_sgt->nents; i++) {
+> +		iommu_unmap(apu_drm->domain, PFN_PHYS(iova_pfn),
+> +			    PAGE_ALIGN(obj->iommu_sgt->sgl[i].length));
+> +		iova_pfn += PHYS_PFN(PAGE_ALIGN(obj->iommu_sgt->sgl[i].length));
 
-Anyway, your SoB is missing.
+You can unmap a set of IOVA-contiguous mappings as a single range with 
+one call.
 
-Best regards,
-Krzysztof
+> +	}
+> +
+> +	sg_free_table(obj->iommu_sgt);
+> +	kfree(obj->iommu_sgt);
+> +
+> +	free_iova(&apu_drm->iovad, PHYS_PFN(obj->iova));
+> +	mutex_unlock(&obj->mutex);
+> +}
+> +
+> +static struct sg_table *apu_get_sg_table(struct drm_gem_object *obj)
+> +{
+> +	if (obj->funcs)
+> +		return obj->funcs->get_sg_table(obj);
+> +	return NULL;
+> +}
+> +
+> +int apu_bo_iommu_map(struct apu_drm *apu_drm, struct drm_gem_object *obj)
+> +{
+> +	struct apu_gem_object *apu_obj = to_apu_bo(obj);
+> +	struct scatterlist *sgl;
+> +	phys_addr_t phys;
+> +	int total_buf_space;
+> +	int iova_pfn;
+> +	int iova;
+> +	int ret;
+> +	int i;
+> +
+> +	mutex_lock(&apu_obj->mutex);
+> +	apu_obj->iommu_refcount++;
+> +	if (apu_obj->iommu_refcount != 1) {
+> +		mutex_unlock(&apu_obj->mutex);
+> +		return 0;
+> +	}
+> +
+> +	apu_obj->iommu_sgt = apu_get_sg_table(obj);
+> +	if (IS_ERR(apu_obj->iommu_sgt)) {
+> +		mutex_unlock(&apu_obj->mutex);
+> +		return PTR_ERR(apu_obj->iommu_sgt);
+> +	}
+> +
+> +	total_buf_space = obj->size;
+> +	iova_pfn = alloc_iova_fast(&apu_drm->iovad,
+> +				   total_buf_space >> PAGE_SHIFT,
+> +				   apu_drm->iova_limit_pfn, true);
 
+If you need things mapped at specific addresses like the commit message 
+claims, the DMA IOVA allocator is a terrible tool for the job. DRM 
+already has its own more flexible abstraction for address space 
+management in the form of drm_mm, so as a DRM driver it would seem a lot 
+more sensible to use one of those.
+
+And even if you could justify using this allocator, I can't imagine 
+there's any way you'd need the _fast version (further illustrated by the 
+fact that you're freeing the IOVAs wrongly for that).
+
+> +	apu_obj->iova = PFN_PHYS(iova_pfn);
+> +
+> +	if (!iova_pfn) {
+> +		dev_err(apu_drm->dev, "Failed to allocate iova address\n");
+> +		mutex_unlock(&apu_obj->mutex);
+> +		return -ENOMEM;
+> +	}
+> +
+> +	iova = apu_obj->iova;
+> +	sgl = apu_obj->iommu_sgt->sgl;
+> +	for (i = 0; i < apu_obj->iommu_sgt->nents; i++) {
+> +		phys = page_to_phys(sg_page(&sgl[i]));
+> +		ret =
+> +		    iommu_map(apu_drm->domain, PFN_PHYS(iova_pfn), phys,
+> +			      PAGE_ALIGN(sgl[i].length), IOMMU_READ | IOMMU_WRITE,
+> +			      GFP_KERNEL);
+> +		if (ret) {
+> +			dev_err(apu_drm->dev, "Failed to iommu map\n");
+> +			free_iova(&apu_drm->iovad, iova_pfn);
+> +			mutex_unlock(&apu_obj->mutex);
+> +			return ret;
+> +		}
+> +		iova += sgl[i].offset + sgl[i].length;
+> +		iova_pfn += PHYS_PFN(PAGE_ALIGN(sgl[i].length));
+
+This looks a lot like it should just be iommu_map_sg(). Also it makes me 
+suspicious of the relationship between obj->size and the sgtable - if 
+the size is already pre-calculated to include any required padding then 
+why can't the caller just provide aligned SG segments in the first 
+place? Conversely if it's the original un-padded size, then any padding 
+you *do* add at this point means you're going to overrun the allocated 
+IOVA space.
+
+> +	}
+> +	mutex_unlock(&apu_obj->mutex);
+> +
+> +	return 0;
+> +}
+> +
+> +int ioctl_gem_iommu_map(struct drm_device *dev, void *data,
+> +			struct drm_file *file_priv)
+> +{
+> +	struct apu_drm *apu_drm = dev->dev_private;
+> +	struct drm_apu_gem_iommu_map *args = data;
+> +	struct drm_gem_object **bos;
+> +	void __user *bo_handles;
+> +	u64 *das;
+> +	int ret;
+> +	int i;
+> +
+> +	if (!apu_drm->domain)
+> +		return -ENODEV;
+> +
+> +	das = kvmalloc_array(args->bo_handle_count, sizeof(*das), GFP_KERNEL);
+
+Does anything prevent userspace passing random numbers and being able to 
+cause arbitrarily large allocations of unaccounted kernel memory here?
+
+> +	if (!das)
+> +		return -ENOMEM;
+> +
+> +	bo_handles = (void __user *)(uintptr_t) args->bo_handles;
+> +	ret = drm_gem_objects_lookup(file_priv, bo_handles,
+> +				     args->bo_handle_count, &bos);
+> +	if (ret) {
+> +		kvfree(das);
+> +		return ret;
+> +	}
+> +
+> +	for (i = 0; i < args->bo_handle_count; i++) {
+> +		ret = apu_bo_iommu_map(apu_drm, bos[i]);
+> +		if (ret) {
+> +			/* TODO: handle error */
+
+Yes, that would be a good thing to do.
+
+> +			break;
+> +		}
+> +		das[i] = to_apu_bo(bos[i])->iova + to_apu_bo(bos[i])->offset;
+> +	}
+> +
+> +	if (copy_to_user((void *)args->bo_device_addresses, das,
+> +			 args->bo_handle_count * sizeof(u64))) {
+> +		ret = -EFAULT;
+> +		DRM_DEBUG("Failed to copy device addresses\n");
+> +		goto out;
+> +	}
+> +
+> +out:
+> +	kvfree(das);
+> +	kvfree(bos);
+> +
+> +	return 0;
+> +}
+> +
+> +int ioctl_gem_iommu_unmap(struct drm_device *dev, void *data,
+> +			  struct drm_file *file_priv)
+> +{
+> +	struct apu_drm *apu_drm = dev->dev_private;
+> +	struct drm_apu_gem_iommu_map *args = data;
+> +	struct drm_gem_object **bos;
+> +	void __user *bo_handles;
+> +	int ret;
+> +	int i;
+> +
+> +	if (!apu_drm->domain)
+> +		return -ENODEV;
+> +
+> +	bo_handles = (void __user *)(uintptr_t) args->bo_handles;
+> +	ret = drm_gem_objects_lookup(file_priv, bo_handles,
+> +				     args->bo_handle_count, &bos);
+> +	if (ret)
+> +		return ret;
+> +
+> +	for (i = 0; i < args->bo_handle_count; i++)
+> +		apu_bo_iommu_unmap(apu_drm, to_apu_bo(bos[i]));
+> +
+> +	kvfree(bos);
+> +
+> +	return 0;
+> +}
+> diff --git a/drivers/gpu/drm/apu/apu_internal.h b/drivers/gpu/drm/apu/apu_internal.h
+> index 021a3efdedf2..ea4183f3fb15 100644
+> --- a/drivers/gpu/drm/apu/apu_internal.h
+> +++ b/drivers/gpu/drm/apu/apu_internal.h
+> @@ -2,6 +2,9 @@
+>   #ifndef __APU_INTERNAL_H__
+>   #define __APU_INTERNAL_H__
+>   
+> +#include <linux/iommu.h>
+> +#include <linux/iova.h>
+> +
+>   #include <drm/drm_drv.h>
+>   #include <drm/drm_gem_dma_helper.h>
+>   #include <drm/gpu_scheduler.h>
+> @@ -9,7 +12,10 @@
+>   struct apu_gem_object {
+>   	struct drm_gem_dma_object base;
+>   	struct mutex mutex;
+> +	struct sg_table *iommu_sgt;
+> +	int iommu_refcount;
+>   	size_t size;
+> +	u32 iova;
+
+Really? "Common infrastructure that could be re-used to support many 
+accelerators", in 2023, that still assumes 32-bit addressing?
+
+>   	u32 offset;
+>   };
+>   
+> @@ -35,6 +41,10 @@ struct apu_drm {
+>   	struct drm_device base;
+>   	struct device *dev;
+>   
+> +	struct iommu_domain *domain;
+
+Oh, nothing ever allocates this domain or attaches to it, so this is all 
+dead code :(
+
+> +	struct iova_domain iovad;
+> +	int iova_limit_pfn;
+
+(and nothing initialises these either)
+
+> +
+>   	struct list_head cores;
+>   	struct list_head node;
+>   
+> @@ -165,12 +175,18 @@ struct apu_gem_object *to_apu_bo(struct drm_gem_object *obj);
+>   struct drm_gem_object *apu_gem_create_object(struct drm_device *dev,
+>   					     size_t size);
+>   
+> +int apu_bo_iommu_map(struct apu_drm *apu_drm, struct drm_gem_object *obj);
+> +void apu_bo_iommu_unmap(struct apu_drm *apu_drm, struct apu_gem_object *obj);
+>   int ioctl_gem_new(struct drm_device *dev, void *data,
+>   		  struct drm_file *file_priv);
+>   int ioctl_gem_user_new(struct drm_device *dev, void *data,
+>   		       struct drm_file *file_priv);
+>   struct dma_buf *apu_gem_prime_export(struct drm_gem_object *gem,
+>   				     int flags);
+> +int ioctl_gem_iommu_map(struct drm_device *dev, void *data,
+> +			struct drm_file *file_priv);
+> +int ioctl_gem_iommu_unmap(struct drm_device *dev, void *data,
+> +			  struct drm_file *file_priv);
+>   int ioctl_gem_queue(struct drm_device *dev, void *data,
+>   		    struct drm_file *file_priv);
+>   int ioctl_gem_dequeue(struct drm_device *dev, void *data,
+> diff --git a/drivers/gpu/drm/apu/apu_sched.c b/drivers/gpu/drm/apu/apu_sched.c
+> index 13b6fbd00bd8..716d4b7f2d55 100644
+> --- a/drivers/gpu/drm/apu/apu_sched.c
+> +++ b/drivers/gpu/drm/apu/apu_sched.c
+> @@ -117,6 +117,8 @@ static void apu_job_cleanup(struct kref *ref)
+>   			struct apu_gem_object *apu_obj;
+>   
+>   			apu_obj = to_apu_bo(job->bos[i]);
+> +			if (job->apu->domain)
+> +				apu_bo_iommu_unmap(job->apu, apu_obj);
+>   			drm_gem_object_put(job->bos[i]);
+>   		}
+>   
+> @@ -397,6 +399,7 @@ static int apu_lookup_bos(struct drm_device *dev, struct drm_file *file_priv,
+>   			  struct drm_apu_gem_queue *args, struct apu_job *job)
+>   {
+>   	void __user *bo_handles;
+> +	unsigned int i;
+>   	int ret;
+>   
+>   	job->bo_count = args->bo_handle_count;
+> @@ -413,6 +416,31 @@ static int apu_lookup_bos(struct drm_device *dev, struct drm_file *file_priv,
+>   	bo_handles = (void __user *)(uintptr_t) args->bo_handles;
+>   	ret = drm_gem_objects_lookup(file_priv, bo_handles,
+>   				     job->bo_count, &job->bos);
+> +	if (ret)
+> +		return ret;
+> +
+> +	if (!job->apu->domain)
+> +		return 0;
+> +
+> +	for (i = 0; i < job->bo_count; i++) {
+> +		ret = apu_bo_iommu_map(job->apu, job->bos[i]);
+> +		if (ret)
+> +			goto err_iommu_map;
+> +	}
+> +
+> +	return ret;
+> +
+> +err_iommu_map:
+> +	kvfree(job->implicit_fences);
+> +	for (i = 0; i < job->bo_count; i++) {
+> +		struct apu_gem_object *apu_obj;
+> +
+> +		apu_obj = to_apu_bo(job->bos[i]);
+> +		if (job->apu->domain)
+
+If the domain *did* ever exist, but could suddenly disappear at any 
+point after you've decided to go ahead and start mapping things into it, 
+then there is a heck of a lot of sychronisation missing from this whole 
+infrastructure.
+
+Thanks,
+Robin.
+
+> +			apu_bo_iommu_unmap(job->apu, apu_obj);
+> +		drm_gem_object_put(job->bos[i]);
+> +	}
+> +	kvfree(job->bos);
+>   
+>   	return ret;
+>   }
+> diff --git a/include/uapi/drm/apu_drm.h b/include/uapi/drm/apu_drm.h
+> index c47000097040..0ecc739d8aed 100644
+> --- a/include/uapi/drm/apu_drm.h
+> +++ b/include/uapi/drm/apu_drm.h
+> @@ -41,6 +41,12 @@ struct drm_apu_gem_dequeue {
+>   	__u64 data;
+>   };
+>   
+> +struct drm_apu_gem_iommu_map {
+> +	__u64 bo_handles;
+> +	__u32 bo_handle_count;
+> +	__u64 bo_device_addresses;
+> +};
+> +
+>   struct apu_job_event {
+>   	struct drm_event base;
+>   	__u32 out_sync;
+> @@ -57,12 +63,16 @@ struct drm_apu_state {
+>   #define DRM_APU_GEM_NEW			0x01
+>   #define DRM_APU_GEM_QUEUE		0x02
+>   #define DRM_APU_GEM_DEQUEUE		0x03
+> -#define DRM_APU_NUM_IOCTLS		0x04
+> +#define DRM_APU_GEM_IOMMU_MAP		0x04
+> +#define DRM_APU_GEM_IOMMU_UNMAP		0x05
+> +#define DRM_APU_NUM_IOCTLS		0x06
+>   
+>   #define DRM_IOCTL_APU_STATE		DRM_IOWR(DRM_COMMAND_BASE + DRM_APU_STATE, struct drm_apu_state)
+>   #define DRM_IOCTL_APU_GEM_NEW		DRM_IOWR(DRM_COMMAND_BASE + DRM_APU_GEM_NEW, struct drm_apu_gem_new)
+>   #define DRM_IOCTL_APU_GEM_QUEUE		DRM_IOWR(DRM_COMMAND_BASE + DRM_APU_GEM_QUEUE, struct drm_apu_gem_queue)
+>   #define DRM_IOCTL_APU_GEM_DEQUEUE	DRM_IOWR(DRM_COMMAND_BASE + DRM_APU_GEM_DEQUEUE, struct drm_apu_gem_dequeue)
+> +#define DRM_IOCTL_APU_GEM_IOMMU_MAP	DRM_IOWR(DRM_COMMAND_BASE + DRM_APU_GEM_IOMMU_MAP, struct drm_apu_gem_iommu_map)
+> +#define DRM_IOCTL_APU_GEM_IOMMU_UNMAP	DRM_IOWR(DRM_COMMAND_BASE + DRM_APU_GEM_IOMMU_UNMAP, struct drm_apu_gem_iommu_map)
+>   
+>   #if defined(__cplusplus)
+>   }
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
