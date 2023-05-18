@@ -2,518 +2,403 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id E1239708293
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 May 2023 15:25:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8707B7082E6
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 May 2023 15:38:41 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A07F73F49E
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 May 2023 13:25:05 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by lists.linaro.org (Postfix) with ESMTP id 501483F49E
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 18 May 2023 13:25:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8907244DAE
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 May 2023 13:38:40 +0000 (UTC)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+	by lists.linaro.org (Postfix) with ESMTPS id 0A04543CAE
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 18 May 2023 13:38:37 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of robin.murphy@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=robin.murphy@arm.com;
-	dmarc=pass (policy=none) header.from=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9F2041FB;
-	Thu, 18 May 2023 06:25:45 -0700 (PDT)
-Received: from [10.57.82.163] (unknown [10.57.82.163])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2CFDC3F7BD;
-	Thu, 18 May 2023 06:24:57 -0700 (PDT)
-Message-ID: <33cf3d3e-1f3c-0f92-aff1-2441e4bfb793@arm.com>
-Date: Thu, 18 May 2023 14:24:53 +0100
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=vukYCLMK;
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=lpHr+Eoz;
+	spf=pass (lists.linaro.org: domain of tzimmermann@suse.de designates 195.135.220.29 as permitted sender) smtp.mailfrom=tzimmermann@suse.de;
+	dmarc=pass (policy=none) header.from=suse.de
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by smtp-out2.suse.de (Postfix) with ESMTPS id 1E35E1F381;
+	Thu, 18 May 2023 13:38:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1684417116; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=d23IndD6gRgPKTLDYF9mGAg03YNCdDbZGzEYMrl6Qc0=;
+	b=vukYCLMKCUl5eGmuakx0qvsYJ04W8aNu9vKcrb54W6Ec/jCy0fizsVVCBBUewKrMAvJkdH
+	XpFzM0j+sHpxlAIOWak8o63w55EKPtXEDXw/EDzGfh6iOALtxJazKswkYcQRWft8M20i5G
+	zNd7WvlLRBLb/amVDfVARwvGhPA8ZeU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1684417116;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references;
+	bh=d23IndD6gRgPKTLDYF9mGAg03YNCdDbZGzEYMrl6Qc0=;
+	b=lpHr+EozM0JPlfhFgHwMnNBHHP5rP/zlpfivOvT2XdD7DIn6l8XEOe2b9IhSxq8p+exV5a
+	14YghKJaH6MuvGBw==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+	(No client certificate requested)
+	by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id BAD2A138F5;
+	Thu, 18 May 2023 13:38:35 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+	by imap2.suse-dmz.suse.de with ESMTPSA
+	id 42afLFsqZmQpRgAAMHmgww
+	(envelope-from <tzimmermann@suse.de>); Thu, 18 May 2023 13:38:35 +0000
+Message-ID: <7b77020f-d543-13bf-e178-bc416bcc728d@suse.de>
+Date: Thu, 18 May 2023 15:38:35 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.10.1
-Content-Language: en-GB
-To: Alexandre Bailon <abailon@baylibre.com>, airlied@gmail.com,
- daniel@ffwll.ch, maarten.lankhorst@linux.intel.com, mripard@kernel.org,
- tzimmermann@suse.de
-References: <20230517145237.295461-1-abailon@baylibre.com>
- <20230517145237.295461-5-abailon@baylibre.com>
-From: Robin Murphy <robin.murphy@arm.com>
-In-Reply-To: <20230517145237.295461-5-abailon@baylibre.com>
-X-Spamd-Result: default: False [-2.70 / 15.00];
+Content-Language: en-US
+To: Sui Jingfeng <suijingfeng@loongson.cn>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, suijingfeng <15330273260@189.cn>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Christian Koenig <christian.koenig@amd.com>,
+ Emil Velikov <emil.l.velikov@gmail.com>
+References: <20230515155734.2954149-1-suijingfeng@loongson.cn>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <20230515155734.2954149-1-suijingfeng@loongson.cn>
+X-Spamd-Result: default: False [-5.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
+	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_IN_DNSWL_HI(-0.50)[217.140.110.172:from];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:217.140.96.0/20];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_NO_TLS_LAST(0.10)[];
-	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	R_DKIM_NA(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,linaro.org,gmail.com,collabora.com,amd.com,baylibre.com,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,lists.linaro.org];
-	FROM_EQ_ENVFROM(0.00)[];
-	ASN(0.00)[asn:28939, ipnet:217.140.110.0/24, country:GB];
-	MIME_TRACE(0.00)[0:+];
-	NEURAL_HAM(-0.00)[-0.999];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[suse.de,none];
+	RCVD_IN_DNSWL_HI(-0.50)[195.135.220.29:from];
+	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
+	R_SPF_ALLOW(-0.20)[+ip4:195.135.220.0/27];
+	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	MIME_BASE64_TEXT(0.10)[];
+	URIBL_BLOCKED(0.00)[60hz:email,30hz:email];
 	FROM_HAS_DN(0.00)[];
-	URIBL_BLOCKED(0.00)[baylibre.com:email];
+	TAGGED_RCPT(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	HAS_ATTACHMENT(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2]
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[suse.de:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_TO(0.00)[loongson.cn,linux.intel.com,kernel.org,gmail.com,ffwll.ch,189.cn,linaro.org,amd.com];
+	ASN(0.00)[asn:29298, ipnet:195.135.220.0/23, country:DE];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:~];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 501483F49E
-X-Spamd-Bar: --
-Message-ID-Hash: YWWD7ANCX2W4O5NHWTX4BMVNZGEAOJHQ
-X-Message-ID-Hash: YWWD7ANCX2W4O5NHWTX4BMVNZGEAOJHQ
-X-MailFrom: robin.murphy@arm.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: robh+dt@kernel.org, krzysztof.kozlowski+dt@linaro.org, conor+dt@kernel.org, matthias.bgg@gmail.com, angelogioacchino.delregno@collabora.com, sumit.semwal@linaro.org, christian.koenig@amd.com, jstephan@baylibre.com, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, khilman@baylibre.com, nbelin@baylibre.com, bero@baylibre.com
+X-Rspamd-Queue-Id: 0A04543CAE
+X-Spamd-Bar: -----
+Message-ID-Hash: MZA4CKCKXYKJP3LTIX5CEC3HNAS7SLLF
+X-Message-ID-Hash: MZA4CKCKXYKJP3LTIX5CEC3HNAS7SLLF
+X-MailFrom: tzimmermann@suse.de
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Nathan Chancellor <nathan@kernel.org>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, loongson-kernel@lists.loongnix.cn
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 4/7] drm/apu: Add support of IOMMU
+Subject: [Linaro-mm-sig] Re: [PATCH v13 0/2] drm: add kms driver for loongson display controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YWWD7ANCX2W4O5NHWTX4BMVNZGEAOJHQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/MZA4CKCKXYKJP3LTIX5CEC3HNAS7SLLF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: multipart/mixed; boundary="===============4357670783741150280=="
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============4357670783741150280==
+Content-Language: en-US
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------lpRXJtGOVOTubga2tCmLuMmE"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------lpRXJtGOVOTubga2tCmLuMmE
+Content-Type: multipart/mixed; boundary="------------64iW4IpIjPGpb7Hhbd0Y1Ac6";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: Sui Jingfeng <suijingfeng@loongson.cn>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
+ Daniel Vetter <daniel@ffwll.ch>, suijingfeng <15330273260@189.cn>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Christian Koenig <christian.koenig@amd.com>,
+ Emil Velikov <emil.l.velikov@gmail.com>
+Cc: Nathan Chancellor <nathan@kernel.org>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org, loongson-kernel@lists.loongnix.cn
+Message-ID: <7b77020f-d543-13bf-e178-bc416bcc728d@suse.de>
+Subject: Re: [PATCH v13 0/2] drm: add kms driver for loongson display
+ controller
+References: <20230515155734.2954149-1-suijingfeng@loongson.cn>
+In-Reply-To: <20230515155734.2954149-1-suijingfeng@loongson.cn>
+
+--------------64iW4IpIjPGpb7Hhbd0Y1Ac6
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+
+SGksDQoNCkkgZG9uJ3Qga25vdyB0aGUgc3RhdHVzIGhlcmUsIGJ1dCBpZiBpdCB3b3Jrcywg
+eW91IHNob3VsZCBwcm9iYWJseSBtZXJnZSANCml0LiBJIHRoaW5rIHlvdSBmaXJzdCBuZWVk
+IHRvIGdldCBjb21taXQgYWNjZXNzIHRvIGRybS1taXNjLiBUaGF0IHdpbGwgDQphbHNvIGFs
+bG93IHlvdSB0byBtZXJnZSB0aGUgb3RoZXIgZml4ZXMgeW91IHNlbnQgcmVjZW50bHkuDQoN
+ClNlZQ0KDQogDQpodHRwczovL2RybS5wYWdlcy5mcmVlZGVza3RvcC5vcmcvbWFpbnRhaW5l
+ci10b29scy9jb21taXQtYWNjZXNzLmh0bWwjZHJtLW1pc2MNCg0KZm9yIHRoZSBvdmVyYWxs
+IHByb2Nlc3MuDQoNCkJlc3QgcmVnYXJkcw0KVGhvbWFzDQoNCkFtIDE1LjA1LjIzIHVtIDE3
+OjU3IHNjaHJpZWIgU3VpIEppbmdmZW5nOg0KPiBMb29uZ3NvbiBkaXNwbGF5IGNvbnRyb2xs
+ZXIgSVAgaGFzIGJlZW4gaW50ZWdyYXRlZCBpbiBib3RoIExvb25nc29uIG5vcnRoDQo+IGJy
+aWRnZSBjaGlwc2V0KGxzN2ExMDAwL2xzN2EyMDAwKSBhbmQgTG9vbmdzb24gU29DcyhsczJr
+MTAwMC9sczJrMjAwMCksIGl0DQo+IGhhcyBiZWVuIGV2ZW4gaW5jbHVkZWQgaW4gTG9vbmdz
+b24gc2VsZi1tYWRlIEJNQyBwcm9kdWN0cy4NCj4gDQo+IFRoaXMgZGlzcGxheSBjb250cm9s
+bGVyIGlzIGEgUENJIGRldmljZS4gSXQgaGFzIHR3byBkaXNwbGF5IHBpcGVzIGFuZCBlYWNo
+DQo+IGRpc3BsYXkgcGlwZSBzdXBwb3J0IGEgcHJpbWFyeSBwbGFuZSBhbmQgYSBjdXJzb3Ig
+cGxhbmUuIEZvciB0aGUgREMgaW4gdGhlDQo+IGxzN2ExMDAwIGFuZCBsczJrMTAwMCwgZWFj
+aCBkaXNwbGF5IHBpcGUgaGFzIGEgRFZPIG91dHB1dCBpbnRlcmZhY2Ugd2hpY2gNCj4gcHJv
+dmlkZSBSR0I4ODggc2lnbmFscywgdmVydGljYWwgJiBob3Jpem9udGFsIHN5bmNocm9uaXNh
+dGlvbnMgYW5kIHBpeGVsDQo+IGNsb2NrLiBFYWNoIENSVEMgaXMgYWJsZSB0byBzdXBwb3J0
+IDE5MjB4MTA4MEA2MEh6LCB0aGUgbWF4aW11bSByZXNvbHV0aW9uDQo+IG9mIGVhY2ggZGlz
+cGxheSBwaXBlIGlzIDIwNDh4MjA0OCBhY2NvcmRpbmcgdG8gdGhlIGhhcmR3YXJlIHNwZWMu
+DQo+IA0KPiBGb3IgdGhlIERDIGluIExTN0EyMDAwLCBlYWNoIGRpc3BsYXkgcGlwZSBpcyBl
+cXVpcHBlZCB3aXRoIGEgYnVpbHQtaW4gSERNSQ0KPiBlbmNvZGVyIHdoaWNoIGlzIGNvbXBs
+aWFudCB3aXRoIHRoZSBIRE1JIDEuNCBzcGVjaWZpY2F0aW9uLCB0aHVzIGl0IHN1cHBvcnQN
+Cj4gMzg0MHgyMTYwQDMwSHouIFRoZSBmaXJzdCBkaXNwbGF5IHBpcGUgaXMgYWxzbyBlcXVp
+cHBlZCB3aXRoIGEgdHJhbnNwYXJlbnQNCj4gdmdhIGVuY29kZXIgd2hpY2ggaXMgcGFyYWxs
+ZWwgd2l0aCB0aGUgSERNSSBlbmNvZGVyLiBUaGUgREMgaW4gTFM3QTIwMDAgaXMNCj4gbW9y
+ZSBjb21wbGV0ZSBjb21wYXJlIHdpdGggdGhlIG9uZSBpbiBvbGQgY2hpcHMsIGJlc2lkZXMg
+YWJvdmUgZmVhdHVyZSwgaXQNCj4gaGFzIHR3byBoYXJkd2FyZSBjdXJzb3JzLCB0d28gaGFy
+ZHdhcmUgdmJsYW5rIGNvdW50ZXIgYW5kIHR3byBzY2Fub3V0DQo+IHBvc2l0aW9uIHJlY29y
+ZGVycyB1bml0LiBJdCBhbHNvIHN1cHBvcnQgdGlsZWQgZnJhbWVidWZmZXIgZm9ybWF0IHdo
+aWNoDQo+IGNhbiBiZSBzY2Fub3V0IHRoZSB0aWxlZCBmcmFtZWJ1ZmZlciByZW5kZXJlZCBi
+eSB0aGUgTG9vbmdHUFUgZGlyZWN0bHkuDQo+IA0KPiB2MSAtPiB2MjoNCj4gICAxKSBVc2Ug
+aHBkIHN0YXR1cyByZWcgd2hlbiBwb2xsaW5nIGZvciBsczdhMjAwMA0KPiAgIDIpIEZpeCBh
+bGwgd2FybmluZ3MgZW1lcmdlZCB3aGVuIGNvbXBpbGUgd2l0aCBXPTENCj4gDQo+IHYyIC0+
+IHYzOg0KPiAgIDEpIEFkZCBDT01QSUxFX1RFU1QgaW4gS2NvbmZpZyBhbmQgbWFrZSB0aGUg
+ZHJpdmVyIG9mZiBieSBkZWZhdWx0DQo+ICAgMikgQWxwaGFiZXRpY2FsIHNvcnRpbmcgaGVh
+ZGVycyAoVGhvbWFzKQ0KPiAgIDMpIFVudGFuZ2xlIHJlZ2lzdGVyIGFjY2VzcyBmdW5jdGlv
+bnMgYXMgbXVjaCBhcyBwb3NzaWJsZSAoVGhvbWFzKQ0KPiAgIDQpIFN3aXRjaCB0byBUVE0g
+YmFzZWQgbWVtb3J5IG1hbmFnZXIgYW5kIHByZWZlciBjYWNoZWQgbWFwcGluZw0KPiAgICAg
+IGZvciBMb29uZ3NvbiBTb0MgKFRob21hcykNCj4gICA1KSBBZGQgY2hpcCBpZCBkZXRlY3Rp
+b24gbWV0aG9kLCBub3cgYWxsIG1vZGVscyBhcmUgZGlzdGluZ3Vpc2hhYmxlLg0KPiAgIDYp
+IFJldmlzZSBidWlsdGluIEhETUkgcGh5IGRyaXZlciwgbmVhcmx5IGFsbCBtYWluIHN0cmVh
+bSBtb2RlDQo+ICAgICAgYmVsb3cgNEtAMzBIeiBpcyB0ZXN0ZWQsIHRoaXMgZHJpdmVyIHN1
+cHBvcnRlZCB0aGVzZSBtb2RlIHZlcnkNCj4gICAgICB3ZWxsIGluY2x1ZGluZyBjbG9uZSBk
+aXNwbGF5IG1vZGUgYW5kIGV4dGVuZCBkaXNwbGF5IG1vZGUuDQo+IA0KPiB2MyAtPiB2NDoN
+Cj4gICAxKSBRdWlja2x5IGZpeCBhIHNtYWxsIG1pc3Rha2UuDQo+IA0KPiB2NCAtPiB2NToN
+Cj4gICAxKSBEcm9wIHBvdGVudGlhbCBzdXBwb3J0IGZvciBMb29uZ3NvbiAySyBzZXJpZXMg
+U29DIHRlbXBvcmFyeSwNCj4gICAgICB0aGlzIHBhcnQgc2hvdWxkIGJlIHJlc2VuZCB3aXRo
+IHRoZSBEVCBiaW5kaW5nIHBhdGNoIGluIHRoZSBmdXR1cmUuDQo+ICAgMikgQWRkIHBlciBk
+aXNwbGF5IHBpcGUgZGVidWdmcyBzdXBwb3J0IHRvIHRoZSBidWlsdGluIEhETUkgZW5jb2Rl
+ci4NCj4gICAzKSBSZXdyaXRlIGF0b21pY191cGRhdGUoKSBmb3IgaGFyZHdhcmUgY3Vyc29y
+cyBwbGFuZShUaG9tYXMpDQo+ICAgNCkgUmV3cml0ZSBlbmNvZGVyIGFuZCBjb25uZWN0b3Ig
+aW5pdGlhbGl6YXRpb24gcGFydCwgdW50YW5nbGUgaXQNCj4gICAgICBhY2NvcmRpbmcgdG8g
+dGhlIGNoaXAoVGhvbWFzKS4NCj4gDQo+IHY1IC0+IHY2Og0KPiAgIDEpIFJlbW92ZSBzdHJh
+eSBjb2RlIHdoaWNoIGRpZG4ndCBnZXQgdXNlZCwgc2F5IGxzZGNfb2ZfZ2V0X3Jlc2VydmVk
+X3JhbQ0KPiAgIDIpIEZpeCBhbGwgdHlwb3MgSSBjb3VsZCBmb3VuZCwgbWFrZSBzZW50ZW5j
+ZXMgYW5kIGNvZGUgbW9yZSByZWFkYWJsZQ0KPiAgIDMpIFVudGFuZ2xlIGxzZGNfaGRtaSpf
+Y29ubmVjdG9yX2RldGVjdCgpIGZ1bmN0aW9uIGFjY29yZGluZyB0byB0aGUgcGlwZQ0KPiAg
+IDQpIEFmdGVyIGEgc2VyaW91cyBjb25zaWRlcmF0aW9uLCB3ZSByZW5hbWUgdGhpcyBkcml2
+ZXIgYXMgbG9vbmdzb24uDQo+ICAgICAgQmVjYXVzZSB3ZSBhbHNvIGhhdmUgZHJpdmVycyB0
+b3dhcmQgdGhlIExvb25nR1BVIElQIGluIExTN0EyMDAwIGFuZA0KPiAgICAgIExTMksyMDAw
+LiBCZXNpZGVzLCB0aGVyZSBhcmUgYWxzbyBkcml2ZXJzIGFib3V0IHRoZSBleHRlcm5hbCBl
+bmNvZGVyLA0KPiAgICAgIEhETUkgYXVkaW8gZHJpdmVyIGFuZCB2YmlvcyBzdXBwb3J0IGV0
+Yy4gVGhpcyBwYXRjaCBvbmx5IHByb3ZpZGUgREMNCj4gICAgICBkcml2ZXIgcGFydCwgbXkg
+dGVhbW1hdGUgTGkgWWkgYmVsaWV2ZSB0aGF0IGxvb25nc29uIHdpbGwgYmUgbW9yZQ0KPiAg
+ICAgIHN1aXRhYmxlIGZvciBsb29uZ3NvbiBncmFwaGljcyB0aGFuIGxzZGMgaW4gdGhlIGxv
+bmcgcnVuLg0KPiANCj4gICAgICBsb29uZ3Nvbi5rbyA9IExTREMgKyBMb29uZ0dQVSArIGVu
+Y29kZXJzIGRyaXZlciArIHZiaW9zL0RUIC4uLg0KPiANCj4gdjYgLT4gdjc6DQo+ICAgMSkg
+QWRkIHByaW1lIHN1cHBvcnQsIHNlbGYtc2hhcmluZyBpcyB3b3Jrcy4gc2hhcmluZyBidWZm
+ZXIgd2l0aCBldG5hdml2DQo+ICAgICAgaXMgYWxzbyB0ZXN0ZWQsIGFuZCBpdHMgd29ya3Mg
+d2l0aCBsaW1pdGF0aW9uLg0KPiAgIDIpIEltcGxlbWVudCBidWZmZXIgb2JqZWN0cyB0cmFj
+a2luZyB3aXRoIGxpc3RfaGVhZC4NCj4gICAzKSBTMyhzbGVlcCB0byBSQU0pIGlzIHRlc3Rl
+ZCBvbiBsczNhNTAwMCtsczdhMjAwMCBldmIgYW5kIGl0IHdvcmtzLg0KPiAgIDQpIFJld3Jp
+dGUgbHNkY19ib19tb3ZlLCBzaW5jZSB0dG0gY29yZSBzdG9wIGFsbG9jYXRpbmcgcmVzb3Vy
+Y2VzDQo+ICAgICAgZHVyaW5nIEJPIGNyZWF0aW9uLiBQYXRjaCBWMSB+IFY2IG9mIHRoaXMg
+c2VyaWVzIG5vIGxvbmdlciB3b3Jrcw0KPiAgICAgIG9uIGxhdGVzdCBrZXJuZWwuIFRodXMs
+IHdlIHNlbmQgVjcgdG8gcmV2aXZhbCB0aGVtLg0KPiANCj4gdjcgLT4gdjg6DQo+ICAgMSkg
+WmVybyBhIGNvbXBpbGUgd2Fybm5pbmdzIG9uIDMyLWJpdCBwbGF0Zm9ybSwgY29tcGlsZSB3
+aXRoIFc9MQ0KPiAgIDIpIFJldmlzZSBsc2RjX2JvX2dwdV9vZmZzZXQoKSBhbmQgbWlub3Ig
+Y2xlYW51cA0KPiAgIDMpIFBhZ2VmbGlwIHRlc3RlZCBvbiB0aGUgdmlydHVhbCB0ZXJtaW5h
+bCB3aXRoIGZvbGxvd2luZyBjb21tYW5kcw0KPiANCj4gICAgICBtb2RldGVzdCAtTSBsb29u
+Z3NvbiAtcyAzMjoxOTIweDEwODAgLXYNCj4gICAgICBtb2RldGVzdCAtTSBsb29uZ3NvbiAt
+cyAzNDoxOTIweDEwODAgLXYgLUYgdGlsZXMNCj4gDQo+ICAgICBJdCB3b3JrcyBsaWtlIGEg
+Y2hhcm0sIHdoZW4gcnVubmluZyBwYWdlZmxpcCB0ZXN0IHdpdGggZHVhbCBzY3Jlbm4NCj4g
+ICAgIGNvbmZpZ3VyYXRpb24sIGFub3RoZXIgdHdvIGFkZGl0aW9uYWwgYm8gY3JlYXRlZCBi
+eSB0aGUgbW9kZXRlc3QNCj4gICAgIGVtZXJnZWQsIFZSQU0gdXNhZ2UgdXAgdG8gNDArTUIs
+IHdlbGwgd2UgaGF2ZSBhdCBsZWFzdCA2NE1CLCBzdGlsbA0KPiAgICAgZW5vdWdoLg0KPiAN
+Cj4gICAgICMgY2F0IGJvcw0KPiANCj4gICAgICAgICBib1swMDAwXTogc2l6ZTogICAgIDgx
+MTJrQiBWUkFNDQo+ICAgICAgICAgYm9bMDAwMV06IHNpemU6ICAgICAgIDE2a0IgVlJBTQ0K
+PiAgICAgICAgIGJvWzAwMDJdOiBzaXplOiAgICAgICAxNmtCIFZSQU0NCj4gICAgICAgICBi
+b1swMDAzXTogc2l6ZTogICAgMTYyMDhrQiBWUkFNDQo+ICAgICAgICAgYm9bMDAwNF06IHNp
+emU6ICAgICA4MTEya0IgVlJBTQ0KPiAgICAgICAgIGJvWzAwMDVdOiBzaXplOiAgICAgODEx
+MmtCIFZSQU0NCj4gDQo+IHY4IC0+IHY5Og0KPiAgIDEpIFNlbGVjdCBJMkMgYW5kIEkyQ19B
+TEdPQklUIGluIEtjb25maWcgYW5kIHNob3VsZCBkZXBlbmQgb24gTU1VLg0KPiAgIDIpIFVz
+aW5nIHBjaV9nZXRfZG9tYWluX2J1c19hbmRfc2xvdCB0byBnZXQgdGhlIEdQVSBkZXZpY2Uu
+DQo+ICAgMykgT3RoZXIgbWlub3IgaW1wcm92ZW1lbnRzLg0KPiANCj4gICBUaG9zZSBwYXRj
+aGVzIGFyZSB0ZXN0ZWQgb24gbHMzYTUwMDAgKyBsczdhMTAwMCBDUkIsIGxzM2E1MDAwICsg
+bHM3YTIwMDANCj4gICBldmIsIGFuZCBsZW1vdGUgYTE5MDEgYm9hcmQobHMzYTQwMDAgKyBs
+czdhMTAwMCkuIE9uIGxvb25nc29uIG1pcHMgQ1BVLA0KPiAgIHRoZSB3cml0ZSBjb21iaW5l
+IHN1cHBvcnQgc2hvdWxkIGJlIGVuYWJsZWQsIHRvIGdldCBhIGRlY2VudCBwZXJmb3JtYW5j
+ZQ0KPiAgIGZvciB3cml0aW5nIGZyYW1lYnVmZmVyIGRhdGEgdG8gdGhlIFZSQU0uDQo+IA0K
+PiB2OSAtPiB2MTA6DQo+ICAgMSkgUmV2aXNlIGxzZGNfZHJtX2ZyZWV6ZSgpIHRvIGltcGxl
+bWVudCBTMyBjb21wbGV0ZWx5IGFuZCBjb3JyZWN0bHkuDQo+ICAgICAgSSBzdWRkZW5seSBy
+ZWFsaXplZCB0aGF0IHBpbm5lZCBidWZmZXIgY2FuIG5vdCBtb3ZlIGFuZCBWUkFNIGxvc3QN
+Cj4gICAgICBwb3dlciB3aGVuIHNsZWVwIHRvIFJBTS4gVGh1cywgdGhlIGRhdGEgaW4gdGhl
+IGJ1ZmZlciB3aG8gaXMgcGlubmVkDQo+ICAgICAgaW4gVlJBTSB3aWxsIGdldCBsb3N0IHdo
+ZW4gcmVzdW1lLiBZZXQgaXQncyBub3QgYmlnIHByb2JsZW0gYmVjYXVzZQ0KPiAgICAgIHdl
+IGFyZSBzb2Z0d2FyZSByZW5kZXJpbmcgc29sdXRpb24gd2hpY2ggcmVsYXkgb24gdGhlIENQ
+VSB1cGRhdGUgdGhlDQo+ICAgICAgZnJvbnQgZnJhbWVidWZmZXIuIFdlIGNhbiBzZWUgdGhl
+IGdhcmJhZ2UgZGF0YSB3aGVuIHJlc3VtZSBmcm9tIFMzLA0KPiAgICAgIGJ1dCB0aGUgc2Ny
+ZWVuIHdpbGwgc2hvdyBjb3JyZWN0IGltYWdlIGFzIEkgbW92ZSB0aGUgY3Vyc29yLiBUaGlz
+IGlzDQo+ICAgICAgZHVlIHRvIHRoZSBjcHUgcmVwYWludC4gdjEwIG9mIHRoaXMgcGF0Y2gg
+bWFrZSBTMyBwZXJmZWN0IGJ5IHVucGluDQo+ICAgICAgYWxsIG9mIEJPcyBpbiBWUkFNLCBl
+dmljdCB0aGVtIGFsbCB0byBzeXN0ZW0gUkFNLg0KPiANCj4gdjEwIC0+IHYxMToNCj4gICAx
+KSBPbiBkb3VibGUgc2NyZWVuIGNhc2UsIHRoZSBzaW5nbGUgZ2lhbnQgZnJhbWVidWZmZXIg
+aXMgcmVmZXJlbmNlZCBieQ0KPiAgICAgIHR3byBHRU0gb2JqZWN0LCBoZW5jZSwgaXQgd2ls
+bCBiZSBwaW5uZWQgYnkgcHJlcGFyZV9mYigpIGF0IGxlYXNlIHR3bw0KPiAgICAgIHRpbWVz
+LiBUaGlzIGNhdXNlIGl0cyBwaW4gY291bnQgPiAxLiBWMTAgb2YgdGhpcyBwYXRjaCBvbmx5
+IHVucGluIFZSQU0NCj4gICAgICBCT3Mgb25jZSB3aGVuIHN1c3BlbmQsIHdoaWNoIGlzIG5v
+dCBjb3JyZWN0IG9uIGRvdWJsZSBzY3JlZW4gY2FzZS4gVjExDQo+ICAgICAgb2YgdGhpcyBw
+YXRjaCB1bnBpbiBCT3MgdW50aWwgaXRzIHBpbiBjb3VudCByZWFjaCB0byB6ZXJvIHdoZW4g
+c3VzcGVuZC4NCj4gICAgICBUaGVuLCB3ZSBtYWtlIHRoZSBTMyBzdXBwb3J0IGNvbXBsZXRl
+IGZpbmFsbHkuIFdpdGggdjExLCBJIGNhbid0IHNlZQ0KPiAgICAgIGFueSBnYXJiYWdlIGRh
+dGEgYWZ0ZXIgcmVzdW1lLiBUZXN0ZWQgb24gYm90aCBsczdhMTAwMCBhbmQgbHM3YTIwMDAN
+Cj4gICAgICBwbGF0Zm9ybSwgd2l0aCBzaW5nbGUgc2NyZWVuIGFuZCBkb3VibGUgc2NyZWVu
+IGNvbmZpZ3VyYXRpb24uDQo+ICAgMikgRml4IHZibGFuayB3YWl0IHRpbWVvdXQgd2hlbiBk
+aXNhYmxlIENSVEMuDQo+ICAgMykgVGVzdCBhZ2FpbnN0IElHVCwgYXQgbGVhc3QgZmJkZXYg
+dGVzdCBhbmQga21zX2ZsaXAgdGVzdCBwYXNzZWQuDQo+ICAgNCkgUmV3cml0ZSBwaXhlbCBQ
+TEwgdXBkYXRlIGZ1bmN0aW9uLCBtYWdpYyBudW1iZXJzIGVsaW1pbmF0ZWQgKEVtaWwpDQo+
+ICAgNSkgRHJvcCBhIGZldyBjb21tb24gaGFyZHdhcmUgZmVhdHVyZXMgZGVzY3JpcHRpb24g
+aW4gbHNkY19kZXNjIChFbWlsKQ0KPiAgIDYpIERyb3AgbHNkY19tb2RlX2NvbmZpZ19tb2Rl
+X3ZhbGlkKCksIGluc3RlYWQgYWRkIHJlc3RyaWN0aW9ucyBpbiBkdW1iDQo+ICAgICAgY3Jl
+YXRlIGZ1bmN0aW9uLiAoRW1pbCkNCj4gICA3KSBVbnRhbmdsZSB0aGUgbHM3YTEwMDAgY2Fz
+ZSBhbmQgbHM3YTIwMDAgY2FzZSBjb21wbGV0ZWx5IChUaG9tYXMpDQo+IA0KPiB2MTEgLT4g
+djEyOg0KPiAgIG5vbmUNCj4gDQo+IHYxMiAtPiB2MTM6DQo+ICAgMSkgQWRkIGJlbmNobWFy
+ayB0byBmaWd1cmUgb3V0IHRoZSBiYW5kd2lkdGggb2YgdGhlIGhhcmR3YXJlIHBsYXRmb3Jt
+Lg0KPiAgICAgIFVzYWdlOg0KPiAgICAgICMgY2QgL3N5cy9rZXJuZWwvZGVidWcvZHJpLzAv
+DQo+ICAgICAgIyBjYXQgYmVuY2htYXJrDQo+IA0KPiAgIDIpIFZSQU0gaXMgZmlsbGVkIHdp
+dGggZ2FyYmFnZSBkYXRhIGlmIHVuaW5pdGlhbGl6ZWQsIGFkZCBhIGJ1ZmZlcg0KPiAgICAg
+IGNsZWFyaW5nIHByb2NlZHVyZSwgY2xlYXIgaXQgb24gdGhlIEJPIGNyZWF0aW9uIHRpbWUu
+DQo+ICAgMykgVXBkYXRlIGNvcHlyaWdodHMgYW5kIGFkanVzdCBjb2Rpbmcgc3R5bGUgKEh1
+YWNhaSkNCj4gDQo+IFN1aSBKaW5nZmVuZyAoMik6DQo+ICAgIGRybTogYWRkIGttcyBkcml2
+ZXIgZm9yIGxvb25nc29uIGRpc3BsYXkgY29udHJvbGxlcg0KPiAgICBNQUlOVEFJTkVSUzog
+YWRkIG1haW50YWluZXJzIGZvciBEUk0gTE9PTkdTT04gZHJpdmVyDQo+IA0KPiAgIE1BSU5U
+QUlORVJTICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICA4ICsNCj4gICBk
+cml2ZXJzL2dwdS9kcm0vS2NvbmZpZyAgICAgICAgICAgICAgICAgICAgIHwgICAgMiArDQo+
+ICAgZHJpdmVycy9ncHUvZHJtL01ha2VmaWxlICAgICAgICAgICAgICAgICAgICB8ICAgIDEg
+Kw0KPiAgIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9LY29uZmlnICAgICAgICAgICAgfCAg
+IDE3ICsNCj4gICBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vTWFrZWZpbGUgICAgICAgICAg
+IHwgICAyMSArDQo+ICAgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzN2ExMDAwX291dHB1
+dHMuYyB8ICAxNjEgKysrDQo+ICAgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzN2EyMDAw
+X291dHB1dHMuYyB8ICA1MzEgKysrKysrKysrDQo+ICAgZHJpdmVycy9ncHUvZHJtL2xvb25n
+c29uL2xzZGNfYmVuY2htYXJrLmMgICB8ICAxMzIgKysrDQo+ICAgZHJpdmVycy9ncHUvZHJt
+L2xvb25nc29uL2xzZGNfYmVuY2htYXJrLmggICB8ICAgMTMgKw0KPiAgIGRyaXZlcnMvZ3B1
+L2RybS9sb29uZ3Nvbi9sc2RjX2NydGMuYyAgICAgICAgfCAxMDY4ICsrKysrKysrKysrKysr
+KysrKysNCj4gICBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19kZWJ1Z2ZzLmMgICAg
+IHwgICA5MSArKw0KPiAgIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX2RldmljZS5j
+ICAgICAgfCAgMTA0ICsrDQo+ICAgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfZHJ2
+LmMgICAgICAgICB8ICA0ODQgKysrKysrKysrDQo+ICAgZHJpdmVycy9ncHUvZHJtL2xvb25n
+c29uL2xzZGNfZHJ2LmggICAgICAgICB8ICA0NTIgKysrKysrKysNCj4gICBkcml2ZXJzL2dw
+dS9kcm0vbG9vbmdzb24vbHNkY19nZW0uYyAgICAgICAgIHwgIDMyNCArKysrKysNCj4gICBk
+cml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19nZW0uaCAgICAgICAgIHwgICAzNyArDQo+
+ICAgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfZ2Z4cGxsLmMgICAgICB8ICAxOTkg
+KysrKw0KPiAgIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX2dmeHBsbC5oICAgICAg
+fCAgIDUyICsNCj4gICBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19pMmMuYyAgICAg
+ICAgIHwgIDE3OSArKysrDQo+ICAgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfaTJj
+LmggICAgICAgICB8ICAgMjkgKw0KPiAgIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2Rj
+X2lycS5jICAgICAgICAgfCAgIDgxICsrDQo+ICAgZHJpdmVycy9ncHUvZHJtL2xvb25nc29u
+L2xzZGNfaXJxLmggICAgICAgICB8ICAgMTYgKw0KPiAgIGRyaXZlcnMvZ3B1L2RybS9sb29u
+Z3Nvbi9sc2RjX291dHB1dC5oICAgICAgfCAgIDIxICsNCj4gICBkcml2ZXJzL2dwdS9kcm0v
+bG9vbmdzb24vbHNkY19waXhwbGwuYyAgICAgIHwgIDQ4MSArKysrKysrKysNCj4gICBkcml2
+ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19waXhwbGwuaCAgICAgIHwgICA4NiArKw0KPiAg
+IGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX3BsYW5lLmMgICAgICAgfCAgNjM5ICsr
+KysrKysrKysrDQo+ICAgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfcHJvYmUuYyAg
+ICAgICB8ICAgNTYgKw0KPiAgIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX3Byb2Jl
+LmggICAgICAgfCAgIDEyICsNCj4gICBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19y
+ZWdzLmggICAgICAgIHwgIDQwMCArKysrKysrDQo+ICAgZHJpdmVycy9ncHUvZHJtL2xvb25n
+c29uL2xzZGNfdHRtLmMgICAgICAgICB8ICA2MTAgKysrKysrKysrKysNCj4gICBkcml2ZXJz
+L2dwdS9kcm0vbG9vbmdzb24vbHNkY190dG0uaCAgICAgICAgIHwgICA5OSArKw0KPiAgIDMx
+IGZpbGVzIGNoYW5nZWQsIDY0MDYgaW5zZXJ0aW9ucygrKQ0KPiAgIGNyZWF0ZSBtb2RlIDEw
+MDY0NCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vS2NvbmZpZw0KPiAgIGNyZWF0ZSBtb2Rl
+IDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vTWFrZWZpbGUNCj4gICBjcmVhdGUg
+bW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzN2ExMDAwX291dHB1dHMu
+Yw0KPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHM3
+YTIwMDBfb3V0cHV0cy5jDQo+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2Ry
+bS9sb29uZ3Nvbi9sc2RjX2JlbmNobWFyay5jDQo+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRy
+aXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX2JlbmNobWFyay5oDQo+ICAgY3JlYXRlIG1v
+ZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX2NydGMuYw0KPiAgIGNy
+ZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19kZWJ1Z2Zz
+LmMNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xz
+ZGNfZGV2aWNlLmMNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2xv
+b25nc29uL2xzZGNfZHJ2LmMNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUv
+ZHJtL2xvb25nc29uL2xzZGNfZHJ2LmgNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVy
+cy9ncHUvZHJtL2xvb25nc29uL2xzZGNfZ2VtLmMNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQg
+ZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfZ2VtLmgNCj4gICBjcmVhdGUgbW9kZSAx
+MDA2NDQgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfZ2Z4cGxsLmMNCj4gICBjcmVh
+dGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfZ2Z4cGxsLmgN
+Cj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNf
+aTJjLmMNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2xvb25nc29u
+L2xzZGNfaTJjLmgNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2xv
+b25nc29uL2xzZGNfaXJxLmMNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUv
+ZHJtL2xvb25nc29uL2xzZGNfaXJxLmgNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVy
+cy9ncHUvZHJtL2xvb25nc29uL2xzZGNfb3V0cHV0LmgNCj4gICBjcmVhdGUgbW9kZSAxMDA2
+NDQgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfcGl4cGxsLmMNCj4gICBjcmVhdGUg
+bW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfcGl4cGxsLmgNCj4g
+ICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfcGxh
+bmUuYw0KPiAgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24v
+bHNkY19wcm9iZS5jDQo+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9s
+b29uZ3Nvbi9sc2RjX3Byb2JlLmgNCj4gICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9n
+cHUvZHJtL2xvb25nc29uL2xzZGNfcmVncy5oDQo+ICAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRy
+aXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX3R0bS5jDQo+ICAgY3JlYXRlIG1vZGUgMTAw
+NjQ0IGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX3R0bS5oDQo+IA0KDQotLSANClRo
+b21hcyBaaW1tZXJtYW5uDQpHcmFwaGljcyBEcml2ZXIgRGV2ZWxvcGVyDQpTVVNFIFNvZnR3
+YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgNCkZyYW5rZW5zdHJhc3NlIDE0NiwgOTA0NjEg
+TnVlcm5iZXJnLCBHZXJtYW55DQpHRjogSXZvIFRvdGV2LCBBbmRyZXcgTXllcnMsIEFuZHJl
+dyBNY0RvbmFsZCwgQm91ZGllbiBNb2VybWFuDQpIUkIgMzY4MDkgKEFHIE51ZXJuYmVyZykN
+Cg==
+
+--------------64iW4IpIjPGpb7Hhbd0Y1Ac6--
+
+--------------lpRXJtGOVOTubga2tCmLuMmE
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmRmKlsFAwAAAAAACgkQlh/E3EQov+Ch
+Kw//Z5s8cBGrQJYL5MxkiK0LjKiR0lsRLwDECNtVqaAbP8SRNpCYS4OUhlmrI4ie6+VOofCxVL6Y
+sC/JLc3g7CVaywf/B7tE+a0aXBjr7G56BJUpEOe5bhP6Bs8sw7Q/+s0o6hQtNS3q4G+iKS/gAX84
+dWjxjO+KhIExiOFuNuWK/ph4EL5y8mSKwA2wD+KBZnS+Os5Ppaqqxyxs5kO6+7qfT5ahcnZriW0O
+rv6MeQlZSvf8HmYfxF7ZO0wt3sOO3V9dXsC4zn8T/D94uetZd47K0/dxHkx3g64/hyIsXz7mzOEj
+/baj8JtxqO5fklIa4ie1PvtcF2uCC+5uYpUqI/DCFiHEuea/deguQDkKGGqAmb/wEynF5qW0MNPS
+UHAxSZRXdTk5rTonBpHzc6xsPK1m27NeNX1JjCaJEg24wDqRbuVNfuzguNvrB45CTSJq4nFSr5BH
+mv9HYWqlKyH+owuZ1iH2IUGVlk1tmNI1suSid4XCPiOJwzmM6ExiWZsvg8mEfimsA7yf1zcr4qRo
+pv+P2uv+nyUhIPlbOboEu+RYeiqEfVzK8hGLyNnEdH8LG9bIHAYeo9oauRnM1qHCfjMpYz2e+iQ1
+UXXKNqkNKlurm/q+l5hVpro/9LqXhnb1IPmWNT2ae+vkBCSV5hcB7l3/lNt4NsMYTtMP4y2Eyi14
+A1A=
+=pq3I
+-----END PGP SIGNATURE-----
+
+--------------lpRXJtGOVOTubga2tCmLuMmE--
+
+--===============4357670783741150280==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 2023-05-17 15:52, Alexandre Bailon wrote:
-> Some APU devices are behind an IOMMU.
-> For some of these devices, we can't use DMA API because
-> they use static addresses so we have to manually use
-> IOMMU API to correctly map the buffers.
-
-Except you still need to use the DMA for the sake of cache coherency and 
-any other aspects :(
-
-> This adds support of IOMMU.
-> 
-> Signed-off-by: Alexandre Bailon <abailon@baylibre.com>
-> Reviewed-by: Julien Stephan <jstephan@baylibre.com>
-> ---
->   drivers/gpu/drm/apu/apu_drv.c      |   4 +
->   drivers/gpu/drm/apu/apu_gem.c      | 174 +++++++++++++++++++++++++++++
->   drivers/gpu/drm/apu/apu_internal.h |  16 +++
->   drivers/gpu/drm/apu/apu_sched.c    |  28 +++++
->   include/uapi/drm/apu_drm.h         |  12 +-
->   5 files changed, 233 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/gpu/drm/apu/apu_drv.c b/drivers/gpu/drm/apu/apu_drv.c
-> index b6bd340b2bc8..a0dce785a02a 100644
-> --- a/drivers/gpu/drm/apu/apu_drv.c
-> +++ b/drivers/gpu/drm/apu/apu_drv.c
-> @@ -23,6 +23,10 @@ static const struct drm_ioctl_desc ioctls[] = {
->   			  DRM_RENDER_ALLOW),
->   	DRM_IOCTL_DEF_DRV(APU_GEM_DEQUEUE, ioctl_gem_dequeue,
->   			  DRM_RENDER_ALLOW),
-> +	DRM_IOCTL_DEF_DRV(APU_GEM_IOMMU_MAP, ioctl_gem_iommu_map,
-> +			  DRM_RENDER_ALLOW),
-> +	DRM_IOCTL_DEF_DRV(APU_GEM_IOMMU_UNMAP, ioctl_gem_iommu_unmap,
-> +			  DRM_RENDER_ALLOW),
->   };
->   
->   DEFINE_DRM_GEM_DMA_FOPS(apu_drm_ops);
-> diff --git a/drivers/gpu/drm/apu/apu_gem.c b/drivers/gpu/drm/apu/apu_gem.c
-> index 0e7b3b27942c..0a91363754c5 100644
-> --- a/drivers/gpu/drm/apu/apu_gem.c
-> +++ b/drivers/gpu/drm/apu/apu_gem.c
-> @@ -2,6 +2,9 @@
->   //
->   // Copyright 2020 BayLibre SAS
->   
-> +#include <linux/iommu.h>
-> +#include <linux/iova.h>
-> +
->   #include <drm/drm_gem_dma_helper.h>
->   
->   #include <uapi/drm/apu_drm.h>
-> @@ -42,6 +45,7 @@ int ioctl_gem_new(struct drm_device *dev, void *data,
->   	 */
->   	apu_obj->size = args->size;
->   	apu_obj->offset = 0;
-> +	apu_obj->iommu_refcount = 0;
->   	mutex_init(&apu_obj->mutex);
->   
->   	ret = drm_gem_handle_create(file_priv, gem_obj, &args->handle);
-> @@ -54,3 +58,173 @@ int ioctl_gem_new(struct drm_device *dev, void *data,
->   
->   	return 0;
->   }
-> +
-> +void apu_bo_iommu_unmap(struct apu_drm *apu_drm, struct apu_gem_object *obj)
-> +{
-> +	int iova_pfn;
-> +	int i;
-> +
-> +	if (!obj->iommu_sgt)
-> +		return;
-> +
-> +	mutex_lock(&obj->mutex);
-> +	obj->iommu_refcount--;
-> +	if (obj->iommu_refcount) {
-> +		mutex_unlock(&obj->mutex);
-> +		return;
-> +	}
-> +
-> +	iova_pfn = PHYS_PFN(obj->iova);
-
-Using mm layer operations on IOVAs looks wrong. In practice I don't 
-think it's ultimately harmful, other than potentially making less 
-efficient use of IOVA space if the CPU page size is larger than the 
-IOMMU page size, but it's still a bad code smell when you're using an 
-IOVA abstraction that is deliberately decoupled from CPU pages.
-
-> +	for (i = 0; i < obj->iommu_sgt->nents; i++) {
-> +		iommu_unmap(apu_drm->domain, PFN_PHYS(iova_pfn),
-> +			    PAGE_ALIGN(obj->iommu_sgt->sgl[i].length));
-> +		iova_pfn += PHYS_PFN(PAGE_ALIGN(obj->iommu_sgt->sgl[i].length));
-
-You can unmap a set of IOVA-contiguous mappings as a single range with 
-one call.
-
-> +	}
-> +
-> +	sg_free_table(obj->iommu_sgt);
-> +	kfree(obj->iommu_sgt);
-> +
-> +	free_iova(&apu_drm->iovad, PHYS_PFN(obj->iova));
-> +	mutex_unlock(&obj->mutex);
-> +}
-> +
-> +static struct sg_table *apu_get_sg_table(struct drm_gem_object *obj)
-> +{
-> +	if (obj->funcs)
-> +		return obj->funcs->get_sg_table(obj);
-> +	return NULL;
-> +}
-> +
-> +int apu_bo_iommu_map(struct apu_drm *apu_drm, struct drm_gem_object *obj)
-> +{
-> +	struct apu_gem_object *apu_obj = to_apu_bo(obj);
-> +	struct scatterlist *sgl;
-> +	phys_addr_t phys;
-> +	int total_buf_space;
-> +	int iova_pfn;
-> +	int iova;
-> +	int ret;
-> +	int i;
-> +
-> +	mutex_lock(&apu_obj->mutex);
-> +	apu_obj->iommu_refcount++;
-> +	if (apu_obj->iommu_refcount != 1) {
-> +		mutex_unlock(&apu_obj->mutex);
-> +		return 0;
-> +	}
-> +
-> +	apu_obj->iommu_sgt = apu_get_sg_table(obj);
-> +	if (IS_ERR(apu_obj->iommu_sgt)) {
-> +		mutex_unlock(&apu_obj->mutex);
-> +		return PTR_ERR(apu_obj->iommu_sgt);
-> +	}
-> +
-> +	total_buf_space = obj->size;
-> +	iova_pfn = alloc_iova_fast(&apu_drm->iovad,
-> +				   total_buf_space >> PAGE_SHIFT,
-> +				   apu_drm->iova_limit_pfn, true);
-
-If you need things mapped at specific addresses like the commit message 
-claims, the DMA IOVA allocator is a terrible tool for the job. DRM 
-already has its own more flexible abstraction for address space 
-management in the form of drm_mm, so as a DRM driver it would seem a lot 
-more sensible to use one of those.
-
-And even if you could justify using this allocator, I can't imagine 
-there's any way you'd need the _fast version (further illustrated by the 
-fact that you're freeing the IOVAs wrongly for that).
-
-> +	apu_obj->iova = PFN_PHYS(iova_pfn);
-> +
-> +	if (!iova_pfn) {
-> +		dev_err(apu_drm->dev, "Failed to allocate iova address\n");
-> +		mutex_unlock(&apu_obj->mutex);
-> +		return -ENOMEM;
-> +	}
-> +
-> +	iova = apu_obj->iova;
-> +	sgl = apu_obj->iommu_sgt->sgl;
-> +	for (i = 0; i < apu_obj->iommu_sgt->nents; i++) {
-> +		phys = page_to_phys(sg_page(&sgl[i]));
-> +		ret =
-> +		    iommu_map(apu_drm->domain, PFN_PHYS(iova_pfn), phys,
-> +			      PAGE_ALIGN(sgl[i].length), IOMMU_READ | IOMMU_WRITE,
-> +			      GFP_KERNEL);
-> +		if (ret) {
-> +			dev_err(apu_drm->dev, "Failed to iommu map\n");
-> +			free_iova(&apu_drm->iovad, iova_pfn);
-> +			mutex_unlock(&apu_obj->mutex);
-> +			return ret;
-> +		}
-> +		iova += sgl[i].offset + sgl[i].length;
-> +		iova_pfn += PHYS_PFN(PAGE_ALIGN(sgl[i].length));
-
-This looks a lot like it should just be iommu_map_sg(). Also it makes me 
-suspicious of the relationship between obj->size and the sgtable - if 
-the size is already pre-calculated to include any required padding then 
-why can't the caller just provide aligned SG segments in the first 
-place? Conversely if it's the original un-padded size, then any padding 
-you *do* add at this point means you're going to overrun the allocated 
-IOVA space.
-
-> +	}
-> +	mutex_unlock(&apu_obj->mutex);
-> +
-> +	return 0;
-> +}
-> +
-> +int ioctl_gem_iommu_map(struct drm_device *dev, void *data,
-> +			struct drm_file *file_priv)
-> +{
-> +	struct apu_drm *apu_drm = dev->dev_private;
-> +	struct drm_apu_gem_iommu_map *args = data;
-> +	struct drm_gem_object **bos;
-> +	void __user *bo_handles;
-> +	u64 *das;
-> +	int ret;
-> +	int i;
-> +
-> +	if (!apu_drm->domain)
-> +		return -ENODEV;
-> +
-> +	das = kvmalloc_array(args->bo_handle_count, sizeof(*das), GFP_KERNEL);
-
-Does anything prevent userspace passing random numbers and being able to 
-cause arbitrarily large allocations of unaccounted kernel memory here?
-
-> +	if (!das)
-> +		return -ENOMEM;
-> +
-> +	bo_handles = (void __user *)(uintptr_t) args->bo_handles;
-> +	ret = drm_gem_objects_lookup(file_priv, bo_handles,
-> +				     args->bo_handle_count, &bos);
-> +	if (ret) {
-> +		kvfree(das);
-> +		return ret;
-> +	}
-> +
-> +	for (i = 0; i < args->bo_handle_count; i++) {
-> +		ret = apu_bo_iommu_map(apu_drm, bos[i]);
-> +		if (ret) {
-> +			/* TODO: handle error */
-
-Yes, that would be a good thing to do.
-
-> +			break;
-> +		}
-> +		das[i] = to_apu_bo(bos[i])->iova + to_apu_bo(bos[i])->offset;
-> +	}
-> +
-> +	if (copy_to_user((void *)args->bo_device_addresses, das,
-> +			 args->bo_handle_count * sizeof(u64))) {
-> +		ret = -EFAULT;
-> +		DRM_DEBUG("Failed to copy device addresses\n");
-> +		goto out;
-> +	}
-> +
-> +out:
-> +	kvfree(das);
-> +	kvfree(bos);
-> +
-> +	return 0;
-> +}
-> +
-> +int ioctl_gem_iommu_unmap(struct drm_device *dev, void *data,
-> +			  struct drm_file *file_priv)
-> +{
-> +	struct apu_drm *apu_drm = dev->dev_private;
-> +	struct drm_apu_gem_iommu_map *args = data;
-> +	struct drm_gem_object **bos;
-> +	void __user *bo_handles;
-> +	int ret;
-> +	int i;
-> +
-> +	if (!apu_drm->domain)
-> +		return -ENODEV;
-> +
-> +	bo_handles = (void __user *)(uintptr_t) args->bo_handles;
-> +	ret = drm_gem_objects_lookup(file_priv, bo_handles,
-> +				     args->bo_handle_count, &bos);
-> +	if (ret)
-> +		return ret;
-> +
-> +	for (i = 0; i < args->bo_handle_count; i++)
-> +		apu_bo_iommu_unmap(apu_drm, to_apu_bo(bos[i]));
-> +
-> +	kvfree(bos);
-> +
-> +	return 0;
-> +}
-> diff --git a/drivers/gpu/drm/apu/apu_internal.h b/drivers/gpu/drm/apu/apu_internal.h
-> index 021a3efdedf2..ea4183f3fb15 100644
-> --- a/drivers/gpu/drm/apu/apu_internal.h
-> +++ b/drivers/gpu/drm/apu/apu_internal.h
-> @@ -2,6 +2,9 @@
->   #ifndef __APU_INTERNAL_H__
->   #define __APU_INTERNAL_H__
->   
-> +#include <linux/iommu.h>
-> +#include <linux/iova.h>
-> +
->   #include <drm/drm_drv.h>
->   #include <drm/drm_gem_dma_helper.h>
->   #include <drm/gpu_scheduler.h>
-> @@ -9,7 +12,10 @@
->   struct apu_gem_object {
->   	struct drm_gem_dma_object base;
->   	struct mutex mutex;
-> +	struct sg_table *iommu_sgt;
-> +	int iommu_refcount;
->   	size_t size;
-> +	u32 iova;
-
-Really? "Common infrastructure that could be re-used to support many 
-accelerators", in 2023, that still assumes 32-bit addressing?
-
->   	u32 offset;
->   };
->   
-> @@ -35,6 +41,10 @@ struct apu_drm {
->   	struct drm_device base;
->   	struct device *dev;
->   
-> +	struct iommu_domain *domain;
-
-Oh, nothing ever allocates this domain or attaches to it, so this is all 
-dead code :(
-
-> +	struct iova_domain iovad;
-> +	int iova_limit_pfn;
-
-(and nothing initialises these either)
-
-> +
->   	struct list_head cores;
->   	struct list_head node;
->   
-> @@ -165,12 +175,18 @@ struct apu_gem_object *to_apu_bo(struct drm_gem_object *obj);
->   struct drm_gem_object *apu_gem_create_object(struct drm_device *dev,
->   					     size_t size);
->   
-> +int apu_bo_iommu_map(struct apu_drm *apu_drm, struct drm_gem_object *obj);
-> +void apu_bo_iommu_unmap(struct apu_drm *apu_drm, struct apu_gem_object *obj);
->   int ioctl_gem_new(struct drm_device *dev, void *data,
->   		  struct drm_file *file_priv);
->   int ioctl_gem_user_new(struct drm_device *dev, void *data,
->   		       struct drm_file *file_priv);
->   struct dma_buf *apu_gem_prime_export(struct drm_gem_object *gem,
->   				     int flags);
-> +int ioctl_gem_iommu_map(struct drm_device *dev, void *data,
-> +			struct drm_file *file_priv);
-> +int ioctl_gem_iommu_unmap(struct drm_device *dev, void *data,
-> +			  struct drm_file *file_priv);
->   int ioctl_gem_queue(struct drm_device *dev, void *data,
->   		    struct drm_file *file_priv);
->   int ioctl_gem_dequeue(struct drm_device *dev, void *data,
-> diff --git a/drivers/gpu/drm/apu/apu_sched.c b/drivers/gpu/drm/apu/apu_sched.c
-> index 13b6fbd00bd8..716d4b7f2d55 100644
-> --- a/drivers/gpu/drm/apu/apu_sched.c
-> +++ b/drivers/gpu/drm/apu/apu_sched.c
-> @@ -117,6 +117,8 @@ static void apu_job_cleanup(struct kref *ref)
->   			struct apu_gem_object *apu_obj;
->   
->   			apu_obj = to_apu_bo(job->bos[i]);
-> +			if (job->apu->domain)
-> +				apu_bo_iommu_unmap(job->apu, apu_obj);
->   			drm_gem_object_put(job->bos[i]);
->   		}
->   
-> @@ -397,6 +399,7 @@ static int apu_lookup_bos(struct drm_device *dev, struct drm_file *file_priv,
->   			  struct drm_apu_gem_queue *args, struct apu_job *job)
->   {
->   	void __user *bo_handles;
-> +	unsigned int i;
->   	int ret;
->   
->   	job->bo_count = args->bo_handle_count;
-> @@ -413,6 +416,31 @@ static int apu_lookup_bos(struct drm_device *dev, struct drm_file *file_priv,
->   	bo_handles = (void __user *)(uintptr_t) args->bo_handles;
->   	ret = drm_gem_objects_lookup(file_priv, bo_handles,
->   				     job->bo_count, &job->bos);
-> +	if (ret)
-> +		return ret;
-> +
-> +	if (!job->apu->domain)
-> +		return 0;
-> +
-> +	for (i = 0; i < job->bo_count; i++) {
-> +		ret = apu_bo_iommu_map(job->apu, job->bos[i]);
-> +		if (ret)
-> +			goto err_iommu_map;
-> +	}
-> +
-> +	return ret;
-> +
-> +err_iommu_map:
-> +	kvfree(job->implicit_fences);
-> +	for (i = 0; i < job->bo_count; i++) {
-> +		struct apu_gem_object *apu_obj;
-> +
-> +		apu_obj = to_apu_bo(job->bos[i]);
-> +		if (job->apu->domain)
-
-If the domain *did* ever exist, but could suddenly disappear at any 
-point after you've decided to go ahead and start mapping things into it, 
-then there is a heck of a lot of sychronisation missing from this whole 
-infrastructure.
-
-Thanks,
-Robin.
-
-> +			apu_bo_iommu_unmap(job->apu, apu_obj);
-> +		drm_gem_object_put(job->bos[i]);
-> +	}
-> +	kvfree(job->bos);
->   
->   	return ret;
->   }
-> diff --git a/include/uapi/drm/apu_drm.h b/include/uapi/drm/apu_drm.h
-> index c47000097040..0ecc739d8aed 100644
-> --- a/include/uapi/drm/apu_drm.h
-> +++ b/include/uapi/drm/apu_drm.h
-> @@ -41,6 +41,12 @@ struct drm_apu_gem_dequeue {
->   	__u64 data;
->   };
->   
-> +struct drm_apu_gem_iommu_map {
-> +	__u64 bo_handles;
-> +	__u32 bo_handle_count;
-> +	__u64 bo_device_addresses;
-> +};
-> +
->   struct apu_job_event {
->   	struct drm_event base;
->   	__u32 out_sync;
-> @@ -57,12 +63,16 @@ struct drm_apu_state {
->   #define DRM_APU_GEM_NEW			0x01
->   #define DRM_APU_GEM_QUEUE		0x02
->   #define DRM_APU_GEM_DEQUEUE		0x03
-> -#define DRM_APU_NUM_IOCTLS		0x04
-> +#define DRM_APU_GEM_IOMMU_MAP		0x04
-> +#define DRM_APU_GEM_IOMMU_UNMAP		0x05
-> +#define DRM_APU_NUM_IOCTLS		0x06
->   
->   #define DRM_IOCTL_APU_STATE		DRM_IOWR(DRM_COMMAND_BASE + DRM_APU_STATE, struct drm_apu_state)
->   #define DRM_IOCTL_APU_GEM_NEW		DRM_IOWR(DRM_COMMAND_BASE + DRM_APU_GEM_NEW, struct drm_apu_gem_new)
->   #define DRM_IOCTL_APU_GEM_QUEUE		DRM_IOWR(DRM_COMMAND_BASE + DRM_APU_GEM_QUEUE, struct drm_apu_gem_queue)
->   #define DRM_IOCTL_APU_GEM_DEQUEUE	DRM_IOWR(DRM_COMMAND_BASE + DRM_APU_GEM_DEQUEUE, struct drm_apu_gem_dequeue)
-> +#define DRM_IOCTL_APU_GEM_IOMMU_MAP	DRM_IOWR(DRM_COMMAND_BASE + DRM_APU_GEM_IOMMU_MAP, struct drm_apu_gem_iommu_map)
-> +#define DRM_IOCTL_APU_GEM_IOMMU_UNMAP	DRM_IOWR(DRM_COMMAND_BASE + DRM_APU_GEM_IOMMU_UNMAP, struct drm_apu_gem_iommu_map)
->   
->   #if defined(__cplusplus)
->   }
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============4357670783741150280==--
