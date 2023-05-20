@@ -2,352 +2,317 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61473708590
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 May 2023 18:05:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 790ED70A758
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 20 May 2023 12:54:41 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 691653F95B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 May 2023 16:05:53 +0000 (UTC)
-Received: from 189.cn (ptr.189.cn [183.61.185.101])
-	by lists.linaro.org (Postfix) with ESMTP id 4EA323F95B
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 18 May 2023 16:05:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 26730443C0
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 20 May 2023 10:54:40 +0000 (UTC)
+Received: from loongson.cn (mail.loongson.cn [114.242.206.163])
+	by lists.linaro.org (Postfix) with ESMTP id E81693E957
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 20 May 2023 10:54:34 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
 	dkim=none;
-	spf=pass (lists.linaro.org: domain of 15330273260@189.cn designates 183.61.185.101 as permitted sender) smtp.mailfrom=15330273260@189.cn;
+	spf=pass (lists.linaro.org: domain of suijingfeng@loongson.cn designates 114.242.206.163 as permitted sender) smtp.mailfrom=suijingfeng@loongson.cn;
 	dmarc=none
-HMM_SOURCE_IP: 10.64.8.31:43896.565364457
-HMM_ATTACHE_NUM: 0000
-HMM_SOURCE_TYPE: SMTP
-Received: from clientip-114.242.206.180 (unknown [10.64.8.31])
-	by 189.cn (HERMES) with SMTP id 8FEEE1001B5;
-	Fri, 19 May 2023 00:05:42 +0800 (CST)
-Received: from  ([114.242.206.180])
-	by gateway-151646-dep-75648544bd-pgxlx with ESMTP id d6a3c86d67614bdbaa2f337c1ed09c98 for tzimmermann@suse.de;
-	Fri, 19 May 2023 00:05:44 CST
-X-Transaction-ID: d6a3c86d67614bdbaa2f337c1ed09c98
-X-Real-From: 15330273260@189.cn
-X-Receive-IP: 114.242.206.180
-X-MEDUSA-Status: 0
-Sender: 15330273260@189.cn
-Message-ID: <8e176697-b78d-e419-064e-5752f571200c@189.cn>
-Date: Fri, 19 May 2023 00:05:39 +0800
+Received: from loongson.cn (unknown [10.20.42.43])
+	by gateway (Coremail) with SMTP id _____8AxFunopmhk_GgKAA--.18193S3;
+	Sat, 20 May 2023 18:54:32 +0800 (CST)
+Received: from openarena.loongson.cn (unknown [10.20.42.43])
+	by localhost.localdomain (Coremail) with SMTP id AQAAf8BxkrDmpmhkOaFrAA--.51434S2;
+	Sat, 20 May 2023 18:54:30 +0800 (CST)
+From: Sui Jingfeng <suijingfeng@loongson.cn>
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>,
+	Daniel Vetter <daniel@ffwll.ch>,
+	Sui Jingfeng <suijingfeng@loongson.cn>,
+	Li Yi <liyi@loongson.cn>,
+	suijingfeng <15330273260@189.cn>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian Koenig <christian.koenig@amd.com>,
+	Emil Velikov <emil.l.velikov@gmail.com>
+Date: Sat, 20 May 2023 18:54:28 +0800
+Message-Id: <20230520105430.325685-1-suijingfeng@loongson.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-To: Thomas Zimmermann <tzimmermann@suse.de>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, suijingfeng <15330273260@189.cn>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Christian Koenig <christian.koenig@amd.com>,
- Emil Velikov <emil.l.velikov@gmail.com>
-References: <20230515155734.2954149-1-suijingfeng@loongson.cn>
- <7b77020f-d543-13bf-e178-bc416bcc728d@suse.de>
-Content-Language: en-US
-From: Sui Jingfeng <15330273260@189.cn>
-In-Reply-To: <7b77020f-d543-13bf-e178-bc416bcc728d@suse.de>
-X-Spamd-Result: default: False [-5.70 / 15.00];
-	REPLY(-4.00)[];
+X-CM-TRANSID: AQAAf8BxkrDmpmhkOaFrAA--.51434S2
+X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
+X-Coremail-Antispam: 1Uk129KBjvJXoWfGryDKrWxGw43uryxJw1kXwb_yoWDWF47pF
+	43Ca4FkrWDJF12yr9xA3W8GFyfAa4fXFWSgF43X3sIg3yDAFyUZrn8ZFW5JrW7ZFy7Xry2
+	qr97Kr4UG3ZFkaUanT9S1TB71UUUUjJqnTZGkaVYY2UrUUUUj1kv1TuYvTs0mT0YCTnIWj
+	qI5I8CrVACY4xI64kE6c02F40Ex7xfYxn0WfASr-VFAUDa7-sFnT9fnUUIcSsGvfJTRUUU
+	bS8YFVCjjxCrM7AC8VAFwI0_Jr0_Gr1l1xkIjI8I6I8E6xAIw20EY4v20xvaj40_Wr0E3s
+	1l1IIY67AEw4v_Jrv_JF1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
+	wVC0I7IYx2IY67AKxVWUCVW8JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwA2z4
+	x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1l
+	n4kS14v26r126r1DM2AIxVAIcxkEcVAq07x20xvEncxIr21l57IF6xkI12xvs2x26I8E6x
+	ACxx1l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r126r1DMcIj6I8E
+	87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxV
+	Aaw2AFwI0_JF0_Jw1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1l4IxY
+	O2xFxVAFwI0_JF0_Jw1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGV
+	WUWwC2zVAF1VAY17CE14v26r4a6rW5MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_
+	JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rV
+	WUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4U
+	YxBIdaVFxhVjvjDU0xZFpf9x07j5o7tUUUUU=
+X-Spamd-Result: default: False [-1.20 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:183.61.185.0/24];
+	MID_CONTAINS_FROM(1.00)[];
+	RCVD_IN_DNSWL_HI(-0.50)[114.242.206.163:from];
+	R_SPF_ALLOW(-0.20)[+ip4:114.242.206.163];
 	MIME_GOOD(-0.10)[text/plain];
 	RCVD_NO_TLS_LAST(0.10)[];
-	FREEMAIL_TO(0.00)[suse.de,linux.intel.com,kernel.org,gmail.com,ffwll.ch,189.cn,linaro.org,amd.com];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:4134, ipnet:183.0.0.0/10, country:CN];
-	R_DKIM_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	FREEMAIL_ENVFROM(0.00)[189.cn];
 	FROM_EQ_ENVFROM(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_SPAM(0.00)[0.654];
-	DMARC_NA(0.00)[189.cn];
-	RCVD_IN_DNSWL_FAIL(0.00)[183.61.185.101:server fail,114.242.206.180:server fail];
-	ARC_NA(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_FROM(0.00)[189.cn];
+	R_DKIM_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_TWO(0.00)[2];
+	ASN(0.00)[asn:4808, ipnet:114.242.192.0/18, country:CN];
 	TO_DN_SOME(0.00)[];
+	FREEMAIL_TO(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,loongson.cn,189.cn,linaro.org,amd.com];
+	FROM_HAS_DN(0.00)[];
 	TAGGED_RCPT(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2]
+	NEURAL_HAM(-0.00)[-1.000];
+	DMARC_NA(0.00)[loongson.cn];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4EA323F95B
-X-Spamd-Bar: -----
-Message-ID-Hash: 5IVOGD4PIRZ4LAE5FOC7VVAF6KTGQ6P7
-X-Message-ID-Hash: 5IVOGD4PIRZ4LAE5FOC7VVAF6KTGQ6P7
-X-MailFrom: 15330273260@189.cn
+X-Rspamd-Queue-Id: E81693E957
+X-Spamd-Bar: -
+Message-ID-Hash: G7TPL5VSG72AUPGBOMTDYUHNP5EGZY6D
+X-Message-ID-Hash: G7TPL5VSG72AUPGBOMTDYUHNP5EGZY6D
+X-MailFrom: suijingfeng@loongson.cn
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Nathan Chancellor <nathan@kernel.org>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, loongson-kernel@lists.loongnix.cn
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v13 0/2] drm: add kms driver for loongson display controller
+Subject: [Linaro-mm-sig] [PATCH v14 0/2] drm: add kms driver for loongson display controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5IVOGD4PIRZ4LAE5FOC7VVAF6KTGQ6P7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/G7TPL5VSG72AUPGBOMTDYUHNP5EGZY6D/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGksDQoNCk9uIDIwMjMvNS8xOCAyMTozOCwgVGhvbWFzIFppbW1lcm1hbm4gd3JvdGU6DQo+IEhp
-LA0KPg0KPiBJIGRvbid0IGtub3cgdGhlIHN0YXR1cyBoZXJlLCBidXQgaWYgaXQgd29ya3MsIHlv
-dSBzaG91bGQgcHJvYmFibHkgDQo+IG1lcmdlIGl0LiBJIHRoaW5rIHlvdSBmaXJzdCBuZWVkIHRv
-IGdldCBjb21taXQgYWNjZXNzIHRvIGRybS1taXNjLiANCj4gVGhhdCB3aWxsIGFsc28gYWxsb3cg
-eW91IHRvIG1lcmdlIHRoZSBvdGhlciBmaXhlcyB5b3Ugc2VudCByZWNlbnRseS4NCj4NCj4gU2Vl
-DQo+DQo+DQo+IGh0dHBzOi8vZHJtLnBhZ2VzLmZyZWVkZXNrdG9wLm9yZy9tYWludGFpbmVyLXRv
-b2xzL2NvbW1pdC1hY2Nlc3MuaHRtbCNkcm0tbWlzYyANCj4NCj4NCj4gZm9yIHRoZSBvdmVyYWxs
-IHByb2Nlc3MuDQo+DQpUaGFua3MgZm9yIHlvdSB2YWx1YWJsZSBhZHZpY2UsIHdlIGRvbid0IGtu
-b3cgdGhhdCBiZWZvcmUuDQoNCkN1cnJlbnRseSwgSSdtIG5vdCBnb29kIGVub3VnaCB0byBoYXZl
-IGEgY29tbWl0IGFjY2Vzcy4NCg0KSSB0aGluayBJIHdvcmsgaGFyZCB0byBtZWV0IHRoZSByZXF1
-aXJlbWVudCBpbiB0aGUgbG9uZyB0ZXJtLg0KDQpXZSBvYnNlcnZlZCB0aGF0IHlvdSBhcmUgbW9y
-ZSBwcm9mZXNzaW9uYWwgcHJvZ3JhbW1lciwgYW5kDQoNCnlvdSBjb250cmlidXRlIGEgbG90IGR1
-cmluZyB0aGUgcGFzdC4NCg0KV2Ugc3RhcnRlZCBkZXZlbG9waW5nIGRyaXZlciBieSBzdHVkeSB5
-b3VyIHBhdGNoZXMuDQoNCkFzIHlvdSBwYXRjaCBhbHdheXMgY29tZSB3aXRoIGdvb2QgZG9jdW1l
-bnQgYW5kIGNvbW1lbnRzLg0KDQpkcm0vbG9vbmdzb24gZHJpdmVyIGxlYXJucyBhIGxvdCBmcm9t
-IGRybS9hc3QsIGRybS9xeGwsIGRybS9tZ2FnMjAwLCANCmRybS9yYWRlb24uDQoNCmFsc28gZHJt
-X2dlbV92cmFtX2hlbHBlci4NCg0KVGhlcmVmb3JlLCB3ZSBhcmUgc3RpbGwgYmVsaWV2ZSB0aGF0
-IHlvdSBhcmUgbW9yZSBwcm9mZXNzaW9uYWwgYXQgZHJtIA0KZnJhbWV3b3JrIGxheWVyLg0KDQpB
-bmQgdGhlcmUgbm8gZG91YnQgdGhhdCB5b3UgaGF2ZSBhIGJldHRlciB1bmRlcnN0YW5kaW5nIHRv
-d2FyZCB0aGUgDQphdG9taWMgbW9kZXNldCB0aGFuIHVzLg0KDQoNCldlIG1heSBoYXZlIGJldHRl
-ciBrbm93bGVkZ2UgYWJvdXQgb3VyIGhhcmR3YXJlLA0KDQpXZSBhbHNvIGtub3cgdGhhdCBieSBr
-ZWVwaW5nIGNoYW5nZXMgbG9jYWxpemVkIHRvIGRybS9sb29uZ3NvbiwNCg0KSXQgd291bGRuJ3Qg
-bWFrZSB0ZXJyaWJsZSBpbmZsdWVuY2Ugb24gdGhlIGRybSBjb3JlKGFuZMKgIG90aGVyIHNpZGUp
-Lg0KDQoNClRoZXJlZm9yZSwgSSB3b3VsZCBsaWtlIGludml0ZSB5b3UgdG8gYmUgdGhlIGNvLW1h
-aW50YWluZXIgb2YgZHJtL2xvb25nc29uLA0KDQpXb3VsZCB5b3UgbGlrZSB0byBhY2NlcHQgdGhp
-cz8gSWYgc28gSSB3b3VsZCBsaWtlIHRvIHVwZGF0ZSBteSBwYXRjaCBhbmQgDQpzZW5kIFYxNC4N
-Cg0KSSB3aWxswqAgcmVzcGVjdCB5b3UgZGVjaXNpb24sIGJ1dCBJIHN0cm9uZ2x5IGVuY291cmFn
-ZSB5b3UgdG8gYWdyZWUgd2l0aCANCnRoaXMuDQoNCkkgYmVsaWV2ZSB0aGF0IHdpdGggeW91ciBn
-dWlkYW5jZSBhbmQgc3VwZXJ2aXNlLCB0aGUgcXVhbGl0eSBvZiB0aGlzIA0KZHJpdmVyIGNhbiBi
-ZSBndWFyYW50ZWVkLg0KDQoNCldlIGNvdWxkIG9mZmVyKGRvbmF0aW9uKSBldmFsdWF0aW9uIGJv
-YXJkcyBmb3IgcGF0Y2ggdmVyaWZpY2F0aW9uLA0KDQpzZWUgbW9yZSBpbmZvcm1hdGlvbiBmb3Ig
-dGhlIGJvYXJkcyBhdmFpbGFibGUgYXQgWzFdLg0KDQpMb29uZ0FyY2ggYm9hcmRzIGhhcyB0byBi
-dXJuIG5ldyBmaXJtd2FyZSBiZWZvcmUgaXQgY2FuIGJlIHVzZWQgd2l0aCANCnVwc3RyZWFtIGtl
-cm5lbC4NCg0KUGxlYXNlIGdpdmUgY29udGFjdCBpbmZvcm1hdGlvbiB0byB1cyBpZiB5b3UgYXJl
-IGludGVyZXN0ZWQgaW4uIEkgd2lsbCANCmJlIGhlbHBmdWwgdGhlbiBiZWNhdXNlDQoNCkkga25v
-dyBob3cgdG8gYnVybiBuZXcgZmlybXdhcmUuDQoNCg0KWzFdIGh0dHBzOi8vZ2l0aHViLmNvbS9s
-b29uZ3Nvbi9GaXJtd2FyZQ0KDQoNCkJ5IHRoZSB3YXksIE1heGltZSBpcyBhbHNvIHRoZSBjby1t
-YWludGFpbmVyIG9mIGRybS9zdW40aS4NCg0KRHVyaW5nIHRoZSBwYXN0IHRoZXJlIGEgbG90IHJl
-dmlld2VycyBwYXJ0aWNpcGF0ZSBpbiB0aGUgcHJvY2VzcyBvZiANCnJldmlld2luZyBkcm0vbG9v
-Z25zb24uDQoNCmluY2x1ZGluZyBNYXhpbWUsIEtyenlzenRvZiwgQ2hyaXN0aWFuLCBFbWlsLCBS
-b2IsIENoZW4gYW5kIG90aGVycy4NCg0Kc28gbGV0J3MgZ2V0IGl0IG1lcmdlZCBhdCBuZXh0IHZl
-cnNpb24sIGRvbid0IHdhc3RlIHRoZSByZXZpZXdpbmcgZWZmb3J0IA0KZXZlciBtYWRlLg0KDQoN
-Cj4gQmVzdCByZWdhcmRzDQo+IFRob21hcw0KPg0KPiBBbSAxNS4wNS4yMyB1bSAxNzo1NyBzY2hy
-aWViIFN1aSBKaW5nZmVuZzoNCj4+IExvb25nc29uIGRpc3BsYXkgY29udHJvbGxlciBJUCBoYXMg
-YmVlbiBpbnRlZ3JhdGVkIGluIGJvdGggTG9vbmdzb24gDQo+PiBub3J0aA0KPj4gYnJpZGdlIGNo
-aXBzZXQobHM3YTEwMDAvbHM3YTIwMDApIGFuZCBMb29uZ3NvbiANCj4+IFNvQ3MobHMyazEwMDAv
-bHMyazIwMDApLCBpdA0KPj4gaGFzIGJlZW4gZXZlbiBpbmNsdWRlZCBpbiBMb29uZ3NvbiBzZWxm
-LW1hZGUgQk1DIHByb2R1Y3RzLg0KPj4NCj4+IFRoaXMgZGlzcGxheSBjb250cm9sbGVyIGlzIGEg
-UENJIGRldmljZS4gSXQgaGFzIHR3byBkaXNwbGF5IHBpcGVzIGFuZCANCj4+IGVhY2gNCj4+IGRp
-c3BsYXkgcGlwZSBzdXBwb3J0IGEgcHJpbWFyeSBwbGFuZSBhbmQgYSBjdXJzb3IgcGxhbmUuIEZv
-ciB0aGUgREMgDQo+PiBpbiB0aGUNCj4+IGxzN2ExMDAwIGFuZCBsczJrMTAwMCwgZWFjaCBkaXNw
-bGF5IHBpcGUgaGFzIGEgRFZPIG91dHB1dCBpbnRlcmZhY2UgDQo+PiB3aGljaA0KPj4gcHJvdmlk
-ZSBSR0I4ODggc2lnbmFscywgdmVydGljYWwgJiBob3Jpem9udGFsIHN5bmNocm9uaXNhdGlvbnMg
-YW5kIHBpeGVsDQo+PiBjbG9jay4gRWFjaCBDUlRDIGlzIGFibGUgdG8gc3VwcG9ydCAxOTIweDEw
-ODBANjBIeiwgdGhlIG1heGltdW0gDQo+PiByZXNvbHV0aW9uDQo+PiBvZiBlYWNoIGRpc3BsYXkg
-cGlwZSBpcyAyMDQ4eDIwNDggYWNjb3JkaW5nIHRvIHRoZSBoYXJkd2FyZSBzcGVjLg0KPj4NCj4+
-IEZvciB0aGUgREMgaW4gTFM3QTIwMDAsIGVhY2ggZGlzcGxheSBwaXBlIGlzIGVxdWlwcGVkIHdp
-dGggYSBidWlsdC1pbiANCj4+IEhETUkNCj4+IGVuY29kZXIgd2hpY2ggaXMgY29tcGxpYW50IHdp
-dGggdGhlIEhETUkgMS40IHNwZWNpZmljYXRpb24sIHRodXMgaXQgDQo+PiBzdXBwb3J0DQo+PiAz
-ODQweDIxNjBAMzBIei4gVGhlIGZpcnN0IGRpc3BsYXkgcGlwZSBpcyBhbHNvIGVxdWlwcGVkIHdp
-dGggYSANCj4+IHRyYW5zcGFyZW50DQo+PiB2Z2EgZW5jb2RlciB3aGljaCBpcyBwYXJhbGxlbCB3
-aXRoIHRoZSBIRE1JIGVuY29kZXIuIFRoZSBEQyBpbiANCj4+IExTN0EyMDAwIGlzDQo+PiBtb3Jl
-IGNvbXBsZXRlIGNvbXBhcmUgd2l0aCB0aGUgb25lIGluIG9sZCBjaGlwcywgYmVzaWRlcyBhYm92
-ZSANCj4+IGZlYXR1cmUsIGl0DQo+PiBoYXMgdHdvIGhhcmR3YXJlIGN1cnNvcnMsIHR3byBoYXJk
-d2FyZSB2YmxhbmsgY291bnRlciBhbmQgdHdvIHNjYW5vdXQNCj4+IHBvc2l0aW9uIHJlY29yZGVy
-cyB1bml0LiBJdCBhbHNvIHN1cHBvcnQgdGlsZWQgZnJhbWVidWZmZXIgZm9ybWF0IHdoaWNoDQo+
-PiBjYW4gYmUgc2Nhbm91dCB0aGUgdGlsZWQgZnJhbWVidWZmZXIgcmVuZGVyZWQgYnkgdGhlIExv
-b25nR1BVIGRpcmVjdGx5Lg0KPj4NCj4+IHYxIC0+IHYyOg0KPj4gwqAgMSkgVXNlIGhwZCBzdGF0
-dXMgcmVnIHdoZW4gcG9sbGluZyBmb3IgbHM3YTIwMDANCj4+IMKgIDIpIEZpeCBhbGwgd2Fybmlu
-Z3MgZW1lcmdlZCB3aGVuIGNvbXBpbGUgd2l0aCBXPTENCj4+DQo+PiB2MiAtPiB2MzoNCj4+IMKg
-IDEpIEFkZCBDT01QSUxFX1RFU1QgaW4gS2NvbmZpZyBhbmQgbWFrZSB0aGUgZHJpdmVyIG9mZiBi
-eSBkZWZhdWx0DQo+PiDCoCAyKSBBbHBoYWJldGljYWwgc29ydGluZyBoZWFkZXJzIChUaG9tYXMp
-DQo+PiDCoCAzKSBVbnRhbmdsZSByZWdpc3RlciBhY2Nlc3MgZnVuY3Rpb25zIGFzIG11Y2ggYXMg
-cG9zc2libGUgKFRob21hcykNCj4+IMKgIDQpIFN3aXRjaCB0byBUVE0gYmFzZWQgbWVtb3J5IG1h
-bmFnZXIgYW5kIHByZWZlciBjYWNoZWQgbWFwcGluZw0KPj4gwqDCoMKgwqAgZm9yIExvb25nc29u
-IFNvQyAoVGhvbWFzKQ0KPj4gwqAgNSkgQWRkIGNoaXAgaWQgZGV0ZWN0aW9uIG1ldGhvZCwgbm93
-IGFsbCBtb2RlbHMgYXJlIGRpc3Rpbmd1aXNoYWJsZS4NCj4+IMKgIDYpIFJldmlzZSBidWlsdGlu
-IEhETUkgcGh5IGRyaXZlciwgbmVhcmx5IGFsbCBtYWluIHN0cmVhbSBtb2RlDQo+PiDCoMKgwqDC
-oCBiZWxvdyA0S0AzMEh6IGlzIHRlc3RlZCwgdGhpcyBkcml2ZXIgc3VwcG9ydGVkIHRoZXNlIG1v
-ZGUgdmVyeQ0KPj4gwqDCoMKgwqAgd2VsbCBpbmNsdWRpbmcgY2xvbmUgZGlzcGxheSBtb2RlIGFu
-ZCBleHRlbmQgZGlzcGxheSBtb2RlLg0KPj4NCj4+IHYzIC0+IHY0Og0KPj4gwqAgMSkgUXVpY2ts
-eSBmaXggYSBzbWFsbCBtaXN0YWtlLg0KPj4NCj4+IHY0IC0+IHY1Og0KPj4gwqAgMSkgRHJvcCBw
-b3RlbnRpYWwgc3VwcG9ydCBmb3IgTG9vbmdzb24gMksgc2VyaWVzIFNvQyB0ZW1wb3JhcnksDQo+
-PiDCoMKgwqDCoCB0aGlzIHBhcnQgc2hvdWxkIGJlIHJlc2VuZCB3aXRoIHRoZSBEVCBiaW5kaW5n
-IHBhdGNoIGluIHRoZSBmdXR1cmUuDQo+PiDCoCAyKSBBZGQgcGVyIGRpc3BsYXkgcGlwZSBkZWJ1
-Z2ZzIHN1cHBvcnQgdG8gdGhlIGJ1aWx0aW4gSERNSSBlbmNvZGVyLg0KPj4gwqAgMykgUmV3cml0
-ZSBhdG9taWNfdXBkYXRlKCkgZm9yIGhhcmR3YXJlIGN1cnNvcnMgcGxhbmUoVGhvbWFzKQ0KPj4g
-wqAgNCkgUmV3cml0ZSBlbmNvZGVyIGFuZCBjb25uZWN0b3IgaW5pdGlhbGl6YXRpb24gcGFydCwg
-dW50YW5nbGUgaXQNCj4+IMKgwqDCoMKgIGFjY29yZGluZyB0byB0aGUgY2hpcChUaG9tYXMpLg0K
-Pj4NCj4+IHY1IC0+IHY2Og0KPj4gwqAgMSkgUmVtb3ZlIHN0cmF5IGNvZGUgd2hpY2ggZGlkbid0
-IGdldCB1c2VkLCBzYXkgDQo+PiBsc2RjX29mX2dldF9yZXNlcnZlZF9yYW0NCj4+IMKgIDIpIEZp
-eCBhbGwgdHlwb3MgSSBjb3VsZCBmb3VuZCwgbWFrZSBzZW50ZW5jZXMgYW5kIGNvZGUgbW9yZSBy
-ZWFkYWJsZQ0KPj4gwqAgMykgVW50YW5nbGUgbHNkY19oZG1pKl9jb25uZWN0b3JfZGV0ZWN0KCkg
-ZnVuY3Rpb24gYWNjb3JkaW5nIHRvIHRoZSANCj4+IHBpcGUNCj4+IMKgIDQpIEFmdGVyIGEgc2Vy
-aW91cyBjb25zaWRlcmF0aW9uLCB3ZSByZW5hbWUgdGhpcyBkcml2ZXIgYXMgbG9vbmdzb24uDQo+
-PiDCoMKgwqDCoCBCZWNhdXNlIHdlIGFsc28gaGF2ZSBkcml2ZXJzIHRvd2FyZCB0aGUgTG9vbmdH
-UFUgSVAgaW4gTFM3QTIwMDAgYW5kDQo+PiDCoMKgwqDCoCBMUzJLMjAwMC4gQmVzaWRlcywgdGhl
-cmUgYXJlIGFsc28gZHJpdmVycyBhYm91dCB0aGUgZXh0ZXJuYWwgDQo+PiBlbmNvZGVyLA0KPj4g
-wqDCoMKgwqAgSERNSSBhdWRpbyBkcml2ZXIgYW5kIHZiaW9zIHN1cHBvcnQgZXRjLiBUaGlzIHBh
-dGNoIG9ubHkgcHJvdmlkZSBEQw0KPj4gwqDCoMKgwqAgZHJpdmVyIHBhcnQsIG15IHRlYW1tYXRl
-IExpIFlpIGJlbGlldmUgdGhhdCBsb29uZ3NvbiB3aWxsIGJlIG1vcmUNCj4+IMKgwqDCoMKgIHN1
-aXRhYmxlIGZvciBsb29uZ3NvbiBncmFwaGljcyB0aGFuIGxzZGMgaW4gdGhlIGxvbmcgcnVuLg0K
-Pj4NCj4+IMKgwqDCoMKgIGxvb25nc29uLmtvID0gTFNEQyArIExvb25nR1BVICsgZW5jb2RlcnMg
-ZHJpdmVyICsgdmJpb3MvRFQgLi4uDQo+Pg0KPj4gdjYgLT4gdjc6DQo+PiDCoCAxKSBBZGQgcHJp
-bWUgc3VwcG9ydCwgc2VsZi1zaGFyaW5nIGlzIHdvcmtzLiBzaGFyaW5nIGJ1ZmZlciB3aXRoIA0K
-Pj4gZXRuYXZpdg0KPj4gwqDCoMKgwqAgaXMgYWxzbyB0ZXN0ZWQsIGFuZCBpdHMgd29ya3Mgd2l0
-aCBsaW1pdGF0aW9uLg0KPj4gwqAgMikgSW1wbGVtZW50IGJ1ZmZlciBvYmplY3RzIHRyYWNraW5n
-IHdpdGggbGlzdF9oZWFkLg0KPj4gwqAgMykgUzMoc2xlZXAgdG8gUkFNKSBpcyB0ZXN0ZWQgb24g
-bHMzYTUwMDArbHM3YTIwMDAgZXZiIGFuZCBpdCB3b3Jrcy4NCj4+IMKgIDQpIFJld3JpdGUgbHNk
-Y19ib19tb3ZlLCBzaW5jZSB0dG0gY29yZSBzdG9wIGFsbG9jYXRpbmcgcmVzb3VyY2VzDQo+PiDC
-oMKgwqDCoCBkdXJpbmcgQk8gY3JlYXRpb24uIFBhdGNoIFYxIH4gVjYgb2YgdGhpcyBzZXJpZXMg
-bm8gbG9uZ2VyIHdvcmtzDQo+PiDCoMKgwqDCoCBvbiBsYXRlc3Qga2VybmVsLiBUaHVzLCB3ZSBz
-ZW5kIFY3IHRvIHJldml2YWwgdGhlbS4NCj4+DQo+PiB2NyAtPiB2ODoNCj4+IMKgIDEpIFplcm8g
-YSBjb21waWxlIHdhcm5uaW5ncyBvbiAzMi1iaXQgcGxhdGZvcm0sIGNvbXBpbGUgd2l0aCBXPTEN
-Cj4+IMKgIDIpIFJldmlzZSBsc2RjX2JvX2dwdV9vZmZzZXQoKSBhbmQgbWlub3IgY2xlYW51cA0K
-Pj4gwqAgMykgUGFnZWZsaXAgdGVzdGVkIG9uIHRoZSB2aXJ0dWFsIHRlcm1pbmFsIHdpdGggZm9s
-bG93aW5nIGNvbW1hbmRzDQo+Pg0KPj4gwqDCoMKgwqAgbW9kZXRlc3QgLU0gbG9vbmdzb24gLXMg
-MzI6MTkyMHgxMDgwIC12DQo+PiDCoMKgwqDCoCBtb2RldGVzdCAtTSBsb29uZ3NvbiAtcyAzNDox
-OTIweDEwODAgLXYgLUYgdGlsZXMNCj4+DQo+PiDCoMKgwqAgSXQgd29ya3MgbGlrZSBhIGNoYXJt
-LCB3aGVuIHJ1bm5pbmcgcGFnZWZsaXAgdGVzdCB3aXRoIGR1YWwgc2NyZW5uDQo+PiDCoMKgwqAg
-Y29uZmlndXJhdGlvbiwgYW5vdGhlciB0d28gYWRkaXRpb25hbCBibyBjcmVhdGVkIGJ5IHRoZSBt
-b2RldGVzdA0KPj4gwqDCoMKgIGVtZXJnZWQsIFZSQU0gdXNhZ2UgdXAgdG8gNDArTUIsIHdlbGwg
-d2UgaGF2ZSBhdCBsZWFzdCA2NE1CLCBzdGlsbA0KPj4gwqDCoMKgIGVub3VnaC4NCj4+DQo+PiDC
-oMKgwqAgIyBjYXQgYm9zDQo+Pg0KPj4gwqDCoMKgwqDCoMKgwqAgYm9bMDAwMF06IHNpemU6wqDC
-oMKgwqAgODExMmtCIFZSQU0NCj4+IMKgwqDCoMKgwqDCoMKgIGJvWzAwMDFdOiBzaXplOsKgwqDC
-oMKgwqDCoCAxNmtCIFZSQU0NCj4+IMKgwqDCoMKgwqDCoMKgIGJvWzAwMDJdOiBzaXplOsKgwqDC
-oMKgwqDCoCAxNmtCIFZSQU0NCj4+IMKgwqDCoMKgwqDCoMKgIGJvWzAwMDNdOiBzaXplOsKgwqDC
-oCAxNjIwOGtCIFZSQU0NCj4+IMKgwqDCoMKgwqDCoMKgIGJvWzAwMDRdOiBzaXplOsKgwqDCoMKg
-IDgxMTJrQiBWUkFNDQo+PiDCoMKgwqDCoMKgwqDCoCBib1swMDA1XTogc2l6ZTrCoMKgwqDCoCA4
-MTEya0IgVlJBTQ0KPj4NCj4+IHY4IC0+IHY5Og0KPj4gwqAgMSkgU2VsZWN0IEkyQyBhbmQgSTJD
-X0FMR09CSVQgaW4gS2NvbmZpZyBhbmQgc2hvdWxkIGRlcGVuZCBvbiBNTVUuDQo+PiDCoCAyKSBV
-c2luZyBwY2lfZ2V0X2RvbWFpbl9idXNfYW5kX3Nsb3QgdG8gZ2V0IHRoZSBHUFUgZGV2aWNlLg0K
-Pj4gwqAgMykgT3RoZXIgbWlub3IgaW1wcm92ZW1lbnRzLg0KPj4NCj4+IMKgIFRob3NlIHBhdGNo
-ZXMgYXJlIHRlc3RlZCBvbiBsczNhNTAwMCArIGxzN2ExMDAwIENSQiwgbHMzYTUwMDAgKyANCj4+
-IGxzN2EyMDAwDQo+PiDCoCBldmIsIGFuZCBsZW1vdGUgYTE5MDEgYm9hcmQobHMzYTQwMDAgKyBs
-czdhMTAwMCkuIE9uIGxvb25nc29uIG1pcHMgDQo+PiBDUFUsDQo+PiDCoCB0aGUgd3JpdGUgY29t
-YmluZSBzdXBwb3J0IHNob3VsZCBiZSBlbmFibGVkLCB0byBnZXQgYSBkZWNlbnQgDQo+PiBwZXJm
-b3JtYW5jZQ0KPj4gwqAgZm9yIHdyaXRpbmcgZnJhbWVidWZmZXIgZGF0YSB0byB0aGUgVlJBTS4N
-Cj4+DQo+PiB2OSAtPiB2MTA6DQo+PiDCoCAxKSBSZXZpc2UgbHNkY19kcm1fZnJlZXplKCkgdG8g
-aW1wbGVtZW50IFMzIGNvbXBsZXRlbHkgYW5kIGNvcnJlY3RseS4NCj4+IMKgwqDCoMKgIEkgc3Vk
-ZGVubHkgcmVhbGl6ZWQgdGhhdCBwaW5uZWQgYnVmZmVyIGNhbiBub3QgbW92ZSBhbmQgVlJBTSBs
-b3N0DQo+PiDCoMKgwqDCoCBwb3dlciB3aGVuIHNsZWVwIHRvIFJBTS4gVGh1cywgdGhlIGRhdGEg
-aW4gdGhlIGJ1ZmZlciB3aG8gaXMgcGlubmVkDQo+PiDCoMKgwqDCoCBpbiBWUkFNIHdpbGwgZ2V0
-IGxvc3Qgd2hlbiByZXN1bWUuIFlldCBpdCdzIG5vdCBiaWcgcHJvYmxlbSBiZWNhdXNlDQo+PiDC
-oMKgwqDCoCB3ZSBhcmUgc29mdHdhcmUgcmVuZGVyaW5nIHNvbHV0aW9uIHdoaWNoIHJlbGF5IG9u
-IHRoZSBDUFUgdXBkYXRlIA0KPj4gdGhlDQo+PiDCoMKgwqDCoCBmcm9udCBmcmFtZWJ1ZmZlci4g
-V2UgY2FuIHNlZSB0aGUgZ2FyYmFnZSBkYXRhIHdoZW4gcmVzdW1lIGZyb20gUzMsDQo+PiDCoMKg
-wqDCoCBidXQgdGhlIHNjcmVlbiB3aWxsIHNob3cgY29ycmVjdCBpbWFnZSBhcyBJIG1vdmUgdGhl
-IGN1cnNvci4gDQo+PiBUaGlzIGlzDQo+PiDCoMKgwqDCoCBkdWUgdG8gdGhlIGNwdSByZXBhaW50
-LiB2MTAgb2YgdGhpcyBwYXRjaCBtYWtlIFMzIHBlcmZlY3QgYnkgdW5waW4NCj4+IMKgwqDCoMKg
-IGFsbCBvZiBCT3MgaW4gVlJBTSwgZXZpY3QgdGhlbSBhbGwgdG8gc3lzdGVtIFJBTS4NCj4+DQo+
-PiB2MTAgLT4gdjExOg0KPj4gwqAgMSkgT24gZG91YmxlIHNjcmVlbiBjYXNlLCB0aGUgc2luZ2xl
-IGdpYW50IGZyYW1lYnVmZmVyIGlzIA0KPj4gcmVmZXJlbmNlZCBieQ0KPj4gwqDCoMKgwqAgdHdv
-IEdFTSBvYmplY3QsIGhlbmNlLCBpdCB3aWxsIGJlIHBpbm5lZCBieSBwcmVwYXJlX2ZiKCkgYXQg
-DQo+PiBsZWFzZSB0d28NCj4+IMKgwqDCoMKgIHRpbWVzLiBUaGlzIGNhdXNlIGl0cyBwaW4gY291
-bnQgPiAxLiBWMTAgb2YgdGhpcyBwYXRjaCBvbmx5IA0KPj4gdW5waW4gVlJBTQ0KPj4gwqDCoMKg
-wqAgQk9zIG9uY2Ugd2hlbiBzdXNwZW5kLCB3aGljaCBpcyBub3QgY29ycmVjdCBvbiBkb3VibGUg
-c2NyZWVuIA0KPj4gY2FzZS4gVjExDQo+PiDCoMKgwqDCoCBvZiB0aGlzIHBhdGNoIHVucGluIEJP
-cyB1bnRpbCBpdHMgcGluIGNvdW50IHJlYWNoIHRvIHplcm8gd2hlbiANCj4+IHN1c3BlbmQuDQo+
-PiDCoMKgwqDCoCBUaGVuLCB3ZSBtYWtlIHRoZSBTMyBzdXBwb3J0IGNvbXBsZXRlIGZpbmFsbHku
-IFdpdGggdjExLCBJIGNhbid0IA0KPj4gc2VlDQo+PiDCoMKgwqDCoCBhbnkgZ2FyYmFnZSBkYXRh
-IGFmdGVyIHJlc3VtZS4gVGVzdGVkIG9uIGJvdGggbHM3YTEwMDAgYW5kIGxzN2EyMDAwDQo+PiDC
-oMKgwqDCoCBwbGF0Zm9ybSwgd2l0aCBzaW5nbGUgc2NyZWVuIGFuZCBkb3VibGUgc2NyZWVuIGNv
-bmZpZ3VyYXRpb24uDQo+PiDCoCAyKSBGaXggdmJsYW5rIHdhaXQgdGltZW91dCB3aGVuIGRpc2Fi
-bGUgQ1JUQy4NCj4+IMKgIDMpIFRlc3QgYWdhaW5zdCBJR1QsIGF0IGxlYXN0IGZiZGV2IHRlc3Qg
-YW5kIGttc19mbGlwIHRlc3QgcGFzc2VkLg0KPj4gwqAgNCkgUmV3cml0ZSBwaXhlbCBQTEwgdXBk
-YXRlIGZ1bmN0aW9uLCBtYWdpYyBudW1iZXJzIGVsaW1pbmF0ZWQgKEVtaWwpDQo+PiDCoCA1KSBE
-cm9wIGEgZmV3IGNvbW1vbiBoYXJkd2FyZSBmZWF0dXJlcyBkZXNjcmlwdGlvbiBpbiBsc2RjX2Rl
-c2MgKEVtaWwpDQo+PiDCoCA2KSBEcm9wIGxzZGNfbW9kZV9jb25maWdfbW9kZV92YWxpZCgpLCBp
-bnN0ZWFkIGFkZCByZXN0cmljdGlvbnMgaW4gDQo+PiBkdW1iDQo+PiDCoMKgwqDCoCBjcmVhdGUg
-ZnVuY3Rpb24uIChFbWlsKQ0KPj4gwqAgNykgVW50YW5nbGUgdGhlIGxzN2ExMDAwIGNhc2UgYW5k
-IGxzN2EyMDAwIGNhc2UgY29tcGxldGVseSAoVGhvbWFzKQ0KPj4NCj4+IHYxMSAtPiB2MTI6DQo+
-PiDCoCBub25lDQo+Pg0KPj4gdjEyIC0+IHYxMzoNCj4+IMKgIDEpIEFkZCBiZW5jaG1hcmsgdG8g
-ZmlndXJlIG91dCB0aGUgYmFuZHdpZHRoIG9mIHRoZSBoYXJkd2FyZSBwbGF0Zm9ybS4NCj4+IMKg
-wqDCoMKgIFVzYWdlOg0KPj4gwqDCoMKgwqAgIyBjZCAvc3lzL2tlcm5lbC9kZWJ1Zy9kcmkvMC8N
-Cj4+IMKgwqDCoMKgICMgY2F0IGJlbmNobWFyaw0KPj4NCj4+IMKgIDIpIFZSQU0gaXMgZmlsbGVk
-IHdpdGggZ2FyYmFnZSBkYXRhIGlmIHVuaW5pdGlhbGl6ZWQsIGFkZCBhIGJ1ZmZlcg0KPj4gwqDC
-oMKgwqAgY2xlYXJpbmcgcHJvY2VkdXJlLCBjbGVhciBpdCBvbiB0aGUgQk8gY3JlYXRpb24gdGlt
-ZS4NCj4+IMKgIDMpIFVwZGF0ZSBjb3B5cmlnaHRzIGFuZCBhZGp1c3QgY29kaW5nIHN0eWxlIChI
-dWFjYWkpDQo+Pg0KPj4gU3VpIEppbmdmZW5nICgyKToNCj4+IMKgwqAgZHJtOiBhZGQga21zIGRy
-aXZlciBmb3IgbG9vbmdzb24gZGlzcGxheSBjb250cm9sbGVyDQo+PiDCoMKgIE1BSU5UQUlORVJT
-OiBhZGQgbWFpbnRhaW5lcnMgZm9yIERSTSBMT09OR1NPTiBkcml2ZXINCj4+DQo+PiDCoCBNQUlO
-VEFJTkVSU8KgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqDCoMKgwqAgfMKgwqDCoCA4ICsNCj4+IMKgIGRyaXZlcnMvZ3B1L2RybS9LY29uZmln
-wqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoMKgIDIgKw0KPj4g
-wqAgZHJpdmVycy9ncHUvZHJtL01ha2VmaWxlwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
-wqDCoMKgwqAgfMKgwqDCoCAxICsNCj4+IMKgIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9LY29u
-ZmlnwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCAxNyArDQo+PiDCoCBkcml2ZXJzL2dwdS9k
-cm0vbG9vbmdzb24vTWFrZWZpbGXCoMKgwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCAyMSArDQo+PiDC
-oCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHM3YTEwMDBfb3V0cHV0cy5jIHzCoCAxNjEgKysr
-DQo+PiDCoCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHM3YTIwMDBfb3V0cHV0cy5jIHzCoCA1
-MzEgKysrKysrKysrDQo+PiDCoCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19iZW5jaG1h
-cmsuY8KgwqAgfMKgIDEzMiArKysNCj4+IMKgIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2Rj
-X2JlbmNobWFyay5owqDCoCB8wqDCoCAxMyArDQo+PiDCoCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdz
-b24vbHNkY19jcnRjLmPCoMKgwqDCoMKgwqDCoCB8IDEwNjggKysrKysrKysrKysrKysrKysrKw0K
-Pj4gwqAgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfZGVidWdmcy5jwqDCoMKgwqAgfMKg
-wqAgOTEgKysNCj4+IMKgIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX2RldmljZS5jwqDC
-oMKgwqDCoCB8wqAgMTA0ICsrDQo+PiDCoCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19k
-cnYuY8KgwqDCoMKgwqDCoMKgwqAgfMKgIDQ4NCArKysrKysrKysNCj4+IMKgIGRyaXZlcnMvZ3B1
-L2RybS9sb29uZ3Nvbi9sc2RjX2Rydi5owqDCoMKgwqDCoMKgwqDCoCB8wqAgNDUyICsrKysrKysr
-DQo+PiDCoCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19nZW0uY8KgwqDCoMKgwqDCoMKg
-wqAgfMKgIDMyNCArKysrKysNCj4+IMKgIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX2dl
-bS5owqDCoMKgwqDCoMKgwqDCoCB8wqDCoCAzNyArDQo+PiDCoCBkcml2ZXJzL2dwdS9kcm0vbG9v
-bmdzb24vbHNkY19nZnhwbGwuY8KgwqDCoMKgwqAgfMKgIDE5OSArKysrDQo+PiDCoCBkcml2ZXJz
-L2dwdS9kcm0vbG9vbmdzb24vbHNkY19nZnhwbGwuaMKgwqDCoMKgwqAgfMKgwqAgNTIgKw0KPj4g
-wqAgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfaTJjLmPCoMKgwqDCoMKgwqDCoMKgIHzC
-oCAxNzkgKysrKw0KPj4gwqAgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfaTJjLmjCoMKg
-wqDCoMKgwqDCoMKgIHzCoMKgIDI5ICsNCj4+IMKgIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9s
-c2RjX2lycS5jwqDCoMKgwqDCoMKgwqDCoCB8wqDCoCA4MSArKw0KPj4gwqAgZHJpdmVycy9ncHUv
-ZHJtL2xvb25nc29uL2xzZGNfaXJxLmjCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDE2ICsNCj4+IMKg
-IGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX291dHB1dC5owqDCoMKgwqDCoCB8wqDCoCAy
-MSArDQo+PiDCoCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19waXhwbGwuY8KgwqDCoMKg
-wqAgfMKgIDQ4MSArKysrKysrKysNCj4+IMKgIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2Rj
-X3BpeHBsbC5owqDCoMKgwqDCoCB8wqDCoCA4NiArKw0KPj4gwqAgZHJpdmVycy9ncHUvZHJtL2xv
-b25nc29uL2xzZGNfcGxhbmUuY8KgwqDCoMKgwqDCoCB8wqAgNjM5ICsrKysrKysrKysrDQo+PiDC
-oCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19wcm9iZS5jwqDCoMKgwqDCoMKgIHzCoMKg
-IDU2ICsNCj4+IMKgIGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX3Byb2JlLmjCoMKgwqDC
-oMKgwqAgfMKgwqAgMTIgKw0KPj4gwqAgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfcmVn
-cy5owqDCoMKgwqDCoMKgwqAgfMKgIDQwMCArKysrKysrDQo+PiDCoCBkcml2ZXJzL2dwdS9kcm0v
-bG9vbmdzb24vbHNkY190dG0uY8KgwqDCoMKgwqDCoMKgwqAgfMKgIDYxMCArKysrKysrKysrKw0K
-Pj4gwqAgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfdHRtLmjCoMKgwqDCoMKgwqDCoMKg
-IHzCoMKgIDk5ICsrDQo+PiDCoCAzMSBmaWxlcyBjaGFuZ2VkLCA2NDA2IGluc2VydGlvbnMoKykN
-Cj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vS2NvbmZp
-Zw0KPj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9NYWtl
-ZmlsZQ0KPj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9s
-czdhMTAwMF9vdXRwdXRzLmMNCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9k
-cm0vbG9vbmdzb24vbHM3YTIwMDBfb3V0cHV0cy5jDQo+PiDCoCBjcmVhdGUgbW9kZSAxMDA2NDQg
-ZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfYmVuY2htYXJrLmMNCj4+IMKgIGNyZWF0ZSBt
-b2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19iZW5jaG1hcmsuaA0KPj4g
-wqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX2NydGMu
-Yw0KPj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2Rj
-X2RlYnVnZnMuYw0KPj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9sb29u
-Z3Nvbi9sc2RjX2RldmljZS5jDQo+PiDCoCBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUv
-ZHJtL2xvb25nc29uL2xzZGNfZHJ2LmMNCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJz
-L2dwdS9kcm0vbG9vbmdzb24vbHNkY19kcnYuaA0KPj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRy
-aXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX2dlbS5jDQo+PiDCoCBjcmVhdGUgbW9kZSAxMDA2
-NDQgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfZ2VtLmgNCj4+IMKgIGNyZWF0ZSBtb2Rl
-IDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19nZnhwbGwuYw0KPj4gwqAgY3Jl
-YXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX2dmeHBsbC5oDQo+
-PiDCoCBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfaTJj
-LmMNCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNk
-Y19pMmMuaA0KPj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nv
-bi9sc2RjX2lycS5jDQo+PiDCoCBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2xv
-b25nc29uL2xzZGNfaXJxLmgNCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9k
-cm0vbG9vbmdzb24vbHNkY19vdXRwdXQuaA0KPj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZl
-cnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX3BpeHBsbC5jDQo+PiDCoCBjcmVhdGUgbW9kZSAxMDA2
-NDQgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfcGl4cGxsLmgNCj4+IMKgIGNyZWF0ZSBt
-b2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24vbHNkY19wbGFuZS5jDQo+PiDCoCBj
-cmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy9ncHUvZHJtL2xvb25nc29uL2xzZGNfcHJvYmUuYw0K
-Pj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2RybS9sb29uZ3Nvbi9sc2RjX3By
-b2JlLmgNCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbG9vbmdzb24v
-bHNkY19yZWdzLmgNCj4+IMKgIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL2dwdS9kcm0vbG9v
-bmdzb24vbHNkY190dG0uYw0KPj4gwqAgY3JlYXRlIG1vZGUgMTAwNjQ0IGRyaXZlcnMvZ3B1L2Ry
-bS9sb29uZ3Nvbi9sc2RjX3R0bS5oDQo+Pg0KPg0KX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJv
-LW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8g
-bGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+Loongson display controller IP has been integrated in both Loongson north
+bridge chipset(ls7a1000/ls7a2000) and Loongson SoCs(ls2k1000/ls2k2000), it
+has been even included in Loongson self-made BMC products.
+
+This display controller is a PCI device. It has two display pipes and each
+display pipe support a primary plane and a cursor plane. For the DC in the
+ls7a1000 and ls2k1000, each display pipe has a DVO output interface which
+provide RGB888 signals, vertical & horizontal synchronisations and pixel
+clock. Each CRTC is able to support 1920x1080@60Hz, the maximum resolution
+of each display pipe is 2048x2048 according to the hardware spec.
+
+For the DC in LS7A2000, each display pipe is equipped with a built-in HDMI
+encoder which is compliant with the HDMI 1.4 specification, thus it support
+3840x2160@30Hz. The first display pipe is also equipped with a transparent
+vga encoder which is parallel with the HDMI encoder. The DC in LS7A2000 is
+more complete compare with the one in old chips, besides above feature, it
+has two hardware cursors, two hardware vblank counter and two scanout
+position recorders unit. It also support tiled framebuffer format which
+can be scanout the tiled framebuffer rendered by the LoongGPU directly.
+
+v1 -> v2:
+ 1) Use hpd status reg when polling for ls7a2000
+ 2) Fix all warnings emerged when compile with W=1
+
+v2 -> v3:
+ 1) Add COMPILE_TEST in Kconfig and make the driver off by default
+ 2) Alphabetical sorting headers (Thomas)
+ 3) Untangle register access functions as much as possible (Thomas)
+ 4) Switch to TTM based memory manager and prefer cached mapping
+    for Loongson SoC (Thomas)
+ 5) Add chip id detection method, now all models are distinguishable.
+ 6) Revise builtin HDMI phy driver, nearly all main stream mode
+    below 4K@30Hz is tested, this driver supported these mode very
+    well including clone display mode and extend display mode.
+
+v3 -> v4:
+ 1) Quickly fix a small mistake.
+
+v4 -> v5:
+ 1) Drop potential support for Loongson 2K series SoC temporary,
+    this part should be resend with the DT binding patch in the future.
+ 2) Add per display pipe debugfs support to the builtin HDMI encoder.
+ 3) Rewrite atomic_update() for hardware cursors plane(Thomas)
+ 4) Rewrite encoder and connector initialization part, untangle it
+    according to the chip(Thomas).
+
+v5 -> v6:
+ 1) Remove stray code which didn't get used, say lsdc_of_get_reserved_ram
+ 2) Fix all typos I could found, make sentences and code more readable
+ 3) Untangle lsdc_hdmi*_connector_detect() function according to the pipe
+ 4) After a serious consideration, we rename this driver as loongson.
+    Because we also have drivers toward the LoongGPU IP in LS7A2000 and
+    LS2K2000. Besides, there are also drivers about the external encoder,
+    HDMI audio driver and vbios support etc. This patch only provide DC
+    driver part, my teammate Li Yi believe that loongson will be more
+    suitable for loongson graphics than lsdc in the long run.
+
+    loongson.ko = LSDC + LoongGPU + encoders driver + vbios/DT ...
+
+v6 -> v7:
+ 1) Add prime support, self-sharing is works. sharing buffer with etnaviv
+    is also tested, and its works with limitation.
+ 2) Implement buffer objects tracking with list_head.
+ 3) S3(sleep to RAM) is tested on ls3a5000+ls7a2000 evb and it works.
+ 4) Rewrite lsdc_bo_move, since ttm core stop allocating resources
+    during BO creation. Patch V1 ~ V6 of this series no longer works
+    on latest kernel. Thus, we send V7 to revival them.
+
+v7 -> v8:
+ 1) Zero a compile warnnings on 32-bit platform, compile with W=1
+ 2) Revise lsdc_bo_gpu_offset() and minor cleanup
+ 3) Pageflip tested on the virtual terminal with following commands
+
+    modetest -M loongson -s 32:1920x1080 -v
+    modetest -M loongson -s 34:1920x1080 -v -F tiles
+
+   It works like a charm, when running pageflip test with dual screnn
+   configuration, another two additional bo created by the modetest
+   emerged, VRAM usage up to 40+MB, well we have at least 64MB, still
+   enough.
+
+   # cat bos
+
+       bo[0000]: size:     8112kB VRAM
+       bo[0001]: size:       16kB VRAM
+       bo[0002]: size:       16kB VRAM
+       bo[0003]: size:    16208kB VRAM
+       bo[0004]: size:     8112kB VRAM
+       bo[0005]: size:     8112kB VRAM
+
+v8 -> v9:
+ 1) Select I2C and I2C_ALGOBIT in Kconfig and should depend on MMU.
+ 2) Using pci_get_domain_bus_and_slot to get the GPU device.
+ 3) Other minor improvements.
+
+ Those patches are tested on ls3a5000 + ls7a1000 CRB, ls3a5000 + ls7a2000
+ evb, and lemote a1901 board(ls3a4000 + ls7a1000). On loongson mips CPU,
+ the write combine support should be enabled, to get a decent performance
+ for writing framebuffer data to the VRAM.
+
+v9 -> v10:
+ 1) Revise lsdc_drm_freeze() to implement S3 completely and correctly.
+    I suddenly realized that pinned buffer can not move and VRAM lost
+    power when sleep to RAM. Thus, the data in the buffer who is pinned
+    in VRAM will get lost when resume. Yet it's not big problem because
+    we are software rendering solution which relay on the CPU update the
+    front framebuffer. We can see the garbage data when resume from S3,
+    but the screen will show correct image as I move the cursor. This is
+    due to the cpu repaint. v10 of this patch make S3 perfect by unpin
+    all of BOs in VRAM, evict them all to system RAM.
+
+v10 -> v11:
+ 1) On double screen case, the single giant framebuffer is referenced by
+    two GEM object, hence, it will be pinned by prepare_fb() at lease two
+    times. This cause its pin count > 1. V10 of this patch only unpin VRAM
+    BOs once when suspend, which is not correct on double screen case. V11
+    of this patch unpin BOs until its pin count reach to zero when suspend.
+    Then, we make the S3 support complete finally. With v11, I can't see
+    any garbage data after resume. Tested on both ls7a1000 and ls7a2000
+    platform, with single screen and double screen configuration.
+ 2) Fix vblank wait timeout when disable CRTC.
+ 3) Test against IGT, at least fbdev test and kms_flip test passed.
+ 4) Rewrite pixel PLL update function, magic numbers eliminated (Emil)
+ 5) Drop a few common hardware features description in lsdc_desc (Emil)
+ 6) Drop lsdc_mode_config_mode_valid(), instead add restrictions in dumb
+    create function. (Emil)
+ 7) Untangle the ls7a1000 case and ls7a2000 case completely (Thomas)
+
+v11 -> v12:
+ none
+
+v12 -> v13:
+ 1) Add benchmark to figure out the bandwidth of the hardware platform.
+    Usage:
+    # cd /sys/kernel/debug/dri/0/
+    # cat benchmark
+
+ 2) VRAM is filled with garbage data if uninitialized, add a buffer
+    clearing procedure, clear it on the BO creation time.
+ 3) Update copyrights and adjust coding style (Huacai)
+
+v13 -> v14:
+ 1) Trying to add async update support for cursor plane.
+
+Sui Jingfeng (2):
+  drm: add kms driver for loongson display controller
+  MAINTAINERS: add maintainers for DRM LOONGSON driver
+
+ MAINTAINERS                                   |    8 +
+ drivers/gpu/drm/Kconfig                       |    2 +
+ drivers/gpu/drm/Makefile                      |    1 +
+ drivers/gpu/drm/loongson/Kconfig              |   17 +
+ drivers/gpu/drm/loongson/Makefile             |   20 +
+ drivers/gpu/drm/loongson/lsdc_benchmark.c     |  133 ++
+ drivers/gpu/drm/loongson/lsdc_benchmark.h     |   13 +
+ drivers/gpu/drm/loongson/lsdc_crtc.c          | 1066 +++++++++++++++++
+ drivers/gpu/drm/loongson/lsdc_debugfs.c       |   91 ++
+ drivers/gpu/drm/loongson/lsdc_device.c        |  104 ++
+ drivers/gpu/drm/loongson/lsdc_drv.c           |  495 ++++++++
+ drivers/gpu/drm/loongson/lsdc_drv.h           |  451 +++++++
+ drivers/gpu/drm/loongson/lsdc_gem.c           |  324 +++++
+ drivers/gpu/drm/loongson/lsdc_gem.h           |   37 +
+ drivers/gpu/drm/loongson/lsdc_gfxpll.c        |  199 +++
+ drivers/gpu/drm/loongson/lsdc_gfxpll.h        |   52 +
+ drivers/gpu/drm/loongson/lsdc_i2c.c           |  179 +++
+ drivers/gpu/drm/loongson/lsdc_i2c.h           |   29 +
+ drivers/gpu/drm/loongson/lsdc_irq.c           |   71 ++
+ drivers/gpu/drm/loongson/lsdc_irq.h           |   16 +
+ drivers/gpu/drm/loongson/lsdc_output.h        |   21 +
+ drivers/gpu/drm/loongson/lsdc_output_7a1000.c |  161 +++
+ drivers/gpu/drm/loongson/lsdc_output_7a2000.c |  531 ++++++++
+ drivers/gpu/drm/loongson/lsdc_pixpll.c        |  481 ++++++++
+ drivers/gpu/drm/loongson/lsdc_pixpll.h        |   86 ++
+ drivers/gpu/drm/loongson/lsdc_plane.c         |  781 ++++++++++++
+ drivers/gpu/drm/loongson/lsdc_probe.c         |   56 +
+ drivers/gpu/drm/loongson/lsdc_probe.h         |   12 +
+ drivers/gpu/drm/loongson/lsdc_regs.h          |  402 +++++++
+ drivers/gpu/drm/loongson/lsdc_ttm.c           |  610 ++++++++++
+ drivers/gpu/drm/loongson/lsdc_ttm.h           |   99 ++
+ 31 files changed, 6548 insertions(+)
+ create mode 100644 drivers/gpu/drm/loongson/Kconfig
+ create mode 100644 drivers/gpu/drm/loongson/Makefile
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_benchmark.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_benchmark.h
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_crtc.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_debugfs.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_device.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_drv.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_drv.h
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_gem.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_gem.h
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_gfxpll.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_gfxpll.h
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_i2c.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_i2c.h
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_irq.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_irq.h
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_output.h
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_output_7a1000.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_output_7a2000.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_pixpll.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_pixpll.h
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_plane.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_probe.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_probe.h
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_regs.h
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_ttm.c
+ create mode 100644 drivers/gpu/drm/loongson/lsdc_ttm.h
+
+-- 
+2.25.1
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
