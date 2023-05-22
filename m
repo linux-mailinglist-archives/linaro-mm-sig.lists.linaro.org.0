@@ -2,34 +2,34 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 09FB570B9C6
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 May 2023 12:18:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8730D70BB40
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 May 2023 13:11:59 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0E71B43D3A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 May 2023 10:18:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8C54543D4A
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 May 2023 11:11:58 +0000 (UTC)
 Received: from 189.cn (ptr.189.cn [183.61.185.102])
-	by lists.linaro.org (Postfix) with ESMTP id DAD603EF52
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 22 May 2023 10:18:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AF7453EE6A
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 22 May 2023 11:11:53 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
 	dkim=none;
 	spf=pass (lists.linaro.org: domain of 15330273260@189.cn designates 183.61.185.102 as permitted sender) smtp.mailfrom=15330273260@189.cn;
 	dmarc=none
-HMM_SOURCE_IP: 10.64.8.41:35068.1997184214
+HMM_SOURCE_IP: 10.64.8.43:43282.1768237263
 HMM_ATTACHE_NUM: 0000
 HMM_SOURCE_TYPE: SMTP
-Received: from clientip-114.242.206.180 (unknown [10.64.8.41])
-	by 189.cn (HERMES) with SMTP id 9D59E1002F0;
-	Mon, 22 May 2023 18:17:59 +0800 (CST)
+Received: from clientip-114.242.206.180 (unknown [10.64.8.43])
+	by 189.cn (HERMES) with SMTP id 19A0A100249;
+	Mon, 22 May 2023 19:11:49 +0800 (CST)
 Received: from  ([114.242.206.180])
-	by gateway-151646-dep-75648544bd-xwndj with ESMTP id 386118d5a73a46768adbda9158d7dc68 for kernel@xen0n.name;
-	Mon, 22 May 2023 18:18:01 CST
-X-Transaction-ID: 386118d5a73a46768adbda9158d7dc68
+	by gateway-151646-dep-75648544bd-7vx9t with ESMTP id 7e6dec763f794de7a956c82faf1763ee for kernel@xen0n.name;
+	Mon, 22 May 2023 19:11:51 CST
+X-Transaction-ID: 7e6dec763f794de7a956c82faf1763ee
 X-Real-From: 15330273260@189.cn
 X-Receive-IP: 114.242.206.180
 X-MEDUSA-Status: 0
 Sender: 15330273260@189.cn
-Message-ID: <5ae49b7a-b8d2-a822-65bc-6a894d2b1b4e@189.cn>
-Date: Mon, 22 May 2023 18:17:58 +0800
+Message-ID: <6ff9a210-9d31-d0b0-f282-7640e95aac5e@189.cn>
+Date: Mon, 22 May 2023 19:11:48 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.0
@@ -50,21 +50,20 @@ References: <20230520105718.325819-1-15330273260@189.cn>
  <331e7baa-a83b-b0c9-37f7-0e8e39187df4@xen0n.name>
 From: Sui Jingfeng <15330273260@189.cn>
 In-Reply-To: <331e7baa-a83b-b0c9-37f7-0e8e39187df4@xen0n.name>
-X-Spamd-Result: default: False [-2.70 / 15.00];
+X-Spamd-Result: default: False [-1.70 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_IN_DNSWL_HI(-1.00)[183.61.185.102:from,114.242.206.180:received];
 	R_SPF_ALLOW(-0.20)[+ip4:183.61.185.0/24];
-	RCVD_NO_TLS_LAST(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
+	RCVD_NO_TLS_LAST(0.10)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	R_DKIM_NA(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[189.cn];
 	FREEMAIL_TO(0.00)[xen0n.name,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,loongson.cn,linaro.org,amd.com];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[189.cn];
+	R_DKIM_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
 	ASN(0.00)[asn:4134, ipnet:183.0.0.0/10, country:CN];
-	NEURAL_HAM(-0.00)[-0.989];
+	NEURAL_HAM(-0.00)[-0.997];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	DMARC_NA(0.00)[189.cn];
 	FROM_HAS_DN(0.00)[];
@@ -76,10 +75,10 @@ X-Spamd-Result: default: False [-2.70 / 15.00];
 	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: DAD603EF52
-X-Spamd-Bar: --
-Message-ID-Hash: VWLHF3XQUSCWI6UNKDG4UGGDDIEQZMXQ
-X-Message-ID-Hash: VWLHF3XQUSCWI6UNKDG4UGGDDIEQZMXQ
+X-Rspamd-Queue-Id: AF7453EE6A
+X-Spamd-Bar: -
+Message-ID-Hash: 5FZHVEPXZMN3TQQCPB2C62L253IERVYX
+X-Message-ID-Hash: 5FZHVEPXZMN3TQQCPB2C62L253IERVYX
 X-MailFrom: 15330273260@189.cn
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -88,7 +87,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v14 1/2] drm: add kms driver for loongson display controller
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VWLHF3XQUSCWI6UNKDG4UGGDDIEQZMXQ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5FZHVEPXZMN3TQQCPB2C62L253IERVYX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -121,14 +120,12 @@ IGluIHRoZSBjb2RlLMKgIHNheSBMUzdBMTAwMC4NCj4+DQo+PiAiTG9vbmdzb24gN0ExMDAwIiBp
 cyB0b28gbG9uZyzCoCBub3QgYXMgY29tcGFjdCBhcyBMUzdBMTAwMC4NCj4+DQo+PiBUaGlzIGFs
 c28gYXZvaWQgYmluZCB0aGUgY29tcGFueSBuYW1lIHRvIGEgc3BlY2lmaWMgcHJvZHVjdCwgYmVj
 YXVzZSANCj4+IGEgY29tcGFueSBjYW4gcHJvZHVjZSBtYW55IHByb2R1Y3QuDQo+DQo+IE5haCwg
-dGhlIGV4aXN0aW5nIGNvbnZlbnRpb24gaXMgIkxTN1h4eHh4IiBmb3IgYnJpZGdlcyBhbmQgIkxv
-b25nc29uIA0KPiAzQXh4eHgiIGZvciBDUFVzIChTb0NzIGxpa2UgMksgZmFsbCB1bmRlciB0aGlz
-IGNhdGVnb3J5IHRvbykuIEl0J3MgDQo+IGJldHRlciB0byBzdGljayB3aXRoIGV4aXN0aW5nIHBy
-YWN0aWNlIHNvIGl0IHdvdWxkIGJlIGZhbWlsaWFyIHRvIA0KPiBsb25nLXRpbWUgTG9vbmdzb24v
-TG9vbmdBcmNoIGRldmVsb3BlcnMsIGJ1dCBJIHBlcnNvbmFsbHkgZG9uJ3QgdGhpbmsgDQo+IGl0
-IHdpbGwgaGFtcGVyIHVuZGVyc3RhbmRpbmcgaWYgeW91IGZlZWwgbGlrZSBkb2luZyBvdGhlcndp
-c2UuDQo+DQpDYW4geW91IGV4cGxhaW4gd2h5IGl0IGlzIGJldHRlcj8NCg0KaXMgaXQgdGhhdCB0
-aGUgYWxyZWFkeSBleGlzdGluZyBpcyBiZXR0ZXIgPw0KDQpfX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBs
-aW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFp
-bCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+dGhlIGV4aXN0aW5nIGNvbnZlbnRpb24gaXMgIkxTN1h4eHh4IiBmb3IgYnJpZGdlcw0KDQoNCkJ1
+dCBJIHNlZSB0aGVyZSBhcmUgZG9jdW1lbnRbMV0gd2hpY2ggbmFtZWQgTFM3QTEwMDAgYnJpZGdl
+IGNoaXAgYXMgDQpMb29uZ3NvbiA3QTEwMDAgQnJpZGdlLA0KDQpTZWUgWzFdIGZvciByZWZlcmVu
+Y2UsIHdobyBpcyB3cm9uZyBpbiB0aGlzIGNhc2U/DQoNCg0KWzFdIA0KaHR0cHM6Ly9sb29uZ3Nv
+bi5naXRodWIuaW8vTG9vbmdBcmNoLURvY3VtZW50YXRpb24vTG9vbmdzb24tN0ExMDAwLXVzZXJt
+YW51YWwtRU4NCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5h
+cm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2
+ZUBsaXN0cy5saW5hcm8ub3JnCg==
