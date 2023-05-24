@@ -2,233 +2,317 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id E3E1870F466
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 May 2023 12:40:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E96AC70F508
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 May 2023 13:24:31 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E72504145F
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 May 2023 10:40:36 +0000 (UTC)
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
-	by lists.linaro.org (Postfix) with ESMTPS id D60053E81F
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 24 May 2023 10:40:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D67A842B34
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 May 2023 11:24:30 +0000 (UTC)
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by lists.linaro.org (Postfix) with ESMTPS id 8039D413FC
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 24 May 2023 11:24:24 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b=MsncBU0X;
-	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.208.46) smtp.mailfrom=daniel@ffwll.ch;
-	dmarc=none
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-50c079eb705so267309a12.1
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 24 May 2023 03:40:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google; t=1684924828; x=1687516828;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:mail-followup-to:message-id:subject:cc:to
-         :from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=vSBx3Jy1mTVvH1DDifa+BTFAVrVdzMfrjrerJocMzTc=;
-        b=MsncBU0Xz5NtTD5S78mXMEeC4K94W2pwnNzWeSZrGQG5dJS82huGUy3CeFMYH9IiDt
-         uJrbvxQOo8WvI+Zx2GRQ6Z3AbzchyrDuGEXD5OdYlnDK9XhsxexvCXh09C24BvmE40dX
-         9mvid7TkCoJwkRNQPQd8tZNSIFdp98fDgbtnY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1684924828; x=1687516828;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:mail-followup-to:message-id:subject:cc:to
-         :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=vSBx3Jy1mTVvH1DDifa+BTFAVrVdzMfrjrerJocMzTc=;
-        b=ZWCMSY/Ph9TwIBPc7cK7mGPICfdBEZONGbJI9/boc7ynqvpGWVRN5mj1TQPbnzd7T+
-         uSWMJxUgEDF3+NpGeZjLygBDt8r5aB0OHNeyjOukIghsSrx+z2u4Fc3MY3nTaaoC6l3N
-         QhsD3pFO0+kCPwByRUKhtodB7maWSwVoi3SUihavBHvAvlMFjLyTaFj0xDcGCg6aWI+P
-         SZhblpNiFZ9A7gdciWwUR346sNNus7vEqnEoD8+xP9LsPaj34jWd/2yYScMpmJB0A7Yl
-         or8dJjfcvtiimhZF6RB2fIZkeZwIpH8Od+Btp/Uh/ky278HGCPbvzk49xGKrwNnxCxNA
-         gjAg==
-X-Gm-Message-State: AC+VfDyl6yPZB7a1EDH2Cl17CkSi2RW4CCxdm+RTNJi3O4+F6t4zmN74
-	sZS0JwrxMkeV+TqOznlUYlrHsg==
-X-Google-Smtp-Source: ACHHUZ4KUw5NB3BOPHGF+oh7fuHhF9gCQe2opcFl/h4sFdwHa3h9ymnCb0ViPZg5quW6K3zoFzNnhA==
-X-Received: by 2002:a17:906:72ce:b0:96f:56ab:c69b with SMTP id m14-20020a17090672ce00b0096f56abc69bmr1766954ejl.3.1684924827732;
-        Wed, 24 May 2023 03:40:27 -0700 (PDT)
-Received: from phenom.ffwll.local (212-51-149-33.fiber7.init7.net. [212.51.149.33])
-        by smtp.gmail.com with ESMTPSA id c25-20020a170906155900b0094f282fc29asm5554047ejd.207.2023.05.24.03.40.26
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 May 2023 03:40:27 -0700 (PDT)
-Date: Wed, 24 May 2023 12:40:25 +0200
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Oded Gabbay <ogabbay@kernel.org>
-Message-ID: <ZG3pmSnUSc9oCtev@phenom.ffwll.local>
-Mail-Followup-To: Oded Gabbay <ogabbay@kernel.org>,
-	Kevin Hilman <khilman@baylibre.com>,
-	Jeffrey Hugo <quic_jhugo@quicinc.com>,
-	Alexandre Bailon <abailon@baylibre.com>, airlied@gmail.com,
-	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
-	tzimmermann@suse.de, devicetree@vger.kernel.org,
-	conor+dt@kernel.org, bero@baylibre.com, jstephan@baylibre.com,
-	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	christian.koenig@amd.com, linaro-mm-sig@lists.linaro.org,
-	robh+dt@kernel.org, linux-mediatek@lists.infradead.org,
-	nbelin@baylibre.com, krzysztof.kozlowski+dt@linaro.org,
-	matthias.bgg@gmail.com, linux-media@vger.kernel.org,
-	sumit.semwal@linaro.org, linux-arm-kernel@lists.infradead.org,
-	angelogioacchino.delregno@collabora.com
-References: <20230517145237.295461-1-abailon@baylibre.com>
- <d0807fe4-dba2-8244-f655-d04e80973572@quicinc.com>
- <7ha5xud3m7.fsf@baylibre.com>
- <CAFCwf10hNjGtEYDi24LREnMLRGT7mRECvqQMdZWv=-uA7YELYg@mail.gmail.com>
+	dkim=pass header.d=intel.com header.s=Intel header.b=VY+H7I7W;
+	spf=pass (lists.linaro.org: domain of jani.nikula@intel.com designates 192.55.52.93 as permitted sender) smtp.mailfrom=jani.nikula@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1684927464; x=1716463464;
+  h=from:to:cc:subject:in-reply-to:references:date:
+   message-id:mime-version;
+  bh=OnaUHEfbRHoCqiDVb2oM+splN97FkVcL52QWGPfWGJg=;
+  b=VY+H7I7WHwtAcJ2AE3QSFxlco1DIG8bjOjGvv8QdmQOBeZtdJ+fu+fVD
+   1qM4WZ3C4kJv7YlYXaKLxiXWQSKSYGCBzpJldjGq/R3JOFTDmEvrSLZTA
+   0F23WZCQ65yiPfT9LmhnGx/pWZEXlLNzgGvhfXfJsRYAavtUZEPQXF156
+   cVo8NyipxF+t4v6Ynvf1zlKiT05fUhU4xTM2KhC4b3zprPGZ/VCi53jyW
+   0lzYgWI1uxCE82wW1t+sIlWzS9cxqRsVp3TxfO+Hn8sBvucTLnD07KNxh
+   vI+oseWltpSWV1zB1xRdBvMaUhEIdVdiHFrOZowlZ8qXT/dPq8fK65QGI
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10719"; a="351046823"
+X-IronPort-AV: E=Sophos;i="6.00,189,1681196400";
+   d="scan'208";a="351046823"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 May 2023 04:24:23 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10719"; a="950970624"
+X-IronPort-AV: E=Sophos;i="6.00,189,1681196400";
+   d="scan'208";a="950970624"
+Received: from davidbel-mobl.ger.corp.intel.com (HELO localhost) ([10.252.44.5])
+  by fmsmga006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 May 2023 04:24:19 -0700
+From: Jani Nikula <jani.nikula@linux.intel.com>
+To: pengfuyuan <pengfuyuan@kylinos.cn>, David Airlie <airlied@gmail.com>
+In-Reply-To: <20230524102332.1483249-1-pengfuyuan@kylinos.cn>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20230524102332.1483249-1-pengfuyuan@kylinos.cn>
+Date: Wed, 24 May 2023 14:24:16 +0300
+Message-ID: <87r0r6j7kv.fsf@intel.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAFCwf10hNjGtEYDi24LREnMLRGT7mRECvqQMdZWv=-uA7YELYg@mail.gmail.com>
-X-Operating-System: Linux phenom 6.1.0-7-amd64 
-X-Spamd-Result: default: False [-5.80 / 15.00];
-	REPLY(-4.00)[];
+X-Spamd-Result: default: False [-6.70 / 15.00];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	FORGED_SENDER(0.30)[jani.nikula@linux.intel.com,jani.nikula@intel.com];
+	R_SPF_ALLOW(-0.20)[+ip4:192.55.52.93/32];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MIME_GOOD(-0.10)[text/plain];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	BLOCKLISTDE_FAIL(0.00)[212.51.149.33:query timed out];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_CC(0.00)[baylibre.com,quicinc.com,gmail.com,ffwll.ch,linux.intel.com,kernel.org,suse.de,vger.kernel.org,lists.freedesktop.org,amd.com,lists.linaro.org,lists.infradead.org,linaro.org,collabora.com];
-	DMARC_NA(0.00)[ffwll.ch];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.46:from];
-	R_SPF_NA(0.00)[no SPF record];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_TRACE(0.00)[ffwll.ch:+];
-	REDIRECTOR_URL(0.00)[twitter.com];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
-	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_TO(0.00)[kylinos.cn,gmail.com];
 	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:4983, ipnet:192.55.52.0/24, country:US];
 	MIME_TRACE(0.00)[0:+];
+	FROM_NEQ_ENVFROM(0.00)[jani.nikula@linux.intel.com,jani.nikula@intel.com];
 	ARC_NA(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
+	RCPT_COUNT_TWELVE(0.00)[15];
+	DKIM_TRACE(0.00)[intel.com:+];
+	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	HAS_ORG_HEADER(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	BLOCKLISTDE_FAIL(0.00)[192.55.52.93:server fail];
+	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: D60053E81F
-X-Spamd-Bar: -----
-Message-ID-Hash: G7L4UZR6RCG3IQ4EVRRL5HGGVTEYMTIW
-X-Message-ID-Hash: G7L4UZR6RCG3IQ4EVRRL5HGGVTEYMTIW
-X-MailFrom: daniel@ffwll.ch
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Kevin Hilman <khilman@baylibre.com>, Jeffrey Hugo <quic_jhugo@quicinc.com>, Alexandre Bailon <abailon@baylibre.com>, daniel@ffwll.ch, maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, devicetree@vger.kernel.org, conor+dt@kernel.org, bero@baylibre.com, jstephan@baylibre.com, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, christian.koenig@amd.com, linaro-mm-sig@lists.linaro.org, robh+dt@kernel.org, linux-mediatek@lists.infradead.org, nbelin@baylibre.com, krzysztof.kozlowski+dt@linaro.org, matthias.bgg@gmail.com, linux-media@vger.kernel.org, sumit.semwal@linaro.org, linux-arm-kernel@lists.infradead.org, angelogioacchino.delregno@collabora.com
+X-Rspamd-Queue-Id: 8039D413FC
+X-Spamd-Bar: ------
+Message-ID-Hash: NOQS6TH7XUSMSM72KI2CWH4L4QEFG6GY
+X-Message-ID-Hash: NOQS6TH7XUSMSM72KI2CWH4L4QEFG6GY
+X-MailFrom: jani.nikula@intel.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, pengfuyuan <pengfuyuan@kylinos.cn>, k2ci <kernel-bot@kylinos.cn>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 0/7] Add a DRM driver to support AI Processing Unit (APU)
+Subject: [Linaro-mm-sig] Re: [PATCH] drm/i915:fix kernel-doc trivial warnings
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/G7L4UZR6RCG3IQ4EVRRL5HGGVTEYMTIW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NOQS6TH7XUSMSM72KI2CWH4L4QEFG6GY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gV2VkLCBNYXkgMjQsIDIwMjMgYXQgMDE6Mjc6MDBQTSArMDMwMCwgT2RlZCBHYWJiYXkgd3Jv
-dGU6DQo+IE9uIFdlZCwgTWF5IDI0LCAyMDIzIGF0IDI6MzTigK9BTSBLZXZpbiBIaWxtYW4gPGto
-aWxtYW5AYmF5bGlicmUuY29tPiB3cm90ZToNCj4gPg0KPiA+IEplZmZyZXkgSHVnbyA8cXVpY19q
-aHVnb0BxdWljaW5jLmNvbT4gd3JpdGVzOg0KPiA+DQo+ID4gPiBPbiA1LzE3LzIwMjMgODo1MiBB
-TSwgQWxleGFuZHJlIEJhaWxvbiB3cm90ZToNCj4gPiA+PiBUaGlzIGFkZHMgYSBEUk0gZHJpdmVy
-IHRoYXQgaW1wbGVtZW50cyBjb21tdW5pY2F0aW9uIGJldHdlZW4gdGhlIENQVSBhbmQgYW4NCj4g
-PiA+PiBBUFUuIFRoZSBkcml2ZXIgdGFyZ2V0IGVtYmVkZGVkIGRldmljZSB0aGF0IHVzdWFsbHkg
-cnVuIGluZmVyZW5jZSB1c2luZyBzb21lDQo+ID4gPj4gcHJlYnVpbHQgbW9kZWxzLiBUaGUgZ29h
-bCBpcyB0byBwcm92aWRlIGNvbW1vbiBpbmZyYXN0cnVjdHVyZSB0aGF0IGNvdWxkIGJlDQo+ID4g
-Pj4gcmUtdXNlZCB0byBzdXBwb3J0IG1hbnkgYWNjZWxlcmF0b3JzLiBCb3RoIGtlcm5lbCwgdXNl
-cnNwYWNlIGFuZCBmaXJtd2FyZSB0cmllcw0KPiA+ID4+IHRvIHVzZSBzdGFuZGFyZCBhbmQgZXhp
-c3RpbmcgdG8gbGV2ZXJhZ2UgdGhlIGRldmVsb3BtZW50IGFuZCBtYWludGVuYW5jZSBlZmZvcnQu
-DQo+ID4gPj4gVGhlIHNlcmllcyBpbXBsZW1lbnRzIHR3byBwbGF0Zm9ybSBkcml2ZXJzLCBvbmUg
-Zm9yIHNpbXVsYXRpb24gYW5kIGFub3RoZXIgb25lIGZvcg0KPiA+ID4+IHRoZSBtdDgxODMgKGNv
-bXBhdGlibGUgd2l0aCBtdDgzNjUpLg0KPiA+ID4NCj4gPiA+IFRoaXMgbG9va3MgbGlrZSB0aGUg
-MyBleGlzdGluZyBBY2NlbCBkcml2ZXJzLiAgV2h5IGlzIHRoaXMgaW4gRFJNPw0KPiA+DQo+ID4g
-WWVzLCB0aGlzIGJlbG9uZ3MgaW4gYWNjZWwuICBJIHRoaW5rIEFsZXggaGFkIHNvbWUgaXNzdWVz
-IGFyb3VuZCB0aGUNCj4gPiBpbmZyYSBpbiBhY2NlbCB3aXRoIGRldmljZSBub2RlcyBub3QgYXBw
-ZWFyaW5nL29wZW5pbmcgcHJvcGVybHksIGJ1dA0KPiA+IEknbGwgbGV0IGhpbSBjb21tZW50IHRo
-ZXJlLiAgQnV0IGVpdGhlciB3YXksIHRoZSByaWdodCBhcHByb2FjaCBzaG91bGQNCj4gPiBiZSB0
-byBmaXggYW55IGlzc3VlcyBpbiBhY2NlbCBhbmQgbW92ZSBpdCB0aGVyZS4NCj4gPg0KPiA+IFsu
-Li5dDQo+ID4NCj4gPiA+PiAgIC4uLi9kZXZpY2V0cmVlL2JpbmRpbmdzL2dwdS9tdGssYXB1LWRy
-bS55YW1sICB8ICAzOCArKw0KPiA+ID4+ICAgZHJpdmVycy9ncHUvZHJtL0tjb25maWcgICAgICAg
-ICAgICAgICAgICAgICAgIHwgICAyICsNCj4gPiA+PiAgIGRyaXZlcnMvZ3B1L2RybS9NYWtlZmls
-ZSAgICAgICAgICAgICAgICAgICAgICB8ICAgMSArDQo+ID4gPj4gICBkcml2ZXJzL2dwdS9kcm0v
-YXB1L0tjb25maWcgICAgICAgICAgICAgICAgICAgfCAgMjIgKw0KPiA+ID4+ICAgZHJpdmVycy9n
-cHUvZHJtL2FwdS9NYWtlZmlsZSAgICAgICAgICAgICAgICAgIHwgIDEwICsNCj4gPiA+PiAgIGRy
-aXZlcnMvZ3B1L2RybS9hcHUvYXB1X2Rydi5jICAgICAgICAgICAgICAgICB8IDI4MiArKysrKysr
-KysNCj4gPiA+PiAgIGRyaXZlcnMvZ3B1L2RybS9hcHUvYXB1X2dlbS5jICAgICAgICAgICAgICAg
-ICB8IDIzMCArKysrKysrDQo+ID4gPj4gICBkcml2ZXJzL2dwdS9kcm0vYXB1L2FwdV9pbnRlcm5h
-bC5oICAgICAgICAgICAgfCAyMDUgKysrKysrDQo+ID4gPj4gICBkcml2ZXJzL2dwdS9kcm0vYXB1
-L2FwdV9zY2hlZC5jICAgICAgICAgICAgICAgfCA1OTIgKysrKysrKysrKysrKysrKysrDQo+ID4g
-Pj4gICBkcml2ZXJzL2dwdS9kcm0vYXB1L3NpbXVfYXB1LmMgICAgICAgICAgICAgICAgfCAzMTMg
-KysrKysrKysrDQo+ID4gPj4gICBpbmNsdWRlL3VhcGkvZHJtL2FwdV9kcm0uaCAgICAgICAgICAg
-ICAgICAgICAgfCAgODEgKysrDQo+ID4gPg0KPiA+ID4gImFwdSIgc2VlbXMgdG9vIGdlbmVyaWMu
-ICBXZSBhbHJlYWR5IGhhdmUgMyAiQUkgcHJvY2Vzc2luZyB1bml0cyIgb3Zlcg0KPiA+ID4gaW4g
-ZHJpdmVycy9hY2NlbCBhbHJlYWR5Li4uDQo+ID4NCj4gPiBJbmRlZWQsIGl0IGlzIGdlbmVyaWMs
-IGJ1dCB0aGF0J3Mga2luZCBvZiB0aGUgcG9pbnQgZm9yIHRoaXMgZHJpdmVyDQo+ID4gc2luY2Ug
-aXQncyB0YXJnZXR0ZWQgYXQgZ2VuZXJhbGl6aW5nIHRoZSBpbnRlcmZhY2Ugd2l0aCAiQUkgcHJv
-Y2Vzc2luZw0KPiA+IHVuaXRzIiBvbiBhIGdyb3dpbmcgbnVtYmVyIG9mIGVtYmVkZGVkIFNvQ3Mg
-KEFSTSwgUklTQy1WLCBldGMuKSAgSW4NCj4gPiBhZGRpdGlvbiwgdGhlIGdlbmVyaWMgbmFtaW5n
-IGlzIGludGVudGlvbmFsIGJlY2F1c2UgdGhlIGdvYWwgaXMgYmlnZ2VyDQo+ID4gdGhhbiB0aGUg
-a2VybmVsIGFuZCBpcyB3b3JraW5nIHRvd2FyZHMgYSBnZW5lcmljLCBzaGFyZWQgImxpYkFQVSIN
-Cj4gPiB1c2Vyc3BhY2VbMV0sIGJ1dCBhbHNvIGNvbW1vbiBmaXJtd2FyZSBmb3IgRFNQLXN0eWxl
-IGluZmVyZW5jZSBlbmdpbmVzDQo+ID4gKGUuZy4gYW5hbGdvdXMgU291bmQgT3BlbiBGaXJtd2Fy
-ZSBmb3IgYXVkaW8gRFNQcy4pDQo+ID4NCj4gPiBBcyB1c3VhbCwgdGhlIHZhcmlvdXMgU29DIHZl
-bmRvcnMgdXNlIGRpZmZlcmVudCBuYW1lcyAoQVBVLCBOUFUsIE5ODQo+ID4gdW5pdCwgZXRjLikg
-IGJ1dCB3ZSdkIGxpa2UgYSBnZW5lcmljIG5hbWUgZm9yIHRoZSBjbGFzcyBvZiBkZXZpY2VzDQo+
-ID4gdGFyZ2V0dGVkIGJ5IHRoaXMgZHJpdmVyLiAgQW5kIHVuZm9ydHVuYXRlbHksIGl0IGxvb2tz
-IGxpa2UgdGhlIGVxdWFsbHkNCj4gPiBnZW5lcmljICJWZXJzYXRpbGUgcHJvY2Vzc2luZyB1bml0
-IiBpcyBhbHJlYWR5IHRha2VuIEludGVsJ3MNCj4gPiBkcml2ZXJzL2FjY2VsL2l2cHUuIDopDQo+
-ID4NCj4gPiBNYXliZSBzaW5jZSB0aGlzIGlzIG1vcmUgYWJvdXQgZ2VuZXJhbGl6aW5nIHRoZSBp
-bnRlcmZhY2UgYmV0d2VlbiB0aGUNCj4gPiBDUFUgcnVubmluZyBsaW51eCBhbmQgdGhlIEFQVSwg
-d2hhdCBhYm91dCB0aGUgbmFtZSBhcHVfaWY/ICBCdXQgSSBndWVzcw0KPiA+IHRoYXQgYXBwbGll
-cyB0byB0aGUgb3RoZXIgMyBkcml2ZXJzIGluIGRyaXZlcnMvYWNjZWxsIGFsc28uICBIbW1tLi4u
-DQo+ID4NCj4gPiBOYW1pbmcgdGhpbmdzIGlzIGhhcmRbMl0sIHNvIHdlJ3JlIGRlZmluaXRseSBv
-cGVuIHRvIG90aGVyIGlkZWFzLiAgQW55DQo+ID4gc3VnZ2VzdGlvbnM/DQo+IE1heWJlIG1vZGVs
-IGl0IGFjY29yZGluZyB0byB0aGUgdGlueSBkcml2ZXIgaW4gZHJtIGRpc3BsYXkgPyBZb3UgY2Fu
-DQo+IHRoZW4gY2FsbCBpdCB0aW55X2FwdSA6LSkNCj4gRGlzY2xvc3VyZTogSXQgd2FzIERhbmll
-bCdzIHN1Z2dlc3Rpb24sIGhlIGNhbiBjaGltZSBpbiB3aXRoIG1vcmUNCj4gZGV0YWlscyBvbiB0
-aGUgdGlueSBkcml2ZXIgY29uY2VwdC4NCg0KWWVhaCBzbyBtYXliZSBhIGJpdCBtb3JlIGRldGFp
-bCBvbiBteSB0aG91Z2h0czoNCg0KRmlyc3QgdGhpcyBzbWVsbHMgbGlrZSBhIG5lZWQgYnlwYXNz
-IG9mIHRoZSBlbnRpcmUgIndlIHdhbnQgb3BlbiB1c2Vyc3BhY2UNCmZvciBhY2NlbCBkcml2ZXJz
-IiBydWxlLiBUaGUgcnVsZSBpc24ndCBxdWl0ZSBhIHN0cmljdCBhcyBmb3IgZHJtIGdwdQ0KZHJp
-dmVycyAobm90IHN1cmUgd2UgZW5kZWQgdXAgZG9jdW1lbnRpbmcgZXhhY3RseSB3aGF0LCBidXQg
-aWlyYyB0aGUNCmNvbnNlbnN1cyB3YXMgdGhhdCBmb3IgYnVpbGQtdGltZSBvbmx5IGRlcGVuZGVu
-Y2llcyB3ZSdyZSBvayB3aXRoDQpkb3duc3RyZWFtIGNvbXBpbGVycyksIGJ1dCBpdCdzIHN0aWxs
-IHRoZXJlLg0KDQpBbmQgYXQgbGVhc3QgZnJvbSBhIHF1aWNrIGxvb2sgYXB1LmtvIGFuZCBsaWJh
-cHUganVzdCBsb29rIGxpa2UgYSBnZW5lcmljDQphY2NlbCBpbnRlcmZhY2UsIGFuZCB0aGF0J3Mg
-bm90IGVub3VnaC4NCg0KRm9yIHRoZSBiaWcgdHJhaW5pbmcgZW5naW5lcyBpdCdzIG1vcmUgb3Ig
-bGVzcyAiZW5vdWdoIHRvIHJ1biBweXRvcmNoLCBidXQNCml0IGNhbiBiZSByZWFsbHkgc2xvdyIs
-IG5vdCBzdXJlIHdoYXQgdGhlIHJpZ2h0IHN0YW5kYXJkIGZvciB0aGVzZQ0KaW5mZXJlbmNlLW9u
-bHkgZHJpdmVycyBzaG91bGQgYmUuDQoNClNvIHRoYXQncyB0aGUgZmlyc3QgcmVhc29uIHdoeSBJ
-IGRvbid0IGxpa2UgdGhpcy4NCg0KVGhlIG90aGVyIGlzIHRoYXQgSSB0aGluayBpZiB3ZSBkbyBl
-bmQgdXAgd2l0aCBhIHBpbGUgb2YgdGlueSBhY2NlbA0KZHJpdmVycywgd2Ugc2hvdWxkIHByb2Jh
-Ymx5IGxvb2sgaW50byBzb21ldGhpbmcgbGlrZSBzaW1tcGxlZHJtIGZvciB0aGUNCnRpbnkgZGlz
-cGxheSBkcml2ZXJzLiBQcm9iYWJseSBzdGlsbCBJUCBzcGVjaWZpYyBpb2N0bHMgKGF0IGxlYXN0
-IG1vc3QpIHNvDQp0aGF0IElQIHNwZWNpZmljIGpvYiBrbm93cyBhbmQgYWxsIHRoYXQgYXJlIGVh
-c3ksIGJ1dCB0aGVuIGp1c3QgcGFzcyB0byBhDQpmcmFtZXdvcmsgdGhhdCBzaW1wbGlmaWVzIGEg
-ZHJtIGdlbSBkcml2ZXIgdG8gIndyaXRlIHB0ZXMiIGFuZCAicnVuIGpvYiINCmNhbGxiYWNrLCBt
-YXliZSB3aXRoIGFuIG9wdGlvbmFsICJjcmVhdGUvZGVzdHJveSB2bS9jdHgiIGZvciBodyB3aGlj
-aCBjYW4NCmRvIHRoYXQuDQoNClNvIG1heWJlIHdlIGVuZCB1cCB3aXRoIGEgZHJpdmVycy9hY2Nl
-bC90aW55IGFuZCBhIGJ1bmNoIG1vcmUgaGVscGVycw0KYXJvdW5kIHRoZSBleGlzdGluZyBnZW0g
-b25lcy4gVGhlIHJ1bGUgd2UgaGF2ZSBmb3IgZHJtL3RpbnkgaXMgIjEgZmlsZSwNCmxlc3MgdGhh
-biAxa2xvYyIsIGFuZCB0aGVyZSdzIGEgYnVuY2ggb2YgdGhlbS4gSSBkbyB0aGluayB3ZSBjYW4g
-YWNoaWV2ZQ0KdGhlIHNhbWUgZm9yIHRpbnkgYWNjZWwgaW5mZXJlbmNlIGVuZ2luZXMgKGJ1dCBp
-dCdzIHN0aWxsIGEgYml0IGEgcm9hZCkuDQpNYXliZSB0aW55IGFjY2VsIGlzIG1vcmUgbGlrZSAi
-bGVzcyB0aGFuIDVrbG9jIiBzaW5jZSB5b3UgbmVlZCBhIGJpdCBtb3JlDQpnbHVlIGZvciB0aGUg
-ZHJpdmVyIHNwZWNpZmljIGlvY3RsIHN0dWZmIC0gbWF5YmUgdGhhdCdzIG9ubHkgbmVlZGVkIGZv
-cg0KdGhlIHN1Ym1pdCBpb2N0bCwgbWF5YmUgYWxzbyBmb3IgYnVmZmVyIG1hcC91bm1hcCBhbmQg
-Y3JlYXRpb24uDQoNCkFsc28gbm90ZSB0aGF0IHRoZXJlJ3MgYW4gZW50aXJlIHBpbGUgb2YgaW4t
-ZmxpZ2h0IHdvcmsgZm9yIGFkZGluZyBuZXcNCmhlbHBlcnMgdG8gdGhlIGdlbSB3b3JsZCB0byBt
-YWtlIHRoaXMgYWxsIGVhc2llci4gT25jZSB3ZSBoYXZlIGdwdXZhIGFuZA0KZXhlYyBoZWxwZXJz
-IHRoZXJlIG5vdCBtdWNoIGdsdWUgbGVmdCB0byB0aWUgaXQgYWxsIHRvZ2V0aGVyIHdpdGggdGhl
-DQpzY2hlZHVsZXIuDQoNCkJ1dCB0aGUgcmVhbCBjcnV4IGlzIHRoYXQgYW4gYWNjZWwgaW5mZXJl
-bmNlIGRyaXZlciByZWFsbHkgbmVlZHMgdG8gaGF2ZQ0KZW5vdWdoIHVzZXJzcGFjZSB0byBkbyBh
-biBhY3R1YWwgaW5mZXJlbmNlIGpvYiB3aXRoIHNvbWUNCmFuZHJvaWQvY3Jvcy93aGF0ZXZlciBm
-cmFtZXdvcmsgZm9yIGluZmVyZW5jZSAodGhlcmUncyBqdXN0IHRvbyBtYW55KS4NCi1EYW5pZWwN
-Cg0KPiBPZGVkDQo+IA0KPiA+DQo+ID4gS2V2aW4NCj4gPg0KPiA+IFsxXSBodHRwczovL2dpdGxh
-Yi5iYXlsaWJyZS5jb20vYmF5bGlicmUvbGliYXB1L2xpYmFwdQ0KPiA+DQo+ID4gWzJdDQo+ID4g
-IlRoZXJlIGFyZSAyIGhhcmQgcHJvYmxlbXMgaW4gY29tcHV0ZXIgc2NpZW5jZTogY2FjaGUgaW52
-YWxpZGF0aW9uLA0KPiA+ICBuYW1pbmcgdGhpbmdzIGFuZCBvZmYtYnktMSBlcnJvcnMuIg0KPiA+
-ICAtLSBodHRwczovL3R3aXR0ZXIuY29tL3NlY3JldEdlZWsvc3RhdHVzLzcyNjk5OTc4NjgNCj4g
-Pg0KDQotLSANCkRhbmllbCBWZXR0ZXINClNvZnR3YXJlIEVuZ2luZWVyLCBJbnRlbCBDb3Jwb3Jh
-dGlvbg0KaHR0cDovL2Jsb2cuZmZ3bGwuY2gNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1t
-bS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxp
-bmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+On Wed, 24 May 2023, pengfuyuan <pengfuyuan@kylinos.cn> wrote:
+> The test robot reports some make warnings.
+>
+> Fix those warnings:
+>     drivers/gpu/drm/i915/i915_gpu_error.c:2174: warning: Function parameter or member 'dump_flags' not described in 'i915_capture_error_state'
+>     drivers/gpu/drm/i915/i915_perf.c:5307: warning: Function parameter or member 'i915' not described in 'i915_perf_ioctl_version'
+>     drivers/gpu/drm/i915/i915_active.h:66: warning: Function parameter or member 'active' not described in '__i915_active_fence_init'
+>     drivers/gpu/drm/i915/i915_active.h:66: warning: Function parameter or member 'fence' not described in '__i915_active_fence_init'
+>     drivers/gpu/drm/i915/i915_active.h:66: warning: Function parameter or member 'fn' not described in '__i915_active_fence_init'
+>     drivers/gpu/drm/i915/i915_active.h:89: warning: Function parameter or member 'active' not described in 'i915_active_fence_set'
+>     drivers/gpu/drm/i915/i915_active.h:89: warning: Function parameter or member 'rq' not described in 'i915_active_fence_set'
+>     drivers/gpu/drm/i915/i915_active.h:102: warning: Function parameter or member 'active' not described in 'i915_active_fence_get'
+>     drivers/gpu/drm/i915/i915_active.h:122: warning: Function parameter or member 'active' not described in 'i915_active_fence_isset'
+>     drivers/gpu/drm/i915/i915_utils.h:284: warning: Function parameter or member 'OP' not described in '__wait_for'
+>     drivers/gpu/drm/i915/i915_utils.h:284: warning: Function parameter or member 'COND' not described in '__wait_for'
+>     drivers/gpu/drm/i915/i915_utils.h:284: warning: Function parameter or member 'US' not described in '__wait_for'
+>     drivers/gpu/drm/i915/i915_utils.h:284: warning: Function parameter or member 'Wmin' not described in '__wait_for'
+>     drivers/gpu/drm/i915/i915_utils.h:284: warning: Function parameter or member 'Wmax' not described in '__wait_for'
+>     drivers/gpu/drm/i915/i915_scatterlist.h:164: warning: Function parameter or member 'release' not described in 'i915_refct_sgt_ops'
+>     drivers/gpu/drm/i915/i915_scatterlist.h:187: warning: Function parameter or member 'rsgt' not described in 'i915_refct_sgt_put'
+>     drivers/gpu/drm/i915/i915_scatterlist.h:198: warning: Function parameter or member 'rsgt' not described in 'i915_refct_sgt_get'
+>     drivers/gpu/drm/i915/i915_scatterlist.h:214: warning: Function parameter or member 'rsgt' not described in '__i915_refct_sgt_init'
+>     drivers/gpu/drm/i915/i915_vma_resource.h:129: warning: Function parameter or member 'wakeref' not described in 'i915_vma_resource'
+>
+> Reported-by: k2ci <kernel-bot@kylinos.cn>
+> Signed-off-by: pengfuyuan <pengfuyuan@kylinos.cn>
+
+Thanks for your patches. However, this and all the other kernel-doc
+warnings have already been fixed by commits:
+
+c6948d8c221a drm/i915/ttm: fix i915_ttm_to_gem() kernel-doc
+9d7fe94d3552 drm/i915/scatterlist: fix kernel-doc
+08272a5a4187 drm/i915/gem: fix function pointer member kernel-doc
+e971121350e7 drm/i915/vma: fix struct i915_vma_bindinfo kernel-doc
+8b2a7394e51d drm/i915/scatterlist: fix kernel-doc parameter documentation
+70b9933c09b8 drm/i915/pxp: fix kernel-doc for member dev_link
+7bc30374f84c drm/i915/pmu: drop kernel-doc
+8802628237ac drm/i915/active: fix kernel-doc for function parameters
+f05e526e44cb drm/i915/guc: drop lots of kernel-doc markers
+3a21c6b4298d drm/i915/guc: add dbgfs_node member kernel-doc
+1f5cf999bedc drm/i915/engine: hide preempt_hang selftest member from kernel-doc
+e798a3b30dcb drm/i915/gtt: fix i915_vm_resv_put() kernel-doc parameter name
+71ca9b87a72b drm/i915/context: fix kernel-doc parameter descriptions
+9c55105be0a7 drm/i915/engine: fix kernel-doc function name for intel_engine_cleanup_common()
+faa19ce89b0b drm/i915/gem: fix i915_gem_object_lookup_rcu() kernel-doc parameter name
+d7b7332c0e99 drm/i915/request: drop kernel-doc
+88629feedcc4 drm/i915/error: fix i915_capture_error_state() kernel-doc
+9570b0390751 drm/i915/perf: fix i915_perf_ioctl_version() kernel-doc
+144c3f7b1909 drm/i915/utils: drop kernel-doc from __wait_for()
+e1172b617a93 drm/i915/vma: fix kernel-doc function name for i915_vma_size()
+67f2dd9f38ab drm/i915/gvt: fix intel_vgpu_alloc_resource() kernel-doc parameter
+b358793c3bf2 drm/i915/wakeref: fix kernel-doc comment
+efd812745405 drm/i915/tc: demote a kernel-doc comment to a regular comment
+
+Please use the drm-tip branch or linux-next to look at the latest
+source.
+
+BR,
+Jani.
+
+
+> ---
+>  drivers/gpu/drm/i915/i915_active.h       | 14 +++++++-------
+>  drivers/gpu/drm/i915/i915_gpu_error.c    |  1 +
+>  drivers/gpu/drm/i915/i915_perf.c         |  1 +
+>  drivers/gpu/drm/i915/i915_scatterlist.h  |  9 +++++----
+>  drivers/gpu/drm/i915/i915_utils.h        |  6 ++++++
+>  drivers/gpu/drm/i915/i915_vma_resource.h |  1 +
+>  6 files changed, 21 insertions(+), 11 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/i915/i915_active.h b/drivers/gpu/drm/i915/i915_active.h
+> index 7eb44132183a..77c676ecc263 100644
+> --- a/drivers/gpu/drm/i915/i915_active.h
+> +++ b/drivers/gpu/drm/i915/i915_active.h
+> @@ -49,9 +49,9 @@ void i915_active_noop(struct dma_fence *fence, struct dma_fence_cb *cb);
+>  
+>  /**
+>   * __i915_active_fence_init - prepares the activity tracker for use
+> - * @active - the active tracker
+> - * @fence - initial fence to track, can be NULL
+> - * @func - a callback when then the tracker is retired (becomes idle),
+> + * @active: the active tracker
+> + * @fence: initial fence to track, can be NULL
+> + * @fn: a callback when then the tracker is retired (becomes idle),
+>   *         can be NULL
+>   *
+>   * i915_active_fence_init() prepares the embedded @active struct for use as
+> @@ -77,8 +77,8 @@ __i915_active_fence_set(struct i915_active_fence *active,
+>  
+>  /**
+>   * i915_active_fence_set - updates the tracker to watch the current fence
+> - * @active - the active tracker
+> - * @rq - the request to watch
+> + * @active: the active tracker
+> + * @rq: the request to watch
+>   *
+>   * i915_active_fence_set() watches the given @rq for completion. While
+>   * that @rq is busy, the @active reports busy. When that @rq is signaled
+> @@ -89,7 +89,7 @@ i915_active_fence_set(struct i915_active_fence *active,
+>  		      struct i915_request *rq);
+>  /**
+>   * i915_active_fence_get - return a reference to the active fence
+> - * @active - the active tracker
+> + * @active: the active tracker
+>   *
+>   * i915_active_fence_get() returns a reference to the active fence,
+>   * or NULL if the active tracker is idle. The reference is obtained under RCU,
+> @@ -111,7 +111,7 @@ i915_active_fence_get(struct i915_active_fence *active)
+>  
+>  /**
+>   * i915_active_fence_isset - report whether the active tracker is assigned
+> - * @active - the active tracker
+> + * @active: the active tracker
+>   *
+>   * i915_active_fence_isset() returns true if the active tracker is currently
+>   * assigned to a fence. Due to the lazy retiring, that fence may be idle
+> diff --git a/drivers/gpu/drm/i915/i915_gpu_error.c b/drivers/gpu/drm/i915/i915_gpu_error.c
+> index f020c0086fbc..dae8b7ff9725 100644
+> --- a/drivers/gpu/drm/i915/i915_gpu_error.c
+> +++ b/drivers/gpu/drm/i915/i915_gpu_error.c
+> @@ -2162,6 +2162,7 @@ void i915_error_state_store(struct i915_gpu_coredump *error)
+>   * i915_capture_error_state - capture an error record for later analysis
+>   * @gt: intel_gt which originated the hang
+>   * @engine_mask: hung engines
+> + * @dump_flags: flags specifying additional options for capturing the error state
+>   *
+>   *
+>   * Should be called when an error is detected (either a hang or an error
+> diff --git a/drivers/gpu/drm/i915/i915_perf.c b/drivers/gpu/drm/i915/i915_perf.c
+> index 050b8ae7b8e7..2bbf359c18b3 100644
+> --- a/drivers/gpu/drm/i915/i915_perf.c
+> +++ b/drivers/gpu/drm/i915/i915_perf.c
+> @@ -5300,6 +5300,7 @@ void i915_perf_fini(struct drm_i915_private *i915)
+>  
+>  /**
+>   * i915_perf_ioctl_version - Version of the i915-perf subsystem
+> + * @i915: i915 device instance
+>   *
+>   * This version number is used by userspace to detect available features.
+>   */
+> diff --git a/drivers/gpu/drm/i915/i915_scatterlist.h b/drivers/gpu/drm/i915/i915_scatterlist.h
+> index b0a1db44f895..50b379bac6fd 100644
+> --- a/drivers/gpu/drm/i915/i915_scatterlist.h
+> +++ b/drivers/gpu/drm/i915/i915_scatterlist.h
+> @@ -154,6 +154,7 @@ bool i915_sg_trim(struct sg_table *orig_st);
+>  
+>  /**
+>   * struct i915_refct_sgt_ops - Operations structure for struct i915_refct_sgt
+> + * @release: Free the memory of the struct i915_refct_sgt
+>   */
+>  struct i915_refct_sgt_ops {
+>  	/**
+> @@ -167,7 +168,7 @@ struct i915_refct_sgt_ops {
+>   * struct i915_refct_sgt - A refcounted scatter-gather table
+>   * @kref: struct kref for refcounting
+>   * @table: struct sg_table holding the scatter-gather table itself. Note that
+> - * @table->sgl = NULL can be used to determine whether a scatter-gather table
+> + * table->sgl = NULL can be used to determine whether a scatter-gather table
+>   * is present or not.
+>   * @size: The size in bytes of the underlying memory buffer
+>   * @ops: The operations structure.
+> @@ -181,7 +182,7 @@ struct i915_refct_sgt {
+>  
+>  /**
+>   * i915_refct_sgt_put - Put a refcounted sg-table
+> - * @rsgt the struct i915_refct_sgt to put.
+> + * @rsgt: the struct i915_refct_sgt to put.
+>   */
+>  static inline void i915_refct_sgt_put(struct i915_refct_sgt *rsgt)
+>  {
+> @@ -191,7 +192,7 @@ static inline void i915_refct_sgt_put(struct i915_refct_sgt *rsgt)
+>  
+>  /**
+>   * i915_refct_sgt_get - Get a refcounted sg-table
+> - * @rsgt the struct i915_refct_sgt to get.
+> + * @rsgt: the struct i915_refct_sgt to get.
+>   */
+>  static inline struct i915_refct_sgt *
+>  i915_refct_sgt_get(struct i915_refct_sgt *rsgt)
+> @@ -203,7 +204,7 @@ i915_refct_sgt_get(struct i915_refct_sgt *rsgt)
+>  /**
+>   * __i915_refct_sgt_init - Initialize a refcounted sg-list with a custom
+>   * operations structure
+> - * @rsgt The struct i915_refct_sgt to initialize.
+> + * @rsgt: The struct i915_refct_sgt to initialize.
+>   * @size: Size in bytes of the underlying memory buffer.
+>   * @ops: A customized operations structure in case the refcounted sg-list
+>   * is embedded into another structure.
+> diff --git a/drivers/gpu/drm/i915/i915_utils.h b/drivers/gpu/drm/i915/i915_utils.h
+> index 2c430c0c3bad..8e8d1f937e60 100644
+> --- a/drivers/gpu/drm/i915/i915_utils.h
+> +++ b/drivers/gpu/drm/i915/i915_utils.h
+> @@ -257,6 +257,12 @@ wait_remaining_ms_from_jiffies(unsigned long timestamp_jiffies, int to_wait_ms)
+>   * important that we check the condition again after having timed out, since the
+>   * timeout could be due to preemption or similar and we've never had a chance to
+>   * check the condition before the timeout.
+> + *
+> + * @OP: operation to perform on each iteration.
+> + * @COND: condition to check for.
+> + * @US: timeout duration in microseconds.
+> + * @Wmin: recommended minimum for usleep (in microseconds).
+> + * @Wmax: maximum wait duration (in microseconds).
+>   */
+>  #define __wait_for(OP, COND, US, Wmin, Wmax) ({ \
+>  	const ktime_t end__ = ktime_add_ns(ktime_get_raw(), 1000ll * (US)); \
+> diff --git a/drivers/gpu/drm/i915/i915_vma_resource.h b/drivers/gpu/drm/i915/i915_vma_resource.h
+> index c1864e3d0b43..6bb7d6d19216 100644
+> --- a/drivers/gpu/drm/i915/i915_vma_resource.h
+> +++ b/drivers/gpu/drm/i915/i915_vma_resource.h
+> @@ -49,6 +49,7 @@ struct i915_page_sizes {
+>   * @__subtree_last: Interval tree private member.
+>   * @vm: non-refcounted pointer to the vm. This is for internal use only and
+>   * this member is cleared after vm_resource unbind.
+> + * @wakeref: wake reference for the resource.
+>   * @mr: The memory region of the object pointed to by the vma.
+>   * @ops: Pointer to the backend i915_vma_ops.
+>   * @private: Bind backend private info.
+
+-- 
+Jani Nikula, Intel Open Source Graphics Center
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
