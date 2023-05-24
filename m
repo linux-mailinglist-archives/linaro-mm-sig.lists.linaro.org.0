@@ -2,331 +2,278 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 343B670EF34
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 May 2023 09:17:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 99222714807
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 29 May 2023 12:39:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F1DC0413D3
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 May 2023 07:17:46 +0000 (UTC)
-Received: from mx.sberdevices.ru (mx.sberdevices.ru [45.89.227.171])
-	by lists.linaro.org (Postfix) with ESMTPS id 9161740455
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 24 May 2023 07:17:41 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 581C143CB0
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 29 May 2023 10:39:45 +0000 (UTC)
+Received: from mailgw.kylinos.cn (mailgw.kylinos.cn [124.126.103.232])
+	by lists.linaro.org (Postfix) with ESMTPS id 1AF483E81F
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 24 May 2023 10:23:42 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=sberdevices.ru header.s=mail header.b=XLgsltHg;
-	spf=pass (lists.linaro.org: domain of AVKrasnov@sberdevices.ru designates 45.89.227.171 as permitted sender) smtp.mailfrom=AVKrasnov@sberdevices.ru;
-	dmarc=pass (policy=quarantine) header.from=sberdevices.ru
-Received: from s-lin-edge02.sberdevices.ru (localhost [127.0.0.1])
-	by mx.sberdevices.ru (Postfix) with ESMTP id EAC145FD06;
-	Wed, 24 May 2023 10:17:39 +0300 (MSK)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
-	s=mail; t=1684912660;
-	bh=9i1IJEfbwq6ZMgC9LwUZi3mYjgeGnxoyyaIpduzpRoM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
-	b=XLgsltHgzaiBdqYarDAL7bK23UIQQc7tng4xlioQISCTiGijy+fxAHTE/xB2otUi+
-	 e3gu8EEMjrqvSfW4NFVn0CeMa2UHT6iapSKwCNutuSvovfNeKa4jG8xc6hon+PkAQz
-	 hIYS+6unZxMFdfBcW0PAJluMLJ60E3ujjNKJyUXll3qJUI9d0+zILW39gvel5V721y
-	 vBsKWNDZRciDMDW2SkBu6OHbe6oNhfmrOHCTgAJvlVeCmYWC1Qp9kaG6C55hFuhr2h
-	 zKkZFoOZZ+lkqlQMQVizcktIOsVvETS41MxAA9GxK/2EFubTid8MolrYTMbwnjiZK6
-	 ulSyVCflGoidA==
-Received: from S-MS-EXCH01.sberdevices.ru (S-MS-EXCH01.sberdevices.ru [172.16.1.4])
-	by mx.sberdevices.ru (Postfix) with ESMTP;
-	Wed, 24 May 2023 10:17:34 +0300 (MSK)
-Message-ID: <038d48cc-cdc6-cdc2-69e6-7768fb965fbe@sberdevices.ru>
-Date: Wed, 24 May 2023 10:13:11 +0300
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of pengfuyuan@kylinos.cn designates 124.126.103.232 as permitted sender) smtp.mailfrom=pengfuyuan@kylinos.cn;
+	dmarc=none
+X-UUID: 668ddbdc9f3441199eba022cbb031cdd-20230524
+X-CID-O-RULE: Release_Ham
+X-CID-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.22,REQID:a266c3e7-407b-45c6-953e-30cc8f6499fb,IP:5,U
+	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:-5,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+	:release,TS:0
+X-CID-INFO: VERSION:1.1.22,REQID:a266c3e7-407b-45c6-953e-30cc8f6499fb,IP:5,URL
+	:0,TC:0,Content:0,EDM:0,RT:0,SF:-5,FILE:0,BULK:0,RULE:Release_Ham,ACTION:r
+	elease,TS:0
+X-CID-META: VersionHash:120426c,CLOUDID:c183e3c1-e32c-4c97-918d-fbb3fc224d4e,B
+	ulkID:230524182338C2CV12RN,BulkQuantity:0,Recheck:0,SF:24|17|19|44|102,TC:
+	nil,Content:0,EDM:-3,IP:-2,URL:0,File:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OS
+	I:0,OSA:0,AV:0
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-UUID: 668ddbdc9f3441199eba022cbb031cdd-20230524
+X-User: pengfuyuan@kylinos.cn
+Received: from localhost.localdomain [(116.128.244.169)] by mailgw
+	(envelope-from <pengfuyuan@kylinos.cn>)
+	(Generic MTA)
+	with ESMTP id 357049139; Wed, 24 May 2023 18:23:36 +0800
+From: pengfuyuan <pengfuyuan@kylinos.cn>
+To: David Airlie <airlied@gmail.com>
+Date: Wed, 24 May 2023 18:23:32 +0800
+Message-Id: <20230524102332.1483249-1-pengfuyuan@kylinos.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.7.1
-Content-Language: en-US
-To: liao jaime <jaimeliao.tw@gmail.com>, Miquel Raynal
-	<miquel.raynal@bootlin.com>
-References: <20230511152120.3297853-1-AVKrasnov@sberdevices.ru>
- <c873b5a9-17ad-767c-5b20-35a49ab2bd40@sberdevices.ru>
- <aa67ee8b-898b-319b-f167-b554700842b3@sberdevices.ru>
- <20230522161446.16d1f307@xps-13>
- <CAAQoYRkTMpeHABxwRAXVtyuUNXhEk8njcXxJiH7PWg3UsERVVQ@mail.gmail.com>
-From: Arseniy Krasnov <avkrasnov@sberdevices.ru>
-In-Reply-To: <CAAQoYRkTMpeHABxwRAXVtyuUNXhEk8njcXxJiH7PWg3UsERVVQ@mail.gmail.com>
-X-Originating-IP: [172.16.1.6]
-X-ClientProxiedBy: S-MS-EXCH01.sberdevices.ru (172.16.1.4) To
- S-MS-EXCH01.sberdevices.ru (172.16.1.4)
-X-KSMG-Rule-ID: 4
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Status: not scanned, disabled by settings
-X-KSMG-AntiSpam-Interceptor-Info: not scanned
-X-KSMG-AntiPhishing: not scanned, disabled by settings
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 1.1.2.30, bases: 2023/05/24 03:15:00 #21395455
-X-KSMG-AntiVirus-Status: Clean, skipped
-X-Spamd-Result: default: False [3.00 / 15.00];
-	RSPAMD_URIBL(4.50)[sberdevices.ru:email,sberdevices.ru:dkim];
+X-Spamd-Result: default: False [-1.80 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:124.126.103.232];
 	MIME_GOOD(-0.10)[text/plain];
-	BAD_REP_POLICIES(0.10)[];
-	FREEMAIL_TO(0.00)[gmail.com,bootlin.com];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCPT_COUNT_TWELVE(0.00)[16];
-	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:4847, ipnet:124.126.0.0/16, country:CN];
+	RCVD_COUNT_ONE(0.00)[1];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[nod.at,ti.com,linaro.org,amd.com,gmail.com,sberdevices.ru,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,mxic.com.tw,collabora.com];
+	FREEMAIL_TO(0.00)[gmail.com];
+	R_DKIM_NA(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	ASN(0.00)[asn:208677, ipnet:45.89.224.0/22, country:RU];
-	RCVD_TLS_LAST(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[sberdevices.ru,quarantine];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	HAS_XOIP(0.00)[];
-	R_DKIM_ALLOW(0.00)[sberdevices.ru:s=mail];
-	DKIM_TRACE(0.00)[sberdevices.ru:+];
+	NEURAL_HAM(-0.00)[-0.550];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	BLOCKLISTDE_FAIL(0.00)[124.126.103.232:server fail];
 	FROM_HAS_DN(0.00)[];
-	R_SPF_ALLOW(0.00)[+ip4:45.89.227.171];
+	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2]
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DMARC_NA(0.00)[kylinos.cn];
+	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Spam-Level: ***
-X-Rspamd-Queue-Id: 9161740455
-X-Spamd-Bar: +++
-Message-ID-Hash: GD3XOZ4W5G5X6WD7KCEK7DCBZBH2WZM2
-X-Message-ID-Hash: GD3XOZ4W5G5X6WD7KCEK7DCBZBH2WZM2
-X-MailFrom: AVKrasnov@sberdevices.ru
+X-Rspamd-Queue-Id: 1AF483E81F
+X-Spamd-Bar: -
+X-MailFrom: pengfuyuan@kylinos.cn
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>, oxffffaa@gmail.com, kernel@sberdevices.ru, linux-mtd@lists.infradead.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Mason Yang <masonccyang@mxic.com.tw>, Boris Brezillon <boris.brezillon@collabora.com>, Jaime Liao <jaimeliao@mxic.com.tw>
+Message-ID-Hash: 7HFH4EBRPSHEYJLAGR25TVFFYTNXHPYF
+X-Message-ID-Hash: 7HFH4EBRPSHEYJLAGR25TVFFYTNXHPYF
+X-Mailman-Approved-At: Mon, 29 May 2023 10:39:42 +0000
+CC: Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com, Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>, intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, pengfuyuan <pengfuyuan@kylinos.cn>, k2ci <kernel-bot@kylinos.cn>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RESEND PATCH v3] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
+Subject: [Linaro-mm-sig] [PATCH] drm/i915:fix kernel-doc trivial warnings
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GD3XOZ4W5G5X6WD7KCEK7DCBZBH2WZM2/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7HFH4EBRPSHEYJLAGR25TVFFYTNXHPYF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-DQoNCk9uIDI0LjA1LjIwMjMgMDk6MzMsIGxpYW8gamFpbWUgd3JvdGU6DQo+IEhpIE1pcXVlbA0K
-PiANCj4+DQo+PiBIaSBBcnNlbml5LA0KPj4NCj4+IGF2a3Jhc25vdkBzYmVyZGV2aWNlcy5ydSB3
-cm90ZSBvbiBNb24sIDE1IE1heSAyMDIzIDEyOjQ5OjUwICswMzAwOg0KPj4NCj4+PiBIZWxsbyBA
-TWlxdWVsIQ0KPj4+DQo+Pj4gU29ycnksIGJ1dCB3aG8gY291bGQgcmV2aWV3IHRoaXMgcGF0Y2g/
-IDopIElJVUMgdGhpcyBsb2dpYyBpcyB2ZXJ5IGh3IHNwZWNpZmljIGFuZCB3ZSBuZWVkDQo+Pj4g
-c29tZW9uZSB3aG8ga25vd3MgaXQgd2VsbD8gSSB0ZXN0ZWQgdGhpcyBwYXRjaCBvbiBvdXIgZGV2
-aWNlcyAod2l0aCBhbHJlYWR5IGtub3duIE1lc29uIE5BTkQNCj4+PiBjb250cm9sbGVyKS4NCj4+
-DQo+PiArIEphaW1lLCB3aG8gbWlnaHQgdGVzdA0KPj4NCj4+Pg0KPj4+IFRoYW5rcywgQXJzZW5p
-eQ0KPj4+DQo+Pj4gT24gMTEuMDUuMjAyMyAyMToyMSwgQXJzZW5peSBLcmFzbm92IHdyb3RlOg0K
-Pj4+PiBDYzogTWFzb24gWWFuZyA8bWFzb25jY3lhbmdAbXhpYy5jb20udHc+IGFuZCBCb3JpcyBC
-cmV6aWxsb24gPGJvcmlzLmJyZXppbGxvbkBjb2xsYWJvcmEuY29tPg0KPj4+Pg0KPj4+PiBPbiAx
-MS4wNS4yMDIzIDE4OjIxLCBBcnNlbml5IEtyYXNub3Ygd3JvdGU6DQo+Pj4+PiBUaGlzIGFkZHMg
-c3VwcG9ydCBmb3IgT1RQIGFyZWEgYWNjZXNzIG9uIE1YMzBMRnhHMThBQyBjaGlwIHNlcmllcy4N
-Cj4+Pj4+DQo+Pj4+PiBDaGFuZ2Vsb2c6DQo+Pj4+PiAgIHYxIC0+IHYyOg0KPj4+Pj4gICAqIEFk
-ZCBzbGFiLmggaW5jbHVkZSBkdWUgdG8ga2VybmVsIHRlc3Qgcm9ib3QgZXJyb3IuDQo+Pj4+PiAg
-IHYyIC0+IHYzOg0KPj4+Pj4gICAqIFVzZSAndWludDY0X3QnIGFzIGlucHV0IGFyZ3VtZW50IGZv
-ciAnZG9fZGl2KCknIGluc3RlYWQNCj4+Pj4+ICAgICBvZiAndW5zaWduZWQgbG9uZycgZHVlIHRv
-IGtlcm5lbCB0ZXN0IHJvYm90IGVycm9yLg0KPj4+Pj4NCj4+Pj4+IFNpZ25lZC1vZmYtYnk6IEFy
-c2VuaXkgS3Jhc25vdiA8QVZLcmFzbm92QHNiZXJkZXZpY2VzLnJ1Pg0KPj4+Pj4gLS0tDQo+Pj4+
-PiAgZHJpdmVycy9tdGQvbmFuZC9yYXcvbmFuZF9tYWNyb25peC5jIHwgMjEzICsrKysrKysrKysr
-KysrKysrKysrKysrKysrKw0KPj4+Pj4gIDEgZmlsZSBjaGFuZ2VkLCAyMTMgaW5zZXJ0aW9ucygr
-KQ0KPj4+Pj4NCj4+Pj4+IGRpZmYgLS1naXQgYS9kcml2ZXJzL210ZC9uYW5kL3Jhdy9uYW5kX21h
-Y3Jvbml4LmMgYi9kcml2ZXJzL210ZC9uYW5kL3Jhdy9uYW5kX21hY3Jvbml4LmMNCj4+Pj4+IGlu
-ZGV4IDE0NzJmOTI1ZjM4Ni4uMjMwMWY5OTA2NzhlIDEwMDY0NA0KPj4+Pj4gLS0tIGEvZHJpdmVy
-cy9tdGQvbmFuZC9yYXcvbmFuZF9tYWNyb25peC5jDQo+Pj4+PiArKysgYi9kcml2ZXJzL210ZC9u
-YW5kL3Jhdy9uYW5kX21hY3Jvbml4LmMNCj4+Pj4+IEBAIC02LDYgKzYsNyBAQA0KPj4+Pj4gICAq
-IEF1dGhvcjogQm9yaXMgQnJlemlsbG9uIDxib3Jpcy5icmV6aWxsb25AZnJlZS1lbGVjdHJvbnMu
-Y29tPg0KPj4+Pj4gICAqLw0KPj4+Pj4NCj4+Pj4+ICsjaW5jbHVkZSA8bGludXgvc2xhYi5oPg0K
-Pj4+Pj4gICNpbmNsdWRlICJsaW51eC9kZWxheS5oIg0KPj4+Pj4gICNpbmNsdWRlICJpbnRlcm5h
-bHMuaCINCj4+Pj4+DQo+Pj4+PiBAQCAtMzEsNiArMzIsMjAgQEANCj4+Pj4+DQo+Pj4+PiAgI2Rl
-ZmluZSBNWElDX0NNRF9QT1dFUl9ET1dOIDB4QjkNCj4+Pj4+DQo+Pj4+PiArI2RlZmluZSBPTkZJ
-X0ZFQVRVUkVfQUREUl8zMExGWEcxOEFDX09UUCAgMHg5MA0KPj4+Pj4gKyNkZWZpbmUgTUFDUk9O
-SVhfMzBMRlhHMThBQ19PVFBfU1RBUlRfUEFHRSAgICAgICAgMA0KPj4+Pj4gKyNkZWZpbmUgTUFD
-Uk9OSVhfMzBMRlhHMThBQ19PVFBfUEFHRVMgICAgICAgICAgICAgMzANCj4+Pj4+ICsjZGVmaW5l
-IE1BQ1JPTklYXzMwTEZYRzE4QUNfT1RQX1BBR0VfU0laRSAyMTEyDQo+Pj4+PiArI2RlZmluZSBN
-QUNST05JWF8zMExGWEcxOEFDX09UUF9TVEFSVF9CWVRFICAgICAgICBcDQo+Pj4+PiArICAoTUFD
-Uk9OSVhfMzBMRlhHMThBQ19PVFBfU1RBUlRfUEFHRSAqICAgXA0KPj4+Pj4gKyAgIE1BQ1JPTklY
-XzMwTEZYRzE4QUNfT1RQX1BBR0VfU0laRSkNCj4+Pj4+ICsjZGVmaW5lIE1BQ1JPTklYXzMwTEZY
-RzE4QUNfT1RQX1NJWkVfQllURVMgICAgICAgIFwNCj4+Pj4+ICsgIChNQUNST05JWF8zMExGWEcx
-OEFDX09UUF9QQUdFUyAqICAgICAgICBcDQo+Pj4+PiArICAgTUFDUk9OSVhfMzBMRlhHMThBQ19P
-VFBfUEFHRV9TSVpFKQ0KPj4+Pj4gKw0KPj4+Pj4gKyNkZWZpbmUgTUFDUk9OSVhfMzBMRlhHMThB
-Q19PVFBfRU4gICAgICAgICAgICAgICAgQklUKDApDQo+Pj4+PiArI2RlZmluZSBNQUNST05JWF8z
-MExGWEcxOEFDX09UUF9MT0NLRUQgICAgICAgICAgICBCSVQoMSkNCj4+Pj4+ICsNCj4+Pj4+ICBz
-dHJ1Y3QgbmFuZF9vbmZpX3ZlbmRvcl9tYWNyb25peCB7DQo+Pj4+PiAgICB1OCByZXNlcnZlZDsN
-Cj4+Pj4+ICAgIHU4IHJlbGlhYmlsaXR5X2Z1bmM7DQo+Pj4+PiBAQCAtMzE2LDYgKzMzMSwyMDMg
-QEAgc3RhdGljIHZvaWQgbWFjcm9uaXhfbmFuZF9kZWVwX3Bvd2VyX2Rvd25fc3VwcG9ydChzdHJ1
-Y3QgbmFuZF9jaGlwICpjaGlwKQ0KPj4+Pj4gICAgY2hpcC0+b3BzLnJlc3VtZSA9IG14aWNfbmFu
-ZF9yZXN1bWU7DQo+Pj4+PiAgfQ0KPj4+Pj4NCj4+Pj4+ICtzdGF0aWMgaW50IG1hY3Jvbml4XzMw
-bGZ4ZzE4YWNfZ2V0X290cF9pbmZvKHN0cnVjdCBtdGRfaW5mbyAqbXRkLCBzaXplX3QgbGVuLA0K
-Pj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc2l6ZV90ICpyZXRs
-ZW4sDQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdHJ1Y3Qg
-b3RwX2luZm8gKmJ1ZikNCj4+Pj4+ICt7DQo+Pj4+PiArICBpZiAobGVuIDwgc2l6ZW9mKCpidWYp
-KQ0KPj4+Pj4gKyAgICAgICAgICByZXR1cm4gLUVJTlZBTDsNCj4+Pj4+ICsNCj4+Pj4+ICsgIC8q
-IERvbid0IGtub3cgaG93IHRvIGNoZWNrIHRoYXQgT1RQIGlzIGxvY2tlZC4gKi8NCj4+DQo+PiBK
-YWltZSwgYW55IGlkZWE/DQo+IA0KPiBPVFAgaW5mbyBjb3VsZCBiZSBjaGVjayBieSBHRVRfRkVB
-VFVSRSBjb21tYW5kLg0KPiBHRVRfRkVBVFVSRSBjb21tYW5kIHdpdGggYWRkcmVzcyA5MGggY291
-bGQgcmVhZCBzdWItZmVhdHVyZQ0KPiBwYXJhbWV0ZXIgdGFibGUsIFAxIGlzICIzIiBtZWFucyBP
-VFAgcHJvdGVjdGlvbi4NCj4gDQo+IFRoYW5rcw0KPiBKYWltZQ0KPiANCg0KSGVsbG8gSmFpbWUs
-IHRoYW5rcyBmb3IgcXVpY2sgcmVwbHkhDQoNCkkgaGF2ZSB0d28gZGV2aWNlcyAtIHdpdGggbG9j
-a2VkIGFuZCB1bmxvY2tlZCBPVFAuIEkgY2FsbCB0aGUgZm9sbG93aW5nIHRoaW5nIGZvciBlYWNo
-IG9mIHRoZW06DQoNCkBAIC0zMzksNiArMzQxLDI2IEBAIHN0YXRpYyBpbnQgbWFjcm9uaXhfMzBs
-ZnhnMThhY19nZXRfb3RwX2luZm8oc3RydWN0IG10ZF9pbmZvICptdGQsIHNpemVfdCBsZW4sDQog
-ICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQogDQogICAgICAgIC8qIERvbid0IGtub3cg
-aG93IHRvIGNoZWNrIHRoYXQgT1RQIGlzIGxvY2tlZC4gKi8NCisgICAgICAgew0KKyAgICAgICAg
-ICAgICAgIHU4IGZlYXR1cmVfYnVmW09ORklfU1VCRkVBVFVSRV9QQVJBTV9MRU5dID0geyAwIH07
-DQorICAgICAgICAgICAgICAgc3RydWN0IG5hbmRfY2hpcCAqbmFuZDsNCisgICAgICAgICAgICAg
-ICBpbnQgcmVzOw0KKw0KKyAgICAgICAgICAgICAgIG5hbmQgPSBtdGRfdG9fbmFuZChtdGQpOw0K
-Kw0KKyAgICAgICAgICAgICAgIG5hbmRfc2VsZWN0X3RhcmdldChuYW5kLCAwKTsNCisNCisgICAg
-ICAgICAgICAgICByZXMgPSBuYW5kX2dldF9mZWF0dXJlcyhuYW5kLCAweDkwLCBmZWF0dXJlX2J1
-Zik7DQorDQorICAgICAgICAgICAgICAgbmFuZF9kZXNlbGVjdF90YXJnZXQobmFuZCk7DQorDQor
-ICAgICAgICAgICAgICAgcHJpbnRrKEtFUk5fRU1FUkcgIlxuXG5SRVMgJWkgT1RQIEJVRiAlaGh4
-ICVoaHggJWhoeCAlaGh4XG5cblxuIiwNCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICByZXMsDQorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmVh
-dHVyZV9idWZbMF0sDQorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmVh
-dHVyZV9idWZbMV0sDQorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmVh
-dHVyZV9idWZbMl0sDQorICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmVh
-dHVyZV9idWZbM10pOw0KKyAgICAgICB9DQogICAgICAgIGJ1Zi0+bG9ja2VkID0gMDsNCiAgICAg
-ICAgYnVmLT5zdGFydCA9IE1BQ1JPTklYXzMwTEZYRzE4QUNfT1RQX1NUQVJUX0JZVEU7DQogICAg
-ICAgIGJ1Zi0+bGVuZ3RoID0gTUFDUk9OSVhfMzBMRlhHMThBQ19PVFBfU0laRV9CWVRFUzsNCg0K
-QW5kIGdldCBmb3IgYm90aCBkZXZpY2VzOg0KDQpbICAgIDQuMjI4NzIxXSBSRVMgMCBPVFAgQlVG
-IDAgMCAwIDANCg0KTWF5IGJlIGknbSBkb2luZyBzb21ldGhpbmcgd3Jvbmc/DQoNClRoYW5rcywg
-QXJzZW5peQ0KDQo+Pg0KPj4+Pj4gKyAgYnVmLT5sb2NrZWQgPSAwOw0KPj4+Pj4gKyAgYnVmLT5z
-dGFydCA9IE1BQ1JPTklYXzMwTEZYRzE4QUNfT1RQX1NUQVJUX0JZVEU7DQo+Pj4+PiArICBidWYt
-Pmxlbmd0aCA9IE1BQ1JPTklYXzMwTEZYRzE4QUNfT1RQX1NJWkVfQllURVM7DQo+Pj4+PiArDQo+
-Pj4+PiArICAqcmV0bGVuID0gc2l6ZW9mKCpidWYpOw0KPj4+Pj4gKw0KPj4+Pj4gKyAgcmV0dXJu
-IDA7DQo+Pj4+PiArfQ0KPj4+Pj4gKw0KPj4+Pj4gK3N0YXRpYyBpbnQgbWFjcm9uaXhfMzBsZnhn
-MThhY19vdHBfZW5hYmxlKHN0cnVjdCBuYW5kX2NoaXAgKm5hbmQpDQo+Pj4+PiArew0KPj4+Pj4g
-KyAgdWludDhfdCBmZWF0dXJlX2J1ZltPTkZJX1NVQkZFQVRVUkVfUEFSQU1fTEVOXSA9IHsgMCB9
-Ow0KPj4+Pj4gKw0KPj4+Pj4gKyAgZmVhdHVyZV9idWZbMF0gPSBNQUNST05JWF8zMExGWEcxOEFD
-X09UUF9FTjsNCj4+Pj4+ICsgIHJldHVybiBuYW5kX3NldF9mZWF0dXJlcyhuYW5kLCBPTkZJX0ZF
-QVRVUkVfQUREUl8zMExGWEcxOEFDX09UUCwNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAg
-ICAgICBmZWF0dXJlX2J1Zik7DQo+Pj4+PiArfQ0KPj4+Pj4gKw0KPj4+Pj4gK3N0YXRpYyBpbnQg
-bWFjcm9uaXhfMzBsZnhnMThhY19vdHBfZGlzYWJsZShzdHJ1Y3QgbmFuZF9jaGlwICpuYW5kKQ0K
-Pj4+Pj4gK3sNCj4+Pj4+ICsgIHVpbnQ4X3QgZmVhdHVyZV9idWZbT05GSV9TVUJGRUFUVVJFX1BB
-UkFNX0xFTl0gPSB7IDAgfTsNCj4+Pj4+ICsNCj4+Pj4+ICsgIHJldHVybiBuYW5kX3NldF9mZWF0
-dXJlcyhuYW5kLCBPTkZJX0ZFQVRVUkVfQUREUl8zMExGWEcxOEFDX09UUCwNCj4+Pj4+ICsgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBmZWF0dXJlX2J1Zik7DQo+Pj4+PiArfQ0KPj4+Pj4gKw0K
-Pj4+Pj4gK3N0YXRpYyBpbnQgX19tYWNyb25peF8zMGxmeGcxOGFjX3J3X290cChzdHJ1Y3QgbXRk
-X2luZm8gKm10ZCwNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbG9m
-Zl90IG9mZnNfaW5fZmxhc2gsDQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIHNpemVfdCBsZW4sIHNpemVfdCAqcmV0bGVuLA0KPj4+Pj4gKyAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICB1X2NoYXIgKmJ1ZiwgYm9vbCB3cml0ZSkNCj4+Pj4+ICt7DQo+Pj4+
-PiArICBzdHJ1Y3QgbmFuZF9jaGlwICpuYW5kOw0KPj4+Pj4gKyAgc2l6ZV90IGJ5dGVzX2hhbmRs
-ZWQ7DQo+Pj4+PiArICBvZmZfdCBvZmZzX2luX3BhZ2U7DQo+Pj4+PiArICB1aW50NjRfdCBwYWdl
-Ow0KPj4+Pj4gKyAgdm9pZCAqZG1hX2J1ZjsNCj4+Pj4+ICsgIGludCByZXQ7DQo+Pj4+PiArDQo+
-Pj4+PiArICAvKiAnbmFuZF9wcm9nL3JlYWRfcGFnZV9vcCgpJyBtYXkgdXNlICdidWYnIGFzIERN
-QSBidWZmZXIsDQo+Pj4+PiArICAgKiBzbyBhbGxvY2F0ZSBwcm9wZXJseSBhbGlnbmVkIG1lbW9y
-eSBmb3IgaXQuIFRoaXMgaXMNCj4+Pj4+ICsgICAqIG5lZWRlZCBiZWNhdXNlIGNyb3NzIHBhZ2Ug
-YWNjZXNzZXMgbWF5IGxlYWQgdG8gdW5hbGlnbmVkDQo+Pj4+PiArICAgKiBidWZmZXIgYWRkcmVz
-cyBmb3IgRE1BLg0KPj4+Pj4gKyAgICovDQo+Pj4+PiArICBkbWFfYnVmID0ga21hbGxvYyhNQUNS
-T05JWF8zMExGWEcxOEFDX09UUF9QQUdFX1NJWkUsIEdGUF9LRVJORUwpOw0KPj4+Pj4gKyAgaWYg
-KCFkbWFfYnVmKQ0KPj4+Pj4gKyAgICAgICAgICByZXR1cm4gLUVOT01FTTsNCj4+Pj4+ICsNCj4+
-Pj4+ICsgIG5hbmQgPSBtdGRfdG9fbmFuZChtdGQpOw0KPj4+Pj4gKyAgbmFuZF9zZWxlY3RfdGFy
-Z2V0KG5hbmQsIDApOw0KPj4+Pj4gKw0KPj4+Pj4gKyAgcmV0ID0gbWFjcm9uaXhfMzBsZnhnMThh
-Y19vdHBfZW5hYmxlKG5hbmQpOw0KPj4+Pj4gKyAgaWYgKHJldCkNCj4+Pj4+ICsgICAgICAgICAg
-Z290byBvdXRfb3RwOw0KPj4+Pj4gKw0KPj4+Pj4gKyAgcGFnZSA9IG9mZnNfaW5fZmxhc2g7DQo+
-Pj4+PiArICAvKiAncGFnZScgd2lsbCBiZSByZXN1bHQgb2YgZGl2aXNpb24uICovDQo+Pj4+PiAr
-ICBvZmZzX2luX3BhZ2UgPSBkb19kaXYocGFnZSwgTUFDUk9OSVhfMzBMRlhHMThBQ19PVFBfUEFH
-RV9TSVpFKTsNCj4+Pj4+ICsgIGJ5dGVzX2hhbmRsZWQgPSAwOw0KPj4+Pj4gKw0KPj4+Pj4gKyAg
-d2hpbGUgKGJ5dGVzX2hhbmRsZWQgPCBsZW4gJiYNCj4+Pj4+ICsgICAgICAgICBwYWdlIDwgTUFD
-Uk9OSVhfMzBMRlhHMThBQ19PVFBfUEFHRVMpIHsNCj4+Pj4+ICsgICAgICAgICAgc2l6ZV90IGJ5
-dGVzX3RvX2hhbmRsZTsNCj4+Pj4+ICsNCj4+Pj4+ICsgICAgICAgICAgYnl0ZXNfdG9faGFuZGxl
-ID0gbWluX3Qoc2l6ZV90LCBsZW4gLSBieXRlc19oYW5kbGVkLA0KPj4+Pj4gKyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBNQUNST05JWF8zMExGWEcxOEFDX09UUF9QQUdFX1NJWkUg
-LQ0KPj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBvZmZzX2luX3BhZ2Up
-Ow0KPj4+Pj4gKw0KPj4+Pj4gKyAgICAgICAgICBpZiAod3JpdGUpIHsNCj4+Pj4+ICsgICAgICAg
-ICAgICAgICAgICBtZW1jcHkoZG1hX2J1ZiwgJmJ1ZltieXRlc19oYW5kbGVkXSwgYnl0ZXNfdG9f
-aGFuZGxlKTsNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICByZXQgPSBuYW5kX3Byb2dfcGFnZV9v
-cChuYW5kLCBwYWdlLCBvZmZzX2luX3BhZ2UsDQo+Pj4+PiArICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgZG1hX2J1ZiwgYnl0ZXNfdG9faGFuZGxlKTsNCj4+Pj4+ICsg
-ICAgICAgICAgfSBlbHNlIHsNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICByZXQgPSBuYW5kX3Jl
-YWRfcGFnZV9vcChuYW5kLCBwYWdlLCBvZmZzX2luX3BhZ2UsDQo+Pj4+PiArICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZG1hX2J1ZiwgYnl0ZXNfdG9faGFuZGxlKTsN
-Cj4+Pj4+ICsgICAgICAgICAgICAgICAgICBpZiAoIXJldCkNCj4+Pj4+ICsgICAgICAgICAgICAg
-ICAgICAgICAgICAgIG1lbWNweSgmYnVmW2J5dGVzX2hhbmRsZWRdLCBkbWFfYnVmLA0KPj4+Pj4g
-KyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJ5dGVzX3RvX2hhbmRsZSk7DQo+Pj4+
-PiArICAgICAgICAgIH0NCj4+Pj4+ICsgICAgICAgICAgaWYgKHJldCkNCj4+Pj4+ICsgICAgICAg
-ICAgICAgICAgICBnb3RvIG91dF9vdHA7DQo+Pj4+PiArDQo+Pj4+PiArICAgICAgICAgIGJ5dGVz
-X2hhbmRsZWQgKz0gYnl0ZXNfdG9faGFuZGxlOw0KPj4+Pj4gKyAgICAgICAgICBvZmZzX2luX3Bh
-Z2UgPSAwOw0KPj4+Pj4gKyAgICAgICAgICBwYWdlKys7DQo+Pj4+PiArICB9DQo+Pj4+PiArDQo+
-Pj4+PiArICAqcmV0bGVuID0gYnl0ZXNfaGFuZGxlZDsNCj4+Pj4+ICsNCj4+Pj4+ICtvdXRfb3Rw
-Og0KPj4+Pj4gKyAgaWYgKHJldCkNCj4+Pj4+ICsgICAgICAgICAgZGV2X2VycigmbXRkLT5kZXYs
-ICJmYWlsZWQgdG8gcGVyZm9ybSBPVFAgSU86ICVpXG4iLCByZXQpOw0KPj4+Pj4gKw0KPj4+Pj4g
-KyAgcmV0ID0gbWFjcm9uaXhfMzBsZnhnMThhY19vdHBfZGlzYWJsZShuYW5kKTsNCj4+Pj4+ICsg
-IFdBUk4ocmV0LCAiZmFpbGVkIHRvIGxlYXZlIE9UUCBtb2RlIGFmdGVyICVzXG4iLA0KPj4+Pj4g
-KyAgICAgICB3cml0ZSA/ICJ3cml0ZSIgOiAicmVhZCIpOw0KPj4NCj4+IExldCdzIGF2b2lkIFdB
-Uk4oKSBjYWxscyAobm9uZSBpbiB0aGlzIGRyaXZlciBhcmUgcmVsZXZhbnQgSU1ITykuIEp1c3Qg
-YQ0KPj4gZGV2X2VycigpIHNob3VsZCBiZSBlbm91Z2guDQo+Pg0KPj4+Pj4gKyAgbmFuZF9kZXNl
-bGVjdF90YXJnZXQobmFuZCk7DQo+Pj4+PiArICBrZnJlZShkbWFfYnVmKTsNCj4+Pj4+ICsNCj4+
-Pj4+ICsgIHJldHVybiByZXQ7DQo+Pj4+PiArfQ0KPj4+Pj4gKw0KPj4+Pj4gK3N0YXRpYyBpbnQg
-bWFjcm9uaXhfMzBsZnhnMThhY193cml0ZV9vdHAoc3RydWN0IG10ZF9pbmZvICptdGQsIGxvZmZf
-dCB0bywNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNpemVfdCBs
-ZW4sIHNpemVfdCAqcmxlbiwNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgIGNvbnN0IHVfY2hhciAqYnVmKQ0KPj4+Pj4gK3sNCj4+Pj4+ICsgIHJldHVybiBfX21hY3Jv
-bml4XzMwbGZ4ZzE4YWNfcndfb3RwKG10ZCwgdG8sIGxlbiwgcmxlbiwgKHVfY2hhciAqKWJ1ZiwN
-Cj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHRydWUpOw0KPj4+
-Pj4gK30NCj4+Pj4+ICsNCj4+Pj4+ICtzdGF0aWMgaW50IG1hY3Jvbml4XzMwbGZ4ZzE4YWNfcmVh
-ZF9vdHAoc3RydWN0IG10ZF9pbmZvICptdGQsIGxvZmZfdCBmcm9tLA0KPj4+Pj4gKyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICBzaXplX3QgbGVuLCBzaXplX3QgKnJsZW4sDQo+Pj4+
-PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVfY2hhciAqYnVmKQ0KPj4+Pj4g
-K3sNCj4+Pj4+ICsgIHJldHVybiBfX21hY3Jvbml4XzMwbGZ4ZzE4YWNfcndfb3RwKG10ZCwgZnJv
-bSwgbGVuLCBybGVuLCBidWYsIGZhbHNlKTsNCj4+Pj4+ICt9DQo+Pj4+PiArDQo+Pj4+PiArc3Rh
-dGljIGludCBtYWNyb25peF8zMGxmeGcxOGFjX2xvY2tfb3RwKHN0cnVjdCBtdGRfaW5mbyAqbXRk
-LCBsb2ZmX3QgZnJvbSwNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-c2l6ZV90IGxlbikNCj4+Pj4+ICt7DQo+Pj4+PiArICB1aW50OF90IGZlYXR1cmVfYnVmW09ORklf
-U1VCRkVBVFVSRV9QQVJBTV9MRU5dID0geyAwIH07DQo+Pj4+PiArICBzdHJ1Y3QgbmFuZF9jaGlw
-ICpuYW5kOw0KPj4+Pj4gKyAgaW50IHJldDsNCj4+Pj4+ICsNCj4+Pj4+ICsgIGlmIChmcm9tICE9
-IE1BQ1JPTklYXzMwTEZYRzE4QUNfT1RQX1NUQVJUX0JZVEUgfHwNCj4+Pj4+ICsgICAgICBsZW4g
-IT0gTUFDUk9OSVhfMzBMRlhHMThBQ19PVFBfU0laRV9CWVRFUykNCj4+Pj4+ICsgICAgICAgICAg
-cmV0dXJuIC1FSU5WQUw7DQo+Pj4+PiArDQo+Pj4+PiArICBkZXZfZGJnKCZtdGQtPmRldiwgImxv
-Y2tpbmcgT1RQXG4iKTsNCj4+Pj4+ICsNCj4+Pj4+ICsgIG5hbmQgPSBtdGRfdG9fbmFuZChtdGQp
-Ow0KPj4+Pj4gKyAgbmFuZF9zZWxlY3RfdGFyZ2V0KG5hbmQsIDApOw0KPj4+Pj4gKw0KPj4+Pj4g
-KyAgZmVhdHVyZV9idWZbMF0gPSBNQUNST05JWF8zMExGWEcxOEFDX09UUF9FTiB8DQo+Pj4+PiAr
-ICAgICAgICAgICAgICAgICAgIE1BQ1JPTklYXzMwTEZYRzE4QUNfT1RQX0xPQ0tFRDsNCj4+Pj4+
-ICsgIHJldCA9IG5hbmRfc2V0X2ZlYXR1cmVzKG5hbmQsIE9ORklfRkVBVFVSRV9BRERSXzMwTEZY
-RzE4QUNfT1RQLA0KPj4+Pj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgZmVhdHVyZV9idWYp
-Ow0KPj4+Pj4gKyAgaWYgKHJldCkgew0KPj4+Pj4gKyAgICAgICAgICBkZXZfZXJyKCZtdGQtPmRl
-diwNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAiZmFpbGVkIHRvIGxvY2sgT1RQIChzZXQgZmVh
-dHVyZXMpOiAlaVxuIiwgcmV0KTsNCj4+Pj4+ICsgICAgICAgICAgbmFuZF9kZXNlbGVjdF90YXJn
-ZXQobmFuZCk7DQo+Pj4+PiArICAgICAgICAgIHJldHVybiByZXQ7DQo+Pj4+PiArICB9DQo+Pj4+
-PiArDQo+Pj4+PiArICAvKiBEbyBkdW1teSBwYWdlIHByb2cgd2l0aCB6ZXJvIGFkZHJlc3MuICov
-DQo+Pj4+PiArICBmZWF0dXJlX2J1ZlswXSA9IDA7DQo+Pj4+PiArICByZXQgPSBuYW5kX3Byb2df
-cGFnZV9vcChuYW5kLCAwLCAwLCBmZWF0dXJlX2J1ZiwgMSk7DQo+Pj4+PiArICBpZiAocmV0KQ0K
-Pj4+Pj4gKyAgICAgICAgICBkZXZfZXJyKCZtdGQtPmRldiwNCj4+Pj4+ICsgICAgICAgICAgICAg
-ICAgICAiZmFpbGVkIHRvIGxvY2sgT1RQIChwYWdlIHByb2cpOiAlaVxuIiwgcmV0KTsNCj4+Pj4+
-ICsNCj4+Pj4+ICsgIHJldCA9IG1hY3Jvbml4XzMwbGZ4ZzE4YWNfb3RwX2Rpc2FibGUobmFuZCk7
-DQo+Pj4+PiArICBXQVJOKHJldCwgImZhaWxlZCB0byBsZWF2ZSBPVFAgbW9kZSBhZnRlciBsb2Nr
-XG4iKTsNCj4+Pj4+ICsNCj4+Pj4+ICsgIG5hbmRfZGVzZWxlY3RfdGFyZ2V0KG5hbmQpOw0KPj4+
-Pj4gKw0KPj4+Pj4gKyAgcmV0dXJuIHJldDsNCj4+Pj4+ICt9DQo+Pj4+PiArDQo+Pj4+PiArc3Rh
-dGljIHZvaWQgbWFjcm9uaXhfbmFuZF9zZXR1cF9vdHAoc3RydWN0IG5hbmRfY2hpcCAqY2hpcCkN
-Cj4+Pj4+ICt7DQo+Pj4+PiArICBzdGF0aWMgY29uc3QgY2hhciAqIGNvbnN0IHN1cHBvcnRlZF9v
-dHBfbW9kZWxzW10gPSB7DQo+Pj4+PiArICAgICAgICAgICJNWDMwTEYxRzE4QUMiLA0KPj4+Pj4g
-KyAgICAgICAgICAiTVgzMExGMkcxOEFDIiwNCj4+Pj4+ICsgICAgICAgICAgIk1YMzBMRjRHMThB
-QyIsDQo+Pj4+PiArICB9Ow0KPj4+Pj4gKyAgc3RydWN0IG10ZF9pbmZvICptdGQ7DQo+Pj4+PiAr
-DQo+Pj4+PiArICBpZiAoIWNoaXAtPnBhcmFtZXRlcnMuc3VwcG9ydHNfc2V0X2dldF9mZWF0dXJl
-cykNCj4+Pj4+ICsgICAgICAgICAgcmV0dXJuOw0KPj4+Pj4gKw0KPj4+Pj4gKyAgaWYgKG1hdGNo
-X3N0cmluZyhzdXBwb3J0ZWRfb3RwX21vZGVscywNCj4+Pj4+ICsgICAgICAgICAgICAgICAgICAg
-QVJSQVlfU0laRShzdXBwb3J0ZWRfb3RwX21vZGVscyksDQo+Pj4+PiArICAgICAgICAgICAgICAg
-ICAgIGNoaXAtPnBhcmFtZXRlcnMubW9kZWwpIDwgMCkNCj4+Pj4+ICsgICAgICAgICAgcmV0dXJu
-Ow0KPj4NCj4+IEkgd291bGQgc3RhcnQgYnkgY2hlY2tpbmcgdGhlIG1vZGVsLCB0aGVuIGl0J3Mg
-bGlzdCBvZiBzdXBwb3J0ZWQgb3BzLg0KPj4NCj4+Pj4+ICsNCj4+Pj4+ICsgIGJpdG1hcF9zZXQo
-Y2hpcC0+cGFyYW1ldGVycy5nZXRfZmVhdHVyZV9saXN0LA0KPj4+Pj4gKyAgICAgICAgICAgICBP
-TkZJX0ZFQVRVUkVfQUREUl8zMExGWEcxOEFDX09UUCwgMSk7DQo+Pj4+PiArICBiaXRtYXBfc2V0
-KGNoaXAtPnBhcmFtZXRlcnMuc2V0X2ZlYXR1cmVfbGlzdCwNCj4+Pj4+ICsgICAgICAgICAgICAg
-T05GSV9GRUFUVVJFX0FERFJfMzBMRlhHMThBQ19PVFAsIDEpOw0KPj4+Pj4gKw0KPj4+Pj4gKyAg
-bXRkID0gbmFuZF90b19tdGQoY2hpcCk7DQo+Pj4+PiArICBtdGQtPl9nZXRfZmFjdF9wcm90X2lu
-Zm8gPSBtYWNyb25peF8zMGxmeGcxOGFjX2dldF9vdHBfaW5mbzsNCj4+Pj4+ICsgIG10ZC0+X3Jl
-YWRfZmFjdF9wcm90X3JlZyA9IG1hY3Jvbml4XzMwbGZ4ZzE4YWNfcmVhZF9vdHA7DQo+Pj4+PiAr
-ICBtdGQtPl9nZXRfdXNlcl9wcm90X2luZm8gPSBtYWNyb25peF8zMGxmeGcxOGFjX2dldF9vdHBf
-aW5mbzsNCj4+Pj4+ICsgIG10ZC0+X3JlYWRfdXNlcl9wcm90X3JlZyA9IG1hY3Jvbml4XzMwbGZ4
-ZzE4YWNfcmVhZF9vdHA7DQo+Pj4+PiArICBtdGQtPl93cml0ZV91c2VyX3Byb3RfcmVnID0gbWFj
-cm9uaXhfMzBsZnhnMThhY193cml0ZV9vdHA7DQo+Pj4+PiArICBtdGQtPl9sb2NrX3VzZXJfcHJv
-dF9yZWcgPSBtYWNyb25peF8zMGxmeGcxOGFjX2xvY2tfb3RwOw0KPj4+Pj4gK30NCj4+Pj4+ICsN
-Cj4+Pj4+ICBzdGF0aWMgaW50IG1hY3Jvbml4X25hbmRfaW5pdChzdHJ1Y3QgbmFuZF9jaGlwICpj
-aGlwKQ0KPj4+Pj4gIHsNCj4+Pj4+ICAgIGlmIChuYW5kX2lzX3NsYyhjaGlwKSkNCj4+Pj4+IEBA
-IC0zMjUsNiArNTM3LDcgQEAgc3RhdGljIGludCBtYWNyb25peF9uYW5kX2luaXQoc3RydWN0IG5h
-bmRfY2hpcCAqY2hpcCkNCj4+Pj4+ICAgIG1hY3Jvbml4X25hbmRfb25maV9pbml0KGNoaXApOw0K
-Pj4+Pj4gICAgbWFjcm9uaXhfbmFuZF9ibG9ja19wcm90ZWN0aW9uX3N1cHBvcnQoY2hpcCk7DQo+
-Pj4+PiAgICBtYWNyb25peF9uYW5kX2RlZXBfcG93ZXJfZG93bl9zdXBwb3J0KGNoaXApOw0KPj4+
-Pj4gKyAgbWFjcm9uaXhfbmFuZF9zZXR1cF9vdHAoY2hpcCk7DQo+Pj4+Pg0KPj4+Pj4gICAgcmV0
-dXJuIDA7DQo+Pj4+PiAgfQ0KPj4NCj4+DQo+PiBUaGFua3MsDQo+PiBNaXF1w6hsDQpfX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1h
-aWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3Jp
-YmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+The test robot reports some make warnings.
+
+Fix those warnings:
+    drivers/gpu/drm/i915/i915_gpu_error.c:2174: warning: Function parameter or member 'dump_flags' not described in 'i915_capture_error_state'
+    drivers/gpu/drm/i915/i915_perf.c:5307: warning: Function parameter or member 'i915' not described in 'i915_perf_ioctl_version'
+    drivers/gpu/drm/i915/i915_active.h:66: warning: Function parameter or member 'active' not described in '__i915_active_fence_init'
+    drivers/gpu/drm/i915/i915_active.h:66: warning: Function parameter or member 'fence' not described in '__i915_active_fence_init'
+    drivers/gpu/drm/i915/i915_active.h:66: warning: Function parameter or member 'fn' not described in '__i915_active_fence_init'
+    drivers/gpu/drm/i915/i915_active.h:89: warning: Function parameter or member 'active' not described in 'i915_active_fence_set'
+    drivers/gpu/drm/i915/i915_active.h:89: warning: Function parameter or member 'rq' not described in 'i915_active_fence_set'
+    drivers/gpu/drm/i915/i915_active.h:102: warning: Function parameter or member 'active' not described in 'i915_active_fence_get'
+    drivers/gpu/drm/i915/i915_active.h:122: warning: Function parameter or member 'active' not described in 'i915_active_fence_isset'
+    drivers/gpu/drm/i915/i915_utils.h:284: warning: Function parameter or member 'OP' not described in '__wait_for'
+    drivers/gpu/drm/i915/i915_utils.h:284: warning: Function parameter or member 'COND' not described in '__wait_for'
+    drivers/gpu/drm/i915/i915_utils.h:284: warning: Function parameter or member 'US' not described in '__wait_for'
+    drivers/gpu/drm/i915/i915_utils.h:284: warning: Function parameter or member 'Wmin' not described in '__wait_for'
+    drivers/gpu/drm/i915/i915_utils.h:284: warning: Function parameter or member 'Wmax' not described in '__wait_for'
+    drivers/gpu/drm/i915/i915_scatterlist.h:164: warning: Function parameter or member 'release' not described in 'i915_refct_sgt_ops'
+    drivers/gpu/drm/i915/i915_scatterlist.h:187: warning: Function parameter or member 'rsgt' not described in 'i915_refct_sgt_put'
+    drivers/gpu/drm/i915/i915_scatterlist.h:198: warning: Function parameter or member 'rsgt' not described in 'i915_refct_sgt_get'
+    drivers/gpu/drm/i915/i915_scatterlist.h:214: warning: Function parameter or member 'rsgt' not described in '__i915_refct_sgt_init'
+    drivers/gpu/drm/i915/i915_vma_resource.h:129: warning: Function parameter or member 'wakeref' not described in 'i915_vma_resource'
+
+Reported-by: k2ci <kernel-bot@kylinos.cn>
+Signed-off-by: pengfuyuan <pengfuyuan@kylinos.cn>
+---
+ drivers/gpu/drm/i915/i915_active.h       | 14 +++++++-------
+ drivers/gpu/drm/i915/i915_gpu_error.c    |  1 +
+ drivers/gpu/drm/i915/i915_perf.c         |  1 +
+ drivers/gpu/drm/i915/i915_scatterlist.h  |  9 +++++----
+ drivers/gpu/drm/i915/i915_utils.h        |  6 ++++++
+ drivers/gpu/drm/i915/i915_vma_resource.h |  1 +
+ 6 files changed, 21 insertions(+), 11 deletions(-)
+
+diff --git a/drivers/gpu/drm/i915/i915_active.h b/drivers/gpu/drm/i915/i915_active.h
+index 7eb44132183a..77c676ecc263 100644
+--- a/drivers/gpu/drm/i915/i915_active.h
++++ b/drivers/gpu/drm/i915/i915_active.h
+@@ -49,9 +49,9 @@ void i915_active_noop(struct dma_fence *fence, struct dma_fence_cb *cb);
+ 
+ /**
+  * __i915_active_fence_init - prepares the activity tracker for use
+- * @active - the active tracker
+- * @fence - initial fence to track, can be NULL
+- * @func - a callback when then the tracker is retired (becomes idle),
++ * @active: the active tracker
++ * @fence: initial fence to track, can be NULL
++ * @fn: a callback when then the tracker is retired (becomes idle),
+  *         can be NULL
+  *
+  * i915_active_fence_init() prepares the embedded @active struct for use as
+@@ -77,8 +77,8 @@ __i915_active_fence_set(struct i915_active_fence *active,
+ 
+ /**
+  * i915_active_fence_set - updates the tracker to watch the current fence
+- * @active - the active tracker
+- * @rq - the request to watch
++ * @active: the active tracker
++ * @rq: the request to watch
+  *
+  * i915_active_fence_set() watches the given @rq for completion. While
+  * that @rq is busy, the @active reports busy. When that @rq is signaled
+@@ -89,7 +89,7 @@ i915_active_fence_set(struct i915_active_fence *active,
+ 		      struct i915_request *rq);
+ /**
+  * i915_active_fence_get - return a reference to the active fence
+- * @active - the active tracker
++ * @active: the active tracker
+  *
+  * i915_active_fence_get() returns a reference to the active fence,
+  * or NULL if the active tracker is idle. The reference is obtained under RCU,
+@@ -111,7 +111,7 @@ i915_active_fence_get(struct i915_active_fence *active)
+ 
+ /**
+  * i915_active_fence_isset - report whether the active tracker is assigned
+- * @active - the active tracker
++ * @active: the active tracker
+  *
+  * i915_active_fence_isset() returns true if the active tracker is currently
+  * assigned to a fence. Due to the lazy retiring, that fence may be idle
+diff --git a/drivers/gpu/drm/i915/i915_gpu_error.c b/drivers/gpu/drm/i915/i915_gpu_error.c
+index f020c0086fbc..dae8b7ff9725 100644
+--- a/drivers/gpu/drm/i915/i915_gpu_error.c
++++ b/drivers/gpu/drm/i915/i915_gpu_error.c
+@@ -2162,6 +2162,7 @@ void i915_error_state_store(struct i915_gpu_coredump *error)
+  * i915_capture_error_state - capture an error record for later analysis
+  * @gt: intel_gt which originated the hang
+  * @engine_mask: hung engines
++ * @dump_flags: flags specifying additional options for capturing the error state
+  *
+  *
+  * Should be called when an error is detected (either a hang or an error
+diff --git a/drivers/gpu/drm/i915/i915_perf.c b/drivers/gpu/drm/i915/i915_perf.c
+index 050b8ae7b8e7..2bbf359c18b3 100644
+--- a/drivers/gpu/drm/i915/i915_perf.c
++++ b/drivers/gpu/drm/i915/i915_perf.c
+@@ -5300,6 +5300,7 @@ void i915_perf_fini(struct drm_i915_private *i915)
+ 
+ /**
+  * i915_perf_ioctl_version - Version of the i915-perf subsystem
++ * @i915: i915 device instance
+  *
+  * This version number is used by userspace to detect available features.
+  */
+diff --git a/drivers/gpu/drm/i915/i915_scatterlist.h b/drivers/gpu/drm/i915/i915_scatterlist.h
+index b0a1db44f895..50b379bac6fd 100644
+--- a/drivers/gpu/drm/i915/i915_scatterlist.h
++++ b/drivers/gpu/drm/i915/i915_scatterlist.h
+@@ -154,6 +154,7 @@ bool i915_sg_trim(struct sg_table *orig_st);
+ 
+ /**
+  * struct i915_refct_sgt_ops - Operations structure for struct i915_refct_sgt
++ * @release: Free the memory of the struct i915_refct_sgt
+  */
+ struct i915_refct_sgt_ops {
+ 	/**
+@@ -167,7 +168,7 @@ struct i915_refct_sgt_ops {
+  * struct i915_refct_sgt - A refcounted scatter-gather table
+  * @kref: struct kref for refcounting
+  * @table: struct sg_table holding the scatter-gather table itself. Note that
+- * @table->sgl = NULL can be used to determine whether a scatter-gather table
++ * table->sgl = NULL can be used to determine whether a scatter-gather table
+  * is present or not.
+  * @size: The size in bytes of the underlying memory buffer
+  * @ops: The operations structure.
+@@ -181,7 +182,7 @@ struct i915_refct_sgt {
+ 
+ /**
+  * i915_refct_sgt_put - Put a refcounted sg-table
+- * @rsgt the struct i915_refct_sgt to put.
++ * @rsgt: the struct i915_refct_sgt to put.
+  */
+ static inline void i915_refct_sgt_put(struct i915_refct_sgt *rsgt)
+ {
+@@ -191,7 +192,7 @@ static inline void i915_refct_sgt_put(struct i915_refct_sgt *rsgt)
+ 
+ /**
+  * i915_refct_sgt_get - Get a refcounted sg-table
+- * @rsgt the struct i915_refct_sgt to get.
++ * @rsgt: the struct i915_refct_sgt to get.
+  */
+ static inline struct i915_refct_sgt *
+ i915_refct_sgt_get(struct i915_refct_sgt *rsgt)
+@@ -203,7 +204,7 @@ i915_refct_sgt_get(struct i915_refct_sgt *rsgt)
+ /**
+  * __i915_refct_sgt_init - Initialize a refcounted sg-list with a custom
+  * operations structure
+- * @rsgt The struct i915_refct_sgt to initialize.
++ * @rsgt: The struct i915_refct_sgt to initialize.
+  * @size: Size in bytes of the underlying memory buffer.
+  * @ops: A customized operations structure in case the refcounted sg-list
+  * is embedded into another structure.
+diff --git a/drivers/gpu/drm/i915/i915_utils.h b/drivers/gpu/drm/i915/i915_utils.h
+index 2c430c0c3bad..8e8d1f937e60 100644
+--- a/drivers/gpu/drm/i915/i915_utils.h
++++ b/drivers/gpu/drm/i915/i915_utils.h
+@@ -257,6 +257,12 @@ wait_remaining_ms_from_jiffies(unsigned long timestamp_jiffies, int to_wait_ms)
+  * important that we check the condition again after having timed out, since the
+  * timeout could be due to preemption or similar and we've never had a chance to
+  * check the condition before the timeout.
++ *
++ * @OP: operation to perform on each iteration.
++ * @COND: condition to check for.
++ * @US: timeout duration in microseconds.
++ * @Wmin: recommended minimum for usleep (in microseconds).
++ * @Wmax: maximum wait duration (in microseconds).
+  */
+ #define __wait_for(OP, COND, US, Wmin, Wmax) ({ \
+ 	const ktime_t end__ = ktime_add_ns(ktime_get_raw(), 1000ll * (US)); \
+diff --git a/drivers/gpu/drm/i915/i915_vma_resource.h b/drivers/gpu/drm/i915/i915_vma_resource.h
+index c1864e3d0b43..6bb7d6d19216 100644
+--- a/drivers/gpu/drm/i915/i915_vma_resource.h
++++ b/drivers/gpu/drm/i915/i915_vma_resource.h
+@@ -49,6 +49,7 @@ struct i915_page_sizes {
+  * @__subtree_last: Interval tree private member.
+  * @vm: non-refcounted pointer to the vm. This is for internal use only and
+  * this member is cleared after vm_resource unbind.
++ * @wakeref: wake reference for the resource.
+  * @mr: The memory region of the object pointed to by the vma.
+  * @ops: Pointer to the backend i915_vma_ops.
+  * @private: Bind backend private info.
+-- 
+2.25.1
+
+
+No virus found
+		Checked by Hillstone Network AntiVirus
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
