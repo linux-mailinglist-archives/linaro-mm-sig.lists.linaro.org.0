@@ -2,193 +2,173 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2B9CE71A022
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Jun 2023 16:34:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 63F8F722A33
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  5 Jun 2023 17:06:06 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DE71243CB7
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Jun 2023 14:34:14 +0000 (UTC)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com (mail-co1nam11on2064.outbound.protection.outlook.com [40.107.220.64])
-	by lists.linaro.org (Postfix) with ESMTPS id 93CC33EF1B
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  1 Jun 2023 14:34:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 73CEC43BEB
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  5 Jun 2023 15:06:05 +0000 (UTC)
+Received: from fd01.gateway.ufhost.com (fd01.gateway.ufhost.com [61.152.239.71])
+	by lists.linaro.org (Postfix) with ESMTP id D79533F205
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  2 Jun 2023 07:40:54 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=lb280PJH;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1");
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.220.64 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gczYBgu6/WI9dnxLQZ3HGl8HWFuWzctqTpiwPDHFf1bNdh9xVwIqfd72TP342FAULiExpAKysfojBiBW+jjBwscgm4a4PIWka5LjF1mCLGSFPbRTvGLn4Z1ao+1CRJPIHv7cZPx6uTad3Qe6SYNKLU3KvtbPUfSprWOjwRWBtg5zbXMIw9MtaIjMCwMnVmhbNmIJ27m5XrpYHwpzE5rzHzTTmjay2jXCeQm6ZnG+EzbZC1BEtJfRrFW8CnLMBHOQkSNQ84ugzHuupgegCBwzvcPndDBBryQnnmtL0p518lJWkLDRF4CzbP+kaOrwAOxhQW7I8lPAxrAcQAxyS/iajw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4byVYc3piYLFHOMuNXRNYjzoaRWwqK9pc5O9hghsaL4=;
- b=YmSGivTu4EpnKvOLurGNCoYV1fOEtzUfpAqcI2PSXQDHIXaULYTGg1+7TgBzQAwTZVxX3kBl0HDMFsdcUn3IT+GjLIVKDDhmYzWzkcF4e950l+FY/V9N2AYy+o68n/NBBJGDv6oH37JmkcBclQsCQLoR8ZSiPWND8VBMQvZ6fQcQ7+uQt5gZQhOyD7zLd2MR8CBq5TuSduybRuCaZ/MWCevWsgTBIWe6Mg0qR/SYvGfkUC41srdAqnT5CPQnfxHWeMxNJaPAfvcOiWxZy5v7dBXfjHn0LWfCcrh7Z9ImhLbYZffgyJcq++tWKuZHPNFlBah1vSNfNJR3UnpudvghEg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4byVYc3piYLFHOMuNXRNYjzoaRWwqK9pc5O9hghsaL4=;
- b=lb280PJHdhJHrn8lTQXk7sMLilNdJG8NetzeBx+mlyDF+1lGndlgV0VMEVQ4QMVQgqi+MoRFFyzS583YL+cDDUXhu275/MGqb1wRh8un8up91nEeMwb6IR02aDUlVIunT8EWAJo9DFowkk4VxGg+ZNpdYMjtZIctF2Wizr+Ahbk=
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by PH7PR12MB6636.namprd12.prod.outlook.com (2603:10b6:510:212::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6455.22; Thu, 1 Jun
- 2023 14:34:05 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::907f:26e2:673a:2ad2]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::907f:26e2:673a:2ad2%6]) with mapi id 15.20.6455.020; Thu, 1 Jun 2023
- 14:34:05 +0000
-Message-ID: <81371d0d-5093-5aa8-f757-2f11f24366eb@amd.com>
-Date: Thu, 1 Jun 2023 16:34:01 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: en-US
-To: Min Li <lm0963hack@gmail.com>, alexander.deucher@amd.com
-References: <20230526123753.16160-1-lm0963hack@gmail.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20230526123753.16160-1-lm0963hack@gmail.com>
-X-ClientProxiedBy: FR3P281CA0085.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1f::22) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of keith.zhao@starfivetech.com designates 61.152.239.71 as permitted sender) smtp.mailfrom=keith.zhao@starfivetech.com;
+	dmarc=none
+Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
+	by fd01.gateway.ufhost.com (Postfix) with ESMTP id 546D280E2;
+	Fri,  2 Jun 2023 15:40:47 +0800 (CST)
+Received: from EXMBX061.cuchost.com (172.16.6.61) by EXMBX166.cuchost.com
+ (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Fri, 2 Jun
+ 2023 15:40:47 +0800
+Received: from xiaofei.localdomain (180.164.60.184) by EXMBX061.cuchost.com
+ (172.16.6.61) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Fri, 2 Jun
+ 2023 15:40:46 +0800
+From: Keith Zhao <keith.zhao@starfivetech.com>
+To: <dri-devel@lists.freedesktop.org>, <devicetree@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-riscv@lists.infradead.org>,
+	<linux-media@vger.kernel.org>, <linaro-mm-sig@lists.linaro.org>
+Date: Fri, 2 Jun 2023 15:40:34 +0800
+Message-ID: <20230602074043.33872-1-keith.zhao@starfivetech.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|PH7PR12MB6636:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6c832bb5-0494-4052-4d62-08db62ad406f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	EalTvypGyVlpEctFuv7RZ7Ttfoj8GaUbLeF0QF45NX60DtoPQ8A0dqUmkQGlzp5QE6FF/BJYMqF9gZ2rAwJzICbBIuQEk2nfNASHpNPKesbseN8MTzZjOvHd6RC+c/RNUnZHvu3MzjlnVtX68wJ+JezbZeEQhkMWojJlnMrdUYGeykZK2CfLGaVUhpUMRAquHKl90dZ8inpWcnNxHtklaYKtOdwgX+5dfrr2aWBgHbD5UauPl23PWF8xYjVaPne+oSLZkXUi9NnIuKDCkwKBRfp7uomQu/Fi9ITvnTgN9Bc8zQrc9KyM4looNLjuphirrv2jHChp/RI6968PhZ4rJmLa9ga/q/kg0g5S8PHZIUYyJvYCY/0g6C0wR6eppm7OGuq1+27iy+nXW+VuYtkLcnGr9LwXonTQ7w+ylozXagJEPpXgIfUIp9v9N0AppZiNSzzjo7ITlADmP6hy0u+mcd3IhAQSFO3JJcKTP3eWjZ+vGL4RQesMnd0wUeEdMKNyWbivDbXFkATZcsgUAAgRS4tA9Wimhlz6Blu0D3QxLV86/l6GIwoIbbSbvPZqRtPUDJpRST0SOcL16HaeTtDe6/WJLGPqBU5mSw8DUsIwSy2AyiKM/zX+71yutsXWWjLR/Q2wm6suxwsps7pnHrT+Ag==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(366004)(39860400002)(396003)(376002)(346002)(136003)(451199021)(6666004)(86362001)(2616005)(316002)(2906002)(6486002)(36756003)(5660300002)(186003)(31696002)(41300700001)(83380400001)(8936002)(8676002)(38100700002)(478600001)(31686004)(6506007)(6512007)(4326008)(6636002)(66476007)(66946007)(66556008)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?TTdCdjkrTXhxMHh2bVU2NFFwZlREYU9wdFlJYklJbTZ0TEZxb29LUFVwajBD?=
- =?utf-8?B?REZBZmxWWDRETzBNOCtEVWUrVnZBVTBzWTV4Sm0yaTdZN2F6ZFVUNEU2T3Nr?=
- =?utf-8?B?N3R3Y0I3OHRHZWQrcmpFbmZMSjUwcmtJU0Z1bS9tbjg2eGJoaXM5MmRpZ2lw?=
- =?utf-8?B?UVRXb3JyU2ZMS2xsZFpMWmdDNWRmMUZzRzdpUlRoeFhIcGx3dmR6WWFIaG9Q?=
- =?utf-8?B?NlJnYllOVEZlTHhDWGdJQmVIYk9UNHZKMTR3T0FZMVYrcklNcXorS0RQam1t?=
- =?utf-8?B?dHk5SDdaWWRyY0FTZjUrNm1lQVpLUGtSeGVGMEx0UjRvbGVQV284ZGJIeS9j?=
- =?utf-8?B?dmNlRytzbEVpOHVmVVhrMEJ1d3NlTjMxYnIzSk51R1M5WjBqT3UzWHVJMkUx?=
- =?utf-8?B?MUdabnM5eFFsZ1daZ3JrUHNnRFRBRm9aUXB4cG9DRzY3dG03eExYV0VOTFRq?=
- =?utf-8?B?VUNXV292Y25JS1R3c0tBc09VZ2Z4VWJTUzUwZ0tpZ1JpRjVZeFBDeDBwTXRy?=
- =?utf-8?B?Y0liV1ZnOVZzWDBVcVNyQnlKeEZEZ2RzV2VZTWc1K0I1ampSa3ZXNVZZMEhp?=
- =?utf-8?B?N1gxbFZTZWM1cWxkVDJkYlJ1MkU4UXVKNTJYVHNndWtFeStrM2ZHOFFERy9G?=
- =?utf-8?B?UVVnRi9vRm1GVlpiNEhnOUpybGRYYWZPMnR6TFY3RXAveGg4Nm1wWmo1TzZE?=
- =?utf-8?B?NFNjdW4vMisyS2ppQlVHRlBSRzFEdG1GZ0lxME53MU4zMWphNU9sVHJXbjhD?=
- =?utf-8?B?MS9SNlY1YmRQM2hSVnExQnNBMHNRc2NRdDF2c21NeldiRDk2TURUZk1UamdX?=
- =?utf-8?B?N3Byb0lTT0V4WFBtaTcwS3lYaUZmaEFLem84NlAvbUdNQ1VJdlROaUtuOXoy?=
- =?utf-8?B?d2I0WG1iWmlKWENJeWloK2ZZcnhDUXpzeTJycGd5SGFGeWNlMVhqYUJqa0Iw?=
- =?utf-8?B?Q3VtZXpIaW9aSmZEdi93N3lQYXpWODFidmZ6VkdCRlhyVHNDZStiYk1ZWHA2?=
- =?utf-8?B?d2F0akZFRjJCS3FNS05QSWN5NG15M3l4cFRXOVlCUUVXWnRmajlDa3BMZGVh?=
- =?utf-8?B?R2s4ek1ZczM2U1Vsa21UczEwM1NJcTlnVmNlYzdCVnB3VG0zeXZrNTRsTGt2?=
- =?utf-8?B?eWxVNUhUaFBHdlZpb1MxdEl4dGxSWjZOejlIZFA4eDJ3UUROOEVhU05JSHUy?=
- =?utf-8?B?SURYSGEyWEFMOW1HYnBxSTFWS3ZHL05hVnREcjRyL1N0ai9oSEQ2M0lLOGJj?=
- =?utf-8?B?d0h4ZzMvQ3Y2SGVyY0NaeUdaTHJCNjBOaHMrTlAzSi9jK2NuS3lIditmeWpq?=
- =?utf-8?B?VGpNT01naHc3dFJPOVE4a1c4Mk5hTlptV2J6VVlYZnVTektna1Yva3BKYmtH?=
- =?utf-8?B?WU1QUnU0VWhaT0FyU2F1RjJucWs1amNiQ256eFJpRzFwLzF1dktKaEczdmhG?=
- =?utf-8?B?WDFFS29DV005SWs3dDYzWnE3b3BmeERqejl5UktjR0d5SGxVY25FYzN2UlVC?=
- =?utf-8?B?azQzeDRNVDhqMjFiKzRRa1hKMDJxZWxIOVB3VWZrb0dhQlNFdkhVd1dmbDZK?=
- =?utf-8?B?VStKTDd5SEc4cWEvdGg5bURSVHpCa0N2bmlFZHBMbDNSN05OUCtNMFU4cVBP?=
- =?utf-8?B?cG9CcDJ0dmR3Zk9DeDB6ZE5qUTlKTWh3Nm83cFExV3NDRUsvanl2R2hYSHcz?=
- =?utf-8?B?cjI2RE4wWi9xWXNIaGxORCt0bVdPckJ2VmZYVHh1YWR2Y3YyWDB3NzQrcjEy?=
- =?utf-8?B?TE1QcWZTc2ZMM3BWT2JUbi9nR0J5T1ZxeDFWdUF2NmtyeTkyQTNFQWVlUkMx?=
- =?utf-8?B?MEI1NHdSZ2Fuc0V6elhOdm9BSXNCMVM1dkFqd0M5ZjN6T09QOUtPaFNObllM?=
- =?utf-8?B?RXJPY1l0NDh4ODhvcnlCSm9sSitUb3lEb2dlN3hFYndhVUlONzZna1NuTHNj?=
- =?utf-8?B?U3FzNlVUclhXRXdzc1pMeTlMWExtM0ZackRad2NkUGp2Mm9ROTNSalROeVk0?=
- =?utf-8?B?S0FiZHZ5cnZscnlROTVFWVgrUWN6dUVFbVpiSUFwZFVwN1NqT1ZhMGdxUzhJ?=
- =?utf-8?B?Mld6ZjQybUJuWlRQOHVOSkVZdEU4Y0hCeDI3NnVpV1JFODZMNUZIdHFrMW5B?=
- =?utf-8?B?YUpPZkJLZ2puQVRDa3lrU1U4SDBra2tnMk1Zdi9DTUhWenpFRE9lSDJEY2I4?=
- =?utf-8?Q?AEzFvh6dTpSz0zAJPJ6QiDk8aBB5vgSXU04GTkDJKVAV?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6c832bb5-0494-4052-4d62-08db62ad406f
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jun 2023 14:34:05.5681
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: /Cb2IuamGLVNljb7NxHuy4GKGZicOhjrZMNtbMXmBxAvpf0sIBaTtTKhN+J8XXS+
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6636
-X-Spamd-Result: default: False [-5.00 / 15.00];
+X-Originating-IP: [180.164.60.184]
+X-ClientProxiedBy: EXCAS062.cuchost.com (172.16.6.22) To EXMBX061.cuchost.com
+ (172.16.6.61)
+X-YovoleRuleAgent: yovoleflag
+X-Spamd-Result: default: False [-1.70 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	SUSPICIOUS_RECIPS(1.50)[];
+	RCVD_IN_DNSWL_HI(-1.50)[175.102.18.54:received,180.164.60.184:received,61.152.239.71:from];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:61.152.239.0/24];
+	RCVD_NO_TLS_LAST(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,kernel.org,linaro.org,esmil.dk,sifive.com,dabbelt.com,eecs.berkeley.edu,linux.intel.com,suse.de,pengutronix.de,amd.com,sntech.de,edgeble.ai,hotmail.com,starfivetech.com];
+	ASN(0.00)[asn:4812, ipnet:61.152.0.0/16, country:CN];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	FREEMAIL_CC(0.00)[amd.com,gmail.com,ffwll.ch,linaro.org,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
-	FREEMAIL_TO(0.00)[gmail.com,amd.com];
 	NEURAL_HAM(-0.00)[-1.000];
-	BLOCKLISTDE_FAIL(0.00)[40.107.220.64:server fail,2603:10b6:408:43::13:server fail];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TO_DN_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.220.64:from];
+	MIME_TRACE(0.00)[0:+];
+	R_DKIM_NA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DKIM_TRACE(0.00)[amd.com:+];
-	RCVD_COUNT_TWO(0.00)[2]
+	RCVD_COUNT_THREE(0.00)[3];
+	FROM_HAS_DN(0.00)[];
+	HAS_XOIP(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[30];
+	TO_DN_SOME(0.00)[];
+	DMARC_NA(0.00)[starfivetech.com];
+	TAGGED_RCPT(0.00)[dt];
+	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 93CC33EF1B
-X-Spamd-Bar: -----
-Message-ID-Hash: O5OVP7N7FZPN5FMI7QFCUEUWH3UGYEOW
-X-Message-ID-Hash: O5OVP7N7FZPN5FMI7QFCUEUWH3UGYEOW
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Xinhui.Pan@amd.com, daniel@ffwll.ch, sumit.semwal@linaro.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+X-Rspamd-Queue-Id: D79533F205
+X-Spamd-Bar: -
+X-MailFrom: keith.zhao@starfivetech.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: GRU2KPUDZ5XZLWPG7MHKLSGP2FTA3BX6
+X-Message-ID-Hash: GRU2KPUDZ5XZLWPG7MHKLSGP2FTA3BX6
+X-Mailman-Approved-At: Mon, 05 Jun 2023 15:06:02 +0000
+CC: Daniel Vetter <daniel@ffwll.ch>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Emil Renner Berthing <kernel@esmil.dk>, Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Philipp Zabel <p.zabel@pengutronix.de>, Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com, Bjorn Andersson <andersson@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Shawn Guo <shawnguo@kernel.org>, Jagan Teki <jagan@edgeble.ai>, Chris Morgan <macromorgan@hotmail.com>, Keith Zhao <keith.zhao@starfivetech.com>, Jack Zhu <jack.zhu@starfivetech.com>, Shengyang Chen <shengyang.chen@starfivetech.com>, Changhuang Liang <changhuang.liang@starfivetech.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] drm/radeon: fix race condition UAF in radeon_gem_set_domain_ioctl
+Subject: [Linaro-mm-sig] [PATCH 0/9] Add DRM driver for StarFive SoC JH7110
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/O5OVP7N7FZPN5FMI7QFCUEUWH3UGYEOW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GRU2KPUDZ5XZLWPG7MHKLSGP2FTA3BX6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Am 26.05.23 um 14:37 schrieb Min Li:
-> Userspace can race to free the gobj(robj converted from), robj should not
-> be accessed again after drm_gem_object_put, otherwith it will result in
-> use-after-free.
->
-> Signed-off-by: Min Li <lm0963hack@gmail.com>
-> ---
->   drivers/gpu/drm/radeon/radeon_gem.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/gpu/drm/radeon/radeon_gem.c b/drivers/gpu/drm/radeon/radeon_gem.c
-> index bdc5af23f005..450c7cbdd28a 100644
-> --- a/drivers/gpu/drm/radeon/radeon_gem.c
-> +++ b/drivers/gpu/drm/radeon/radeon_gem.c
-> @@ -478,7 +478,7 @@ int radeon_gem_set_domain_ioctl(struct drm_device *dev, void *data,
->   
->   	drm_gem_object_put(gobj);
->   	up_read(&rdev->exclusive_lock);
-> -	r = radeon_gem_handle_lockup(robj->rdev, r);
-> +	r = radeon_gem_handle_lockup(rdev, r);
+Hi,
 
-This also makes the robj unused which the kernel test robot also 
-complained about.
+This series is a DRM driver for StarFive SoC JH7110, which includes a
+display controller driver for Verisilicon DC8200 and an HMDI driver.
 
-Please remove that local variable and re-submit.
+We use GEM framework for buffer management and allocate memory by 
+using DMA APIs.
 
-Apart from that the patch looks good to me,
-Christian.
+The JH7110 display subsystem includes a display controller Verisilicon
+DC8200 and an HDMI transmitter. The HDMI TX IP is designed for transmitting 
+video and audio data from DC8200 to a display device. The HDMI TX IP 
+consists of  the digital controller and the physical layer.
 
->   	return r;
->   }
->   
+This series does not support HDMI audio driver.
+
+Keith Zhao (9):
+  dt-bindings: display: Add yamls for JH7110 display subsystem
+  riscv: dts: starfive: jh7110: add dc&hdmi controller node
+  drm/verisilicon: Add basic drm driver
+  drm/verisilicon: Add gem driver for JH7110 SoC
+  drm/verisilicon: Add mode config funcs
+  drm/verisilicon: Add drm crtc funcs
+  drm/verisilicon: Add drm plane funcs
+  drm/verisilicon: Add verisilicon dc controller driver
+  drm/verisilicon: Add starfive hdmi driver
+
+ .../display/verisilicon/starfive-hdmi.yaml    |   93 +
+ .../display/verisilicon/verisilicon-dc.yaml   |  110 +
+ .../display/verisilicon/verisilicon-drm.yaml  |   42 +
+ .../devicetree/bindings/vendor-prefixes.yaml  |    2 +
+ MAINTAINERS                                   |    9 +
+ .../jh7110-starfive-visionfive-2.dtsi         |   87 +
+ arch/riscv/boot/dts/starfive/jh7110.dtsi      |   46 +
+ drivers/gpu/drm/Kconfig                       |    2 +
+ drivers/gpu/drm/Makefile                      |    1 +
+ drivers/gpu/drm/verisilicon/Kconfig           |   24 +
+ drivers/gpu/drm/verisilicon/Makefile          |   13 +
+ drivers/gpu/drm/verisilicon/starfive_hdmi.c   |  928 ++++++++
+ drivers/gpu/drm/verisilicon/starfive_hdmi.h   |  296 +++
+ drivers/gpu/drm/verisilicon/vs_crtc.c         |  388 ++++
+ drivers/gpu/drm/verisilicon/vs_crtc.h         |   74 +
+ drivers/gpu/drm/verisilicon/vs_dc.c           | 1040 +++++++++
+ drivers/gpu/drm/verisilicon/vs_dc.h           |   62 +
+ drivers/gpu/drm/verisilicon/vs_dc_hw.c        | 2008 +++++++++++++++++
+ drivers/gpu/drm/verisilicon/vs_dc_hw.h        |  496 ++++
+ drivers/gpu/drm/verisilicon/vs_drv.c          |  301 +++
+ drivers/gpu/drm/verisilicon/vs_drv.h          |   52 +
+ drivers/gpu/drm/verisilicon/vs_fb.c           |  181 ++
+ drivers/gpu/drm/verisilicon/vs_fb.h           |   15 +
+ drivers/gpu/drm/verisilicon/vs_gem.c          |  372 +++
+ drivers/gpu/drm/verisilicon/vs_gem.h          |   72 +
+ drivers/gpu/drm/verisilicon/vs_plane.c        |  440 ++++
+ drivers/gpu/drm/verisilicon/vs_plane.h        |   74 +
+ drivers/gpu/drm/verisilicon/vs_type.h         |   72 +
+ include/uapi/drm/drm_fourcc.h                 |   83 +
+ include/uapi/drm/vs_drm.h                     |   50 +
+ 30 files changed, 7433 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/display/verisilicon/starfive-hdmi.yaml
+ create mode 100644 Documentation/devicetree/bindings/display/verisilicon/verisilicon-dc.yaml
+ create mode 100644 Documentation/devicetree/bindings/display/verisilicon/verisilicon-drm.yaml
+ create mode 100644 drivers/gpu/drm/verisilicon/Kconfig
+ create mode 100644 drivers/gpu/drm/verisilicon/Makefile
+ create mode 100644 drivers/gpu/drm/verisilicon/starfive_hdmi.c
+ create mode 100644 drivers/gpu/drm/verisilicon/starfive_hdmi.h
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_crtc.c
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_crtc.h
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_dc.c
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_dc.h
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_dc_hw.c
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_dc_hw.h
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_drv.c
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_drv.h
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_fb.c
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_fb.h
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_gem.c
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_gem.h
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_plane.c
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_plane.h
+ create mode 100644 drivers/gpu/drm/verisilicon/vs_type.h
+ create mode 100644 include/uapi/drm/vs_drm.h
+
+-- 
+2.34.1
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
