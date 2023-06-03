@@ -2,335 +2,152 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3E28372090B
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  2 Jun 2023 20:22:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 373C1720E8A
+	for <lists+linaro-mm-sig@lfdr.de>; Sat,  3 Jun 2023 09:44:00 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EA9963F964
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  2 Jun 2023 18:22:00 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 2A5373F205
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  2 Jun 2023 18:21:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DC54843BB1
+	for <lists+linaro-mm-sig@lfdr.de>; Sat,  3 Jun 2023 07:43:58 +0000 (UTC)
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com [209.85.210.169])
+	by lists.linaro.org (Postfix) with ESMTPS id 14B013EA46
+	for <linaro-mm-sig@lists.linaro.org>; Sat,  3 Jun 2023 07:43:54 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="HxHBZ0/i";
-	spf=pass (lists.linaro.org: domain of conor@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=conor@kernel.org;
-	dmarc=pass (policy=none) header.from=kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id BE71564FE2;
-	Fri,  2 Jun 2023 18:21:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A609C433D2;
-	Fri,  2 Jun 2023 18:21:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1685730115;
-	bh=wZmST5GqZfwNaXvG5ams1yOqiopsMBnwXrGfs0DzrKk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=HxHBZ0/iZ+gWdLqiKl6YbDXzHpA124IhNDjyA68Fln6QGStTGDWjKUkHIrFN9xTU7
-	 95B8CQ+aTdp9EW0NAufAfu/J99ZNMwPbFr0ROwPlNVB7+jpFxMx4LoXtuy9pAQyjKp
-	 8sFG56C83swAIV2LURY2SsrrpVNha0ZqJsDjMfybtxHfV32X2XqmjFOSjFBudnww0z
-	 AJ29/B2AeOuC4120GlF7y0cLJjI57ri2lUvIUm+mGMJOCxPSJ3vb+PEriH+04FpxU4
-	 sMVMnuhAk1pTDZNQ5psWuVJ1IGHN46Bcy7i+HMOhMbxJbBNqzcuqQWNs71k5HLKuqk
-	 ENBfjRGZl6hew==
-Date: Fri, 2 Jun 2023 19:21:47 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Keith Zhao <keith.zhao@starfivetech.com>
-Message-ID: <20230602-uncommon-rejoicing-e73c0c475f9f@spud>
-References: <20230602074043.33872-1-keith.zhao@starfivetech.com>
- <20230602074043.33872-2-keith.zhao@starfivetech.com>
+	dkim=pass header.d=gmail.com header.s=20221208 header.b=HdR32jWE;
+	spf=pass (lists.linaro.org: domain of lm0963hack@gmail.com designates 209.85.210.169 as permitted sender) smtp.mailfrom=lm0963hack@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-pf1-f169.google.com with SMTP id d2e1a72fcca58-64d61fff78aso354546b3a.1
+        for <linaro-mm-sig@lists.linaro.org>; Sat, 03 Jun 2023 00:43:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1685778233; x=1688370233;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=AWur87b6+FWCBKqxfBacalad+HJLdADtjiXHWwWG+kk=;
+        b=HdR32jWEiMDgRFNHZ4AmO+HfNOYRhIeMt1Z5uNTHesSQqHDELs6TlofSvDyhAYT35y
+         JtaJAitoMYef8byzb4Q/v3Q1X37KaWjsPrprQlD57U3+I6XKSx204zCQ1EOG7U21K4fq
+         fXT6MUWv5fX/6d68aknWQA62HaAXaJ7DT2OMuNznhhusSLzEaG5OodKAGVCBaeTD9In5
+         UhGE6Caok7XVhyUI2FU8bRU0U+QCu7mWwwuYcu4PH+H+U4yRVxt3yqk20JfkptJRMas7
+         0UZzD5imjL3NijdOtD+bWCh0OhMtk0o+uTjgUT+aeEfbUcXYkTQbxshWNa3CPUXt94Qk
+         PETw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1685778233; x=1688370233;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=AWur87b6+FWCBKqxfBacalad+HJLdADtjiXHWwWG+kk=;
+        b=Hu3wdkHxzJcp4dhsA8VfsQII+byGurACQZWd7f73Gex0i/P0m3QybnO+/dXeZPxT1Y
+         9GjZKJcdG9os8fO6AJ3gAgbDyvnkr0+IXuG6IC2UsoqOwzwrJitnkU7VUmWcss5FRvJG
+         O1ZBl/RxLkGs37pN4wiNtC9NJ+xVf/IIz6hVm83acmO9VBThf/UOihg9Gc3gmH2DrMVs
+         pzZTVBZua8ICFJX1m6FVoLjAGA6R2zpOHKupqXKgUWpZEqeCwCEb7dUejpdR4mwNQ7b6
+         D+Yz1OrVIIs35jxQovkk05lqAcB8J+0e45yq9KTz+NAeEb04eqtMGlnmNnf1gYy/NRco
+         Ljdw==
+X-Gm-Message-State: AC+VfDx63h5bU65rv9aZQitsP/yOba7ZWg/q0Gj2ed05bN/j6/ROUJ96
+	4OpwPigVTIXw0w4UEghHlY4=
+X-Google-Smtp-Source: ACHHUZ7Sb3282pwyR3Z2zP7ICZ4Es7PNecGCmDTkrXI02OgZnCeM/hb458Wo12XIa+dX4RK3fGmPTQ==
+X-Received: by 2002:a17:902:ecc5:b0:1ae:1364:6086 with SMTP id a5-20020a170902ecc500b001ae13646086mr12068845plh.2.1685778232982;
+        Sat, 03 Jun 2023 00:43:52 -0700 (PDT)
+Received: from ubuntu.localdomain ([183.208.21.185])
+        by smtp.gmail.com with ESMTPSA id 12-20020a170902c10c00b001afd275e186sm2525846pli.286.2023.06.03.00.43.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 03 Jun 2023 00:43:52 -0700 (PDT)
+From: Min Li <lm0963hack@gmail.com>
+To: alexander.deucher@amd.com
+Date: Sat,  3 Jun 2023 15:43:45 +0800
+Message-Id: <20230603074345.17907-1-lm0963hack@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-In-Reply-To: <20230602074043.33872-2-keith.zhao@starfivetech.com>
-X-Spamd-Result: default: False [-4.10 / 15.00];
+X-Spamd-Result: default: False [-4.60 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,lists.infradead.org,lists.linaro.org,gmail.com,ffwll.ch,kernel.org,linaro.org,esmil.dk,sifive.com,dabbelt.com,eecs.berkeley.edu,linux.intel.com,suse.de,pengutronix.de,amd.com,sntech.de,edgeble.ai,hotmail.com,starfivetech.com];
-	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[30];
+	MID_CONTAINS_FROM(1.00)[];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	RCVD_IN_DNSWL_HI(-1.00)[183.208.21.185:received,209.85.210.169:from];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20221208];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.210.169:from];
+	MIME_GOOD(-0.10)[text/plain];
+	FREEMAIL_CC(0.00)[amd.com,gmail.com,ffwll.ch,linaro.org,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
+	NEURAL_HAM(-0.00)[-0.981];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
-	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	TO_DN_NONE(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 2A5373F205
+X-Rspamd-Queue-Id: 14B013EA46
 X-Spamd-Bar: ----
-Message-ID-Hash: A2CANAMNGCWI3R5UEEWPBJWEQSHZVHST
-X-Message-ID-Hash: A2CANAMNGCWI3R5UEEWPBJWEQSHZVHST
-X-MailFrom: conor@kernel.org
+Message-ID-Hash: YOQA56HZXZITL7YNZG5Q2M7TQFOUKULM
+X-Message-ID-Hash: YOQA56HZXZITL7YNZG5Q2M7TQFOUKULM
+X-MailFrom: lm0963hack@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Daniel Vetter <daniel@ffwll.ch>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Emil Renner Berthing <kernel@esmil.dk>, Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Philipp Zabel <p.zabel@pengutronix.de>, Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com, Bjorn Andersson <andersson@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Shawn Guo <shawnguo@kernel.org>, Jagan Teki <jagan@edgeble.ai>, Chris Morgan <macromorgan@hotmail.com>, Jack Zhu <jack.zhu@starfivetech.com>, Shengyang Chen <shengyang.chen@starfivete
- ch.com>, Changhuang Liang <changhuang.liang@starfivetech.com>
+CC: christian.koenig@amd.com, Xinhui.Pan@amd.com, daniel@ffwll.ch, sumit.semwal@linaro.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/9] dt-bindings: display: Add yamls for JH7110 display subsystem
+Subject: [Linaro-mm-sig] [PATCH v2] drm/radeon: fix race condition UAF in  radeon_gem_set_domain_ioctl
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/A2CANAMNGCWI3R5UEEWPBJWEQSHZVHST/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YOQA56HZXZITL7YNZG5Q2M7TQFOUKULM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============5192272928603594492=="
-
-
---===============5192272928603594492==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="MvIfnYU0aT/WgDUu"
-Content-Disposition: inline
-
-
---MvIfnYU0aT/WgDUu
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hey Keith,
-
-On Fri, Jun 02, 2023 at 03:40:35PM +0800, Keith Zhao wrote:
-> Add bindings for JH7110 display subsystem which
-> has a display controller verisilicon dc8200
-> and an HDMI interface.
->=20
-> Signed-off-by: Keith Zhao <keith.zhao@starfivetech.com>
-> ---
->  .../display/verisilicon/starfive-hdmi.yaml    |  93 +++++++++++++++
->  .../display/verisilicon/verisilicon-dc.yaml   | 110 ++++++++++++++++++
->  .../display/verisilicon/verisilicon-drm.yaml  |  42 +++++++
->  .../devicetree/bindings/vendor-prefixes.yaml  |   2 +
->  MAINTAINERS                                   |   7 ++
->  5 files changed, 254 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/display/verisilicon=
-/starfive-hdmi.yaml
->  create mode 100644 Documentation/devicetree/bindings/display/verisilicon=
-/verisilicon-dc.yaml
->  create mode 100644 Documentation/devicetree/bindings/display/verisilicon=
-/verisilicon-drm.yaml
->=20
-> diff --git a/Documentation/devicetree/bindings/display/verisilicon/starfi=
-ve-hdmi.yaml b/Documentation/devicetree/bindings/display/verisilicon/starfi=
-ve-hdmi.yaml
-> new file mode 100644
-> index 000000000000..c30b7954a355
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/display/verisilicon/starfive-hdmi=
-=2Eyaml
-> @@ -0,0 +1,93 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/display/verisilicon/starfive-hdmi.yam=
-l#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: StarFive HDMI transmiter
-> +
-> +description:
-> +  The StarFive SoC uses the HDMI signal transmiter based on innosilicon =
-IP
-
-Is innosilicon the same thing as verisilicon? Also
-s/transmiter/transmitter/, both here and in the title.
-
-
-> +  to generate HDMI signal from its input and transmit the signal to the =
-screen.
-> +
-> +maintainers:
-> +  - Keith Zhao <keith.zhao@starfivetech.com>
-> +  - ShengYang Chen <shengyang.chen@starfivetech.com>
-> +
-> +properties:
-> +  compatible:
-> +    const: starfive,hdmi
-
-Is this going to work on every SoC that StarFive has ever & will ever
-make? Please use soc-based compatibles ;)
-
-> +
-> +  reg:
-> +    minItems: 1
-> +
-> +  interrupts:
-> +    items:
-> +      - description: The HDMI hot plug detection interrupt.
-> +
-> +  clocks:
-> +    items:
-> +      - description: System clock of HDMI module.
-> +      - description: Mclk clock of HDMI audio.
-> +      - description: Bclk clock of HDMI audio.
-> +      - description: Pixel clock generated by HDMI module.
-> +
-> +  clock-names:
-> +    items:
-> +      - const: sysclk
-> +      - const: mclk
-> +      - const: bclk
-> +      - const: pclk
-> +
-> +  resets:
-> +    items:
-> +      - description: Reset for HDMI module.
-> +
-> +  reset-names:
-> +    items:
-> +      - const: hdmi_tx
-
-You only have one item here, you don't need the "items: - const:",
-"const:" alone will do.
-
-
-> diff --git a/Documentation/devicetree/bindings/display/verisilicon/verisi=
-licon-dc.yaml b/Documentation/devicetree/bindings/display/verisilicon/veris=
-ilicon-dc.yaml
-> new file mode 100644
-> index 000000000000..1322502c4cde
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/display/verisilicon/verisilicon-d=
-c.yaml
-> @@ -0,0 +1,110 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/display/verisilicon/verisilicon-dc.ya=
-ml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: StarFive display controller
-> +
-> +description:
-> +  The StarFive SoC uses the display controller based on Verisilicon IP
-> +  to transfer the image data from a video memory
-> +  buffer to an external LCD interface.
-
-Is it based on Verisilicon IP, or is it exactly that verisilicon IP? I
-ask because...
-
-> +maintainers:
-> +  - Keith Zhao <keith.zhao@starfivetech.com>
-> +  - ShengYang Chen <shengyang.chen@starfivetech.com>
-> +
-> +properties:
-> +  compatible:
-> +    const: verisilicon,dc8200
-
-=2E..the compatible is the verisilicon IP. I would be a lot happier if
-the compatibles were set yp for something like:
-"starfive,jh7110-foo", "verisilicon,dc8200"
-
-> diff --git a/Documentation/devicetree/bindings/display/verisilicon/verisi=
-licon-drm.yaml b/Documentation/devicetree/bindings/display/verisilicon/veri=
-silicon-drm.yaml
-> new file mode 100644
-> index 000000000000..aed8d4af2c55
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/display/verisilicon/verisilicon-d=
-rm.yaml
-> @@ -0,0 +1,42 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/display/verisilicon/verisilicon-drm.y=
-aml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Verisilicon DRM master device
-> +
-> +maintainers:
-> +  - Keith Zhao <keith.zhao@starfivetech.com>
-> +  - ShengYang Chen <shengyang.chen@starfivetech.com>
-> +
-> +description: |
-> +  The Verisilicon DRM master device is a virtual device needed to list a=
-ll
-> +  display controller or other display interface nodes that comprise the
-> +  graphics subsystem.
-> +
-> +properties:
-> +  compatible:
-> +    const: verisilicon,display-subsystem
-
-Same here.
-
-> diff --git a/Documentation/devicetree/bindings/vendor-prefixes.yaml b/Doc=
-umentation/devicetree/bindings/vendor-prefixes.yaml
-> index 82d39ab0231b..52c04fd098be 100644
-> --- a/Documentation/devicetree/bindings/vendor-prefixes.yaml
-> +++ b/Documentation/devicetree/bindings/vendor-prefixes.yaml
-> @@ -1436,6 +1436,8 @@ patternProperties:
->      description: Variscite Ltd.
->    "^vdl,.*":
->      description: Van der Laan b.v.
-> +  "^verisilicon,.*":
-> +    description: Verisilicon Technologies, Inc.
-
-This should be in it's own patch.
-
-Cheers,
-Conor.
-
->    "^vertexcom,.*":
->      description: Vertexcom Technologies, Inc.
->    "^via,.*":
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 2a0496448b7f..293aa13d484c 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -7049,6 +7049,13 @@ F:	Documentation/devicetree/bindings/display/brcm,=
-bcm2835-*.yaml
->  F:	drivers/gpu/drm/vc4/
->  F:	include/uapi/drm/vc4_drm.h
-> =20
-> +DRM DRIVERS FOR VERISILICON
-> +M:	Keith Zhao <keith.zhao@starfivetech.com>
-> +L:	dri-devel@lists.freedesktop.org
-> +S:	Maintained
-> +T:	git git://anongit.freedesktop.org/drm/drm-misc
-> +F:	Documentation/devicetree/bindings/display/verisilicon/
-> +
->  DRM DRIVERS FOR VIVANTE GPU IP
->  M:	Lucas Stach <l.stach@pengutronix.de>
->  R:	Russell King <linux+etnaviv@armlinux.org.uk>
-> --=20
-> 2.34.1
->=20
-
---MvIfnYU0aT/WgDUu
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZHozOwAKCRB4tDGHoIJi
-0qGfAQCOw/FcLRxZ76ev3AIGXrIb1ZeNQe+VXPB56KKXU2pSxwEArYO0igKszta9
-cCp+5+8uMIkgXInjUhRVx70UBTTb9gs=
-=sbrO
------END PGP SIGNATURE-----
-
---MvIfnYU0aT/WgDUu--
-
---===============5192272928603594492==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+
+Userspace can race to free the gobj(robj converted from), robj should not
+be accessed again after drm_gem_object_put, otherwith it will result in
+use-after-free.
+
+Signed-off-by: Min Li <lm0963hack@gmail.com>
+---
+Changes in v2:
+- Remove unused robj, avoid compile complain
+
+ drivers/gpu/drm/radeon/radeon_gem.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/radeon/radeon_gem.c b/drivers/gpu/drm/radeon/radeon_gem.c
+index bdc5af23f005..d3f5ddbc1704 100644
+--- a/drivers/gpu/drm/radeon/radeon_gem.c
++++ b/drivers/gpu/drm/radeon/radeon_gem.c
+@@ -459,7 +459,6 @@ int radeon_gem_set_domain_ioctl(struct drm_device *dev, void *data,
+ 	struct radeon_device *rdev = dev->dev_private;
+ 	struct drm_radeon_gem_set_domain *args = data;
+ 	struct drm_gem_object *gobj;
+-	struct radeon_bo *robj;
+ 	int r;
+ 
+ 	/* for now if someone requests domain CPU -
+@@ -472,13 +471,12 @@ int radeon_gem_set_domain_ioctl(struct drm_device *dev, void *data,
+ 		up_read(&rdev->exclusive_lock);
+ 		return -ENOENT;
+ 	}
+-	robj = gem_to_radeon_bo(gobj);
+ 
+ 	r = radeon_gem_set_domain(gobj, args->read_domains, args->write_domain);
+ 
+ 	drm_gem_object_put(gobj);
+ 	up_read(&rdev->exclusive_lock);
+-	r = radeon_gem_handle_lockup(robj->rdev, r);
++	r = radeon_gem_handle_lockup(rdev, r);
+ 	return r;
+ }
+ 
+-- 
+2.34.1
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============5192272928603594492==--
