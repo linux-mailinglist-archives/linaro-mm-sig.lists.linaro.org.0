@@ -2,188 +2,456 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56CC77220B2
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  5 Jun 2023 10:13:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 35EC1722A48
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  5 Jun 2023 17:08:36 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id F122D4142D
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  5 Jun 2023 08:13:07 +0000 (UTC)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (mail-dm6nam12on2053.outbound.protection.outlook.com [40.107.243.53])
-	by lists.linaro.org (Postfix) with ESMTPS id 8B7F23EBFD
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  5 Jun 2023 08:13:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 41FAE43BEA
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  5 Jun 2023 15:08:35 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id A4B4D3EBCA
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  5 Jun 2023 09:56:19 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=JzPmBqLm;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1");
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.243.53 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jLdPN8xgzeNezD5btOSKq9HAUV3Y1YrcYukeAnmBqH4yGRPV/hWGa7TWybJVRQgfV6PwqK7T7b1GJojpH/gLgpNaUpVce2tVsWKqHPiOylo+RVbO9NsACjYIaQTvvNjXXGj3WxpKZViAmSA3NQGnX59CjfyimeCevrddt8LJj9WK9HU+WJXesZOFNRr0qYtJIzf/0mJAbRwpsAFn/CK3DSyGJICSGW5MDu1bTW9sdAf0f2r5R+MDLTPgsI1ppLw8tcR0dRag9QHjE5EwkFY8tgCJ/7J36FCLxhHHNpZaB2EZMZPWa83s0FUFQ1A1TbZfubQMMMdS3QV/ZZQS91FSqw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HskrjQTHtVsKOxc3AhKTql+Wr/0OAstnXmFMD6ONbRE=;
- b=aLLAhYeCadWsS9SkE/QU5yphLWnJashxjGqAcVGuwJg9+PsmNqHHpirVGzntkjtjB66GjYud9gYTx9wXM1LMs4eZddFPHyQybro6/ZzQ4qblWmiV1sALeZLLzbBEcTckX3AsbNvWvxgwmikhtzNxdug/lR0QT9hGpYlNyIfiFxvKz/lc6P3qo7JPab+asELmVL4Oeh1i3xGO6Z4IMNxTr75oh5HmDnRvZ0dv+zQgBSuuTf07oZVFAVo4+bj1UQLE/xlVhH+UtNZDlkSx/ZObgVlxgCJ3Sm7hoesaP/Pz7s+oR635Iu2nVF9HeU508eMt9rjEFRLDL3ixkAaitQ6CoA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HskrjQTHtVsKOxc3AhKTql+Wr/0OAstnXmFMD6ONbRE=;
- b=JzPmBqLmCt0bq32eJaoh+9W/EYtx9M9GE8bmcjT0UhHTw73dtN5GzcK9hEGmnP+Pd8Aye8rHNDiXW/zDXVs7QrSEw/X4eukchP6DWp2tYeSg9DXpVhdsaAVQFwqldSpNw/IdJzVqxuP1Nq3YcMT79mm9kJjwOk97rp632sRdFnY=
-Received: from BYAPR12MB3589.namprd12.prod.outlook.com (2603:10b6:a03:df::29)
- by MW3PR12MB4411.namprd12.prod.outlook.com (2603:10b6:303:5e::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6455.32; Mon, 5 Jun
- 2023 08:13:00 +0000
-Received: from BYAPR12MB3589.namprd12.prod.outlook.com
- ([fe80::401e:2e7f:7c2b:6bff]) by BYAPR12MB3589.namprd12.prod.outlook.com
- ([fe80::401e:2e7f:7c2b:6bff%4]) with mapi id 15.20.6455.024; Mon, 5 Jun 2023
- 08:13:00 +0000
-Message-ID: <e337dec6-0b0e-7e53-e38d-ae1791b98418@amd.com>
-Date: Mon, 5 Jun 2023 10:12:52 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: en-US
-To: Min Li <lm0963hack@gmail.com>, alexander.deucher@amd.com
-References: <20230603074345.17907-1-lm0963hack@gmail.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20230603074345.17907-1-lm0963hack@gmail.com>
-X-ClientProxiedBy: FR3P281CA0199.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a5::16) To BYAPR12MB3589.namprd12.prod.outlook.com
- (2603:10b6:a03:df::29)
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=bErdGzNY;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org;
+	dmarc=pass (policy=none) header.from=kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 5525061016;
+	Mon,  5 Jun 2023 09:56:19 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B51EC433D2;
+	Mon,  5 Jun 2023 09:56:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1685958978;
+	bh=E0sAzZZmP5WA1Nwo3dxOCDReq4iq5AIC9EGQphYjTpc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=bErdGzNY2CmDdzKa+JSuXnENnoWBEZhEfN1CjJA42rochcJAzsTmwhQgjeGA7RzKl
+	 h/lT3hAkIPCwG8aXhHAVR+shMKLMbRjbUjGitdmddEBDMzFXDy03jqQa+2ZGCvJpKs
+	 JBYPF5nOf/OBaU+evEXkwRnmc9TtQosKCKHvFGCI+hjlEyBGp+dLIC6gyZnz34tTAX
+	 QgwpmaMeF9yT/D4/t3JtKiz+aUCNuPP7d/augH+oAAY34+2MH2+noUTSRfJhzSI9s2
+	 ZX2zDaKS4KuAic9ukqDgdkfXu6YMIyYuA7NbK/dZVFliyw6lfaBgsb0RI/Hc9wen7l
+	 67FeaF2Sct8vA==
+Date: Mon, 5 Jun 2023 11:56:15 +0200
+From: Maxime Ripard <mripard@kernel.org>
+To: Keith Zhao <keith.zhao@starfivetech.com>
+Message-ID: <ayygsdwzogu4ygkobs7zkroxicxtixtp5bxayn5vzk4qlkwt6x@yo5s2qwt77mo>
+References: <20230602074043.33872-1-keith.zhao@starfivetech.com>
+ <20230602074043.33872-10-keith.zhao@starfivetech.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BYAPR12MB3589:EE_|MW3PR12MB4411:EE_
-X-MS-Office365-Filtering-Correlation-Id: 07e04105-cc5b-4e5a-35c1-08db659cad3b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	GPJLOMH1CmRGCAxkA6+swQI1cAYpQA024v7OEsCsC1L9e3UOen8MhSMJ1rUXaQpQXR7DYmjZVV9uskmToxk9+rguJs2GM1Zx91K0cnL0cBn5YeB+yU5hP03KNwjpr7o0+QNuyKHgIIOVUf8lET1KkCq9cMgrnQGr0r7GGnrFF4USfuYZLmb5cwfzsGGpVykL1haZnikBimpBneuB53H9Djz/09dBqAotAvnVDZGM36xMiQuMZcrz/Fu2/wn4f/vtuGL+9VvrtcXK6+qOz3QZ0Zv8pYQB3TI851A/wQNp2HtbXGJ5dKJBJpLbeJgF1gfs9zPHxE30l1VHMQZv0XibDKfZAgEnb8iJRD6coa3+Jv7g58mu19DWZZMPXX/Gx6C7djgJIN1dDiylFbCqdlIIIZ8Cmsh+xdDvQmSVh2LKFq+6nBcTuZjFkg/T1tsX+7ZGwmDWvxcAUsFFM/LuVQbNYz5u2qKhThEPabw+zc2qZYPdRmleJa056q8CaLxAZA5CpIQofCaM6VbMLVZcY/zyMih6rxLb8qB64X3adqr5lA/xttWMoWC7fX8PiWzMvBZiYMIV+OkhRmfeJN4IWhQYT1yd43xacWI9JnCiFJUi2d1oP6UTktDbNsuXIQWvXd6dL1XssT2zfA6LUUHblCiqHw==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR12MB3589.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(39860400002)(376002)(366004)(346002)(136003)(396003)(451199021)(6506007)(6512007)(31686004)(83380400001)(186003)(2906002)(36756003)(316002)(5660300002)(31696002)(86362001)(41300700001)(8936002)(8676002)(2616005)(6666004)(38100700002)(66556008)(66946007)(66476007)(6636002)(4326008)(66574015)(6486002)(478600001)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?NEM3dWVnMHNPTTZwQUtwOVRManVnN1pablBBcXBNWE1uQ0VmOEdCOUM4S2xF?=
- =?utf-8?B?TUZlQVVTd2ZFNno2ZDJwQ0QzdFJvQmM0ZjAxcGRMTG1XRU95TjRBQnNmczZ5?=
- =?utf-8?B?MmdtczNIWWl5OVE0WDNmRXk4WkZEM3pXSkNBcDFmOFFya29zQXJLZ2tieWht?=
- =?utf-8?B?ZHNsWGlEUHp5VldubkJINEVIdFRQZlJTd0RCRXpWKzZLNHBhdkUwZTVWcUVB?=
- =?utf-8?B?UmNDS0xBTWpXTHNBazlqQSttZml4VVJqOEdMU3IzV2VsZGVEWjJjYVcwTUhV?=
- =?utf-8?B?Zm9MdjRnbXFHYXpmcCtTK250T0h1T09RQ3pUYituR3NGTVEyME9vdUFiTEJW?=
- =?utf-8?B?ZUkwbEJCTk9QTWNUL2JscmxjR0dTTjJ2MWh2UXZ2aW5RZFRmdFc5ZS9rcmFS?=
- =?utf-8?B?MmFLdVBDb2h5M2kzSzZBM0pJOTVYQXNQREZOdmF0cFgyRXljR0tiSE1RcWMz?=
- =?utf-8?B?M2VZaE5iZzJNSXZGSlEzajJzQ1NmclhVQnh0OUMvTVh1bEsyMkxybWNYNk9n?=
- =?utf-8?B?WTJRTEh5K1E0MG9jdk5iT3psSDhYdE9mNmlsMmF0VHdKbElJaU5BVG83VUF0?=
- =?utf-8?B?NTRDT1NnL1FCR2dySUNCUlZnTjAyN1NmWTRsc2IycHNrTUtSc21VMlZxaFNK?=
- =?utf-8?B?RmZ5RFlKWEh0S1lEdWIxMXFMZVI0S25Ec0J1MXBoSWRhQ2pPK1k5Q1dvQlVD?=
- =?utf-8?B?dC9XMU1Oa1p1RGdiVWxhaDRPTHNSUFloeTBlNW1GZnZ5eTNoVnRkZ1Jzc0V4?=
- =?utf-8?B?WUdRVjFWTTVjeVZqWk9NdmlLZEJxMmJTZ2NWVGhPVDJsaDBWQTRpcVc2azNC?=
- =?utf-8?B?TklQTGxPZU4vcG54Mnhrc25hYXpFNTU5NnlWc1ZPZ3JDb2d3QlJaNUN5cEtt?=
- =?utf-8?B?Vnh4K1Z5R3dnYjQ1UU40b3JLNzRxOThselB6Wkl2ZVdnWTNQak5WRytQZGs0?=
- =?utf-8?B?QytCZk1lVS9oQjNDWDBPeEZOU1BEVGpuNHJvTmhMbmJ1U2xlREdicWxxREtT?=
- =?utf-8?B?bTlqRDd0dzNoRFpUSk1lVXo5QmI4cW9XcHkrRTAxOENxb2Y3N2hRdW83WlFI?=
- =?utf-8?B?QkE0TTFmdjhFcUQ1QXVEekdQN0lnUzdGL3lweStrUHk5ODFqbHg5Mm5GYjlm?=
- =?utf-8?B?eGxuRSttZTFjTVA3OWFMdEVRMUNWWURmcG5PN2t4emtGU21iajhMcHEyUmJW?=
- =?utf-8?B?T0NzSzc4ck1WTDc1MWxaMW9ZU1NCNVdrUDY0VW51T1VyQnFvU0RYWGZZRzFC?=
- =?utf-8?B?S0tUZjF2WUVVWlN3QU9ZMkl3elgwNS85dDB0RGRPbnFOeHVwei9Pc2pUUCtj?=
- =?utf-8?B?WDhhRUNxREs5WFZRL2NMNlM1a0xrL05VSFJiV1JtVkhzRFlrNC9PN21FT29D?=
- =?utf-8?B?SVFTNjQzZTQzSlZPbWNWbERRaVhlVGY4RTJCYXlEVDFhOVNaSUR1U0hsR2xW?=
- =?utf-8?B?ZG94ODNSYUZxK0hvdEgyWTZxMDVldFVyOG41NjBtYkczZWp2MG4wY2pVZFNv?=
- =?utf-8?B?RTNadUgwNk11a0tCSXUxczU0Vk5uUExOdzN4TzFZdFdlTDlqWUtsQW9MNHE4?=
- =?utf-8?B?WmJ5d1l3Z0xGclJjZ3JqRG05U1YyR0xtQk9sOWJNaitzQ3RRWm9xZklWd1ZM?=
- =?utf-8?B?bG90S0RpUFVzNzRDZFJVMFZrKzRXUWdMZ1N0ejZYZGlFUmJPbDJzNENzQWRz?=
- =?utf-8?B?Y0d0eFk3c0wzVWpzRW9obS9xNE1CbkMzWm1JUlNmTEVmYU52cDFWWjczd2s1?=
- =?utf-8?B?ZWJ3emdUcHFHdFBEMlJ4QXp1TEVrV1JsSENJV2tUazhTVW90RjdNaUZQY2R6?=
- =?utf-8?B?S1ROcnY0OEhZcmxyQUxiK0xmc1RIbWx6OW5wTXRFU2F3WHh6Q2NhYjduUlFN?=
- =?utf-8?B?dU1ob2VSbTRxVEdGY2Y2SnZ4WFRjK2cyTHZ0VUdQZTFyM2xYN2pPWWF6Rllx?=
- =?utf-8?B?YXBPeXlzUXhyeDEweWxjV245QVVUL0tLY0VURWxKUk5GQUY3aExyV056WThT?=
- =?utf-8?B?THVGaCs5S1gzNkxoYWg2NjFMTE5zdE9RcmhhbjduNjhyU0xac3h0NkhRRFEw?=
- =?utf-8?B?dmVoMnJuWE5tZlV6em8zYitRNlR0ZkYwajlVNkhLQ0dyRE9RbjJyNHg3SXo5?=
- =?utf-8?B?a2s1bXNOc0RKMDhVZ0pNMWlLOUJXNzFyNXNGODBKeGkyQThpaGtscGF0NTA0?=
- =?utf-8?Q?0YWAKChRb6mvxZi+U8gh7pgXkN3P1OcSSMHJVPcON55e?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 07e04105-cc5b-4e5a-35c1-08db659cad3b
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR12MB3589.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Jun 2023 08:13:00.2127
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ame2J5l14sSzO+urw3TissM/LGlgzlb71KTWjl07qOYfsTcf7SAyqNE8SF8Ns0KZ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR12MB4411
-X-Spamd-Result: default: False [-5.00 / 15.00];
+In-Reply-To: <20230602074043.33872-10-keith.zhao@starfivetech.com>
+X-Spamd-Result: default: False [-4.10 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
-	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[amd.com,gmail.com,ffwll.ch,linaro.org,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
+	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org];
 	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,amd.com];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.243.53:from];
-	TO_DN_SOME(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
 	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,lists.infradead.org,lists.linaro.org,gmail.com,ffwll.ch,kernel.org,linaro.org,esmil.dk,sifive.com,dabbelt.com,eecs.berkeley.edu,linux.intel.com,suse.de,pengutronix.de,amd.com,sntech.de,edgeble.ai,hotmail.com,starfivetech.com];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	BLOCKLISTDE_FAIL(0.00)[139.178.84.217:server fail,52.25.139.140:query timed out];
+	DKIM_TRACE(0.00)[kernel.org:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DKIM_TRACE(0.00)[amd.com:+];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[29];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[dt];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 8B7F23EBFD
-X-Spamd-Bar: -----
-Message-ID-Hash: UL64CAHBDIPPIIXG5ES5C6A7L22DQYMU
-X-Message-ID-Hash: UL64CAHBDIPPIIXG5ES5C6A7L22DQYMU
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Xinhui.Pan@amd.com, daniel@ffwll.ch, sumit.semwal@linaro.org, amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+X-Rspamd-Queue-Id: A4B4D3EBCA
+X-Spamd-Bar: ----
+X-MailFrom: mripard@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+Message-ID-Hash: 7OFF4R7W5JIH24X42ROFCUQ53X53OEFG
+X-Message-ID-Hash: 7OFF4R7W5JIH24X42ROFCUQ53X53OEFG
+X-Mailman-Approved-At: Mon, 05 Jun 2023 15:06:37 +0000
+CC: dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Daniel Vetter <daniel@ffwll.ch>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Emil Renner Berthing <kernel@esmil.dk>, Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, Philipp Zabel <p.zabel@pengutronix.de>, Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com, Bjorn Andersson <andersson@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Shawn Guo <shawnguo@kernel.org>, Jagan Teki <jagan@edgeble.ai>, Chris Morgan <macromorgan@hotmail.com>, Jack Zhu <jack.zhu@starfivetech.com>, Shengyang Chen <shengyang.chen@starfivetech.com>, Changhuang Liang <changhuan
+ g.liang@starfivetech.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] drm/radeon: fix race condition UAF in radeon_gem_set_domain_ioctl
+Subject: [Linaro-mm-sig] Re: [PATCH 9/9] drm/verisilicon: Add starfive hdmi driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UL64CAHBDIPPIIXG5ES5C6A7L22DQYMU/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7OFF4R7W5JIH24X42ROFCUQ53X53OEFG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============7323937904660107760=="
 
-QW0gMDMuMDYuMjMgdW0gMDk6NDMgc2NocmllYiBNaW4gTGk6DQo+IFVzZXJzcGFjZSBjYW4gcmFj
-ZSB0byBmcmVlIHRoZSBnb2JqKHJvYmogY29udmVydGVkIGZyb20pLCByb2JqIHNob3VsZCBub3QN
-Cj4gYmUgYWNjZXNzZWQgYWdhaW4gYWZ0ZXIgZHJtX2dlbV9vYmplY3RfcHV0LCBvdGhlcndpdGgg
-aXQgd2lsbCByZXN1bHQgaW4NCj4gdXNlLWFmdGVyLWZyZWUuDQo+DQo+IFNpZ25lZC1vZmYtYnk6
-IE1pbiBMaSA8bG0wOTYzaGFja0BnbWFpbC5jb20+DQoNClJldmlld2VkLWJ5OiBDaHJpc3RpYW4g
-S8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQoNCj4gLS0tDQo+IENoYW5nZXMgaW4g
-djI6DQo+IC0gUmVtb3ZlIHVudXNlZCByb2JqLCBhdm9pZCBjb21waWxlIGNvbXBsYWluDQo+DQo+
-ICAgZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fZ2VtLmMgfCA0ICstLS0NCj4gICAxIGZp
-bGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDMgZGVsZXRpb25zKC0pDQo+DQo+IGRpZmYgLS1n
-aXQgYS9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9nZW0uYyBiL2RyaXZlcnMvZ3B1L2Ry
-bS9yYWRlb24vcmFkZW9uX2dlbS5jDQo+IGluZGV4IGJkYzVhZjIzZjAwNS4uZDNmNWRkYmMxNzA0
-IDEwMDY0NA0KPiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9nZW0uYw0KPiAr
-KysgYi9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3JhZGVvbl9nZW0uYw0KPiBAQCAtNDU5LDcgKzQ1
-OSw2IEBAIGludCByYWRlb25fZ2VtX3NldF9kb21haW5faW9jdGwoc3RydWN0IGRybV9kZXZpY2Ug
-KmRldiwgdm9pZCAqZGF0YSwNCj4gICAJc3RydWN0IHJhZGVvbl9kZXZpY2UgKnJkZXYgPSBkZXYt
-PmRldl9wcml2YXRlOw0KPiAgIAlzdHJ1Y3QgZHJtX3JhZGVvbl9nZW1fc2V0X2RvbWFpbiAqYXJn
-cyA9IGRhdGE7DQo+ICAgCXN0cnVjdCBkcm1fZ2VtX29iamVjdCAqZ29iajsNCj4gLQlzdHJ1Y3Qg
-cmFkZW9uX2JvICpyb2JqOw0KPiAgIAlpbnQgcjsNCj4gICANCj4gICAJLyogZm9yIG5vdyBpZiBz
-b21lb25lIHJlcXVlc3RzIGRvbWFpbiBDUFUgLQ0KPiBAQCAtNDcyLDEzICs0NzEsMTIgQEAgaW50
-IHJhZGVvbl9nZW1fc2V0X2RvbWFpbl9pb2N0bChzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LCB2b2lk
-ICpkYXRhLA0KPiAgIAkJdXBfcmVhZCgmcmRldi0+ZXhjbHVzaXZlX2xvY2spOw0KPiAgIAkJcmV0
-dXJuIC1FTk9FTlQ7DQo+ICAgCX0NCj4gLQlyb2JqID0gZ2VtX3RvX3JhZGVvbl9ibyhnb2JqKTsN
-Cj4gICANCj4gICAJciA9IHJhZGVvbl9nZW1fc2V0X2RvbWFpbihnb2JqLCBhcmdzLT5yZWFkX2Rv
-bWFpbnMsIGFyZ3MtPndyaXRlX2RvbWFpbik7DQo+ICAgDQo+ICAgCWRybV9nZW1fb2JqZWN0X3B1
-dChnb2JqKTsNCj4gICAJdXBfcmVhZCgmcmRldi0+ZXhjbHVzaXZlX2xvY2spOw0KPiAtCXIgPSBy
-YWRlb25fZ2VtX2hhbmRsZV9sb2NrdXAocm9iai0+cmRldiwgcik7DQo+ICsJciA9IHJhZGVvbl9n
-ZW1faGFuZGxlX2xvY2t1cChyZGV2LCByKTsNCj4gICAJcmV0dXJuIHI7DQo+ICAgfQ0KPiAgIA0K
-DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8t
-bW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8g
-dW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxp
-bmFyby5vcmcK
+
+--===============7323937904660107760==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="c3ccdoac5xz7n6if"
+Content-Disposition: inline
+
+
+--c3ccdoac5xz7n6if
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Fri, Jun 02, 2023 at 03:40:43PM +0800, Keith Zhao wrote:
+> Add HDMI dirver for StarFive SoC JH7110.
+>=20
+> Signed-off-by: Keith Zhao <keith.zhao@starfivetech.com>
+
+I have a few high level comments:
+
+> +static int starfive_hdmi_setup(struct starfive_hdmi *hdmi,
+> +			       struct drm_display_mode *mode)
+> +{
+> +	hdmi_modb(hdmi, STARFIVE_BIAS_CONTROL, STARFIVE_BIAS_ENABLE, STARFIVE_B=
+IAS_ENABLE);
+> +	hdmi_writeb(hdmi, STARFIVE_RX_CONTROL, STARFIVE_RX_ENABLE);
+> +	hdmi->hdmi_data.vic =3D drm_match_cea_mode(mode);
+> +
+> +	hdmi->tmds_rate =3D mode->clock * 1000;
+> +	starfive_hdmi_phy_clk_set_rate(hdmi);
+> +
+> +	while (!(hdmi_readb(hdmi, STARFIVE_PRE_PLL_LOCK_STATUS) & 0x1))
+> +		continue;
+> +	while (!(hdmi_readb(hdmi, STARFIVE_POST_PLL_LOCK_STATUS) & 0x1))
+> +		continue;
+> +
+> +	/*turn on LDO*/
+> +	hdmi_writeb(hdmi, STARFIVE_LDO_CONTROL, STARFIVE_LDO_ENABLE);
+> +	/*turn on serializer*/
+> +	hdmi_writeb(hdmi, STARFIVE_SERIALIER_CONTROL, STARFIVE_SERIALIER_ENABLE=
+);
+> +
+> +	starfive_hdmi_tx_phy_power_down(hdmi);
+> +	starfive_hdmi_config_video_timing(hdmi, mode);
+> +	starfive_hdmi_tx_phy_power_on(hdmi);
+> +
+> +	starfive_hdmi_tmds_driver_on(hdmi);
+> +	starfive_hdmi_sync_tmds(hdmi);
+> +
+> +	return 0;
+> +}
+
+The PHY PLL supports rate until 594MHz, but I don't see any scrambler
+setup here?
+
+> +static void starfive_hdmi_encoder_mode_set(struct drm_encoder *encoder,
+> +					   struct drm_display_mode *mode,
+> +					   struct drm_display_mode *adj_mode)
+> +{
+> +	struct starfive_hdmi *hdmi =3D encoder_to_hdmi(encoder);
+> +
+> +	starfive_hdmi_setup(hdmi, adj_mode);
+
+You should put that call into the enable callback, there's no need to
+power it up at that point.
+
+> +	memcpy(&hdmi->previous_mode, adj_mode, sizeof(hdmi->previous_mode));
+
+You don't seem to be using that anywhere, and it's not the previous but
+the current mode.
+
+> +}
+> +
+> +static void starfive_hdmi_encoder_enable(struct drm_encoder *encoder)
+> +{
+> +	struct starfive_hdmi *hdmi =3D encoder_to_hdmi(encoder);
+> +
+> +	pm_runtime_get_sync(hdmi->dev);
+> +}
+> +
+> +static void starfive_hdmi_encoder_disable(struct drm_encoder *encoder)
+> +{
+> +	struct starfive_hdmi *hdmi =3D encoder_to_hdmi(encoder);
+> +
+> +	pm_runtime_put(hdmi->dev);
+> +}
+> +
+> +static bool starfive_hdmi_encoder_mode_fixup(struct drm_encoder *encoder,
+> +					     const struct drm_display_mode *mode,
+> +					     struct drm_display_mode *adj_mode)
+> +{
+> +	return true;
+> +}
+
+You can drop that one
+
+> +static int
+> +starfive_hdmi_encoder_atomic_check(struct drm_encoder *encoder,
+> +				   struct drm_crtc_state *crtc_state,
+> +				   struct drm_connector_state *conn_state)
+> +{
+> +	return 0;
+> +}
+
+Ditto
+
+> +static int starfive_hdmi_connector_get_modes(struct drm_connector *conne=
+ctor)
+> +{
+> +	struct starfive_hdmi *hdmi =3D connector_to_hdmi(connector);
+> +	struct edid *edid;
+> +	int ret =3D 0;
+> +
+> +	if (!hdmi->ddc)
+> +		return 0;
+> +
+> +	edid =3D drm_get_edid(connector, hdmi->ddc);
+> +	if (edid) {
+> +		hdmi->hdmi_data.sink_is_hdmi =3D drm_detect_hdmi_monitor(edid);
+> +		hdmi->hdmi_data.sink_has_audio =3D drm_detect_monitor_audio(edid);
+> +		drm_connector_update_edid_property(connector, edid);
+> +		ret =3D drm_add_edid_modes(connector, edid);
+> +		kfree(edid);
+> +	}
+> +
+> +	return ret;
+> +}
+
+get_modes can be called while the connector is inactive, you need to
+call pm_runtime_get_sync / pm_runtime_put here
+
+> +static enum drm_mode_status
+> +starfive_hdmi_connector_mode_valid(struct drm_connector *connector,
+> +				   struct drm_display_mode *mode)
+> +{
+> +	const struct pre_pll_config *cfg =3D pre_pll_cfg_table;
+> +	int pclk =3D mode->clock * 1000;
+> +	bool valid =3D false;
+> +	int i;
+> +
+> +	for (i =3D 0; cfg[i].pixclock !=3D (~0UL); i++) {
+> +		if (pclk =3D=3D cfg[i].pixclock) {
+> +			if (pclk > 297000000)
+> +				continue;
+> +
+> +			valid =3D true;
+> +			break;
+> +		}
+> +	}
+> +
+> +	return (valid) ? MODE_OK : MODE_BAD;
+> +}
+
+So I guess that's why you don't bother with the scrambler, you filter
+all the modes > 297MHz?
+
+If so, you also need to make sure it happens in atomic_check. mode_valid
+will only filter the modes exposed to userspace, but the userspace is
+free to send any mode it wants and that's checked by atomic_check.
+
+> +
+> +static int
+> +starfive_hdmi_probe_single_connector_modes(struct drm_connector *connect=
+or,
+> +					   u32 maxX, u32 maxY)
+> +{
+> +	struct starfive_hdmi *hdmi =3D connector_to_hdmi(connector);
+> +	int ret;
+> +
+> +	pm_runtime_get_sync(hdmi->dev);
+> +
+> +	ret =3D drm_helper_probe_single_connector_modes(connector, 3840, 2160);
+> +
+> +	pm_runtime_put(hdmi->dev);
+> +
+> +	return ret;
+> +}
+
+You already have a pm_runtime_get_sync call in get_modes, why is that
+necessary?
+
+> +
+> +static void starfive_hdmi_connector_destroy(struct drm_connector *connec=
+tor)
+> +{
+> +	drm_connector_unregister(connector);
+> +	drm_connector_cleanup(connector);
+> +}
+
+Use drmm_connector_init.
+
+> +static irqreturn_t starfive_hdmi_irq(int irq, void *dev_id)
+> +{
+> +	struct starfive_hdmi *hdmi =3D dev_id;
+> +
+> +	drm_helper_hpd_irq_event(hdmi->connector.dev);
+
+drm_connector_helper_hpd_irq_event()
+
+> +static int starfive_hdmi_get_clk_rst(struct device *dev, struct starfive=
+_hdmi *hdmi)
+> +{
+> +	hdmi->sys_clk =3D devm_clk_get(dev, "sysclk");
+> +	if (IS_ERR(hdmi->sys_clk)) {
+> +		DRM_DEV_ERROR(dev, "Unable to get HDMI sysclk clk\n");
+> +		return PTR_ERR(hdmi->sys_clk);
+> +	}
+> +	hdmi->mclk =3D devm_clk_get(dev, "mclk");
+> +	if (IS_ERR(hdmi->mclk)) {
+> +		DRM_DEV_ERROR(dev, "Unable to get HDMI mclk clk\n");
+> +		return PTR_ERR(hdmi->mclk);
+> +	}
+> +	hdmi->bclk =3D devm_clk_get(dev, "bclk");
+> +	if (IS_ERR(hdmi->bclk)) {
+> +		DRM_DEV_ERROR(dev, "Unable to get HDMI bclk clk\n");
+> +		return PTR_ERR(hdmi->bclk);
+> +	}
+> +	hdmi->tx_rst =3D reset_control_get_shared(dev, "hdmi_tx");
+> +	if (IS_ERR(hdmi->tx_rst)) {
+> +		DRM_DEV_ERROR(dev, "Unable to get HDMI tx rst\n");
+> +		return PTR_ERR(hdmi->tx_rst);
+> +	}
+
+That one isn't device-managed, you'll need to put back the reference in
+unbind.
+
+> +	return 0;
+> +}
+> +
+> +static int starfive_hdmi_bind(struct device *dev, struct device *master,
+> +			      void *data)
+> +{
+> +	struct platform_device *pdev =3D to_platform_device(dev);
+> +	struct drm_device *drm =3D data;
+> +	struct starfive_hdmi *hdmi;
+> +	struct resource *iores;
+> +	int irq;
+> +	int ret;
+> +
+> +	hdmi =3D devm_kzalloc(dev, sizeof(*hdmi), GFP_KERNEL);
+> +	if (!hdmi)
+> +		return -ENOMEM;
+
+Using device-managed actions to allocate memory that will eventually
+hold the connectors and encoders is unsafe.
+
+Please use drmm_kzalloc here, and test that it all works fine by
+enabling KASAN and removing the module.
+
+> +
+> +	hdmi->dev =3D dev;
+> +	hdmi->drm_dev =3D drm;
+> +
+> +	iores =3D platform_get_resource(pdev, IORESOURCE_MEM, 0);
+> +	hdmi->regs =3D devm_ioremap_resource(dev, iores);
+> +	if (IS_ERR(hdmi->regs))
+> +		return PTR_ERR(hdmi->regs);
+
+The main issue I was mentioning above is that whenever the device is
+unbound from its driver, all the device-managed actions are executed.
+
+However, the KMS device will still be there until the last (userspace)
+user closes its FD, so if anything happens between the time the module
+is removed and the FD is closed, you get plenty of use-after-free errors.
+
+For MMIO accesses, this is even more true since you need to use a
+device-managed action for the registers mapping (this is true for any
+resource tied to the device itself, so clocks, reset, etc. fit that
+description too).
+
+To protect against it, you need to protect any device access by a call
+to drm_dev_enter/drm_dev_exit.
+
+> +
+> +	ret =3D starfive_hdmi_get_clk_rst(dev, hdmi);
+> +	ret =3D starfive_hdmi_enable_clk_deassert_rst(dev, hdmi);
+
+Why does the device need to be powered here?
+
+> +	irq =3D platform_get_irq(pdev, 0);
+> +	if (irq < 0) {
+> +		ret =3D irq;
+> +		goto err_disable_clk;
+> +	}
+> +
+> +	hdmi->ddc =3D starfive_hdmi_i2c_adapter(hdmi);
+> +	if (IS_ERR(hdmi->ddc)) {
+> +		ret =3D PTR_ERR(hdmi->ddc);
+> +		hdmi->ddc =3D NULL;
+> +		goto err_disable_clk;
+> +	}
+> +
+> +	hdmi->tmds_rate =3D clk_get_rate(hdmi->sys_clk);
+
+It's not clear to me what tmds_rate is here, wouldn't that change from
+one mode to the next?
+
+> +	starfive_hdmi_i2c_init(hdmi);
+> +
+> +	ret =3D starfive_hdmi_register(drm, hdmi);
+> +	if (ret)
+> +		goto err_put_adapter;
+> +
+> +	dev_set_drvdata(dev, hdmi);
+> +
+> +	/* Unmute hotplug interrupt */
+> +	hdmi_modb(hdmi, HDMI_STATUS, m_MASK_INT_HOTPLUG, v_MASK_INT_HOTPLUG(1));
+> +
+> +	ret =3D devm_request_threaded_irq(dev, irq, starfive_hdmi_hardirq,
+> +					starfive_hdmi_irq, IRQF_SHARED,
+> +					dev_name(dev), hdmi);
+> +	if (ret < 0)
+> +		goto err_cleanup_hdmi;
+> +
+> +	pm_runtime_use_autosuspend(&pdev->dev);
+> +	pm_runtime_set_autosuspend_delay(&pdev->dev, 500);
+
+Autosuspend? Shouldn't we enable the device as long as there is an
+active video output (and you have that covered already)?
+
+> +	pm_runtime_enable(&pdev->dev);
+> +
+> +	starfive_hdmi_disable_clk_assert_rst(dev, hdmi);
+
+It would be clearer if you would move
+starfive_hdmi_enable_clk_deassert_rst()/disable_clk_assert_rst() into
+runtime_resume/runtime_suspend, and then in you bind just call
+pm_runtime_enable(), pm_runtime_get_sync(), do the registration, and
+pm_runtime_put.
+
+> +#define UPDATE(x, h, l)\
+> +({\
+> +	typeof(x) x_ =3D (x);\
+> +	typeof(h) h_ =3D (h);\
+> +	typeof(l) l_ =3D (l);\
+> +	(((x_) << (l_)) & GENMASK((h_), (l_)));\
+> +})
+
+That's FIELD_PREP, right?
+Maxime
+
+--c3ccdoac5xz7n6if
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZH2xPwAKCRDj7w1vZxhR
+xRFAAP0f3J6Tu7GQHeZqx5luoDhXXLf8/1gmqshwjcYtEt7awgEAoRRjwu25Pah9
+m5eSDewNpcJYQHuxezva0a9w+5vmPQk=
+=BH5E
+-----END PGP SIGNATURE-----
+
+--c3ccdoac5xz7n6if--
+
+--===============7323937904660107760==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============7323937904660107760==--
