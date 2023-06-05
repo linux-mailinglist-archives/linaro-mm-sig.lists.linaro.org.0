@@ -2,456 +2,138 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 35EC1722A48
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  5 Jun 2023 17:08:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A236A722ADE
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  5 Jun 2023 17:22:16 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 41FAE43BEA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  5 Jun 2023 15:08:35 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id A4B4D3EBCA
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  5 Jun 2023 09:56:19 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A09503EBFD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  5 Jun 2023 15:22:15 +0000 (UTC)
+Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com [209.85.167.177])
+	by lists.linaro.org (Postfix) with ESMTPS id B2F6A3E94C
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  5 Jun 2023 15:22:09 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=bErdGzNY;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org;
-	dmarc=pass (policy=none) header.from=kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id 5525061016;
-	Mon,  5 Jun 2023 09:56:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3B51EC433D2;
-	Mon,  5 Jun 2023 09:56:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1685958978;
-	bh=E0sAzZZmP5WA1Nwo3dxOCDReq4iq5AIC9EGQphYjTpc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=bErdGzNY2CmDdzKa+JSuXnENnoWBEZhEfN1CjJA42rochcJAzsTmwhQgjeGA7RzKl
-	 h/lT3hAkIPCwG8aXhHAVR+shMKLMbRjbUjGitdmddEBDMzFXDy03jqQa+2ZGCvJpKs
-	 JBYPF5nOf/OBaU+evEXkwRnmc9TtQosKCKHvFGCI+hjlEyBGp+dLIC6gyZnz34tTAX
-	 QgwpmaMeF9yT/D4/t3JtKiz+aUCNuPP7d/augH+oAAY34+2MH2+noUTSRfJhzSI9s2
-	 ZX2zDaKS4KuAic9ukqDgdkfXu6YMIyYuA7NbK/dZVFliyw6lfaBgsb0RI/Hc9wen7l
-	 67FeaF2Sct8vA==
-Date: Mon, 5 Jun 2023 11:56:15 +0200
-From: Maxime Ripard <mripard@kernel.org>
-To: Keith Zhao <keith.zhao@starfivetech.com>
-Message-ID: <ayygsdwzogu4ygkobs7zkroxicxtixtp5bxayn5vzk4qlkwt6x@yo5s2qwt77mo>
-References: <20230602074043.33872-1-keith.zhao@starfivetech.com>
- <20230602074043.33872-10-keith.zhao@starfivetech.com>
+	dkim=pass header.d=gmail.com header.s=20221208 header.b=PmI2vPsn;
+	spf=pass (lists.linaro.org: domain of alexdeucher@gmail.com designates 209.85.167.177 as permitted sender) smtp.mailfrom=alexdeucher@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-oi1-f177.google.com with SMTP id 5614622812f47-394c7ba4cb5so3401240b6e.1
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 05 Jun 2023 08:22:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1685978529; x=1688570529;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ownFhAOJ49PkdCY/ElX6rAxTLNeHPzeq4mznvKgyoCM=;
+        b=PmI2vPsng+rdUr3wY1rs4RCuBu6dzmI7/2gJjL9H+RgWI+JJhWKnCseHxLxsGLSYt+
+         VI5l2Oyo3052z/uTfpJi3wPv674gduL/0ctQmP1cnvXkIneLoi/k8xqBkCH6+wQ1p/nh
+         2z/9JOBkiVHtKHskN+Ph40moVJhs+PEWR5AOhRNN7VV5UkCHv1bxRqjJ9D036msS6Ji/
+         evOHJ8N/U1op0XQt6YMHnorGrSSOWBNwZD12hH8JnyJFowUh3ed77YHLxHoDWDaZlXgF
+         a1K5icKxJjEptcjjelAProwntmsYZ4Eym7hd+BC4GHy5U4gwuNLv91PyMFtkpCGjL9Ij
+         4bGw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1685978529; x=1688570529;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ownFhAOJ49PkdCY/ElX6rAxTLNeHPzeq4mznvKgyoCM=;
+        b=NhAOW5UouB15utvLBgtZsq1fv5I6pUqfGDA5L22DeX6AljmY0vapCvZhyonN1oILpR
+         obJ0VM9QakV4dHpDqazCbIYIVjVKoeqUdHas0pHcotYKTUQjzWSfI4BK6Mxfh47XXdMI
+         0YJGeJZ1j3VmzNSAIEEHWPg4UUiS9iYaaeIWsai74ro8Kplc/nJ7z4ET+T+0OIxw5Xhm
+         TI7WIDYvbf0yHiXXXOG9aOnroXqbog1UEXuzYkp49+KkraZ/SCGPoqTdy0DjbSIWZ+I/
+         imt4e50DFn3zN7Qa6TIv3jbHeKjsUaNOgXTarLbhksRdWfMp3JCXfhXx0vD+6FzBuVGs
+         TzQA==
+X-Gm-Message-State: AC+VfDwbrg1sUGvl0JY4R2OVf9807UJ0/J/XlfB3NJRijpmxHWyO+Ddp
+	LO71PUSDH20Uqa60jO0ccg1wQa6I27h/7E7QN6Y=
+X-Google-Smtp-Source: ACHHUZ6UGZNvBqYMQ3/CqE2fGvsTmTRJM2EW2RZ/4t9luyD1O0fKQABDsXBaz/nEdC+C/lqa8j6+9PDMqZEFFXOnXHE=
+X-Received: by 2002:a54:4598:0:b0:39a:bc50:db96 with SMTP id
+ z24-20020a544598000000b0039abc50db96mr2647242oib.41.1685978529045; Mon, 05
+ Jun 2023 08:22:09 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20230602074043.33872-10-keith.zhao@starfivetech.com>
-X-Spamd-Result: default: False [-4.10 / 15.00];
+References: <20230603074345.17907-1-lm0963hack@gmail.com> <e337dec6-0b0e-7e53-e38d-ae1791b98418@amd.com>
+In-Reply-To: <e337dec6-0b0e-7e53-e38d-ae1791b98418@amd.com>
+From: Alex Deucher <alexdeucher@gmail.com>
+Date: Mon, 5 Jun 2023 11:21:58 -0400
+Message-ID: <CADnq5_N=enSchma5R7d8q9t8SkJ_Z7oFxDFHp3a+ypqenO=DYA@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+X-Spamd-Result: default: False [-8.00 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20221208];
+	MIME_GOOD(-0.10)[text/plain];
+	RCVD_COUNT_ONE(0.00)[1];
+	NEURAL_HAM(-0.00)[-0.963];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_CC(0.00)[lists.freedesktop.org,vger.kernel.org,lists.infradead.org,lists.linaro.org,gmail.com,ffwll.ch,kernel.org,linaro.org,esmil.dk,sifive.com,dabbelt.com,eecs.berkeley.edu,linux.intel.com,suse.de,pengutronix.de,amd.com,sntech.de,edgeble.ai,hotmail.com,starfivetech.com];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	BLOCKLISTDE_FAIL(0.00)[139.178.84.217:server fail,52.25.139.140:query timed out];
-	DKIM_TRACE(0.00)[kernel.org:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[29];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[gmail.com,amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,linaro.org];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	BLOCKLISTDE_FAIL(0.00)[209.85.167.177:server fail];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2]
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.177:from]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: A4B4D3EBCA
-X-Spamd-Bar: ----
-X-MailFrom: mripard@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 7OFF4R7W5JIH24X42ROFCUQ53X53OEFG
-X-Message-ID-Hash: 7OFF4R7W5JIH24X42ROFCUQ53X53OEFG
-X-Mailman-Approved-At: Mon, 05 Jun 2023 15:06:37 +0000
-CC: dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Daniel Vetter <daniel@ffwll.ch>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Emil Renner Berthing <kernel@esmil.dk>, Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, Philipp Zabel <p.zabel@pengutronix.de>, Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com, Bjorn Andersson <andersson@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Shawn Guo <shawnguo@kernel.org>, Jagan Teki <jagan@edgeble.ai>, Chris Morgan <macromorgan@hotmail.com>, Jack Zhu <jack.zhu@starfivetech.com>, Shengyang Chen <shengyang.chen@starfivetech.com>, Changhuang Liang <changhuan
- g.liang@starfivetech.com>
+X-Rspamd-Queue-Id: B2F6A3E94C
+X-Spamd-Bar: --------
+Message-ID-Hash: LCFXYKNH7QSTPPFAPO7GQJF6FKFESZOQ
+X-Message-ID-Hash: LCFXYKNH7QSTPPFAPO7GQJF6FKFESZOQ
+X-MailFrom: alexdeucher@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Min Li <lm0963hack@gmail.com>, alexander.deucher@amd.com, Xinhui.Pan@amd.com, linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org, sumit.semwal@linaro.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 9/9] drm/verisilicon: Add starfive hdmi driver
+Subject: [Linaro-mm-sig] Re: [PATCH v2] drm/radeon: fix race condition UAF in radeon_gem_set_domain_ioctl
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7OFF4R7W5JIH24X42ROFCUQ53X53OEFG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LCFXYKNH7QSTPPFAPO7GQJF6FKFESZOQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============7323937904660107760=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-
---===============7323937904660107760==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="c3ccdoac5xz7n6if"
-Content-Disposition: inline
-
-
---c3ccdoac5xz7n6if
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Fri, Jun 02, 2023 at 03:40:43PM +0800, Keith Zhao wrote:
-> Add HDMI dirver for StarFive SoC JH7110.
->=20
-> Signed-off-by: Keith Zhao <keith.zhao@starfivetech.com>
-
-I have a few high level comments:
-
-> +static int starfive_hdmi_setup(struct starfive_hdmi *hdmi,
-> +			       struct drm_display_mode *mode)
-> +{
-> +	hdmi_modb(hdmi, STARFIVE_BIAS_CONTROL, STARFIVE_BIAS_ENABLE, STARFIVE_B=
-IAS_ENABLE);
-> +	hdmi_writeb(hdmi, STARFIVE_RX_CONTROL, STARFIVE_RX_ENABLE);
-> +	hdmi->hdmi_data.vic =3D drm_match_cea_mode(mode);
-> +
-> +	hdmi->tmds_rate =3D mode->clock * 1000;
-> +	starfive_hdmi_phy_clk_set_rate(hdmi);
-> +
-> +	while (!(hdmi_readb(hdmi, STARFIVE_PRE_PLL_LOCK_STATUS) & 0x1))
-> +		continue;
-> +	while (!(hdmi_readb(hdmi, STARFIVE_POST_PLL_LOCK_STATUS) & 0x1))
-> +		continue;
-> +
-> +	/*turn on LDO*/
-> +	hdmi_writeb(hdmi, STARFIVE_LDO_CONTROL, STARFIVE_LDO_ENABLE);
-> +	/*turn on serializer*/
-> +	hdmi_writeb(hdmi, STARFIVE_SERIALIER_CONTROL, STARFIVE_SERIALIER_ENABLE=
-);
-> +
-> +	starfive_hdmi_tx_phy_power_down(hdmi);
-> +	starfive_hdmi_config_video_timing(hdmi, mode);
-> +	starfive_hdmi_tx_phy_power_on(hdmi);
-> +
-> +	starfive_hdmi_tmds_driver_on(hdmi);
-> +	starfive_hdmi_sync_tmds(hdmi);
-> +
-> +	return 0;
-> +}
-
-The PHY PLL supports rate until 594MHz, but I don't see any scrambler
-setup here?
-
-> +static void starfive_hdmi_encoder_mode_set(struct drm_encoder *encoder,
-> +					   struct drm_display_mode *mode,
-> +					   struct drm_display_mode *adj_mode)
-> +{
-> +	struct starfive_hdmi *hdmi =3D encoder_to_hdmi(encoder);
-> +
-> +	starfive_hdmi_setup(hdmi, adj_mode);
-
-You should put that call into the enable callback, there's no need to
-power it up at that point.
-
-> +	memcpy(&hdmi->previous_mode, adj_mode, sizeof(hdmi->previous_mode));
-
-You don't seem to be using that anywhere, and it's not the previous but
-the current mode.
-
-> +}
-> +
-> +static void starfive_hdmi_encoder_enable(struct drm_encoder *encoder)
-> +{
-> +	struct starfive_hdmi *hdmi =3D encoder_to_hdmi(encoder);
-> +
-> +	pm_runtime_get_sync(hdmi->dev);
-> +}
-> +
-> +static void starfive_hdmi_encoder_disable(struct drm_encoder *encoder)
-> +{
-> +	struct starfive_hdmi *hdmi =3D encoder_to_hdmi(encoder);
-> +
-> +	pm_runtime_put(hdmi->dev);
-> +}
-> +
-> +static bool starfive_hdmi_encoder_mode_fixup(struct drm_encoder *encoder,
-> +					     const struct drm_display_mode *mode,
-> +					     struct drm_display_mode *adj_mode)
-> +{
-> +	return true;
-> +}
-
-You can drop that one
-
-> +static int
-> +starfive_hdmi_encoder_atomic_check(struct drm_encoder *encoder,
-> +				   struct drm_crtc_state *crtc_state,
-> +				   struct drm_connector_state *conn_state)
-> +{
-> +	return 0;
-> +}
-
-Ditto
-
-> +static int starfive_hdmi_connector_get_modes(struct drm_connector *conne=
-ctor)
-> +{
-> +	struct starfive_hdmi *hdmi =3D connector_to_hdmi(connector);
-> +	struct edid *edid;
-> +	int ret =3D 0;
-> +
-> +	if (!hdmi->ddc)
-> +		return 0;
-> +
-> +	edid =3D drm_get_edid(connector, hdmi->ddc);
-> +	if (edid) {
-> +		hdmi->hdmi_data.sink_is_hdmi =3D drm_detect_hdmi_monitor(edid);
-> +		hdmi->hdmi_data.sink_has_audio =3D drm_detect_monitor_audio(edid);
-> +		drm_connector_update_edid_property(connector, edid);
-> +		ret =3D drm_add_edid_modes(connector, edid);
-> +		kfree(edid);
-> +	}
-> +
-> +	return ret;
-> +}
-
-get_modes can be called while the connector is inactive, you need to
-call pm_runtime_get_sync / pm_runtime_put here
-
-> +static enum drm_mode_status
-> +starfive_hdmi_connector_mode_valid(struct drm_connector *connector,
-> +				   struct drm_display_mode *mode)
-> +{
-> +	const struct pre_pll_config *cfg =3D pre_pll_cfg_table;
-> +	int pclk =3D mode->clock * 1000;
-> +	bool valid =3D false;
-> +	int i;
-> +
-> +	for (i =3D 0; cfg[i].pixclock !=3D (~0UL); i++) {
-> +		if (pclk =3D=3D cfg[i].pixclock) {
-> +			if (pclk > 297000000)
-> +				continue;
-> +
-> +			valid =3D true;
-> +			break;
-> +		}
-> +	}
-> +
-> +	return (valid) ? MODE_OK : MODE_BAD;
-> +}
-
-So I guess that's why you don't bother with the scrambler, you filter
-all the modes > 297MHz?
-
-If so, you also need to make sure it happens in atomic_check. mode_valid
-will only filter the modes exposed to userspace, but the userspace is
-free to send any mode it wants and that's checked by atomic_check.
-
-> +
-> +static int
-> +starfive_hdmi_probe_single_connector_modes(struct drm_connector *connect=
-or,
-> +					   u32 maxX, u32 maxY)
-> +{
-> +	struct starfive_hdmi *hdmi =3D connector_to_hdmi(connector);
-> +	int ret;
-> +
-> +	pm_runtime_get_sync(hdmi->dev);
-> +
-> +	ret =3D drm_helper_probe_single_connector_modes(connector, 3840, 2160);
-> +
-> +	pm_runtime_put(hdmi->dev);
-> +
-> +	return ret;
-> +}
-
-You already have a pm_runtime_get_sync call in get_modes, why is that
-necessary?
-
-> +
-> +static void starfive_hdmi_connector_destroy(struct drm_connector *connec=
-tor)
-> +{
-> +	drm_connector_unregister(connector);
-> +	drm_connector_cleanup(connector);
-> +}
-
-Use drmm_connector_init.
-
-> +static irqreturn_t starfive_hdmi_irq(int irq, void *dev_id)
-> +{
-> +	struct starfive_hdmi *hdmi =3D dev_id;
-> +
-> +	drm_helper_hpd_irq_event(hdmi->connector.dev);
-
-drm_connector_helper_hpd_irq_event()
-
-> +static int starfive_hdmi_get_clk_rst(struct device *dev, struct starfive=
-_hdmi *hdmi)
-> +{
-> +	hdmi->sys_clk =3D devm_clk_get(dev, "sysclk");
-> +	if (IS_ERR(hdmi->sys_clk)) {
-> +		DRM_DEV_ERROR(dev, "Unable to get HDMI sysclk clk\n");
-> +		return PTR_ERR(hdmi->sys_clk);
-> +	}
-> +	hdmi->mclk =3D devm_clk_get(dev, "mclk");
-> +	if (IS_ERR(hdmi->mclk)) {
-> +		DRM_DEV_ERROR(dev, "Unable to get HDMI mclk clk\n");
-> +		return PTR_ERR(hdmi->mclk);
-> +	}
-> +	hdmi->bclk =3D devm_clk_get(dev, "bclk");
-> +	if (IS_ERR(hdmi->bclk)) {
-> +		DRM_DEV_ERROR(dev, "Unable to get HDMI bclk clk\n");
-> +		return PTR_ERR(hdmi->bclk);
-> +	}
-> +	hdmi->tx_rst =3D reset_control_get_shared(dev, "hdmi_tx");
-> +	if (IS_ERR(hdmi->tx_rst)) {
-> +		DRM_DEV_ERROR(dev, "Unable to get HDMI tx rst\n");
-> +		return PTR_ERR(hdmi->tx_rst);
-> +	}
-
-That one isn't device-managed, you'll need to put back the reference in
-unbind.
-
-> +	return 0;
-> +}
-> +
-> +static int starfive_hdmi_bind(struct device *dev, struct device *master,
-> +			      void *data)
-> +{
-> +	struct platform_device *pdev =3D to_platform_device(dev);
-> +	struct drm_device *drm =3D data;
-> +	struct starfive_hdmi *hdmi;
-> +	struct resource *iores;
-> +	int irq;
-> +	int ret;
-> +
-> +	hdmi =3D devm_kzalloc(dev, sizeof(*hdmi), GFP_KERNEL);
-> +	if (!hdmi)
-> +		return -ENOMEM;
-
-Using device-managed actions to allocate memory that will eventually
-hold the connectors and encoders is unsafe.
-
-Please use drmm_kzalloc here, and test that it all works fine by
-enabling KASAN and removing the module.
-
-> +
-> +	hdmi->dev =3D dev;
-> +	hdmi->drm_dev =3D drm;
-> +
-> +	iores =3D platform_get_resource(pdev, IORESOURCE_MEM, 0);
-> +	hdmi->regs =3D devm_ioremap_resource(dev, iores);
-> +	if (IS_ERR(hdmi->regs))
-> +		return PTR_ERR(hdmi->regs);
-
-The main issue I was mentioning above is that whenever the device is
-unbound from its driver, all the device-managed actions are executed.
-
-However, the KMS device will still be there until the last (userspace)
-user closes its FD, so if anything happens between the time the module
-is removed and the FD is closed, you get plenty of use-after-free errors.
-
-For MMIO accesses, this is even more true since you need to use a
-device-managed action for the registers mapping (this is true for any
-resource tied to the device itself, so clocks, reset, etc. fit that
-description too).
-
-To protect against it, you need to protect any device access by a call
-to drm_dev_enter/drm_dev_exit.
-
-> +
-> +	ret =3D starfive_hdmi_get_clk_rst(dev, hdmi);
-> +	ret =3D starfive_hdmi_enable_clk_deassert_rst(dev, hdmi);
-
-Why does the device need to be powered here?
-
-> +	irq =3D platform_get_irq(pdev, 0);
-> +	if (irq < 0) {
-> +		ret =3D irq;
-> +		goto err_disable_clk;
-> +	}
-> +
-> +	hdmi->ddc =3D starfive_hdmi_i2c_adapter(hdmi);
-> +	if (IS_ERR(hdmi->ddc)) {
-> +		ret =3D PTR_ERR(hdmi->ddc);
-> +		hdmi->ddc =3D NULL;
-> +		goto err_disable_clk;
-> +	}
-> +
-> +	hdmi->tmds_rate =3D clk_get_rate(hdmi->sys_clk);
-
-It's not clear to me what tmds_rate is here, wouldn't that change from
-one mode to the next?
-
-> +	starfive_hdmi_i2c_init(hdmi);
-> +
-> +	ret =3D starfive_hdmi_register(drm, hdmi);
-> +	if (ret)
-> +		goto err_put_adapter;
-> +
-> +	dev_set_drvdata(dev, hdmi);
-> +
-> +	/* Unmute hotplug interrupt */
-> +	hdmi_modb(hdmi, HDMI_STATUS, m_MASK_INT_HOTPLUG, v_MASK_INT_HOTPLUG(1));
-> +
-> +	ret =3D devm_request_threaded_irq(dev, irq, starfive_hdmi_hardirq,
-> +					starfive_hdmi_irq, IRQF_SHARED,
-> +					dev_name(dev), hdmi);
-> +	if (ret < 0)
-> +		goto err_cleanup_hdmi;
-> +
-> +	pm_runtime_use_autosuspend(&pdev->dev);
-> +	pm_runtime_set_autosuspend_delay(&pdev->dev, 500);
-
-Autosuspend? Shouldn't we enable the device as long as there is an
-active video output (and you have that covered already)?
-
-> +	pm_runtime_enable(&pdev->dev);
-> +
-> +	starfive_hdmi_disable_clk_assert_rst(dev, hdmi);
-
-It would be clearer if you would move
-starfive_hdmi_enable_clk_deassert_rst()/disable_clk_assert_rst() into
-runtime_resume/runtime_suspend, and then in you bind just call
-pm_runtime_enable(), pm_runtime_get_sync(), do the registration, and
-pm_runtime_put.
-
-> +#define UPDATE(x, h, l)\
-> +({\
-> +	typeof(x) x_ =3D (x);\
-> +	typeof(h) h_ =3D (h);\
-> +	typeof(l) l_ =3D (l);\
-> +	(((x_) << (l_)) & GENMASK((h_), (l_)));\
-> +})
-
-That's FIELD_PREP, right?
-Maxime
-
---c3ccdoac5xz7n6if
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZH2xPwAKCRDj7w1vZxhR
-xRFAAP0f3J6Tu7GQHeZqx5luoDhXXLf8/1gmqshwjcYtEt7awgEAoRRjwu25Pah9
-m5eSDewNpcJYQHuxezva0a9w+5vmPQk=
-=BH5E
------END PGP SIGNATURE-----
-
---c3ccdoac5xz7n6if--
-
---===============7323937904660107760==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============7323937904660107760==--
+QXBwbGllZC4gIFRoYW5rcyENCg0KT24gTW9uLCBKdW4gNSwgMjAyMyBhdCA0OjEz4oCvQU0gQ2hy
+aXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPiB3cm90ZToNCj4NCj4gQW0g
+MDMuMDYuMjMgdW0gMDk6NDMgc2NocmllYiBNaW4gTGk6DQo+ID4gVXNlcnNwYWNlIGNhbiByYWNl
+IHRvIGZyZWUgdGhlIGdvYmoocm9iaiBjb252ZXJ0ZWQgZnJvbSksIHJvYmogc2hvdWxkIG5vdA0K
+PiA+IGJlIGFjY2Vzc2VkIGFnYWluIGFmdGVyIGRybV9nZW1fb2JqZWN0X3B1dCwgb3RoZXJ3aXRo
+IGl0IHdpbGwgcmVzdWx0IGluDQo+ID4gdXNlLWFmdGVyLWZyZWUuDQo+ID4NCj4gPiBTaWduZWQt
+b2ZmLWJ5OiBNaW4gTGkgPGxtMDk2M2hhY2tAZ21haWwuY29tPg0KPg0KPiBSZXZpZXdlZC1ieTog
+Q2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KPg0KPiA+IC0tLQ0K
+PiA+IENoYW5nZXMgaW4gdjI6DQo+ID4gLSBSZW1vdmUgdW51c2VkIHJvYmosIGF2b2lkIGNvbXBp
+bGUgY29tcGxhaW4NCj4gPg0KPiA+ICAgZHJpdmVycy9ncHUvZHJtL3JhZGVvbi9yYWRlb25fZ2Vt
+LmMgfCA0ICstLS0NCj4gPiAgIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMyBkZWxl
+dGlvbnMoLSkNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcmFkZW9uL3Jh
+ZGVvbl9nZW0uYyBiL2RyaXZlcnMvZ3B1L2RybS9yYWRlb24vcmFkZW9uX2dlbS5jDQo+ID4gaW5k
+ZXggYmRjNWFmMjNmMDA1Li5kM2Y1ZGRiYzE3MDQgMTAwNjQ0DQo+ID4gLS0tIGEvZHJpdmVycy9n
+cHUvZHJtL3JhZGVvbi9yYWRlb25fZ2VtLmMNCj4gPiArKysgYi9kcml2ZXJzL2dwdS9kcm0vcmFk
+ZW9uL3JhZGVvbl9nZW0uYw0KPiA+IEBAIC00NTksNyArNDU5LDYgQEAgaW50IHJhZGVvbl9nZW1f
+c2V0X2RvbWFpbl9pb2N0bChzdHJ1Y3QgZHJtX2RldmljZSAqZGV2LCB2b2lkICpkYXRhLA0KPiA+
+ICAgICAgIHN0cnVjdCByYWRlb25fZGV2aWNlICpyZGV2ID0gZGV2LT5kZXZfcHJpdmF0ZTsNCj4g
+PiAgICAgICBzdHJ1Y3QgZHJtX3JhZGVvbl9nZW1fc2V0X2RvbWFpbiAqYXJncyA9IGRhdGE7DQo+
+ID4gICAgICAgc3RydWN0IGRybV9nZW1fb2JqZWN0ICpnb2JqOw0KPiA+IC0gICAgIHN0cnVjdCBy
+YWRlb25fYm8gKnJvYmo7DQo+ID4gICAgICAgaW50IHI7DQo+ID4NCj4gPiAgICAgICAvKiBmb3Ig
+bm93IGlmIHNvbWVvbmUgcmVxdWVzdHMgZG9tYWluIENQVSAtDQo+ID4gQEAgLTQ3MiwxMyArNDcx
+LDEyIEBAIGludCByYWRlb25fZ2VtX3NldF9kb21haW5faW9jdGwoc3RydWN0IGRybV9kZXZpY2Ug
+KmRldiwgdm9pZCAqZGF0YSwNCj4gPiAgICAgICAgICAgICAgIHVwX3JlYWQoJnJkZXYtPmV4Y2x1
+c2l2ZV9sb2NrKTsNCj4gPiAgICAgICAgICAgICAgIHJldHVybiAtRU5PRU5UOw0KPiA+ICAgICAg
+IH0NCj4gPiAtICAgICByb2JqID0gZ2VtX3RvX3JhZGVvbl9ibyhnb2JqKTsNCj4gPg0KPiA+ICAg
+ICAgIHIgPSByYWRlb25fZ2VtX3NldF9kb21haW4oZ29iaiwgYXJncy0+cmVhZF9kb21haW5zLCBh
+cmdzLT53cml0ZV9kb21haW4pOw0KPiA+DQo+ID4gICAgICAgZHJtX2dlbV9vYmplY3RfcHV0KGdv
+YmopOw0KPiA+ICAgICAgIHVwX3JlYWQoJnJkZXYtPmV4Y2x1c2l2ZV9sb2NrKTsNCj4gPiAtICAg
+ICByID0gcmFkZW9uX2dlbV9oYW5kbGVfbG9ja3VwKHJvYmotPnJkZXYsIHIpOw0KPiA+ICsgICAg
+IHIgPSByYWRlb25fZ2VtX2hhbmRsZV9sb2NrdXAocmRldiwgcik7DQo+ID4gICAgICAgcmV0dXJu
+IHI7DQo+ID4gICB9DQo+ID4NCj4NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdA
+bGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1t
+bS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
