@@ -2,309 +2,152 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EBDA7255F0
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 Jun 2023 09:38:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A25E77256BB
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 Jun 2023 10:03:08 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6D56F413E1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 Jun 2023 07:38:11 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
-	by lists.linaro.org (Postfix) with ESMTPS id 6D7953EBEE
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  7 Jun 2023 07:38:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9D335413F2
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  7 Jun 2023 08:03:07 +0000 (UTC)
+Received: from ex01.ufhost.com (ex01.ufhost.com [61.152.239.75])
+	by lists.linaro.org (Postfix) with ESMTP id 802023EC76
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  7 Jun 2023 08:02:44 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=ULkXjzQU;
-	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.218.48 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org;
-	dmarc=pass (policy=none) header.from=linaro.org
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-977d55ac17bso583092366b.3
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 07 Jun 2023 00:38:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1686123485; x=1688715485;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=WNSVpTGK/l9iZwOWNmHI2F19yNhHKxnKGcZzUtPUdPM=;
-        b=ULkXjzQUh10+WTvid47PSYTfNolUEhpdm0pUGX4COa+AKaF56Lo1LEWLnJJLkMTtDk
-         1bu8DW26K2ZWIKauxfZBMLPFVq+1NaKdyWF36l+Djo6nB8KezB+LlKmThOeAOcQokC77
-         rd6mUJw2vIcay0nQc4onaXwFdHtel0CItpPmLaaB6SPBbHvwT+gDZWCSX3SULDuXVwQR
-         rEcJWNiETnCPR2sBojc8GzYqz9YevQgC0fruyK4yGMYGqmaLkb/3kg69m5d2Ctsk71zV
-         eITRSn697jIqgkelnOEW++XCjaltRsY+vxgXcGOWy4b0lvZ6y6qkeR9Qewzg2dl41Rq+
-         ml/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1686123485; x=1688715485;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=WNSVpTGK/l9iZwOWNmHI2F19yNhHKxnKGcZzUtPUdPM=;
-        b=RQsbrqAm+1P0E5AUxHov6PI+1oKbh4KUsowfZEc4XU3NwkwC5y6aYhVgJGyke7FJWQ
-         cITUZ5Ms58d0Sww9BncnsJOMHRh+i/bSvtlEsO5cJlv173Hjm7VEbdpys+larzdet/Hm
-         ADySgeJ2bbHc+7h5eAQkkpRYP1puS39jgYMsQhp1FCuYiFcSQDtOVoimWRwSnNlOHcNE
-         o1mk0X4UOimSVMNyRS3s/QqlAHYUxG4r1XXCLdt/yywyHX53UiL6WYC9KvxalvvlXian
-         Ys+V3ygf30S5ft/Xg2dtxCOXCa/PQfUXMX+KlTNOT8MLYqsjNp7ly6vYeOcvJB64/UB7
-         5/3Q==
-X-Gm-Message-State: AC+VfDx9zvu2Dyep4UrEVMQ8bzeVQOljrk8n5gQRVEz/7gnNaM5o2T/W
-	n8RBsKh4mjkPtB/oTsfg6txA4Art
-X-Google-Smtp-Source: ACHHUZ4eKaPNF9Y7Ctvy7bb6DgDgKJYoGYQGb84V/eSeixnqSw+c+G9oT2Nf3z6Gs7xy3BpZkwvUJg==
-X-Received: by 2002:a17:907:9710:b0:974:c1c:8217 with SMTP id jg16-20020a170907971000b009740c1c8217mr5128815ejc.55.1686123485324;
-        Wed, 07 Jun 2023 00:38:05 -0700 (PDT)
-Received: from [192.168.1.20] ([178.197.219.26])
-        by smtp.gmail.com with ESMTPSA id bv13-20020a170906b1cd00b00978743b54bdsm1369725ejb.78.2023.06.07.00.38.03
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 07 Jun 2023 00:38:04 -0700 (PDT)
-Message-ID: <d97987f2-58e1-f46f-4b33-ccc72285d089@linaro.org>
-Date: Wed, 7 Jun 2023 09:38:02 +0200
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of keith.zhao@starfivetech.com designates 61.152.239.75 as permitted sender) smtp.mailfrom=keith.zhao@starfivetech.com;
+	dmarc=none
+Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
+	by ex01.ufhost.com (Postfix) with ESMTP id E591624E307;
+	Wed,  7 Jun 2023 16:02:35 +0800 (CST)
+Received: from EXMBX061.cuchost.com (172.16.6.61) by EXMBX166.cuchost.com
+ (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Wed, 7 Jun
+ 2023 16:02:35 +0800
+Received: from [192.168.60.122] (180.164.60.184) by EXMBX061.cuchost.com
+ (172.16.6.61) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Wed, 7 Jun
+ 2023 16:02:35 +0800
+Message-ID: <ab89b684-8b49-2088-b0d2-ca362fd9dfb4@starfivetech.com>
+Date: Wed, 7 Jun 2023 16:02:34 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.11.2
 Content-Language: en-US
-To: Keith Zhao <keith.zhao@starfivetech.com>,
- dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
- linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 References: <20230602074043.33872-1-keith.zhao@starfivetech.com>
- <20230602074043.33872-3-keith.zhao@starfivetech.com>
-From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-In-Reply-To: <20230602074043.33872-3-keith.zhao@starfivetech.com>
-X-Spamd-Result: default: False [-2.50 / 15.00];
+ <20230602-uncommon-rejoicing-e73c0c475f9f@spud>
+ <TY3P286MB26116576E3E502CAE53834599852A@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+ <1991848.PYKUYFuaPT@diego> <20230606-geometry-blurb-1f0f07d4bf6a@spud>
+ <ifgjvonhkzcwrklzch5efguor2x6az4m737dwte4uyow7ar5dr@z4glaxse6dou>
+From: Keith Zhao <keith.zhao@starfivetech.com>
+To: undisclosed-recipients:;
+In-Reply-To: <ifgjvonhkzcwrklzch5efguor2x6az4m737dwte4uyow7ar5dr@z4glaxse6dou>
+X-Originating-IP: [180.164.60.184]
+X-ClientProxiedBy: EXCAS062.cuchost.com (172.16.6.22) To EXMBX061.cuchost.com
+ (172.16.6.61)
+X-YovoleRuleAgent: yovoleflag
+X-Spamd-Result: default: False [1.80 / 15.00];
+	R_UNDISC_RCPT(3.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
+	FORGED_RECIPIENTS(2.00)[m:,s:linaro-mm-sig@lists.linaro.org];
+	R_SPF_ALLOW(-0.20)[+ip4:61.152.239.0/24];
 	MIME_GOOD(-0.10)[text/plain];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_RCPT(0.00)[dt];
-	RCPT_COUNT_TWELVE(0.00)[30];
-	NEURAL_HAM(-0.00)[-1.000];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[starfivetech.com:email,mail-ej1-f48.google.com:rdns,mail-ej1-f48.google.com:helo,29400000:email,40000000:email,devicetree-specification.readthedocs.io:url,linaro.org:dkim];
-	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,kernel.org,linaro.org,esmil.dk,sifive.com,dabbelt.com,eecs.berkeley.edu,linux.intel.com,suse.de,pengutronix.de,amd.com,sntech.de,edgeble.ai,hotmail.com,starfivetech.com];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.48:from];
-	DKIM_TRACE(0.00)[linaro.org:+];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FROM_EQ_ENVFROM(0.00)[];
-	URIBL_BLOCKED(0.00)[devicetree-specification.readthedocs.io:url,29400000:email,0:email,linaro.org:dkim,starfivetech.com:email,mail-ej1-f48.google.com:rdns,mail-ej1-f48.google.com:helo];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_NO_TLS_LAST(0.10)[];
+	R_DKIM_NA(0.00)[];
 	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
+	ASN(0.00)[asn:4812, ipnet:61.152.0.0/16, country:CN];
+	MIME_TRACE(0.00)[0:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	BLOCKLISTDE_FAIL(0.00)[61.152.239.75:server fail,180.164.60.184:server fail,175.102.18.54:server fail];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCPT_COUNT_ONE(0.00)[1];
+	FROM_HAS_DN(0.00)[];
+	HAS_XOIP(0.00)[];
+	TO_DN_ALL(0.00)[];
+	URIBL_BLOCKED(0.00)[ex01.ufhost.com:rdns,ex01.ufhost.com:helo];
+	NEURAL_SPAM(0.00)[0.998];
+	DMARC_NA(0.00)[starfivetech.com];
+	FROM_EQ_ENVFROM(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 6D7953EBEE
-X-Spamd-Bar: --
-Message-ID-Hash: CRJHU5PKVQ3UDDQKDL3FGTB6NCQVHRUH
-X-Message-ID-Hash: CRJHU5PKVQ3UDDQKDL3FGTB6NCQVHRUH
-X-MailFrom: krzysztof.kozlowski@linaro.org
+X-Spam-Level: *
+X-Rspamd-Queue-Id: 802023EC76
+X-Spamd-Bar: +
+Message-ID-Hash: L3I2VASZR3IJ72V6652U247OMZOG2RPJ
+X-Message-ID-Hash: L3I2VASZR3IJ72V6652U247OMZOG2RPJ
+X-MailFrom: keith.zhao@starfivetech.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Daniel Vetter <daniel@ffwll.ch>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Emil Renner Berthing <kernel@esmil.dk>, Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Philipp Zabel <p.zabel@pengutronix.de>, Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com, Bjorn Andersson <andersson@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Shawn Guo <shawnguo@kernel.org>, Jagan Teki <jagan@edgeble.ai>, Chris Morgan <macromorgan@hotmail.com>, Jack Zhu <jack.zhu@starfivetech.com>, Shengyang Chen <shengyang.chen@starfivetech.com>, Changhuang Liang <changhuang.liang@starfivetech.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 2/9] riscv: dts: starfive: jh7110: add dc&hdmi controller node
+Subject: [Linaro-mm-sig] Re: [PATCH 1/9] dt-bindings: display: Add yamls for JH7110 display subsystem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CRJHU5PKVQ3UDDQKDL3FGTB6NCQVHRUH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/L3I2VASZR3IJ72V6652U247OMZOG2RPJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On 02/06/2023 09:40, Keith Zhao wrote:
-> Add the dc controller and hdmi node for the Starfive JH7110 SoC.
-> 
-> Signed-off-by: Keith Zhao <keith.zhao@starfivetech.com>
-> ---
->  .../jh7110-starfive-visionfive-2.dtsi         | 87 +++++++++++++++++++
->  arch/riscv/boot/dts/starfive/jh7110.dtsi      | 46 ++++++++++
->  2 files changed, 133 insertions(+)
-> 
-> diff --git a/arch/riscv/boot/dts/starfive/jh7110-starfive-visionfive-2.dtsi b/arch/riscv/boot/dts/starfive/jh7110-starfive-visionfive-2.dtsi
-> index 1155b97b593d..8dc6c8a15c59 100644
-> --- a/arch/riscv/boot/dts/starfive/jh7110-starfive-visionfive-2.dtsi
-> +++ b/arch/riscv/boot/dts/starfive/jh7110-starfive-visionfive-2.dtsi
-> @@ -31,6 +31,21 @@ memory@40000000 {
->  		reg = <0x0 0x40000000 0x1 0x0>;
->  	};
->  
-> +	reserved-memory {
-> +		#address-cells = <2>;
-> +		#size-cells = <2>;
-> +		ranges;
-> +
-> +		linux,cma {
-> +			compatible = "shared-dma-pool";
-> +			reusable;
-> +			size = <0x0 0x20000000>;
-> +			alignment = <0x0 0x1000>;
-> +			alloc-ranges = <0x0 0x80000000 0x0 0x20000000>;
-> +			linux,cma-default;
-> +		};
-> +	};
-> +
->  	gpio-restart {
->  		compatible = "gpio-restart";
->  		gpios = <&sysgpio 35 GPIO_ACTIVE_HIGH>;
-> @@ -214,6 +229,41 @@ GPOEN_DISABLE,
->  			slew-rate = <0>;
->  		};
->  	};
-> +
-> +	hdmi_pins: hdmi-0 {
-> +		hdmi-scl-pins {
-> +			pinmux = <GPIOMUX(0, GPOUT_SYS_HDMI_DDC_SCL,
-> +					     GPOEN_SYS_HDMI_DDC_SCL,
-> +					     GPI_SYS_HDMI_DDC_SCL)>;
-> +			input-enable;
-> +			bias-pull-up;
-> +		};
-> +
-> +		hdmi-sda-pins {
-> +			pinmux = <GPIOMUX(1, GPOUT_SYS_HDMI_DDC_SDA,
-> +					     GPOEN_SYS_HDMI_DDC_SDA,
-> +					     GPI_SYS_HDMI_DDC_SDA)>;
-> +			input-enable;
-> +			bias-pull-up;
-> +		};
-> +
-> +		hdmi-cec-pins {
-> +			pinmux = <GPIOMUX(14, GPOUT_SYS_HDMI_CEC_SDA,
-> +					     GPOEN_SYS_HDMI_CEC_SDA,
-> +					     GPI_SYS_HDMI_CEC_SDA)>;
-> +			input-enable;
-> +			bias-pull-up;
-> +		};
-> +
-> +		hdmi-hpd-pins {
-> +			pinmux = <GPIOMUX(15, GPOUT_HIGH,
-> +					     GPOEN_ENABLE,
-> +					     GPI_SYS_HDMI_HPD)>;
-> +			input-enable;
-> +			bias-disable; /* external pull-up */
-> +		};
-> +	};
-> +
->  };
->  
->  &uart0 {
-> @@ -221,3 +271,40 @@ &uart0 {
->  	pinctrl-0 = <&uart0_pins>;
->  	status = "okay";
->  };
-> +
-> +&voutcrg {
-> +	status = "okay";
-> +};
-> +
-> +&display {
-> +	status = "okay";
-> +};
-> +
-> +&hdmi {
-> +	status = "okay";
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&hdmi_pins>;
-> +
-> +	hdmi_in: port {
-> +		#address-cells = <1>;
-> +		#size-cells = <0>;
-> +		hdmi_input: endpoint@0 {
-> +			reg = <0>;
-> +			remote-endpoint = <&dc_out_dpi0>;
-
-This does not make any sense. You wrote in bindings that this is display
-output, but you call it HDMI input. If this is input, where is your output?
-
-> +		};
-> +	};
-> +};
-> +
-> +&dc8200 {
-> +	status = "okay";
-> +
-> +	dc_out: port {
-> +		#address-cells = <1>;
-> +		#size-cells = <0>;
-> +		dc_out_dpi0: endpoint@0 {
-> +			reg = <0>;
-> +			remote-endpoint = <&hdmi_input>;
-> +		};
-> +
-
-Stray blank line.
-
-> +	};
-> +};
-> diff --git a/arch/riscv/boot/dts/starfive/jh7110.dtsi b/arch/riscv/boot/dts/starfive/jh7110.dtsi
-> index 9acb5fb1716d..66be6e65a066 100644
-> --- a/arch/riscv/boot/dts/starfive/jh7110.dtsi
-> +++ b/arch/riscv/boot/dts/starfive/jh7110.dtsi
-> @@ -249,6 +249,11 @@ tdm_ext: tdm-ext-clock {
->  		#clock-cells = <0>;
->  	};
->  
-> +	display: display-subsystem {
-> +		compatible = "verisilicon,display-subsystem";
-
-Drop fake nodes which do not represent hardware. Instead, DTS and
-bindings should describe real hardware.
-
-
-> +		ports = <&dc_out>;
-> +	};
-> +
->  	soc {
->  		compatible = "simple-bus";
->  		interrupt-parent = <&plic>;
-> @@ -570,5 +575,46 @@ voutcrg: clock-controller@295c0000 {
->  			#reset-cells = <1>;
->  			power-domains = <&pwrc JH7110_PD_VOUT>;
->  		};
-> +
-> +		dc8200: dc8200@29400000 {
-
-Node names should be generic. See also explanation and list of examples
-in DT specification:
-https://devicetree-specification.readthedocs.io/en/latest/chapter2-devicetree-basics.html#generic-names-recommendation
-
-> +			compatible = "verisilicon,dc8200";
-> +			reg = <0x0 0x29400000 0x0 0x100>,
-> +			      <0x0 0x29400800 0x0 0x2000>,
-> +			      <0x0 0x295B0000 0x0 0x90>;
-> +			interrupts = <95>;
-> +			clocks = <&syscrg JH7110_SYSCLK_NOC_BUS_DISP_AXI>,
-> +				<&voutcrg JH7110_VOUTCLK_DC8200_PIX0>,
-> +				<&voutcrg JH7110_VOUTCLK_DC8200_PIX1>,
-> +				<&voutcrg JH7110_VOUTCLK_DC8200_AXI>,
-> +				<&voutcrg JH7110_VOUTCLK_DC8200_CORE>,
-> +				<&voutcrg JH7110_VOUTCLK_DC8200_AHB>,
-> +				<&hdmitx0_pixelclk>,
-> +				<&voutcrg JH7110_VOUTCLK_DC8200_PIX>;
-> +			clock-names = "clk_vout_noc_disp",
-> +				"clk_vout_pix0","clk_vout_pix1",
-
-Fix alignment
-
-> +				"clk_vout_axi","clk_vout_core",
-> +				"clk_vout_vout_ahb","hdmitx0_pixel",
-> +				"clk_vout_dc8200";
-> +			resets = <&voutcrg JH7110_VOUTRST_DC8200_AXI>,
-> +				 <&voutcrg JH7110_VOUTRST_DC8200_AHB>,
-> +				 <&voutcrg JH7110_VOUTRST_DC8200_CORE>;
-> +			reset-names = "rst_vout_axi","rst_vout_ahb",
-> +						"rst_vout_core";
-
-Fix alignment.
-
-
-
-Best regards,
-Krzysztof
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+DQoNCk9uIDIwMjMvNi83IDE0OjQxLCBNYXhpbWUgUmlwYXJkIHdyb3RlOg0KPiBPbiBUdWUsIEp1
+biAwNiwgMjAyMyBhdCAxMTozNzo1M1BNICswMTAwLCBDb25vciBEb29sZXkgd3JvdGU6DQo+PiBP
+biBXZWQsIEp1biAwNywgMjAyMyBhdCAxMjoyMjozM0FNICswMjAwLCBIZWlrbyBTdMO8Ym5lciB3
+cm90ZToNCj4+ID4gQW0gRGllbnN0YWcsIDYuIEp1bmkgMjAyMywgMjA6NDE6MTcgQ0VTVCBzY2hy
+aWViIFNoZW5neXUgUXU6DQo+PiA+ID4gPiBPbiBGcmksIEp1biAwMiwgMjAyMyBhdCAwMzo0MDoz
+NVBNICswODAwLCBLZWl0aCBaaGFvIHdyb3RlOg0KPj4gPiA+ID4+IEFkZCBiaW5kaW5ncyBmb3Ig
+Skg3MTEwIGRpc3BsYXkgc3Vic3lzdGVtIHdoaWNoDQo+PiA+ID4gPj4gaGFzIGEgZGlzcGxheSBj
+b250cm9sbGVyIHZlcmlzaWxpY29uIGRjODIwMA0KPj4gPiA+ID4+IGFuZCBhbiBIRE1JIGludGVy
+ZmFjZS4NCj4+IA0KPj4gPiA+ID4+ICtkZXNjcmlwdGlvbjoNCj4+ID4gPiA+PiArICBUaGUgU3Rh
+ckZpdmUgU29DIHVzZXMgdGhlIEhETUkgc2lnbmFsIHRyYW5zbWl0ZXIgYmFzZWQgb24gaW5ub3Np
+bGljb24gSVANCj4+ID4gPiA+IElzIGlubm9zaWxpY29uIHRoZSBzYW1lIHRoaW5nIGFzIHZlcmlz
+aWxpY29uPyBBbHNvDQo+PiA+ID4gPiBzL3RyYW5zbWl0ZXIvdHJhbnNtaXR0ZXIvLCBib3RoIGhl
+cmUgYW5kIGluIHRoZSB0aXRsZS4NCnllcyxpbm5vc2lsaWNvbiBpcyB0aGUgSERNSSBJUCAgYW5k
+IHZlcmlzaWxpY29uIGlzIHRoZSBEQy1jb250cm9sbGVyIElQDQoNCj4+ID4gPiANCj4+ID4gPiBJ
+IHRoaW5rIHRoYXQgaXMgbm90IHRoZSBzYW1lLCBJIHJlbWVtYmVyIFJvY2tjaGlwIGhhcyB1c2Vk
+IGEgSERNSSANCj4+ID4gPiB0cmFuc21pdHRlciBmcm9tDQo+PiA+ID4gDQo+PiA+ID4gSW5ub3Np
+bGljb24sIGFuZCB0aGVyZSBpcyBhIGV4aXN0aW5nIGRyaXZlciBmb3IgdGhhdCBpbiBtYWlubGlu
+ZS4NCj4+ID4gDQo+PiA+IFllcCwgSSB0aGluayBJbm5vc2lsaWNvbiBpcyB0aGUgY29tcGFueSB5
+b3UgdHVybiB0byB3aGVuIHlvdSB3YW50IHRvIHNhdmUNCj4+ID4gYSBiaXQgb2YgbW9uZXkgOy0p
+IC4gSW4gdGhlIGJpZ2dlciBTb0NzIFJvY2tjaGlwIG1vc3Qgb2YgdGhlIHRpbWUgdXNlcw0KPj4g
+PiBEZXNpZ253YXJlIGhkbWkgYmxvY2tzIGFuZCBsb29raW5nIGF0IHRoZSBoaXN0b3J5IG9ubHkg
+dGhlIHJrMzAzNiBldmVyDQo+PiA+IHVzZWQgYW4gSW5ub3NpbGljb24gYmxvY2suDQo+PiA+IA0K
+SSBoYXZlIGRvbmUgYSBIRE1JY29tcGFyaXNvbiBvZiB0aGUgcmszMDM2IGFuZCB0aGUgamg3MTEw
+LCBhbmQgdGhleSBhcmUgYm90aCBiYXNlZCBvbiBpcCBJbm5vc2lsaWNvbi4NCg0KdGhlIGhhcmR3
+YXJlIG9mIHRoZW0gLg0KU29tZSBwYXJ0cyBvZiB0aGUgaGFyZHdhcmUgb2YgdGhlIHR3byBhcmUg
+Y29tbW9uLCBzdWNoIGFzIHRoZSBsb2dpYyBvZiBoZG1pIEkyQyB0byBvYnRhaW4gZWRpZCwgYW5k
+IHRoZSByZWdpc3RlciBkZWZpbml0aW9uIGlzIGNvbnNpc3RlbnQuDQoNCk1hbnkgcmVnaXN0ZXJz
+IGFyZSBkZWZpbmVkIGRpZmZlcmVudGx5IGZyb20gdGhlIGxpbnV4IG1haW4gbGluZSBpbm5vIGRy
+aXZlciwgaW5jbHVkaW5nIHJlZ2lzdGVycyB0aGF0IGNvbnRhaW4gc3BlY2lmaWMgYml0cw0KYW5k
+IHNvbWUgcmVnaXN0ZXJzIGluIGxpbnV4IG1haW4gbGluZSBpbm5vIGRyaXZlciBubyBsb25nZXIg
+dXNlZCBpbiBteSBuZXcgaW5vbyBoZG1pIGhhcmR3YXJlLg0KDQo+PiA+IExvb2tpbmcgYXQgdGhl
+IGhpc3RvcnksIDIwMTYgcmVhbGx5IHdhcyBhIGxvbmcgdGltZSBhZ28gOi1ELg0KPj4gPiANCj4+
+ID4gPiBTbyBLZWl0aCwgaWYgdGhhdCdzIHRydWUsIEkgdGhpbmsgaXQgaXMgYmV0dGVyIHRvIHNl
+cGVyYXRlIHRoZSBIRE1JIA0KPj4gPiA+IHN0dWZmIGFuZCByZXVzZSBleGlzdGluZyBkcml2ZXIu
+DQo+PiA+IA0KPj4gPiBJJ20gbm90IHNvIHN1cmUgYWJvdXQgdGhhdCAtIGF0IGxlYXN0IGZyb20g
+YSBjdXJzb3J5IGdsYW5jZSA6LSkgLg0KPj4gPiANCj4+ID4gVGhlIHJlZ2lzdGVycyBkbyBsb29r
+IHNsaWdodGx5IGRpZmZlcmVudCBhbmQgSSBkb24ndCBrbm93IGhvdyBtdWNoDQo+PiA+IHRoZSBJ
+UCBjaGFuZ2VkIGJldHdlZW4gdGhlIHJrMzAzNi12ZXJzaW9uIGFuZCB0aGUgamg3MTEwIHZlcnNp
+b24uDQo+PiA+IA0KPj4gPiBBdCB0aGUgdmVyeSBsZWFzdCwgSSBrbm93IG15IHJrMzAzNiBib2Fy
+ZCBpc24ndCBib290aW5nIHJpZ2h0IG5vdywgc28NCj4+ID4gSSBjYW4ndCByZWFsbHkgcHJvdmlk
+ZSBoZWxwIGZvciBnZW5lcmFsaXppbmcgdGhlIHJvY2tjaGlwLWRyaXZlci4NCj4+ID4gDQo+PiA+
+IEF0IHRoZSB2ZXJ5IGxlYXN0IGJvdGggdGhlIGJpbmRpbmcgYW5kIGRyaXZlciBjb3VsZCBkcm9w
+IHRoZSAic3RhcmZpdmUtaGRtaSINCj4+ID4gYW5kIGFjdHVhbGx5IHVzZSB0aGUgSW5ub3NpbGlj
+b24gaW4gdGhlIG5hbWluZyBzb21ld2hlcmUsIHNvIHRoYXQgaXQncw0KPj4gPiBjbGVhciBmb3Ig
+ZnV0dXJlIGRldmVsb3BlcnMgOi0pDQo+PiANCj4+IFNlZWluZyAiYmFzZWQgb24iIGFsd2F5cyBt
+YWtlcyBtZSBhIGxpdHRsZSBiaXQgbmVydm91cyB0byBiZSBob25lc3Qgd2hlbg0KPj4gaXQgY29t
+ZXMgdG8gdXNpbmcgYSBjb21wYXRpYmxlIGZyb20gdGhlIElQLiBJcyBpdCB0aGUgSVA/IFdoYXQg
+dmVyc2lvbg0KPj4gaXMgaXQ/IGV0Yy4gUGVyaGFwcyAic3RhcmZpdmUsamg3MTEwLWhkbWkiICYg
+ZmFsbGluZyBiYWNrIHRvIHNvbWUgc29ydA0KPj4gb2YgImlubm9zaWxpY29uLGhkbWkiIHdvdWxk
+IGJlIG1vcmUgZnV0dXJlL0lQLXNpbGxpbmVzcyBwcm9vZi4NCj4+IERyaXZlciBjYW4gYWx3YXlz
+IGJlIGdlbmVyaWMgJiBiaW5kIGFnYWluc3QgImlubm9zaWxpY29uLGhkbWkiIHVudGlsDQo+PiB0
+aGF0IGJlY29tZXMgaW1wb3NzaWJsZS4NCj4gDQo+IEdpdmVuIHRoYXQgTmVpbCB3YXMgc2F5aW5n
+IHRoYXQgdGhlcmUncyBhdCBsZWFzdCB0d28NCj4gZ2VuZXJhdGlvbnMvcmV2aXNpb25zL21vZGVs
+cyBvZiBhbiBIRE1JIGNvbnRyb2xsZXIgZnJvbSBJbm5vc2lsaWNvbiwgSSdtDQo+IG5vdCBzdXJl
+IHRoYXQgY29tcGF0aWJsZSBpcyBlbm91Z2ggdG8gcmVhY2ggdGhhdCBnb2FsIGFueXdheS4NCj4g
+DQo+IE1heGltZQ0KDQoNCg0KSSB3aWxsIGNoYW5nZSB0aGUgIHRoZSBiaW5kaW5nICB0byBtZWV0
+IGlubm9zaWxpY29uLGhkbWkgLg0KZm9yIHRoZSBkcml2ZXJzIHBhcnQgLCBJIHdpbGwgc3R1ZHkg
+dGhlIHBvc3NpYmlsaXR5IG9mIFJLLUhETUkgcmV1c2UuDQoNClRoYW5rIHlvdSBmb3IgeW91ciBj
+b21tZW50cw0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3Qg
+LS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4g
+ZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
