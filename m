@@ -2,332 +2,168 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3D3FF72C916
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 12 Jun 2023 16:59:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86E5E72C963
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 12 Jun 2023 17:10:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2379F43CD9
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 12 Jun 2023 14:59:12 +0000 (UTC)
-Received: from mail.loongson.cn (mail.loongson.cn [114.242.206.163])
-	by lists.linaro.org (Postfix) with ESMTP id 5941F3E952
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 12 Jun 2023 14:58:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 87CDC3EBC0
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 12 Jun 2023 15:10:03 +0000 (UTC)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	by lists.linaro.org (Postfix) with ESMTPS id B0A783EBC0
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 12 Jun 2023 15:09:50 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	dmarc=none;
-	spf=pass (lists.linaro.org: domain of suijingfeng@loongson.cn designates 114.242.206.163 as permitted sender) smtp.mailfrom=suijingfeng@loongson.cn
-Received: from loongson.cn (unknown [10.20.42.43])
-	by gateway (Coremail) with SMTP id _____8DxRumvModk1t8DAA--.6415S3;
-	Mon, 12 Jun 2023 22:58:55 +0800 (CST)
-Received: from [10.20.42.43] (unknown [10.20.42.43])
-	by localhost.localdomain (Coremail) with SMTP id AQAAf8BxNeSuModkTncWAA--.64771S3;
-	Mon, 12 Jun 2023 22:58:54 +0800 (CST)
-Message-ID: <d4e647d8-294c-abd7-40c6-37381796203d@loongson.cn>
-Date: Mon, 12 Jun 2023 22:58:54 +0800
+	dkim=pass header.d=quicinc.com header.s=qcppdkim1 header.b=NntYswhd;
+	dmarc=pass (policy=none) header.from=quicinc.com;
+	spf=pass (lists.linaro.org: domain of quic_jhugo@quicinc.com designates 205.220.180.131 as permitted sender) smtp.mailfrom=quic_jhugo@quicinc.com
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 35CDrdde003212;
+	Mon, 12 Jun 2023 15:09:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=qcppdkim1;
+ bh=We40rKMLG+MEC25B0HGY2atMNWzmRl6ol9yjTjBbbfY=;
+ b=NntYswhdnF3o7j1hOEJqs6tPZKC/ueV3kPVbn26ZQ2xd7UZWsyMJxtdOUYjqNlQz/R5f
+ boTx7AyP9HNQDQey/BscZcwWcv+hLMcH5DbIQBlQMnANGMWU3lYiVjI0y6eFaPUH2Lgu
+ PmNF1LZlYDQx8tHa+vq86SWu6o0Pbm/gbSq9VFlc66JxPDvmUqV7lOTOQefisSsOTD99
+ gNiTBozUOcRfviZ10rKtkcec45Hx7wjbRu3bHwTRM+AYUtqGFyenx5paFa1reIGHzw/p
+ tCB3jKTosJSVWfDEZKjMLfJcRDdNl4LEX5eC2sbhYoL41R+mxKzzBRB7z1ro5AVJDEMc 6Q==
+Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3r4ggr3pdy-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 12 Jun 2023 15:09:41 +0000
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
+	by NALASPPMTA01.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 35CF9ekQ003169
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 12 Jun 2023 15:09:40 GMT
+Received: from [10.226.59.182] (10.80.80.8) by nalasex01a.na.qualcomm.com
+ (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.42; Mon, 12 Jun
+ 2023 08:09:40 -0700
+Message-ID: <b5e5c141-b5df-e24d-8fa4-94297d561cec@quicinc.com>
+Date: Mon, 12 Jun 2023 09:09:39 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
+ Thunderbird/91.6.0
 Content-Language: en-US
-To: Sui Jingfeng <15330273260@189.cn>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Li Yi <liyi@loongson.cn>, Sumit Semwal <sumit.semwal@linaro.org>,
- Christian Koenig <christian.koenig@amd.com>,
- Emil Velikov <emil.l.velikov@gmail.com>
-References: <20230520105718.325819-1-15330273260@189.cn>
-From: Sui Jingfeng <suijingfeng@loongson.cn>
-Organization: Loongson
-In-Reply-To: <20230520105718.325819-1-15330273260@189.cn>
-X-CM-TRANSID: AQAAf8BxNeSuModkTncWAA--.64771S3
-X-CM-SenderInfo: xvxlyxpqjiv03j6o00pqjv00gofq/
-X-Coremail-Antispam: 1Uk129KBj93XoW3Zw1fJr48WryUuF1DXF1UArc_yoWDuF48pF
-	47Ca4FkrWDJF12yr9rA3W8GFyrZa4fXFWS9F47X3sIg3yDAryDZrn8ZFW5JrW7ZFy7X342
-	qr97GrW7G3ZIk3gCm3ZEXasCq-sJn29KB7ZKAUJUUUU3529EdanIXcx71UUUUU7KY7ZEXa
-	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUUP2b4IE77IF4wAFF20E14v26r1j6r4UM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1Y6r17M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
-	0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v2
-	6F4UJVW0owAaw2AFwI0_JF0_Jw1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqjxCEc2xF0c
-	Ia020Ex4CE44I27wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jw0_
-	WrylYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrw
-	CYjI0SjxkI62AI1cAE67vIY487MxkF7I0En4kS14v26r126r1DMxAIw28IcxkI7VAKI48J
-	MxC20s026xCaFVCjc4AY6r1j6r4UMxCIbckI1I0E14v26r126r1DMI8I3I0E5I8CrVAFwI
-	0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVW8ZVWrXwCIc40Y
-	0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267AKxV
-	W8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Gr0_Cr1l
-	IxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU8_gA5UUUU
-	U==
-X-Rspamd-Queue-Id: 5941F3E952
-X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.70 / 15.00];
+To: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
+        "Pranjal
+ Ramajor Asha Kanojiya" <quic_pkanojiy@quicinc.com>,
+        Sukrut Bellary
+	<sukrut.bellary@linux.com>,
+        Oded Gabbay <ogabbay@kernel.org>,
+        Sumit Semwal
+	<sumit.semwal@linaro.org>
+References: <20230610021200.377452-1-sukrut.bellary@linux.com>
+ <fc979a4e-c30a-2606-9eec-afbba4fdd774@amd.com>
+ <e3a867a8-284b-7250-b1b2-1956f533f6b0@quicinc.com>
+ <ff196b04-e8c5-52d9-852b-9a9cc7eecdd0@amd.com>
+From: Jeffrey Hugo <quic_jhugo@quicinc.com>
+In-Reply-To: <ff196b04-e8c5-52d9-852b-9a9cc7eecdd0@amd.com>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-GUID: 6P2l9VzzfQul7Cq_a4b7dSQKLSzsvKAl
+X-Proofpoint-ORIG-GUID: 6P2l9VzzfQul7Cq_a4b7dSQKLSzsvKAl
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
+ definitions=2023-06-12_06,2023-06-09_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 adultscore=0 impostorscore=0
+ mlxscore=0 mlxlogscore=999 malwarescore=0 phishscore=0 clxscore=1011
+ priorityscore=1501 spamscore=0 bulkscore=0 suspectscore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2305260000 definitions=main-2306120130
+X-Rspamd-Queue-Id: B0A783EBC0
+X-Spamd-Bar: --------
+X-Spamd-Result: default: False [-8.00 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:114.242.206.163];
+	DMARC_POLICY_ALLOW(-0.50)[quicinc.com,none];
+	R_DKIM_ALLOW(-0.20)[quicinc.com:s=qcppdkim1];
+	R_SPF_ALLOW(-0.20)[+ip4:205.220.180.131];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_NO_TLS_LAST(0.10)[];
-	FREEMAIL_TO(0.00)[189.cn,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,loongson.cn,linaro.org,amd.com];
-	ASN(0.00)[asn:4808, ipnet:114.242.192.0/18, country:CN];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.995];
-	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mx0b-0031df01.pphosted.com:rdns,mx0b-0031df01.pphosted.com:helo,quicinc.com:dkim];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:22843, ipnet:205.220.180.0/24, country:US];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	DKIM_TRACE(0.00)[quicinc.com:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	HAS_ORG_HEADER(0.00)[];
+	HAS_XOIP(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_COUNT_THREE(0.00)[4];
 	TO_DN_SOME(0.00)[];
-	DMARC_NA(0.00)[loongson.cn];
-	TAGGED_RCPT(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[]
+	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 35YJDAWGJEPGGTXKK5EOUZ6WFE63Y2D5
-X-Message-ID-Hash: 35YJDAWGJEPGGTXKK5EOUZ6WFE63Y2D5
-X-MailFrom: suijingfeng@loongson.cn
+Message-ID-Hash: 6WYT6Y7SICUGM5EWIAGQHT5WNAFKZWCA
+X-Message-ID-Hash: 6WYT6Y7SICUGM5EWIAGQHT5WNAFKZWCA
+X-MailFrom: quic_jhugo@quicinc.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Nathan Chancellor <nathan@kernel.org>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, loongson-kernel@lists.loongnix.cn
+CC: linux-arm-msm@vger.kernel.org, kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v14 0/2] drm: add kms driver for loongson display controller
+Subject: [Linaro-mm-sig] Re: [PATCH] accel/qaic: Fix dereferencing freed memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/35YJDAWGJEPGGTXKK5EOUZ6WFE63Y2D5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6WYT6Y7SICUGM5EWIAGQHT5WNAFKZWCA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-Hi,
-
-
-Any ideas for this trivial DC driver? Sorry about my broken English.
-
-What to do next? Send a new version?
-
-Please Help!
-
-
-On 2023/5/20 18:57, Sui Jingfeng wrote:
-> From: Sui Jingfeng <suijingfeng@loongson.cn>
->
-> Loongson display controller IP has been integrated in both Loongson north
-> bridge chipset(ls7a1000/ls7a2000) and Loongson SoCs(ls2k1000/ls2k2000), it
-> has been even included in Loongson self-made BMC products.
->
-> This display controller is a PCI device. It has two display pipes and each
-> display pipe support a primary plane and a cursor plane. For the DC in the
-> ls7a1000 and ls2k1000, each display pipe has a DVO output interface which
-> provide RGB888 signals, vertical & horizontal synchronisations and pixel
-> clock. Each CRTC is able to support 1920x1080@60Hz, the maximum resolution
-> of each display pipe is 2048x2048 according to the hardware spec.
->
-> For the DC in LS7A2000, each display pipe is equipped with a built-in HDMI
-> encoder which is compliant with the HDMI 1.4 specification, thus it support
-> 3840x2160@30Hz. The first display pipe is also equipped with a transparent
-> vga encoder which is parallel with the HDMI encoder. The DC in LS7A2000 is
-> more complete compare with the one in old chips, besides above feature, it
-> has two hardware cursors, two hardware vblank counter and two scanout
-> position recorders unit. It also support tiled framebuffer format which
-> can be scanout the tiled framebuffer rendered by the LoongGPU directly.
->
-> v1 -> v2:
->   1) Use hpd status reg when polling for ls7a2000
->   2) Fix all warnings emerged when compile with W=1
->
-> v2 -> v3:
->   1) Add COMPILE_TEST in Kconfig and make the driver off by default
->   2) Alphabetical sorting headers (Thomas)
->   3) Untangle register access functions as much as possible (Thomas)
->   4) Switch to TTM based memory manager and prefer cached mapping
->      for Loongson SoC (Thomas)
->   5) Add chip id detection method, now all models are distinguishable.
->   6) Revise builtin HDMI phy driver, nearly all main stream mode
->      below 4K@30Hz is tested, this driver supported these mode very
->      well including clone display mode and extend display mode.
->
-> v3 -> v4:
->   1) Quickly fix a small mistake.
->
-> v4 -> v5:
->   1) Drop potential support for Loongson 2K series SoC temporary,
->      this part should be resend with the DT binding patch in the future.
->   2) Add per display pipe debugfs support to the builtin HDMI encoder.
->   3) Rewrite atomic_update() for hardware cursors plane(Thomas)
->   4) Rewrite encoder and connector initialization part, untangle it
->      according to the chip(Thomas).
->
-> v5 -> v6:
->   1) Remove stray code which didn't get used, say lsdc_of_get_reserved_ram
->   2) Fix all typos I could found, make sentences and code more readable
->   3) Untangle lsdc_hdmi*_connector_detect() function according to the pipe
->   4) After a serious consideration, we rename this driver as loongson.
->      Because we also have drivers toward the LoongGPU IP in LS7A2000 and
->      LS2K2000. Besides, there are also drivers about the external encoder,
->      HDMI audio driver and vbios support etc. This patch only provide DC
->      driver part, my teammate Li Yi believe that loongson will be more
->      suitable for loongson graphics than lsdc in the long run.
->
->      loongson.ko = LSDC + LoongGPU + encoders driver + vbios/DT ...
->
-> v6 -> v7:
->   1) Add prime support, self-sharing is works. sharing buffer with etnaviv
->      is also tested, and its works with limitation.
->   2) Implement buffer objects tracking with list_head.
->   3) S3(sleep to RAM) is tested on ls3a5000+ls7a2000 evb and it works.
->   4) Rewrite lsdc_bo_move, since ttm core stop allocating resources
->      during BO creation. Patch V1 ~ V6 of this series no longer works
->      on latest kernel. Thus, we send V7 to revival them.
->
-> v7 -> v8:
->   1) Zero a compile warnnings on 32-bit platform, compile with W=1
->   2) Revise lsdc_bo_gpu_offset() and minor cleanup
->   3) Pageflip tested on the virtual terminal with following commands
->
->      modetest -M loongson -s 32:1920x1080 -v
->      modetest -M loongson -s 34:1920x1080 -v -F tiles
->
->     It works like a charm, when running pageflip test with dual screnn
->     configuration, another two additional bo created by the modetest
->     emerged, VRAM usage up to 40+MB, well we have at least 64MB, still
->     enough.
->
->     # cat bos
->
->         bo[0000]: size:     8112kB VRAM
->         bo[0001]: size:       16kB VRAM
->         bo[0002]: size:       16kB VRAM
->         bo[0003]: size:    16208kB VRAM
->         bo[0004]: size:     8112kB VRAM
->         bo[0005]: size:     8112kB VRAM
->
-> v8 -> v9:
->   1) Select I2C and I2C_ALGOBIT in Kconfig and should depend on MMU.
->   2) Using pci_get_domain_bus_and_slot to get the GPU device.
->   3) Other minor improvements.
->
->   Those patches are tested on ls3a5000 + ls7a1000 CRB, ls3a5000 + ls7a2000
->   evb, and lemote a1901 board(ls3a4000 + ls7a1000). On loongson mips CPU,
->   the write combine support should be enabled, to get a decent performance
->   for writing framebuffer data to the VRAM.
->
-> v9 -> v10:
->   1) Revise lsdc_drm_freeze() to implement S3 completely and correctly.
->      I suddenly realized that pinned buffer can not move and VRAM lost
->      power when sleep to RAM. Thus, the data in the buffer who is pinned
->      in VRAM will get lost when resume. Yet it's not big problem because
->      we are software rendering solution which relay on the CPU update the
->      front framebuffer. We can see the garbage data when resume from S3,
->      but the screen will show correct image as I move the cursor. This is
->      due to the cpu repaint. v10 of this patch make S3 perfect by unpin
->      all of BOs in VRAM, evict them all to system RAM.
->
-> v10 -> v11:
->   1) On double screen case, the single giant framebuffer is referenced by
->      two GEM object, hence, it will be pinned by prepare_fb() at lease two
->      times. This cause its pin count > 1. V10 of this patch only unpin VRAM
->      BOs once when suspend, which is not correct on double screen case. V11
->      of this patch unpin BOs until its pin count reach to zero when suspend.
->      Then, we make the S3 support complete finally. With v11, I can't see
->      any garbage data after resume. Tested on both ls7a1000 and ls7a2000
->      platform, with single screen and double screen configuration.
->   2) Fix vblank wait timeout when disable CRTC.
->   3) Test against IGT, at least fbdev test and kms_flip test passed.
->   4) Rewrite pixel PLL update function, magic numbers eliminated (Emil)
->   5) Drop a few common hardware features description in lsdc_desc (Emil)
->   6) Drop lsdc_mode_config_mode_valid(), instead add restrictions in dumb
->      create function. (Emil)
->   7) Untangle the ls7a1000 case and ls7a2000 case completely (Thomas)
->
-> v11 -> v12:
->   none
->
-> v12 -> v13:
->   1) Add benchmark to figure out the bandwidth of the hardware platform.
->      Usage:
->      # cd /sys/kernel/debug/dri/0/
->      # cat benchmark
->
->   2) VRAM is filled with garbage data if uninitialized, add a buffer
->      clearing procedure, clear it on the BO creation time.
->   3) Update copyrights and adjust coding style (Huacai)
->
-> v13 -> v14:
->   1) Trying to add async update support for cursor plane.
->
-> Sui Jingfeng (2):
->    drm: add kms driver for loongson display controller
->    MAINTAINERS: add maintainers for DRM LOONGSON driver
->
->   MAINTAINERS                                   |    8 +
->   drivers/gpu/drm/Kconfig                       |    2 +
->   drivers/gpu/drm/Makefile                      |    1 +
->   drivers/gpu/drm/loongson/Kconfig              |   17 +
->   drivers/gpu/drm/loongson/Makefile             |   20 +
->   drivers/gpu/drm/loongson/lsdc_benchmark.c     |  133 ++
->   drivers/gpu/drm/loongson/lsdc_benchmark.h     |   13 +
->   drivers/gpu/drm/loongson/lsdc_crtc.c          | 1066 +++++++++++++++++
->   drivers/gpu/drm/loongson/lsdc_debugfs.c       |   91 ++
->   drivers/gpu/drm/loongson/lsdc_device.c        |  104 ++
->   drivers/gpu/drm/loongson/lsdc_drv.c           |  495 ++++++++
->   drivers/gpu/drm/loongson/lsdc_drv.h           |  451 +++++++
->   drivers/gpu/drm/loongson/lsdc_gem.c           |  324 +++++
->   drivers/gpu/drm/loongson/lsdc_gem.h           |   37 +
->   drivers/gpu/drm/loongson/lsdc_gfxpll.c        |  199 +++
->   drivers/gpu/drm/loongson/lsdc_gfxpll.h        |   52 +
->   drivers/gpu/drm/loongson/lsdc_i2c.c           |  179 +++
->   drivers/gpu/drm/loongson/lsdc_i2c.h           |   29 +
->   drivers/gpu/drm/loongson/lsdc_irq.c           |   71 ++
->   drivers/gpu/drm/loongson/lsdc_irq.h           |   16 +
->   drivers/gpu/drm/loongson/lsdc_output.h        |   21 +
->   drivers/gpu/drm/loongson/lsdc_output_7a1000.c |  161 +++
->   drivers/gpu/drm/loongson/lsdc_output_7a2000.c |  531 ++++++++
->   drivers/gpu/drm/loongson/lsdc_pixpll.c        |  481 ++++++++
->   drivers/gpu/drm/loongson/lsdc_pixpll.h        |   86 ++
->   drivers/gpu/drm/loongson/lsdc_plane.c         |  781 ++++++++++++
->   drivers/gpu/drm/loongson/lsdc_probe.c         |   56 +
->   drivers/gpu/drm/loongson/lsdc_probe.h         |   12 +
->   drivers/gpu/drm/loongson/lsdc_regs.h          |  402 +++++++
->   drivers/gpu/drm/loongson/lsdc_ttm.c           |  610 ++++++++++
->   drivers/gpu/drm/loongson/lsdc_ttm.h           |   99 ++
->   31 files changed, 6548 insertions(+)
->   create mode 100644 drivers/gpu/drm/loongson/Kconfig
->   create mode 100644 drivers/gpu/drm/loongson/Makefile
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_benchmark.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_benchmark.h
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_crtc.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_debugfs.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_device.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_drv.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_drv.h
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_gem.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_gem.h
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_gfxpll.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_gfxpll.h
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_i2c.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_i2c.h
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_irq.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_irq.h
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_output.h
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_output_7a1000.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_output_7a2000.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_pixpll.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_pixpll.h
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_plane.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_probe.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_probe.h
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_regs.h
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_ttm.c
->   create mode 100644 drivers/gpu/drm/loongson/lsdc_ttm.h
->
--- 
-Jingfeng
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gNi8xMi8yMDIzIDc6MjEgQU0sIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6DQo+IEFtIDEyLjA2
+LjIzIHVtIDE1OjAzIHNjaHJpZWIgUHJhbmphbCBSYW1ham9yIEFzaGEgS2Fub2ppeWE6DQo+Pg0K
+Pj4NCj4+IE9uIDYvMTIvMjAyMyA0OjUyIFBNLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0KPj4+
+DQo+Pj4NCj4+PiBBbSAxMC4wNi4yMyB1bSAwNDoxMiBzY2hyaWViIFN1a3J1dCBCZWxsYXJ5Og0K
+Pj4+PiBzbWF0Y2ggd2FybmluZzoNCj4+Pj4gwqDCoMKgwqBkcml2ZXJzL2FjY2VsL3FhaWMvcWFp
+Y19kYXRhLmM6NjIwIHFhaWNfZnJlZV9vYmplY3QoKSBlcnJvcjoNCj4+Pj4gwqDCoMKgwqDCoMKg
+wqAgZGVyZWZlcmVuY2luZyBmcmVlZCBtZW1vcnkgJ29iai0+aW1wb3J0X2F0dGFjaCcNCj4+Pj4N
+Cj4+Pj4gb2JqLT5pbXBvcnRfYXR0YWNoIGlzIGRldGFjaGVkIGFuZCBmcmVlZCB1c2luZyBkbWFf
+YnVmX2RldGFjaCgpLg0KPj4+PiBCdXQgdXNlZCBhZnRlciBmcmVlIHRvIGRlY3JlYXNlIHRoZSBk
+bWFidWYgcmVmIGNvdW50IHVzaW5nDQo+Pj4+IGRtYV9idWZfcHV0KCkuDQo+Pj4+DQo+Pj4+IEZp
+eGVzOiBmZjEzYmU4MzAzMzMgKCJhY2NlbC9xYWljOiBBZGQgZGF0YXBhdGgiKQ0KPj4+PiBTaWdu
+ZWQtb2ZmLWJ5OiBTdWtydXQgQmVsbGFyeSA8c3VrcnV0LmJlbGxhcnlAbGludXguY29tPg0KPj4+
+PiAtLS0NCj4+Pj4gwqAgZHJpdmVycy9hY2NlbC9xYWljL3FhaWNfZGF0YS5jIHwgNCArKystDQo+
+Pj4+IMKgIDEgZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkNCj4+
+Pj4NCj4+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvYWNjZWwvcWFpYy9xYWljX2RhdGEuYyANCj4+
+Pj4gYi9kcml2ZXJzL2FjY2VsL3FhaWMvcWFpY19kYXRhLmMNCj4+Pj4gaW5kZXggZTQyYzFmOWZm
+ZmY4Li43Y2JhNGQ2ODBlYTggMTAwNjQ0DQo+Pj4+IC0tLSBhL2RyaXZlcnMvYWNjZWwvcWFpYy9x
+YWljX2RhdGEuYw0KPj4+PiArKysgYi9kcml2ZXJzL2FjY2VsL3FhaWMvcWFpY19kYXRhLmMNCj4+
+Pj4gQEAgLTYxMywxMSArNjEzLDEzIEBAIHN0YXRpYyBpbnQgcWFpY19nZW1fb2JqZWN0X21tYXAo
+c3RydWN0IA0KPj4+PiBkcm1fZ2VtX29iamVjdCAqb2JqLCBzdHJ1Y3Qgdm1fYXJlYV9zdHJ1Yw0K
+Pj4+PiDCoCBzdGF0aWMgdm9pZCBxYWljX2ZyZWVfb2JqZWN0KHN0cnVjdCBkcm1fZ2VtX29iamVj
+dCAqb2JqKQ0KPj4+PiDCoCB7DQo+Pj4+IMKgwqDCoMKgwqAgc3RydWN0IHFhaWNfYm8gKmJvID0g
+dG9fcWFpY19ibyhvYmopOw0KPj4+PiArwqDCoMKgIHN0cnVjdCBkbWFfYnVmICpkbWFidWY7DQo+
+Pj4NCj4+PiBNYXliZSBtb3ZlIHRoYXQgdmFyaWFibGUgaW50byB0aGUgaWYuDQo+Pj4NCj4+Pj4g
+wqDCoMKgwqDCoCBpZiAob2JqLT5pbXBvcnRfYXR0YWNoKSB7DQo+Pj4+IMKgwqDCoMKgwqDCoMKg
+wqDCoCAvKiBETUFCVUYvUFJJTUUgUGF0aCAqLw0KPj4+PiArwqDCoMKgwqDCoMKgwqAgZG1hYnVm
+ID0gb2JqLT5pbXBvcnRfYXR0YWNoLT5kbWFidWY7DQo+Pj4+IMKgwqDCoMKgwqDCoMKgwqDCoCBk
+bWFfYnVmX2RldGFjaChvYmotPmltcG9ydF9hdHRhY2gtPmRtYWJ1ZiwgDQo+Pj4+IG9iai0+aW1w
+b3J0X2F0dGFjaCk7DQo+Pj4+IC3CoMKgwqDCoMKgwqDCoCBkbWFfYnVmX3B1dChvYmotPmltcG9y
+dF9hdHRhY2gtPmRtYWJ1Zik7DQo+Pj4+ICvCoMKgwqDCoMKgwqDCoCBkbWFfYnVmX3B1dChkbWFi
+dWYpOw0KPj4+DQo+Pj4gSSBzdHJvbmdseSBhc3N1bWUgeW91IGFyZSBub3QgdXNpbmcgdGhlIEdF
+TSBwcmltZSBoZWxwZXJzIGZvciB0aGlzPw0KPj4+DQo+Pj4gQ2hyaXN0aWFuLg0KPj4NCj4+IERy
+aXZlciB1c2VzIGRybV9nZW1fcHJpbWVfZmRfdG9faGFuZGxlKCkgaGVscGVyIGZ1bmN0aW9uIGJ1
+dCBpdCBhbHNvIA0KPj4gcmVnaXN0ZXJzIGZvciAtPmdlbV9wcmltZV9pbXBvcnQoKSB3aGljaCBp
+cyBpbnRlcm5hbGx5IGNhbGxlZCBieSANCj4+IGRybV9nZW1fcHJpbWVfZmRfdG9faGFuZGxlKCku
+IEFsbCB0aGUgb3BlcmF0aW9ucyBkb25lIGluIA0KPj4gZ2VtX3ByaW1lX2ltcG9ydCgpIGFyZSB1
+bmRvbmUgaGVyZS4NCj4gDQo+IFRoZW4gd2h5IGRvbid0IHlvdSB1c2UgZHJtX3ByaW1lX2dlbV9k
+ZXN0cm95KCkgd2hpY2ggaXMgdGhlIGNsZWFudXAgDQo+IGhlbHBlciBmb3IgaW1wb3J0cyBjcmVh
+dGVkIGJ5IC0+Z2VtX3ByaW1lX2ltcG9ydCgpID8NCj4gDQo+IFRoYXQgbG9va3MgcHJldHR5IG11
+Y2ggaWRlbnRpY2FsIHRvIHdoYXQgeW91IGRvIGhlcmUgbWFudWFsbHkuDQoNCkkgdGhpbmsgZGVz
+dHJveSgpIHdhc24ndCB1c2VkIGJlY2F1c2Ugd2UgYXJlIG5ldyB0byBEUk0gYW5kIHNvbWV0aW1l
+cyANCmNvbmZ1c2VkIGJ5IHRoZSBtdWx0aXR1ZGUgb2Ygb3B0aW9ucy4gIEkgYXBwcmVjaWF0ZSB0
+aGUgc3VnZ2VzdGlvbiBhbmQgDQp3aWxsIGZvbGxvdyB1cCB0byBzZWUgaWYgZGVzdHJveSgpIHdp
+bGwgd29yayBoZXJlLCBvciBpZGVudGlmeSB3aGF0IA0Kd291bGQgcHJldmVudCB0aGUgdXNlIG9m
+IGl0Lg0KDQotSmVmZg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5s
+aW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1s
+ZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
