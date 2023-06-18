@@ -2,180 +2,173 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1AEF6734BEA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 Jun 2023 08:54:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B2F3734BEF
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 Jun 2023 08:54:59 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B9A8C3F356
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 Jun 2023 06:54:38 +0000 (UTC)
-Received: from mail-io1-f79.google.com (mail-io1-f79.google.com [209.85.166.79])
-	by lists.linaro.org (Postfix) with ESMTPS id 356093E923
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 17 Jun 2023 18:42:47 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 533B343BD7
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 Jun 2023 06:54:58 +0000 (UTC)
+Received: from mail.208.org (unknown [183.242.55.162])
+	by lists.linaro.org (Postfix) with ESMTPS id 3632D3EC14
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 18 Jun 2023 14:54:40 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of 3pv6NZAkbAAcz56rhsslyhwwpk.nvvnsl1zlyjvu0lu0.jvt@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.166.79 as permitted sender) smtp.mailfrom=3pv6NZAkbAAcz56rhsslyhwwpk.nvvnsl1zlyjvu0lu0.jvt@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none)
-Received: by mail-io1-f79.google.com with SMTP id ca18e2360f4ac-7778eb7966eso179064039f.1
-        for <linaro-mm-sig@lists.linaro.org>; Sat, 17 Jun 2023 11:42:47 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1687027366; x=1689619366;
-        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=DBaDf6IaqpzK1ZRigtHt9P4RoGRnNk1rRIyUUGVymcY=;
-        b=LJwC4EhTZI3AD1AoJGX33K2Ady04WWaihSZ64LyYSjs4roOyrz+JzRN+R0Qxz4k1VT
-         7/4wDuazZEIky7BmvavQJCtI5E7ZdwoRWaVxXWYb+jdUlGOZ8UeLukjTJR0mvDNxevyJ
-         GYM96bLe6JRNMCHpuKuWlr3GEtiOUjYJazxT0etR4xPRbtSoreb8zFLyHvrzLyYkJPht
-         eJDW8FY+hNqWZiwzQJUwOiBfr2rBqH6RLSJ+7uW4Grvz2hlIy0SShQdx+cHgw9ps9WmS
-         b28hRJ1e9C0kkUEUHVHbNVKPWV8JorCC5IyjN/NkKhSssm8mxYGnafKVZjTKj93wD+mF
-         595A==
-X-Gm-Message-State: AC+VfDwoM8kon+1rFwW1hdMOyB5Q3PeFc9+Iw+YadfVIBWnpDsUQNSum
-	8/n9V8k6kme/ETFdsvcJujt6sGWHZFPpVB1Whbu8DTrGQSwK
-X-Google-Smtp-Source: ACHHUZ7CYafZSONe2OvDQu1FzU/g//AWiU+h+oZNfT7C8pKY2i6K0k+u8Q1dvFGQcIC5sN+Dv8KKCW7XpvJDLw7jCAqjoAFcGZXK
+	dkim=none ("invalid DKIM record") header.d=208.org header.s=dkim header.b="F XPLeXB";
+	spf=pass (lists.linaro.org: domain of zhumao001@208suo.com designates 183.242.55.162 as permitted sender) smtp.mailfrom=zhumao001@208suo.com;
+	dmarc=none
+Received: from mail.208.org (email.208.org [127.0.0.1])
+	by mail.208.org (Postfix) with ESMTP id 4QkbXD5n4szBJTDG
+	for <linaro-mm-sig@lists.linaro.org>; Sun, 18 Jun 2023 22:54:36 +0800 (CST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=208.org; h=
+	content-type:message-id:user-agent:references:in-reply-to
+	:subject:to:from:date:mime-version; s=dkim; t=1687100076; x=
+	1689692077; bh=Ycho+bN0cSAaFhdFtGizO8c/EFquN3+WpUviiSP5YR8=; b=F
+	XPLeXBJWSqqIFstR0Ml+DtnxWTCvt8+m+az5wy7SbjOK1ylQkI/L3me/JCn/HFdE
+	vas70yi+BmShFLXHLSoDDdteQUSx7rEiLEVCHDx9SSyT7veTBQ+IBhSC8Y3uMFG5
+	TfLhOgfpEeIvRB/HzfRo1LKZqY4T25EaQVaUo5QVzrXpAsV5r+BAkL+e+DyTRdm5
+	SoTmpclXZXpfhP0g1KMcYpnnUqMNbl/y+Sjmp9ELWYWF4OLp3pSpufCabem3hZA6
+	UQKObqJTpBpWqwGt3qfQwLYePO1cDcFuIUYU28XWhIWARFGQQgIXCmIalVQB4QLH
+	U7UcTIJTr72YPT6QfKUAA==
+X-Virus-Scanned: amavisd-new at mail.208.org
+Received: from mail.208.org ([127.0.0.1])
+	by mail.208.org (mail.208.org [127.0.0.1]) (amavisd-new, port 10026)
+	with ESMTP id SgwYb1W_flCi for <linaro-mm-sig@lists.linaro.org>;
+	Sun, 18 Jun 2023 22:54:36 +0800 (CST)
+Received: from localhost (email.208.org [127.0.0.1])
+	by mail.208.org (Postfix) with ESMTPSA id 4QkbXD111szBJJDJ;
+	Sun, 18 Jun 2023 22:54:36 +0800 (CST)
 MIME-Version: 1.0
-X-Received: by 2002:a92:d204:0:b0:338:bdd7:d439 with SMTP id
- y4-20020a92d204000000b00338bdd7d439mr1512731ily.6.1687027366660; Sat, 17 Jun
- 2023 11:42:46 -0700 (PDT)
-Date: Sat, 17 Jun 2023 11:42:46 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000ea931b05fe57aa62@google.com>
-From: syzbot <syzbot+4fad2e57beb6397ab2fc@syzkaller.appspotmail.com>
-To: airlied@gmail.com, christian.koenig@amd.com, daniel@ffwll.ch,
-	dri-devel@lists.freedesktop.org, glider@google.com,
-	linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
-	linux-media@vger.kernel.org, maarten.lankhorst@linux.intel.com,
-	mripard@kernel.org, sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com,
-	tzimmermann@suse.de
-X-Spamd-Result: default: False [-1.90 / 15.00];
+Date: Sun, 18 Jun 2023 22:54:36 +0800
+From: zhumao001@208suo.com
+To: robdclark@gmail.com, quic_abhinavk@quicinc.com,
+ dmitry.baryshkov@linaro.org, airlied@gmail.com, daniel@ffwll.ch,
+ sumit.semwal@linaro.org, christian.koenig@amd.com, sean@poorly.run
+In-Reply-To: <20230618143813.15142-4-dengshaomin@cdjrlc.com>
+References: <20230618143813.15142-1-dengshaomin@cdjrlc.com>
+ <20230618143813.15142-4-dengshaomin@cdjrlc.com>
+User-Agent: Roundcube Webmail
+Message-ID: <610b47a2989976b9dae162ecc55ddc85@208suo.com>
+X-Sender: zhumao001@208suo.com
+X-Spamd-Result: default: False [0.21 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=753079601b2300f9];
-	FORGED_SENDER(0.30)[syzbot@syzkaller.appspotmail.com,3pv6NZAkbAAcz56rhsslyhwwpk.nvvnsl1zlyjvu0lu0.jvt@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
-	RCVD_COUNT_ONE(0.00)[1];
-	TAGGED_FROM(0.00)[4fad2e57beb6397ab2fc];
-	FREEMAIL_TO(0.00)[gmail.com,amd.com,ffwll.ch,lists.freedesktop.org,google.com,lists.linaro.org,vger.kernel.org,linux.intel.com,kernel.org,linaro.org,googlegroups.com,suse.de];
-	R_DKIM_NA(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	MIME_TRACE(0.00)[0:+];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.166.79:from];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	REDIRECTOR_URL(0.00)[goo.gl];
-	SUBJECT_HAS_QUESTION(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	URIBL_BLOCKED(0.00)[googlegroups.com:email,goo.gl:url];
-	ARC_NA(0.00)[];
+	HFILTER_HOSTNAME_UNKNOWN(2.50)[];
+	RDNS_NONE(1.00)[];
+	R_SPF_ALLOW(-0.20)[+a];
+	MIME_GOOD(-0.10)[multipart/alternative,text/plain];
+	XM_UA_NO_VERSION(0.01)[];
+	NEURAL_SPAM(0.00)[0.612];
+	FREEMAIL_TO(0.00)[gmail.com,quicinc.com,linaro.org,ffwll.ch,amd.com,poorly.run];
+	ASN(0.00)[asn:56048, ipnet:183.242.0.0/15, country:CN];
+	FROM_EQ_ENVFROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	NEURAL_SPAM(0.00)[0.975];
-	TO_DN_NONE(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	R_DKIM_PERMFAIL(0.00)[208.org:s=dkim];
+	RCPT_COUNT_TWELVE(0.00)[14];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,3pv6NZAkbAAcz56rhsslyhwwpk.nvvnsl1zlyjvu0lu0.jvt@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com]
+	DKIM_TRACE(0.00)[208.org:~];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	ARC_NA(0.00)[];
+	FROM_NO_DN(0.00)[];
+	TO_DN_NONE(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	DMARC_NA(0.00)[208suo.com];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 356093E923
-X-Spamd-Bar: -
-X-MailFrom: 3pv6NZAkbAAcz56rhsslyhwwpk.nvvnsl1zlyjvu0lu0.jvt@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
+X-Rspamd-Queue-Id: 3632D3EC14
+X-Spamd-Bar: /
+X-MailFrom: zhumao001@208suo.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: JL4WNYF2FETOOHA7FXOOCUW7WJLKD4NE
-X-Message-ID-Hash: JL4WNYF2FETOOHA7FXOOCUW7WJLKD4NE
-X-Mailman-Approved-At: Mon, 19 Jun 2023 06:54:24 +0000
+Message-ID-Hash: 3E67XW5AZAWL4HOR4LCEKGKC5IXYCXW3
+X-Message-ID-Hash: 3E67XW5AZAWL4HOR4LCEKGKC5IXYCXW3
+X-Mailman-Approved-At: Mon, 19 Jun 2023 06:54:44 +0000
+CC: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [syzbot] [dri?] KMSAN: uninit-value in drm_mode_setcrtc
+Subject: [Linaro-mm-sig] [PATCH] drm/msm: Fix typo in comment
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JL4WNYF2FETOOHA7FXOOCUW7WJLKD4NE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3E67XW5AZAWL4HOR4LCEKGKC5IXYCXW3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/mixed; boundary="===============3870149332827419272=="
+
+--===============3870149332827419272==
+Content-Type: multipart/alternative;
+ boundary="=_bd33facbe9810b6ba40fa09dc0a42d93"
+
+--=_bd33facbe9810b6ba40fa09dc0a42d93
 Content-Transfer-Encoding: 7bit
-
-Hello,
-
-syzbot found the following issue on:
-
-HEAD commit:    2741f1b02117 string: use __builtin_memcpy() in strlcpy/str..
-git tree:       https://github.com/google/kmsan.git master
-console+strace: https://syzkaller.appspot.com/x/log.txt?x=17bb33d1280000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=753079601b2300f9
-dashboard link: https://syzkaller.appspot.com/bug?extid=4fad2e57beb6397ab2fc
-compiler:       Debian clang version 15.0.7, GNU ld (GNU Binutils for Debian) 2.35.2
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=16d669a5280000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=14d8f095280000
-
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/ebd05512d8d7/disk-2741f1b0.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/aa555b09582c/vmlinux-2741f1b0.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/5ea0934e02cc/bzImage-2741f1b0.xz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+4fad2e57beb6397ab2fc@syzkaller.appspotmail.com
-
-=====================================================
-BUG: KMSAN: uninit-value in drm_mode_setcrtc+0x1ad3/0x24a0 drivers/gpu/drm/drm_crtc.c:896
- drm_mode_setcrtc+0x1ad3/0x24a0 drivers/gpu/drm/drm_crtc.c:896
- drm_ioctl_kernel+0x5ae/0x730 drivers/gpu/drm/drm_ioctl.c:788
- drm_ioctl+0xd12/0x1590 drivers/gpu/drm/drm_ioctl.c:891
- vfs_ioctl fs/ioctl.c:51 [inline]
- __do_sys_ioctl fs/ioctl.c:870 [inline]
- __se_sys_ioctl+0x222/0x400 fs/ioctl.c:856
- __x64_sys_ioctl+0x96/0xe0 fs/ioctl.c:856
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x41/0xc0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-
-Uninit was created at:
- slab_post_alloc_hook+0x12d/0xb60 mm/slab.h:716
- slab_alloc_node mm/slub.c:3451 [inline]
- __kmem_cache_alloc_node+0x4ff/0x8b0 mm/slub.c:3490
- __do_kmalloc_node mm/slab_common.c:965 [inline]
- __kmalloc+0x121/0x3c0 mm/slab_common.c:979
- kmalloc_array include/linux/slab.h:596 [inline]
- drm_mode_setcrtc+0x1dba/0x24a0 drivers/gpu/drm/drm_crtc.c:846
- drm_ioctl_kernel+0x5ae/0x730 drivers/gpu/drm/drm_ioctl.c:788
- drm_ioctl+0xd12/0x1590 drivers/gpu/drm/drm_ioctl.c:891
- vfs_ioctl fs/ioctl.c:51 [inline]
- __do_sys_ioctl fs/ioctl.c:870 [inline]
- __se_sys_ioctl+0x222/0x400 fs/ioctl.c:856
- __x64_sys_ioctl+0x96/0xe0 fs/ioctl.c:856
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x41/0xc0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-
-CPU: 1 PID: 4955 Comm: syz-executor275 Not tainted 6.4.0-rc4-syzkaller-g2741f1b02117 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 05/25/2023
-=====================================================
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
 
 
+Fix typo in comment of msm_gem.c.
+
+Signed-off-by: Zhu Mao <zhumao001@208suo.com>
 ---
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
+  drivers/gpu/drm/msm/msm_gem.c | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
 
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
+diff --git a/drivers/gpu/drm/msm/msm_gem.c 
+b/drivers/gpu/drm/msm/msm_gem.c
+index 20cfd86d2b32..ef81074416af 100644
+--- a/drivers/gpu/drm/msm/msm_gem.c
++++ b/drivers/gpu/drm/msm/msm_gem.c
+@@ -503,8 +503,8 @@ void msm_gem_unpin_locked(struct drm_gem_object 
+*obj)
 
-If the bug is already fixed, let syzbot know by replying with:
-#syz fix: exact-commit-title
+  /* Special unpin path for use in fence-signaling path, avoiding the 
+need
+   * to hold the obj lock by only depending on things that a protected by
+- * the LRU lock.  In particular we know that that we already have 
+backing
+- * and and that the object's dma_resv has the fence for the current
++ * the LRU lock.  In particular we know that we already have backing
++ * and that the object's dma_resv has the fence for the current
+   * submit/job which will prevent us racing against page eviction.
+   */
+  void msm_gem_unpin_active(struct drm_gem_object *obj)
+--=_bd33facbe9810b6ba40fa09dc0a42d93
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
 
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3DUTF-8" /></head><body style=3D'font-size: 12pt; font-family: Verdana,Gen=
+eva,sans-serif'>
+<div class=3D"pre" style=3D"margin: 0; padding: 0; font-family: monospace">=
+Fix typo in comment of msm_gem.c.<br /><br />Signed-off-by: Zhu Mao &lt;zhu=
+mao001@208suo.com&gt;<br />---<br />&nbsp;drivers/gpu/drm/msm/msm_gem.c | 4=
+ ++--<br />&nbsp;1 file changed, 2 insertions(+), 2 deletions(-)<br /><br /=
+>diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c=
+<br />index 20cfd86d2b32..ef81074416af 100644<br />--- a/drivers/gpu/drm/ms=
+m/msm_gem.c<br />+++ b/drivers/gpu/drm/msm/msm_gem.c<br />@@ -503,8 +503,8 =
+@@ void msm_gem_unpin_locked(struct drm_gem_object *obj)<br />&nbsp;<br />&=
+nbsp;/* Special unpin path for use in fence-signaling path, avoiding the ne=
+ed<br />&nbsp;&nbsp;* to hold the obj lock by only depending on things that=
+ a protected by<br />- * the LRU lock. &nbsp;In particular we know that tha=
+t we already have backing<br />- * and and that the object's dma_resv has t=
+he fence for the current<br />+ * the LRU lock. &nbsp;In particular we know=
+ that we already have backing<br />+ * and that the object's dma_resv has t=
+he fence for the current<br />&nbsp;&nbsp;* submit/job which will prevent u=
+s racing against page eviction.<br />&nbsp;&nbsp;*/<br />&nbsp;void msm_gem=
+_unpin_active(struct drm_gem_object *obj)</div>
 
-If you want to change bug's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
+</body></html>
 
-If the bug is a duplicate of another bug, reply with:
-#syz dup: exact-subject-of-another-report
+--=_bd33facbe9810b6ba40fa09dc0a42d93--
 
-If you want to undo deduplication, reply with:
-#syz undup
+--===============3870149332827419272==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============3870149332827419272==--
