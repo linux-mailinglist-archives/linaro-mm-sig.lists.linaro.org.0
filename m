@@ -2,83 +2,74 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4E98E73D735
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Jun 2023 07:35:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B91973FE9B
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Jun 2023 16:44:09 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E999A3F0CC
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Jun 2023 05:35:29 +0000 (UTC)
-Received: from fd01.gateway.ufhost.com (fd01.gateway.ufhost.com [61.152.239.71])
-	by lists.linaro.org (Postfix) with ESMTP id 0988F3ED2A
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Jun 2023 05:35:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4C51E3EF35
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Jun 2023 14:44:08 +0000 (UTC)
+Received: from mail2-relais-roc.national.inria.fr (mail2-relais-roc.national.inria.fr [192.134.164.83])
+	by lists.linaro.org (Postfix) with ESMTPS id A0C9C3EF35
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Jun 2023 14:43:52 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of keith.zhao@starfivetech.com designates 61.152.239.71 as permitted sender) smtp.mailfrom=keith.zhao@starfivetech.com;
-	dmarc=none
-Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
-	by fd01.gateway.ufhost.com (Postfix) with ESMTP id CBF318139;
-	Mon, 26 Jun 2023 13:34:56 +0800 (CST)
-Received: from EXMBX061.cuchost.com (172.16.6.61) by EXMBX166.cuchost.com
- (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Mon, 26 Jun
- 2023 13:34:56 +0800
-Received: from [192.168.1.115] (180.164.60.184) by EXMBX061.cuchost.com
- (172.16.6.61) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Mon, 26 Jun
- 2023 13:34:56 +0800
-Message-ID: <32d1db3e-be6a-5219-b886-14c5f5102a5f@starfivetech.com>
-Date: Mon, 26 Jun 2023 13:34:55 +0800
+	dkim=pass header.d=inria.fr header.s=dc header.b=YpuufV72;
+	spf=pass (lists.linaro.org: domain of Julia.Lawall@inria.fr designates 192.134.164.83 as permitted sender) smtp.mailfrom=Julia.Lawall@inria.fr;
+	dmarc=pass (policy=none) header.from=inria.fr
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=inria.fr; s=dc;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=lz+eaKXjltZfgC96+KOEH+DiV357kqzsKaP1ME9j9JM=;
+  b=YpuufV72ER5dSm9wrYSnJ+nyISX1oQx33v1s2pGZoMDoTbTZApc/Qnr+
+   jWRuBVmLvwZwmibFQ5jrR1vtZ5noOKi7DSKRNrP0U1BZ9FCltFGcibx6p
+   ck1ThN0OMstSb7PrPLh1Mq91rYGjkQ4mlVR9Zej3KEIn+kL4eNkAXPzxE
+   c=;
+X-IronPort-AV: E=Sophos;i="6.01,162,1684792800";
+   d="scan'208";a="114936315"
+Received: from i80.paris.inria.fr (HELO i80.paris.inria.fr.) ([128.93.90.48])
+  by mail2-relais-roc.national.inria.fr with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jun 2023 16:43:51 +0200
+From: Julia Lawall <Julia.Lawall@inria.fr>
+To: linux-hyperv@vger.kernel.org
+Date: Tue, 27 Jun 2023 16:43:15 +0200
+Message-Id: <20230627144339.144478-1-Julia.Lawall@inria.fr>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Content-Language: en-US
-References: <20230602074043.33872-1-keith.zhao@starfivetech.com>
- <CGME20230602081437epcas1p36b7961b1d3f01dbed3fe2672a92e9d92@epcas1p3.samsung.com>
- <20230602074043.33872-10-keith.zhao@starfivetech.com>
- <003a01d9a57b$c140f340$43c2d9c0$@samsung.com>
-From: Keith Zhao <keith.zhao@starfivetech.com>
-To: undisclosed-recipients:;
-In-Reply-To: <003a01d9a57b$c140f340$43c2d9c0$@samsung.com>
-X-Originating-IP: [180.164.60.184]
-X-ClientProxiedBy: EXCAS062.cuchost.com (172.16.6.22) To EXMBX061.cuchost.com
- (172.16.6.61)
-X-YovoleRuleAgent: yovoleflag
-X-Spamd-Result: default: False [1.80 / 15.00];
-	R_UNDISC_RCPT(3.00)[];
+X-Spamd-Result: default: False [-6.00 / 15.00];
+	DWL_DNSWL_HI(-3.50)[inria.fr:dkim];
 	BAYES_HAM(-3.00)[100.00%];
-	FORGED_RECIPIENTS(2.00)[m:,s:linaro-mm-sig@lists.linaro.org];
-	R_SPF_ALLOW(-0.20)[+ip4:61.152.239.0/24];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[inria.fr,none];
+	R_SPF_ALLOW(-0.20)[+ip4:192.134.164.0/24];
+	R_DKIM_ALLOW(-0.20)[inria.fr:s=dc];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_NO_TLS_LAST(0.10)[];
-	R_DKIM_NA(0.00)[];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:4812, ipnet:61.152.0.0/16, country:CN];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
 	MIME_TRACE(0.00)[0:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[61.152.239.71:from];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCPT_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:2200, ipnet:192.134.164.0/24, country:FR];
+	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	HAS_XOIP(0.00)[];
-	TO_DN_ALL(0.00)[];
-	URIBL_BLOCKED(0.00)[fd01.gateway.ufhost.com:helo,fd01.gateway.ufhost.com:rdns,infradead.org:email];
-	NEURAL_SPAM(0.00)[0.801];
-	DMARC_NA(0.00)[starfivetech.com];
-	FROM_EQ_ENVFROM(0.00)[]
+	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[35];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[inria.fr:+];
+	FREEMAIL_CC(0.00)[vger.kernel.org,chromium.org,wanadoo.fr,kernel.org,googlegroups.com,gmail.com,google.com,lists.linux.dev,arm.com,nvidia.com,lists.linux-foundation.org,linux.alibaba.com,lists.linaro.org,redhat.com,codeaurora.org,collabora.com,lists.freedesktop.org,linux.intel.com,zytor.com];
+	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
-X-Spam-Level: *
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 0988F3ED2A
-X-Spamd-Bar: +
-Message-ID-Hash: 5BMCVIBPQ7FFZN3KYP5RJX67OO5AUJ77
-X-Message-ID-Hash: 5BMCVIBPQ7FFZN3KYP5RJX67OO5AUJ77
-X-MailFrom: keith.zhao@starfivetech.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+X-Rspamd-Queue-Id: A0C9C3EF35
+X-Spamd-Bar: ------
+Message-ID-Hash: WW2XHUPMEOHMVVR3ABKUBN46RIU5ATS6
+X-Message-ID-Hash: WW2XHUPMEOHMVVR3ABKUBN46RIU5ATS6
+X-MailFrom: Julia.Lawall@inria.fr
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: kernel-janitors@vger.kernel.org, keescook@chromium.org, christophe.jaillet@wanadoo.fr, kuba@kernel.org, kasan-dev@googlegroups.com, Andrey Konovalov <andreyknvl@gmail.com>, Dmitry Vyukov <dvyukov@google.com>, iommu@lists.linux.dev, linux-tegra@vger.kernel.org, Robin Murphy <robin.murphy@arm.com>, virtualization@lists.linux-foundation.org, Xuan Zhuo <xuanzhuo@linux.alibaba.com>, linux-scsi@vger.kernel.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, John Stultz <jstultz@google.com>, Brian Starkey <Brian.Starkey@arm.com>, Laura Abbott <labbott@redhat.com>, Liam Mark <lmark@codeaurora.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, netdev@vger.kernel.org, Shailend Chand <shailend@google.com>, linux-rdma@vger.kernel.org, mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org, linux-btrfs@vger.kernel.org, intel-gvt-dev@lists.freedesktop.org, intel-gfx@lists.freedesktop.org, Dave Hansen <dave.hansen@
+ linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>, linux-sgx@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 9/9] drm/verisilicon: Add starfive hdmi driver
+Subject: [Linaro-mm-sig] [PATCH v2 00/24] use vmalloc_array and vcalloc
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5BMCVIBPQ7FFZN3KYP5RJX67OO5AUJ77/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WW2XHUPMEOHMVVR3ABKUBN46RIU5ATS6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -88,146 +79,86 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-yes I tested 
-modetest -M starfive -D 0 -s 116@31:1280x720-59.94 -v
-modetest -M starfive -D 0 -s 116@31:1920x1080 -v
+The functions vmalloc_array and vcalloc were introduced in
 
-and the second command will repeat the problem
-as you advise at the beginning
-I call the "starfive_hdmi_setup"  function in the "starfive_hdmi_encoder_enable"
-instead of "starfive_hdmi_encoder_mode_set"
-resolve the problem
-i will add this modify in my next patch
+commit a8749a35c399 ("mm: vmalloc: introduce array allocation functions")
 
-Thank you Hoegeun
+but are not used much yet.  This series introduces uses of
+these functions, to protect against multiplication overflows.
 
-On 2023/6/23 10:38, Hoegeun Kwon wrote:
-> Hi Keith,
-> 
-> There is a problem with stopping when changing modes.
-> 
-> Below test log
-> 
-> root:~> modetest -Mstarfive -c
-> Connectors:
-> id      encoder status          name            size (mm)       modes
-> encoders
-> 116     115     connected       HDMI-A-1        320x180         51      115
->   modes:
->         index name refresh (Hz) hdisp hss hse htot vdisp vss vse vtot
->   #0 1280x800 59.91 1280 1328 1360 1440 800 803 809 823 71000 flags: phsync,
-> pvsync; type: preferred, driver
->   #1 1920x1080 60.00 1920 2008 2052 2200 1080 1084 1089 1125 148500 flags:
-> phsync, pvsync; type: driver
-> [...]
-> 
-> root:~> modetest -Mstarfive -s 116:#0 -v
-> setting mode 1280x800-59.91Hz on connectors 116, crtc 31
-> freq: 60.65Hz
-> freq: 59.91Hz
-> freq: 59.91Hz
-> 
-> root:~> modetest -Mstarfive -s 116:#1 -v
-> setting mode 1920x1080-60.00Hz on connectors 116, crtc 31
-> [   94.535626] rcu: INFO: rcu_sched detected stalls on CPUs/tasks:
-> [   94.560985] rcu:     1-...0: (20 ticks this GP)
-> idle=c9bc/1/0x4000000000000000 softirq=3869/3871 fqs=1120
-> [   94.589532] rcu:     (detected by 3, t=5264 jiffies, g=4645, q=63
-> ncpus=4)
-> [   94.615335] Task dump for CPU 1:
-> [   94.637723] task:modetest        state:R  running task     stack:0
-> pid:407   ppid:397    flags:0x00000008
-> [   94.667299] Call Trace:
-> [   94.689297] [<ffffffff80d1e8fc>] __schedule+0x2a8/0xa52
-> [   94.714221] [<ffffffff80d1f100>] schedule+0x5a/0xdc
-> [   94.738626] [<ffffffff80d25a14>] schedule_timeout+0x220/0x2a6
-> [   94.763762] [<ffffffff80d2037a>] wait_for_completion+0xfe/0x126
-> [   94.789073] [<ffffffff8002ffe4>] kthread_flush_worker+0x82/0xa0
-> 
-> 
->> -----Original Message-----
->> From: dri-devel <dri-devel-bounces@lists.freedesktop.org> On Behalf Of
->> Keith Zhao
->> Sent: Friday, June 2, 2023 4:41 PM
->> To: dri-devel@lists.freedesktop.org; devicetree@vger.kernel.org; linux-
->> kernel@vger.kernel.org; linux-riscv@lists.infradead.org; linux-
->> media@vger.kernel.org; linaro-mm-sig@lists.linaro.org
->> Cc: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>; Sumit Semwal
->> <sumit.semwal@linaro.org>; Emil Renner Berthing <kernel@esmil.dk>;
->> Shengyang Chen <shengyang.chen@starfivetech.com>; Conor Dooley
->> <conor+dt@kernel.org>; Albert Ou <aou@eecs.berkeley.edu>; Thomas
->> Zimmermann <tzimmermann@suse.de>; Jagan Teki <jagan@edgeble.ai>; Rob
->> Herring <robh+dt@kernel.org>; Chris Morgan <macromorgan@hotmail.com>; Paul
->> Walmsley <paul.walmsley@sifive.com>; Keith Zhao
->> <keith.zhao@starfivetech.com>; Bjorn Andersson <andersson@kernel.org>;
->> Changhuang Liang <changhuang.liang@starfivetech.com>; Jack Zhu
->> <jack.zhu@starfivetech.com>; Palmer Dabbelt <palmer@dabbelt.com>; Shawn
->> Guo <shawnguo@kernel.org>; christian.koenig@amd.com
->> Subject: [PATCH 9/9] drm/verisilicon: Add starfive hdmi driver
->> 
->> Add HDMI dirver for StarFive SoC JH7110.
->> 
->> Signed-off-by: Keith Zhao <keith.zhao@starfivetech.com>
->> ---
->>  drivers/gpu/drm/verisilicon/Kconfig         |  11 +
->>  drivers/gpu/drm/verisilicon/Makefile        |   1 +
->>  drivers/gpu/drm/verisilicon/starfive_hdmi.c | 928 ++++++++++++++++++++
->> drivers/gpu/drm/verisilicon/starfive_hdmi.h | 296 +++++++
->>  drivers/gpu/drm/verisilicon/vs_drv.c        |   6 +
->>  drivers/gpu/drm/verisilicon/vs_drv.h        |   4 +
->>  6 files changed, 1246 insertions(+)
->>  create mode 100644 drivers/gpu/drm/verisilicon/starfive_hdmi.c
->>  create mode 100644 drivers/gpu/drm/verisilicon/starfive_hdmi.h
-> 
-> [...]
-> 
->> diff --git a/drivers/gpu/drm/verisilicon/starfive_hdmi.c
->> b/drivers/gpu/drm/verisilicon/starfive_hdmi.c
->> new file mode 100644
->> index 000000000000..128ecca03309
->> --- /dev/null
->> +++ b/drivers/gpu/drm/verisilicon/starfive_hdmi.c
->> @@ -0,0 +1,928 @@
-> 
-> [...]
-> 
->> +static int starfive_hdmi_setup(struct starfive_hdmi *hdmi,
->> +			       struct drm_display_mode *mode) {
-> 
-> [...]
-> 
->> +	return 0;
->> +}
->> +
->> +static void starfive_hdmi_encoder_mode_set(struct drm_encoder *encoder,
->> +					   struct drm_display_mode *mode,
->> +					   struct drm_display_mode
-> *adj_mode) {
->> +	struct starfive_hdmi *hdmi = encoder_to_hdmi(encoder);
->> +
->> +	starfive_hdmi_setup(hdmi, adj_mode);
-> 
-> When starfive_hdmi_setup runs here,
-> when changing the mode, a problem occurs because try to write a value to reg
-> in a state that is not resumed after suspend.
-> 
->> +
->> +	memcpy(&hdmi->previous_mode, adj_mode, sizeof(hdmi-
->> >previous_mode)); }
->> +
->> +static void starfive_hdmi_encoder_enable(struct drm_encoder *encoder) {
->> +	struct starfive_hdmi *hdmi = encoder_to_hdmi(encoder);
->> +
->> +	pm_runtime_get_sync(hdmi->dev);
-> 
-> So if move the call point of starfive_hdmi_setup here, it works normally.
-> 
->> +}
-> 
-> Best regards,
-> Hoegeun
-> 
-> 
+The changes were done using the following Coccinelle semantic
+patch.
+
+@initialize:ocaml@
+@@
+
+let rename alloc =
+  match alloc with
+    "vmalloc" -> "vmalloc_array"
+  | "vzalloc" -> "vcalloc"
+  | _ -> failwith "unknown"
+
+@@
+    size_t e1,e2;
+    constant C1, C2;
+    expression E1, E2, COUNT, x1, x2, x3;
+    typedef u8;
+    typedef __u8;
+    type t = {u8,__u8,char,unsigned char};
+    identifier alloc = {vmalloc,vzalloc};
+    fresh identifier realloc = script:ocaml(alloc) { rename alloc };
+@@
+
+(
+      alloc(x1*x2*x3)
+|
+      alloc(C1 * C2)
+|
+      alloc((sizeof(t)) * (COUNT), ...)
+|
+-     alloc((e1) * (e2))
++     realloc(e1, e2)
+|
+-     alloc((e1) * (COUNT))
++     realloc(COUNT, e1)
+|
+-     alloc((E1) * (E2))
++     realloc(E1, E2)
+)
+
+v2: This series uses vmalloc_array and vcalloc instead of
+array_size.  It also leaves a multiplication of a constant by a
+sizeof as is.  Two patches are thus dropped from the series.
+
+---
+
+ arch/x86/kernel/cpu/sgx/main.c                    |    2 +-
+ drivers/accel/habanalabs/common/device.c          |    3 ++-
+ drivers/accel/habanalabs/common/state_dump.c      |    7 ++++---
+ drivers/bus/mhi/host/init.c                       |    2 +-
+ drivers/comedi/comedi_buf.c                       |    4 ++--
+ drivers/dma-buf/heaps/system_heap.c               |    2 +-
+ drivers/gpu/drm/gud/gud_pipe.c                    |    2 +-
+ drivers/gpu/drm/i915/gvt/gtt.c                    |    6 ++++--
+ drivers/infiniband/hw/bnxt_re/qplib_res.c         |    4 ++--
+ drivers/infiniband/hw/erdma/erdma_verbs.c         |    4 ++--
+ drivers/infiniband/sw/siw/siw_qp.c                |    4 ++--
+ drivers/infiniband/sw/siw/siw_verbs.c             |    6 +++---
+ drivers/iommu/tegra-gart.c                        |    4 ++--
+ drivers/net/ethernet/amd/pds_core/core.c          |    4 ++--
+ drivers/net/ethernet/freescale/enetc/enetc.c      |    4 ++--
+ drivers/net/ethernet/google/gve/gve_tx.c          |    2 +-
+ drivers/net/ethernet/marvell/octeon_ep/octep_rx.c |    2 +-
+ drivers/net/ethernet/microsoft/mana/hw_channel.c  |    2 +-
+ drivers/net/ethernet/pensando/ionic/ionic_lif.c   |    4 ++--
+ drivers/scsi/fnic/fnic_trace.c                    |    2 +-
+ drivers/scsi/qla2xxx/qla_init.c                   |    4 ++--
+ drivers/vdpa/vdpa_user/iova_domain.c              |    4 ++--
+ drivers/virtio/virtio_mem.c                       |    6 +++---
+ fs/btrfs/zoned.c                                  |    4 ++--
+ kernel/kcov.c                                     |    2 +-
+ lib/test_vmalloc.c                                |    9 +++++----
+ 26 files changed, 52 insertions(+), 47 deletions(-)
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
