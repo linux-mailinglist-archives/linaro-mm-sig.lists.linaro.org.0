@@ -2,231 +2,137 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 73F85747044
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Jul 2023 13:59:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F18A2747893
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Jul 2023 21:11:28 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 12C1B43D5E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Jul 2023 11:59:58 +0000 (UTC)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
-	by lists.linaro.org (Postfix) with ESMTPS id EA3ED3EF9E
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  4 Jul 2023 11:59:35 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CAA5640439
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Jul 2023 19:11:27 +0000 (UTC)
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+	by lists.linaro.org (Postfix) with ESMTPS id 0D0883E916
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  4 Jul 2023 19:11:10 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=fdBWQfwu;
-	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.172 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com;
-	dmarc=pass (policy=quarantine) header.from=collabora.com
-Received: from [IPV6:2001:b07:2ed:14ed:c5f8:7372:f042:90a2] (unknown [IPv6:2001:b07:2ed:14ed:c5f8:7372:f042:90a2])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits))
-	(No client certificate requested)
-	(Authenticated sender: kholk11)
-	by madras.collabora.co.uk (Postfix) with ESMTPSA id C0B016606F8B;
-	Tue,  4 Jul 2023 12:59:33 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1688471974;
-	bh=KgU5DuxFUlWjByoqrF+GPfDgTBGAD9hOjf3Ly37cgqs=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=fdBWQfwuZBznWUYGHIr/rz/kbQjYSdDK7qDNCIKOMIp1XdclZ69Dcg7GobbIKwz/b
-	 QL64xOyyMioXnY3Qi3jQK9bPlyZ3ZQd2w/MATPgT34stogd0s3p/T5tr0O7Qz83JEt
-	 tY2YkUUmiFKDvkeGeuT3yAPubmOqK5JmcCSFncow8/zKDdaNZ7BN3ynUOONI/oe8r9
-	 AfJEYrtldXbK64l38u+rpduGdafU0sOJObgLxWZDaBqOHGAGH8nb4FY9nuo/+QFglw
-	 UO2vfpORoPUzggZZqA9wmda/38RX+warBCFEysAt52DddiWzCtbUAbDQi/3GCgMujv
-	 QwvmPfFOHlT4A==
-Message-ID: <e3b3a035-508d-1422-30eb-876fd38795e3@collabora.com>
-Date: Tue, 4 Jul 2023 13:59:30 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.12.0
-Content-Language: en-US
+	dkim=pass header.d=intel.com header.s=Intel header.b=TahlfA6P;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 134.134.136.100 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1688497871; x=1720033871;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=N+jEsHLauGx61KnltWviK6hcwVBEgkMktElW+SHC/C4=;
+  b=TahlfA6Pts1Jd/COI60XXSaRzo3erQuDHdITXdUPdlUO65k/OPQ9CBHj
+   pe27ZB29KLikxTo7rbrRPWyFDJDQ+jwcZm2bDed+fgAbel4LLtI8IjFM4
+   MODhtV3h+ZemTht89t6LDhk5U/TOnaHQY4iRW4dbRDsjPmZfqVAPj3/M0
+   /ESiG4k+Shi+hwPxZB8TOY/zm1ArnGeS11vLih4hX1HaYIqLMV2XdQw95
+   dHUiT/erUCYgz6eb/SFrLtFCMyolljbxLTsSWKW/NYgTlaQDsDoO2Elhi
+   Ef9L3/2Z41a7Iv9dtlq9qVArv6+noQPFn4pVPvgHpEYCRos0mu+5WQ36L
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10761"; a="429218478"
+X-IronPort-AV: E=Sophos;i="6.01,181,1684825200";
+   d="scan'208";a="429218478"
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Jul 2023 12:11:09 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10761"; a="832249738"
+X-IronPort-AV: E=Sophos;i="6.01,181,1684825200";
+   d="scan'208";a="832249738"
+Received: from lkp-server01.sh.intel.com (HELO 783282924a45) ([10.239.97.150])
+  by fmsmga002.fm.intel.com with ESMTP; 04 Jul 2023 12:11:05 -0700
+Received: from kbuild by 783282924a45 with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1qGlQW-000ITj-28;
+	Tue, 04 Jul 2023 19:11:04 +0000
+Date: Wed, 5 Jul 2023 03:11:03 +0800
+From: kernel test robot <lkp@intel.com>
 To: Yongqiang Niu <yongqiang.niu@mediatek.com>,
- Chun-Kuang Hu <chunkuang.hu@kernel.org>, CK Hu <ck.hu@mediatek.com>,
- Philipp Zabel <p.zabel@pengutronix.de>
+	Chun-Kuang Hu <chunkuang.hu@kernel.org>, CK Hu <ck.hu@mediatek.com>,
+	Philipp Zabel <p.zabel@pengutronix.de>
+Message-ID: <202307050325.QZv71se7-lkp@intel.com>
 References: <20230704090432.5844-1-yongqiang.niu@mediatek.com>
-From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+MIME-Version: 1.0
+Content-Disposition: inline
 In-Reply-To: <20230704090432.5844-1-yongqiang.niu@mediatek.com>
-X-Spamd-Result: default: False [-8.40 / 15.00];
+X-Spamd-Result: default: False [-13.50 / 15.00];
 	REPLY(-4.00)[];
+	DWL_DNSWL_HI(-3.50)[intel.com:dkim];
 	BAYES_HAM(-3.00)[100.00%];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-1.00)[2001:b07:2ed:14ed:c5f8:7372:f042:90a2:received,46.235.227.172:from];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.172];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
-	ONCE_RECEIVED(0.10)[];
+	MID_CONTAINS_FROM(1.00)[];
+	RCVD_IN_DNSWL_HI(-0.50)[134.134.136.100:from];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:134.134.136.100/32];
 	MIME_GOOD(-0.10)[text/plain];
-	BLOCKLISTDE_FAIL(0.00)[2001:b07:2ed:14ed:c5f8:7372:f042:90a2:server fail];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	RCVD_TLS_ALL(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,linaro.org,cerno.tech,suse.de,lists.freedesktop.org,lists.infradead.org,vger.kernel.org,lists.linaro.org,mediatek.com,chromium.org];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	RCVD_COUNT_THREE(0.00)[3];
 	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_CC(0.00)[lists.linux.dev,mediatek.com,suse.de,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.infradead.org,cerno.tech,chromium.org,gmail.com,linaro.org,collabora.com];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
 	TAGGED_RCPT(0.00)[];
 	ARC_NA(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:+];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:4983, ipnet:134.134.136.0/24, country:US];
 	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: EA3ED3EF9E
-X-Spamd-Bar: --------
-Message-ID-Hash: GVRS6ZW3H5IVC3XQJ7SG7AUUK57ACILD
-X-Message-ID-Hash: GVRS6ZW3H5IVC3XQJ7SG7AUUK57ACILD
-X-MailFrom: angelogioacchino.delregno@collabora.com
+X-Rspamd-Queue-Id: 0D0883E916
+X-Spamd-Bar: -------------
+Message-ID-Hash: XAI3EA76H6PRO5VX7BX6P3CW72MILYLT
+X-Message-ID-Hash: XAI3EA76H6PRO5VX7BX6P3CW72MILYLT
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Daniel Vetter <daniel@ffwll.ch>, Matthias Brugger <matthias.bgg@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Maxime Ripard <maxime@cerno.tech>, Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Project_Global_Chrome_Upstream_Group@mediatek.com, Hsin-Yi Wang <hsinyi@chromium.org>
+CC: oe-kbuild-all@lists.linux.dev, Project_Global_Chrome_Upstream_Group@mediatek.com, Thomas Zimmermann <tzimmermann@suse.de>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, Yongqiang Niu <yongqiang.niu@mediatek.com>, linaro-mm-sig@lists.linaro.org, linux-mediatek@lists.infradead.org, Maxime Ripard <maxime@cerno.tech>, Hsin-Yi Wang <hsinyi@chromium.org>, Matthias Brugger <matthias.bgg@gmail.com>, linux-media@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-arm-kernel@lists.infradead.org, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [v4, PATCH] drm/mediatek: add dma buffer control for drm plane disable
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GVRS6ZW3H5IVC3XQJ7SG7AUUK57ACILD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XAI3EA76H6PRO5VX7BX6P3CW72MILYLT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Il 04/07/23 11:04, Yongqiang Niu ha scritto:
-> dma buffer release before overlay disable, that will cause
-> m4u translation fault warning.
-> 
-> add dma buffer control flow in mediatek driver:
-> get dma buffer when drm plane disable
-> put dma buffer when overlay really disable
-> 
-> Fixes: 41016fe1028e4 ("drm: Rename plane->state variables in atomic update and disable")
-> Signed-off-by: Yongqiang Niu <yongqiang.niu@mediatek.com>
+Hi Yongqiang,
 
-Hello,
+kernel test robot noticed the following build errors:
 
-could you please rebase this over [1] for linux-next, while retaining this for
-stable backports?
+[auto build test ERROR on drm-misc/drm-misc-next]
+[also build test ERROR on linus/master v6.4 next-20230704]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-[1]: 
-https://lore.kernel.org/lkml/20230623094931.117918-1-angelogioacchino.delregno@collabora.com/
+url:    https://github.com/intel-lab-lkp/linux/commits/Yongqiang-Niu/drm-mediatek-add-dma-buffer-control-for-drm-plane-disable/20230704-170623
+base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
+patch link:    https://lore.kernel.org/r/20230704090432.5844-1-yongqiang.niu%40mediatek.com
+patch subject: [v4, PATCH] drm/mediatek: add dma buffer control for drm plane disable
+config: arm64-defconfig (https://download.01.org/0day-ci/archive/20230705/202307050325.QZv71se7-lkp@intel.com/config)
+compiler: aarch64-linux-gcc (GCC) 12.3.0
+reproduce: (https://download.01.org/0day-ci/archive/20230705/202307050325.QZv71se7-lkp@intel.com/reproduce)
 
-Thanks,
-Angelo
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202307050325.QZv71se7-lkp@intel.com/
 
-> ---
->   drivers/gpu/drm/mediatek/mtk_drm_crtc.c  | 25 ++++++++++++++++++++++++
->   drivers/gpu/drm/mediatek/mtk_drm_plane.c | 12 ++++++++++++
->   drivers/gpu/drm/mediatek/mtk_drm_plane.h |  1 +
->   3 files changed, 38 insertions(+)
-> 
-> diff --git a/drivers/gpu/drm/mediatek/mtk_drm_crtc.c b/drivers/gpu/drm/mediatek/mtk_drm_crtc.c
-> index d40142842f85..49d671100785 100644
-> --- a/drivers/gpu/drm/mediatek/mtk_drm_crtc.c
-> +++ b/drivers/gpu/drm/mediatek/mtk_drm_crtc.c
-> @@ -4,6 +4,7 @@
->    */
->   
->   #include <linux/clk.h>
-> +#include <linux/dma-buf.h>
->   #include <linux/dma-mapping.h>
->   #include <linux/mailbox_controller.h>
->   #include <linux/pm_runtime.h>
-> @@ -283,6 +284,23 @@ struct mtk_ddp_comp *mtk_drm_ddp_comp_for_plane(struct drm_crtc *crtc,
->   	return NULL;
->   }
->   
-> +static void mtk_drm_dma_buf_put(struct mtk_drm_crtc *mtk_crtc)
-> +{
-> +	unsigned int i;
-> +
-> +	for (i = 0; i < mtk_crtc->layer_nr; i++) {
-> +		struct drm_plane *plane = &mtk_crtc->planes[i];
-> +		struct mtk_plane_state *plane_state;
-> +
-> +		plane_state = to_mtk_plane_state(plane->state);
-> +
-> +		if (plane_state && plane_state->pending.dma_buf) {
-> +			dma_buf_put(plane_state->pending.dma_buf);
-> +			plane_state->pending.dma_buf = NULL;
-> +		}
-> +	}
-> +}
-> +
->   #if IS_REACHABLE(CONFIG_MTK_CMDQ)
->   static void ddp_cmdq_cb(struct mbox_client *cl, void *mssg)
->   {
-> @@ -323,6 +341,8 @@ static void ddp_cmdq_cb(struct mbox_client *cl, void *mssg)
->   		mtk_crtc->pending_async_planes = false;
->   	}
->   
-> +	mtk_drm_dma_buf_put(mtk_crtc);
-> +
->   	mtk_crtc->cmdq_vblank_cnt = 0;
->   	wake_up(&mtk_crtc->cb_blocking_queue);
->   }
-> @@ -624,9 +644,14 @@ static void mtk_crtc_ddp_irq(void *data)
->   	else if (mtk_crtc->cmdq_vblank_cnt > 0 && --mtk_crtc->cmdq_vblank_cnt == 0)
->   		DRM_ERROR("mtk_crtc %d CMDQ execute command timeout!\n",
->   			  drm_crtc_index(&mtk_crtc->base));
-> +
-> +	if (!mtk_crtc->cmdq_client.chan)
-> +		mtk_drm_dma_buf_put(mtk_crtc);
->   #else
->   	if (!priv->data->shadow_register)
->   		mtk_crtc_ddp_config(crtc, NULL);
-> +
-> +	mtk_drm_dma_buf_put(mtk_crtc);
->   #endif
->   	mtk_drm_finish_page_flip(mtk_crtc);
->   }
-> diff --git a/drivers/gpu/drm/mediatek/mtk_drm_plane.c b/drivers/gpu/drm/mediatek/mtk_drm_plane.c
-> index 31f9420aff6f..66e6393e45ee 100644
-> --- a/drivers/gpu/drm/mediatek/mtk_drm_plane.c
-> +++ b/drivers/gpu/drm/mediatek/mtk_drm_plane.c
-> @@ -12,6 +12,7 @@
->   #include <drm/drm_framebuffer.h>
->   #include <drm/drm_gem_atomic_helper.h>
->   #include <linux/align.h>
-> +#include <linux/dma-buf.h>
->   
->   #include "mtk_drm_crtc.h"
->   #include "mtk_drm_ddp_comp.h"
-> @@ -266,6 +267,17 @@ static void mtk_plane_atomic_disable(struct drm_plane *plane,
->   	struct drm_plane_state *new_state = drm_atomic_get_new_plane_state(state,
->   									   plane);
->   	struct mtk_plane_state *mtk_plane_state = to_mtk_plane_state(new_state);
-> +	struct drm_plane_state *old_state = drm_atomic_get_old_plane_state(state,
-> +									   plane);
-> +
-> +	if (old_state && old_state->fb) {
-> +		struct drm_gem_object *gem = old_state->fb->obj[0];
-> +
-> +		if (gem && gem->dma_buf) {
-> +			get_dma_buf(gem->dma_buf);
-> +			mtk_plane_state->pending.dma_buf = gem->dma_buf;
-> +		}
-> +	}
->   	mtk_plane_state->pending.enable = false;
->   	wmb(); /* Make sure the above parameter is set before update */
->   	mtk_plane_state->pending.dirty = true;
-> diff --git a/drivers/gpu/drm/mediatek/mtk_drm_plane.h b/drivers/gpu/drm/mediatek/mtk_drm_plane.h
-> index 99aff7da0831..3aba0b58ef3c 100644
-> --- a/drivers/gpu/drm/mediatek/mtk_drm_plane.h
-> +++ b/drivers/gpu/drm/mediatek/mtk_drm_plane.h
-> @@ -33,6 +33,7 @@ struct mtk_plane_pending_state {
->   	bool				async_dirty;
->   	bool				async_config;
->   	enum drm_color_encoding		color_encoding;
-> +	struct dma_buf			*dma_buf;
->   };
->   
->   struct mtk_plane_state {
+All errors (new ones prefixed by >>, old ones prefixed by <<):
 
+>> ERROR: modpost: module mediatek-drm uses symbol dma_buf_put from namespace DMA_BUF, but does not import it.
 
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
