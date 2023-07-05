@@ -2,98 +2,99 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id F18A2747893
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Jul 2023 21:11:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 355C8747CCE
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Jul 2023 08:07:47 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id CAA5640439
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  4 Jul 2023 19:11:27 +0000 (UTC)
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by lists.linaro.org (Postfix) with ESMTPS id 0D0883E916
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  4 Jul 2023 19:11:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DE3993EE3B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  5 Jul 2023 06:07:45 +0000 (UTC)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+	by lists.linaro.org (Postfix) with ESMTPS id 9BDD73EE3B
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  5 Jul 2023 06:07:29 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=TahlfA6P;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 134.134.136.100 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1688497871; x=1720033871;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=N+jEsHLauGx61KnltWviK6hcwVBEgkMktElW+SHC/C4=;
-  b=TahlfA6Pts1Jd/COI60XXSaRzo3erQuDHdITXdUPdlUO65k/OPQ9CBHj
-   pe27ZB29KLikxTo7rbrRPWyFDJDQ+jwcZm2bDed+fgAbel4LLtI8IjFM4
-   MODhtV3h+ZemTht89t6LDhk5U/TOnaHQY4iRW4dbRDsjPmZfqVAPj3/M0
-   /ESiG4k+Shi+hwPxZB8TOY/zm1ArnGeS11vLih4hX1HaYIqLMV2XdQw95
-   dHUiT/erUCYgz6eb/SFrLtFCMyolljbxLTsSWKW/NYgTlaQDsDoO2Elhi
-   Ef9L3/2Z41a7Iv9dtlq9qVArv6+noQPFn4pVPvgHpEYCRos0mu+5WQ36L
-   g==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10761"; a="429218478"
-X-IronPort-AV: E=Sophos;i="6.01,181,1684825200";
-   d="scan'208";a="429218478"
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Jul 2023 12:11:09 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10761"; a="832249738"
-X-IronPort-AV: E=Sophos;i="6.01,181,1684825200";
-   d="scan'208";a="832249738"
-Received: from lkp-server01.sh.intel.com (HELO 783282924a45) ([10.239.97.150])
-  by fmsmga002.fm.intel.com with ESMTP; 04 Jul 2023 12:11:05 -0700
-Received: from kbuild by 783282924a45 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1qGlQW-000ITj-28;
-	Tue, 04 Jul 2023 19:11:04 +0000
-Date: Wed, 5 Jul 2023 03:11:03 +0800
-From: kernel test robot <lkp@intel.com>
-To: Yongqiang Niu <yongqiang.niu@mediatek.com>,
-	Chun-Kuang Hu <chunkuang.hu@kernel.org>, CK Hu <ck.hu@mediatek.com>,
+	dkim=pass header.d=mediatek.com header.s=dk header.b=GiHkwWzA;
+	spf=pass (lists.linaro.org: domain of yongqiang.niu@mediatek.com designates 60.244.123.138 as permitted sender) smtp.mailfrom=yongqiang.niu@mediatek.com;
+	dmarc=pass (policy=quarantine) header.from=mediatek.com
+X-UUID: 3537e1a21afa11ee9cb5633481061a41-20230705
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
+	h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:CC:To:From; bh=4TmeHhlrXWGg0KDs/xJCk7og/nzeLtlm1oD/EJ/DP08=;
+	b=GiHkwWzA23yYU84IgIg1l3PWhUlO155KpCJ7DmiecxPqCAwuU4+VXfFOj6Xh6PKI+/4qL5hk3za1nJftBBnQYULXIQHhptwZVQUvthtuYgeSZ2fJyOveOZ7pi+bfCtZ11ySEzwFdgIhQ3QVSg4V2UtoFJu7gtoh5ekNKRcqSJJg=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.27,REQID:a527472b-1a03-47d8-a8f8-eab8c072a996,IP:0,U
+	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:100,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
+	N:release,TS:100
+X-CID-INFO: VERSION:1.1.27,REQID:a527472b-1a03-47d8-a8f8-eab8c072a996,IP:0,URL
+	:0,TC:0,Content:0,EDM:0,RT:0,SF:100,FILE:0,BULK:0,RULE:Spam_GS981B3D,ACTIO
+	N:quarantine,TS:100
+X-CID-META: VersionHash:01c9525,CLOUDID:93a8e00d-c22b-45ab-8a43-3004e9216b56,B
+	ulkID:230705140726G7TDRFB8,BulkQuantity:0,Recheck:0,SF:38|29|28|17|19|48,T
+	C:nil,Content:0,EDM:-3,IP:nil,URL:0,File:nil,Bulk:nil,QS:nil,BEC:nil,COL:0
+	,OSI:0,OSA:0,AV:0,LES:1,SPR:NO
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-CID-FACTOR: TF_CID_SPAM_SDM,TF_CID_SPAM_ASC,TF_CID_SPAM_FAS,TF_CID_SPAM_FSD,
+	TF_CID_SPAM_SNR
+X-UUID: 3537e1a21afa11ee9cb5633481061a41-20230705
+Received: from mtkmbs10n1.mediatek.inc [(172.21.101.34)] by mailgw01.mediatek.com
+	(envelope-from <yongqiang.niu@mediatek.com>)
+	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+	with ESMTP id 731313926; Wed, 05 Jul 2023 14:07:23 +0800
+Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
+ mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Wed, 5 Jul 2023 14:07:21 +0800
+Received: from mhfsdcap04.gcn.mediatek.inc (10.17.3.154) by
+ mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1118.26 via Frontend Transport; Wed, 5 Jul 2023 14:07:21 +0800
+From: Yongqiang Niu <yongqiang.niu@mediatek.com>
+To: Chun-Kuang Hu <chunkuang.hu@kernel.org>, CK Hu <ck.hu@mediatek.com>,
 	Philipp Zabel <p.zabel@pengutronix.de>
-Message-ID: <202307050325.QZv71se7-lkp@intel.com>
-References: <20230704090432.5844-1-yongqiang.niu@mediatek.com>
+Date: Wed, 5 Jul 2023 14:07:18 +0800
+Message-ID: <20230705060719.14700-1-yongqiang.niu@mediatek.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230704090432.5844-1-yongqiang.niu@mediatek.com>
-X-Spamd-Result: default: False [-13.50 / 15.00];
-	REPLY(-4.00)[];
-	DWL_DNSWL_HI(-3.50)[intel.com:dkim];
+X-MTK: N
+X-Spamd-Result: default: False [-3.50 / 15.00];
+	DWL_DNSWL_HI(-3.50)[mediatek.com:dkim];
 	BAYES_HAM(-3.00)[100.00%];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+	HFILTER_HOSTNAME_UNKNOWN(2.50)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
 	MID_CONTAINS_FROM(1.00)[];
-	RCVD_IN_DNSWL_HI(-0.50)[134.134.136.100:from];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:134.134.136.100/32];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[mediatek.com,quarantine];
+	R_MISSING_CHARSET(0.50)[];
+	RCVD_IN_DNSWL_HI(-0.50)[60.244.123.138:from];
+	R_DKIM_ALLOW(-0.20)[mediatek.com:s=dk];
+	R_SPF_ALLOW(-0.20)[+ip4:60.244.123.138/32];
 	MIME_GOOD(-0.10)[text/plain];
 	RCVD_TLS_LAST(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[19];
 	RCVD_COUNT_THREE(0.00)[3];
 	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_CC(0.00)[lists.linux.dev,mediatek.com,suse.de,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.infradead.org,cerno.tech,chromium.org,gmail.com,linaro.org,collabora.com];
+	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,collabora.com,linaro.org,cerno.tech,suse.de,lists.freedesktop.org,lists.infradead.org,vger.kernel.org,lists.linaro.org,mediatek.com,chromium.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+];
+	DKIM_TRACE(0.00)[mediatek.com:+];
 	TAGGED_RCPT(0.00)[];
 	ARC_NA(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:134.134.136.0/24, country:US];
+	ASN(0.00)[asn:24154, ipnet:60.244.123.0/24, country:TW];
 	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 0D0883E916
-X-Spamd-Bar: -------------
-Message-ID-Hash: XAI3EA76H6PRO5VX7BX6P3CW72MILYLT
-X-Message-ID-Hash: XAI3EA76H6PRO5VX7BX6P3CW72MILYLT
-X-MailFrom: lkp@intel.com
+X-Rspamd-Queue-Id: 9BDD73EE3B
+X-Spamd-Bar: ---
+Message-ID-Hash: KI4RS53HZVQ4SUO5VKLMI6GCQSCPA46P
+X-Message-ID-Hash: KI4RS53HZVQ4SUO5VKLMI6GCQSCPA46P
+X-MailFrom: yongqiang.niu@mediatek.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, Project_Global_Chrome_Upstream_Group@mediatek.com, Thomas Zimmermann <tzimmermann@suse.de>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, Yongqiang Niu <yongqiang.niu@mediatek.com>, linaro-mm-sig@lists.linaro.org, linux-mediatek@lists.infradead.org, Maxime Ripard <maxime@cerno.tech>, Hsin-Yi Wang <hsinyi@chromium.org>, Matthias Brugger <matthias.bgg@gmail.com>, linux-media@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, linux-arm-kernel@lists.infradead.org, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+CC: Daniel Vetter <daniel@ffwll.ch>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Sumit Semwal <sumit.semwal@linaro.org>, Maxime Ripard <maxime@cerno.tech>, Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Project_Global_Chrome_Upstream_Group@mediatek.com, Hsin-Yi Wang <hsinyi@chromium.org>, Yongqiang Niu <yongqiang.niu@mediatek.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [v4, PATCH] drm/mediatek: add dma buffer control for drm plane disable
+Subject: [Linaro-mm-sig] [v5, PATCH] drm/mediatek: add dma buffer control for drm plane disable
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XAI3EA76H6PRO5VX7BX6P3CW72MILYLT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KI4RS53HZVQ4SUO5VKLMI6GCQSCPA46P/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -103,36 +104,137 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi Yongqiang,
+dma buffer release before overlay disable, that will cause
+m4u translation fault warning.
 
-kernel test robot noticed the following build errors:
+add dma buffer control flow in mediatek driver:
+get dma buffer when drm plane disable
+put dma buffer when overlay really disable
 
-[auto build test ERROR on drm-misc/drm-misc-next]
-[also build test ERROR on linus/master v6.4 next-20230704]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Fixes: 41016fe1028e ("drm: Rename plane->state variables in atomic update and disable")
+Signed-off-by: Yongqiang Niu <yongqiang.niu@mediatek.com>
+---
+ drivers/gpu/drm/mediatek/mtk_drm_crtc.c  | 25 ++++++++++++++++++++++++
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c   |  1 +
+ drivers/gpu/drm/mediatek/mtk_drm_plane.c | 12 ++++++++++++
+ drivers/gpu/drm/mediatek/mtk_drm_plane.h |  1 +
+ 4 files changed, 39 insertions(+)
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Yongqiang-Niu/drm-mediatek-add-dma-buffer-control-for-drm-plane-disable/20230704-170623
-base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
-patch link:    https://lore.kernel.org/r/20230704090432.5844-1-yongqiang.niu%40mediatek.com
-patch subject: [v4, PATCH] drm/mediatek: add dma buffer control for drm plane disable
-config: arm64-defconfig (https://download.01.org/0day-ci/archive/20230705/202307050325.QZv71se7-lkp@intel.com/config)
-compiler: aarch64-linux-gcc (GCC) 12.3.0
-reproduce: (https://download.01.org/0day-ci/archive/20230705/202307050325.QZv71se7-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202307050325.QZv71se7-lkp@intel.com/
-
-All errors (new ones prefixed by >>, old ones prefixed by <<):
-
->> ERROR: modpost: module mediatek-drm uses symbol dma_buf_put from namespace DMA_BUF, but does not import it.
-
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_crtc.c b/drivers/gpu/drm/mediatek/mtk_drm_crtc.c
+index d40142842f85..49d671100785 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_crtc.c
++++ b/drivers/gpu/drm/mediatek/mtk_drm_crtc.c
+@@ -4,6 +4,7 @@
+  */
+ 
+ #include <linux/clk.h>
++#include <linux/dma-buf.h>
+ #include <linux/dma-mapping.h>
+ #include <linux/mailbox_controller.h>
+ #include <linux/pm_runtime.h>
+@@ -283,6 +284,23 @@ struct mtk_ddp_comp *mtk_drm_ddp_comp_for_plane(struct drm_crtc *crtc,
+ 	return NULL;
+ }
+ 
++static void mtk_drm_dma_buf_put(struct mtk_drm_crtc *mtk_crtc)
++{
++	unsigned int i;
++
++	for (i = 0; i < mtk_crtc->layer_nr; i++) {
++		struct drm_plane *plane = &mtk_crtc->planes[i];
++		struct mtk_plane_state *plane_state;
++
++		plane_state = to_mtk_plane_state(plane->state);
++
++		if (plane_state && plane_state->pending.dma_buf) {
++			dma_buf_put(plane_state->pending.dma_buf);
++			plane_state->pending.dma_buf = NULL;
++		}
++	}
++}
++
+ #if IS_REACHABLE(CONFIG_MTK_CMDQ)
+ static void ddp_cmdq_cb(struct mbox_client *cl, void *mssg)
+ {
+@@ -323,6 +341,8 @@ static void ddp_cmdq_cb(struct mbox_client *cl, void *mssg)
+ 		mtk_crtc->pending_async_planes = false;
+ 	}
+ 
++	mtk_drm_dma_buf_put(mtk_crtc);
++
+ 	mtk_crtc->cmdq_vblank_cnt = 0;
+ 	wake_up(&mtk_crtc->cb_blocking_queue);
+ }
+@@ -624,9 +644,14 @@ static void mtk_crtc_ddp_irq(void *data)
+ 	else if (mtk_crtc->cmdq_vblank_cnt > 0 && --mtk_crtc->cmdq_vblank_cnt == 0)
+ 		DRM_ERROR("mtk_crtc %d CMDQ execute command timeout!\n",
+ 			  drm_crtc_index(&mtk_crtc->base));
++
++	if (!mtk_crtc->cmdq_client.chan)
++		mtk_drm_dma_buf_put(mtk_crtc);
+ #else
+ 	if (!priv->data->shadow_register)
+ 		mtk_crtc_ddp_config(crtc, NULL);
++
++	mtk_drm_dma_buf_put(mtk_crtc);
+ #endif
+ 	mtk_drm_finish_page_flip(mtk_crtc);
+ }
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_drv.c b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
+index 6dcb4ba2466c..812f1667e070 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_drv.c
++++ b/drivers/gpu/drm/mediatek/mtk_drm_drv.c
+@@ -993,4 +993,5 @@ module_exit(mtk_drm_exit);
+ 
+ MODULE_AUTHOR("YT SHEN <yt.shen@mediatek.com>");
+ MODULE_DESCRIPTION("Mediatek SoC DRM driver");
++MODULE_IMPORT_NS(DMA_BUF);
+ MODULE_LICENSE("GPL v2");
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_plane.c b/drivers/gpu/drm/mediatek/mtk_drm_plane.c
+index 31f9420aff6f..66e6393e45ee 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_plane.c
++++ b/drivers/gpu/drm/mediatek/mtk_drm_plane.c
+@@ -12,6 +12,7 @@
+ #include <drm/drm_framebuffer.h>
+ #include <drm/drm_gem_atomic_helper.h>
+ #include <linux/align.h>
++#include <linux/dma-buf.h>
+ 
+ #include "mtk_drm_crtc.h"
+ #include "mtk_drm_ddp_comp.h"
+@@ -266,6 +267,17 @@ static void mtk_plane_atomic_disable(struct drm_plane *plane,
+ 	struct drm_plane_state *new_state = drm_atomic_get_new_plane_state(state,
+ 									   plane);
+ 	struct mtk_plane_state *mtk_plane_state = to_mtk_plane_state(new_state);
++	struct drm_plane_state *old_state = drm_atomic_get_old_plane_state(state,
++									   plane);
++
++	if (old_state && old_state->fb) {
++		struct drm_gem_object *gem = old_state->fb->obj[0];
++
++		if (gem && gem->dma_buf) {
++			get_dma_buf(gem->dma_buf);
++			mtk_plane_state->pending.dma_buf = gem->dma_buf;
++		}
++	}
+ 	mtk_plane_state->pending.enable = false;
+ 	wmb(); /* Make sure the above parameter is set before update */
+ 	mtk_plane_state->pending.dirty = true;
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_plane.h b/drivers/gpu/drm/mediatek/mtk_drm_plane.h
+index 99aff7da0831..3aba0b58ef3c 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_plane.h
++++ b/drivers/gpu/drm/mediatek/mtk_drm_plane.h
+@@ -33,6 +33,7 @@ struct mtk_plane_pending_state {
+ 	bool				async_dirty;
+ 	bool				async_config;
+ 	enum drm_color_encoding		color_encoding;
++	struct dma_buf			*dma_buf;
+ };
+ 
+ struct mtk_plane_state {
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.25.1
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
