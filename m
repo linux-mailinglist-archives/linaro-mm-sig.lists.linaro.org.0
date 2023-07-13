@@ -2,168 +2,132 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B293752AEC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jul 2023 21:29:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 377D1752B2F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jul 2023 21:48:24 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 90AD943F1B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jul 2023 19:29:08 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id B5C2D3F095
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Jul 2023 19:28:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3ECFD43F1B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jul 2023 19:48:23 +0000 (UTC)
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by lists.linaro.org (Postfix) with ESMTPS id 87A563F095
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Jul 2023 19:48:06 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linuxfoundation.org header.s=korg header.b=xnARUZ0P;
-	spf=pass (lists.linaro.org: domain of gregkh@linuxfoundation.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=gregkh@linuxfoundation.org;
-	dmarc=pass (policy=none) header.from=linuxfoundation.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
-	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id 5C69C6128D;
-	Thu, 13 Jul 2023 19:28:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C7CFC433C7;
-	Thu, 13 Jul 2023 19:28:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1689276530;
-	bh=zDVMhROmojmbgyEs2EDFF1j/BJYI67as1OcXUNfcQPg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=xnARUZ0P4IJfcgcPMHZ9Y6DjTZcWfPEqfbjzO+3k0J7MGqLzYYWrIhzbHGrSDjTjP
-	 fkROjl9lPL8k4HfEQESuE7ohoRjDo/EzyxGcqEbIhCTW0a3enlxmyy8AFC4kRNnTHf
-	 gb37E6ir3PbH3oNe2jOpCLtGi0BIQ7W3ZZZXqmCM=
-Date: Thu, 13 Jul 2023 21:28:47 +0200
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: Andrew Davis <afd@ti.com>
-Message-ID: <2023071308-squeeze-hamster-d02f@gregkh>
-References: <20230713191316.116019-1-afd@ti.com>
+	dkim=pass header.d=intel.com header.s=Intel header.b=BbKy+G8q;
+	spf=none (lists.linaro.org: domain of ville.syrjala@linux.intel.com has no SPF policy when checking 192.55.52.93) smtp.mailfrom=ville.syrjala@linux.intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1689277686; x=1720813686;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=PSNuFJ2YvjV3jxMAZ+7/NMsIeHyXgIo7PD8ECkHz9l8=;
+  b=BbKy+G8qbbJYh2zdUXfm9tZ1aleepgZYRUz2hYgYqKWO7XxVzXrDDtM3
+   seBdZQRbA8pdDNRxwm9UTNQcfb/WFD7gc7N8hN7OLLzZ4a/v0cx4RlpYe
+   Ly0Ci3T+inh79ADw7454oqGMe1wWUlH0RBLWUmcu5ORI10k9VK7GxGFUT
+   ZVJaUyFRRzPnbU/Hhx5qmoULnAeiHQGMwkAGcmkHVdMT9ZULsJhPpeNV8
+   /OZmo7UBT4vqn3fD86ZDGLXTWQ2vgdz1hioVTOEQl66ipaOBs16ctFLNg
+   f3rL1WbdLwh81UZasP9U0s0S3iee6yCV9puBtOtaQDpEhRGi+vIZ+eXlK
+   g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10770"; a="362765421"
+X-IronPort-AV: E=Sophos;i="6.01,203,1684825200";
+   d="scan'208";a="362765421"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jul 2023 12:47:49 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10770"; a="787588936"
+X-IronPort-AV: E=Sophos;i="6.01,203,1684825200";
+   d="scan'208";a="787588936"
+Received: from stinkpipe.fi.intel.com (HELO stinkbox) ([10.237.72.70])
+  by fmsmga008.fm.intel.com with SMTP; 13 Jul 2023 12:47:46 -0700
+Received: by stinkbox (sSMTP sendmail emulation); Thu, 13 Jul 2023 22:47:45 +0300
+From: Ville Syrjala <ville.syrjala@linux.intel.com>
+To: dri-devel@lists.freedesktop.org
+Date: Thu, 13 Jul 2023 22:47:45 +0300
+Message-Id: <20230713194745.1751-1-ville.syrjala@linux.intel.com>
+X-Mailer: git-send-email 2.39.3
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230713191316.116019-1-afd@ti.com>
-X-Spamd-Result: default: False [-2.00 / 15.00];
-	MID_END_EQ_FROM_USER_PART(4.00)[];
-	REPLY(-4.00)[];
+X-Spamd-Result: default: False [-4.30 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
-	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	RCVD_IN_DNSWL_HI(-0.50)[192.55.52.93:from];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MIME_GOOD(-0.10)[text/plain];
-	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_CC(0.00)[arndb.de,gmail.com,google.com,pengutronix.de,linaro.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	NEURAL_HAM(-0.00)[-0.998];
+	R_SPF_NA(0.00)[no SPF record];
 	FROM_EQ_ENVFROM(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	RCVD_TLS_ALL(0.00)[];
-	URIBL_BLOCKED(0.00)[linuxfoundation.org:dkim,dfw.source.kernel.org:helo,dfw.source.kernel.org:rdns,ti.com:url,ti.com:email];
+	ASN(0.00)[asn:4983, ipnet:192.55.52.0/24, country:US];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+];
+	RCVD_COUNT_THREE(0.00)[3];
+	URIBL_BLOCKED(0.00)[linaro.org:email,amd.com:email,intel.com:email,intel.com:dkim,mga11.intel.com:helo,mga11.intel.com:rdns];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[linuxfoundation.org:+];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2]
+	ARC_NA(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: B5C2D3F095
-X-Spamd-Bar: --
-Message-ID-Hash: 6NIBQ2A7DYG3Z5HI2FCJHOKXTKQIW5BA
-X-Message-ID-Hash: 6NIBQ2A7DYG3Z5HI2FCJHOKXTKQIW5BA
-X-MailFrom: gregkh@linuxfoundation.org
+X-Rspamd-Queue-Id: 87A563F095
+X-Spamd-Bar: ----
+Message-ID-Hash: IBJACJSL652TVM5MWZ3R5JQWZXIXJTDF
+X-Message-ID-Hash: IBJACJSL652TVM5MWZ3R5JQWZXIXJTDF
+X-MailFrom: ville.syrjala@linux.intel.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Arnd Bergmann <arnd@arndb.de>, Christian Gmeiner <christian.gmeiner@gmail.com>, John Stultz <jstultz@google.com>, Philipp Zabel <p.zabel@pengutronix.de>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+CC: intel-gfx@lists.freedesktop.org, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3] misc: sram: Add DMA-BUF Heap exporting of SRAM areas
+Subject: [Linaro-mm-sig] [PATCH] dma-buf/dma-resv: Stop leaking on krealloc() failure
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6NIBQ2A7DYG3Z5HI2FCJHOKXTKQIW5BA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IBJACJSL652TVM5MWZ3R5JQWZXIXJTDF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Thu, Jul 13, 2023 at 02:13:16PM -0500, Andrew Davis wrote:
-> This new export type exposes to userspace the SRAM area as a DMA-BUF Heap,
-> this allows for allocations of DMA-BUFs that can be consumed by various
-> DMA-BUF supporting devices.
-
-What devices exactly?
-
-And what userspace tools/programs are going to use this api?
-
-> 
-> Signed-off-by: Andrew Davis <afd@ti.com>
-> ---
-> 
-> Changes from v2:
->  - Make sram_dma_heap_allocate static (kernel test robot)
->  - Rebase on v6.5-rc1
-> 
->  drivers/misc/Kconfig         |   7 +
->  drivers/misc/Makefile        |   1 +
->  drivers/misc/sram-dma-heap.c | 245 +++++++++++++++++++++++++++++++++++
->  drivers/misc/sram.c          |   6 +
->  drivers/misc/sram.h          |  16 +++
->  5 files changed, 275 insertions(+)
->  create mode 100644 drivers/misc/sram-dma-heap.c
-> 
-> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-> index 75e427f124b28..ee34dfb61605f 100644
-> --- a/drivers/misc/Kconfig
-> +++ b/drivers/misc/Kconfig
-> @@ -448,6 +448,13 @@ config SRAM
->  config SRAM_EXEC
->  	bool
->  
-> +config SRAM_DMA_HEAP
-> +	bool "Export on-chip SRAM pools using DMA-Heaps"
-> +	depends on DMABUF_HEAPS && SRAM
-> +	help
-> +	  This driver allows the export of on-chip SRAM marked as both pool
-> +	  and exportable to userspace using the DMA-Heaps interface.
-
-Module name?
-
->  config DW_XDATA_PCIE
->  	depends on PCI
->  	tristate "Synopsys DesignWare xData PCIe driver"
-> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-> index f2a4d1ff65d46..5e7516bfaa8de 100644
-> --- a/drivers/misc/Makefile
-> +++ b/drivers/misc/Makefile
-> @@ -47,6 +47,7 @@ obj-$(CONFIG_VMWARE_VMCI)	+= vmw_vmci/
->  obj-$(CONFIG_LATTICE_ECP3_CONFIG)	+= lattice-ecp3-config.o
->  obj-$(CONFIG_SRAM)		+= sram.o
->  obj-$(CONFIG_SRAM_EXEC)		+= sram-exec.o
-> +obj-$(CONFIG_SRAM_DMA_HEAP)	+= sram-dma-heap.o
->  obj-$(CONFIG_GENWQE)		+= genwqe/
->  obj-$(CONFIG_ECHO)		+= echo/
->  obj-$(CONFIG_CXL_BASE)		+= cxl/
-> diff --git a/drivers/misc/sram-dma-heap.c b/drivers/misc/sram-dma-heap.c
-> new file mode 100644
-> index 0000000000000..c054c04dff33e
-> --- /dev/null
-> +++ b/drivers/misc/sram-dma-heap.c
-> @@ -0,0 +1,245 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * SRAM DMA-Heap userspace exporter
-> + *
-> + * Copyright (C) 2019-2022 Texas Instruments Incorporated - https://www.ti.com/
-> + *	Andrew Davis <afd@ti.com>
-
-It's 2023 :(
-
-And this needs review from the dma-buf maintainers before I could do
-anything with it.
-
-thanks,
-
-greg k-h
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+RnJvbTogVmlsbGUgU3lyasOkbMOkIDx2aWxsZS5zeXJqYWxhQGxpbnV4LmludGVsLmNvbT4NCg0K
+Q3VycmVudGx5IGRtYV9yZXN2X2dldF9mZW5jZXMoKSB3aWxsIGxlYWsgdGhlIHByZXZpb3VzbHkN
+CmFsbG9jYXRlZCBhcnJheSBpZiB0aGUgZmVuY2UgaXRlcmF0aW9uIGdvdCByZXN0YXJ0ZWQgYW5k
+DQp0aGUga3JlYWxsb2NfYXJyYXkoKSBmYWlscy4NCg0KRnJlZSB0aGUgb2xkIGFycmF5IGJ5IGhh
+bmQsIGFuZCBtYWtlIHN1cmUgd2Ugc3RpbGwgY2xlYXINCnRoZSByZXR1cm5lZCAqZmVuY2VzIHNv
+IHRoZSBjYWxsZXIgd29uJ3QgZW5kIHVwIGFjY2Vzc2luZw0KZnJlZWQgbWVtb3J5LiBTb21lIChi
+dXQgbm90IGFsbCkgb2YgdGhlIGNhbGxlcnMgb2YNCmRtYV9yZXN2X2dldF9mZW5jZXMoKSBzZWVt
+IHRvIHN0aWxsIHRyYXdsIHRocm91Z2ggdGhlDQphcnJheSBldmVuIHdoZW4gZG1hX3Jlc3ZfZ2V0
+X2ZlbmNlcygpIGZhaWxlZC4gQW5kIGxldCdzDQp6ZXJvIG91dCAqbnVtX2ZlbmNlcyBhcyB3ZWxs
+IGZvciBnb29kIG1lYXN1cmUuDQoNCkNjOiBTdW1pdCBTZW13YWwgPHN1bWl0LnNlbXdhbEBsaW5h
+cm8ub3JnPg0KQ2M6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4N
+CkNjOiBsaW51eC1tZWRpYUB2Z2VyLmtlcm5lbC5vcmcNCkNjOiBkcmktZGV2ZWxAbGlzdHMuZnJl
+ZWRlc2t0b3Aub3JnDQpDYzogbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnDQpGaXhlczog
+ZDNjODA2OThjOWY1ICgiZG1hLWJ1ZjogdXNlIG5ldyBpdGVyYXRvciBpbiBkbWFfcmVzdl9nZXRf
+ZmVuY2VzIHYzIikNClNpZ25lZC1vZmYtYnk6IFZpbGxlIFN5cmrDpGzDpCA8dmlsbGUuc3lyamFs
+YUBsaW51eC5pbnRlbC5jb20+DQotLS0NCiBkcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYyB8IDEz
+ICsrKysrKysrKy0tLS0NCiAxIGZpbGUgY2hhbmdlZCwgOSBpbnNlcnRpb25zKCspLCA0IGRlbGV0
+aW9ucygtKQ0KDQpkaWZmIC0tZ2l0IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1yZXN2LmMgYi9kcml2
+ZXJzL2RtYS1idWYvZG1hLXJlc3YuYw0KaW5kZXggYjZmNzFlYjAwODY2Li4zOGI0MTEwMzc4ZGUg
+MTAwNjQ0DQotLS0gYS9kcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYw0KKysrIGIvZHJpdmVycy9k
+bWEtYnVmL2RtYS1yZXN2LmMNCkBAIC01NzEsNiArNTcxLDcgQEAgaW50IGRtYV9yZXN2X2dldF9m
+ZW5jZXMoc3RydWN0IGRtYV9yZXN2ICpvYmosIGVudW0gZG1hX3Jlc3ZfdXNhZ2UgdXNhZ2UsDQog
+CWRtYV9yZXN2X2Zvcl9lYWNoX2ZlbmNlX3VubG9ja2VkKCZjdXJzb3IsIGZlbmNlKSB7DQogDQog
+CQlpZiAoZG1hX3Jlc3ZfaXRlcl9pc19yZXN0YXJ0ZWQoJmN1cnNvcikpIHsNCisJCQlzdHJ1Y3Qg
+ZG1hX2ZlbmNlICoqbmV3X2ZlbmNlczsNCiAJCQl1bnNpZ25lZCBpbnQgY291bnQ7DQogDQogCQkJ
+d2hpbGUgKCpudW1fZmVuY2VzKQ0KQEAgLTU3OSwxMyArNTgwLDE3IEBAIGludCBkbWFfcmVzdl9n
+ZXRfZmVuY2VzKHN0cnVjdCBkbWFfcmVzdiAqb2JqLCBlbnVtIGRtYV9yZXN2X3VzYWdlIHVzYWdl
+LA0KIAkJCWNvdW50ID0gY3Vyc29yLm51bV9mZW5jZXMgKyAxOw0KIA0KIAkJCS8qIEV2ZW50dWFs
+bHkgcmUtYWxsb2NhdGUgdGhlIGFycmF5ICovDQotCQkJKmZlbmNlcyA9IGtyZWFsbG9jX2FycmF5
+KCpmZW5jZXMsIGNvdW50LA0KLQkJCQkJCSBzaXplb2Yodm9pZCAqKSwNCi0JCQkJCQkgR0ZQX0tF
+Uk5FTCk7DQotCQkJaWYgKGNvdW50ICYmICEqZmVuY2VzKSB7DQorCQkJbmV3X2ZlbmNlcyA9IGty
+ZWFsbG9jX2FycmF5KCpmZW5jZXMsIGNvdW50LA0KKwkJCQkJCSAgICBzaXplb2Yodm9pZCAqKSwN
+CisJCQkJCQkgICAgR0ZQX0tFUk5FTCk7DQorCQkJaWYgKGNvdW50ICYmICFuZXdfZmVuY2VzKSB7
+DQorCQkJCWtmcmVlKCpmZW5jZXMpOw0KKwkJCQkqZmVuY2VzID0gTlVMTDsNCisJCQkJKm51bV9m
+ZW5jZXMgPSAwOw0KIAkJCQlkbWFfcmVzdl9pdGVyX2VuZCgmY3Vyc29yKTsNCiAJCQkJcmV0dXJu
+IC1FTk9NRU07DQogCQkJfQ0KKwkJCSpmZW5jZXMgPSBuZXdfZmVuY2VzOw0KIAkJfQ0KIA0KIAkJ
+KCpmZW5jZXMpWygqbnVtX2ZlbmNlcykrK10gPSBkbWFfZmVuY2VfZ2V0KGZlbmNlKTsNCi0tIA0K
+Mi4zOS4zDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+CkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJv
+Lm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVA
+bGlzdHMubGluYXJvLm9yZwo=
