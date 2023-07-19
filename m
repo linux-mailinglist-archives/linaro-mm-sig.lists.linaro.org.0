@@ -2,106 +2,113 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 599C175A043
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jul 2023 22:58:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83F1F75A2CF
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 20 Jul 2023 01:25:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 255DB42B38
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jul 2023 20:58:08 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	by lists.linaro.org (Postfix) with ESMTPS id 5EED83F0B4
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jul 2023 20:58:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 97F8D41208
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jul 2023 23:25:03 +0000 (UTC)
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+	by lists.linaro.org (Postfix) with ESMTPS id E16ED3E925
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jul 2023 23:24:54 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=KQEJXQUL;
-	spf=pass (lists.linaro.org: domain of fmartine@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=fmartine@redhat.com;
-	dmarc=pass (policy=none) header.from=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1689800282;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=u8/7gfrcuf8/DAAooprDSDfzeOTJmiOUpVBm/359QlE=;
-	b=KQEJXQULDBeFoapiLzLSqf2YdLQDCvPSOS+DzIzTDJeG2QA+aIicsvz2nLzjfe1fz4Cs2Q
-	GQr73ibf+Bn2NFLqN+VFOWClQSgerctpgB7nvU/IKSGyZfrjoIxR/XGTN7T1gPN7lOdcdA
-	Dazyk/iw3FwKw1kRWA8sDF7kM/24SBg=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-619-9yxM0_8ZN8ek8zwwCKHFCw-1; Wed, 19 Jul 2023 16:57:09 -0400
-X-MC-Unique: 9yxM0_8ZN8ek8zwwCKHFCw-1
-Received: by mail-wr1-f72.google.com with SMTP id ffacd0b85a97d-315a03cae87so532128f8f.0
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jul 2023 13:57:09 -0700 (PDT)
+	dkim=pass header.d=ziepe.ca header.s=google header.b=RitoPG5v;
+	spf=pass (lists.linaro.org: domain of jgg@ziepe.ca designates 209.85.210.171 as permitted sender) smtp.mailfrom=jgg@ziepe.ca;
+	dmarc=none
+Received: by mail-pf1-f171.google.com with SMTP id d2e1a72fcca58-6686c74183cso134573b3a.1
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jul 2023 16:24:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google; t=1689809094; x=1690413894;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=QMBXWfDTfMeBEXpKpdrCux7UOxDUWWDJl0r9KLthi7I=;
+        b=RitoPG5vg2KH92ckG+V7d8L8L9W7M1MBD8JemTd7YYR3fTJrTOVFYtqqXzUnBKMuir
+         5mWALTL5KmWaQJU0sCdTf1pDvm6hLmYvUeYrkwPsO1SZCFet8sGivcjzWo2/jJSQ+69r
+         tWFF5/07XRl/q/8uN+rCYjwQhkZBkDDkJmR7gbwa/MDL9f0w0sZGSvooJmm5Ax+0ioy1
+         H/sOq8DkuI4B9Gm5OL3DqroseeCwVW7yCWj9quaQcgXz/+7NKt05sQF+GJ9/12jWPXZ6
+         8j+EKQKrYcWo0PuWQibJD8tsH5yifa7BtFwNC8Ufe7awQAN0xt48aMlwNrlWN/lcUSoO
+         93QA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1689800228; x=1690405028;
-        h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=u8/7gfrcuf8/DAAooprDSDfzeOTJmiOUpVBm/359QlE=;
-        b=f4JKdmNh9g6eG0LuuqIH1qCQXbPe4ZR9aObmQWtqcwbVzcdhTTGZaOgV9/iixFCTxr
-         sFVWXDv0j/o7P+KfZo9CxjRIa9x6egkg3JGf/He+UKIqwu1o1S7nWu6lt8vmyRAuAR/w
-         M64aLz1UtvYju3Oqld4pnaZqJ1qCwaGMb1L2cwk28aVAD81GOoK3OxlP2JZlIhdKs4ct
-         1A3v6DX9DPmLRR9ooDSndcbX/+5V2iRvvsSff6OdxjwTd9tG1h/aDWEWLbhzMfA5/QhZ
-         9oOvYGLzVxH96pl9/Bp0NuyRXsE6nfoJ9DBeAH7cy5dTS9rLmzRrWLCxI9QQ1sOH4mem
-         1pUg==
-X-Gm-Message-State: ABy/qLZwMEgKuMLd1v3d91OJjBE+ZxkLcZXkq9HtWeImhwBPNe5FiiF6
-	zTemJSPmapWwc0AhkjOMJt1otYX/mmd/xBjV0HLIYcqL95aIo5KcJOPKWl5ivtQwrMIek4Sx+1F
-	hjW5xHIxlS64npOLZNzL7sjBa+SA=
-X-Received: by 2002:a5d:6808:0:b0:313:ef62:6370 with SMTP id w8-20020a5d6808000000b00313ef626370mr779422wru.10.1689800228320;
-        Wed, 19 Jul 2023 13:57:08 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlFLQI82PXe04TmP/q3eozKaXk38E3F+Qti+S7R2zewTlwbsEDY2//S9hJbdkbY4vyqMa8EZ9Q==
-X-Received: by 2002:a5d:6808:0:b0:313:ef62:6370 with SMTP id w8-20020a5d6808000000b00313ef626370mr779410wru.10.1689800228058;
-        Wed, 19 Jul 2023 13:57:08 -0700 (PDT)
-Received: from localhost (205.pool92-176-231.dynamic.orange.es. [92.176.231.205])
-        by smtp.gmail.com with ESMTPSA id t14-20020a5d460e000000b0030fb4b55c13sm6150243wrq.96.2023.07.19.13.57.07
+        d=1e100.net; s=20221208; t=1689809094; x=1690413894;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=QMBXWfDTfMeBEXpKpdrCux7UOxDUWWDJl0r9KLthi7I=;
+        b=iPsePPeaxOKoXwzJSS2cmZLbX3M0HAr+eFAUy4G5DUY6HWmILZVKUQ6Y0nNVCWOumz
+         lv5wadbqLxxGzdHW3HZx8kWkQx2LwoVFULzpUxFqxgqepEPJ4rFGNAHFx6P1nTlDWSi4
+         f3+TtA1XHTTjRhrXKOMWqML5smRtyUuXvRZvxLpkIKV9qDpfdWMCfXOPq5iocLVrTZUt
+         Dq0CzsRyHdKTm5gCEhd+HwZbyKJLY+GoQKC3LgSZFv8Me+uwh9UEzLXiV0LN0cPhUXwv
+         OVIKjYhB7LyKbn4divHt5V+d+r6g6jZo2leTOaVN9DZ1sG/Gx5mPMDiVcxMGWCCWQ6f6
+         LQcA==
+X-Gm-Message-State: ABy/qLYl737zc2PbPYwgOVme4aZtdSFsA+VvnCSMQOiNCi4o/TbxwYPR
+	Ys5vbpF6MAbEUg7e/jgdQicGIA==
+X-Google-Smtp-Source: APBJJlF1RVY7gVrV+x6J0pGqg/vEpRGAJ3WpkIaplw7rwOALVicAHlHdlSUsDv1w5+4aog7vtr7zhQ==
+X-Received: by 2002:a05:6a20:840b:b0:126:a80d:4960 with SMTP id c11-20020a056a20840b00b00126a80d4960mr28216893pzd.30.1689809094040;
+        Wed, 19 Jul 2023 16:24:54 -0700 (PDT)
+Received: from ziepe.ca ([206.223.160.26])
+        by smtp.gmail.com with ESMTPSA id g23-20020aa78757000000b0067a1f4f4f7dsm3780558pfo.169.2023.07.19.16.24.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Jul 2023 13:57:07 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>,
- maarten.lankhorst@linux.intel.com
-In-Reply-To: <20230320015829.52988-1-jiapeng.chong@linux.alibaba.com>
-References: <20230320015829.52988-1-jiapeng.chong@linux.alibaba.com>
-Date: Wed, 19 Jul 2023 22:57:07 +0200
-Message-ID: <871qh3k4bg.fsf@minerva.mail-host-address-is-not-set>
+        Wed, 19 Jul 2023 16:24:53 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.95)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1qMGXL-002tBd-Tt;
+	Wed, 19 Jul 2023 20:24:51 -0300
+Date: Wed, 19 Jul 2023 20:24:51 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Stephen Hemminger <stephen@networkplumber.org>
+Message-ID: <ZLhww+P+7zhTTUk7@ziepe.ca>
+References: <12393cd2-4b09-4956-fff0-93ef3929ee37@kernel.org>
+ <CAHS8izNPTwtk+zN7XYt-+ycpT+47LMcRrYXYh=suTXCZQ6-rVQ@mail.gmail.com>
+ <ZLbUpdNYvyvkD27P@ziepe.ca>
+ <20230718111508.6f0b9a83@kernel.org>
+ <35f3ec37-11fe-19c8-9d6f-ae5a789843cb@kernel.org>
+ <20230718112940.2c126677@kernel.org>
+ <eb34f812-a866-a1a3-9f9b-7d5054d17609@kernel.org>
+ <20230718154503.0421b4cd@kernel.org>
+ <CAHS8izPORN=r2-hzYSgN4s_Aoo2dnwoJXrU5Hu=43sb8zsWyhQ@mail.gmail.com>
+ <20230719105711.448f8cad@hermes.local>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+In-Reply-To: <20230719105711.448f8cad@hermes.local>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 5EED83F0B4
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.90 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	RCVD_IN_DNSWL_HI(-1.00)[209.85.221.72:received,170.10.129.124:from];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,none];
-	FORGED_SENDER(0.30)[javierm@redhat.com,fmartine@redhat.com];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
-	RWL_MAILSPIKE_VERYGOOD(-0.20)[170.10.129.124:from];
-	R_SPF_ALLOW(-0.20)[+ip4:170.10.129.0/24];
+X-Rspamd-Queue-Id: E16ED3E925
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-2.00 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_ALLOW(-0.20)[ziepe.ca:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_TLS_LAST(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	FROM_NEQ_ENVFROM(0.00)[javierm@redhat.com,fmartine@redhat.com];
-	ASN(0.00)[asn:30031, ipnet:170.10.128.0/23, country:US];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[google.com,kernel.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,linaro.org,amd.com,davemloft.net,redhat.com,arndb.de,gmail.com];
+	BLOCKLISTDE_FAIL(0.00)[206.223.160.26:server fail,209.85.210.171:server fail];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[ziepe.ca:+];
 	RCVD_COUNT_THREE(0.00)[3];
+	DMARC_NA(0.00)[ziepe.ca];
+	MID_RHS_MATCH_FROM(0.00)[];
 	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[redhat.com:+];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_RCPT(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: C7OI4GYU5HG5ASAIEBEHCG25LLJRCJSA
-X-Message-ID-Hash: C7OI4GYU5HG5ASAIEBEHCG25LLJRCJSA
-X-MailFrom: fmartine@redhat.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>, tzimmermann@suse.de, Abaci Robot <abaci@linux.alibaba.com>, linux-kernel@vger.kernel.org, sumit.semwal@linaro.org, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org, christian.koenig@amd.com, linux-media@vger.kernel.org
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.210.171:from]
+Message-ID-Hash: 6VFVWNO52SLA6SZKC3QMSDHD7JM5NGA2
+X-Message-ID-Hash: 6VFVWNO52SLA6SZKC3QMSDHD7JM5NGA2
+X-MailFrom: jgg@ziepe.ca
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Mina Almasry <almasrymina@google.com>, Jakub Kicinski <kuba@kernel.org>, David Ahern <dsahern@kernel.org>, Andy Lutomirski <luto@kernel.org>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, netdev@vger.kernel.org, linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Jesper Dangaard Brouer <hawk@kernel.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Arnd Bergmann <arnd@arndb.de>, Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Shuah Khan <shuah@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] drm/shmem-helper: Remove duplicate include
+Subject: [Linaro-mm-sig] Re: [RFC PATCH 00/10] Device Memory TCP
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/C7OI4GYU5HG5ASAIEBEHCG25LLJRCJSA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6VFVWNO52SLA6SZKC3QMSDHD7JM5NGA2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -111,24 +118,19 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Jiapeng Chong <jiapeng.chong@linux.alibaba.com> writes:
+On Wed, Jul 19, 2023 at 10:57:11AM -0700, Stephen Hemminger wrote:
 
-> ./drivers/gpu/drm/drm_gem_shmem_helper.c: linux/module.h is included more than once.
->
-> Reported-by: Abaci Robot <abaci@linux.alibaba.com>
-> Link: https://bugzilla.openanolis.cn/show_bug.cgi?id=4567
-> Signed-off-by: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
-> ---
+> Naive idea.
+> Would it be possible for process to use mmap() on the GPU memory and then
+> do zero copy TCP receive some how? Or is this what is being proposed.
 
-Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
+It could be possible, but currently there is no API to recover the
+underlying dmabuf from the VMA backing the mmap.
 
--- 
-Best regards,
+Also you can't just take arbitary struct pages from any old VMA and
+make them "netmem"
 
-Javier Martinez Canillas
-Core Platforms
-Red Hat
-
+Jason
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
