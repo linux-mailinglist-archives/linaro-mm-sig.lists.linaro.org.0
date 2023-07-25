@@ -2,145 +2,237 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7504F75E286
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 23 Jul 2023 16:17:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4053A76066F
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Jul 2023 05:12:26 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8307E3E940
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 23 Jul 2023 14:17:14 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id DD7CD3E940
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 23 Jul 2023 14:17:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D510E43EE0
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Jul 2023 03:12:24 +0000 (UTC)
+Received: from fd01.gateway.ufhost.com (fd01.gateway.ufhost.com [61.152.239.71])
+	by lists.linaro.org (Postfix) with ESMTP id 251A53E962
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 25 Jul 2023 03:12:11 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linuxfoundation.org header.s=korg header.b=HwyDj2aj;
-	spf=pass (lists.linaro.org: domain of gregkh@linuxfoundation.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=gregkh@linuxfoundation.org;
-	dmarc=pass (policy=none) header.from=linuxfoundation.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
-	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id 7936860D36;
-	Sun, 23 Jul 2023 14:17:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85D82C433CB;
-	Sun, 23 Jul 2023 14:17:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1690121827;
-	bh=O1cXHhAeYkZFkr7qMe4gJCB+wFoLOfSAL42tdBNvO2U=;
-	h=Subject:To:Cc:From:Date:From;
-	b=HwyDj2aj5RFL0zbuPHS4zMpIn4yKl01yr++ke6RBjR9ABhtxSxuaChexnNiKAgFI4
-	 BmjvXXLBaS3to3wGTCKDfTGwlhxp1qAnhErewaMFd52KumCNJRAO3O/98MlN39QY1S
-	 1rni1b+80r7/M6uqhArYeCIgOSk9cSckIS5Abax8=
-To: christian.koenig@amd.com,dri-devel@lists.freedesktop.org,gregkh@linuxfoundation.org,linaro-mm-sig@lists.linaro.org,sumit.semwal@linaro.org,ville.syrjala@linux.intel.com
-From: <gregkh@linuxfoundation.org>
-Date: Sun, 23 Jul 2023 16:13:23 +0200
-Message-ID: <2023072323-glamorous-unsubtle-24f4@gregkh>
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of keith.zhao@starfivetech.com designates 61.152.239.71 as permitted sender) smtp.mailfrom=keith.zhao@starfivetech.com;
+	dmarc=none
+Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
+	by fd01.gateway.ufhost.com (Postfix) with ESMTP id A1E088284;
+	Tue, 25 Jul 2023 11:12:02 +0800 (CST)
+Received: from EXMBX061.cuchost.com (172.16.6.61) by EXMBX166.cuchost.com
+ (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 25 Jul
+ 2023 11:12:02 +0800
+Received: from [192.168.60.113] (180.164.60.184) by EXMBX061.cuchost.com
+ (172.16.6.61) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 25 Jul
+ 2023 11:12:01 +0800
+Message-ID: <b8e51384-4781-2710-e94f-38a88f43b801@starfivetech.com>
+Date: Tue, 25 Jul 2023 11:12:01 +0800
 MIME-Version: 1.0
-X-stable: commit
-X-Patchwork-Hint: ignore 
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Content-Language: en-US
+To: Lucas Stach <l.stach@pengutronix.de>, <dri-devel@lists.freedesktop.org>,
+	<devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+	<linux-riscv@lists.infradead.org>, <linux-media@vger.kernel.org>,
+	<linaro-mm-sig@lists.linaro.org>
+References: <20230602074043.33872-1-keith.zhao@starfivetech.com>
+ <20230602074043.33872-4-keith.zhao@starfivetech.com>
+ <e0eeae3b35e8efac7c577ca3159abcf7f43d5082.camel@pengutronix.de>
+From: Keith Zhao <keith.zhao@starfivetech.com>
+In-Reply-To: <e0eeae3b35e8efac7c577ca3159abcf7f43d5082.camel@pengutronix.de>
+X-Originating-IP: [180.164.60.184]
+X-ClientProxiedBy: EXCAS064.cuchost.com (172.16.6.24) To EXMBX061.cuchost.com
+ (172.16.6.61)
+X-YovoleRuleAgent: yovoleflag
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: DD7CD3E940
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.00 / 15.00];
-	MID_END_EQ_FROM_USER_PART(4.00)[];
-	DWL_DNSWL_HI(-3.50)[linuxfoundation.org:dkim];
+X-Rspamd-Queue-Id: 251A53E962
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.70 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
-	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:61.152.239.0/24];
+	RCVD_NO_TLS_LAST(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[24];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	NEURAL_HAM(-0.00)[-0.999];
-	RCPT_COUNT_SEVEN(0.00)[7];
-	DKIM_TRACE(0.00)[linuxfoundation.org:+];
-	RCVD_COUNT_TWO(0.00)[2];
-	ARC_NA(0.00)[];
-	FROM_NO_DN(0.00)[];
-	TO_DN_NONE(0.00)[];
+	R_DKIM_NA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_TLS_ALL(0.00)[]
-Message-ID-Hash: VSACZ5K6VXSRI73P6RXUJ464PRTPB2GN
-X-Message-ID-Hash: VSACZ5K6VXSRI73P6RXUJ464PRTPB2GN
-X-MailFrom: gregkh@linuxfoundation.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: stable-commits@vger.kernel.org
+	ASN(0.00)[asn:4812, ipnet:61.152.0.0/16, country:CN];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	NEURAL_SPAM(0.00)[0.866];
+	DMARC_NA(0.00)[starfivetech.com];
+	HAS_XOIP(0.00)[];
+	ARC_NA(0.00)[];
+	FREEMAIL_CC(0.00)[linaro.org,esmil.dk,starfivetech.com,kernel.org,eecs.berkeley.edu,suse.de,edgeble.ai,hotmail.com,sifive.com,dabbelt.com,amd.com];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[dt];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[]
+Message-ID-Hash: JI5T6HHWJ5ZVYVN5O676PWLWXTTKVUSD
+X-Message-ID-Hash: JI5T6HHWJ5ZVYVN5O676PWLWXTTKVUSD
+X-MailFrom: keith.zhao@starfivetech.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Sumit Semwal <sumit.semwal@linaro.org>, Emil Renner Berthing <kernel@esmil.dk>, Shengyang Chen <shengyang.chen@starfivetech.com>, Conor Dooley <conor+dt@kernel.org>, Albert Ou <aou@eecs.berkeley.edu>, Thomas Zimmermann <tzimmermann@suse.de>, Jagan Teki <jagan@edgeble.ai>, Rob Herring <robh+dt@kernel.org>, Chris Morgan <macromorgan@hotmail.com>, Paul Walmsley <paul.walmsley@sifive.com>, Bjorn Andersson <andersson@kernel.org>, Changhuang Liang <changhuang.liang@starfivetech.com>, Jack Zhu <jack.zhu@starfivetech.com>, Palmer Dabbelt <palmer@dabbelt.com>, Shawn Guo <shawnguo@kernel.org>, christian.koenig@amd.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Patch "dma-buf/dma-resv: Stop leaking on krealloc() failure" has been added to the 6.4-stable tree
+Subject: [Linaro-mm-sig] Re: [PATCH 3/9] drm/verisilicon: Add basic drm driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VSACZ5K6VXSRI73P6RXUJ464PRTPB2GN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JI5T6HHWJ5ZVYVN5O676PWLWXTTKVUSD/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-DQpUaGlzIGlzIGEgbm90ZSB0byBsZXQgeW91IGtub3cgdGhhdCBJJ3ZlIGp1c3QgYWRkZWQgdGhl
-IHBhdGNoIHRpdGxlZA0KDQogICAgZG1hLWJ1Zi9kbWEtcmVzdjogU3RvcCBsZWFraW5nIG9uIGty
-ZWFsbG9jKCkgZmFpbHVyZQ0KDQp0byB0aGUgNi40LXN0YWJsZSB0cmVlIHdoaWNoIGNhbiBiZSBm
-b3VuZCBhdDoNCiAgICBodHRwOi8vd3d3Lmtlcm5lbC5vcmcvZ2l0Lz9wPWxpbnV4L2tlcm5lbC9n
-aXQvc3RhYmxlL3N0YWJsZS1xdWV1ZS5naXQ7YT1zdW1tYXJ5DQoNClRoZSBmaWxlbmFtZSBvZiB0
-aGUgcGF0Y2ggaXM6DQogICAgIGRtYS1idWYtZG1hLXJlc3Ytc3RvcC1sZWFraW5nLW9uLWtyZWFs
-bG9jLWZhaWx1cmUucGF0Y2gNCmFuZCBpdCBjYW4gYmUgZm91bmQgaW4gdGhlIHF1ZXVlLTYuNCBz
-dWJkaXJlY3RvcnkuDQoNCklmIHlvdSwgb3IgYW55b25lIGVsc2UsIGZlZWxzIGl0IHNob3VsZCBu
-b3QgYmUgYWRkZWQgdG8gdGhlIHN0YWJsZSB0cmVlLA0KcGxlYXNlIGxldCA8c3RhYmxlQHZnZXIu
-a2VybmVsLm9yZz4ga25vdyBhYm91dCBpdC4NCg0KDQo+RnJvbSAwNWFiYjNiZTkxZDg3ODgzMjgy
-MzFlZTAyOTczYWIzZDQ3ZjVlM2QyIE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQ0KRnJvbTogPT9V
-VEYtOD9xP1ZpbGxlPTIwU3lyaj1DMz1BNGw9QzM9QTQ/PSA8dmlsbGUuc3lyamFsYUBsaW51eC5p
-bnRlbC5jb20+DQpEYXRlOiBUaHUsIDEzIEp1bCAyMDIzIDIyOjQ3OjQ1ICswMzAwDQpTdWJqZWN0
-OiBkbWEtYnVmL2RtYS1yZXN2OiBTdG9wIGxlYWtpbmcgb24ga3JlYWxsb2MoKSBmYWlsdXJlDQpN
-SU1FLVZlcnNpb246IDEuMA0KQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluOyBjaGFyc2V0PVVURi04
-DQpDb250ZW50LVRyYW5zZmVyLUVuY29kaW5nOiA4Yml0DQoNCkZyb206IFZpbGxlIFN5cmrDpGzD
-pCA8dmlsbGUuc3lyamFsYUBsaW51eC5pbnRlbC5jb20+DQoNCmNvbW1pdCAwNWFiYjNiZTkxZDg3
-ODgzMjgyMzFlZTAyOTczYWIzZDQ3ZjVlM2QyIHVwc3RyZWFtLg0KDQpDdXJyZW50bHkgZG1hX3Jl
-c3ZfZ2V0X2ZlbmNlcygpIHdpbGwgbGVhayB0aGUgcHJldmlvdXNseQ0KYWxsb2NhdGVkIGFycmF5
-IGlmIHRoZSBmZW5jZSBpdGVyYXRpb24gZ290IHJlc3RhcnRlZCBhbmQNCnRoZSBrcmVhbGxvY19h
-cnJheSgpIGZhaWxzLg0KDQpGcmVlIHRoZSBvbGQgYXJyYXkgYnkgaGFuZCwgYW5kIG1ha2Ugc3Vy
-ZSB3ZSBzdGlsbCBjbGVhcg0KdGhlIHJldHVybmVkICpmZW5jZXMgc28gdGhlIGNhbGxlciB3b24n
-dCBlbmQgdXAgYWNjZXNzaW5nDQpmcmVlZCBtZW1vcnkuIFNvbWUgKGJ1dCBub3QgYWxsKSBvZiB0
-aGUgY2FsbGVycyBvZg0KZG1hX3Jlc3ZfZ2V0X2ZlbmNlcygpIHNlZW0gdG8gc3RpbGwgdHJhd2wg
-dGhyb3VnaCB0aGUNCmFycmF5IGV2ZW4gd2hlbiBkbWFfcmVzdl9nZXRfZmVuY2VzKCkgZmFpbGVk
-LiBBbmQgbGV0J3MNCnplcm8gb3V0ICpudW1fZmVuY2VzIGFzIHdlbGwgZm9yIGdvb2QgbWVhc3Vy
-ZS4NCg0KQ2M6IFN1bWl0IFNlbXdhbCA8c3VtaXQuc2Vtd2FsQGxpbmFyby5vcmc+DQpDYzogQ2hy
-aXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KQ2M6IGxpbnV4LW1lZGlh
-QHZnZXIua2VybmVsLm9yZw0KQ2M6IGRyaS1kZXZlbEBsaXN0cy5mcmVlZGVza3RvcC5vcmcNCkNj
-OiBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcNCkZpeGVzOiBkM2M4MDY5OGM5ZjUgKCJk
-bWEtYnVmOiB1c2UgbmV3IGl0ZXJhdG9yIGluIGRtYV9yZXN2X2dldF9mZW5jZXMgdjMiKQ0KU2ln
-bmVkLW9mZi1ieTogVmlsbGUgU3lyasOkbMOkIDx2aWxsZS5zeXJqYWxhQGxpbnV4LmludGVsLmNv
-bT4NClJldmlld2VkLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5j
-b20+DQpDYzogc3RhYmxlQHZnZXIua2VybmVsLm9yZw0KTGluazogaHR0cHM6Ly9wYXRjaHdvcmsu
-ZnJlZWRlc2t0b3Aub3JnL3BhdGNoL21zZ2lkLzIwMjMwNzEzMTk0NzQ1LjE3NTEtMS12aWxsZS5z
-eXJqYWxhQGxpbnV4LmludGVsLmNvbQ0KU2lnbmVkLW9mZi1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8
-Y2hyaXN0aWFuLmtvZW5pZ0BhbWQuY29tPg0KU2lnbmVkLW9mZi1ieTogR3JlZyBLcm9haC1IYXJ0
-bWFuIDxncmVna2hAbGludXhmb3VuZGF0aW9uLm9yZz4NCi0tLQ0KIGRyaXZlcnMvZG1hLWJ1Zi9k
-bWEtcmVzdi5jIHwgICAxMyArKysrKysrKystLS0tDQogMSBmaWxlIGNoYW5nZWQsIDkgaW5zZXJ0
-aW9ucygrKSwgNCBkZWxldGlvbnMoLSkNCg0KLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1yZXN2
-LmMNCisrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5jDQpAQCAtNTcxLDYgKzU3MSw3IEBA
-IGludCBkbWFfcmVzdl9nZXRfZmVuY2VzKHN0cnVjdCBkbWFfcmVzdg0KIAlkbWFfcmVzdl9mb3Jf
-ZWFjaF9mZW5jZV91bmxvY2tlZCgmY3Vyc29yLCBmZW5jZSkgew0KIA0KIAkJaWYgKGRtYV9yZXN2
-X2l0ZXJfaXNfcmVzdGFydGVkKCZjdXJzb3IpKSB7DQorCQkJc3RydWN0IGRtYV9mZW5jZSAqKm5l
-d19mZW5jZXM7DQogCQkJdW5zaWduZWQgaW50IGNvdW50Ow0KIA0KIAkJCXdoaWxlICgqbnVtX2Zl
-bmNlcykNCkBAIC01NzksMTMgKzU4MCwxNyBAQCBpbnQgZG1hX3Jlc3ZfZ2V0X2ZlbmNlcyhzdHJ1
-Y3QgZG1hX3Jlc3YNCiAJCQljb3VudCA9IGN1cnNvci5udW1fZmVuY2VzICsgMTsNCiANCiAJCQkv
-KiBFdmVudHVhbGx5IHJlLWFsbG9jYXRlIHRoZSBhcnJheSAqLw0KLQkJCSpmZW5jZXMgPSBrcmVh
-bGxvY19hcnJheSgqZmVuY2VzLCBjb3VudCwNCi0JCQkJCQkgc2l6ZW9mKHZvaWQgKiksDQotCQkJ
-CQkJIEdGUF9LRVJORUwpOw0KLQkJCWlmIChjb3VudCAmJiAhKmZlbmNlcykgew0KKwkJCW5ld19m
-ZW5jZXMgPSBrcmVhbGxvY19hcnJheSgqZmVuY2VzLCBjb3VudCwNCisJCQkJCQkgICAgc2l6ZW9m
-KHZvaWQgKiksDQorCQkJCQkJICAgIEdGUF9LRVJORUwpOw0KKwkJCWlmIChjb3VudCAmJiAhbmV3
-X2ZlbmNlcykgew0KKwkJCQlrZnJlZSgqZmVuY2VzKTsNCisJCQkJKmZlbmNlcyA9IE5VTEw7DQor
-CQkJCSpudW1fZmVuY2VzID0gMDsNCiAJCQkJZG1hX3Jlc3ZfaXRlcl9lbmQoJmN1cnNvcik7DQog
-CQkJCXJldHVybiAtRU5PTUVNOw0KIAkJCX0NCisJCQkqZmVuY2VzID0gbmV3X2ZlbmNlczsNCiAJ
-CX0NCiANCiAJCSgqZmVuY2VzKVsoKm51bV9mZW5jZXMpKytdID0gZG1hX2ZlbmNlX2dldChmZW5j
-ZSk7DQoNCg0KUGF0Y2hlcyBjdXJyZW50bHkgaW4gc3RhYmxlLXF1ZXVlIHdoaWNoIG1pZ2h0IGJl
-IGZyb20gdmlsbGUuc3lyamFsYUBsaW51eC5pbnRlbC5jb20gYXJlDQoNCnF1ZXVlLTYuNC9kbWEt
-YnVmLWRtYS1yZXN2LXN0b3AtbGVha2luZy1vbi1rcmVhbGxvYy1mYWlsdXJlLnBhdGNoDQpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2ln
-IG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJz
-Y3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5v
-cmcK
+
+
+On 2023/6/7 16:53, Lucas Stach wrote:
+> Hi Keith,
+> 
+> Am Freitag, dem 02.06.2023 um 15:40 +0800 schrieb Keith Zhao:
+>> Add a basic platform driver of the DRM driver for JH7110 SoC.
+>> 
+>> Signed-off-by: Keith Zhao <keith.zhao@starfivetech.com>
+>> ---
+>>  MAINTAINERS                          |   2 +
+>>  drivers/gpu/drm/Kconfig              |   2 +
+>>  drivers/gpu/drm/Makefile             |   1 +
+>>  drivers/gpu/drm/verisilicon/Kconfig  |  13 ++
+>>  drivers/gpu/drm/verisilicon/Makefile |   6 +
+>>  drivers/gpu/drm/verisilicon/vs_drv.c | 284 +++++++++++++++++++++++++++
+>>  drivers/gpu/drm/verisilicon/vs_drv.h |  48 +++++
+>>  include/uapi/drm/drm_fourcc.h        |  83 ++++++++
+>>  include/uapi/drm/vs_drm.h            |  50 +++++
+>>  9 files changed, 489 insertions(+)
+>>  create mode 100644 drivers/gpu/drm/verisilicon/Kconfig
+>>  create mode 100644 drivers/gpu/drm/verisilicon/Makefile
+>>  create mode 100644 drivers/gpu/drm/verisilicon/vs_drv.c
+>>  create mode 100644 drivers/gpu/drm/verisilicon/vs_drv.h
+>>  create mode 100644 include/uapi/drm/vs_drm.h
+>> 
+>> 
+>> [...]
+>> +#endif /* __VS_DRV_H__ */
+>> diff --git a/include/uapi/drm/drm_fourcc.h b/include/uapi/drm/drm_fourcc.h
+>> index de703c6be969..af4fb50f9207 100644
+>> --- a/include/uapi/drm/drm_fourcc.h
+>> +++ b/include/uapi/drm/drm_fourcc.h
+>> @@ -419,6 +419,7 @@ extern "C" {
+>>  #define DRM_FORMAT_MOD_VENDOR_ARM     0x08
+>>  #define DRM_FORMAT_MOD_VENDOR_ALLWINNER 0x09
+>>  #define DRM_FORMAT_MOD_VENDOR_AMLOGIC 0x0a
+>> +#define DRM_FORMAT_MOD_VENDOR_VS      0x0b
+>>  
+>>  /* add more to the end as needed */
+>>  
+>> @@ -1519,6 +1520,88 @@ drm_fourcc_canonicalize_nvidia_format_mod(__u64 modifier)
+>>  #define AMD_FMT_MOD_CLEAR(field) \
+>>  	(~((__u64)AMD_FMT_MOD_##field##_MASK << AMD_FMT_MOD_##field##_SHIFT))
+>>  
+>> +#define DRM_FORMAT_MOD_VS_TYPE_NORMAL        0x00
+>> +#define DRM_FORMAT_MOD_VS_TYPE_COMPRESSED    0x01
+>> +#define DRM_FORMAT_MOD_VS_TYPE_CUSTOM_10BIT  0x02
+>> +#define DRM_FORMAT_MOD_VS_TYPE_MASK     ((__u64)0x3 << 54)
+>> +
+>> +#define fourcc_mod_vs_code(type, val) \
+>> +	fourcc_mod_code(VS, ((((__u64)type) << 54) | (val)))
+>> +
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_MODE_MASK    0x3F
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_8X8_XMAJOR   0x00
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_8X8_YMAJOR   0x01
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_16X4     0x02
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_8X4      0x03
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_4X8      0x04
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_16X4   0x06
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_64X4     0x07
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_32X4     0x08
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_256X1  0x09
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_128X1  0x0A
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_64X4   0x0B
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_256X2  0x0C
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_128X2  0x0D
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_128X4  0x0E
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_64X1   0x0F
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_16X8     0x10
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_8X16     0x11
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_512X1  0x12
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_32X4   0x13
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_64X2   0x14
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_32X2   0x15
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_32X1   0x16
+>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_16X1   0x17
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_128X4    0x18
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_256X4    0x19
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_512X4    0x1A
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_16X16    0x1B
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_32X16    0x1C
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_64X16    0x1D
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_128X8    0x1E
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_8X4_S    0x1F
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_16X4_S   0x20
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_32X4_S   0x21
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_16X4_LSB 0x22
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_32X4_LSB 0x23
+>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_32X8     0x24
+>> +
+>> +#define DRM_FORMAT_MOD_VS_DEC_ALIGN_32      (0x01 << 6)
+>> +#define DRM_FORMAT_MOD_VS_DEC_ALIGN_64      (0x01 << 7)
+>> +
+>> +#define fourcc_mod_vs_dec_code(tile, align) \
+>> +	fourcc_mod_vs_code(DRM_FORMAT_MOD_VS_TYPE_COMPRESSED, \
+>> +				((tile) | (align)))
+>> +
+>> +#define DRM_FORMAT_MOD_VS_NORM_MODE_MASK        0x1F
+>> +#define DRM_FORMAT_MOD_VS_LINEAR                0x00
+>> +#define DRM_FORMAT_MOD_VS_TILED4x4              0x01
+>> +#define DRM_FORMAT_MOD_VS_SUPER_TILED_XMAJOR    0x02
+>> +#define DRM_FORMAT_MOD_VS_SUPER_TILED_YMAJOR    0x03
+>> +#define DRM_FORMAT_MOD_VS_TILE_8X8              0x04
+>> +#define DRM_FORMAT_MOD_VS_TILE_MODE1            0x05
+>> +#define DRM_FORMAT_MOD_VS_TILE_MODE2            0x06
+>> +#define DRM_FORMAT_MOD_VS_TILE_8X4              0x07
+>> +#define DRM_FORMAT_MOD_VS_TILE_MODE4            0x08
+>> +#define DRM_FORMAT_MOD_VS_TILE_MODE5            0x09
+>> +#define DRM_FORMAT_MOD_VS_TILE_MODE6            0x0A
+>> +#define DRM_FORMAT_MOD_VS_SUPER_TILED_XMAJOR_8X4    0x0B
+>> +#define DRM_FORMAT_MOD_VS_SUPER_TILED_YMAJOR_4X8    0x0C
+>> +#define DRM_FORMAT_MOD_VS_TILE_Y                0x0D
+>> +#define DRM_FORMAT_MOD_VS_TILE_128X1            0x0F
+>> +#define DRM_FORMAT_MOD_VS_TILE_256X1            0x10
+>> +#define DRM_FORMAT_MOD_VS_TILE_32X1             0x11
+>> +#define DRM_FORMAT_MOD_VS_TILE_64X1             0x12
+>> +#define DRM_FORMAT_MOD_VS_TILE_MODE4X4          0x15
+>> +
+>> +#define fourcc_mod_vs_norm_code(tile) \
+>> +	fourcc_mod_vs_code(DRM_FORMAT_MOD_VS_TYPE_NORMAL, \
+>> +				(tile))
+>> +
+>> +#define fourcc_mod_vs_custom_code(tile) \
+>> +	fourcc_mod_vs_code(DRM_FORMAT_MOD_VS_TYPE_CUSTOM_10BIT, \
+>> +				(tile))
+>> +
+> 
+> You are opening a new namespace for what is effectively the VIVANTE
+> tiling. While your list seems much more exhaustive than the (reverse
+> engineered) list provided under the VIVANTE namespace, this is still
+> unacceptable as it adds new aliases for existing modifiers.
+> 
+hi Lucas:
+I got what you mean , I will check the whether the current existence can be reused.
+In principle, can existing modefiers cover my definition?
+
+> Also any modifier additions should be in a separate patch and not
+> buried in another change.
+> 
+ok , no problem
+> Regards,
+> Lucas
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
