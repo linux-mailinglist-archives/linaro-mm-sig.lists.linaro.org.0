@@ -2,80 +2,77 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E418761156
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Jul 2023 12:50:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0983761229
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Jul 2023 12:59:54 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5587843E23
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Jul 2023 10:50:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id BC8153F66B
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Jul 2023 10:59:53 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id A9EFF3F31F
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 25 Jul 2023 10:49:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 5EE153F325
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 25 Jul 2023 10:59:48 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linuxfoundation.org header.s=korg header.b=XQVwhIoI;
+	dkim=pass header.d=linuxfoundation.org header.s=korg header.b=o45GTKZk;
 	spf=pass (lists.linaro.org: domain of gregkh@linuxfoundation.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=gregkh@linuxfoundation.org;
 	dmarc=pass (policy=none) header.from=linuxfoundation.org
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id 56AE76166F;
-	Tue, 25 Jul 2023 10:49:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6658DC433C8;
-	Tue, 25 Jul 2023 10:49:56 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 02EE86164D;
+	Tue, 25 Jul 2023 10:59:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 174C9C433C8;
+	Tue, 25 Jul 2023 10:59:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
-	s=korg; t=1690282196;
-	bh=mqeWrjRkKEshdY5zvAqc2lyl7BsSe/D42AtpoyJoeE4=;
+	s=korg; t=1690282787;
+	bh=fBwH6do8fLXuBrWtFFFz+C2h8zLxgC0R4Fmj5/GQkjI=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=XQVwhIoIUY49cragFx1gM6ymIKwa5ilV5ALGKUGGIQiNHgJz93cydVDBMnmxtaSIW
-	 7JM3+OhgI1DIekW74AbUm1y+aexaRbKgIgQdZw+gZhKrTXr7YmmJWrfUYYoW8tBIje
-	 tx/9sed7cFZt5KxMMlPZXCEhzqO6Bu6vpmd8ozsU=
+	b=o45GTKZkCUbdoRoK8PCkQurIly8z9wvNrMScsadJH/B+SqHlyitUp4gafwE+wra2H
+	 YHzuy0fPh7SllD572de7IVsFpRo4CbcyctxVW55cqncjsFc6sdWGF3uq8w/YmF/Krp
+	 ndFOpyzHrGOSrEFlakJTG0RoGd0GowMV3yjhN+zY=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: stable@vger.kernel.org
-Date: Tue, 25 Jul 2023 12:43:30 +0200
-Message-ID: <20230725104516.591974295@linuxfoundation.org>
+Date: Tue, 25 Jul 2023 12:44:14 +0200
+Message-ID: <20230725104508.847407285@linuxfoundation.org>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20230725104514.821564989@linuxfoundation.org>
-References: <20230725104514.821564989@linuxfoundation.org>
+In-Reply-To: <20230725104507.756981058@linuxfoundation.org>
+References: <20230725104507.756981058@linuxfoundation.org>
 User-Agent: quilt/0.67
 MIME-Version: 1.0
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: A9EFF3F31F
-X-Spamd-Bar: ----------
-X-Spamd-Result: default: False [-10.00 / 15.00];
-	REPLY(-4.00)[];
+X-Rspamd-Queue-Id: 5EE153F325
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	RCVD_IN_DNSWL_HI(-1.00)[52.25.139.140:received,139.178.84.217:from];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[linuxfoundation.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
 	R_DKIM_ALLOW(-0.20)[linuxfoundation.org:s=korg];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
 	MIME_GOOD(-0.10)[text/plain];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	RCVD_COUNT_TWO(0.00)[2];
 	RCPT_COUNT_SEVEN(0.00)[9];
-	FROM_HAS_DN(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	MIME_TRACE(0.00)[0:+];
+	FROM_EQ_ENVFROM(0.00)[];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
 	DKIM_TRACE(0.00)[linuxfoundation.org:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	URIBL_BLOCKED(0.00)[linuxfoundation.org:email,linuxfoundation.org:dkim];
-	RCVD_TLS_ALL(0.00)[];
+	URIBL_BLOCKED(0.00)[linaro.org:email,intel.com:email,patchwork.freedesktop.org:url,linuxfoundation.org:email,linuxfoundation.org:dkim,dfw.source.kernel.org:helo,dfw.source.kernel.org:rdns];
+	RCVD_COUNT_TWO(0.00)[2];
 	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: QGLFLDJSC77NAKKTGXF76ZLLHZQGJILH
-X-Message-ID-Hash: QGLFLDJSC77NAKKTGXF76ZLLHZQGJILH
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_ALL(0.00)[]
+Message-ID-Hash: 33FXGUFXS7KJKRMMIA2XKGYP4TKJHU3I
+X-Message-ID-Hash: 33FXGUFXS7KJKRMMIA2XKGYP4TKJHU3I
 X-MailFrom: gregkh@linuxfoundation.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, patches@lists.linux.dev, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= <ville.syrjala@linux.intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 6.4 043/227] dma-buf/dma-resv: Stop leaking on krealloc() failure
+Subject: [Linaro-mm-sig] [PATCH 6.1 026/183] dma-buf/dma-resv: Stop leaking on krealloc() failure
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QGLFLDJSC77NAKKTGXF76ZLLHZQGJILH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/33FXGUFXS7KJKRMMIA2XKGYP4TKJHU3I/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -110,11 +107,11 @@ LWJ5OiBHcmVnIEtyb2FoLUhhcnRtYW4gPGdyZWdraEBsaW51eGZvdW5kYXRpb24ub3JnPg0KLS0t
 DQogZHJpdmVycy9kbWEtYnVmL2RtYS1yZXN2LmMgfCAgIDEzICsrKysrKysrKy0tLS0NCiAxIGZp
 bGUgY2hhbmdlZCwgOSBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQ0KDQotLS0gYS9kcml2
 ZXJzL2RtYS1idWYvZG1hLXJlc3YuYw0KKysrIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1yZXN2LmMN
-CkBAIC01NzEsNiArNTcxLDcgQEAgaW50IGRtYV9yZXN2X2dldF9mZW5jZXMoc3RydWN0IGRtYV9y
+CkBAIC01NjYsNiArNTY2LDcgQEAgaW50IGRtYV9yZXN2X2dldF9mZW5jZXMoc3RydWN0IGRtYV9y
 ZXN2DQogCWRtYV9yZXN2X2Zvcl9lYWNoX2ZlbmNlX3VubG9ja2VkKCZjdXJzb3IsIGZlbmNlKSB7
 DQogDQogCQlpZiAoZG1hX3Jlc3ZfaXRlcl9pc19yZXN0YXJ0ZWQoJmN1cnNvcikpIHsNCisJCQlz
 dHJ1Y3QgZG1hX2ZlbmNlICoqbmV3X2ZlbmNlczsNCiAJCQl1bnNpZ25lZCBpbnQgY291bnQ7DQog
-DQogCQkJd2hpbGUgKCpudW1fZmVuY2VzKQ0KQEAgLTU3OSwxMyArNTgwLDE3IEBAIGludCBkbWFf
+DQogCQkJd2hpbGUgKCpudW1fZmVuY2VzKQ0KQEAgLTU3NCwxMyArNTc1LDE3IEBAIGludCBkbWFf
 cmVzdl9nZXRfZmVuY2VzKHN0cnVjdCBkbWFfcmVzdg0KIAkJCWNvdW50ID0gY3Vyc29yLm51bV9m
 ZW5jZXMgKyAxOw0KIA0KIAkJCS8qIEV2ZW50dWFsbHkgcmUtYWxsb2NhdGUgdGhlIGFycmF5ICov
 DQotCQkJKmZlbmNlcyA9IGtyZWFsbG9jX2FycmF5KCpmZW5jZXMsIGNvdW50LA0KLQkJCQkJCSBz
