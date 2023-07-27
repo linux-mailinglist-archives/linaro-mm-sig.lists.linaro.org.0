@@ -2,285 +2,197 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BEBAC7614F3
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Jul 2023 13:24:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58F98764935
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Jul 2023 09:46:17 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A03BA441A0
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Jul 2023 11:24:06 +0000 (UTC)
-Received: from ex01.ufhost.com (ex01.ufhost.com [61.152.239.75])
-	by lists.linaro.org (Postfix) with ESMTP id D55103E975
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 25 Jul 2023 11:23:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 156BE43D71
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 27 Jul 2023 07:46:16 +0000 (UTC)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2041.outbound.protection.outlook.com [40.107.93.41])
+	by lists.linaro.org (Postfix) with ESMTPS id B7B403F31A
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 27 Jul 2023 07:46:09 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of keith.zhao@starfivetech.com designates 61.152.239.75 as permitted sender) smtp.mailfrom=keith.zhao@starfivetech.com;
-	dmarc=none
-Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
-	by ex01.ufhost.com (Postfix) with ESMTP id B0D2F24E282;
-	Tue, 25 Jul 2023 19:23:46 +0800 (CST)
-Received: from EXMBX061.cuchost.com (172.16.6.61) by EXMBX166.cuchost.com
- (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 25 Jul
- 2023 19:23:46 +0800
-Received: from [192.168.60.113] (180.164.60.184) by EXMBX061.cuchost.com
- (172.16.6.61) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 25 Jul
- 2023 19:23:45 +0800
-Message-ID: <3dd360e2-7521-6305-c543-58830cd60ec0@starfivetech.com>
-Date: Tue, 25 Jul 2023 19:23:45 +0800
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+	dkim=pass header.d=amd.com header.s=selector1 header.b=nr7kmUQG;
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.93.41 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1");
+	dmarc=pass (policy=quarantine) header.from=amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QgIlD//yHQZcBNLA34RVsTbbf2CSiLVTGmiqeqko4BZIXjw+mZsrnP4g7jrucCZ9eS35rD1IDE7/YrvOSf/uKH/Alt+34V5o6rws04YFdIE10f6BLt2bhP9dBAxr6zzolIlsoA/7XlYgbnRj7xTLEjwLuUvWdwEkxwrVIhkd2LNTwIw4kCw2zxNmJw1Y0dXl1gKbH1jlpktAG8deO33YMxZOabIP7GQe756hw3r59a/1UoErNfCHYiREcEHJ/EpyRFWq1xVI+2DWRoUZVlz0X4ctAz96ERbzJcqaUErHhAFglsbfXCuteRUemApE8nq01hcu/A+5KiY6rkUqD984eA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dsuXSTq8w9nhLNvGsyo0ANgU+L52Pez8eHR2nW3tAPQ=;
+ b=NOkn5uY6/R9+gq+mBnOB/pv7gl1oNYr71x9iVTW1cSBBpuU160IaTbb275lEcgz73WFg5mG3rT4kuG4Eq7xvWRzNxtVGv4nDqMuCubB9bBvhXeZ/W2UL+WCZQtK+OE4slY9jdD4ewD5EQXL8tztXoQTjorIRsocdgpkjjB8fMEkdgB7ou5/JMImJYswT1dSF7pfHbU8vF8X8HqmEyDaSLYIn9qg+BI/C2KFk46BpIPKPAFeS4Ztt8kcUOEknS7tSpXQSlL/q1zDxh44alnOjYUSOdiVAoBuE5KFoSwd2QbjDWCkZ8MlRIFNZzWhkeAa0naSVXBAXc/2THq5+RAskDg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dsuXSTq8w9nhLNvGsyo0ANgU+L52Pez8eHR2nW3tAPQ=;
+ b=nr7kmUQG1HVtPnGuUBIsJ75njrri7jJJri8GjqJBj6mX6EtW/gU6Nqo/Z6L953baUt3RqrzoHvRWeE49mvbr/APuE7l9k8fecl8F0cSjr8JXPfBWdJWFWSRB5y1bjgJL5SCLGhV9rbvCzCDVIMw3aGr9TYZo65x/qVbvI182Dt0=
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
+ by PH7PR12MB8428.namprd12.prod.outlook.com (2603:10b6:510:243::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6609.33; Thu, 27 Jul
+ 2023 07:46:07 +0000
+Received: from BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::3d:c14:667a:1c81]) by BN8PR12MB3587.namprd12.prod.outlook.com
+ ([fe80::3d:c14:667a:1c81%4]) with mapi id 15.20.6631.026; Thu, 27 Jul 2023
+ 07:46:07 +0000
+Message-ID: <52498955-a14b-5646-95a3-611bda0049d7@amd.com>
+Date: Thu, 27 Jul 2023 09:46:04 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
 Content-Language: en-US
-From: Keith Zhao <keith.zhao@starfivetech.com>
-To: Lucas Stach <l.stach@pengutronix.de>, <dri-devel@lists.freedesktop.org>,
-	<devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-	<linux-riscv@lists.infradead.org>, <linux-media@vger.kernel.org>,
-	<linaro-mm-sig@lists.linaro.org>
-References: <20230602074043.33872-1-keith.zhao@starfivetech.com>
- <20230602074043.33872-4-keith.zhao@starfivetech.com>
- <e0eeae3b35e8efac7c577ca3159abcf7f43d5082.camel@pengutronix.de>
- <b8e51384-4781-2710-e94f-38a88f43b801@starfivetech.com>
-In-Reply-To: <b8e51384-4781-2710-e94f-38a88f43b801@starfivetech.com>
-X-Originating-IP: [180.164.60.184]
-X-ClientProxiedBy: EXCAS066.cuchost.com (172.16.6.26) To EXMBX061.cuchost.com
- (172.16.6.61)
-X-YovoleRuleAgent: yovoleflag
+To: Luc Ma <onion0709@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>,
+ linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
+ javierm@redhat.com
+References: <64b6749a.170a0220.3acab.2af9@mx.google.com>
+From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+In-Reply-To: <64b6749a.170a0220.3acab.2af9@mx.google.com>
+X-ClientProxiedBy: FR3P281CA0012.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1d::15) To BN8PR12MB3587.namprd12.prod.outlook.com
+ (2603:10b6:408:43::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|PH7PR12MB8428:EE_
+X-MS-Office365-Filtering-Correlation-Id: ad16d763-6edc-4a3b-2de4-08db8e75897a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	RuL7iBJnJFTcVsK1fEVZO077ALPlv4WU+SdLG35DRgz7GDx5CPLpK7ifMZyj9wZ9dEvVceAHSIVxU1lNSHSmh+pD9RSKMOkWBVDEo9a113d9BONqeV7ydKUrZW3+dn3TuYg2Onml47vB2kexVO0hR7gmARwdGf1u7bc2sp8UOfPnPtRVM/7attWCfbK4N5f34HqlTP+ChYrZUX5h9fpGOotCiJyJ0AzPljVslVxbkTkYCEoKZbIGamUu9z37dOuLyz5ieDG4l+TgU3o2RnHSYndmNF0xR2hC9xslPkx6Gwf/vk8/Kdu9CzZG6JC0VQJ5evhFy0dYR7v7aw4sIV7mZPbNguO9OOtaMpBHDknnatc477vzbUW/PC8Zaje1OPxc3uw/QpqbUBTTJPW7sDQcj9MPvTJNTZjyHdndPWvxH2Z8YkD62adQDISfiX17EKXnLvSZPXVKyVxDo/JyTGdsBdRI4H/jKCVnCGLeTq19L5d7GTNmhhnm1LZR4YGixu2bdWsJzFzKDzTFsTM4DrvJxh8z1iWmsNiJVap5S+InIEXy+zc0I7UgA/HL4gQmgVW+O7Kj+7DFxnQ5CExjBvGBmAOQA2yn3dsDMj06rKiwMVW0ZlDTbRuvJm5VB8ZUpijWflYQ+P8Zgi3u5XcRSmZjXg==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230028)(4636009)(136003)(376002)(396003)(39860400002)(346002)(366004)(451199021)(31686004)(8936002)(8676002)(5660300002)(41300700001)(316002)(2906002)(66556008)(66476007)(66946007)(6666004)(110136005)(6506007)(186003)(478600001)(86362001)(31696002)(36756003)(2616005)(6512007)(6486002)(83380400001)(38100700002)(45980500001)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?aTJDeEVFY1ZpS1BEaktnOEZuR29XMGhwUE5DNEVLVkYyRmxPNVU0UGU4MXpo?=
+ =?utf-8?B?cFNPQXB3WDZwbGNTZkxJdHh4ZmIyVm5QWGl5Z1Z6OVVkQXpCL213Tm42ckw4?=
+ =?utf-8?B?aDFCRUQ3cUEzdUtza2JOTnhlN0VmWXZUUHBNeTVYWjVScm5DL3NkU3ZCVU5Z?=
+ =?utf-8?B?S0kvblRCd0RkTllFUmxrRi9RZmorb3J6QXFaeUw2eHBzNlNCdWw0QWtSNjlV?=
+ =?utf-8?B?VDZxTjR1NEVua2kya3VwRkN5THJDcjN3QTFGSW81QWFRL2hPU2tzTHJJdzU5?=
+ =?utf-8?B?MnFqT3VFSG9FanZMQk9ySVVDYmNRTWM5Y09hYmMvNk5vRkFQTmNtSzZLSHVu?=
+ =?utf-8?B?ZGluNC83Tkorc2RhMm5YWkZtMjViRElETDUyb2dudzR2UTJuQW1FWjJxcmdk?=
+ =?utf-8?B?TzZ2SGFBeG5nVmZnelZRS2FLOTRRR08zczEzZ1Mydk96V1kvc3M2U2NtbUho?=
+ =?utf-8?B?TmM4T1lVdEJkRDJNais5ZENreC9MN2puR01odUtPUGp0MmhaMVF4dExheHU0?=
+ =?utf-8?B?WUNtWlBGVlN2cXlpMnB6cGpTbU03TjFOeHN0Q0VKSW1yUG9xVUg1Q0lYbDNQ?=
+ =?utf-8?B?ODkvQkZ3TzhtRk5qYnlsVzhmekVMZDZsUDVVNXBiZVVWZ1RzNW1YQlQ3MGQ5?=
+ =?utf-8?B?NGdqRXh5K1g0VW1mSkFQc0ljTFV1QVRVYzZFL2lDTFlBdzhxTTNoZXRDTEFX?=
+ =?utf-8?B?d1crYTJyTEVMM0d3V1J3NldPMWFTYm5VM2xabzZCd3hGaUdKeU4vRENZUDNR?=
+ =?utf-8?B?WEZJY3dBdlJ1eXVpeUJzVndsb2Q1QS9uZDRXTGdmSjAxQlJwb2tsR3Nld2Vs?=
+ =?utf-8?B?Vno2bzRHWjBkUGpzTklCcFFsb0IrclZSYjRnUTVoTHEveHlhYVBCbnZPQjFj?=
+ =?utf-8?B?TkpUb0JxdGRhU1lWUGhIYytocklBM3hHdTBkMHZFL29OV1l5eVdKYjRPNE16?=
+ =?utf-8?B?ZmZSZTRWZEZHMVQ0S2hIVVF3RXQ5cWI4RGl1VG96MmIzMWhlaEQxRTJaL214?=
+ =?utf-8?B?V2I3aDZheUlCbnNvaDc1dEpBVXA4Q3NOTWxQeitkR0xWeW9qZ212SWpDOXkv?=
+ =?utf-8?B?UzU2R0tNbEF4Mlpobkhlek9YMkp6dVQxS3YzNlI3aVVPZFlBWDYyWUx6WlBO?=
+ =?utf-8?B?bnU5amJuemhwZ3VWb0J1YisyeVZMSE5TQWtHSjVkSENRZFR3TkROWDVyT3Nm?=
+ =?utf-8?B?VWRXMElLeCtzTUhkTklRdXZ1NzBKM1podytWTTRPV3NWZDVVRzU5Z0ZIVlJv?=
+ =?utf-8?B?eXBwWVhQUG50a1Fwd0hrUHRQQVluc0NaaEtyL0ppQ29IbUQ0aWFicFlwVlVq?=
+ =?utf-8?B?U3kwdG5rY0JNMDJIdk96NTlwbzZ6WXJCK0lYMjVWRDhTdlduYWNNZWJ2SEF5?=
+ =?utf-8?B?d0dBamlxWkFwUCt2dlZCZ3hnRUNBSkxFWkdpRkg5OGhpaUEvSzltazZPZFhH?=
+ =?utf-8?B?Ty83VmdrK2F1VEMxTE5velJobng4TkpxNDREK3N0SjdkdFQxYWUwVForczhv?=
+ =?utf-8?B?NXdQK3JTeFdLWHdGMkplc01FUGJxMmlqTEFjY201U0ZZZEN6dFU2MHU0bjZt?=
+ =?utf-8?B?UER3b0Y5UGdXQWdLYWYwYUlmdkZ4Rzl3S2lOM1BQWGdlREh3MERFVmpkV0tn?=
+ =?utf-8?B?bjlEZGdMOG1meWdwc3dkRVAwTHFJdStuS01GWW9XS0xzbkZ2ZHczREM2OEFM?=
+ =?utf-8?B?ZnNhRE1EU3RxaUp5K1gvZFA2UjYvRkJUOWRvYWtGT21aSTJ3N1A3ejZDak15?=
+ =?utf-8?B?bEVwU3hWZVVrOEs1dmhINWk5a0NVZkJYOU1RT0g5NWxmQjlIZE5YL1kwUWUy?=
+ =?utf-8?B?RzRINFozZGREd2NUY0UxaTBvWmMvbDhRWlBad0lXY0NGak92L1hHRFR4N1Zs?=
+ =?utf-8?B?aXFlUVQvQTZYc1JUajBkelRMRUlsTnVXdFFVeUlvakdtZVA0R1Fxa1dua3RX?=
+ =?utf-8?B?TWNObisxVVVoU3JJRmZEZUNvcS9yajJnS1ZHdTJyNnBiU1FBZ29RUVEyYzJM?=
+ =?utf-8?B?ZjNHYmxRcVV2TFNjZWdjTXpHY3RFZjJqK1BJZjBCZVVlUDZURzBNMzk5TElX?=
+ =?utf-8?B?ME5FanBnZENBWDhrbnNHaUtrQlRlcVdORytVOXpFL2wvRzA2Zy9FTEZUeGdD?=
+ =?utf-8?B?N0IyWTVqUXJZRUoraWVKc2NQVVdROEQyZjYrMjJkb292dVdUeVBoOUxUbmNN?=
+ =?utf-8?Q?Y4BBvYU5YNvgQgltf+1p0yUxPg61GdeSj8MMqGHvaFME?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ad16d763-6edc-4a3b-2de4-08db8e75897a
+X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jul 2023 07:46:07.4369
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Lq9owbYWAvd6beiuZRhz1EXVczpgVw3MjPpwPi6RJzrujSH8KdaWrQIvkYqpKN3V
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8428
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: D55103E975
-X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.70 / 15.00];
+X-Rspamd-Queue-Id: B7B403F31A
+X-Spamd-Bar: ------
+X-Spamd-Result: default: False [-6.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:61.152.239.0/24];
-	RCVD_NO_TLS_LAST(0.10)[];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	RCVD_IN_DNSWL_HI(-0.50)[2603:10b6:408:43::13:received];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
 	MIME_GOOD(-0.10)[text/plain];
-	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_TO(0.00)[gmail.com,linaro.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,redhat.com];
 	MIME_TRACE(0.00)[0:+];
-	R_DKIM_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	ASN(0.00)[asn:4812, ipnet:61.152.0.0/16, country:CN];
+	RCVD_TLS_LAST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	RCPT_COUNT_SEVEN(0.00)[7];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	DMARC_NA(0.00)[starfivetech.com];
-	HAS_XOIP(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[linaro.org,esmil.dk,starfivetech.com,kernel.org,eecs.berkeley.edu,suse.de,edgeble.ai,hotmail.com,sifive.com,dabbelt.com,amd.com];
+	MID_RHS_MATCH_FROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.93.41:from];
+	DKIM_TRACE(0.00)[amd.com:+];
 	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[]
-Message-ID-Hash: 2YYQEIN6ZVAYFGMHCT6YAL666CQPEGBL
-X-Message-ID-Hash: 2YYQEIN6ZVAYFGMHCT6YAL666CQPEGBL
-X-MailFrom: keith.zhao@starfivetech.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Sumit Semwal <sumit.semwal@linaro.org>, Emil Renner Berthing <kernel@esmil.dk>, Shengyang Chen <shengyang.chen@starfivetech.com>, Conor Dooley <conor+dt@kernel.org>, Albert Ou <aou@eecs.berkeley.edu>, Thomas Zimmermann <tzimmermann@suse.de>, Jagan Teki <jagan@edgeble.ai>, Rob Herring <robh+dt@kernel.org>, Chris Morgan <macromorgan@hotmail.com>, Paul Walmsley <paul.walmsley@sifive.com>, Bjorn Andersson <andersson@kernel.org>, Changhuang Liang <changhuang.liang@starfivetech.com>, Jack Zhu <jack.zhu@starfivetech.com>, Palmer Dabbelt <palmer@dabbelt.com>, Shawn Guo <shawnguo@kernel.org>, christian.koenig@amd.com
+	NEURAL_SPAM(0.00)[0.710];
+	URIBL_BLOCKED(0.00)[sietium.com:email,mail-dm6nam10on2041.outbound.protection.outlook.com:rdns];
+	RCVD_IN_DNSWL_FAIL(0.00)[40.107.93.41:server fail]
+Message-ID-Hash: HPLHY2RYUO6OF5JW2A3ZKRJFSZEEF4PZ
+X-Message-ID-Hash: HPLHY2RYUO6OF5JW2A3ZKRJFSZEEF4PZ
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 3/9] drm/verisilicon: Add basic drm driver
+Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: Fix the typo in DMA-BUF statistics doc
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2YYQEIN6ZVAYFGMHCT6YAL666CQPEGBL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HPLHY2RYUO6OF5JW2A3ZKRJFSZEEF4PZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
+Am 18.07.23 um 13:16 schrieb Luc Ma:
+> From: Luc Ma <luc@sietium.com>
+>
+> The kernel-doc for DMA-BUF statistics mentions /sys/kernel/dma-buf/buffers
+> but the correct path is /sys/kernel/dmabuf/buffers instead.
+>
+> Signed-off-by: Luc Ma <luc@sietium.com>
+> Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
 
+Reviewed and pushed to drm-misc-next.
 
-On 2023/7/25 11:12, Keith Zhao wrote:
-> 
-> 
-> On 2023/6/7 16:53, Lucas Stach wrote:
->> Hi Keith,
->> 
->> Am Freitag, dem 02.06.2023 um 15:40 +0800 schrieb Keith Zhao:
->>> Add a basic platform driver of the DRM driver for JH7110 SoC.
->>> 
->>> Signed-off-by: Keith Zhao <keith.zhao@starfivetech.com>
->>> ---
->>>  MAINTAINERS                          |   2 +
->>>  drivers/gpu/drm/Kconfig              |   2 +
->>>  drivers/gpu/drm/Makefile             |   1 +
->>>  drivers/gpu/drm/verisilicon/Kconfig  |  13 ++
->>>  drivers/gpu/drm/verisilicon/Makefile |   6 +
->>>  drivers/gpu/drm/verisilicon/vs_drv.c | 284 +++++++++++++++++++++++++++
->>>  drivers/gpu/drm/verisilicon/vs_drv.h |  48 +++++
->>>  include/uapi/drm/drm_fourcc.h        |  83 ++++++++
->>>  include/uapi/drm/vs_drm.h            |  50 +++++
->>>  9 files changed, 489 insertions(+)
->>>  create mode 100644 drivers/gpu/drm/verisilicon/Kconfig
->>>  create mode 100644 drivers/gpu/drm/verisilicon/Makefile
->>>  create mode 100644 drivers/gpu/drm/verisilicon/vs_drv.c
->>>  create mode 100644 drivers/gpu/drm/verisilicon/vs_drv.h
->>>  create mode 100644 include/uapi/drm/vs_drm.h
->>> 
->>> 
->>> [...]
->>> +#endif /* __VS_DRV_H__ */
->>> diff --git a/include/uapi/drm/drm_fourcc.h b/include/uapi/drm/drm_fourcc.h
->>> index de703c6be969..af4fb50f9207 100644
->>> --- a/include/uapi/drm/drm_fourcc.h
->>> +++ b/include/uapi/drm/drm_fourcc.h
->>> @@ -419,6 +419,7 @@ extern "C" {
->>>  #define DRM_FORMAT_MOD_VENDOR_ARM     0x08
->>>  #define DRM_FORMAT_MOD_VENDOR_ALLWINNER 0x09
->>>  #define DRM_FORMAT_MOD_VENDOR_AMLOGIC 0x0a
->>> +#define DRM_FORMAT_MOD_VENDOR_VS      0x0b
->>>  
->>>  /* add more to the end as needed */
->>>  
->>> @@ -1519,6 +1520,88 @@ drm_fourcc_canonicalize_nvidia_format_mod(__u64 modifier)
->>>  #define AMD_FMT_MOD_CLEAR(field) \
->>>  	(~((__u64)AMD_FMT_MOD_##field##_MASK << AMD_FMT_MOD_##field##_SHIFT))
->>>  
->>> +#define DRM_FORMAT_MOD_VS_TYPE_NORMAL        0x00
->>> +#define DRM_FORMAT_MOD_VS_TYPE_COMPRESSED    0x01
->>> +#define DRM_FORMAT_MOD_VS_TYPE_CUSTOM_10BIT  0x02
->>> +#define DRM_FORMAT_MOD_VS_TYPE_MASK     ((__u64)0x3 << 54)
->>> +
->>> +#define fourcc_mod_vs_code(type, val) \
->>> +	fourcc_mod_code(VS, ((((__u64)type) << 54) | (val)))
->>> +
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_MODE_MASK    0x3F
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_8X8_XMAJOR   0x00
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_8X8_YMAJOR   0x01
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_16X4     0x02
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_8X4      0x03
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_4X8      0x04
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_16X4   0x06
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_64X4     0x07
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_32X4     0x08
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_256X1  0x09
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_128X1  0x0A
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_64X4   0x0B
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_256X2  0x0C
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_128X2  0x0D
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_128X4  0x0E
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_64X1   0x0F
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_16X8     0x10
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_8X16     0x11
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_512X1  0x12
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_32X4   0x13
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_64X2   0x14
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_32X2   0x15
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_32X1   0x16
->>> +#define DRM_FORMAT_MOD_VS_DEC_RASTER_16X1   0x17
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_128X4    0x18
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_256X4    0x19
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_512X4    0x1A
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_16X16    0x1B
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_32X16    0x1C
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_64X16    0x1D
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_128X8    0x1E
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_8X4_S    0x1F
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_16X4_S   0x20
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_32X4_S   0x21
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_16X4_LSB 0x22
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_32X4_LSB 0x23
->>> +#define DRM_FORMAT_MOD_VS_DEC_TILE_32X8     0x24
->>> +
->>> +#define DRM_FORMAT_MOD_VS_DEC_ALIGN_32      (0x01 << 6)
->>> +#define DRM_FORMAT_MOD_VS_DEC_ALIGN_64      (0x01 << 7)
->>> +
->>> +#define fourcc_mod_vs_dec_code(tile, align) \
->>> +	fourcc_mod_vs_code(DRM_FORMAT_MOD_VS_TYPE_COMPRESSED, \
->>> +				((tile) | (align)))
->>> +
->>> +#define DRM_FORMAT_MOD_VS_NORM_MODE_MASK        0x1F
->>> +#define DRM_FORMAT_MOD_VS_LINEAR                0x00
->>> +#define DRM_FORMAT_MOD_VS_TILED4x4              0x01
->>> +#define DRM_FORMAT_MOD_VS_SUPER_TILED_XMAJOR    0x02
->>> +#define DRM_FORMAT_MOD_VS_SUPER_TILED_YMAJOR    0x03
->>> +#define DRM_FORMAT_MOD_VS_TILE_8X8              0x04
->>> +#define DRM_FORMAT_MOD_VS_TILE_MODE1            0x05
->>> +#define DRM_FORMAT_MOD_VS_TILE_MODE2            0x06
->>> +#define DRM_FORMAT_MOD_VS_TILE_8X4              0x07
->>> +#define DRM_FORMAT_MOD_VS_TILE_MODE4            0x08
->>> +#define DRM_FORMAT_MOD_VS_TILE_MODE5            0x09
->>> +#define DRM_FORMAT_MOD_VS_TILE_MODE6            0x0A
->>> +#define DRM_FORMAT_MOD_VS_SUPER_TILED_XMAJOR_8X4    0x0B
->>> +#define DRM_FORMAT_MOD_VS_SUPER_TILED_YMAJOR_4X8    0x0C
->>> +#define DRM_FORMAT_MOD_VS_TILE_Y                0x0D
->>> +#define DRM_FORMAT_MOD_VS_TILE_128X1            0x0F
->>> +#define DRM_FORMAT_MOD_VS_TILE_256X1            0x10
->>> +#define DRM_FORMAT_MOD_VS_TILE_32X1             0x11
->>> +#define DRM_FORMAT_MOD_VS_TILE_64X1             0x12
->>> +#define DRM_FORMAT_MOD_VS_TILE_MODE4X4          0x15
->>> +
->>> +#define fourcc_mod_vs_norm_code(tile) \
->>> +	fourcc_mod_vs_code(DRM_FORMAT_MOD_VS_TYPE_NORMAL, \
->>> +				(tile))
->>> +
->>> +#define fourcc_mod_vs_custom_code(tile) \
->>> +	fourcc_mod_vs_code(DRM_FORMAT_MOD_VS_TYPE_CUSTOM_10BIT, \
->>> +				(tile))
->>> +
->> 
->> You are opening a new namespace for what is effectively the VIVANTE
->> tiling. While your list seems much more exhaustive than the (reverse
->> engineered) list provided under the VIVANTE namespace, this is still
->> unacceptable as it adds new aliases for existing modifiers.
->> 
-> hi Lucas:
-> I got what you mean , I will check the whether the current existence can be reused.
-> In principle, can existing modefiers cover my definition?
-> 
+Thanks,
+Christian.
 
-hello Lucas:
-I made it a little simpler: I removed what I didn't use in the code .
-Keep only these:
+> ---
+>   drivers/dma-buf/dma-buf-sysfs-stats.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/dma-buf/dma-buf-sysfs-stats.c b/drivers/dma-buf/dma-buf-sysfs-stats.c
+> index 6cfbbf0720bd..b5b62e40ccc1 100644
+> --- a/drivers/dma-buf/dma-buf-sysfs-stats.c
+> +++ b/drivers/dma-buf/dma-buf-sysfs-stats.c
+> @@ -33,7 +33,7 @@
+>    * into their address space. This necessitated the creation of the DMA-BUF sysfs
+>    * statistics interface to provide per-buffer information on production systems.
+>    *
+> - * The interface at ``/sys/kernel/dma-buf/buffers`` exposes information about
+> + * The interface at ``/sys/kernel/dmabuf/buffers`` exposes information about
+>    * every DMA-BUF when ``CONFIG_DMABUF_SYSFS_STATS`` is enabled.
+>    *
+>    * The following stats are exposed by the interface:
 
-#define DRM_FORMAT_MOD_VS_TYPE_NORMAL        0x00
-#define DRM_FORMAT_MOD_VS_TYPE_COMPRESSED    0x01
-#define DRM_FORMAT_MOD_VS_TYPE_CUSTOM_10BIT  0x02
-#define DRM_FORMAT_MOD_VS_TYPE_MASK     ((__u64)0x3 << 54)
-
-#define fourcc_mod_vs_code(type, val) \
-	fourcc_mod_code(VS, ((((__u64)type) << 54) | (val)))
-
-#define DRM_FORMAT_MOD_VS_NORM_MODE_MASK        0x1F
-#define DRM_FORMAT_MOD_VS_LINEAR                0x00
-#define DRM_FORMAT_MOD_VS_SUPER_TILED_XMAJOR    0x02
-#define DRM_FORMAT_MOD_VS_SUPER_TILED_YMAJOR    0x03
-#define DRM_FORMAT_MOD_VS_TILE_8X8              0x04
-#define DRM_FORMAT_MOD_VS_TILE_8X4              0x07
-#define DRM_FORMAT_MOD_VS_SUPER_TILED_XMAJOR_8X4    0x0B
-#define DRM_FORMAT_MOD_VS_SUPER_TILED_YMAJOR_4X8    0x0C
-#define DRM_FORMAT_MOD_VS_TILE_MODE4X4          0x15
-
-#define fourcc_mod_vs_norm_code(tile) \
-	fourcc_mod_vs_code(DRM_FORMAT_MOD_VS_TYPE_NORMAL, \
-				(tile))
-
-#define fourcc_mod_vs_custom_code(tile) \
-	fourcc_mod_vs_code(DRM_FORMAT_MOD_VS_TYPE_CUSTOM_10BIT, \
-				(tile))
-
-I need you help to check what modifiers it should be (for existing modifiers) 
-
-DRM_FORMAT_MOD_VS_LINEAR			----> DRM_FORMAT_MOD_LINEAR
-DRM_FORMAT_MOD_VS_SUPER_TILED_XMAJOR 		----> ?
-DRM_FORMAT_MOD_VS_SUPER_TILED_YMAJOR 		----> ?
-DRM_FORMAT_MOD_VS_TILE_8X8           		----> ?  
-DRM_FORMAT_MOD_VS_TILE_8X4              	----> ?                    
-DRM_FORMAT_MOD_VS_SUPER_TILED_XMAJOR_8X4    	----> ?
-DRM_FORMAT_MOD_VS_SUPER_TILED_YMAJOR_4X8    	----> ?
-DRM_FORMAT_MOD_VS_TILE_MODE4X4          	----> DRM_FORMAT_MOD_VIVANTE_TILED
-
-Thanks a million!!
-Keith
->> Also any modifier additions should be in a separate patch and not
->> buried in another change.
->> 
-> ok , no problem
->> Regards,
->> Lucas
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
