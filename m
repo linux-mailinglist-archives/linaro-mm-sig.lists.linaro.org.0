@@ -2,67 +2,85 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2298076BAF9
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  1 Aug 2023 19:18:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9A5C076BD0E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  1 Aug 2023 20:56:03 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2E8843F31F
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  1 Aug 2023 17:18:47 +0000 (UTC)
-Received: from verein.lst.de (verein.lst.de [213.95.11.211])
-	by lists.linaro.org (Postfix) with ESMTPS id B27DB3F31F
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  1 Aug 2023 17:18:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9BC9E43C5E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  1 Aug 2023 18:56:02 +0000 (UTC)
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	by lists.linaro.org (Postfix) with ESMTPS id 363E83EF12
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  1 Aug 2023 18:55:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=none (lists.linaro.org: domain of hch@lst.de has no SPF policy when checking 213.95.11.211) smtp.mailfrom=hch@lst.de;
+	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b="tRb4rec/";
+	spf=none (lists.linaro.org: domain of rdunlap@infradead.org has no SPF policy when checking 198.137.202.133) smtp.mailfrom=rdunlap@infradead.org;
 	dmarc=none
-Received: by verein.lst.de (Postfix, from userid 2407)
-	id AF5E46732D; Tue,  1 Aug 2023 19:18:38 +0200 (CEST)
-Date: Tue, 1 Aug 2023 19:18:38 +0200
-From: Christoph Hellwig <hch@lst.de>
-To: Pintu Agarwal <pintu.ping@gmail.com>
-Message-ID: <20230801171838.GA14599@lst.de>
-References: <1690598115-26287-1-git-send-email-quic_pintu@quicinc.com> <20230731112155.GA3662@lst.de> <CAOuPNLjnfq1JefngtNrg0Q+JdMTSRz+eEqxGQJFfx9+af+k9WA@mail.gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=ZbJ6XzZFv+F6scIaytBSdgvIm2dwO2prs0+W8B5me30=; b=tRb4rec/Sr7L58aBAg+lYczHwH
+	NodjWNp9D97lEVUOMIX9q37VC7+tbt3fTQFQXHvlGH9pG35Wi+5NqEfyCW/3efHz1NUkaPodzIneD
+	xfChRtZD6xrvl7ocUqpSEwYXAN9wk+jhzPbpPT9KTjm5MiwO+03Nfxz8GcJ2LJiz3et/qHdUD42WI
+	/EmB/n7Ka0HCUPmS+k7guOVl+BrZQjZcD9YqG6wLANK8cVoqfSyhNGwOSsak8//gR9YCimKQyaven
+	WV3IZRKW6sSQDw9NX4JrrtTOtL/KUsr6FJzM+aQImAZtAJKPNTDPL8+NAXm52i0KS+QT8PHF600u2
+	h3LtBEzg==;
+Received: from [2601:1c2:980:9ec0::2764]
+	by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+	id 1qQuX6-0034yw-0M;
+	Tue, 01 Aug 2023 18:55:48 +0000
+Message-ID: <08610e6b-e7eb-3442-b590-9d150f6556d6@infradead.org>
+Date: Tue, 1 Aug 2023 11:55:45 -0700
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAOuPNLjnfq1JefngtNrg0Q+JdMTSRz+eEqxGQJFfx9+af+k9WA@mail.gmail.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Content-Language: en-US
+To: Keith Zhao <keith.zhao@starfivetech.com>,
+ dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
+ linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+References: <20230801101030.2040-1-keith.zhao@starfivetech.com>
+ <20230801101030.2040-6-keith.zhao@starfivetech.com>
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <20230801101030.2040-6-keith.zhao@starfivetech.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: B27DB3F31F
-X-Spamd-Bar: /
-X-Spamd-Result: default: False [-1.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+X-Rspamd-Queue-Id: 363E83EF12
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.70 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	AUTH_NA(1.00)[];
-	RCVD_IN_DNSWL_HI(-0.50)[213.95.11.211:from];
-	ONCE_RECEIVED(0.10)[];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
 	MIME_GOOD(-0.10)[text/plain];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	R_DKIM_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	ONCE_RECEIVED(0.10)[];
 	RCVD_COUNT_ONE(0.00)[1];
-	RCVD_TLS_LAST(0.00)[];
-	ASN(0.00)[asn:12337, ipnet:213.95.0.0/16, country:DE];
-	NEURAL_HAM(-0.00)[-0.247];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	R_SPF_NA(0.00)[no SPF record];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,kernel.org,linaro.org,esmil.dk,sifive.com,dabbelt.com,eecs.berkeley.edu,linux.intel.com,suse.de,pengutronix.de,amd.com,sntech.de,edgeble.ai,hotmail.com,starfivetech.com];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:7247, ipnet:198.137.202.0/24, country:US];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[30];
+	DMARC_NA(0.00)[infradead.org];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_TRACE(0.00)[infradead.org:+];
 	FROM_HAS_DN(0.00)[];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
 	TO_DN_SOME(0.00)[];
-	DMARC_NA(0.00)[lst.de];
-	TAGGED_RCPT(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[]
-Message-ID-Hash: Y4RVC3SF4TSXU66LEWB6BFI35USGFFOY
-X-Message-ID-Hash: Y4RVC3SF4TSXU66LEWB6BFI35USGFFOY
-X-MailFrom: hch@lst.de
+	TAGGED_RCPT(0.00)[dt];
+	RCVD_TLS_ALL(0.00)[]
+Message-ID-Hash: URDEGGMAVOKVPKLTIZUK2RRAJ32YI6AZ
+X-Message-ID-Hash: URDEGGMAVOKVPKLTIZUK2RRAJ32YI6AZ
+X-MailFrom: rdunlap@infradead.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Christoph Hellwig <hch@lst.de>, Pintu Kumar <quic_pintu@quicinc.com>, linux-kernel@vger.kernel.org, akpm@linux-foundation.org, linux-mm@kvack.org, robin.murphy@arm.com, iommu@lists.linux.dev, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Daniel Vetter <daniel@ffwll.ch>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Emil Renner Berthing <kernel@esmil.dk>, Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Philipp Zabel <p.zabel@pengutronix.de>, Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com, Bjorn Andersson <andersson@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Shawn Guo <shawnguo@kernel.org>, Jagan Teki <jagan@edgeble.ai>, Chris Morgan <macromorgan@hotmail.com>, Jack Zhu <jack.zhu@starfivetech.com>, Shengyang Chen <shengyang.chen@starfivetech.com>, Changhuang Liang <changhuang.liang@starfivetech.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-contiguous: define proper name for global cma region
+Subject: [Linaro-mm-sig] Re: [PATCH v1 v1 5/7] drm/vs: Register DRM device
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Y4RVC3SF4TSXU66LEWB6BFI35USGFFOY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/URDEGGMAVOKVPKLTIZUK2RRAJ32YI6AZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -72,37 +90,46 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, Aug 01, 2023 at 10:42:42PM +0530, Pintu Agarwal wrote:
-> > I agree that reserved is not a very useful name.  Unfortuately the
-> > name of the region leaks to userspace through cma_heap.
-> >
-> > So I think we need prep patches to hardcode "reserved" in
-> > add_default_cma_heap first, and then remove the cma_get_name
-> > first.
-> 
-> Sorry, but I could not fully understand your comments.
-> Can you please elaborate a little more what changes are required in
-> cma_heap if we change "reserved" to "global-cma-region" ?
 
-Step 1:
 
-Instead of setting exp_info.name to cma_get_name(cma);
-in __add_cma_heap just set it to "reserved", probably by passing a name
-argument.  You can also remove the unused data argument to __add_cma_heap
-and/or just fold that function into the only caller while you're at it.
+On 8/1/23 03:10, Keith Zhao wrote:
+> diff --git a/drivers/gpu/drm/verisilicon/Kconfig b/drivers/gpu/drm/verisilicon/Kconfig
+> new file mode 100644
+> index 000000000..fcc39dded
+> --- /dev/null
+> +++ b/drivers/gpu/drm/verisilicon/Kconfig
+> @@ -0,0 +1,25 @@
+> +# SPDX-License-Identifier: GPL-2.0
+> +config DRM_VERISILICON
+> +	tristate "DRM Support for VeriSilicon"
+> +	depends on DRM
+> +	select DRM_KMS_HELPER
+> +	select DRM_GEM_DMA_HELPER
+> +	select CMA
+> +	select DMA_CMA
+> +	help
+> +	  Choose this option if you have a VeriSilicon soc chipset.
 
-Step 2:
+s/soc/SoC/ as used below.
 
-Remove cma_get_name, as it is unused now.
+> +	  This driver provides VeriSilicon kernel mode
+> +	  setting and buffer management. It does not
+> +	  provide 2D or 3D acceleration.
+> +
+> +if DRM_VERISILICON
+> +
+> +config STARFIVE_HDMI
+> +	bool "Starfive specific extensions HDMI"
+> +	help
+> +	   This selects support for StarFive SoC specific extensions
+> +	   for the Innosilicon HDMI driver. If you want to enable
+> +	   HDMI on JH7110 based SoC, you should select this option.
+> +
+> +	   To compile this driver as a module, choose M here.
+> +endif
 
-Step 3:
-
-The patch your previously sent.
-
-> You mean to say there are userspace tools that rely on this "reserved"
-> naming for global cma ?
-
-Yes.
+-- 
+~Randy
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
