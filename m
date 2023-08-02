@@ -2,128 +2,131 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9214D76BD11
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  1 Aug 2023 20:56:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8907376C4FB
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Aug 2023 07:39:22 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9E4DD3F0B4
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  1 Aug 2023 18:56:21 +0000 (UTC)
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
-	by lists.linaro.org (Postfix) with ESMTPS id D0AB83ECF6
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  1 Aug 2023 18:55:56 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 924D644149
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Aug 2023 05:39:21 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+	by lists.linaro.org (Postfix) with ESMTPS id B1E0B3ECF6
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  2 Aug 2023 05:39:16 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=fBKF6RRy;
-	spf=none (lists.linaro.org: domain of rdunlap@infradead.org has no SPF policy when checking 198.137.202.133) smtp.mailfrom=rdunlap@infradead.org;
-	dmarc=none
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
-	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
-	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
-	bh=ZcHJoyOnSyStBYXLxjKo9vGFu+ive0GAxmxsAXs0Erc=; b=fBKF6RRyzycU76I/LkqFaOlU3u
-	QIUo9yM61JDHkELJ1pnhRtC4QwFuYkmsdXwlzXeK20DcCHwwxpmEjYa78GxpKHHKjk9bVv4LYrcJq
-	jB/hkbqhCpyTS9uVfH6TwkFxGnJcJnyq8KlVbwwoXjX0A8dgvqGiTkoZnYgFlWtkS00xIpqrLTRL7
-	4QHaMFvmGICvFrinJYgiJ6z3UzcdZFwfSoSBvDl7T4yroi8FU95d5WvnruBmCocjLYUPJnQsbrhHw
-	30F9/cD6Vud5SxrQ8X/fUjyVstb0u7kO0QDHGjUH/+zCQegLy6u7Vn9caDweSrjeXL0FbbC0wDC2Y
-	jQXTZg3g==;
-Received: from [2601:1c2:980:9ec0::2764]
-	by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
-	id 1qQuXA-0034zE-0r;
-	Tue, 01 Aug 2023 18:55:52 +0000
-Message-ID: <6286077f-bd7e-8a78-deca-3442bd987ad4@infradead.org>
-Date: Tue, 1 Aug 2023 11:55:50 -0700
+	dkim=pass header.d=google.com header.s=20221208 header.b=u2D4gxea;
+	spf=pass (lists.linaro.org: domain of jstultz@google.com designates 209.85.128.51 as permitted sender) smtp.mailfrom=jstultz@google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-3fe1e44fd2bso60955e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 01 Aug 2023 22:39:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20221208; t=1690954755; x=1691559555;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=TWYJKDdolz+W7APxSZcge8Mpis/01h5Go/3E39ja9gE=;
+        b=u2D4gxeakPR8NuViuxq7UOiZsXAZW1EeAxq+260enPXoslZIKgTJbxTZZoltObc9L6
+         d6pMxqUZsWU0dbrDwyykja+xGR30Gljw+lz1PRzPjM5gBPHycl4nmSLnVV7ShP+3RLv8
+         N7iahaTTeK5z+s2r4WzxLyBIXNZrj8OMhzvDjL3k3QrlbULDJh6qFaBn92vNfZxl1XJm
+         F29l5WQb1DIyMP4Y30lGQ/WhqONeInAjmuRC2xCDT8eThE13MwYY4eIXVAuk9hVqRzCO
+         DSJQYanSQWCDcHa3e//iXzl0PWct1NPh6MBHFYCZuhrmxOR5AtQ4ekJyHv6Ppg60BKDI
+         nN5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1690954755; x=1691559555;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=TWYJKDdolz+W7APxSZcge8Mpis/01h5Go/3E39ja9gE=;
+        b=YvyIH1xYs2L+8RtxOj5WBDlh2gnYfUrd/reBfM62XENiYfUiRsOaRaST2X3S1wXvWk
+         6zJ9LJ0g5YFT/Wm9GoH8jhtVfnzv2QQVqDnl63gWsUjP23vWBaIcuHTnA1wKzjQfyO3b
+         DwcD6vEM3zwe6Sd2m6NgsiAhuojXT3NGhPQUYvl0cHNcOpQ1Z3PKlx0nsNLjmRX8SNll
+         ASsg/dcyx6bWs6/1Vm1MOh5IFcdJPFNoyL3TAbpLQhAvoFFYar/mzFclepq5FC9wa34/
+         znNxidk9KRL9QzvpX1dfcazOWLIKOlJjAB7f3L6wh7CYkG6FUzH2JBMtOZfNVFbhCtHU
+         174g==
+X-Gm-Message-State: ABy/qLZ6KL9EMY5K8FS5A3lInxymeplFJVI6O13QgeaRJAHln1CIX3NX
+	cIyNBz1RPTK/LmJHdGqtUORDaRH/tAcJUNXDKM7A
+X-Google-Smtp-Source: APBJJlGB2VlfuxW3dK4WzHju6fp7PuJyl70BB7fOeK4klgHs3vDqzuSrKB0hMKQEoXT8t+Zp/UAztaUSZM5ue3QKmJs=
+X-Received: by 2002:a05:600c:3415:b0:3f7:e463:a0d6 with SMTP id
+ y21-20020a05600c341500b003f7e463a0d6mr341983wmp.0.1690954755562; Tue, 01 Aug
+ 2023 22:39:15 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Content-Language: en-US
-To: Keith Zhao <keith.zhao@starfivetech.com>,
- dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
- linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
-References: <20230801101030.2040-1-keith.zhao@starfivetech.com>
- <20230801101030.2040-2-keith.zhao@starfivetech.com>
-From: Randy Dunlap <rdunlap@infradead.org>
-In-Reply-To: <20230801101030.2040-2-keith.zhao@starfivetech.com>
+References: <1690598115-26287-1-git-send-email-quic_pintu@quicinc.com>
+ <20230731112155.GA3662@lst.de> <CAOuPNLjnfq1JefngtNrg0Q+JdMTSRz+eEqxGQJFfx9+af+k9WA@mail.gmail.com>
+ <20230801171838.GA14599@lst.de>
+In-Reply-To: <20230801171838.GA14599@lst.de>
+From: John Stultz <jstultz@google.com>
+Date: Tue, 1 Aug 2023 22:39:04 -0700
+Message-ID: <CANDhNCq+3OEosUcQJ5GFgk+5OyG+JqXKM43UAo0aPz-V27OgAA@mail.gmail.com>
+To: Christoph Hellwig <hch@lst.de>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: D0AB83ECF6
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.70 / 15.00];
+X-Rspamd-Queue-Id: B1E0B3ECF6
+X-Spamd-Bar: ------
+X-Spamd-Result: default: False [-6.50 / 15.00];
 	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
+	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20221208];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	ONCE_RECEIVED(0.10)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	R_SPF_NA(0.00)[no SPF record];
 	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,kernel.org,linaro.org,esmil.dk,sifive.com,dabbelt.com,eecs.berkeley.edu,linux.intel.com,suse.de,pengutronix.de,amd.com,sntech.de,edgeble.ai,hotmail.com,starfivetech.com];
-	NEURAL_HAM(-0.00)[-1.000];
-	ASN(0.00)[asn:7247, ipnet:198.137.202.0/24, country:US];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[30];
-	DMARC_NA(0.00)[infradead.org];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DKIM_TRACE(0.00)[infradead.org:+];
-	FROM_HAS_DN(0.00)[];
 	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
+	FREEMAIL_CC(0.00)[gmail.com,quicinc.com,vger.kernel.org,linux-foundation.org,kvack.org,samsung.com,arm.com,lists.linux.dev,linaro.org,collabora.com,codeaurora.org,redhat.com,amd.com,lists.freedesktop.org,lists.linaro.org];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[google.com:+];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[18];
 	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
-	RCVD_TLS_ALL(0.00)[]
-Message-ID-Hash: WX3TGKZEEARE72KB2QUDDRN3ZJBPVK5T
-X-Message-ID-Hash: WX3TGKZEEARE72KB2QUDDRN3ZJBPVK5T
-X-MailFrom: rdunlap@infradead.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Daniel Vetter <daniel@ffwll.ch>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Emil Renner Berthing <kernel@esmil.dk>, Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Philipp Zabel <p.zabel@pengutronix.de>, Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com, Bjorn Andersson <andersson@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Shawn Guo <shawnguo@kernel.org>, Jagan Teki <jagan@edgeble.ai>, Chris Morgan <macromorgan@hotmail.com>, Jack Zhu <jack.zhu@starfivetech.com>, Shengyang Chen <shengyang.chen@starfivetech.com>, Changhuang Liang <changhuang.liang@starfivetech.com>
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_RCPT(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.51:from]
+Message-ID-Hash: RWXD4Y7CKLXSBF5IDBGU4AWDQUWEXCTK
+X-Message-ID-Hash: RWXD4Y7CKLXSBF5IDBGU4AWDQUWEXCTK
+X-MailFrom: jstultz@google.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Pintu Agarwal <pintu.ping@gmail.com>, Pintu Kumar <quic_pintu@quicinc.com>, linux-kernel@vger.kernel.org, akpm@linux-foundation.org, linux-mm@kvack.org, robin.murphy@arm.com, iommu@lists.linux.dev, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v1 v1 1/7] MAINTAINERS: Update starfive maintainers
+Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-contiguous: define proper name for global cma region
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WX3TGKZEEARE72KB2QUDDRN3ZJBPVK5T/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RWXD4Y7CKLXSBF5IDBGU4AWDQUWEXCTK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-
-
-On 8/1/23 03:10, Keith Zhao wrote:
-> update starfive maintainers
-> 
-> Signed-off-by: Keith Zhao <keith.zhao@starfivetech.com>
-> ---
->  MAINTAINERS | 7 +++++++
->  1 file changed, 7 insertions(+)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 3be1bdfe8..daadd1707 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -6760,6 +6760,13 @@ S:	Supported
->  T:	git git://anongit.freedesktop.org/drm/drm-misc
->  F:	drivers/gpu/drm/udl/
->  
-
-This new entry should be in alphabetical order (hint: it's not).
-
-> +DRM DRIVERS FOR STARFIVE
-> +M:	Keith Zhao <keith.zhao@starfivetech.com>
-> +L:	dri-devel@lists.freedesktop.org
-> +S:	Maintained
-> +T:	git git://anongit.freedesktop.org/drm/drm-misc
-> +F:	Documentation/devicetree/bindings/display/starfive/
-> +
->  DRM DRIVER FOR VIRTUAL KERNEL MODESETTING (VKMS)
->  M:	Rodrigo Siqueira <rodrigosiqueiramelo@gmail.com>
->  M:	Melissa Wen <melissa.srw@gmail.com>
-
--- 
-~Randy
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVHVlLCBBdWcgMSwgMjAyMyBhdCAxMDoxOOKAr0FNIENocmlzdG9waCBIZWxsd2lnIDxoY2hA
+bHN0LmRlPiB3cm90ZToNCj4NCj4gT24gVHVlLCBBdWcgMDEsIDIwMjMgYXQgMTA6NDI6NDJQTSAr
+MDUzMCwgUGludHUgQWdhcndhbCB3cm90ZToNCj4gPiA+IEkgYWdyZWUgdGhhdCByZXNlcnZlZCBp
+cyBub3QgYSB2ZXJ5IHVzZWZ1bCBuYW1lLiAgVW5mb3J0dWF0ZWx5IHRoZQ0KPiA+ID4gbmFtZSBv
+ZiB0aGUgcmVnaW9uIGxlYWtzIHRvIHVzZXJzcGFjZSB0aHJvdWdoIGNtYV9oZWFwLg0KPiA+ID4N
+Cj4gPiA+IFNvIEkgdGhpbmsgd2UgbmVlZCBwcmVwIHBhdGNoZXMgdG8gaGFyZGNvZGUgInJlc2Vy
+dmVkIiBpbg0KPiA+ID4gYWRkX2RlZmF1bHRfY21hX2hlYXAgZmlyc3QsIGFuZCB0aGVuIHJlbW92
+ZSB0aGUgY21hX2dldF9uYW1lDQo+ID4gPiBmaXJzdC4NCj4gPg0KPiA+IFNvcnJ5LCBidXQgSSBj
+b3VsZCBub3QgZnVsbHkgdW5kZXJzdGFuZCB5b3VyIGNvbW1lbnRzLg0KPiA+IENhbiB5b3UgcGxl
+YXNlIGVsYWJvcmF0ZSBhIGxpdHRsZSBtb3JlIHdoYXQgY2hhbmdlcyBhcmUgcmVxdWlyZWQgaW4N
+Cj4gPiBjbWFfaGVhcCBpZiB3ZSBjaGFuZ2UgInJlc2VydmVkIiB0byAiZ2xvYmFsLWNtYS1yZWdp
+b24iID8NCj4NCj4gU3RlcCAxOg0KPg0KPiBJbnN0ZWFkIG9mIHNldHRpbmcgZXhwX2luZm8ubmFt
+ZSB0byBjbWFfZ2V0X25hbWUoY21hKTsNCj4gaW4gX19hZGRfY21hX2hlYXAganVzdCBzZXQgaXQg
+dG8gInJlc2VydmVkIiwgcHJvYmFibHkgYnkgcGFzc2luZyBhIG5hbWUNCj4gYXJndW1lbnQuICBZ
+b3UgY2FuIGFsc28gcmVtb3ZlIHRoZSB1bnVzZWQgZGF0YSBhcmd1bWVudCB0byBfX2FkZF9jbWFf
+aGVhcA0KPiBhbmQvb3IganVzdCBmb2xkIHRoYXQgZnVuY3Rpb24gaW50byB0aGUgb25seSBjYWxs
+ZXIgd2hpbGUgeW91J3JlIGF0IGl0Lg0KDQpTbywgZm9yZ2l2ZSBtZSwgSSd2ZSBub3QgaGFkIGEg
+Y2hhbmNlIHRvIGxvb2sgaW50byB0aGlzLCBidXQgbXkNCnJlY29sbGVjdGlvbiB3YXMgInJlc2Vy
+dmVkIiBpcyB0aGUgbmFtZSB3ZSBzZWUgb24geDg2LCBidXQgb3RoZXIgbmFtZXMNCmFyZSBwb3Nz
+aWJseSBwcm92aWRlZCB2aWEgdGhlIGR0cyBub2RlPw0KDQpJIGJlbGlldmUgb24gdGhlIGhpa2V5
+IGJvYXJkIGl0cyAibGludXgsY21hIiBpcyB0aGUgbmFtZSwgc28gZm9yY2luZw0KaXQgdG8gcmVz
+ZXJ2ZWQgd291bGQgYnJlYWsgdGhhdC4NCg0KTWF5YmUgaW5zdGVhZCBhZGQgYSBjb21wYXQgY29u
+ZmlnIG9wdGlvbiB0byBmb3JjZSB0aGUgY21hIG5hbWUgKHNvIHg4Ng0KY2FuIHNldCBpdCB0byAi
+ZGVmYXVsdCIgaWYgbmVlZGVkKT8NCg0KdGhhbmtzDQotam9obg0KX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3Qg
+LS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4g
+ZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
