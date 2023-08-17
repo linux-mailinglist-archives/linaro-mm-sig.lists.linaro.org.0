@@ -2,447 +2,170 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 014E877F770
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Aug 2023 15:13:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DF76277FFFA
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Aug 2023 23:37:43 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 93B7F41536
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Aug 2023 13:13:58 +0000 (UTC)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by lists.linaro.org (Postfix) with ESMTP id 7C0DC3EFA4
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Aug 2023 13:13:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C41EA44172
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Aug 2023 21:37:42 +0000 (UTC)
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+	by lists.linaro.org (Postfix) with ESMTPS id 5875B3F08F
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Aug 2023 21:37:37 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of robin.murphy@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=robin.murphy@arm.com;
-	dmarc=pass (policy=none) header.from=arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1A9D1D75;
-	Thu, 17 Aug 2023 06:14:34 -0700 (PDT)
-Received: from [10.57.90.41] (unknown [10.57.90.41])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 607823F6C4;
-	Thu, 17 Aug 2023 06:13:51 -0700 (PDT)
-Message-ID: <2a53e369-c268-7426-ae06-46bd42b04737@arm.com>
-Date: Thu, 17 Aug 2023 14:13:47 +0100
+	dkim=pass header.d=gmail.com header.s=20221208 header.b=ooeNolDT;
+	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.214.178 as permitted sender) smtp.mailfrom=robdclark@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-1bf11b1c7d0so8249415ad.0
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Aug 2023 14:37:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20221208; t=1692308256; x=1692913056;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=VfBSoWR2VMdVe94DeOrM4dJxlWeWi9hCbvQq6BP8leQ=;
+        b=ooeNolDTQvVzWf2zo5DcjLo0zaFOj4KtaIyw06AM53glPonl3hUVxydutbt3d/H9CJ
+         f+vxbqJFtntaTuU4CzGcyIYDH9p+VwmFwMTTTDvjtS8v5FbxAJqMTczSApyRPW16HBnp
+         RgMFZYVwwgdE6AO9PSpytdCh18VA2I/IVKdcX5EppaTF1O3Gu0nWlFyyNFNca/eZFLyi
+         pw/BmMOH3uysAn/ltjoXjbR7KJj9xe5slf5Wxb2Kkz6WlRT0xqHOdaHRTdzYjQDoLdBV
+         /pMO4wLh9pQn/bQ77zyhrLPhMVAxCodJoQT6zkN1h0AtseHP4mU35GIY4zCkeM2kIhXt
+         ig1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20221208; t=1692308256; x=1692913056;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=VfBSoWR2VMdVe94DeOrM4dJxlWeWi9hCbvQq6BP8leQ=;
+        b=BizvgYSpGJ5/9Zz8kUSwd4w1mS+eRu6Hi4MEZ4eXYMvVAAE7i4z6DiYthTKM5YfXGl
+         KwAbf/jzMui9O0Ur22mU0pCuoAS1igoVMjta5OY8/6VC+5SQaOo3MDf6tDFqRG0KuyvX
+         Xovgwg17J/kNCfA6oSbp+v7Irv1zsa8VAQz1ObDfVrk+5qz4C8qK/S6xHSGCeAgIp2Ao
+         ObmDz1V9m9I5jqxgo1DIpGBvXxSjcDkGHYGBfRdRjV7vFIb9ipFBWRDABvCmWmyNm3wv
+         SNfSUG5Gosj6nGYK8vyJNuc8mMrObR4DIz+M3G4rsWvnj814ifLzpZ+QTJzuoNo+jJQ3
+         55kg==
+X-Gm-Message-State: AOJu0YyuD7UR67JvmGsSlBc6TO1iGnIohk1od2OaNcC7oC+ceyFLYxLp
+	Z9SkRiSgzy+TB7dtrWs2DUk=
+X-Google-Smtp-Source: AGHT+IGhCNZ1M6WxLRZDhHgvhRaLi1UoeCIe3iYoAIHvyaW8/IAW6HFIhufDJb+oEn3k4h34lVliew==
+X-Received: by 2002:a17:903:44e:b0:1bc:210d:6365 with SMTP id iw14-20020a170903044e00b001bc210d6365mr715384plb.2.1692308256327;
+        Thu, 17 Aug 2023 14:37:36 -0700 (PDT)
+Received: from localhost ([2a00:79e1:abd:4a00:6c80:7c10:75a0:44f4])
+        by smtp.gmail.com with ESMTPSA id u18-20020a17090341d200b001b9d95945afsm232379ple.155.2023.08.17.14.37.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 17 Aug 2023 14:37:35 -0700 (PDT)
+From: Rob Clark <robdclark@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Date: Thu, 17 Aug 2023 14:37:28 -0700
+Message-ID: <20230817213729.110087-1-robdclark@gmail.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Content-Language: en-GB
-To: Andrew Davis <afd@ti.com>, Arnd Bergmann <arnd@arndb.de>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- John Stultz <jstultz@google.com>, Philipp Zabel <p.zabel@pengutronix.de>,
- Sumit Semwal <sumit.semwal@linaro.org>
-References: <20230713191316.116019-1-afd@ti.com>
-From: Robin Murphy <robin.murphy@arm.com>
-In-Reply-To: <20230713191316.116019-1-afd@ti.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 7C0DC3EFA4
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.20 / 15.00];
+X-Rspamd-Queue-Id: 5875B3F08F
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.10 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:217.140.96.0/20];
+	MID_CONTAINS_FROM(1.00)[];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	RCVD_IN_DNSWL_HI(-0.50)[2a00:79e1:abd:4a00:6c80:7c10:75a0:44f4:received];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20221208];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_NO_TLS_LAST(0.10)[];
-	ASN(0.00)[asn:28939, ipnet:217.140.110.0/24, country:GB];
-	NEURAL_HAM(-0.00)[-0.998];
-	R_DKIM_NA(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_TO(0.00)[ti.com,arndb.de,gmail.com,linuxfoundation.org,google.com,pengutronix.de,linaro.org];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.178:from];
+	URIBL_BLOCKED(0.00)[mail-pl1-f178.google.com:helo,mail-pl1-f178.google.com:rdns,basnieuwenhuizen.nl:email];
 	FROM_HAS_DN(0.00)[];
-	URIBL_BLOCKED(0.00)[exp_info.name:url,ti.com:email,ti.com:url];
+	NEURAL_HAM(-0.00)[-1.000];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_IN_DNSWL_NONE(0.00)[209.85.214.178:from];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_COUNT_TWO(0.00)[2];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	TO_DN_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[]
-Message-ID-Hash: ANI3AIFFABDSD3NUAKGNAHQFLAP65H3I
-X-Message-ID-Hash: ANI3AIFFABDSD3NUAKGNAHQFLAP65H3I
-X-MailFrom: robin.murphy@arm.com
+Message-ID-Hash: TJPGMLFHJ74M56REB3NEOVOVQP54ORXM
+X-Message-ID-Hash: TJPGMLFHJ74M56REB3NEOVOVQP54ORXM
+X-MailFrom: robdclark@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org
+CC: Rob Clark <robdclark@chromium.org>, Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Chris Wilson <chris@chris-wilson.co.uk>, "open list:SYNC FILE FRAMEWORK" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK" <linaro-mm-sig@lists.linaro.org>, open list <linux-kernel@vger.kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3] misc: sram: Add DMA-BUF Heap exporting of SRAM areas
+Subject: [Linaro-mm-sig] [PATCH] dma-buf/sw_sync: Avoid recursive lock during fence signal
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ANI3AIFFABDSD3NUAKGNAHQFLAP65H3I/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TJPGMLFHJ74M56REB3NEOVOVQP54ORXM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 2023-07-13 20:13, Andrew Davis wrote:
-> This new export type exposes to userspace the SRAM area as a DMA-BUF Heap,
-> this allows for allocations of DMA-BUFs that can be consumed by various
-> DMA-BUF supporting devices.
-> 
-> Signed-off-by: Andrew Davis <afd@ti.com>
-> ---
-> 
-> Changes from v2:
->   - Make sram_dma_heap_allocate static (kernel test robot)
->   - Rebase on v6.5-rc1
-> 
->   drivers/misc/Kconfig         |   7 +
->   drivers/misc/Makefile        |   1 +
->   drivers/misc/sram-dma-heap.c | 245 +++++++++++++++++++++++++++++++++++
->   drivers/misc/sram.c          |   6 +
->   drivers/misc/sram.h          |  16 +++
->   5 files changed, 275 insertions(+)
->   create mode 100644 drivers/misc/sram-dma-heap.c
-> 
-> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-> index 75e427f124b28..ee34dfb61605f 100644
-> --- a/drivers/misc/Kconfig
-> +++ b/drivers/misc/Kconfig
-> @@ -448,6 +448,13 @@ config SRAM
->   config SRAM_EXEC
->   	bool
->   
-> +config SRAM_DMA_HEAP
-> +	bool "Export on-chip SRAM pools using DMA-Heaps"
-> +	depends on DMABUF_HEAPS && SRAM
-> +	help
-> +	  This driver allows the export of on-chip SRAM marked as both pool
-> +	  and exportable to userspace using the DMA-Heaps interface.
-> +
->   config DW_XDATA_PCIE
->   	depends on PCI
->   	tristate "Synopsys DesignWare xData PCIe driver"
-> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-> index f2a4d1ff65d46..5e7516bfaa8de 100644
-> --- a/drivers/misc/Makefile
-> +++ b/drivers/misc/Makefile
-> @@ -47,6 +47,7 @@ obj-$(CONFIG_VMWARE_VMCI)	+= vmw_vmci/
->   obj-$(CONFIG_LATTICE_ECP3_CONFIG)	+= lattice-ecp3-config.o
->   obj-$(CONFIG_SRAM)		+= sram.o
->   obj-$(CONFIG_SRAM_EXEC)		+= sram-exec.o
-> +obj-$(CONFIG_SRAM_DMA_HEAP)	+= sram-dma-heap.o
->   obj-$(CONFIG_GENWQE)		+= genwqe/
->   obj-$(CONFIG_ECHO)		+= echo/
->   obj-$(CONFIG_CXL_BASE)		+= cxl/
-> diff --git a/drivers/misc/sram-dma-heap.c b/drivers/misc/sram-dma-heap.c
-> new file mode 100644
-> index 0000000000000..c054c04dff33e
-> --- /dev/null
-> +++ b/drivers/misc/sram-dma-heap.c
-> @@ -0,0 +1,245 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * SRAM DMA-Heap userspace exporter
-> + *
-> + * Copyright (C) 2019-2022 Texas Instruments Incorporated - https://www.ti.com/
-> + *	Andrew Davis <afd@ti.com>
-> + */
-> +
-> +#include <linux/dma-mapping.h>
-> +#include <linux/err.h>
-> +#include <linux/genalloc.h>
-> +#include <linux/io.h>
-> +#include <linux/mm.h>
-> +#include <linux/scatterlist.h>
-> +#include <linux/slab.h>
-> +#include <linux/dma-buf.h>
-> +#include <linux/dma-heap.h>
-> +
-> +#include "sram.h"
-> +
-> +struct sram_dma_heap {
-> +	struct dma_heap *heap;
-> +	struct gen_pool *pool;
-> +};
-> +
-> +struct sram_dma_heap_buffer {
-> +	struct gen_pool *pool;
-> +	struct list_head attachments;
-> +	struct mutex attachments_lock;
-> +	unsigned long len;
-> +	void *vaddr;
-> +	phys_addr_t paddr;
-> +};
-> +
-> +struct dma_heap_attachment {
-> +	struct device *dev;
-> +	struct sg_table *table;
-> +	struct list_head list;
-> +};
-> +
-> +static int dma_heap_attach(struct dma_buf *dmabuf,
-> +			   struct dma_buf_attachment *attachment)
-> +{
-> +	struct sram_dma_heap_buffer *buffer = dmabuf->priv;
-> +	struct dma_heap_attachment *a;
-> +	struct sg_table *table;
-> +
-> +	a = kzalloc(sizeof(*a), GFP_KERNEL);
-> +	if (!a)
-> +		return -ENOMEM;
-> +
-> +	table = kmalloc(sizeof(*table), GFP_KERNEL);
-> +	if (!table) {
-> +		kfree(a);
-> +		return -ENOMEM;
-> +	}
-> +	if (sg_alloc_table(table, 1, GFP_KERNEL)) {
-> +		kfree(table);
-> +		kfree(a);
-> +		return -ENOMEM;
-> +	}
-> +	sg_set_page(table->sgl, pfn_to_page(PFN_DOWN(buffer->paddr)), buffer->len, 0);
+From: Rob Clark <robdclark@chromium.org>
 
-What happens if someone (reasonably) assumes that this struct page 
-pointer isn't completely made up, and dereferences it?
+If a signal callback releases the sw_sync fence, that will trigger a
+deadlock as the timeline_fence_release recurses onto the fence->lock
+(used both for signaling and the the timeline tree).
 
-(That's if pfn_to_page() itself doesn't blow up, which it potentially 
-might, at least under CONFIG_SPARSEMEM)
+To avoid that, temporarily hold an extra reference to the signalled
+fences until after we drop the lock.
 
-I think this needs to be treated as P2PDMA if it's going to have any 
-hope of working robustly.
+(This is an alternative implementation of https://patchwork.kernel.org/patch/11664717/
+which avoids some potential UAF issues with the original patch.)
 
-> +
-> +	a->table = table;
-> +	a->dev = attachment->dev;
-> +	INIT_LIST_HEAD(&a->list);
-> +
-> +	attachment->priv = a;
-> +
-> +	mutex_lock(&buffer->attachments_lock);
-> +	list_add(&a->list, &buffer->attachments);
-> +	mutex_unlock(&buffer->attachments_lock);
-> +
-> +	return 0;
-> +}
-> +
-> +static void dma_heap_detatch(struct dma_buf *dmabuf,
-> +			     struct dma_buf_attachment *attachment)
-> +{
-> +	struct sram_dma_heap_buffer *buffer = dmabuf->priv;
-> +	struct dma_heap_attachment *a = attachment->priv;
-> +
-> +	mutex_lock(&buffer->attachments_lock);
-> +	list_del(&a->list);
-> +	mutex_unlock(&buffer->attachments_lock);
-> +
-> +	sg_free_table(a->table);
-> +	kfree(a->table);
-> +	kfree(a);
-> +}
-> +
-> +static struct sg_table *dma_heap_map_dma_buf(struct dma_buf_attachment *attachment,
-> +					     enum dma_data_direction direction)
-> +{
-> +	struct dma_heap_attachment *a = attachment->priv;
-> +	struct sg_table *table = a->table;
-> +
-> +	/*
-> +	 * As this heap is backed by uncached SRAM memory we do not need to
-> +	 * perform any sync operations on the buffer before allowing device
-> +	 * domain access. For this reason we use SKIP_CPU_SYNC and also do
-> +	 * not use or provide begin/end_cpu_access() dma-buf functions.
-> +	 */
+Reported-by: Bas Nieuwenhuizen <bas@basnieuwenhuizen.nl>
+Fixes: d3c6dd1fb30d ("dma-buf/sw_sync: Synchronize signal vs syncpt free")
+Signed-off-by: Rob Clark <robdclark@chromium.org>
+---
+ drivers/dma-buf/sw_sync.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-I bet that works really well with SWIOTLB ;)
+diff --git a/drivers/dma-buf/sw_sync.c b/drivers/dma-buf/sw_sync.c
+index 63f0aeb66db6..ceb6a0408624 100644
+--- a/drivers/dma-buf/sw_sync.c
++++ b/drivers/dma-buf/sw_sync.c
+@@ -191,6 +191,7 @@ static const struct dma_fence_ops timeline_fence_ops = {
+  */
+ static void sync_timeline_signal(struct sync_timeline *obj, unsigned int inc)
+ {
++	LIST_HEAD(signalled);
+ 	struct sync_pt *pt, *next;
+ 
+ 	trace_sync_timeline(obj);
+@@ -203,9 +204,13 @@ static void sync_timeline_signal(struct sync_timeline *obj, unsigned int inc)
+ 		if (!timeline_fence_signaled(&pt->base))
+ 			break;
+ 
++		dma_fence_get(&pt->base);
++
+ 		list_del_init(&pt->link);
+ 		rb_erase(&pt->node, &obj->pt_tree);
+ 
++		list_add_tail(&pt->link, &signalled);
++
+ 		/*
+ 		 * A signal callback may release the last reference to this
+ 		 * fence, causing it to be freed. That operation has to be
+@@ -218,6 +223,11 @@ static void sync_timeline_signal(struct sync_timeline *obj, unsigned int inc)
+ 	}
+ 
+ 	spin_unlock_irq(&obj->lock);
++
++	list_for_each_entry_safe(pt, next, &signalled, link) {
++		list_del(&pt->link);
++		dma_fence_put(&pt->base);
++	}
+ }
+ 
+ /**
+-- 
+2.41.0
 
-Also note that SKIP_CPU_SYNC is only a hint, so the DMA API 
-implementation is still at liberty to do the fatally dangerous things 
-you're hoping it won't (e.g. dereferencing sg_virt()...)
-
-Thanks,
-Robin.
-
-> +	if (!dma_map_sg_attrs(attachment->dev, table->sgl, table->nents,
-> +			      direction, DMA_ATTR_SKIP_CPU_SYNC))
-> +		return ERR_PTR(-ENOMEM);
-> +
-> +	return table;
-> +}
-> +
-> +static void dma_heap_unmap_dma_buf(struct dma_buf_attachment *attachment,
-> +				   struct sg_table *table,
-> +				   enum dma_data_direction direction)
-> +{
-> +	dma_unmap_sg_attrs(attachment->dev, table->sgl, table->nents,
-> +			   direction, DMA_ATTR_SKIP_CPU_SYNC);
-> +}
-> +
-> +static void dma_heap_dma_buf_release(struct dma_buf *dmabuf)
-> +{
-> +	struct sram_dma_heap_buffer *buffer = dmabuf->priv;
-> +
-> +	gen_pool_free(buffer->pool, (unsigned long)buffer->vaddr, buffer->len);
-> +	kfree(buffer);
-> +}
-> +
-> +static int dma_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
-> +{
-> +	struct sram_dma_heap_buffer *buffer = dmabuf->priv;
-> +	int ret;
-> +
-> +	/* SRAM mappings are not cached */
-> +	vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
-> +
-> +	ret = vm_iomap_memory(vma, buffer->paddr, buffer->len);
-> +	if (ret)
-> +		pr_err("Could not map buffer to userspace\n");
-> +
-> +	return ret;
-> +}
-> +
-> +static int dma_heap_vmap(struct dma_buf *dmabuf, struct iosys_map *map)
-> +{
-> +	struct sram_dma_heap_buffer *buffer = dmabuf->priv;
-> +
-> +	iosys_map_set_vaddr(map, buffer->vaddr);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct dma_buf_ops sram_dma_heap_buf_ops = {
-> +	.attach = dma_heap_attach,
-> +	.detach = dma_heap_detatch,
-> +	.map_dma_buf = dma_heap_map_dma_buf,
-> +	.unmap_dma_buf = dma_heap_unmap_dma_buf,
-> +	.release = dma_heap_dma_buf_release,
-> +	.mmap = dma_heap_mmap,
-> +	.vmap = dma_heap_vmap,
-> +};
-> +
-> +static struct dma_buf *sram_dma_heap_allocate(struct dma_heap *heap,
-> +					      unsigned long len,
-> +					      unsigned long fd_flags,
-> +					      unsigned long heap_flags)
-> +{
-> +	struct sram_dma_heap *sram_dma_heap = dma_heap_get_drvdata(heap);
-> +	struct sram_dma_heap_buffer *buffer;
-> +
-> +	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
-> +	struct dma_buf *dmabuf;
-> +	int ret = 0;
-> +
-> +	buffer = kzalloc(sizeof(*buffer), GFP_KERNEL);
-> +	if (!buffer)
-> +		return ERR_PTR(-ENOMEM);
-> +	buffer->pool = sram_dma_heap->pool;
-> +	INIT_LIST_HEAD(&buffer->attachments);
-> +	mutex_init(&buffer->attachments_lock);
-> +	buffer->len = len;
-> +
-> +	buffer->vaddr = (void *)gen_pool_alloc(buffer->pool, buffer->len);
-> +	if (!buffer->vaddr) {
-> +		ret = -ENOMEM;
-> +		goto free_buffer;
-> +	}
-> +
-> +	buffer->paddr = gen_pool_virt_to_phys(buffer->pool, (unsigned long)buffer->vaddr);
-> +	if (buffer->paddr == -1) {
-> +		ret = -ENOMEM;
-> +		goto free_pool;
-> +	}
-> +
-> +	/* create the dmabuf */
-> +	exp_info.exp_name = dma_heap_get_name(heap);
-> +	exp_info.ops = &sram_dma_heap_buf_ops;
-> +	exp_info.size = buffer->len;
-> +	exp_info.flags = fd_flags;
-> +	exp_info.priv = buffer;
-> +	dmabuf = dma_buf_export(&exp_info);
-> +	if (IS_ERR(dmabuf)) {
-> +		ret = PTR_ERR(dmabuf);
-> +		goto free_pool;
-> +	}
-> +
-> +	return dmabuf;
-> +
-> +free_pool:
-> +	gen_pool_free(buffer->pool, (unsigned long)buffer->vaddr, buffer->len);
-> +free_buffer:
-> +	kfree(buffer);
-> +
-> +	return ERR_PTR(ret);
-> +}
-> +
-> +static struct dma_heap_ops sram_dma_heap_ops = {
-> +	.allocate = sram_dma_heap_allocate,
-> +};
-> +
-> +int sram_add_dma_heap(struct sram_dev *sram,
-> +		      struct sram_reserve *block,
-> +		      phys_addr_t start,
-> +		      struct sram_partition *part)
-> +{
-> +	struct sram_dma_heap *sram_dma_heap;
-> +	struct dma_heap_export_info exp_info;
-> +
-> +	dev_info(sram->dev, "Exporting SRAM Heap '%s'\n", block->label);
-> +
-> +	sram_dma_heap = kzalloc(sizeof(*sram_dma_heap), GFP_KERNEL);
-> +	if (!sram_dma_heap)
-> +		return -ENOMEM;
-> +	sram_dma_heap->pool = part->pool;
-> +
-> +	exp_info.name = kasprintf(GFP_KERNEL, "sram_%s", block->label);
-> +	exp_info.ops = &sram_dma_heap_ops;
-> +	exp_info.priv = sram_dma_heap;
-> +	sram_dma_heap->heap = dma_heap_add(&exp_info);
-> +	if (IS_ERR(sram_dma_heap->heap)) {
-> +		int ret = PTR_ERR(sram_dma_heap->heap);
-> +		kfree(sram_dma_heap);
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> diff --git a/drivers/misc/sram.c b/drivers/misc/sram.c
-> index 5757adf418b1d..6dd173a2fba8e 100644
-> --- a/drivers/misc/sram.c
-> +++ b/drivers/misc/sram.c
-> @@ -120,6 +120,12 @@ static int sram_add_partition(struct sram_dev *sram, struct sram_reserve *block,
->   		ret = sram_add_pool(sram, block, start, part);
->   		if (ret)
->   			return ret;
-> +
-> +		if (block->export) {
-> +			ret = sram_add_dma_heap(sram, block, start, part);
-> +			if (ret)
-> +				return ret;
-> +		}
->   	}
->   	if (block->export) {
->   		ret = sram_add_export(sram, block, start, part);
-> diff --git a/drivers/misc/sram.h b/drivers/misc/sram.h
-> index 397205b8bf6ff..062bdd25fa068 100644
-> --- a/drivers/misc/sram.h
-> +++ b/drivers/misc/sram.h
-> @@ -60,4 +60,20 @@ static inline int sram_add_protect_exec(struct sram_partition *part)
->   	return -ENODEV;
->   }
->   #endif /* CONFIG_SRAM_EXEC */
-> +
-> +#ifdef CONFIG_SRAM_DMA_HEAP
-> +int sram_add_dma_heap(struct sram_dev *sram,
-> +		      struct sram_reserve *block,
-> +		      phys_addr_t start,
-> +		      struct sram_partition *part);
-> +#else
-> +static inline int sram_add_dma_heap(struct sram_dev *sram,
-> +				    struct sram_reserve *block,
-> +				    phys_addr_t start,
-> +				    struct sram_partition *part)
-> +{
-> +	return 0;
-> +}
-> +#endif /* CONFIG_SRAM_DMA_HEAP */
-> +
->   #endif /* __SRAM_H */
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
