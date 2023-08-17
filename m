@@ -2,182 +2,447 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 92C75776D44
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Aug 2023 02:57:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 014E877F770
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Aug 2023 15:13:59 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 53FC23F564
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Aug 2023 00:57:39 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
-	by lists.linaro.org (Postfix) with ESMTPS id 4FEB43ED86
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 10 Aug 2023 00:57:33 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 93B7F41536
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 17 Aug 2023 13:13:58 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by lists.linaro.org (Postfix) with ESMTP id 7C0DC3EFA4
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 17 Aug 2023 13:13:53 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20221208 header.b=DcyoSSCw;
-	spf=pass (lists.linaro.org: domain of jstultz@google.com designates 209.85.208.53 as permitted sender) smtp.mailfrom=jstultz@google.com;
-	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-5232ce75e26so2869a12.1
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 09 Aug 2023 17:57:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20221208; t=1691629052; x=1692233852;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=pENb1t85EdhZr2S/NRQldNOIuogVZkW2tw0vSMoDYS4=;
-        b=DcyoSSCwJwp9vWokfe6dcIcLr97RyCLwBKjCbSskay0ACsx3/Izc9hLNsxwGuAVej/
-         wB2ynNNpnWSk9rjEmycLvjbxhdjuGCr4gLKPNdtYax8aYtgx0roYCOdnsQxs2XvY8Kyz
-         zm4+OHdnDZS1cSMHKnWNLEjHVbE+tLFR1H4cuVpsMI7fqGM3Rm7czFUMk2/pAODSkQ8h
-         qpa6v2aLXK8WqWZ0zBc0vDg3ZDBlNkD+nEgNFbauOexdn14Eul3ITgPmwpU+k0aY3DlC
-         U695WvJ65wCg4BdHjT1N2bzpnjEz1BPQGdzsN8A21gHFmb8YSwAg7Z0RT6ewZLnRVqRo
-         JX5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1691629052; x=1692233852;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=pENb1t85EdhZr2S/NRQldNOIuogVZkW2tw0vSMoDYS4=;
-        b=MNw/LRcw5r03S3sNKOjOnlBYv2MCGz6JkFuMeRlKagI7Dsdz6piz7TAk4BvbynvZK0
-         RPqEnyfr2U1rTjvedpoMBIKQHurucwdJZ9ISlH1qcooHspglg9xMMXo6ujEzoFgUX4SO
-         ODVTlHyTYsK+9xvlJ3tCobYoFyQXIjRvE9Aa3uVX+jveOsBnWCzMPirjjK/nWMN934fa
-         meOwLl/xA+ce/h0DDRw6IeNbl9F8DIj/Is+J9XscszPi1y0jqGgUUjsWOX/nkUNfp7TU
-         6KzUAJQ6tjyQl2flPj/IwqWoERG3YHbsj/JAcFllIuX2eXXqh5/z7ge64g28JqIbHXj7
-         Vbjg==
-X-Gm-Message-State: AOJu0Yx0bifgzRh1oftpAlyiBtRu/dFEIJ5cQF478gpsgLDqjP/0QKi7
-	v0RHrFT7zfIEnSwI1QWthk0iGsflPjAzSdlt4UTF
-X-Google-Smtp-Source: AGHT+IGC3Ojhu3H3wyaJnO0AFrfMJr5XHWFXJ1jg2Nd0krAXKutumnTRxviNOopna7nevL3OGuuOsnupTL3vhP1snHY=
-X-Received: by 2002:a50:99db:0:b0:522:28a1:2095 with SMTP id
- n27-20020a5099db000000b0052228a12095mr191965edb.3.1691629052118; Wed, 09 Aug
- 2023 17:57:32 -0700 (PDT)
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of robin.murphy@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=robin.murphy@arm.com;
+	dmarc=pass (policy=none) header.from=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1A9D1D75;
+	Thu, 17 Aug 2023 06:14:34 -0700 (PDT)
+Received: from [10.57.90.41] (unknown [10.57.90.41])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 607823F6C4;
+	Thu, 17 Aug 2023 06:13:51 -0700 (PDT)
+Message-ID: <2a53e369-c268-7426-ae06-46bd42b04737@arm.com>
+Date: Thu, 17 Aug 2023 14:13:47 +0100
 MIME-Version: 1.0
-References: <1690598115-26287-1-git-send-email-quic_pintu@quicinc.com>
- <20230731112155.GA3662@lst.de> <CAOuPNLjnfq1JefngtNrg0Q+JdMTSRz+eEqxGQJFfx9+af+k9WA@mail.gmail.com>
- <20230801171838.GA14599@lst.de> <CANDhNCq+3OEosUcQJ5GFgk+5OyG+JqXKM43UAo0aPz-V27OgAA@mail.gmail.com>
- <20230802094725.GA28241@lst.de> <CAOuPNLjAOk0BOXDcjbY+evX_uxbZyptrJXMf0ULhReECzEX0CQ@mail.gmail.com>
- <CAOuPNLjn3b3YSgy=ObnF+cE7kj-9vdZ+6fFzMp-bJYLFq3MgWw@mail.gmail.com>
-In-Reply-To: <CAOuPNLjn3b3YSgy=ObnF+cE7kj-9vdZ+6fFzMp-bJYLFq3MgWw@mail.gmail.com>
-From: John Stultz <jstultz@google.com>
-Date: Wed, 9 Aug 2023 17:57:19 -0700
-Message-ID: <CANDhNCpJ_di5sjyExPw8itoSOfSoG5syy-t8CmKHzHBSp4qqFQ@mail.gmail.com>
-To: Pintu Agarwal <pintu.ping@gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Content-Language: en-GB
+To: Andrew Davis <afd@ti.com>, Arnd Bergmann <arnd@arndb.de>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ John Stultz <jstultz@google.com>, Philipp Zabel <p.zabel@pengutronix.de>,
+ Sumit Semwal <sumit.semwal@linaro.org>
+References: <20230713191316.116019-1-afd@ti.com>
+From: Robin Murphy <robin.murphy@arm.com>
+In-Reply-To: <20230713191316.116019-1-afd@ti.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4FEB43ED86
+X-Rspamd-Queue-Id: 7C0DC3EFA4
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
+X-Spamd-Result: default: False [-2.20 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20221208];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:217.140.96.0/20];
 	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_TO(0.00)[gmail.com];
-	RCVD_COUNT_ONE(0.00)[1];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
+	RCVD_NO_TLS_LAST(0.10)[];
+	ASN(0.00)[asn:28939, ipnet:217.140.110.0/24, country:GB];
+	NEURAL_HAM(-0.00)[-0.998];
+	R_DKIM_NA(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	NEURAL_HAM(-0.00)[-1.000];
-	ARC_NA(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+];
-	FROM_HAS_DN(0.00)[];
-	URIBL_BLOCKED(0.00)[lst.de:email];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	TO_DN_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_RCPT(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[ti.com,arndb.de,gmail.com,linuxfoundation.org,google.com,pengutronix.de,linaro.org];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.53:from]
-Message-ID-Hash: T2FRBCUYZFP7V3CI4UTK7MFPR3MM4NIK
-X-Message-ID-Hash: T2FRBCUYZFP7V3CI4UTK7MFPR3MM4NIK
-X-MailFrom: jstultz@google.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Christoph Hellwig <hch@lst.de>, Pintu Kumar <quic_pintu@quicinc.com>, linux-kernel@vger.kernel.org, akpm@linux-foundation.org, linux-mm@kvack.org, robin.murphy@arm.com, iommu@lists.linux.dev, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Liam Mark <lmark@codeaurora.org>, Laura Abbott <labbott@redhat.com>, Brian Starkey <Brian.Starkey@arm.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+	TAGGED_RCPT(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_HAS_DN(0.00)[];
+	URIBL_BLOCKED(0.00)[exp_info.name:url,ti.com:email,ti.com:url];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[]
+Message-ID-Hash: ANI3AIFFABDSD3NUAKGNAHQFLAP65H3I
+X-Message-ID-Hash: ANI3AIFFABDSD3NUAKGNAHQFLAP65H3I
+X-MailFrom: robin.murphy@arm.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-contiguous: define proper name for global cma region
+Subject: [Linaro-mm-sig] Re: [PATCH v3] misc: sram: Add DMA-BUF Heap exporting of SRAM areas
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/T2FRBCUYZFP7V3CI4UTK7MFPR3MM4NIK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ANI3AIFFABDSD3NUAKGNAHQFLAP65H3I/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-T24gV2VkLCBBdWcgOSwgMjAyMyBhdCA4OjA04oCvQU0gUGludHUgQWdhcndhbCA8cGludHUucGlu
-Z0BnbWFpbC5jb20+IHdyb3RlOg0KPg0KPiBIaSwNCj4NCj4gT24gVGh1LCAzIEF1ZyAyMDIzIGF0
-IDIzOjA0LCBQaW50dSBBZ2Fyd2FsIDxwaW50dS5waW5nQGdtYWlsLmNvbT4gd3JvdGU6DQo+ID4N
-Cj4gPiBIaSwNCj4gPg0KPiA+IE9uIFdlZCwgMiBBdWcgMjAyMyBhdCAxNToxNywgQ2hyaXN0b3Bo
-IEhlbGx3aWcgPGhjaEBsc3QuZGU+IHdyb3RlOg0KPiA+ID4NCj4gPiA+IE9uIFR1ZSwgQXVnIDAx
-LCAyMDIzIGF0IDEwOjM5OjA0UE0gLTA3MDAsIEpvaG4gU3R1bHR6IHdyb3RlOg0KPiA+ID4gPiBT
-bywgZm9yZ2l2ZSBtZSwgSSd2ZSBub3QgaGFkIGEgY2hhbmNlIHRvIGxvb2sgaW50byB0aGlzLCBi
-dXQgbXkNCj4gPiA+ID4gcmVjb2xsZWN0aW9uIHdhcyAicmVzZXJ2ZWQiIGlzIHRoZSBuYW1lIHdl
-IHNlZSBvbiB4ODYsIGJ1dCBvdGhlciBuYW1lcw0KPiA+ID4gPiBhcmUgcG9zc2libHkgcHJvdmlk
-ZWQgdmlhIHRoZSBkdHMgbm9kZT8NCj4gPiA+DQo+ID4gTm8sIEkgdGhpbmsgInJlc2VydmVkIiBp
-cyB0aGUgbmFtZSBoYXJkLWNvZGVkIChmb3IgYWxsIGFyY2gpIGluIEtlcm5lbA0KPiA+IGZvciBn
-bG9iYWwtY21hLg0KPiA+IFNvLCBJIGRvbid0IHRoaW5rIHRoaXMgaXMgeDg2IHNwZWNpZmljLiBJ
-IGFtIGNoZWNraW5nIG9uIGFybTMyIGl0c2VsZi4NCj4gPiBXaGVuIHdlIGNhbiBkbWFfYWxsb2Nf
-Y29oZXJlbnQgd2Ugc2VlIHRoZXNlIGluIHRoZSBsb2dzIChpZiBkdHMgcmVnaW9uDQo+ID4gaXMg
-bm90IHByZXNlbnQpLg0KPiA+IGNtYTogY21hX2FsbG9jKGNtYSAocHRydmFsKSwgbmFtZTogcmVz
-ZXJ2ZWQsIGNvdW50IDY0LCBhbGlnbiA2KQ0KPiA+IE5vdywgd2l0aCB0aGlzIGNoYW5nZSB3ZSB3
-aWxsIHNlZSB0aGlzOg0KPiA+IGNtYTogY21hX2FsbG9jKGNtYSAocHRydmFsKSwgbmFtZTogZ2xv
-YmFsLWNtYS1yZWdpb24sIGNvdW50IDY0LCBhbGlnbiA2KQ0KPiA+DQo+ID4gPiBJbmRlZWQsIGRt
-YV9jb250aWd1b3VzX2RlZmF1bHRfYXJlYSBjYW4gYWxzbyBiZSBzZXQgdGhyb3VnaA0KPiA+ID4g
-cm1lbV9jbWFfc2V0dXAsIHdoaWNoIHRoZW4gdGFrZXMgdGhlIG5hbWUgZnJvbSBEVC4NCj4gPiA+
-DQo+ID4gSSB0aGluayB0aGlzIGlzIGEgZGlmZmVyZW50IGNhc2UuIElmIERUIGVudHJ5IGlzIHBy
-ZXNlbnQgd2UgZ2V0IHRoaXM6DQo+ID4gUmVzZXJ2ZWQgbWVtb3J5OiBjcmVhdGVkIENNQSBtZW1v
-cnkgcG9vbCBhdCAweDk4MDAwMDAwLCBuYW1lOiBuYW1lOg0KPiA+IGxpbnV4LGNtYSwgc2l6ZSAx
-MjggTWlCDQo+ID4gY21hOiBjbWFfYWxsb2MoY21hIChwdHJ2YWwpLCBuYW1lOiBsaW51eCxjbWEs
-IGNvdW50IDY0LCBhbGlnbiA2KQ0KPiA+DQo+ID4gSGVyZSB3ZSBhcmUgdGFsa2luZyBhYm91dCB0
-aGUgZGVmYXVsdCBoYXJkLWNvZGVkIG5hbWUgaW4gS2VybmVsIGNvZGUNCj4gPiBpZiBEVCBpcyBu
-b3QgZGVmaW5lZC4NCj4gPiBTbywgaW4gb25lIG9mIHRoZSBib2FyZHMsIHRoaXMgRFQgZW50cnkg
-d2FzIG5vdCBwcmVzZW50IGFuZCBpdCBzaG93cw0KPiA+IGFzICJyZXNlcnZlZCIuDQo+ID4NCj4g
-PiA+ID4gSSBiZWxpZXZlIG9uIHRoZSBoaWtleSBib2FyZCBpdHMgImxpbnV4LGNtYSIgaXMgdGhl
-IG5hbWUsIHNvIGZvcmNpbmcNCj4gPiA+ID4gaXQgdG8gcmVzZXJ2ZWQgd291bGQgYnJlYWsgdGhh
-dC4NCj4gPiA+ID4NCj4gPiBZZXMsIGV2ZXJ5d2hlcmUgaW4gdGhlIERUIGl0J3MgZGVmaW5lZCBh
-cyAibGludXgsY21hIi4NCj4gPiBZb3UgbWVhbiB0aGlzIGFsc28gc2hvdWxkIGJlIGNoYW5nZWQg
-dG8gImxpbnV4LGNtYS1nbG9iYWwtcmVnaW9uIg0KPiA+IGV2ZXJ5d2hlcmUgd2l0aCB0aGlzIGNo
-YW5nZSA/DQo+ID4NCj4gPiA+ID4gTWF5YmUgaW5zdGVhZCBhZGQgYSBjb21wYXQgY29uZmlnIG9w
-dGlvbiB0byBmb3JjZSB0aGUgY21hIG5hbWUgKHNvIHg4Ng0KPiA+ID4gPiBjYW4gc2V0IGl0IHRv
-ICJkZWZhdWx0IiBpZiBuZWVkZWQpPw0KPiA+ID4NCj4gPiBZZXMsIGhhdmluZyBpdCBpbiBjb25m
-aWcgaXMgYWxzbyBhIGdvb2Qgb3B0aW9uIGluc3RlYWQgb2YgaGFyZC1jb2RpbmcgaW4gS2VybmVs
-Lg0KPiA+ID4NCj4gPiA+IEkgdGhpbmsgd2UnbGwganVzdCBuZWVkIHRvIGxlYXZlIGl0IGFzLWlz
-LiAgSSB3aXRoIGRtYS1oZWFwcyBoYWQgbmV2ZXINCj4gPiA+IGV4cG9zZWQgdGhlIG5hbWUgdG8g
-dXNlcnNwYWNlLCBidXQgd2UnbGwgaGF2ZSB0byBs0ZZ2ZSB3aXRoIGl0IG5vdy4NCj4gPg0KPiA+
-IENhbiB5b3UgcG9pbnQgbWUgdG8gdGhlIHVzZXJzcGFjZSB1dGlsaXR5IHdlIGFyZSB0YWxraW5n
-IGFib3V0IGhlcmUgPw0KPiA+IEkgdGhpbmsgd2Ugc2hvdWxkIG5vdCB3b3JyeSBtdWNoIGFib3V0
-IHVzZXJzcGFjZSBuYW1lIGV4cG9zdXJlLg0KPiA+IEkgZ3Vlc3MgaXQgc2hvdWxkIGZldGNoIHdo
-YXRldmVyIGlzIGRlY2xhcmVkIGluIEtlcm5lbCBvciBEVFMsIHJpZ2h0ID8NCj4NCj4gSnVzdCB0
-byBmb2xsb3ctdXAgb24gdGhpcy4NCj4gRm9yIG5vdywgY2FuIHdlIGNoYW5nZSB0aGUgS2VybmVs
-IGhhcmQtY29kZWQgdmFsdWUgZnJvbSAicmVzZXJ2ZWQiIHRvDQo+ICJnbG9iYWwtY21hLXJlZ2lv
-biIgPw0KPiBMYXRlciwgZm9yIHRoZSBEVFMgZGVmaW5lZCBuYW1lIGxldCBpdCBiZSAibGludXgs
-Y21hIiBvciBjaGFuZ2UgdGhhdA0KPiBhbHNvIHRvICJsaW51eCxnbG9iYWwtY21hLXJlZ2lvbiIg
-Pw0KPg0KPiBXaWxsIHRoaXMgbWFrZSBzZW5zZSA/DQoNCkFwb2xvZ2llcywgc29ycnkgZm9yIG5v
-dCByZXNwb25kaW5nIHRvIHlvdXIgZWFybGllciBtZXNzYWdlLCBpdCBzbGlwcGVkIGJ5Lg0KDQpT
-bywgdGhlIGNvbmNlcm4gaXMgdGhlcmUgbWF5IGJlIGFsbG9jYXRvcnMgKGxpa2UgZ3JhbGxvYyBp
-biBBbmRyb2lkKQ0KdGhhdCBhbGxvY2F0ZSBmcm9tIHRoZSBDTUEgcmVnaW9uIHZpYSB0aGUgZG1h
-LWJ1ZiBoZWFwcyBpbnRlcmZhY2UuDQoNClNvIGJ5IGNoYW5naW5nIHRoZSBuYW1lIChlaXRoZXIg
-aGFyZGNvZGVkIG9yIERUUyBuYW1lcyksIHlvdSdsbCBjaGFuZ2UNCnRoZSB1c2VyLXZpc2libGUg
-aGVhcCBuYW1lLCBwb3RlbnRpYWxseSBicmVha2luZyB0aG9zZSB1c2VybGFuZA0KYWxsb2NhdG9y
-cy4NCg0KTm93LCB0aGUgZG1hYnVmIGhlYXBzIGFyZSBkZXNpZ25lZCB0byBiZSBsaWtlIG90aGVy
-IGR5bmFtaWMgZGV2aWNlcw0KKGxpa2UgZGlza3Mgb3IgcGFydGl0aW9ucyksIHdoaWNoIG1heSBi
-ZSBkaWZmZXJlbnQgZnJvbSBkZXZpY2UgdG8NCmRldmljZS4gSG93ZXZlciwgY2hhbmdpbmcgdGhl
-IG5hbWUgd291bGQgc3RpbGwgYmUgYW4gaW5jb252ZW5pZW5jZSBmb3INCmZvbGtzIHdobyBoYXZl
-IGhhcmQtY29kZWQgdGhhdCBuYW1lIGluIHRoZWlyIHVzZXJsYW5kIGFsbG9jYXRvciB3aGljaA0K
-d2FzIGRlc2lnbmVkIGZvciBhIHNpbmdsZSBkZXZpY2UuICBUaGlzIHdvdWxkIGJlIHNpbWlsYXIg
-dG8gdGhlIG9sZA0KaXNzdWUgb2YgYW4gZXhpc3RpbmcgZnN0YWIgYnJlYWtpbmcgZnJvbSB0aGUg
-aWRlIChoZGEpIHRvIHNhdGEgKHNkYSkNCmRyaXZlciB0cmFuc2l0aW9uLiAgT3Igc2ltaWxhciB0
-byB3aGF0IGZvbGtzIHdlbnQgdGhyb3VnaCBhIHdoaWxlIGJhY2sNCndpdGggbmV0d29yayBkZXZp
-Y2UgbmFtZXMgY2hhbmdpbmcgZnJvbSBldGgwIC0+IGVuczAgb3Igd2hhdGV2ZXIuDQoNClRoYXQg
-c2FpZCwgbW9zdCBhbmRyb2lkIGRldmljZXMgaGlzdG9yaWNhbGx5IGhhdmVuJ3QgdXByZXZlZCB0
-byBuZXcNCmtlcm5lbCB2ZXJzaW9ucyB3aWh0b3V0IG1ham9yIHVzZXJzcGFjZSBjaGFuZ2VzLCBz
-byB0aGUgaW1wYWN0IG1pZ2h0DQpiZSBtaW5pbWFsLCBidXQgdGhhdCBpcyBsaWtlbHkgdG8gY2hh
-bmdlIGluIHRoZSBmdXR1cmUgc28gd2Ugc2hvdWxkIGJlDQpjYXJlZnVsIGhlcmUuDQoNCldoYXQg
-SSdkIHByb3Bvc2UgaW5zdGVhZCBpcyB0byBlaXRoZXIgbGVhdmUgaXQgYWxvbmUgYXMgQ2hyaXN0
-b3BoDQpzdWdnZXN0ZWQsIG9yIGhhdmUgYSBidWlsZCBvcHRpb24vYm9vdCBhcmd1bWVudCBzbyBm
-b2xrcyBjYW4gcHJlc2VydmUNCnRoZSBsZWdhY3kgbmFtZSBpZiB0aGV5IG5lZWQuDQoNCnRoYW5r
-cw0KLWpvaG4NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-CkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJv
-Lm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVA
-bGlzdHMubGluYXJvLm9yZwo=
+On 2023-07-13 20:13, Andrew Davis wrote:
+> This new export type exposes to userspace the SRAM area as a DMA-BUF Heap,
+> this allows for allocations of DMA-BUFs that can be consumed by various
+> DMA-BUF supporting devices.
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+> 
+> Changes from v2:
+>   - Make sram_dma_heap_allocate static (kernel test robot)
+>   - Rebase on v6.5-rc1
+> 
+>   drivers/misc/Kconfig         |   7 +
+>   drivers/misc/Makefile        |   1 +
+>   drivers/misc/sram-dma-heap.c | 245 +++++++++++++++++++++++++++++++++++
+>   drivers/misc/sram.c          |   6 +
+>   drivers/misc/sram.h          |  16 +++
+>   5 files changed, 275 insertions(+)
+>   create mode 100644 drivers/misc/sram-dma-heap.c
+> 
+> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> index 75e427f124b28..ee34dfb61605f 100644
+> --- a/drivers/misc/Kconfig
+> +++ b/drivers/misc/Kconfig
+> @@ -448,6 +448,13 @@ config SRAM
+>   config SRAM_EXEC
+>   	bool
+>   
+> +config SRAM_DMA_HEAP
+> +	bool "Export on-chip SRAM pools using DMA-Heaps"
+> +	depends on DMABUF_HEAPS && SRAM
+> +	help
+> +	  This driver allows the export of on-chip SRAM marked as both pool
+> +	  and exportable to userspace using the DMA-Heaps interface.
+> +
+>   config DW_XDATA_PCIE
+>   	depends on PCI
+>   	tristate "Synopsys DesignWare xData PCIe driver"
+> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+> index f2a4d1ff65d46..5e7516bfaa8de 100644
+> --- a/drivers/misc/Makefile
+> +++ b/drivers/misc/Makefile
+> @@ -47,6 +47,7 @@ obj-$(CONFIG_VMWARE_VMCI)	+= vmw_vmci/
+>   obj-$(CONFIG_LATTICE_ECP3_CONFIG)	+= lattice-ecp3-config.o
+>   obj-$(CONFIG_SRAM)		+= sram.o
+>   obj-$(CONFIG_SRAM_EXEC)		+= sram-exec.o
+> +obj-$(CONFIG_SRAM_DMA_HEAP)	+= sram-dma-heap.o
+>   obj-$(CONFIG_GENWQE)		+= genwqe/
+>   obj-$(CONFIG_ECHO)		+= echo/
+>   obj-$(CONFIG_CXL_BASE)		+= cxl/
+> diff --git a/drivers/misc/sram-dma-heap.c b/drivers/misc/sram-dma-heap.c
+> new file mode 100644
+> index 0000000000000..c054c04dff33e
+> --- /dev/null
+> +++ b/drivers/misc/sram-dma-heap.c
+> @@ -0,0 +1,245 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * SRAM DMA-Heap userspace exporter
+> + *
+> + * Copyright (C) 2019-2022 Texas Instruments Incorporated - https://www.ti.com/
+> + *	Andrew Davis <afd@ti.com>
+> + */
+> +
+> +#include <linux/dma-mapping.h>
+> +#include <linux/err.h>
+> +#include <linux/genalloc.h>
+> +#include <linux/io.h>
+> +#include <linux/mm.h>
+> +#include <linux/scatterlist.h>
+> +#include <linux/slab.h>
+> +#include <linux/dma-buf.h>
+> +#include <linux/dma-heap.h>
+> +
+> +#include "sram.h"
+> +
+> +struct sram_dma_heap {
+> +	struct dma_heap *heap;
+> +	struct gen_pool *pool;
+> +};
+> +
+> +struct sram_dma_heap_buffer {
+> +	struct gen_pool *pool;
+> +	struct list_head attachments;
+> +	struct mutex attachments_lock;
+> +	unsigned long len;
+> +	void *vaddr;
+> +	phys_addr_t paddr;
+> +};
+> +
+> +struct dma_heap_attachment {
+> +	struct device *dev;
+> +	struct sg_table *table;
+> +	struct list_head list;
+> +};
+> +
+> +static int dma_heap_attach(struct dma_buf *dmabuf,
+> +			   struct dma_buf_attachment *attachment)
+> +{
+> +	struct sram_dma_heap_buffer *buffer = dmabuf->priv;
+> +	struct dma_heap_attachment *a;
+> +	struct sg_table *table;
+> +
+> +	a = kzalloc(sizeof(*a), GFP_KERNEL);
+> +	if (!a)
+> +		return -ENOMEM;
+> +
+> +	table = kmalloc(sizeof(*table), GFP_KERNEL);
+> +	if (!table) {
+> +		kfree(a);
+> +		return -ENOMEM;
+> +	}
+> +	if (sg_alloc_table(table, 1, GFP_KERNEL)) {
+> +		kfree(table);
+> +		kfree(a);
+> +		return -ENOMEM;
+> +	}
+> +	sg_set_page(table->sgl, pfn_to_page(PFN_DOWN(buffer->paddr)), buffer->len, 0);
+
+What happens if someone (reasonably) assumes that this struct page 
+pointer isn't completely made up, and dereferences it?
+
+(That's if pfn_to_page() itself doesn't blow up, which it potentially 
+might, at least under CONFIG_SPARSEMEM)
+
+I think this needs to be treated as P2PDMA if it's going to have any 
+hope of working robustly.
+
+> +
+> +	a->table = table;
+> +	a->dev = attachment->dev;
+> +	INIT_LIST_HEAD(&a->list);
+> +
+> +	attachment->priv = a;
+> +
+> +	mutex_lock(&buffer->attachments_lock);
+> +	list_add(&a->list, &buffer->attachments);
+> +	mutex_unlock(&buffer->attachments_lock);
+> +
+> +	return 0;
+> +}
+> +
+> +static void dma_heap_detatch(struct dma_buf *dmabuf,
+> +			     struct dma_buf_attachment *attachment)
+> +{
+> +	struct sram_dma_heap_buffer *buffer = dmabuf->priv;
+> +	struct dma_heap_attachment *a = attachment->priv;
+> +
+> +	mutex_lock(&buffer->attachments_lock);
+> +	list_del(&a->list);
+> +	mutex_unlock(&buffer->attachments_lock);
+> +
+> +	sg_free_table(a->table);
+> +	kfree(a->table);
+> +	kfree(a);
+> +}
+> +
+> +static struct sg_table *dma_heap_map_dma_buf(struct dma_buf_attachment *attachment,
+> +					     enum dma_data_direction direction)
+> +{
+> +	struct dma_heap_attachment *a = attachment->priv;
+> +	struct sg_table *table = a->table;
+> +
+> +	/*
+> +	 * As this heap is backed by uncached SRAM memory we do not need to
+> +	 * perform any sync operations on the buffer before allowing device
+> +	 * domain access. For this reason we use SKIP_CPU_SYNC and also do
+> +	 * not use or provide begin/end_cpu_access() dma-buf functions.
+> +	 */
+
+I bet that works really well with SWIOTLB ;)
+
+Also note that SKIP_CPU_SYNC is only a hint, so the DMA API 
+implementation is still at liberty to do the fatally dangerous things 
+you're hoping it won't (e.g. dereferencing sg_virt()...)
+
+Thanks,
+Robin.
+
+> +	if (!dma_map_sg_attrs(attachment->dev, table->sgl, table->nents,
+> +			      direction, DMA_ATTR_SKIP_CPU_SYNC))
+> +		return ERR_PTR(-ENOMEM);
+> +
+> +	return table;
+> +}
+> +
+> +static void dma_heap_unmap_dma_buf(struct dma_buf_attachment *attachment,
+> +				   struct sg_table *table,
+> +				   enum dma_data_direction direction)
+> +{
+> +	dma_unmap_sg_attrs(attachment->dev, table->sgl, table->nents,
+> +			   direction, DMA_ATTR_SKIP_CPU_SYNC);
+> +}
+> +
+> +static void dma_heap_dma_buf_release(struct dma_buf *dmabuf)
+> +{
+> +	struct sram_dma_heap_buffer *buffer = dmabuf->priv;
+> +
+> +	gen_pool_free(buffer->pool, (unsigned long)buffer->vaddr, buffer->len);
+> +	kfree(buffer);
+> +}
+> +
+> +static int dma_heap_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma)
+> +{
+> +	struct sram_dma_heap_buffer *buffer = dmabuf->priv;
+> +	int ret;
+> +
+> +	/* SRAM mappings are not cached */
+> +	vma->vm_page_prot = pgprot_writecombine(vma->vm_page_prot);
+> +
+> +	ret = vm_iomap_memory(vma, buffer->paddr, buffer->len);
+> +	if (ret)
+> +		pr_err("Could not map buffer to userspace\n");
+> +
+> +	return ret;
+> +}
+> +
+> +static int dma_heap_vmap(struct dma_buf *dmabuf, struct iosys_map *map)
+> +{
+> +	struct sram_dma_heap_buffer *buffer = dmabuf->priv;
+> +
+> +	iosys_map_set_vaddr(map, buffer->vaddr);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct dma_buf_ops sram_dma_heap_buf_ops = {
+> +	.attach = dma_heap_attach,
+> +	.detach = dma_heap_detatch,
+> +	.map_dma_buf = dma_heap_map_dma_buf,
+> +	.unmap_dma_buf = dma_heap_unmap_dma_buf,
+> +	.release = dma_heap_dma_buf_release,
+> +	.mmap = dma_heap_mmap,
+> +	.vmap = dma_heap_vmap,
+> +};
+> +
+> +static struct dma_buf *sram_dma_heap_allocate(struct dma_heap *heap,
+> +					      unsigned long len,
+> +					      unsigned long fd_flags,
+> +					      unsigned long heap_flags)
+> +{
+> +	struct sram_dma_heap *sram_dma_heap = dma_heap_get_drvdata(heap);
+> +	struct sram_dma_heap_buffer *buffer;
+> +
+> +	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
+> +	struct dma_buf *dmabuf;
+> +	int ret = 0;
+> +
+> +	buffer = kzalloc(sizeof(*buffer), GFP_KERNEL);
+> +	if (!buffer)
+> +		return ERR_PTR(-ENOMEM);
+> +	buffer->pool = sram_dma_heap->pool;
+> +	INIT_LIST_HEAD(&buffer->attachments);
+> +	mutex_init(&buffer->attachments_lock);
+> +	buffer->len = len;
+> +
+> +	buffer->vaddr = (void *)gen_pool_alloc(buffer->pool, buffer->len);
+> +	if (!buffer->vaddr) {
+> +		ret = -ENOMEM;
+> +		goto free_buffer;
+> +	}
+> +
+> +	buffer->paddr = gen_pool_virt_to_phys(buffer->pool, (unsigned long)buffer->vaddr);
+> +	if (buffer->paddr == -1) {
+> +		ret = -ENOMEM;
+> +		goto free_pool;
+> +	}
+> +
+> +	/* create the dmabuf */
+> +	exp_info.exp_name = dma_heap_get_name(heap);
+> +	exp_info.ops = &sram_dma_heap_buf_ops;
+> +	exp_info.size = buffer->len;
+> +	exp_info.flags = fd_flags;
+> +	exp_info.priv = buffer;
+> +	dmabuf = dma_buf_export(&exp_info);
+> +	if (IS_ERR(dmabuf)) {
+> +		ret = PTR_ERR(dmabuf);
+> +		goto free_pool;
+> +	}
+> +
+> +	return dmabuf;
+> +
+> +free_pool:
+> +	gen_pool_free(buffer->pool, (unsigned long)buffer->vaddr, buffer->len);
+> +free_buffer:
+> +	kfree(buffer);
+> +
+> +	return ERR_PTR(ret);
+> +}
+> +
+> +static struct dma_heap_ops sram_dma_heap_ops = {
+> +	.allocate = sram_dma_heap_allocate,
+> +};
+> +
+> +int sram_add_dma_heap(struct sram_dev *sram,
+> +		      struct sram_reserve *block,
+> +		      phys_addr_t start,
+> +		      struct sram_partition *part)
+> +{
+> +	struct sram_dma_heap *sram_dma_heap;
+> +	struct dma_heap_export_info exp_info;
+> +
+> +	dev_info(sram->dev, "Exporting SRAM Heap '%s'\n", block->label);
+> +
+> +	sram_dma_heap = kzalloc(sizeof(*sram_dma_heap), GFP_KERNEL);
+> +	if (!sram_dma_heap)
+> +		return -ENOMEM;
+> +	sram_dma_heap->pool = part->pool;
+> +
+> +	exp_info.name = kasprintf(GFP_KERNEL, "sram_%s", block->label);
+> +	exp_info.ops = &sram_dma_heap_ops;
+> +	exp_info.priv = sram_dma_heap;
+> +	sram_dma_heap->heap = dma_heap_add(&exp_info);
+> +	if (IS_ERR(sram_dma_heap->heap)) {
+> +		int ret = PTR_ERR(sram_dma_heap->heap);
+> +		kfree(sram_dma_heap);
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> diff --git a/drivers/misc/sram.c b/drivers/misc/sram.c
+> index 5757adf418b1d..6dd173a2fba8e 100644
+> --- a/drivers/misc/sram.c
+> +++ b/drivers/misc/sram.c
+> @@ -120,6 +120,12 @@ static int sram_add_partition(struct sram_dev *sram, struct sram_reserve *block,
+>   		ret = sram_add_pool(sram, block, start, part);
+>   		if (ret)
+>   			return ret;
+> +
+> +		if (block->export) {
+> +			ret = sram_add_dma_heap(sram, block, start, part);
+> +			if (ret)
+> +				return ret;
+> +		}
+>   	}
+>   	if (block->export) {
+>   		ret = sram_add_export(sram, block, start, part);
+> diff --git a/drivers/misc/sram.h b/drivers/misc/sram.h
+> index 397205b8bf6ff..062bdd25fa068 100644
+> --- a/drivers/misc/sram.h
+> +++ b/drivers/misc/sram.h
+> @@ -60,4 +60,20 @@ static inline int sram_add_protect_exec(struct sram_partition *part)
+>   	return -ENODEV;
+>   }
+>   #endif /* CONFIG_SRAM_EXEC */
+> +
+> +#ifdef CONFIG_SRAM_DMA_HEAP
+> +int sram_add_dma_heap(struct sram_dev *sram,
+> +		      struct sram_reserve *block,
+> +		      phys_addr_t start,
+> +		      struct sram_partition *part);
+> +#else
+> +static inline int sram_add_dma_heap(struct sram_dev *sram,
+> +				    struct sram_reserve *block,
+> +				    phys_addr_t start,
+> +				    struct sram_partition *part)
+> +{
+> +	return 0;
+> +}
+> +#endif /* CONFIG_SRAM_DMA_HEAP */
+> +
+>   #endif /* __SRAM_H */
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
