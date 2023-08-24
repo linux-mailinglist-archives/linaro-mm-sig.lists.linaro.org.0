@@ -2,242 +2,209 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A9D7779A93B
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 16:58:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F35379A93D
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 16:58:26 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AD41B3F505
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 14:58:05 +0000 (UTC)
-Received: from mail-pf1-f206.google.com (mail-pf1-f206.google.com [209.85.210.206])
-	by lists.linaro.org (Postfix) with ESMTPS id 307383F053
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Aug 2023 07:01:14 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5B7D03F003
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 14:58:25 +0000 (UTC)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (mail-dm6nam10on2046.outbound.protection.outlook.com [40.107.93.46])
+	by lists.linaro.org (Postfix) with ESMTPS id 72EC23F053
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Aug 2023 12:14:36 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of 3OQDnZAkbAAQw23oeppivettmh.ksskpiywivgsrxirx.gsq@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.210.206 as permitted sender) smtp.mailfrom=3OQDnZAkbAAQw23oeppivettmh.ksskpiywivgsrxirx.gsq@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none)
-Received: by mail-pf1-f206.google.com with SMTP id d2e1a72fcca58-68a48df712bso6102707b3a.3
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Aug 2023 00:01:14 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1692860473; x=1693465273;
-        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=g8QLJ93H/zrO//rMAevhu8RWkecEt3CkKbeVnQwZKcc=;
-        b=VmuOkJyF/JEExTdTloWTAx3rz4Tgrj9LNDwvdXAw0BIrcjXajaElVSXRTeZUwOYaPu
-         gtoEcNKzpIrAwKU5Iai7wV51F171bi0aZle9udNmyBp+BYpUQwRYmANXJuUSMFaFwxCR
-         NVBz6z5ukxPuIqcSU2Qik6jYwuqwPbCXJefDzL5U7uy+KcfvZ/NHbneGOWy9WmamY+9/
-         6NZBAnJe6jdkm2OeVNx0Ss8hIuAYPoJuRLoHU1Aa6lrRhb5YbjzVA496KwSaW8NmQY3l
-         pv/evuWdjcTR+iKUhnGOw4OA3uPGbxr1pvq8ccq+jMoPp+VrrtMYTvS84RnHt1qykJq3
-         7f2w==
-X-Gm-Message-State: AOJu0Yzk8rgEgBte6KWs10Poq2jTkTODRSIhfBYWquV893K36VLnewIw
-	hhCvz/cUfNqWjwwfX6d4CSRDl833avuyL2n4FN1a8XLJ/GI9
-X-Google-Smtp-Source: AGHT+IF5s8TGinkAiQnXtWBdxCLtRr8vJbFKfzTX0KZYjlH1RVf3WytudqydgLn/voM2m7jKbRBavCab/QbB0lVdRkzNY8/HWR1+
+	dkim=pass header.d=amd.com header.s=selector1 header.b=q9bOpr8i;
+	spf=pass (lists.linaro.org: domain of Hamza.Mahfooz@amd.com designates 40.107.93.46 as permitted sender) smtp.mailfrom=Hamza.Mahfooz@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Oqm1nEZNUaWXQ7ic+3+TUqB5pwwKbJzDpxL6dzq7HOQWkCUZmbVYMNHN5MLrf950Bzz8UvT86cigPleL4csro9ei5t5+Fd21RKkuub/ETYR/sYdIWaHtqbFdFlMlFczBlu64NqFrfYcywlApbADMqNv16b+ILtn1AVcAdkYYDcmTUGpj4k9PKrT3ekw+nENgZKFGy3Rnvql4uiP6Rudg4kjoYDqXNFQk/N1pkdC82OfIbQgYI6RLLyfUTvPteq6UtfJ8h2xxusZtbVz3wEMXQhMCi04THIh8pVeaqOaEQKVM6nW8cnj7rRM0a4lQ2fRBT5GB6O6gLU6o53Yo28p8Fw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3Zo+CsY04YIaWE3Q+dAIa64vt+otS7yVI6VMJBMcN84=;
+ b=mPHdRJmxmtcRNCTasU5mmAAoeaL0l5cJkkOM5cdG4cJvoZ9bJ97lNFRJbuWjWwZ6phOA6SCn1HDHwHDq+f9ky5H51DPSx5IDidXF8SVUtc5Fx+3amF5QA9IrRZxM3ABRjpOkRJbtQqTRfdgh+64R1RvO+EP5umhOWoXYarYtNVnPvatX5P7R8K9KQQfbpp7oWtvNXZU4GLihfRudb6gBvHtogLym4yD1HXbSJwKOoHuwCr8OFcLNLUZvQfJ/QewGc06SzMAqpMniXjF/gxg0FeCnpoTKN8X212YZjJiKsR4whZxCWNp8Wo5VeNhxi7CEDiINEDMgiWTZPbqLUTUyYA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=3Zo+CsY04YIaWE3Q+dAIa64vt+otS7yVI6VMJBMcN84=;
+ b=q9bOpr8i4nfTJjN940s5Rt40CuUE6H61zkjGYm8S3VEkx+2k7rcRAu4IcG7cKVhzwKQ7H5WQU1C9/7LsXMIG3hfIF0J1hVNMncprOjOwQnD4UeyDY62InVr/x14oesHF2yknKIE19VG+qLBTr9yRqJJzc986BxgiMYoFR0cZ0o4=
+Received: from DM4PR12MB6280.namprd12.prod.outlook.com (2603:10b6:8:a2::11) by
+ PH8PR12MB8608.namprd12.prod.outlook.com (2603:10b6:510:1bc::9) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6699.27; Thu, 24 Aug 2023 12:14:32 +0000
+Received: from DM4PR12MB6280.namprd12.prod.outlook.com
+ ([fe80::4196:c9c9:dfe9:8079]) by DM4PR12MB6280.namprd12.prod.outlook.com
+ ([fe80::4196:c9c9:dfe9:8079%3]) with mapi id 15.20.6699.027; Thu, 24 Aug 2023
+ 12:14:32 +0000
+Message-ID: <a3c4c781-2f74-4b09-9db4-7b947897ef5a@amd.com>
+Date: Thu, 24 Aug 2023 08:14:26 -0400
+User-Agent: Mozilla Thunderbird
+To: Lee Jones <lee@kernel.org>, Jani Nikula <jani.nikula@linux.intel.com>
+References: <20230824073710.2677348-1-lee@kernel.org>
+ <87wmxk4xt3.fsf@intel.com> <20230824120735.GS1380343@google.com>
+Content-Language: en-US
+From: Hamza Mahfooz <hamza.mahfooz@amd.com>
+In-Reply-To: <20230824120735.GS1380343@google.com>
+X-ClientProxiedBy: YQZPR01CA0176.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c01:8b::25) To DM4PR12MB6280.namprd12.prod.outlook.com
+ (2603:10b6:8:a2::11)
 MIME-Version: 1.0
-X-Received: by 2002:a05:6a00:180c:b0:686:2ad5:d132 with SMTP id
- y12-20020a056a00180c00b006862ad5d132mr7930789pfa.5.1692860473296; Thu, 24 Aug
- 2023 00:01:13 -0700 (PDT)
-Date: Thu, 24 Aug 2023 00:01:13 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <0000000000002a4da90603a5cbbf@google.com>
-From: syzbot <syzbot+398e17b61dab22cc56bc@syzkaller.appspotmail.com>
-To: airlied@gmail.com, christian.koenig@amd.com, daniel@ffwll.ch,
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
-	sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com, tzimmermann@suse.de
-X-Rspamd-Queue-Id: 307383F053
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.00 / 15.00];
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR12MB6280:EE_|PH8PR12MB8608:EE_
+X-MS-Office365-Filtering-Correlation-Id: f238e3d8-548c-4cd4-3d73-08dba49bac4e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	OgDGeuFeN9MW1Xj7fkLtmJWsYhvIQYoI8kb+ljMkqrwB+q2IHN6gzcYnR1qPrKxSm/9JvJUYl05TDDo1/FyBoVLI1hbuvak1vcE6IKJYHdQeufSNUBBWNjHIdZ6YA4gwtopTBjapWbkTrxt20No0CQcrjKVoNs7p2ubyqUE48i9uEzKI6ooTGqPnvgiOH/iUjksZwfFPdxIH7b459eJ1XJlPwOXAv/avzeTm/6HyIL4ZgjXXYfhUcfYj/sRia8ubXRDpSxUcW3KcBvGdnAqLWew6qSbVoa1LYrAhs3aJlcHupiIuiKucYWg/OQOgoMO3LRchLvW4aV67isFI4oOZAFM7EP7qzpeofP+I0phDzLVOUdl2KgODCdyX3+Cj1WblUl5EMuQuIOxmHPZ5Ku2mLImWViJuEX8aVluFz0Op+5r97PuBRJ7RqnxR2osp9Jn3gEoAjtRYq+yILUjxGVwF2SmjG5Es5M8JMtwT1uiL10W6b/3pdb9A75aV55+qPwv7m5E62VE1Dvqkwr5//eEeqlOCYCYY5OSFNc6Vcn0ktnJQ17+ThleMKGRtYubNJbxkurl1CRD1D5MKKdueCUUH8eaArNDjKu4eyARFJhhzY69LitY1CsQn7SFjHa/BMW1J4Mnfyg6vU45Ls6CtWCrqpw==
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR12MB6280.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376002)(396003)(366004)(346002)(39860400002)(136003)(1800799009)(186009)(451199024)(2616005)(4326008)(8676002)(8936002)(83380400001)(5660300002)(36756003)(7416002)(44832011)(26005)(6666004)(38100700002)(66946007)(66556008)(54906003)(66476007)(316002)(110136005)(478600001)(966005)(31686004)(41300700001)(2906002)(6512007)(6486002)(53546011)(31696002)(86362001)(6506007)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?VVRVRXB5NnU1WTV1TkU3RS85d041OEp3dHorR0JTNEttSktiQWtOd2hjYXdN?=
+ =?utf-8?B?ajU1U3A5RE1waG8vS2tRUnBtVTdkWFVnNjRGSUVLSURsSjFzU05wMUtaNGw1?=
+ =?utf-8?B?N3pZQ0c1ZElwcGxVeURTYk8xNWVlbm04Mm5YYkZ3OFhSKzZkWDVIUHp6aGtv?=
+ =?utf-8?B?eFZVS29LNWl4a1BSU0haenlXVVd2ZFd1V3dGcnNPUmhvdklKNVpCbTJVK1c0?=
+ =?utf-8?B?UDJEZWRaS1JVNzdMMVM5K0lyMjlKZEVTSTJuYkthWmlDQTMvSFI2cWYvb29q?=
+ =?utf-8?B?T3BGOE16ZjBPZHBCR1FSbzJkd2hBTWhsUVhIMW5pelk5eVRWbzY2ZTY1Y04y?=
+ =?utf-8?B?S0Z4YTlGVlZqdU9LdVRGU0NUNXhLSzBrdnJoZzhxUHJVT1JtUWp4bkdyNkpY?=
+ =?utf-8?B?STBnOFJVSkp6blBrVFg2Z0NqNVZielhPbC9KK1FVbkprMXdCVS9ER1lzV2ZJ?=
+ =?utf-8?B?WnNjdEM2N1dHNGYwYWQ0cmJQSTJHMDZBSUg4R1YxK1Q4SEs3UFlNeTJnbzJD?=
+ =?utf-8?B?bFppTjNMQjJGYXhpbHhaNWJ4T01qaUxjSDIvenhmcmxtdkc5MC9tcUNTSURo?=
+ =?utf-8?B?V3lsQXRxQzZyTkxGVWh3RnhoanN4SjcweFdhZ01OeEFhL2dEWnp5K1lLanhW?=
+ =?utf-8?B?Wk5QSUhud3NVZUVtRzJHdGpmUUdNSmtPODJLZmFweCtzOTVwZnJsci9jbk1T?=
+ =?utf-8?B?NG9rdmtNazRsbVMxWkhEY0VRbzZ3N1cvc2Vib2EyL2Q0VnBubHY1N2U2RExu?=
+ =?utf-8?B?OXNWdUR1Z04reFNQZjJsWEtnSmJWUGJ4RHF5OTBaSjZqTmp1ZE82UnB6TkE3?=
+ =?utf-8?B?T3lldW5ORithYVJ5V2pSVm9rWTRkWDdIR2ZYU1Y3YVo3ZkQ2U2xFMUJ6VWsz?=
+ =?utf-8?B?cVMvcHN5ZXNtMGp4THp1d2hlc0V0T21pamdIU28wNlhUZDZHRmt3UmRwRTZ4?=
+ =?utf-8?B?cWpFOTRyQi9SS1FpN2N3VW42Ri9kWGV5QjJnWTYzUUZmUXpibFBsOHpDODQ3?=
+ =?utf-8?B?YnN1WnhQeXZYK1UzM3c4UVFQQXRxY21oVnQzNzF6cXFrWCtwQUQranp3QUlW?=
+ =?utf-8?B?WlovOVJpd056QXdIZytkNlRhOTFjWWcreitwMGNBRXBBMFdybXFFSVZ0K1dj?=
+ =?utf-8?B?dDNlQ1pDUEZaZGVkS0xGZWhxRDIxTzhmV2ppbURqQTVKbSsvT1hneE95dXpY?=
+ =?utf-8?B?YmVuVFRpOTVxVk5YWEpvQnZuSVR2TlRGUVY4Tk1URk1KZXpWelo5VjBXd1d3?=
+ =?utf-8?B?akl6WlU0TnQyczJQNUttS2MyelZpSml1cWdqUVloSTdiOVpUbTNlbVpTQ2ZV?=
+ =?utf-8?B?c1RDMzQxa1Bwbmx6aGlKYTBKSGVicXNoemg4QTIwTEtMUUdMMEVTMmNjcm54?=
+ =?utf-8?B?ZFJuZzJLSnB2eTgreE8wamNYVi80SWgvS1Q4QkZEUUZ6dDMrc2lkUjZzMmtJ?=
+ =?utf-8?B?K0JyclpOTGxTbG16YXkyN2E2RW9VbmswT3Z0UmRrbHhYVXZJWnVJQ1VybS9G?=
+ =?utf-8?B?ekUzVHZMN3Zyc0VlMHZna2N4bS9nOUN2blUwc1Qxc1BLZEZhQklGVFZnN0cw?=
+ =?utf-8?B?RFpCd3E2RCtveVVyZmVzUHFGYUhkbS9sayt0cWo1MVVpczNkMjVKTTRWWWd0?=
+ =?utf-8?B?MFArSnRuejUyRjllRVBTZFdjWFhzeEJZMytGTE1oNzYwSXlmUFo0VDBUcldi?=
+ =?utf-8?B?U3llbUN5alNrRDNod0dNL3htUHRUUDk1MWVubVAwdUttMEhoczNvWmlkRit0?=
+ =?utf-8?B?bGVnREdFTzVGRkNYd1FjQ2FqZHA0aHM1YWcvSjhSRUJLVlFWRzV0T1A3WHNo?=
+ =?utf-8?B?ejdybnZVaTlyaHI1TjhEckNnaWdwOE9jUHBucFlIYjlQUkZ3aXZYd3d0WmU4?=
+ =?utf-8?B?WHBmOUJ2S09TRFJpeTFjNUh5OWFmS3NRNGZXc1JHUlVrcllLK0lEWGVhdWVN?=
+ =?utf-8?B?NDhnVFZGSWQreGZMMk8xZDJuNHBoQ2dNM0dnaHdvRjd1clRlRkdCU1RNa0Qw?=
+ =?utf-8?B?N2ZwRDBPbk5LZ1ZPWUkrdG9jMnN1ZVJJYkU5OUN2bmtVQlhFc1ArNHpYcUIr?=
+ =?utf-8?B?MEprRzZKNU53eGlqRmNGZGhWcTFhTG1QQ2NUZDZFYS9oSkFrTGFpUG04ODNy?=
+ =?utf-8?Q?iZ6v/AZxS78ixomVd1O49p5/1?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f238e3d8-548c-4cd4-3d73-08dba49bac4e
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR12MB6280.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Aug 2023 12:14:32.2402
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: V1FnG434c7Ma3mBdV/gKKwFyrkOYZp2ByAqir9ULENp73ypqd8SA9+Lrffbyegt0H5uG3wjFb6puZ8sBf+IeUA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB8608
+X-Rspamd-Queue-Id: 72EC23F053
+X-Spamd-Bar: -------
+X-Spamd-Result: default: False [-7.49 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=aa796b6080b04102];
-	FORGED_SENDER(0.30)[syzbot@syzkaller.appspotmail.com,3OQDnZAkbAAQw23oeppivettmh.ksskpiywivgsrxirx.gsq@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.210.206:from];
+	SUSPICIOUS_RECIPS(1.50)[];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
-	REDIRECTOR_URL(0.00)[goo.gl];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_ONE(0.00)[1];
-	RCPT_COUNT_TWELVE(0.00)[12];
+	XM_UA_NO_VERSION(0.01)[];
+	FREEMAIL_CC(0.00)[redhat.com,lists.freedesktop.org,nvidia.com,riseup.net,gmail.com,ideasonboard.com,linaro.org,amd.com,xilinx.com,vger.kernel.org,suse.de,pengutronix.de,kernel.org,lists.linaro.org,nxp.com,lists.infradead.org,freedesktop.org];
 	RCVD_TLS_LAST(0.00)[];
-	R_DKIM_NA(0.00)[];
-	ARC_NA(0.00)[];
-	TO_DN_NONE(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,3OQDnZAkbAAQw23oeppivettmh.ksskpiywivgsrxirx.gsq@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
-	FREEMAIL_TO(0.00)[gmail.com,amd.com,ffwll.ch,lists.freedesktop.org,lists.linaro.org,vger.kernel.org,linux.intel.com,kernel.org,linaro.org,googlegroups.com,suse.de];
-	TAGGED_FROM(0.00)[398e17b61dab22cc56bc];
+	RCPT_COUNT_TWELVE(0.00)[37];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.93.46:from];
+	TO_DN_SOME(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	NEURAL_HAM(-0.00)[-0.992];
-	SUBJECT_HAS_QUESTION(0.00)[]
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_TRACE(0.00)[amd.com:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	RCVD_IN_DNSWL_FAIL(0.00)[2603:10b6:8:a2::11:server fail];
+	RCVD_IN_DNSWL_NONE(0.00)[40.107.93.46:from]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-MailFrom: 3OQDnZAkbAAQw23oeppivettmh.ksskpiywivgsrxirx.gsq@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
+X-MailFrom: Hamza.Mahfooz@amd.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: HSOBHQYOQZDPKAGUVKG33G5ZJSV7AENE
-X-Message-ID-Hash: HSOBHQYOQZDPKAGUVKG33G5ZJSV7AENE
-X-Mailman-Approved-At: Mon, 11 Sep 2023 14:57:26 +0000
+Message-ID-Hash: POPINHT4JVSO27N7MV62ZN6IBOWH4WJO
+X-Message-ID-Hash: POPINHT4JVSO27N7MV62ZN6IBOWH4WJO
+X-Mailman-Approved-At: Mon, 11 Sep 2023 14:57:55 +0000
+CC: Karol Herbst <kherbst@redhat.com>, nouveau@lists.freedesktop.org, dri-devel@lists.freedesktop.org, Mikko Perttunen <mperttunen@nvidia.com>, =?UTF-8?Q?Ma=C3=ADra_Canal?= <mairacanal@riseup.net>, Thierry Reding <thierry.reding@gmail.com>, Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Sumit Semwal <sumit.semwal@linaro.org>, Shashank Sharma <shashank.sharma@amd.com>, Michal Simek <michal.simek@xilinx.com>, amd-gfx@lists.freedesktop.org, Jonathan Hunter <jonathanh@nvidia.com>, Luben Tuikov <luben.tuikov@amd.com>, Danilo Krummrich <dakr@redhat.com>, Ben Skeggs <bskeggs@redhat.com>, Stanley Yang <Stanley.Yang@amd.com>, linux-media@vger.kernel.org, Thomas Zimmermann <tzimmermann@suse.de>, Sascha Hauer <s.hauer@pengutronix.de>, Maxime Ripard <mripard@kernel.org>, linaro-mm-sig@lists.linaro.org, linux-tegra@vger.kernel.org, NXP Linux Team <linux-imx@nxp.com>, linux-arm-kernel@lists.infradead.org, Hyun Kwon <hyun.kwon@xilinx.com>, "Pan, Xinhui" <Xinhui.Pan@amd.com>, linux-kernel@vge
+ r.kernel.org, Hawking Zhang <Hawking.Zhang@amd.com>, Jerome Glisse <glisse@freedesktop.org>, Pengutronix Kernel Team <kernel@pengutronix.de>, Alex Deucher <alexander.deucher@amd.com>, Gourav Samaiya <gsamaiya@nvidia.com>, Shawn Guo <shawnguo@kernel.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Mario Limonciello <mario.limonciello@amd.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [syzbot] [dri?] kernel BUG in vmf_insert_pfn_prot (2)
+Subject: [Linaro-mm-sig] Re: [PATCH (set 1) 00/20] Rid W=1 warnings from GPU
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HSOBHQYOQZDPKAGUVKG33G5ZJSV7AENE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/POPINHT4JVSO27N7MV62ZN6IBOWH4WJO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-Hello,
 
-syzbot found the following issue on:
+On 8/24/23 08:07, Lee Jones wrote:
+> On Thu, 24 Aug 2023, Jani Nikula wrote:
+> 
+>> On Thu, 24 Aug 2023, Lee Jones <lee@kernel.org> wrote:
+>>> This set is part of a larger effort attempting to clean-up W=1
+>>> kernel builds, which are currently overwhelmingly riddled with
+>>> niggly little warnings.
+>>
+>> The next question is, how do we keep it W=1 clean going forward?
+> 
+> My plan was to fix them all, then move each warning to W=0.
+> 
+> Arnd recently submitted a set doing just that for a bunch of them.
+> 
+> https://lore.kernel.org/all/20230811140327.3754597-1-arnd@kernel.org/
+> 
+> I like to think a bunch of this is built on top of my previous efforts.
+> 
+> GPU is a particularly tricky though - the warnings seem to come in faster
+> than I can squash them.  Maybe the maintainers can find a way to test
+> new patches on merge?
 
-HEAD commit:    9e6c269de404 Merge tag 'i2c-for-6.5-rc7' of git://git.kern..
-git tree:       upstream
-console+strace: https://syzkaller.appspot.com/x/log.txt?x=110b32d3a80000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=aa796b6080b04102
-dashboard link: https://syzkaller.appspot.com/bug?extid=398e17b61dab22cc56bc
-compiler:       gcc (Debian 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Debian) 2.40
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=14284307a80000
+I guess on that note, do you know if there is a way to run
+`scripts/kernel-doc` on patches instead of whole files? That would make
+much easier to block new kernel-doc issues from appearing.
 
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/481d8421bfb2/disk-9e6c269d.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/5ec626f94634/vmlinux-9e6c269d.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/ab1e59619bd6/bzImage-9e6c269d.xz
+> 
+>> Most people don't use W=1 because it's too noisy, so it's a bit of a
+>> catch-22.
+>>
+>> In i915, we enable a lot of W=1 warnings using subdir-ccflags-y in our
+>> Makefile. For CI/developer use we also enable kernel-doc warnings by
+>> default.
+>>
+>> Should we start enabling some of those warning flags in drm/Makefile to
+>> to keep the entire subsystem warning free?
+> 
+> That would we awesome!  We'd just need buy-in.
+> 
+-- 
+Hamza
 
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+398e17b61dab22cc56bc@syzkaller.appspotmail.com
-
-------------[ cut here ]------------
-kernel BUG at mm/memory.c:2214!
-invalid opcode: 0000 [#1] PREEMPT SMP KASAN
-CPU: 0 PID: 5157 Comm: syz-executor.3 Not tainted 6.5.0-rc6-syzkaller-00253-g9e6c269de404 #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 07/26/2023
-RIP: 0010:vmf_insert_pfn_prot+0x247/0x430 mm/memory.c:2214
-Code: 0f 0b e8 0c 4f c0 ff 49 89 ef bf 20 00 00 00 41 83 e7 28 4c 89 fe e8 88 4a c0 ff 49 83 ff 20 0f 85 aa fe ff ff e8 e9 4e c0 ff <0f> 0b 48 bd ff ff ff ff ff ff 0f 00 e8 d8 4e c0 ff 4c 89 f6 48 89
-RSP: 0018:ffffc9000415f750 EFLAGS: 00010293
-RAX: 0000000000000000 RBX: ffff8880275a0d00 RCX: 0000000000000000
-RDX: ffff888018379dc0 RSI: ffffffff81c5b9b7 RDI: 0000000000000007
-RBP: 000000000c140477 R08: 0000000000000007 R09: 0000000000000020
-R10: 0000000000000020 R11: 000000000000001f R12: 0000000020ffc000
-R13: 1ffff9200082beeb R14: 000000000007e79e R15: 0000000000000020
-FS:  00007f235bd9a6c0(0000) GS:ffff8880b9800000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 0000000020ffc000 CR3: 0000000022a32000 CR4: 00000000003506f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- <TASK>
- drm_gem_shmem_fault+0x1ea/0x3a0 drivers/gpu/drm/drm_gem_shmem_helper.c:563
- __do_fault+0x107/0x5f0 mm/memory.c:4198
- do_read_fault mm/memory.c:4547 [inline]
- do_fault mm/memory.c:4670 [inline]
- do_pte_missing mm/memory.c:3664 [inline]
- handle_pte_fault mm/memory.c:4939 [inline]
- __handle_mm_fault+0x27e0/0x3b80 mm/memory.c:5079
- handle_mm_fault+0x2ab/0x9d0 mm/memory.c:5233
- do_user_addr_fault+0x446/0xfc0 arch/x86/mm/fault.c:1392
- handle_page_fault arch/x86/mm/fault.c:1486 [inline]
- exc_page_fault+0x5c/0xd0 arch/x86/mm/fault.c:1542
- asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
-RIP: 0010:rep_movs_alternative+0x4a/0xb0 arch/x86/lib/copy_user_64.S:71
-Code: 75 f1 c3 66 66 2e 0f 1f 84 00 00 00 00 00 66 90 48 8b 06 48 89 07 48 83 c6 08 48 83 c7 08 83 e9 08 74 df 83 f9 08 73 e8 eb c9 <f3> a4 c3 0f 1f 00 4c 8b 06 4c 8b 4e 08 4c 8b 56 10 4c 8b 5e 18 4c
-RSP: 0018:ffffc9000415fb50 EFLAGS: 00050206
-RAX: 0000000000000001 RBX: 0000000020ffc000 RCX: 0000000000001000
-RDX: 0000000000000000 RSI: 0000000020ffc000 RDI: ffff88807b764000
-RBP: 0000000000001000 R08: 0000000000000001 R09: ffffed100f6ec9ff
-R10: ffff88807b764fff R11: 0000000000000000 R12: 0000000020ffd000
-R13: ffff88807b764000 R14: 0000000000000000 R15: 0000000020ffc000
- copy_user_generic arch/x86/include/asm/uaccess_64.h:112 [inline]
- raw_copy_from_user arch/x86/include/asm/uaccess_64.h:127 [inline]
- _copy_from_user+0xc2/0xf0 lib/usercopy.c:23
- copy_from_user include/linux/uaccess.h:183 [inline]
- snd_rawmidi_kernel_write1+0x360/0x860 sound/core/rawmidi.c:1618
- snd_rawmidi_write+0x278/0xc10 sound/core/rawmidi.c:1687
- vfs_write+0x2a4/0xe40 fs/read_write.c:582
- ksys_write+0x1f0/0x250 fs/read_write.c:637
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x38/0xb0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-RIP: 0033:0x7f235b07cae9
-Code: 28 00 00 00 75 05 48 83 c4 28 c3 e8 e1 20 00 00 90 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b0 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007f235bd9a0c8 EFLAGS: 00000246 ORIG_RAX: 0000000000000001
-RAX: ffffffffffffffda RBX: 00007f235b19bf80 RCX: 00007f235b07cae9
-RDX: 00000000fffffd2c RSI: 0000000020000000 RDI: 0000000000000005
-RBP: 00007f235b0c847a R08: 0000000000000000 R09: 0000000000000000
-R10: 0000000000000000 R11: 0000000000000246 R12: 0000000000000000
-R13: 000000000000000b R14: 00007f235b19bf80 R15: 00007ffd9cdf0fe8
- </TASK>
-Modules linked in:
----[ end trace 0000000000000000 ]---
-RIP: 0010:vmf_insert_pfn_prot+0x247/0x430 mm/memory.c:2214
-Code: 0f 0b e8 0c 4f c0 ff 49 89 ef bf 20 00 00 00 41 83 e7 28 4c 89 fe e8 88 4a c0 ff 49 83 ff 20 0f 85 aa fe ff ff e8 e9 4e c0 ff <0f> 0b 48 bd ff ff ff ff ff ff 0f 00 e8 d8 4e c0 ff 4c 89 f6 48 89
-RSP: 0018:ffffc9000415f750 EFLAGS: 00010293
-RAX: 0000000000000000 RBX: ffff8880275a0d00 RCX: 0000000000000000
-RDX: ffff888018379dc0 RSI: ffffffff81c5b9b7 RDI: 0000000000000007
-RBP: 000000000c140477 R08: 0000000000000007 R09: 0000000000000020
-R10: 0000000000000020 R11: 000000000000001f R12: 0000000020ffc000
-R13: 1ffff9200082beeb R14: 000000000007e79e R15: 0000000000000020
-FS:  00007f235bd9a6c0(0000) GS:ffff8880b9800000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00007f93c20ffac1 CR3: 0000000022a32000 CR4: 00000000003506f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-----------------
-Code disassembly (best guess):
-   0:	75 f1                	jne    0xfffffff3
-   2:	c3                   	ret
-   3:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
-   a:	00 00 00 00
-   e:	66 90                	xchg   %ax,%ax
-  10:	48 8b 06             	mov    (%rsi),%rax
-  13:	48 89 07             	mov    %rax,(%rdi)
-  16:	48 83 c6 08          	add    $0x8,%rsi
-  1a:	48 83 c7 08          	add    $0x8,%rdi
-  1e:	83 e9 08             	sub    $0x8,%ecx
-  21:	74 df                	je     0x2
-  23:	83 f9 08             	cmp    $0x8,%ecx
-  26:	73 e8                	jae    0x10
-  28:	eb c9                	jmp    0xfffffff3
-* 2a:	f3 a4                	rep movsb %ds:(%rsi),%es:(%rdi) <-- trapping instruction
-  2c:	c3                   	ret
-  2d:	0f 1f 00             	nopl   (%rax)
-  30:	4c 8b 06             	mov    (%rsi),%r8
-  33:	4c 8b 4e 08          	mov    0x8(%rsi),%r9
-  37:	4c 8b 56 10          	mov    0x10(%rsi),%r10
-  3b:	4c 8b 5e 18          	mov    0x18(%rsi),%r11
-  3f:	4c                   	rex.WR
-
-
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-
-If the bug is already fixed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
-
-If you want to overwrite bug's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the bug is a duplicate of another bug, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
