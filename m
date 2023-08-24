@@ -2,36 +2,36 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 951A5786AE5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Aug 2023 11:00:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C3CA786AED
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Aug 2023 11:00:54 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7FD483F672
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Aug 2023 09:00:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id ADA3E43FDB
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 24 Aug 2023 09:00:53 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id A52EC3F672
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Aug 2023 08:59:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id DEDC63F637
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 24 Aug 2023 09:00:48 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ectU467x;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=FyA43QAV;
 	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
 	(No client certificate requested)
-	by dfw.source.kernel.org (Postfix) with ESMTPS id 228F366430;
-	Thu, 24 Aug 2023 08:59:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0ED30C433C7;
-	Thu, 24 Aug 2023 08:59:57 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTPS id 7EDD060FB6;
+	Thu, 24 Aug 2023 09:00:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6785BC433C8;
+	Thu, 24 Aug 2023 09:00:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1692867597;
+	s=k20201202; t=1692867647;
 	bh=pRjABeYbdZ7kYm0kauhfXEU9jP8GasEtUcwhn21dCxc=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
-	b=ectU467xo6X3YBcQDP+/ngOU7WPTPgRDxCHrpluWN392Mlc60axx3vIIX48VsgoDN
-	 PpRyrP5/+WdC+2ykQLyOeTetMwu/huJ3eZd8i0LSxlom3CPb3lrf4rgBp8s0eX8avr
-	 BGfWzbgxOTfIlW+pAY0WIEqoHeTxo/6sOY5QZAkYbyAkN19q9/PRObJOfOAPQjH1uq
-	 yuz+qZ9oGjn0YECu1cNAX2T+ncu2eKxivxlqKZpSZVNj2O7+WanBFUfataSOnZA+79
-	 SeT2jrZPjluftwVKxhf8sdBqKhIPd8Cn9wX8U0ZFVrF46L28H4hVpTzZP/2UJTdUE/
-	 2QZdbUc7UizJQ==
+	b=FyA43QAVtvboJtLBnYjCn2l5B6rkqjm/L5UMpQBdz1EkwfzYAJF8ceZbbmfDWvnHP
+	 c0NMsslfjy8YhmJnLIzirvCjxSqW/j46XG9U+pmj4Rdo4Jb1Ib0MPYmuWBfIdRgQcv
+	 BQCIKj1tuabIgXNffOpoMoKWz6fFmUEc9y0mHFL+CvHTWIXiMDWg2qmK0a8Rrr6utX
+	 4rQmBV9mdjclIv6Vlg0WeG5NxWT/TfYNNSEl1D7oeImRLkiMXntWYDhOsYxx5vULvK
+	 4Ndwj/COJJ2khusQSyxLJCpSzB4hk7l3yB5hTbRpcCaHI+0YefYTK3XWKmNGhMw9SO
+	 EvN/cUb31UV0w==
 From: Maxime Ripard <mripard@kernel.org>
 To: Lee Jones <lee@kernel.org>
 In-Reply-To: <20230824073710.2677348-1-lee@kernel.org>
@@ -41,7 +41,7 @@ Date: Thu, 24 Aug 2023 10:59:54 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 X-Mailer: b4 0.12.3
-X-Rspamd-Queue-Id: A52EC3F672
+X-Rspamd-Queue-Id: DEDC63F637
 X-Spamd-Bar: ------
 X-Spamd-Result: default: False [-6.50 / 15.00];
 	REPLY(-4.00)[];
@@ -49,7 +49,7 @@ X-Spamd-Result: default: False [-6.50 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org];
+	R_SPF_ALLOW(-0.20)[+a:dfw.source.kernel.org:c];
 	MIME_GOOD(-0.10)[text/plain];
 	TAGGED_RCPT(0.00)[];
 	ARC_NA(0.00)[];
