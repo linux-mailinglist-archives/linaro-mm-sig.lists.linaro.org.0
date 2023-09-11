@@ -2,89 +2,95 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89A9379A952
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 17:02:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 41E3679A953
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 17:03:19 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8241D3F505
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 15:02:55 +0000 (UTC)
-Received: from mail-pl1-f205.google.com (mail-pl1-f205.google.com [209.85.214.205])
-	by lists.linaro.org (Postfix) with ESMTPS id E98ED3F009
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  6 Sep 2023 11:42:12 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3E52E3F4AC
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 15:03:18 +0000 (UTC)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+	by lists.linaro.org (Postfix) with ESMTPS id 4AACD3E95C
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 11 Sep 2023 02:30:51 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of 3lGX4ZAkbAG8flmXNYYReNccVQ.TbbTYRhfRePbagRag.PbZ@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.214.205 as permitted sender) smtp.mailfrom=3lGX4ZAkbAG8flmXNYYReNccVQ.TbbTYRhfRePbagRag.PbZ@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none)
-Received: by mail-pl1-f205.google.com with SMTP id d9443c01a7336-1bf703dd21fso38423185ad.3
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 06 Sep 2023 04:42:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20221208; t=1694000532; x=1694605332;
-        h=to:from:subject:message-id:date:mime-version:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=mgm4FvWa3BKSRlLi2OGqzTICf6l825wM16V78xPPAuI=;
-        b=Dz4+lDnCNtYT7EZXyesldXatFR2i/23dgHMVTCH7EHoQ7STguYUiqaiS4WcjAg+Odr
-         lQ8d/ACdmT/hm01nsW43M4PMZUDr8gSFAGjECXOBLPIE8PKmZDbyPBEbbf9cdcgfzUwY
-         xLfpsFX5HMTj23STSFm35eEPHQjtg9Cvd6c78EDpLb0x+bluuN9ZR0dJeE3qXBUfMaw4
-         IaJZcxTh2kb9imH8upHqphe6Xz7DVlXurSuymQPN9ink6vKLwZwHpbQWUGQiWRn9lo9B
-         oer10tdbwWBNMcQa5fzlOzyGA4EDH0yjp8repN7DCRhZaHhkrh+nvmFwgc+OJFK0MZtH
-         A7SQ==
-X-Gm-Message-State: AOJu0Yyz/BEa505g5ob8Jw3rVdwK+PLJLITeXjnuf7E08DKgpT7KqsUD
-	au0EYaiRnGJ6QJiqUS1lotTJm/s8/hb6ljJscK0n+IhsrDab
-X-Google-Smtp-Source: AGHT+IHQYLZtz6vLjN0KeGAyveKhAq6Q0dCa+xbTebR1FxdE03KP0paQKULbcKxiqtdNz+wFxUM88ytkroo+z7iduvzlXH6UaEqx
+	dkim=pass header.d=mediatek.com header.s=dk header.b="uf2/Wzg+";
+	spf=pass (lists.linaro.org: domain of yong.wu@mediatek.com designates 60.244.123.138 as permitted sender) smtp.mailfrom=yong.wu@mediatek.com;
+	dmarc=pass (policy=quarantine) header.from=mediatek.com
+X-UUID: 36af3e00504b11eea33bb35ae8d461a2-20230911
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
+	h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:CC:To:From; bh=+87uOL2WQvYvX9g5bStM5h9swQ1laB4yxiMeMo2iqXc=;
+	b=uf2/Wzg+L7T9MTAwoxRWPDfyQUIyCXE0Hxfbpd3z4Ot7lzyqPcWbk4O4xh7hh9E8y45mJKqChOgOFP9EF9naY5Gdk/LEGyxBY3/4r3IOo4Os4WsSemPu36wTXwRLsVKa+x8NEqVQB2TXZtAhjvT8S2sZri8wfjQveu6OzbfAAG8=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.31,REQID:2fcd4e6f-6799-4aa9-ab3f-fbfa01e6997a,IP:0,U
+	RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
+	N:release,TS:-25
+X-CID-META: VersionHash:0ad78a4,CLOUDID:1d59adbe-14cc-44ca-b657-2d2783296e72,B
+	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
+	RL:0,File:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,
+	DKR:0,DKP:0,BRR:0,BRE:0
+X-CID-BVR: 0
+X-CID-BAS: 0,_,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-UUID: 36af3e00504b11eea33bb35ae8d461a2-20230911
+Received: from mtkmbs14n2.mediatek.inc [(172.21.101.76)] by mailgw01.mediatek.com
+	(envelope-from <yong.wu@mediatek.com>)
+	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+	with ESMTP id 141108311; Mon, 11 Sep 2023 10:30:46 +0800
+Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
+ mtkmbs13n2.mediatek.inc (172.21.101.108) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Mon, 11 Sep 2023 10:30:45 +0800
+Received: from mhfsdcap04.gcn.mediatek.inc (10.17.3.154) by
+ mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1118.26 via Frontend Transport; Mon, 11 Sep 2023 10:30:44 +0800
+From: Yong Wu <yong.wu@mediatek.com>
+To: Rob Herring <robh+dt@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>,
+	<christian.koenig@amd.com>, Matthias Brugger <matthias.bgg@gmail.com>
+Date: Mon, 11 Sep 2023 10:30:29 +0800
+Message-ID: <20230911023038.30649-1-yong.wu@mediatek.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Received: by 2002:a17:902:d48e:b0:1bc:1189:16d with SMTP id
- c14-20020a170902d48e00b001bc1189016dmr5569688plg.3.1694000532076; Wed, 06 Sep
- 2023 04:42:12 -0700 (PDT)
-Date: Wed, 06 Sep 2023 04:42:11 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000f6bf6d0604af3b95@google.com>
-From: syzbot <syzbot+95416f957d84e858b377@syzkaller.appspotmail.com>
-To: airlied@gmail.com, christian.koenig@amd.com, daniel@ffwll.ch,
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
-	sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com, tzimmermann@suse.de
-X-Rspamd-Queue-Id: E98ED3F009
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.00 / 15.00];
+X-MTK: N
+X-Rspamd-Queue-Id: 4AACD3E95C
+X-Spamd-Bar: +
+X-Spamd-Result: default: False [1.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=39744401c57166fc];
-	FORGED_SENDER(0.30)[syzbot@syzkaller.appspotmail.com,3lGX4ZAkbAG8flmXNYYReNccVQ.TbbTYRhfRePbagRag.PbZ@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	HFILTER_HOSTNAME_UNKNOWN(2.50)[];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[mediatek.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:60.244.123.128/27];
+	R_DKIM_ALLOW(-0.20)[mediatek.com:s=dk];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.205:from];
-	REDIRECTOR_URL(0.00)[goo.gl];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_COUNT_ONE(0.00)[1];
-	RCVD_TLS_LAST(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	MIME_TRACE(0.00)[0:+];
-	BLOCKLISTDE_FAIL(0.00)[209.85.214.205:query timed out];
-	FROM_HAS_DN(0.00)[];
 	ARC_NA(0.00)[];
-	TAGGED_FROM(0.00)[95416f957d84e858b377];
-	TO_DN_NONE(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,3lGX4ZAkbAG8flmXNYYReNccVQ.TbbTYRhfRePbagRag.PbZ@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
-	FREEMAIL_TO(0.00)[gmail.com,amd.com,ffwll.ch,lists.freedesktop.org,lists.linaro.org,vger.kernel.org,linux.intel.com,kernel.org,linaro.org,googlegroups.com,suse.de];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	NEURAL_HAM(-0.00)[-0.990];
+	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	R_DKIM_NA(0.00)[];
-	SUBJECT_HAS_QUESTION(0.00)[]
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:24154, ipnet:60.244.123.0/24, country:TW];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[dt];
+	FREEMAIL_TO(0.00)[kernel.org,linaro.org,amd.com,gmail.com];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_TRACE(0.00)[mediatek.com:+];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mailgw01.mediatek.com:helo,mailgw01.mediatek.com:rdns,mediatek.com:dkim]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-MailFrom: 3lGX4ZAkbAG8flmXNYYReNccVQ.TbbTYRhfRePbagRag.PbZ@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
+X-Spam-Level: *
+X-MailFrom: yong.wu@mediatek.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: OOXHIYYT2RIQIFMY7NHRZ3TGRJYEAECO
-X-Message-ID-Hash: OOXHIYYT2RIQIFMY7NHRZ3TGRJYEAECO
-X-Mailman-Approved-At: Mon, 11 Sep 2023 15:02:52 +0000
+Message-ID-Hash: M6PVSFQ5BUGZ62Y35KZLMPH5R4JV4VMO
+X-Message-ID-Hash: M6PVSFQ5BUGZ62Y35KZLMPH5R4JV4VMO
+X-Mailman-Approved-At: Mon, 11 Sep 2023 15:03:14 +0000
+CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, tjmercier@google.com, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Yong Wu <yong.wu@mediatek.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, jianjiao.zeng@mediatek.com, kuohong.wang@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [syzbot] [dri?] WARNING in drm_syncobj_array_find
+Subject: [Linaro-mm-sig] [PATCH 0/9] dma-buf: heaps: Add MediaTek secure heap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OOXHIYYT2RIQIFMY7NHRZ3TGRJYEAECO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/M6PVSFQ5BUGZ62Y35KZLMPH5R4JV4VMO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -94,99 +100,55 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hello,
+This patchset consists of two parts, the first is from John and TJ.
+It adds some heap interfaces, then our kernel users could allocate buffer
+from special heap. The second part is adding MTK secure heap for SVP
+(Secure Video Path). A total of two heaps are added, one is mtk_svp and
+the other is mtk_svp_cma. The mtk_svp buffer is reserved for the secure
+world after bootup and it is used for ES/working buffer, while the
+mtk_svp_cma buffer is dynamically reserved for the secure world and will
+be get ready when we start playing secure videos, this heap is used for the
+frame buffer. Once the security video playing is complete, the CMA will be
+released.
 
-syzbot found the following issue on:
+For easier viewing, I've split the new heap file into several patches.
 
-HEAD commit:    0468be89b3fa Merge tag 'iommu-updates-v6.6' of git://git.k..
-git tree:       upstream
-console output: https://syzkaller.appspot.com/x/log.txt?x=13571367a80000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=39744401c57166fc
-dashboard link: https://syzkaller.appspot.com/bug?extid=95416f957d84e858b377
-compiler:       gcc (Debian 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Debian) 2.40
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=111c39a8680000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=1267d83fa80000
+The consumers of new heap and new interfaces are our codec and drm which
+will send upstream soon, probably this week.
 
-Downloadable assets:
-disk image (non-bootable): https://storage.googleapis.com/syzbot-assets/7bc7510fe41f/non_bootable_disk-0468be89.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/7feba36779de/vmlinux-0468be89.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/b1cdc0506491/bzImage-0468be89.xz
+Base on v6.6-rc1.
 
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+95416f957d84e858b377@syzkaller.appspotmail.com
+John Stultz (2):
+  dma-heap: Add proper kref handling on dma-buf heaps
+  dma-heap: Provide accessors so that in-kernel drivers can allocate
+    dmabufs from specific heaps
 
-------------[ cut here ]------------
-WARNING: CPU: 2 PID: 5141 at mm/page_alloc.c:4415 __alloc_pages+0x3ab/0x4a0 mm/page_alloc.c:4415
-Modules linked in:
-CPU: 2 PID: 5141 Comm: syz-executor127 Not tainted 6.5.0-syzkaller-10885-g0468be89b3fa #0
-Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 1.16.2-debian-1.16.2-1 04/01/2014
-RIP: 0010:__alloc_pages+0x3ab/0x4a0 mm/page_alloc.c:4415
-Code: ff ff 00 0f 84 2f fe ff ff 80 ce 01 e9 27 fe ff ff 83 fe 0a 0f 86 3a fd ff ff 80 3d c9 37 e6 0c 00 75 09 c6 05 c0 37 e6 0c 01 <0f> 0b 45 31 f6 e9 97 fe ff ff e8 b6 10 9e ff 84 c0 0f 85 8a fe ff
-RSP: 0018:ffffc900030b7a18 EFLAGS: 00010246
-RAX: 0000000000000000 RBX: 0000000000040cc0 RCX: 0000000000000000
-RDX: 0000000000000000 RSI: 0000000000000016 RDI: 0000000000040cc0
-RBP: 1ffff92000616f44 R08: 0000000000000005 R09: 0000000000000000
-R10: 00000000ffffff1f R11: 0000000000000000 R12: 0000000000000016
-R13: 0000000000000000 R14: ffffffff84b4e215 R15: ffff888013722000
-FS:  00005555555a4380(0000) GS:ffff88806b800000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 00000000200001c0 CR3: 000000002accd000 CR4: 0000000000350ee0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- <TASK>
- __alloc_pages_node include/linux/gfp.h:237 [inline]
- alloc_pages_node include/linux/gfp.h:260 [inline]
- __kmalloc_large_node+0x87/0x1c0 mm/slab_common.c:1164
- __do_kmalloc_node mm/slab_common.c:1011 [inline]
- __kmalloc.cold+0xb/0xe0 mm/slab_common.c:1036
- kmalloc_array include/linux/slab.h:636 [inline]
- drm_syncobj_array_find+0x35/0x3c0 drivers/gpu/drm/drm_syncobj.c:1246
- drm_syncobj_timeline_signal_ioctl+0x21f/0x860 drivers/gpu/drm/drm_syncobj.c:1533
- drm_ioctl_kernel+0x280/0x4c0 drivers/gpu/drm/drm_ioctl.c:789
- drm_ioctl+0x5cb/0xbf0 drivers/gpu/drm/drm_ioctl.c:892
- vfs_ioctl fs/ioctl.c:51 [inline]
- __do_sys_ioctl fs/ioctl.c:871 [inline]
- __se_sys_ioctl fs/ioctl.c:857 [inline]
- __x64_sys_ioctl+0x18f/0x210 fs/ioctl.c:857
- do_syscall_x64 arch/x86/entry/common.c:50 [inline]
- do_syscall_64+0x38/0xb0 arch/x86/entry/common.c:80
- entry_SYSCALL_64_after_hwframe+0x63/0xcd
-RIP: 0033:0x7ff62d53f129
-Code: 48 83 c4 28 c3 e8 37 17 00 00 0f 1f 80 00 00 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007ffe7c669ea8 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
-RAX: ffffffffffffffda RBX: 00007ffe7c66a078 RCX: 00007ff62d53f129
-RDX: 0000000020000500 RSI: 00000000c01864cd RDI: 0000000000000003
-RBP: 00007ff62d5b2610 R08: 0023647261632f69 R09: 00007ffe7c66a078
-R10: 000000000000001f R11: 0000000000000246 R12: 0000000000000001
-R13: 00007ffe7c66a068 R14: 0000000000000001 R15: 0000000000000001
- </TASK>
+T.J. Mercier (1):
+  dma-buf: heaps: Deduplicate docs and adopt common format
+
+Yong Wu (6):
+  dma-buf: heaps: Initialise MediaTek secure heap
+  dma-buf: heaps: mtk_sec_heap: Initialise tee session
+  dma-buf: heaps: mtk_sec_heap: Add tee service call for buffer
+    allocating/freeing
+  dma-buf: heaps: mtk_sec_heap: Add dma_ops
+  dt-bindings: reserved-memory: MediaTek: Add reserved memory for SVP
+  dma_buf: heaps: mtk_sec_heap: Add a new CMA heap
+
+ .../mediatek,secure_cma_chunkmem.yaml         |  42 ++
+ drivers/dma-buf/dma-heap.c                    | 127 +++--
+ drivers/dma-buf/heaps/Kconfig                 |   8 +
+ drivers/dma-buf/heaps/Makefile                |   1 +
+ drivers/dma-buf/heaps/mtk_secure_heap.c       | 458 ++++++++++++++++++
+ include/linux/dma-heap.h                      |  42 +-
+ 6 files changed, 630 insertions(+), 48 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/reserved-memory/mediatek,secure_cma_chunkmem.yaml
+ create mode 100644 drivers/dma-buf/heaps/mtk_secure_heap.c
+
+-- 
+2.18.0
 
 
----
-This report is generated by a bot. It may contain errors.
-See https://goo.gl/tpsmEJ for more information about syzbot.
-syzbot engineers can be reached at syzkaller@googlegroups.com.
-
-syzbot will keep track of this issue. See:
-https://goo.gl/tpsmEJ#status for how to communicate with syzbot.
-
-If the bug is already fixed, let syzbot know by replying with:
-#syz fix: exact-commit-title
-
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
-
-If you want to overwrite bug's subsystems, reply with:
-#syz set subsystems: new-subsystem
-(See the list of subsystem names on the web dashboard)
-
-If the bug is a duplicate of another bug, reply with:
-#syz dup: exact-subject-of-another-report
-
-If you want to undo deduplication, reply with:
-#syz undup
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
