@@ -2,97 +2,115 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A1C779A95B
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 17:05:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E62479A964
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 17:06:27 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 34BFC3F4AC
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 15:05:23 +0000 (UTC)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
-	by lists.linaro.org (Postfix) with ESMTPS id B0D7F3F09C
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 11 Sep 2023 02:32:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1EA9A3F0C7
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 15:06:26 +0000 (UTC)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+	by lists.linaro.org (Postfix) with ESMTPS id 70B5F3EAB0
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 11 Sep 2023 02:47:10 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=mediatek.com header.s=dk header.b=lw8pKRxc;
-	spf=pass (lists.linaro.org: domain of yong.wu@mediatek.com designates 60.244.123.138 as permitted sender) smtp.mailfrom=yong.wu@mediatek.com;
+	dkim=pass header.d=mediatek.com header.s=dk header.b=oKAqoGGg;
+	spf=pass (lists.linaro.org: domain of yong.wu@mediatek.com designates 210.61.82.184 as permitted sender) smtp.mailfrom=yong.wu@mediatek.com;
 	dmarc=pass (policy=quarantine) header.from=mediatek.com
-X-UUID: 60847d26504b11eea33bb35ae8d461a2-20230911
+X-UUID: 6428c00e504b11ee8051498923ad61e6-20230911
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
-	h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From; bh=DFNRQ28HF8Flal6wMkjv4la7oVgV+efuZKVRyjunRyY=;
-	b=lw8pKRxc1iQ2Y49ygb9viUkFZ8SEKQugnOaaYpv+gDzF7CvLU6zeN2TcYUxhOK4bkZRmyJgGyLGaTEp+ojDnSD3LYcbIBU88TlXCkrL/aUk+RqwbJBC8qHa7UnPMao3HQ/SeUJPgRB5BJjPJoY3ZcBzeNgbKNg4dTQ1GA3FWN0c=;
+	h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From; bh=k7eKKqiU9u1VTQEhbL4g+T+8Z/Im5zTAmaqVcrzlJog=;
+	b=oKAqoGGgHnTwU2Nrzr77Lv7TzaetUwm2zBYVB2mGQH8flZ/fZGDLB2cPKgwRMRTzdzgWxH2poaxG79v5uQ+IVM6mcX2FUiQzRvCQ1UbaPN7RiFQij01a502CP/yNilRPd3s/shqR3mVWpLZ9o4FqblhdHwlWX2yZpexGuDIZUqw=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.31,REQID:b35ae5c5-6b66-4c52-acbe-f8372a5bc3b6,IP:0,U
-	RL:25,TC:0,Content:41,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
-	N:release,TS:66
-X-CID-META: VersionHash:0ad78a4,CLOUDID:c25dadbe-14cc-44ca-b657-2d2783296e72,B
-	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:3,EDM:-3,IP:nil,U
-	RL:11|1,File:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:
-	NO,DKR:0,DKP:0,BRR:0,BRE:0
-X-CID-BVR: 0
-X-CID-BAS: 0,_,0,_
-X-CID-FACTOR: TF_CID_SPAM_ULN,TF_CID_SPAM_SNR
-X-UUID: 60847d26504b11eea33bb35ae8d461a2-20230911
-Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by mailgw01.mediatek.com
+X-CID-O-INFO: VERSION:1.1.31,REQID:2b9c6210-8e26-4923-9451-89365963a96c,IP:0,U
+	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+	release,TS:0
+X-CID-META: VersionHash:0ad78a4,CLOUDID:dc85c713-4929-4845-9571-38c601e9c3c9,B
+	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
+	RL:0,File:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,
+	DKR:0,DKP:0,BRR:0,BRE:0
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-UUID: 6428c00e504b11ee8051498923ad61e6-20230911
+Received: from mtkmbs10n2.mediatek.inc [(172.21.101.183)] by mailgw02.mediatek.com
 	(envelope-from <yong.wu@mediatek.com>)
 	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
-	with ESMTP id 1829635109; Mon, 11 Sep 2023 10:31:56 +0800
-Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
- mtkmbs13n2.mediatek.inc (172.21.101.108) with Microsoft SMTP Server
+	with ESMTP id 650081513; Mon, 11 Sep 2023 10:32:02 +0800
+Received: from mtkmbs13n2.mediatek.inc (172.21.101.194) by
+ MTKMBS14N2.mediatek.inc (172.21.101.76) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Mon, 11 Sep 2023 10:31:55 +0800
+ 15.2.1118.26; Mon, 11 Sep 2023 10:32:01 +0800
 Received: from mhfsdcap04.gcn.mediatek.inc (10.17.3.154) by
  mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Mon, 11 Sep 2023 10:31:54 +0800
+ 15.2.1118.26 via Frontend Transport; Mon, 11 Sep 2023 10:32:00 +0800
 From: Yong Wu <yong.wu@mediatek.com>
 To: Rob Herring <robh+dt@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>,
 	<christian.koenig@amd.com>, Matthias Brugger <matthias.bgg@gmail.com>
-Date: Mon, 11 Sep 2023 10:30:37 +0800
-Message-ID: <20230911023038.30649-9-yong.wu@mediatek.com>
+Date: Mon, 11 Sep 2023 10:30:38 +0800
+Message-ID: <20230911023038.30649-10-yong.wu@mediatek.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230911023038.30649-1-yong.wu@mediatek.com>
 References: <20230911023038.30649-1-yong.wu@mediatek.com>
 MIME-Version: 1.0
+X-TM-AS-Product-Ver: SMEX-14.0.0.3152-9.1.1006-23728.005
+X-TM-AS-Result: No-10--7.150000-8.000000
+X-TMASE-MatchedRID: l/nE+SiO7Ibv9W9IPgV+ekKcYi5Qw/RVJNtuyL6mpIWgaf0+XUrNk6jp
+	YrigUiQ3RgA/t103tXOp3RVRr+fKXKawq2pdPD7UA9lly13c/gG94JvJnfFrHg6QlBHhBZuwYXo
+	6e6cMykyCrhXL3UcSds/8MSwnHgK56fubsV+A+k+yntSjDrb64SQwGQSJ46NmXCmcAC8DBrPrio
+	8O85DXBtuU0Ipyd28f+kFR4g8YiAE/eX/eRWk3RZA6S0SjvcYUmyqQJWNsukna+IH8mvgPVEttN
+	R/47hK8ALglGcpZqpxRomVnnmsja5e/bF1ays2S4RtSDjG+z7BzijlDBYeD/Jsoi2XrUn/Jn6Kd
+	MrRsL14qtq5d3cxkNTx61AcxE5RmHl89tzhQNcPdxB32r2oE1NRT50T+gtKLgL5DmE5InGnToZA
+	9tPKpDJ6oP1a0mRIj
+X-TM-AS-User-Approved-Sender: No
+X-TM-AS-User-Blocked-Sender: No
+X-TMASE-Result: 10--7.150000-8.000000
+X-TMASE-Version: SMEX-14.0.0.3152-9.1.1006-23728.005
+X-TM-SNTS-SMTP: 
+	D012446BA56B603C0A9C42A245B2817DF015B66332AAB4883A6336DF0FC547C72000:8
 X-MTK: N
-X-Rspamd-Queue-Id: B0D7F3F09C
-X-Spamd-Bar: +
-X-Spamd-Result: default: False [1.50 / 15.00];
+X-Rspamd-Queue-Id: 70B5F3EAB0
+X-Spamd-Bar: ++++
+X-Spamd-Result: default: False [4.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	HFILTER_HOSTNAME_UNKNOWN(2.50)[];
+	RBL_VIRUSFREE_BOTNET(2.00)[210.61.82.184:from];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[mediatek.com,quarantine];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:60.244.123.128/27:c];
-	R_DKIM_ALLOW(-0.20)[mediatek.com:s=dk];
+	BAD_REP_POLICIES(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
+	R_SPF_ALLOW(0.00)[+ip4:210.61.82.184/32:c];
+	FREEMAIL_TO(0.00)[kernel.org,linaro.org,amd.com,gmail.com];
+	RCVD_COUNT_THREE(0.00)[3];
+	R_DKIM_ALLOW(0.00)[mediatek.com:s=dk];
+	GREYLIST(0.00)[pass,meta];
 	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[21];
 	TAGGED_RCPT(0.00)[dt];
-	ASN(0.00)[asn:24154, ipnet:60.244.123.0/24, country:TW];
-	NEURAL_HAM(-0.00)[-1.000];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mailgw01.mediatek.com:helo,mailgw01.mediatek.com:rdns,mediatek.com:dkim,mediatek.com:email];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[kernel.org,linaro.org,amd.com,gmail.com];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
 	RCVD_TLS_LAST(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mailgw02.mediatek.com:helo,mailgw02.mediatek.com:rdns,mediatek.com:dkim,mediatek.com:email];
+	NEURAL_HAM(-0.00)[-0.996];
+	ASN(0.00)[asn:3462, ipnet:210.61.0.0/16, country:TW];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[mediatek.com:+];
 	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[mediatek.com:+]
-X-Rspamd-Action: no action
+	DMARC_POLICY_ALLOW(0.00)[mediatek.com,quarantine];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[]
+X-Rspamd-Action: add header
 X-Rspamd-Server: lists.linaro.org
-X-Spam-Level: *
+X-Spam-Level: ****
 X-MailFrom: yong.wu@mediatek.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: A3RRMWR2KUX72C3HDTZAPJ7CTWOOIGX4
-X-Message-ID-Hash: A3RRMWR2KUX72C3HDTZAPJ7CTWOOIGX4
-X-Mailman-Approved-At: Mon, 11 Sep 2023 15:03:22 +0000
+Message-ID-Hash: DROOAKSDNNFAVMW4PB2MKHL7TPRBBHEH
+X-Message-ID-Hash: DROOAKSDNNFAVMW4PB2MKHL7TPRBBHEH
+X-Mailman-Approved-At: Mon, 11 Sep 2023 15:03:24 +0000
 CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, tjmercier@google.com, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Yong Wu <yong.wu@mediatek.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, jianjiao.zeng@mediatek.com, kuohong.wang@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 8/9] dt-bindings: reserved-memory: MediaTek: Add reserved memory for SVP
+Subject: [Linaro-mm-sig] [PATCH 9/9] dma_buf: heaps: mtk_sec_heap: Add a new CMA heap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/A3RRMWR2KUX72C3HDTZAPJ7CTWOOIGX4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DROOAKSDNNFAVMW4PB2MKHL7TPRBBHEH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -102,63 +120,239 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-This adds the binding for describing a CMA memory for MediaTek SVP(Secure
-Video Path).
+Create a new mtk_svp_cma heap from the CMA reserved buffer.
+
+When the first allocating buffer, use cma_alloc to prepare whole the
+CMA range, then send its range to TEE to protect and manage.
+For the later allocating, we just adds the cma_used_size.
+
+When SVP done, cma_release will release the buffer, then kernel may
+reuse it.
 
 Signed-off-by: Yong Wu <yong.wu@mediatek.com>
 ---
- .../mediatek,secure_cma_chunkmem.yaml         | 42 +++++++++++++++++++
- 1 file changed, 42 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/reserved-memory/mediatek,secure_cma_chunkmem.yaml
+ drivers/dma-buf/heaps/Kconfig           |   2 +-
+ drivers/dma-buf/heaps/mtk_secure_heap.c | 121 +++++++++++++++++++++++-
+ 2 files changed, 119 insertions(+), 4 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/reserved-memory/mediatek,secure_cma_chunkmem.yaml b/Documentation/devicetree/bindings/reserved-memory/mediatek,secure_cma_chunkmem.yaml
-new file mode 100644
-index 000000000000..cc10e00d35c4
---- /dev/null
-+++ b/Documentation/devicetree/bindings/reserved-memory/mediatek,secure_cma_chunkmem.yaml
-@@ -0,0 +1,42 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/reserved-memory/mediatek,secure_cma_chunkmem.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
+diff --git a/drivers/dma-buf/heaps/Kconfig b/drivers/dma-buf/heaps/Kconfig
+index 729c0cf3eb7c..e101f788ecbf 100644
+--- a/drivers/dma-buf/heaps/Kconfig
++++ b/drivers/dma-buf/heaps/Kconfig
+@@ -15,7 +15,7 @@ config DMABUF_HEAPS_CMA
+ 
+ config DMABUF_HEAPS_MTK_SECURE
+ 	bool "DMA-BUF MediaTek Secure Heap"
+-	depends on DMABUF_HEAPS && TEE
++	depends on DMABUF_HEAPS && TEE && CMA
+ 	help
+ 	  Choose this option to enable dma-buf MediaTek secure heap for Secure
+ 	  Video Path. This heap is backed by TEE client interfaces. If in
+diff --git a/drivers/dma-buf/heaps/mtk_secure_heap.c b/drivers/dma-buf/heaps/mtk_secure_heap.c
+index daf6cf2121a1..3f568fe6b569 100644
+--- a/drivers/dma-buf/heaps/mtk_secure_heap.c
++++ b/drivers/dma-buf/heaps/mtk_secure_heap.c
+@@ -4,11 +4,12 @@
+  *
+  * Copyright (C) 2023 MediaTek Inc.
+  */
+-
++#include <linux/cma.h>
+ #include <linux/dma-buf.h>
+ #include <linux/dma-heap.h>
+ #include <linux/err.h>
+ #include <linux/module.h>
++#include <linux/of_reserved_mem.h>
+ #include <linux/scatterlist.h>
+ #include <linux/slab.h>
+ #include <linux/tee_drv.h>
+@@ -25,9 +26,11 @@
+  * MediaTek secure (chunk) memory type
+  *
+  * @KREE_MEM_SEC_CM_TZ: static chunk memory carved out for trustzone.
++ * @KREE_MEM_SEC_CM_CMA: dynamic chunk memory carved out from CMA.
+  */
+ enum kree_mem_type {
+ 	KREE_MEM_SEC_CM_TZ = 1,
++	KREE_MEM_SEC_CM_CMA,
+ };
+ 
+ struct mtk_secure_heap_buffer {
+@@ -42,6 +45,13 @@ struct mtk_secure_heap {
+ 	const enum kree_mem_type mem_type;
+ 	u32			 mem_session;
+ 	struct tee_context	*tee_ctx;
 +
-+title: MediaTek Secure Video Path Reserved Memory
++	struct cma		*cma;
++	struct page		*cma_page;
++	unsigned long		cma_paddr;
++	unsigned long		cma_size;
++	unsigned long		cma_used_size;
++	struct mutex		lock; /* lock for cma_used_size */
+ };
+ 
+ struct mtk_secure_heap_attachment {
+@@ -90,6 +100,42 @@ static int mtk_kree_secure_session_init(struct mtk_secure_heap *sec_heap)
+ 	return ret;
+ }
+ 
++static int mtk_sec_mem_cma_allocate(struct mtk_secure_heap *sec_heap, size_t size)
++{
++	/*
++	 * Allocate CMA only when allocating buffer for the first time, and just
++	 * increase cma_used_size at the other times.
++	 */
++	mutex_lock(&sec_heap->lock);
++	if (sec_heap->cma_used_size)
++		goto add_size;
 +
-+description:
-+  This binding describes the reserved memory for secure video path.
++	mutex_unlock(&sec_heap->lock);
++	sec_heap->cma_page = cma_alloc(sec_heap->cma, sec_heap->cma_size >> PAGE_SHIFT,
++				       get_order(PAGE_SIZE), false);
++	if (!sec_heap->cma_page)
++		return -ENOMEM;
 +
-+maintainers:
-+  - Yong Wu <yong.wu@mediatek.com>
++	mutex_lock(&sec_heap->lock);
++add_size:
++	sec_heap->cma_used_size += size;
++	mutex_unlock(&sec_heap->lock);
++	return sec_heap->cma_used_size;
++}
 +
-+allOf:
-+  - $ref: reserved-memory.yaml
++static void mtk_sec_mem_cma_free(struct mtk_secure_heap *sec_heap, size_t size)
++{
++	bool cma_is_empty;
 +
-+properties:
-+  compatible:
-+    const: mediatek,secure_cma_chunkmem
++	mutex_lock(&sec_heap->lock);
++	sec_heap->cma_used_size -= size;
++	cma_is_empty = !sec_heap->cma_used_size;
++	mutex_unlock(&sec_heap->lock);
 +
-+required:
-+  - compatible
-+  - reg
-+  - reusable
++	if (cma_is_empty)
++		cma_release(sec_heap->cma, sec_heap->cma_page, sec_heap->cma_size >> PAGE_SHIFT);
++}
 +
-+unevaluatedProperties: false
+ static int
+ mtk_sec_mem_tee_service_call(struct tee_context *tee_ctx, u32 session,
+ 			     unsigned int command, struct tee_param *params)
+@@ -114,23 +160,47 @@ static int mtk_sec_mem_allocate(struct mtk_secure_heap *sec_heap,
+ {
+ 	struct tee_param params[MTK_TEE_PARAM_NUM] = {0};
+ 	u32 mem_session = sec_heap->mem_session;
++	bool cma_frst_alloc = false;
+ 	int ret;
+ 
++	if (sec_heap->cma) {
++		ret = mtk_sec_mem_cma_allocate(sec_heap, sec_buf->size);
++		if (ret < 0)
++			return ret;
++		/*
++		 * When CMA allocates for the first time, pass the CMA range to TEE
++		 * to protect it. It's the first allocating if the cma_used_size is equal
++		 * to this required buffer size.
++		 */
++		cma_frst_alloc = (ret == sec_buf->size);
++	}
 +
-+examples:
-+  - |
+ 	params[0].attr = TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INPUT;
+ 	params[0].u.value.a = SZ_4K;			/* alignment */
+ 	params[0].u.value.b = sec_heap->mem_type;	/* memory type */
+ 	params[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INPUT;
+ 	params[1].u.value.a = sec_buf->size;
+ 	params[2].attr = TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INOUT;
++	if (sec_heap->cma && cma_frst_alloc) {
++		params[2].u.value.a = sec_heap->cma_paddr;
++		params[2].u.value.b = sec_heap->cma_size;
++	}
+ 
+ 	/* Always request zeroed buffer */
+ 	ret = mtk_sec_mem_tee_service_call(sec_heap->tee_ctx, mem_session,
+ 					   TZCMD_MEM_SECURECM_ZALLOC, params);
+-	if (ret)
+-		return -ENOMEM;
++	if (ret) {
++		ret = -ENOMEM;
++		goto free_cma;
++	}
+ 
+ 	sec_buf->sec_handle = params[2].u.value.a;
+ 	return 0;
 +
-+    reserved-memory {
-+        #address-cells = <1>;
-+        #size-cells = <1>;
-+        ranges;
++free_cma:
++	if (sec_heap->cma)
++		mtk_sec_mem_cma_free(sec_heap, sec_buf->size);
++	return ret;
+ }
+ 
+ static void mtk_sec_mem_release(struct mtk_secure_heap *sec_heap,
+@@ -145,6 +215,9 @@ static void mtk_sec_mem_release(struct mtk_secure_heap *sec_heap,
+ 
+ 	mtk_sec_mem_tee_service_call(sec_heap->tee_ctx, mem_session,
+ 				     TZCMD_MEM_SECURECM_UNREF, params);
 +
-+        reserved-memory@80000000 {
-+            compatible = "mediatek,secure_cma_chunkmem";
-+            reusable;
-+            reg = <0x80000000 0x18000000>;
-+        };
-+    };
++	if (sec_heap->cma)
++		mtk_sec_mem_cma_free(sec_heap, sec_buf->size);
+ }
+ 
+ static int mtk_sec_heap_attach(struct dma_buf *dmabuf, struct dma_buf_attachment *attachment)
+@@ -317,8 +390,41 @@ static struct mtk_secure_heap mtk_sec_heap[] = {
+ 		.name		= "mtk_svp",
+ 		.mem_type	= KREE_MEM_SEC_CM_TZ,
+ 	},
++	{
++		.name		= "mtk_svp_cma",
++		.mem_type	= KREE_MEM_SEC_CM_CMA,
++	},
+ };
+ 
++static int __init mtk_secure_cma_init(struct reserved_mem *rmem)
++{
++	struct mtk_secure_heap *sec_heap = NULL;
++	int ret, i;
++
++	for (i = 0; i < ARRAY_SIZE(mtk_sec_heap); i++) {
++		if (mtk_sec_heap[i].mem_type != KREE_MEM_SEC_CM_CMA)
++			continue;
++		sec_heap = &mtk_sec_heap[i];
++		break;
++	}
++	if (!sec_heap)
++		return -ENOENT;
++
++	ret = cma_init_reserved_mem(rmem->base, rmem->size, 0, sec_heap->name,
++				    &sec_heap->cma);
++	if (ret) {
++		pr_err("%s: %s set up CMA fail\n", __func__, rmem->name);
++		return ret;
++	}
++	sec_heap->cma_paddr = rmem->base;
++	sec_heap->cma_size = rmem->size;
++
++	return 0;
++}
++
++RESERVEDMEM_OF_DECLARE(mtk_secure_cma, "mediatek,secure_cma_chunkmem",
++		       mtk_secure_cma_init);
++
+ static int mtk_sec_heap_init(void)
+ {
+ 	struct mtk_secure_heap *sec_heap = mtk_sec_heap;
+@@ -331,6 +437,15 @@ static int mtk_sec_heap_init(void)
+ 		exp_info.ops = &mtk_sec_heap_ops;
+ 		exp_info.priv = (void *)sec_heap;
+ 
++		if (sec_heap->mem_type == KREE_MEM_SEC_CM_CMA) {
++			if (!sec_heap->cma) {
++				pr_err("CMA is not ready for %s.\n", sec_heap->name);
++				continue;
++			} else {
++				mutex_init(&sec_heap->lock);
++			}
++		}
++
+ 		heap = dma_heap_add(&exp_info);
+ 		if (IS_ERR(heap))
+ 			return PTR_ERR(heap);
 -- 
 2.25.1
 
