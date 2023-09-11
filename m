@@ -2,44 +2,44 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CBBF79A6F6
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 11:49:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D1FC79A726
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 12:14:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1FD1E3F23A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 09:49:04 +0000 (UTC)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com (mail-mw2nam04on2060.outbound.protection.outlook.com [40.107.101.60])
-	by lists.linaro.org (Postfix) with ESMTPS id 1D7313F1D7
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 11 Sep 2023 09:48:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 37F973F1D7
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 10:14:03 +0000 (UTC)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (mail-co1nam11on2085.outbound.protection.outlook.com [40.107.220.85])
+	by lists.linaro.org (Postfix) with ESMTPS id AD4223F1D7
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 11 Sep 2023 10:13:58 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b="Nt0pOE5/";
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.101.60 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dkim=pass header.d=amd.com header.s=selector1 header.b="F/IRdCO4";
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.220.85 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
 	dmarc=pass (policy=quarantine) header.from=amd.com;
 	arc=pass ("microsoft.com:s=arcselector9901:i=1")
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LtKIUNfdgFKIW3NdtH5FsdvbYUjBHABg36MRT0eId2PUVnGuX9n97c4GyzL0idmDazwVMbpftELRuXOvi+NoBpHjajYvZ9f7170YboHZAJXJw+SGlWdkWXB8tTXR/avzM3veUfIKlmb4DD6PH5kCg2T91BDmHrlEMvCVfXcQx1ouSXmFa0pwjspU2cP6UkyCTXZtD0qf7PcykQHo7ApEVtzVxirgYKMPMGW9Lbfo/NFq96NSKwn8S6+vgasPm8OJ7Ny9Bd3D7/HLMqgUxHgqG82kkvj0Ap38GH+90FCqWEPvlkGlb/YaAP3tHXx/ffNTiybaPXgADhrV1flaAYBQqA==
+ b=MCKX13hn6u39iZBft0F+NxDIg/zFIyh5loETF8Du6kZb9SPR5RrcMb/UOOjCbS5ITJhIC4n7AdaDfWl5xAUZgHRLGImfODdvhu07nqPU5HlgHmcRj35w59j/z9NiPGCU51MmNkCFnZFWnPToyKm+nyFNdJZAqY5jgJwHOIG8zKRLfZj74cVjBkU1FHJiPM0XawkKU0bKzjlj5+NNUWwb2vqYidpSa3u2SBEYU/ydq3C52ViasUQMISIgHqbXVOXPxmAJcWpn4JYettpipQJMO/fiER4GpBjB8YLmQt3oCwn2ak9aNmXaazYjgMjkkGqIeV1gxm9IjMC+BnrORF1mFA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=t2uEhVECCncl7hA37mt7/jWTe1zjpAOxYbT+TCoQozU=;
- b=TpOUCWI4aNNlky/ry3KwonxlOVv/y8tkHOa7MeMH3oeC0oSqsntfpqiyv2fpLXoKvNct0mop7ugmi9A/SPv18G8tf+PLyqFTG9BfBKjtjMy8HV9I3mgZOZH2xajwwyWBXWXuCtkH8NHKRQQCri8VGCYWtiix7qQ3eRE4wM0Ceri4LauDOjDiQK+kawry7LpchqiUQIea2lUJmnbfU6F3+UZvRT4QZuCsWmOELEfNnoC3E5zKxmnH5WnVsKlLtc1KyLnIDdedWKLst9FQwYV24QFDMBqIoRatbyVtb9Vd2pYrWa5gRVYVgfbVkb8e2w+8G0Hrb918D7tK1c8I6T9kxw==
+ bh=82WS5ze9mfKQ3VMJE6VR/FyRpYWCAMKAza5KvnDrfho=;
+ b=lu0r56Z60oXZq8+ndWg1h708aO8xLaQJNp969Gn2abCiaqeK/SwBXu9GKk9eagvcAgnU0mRqg9/0y/+2IYf0q51A95zKuRPwwLtj0pJLfYPEaAlSbaOBM7mUnjG31Y6AECdWrjEgkE4I4C29blCT5Z8w7m5vg1zsaQEXNfA5hZQGFcGN/kT0Ulcv4ruk4+IiclpZ4uGPKU6hVwqrt0OEclp1ebhCzxDn7Lo7I4AQPR76bYZgCFO28DcLhqhrwVgDgnfk8j0anNKZ6yXfQA5GyCzfnF2a+epigHfsf/5ZVpvHBaz1rceJPjTEm4gpuiUOqb9tmw7linwHL4mFysTFOA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=t2uEhVECCncl7hA37mt7/jWTe1zjpAOxYbT+TCoQozU=;
- b=Nt0pOE5/HlFwD+rUG5Pl2cmEn9aAG3oy/AO1u+RAe/tCBwvB57zA2y/z3YGETg3MTT0PPNdRQplhWuhbnacnztl494UvS9Dy9KwuzciXMBiucJ2LL64OPYyY8saHmO8pVPSashinANaBZpqBIykGNATENW0Wzfatry/D2lCXfB0=
+ bh=82WS5ze9mfKQ3VMJE6VR/FyRpYWCAMKAza5KvnDrfho=;
+ b=F/IRdCO4e2ijMQifGTNxtlDgm/CgjdZg49ImOQLPdocNnax+osr0ru/5ZbbXquzXBfXrxae8oEKn3gQWmghsttdHevYL1j4Z5gK7jQUVgypXmREaCSWIB1vtE8zatCD9n+/SZSyjcIC6ACbo+L4UvPSkIObKHbYDIGATVJ+6Zo8=
 Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by IA1PR12MB6113.namprd12.prod.outlook.com (2603:10b6:208:3eb::8) with
+ by DM6PR12MB4562.namprd12.prod.outlook.com (2603:10b6:5:2aa::15) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.34; Mon, 11 Sep
- 2023 09:48:55 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.34; Mon, 11 Sep
+ 2023 10:13:55 +0000
 Received: from BN8PR12MB3587.namprd12.prod.outlook.com
  ([fe80::55cb:215b:389e:eced]) by BN8PR12MB3587.namprd12.prod.outlook.com
  ([fe80::55cb:215b:389e:eced%5]) with mapi id 15.20.6768.029; Mon, 11 Sep 2023
- 09:48:55 +0000
-Message-ID: <71c435a6-ba43-5d26-e658-f55bddbb8b98@amd.com>
-Date: Mon, 11 Sep 2023 11:48:46 +0200
+ 10:13:55 +0000
+Message-ID: <803846bc-fd1d-d2ec-2855-456af22c82f8@amd.com>
+Date: Mon, 11 Sep 2023 12:13:47 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.0
 Content-Language: en-US
@@ -47,90 +47,91 @@ To: Yong Wu <yong.wu@mediatek.com>, Rob Herring <robh+dt@kernel.org>,
  Sumit Semwal <sumit.semwal@linaro.org>,
  Matthias Brugger <matthias.bgg@gmail.com>
 References: <20230911023038.30649-1-yong.wu@mediatek.com>
- <20230911023038.30649-3-yong.wu@mediatek.com>
+ <20230911023038.30649-4-yong.wu@mediatek.com>
 From: =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
-In-Reply-To: <20230911023038.30649-3-yong.wu@mediatek.com>
-X-ClientProxiedBy: VI1PR10CA0110.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:803:28::39) To BN8PR12MB3587.namprd12.prod.outlook.com
+In-Reply-To: <20230911023038.30649-4-yong.wu@mediatek.com>
+X-ClientProxiedBy: FR3P281CA0131.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:94::14) To BN8PR12MB3587.namprd12.prod.outlook.com
  (2603:10b6:408:43::13)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|IA1PR12MB6113:EE_
-X-MS-Office365-Filtering-Correlation-Id: 05e2b64d-ebfa-4b2a-40e5-08dbb2ac5046
+X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|DM6PR12MB4562:EE_
+X-MS-Office365-Filtering-Correlation-Id: 117cffd2-7960-42a8-807d-08dbb2afcdfc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	L8995o9HvicxA11Js2PxXk8ptf48jmMYy5R2WwEW8EsRoUgwZJv+9MTl+svwfp+i5tWFQkQ4gZIuw9upy2SaB9c02fXQ0Co3Mr9LW4mPTMLaDd5D1ae+zZHhhxsvFL+WaXVPl51Ws6ZkxIHuA0WlOewPLsjEO+WUoNI3d+T6DRXMnmRLRJSMcmVTUhVG7h6o+CwKXnAlpZCkwbYttwuSmq1wjQ0QckAiuil31qU6LFqu+gJ8MM6tEnzIeG91TrDoRU5OpgcM2JrD1VuCy7pAdx1jQUpNma+Xq6aZPVIWx3BZaX9hMX2iX9XFqUPXgh+5BCivwdJiRv/LbltXPEANyW5Y0Z55N0FEOAnE7FtNxp1x1fdXf2r00d2NlvibyWKtcnoBYLXi1L28X71EMjrzCNyNtJExP3OySTV5JWm6HqCxllyX5twaTR8AdXl7azgLwqDBnc64ZuTdvLzz8jTe+ySxnSa+iM/zf4By2aE2UC6VgwDLzO37WAwX+1oopcKQawX+cyfxDyAYoW1Guz/kJu6W1nYs1GAQ82GLjW2W8yt7JCYWQzkML0BPcgHdLMZOFi1z5grio/ulqz4idcN14TFdE6doRq0ETFCtz9hTambW8YcCeBNe/gItOFhnnw/i1NutUQYbZwXkVJlD/OJu+A==
+	4gmDjXmT8Pdf+3Ef1KOA7ckvmucguKgJgtMKtdF2NluS9LAXKIeHIjzCJsLiCrvnElcrrVGB48SYrol0Nq6D1X1LtfgRMsixpEE8+cmeQ+MoUi2zk837ITDIkDfMa+lOHWvQM79JXYbQzvdTKjI9qfzZFGCJZD4EkVK7HkXZmjagIBk8xx7yGyGOPj4rYDXcwjo4AeR11wfIaqwzaBaxdHGv3j9c0krTDrylf7JOy4k+eYlYdErO4EdlNpcw/lY2gp4payccWBK1K0mFgVBKtV04e4nCqr62/nTA7Uektp0ytZgdKs91RbMWHaJnAkHmIePTtVnfNm7OCF4pDJQ7duDSmRcoEBPLe80UvWe8fH2yxD6+baRat8ldPRCCDxbzHoe5yBlQTAUhQhO+uLRG88uR17vZkxeApkvNiZ2XMnDXWt8TulJ4YcgEtBqx6S4Muvl3cPLioICQUeKJYsK1KictBm0T1CTP0bQ2KsohYYUmDS9mb66oTUwxxmd5sjvBHmJiou4gwm+360pFhH4Slf2ma9L7NgUW4POMh9zND9QepuaUsjxw/sdbodetEC8pJJHdx61iYdLvZTKKv0YeeL/68hst/Cdoq+3XJYrI5WXlU5cZSNUZK7Yteat1ZN7Hj8HT7CWIcDR9tniCVGPKHw==
 X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(396003)(39860400002)(376002)(136003)(366004)(346002)(1800799009)(451199024)(186009)(41300700001)(316002)(7416002)(26005)(31686004)(2906002)(8676002)(66946007)(8936002)(66476007)(4326008)(66556008)(54906003)(110136005)(5660300002)(478600001)(6666004)(6486002)(6506007)(6512007)(36756003)(2616005)(83380400001)(38100700002)(31696002)(86362001)(43740500002)(45980500001);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(396003)(376002)(136003)(39860400002)(366004)(346002)(1800799009)(186009)(451199024)(110136005)(6506007)(6486002)(6666004)(966005)(6512007)(478600001)(83380400001)(2616005)(26005)(7416002)(54906003)(66476007)(66556008)(66946007)(4326008)(316002)(2906002)(41300700001)(5660300002)(8676002)(8936002)(86362001)(36756003)(31696002)(38100700002)(31686004)(43740500002)(45980500001);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?SkIxVWdCYTgyUUF4NDJ0dHMwbjdlaHdPWUtzYjRxYXo2UCtEUWNnRld1MzBm?=
- =?utf-8?B?eTAweG9KbDBFN2RKcDI3UmR1YzlraGg3emRiU3NYekVXOFZTTnZHQUJlMVBX?=
- =?utf-8?B?Ty9oWGpraDRyNXZBbFEycW5aVmhkaW5JdWEraHRFd1pnQ0RmWi8vWVQ0Q0Rn?=
- =?utf-8?B?b0RtMksyK2pjMitzN0d1V25FdmVVeHN4VFg1UGNSWVI2ZzJwM1h1YTJLWHk2?=
- =?utf-8?B?SEtMcWN3aHJydGk3KzVhMEhnMSt4Y1lkL2pxMWtZcXdHWXlzeENyeFNuQmdk?=
- =?utf-8?B?akFIclRtaWNyNm93aE1hREc3TUtZLzBJQWttMGNsVVE2MmZGNGY3NDFZSmRV?=
- =?utf-8?B?clRBSitBUEwreVkrUDdES3Q5YjdCU0VuYU9VWXUzOGVYeWlySlBDTk96ZTJk?=
- =?utf-8?B?NnhySGpSMzdpdzFEcDhqVVU0TDBTM09nNFkwVHNYUUdFUXowcW15WEw1TEdL?=
- =?utf-8?B?czlVdGhWN0hqYytxaUllcUJIbUhhQlY5M2FtUnU4ZXNIREE3YVFiNVZhQk5n?=
- =?utf-8?B?ZXd4TXpweE0wSFc4Q0EzeEFiUlFna3ozVk11RDlSRGpXaUJacDU0ZDlnVzY4?=
- =?utf-8?B?clNlUGh4M2dISmRtTU1ZbmpWcHJyNlRYcTFNeitBSXhXUnBnZUZKeGxFTHA2?=
- =?utf-8?B?VURMSGlTQ1A0aTBnYXNuN0xabWpSY0txNFpxLzhUNnZFSEM0ZDhVWjF1NE42?=
- =?utf-8?B?WDdkWWgrUGw5MkIwaFZiQU9COE9pUGtUd2Zpd2NjWDQwRlBYc2xwY3Mvakx3?=
- =?utf-8?B?bnYxOUQvdURLeHd5dHZsd0dHTGhTWnBpOVY0ZkJ5L0RaY0ZyTXBUbjVOUHVN?=
- =?utf-8?B?TkF3MXJaZ1EvTVVtZGRHYmRqUlNCbndicE50eEhPdS8rb0xaNVNWd2tiUHc1?=
- =?utf-8?B?ZjE0VFJaOVgxY0lEUkdnZk80WXNCVkc5QUIybElCNTVKb0JxWnU5Wmxjem8x?=
- =?utf-8?B?Y3F1OGpuWG9JYWUveWJwaC84Y3NGd0tkRHBpWlBzY0diZkRjM3pydm5vaGlJ?=
- =?utf-8?B?QnVLSlh3amdPNm9hcGt6eVJQdXg4aFhNNFZvbFpGSUdEVGRxb1pweVZPUHZw?=
- =?utf-8?B?RUs2Rk4wRXNzYkZ4VUpjR0ZYa24ySS9hdXN1TTFQcWo0QlEwV3pDR1JiSEtS?=
- =?utf-8?B?TitVK1FoRHZVYmpTbTNQTjZucm5RRHJ1ZmdEalM5ZDRpWi9QNUQ1cjZ3T3hi?=
- =?utf-8?B?Nk1GQ1BsOEphUHVBOXhXelRkeWNYeldvK09RanpvOERycXFJNDUrUFZEMXlW?=
- =?utf-8?B?VHdMRGZmL1A5WjA5OXRtNEIzTTYvc3c2cS82bEVTekU0K2RISlQrWUx2b0da?=
- =?utf-8?B?RUtNSzRZdG05NklKL3dPdXVDTGptZ1FNdCtQcVlJbmZYM2lWYjhYWldUdFFF?=
- =?utf-8?B?WlFJYTJOK2Ezd1lYK2h6OC9OVElJdTdGaUdBN2l3UTl2dzZTWXVoVFhiaWxl?=
- =?utf-8?B?a1NnMmh2bHJUZ2l2MlBNNlEwcFl6aldIOWRwV0pqQVdEU1pLTDhwQmpMQk9m?=
- =?utf-8?B?aXhSN3FWTDU5eFZTZTlsVjQvMjh2cnZSRnBabzhRdGhPd2t2ZXhzYWVWaTNI?=
- =?utf-8?B?SWZCazBoLzJCcFlvVmN2Z0xJTTJxTDVFVmZ1Ym1mcWNlTkMwQjRnRnIxNXhU?=
- =?utf-8?B?WGJra0RDVkpodWFYMTdRcUw1alNycVJ4R2F2YTVJYkxNQ0MyZTJSeE92V21G?=
- =?utf-8?B?NlI3VXBYZDhyUGlPVzFVbStyay9mbHo3eGNxdVE1Vld3dUhNWXNHODlwWjJm?=
- =?utf-8?B?dXZNejA5NTJoaGZxSDFoUDU2VVF6NTl6QkxuUVFVV1FwRkdrbWJTanE1NFRj?=
- =?utf-8?B?Z3RzbUE2MmF5elZ3SkttSXdwak9TeG0vdWZUL2dHNGIvSFA1RGhRQ2s2bStD?=
- =?utf-8?B?RnlyWnFhV2dNT0NBTXpmaHkwZG9jNHFVS3RjV3MzTk1UblZrMzNJVjlPMGVQ?=
- =?utf-8?B?MGhuTkRIUlNYdDBxU09QWTZWQ3NVSHRSZnloMjJGRVhzY2w1YnlVUlh4Z0cr?=
- =?utf-8?B?cW9KWEV1VjkxOEFqeGRlVzUyT2VWL0lsWlZnZHkrUHFlclQySGJRZmFiY3Q0?=
- =?utf-8?B?NHQxTWZNQkJ5RHEyVXNPeVZQUkIwOXk5d0I3NVl1azBsTFdvcDVPem50Mksx?=
- =?utf-8?Q?c2ikDHn4/58j9kHE/No3URfaX?=
+	=?utf-8?B?UkZ2UXFhSEMvcUQxWVJKdmtEeE52MllVS3B0dTZ5eFBydnpENjU5NmRYRmRr?=
+ =?utf-8?B?M0JaM1NXVFFYeVpQcnJmWFc0akowd1hJL1Z3N3M0OEIwWGIxaSs1amtpZUdy?=
+ =?utf-8?B?MGo3U2ZOSGlRdHpDWFVEa3ZFelpxYzVTQk9xR3ZvMlRFQThpSitmUFhvSWZU?=
+ =?utf-8?B?WlFoUFVkQ3UxWGRVVWU1S1ZTWk5xL0hDcXJEVWF1Vld6VXpmTTZlS0dZTjdO?=
+ =?utf-8?B?Tk15ZWY3TEdWbWJleG54cUhWS1pkTEFreGRoTG9CY3RVRVlFT1JybCs3VkpK?=
+ =?utf-8?B?elNyUTF6Z1FJUHo3MWRhT3ppVVlLUGF0cHFlNmt1U2JzMDNtSmJ6ekVIZEc2?=
+ =?utf-8?B?TnJCMnNWQU5jRVFwcVBUZmtGTmtUak1idjNjOGgyVmljcGJHa3dMb3B0Rity?=
+ =?utf-8?B?S3ZONlEzSmFhUWZmRFNCYjdNalhqNXA1R2ZiOUNIbTdnL3VGV1NDQm9lYVUz?=
+ =?utf-8?B?ZTFudnpEeGZTZlpjRUxCMmVqUTBUa284SFBzRm0vN3hNQm01WEJlNjhQRmVr?=
+ =?utf-8?B?UHFrTTJaL0o5OEdVU1ZIVUZnWnRaNy8wNEtGck5xeUpLOXE4M3BMSXpBdEJ2?=
+ =?utf-8?B?TXNQekt5RjdJV3BrN3ZUMG9YT3QxbEx6ejU2Y0lpeUNzczI3U081OWJCZW5v?=
+ =?utf-8?B?T1NXLytRZWNLb1Qrc2F0ZGR1c0JZZUtCYlZYbzNjbzJKWnc5dGR3Y3c1RExs?=
+ =?utf-8?B?WklrSXF1ZGpHN3pOZmVRNTRoMkJMTHYvOXlSeTdNNFU0L2wrTDJaNFBXK3ZF?=
+ =?utf-8?B?eUxoRitLVmplSWFIdllwYlQxaXNJUGNYb1ZxaWdYS21lT0JUUW9wdmp3NDV2?=
+ =?utf-8?B?U0ZUREZ4dUFVWmc5Tk9BY3dPRlczN2Y5N1JFZ2gvaC9GS0lQR2wxbnJkQmJk?=
+ =?utf-8?B?Ym9rQmliVmFmeVZ6d2luVHNMVWxpY1FDSExPb1JwR3FicWpqd0d0L2l2bDVw?=
+ =?utf-8?B?OFpra09QS1pxSTY4SW9MSUx6MHdxY2RzNWw4ZU9PenlUY0x2d0U5NTNsUFA2?=
+ =?utf-8?B?SlZiaFR3dzRab1V2aG1samI0K0x4ZXVlZlJ4SXVEQVRqcldUb2I5RDBpcEtD?=
+ =?utf-8?B?QnhEcTBDS3dFME5lRlRubEhuTWtDZlVrOU5rRExLb2E0NGx2Y2ZXd01jTVlh?=
+ =?utf-8?B?anJBUzg2NE5LLzIrRlVkVnJ2NlVrbTFXQ2poblJJVk51UC9KSXZJeVVoU0R2?=
+ =?utf-8?B?NER3ck1CWEVCNXlnTzdrZm1vbVdyWndveVBWN1hHaW40WWdoeVQzUlFKR0I1?=
+ =?utf-8?B?WkY2RU9rVzliaE5IT0hCOW1rdTlFNytOaUtUc0NiYjlLZ2JLS0x4azYwTnV6?=
+ =?utf-8?B?TEVnNzZjNTRHK3ErWVZWVGpTbXhidGppM3N4MFdrUllzRGJDaFNiTklnejA3?=
+ =?utf-8?B?ZFp5NUdvdkJmbWZKait5SHcxRDB3RVlvb1VDV1p1WWpaMVlPM3JEa2NNaGVQ?=
+ =?utf-8?B?azZIQitpUm9JY0Z1TEVuYndPek1JQ0pTRlV0dUk3R2tNalBGWEV3THJvV0pM?=
+ =?utf-8?B?Z09kUU9tMHYzczJkZGJLQnB3bmthZmx1V3AwbCswYWRXVXkyZ0gxQ3RDWGIv?=
+ =?utf-8?B?ekd3SEE4RFFkbTR4dk0wRXhhcGhudnVURWVFVWVNYlNLWitnZisvamhBREVY?=
+ =?utf-8?B?d25kYmwvYUxiMDN1V0hhUFpiaUY3WXlMVzlVUFMremZLdFVMT0pvemJEbWo1?=
+ =?utf-8?B?MHNEY2d2M0pHZEdiQ0VRZVE1cUxGeitVa0ZjVFVBRFpWUHRuYjNuNm9UTlhx?=
+ =?utf-8?B?SFM0MElkU2NrSUxFMmxKQTh0R1dyUWlDN05lZG8yRHZkZlhrWmJGR1p4L3N1?=
+ =?utf-8?B?ZldsUHpWVVFOVmRzUEFLWTlkZENIQlBTT0liTk1rQnVrMjFaNU1kcWdzeDNO?=
+ =?utf-8?B?VVRzWDdyOUxWZHlwUHdRT2NKOWh6bjlJLzYyVUFSVkFHWS8zazhRTldvU2RT?=
+ =?utf-8?B?ZXUrZTFZYlRTZ29UbDJ4ZzBRcE43MzZGd29HYTJoRzJzN2kwZ0txMFViRTNs?=
+ =?utf-8?B?Y2VtUUtYeXl1MGU3WnJ3UWxPYUUyQTN3eGNvbnY3ZVhkcUkrQUhHVnEvaWZP?=
+ =?utf-8?B?UmxFSldseTRvWkg2MElaSFdzMmJJMy9PV1ZsOXNOa0xTYm9kaTZreHJLck9x?=
+ =?utf-8?Q?NDv19ZMRZnXemwh9AUk7MGzU3?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 05e2b64d-ebfa-4b2a-40e5-08dbb2ac5046
+X-MS-Exchange-CrossTenant-Network-Message-Id: 117cffd2-7960-42a8-807d-08dbb2afcdfc
 X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2023 09:48:55.5003
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2023 10:13:55.0746
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: e5qkUIcT3si3qu33prnjY9GxcDaj2jUbB3UdxWxFM1cjpCHIQMA8VVtv+YufCIUJ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6113
-X-Rspamd-Queue-Id: 1D7313F1D7
+X-MS-Exchange-CrossTenant-UserPrincipalName: i7OZCHNyCNYebOTp/Jo8bbhHpBOlg1jsWELeYHwf3AbariSw1wIkrL+/Z9pxvYs7
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4562
+X-Rspamd-Queue-Id: AD4223F1D7
 X-Spamd-Bar: ---
 X-Spamd-Result: default: False [-3.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
 	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.220.85:from];
 	TAGGED_RCPT(0.00)[dt];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[mediatek.com:email,mail-co1nam11on2085.outbound.protection.outlook.com:rdns];
+	MIME_TRACE(0.00)[0:+];
 	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.101.60:from];
 	RCPT_COUNT_TWELVE(0.00)[20];
 	FREEMAIL_TO(0.00)[mediatek.com,kernel.org,linaro.org,gmail.com];
 	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
+	NEURAL_HAM(-0.00)[-1.000];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
@@ -140,16 +141,16 @@ X-Spamd-Result: default: False [-3.50 / 15.00];
 	DKIM_TRACE(0.00)[amd.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 2U2I4FZNB3UP36UFKY4TUPRO4URJ3UMN
-X-Message-ID-Hash: 2U2I4FZNB3UP36UFKY4TUPRO4URJ3UMN
+Message-ID-Hash: 2ZOH2QZNZD44KNHUWJ55UU4DBRVRVNOK
+X-Message-ID-Hash: 2ZOH2QZNZD44KNHUWJ55UU4DBRVRVNOK
 X-MailFrom: Christian.Koenig@amd.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, tjmercier@google.com, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, jianjiao.zeng@mediatek.com, kuohong.wang@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 2/9] dma-heap: Add proper kref handling on dma-buf heaps
+Subject: [Linaro-mm-sig] Re: [PATCH 3/9] dma-heap: Provide accessors so that in-kernel drivers can allocate dmabufs from specific heaps
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2U2I4FZNB3UP36UFKY4TUPRO4URJ3UMN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2ZOH2QZNZD44KNHUWJ55UU4DBRVRVNOK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -162,162 +163,192 @@ Content-Transfer-Encoding: 7bit
 Am 11.09.23 um 04:30 schrieb Yong Wu:
 > From: John Stultz <jstultz@google.com>
 >
-> Add proper refcounting on the dma_heap structure.
-> While existing heaps are built-in, we may eventually
-> have heaps loaded from modules, and we'll need to be
-> able to properly handle the references to the heaps
+> This allows drivers who don't want to create their own
+> DMA-BUF exporter to be able to allocate DMA-BUFs directly
+> from existing DMA-BUF Heaps.
 >
-> Also moves minor tracking into the heap structure so
-> we can properly free things.
+> There is some concern that the premise of DMA-BUF heaps is
+> that userland knows better about what type of heap memory
+> is needed for a pipeline, so it would likely be best for
+> drivers to import and fill DMA-BUFs allocated by userland
+> instead of allocating one themselves, but this is still
+> up for debate.
 
-This is completely unnecessary, see below.
+The main design goal of having DMA-heaps in the first place is to avoid 
+per driver allocation and this is not necessary because userland know 
+better what type of memory it wants.
+
+The background is rather that we generally want to decouple allocation 
+from having a device driver connection so that we have better chance 
+that multiple devices can work with the same memory.
+
+I once create a prototype which gives userspace a hint which DMA-heap to 
+user for which device: 
+https://patchwork.kernel.org/project/linux-media/patch/20230123123756.401692-2-christian.koenig@amd.com/
+
+Problem is that I don't really have time to look into it and maintain 
+that stuff, but I think from the high level design that is rather the 
+general direction we should push at.
+
+Regards,
+Christian.
 
 >
 > Signed-off-by: John Stultz <jstultz@google.com>
 > Signed-off-by: T.J. Mercier <tjmercier@google.com>
 > Signed-off-by: Yong Wu <yong.wu@mediatek.com>
-> [Yong: Just add comment for "minor" and "refcount"]
+> [Yong: Fix the checkpatch alignment warning]
 > ---
->   drivers/dma-buf/dma-heap.c | 38 ++++++++++++++++++++++++++++++++++----
->   include/linux/dma-heap.h   |  6 ++++++
->   2 files changed, 40 insertions(+), 4 deletions(-)
+>   drivers/dma-buf/dma-heap.c | 60 ++++++++++++++++++++++++++++----------
+>   include/linux/dma-heap.h   | 25 ++++++++++++++++
+>   2 files changed, 69 insertions(+), 16 deletions(-)
 >
 > diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
-> index 51030f6c9d6e..dcc0e38c61fa 100644
+> index dcc0e38c61fa..908bb30dc864 100644
 > --- a/drivers/dma-buf/dma-heap.c
 > +++ b/drivers/dma-buf/dma-heap.c
-> @@ -11,6 +11,7 @@
->   #include <linux/dma-buf.h>
->   #include <linux/dma-heap.h>
->   #include <linux/err.h>
-> +#include <linux/kref.h>
->   #include <linux/list.h>
->   #include <linux/nospec.h>
->   #include <linux/syscalls.h>
-> @@ -30,6 +31,8 @@
->    * @heap_devt:		heap device node
->    * @list:		list head connecting to list of heaps
->    * @heap_cdev:		heap char device
-> + * @minor:		heap device node minor number
-> + * @refcount:		reference counter for this heap device
->    *
->    * Represents a heap of memory from which buffers can be made.
->    */
-> @@ -40,6 +43,8 @@ struct dma_heap {
->   	dev_t heap_devt;
->   	struct list_head list;
->   	struct cdev heap_cdev;
-> +	int minor;
-> +	struct kref refcount;
->   };
+> @@ -53,12 +53,15 @@ static dev_t dma_heap_devt;
+>   static struct class *dma_heap_class;
+>   static DEFINE_XARRAY_ALLOC(dma_heap_minors);
 >   
->   static LIST_HEAD(heap_list);
-> @@ -205,7 +210,6 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+> -static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
+> -				 unsigned int fd_flags,
+> -				 unsigned int heap_flags)
+> +struct dma_buf *dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
+> +				      unsigned int fd_flags,
+> +				      unsigned int heap_flags)
 >   {
->   	struct dma_heap *heap, *h, *err_ret;
->   	struct device *dev_ret;
-> -	unsigned int minor;
->   	int ret;
+> -	struct dma_buf *dmabuf;
+> -	int fd;
+> +	if (fd_flags & ~DMA_HEAP_VALID_FD_FLAGS)
+> +		return ERR_PTR(-EINVAL);
+> +
+> +	if (heap_flags & ~DMA_HEAP_VALID_HEAP_FLAGS)
+> +		return ERR_PTR(-EINVAL);
 >   
->   	if (!exp_info->name || !strcmp(exp_info->name, "")) {
-> @@ -222,12 +226,13 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
->   	if (!heap)
->   		return ERR_PTR(-ENOMEM);
+>   	/*
+>   	 * Allocations from all heaps have to begin
+> @@ -66,9 +69,20 @@ static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
+>   	 */
+>   	len = PAGE_ALIGN(len);
+>   	if (!len)
+> -		return -EINVAL;
+> +		return ERR_PTR(-EINVAL);
 >   
-> +	kref_init(&heap->refcount);
->   	heap->name = exp_info->name;
->   	heap->ops = exp_info->ops;
->   	heap->priv = exp_info->priv;
+> -	dmabuf = heap->ops->allocate(heap, len, fd_flags, heap_flags);
+> +	return heap->ops->allocate(heap, len, fd_flags, heap_flags);
+> +}
+> +EXPORT_SYMBOL_GPL(dma_heap_buffer_alloc);
+> +
+> +static int dma_heap_bufferfd_alloc(struct dma_heap *heap, size_t len,
+> +				   unsigned int fd_flags,
+> +				   unsigned int heap_flags)
+> +{
+> +	struct dma_buf *dmabuf;
+> +	int fd;
+> +
+> +	dmabuf = dma_heap_buffer_alloc(heap, len, fd_flags, heap_flags);
+>   	if (IS_ERR(dmabuf))
+>   		return PTR_ERR(dmabuf);
 >   
->   	/* Find unused minor number */
-> -	ret = xa_alloc(&dma_heap_minors, &minor, heap,
-> +	ret = xa_alloc(&dma_heap_minors, &heap->minor, heap,
->   		       XA_LIMIT(0, NUM_HEAP_MINORS - 1), GFP_KERNEL);
->   	if (ret < 0) {
->   		pr_err("dma_heap: Unable to get minor number for heap\n");
-> @@ -236,7 +241,7 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
->   	}
+> @@ -106,15 +120,9 @@ static long dma_heap_ioctl_allocate(struct file *file, void *data)
+>   	if (heap_allocation->fd)
+>   		return -EINVAL;
 >   
->   	/* Create device */
-> -	heap->heap_devt = MKDEV(MAJOR(dma_heap_devt), minor);
-> +	heap->heap_devt = MKDEV(MAJOR(dma_heap_devt), heap->minor);
+> -	if (heap_allocation->fd_flags & ~DMA_HEAP_VALID_FD_FLAGS)
+> -		return -EINVAL;
+> -
+> -	if (heap_allocation->heap_flags & ~DMA_HEAP_VALID_HEAP_FLAGS)
+> -		return -EINVAL;
+> -
+> -	fd = dma_heap_buffer_alloc(heap, heap_allocation->len,
+> -				   heap_allocation->fd_flags,
+> -				   heap_allocation->heap_flags);
+> +	fd = dma_heap_bufferfd_alloc(heap, heap_allocation->len,
+> +				     heap_allocation->fd_flags,
+> +				     heap_allocation->heap_flags);
+>   	if (fd < 0)
+>   		return fd;
 >   
->   	cdev_init(&heap->heap_cdev, &dma_heap_fops);
->   	ret = cdev_add(&heap->heap_cdev, heap->heap_devt, 1);
-> @@ -280,12 +285,37 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
->   err2:
->   	cdev_del(&heap->heap_cdev);
->   err1:
-> -	xa_erase(&dma_heap_minors, minor);
-> +	xa_erase(&dma_heap_minors, heap->minor);
->   err0:
+> @@ -205,6 +213,7 @@ const char *dma_heap_get_name(struct dma_heap *heap)
+>   {
+>   	return heap->name;
+>   }
+> +EXPORT_SYMBOL_GPL(dma_heap_get_name);
+>   
+>   struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
+>   {
+> @@ -290,6 +299,24 @@ struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info)
 >   	kfree(heap);
 >   	return err_ret;
 >   }
->   
-> +static void dma_heap_release(struct kref *ref)
+> +EXPORT_SYMBOL_GPL(dma_heap_add);
+> +
+> +struct dma_heap *dma_heap_find(const char *name)
 > +{
-> +	struct dma_heap *heap = container_of(ref, struct dma_heap, refcount);
+> +	struct dma_heap *h;
 > +
-> +	/* Note, we already holding the heap_list_lock here */
-> +	list_del(&heap->list);
-> +
-> +	device_destroy(dma_heap_class, heap->heap_devt);
-> +	cdev_del(&heap->heap_cdev);
-> +	xa_erase(&dma_heap_minors, heap->minor);
-
-You can just use MINOR(heap->heap_devt) here instead.
-
-> +
-> +	kfree(heap);
-> +}
-> +
-> +void dma_heap_put(struct dma_heap *h)
-> +{
-> +	/*
-> +	 * Take the heap_list_lock now to avoid racing with code
-> +	 * scanning the list and then taking a kref.
-> +	 */
-
-This is usually considered a bad idea since it makes the kref approach 
-superfluous.
-
-There are multiple possibilities how handle this, the most common one is 
-to use kref_get_unless_zero() in your list traversal code and ignore the 
-entry when that fails.
-
-Alternatively you could use kref_put_mutex() instead. This gives you the 
-same functionality as this here, but as far as I know it's normally only 
-used in a couple of special cases.
-
 > +	mutex_lock(&heap_list_lock);
-> +	kref_put(&h->refcount, dma_heap_release);
+> +	list_for_each_entry(h, &heap_list, list) {
+> +		if (!strcmp(h->name, name)) {
+> +			kref_get(&h->refcount);
+> +			mutex_unlock(&heap_list_lock);
+> +			return h;
+> +		}
+> +	}
 > +	mutex_unlock(&heap_list_lock);
+> +	return NULL;
 > +}
-> +
+> +EXPORT_SYMBOL_GPL(dma_heap_find);
+>   
+>   static void dma_heap_release(struct kref *ref)
+>   {
+> @@ -315,6 +342,7 @@ void dma_heap_put(struct dma_heap *h)
+>   	kref_put(&h->refcount, dma_heap_release);
+>   	mutex_unlock(&heap_list_lock);
+>   }
+> +EXPORT_SYMBOL_GPL(dma_heap_put);
+>   
 >   static char *dma_heap_devnode(const struct device *dev, umode_t *mode)
 >   {
->   	return kasprintf(GFP_KERNEL, "dma_heap/%s", dev_name(dev));
 > diff --git a/include/linux/dma-heap.h b/include/linux/dma-heap.h
-> index c7c29b724ad6..f3c678892c5c 100644
+> index f3c678892c5c..59e70f6c7a60 100644
 > --- a/include/linux/dma-heap.h
 > +++ b/include/linux/dma-heap.h
-> @@ -64,4 +64,10 @@ const char *dma_heap_get_name(struct dma_heap *heap);
+> @@ -64,10 +64,35 @@ const char *dma_heap_get_name(struct dma_heap *heap);
 >    */
 >   struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_info);
 >   
 > +/**
-> + * dma_heap_put - drops a reference to a dmabuf heap, potentially freeing it
-> + * @heap: the heap whose reference count to decrement
+> + * dma_heap_find - get the heap registered with the specified name
+> + * @name: Name of the DMA-Heap to find
+> + *
+> + * Returns:
+> + * The DMA-Heap with the provided name.
+> + *
+> + * NOTE: DMA-Heaps returned from this function MUST be released using
+> + * dma_heap_put() when the user is done to enable the heap to be unloaded.
 > + */
-
-Please don't add kerneldoc to the definition, add it to the 
-implementation of the function.
-
-Regards,
-Christian.
-
-> +void dma_heap_put(struct dma_heap *heap);
+> +struct dma_heap *dma_heap_find(const char *name);
+> +
+>   /**
+>    * dma_heap_put - drops a reference to a dmabuf heap, potentially freeing it
+>    * @heap: the heap whose reference count to decrement
+>    */
+>   void dma_heap_put(struct dma_heap *heap);
+>   
+> +/**
+> + * dma_heap_buffer_alloc - Allocate dma-buf from a dma_heap
+> + * @heap:	DMA-Heap to allocate from
+> + * @len:	size to allocate in bytes
+> + * @fd_flags:	flags to set on returned dma-buf fd
+> + * @heap_flags: flags to pass to the dma heap
+> + *
+> + * This is for internal dma-buf allocations only. Free returned buffers with dma_buf_put().
+> + */
+> +struct dma_buf *dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
+> +				      unsigned int fd_flags,
+> +				      unsigned int heap_flags);
 > +
 >   #endif /* _DMA_HEAPS_H */
 
