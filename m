@@ -2,148 +2,204 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 237DB79A57C
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 10:06:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AD83079A6BD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 11:29:32 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 071683F204
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 08:06:58 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.100])
-	by lists.linaro.org (Postfix) with ESMTPS id 5BCF63F09C
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 11 Sep 2023 08:06:53 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A4FAB3F342
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 11 Sep 2023 09:29:31 +0000 (UTC)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+	by lists.linaro.org (Postfix) with ESMTPS id AF40B3F09C
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 11 Sep 2023 09:29:26 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=RS3Uj6xM;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 134.134.136.100 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1694419613; x=1725955613;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=EKc2l8u/kKBul3gNAYJEk/Ck38NKo2uvJewBdyW546M=;
-  b=RS3Uj6xMs7Lu3fPoUv4ItJcYkMLwj1MNGmh17VDPbUjOhJicE01s30lQ
-   lS1BxPkLo8plMuafVS9MgavAbjYVNzMGBLBO2GpXN/xX94DxbVB/Vh/WU
-   McIEfRZHuGmrf22f4lg+Wcqc3oF+zq1kT86iWl+7dkBiCL/M/FGzUqG9g
-   +bk51+dt8oHaUBzcttmyqM9FJrpGiQSBI6DkfHv9+ZurqXAAyanKJ4zuu
-   f2OkXQv+MwL9E7P6lH+h+NubaCdi+WFhkJg6th1rZrRUQ336PfLmhSwht
-   MGEaTxyAHCBIb7IUcb1vNdeyzB1gDbTIXsJMVPBK0F0doszpbeQAeRUxW
-   A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10829"; a="444438893"
-X-IronPort-AV: E=Sophos;i="6.02,243,1688454000";
-   d="scan'208";a="444438893"
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Sep 2023 01:06:52 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10829"; a="693005175"
-X-IronPort-AV: E=Sophos;i="6.02,243,1688454000";
-   d="scan'208";a="693005175"
-Received: from lkp-server01.sh.intel.com (HELO 59b3c6e06877) ([10.239.97.150])
-  by orsmga003.jf.intel.com with ESMTP; 11 Sep 2023 01:06:47 -0700
-Received: from kbuild by 59b3c6e06877 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1qfbwS-0005yc-30;
-	Mon, 11 Sep 2023 08:06:44 +0000
-Date: Mon, 11 Sep 2023 16:05:45 +0800
-From: kernel test robot <lkp@intel.com>
-To: Yong Wu <yong.wu@mediatek.com>, Rob Herring <robh+dt@kernel.org>,
-	Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com,
-	Matthias Brugger <matthias.bgg@gmail.com>
-Message-ID: <202309111534.u4wfJ4vk-lkp@intel.com>
-References: <20230911023038.30649-5-yong.wu@mediatek.com>
+	dkim=pass header.d=collabora.com header.s=mail header.b=hD8i4A7y;
+	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.172 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com;
+	dmarc=pass (policy=quarantine) header.from=collabora.com
+Received: from [192.168.1.100] (2-237-20-237.ip236.fastwebnet.it [2.237.20.237])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits))
+	(No client certificate requested)
+	(Authenticated sender: kholk11)
+	by madras.collabora.co.uk (Postfix) with ESMTPSA id C395966072F0;
+	Mon, 11 Sep 2023 10:29:24 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1694424565;
+	bh=PEkfGXDLYefkrpep6+K+sw4moQH4wOvu/m6wtn7s7qE=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=hD8i4A7ygMbHzKh2hK4C8OTl2GKieKyk8xGbRPMbHh+6Zkrg0lQgfgxlDZy0HRUJd
+	 hEdTk0obzK2Soq+CEJ+T+JLcwnOMUikk0wnKdLVr2vxOLzr9He7w7SYn4K1l3xO6fr
+	 /9XwtvQteamqKIqH0Ua418zxn8O/3reRef2Tn5cfAgKXi2NjXIa4UZKoN2ylJKTJve
+	 z8tii5c5OgY29mGF7N6lHal7ve+g93RN6lfW2DYL289Pg0knfDSwOkmhpzzOtW8o76
+	 EsghCr6u9IYosm3Za/H5v2jfmV2KXgyoLBzSszsENieOawR8bwBqutUX73tcjMXs2U
+	 3EGGiwISa2Ncg==
+Message-ID: <d0373c02-9b22-661f-9930-ca720053c2a0@collabora.com>
+Date: Mon, 11 Sep 2023 11:29:22 +0200
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230911023038.30649-5-yong.wu@mediatek.com>
-X-Rspamd-Queue-Id: 5BCF63F09C
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.50 / 15.00];
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.0
+Content-Language: en-US
+To: Yong Wu <yong.wu@mediatek.com>, Rob Herring <robh+dt@kernel.org>,
+ Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com,
+ Matthias Brugger <matthias.bgg@gmail.com>
+References: <20230911023038.30649-1-yong.wu@mediatek.com>
+ <20230911023038.30649-6-yong.wu@mediatek.com>
+From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+In-Reply-To: <20230911023038.30649-6-yong.wu@mediatek.com>
+X-Rspamd-Queue-Id: AF40B3F09C
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.40 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:134.134.136.100/32];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	DMARC_POLICY_ALLOW(-0.50)[collabora.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.172];
+	ONCE_RECEIVED(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	TAGGED_RCPT(0.00)[dt];
-	BLOCKLISTDE_FAIL(0.00)[134.134.136.100:server fail];
-	ASN(0.00)[asn:4983, ipnet:134.134.136.0/24, country:US];
+	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
+	RCVD_COUNT_ONE(0.00)[1];
+	RCVD_TLS_ALL(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[20];
 	MIME_TRACE(0.00)[0:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[mgamail.intel.com:helo,mgamail.intel.com:rdns,01.org:url,intel.com:dkim,intel.com:email];
 	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FREEMAIL_TO(0.00)[mediatek.com,kernel.org,linaro.org,amd.com,gmail.com];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCVD_TLS_LAST(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[dt];
+	FROM_EQ_ENVFROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[intel.com:+]
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 5IYSIKUIVYB7RAYOV7IGZGF7VBYJ2GBN
-X-Message-ID-Hash: 5IYSIKUIVYB7RAYOV7IGZGF7VBYJ2GBN
-X-MailFrom: lkp@intel.com
+Message-ID-Hash: VQ62YLJJO2J5VFNNM7XZNQUHCGA5J3HI
+X-Message-ID-Hash: VQ62YLJJO2J5VFNNM7XZNQUHCGA5J3HI
+X-MailFrom: angelogioacchino.delregno@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, devicetree@vger.kernel.org, Conor Dooley <conor+dt@kernel.org>, jianjiao.zeng@mediatek.com, Benjamin Gaignard <benjamin.gaignard@collabora.com>, kuohong.wang@mediatek.com, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, tjmercier@google.com, linaro-mm-sig@lists.linaro.org, John Stultz <jstultz@google.com>, linux-arm-kernel@lists.infradead.org, Krzysztof Kozlowski <krzk@kernel.org>, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, Yong Wu <yong.wu@mediatek.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, tjmercier@google.com, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, jianjiao.zeng@mediatek.com, kuohong.wang@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 4/9] dma-buf: heaps: Initialise MediaTek secure heap
+Subject: [Linaro-mm-sig] Re: [PATCH 5/9] dma-buf: heaps: mtk_sec_heap: Initialise tee session
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5IYSIKUIVYB7RAYOV7IGZGF7VBYJ2GBN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VQ62YLJJO2J5VFNNM7XZNQUHCGA5J3HI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-Hi Yong,
+Il 11/09/23 04:30, Yong Wu ha scritto:
+> The TEE probe later than dma-buf heap, and PROBE_DEDER doesn't work
+> here since this is not a platform driver, therefore initialise the TEE
+> context/session while we allocate the first secure buffer.
+> 
+> Signed-off-by: Yong Wu <yong.wu@mediatek.com>
+> ---
+>   drivers/dma-buf/heaps/mtk_secure_heap.c | 61 +++++++++++++++++++++++++
+>   1 file changed, 61 insertions(+)
+> 
+> diff --git a/drivers/dma-buf/heaps/mtk_secure_heap.c b/drivers/dma-buf/heaps/mtk_secure_heap.c
+> index bbf1c8dce23e..e3da33a3d083 100644
+> --- a/drivers/dma-buf/heaps/mtk_secure_heap.c
+> +++ b/drivers/dma-buf/heaps/mtk_secure_heap.c
+> @@ -10,6 +10,12 @@
+>   #include <linux/err.h>
+>   #include <linux/module.h>
+>   #include <linux/slab.h>
+> +#include <linux/tee_drv.h>
+> +#include <linux/uuid.h>
+> +
+> +#define TZ_TA_MEM_UUID		"4477588a-8476-11e2-ad15-e41f1390d676"
+> +
 
-kernel test robot noticed the following build errors:
+Is this UUID the same for all SoCs and all TZ versions?
 
-[auto build test ERROR on drm-misc/drm-misc-next]
-[also build test ERROR on robh/for-next linus/master v6.6-rc1 next-20230911]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Yong-Wu/dma-buf-heaps-Deduplicate-docs-and-adopt-common-format/20230911-103308
-base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
-patch link:    https://lore.kernel.org/r/20230911023038.30649-5-yong.wu%40mediatek.com
-patch subject: [PATCH 4/9] dma-buf: heaps: Initialise MediaTek secure heap
-config: openrisc-allmodconfig (https://download.01.org/0day-ci/archive/20230911/202309111534.u4wfJ4vk-lkp@intel.com/config)
-compiler: or1k-linux-gcc (GCC) 13.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20230911/202309111534.u4wfJ4vk-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202309111534.u4wfJ4vk-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
->> drivers/dma-buf/heaps/mtk_secure_heap.c:68:27: error: initialization of 'struct dma_buf * (*)(struct dma_heap *, long unsigned int,  long unsigned int,  long unsigned int)' from incompatible pointer type 'struct dma_buf * (*)(struct dma_heap *, size_t,  long unsigned int,  long unsigned int)' {aka 'struct dma_buf * (*)(struct dma_heap *, unsigned int,  long unsigned int,  long unsigned int)'} [-Werror=incompatible-pointer-types]
-      68 |         .allocate       = mtk_sec_heap_allocate,
-         |                           ^~~~~~~~~~~~~~~~~~~~~
-   drivers/dma-buf/heaps/mtk_secure_heap.c:68:27: note: (near initialization for 'mtk_sec_heap_ops.allocate')
-   cc1: some warnings being treated as errors
+Thanks,
+Angelo
 
 
-vim +68 drivers/dma-buf/heaps/mtk_secure_heap.c
+> +#define MTK_TEE_PARAM_NUM		4
+>   
+>   /*
+>    * MediaTek secure (chunk) memory type
+> @@ -28,17 +34,72 @@ struct mtk_secure_heap_buffer {
+>   struct mtk_secure_heap {
+>   	const char		*name;
+>   	const enum kree_mem_type mem_type;
+> +	u32			 mem_session;
+> +	struct tee_context	*tee_ctx;
+>   };
+>   
+> +static int mtk_optee_ctx_match(struct tee_ioctl_version_data *ver, const void *data)
+> +{
+> +	return ver->impl_id == TEE_IMPL_ID_OPTEE;
+> +}
+> +
+> +static int mtk_kree_secure_session_init(struct mtk_secure_heap *sec_heap)
+> +{
+> +	struct tee_param t_param[MTK_TEE_PARAM_NUM] = {0};
+> +	struct tee_ioctl_open_session_arg arg = {0};
+> +	uuid_t ta_mem_uuid;
+> +	int ret;
+> +
+> +	sec_heap->tee_ctx = tee_client_open_context(NULL, mtk_optee_ctx_match,
+> +						    NULL, NULL);
+> +	if (IS_ERR(sec_heap->tee_ctx)) {
+> +		pr_err("%s: open context failed, ret=%ld\n", sec_heap->name,
+> +		       PTR_ERR(sec_heap->tee_ctx));
+> +		return -ENODEV;
+> +	}
+> +
+> +	arg.num_params = MTK_TEE_PARAM_NUM;
+> +	arg.clnt_login = TEE_IOCTL_LOGIN_PUBLIC;
+> +	ret = uuid_parse(TZ_TA_MEM_UUID, &ta_mem_uuid);
+> +	if (ret)
+> +		goto close_context;
+> +	memcpy(&arg.uuid, &ta_mem_uuid.b, sizeof(ta_mem_uuid));
+> +
+> +	ret = tee_client_open_session(sec_heap->tee_ctx, &arg, t_param);
+> +	if (ret < 0 || arg.ret) {
+> +		pr_err("%s: open session failed, ret=%d:%d\n",
+> +		       sec_heap->name, ret, arg.ret);
+> +		ret = -EINVAL;
+> +		goto close_context;
+> +	}
+> +	sec_heap->mem_session = arg.session;
+> +	return 0;
+> +
+> +close_context:
+> +	tee_client_close_context(sec_heap->tee_ctx);
+> +	return ret;
+> +}
+> +
+>   static struct dma_buf *
+>   mtk_sec_heap_allocate(struct dma_heap *heap, size_t size,
+>   		      unsigned long fd_flags, unsigned long heap_flags)
+>   {
+> +	struct mtk_secure_heap *sec_heap = dma_heap_get_drvdata(heap);
+>   	struct mtk_secure_heap_buffer *sec_buf;
+>   	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
+>   	struct dma_buf *dmabuf;
+>   	int ret;
+>   
+> +	/*
+> +	 * TEE probe may be late. Initialise the secure session in the first
+> +	 * allocating secure buffer.
+> +	 */
+> +	if (!sec_heap->mem_session) {
+> +		ret = mtk_kree_secure_session_init(sec_heap);
+> +		if (ret)
+> +			return ERR_PTR(ret);
+> +	}
+> +
+>   	sec_buf = kzalloc(sizeof(*sec_buf), GFP_KERNEL);
+>   	if (!sec_buf)
+>   		return ERR_PTR(-ENOMEM);
 
-    66	
-    67	static const struct dma_heap_ops mtk_sec_heap_ops = {
-  > 68		.allocate	= mtk_sec_heap_allocate,
-    69	};
-    70	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
