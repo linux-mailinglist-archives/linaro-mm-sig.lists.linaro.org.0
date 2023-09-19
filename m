@@ -2,101 +2,98 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC1427CF767
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 13:50:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 789E97CF75D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 13:48:11 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 06E7C40C46
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 11:50:13 +0000 (UTC)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
-	by lists.linaro.org (Postfix) with ESMTPS id B6AEB3F944
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Sep 2023 03:18:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8B03940C0D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 11:48:10 +0000 (UTC)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+	by lists.linaro.org (Postfix) with ESMTPS id 91C1D3F95F
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Sep 2023 03:03:58 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=mediatek.com header.s=dk header.b="PYya/MW1";
-	spf=pass (lists.linaro.org: domain of jason-jh.lin@mediatek.com designates 210.61.82.184 as permitted sender) smtp.mailfrom=jason-jh.lin@mediatek.com;
+	dkim=pass header.d=mediatek.com header.s=dk header.b=RUNsFCL2;
+	spf=pass (lists.linaro.org: domain of jason-jh.lin@mediatek.com designates 60.244.123.138 as permitted sender) smtp.mailfrom=jason-jh.lin@mediatek.com;
 	dmarc=pass (policy=quarantine) header.from=mediatek.com
-X-UUID: 27530ae6569911ee8051498923ad61e6-20230919
+X-UUID: 27f8d7c8569911eea33bb35ae8d461a2-20230919
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
-	h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From; bh=3ldvco4cD1N2iRkeWeHPyDxnixRPCq726JfOrr8fwYQ=;
-	b=PYya/MW19aPPc+F/M7yGOrHcqANMIAkb7qe/vNl8j4EKIq5pfyC/2YR7AYI0nxEMT6qVPgwhEpci5KCFW1WsRr3VnVO9SLnkuu/AvIpGWxEvbEBc+1YhjIxu3mdX+NWV1GtyHWMXGVlXQpyiBlfPuxJRtHWUya/IPJFlJlLsVAY=;
+	h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From; bh=X+tczk0/vmYvmSCEtwcnNPhlaGybKeOD9xZv9JHzkfU=;
+	b=RUNsFCL2q/dYVZ/Gw9TNfxkPCSodo/5tc+yg75Af/31dA5zX5oFGK7miPx9hL8rw1LwTzj5KIkl7oIRkvLPjxHAXcOxw07U/VS9FkzsE4NSEfdEslYbOOmSj+jIDY45gGCb/IQf53VkqhR72a9NEoawas8EAI/X83xvUFdKz+GA=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.31,REQID:972a53f8-3f8c-4f4e-8e2d-ad1f143c28a8,IP:0,U
+X-CID-O-INFO: VERSION:1.1.31,REQID:6236a0c8-09c5-404a-b659-707400aecc24,IP:0,U
 	RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
 	N:release,TS:-25
-X-CID-META: VersionHash:0ad78a4,CLOUDID:138e1814-4929-4845-9571-38c601e9c3c9,B
+X-CID-META: VersionHash:0ad78a4,CLOUDID:75b6daef-9a6e-4c39-b73e-f2bc08ca3dc5,B
 	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
 	RL:0,File:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,
 	DKR:0,DKP:0,BRR:0,BRE:0
 X-CID-BVR: 0,NGT
 X-CID-BAS: 0,NGT,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 27530ae6569911ee8051498923ad61e6-20230919
-Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by mailgw02.mediatek.com
+X-UUID: 27f8d7c8569911eea33bb35ae8d461a2-20230919
+Received: from mtkmbs10n1.mediatek.inc [(172.21.101.34)] by mailgw01.mediatek.com
 	(envelope-from <jason-jh.lin@mediatek.com>)
 	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
-	with ESMTP id 706449327; Tue, 19 Sep 2023 11:03:48 +0800
+	with ESMTP id 32418858; Tue, 19 Sep 2023 11:03:49 +0800
 Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
- mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
+ mtkmbs11n2.mediatek.inc (172.21.101.187) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Tue, 19 Sep 2023 11:03:47 +0800
+ 15.2.1118.26; Tue, 19 Sep 2023 11:03:48 +0800
 Received: from mtksdccf07.mediatek.inc (172.21.84.99) by
  mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Tue, 19 Sep 2023 11:03:47 +0800
+ 15.2.1118.26 via Frontend Transport; Tue, 19 Sep 2023 11:03:48 +0800
 From: Jason-JH.Lin <jason-jh.lin@mediatek.com>
 To: Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski
 	<krzysztof.kozlowski+dt@linaro.org>, Matthias Brugger
 	<matthias.bgg@gmail.com>, AngeloGioacchino Del Regno
 	<angelogioacchino.delregno@collabora.com>, Chun-Kuang Hu
 	<chunkuang.hu@kernel.org>
-Date: Tue, 19 Sep 2023 11:03:42 +0800
-Message-ID: <20230919030345.8629-8-jason-jh.lin@mediatek.com>
+Date: Tue, 19 Sep 2023 11:03:43 +0800
+Message-ID: <20230919030345.8629-9-jason-jh.lin@mediatek.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20230919030345.8629-1-jason-jh.lin@mediatek.com>
 References: <20230919030345.8629-1-jason-jh.lin@mediatek.com>
 MIME-Version: 1.0
 X-MTK: N
-X-Spamd-Bar: ++++
-X-Spamd-Result: default: False [4.00 / 15.00];
+X-Spamd-Bar: +
+X-Spamd-Result: default: False [1.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	HFILTER_HOSTNAME_UNKNOWN(2.50)[];
-	RBL_VIRUSFREE_BOTNET(2.00)[210.61.82.184:from];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[mediatek.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[mediatek.com:s=dk];
+	R_SPF_ALLOW(-0.20)[+ip4:60.244.123.128/27:c];
 	MIME_GOOD(-0.10)[text/plain];
-	BAD_REP_POLICIES(0.10)[];
-	R_SPF_ALLOW(0.00)[+ip4:210.61.82.184/32:c];
-	FROM_EQ_ENVFROM(0.00)[];
-	GREYLIST(0.00)[pass,meta];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:3462, ipnet:210.61.0.0/16, country:TW];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[dt];
-	FREEMAIL_TO(0.00)[kernel.org,linaro.org,gmail.com,collabora.com];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:24154, ipnet:60.244.123.0/24, country:TW];
+	RCPT_COUNT_TWELVE(0.00)[20];
+	ARC_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DMARC_POLICY_ALLOW(0.00)[mediatek.com,quarantine];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_TO(0.00)[kernel.org,linaro.org,gmail.com,collabora.com];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_THREE(0.00)[3];
-	R_DKIM_ALLOW(0.00)[mediatek.com:s=dk];
+	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[mediatek.com:+]
-X-Rspamd-Action: add header
+X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Spam-Level: ****
-X-Rspamd-Queue-Id: B6AEB3F944
+X-Spam-Level: *
+X-Rspamd-Queue-Id: 91C1D3F95F
 X-MailFrom: jason-jh.lin@mediatek.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: PCZQSTFTTBHKWBO62PLYNTK22C6GYODG
-X-Message-ID-Hash: PCZQSTFTTBHKWBO62PLYNTK22C6GYODG
-X-Mailman-Approved-At: Thu, 19 Oct 2023 11:46:50 +0000
+Message-ID-Hash: HGS3TB3DNYM5LHMUXMXS2JKETV7AK442
+X-Message-ID-Hash: HGS3TB3DNYM5LHMUXMXS2JKETV7AK442
+X-Mailman-Approved-At: Thu, 19 Oct 2023 11:45:29 +0000
 CC: Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jason-ch Chen <jason-ch.chen@mediatek.com>, Johnson Wang <johnson.wang@mediatek.com>, "Jason-JH . Lin" <jason-jh.lin@mediatek.com>, Singo Chang <singo.chang@mediatek.com>, Nancy Lin <nancy.lin@mediatek.com>, Shawn Sung <shawn.sung@mediatek.com>, Project_Global_Chrome_Upstream_Group@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 07/10] drm/mediatek: Add secure layer config support for ovl
+Subject: [Linaro-mm-sig] [PATCH 08/10] drm/mediatek: Add secure layer config support for ovl_adaptor
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PCZQSTFTTBHKWBO62PLYNTK22C6GYODG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HGS3TB3DNYM5LHMUXMXS2JKETV7AK442/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -106,152 +103,78 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Add secure layer config support for ovl.
+Add secure layer config support for ovl_adaptor and sub driver mdp_rdma.
 
 Signed-off-by: Jason-JH.Lin <jason-jh.lin@mediatek.com>
 ---
- drivers/gpu/drm/mediatek/mtk_disp_drv.h       |  3 ++
- drivers/gpu/drm/mediatek/mtk_disp_ovl.c       | 31 +++++++++++++++++--
- .../gpu/drm/mediatek/mtk_disp_ovl_adaptor.c   | 12 +++++++
- drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.c   |  2 ++
- 4 files changed, 46 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/mediatek/mtk_disp_ovl_adaptor.c |  3 +++
+ drivers/gpu/drm/mediatek/mtk_mdp_rdma.c         | 11 ++++++++---
+ drivers/gpu/drm/mediatek/mtk_mdp_rdma.h         |  2 ++
+ 3 files changed, 13 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/gpu/drm/mediatek/mtk_disp_drv.h b/drivers/gpu/drm/mediatek/mtk_disp_drv.h
-index 2254038519e1..dec937b183a8 100644
---- a/drivers/gpu/drm/mediatek/mtk_disp_drv.h
-+++ b/drivers/gpu/drm/mediatek/mtk_disp_drv.h
-@@ -9,6 +9,7 @@
- #include <linux/soc/mediatek/mtk-cmdq.h>
- #include <linux/soc/mediatek/mtk-mmsys.h>
- #include <linux/soc/mediatek/mtk-mutex.h>
-+#include "mtk_drm_ddp_comp.h"
- #include "mtk_drm_plane.h"
- #include "mtk_mdp_rdma.h"
+diff --git a/drivers/gpu/drm/mediatek/mtk_disp_ovl_adaptor.c b/drivers/gpu/drm/mediatek/mtk_disp_ovl_adaptor.c
+index 28a0bccfb0b9..274961222672 100644
+--- a/drivers/gpu/drm/mediatek/mtk_disp_ovl_adaptor.c
++++ b/drivers/gpu/drm/mediatek/mtk_disp_ovl_adaptor.c
+@@ -153,6 +153,9 @@ void mtk_ovl_adaptor_layer_config(struct device *dev, unsigned int idx,
+ 	rdma_config.pitch = pending->pitch;
+ 	rdma_config.fmt = pending->format;
+ 	rdma_config.color_encoding = pending->color_encoding;
++	rdma_config.source_size = (pending->height - 1) * pending->pitch +
++				  pending->width * fmt_info->cpp[0];
++	rdma_config.is_sec = state->pending.is_sec;
+ 	mtk_mdp_rdma_config(rdma_l, &rdma_config, cmdq_pkt);
  
-@@ -79,6 +80,7 @@ void mtk_ovl_clk_disable(struct device *dev);
- void mtk_ovl_config(struct device *dev, unsigned int w,
- 		    unsigned int h, unsigned int vrefresh,
- 		    unsigned int bpc, struct cmdq_pkt *cmdq_pkt);
-+u64 mtk_ovl_get_sec_port(struct mtk_ddp_comp *comp, unsigned int idx);
- int mtk_ovl_layer_check(struct device *dev, unsigned int idx,
- 			struct mtk_plane_state *mtk_state);
- void mtk_ovl_layer_config(struct device *dev, unsigned int idx,
-@@ -112,6 +114,7 @@ void mtk_ovl_adaptor_clk_disable(struct device *dev);
- void mtk_ovl_adaptor_config(struct device *dev, unsigned int w,
- 			    unsigned int h, unsigned int vrefresh,
- 			    unsigned int bpc, struct cmdq_pkt *cmdq_pkt);
-+u64 mtk_ovl_adaptor_get_sec_port(struct mtk_ddp_comp *comp, unsigned int idx);
- void mtk_ovl_adaptor_layer_config(struct device *dev, unsigned int idx,
- 				  struct mtk_plane_state *state,
- 				  struct cmdq_pkt *cmdq_pkt);
-diff --git a/drivers/gpu/drm/mediatek/mtk_disp_ovl.c b/drivers/gpu/drm/mediatek/mtk_disp_ovl.c
-index 2bffe4245466..76e832e4875a 100644
---- a/drivers/gpu/drm/mediatek/mtk_disp_ovl.c
-+++ b/drivers/gpu/drm/mediatek/mtk_disp_ovl.c
-@@ -46,6 +46,7 @@
- #define DISP_REG_OVL_ADDR(ovl, n)		((ovl)->data->addr + 0x20 * (n))
- #define DISP_REG_OVL_HDR_ADDR(ovl, n)		((ovl)->data->addr + 0x20 * (n) + 0x04)
- #define DISP_REG_OVL_HDR_PITCH(ovl, n)		((ovl)->data->addr + 0x20 * (n) + 0x08)
-+#define DISP_REG_OVL_SECURE			0x0fc0
- 
- #define GMC_THRESHOLD_BITS	16
- #define GMC_THRESHOLD_HIGH	((1 << GMC_THRESHOLD_BITS) / 4)
-@@ -126,8 +127,19 @@ struct mtk_disp_ovl {
- 	const struct mtk_disp_ovl_data	*data;
- 	void				(*vblank_cb)(void *data);
- 	void				*vblank_cb_data;
-+	resource_size_t			regs_pa;
+ 	if (use_dual_pipe) {
+diff --git a/drivers/gpu/drm/mediatek/mtk_mdp_rdma.c b/drivers/gpu/drm/mediatek/mtk_mdp_rdma.c
+index c3adaeefd551..1c4798e3bbc3 100644
+--- a/drivers/gpu/drm/mediatek/mtk_mdp_rdma.c
++++ b/drivers/gpu/drm/mediatek/mtk_mdp_rdma.c
+@@ -94,6 +94,7 @@ struct mtk_mdp_rdma {
+ 	void __iomem		*regs;
+ 	struct clk		*clk;
+ 	struct cmdq_client_reg	cmdq_reg;
++	resource_size_t		regs_pa;
  };
  
-+u64 mtk_ovl_get_sec_port(struct mtk_ddp_comp *comp, unsigned int idx)
-+{
-+	if (comp->id == DDP_COMPONENT_OVL0)
-+		return 1ULL << CMDQ_SEC_DISP_OVL0;
-+	else if (comp->id == DDP_COMPONENT_OVL1)
-+		return 1ULL << CMDQ_SEC_DISP_OVL1;
-+
-+	return 0;
-+}
-+
- static irqreturn_t mtk_disp_ovl_irq_handler(int irq, void *dev_id)
- {
- 	struct mtk_disp_ovl *priv = dev_id;
-@@ -449,8 +461,22 @@ void mtk_ovl_layer_config(struct device *dev, unsigned int idx,
- 			      DISP_REG_OVL_SRC_SIZE(idx));
- 	mtk_ddp_write_relaxed(cmdq_pkt, offset, &ovl->cmdq_reg, ovl->regs,
- 			      DISP_REG_OVL_OFFSET(idx));
--	mtk_ddp_write_relaxed(cmdq_pkt, addr, &ovl->cmdq_reg, ovl->regs,
--			      DISP_REG_OVL_ADDR(ovl, idx));
-+
-+	if (state->pending.is_sec) {
-+		const struct drm_format_info *fmt_info = drm_format_info(fmt);
-+		unsigned int buf_size = (pending->height - 1) * pending->pitch +
-+					pending->width * fmt_info->cpp[0];
-+
-+		mtk_ddp_write_mask(cmdq_pkt, BIT(idx), &ovl->cmdq_reg, ovl->regs,
-+				   DISP_REG_OVL_SECURE, BIT(idx));
-+		mtk_ddp_sec_write(cmdq_pkt, ovl->regs_pa + DISP_REG_OVL_ADDR(ovl, idx),
-+				  pending->addr, CMDQ_IWC_H_2_MVA, 0, buf_size, 0);
-+	} else {
-+		mtk_ddp_write_mask(cmdq_pkt, 0, &ovl->cmdq_reg, ovl->regs,
-+				   DISP_REG_OVL_SECURE, BIT(idx));
-+		mtk_ddp_write_relaxed(cmdq_pkt, addr, &ovl->cmdq_reg, ovl->regs,
-+				      DISP_REG_OVL_ADDR(ovl, idx));
-+	}
+ static unsigned int rdma_fmt_convert(unsigned int fmt)
+@@ -198,9 +199,12 @@ void mtk_mdp_rdma_config(struct device *dev, struct mtk_mdp_rdma_cfg *cfg,
+ 	else
+ 		mtk_ddp_write_mask(cmdq_pkt, 0, &priv->cmdq_reg, priv->regs,
+ 				   MDP_RDMA_SRC_CON, FLD_OUTPUT_ARGB);
+-
+-	mtk_ddp_write_mask(cmdq_pkt, cfg->addr0, &priv->cmdq_reg, priv->regs,
+-			   MDP_RDMA_SRC_BASE_0, FLD_SRC_BASE_0);
++	if (cfg->is_sec)
++		mtk_ddp_sec_write(cmdq_pkt, priv->regs_pa + MDP_RDMA_SRC_BASE_0,
++				  cfg->addr0, CMDQ_IWC_H_2_MVA, 0, cfg->source_size, 0);
++	else
++		mtk_ddp_write_mask(cmdq_pkt, cfg->addr0, &priv->cmdq_reg, priv->regs,
++				   MDP_RDMA_SRC_BASE_0, FLD_SRC_BASE_0);
  
- 	if (is_afbc) {
- 		mtk_ddp_write_relaxed(cmdq_pkt, hdr_addr, &ovl->cmdq_reg, ovl->regs,
-@@ -529,6 +555,7 @@ static int mtk_disp_ovl_probe(struct platform_device *pdev)
- 	}
+ 	mtk_ddp_write_mask(cmdq_pkt, src_pitch_y, &priv->cmdq_reg, priv->regs,
+ 			   MDP_RDMA_MF_BKGD_SIZE_IN_BYTE, FLD_MF_BKGD_WB);
+@@ -285,6 +289,7 @@ static int mtk_mdp_rdma_probe(struct platform_device *pdev)
+ 		return -ENOMEM;
  
  	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 +	priv->regs_pa = res->start;
  	priv->regs = devm_ioremap_resource(dev, res);
  	if (IS_ERR(priv->regs)) {
- 		dev_err(dev, "failed to ioremap ovl\n");
-diff --git a/drivers/gpu/drm/mediatek/mtk_disp_ovl_adaptor.c b/drivers/gpu/drm/mediatek/mtk_disp_ovl_adaptor.c
-index 6bf6367853fb..28a0bccfb0b9 100644
---- a/drivers/gpu/drm/mediatek/mtk_disp_ovl_adaptor.c
-+++ b/drivers/gpu/drm/mediatek/mtk_disp_ovl_adaptor.c
-@@ -83,6 +83,18 @@ static const struct ovl_adaptor_comp_match comp_matches[OVL_ADAPTOR_ID_MAX] = {
- 	[OVL_ADAPTOR_ETHDR0]	= { OVL_ADAPTOR_TYPE_ETHDR, 0 },
+ 		dev_err(dev, "failed to ioremap rdma\n");
+diff --git a/drivers/gpu/drm/mediatek/mtk_mdp_rdma.h b/drivers/gpu/drm/mediatek/mtk_mdp_rdma.h
+index 9943ee3aac31..9add18e96319 100644
+--- a/drivers/gpu/drm/mediatek/mtk_mdp_rdma.h
++++ b/drivers/gpu/drm/mediatek/mtk_mdp_rdma.h
+@@ -15,6 +15,8 @@ struct mtk_mdp_rdma_cfg {
+ 	unsigned int	y_top;
+ 	int		fmt;
+ 	int		color_encoding;
++	unsigned int	source_size;
++	unsigned int	is_sec;
  };
  
-+static const u64 ovl_adaptor_sec_port[] = {
-+	1ULL << CMDQ_SEC_VDO1_DISP_RDMA_L0,
-+	1ULL << CMDQ_SEC_VDO1_DISP_RDMA_L1,
-+	1ULL << CMDQ_SEC_VDO1_DISP_RDMA_L2,
-+	1ULL << CMDQ_SEC_VDO1_DISP_RDMA_L3,
-+};
-+
-+u64 mtk_ovl_adaptor_get_sec_port(struct mtk_ddp_comp *comp, unsigned int idx)
-+{
-+	return ovl_adaptor_sec_port[idx];
-+}
-+
- void mtk_ovl_adaptor_layer_config(struct device *dev, unsigned int idx,
- 				  struct mtk_plane_state *state,
- 				  struct cmdq_pkt *cmdq_pkt)
-diff --git a/drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.c b/drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.c
-index 3dca936b9143..eec3a1cc2ed4 100644
---- a/drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.c
-+++ b/drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.c
-@@ -373,6 +373,7 @@ static const struct mtk_ddp_comp_funcs ddp_ovl = {
- 	.bgclr_in_off = mtk_ovl_bgclr_in_off,
- 	.get_formats = mtk_ovl_get_formats,
- 	.get_num_formats = mtk_ovl_get_num_formats,
-+	.get_sec_port = mtk_ovl_get_sec_port,
- };
- 
- static const struct mtk_ddp_comp_funcs ddp_postmask = {
-@@ -424,6 +425,7 @@ static const struct mtk_ddp_comp_funcs ddp_ovl_adaptor = {
- 	.remove = mtk_ovl_adaptor_remove_comp,
- 	.get_formats = mtk_ovl_adaptor_get_formats,
- 	.get_num_formats = mtk_ovl_adaptor_get_num_formats,
-+	.get_sec_port = mtk_ovl_adaptor_get_sec_port,
- };
- 
- static const char * const mtk_ddp_comp_stem[MTK_DDP_COMP_TYPE_MAX] = {
+ #endif // __MTK_MDP_RDMA_H__
 -- 
 2.18.0
 
