@@ -2,40 +2,40 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2CA97CF757
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 13:46:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86E237CF758
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 13:47:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B4F9A40C23
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 11:46:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9856540C43
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 11:47:09 +0000 (UTC)
 Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
-	by lists.linaro.org (Postfix) with ESMTPS id 1B6713ED9C
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Sep 2023 03:03:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 0701A3F5A5
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Sep 2023 03:03:56 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=mediatek.com header.s=dk header.b=cGEy1+py;
+	dkim=pass header.d=mediatek.com header.s=dk header.b="LlQ/zhyf";
 	spf=pass (lists.linaro.org: domain of jason-jh.lin@mediatek.com designates 60.244.123.138 as permitted sender) smtp.mailfrom=jason-jh.lin@mediatek.com;
 	dmarc=pass (policy=quarantine) header.from=mediatek.com
-X-UUID: 28192744569911eea33bb35ae8d461a2-20230919
+X-UUID: 28622890569911eea33bb35ae8d461a2-20230919
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
-	h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From; bh=P8YVDxyqFUMPUtEmRu4vRhBkKU6+xIuJD/plS6PwPgI=;
-	b=cGEy1+pyEJ0Z1e03i1oowAFaMg/7afZ2QOdng9oHmO3wpfhyWcYxa4C/zRQVAUSNNwqmUqw0Rusp64qIRwVrxEkhgX9ecoPnPJXV9Ml+HE+X8DQVrG8wlcdZTQJ2nZ5axquen1bRNibMUnCN6ASG+mEgIhwevuI/O8YRYW+h5VQ=;
+	h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From; bh=sok7FijpBkztm+3g45hUbc7bumZrR63/NFUxRceRXGI=;
+	b=LlQ/zhyfc3JYmAOSyA0H4ayKKEyVYCZ3Ygr8jPdB0RaKTHINeXGYz8I9dONUU1Bud/9mo/xCO43sMMk4EXpghQqtETn8qH8csvk27r9sXV8oeiu9gPCXok1AiDzy/ZdcBMXBUpUJ1M4ws4sBTK8HLmcNiTAjYtEMXxAkNgsfk4A=;
 X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.31,REQID:7cf41f5f-dc89-4825-89cc-8259a2b4a4de,IP:0,U
-	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
-	release,TS:0
-X-CID-META: VersionHash:0ad78a4,CLOUDID:73b6daef-9a6e-4c39-b73e-f2bc08ca3dc5,B
+X-CID-O-INFO: VERSION:1.1.31,REQID:4ac9ebf3-0e08-4500-b8f7-907cda2b0e80,IP:0,U
+	RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
+	N:release,TS:-25
+X-CID-META: VersionHash:0ad78a4,CLOUDID:76b6daef-9a6e-4c39-b73e-f2bc08ca3dc5,B
 	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
 	RL:0,File:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,
 	DKR:0,DKP:0,BRR:0,BRE:0
 X-CID-BVR: 0,NGT
 X-CID-BAS: 0,NGT,0,_
 X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 28192744569911eea33bb35ae8d461a2-20230919
-Received: from mtkmbs11n2.mediatek.inc [(172.21.101.187)] by mailgw01.mediatek.com
+X-UUID: 28622890569911eea33bb35ae8d461a2-20230919
+Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by mailgw01.mediatek.com
 	(envelope-from <jason-jh.lin@mediatek.com>)
 	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
-	with ESMTP id 390814563; Tue, 19 Sep 2023 11:03:49 +0800
+	with ESMTP id 2043954794; Tue, 19 Sep 2023 11:03:50 +0800
 Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
- MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
+ mtkmbs10n1.mediatek.inc (172.21.101.34) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
  15.2.1118.26; Tue, 19 Sep 2023 11:03:47 +0800
 Received: from mtksdccf07.mediatek.inc (172.21.84.99) by
@@ -47,24 +47,23 @@ To: Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski
 	<matthias.bgg@gmail.com>, AngeloGioacchino Del Regno
 	<angelogioacchino.delregno@collabora.com>, Chun-Kuang Hu
 	<chunkuang.hu@kernel.org>
-Date: Tue, 19 Sep 2023 11:03:39 +0800
-Message-ID: <20230919030345.8629-5-jason-jh.lin@mediatek.com>
+Date: Tue, 19 Sep 2023 11:03:40 +0800
+Message-ID: <20230919030345.8629-6-jason-jh.lin@mediatek.com>
 X-Mailer: git-send-email 2.18.0
 In-Reply-To: <20230919030345.8629-1-jason-jh.lin@mediatek.com>
 References: <20230919030345.8629-1-jason-jh.lin@mediatek.com>
 MIME-Version: 1.0
 X-TM-AS-Product-Ver: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-AS-Result: No-10--4.953300-8.000000
-X-TMASE-MatchedRID: tiRXYRqWr+sXSulpnju2H0hwlOfYeSqxEbxKVXd70tXfUZT83lbkEAte
-	+Pua94rgIAIDm5vZWu4+PHq8e3nI3h8TzIzimOwPC24oEZ6SpSmb4wHqRpnaDv34F7bMpQx9hin
-	ct4EsDwcwVAe/hvF/RWd+CkOAbYQn3xRUQILtibZkqeK1RJU6ff/9fS95GkA7CM4wutSD8b/iL/
-	CRDFHgmkma3zYT97IFAYfQIAUhBayZvmCbKVb49sZL6x5U/HridGByp+zdaDg=
+X-TM-AS-Result: No-10--7.195900-8.000000
+X-TMASE-MatchedRID: yvDAzrttxFVvH7GZAcw0g03dRRsh/h6yqQ9UezeTkTj7efdnqtsaEx4S
+	wGIs+PSaGQdEeHBaW03ijpjet3oGSC1Wsi+5O6JcQ5lZokGzOart/okBLaEo+A6QlBHhBZuwVSd
+	AA6mVeIYgYsU8L2jyLIAy6p60ZV62fJ5/bZ6npdiyO81X3yak8x/ZuZrxnglDckm0qt1N+wm59w
+	YeEP/lO9bWMxME39m8thcSAOHAJF9+3BndfXUhXQ==
 X-TM-AS-User-Approved-Sender: No
 X-TM-AS-User-Blocked-Sender: No
-X-TMASE-Result: 10--4.953300-8.000000
+X-TMASE-Result: 10--7.195900-8.000000
 X-TMASE-Version: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-SNTS-SMTP: 
-	970F2FF1458D4C470B41AC76593BC4974EFB1D296060D843A976641D04EFADC22000:8
+X-TM-SNTS-SMTP: A76E1920480E25EAD878E5572C518C87A647104F54A19B23392BEE2F7BAD73A32000:8
 X-MTK: N
 X-Spamd-Bar: +
 X-Spamd-Result: default: False [1.00 / 15.00];
@@ -93,19 +92,19 @@ X-Spamd-Result: default: False [1.00 / 15.00];
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
 X-Spam-Level: *
-X-Rspamd-Queue-Id: 1B6713ED9C
+X-Rspamd-Queue-Id: 0701A3F5A5
 X-MailFrom: jason-jh.lin@mediatek.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: ENBBLZ5YVR63ZHL32FRK3XJUANAFXIGE
-X-Message-ID-Hash: ENBBLZ5YVR63ZHL32FRK3XJUANAFXIGE
-X-Mailman-Approved-At: Thu, 19 Oct 2023 11:45:26 +0000
+Message-ID-Hash: EDB47I5WGKQPWGAPRUIFO3Z4VNTIBR5O
+X-Message-ID-Hash: EDB47I5WGKQPWGAPRUIFO3Z4VNTIBR5O
+X-Mailman-Approved-At: Thu, 19 Oct 2023 11:45:27 +0000
 CC: Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jason-ch Chen <jason-ch.chen@mediatek.com>, Johnson Wang <johnson.wang@mediatek.com>, "Jason-JH . Lin" <jason-jh.lin@mediatek.com>, Singo Chang <singo.chang@mediatek.com>, Nancy Lin <nancy.lin@mediatek.com>, Shawn Sung <shawn.sung@mediatek.com>, Project_Global_Chrome_Upstream_Group@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 04/10] drm/mediatek: Add secure identify flag and funcution to mtk_drm_plane
+Subject: [Linaro-mm-sig] [PATCH 05/10] drm/mediatek: Add mtk_ddp_sec_write to config secure buffer info
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ENBBLZ5YVR63ZHL32FRK3XJUANAFXIGE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EDB47I5WGKQPWGAPRUIFO3Z4VNTIBR5O/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -115,34 +114,60 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Add is_sec flag to identify current mtk_drm_plane is secure.
-Add mtk_plane_is_sec_fb() to check current drm_framebuffer is secure.
+Add mtk_ddp_sec_write to configure secure buffer information to
+cmdq secure packet data.
+Then secure cmdq driver will use these information to configure
+curresponding secure DRAM address to HW overlay in secure world.
 
 Signed-off-by: Jason-JH.Lin <jason-jh.lin@mediatek.com>
 ---
- drivers/gpu/drm/mediatek/mtk_drm_plane.h | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.c | 12 ++++++++++++
+ drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.h |  4 ++++
+ 2 files changed, 16 insertions(+)
 
-diff --git a/drivers/gpu/drm/mediatek/mtk_drm_plane.h b/drivers/gpu/drm/mediatek/mtk_drm_plane.h
-index 99aff7da0831..fe60e20a6e1c 100644
---- a/drivers/gpu/drm/mediatek/mtk_drm_plane.h
-+++ b/drivers/gpu/drm/mediatek/mtk_drm_plane.h
-@@ -33,6 +33,7 @@ struct mtk_plane_pending_state {
- 	bool				async_dirty;
- 	bool				async_config;
- 	enum drm_color_encoding		color_encoding;
-+	bool				is_sec;
- };
- 
- struct mtk_plane_state {
-@@ -46,6 +47,7 @@ to_mtk_plane_state(struct drm_plane_state *state)
- 	return container_of(state, struct mtk_plane_state, base);
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.c b/drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.c
+index 771f4e173353..3dca936b9143 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.c
++++ b/drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.c
+@@ -111,6 +111,18 @@ void mtk_ddp_write_mask(struct cmdq_pkt *cmdq_pkt, unsigned int value,
+ #endif
  }
  
-+bool mtk_plane_fb_is_secure(struct drm_framebuffer *fb);
- int mtk_plane_init(struct drm_device *dev, struct drm_plane *plane,
- 		   unsigned long possible_crtcs, enum drm_plane_type type,
- 		   unsigned int supported_rotations, const u32 *formats,
++void mtk_ddp_sec_write(struct cmdq_pkt *cmdq_pkt, u32 addr, u64 base,
++		       const enum cmdq_iwc_addr_metadata_type type,
++		       const u32 offset, const u32 size, const u32 port)
++{
++#if IS_REACHABLE(CONFIG_MTK_CMDQ)
++	/* secure buffer will be 4K alignment */
++	if (cmdq_pkt)
++		cmdq_sec_pkt_write(cmdq_pkt, addr, base, type,
++				   offset, ALIGN(size, PAGE_SIZE), port);
++#endif
++}
++
+ static int mtk_ddp_clk_enable(struct device *dev)
+ {
+ 	struct mtk_ddp_comp_dev *priv = dev_get_drvdata(dev);
+diff --git a/drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.h b/drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.h
+index febcaeef16a1..239a65140352 100644
+--- a/drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.h
++++ b/drivers/gpu/drm/mediatek/mtk_drm_ddp_comp.h
+@@ -7,6 +7,7 @@
+ #define MTK_DRM_DDP_COMP_H
+ 
+ #include <linux/io.h>
++#include <linux/mailbox/mtk-cmdq-sec-mailbox.h>
+ #include <linux/soc/mediatek/mtk-cmdq.h>
+ #include <linux/soc/mediatek/mtk-mmsys.h>
+ #include <linux/soc/mediatek/mtk-mutex.h>
+@@ -291,4 +292,7 @@ void mtk_ddp_write_relaxed(struct cmdq_pkt *cmdq_pkt, unsigned int value,
+ void mtk_ddp_write_mask(struct cmdq_pkt *cmdq_pkt, unsigned int value,
+ 			struct cmdq_client_reg *cmdq_reg, void __iomem *regs,
+ 			unsigned int offset, unsigned int mask);
++void mtk_ddp_sec_write(struct cmdq_pkt *cmdq_pkt, u32 addr, u64 base,
++		       const enum cmdq_iwc_addr_metadata_type type,
++		       const u32 offset, const u32 size, const u32 port);
+ #endif /* MTK_DRM_DDP_COMP_H */
 -- 
 2.18.0
 
