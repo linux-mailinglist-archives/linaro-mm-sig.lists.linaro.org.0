@@ -2,182 +2,111 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF1B37CF799
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 13:55:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E0757CF7A0
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 13:56:00 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E2ECB40D68
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 11:55:40 +0000 (UTC)
-Received: from vulcan.natalenko.name (vulcan.natalenko.name [104.207.131.136])
-	by lists.linaro.org (Postfix) with ESMTPS id C184C3ECF3
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  2 Oct 2023 15:39:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0D43440F36
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 11:55:59 +0000 (UTC)
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
+	by lists.linaro.org (Postfix) with ESMTPS id 7D7DE3E9FC
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Oct 2023 18:09:13 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=natalenko.name header.s=dkim-20170712 header.b=pWXunvHw;
-	spf=pass (lists.linaro.org: domain of oleksandr@natalenko.name designates 104.207.131.136 as permitted sender) smtp.mailfrom=oleksandr@natalenko.name;
-	dmarc=pass (policy=reject) header.from=natalenko.name
-Received: from spock.localnet (unknown [94.142.239.106])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by vulcan.natalenko.name (Postfix) with ESMTPSA id 9BE981528EB4;
-	Mon,  2 Oct 2023 17:39:02 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=natalenko.name;
-	s=dkim-20170712; t=1696261142;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=cOB88vPQiLyH370nTLoYIxokwI7a/8OLj2bT7Vxp3cw=;
-	b=pWXunvHw7ykTJg5hBsOg9EX0UAyT7FxfqVQMTpPDUw0Ad3+mLwq+Vj11H1fg015DGMouCo
-	HDMokGSEED/qVoVe/NscrAb22quvRHi7Y+jUpi2n0kKzJZt4v0y0NCA2RqDB8IODILxZlF
-	JC4Gq82iC3zo/kynuS1cSb+zfeXbs2c=
-From: Oleksandr Natalenko <oleksandr@natalenko.name>
-To: Matthew Wilcox <willy@infradead.org>
-Date: Mon, 02 Oct 2023 17:38:48 +0200
-Message-ID: <2160215.irdbgypaU6@natalenko.name>
-In-Reply-To: <ZRrUjcWqtmzPV3Fs@casper.infradead.org>
-References: 
- <13360591.uLZWGnKmhe@natalenko.name> <2300189.ElGaqSPkdT@natalenko.name>
- <ZRrUjcWqtmzPV3Fs@casper.infradead.org>
+	dkim=pass header.d=google.com header.s=20230601 header.b=P9VZOO5M;
+	spf=pass (lists.linaro.org: domain of jkardatzke@google.com designates 209.85.214.179 as permitted sender) smtp.mailfrom=jkardatzke@google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-1c6185cafb3so20795ad.1
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 03 Oct 2023 11:09:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1696356552; x=1696961352; darn=lists.linaro.org;
+        h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+         :date:message-id:reply-to;
+        bh=Z5ADml8UEYFyYxVl60KXFq6v7496GwJKAXl/Dq0m1dI=;
+        b=P9VZOO5MjBHWzKGYa3BAfYDolubuEz9opbbH7A2MtfRG64oy1ky6cLFC6JMqtQWN3F
+         gY7cH6b5trnrwVG/Homjr7U5W/IJKdnSNM6XXAFKNPPdcmCnVhY1vqXOymbqFPUcOax1
+         4XwF5Z4mEcRpEJzlPtWF9BJh5kMKi5NcX48533Z8+8TzExlYLVvzsb/X2cK/Fscs47OZ
+         jpySLeV17pKN2q/aW6AgOijL4fGDMYdItrVAzZ7TH4/J3B5Scrg4jmWUFYby9qEYEZzO
+         WxaP7gBWbOxpEjKnLitOwMpvwoNU9NSqdEIH8GRIG/n0nD0moJpPf5s1me1ag0IvZNqY
+         PgNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1696356552; x=1696961352;
+        h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=Z5ADml8UEYFyYxVl60KXFq6v7496GwJKAXl/Dq0m1dI=;
+        b=e+V5ChtsZo11R8CWS2RILToZEk2zEr/BtdnZYCQNWKSw7kiy91jbbrGI/+LSvuI5+I
+         nsHcgpWiHWs479e9X/e04ZWpcIniZAp3ooBxZiGPfqmKkqW/xyIJzMSGfnjxrLJy7fmu
+         AQpV71fQhW5+ghKR9xdR48h7u5KhUiKeF5qBkguerzmCpSxRsarCHlP+tFCHtQBvmOmo
+         TiQbSZkLBjVuwGkgwC5OcSuLnWzdCGRwgE7Q0bMiWA+BmdG2Y16kCIs8yhiwzBqmvt0/
+         f183m5lPcd7jsTJX/iXHvN/9kTzZy6V5IVGnepobjtzRIOVWZl8jS5wiWioF9lygyg0r
+         2bFQ==
+X-Gm-Message-State: AOJu0YxMozPRyvZg0jOI6h11DLTaCUh118Vn7zS5eFo+dP/YMd5fgsAc
+	ZNItFSU+qip+R6To1hMt7Czjbu8e/78Ts0PN6AHV
+X-Google-Smtp-Source: AGHT+IEl6IJ3DsIw7oyXRf7R7HS8s4r59Isc2f9JN+K4IY+u/eiaCuHNxh0RznXZ+FmVCsNdWoBLHGhb923Bp4V1USc=
+X-Received: by 2002:a17:902:dad1:b0:1c6:1e4e:b770 with SMTP id
+ q17-20020a170902dad100b001c61e4eb770mr19311plx.28.1696356552314; Tue, 03 Oct
+ 2023 11:09:12 -0700 (PDT)
 MIME-Version: 1.0
-X-Spamd-Bar: ---------
-X-Spamd-Result: default: False [-10.00 / 15.00];
-	REPLY(-4.00)[];
+From: Jeffrey Kardatzke <jkardatzke@google.com>
+Date: Tue, 3 Oct 2023 11:09:01 -0700
+Message-ID: <CA+ddPcPS8oUsMk0ziumwdTTWetekE37cK0Gkt9x5w2ig1m2pXQ@mail.gmail.com>
+To: "Jason-JH.Lin" <jason-jh.lin@mediatek.com>
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.60 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	SIGNED_PGP(-2.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[natalenko.name,reject];
-	R_SPF_ALLOW(-0.20)[+mx];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_DKIM_ALLOW(-0.20)[natalenko.name:s=dkim-20170712];
-	ONCE_RECEIVED(0.10)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	SUSPICIOUS_RECIPS(1.50)[];
+	FAKE_REPLY(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	MIME_GOOD(-0.10)[text/plain];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.179:from];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	ARC_NA(0.00)[];
-	ASN(0.00)[asn:20473, ipnet:104.207.130.0/23, country:US];
-	RCVD_TLS_ALL(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_CC(0.00)[mediatek.com,collabora.com,kernel.org,vger.kernel.org,lists.freedesktop.org,chromium.org,linaro.org,lists.linaro.org,lists.infradead.org,gmail.com];
+	RCVD_COUNT_ONE(0.00)[1];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,gmail.com,lists.linaro.org,lists.freedesktop.org,linux.intel.com,kernel.org,suse.de,ffwll.ch,linaro.org,amd.com,lists.linux.dev,linux-foundation.org,kvack.org];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	URIBL_BLOCKED(0.00)[vulcan.natalenko.name:helo,vulcan.natalenko.name:rdns];
+	BLOCKLISTDE_FAIL(0.00)[209.85.214.179:server fail];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[natalenko.name:+]
+	TAGGED_RCPT(0.00)[dt];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: C184C3ECF3
-X-MailFrom: oleksandr@natalenko.name
+X-Rspamd-Queue-Id: 7D7DE3E9FC
+X-MailFrom: jkardatzke@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: F366VWJQTYF46ERLAWYF5S2YCWHTSFE5
-X-Message-ID-Hash: F366VWJQTYF46ERLAWYF5S2YCWHTSFE5
-X-Mailman-Approved-At: Thu, 19 Oct 2023 11:50:29 +0000
-CC: linux-kernel@vger.kernel.org, Bagas Sanjaya <bagasdotme@gmail.com>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Linux Regressions <regressions@lists.linux.dev>, Andrew Morton <akpm@linux-foundation.org>, linux-mm@kvack.org
+Message-ID-Hash: NAHZEIS35PB54CAJWSBYNHD6FCBOOBAX
+X-Message-ID-Hash: NAHZEIS35PB54CAJWSBYNHD6FCBOOBAX
+X-Mailman-Approved-At: Thu, 19 Oct 2023 11:50:30 +0000
+CC: Project_Global_Chrome_Upstream_Group <Project_Global_Chrome_Upstream_Group@mediatek.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Chun-Kuang Hu <chunkuang.hu@kernel.org>, Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org, drinkcat@chromium.org, Jason-ch Chen <jason-ch.chen@mediatek.com>, Johnson Wang <johnson.wang@mediatek.com>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, LKML <linux-kernel@vger.kernel.org>, Linux Media Mailing List <linux-media@vger.kernel.org>, linux-mediatek@lists.infradead.org, Matthias Brugger <matthias.bgg@gmail.com>, Nancy Lin <nancy.lin@mediatek.com>, Rob Herring <robh+dt@kernel.org>, Shawn Sung <shawn.sung@mediatek.com>, Singo Chang <singo.chang@mediatek.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [REGRESSION] BUG: KFENCE: memory corruption in drm_gem_put_pages+0x186/0x250
+Subject: [Linaro-mm-sig] Re: [PATCH 01/10] drm/mediatek: Add interface to allocate MediaTek GEM buffer.
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/F366VWJQTYF46ERLAWYF5S2YCWHTSFE5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NAHZEIS35PB54CAJWSBYNHD6FCBOOBAX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============8534020939958128295=="
-
---===============8534020939958128295==
-Content-Type: multipart/signed; boundary="nextPart13361251.uLZWGnKmhe";
- micalg="pgp-sha256"; protocol="application/pgp-signature"
-
---nextPart13361251.uLZWGnKmhe
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"; protected-headers="v1"
-From: Oleksandr Natalenko <oleksandr@natalenko.name>
-To: Matthew Wilcox <willy@infradead.org>
-Date: Mon, 02 Oct 2023 17:38:48 +0200
-Message-ID: <2160215.irdbgypaU6@natalenko.name>
-In-Reply-To: <ZRrUjcWqtmzPV3Fs@casper.infradead.org>
-MIME-Version: 1.0
-
-On pond=C4=9Bl=C3=AD 2. =C5=99=C3=ADjna 2023 16:32:45 CEST Matthew Wilcox w=
-rote:
-> On Mon, Oct 02, 2023 at 01:02:52PM +0200, Oleksandr Natalenko wrote:
-> > > > > > BUG: KFENCE: memory corruption in drm_gem_put_pages+0x186/0x250
-> > > > > >=20
-> > > > > > Corrupted memory at 0x00000000e173a294 [ ! ! ! ! ! ! ! ! ! ! ! =
-! ! ! ! ! ] (in kfence-#108):
-> > > > > >  drm_gem_put_pages+0x186/0x250
-> > > > > >  drm_gem_shmem_put_pages_locked+0x43/0xc0
-> > > > > >  drm_gem_shmem_object_vunmap+0x83/0xe0
-> > > > > >  drm_gem_vunmap_unlocked+0x46/0xb0
-> > > > > >  drm_fbdev_generic_helper_fb_dirty+0x1dc/0x310
-> > > > > >  drm_fb_helper_damage_work+0x96/0x170
-> >=20
-> > Matthew, before I start dancing around, do you think ^^ could have the =
-same cause as 0b62af28f249b9c4036a05acfb053058dc02e2e2 which got fixed by 8=
-63a8eb3f27098b42772f668e3977ff4cae10b04?
->=20
-> Yes, entirely plausible.  I think you have two useful points to look at
-> before delving into a full bisect -- 863a8e and the parent of 0b62af.
-> If either of them work, I think you have no more work to do.
-
-OK, I've did this against v6.5.5:
-
-```
-git log --oneline HEAD~3..
-7c1e7695ca9b8 (HEAD -> test) Revert "mm: remove struct pagevec"
-8f2ad53b6eac6 Revert "mm: remove check_move_unevictable_pages()"
-fa1e3c0b5453c Revert "drm: convert drm_gem_put_pages() to use a folio_batch"
-```
-
-then rebooted the host multiple times, and the issue is not seen any more.
-
-So I guess 3291e09a463870610b8227f32b16b19a587edf33 is the culprit.
-
-Thanks.
-
-=2D-=20
-Oleksandr Natalenko (post-factum)
---nextPart13361251.uLZWGnKmhe
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part.
-Content-Transfer-Encoding: 7Bit
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEZUOOw5ESFLHZZtOKil/iNcg8M0sFAmUa5AgACgkQil/iNcg8
-M0syzg/7BciM9R4z20hUehuS7SJe83FiC1Cgucq3pMgk42d+48MZTzND3Xui+p8v
-WXpF98grtGA1nzPzfBngpkwzPVHCL2Psf/mT+ea86et2jNMPtoQBJ0BQYo4DL83F
-AG7VP9HRo9aPKwppoYsOnEEJmXqx1iqsHn0O89uworE0aV6aRRM4POZVsafKNjdT
-vAlYmRrueMS/F6YhfjcVlPd7G4K7SQTg0glBOgWo9rY9C7Ox/oNgf1MqGcp+L/V3
-2lYuFDFzj4fAHikW1zm74ujUbEXJ3FtG0knmkWcqNIjJ5yWwJk3l3birm0ni0PX6
-e22IoVoShI0W9rTpDlUEPkx7OEQ6taAwadWJbKhNdBMOjdpm1BFkDCmWH4HCWOgd
-o1ChU5iQfJldc50ymThnHVX5JxutVaPmNZDYWWAL9iMUdTkI0NkgqtWm5ZgaXRq3
-vJbZLqWAiHxA3UqvstvrzGwX3VswbJsjDV+Lqi1I27MW+xti81I3BzBP2+kfM/0I
-7bqi/XC5DboJFpNy5ac2BJdZn2ZktqAi3tkGKr4cAJViohE1/50kjAWrS+gWISOJ
-8f7UivDTV+AxizGySF88gekEA9raxURl40GK7rvBvQMwi7Fd1njzRct/O4neDlaP
-MlmoKVsz6VJoOuANweZqkyHyHYRALaxRGXxkE3yPXIfeWaFwGWc=
-=38a+
------END PGP SIGNATURE-----
-
---nextPart13361251.uLZWGnKmhe--
-
-
-
-
---===============8534020939958128295==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
+You can remove the DRIVER_RENDER flag from this patchset. That should
+not be upstreamed. The IOCTLs are still needed though because of the
+flag for allocating a secure surface that is in the next patch. If
+that flag wasn't needed, then dumb buffer allocations could be used
+instead.
+
+Thanks,
+Jeff Kardatzke
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============8534020939958128295==--
-
-
-
