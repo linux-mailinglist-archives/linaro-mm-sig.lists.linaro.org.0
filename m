@@ -2,189 +2,189 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63E2E7CF7BD
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 13:58:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9765A7CF7C1
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 13:59:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 722C63F026
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 11:58:41 +0000 (UTC)
-Received: from mail-oo1-f80.google.com (mail-oo1-f80.google.com [209.85.161.80])
-	by lists.linaro.org (Postfix) with ESMTPS id 5FA093EF1D
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 15 Oct 2023 03:37:48 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AA8B33F026
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 19 Oct 2023 11:59:03 +0000 (UTC)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	by lists.linaro.org (Postfix) with ESMTPS id 3A2183F362
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 19 Oct 2023 04:45:02 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	spf=pass (lists.linaro.org: domain of 3i14rZQkbACYUabMCNNGTCRRKF.IQQINGWUGTEQPVGPV.EQO@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.161.80 as permitted sender) smtp.mailfrom=3i14rZQkbACYUabMCNNGTCRRKF.IQQINGWUGTEQPVGPV.EQO@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none)
-Received: by mail-oo1-f80.google.com with SMTP id 006d021491bc7-57b74fbbd6eso4198199eaf.0
-        for <linaro-mm-sig@lists.linaro.org>; Sat, 14 Oct 2023 20:37:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1697341067; x=1697945867;
-        h=content-transfer-encoding:to:from:subject:message-id:date
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=foF8w8a+Sc3aMYEjJANWw1plNPjcJQbPnL865dnxUWo=;
-        b=rWHvyVAbDTIXFYkBFrhtPj2avYuo8SlHV3ECmnp7FkriB4mkly9csvNJD6GozNrvg4
-         Z4QrOaOn+aBXPiq1elCXREzJJtZ7SQ2wMxmnr/WpA0ntg1h9AXOZnJfC13ehQV+O7/xG
-         cgvJzRg8sdHM/GVJL68hseepzd+rdX+92ucwjJkIuoKrhgTbVzHlbSZhT7GmwbPq/jUF
-         LGxyjZxM348CphqGx/YVeB2KSj+ic/v7Cv6vC8qMoChtEqj6GAba1zlZltMfSMht07eW
-         Nsm/ZwHqZT0hqo97kn2qkeVjDVVY0yLoMDiVQCFwMD084cYtnhPgEEcdl0OoFIfs6Nqh
-         dXhQ==
-X-Gm-Message-State: AOJu0YyA61o0LeHQ5zMXGRUEDcYEbajRUrfSWXKwToxQktwfwI3/t/Ek
-	SJ8+Dj1iZUIhdSJ6rQO1vYQEyKKjPmlWRH4i2og5OQkBVI7s
-X-Google-Smtp-Source: AGHT+IGsyZ0CVZPQIKSBXE2Ngyt2bDz2pyzbCDr2Xsmei5tIBjt7D/9dE16CAQNT9YtnIs7GTSb7j6pgJXBjgsVW/asO6sA1JIcf
+	dkim=pass header.d=quicinc.com header.s=qcppdkim1 header.b=nXh8jcJM;
+	spf=pass (lists.linaro.org: domain of quic_vjitta@quicinc.com designates 205.220.168.131 as permitted sender) smtp.mailfrom=quic_vjitta@quicinc.com;
+	dmarc=pass (policy=none) header.from=quicinc.com
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id 39J4N061015623;
+	Thu, 19 Oct 2023 04:44:42 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=message-id : date :
+ mime-version : subject : to : cc : references : from : in-reply-to :
+ content-type : content-transfer-encoding; s=qcppdkim1;
+ bh=+ugDTtE0N5pIP+bbxhOpFwqhGnBHp8dix51AVdVNmjI=;
+ b=nXh8jcJMjbwNDlgTbyO4nJVcjRiJc/JawzpuRc0IrUlnQUYa743bURCiUPGUdZXKghUe
+ sFv6JARIsxdhvzuTvfCmwILcxHvnCTWRQwwFkbFwKAsm1WeFGhhIuvvZaAsIjfexmxT/
+ XLKvOloHIsj0h596xV05Yb7j5gqMxfkU3iKnUab5ssaUXl9e1Dz59e8YEesPodfso2ic
+ 7J48ll5bv1UaRcXGenNxuOi+ChpoLkL/pkloCxTOc34pgT2T6ohwHHo4+YyAjrPI4k7P
+ PTRUwjG/lTGhkBhQBaf57GTmtfRWBX6NzqxWONInX9Rtr3xAson5hsNvxDg7X8yaj0nr xw==
+Received: from nalasppmta04.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 3tth2f1pm9-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 19 Oct 2023 04:44:42 +0000
+Received: from nalasex01a.na.qualcomm.com (nalasex01a.na.qualcomm.com [10.47.209.196])
+	by NALASPPMTA04.qualcomm.com (8.17.1.5/8.17.1.5) with ESMTPS id 39J4ifLU003377
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Thu, 19 Oct 2023 04:44:41 GMT
+Received: from [10.216.19.246] (10.80.80.8) by nalasex01a.na.qualcomm.com
+ (10.47.209.196) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.39; Wed, 18 Oct
+ 2023 21:44:33 -0700
+Message-ID: <423c28cc-e6b0-4e82-8f38-3f4fe22076c2@quicinc.com>
+Date: Thu, 19 Oct 2023 10:14:13 +0530
 MIME-Version: 1.0
-X-Received: by 2002:a05:6808:2091:b0:3a1:c163:6022 with SMTP id
- s17-20020a056808209100b003a1c1636022mr1741075oiw.4.1697341067805; Sat, 14 Oct
- 2023 20:37:47 -0700 (PDT)
-Date: Sat, 14 Oct 2023 20:37:47 -0700
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <00000000000068c7730607b903b7@google.com>
-From: syzbot <syzbot+0da81ccba2345eeb7f48@syzkaller.appspotmail.com>
-To: airlied@gmail.com, christian.koenig@amd.com, daniel@ffwll.ch,
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
-	sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com, tzimmermann@suse.de
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.00 / 15.00];
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Yong Wu <yong.wu@mediatek.com>, Rob Herring <robh+dt@kernel.org>,
+        Sumit
+ Semwal <sumit.semwal@linaro.org>, <christian.koenig@amd.com>,
+        Matthias
+ Brugger <matthias.bgg@gmail.com>
+References: <20230911023038.30649-1-yong.wu@mediatek.com>
+From: Vijayanand Jitta <quic_vjitta@quicinc.com>
+In-Reply-To: <20230911023038.30649-1-yong.wu@mediatek.com>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nalasex01a.na.qualcomm.com (10.47.209.196)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800 signatures=585085
+X-Proofpoint-ORIG-GUID: Lc4B_SAVgouSoZ-DK34n-SzwIOaz_pQs
+X-Proofpoint-GUID: Lc4B_SAVgouSoZ-DK34n-SzwIOaz_pQs
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-10-19_02,2023-10-18_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 mlxscore=0
+ mlxlogscore=943 spamscore=0 malwarescore=0 suspectscore=0
+ lowpriorityscore=0 impostorscore=0 priorityscore=1501 clxscore=1011
+ adultscore=0 bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2309180000 definitions=main-2310190039
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.49 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=32d0b9b42ceb8b10];
-	FORGED_SENDER(0.30)[syzbot@syzkaller.appspotmail.com,3i14rZQkbACYUabMCNNGTCRRKF.IQQINGWUGTEQPVGPV.EQO@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	SUSPICIOUS_RECIPS(1.50)[];
+	RCVD_IN_DNSWL_HI(-1.00)[129.46.96.20:received,205.220.168.131:from];
+	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[quicinc.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:205.220.168.131];
+	R_DKIM_ALLOW(-0.20)[quicinc.com:s=qcppdkim1];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.161.80:from];
-	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_COUNT_ONE(0.00)[1];
-	MIME_TRACE(0.00)[0:+];
-	REDIRECTOR_URL(0.00)[goo.gl];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
+	XM_UA_NO_VERSION(0.01)[];
 	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_THREE(0.00)[4];
+	URIBL_BLOCKED(0.00)[mx0a-0031df01.pphosted.com:helo,mx0a-0031df01.pphosted.com:rdns,quicinc.com:dkim];
+	FREEMAIL_TO(0.00)[mediatek.com,kernel.org,linaro.org,amd.com,gmail.com];
+	ARC_NA(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	NEURAL_SPAM(0.00)[0.999];
-	TO_DN_NONE(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,3i14rZQkbACYUabMCNNGTCRRKF.IQQINGWUGTEQPVGPV.EQO@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
-	FREEMAIL_TO(0.00)[gmail.com,amd.com,ffwll.ch,lists.freedesktop.org,lists.linaro.org,vger.kernel.org,linux.intel.com,kernel.org,linaro.org,googlegroups.com,suse.de];
-	TAGGED_FROM(0.00)[0da81ccba2345eeb7f48];
+	DKIM_TRACE(0.00)[quicinc.com:+];
+	ASN(0.00)[asn:26211, ipnet:205.220.168.0/24, country:US];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	R_DKIM_NA(0.00)[];
-	SUBJECT_HAS_QUESTION(0.00)[]
+	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	HAS_XOIP(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[dt];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 5FA093EF1D
-X-MailFrom: 3i14rZQkbACYUabMCNNGTCRRKF.IQQINGWUGTEQPVGPV.EQO@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
+X-Rspamd-Queue-Id: 3A2183F362
+X-MailFrom: quic_vjitta@quicinc.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-Message-ID-Hash: 7C46ADP6LNY4HNX54CHSCY5NKR23EOLY
-X-Message-ID-Hash: 7C46ADP6LNY4HNX54CHSCY5NKR23EOLY
-X-Mailman-Approved-At: Thu, 19 Oct 2023 11:51:53 +0000
+Message-ID-Hash: GXYYXP34FODM4EX6HOBQU44M6ERXERNR
+X-Message-ID-Hash: GXYYXP34FODM4EX6HOBQU44M6ERXERNR
+X-Mailman-Approved-At: Thu, 19 Oct 2023 11:52:26 +0000
+CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, tjmercier@google.com, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, jianjiao.zeng@mediatek.com, kuohong.wang@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [syzbot] [dri?] WARNING in drm_prime_fd_to_handle_ioctl
+Subject: [Linaro-mm-sig] Re: [PATCH 0/9] dma-buf: heaps: Add MediaTek secure heap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7C46ADP6LNY4HNX54CHSCY5NKR23EOLY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GXYYXP34FODM4EX6HOBQU44M6ERXERNR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGVsbG8sDQoNCnN5emJvdCBmb3VuZCB0aGUgZm9sbG93aW5nIGlzc3VlIG9uOg0KDQpIRUFEIGNv
-bW1pdDogICAgMWM4Yjg2YTM3OTlmIE1lcmdlIHRhZyAneHNhNDQxLTYuNi10YWcnIG9mIGdpdDov
-L2dpdC5rZXJuZS4uDQpnaXQgdHJlZTogICAgICAgdXBzdHJlYW0NCmNvbnNvbGUrc3RyYWNlOiBo
-dHRwczovL3N5emthbGxlci5hcHBzcG90LmNvbS94L2xvZy50eHQ/eD0xMzAwNWUzMTY4MDAwMA0K
-a2VybmVsIGNvbmZpZzogIGh0dHBzOi8vc3l6a2FsbGVyLmFwcHNwb3QuY29tL3gvLmNvbmZpZz94
-PTMyZDBiOWI0MmNlYjhiMTANCmRhc2hib2FyZCBsaW5rOiBodHRwczovL3N5emthbGxlci5hcHBz
-cG90LmNvbS9idWc/ZXh0aWQ9MGRhODFjY2JhMjM0NWVlYjdmNDgNCmNvbXBpbGVyOiAgICAgICBn
-Y2MgKERlYmlhbiAxMi4yLjAtMTQpIDEyLjIuMCwgR05VIGxkIChHTlUgQmludXRpbHMgZm9yIERl
-YmlhbikgMi40MA0Kc3l6IHJlcHJvOiAgICAgIGh0dHBzOi8vc3l6a2FsbGVyLmFwcHNwb3QuY29t
-L3gvcmVwcm8uc3l6P3g9MTNjNDgzNDU2ODAwMDANCkMgcmVwcm9kdWNlcjogICBodHRwczovL3N5
-emthbGxlci5hcHBzcG90LmNvbS94L3JlcHJvLmM/eD0xMDFiMzY3OTY4MDAwMA0KDQpEb3dubG9h
-ZGFibGUgYXNzZXRzOg0KZGlzayBpbWFnZTogaHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29t
-L3N5emJvdC1hc3NldHMvNDVlOTM3Nzg4NmU5L2Rpc2stMWM4Yjg2YTMucmF3Lnh6DQp2bWxpbnV4
-OiBodHRwczovL3N0b3JhZ2UuZ29vZ2xlYXBpcy5jb20vc3l6Ym90LWFzc2V0cy85NTExYTQxYTZk
-MWUvdm1saW51eC0xYzhiODZhMy54eg0Ka2VybmVsIGltYWdlOiBodHRwczovL3N0b3JhZ2UuZ29v
-Z2xlYXBpcy5jb20vc3l6Ym90LWFzc2V0cy9mYWMwN2UxYzNjMWEvYnpJbWFnZS0xYzhiODZhMy54
-eg0KDQpUaGUgaXNzdWUgd2FzIGJpc2VjdGVkIHRvOg0KDQpjb21taXQgODVlMjZkZDUxMDBhMTgy
-YmY4NDQ4MDUwNDI3NTM5YzBhNjZhYjc5Mw0KQXV0aG9yOiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJp
-c3RpYW4ua29lbmlnQGFtZC5jb20+DQpEYXRlOiAgIFRodSBKYW4gMjYgMDk6MjQ6MjYgMjAyMyAr
-MDAwMA0KDQogICAgZHJtL2NsaWVudDogZml4IGNpcmN1bGFyIHJlZmVyZW5jZSBjb3VudGluZyBp
-c3N1ZQ0KDQpiaXNlY3Rpb24gbG9nOiAgaHR0cHM6Ly9zeXprYWxsZXIuYXBwc3BvdC5jb20veC9i
-aXNlY3QudHh0P3g9MTRjZjE3ZjE2ODAwMDANCmZpbmFsIG9vcHM6ICAgICBodHRwczovL3N5emth
-bGxlci5hcHBzcG90LmNvbS94L3JlcG9ydC50eHQ/eD0xNmNmMTdmMTY4MDAwMA0KY29uc29sZSBv
-dXRwdXQ6IGh0dHBzOi8vc3l6a2FsbGVyLmFwcHNwb3QuY29tL3gvbG9nLnR4dD94PTEyY2YxN2Yx
-NjgwMDAwDQoNCklNUE9SVEFOVDogaWYgeW91IGZpeCB0aGUgaXNzdWUsIHBsZWFzZSBhZGQgdGhl
-IGZvbGxvd2luZyB0YWcgdG8gdGhlIGNvbW1pdDoNClJlcG9ydGVkLWJ5OiBzeXpib3QrMGRhODFj
-Y2JhMjM0NWVlYjdmNDhAc3l6a2FsbGVyLmFwcHNwb3RtYWlsLmNvbQ0KRml4ZXM6IDg1ZTI2ZGQ1
-MTAwYSAoImRybS9jbGllbnQ6IGZpeCBjaXJjdWxhciByZWZlcmVuY2UgY291bnRpbmcgaXNzdWUi
-KQ0KDQotLS0tLS0tLS0tLS1bIGN1dCBoZXJlIF0tLS0tLS0tLS0tLS0NCldBUk5JTkc6IENQVTog
-MCBQSUQ6IDUwNDAgYXQgZHJpdmVycy9ncHUvZHJtL2RybV9wcmltZS5jOjMyNiBkcm1fZ2VtX3By
-aW1lX2ZkX3RvX2hhbmRsZSBkcml2ZXJzL2dwdS9kcm0vZHJtX3ByaW1lLmM6MzI2IFtpbmxpbmVd
-DQpXQVJOSU5HOiBDUFU6IDAgUElEOiA1MDQwIGF0IGRyaXZlcnMvZ3B1L2RybS9kcm1fcHJpbWUu
-YzozMjYgZHJtX3ByaW1lX2ZkX3RvX2hhbmRsZV9pb2N0bCsweDU1NS8weDYwMCBkcml2ZXJzL2dw
-dS9kcm0vZHJtX3ByaW1lLmM6Mzc0DQpNb2R1bGVzIGxpbmtlZCBpbjoNCkNQVTogMCBQSUQ6IDUw
-NDAgQ29tbTogc3l6LWV4ZWN1dG9yNDA1IE5vdCB0YWludGVkIDYuNi4wLXJjNS1zeXprYWxsZXIt
-MDAwNTUtZzFjOGI4NmEzNzk5ZiAjMA0KSGFyZHdhcmUgbmFtZTogR29vZ2xlIEdvb2dsZSBDb21w
-dXRlIEVuZ2luZS9Hb29nbGUgQ29tcHV0ZSBFbmdpbmUsIEJJT1MgR29vZ2xlIDA5LzA2LzIwMjMN
-ClJJUDogMDAxMDpkcm1fZ2VtX3ByaW1lX2ZkX3RvX2hhbmRsZSBkcml2ZXJzL2dwdS9kcm0vZHJt
-X3ByaW1lLmM6MzI2IFtpbmxpbmVdDQpSSVA6IDAwMTA6ZHJtX3ByaW1lX2ZkX3RvX2hhbmRsZV9p
-b2N0bCsweDU1NS8weDYwMCBkcml2ZXJzL2dwdS9kcm0vZHJtX3ByaW1lLmM6Mzc0DQpDb2RlOiA4
-OSBkZiBlOCAwZSA5YiAyNiBmZCBmMCA0OCBmZiAwMyBlOSA3ZSBmZCBmZiBmZiBlOCBiMCBkYyBk
-MCBmYyA0YyA4OSBmNyA0NCA4OSBlYiBlOCA3NSA3MyA4YiAwNSBlOSBkYSBmZSBmZiBmZiBlOCA5
-YiBkYyBkMCBmYyA8MGY+IDBiIGU5IDVkIGZkIGZmIGZmIGU4IDNmIDk0IDI2IGZkIGU5IDNhIGZj
-IGZmIGZmIDQ4IDhiIDdjIDI0IDA4DQpSU1A6IDAwMTg6ZmZmZmM5MDAwM2E1ZmM3MCBFRkxBR1M6
-IDAwMDEwMjkzDQpSQVg6IDAwMDAwMDAwMDAwMDAwMDAgUkJYOiBmZmZmODg4MDE4ZjE0YzAwIFJD
-WDogMDAwMDAwMDAwMDAwMDAwMA0KUkRYOiBmZmZmODg4MDFkNjkxZGMwIFJTSTogZmZmZmZmZmY4
-NGI2ZWExNSBSREk6IGZmZmY4ODgxNDc2ZjM5MjgNClJCUDogZmZmZjg4ODAxZmFjNTQwMCBSMDg6
-IDAwMDAwMDAwMDAwMDAwMDcgUjA5OiBmZmZmZmZmZmZmZmZmMDAwDQpSMTA6IGZmZmY4ODgxNDc2
-ZjM4MDAgUjExOiAwMDAwMDAwMDAwMDAwMDAwIFIxMjogZmZmZmM5MDAwM2E1ZmUxMA0KUjEzOiBm
-ZmZmODg4MTQ3NmYzODAwIFIxNDogZmZmZjg4ODAxYzU5MGMxMCBSMTU6IDAwMDAwMDAwMDAwMDAw
-MDANCkZTOiAgMDAwMDU1NTU1NTVkNjM4MCgwMDAwKSBHUzpmZmZmODg4MGI5ODAwMDAwKDAwMDAp
-IGtubEdTOjAwMDAwMDAwMDAwMDAwMDANCkNTOiAgMDAxMCBEUzogMDAwMCBFUzogMDAwMCBDUjA6
-IDAwMDAwMDAwODAwNTAwMzMNCkNSMjogMDAwMDU1NWRiNzVmNDA1OCBDUjM6IDAwMDAwMDAwNzIy
-MDkwMDAgQ1I0OiAwMDAwMDAwMDAwMzUwZWYwDQpDYWxsIFRyYWNlOg0KIDxUQVNLPg0KIGRybV9p
-b2N0bF9rZXJuZWwrMHgyODAvMHg0YzAgZHJpdmVycy9ncHUvZHJtL2RybV9pb2N0bC5jOjc4OQ0K
-IGRybV9pb2N0bCsweDVjYi8weGJmMCBkcml2ZXJzL2dwdS9kcm0vZHJtX2lvY3RsLmM6ODkyDQog
-dmZzX2lvY3RsIGZzL2lvY3RsLmM6NTEgW2lubGluZV0NCiBfX2RvX3N5c19pb2N0bCBmcy9pb2N0
-bC5jOjg3MSBbaW5saW5lXQ0KIF9fc2Vfc3lzX2lvY3RsIGZzL2lvY3RsLmM6ODU3IFtpbmxpbmVd
-DQogX194NjRfc3lzX2lvY3RsKzB4MThmLzB4MjEwIGZzL2lvY3RsLmM6ODU3DQogZG9fc3lzY2Fs
-bF94NjQgYXJjaC94ODYvZW50cnkvY29tbW9uLmM6NTAgW2lubGluZV0NCiBkb19zeXNjYWxsXzY0
-KzB4MzgvMHhiMCBhcmNoL3g4Ni9lbnRyeS9jb21tb24uYzo4MA0KIGVudHJ5X1NZU0NBTExfNjRf
-YWZ0ZXJfaHdmcmFtZSsweDYzLzB4Y2QNClJJUDogMDAzMzoweDdmMGM4MjE0YmU2OQ0KQ29kZTog
-MjggMDAgMDAgMDAgNzUgMDUgNDggODMgYzQgMjggYzMgZTggYzEgMTcgMDAgMDAgOTAgNDggODkg
-ZjggNDggODkgZjcgNDggODkgZDYgNDggODkgY2EgNGQgODkgYzIgNGQgODkgYzggNGMgOGIgNGMg
-MjQgMDggMGYgMDUgPDQ4PiAzZCAwMSBmMCBmZiBmZiA3MyAwMSBjMyA0OCBjNyBjMSBiOCBmZiBm
-ZiBmZiBmNyBkOCA2NCA4OSAwMSA0OA0KUlNQOiAwMDJiOjAwMDA3ZmZmNmY0MTU2ZjggRUZMQUdT
-OiAwMDAwMDI0NiBPUklHX1JBWDogMDAwMDAwMDAwMDAwMDAxMA0KUkFYOiBmZmZmZmZmZmZmZmZm
-ZmRhIFJCWDogMDAwMDAwMDAwMDAwMDAwMCBSQ1g6IDAwMDA3ZjBjODIxNGJlNjkNClJEWDogMDAw
-MDAwMDAyMDAwMDAwMCBSU0k6IDAwMDAwMDAwYzAwYzY0MmUgUkRJOiAwMDAwMDAwMDAwMDAwMDAz
-DQpSQlA6IDAwMDAwMDAwMDAwMDAwMDAgUjA4OiAwMDAwMDAwMDAwMDAwMGEwIFIwOTogMDAwMDAw
-MDAwMDAwMDBhMA0KUjEwOiAwMDAwMDAwMDAwMDAwMGEwIFIxMTogMDAwMDAwMDAwMDAwMDI0NiBS
-MTI6IDAwMDAwMDAwMDAwMDAwMDANClIxMzogMDAwMDdmMGM4MjFjMzgyMCBSMTQ6IDAwMDA3ZmZm
-NmY0MTU3MjAgUjE1OiAwMDAwN2ZmZjZmNDE1NzEwDQogPC9UQVNLPg0KDQoNCi0tLQ0KVGhpcyBy
-ZXBvcnQgaXMgZ2VuZXJhdGVkIGJ5IGEgYm90LiBJdCBtYXkgY29udGFpbiBlcnJvcnMuDQpTZWUg
-aHR0cHM6Ly9nb28uZ2wvdHBzbUVKIGZvciBtb3JlIGluZm9ybWF0aW9uIGFib3V0IHN5emJvdC4N
-CnN5emJvdCBlbmdpbmVlcnMgY2FuIGJlIHJlYWNoZWQgYXQgc3l6a2FsbGVyQGdvb2dsZWdyb3Vw
-cy5jb20uDQoNCnN5emJvdCB3aWxsIGtlZXAgdHJhY2sgb2YgdGhpcyBpc3N1ZS4gU2VlOg0KaHR0
-cHM6Ly9nb28uZ2wvdHBzbUVKI3N0YXR1cyBmb3IgaG93IHRvIGNvbW11bmljYXRlIHdpdGggc3l6
-Ym90Lg0KRm9yIGluZm9ybWF0aW9uIGFib3V0IGJpc2VjdGlvbiBwcm9jZXNzIHNlZTogaHR0cHM6
-Ly9nb28uZ2wvdHBzbUVKI2Jpc2VjdGlvbg0KDQpJZiB0aGUgYnVnIGlzIGFscmVhZHkgZml4ZWQs
-IGxldCBzeXpib3Qga25vdyBieSByZXBseWluZyB3aXRoOg0KI3N5eiBmaXg6IGV4YWN0LWNvbW1p
-dC10aXRsZQ0KDQpJZiB5b3Ugd2FudCBzeXpib3QgdG8gcnVuIHRoZSByZXByb2R1Y2VyLCByZXBs
-eSB3aXRoOg0KI3N5eiB0ZXN0OiBnaXQ6Ly9yZXBvL2FkZHJlc3MuZ2l0IGJyYW5jaC1vci1jb21t
-aXQtaGFzaA0KSWYgeW91IGF0dGFjaCBvciBwYXN0ZSBhIGdpdCBwYXRjaCwgc3l6Ym90IHdpbGwg
-YXBwbHkgaXQgYmVmb3JlIHRlc3RpbmcuDQoNCklmIHlvdSB3YW50IHRvIG92ZXJ3cml0ZSBidWcn
-cyBzdWJzeXN0ZW1zLCByZXBseSB3aXRoOg0KI3N5eiBzZXQgc3Vic3lzdGVtczogbmV3LXN1YnN5
-c3RlbQ0KKFNlZSB0aGUgbGlzdCBvZiBzdWJzeXN0ZW0gbmFtZXMgb24gdGhlIHdlYiBkYXNoYm9h
-cmQpDQoNCklmIHRoZSBidWcgaXMgYSBkdXBsaWNhdGUgb2YgYW5vdGhlciBidWcsIHJlcGx5IHdp
-dGg6DQojc3l6IGR1cDogZXhhY3Qtc3ViamVjdC1vZi1hbm90aGVyLXJlcG9ydA0KDQpJZiB5b3Ug
-d2FudCB0byB1bmRvIGRlZHVwbGljYXRpb24sIHJlcGx5IHdpdGg6DQojc3l6IHVuZHVwDQpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2ln
-IG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJz
-Y3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5v
-cmcK
+
+
+On 9/11/2023 8:00 AM, Yong Wu wrote:
+> This patchset consists of two parts, the first is from John and TJ.
+> It adds some heap interfaces, then our kernel users could allocate buffer
+> from special heap. The second part is adding MTK secure heap for SVP
+> (Secure Video Path). A total of two heaps are added, one is mtk_svp and
+> the other is mtk_svp_cma. The mtk_svp buffer is reserved for the secure
+> world after bootup and it is used for ES/working buffer, while the
+> mtk_svp_cma buffer is dynamically reserved for the secure world and will
+> be get ready when we start playing secure videos, this heap is used for the
+> frame buffer. Once the security video playing is complete, the CMA will be
+> released.
+> 
+> For easier viewing, I've split the new heap file into several patches.
+> 
+> The consumers of new heap and new interfaces are our codec and drm which
+> will send upstream soon, probably this week.
+> 
+> Base on v6.6-rc1.
+> 
+> John Stultz (2):
+>   dma-heap: Add proper kref handling on dma-buf heaps
+>   dma-heap: Provide accessors so that in-kernel drivers can allocate
+>     dmabufs from specific heaps
+> 
+> T.J. Mercier (1):
+>   dma-buf: heaps: Deduplicate docs and adopt common format
+> 
+> Yong Wu (6):
+>   dma-buf: heaps: Initialise MediaTek secure heap
+>   dma-buf: heaps: mtk_sec_heap: Initialise tee session
+>   dma-buf: heaps: mtk_sec_heap: Add tee service call for buffer
+>     allocating/freeing
+>   dma-buf: heaps: mtk_sec_heap: Add dma_ops
+>   dt-bindings: reserved-memory: MediaTek: Add reserved memory for SVP
+>   dma_buf: heaps: mtk_sec_heap: Add a new CMA heap
+> 
+>  .../mediatek,secure_cma_chunkmem.yaml         |  42 ++
+>  drivers/dma-buf/dma-heap.c                    | 127 +++--
+>  drivers/dma-buf/heaps/Kconfig                 |   8 +
+>  drivers/dma-buf/heaps/Makefile                |   1 +
+>  drivers/dma-buf/heaps/mtk_secure_heap.c       | 458 ++++++++++++++++++
+>  include/linux/dma-heap.h                      |  42 +-
+>  6 files changed, 630 insertions(+), 48 deletions(-)
+>  create mode 100644 Documentation/devicetree/bindings/reserved-memory/mediatek,secure_cma_chunkmem.yaml
+>  create mode 100644 drivers/dma-buf/heaps/mtk_secure_heap.c
+> 
+
+Thanks for this patch series.
+
+In Qualcomm as well we have similar usecases which need secure heap. We are working on
+posting them upstream, would share more details on usecases soon.
+
+Have few comments on the current implementation.
+
+1) I see most the implementation here is mtk specific, even file names ,heap names etc.
+   But secure heap is a common requirement, can we keep naming as well generic may be secure_heap ?
+
+2) secure heap has two parts, one is allocation and other one is securing the memory.
+   Have few comments on making these interfaces generic, would post those on corresponding 
+   patches.
+
+Thanks,
+Vijay
+   
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
