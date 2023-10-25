@@ -2,82 +2,155 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D226E7D690C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Oct 2023 12:40:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86DBE7D6C53
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Oct 2023 14:50:48 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BE92440BC4
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Oct 2023 10:40:29 +0000 (UTC)
-Received: from fd01.gateway.ufhost.com (fd01.gateway.ufhost.com [61.152.239.71])
-	by lists.linaro.org (Postfix) with ESMTP id 7C4FE3EFD1
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Oct 2023 10:40:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7879340BB3
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 25 Oct 2023 12:50:47 +0000 (UTC)
+Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
+	by lists.linaro.org (Postfix) with ESMTPS id 7FD4F3EA1B
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Oct 2023 12:50:31 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	dmarc=none;
-	spf=pass (lists.linaro.org: domain of keith.zhao@starfivetech.com designates 61.152.239.71 as permitted sender) smtp.mailfrom=keith.zhao@starfivetech.com
-Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
-	by fd01.gateway.ufhost.com (Postfix) with ESMTP id B487A83D7;
-	Wed, 25 Oct 2023 18:40:00 +0800 (CST)
-Received: from EXMBX061.cuchost.com (172.16.6.61) by EXMBX166.cuchost.com
- (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Wed, 25 Oct
- 2023 18:40:00 +0800
-Received: from xiaofei.localdomain (180.164.60.184) by EXMBX061.cuchost.com
- (172.16.6.61) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Wed, 25 Oct
- 2023 18:40:00 +0800
-From: Keith Zhao <keith.zhao@starfivetech.com>
-To: <dri-devel@lists.freedesktop.org>, <devicetree@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <linux-riscv@lists.infradead.org>,
-	<linux-media@vger.kernel.org>, <linaro-mm-sig@lists.linaro.org>
-Date: Wed, 25 Oct 2023 18:39:57 +0800
-Message-ID: <20231025103957.3776-7-keith.zhao@starfivetech.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231025103957.3776-1-keith.zhao@starfivetech.com>
-References: <20231025103957.3776-1-keith.zhao@starfivetech.com>
+	dkim=pass header.d=linaro.org header.s=google header.b=jbmhKpJQ;
+	dmarc=pass (policy=none) header.from=linaro.org;
+	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.208.43 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org
+Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-53b32dca0bfso1842111a12.0
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 25 Oct 2023 05:50:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1698238230; x=1698843030; darn=lists.linaro.org;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=fD2982vYZCUDmxVo5Px3lqGhkfxchv2yO6sZbRsOqSM=;
+        b=jbmhKpJQSVIf3t4N3Hs7Qniswq3ZwbTC6BBMHjGarnwsHeYinRGckv6jvofHa8aE/D
+         rSJNn8FRP0KDS44VUB03hIHFuT1L69vBMGOox7yXOsBSGZ2kslIlqHrvbHVmabwBv4qF
+         /ZqBBYbjZxEG9O02gpe9KVCUA9uEVvWF8gEZ3jclm4sqUArOs0nkDfD5nucpBN/Pspc9
+         Tkg7eJbk2YwRWLemR9nXjTOfOIbm0xNn340KGiLBbgc5UuAsf4oTQHFXVcVZ8CpHXQWz
+         cdVxDyWyrPigy5+gWuypMvwKEL98+0tzuGeCVBxFmItezLnU7QfBeu6Al36q1RXpaBo5
+         iuGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1698238230; x=1698843030;
+        h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
+         :to:content-language:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=fD2982vYZCUDmxVo5Px3lqGhkfxchv2yO6sZbRsOqSM=;
+        b=qSpGK88gMuejOuWf1BAf4MfljGiNM3GMJJQnDTULiyFjkki9BjuGOMpxLVJWGY/Of1
+         S7EO5nXNPspOIV/pC/v7vDZQpXXUAOQQ4yugDiKPetoqoSWMYPrr/eYoU3wAKCiwROUf
+         IwUqVvNdbourMkmKWgdsvVlV1vYAMfZjo2bvX80MzGDEIAWP2tJpiBi0PiEhOd5UWHha
+         HsmoVE6NjeB7vOTUMSBH8iPHb+bsy3pWmqxBGTMTLjrBtERjcTV48f+IKinWKJqqbw0I
+         sbJs1qZNL7Tr956revgxpI2LrGHPphm6NioPYSTOhfeKYsis0o+/FLHXNCRMW6MlMs5I
+         OrMg==
+X-Gm-Message-State: AOJu0Yz9AB9MB2IhnIXg6pkcq9/lnea7RO/MrcpK9XsK3DHxWYlxBlJG
+	kUCxuydNRvFIhX4Mbhbeb+9OJotQ
+X-Google-Smtp-Source: AGHT+IFY+odEeWhpmWwdO9o/N+Sxf3TBtwjYsjMlFnwBohLaWPF4pJvsSJhPttwqS0MW8f/KvpgDQw==
+X-Received: by 2002:a05:6402:35c4:b0:540:911b:72b1 with SMTP id z4-20020a05640235c400b00540911b72b1mr6159231edc.7.1698238230380;
+        Wed, 25 Oct 2023 05:50:30 -0700 (PDT)
+Received: from [192.168.1.20] ([178.197.218.126])
+        by smtp.gmail.com with ESMTPSA id eh16-20020a0564020f9000b0054026e95beesm6184888edb.76.2023.10.25.05.50.25
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 25 Oct 2023 05:50:28 -0700 (PDT)
+Message-ID: <cb7395a9-71e8-415e-90d5-866a2aeadf28@linaro.org>
+Date: Wed, 25 Oct 2023 14:50:23 +0200
 MIME-Version: 1.0
-X-Originating-IP: [180.164.60.184]
-X-ClientProxiedBy: EXCAS062.cuchost.com (172.16.6.22) To EXMBX061.cuchost.com
- (172.16.6.61)
-X-YovoleRuleAgent: yovoleflag
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Keith Zhao <keith.zhao@starfivetech.com>,
+ dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
+ linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+References: <20231025103957.3776-1-keith.zhao@starfivetech.com>
+ <20231025103957.3776-2-keith.zhao@starfivetech.com>
+From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
+ 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
+ D2GYIS41Kv4Isx2dEFh+/Q==
+In-Reply-To: <20231025103957.3776-2-keith.zhao@starfivetech.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 7C4FE3EFD1
-X-Spamd-Bar: /
-X-Spamd-Result: default: False [-0.20 / 15.00];
+X-Rspamd-Queue-Id: 7FD4F3EA1B
+X-Spamd-Bar: ------
+X-Spamd-Result: default: False [-6.49 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:61.152.239.0/24];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_NO_TLS_LAST(0.10)[];
+	XM_UA_NO_VERSION(0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:4812, ipnet:61.152.0.0/16, country:CN];
-	TAGGED_RCPT(0.00)[dt];
-	ARC_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	RCPT_COUNT_TWELVE(0.00)[30];
-	DMARC_NA(0.00)[starfivetech.com];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	URIBL_BLOCKED(0.00)[linaro.org:dkim,starfivetech.com:email,mail-ed1-f43.google.com:rdns,mail-ed1-f43.google.com:helo,1.192.155.192:email];
+	ARC_NA(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,kernel.org,linaro.org,esmil.dk,sifive.com,dabbelt.com,eecs.berkeley.edu,linux.intel.com,suse.de,pengutronix.de,amd.com,sntech.de,edgeble.ai,hotmail.com,starfivetech.com];
+	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	R_DKIM_NA(0.00)[];
+	DKIM_TRACE(0.00)[linaro.org:+];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.43:from];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	HAS_XOIP(0.00)[];
-	DNSWL_BLOCKED(0.00)[175.102.18.54:received,180.164.60.184:received];
-	RCVD_COUNT_THREE(0.00)[3];
-	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,kernel.org,linaro.org,esmil.dk,sifive.com,dabbelt.com,eecs.berkeley.edu,linux.intel.com,suse.de,pengutronix.de,amd.com,sntech.de,edgeble.ai,hotmail.com,starfivetech.com]
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[dt];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_IN_DNSWL_FAIL(0.00)[178.197.218.126:server fail];
+	RCVD_IN_DNSWL_NONE(0.00)[209.85.208.43:from]
 X-Rspamd-Action: no action
-Message-ID-Hash: INSQNLVNWO7ZPRH3JPV2XINXC3QPTZPU
-X-Message-ID-Hash: INSQNLVNWO7ZPRH3JPV2XINXC3QPTZPU
-X-MailFrom: keith.zhao@starfivetech.com
+Message-ID-Hash: IHVS2IMM7TKRCY3PXPMW2UV76KCLNXB4
+X-Message-ID-Hash: IHVS2IMM7TKRCY3PXPMW2UV76KCLNXB4
+X-MailFrom: krzysztof.kozlowski@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Daniel Vetter <daniel@ffwll.ch>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Emil Renner Berthing <kernel@esmil.dk>, Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Philipp Zabel <p.zabel@pengutronix.de>, Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com, Bjorn Andersson <andersson@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Shawn Guo <shawnguo@kernel.org>, Jagan Teki <jagan@edgeble.ai>, Chris Morgan <macromorgan@hotmail.com>, Keith Zhao <keith.zhao@starfivetech.com>, Jack Zhu <jack.zhu@starfivetech.com>, Shengyang Chen <shengyang.chen@starfivetech.com>, Changhuang Liang <changhuang.liang@starfivetech.com>
+CC: Daniel Vetter <daniel@ffwll.ch>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Emil Renner Berthing <kernel@esmil.dk>, Paul Walmsley <paul.walmsley@sifive.com>, Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Philipp Zabel <p.zabel@pengutronix.de>, Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com, Bjorn Andersson <andersson@kernel.org>, Heiko Stuebner <heiko@sntech.de>, Shawn Guo <shawnguo@kernel.org>, Jagan Teki <jagan@edgeble.ai>, Chris Morgan <macromorgan@hotmail.com>, Jack Zhu <jack.zhu@starfivetech.com>, Shengyang Chen <shengyang.chen@starfivetech.com>, Changhuang Liang <changhuang.liang@starfivetech.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2 6/6] drm/vs: Add hdmi driver
+Subject: [Linaro-mm-sig] Re: [PATCH v2 1/6] dt-bindings: display: Add yamls for JH7110 display system
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/INSQNLVNWO7ZPRH3JPV2XINXC3QPTZPU/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IHVS2IMM7TKRCY3PXPMW2UV76KCLNXB4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -87,1334 +160,261 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-add hdmi driver as encoder and connect
+On 25/10/2023 12:39, Keith Zhao wrote:
+> StarFive SoCs JH7110 display system:
 
-Signed-off-by: Keith Zhao <keith.zhao@starfivetech.com>
----
- drivers/gpu/drm/verisilicon/Kconfig         |   8 +-
- drivers/gpu/drm/verisilicon/Makefile        |   1 +
- drivers/gpu/drm/verisilicon/starfive_hdmi.c | 949 ++++++++++++++++++++
- drivers/gpu/drm/verisilicon/starfive_hdmi.h | 295 ++++++
- drivers/gpu/drm/verisilicon/vs_drv.c        |   5 +
- drivers/gpu/drm/verisilicon/vs_drv.h        |   4 +
- 6 files changed, 1261 insertions(+), 1 deletion(-)
- create mode 100644 drivers/gpu/drm/verisilicon/starfive_hdmi.c
- create mode 100644 drivers/gpu/drm/verisilicon/starfive_hdmi.h
+A nit, subject: drop second/last, redundant "yamls for". The
+"dt-bindings" prefix is already stating that these are bindings, so
+format is fixed.
 
-diff --git a/drivers/gpu/drm/verisilicon/Kconfig b/drivers/gpu/drm/verisilicon/Kconfig
-index 3a361f8c8..122c786e3 100644
---- a/drivers/gpu/drm/verisilicon/Kconfig
-+++ b/drivers/gpu/drm/verisilicon/Kconfig
-@@ -12,4 +12,10 @@ config DRM_VERISILICON
- 	  setting and buffer management. It does not
- 	  provide 2D or 3D acceleration.
- 
--
-+config DRM_VERISILICON_STARFIVE_HDMI
-+	bool "Starfive HDMI extensions"
-+	depends on DRM_VERISILICON
-+	help
-+	   This selects support for StarFive soc specific extensions
-+	   for the Innosilicon HDMI driver. If you want to enable
-+	   HDMI on JH7110 based soc, you should select this option.
-diff --git a/drivers/gpu/drm/verisilicon/Makefile b/drivers/gpu/drm/verisilicon/Makefile
-index 1d48016ca..08350f25b 100644
---- a/drivers/gpu/drm/verisilicon/Makefile
-+++ b/drivers/gpu/drm/verisilicon/Makefile
-@@ -7,5 +7,6 @@ vs_drm-objs := vs_dc_hw.o \
- 		vs_modeset.o \
- 		vs_plane.o
- 
-+vs_drm-$(CONFIG_DRM_VERISILICON_STARFIVE_HDMI) += starfive_hdmi.o
- obj-$(CONFIG_DRM_VERISILICON) += vs_drm.o
- 
-diff --git a/drivers/gpu/drm/verisilicon/starfive_hdmi.c b/drivers/gpu/drm/verisilicon/starfive_hdmi.c
-new file mode 100644
-index 000000000..d296c4b71
---- /dev/null
-+++ b/drivers/gpu/drm/verisilicon/starfive_hdmi.c
-@@ -0,0 +1,949 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (C) 2023 StarFive Technology Co., Ltd.
-+ */
-+
-+#include <linux/clk.h>
-+#include <linux/component.h>
-+#include <linux/delay.h>
-+#include <linux/err.h>
-+#include <linux/hdmi.h>
-+#include <linux/i2c.h>
-+#include <linux/irq.h>
-+#include <linux/media-bus-format.h>
-+#include <linux/mfd/syscon.h>
-+#include <linux/module.h>
-+#include <linux/mutex.h>
-+#include <linux/of_device.h>
-+#include <linux/pm_runtime.h>
-+#include <linux/reset.h>
-+
-+#include <drm/bridge/dw_hdmi.h>
-+#include <drm/drm_atomic_helper.h>
-+#include <drm/drm_edid.h>
-+#include <drm/drm_managed.h>
-+#include <drm/drm_of.h>
-+#include <drm/drm_probe_helper.h>
-+#include <drm/drm_simple_kms_helper.h>
-+
-+#include "starfive_hdmi.h"
-+#include "vs_drv.h"
-+#include "vs_crtc.h"
-+
-+static struct starfive_hdmi *encoder_to_hdmi(struct drm_encoder *encoder)
-+{
-+	return container_of(encoder, struct starfive_hdmi, encoder);
-+}
-+
-+static struct starfive_hdmi *connector_to_hdmi(struct drm_connector *connector)
-+{
-+	return container_of(connector, struct starfive_hdmi, connector);
-+}
-+
-+struct starfive_hdmi_i2c {
-+	struct i2c_adapter adap;
-+
-+	u8 ddc_addr;
-+	u8 segment_addr;
-+	/* protects the edid data when use i2c cmd to read edid */
-+	struct mutex lock;
-+	struct completion cmp;
-+};
-+
-+static const struct pre_pll_config pre_pll_cfg_table[] = {
-+	{ 25175000,  25175000, 1,  100, 2, 3, 3, 12, 3, 3, 4, 0, 0xf55555},
-+	{ 25200000,  25200000, 1,  100, 2, 3, 3, 12, 3, 3, 4, 0, 0},
-+	{ 27000000,  27000000, 1,  90, 3, 2, 2, 10, 3, 3, 4, 0, 0},
-+	{ 27027000,  27027000, 1,  90, 3, 2, 2, 10, 3, 3, 4, 0, 0x170a3d},
-+	{ 28320000,  28320000, 1,  28, 2, 1, 1,  3, 0, 3, 4, 0, 0x51eb85},
-+	{ 30240000,  30240000, 1,  30, 2, 1, 1,  3, 0, 3, 4, 0, 0x3d70a3},
-+	{ 31500000,  31500000, 1,  31, 2, 1, 1,  3, 0, 3, 4, 0, 0x7fffff},
-+	{ 33750000,  33750000, 1,  33, 2, 1, 1,  3, 0, 3, 4, 0, 0xcfffff},
-+	{ 36000000,  36000000, 1,  36, 2, 1, 1,  3, 0, 3, 4, 0, 0},
-+	{ 40000000,  40000000, 1,  80, 2, 2, 2, 12, 2, 2, 2, 0, 0},
-+	{ 46970000,  46970000, 1,  46, 2, 1, 1,  3, 0, 3, 4, 0, 0xf851eb},
-+	{ 49500000,  49500000, 1,  49, 2, 1, 1,  3, 0, 3, 4, 0, 0x7fffff},
-+	{ 49000000,  49000000, 1,  49, 2, 1, 1,  3, 0, 3, 4, 0, 0},
-+	{ 50000000,  50000000, 1,  50, 2, 1, 1,  3, 0, 3, 4, 0, 0},
-+	{ 54000000,  54000000, 1,  54, 2, 1, 1,  3, 0, 3, 4, 0, 0},
-+	{ 54054000,  54054000, 1,  54, 2, 1, 1,  3, 0, 3, 4, 0, 0x0dd2f1},
-+	{ 57284000,  57284000, 1,  57, 2, 1, 1,  3, 0, 3, 4, 0, 0x48b439},
-+	{ 58230000,  58230000, 1,  58, 2, 1, 1,  3, 0, 3, 4, 0, 0x3ae147},
-+	{ 59341000,  59341000, 1,  59, 2, 1, 1,  3, 0, 3, 4, 0, 0x574bc6},
-+	{ 59400000,  59400000, 1,  99, 3, 1, 1,  1, 3, 3, 4, 0, 0},
-+	{ 65000000,  65000000, 1, 130, 2, 2, 2,  12, 0, 2, 2, 0, 0},
-+	{ 68250000,  68250000, 1, 68,  2, 1, 1,  3,  0, 3, 4, 0, 0x3fffff},
-+	{ 71000000,  71000000, 1,  71, 2, 1, 1,  3, 0, 3,  4, 0, 0},
-+	{ 74176000,  74176000, 1,  98, 1, 2, 2,  1, 2, 3, 4, 0, 0xe6ae6b},
-+	{ 74250000,  74250000, 1,  99, 1, 2, 2,  1, 2, 3, 4, 0, 0},
-+	{ 75000000,  75000000, 1,  75, 2, 1, 1,  3, 0, 3, 4, 0, 0},
-+	{ 78750000,  78750000, 1,  78, 2, 1, 1,  3, 0, 3, 4, 0, 0xcfffff},
-+	{ 79500000,  79500000, 1,  79, 2, 1, 1,  3, 0, 3, 4, 0, 0x7fffff},
-+	{ 83500000,  83500000, 2, 167, 2, 1, 1,  1, 0, 0,  6, 0, 0},
-+	{ 83500000, 104375000, 1, 104, 2, 1, 1,  1, 1, 0,  5, 0, 0x600000},
-+	{ 84858000,  84858000, 1,  85, 2, 1, 1,  3, 0, 3,  4, 0, 0xdba5e2},
-+	{ 85500000,  85500000, 1,  85, 2, 1, 1,  3, 0, 3,  4, 0, 0x7fffff},
-+	{ 85750000,  85750000, 1,  85, 2, 1, 1,  3, 0, 3,  4, 0, 0xcfffff},
-+	{ 85800000,  85800000, 1,  85, 2, 1, 1,  3, 0, 3,  4, 0, 0xcccccc},
-+	{ 88750000,  88750000, 1,  88, 2, 1, 1,  3, 0, 3,  4, 0, 0xcfffff},
-+	{ 89910000,  89910000, 1,  89, 2, 1, 1,  3, 0, 3, 4, 0, 0xe8f5c1},
-+	{ 90000000,  90000000, 1,  90, 2, 1, 1,  3, 0, 3, 4, 0, 0},
-+	{101000000, 101000000, 1, 101, 2, 1, 1,  3, 0, 3, 4, 0, 0},
-+	{102250000, 102250000, 1, 102, 2, 1, 1,  3, 0, 3, 4, 0, 0x3fffff},
-+	{106500000, 106500000, 1, 106, 2, 1, 1,  3, 0, 3, 4, 0, 0x7fffff},
-+	{108000000, 108000000, 1,  90, 3, 0, 0,  5, 0, 2,  2, 0, 0},
-+	{119000000, 119000000, 1, 119, 2, 1, 1,  3, 0, 3,  4, 0, 0},
-+	{131481000, 131481000, 1,  131, 2, 1, 1,  3, 0, 3,  4, 0, 0x7b22d1},
-+	{135000000, 135000000, 1,  135, 2, 1, 1,  3, 0, 3, 4, 0, 0},
-+	{136750000, 136750000, 1,  136, 2, 1, 1,  3, 0, 3, 4, 0, 0xcfffff},
-+	{147180000, 147180000, 1,  147, 2, 1, 1,  3, 0, 3, 4, 0, 0x2e147a},
-+	{148352000, 148352000, 1,  98, 1, 1, 1,  1, 2, 2, 2, 0, 0xe6ae6b},
-+	{148500000, 148500000, 1,  99, 1, 1, 1,  1, 2, 2, 2, 0, 0},
-+	{154000000, 154000000, 1, 154, 2, 1, 1,  3, 0, 3, 4, 0, 0},
-+	{156000000, 156000000, 1, 156, 2, 1, 1,  3, 0, 3, 4, 0, 0},
-+	{157000000, 157000000, 1, 157, 2, 1, 1,  3, 0, 3, 4, 0, 0},
-+	{162000000, 162000000, 1, 162, 2, 1, 1,  3, 0, 3, 4, 0, 0},
-+	{174250000, 174250000, 1, 145, 3, 0, 0,  5, 0, 2, 2, 0, 0x355555},
-+	{174500000, 174500000, 1, 174, 2, 1, 1,  3, 0, 3, 4, 0, 0x7fffff},
-+	{174570000, 174570000, 1, 174, 2, 1, 1,  3, 0, 3, 4, 0, 0x91eb84},
-+	{175500000, 175500000, 1, 175, 2, 1, 1,  3, 0, 3, 4, 0, 0x7fffff},
-+	{185590000, 185590000, 1, 185, 2, 1, 1,  3, 0, 3, 4, 0, 0x970a3c},
-+	{187000000, 187000000, 1, 187, 2, 1, 1,  3, 0, 3, 4, 0, 0},
-+	{241500000, 241500000, 1, 161, 1, 1, 1,  4, 0, 2,  2, 0, 0},
-+	{241700000, 241700000, 1, 241, 2, 1, 1,  3, 0, 3,  4, 0, 0xb33332},
-+	{262750000, 262750000, 1, 262, 2, 1, 1,  3, 0, 3,  4, 0, 0xcfffff},
-+	{296500000, 296500000, 1, 296, 2, 1, 1,  3, 0, 3,  4, 0, 0x7fffff},
-+	{296703000, 296703000, 1,  98, 0, 1, 1,  1, 0, 2,  2, 0, 0xe6ae6b},
-+	{297000000, 297000000, 1,  99, 0, 1, 1,  1, 0, 2,  2, 0, 0},
-+	{594000000, 594000000, 1,  99, 0, 2, 0,  1, 0, 1,  1, 0, 0},
-+	{0, 0, 0,  0, 0, 0, 0,  0, 0, 0,  0, 0, 0},
-+};
-+
-+static const struct post_pll_config post_pll_cfg_table[] = {
-+	{25200000,	1, 80, 13, 3, 1},
-+	{27000000,	1, 40, 11, 3, 1},
-+	{33750000,	1, 40, 11, 3, 1},
-+	{49000000,	1, 20, 1, 3, 3},
-+	{241700000, 1, 20, 1, 3, 3},
-+	{297000000, 4, 20, 0, 0, 3},
-+	{594000000, 4, 20, 0, 0, 0},
-+	{ /* sentinel */ }
-+};
-+
-+inline u8 hdmi_readb(struct starfive_hdmi *hdmi, u16 offset)
-+{
-+	return readl_relaxed(hdmi->regs + (offset) * 0x04);
-+}
-+
-+inline void hdmi_writeb(struct starfive_hdmi *hdmi, u16 offset, u32 val)
-+{
-+	writel_relaxed(val, hdmi->regs + (offset) * 0x04);
-+}
-+
-+inline void hdmi_modb(struct starfive_hdmi *hdmi, u16 offset,
-+			     u32 msk, u32 val)
-+{
-+	u8 temp = hdmi_readb(hdmi, offset) & ~msk;
-+
-+	temp |= val & msk;
-+	hdmi_writeb(hdmi, offset, temp);
-+}
-+
-+static int starfive_hdmi_enable_clk_deassert_rst(struct device *dev, struct starfive_hdmi *hdmi)
-+{
-+	int ret;
-+
-+	ret = clk_prepare_enable(hdmi->sys_clk);
-+	if (ret) {
-+		dev_err(dev, "Cannot enable HDMI sys clock: %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = clk_prepare_enable(hdmi->mclk);
-+	if (ret) {
-+		dev_err(dev, "Cannot enable HDMI mclk clock: %d\n", ret);
-+		goto err_mclk;
-+	}
-+	ret = clk_prepare_enable(hdmi->bclk);
-+	if (ret) {
-+		dev_err(dev, "Cannot enable HDMI bclk clock: %d\n", ret);
-+		goto err_bclk;
-+	}
-+	ret = reset_control_deassert(hdmi->tx_rst);
-+	if (ret < 0) {
-+		dev_err(dev, "failed to deassert tx_rst\n");
-+		goto err_rst;
-+	}
-+	return 0;
-+
-+err_rst:
-+	clk_disable_unprepare(hdmi->bclk);
-+err_bclk:
-+	clk_disable_unprepare(hdmi->mclk);
-+err_mclk:
-+	clk_disable_unprepare(hdmi->sys_clk);
-+	return ret;
-+}
-+
-+static void starfive_hdmi_disable_clk_assert_rst(struct device *dev, struct starfive_hdmi *hdmi)
-+{
-+	int ret;
-+
-+	ret = reset_control_assert(hdmi->tx_rst);
-+	if (ret < 0)
-+		dev_err(dev, "failed to assert tx_rst\n");
-+
-+	clk_disable_unprepare(hdmi->sys_clk);
-+	clk_disable_unprepare(hdmi->mclk);
-+	clk_disable_unprepare(hdmi->bclk);
-+}
-+
-+#ifdef CONFIG_PM_SLEEP
-+static int hdmi_system_pm_suspend(struct device *dev)
-+{
-+	return pm_runtime_force_suspend(dev);
-+}
-+
-+static int hdmi_system_pm_resume(struct device *dev)
-+{
-+	return pm_runtime_force_resume(dev);
-+}
-+#endif
-+
-+#ifdef CONFIG_PM
-+static int hdmi_runtime_suspend(struct device *dev)
-+{
-+	struct starfive_hdmi *hdmi = dev_get_drvdata(dev);
-+
-+	starfive_hdmi_disable_clk_assert_rst(dev, hdmi);
-+
-+	return 0;
-+}
-+
-+static int hdmi_runtime_resume(struct device *dev)
-+{
-+	struct starfive_hdmi *hdmi = dev_get_drvdata(dev);
-+
-+	return starfive_hdmi_enable_clk_deassert_rst(dev, hdmi);
-+}
-+#endif
-+
-+static void starfive_hdmi_tx_phy_power_down(struct starfive_hdmi *hdmi)
-+{
-+	hdmi_modb(hdmi, HDMI_SYS_CTRL, m_POWER, v_PWR_OFF);
-+}
-+
-+static void starfive_hdmi_tx_phy_power_on(struct starfive_hdmi *hdmi)
-+{
-+	hdmi_modb(hdmi, HDMI_SYS_CTRL, m_POWER, v_PWR_ON);
-+}
-+
-+static void starfive_hdmi_config_pll(struct starfive_hdmi *hdmi)
-+{
-+	u32 val;
-+	u8 reg_1ad_value = hdmi->post_cfg->post_div_en ?
-+		 hdmi->post_cfg->postdiv : 0x00;
-+	u8 reg_1aa_value = hdmi->post_cfg->post_div_en ?
-+		 0x0e : 0x02;
-+
-+	hdmi_writeb(hdmi, STARFIVE_PRE_PLL_CONTROL, STARFIVE_PRE_PLL_POWER_DOWN);
-+	hdmi_writeb(hdmi, STARFIVE_POST_PLL_DIV_1,
-+		    STARFIVE_POST_PLL_POST_DIV_ENABLE |
-+		    STARFIVE_POST_PLL_REFCLK_SEL_TMDS |
-+		    STARFIVE_POST_PLL_POWER_DOWN);
-+	hdmi_writeb(hdmi, STARFIVE_PRE_PLL_DIV_1, STARFIVE_PRE_PLL_PRE_DIV(hdmi->pre_cfg->prediv));
-+
-+	val = STARFIVE_SPREAD_SPECTRUM_MOD_DISABLE | STARFIVE_SPREAD_SPECTRUM_MOD_DOWN;
-+	if (!hdmi->pre_cfg->fracdiv)
-+		val |= STARFIVE_PRE_PLL_FRAC_DIV_DISABLE;
-+	hdmi_writeb(hdmi, STARFIVE_PRE_PLL_DIV_2,
-+		    STARFIVE_PRE_PLL_FB_DIV_11_8(hdmi->pre_cfg->fbdiv) | val);
-+	hdmi_writeb(hdmi, STARFIVE_PRE_PLL_DIV_3,
-+		    STARFIVE_PRE_PLL_FB_DIV_7_0(hdmi->pre_cfg->fbdiv));
-+	hdmi_writeb(hdmi, STARFIVE_PRE_PLL_DIV_4,
-+		    STARFIVE_PRE_PLL_TMDSCLK_DIV_C(hdmi->pre_cfg->tmds_div_c) |
-+		    STARFIVE_PRE_PLL_TMDSCLK_DIV_A(hdmi->pre_cfg->tmds_div_a) |
-+		    STARFIVE_PRE_PLL_TMDSCLK_DIV_B(hdmi->pre_cfg->tmds_div_b));
-+
-+	if (hdmi->pre_cfg->fracdiv) {
-+		hdmi_writeb(hdmi, STARFIVE_PRE_PLL_FRAC_DIV_L,
-+			    STARFIVE_PRE_PLL_FRAC_DIV_7_0(hdmi->pre_cfg->fracdiv));
-+		hdmi_writeb(hdmi, STARFIVE_PRE_PLL_FRAC_DIV_M,
-+			    STARFIVE_PRE_PLL_FRAC_DIV_15_8(hdmi->pre_cfg->fracdiv));
-+		hdmi_writeb(hdmi, STARFIVE_PRE_PLL_FRAC_DIV_H,
-+			    STARFIVE_PRE_PLL_FRAC_DIV_23_16(hdmi->pre_cfg->fracdiv));
-+	}
-+
-+	hdmi_writeb(hdmi, STARFIVE_PRE_PLL_DIV_5,
-+		    STARFIVE_PRE_PLL_PCLK_DIV_A(hdmi->pre_cfg->pclk_div_a) |
-+		    STARFIVE_PRE_PLL_PCLK_DIV_B(hdmi->pre_cfg->pclk_div_b));
-+	hdmi_writeb(hdmi, STARFIVE_PRE_PLL_DIV_6,
-+		    STARFIVE_PRE_PLL_PCLK_DIV_C(hdmi->pre_cfg->pclk_div_c) |
-+		    STARFIVE_PRE_PLL_PCLK_DIV_D(hdmi->pre_cfg->pclk_div_d));
-+
-+	/*pre-pll power down*/
-+	hdmi_modb(hdmi, STARFIVE_PRE_PLL_CONTROL, STARFIVE_PRE_PLL_POWER_DOWN, 0);
-+
-+	hdmi_modb(hdmi, STARFIVE_POST_PLL_DIV_2, STARFIVE_POST_PLL_Pre_DIV_MASK,
-+		  STARFIVE_POST_PLL_PRE_DIV(hdmi->post_cfg->prediv));
-+	hdmi_writeb(hdmi, STARFIVE_POST_PLL_DIV_3, hdmi->post_cfg->fbdiv & 0xff);
-+	hdmi_writeb(hdmi, STARFIVE_POST_PLL_DIV_4, reg_1ad_value);
-+	hdmi_writeb(hdmi, STARFIVE_POST_PLL_DIV_1, reg_1aa_value);
-+}
-+
-+static void starfive_hdmi_tmds_driver_on(struct starfive_hdmi *hdmi)
-+{
-+	hdmi_modb(hdmi, STARFIVE_TMDS_CONTROL,
-+		  STARFIVE_TMDS_DRIVER_ENABLE, STARFIVE_TMDS_DRIVER_ENABLE);
-+}
-+
-+static void starfive_hdmi_sync_tmds(struct starfive_hdmi *hdmi)
-+{
-+	/*first send 0 to this bit, then send 1 and keep 1 into this bit*/
-+	hdmi_writeb(hdmi, HDMI_SYNC, 0x0);
-+	hdmi_writeb(hdmi, HDMI_SYNC, 0x1);
-+}
-+
-+static void starfive_hdmi_i2c_init(struct starfive_hdmi *hdmi)
-+{
-+	int ddc_bus_freq;
-+
-+	ddc_bus_freq = (clk_get_rate(hdmi->sys_clk) >> 2) / HDMI_SCL_RATE;
-+
-+	hdmi_writeb(hdmi, DDC_BUS_FREQ_L, ddc_bus_freq & 0xFF);
-+	hdmi_writeb(hdmi, DDC_BUS_FREQ_H, (ddc_bus_freq >> 8) & 0xFF);
-+
-+	/* Clear the EDID interrupt flag and mute the interrupt */
-+	hdmi_writeb(hdmi, HDMI_INTERRUPT_MASK1, 0);
-+	hdmi_writeb(hdmi, HDMI_INTERRUPT_STATUS1, m_INT_EDID_READY);
-+}
-+
-+static const
-+struct pre_pll_config *starfive_hdmi_phy_get_pre_pll_cfg(struct starfive_hdmi *hdmi,
-+							 unsigned long rate)
-+{
-+	const struct pre_pll_config *cfg = pre_pll_cfg_table;
-+
-+	rate = (rate / 1000) * 1000;
-+	for (; cfg->pixclock != 0; cfg++)
-+		if (cfg->tmdsclock == rate && cfg->pixclock == rate)
-+			break;
-+
-+	if (cfg->pixclock == 0)
-+		return ERR_PTR(-EINVAL);
-+
-+	return cfg;
-+}
-+
-+static int starfive_hdmi_phy_clk_set_rate(struct starfive_hdmi *hdmi)
-+{
-+	hdmi->post_cfg = post_pll_cfg_table;
-+
-+	hdmi->pre_cfg = starfive_hdmi_phy_get_pre_pll_cfg(hdmi, hdmi->tmds_rate);
-+	if (IS_ERR(hdmi->pre_cfg))
-+		return PTR_ERR(hdmi->pre_cfg);
-+
-+	for (; hdmi->post_cfg->tmdsclock != 0; hdmi->post_cfg++)
-+		if (hdmi->tmds_rate <= hdmi->post_cfg->tmdsclock)
-+			break;
-+
-+	starfive_hdmi_config_pll(hdmi);
-+
-+	return 0;
-+}
-+
-+static int starfive_hdmi_config_video_timing(struct starfive_hdmi *hdmi,
-+					     struct drm_display_mode *mode)
-+{
-+	int value;
-+	/* Set detail external video timing */
-+	value = mode->htotal;
-+	hdmi_writeb(hdmi, HDMI_VIDEO_EXT_HTOTAL_L, value & 0xFF);
-+	hdmi_writeb(hdmi, HDMI_VIDEO_EXT_HTOTAL_H, (value >> 8) & 0xFF);
-+
-+	value = mode->htotal - mode->hdisplay;
-+	hdmi_writeb(hdmi, HDMI_VIDEO_EXT_HBLANK_L, value & 0xFF);
-+	hdmi_writeb(hdmi, HDMI_VIDEO_EXT_HBLANK_H, (value >> 8) & 0xFF);
-+
-+	value = mode->htotal - mode->hsync_start;
-+	hdmi_writeb(hdmi, HDMI_VIDEO_EXT_HDELAY_L, value & 0xFF);
-+	hdmi_writeb(hdmi, HDMI_VIDEO_EXT_HDELAY_H, (value >> 8) & 0xFF);
-+
-+	value = mode->hsync_end - mode->hsync_start;
-+	hdmi_writeb(hdmi, HDMI_VIDEO_EXT_HDURATION_L, value & 0xFF);
-+	hdmi_writeb(hdmi, HDMI_VIDEO_EXT_HDURATION_H, (value >> 8) & 0xFF);
-+
-+	value = mode->vtotal;
-+	hdmi_writeb(hdmi, HDMI_VIDEO_EXT_VTOTAL_L, value & 0xFF);
-+	hdmi_writeb(hdmi, HDMI_VIDEO_EXT_VTOTAL_H, (value >> 8) & 0xFF);
-+
-+	value = mode->vtotal - mode->vdisplay;
-+	hdmi_writeb(hdmi, HDMI_VIDEO_EXT_VBLANK, value & 0xFF);
-+
-+	value = mode->vtotal - mode->vsync_start;
-+	hdmi_writeb(hdmi, HDMI_VIDEO_EXT_VDELAY, value & 0xFF);
-+
-+	value = mode->vsync_end - mode->vsync_start;
-+	hdmi_writeb(hdmi, HDMI_VIDEO_EXT_VDURATION, value & 0xFF);
-+
-+	/* Set detail external video timing polarity and interlace mode */
-+	value = v_EXTERANL_VIDEO(1);
-+	value |= mode->flags & DRM_MODE_FLAG_PHSYNC ?
-+		v_HSYNC_POLARITY(1) : v_HSYNC_POLARITY(0);
-+	value |= mode->flags & DRM_MODE_FLAG_PVSYNC ?
-+		v_VSYNC_POLARITY(1) : v_VSYNC_POLARITY(0);
-+	value |= mode->flags & DRM_MODE_FLAG_INTERLACE ?
-+		v_INETLACE(1) : v_INETLACE(0);
-+
-+	hdmi_writeb(hdmi, HDMI_VIDEO_TIMING_CTL, value);
-+	return 0;
-+}
-+
-+static int starfive_hdmi_setup(struct starfive_hdmi *hdmi,
-+			       struct drm_display_mode *mode)
-+{
-+	hdmi_modb(hdmi, STARFIVE_BIAS_CONTROL, STARFIVE_BIAS_ENABLE, STARFIVE_BIAS_ENABLE);
-+	hdmi_writeb(hdmi, STARFIVE_RX_CONTROL, STARFIVE_RX_ENABLE);
-+	hdmi->hdmi_data.vic = drm_match_cea_mode(mode);
-+
-+	hdmi->tmds_rate = mode->clock * 1000;
-+	starfive_hdmi_phy_clk_set_rate(hdmi);
-+
-+	while (!(hdmi_readb(hdmi, STARFIVE_PRE_PLL_LOCK_STATUS) & 0x1))
-+		continue;
-+	while (!(hdmi_readb(hdmi, STARFIVE_POST_PLL_LOCK_STATUS) & 0x1))
-+		continue;
-+
-+	/*turn on LDO*/
-+	hdmi_writeb(hdmi, STARFIVE_LDO_CONTROL, STARFIVE_LDO_ENABLE);
-+	/*turn on serializer*/
-+	hdmi_writeb(hdmi, STARFIVE_SERIALIER_CONTROL, STARFIVE_SERIALIER_ENABLE);
-+
-+	starfive_hdmi_tx_phy_power_down(hdmi);
-+	starfive_hdmi_config_video_timing(hdmi, mode);
-+	starfive_hdmi_tx_phy_power_on(hdmi);
-+
-+	starfive_hdmi_tmds_driver_on(hdmi);
-+	starfive_hdmi_sync_tmds(hdmi);
-+
-+	return 0;
-+}
-+
-+static void starfive_hdmi_encoder_mode_set(struct drm_encoder *encoder,
-+					   struct drm_display_mode *mode,
-+					   struct drm_display_mode *adj_mode)
-+{
-+	struct starfive_hdmi *hdmi = encoder_to_hdmi(encoder);
-+
-+	drm_mode_copy(&hdmi->previous_mode, adj_mode);
-+}
-+
-+static void starfive_hdmi_encoder_enable(struct drm_encoder *encoder)
-+{
-+	struct starfive_hdmi *hdmi = encoder_to_hdmi(encoder);
-+	struct drm_display_mode *mode = &encoder->crtc->state->adjusted_mode;
-+	int ret, idx;
-+	struct drm_device *drm = hdmi->connector.dev;
-+
-+	if (drm && !drm_dev_enter(drm, &idx))
-+		return;
-+
-+	ret = pm_runtime_get_sync(hdmi->dev);
-+	if (ret < 0)
-+		return;
-+	mdelay(10);
-+	starfive_hdmi_setup(hdmi, mode);
-+
-+	if (drm)
-+		drm_dev_exit(idx);
-+}
-+
-+static void starfive_hdmi_encoder_disable(struct drm_encoder *encoder)
-+{
-+	struct starfive_hdmi *hdmi = encoder_to_hdmi(encoder);
-+
-+	int idx;
-+	struct drm_device *drm = hdmi->connector.dev;
-+
-+	if (drm && !drm_dev_enter(drm, &idx))
-+		return;
-+
-+	pm_runtime_put(hdmi->dev);
-+
-+	if (drm)
-+		drm_dev_exit(idx);
-+}
-+
-+static int
-+starfive_hdmi_encoder_atomic_check(struct drm_encoder *encoder,
-+				   struct drm_crtc_state *crtc_state,
-+				   struct drm_connector_state *conn_state)
-+{
-+	bool valid = false;
-+	struct drm_display_mode *mode = &crtc_state->adjusted_mode;
-+	struct vs_crtc_state *vs_crtc_state = to_vs_crtc_state(crtc_state);
-+
-+	vs_crtc_state->encoder_type = encoder->encoder_type;
-+	vs_crtc_state->output_fmt = MEDIA_BUS_FMT_RGB888_1X24;
-+
-+	const struct pre_pll_config *cfg = pre_pll_cfg_table;
-+	int pclk = mode->clock * 1000;
-+
-+	for (; cfg->pixclock != 0; cfg++) {
-+		if (pclk == cfg->pixclock) {
-+			if (pclk > 297000000)
-+				continue;
-+
-+			valid = true;
-+			break;
-+		}
-+	}
-+
-+	return (valid) ? 0 : -EINVAL;
-+}
-+
-+static const struct drm_encoder_helper_funcs starfive_hdmi_encoder_helper_funcs = {
-+	.enable     = starfive_hdmi_encoder_enable,
-+	.disable    = starfive_hdmi_encoder_disable,
-+	.mode_set   = starfive_hdmi_encoder_mode_set,
-+	.atomic_check = starfive_hdmi_encoder_atomic_check,
-+};
-+
-+static enum drm_connector_status
-+starfive_hdmi_connector_detect(struct drm_connector *connector, bool force)
-+{
-+	struct starfive_hdmi *hdmi = connector_to_hdmi(connector);
-+	struct drm_device *drm = hdmi->connector.dev;
-+	int ret;
-+	int idx;
-+
-+	if (drm && !drm_dev_enter(drm, &idx))
-+		return connector_status_disconnected;
-+
-+	ret = pm_runtime_get_sync(hdmi->dev);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = (hdmi_readb(hdmi, HDMI_STATUS) & m_HOTPLUG) ?
-+		connector_status_connected : connector_status_disconnected;
-+	pm_runtime_put(hdmi->dev);
-+
-+	if (drm)
-+		drm_dev_exit(idx);
-+
-+	return ret;
-+}
-+
-+static int starfive_hdmi_connector_get_modes(struct drm_connector *connector)
-+{
-+	struct starfive_hdmi *hdmi = connector_to_hdmi(connector);
-+	struct edid *edid;
-+	int ret = 0;
-+
-+	if (!hdmi->ddc)
-+		return 0;
-+	ret = pm_runtime_get_sync(hdmi->dev);
-+	if (ret < 0)
-+		return ret;
-+
-+	edid = drm_get_edid(connector, hdmi->ddc);
-+	if (edid) {
-+		hdmi->hdmi_data.sink_is_hdmi = drm_detect_hdmi_monitor(edid);
-+		hdmi->hdmi_data.sink_has_audio = drm_detect_monitor_audio(edid);
-+		drm_connector_update_edid_property(connector, edid);
-+		ret = drm_add_edid_modes(connector, edid);
-+		kfree(edid);
-+	}
-+	pm_runtime_put(hdmi->dev);
-+
-+	return ret;
-+}
-+
-+static enum drm_mode_status
-+starfive_hdmi_connector_mode_valid(struct drm_connector *connector,
-+				   struct drm_display_mode *mode)
-+{
-+	const struct pre_pll_config *cfg = pre_pll_cfg_table;
-+	int pclk = mode->clock * 1000;
-+	bool valid = false;
-+
-+	for (; cfg->pixclock != 0; cfg++) {
-+		if (pclk == cfg->pixclock) {
-+			if (pclk > 297000000)
-+				continue;
-+
-+			valid = true;
-+			break;
-+		}
-+	}
-+
-+	return (valid) ? MODE_OK : MODE_BAD;
-+}
-+
-+static int
-+starfive_hdmi_probe_single_connector_modes(struct drm_connector *connector,
-+					   u32 maxX, u32 maxY)
-+{
-+	return drm_helper_probe_single_connector_modes(connector, 3840, 2160);
-+}
-+
-+static const struct drm_connector_funcs starfive_hdmi_connector_funcs = {
-+	.fill_modes = starfive_hdmi_probe_single_connector_modes,
-+	.detect = starfive_hdmi_connector_detect,
-+	.reset = drm_atomic_helper_connector_reset,
-+	.atomic_duplicate_state = drm_atomic_helper_connector_duplicate_state,
-+	.atomic_destroy_state = drm_atomic_helper_connector_destroy_state,
-+};
-+
-+static struct drm_connector_helper_funcs starfive_hdmi_connector_helper_funcs = {
-+	.get_modes = starfive_hdmi_connector_get_modes,
-+	.mode_valid = starfive_hdmi_connector_mode_valid,
-+};
-+
-+static int starfive_hdmi_register(struct drm_device *drm, struct starfive_hdmi *hdmi)
-+{
-+	struct drm_encoder *encoder = &hdmi->encoder;
-+	struct device *dev = hdmi->dev;
-+
-+	encoder->possible_crtcs = drm_of_find_possible_crtcs(drm, dev->of_node);
-+
-+	/*
-+	 * If we failed to find the CRTC(s) which this encoder is
-+	 * supposed to be connected to, it's because the CRTC has
-+	 * not been registered yet.  Defer probing, and hope that
-+	 * the required CRTC is added later.
-+	 */
-+	if (encoder->possible_crtcs == 0)
-+		return -EPROBE_DEFER;
-+
-+	drm_encoder_helper_add(encoder, &starfive_hdmi_encoder_helper_funcs);
-+
-+	hdmi->connector.polled = DRM_CONNECTOR_POLL_HPD;
-+
-+	drm_connector_helper_add(&hdmi->connector,
-+				 &starfive_hdmi_connector_helper_funcs);
-+	drmm_connector_init(drm, &hdmi->connector,
-+			    &starfive_hdmi_connector_funcs,
-+			    DRM_MODE_CONNECTOR_HDMIA,
-+			    hdmi->ddc);
-+
-+	drm_connector_attach_encoder(&hdmi->connector, encoder);
-+
-+	return 0;
-+}
-+
-+static irqreturn_t starfive_hdmi_i2c_irq(struct starfive_hdmi *hdmi)
-+{
-+	struct starfive_hdmi_i2c *i2c = hdmi->i2c;
-+	u8 stat;
-+
-+	stat = hdmi_readb(hdmi, HDMI_INTERRUPT_STATUS1);
-+	if (!(stat & m_INT_EDID_READY))
-+		return IRQ_NONE;
-+
-+	/* Clear HDMI EDID interrupt flag */
-+	hdmi_writeb(hdmi, HDMI_INTERRUPT_STATUS1, m_INT_EDID_READY);
-+
-+	complete(&i2c->cmp);
-+
-+	return IRQ_HANDLED;
-+}
-+
-+static irqreturn_t starfive_hdmi_hardirq(int irq, void *dev_id)
-+{
-+	struct starfive_hdmi *hdmi = dev_id;
-+	irqreturn_t ret = IRQ_NONE;
-+	u8 interrupt;
-+
-+	if (hdmi->i2c)
-+		ret = starfive_hdmi_i2c_irq(hdmi);
-+
-+	interrupt = hdmi_readb(hdmi, HDMI_STATUS);
-+	if (interrupt & m_INT_HOTPLUG) {
-+		hdmi_modb(hdmi, HDMI_STATUS, m_INT_HOTPLUG, m_INT_HOTPLUG);
-+		ret = IRQ_WAKE_THREAD;
-+	}
-+
-+	return ret;
-+}
-+
-+static irqreturn_t starfive_hdmi_irq(int irq, void *dev_id)
-+{
-+	struct starfive_hdmi *hdmi = dev_id;
-+
-+	drm_connector_helper_hpd_irq_event(&hdmi->connector);
-+
-+	return IRQ_HANDLED;
-+}
-+
-+static int starfive_hdmi_i2c_read(struct starfive_hdmi *hdmi, struct i2c_msg *msgs)
-+{
-+	int length = msgs->len;
-+	u8 *buf = msgs->buf;
-+	int ret;
-+
-+	ret = wait_for_completion_timeout(&hdmi->i2c->cmp, HZ / 10);
-+	if (!ret)
-+		return -EAGAIN;
-+
-+	while (length--)
-+		*buf++ = hdmi_readb(hdmi, HDMI_EDID_FIFO_ADDR);
-+
-+	return 0;
-+}
-+
-+static int starfive_hdmi_i2c_write(struct starfive_hdmi *hdmi, struct i2c_msg *msgs)
-+{
-+	/*
-+	 * The DDC module only support read EDID message, so
-+	 * we assume that each word write to this i2c adapter
-+	 * should be the offset of EDID word address.
-+	 */
-+	if (msgs->len != 1 ||
-+	    (msgs->addr != DDC_ADDR && msgs->addr != DDC_SEGMENT_ADDR))
-+		return -EINVAL;
-+
-+	reinit_completion(&hdmi->i2c->cmp);
-+
-+	if (msgs->addr == DDC_SEGMENT_ADDR)
-+		hdmi->i2c->segment_addr = msgs->buf[0];
-+	if (msgs->addr == DDC_ADDR)
-+		hdmi->i2c->ddc_addr = msgs->buf[0];
-+
-+	/* Set edid fifo first addr */
-+	hdmi_writeb(hdmi, HDMI_EDID_FIFO_OFFSET, 0x00);
-+
-+	/* Set edid word address 0x00/0x80 */
-+	hdmi_writeb(hdmi, HDMI_EDID_WORD_ADDR, hdmi->i2c->ddc_addr);
-+
-+	/* Set edid segment pointer */
-+	hdmi_writeb(hdmi, HDMI_EDID_SEGMENT_POINTER, hdmi->i2c->segment_addr);
-+
-+	return 0;
-+}
-+
-+static int starfive_hdmi_i2c_xfer(struct i2c_adapter *adap,
-+				  struct i2c_msg *msgs, int num)
-+{
-+	struct starfive_hdmi *hdmi = i2c_get_adapdata(adap);
-+	struct starfive_hdmi_i2c *i2c = hdmi->i2c;
-+	int i, ret = 0;
-+
-+	mutex_lock(&i2c->lock);
-+
-+	/* Clear the EDID interrupt flag and unmute the interrupt */
-+	hdmi_writeb(hdmi, HDMI_INTERRUPT_MASK1, m_INT_EDID_READY);
-+	hdmi_writeb(hdmi, HDMI_INTERRUPT_STATUS1, m_INT_EDID_READY);
-+
-+	for (i = 0; i < num; i++) {
-+		DRM_DEV_DEBUG(hdmi->dev,
-+			      "xfer: num: %d/%d, len: %d, flags: %#x\n",
-+			      i + 1, num, msgs[i].len, msgs[i].flags);
-+
-+		if (msgs[i].flags & I2C_M_RD)
-+			ret = starfive_hdmi_i2c_read(hdmi, &msgs[i]);
-+		else
-+			ret = starfive_hdmi_i2c_write(hdmi, &msgs[i]);
-+
-+		if (ret < 0)
-+			break;
-+	}
-+
-+	if (!ret)
-+		ret = num;
-+
-+	/* Mute HDMI EDID interrupt */
-+	hdmi_writeb(hdmi, HDMI_INTERRUPT_MASK1, 0);
-+
-+	mutex_unlock(&i2c->lock);
-+
-+	return ret;
-+}
-+
-+static u32 starfive_hdmi_i2c_func(struct i2c_adapter *adapter)
-+{
-+	return I2C_FUNC_I2C | I2C_FUNC_SMBUS_EMUL;
-+}
-+
-+static const struct i2c_algorithm starfive_hdmi_algorithm = {
-+	.master_xfer	= starfive_hdmi_i2c_xfer,
-+	.functionality	= starfive_hdmi_i2c_func,
-+};
-+
-+static struct i2c_adapter *starfive_hdmi_i2c_adapter(struct starfive_hdmi *hdmi)
-+{
-+	struct i2c_adapter *adap;
-+	struct starfive_hdmi_i2c *i2c;
-+	int ret;
-+
-+	i2c = drmm_kzalloc(hdmi->drm_dev, sizeof(*i2c), GFP_KERNEL);
-+	if (!i2c)
-+		return ERR_PTR(-ENOMEM);
-+
-+	mutex_init(&i2c->lock);
-+	init_completion(&i2c->cmp);
-+
-+	adap = &i2c->adap;
-+	adap->class = I2C_CLASS_DDC;
-+	adap->owner = THIS_MODULE;
-+	adap->dev.parent = hdmi->dev;
-+	adap->algo = &starfive_hdmi_algorithm;
-+	strscpy(adap->name, "Starfive HDMI", sizeof(adap->name));
-+	i2c_set_adapdata(adap, hdmi);
-+
-+	ret = devm_i2c_add_adapter(hdmi->dev, adap);
-+	if (ret) {
-+		drm_warn(hdmi->drm_dev, "cannot add %s I2C adapter\n", adap->name);
-+		return ERR_PTR(ret);
-+	}
-+
-+	hdmi->i2c = i2c;
-+
-+	drm_info(hdmi->drm_dev, "registered %s I2C bus driver success\n", adap->name);
-+
-+	return adap;
-+}
-+
-+static int starfive_hdmi_get_clk_rst(struct device *dev, struct starfive_hdmi *hdmi)
-+{
-+	hdmi->sys_clk = devm_clk_get(dev, "sysclk");
-+	if (IS_ERR(hdmi->sys_clk)) {
-+		dev_err(dev, "Unable to get HDMI sysclk clk\n");
-+		return PTR_ERR(hdmi->sys_clk);
-+	}
-+	hdmi->mclk = devm_clk_get(dev, "mclk");
-+	if (IS_ERR(hdmi->mclk)) {
-+		dev_err(dev, "Unable to get HDMI mclk clk\n");
-+		return PTR_ERR(hdmi->mclk);
-+	}
-+	hdmi->bclk = devm_clk_get(dev, "bclk");
-+	if (IS_ERR(hdmi->bclk)) {
-+		dev_err(dev, "Unable to get HDMI bclk clk\n");
-+		return PTR_ERR(hdmi->bclk);
-+	}
-+	hdmi->tx_rst = devm_reset_control_get_by_index(dev, 0);
-+	if (IS_ERR(hdmi->tx_rst)) {
-+		dev_err(dev, "failed to get tx_rst reset\n");
-+		return PTR_ERR(hdmi->tx_rst);
-+	}
-+
-+	return 0;
-+}
-+
-+static int starfive_hdmi_bind(struct device *dev, struct device *master,
-+			      void *data)
-+{
-+	struct platform_device *pdev = to_platform_device(dev);
-+	struct drm_device *drm = dev_get_drvdata(master);
-+	struct starfive_hdmi *hdmi;
-+	struct resource *iores;
-+	int irq;
-+	int ret;
-+
-+	hdmi = drmm_kzalloc(drm, sizeof(*hdmi), GFP_KERNEL);
-+	if (!hdmi)
-+		return -ENOMEM;
-+
-+	hdmi = drmm_simple_encoder_alloc(drm, struct starfive_hdmi,
-+					 encoder, DRM_MODE_ENCODER_TMDS);
-+
-+	hdmi->dev = dev;
-+	hdmi->drm_dev = drm;
-+	dev_set_drvdata(dev, hdmi);
-+
-+	iores = platform_get_resource(pdev, IORESOURCE_MEM, 0);
-+	hdmi->regs = devm_ioremap_resource(dev, iores);
-+	if (IS_ERR(hdmi->regs))
-+		return PTR_ERR(hdmi->regs);
-+
-+	ret = starfive_hdmi_get_clk_rst(dev, hdmi);
-+	if (ret < 0)
-+		return ret;
-+
-+	ret = devm_pm_runtime_enable(dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = pm_runtime_resume_and_get(dev);
-+	if (ret)
-+		return ret;
-+
-+	irq = platform_get_irq(pdev, 0);
-+	if (irq < 0) {
-+		ret = irq;
-+		goto err_put_runtime_pm;
-+	}
-+
-+	hdmi->ddc = starfive_hdmi_i2c_adapter(hdmi);
-+	if (IS_ERR(hdmi->ddc)) {
-+		ret = PTR_ERR(hdmi->ddc);
-+		hdmi->ddc = NULL;
-+		goto err_put_runtime_pm;
-+	}
-+
-+	starfive_hdmi_i2c_init(hdmi);
-+
-+	ret = starfive_hdmi_register(drm, hdmi);
-+	if (ret)
-+		goto err_put_adapter;
-+
-+	/* Unmute hotplug interrupt */
-+	hdmi_modb(hdmi, HDMI_STATUS, m_MASK_INT_HOTPLUG, v_MASK_INT_HOTPLUG(1));
-+
-+	ret = devm_request_threaded_irq(dev, irq, starfive_hdmi_hardirq,
-+					starfive_hdmi_irq, IRQF_SHARED,
-+					dev_name(dev), hdmi);
-+	if (ret < 0)
-+		goto err_put_adapter;
-+
-+	pm_runtime_put_sync(dev);
-+
-+	return 0;
-+
-+err_put_adapter:
-+	i2c_put_adapter(hdmi->ddc);
-+err_put_runtime_pm:
-+	pm_runtime_put_sync(dev);
-+
-+	return ret;
-+}
-+
-+static const struct component_ops starfive_hdmi_ops = {
-+	.bind	= starfive_hdmi_bind,
-+};
-+
-+static int starfive_hdmi_probe(struct platform_device *pdev)
-+{
-+	return component_add(&pdev->dev, &starfive_hdmi_ops);
-+}
-+
-+static int starfive_hdmi_remove(struct platform_device *pdev)
-+{
-+	component_del(&pdev->dev, &starfive_hdmi_ops);
-+
-+	return 0;
-+}
-+
-+static const struct dev_pm_ops hdmi_pm_ops = {
-+	SET_RUNTIME_PM_OPS(hdmi_runtime_suspend, hdmi_runtime_resume, NULL)
-+	SET_LATE_SYSTEM_SLEEP_PM_OPS(hdmi_system_pm_suspend, hdmi_system_pm_resume)
-+};
-+
-+static const struct of_device_id starfive_hdmi_dt_ids[] = {
-+	{ .compatible = "starfive,jh7110-inno-hdmi",},
-+	{},
-+};
-+MODULE_DEVICE_TABLE(of, starfive_hdmi_dt_ids);
-+
-+struct platform_driver starfive_hdmi_driver = {
-+	.probe  = starfive_hdmi_probe,
-+	.remove = starfive_hdmi_remove,
-+	.driver = {
-+		.name = "starfive-hdmi",
-+		.of_match_table = starfive_hdmi_dt_ids,
-+		.pm = &hdmi_pm_ops,
-+	},
-+};
-+
-+MODULE_AUTHOR("StarFive Corporation");
-+MODULE_DESCRIPTION("Starfive HDMI Driver");
-diff --git a/drivers/gpu/drm/verisilicon/starfive_hdmi.h b/drivers/gpu/drm/verisilicon/starfive_hdmi.h
-new file mode 100644
-index 000000000..1b9a11bca
---- /dev/null
-+++ b/drivers/gpu/drm/verisilicon/starfive_hdmi.h
-@@ -0,0 +1,295 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Copyright (C) 2023 StarFive Technology Co., Ltd.
-+ */
-+
-+#ifndef __STARFIVE_HDMI_H__
-+#define __STARFIVE_HDMI_H__
-+
-+#include <drm/bridge/dw_hdmi.h>
-+#include <drm/drm_atomic_helper.h>
-+#include <drm/drm_edid.h>
-+#include <drm/drm_of.h>
-+#include <drm/drm_probe_helper.h>
-+#include <drm/drm_simple_kms_helper.h>
-+#include <linux/bitfield.h>
-+#include <linux/bits.h>
-+
-+#define DDC_SEGMENT_ADDR		0x30
-+
-+#define HDMI_SCL_RATE			(100 * 1000)
-+#define DDC_BUS_FREQ_L			0x4b
-+#define DDC_BUS_FREQ_H			0x4c
-+
-+#define HDMI_SYS_CTRL			0x00
-+#define m_RST_ANALOG			BIT(6)
-+#define v_RST_ANALOG			0
-+#define v_NOT_RST_ANALOG		BIT(6)
-+#define m_RST_DIGITAL			BIT(5)
-+#define v_RST_DIGITAL			0
-+#define v_NOT_RST_DIGITAL		BIT(5)
-+#define m_REG_CLK_INV			BIT(4)
-+#define v_REG_CLK_NOT_INV		0
-+#define v_REG_CLK_INV			BIT(4)
-+#define m_VCLK_INV			BIT(3)
-+#define v_VCLK_NOT_INV			0
-+#define v_VCLK_INV			BIT(3)
-+#define m_REG_CLK_SOURCE		BIT(2)
-+#define v_REG_CLK_SOURCE_TMDS		0
-+#define v_REG_CLK_SOURCE_SYS		BIT(2)
-+#define m_POWER				BIT(1)
-+#define v_PWR_ON			0
-+#define v_PWR_OFF			BIT(1)
-+#define m_INT_POL			BIT(0)
-+#define v_INT_POL_HIGH			1
-+#define v_INT_POL_LOW			0
-+
-+#define HDMI_AV_MUTE			0x05
-+#define m_AVMUTE_CLEAR			BIT(7)
-+#define m_AVMUTE_ENABLE			BIT(6)
-+#define m_AUDIO_MUTE			BIT(1)
-+#define m_VIDEO_BLACK			BIT(0)
-+#define v_AVMUTE_CLEAR(n)		((n) << 7)
-+#define v_AVMUTE_ENABLE(n)		((n) << 6)
-+#define v_AUDIO_MUTE(n)			((n) << 1)
-+#define v_VIDEO_MUTE(n)			((n) << 0)
-+
-+#define HDMI_VIDEO_TIMING_CTL		0x08
-+#define v_VSYNC_POLARITY(n)		((n) << 3)
-+#define v_HSYNC_POLARITY(n)		((n) << 2)
-+#define v_INETLACE(n)			((n) << 1)
-+#define v_EXTERANL_VIDEO(n)		((n) << 0)
-+
-+#define HDMI_VIDEO_EXT_HTOTAL_L		0x09
-+#define HDMI_VIDEO_EXT_HTOTAL_H		0x0a
-+#define HDMI_VIDEO_EXT_HBLANK_L		0x0b
-+#define HDMI_VIDEO_EXT_HBLANK_H		0x0c
-+#define HDMI_VIDEO_EXT_HDELAY_L		0x0d
-+#define HDMI_VIDEO_EXT_HDELAY_H		0x0e
-+#define HDMI_VIDEO_EXT_HDURATION_L	0x0f
-+#define HDMI_VIDEO_EXT_HDURATION_H	0x10
-+#define HDMI_VIDEO_EXT_VTOTAL_L		0x11
-+#define HDMI_VIDEO_EXT_VTOTAL_H		0x12
-+#define HDMI_VIDEO_EXT_VBLANK		0x13
-+#define HDMI_VIDEO_EXT_VDELAY		0x14
-+#define HDMI_VIDEO_EXT_VDURATION	0x15
-+
-+#define HDMI_EDID_SEGMENT_POINTER	0x4d
-+#define HDMI_EDID_WORD_ADDR		0x4e
-+#define HDMI_EDID_FIFO_OFFSET		0x4f
-+#define HDMI_EDID_FIFO_ADDR		0x50
-+
-+#define HDMI_INTERRUPT_MASK1		0xc0
-+#define HDMI_INTERRUPT_STATUS1		0xc1
-+#define	m_INT_ACTIVE_VSYNC		BIT(5)
-+#define m_INT_EDID_READY		BIT(2)
-+
-+#define HDMI_STATUS			0xc8
-+#define m_HOTPLUG			BIT(7)
-+#define m_MASK_INT_HOTPLUG		BIT(5)
-+#define m_INT_HOTPLUG			BIT(1)
-+#define v_MASK_INT_HOTPLUG(n)		(((n) & 0x1) << 5)
-+
-+#define HDMI_SYNC					0xce
-+
-+#define UPDATE(x, h, l)					FIELD_PREP(GENMASK(h, l), x)
-+
-+/* REG: 0x1a0 */
-+#define STARFIVE_PRE_PLL_CONTROL			0x1a0
-+#define STARFIVE_PCLK_VCO_DIV_5_MASK			BIT(1)
-+#define STARFIVE_PCLK_VCO_DIV_5(x)			UPDATE(x, 1, 1)
-+#define STARFIVE_PRE_PLL_POWER_DOWN			BIT(0)
-+
-+/* REG: 0x1a1 */
-+#define STARFIVE_PRE_PLL_DIV_1				0x1a1
-+#define STARFIVE_PRE_PLL_PRE_DIV_MASK			GENMASK(5, 0)
-+#define STARFIVE_PRE_PLL_PRE_DIV(x)			UPDATE(x, 5, 0)
-+
-+/* REG: 0x1a2 */
-+#define STARFIVE_PRE_PLL_DIV_2				0x1a2
-+#define STARFIVE_SPREAD_SPECTRUM_MOD_DOWN		BIT(7)
-+#define STARFIVE_SPREAD_SPECTRUM_MOD_DISABLE		BIT(6)
-+#define STARFIVE_PRE_PLL_FRAC_DIV_DISABLE		UPDATE(3, 5, 4)
-+#define STARFIVE_PRE_PLL_FB_DIV_11_8_MASK		GENMASK(3, 0)
-+#define STARFIVE_PRE_PLL_FB_DIV_11_8(x)			UPDATE((x) >> 8, 3, 0)
-+
-+/* REG: 0x1a3 */
-+#define STARFIVE_PRE_PLL_DIV_3				0x1a3
-+#define STARFIVE_PRE_PLL_FB_DIV_7_0(x)			UPDATE(x, 7, 0)
-+
-+/* REG: 0x1a4*/
-+#define STARFIVE_PRE_PLL_DIV_4				0x1a4
-+#define STARFIVE_PRE_PLL_TMDSCLK_DIV_C_MASK		GENMASK(1, 0)
-+#define STARFIVE_PRE_PLL_TMDSCLK_DIV_C(x)		UPDATE(x, 1, 0)
-+#define STARFIVE_PRE_PLL_TMDSCLK_DIV_B_MASK		GENMASK(3, 2)
-+#define STARFIVE_PRE_PLL_TMDSCLK_DIV_B(x)		UPDATE(x, 3, 2)
-+#define STARFIVE_PRE_PLL_TMDSCLK_DIV_A_MASK		GENMASK(5, 4)
-+#define STARFIVE_PRE_PLL_TMDSCLK_DIV_A(x)		UPDATE(x, 5, 4)
-+
-+/* REG: 0x1a5 */
-+#define STARFIVE_PRE_PLL_DIV_5				0x1a5
-+#define STARFIVE_PRE_PLL_PCLK_DIV_B_SHIFT		5
-+#define STARFIVE_PRE_PLL_PCLK_DIV_B_MASK		GENMASK(6, 5)
-+#define STARFIVE_PRE_PLL_PCLK_DIV_B(x)			UPDATE(x, 6, 5)
-+#define STARFIVE_PRE_PLL_PCLK_DIV_A_MASK		GENMASK(4, 0)
-+#define STARFIVE_PRE_PLL_PCLK_DIV_A(x)			UPDATE(x, 4, 0)
-+
-+/* REG: 0x1a6 */
-+#define STARFIVE_PRE_PLL_DIV_6				0x1a6
-+#define STARFIVE_PRE_PLL_PCLK_DIV_C_SHIFT		5
-+#define STARFIVE_PRE_PLL_PCLK_DIV_C_MASK		GENMASK(6, 5)
-+#define STARFIVE_PRE_PLL_PCLK_DIV_C(x)			UPDATE(x, 6, 5)
-+#define STARFIVE_PRE_PLL_PCLK_DIV_D_MASK		GENMASK(4, 0)
-+#define STARFIVE_PRE_PLL_PCLK_DIV_D(x)			UPDATE(x, 4, 0)
-+
-+/* REG: 0x1a9 */
-+#define STARFIVE_PRE_PLL_LOCK_STATUS			0x1a9
-+
-+/* REG: 0x1aa */
-+#define STARFIVE_POST_PLL_DIV_1				0x1aa
-+#define STARFIVE_POST_PLL_POST_DIV_ENABLE		GENMASK(3, 2)
-+#define STARFIVE_POST_PLL_REFCLK_SEL_TMDS		BIT(1)
-+#define STARFIVE_POST_PLL_POWER_DOWN			BIT(0)
-+#define STARFIVE_POST_PLL_FB_DIV_8(x)			UPDATE(((x) >> 8) << 4, 4, 4)
-+
-+/* REG:0x1ab */
-+#define STARFIVE_POST_PLL_DIV_2				0x1ab
-+#define STARFIVE_POST_PLL_Pre_DIV_MASK			GENMASK(5, 0)
-+#define STARFIVE_POST_PLL_PRE_DIV(x)			UPDATE(x, 5, 0)
-+
-+/* REG: 0x1ac */
-+#define STARFIVE_POST_PLL_DIV_3				0x1ac
-+#define STARFIVE_POST_PLL_FB_DIV_7_0(x)			UPDATE(x, 7, 0)
-+
-+/* REG: 0x1ad */
-+#define STARFIVE_POST_PLL_DIV_4				0x1ad
-+#define STARFIVE_POST_PLL_POST_DIV_MASK			GENMASK(2, 0)
-+#define STARFIVE_POST_PLL_POST_DIV_2			0x0
-+#define STARFIVE_POST_PLL_POST_DIV_4			0x1
-+#define STARFIVE_POST_PLL_POST_DIV_8			0x3
-+
-+/* REG: 0x1af */
-+#define STARFIVE_POST_PLL_LOCK_STATUS			0x1af
-+
-+/* REG: 0x1b0 */
-+#define STARFIVE_BIAS_CONTROL				0x1b0
-+#define STARFIVE_BIAS_ENABLE				BIT(2)
-+
-+/* REG: 0x1b2 */
-+#define STARFIVE_TMDS_CONTROL				0x1b2
-+#define STARFIVE_TMDS_CLK_DRIVER_EN			BIT(3)
-+#define STARFIVE_TMDS_D2_DRIVER_EN			BIT(2)
-+#define STARFIVE_TMDS_D1_DRIVER_EN			BIT(1)
-+#define STARFIVE_TMDS_D0_DRIVER_EN			BIT(0)
-+#define STARFIVE_TMDS_DRIVER_ENABLE			(STARFIVE_TMDS_CLK_DRIVER_EN | \
-+							 STARFIVE_TMDS_D2_DRIVER_EN | \
-+							 STARFIVE_TMDS_D1_DRIVER_EN | \
-+							 STARFIVE_TMDS_D0_DRIVER_EN)
-+
-+/* REG: 0x1b4 */
-+#define STARFIVE_LDO_CONTROL				0x1b4
-+#define STARFIVE_LDO_D2_EN				BIT(2)
-+#define STARFIVE_LDO_D1_EN				BIT(1)
-+#define STARFIVE_LDO_D0_EN				BIT(0)
-+#define STARFIVE_LDO_ENABLE				(STARFIVE_LDO_D2_EN | \
-+							 STARFIVE_LDO_D1_EN | \
-+							 STARFIVE_LDO_D0_EN)
-+
-+/* REG: 0x1be */
-+#define STARFIVE_SERIALIER_CONTROL			0x1be
-+#define STARFIVE_SERIALIER_D2_EN			BIT(6)
-+#define STARFIVE_SERIALIER_D1_EN			BIT(5)
-+#define STARFIVE_SERIALIER_D0_EN			BIT(4)
-+#define STARFIVE_SERIALIER_EN				BIT(0)
-+
-+#define STARFIVE_SERIALIER_ENABLE			(STARFIVE_SERIALIER_D2_EN | \
-+							 STARFIVE_SERIALIER_D1_EN | \
-+							 STARFIVE_SERIALIER_D0_EN | \
-+							 STARFIVE_SERIALIER_EN)
-+
-+/* REG: 0x1cc */
-+#define STARFIVE_RX_CONTROL				0x1cc
-+#define STARFIVE_RX_EN					BIT(3)
-+#define STARFIVE_RX_CHANNEL_2_EN			BIT(2)
-+#define STARFIVE_RX_CHANNEL_1_EN			BIT(1)
-+#define STARFIVE_RX_CHANNEL_0_EN			BIT(0)
-+#define STARFIVE_RX_ENABLE				(STARFIVE_RX_EN | \
-+							 STARFIVE_RX_CHANNEL_2_EN | \
-+							 STARFIVE_RX_CHANNEL_1_EN | \
-+							 STARFIVE_RX_CHANNEL_0_EN)
-+
-+/* REG: 0x1d1 */
-+#define STARFIVE_PRE_PLL_FRAC_DIV_H			0x1d1
-+#define STARFIVE_PRE_PLL_FRAC_DIV_23_16(x)		UPDATE((x) >> 16, 7, 0)
-+/* REG: 0x1d2 */
-+#define STARFIVE_PRE_PLL_FRAC_DIV_M			0x1d2
-+#define STARFIVE_PRE_PLL_FRAC_DIV_15_8(x)		UPDATE((x) >> 8, 7, 0)
-+/* REG: 0x1d3 */
-+#define STARFIVE_PRE_PLL_FRAC_DIV_L			0x1d3
-+#define STARFIVE_PRE_PLL_FRAC_DIV_7_0(x)		UPDATE(x, 7, 0)
-+
-+struct pre_pll_config {
-+	unsigned long pixclock;
-+	unsigned long tmdsclock;
-+	u8 prediv;
-+	u16 fbdiv;
-+	u8 tmds_div_a;
-+	u8 tmds_div_b;
-+	u8 tmds_div_c;
-+	u8 pclk_div_a;
-+	u8 pclk_div_b;
-+	u8 pclk_div_c;
-+	u8 pclk_div_d;
-+	u8 vco_div_5_en;
-+	u32 fracdiv;
-+};
-+
-+struct post_pll_config {
-+	unsigned long tmdsclock;
-+	u8 prediv;
-+	u16 fbdiv;
-+	u8 postdiv;
-+	u8 post_div_en;
-+	u8 version;
-+};
-+
-+struct phy_config {
-+	unsigned long	tmdsclock;
-+	u8		regs[14];
-+};
-+
-+struct hdmi_data_info {
-+	int vic;
-+	bool sink_is_hdmi;
-+	bool sink_has_audio;
-+	unsigned int enc_in_format;
-+	unsigned int enc_out_format;
-+	unsigned int colorimetry;
-+};
-+
-+struct starfive_hdmi {
-+	struct device *dev;
-+	struct drm_device *drm_dev;
-+	struct drm_encoder	encoder;
-+	struct drm_connector	connector;
-+
-+	struct starfive_hdmi_i2c *i2c;
-+
-+	int irq;
-+	struct clk *sys_clk;
-+	struct clk *mclk;
-+	struct clk *bclk;
-+	struct reset_control *tx_rst;
-+	void __iomem *regs;
-+
-+	struct i2c_adapter *ddc;
-+
-+	unsigned long tmds_rate;
-+
-+	struct hdmi_data_info	hdmi_data;
-+	struct drm_display_mode previous_mode;
-+	const struct pre_pll_config	*pre_cfg;
-+	const struct post_pll_config	*post_cfg;
-+};
-+
-+#endif /* __STARFIVE_HDMI_H__ */
-diff --git a/drivers/gpu/drm/verisilicon/vs_drv.c b/drivers/gpu/drm/verisilicon/vs_drv.c
-index 3cd533cfa..9669354bd 100644
---- a/drivers/gpu/drm/verisilicon/vs_drv.c
-+++ b/drivers/gpu/drm/verisilicon/vs_drv.c
-@@ -126,6 +126,11 @@ static const struct component_master_ops vs_drm_ops = {
- static struct platform_driver *drm_sub_drivers[] = {
- 	&dc_platform_driver,
- 
-+	/* connector + encoder*/
-+#ifdef CONFIG_DRM_VERISILICON_STARFIVE_HDMI
-+	&starfive_hdmi_driver,
-+#endif
-+
- };
- 
- static struct component_match *vs_drm_match_add(struct device *dev)
-diff --git a/drivers/gpu/drm/verisilicon/vs_drv.h b/drivers/gpu/drm/verisilicon/vs_drv.h
-index 369ad22d6..e90723419 100644
---- a/drivers/gpu/drm/verisilicon/vs_drv.h
-+++ b/drivers/gpu/drm/verisilicon/vs_drv.h
-@@ -24,4 +24,8 @@ to_vs_drm_private(const struct drm_device *dev)
- 	return container_of(dev, struct vs_drm_device, base);
- }
- 
-+#ifdef CONFIG_DRM_VERISILICON_STARFIVE_HDMI
-+extern struct platform_driver starfive_hdmi_driver;
-+#endif
-+
- #endif /* __VS_DRV_H__ */
--- 
-2.34.1
+> lcd-controller bases verisilicon dc8200 IP,
+> and hdmi bases Innosilicon IP. Add bindings for them.
+
+Please make it a proper sentences, with proper wrapping.
+
+> 
+> also update MAINTAINERS for dt-bindings
+
+Not a sentence, but also not really needed.
+
+> 
+> about this patch, I tested the dtbs_check and dt_binding_check
+> with the result pass.
+> Based on the feedback of the previous version, the corresponding arrangement is made
+
+Not relevant, so not really suitable for commit msg.
+
+> 
+> Signed-off-by: Keith Zhao <keith.zhao@starfivetech.com>
+> ---
+>  .../starfive/starfive,display-subsystem.yaml  |  41 +++++++
+>  .../starfive/starfive,jh7110-dc8200.yaml      | 109 ++++++++++++++++++
+>  .../starfive/starfive,jh7110-inno-hdmi.yaml   |  85 ++++++++++++++
+>  MAINTAINERS                                   |   7 ++
+>  4 files changed, 242 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/display/starfive/starfive,display-subsystem.yaml
+>  create mode 100644 Documentation/devicetree/bindings/display/starfive/starfive,jh7110-dc8200.yaml
+>  create mode 100644 Documentation/devicetree/bindings/display/starfive/starfive,jh7110-inno-hdmi.yaml
+> 
+> diff --git a/Documentation/devicetree/bindings/display/starfive/starfive,display-subsystem.yaml b/Documentation/devicetree/bindings/display/starfive/starfive,display-subsystem.yaml
+> new file mode 100644
+> index 000000000..f45b97b08
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/display/starfive/starfive,display-subsystem.yaml
+> @@ -0,0 +1,41 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/display/starfive/starfive,display-subsystem.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Starfive DRM master device
+
+What is DRM in hardware? I know Digital Rights Management, but then
+subsystem seems wrong. If you mean Linux DRM, then Linux is not a
+hardware, so drop all Linuxisms and describe hardware.
+
+
+> +
+> +maintainers:
+> +  - Keith Zhao <keith.zhao@starfivetech.com>
+> +  - ShengYang Chen <shengyang.chen@starfivetech.com>
+> +
+> +description:
+> +  The Starfive DRM master device is a virtual device needed to list all
+
+Virtual device? Then not suitable for bindings, sorry.
+
+> +  display controller or other display interface nodes that comprise the
+> +  graphics subsystem.
+> +
+> +properties:
+> +  compatible:
+> +    const: starfive,display-subsystem
+> +
+> +  ports:
+> +    $ref: /schemas/types.yaml#/definitions/phandle-array
+
+No, ports is not phandle-array. ports is object, always.
+
+> +    description:
+> +      Should contain a list of phandles pointing to display interface ports
+> +      of display controller devices. Display controller definitions as defined
+> +      in Documentation/devicetree/bindings/display/starfive/
+> +      starfive,jh7110-dc8200.yaml
+
+Use standard graph ports, not some own, custom property.
+
+Anyway, entire binding should be dropped. You do not need it even.
+
+> +
+> +required:
+> +  - compatible
+> +  - ports
+> +
+> +additionalProperties: false
+> +
+> +examples:
+> +  - |
+> +    display-subsystem {
+> +        compatible = "starfive,display-subsystem";
+> +        ports = <&dc_out>;
+> +    };
+> diff --git a/Documentation/devicetree/bindings/display/starfive/starfive,jh7110-dc8200.yaml b/Documentation/devicetree/bindings/display/starfive/starfive,jh7110-dc8200.yaml
+> new file mode 100644
+> index 000000000..87051cddf
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/display/starfive/starfive,jh7110-dc8200.yaml
+> @@ -0,0 +1,109 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/display/starfive/starfive,jh7110-dc8200.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: StarFive display controller
+> +
+> +description:
+> +  The StarFive SoC uses the display controller based on Verisilicon IP
+> +  to transfer the image data from a video memory buffer to an external
+> +  LCD interface.
+> +
+> +maintainers:
+> +  - Keith Zhao <keith.zhao@starfivetech.com>
+> +
+> +properties:
+> +  compatible:
+> +    const: starfive,jh7110-dc8200
+> +
+> +  reg:
+> +    minItems: 1
+> +    items:
+> +      - description:
+> +          host interface
+
+In one line.
+ - description: host interface
+
+> +      - description:
+> +          display physical base address and length.
+
+Drop redundant parts: base address and length. Everything in reg for
+MMIO would have it...
+
+> +
+> +  interrupts:
+> +    items:
+> +      - description: The interrupt will be generated when DC finish one frame
+> +
+> +  clocks:
+> +    items:
+> +      - description: Clock for display system noc bus.
+> +      - description: Pixel clock for display channel 0.
+> +      - description: Pixel clock for display channel 1.
+> +      - description: Core clock for display controller.
+> +      - description: Clock for axi bus to access ddr.
+> +      - description: Clock for ahb bus to R/W the phy regs.
+> +      - description: External HDMI pixel clock.
+> +      - description: Parent clock for pixel clock
+> +
+> +  clock-names:
+> +    items:
+> +      - const: noc_bus
+> +      - const: channel0
+> +      - const: channel1
+> +      - const: dc_core
+> +      - const: axi_core
+> +      - const: ahb
+> +      - const: hdmi_tx
+> +      - const: dc_parent
+> +
+> +  resets:
+> +    items:
+> +      - description: Reset for axi bus.
+> +      - description: Reset for ahb bus.
+> +      - description: Core reset of display controller.
+> +
+> +  reset-names:
+> +    items:
+> +      - const: axi
+> +      - const: ahb
+> +      - const: core
+> +
+> +  port:
+> +    $ref: /schemas/graph.yaml#/properties/port
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - interrupts
+> +  - clocks
+> +  - clock-names
+> +  - resets
+> +  - reset-names
+> +  - port
+> +
+> +additionalProperties: false
+> +
+> +examples:
+> +  - |
+> +    dc8200: lcd-controller@29400000 {
+> +        compatible = "starfive,jh7110-dc8200";
+> +        reg = <0x29400000 0x100>, <0x29400800 0x2000>;
+> +        interrupts = <95>;
+> +        clocks = <&syscrg 60>,
+> +               <&voutcrg 7>,
+> +               <&voutcrg 8>,
+> +               <&voutcrg 4>,
+> +               <&voutcrg 5>,
+> +               <&voutcrg 6>,
+> +               <&hdmitx0_pixelclk>,
+> +               <&voutcrg 1>;
+> +        clock-names = "noc_bus", "channel0", "channel1",
+> +                      "dc_core", "axi_core", "ahb",
+> +                      "hdmi_tx","dc_parent";
+> +        resets = <&voutcrg 0>, <&voutcrg 1>, <&voutcrg 2>;
+> +        reset-names = "axi", "ahb", "core";
+> +        dc_out: port {
+> +            #address-cells = <1>;
+> +            #size-cells = <0>;
+> +            dc_out_hdmi: endpoint@0 {
+> +                reg = <0>;
+> +                remote-endpoint = <&hdmi_in_dc>;
+> +            };
+> +        };
+> +    };
+> diff --git a/Documentation/devicetree/bindings/display/starfive/starfive,jh7110-inno-hdmi.yaml b/Documentation/devicetree/bindings/display/starfive/starfive,jh7110-inno-hdmi.yaml
+> new file mode 100644
+> index 000000000..f6c473a10
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/display/starfive/starfive,jh7110-inno-hdmi.yaml
+> @@ -0,0 +1,85 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/display/starfive/starfive,jh7110-inno-hdmi.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Starfive JH7110 HDMI controller
+> +
+> +description:
+> +  The StarFive JH7110 SoC uses the HDMI signal transmiter based on innosilicon IP
+> +  to generate HDMI signal from its input and transmit the signal to the screen.
+> +
+> +maintainers:
+> +  - Keith Zhao <keith.zhao@starfivetech.com>
+> +
+> +properties:
+> +  compatible:
+> +    const: "starfive,jh7110-inno-hdmi"
+
+It does not look like you tested the bindings, at least after quick
+look. Please run `make dt_binding_check` (see
+Documentation/devicetree/bindings/writing-schema.rst for instructions).
+Maybe you need to update your dtschema and yamllint.
+
+Best regards,
+Krzysztof
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
