@@ -2,258 +2,294 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4FDA07E19CC
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Nov 2023 06:56:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 36B627E25FB
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Nov 2023 14:47:04 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id ED28940BC5
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Nov 2023 05:56:32 +0000 (UTC)
-Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
-	by lists.linaro.org (Postfix) with ESMTPS id B348B40BC5
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Nov 2023 05:56:15 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1DA6540C52
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Nov 2023 13:47:03 +0000 (UTC)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+	by lists.linaro.org (Postfix) with ESMTPS id 4A6E33E94E
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Nov 2023 13:46:46 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=mediatek.com header.s=dk header.b=Wg4JoX3K;
-	dkim=pass header.d=mediateko365.onmicrosoft.com header.s=selector2-mediateko365-onmicrosoft-com header.b=CEb7bBOz;
-	dmarc=pass (policy=quarantine) header.from=mediatek.com;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1");
-	spf=pass (lists.linaro.org: domain of yong.wu@mediatek.com designates 210.61.82.184 as permitted sender) smtp.mailfrom=yong.wu@mediatek.com
-X-UUID: 2db157bc7c6911ee8051498923ad61e6-20231106
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
-	h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:In-Reply-To:References:Message-ID:Date:Subject:CC:To:From; bh=mE+lRvYcfW1hQt1+wxUo+n2orkUt4xakPvAQjh1GUUc=;
-	b=Wg4JoX3K4BX9BAoj5Trn/j1LbOOoIOpfHPOAWSE1i6yzuGsR/UbFJLO5XH0XkwchfOGDyO4GZTfGkDgPKKFfoFXVdzWR4d478Mv87IDiFI8Gy4J/ZnCMpgi0ccKIqmqOxE4MKmdSZiVyn+S5z6k/tYgZSKb8VWqCHaoxLpsvJ5c=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.33,REQID:e43c735c-e47a-4624-8aa3-4cf7eeec545a,IP:0,U
-	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
-	release,TS:0
-X-CID-META: VersionHash:364b77b,CLOUDID:8c3d5072-1bd3-4f48-b671-ada88705968c,B
-	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
-	RL:1,File:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,
-	DKR:0,DKP:0,BRR:0,BRE:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
-X-UUID: 2db157bc7c6911ee8051498923ad61e6-20231106
-Received: from mtkmbs14n2.mediatek.inc [(172.21.101.76)] by mailgw02.mediatek.com
-	(envelope-from <yong.wu@mediatek.com>)
-	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
-	with ESMTP id 167722151; Mon, 06 Nov 2023 13:56:07 +0800
-Received: from mtkmbs10n2.mediatek.inc (172.21.101.183) by
- MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Mon, 6 Nov 2023 13:56:06 +0800
-Received: from APC01-TYZ-obe.outbound.protection.outlook.com (172.21.101.237)
- by mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Mon, 6 Nov 2023 13:56:06 +0800
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=kAp/oPZTR58pGGjgjbuywpFYo7m+epV+XhkJ7mR/ng6NIt2BlfDaStPrUT4aIkJfijxVaZCIzD1T2J3gn0Or98bLHkQuMpQOvDOtYnWOX6fStN4BoeOJGum+9qPgEyOendaKHH6nE0Y/WmMGet0IoSWvJ5DO+6c3Ob+/XuV6sRL65etTVSLJ/G5aXhL+xWoV9Ox1uIQE8zhddz/WeeKhIqvtYyM1JZR4i8es2xi0wx75JVXme3gVPoIXBDQaXylGvUSV5mVV0ONKUGOASJEYdS1liBHBLsd1GUXD/iai0n9LDtS8ukBSFIWJMXNqul3wbdtjh1JGoqXubz57yS733g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mE+lRvYcfW1hQt1+wxUo+n2orkUt4xakPvAQjh1GUUc=;
- b=fcoO0JEcM5nlhrxgnu6z+gUZVpGELJokRDfFEdJuckaGiMsgvl4SfnMjmiqfcPvaaJVvD9NQofJ+FLwgVrMXi3J5UDfWgT/lZ/3hMNHQ4Imw+vd72G/jZ3hjI88/THMKQoxBz5JZcmLsHHgimIgQWSQZhYicnT935w9o11DflrHZQEVOHPYRvwk0s0CLYd5G+WrHcNeGi1QkTI1b/bg2ZIipHo27wIFlOI+u0aTwbpCfOfKNpC4ndxk8RN92kWcQ2EMHBIxiUBLnYqxz6z84DbBnw7lQnPgEDex7xaZOLmABlOg3z+l/f3YEXKchWVGXnXp67WDZk9CfrOhlaHbhbw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mediatek.com; dmarc=pass action=none header.from=mediatek.com;
- dkim=pass header.d=mediatek.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mediateko365.onmicrosoft.com; s=selector2-mediateko365-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mE+lRvYcfW1hQt1+wxUo+n2orkUt4xakPvAQjh1GUUc=;
- b=CEb7bBOz1cX8AYxIExqwgDE05sKmQSxbpUgH6hnjCazvAOIhAPlyBV022gqEmOVadJhpzs7EEYGOI5t7u2nJKyRTcDF2tDYLa2GnzpVoBOlzjm+dGrNIj1K9fBkJcI4VYEc/3N1M/tOkZYPwz/9/j5GOcmLfxqk5SGQIb+ng7cQ=
-Received: from SI2PR03MB5885.apcprd03.prod.outlook.com (2603:1096:4:142::7) by
- SEYPR03MB7815.apcprd03.prod.outlook.com (2603:1096:101:171::7) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6954.25; Mon, 6 Nov 2023 05:56:03 +0000
-Received: from SI2PR03MB5885.apcprd03.prod.outlook.com
- ([fe80::2e66:c8a4:6d9:1e43]) by SI2PR03MB5885.apcprd03.prod.outlook.com
- ([fe80::2e66:c8a4:6d9:1e43%5]) with mapi id 15.20.6954.025; Mon, 6 Nov 2023
- 05:56:03 +0000
-From: =?utf-8?B?WW9uZyBXdSAo5ZC05YuHKQ==?= <Yong.Wu@mediatek.com>
-To: "matthias.bgg@gmail.com" <matthias.bgg@gmail.com>,
-	"christian.koenig@amd.com" <christian.koenig@amd.com>,
-	"quic_vjitta@quicinc.com" <quic_vjitta@quicinc.com>,
-	"quic_jasksing@quicinc.com" <quic_jasksing@quicinc.com>, "robh+dt@kernel.org"
-	<robh+dt@kernel.org>, "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>
-Thread-Topic: [PATCH 8/9] dt-bindings: reserved-memory: MediaTek: Add reserved
- memory for SVP
-Thread-Index: AQHZ5FgxjegLVruM7kG7VRoFLocLPrBQxboAgAHnZgCAEpjlgIAH3SGA
-Date: Mon, 6 Nov 2023 05:56:03 +0000
-Message-ID: <8666e39c6b59322af6a9637121ed22f291830c46.camel@mediatek.com>
-References: <20230911023038.30649-1-yong.wu@mediatek.com>
-	 <20230911023038.30649-9-yong.wu@mediatek.com>
-	 <d4d471e7-64cf-42bf-a061-82934c904691@quicinc.com>
-	 <2c3ad77806df3ef23cb69336f2049821529e337b.camel@mediatek.com>
-	 <a83b00c4-a33a-4687-b024-173c6c5a66a0@quicinc.com>
-In-Reply-To: <a83b00c4-a33a-4687-b024-173c6c5a66a0@quicinc.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SI2PR03MB5885:EE_|SEYPR03MB7815:EE_
-x-ms-office365-filtering-correlation-id: 7bfd3076-d67d-413b-b2b7-08dbde8d0f8a
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: NGRK3/5NjewAAO3MAuWzp9Jzkt6x1dI2b75VpMvK/iEEEuW9Hmbj+ITM2FNTGclJsEeh1MXpVnd/jxrErI+dOxUFrhne3fjBS9aHZ8PN24Sma7Z3fql6IeQjkYxBJyuEFATqGkRqZANpFvynMtj1Nj8SjLh62xutnIDndBNr2OFZKENSvZF3Axa+dVZj/+Yr1kb2ugL2pM9DOv9yVoHNoknP9SXJ0erf7YK88d1t5xcew1dLxXZFs6SJvSsLuaPY0aZ2Y5V4ISZyboiCe7sYEjLQw1BnhsimSOKWRe6Hq62OF1584lwLdK7YpQ+1nBpSGjxHKRx4YNRegympKrbLcv7B+aqL9jCQBkQ3/i8GPQ7tElavYNwUTAmYMB+IOMIE8zNTq+FT7SiGL5KLFk03g0DWf/VwqRgDgwSnofURwdhROexO507nry8zqwjWoToZaD10uuRVPaXfEu5eIQ6as7iPUNJm6BABKg7vA8/8Niw0IWfuuQoSkv/5kVbJr1vU0zAnYzFJytIwpxBuunsthXmTsOgW15wysUBsvksDFy3diUSp7u5pQ8tTDdRwaqgFXBNyCMMwO2TP4jBA0km+WfO69dAZUjy8J+/C8G0MAqbY7c+SALRWcj5madFtyeq5JltqtLFn8tK59CLGhTgltEBJqc8+th51Q6rBtu25i/Y0ZLr7TqqSE/Npjb0PNuWOYm/u1gLTXDvvTsf3DQq60I1nmFOjR9t6gf+AURTpkgqzqSPiNIUi9d2X5D1aHaKc
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SI2PR03MB5885.apcprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(346002)(376002)(39860400002)(366004)(396003)(136003)(230173577357003)(230922051799003)(230273577357003)(451199024)(64100799003)(1800799009)(186009)(4001150100001)(7416002)(2906002)(38100700002)(85182001)(54906003)(86362001)(66446008)(966005)(66556008)(66476007)(66946007)(76116006)(316002)(122000001)(36756003)(64756008)(91956017)(6512007)(6486002)(110136005)(26005)(2616005)(53546011)(478600001)(71200400001)(6506007)(83380400001)(5660300002)(41300700001)(38070700009)(8936002)(4326008)(8676002)(99106002);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?WXE4Sy9sdEE3YUo3NDVkMHQ5Q25iRU8ybUpGTGZ0UnFyTU85Rit6MjZlNGhK?=
- =?utf-8?B?SjNJbFYweElyRWZNeEpsYVJGMjgrWll0ckRPbUhRMjRTZ1pFRWx6bUVlUXZm?=
- =?utf-8?B?UzFGRTg4QkRCVlZqc1V3TEhpZDF4VUhVZjZzaENsK0g5QXZxV1pzQmpiNnlo?=
- =?utf-8?B?bW5TcVpYQkNUd2ZWUk5Xd1RUdFVWWGlRd2pRd3hKempVNFBkc0pRVGN0N21a?=
- =?utf-8?B?Yi96NzFyVzRrWHJOdjNpL1Uwbk0wM2NMMkZpaXhPTGw3UFJsYkVDcU92T2c2?=
- =?utf-8?B?b0FyV3RpTkxqNDlTZExob3k5V29kalFsZW5xRmt5UDZvNE1lK2x6UndrMC9W?=
- =?utf-8?B?WDRtNkw3QnExZWtVRTZXNjlETkpkQ2pERVhJWDNYWFp3T0dJWHR2aktBaEtS?=
- =?utf-8?B?VS9Wd2VNeGNsMmpJWXc4MEhkUUlKUWg4MHN6MUNuTW5jR0dkeDNRaEt1ZUZj?=
- =?utf-8?B?cDhBcURmOHNlWGtLRS9KR3M5L1RTMXNtYjJUZ0JHM0hSZ1pObW5jQ0N2RGQy?=
- =?utf-8?B?YXZaSlFSaU9oYTljWVVWcXdhWm1UdStpTUM3OU94NXJRS3RqcjVpSjBwZDZm?=
- =?utf-8?B?cEVjVGY2dDQ3K1lWVzlGWEdOZ0p0dlRMZkRMbmlTZE1mR3k1ZHB4RjU0QzV1?=
- =?utf-8?B?Wmd5OTNYNytyQVVuL3ZjZlkrTklmclZDY3dCOVl6bnBDOEg0TWVDbmdWYjRk?=
- =?utf-8?B?ZVMweE5DRjY3YWk4R2ZOMmdzOU03eHdUZUJuZE02YmJIckhSQ0tUZnVTZFRJ?=
- =?utf-8?B?aitRa3BCem5PY3V0NDBEUXlnQ1U3UERsM1ZqWkY4S3lBSldZZXY0TDJkRTkv?=
- =?utf-8?B?MDZBVlJjaXY1R2dKdmJDaWhYUUV3ZjlNaFc5YnAzK1RPa3h3TENvaTNrdFVo?=
- =?utf-8?B?NXhhRDFNZXdKK05sczF0VWk0b0lkcFlvZEN4QjliUThxanN4MTF0ODBBRFl0?=
- =?utf-8?B?U0g3Ly9xT1RVaFdmdFFUN2lsQVBHQkdOV3BKR09pbld1eXVFWFVYRnBBcll0?=
- =?utf-8?B?S1Z5bGRqbnAzNnhCd3VFd2pTY3pZMG9xSjBaVENIRFZDYmxoRU5pYm9tZ1lL?=
- =?utf-8?B?TWpBcnRFTEVGS0F3YnYvaFJPQzV1RGF3ZkM0Ky9yWVFDTW4rNW0za2VGMkVr?=
- =?utf-8?B?dWZzWVhHaDY3Y0djLzFSU2Q2bDVqSU5JdUl2dERuSUVYTU9BUGRHUzBLMzlP?=
- =?utf-8?B?QUFsbTQzYXg2VUE1dzBlZnJVMjBTT09nNjdjbVRUcVZ4eDdJZzl1TEozcE9U?=
- =?utf-8?B?SjFRWEpRbDExOGo5azVSSm9iUWg5SWdaQWYydlI5KzJpOW94RnJnOGh2Yzd0?=
- =?utf-8?B?a0xGcElyY2swYXZJUHE3Skl1MXFIWUR0SCtGdHBxaU9WY1J4czRVOC92TnAy?=
- =?utf-8?B?QklKWHRUUFNzWGRTZTl4ZS90VjN1NVpTblIrQVhPa2tXVWRNbERjN0E4VGxS?=
- =?utf-8?B?OFdlWUFVNnJiYkdvWmlGR3Y4Z0E5ZVkrMHFjeXJVSnBubUZObm93cVBzWllq?=
- =?utf-8?B?bmc2T0s1enZOcmdRK1dqSDNaMTNkdXhxZEdmeGtTK1gza2NORVF2Q2twb1dY?=
- =?utf-8?B?QVN4ZGVZNXc1OXI3NlBlNEg1Q0FhenQrQWtia0x1NW1QNXpKTDhFUHVqNWdS?=
- =?utf-8?B?cUw3MHllcnRhcDV0ck81ajJRUmhVNnN4ZWNKd1NJRUFjNVoxUGk5d2h2V0pF?=
- =?utf-8?B?UVhOOW1OSnJiUStFUEN6VTg1andocFVVSUVNWU5rTnRXUTRtYmFKYmoyeXRB?=
- =?utf-8?B?dUtoM3lWVCtTZ2s2UkMzbHRYUWMrelhvZjJkVVpMdzduSGJtT2psWDBuakxi?=
- =?utf-8?B?NnhvdlA1NVVNUUcrc2pqYnBqdVFQNG5yY0NDeFQzSEtxeGdJRmhud2Z1YjdK?=
- =?utf-8?B?UXBrVkgvVmtWb0MySkR6bDZEMFBHZmlEMjBQQkI4OW15ajIrN21HMzVNZ2w5?=
- =?utf-8?B?QU5Yai93MG1aSmFRQzArWHViWnd2eUUvZXpLY3kvYU03N2ZxTjE0OWFTRTkr?=
- =?utf-8?B?bWlHSEI0QWh3M3BuZ24yOHZuS0FaTytZdVlIQ3U4ZmlLQTBVS3lnQ3RCQUNI?=
- =?utf-8?B?WjdFWGF3MjVncDF6SkV3MGxWSmU2bmdSYUoxMkRQdkluZjErbEd3SHA1YXpP?=
- =?utf-8?Q?QU7lzyixUIxvCyOrtK/jTgZDU?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <C6599153295A034C8EB4F0D1F0BF4048@apcprd03.prod.outlook.com>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Vqlzg33r;
+	dmarc=pass (policy=none) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 145.40.73.55 as permitted sender) smtp.mailfrom=mripard@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sin.source.kernel.org (Postfix) with ESMTP id E2200CE0B89;
+	Mon,  6 Nov 2023 13:46:43 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB78CC433C7;
+	Mon,  6 Nov 2023 13:46:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1699278403;
+	bh=UMo9qYG9JxxpGt1tXwkBsURejlZe7ea1mXalWt6sYSU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Vqlzg33ro2BWfJXpbHrXhNe2CcU6yPcQ59eO5vWnH8tzEqBPoVQfmfs3ZSKKv5zhY
+	 4gVLTMGsua0PRJdMWWfG9QXKXAURFAiJE9/RskqdWwsMfNbtPvE/tP5faIUXRMN2aa
+	 cbYOcN82xmcl5udNag2AzoAwvBNHtfTjZVEIhOAa0PvXh0r5iX2qN36hY33XRPPy0f
+	 4W8J+q+mWqoUxe4IWx3AJ1bJM1RlIuJ7yq02T26hiUxU0opRhYR/IhKoCIzAxgVq+h
+	 ui4qPeM/I56ocswP62wnegNhcHzo2XITTbl3k0CV5hcIJE1XLJ92jWAzqmaYu7M4l0
+	 ZthyR6pinmgBQ==
+Date: Mon, 6 Nov 2023 14:46:40 +0100
+From: Maxime Ripard <mripard@kernel.org>
+To: Marco Pagani <marpagan@redhat.com>
+Message-ID: <ju7huixzwdjoz2jvnhdwc3mxrrbm7uvj73wezbpedcossijgi6@3la34kfiaval>
+References: <20231023164541.92913-1-marpagan@redhat.com>
+ <zakappnhljtx3axi2ovvis3evhju4cwqrena7j6gqn5kjdjtsb@mgrhkn5oboid>
+ <789aaf2b-4d68-4128-b8ff-c1ba4849e141@redhat.com>
+ <bychwi46hiqd34ch2f2ikvcijnq3hxvqudycsja5mawng46gyx@cq7wwxozv4si>
+ <3e32dbc2-c93f-45a1-a872-4e1798141a70@redhat.com>
 MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SI2PR03MB5885.apcprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7bfd3076-d67d-413b-b2b7-08dbde8d0f8a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Nov 2023 05:56:03.5430
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a7687ede-7a6b-4ef6-bace-642f677fbe31
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: w0HAQX4Sd/PJ7Vc3uYeGg7lGMWGYFBh9z1JuqRX0XZotWPGJbaAntqqDskKqhMPg2F62MrN5D5SE/vTqoxc0KQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR03MB7815
-X-TM-AS-Product-Ver: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-AS-Result: No-10--26.616600-8.000000
-X-TMASE-MatchedRID: yxAmdCLMIs3UL3YCMmnG4ia1MaKuob8PCJpCCsn6HCHBnyal/eRn3gzR
-	CsGHURLuwpcJm2NYlPAF6GY0Fb6yCifZYRtbOr2tttAWxuM5sl74qCLIu0mtIGHZ+cd7VyKX78m
-	ng1Xqld9TvHeBiMKYYxSbVdUWUqf5YeOFZSwS7nTmAId+2bAQwlAI6wCVrE3vWltirZ/iPP7GEu
-	3/atNxSYO6yQgGYLGn9LOItqNiof9cqim4vwMm8Bes/RxhysDbAlw1lJDBMtaav7eQVL9oQ0wVU
-	EAID5kTfIVut8szzbj++GoROERRv66UR+fsf9oDIQrubkFPQdnZHwCsL68/MWjliw+xvItdK27U
-	O0gQTeqT067b6oi4rJ/ujNnNM8HU/ZG8oSoOiZQpa6LJktEjgMBZPOJYZoM8EQQHCSpHtkqjxYy
-	RBa/qJRVHsNBZf9aRAYt5KiTiutkLbigRnpKlKSBuGJWwgxArFnn7zLfna4I=
-X-TM-AS-User-Approved-Sender: No
-X-TM-AS-User-Blocked-Sender: No
-X-TMASE-Result: 10--26.616600-8.000000
-X-TMASE-Version: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-SNTS-SMTP: 
-	DED780E05D58FB38ACD5D8EB8392EC1023462A61FA55832B3649BAC418483CC62000:8
-X-MTK: N
+In-Reply-To: <3e32dbc2-c93f-45a1-a872-4e1798141a70@redhat.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: B348B40BC5
-X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.10 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	HFILTER_HOSTNAME_UNKNOWN(2.50)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[mediatek.com,quarantine];
-	RWL_MAILSPIKE_VERYGOOD(-0.20)[210.61.82.184:from];
-	R_DKIM_ALLOW(-0.20)[mediatek.com:s=dk,mediateko365.onmicrosoft.com:s=selector2-mediateko365-onmicrosoft-com];
-	R_SPF_ALLOW(-0.20)[+ip4:210.61.82.184/32];
-	MIME_BASE64_TEXT(0.10)[];
-	MIME_GOOD(-0.10)[text/plain];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+X-Rspamd-Queue-Id: 4A6E33E94E
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.60 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SIGNED_PGP(-2.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:145.40.73.55];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,amd.com,quicinc.com,kernel.org,linaro.org];
-	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_CC(0.00)[linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	ASN(0.00)[asn:54825, ipnet:145.40.73.0/24, country:US];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
 	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[mediatek.com:+,mediateko365.onmicrosoft.com:+];
-	ASN(0.00)[asn:3462, ipnet:210.61.0.0/16, country:TW];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[100.75.92.58:received];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_FIVE(0.00)[5];
-	BLOCKLISTDE_FAIL(0.00)[2603:1096:4:142::7:server fail];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	TAGGED_RCPT(0.00)[dt];
-	TO_DN_SOME(0.00)[]
+	URIBL_BLOCKED(0.00)[sin.source.kernel.org:rdns,sin.source.kernel.org:helo];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.source.kernel.org:rdns,sin.source.kernel.org:helo];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: KGCKDYJXM65WK2SKHWN7LIP5ORIOILVX
-X-Message-ID-Hash: KGCKDYJXM65WK2SKHWN7LIP5ORIOILVX
-X-MailFrom: yong.wu@mediatek.com
+Message-ID-Hash: SYGFHPNFJ2S3NOTL6PKMTVDVQPQ4UHHY
+X-Message-ID-Hash: SYGFHPNFJ2S3NOTL6PKMTVDVQPQ4UHHY
+X-MailFrom: mripard@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>, "jstultz@google.com" <jstultz@google.com>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, =?utf-8?B?SmlhbmppYW8gWmVuZyAo5pu+5YGl5aejKQ==?= <Jianjiao.Zeng@mediatek.com>, =?utf-8?B?S3VvaG9uZyBXYW5nICjnjovlnIvptLsp?= <kuohong.wang@mediatek.com>, "conor+dt@kernel.org" <conor+dt@kernel.org>, "Brian.Starkey@arm.com" <Brian.Starkey@arm.com>, "benjamin.gaignard@collabora.com" <benjamin.gaignard@collabora.com>, "tjmercier@google.com" <tjmercier@google.com>, "krzysztof.kozlowski+dt@linaro.org" <krzysztof.kozlowski+dt@linaro.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, "angelogioacchino.delregno@collabora.com" 
- <angelogioacchino.delregno@collabora.com>
+CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian Koenig <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 8/9] dt-bindings: reserved-memory: MediaTek: Add reserved memory for SVP
+Subject: [Linaro-mm-sig] Re: [RFC PATCH] drm/test: add a test suite for GEM objects backed by shmem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KGCKDYJXM65WK2SKHWN7LIP5ORIOILVX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SYGFHPNFJ2S3NOTL6PKMTVDVQPQ4UHHY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============5346209996337150658=="
 
-T24gV2VkLCAyMDIzLTExLTAxIGF0IDExOjIwICswNTMwLCBKYXNrYXJhbiBTaW5naCB3cm90ZToN
-Cj4gIAkgDQo+IEV4dGVybmFsIGVtYWlsIDogUGxlYXNlIGRvIG5vdCBjbGljayBsaW5rcyBvciBv
-cGVuIGF0dGFjaG1lbnRzIHVudGlsDQo+IHlvdSBoYXZlIHZlcmlmaWVkIHRoZSBzZW5kZXIgb3Ig
-dGhlIGNvbnRlbnQuDQo+ICBPbiAxMC8yMC8yMDIzIDM6MjAgUE0sIFlvbmcgV3UgKOWQtOWLhykg
-d3JvdGU6DQo+ID4gT24gVGh1LCAyMDIzLTEwLTE5IGF0IDEwOjE2ICswNTMwLCBWaWpheWFuYW5k
-IEppdHRhIHdyb3RlOg0KPiA+PiAgIA0KPiA+PiBJbnN0ZWFkIG9mIGhhdmluZyBhIHZlbmRvciBz
-cGVjaWZpYyBiaW5kaW5nIGZvciBjbWEgYXJlYSwgSG93DQo+IGFib3V0DQo+ID4+IHJldHJpZXZp
-bmcNCj4gPj4NCj4gPiANCj4gaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvbGttbC8xNTk0OTQ4MjA4
-LTQ3MzktMS1naXQtc2VuZC1lbWFpbC1oYXlhc2hpLmt1bmloaWtvQHNvY2lvbmV4dC5jb20vDQo+
-ID4+ICA/DQo+ID4+IGRtYV9oZWFwX2FkZF9jbWEgY2FuIGp1c3QgYXNzb2NpYXRlIGNtYSByZWdp
-b24gYW5kIGNyZWF0ZSBhIGhlYXAuDQo+IFNvLA0KPiA+PiB3ZSBjYW4gcmV1c2UgY21hIGhlYXAN
-Cj4gPj4gY29kZSBmb3IgYWxsb2NhdGlvbiBpbnN0ZWFkIG9mIHJlcGxpY2F0aW5nIHRoYXQgY29k
-ZSBoZXJlLg0KPiA+Pg0KPiA+IA0KPiA+IFRoYW5rcyBmb3IgdGhlIHJlZmVyZW5jZS4gSSBndWVz
-cyB3ZSBjYW4ndCB1c2UgaXQuIFRoZXJlIGFyZSB0d28NCj4gPiByZWFzb25zOg0KPiA+ICAgDQo+
-ID4gYSkgVGhlIHNlY3VyZSBoZWFwIGRyaXZlciBpcyBhIHB1cmUgc29mdHdhcmUgZHJpdmVyIGFu
-ZCB3ZSBoYXZlIG5vDQo+ID4gZGV2aWNlIGZvciBpdCwgdGhlcmVmb3JlIHdlIGNhbm5vdCBjYWxs
-IGRtYV9oZWFwX2FkZF9jbWEuDQo+ID4gICANCj4gDQo+IEhpIFlvbmcsDQo+IA0KPiBXZSdyZSBj
-b25zaWRlcmluZyB1c2luZyBzdHJ1Y3QgY21hIGFzIHRoZSBmdW5jdGlvbiBhcmd1bWVudCB0bw0K
-PiBkbWFfaGVhcF9hZGRfY21hKCkgcmF0aGVyIHRoYW4gc3RydWN0IGRldmljZS4gV291bGQgdGhp
-cyBoZWxwDQo+IHJlc29sdmUgdGhlIHByb2JsZW0gb2YgdXNhZ2Ugd2l0aCBkbWFfaGVhcF9hZGRf
-Y21hKCk/DQoNClllcy4gSWYgd2UgdXNlICJzdHJ1Y3QgY21hIiwgSSBndWVzcyBpdCB3b3Jrcy4N
-Cg0KPiANCj4gPiBiKSBUaGUgQ01BIGFyZWEgaGVyZSBpcyBkeW5hbWljIGZvciBTVlAuIE5vcm1h
-bGx5IHRoaXMgQ01BIGNhbiBiZQ0KPiB1c2VkDQo+ID4gaW4gdGhlIGtlcm5lbC4gSW4gdGhlIFNW
-UCBjYXNlIHdlIHVzZSBjbWFfYWxsb2MgdG8gZ2V0IGl0IGFuZCBwYXNzDQo+IHRoZQ0KPiA+IGVu
-dGlyZSBDTUEgcGh5c2ljYWwgc3RhcnQgYWRkcmVzcyBhbmQgc2l6ZSBpbnRvIFRFRSB0byBwcm90
-ZWN0IHRoZQ0KPiBDTUENCj4gPiByZWdpb24uIFRoZSBvcmlnaW5hbCBDTUEgaGVhcCBjYW5ub3Qg
-aGVscCB3aXRoIHRoZSBURUUgcGFydC4NCj4gPg0KPiANCj4gUmVmZXJyaW5nIHRoZSBjb252ZXJz
-YXRpb24gYXQNCj4gDQpodHRwczovL2xvcmUua2VybmVsLm9yZy9sa21sLzdhMjk5NWRlMjNjMjRl
-ZjIyYzA3MWM2OTc2YzAyYjk3ZTliNTAxMjYuY2FtZWxAbWVkaWF0ZWsuY29tLw0KPiA7DQo+IA0K
-PiBzaW5jZSB3ZSdyZSBjb25zaWRlcmluZyBhYnN0cmFjdGluZyBzZWN1cmUgbWVtIG9wcywgd291
-bGQgaXQgbWFrZQ0KPiBzZW5zZQ0KPiB0byB1c2UgdGhlIGRlZmF1bHQgQ01BIGhlYXAgb3BzIChj
-bWFfaGVhcF9vcHMpLCBhbGxvY2F0ZSBidWZmZXJzIGZyb20NCj4gaXQNCj4gYW5kIHNlY3VyZSBl
-YWNoIGFsbG9jYXRlZCBidWZmZXI/DQoNClRoZW4gaXQgbG9va3MgeW91IGFsc28gbmVlZCB0ZWUg
-b3BlcmF0aW9uIGxpa2UgdGVlX2NsaWVudF9vcGVuX3Nlc3Npb24NCmFuZCB0ZWVfY2xpZW50X2lu
-dm9rZV9mdW5jLCByaWdodD8NCg0KSXQgc2VlbXMgd2UgYWxzbyBuZWVkIGNoYW5nZSBhIGJpdCBm
-b3IgImNtYV9oZWFwX2FsbG9jYXRlIiB0byBhbGxvdyBjbWENCnN1cHBvcnQgb3BlcmF0aW9ucyBm
-cm9tIHNlY3VyZSBoZWFwLg0KDQpJIHdpbGwgc2VuZCBhIHYyIHRvIG1vdmUgdGhlIGRpc2N1c3Np
-b24gZm9yd2FyZC4gVGhlIHYyIGlzIGJhc2VkIG9uIG91cg0KY2FzZSwgSXQgd29uJ3QgaW5jbHVk
-ZSB0aGUgY21hIHBhcnQuDQoNCj4gDQo+IFRoYW5rcywNCj4gSmFza2FyYW4uDQo+IA0KPiA+IFRo
-YW5rcy4NCj4gPiANCj4gPj4gVGhhbmtzLA0KPiA+PiBWaWpheQ0KPiA+Pg0KPiA+Pg0KPiA+Pg0K
-PiANCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFy
-by1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpU
-byB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMu
-bGluYXJvLm9yZwo=
+
+--===============5346209996337150658==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="o32cap6w7m6manzj"
+Content-Disposition: inline
+
+
+--o32cap6w7m6manzj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Oct 30, 2023 at 11:58:20AM +0100, Marco Pagani wrote:
+> On 2023-10-25 10:43, Maxime Ripard wrote:
+> > On Tue, Oct 24, 2023 at 07:14:25PM +0200, Marco Pagani wrote:
+> >>>> +static void drm_gem_shmem_test_obj_create_private(struct kunit *tes=
+t)
+> >>>> +{
+> >>>> +	struct fake_dev *fdev =3D test->priv;
+> >>>> +	struct drm_gem_shmem_object *shmem;
+> >>>> +	struct drm_gem_object *gem_obj;
+> >>>> +	struct dma_buf buf_mock;
+> >>>> +	struct dma_buf_attachment attach_mock;
+> >>>> +	struct sg_table *sgt;
+> >>>> +	char *buf;
+> >>>> +	int ret;
+> >>>> +
+> >>>> +	/* Create a mock scatter/gather table */
+> >>>> +	buf =3D kunit_kzalloc(test, TEST_SIZE, GFP_KERNEL);
+> >>>> +	KUNIT_ASSERT_NOT_NULL(test, buf);
+> >>>> +
+> >>>> +	sgt =3D kzalloc(sizeof(*sgt), GFP_KERNEL);
+> >>>> +	KUNIT_ASSERT_NOT_NULL(test, sgt);
+> >>>> +
+> >>>> +	ret =3D sg_alloc_table(sgt, 1, GFP_KERNEL);
+> >>>> +	KUNIT_ASSERT_EQ(test, ret, 0);
+> >>>> +	sg_init_one(sgt->sgl, buf, TEST_SIZE);
+> >>>> +
+> >>>> +	/* Init a mock DMA-BUF */
+> >>>> +	buf_mock.size =3D TEST_SIZE;
+> >>>> +	attach_mock.dmabuf =3D &buf_mock;
+> >>>> +
+> >>>> +	gem_obj =3D drm_gem_shmem_prime_import_sg_table(&fdev->drm_dev, &a=
+ttach_mock, sgt);
+> >>>> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, gem_obj);
+> >>>> +	KUNIT_ASSERT_EQ(test, gem_obj->size, TEST_SIZE);
+> >>>> +	KUNIT_ASSERT_NULL(test, gem_obj->filp);
+> >>>> +	KUNIT_ASSERT_NOT_NULL(test, gem_obj->funcs);
+> >>>> +
+> >>>> +	shmem =3D to_drm_gem_shmem_obj(gem_obj);
+> >>>> +	KUNIT_ASSERT_PTR_EQ(test, shmem->sgt, sgt);
+> >>>> +
+> >>>> +	/* The scatter/gather table is freed by drm_gem_shmem_free */
+> >>>> +	drm_gem_shmem_free(shmem);
+> >>>> +}
+> >>>
+> >>> KUNIT_ASSERT_* will stop the execution of the test on failure, you
+> >>> should probably use a bit more of KUNIT_EXPECT_* calls otherwise you'=
+ll
+> >>> leak resources.
+> >>>
+> >>> You also probably want to use a kunit_action to clean up and avoid th=
+at
+> >>> whole discussion
+> >>>
+> >>
+> >> You are right. I slightly prefer using KUnit expectations (unless acti=
+ons
+> >> are strictly necessary) since I feel using actions makes test cases a =
+bit
+> >> less straightforward to understand. Is this okay for you?
+> >=20
+> > I disagree. Actions make it easier to reason about, even when comparing
+> > assertion vs expectation
+> >=20
+> > Like, for the call to sg_alloc_table and
+> > drm_gem_shmem_prime_import_sg_table(), the reasonable use of assert vs
+> > expect would be something like:
+> >=20
+> > sgt =3D kzalloc(sizeof(*sgt), GFP_KERNEL);
+> > KUNIT_ASSERT_NOT_NULL(test, sgt);
+> >=20
+> > ret =3D sg_alloc_table(sgt, 1, GFP_KERNEL);
+> > KUNIT_ASSERT_EQ(test, ret, 0);
+> >=20
+> > /*
+> >  * Here, it's already not super clear whether you want to expect vs
+> >  * assert. expect will make you handle the failure case later, assert w=
+ill
+> >  * force you to call kfree on sgt. Both kind of suck in their own ways.
+> >  */
+> >=20
+> > sg_init_one(sgt->sgl, buf, TEST_SIZE);
+> >=20
+> > gem_obj =3D drm_gem_shmem_prime_import_sg_table(&fdev->drm_dev, &attach=
+_mock, sgt);
+> > KUNIT_ASSERT_NOT_ERR_OR_NULL(test, gem_obj);
+> >=20
+> > /*
+> >  * If the assert fails, we forgot to call sg_free_table(sgt) and kfree(=
+sgt).
+> >  */
+> >=20
+> > KUNIT_EXPECT_EQ(test, gem_obj->size, TEST_SIZE);
+> > KUNIT_EXPECT_NULL(test, gem_obj->filp);
+> > KUNIT_EXPECT_NOT_NULL(test, gem_obj->funcs);
+> >=20
+> > /*
+> >  * And here we have to handle the case where the expectation was wrong,
+> >  * but the test still continued.
+> >  */
+> >=20
+> > But if you're not using an action, you still have to call kfree(sgt),
+> > which means that you might still
+> >=20
+> > shmem =3D to_drm_gem_shmem_obj(gem_obj);
+> > KUNIT_ASSERT_PTR_EQ(test, shmem->sgt, sgt);
+> >=20
+> > /*
+> >  * If the assertion fails, we now have to call drm_gem_shmem_free(shmem)
+> >  */
+> >=20
+> > /* The scatter/gather table is freed by drm_gem_shmem_free */
+> > drm_gem_shmem_free(shmem);
+> >=20
+> > /* everything's fine now */
+> >=20
+> > The semantics around drm_gem_shmem_free make it a bit convoluted, but
+> > doing it using goto/labels, plus handling the assertions and error
+> > reporting would be difficult.
+> >=20
+> > Using actions, we have:
+> >=20
+> > sgt =3D kzalloc(sizeof(*sgt), GFP_KERNEL);
+> > KUNIT_ASSERT_NOT_NULL(test, sgt);
+> >=20
+> > ret =3D kunit_add_action_or_reset(test, kfree_wrapper, sgt);
+> > KUNIT_ASSERT_EQ(test, ret, 0);
+> >=20
+> > ret =3D sg_alloc_table(sgt, 1, GFP_KERNEL);
+> > KUNIT_ASSERT_EQ(test, ret, 0);
+> >=20
+> > ret =3D kunit_add_action_or_reset(test, sg_free_table_wrapper, sgt);
+> > KUNIT_ASSERT_EQ(test, ret, 0);
+> >=20
+> > sg_init_one(sgt->sgl, buf, TEST_SIZE);
+> >=20
+> > gem_obj =3D drm_gem_shmem_prime_import_sg_table(&fdev->drm_dev, &attach=
+_mock, sgt);
+> > KUNIT_ASSERT_NOT_ERR_OR_NULL(test, gem_obj);
+> > KUNIT_EXPECT_EQ(test, gem_obj->size, TEST_SIZE);
+> > KUNIT_EXPECT_NULL(test, gem_obj->filp);
+> > KUNIT_EXPECT_NOT_NULL(test, gem_obj->funcs);
+> >=20
+> > /* drm_gem_shmem_free will free the struct sg_table itself */
+> > kunit_remove_action(test, sg_free_table_wrapper, sgt);
+> > kunit_remove_action(test, kfree_wrapper, sgt);
+>=20
+> I agree that using actions makes error handling cleaner. However, I still
+> have some concerns about the additional complexity that actions introduce.
+> For instance, I feel these two lines make the testing harness more complex
+> without asserting any additional property of the component under test.=20
+
+If anything, the API makes it more difficult to deal with. It would
+actually be harder/messier to handle without an action.
+
+> In some sense, I wonder if it is worth worrying about memory leaks when
+> a test case fails. At that point, the system is already in an inconsistent
+> state due to a bug in the component under test, so it is unsafe to contin=
+ue
+> anyway.
+
+I guess the larger issue is: once that code will be merged, we're going
+to have patches to convert to actions because they make it nicer and fix
+a couple of issues anyway.
+
+So, if it's still the state we're going to end up in, why not doing it
+right from the beginning?
+
+Maxime
+
+--o32cap6w7m6manzj
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZUjuQAAKCRDj7w1vZxhR
+xZIUAP4nxKW5nlbzzvyXfNDLXwSOCafaX8ziFwHyO6uOpAaQ/wD/ahMbjKTpWtAv
+lSr9PJJaR+rJk7pnvNB14wMm6Ud7owo=
+=9b+7
+-----END PGP SIGNATURE-----
+
+--o32cap6w7m6manzj--
+
+--===============5346209996337150658==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============5346209996337150658==--
