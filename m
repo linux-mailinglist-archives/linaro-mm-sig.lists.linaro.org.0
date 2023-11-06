@@ -2,294 +2,222 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36B627E25FB
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Nov 2023 14:47:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 712CB7E315C
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 Nov 2023 00:25:40 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1DA6540C52
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Nov 2023 13:47:03 +0000 (UTC)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
-	by lists.linaro.org (Postfix) with ESMTPS id 4A6E33E94E
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Nov 2023 13:46:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7173940C96
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Nov 2023 23:25:39 +0000 (UTC)
+Received: from mail-oa1-f80.google.com (mail-oa1-f80.google.com [209.85.160.80])
+	by lists.linaro.org (Postfix) with ESMTPS id D7CA83E94E
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Nov 2023 23:25:22 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Vqlzg33r;
-	dmarc=pass (policy=none) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 145.40.73.55 as permitted sender) smtp.mailfrom=mripard@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sin.source.kernel.org (Postfix) with ESMTP id E2200CE0B89;
-	Mon,  6 Nov 2023 13:46:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB78CC433C7;
-	Mon,  6 Nov 2023 13:46:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1699278403;
-	bh=UMo9qYG9JxxpGt1tXwkBsURejlZe7ea1mXalWt6sYSU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Vqlzg33ro2BWfJXpbHrXhNe2CcU6yPcQ59eO5vWnH8tzEqBPoVQfmfs3ZSKKv5zhY
-	 4gVLTMGsua0PRJdMWWfG9QXKXAURFAiJE9/RskqdWwsMfNbtPvE/tP5faIUXRMN2aa
-	 cbYOcN82xmcl5udNag2AzoAwvBNHtfTjZVEIhOAa0PvXh0r5iX2qN36hY33XRPPy0f
-	 4W8J+q+mWqoUxe4IWx3AJ1bJM1RlIuJ7yq02T26hiUxU0opRhYR/IhKoCIzAxgVq+h
-	 ui4qPeM/I56ocswP62wnegNhcHzo2XITTbl3k0CV5hcIJE1XLJ92jWAzqmaYu7M4l0
-	 ZthyR6pinmgBQ==
-Date: Mon, 6 Nov 2023 14:46:40 +0100
-From: Maxime Ripard <mripard@kernel.org>
-To: Marco Pagani <marpagan@redhat.com>
-Message-ID: <ju7huixzwdjoz2jvnhdwc3mxrrbm7uvj73wezbpedcossijgi6@3la34kfiaval>
-References: <20231023164541.92913-1-marpagan@redhat.com>
- <zakappnhljtx3axi2ovvis3evhju4cwqrena7j6gqn5kjdjtsb@mgrhkn5oboid>
- <789aaf2b-4d68-4128-b8ff-c1ba4849e141@redhat.com>
- <bychwi46hiqd34ch2f2ikvcijnq3hxvqudycsja5mawng46gyx@cq7wwxozv4si>
- <3e32dbc2-c93f-45a1-a872-4e1798141a70@redhat.com>
+	dkim=none;
+	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none);
+	spf=pass (lists.linaro.org: domain of 34nVJZQkbACUTZaLBMMFSBQQJE.HPPHMFVTFSDPOUFOU.DPN@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.160.80 as permitted sender) smtp.mailfrom=34nVJZQkbACUTZaLBMMFSBQQJE.HPPHMFVTFSDPOUFOU.DPN@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
+Received: by mail-oa1-f80.google.com with SMTP id 586e51a60fabf-1e9f6006f9cso7034205fac.3
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 06 Nov 2023 15:25:22 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699313122; x=1699917922;
+        h=to:from:subject:message-id:in-reply-to:date:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=4tIuCoytmVadRySr33DQZ5/TwXBcyTI+qOt/uxCcdew=;
+        b=SbmWGNeIZgj+6DPvd7fESlb08EvNvDdn+JK5DwYjqMNrANK4yQ4t47Nm1fhDBTi1T0
+         OOaNJrP174ttIkKV+0tUTs5LcNrYfWbWiaPrCJO+Q7I+Dl6rMIWupylAPEWiGc8oE0+n
+         ZrhpiHL5Q+ey2mtqaTI//Yf1xDu8rW/nx5t+EylHT3b54mELrNmIPIa677gBbz82PQzw
+         A8hmFJiraYq5Bv3y0RmTLXsjNBuDMygCdqLTZNjrswCNg9aGo/AdVD8B/0Xa3cGy71mm
+         5L4KHBJhX9a6p3MutdBVj4mbTn763vzCdVFI2aguv11bGH7hKJKjJdm4uKa2iTYvJ0Ko
+         tHDg==
+X-Gm-Message-State: AOJu0Ywh/V0rhqUlivl4iDjBBLIvs3yiU3n8UfthytqnJbkOtPQ3dxJO
+	gHHJFc8vDxNqOVmD8Mb4BdZTlOQZC7b4AjJwQWPBY0cpUJ7T
+X-Google-Smtp-Source: AGHT+IGZnbMG2wIjxKhbru5Ov2b3CCz3h1LseB0sEh5MBxu3ykMqYgKg6klDliWZX6650SH3AnLqNCoNgwsFj+QnIVQ6y8i/RZKz
 MIME-Version: 1.0
-In-Reply-To: <3e32dbc2-c93f-45a1-a872-4e1798141a70@redhat.com>
+X-Received: by 2002:a05:6871:5d4:b0:1e9:9dda:12d with SMTP id
+ v20-20020a05687105d400b001e99dda012dmr519982oan.2.1699313122401; Mon, 06 Nov
+ 2023 15:25:22 -0800 (PST)
+Date: Mon, 06 Nov 2023 15:25:22 -0800
+In-Reply-To: <0000000000002a4da90603a5cbbf@google.com>
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <00000000000005e40d0609842b6d@google.com>
+From: syzbot <syzbot+398e17b61dab22cc56bc@syzkaller.appspotmail.com>
+To: airlied@gmail.com, christian.koenig@amd.com, daniel@ffwll.ch,
+	dri-devel@lists.freedesktop.org, hdanton@sina.com,
+	linaro-mm-sig-bounces@lists.linaro.org, linaro-mm-sig@lists.linaro.org,
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+	sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com, tzimmermann@suse.de
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4A6E33E94E
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.60 / 15.00];
+X-Rspamd-Queue-Id: D7CA83E94E
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.90 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:145.40.73.55];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FREEMAIL_CC(0.00)[linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	ASN(0.00)[asn:54825, ipnet:145.40.73.0/24, country:US];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	RCVD_TLS_LAST(0.00)[];
+	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=1ffa1cec3b40f3ce];
+	FORGED_SENDER(0.30)[syzbot@syzkaller.appspotmail.com,34nVJZQkbACUTZaLBMMFSBQQJE.HPPHMFVTFSDPOUFOU.DPN@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
+	MIME_GOOD(-0.10)[text/plain];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[100.75.92.58:received];
-	NEURAL_HAM(-0.00)[-1.000];
-	URIBL_BLOCKED(0.00)[sin.source.kernel.org:rdns,sin.source.kernel.org:helo];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[sin.source.kernel.org:rdns,sin.source.kernel.org:helo];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_COUNT_ONE(0.00)[1];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.160.80:from];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
+	R_DKIM_NA(0.00)[];
+	ARC_NA(0.00)[];
+	TO_DN_NONE(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,34nVJZQkbACUTZaLBMMFSBQQJE.HPPHMFVTFSDPOUFOU.DPN@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
+	FREEMAIL_TO(0.00)[gmail.com,amd.com,ffwll.ch,lists.freedesktop.org,sina.com,lists.linaro.org,vger.kernel.org,linux.intel.com,kernel.org,linaro.org,googlegroups.com,suse.de];
+	TAGGED_FROM(0.00)[398e17b61dab22cc56bc];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	NEURAL_HAM(-0.00)[-0.998];
+	SUBJECT_HAS_QUESTION(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: SYGFHPNFJ2S3NOTL6PKMTVDVQPQ4UHHY
-X-Message-ID-Hash: SYGFHPNFJ2S3NOTL6PKMTVDVQPQ4UHHY
-X-MailFrom: mripard@kernel.org
+Message-ID-Hash: HK34KGONMQQOLGKAMWK3U5QOMSWDYL4Q
+X-Message-ID-Hash: HK34KGONMQQOLGKAMWK3U5QOMSWDYL4Q
+X-MailFrom: 34nVJZQkbACUTZaLBMMFSBQQJE.HPPHMFVTFSDPOUFOU.DPN@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian Koenig <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC PATCH] drm/test: add a test suite for GEM objects backed by shmem
+Subject: [Linaro-mm-sig] Re: [syzbot] [dri?] kernel BUG in vmf_insert_pfn_prot (2)
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SYGFHPNFJ2S3NOTL6PKMTVDVQPQ4UHHY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HK34KGONMQQOLGKAMWK3U5QOMSWDYL4Q/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============5346209996337150658=="
-
-
---===============5346209996337150658==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="o32cap6w7m6manzj"
-Content-Disposition: inline
-
-
---o32cap6w7m6manzj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Oct 30, 2023 at 11:58:20AM +0100, Marco Pagani wrote:
-> On 2023-10-25 10:43, Maxime Ripard wrote:
-> > On Tue, Oct 24, 2023 at 07:14:25PM +0200, Marco Pagani wrote:
-> >>>> +static void drm_gem_shmem_test_obj_create_private(struct kunit *tes=
-t)
-> >>>> +{
-> >>>> +	struct fake_dev *fdev =3D test->priv;
-> >>>> +	struct drm_gem_shmem_object *shmem;
-> >>>> +	struct drm_gem_object *gem_obj;
-> >>>> +	struct dma_buf buf_mock;
-> >>>> +	struct dma_buf_attachment attach_mock;
-> >>>> +	struct sg_table *sgt;
-> >>>> +	char *buf;
-> >>>> +	int ret;
-> >>>> +
-> >>>> +	/* Create a mock scatter/gather table */
-> >>>> +	buf =3D kunit_kzalloc(test, TEST_SIZE, GFP_KERNEL);
-> >>>> +	KUNIT_ASSERT_NOT_NULL(test, buf);
-> >>>> +
-> >>>> +	sgt =3D kzalloc(sizeof(*sgt), GFP_KERNEL);
-> >>>> +	KUNIT_ASSERT_NOT_NULL(test, sgt);
-> >>>> +
-> >>>> +	ret =3D sg_alloc_table(sgt, 1, GFP_KERNEL);
-> >>>> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> >>>> +	sg_init_one(sgt->sgl, buf, TEST_SIZE);
-> >>>> +
-> >>>> +	/* Init a mock DMA-BUF */
-> >>>> +	buf_mock.size =3D TEST_SIZE;
-> >>>> +	attach_mock.dmabuf =3D &buf_mock;
-> >>>> +
-> >>>> +	gem_obj =3D drm_gem_shmem_prime_import_sg_table(&fdev->drm_dev, &a=
-ttach_mock, sgt);
-> >>>> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, gem_obj);
-> >>>> +	KUNIT_ASSERT_EQ(test, gem_obj->size, TEST_SIZE);
-> >>>> +	KUNIT_ASSERT_NULL(test, gem_obj->filp);
-> >>>> +	KUNIT_ASSERT_NOT_NULL(test, gem_obj->funcs);
-> >>>> +
-> >>>> +	shmem =3D to_drm_gem_shmem_obj(gem_obj);
-> >>>> +	KUNIT_ASSERT_PTR_EQ(test, shmem->sgt, sgt);
-> >>>> +
-> >>>> +	/* The scatter/gather table is freed by drm_gem_shmem_free */
-> >>>> +	drm_gem_shmem_free(shmem);
-> >>>> +}
-> >>>
-> >>> KUNIT_ASSERT_* will stop the execution of the test on failure, you
-> >>> should probably use a bit more of KUNIT_EXPECT_* calls otherwise you'=
-ll
-> >>> leak resources.
-> >>>
-> >>> You also probably want to use a kunit_action to clean up and avoid th=
-at
-> >>> whole discussion
-> >>>
-> >>
-> >> You are right. I slightly prefer using KUnit expectations (unless acti=
-ons
-> >> are strictly necessary) since I feel using actions makes test cases a =
-bit
-> >> less straightforward to understand. Is this okay for you?
-> >=20
-> > I disagree. Actions make it easier to reason about, even when comparing
-> > assertion vs expectation
-> >=20
-> > Like, for the call to sg_alloc_table and
-> > drm_gem_shmem_prime_import_sg_table(), the reasonable use of assert vs
-> > expect would be something like:
-> >=20
-> > sgt =3D kzalloc(sizeof(*sgt), GFP_KERNEL);
-> > KUNIT_ASSERT_NOT_NULL(test, sgt);
-> >=20
-> > ret =3D sg_alloc_table(sgt, 1, GFP_KERNEL);
-> > KUNIT_ASSERT_EQ(test, ret, 0);
-> >=20
-> > /*
-> >  * Here, it's already not super clear whether you want to expect vs
-> >  * assert. expect will make you handle the failure case later, assert w=
-ill
-> >  * force you to call kfree on sgt. Both kind of suck in their own ways.
-> >  */
-> >=20
-> > sg_init_one(sgt->sgl, buf, TEST_SIZE);
-> >=20
-> > gem_obj =3D drm_gem_shmem_prime_import_sg_table(&fdev->drm_dev, &attach=
-_mock, sgt);
-> > KUNIT_ASSERT_NOT_ERR_OR_NULL(test, gem_obj);
-> >=20
-> > /*
-> >  * If the assert fails, we forgot to call sg_free_table(sgt) and kfree(=
-sgt).
-> >  */
-> >=20
-> > KUNIT_EXPECT_EQ(test, gem_obj->size, TEST_SIZE);
-> > KUNIT_EXPECT_NULL(test, gem_obj->filp);
-> > KUNIT_EXPECT_NOT_NULL(test, gem_obj->funcs);
-> >=20
-> > /*
-> >  * And here we have to handle the case where the expectation was wrong,
-> >  * but the test still continued.
-> >  */
-> >=20
-> > But if you're not using an action, you still have to call kfree(sgt),
-> > which means that you might still
-> >=20
-> > shmem =3D to_drm_gem_shmem_obj(gem_obj);
-> > KUNIT_ASSERT_PTR_EQ(test, shmem->sgt, sgt);
-> >=20
-> > /*
-> >  * If the assertion fails, we now have to call drm_gem_shmem_free(shmem)
-> >  */
-> >=20
-> > /* The scatter/gather table is freed by drm_gem_shmem_free */
-> > drm_gem_shmem_free(shmem);
-> >=20
-> > /* everything's fine now */
-> >=20
-> > The semantics around drm_gem_shmem_free make it a bit convoluted, but
-> > doing it using goto/labels, plus handling the assertions and error
-> > reporting would be difficult.
-> >=20
-> > Using actions, we have:
-> >=20
-> > sgt =3D kzalloc(sizeof(*sgt), GFP_KERNEL);
-> > KUNIT_ASSERT_NOT_NULL(test, sgt);
-> >=20
-> > ret =3D kunit_add_action_or_reset(test, kfree_wrapper, sgt);
-> > KUNIT_ASSERT_EQ(test, ret, 0);
-> >=20
-> > ret =3D sg_alloc_table(sgt, 1, GFP_KERNEL);
-> > KUNIT_ASSERT_EQ(test, ret, 0);
-> >=20
-> > ret =3D kunit_add_action_or_reset(test, sg_free_table_wrapper, sgt);
-> > KUNIT_ASSERT_EQ(test, ret, 0);
-> >=20
-> > sg_init_one(sgt->sgl, buf, TEST_SIZE);
-> >=20
-> > gem_obj =3D drm_gem_shmem_prime_import_sg_table(&fdev->drm_dev, &attach=
-_mock, sgt);
-> > KUNIT_ASSERT_NOT_ERR_OR_NULL(test, gem_obj);
-> > KUNIT_EXPECT_EQ(test, gem_obj->size, TEST_SIZE);
-> > KUNIT_EXPECT_NULL(test, gem_obj->filp);
-> > KUNIT_EXPECT_NOT_NULL(test, gem_obj->funcs);
-> >=20
-> > /* drm_gem_shmem_free will free the struct sg_table itself */
-> > kunit_remove_action(test, sg_free_table_wrapper, sgt);
-> > kunit_remove_action(test, kfree_wrapper, sgt);
->=20
-> I agree that using actions makes error handling cleaner. However, I still
-> have some concerns about the additional complexity that actions introduce.
-> For instance, I feel these two lines make the testing harness more complex
-> without asserting any additional property of the component under test.=20
-
-If anything, the API makes it more difficult to deal with. It would
-actually be harder/messier to handle without an action.
-
-> In some sense, I wonder if it is worth worrying about memory leaks when
-> a test case fails. At that point, the system is already in an inconsistent
-> state due to a bug in the component under test, so it is unsafe to contin=
-ue
-> anyway.
-
-I guess the larger issue is: once that code will be merged, we're going
-to have patches to convert to actions because they make it nicer and fix
-a couple of issues anyway.
-
-So, if it's still the state we're going to end up in, why not doing it
-right from the beginning?
-
-Maxime
-
---o32cap6w7m6manzj
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZUjuQAAKCRDj7w1vZxhR
-xZIUAP4nxKW5nlbzzvyXfNDLXwSOCafaX8ziFwHyO6uOpAaQ/wD/ahMbjKTpWtAv
-lSr9PJJaR+rJk7pnvNB14wMm6Ud7owo=
-=9b+7
------END PGP SIGNATURE-----
-
---o32cap6w7m6manzj--
-
---===============5346209996337150658==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
+syzbot has found a reproducer for the following issue on:
+
+HEAD commit:    d2f51b3516da Merge tag 'rtc-6.7' of git://git.kernel.org/p..
+git tree:       upstream
+console+strace: https://syzkaller.appspot.com/x/log.txt?x=1422ebef680000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=1ffa1cec3b40f3ce
+dashboard link: https://syzkaller.appspot.com/bug?extid=398e17b61dab22cc56bc
+compiler:       gcc (Debian 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Debian) 2.40
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=16344918e80000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=156bb2c0e80000
+
+Downloadable assets:
+disk image: https://storage.googleapis.com/syzbot-assets/01a7f380fc8d/disk-d2f51b35.raw.xz
+vmlinux: https://storage.googleapis.com/syzbot-assets/c2fe46c74542/vmlinux-d2f51b35.xz
+kernel image: https://storage.googleapis.com/syzbot-assets/247d6a0567c5/bzImage-d2f51b35.xz
+
+IMPORTANT: if you fix the issue, please add the following tag to the commit:
+Reported-by: syzbot+398e17b61dab22cc56bc@syzkaller.appspotmail.com
+
+------------[ cut here ]------------
+kernel BUG at mm/memory.c:2216!
+invalid opcode: 0000 [#1] PREEMPT SMP KASAN
+CPU: 1 PID: 5067 Comm: syz-executor340 Not tainted 6.6.0-syzkaller-14651-gd2f51b3516da #0
+Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 10/09/2023
+RIP: 0010:vmf_insert_pfn_prot+0x247/0x430 mm/memory.c:2216
+Code: 0f 0b e8 7c e6 bd ff 49 89 ef bf 20 00 00 00 41 83 e7 28 4c 89 fe e8 f8 e1 bd ff 49 83 ff 20 0f 85 aa fe ff ff e8 59 e6 bd ff <0f> 0b 48 bd ff ff ff ff ff ff 0f 00 e8 48 e6 bd ff 4c 89 f6 48 89
+RSP: 0018:ffffc90003bbf758 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: ffff88802847ec00 RCX: ffffffff81cab618
+RDX: ffff888015bd1dc0 RSI: ffffffff81cab627 RDI: 0000000000000007
+RBP: 000000000c040474 R08: 0000000000000007 R09: 0000000000000020
+R10: 0000000000000020 R11: 0000000000000009 R12: 0000000020ffd000
+R13: 1ffff92000777eec R14: 000000000001e529 R15: 0000000000000020
+FS:  0000555555e2a480(0000) GS:ffff8880b9900000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020ffd000 CR3: 000000002aae7000 CR4: 00000000003506f0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+Call Trace:
+ <TASK>
+ drm_gem_shmem_fault+0x207/0x400 drivers/gpu/drm/drm_gem_shmem_helper.c:531
+ __do_fault+0x107/0x5f0 mm/memory.c:4265
+ do_read_fault mm/memory.c:4628 [inline]
+ do_fault mm/memory.c:4762 [inline]
+ do_pte_missing mm/memory.c:3730 [inline]
+ handle_pte_fault mm/memory.c:5038 [inline]
+ __handle_mm_fault+0x2682/0x3d60 mm/memory.c:5179
+ handle_mm_fault+0x478/0xa00 mm/memory.c:5344
+ do_user_addr_fault+0x3d1/0x1000 arch/x86/mm/fault.c:1413
+ handle_page_fault arch/x86/mm/fault.c:1505 [inline]
+ exc_page_fault+0x5c/0xd0 arch/x86/mm/fault.c:1561
+ asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
+RIP: 0010:rep_movs_alternative+0x4a/0x70 arch/x86/lib/copy_user_64.S:71
+Code: 75 f1 c3 66 66 2e 0f 1f 84 00 00 00 00 00 66 90 48 8b 06 48 89 07 48 83 c6 08 48 83 c7 08 83 e9 08 74 df 83 f9 08 73 e8 eb c9 <f3> a4 c3 48 89 c8 48 c1 e9 03 83 e0 07 f3 48 a5 89 c1 85 c9 75 b3
+RSP: 0018:ffffc90003bbfb50 EFLAGS: 00050206
+RAX: 0000000000000001 RBX: 0000000020ffd000 RCX: 0000000000001000
+RDX: 0000000000000000 RSI: 0000000020ffd000 RDI: ffff888018796000
+RBP: 0000000000001000 R08: 0000000000000001 R09: ffffed10030f2dff
+R10: ffff888018796fff R11: 0000000000000000 R12: 0000000020ffe000
+R13: ffff888018796000 R14: 0000000000000000 R15: 0000000020ffd000
+ copy_user_generic arch/x86/include/asm/uaccess_64.h:112 [inline]
+ raw_copy_from_user arch/x86/include/asm/uaccess_64.h:127 [inline]
+ _copy_from_user+0xc2/0xf0 lib/usercopy.c:23
+ copy_from_user include/linux/uaccess.h:183 [inline]
+ snd_rawmidi_kernel_write1+0x360/0x860 sound/core/rawmidi.c:1618
+ snd_rawmidi_write+0x26e/0xc00 sound/core/rawmidi.c:1687
+ vfs_write+0x2a4/0xdf0 fs/read_write.c:582
+ ksys_write+0x1f0/0x250 fs/read_write.c:637
+ do_syscall_x64 arch/x86/entry/common.c:51 [inline]
+ do_syscall_64+0x3f/0x110 arch/x86/entry/common.c:82
+ entry_SYSCALL_64_after_hwframe+0x63/0x6b
+RIP: 0033:0x7f31add88d69
+Code: 48 83 c4 28 c3 e8 37 17 00 00 0f 1f 80 00 00 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
+RSP: 002b:00007ffdd9a49ee8 EFLAGS: 00000246 ORIG_RAX: 0000000000000001
+RAX: ffffffffffffffda RBX: 00007ffdd9a49f00 RCX: 00007f31add88d69
+RDX: 00000000fffffd2c RSI: 0000000020000000 RDI: 0000000000000004
+RBP: 00007ffdd9a49f08 R08: 0000000000000000 R09: 0000000000000000
+R10: 00007ffdd9a49f08 R11: 0000000000000246 R12: 0000000000000000
+R13: 00007ffdd9a4a168 R14: 0000000000000001 R15: 0000000000000001
+ </TASK>
+Modules linked in:
+---[ end trace 0000000000000000 ]---
+RIP: 0010:vmf_insert_pfn_prot+0x247/0x430 mm/memory.c:2216
+Code: 0f 0b e8 7c e6 bd ff 49 89 ef bf 20 00 00 00 41 83 e7 28 4c 89 fe e8 f8 e1 bd ff 49 83 ff 20 0f 85 aa fe ff ff e8 59 e6 bd ff <0f> 0b 48 bd ff ff ff ff ff ff 0f 00 e8 48 e6 bd ff 4c 89 f6 48 89
+RSP: 0018:ffffc90003bbf758 EFLAGS: 00010293
+RAX: 0000000000000000 RBX: ffff88802847ec00 RCX: ffffffff81cab618
+RDX: ffff888015bd1dc0 RSI: ffffffff81cab627 RDI: 0000000000000007
+RBP: 000000000c040474 R08: 0000000000000007 R09: 0000000000000020
+R10: 0000000000000020 R11: 0000000000000009 R12: 0000000020ffd000
+R13: 1ffff92000777eec R14: 000000000001e529 R15: 0000000000000020
+FS:  0000555555e2a480(0000) GS:ffff8880b9800000(0000) knlGS:0000000000000000
+CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+CR2: 0000000020acb000 CR3: 000000002aae7000 CR4: 00000000003506f0
+DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+----------------
+Code disassembly (best guess):
+   0:	75 f1                	jne    0xfffffff3
+   2:	c3                   	ret
+   3:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
+   a:	00 00 00 00
+   e:	66 90                	xchg   %ax,%ax
+  10:	48 8b 06             	mov    (%rsi),%rax
+  13:	48 89 07             	mov    %rax,(%rdi)
+  16:	48 83 c6 08          	add    $0x8,%rsi
+  1a:	48 83 c7 08          	add    $0x8,%rdi
+  1e:	83 e9 08             	sub    $0x8,%ecx
+  21:	74 df                	je     0x2
+  23:	83 f9 08             	cmp    $0x8,%ecx
+  26:	73 e8                	jae    0x10
+  28:	eb c9                	jmp    0xfffffff3
+* 2a:	f3 a4                	rep movsb %ds:(%rsi),%es:(%rdi) <-- trapping instruction
+  2c:	c3                   	ret
+  2d:	48 89 c8             	mov    %rcx,%rax
+  30:	48 c1 e9 03          	shr    $0x3,%rcx
+  34:	83 e0 07             	and    $0x7,%eax
+  37:	f3 48 a5             	rep movsq %ds:(%rsi),%es:(%rdi)
+  3a:	89 c1                	mov    %eax,%ecx
+  3c:	85 c9                	test   %ecx,%ecx
+  3e:	75 b3                	jne    0xfffffff3
+
+
+---
+If you want syzbot to run the reproducer, reply with:
+#syz test: git://repo/address.git branch-or-commit-hash
+If you attach or paste a git patch, syzbot will apply it before testing.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============5346209996337150658==--
