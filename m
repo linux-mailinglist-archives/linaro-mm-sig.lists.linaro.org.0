@@ -2,222 +2,224 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 712CB7E315C
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 Nov 2023 00:25:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0AEB07E375D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 Nov 2023 10:19:45 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7173940C96
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 Nov 2023 23:25:39 +0000 (UTC)
-Received: from mail-oa1-f80.google.com (mail-oa1-f80.google.com [209.85.160.80])
-	by lists.linaro.org (Postfix) with ESMTPS id D7CA83E94E
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 Nov 2023 23:25:22 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D1AC63EA4D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 Nov 2023 09:19:43 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id D985F3EA4D
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Nov 2023 09:19:27 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none);
-	spf=pass (lists.linaro.org: domain of 34nVJZQkbACUTZaLBMMFSBQQJE.HPPHMFVTFSDPOUFOU.DPN@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.160.80 as permitted sender) smtp.mailfrom=34nVJZQkbACUTZaLBMMFSBQQJE.HPPHMFVTFSDPOUFOU.DPN@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
-Received: by mail-oa1-f80.google.com with SMTP id 586e51a60fabf-1e9f6006f9cso7034205fac.3
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 06 Nov 2023 15:25:22 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699313122; x=1699917922;
-        h=to:from:subject:message-id:in-reply-to:date:mime-version
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=4tIuCoytmVadRySr33DQZ5/TwXBcyTI+qOt/uxCcdew=;
-        b=SbmWGNeIZgj+6DPvd7fESlb08EvNvDdn+JK5DwYjqMNrANK4yQ4t47Nm1fhDBTi1T0
-         OOaNJrP174ttIkKV+0tUTs5LcNrYfWbWiaPrCJO+Q7I+Dl6rMIWupylAPEWiGc8oE0+n
-         ZrhpiHL5Q+ey2mtqaTI//Yf1xDu8rW/nx5t+EylHT3b54mELrNmIPIa677gBbz82PQzw
-         A8hmFJiraYq5Bv3y0RmTLXsjNBuDMygCdqLTZNjrswCNg9aGo/AdVD8B/0Xa3cGy71mm
-         5L4KHBJhX9a6p3MutdBVj4mbTn763vzCdVFI2aguv11bGH7hKJKjJdm4uKa2iTYvJ0Ko
-         tHDg==
-X-Gm-Message-State: AOJu0Ywh/V0rhqUlivl4iDjBBLIvs3yiU3n8UfthytqnJbkOtPQ3dxJO
-	gHHJFc8vDxNqOVmD8Mb4BdZTlOQZC7b4AjJwQWPBY0cpUJ7T
-X-Google-Smtp-Source: AGHT+IGZnbMG2wIjxKhbru5Ov2b3CCz3h1LseB0sEh5MBxu3ykMqYgKg6klDliWZX6650SH3AnLqNCoNgwsFj+QnIVQ6y8i/RZKz
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=NYHtnTJn;
+	dmarc=pass (policy=none) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by dfw.source.kernel.org (Postfix) with ESMTP id 4A83C61171;
+	Tue,  7 Nov 2023 09:19:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6CE03C433C8;
+	Tue,  7 Nov 2023 09:19:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1699348767;
+	bh=VDrXsVNkm+N8iNlJC3ZwEH4c+vJY+PF2deM4StXlHO8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=NYHtnTJnvG6VbnZXS27Xlyz8fAbAUOKKK+C0hD/yaEtP3hsK1Ft/lHn10pWx8x1ar
+	 lvK7xSDqD7EuZfakWhLeb+ssDHh2t/ywB0jfMWGhw0gQ7PD0kmMLqM52eTbYssUDAU
+	 0b+6+E6otlZyPvBUDvMpMsvMC80povFl+2nQNBvX7nCWH+5ucojPZNMfaeK1Z076i8
+	 Mk3Y3AaVvEcXbmZ1safxJou7RShM8a6rP+ur+hRMrkOU4u4ojoBlei0eTHmSOB9+eG
+	 PxF2bIabLg/DSeV0GPKgiGapHIOaZLvAViYf+VDWadCax+CBHM6PCRQZyguJRXGzRG
+	 b8tJ6WJhB2NUA==
+Date: Tue, 7 Nov 2023 10:19:24 +0100
+From: Maxime Ripard <mripard@kernel.org>
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Message-ID: <rx7oxrxs6dgwdkdu4l7y74yek4656jejixzccryml6jl6t5elp@jvk7agdcljwg>
+References: <20231025103957.3776-1-keith.zhao@starfivetech.com>
+ <20231025103957.3776-7-keith.zhao@starfivetech.com>
+ <70805ff2-56a8-45e1-a31c-ffb0e84749e5@linaro.org>
+ <3twc4zoohon7uujypgjtlnryfmebx4osvpykagnwr5nemmqz2w@w4vw55uswebh>
+ <CAA8EJppxQ7J8DEDFsWzPL8bDpNW-KY0nhUA++zDBRpMCpP-bkA@mail.gmail.com>
+ <344veqjvvwlo7vls2kdlgjggf77of2ijxwc2hmk7tarm75ugcs@bmozk23uqxqr>
+ <CAA8EJpomaDoJVkq+_NhcxqOs6X-dFd=Vo9Wtqnp8egNaWzDH2Q@mail.gmail.com>
 MIME-Version: 1.0
-X-Received: by 2002:a05:6871:5d4:b0:1e9:9dda:12d with SMTP id
- v20-20020a05687105d400b001e99dda012dmr519982oan.2.1699313122401; Mon, 06 Nov
- 2023 15:25:22 -0800 (PST)
-Date: Mon, 06 Nov 2023 15:25:22 -0800
-In-Reply-To: <0000000000002a4da90603a5cbbf@google.com>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <00000000000005e40d0609842b6d@google.com>
-From: syzbot <syzbot+398e17b61dab22cc56bc@syzkaller.appspotmail.com>
-To: airlied@gmail.com, christian.koenig@amd.com, daniel@ffwll.ch,
-	dri-devel@lists.freedesktop.org, hdanton@sina.com,
-	linaro-mm-sig-bounces@lists.linaro.org, linaro-mm-sig@lists.linaro.org,
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
-	sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com, tzimmermann@suse.de
+In-Reply-To: <CAA8EJpomaDoJVkq+_NhcxqOs6X-dFd=Vo9Wtqnp8egNaWzDH2Q@mail.gmail.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: D7CA83E94E
-X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.90 / 15.00];
+X-Rspamd-Queue-Id: D985F3EA4D
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.10 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=1ffa1cec3b40f3ce];
-	FORGED_SENDER(0.30)[syzbot@syzkaller.appspotmail.com,34nVJZQkbACUTZaLBMMFSBQQJE.HPPHMFVTFSDPOUFOU.DPN@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
-	MIME_GOOD(-0.10)[text/plain];
-	FROM_HAS_DN(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCVD_COUNT_ONE(0.00)[1];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.160.80:from];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	R_DKIM_NA(0.00)[];
+	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	RCVD_COUNT_TWO(0.00)[2];
 	ARC_NA(0.00)[];
-	TO_DN_NONE(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,34nVJZQkbACUTZaLBMMFSBQQJE.HPPHMFVTFSDPOUFOU.DPN@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
-	FREEMAIL_TO(0.00)[gmail.com,amd.com,ffwll.ch,lists.freedesktop.org,sina.com,lists.linaro.org,vger.kernel.org,linux.intel.com,kernel.org,linaro.org,googlegroups.com,suse.de];
-	TAGGED_FROM(0.00)[398e17b61dab22cc56bc];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[starfivetech.com,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,lists.linaro.org,linaro.org,esmil.dk,kernel.org,eecs.berkeley.edu,suse.de,edgeble.ai,hotmail.com,sifive.com,dabbelt.com,amd.com];
+	FROM_HAS_DN(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	NEURAL_HAM(-0.00)[-0.998];
-	SUBJECT_HAS_QUESTION(0.00)[]
+	TAGGED_RCPT(0.00)[dt];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: HK34KGONMQQOLGKAMWK3U5QOMSWDYL4Q
-X-Message-ID-Hash: HK34KGONMQQOLGKAMWK3U5QOMSWDYL4Q
-X-MailFrom: 34nVJZQkbACUTZaLBMMFSBQQJE.HPPHMFVTFSDPOUFOU.DPN@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
+Message-ID-Hash: TTGZUYRCYMTXRE5VQSFZC4TMOW2OGVBZ
+X-Message-ID-Hash: TTGZUYRCYMTXRE5VQSFZC4TMOW2OGVBZ
+X-MailFrom: mripard@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Keith Zhao <keith.zhao@starfivetech.com>, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Sumit Semwal <sumit.semwal@linaro.org>, Emil Renner Berthing <kernel@esmil.dk>, Shengyang Chen <shengyang.chen@starfivetech.com>, Conor Dooley <conor+dt@kernel.org>, Albert Ou <aou@eecs.berkeley.edu>, Thomas Zimmermann <tzimmermann@suse.de>, Jagan Teki <jagan@edgeble.ai>, Rob Herring <robh+dt@kernel.org>, Chris Morgan <macromorgan@hotmail.com>, Paul Walmsley <paul.walmsley@sifive.com>, Bjorn Andersson <andersson@kernel.org>, Changhuang Liang <changhuang.liang@starfivetech.com>, Jack Zhu <jack.zhu@starfivetech.com>, Palmer Dabbelt <palmer@dabbelt.com>, Shawn Guo <shawnguo@kernel.org>, christian.koenig@amd.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [syzbot] [dri?] kernel BUG in vmf_insert_pfn_prot (2)
+Subject: [Linaro-mm-sig] Re: [PATCH v2 6/6] drm/vs: Add hdmi driver
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HK34KGONMQQOLGKAMWK3U5QOMSWDYL4Q/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TTGZUYRCYMTXRE5VQSFZC4TMOW2OGVBZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: multipart/mixed; boundary="===============3251594130506947498=="
+
+
+--===============3251594130506947498==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="sx3kokd2nvv34uc7"
+Content-Disposition: inline
+
+
+--sx3kokd2nvv34uc7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Sun, Oct 29, 2023 at 06:52:24PM +0200, Dmitry Baryshkov wrote:
+> On Thu, 26 Oct 2023 at 14:53, Maxime Ripard <mripard@kernel.org> wrote:
+> >
+> > On Thu, Oct 26, 2023 at 11:57:22AM +0300, Dmitry Baryshkov wrote:
+> > > On Thu, 26 Oct 2023 at 11:07, Maxime Ripard <mripard@kernel.org> wrot=
+e:
+> > > >
+> > > > On Thu, Oct 26, 2023 at 01:23:53AM +0300, Dmitry Baryshkov wrote:
+> > > > > > +static int starfive_hdmi_register(struct drm_device *drm, stru=
+ct starfive_hdmi *hdmi)
+> > > > > > +{
+> > > > > > +   struct drm_encoder *encoder =3D &hdmi->encoder;
+> > > > > > +   struct device *dev =3D hdmi->dev;
+> > > > > > +
+> > > > > > +   encoder->possible_crtcs =3D drm_of_find_possible_crtcs(drm,=
+ dev->of_node);
+> > > > > > +
+> > > > > > +   /*
+> > > > > > +    * If we failed to find the CRTC(s) which this encoder is
+> > > > > > +    * supposed to be connected to, it's because the CRTC has
+> > > > > > +    * not been registered yet.  Defer probing, and hope that
+> > > > > > +    * the required CRTC is added later.
+> > > > > > +    */
+> > > > > > +   if (encoder->possible_crtcs =3D=3D 0)
+> > > > > > +           return -EPROBE_DEFER;
+> > > > > > +
+> > > > > > +   drm_encoder_helper_add(encoder, &starfive_hdmi_encoder_help=
+er_funcs);
+> > > > > > +
+> > > > > > +   hdmi->connector.polled =3D DRM_CONNECTOR_POLL_HPD;
+> > > > > > +
+> > > > > > +   drm_connector_helper_add(&hdmi->connector,
+> > > > > > +                            &starfive_hdmi_connector_helper_fu=
+ncs);
+> > > > > > +   drmm_connector_init(drm, &hdmi->connector,
+> > > > > > +                       &starfive_hdmi_connector_funcs,
+> > > > > > +                       DRM_MODE_CONNECTOR_HDMIA,
+> > > > >
+> > > > > On an embedded device one can not be so sure. There can be MHL or=
+ HDMI
+> > > > > Alternative Mode. Usually we use drm_bridge here and drm_bridge_c=
+onnector.
+> > > >
+> > > > On an HDMI driver, it's far from being a requirement, especially gi=
+ven
+> > > > the limitations bridges have.
+> > >
+> > > It's a blessing that things like MHL / HDMI-in-USB-C / HDMI-to-MyDP
+> > > are not widely used in the wild and are mostly non-existing except
+> > > several phones that preate wide DP usage.
+> >
+> > And those can be supported without relying on bridges.
+>=20
+> Yes, they likely can, in the way that nouveau handles I2C TV encoders.
+> But I don't think this can scale. We can have different devices
+> attached to the DSI, LVDS, HDMI and even DP image sources. I don't see
+> a scalable solution for either of them. E.g. by switching drm/msm to
+> use panel bridges for DSI panels we were able to significantly unify
+> and simplify code paths.
+
+I'm glad it worked fine for drm/msm, but what I don't really like is the
+current dogma that *everything* should be a bridge, and that's just a
+poor guideline.
+
+> > > Using drm_connector directly prevents one from handling possible
+> > > modifications on the board level. For example, with the DRM connector
+> > > in place, handling a separate HPD GPIO will result in code duplication
+> > > from the hdmi-connector driver. Handling any other variations in the
+> > > board design (which are pretty common in the embedded world) will also
+> > > require changing the driver itself. drm_bridge / drm_bridge_connector
+> > > save us from those issues.
+> >
+> > And we have other solutions there too. Like, EDIDs are pretty much in
+> > the same spot with a lot of device variations, but it also works without
+> > a common driver. I'd really wish we were having less bridges and more
+> > helpers, but here we are.
+> >
+> > > BTW: what are the limitations of the drm_bridge wrt. HDMI output? I'm
+> > > asking because we heavily depend on the bridge infrastructure for HDMI
+> > > output. Maybe we are missing something there, which went unnoticed to
+> > > me and my colleagues.
+> >
+> > A bridge cannot extend the connector state or use properties, for
+> > example. It works for basic stuff but falls apart as soon as you're
+> > trying to do something slightly advanced.
+>=20
+> Ack. I agree, we didn't have a necessity to implement properties up to
+> now. But that sounds like an interesting topic for DSI-to-HDMI bridges
+> and HDCP support. I'll need to check if any of the RB3/RB5/Dragonboard
+> bridges are programmed with the HDCP keys.
+
+Aside from HDCP, the current color management work will also require to
+expose properties on the connectors.
+
+Maxime
+
+--sx3kokd2nvv34uc7
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZUoBHAAKCRDj7w1vZxhR
+xWiBAP4sevvTIl4u+we2L7l/PqToVfQ/nXueZ0RTUgw/AJ/I1wEA+wM7mB5NCTiB
+uAat91IEFc4bWWOTLkkDTh9pBOjkfwg=
+=28g0
+-----END PGP SIGNATURE-----
+
+--sx3kokd2nvv34uc7--
+
+--===============3251594130506947498==
 Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-syzbot has found a reproducer for the following issue on:
-
-HEAD commit:    d2f51b3516da Merge tag 'rtc-6.7' of git://git.kernel.org/p..
-git tree:       upstream
-console+strace: https://syzkaller.appspot.com/x/log.txt?x=1422ebef680000
-kernel config:  https://syzkaller.appspot.com/x/.config?x=1ffa1cec3b40f3ce
-dashboard link: https://syzkaller.appspot.com/bug?extid=398e17b61dab22cc56bc
-compiler:       gcc (Debian 12.2.0-14) 12.2.0, GNU ld (GNU Binutils for Debian) 2.40
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=16344918e80000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=156bb2c0e80000
-
-Downloadable assets:
-disk image: https://storage.googleapis.com/syzbot-assets/01a7f380fc8d/disk-d2f51b35.raw.xz
-vmlinux: https://storage.googleapis.com/syzbot-assets/c2fe46c74542/vmlinux-d2f51b35.xz
-kernel image: https://storage.googleapis.com/syzbot-assets/247d6a0567c5/bzImage-d2f51b35.xz
-
-IMPORTANT: if you fix the issue, please add the following tag to the commit:
-Reported-by: syzbot+398e17b61dab22cc56bc@syzkaller.appspotmail.com
-
-------------[ cut here ]------------
-kernel BUG at mm/memory.c:2216!
-invalid opcode: 0000 [#1] PREEMPT SMP KASAN
-CPU: 1 PID: 5067 Comm: syz-executor340 Not tainted 6.6.0-syzkaller-14651-gd2f51b3516da #0
-Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 10/09/2023
-RIP: 0010:vmf_insert_pfn_prot+0x247/0x430 mm/memory.c:2216
-Code: 0f 0b e8 7c e6 bd ff 49 89 ef bf 20 00 00 00 41 83 e7 28 4c 89 fe e8 f8 e1 bd ff 49 83 ff 20 0f 85 aa fe ff ff e8 59 e6 bd ff <0f> 0b 48 bd ff ff ff ff ff ff 0f 00 e8 48 e6 bd ff 4c 89 f6 48 89
-RSP: 0018:ffffc90003bbf758 EFLAGS: 00010293
-RAX: 0000000000000000 RBX: ffff88802847ec00 RCX: ffffffff81cab618
-RDX: ffff888015bd1dc0 RSI: ffffffff81cab627 RDI: 0000000000000007
-RBP: 000000000c040474 R08: 0000000000000007 R09: 0000000000000020
-R10: 0000000000000020 R11: 0000000000000009 R12: 0000000020ffd000
-R13: 1ffff92000777eec R14: 000000000001e529 R15: 0000000000000020
-FS:  0000555555e2a480(0000) GS:ffff8880b9900000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 0000000020ffd000 CR3: 000000002aae7000 CR4: 00000000003506f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-Call Trace:
- <TASK>
- drm_gem_shmem_fault+0x207/0x400 drivers/gpu/drm/drm_gem_shmem_helper.c:531
- __do_fault+0x107/0x5f0 mm/memory.c:4265
- do_read_fault mm/memory.c:4628 [inline]
- do_fault mm/memory.c:4762 [inline]
- do_pte_missing mm/memory.c:3730 [inline]
- handle_pte_fault mm/memory.c:5038 [inline]
- __handle_mm_fault+0x2682/0x3d60 mm/memory.c:5179
- handle_mm_fault+0x478/0xa00 mm/memory.c:5344
- do_user_addr_fault+0x3d1/0x1000 arch/x86/mm/fault.c:1413
- handle_page_fault arch/x86/mm/fault.c:1505 [inline]
- exc_page_fault+0x5c/0xd0 arch/x86/mm/fault.c:1561
- asm_exc_page_fault+0x26/0x30 arch/x86/include/asm/idtentry.h:570
-RIP: 0010:rep_movs_alternative+0x4a/0x70 arch/x86/lib/copy_user_64.S:71
-Code: 75 f1 c3 66 66 2e 0f 1f 84 00 00 00 00 00 66 90 48 8b 06 48 89 07 48 83 c6 08 48 83 c7 08 83 e9 08 74 df 83 f9 08 73 e8 eb c9 <f3> a4 c3 48 89 c8 48 c1 e9 03 83 e0 07 f3 48 a5 89 c1 85 c9 75 b3
-RSP: 0018:ffffc90003bbfb50 EFLAGS: 00050206
-RAX: 0000000000000001 RBX: 0000000020ffd000 RCX: 0000000000001000
-RDX: 0000000000000000 RSI: 0000000020ffd000 RDI: ffff888018796000
-RBP: 0000000000001000 R08: 0000000000000001 R09: ffffed10030f2dff
-R10: ffff888018796fff R11: 0000000000000000 R12: 0000000020ffe000
-R13: ffff888018796000 R14: 0000000000000000 R15: 0000000020ffd000
- copy_user_generic arch/x86/include/asm/uaccess_64.h:112 [inline]
- raw_copy_from_user arch/x86/include/asm/uaccess_64.h:127 [inline]
- _copy_from_user+0xc2/0xf0 lib/usercopy.c:23
- copy_from_user include/linux/uaccess.h:183 [inline]
- snd_rawmidi_kernel_write1+0x360/0x860 sound/core/rawmidi.c:1618
- snd_rawmidi_write+0x26e/0xc00 sound/core/rawmidi.c:1687
- vfs_write+0x2a4/0xdf0 fs/read_write.c:582
- ksys_write+0x1f0/0x250 fs/read_write.c:637
- do_syscall_x64 arch/x86/entry/common.c:51 [inline]
- do_syscall_64+0x3f/0x110 arch/x86/entry/common.c:82
- entry_SYSCALL_64_after_hwframe+0x63/0x6b
-RIP: 0033:0x7f31add88d69
-Code: 48 83 c4 28 c3 e8 37 17 00 00 0f 1f 80 00 00 00 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 4d 89 c8 4c 8b 4c 24 08 0f 05 <48> 3d 01 f0 ff ff 73 01 c3 48 c7 c1 b8 ff ff ff f7 d8 64 89 01 48
-RSP: 002b:00007ffdd9a49ee8 EFLAGS: 00000246 ORIG_RAX: 0000000000000001
-RAX: ffffffffffffffda RBX: 00007ffdd9a49f00 RCX: 00007f31add88d69
-RDX: 00000000fffffd2c RSI: 0000000020000000 RDI: 0000000000000004
-RBP: 00007ffdd9a49f08 R08: 0000000000000000 R09: 0000000000000000
-R10: 00007ffdd9a49f08 R11: 0000000000000246 R12: 0000000000000000
-R13: 00007ffdd9a4a168 R14: 0000000000000001 R15: 0000000000000001
- </TASK>
-Modules linked in:
----[ end trace 0000000000000000 ]---
-RIP: 0010:vmf_insert_pfn_prot+0x247/0x430 mm/memory.c:2216
-Code: 0f 0b e8 7c e6 bd ff 49 89 ef bf 20 00 00 00 41 83 e7 28 4c 89 fe e8 f8 e1 bd ff 49 83 ff 20 0f 85 aa fe ff ff e8 59 e6 bd ff <0f> 0b 48 bd ff ff ff ff ff ff 0f 00 e8 48 e6 bd ff 4c 89 f6 48 89
-RSP: 0018:ffffc90003bbf758 EFLAGS: 00010293
-RAX: 0000000000000000 RBX: ffff88802847ec00 RCX: ffffffff81cab618
-RDX: ffff888015bd1dc0 RSI: ffffffff81cab627 RDI: 0000000000000007
-RBP: 000000000c040474 R08: 0000000000000007 R09: 0000000000000020
-R10: 0000000000000020 R11: 0000000000000009 R12: 0000000020ffd000
-R13: 1ffff92000777eec R14: 000000000001e529 R15: 0000000000000020
-FS:  0000555555e2a480(0000) GS:ffff8880b9800000(0000) knlGS:0000000000000000
-CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
-CR2: 0000000020acb000 CR3: 000000002aae7000 CR4: 00000000003506f0
-DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
-DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
-----------------
-Code disassembly (best guess):
-   0:	75 f1                	jne    0xfffffff3
-   2:	c3                   	ret
-   3:	66 66 2e 0f 1f 84 00 	data16 cs nopw 0x0(%rax,%rax,1)
-   a:	00 00 00 00
-   e:	66 90                	xchg   %ax,%ax
-  10:	48 8b 06             	mov    (%rsi),%rax
-  13:	48 89 07             	mov    %rax,(%rdi)
-  16:	48 83 c6 08          	add    $0x8,%rsi
-  1a:	48 83 c7 08          	add    $0x8,%rdi
-  1e:	83 e9 08             	sub    $0x8,%ecx
-  21:	74 df                	je     0x2
-  23:	83 f9 08             	cmp    $0x8,%ecx
-  26:	73 e8                	jae    0x10
-  28:	eb c9                	jmp    0xfffffff3
-* 2a:	f3 a4                	rep movsb %ds:(%rsi),%es:(%rdi) <-- trapping instruction
-  2c:	c3                   	ret
-  2d:	48 89 c8             	mov    %rcx,%rax
-  30:	48 c1 e9 03          	shr    $0x3,%rcx
-  34:	83 e0 07             	and    $0x7,%eax
-  37:	f3 48 a5             	rep movsq %ds:(%rsi),%es:(%rdi)
-  3a:	89 c1                	mov    %eax,%ecx
-  3c:	85 c9                	test   %ecx,%ecx
-  3e:	75 b3                	jne    0xfffffff3
-
-
----
-If you want syzbot to run the reproducer, reply with:
-#syz test: git://repo/address.git branch-or-commit-hash
-If you attach or paste a git patch, syzbot will apply it before testing.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============3251594130506947498==--
