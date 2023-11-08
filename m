@@ -2,224 +2,152 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0AEB07E375D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 Nov 2023 10:19:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 78FE87E5966
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Nov 2023 15:43:47 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D1AC63EA4D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 Nov 2023 09:19:43 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id D985F3EA4D
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 Nov 2023 09:19:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1D8123F362
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Nov 2023 14:43:46 +0000 (UTC)
+Received: from eu-smtp-delivery-151.mimecast.com (eu-smtp-delivery-151.mimecast.com [185.58.85.151])
+	by lists.linaro.org (Postfix) with ESMTPS id B60E23F0A5
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Nov 2023 14:43:29 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=NYHtnTJn;
-	dmarc=pass (policy=none) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 4A83C61171;
-	Tue,  7 Nov 2023 09:19:27 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6CE03C433C8;
-	Tue,  7 Nov 2023 09:19:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1699348767;
-	bh=VDrXsVNkm+N8iNlJC3ZwEH4c+vJY+PF2deM4StXlHO8=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=NYHtnTJnvG6VbnZXS27Xlyz8fAbAUOKKK+C0hD/yaEtP3hsK1Ft/lHn10pWx8x1ar
-	 lvK7xSDqD7EuZfakWhLeb+ssDHh2t/ywB0jfMWGhw0gQ7PD0kmMLqM52eTbYssUDAU
-	 0b+6+E6otlZyPvBUDvMpMsvMC80povFl+2nQNBvX7nCWH+5ucojPZNMfaeK1Z076i8
-	 Mk3Y3AaVvEcXbmZ1safxJou7RShM8a6rP+ur+hRMrkOU4u4ojoBlei0eTHmSOB9+eG
-	 PxF2bIabLg/DSeV0GPKgiGapHIOaZLvAViYf+VDWadCax+CBHM6PCRQZyguJRXGzRG
-	 b8tJ6WJhB2NUA==
-Date: Tue, 7 Nov 2023 10:19:24 +0100
-From: Maxime Ripard <mripard@kernel.org>
-To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Message-ID: <rx7oxrxs6dgwdkdu4l7y74yek4656jejixzccryml6jl6t5elp@jvk7agdcljwg>
-References: <20231025103957.3776-1-keith.zhao@starfivetech.com>
- <20231025103957.3776-7-keith.zhao@starfivetech.com>
- <70805ff2-56a8-45e1-a31c-ffb0e84749e5@linaro.org>
- <3twc4zoohon7uujypgjtlnryfmebx4osvpykagnwr5nemmqz2w@w4vw55uswebh>
- <CAA8EJppxQ7J8DEDFsWzPL8bDpNW-KY0nhUA++zDBRpMCpP-bkA@mail.gmail.com>
- <344veqjvvwlo7vls2kdlgjggf77of2ijxwc2hmk7tarm75ugcs@bmozk23uqxqr>
- <CAA8EJpomaDoJVkq+_NhcxqOs6X-dFd=Vo9Wtqnp8egNaWzDH2Q@mail.gmail.com>
+	dkim=none;
+	dmarc=pass (policy=none) header.from=aculab.com;
+	spf=pass (lists.linaro.org: domain of david.laight@aculab.com designates 185.58.85.151 as permitted sender) smtp.mailfrom=david.laight@aculab.com
+Received: from AcuMS.aculab.com (156.67.243.121 [156.67.243.121]) by
+ relay.mimecast.com with ESMTP with both STARTTLS and AUTH (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ uk-mtapsc-8-f2DJacRmPsWNj5mB7xeKRQ-1; Wed, 08 Nov 2023 14:43:27 +0000
+X-MC-Unique: f2DJacRmPsWNj5mB7xeKRQ-1
+Received: from AcuMS.Aculab.com (10.202.163.4) by AcuMS.aculab.com
+ (10.202.163.4) with Microsoft SMTP Server (TLS) id 15.0.1497.48; Wed, 8 Nov
+ 2023 14:43:23 +0000
+Received: from AcuMS.Aculab.com ([::1]) by AcuMS.aculab.com ([::1]) with mapi
+ id 15.00.1497.048; Wed, 8 Nov 2023 14:43:23 +0000
+From: David Laight <David.Laight@ACULAB.COM>
+To: 'Mina Almasry' <almasrymina@google.com>, "netdev@vger.kernel.org"
+	<netdev@vger.kernel.org>, "linux-kernel@vger.kernel.org"
+	<linux-kernel@vger.kernel.org>, "linux-arch@vger.kernel.org"
+	<linux-arch@vger.kernel.org>, "linux-kselftest@vger.kernel.org"
+	<linux-kselftest@vger.kernel.org>, "linux-media@vger.kernel.org"
+	<linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org"
+	<dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org"
+	<linaro-mm-sig@lists.linaro.org>
+Thread-Topic: [RFC PATCH v3 09/12] net: add support for skbs with unreadable
+ frags
+Thread-Index: AQHaEFtCwSYr9EEKH0iEeRZOyEz/y7BwghiQ
+Date: Wed, 8 Nov 2023 14:43:23 +0000
+Message-ID: <1478ddd0902941fba8316e8883de2758@AcuMS.aculab.com>
+References: <20231106024413.2801438-1-almasrymina@google.com>
+ <20231106024413.2801438-10-almasrymina@google.com>
+In-Reply-To: <20231106024413.2801438-10-almasrymina@google.com>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.202.205.107]
 MIME-Version: 1.0
-In-Reply-To: <CAA8EJpomaDoJVkq+_NhcxqOs6X-dFd=Vo9Wtqnp8egNaWzDH2Q@mail.gmail.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: aculab.com
+Content-Language: en-US
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: D985F3EA4D
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.10 / 15.00];
+X-Rspamd-Queue-Id: B60E23F0A5
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.60 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	RCVD_COUNT_TWO(0.00)[2];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[aculab.com,none];
+	RWL_MAILSPIKE_EXCELLENT(-0.40)[185.58.85.151:from];
+	R_SPF_ALLOW(-0.20)[+ip4:185.58.85.0/24];
+	MIME_BASE64_TEXT(0.10)[];
+	MIME_GOOD(-0.10)[text/plain];
+	TAGGED_RCPT(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	ASN(0.00)[asn:42427, ipnet:185.58.85.0/24, country:GB];
 	RCPT_COUNT_TWELVE(0.00)[25];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_CC(0.00)[starfivetech.com,lists.freedesktop.org,vger.kernel.org,lists.infradead.org,lists.linaro.org,linaro.org,esmil.dk,kernel.org,eecs.berkeley.edu,suse.de,edgeble.ai,hotmail.com,sifive.com,dabbelt.com,amd.com];
+	RCVD_COUNT_THREE(0.00)[3];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.862];
 	FROM_HAS_DN(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_CC(0.00)[davemloft.net,google.com,kernel.org,redhat.com,linaro.org,arndb.de,gmail.com,amd.com];
 	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	HAS_XOIP(0.00)[];
+	MID_RHS_MATCH_FROMTLD(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: TTGZUYRCYMTXRE5VQSFZC4TMOW2OGVBZ
-X-Message-ID-Hash: TTGZUYRCYMTXRE5VQSFZC4TMOW2OGVBZ
-X-MailFrom: mripard@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Keith Zhao <keith.zhao@starfivetech.com>, dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Sumit Semwal <sumit.semwal@linaro.org>, Emil Renner Berthing <kernel@esmil.dk>, Shengyang Chen <shengyang.chen@starfivetech.com>, Conor Dooley <conor+dt@kernel.org>, Albert Ou <aou@eecs.berkeley.edu>, Thomas Zimmermann <tzimmermann@suse.de>, Jagan Teki <jagan@edgeble.ai>, Rob Herring <robh+dt@kernel.org>, Chris Morgan <macromorgan@hotmail.com>, Paul Walmsley <paul.walmsley@sifive.com>, Bjorn Andersson <andersson@kernel.org>, Changhuang Liang <changhuang.liang@starfivetech.com>, Jack Zhu <jack.zhu@starfivetech.com>, Palmer Dabbelt <palmer@dabbelt.com>, Shawn Guo <shawnguo@kernel.org>, christian.koenig@amd.com
+Message-ID-Hash: EVXWV4Q4VP2WGJL3EXRF64C75MDDGTI5
+X-Message-ID-Hash: EVXWV4Q4VP2WGJL3EXRF64C75MDDGTI5
+X-MailFrom: david.laight@aculab.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Jesper Dangaard Brouer <hawk@kernel.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Arnd Bergmann <arnd@arndb.de>, David Ahern <dsahern@kernel.org>, Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Shuah Khan <shuah@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?utf-8?B?Q2hyaXN0aWFuIEvDtm5pZw==?= <christian.koenig@amd.com>, Shakeel Butt <shakeelb@google.com>, Jeroen de Borst <jeroendb@google.com>, Praveen Kaligineedi <pkaligineedi@google.com>, Willem de Bruijn <willemb@google.com>, Kaiyuan Zhang <kaiyuanz@google.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 6/6] drm/vs: Add hdmi driver
+Subject: [Linaro-mm-sig] Re: [RFC PATCH v3 09/12] net: add support for skbs with unreadable frags
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TTGZUYRCYMTXRE5VQSFZC4TMOW2OGVBZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EVXWV4Q4VP2WGJL3EXRF64C75MDDGTI5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============3251594130506947498=="
-
-
---===============3251594130506947498==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="sx3kokd2nvv34uc7"
-Content-Disposition: inline
-
-
---sx3kokd2nvv34uc7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-Hi,
-
-On Sun, Oct 29, 2023 at 06:52:24PM +0200, Dmitry Baryshkov wrote:
-> On Thu, 26 Oct 2023 at 14:53, Maxime Ripard <mripard@kernel.org> wrote:
-> >
-> > On Thu, Oct 26, 2023 at 11:57:22AM +0300, Dmitry Baryshkov wrote:
-> > > On Thu, 26 Oct 2023 at 11:07, Maxime Ripard <mripard@kernel.org> wrot=
-e:
-> > > >
-> > > > On Thu, Oct 26, 2023 at 01:23:53AM +0300, Dmitry Baryshkov wrote:
-> > > > > > +static int starfive_hdmi_register(struct drm_device *drm, stru=
-ct starfive_hdmi *hdmi)
-> > > > > > +{
-> > > > > > +   struct drm_encoder *encoder =3D &hdmi->encoder;
-> > > > > > +   struct device *dev =3D hdmi->dev;
-> > > > > > +
-> > > > > > +   encoder->possible_crtcs =3D drm_of_find_possible_crtcs(drm,=
- dev->of_node);
-> > > > > > +
-> > > > > > +   /*
-> > > > > > +    * If we failed to find the CRTC(s) which this encoder is
-> > > > > > +    * supposed to be connected to, it's because the CRTC has
-> > > > > > +    * not been registered yet.  Defer probing, and hope that
-> > > > > > +    * the required CRTC is added later.
-> > > > > > +    */
-> > > > > > +   if (encoder->possible_crtcs =3D=3D 0)
-> > > > > > +           return -EPROBE_DEFER;
-> > > > > > +
-> > > > > > +   drm_encoder_helper_add(encoder, &starfive_hdmi_encoder_help=
-er_funcs);
-> > > > > > +
-> > > > > > +   hdmi->connector.polled =3D DRM_CONNECTOR_POLL_HPD;
-> > > > > > +
-> > > > > > +   drm_connector_helper_add(&hdmi->connector,
-> > > > > > +                            &starfive_hdmi_connector_helper_fu=
-ncs);
-> > > > > > +   drmm_connector_init(drm, &hdmi->connector,
-> > > > > > +                       &starfive_hdmi_connector_funcs,
-> > > > > > +                       DRM_MODE_CONNECTOR_HDMIA,
-> > > > >
-> > > > > On an embedded device one can not be so sure. There can be MHL or=
- HDMI
-> > > > > Alternative Mode. Usually we use drm_bridge here and drm_bridge_c=
-onnector.
-> > > >
-> > > > On an HDMI driver, it's far from being a requirement, especially gi=
-ven
-> > > > the limitations bridges have.
-> > >
-> > > It's a blessing that things like MHL / HDMI-in-USB-C / HDMI-to-MyDP
-> > > are not widely used in the wild and are mostly non-existing except
-> > > several phones that preate wide DP usage.
-> >
-> > And those can be supported without relying on bridges.
->=20
-> Yes, they likely can, in the way that nouveau handles I2C TV encoders.
-> But I don't think this can scale. We can have different devices
-> attached to the DSI, LVDS, HDMI and even DP image sources. I don't see
-> a scalable solution for either of them. E.g. by switching drm/msm to
-> use panel bridges for DSI panels we were able to significantly unify
-> and simplify code paths.
-
-I'm glad it worked fine for drm/msm, but what I don't really like is the
-current dogma that *everything* should be a bridge, and that's just a
-poor guideline.
-
-> > > Using drm_connector directly prevents one from handling possible
-> > > modifications on the board level. For example, with the DRM connector
-> > > in place, handling a separate HPD GPIO will result in code duplication
-> > > from the hdmi-connector driver. Handling any other variations in the
-> > > board design (which are pretty common in the embedded world) will also
-> > > require changing the driver itself. drm_bridge / drm_bridge_connector
-> > > save us from those issues.
-> >
-> > And we have other solutions there too. Like, EDIDs are pretty much in
-> > the same spot with a lot of device variations, but it also works without
-> > a common driver. I'd really wish we were having less bridges and more
-> > helpers, but here we are.
-> >
-> > > BTW: what are the limitations of the drm_bridge wrt. HDMI output? I'm
-> > > asking because we heavily depend on the bridge infrastructure for HDMI
-> > > output. Maybe we are missing something there, which went unnoticed to
-> > > me and my colleagues.
-> >
-> > A bridge cannot extend the connector state or use properties, for
-> > example. It works for basic stuff but falls apart as soon as you're
-> > trying to do something slightly advanced.
->=20
-> Ack. I agree, we didn't have a necessity to implement properties up to
-> now. But that sounds like an interesting topic for DSI-to-HDMI bridges
-> and HDCP support. I'll need to check if any of the RB3/RB5/Dragonboard
-> bridges are programmed with the HDCP keys.
-
-Aside from HDCP, the current color management work will also require to
-expose properties on the connectors.
-
-Maxime
-
---sx3kokd2nvv34uc7
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZUoBHAAKCRDj7w1vZxhR
-xWiBAP4sevvTIl4u+we2L7l/PqToVfQ/nXueZ0RTUgw/AJ/I1wEA+wM7mB5NCTiB
-uAat91IEFc4bWWOTLkkDTh9pBOjkfwg=
-=28g0
------END PGP SIGNATURE-----
-
---sx3kokd2nvv34uc7--
-
---===============3251594130506947498==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
+From: Mina Almasry
+> Sent: 06 November 2023 02:44
+> 
+> For device memory TCP, we expect the skb headers to be available in host
+> memory for access, and we expect the skb frags to be in device memory
+> and unaccessible to the host. We expect there to be no mixing and
+> matching of device memory frags (unaccessible) with host memory frags
+> (accessible) in the same skb.
+> 
+> Add a skb->devmem flag which indicates whether the frags in this skb
+> are device memory frags or not.
+> 
+...
+> diff --git a/include/linux/skbuff.h b/include/linux/skbuff.h
+> index 1fae276c1353..8fb468ff8115 100644
+> --- a/include/linux/skbuff.h
+> +++ b/include/linux/skbuff.h
+> @@ -805,6 +805,8 @@ typedef unsigned char *sk_buff_data_t;
+>   *	@csum_level: indicates the number of consecutive checksums found in
+>   *		the packet minus one that have been verified as
+>   *		CHECKSUM_UNNECESSARY (max 3)
+> + *	@devmem: indicates that all the fragments in this skb are backed by
+> + *		device memory.
+>   *	@dst_pending_confirm: need to confirm neighbour
+>   *	@decrypted: Decrypted SKB
+>   *	@slow_gro: state present at GRO time, slower prepare step required
+> @@ -991,7 +993,7 @@ struct sk_buff {
+>  #if IS_ENABLED(CONFIG_IP_SCTP)
+>  	__u8			csum_not_inet:1;
+>  #endif
+> -
+> +	__u8			devmem:1;
+>  #if defined(CONFIG_NET_SCHED) || defined(CONFIG_NET_XGRESS)
+>  	__u16			tc_index;	/* traffic control index */
+>  #endif
+> @@ -1766,6 +1768,12 @@ static inline void skb_zcopy_downgrade_managed(struct sk_buff *skb)
+>  		__skb_zcopy_downgrade_managed(skb);
+>  }
+
+Doesn't that bloat struct sk_buff?
+I'm not sure there are any spare bits available.
+Although CONFIG_NET_SWITCHDEV and CONFIG_NET_SCHED seem to
+already add padding.
+
+	David
+
+-
+Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
+Registration No: 1397386 (Wales)
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============3251594130506947498==--
