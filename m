@@ -2,94 +2,90 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 78FE87E5966
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Nov 2023 15:43:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E1C67E5972
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Nov 2023 15:46:21 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1D8123F362
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Nov 2023 14:43:46 +0000 (UTC)
-Received: from eu-smtp-delivery-151.mimecast.com (eu-smtp-delivery-151.mimecast.com [185.58.85.151])
-	by lists.linaro.org (Postfix) with ESMTPS id B60E23F0A5
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Nov 2023 14:43:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 230A440C57
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 Nov 2023 14:46:20 +0000 (UTC)
+Received: from mail-oi1-f197.google.com (mail-oi1-f197.google.com [209.85.167.197])
+	by lists.linaro.org (Postfix) with ESMTPS id DC0D13F0D8
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 Nov 2023 14:46:04 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
 	dkim=none;
-	dmarc=pass (policy=none) header.from=aculab.com;
-	spf=pass (lists.linaro.org: domain of david.laight@aculab.com designates 185.58.85.151 as permitted sender) smtp.mailfrom=david.laight@aculab.com
-Received: from AcuMS.aculab.com (156.67.243.121 [156.67.243.121]) by
- relay.mimecast.com with ESMTP with both STARTTLS and AUTH (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- uk-mtapsc-8-f2DJacRmPsWNj5mB7xeKRQ-1; Wed, 08 Nov 2023 14:43:27 +0000
-X-MC-Unique: f2DJacRmPsWNj5mB7xeKRQ-1
-Received: from AcuMS.Aculab.com (10.202.163.4) by AcuMS.aculab.com
- (10.202.163.4) with Microsoft SMTP Server (TLS) id 15.0.1497.48; Wed, 8 Nov
- 2023 14:43:23 +0000
-Received: from AcuMS.Aculab.com ([::1]) by AcuMS.aculab.com ([::1]) with mapi
- id 15.00.1497.048; Wed, 8 Nov 2023 14:43:23 +0000
-From: David Laight <David.Laight@ACULAB.COM>
-To: 'Mina Almasry' <almasrymina@google.com>, "netdev@vger.kernel.org"
-	<netdev@vger.kernel.org>, "linux-kernel@vger.kernel.org"
-	<linux-kernel@vger.kernel.org>, "linux-arch@vger.kernel.org"
-	<linux-arch@vger.kernel.org>, "linux-kselftest@vger.kernel.org"
-	<linux-kselftest@vger.kernel.org>, "linux-media@vger.kernel.org"
-	<linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org"
-	<dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org"
-	<linaro-mm-sig@lists.linaro.org>
-Thread-Topic: [RFC PATCH v3 09/12] net: add support for skbs with unreadable
- frags
-Thread-Index: AQHaEFtCwSYr9EEKH0iEeRZOyEz/y7BwghiQ
-Date: Wed, 8 Nov 2023 14:43:23 +0000
-Message-ID: <1478ddd0902941fba8316e8883de2758@AcuMS.aculab.com>
-References: <20231106024413.2801438-1-almasrymina@google.com>
- <20231106024413.2801438-10-almasrymina@google.com>
-In-Reply-To: <20231106024413.2801438-10-almasrymina@google.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.202.205.107]
+	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=appspotmail.com (policy=none);
+	spf=pass (lists.linaro.org: domain of 3LJ9LZQkbAMk7DEzp00t6p44xs.v33v0t97t6r328t28.r31@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com designates 209.85.167.197 as permitted sender) smtp.mailfrom=3LJ9LZQkbAMk7DEzp00t6p44xs.v33v0t97t6r328t28.r31@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
+Received: by mail-oi1-f197.google.com with SMTP id 5614622812f47-3b3edaef525so10091560b6e.0
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 08 Nov 2023 06:46:04 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1699454764; x=1700059564;
+        h=to:from:subject:message-id:in-reply-to:date:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=eyg+x1sdBdUCTK9dEOdpm/i8Z98iZDIp/TYoaCFtNfI=;
+        b=sXtbXkKgKs0dPDIK3c/secZKeU9iA/2pt8dsCiHcnmIK5RqBb1nmgzkf7eMfzg5Q5K
+         Afn1q+yji7wqDmwC+rt1pue3pZoSkb/sZuTb3JFS+0mY/8F7hLJmtIpnPrgGdM+iQlkf
+         PKwHWIkH1zGCoZ5Du8AUODjZjehmptMCnnIT3xBrBSu5h9iSeN+VaNrQ7WuzdhaeUIgd
+         w10PsPdQQfB359z5E35mhtKcm8mik6RZ23zIm/vwI1s0pHZuJup/ebjDAjlY7B2dVfFH
+         TYPK13ZeGwZ4nuX0vQHOBTnnB+U3HLl8D1GalbnkqovvREupKZwDSSY4fN5wXxO/6CNv
+         /etA==
+X-Gm-Message-State: AOJu0YwUU6EecrQ5I/mCEVLO7Mrq2UK2GvHG+2/fwqKHG6Fic5pYeySR
+	HrWHMI0zimlGytMYMUkmAPsM5NXboTMBT3+h4+qSAAxI6RTq
+X-Google-Smtp-Source: AGHT+IHYVbPqVKNGXu+BvwkE/pRq1+khXE9q8J8tLhTwkKxlwRoFhUls2Br/4J25UUlY0OHXWCPFT/tsDkP8SnIUAsiU7jVq8Mz6
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: aculab.com
-Content-Language: en-US
+X-Received: by 2002:a05:6808:138d:b0:3a7:86b2:1950 with SMTP id
+ c13-20020a056808138d00b003a786b21950mr789798oiw.0.1699454764313; Wed, 08 Nov
+ 2023 06:46:04 -0800 (PST)
+Date: Wed, 08 Nov 2023 06:46:04 -0800
+In-Reply-To: <0000000000002a4da90603a5cbbf@google.com>
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <00000000000089f4110609a525b2@google.com>
+From: syzbot <syzbot+398e17b61dab22cc56bc@syzkaller.appspotmail.com>
+To: airlied@gmail.com, airlied@linux.ie, christian.koenig@amd.com,
+	daniel.vetter@ffwll.ch, daniel.vetter@intel.com, daniel@ffwll.ch,
+	dri-devel@lists.freedesktop.org, hdanton@sina.com,
+	linaro-mm-sig-bounces@lists.linaro.org, linaro-mm-sig@lists.linaro.org,
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+	maarten.lankhorst@linux.intel.com, mripard@kernel.org,
+	sumit.semwal@linaro.org, syzkaller-bugs@googlegroups.com, tzimmermann@suse.de
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: B60E23F0A5
+X-Rspamd-Queue-Id: DC0D13F0D8
 X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.60 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MIME_BASE64_TEXT_BOGUS(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[aculab.com,none];
-	RWL_MAILSPIKE_EXCELLENT(-0.40)[185.58.85.151:from];
-	R_SPF_ALLOW(-0.20)[+ip4:185.58.85.0/24];
-	MIME_BASE64_TEXT(0.10)[];
+X-Spamd-Result: default: False [-1.90 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	URI_HIDDEN_PATH(1.00)[https://syzkaller.appspot.com/x/.config?x=1ffa1cec3b40f3ce];
+	FORGED_SENDER(0.30)[syzbot@syzkaller.appspotmail.com,3LJ9LZQkbAMk7DEzp00t6p44xs.v33v0t97t6r328t28.r31@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	DMARC_POLICY_SOFTFAIL(0.10)[appspotmail.com : SPF not aligned (relaxed), No valid DKIM,none];
 	MIME_GOOD(-0.10)[text/plain];
-	TAGGED_RCPT(0.00)[];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	ASN(0.00)[asn:42427, ipnet:185.58.85.0/24, country:GB];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	RCVD_COUNT_THREE(0.00)[3];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	R_DKIM_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-0.862];
+	REDIRECTOR_URL(0.00)[goo.gl];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[davemloft.net,google.com,kernel.org,redhat.com,linaro.org,arndb.de,gmail.com,amd.com];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_COUNT_ONE(0.00)[1];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.197:from];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
 	RCVD_TLS_LAST(0.00)[];
+	R_DKIM_NA(0.00)[];
+	ARC_NA(0.00)[];
+	TO_DN_NONE(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[syzbot@syzkaller.appspotmail.com,3LJ9LZQkbAMk7DEzp00t6p44xs.v33v0t97t6r328t28.r31@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com];
+	FREEMAIL_TO(0.00)[gmail.com,linux.ie,amd.com,ffwll.ch,intel.com,lists.freedesktop.org,sina.com,lists.linaro.org,vger.kernel.org,linux.intel.com,kernel.org,linaro.org,googlegroups.com,suse.de];
+	TAGGED_FROM(0.00)[398e17b61dab22cc56bc];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	HAS_XOIP(0.00)[];
-	MID_RHS_MATCH_FROMTLD(0.00)[]
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	NEURAL_HAM(-0.00)[-0.984];
+	SUBJECT_HAS_QUESTION(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: EVXWV4Q4VP2WGJL3EXRF64C75MDDGTI5
-X-Message-ID-Hash: EVXWV4Q4VP2WGJL3EXRF64C75MDDGTI5
-X-MailFrom: david.laight@aculab.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Jesper Dangaard Brouer <hawk@kernel.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Arnd Bergmann <arnd@arndb.de>, David Ahern <dsahern@kernel.org>, Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Shuah Khan <shuah@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, =?utf-8?B?Q2hyaXN0aWFuIEvDtm5pZw==?= <christian.koenig@amd.com>, Shakeel Butt <shakeelb@google.com>, Jeroen de Borst <jeroendb@google.com>, Praveen Kaligineedi <pkaligineedi@google.com>, Willem de Bruijn <willemb@google.com>, Kaiyuan Zhang <kaiyuanz@google.com>
+Message-ID-Hash: WWJGDU27TTJFO4YQOIHTZBGG7IWLX3GB
+X-Message-ID-Hash: WWJGDU27TTJFO4YQOIHTZBGG7IWLX3GB
+X-MailFrom: 3LJ9LZQkbAMk7DEzp00t6p44xs.v33v0t97t6r328t28.r31@M3KW2WVRGUFZ5GODRSRYTGD7.apphosting.bounces.google.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC PATCH v3 09/12] net: add support for skbs with unreadable frags
+Subject: [Linaro-mm-sig] Re: [syzbot] [dri?] kernel BUG in vmf_insert_pfn_prot (2)
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EVXWV4Q4VP2WGJL3EXRF64C75MDDGTI5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WWJGDU27TTJFO4YQOIHTZBGG7IWLX3GB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -99,55 +95,28 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-From: Mina Almasry
-> Sent: 06 November 2023 02:44
-> 
-> For device memory TCP, we expect the skb headers to be available in host
-> memory for access, and we expect the skb frags to be in device memory
-> and unaccessible to the host. We expect there to be no mixing and
-> matching of device memory frags (unaccessible) with host memory frags
-> (accessible) in the same skb.
-> 
-> Add a skb->devmem flag which indicates whether the frags in this skb
-> are device memory frags or not.
-> 
-...
-> diff --git a/include/linux/skbuff.h b/include/linux/skbuff.h
-> index 1fae276c1353..8fb468ff8115 100644
-> --- a/include/linux/skbuff.h
-> +++ b/include/linux/skbuff.h
-> @@ -805,6 +805,8 @@ typedef unsigned char *sk_buff_data_t;
->   *	@csum_level: indicates the number of consecutive checksums found in
->   *		the packet minus one that have been verified as
->   *		CHECKSUM_UNNECESSARY (max 3)
-> + *	@devmem: indicates that all the fragments in this skb are backed by
-> + *		device memory.
->   *	@dst_pending_confirm: need to confirm neighbour
->   *	@decrypted: Decrypted SKB
->   *	@slow_gro: state present at GRO time, slower prepare step required
-> @@ -991,7 +993,7 @@ struct sk_buff {
->  #if IS_ENABLED(CONFIG_IP_SCTP)
->  	__u8			csum_not_inet:1;
->  #endif
-> -
-> +	__u8			devmem:1;
->  #if defined(CONFIG_NET_SCHED) || defined(CONFIG_NET_XGRESS)
->  	__u16			tc_index;	/* traffic control index */
->  #endif
-> @@ -1766,6 +1768,12 @@ static inline void skb_zcopy_downgrade_managed(struct sk_buff *skb)
->  		__skb_zcopy_downgrade_managed(skb);
->  }
+syzbot has bisected this issue to:
 
-Doesn't that bloat struct sk_buff?
-I'm not sure there are any spare bits available.
-Although CONFIG_NET_SWITCHDEV and CONFIG_NET_SCHED seem to
-already add padding.
+commit 45d9c8dde4cd8589f9180309ec60f0da2ce486e4
+Author: Daniel Vetter <daniel.vetter@ffwll.ch>
+Date:   Thu Aug 12 13:14:12 2021 +0000
 
-	David
+    drm/vgem: use shmem helpers
 
--
-Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
-Registration No: 1397386 (Wales)
+bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=126094df680000
+start commit:   d2f51b3516da Merge tag 'rtc-6.7' of git://git.kernel.org/p..
+git tree:       upstream
+final oops:     https://syzkaller.appspot.com/x/report.txt?x=116094df680000
+console output: https://syzkaller.appspot.com/x/log.txt?x=166094df680000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=1ffa1cec3b40f3ce
+dashboard link: https://syzkaller.appspot.com/bug?extid=398e17b61dab22cc56bc
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=16344918e80000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=156bb2c0e80000
+
+Reported-by: syzbot+398e17b61dab22cc56bc@syzkaller.appspotmail.com
+Fixes: 45d9c8dde4cd ("drm/vgem: use shmem helpers")
+
+For information about bisection process see: https://goo.gl/tpsmEJ#bisection
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
