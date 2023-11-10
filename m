@@ -2,596 +2,110 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC74F7E7D18
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Nov 2023 15:42:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 237D77E8648
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Nov 2023 00:13:58 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A1AE240EC2
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Nov 2023 14:42:19 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 14D5440C86
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Nov 2023 14:42:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D079441023
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 10 Nov 2023 23:13:56 +0000 (UTC)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+	by lists.linaro.org (Postfix) with ESMTPS id B784440C74
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 10 Nov 2023 23:13:40 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=jeZGc+RX;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="urs+N/fb";
 	dmarc=pass (policy=none) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org
+	spf=pass (lists.linaro.org: domain of kuba@kernel.org designates 145.40.73.55 as permitted sender) smtp.mailfrom=kuba@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 795B3619F8;
-	Fri, 10 Nov 2023 14:42:02 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B8B73C433C7;
-	Fri, 10 Nov 2023 14:42:01 +0000 (UTC)
+	by sin.source.kernel.org (Postfix) with ESMTP id 0D6D4CE1736;
+	Fri, 10 Nov 2023 23:13:38 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 311CFC433C8;
+	Fri, 10 Nov 2023 23:13:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1699627322;
-	bh=r1u4S6czlGhgJr3DSHZB1Nz2Yr5vLHsBgbtwT8LGonA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=jeZGc+RXq0whsJf3Tj83XQod+vt8TsuDXIyAKqe3UJhwW+HMN9jR42ZyDve31pWUc
-	 WCputicK5jjb5eFtCoY1mmmV8ATY+2xlHL+mvmBkxsPDTTiz3/Crlj4lM1qUElDhXj
-	 YcJT7LFrp/ZRScU54AypyrsDkcTM5gv2toTSvnYApspJgYWH1juzbSMUqYWtwmV+z3
-	 yL2vkSM1RxJYipYM0x682SNxwWh9T/ojfgeL96cELAzo7LH0ZZQXKyF0N2WhZ/53Hx
-	 QWz9BTxCQ3B1kiI/4NLeKW7vIBI04m4gPqTnVRqcCo+CbkGvQQfGEW5IDh1F0YP4hk
-	 rWa3ob4QSAl+A==
-Date: Fri, 10 Nov 2023 15:41:59 +0100
-From: Maxime Ripard <mripard@kernel.org>
-To: Marco Pagani <marpagan@redhat.com>
-Message-ID: <dqpsjdpedvpbooffrn2nwg6hxr2bhdizwx27icwz2dx5bgsho4@id5drrg66e7h>
-References: <20231108134205.111478-1-marpagan@redhat.com>
+	s=k20201202; t=1699658017;
+	bh=3kEmglIzeVKeC89qJz186In/g6MnNvWn/X0kBCEAmR0=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=urs+N/fb0zYrePTt7BfGxDX3SlOzERDJqx1nVlvFB0bjm20DEIOtlngKpII5c8iUC
+	 JA+a/PQoHqi7fbtMcF6+72fNv57rXF0fFdo9uGu4Ib4h2e/rh0hXSVpgxVOwgyaE18
+	 ZOl47igkAtH6rUtgZzs1JZI9ZKl+tQln3SdK3zFqeuuKQSad1G2Qof0r6YqS5f+K/m
+	 avCl0oRY/UckS2XaoWsLJL6GjlHYaQMA8DZIW6fJPMh3vDNg2oHIlMUpsvzmjp/Qf8
+	 KlRCpaECHCkbwoKHIiku1cErTYNEclyDVpCghn5fmL2ME3UUxI7uHtCDyIvZ2t9Hq/
+	 OtoukLeU9AnSw==
+Date: Fri, 10 Nov 2023 15:13:35 -0800
+From: Jakub Kicinski <kuba@kernel.org>
+To: Mina Almasry <almasrymina@google.com>
+Message-ID: <20231110151335.38a1c6ec@kernel.org>
+In-Reply-To: <20231106024413.2801438-13-almasrymina@google.com>
+References: <20231106024413.2801438-1-almasrymina@google.com>
+	<20231106024413.2801438-13-almasrymina@google.com>
 MIME-Version: 1.0
-In-Reply-To: <20231108134205.111478-1-marpagan@redhat.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 14D5440C86
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.60 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
+X-Rspamd-Queue-Id: B784440C74
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.50 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+	R_SPF_ALLOW(-0.20)[+ip4:145.40.73.55];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	MIME_GOOD(-0.10)[text/plain];
+	TAGGED_RCPT(0.00)[];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:54825, ipnet:145.40.73.0/24, country:US];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	MIME_TRACE(0.00)[0:+];
+	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
+	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,redhat.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,davemloft.net,google.com,redhat.com,kernel.org,linaro.org,arndb.de,gmail.com,amd.com];
 	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: LFBY5MLUOT4B3CJXUNZNSTQDUX6SRDF2
-X-Message-ID-Hash: LFBY5MLUOT4B3CJXUNZNSTQDUX6SRDF2
-X-MailFrom: mripard@kernel.org
+Message-ID-Hash: XI45YLXJ6ZR5MLK3RPXMSDH4DNY2KVW2
+X-Message-ID-Hash: XI45YLXJ6ZR5MLK3RPXMSDH4DNY2KVW2
+X-MailFrom: kuba@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian Koenig <christian.koenig@amd.com>, Javier Martinez Canillas <javierm@redhat.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Jesper Dangaard Brouer <hawk@kernel.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Arnd Bergmann <arnd@arndb.de>, David Ahern <dsahern@kernel.org>, Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Shuah Khan <shuah@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Shakeel Butt <shakeelb@google.com>, Jeroen de Borst <jeroendb@google.com>, Praveen Kaligineedi <pkaligineedi@google.com>, Stanislav Fomichev <sdf@google.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC PATCH v2] drm/test: add a test suite for GEM objects backed by shmem
+Subject: [Linaro-mm-sig] Re: [RFC PATCH v3 12/12] selftests: add ncdevmem, netcat for devmem TCP
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LFBY5MLUOT4B3CJXUNZNSTQDUX6SRDF2/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XI45YLXJ6ZR5MLK3RPXMSDH4DNY2KVW2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============5390562072665339000=="
-
-
---===============5390562072665339000==
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="5f7kz7hlopnaynsr"
-Content-Disposition: inline
-
-
---5f7kz7hlopnaynsr
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Nov 08, 2023 at 02:42:03PM +0100, Marco Pagani wrote:
-> This patch introduces an initial KUnit test suite for GEM objects
-> backed by shmem buffers.
->=20
-> Suggested-by: Javier Martinez Canillas <javierm@redhat.com>
-> Signed-off-by: Marco Pagani <marpagan@redhat.com>
->=20
-> v2:
-> - Improved description of test cases
-> - Cleaner error handling using KUnit actions
-> - Alphabetical order in Kconfig and Makefile
-> ---
->  drivers/gpu/drm/Kconfig                    |   9 +-
->  drivers/gpu/drm/tests/Makefile             |   5 +-
->  drivers/gpu/drm/tests/drm_gem_shmem_test.c | 381 +++++++++++++++++++++
->  3 files changed, 389 insertions(+), 6 deletions(-)
->  create mode 100644 drivers/gpu/drm/tests/drm_gem_shmem_test.c
->=20
-> diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
-> index 3eee8636f847..a2551c8c393a 100644
-> --- a/drivers/gpu/drm/Kconfig
-> +++ b/drivers/gpu/drm/Kconfig
-> @@ -76,14 +76,15 @@ config DRM_KUNIT_TEST
->  	tristate "KUnit tests for DRM" if !KUNIT_ALL_TESTS
->  	depends on DRM && KUNIT
->  	select PRIME_NUMBERS
-> +	select DRM_BUDDY
->  	select DRM_DISPLAY_DP_HELPER
->  	select DRM_DISPLAY_HELPER
-> -	select DRM_LIB_RANDOM
-> -	select DRM_KMS_HELPER
-> -	select DRM_BUDDY
-> +	select DRM_EXEC
->  	select DRM_EXPORT_FOR_TESTS if m
-> +	select DRM_GEM_SHMEM_HELPER
-> +	select DRM_KMS_HELPER
->  	select DRM_KUNIT_TEST_HELPERS
-> -	select DRM_EXEC
-> +	select DRM_LIB_RANDOM
->  	default KUNIT_ALL_TESTS
->  	help
->  	  This builds unit tests for DRM. This option is not useful for
-> diff --git a/drivers/gpu/drm/tests/Makefile b/drivers/gpu/drm/tests/Makef=
-ile
-> index ba7baa622675..d6183b3d7688 100644
-> --- a/drivers/gpu/drm/tests/Makefile
-> +++ b/drivers/gpu/drm/tests/Makefile
-> @@ -9,15 +9,16 @@ obj-$(CONFIG_DRM_KUNIT_TEST) +=3D \
->  	drm_connector_test.o \
->  	drm_damage_helper_test.o \
->  	drm_dp_mst_helper_test.o \
-> +	drm_exec_test.o \
->  	drm_format_helper_test.o \
->  	drm_format_test.o \
->  	drm_framebuffer_test.o \
-> +	drm_gem_shmem_test.o \
->  	drm_managed_test.o \
->  	drm_mm_test.o \
->  	drm_modes_test.o \
->  	drm_plane_helper_test.o \
->  	drm_probe_helper_test.o \
-> -	drm_rect_test.o	\
-> -	drm_exec_test.o
-> +	drm_rect_test.o
-
-Thanks for reordering the tests and symbols, but they should part of a
-preliminary patch.
-
->  CFLAGS_drm_mm_test.o :=3D $(DISABLE_STRUCTLEAK_PLUGIN)
-> diff --git a/drivers/gpu/drm/tests/drm_gem_shmem_test.c b/drivers/gpu/drm=
-/tests/drm_gem_shmem_test.c
-> new file mode 100644
-> index 000000000000..983380490673
-> --- /dev/null
-> +++ b/drivers/gpu/drm/tests/drm_gem_shmem_test.c
-> @@ -0,0 +1,381 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * KUnit test suite for GEM objects backed by shmem buffers
-> + *
-> + * Copyright (C) 2023 Red Hat, Inc.
-> + *
-> + * Author: Marco Pagani <marpagan@redhat.com>
-> + */
-> +
-> +#include <linux/dma-buf.h>
-> +#include <linux/iosys-map.h>
-> +#include <linux/sizes.h>
-> +
-> +#include <kunit/test.h>
-> +
-> +#include <drm/drm_device.h>
-> +#include <drm/drm_drv.h>
-> +#include <drm/drm_gem.h>
-> +#include <drm/drm_gem_shmem_helper.h>
-> +#include <drm/drm_kunit_helpers.h>
-> +
-> +#define TEST_SIZE		SZ_1M
-> +#define TEST_BYTE		0xae
-> +
-> +struct fake_dev {
-> +	struct drm_device drm_dev;
-> +	struct device *dev;
-
-AFAICS, you're not using the dev pointer anywhere. You could remove the
-fake_dev struct entirely and pass the drm_device pointer in test->priv
-
-> +};
-> +
-> +/*
-> + * Wrappers to avoid an explicit type casting when passing action
-> + * functions to kunit_add_action().
-> + */
-> +static void kfree_wrapper(void *p)
-> +{
-> +	kfree(p);
-> +}
-> +
-> +static void sg_free_table_wrapper(void *sgt)
-> +{
-> +	sg_free_table(sgt);
-> +}
-> +
-> +static void drm_gem_shmem_free_wrapper(void *shmem)
-> +{
-> +	drm_gem_shmem_free(shmem);
-> +}
-
-I think you need to explicitly cast the pointer (or do a temporary
-assignment to the proper type) to avoid a compiler warning.
-
-> +/*
-> + * Test creating a shmem GEM object backed by shmem buffer. The test
-> + * case succeeds if the GEM object is successfully allocated with the
-> + * shmem file node and object functions attributes set, and the size
-> + * attribute is equal to the correct size.
-> + */
-
-Thanks for all those comments, it's super helpful
-
-> +static void drm_gem_shmem_test_obj_create(struct kunit *test)
-> +{
-> +	struct fake_dev *fdev =3D test->priv;
-> +	struct drm_gem_shmem_object *shmem;
-> +
-> +	shmem =3D drm_gem_shmem_create(&fdev->drm_dev, TEST_SIZE);
-> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, shmem);
-> +	KUNIT_EXPECT_EQ(test, shmem->base.size, TEST_SIZE);
-> +	KUNIT_EXPECT_NOT_NULL(test, shmem->base.filp);
-> +	KUNIT_EXPECT_NOT_NULL(test, shmem->base.funcs);
-> +
-> +	drm_gem_shmem_free(shmem);
-> +}
-> +
-> +/*
-> + * Test creating a shmem GEM object from a scatter/gather table exported
-> + * via a DMA-BUF. The test case succeed if the GEM object is successfully
-> + * created with the shmem file node attribute equal to NULL and the sgt
-> + * attribute pointing to the scatter/gather table that has been imported.
-> + */
-> +static void drm_gem_shmem_test_obj_create_private(struct kunit *test)
-> +{
-> +	struct fake_dev *fdev =3D test->priv;
-> +	struct drm_gem_shmem_object *shmem;
-> +	struct drm_gem_object *gem_obj;
-> +	struct dma_buf buf_mock;
-> +	struct dma_buf_attachment attach_mock;
-> +	struct sg_table *sgt;
-> +	char *buf;
-> +	int ret;
-> +
-> +	/* Create a mock scatter/gather table */
-> +	buf =3D kunit_kzalloc(test, TEST_SIZE, GFP_KERNEL);
-> +	KUNIT_ASSERT_NOT_NULL(test, buf);
-> +
-> +	sgt =3D kzalloc(sizeof(*sgt), GFP_KERNEL);
-> +	KUNIT_ASSERT_NOT_NULL(test, sgt);
-> +
-> +	ret =3D kunit_add_action_or_reset(test, kfree_wrapper, sgt);
-> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> +
-> +	ret =3D sg_alloc_table(sgt, 1, GFP_KERNEL);
-> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> +
-> +	ret =3D kunit_add_action_or_reset(test, sg_free_table_wrapper, sgt);
-> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> +
-> +	sg_init_one(sgt->sgl, buf, TEST_SIZE);
-> +
-> +	/* Init a mock DMA-BUF */
-> +	buf_mock.size =3D TEST_SIZE;
-> +	attach_mock.dmabuf =3D &buf_mock;
-> +
-> +	gem_obj =3D drm_gem_shmem_prime_import_sg_table(&fdev->drm_dev, &attach=
-_mock, sgt);
-> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, gem_obj);
-> +	KUNIT_EXPECT_EQ(test, gem_obj->size, TEST_SIZE);
-> +	KUNIT_EXPECT_NULL(test, gem_obj->filp);
-> +	KUNIT_EXPECT_NOT_NULL(test, gem_obj->funcs);
-> +
-> +	/* The scatter/gather table will be freed by drm_gem_shmem_free */
-> +	kunit_remove_action(test, sg_free_table_wrapper, sgt);
-> +	kunit_remove_action(test, kfree_wrapper, sgt);
-> +
-> +	shmem =3D to_drm_gem_shmem_obj(gem_obj);
-> +	KUNIT_EXPECT_PTR_EQ(test, shmem->sgt, sgt);
-> +
-> +	drm_gem_shmem_free(shmem);
-> +}
-> +
-> +/*
-> + * Test pinning backing pages for a shmem GEM object. The test case
-> + * succeeds if a suitable number of backing pages are allocated, and
-> + * the pages table counter attribute is increased by one.
-> + */
-> +static void drm_gem_shmem_test_pin_pages(struct kunit *test)
-> +{
-> +	struct fake_dev *fdev =3D test->priv;
-> +	struct drm_gem_shmem_object *shmem;
-> +	int i, ret;
-> +
-> +	shmem =3D drm_gem_shmem_create(&fdev->drm_dev, TEST_SIZE);
-> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, shmem);
-> +	KUNIT_EXPECT_NULL(test, shmem->pages);
-> +	KUNIT_EXPECT_EQ(test, shmem->pages_use_count, 0);
-> +
-> +	ret =3D kunit_add_action_or_reset(test, drm_gem_shmem_free_wrapper, shm=
-em);
-> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> +
-> +	ret =3D drm_gem_shmem_pin(shmem);
-> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> +	KUNIT_ASSERT_NOT_NULL(test, shmem->pages);
-> +	KUNIT_EXPECT_EQ(test, shmem->pages_use_count, 1);
-> +
-> +	for (i =3D 0; i < (shmem->base.size >> PAGE_SHIFT); i++)
-> +		KUNIT_ASSERT_NOT_NULL(test, shmem->pages[i]);
-> +
-> +	drm_gem_shmem_unpin(shmem);
-> +	KUNIT_EXPECT_NULL(test, shmem->pages);
-> +	KUNIT_EXPECT_EQ(test, shmem->pages_use_count, 0);
-> +}
-> +
-> +/*
-> + * Test creating a virtual mapping for a shmem GEM object. The test
-> + * case succeeds if the backing memory is mapped and the reference
-> + * counter for virtual mapping is increased by one. Moreover, the test
-> + * case writes and then reads a test pattern over the mapped memory.
-> + */
-> +static void drm_gem_shmem_test_vmap(struct kunit *test)
-> +{
-> +	struct fake_dev *fdev =3D test->priv;
-> +	struct drm_gem_shmem_object *shmem;
-> +	struct iosys_map map;
-> +	int ret, i;
-> +
-> +	shmem =3D drm_gem_shmem_create(&fdev->drm_dev, TEST_SIZE);
-> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, shmem);
-> +	KUNIT_EXPECT_NULL(test, shmem->vaddr);
-> +	KUNIT_EXPECT_EQ(test, shmem->vmap_use_count, 0);
-> +
-> +	ret =3D kunit_add_action_or_reset(test, drm_gem_shmem_free_wrapper, shm=
-em);
-> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> +
-> +	ret =3D drm_gem_shmem_vmap(shmem, &map);
-> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> +	KUNIT_ASSERT_NOT_NULL(test, shmem->vaddr);
-> +	KUNIT_ASSERT_FALSE(test, iosys_map_is_null(&map));
-> +	KUNIT_EXPECT_EQ(test, shmem->vmap_use_count, 1);
-> +
-> +	iosys_map_memset(&map, 0, TEST_BYTE, TEST_SIZE);
-> +	for (i =3D 0; i < TEST_SIZE; i++)
-> +		KUNIT_EXPECT_EQ(test, iosys_map_rd(&map, i, u8), TEST_BYTE);
-> +
-> +	drm_gem_shmem_vunmap(shmem, &map);
-> +	KUNIT_EXPECT_NULL(test, shmem->vaddr);
-> +	KUNIT_EXPECT_EQ(test, shmem->vmap_use_count, 0);
-> +}
-> +
-> +/*
-> + * Test exporting a scatter/gather table of pinned pages suitable for
-> + * PRIME usage from a shmem GEM object. The test case succeeds if a
-> + * scatter/gather table large enough to accommodate the backing memory
-> + * is successfully exported.
-> + */
-> +static void drm_gem_shmem_test_get_pages_sgt(struct kunit *test)
-> +{
-> +	struct fake_dev *fdev =3D test->priv;
-> +	struct drm_gem_shmem_object *shmem;
-> +	struct sg_table *sgt;
-> +	struct scatterlist *sg;
-> +	unsigned int si, len =3D 0;
-> +	int ret;
-> +
-> +	shmem =3D drm_gem_shmem_create(&fdev->drm_dev, TEST_SIZE);
-> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, shmem);
-> +
-> +	ret =3D kunit_add_action_or_reset(test, drm_gem_shmem_free_wrapper, shm=
-em);
-> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> +
-> +	ret =3D drm_gem_shmem_pin(shmem);
-> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> +
-> +	sgt =3D drm_gem_shmem_get_sg_table(shmem);
-> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, sgt);
-> +	KUNIT_EXPECT_NULL(test, shmem->sgt);
-> +
-> +	ret =3D kunit_add_action_or_reset(test, sg_free_table_wrapper, sgt);
-> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> +
-> +	for_each_sgtable_sg(sgt, sg, si) {
-> +		KUNIT_EXPECT_NOT_NULL(test, sg);
-> +		len +=3D sg->length;
-> +	}
-> +
-> +	KUNIT_EXPECT_GE(test, len, TEST_SIZE);
-> +}
-> +
-> +/*
-> + * Test pinning pages and exporting a scatter/gather table suitable for
-> + * driver usage from a shmem GEM object. The test case succeeds if the
-> + * backing pages are pinned and a scatter/gather table large enough to
-> + * accommodate the backing memory is successfully exported.
-> + */
-> +static void drm_gem_shmem_test_get_sg_table(struct kunit *test)
-> +{
-> +	struct fake_dev *fdev =3D test->priv;
-> +	struct drm_gem_shmem_object *shmem;
-> +	struct sg_table *sgt;
-> +	struct scatterlist *sg;
-> +	unsigned int si, len, ret =3D 0;
-> +
-> +	shmem =3D drm_gem_shmem_create(&fdev->drm_dev, TEST_SIZE);
-> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, shmem);
-> +
-> +	ret =3D kunit_add_action_or_reset(test, drm_gem_shmem_free_wrapper, shm=
-em);
-> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> +
-> +	/* The scatter/gather table will be freed by drm_gem_shmem_free */
-> +	sgt =3D drm_gem_shmem_get_pages_sgt(shmem);
-> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, sgt);
-> +	KUNIT_ASSERT_NOT_NULL(test, shmem->pages);
-> +	KUNIT_EXPECT_EQ(test, shmem->pages_use_count, 1);
-> +	KUNIT_EXPECT_PTR_EQ(test, sgt, shmem->sgt);
-> +
-> +	for_each_sgtable_sg(sgt, sg, si) {
-> +		KUNIT_EXPECT_NOT_NULL(test, sg);
-> +		len +=3D sg->length;
-> +	}
-> +
-> +	KUNIT_EXPECT_GE(test, len, TEST_SIZE);
-> +}
-> +
-> +/*
-> + * Test updating the madvise state of a shmem GEM object. The test
-> + * case checks that the function for setting madv updates it only if
-> + * its current value is greater or equal than zero and returns false
-> + * if it has a negative value.
-> + */
-> +static void drm_gem_shmem_test_madvise(struct kunit *test)
-> +{
-> +	struct fake_dev *fdev =3D test->priv;
-> +	struct drm_gem_shmem_object *shmem;
-> +	int ret;
-> +
-> +	shmem =3D drm_gem_shmem_create(&fdev->drm_dev, TEST_SIZE);
-> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, shmem);
-> +	KUNIT_ASSERT_EQ(test, shmem->madv, 0);
-> +
-> +	ret =3D kunit_add_action_or_reset(test, drm_gem_shmem_free_wrapper, shm=
-em);
-> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> +
-> +	ret =3D drm_gem_shmem_madvise(shmem, 1);
-> +	KUNIT_EXPECT_TRUE(test, ret);
-> +	KUNIT_ASSERT_EQ(test, shmem->madv, 1);
-> +
-> +	/* Set madv to a negative value */
-> +	ret =3D drm_gem_shmem_madvise(shmem, -1);
-> +	KUNIT_EXPECT_FALSE(test, ret);
-> +	KUNIT_ASSERT_EQ(test, shmem->madv, -1);
-> +
-> +	/* Check that madv cannot be set back to a positive value */
-> +	ret =3D drm_gem_shmem_madvise(shmem, 0);
-> +	KUNIT_EXPECT_FALSE(test, ret);
-> +	KUNIT_ASSERT_EQ(test, shmem->madv, -1);
-> +}
-> +
-> +/*
-> + * Test purging a shmem GEM object. First, assert that a newly created
-> + * shmem GEM object is not purgeable. Then, set madvise to a positive
-> + * value and call drm_gem_shmem_get_pages_sgt() to pin and dma-map the
-> + * backing pages. Finally, assert that the shmem GEM object is now
-> + * purgeable and purge it.
-> + */
-> +static void drm_gem_shmem_test_purge(struct kunit *test)
-> +{
-> +	struct fake_dev *fdev =3D test->priv;
-> +	struct drm_gem_shmem_object *shmem;
-> +	struct sg_table *sgt;
-> +	int ret;
-> +
-> +	shmem =3D drm_gem_shmem_create(&fdev->drm_dev, TEST_SIZE);
-> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, shmem);
-> +
-> +	ret =3D kunit_add_action_or_reset(test, drm_gem_shmem_free_wrapper, shm=
-em);
-> +	KUNIT_ASSERT_EQ(test, ret, 0);
-> +
-> +	ret =3D drm_gem_shmem_is_purgeable(shmem);
-> +	KUNIT_EXPECT_FALSE(test, ret);
-> +
-> +	ret =3D drm_gem_shmem_madvise(shmem, 1);
-> +	KUNIT_EXPECT_TRUE(test, ret);
-> +
-> +	/* The scatter/gather table will be freed by drm_gem_shmem_free */
-> +	sgt =3D drm_gem_shmem_get_pages_sgt(shmem);
-> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, sgt);
-> +
-> +	ret =3D drm_gem_shmem_is_purgeable(shmem);
-> +	KUNIT_EXPECT_TRUE(test, ret);
-> +
-> +	drm_gem_shmem_purge(shmem);
-> +	KUNIT_EXPECT_NULL(test, shmem->pages);
-> +	KUNIT_EXPECT_NULL(test, shmem->sgt);
-> +	KUNIT_EXPECT_EQ(test, shmem->madv, -1);
-> +}
-> +
-> +static int drm_gem_shmem_test_init(struct kunit *test)
-> +{
-> +	struct fake_dev *fdev;
-> +	struct device *dev;
-> +
-> +	/* Allocate a parent device */
-> +	dev =3D drm_kunit_helper_alloc_device(test);
-> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, dev);
-> +
-> +	/*
-> +	 * The DRM core will automatically initialize the GEM core and create
-> +	 * a DRM Memory Manager object which provides an address space pool
-> +	 * for GEM objects allocation.
-> +	 */
-> +	fdev =3D drm_kunit_helper_alloc_drm_device(test, dev, struct fake_dev,
-> +						 drm_dev, DRIVER_GEM);
-> +	KUNIT_ASSERT_NOT_ERR_OR_NULL(test, fdev);
-> +
-> +	fdev->dev =3D dev;
-> +	test->priv =3D fdev;
-> +
-> +	return 0;
-> +}
-> +
-> +static struct kunit_case drm_gem_shmem_test_cases[] =3D {
-> +	KUNIT_CASE(drm_gem_shmem_test_obj_create),
-> +	KUNIT_CASE(drm_gem_shmem_test_obj_create_private),
-> +	KUNIT_CASE(drm_gem_shmem_test_pin_pages),
-> +	KUNIT_CASE(drm_gem_shmem_test_vmap),
-> +	KUNIT_CASE(drm_gem_shmem_test_get_pages_sgt),
-> +	KUNIT_CASE(drm_gem_shmem_test_get_sg_table),
-> +	KUNIT_CASE(drm_gem_shmem_test_madvise),
-> +	KUNIT_CASE(drm_gem_shmem_test_purge),
-> +	{}
-> +};
-> +
-> +static struct kunit_suite drm_gem_shmem_suite =3D {
-> +	.name =3D "drm_gem_shmem",
-> +	.init =3D drm_gem_shmem_test_init,
-> +	.test_cases =3D drm_gem_shmem_test_cases
-> +};
-> +
-> +kunit_test_suite(drm_gem_shmem_suite);
-
-Looks great otherwise, thanks!
-Maxime
-
---5f7kz7hlopnaynsr
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZU5BNwAKCRDj7w1vZxhR
-xd8BAQCWQfZ2OUNNLGx+mO3N4bk72Lqzux9XJTMEhqQKbwFPJwD+J6F3JeK2aGcw
-HnOZStcGzpv8ESgnBrcVBVAhp0/Nrg0=
-=2My6
------END PGP SIGNATURE-----
-
---5f7kz7hlopnaynsr--
-
---===============5390562072665339000==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
+My brain is slightly fried after trying to catch up on the thread 
+for close to 2h. So forgive me if I'm missing something.
+This applies to all emails I'm about to send :)
+
+On Sun,  5 Nov 2023 18:44:11 -0800 Mina Almasry wrote:
+> +	trigger_device_reset();
+
+The user space must not be responsible for the reset.
+We can add some temporary "recreate page pools" ndo
+until the queue API is ready. 
+
+But it should not be visible to the user in any way.
+
+And then the kernel can issue the same reset when the netlink 
+socket dies to flush device free lists.
+
+Maybe we should also add a "allow device/all-queues reload" flag 
+to the netlink API to differentiate drivers which can't implement 
+full queue API later on. We want to make sure the defaults work well 
+in our "target design", rather than at the first stage. And target
+design will reload queues one by one.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============5390562072665339000==--
