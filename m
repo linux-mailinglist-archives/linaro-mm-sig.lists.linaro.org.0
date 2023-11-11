@@ -2,81 +2,95 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87B837E8860
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Nov 2023 03:36:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C4717E8A80
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Nov 2023 12:16:41 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5299F3F204
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Nov 2023 02:36:21 +0000 (UTC)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
-	by lists.linaro.org (Postfix) with ESMTPS id 11C983F204
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 11 Nov 2023 02:36:01 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3EFB540D47
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 11 Nov 2023 11:16:40 +0000 (UTC)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+	by lists.linaro.org (Postfix) with ESMTPS id 0121040CC4
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 11 Nov 2023 11:16:21 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ht9uExB8;
-	dmarc=pass (policy=none) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of kuba@kernel.org designates 145.40.68.75 as permitted sender) smtp.mailfrom=kuba@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by ams.source.kernel.org (Postfix) with ESMTP id EAB0AB82448;
-	Sat, 11 Nov 2023 02:35:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75F08C433C7;
-	Sat, 11 Nov 2023 02:35:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1699670158;
-	bh=gY+gv6FuH7IyPZd+GcBbaxMFJ8nyFzbRgSyvPpB8WHI=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=ht9uExB8i5dnk2CmKBU1mVcjqsdrsD2ZgLZevr8N30eX0ZSAYboFGGKykaf+sSld7
-	 CGIVo25CwHPZiytr+teiiIPuigIDo+JPIkQyvN5n3iPDUMIc9jsF0NZEo7e+fDs8hI
-	 ztRuR71feWJhW6c3gOy9FbB8al83VwWsa2jI6RDs8vnryE62nP6YASRYhTa1kayr6w
-	 Da1EO6WGh1FXrOMerj2O/J/S46xnJ+wZhJFsdyYR1y51fhNB5Bz4l+uQ9vxyzm9yki
-	 rXMDshUoip7ZzimtjecJgZVPpXDWmdS8vodHd4gqw3Sf3ZLjfhV8IAAtpr5Xj5Edg8
-	 N5/Cmof6uQUjA==
-Date: Fri, 10 Nov 2023 18:35:56 -0800
-From: Jakub Kicinski <kuba@kernel.org>
-To: Mina Almasry <almasrymina@google.com>
-Message-ID: <20231110183556.2b7b7502@kernel.org>
-In-Reply-To: <CAHS8izNFnE8RGgBhKzxhVoKXtXgZGVQCLSdm4_dWNeH9Gx-WDQ@mail.gmail.com>
-References: <20231106024413.2801438-1-almasrymina@google.com>
-	<20231106024413.2801438-13-almasrymina@google.com>
-	<20231110151335.38a1c6ec@kernel.org>
-	<CAHS8izNFnE8RGgBhKzxhVoKXtXgZGVQCLSdm4_dWNeH9Gx-WDQ@mail.gmail.com>
+	dkim=pass header.d=mediatek.com header.s=dk header.b=ZYVp65ZK;
+	dmarc=pass (policy=quarantine) header.from=mediatek.com;
+	spf=pass (lists.linaro.org: domain of yong.wu@mediatek.com designates 210.61.82.184 as permitted sender) smtp.mailfrom=yong.wu@mediatek.com
+X-UUID: bb35b3e4808311ee8051498923ad61e6-20231111
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
+	h=Content-Type:Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:CC:To:From; bh=D2tKsXiy0X+1JGV/GrDN1OLzUO3UG44bCa8GSOX5Eqc=;
+	b=ZYVp65ZKL9ii//GMRU+3Tykq1kLMIacfXQ0nUO8RIrVzwDumVK/jnHAwyzRTIdCO350B7ZJCaScXLko1RgwVuKdL7aXewsLAdakY6gi0mB5K8pFqto0ZLA+RG7n66nS53yWTRj497ffjtTU2Ioy5z5VmrA+CbxLniS4hGITzO90=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.33,REQID:1bb9f16c-58c5-49af-bcbe-52e6832c6786,IP:0,U
+	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+	release,TS:0
+X-CID-META: VersionHash:364b77b,CLOUDID:9e818872-1bd3-4f48-b671-ada88705968c,B
+	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
+	RL:1,File:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,
+	DKR:0,DKP:0,BRR:0,BRE:0
+X-CID-BVR: 0
+X-CID-BAS: 0,_,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
+X-UUID: bb35b3e4808311ee8051498923ad61e6-20231111
+Received: from mtkmbs13n1.mediatek.inc [(172.21.101.193)] by mailgw02.mediatek.com
+	(envelope-from <yong.wu@mediatek.com>)
+	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+	with ESMTP id 384052900; Sat, 11 Nov 2023 19:16:16 +0800
+Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
+ mtkmbs13n1.mediatek.inc (172.21.101.193) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Sat, 11 Nov 2023 19:16:15 +0800
+Received: from mhfsdcap04.gcn.mediatek.inc (10.17.3.154) by
+ mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1118.26 via Frontend Transport; Sat, 11 Nov 2023 19:16:14 +0800
+From: Yong Wu <yong.wu@mediatek.com>
+To: Rob Herring <robh+dt@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>,
+	<christian.koenig@amd.com>, Matthias Brugger <matthias.bgg@gmail.com>
+Date: Sat, 11 Nov 2023 19:15:51 +0800
+Message-ID: <20231111111559.8218-1-yong.wu@mediatek.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+X-MTK: N
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 11C983F204
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+X-Rspamd-Queue-Id: 0121040CC4
+X-Spamd-Bar: +
+X-Spamd-Result: default: False [1.30 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	HFILTER_HOSTNAME_UNKNOWN(2.50)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:145.40.68.75];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[mediatek.com,quarantine];
+	RWL_MAILSPIKE_VERYGOOD(-0.20)[210.61.82.184:from];
+	R_DKIM_ALLOW(-0.20)[mediatek.com:s=dk];
+	R_SPF_ALLOW(-0.20)[+ip4:210.61.82.184/32];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:54825, ipnet:145.40.68.0/24, country:US];
-	TAGGED_RCPT(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[23];
-	ARC_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:3462, ipnet:210.61.0.0/16, country:TW];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	TAGGED_RCPT(0.00)[dt];
+	FREEMAIL_TO(0.00)[kernel.org,linaro.org,amd.com,gmail.com];
 	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,davemloft.net,google.com,redhat.com,kernel.org,linaro.org,arndb.de,gmail.com,amd.com];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_CC(0.00)[linaro.org,kernel.org,collabora.com,arm.com,google.com,mediatek.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.infradead.org,quicinc.com,ndufresne.ca,gmail.com];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	RCVD_COUNT_THREE(0.00)[3];
+	DKIM_TRACE(0.00)[mediatek.com:+];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: WESBE4RMYL64OO3KQDXHHR4V76WSDE42
-X-Message-ID-Hash: WESBE4RMYL64OO3KQDXHHR4V76WSDE42
-X-MailFrom: kuba@kernel.org
+X-Spam-Level: *
+Message-ID-Hash: SV33QOAJQGQOFBK3DVZ57LMYP7I5RRL7
+X-Message-ID-Hash: SV33QOAJQGQOFBK3DVZ57LMYP7I5RRL7
+X-MailFrom: yong.wu@mediatek.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Jesper Dangaard Brouer <hawk@kernel.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Arnd Bergmann <arnd@arndb.de>, David Ahern <dsahern@kernel.org>, Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Shuah Khan <shuah@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Shakeel Butt <shakeelb@google.com>, Jeroen de Borst <jeroendb@google.com>, Praveen Kaligineedi <pkaligineedi@google.com>, Stanislav Fomichev <sdf@google.com>
+CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, tjmercier@google.com, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Yong Wu <yong.wu@mediatek.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, jianjiao.zeng@mediatek.com, kuohong.wang@mediatek.com, Vijayanand Jitta <quic_vjitta@quicinc.com>, Joakim Bech <joakim.bech@linaro.org>, Jeffrey Kardatzke <jkardatzke@google.com>, Nicolas Dufresne <nicolas@ndufresne.ca>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC PATCH v3 12/12] selftests: add ncdevmem, netcat for devmem TCP
+Subject: [Linaro-mm-sig] [PATCH v2 0/8] dma-buf: heaps: Add secure heap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WESBE4RMYL64OO3KQDXHHR4V76WSDE42/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SV33QOAJQGQOFBK3DVZ57LMYP7I5RRL7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -86,47 +100,66 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Fri, 10 Nov 2023 18:27:08 -0800 Mina Almasry wrote:
-> Thanks for the clear requirement. I clearly had something different in mind.
-> 
-> Might be dumb suggestions, but instead of creating a new ndo that we
-> maybe end up wanting to deprecate once the queue API is ready, how
-> about we use either of those existing APIs?
-> 
-> +void netdev_reset(struct net_device *dev)
-> +{
-> +       int flags = ETH_RESET_ALL;
-> +       int err;
-> +
-> +#if 1
-> +       __dev_close(dev);
-> +       err = __dev_open(dev, NULL);
-> +#else
-> +       err = dev->ethtool_ops->reset(dev, &flags);
-> +#endif
-> +}
-> +
-> 
-> I've tested both of these to work with GVE on both bind via the
-> netlink API and unbind via the netlink socket close, but I'm not
-> enough of an expert to tell if there is some bad side effect that can
-> happen or something.
+This patchset adds three secure heaps:
+1) secure_mtk_cm: secure chunk memory for MediaTek SVP (Secure Video Path).
+   The buffer is reserved for the secure world after bootup and it is used
+   for vcodec's ES/working buffer;
+2) secure_mtk_cma: secure CMA memory for MediaTek SVP. This buffer is
+   dynamically reserved for the secure world and will be got when we start
+   playing secure videos, Once the security video playing is complete, the
+   CMA will be released. This heap is used for the vcodec's frame buffer. 
+3) secure_cma: Use the kerne CMA ops as the allocation ops. 
+   currently it is a draft version for Vijay and Jaskaran.
 
-We generally don't accept drivers doing device reconfiguration with
-full close() + open() because if the open() fails your machine 
-may be cut off.
+For the first two MediaTek heaps will be used v4l2[1] and drm[2], thus we
+cannot put it in v4l2 or drm, and create a common heap for them. Meanwhile
+We have a limited number of hardware entries to protect memory, we cannot
+protect memory arbitrarily, thus the secure memory management is actually
+inside OPTEE. The kernel just tells the TEE what size I want and the TEE
+will return a "secure handle".
 
-There are drivers which do it, but they are either old... or weren't
-reviewed hard enough.
+[1] https://lore.kernel.org/linux-mediatek/20231106120423.23364-1-yunfei.dong@mediatek.com/
+[2] https://lore.kernel.org/linux-mediatek/20231023044549.21412-1-jason-jh.lin@mediatek.com/
 
-The driver should allocate memory and whether else it can without
-stopping the queues first. Once it has all those, stop the queues,
-reconfigure with already allocated resources, start queues, free old.
+Change note:
+v2: 1) Move John's patches into the vcodec patchset since they use the new
+       dma heap interface directly.
+       https://lore.kernel.org/linux-mediatek/20231106120423.23364-1-yunfei.dong@mediatek.com/
+    2) Reword the dt-binding description.
+    3) Rename the heap name from mtk_svp to secure_mtk_cm.
+       This means the current vcodec/DRM upstream code doesn't match this.
+    4) Add a normal CMA heap. currently it should be a draft version.
+    5) Regarding the UUID, I still use hard code, but put it in a private
+    data which allow the others could set their own UUID. What's more, UUID
+    is necessary for the session with TEE. If we don't have it, we can't
+    communicate with the TEE, including the get_uuid interface, which tries
+    to make uuid more generic, not working. If there is other way to make
+    UUID more general, please free to tell me.
+    
+v1: https://lore.kernel.org/linux-mediatek/20230911023038.30649-1-yong.wu@mediatek.com/
+    Base on v6.6-rc1.
 
-Even without the queue API in place, good drivers do full device
-reconfig this way. Hence my mind goes towards a new (temporary?)
-ndo. It will be replaced by the queue API, but whoever implements
-it for now has to follow this careful reconfig strategy...
+Yong Wu (8):
+  dma-buf: heaps: Initialize a secure heap
+  dma-buf: heaps: secure_heap: Add private heap ops
+  dma-buf: heaps: secure_heap: Initialize tee session
+  dma-buf: heaps: secure_heap: Add tee memory service call
+  dma-buf: heaps: secure_heap: Add dma_ops
+  dt-bindings: reserved-memory: Add secure CMA reserved memory range
+  dma_buf: heaps: secure_heap: Add a new MediaTek CMA heap
+  dma-buf: heaps: secure_heap: Add normal CMA heap
+
+ .../reserved-memory/secure_cma_region.yaml    |  44 ++
+ drivers/dma-buf/heaps/Kconfig                 |   7 +
+ drivers/dma-buf/heaps/Makefile                |   1 +
+ drivers/dma-buf/heaps/secure_heap.c           | 602 ++++++++++++++++++
+ 4 files changed, 654 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/reserved-memory/secure_cma_region.yaml
+ create mode 100644 drivers/dma-buf/heaps/secure_heap.c
+
+-- 
+2.25.1
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
