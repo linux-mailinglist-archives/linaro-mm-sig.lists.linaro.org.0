@@ -2,91 +2,81 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BD9B37EA4FA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Nov 2023 21:41:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CD3B97EA5BF
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Nov 2023 23:11:22 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AB68940F1F
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Nov 2023 20:41:00 +0000 (UTC)
-Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com [209.85.167.181])
-	by lists.linaro.org (Postfix) with ESMTPS id DF6293F0B9
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Nov 2023 20:40:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D7F2840D2B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 Nov 2023 22:11:21 +0000 (UTC)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+	by lists.linaro.org (Postfix) with ESMTPS id 8E2CE3F0A5
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Nov 2023 22:11:04 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=none;
-	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=kernel.org (policy=none);
-	spf=pass (lists.linaro.org: domain of robherring2@gmail.com designates 209.85.167.181 as permitted sender) smtp.mailfrom=robherring2@gmail.com
-Received: by mail-oi1-f181.google.com with SMTP id 5614622812f47-3b3ec45d6e9so3039772b6e.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 13 Nov 2023 12:40:44 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1699908044; x=1700512844;
-        h=date:subject:message-id:references:in-reply-to:cc:to:from
-         :mime-version:content-transfer-encoding:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=kIUOg6xcD1mveQt4yAqYkPtye9ZANiCj61RnWxJZ9RE=;
-        b=ZDKkTMfgg9dtcYW9jWn81EXM1Lhwy6h5QcGM5GP5PPjsQPGaok6aB5e55sGza80GOY
-         ujKUz5F9YUnGJBODPk1bygiqU8D7ZEFogoOpSEjKDvWJiL4L3Nh4i7g+Z8j/MYgadUFl
-         jFN5e/XOLTPkjZeLxDxDbwlARXp8nXKe2iccb0jqeXEXBgXQ5wR0gPdNkbOqLx8REx1G
-         hEQxCjaI0xampVyBNLxGb8qqIblWCriDRbDO90EFVNMuoMYgUryx7mNOKnzs/H2X/PSM
-         hKjIK77UdPAxuUNdJhOb/P9TiuCjG8ai6WwHQ6OkKGyZrMFQT/TIQ+WbZzhpAcPQ+3kb
-         +1hA==
-X-Gm-Message-State: AOJu0Yx7N3lBseCUFv+4WiEpcTn3F2lG9nw5akUKDRkD10wdJhISXYgl
-	nNkcDSO+VO7/j8UHeGR6ag==
-X-Google-Smtp-Source: AGHT+IE+M7ODqvletmAN6kZJ6EBjwVhQYADFHXDZ0Hl1ZJYebTPk7Dxy4FLEWYDWixjDGGboIOMmUw==
-X-Received: by 2002:a54:4586:0:b0:3ab:8431:8037 with SMTP id z6-20020a544586000000b003ab84318037mr9564352oib.32.1699908044232;
-        Mon, 13 Nov 2023 12:40:44 -0800 (PST)
-Received: from herring.priv (66-90-144-107.dyn.grandenetworks.net. [66.90.144.107])
-        by smtp.gmail.com with ESMTPSA id b7-20020aca1b07000000b003af732a2054sm902879oib.57.2023.11.13.12.40.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 13 Nov 2023 12:40:43 -0800 (PST)
-Received: (nullmailer pid 38662 invoked by uid 1000);
-	Mon, 13 Nov 2023 20:40:42 -0000
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=sh8VLAlu;
+	dmarc=pass (policy=none) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of kuba@kernel.org designates 145.40.68.75 as permitted sender) smtp.mailfrom=kuba@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by ams.source.kernel.org (Postfix) with ESMTP id 65D4CB810B9;
+	Mon, 13 Nov 2023 22:11:03 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73772C433C8;
+	Mon, 13 Nov 2023 22:11:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1699913462;
+	bh=y8SvI32OK2xraWnJ4KYO59jDyKCSgMJ4BUaSyMs0sXQ=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=sh8VLAlu2TmvxYxt3GN/26B09B8wkV2+1djcwE8Do3NvbevLDLFLmcF4YsP/sCiHD
+	 NW4TAVN2626qYqQZ9gcvgaKIoHkfVe+s2AWqXNrsu8Xl0AfBnF1Vd8JWmlqeVdBKOM
+	 h2ru3fjERW2LWok5RGV9gkJxm2hnRvqjsTxAfYZyMO9A2PhTDH5PN+1t8UAu1SEGIZ
+	 NOIR0ex6iou1GQEd1NFF2ucKqLJjr9mKhphshDQXzoqdPKJhBHReb0wsywTUyCOztx
+	 tLE5Vxef0IOTcXVEzGS5tfTu8GIR8oCdjW0zUkV3ILeho4XhBy1idGuC8LO3I8aBdJ
+	 yzLBad+6UuGBg==
+Date: Mon, 13 Nov 2023 17:10:58 -0500
+From: Jakub Kicinski <kuba@kernel.org>
+To: Mina Almasry <almasrymina@google.com>
+Message-ID: <20231113171058.68973860@kernel.org>
+In-Reply-To: <CAHS8izPKRh7ukRytXaweKcY_76sE7F_3s1sYVgsUXYGrypK93Q@mail.gmail.com>
+References: <20231106024413.2801438-1-almasrymina@google.com>
+	<20231106024413.2801438-3-almasrymina@google.com>
+	<20231110151907.023c61cd@kernel.org>
+	<CAHS8izPKRh7ukRytXaweKcY_76sE7F_3s1sYVgsUXYGrypK93Q@mail.gmail.com>
 MIME-Version: 1.0
-From: Rob Herring <robh@kernel.org>
-To: Yong Wu <yong.wu@mediatek.com>
-In-Reply-To: <20231111111559.8218-7-yong.wu@mediatek.com>
-References: <20231111111559.8218-1-yong.wu@mediatek.com>
- <20231111111559.8218-7-yong.wu@mediatek.com>
-Message-Id: <169990800956.37900.2282148242749436119.robh@kernel.org>
-Date: Mon, 13 Nov 2023 14:40:42 -0600
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: DF6293F0B9
-X-Spamd-Bar: /
-X-Spamd-Result: default: False [-0.40 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+X-Rspamd-Queue-Id: 8E2CE3F0A5
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.50 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	FORGED_SENDER(0.30)[robh@kernel.org,robherring2@gmail.com];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:145.40.68.75];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
-	DMARC_POLICY_SOFTFAIL(0.10)[kernel.org : SPF not aligned (relaxed), No valid DKIM,none];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FREEMAIL_CC(0.00)[lists.infradead.org,kernel.org,gmail.com,collabora.com,mediatek.com,ndufresne.ca,google.com,amd.com,arm.com,linaro.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,quicinc.com];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	MIME_TRACE(0.00)[0:+];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.181:from];
-	RCPT_COUNT_TWELVE(0.00)[26];
+	ASN(0.00)[asn:54825, ipnet:145.40.68.0/24, country:US];
+	TAGGED_RCPT(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
 	ARC_NA(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_LAST(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	FROM_HAS_DN(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[robh@kernel.org,robherring2@gmail.com];
-	R_DKIM_NA(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	TO_DN_SOME(0.00)[]
+	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,davemloft.net,google.com,redhat.com,kernel.org,linaro.org,arndb.de,gmail.com,amd.com];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: 6FXJD63OAPXBIHMYMEBHT2A5PV2QY676
-X-Message-ID-Hash: 6FXJD63OAPXBIHMYMEBHT2A5PV2QY676
-X-MailFrom: robherring2@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linux-arm-kernel@lists.infradead.org, Rob Herring <robh+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, kuohong.wang@mediatek.com, Nicolas Dufresne <nicolas@ndufresne.ca>, Jeffrey Kardatzke <jkardatzke@google.com>, christian.koenig@amd.com, Brian Starkey <Brian.Starkey@arm.com>, Sumit Semwal <sumit.semwal@linaro.org>, John Stultz <jstultz@google.com>, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, dri-devel@lists.freedesktop.org, tjmercier@google.com, linaro-mm-sig@lists.linaro.org, Joakim Bech <joakim.bech@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Vijayanand Jitta <quic_vjitta@quicinc.com>, jianjiao.zeng@mediatek.com, linux-mediatek@lists.infradead.org, Benjamin Gaignard <benjamin.gaignard@collabora.com>, devicetree@vger.kernel.org
+Message-ID-Hash: LS5HT37JGEA4U6GIWQJTLUKVG5MLKBMK
+X-Message-ID-Hash: LS5HT37JGEA4U6GIWQJTLUKVG5MLKBMK
+X-MailFrom: kuba@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: netdev@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Paolo Abeni <pabeni@redhat.com>, Jesper Dangaard Brouer <hawk@kernel.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Arnd Bergmann <arnd@arndb.de>, David Ahern <dsahern@kernel.org>, Willem de Bruijn <willemdebruijn.kernel@gmail.com>, Shuah Khan <shuah@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Shakeel Butt <shakeelb@google.com>, Jeroen de Borst <jeroendb@google.com>, Praveen Kaligineedi <pkaligineedi@google.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 6/8] dt-bindings: reserved-memory: Add secure CMA reserved memory range
+Subject: [Linaro-mm-sig] Re: [RFC PATCH v3 02/12] net: page_pool: create hooks for custom page providers
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6FXJD63OAPXBIHMYMEBHT2A5PV2QY676/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LS5HT37JGEA4U6GIWQJTLUKVG5MLKBMK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -96,53 +86,21 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-
-On Sat, 11 Nov 2023 19:15:57 +0800, Yong Wu wrote:
-> Add a binding for describing the secure CMA reserved memory range. The
-> memory range also will be defined in the TEE firmware. It means the TEE
-> will be configured with the same address/size that is being set in this
-> DT node.
+On Sun, 12 Nov 2023 19:28:52 -0800 Mina Almasry wrote:
+> My issue with this is that if the driver doesn't support dmabuf then
+> the driver will accidentally use the pp backed by the dmabuf, allocate
+> a page from it, then call page_address() on it or something, and
+> crash.
 > 
-> Signed-off-by: Yong Wu <yong.wu@mediatek.com>
-> ---
->  .../reserved-memory/secure_cma_region.yaml    | 44 +++++++++++++++++++
->  1 file changed, 44 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/reserved-memory/secure_cma_region.yaml
-> 
+> Currently I avoid that by having the driver be responsible for picking
+> up the dmabuf from the netdev_rx_queue and giving it to the page pool.
+> What would be the appropriate way to check for driver support in the
+> netlink API? Perhaps adding something to ndo_features_check?
 
-My bot found errors running 'make DT_CHECKER_FLAGS=-m dt_binding_check'
-on your patch (DT_CHECKER_FLAGS is new in v5.13):
-
-yamllint warnings/errors:
-./Documentation/devicetree/bindings/reserved-memory/secure_cma_region.yaml:12:1: [error] syntax error: could not find expected ':' (syntax)
-
-dtschema/dtc warnings/errors:
-make[2]: *** Deleting file 'Documentation/devicetree/bindings/reserved-memory/secure_cma_region.example.dts'
-Documentation/devicetree/bindings/reserved-memory/secure_cma_region.yaml:12:1: could not find expected ':'
-make[2]: *** [Documentation/devicetree/bindings/Makefile:26: Documentation/devicetree/bindings/reserved-memory/secure_cma_region.example.dts] Error 1
-make[2]: *** Waiting for unfinished jobs....
-./Documentation/devicetree/bindings/reserved-memory/secure_cma_region.yaml:12:1: could not find expected ':'
-/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/reserved-memory/secure_cma_region.yaml: ignoring, error parsing file
-make[1]: *** [/builds/robherring/dt-review-ci/linux/Makefile:1427: dt_binding_check] Error 2
-make: *** [Makefile:234: __sub-make] Error 2
-
-doc reference errors (make refcheckdocs):
-
-See https://patchwork.ozlabs.org/project/devicetree-bindings/patch/20231111111559.8218-7-yong.wu@mediatek.com
-
-The base for the series is generally the latest rc1. A different dependency
-should be noted in *this* patch.
-
-If you already ran 'make dt_binding_check' and didn't see the above
-error(s), then make sure 'yamllint' is installed and dt-schema is up to
-date:
-
-pip3 install dtschema --upgrade
-
-Please check and re-submit after running the above command yourself. Note
-that DT_SCHEMA_FILES can be set to your schema file to speed up checking
-your schema. However, it must be unset to test all examples with your schema.
-
+We need some form of capabilities. I was expecting to add that as part
+of the queue API. Either a new field in struct net_device or in ndos.
+I tend to put static driver caps of this nature into ops.
+See for instance .supported_ring_params in ethtool ops.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
