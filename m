@@ -2,144 +2,247 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 84F887EBF7E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Nov 2023 10:30:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4DE387EC212
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Nov 2023 13:19:59 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 618EF410E6
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Nov 2023 09:30:53 +0000 (UTC)
-Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
-	by lists.linaro.org (Postfix) with ESMTPS id DDBE13F0D8
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 15 Nov 2023 09:30:37 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 56EB341113
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 Nov 2023 12:19:58 +0000 (UTC)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+	by lists.linaro.org (Postfix) with ESMTPS id 86D493F0A5
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 15 Nov 2023 12:19:41 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b="DM7dCN/F";
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.218.45 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com
-Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-9e623356d5dso726591966b.3
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 15 Nov 2023 01:30:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1700040637; x=1700645437; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:from:to:cc:subject:date:message-id:reply-to;
-        bh=yB7Vx9jRhXPtu5tqEcLUYKJwFbScID9ZtZB3ZSvKBco=;
-        b=DM7dCN/Fe/OFV2NBS6z6WTJ8I7Hm2vD4ZvcAbmzcT5n0eMz/EiEkOaRf3I7BX+w792
-         lXL3Z3ej4vZb56tT5HV+kbdPmZLUa3UyyeuBaxWrX+qf6e+DuS/ZClfnZKdzxY6XqTHO
-         vccst+qGsspYqJGdZjmFlLR7uIdwPiPH18QnDvswj6eTBER/GoRCZ0j+1ln91KQFLg2j
-         eKejXQRws4kyxpOqtmOGME0jfVis4nr+uee4p7ivVT7WhVh+tUmoq+U3uGaOaidIT9S/
-         jmhn865JJttEwq3Q7D+oLS84gKTK4IiJmLsqz4NXQMdQ1DnmzUjNTEuSbK3kr9Eao3fI
-         NLLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1700040637; x=1700645437;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=yB7Vx9jRhXPtu5tqEcLUYKJwFbScID9ZtZB3ZSvKBco=;
-        b=AQZumlgZvIsGqsZAymu4PDURcM5RIcDYa6NXiVfmKYq+35+TJZ5ly7RBB2jK5AUX+k
-         hEPkB9ZnAIBC5yV1rLBf/USp3uWpbZy6K8GRlw2+jn4Rti7Cc9rn4LtLLCZkaUPn9AiK
-         NrilOejXyBwMrlK6Z0hgn01sZ8/ICPWNizsdFUVzeCNVmjbn4O5Tkln/lloORYxJPo8P
-         PtASkZVuAxpVguEwW7wB5v9tXxqtmBygmMZ0xUQ/54RQ9XL7WJonmFm5LefQuyTTKz0V
-         qy1e5JnQymFSOvKNULsWlppp0x60wBwJkLcSuUUA7qm9ZfED31qCaAIGrVLtvM+EFqtY
-         wH4w==
-X-Gm-Message-State: AOJu0Yxh/p7b637LBuWAUayjPAg/9iQYvLNDqbqh8qALlvMqiNXPlXt6
-	DeQ5wIwJvebVDi0NLveC36w=
-X-Google-Smtp-Source: AGHT+IGSUIO1vf/vS6SCJdIo3iWj+1ibt6jwIe6cS2Zz1J88lLlR4jPJ2yLG0oV0Crvhh3hBAPUrDQ==
-X-Received: by 2002:a17:906:d14b:b0:9ad:7890:b4c0 with SMTP id br11-20020a170906d14b00b009ad7890b4c0mr7671598ejb.56.1700040636600;
-        Wed, 15 Nov 2023 01:30:36 -0800 (PST)
-Received: from able.fritz.box ([2a00:e180:1581:a900:e649:e473:229b:cd53])
-        by smtp.gmail.com with ESMTPSA id ga33-20020a1709070c2100b0099e12a49c8fsm6880255ejc.173.2023.11.15.01.30.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Nov 2023 01:30:36 -0800 (PST)
-From: "=?UTF-8?q?Christian=20K=C3=B6nig?=" <ckoenig.leichtzumerken@gmail.com>
-X-Google-Original-From: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-To: sumit.semwal@linaro.org,
-	faith.ekstrand@collabora.com,
-	linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org
-Date: Wed, 15 Nov 2023 10:30:35 +0100
-Message-Id: <20231115093035.1889-1-christian.koenig@amd.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=BGFk9yDD;
+	dmarc=pass (policy=none) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 145.40.73.55 as permitted sender) smtp.mailfrom=mripard@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sin.source.kernel.org (Postfix) with ESMTP id 20C74CE1C8E;
+	Wed, 15 Nov 2023 12:19:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 93B3AC433C7;
+	Wed, 15 Nov 2023 12:19:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1700050778;
+	bh=poAYkK4mnhrVQ3flBhD3AQ8sCwUy7YwbiQba2YhU01o=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=BGFk9yDDHNtFs1qJzQ2TgsrLUsTcXpFClT9B5nfp2fQ6WOw+rXBbhVWTGfNktUr5e
+	 StKgITcfMF8NlBHG6hjbqRMjymMPZmNLn2d5NopdZT1nRdZkxs3NETTfVKRt3wwnUm
+	 Nu/TyVGUo1Lj47rQpvgqS6+ipqHzQ/EPgfpjVQsbZEpiftKBqvvUDmpX4Yu/qVhotp
+	 hluG6dNDbs+7UdeKb1fixJ0iCiVG6pSD5FS5H3hcACyzuFncrJlWzoU/S5qROqm9h2
+	 zgdxTF+zQ0iD1xKim1Oi5e+ckVEvBhRYNTpDmWN02fUoZclRfPNJKNCuJA4odk5T+N
+	 8agOx/iMTK8Ew==
+Date: Wed, 15 Nov 2023 13:19:34 +0100
+From: Maxime Ripard <mripard@kernel.org>
+To: Marco Pagani <marpagan@redhat.com>
+Message-ID: <2w7ewdzi2igf2yvw6xp4dnommjhs7sji2zvzj2r5npdgxuear4@fs3rje42jbnf>
+References: <20231108134205.111478-1-marpagan@redhat.com>
+ <dqpsjdpedvpbooffrn2nwg6hxr2bhdizwx27icwz2dx5bgsho4@id5drrg66e7h>
+ <e2c3e589-880c-4b24-8aa3-5084d1d40e21@redhat.com>
 MIME-Version: 1.0
+In-Reply-To: <e2c3e589-880c-4b24-8aa3-5084d1d40e21@redhat.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: DDBE13F0D8
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.10 / 15.00];
+X-Rspamd-Queue-Id: 86D493F0A5
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.60 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.45:from];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	SIGNED_PGP(-2.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:145.40.73.55];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	RCVD_TLS_LAST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_TWO(0.00)[2];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:54825, ipnet:145.40.73.0/24, country:US];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	DNSWL_BLOCKED(0.00)[100.75.92.58:received,145.40.73.55:from];
+	FREEMAIL_CC(0.00)[linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,redhat.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
 	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[5];
-	TO_DN_NONE(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_FROM(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+]
+	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: 65OT3Q6CUSNMCEQTRQ56TUODYPOAI2QR
-X-Message-ID-Hash: 65OT3Q6CUSNMCEQTRQ56TUODYPOAI2QR
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+Message-ID-Hash: BQBSELF4CENT7XBDCXRMBNVGLPV727YQ
+X-Message-ID-Hash: BQBSELF4CENT7XBDCXRMBNVGLPV727YQ
+X-MailFrom: mripard@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian Koenig <christian.koenig@amd.com>, Javier Martinez Canillas <javierm@redhat.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH] dma-buf: fix check in dma_resv_add_fence
+Subject: [Linaro-mm-sig] Re: [RFC PATCH v2] drm/test: add a test suite for GEM objects backed by shmem
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/65OT3Q6CUSNMCEQTRQ56TUODYPOAI2QR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BQBSELF4CENT7XBDCXRMBNVGLPV727YQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============4223825476610203823=="
 
-SXQncyB2YWxpZCB0byBhZGQgdGhlIHNhbWUgZmVuY2UgbXVsdGlwbGUgdGltZXMgdG8gYSBkbWEt
-cmVzdiBvYmplY3QgYW5kDQp3ZSBzaG91bGRuJ3QgbmVlZCBvbmUgZXh0cmEgc2xvdCBmb3IgZWFj
-aC4NCg0KU2lnbmVkLW9mZi1ieTogQ2hyaXN0aWFuIEvDtm5pZyA8Y2hyaXN0aWFuLmtvZW5pZ0Bh
-bWQuY29tPg0KRml4ZXM6IGEzZjdjMTBhMjY5ZDUgKCJkbWEtYnVmL2RtYS1yZXN2OiBjaGVjayBp
-ZiB0aGUgbmV3IGZlbmNlIGlzIHJlYWxseSBsYXRlciIpDQpDYzogc3RhYmxlQHZnZXIua2VybmVs
-Lm9yZyAjIHY1LjE5Kw0KLS0tDQogZHJpdmVycy9kbWEtYnVmL2RtYS1yZXN2LmMgfCAgMiArLQ0K
-IGluY2x1ZGUvbGludXgvZG1hLWZlbmNlLmggIHwgMTUgKysrKysrKysrKysrKysrDQogMiBmaWxl
-cyBjaGFuZ2VkLCAxNiBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pDQoNCmRpZmYgLS1naXQg
-YS9kcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtcmVzdi5j
-DQppbmRleCAzOGI0MTEwMzc4ZGUuLmViOGI3MzMwNjViMiAxMDA2NDQNCi0tLSBhL2RyaXZlcnMv
-ZG1hLWJ1Zi9kbWEtcmVzdi5jDQorKysgYi9kcml2ZXJzL2RtYS1idWYvZG1hLXJlc3YuYw0KQEAg
-LTMwMSw3ICszMDEsNyBAQCB2b2lkIGRtYV9yZXN2X2FkZF9mZW5jZShzdHJ1Y3QgZG1hX3Jlc3Yg
-Km9iaiwgc3RydWN0IGRtYV9mZW5jZSAqZmVuY2UsDQogDQogCQlkbWFfcmVzdl9saXN0X2VudHJ5
-KGZvYmosIGksIG9iaiwgJm9sZCwgJm9sZF91c2FnZSk7DQogCQlpZiAoKG9sZC0+Y29udGV4dCA9
-PSBmZW5jZS0+Y29udGV4dCAmJiBvbGRfdXNhZ2UgPj0gdXNhZ2UgJiYNCi0JCSAgICAgZG1hX2Zl
-bmNlX2lzX2xhdGVyKGZlbmNlLCBvbGQpKSB8fA0KKwkJICAgICBkbWFfZmVuY2VfaXNfbGF0ZXJf
-b3Jfc2FtZShmZW5jZSwgb2xkKSkgfHwNCiAJCSAgICBkbWFfZmVuY2VfaXNfc2lnbmFsZWQob2xk
-KSkgew0KIAkJCWRtYV9yZXN2X2xpc3Rfc2V0KGZvYmosIGksIGZlbmNlLCB1c2FnZSk7DQogCQkJ
-ZG1hX2ZlbmNlX3B1dChvbGQpOw0KZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvZG1hLWZlbmNl
-LmggYi9pbmNsdWRlL2xpbnV4L2RtYS1mZW5jZS5oDQppbmRleCBlYmU3OGJkM2QxMjEuLmIzNzcy
-ZWRjYTJlNiAxMDA2NDQNCi0tLSBhL2luY2x1ZGUvbGludXgvZG1hLWZlbmNlLmgNCisrKyBiL2lu
-Y2x1ZGUvbGludXgvZG1hLWZlbmNlLmgNCkBAIC00OTgsNiArNDk4LDIxIEBAIHN0YXRpYyBpbmxp
-bmUgYm9vbCBkbWFfZmVuY2VfaXNfbGF0ZXIoc3RydWN0IGRtYV9mZW5jZSAqZjEsDQogCXJldHVy
-biBfX2RtYV9mZW5jZV9pc19sYXRlcihmMS0+c2Vxbm8sIGYyLT5zZXFubywgZjEtPm9wcyk7DQog
-fQ0KIA0KKy8qKg0KKyAqIGRtYV9mZW5jZV9pc19sYXRlcl9vcl9zYW1lIC0gcmV0dXJuIHRydWUg
-aWYgZjEgaXMgbGF0ZXIgb3Igc2FtZSBhcyBmMg0KKyAqIEBmMTogdGhlIGZpcnN0IGZlbmNlIGZy
-b20gdGhlIHNhbWUgY29udGV4dA0KKyAqIEBmMjogdGhlIHNlY29uZCBmZW5jZSBmcm9tIHRoZSBz
-YW1lIGNvbnRleHQNCisgKg0KKyAqIFJldHVybnMgdHJ1ZSBpZiBmMSBpcyBjaHJvbm9sb2dpY2Fs
-bHkgbGF0ZXIgdGhhbiBmMiBvciB0aGUgc2FtZSBmZW5jZS4gQm90aA0KKyAqIGZlbmNlcyBtdXN0
-IGJlIGZyb20gdGhlIHNhbWUgY29udGV4dCwgc2luY2UgYSBzZXFubyBpcyBub3QgcmUtdXNlZCBh
-Y3Jvc3MNCisgKiBjb250ZXh0cy4NCisgKi8NCitzdGF0aWMgaW5saW5lIGJvb2wgZG1hX2ZlbmNl
-X2lzX2xhdGVyX29yX3NhbWUoc3RydWN0IGRtYV9mZW5jZSAqZjEsDQorCQkJCQkgICAgICBzdHJ1
-Y3QgZG1hX2ZlbmNlICpmMikNCit7DQorCXJldHVybiBmMSA9PSBmMiB8fCBkbWFfZmVuY2VfaXNf
-bGF0ZXIoZjEsIGYyKTsNCit9DQorDQogLyoqDQogICogZG1hX2ZlbmNlX2xhdGVyIC0gcmV0dXJu
-IHRoZSBjaHJvbm9sb2dpY2FsbHkgbGF0ZXIgZmVuY2UNCiAgKiBAZjE6CXRoZSBmaXJzdCBmZW5j
-ZSBmcm9tIHRoZSBzYW1lIGNvbnRleHQNCi0tIA0KMi4zNC4xDQoNCl9fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0
-IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFu
-IGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
+
+--===============4223825476610203823==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="3qk6gcllhntcokbi"
+Content-Disposition: inline
+
+
+--3qk6gcllhntcokbi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+On Tue, Nov 14, 2023 at 05:18:08PM +0100, Marco Pagani wrote:
+> On 2023-11-10 15:41, Maxime Ripard wrote:
+> > On Wed, Nov 08, 2023 at 02:42:03PM +0100, Marco Pagani wrote:
+> >> This patch introduces an initial KUnit test suite for GEM objects
+> >> backed by shmem buffers.
+> >>
+> >> Suggested-by: Javier Martinez Canillas <javierm@redhat.com>
+> >> Signed-off-by: Marco Pagani <marpagan@redhat.com>
+> >>
+> >> v2:
+> >> - Improved description of test cases
+> >> - Cleaner error handling using KUnit actions
+> >> - Alphabetical order in Kconfig and Makefile
+> >> ---
+> >>  drivers/gpu/drm/Kconfig                    |   9 +-
+> >>  drivers/gpu/drm/tests/Makefile             |   5 +-
+> >>  drivers/gpu/drm/tests/drm_gem_shmem_test.c | 381 +++++++++++++++++++++
+> >>  3 files changed, 389 insertions(+), 6 deletions(-)
+> >>  create mode 100644 drivers/gpu/drm/tests/drm_gem_shmem_test.c
+> >>
+> >> diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
+> >> index 3eee8636f847..a2551c8c393a 100644
+> >> --- a/drivers/gpu/drm/Kconfig
+> >> +++ b/drivers/gpu/drm/Kconfig
+> >> @@ -76,14 +76,15 @@ config DRM_KUNIT_TEST
+> >>  	tristate "KUnit tests for DRM" if !KUNIT_ALL_TESTS
+> >>  	depends on DRM && KUNIT
+> >>  	select PRIME_NUMBERS
+> >> +	select DRM_BUDDY
+> >>  	select DRM_DISPLAY_DP_HELPER
+> >>  	select DRM_DISPLAY_HELPER
+> >> -	select DRM_LIB_RANDOM
+> >> -	select DRM_KMS_HELPER
+> >> -	select DRM_BUDDY
+> >> +	select DRM_EXEC
+> >>  	select DRM_EXPORT_FOR_TESTS if m
+> >> +	select DRM_GEM_SHMEM_HELPER
+> >> +	select DRM_KMS_HELPER
+> >>  	select DRM_KUNIT_TEST_HELPERS
+> >> -	select DRM_EXEC
+> >> +	select DRM_LIB_RANDOM
+> >>  	default KUNIT_ALL_TESTS
+> >>  	help
+> >>  	  This builds unit tests for DRM. This option is not useful for
+> >> diff --git a/drivers/gpu/drm/tests/Makefile b/drivers/gpu/drm/tests/Ma=
+kefile
+> >> index ba7baa622675..d6183b3d7688 100644
+> >> --- a/drivers/gpu/drm/tests/Makefile
+> >> +++ b/drivers/gpu/drm/tests/Makefile
+> >> @@ -9,15 +9,16 @@ obj-$(CONFIG_DRM_KUNIT_TEST) +=3D \
+> >>  	drm_connector_test.o \
+> >>  	drm_damage_helper_test.o \
+> >>  	drm_dp_mst_helper_test.o \
+> >> +	drm_exec_test.o \
+> >>  	drm_format_helper_test.o \
+> >>  	drm_format_test.o \
+> >>  	drm_framebuffer_test.o \
+> >> +	drm_gem_shmem_test.o \
+> >>  	drm_managed_test.o \
+> >>  	drm_mm_test.o \
+> >>  	drm_modes_test.o \
+> >>  	drm_plane_helper_test.o \
+> >>  	drm_probe_helper_test.o \
+> >> -	drm_rect_test.o	\
+> >> -	drm_exec_test.o
+> >> +	drm_rect_test.o
+> >=20
+> > Thanks for reordering the tests and symbols, but they should part of a
+> > preliminary patch.
+> >=20
+>=20
+> Okay, I'll send it as a separate patch before v3.
+
+Thanks for taking care of this.
+
+[...]
+
+> >> +/*
+> >> + * Wrappers to avoid an explicit type casting when passing action
+> >> + * functions to kunit_add_action().
+> >> + */
+> >> +static void kfree_wrapper(void *p)
+> >> +{
+> >> +	kfree(p);
+> >> +}
+> >> +
+> >> +static void sg_free_table_wrapper(void *sgt)
+> >> +{
+> >> +	sg_free_table(sgt);
+> >> +}
+> >> +
+> >> +static void drm_gem_shmem_free_wrapper(void *shmem)
+> >> +{
+> >> +	drm_gem_shmem_free(shmem);
+> >> +}
+> >=20
+> > I think you need to explicitly cast the pointer (or do a temporary
+> > assignment to the proper type) to avoid a compiler warning.
+> >=20
+>=20
+> Do you mean like:
+>=20
+> static void drm_gem_shmem_free_wrapper(void *shmem)
+> {
+> 	drm_gem_shmem_free((struct drm_gem_shmem_object *)shmem);
+> }
+
+yeah, or
+
+static void drm_gem_shmem_free_wrapper(void *ptr)
+{
+	struct drm_gem_shmem_object *shmem =3D ptr;
+
+	drm_gem_shmem_free(shmem);
+}
+
+> I built the current version with clang 16.0.6 and gcc 13.2.1 but got
+> no cast warnings. Clang spotted an uninitialized variable, though.
+
+The same thing happened to me, gcc didn't spot those issues but Intel's
+build bot did. They might run with extra warnings.
+
+Maxime
+
+--3qk6gcllhntcokbi
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCZVS3VgAKCRDj7w1vZxhR
+xa4aAQCAVyhWZiU+OniP4UNu1OLe7cKdZnHLG6DzxYjmbnf5pQEAiRgK42cmj+Ne
+VDlM4EvcxZ19p0Bx76sBbF1hXYqX2wU=
+=9mwm
+-----END PGP SIGNATURE-----
+
+--3qk6gcllhntcokbi--
+
+--===============4223825476610203823==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============4223825476610203823==--
