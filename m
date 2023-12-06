@@ -2,47 +2,47 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 862FC807C89
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  7 Dec 2023 00:44:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC12A807C8A
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  7 Dec 2023 00:45:02 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2E67443C24
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  6 Dec 2023 23:44:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id AC44744159
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  6 Dec 2023 23:45:01 +0000 (UTC)
 Received: from mgamail.intel.com (mgamail.intel.com [192.55.52.136])
-	by lists.linaro.org (Postfix) with ESMTPS id F00D33EF0D
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  6 Dec 2023 23:44:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 4F33C3EF0D
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  6 Dec 2023 23:44:19 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=gl+2JLXS;
+	dkim=pass header.d=intel.com header.s=Intel header.b=TITtdQEC;
 	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.55.52.136 as permitted sender) smtp.mailfrom=lkp@intel.com;
 	dmarc=pass (policy=none) header.from=intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1701906258; x=1733442258;
+  t=1701906259; x=1733442259;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=eriwFjI3LNv4Js6dYZ339bbItfpw+p66ws9NjKsufBg=;
-  b=gl+2JLXSX0qmCxrZQdD35C0CWbKa0YoO8tv94LASlM+XVgRbmjz8k1Kw
-   zrDbpuVktQVMzUlvIRITAbEFvtW6SO8poaSnpoZHPX2aFuJuq6PtE76iv
-   jW2MXb4ry19so+NK3E+ajoo/6bA1ENPRljXA9AakDRRbjaPhp9+zh/GyN
-   8TKMaJK8fO6q/731s4U3Ip1jQHI9HlNhJKlSegEDIzsEq9v1LyuEEiu+l
-   Sear1KvQa/6BiSsSfIkbMVtnbwMttvDleSo6+qGsTmuYo39pQLmn2UuP0
-   IzDh8f8f9HlrwnseByzATZrKk/q+eXQnquPQM5tTaI266Ttv27ZkWNcW+
+  bh=aBQ3UsUdaTX6qmXYeXuurT+R78I2+gSlJN8HCaWvth4=;
+  b=TITtdQECR4Jwb4/OMOSsmdkWB45yZvQoNbMwy7UqluAYSMFkna+1bytN
+   dT1P+ovBILrnmEDcOVqbq+4qLXFfZT1iOyNiO5N8eUpq7kR3wGJiSzusz
+   jfNgAIupri9hSodCBGcaVNtd0Kq07xcTOCKA9d5qXDQyClHfREzYqDopg
+   u13kj1FriE1RIR4XnW5rF8D1BpcqNfT723QKMFwiFNeyHfsLMAOp/hpWp
+   IcmBkVZwfW2igwfAGEB+oSl27sUS3JB5hfnVr6CNMDzanZYW071pkzIxS
+   qtq4hqQd7awNxukVcSih+YcnNQmQffitbGeApjFJv4f/93Hx0y0e/Sh87
    Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10916"; a="373634462"
+X-IronPort-AV: E=McAfee;i="6600,9927,10916"; a="373634474"
 X-IronPort-AV: E=Sophos;i="6.04,256,1695711600";
-   d="scan'208";a="373634462"
+   d="scan'208";a="373634474"
 Received: from fmsmga006.fm.intel.com ([10.253.24.20])
   by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 06 Dec 2023 15:44:16 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10916"; a="1018737712"
+X-IronPort-AV: E=McAfee;i="6600,9927,10916"; a="1018737711"
 X-IronPort-AV: E=Sophos;i="6.04,256,1695711600";
-   d="scan'208";a="1018737712"
+   d="scan'208";a="1018737711"
 Received: from lkp-server02.sh.intel.com (HELO b07ab15da5fe) ([10.239.97.151])
   by fmsmga006.fm.intel.com with ESMTP; 06 Dec 2023 15:44:09 -0800
 Received: from kbuild by b07ab15da5fe with local (Exim 4.96)
 	(envelope-from <lkp@intel.com>)
-	id 1rB1Yk-000Bb4-30;
+	id 1rB1Yk-000Bb2-2w;
 	Wed, 06 Dec 2023 23:44:06 +0000
-Date: Thu, 7 Dec 2023 07:43:14 +0800
+Date: Thu, 7 Dec 2023 07:43:15 +0800
 From: kernel test robot <lkp@intel.com>
 To: Yunfei Dong <yunfei.dong@mediatek.com>,
 	Jeffrey Kardatzke <jkardatzke@google.com>,
@@ -52,12 +52,12 @@ To: Yunfei Dong <yunfei.dong@mediatek.com>,
 	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
 	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
 	Nathan Hebert <nhebert@chromium.org>
-Message-ID: <202312070717.a86rODYn-lkp@intel.com>
+Message-ID: <202312070723.APrpMLj9-lkp@intel.com>
 References: <20231206081538.17056-21-yunfei.dong@mediatek.com>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <20231206081538.17056-21-yunfei.dong@mediatek.com>
-X-Rspamd-Queue-Id: F00D33EF0D
+X-Rspamd-Queue-Id: 4F33C3EF0D
 X-Spamd-Bar: ----
 X-Spamd-Result: default: False [-4.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
@@ -65,38 +65,38 @@ X-Spamd-Result: default: False [-4.50 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:192.55.52.136/32:c];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:192.55.52.136/32];
 	MIME_GOOD(-0.10)[text/plain];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ARC_NA(0.00)[];
 	ASN(0.00)[asn:4983, ipnet:192.55.52.0/24, country:US];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[29];
 	MISSING_XM_UA(0.00)[];
-	FREEMAIL_CC(0.00)[lists.linux.dev,chromium.org,mediatek.com,ffwll.ch,linaro.org,arm.com,google.com,amd.com,gmail.com,lists.freedesktop.org,lists.linaro.org,vger.kernel.org,lists.infradead.org];
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[30];
+	TO_DN_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	TAGGED_RCPT(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[lists.linux.dev,chromium.org,mediatek.com,ffwll.ch,linaro.org,arm.com,google.com,amd.com,gmail.com,lists.freedesktop.org,lists.linaro.org,vger.kernel.org,lists.infradead.org];
 	RCVD_COUNT_THREE(0.00)[3];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	FREEMAIL_TO(0.00)[mediatek.com,google.com,collabora.com,xs4all.nl,chromium.org];
-	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[intel.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 2SK3DMWX6RKRFBIWS4XA6I3GIHDDSSCP
-X-Message-ID-Hash: 2SK3DMWX6RKRFBIWS4XA6I3GIHDDSSCP
+Message-ID-Hash: OXK6CCOGMYICREHSCXBOUDAA3QAPHIAM
+X-Message-ID-Hash: OXK6CCOGMYICREHSCXBOUDAA3QAPHIAM
 X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, Chen-Yu Tsai <wenst@chromium.org>, Yong Wu <yong.wu@mediatek.com>, Hsin-Yi Wang <hsinyi@chromium.org>, Fritz Koenig <frkoenig@chromium.org>, Daniel Vetter <daniel@ffwll.ch>, Steve Cho <stevecho@chromium.org>, Yunfei Dong <yunfei.dong@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Matthias Brugger <matthias.bgg@gmail.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, Project_Global_Chrome_Upstream_Group@mediatek.com
+CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, Chen-Yu Tsai <wenst@chromium.org>, Yong Wu <yong.wu@mediatek.com>, Hsin-Yi Wang <hsinyi@chromium.org>, Fritz Koenig <frkoenig@chromium.org>, Daniel Vetter <daniel@ffwll.ch>, Steve Cho <stevecho@chromium.org>, Yunfei Dong <yunfei.dong@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Matthias Brugger <matthias.bgg@gmail.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, Project_Global_Chrome_Upstream_Group@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH] media: medkatek: vcodec: support tee decoder
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2SK3DMWX6RKRFBIWS4XA6I3GIHDDSSCP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OXK6CCOGMYICREHSCXBOUDAA3QAPHIAM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -120,34 +120,38 @@ url:    https://github.com/intel-lab-lkp/linux/commits/Yunfei-Dong/media-medkate
 base:   git://linuxtv.org/media_tree.git master
 patch link:    https://lore.kernel.org/r/20231206081538.17056-21-yunfei.dong%40mediatek.com
 patch subject: [PATCH] media: medkatek: vcodec: support tee decoder
-config: arm64-defconfig (https://download.01.org/0day-ci/archive/20231207/202312070717.a86rODYn-lkp@intel.com/config)
-compiler: aarch64-linux-gcc (GCC) 13.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20231207/202312070717.a86rODYn-lkp@intel.com/reproduce)
+config: powerpc-allmodconfig (https://download.01.org/0day-ci/archive/20231207/202312070723.APrpMLj9-lkp@intel.com/config)
+compiler: clang version 17.0.0 (https://github.com/llvm/llvm-project.git 4a5ac14ee968ff0ad5d2cc1ffa0299048db4c88a)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20231207/202312070723.APrpMLj9-lkp@intel.com/reproduce)
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202312070717.a86rODYn-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202312070723.APrpMLj9-lkp@intel.com/
 
 All errors (new ones prefixed by >>):
 
-   drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec_drv.c: In function 'fops_vcodec_release':
->> drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec_drv.c:313:16: error: 'struct mtk_vcodec_dec_ctx' has no member named 'is_secure_playback'
+>> drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec_drv.c:313:11: error: no member named 'is_secure_playback' in 'struct mtk_vcodec_dec_ctx'
      313 |         if (ctx->is_secure_playback)
-         |                ^~
->> drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec_drv.c:314:17: error: implicit declaration of function 'mtk_vcodec_dec_optee_release'; did you mean 'mtk_vcodec_dec_release'? [-Werror=implicit-function-declaration]
+         |             ~~~  ^
+>> drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec_drv.c:314:3: error: call to undeclared function 'mtk_vcodec_dec_optee_release'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
      314 |                 mtk_vcodec_dec_optee_release(dev->optee_private);
-         |                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         |                 mtk_vcodec_dec_release
->> drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec_drv.c:314:49: error: 'struct mtk_vcodec_dec_dev' has no member named 'optee_private'
+         |                 ^
+   drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec_drv.c:314:3: note: did you mean 'mtk_vcodec_dec_release'?
+   drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec.h:88:6: note: 'mtk_vcodec_dec_release' declared here
+      88 | void mtk_vcodec_dec_release(struct mtk_vcodec_dec_ctx *ctx);
+         |      ^
+>> drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec_drv.c:314:37: error: no member named 'optee_private' in 'struct mtk_vcodec_dec_dev'
      314 |                 mtk_vcodec_dec_optee_release(dev->optee_private);
-         |                                                 ^~
-   drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec_drv.c: In function 'mtk_vcodec_probe':
->> drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec_drv.c:472:15: error: implicit declaration of function 'mtk_vcodec_dec_optee_private_init'; did you mean 'mtk_vcodec_dec_queue_init'? [-Werror=implicit-function-declaration]
+         |                                              ~~~  ^
+>> drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec_drv.c:472:8: error: call to undeclared function 'mtk_vcodec_dec_optee_private_init'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
      472 |         ret = mtk_vcodec_dec_optee_private_init(dev);
-         |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         |               mtk_vcodec_dec_queue_init
-   cc1: some warnings being treated as errors
+         |               ^
+   drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec_drv.c:472:8: note: did you mean 'mtk_vcodec_dec_queue_init'?
+   drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec.h:85:5: note: 'mtk_vcodec_dec_queue_init' declared here
+      85 | int mtk_vcodec_dec_queue_init(void *priv, struct vb2_queue *src_vq,
+         |     ^
+   4 errors generated.
 
 
 vim +313 drivers/media/platform/mediatek/vcodec/decoder/mtk_vcodec_dec_drv.c
