@@ -2,309 +2,333 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 432918113EC
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Dec 2023 15:00:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 27B1E811469
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Dec 2023 15:16:39 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3F17040D50
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Dec 2023 13:59:59 +0000 (UTC)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com (mail-bn7nam10on2073.outbound.protection.outlook.com [40.107.92.73])
-	by lists.linaro.org (Postfix) with ESMTPS id 846FB3E91A
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Dec 2023 13:59:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 18F3F3F4DE
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Dec 2023 14:16:38 +0000 (UTC)
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
+	by lists.linaro.org (Postfix) with ESMTPS id CD7EE3E91E
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Dec 2023 14:16:28 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=wOmtkwUX;
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.92.73 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Dpy0gpQczUwGj76PKeP+1ZXxp+pJ8ec5IwpFzNppjn0BZtejoe7qBwRy1Qb4g1SRL34I4xw8fjBCnk/JzEXuWYeOW3eBFk2JKz9udDYUarqN4EB22blJ9wdIyfh5OX5Qgy3mf3zICH7NSJ4LAZS9xrOL06G+9C5Vuy6dHYd5y7VqJrwlYu4t6PyagzCd7+Ph5LqZgy6L4QIQqHd8zIKwQ+xnO2/7/4JHA68TqNuc07w5PN3K5zqvVLH/XHSxRBnJR6zTciJpdrohu/+ai2p+5MTAWHiNZn5ugjF5ijPyl/BFoLHCFAysMIMamUa9kESqvEZZLxCaK/MEGUaP2uB55g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=959RlqaNHZFPTzWiCYmR8CRuOuvZOPyVf4+d9qW21eE=;
- b=GiV+MPBBmH179z5up7qBMNoDqo/tuAkpZBJBqr2SF7TKMXnR5wMTSP+aQH/Gu2iFq0dyIkakBTwjATGV8FEclsw/UiGWGJQpT0FgN6Kvx7fA/z759UQ+fHv5laSqgpElHlR/9z8yZnbJQ+AIZxUoBCRbXNaaOuhH4uZUaOokfQo8umTFjATxv7MAx4MIyX73X+sfe3SIxtFddt6Z6QZHvroCNx+35pOqB0E+IOa/rXmabLiDPu+ioK2bQiLAhCNHEqERpyy+wjAHdNeNSTEJbQtepHAdGrthpnxmVmcYIlY6K4aoL8gJCeI/DJ0SgjBiApsnfYho70YaiyP9hDmsIA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=959RlqaNHZFPTzWiCYmR8CRuOuvZOPyVf4+d9qW21eE=;
- b=wOmtkwUXQwR3hXS7L3NBVA8pFFFdlSdXlMpLaWaD75RxkD/x84xxVyXVRPtacF4Hs6gO9VeU4YhSRVIaF8Ei/McHAnf97hKiyirElD95EHQwTzj0uAUk8I2LwpeZ596Zb3Mh0d6QQUUt1AOp05WBF7U16YPy8EJXVhajgpr0LtA=
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com (2603:10b6:408:43::13)
- by PH0PR12MB5677.namprd12.prod.outlook.com (2603:10b6:510:14d::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7091.26; Wed, 13 Dec
- 2023 13:59:46 +0000
-Received: from BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::ca80:8f1c:c11:ded3]) by BN8PR12MB3587.namprd12.prod.outlook.com
- ([fe80::ca80:8f1c:c11:ded3%7]) with mapi id 15.20.7091.022; Wed, 13 Dec 2023
- 13:59:46 +0000
-Message-ID: <f2f2b676-295d-4792-a26d-7fafb7340f36@amd.com>
-Date: Wed, 13 Dec 2023 14:59:28 +0100
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Joakim Bech <joakim.bech@linaro.org>, Pekka Paalanen <ppaalanen@gmail.com>
-References: <20231212024607.3681-1-yong.wu@mediatek.com>
- <DPBmATfmfvSP8Cwjz99kj_JvCEiAqRfuMFJZEBF2aIgl8NZqWFR66eyPTX1E8bHyOlimBihEE3E80p9bfOJ-0SNu8pwoIzL9gD2Xae6r97g=@emersion.fr>
- <20231213110517.6ce36aca@eldfell>
- <20231213101549.lioqfzjxcvmqxqu3@pop-os.localdomain>
- <20231213133825.0a329864@eldfell>
- <20231213132229.q3uxdhtdsxuzw3w6@pop-os.localdomain>
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=UY+WVnOZ;
+	spf=pass (lists.linaro.org: domain of ppaalanen@gmail.com designates 209.85.208.171 as permitted sender) smtp.mailfrom=ppaalanen@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-2c9f7fe6623so88060541fa.3
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Dec 2023 06:16:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1702476987; x=1703081787; darn=lists.linaro.org;
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to;
+        bh=HnmrUE6uA1UjU0DGZJd+ywoyYgk2RFZ2Qv8HjSJNWug=;
+        b=UY+WVnOZjIsPs3y6z1fJP5zrMf5gHGh+8E0viJh1+qE7OTGPdq/apgMANOhBiZh/Zf
+         UJUAxARYoBOW88v++dzxuBHUW/Nw+PiNVTzJie75Vq6rXDiWm/0rC/BcBlkOVnnw2hPQ
+         6G70wH/FRAEjisX/gwGkjhV1OU79/vpQBlnCL2s5OMi5dZfFj1oX/IYvo5wX6wZBMSX8
+         m1081ujuELcv3Bwyq+3wnHOAYkbB9bfrKmDM265zbey05XgQ9tR/b/SfAzYUb0q59qvq
+         ONU4BIt8jUf299RHtiDKSKZX1jV2jEWbu7yqAAqqdi5CTe4u5c8sRVoir+UluaBZmSuJ
+         gDMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1702476987; x=1703081787;
+        h=mime-version:references:in-reply-to:message-id:subject:cc:to:from
+         :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=HnmrUE6uA1UjU0DGZJd+ywoyYgk2RFZ2Qv8HjSJNWug=;
+        b=pC4kolPNgs9vq4zdNppPK9K7NgCmPfPaYENJ03FeZ3JUn3QmxeZ4rNtt/Z9Vs0HAvC
+         Nisx4UmeOqxk0edd86c3BE9iOG2+KrN2vX/JFYKqvVnt6qoXbZWyWb+NPttFewrEWEtf
+         pI2UVX90lLlKCRQaNwYY3UV9ilOFgydNM3Fb1Wr1w9vhF0LE672mVHuKshcY2i/xmbZ9
+         6+yYpkW8wuZvEqyqzfFmbo7Kz8ElhvMrMPeO5uGdNJAtgridh1XWTSOU4vH46o+x8fce
+         gHd7t3CNjJudNqWn5NfFU5QdDqRBxO9in6+5mq/o1MhTm/LYrq8/oJOkrTz+QhkLfpVC
+         xUqw==
+X-Gm-Message-State: AOJu0YzA49bJ8PNsNKA365j+3Bs5IEctNKZfFe+tniWAQaSFd7qWNsE9
+	/wodWwJZsi1Ph6GBUQYmDTs=
+X-Google-Smtp-Source: AGHT+IHMEFbwY2jxx7Eqytsu4ONvN/Lw6aO1DvwW9XsiwGhW/Welyye/FmxGvgN+8ji2wLeKZxibCA==
+X-Received: by 2002:a2e:9b03:0:b0:2ca:34cd:77ea with SMTP id u3-20020a2e9b03000000b002ca34cd77eamr2472316lji.44.1702476987175;
+        Wed, 13 Dec 2023 06:16:27 -0800 (PST)
+Received: from eldfell ([194.136.85.206])
+        by smtp.gmail.com with ESMTPSA id 20-20020a2eb954000000b002c9f62145f8sm1868126ljs.82.2023.12.13.06.16.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 13 Dec 2023 06:16:26 -0800 (PST)
+Date: Wed, 13 Dec 2023 16:16:14 +0200
+From: Pekka Paalanen <ppaalanen@gmail.com>
+To: Joakim Bech <joakim.bech@linaro.org>
+Message-ID: <20231213161614.43e5bca8@eldfell>
 In-Reply-To: <20231213132229.q3uxdhtdsxuzw3w6@pop-os.localdomain>
-X-ClientProxiedBy: FR3P281CA0182.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:a4::17) To BN8PR12MB3587.namprd12.prod.outlook.com
- (2603:10b6:408:43::13)
+References: <20231212024607.3681-1-yong.wu@mediatek.com>
+	<DPBmATfmfvSP8Cwjz99kj_JvCEiAqRfuMFJZEBF2aIgl8NZqWFR66eyPTX1E8bHyOlimBihEE3E80p9bfOJ-0SNu8pwoIzL9gD2Xae6r97g=@emersion.fr>
+	<20231213110517.6ce36aca@eldfell>
+	<20231213101549.lioqfzjxcvmqxqu3@pop-os.localdomain>
+	<20231213133825.0a329864@eldfell>
+	<20231213132229.q3uxdhtdsxuzw3w6@pop-os.localdomain>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN8PR12MB3587:EE_|PH0PR12MB5677:EE_
-X-MS-Office365-Filtering-Correlation-Id: 19176b9f-e92d-4621-7f03-08dbfbe3c38c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	KpIYws6ptnnE5G3HSmOjucw0l0+uVzoyzOBYUiWiWzzs0oLgk65snyrXbGCkvO7ugwZ+C9Qi/0vPETvzny8cZ42LwCe+cgAGtMF0uhzwLslY1bPWZIbE4t8yzjRBURbQaMZIfWDm3+uAAqgALqeARBf5xKnh8kG9wIu0LQrWOpkqOF0k5dAjQt30TjamAvr8MfOh3rdXpjGEctNHMMBDHvdCwuGgHIAbGDXXFH0Gzn+FDyuktnZkH0J9CmJK+3B18h0+pZ1Qm38FRM9rxMeywFsVbEzrEoJQMGfA1NFYkCg7af6YFoCWdWaZyrmpjbxzdDCYcqaa5HwfIG1dpzwImp2u9YNSlgrcz1ttmnh4YUq67cThaivtTRIBAHiMzbmbCwpBI2jSSMDvxwakYCj+NpYu61wIJX6bckBOXZnzmGGCh8U8rkndwjVby6TFHRmYYbDZELuBhj5WecKoAWwLLnrddIVk/rAfQ7zsXQcS+q0nbp4HDJM35JQU6gRLo5TlyQgUDATCtGDIQNBYCnjDYOkJg6N8cNJTp+zor4AjxMkVw5+gS0kGE7oKgE6s2PynZCE9phRTaXXw97cl1v6+m7CF3bopF5l9gP/95EZJ9ZUBm4TVNwsFCgcS43AKHFejgADvd68JlJ3f2m7ews0FzA==
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN8PR12MB3587.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(346002)(396003)(376002)(136003)(366004)(39860400002)(230922051799003)(186009)(451199024)(1800799012)(64100799003)(31686004)(66899024)(110136005)(66946007)(66476007)(38100700002)(31696002)(36756003)(86362001)(66556008)(26005)(83380400001)(6512007)(6506007)(2616005)(2906002)(7416002)(6486002)(54906003)(316002)(478600001)(6666004)(5660300002)(8936002)(8676002)(4326008)(41300700001)(45980500001)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?VzZSSjJvWCtzMTVrSnh2Qnk2MmI3N1VYd0MxalF2VEx4M3ZmRGUwTTJJaGhB?=
- =?utf-8?B?aWEvZ0c1SkdjaVYwZ2dxQnI4VlpZRkU5RldvUms0MmVFZVJJWisxTC9LZFk5?=
- =?utf-8?B?R3ViS1NsbVVVeDlRUVZmSUJoU0VZWmNYRFJsNGgybG4xOEFMblE0R2xFT0Fk?=
- =?utf-8?B?TnlrYUNGdGh4SFZXcFFHMUM0eElmYWdTUXZVaXhCUk9nZHMyRU1SUCsraW02?=
- =?utf-8?B?dEJHY0xvTGhBM2NtRmFWK0hNb0NZU0hwekRFNHFTUU8vbm1XNVJmSXRpMmRI?=
- =?utf-8?B?RTZJUlF3RUp4THlJWWRhd1M3dHV3WWRvQitnNUJyV0NpTUFjZTdSam5Jcmo0?=
- =?utf-8?B?RDkxRy9RVERSRlIwc2twOFJjTG4vQXl5eXFpdTBpTW5UdnFEY0FvdEp2Yytm?=
- =?utf-8?B?YTVrYTlJL3ErR2NaUlJXVG02Y0pPUUI0Ym9FdVlaNDJUdGhRR2s1d1pEaUJL?=
- =?utf-8?B?RnNNUWRyQ0dKUmV2K2FlQ0lkbGpwSUl3QkI1WUlCK2cxQWZVVmkvdTUxV2VW?=
- =?utf-8?B?N3FLUmFYSTNDbW9QUXhnRHZ0bWNaQTE5UnhDK2FLSStIM0FCUzB5UHVGeHNB?=
- =?utf-8?B?YnFtc2lPTFdweWFwZXM3cFgzbWVKRit1ZmZLNTlKZU9LUXZyQnEyQlZhMUxy?=
- =?utf-8?B?R3oramQ0NG5QSE8wRldkeVMrODZ2YU00amdvREZOdmM3NzVDTG16VjhjckNL?=
- =?utf-8?B?dHBia0VpclR1c050YXhsUHVCQWFuSVNaSVl6c1dqRWFWVmpVdWc2cW02eFlK?=
- =?utf-8?B?UHEvUTFKcXN4d05Wb01SdnYrdkk0M0VyN1ZLTklTQXFMUUMzUDF2T2R0MWg4?=
- =?utf-8?B?Yi8rNmU1K1YyejRDTTdSVXRRL1lMSlJ1SzFrSFVRWXpsUnBIMHQ3VEcvVzdB?=
- =?utf-8?B?NlBiR3NFUTJrWFBHM0pwOC83WEYwSHk2MUxhLzRwelMrS2FqNVpRa3dNcGFk?=
- =?utf-8?B?MGZaS2JxSmV0clFWdkxXUWJTSzhOY05vMWpTZXdNOWlxaTJsVERBbEVIeWFU?=
- =?utf-8?B?M0VpMUdVaGpBbDgvbXQra09XSDgzY01MZFkzbXByRnVlVnBES3k5RHFYZzkx?=
- =?utf-8?B?UGpGRXlaUU1JRE1wNW9pbzcyZ0lTUVkweVdmYXhPR04xQmx6ZWNxdmthbCsw?=
- =?utf-8?B?QTNCeC84NE9aV3FGZ2ZldzhLdDFxYTFrT1ZYVVl5cDJyMlhGRE9rUHRNVjMy?=
- =?utf-8?B?L0pUYXdzb3B5MFBoRysySXdFamp6cTM0QU81eGxSQWI3TFRCWFpQb25qemNo?=
- =?utf-8?B?dmxpdUl0UVlEMVZlcDFFR0tDUU0wMmtXYjhBOGZ6SmRiLzVHa2lJTmIzTml2?=
- =?utf-8?B?eFhKeC9QOVNxM2lxcVkrdUQ2SWNzR2l3OFJxd2syc0JGUmticEp6Wk5rQjlX?=
- =?utf-8?B?SWR6cGF1Tll2b3JWRzhUTG12b3l0WUFmSkNEQXJwWjVnSGowemlkc0lhbnUr?=
- =?utf-8?B?Ymdwemh3WmRHTThSWm13WmRMcEovOXZab3FETysvUXRHNHRkSk4vQXl1YWdB?=
- =?utf-8?B?RVZZV25hQ3RsLzlTVHFZenBXcmd4N2J3R1dqa2w3ei9RbFF3Z1NtL29ZQTBM?=
- =?utf-8?B?Q05MTXViTXZ1Y1ZoSnp3RE5KNnJIQkdqb3ViKzZ4TkcrTWtweUlWSTdWZ1VP?=
- =?utf-8?B?dGhxRDB2d2lXK2t1Y2Irai9aM0JWb0pjNDA3cWN6Ui93YlF1OXZCQngyS2Vv?=
- =?utf-8?B?ZXNadVp5a0tsNDg1dVNxNVZsN016RFBkSDZJNDg3clgvbklIYlZhcEpIYlpI?=
- =?utf-8?B?L25CQ3FRU1NsYk1SZVpXQXJxdGdlZDZVWEJVTURvZ29RQ0ZtS3FiZlcwVm5I?=
- =?utf-8?B?NWZpaGVMVlZlVW9FRVVyZ0hGbXhhV0NGU2pUcVdnbzhJaU9XeExZMmFYK1lp?=
- =?utf-8?B?TlJ4V0NnbUgreEpOZzRQQjR6cytLQVJzWS84Qlc5N0pmMGp5bGQ3dm1aUUhM?=
- =?utf-8?B?M0lJdjdRTWtrWEx0TnMzNHdLMGhOYm5scTIyZ1lqTmtFcEs4aTdTbWM3RkV6?=
- =?utf-8?B?WWJ4OTZPRExaRE9mS0p0QmhSYVdQNFlGTWtVamMzdHhJUlFlUWRIbVBmR3g4?=
- =?utf-8?B?RnZXR1NoVUUwaDNFV1NrYTJMSkZ0WXZBaW5SZUZFd3NWZ3E2VlNCZFlGdmla?=
- =?utf-8?Q?hRm8=3D?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 19176b9f-e92d-4621-7f03-08dbfbe3c38c
-X-MS-Exchange-CrossTenant-AuthSource: BN8PR12MB3587.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Dec 2023 13:59:46.1743
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: q/l27ZpzoJzCatgjft+ydWH2RcVITPsWcrpanm+tRHhAa7/4mFWAHoSS/r7Z7GSv
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB5677
-X-Rspamd-Queue-Id: 846FB3E91A
-X-Spamd-Bar: -------
-X-Spamd-Result: default: False [-7.49 / 15.00];
+X-Rspamd-Queue-Id: CD7EE3E91E
+X-Spamd-Bar: --------
+X-Spamd-Result: default: False [-8.10 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
+	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
-	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.92.73:from];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	TAGGED_RCPT(0.00)[dt];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	FREEMAIL_TO(0.00)[linaro.org,gmail.com];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
 	FREEMAIL_CC(0.00)[emersion.fr,mediatek.com,kernel.org,linaro.org,amd.com,gmail.com,lists.freedesktop.org,google.com,collabora.com,quicinc.com,ndufresne.ca,vger.kernel.org,lists.linaro.org,lists.infradead.org];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_RCPT(0.00)[dt];
 	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[amd.com:+]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.171:from];
+	FREEMAIL_ENVFROM(0.00)[gmail.com]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: UB33RFKBY7XXS2CUSALGEVG7KTL6AR4X
-X-Message-ID-Hash: UB33RFKBY7XXS2CUSALGEVG7KTL6AR4X
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+Message-ID-Hash: EEU5HOTYF33WHR5LVPEF7GJPGOGXD7ZU
+X-Message-ID-Hash: EEU5HOTYF33WHR5LVPEF7GJPGOGXD7ZU
+X-MailFrom: ppaalanen@gmail.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Simon Ser <contact@emersion.fr>, Yong Wu <yong.wu@mediatek.com>, Rob Herring <robh+dt@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, christian.koenig@amd.com, Matthias Brugger <matthias.bgg@gmail.com>, dri-devel@lists.freedesktop.org, John Stultz <jstultz@google.com>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Jeffrey Kardatzke <jkardatzke@google.com>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Vijayanand Jitta <quic_vjitta@quicinc.com>, Nicolas Dufresne <nicolas@ndufresne.ca>, jianjiao.zeng@mediatek.com, linux-media@vger.kernel.org, devicetree@vger.kernel.org, Conor Dooley <conor+dt@kernel.org>, linaro-mm-sig@lists.linaro.org, linux-mediatek@lists.infradead.org, tjmercier@google.com, linux-arm-kernel@lists.infradead.org, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, kuohong.wang@mediatek.com, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v3 0/7] dma-buf: heaps: Add secure heap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UB33RFKBY7XXS2CUSALGEVG7KTL6AR4X/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EEU5HOTYF33WHR5LVPEF7GJPGOGXD7ZU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============5829350725464941305=="
 
-Am 13.12.23 um 14:22 schrieb Joakim Bech:
+--===============5829350725464941305==
+Content-Type: multipart/signed; boundary="Sig_/m_y9/L720k3.YUUEknjTd2h";
+ protocol="application/pgp-signature"; micalg=pgp-sha256
+
+--Sig_/m_y9/L720k3.YUUEknjTd2h
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, 13 Dec 2023 14:22:29 +0100
+Joakim Bech <joakim.bech@linaro.org> wrote:
+
 > On Wed, Dec 13, 2023 at 01:38:25PM +0200, Pekka Paalanen wrote:
->> On Wed, 13 Dec 2023 11:15:49 +0100
->> Joakim Bech <joakim.bech@linaro.org> wrote:
->>
->>> On Wed, Dec 13, 2023 at 11:05:17AM +0200, Pekka Paalanen wrote:
->>>> On Tue, 12 Dec 2023 16:36:35 +0000
->>>> Simon Ser <contact@emersion.fr> wrote:
->>>>    
->>>>> Is there a chance to pick a better name than "secure" here?
->>>>>
->>>>> "Secure" is super overloaded, it's not clear at all what it means from
->>>>> just the name. Something like "restricted" would be an improvement.
->>>>>    
->>>> My thoughts exactly. Every time I see "secure" used for something that
->>>> either gives you garbage, refuses to work, or crashes your whole machine
->>>> *intentionally* when you try to do normal usual things to it in
->>>> userspace (like use it for GL texturing, or try to use KMS writeback), I
->>>> get an unscratchable itch.
->>>>
->>>> There is nothing "secure" from security perspective there for end users
->>>> and developers. It's just inaccessible buffers.
->>>>
->>>> I've been biting my lip until now, thinking it's too late.
->>>>    
->>> The characteristics we're looking for here is a buffer where the content
->>> is inaccessible to the normal OS and user space, i.e., Non-secure EL0 to
->>> EL2. I.e, the content of the buffer is meant to be used and accessible
->>> primarily by the secure side and other devices that has been granted
->> s/secure side/proprietary side/
->>
+> > On Wed, 13 Dec 2023 11:15:49 +0100
+> > Joakim Bech <joakim.bech@linaro.org> wrote:
+> >  =20
+> > > On Wed, Dec 13, 2023 at 11:05:17AM +0200, Pekka Paalanen wrote: =20
+> > > > On Tue, 12 Dec 2023 16:36:35 +0000
+> > > > Simon Ser <contact@emersion.fr> wrote:
+> > > >    =20
+> > > > > Is there a chance to pick a better name than "secure" here?
+> > > > >=20
+> > > > > "Secure" is super overloaded, it's not clear at all what it means=
+ from
+> > > > > just the name. Something like "restricted" would be an improvemen=
+t.
+> > > > >    =20
+> > > >=20
+> > > > My thoughts exactly. Every time I see "secure" used for something t=
+hat
+> > > > either gives you garbage, refuses to work, or crashes your whole ma=
+chine
+> > > > *intentionally* when you try to do normal usual things to it in
+> > > > userspace (like use it for GL texturing, or try to use KMS writebac=
+k), I
+> > > > get an unscratchable itch.
+> > > >=20
+> > > > There is nothing "secure" from security perspective there for end u=
+sers
+> > > > and developers. It's just inaccessible buffers.
+> > > >=20
+> > > > I've been biting my lip until now, thinking it's too late.
+> > > >    =20
+> > > The characteristics we're looking for here is a buffer where the cont=
+ent
+> > > is inaccessible to the normal OS and user space, i.e., Non-secure EL0=
+ to
+> > > EL2. I.e, the content of the buffer is meant to be used and accessible
+> > > primarily by the secure side and other devices that has been granted =
+=20
+> >=20
+> > s/secure side/proprietary side/
+> >  =20
 > I'm using the nomenclature as written by Arm (other architectures have
 > other names for their secure execution states).
-
-AMDs GPUs call that "trusted" which is only minimal better than secure I 
-think.
-
->
->> I presume nothing of the other side can ever be in any way open?
->>
+>=20
+> > I presume nothing of the other side can ever be in any way open?
+> >  =20
 > I'm sure there are lots of examples of things running on the secure side
 > that are open. The OP-TEE project where I'm a maintainer has been fully
 > open source since 2014, to give one example that I'm familiar with
 > myself.
 
-On AMDs GPUs you can actually write shaders which works with the trusted 
-data and can read and write.
+Oh, I didn't realise there were FOSS implementations of the other side
+that tie in with this secure/restricted heap here. Sorry.
 
-What is prevented is that you copy the data outside of the trusted zone, 
-e.g. to the CPU. When you do this you only get garbage.
+I think the patch series cover letter should point to those to give a
+view of the other side to the reviewers, just like DRM requires
+userspace to be open for new UAPI.
 
-Only engines which have the proper decryption key can send out the data 
-(for example) to a display device which has authenticated itself using HDCP.
-
-Just a few infos how this is done elsewhere.
-
-Cheers,
-Christian.
-
->
->> Maybe the other side is even less secure than the FOSS side...
->>
->>> access to it (for example decoders, display controllers if we're talking
->>> about video use cases). However, since the use cases for this exercises
->>> the whole stack, from non-secure user space (EL0) all the way to secure
->>> user space (S-EL0), with various devices needing access to the buffer at
->>> various times, it makes sense to let Linux manage the buffers, although
->>> it still cannot access the content. That's the overall context.
->> Yes, we know all this (except for the exact meaning of EL0 etc.).
->>
+> > Maybe the other side is even less secure than the FOSS side...
+> >  =20
+> > > access to it (for example decoders, display controllers if we're talk=
+ing
+> > > about video use cases). However, since the use cases for this exercis=
+es
+> > > the whole stack, from non-secure user space (EL0) all the way to secu=
+re
+> > > user space (S-EL0), with various devices needing access to the buffer=
+ at
+> > > various times, it makes sense to let Linux manage the buffers, althou=
+gh
+> > > it still cannot access the content. That's the overall context. =20
+> >=20
+> > Yes, we know all this (except for the exact meaning of EL0 etc.).
+> >  =20
 > Great!
->
->>> As for the name, it's always difficult to find a name suitable precisely
->>> describing what it is. "Secure" is perhaps vague, but it might still a
->>> good choice, if you carefully describe what secure means for this
->>> particular heap (in the source code and the documentation for it). For
->> Carefully describe, as in, re-define.
->>
->>> example, the definition of "secure" for a secure heap as here could mean
->>> that buffer content is inaccessible to the host OS and user space
->>> running in normal world (using Arm nomenclature). I wouldn't have any
->>> problems with calling it secure if, as said it's defined what we mean by
->>> saying so. But I'm all ears for other suggestions as well.
->>>
->>> Safe, protected, shielded, unreachable, isolated, inaccessible,
->>> unaccessible, fortified, ... would any of these make more sense?
->> "Restricted" sounds like a good compromise to me. The buffers' usage is
->> severely restricted.
->>
+>=20
+> > > As for the name, it's always difficult to find a name suitable precis=
+ely
+> > > describing what it is. "Secure" is perhaps vague, but it might still a
+> > > good choice, if you carefully describe what secure means for this
+> > > particular heap (in the source code and the documentation for it). Fo=
+r =20
+> >=20
+> > Carefully describe, as in, re-define.
+> >  =20
+> > > example, the definition of "secure" for a secure heap as here could m=
+ean
+> > > that buffer content is inaccessible to the host OS and user space
+> > > running in normal world (using Arm nomenclature). I wouldn't have any
+> > > problems with calling it secure if, as said it's defined what we mean=
+ by
+> > > saying so. But I'm all ears for other suggestions as well.
+> > >=20
+> > > Safe, protected, shielded, unreachable, isolated, inaccessible,
+> > > unaccessible, fortified, ... would any of these make more sense? =20
+> >=20
+> > "Restricted" sounds like a good compromise to me. The buffers' usage is
+> > severely restricted.
+> >  =20
 > Yes, restricted isn't a bad choice. We would still need to describe what
 > we mean by saying it's restricted, i.e., what is it restricted from,
 > since I'd guess that "restricted" by itself also could be a bit open
 > ended for a lot of people.
->
->> It is the opposite of "safe", because accessing the contents the wrong
->> way can return garbage or intentionally crash the whole system,
->> depending on the hardware implementation. One example is attempting to
->> put such a buffer on a KMS plane while the connector HDCP state is not
->> high enough, or a writeback connector is connected to the CRTC. It is
->> really fragile. (Do KMS drivers fail an atomic commit that would
->> violate the heap rules? Somehow I doubt that, who'd even know what the
->> rules are.)
->>
+
+Yes, but "restricted" also does not give out an immediate wrong
+impression. Label something as "secure", and it immediately raises the
+questions of what kind of attacks it prevents and how can I make use of
+it.
+
+Is there any use of restricted buffers outside of Digital Rights
+Management though? Could a private person somehow make use of it to
+protect their own contents? Like a photographer sending drafts to a
+customer while not wanting give out any digital copies?
+
+If not, then restricted buffers are something people would generally
+like to avoid, not embrace. "Secure" gives a positive impression,
+"restricted" a negative impression.
+
+> > It is the opposite of "safe", because accessing the contents the wrong
+> > way can return garbage or intentionally crash the whole system,
+> > depending on the hardware implementation. One example is attempting to
+> > put such a buffer on a KMS plane while the connector HDCP state is not
+> > high enough, or a writeback connector is connected to the CRTC. It is
+> > really fragile. (Do KMS drivers fail an atomic commit that would
+> > violate the heap rules? Somehow I doubt that, who'd even know what the
+> > rules are.)
+> >  =20
 > I believe one of the goals with reviewing the patches is to highlight
 > issues like this and try to figure out how to avoid ending up in
 > situations like what you described by suggesting alternative solutions
 > and ideas.
->
->> It is protected/shielded/fortified from all the kernel and userspace,
->> but a more familiar word to describe that is inaccessible.
->> "Inaccessible buffer" per se OTOH sounds like a useless concept.
->>
->> It is not secure, because it does not involve security in any way. In
->> fact, given it's so fragile, I'd classify it as mildly opposite of
->> secure, as e.g. clients of a Wayland compositor can potentially DoS the
->> compositor with it by simply sending such a dmabuf. Or DoS the whole
->> system.
->>
+>=20
+> > It is protected/shielded/fortified from all the kernel and userspace,
+> > but a more familiar word to describe that is inaccessible.
+> > "Inaccessible buffer" per se OTOH sounds like a useless concept.
+> >=20
+> > It is not secure, because it does not involve security in any way. In
+> > fact, given it's so fragile, I'd classify it as mildly opposite of
+> > secure, as e.g. clients of a Wayland compositor can potentially DoS the
+> > compositor with it by simply sending such a dmabuf. Or DoS the whole
+> > system.
+> >  =20
 > I hear what you are saying and DoS is a known problem and attack vector,
 > but regardless, we have use cases where we don't want to expose
 > information in the clear and where we also would like to have some
 > guarantees about correctness. That is where various secure elements and
 > more generally security is needed.
->
+>=20
 > So, it sounds like we have two things here, the first is the naming and
 > the meaning behind it. I'm pretty sure the people following and
 > contributing to this thread can agree on a name that makes sense. Would
 > you personally be OK with "restricted" as the name? It sounds like that.
->
+
+I would. I'm also just a by-stander, not a maintainer of kernel
+anything. I have no power to accept nor reject anything here.
+
 > The other thing is the feature and functionality itself offered by this
 > patch series. My impression from reading your replies is that you think
 > this is the wrong approach. If my impression is correct, what would you
 > suggest as an alternative approach?
->
->> "Poisonous heap" would be fitting but politically inappropriate I
->> guess. After all, "poison" is data that is not meant to be read by
->> anything normal.
->>
->>
->> Thanks,
->> pq
+
+I just generally dislike locking people out of what their systems hold,
+but I also understand why extremely big companies want this Digital
+Rights Management technology for their business model. If Linux does
+not support that business model, they and the whole broadcast industry
+might use something else. At least it pays for kernel developers who
+can hopefully do some genuinely useful work on the side as well,
+benefiting the community.
+
+Let's just be honest about what is what.
+
+
+Thanks,
+pq
+
+--Sig_/m_y9/L720k3.YUUEknjTd2h
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEJQjwWQChkWOYOIONI1/ltBGqqqcFAmV5vK4ACgkQI1/ltBGq
+qqeSrxAAsVMu1uwUAEiHOmIbdZ3IMpYONvvX9PjrsowXIzc4xZ+sohcdjwWsN9LM
+ZwyXBLhxVmbSKy55b8fNI2UR51yIDO8E6lZLQieSxAulEzya2aMjmJEHoXdBo/sS
+A3aGLk4Wu7hh4kSbyeOSoLf2Xf+Fg85puarR12WrxHwXn2JvFteRe1NX2v5+QJSn
+lzGOqYb4bFIIC7oL7qBVH3VBT/st+RdqvUGnsJlvngSO/YEZz8Q2AZTt8sE1R/mT
+6eZ9cidJoUdKqF9vKAxiKpTJyiVLpYqvhm9cvGQinbsYz3QKoUICKcSIGCGZlQti
+2GShGtnPL1qpZfo95xzcu+fw/9g9DC3BRbG/+dV84txlxzn8y1pD6kGka9HjPhi1
+ZuPC1MVNFvSOpv7tIvRRI/lD4ZRKdRJnvW4DDFntEhVfjGq0I5ezVjqBBHcic4QE
+tWWjkepYco492avLdzrJFuVbzj9VwzCRt+M/mlIyons/QfvX/SoRGDya2pk1DNvF
+NBK3Rf4qvOsooioZRNe8PnR/aBXw0MRFMN8htEKcuUHZnOCeIih+PV7VJwGMLMC2
+vjYC7/yXalMFutcYjBJeMyqQylgXUsoJY2WB4d4alazZvlMFrQ/v6+t9y2aOHdpZ
++XGDbbjlVimKW1utrZlaHsi8w8Dbk9OH3I3tOZZQYfBgAFj6Nco=
+=IiKA
+-----END PGP SIGNATURE-----
+
+--Sig_/m_y9/L720k3.YUUEknjTd2h--
+
+--===============5829350725464941305==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============5829350725464941305==--
