@@ -2,233 +2,116 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FB098286B5
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Jan 2024 14:02:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DA0BF82A6D9
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jan 2024 05:12:07 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4CC9C43D1E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Jan 2024 13:02:25 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
-	by lists.linaro.org (Postfix) with ESMTPS id C651E40B79
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Jan 2024 13:02:03 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6BFD243F1C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jan 2024 04:12:06 +0000 (UTC)
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	by lists.linaro.org (Postfix) with ESMTPS id DF2823F00C
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jan 2024 04:11:45 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b=Ez8Op8er;
-	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.218.47) smtp.mailfrom=daniel@ffwll.ch;
+	dkim=pass header.d=infradead.org header.s=bombadil.20210309 header.b=PFDKEvoT;
+	spf=none (lists.linaro.org: domain of rdunlap@infradead.org has no SPF policy when checking 198.137.202.133) smtp.mailfrom=rdunlap@infradead.org;
 	dmarc=none
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-a29b850ec66so97177466b.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 09 Jan 2024 05:02:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google; t=1704805323; x=1705410123; darn=lists.linaro.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:mail-followup-to:message-id:subject:cc:to
-         :from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=tgjWq+GNDqJ5m/X5ry3BHL3SU/PqMtpMN091r7LGUoA=;
-        b=Ez8Op8ertlf1BkHYHFWKbKcmYLHMOwF50ItT8OIBccKFg8DT6SvUxSmvzMdqTrFCdi
-         LGBNtpXvG8PEkVW6DZEkWIawEMosSrnYVAOaadR71X78j/z6MCZPugggAYSlALAnxjWW
-         1tGXfvovU7OqWDcV8tYD4CQcGYK0k/QuI+VgM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1704805323; x=1705410123;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:mail-followup-to:message-id:subject:cc:to
-         :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=tgjWq+GNDqJ5m/X5ry3BHL3SU/PqMtpMN091r7LGUoA=;
-        b=fPcl0Hsq0HQyDScsY3+9WI2n+4D6E5S891eV7+qI1udLHbGACSCVop8mlNvJhanKsQ
-         pYOGvFO/PMmmqP5e3sEoVYFaA3ztMJC6g6Y4Aiqq5jG98wWHvvSCUUDLBHhR5PXWpfJF
-         8aXoemER4jB22+fEuPBP5jC0WAb4msmQB8s4luc9uwN+Eey4gQuvA/B4arWPpsjsy0Yc
-         Zv5EKdxxvVKC9kvdQRyi6sGzuYPWR/FX8RsLJzo3A0ISzRTLw1NQbmTV32cmdzzL2ad0
-         GCivtfereb5BzO5TeMqbA9V3Qr/QwYcP3un7oxItdPCveJMXOAaZgfNUEe9e8IF9PZ+n
-         Qm6Q==
-X-Gm-Message-State: AOJu0Yz3j54LTl9l2Im4QRNzDiC6PJBbGhLev0n2RMemn/0LOVS7qbHo
-	ItJ9xgKYDpdAoKcdhr5bIfrEMYkwCraqvQ==
-X-Google-Smtp-Source: AGHT+IGjVfkl4K5438EgxZNYkdIb8UWsXUs419kNzc6Ewo2f7z4uJ8gnFTH0tvWgAwZexzBu/d17zw==
-X-Received: by 2002:a17:906:fe47:b0:a28:34e5:b609 with SMTP id wz7-20020a170906fe4700b00a2834e5b609mr5343630ejb.6.1704805322530;
-        Tue, 09 Jan 2024 05:02:02 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id x12-20020a170906710c00b00a29430458efsm1031296ejj.65.2024.01.09.05.02.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 09 Jan 2024 05:02:01 -0800 (PST)
-Date: Tue, 9 Jan 2024 14:01:59 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Paul Cercueil <paul@crapouillou.net>
-Message-ID: <ZZ1Dx1Jqbi61_Afb@phenom.ffwll.local>
-Mail-Followup-To: Paul Cercueil <paul@crapouillou.net>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Michael Hennerich <Michael.Hennerich@analog.com>,
-	linux-doc@vger.kernel.org, linux-usb@vger.kernel.org,
-	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	Andrzej Pietrasiewicz <andrzej.p@collabora.com>,
-	linaro-mm-sig@lists.linaro.org,
-	Nuno =?iso-8859-1?Q?S=E1?= <noname.nuno@gmail.com>,
-	Jonathan Cameron <jic23@kernel.org>, linux-media@vger.kernel.org
-References: <20240108120056.22165-1-paul@crapouillou.net>
- <20240108120056.22165-4-paul@crapouillou.net>
- <ZZvtEXL8DLPPdtPs@phenom.ffwll.local>
- <a44aca93adc60ce56a64c50797a029631900172e.camel@crapouillou.net>
- <ZZwU827NMHbx7bsO@phenom.ffwll.local>
- <2c0d4ef1b657c56ea2290fe16d757ce563a3e71b.camel@crapouillou.net>
- <ZZxKvR9gjH8D5qxj@phenom.ffwll.local>
- <31e56028b4d865c60b7c01b2a305b3dd8a21ff7a.camel@crapouillou.net>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From:Sender:Reply-To:
+	Content-ID:Content-Description:In-Reply-To:References;
+	bh=b4pQ8hJoVvzvXHxUFM9uPj+P7m+YblKumbV4h+B9NcU=; b=PFDKEvoTOU181sWOpwAIf5OQUB
+	ZQ0uvHyPcQwHyzHkDJ/m7iKzNfZ2g5v3opb0x+PgfHdcHYeiud4irhPlCD5aXj9KUPDaItC0Hs5ON
+	Y6kYhMHlBBO0btZZQctB+iKRcKpAT5S7lPMpGEqNki6RLxl7VziCAhlL+pIkp31GrdnEiZS5GqnSe
+	8sM8ShMh9oSC1L/1wUhk2jP/tfAZmkhJBVgC7XKAPqW+5ASZyTvdyLX6HSZVJlXGy+f3Dg+nAIuga
+	bPZ0oDK6J4OHyi9hNIUksffc3Ypzmpwwkm9fKkWL4lenLOY4aRncqsDONyjwKt9ICSHJao/Mdnb6E
+	DEz4MQyQ==;
+Received: from [50.53.46.231] (helo=bombadil.infradead.org)
+	by bombadil.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+	id 1rNmPr-00FjzT-1i;
+	Thu, 11 Jan 2024 04:11:39 +0000
+From: Randy Dunlap <rdunlap@infradead.org>
+To: dri-devel@lists.freedesktop.org
+Date: Wed, 10 Jan 2024 20:11:36 -0800
+Message-ID: <20240111041138.30278-1-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <31e56028b4d865c60b7c01b2a305b3dd8a21ff7a.camel@crapouillou.net>
-X-Operating-System: Linux phenom 6.5.0-4-amd64 
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-5.80 / 15.00];
-	REPLY(-4.00)[];
+X-Spamd-Result: default: False [-2.20 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
+	MID_CONTAINS_FROM(1.00)[];
+	R_DKIM_ALLOW(-0.20)[infradead.org:s=bombadil.20210309];
+	ONCE_RECEIVED(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	R_SPF_NA(0.00)[no SPF record];
-	TAGGED_RCPT(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.47:from];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
 	ARC_NA(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	RCVD_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:7247, ipnet:198.137.202.0/24, country:US];
 	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_SEVEN(0.00)[8];
 	NEURAL_HAM(-0.00)[-1.000];
-	DMARC_NA(0.00)[ffwll.ch];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[ffwll.ch,linuxfoundation.org,linaro.org,amd.com,lwn.net,analog.com,vger.kernel.org,lists.freedesktop.org,collabora.com,lists.linaro.org,gmail.com,kernel.org];
 	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	DMARC_NA(0.00)[infradead.org];
 	FROM_EQ_ENVFROM(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[ffwll.ch:+]
+	R_SPF_NA(0.00)[no SPF record];
+	DKIM_TRACE(0.00)[infradead.org:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: C651E40B79
-X-Spamd-Bar: -----
-Message-ID-Hash: D3ALF2F63SW3I2U6RCEFLD6OA3QVI3TY
-X-Message-ID-Hash: D3ALF2F63SW3I2U6RCEFLD6OA3QVI3TY
-X-MailFrom: daniel@ffwll.ch
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Daniel Vetter <daniel@ffwll.ch>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Michael Hennerich <Michael.Hennerich@analog.com>, linux-doc@vger.kernel.org, linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, Andrzej Pietrasiewicz <andrzej.p@collabora.com>, linaro-mm-sig@lists.linaro.org, Nuno =?iso-8859-1?Q?S=E1?= <noname.nuno@gmail.com>, Jonathan Cameron <jic23@kernel.org>, linux-media@vger.kernel.org
+X-Rspamd-Queue-Id: DF2823F00C
+X-Spamd-Bar: --
+Message-ID-Hash: IJJPQFVNCSDGF2HGIORHOD3SD4RXX5ZE
+X-Message-ID-Hash: IJJPQFVNCSDGF2HGIORHOD3SD4RXX5ZE
+X-MailFrom: rdunlap@infradead.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: patches@lists.linux.dev, Randy Dunlap <rdunlap@infradead.org>, Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan <gustavo@padovan.org>, linux-media@vger.kernel.org, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 3/4] usb: gadget: functionfs: Add DMABUF import interface
+Subject: [Linaro-mm-sig] [PATCH] dma-buf/dma-fence: fix spelling
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/D3ALF2F63SW3I2U6RCEFLD6OA3QVI3TY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IJJPQFVNCSDGF2HGIORHOD3SD4RXX5ZE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Tue, Jan 09, 2024 at 12:06:58PM +0100, Paul Cercueil wrote:
-> Hi Daniel / Sima,
->=20
-> Le lundi 08 janvier 2024 =E0 20:19 +0100, Daniel Vetter a =E9crit=A0:
-> > On Mon, Jan 08, 2024 at 05:27:33PM +0100, Paul Cercueil wrote:
-> > > Le lundi 08 janvier 2024 =E0 16:29 +0100, Daniel Vetter a =E9crit=A0:
-> > > > On Mon, Jan 08, 2024 at 03:21:21PM +0100, Paul Cercueil wrote:
-> > > > > Hi Daniel (Sima?),
-> > > > >=20
-> > > > > Le lundi 08 janvier 2024 =E0 13:39 +0100, Daniel Vetter a =E9crit=
-=A0:
-> > > > > > On Mon, Jan 08, 2024 at 01:00:55PM +0100, Paul Cercueil
-> > > > > > wrote:
-> > > > > > > +static void ffs_dmabuf_signal_done(struct ffs_dma_fence
-> > > > > > > *dma_fence, int ret)
-> > > > > > > +{
-> > > > > > > +	struct ffs_dmabuf_priv *priv =3D dma_fence->priv;
-> > > > > > > +	struct dma_fence *fence =3D &dma_fence->base;
-> > > > > > > +
-> > > > > > > +	dma_fence_get(fence);
-> > > > > > > +	fence->error =3D ret;
-> > > > > > > +	dma_fence_signal(fence);
-> > > > > > > +
-> > > > > > > +	dma_buf_unmap_attachment(priv->attach, dma_fence-
-> > > > > > > >sgt,
-> > > > > > > dma_fence->dir);
-> > > > > > > +	dma_fence_put(fence);
-> > > > > > > +	ffs_dmabuf_put(priv->attach);
-> > > > > >=20
-> > > > > > So this can in theory take the dma_resv lock, and if the usb
-> > > > > > completion
-> > > > > > isn't an unlimited worker this could hold up completion of
-> > > > > > future
-> > > > > > dma_fence, resulting in a deadlock.
-> > > > > >=20
-> > > > > > Needs to be checked how usb works, and if stalling
-> > > > > > indefinitely
-> > > > > > in
-> > > > > > the
-> > > > > > io_complete callback can hold up the usb stack you need to:
-> > > > > >=20
-> > > > > > - drop a dma_fence_begin/end_signalling annotations in here
-> > > > > > - pull out the unref stuff into a separate preallocated
-> > > > > > worker
-> > > > > > (or at
-> > > > > > =A0 least the final unrefs for ffs_dma_buf).
-> > > > >=20
-> > > > > Only ffs_dmabuf_put() can attempt to take the dma_resv and
-> > > > > would
-> > > > > have
-> > > > > to be in a worker, right? Everything else would be inside the
-> > > > > dma_fence_begin/end_signalling() annotations?
-> > > >=20
-> > > > Yup. Also I noticed that unlike the iio patches you don't have
-> > > > the
-> > > > dma_buf_unmap here in the completion path (or I'm blind?), which
-> > > > helps a
-> > > > lot with avoiding trouble.
-> > >=20
-> > > They both call dma_buf_unmap_attachment() in the "signal done"
-> > > callback, the only difference I see is that it is called after the
-> > > dma_fence_put() in the iio patches, while it's called before
-> > > dma_fence_put() here.
-> >=20
-> > I was indeed blind ...
-> >=20
-> > So the trouble is this wont work because:
-> > - dma_buf_unmap_attachment() requires dma_resv_lock. This is a
-> > somewhat
-> > =A0 recent-ish change from 47e982d5195d ("dma-buf: Move
-> > =A0 dma_buf_map_attachment() to dynamic locking specification"), so
-> > maybe
-> > =A0 old kernel or you don't have full lockdep enabled to get the right
-> > =A0 splat.
-> >=20
-> > - dma_fence critical section forbids dma_resv_lock
-> >=20
-> > Which means you need to move this out, but then there's the potential
-> > cache management issue. Which current gpu drivers just kinda ignore
-> > because it doesn't matter for current use-case, they all cache the
-> > mapping
-> > for about as long as the attachment exists. You might want to do the
-> > same,
-> > unless that somehow breaks a use-case you have, I have no idea about
-> > that.
-> > If something breaks with unmap_attachment moved out of the fence
-> > handling
-> > then I guess it's high time to add separate cache-management only to
-> > dma_buf (and that's probably going to be quite some wiring up, not
-> > sure
-> > even how easy that would be to do nor what exactly the interface
-> > should
-> > look like).
->=20
-> Ok. Then I'll just cache the mapping for now, I think.
-
-Yeah I think that's simplest. I did ponder a bit and I don't think it'd be
-too much pain to add the cache-management functions for device
-attachments/mappings. But it would be quite some typing ...
--Sima
---=20
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+Rml4IHNwZWxsaW5nIG1pc3Rha2VzIGFzIHJlcG9ydGVkIGJ5IGNvZGVzcGVsbC4NCg0KU2lnbmVk
+LW9mZi1ieTogUmFuZHkgRHVubGFwIDxyZHVubGFwQGluZnJhZGVhZC5vcmc+DQpDYzogU3VtaXQg
+U2Vtd2FsIDxzdW1pdC5zZW13YWxAbGluYXJvLm9yZz4NCkNjOiBHdXN0YXZvIFBhZG92YW4gPGd1
+c3Rhdm9AcGFkb3Zhbi5vcmc+DQpDYzogbGludXgtbWVkaWFAdmdlci5rZXJuZWwub3JnDQpDYzog
+ZHJpLWRldmVsQGxpc3RzLmZyZWVkZXNrdG9wLm9yZw0KQ2M6IENocmlzdGlhbiBLw7ZuaWcgPGNo
+cmlzdGlhbi5rb2VuaWdAYW1kLmNvbT4NCkNjOiBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5v
+cmcNCi0tLQ0KIGRyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYyB8ICAgIDggKysrKy0tLS0NCiAx
+IGZpbGUgY2hhbmdlZCwgNCBpbnNlcnRpb25zKCspLCA0IGRlbGV0aW9ucygtKQ0KDQpkaWZmIC0t
+IGEvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5j
+ZS5jDQotLS0gYS9kcml2ZXJzL2RtYS1idWYvZG1hLWZlbmNlLmMNCisrKyBiL2RyaXZlcnMvZG1h
+LWJ1Zi9kbWEtZmVuY2UuYw0KQEAgLTEwMiw3ICsxMDIsNyBAQCBzdGF0aWMgYXRvbWljNjRfdCBk
+bWFfZmVuY2VfY29udGV4dF9jb3VuDQogICoNCiAgKiAqIERyaXZlcnMgYXJlIGFsbG93ZWQgdG8g
+Y2FsbCBkbWFfZmVuY2Vfd2FpdCgpIGZyb20gdGhlaXIgJm1tdV9ub3RpZmllcg0KICAqICAgcmVz
+cGVjdGl2ZWx5ICZtbXVfaW50ZXJ2YWxfbm90aWZpZXIgY2FsbGJhY2tzLiBUaGlzIG1lYW5zIGFu
+eSBjb2RlIHJlcXVpcmVkDQotICogICBmb3IgZmVuY2UgY29tcGxldGVpb24gY2Fubm90IGFsbG9j
+YXRlIG1lbW9yeSB3aXRoIEdGUF9OT0ZTIG9yIEdGUF9OT0lPLg0KKyAqICAgZm9yIGZlbmNlIGNv
+bXBsZXRpb24gY2Fubm90IGFsbG9jYXRlIG1lbW9yeSB3aXRoIEdGUF9OT0ZTIG9yIEdGUF9OT0lP
+Lg0KICAqICAgT25seSBHRlBfQVRPTUlDIGlzIHBlcm1pc3NpYmxlLCB3aGljaCBtaWdodCBmYWls
+Lg0KICAqDQogICogTm90ZSB0aGF0IG9ubHkgR1BVIGRyaXZlcnMgaGF2ZSBhIHJlYXNvbmFibGUg
+ZXhjdXNlIGZvciBib3RoIHJlcXVpcmluZw0KQEAgLTUyMiw3ICs1MjIsNyBAQCBkbWFfZmVuY2Vf
+d2FpdF90aW1lb3V0KHN0cnVjdCBkbWFfZmVuY2UNCiBFWFBPUlRfU1lNQk9MKGRtYV9mZW5jZV93
+YWl0X3RpbWVvdXQpOw0KIA0KIC8qKg0KLSAqIGRtYV9mZW5jZV9yZWxlYXNlIC0gZGVmYXVsdCBy
+ZWxlc2UgZnVuY3Rpb24gZm9yIGZlbmNlcw0KKyAqIGRtYV9mZW5jZV9yZWxlYXNlIC0gZGVmYXVs
+dCByZWxlYXNlIGZ1bmN0aW9uIGZvciBmZW5jZXMNCiAgKiBAa3JlZjogJmRtYV9mZW5jZS5yZWNm
+b3VudA0KICAqDQogICogVGhpcyBpcyB0aGUgZGVmYXVsdCByZWxlYXNlIGZ1bmN0aW9ucyBmb3Ig
+JmRtYV9mZW5jZS4gRHJpdmVycyBzaG91bGRuJ3QgY2FsbA0KQEAgLTk3NCw4ICs5NzQsOCBAQCB2
+b2lkIGRtYV9mZW5jZV9zZXRfZGVhZGxpbmUoc3RydWN0IGRtYV9mDQogRVhQT1JUX1NZTUJPTChk
+bWFfZmVuY2Vfc2V0X2RlYWRsaW5lKTsNCiANCiAvKioNCi0gKiBkbWFfZmVuY2VfZGVzY3JpYmUg
+LSBEdW1wIGZlbmNlIGRlc2NyaWJ0aW9uIGludG8gc2VxX2ZpbGUNCi0gKiBAZmVuY2U6IHRoZSA2
+ZmVuY2UgdG8gZGVzY3JpYmUNCisgKiBkbWFfZmVuY2VfZGVzY3JpYmUgLSBEdW1wIGZlbmNlIGRl
+c2NyaXB0aW9uIGludG8gc2VxX2ZpbGUNCisgKiBAZmVuY2U6IHRoZSBmZW5jZSB0byBkZXNjcmli
+ZQ0KICAqIEBzZXE6IHRoZSBzZXFfZmlsZSB0byBwdXQgdGhlIHRleHR1YWwgZGVzY3JpcHRpb24g
+aW50bw0KICAqDQogICogRHVtcCBhIHRleHR1YWwgZGVzY3JpcHRpb24gb2YgdGhlIGZlbmNlIGFu
+ZCBpdCdzIHN0YXRlIGludG8gdGhlIHNlcV9maWxlLg0KX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
+YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
+dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
