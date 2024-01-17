@@ -2,190 +2,148 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29AA78304FB
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jan 2024 13:10:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2E35830570
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jan 2024 13:36:54 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E497C43E82
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jan 2024 12:10:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8D70F43F17
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 17 Jan 2024 12:36:53 +0000 (UTC)
 Received: from aposti.net (aposti.net [89.234.176.197])
-	by lists.linaro.org (Postfix) with ESMTPS id 4F28C3F1A7
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Jan 2024 12:09:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id C9A663F19B
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 17 Jan 2024 12:36:31 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=crapouillou.net header.s=mail header.b=U8AlA84k;
+	dkim=pass header.d=crapouillou.net header.s=mail header.b=AnuJeXJr;
 	spf=pass (lists.linaro.org: domain of paul@crapouillou.net designates 89.234.176.197 as permitted sender) smtp.mailfrom=paul@crapouillou.net;
 	dmarc=pass (policy=none) header.from=crapouillou.net
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
-	s=mail; t=1705493382;
+	s=mail; t=1705494412;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=eAUPGmwVUxQVs8BO6mc3v/3UdbiY25Zj8A255TdtQdY=;
-	b=U8AlA84klRlnjcH59h4TKcN/vh5m4kHbbeoDnBPlx4SFfSyO2UfAU8givJIif68KKEnB4e
-	joC7uWn1VXtL5cOXBoBjAjnfw111Gh4nkicSLgOpJKGRjsWEdUF/crtYEr7ENZpZ+0+6Rr
-	Ic0eHnXR6ZrOLPJHWAuVm9krBvdohdo=
-Message-ID: <35a9d8ae152deea8a79392bb4b2a9b2053daae92.camel@crapouillou.net>
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=/sDVLzlV6tVM1+jlnCP4YrSpFonZ8VEXETbEWgRMsuA=;
+	b=AnuJeXJrsxDBX4u2PXAQELZ/ATdNATOI3nnJtTFJP8NZyE+fPe7/7Wl72Pf0pufRWaFvP1
+	sNzzWBdCHYltlr90nl6m+MVGb9eTfWZS+78j7Mt7MuOAR0Qk1audmOo2VqSZdf8a89jbTb
+	IWdLbuxuhZnhf1RqMzfVvZA6GZH3DTg=
 From: Paul Cercueil <paul@crapouillou.net>
-To: Vegard Nossum <vegard.nossum@oracle.com>, Greg Kroah-Hartman
-	 <gregkh@linuxfoundation.org>, Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?ISO-8859-1?Q?K=F6nig?=
-	 <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>
-Date: Wed, 17 Jan 2024 13:09:40 +0100
-In-Reply-To: <9712abdd-cbca-4ad6-b1e9-ff9bf054b278@oracle.com>
-References: <20240108120056.22165-1-paul@crapouillou.net>
-	 <20240108120056.22165-5-paul@crapouillou.net>
-	 <9712abdd-cbca-4ad6-b1e9-ff9bf054b278@oracle.com>
-Autocrypt: addr=paul@crapouillou.net; prefer-encrypt=mutual;
- keydata=mQENBF0KhcEBCADkfmrzdTOp/gFOMQX0QwKE2WgeCJiHPWkpEuPH81/HB2dpjPZNW03ZMLQfECbbaEkdbN4YnPfXgcc1uBe5mwOAPV1MBlaZcEt4M67iYQwSNrP7maPS3IaQJ18ES8JJ5Uf5UzFZaUawgH+oipYGW+v31cX6L3k+dGsPRM0Pyo0sQt52fsopNPZ9iag0iY7dGNuKenaEqkYNjwEgTtNz8dt6s3hMpHIKZFL3OhAGi88wF/21isv0zkF4J0wlf9gYUTEEY3Eulx80PTVqGIcHZzfavlWIdzhe+rxHTDGVwseR2Y1WjgFGQ2F+vXetAB8NEeygXee+i9nY5qt9c07m8mzjABEBAAG0JFBhdWwgQ2VyY3VlaWwgPHBhdWxAY3JhcG91aWxsb3UubmV0PokBTgQTAQoAOBYhBNdHYd8OeCBwpMuVxnPua9InSr1BBQJdCoXBAhsDBQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEHPua9InSr1BgvIH/0kLyrI3V0f33a6D3BJwc1grbygPVYGuC5l5eMnAI+rDmLR19E2yvibRpgUc87NmPEQPpbbtAZt8On/2WZoE5OIPdlId/AHNpdgAtGXo0ZX4LGeVPjxjdkbrKVHxbcdcnY+zzaFglpbVSvp76pxqgVg8PgxkAAeeJV+ET4t0823Gz2HzCL/6JZhvKAEtHVulOWoBh368SYdolp1TSfORWmHzvQiCCCA+j0cMkYVGzIQzEQhX7Urf9N/nhU5/SGLFEi9DcBfXoGzhyQyLXflhJtKm3XGB1K/pPulbKaPcKAl6rIDWPuFpHkSbmZ9r4KFlBwgAhlGy6nqP7O3u7q23hRW5AQ0EXQqFwQEIAMo+MgvYHsyjX3Ja4Oolg1Txzm8woj30ch2nACFCqaO0R/1kLj2VVeLrDyQUOlXx9PD6IQI4M8wy8m0sR4wV2p/g/paw7k65cjzYYLh+FdLNyO7IW
-	YXndJO+wDPi3aK/YKUYepqlP+QsmaHNYNdXEQDRKqNfJg8t0f5rfzp9ryxd1tCnbV+tG8VHQWiZXNqN7062DygSNXFUfQ0vZ3J2D4oAcIAEXTymRQ2+hr3Hf7I61KMHWeSkCvCG2decTYsHlw5Erix/jYWqVOtX0roOOLqWkqpQQJWtU+biWrAksmFmCp5fXIg1Nlg39v21xCXBGxJkxyTYuhdWyu1yDQ+LSIUAEQEAAYkBNgQYAQoAIBYhBNdHYd8OeCBwpMuVxnPua9InSr1BBQJdCoXBAhsMAAoJEHPua9InSr1B4wsH/Az767YCT0FSsMNt1jkkdLCBi7nY0GTW+PLP1a4zvVqFMo/vD6uz1ZflVTUAEvcTi3VHYZrlgjcxmcGu239oruqUS8Qy/xgZBp9KF0NTWQSl1iBfVbIU5VV1vHS6r77W5x0qXgfvAUWOH4gmN3MnF01SH2zMcLiaUGF+mcwl15rHbjnT3Nu2399aSE6cep86igfCAyFUOXjYEGlJy+c6UyT+DUylpjQg0nl8MlZ/7Whg2fAU9+FALIbQYQzGlT4c71SibR9T741jnegHhlmV4WXXUD6roFt54t0MSAFSVxzG8mLcSjR2cLUJ3NIPXixYUSEn3tQhfZj07xIIjWxAYZo=
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Date: Wed, 17 Jan 2024 13:26:42 +0100
+Message-ID: <20240117122646.41616-1-paul@crapouillou.net>
 MIME-Version: 1.0
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-2.50 / 15.00];
+X-Rspamd-Server: lists.linaro.org
+X-Rspamd-Action: add header
+X-Spamd-Result: default: False [4.00 / 15.00];
+	SPAM_FLAG(5.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[crapouillou.net,none];
 	R_SPF_ALLOW(-0.20)[+a];
 	R_DKIM_ALLOW(-0.20)[crapouillou.net:s=mail];
 	MIME_GOOD(-0.10)[text/plain];
 	ARC_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.963];
 	ASN(0.00)[asn:203432, ipnet:89.234.176.0/23, country:FR];
-	MIME_TRACE(0.00)[0:+];
 	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	TAGGED_RCPT(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,gmail.com,analog.com,collabora.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	RCVD_COUNT_ZERO(0.00)[0];
-	FROM_EQ_ENVFROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	MIME_TRACE(0.00)[0:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,gmail.com,analog.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,crapouillou.net];
+	RCVD_COUNT_ZERO(0.00)[0];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	GREYLIST(0.00)[pass,body];
 	DKIM_TRACE(0.00)[crapouillou.net:+]
-X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4F28C3F1A7
-X-Spamd-Bar: --
-Message-ID-Hash: Y5JIB7EYV5K6CHAJ2XHVRTNYSWBXLMUD
-X-Message-ID-Hash: Y5JIB7EYV5K6CHAJ2XHVRTNYSWBXLMUD
+X-Spam-Level: ****
+X-Rspamd-Queue-Id: C9A663F19B
+X-Spamd-Bar: ++++
+Message-ID-Hash: SMCOB6CDDKONBYN5MNDZ3VYVLGAAVTLS
+X-Message-ID-Hash: SMCOB6CDDKONBYN5MNDZ3VYVLGAAVTLS
 X-MailFrom: paul@crapouillou.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jonathan Cameron <jic23@kernel.org>, Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>, Michael Hennerich <Michael.Hennerich@analog.com>, Andrzej Pietrasiewicz <andrzej.p@collabora.com>, linux-usb@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Jonathan Cameron <jic23@kernel.org>, =?UTF-8?q?Nuno=20S=C3=A1?= <noname.nuno@gmail.com>, Michael Hennerich <Michael.Hennerich@analog.com>, linux-usb@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Paul Cercueil <paul@crapouillou.net>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 4/4] Documentation: usb: Document FunctionFS DMABUF API
+Subject: [Linaro-mm-sig] [PATCH v4 0/4] usb: gadget: functionfs: DMABUF import interface
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Y5JIB7EYV5K6CHAJ2XHVRTNYSWBXLMUD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SMCOB6CDDKONBYN5MNDZ3VYVLGAAVTLS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-Spam: Yes
 
-SGkgVmVnYXJkLA0KDQpMZSBtYXJkaSAwOSBqYW52aWVyIDIwMjQgw6AgMTQ6MDggKzAxMDAsIFZl
-Z2FyZCBOb3NzdW0gYSDDqWNyaXTCoDoNCj4gT24gMDgvMDEvMjAyNCAxMzowMCwgUGF1bCBDZXJj
-dWVpbCB3cm90ZToNCj4gPiBBZGQgZG9jdW1lbnRhdGlvbiBmb3IgdGhlIHRocmVlIGlvY3RscyB1
-c2VkIHRvIGF0dGFjaCBvciBkZXRhY2gNCj4gPiBleHRlcm5hbGx5LWNyZWF0ZWQgRE1BQlVGcywg
-YW5kIHRvIHJlcXVlc3QgdHJhbnNmZXJzIGZyb20vdG8NCj4gPiBwcmV2aW91c2x5DQo+ID4gYXR0
-YWNoZWQgRE1BQlVGcy4NCj4gPiANCj4gPiBTaWduZWQtb2ZmLWJ5OiBQYXVsIENlcmN1ZWlsIDxw
-YXVsQGNyYXBvdWlsbG91Lm5ldD4NCj4gPiANCj4gPiAtLS0NCj4gPiB2MzogTmV3IHBhdGNoDQo+
-ID4gLS0tDQo+ID4gwqAgRG9jdW1lbnRhdGlvbi91c2IvZnVuY3Rpb25mcy5yc3QgfCAzNg0KPiA+
-ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrDQo+ID4gwqAgMSBmaWxlIGNoYW5nZWQs
-IDM2IGluc2VydGlvbnMoKykNCj4gDQo+IEhpLA0KPiANCj4gSSdkIGxpa2UgdG8gcG9pbnQgb3V0
-IHRoYXQgdGhpcyBmaWxlICh1c2IvZnVuY3Rpb25mcy5yc3QpIGlzDQo+IGN1cnJlbnRseQ0KPiBp
-bmNsdWRlZCBieSBEb2N1bWVudGF0aW9uL3N1YnN5c3RlbS1hcGlzLnJzdCwgdGhlIHRvcC1sZXZl
-bCBmaWxlIGZvcg0KPiB0aGUNCj4gIktlcm5lbCBzdWJzeXN0ZW0gZG9jdW1lbnRhdGlvbiIgc2V0
-IG9mIGJvb2tzLCB3aGljaCBkZXNjcmliZQ0KPiBpbnRlcm5hbA0KPiBBUElzOiAiVGhlc2UgYm9v
-a3MgZ2V0IGludG8gdGhlIGRldGFpbHMgb2YgaG93IHNwZWNpZmljIGtlcm5lbA0KPiBzdWJzeXN0
-ZW1zIHdvcmsgZnJvbSB0aGUgcG9pbnQgb2YgdmlldyBvZiBhIGtlcm5lbCBkZXZlbG9wZXIiLg0K
-PiANCj4gSG93ZXZlciwgZnVuY3Rpb25mcy5yc3QgKGFuZCBlc3BlY2lhbGx5IHlvdXIgbmV3IGFk
-ZGl0aW9ucykgYXJlDQo+IGRvY3VtZW50aW5nIGEgdXNlcnNwYWNlIEFQSSwgc28gaXQgcmVhbGx5
-IGJlbG9uZ3Mgc29tZXdoZXJlIGluDQo+IERvY3VtZW50YXRpb24vdXNlcnNwYWNlLWFwaS8gLS0g
-dGhhdCdzIHdoZXJlIC9wcm9jLCAvc3lzLCAvZGV2IGFuZA0KPiBpb2N0bA0KPiBkZXNjcmlwdGlv
-bnMgZm9yIHVzZXJzcGFjZSBwcm9ncmFtbWVycyBiZWxvbmcuDQoNCkFncmVlZC4gRXZlbiB0aGUg
-b3JpZ2luYWwgY29udGVudCBwcmlvciB0byBteSBhZGRpdGlvbnMgZGVzY3JpYmUgYQ0KdXNlcnNw
-YWNlIEFQSS4NCg0KPiANCj4gSSdtIG5vdCBOQUtpbmcgdGhlIHBhdGNoIC0tIEkganVzdCB3YW50
-IHRvIGRyYXcgYXR0ZW50aW9uIHRvIHRoaXMNCj4gZGlzY3JlcGFuY3kuIE1heWJlIHdlIGNhbiBz
-ZXBhcmF0ZSB0aGUga2VybmVsLWltcGxlbWVudGF0aW9uIGRldGFpbHMNCj4gKHN0dWZmIGFib3V0
-IF9faW5pdCBzZWN0aW9ucyBhbmQgc3R1ZmYpIGZyb20gdGhlIG5ldyBpb2N0bCgpIGluZm8/DQo+
-IA0KPiBMb29raW5nIGF0IDxodHRwczovL2RvY3Mua2VybmVsLm9yZy91c2IvPiBJIHNlZSB0aGF0
-IHRoZXJlIGFyZSBtYW55DQo+IG90aGVyIGFkamFjZW50IGRvY3VtZW50cyB0aGF0IGFyZSBhbHNv
-IG5vdCByZWFsbHkgZG9jdW1lbnRpbmcga2VybmVsDQo+IGltcGxlbWVudGF0aW9uIGRldGFpbHMs
-IHJvdWdoIGNhdGVnb3JpemF0aW9uIGFzIGZvbGxvd3M6DQo+IA0KPiBVU0Igc3VwcG9ydA0KPiAt
-LS0tLS0tLS0tLQ0KPiANCj4gLSBMaW51eCBBQ00gZHJpdmVyIHYwLjE2ID09PiBhZG1pbi91c2Vy
-IGluZm8NCj4gLSBBdXRob3JpemluZyAob3Igbm90KSB5b3VyIFVTQiBkZXZpY2VzIHRvIGNvbm5l
-Y3QgdG8gdGhlIHN5c3RlbSA9PT4gDQo+IGFkbWluL3VzZXIgaW5mbw0KPiAtIENoaXBJZGVhIEhp
-Z2hzcGVlZCBEdWFsIFJvbGUgQ29udHJvbGxlciBEcml2ZXIgPT4gYWRtaW4vdXNlciBpbmZvDQo+
-IC0gRFdDMyBkcml2ZXIgPT0+IGRyaXZlciBUT0RPcyAoY2FuIGJlIG1vdmVkIGludG8gc291cmNl
-IGNvZGU/KQ0KPiAtIEVIQ0kgZHJpdmVyID09PiB0ZWNobmljYWwgaW5mbyArIGRyaXZlciBkZXRh
-aWxzDQo+IC0gSG93IEZ1bmN0aW9uRlMgd29ya3MNCj4gLSBMaW51eCBVU0IgZ2FkZ2V0IGNvbmZp
-Z3VyZWQgdGhyb3VnaCBjb25maWdmcyA9PT4gdXNlcnNwYWNlIEFQSSArIA0KPiBpbXBsZW1lbnRh
-dGlvbg0KPiAtIExpbnV4IFVTQiBISUQgZ2FkZ2V0IGRyaXZlciA9PT4gaW1wbGVtZW50YXRpb24g
-KyB1c2Vyc3BhY2UgQVBJDQo+IC0gTXVsdGlmdW5jdGlvbiBDb21wb3NpdGUgR2FkZ2V0ID09PiB0
-ZWNobmljYWwgKyB1c2VyIGluZm8NCj4gLSBMaW51eCBVU0IgUHJpbnRlciBHYWRnZXQgRHJpdmVy
-ID09PiB1c2Vyc3BhY2UgQVBJDQo+IC0gTGludXggR2FkZ2V0IFNlcmlhbCBEcml2ZXIgdjIuMCA9
-PT4gdXNlci9hZG1pbiArIHVzZXJzcGFjZSBBUEkNCj4gLSBMaW51eCBVVkMgR2FkZ2V0IERyaXZl
-ciA9PT4gdXNlci9hZG1pbiArIHVzZXJzcGFjZSBBUEkNCj4gLSBHYWRnZXQgVGVzdGluZyA9PT4g
-dXNlci9hZG1pbiArIHVzZXJzcGFjZSBBUEkNCj4gLSBJbmZpbml0eSBVc2IgVW5saW1pdGVkIFJl
-YWRtZSA9PT4gdXNlci9hZG1pbg0KPiAtIE1hc3MgU3RvcmFnZSBHYWRnZXQgKE1TRykgPT0+IHVz
-ZXIvYWRtaW4NCj4gLSBVU0IgNy1TZWdtZW50IE51bWVyaWMgRGlzcGxheSA9PT4gdXNlci9hZG1p
-bg0KPiAtIG10b3VjaHVzYiBkcml2ZXIgPT0+IHVzZXIvYWRtaW4NCj4gLSBPSENJID09PiB0ZWNo
-bmljYWwgaW5mbw0KPiAtIFVTQiBSYXcgR2FkZ2V0ID09PiB1c2Vyc3BhY2UgQVBJDQo+IC0gVVNC
-L0lQIHByb3RvY29sID09PiB0ZWNobmljYWwgaW5mbw0KPiAtIHVzYm1vbiA9PT4gdXNlci9hZG1p
-biArIHVzZXJzcGFjZSBBUEkNCj4gLSBVU0Igc2VyaWFsID09PiB1c2VyL2FkbWluICsgdGVjaG5p
-Y2FsIGluZm8NCj4gLSBVU0IgcmVmZXJlbmNlcw0KPiAtIExpbnV4IENEQyBBQ00gaW5mDQo+IC0g
-TGludXggaW5mDQo+IC0gVVNCIGRldmZzIGRyb3AgcGVybWlzc2lvbnMgc291cmNlDQo+IC0gQ3Jl
-ZGl0cw0KPiANCj4gQnkgImFkbWluL3VzZXIgaW5mbyIsIEkgbWVhbiB0aGluZ3MgdGhhdCBhIHVz
-ZXIgd291bGQgaGF2ZSB0byBkbyBvcg0KPiBydW4NCj4gKGUuZy4gbW9kcHJvYmUgKyBmbGFncykg
-dG8gbWFrZSB1c2Ugb2YgYSBkcml2ZXI7ICJ0ZWNobmljYWwgaW5mbyIgaXMNCj4gbW9yZSBsaWtl
-IGRldmljZSBzcGVjaWZpY2F0aW9ucyAodHJhbnNmZXIgc3BlZWRzLCBtb2RlcyBvZiBvcGVyYXRp
-b24sDQo+IGV0Yy4pOyAidXNlcnNwYWNlIEFQSSIgaXMgc3R1ZmYgbGlrZSBjb25maWdmcyBhbmQg
-aW9jdGxzOyAiZHJpdmVyDQo+IGRldGFpbHMiIGlzIHJlYWxseSBpbXBsZW1lbnRhdGlvbiBkZXRh
-aWxzIGFuZCBpbnRlcm5hbA0KPiBjb25zaWRlcmF0aW9ucy4NCj4gDQo+IFRoZSBsYXN0IG9uZXMg
-SSBkb24ndCBldmVuIHJlYWxseSBrbm93IGhvdyB0byBjYXRlZ29yaXplLg0KPiANCj4gSSdtIGd1
-ZXNzaW5nIG5vYm9keSBpcyByZWFsbHkgZW50aHJhbGxlZCBieSB0aGUgaWRlYSBvZiBzcGxpdHRp
-bmcNCj4gRG9jdW1lbnRhdGlvbi91c2IvIHVwIGxpa2UgdGhpcz8NCj4gDQo+IMKgwqAgRG9jdW1l
-bnRhdGlvbi9hZG1pbi1ndWlkZS91c2IvDQo+IMKgwqAgRG9jdW1lbnRhdGlvbi9kcml2ZXItYXBp
-L3VzYi8gKHRoaXMgb25lIGFjdHVhbGx5IGV4aXN0cyBhbHJlYWR5KQ0KPiDCoMKgIERvY3VtZW50
-YXRpb24vdXNlcnNwYWNlLWFwaS91c2IvDQo+IA0KPiBGb3IgdGhlIHN0dWZmIHRoYXQgaXMgX2Fj
-dHVhbGx5XyBpbnRlcm5hbCB0byBhIHNwZWNpZmljIGRyaXZlciAoc28NCj4gbm90DQo+IHVzZWZ1
-bCBmb3IgZW5kIHVzZXJzLCBub3QgdXNlZnVsIGZvciBhZG1pbnMsIG5vdCBnZW5lcmljIFVTQiBp
-bmZvLA0KPiBhbmQNCj4gbm90IHVzZWZ1bCBmb3IgdXNlcnNwYWNlIHByb2dyYW1tZXJzKSwgSSB3
-b3VsZCBob25lc3RseSBwcm9wb3NlIHRvDQo+IGp1c3QNCj4gbW92ZSBpdCBkaXJlY3RseSBpbnRv
-IHRoZSBkcml2ZXIncyBzb3VyY2UgY29kZSwgb3IsIGlmIHRoZSB0ZXh0IGlzDQo+IG9ic29sZXRl
-LCBqdXN0IGdldCByaWQgb2YgaXQgY29tcGxldGVseS4NCj4gDQo+IFRoZSBkaXN0aW5jdGlvbiBi
-ZXR3ZWVuIHVzZXIvYWRtaW4gYW5kIHVzZXJzcGFjZSBBUEkgaXMgcHJldHR5IGNsZWFyDQo+IChv
-bmUgaXMgZm9yIGVuZCB1c2VycywgdGhlIG90aGVyIGlzIGZvciB1c2Vyc3BhY2UgX3Byb2dyYW1t
-ZXJzXyksIGJ1dA0KPiBpdA0KPiBjYW4gc29tZXRpbWVzIGJlIGhhcmQgdG8gZGV0ZXJtaW5lIHdo
-ZXRoZXIgc29tZXRoaW5nIGZhbGxzIGluIG9uZSBvcg0KPiB0aGUNCj4gb3RoZXIgY2F0ZWdvcnku
-DQo+IA0KPiBJbiBhbnkgY2FzZSAtLSBpdCBsb29rcyBsaWtlIGFsbW9zdCBhbGwgb2YgdGhlIHVz
-Yi8gZGlyZWN0b3J5IGRvZXMNCj4gbm90DQo+IGRvY3VtZW50ICJob3cgc3BlY2lmaWMga2VybmVs
-IHN1YnN5c3RlbXMgd29yayBmcm9tIHRoZSBwb2ludCBvZiB2aWV3DQo+IG9mDQo+IGEga2VybmVs
-IGRldmVsb3BlciIgc28gbWF5YmUgd2Ugc2hvdWxkIGp1c3QgbW92ZSB0aGUgaW5jbHVkZSB0bw0K
-PiB1c2Vyc3BhY2UtYXBpLyBmb3Igbm93IGFzIGFuIG9idmlvdXMgaW1wcm92ZW1lbnQgKGlmIHN0
-aWxsIG5vdCAxMDAlDQo+IGNvcnJlY3QpOg0KPiANCj4gZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRp
-b24vc3Vic3lzdGVtLWFwaXMucnN0IA0KPiBiL0RvY3VtZW50YXRpb24vc3Vic3lzdGVtLWFwaXMu
-cnN0DQo+IGluZGV4IDJkMzUzZmI4ZWEyNi4uZmU5NzJmNTdiZjRjIDEwMDY0NA0KPiAtLS0gYS9E
-b2N1bWVudGF0aW9uL3N1YnN5c3RlbS1hcGlzLnJzdA0KPiArKysgYi9Eb2N1bWVudGF0aW9uL3N1
-YnN5c3RlbS1hcGlzLnJzdA0KPiBAQCAtODEsNyArODEsNiBAQCBTdG9yYWdlIGludGVyZmFjZXMN
-Cj4gwqDCoMKgwqAgc2VjdXJpdHkvaW5kZXgNCj4gwqDCoMKgwqAgY3J5cHRvL2luZGV4DQo+IMKg
-wqDCoMKgIGJwZi9pbmRleA0KPiAtwqDCoCB1c2IvaW5kZXgNCj4gwqDCoMKgwqAgUENJL2luZGV4
-DQo+IMKgwqDCoMKgIG1pc2MtZGV2aWNlcy9pbmRleA0KPiDCoMKgwqDCoCBwZWNpL2luZGV4DQo+
-IGRpZmYgLS1naXQgYS9Eb2N1bWVudGF0aW9uL3VzZXJzcGFjZS1hcGkvaW5kZXgucnN0IA0KPiBi
-L0RvY3VtZW50YXRpb24vdXNlcnNwYWNlLWFwaS9pbmRleC5yc3QNCj4gaW5kZXggODJmOWRiZDIy
-OGY1Li5lNjBjZDkxNzRhZGEgMTAwNjQ0DQo+IC0tLSBhL0RvY3VtZW50YXRpb24vdXNlcnNwYWNl
-LWFwaS9pbmRleC5yc3QNCj4gKysrIGIvRG9jdW1lbnRhdGlvbi91c2Vyc3BhY2UtYXBpL2luZGV4
-LnJzdA0KPiBAQCAtNDEsNiArNDEsNyBAQCBTdWJzeXN0ZW0tc3BlY2lmaWMgZG9jdW1lbnRhdGlv
-bjoNCj4gwqDCoMKgwqAgdGVlDQo+IMKgwqDCoMKgIGlzYXBucA0KPiDCoMKgwqDCoCBkY2RiYXMN
-Cj4gK8KgwqAgLi4vdXNiL2luZGV4DQo+IA0KPiDCoCBLZXJuZWwgQUJJczogVGhlc2UgZG9jdW1l
-bnRzIGRlc2NyaWJlIHRoZSB0aGUgQUJJIGJldHdlZW4gdGhlIExpbnV4DQo+IMKgIGtlcm5lbCBh
-bmQgdXNlcnNwYWNlLCBhbmQgdGhlIHJlbGF0aXZlIHN0YWJpbGl0eSBvZiB0aGVzZQ0KPiBpbnRl
-cmZhY2VzLg0KPiANCj4gDQo+IFRob3VnaHRzPw0KDQpNYWtlcyBzZW5zZSB0byBtZS4gVGhlcmUn
-cyBkZWZpbml0ZWx5IHNvbWUgY2xlYW51cCB0byBiZSBkb25lIGluIHRoZQ0KVVNCIGRvY3VtZW50
-YXRpb24uDQoNCj4gVmVnYXJkDQoNCkNoZWVycywNCi1QYXVsDQpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAt
-LSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBl
-bWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+Hi,
+
+This is the v4 of my patchset that adds a new DMABUF import interface to
+FunctionFS. It addresses the points that Daniel raised on the v3 - see
+changelog below.
+
+This interface is being used at Analog Devices, to transfer data from
+high-speed transceivers to USB in a zero-copy fashion, using also the
+DMABUF import interface to the IIO subsystem which is being upstreamed
+in parallel [1]. The two are used by the Libiio software [2].
+
+On a ZCU102 board with a FMComms3 daughter board, using the combination
+of these two new interfaces yields a drastic improvement of the
+throughput, from about 127 MiB/s using IIO's buffer read/write interface
++ read/write to the FunctionFS endpoints, to about 274 MiB/s when
+passing around DMABUFs, for a lower CPU usage (0.85 load avg. before,
+vs. 0.65 after).
+
+Right now, *technically* there are no users of this interface, as
+Analog Devices wants to wait until both interfaces are accepted upstream
+to merge the DMABUF code in Libiio into the main branch, and Jonathan
+wants to wait and see if this patchset is accepted to greenlight the
+DMABUF interface in IIO as well. I think this isn't really a problem;
+once everybody is happy with its part of the cake, we can merge them all
+at once.
+
+This is obviously for 5.9, and based on next-20240117.
+
+Changelog:
+
+- [3/4]:
+  - Protect the dmabufs list with a mutex
+  - Use incremental sequence number for the dma_fences
+  - Unref attachments and DMABUFs in workers
+  - Remove dead code in ffs_dma_resv_lock()
+  - Fix non-block actually blocking
+  - Use dma_fence_begin/end_signalling()
+  - Add comment about cache-management and dma_buf_unmap_attachment()
+  - Make sure dma_buf_map_attachment() is called with the dma-resv locked
+
+Cheers,
+-Paul
+
+[1] https://lore.kernel.org/linux-iio/219abc43b4fdd4a13b307ed2efaa0e6869e68e3f.camel@gmail.com/T/
+[2] https://github.com/analogdevicesinc/libiio/tree/pcercuei/dev-new-dmabuf-api
+
+Paul Cercueil (4):
+  usb: gadget: Support already-mapped DMA SGs
+  usb: gadget: functionfs: Factorize wait-for-endpoint code
+  usb: gadget: functionfs: Add DMABUF import interface
+  Documentation: usb: Document FunctionFS DMABUF API
+
+ Documentation/usb/functionfs.rst    |  36 ++
+ drivers/usb/gadget/function/f_fs.c  | 500 ++++++++++++++++++++++++++--
+ drivers/usb/gadget/udc/core.c       |   7 +-
+ include/linux/usb/gadget.h          |   2 +
+ include/uapi/linux/usb/functionfs.h |  41 +++
+ 5 files changed, 565 insertions(+), 21 deletions(-)
+
+-- 
+2.43.0
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
