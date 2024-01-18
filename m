@@ -2,195 +2,155 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CC0C831BC4
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Jan 2024 15:50:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id CDD06831DF6
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Jan 2024 17:57:50 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DAB2D40ECA
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Jan 2024 14:50:09 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
-	by lists.linaro.org (Postfix) with ESMTPS id BFC713F19B
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 18 Jan 2024 14:49:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 77D4143D54
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Jan 2024 16:57:49 +0000 (UTC)
+Received: from mail-yb1-f178.google.com (mail-yb1-f178.google.com [209.85.219.178])
+	by lists.linaro.org (Postfix) with ESMTPS id 2FC2D3F52E
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 18 Jan 2024 16:57:29 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b=LuM4hce+;
-	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.218.53) smtp.mailfrom=daniel@ffwll.ch;
-	dmarc=none
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-a29b850ec66so380700566b.1
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 18 Jan 2024 06:49:49 -0800 (PST)
+	dkim=pass header.d=google.com header.s=20230601 header.b=W2Bo1JCE;
+	spf=pass (lists.linaro.org: domain of tjmercier@google.com designates 209.85.219.178 as permitted sender) smtp.mailfrom=tjmercier@google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-yb1-f178.google.com with SMTP id 3f1490d57ef6-dbedb1ee3e4so10623696276.3
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 18 Jan 2024 08:57:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google; t=1705589389; x=1706194189; darn=lists.linaro.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:mail-followup-to:message-id:subject:cc:to
-         :from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=T0SV8U+IlkdLHr/XjT2iGav+KPgKzY+DGmeC0LEv1Zs=;
-        b=LuM4hce+P09ibI2WqjDaQaB8tpnViagfFzxIEshq/b8GWriReIkrvHEAvaQYzQwopn
-         tC0y5itSmpqEScPMOUul7wU9EjipPrDr4saTAQ5IeLTh1xS8u2xjycmPvVnxLVV+Z2lz
-         ZkT4lFv1lHiChik/RLhLTJTWgAtqtIKF2o1tI=
+        d=google.com; s=20230601; t=1705597049; x=1706201849; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=cmZn+BROv+sMREBkau20U4T/TQEgObsLAqinfuULAyg=;
+        b=W2Bo1JCEgR1LVbNAgNYucH5X7oSp7YQfmbBHY2Wx39NiiNDLnhixSPYWpHEklkKzbo
+         XtMCjKsqDn+n2G0xd2j4pY33LxRdGy5gff/TfI0VCsiDYubEiyNUJKVdcqo6wG85th7O
+         PNVDMNaWg58LPA08oQtLXkPmyH7MSHL35ngtsQ/UjpVYJg1+V9b1nep73rpw+Tvf7EYb
+         rrSQmaDGLh4pDzNC1EgyLMyW8WZWW5zfPL5ANWICKuJk+ziWCT/g3IEJ5GOfRuXYQ6xI
+         M+04NOur9j532W43bFABO8ncnivvI+JtpglkgWvdQu9TtkRTR5SsNBr3veMzPCupd2Oh
+         Ni3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705589389; x=1706194189;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:mail-followup-to:message-id:subject:cc:to
-         :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=T0SV8U+IlkdLHr/XjT2iGav+KPgKzY+DGmeC0LEv1Zs=;
-        b=KyfuzhzBkwBWFpNnNYtwKQUcX7nDPs18oufCjl+VSmCuxurw4k/fYJHn2FctaFamPw
-         B8v2vuhlWbaiaMm/SDH/twoBKC5KDXS4+Xh7BDLtu7R0cRVf3BnFH2AJlGnxeGfYqOUF
-         Sgv3BLBltaQVF6E+7uvyCQ1q2vXfuisaCFsLq181VYrfA86xAq9Qrwi7lvpXBKKfG/BE
-         ZfyQxKzGmCkLPP3jPfFaT6NqdaZZnfn/mpFXj6Xe8Oh+g0M0UaPZRWuRebCdfTCZd39K
-         OURGZ8/Pi7/MmXOYxbm0Uc6kAIX207xIGUz5f33Pf+zp16fGDQbpwIkfK3QvY3HTbKBd
-         YAvw==
-X-Gm-Message-State: AOJu0Yyq77W5lLTE/9h6VjeYjNDFvJHK0Xzuu3V3jzPqH8Xci6cAz7qN
-	FnH+TOo/tfWM4FEXtc2EXpplWEyLN3T1AvV+QQz+SdxxaRSUmnH85pHbJbRfSGA=
-X-Google-Smtp-Source: AGHT+IEVM70e6beCogh7O7jcU8xaluhv/ktlLII9rfJtR4gxAiS0g3VAw/ikru3AEG+C2Wt7+UZAPw==
-X-Received: by 2002:a17:906:4088:b0:a2e:9ff8:218d with SMTP id u8-20020a170906408800b00a2e9ff8218dmr1190541ejj.3.1705589388609;
-        Thu, 18 Jan 2024 06:49:48 -0800 (PST)
-Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id sa19-20020a1709076d1300b00a2eb5c46618sm2437136ejc.19.2024.01.18.06.49.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 18 Jan 2024 06:49:47 -0800 (PST)
-Date: Thu, 18 Jan 2024 15:49:45 +0100
-From: Daniel Vetter <daniel@ffwll.ch>
-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <Zak6iW8lktml7f2H@phenom.ffwll.local>
-Mail-Followup-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	"T.J. Mercier" <tjmercier@google.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
-	Brian Starkey <Brian.Starkey@arm.com>,
-	John Stultz <jstultz@google.com>,
-	Sandeep Patil <sspatil@android.com>,
-	Laura Abbott <labbott@redhat.com>, android-mm@google.com,
-	minchan@google.com, John Stultz <john.stultz@linaro.org>,
-	Benjamin Gaignard <benjamin.gaignard@linaro.org>,
+        d=1e100.net; s=20230601; t=1705597049; x=1706201849;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=cmZn+BROv+sMREBkau20U4T/TQEgObsLAqinfuULAyg=;
+        b=WYqmV94BvTioTXsZXMCLOVrdqnvDifYklFRSv7ybO13Z3z2vg6tOQ9QNBmdZrf38/u
+         3c+ZNDz5ipxJRwzCBIrEsog90AfSiVWLmbb8QrI16Q78IiGVlpJQD5QQvMfzflK7XtFT
+         8goJlLecyHcQko05FDi2FK8X0W2xcwQKM11Q+6jOI0eFWHBgRmJg1yc4ioXPYowyMm0Z
+         aQqM7y0VCBbbCoZCtXi+HvUvmrrhnwIhHM6cmIyilfZNO5orJ/V6Hahu8Wj0dCGDOuro
+         taIGSrEgPzF3VHRo53irRKDPRd/qgMZfK60iMU9wIo4pBfn3rKO3x+qIERfSOfq0b5F8
+         fn/A==
+X-Gm-Message-State: AOJu0YyqnZQCRgCecCPxQ1cN+UQ3AwyWxZ9+L6Ws19X68Ewzw/piLFAs
+	MOb813/BUrsMVXGHbaXcDIv6vUB6rUxye1QnLIf0c55o2lqqdnJx5XvH06ebXtyTa94UULp63TM
+	Fy+wQ3ZZilzVo1x24ML+NZw5wKklgUuHl52ao
+X-Google-Smtp-Source: AGHT+IGdm+3tzpwneR3Std891dkepC+HcM/F/QU4NLlUSQFVDjEWUf46RxO8DdQGNQYUp4EkO2YYs2e+Vx5E/WIMRrc=
+X-Received: by 2002:a25:748c:0:b0:dbd:7743:77cb with SMTP id
+ p134-20020a25748c000000b00dbd774377cbmr856586ybc.128.1705597048380; Thu, 18
+ Jan 2024 08:57:28 -0800 (PST)
+MIME-Version: 1.0
+References: <20240117181141.286383-1-tjmercier@google.com> <20a68f86-27f0-48f4-a066-7dcf0092858e@amd.com>
+ <Zak6iW8lktml7f2H@phenom.ffwll.local>
+In-Reply-To: <Zak6iW8lktml7f2H@phenom.ffwll.local>
+From: "T.J. Mercier" <tjmercier@google.com>
+Date: Thu, 18 Jan 2024 08:57:16 -0800
+Message-ID: <CABdmKX10zz6bk4VVDgsosJbA8_7WOxuCnkyYFiL1FPwtZ-C+WQ@mail.gmail.com>
+To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+	"T.J. Mercier" <tjmercier@google.com>, Sumit Semwal <sumit.semwal@linaro.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <jstultz@google.com>, Sandeep Patil <sspatil@android.com>,
+	Laura Abbott <labbott@redhat.com>, android-mm@google.com, minchan@google.com,
+	John Stultz <john.stultz@linaro.org>, Benjamin Gaignard <benjamin.gaignard@linaro.org>,
 	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
 	linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
-References: <20240117181141.286383-1-tjmercier@google.com>
- <20a68f86-27f0-48f4-a066-7dcf0092858e@amd.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20a68f86-27f0-48f4-a066-7dcf0092858e@amd.com>
-X-Operating-System: Linux phenom 6.5.0-4-amd64 
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-7.40 / 15.00];
+X-Spamd-Result: default: False [-8.00 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.53:from];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
 	MIME_GOOD(-0.10)[text/plain];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	TO_DN_SOME(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
-	R_SPF_NA(0.00)[no SPF record];
-	DMARC_NA(0.00)[ffwll.ch];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
+	ARC_NA(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.178:from];
+	MISSING_XM_UA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	DKIM_TRACE(0.00)[ffwll.ch:+]
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: BFC713F19B
-X-Spamd-Bar: -------
-Message-ID-Hash: 2CIYOVYUEEKCAJOBHSLVTIP65OK74ODE
-X-Message-ID-Hash: 2CIYOVYUEEKCAJOBHSLVTIP65OK74ODE
-X-MailFrom: daniel@ffwll.ch
+X-Rspamd-Queue-Id: 2FC2D3F52E
+X-Spamd-Bar: --------
+Message-ID-Hash: 7OWSBXBLGWN5F6J2ITNV6JTKCETNUBKB
+X-Message-ID-Hash: 7OWSBXBLGWN5F6J2ITNV6JTKCETNUBKB
+X-MailFrom: tjmercier@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: "T.J. Mercier" <tjmercier@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, Sandeep Patil <sspatil@android.com>, Laura Abbott <labbott@redhat.com>, android-mm@google.com, minchan@google.com, daniel@ffwll.ch, John Stultz <john.stultz@linaro.org>, Benjamin Gaignard <benjamin.gaignard@linaro.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+CC: daniel@ffwll.ch
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: heaps: Don't track CMA dma-buf pages under RssFile
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2CIYOVYUEEKCAJOBHSLVTIP65OK74ODE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7OWSBXBLGWN5F6J2ITNV6JTKCETNUBKB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Thu, Jan 18, 2024 at 11:02:22AM +0100, Christian K=F6nig wrote:
-> Am 17.01.24 um 19:11 schrieb T.J. Mercier:
-> > DMA buffers allocated from the CMA dma-buf heap get counted under
-> > RssFile for processes that map them and trigger page faults. In
-> > addition to the incorrect accounting reported to userspace, reclaim
-> > behavior was influenced by the MM_FILEPAGES counter until linux 6.8, but
-> > this memory is not reclaimable. [1] Change the CMA dma-buf heap to set
-> > VM_PFNMAP on the VMA so MM does not poke at the memory managed by this
-> > dma-buf heap, and use vmf_insert_pfn to correct the RSS accounting.
-> >=20
-> > The system dma-buf heap does not suffer from this issue since
-> > remap_pfn_range is used during the mmap of the buffer, which also sets
-> > VM_PFNMAP on the VMA.
->=20
-> Mhm, not an issue with this patch but Daniel wanted to add a check for
-> VM_PFNMAP to dma_buf_mmap() which would have noted this earlier.
->=20
-> I don't fully remember the discussion but for some reason that was never
-> committed. We should probably try that again.
-
-Iirc the issue is that dma_mmap is not guaranteed to give you a VM_SPECIAL
-mapping, at least on absolutely all architectures. That's why I defacto
-dropped that idea, but it would indeed be really great if we could
-resurrect it.
-
-Maybe for x86 only? Or x86+armv8, I'm honestly not sure anymore which
-exact cases ended up with a VM_NORMAL mapping ... Would need a pile of
-digging.
-
-I think all the other patches I've landed.
--Sima
-
->=20
-> > [1]https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/c=
-ommit/mm/vmscan.c?id=3Dfb46e22a9e3863e08aef8815df9f17d0f4b9aede
-> >=20
-> > Fixes: b61614ec318a ("dma-buf: heaps: Add CMA heap to dmabuf heaps")
-> > Signed-off-by: T.J. Mercier<tjmercier@google.com>
->=20
-> Acked-by: Christian K=F6nig <christian.koenig@amd.com>
->=20
-> > ---
-> >   drivers/dma-buf/heaps/cma_heap.c | 7 +++----
-> >   1 file changed, 3 insertions(+), 4 deletions(-)
-> >=20
-> > diff --git a/drivers/dma-buf/heaps/cma_heap.c b/drivers/dma-buf/heaps/c=
-ma_heap.c
-> > index ee899f8e6721..4a63567e93ba 100644
-> > --- a/drivers/dma-buf/heaps/cma_heap.c
-> > +++ b/drivers/dma-buf/heaps/cma_heap.c
-> > @@ -168,10 +168,7 @@ static vm_fault_t cma_heap_vm_fault(struct vm_faul=
-t *vmf)
-> >   	if (vmf->pgoff > buffer->pagecount)
-> >   		return VM_FAULT_SIGBUS;
-> > -	vmf->page =3D buffer->pages[vmf->pgoff];
-> > -	get_page(vmf->page);
-> > -
-> > -	return 0;
-> > +	return vmf_insert_pfn(vma, vmf->address, page_to_pfn(buffer->pages[vm=
-f->pgoff]));
-> >   }
-> >   static const struct vm_operations_struct dma_heap_vm_ops =3D {
-> > @@ -185,6 +182,8 @@ static int cma_heap_mmap(struct dma_buf *dmabuf, st=
-ruct vm_area_struct *vma)
-> >   	if ((vma->vm_flags & (VM_SHARED | VM_MAYSHARE)) =3D=3D 0)
-> >   		return -EINVAL;
-> > +	vm_flags_set(vma, VM_IO | VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP);
-> > +
-> >   	vma->vm_ops =3D &dma_heap_vm_ops;
-> >   	vma->vm_private_data =3D buffer;
-
---=20
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVGh1LCBKYW4gMTgsIDIwMjQgYXQgNjo0OeKAr0FNIERhbmllbCBWZXR0ZXIgPGRhbmllbEBm
+ZndsbC5jaD4gd3JvdGU6DQo+DQo+IE9uIFRodSwgSmFuIDE4LCAyMDI0IGF0IDExOjAyOjIyQU0g
+KzAxMDAsIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6DQo+ID4gQW0gMTcuMDEuMjQgdW0gMTk6MTEg
+c2NocmllYiBULkouIE1lcmNpZXI6DQo+ID4gPiBETUEgYnVmZmVycyBhbGxvY2F0ZWQgZnJvbSB0
+aGUgQ01BIGRtYS1idWYgaGVhcCBnZXQgY291bnRlZCB1bmRlcg0KPiA+ID4gUnNzRmlsZSBmb3Ig
+cHJvY2Vzc2VzIHRoYXQgbWFwIHRoZW0gYW5kIHRyaWdnZXIgcGFnZSBmYXVsdHMuIEluDQo+ID4g
+PiBhZGRpdGlvbiB0byB0aGUgaW5jb3JyZWN0IGFjY291bnRpbmcgcmVwb3J0ZWQgdG8gdXNlcnNw
+YWNlLCByZWNsYWltDQo+ID4gPiBiZWhhdmlvciB3YXMgaW5mbHVlbmNlZCBieSB0aGUgTU1fRklM
+RVBBR0VTIGNvdW50ZXIgdW50aWwgbGludXggNi44LCBidXQNCj4gPiA+IHRoaXMgbWVtb3J5IGlz
+IG5vdCByZWNsYWltYWJsZS4gWzFdIENoYW5nZSB0aGUgQ01BIGRtYS1idWYgaGVhcCB0byBzZXQN
+Cj4gPiA+IFZNX1BGTk1BUCBvbiB0aGUgVk1BIHNvIE1NIGRvZXMgbm90IHBva2UgYXQgdGhlIG1l
+bW9yeSBtYW5hZ2VkIGJ5IHRoaXMNCj4gPiA+IGRtYS1idWYgaGVhcCwgYW5kIHVzZSB2bWZfaW5z
+ZXJ0X3BmbiB0byBjb3JyZWN0IHRoZSBSU1MgYWNjb3VudGluZy4NCj4gPiA+DQo+ID4gPiBUaGUg
+c3lzdGVtIGRtYS1idWYgaGVhcCBkb2VzIG5vdCBzdWZmZXIgZnJvbSB0aGlzIGlzc3VlIHNpbmNl
+DQo+ID4gPiByZW1hcF9wZm5fcmFuZ2UgaXMgdXNlZCBkdXJpbmcgdGhlIG1tYXAgb2YgdGhlIGJ1
+ZmZlciwgd2hpY2ggYWxzbyBzZXRzDQo+ID4gPiBWTV9QRk5NQVAgb24gdGhlIFZNQS4NCj4gPg0K
+PiA+IE1obSwgbm90IGFuIGlzc3VlIHdpdGggdGhpcyBwYXRjaCBidXQgRGFuaWVsIHdhbnRlZCB0
+byBhZGQgYSBjaGVjayBmb3INCj4gPiBWTV9QRk5NQVAgdG8gZG1hX2J1Zl9tbWFwKCkgd2hpY2gg
+d291bGQgaGF2ZSBub3RlZCB0aGlzIGVhcmxpZXIuDQo+ID4NCj4gPiBJIGRvbid0IGZ1bGx5IHJl
+bWVtYmVyIHRoZSBkaXNjdXNzaW9uIGJ1dCBmb3Igc29tZSByZWFzb24gdGhhdCB3YXMgbmV2ZXIN
+Cj4gPiBjb21taXR0ZWQuIFdlIHNob3VsZCBwcm9iYWJseSB0cnkgdGhhdCBhZ2Fpbi4NCj4NCj4g
+SWlyYyB0aGUgaXNzdWUgaXMgdGhhdCBkbWFfbW1hcCBpcyBub3QgZ3VhcmFudGVlZCB0byBnaXZl
+IHlvdSBhIFZNX1NQRUNJQUwNCj4gbWFwcGluZywgYXQgbGVhc3Qgb24gYWJzb2x1dGVseSBhbGwg
+YXJjaGl0ZWN0dXJlcy4gVGhhdCdzIHdoeSBJIGRlZmFjdG8NCj4gZHJvcHBlZCB0aGF0IGlkZWEs
+IGJ1dCBpdCB3b3VsZCBpbmRlZWQgYmUgcmVhbGx5IGdyZWF0IGlmIHdlIGNvdWxkDQo+IHJlc3Vy
+cmVjdCBpdC4NCg0KSSBhY3R1YWxseSBoYWQgaXQgaW4gbXkgaGVhZCB0aGF0IGl0IHdhcyBhIEJV
+R19PTiBjaGVjayBmb3IgVk1fUEZOTUFQDQppbiBkbWFfYnVmX21tYXAgYW5kIGl0IHdhcyBtZXJn
+ZWQsIHNvIEkgd2FzIHN1cnByaXNlZCB0byBkaXNjb3ZlciB0aGF0DQppdCB3YXNuJ3Qgc2V0IGZv
+ciB0aGVzZSBDTUEgYnVmZmVycy4NCg0KPiBNYXliZSBmb3IgeDg2IG9ubHk/IE9yIHg4Nithcm12
+OCwgSSdtIGhvbmVzdGx5IG5vdCBzdXJlIGFueW1vcmUgd2hpY2gNCj4gZXhhY3QgY2FzZXMgZW5k
+ZWQgdXAgd2l0aCBhIFZNX05PUk1BTCBtYXBwaW5nIC4uLiBXb3VsZCBuZWVkIGEgcGlsZSBvZg0K
+PiBkaWdnaW5nLg0KDQpMb29raW5nIGJhY2sgYXQgdGhlIHBhdGNoLCB0aGUgQ0kgZW1haWwgYXQg
+dGhlIGVuZCBvZiB0aGUgdGhyZWFkIGxpc3RzDQphIGJ1bmNoIG9mIG5vdy1icm9rZW4gbGlua3Mg
+dG8gRE1FU0ctV0FSTiB0ZXN0IGZhaWx1cmVzIEkgYXNzdW1lDQpwb2ludGVkIGF0IGEgbGFyZ2Ug
+Y2h1bmsgb2YgdGhlbS4NCg0KaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvYWxsLzE2NjkxOTc1MDE3
+My4xNTU3NS4yODY0NzM2OTgwNzM1MzQ2NzMwQGVtZXJpbC5mcmVlZGVza3RvcC5vcmcvDQoNCj4g
+Pg0KPiA+ID4gWzFdaHR0cHM6Ly9naXQua2VybmVsLm9yZy9wdWIvc2NtL2xpbnV4L2tlcm5lbC9n
+aXQvdG9ydmFsZHMvbGludXguZ2l0L2NvbW1pdC9tbS92bXNjYW4uYz9pZD1mYjQ2ZTIyYTllMzg2
+M2UwOGFlZjg4MTVkZjlmMTdkMGY0YjlhZWRlDQo+ID4gPg0KPiA+ID4gRml4ZXM6IGI2MTYxNGVj
+MzE4YSAoImRtYS1idWY6IGhlYXBzOiBBZGQgQ01BIGhlYXAgdG8gZG1hYnVmIGhlYXBzIikNCj4g
+PiA+IFNpZ25lZC1vZmYtYnk6IFQuSi4gTWVyY2llcjx0am1lcmNpZXJAZ29vZ2xlLmNvbT4NCj4g
+Pg0KPiA+IEFja2VkLWJ5OiBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5j
+b20+DQoNClRoYW5rcyBDaHJpc3RpYW4uDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0t
+c2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5h
+cm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
