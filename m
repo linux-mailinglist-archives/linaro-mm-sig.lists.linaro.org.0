@@ -2,56 +2,56 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id CC13B832D6A
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jan 2024 17:44:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 02FE2832D70
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jan 2024 17:45:10 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9F01940D85
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jan 2024 16:44:31 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id EB4153EC20
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 19 Jan 2024 16:44:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0A5EE3EF1D
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jan 2024 16:45:09 +0000 (UTC)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+	by lists.linaro.org (Postfix) with ESMTPS id E7C483EC20
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 19 Jan 2024 16:44:48 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=q7kZGfi2;
-	spf=pass (lists.linaro.org: domain of conor@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=conor@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=CwrBjiJI;
+	spf=pass (lists.linaro.org: domain of conor@kernel.org designates 145.40.73.55 as permitted sender) smtp.mailfrom=conor@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 80B6861A1B;
-	Fri, 19 Jan 2024 16:44:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 27A60C433C7;
-	Fri, 19 Jan 2024 16:44:05 +0000 (UTC)
+	by sin.source.kernel.org (Postfix) with ESMTP id 6BDABCE22CB;
+	Fri, 19 Jan 2024 16:44:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B2CBBC433F1;
+	Fri, 19 Jan 2024 16:44:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1705682650;
-	bh=rRw2O8xwrDlJ45VGXmvgJkqhcUfZQFmZYjMTGiQcFo0=;
+	s=k20201202; t=1705682685;
+	bh=QRRwKq5LqVnkhPlBmuRkLsTSp0aAGvhbAw+sw+G5rKE=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=q7kZGfi2i22e2F/TmsZJrGGsmi1v+fJ9bhNNWQLcIh56t/cwSl/tPVh0WD9bi/AEj
-	 Y4toGR1r5VwBuR+dCg0x42dZdoR0WTCryYhydFUp7TQvIKMuzemhX/bYaVldx/nyAL
-	 Jq2JrYHng9RIX6ivrVNikYrqbVdI/Q11/7fETP2FWoiD/1AAQ9WTeqDUOzM0yi9h5i
-	 rtsllgRARjyaNb8br7SkPkjaDfdFzf+nyMzqXAVrTJNIBVUGB9Q/PNh0A8pxneHvpD
-	 oNzkUIUn98Ovk/z75q0iJEbuZ/lvN3a4tzxcK2s8S0f8UYpm+U+76e5T7nLoP6if+O
-	 zntyEg7xT6WBg==
-Date: Fri, 19 Jan 2024 16:44:03 +0000
+	b=CwrBjiJIY6u280JXIzDtHkBHRzWVPvj21WBA3CEh+/RxwVDkP1q76R9RcGOAEyyRK
+	 as+ANa1c06TpMg4CSg3jgI/b6cHETC2nV29hrJr/oCc2F4jC0QyHxo5j3CW/6xeQS4
+	 2/LhaIaaszvyl5bZLnRvvN3nLgKCAYbpZfcIFEEXQ350rEcRG2RgHKJCnZLeg/8v6w
+	 JtuC7tca0XPKKcYmAMa1YjrUPxYJg22gsmy55XF+vjJIA79MEhx/IPY+PiDnwlW7H9
+	 9O61Ux0CCCSlgDQ027Dydc5dIrvEJeStSAxt9wKgDpDsIe7mqT7guLB6toTJZZ90sQ
+	 XVPPRdo7GkE3w==
+Date: Fri, 19 Jan 2024 16:44:39 +0000
 From: Conor Dooley <conor@kernel.org>
 To: "Jason-JH.Lin" <jason-jh.lin@mediatek.com>
-Message-ID: <20240119-demote-fragment-624a35367a87@spud>
+Message-ID: <20240119-surrender-both-21c64f5149c4@spud>
 References: <20240119063224.29671-1-jason-jh.lin@mediatek.com>
- <20240119063224.29671-2-jason-jh.lin@mediatek.com>
+ <20240119063224.29671-3-jason-jh.lin@mediatek.com>
 MIME-Version: 1.0
-In-Reply-To: <20240119063224.29671-2-jason-jh.lin@mediatek.com>
+In-Reply-To: <20240119063224.29671-3-jason-jh.lin@mediatek.com>
 X-Rspamd-Action: no action
 X-Spamd-Result: default: False [-8.10 / 15.00];
 	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
+	BAYES_HAM(-3.00)[99.99%];
 	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+	R_SPF_ALLOW(-0.20)[+ip4:145.40.73.55:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	RCPT_COUNT_TWELVE(0.00)[20];
 	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	ASN(0.00)[asn:54825, ipnet:145.40.73.0/24, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
@@ -65,159 +65,64 @@ X-Spamd-Result: default: False [-8.10 / 15.00];
 	TO_DN_SOME(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: EB4153EC20
+X-Rspamd-Queue-Id: E7C483EC20
 X-Spamd-Bar: --------
-Message-ID-Hash: REISESM5AYIFG233ERWHHSF2YLIQTFMG
-X-Message-ID-Hash: REISESM5AYIFG233ERWHHSF2YLIQTFMG
+Message-ID-Hash: X4EHARYJMRS4J6AB3X3UJSJSBJW6HFSY
+X-Message-ID-Hash: X4EHARYJMRS4J6AB3X3UJSJSBJW6HFSY
 X-MailFrom: conor@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Chun-Kuang Hu <chunkuang.hu@kernel.org>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jason-ch Chen <jason-ch.chen@mediatek.com>, Johnson Wang <johnson.wang@mediatek.com>, Singo Chang <singo.chang@mediatek.com>, Nancy Lin <nancy.lin@mediatek.com>, Shawn Sung <shawn.sung@mediatek.com>, Project_Global_Chrome_Upstream_Group@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 1/3] dt-bindings: mailbox: Add mediatek,gce-props.yaml
+Subject: [Linaro-mm-sig] Re: [PATCH v3 2/3] dt-bindings: media: mediatek: mdp: Change mediatek,gce-events to reference
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/REISESM5AYIFG233ERWHHSF2YLIQTFMG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/X4EHARYJMRS4J6AB3X3UJSJSBJW6HFSY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============6268277731854210044=="
+Content-Type: multipart/mixed; boundary="===============8752124917307988036=="
 
 
---===============6268277731854210044==
+--===============8752124917307988036==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="5+I8isPEC3Mumo7F"
+	protocol="application/pgp-signature"; boundary="R17Or0wU+thr7YJr"
 Content-Disposition: inline
 
 
---5+I8isPEC3Mumo7F
+--R17Or0wU+thr7YJr
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Rob,
-
-On Fri, Jan 19, 2024 at 02:32:22PM +0800, Jason-JH.Lin wrote:
-> Add mediatek,gce-props.yaml for common GCE properties that is used for
-> both mailbox providers and consumers. We place the common property
-> "mediatek,gce-events" in this binding currently.
->=20
-> The property "mediatek,gce-events" is used for GCE event ID corresponding
-> to a hardware event signal sent by the hardware or a sofware driver.
-> If the mailbox providers or consumers want to manipulate the value of
-> the event ID, they need to know the specific event ID.
+On Fri, Jan 19, 2024 at 02:32:23PM +0800, Jason-JH.Lin wrote:
+> Change mediatek,gce-events property to reference mediatek,gce-props.yaml
+> instead of defining itself.
 >=20
 > Signed-off-by: Jason-JH.Lin <jason-jh.lin@mediatek.com>
-> ---
->  .../bindings/mailbox/mediatek,gce-props.yaml  | 52 +++++++++++++++++++
 
-Is bindings/mailbox the correct directory to put this in?
+Reviewed-by: Conor Dooley <conor.dooley@microchip.com>
 
->  1 file changed, 52 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/mailbox/mediatek,gc=
-e-props.yaml
->=20
-> diff --git a/Documentation/devicetree/bindings/mailbox/mediatek,gce-props=
-=2Eyaml b/Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml
-> new file mode 100644
-> index 000000000000..68b519ff089f
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml
-> @@ -0,0 +1,52 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/mailbox/mediatek,gce-props.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: MediaTek Global Command Engine Common Propertes
-> +
-> +maintainers:
-> +  - Houlong Wei <houlong.wei@mediatek.com>
-> +
-> +description:
-> +  The Global Command Engine (GCE) is an instruction based, multi-threade=
-d,
-> +  single-core command dispatcher for MediaTek hardware. The Command Queue
-> +  (CMDQ) mailbox driver is a driver for GCE, implemented using the Linux
-> +  mailbox framework. It is used to receive messages from mailbox consume=
-rs
-> +  and configure GCE to execute the specified instruction set in the mess=
-age.
-> +  We use mediatek,gce-mailbox.yaml to define the properties for CMDQ mai=
-lbox
-> +  driver. A device driver that uses the CMDQ driver to configure its har=
-dware
-> +  registers is a mailbox consumer. The mailbox consumer can request a ma=
-ilbox
-> +  channel corresponding to a GCE hardware thread to send a message, spec=
-ifying
-> +  that the GCE thread to configure its hardware. The mailbox provider ca=
-n also
-> +  reserved a mailbox channel to configure GCE hardware register by the s=
-pcific
-> +  GCE thread. This binding defines the common GCE properties for both ma=
-ilbox
-> +  provider and consumers.
-> +
-> +properties:
-> +  mediatek,gce-events:
-> +    description:
-> +      GCE has an event table in SRAM, consisting of 1024 event IDs (0~10=
-23).
-> +      Each event ID has a boolean event value with the default value 0.
-> +      The property mediatek,gce-events is used to obtain the event IDs.
-> +      Some gce-events are hardware-bound and cannot be changed by softwa=
-re.
-> +      For instance, in MT8195, when VDO0_MUTEX is stream done, VDO_MUTEX=
- will
-> +      send an event signal to GCE, setting the value of event ID 597 to =
-1.
-> +      Similarly, in MT8188, the value of event ID 574 will be set to 1 w=
-hen
-> +      VOD0_MUTEX is stream done.
-> +      On the other hand, some gce-events are not hardware-bound and can =
-be
-> +      changed by software. For example, in MT8188, we can set the value =
-of
-> +      event ID 855, which is not bound to any hardware, to 1 when the dr=
-iver
-> +      in the secure world completes a task. However, in MT8195, event ID=
- 855
-> +      is already bound to VDEC_LAT1, so we need to select another event =
-ID to
-> +      achieve the same purpose. This event ID can be any ID that is not =
-bound
-> +      to any hardware and is not yet used in any software driver.
-> +      To determine if the event ID is bound to the hardware or used by a
-> +      software driver, refer to the GCE header
-> +      include/dt-bindings/gce/<chip>-gce.h of each chip.
-> +    $ref: /schemas/types.yaml#/definitions/uint32-array
-> +    minItems: 1
-> +    maxItems: 1024
-> +
-> +additionalProperties: true
-> --=20
-> 2.18.0
->=20
+Cheers,
+Conor.
 
---5+I8isPEC3Mumo7F
+--R17Or0wU+thr7YJr
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZaqm0wAKCRB4tDGHoIJi
-0no0AQC56hKuU1fmtkZ0/SFR3pDacK2I9XoVgG8Zhv6/MlLMfwEAnf7AHDe29oll
-GZ8VqDNg5+hCVNwBevuCStPe9uK+WAw=
-=kej4
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZaqm9wAKCRB4tDGHoIJi
+0oxFAP426FO4m886BrM5F53nZ1cAx5WLgsXMYRGhDk8jJycBJAEA8wHMS3uLk1xV
+EfgQYdDiX0aOUSswVeHTyrGZXsooNgA=
+=xSy/
 -----END PGP SIGNATURE-----
 
---5+I8isPEC3Mumo7F--
+--R17Or0wU+thr7YJr--
 
---===============6268277731854210044==
+--===============8752124917307988036==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -227,4 +132,4 @@ _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
 
---===============6268277731854210044==--
+--===============8752124917307988036==--
