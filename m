@@ -2,225 +2,185 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4359E8324B0
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jan 2024 07:33:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A72E83282D
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jan 2024 11:53:52 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4AE2E40B71
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jan 2024 06:33:53 +0000 (UTC)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
-	by lists.linaro.org (Postfix) with ESMTPS id 02EBC40BE5
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 19 Jan 2024 06:32:33 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CCD7940B2C
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jan 2024 10:53:50 +0000 (UTC)
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
+	by lists.linaro.org (Postfix) with ESMTPS id 0AB4C3ED39
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 19 Jan 2024 10:53:30 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=mediatek.com header.s=dk header.b=jS8ZBYid;
-	spf=pass (lists.linaro.org: domain of jason-jh.lin@mediatek.com designates 60.244.123.138 as permitted sender) smtp.mailfrom=jason-jh.lin@mediatek.com;
-	dmarc=pass (policy=quarantine) header.from=mediatek.com
-X-UUID: 83ae82e2b69411ee9e680517dc993faa-20240119
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
-	h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From; bh=4dSkfhxXn6PJbi+ffnAzIhz6r14jeWtUuUT2IRv8Qyk=;
-	b=jS8ZBYid7FS5es2FbtmG4oJdZPD70EaPox+EqXVcuYM3QWyYMpv1oHEubIjOBw3kTD1hO0aifXg+U0Owq9KW8NIsPWlJorqgP4pZ15ZCxP5PqaGlDrsN8xvT0W3KquuCHwzDf6jeBfNZMvahOiUC/n1YurNnMW/WT66Ux5vThYY=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.36,REQID:e9dc4a66-7521-4762-904b-de9e580ced06,IP:0,U
-	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
-	release,TS:0
-X-CID-META: VersionHash:6e16cf4,CLOUDID:78ca0583-8d4f-477b-89d2-1e3bdbef96d1,B
-	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
-	RL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
-	SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 83ae82e2b69411ee9e680517dc993faa-20240119
-Received: from mtkmbs11n2.mediatek.inc [(172.21.101.187)] by mailgw01.mediatek.com
-	(envelope-from <jason-jh.lin@mediatek.com>)
-	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
-	with ESMTP id 1013493475; Fri, 19 Jan 2024 14:32:27 +0800
-Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
- MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Fri, 19 Jan 2024 14:32:25 +0800
-Received: from mtksdccf07.mediatek.inc (172.21.84.99) by
- mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Fri, 19 Jan 2024 14:32:25 +0800
-From: Jason-JH.Lin <jason-jh.lin@mediatek.com>
-To: Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski
-	<krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>,
-	Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno
-	<angelogioacchino.delregno@collabora.com>, Chun-Kuang Hu
-	<chunkuang.hu@kernel.org>
-Date: Fri, 19 Jan 2024 14:32:24 +0800
-Message-ID: <20240119063224.29671-4-jason-jh.lin@mediatek.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20240119063224.29671-1-jason-jh.lin@mediatek.com>
-References: <20240119063224.29671-1-jason-jh.lin@mediatek.com>
+	dkim=pass header.d=collabora.com header.s=mail header.b=avoTUk8W;
+	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.194 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com;
+	dmarc=pass (policy=quarantine) header.from=collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1705661608;
+	bh=CFyBN3hM6Icm5piROwxSXNJbjOUUSK0D7k+x7CC40aU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=avoTUk8WRN/wl1do+O2nS/ru8pUagCwo4abnUWi1pX+a2UJBgBv/QnAf8ajcp/IRX
+	 rn7dvUSc6EWvANhphTJmt3tJaslmfHGyXq05qKFHILrnX3hQzV8EDK5PszgnmTvIc0
+	 M5cyBnu2ZLRTuJiqyIMvEUKNkiNoaLuuxpMNbf05/XvhVJjmy7Ji9Vbo7Bft8JW14f
+	 rkJZIpie5RTHZdSfoOCkWnrJ92vqbz34HZwxTy8EGfJ9Wts8CCASh/jwXUovDOgaBm
+	 Ee3tMs5+O+EndXRO7krQWzoKAKnYRoMF3o78oqyfHjMMBbHUdJg2MbzZLNApmb8gg1
+	 ZNvAuD/5vERSA==
+Received: from [100.113.186.2] (cola.collaboradmins.com [195.201.22.229])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: kholk11)
+	by madrid.collaboradmins.com (Postfix) with ESMTPSA id 5EC20378202D;
+	Fri, 19 Jan 2024 10:53:27 +0000 (UTC)
+Message-ID: <30dca707-2b48-4309-8567-8c1297a75db5@collabora.com>
+Date: Fri, 19 Jan 2024 11:53:26 +0100
 MIME-Version: 1.0
-X-TM-AS-Product-Ver: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-AS-Result: No-10--5.235100-8.000000
-X-TMASE-MatchedRID: j0B6s1FsmQFveCKWtaLcaB+WEMjoO9WWFuNF4lJG6xtZps+y1VXzqQse
-	d7xgehs09wfh7XcCXjTizDicmrk0K9a/jIZoZyKFjtK7dC6UBnl9LQinZ4QefPcjNeVeWlqY+gt
-	Hj7OwNO2oWEe3+NERqawr18XZMKaoxDZ6sXkJle3x3B6y3foUp5pOIJQ53vqAVlxr1FJij9s=
-X-TM-AS-User-Approved-Sender: No
-X-TM-AS-User-Blocked-Sender: No
-X-TMASE-Result: 10--5.235100-8.000000
-X-TMASE-Version: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-SNTS-SMTP: 
-	6DF45B8F3966170C66AC1F178550098CEA372F1145029F48DA0A887C80C6B7DB2000:8
-X-MTK: N
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: "Jason-JH.Lin" <jason-jh.lin@mediatek.com>,
+ Rob Herring <robh+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Conor Dooley <conor+dt@kernel.org>, Matthias Brugger
+ <matthias.bgg@gmail.com>, Chun-Kuang Hu <chunkuang.hu@kernel.org>
+References: <20240119063224.29671-1-jason-jh.lin@mediatek.com>
+ <20240119063224.29671-2-jason-jh.lin@mediatek.com>
+From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+In-Reply-To: <20240119063224.29671-2-jason-jh.lin@mediatek.com>
 X-Rspamd-Action: no action
-X-Spamd-Result: default: False [0.80 / 15.00];
+X-Spamd-Result: default: False [-6.39 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	HFILTER_HOSTNAME_UNKNOWN(2.50)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[mediatek.com,quarantine];
-	RWL_MAILSPIKE_VERYGOOD(-0.20)[60.244.123.138:from];
-	R_SPF_ALLOW(-0.20)[+ip4:60.244.123.128/27:c];
-	R_DKIM_ALLOW(-0.20)[mediatek.com:s=dk];
+	DMARC_POLICY_ALLOW(-0.50)[collabora.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.194];
+	ONCE_RECEIVED(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
+	XM_UA_NO_VERSION(0.01)[];
 	ARC_NA(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
+	RCVD_COUNT_ONE(0.00)[1];
+	RCVD_TLS_ALL(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:24154, ipnet:60.244.123.0/24, country:TW];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	TAGGED_RCPT(0.00)[dt];
-	FREEMAIL_TO(0.00)[kernel.org,linaro.org,gmail.com,collabora.com];
 	TO_DN_SOME(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FREEMAIL_TO(0.00)[mediatek.com,kernel.org,linaro.org,gmail.com];
 	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_THREE(0.00)[3];
-	DKIM_TRACE(0.00)[mediatek.com:+]
+	TAGGED_RCPT(0.00)[dt];
+	FROM_EQ_ENVFROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.998];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 02EBC40BE5
-X-Spamd-Bar: /
-Message-ID-Hash: TWYWJFYNKLGSB42MJH2MO7LW5PQOFDVS
-X-Message-ID-Hash: TWYWJFYNKLGSB42MJH2MO7LW5PQOFDVS
-X-MailFrom: jason-jh.lin@mediatek.com
+X-Rspamd-Queue-Id: 0AB4C3ED39
+X-Spamd-Bar: ------
+Message-ID-Hash: TLFBKKC3DVHLDQYJXX2EYH3GYWBR2MZX
+X-Message-ID-Hash: TLFBKKC3DVHLDQYJXX2EYH3GYWBR2MZX
+X-MailFrom: angelogioacchino.delregno@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jason-ch Chen <jason-ch.chen@mediatek.com>, Johnson Wang <johnson.wang@mediatek.com>, "Jason-JH . Lin" <jason-jh.lin@mediatek.com>, Singo Chang <singo.chang@mediatek.com>, Nancy Lin <nancy.lin@mediatek.com>, Shawn Sung <shawn.sung@mediatek.com>, Project_Global_Chrome_Upstream_Group@mediatek.com
+CC: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jason-ch Chen <jason-ch.chen@mediatek.com>, Johnson Wang <johnson.wang@mediatek.com>, Singo Chang <singo.chang@mediatek.com>, Nancy Lin <nancy.lin@mediatek.com>, Shawn Sung <shawn.sung@mediatek.com>, Project_Global_Chrome_Upstream_Group@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v3 3/3] dt-bindings: soc: mediatek: Change mediatek,gce-events to refernece
+Subject: [Linaro-mm-sig] Re: [PATCH v3 1/3] dt-bindings: mailbox: Add mediatek,gce-props.yaml
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TWYWJFYNKLGSB42MJH2MO7LW5PQOFDVS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TLFBKKC3DVHLDQYJXX2EYH3GYWBR2MZX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-Change mediatek,gce-events property to reference mediatek,gce-props.yaml
-instead of defining itself.
+Il 19/01/24 07:32, Jason-JH.Lin ha scritto:
+> Add mediatek,gce-props.yaml for common GCE properties that is used for
+> both mailbox providers and consumers. We place the common property
+> "mediatek,gce-events" in this binding currently.
+> 
+> The property "mediatek,gce-events" is used for GCE event ID corresponding
+> to a hardware event signal sent by the hardware or a sofware driver.
+> If the mailbox providers or consumers want to manipulate the value of
+> the event ID, they need to know the specific event ID.
+> 
+> Signed-off-by: Jason-JH.Lin <jason-jh.lin@mediatek.com>
+> ---
+>   .../bindings/mailbox/mediatek,gce-props.yaml  | 52 +++++++++++++++++++
+>   1 file changed, 52 insertions(+)
+>   create mode 100644 Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml
+> 
+> diff --git a/Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml b/Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml
+> new file mode 100644
+> index 000000000000..68b519ff089f
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml
+> @@ -0,0 +1,52 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/mailbox/mediatek,gce-props.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: MediaTek Global Command Engine Common Propertes
+> +
+> +maintainers:
+> +  - Houlong Wei <houlong.wei@mediatek.com>
+> +
+> +description:
+> +  The Global Command Engine (GCE) is an instruction based, multi-threaded,
+> +  single-core command dispatcher for MediaTek hardware. The Command Queue
+> +  (CMDQ) mailbox driver is a driver for GCE, implemented using the Linux
+> +  mailbox framework. It is used to receive messages from mailbox consumers
+> +  and configure GCE to execute the specified instruction set in the message.
+> +  We use mediatek,gce-mailbox.yaml to define the properties for CMDQ mailbox
+> +  driver. A device driver that uses the CMDQ driver to configure its hardware
+> +  registers is a mailbox consumer. The mailbox consumer can request a mailbox
+> +  channel corresponding to a GCE hardware thread to send a message, specifying
+> +  that the GCE thread to configure its hardware. The mailbox provider can also
+> +  reserved a mailbox channel to configure GCE hardware register by the spcific
+> +  GCE thread. This binding defines the common GCE properties for both mailbox
+> +  provider and consumers.
+> +
+> +properties:
+> +  mediatek,gce-events:
+> +    description:
+> +      GCE has an event table in SRAM, consisting of 1024 event IDs (0~1023).
+> +      Each event ID has a boolean event value with the default value 0.
+> +      The property mediatek,gce-events is used to obtain the event IDs.
+> +      Some gce-events are hardware-bound and cannot be changed by software.
+> +      For instance, in MT8195, when VDO0_MUTEX is stream done, VDO_MUTEX will
+> +      send an event signal to GCE, setting the value of event ID 597 to 1.
+> +      Similarly, in MT8188, the value of event ID 574 will be set to 1 when
+> +      VOD0_MUTEX is stream done.
+> +      On the other hand, some gce-events are not hardware-bound and can be
+> +      changed by software. For example, in MT8188, we can set the value of
+> +      event ID 855, which is not bound to any hardware, to 1 when the driver
+> +      in the secure world completes a task. However, in MT8195, event ID 855
+> +      is already bound to VDEC_LAT1, so we need to select another event ID to
+> +      achieve the same purpose. This event ID can be any ID that is not bound
+> +      to any hardware and is not yet used in any software driver.
+> +      To determine if the event ID is bound to the hardware or used by a
+> +      software driver, refer to the GCE header
+> +      include/dt-bindings/gce/<chip>-gce.h of each chip.
+> +    $ref: /schemas/types.yaml#/definitions/uint32-array
+> +    minItems: 1
+> +    maxItems: 1024
 
-Signed-off-by: Jason-JH.Lin <jason-jh.lin@mediatek.com>
----
- .../bindings/soc/mediatek/mediatek,ccorr.yaml        | 12 ++++--------
- .../bindings/soc/mediatek/mediatek,mutex.yaml        | 11 +++--------
- .../bindings/soc/mediatek/mediatek,wdma.yaml         | 12 ++++--------
- 3 files changed, 11 insertions(+), 24 deletions(-)
+maxItems: 1024 seems to be a bit too many... this means that one devicetree node
+may have up to 1024 gce events, which is impossible! If a driver needed all of
+the 1024 events, this means that it's not an user of the GCE, but the GCE itself!
 
-diff --git a/Documentation/devicetree/bindings/soc/mediatek/mediatek,ccorr.yaml b/Documentation/devicetree/bindings/soc/mediatek/mediatek,ccorr.yaml
-index 4380b98b0dfe..305f2cd9f865 100644
---- a/Documentation/devicetree/bindings/soc/mediatek/mediatek,ccorr.yaml
-+++ b/Documentation/devicetree/bindings/soc/mediatek/mediatek,ccorr.yaml
-@@ -34,13 +34,6 @@ properties:
-       4 arguments defined in this property. Each GCE subsys id is mapping to
-       a client defined in the header include/dt-bindings/gce/<chip>-gce.h.
- 
--  mediatek,gce-events:
--    description:
--      The event id which is mapping to the specific hardware event signal
--      to gce. The event id is defined in the gce header
--      include/dt-bindings/gce/<chip>-gce.h of each chips.
--    $ref: /schemas/types.yaml#/definitions/uint32-array
--
-   clocks:
-     minItems: 1
- 
-@@ -51,7 +44,10 @@ required:
-   - mediatek,gce-events
-   - clocks
- 
--additionalProperties: false
-+allOf:
-+  - $ref: /schemas/mailbox/mediatek,gce-props.yaml#
-+
-+unevaluatedProperties: false
- 
- examples:
-   - |
-diff --git a/Documentation/devicetree/bindings/soc/mediatek/mediatek,mutex.yaml b/Documentation/devicetree/bindings/soc/mediatek/mediatek,mutex.yaml
-index ba2014a8725c..61cf16ce8b0b 100644
---- a/Documentation/devicetree/bindings/soc/mediatek/mediatek,mutex.yaml
-+++ b/Documentation/devicetree/bindings/soc/mediatek/mediatek,mutex.yaml
-@@ -53,13 +53,6 @@ properties:
-     items:
-       - description: MUTEX Clock
- 
--  mediatek,gce-events:
--    description:
--      The event id which is mapping to the specific hardware event signal
--      to gce. The event id is defined in the gce header
--      include/dt-bindings/gce/<chip>-gce.h of each chips.
--    $ref: /schemas/types.yaml#/definitions/uint32-array
--
-   mediatek,gce-client-reg:
-     $ref: /schemas/types.yaml#/definitions/phandle-array
-     items:
-@@ -73,6 +66,8 @@ properties:
-       a client defined in the header include/dt-bindings/gce/<chip>-gce.h.
- 
- allOf:
-+  - $ref: /schemas/mailbox/mediatek,gce-props.yaml#
-+
-   - if:
-       properties:
-         compatible:
-@@ -97,7 +92,7 @@ required:
-   - interrupts
-   - power-domains
- 
--additionalProperties: false
-+unevaluatedProperties: false
- 
- examples:
-   - |
-diff --git a/Documentation/devicetree/bindings/soc/mediatek/mediatek,wdma.yaml b/Documentation/devicetree/bindings/soc/mediatek/mediatek,wdma.yaml
-index 69afb329e5f4..d9dd4428c036 100644
---- a/Documentation/devicetree/bindings/soc/mediatek/mediatek,wdma.yaml
-+++ b/Documentation/devicetree/bindings/soc/mediatek/mediatek,wdma.yaml
-@@ -35,13 +35,6 @@ properties:
-       4 arguments defined in this property. Each GCE subsys id is mapping to
-       a client defined in the header include/dt-bindings/gce/<chip>-gce.h.
- 
--  mediatek,gce-events:
--    description:
--      The event id which is mapping to the specific hardware event signal
--      to gce. The event id is defined in the gce header
--      include/dt-bindings/gce/<chip>-gce.h of each chips.
--    $ref: /schemas/types.yaml#/definitions/uint32-array
--
-   power-domains:
-     maxItems: 1
- 
-@@ -60,7 +53,10 @@ required:
-   - clocks
-   - iommus
- 
--additionalProperties: false
-+allOf:
-+  - $ref: /schemas/mailbox/mediatek,gce-props.yaml#
-+
-+unevaluatedProperties: false
- 
- examples:
-   - |
--- 
-2.18.0
+Imagine seeing a devicetree node with 1024 array entries for mediatek,gce-events...
+
+I'd set that to a more sensible value of 32 - eventually we can extend it later,
+if ever needed.
+
+Besides, nice job about all this documentation of the GCE and its events: love it!
+
+Cheers,
+Angelo
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
