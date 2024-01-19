@@ -2,16 +2,16 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9F340832B2A
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jan 2024 15:15:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E4ADC832B2F
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jan 2024 15:15:51 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AE24C3EF1D
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jan 2024 14:15:32 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E99593EF1D
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 19 Jan 2024 14:15:50 +0000 (UTC)
 Received: from aposti.net (aposti.net [89.234.176.197])
-	by lists.linaro.org (Postfix) with ESMTPS id C9A0A43D14
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 19 Jan 2024 14:14:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id AB54444320
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 19 Jan 2024 14:14:36 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=crapouillou.net header.s=mail header.b=NaAbiMYN;
+	dkim=pass header.d=crapouillou.net header.s=mail header.b=Gt2xMOok;
 	spf=pass (lists.linaro.org: domain of paul@crapouillou.net designates 89.234.176.197 as permitted sender) smtp.mailfrom=paul@crapouillou.net;
 	dmarc=pass (policy=none) header.from=crapouillou.net
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
@@ -20,17 +20,17 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=SqXbfp61fzBHWNEqVrElLd46cr7HG/1wYVIvKKSn5jY=;
-	b=NaAbiMYNA0AFJ1EOYLqs/WsQDOJFW4kjOTy5BHngcJ3g7fQNN1JRmaxyrKqwxaeT10DLx6
-	T/t9sAqiAQOdlMHR4xSm/2PaVYL5NNRDZmkExUzP1K+6bXsSsg+vJUIOe7o66dFXNKxz1T
-	BAnGgTqNlP4vbEWAzuO4NKw3WXxW5dY=
+	bh=PFENih9XWAd70944xbCOau+9oHw/D103WR9u3LQvnx8=;
+	b=Gt2xMOokNy++NJFR1tq2AUBcDdKRgJGiiz5FSZvayuQanfDZYEBEehUt+TLwRdtKYYMQX0
+	N+tcnAwYsDx961blLSEEEMkDtaedDVVXIhQ3h6d+0+HHoJaBgCZxoP1TkzfBHso6z1qKo7
+	EDDtwRL25WF5+PCGPOhNibxKGarkIyE=
 From: Paul Cercueil <paul@crapouillou.net>
 To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	Jonathan Corbet <corbet@lwn.net>,
 	Sumit Semwal <sumit.semwal@linaro.org>,
 	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Date: Fri, 19 Jan 2024 15:13:59 +0100
-Message-ID: <20240119141402.44262-4-paul@crapouillou.net>
+Date: Fri, 19 Jan 2024 15:14:00 +0100
+Message-ID: <20240119141402.44262-5-paul@crapouillou.net>
 In-Reply-To: <20240119141402.44262-1-paul@crapouillou.net>
 References: <20240119141402.44262-1-paul@crapouillou.net>
 MIME-Version: 1.0
@@ -54,26 +54,26 @@ X-Spamd-Result: default: False [-0.00 / 15.00];
 	FROM_EQ_ENVFROM(0.00)[];
 	FREEMAIL_CC(0.00)[kernel.org,gmail.com,analog.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,crapouillou.net];
 	TAGGED_RCPT(0.00)[];
-	NEURAL_HAM(-0.00)[-0.581];
+	NEURAL_HAM(-0.00)[-0.549];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_ZERO(0.00)[0];
 	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[crapouillou.net:+]
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: C9A0A43D14
+X-Rspamd-Queue-Id: AB54444320
 X-Spamd-Bar: /
-Message-ID-Hash: TOUO55ISCPCE23T3XL54C5DJQDMHFCF5
-X-Message-ID-Hash: TOUO55ISCPCE23T3XL54C5DJQDMHFCF5
+Message-ID-Hash: PFA4JJDQZF2PX6YT7Z3FNBSMKDCC3IEY
+X-Message-ID-Hash: PFA4JJDQZF2PX6YT7Z3FNBSMKDCC3IEY
 X-MailFrom: paul@crapouillou.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Jonathan Cameron <jic23@kernel.org>, =?UTF-8?q?Nuno=20S=C3=A1?= <noname.nuno@gmail.com>, Michael Hennerich <Michael.Hennerich@analog.com>, linux-usb@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Paul Cercueil <paul@crapouillou.net>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v5 3/6] usb: gadget: Support already-mapped DMA SGs
+Subject: [Linaro-mm-sig] [PATCH v5 4/6] usb: gadget: functionfs: Factorize wait-for-endpoint code
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TOUO55ISCPCE23T3XL54C5DJQDMHFCF5/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PFA4JJDQZF2PX6YT7Z3FNBSMKDCC3IEY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -83,62 +83,93 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Add a new 'sg_was_mapped' field to the struct usb_request. This field
-can be used to indicate that the scatterlist associated to the USB
-transfer has already been mapped into the DMA space, and it does not
-have to be done internally.
+This exact same code was duplicated in two different places.
 
 Signed-off-by: Paul Cercueil <paul@crapouillou.net>
 ---
- drivers/usb/gadget/udc/core.c | 7 ++++++-
- include/linux/usb/gadget.h    | 2 ++
- 2 files changed, 8 insertions(+), 1 deletion(-)
+ drivers/usb/gadget/function/f_fs.c | 48 +++++++++++++++++-------------
+ 1 file changed, 27 insertions(+), 21 deletions(-)
 
-diff --git a/drivers/usb/gadget/udc/core.c b/drivers/usb/gadget/udc/core.c
-index d59f94464b87..9d4150124fdb 100644
---- a/drivers/usb/gadget/udc/core.c
-+++ b/drivers/usb/gadget/udc/core.c
-@@ -903,6 +903,11 @@ int usb_gadget_map_request_by_dev(struct device *dev,
- 	if (req->length == 0)
- 		return 0;
+diff --git a/drivers/usb/gadget/function/f_fs.c b/drivers/usb/gadget/function/f_fs.c
+index 6bff6cb93789..ed2a6d5fcef7 100644
+--- a/drivers/usb/gadget/function/f_fs.c
++++ b/drivers/usb/gadget/function/f_fs.c
+@@ -934,31 +934,44 @@ static ssize_t __ffs_epfile_read_data(struct ffs_epfile *epfile,
+ 	return ret;
+ }
  
-+	if (req->sg_was_mapped) {
-+		req->num_mapped_sgs = req->num_sgs;
-+		return 0;
-+	}
-+
- 	if (req->num_sgs) {
- 		int     mapped;
- 
-@@ -948,7 +953,7 @@ EXPORT_SYMBOL_GPL(usb_gadget_map_request);
- void usb_gadget_unmap_request_by_dev(struct device *dev,
- 		struct usb_request *req, int is_in)
+-static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
++static struct ffs_ep *ffs_epfile_wait_ep(struct file *file)
  {
--	if (req->length == 0)
-+	if (req->length == 0 || req->sg_was_mapped)
- 		return;
+ 	struct ffs_epfile *epfile = file->private_data;
+-	struct usb_request *req;
+ 	struct ffs_ep *ep;
+-	char *data = NULL;
+-	ssize_t ret, data_len = -EINVAL;
+-	int halt;
+-
+-	/* Are we still active? */
+-	if (WARN_ON(epfile->ffs->state != FFS_ACTIVE))
+-		return -ENODEV;
++	int ret;
  
- 	if (req->num_mapped_sgs) {
-diff --git a/include/linux/usb/gadget.h b/include/linux/usb/gadget.h
-index a771ccc038ac..c529e4e06997 100644
---- a/include/linux/usb/gadget.h
-+++ b/include/linux/usb/gadget.h
-@@ -52,6 +52,7 @@ struct usb_ep;
-  * @short_not_ok: When reading data, makes short packets be
-  *     treated as errors (queue stops advancing till cleanup).
-  * @dma_mapped: Indicates if request has been mapped to DMA (internal)
-+ * @sg_was_mapped: Set if the scatterlist has been mapped before the request
-  * @complete: Function called when request completes, so this request and
-  *	its buffer may be re-used.  The function will always be called with
-  *	interrupts disabled, and it must not sleep.
-@@ -111,6 +112,7 @@ struct usb_request {
- 	unsigned		zero:1;
- 	unsigned		short_not_ok:1;
- 	unsigned		dma_mapped:1;
-+	unsigned		sg_was_mapped:1;
+ 	/* Wait for endpoint to be enabled */
+ 	ep = epfile->ep;
+ 	if (!ep) {
+ 		if (file->f_flags & O_NONBLOCK)
+-			return -EAGAIN;
++			return ERR_PTR(-EAGAIN);
  
- 	void			(*complete)(struct usb_ep *ep,
- 					struct usb_request *req);
+ 		ret = wait_event_interruptible(
+ 				epfile->ffs->wait, (ep = epfile->ep));
+ 		if (ret)
+-			return -EINTR;
++			return ERR_PTR(-EINTR);
+ 	}
+ 
++	return ep;
++}
++
++static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
++{
++	struct ffs_epfile *epfile = file->private_data;
++	struct usb_request *req;
++	struct ffs_ep *ep;
++	char *data = NULL;
++	ssize_t ret, data_len = -EINVAL;
++	int halt;
++
++	/* Are we still active? */
++	if (WARN_ON(epfile->ffs->state != FFS_ACTIVE))
++		return -ENODEV;
++
++	ep = ffs_epfile_wait_ep(file);
++	if (IS_ERR(ep))
++		return PTR_ERR(ep);
++
+ 	/* Do we halt? */
+ 	halt = (!io_data->read == !epfile->in);
+ 	if (halt && epfile->isoc)
+@@ -1280,16 +1293,9 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
+ 		return -ENODEV;
+ 
+ 	/* Wait for endpoint to be enabled */
+-	ep = epfile->ep;
+-	if (!ep) {
+-		if (file->f_flags & O_NONBLOCK)
+-			return -EAGAIN;
+-
+-		ret = wait_event_interruptible(
+-				epfile->ffs->wait, (ep = epfile->ep));
+-		if (ret)
+-			return -EINTR;
+-	}
++	ep = ffs_epfile_wait_ep(file);
++	if (IS_ERR(ep))
++		return PTR_ERR(ep);
+ 
+ 	spin_lock_irq(&epfile->ffs->eps_lock);
+ 
 -- 
 2.43.0
 
