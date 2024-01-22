@@ -2,109 +2,87 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7266E835FCA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jan 2024 11:35:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54176835FD9
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jan 2024 11:38:27 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1D19044245
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jan 2024 10:35:13 +0000 (UTC)
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
-	by lists.linaro.org (Postfix) with ESMTPS id 409F53ED39
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 22 Jan 2024 10:35:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6013644246
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jan 2024 10:38:26 +0000 (UTC)
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
+	by lists.linaro.org (Postfix) with ESMTPS id E32D53ED39
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 22 Jan 2024 10:38:18 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=IDPdrvCg;
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.128.53 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-40e86a9fbd9so33461215e9.1
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 22 Jan 2024 02:35:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1705919704; x=1706524504; darn=lists.linaro.org;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=wUaBjTF8ze7TJQKlKI0DO8wsNhCqTacpbxQmnNsDib0=;
-        b=IDPdrvCgfcbi2qTpqYsBno/toMndlBuXIopqofS0FKkeFH0Ayv5Qb89vbaV6tA6kRN
-         BS+kLakUJYhWRIFFwN1af/Mjd9AUswLBafwa9uXjA9DL2yaTXQRuosZw27Sl0I/hZ0lz
-         Sr9/jNcEld33CSjBB1b74EEAgIrSgcrbnveRvLimP/Lvk8Y0HFIEuMHlq4GZqxC1egtu
-         nsTL5gH+ImLuywlCudNEN4WZKhxADBrxo5IVXO0vOpDg9pslf36bIAheQODBKB8USNpI
-         LXuvCWMuJhZ6VbzxYle44BAJVpdtj7IIioZa8Zdu4hGrdodt7wbOpKibKJ+QBVeIrxgb
-         QZHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1705919704; x=1706524504;
-        h=content-transfer-encoding:in-reply-to:from:references:cc:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=wUaBjTF8ze7TJQKlKI0DO8wsNhCqTacpbxQmnNsDib0=;
-        b=h4a6KfSZzIbISzPnuNOH21yB4z9dUrRzQDY2ZxnfiaEt6zvaB2mmuEZuPGkqQWLjKq
-         OnZXNI4vKPVU0Tz2kzjR22apqwDb2t3Y8EEc99FSsrdQKCpo/VSxQpIEo3a5FSphce/h
-         BV48lH2NwBIOlY+DmMJ+tgAHfxIDw7rYGl9wFMmitfE5eNyFLzC9mUYCVS2XgVEUepf3
-         uQStiVqSbRLQD2AyCjq2ns1raLAU+y9u6NXhwtHGksLU4DMrZL/mP1lxeoj0dxFHeIdC
-         jNbcQ4wuR5arLNBBQdspMeJrOmiUo11nlvLkGLB11rHT24hLTJItLzlRdi/zVapYxxRj
-         AnpA==
-X-Gm-Message-State: AOJu0YyNQhye2hYOzxudYMfCK4eez575SjaGbMk5XXYy4nLt9vqT1eHQ
-	j4dwUS0j9YFtzQ1LhsVHCzMPLVkmC90HV82WigFBQU+apf0UZwFE
-X-Google-Smtp-Source: AGHT+IEBg93W5Ic2cq8LVxb2U2hPd7pLRG/nN6Z0J3Udrdl4B95BIKuujofcMkdi+IpBnJPrzbr9Pg==
-X-Received: by 2002:a05:600c:548e:b0:40e:615f:32cc with SMTP id iv14-20020a05600c548e00b0040e615f32ccmr2257718wmb.185.1705919703859;
-        Mon, 22 Jan 2024 02:35:03 -0800 (PST)
-Received: from [10.254.108.81] (munvpn.amd.com. [165.204.72.6])
-        by smtp.gmail.com with ESMTPSA id ay2-20020a05600c1e0200b0040ead97f70dsm3088330wmb.24.2024.01.22.02.35.02
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 22 Jan 2024 02:35:03 -0800 (PST)
-Message-ID: <8035f515-591f-4c87-bf0a-23d5705d9b1c@gmail.com>
-Date: Mon, 22 Jan 2024 11:35:00 +0100
+	dkim=pass header.d=collabora.com header.s=mail header.b=ry2b84fv;
+	dmarc=pass (policy=quarantine) header.from=collabora.com;
+	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.194 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1705919897;
+	bh=QOgZWgCo219X/V3HqTTipzGqn3wTwHbInkP56JKp9LU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=ry2b84fvNF59C0fPB/rOmCrQfkB9UCYyyxjbbVblAutR13mGF1OtEsYNT4P9veMNH
+	 qNGb0ir5fSdO4/aVWMTwKNLlUU4KN+tMfMu64/tonBwHeD1VIHlseBwPfkXoaAHWoL
+	 gNMt/FELnlRq0ivLUOec/jQpoxO2qCVeXjzlOswL3NAJBM7KRH5I23LTC7FwxSwe0B
+	 4MZeDMMZYFG6QD6iFsGlOpEyACqG6GUsEXAdtXbAt7wl1yVFWDEwcExZjeJN09OoNg
+	 bb2AeCvEGX7DEYDkLgAxYVEnt8NlA8nXRW+J+OfUcYS0PFxRe/mST7BTtk5m9gOW9R
+	 dUgN3exk993+g==
+Received: from [100.113.186.2] (cola.collaboradmins.com [195.201.22.229])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: kholk11)
+	by madrid.collaboradmins.com (Postfix) with ESMTPSA id 89FCE378045F;
+	Mon, 22 Jan 2024 10:38:16 +0000 (UTC)
+Message-ID: <9c447297-2738-4b63-9da9-0d004660e65d@collabora.com>
+Date: Mon, 22 Jan 2024 11:38:15 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
-To: Paul Cercueil <paul@crapouillou.net>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-References: <20240119141402.44262-1-paul@crapouillou.net>
- <20240119141402.44262-2-paul@crapouillou.net>
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <20240119141402.44262-2-paul@crapouillou.net>
+To: Conor Dooley <conor@kernel.org>, "Jason-JH.Lin"
+ <jason-jh.lin@mediatek.com>
+References: <20240119063224.29671-1-jason-jh.lin@mediatek.com>
+ <20240119063224.29671-2-jason-jh.lin@mediatek.com>
+ <20240119-demote-fragment-624a35367a87@spud>
+From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+In-Reply-To: <20240119-demote-fragment-624a35367a87@spud>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 409F53ED39
+X-Rspamd-Queue-Id: E32D53ED39
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.49 / 15.00];
+X-Spamd-Result: default: False [-2.39 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	DMARC_POLICY_ALLOW(-0.50)[collabora.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.194];
+	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
+	ONCE_RECEIVED(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
 	XM_UA_NO_VERSION(0.01)[];
-	FREEMAIL_CC(0.00)[kernel.org,gmail.com,analog.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[14];
 	ARC_NA(0.00)[];
+	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
+	RCVD_TLS_ALL(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_ONE(0.00)[1];
 	TO_DN_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	NEURAL_HAM(-0.00)[-0.998];
-	TAGGED_RCPT(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[20];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.53:from];
-	FREEMAIL_ENVFROM(0.00)[gmail.com]
-Message-ID-Hash: IPKDEDIBS3TPNHFKYSWAVVOVCVUFODBC
-X-Message-ID-Hash: IPKDEDIBS3TPNHFKYSWAVVOVCVUFODBC
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Jonathan Cameron <jic23@kernel.org>, =?UTF-8?Q?Nuno_S=C3=A1?= <noname.nuno@gmail.com>, Michael Hennerich <Michael.Hennerich@analog.com>, linux-usb@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+	NEURAL_HAM(-0.00)[-0.874];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,linaro.org,gmail.com,vger.kernel.org,lists.infradead.org,lists.freedesktop.org,lists.linaro.org,mediatek.com];
+	TAGGED_RCPT(0.00)[dt];
+	FROM_HAS_DN(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:+]
+Message-ID-Hash: 7G4A5Z7FKQK7UQEJVSRZULJMT53QNJBV
+X-Message-ID-Hash: 7G4A5Z7FKQK7UQEJVSRZULJMT53QNJBV
+X-MailFrom: angelogioacchino.delregno@collabora.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, Chun-Kuang Hu <chunkuang.hu@kernel.org>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jason-ch Chen <jason-ch.chen@mediatek.com>, Johnson Wang <johnson.wang@mediatek.com>, Singo Chang <singo.chang@mediatek.com>, Nancy Lin <nancy.lin@mediatek.com>, Shawn Sung <shawn.sung@mediatek.com>, Project_Global_Chrome_Upstream_Group@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 1/6] dma-buf: Add dma_buf_{begin,end}_access()
+Subject: [Linaro-mm-sig] Re: [PATCH v3 1/3] dt-bindings: mailbox: Add mediatek,gce-props.yaml
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/IPKDEDIBS3TPNHFKYSWAVVOVCVUFODBC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7G4A5Z7FKQK7UQEJVSRZULJMT53QNJBV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -114,167 +92,99 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-Am 19.01.24 um 15:13 schrieb Paul Cercueil:
-> These functions should be used by device drivers when they start and
-> stop accessing the data of DMABUF. It allows DMABUF importers to cache
-> the dma_buf_attachment while ensuring that the data they want to access
-> is available for their device when the DMA transfers take place.
+Il 19/01/24 17:44, Conor Dooley ha scritto:
+> Rob,
+> 
+> On Fri, Jan 19, 2024 at 02:32:22PM +0800, Jason-JH.Lin wrote:
+>> Add mediatek,gce-props.yaml for common GCE properties that is used for
+>> both mailbox providers and consumers. We place the common property
+>> "mediatek,gce-events" in this binding currently.
+>>
+>> The property "mediatek,gce-events" is used for GCE event ID corresponding
+>> to a hardware event signal sent by the hardware or a sofware driver.
+>> If the mailbox providers or consumers want to manipulate the value of
+>> the event ID, they need to know the specific event ID.
+>>
+>> Signed-off-by: Jason-JH.Lin <jason-jh.lin@mediatek.com>
+>> ---
+>>   .../bindings/mailbox/mediatek,gce-props.yaml  | 52 +++++++++++++++++++
+> 
+> Is bindings/mailbox the correct directory to put this in?
+> 
 
-As Daniel already noted as well this is a complete no-go from the 
-DMA-buf design point of view.
+Well, the GCE is a mailbox :-)
 
-Regards,
-Christian.
+...but I get why you're asking... and I don't think that this should go to
+arm/mediatek/ as it's really just only referring to extra properties for kind of
+"special" mailbox client events...
 
->
-> Signed-off-by: Paul Cercueil <paul@crapouillou.net>
->
-> ---
-> v5: New patch
-> ---
->   drivers/dma-buf/dma-buf.c | 66 +++++++++++++++++++++++++++++++++++++++
->   include/linux/dma-buf.h   | 37 ++++++++++++++++++++++
->   2 files changed, 103 insertions(+)
->
-> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-> index 8fe5aa67b167..a8bab6c18fcd 100644
-> --- a/drivers/dma-buf/dma-buf.c
-> +++ b/drivers/dma-buf/dma-buf.c
-> @@ -830,6 +830,8 @@ static struct sg_table * __map_dma_buf(struct dma_buf_attachment *attach,
->    *     - dma_buf_mmap()
->    *     - dma_buf_begin_cpu_access()
->    *     - dma_buf_end_cpu_access()
-> + *     - dma_buf_begin_access()
-> + *     - dma_buf_end_access()
->    *     - dma_buf_map_attachment_unlocked()
->    *     - dma_buf_unmap_attachment_unlocked()
->    *     - dma_buf_vmap_unlocked()
-> @@ -1602,6 +1604,70 @@ void dma_buf_vunmap_unlocked(struct dma_buf *dmabuf, struct iosys_map *map)
->   }
->   EXPORT_SYMBOL_NS_GPL(dma_buf_vunmap_unlocked, DMA_BUF);
->   
-> +/**
-> + * @dma_buf_begin_access - Call before any hardware access from/to the DMABUF
-> + * @attach:	[in]	attachment used for hardware access
-> + * @sg_table:	[in]	scatterlist used for the DMA transfer
-> + * @direction:  [in]    direction of DMA transfer
-> + */
-> +int dma_buf_begin_access(struct dma_buf_attachment *attach,
-> +			 struct sg_table *sgt, enum dma_data_direction dir)
-> +{
-> +	struct dma_buf *dmabuf;
-> +	bool cookie;
-> +	int ret;
-> +
-> +	if (WARN_ON(!attach))
-> +		return -EINVAL;
-> +
-> +	dmabuf = attach->dmabuf;
-> +
-> +	if (!dmabuf->ops->begin_access)
-> +		return 0;
-> +
-> +	cookie = dma_fence_begin_signalling();
-> +	ret = dmabuf->ops->begin_access(attach, sgt, dir);
-> +	dma_fence_end_signalling(cookie);
-> +
-> +	if (WARN_ON_ONCE(ret))
-> +		return ret;
-> +
-> +	return 0;
-> +}
-> +EXPORT_SYMBOL_NS_GPL(dma_buf_begin_access, DMA_BUF);
-> +
-> +/**
-> + * @dma_buf_end_access - Call after any hardware access from/to the DMABUF
-> + * @attach:	[in]	attachment used for hardware access
-> + * @sg_table:	[in]	scatterlist used for the DMA transfer
-> + * @direction:  [in]    direction of DMA transfer
-> + */
-> +int dma_buf_end_access(struct dma_buf_attachment *attach,
-> +		       struct sg_table *sgt, enum dma_data_direction dir)
-> +{
-> +	struct dma_buf *dmabuf;
-> +	bool cookie;
-> +	int ret;
-> +
-> +	if (WARN_ON(!attach))
-> +		return -EINVAL;
-> +
-> +	dmabuf = attach->dmabuf;
-> +
-> +	if (!dmabuf->ops->end_access)
-> +		return 0;
-> +
-> +	cookie = dma_fence_begin_signalling();
-> +	ret = dmabuf->ops->end_access(attach, sgt, dir);
-> +	dma_fence_end_signalling(cookie);
-> +
-> +	if (WARN_ON_ONCE(ret))
-> +		return ret;
-> +
-> +	return 0;
-> +}
-> +EXPORT_SYMBOL_NS_GPL(dma_buf_end_access, DMA_BUF);
-> +
->   #ifdef CONFIG_DEBUG_FS
->   static int dma_buf_debug_show(struct seq_file *s, void *unused)
->   {
-> diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
-> index 8ff4add71f88..8ba612c7cc16 100644
-> --- a/include/linux/dma-buf.h
-> +++ b/include/linux/dma-buf.h
-> @@ -246,6 +246,38 @@ struct dma_buf_ops {
->   	 */
->   	int (*end_cpu_access)(struct dma_buf *, enum dma_data_direction);
->   
-> +	/**
-> +	 * @begin_access:
-> +	 *
-> +	 * This is called from dma_buf_begin_access() when a device driver
-> +	 * wants to access the data of the DMABUF. The exporter can use this
-> +	 * to flush/sync the caches if needed.
-> +	 *
-> +	 * This callback is optional.
-> +	 *
-> +	 * Returns:
-> +	 *
-> +	 * 0 on success or a negative error code on failure.
-> +	 */
-> +	int (*begin_access)(struct dma_buf_attachment *, struct sg_table *,
-> +			    enum dma_data_direction);
-> +
-> +	/**
-> +	 * @end_access:
-> +	 *
-> +	 * This is called from dma_buf_end_access() when a device driver is
-> +	 * done accessing the data of the DMABUF. The exporter can use this
-> +	 * to flush/sync the caches if needed.
-> +	 *
-> +	 * This callback is optional.
-> +	 *
-> +	 * Returns:
-> +	 *
-> +	 * 0 on success or a negative error code on failure.
-> +	 */
-> +	int (*end_access)(struct dma_buf_attachment *, struct sg_table *,
-> +			  enum dma_data_direction);
-> +
->   	/**
->   	 * @mmap:
->   	 *
-> @@ -606,6 +638,11 @@ void dma_buf_detach(struct dma_buf *dmabuf,
->   int dma_buf_pin(struct dma_buf_attachment *attach);
->   void dma_buf_unpin(struct dma_buf_attachment *attach);
->   
-> +int dma_buf_begin_access(struct dma_buf_attachment *attach,
-> +			 struct sg_table *sgt, enum dma_data_direction dir);
-> +int dma_buf_end_access(struct dma_buf_attachment *attach,
-> +		       struct sg_table *sgt, enum dma_data_direction dir);
-> +
->   struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info);
->   
->   int dma_buf_fd(struct dma_buf *dmabuf, int flags);
+Cheers,
+Angelo
+
+>>   1 file changed, 52 insertions(+)
+>>   create mode 100644 Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml
+>>
+>> diff --git a/Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml b/Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml
+>> new file mode 100644
+>> index 000000000000..68b519ff089f
+>> --- /dev/null
+>> +++ b/Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml
+>> @@ -0,0 +1,52 @@
+>> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+>> +%YAML 1.2
+>> +---
+>> +$id: http://devicetree.org/schemas/mailbox/mediatek,gce-props.yaml#
+>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+>> +
+>> +title: MediaTek Global Command Engine Common Propertes
+>> +
+>> +maintainers:
+>> +  - Houlong Wei <houlong.wei@mediatek.com>
+>> +
+>> +description:
+>> +  The Global Command Engine (GCE) is an instruction based, multi-threaded,
+>> +  single-core command dispatcher for MediaTek hardware. The Command Queue
+>> +  (CMDQ) mailbox driver is a driver for GCE, implemented using the Linux
+>> +  mailbox framework. It is used to receive messages from mailbox consumers
+>> +  and configure GCE to execute the specified instruction set in the message.
+>> +  We use mediatek,gce-mailbox.yaml to define the properties for CMDQ mailbox
+>> +  driver. A device driver that uses the CMDQ driver to configure its hardware
+>> +  registers is a mailbox consumer. The mailbox consumer can request a mailbox
+>> +  channel corresponding to a GCE hardware thread to send a message, specifying
+>> +  that the GCE thread to configure its hardware. The mailbox provider can also
+>> +  reserved a mailbox channel to configure GCE hardware register by the spcific
+>> +  GCE thread. This binding defines the common GCE properties for both mailbox
+>> +  provider and consumers.
+>> +
+>> +properties:
+>> +  mediatek,gce-events:
+>> +    description:
+>> +      GCE has an event table in SRAM, consisting of 1024 event IDs (0~1023).
+>> +      Each event ID has a boolean event value with the default value 0.
+>> +      The property mediatek,gce-events is used to obtain the event IDs.
+>> +      Some gce-events are hardware-bound and cannot be changed by software.
+>> +      For instance, in MT8195, when VDO0_MUTEX is stream done, VDO_MUTEX will
+>> +      send an event signal to GCE, setting the value of event ID 597 to 1.
+>> +      Similarly, in MT8188, the value of event ID 574 will be set to 1 when
+>> +      VOD0_MUTEX is stream done.
+>> +      On the other hand, some gce-events are not hardware-bound and can be
+>> +      changed by software. For example, in MT8188, we can set the value of
+>> +      event ID 855, which is not bound to any hardware, to 1 when the driver
+>> +      in the secure world completes a task. However, in MT8195, event ID 855
+>> +      is already bound to VDEC_LAT1, so we need to select another event ID to
+>> +      achieve the same purpose. This event ID can be any ID that is not bound
+>> +      to any hardware and is not yet used in any software driver.
+>> +      To determine if the event ID is bound to the hardware or used by a
+>> +      software driver, refer to the GCE header
+>> +      include/dt-bindings/gce/<chip>-gce.h of each chip.
+>> +    $ref: /schemas/types.yaml#/definitions/uint32-array
+>> +    minItems: 1
+>> +    maxItems: 1024
+>> +
+>> +additionalProperties: true
+>> -- 
+>> 2.18.0
+>>
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
