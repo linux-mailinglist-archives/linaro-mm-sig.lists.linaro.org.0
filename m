@@ -2,190 +2,196 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54176835FD9
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jan 2024 11:38:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0ADF836041
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jan 2024 12:02:05 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6013644246
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jan 2024 10:38:26 +0000 (UTC)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
-	by lists.linaro.org (Postfix) with ESMTPS id E32D53ED39
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 22 Jan 2024 10:38:18 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9C38640F24
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jan 2024 11:02:04 +0000 (UTC)
+Received: from aposti.net (aposti.net [89.234.176.197])
+	by lists.linaro.org (Postfix) with ESMTPS id 66AED3EB96
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 22 Jan 2024 11:01:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=ry2b84fv;
-	dmarc=pass (policy=quarantine) header.from=collabora.com;
-	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.194 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1705919897;
-	bh=QOgZWgCo219X/V3HqTTipzGqn3wTwHbInkP56JKp9LU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=ry2b84fvNF59C0fPB/rOmCrQfkB9UCYyyxjbbVblAutR13mGF1OtEsYNT4P9veMNH
-	 qNGb0ir5fSdO4/aVWMTwKNLlUU4KN+tMfMu64/tonBwHeD1VIHlseBwPfkXoaAHWoL
-	 gNMt/FELnlRq0ivLUOec/jQpoxO2qCVeXjzlOswL3NAJBM7KRH5I23LTC7FwxSwe0B
-	 4MZeDMMZYFG6QD6iFsGlOpEyACqG6GUsEXAdtXbAt7wl1yVFWDEwcExZjeJN09OoNg
-	 bb2AeCvEGX7DEYDkLgAxYVEnt8NlA8nXRW+J+OfUcYS0PFxRe/mST7BTtk5m9gOW9R
-	 dUgN3exk993+g==
-Received: from [100.113.186.2] (cola.collaboradmins.com [195.201.22.229])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: kholk11)
-	by madrid.collaboradmins.com (Postfix) with ESMTPSA id 89FCE378045F;
-	Mon, 22 Jan 2024 10:38:16 +0000 (UTC)
-Message-ID: <9c447297-2738-4b63-9da9-0d004660e65d@collabora.com>
-Date: Mon, 22 Jan 2024 11:38:15 +0100
+	dkim=pass header.d=crapouillou.net header.s=mail header.b=vAc8dA6p;
+	dmarc=pass (policy=none) header.from=crapouillou.net;
+	spf=pass (lists.linaro.org: domain of paul@crapouillou.net designates 89.234.176.197 as permitted sender) smtp.mailfrom=paul@crapouillou.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
+	s=mail; t=1705921309;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=733fDA1vC7zKwBluwpjfcq4TVRYfPXDC67NVY7T7aqQ=;
+	b=vAc8dA6pC47aVOf5mjHAD4DKA4dRwEc+4dmRDZXuXgcDAjk3lQmBQyWLIwZ5ERx4utx0Nw
+	GmrQH4cNNE5vM4boQ9Y3Sr2mh0SksOhCzqErNeuXRj+qkZFOizrQ8lJ3F9W8opk0sqCYPy
+	MM6p+RcEXW2zqbDh8/mClEB2B4V2X14=
+Message-ID: <442f69f31ece6d441f3dc41c3dfeb4dcf52c00b8.camel@crapouillou.net>
+From: Paul Cercueil <paul@crapouillou.net>
+To: Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jonathan Corbet
+ <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>,  Christian
+ =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Date: Mon, 22 Jan 2024 12:01:47 +0100
+In-Reply-To: <8035f515-591f-4c87-bf0a-23d5705d9b1c@gmail.com>
+References: <20240119141402.44262-1-paul@crapouillou.net>
+	 <20240119141402.44262-2-paul@crapouillou.net>
+	 <8035f515-591f-4c87-bf0a-23d5705d9b1c@gmail.com>
+Autocrypt: addr=paul@crapouillou.net; prefer-encrypt=mutual;
+ keydata=mQENBF0KhcEBCADkfmrzdTOp/gFOMQX0QwKE2WgeCJiHPWkpEuPH81/HB2dpjPZNW03ZMLQfECbbaEkdbN4YnPfXgcc1uBe5mwOAPV1MBlaZcEt4M67iYQwSNrP7maPS3IaQJ18ES8JJ5Uf5UzFZaUawgH+oipYGW+v31cX6L3k+dGsPRM0Pyo0sQt52fsopNPZ9iag0iY7dGNuKenaEqkYNjwEgTtNz8dt6s3hMpHIKZFL3OhAGi88wF/21isv0zkF4J0wlf9gYUTEEY3Eulx80PTVqGIcHZzfavlWIdzhe+rxHTDGVwseR2Y1WjgFGQ2F+vXetAB8NEeygXee+i9nY5qt9c07m8mzjABEBAAG0JFBhdWwgQ2VyY3VlaWwgPHBhdWxAY3JhcG91aWxsb3UubmV0PokBTgQTAQoAOBYhBNdHYd8OeCBwpMuVxnPua9InSr1BBQJdCoXBAhsDBQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEHPua9InSr1BgvIH/0kLyrI3V0f33a6D3BJwc1grbygPVYGuC5l5eMnAI+rDmLR19E2yvibRpgUc87NmPEQPpbbtAZt8On/2WZoE5OIPdlId/AHNpdgAtGXo0ZX4LGeVPjxjdkbrKVHxbcdcnY+zzaFglpbVSvp76pxqgVg8PgxkAAeeJV+ET4t0823Gz2HzCL/6JZhvKAEtHVulOWoBh368SYdolp1TSfORWmHzvQiCCCA+j0cMkYVGzIQzEQhX7Urf9N/nhU5/SGLFEi9DcBfXoGzhyQyLXflhJtKm3XGB1K/pPulbKaPcKAl6rIDWPuFpHkSbmZ9r4KFlBwgAhlGy6nqP7O3u7q23hRW5AQ0EXQqFwQEIAMo+MgvYHsyjX3Ja4Oolg1Txzm8woj30ch2nACFCqaO0R/1kLj2VVeLrDyQUOlXx9PD6IQI4M8wy8m0sR4wV2p/g/paw7k65cjzYYLh+FdLNyO7IW
+	YXndJO+wDPi3aK/YKUYepqlP+QsmaHNYNdXEQDRKqNfJg8t0f5rfzp9ryxd1tCnbV+tG8VHQWiZXNqN7062DygSNXFUfQ0vZ3J2D4oAcIAEXTymRQ2+hr3Hf7I61KMHWeSkCvCG2decTYsHlw5Erix/jYWqVOtX0roOOLqWkqpQQJWtU+biWrAksmFmCp5fXIg1Nlg39v21xCXBGxJkxyTYuhdWyu1yDQ+LSIUAEQEAAYkBNgQYAQoAIBYhBNdHYd8OeCBwpMuVxnPua9InSr1BBQJdCoXBAhsMAAoJEHPua9InSr1B4wsH/Az767YCT0FSsMNt1jkkdLCBi7nY0GTW+PLP1a4zvVqFMo/vD6uz1ZflVTUAEvcTi3VHYZrlgjcxmcGu239oruqUS8Qy/xgZBp9KF0NTWQSl1iBfVbIU5VV1vHS6r77W5x0qXgfvAUWOH4gmN3MnF01SH2zMcLiaUGF+mcwl15rHbjnT3Nu2399aSE6cep86igfCAyFUOXjYEGlJy+c6UyT+DUylpjQg0nl8MlZ/7Whg2fAU9+FALIbQYQzGlT4c71SibR9T741jnegHhlmV4WXXUD6roFt54t0MSAFSVxzG8mLcSjR2cLUJ3NIPXixYUSEn3tQhfZj07xIIjWxAYZo=
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Conor Dooley <conor@kernel.org>, "Jason-JH.Lin"
- <jason-jh.lin@mediatek.com>
-References: <20240119063224.29671-1-jason-jh.lin@mediatek.com>
- <20240119063224.29671-2-jason-jh.lin@mediatek.com>
- <20240119-demote-fragment-624a35367a87@spud>
-From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
-In-Reply-To: <20240119-demote-fragment-624a35367a87@spud>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: E32D53ED39
+X-Rspamd-Queue-Id: 66AED3EB96
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.39 / 15.00];
+X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.194];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
-	ONCE_RECEIVED(0.10)[];
+	DMARC_POLICY_ALLOW(-0.50)[crapouillou.net,none];
+	R_DKIM_ALLOW(-0.20)[crapouillou.net:s=mail];
+	R_SPF_ALLOW(-0.20)[+a];
 	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
 	ARC_NA(0.00)[];
-	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
-	RCVD_TLS_ALL(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_ONE(0.00)[1];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	NEURAL_HAM(-0.00)[-0.874];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:203432, ipnet:89.234.176.0/23, country:FR];
+	TAGGED_RCPT(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	RCVD_COUNT_ZERO(0.00)[0];
 	MID_RHS_MATCH_FROM(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,linaro.org,gmail.com,vger.kernel.org,lists.infradead.org,lists.freedesktop.org,lists.linaro.org,mediatek.com];
-	TAGGED_RCPT(0.00)[dt];
+	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,gmail.com,analog.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	FREEMAIL_TO(0.00)[gmail.com,linuxfoundation.org,lwn.net,linaro.org,amd.com];
 	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:+]
-Message-ID-Hash: 7G4A5Z7FKQK7UQEJVSRZULJMT53QNJBV
-X-Message-ID-Hash: 7G4A5Z7FKQK7UQEJVSRZULJMT53QNJBV
-X-MailFrom: angelogioacchino.delregno@collabora.com
+	NEURAL_HAM(-0.00)[-1.000];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[crapouillou.net:+]
+Message-ID-Hash: GK4LTFUQKC4KYGSF5CVYXG4WLTRG5AO3
+X-Message-ID-Hash: GK4LTFUQKC4KYGSF5CVYXG4WLTRG5AO3
+X-MailFrom: paul@crapouillou.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, Chun-Kuang Hu <chunkuang.hu@kernel.org>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jason-ch Chen <jason-ch.chen@mediatek.com>, Johnson Wang <johnson.wang@mediatek.com>, Singo Chang <singo.chang@mediatek.com>, Nancy Lin <nancy.lin@mediatek.com>, Shawn Sung <shawn.sung@mediatek.com>, Project_Global_Chrome_Upstream_Group@mediatek.com
+CC: Jonathan Cameron <jic23@kernel.org>, Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>, Michael Hennerich <Michael.Hennerich@analog.com>, linux-usb@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 1/3] dt-bindings: mailbox: Add mediatek,gce-props.yaml
+Subject: [Linaro-mm-sig] Re: [PATCH v5 1/6] dma-buf: Add dma_buf_{begin,end}_access()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7G4A5Z7FKQK7UQEJVSRZULJMT53QNJBV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GK4LTFUQKC4KYGSF5CVYXG4WLTRG5AO3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Il 19/01/24 17:44, Conor Dooley ha scritto:
-> Rob,
-> 
-> On Fri, Jan 19, 2024 at 02:32:22PM +0800, Jason-JH.Lin wrote:
->> Add mediatek,gce-props.yaml for common GCE properties that is used for
->> both mailbox providers and consumers. We place the common property
->> "mediatek,gce-events" in this binding currently.
->>
->> The property "mediatek,gce-events" is used for GCE event ID corresponding
->> to a hardware event signal sent by the hardware or a sofware driver.
->> If the mailbox providers or consumers want to manipulate the value of
->> the event ID, they need to know the specific event ID.
->>
->> Signed-off-by: Jason-JH.Lin <jason-jh.lin@mediatek.com>
->> ---
->>   .../bindings/mailbox/mediatek,gce-props.yaml  | 52 +++++++++++++++++++
-> 
-> Is bindings/mailbox the correct directory to put this in?
-> 
-
-Well, the GCE is a mailbox :-)
-
-...but I get why you're asking... and I don't think that this should go to
-arm/mediatek/ as it's really just only referring to extra properties for kind of
-"special" mailbox client events...
-
-Cheers,
-Angelo
-
->>   1 file changed, 52 insertions(+)
->>   create mode 100644 Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml
->>
->> diff --git a/Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml b/Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml
->> new file mode 100644
->> index 000000000000..68b519ff089f
->> --- /dev/null
->> +++ b/Documentation/devicetree/bindings/mailbox/mediatek,gce-props.yaml
->> @@ -0,0 +1,52 @@
->> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
->> +%YAML 1.2
->> +---
->> +$id: http://devicetree.org/schemas/mailbox/mediatek,gce-props.yaml#
->> +$schema: http://devicetree.org/meta-schemas/core.yaml#
->> +
->> +title: MediaTek Global Command Engine Common Propertes
->> +
->> +maintainers:
->> +  - Houlong Wei <houlong.wei@mediatek.com>
->> +
->> +description:
->> +  The Global Command Engine (GCE) is an instruction based, multi-threaded,
->> +  single-core command dispatcher for MediaTek hardware. The Command Queue
->> +  (CMDQ) mailbox driver is a driver for GCE, implemented using the Linux
->> +  mailbox framework. It is used to receive messages from mailbox consumers
->> +  and configure GCE to execute the specified instruction set in the message.
->> +  We use mediatek,gce-mailbox.yaml to define the properties for CMDQ mailbox
->> +  driver. A device driver that uses the CMDQ driver to configure its hardware
->> +  registers is a mailbox consumer. The mailbox consumer can request a mailbox
->> +  channel corresponding to a GCE hardware thread to send a message, specifying
->> +  that the GCE thread to configure its hardware. The mailbox provider can also
->> +  reserved a mailbox channel to configure GCE hardware register by the spcific
->> +  GCE thread. This binding defines the common GCE properties for both mailbox
->> +  provider and consumers.
->> +
->> +properties:
->> +  mediatek,gce-events:
->> +    description:
->> +      GCE has an event table in SRAM, consisting of 1024 event IDs (0~1023).
->> +      Each event ID has a boolean event value with the default value 0.
->> +      The property mediatek,gce-events is used to obtain the event IDs.
->> +      Some gce-events are hardware-bound and cannot be changed by software.
->> +      For instance, in MT8195, when VDO0_MUTEX is stream done, VDO_MUTEX will
->> +      send an event signal to GCE, setting the value of event ID 597 to 1.
->> +      Similarly, in MT8188, the value of event ID 574 will be set to 1 when
->> +      VOD0_MUTEX is stream done.
->> +      On the other hand, some gce-events are not hardware-bound and can be
->> +      changed by software. For example, in MT8188, we can set the value of
->> +      event ID 855, which is not bound to any hardware, to 1 when the driver
->> +      in the secure world completes a task. However, in MT8195, event ID 855
->> +      is already bound to VDEC_LAT1, so we need to select another event ID to
->> +      achieve the same purpose. This event ID can be any ID that is not bound
->> +      to any hardware and is not yet used in any software driver.
->> +      To determine if the event ID is bound to the hardware or used by a
->> +      software driver, refer to the GCE header
->> +      include/dt-bindings/gce/<chip>-gce.h of each chip.
->> +    $ref: /schemas/types.yaml#/definitions/uint32-array
->> +    minItems: 1
->> +    maxItems: 1024
->> +
->> +additionalProperties: true
->> -- 
->> 2.18.0
->>
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SGkgQ2hyaXN0aWFuLA0KDQpMZSBsdW5kaSAyMiBqYW52aWVyIDIwMjQgw6AgMTE6MzUgKzAxMDAs
+IENocmlzdGlhbiBLw7ZuaWcgYSDDqWNyaXTCoDoNCj4gQW0gMTkuMDEuMjQgdW0gMTU6MTMgc2No
+cmllYiBQYXVsIENlcmN1ZWlsOg0KPiA+IFRoZXNlIGZ1bmN0aW9ucyBzaG91bGQgYmUgdXNlZCBi
+eSBkZXZpY2UgZHJpdmVycyB3aGVuIHRoZXkgc3RhcnQNCj4gPiBhbmQNCj4gPiBzdG9wIGFjY2Vz
+c2luZyB0aGUgZGF0YSBvZiBETUFCVUYuIEl0IGFsbG93cyBETUFCVUYgaW1wb3J0ZXJzIHRvDQo+
+ID4gY2FjaGUNCj4gPiB0aGUgZG1hX2J1Zl9hdHRhY2htZW50IHdoaWxlIGVuc3VyaW5nIHRoYXQg
+dGhlIGRhdGEgdGhleSB3YW50IHRvDQo+ID4gYWNjZXNzDQo+ID4gaXMgYXZhaWxhYmxlIGZvciB0
+aGVpciBkZXZpY2Ugd2hlbiB0aGUgRE1BIHRyYW5zZmVycyB0YWtlIHBsYWNlLg0KPiANCj4gQXMg
+RGFuaWVsIGFscmVhZHkgbm90ZWQgYXMgd2VsbCB0aGlzIGlzIGEgY29tcGxldGUgbm8tZ28gZnJv
+bSB0aGUgDQo+IERNQS1idWYgZGVzaWduIHBvaW50IG9mIHZpZXcuDQoNCldoYXQgZG8geW91IG1l
+YW4gImFzIERhbmllbCBhbHJlYWR5IG5vdGVkIj8gSXQgd2FzIGhpbSB3aG8gc3VnZ2VzdGVkDQp0
+aGlzLg0KDQo+IA0KPiBSZWdhcmRzLA0KPiBDaHJpc3RpYW4uDQoNCkNoZWVycywNCi1QYXVsDQoN
+Cj4gDQo+ID4gDQo+ID4gU2lnbmVkLW9mZi1ieTogUGF1bCBDZXJjdWVpbCA8cGF1bEBjcmFwb3Vp
+bGxvdS5uZXQ+DQo+ID4gDQo+ID4gLS0tDQo+ID4gdjU6IE5ldyBwYXRjaA0KPiA+IC0tLQ0KPiA+
+IMKgIGRyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMgfCA2Ng0KPiA+ICsrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKw0KPiA+IMKgIGluY2x1ZGUvbGludXgvZG1hLWJ1Zi5owqDC
+oCB8IDM3ICsrKysrKysrKysrKysrKysrKysrKysNCj4gPiDCoCAyIGZpbGVzIGNoYW5nZWQsIDEw
+MyBpbnNlcnRpb25zKCspDQo+ID4gDQo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9k
+bWEtYnVmLmMgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQo+ID4gaW5kZXggOGZlNWFhNjdi
+MTY3Li5hOGJhYjZjMThmY2QgMTAwNjQ0DQo+ID4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1i
+dWYuYw0KPiA+ICsrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMNCj4gPiBAQCAtODMwLDYg
+KzgzMCw4IEBAIHN0YXRpYyBzdHJ1Y3Qgc2dfdGFibGUgKiBfX21hcF9kbWFfYnVmKHN0cnVjdA0K
+PiA+IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNoLA0KPiA+IMKgwqAgKsKgwqDCoMKgIC0gZG1h
+X2J1Zl9tbWFwKCkNCj4gPiDCoMKgICrCoMKgwqDCoCAtIGRtYV9idWZfYmVnaW5fY3B1X2FjY2Vz
+cygpDQo+ID4gwqDCoCAqwqDCoMKgwqAgLSBkbWFfYnVmX2VuZF9jcHVfYWNjZXNzKCkNCj4gPiAr
+ICrCoMKgwqDCoCAtIGRtYV9idWZfYmVnaW5fYWNjZXNzKCkNCj4gPiArICrCoMKgwqDCoCAtIGRt
+YV9idWZfZW5kX2FjY2VzcygpDQo+ID4gwqDCoCAqwqDCoMKgwqAgLSBkbWFfYnVmX21hcF9hdHRh
+Y2htZW50X3VubG9ja2VkKCkNCj4gPiDCoMKgICrCoMKgwqDCoCAtIGRtYV9idWZfdW5tYXBfYXR0
+YWNobWVudF91bmxvY2tlZCgpDQo+ID4gwqDCoCAqwqDCoMKgwqAgLSBkbWFfYnVmX3ZtYXBfdW5s
+b2NrZWQoKQ0KPiA+IEBAIC0xNjAyLDYgKzE2MDQsNzAgQEAgdm9pZCBkbWFfYnVmX3Z1bm1hcF91
+bmxvY2tlZChzdHJ1Y3QgZG1hX2J1Zg0KPiA+ICpkbWFidWYsIHN0cnVjdCBpb3N5c19tYXAgKm1h
+cCkNCj4gPiDCoCB9DQo+ID4gwqAgRVhQT1JUX1NZTUJPTF9OU19HUEwoZG1hX2J1Zl92dW5tYXBf
+dW5sb2NrZWQsIERNQV9CVUYpOw0KPiA+IMKgIA0KPiA+ICsvKioNCj4gPiArICogQGRtYV9idWZf
+YmVnaW5fYWNjZXNzIC0gQ2FsbCBiZWZvcmUgYW55IGhhcmR3YXJlIGFjY2VzcyBmcm9tL3RvDQo+
+ID4gdGhlIERNQUJVRg0KPiA+ICsgKiBAYXR0YWNoOglbaW5dCWF0dGFjaG1lbnQgdXNlZCBmb3Ig
+aGFyZHdhcmUgYWNjZXNzDQo+ID4gKyAqIEBzZ190YWJsZToJW2luXQlzY2F0dGVybGlzdCB1c2Vk
+IGZvciB0aGUgRE1BIHRyYW5zZmVyDQo+ID4gKyAqIEBkaXJlY3Rpb246wqAgW2luXcKgwqDCoCBk
+aXJlY3Rpb24gb2YgRE1BIHRyYW5zZmVyDQo+ID4gKyAqLw0KPiA+ICtpbnQgZG1hX2J1Zl9iZWdp
+bl9hY2Nlc3Moc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNoLA0KPiA+ICsJCQkgc3Ry
+dWN0IHNnX3RhYmxlICpzZ3QsIGVudW0NCj4gPiBkbWFfZGF0YV9kaXJlY3Rpb24gZGlyKQ0KPiA+
+ICt7DQo+ID4gKwlzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmOw0KPiA+ICsJYm9vbCBjb29raWU7DQo+
+ID4gKwlpbnQgcmV0Ow0KPiA+ICsNCj4gPiArCWlmIChXQVJOX09OKCFhdHRhY2gpKQ0KPiA+ICsJ
+CXJldHVybiAtRUlOVkFMOw0KPiA+ICsNCj4gPiArCWRtYWJ1ZiA9IGF0dGFjaC0+ZG1hYnVmOw0K
+PiA+ICsNCj4gPiArCWlmICghZG1hYnVmLT5vcHMtPmJlZ2luX2FjY2VzcykNCj4gPiArCQlyZXR1
+cm4gMDsNCj4gPiArDQo+ID4gKwljb29raWUgPSBkbWFfZmVuY2VfYmVnaW5fc2lnbmFsbGluZygp
+Ow0KPiA+ICsJcmV0ID0gZG1hYnVmLT5vcHMtPmJlZ2luX2FjY2VzcyhhdHRhY2gsIHNndCwgZGly
+KTsNCj4gPiArCWRtYV9mZW5jZV9lbmRfc2lnbmFsbGluZyhjb29raWUpOw0KPiA+ICsNCj4gPiAr
+CWlmIChXQVJOX09OX09OQ0UocmV0KSkNCj4gPiArCQlyZXR1cm4gcmV0Ow0KPiA+ICsNCj4gPiAr
+CXJldHVybiAwOw0KPiA+ICt9DQo+ID4gK0VYUE9SVF9TWU1CT0xfTlNfR1BMKGRtYV9idWZfYmVn
+aW5fYWNjZXNzLCBETUFfQlVGKTsNCj4gPiArDQo+ID4gKy8qKg0KPiA+ICsgKiBAZG1hX2J1Zl9l
+bmRfYWNjZXNzIC0gQ2FsbCBhZnRlciBhbnkgaGFyZHdhcmUgYWNjZXNzIGZyb20vdG8NCj4gPiB0
+aGUgRE1BQlVGDQo+ID4gKyAqIEBhdHRhY2g6CVtpbl0JYXR0YWNobWVudCB1c2VkIGZvciBoYXJk
+d2FyZSBhY2Nlc3MNCj4gPiArICogQHNnX3RhYmxlOglbaW5dCXNjYXR0ZXJsaXN0IHVzZWQgZm9y
+IHRoZSBETUEgdHJhbnNmZXINCj4gPiArICogQGRpcmVjdGlvbjrCoCBbaW5dwqDCoMKgIGRpcmVj
+dGlvbiBvZiBETUEgdHJhbnNmZXINCj4gPiArICovDQo+ID4gK2ludCBkbWFfYnVmX2VuZF9hY2Nl
+c3Moc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNoLA0KPiA+ICsJCcKgwqDCoMKgwqDC
+oCBzdHJ1Y3Qgc2dfdGFibGUgKnNndCwgZW51bQ0KPiA+IGRtYV9kYXRhX2RpcmVjdGlvbiBkaXIp
+DQo+ID4gK3sNCj4gPiArCXN0cnVjdCBkbWFfYnVmICpkbWFidWY7DQo+ID4gKwlib29sIGNvb2tp
+ZTsNCj4gPiArCWludCByZXQ7DQo+ID4gKw0KPiA+ICsJaWYgKFdBUk5fT04oIWF0dGFjaCkpDQo+
+ID4gKwkJcmV0dXJuIC1FSU5WQUw7DQo+ID4gKw0KPiA+ICsJZG1hYnVmID0gYXR0YWNoLT5kbWFi
+dWY7DQo+ID4gKw0KPiA+ICsJaWYgKCFkbWFidWYtPm9wcy0+ZW5kX2FjY2VzcykNCj4gPiArCQly
+ZXR1cm4gMDsNCj4gPiArDQo+ID4gKwljb29raWUgPSBkbWFfZmVuY2VfYmVnaW5fc2lnbmFsbGlu
+ZygpOw0KPiA+ICsJcmV0ID0gZG1hYnVmLT5vcHMtPmVuZF9hY2Nlc3MoYXR0YWNoLCBzZ3QsIGRp
+cik7DQo+ID4gKwlkbWFfZmVuY2VfZW5kX3NpZ25hbGxpbmcoY29va2llKTsNCj4gPiArDQo+ID4g
+KwlpZiAoV0FSTl9PTl9PTkNFKHJldCkpDQo+ID4gKwkJcmV0dXJuIHJldDsNCj4gPiArDQo+ID4g
+KwlyZXR1cm4gMDsNCj4gPiArfQ0KPiA+ICtFWFBPUlRfU1lNQk9MX05TX0dQTChkbWFfYnVmX2Vu
+ZF9hY2Nlc3MsIERNQV9CVUYpOw0KPiA+ICsNCj4gPiDCoCAjaWZkZWYgQ09ORklHX0RFQlVHX0ZT
+DQo+ID4gwqAgc3RhdGljIGludCBkbWFfYnVmX2RlYnVnX3Nob3coc3RydWN0IHNlcV9maWxlICpz
+LCB2b2lkICp1bnVzZWQpDQo+ID4gwqAgew0KPiA+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4
+L2RtYS1idWYuaCBiL2luY2x1ZGUvbGludXgvZG1hLWJ1Zi5oDQo+ID4gaW5kZXggOGZmNGFkZDcx
+Zjg4Li44YmE2MTJjN2NjMTYgMTAwNjQ0DQo+ID4gLS0tIGEvaW5jbHVkZS9saW51eC9kbWEtYnVm
+LmgNCj4gPiArKysgYi9pbmNsdWRlL2xpbnV4L2RtYS1idWYuaA0KPiA+IEBAIC0yNDYsNiArMjQ2
+LDM4IEBAIHN0cnVjdCBkbWFfYnVmX29wcyB7DQo+ID4gwqDCoAkgKi8NCj4gPiDCoMKgCWludCAo
+KmVuZF9jcHVfYWNjZXNzKShzdHJ1Y3QgZG1hX2J1ZiAqLCBlbnVtDQo+ID4gZG1hX2RhdGFfZGly
+ZWN0aW9uKTsNCj4gPiDCoCANCj4gPiArCS8qKg0KPiA+ICsJICogQGJlZ2luX2FjY2VzczoNCj4g
+PiArCSAqDQo+ID4gKwkgKiBUaGlzIGlzIGNhbGxlZCBmcm9tIGRtYV9idWZfYmVnaW5fYWNjZXNz
+KCkgd2hlbiBhDQo+ID4gZGV2aWNlIGRyaXZlcg0KPiA+ICsJICogd2FudHMgdG8gYWNjZXNzIHRo
+ZSBkYXRhIG9mIHRoZSBETUFCVUYuIFRoZSBleHBvcnRlcg0KPiA+IGNhbiB1c2UgdGhpcw0KPiA+
+ICsJICogdG8gZmx1c2gvc3luYyB0aGUgY2FjaGVzIGlmIG5lZWRlZC4NCj4gPiArCSAqDQo+ID4g
+KwkgKiBUaGlzIGNhbGxiYWNrIGlzIG9wdGlvbmFsLg0KPiA+ICsJICoNCj4gPiArCSAqIFJldHVy
+bnM6DQo+ID4gKwkgKg0KPiA+ICsJICogMCBvbiBzdWNjZXNzIG9yIGEgbmVnYXRpdmUgZXJyb3Ig
+Y29kZSBvbiBmYWlsdXJlLg0KPiA+ICsJICovDQo+ID4gKwlpbnQgKCpiZWdpbl9hY2Nlc3MpKHN0
+cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKiwgc3RydWN0DQo+ID4gc2dfdGFibGUgKiwNCj4gPiAr
+CQkJwqDCoMKgIGVudW0gZG1hX2RhdGFfZGlyZWN0aW9uKTsNCj4gPiArDQo+ID4gKwkvKioNCj4g
+PiArCSAqIEBlbmRfYWNjZXNzOg0KPiA+ICsJICoNCj4gPiArCSAqIFRoaXMgaXMgY2FsbGVkIGZy
+b20gZG1hX2J1Zl9lbmRfYWNjZXNzKCkgd2hlbiBhIGRldmljZQ0KPiA+IGRyaXZlciBpcw0KPiA+
+ICsJICogZG9uZSBhY2Nlc3NpbmcgdGhlIGRhdGEgb2YgdGhlIERNQUJVRi4gVGhlIGV4cG9ydGVy
+IGNhbg0KPiA+IHVzZSB0aGlzDQo+ID4gKwkgKiB0byBmbHVzaC9zeW5jIHRoZSBjYWNoZXMgaWYg
+bmVlZGVkLg0KPiA+ICsJICoNCj4gPiArCSAqIFRoaXMgY2FsbGJhY2sgaXMgb3B0aW9uYWwuDQo+
+ID4gKwkgKg0KPiA+ICsJICogUmV0dXJuczoNCj4gPiArCSAqDQo+ID4gKwkgKiAwIG9uIHN1Y2Nl
+c3Mgb3IgYSBuZWdhdGl2ZSBlcnJvciBjb2RlIG9uIGZhaWx1cmUuDQo+ID4gKwkgKi8NCj4gPiAr
+CWludCAoKmVuZF9hY2Nlc3MpKHN0cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKiwgc3RydWN0DQo+
+ID4gc2dfdGFibGUgKiwNCj4gPiArCQkJwqAgZW51bSBkbWFfZGF0YV9kaXJlY3Rpb24pOw0KPiA+
+ICsNCj4gPiDCoMKgCS8qKg0KPiA+IMKgwqAJICogQG1tYXA6DQo+ID4gwqDCoAkgKg0KPiA+IEBA
+IC02MDYsNiArNjM4LDExIEBAIHZvaWQgZG1hX2J1Zl9kZXRhY2goc3RydWN0IGRtYV9idWYgKmRt
+YWJ1ZiwNCj4gPiDCoCBpbnQgZG1hX2J1Zl9waW4oc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAq
+YXR0YWNoKTsNCj4gPiDCoCB2b2lkIGRtYV9idWZfdW5waW4oc3RydWN0IGRtYV9idWZfYXR0YWNo
+bWVudCAqYXR0YWNoKTsNCj4gPiDCoCANCj4gPiAraW50IGRtYV9idWZfYmVnaW5fYWNjZXNzKHN0
+cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKmF0dGFjaCwNCj4gPiArCQkJIHN0cnVjdCBzZ190YWJs
+ZSAqc2d0LCBlbnVtDQo+ID4gZG1hX2RhdGFfZGlyZWN0aW9uIGRpcik7DQo+ID4gK2ludCBkbWFf
+YnVmX2VuZF9hY2Nlc3Moc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNoLA0KPiA+ICsJ
+CcKgwqDCoMKgwqDCoCBzdHJ1Y3Qgc2dfdGFibGUgKnNndCwgZW51bQ0KPiA+IGRtYV9kYXRhX2Rp
+cmVjdGlvbiBkaXIpOw0KPiA+ICsNCj4gPiDCoCBzdHJ1Y3QgZG1hX2J1ZiAqZG1hX2J1Zl9leHBv
+cnQoY29uc3Qgc3RydWN0IGRtYV9idWZfZXhwb3J0X2luZm8NCj4gPiAqZXhwX2luZm8pOw0KPiA+
+IMKgIA0KPiA+IMKgIGludCBkbWFfYnVmX2ZkKHN0cnVjdCBkbWFfYnVmICpkbWFidWYsIGludCBm
+bGFncyk7DQo+IA0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxp
+bmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxl
+YXZlQGxpc3RzLmxpbmFyby5vcmcK
