@@ -2,196 +2,178 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0ADF836041
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jan 2024 12:02:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id DFC5C836080
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jan 2024 12:06:20 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9C38640F24
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jan 2024 11:02:04 +0000 (UTC)
-Received: from aposti.net (aposti.net [89.234.176.197])
-	by lists.linaro.org (Postfix) with ESMTPS id 66AED3EB96
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 22 Jan 2024 11:01:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id F034940EBD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 22 Jan 2024 11:06:19 +0000 (UTC)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+	by lists.linaro.org (Postfix) with ESMTPS id 913B23ED39
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 22 Jan 2024 11:06:12 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=crapouillou.net header.s=mail header.b=vAc8dA6p;
-	dmarc=pass (policy=none) header.from=crapouillou.net;
-	spf=pass (lists.linaro.org: domain of paul@crapouillou.net designates 89.234.176.197 as permitted sender) smtp.mailfrom=paul@crapouillou.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
-	s=mail; t=1705921309;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=733fDA1vC7zKwBluwpjfcq4TVRYfPXDC67NVY7T7aqQ=;
-	b=vAc8dA6pC47aVOf5mjHAD4DKA4dRwEc+4dmRDZXuXgcDAjk3lQmBQyWLIwZ5ERx4utx0Nw
-	GmrQH4cNNE5vM4boQ9Y3Sr2mh0SksOhCzqErNeuXRj+qkZFOizrQ8lJ3F9W8opk0sqCYPy
-	MM6p+RcEXW2zqbDh8/mClEB2B4V2X14=
-Message-ID: <442f69f31ece6d441f3dc41c3dfeb4dcf52c00b8.camel@crapouillou.net>
-From: Paul Cercueil <paul@crapouillou.net>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jonathan Corbet
- <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>,  Christian
- =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Date: Mon, 22 Jan 2024 12:01:47 +0100
-In-Reply-To: <8035f515-591f-4c87-bf0a-23d5705d9b1c@gmail.com>
-References: <20240119141402.44262-1-paul@crapouillou.net>
-	 <20240119141402.44262-2-paul@crapouillou.net>
-	 <8035f515-591f-4c87-bf0a-23d5705d9b1c@gmail.com>
-Autocrypt: addr=paul@crapouillou.net; prefer-encrypt=mutual;
- keydata=mQENBF0KhcEBCADkfmrzdTOp/gFOMQX0QwKE2WgeCJiHPWkpEuPH81/HB2dpjPZNW03ZMLQfECbbaEkdbN4YnPfXgcc1uBe5mwOAPV1MBlaZcEt4M67iYQwSNrP7maPS3IaQJ18ES8JJ5Uf5UzFZaUawgH+oipYGW+v31cX6L3k+dGsPRM0Pyo0sQt52fsopNPZ9iag0iY7dGNuKenaEqkYNjwEgTtNz8dt6s3hMpHIKZFL3OhAGi88wF/21isv0zkF4J0wlf9gYUTEEY3Eulx80PTVqGIcHZzfavlWIdzhe+rxHTDGVwseR2Y1WjgFGQ2F+vXetAB8NEeygXee+i9nY5qt9c07m8mzjABEBAAG0JFBhdWwgQ2VyY3VlaWwgPHBhdWxAY3JhcG91aWxsb3UubmV0PokBTgQTAQoAOBYhBNdHYd8OeCBwpMuVxnPua9InSr1BBQJdCoXBAhsDBQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEHPua9InSr1BgvIH/0kLyrI3V0f33a6D3BJwc1grbygPVYGuC5l5eMnAI+rDmLR19E2yvibRpgUc87NmPEQPpbbtAZt8On/2WZoE5OIPdlId/AHNpdgAtGXo0ZX4LGeVPjxjdkbrKVHxbcdcnY+zzaFglpbVSvp76pxqgVg8PgxkAAeeJV+ET4t0823Gz2HzCL/6JZhvKAEtHVulOWoBh368SYdolp1TSfORWmHzvQiCCCA+j0cMkYVGzIQzEQhX7Urf9N/nhU5/SGLFEi9DcBfXoGzhyQyLXflhJtKm3XGB1K/pPulbKaPcKAl6rIDWPuFpHkSbmZ9r4KFlBwgAhlGy6nqP7O3u7q23hRW5AQ0EXQqFwQEIAMo+MgvYHsyjX3Ja4Oolg1Txzm8woj30ch2nACFCqaO0R/1kLj2VVeLrDyQUOlXx9PD6IQI4M8wy8m0sR4wV2p/g/paw7k65cjzYYLh+FdLNyO7IW
-	YXndJO+wDPi3aK/YKUYepqlP+QsmaHNYNdXEQDRKqNfJg8t0f5rfzp9ryxd1tCnbV+tG8VHQWiZXNqN7062DygSNXFUfQ0vZ3J2D4oAcIAEXTymRQ2+hr3Hf7I61KMHWeSkCvCG2decTYsHlw5Erix/jYWqVOtX0roOOLqWkqpQQJWtU+biWrAksmFmCp5fXIg1Nlg39v21xCXBGxJkxyTYuhdWyu1yDQ+LSIUAEQEAAYkBNgQYAQoAIBYhBNdHYd8OeCBwpMuVxnPua9InSr1BBQJdCoXBAhsMAAoJEHPua9InSr1B4wsH/Az767YCT0FSsMNt1jkkdLCBi7nY0GTW+PLP1a4zvVqFMo/vD6uz1ZflVTUAEvcTi3VHYZrlgjcxmcGu239oruqUS8Qy/xgZBp9KF0NTWQSl1iBfVbIU5VV1vHS6r77W5x0qXgfvAUWOH4gmN3MnF01SH2zMcLiaUGF+mcwl15rHbjnT3Nu2399aSE6cep86igfCAyFUOXjYEGlJy+c6UyT+DUylpjQg0nl8MlZ/7Whg2fAU9+FALIbQYQzGlT4c71SibR9T741jnegHhlmV4WXXUD6roFt54t0MSAFSVxzG8mLcSjR2cLUJ3NIPXixYUSEn3tQhfZj07xIIjWxAYZo=
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=sT8RYILN;
+	dmarc=pass (policy=none) header.from=kernel.org;
+	spf=pass (lists.linaro.org: domain of vkoul@kernel.org designates 145.40.68.75 as permitted sender) smtp.mailfrom=vkoul@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by ams.source.kernel.org (Postfix) with ESMTP id 83F2DB8075F;
+	Mon, 22 Jan 2024 11:06:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C865C433C7;
+	Mon, 22 Jan 2024 11:06:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1705921570;
+	bh=V/MmW1yVoK0TjvFsg0TJRYR3IjhkDr66kgUMy4s5icQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=sT8RYILNkg7DURq+DonPfOgYKWZzT9z1t7mKh5x8C8ZtDBgG2Ac0So6ocPeViznQk
+	 +b371knvzEQWiydLKI1rfHATW4gAcoP59HbiRavhYPxlUmUDhWQYFGir8/FVGINZd4
+	 4pbOy4f0jZXJrLq+pJ3U/hqDcEQirBEh7ORQTHlbVbDWuK1Bz5xSiDRJ61ytOBjCy+
+	 MIKGPKdVLBk54rOk1kK1ZfjKmuXIlY6qfkGds5xNN06kmh+7o/uJaxX7pptL30KyeJ
+	 KtePRH0INjn0SKiK3esQsx8GBl9w/Z8ZG+lbA3GAdrOUfJSnUjJhBs97oG+pTIzNU4
+	 jhoAF4LEG4IIA==
+Date: Mon, 22 Jan 2024 16:36:06 +0530
+From: Vinod Koul <vkoul@kernel.org>
+To: Paul Cercueil <paul@crapouillou.net>
+Message-ID: <Za5MHkzSjyVUoytI@matsya>
+References: <20231219175009.65482-1-paul@crapouillou.net>
+ <20231219175009.65482-4-paul@crapouillou.net>
+ <ZYRWbROAuMXftH07@matsya>
+ <86a30af0db2232bd473a38cd001342156cd4012e.camel@crapouillou.net>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <86a30af0db2232bd473a38cd001342156cd4012e.camel@crapouillou.net>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 66AED3EB96
+X-Rspamd-Queue-Id: 913B23ED39
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
+X-Spamd-Result: default: False [-2.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[crapouillou.net,none];
-	R_DKIM_ALLOW(-0.20)[crapouillou.net:s=mail];
-	R_SPF_ALLOW(-0.20)[+a];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:145.40.68.75];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
+	ASN(0.00)[asn:54825, ipnet:145.40.68.0/24, country:US];
 	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	MIME_TRACE(0.00)[0:+];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:203432, ipnet:89.234.176.0/23, country:FR];
-	TAGGED_RCPT(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	RCVD_COUNT_ZERO(0.00)[0];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,gmail.com,analog.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	FREEMAIL_TO(0.00)[gmail.com,linuxfoundation.org,lwn.net,linaro.org,amd.com];
-	FROM_EQ_ENVFROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,metafoo.de,linaro.org,amd.com,lwn.net,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com,analog.com];
+	RCVD_COUNT_TWO(0.00)[2];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[crapouillou.net:+]
-Message-ID-Hash: GK4LTFUQKC4KYGSF5CVYXG4WLTRG5AO3
-X-Message-ID-Hash: GK4LTFUQKC4KYGSF5CVYXG4WLTRG5AO3
-X-MailFrom: paul@crapouillou.net
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[kernel.org:+]
+Message-ID-Hash: T56VV4NC2BF2DX5KXHVQ4PE7JOS2SXBV
+X-Message-ID-Hash: T56VV4NC2BF2DX5KXHVQ4PE7JOS2SXBV
+X-MailFrom: vkoul@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jonathan Cameron <jic23@kernel.org>, Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>, Michael Hennerich <Michael.Hennerich@analog.com>, linux-usb@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Jonathan Cameron <jic23@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-iio@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nuno =?iso-8859-1?Q?S=E1?= <noname.nuno@gmail.com>, Michael Hennerich <Michael.Hennerich@analog.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 1/6] dma-buf: Add dma_buf_{begin,end}_access()
+Subject: [Linaro-mm-sig] Re: [PATCH v5 3/8] dmaengine: Add API function dmaengine_prep_slave_dma_vec()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/GK4LTFUQKC4KYGSF5CVYXG4WLTRG5AO3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/T56VV4NC2BF2DX5KXHVQ4PE7JOS2SXBV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-SGkgQ2hyaXN0aWFuLA0KDQpMZSBsdW5kaSAyMiBqYW52aWVyIDIwMjQgw6AgMTE6MzUgKzAxMDAs
-IENocmlzdGlhbiBLw7ZuaWcgYSDDqWNyaXTCoDoNCj4gQW0gMTkuMDEuMjQgdW0gMTU6MTMgc2No
-cmllYiBQYXVsIENlcmN1ZWlsOg0KPiA+IFRoZXNlIGZ1bmN0aW9ucyBzaG91bGQgYmUgdXNlZCBi
-eSBkZXZpY2UgZHJpdmVycyB3aGVuIHRoZXkgc3RhcnQNCj4gPiBhbmQNCj4gPiBzdG9wIGFjY2Vz
-c2luZyB0aGUgZGF0YSBvZiBETUFCVUYuIEl0IGFsbG93cyBETUFCVUYgaW1wb3J0ZXJzIHRvDQo+
-ID4gY2FjaGUNCj4gPiB0aGUgZG1hX2J1Zl9hdHRhY2htZW50IHdoaWxlIGVuc3VyaW5nIHRoYXQg
-dGhlIGRhdGEgdGhleSB3YW50IHRvDQo+ID4gYWNjZXNzDQo+ID4gaXMgYXZhaWxhYmxlIGZvciB0
-aGVpciBkZXZpY2Ugd2hlbiB0aGUgRE1BIHRyYW5zZmVycyB0YWtlIHBsYWNlLg0KPiANCj4gQXMg
-RGFuaWVsIGFscmVhZHkgbm90ZWQgYXMgd2VsbCB0aGlzIGlzIGEgY29tcGxldGUgbm8tZ28gZnJv
-bSB0aGUgDQo+IERNQS1idWYgZGVzaWduIHBvaW50IG9mIHZpZXcuDQoNCldoYXQgZG8geW91IG1l
-YW4gImFzIERhbmllbCBhbHJlYWR5IG5vdGVkIj8gSXQgd2FzIGhpbSB3aG8gc3VnZ2VzdGVkDQp0
-aGlzLg0KDQo+IA0KPiBSZWdhcmRzLA0KPiBDaHJpc3RpYW4uDQoNCkNoZWVycywNCi1QYXVsDQoN
-Cj4gDQo+ID4gDQo+ID4gU2lnbmVkLW9mZi1ieTogUGF1bCBDZXJjdWVpbCA8cGF1bEBjcmFwb3Vp
-bGxvdS5uZXQ+DQo+ID4gDQo+ID4gLS0tDQo+ID4gdjU6IE5ldyBwYXRjaA0KPiA+IC0tLQ0KPiA+
-IMKgIGRyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMgfCA2Ng0KPiA+ICsrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKw0KPiA+IMKgIGluY2x1ZGUvbGludXgvZG1hLWJ1Zi5owqDC
-oCB8IDM3ICsrKysrKysrKysrKysrKysrKysrKysNCj4gPiDCoCAyIGZpbGVzIGNoYW5nZWQsIDEw
-MyBpbnNlcnRpb25zKCspDQo+ID4gDQo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9k
-bWEtYnVmLmMgYi9kcml2ZXJzL2RtYS1idWYvZG1hLWJ1Zi5jDQo+ID4gaW5kZXggOGZlNWFhNjdi
-MTY3Li5hOGJhYjZjMThmY2QgMTAwNjQ0DQo+ID4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2RtYS1i
-dWYuYw0KPiA+ICsrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtYnVmLmMNCj4gPiBAQCAtODMwLDYg
-KzgzMCw4IEBAIHN0YXRpYyBzdHJ1Y3Qgc2dfdGFibGUgKiBfX21hcF9kbWFfYnVmKHN0cnVjdA0K
-PiA+IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNoLA0KPiA+IMKgwqAgKsKgwqDCoMKgIC0gZG1h
-X2J1Zl9tbWFwKCkNCj4gPiDCoMKgICrCoMKgwqDCoCAtIGRtYV9idWZfYmVnaW5fY3B1X2FjY2Vz
-cygpDQo+ID4gwqDCoCAqwqDCoMKgwqAgLSBkbWFfYnVmX2VuZF9jcHVfYWNjZXNzKCkNCj4gPiAr
-ICrCoMKgwqDCoCAtIGRtYV9idWZfYmVnaW5fYWNjZXNzKCkNCj4gPiArICrCoMKgwqDCoCAtIGRt
-YV9idWZfZW5kX2FjY2VzcygpDQo+ID4gwqDCoCAqwqDCoMKgwqAgLSBkbWFfYnVmX21hcF9hdHRh
-Y2htZW50X3VubG9ja2VkKCkNCj4gPiDCoMKgICrCoMKgwqDCoCAtIGRtYV9idWZfdW5tYXBfYXR0
-YWNobWVudF91bmxvY2tlZCgpDQo+ID4gwqDCoCAqwqDCoMKgwqAgLSBkbWFfYnVmX3ZtYXBfdW5s
-b2NrZWQoKQ0KPiA+IEBAIC0xNjAyLDYgKzE2MDQsNzAgQEAgdm9pZCBkbWFfYnVmX3Z1bm1hcF91
-bmxvY2tlZChzdHJ1Y3QgZG1hX2J1Zg0KPiA+ICpkbWFidWYsIHN0cnVjdCBpb3N5c19tYXAgKm1h
-cCkNCj4gPiDCoCB9DQo+ID4gwqAgRVhQT1JUX1NZTUJPTF9OU19HUEwoZG1hX2J1Zl92dW5tYXBf
-dW5sb2NrZWQsIERNQV9CVUYpOw0KPiA+IMKgIA0KPiA+ICsvKioNCj4gPiArICogQGRtYV9idWZf
-YmVnaW5fYWNjZXNzIC0gQ2FsbCBiZWZvcmUgYW55IGhhcmR3YXJlIGFjY2VzcyBmcm9tL3RvDQo+
-ID4gdGhlIERNQUJVRg0KPiA+ICsgKiBAYXR0YWNoOglbaW5dCWF0dGFjaG1lbnQgdXNlZCBmb3Ig
-aGFyZHdhcmUgYWNjZXNzDQo+ID4gKyAqIEBzZ190YWJsZToJW2luXQlzY2F0dGVybGlzdCB1c2Vk
-IGZvciB0aGUgRE1BIHRyYW5zZmVyDQo+ID4gKyAqIEBkaXJlY3Rpb246wqAgW2luXcKgwqDCoCBk
-aXJlY3Rpb24gb2YgRE1BIHRyYW5zZmVyDQo+ID4gKyAqLw0KPiA+ICtpbnQgZG1hX2J1Zl9iZWdp
-bl9hY2Nlc3Moc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNoLA0KPiA+ICsJCQkgc3Ry
-dWN0IHNnX3RhYmxlICpzZ3QsIGVudW0NCj4gPiBkbWFfZGF0YV9kaXJlY3Rpb24gZGlyKQ0KPiA+
-ICt7DQo+ID4gKwlzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmOw0KPiA+ICsJYm9vbCBjb29raWU7DQo+
-ID4gKwlpbnQgcmV0Ow0KPiA+ICsNCj4gPiArCWlmIChXQVJOX09OKCFhdHRhY2gpKQ0KPiA+ICsJ
-CXJldHVybiAtRUlOVkFMOw0KPiA+ICsNCj4gPiArCWRtYWJ1ZiA9IGF0dGFjaC0+ZG1hYnVmOw0K
-PiA+ICsNCj4gPiArCWlmICghZG1hYnVmLT5vcHMtPmJlZ2luX2FjY2VzcykNCj4gPiArCQlyZXR1
-cm4gMDsNCj4gPiArDQo+ID4gKwljb29raWUgPSBkbWFfZmVuY2VfYmVnaW5fc2lnbmFsbGluZygp
-Ow0KPiA+ICsJcmV0ID0gZG1hYnVmLT5vcHMtPmJlZ2luX2FjY2VzcyhhdHRhY2gsIHNndCwgZGly
-KTsNCj4gPiArCWRtYV9mZW5jZV9lbmRfc2lnbmFsbGluZyhjb29raWUpOw0KPiA+ICsNCj4gPiAr
-CWlmIChXQVJOX09OX09OQ0UocmV0KSkNCj4gPiArCQlyZXR1cm4gcmV0Ow0KPiA+ICsNCj4gPiAr
-CXJldHVybiAwOw0KPiA+ICt9DQo+ID4gK0VYUE9SVF9TWU1CT0xfTlNfR1BMKGRtYV9idWZfYmVn
-aW5fYWNjZXNzLCBETUFfQlVGKTsNCj4gPiArDQo+ID4gKy8qKg0KPiA+ICsgKiBAZG1hX2J1Zl9l
-bmRfYWNjZXNzIC0gQ2FsbCBhZnRlciBhbnkgaGFyZHdhcmUgYWNjZXNzIGZyb20vdG8NCj4gPiB0
-aGUgRE1BQlVGDQo+ID4gKyAqIEBhdHRhY2g6CVtpbl0JYXR0YWNobWVudCB1c2VkIGZvciBoYXJk
-d2FyZSBhY2Nlc3MNCj4gPiArICogQHNnX3RhYmxlOglbaW5dCXNjYXR0ZXJsaXN0IHVzZWQgZm9y
-IHRoZSBETUEgdHJhbnNmZXINCj4gPiArICogQGRpcmVjdGlvbjrCoCBbaW5dwqDCoMKgIGRpcmVj
-dGlvbiBvZiBETUEgdHJhbnNmZXINCj4gPiArICovDQo+ID4gK2ludCBkbWFfYnVmX2VuZF9hY2Nl
-c3Moc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNoLA0KPiA+ICsJCcKgwqDCoMKgwqDC
-oCBzdHJ1Y3Qgc2dfdGFibGUgKnNndCwgZW51bQ0KPiA+IGRtYV9kYXRhX2RpcmVjdGlvbiBkaXIp
-DQo+ID4gK3sNCj4gPiArCXN0cnVjdCBkbWFfYnVmICpkbWFidWY7DQo+ID4gKwlib29sIGNvb2tp
-ZTsNCj4gPiArCWludCByZXQ7DQo+ID4gKw0KPiA+ICsJaWYgKFdBUk5fT04oIWF0dGFjaCkpDQo+
-ID4gKwkJcmV0dXJuIC1FSU5WQUw7DQo+ID4gKw0KPiA+ICsJZG1hYnVmID0gYXR0YWNoLT5kbWFi
-dWY7DQo+ID4gKw0KPiA+ICsJaWYgKCFkbWFidWYtPm9wcy0+ZW5kX2FjY2VzcykNCj4gPiArCQly
-ZXR1cm4gMDsNCj4gPiArDQo+ID4gKwljb29raWUgPSBkbWFfZmVuY2VfYmVnaW5fc2lnbmFsbGlu
-ZygpOw0KPiA+ICsJcmV0ID0gZG1hYnVmLT5vcHMtPmVuZF9hY2Nlc3MoYXR0YWNoLCBzZ3QsIGRp
-cik7DQo+ID4gKwlkbWFfZmVuY2VfZW5kX3NpZ25hbGxpbmcoY29va2llKTsNCj4gPiArDQo+ID4g
-KwlpZiAoV0FSTl9PTl9PTkNFKHJldCkpDQo+ID4gKwkJcmV0dXJuIHJldDsNCj4gPiArDQo+ID4g
-KwlyZXR1cm4gMDsNCj4gPiArfQ0KPiA+ICtFWFBPUlRfU1lNQk9MX05TX0dQTChkbWFfYnVmX2Vu
-ZF9hY2Nlc3MsIERNQV9CVUYpOw0KPiA+ICsNCj4gPiDCoCAjaWZkZWYgQ09ORklHX0RFQlVHX0ZT
-DQo+ID4gwqAgc3RhdGljIGludCBkbWFfYnVmX2RlYnVnX3Nob3coc3RydWN0IHNlcV9maWxlICpz
-LCB2b2lkICp1bnVzZWQpDQo+ID4gwqAgew0KPiA+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4
-L2RtYS1idWYuaCBiL2luY2x1ZGUvbGludXgvZG1hLWJ1Zi5oDQo+ID4gaW5kZXggOGZmNGFkZDcx
-Zjg4Li44YmE2MTJjN2NjMTYgMTAwNjQ0DQo+ID4gLS0tIGEvaW5jbHVkZS9saW51eC9kbWEtYnVm
-LmgNCj4gPiArKysgYi9pbmNsdWRlL2xpbnV4L2RtYS1idWYuaA0KPiA+IEBAIC0yNDYsNiArMjQ2
-LDM4IEBAIHN0cnVjdCBkbWFfYnVmX29wcyB7DQo+ID4gwqDCoAkgKi8NCj4gPiDCoMKgCWludCAo
-KmVuZF9jcHVfYWNjZXNzKShzdHJ1Y3QgZG1hX2J1ZiAqLCBlbnVtDQo+ID4gZG1hX2RhdGFfZGly
-ZWN0aW9uKTsNCj4gPiDCoCANCj4gPiArCS8qKg0KPiA+ICsJICogQGJlZ2luX2FjY2VzczoNCj4g
-PiArCSAqDQo+ID4gKwkgKiBUaGlzIGlzIGNhbGxlZCBmcm9tIGRtYV9idWZfYmVnaW5fYWNjZXNz
-KCkgd2hlbiBhDQo+ID4gZGV2aWNlIGRyaXZlcg0KPiA+ICsJICogd2FudHMgdG8gYWNjZXNzIHRo
-ZSBkYXRhIG9mIHRoZSBETUFCVUYuIFRoZSBleHBvcnRlcg0KPiA+IGNhbiB1c2UgdGhpcw0KPiA+
-ICsJICogdG8gZmx1c2gvc3luYyB0aGUgY2FjaGVzIGlmIG5lZWRlZC4NCj4gPiArCSAqDQo+ID4g
-KwkgKiBUaGlzIGNhbGxiYWNrIGlzIG9wdGlvbmFsLg0KPiA+ICsJICoNCj4gPiArCSAqIFJldHVy
-bnM6DQo+ID4gKwkgKg0KPiA+ICsJICogMCBvbiBzdWNjZXNzIG9yIGEgbmVnYXRpdmUgZXJyb3Ig
-Y29kZSBvbiBmYWlsdXJlLg0KPiA+ICsJICovDQo+ID4gKwlpbnQgKCpiZWdpbl9hY2Nlc3MpKHN0
-cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKiwgc3RydWN0DQo+ID4gc2dfdGFibGUgKiwNCj4gPiAr
-CQkJwqDCoMKgIGVudW0gZG1hX2RhdGFfZGlyZWN0aW9uKTsNCj4gPiArDQo+ID4gKwkvKioNCj4g
-PiArCSAqIEBlbmRfYWNjZXNzOg0KPiA+ICsJICoNCj4gPiArCSAqIFRoaXMgaXMgY2FsbGVkIGZy
-b20gZG1hX2J1Zl9lbmRfYWNjZXNzKCkgd2hlbiBhIGRldmljZQ0KPiA+IGRyaXZlciBpcw0KPiA+
-ICsJICogZG9uZSBhY2Nlc3NpbmcgdGhlIGRhdGEgb2YgdGhlIERNQUJVRi4gVGhlIGV4cG9ydGVy
-IGNhbg0KPiA+IHVzZSB0aGlzDQo+ID4gKwkgKiB0byBmbHVzaC9zeW5jIHRoZSBjYWNoZXMgaWYg
-bmVlZGVkLg0KPiA+ICsJICoNCj4gPiArCSAqIFRoaXMgY2FsbGJhY2sgaXMgb3B0aW9uYWwuDQo+
-ID4gKwkgKg0KPiA+ICsJICogUmV0dXJuczoNCj4gPiArCSAqDQo+ID4gKwkgKiAwIG9uIHN1Y2Nl
-c3Mgb3IgYSBuZWdhdGl2ZSBlcnJvciBjb2RlIG9uIGZhaWx1cmUuDQo+ID4gKwkgKi8NCj4gPiAr
-CWludCAoKmVuZF9hY2Nlc3MpKHN0cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKiwgc3RydWN0DQo+
-ID4gc2dfdGFibGUgKiwNCj4gPiArCQkJwqAgZW51bSBkbWFfZGF0YV9kaXJlY3Rpb24pOw0KPiA+
-ICsNCj4gPiDCoMKgCS8qKg0KPiA+IMKgwqAJICogQG1tYXA6DQo+ID4gwqDCoAkgKg0KPiA+IEBA
-IC02MDYsNiArNjM4LDExIEBAIHZvaWQgZG1hX2J1Zl9kZXRhY2goc3RydWN0IGRtYV9idWYgKmRt
-YWJ1ZiwNCj4gPiDCoCBpbnQgZG1hX2J1Zl9waW4oc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAq
-YXR0YWNoKTsNCj4gPiDCoCB2b2lkIGRtYV9idWZfdW5waW4oc3RydWN0IGRtYV9idWZfYXR0YWNo
-bWVudCAqYXR0YWNoKTsNCj4gPiDCoCANCj4gPiAraW50IGRtYV9idWZfYmVnaW5fYWNjZXNzKHN0
-cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQgKmF0dGFjaCwNCj4gPiArCQkJIHN0cnVjdCBzZ190YWJs
-ZSAqc2d0LCBlbnVtDQo+ID4gZG1hX2RhdGFfZGlyZWN0aW9uIGRpcik7DQo+ID4gK2ludCBkbWFf
-YnVmX2VuZF9hY2Nlc3Moc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNoLA0KPiA+ICsJ
-CcKgwqDCoMKgwqDCoCBzdHJ1Y3Qgc2dfdGFibGUgKnNndCwgZW51bQ0KPiA+IGRtYV9kYXRhX2Rp
-cmVjdGlvbiBkaXIpOw0KPiA+ICsNCj4gPiDCoCBzdHJ1Y3QgZG1hX2J1ZiAqZG1hX2J1Zl9leHBv
-cnQoY29uc3Qgc3RydWN0IGRtYV9idWZfZXhwb3J0X2luZm8NCj4gPiAqZXhwX2luZm8pOw0KPiA+
-IMKgIA0KPiA+IMKgIGludCBkbWFfYnVmX2ZkKHN0cnVjdCBkbWFfYnVmICpkbWFidWYsIGludCBm
-bGFncyk7DQo+IA0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxp
-bmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxl
-YXZlQGxpc3RzLmxpbmFyby5vcmcK
+Hi Paul,
+
+
+On 08-01-24, 13:20, Paul Cercueil wrote:
+> Hi Vinod,
+>=20
+> Le jeudi 21 d=E9cembre 2023 =E0 20:44 +0530, Vinod Koul a =E9crit=A0:
+> > On 19-12-23, 18:50, Paul Cercueil wrote:
+> > > This function can be used to initiate a scatter-gather DMA
+> > > transfer,
+> > > where the address and size of each segment is located in one entry
+> > > of
+> > > the dma_vec array.
+> > >=20
+> > > The major difference with dmaengine_prep_slave_sg() is that it
+> > > supports
+> > > specifying the lengths of each DMA transfer; as trying to override
+> > > the
+> > > length of the transfer with dmaengine_prep_slave_sg() is a very
+> > > tedious
+> > > process. The introduction of a new API function is also justified
+> > > by the
+> > > fact that scatterlists are on their way out.
+> > >=20
+> > > Note that dmaengine_prep_interleaved_dma() is not helpful either in
+> > > that
+> > > case, as it assumes that the address of each segment will be higher
+> > > than
+> > > the one of the previous segment, which we just cannot guarantee in
+> > > case
+> > > of a scatter-gather transfer.
+> > >=20
+> > > Signed-off-by: Paul Cercueil <paul@crapouillou.net>
+> > >=20
+> > > ---
+> > > v3: New patch
+> > >=20
+> > > v5: Replace with function dmaengine_prep_slave_dma_vec(), and
+> > > struct
+> > > =A0=A0=A0 'dma_vec'.
+> > > =A0=A0=A0 Note that at some point we will need to support cyclic
+> > > transfers
+> > > =A0=A0=A0 using dmaengine_prep_slave_dma_vec(). Maybe with a new "fla=
+gs"
+> > > =A0=A0=A0 parameter to the function?
+> > > ---
+> > > =A0include/linux/dmaengine.h | 25 +++++++++++++++++++++++++
+> > > =A01 file changed, 25 insertions(+)
+> > >=20
+> > > diff --git a/include/linux/dmaengine.h b/include/linux/dmaengine.h
+> > > index 3df70d6131c8..ee5931ddb42f 100644
+> > > --- a/include/linux/dmaengine.h
+> > > +++ b/include/linux/dmaengine.h
+> > > @@ -160,6 +160,16 @@ struct dma_interleaved_template {
+> > > =A0	struct data_chunk sgl[];
+> > > =A0};
+> > > =A0
+> > > +/**
+> > > + * struct dma_vec - DMA vector
+> > > + * @addr: Bus address of the start of the vector
+> > > + * @len: Length in bytes of the DMA vector
+> > > + */
+> > > +struct dma_vec {
+> > > +	dma_addr_t addr;
+> > > +	size_t len;
+> > > +};
+>=20
+> I don't want to be pushy, but I'd like to know how to solve this now,
+> otherwise I'll just send the same patches for my v6.
+>=20
+> > so you want to transfer multiple buffers, right? why not use
+> > dmaengine_prep_slave_sg(). If there is reason for not using that one?
+>=20
+> The reason is that we want to have the possibility to transfer less
+> than the total size of the scatterlist, and that's currently very hard
+> to do - scatterlists were designed to not be tampered with.
+>=20
+> Christian K=F6nig then suggested to introduce a "dma_vec" which had been
+> on his TODO list for a while now.
+
+Yeah for this interleaved seems overkill. Lets go with this api. I would
+suggest change the name of the API replacing slave with peripheral
+though
+
+--=20
+~Vinod
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
