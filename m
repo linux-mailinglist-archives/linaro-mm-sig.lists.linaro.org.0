@@ -2,216 +2,318 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C38A5842003
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jan 2024 10:48:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9FF6584217E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jan 2024 11:38:46 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A174C400E4
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jan 2024 09:48:38 +0000 (UTC)
-Received: from aposti.net (aposti.net [89.234.176.197])
-	by lists.linaro.org (Postfix) with ESMTPS id F3C85400A2
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Jan 2024 09:48:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B0F0D400A1
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jan 2024 10:38:45 +0000 (UTC)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com [209.85.218.44])
+	by lists.linaro.org (Postfix) with ESMTPS id 8302C400A1
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Jan 2024 10:38:32 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=crapouillou.net header.s=mail header.b=GaMkHCku;
-	dmarc=pass (policy=none) header.from=crapouillou.net;
-	spf=pass (lists.linaro.org: domain of paul@crapouillou.net designates 89.234.176.197 as permitted sender) smtp.mailfrom=paul@crapouillou.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
-	s=mail; t=1706608105;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=fzKqsStcb36iopomlKgRGs7SQG0sReHnAQLYp7HEgu0=;
-	b=GaMkHCkutXjW0L4/XyIxRz73MLclQ9Ia3j5M6z+wdTwSCEYHwYtDikGSv2r4x81YUBlihy
-	QNgViGuhWALFT+qoow9WmzoaLW6sGAyeHKwWZOXHki0Imxc1Be5O6lJMrdpERSf/Ek21hg
-	BCU+bC9oV4o447lijAoa0537XEiQazA=
-Message-ID: <7eec45a95808afe94ac65a8518df853356ecf117.camel@crapouillou.net>
-From: Paul Cercueil <paul@crapouillou.net>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
- Christian =?ISO-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>, Greg
- Kroah-Hartman <gregkh@linuxfoundation.org>, Jonathan Corbet
- <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Jonathan Cameron
- <jic23@kernel.org>, Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>,
- Michael Hennerich <Michael.Hennerich@analog.com>,
- linux-usb@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Christoph
- Hellwig <hch@lst.de>
-Date: Tue, 30 Jan 2024 10:48:23 +0100
-In-Reply-To: <a2346244-e22b-4ff6-b6cd-1da7138725ae@amd.com>
-References: <442f69f31ece6d441f3dc41c3dfeb4dcf52c00b8.camel@crapouillou.net>
-	 <0b6b8738-9ea3-44fa-a624-9297bd55778f@amd.com>
-	 <e4620acdf24628d904cedcb0030d78b14559f337.camel@crapouillou.net>
-	 <85a89505-edeb-4619-86c1-157f7abdd190@amd.com>
-	 <0fe2755fb320027234c086bcc88fd107855234c5.camel@crapouillou.net>
-	 <577501f9-9d1c-4f8d-9882-7c71090e5ef3@amd.com>
-	 <7928c0866ac5b2bfaaa56ad3422bedc9061e0f7b.camel@crapouillou.net>
-	 <2ac7562c-d221-409a-bfee-1b3cfcc0f1c6@amd.com>
-	 <ZbKiCPhRvWaz4Icn@phenom.ffwll.local>
-	 <c97e38ee-b860-4990-87f1-3e59d7d9c999@amd.com>
-	 <Zbi6zQYtnfOZu5Wh@phenom.ffwll.local>
-	 <a2346244-e22b-4ff6-b6cd-1da7138725ae@amd.com>
-Autocrypt: addr=paul@crapouillou.net; prefer-encrypt=mutual;
- keydata=mQENBF0KhcEBCADkfmrzdTOp/gFOMQX0QwKE2WgeCJiHPWkpEuPH81/HB2dpjPZNW03ZMLQfECbbaEkdbN4YnPfXgcc1uBe5mwOAPV1MBlaZcEt4M67iYQwSNrP7maPS3IaQJ18ES8JJ5Uf5UzFZaUawgH+oipYGW+v31cX6L3k+dGsPRM0Pyo0sQt52fsopNPZ9iag0iY7dGNuKenaEqkYNjwEgTtNz8dt6s3hMpHIKZFL3OhAGi88wF/21isv0zkF4J0wlf9gYUTEEY3Eulx80PTVqGIcHZzfavlWIdzhe+rxHTDGVwseR2Y1WjgFGQ2F+vXetAB8NEeygXee+i9nY5qt9c07m8mzjABEBAAG0JFBhdWwgQ2VyY3VlaWwgPHBhdWxAY3JhcG91aWxsb3UubmV0PokBTgQTAQoAOBYhBNdHYd8OeCBwpMuVxnPua9InSr1BBQJdCoXBAhsDBQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEHPua9InSr1BgvIH/0kLyrI3V0f33a6D3BJwc1grbygPVYGuC5l5eMnAI+rDmLR19E2yvibRpgUc87NmPEQPpbbtAZt8On/2WZoE5OIPdlId/AHNpdgAtGXo0ZX4LGeVPjxjdkbrKVHxbcdcnY+zzaFglpbVSvp76pxqgVg8PgxkAAeeJV+ET4t0823Gz2HzCL/6JZhvKAEtHVulOWoBh368SYdolp1TSfORWmHzvQiCCCA+j0cMkYVGzIQzEQhX7Urf9N/nhU5/SGLFEi9DcBfXoGzhyQyLXflhJtKm3XGB1K/pPulbKaPcKAl6rIDWPuFpHkSbmZ9r4KFlBwgAhlGy6nqP7O3u7q23hRW5AQ0EXQqFwQEIAMo+MgvYHsyjX3Ja4Oolg1Txzm8woj30ch2nACFCqaO0R/1kLj2VVeLrDyQUOlXx9PD6IQI4M8wy8m0sR4wV2p/g/paw7k65cjzYYLh+FdLNyO7IW
-	YXndJO+wDPi3aK/YKUYepqlP+QsmaHNYNdXEQDRKqNfJg8t0f5rfzp9ryxd1tCnbV+tG8VHQWiZXNqN7062DygSNXFUfQ0vZ3J2D4oAcIAEXTymRQ2+hr3Hf7I61KMHWeSkCvCG2decTYsHlw5Erix/jYWqVOtX0roOOLqWkqpQQJWtU+biWrAksmFmCp5fXIg1Nlg39v21xCXBGxJkxyTYuhdWyu1yDQ+LSIUAEQEAAYkBNgQYAQoAIBYhBNdHYd8OeCBwpMuVxnPua9InSr1BBQJdCoXBAhsMAAoJEHPua9InSr1B4wsH/Az767YCT0FSsMNt1jkkdLCBi7nY0GTW+PLP1a4zvVqFMo/vD6uz1ZflVTUAEvcTi3VHYZrlgjcxmcGu239oruqUS8Qy/xgZBp9KF0NTWQSl1iBfVbIU5VV1vHS6r77W5x0qXgfvAUWOH4gmN3MnF01SH2zMcLiaUGF+mcwl15rHbjnT3Nu2399aSE6cep86igfCAyFUOXjYEGlJy+c6UyT+DUylpjQg0nl8MlZ/7Whg2fAU9+FALIbQYQzGlT4c71SibR9T741jnegHhlmV4WXXUD6roFt54t0MSAFSVxzG8mLcSjR2cLUJ3NIPXixYUSEn3tQhfZj07xIIjWxAYZo=
+	dkim=pass header.d=ffwll.ch header.s=google header.b=HaUOfT8W;
+	dmarc=none;
+	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.218.44) smtp.mailfrom=daniel@ffwll.ch
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-a30e898db99so88509666b.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Jan 2024 02:38:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ffwll.ch; s=google; t=1706611111; x=1707215911; darn=lists.linaro.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:mail-followup-to:message-id:subject:cc:to
+         :from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=q0DpHsp78524WTcdq3ZlObN34BwE3mZw0kMPMavoOX4=;
+        b=HaUOfT8Wq+HbbU7cOADCYuqC0YTVzr+vyM7XfQQOvPGabmSYP0oXtVExLr+yvWK4tF
+         iXBuBx0ejefB5p/HWOWzufjxth5h20EoPNh0ioXM7wXO/woz+Xo5H6pkc+QcfcNPyUIO
+         3wW9creq9wMqshqttaOh142kEY5mH4n7YCVfI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1706611111; x=1707215911;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:mail-followup-to:message-id:subject:cc:to
+         :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=q0DpHsp78524WTcdq3ZlObN34BwE3mZw0kMPMavoOX4=;
+        b=Mmem76CTTYYmpUmTe+FEWiyC12JSPfNKdJeBL9sMccT4M+Lv0rjGzS7ZRahgiYtsky
+         ldlEN36i+BmE93WmPvDTCRURgOJVUiZ1zVHd4lBqXbr+/HjxTbnXI/jA6iHuWBygeZOf
+         0UiNTd0FKzf+Ns7jLxUANvo2ffaGOakQn9vo/l/pBWO/SY7Q149rpNQvQFYya0UNzVAh
+         hITr/t2s5u2mwbChVRlohp5qJvXCZyE7J85SExCv9VrlSdj8KOpENWS2NmguqbsqJR6h
+         PwobXD/cVaVFjlheywdp0pKoN3+LFIGihk4t7MzOPiRytgQrxZ9akAxnB2pKTvSNZIyg
+         LXwg==
+X-Forwarded-Encrypted: i=0; AJvYcCWndPMq12md3Of45q0Uc+kNybhEq8eh9cByEU8S5tFnpwd9mk1AntR+Y/EI6C/wbFowc1Y6yTiQaI3Xw4QZn6ulxR/kSDdZkfapcwVH6IM=
+X-Gm-Message-State: AOJu0Yzm7Fx0juGAg5Iy11+yh7YWkb3y7lVqIEPn+Rx0ckTZaiNQhxMw
+	VmE9QZxCggN4TkzKlhfMmM+PJWDzMALSHoj37Tw/mT+h8N3PcXhFAhJeuTYHDCY=
+X-Google-Smtp-Source: AGHT+IGOdGiExTeKnmBCfXOvsiugsDOp4x/n9iwmfZrcr5SM95YNybe4aCyt7LzfW61YerkaMsSHkg==
+X-Received: by 2002:a17:906:c0c6:b0:a34:4c5e:40db with SMTP id bn6-20020a170906c0c600b00a344c5e40dbmr6071192ejb.4.1706611111218;
+        Tue, 30 Jan 2024 02:38:31 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id cx1-20020a170907168100b00a354d25da36sm3704061ejd.83.2024.01.30.02.38.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 30 Jan 2024 02:38:30 -0800 (PST)
+Date: Tue, 30 Jan 2024 11:38:28 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <ZbjRpDemivdBJaSN@phenom.ffwll.local>
+Mail-Followup-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Paul Cercueil <paul@crapouillou.net>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Nuno =?iso-8859-1?Q?S=E1?= <noname.nuno@gmail.com>,
+	Michael Hennerich <Michael.Hennerich@analog.com>,
+	linux-usb@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+	Christoph Hellwig <hch@lst.de>
+References: <e4620acdf24628d904cedcb0030d78b14559f337.camel@crapouillou.net>
+ <85a89505-edeb-4619-86c1-157f7abdd190@amd.com>
+ <0fe2755fb320027234c086bcc88fd107855234c5.camel@crapouillou.net>
+ <577501f9-9d1c-4f8d-9882-7c71090e5ef3@amd.com>
+ <7928c0866ac5b2bfaaa56ad3422bedc9061e0f7b.camel@crapouillou.net>
+ <2ac7562c-d221-409a-bfee-1b3cfcc0f1c6@amd.com>
+ <ZbKiCPhRvWaz4Icn@phenom.ffwll.local>
+ <c97e38ee-b860-4990-87f1-3e59d7d9c999@amd.com>
+ <Zbi6zQYtnfOZu5Wh@phenom.ffwll.local>
+ <a2346244-e22b-4ff6-b6cd-1da7138725ae@amd.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <a2346244-e22b-4ff6-b6cd-1da7138725ae@amd.com>
+X-Operating-System: Linux phenom 6.6.11-amd64 
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: F3C85400A2
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.50 / 15.00];
+X-Rspamd-Queue-Id: 8302C400A1
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.80 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[crapouillou.net,none];
-	R_SPF_ALLOW(-0.20)[+a];
-	R_DKIM_ALLOW(-0.20)[crapouillou.net:s=mail];
+	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:203432, ipnet:89.234.176.0/23, country:FR];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	MISSING_XM_UA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	R_SPF_NA(0.00)[no SPF record];
 	TAGGED_RCPT(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FREEMAIL_TO(0.00)[amd.com,gmail.com,linuxfoundation.org,lwn.net,linaro.org,kernel.org,analog.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lst.de];
-	FROM_EQ_ENVFROM(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.44:from];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	MIME_TRACE(0.00)[0:+];
+	NEURAL_HAM(-0.00)[-1.000];
+	DMARC_NA(0.00)[ffwll.ch];
+	RCVD_COUNT_TWO(0.00)[2];
 	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_ZERO(0.00)[0];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[crapouillou.net,gmail.com,linuxfoundation.org,lwn.net,linaro.org,kernel.org,analog.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lst.de];
 	TO_DN_SOME(0.00)[];
-	NEURAL_HAM(-0.00)[-0.999];
-	DKIM_TRACE(0.00)[crapouillou.net:+]
-Message-ID-Hash: 3ZSMU4BQ5B2N2F24MAHEKTAXWBO3L4KG
-X-Message-ID-Hash: 3ZSMU4BQ5B2N2F24MAHEKTAXWBO3L4KG
-X-MailFrom: paul@crapouillou.net
+	FROM_EQ_ENVFROM(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[ffwll.ch:+]
+Message-ID-Hash: CNKALZW3GE2ARHN3RKLXI3MEJAQ3P52A
+X-Message-ID-Hash: CNKALZW3GE2ARHN3RKLXI3MEJAQ3P52A
+X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Paul Cercueil <paul@crapouillou.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Jonathan Cameron <jic23@kernel.org>, Nuno =?iso-8859-1?Q?S=E1?= <noname.nuno@gmail.com>, Michael Hennerich <Michael.Hennerich@analog.com>, linux-usb@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Christoph Hellwig <hch@lst.de>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v5 1/6] dma-buf: Add dma_buf_{begin,end}_access()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3ZSMU4BQ5B2N2F24MAHEKTAXWBO3L4KG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CNKALZW3GE2ARHN3RKLXI3MEJAQ3P52A/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-SGkgQ2hyaXN0aWFuLA0KDQooWW91ciBlbWFpbCBzb2Z0d2FyZSBpcyBjb25maWd1cmVkIGZvciBI
-VE1MIGJ0dykNCg0KTGUgbWFyZGkgMzAgamFudmllciAyMDI0IMOgIDEwOjIzICswMTAwLCBDaHJp
-c3RpYW4gS8O2bmlnIGEgw6ljcml0wqA6DQo+IMKgQW0gMzAuMDEuMjQgdW0gMTA6MDEgc2Nocmll
-YiBEYW5pZWwgVmV0dGVyOg0KPiDCoA0KPiA+IMKgDQo+ID4gT24gRnJpLCBKYW4gMjYsIDIwMjQg
-YXQgMDU6NDI6NTBQTSArMDEwMCwgQ2hyaXN0aWFuIEvDtm5pZyB3cm90ZToNCj4gPiDCoA0KPiA+
-ID4gW1NOSVBdIA0KPiA+ID4gV2VsbCBJIHRoaW5rIHdlIHNob3VsZCBoYXZlIHNvbWUgc29sdXRp
-b24sIGJ1dCBJJ20gbm90IHN1cmUgaWYgaXQNCj4gPiA+IHNob3VsZCBiZQ0KPiA+ID4gcGFydCBv
-ZiBETUEtYnVmLg0KPiA+ID4gDQo+ID4gPiBFc3NlbnRpYWxseSBhIERNQS1idWYgZXhwb3J0cyB0
-aGUgYnVmZmVycyBhcyBoZSB1c2VzIGl0IGFuZCB0aGUNCj4gPiA+IGltcG9ydGVyIChvcg0KPiA+
-ID4gdGhlIERNQS1idWYgc3Vic3lzdGVtKSBpcyB0aGVuIHRoZSBvbmUgd2hvIHNheXMgb2sgSSBj
-YW4gdXNlIHRoaXMNCj4gPiA+IG9yIEkgY2FuJ3QNCj4gPiA+IHVzZSB0aGlzIG9yIEkgbmVlZCB0
-byBjYWxsIGV4dHJhIGZ1bmN0aW9ucyB0byB1c2UgdGhpcyBvcg0KPiA+ID4gd2hhdGV2ZXIuDQo+
-ID4gPiANCj4gPiA+IEl0J3Mgbm90IHRoZSBqb2Igb2YgdGhlIGV4cG9ydGVyIHRvIHByb3ZpZGUg
-dGhlIGNvaGVyZW5jeSBmb3IgdGhlDQo+ID4gPiBpbXBvcnRlciwNCj4gPiA+IGNhdXNlIG90aGVy
-d2lzZSB3ZSB3b3VsZCBoYXZlIGEgbG90IG9mIGNvZGUgaW4gdGhlIGV4cG9ydGVyIHdoaWNoDQo+
-ID4gPiBjYW4gb25seQ0KPiA+ID4gYmUgdGVzdGVkIHdoZW4geW91IGhhdmUgdGhlIHJpZ2h0IGlt
-cG9ydGVyIGFyb3VuZC4gQW5kIEkgc3Ryb25nbHkNCj4gPiA+IHRoaW5rIHRoYXQNCj4gPiA+IHRo
-aXMgaXMgYSBuby1nbyBmb3IgaGF2aW5nIGEgcmVsaWFibGUgc29sdXRpb24uDQo+ID4gPiDCoA0K
-PiA+IMKgDQo+ID4gVGhlIHRyb3VibGUgaXMsIHRoYXQgaWYgeW91IGhhdmUgb3RoZXIgbWVtb3J5
-IHRoYW4gc3R1ZmYgYWxsb2NhdGVkDQo+ID4gYnkgdGhlDQo+ID4gZG1hLWFwaSBvciBtYXBwZWQg
-dXNpbmcgdGhlIGRtYS1hcGksIHRoZW4gYnkgbmVjZXNzaXR5IHRoZSBleHBvcnRlcg0KPiA+IGhh
-cyB0bw0KPiA+IGRlYWwgd2l0aCB0aGlzLg0KPiA+IMKgDQo+IMKgDQo+IMKgWWVzLCBJIHdhcyB0
-aGlua2luZyBhYm91dCB0aGF0IGFzIHdlbGwuDQo+IMKgDQo+IMKgDQo+ID4gwqANCj4gPiBXaGlj
-aCBpcyB0aGUgZXhhY3Qgc2FtZSByZWFzb24gd2UgYWxzbyBmb3JjZSB0aGUgZXhwb3J0ZXJzIHRv
-IGRlYWwNCj4gPiB3aXRoDQo+ID4gdGhlIGNwdSBjYWNoZSBmbHVzaGluZyAtIHlvdSdyZSBhcmd1
-bWVudCB0aGF0IGl0J3Mgbm90IGdyZWF0IHRvDQo+ID4gcmVwbGljYXRlDQo+ID4gdGhpcyBldmVy
-eXdoZXJlIGhvbGRzIHRoZXJlIGVxdWFsbHkuDQo+ID4gwqANCj4gwqANCj4gwqBBbmQgSSdtIG5v
-dCByZWFsbHkgaGFwcHkgd2l0aCB0aGF0IGVpdGhlci4NCj4gwqANCj4gwqANCj4gPiDCoA0KPiA+
-IFRoZSBvdGhlciB0aGluZyBpcyB0aGF0IHJpZ2h0IG5vdyB0aGUgZXhwb3J0ZXIgaXMgdGhlIG9u
-bHkgb25lIHdobw0KPiA+IGFjdHVhbGx5IGtub3dzIHdoYXQga2luZCBvZiBkbWEgY29oZXJlbmN5
-IHJ1bGVzIGFwcGx5IGZvciBhIGNlcnRhaW4NCj4gPiBwaWVjZQ0KPiA+IG9mIG1lbW9yeS4gRS5n
-LiBvbiBpOTE1LWdlbSBldmVuIGlmIGl0J3MgZG1hX21hcF9zZyBtYXBwZWQgdGhlDQo+ID4gdW5k
-ZXJseWluZw0KPiA+IGk5MTUtZ2VtIGJ1ZmZlciBtaWdodCBiZSBub24tY29oZXJlbnQsIGFuZCBp
-OTE1LWdlbSBtYWtlcyBpdCBhbGwNCj4gPiB3b3JrIGJ5DQo+ID4gZG9pbmcgdGhlIGFwcHJvcHJp
-YXRlIGFtb3VudCBvZiBjbGZsdXNoLg0KPiA+IMKgDQo+IMKgDQo+IMKgWWVhaCwgZXhhY3RseSB0
-aGF0J3MgdGhlIHJlYXNvbiB3aHkgSSB0aGluayB0aGF0IHRoaXMgc3R1ZmYgZG9lc24ndA0KPiBi
-ZWxvbmcgaW50byBleHBvcnRlcnMvZHJpdmVycy4NCj4gwqANCj4gwqBMb29raW5nIGF0IHdoYXQg
-a2luZCBvZiBoYWNrcyBhbmQgd29ya2Fyb3VuZHMgd2UgaGF2ZSBpbiBib3RoIGFtZGdwdQ0KPiBh
-cyB3ZWxsIGFzIGk5MTUgaXQncyBwcmV0dHkgY2xlYXIgdGhhdCB3ZSBuZWVkIHRvIGltcHJvdmUg
-dGhpcyBkZXNpZ24NCj4gc29tZWhvdy4NCj4gwqANCj4gwqANCj4gPiDCoA0KPiA+IFNpbWlsYXIg
-ZnVua3kgdGhpbmdzIGhhcHBlbiBpbiBvdGhlciBjYXNlcy4NCj4gPiANCj4gPiBTbyB1bmxlc3Mg
-d2UgYWRkIGFuIGludGVyZmFjZSB3aGljaCBhbGxvd3MgaW1wb3J0ZXJzIHRvIGZpZ3VyZSBvdXQN
-Cj4gPiBob3cNCj4gPiBtdWNoIGZsdXNoaW5nIGlzIG5lZWRlZCwgY3VycmVudGx5IHRoZSBleHBv
-cnRlciBpcyB0aGUgb25seSBvbmUgd2hvDQo+ID4ga25vd3MNCj4gPiAoYmVjYXVzZSBpdCBjYW4g
-aW5zcGVjdCB0aGUgc3RydWN0IGRldmljZSBhdCBkbWFfYnVmX2F0dGFjaCB0aW1lKS4NCj4gPiAN
-Cj4gPiBXZSBjb3VsZCBmbGlwIHRoaXMgYXJvdW5kLCBidXQgaXQgd291bGQgYmUgYSByYXRoZXIg
-c2VyaW91cw0KPiA+IGRlcGF0dXJlIGZyb20NCj4gPiB0aGUgZG1hLWJ1ZiBkZXNpZ24gYXBwcm9h
-Y2ggdGh1cyBmYXIuDQo+ID4gwqANCj4gwqANCj4gwqBXZWxsIGNsaWVudHMgYWxyZWFkeSBnaXZl
-IHRoZSBETUEtZGlyZWN0aW9uIHRvIGV4cG9ydGVycyB3aGVuDQo+IGNyZWF0aW5nIHRoZSBtYXBw
-aW5nIGFuZCBnZXQgYW4gYXBwcm9wcmlhdGUgc2dfdGFibGUgaW4gcmV0dXJuLg0KPiDCoA0KPiDC
-oEFsbCB3ZSBuZWVkIHRvIGRvIGlzIGdldHRpbmcgdGhlIGluZm9ybWF0aW9uIHdoYXQgZmx1c2hp
-bmcgaXMgbmVlZGVkDQo+IGludG8gdGhlIG9iamVjdCByZXR1cm5lZCBoZXJlIHNvIHRoYXQgdGhl
-IERNQSBBUEkgY2FuIHdvcmsgd2l0aCBpdC4NCj4gwqANCj4gwqBDaHJpc3RvcGggSGVsbHdpZyBw
-cmV0dHkgbXVjaCBuYWlsZWQgaXQgd2hlbiBoZSBzYWlkIHRoYXQgdGhlDQo+IHByb2JsZW0gd2l0
-aCB0aGUgc2dfdGFibGUgaXMgdGhhdCBpdCBtaXhlcyBpbnB1dCBhbmQgb3V0cHV0DQo+IHBhcmFt
-ZXRlcnMgb2YgdGhlIERNQS1BUEkuDQo+IMKgDQo+IMKgSSB3b3VsZCBleHRlbmQgdGhhdCBhbmQg
-c2F5IHRoYXQgd2UgbmVlZCBhIG1hcHBpbmcgb2JqZWN0IHRoZSBETUEtDQo+IEFQSSBjYW4gd29y
-ayB3aXRoIHNvIHRoYXQgaXQgY2FuIGtub3cgd2hhdCBuZWVkcyB0byBiZSBkb25lIHdoZW4NCj4g
-ZGV2aWNlcyByZXF1ZXN0IHRoYXQgZGF0YSBpcyBtYWRlIGNvaGVyZW50IGJldHdlZW4gdGhlbSBv
-ciB0aGUgQ1BVLg0KPiDCoA0KPiDCoA0KPiA+IMKgDQo+ID4gPiDCoA0KPiA+ID4gVGhhdCdzIHdo
-eSBJIHRoaW5rIHRoZSBhcHByb2FjaCBvZiBoYXZpbmcgRE1BLWJ1ZiBjYWxsYmFja3MgaXMNCj4g
-PiA+IG1vc3QgbGlrZWx5DQo+ID4gPiB0aGUgd3JvbmcgdGhpbmcgdG8gZG8uDQo+ID4gPiANCj4g
-PiA+IFdoYXQgc2hvdWxkIGhhcHBlbiBpbnN0ZWFkIGlzIHRoYXQgdGhlIERNQSBzdWJzeXN0ZW0g
-cHJvdmlkZXMNCj4gPiA+IGZ1bmN0aW9uYWxpdHkNCj4gPiA+IHdoaWNoIHRvIGRldmljZXMgd2hp
-Y2ggZG9uJ3Qgc3VwcG9ydCBjb2hlcmVuY3kgdGhyb3VnaCBpdCdzDQo+ID4gPiBjb25uZWN0aW9u
-IHRvDQo+ID4gPiBzYXkgSSB3YW50IHRvIGFjY2VzcyB0aGlzIGRhdGEsIHBsZWFzZSBtYWtlIHN1
-cmUgdG8gZmx1c2ggdGhlDQo+ID4gPiBhcHByb3ByaWF0ZQ0KPiA+ID4gY2F0Y2hlcy4gQnV0IHRo
-YXQncyBqdXN0IGEgdmVyeSB2ZXJ5IHJvdWdoIGRlc2lnbiBpZGVhLg0KPiA+ID4gDQo+ID4gPiBU
-aGlzIHdpbGwgYmVjb21lIG1vcmUgd2l0aCBDWEwgYXQgdGhlIGhvcml6b24gSSB0aGluay4NCj4g
-PiA+IMKgDQo+ID4gwqANCj4gPiBZZWFoIENYTCB3aWxsIG1ha2UgdGhpcyBhbGwgZXZlbiBtb3Jl
-IGZ1biwgYnV0IHdlIGFyZSBmaXJtbHkgdGhlcmUNCj4gPiBhbHJlYWR5DQo+ID4gd2l0aCBkZXZp
-Y2VzIGRlY2lkaW5nIHBlci1idWZmZXIgKG9yIHNvbWV0aW1lcyBldmVuIHBlci1hY2Nlc3Mgd2l0
-aA0KPiA+IGludGVsJ3MgTU9DUyBzdHVmZikgd2hhdCBjb2hlcmVuY3kgbW9kZSB0byB1c2UgZm9y
-IGEgYnVmZmVyLg0KPiA+IA0KPiA+IEFsc28gYXJtIHNvYyBnZW5lcmFsbHkgaGF2ZSBib3RoIGNv
-aGVyZW50IGFuZCBub24tY29oZXJlbnQgZGV2aWNlDQo+ID4gaW50ZXJjb25uZWN0cywgYW5kIEkg
-dGhpbmsgc29tZSBkZXZpY2VzIGNhbiBzd2l0Y2ggd2l0aCBydW50aW1lDQo+ID4gZmxhZ3MgdG9v
-DQo+ID4gd2hpY2ggbW9kZSB0aGV5IHVzZSBmb3IgYSBzcGVjaWZpYyB0cmFuc2l0aW9uLg0KPiA+
-IA0KPiA+IENYTCBqdXN0IGV4dGVuZHMgdGhpcyB0byBwY2llIGRldmljZXMuDQo+ID4gDQo+ID4g
-U28gdGhlIG1lc3MgaXMgaGVyZSwgaG93IGRvIHdlIGRlYWwgd2l0aCBpdD8NCj4gPiDCoA0KPiDC
-oA0KPiDCoEkgd291bGQgc2F5IHdlIHN0YXJ0IHdpdGggdGhlIERNQS1BUEkgYnkgZ2V0dGluZyBh
-d2F5IGZyb20gc2dfdGFibGVzDQo+IHRvIHNvbWV0aGluZyBjbGVhbmVyIGFuZCBzdGF0ZSBvcmll
-bnRlZC7CoA0KDQpGWUkgSSBhbSBhbHJlYWR5IGFkZGluZyBhICdkbWFfdmVjJyBvYmplY3QgaW4g
-bXkgSUlPIERNQUJVRiBwYXRjaHNldCwNCndoaWNoIGlzIGp1c3QgYSBkZWFkIHNpbXBsZQ0KDQpz
-dHJ1Y3QgZG1hX3ZlYyB7DQogIGRtYV9hZGRyX3QgYWRkcjsNCiAgc2l6ZV90IGxlbjsNCn07DQoN
-CihUaGUgcmF0aW9uYWxlIGZvciBpbnRyb2R1Y2luZyBpdCBpbiB0aGUgSUlPIERNQUJVRiBwYXRj
-aHNldCB3YXMgdGhhdA0KdGhlICJzY2F0dGVybGlzdCIgd291bGRuJ3QgYWxsb3cgbWUgdG8gY2hh
-bmdlIHRoZSB0cmFuc2ZlciBzaXplLikNCg0KU28gSSBiZWxpZXZlIGEgbmV3ICJzZ190YWJsZSIt
-bGlrZSBjb3VsZCBqdXN0IGJlIGFuIGFycmF5IG9mIHN0cnVjdA0KZG1hX3ZlYyArIGZsYWdzLg0K
-DQpDaGVlcnMsDQotUGF1bA0KDQo+ID4gwqANCj4gPiANCj4gPiBNeSB0YWtlIGlzIHRoYXQgdGhl
-IG9wdC1pbiBjYWxsYmFjayBhZGRpdGlvbiBpcyBmYXIgZnJvbSBncmVhdCwgYnV0DQo+ID4gaXQn
-cw0KPiA+IGluIGxpbmUgd2l0aCBob3cgd2UgZXh0ZW5kZWQgZG1hLWJ1ZiB0aGUgcGFzdCBkZWNh
-ZGUgcGx1cyB0b28uIFNvDQo+ID4gdW5sZXNzDQo+ID4gc29tZW9uZSdzIHZvbHVudGVlcmluZyB0
-byBwb3VyIHNvbWUgc2VyaW91cyB0aW1lIGludG8gcmUtDQo+ID4gZW5naW5lZXJpbmcgdGhpcw0K
-PiA+IGFsbCAoaW5jbHVkaW5nIHRlc3RpbmcgYWxsIHRoZSBkaWZmZXJlbnQgZGV2aWNlL2RyaXZl
-cjwtDQo+ID4gPmRldmljZS9kcml2ZXINCj4gPiBpbnRlcmFjdGlvbnMpIEkgdGhpbmsgdGhlcmUn
-cyBvbmx5IHJlYWxseSBvbmUgb3RoZXIgb3B0aW9uOiBUbyBub3QNCj4gPiBzdXBwb3J0DQo+ID4g
-dGhlc2UgY2FzZXMgYXQgYWxsLiBBbmQgSSBkb24ndCByZWFsbHkgbGlrZSB0aGF0LCBiZWNhdXNl
-IGl0IG1lYW5zDQo+ID4gcGVvcGxlDQo+ID4gd2lsbCBoYWNrIHRvZ2V0aGVyIHNvbWV0aGluZyBl
-dmVuIHdvcnNlIGluIHRoZWlyIGRyaXZlcnMuDQo+ID4gDQo+ID4gQnkgYWRkaW5nIGl0IHRvIGRt
-YS1idWYgaXQnbGwgc3RhcmUgdXMgaW4gb3VyIGZhY2VzIGF0IGxlYXN0IDotLw0KPiA+IMKgDQo+
-IMKgDQo+IMKgWWVhaCwgaXQncyB0aGUgd2F5IG9mIHRoZSBsZWFzdCByZXNpc3RhbmNlLiBCdXQg
-d2l0aCBDWEwgYXQgdGhlDQo+IGhvcml6b24gYW5kIG1vcmUgYW5kIG1vcmUgZHJpdmVycyB1c2lu
-ZyBpdCBJIHRoaW5rIGl0J3MgcHJlZGljdGFibGUNCj4gdGhhdCB0aGlzIHdpbGwgc29vbmVyIG9y
-IGxhdGVyIGJsb3cgdXAuDQo+IMKgDQo+IMKgQ2hlZXJzLA0KPiDCoENocmlzdGlhbi4gDQo+IMKg
-DQo+IMKgDQo+ID4gwqANCj4gPiANCj4gPiBDaGVlcnMsIFNpbWENCj4gPiANCj4gPiDCoA0KPiA+
-ID4gwqANCj4gPiA+IFJlZ2FyZHMsDQo+ID4gPiBDaHJpc3RpYW4uDQo+ID4gPiANCj4gPiA+IMKg
-DQo+ID4gPiA+IMKgDQo+ID4gPiA+IENoZWVycywgU2ltYQ0KPiA+ID4gPiDCoA0KPiA+ID4gwqAN
-Cj4gPiA+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+
-ID4gPiBMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxp
-bmFyby5vcmcNCj4gPiA+IFRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1t
-LXNpZy0NCj4gPiA+IGxlYXZlQGxpc3RzLmxpbmFyby5vcmcNCj4gPiA+IMKgDQo+ID4gwqDCoA0K
-PiDCoA0KPiDCoA0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxp
-bmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxl
-YXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Tue, Jan 30, 2024 at 10:23:03AM +0100, Christian K=F6nig wrote:
+> Am 30.01.24 um 10:01 schrieb Daniel Vetter:
+> > On Fri, Jan 26, 2024 at 05:42:50PM +0100, Christian K=F6nig wrote:
+> > > [SNIP]
+> > > Well I think we should have some solution, but I'm not sure if it sho=
+uld be
+> > > part of DMA-buf.
+> > >=20
+> > > Essentially a DMA-buf exports the buffers as he uses it and the impor=
+ter (or
+> > > the DMA-buf subsystem) is then the one who says ok I can use this or =
+I can't
+> > > use this or I need to call extra functions to use this or whatever.
+> > >=20
+> > > It's not the job of the exporter to provide the coherency for the imp=
+orter,
+> > > cause otherwise we would have a lot of code in the exporter which can=
+ only
+> > > be tested when you have the right importer around. And I strongly thi=
+nk that
+> > > this is a no-go for having a reliable solution.
+> > The trouble is, that if you have other memory than stuff allocated by t=
+he
+> > dma-api or mapped using the dma-api, then by necessity the exporter has=
+ to
+> > deal with this.
+>=20
+> Yes, I was thinking about that as well.
+>=20
+> > Which is the exact same reason we also force the exporters to deal with
+> > the cpu cache flushing - you're argument that it's not great to replica=
+te
+> > this everywhere holds there equally.
+>=20
+> And I'm not really happy with that either.
+>=20
+> > The other thing is that right now the exporter is the only one who
+> > actually knows what kind of dma coherency rules apply for a certain pie=
+ce
+> > of memory. E.g. on i915-gem even if it's dma_map_sg mapped the underlyi=
+ng
+> > i915-gem buffer might be non-coherent, and i915-gem makes it all work by
+> > doing the appropriate amount of clflush.
+>=20
+> Yeah, exactly that's the reason why I think that this stuff doesn't belong
+> into exporters/drivers.
+>=20
+> Looking at what kind of hacks and workarounds we have in both amdgpu as w=
+ell
+> as i915 it's pretty clear that we need to improve this design somehow.
+
+Yeah it's been a well-known issue, and we've very slowly improved things.
+
+> > Similar funky things happen in other cases.
+> >=20
+> > So unless we add an interface which allows importers to figure out how
+> > much flushing is needed, currently the exporter is the only one who kno=
+ws
+> > (because it can inspect the struct device at dma_buf_attach time).
+> >=20
+> > We could flip this around, but it would be a rather serious depature fr=
+om
+> > the dma-buf design approach thus far.
+>=20
+> Well clients already give the DMA-direction to exporters when creating the
+> mapping and get an appropriate sg_table in return.
+>=20
+> All we need to do is getting the information what flushing is needed into
+> the object returned here so that the DMA API can work with it.
+
+So the problem is that we can provide this information from exporters that
+do device specific stuff. But we cannot get this information from
+exporters which just use the dma-api, whether it's dma_alloc or
+dma_map_sg, because the core design principle of the dma-api is to hide
+the coherency rules for device dma.
+
+The idea is that you have the same ip on different socs, where on one the
+soc needs cache flushing and on the other you dont (because different
+architecture, or just the ip being connected to different interconnects),
+you can use the exact same driver since the dma-api hides all this.
+
+And at least every time it was discussed in the past, dma-api maintainers
+insisted that we don't break this abstraction rule. Which means for most
+exporters, we simply do not have this information available. This is also
+why after epic long discussions it was decided that cache coherency was
+the exporter's problem, so that from an importer pov there's no difference
+between an sg list optained through dma_buf_map and an sg list obtained
+from dma_map_sg or memory allocated with dma_alloc - in none of these
+cases does the driver have to do its own cache management.
+
+> Christoph Hellwig pretty much nailed it when he said that the problem with
+> the sg_table is that it mixes input and output parameters of the DMA-API.
+
+Hm my take away from these discussions was that sg as a data structure is
+not a clean design, but I haven't ever seen Christoph (or anyone else from
+the dma-api side) say that they're ok with leaking cache coherency
+management to clients.
+
+We couldn't even get the core arch primitives exported to drivers so that
+dma-buf exporters could do the right cache management for their driver
+specific allocators that entirely bypass the dma-api. I think what you're
+suggesting would go way beyond that.
+
+> I would extend that and say that we need a mapping object the DMA-API can
+> work with so that it can know what needs to be done when devices request
+> that data is made coherent between them or the CPU.
+
+Personally I do think it makes sense as a design and iirc we discussed it
+plenty in the early dma-buf discussions. I just don't think it's a
+realistic design approach to upstream.
+
+I think best we can hope for is a new set of device2device sync functions
+in the dma_sg_sync_for* family of functions, so that on platforms where
+syncing for cpu access requires cache flushes, but going from one device
+to the next doesn't we could avoid some unecessary flushing. Currently
+there's no way to do that and we have to pessimistically flush for cpu
+coherency with the dma-api. Or suffer from device2device coherency issues
+on funky platforms.
+
+> > > That's why I think the approach of having DMA-buf callbacks is most l=
+ikely
+> > > the wrong thing to do.
+> > >=20
+> > > What should happen instead is that the DMA subsystem provides functio=
+nality
+> > > which to devices which don't support coherency through it's connectio=
+n to
+> > > say I want to access this data, please make sure to flush the appropr=
+iate
+> > > catches. But that's just a very very rough design idea.
+> > >=20
+> > > This will become more with CXL at the horizon I think.
+> > Yeah CXL will make this all even more fun, but we are firmly there alre=
+ady
+> > with devices deciding per-buffer (or sometimes even per-access with
+> > intel's MOCS stuff) what coherency mode to use for a buffer.
+> >=20
+> > Also arm soc generally have both coherent and non-coherent device
+> > interconnects, and I think some devices can switch with runtime flags t=
+oo
+> > which mode they use for a specific transition.
+> >=20
+> > CXL just extends this to pcie devices.
+> >=20
+> > So the mess is here, how do we deal with it?
+>=20
+> I would say we start with the DMA-API by getting away from sg_tables to
+> something cleaner and state oriented.
+
+Imo that's a tangential distraction. Definitely would be great to untangle
+that data structure, but I don't think that gets us any closer to getting
+the coherency information out of the dma-api abstraction that we'd like to
+have.
+
+That part has been an extremely firm "no" every time we asked.
+
+> > My take is that the opt-in callback addition is far from great, but it's
+> > in line with how we extended dma-buf the past decade plus too. So unless
+> > someone's volunteering to pour some serious time into re-engineering th=
+is
+> > all (including testing all the different device/driver<->device/driver
+> > interactions) I think there's only really one other option: To not supp=
+ort
+> > these cases at all. And I don't really like that, because it means peop=
+le
+> > will hack together something even worse in their drivers.
+> >=20
+> > By adding it to dma-buf it'll stare us in our faces at least :-/
+>=20
+> Yeah, it's the way of the least resistance. But with CXL at the horizon a=
+nd
+> more and more drivers using it I think it's predictable that this will
+> sooner or later blow up.
+
+I know, it's kinda been blowing up already.
+
+My prediction is that the best we can get out of the dma-api is a new
+device2device sync, while all the coherency details are still 100% hidden
+behind the dma-api. And even that is probably going to take years.
+
+Cheers, Sima
+--=20
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
