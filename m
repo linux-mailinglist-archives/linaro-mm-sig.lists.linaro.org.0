@@ -2,66 +2,66 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D342084406F
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Jan 2024 14:24:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 14AA8844113
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Jan 2024 14:53:55 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 88CD3400DB
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Jan 2024 13:24:11 +0000 (UTC)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com [209.85.208.43])
-	by lists.linaro.org (Postfix) with ESMTPS id 9AD7F3EA59
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 31 Jan 2024 13:24:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DBDA6400DD
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 31 Jan 2024 13:53:53 +0000 (UTC)
+Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
+	by lists.linaro.org (Postfix) with ESMTPS id 5E1FB3EA59
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 31 Jan 2024 13:53:47 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=sRuDEHSC;
+	dkim=pass header.d=linaro.org header.s=google header.b="V/ifnS5r";
 	dmarc=pass (policy=none) header.from=linaro.org;
-	spf=pass (lists.linaro.org: domain of joakim.bech@linaro.org designates 209.85.208.43 as permitted sender) smtp.mailfrom=joakim.bech@linaro.org
-Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-55f8abbeeddso662954a12.1
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 31 Jan 2024 05:24:04 -0800 (PST)
+	spf=pass (lists.linaro.org: domain of joakim.bech@linaro.org designates 209.85.208.52 as permitted sender) smtp.mailfrom=joakim.bech@linaro.org
+Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-55a9008c185so1725264a12.1
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 31 Jan 2024 05:53:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1706707443; x=1707312243; darn=lists.linaro.org;
+        d=linaro.org; s=google; t=1706709226; x=1707314026; darn=lists.linaro.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=5MUD9HTI1e0BY5P2+rcAvV/RfzBprzDJcgshNjTcI5g=;
-        b=sRuDEHSCCNICwykXzQlwmWkrCOahY6m/0GM1yv7w5p2bOYhE5vFjt/6E/cmvup6FMf
-         TcjPXydMKmslmi9NK7VtCwBWWxGm1PifqJYXuRLb4sn90cARq+ZqnonzF1dp1Ij4UF7r
-         CDwrE4odVJeqnUbNCNv+EyZOR2TGG6t4aGbKWlOdX97N/L0jKlZh+UpTblmpkuxg/AdU
-         vZVSg/PDvf02Zv0ZE4NOZDTaSns0b+VtdPiwlNPJOMO+yEuS25lTkTHrdD+C13oFgRGb
-         zm6RN5l2JnKpyNDW4jg7kCixjqXbVtCmgWtRlzXC9fG4mQ+nfs7Wo+LUsj02GGMxLzUT
-         RPQw==
+        bh=ahOd0DsEgD/5LLUjuJjav5ZXUjQod+q+9a1w7vEMGKU=;
+        b=V/ifnS5r1dGpchb8sHoWl5c4Z33xbgxOUlzLxgv7wdPfQvLf3pqyyg8lDSMZGAwIoa
+         ZAMlglJTj5iPymXd4TxPchH66UizMhXcPZyV1bTQbEcIjULTPuhnmL319V55v7iOAMrf
+         nIXMra46hpyBRxkNymk9eRf12xsTzF57DUdmaMXOlcxi2qS2vrPuEtxbTWL79NXfkBvY
+         l8A4KUUEuxrmBbGAEFqXhGgDfRapCvALiOq9SKVTslOBRWmXbefWPzJBNAff+3eVqATu
+         QwUFR4bfzXEVgIAMl7RWU+70x6tLE/F3dBDkpYZbryOX82g9HOJrZAbz/WS4nG9Iwkkn
+         vc9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1706707443; x=1707312243;
+        d=1e100.net; s=20230601; t=1706709226; x=1707314026;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=5MUD9HTI1e0BY5P2+rcAvV/RfzBprzDJcgshNjTcI5g=;
-        b=EMbh6OZHEXzQKqBAF+GeleZ7ntdmjSBaBLgasrvOOMyY3SA2INhamU3DLJaBNiECML
-         /8HuxCrPE2tBORYuIDNca0gUtylbBjPMhmTKWlXiZQFrE1P+Uq1e5CnAXb6ZkXVyPIXv
-         Kyy7eQxNzqPVlotIsfrBlVMhgL6VBOtWXhYQcJs56hWmHcTRAvCecDluB2LcIeX6YE79
-         OWp2sVER4tzG7XHbU67oFR7++SkYNvF/I04rhI4GJuAwnqtNcfTLDwxpUIGnflRCmUEv
-         G9poeoPHSNXcxLujHXpX4XopuGmZ/IOIKH7cvbNrnAQeCdvN/tx/oSUlyUfoFRWoZ2l1
-         mD8w==
-X-Gm-Message-State: AOJu0Yxozk3jVNs7nh0GPEjjA6vjY3tW8cadJBFV1vH3rWW0i4RKh7ul
-	ky6X6o8IO7gpj7Efe0sY4yihAT4bZXVDaNDbTtwyAQwlwZYyp+M1++jpwcoXPdsIDQ==
-X-Google-Smtp-Source: AGHT+IGsArhQ0W4XwCtuYHmCXvO2RCbEUYwLVnXG7bbJ2f+RWm7qp6uth4/WrrGNVLWi0nMCiDAGlA==
-X-Received: by 2002:a05:6402:5213:b0:55f:7fe9:c567 with SMTP id s19-20020a056402521300b0055f7fe9c567mr1328202edd.1.1706707443454;
-        Wed, 31 Jan 2024 05:24:03 -0800 (PST)
-X-Forwarded-Encrypted: i=0; AJvYcCXAPb1qAxujL6HdXhhSE+sVLYyv05T+1t6zsGllhHznYzX/PMaaMWlWlwdKflV/rE2cW6o74D6P5/MgaRBL50x8hpKC6rdV3SXCT9jg9Ji7TUTPz1pNeBhWMlWC+IfLrPd0B2vhwyNDuizmS32810JX3sqf5JT7V+AQ99g6Rel+10bREe21Sb5EO1A/Omzzjn3QIfCT/mujA2BEUIiu1zZv+0CqUv1MaxkOh7cqm9rocuXEHmjyBszU0xvEJlv0mjNYLCS1XoDJxpzUAq/rfM/zz5jpOFPEGrdjrd9xf/22brANqKdr5Qe7xJD4RBSiEgBrJJf/AkA4q95VBK8PXrnB0jaX78Q7eDv8e+05u79LxxjkpSzKapxDjRADUQkvVUGL4Bo/Fj0g6gCjTSX4jQxfKFGNVzoFUx5kWAFx1+ygTUek7Rz2OKpqQXwb937CLkXtvDD2DA7yqDKv1A+/fqrKg8HBoUNNJECbkjLwH8g99VV5sbLqL0YhV3CLc4Xcu7CMQMVNnwPCTGD4XqyeQSQ8hrz1YCxpBWplY+sPHVREe6iy1/GkJs/OwqCglwcC7CFTSolo9DSTLmRDrk1UhGOFe31qbec+gOCKSWxxr4s6abJlSI8f+navK+6YHoPncMiXIizZv3QIiI1Z4891Tkb4pYAedqs2PA0AE1Wv9C7i3ka9bfYsDX09/hNrgQkhQ1xjUVADtWzUmG0UrwpYOJEmhjfGBkgglntxHOt+hgbn4N4VuA1QdBjYw1CU8N7CJzmVLwtLZaliIjELEvthoIM2ibY5DXpSs5qu9XM59tf609gL0qEP4IFy3iwMydPTmAqogjjmV03dipumTSNdoFHa55YPC2eQ3OyH5nA5YOEQrE4ElC5koxoXVb43SA5OoTdRfnAD93eKIz+BlAAfzx/hqxYe+pKpm1gX8Qh3wS2YqK9fF05r6BlYh117YgypN339P3
- 9xHWP4A+bTltjSuhLbMpZNEOGvejoeqZB4
+        bh=ahOd0DsEgD/5LLUjuJjav5ZXUjQod+q+9a1w7vEMGKU=;
+        b=lPlyZAToUqVQuGaWXPkm95608QpKjOfM9ndZTs894vS+ysgREnr5OmZKiL+Qh3o8/O
+         5q0Vpvc6I7DyoF60ZTTEf+ocX/If7goESzxGFFY1+cGUbyaV9UONqaeG0eMdqXYeBJi4
+         Kjis/F0+2m1EQjPkfCMe5PKynunlzpl6RIiRKqFNXRu1aoO5uBFhAF0qu2O+QC9zzi9G
+         0k53VAUbpGr/dpMEPwTHN7nBBZTcyMaV6UdMcnRqYx4Etr4ntlVdKCaO5RvEFsnCycf3
+         HeZQto5CBff8WtmpXhgH7IE53mMAlUAeszrpoCgY0DdhAZadwL3CDNxFeIUltjszX7Q7
+         Xgqg==
+X-Gm-Message-State: AOJu0YwTLYBpanec7qht2EdCDVxWlBws+Lqd7QQTZWFdL0/7GRRYn/az
+	0ThW6g3BNvg9ZVkMhIbRybkXmAjhbWSlbSRNG7vWkAMEqzy2pGrpsvM7wuV+E73sVg==
+X-Google-Smtp-Source: AGHT+IF/HhYD9uEpTmG0foPvY+xCTXKvk5obu0HsU61MTSjfgdbYBqyNsdDIta+ap8fzjTNneV6ulw==
+X-Received: by 2002:a05:6402:26ce:b0:55f:992a:6214 with SMTP id x14-20020a05640226ce00b0055f992a6214mr544647edd.4.1706709226169;
+        Wed, 31 Jan 2024 05:53:46 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCWUqIoHU49HCTb1rUovxV2gzF0kNXugLnZJeOYtS/NemWRrh0sE6nRlMpUq+1mJOwWQ4reR3QOaR4C3hI6SS4Kh4wZKVlDJ6uoiKBDU6GaEZZwuVqTSlfqoRX1FVckX34fLfeEqodIdgfqNacwxzO+JYfyzbocr4Tf59DtEwj01giG3YFJYFmtUtcG6AP90iDOC5tTEc867KA+4Emd3CN1m+cq3Dcnp1bMhe39oHkOf2V0jc4Bm3Bv6PK49WOdh4e/icTK6ccAzVCAvXM8v/flwcNq8frmo+e6JZeNhUY6YN1hwSWBx+UtwP0rMZbbaqwrgKeKmjD2tJSVyvIRoB22IZqQSA0oS+sFhSdh38PdbvFu5BAMPHZv/GJMNZp30c6wZ1ADFFk8hz9MQ3y+PNePEmHaVS9CRINxdCNihRo6E4sgFvNybrmAmsC9H269+TZOeVrhCndoEuH72nqlo1ERZTy5ElrRbIMG8cczjx3VcSNQBRpAh1bFq1MgJiK5+nY1mN/UQhps5E330KFEiv7gJSnXi/jK8jB8We7h/tnrp/0t23yaFt41Svs574zOCgtjvdO0u52EcTzEez9PatHNpm5lOxC8qYzIzcVI0R91u1nCmwKpYslmUYln4R7MnjewahTR+IYHmByVBXx0FTdOFqHCMcWcrlN39J5yYs1np2PrPxYyI3DIW1gi3OCDgZNdD5rVHlFc75iXOjasBH7eahPDFLcVx0p6BqqJ2mLLk4NTcoZIP85Zu5wI7g8IBiqrZJcWYGgNwTRryHRWokBw5XBe1BnY+ib53YyThWi+SlQrwBSm9ItKEaslSYUzPrVjWnl0hURKIOdO4Q1NPXPTGQdvnNoeFf6lkeqho5K0m8d5bIh8SAM9gkGTnBDlRsusQAZ8M5GG+Da2YhJoKqVc8P0u+gvHUcFdFxRqRfZjFVyBvK4UT6BKw+xELIa0Q+7Tc6t
+ togPTrIj/XhTaCr9NEbPyyavGfIsDRv+PD
 Received: from pop-os.localdomain (81-231-61-187-no276.tbcn.telia.com. [81.231.61.187])
-        by smtp.gmail.com with ESMTPSA id et6-20020a056402378600b0055eeb5f0efcsm3641516edb.58.2024.01.31.05.24.01
+        by smtp.gmail.com with ESMTPSA id ec37-20020a0564020d6500b0055f8adf1d6esm465420edb.47.2024.01.31.05.53.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 31 Jan 2024 05:24:02 -0800 (PST)
-Date: Wed, 31 Jan 2024 14:24:00 +0100
+        Wed, 31 Jan 2024 05:53:45 -0800 (PST)
+Date: Wed, 31 Jan 2024 14:53:43 +0100
 From: Joakim Bech <joakim.bech@linaro.org>
 To: Yong Wu <yong.wu@mediatek.com>
-Message-ID: <20240131132400.h3hklvnjjp3pelqz@pop-os.localdomain>
+Message-ID: <20240131135343.rj6xlch6zcev2v47@pop-os.localdomain>
 References: <20240112092014.23999-1-yong.wu@mediatek.com>
- <20240112092014.23999-3-yong.wu@mediatek.com>
+ <20240112092014.23999-4-yong.wu@mediatek.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240112092014.23999-3-yong.wu@mediatek.com>
+In-Reply-To: <20240112092014.23999-4-yong.wu@mediatek.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 9AD7F3EA59
+X-Rspamd-Queue-Id: 5E1FB3EA59
 X-Spamd-Bar: --
 X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
@@ -70,7 +70,7 @@ X-Spamd-Result: default: False [-2.50 / 15.00];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.43:from];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.52:from];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ARC_NA(0.00)[];
 	MISSING_XM_UA(0.00)[];
@@ -88,17 +88,17 @@ X-Spamd-Result: default: False [-2.50 / 15.00];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[linaro.org:+]
-Message-ID-Hash: AHR7HXTPV4RSER2JKHNSQAYZVNPKMQLS
-X-Message-ID-Hash: AHR7HXTPV4RSER2JKHNSQAYZVNPKMQLS
+Message-ID-Hash: UZ7NK2BV6YFKSTX6AHG7OHSL5D74S3ZF
+X-Message-ID-Hash: UZ7NK2BV6YFKSTX6AHG7OHSL5D74S3ZF
 X-MailFrom: joakim.bech@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Rob Herring <robh+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, christian.koenig@amd.com, Sumit Semwal <sumit.semwal@linaro.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, tjmercier@google.com, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, Robin Murphy <robin.murphy@arm.com>, Vijayanand Jitta <quic_vjitta@quicinc.com>, Jeffrey Kardatzke <jkardatzke@google.com>, Pavel Machek <pavel@ucw.cz>, Simon Ser <contact@emersion.fr>, Pekka Paalanen <ppaalanen@gmail.com>, jianjiao.zeng@mediatek.com, kuohong.wang@mediatek.com, youlin.pei@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 2/7] dma-buf: heaps: Initialize a restricted heap
+Subject: [Linaro-mm-sig] Re: [PATCH v4 3/7] dma-buf: heaps: restricted_heap: Add private heap ops
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AHR7HXTPV4RSER2JKHNSQAYZVNPKMQLS/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UZ7NK2BV6YFKSTX6AHG7OHSL5D74S3ZF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -108,152 +108,137 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Fri, Jan 12, 2024 at 05:20:09PM +0800, Yong Wu wrote:
-> Initialize a restricted heap. Currently just add a null heap, Prepare for
-> the later patches.
+On Fri, Jan 12, 2024 at 05:20:10PM +0800, Yong Wu wrote:
+> Add "struct restricted_heap_ops". For the restricted memory, totally there
+> are two steps:
+> a) memory_alloc: Allocate the buffer in kernel;
+> b) memory_restrict: Restrict/Protect/Secure that buffer.
+> The memory_alloc is mandatory while memory_restrict is optinal since it may
+>
+s/optinal/optional/
+
+> be part of memory_alloc.
 > 
 > Signed-off-by: Yong Wu <yong.wu@mediatek.com>
 > ---
->  drivers/dma-buf/heaps/Kconfig           |  9 ++++
->  drivers/dma-buf/heaps/Makefile          |  3 +-
->  drivers/dma-buf/heaps/restricted_heap.c | 67 +++++++++++++++++++++++++
->  drivers/dma-buf/heaps/restricted_heap.h | 22 ++++++++
->  4 files changed, 100 insertions(+), 1 deletion(-)
->  create mode 100644 drivers/dma-buf/heaps/restricted_heap.c
->  create mode 100644 drivers/dma-buf/heaps/restricted_heap.h
+>  drivers/dma-buf/heaps/restricted_heap.c | 41 ++++++++++++++++++++++++-
+>  drivers/dma-buf/heaps/restricted_heap.h | 12 ++++++++
+>  2 files changed, 52 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/dma-buf/heaps/Kconfig b/drivers/dma-buf/heaps/Kconfig
-> index a5eef06c4226..e54506f480ea 100644
-> --- a/drivers/dma-buf/heaps/Kconfig
-> +++ b/drivers/dma-buf/heaps/Kconfig
-> @@ -12,3 +12,12 @@ config DMABUF_HEAPS_CMA
->  	  Choose this option to enable dma-buf CMA heap. This heap is backed
->  	  by the Contiguous Memory Allocator (CMA). If your system has these
->  	  regions, you should say Y here.
-> +
-> +config DMABUF_HEAPS_RESTRICTED
-> +	bool "DMA-BUF Restricted Heap"
-> +	depends on DMABUF_HEAPS
-> +	help
-> +	  Choose this option to enable dma-buf restricted heap. The purpose of this
-> +	  heap is to manage buffers that are inaccessible to the kernel and user space.
-> +	  There may be several ways to restrict it, for example it may be encrypted or
-> +	  protected by a TEE or hypervisor. If in doubt, say N.
-> diff --git a/drivers/dma-buf/heaps/Makefile b/drivers/dma-buf/heaps/Makefile
-> index 974467791032..a2437c1817e2 100644
-> --- a/drivers/dma-buf/heaps/Makefile
-> +++ b/drivers/dma-buf/heaps/Makefile
-> @@ -1,3 +1,4 @@
->  # SPDX-License-Identifier: GPL-2.0
-> -obj-$(CONFIG_DMABUF_HEAPS_SYSTEM)	+= system_heap.o
->  obj-$(CONFIG_DMABUF_HEAPS_CMA)		+= cma_heap.o
-> +obj-$(CONFIG_DMABUF_HEAPS_RESTRICTED)	+= restricted_heap.o
-> +obj-$(CONFIG_DMABUF_HEAPS_SYSTEM)	+= system_heap.o
 > diff --git a/drivers/dma-buf/heaps/restricted_heap.c b/drivers/dma-buf/heaps/restricted_heap.c
-> new file mode 100644
-> index 000000000000..fd7c82abd42e
-> --- /dev/null
+> index fd7c82abd42e..8c266a0f6192 100644
+> --- a/drivers/dma-buf/heaps/restricted_heap.c
 > +++ b/drivers/dma-buf/heaps/restricted_heap.c
-> @@ -0,0 +1,67 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * DMABUF restricted heap exporter
-> + *
-> + * Copyright (C) 2024 MediaTek Inc.
-> + */
-> +
-> +#include <linux/dma-buf.h>
-> +#include <linux/dma-heap.h>
-> +#include <linux/err.h>
-> +#include <linux/slab.h>
-> +
-> +#include "restricted_heap.h"
-> +
-> +static struct dma_buf *
-> +restricted_heap_allocate(struct dma_heap *heap, unsigned long size,
-> +			 unsigned long fd_flags, unsigned long heap_flags)
+> @@ -12,10 +12,44 @@
+>  
+>  #include "restricted_heap.h"
+>  
+> +static int
+> +restricted_heap_memory_allocate(struct restricted_heap *heap, struct restricted_buffer *buf)
 > +{
-> +	struct restricted_buffer *restricted_buf;
-> +	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
-> +	struct dma_buf *dmabuf;
+> +	const struct restricted_heap_ops *ops = heap->ops;
 > +	int ret;
 > +
-> +	restricted_buf = kzalloc(sizeof(*restricted_buf), GFP_KERNEL);
-> +	if (!restricted_buf)
-> +		return ERR_PTR(-ENOMEM);
+> +	ret = ops->memory_alloc(heap, buf);
+> +	if (ret)
+> +		return ret;
 > +
-> +	restricted_buf->size = ALIGN(size, PAGE_SIZE);
-> +	restricted_buf->heap = heap;
-> +
-> +	exp_info.exp_name = dma_heap_get_name(heap);
-> +	exp_info.size = restricted_buf->size;
-> +	exp_info.flags = fd_flags;
-> +	exp_info.priv = restricted_buf;
-> +
-> +	dmabuf = dma_buf_export(&exp_info);
-> +	if (IS_ERR(dmabuf)) {
-> +		ret = PTR_ERR(dmabuf);
-> +		goto err_free_buf;
+> +	if (ops->memory_restrict) {
+> +		ret = ops->memory_restrict(heap, buf);
+> +		if (ret)
+> +			goto memory_free;
 > +	}
-> +
-> +	return dmabuf;
-> +
-> +err_free_buf:
-> +	kfree(restricted_buf);
-> +	return ERR_PTR(ret);
-> +}
-> +
-> +static const struct dma_heap_ops restricted_heap_ops = {
-> +	.allocate = restricted_heap_allocate,
-> +};
-> +
-> +int restricted_heap_add(struct restricted_heap *rstrd_heap)
->
-Nothing wrong, but what about shortening rstrd_heap throughout the patch
-set to "rheap", I would find that easier to read.
-
-> +{
-> +	struct dma_heap_export_info exp_info;
-> +	struct dma_heap *heap;
-> +
-> +	exp_info.name = rstrd_heap->name;
-> +	exp_info.ops = &restricted_heap_ops;
-> +	exp_info.priv = (void *)rstrd_heap;
-> +
-> +	heap = dma_heap_add(&exp_info);
-> +	if (IS_ERR(heap))
-> +		return PTR_ERR(heap);
 > +	return 0;
+> +
+> +memory_free:
+> +	ops->memory_free(heap, buf);
+> +	return ret;
 > +}
-> +EXPORT_SYMBOL_GPL(restricted_heap_add);
+> +
+> +static void
+> +restricted_heap_memory_free(struct restricted_heap *heap, struct restricted_buffer *buf)
+> +{
+> +	const struct restricted_heap_ops *ops = heap->ops;
+> +
+> +	if (ops->memory_unrestrict)
+> +		ops->memory_unrestrict(heap, buf);
+> +
+> +	ops->memory_free(heap, buf);
+> +}
+> +
+>  static struct dma_buf *
+>  restricted_heap_allocate(struct dma_heap *heap, unsigned long size,
+>  			 unsigned long fd_flags, unsigned long heap_flags)
+>  {
+> +	struct restricted_heap *restricted_heap = dma_heap_get_drvdata(heap);
+>  	struct restricted_buffer *restricted_buf;
+>  	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
+>  	struct dma_buf *dmabuf;
+> @@ -28,6 +62,9 @@ restricted_heap_allocate(struct dma_heap *heap, unsigned long size,
+>  	restricted_buf->size = ALIGN(size, PAGE_SIZE);
+>  	restricted_buf->heap = heap;
+>  
+> +	ret = restricted_heap_memory_allocate(restricted_heap, restricted_buf);
+>
+Can we guarantee that "restricted_heap" here isn't NULL (i.e., heap->priv). If
+not perhaps we should consider adding a check for NULL in the
+restricted_heap_memory_allocate() function?
+
+> +	if (ret)
+> +		goto err_free_buf;
+>  	exp_info.exp_name = dma_heap_get_name(heap);
+>  	exp_info.size = restricted_buf->size;
+>  	exp_info.flags = fd_flags;
+> @@ -36,11 +73,13 @@ restricted_heap_allocate(struct dma_heap *heap, unsigned long size,
+>  	dmabuf = dma_buf_export(&exp_info);
+>  	if (IS_ERR(dmabuf)) {
+>  		ret = PTR_ERR(dmabuf);
+> -		goto err_free_buf;
+> +		goto err_free_restricted_mem;
+>  	}
+>  
+>  	return dmabuf;
+>  
+> +err_free_restricted_mem:
+> +	restricted_heap_memory_free(restricted_heap, restricted_buf);
+>  err_free_buf:
+>  	kfree(restricted_buf);
+>  	return ERR_PTR(ret);
 > diff --git a/drivers/dma-buf/heaps/restricted_heap.h b/drivers/dma-buf/heaps/restricted_heap.h
-> new file mode 100644
-> index 000000000000..443028f6ba3b
-> --- /dev/null
+> index 443028f6ba3b..ddeaf9805708 100644
+> --- a/drivers/dma-buf/heaps/restricted_heap.h
 > +++ b/drivers/dma-buf/heaps/restricted_heap.h
-> @@ -0,0 +1,22 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * Restricted heap Header.
-> + *
-> + * Copyright (C) 2024 MediaTek, Inc.
-> + */
+> @@ -15,6 +15,18 @@ struct restricted_buffer {
+>  
+>  struct restricted_heap {
+>  	const char		*name;
 > +
-> +#ifndef _DMABUF_RESTRICTED_HEAP_H_
-> +#define _DMABUF_RESTRICTED_HEAP_H_
-> +
-> +struct restricted_buffer {
-> +	struct dma_heap		*heap;
-> +	size_t			size;
+> +	const struct restricted_heap_ops *ops;
 > +};
 > +
-> +struct restricted_heap {
-> +	const char		*name;
-> +};
+> +struct restricted_heap_ops {
+>
+This have the same name as used for the dma_heap_ops in the file
+restricted_heap.c, this might be a little bit confusing, or?
+
+> +	int	(*heap_init)(struct restricted_heap *heap);
 > +
-> +int restricted_heap_add(struct restricted_heap *rstrd_heap);
+> +	int	(*memory_alloc)(struct restricted_heap *heap, struct restricted_buffer *buf);
+> +	void	(*memory_free)(struct restricted_heap *heap, struct restricted_buffer *buf);
 > +
-> +#endif
+> +	int	(*memory_restrict)(struct restricted_heap *heap, struct restricted_buffer *buf);
+> +	void	(*memory_unrestrict)(struct restricted_heap *heap, struct restricted_buffer *buf);
+>
+Is the prefix "memory_" superfluous here in these ops?
+
+Also related to a comment on the prior patch. The name here is "heap" for
+restricted_heap, but below you use rstrd_heap. It's the same struct, so I would
+advise to use the same name to avoid confusion when reading the code. As
+mentioned before, I think the name "rheap" would be a good choice.
+
+>  };
+>  
+>  int restricted_heap_add(struct restricted_heap *rstrd_heap);
 > -- 
 > 2.25.1
 > 
