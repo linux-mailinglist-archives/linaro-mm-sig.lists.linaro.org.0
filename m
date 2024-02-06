@@ -2,72 +2,70 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 95F9184B655
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Feb 2024 14:28:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 252BA84B704
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Feb 2024 14:57:16 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 66EEB40C87
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Feb 2024 13:28:47 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
-	by lists.linaro.org (Postfix) with ESMTPS id EA4993EB98
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Feb 2024 13:28:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2496C400E2
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  6 Feb 2024 13:57:15 +0000 (UTC)
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+	by lists.linaro.org (Postfix) with ESMTPS id 4F5EF3EB98
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  6 Feb 2024 13:57:07 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=XJbhOVLP;
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.221.46 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-33b29b5ea86so2225305f8f.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 06 Feb 2024 05:28:39 -0800 (PST)
+	dkim=pass header.d=ffwll.ch header.s=google header.b=ij01Rzxl;
+	dmarc=none;
+	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.128.47) smtp.mailfrom=daniel@ffwll.ch
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-40f030bf978so9840315e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 06 Feb 2024 05:57:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1707226119; x=1707830919; darn=lists.linaro.org;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=wsLRKQ8iAaIhKBkm7KdmikDqe1gMJ2UtuCoYvn2yltg=;
-        b=XJbhOVLPgZsd2yAyXt1iOriTcG5GEn6vYDWilliDEXT8ubK3NLy8vQF8n9s4ByImkh
-         iHKSddxhht5qkzaoAc31s6s/3aA1uKY4sSMtIMXoUmW1GXQEWLHeSaXjh+Dxs7k0dLw/
-         GhVetFrmRqb6axPKf5Ew5QiYj24bFhT/Z7g5UAfWthlEDOFo/eYGpI5wMntTGfGPuamG
-         kS4d7h7FPadVHXcgFKHrHXi+s4bDhEMfixeP070XuknKAxSgOyQHb+8jHX9LalkAAWP+
-         zDp2Gdq6pzk3rFbfq5/c+tpqBGxTT++i93Gtt7b3manl904CEu8bY5Wx4jKkXp5a/Ngk
-         LP9g==
+        d=ffwll.ch; s=google; t=1707227826; x=1707832626; darn=lists.linaro.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:mail-followup-to:message-id:subject:cc:to
+         :from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=kb3EfwQ1MJaeA9+O1qYrsLSl0T9nvfGVDQWyYC/ou2o=;
+        b=ij01Rzxlr+yk0/TET307zL2cVIxjfb78AaLuB1C2AABUWS5jr8TATW6NrbtA3jco4n
+         4M/hIJS8MeuhKHNOLs2Cn6lgdrXvX4EjMJjPdKnM4BHrFTODd8/w5bUQ8Ve2veHpS3Je
+         qdlPiQ9sA0ZQuZ0W3Omw+TwDFoORZOpsl7dHA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1707226119; x=1707830919;
-        h=content-transfer-encoding:in-reply-to:from:references:to
-         :content-language:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=wsLRKQ8iAaIhKBkm7KdmikDqe1gMJ2UtuCoYvn2yltg=;
-        b=Fuq01+DgxISOMk6VMXCe28A0K6T5vnORTGtMXHm76DKC2ape1qswHUh+0nGnuozZ+x
-         LA72hcdm2nG/v9z+3b5THGxruuDPh1m1kDiPlX1wfe1ts2yttOPLYNs2fdASEsD8yb7h
-         1PfsEmKuYEeBBzH3mTh6VDSJuxBmwovxHMcfHKBcjvXwIQE8fbwyI/s4AzllG+P1W360
-         CQMzTGNbC/EAtTl7ZZJFnT+lg30Mmpe0IBl0LrdCZMS6KVGWGV4S6HMdlSE8MgsCf0+5
-         DSyICidojVg8B+Imyy05K8kmmaa3giiK/P949sqI7MQqVWzk6ZJluT9o/mT4VjQVoPYr
-         M1bw==
-X-Gm-Message-State: AOJu0YyjYNDnRncwmSgg4gOyp3KeOQhQOWmW8rAxtWzqeVWNtrdBPv5N
-	DvbG/xB19muesHQkNIYGCdnWCZSJBn84tN7ZsZYreqxnIETEz+60
-X-Google-Smtp-Source: AGHT+IGSDJt3qyb8vqRZcGNSkwAyY4OOFYpsyl5EB9OpHo+uWm9GpfenvaGvvYCRalJgwa8LRwgXHA==
-X-Received: by 2002:a5d:468b:0:b0:33b:214b:1a6c with SMTP id u11-20020a5d468b000000b0033b214b1a6cmr1257999wrq.22.1707226118451;
-        Tue, 06 Feb 2024 05:28:38 -0800 (PST)
-X-Forwarded-Encrypted: i=0; AJvYcCV/xd/hEifO+dh/jkqixxKYmjfxNhhZAMCya98Aa5zo+qWYH015fAtOyzEaN8GI+6mlwKVyFScyB4J6MmSJ954wR+MWzART6L4Ahc0FsQgfs7f0HdgsCCADkTuOkZQSaOvJnekcFu6MeDVvQGe2vIo4Rfeedt0rPHNjI0LKgzcux+K6zSm7FFwrUTvz8twOXlNZV/QtfQVMeKFukreR1kgYwaKciqspQsPXaI0jXFfdiDiTjCyqLl+wvm39Re23g6SWfApq2JCwOfy0GblNwuDqZ+QhkAnfM1T70g109AcyEEw8BHYDVdaFso7ZME3uKPQCmRnRFWjxpTq+0lUMzaidSwgxbOc/I71b3xV2IKbNYlN+OdoZU4H6m/nQtv/dOqzS9j7JREkdNyanHJZV9bFaGu/b9VzvUB91+1iRpkSm/ZXGQsoiySnSHeps71anGtgZbUP6NDgWecuHQKzaBduU6gSL/2SNvh1mVN02/o15ndJPb261Nu3IC9Ne1k14Swfg6v15U/95/qYEYdTiZA==
-Received: from [10.254.108.81] (munvpn.amd.com. [165.204.72.6])
-        by smtp.gmail.com with ESMTPSA id e1-20020a5d65c1000000b0033b3c1200f0sm2124190wrw.10.2024.02.06.05.28.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 06 Feb 2024 05:28:37 -0800 (PST)
-Message-ID: <b2906521-998f-4a65-adb2-23caff207a4a@gmail.com>
-Date: Tue, 6 Feb 2024 14:28:35 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Paul Cercueil <paul@crapouillou.net>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>,
- Jonathan Cameron <jic23@kernel.org>, =?UTF-8?Q?Nuno_S=C3=A1?=
- <noname.nuno@gmail.com>, Michael Hennerich <Michael.Hennerich@analog.com>,
- linux-usb@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
- Christoph Hellwig <hch@lst.de>
-References: <577501f9-9d1c-4f8d-9882-7c71090e5ef3@amd.com>
- <7928c0866ac5b2bfaaa56ad3422bedc9061e0f7b.camel@crapouillou.net>
- <2ac7562c-d221-409a-bfee-1b3cfcc0f1c6@amd.com>
+        d=1e100.net; s=20230601; t=1707227826; x=1707832626;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:mail-followup-to:message-id:subject:cc:to
+         :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=kb3EfwQ1MJaeA9+O1qYrsLSl0T9nvfGVDQWyYC/ou2o=;
+        b=uaJ3lw2y24JJJznPYcdFPpggKh3Eox5kY/hNQ9c0f35PmzAwAF+3P5XwDxBuBnXhkb
+         0WxUJKRUYtP6Jx0G3EH28Bnh85FOFWGkxJgfYIB0V8vWE8Dy4MQNk+3dlTBm5VYfDRG3
+         JcTbAH4V7sGrZZvvak1oSBpLGxcPNr9OEb3vAnGxcSCbafAX01+m0pKv0lGiNawUYh0y
+         h4Q+7HYeum5BK3aPPHF7CZx9q89gMDV7WF6NCFv/IYhRirEu5aPcsj1xPJcDtsBYp3SL
+         Uy8pFGse0Fmjlyt9X0n7Ms6rhN6dPyS5g00fauBZZQXfijzjwRaUOJGkUvmCvIz15/st
+         1FfA==
+X-Gm-Message-State: AOJu0YyEFH6mlkpvOk+XnoL5PBeN24wZ8OdQ6FqgdLS+eYKKhz4XujUk
+	N2e2Blxi3u/oTENdqs1nTfR+X7wtTVsciOOIVDwpzj0gD+EU5DFNReu690YZ7B0=
+X-Google-Smtp-Source: AGHT+IFOqn0cbJK+WY/X2jzsNFe5DlfE9RRoN3pYgv6uF/Bp/mQ+6ZreQmabY1RjWhfdxFOF8hFqgg==
+X-Received: by 2002:a05:600c:1d07:b0:40f:dd10:180f with SMTP id l7-20020a05600c1d0700b0040fdd10180fmr2171433wms.3.1707227826124;
+        Tue, 06 Feb 2024 05:57:06 -0800 (PST)
+X-Forwarded-Encrypted: i=0; AJvYcCVlNRdjfnrbeDjDbrCKYEBO3kd6rGhLpeMtXIG9oqKa+D8JDxEGy5DMCrqpoHSWZs0/bNypXMCfWtNtUPqoesQgAB0H6Daunh1Zgxlc+2Ut33t2ErRQSVGy8smjuSRGtY0tvTXLVh7k2qgPJ93b3ErEDdLGeMwVxq55VuThizfQDT/p92QBrVwVt6BC9+X/SgRZrG0aownrL7ZHiM5971IDJlkOtrvm6vm9btDr7rv6V6gklC7NhCAFtqZc8Pe/XJ7+9n2Rv5Auu909IPa39tT735ZRStAPQXX0KhuLsVAp7u7JKEaZy/OQBZ7OyT7GVfzIqxz+sgDsJt66dHh2BvC1uWUyIwCoa0jWx1h5P8wd7yKn0PYKtKi83LfG4m6t2/LSboEDvEmcshMx0eJHZjkLyWzcDWnLXG0SAj4nS4G+WWjIVaUS8optm2+U6EPGTnjDirg8XZAwCT2sFJbsh9+wpp7btXrzOT/ocxKYjY8ji4cYLruFDMZrZtrTNBc7+j0i3Mnw/EvN2ackeUuZ4g==
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id f6-20020a5d50c6000000b0033afcc069c3sm2153649wrt.84.2024.02.06.05.57.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 06 Feb 2024 05:57:05 -0800 (PST)
+Date: Tue, 6 Feb 2024 14:57:03 +0100
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <ZcI6r_F1RQf8MCrq@phenom.ffwll.local>
+Mail-Followup-To: Christian =?iso-8859-1?Q?K=F6nig?= <ckoenig.leichtzumerken@gmail.com>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Paul Cercueil <paul@crapouillou.net>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Jonathan Corbet <corbet@lwn.net>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Nuno =?iso-8859-1?Q?S=E1?= <noname.nuno@gmail.com>,
+	Michael Hennerich <Michael.Hennerich@analog.com>,
+	linux-usb@vger.kernel.org, linux-doc@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+	Christoph Hellwig <hch@lst.de>
+References: <2ac7562c-d221-409a-bfee-1b3cfcc0f1c6@amd.com>
  <ZbKiCPhRvWaz4Icn@phenom.ffwll.local>
  <c97e38ee-b860-4990-87f1-3e59d7d9c999@amd.com>
  <Zbi6zQYtnfOZu5Wh@phenom.ffwll.local>
@@ -76,238 +74,373 @@ References: <577501f9-9d1c-4f8d-9882-7c71090e5ef3@amd.com>
  <ZbjSJi07gQhZ4WMC@phenom.ffwll.local>
  <1d912523-b980-4386-82b2-8d79808398c1@amd.com>
  <ZboNyju8h4vfSd7v@phenom.ffwll.local>
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <ZboNyju8h4vfSd7v@phenom.ffwll.local>
+ <b2906521-998f-4a65-adb2-23caff207a4a@gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <b2906521-998f-4a65-adb2-23caff207a4a@gmail.com>
+X-Operating-System: Linux phenom 6.6.11-amd64 
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: EA4993EB98
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.49 / 15.00];
+X-Rspamd-Queue-Id: 4F5EF3EB98
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.80 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
-	TAGGED_FROM(0.00)[];
+	URIBL_BLOCKED(0.00)[mail-wm1-f47.google.com:helo,mail-wm1-f47.google.com:rdns];
 	RCVD_TLS_LAST(0.00)[];
-	URIBL_BLOCKED(0.00)[linaro.org:email,mail-wr1-f46.google.com:helo,mail-wr1-f46.google.com:rdns];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	FREEMAIL_TO(0.00)[amd.com,crapouillou.net,linuxfoundation.org,lwn.net,linaro.org,kernel.org,gmail.com,analog.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lst.de];
+	FREEMAIL_CC(0.00)[amd.com,crapouillou.net,linuxfoundation.org,lwn.net,linaro.org,kernel.org,gmail.com,analog.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lst.de];
+	R_SPF_NA(0.00)[no SPF record];
+	FREEMAIL_TO(0.00)[gmail.com];
+	DMARC_NA(0.00)[ffwll.ch];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[ffwll.ch:+];
+	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	NEURAL_HAM(-0.00)[-1.000];
-	DWL_DNSWL_BLOCKED(0.00)[gmail.com:dkim];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.221.46:from];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TAGGED_RCPT(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[gmail.com]
-Message-ID-Hash: NCVYL72HK27EUJT5PZBB3TUYT6PAAJTZ
-X-Message-ID-Hash: NCVYL72HK27EUJT5PZBB3TUYT6PAAJTZ
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.47:from];
+	TO_DN_SOME(0.00)[]
+Message-ID-Hash: JLHYBLQFSTOC2WAP53BEKO725LMMS3CC
+X-Message-ID-Hash: JLHYBLQFSTOC2WAP53BEKO725LMMS3CC
+X-MailFrom: daniel@ffwll.ch
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Paul Cercueil <paul@crapouillou.net>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jonathan Corbet <corbet@lwn.net>, Sumit Semwal <sumit.semwal@linaro.org>, Jonathan Cameron <jic23@kernel.org>, Nuno =?iso-8859-1?Q?S=E1?= <noname.nuno@gmail.com>, Michael Hennerich <Michael.Hennerich@analog.com>, linux-usb@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Christoph Hellwig <hch@lst.de>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v5 1/6] dma-buf: Add dma_buf_{begin,end}_access()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NCVYL72HK27EUJT5PZBB3TUYT6PAAJTZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JLHYBLQFSTOC2WAP53BEKO725LMMS3CC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-QW0gMzEuMDEuMjQgdW0gMTA6MDcgc2NocmllYiBEYW5pZWwgVmV0dGVyOg0KPiBPbiBUdWUsIEph
-biAzMCwgMjAyNCBhdCAwMjowOTo0NVBNICswMTAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3RlOg0K
-Pj4gQW0gMzAuMDEuMjQgdW0gMTE6NDAgc2NocmllYiBEYW5pZWwgVmV0dGVyOg0KPj4+IE9uIFR1
-ZSwgSmFuIDMwLCAyMDI0IGF0IDEwOjQ4OjIzQU0gKzAxMDAsIFBhdWwgQ2VyY3VlaWwgd3JvdGU6
-DQo+Pj4+IExlIG1hcmRpIDMwIGphbnZpZXIgMjAyNCDDoCAxMDoyMyArMDEwMCwgQ2hyaXN0aWFu
-IEvDtm5pZyBhIMOpY3JpdMKgOg0KPj4+Pj4gICDCoEkgd291bGQgc2F5IHdlIHN0YXJ0IHdpdGgg
-dGhlIERNQS1BUEkgYnkgZ2V0dGluZyBhd2F5IGZyb20gc2dfdGFibGVzDQo+Pj4+PiB0byBzb21l
-dGhpbmcgY2xlYW5lciBhbmQgc3RhdGUgb3JpZW50ZWQuDQo+Pj4+IEZZSSBJIGFtIGFscmVhZHkg
-YWRkaW5nIGEgJ2RtYV92ZWMnIG9iamVjdCBpbiBteSBJSU8gRE1BQlVGIHBhdGNoc2V0LA0KPj4+
-PiB3aGljaCBpcyBqdXN0IGEgZGVhZCBzaW1wbGUNCj4+Pj4NCj4+Pj4gc3RydWN0IGRtYV92ZWMg
-ew0KPj4+PiAgICAgZG1hX2FkZHJfdCBhZGRyOw0KPj4+PiAgICAgc2l6ZV90IGxlbjsNCj4+Pj4g
-fTsNCj4+Pj4NCj4+Pj4gKFRoZSByYXRpb25hbGUgZm9yIGludHJvZHVjaW5nIGl0IGluIHRoZSBJ
-SU8gRE1BQlVGIHBhdGNoc2V0IHdhcyB0aGF0DQo+Pj4+IHRoZSAic2NhdHRlcmxpc3QiIHdvdWxk
-bid0IGFsbG93IG1lIHRvIGNoYW5nZSB0aGUgdHJhbnNmZXIgc2l6ZS4pDQo+Pj4+DQo+Pj4+IFNv
-IEkgYmVsaWV2ZSBhIG5ldyAic2dfdGFibGUiLWxpa2UgY291bGQganVzdCBiZSBhbiBhcnJheSBv
-ZiBzdHJ1Y3QNCj4+Pj4gZG1hX3ZlYyArIGZsYWdzLg0KPj4+IFllYWggdGhhdCdzIHByZXR0eSBt
-dWNoIHRoZSBwcm9wb3NhbCBJJ3ZlIHNlZW4sIHNwbGl0IHRoZSBzZyB0YWJsZSBpbnRvDQo+Pj4g
-aW5wdXQgZGF0YSAoc3RydWN0IHBhZ2UgKyBsZW4pIGFuZCBvdXRwdXQgZGF0YSAod2hpY2ggaXMg
-dGhlIGRtYV9hZGRyX3QgKw0KPj4+IGxlbiB5b3UgaGF2ZSBhYm92ZSkuDQo+PiBJIHdvdWxkIGV4
-dGVuZCB0aGF0IGEgYml0IGFuZCBzYXkgd2UgaGF2ZSBhbiBhcnJheSB3aXRoDQo+PiBkbWFfYWRk
-citwb3dlcl9vZl90d29fb3JkZXIgYW5kIGEgaGVhZGVyIHN0cnVjdHVyZSB3aXRoIGxvd2VyIGJp
-dCBvZmZzZXQgYW5kDQo+PiBzb21lIERNQSB0cmFuc2FjdGlvbiBmbGFncy4NCj4+DQo+PiBCdXQg
-dGhpcyBpcyBzb21ldGhpbmcgd2hpY2ggY2FuIGJlIHdvcmtlZCBhcyBhbiBvcHRpbWl6YXRpb24g
-bGF0ZXIgb24uIEZvciBhDQo+PiBzdGFydCB0aGlzIHByb3Bvc2FsIGhlcmUgbG9va3MgZ29vZCB0
-byBtZSBhcyB3ZWxsLg0KPj4NCj4+PiBUaGUgcGFydCBJIGRvbid0IGV4cGVjdCB0byBldmVyIGhh
-cHBlbiwgYmVjYXVzZSBpdCBoYXNuJ3QgdGhlIHBhc3QgMjAgb3INCj4+PiBzbyB5ZWFycywgaXMg
-dGhhdCB0aGUgZG1hLWFwaSB3aWxsIGdpdmUgdXMgaW5mb3JtYXRpb24gYWJvdXQgd2hhdCBpcw0K
-Pj4+IG5lZWRlZCB0byBrZWVwIHRoZSBidWZmZXJzIGNvaGVyZW5jeSBiZXR3ZWVuIHZhcmlvdXMg
-ZGV2aWNlcyBhbmQgdGhlIGNwdS4NCj4+IFdlbGwgbWF5YmUgdGhhdCdzIHdoYXQgd2UgYXJlIGRv
-aW5nIHdyb25nLg0KPj4NCj4+IEluc3RlYWQgb2YgYXNraW5nIHRoZSBkbWEtYXBpIGFib3V0IHRo
-ZSBuZWNlc3NhcnkgaW5mb3JtYXRpb24gd2Ugc2hvdWxkIGdpdmUNCj4+IHRoZSBBUEkgdGhlIG9w
-cG9ydHVuaXR5IHRvIHdvcmsgZm9yIHVzLg0KPj4NCj4+IEluIG90aGVyIHdvcmRzIHdlIGRvbid0
-IG5lZWQgdGhlIGluZm9ybWF0aW9uIGFib3V0IGJ1ZmZlciBjb2hlcmVuY3kgd2hhdCB3ZQ0KPj4g
-bmVlZCBpcyB0aGF0IHRoZSBBUEkgd29ya3MgZm9yIGFzIGFuZCBmdWxmaWxscyB0aGUgcmVxdWly
-ZW1lbnRzIHdlIGhhdmUuDQo+Pg0KPj4gU28gdGhlIHF1ZXN0aW9uIGlzIHJlYWxseSB3aGF0IHNo
-b3VsZCB3ZSBwcm9wb3NlIHRvIGNoYW5nZSBvbiB0aGUgRE1BLWFwaQ0KPj4gc2lkZSB0byBnZXQg
-dGhpcyB3b3JraW5nIGFzIGV4cGVjdGVkPw0KPiBTbyBvbmUgdGhpbmcgSSd2ZSBiZWVuIHBvbmRl
-cmluZywga2luZGEgcGlja2luZyB1cCB5b3VyIHBvaW50IGFib3V0IENYTCwNCj4gaXMgdGhhdCB3
-ZSBkbyBtYWtlIHRoZSBjb2hlcmVuY3kgcHJvdG9jb2wgbW9yZSBleHBsaWNpdCBieSBhZGRpbmcg
-YQ0KPiBjb2hlcmVuY3kgbW9kZSB0byBkbWFfYnVmIHRoYXQgdGhlIGV4cG9ydGVyIHNldHMuIFNv
-bWUgaWRlYXMgZm9yIHZhbHVlcw0KPiB0aGlzIGNvdWxkIGhhdmU6DQo+DQo+IC0gQVRUT01JQ19D
-T0hFUkVOVDogRnVsbHkgY2FjaGUgY29oZXJlbnQsIGluY2x1ZGluZyBkZXZpY2UvY3B1IGF0b21p
-cy4NCj4gICAgVGhpcyB3b3VsZCBiZSBmb3IgQ1hMLiBOb24tQ1hMIGRldmljZXMgY291bGQgc3Rp
-bGwgcGFydGljaXBhdGUgd2l0aCB0aGUNCj4gICAgb2xkIG1vZGVsIHVzaW5nIGV4cGxpY2l0IGRl
-dmljZXMgZmx1c2hlcywgYnV0IG11c3QgYXQgY29tcGx5IHdpdGgNCj4gICAgQ1BVX0NPSEVSRU5U
-Lg0KPg0KPiAgICBUaGVyZSdzIGFsc28gdGhlIHBvd2VyOS1vbmx5IG52bGluayB0aGF0IHdvdWxk
-IGZpdCBoZXJlLCBidXQgSSBndWVzcw0KPiAgICBnb2luZyBmb3J3YXJkIENYTCAoYW5kIGNhY2hl
-LWNvaGVyZW50IGludGVncmF0ZWQgZ3B1KSB3b3VsZCByZWFsbHkgYmUNCj4gICAgdGhlIG9ubHkg
-dXNlcnMgb2YgdGhpcyBmbGFnLg0KPg0KPiAgICBQZWVyMnBlZXIgd291bGQgaGF2ZSB0aGUgc2Ft
-ZSBydWxlcywgb3RoZXJ3aXNlIGRvZXNuJ3QgcmVhbGx5IG1ha2UNCj4gICAgc2Vuc2UuIEFsc28g
-d2UgbWlnaHQgd2FudCB0byBmb3JiaWIgbm9uLUNYTCBpbXBvcnRzIGZvciB0aGVzZSBidWZmZXJz
-DQo+ICAgIG1heWJlIGV2ZW4/IE5vdCBzdXJlIG9uIHRoYXQuDQo+DQo+IC0gQ1BVX0NPSEVSRU5U
-OiBkZXZpY2UgdHJhbnNhY3Rpb25zIGRvIHNub29wIGNwdSBkZXZpY2VzIGNhY2hlcywgYnV0DQo+
-ICAgIGRldmljZXMgbWlnaHQgZG8gdGhlaXIgb3duIGNhY2hpbmcgd2hpY2ggaXNuJ3Qgc25vb3Bl
-ZCBieSB0aGUgY3B1IGFuZA0KPiAgICBuZWVkcyBleHBsaWNpdCBkZXZpY2Utc2lkZSBpbnZhbGlk
-YXRlL2ZsdXNoaW5nLiBUaGlzIG1lYW5zIHBjaWUNCj4gICAgaW1wb3J0ZXJzIGFyZSBub3QgYWxs
-b3dlZCB0byB1c2UgcGNpZSBuby1zbm9vcCB0cmFuc2FjdGlvbnMsIGludGVsIGlncHUNCj4gICAg
-d291bGRuJ3QgYmUgYWxsb3dlZCB0byB1c2UgTU9DUyB0aGF0IGRvIHRoZSBzYW1lLCBzaW1pbGFy
-IGZvciBhcm0NCj4gICAgaW50ZWdyYXRlZCBkZXZpY2VzLg0KPg0KPiAgICBJbXBvcnRlcnMgY2Fu
-IHNraXAgYWxsIGV4cGxpY2l0IGNhY2hlIG1hbmFnZW1lbnQgYXBpcyBsaWtlDQo+ICAgIGRtYV9i
-dWZfYmVnaW4vZW5kX2NwdV9hY2Nlc3MsIG9yIHRoZSBuZXdseSBwcm9wb3NlZA0KPiAgICBkbWFf
-YnVmX2JlZ2luL2VuZF9kZXZpY2VfYWNjZXNzIGhlcmUuDQo+DQo+ICAgIFdlJ2QgbmVlZCB0byBm
-aWd1cmUgb3V0IHdoYXQgZXhhY3RseSB0aGlzIG1lYW5zIGZvciBwZWVyMnBlZXINCj4gICAgdHJh
-bnNhY3Rpb25zLCBJIGhhdmUgbm8gaWRlYSB3aGV0aGVyIHRoZSBuby1zbm9vcCBmbGFnIGV2ZW4g
-ZG9lcw0KPiAgICBhbnl0aGluZyBmb3IgdGhvc2UuDQo+DQo+ICAgIFdlIG1pZ2h0IGFsc28gd2Fu
-dCB0byBzcGxpdCB1cCBDUFVfQ09IRVJFTlQgaW50byBDUFVfQ09IRVJFTlRfV0IgYW5kDQo+ICAg
-IENQVV9XT0hFUkVOVF9XQywgc28gdGhhdCBpbXBvcnRlcnMga25vdyB3aGV0aGVyIGNwdSByZWFk
-cyBhcmUgZ29pbmcgdG8NCj4gICAgYmUgY3Jhd2xpbmcgb3Igbm90Lg0KPg0KPiAtIE1FTU9SWV9D
-T0hFUkVOVDogZGV2aWNlcyB0cmFuc2FjdGlvbnMgZG8gbm90IHNub29wIGFueSBjYWNoZXMsIGJ1
-dA0KPiAgICBwcm9taXNlIHRoYXQgYWxsIHRyYW5zYWN0aW9ucyBhcmUgZnVsbHkgZmx1c2hlZCB0
-byBzeXN0ZW0gbWVtb3J5LiBBbnkNCj4gICAgZGV2aWNlcyB0cmFuc2FjdGlvbnMgd2hpY2ggZG8g
-ZmlsbCBjcHUgY2FjaGVzIG11c3QgY2FsbCB0aGUgcHJvcG9zZWQNCj4gICAgZG1hX2J1Zl9iZWdp
-bi9lbmRfZGV2aWNlX2FjY2VzcyBmdW5jdGlvbnMgcHJvcG9zZWQgaGVyZS4gQW55IGNwdSBhY2Nl
-c3MNCj4gICAgbXVzdCBiZSBicmFrZXRlZCBieSBjYWxscyB0byBkbWFfYnVmX2JlZ2luL2VuZF9j
-cHVfYWNjZXNzLg0KPg0KPiAgICBJZiB5b3VyIGRldmljZSBkb2VzIGZpbGwgY3B1IGNhY2hlcywg
-dGhlbiBlc3NlbnRpYWxseSB5b3UnZCBub3QgYmUgYWJsZQ0KPiAgICB0byBpbXBvcnQgc3VjaCBi
-dWZmZXJzLiBOb3Qgc3VyZSB3aGV0aGVyIHdlIG5lZWQgdG8gcHV0IHRoZQ0KPiAgICByZXNwb25z
-aWJpbGl0eSBvZiBjaGVja2luZyB0aGF0IG9udG8gaW1wb3J0ZXJzIG9yIGV4cG9ydGVycy4gSWRl
-YWxseQ0KPiAgICBjb3JlIGRtYS1idWYuYyBjb2RlIHdvdWxkIGNoZWNrIHRoaXMuDQo+DQo+ICAg
-IEFsc28gbWF5YmUgdGhlIGNwdSBXQyBtYXBwaW5nIG1vZGUgd291bGQgYWN0dWFsbHkgbmVlZCB0
-byBiZSBhIHN1Yi1tb2RlDQo+ICAgIGZvciBNRU1PUllfQ09IRVJFTlQsIGJlY2F1c2UgYWxsIGNw
-dSB3YyBhY2hpZXZlcyBpcyB0byBhdm9pZCB0aGUgbmVlZCB0bw0KPiAgICBjYWxsIGRtYV9idWZf
-YmVnaW4vZW5kX2NwdV9hY2Nlc3MsIHlvdSB3b3VsZCBzdGlsbCBuZWVkIHlvdXIgZGV2aWNlcyB0
-bw0KPiAgICBiZSBtZW1vcnkgY29oZXJlbnQuIEFuZCBpZiB0aGV5J3JlIG5vdCwgdGhlbiB5b3Ug
-Y2Fubm90IHVzZSB0aGF0DQo+ICAgIGRtYS1idWYuDQo+DQo+ICAgIE9yIG1heWJlIGFsdGVybmF0
-aXZlbHkgd2UgbmVlZCB0byBndWFyYW50ZWUgdGhhdCBleHBvcnRlcnMgd2hpY2ggc2V0DQo+ICAg
-IE1FTU9SWV9DT0hFUkVOVCBpbXBsZW1lbnQgZG1hX2J1Zl9iZWdpbi9lbmRfZGV2aWNlX2FjY2Vz
-cyB0byBtYWtlIHRoaW5ncw0KPiAgICB3b3JrIGZvciB0aGVzZSBjcHUtY29oZXJlbnQgYnV0IG5v
-dCBtZW1vcnktY29oZXJlbnQgZGV2aWNlcy4gVGhpcw0KPiAgICBiZWNvbWVzIHZlcnkgdHJpY2t5
-IHdpdGggZGV2aWNlL2FyY2gvYnVzIHNwZWNpZmljIGRldGFpbHMgSSB0aGluay4NCj4NCj4gLSBE
-TUFfQVBJX0NPSEVSRU5UOiBUaGUgbWVtb3J5IGlzIGFsbG9jYXRlZCBvciBtYXBwZWQgYnkgdGhl
-IGRtYS1hcGksIGFuZA0KPiAgICB0aGUgZXhhY3QgY29oZXJlbmN5IG1vZGUgaXMgbm90IGtub3cu
-IEltcG9ydGVycyBfbXVzdF8gYnJha2V0IGFsbCBjcHUNCj4gICAgYW5kIGRldmljZSBhY2Nlc3Mg
-d2l0aCB0aGUgcmVzcGVjdGl2ZSBkbWFfYnVmIGZ1bmN0aW9ucy4gVGhpcyBpcw0KPiAgICBlc3Nl
-bnRpYWxseSB0aGUgIndlIGhhdmUgbm8gaWRlYSIgZGVmYXVsdC4NCj4NCj4gICAgTm90ZSB0aGF0
-IGV4cG9ydGVycyBtaWdodCBleHBvcnQgbWVtb3J5IGFsbG9jYXRlZCB3aXRoIGRtYV9tYXBfYWxs
-b2MNCj4gICAgd2l0aCBNRU1PUllfQ09IRVJFTlQgb3IgQ1BVX0NPSEVSRU5UIGlmIHRoZXkga25v
-dyBob3cgdGhlIG1lbW9yeSBleGFjdGx5DQo+ICAgIHdvcmtzLiBFLmcuIGZvciBtb3N0IGFybSBz
-b2MgZ3B1L2Rpc3BsYXkgZHJpdmVycyB3ZSBjYW4gYXNzdW1lIHRoYXQgdGhlDQo+ICAgIGRtYS1h
-cGkgZ2l2ZXMgdXMgTUVNT1JZX0NPSEVSRU5UIG9yIENQVV9DT0hFUkVOVF9XQywgYW5kIGp1c3Qg
-dXNlIHRoYXQuDQo+ICAgIEVzc2VudGlhbGx5IHRoaXMgd291bGQgbWFrZSB0aGUgY3VycmVudCBp
-bXBsaWNpdCBhc3N1bXB0aW9ucyBleHBsaWNpdC4NCj4NCj4gICAgdWRtYWJ1ZiB3b3VsZCBuZWVk
-IHRvIHNldCB0aGlzLCBkZWZpbml0ZWx5IGlmIFBhdWwncyBwYXRjaGVzIHRvIGFkZCB0aGUNCj4g
-ICAgZXhwbGljaXQgZGV2aWNlIGZsdXNoZXMgbGFuZC4NCj4NCj4gLSBERUZBVUxUX0NPSEVSRU5U
-OiBUaGlzIHdvdWxkIGJlIHRoZSBiYWNrd2FyZHMgY29tcGF0IGxlZ2FjeSB5b2xvDQo+ICAgIGJl
-aHZhaW9yLiBJJ20gbm90IHN1cmUgd2hldGhlciB3ZSBzaG91bGQgYWxpYXMgdGhhdCB3aXRoDQo+
-ICAgIERNQV9BUElfQ09IRVJFTlQgb3IgbGVhdmUgaXQgYXMgYSBzcGVjaWFsIHZhbHVlIHRvIG1h
-cmsgZXhwb3J0ZXJzIHdoaWNoDQo+ICAgIGhhdmVuJ3QgYmVlbiB1cGRhdGVkIGZvciB0aGUgbXVj
-aCBtb3JlIGV4cGxpY2l0IGNvaGVyZW5jeSBoYW5kbGluZyB5ZXQuDQo+DQo+ICAgIFRoZSBzcGVj
-aWZpY2F0aW9uIGZvciB0aGlzIGNvaGVyZW5jeSBtb2RlIHdvdWxkIGJlIGEgZmxhdCBvdXQgIndo
-bw0KPiAgICBrbm93cywganVzdCBkb24ndCBicmVhayBleGlzdGluZyB1c2UtY2FzZXMgd2l0aCBh
-Y3R1YWwgdXNlcnMiLg0KPiAgICBFc3NlbnRpYWxseSB0aGUgb25seSByZWFzb24gd2UnZCBoYXZl
-IHRoaXMgd291bGQgYmUgdG8gbWFrZSBzdXJlIHdlIGNhbg0KPiAgICBhdm9pZCByZWdyZXNzaW9u
-cyBvZiB0aGVzZSBleGlzdGluZyB1c2UtY2FzZXMsIGJ5IGtlZXBpbmcgd2hhdGV2ZXINCj4gICAg
-aG9ycmlibGUgaGV1cmlzdGljcyB3ZSBoYXZlIGluIGN1cnJlbnQgZXhwb3J0ZXJzLg0KPg0KPiAg
-ICBJdCB3b3VsZCBhbHNvIGFsbG93IHVzIHRvIGNvbnZlcnQgZXhwb3J0ZXJzIGFuZCBpbXBvcnRl
-cnMgb24gYSBjYXNlIGJ5DQo+ICAgIGNhc2UgYmFzaXMuDQo+DQo+IE5vdGUgdGhhdCBhbGwgdGhl
-c2UgY29oZXJlbmN5IG1vZGVzIGFyZSBkZWZpbmVkIGluIHRlcm1zIG9mIGJ1cy1zZXBlY2lmaWMN
-Cj4gZGV2aWNlIGFjY2VzcyBhbmQgaW4gdGVybXMgb2YgZG1hX2J1ZiBhcGlzIHRoZSBpbXBvcnRl
-ciBtdXN0IGNhbGwgb3IgY2FuDQo+IHNraXAuIFRoaXMgd2F5IHdlJ2QgYXZvaWQgaGF2aW5nIHRv
-IGNoYW5nZSB0aGUgZG1hLWFwaSBpbiBhIGZpcnN0IHN0ZXAsDQo+IGFuZCBpZiB0aGlzIGFsbCB3
-b3JrcyBvdXQgcHJvcGVybHkgd2UgY291bGQgdGhlbiB1c2UgdGhlIHJlc3VsdGluZyBkbWEtYXBp
-DQo+IGFzIGEgYmFzZWxpbmUgdG8gcHJvcG9zZSBkbWEtYXBpIGV4dGVuc2lvbnMuDQoNCldoZW4g
-SSByZWFkIHRoaXMgZm9yIHRoZSBmaXJzdCB0aW1lIG15IGluaXRpYWwgaW1wcmVzc2lvbiB3YXMg
-dGhhdCB0aGUgDQppZGVhIG1vc3RseSBsb29rZWQgZ29vZCwgYnV0IHdoaWxlIHRoaW5raW5nIGFi
-b3V0IGl0IG1vcmUgYW5kIG1vcmUgSSANCmNhbWUgdG8gdGhlIGNvbmNsdXNpb24gdGhhdCB0aGlz
-IHdvdWxkIGdvIGludG8gdGhlIHdyb25nIGRpcmVjdGlvbi4NCg0KTWF5YmUgSSdtIHJlcGVhdGlu
-ZyBteXNlbGYsIGJ1dCBJIHRoaW5rIHdlIGZpcnN0IG9mIGFsbCBoYXZlIHRvIHRhbGsgYSANCmJp
-dCBhYm91dCBzb21lIGFzcGVjdHMgb2YgY29oZXJlbmN5Og0KDQoxLiBJbnRyYSBkZXZpY2UgY29o
-ZXJlbmN5LiBUaGlzIG1lYW5zIHRoYXQgaW50cmEgZGV2aWNlcyBjYWNoZXMgYXJlIA0KaW52YWxp
-ZGF0ZWQgYmVmb3JlIGJlZ2lubmluZyBhbiBvcGVyYXRpb24gYW5kIGZsdXNoZWQgYmVmb3JlIHNp
-Z25hbGluZyANCnRoYXQgYW4gb3BlcmF0aW9uIGZpbmlzaGVkLg0KDQoyLiBJbnRlciBkZXZpY2Ug
-YW5kIGRldmljZSB0byBDUFUgY29oZXJlbmN5LiBUaGlzIG1lYW5zIHRoYXQgY2FjaGVzIA0Kd2hp
-Y2ggc2l0IGluIGJldHdlZW4gZGV2aWNlcyBhbmQgYmV0d2VlbiBkZXZpY2VzIGFuZCB0aGUgQ1BV
-IG5lZWQgdG8gYmUgDQppbnZhbGlkYXRlZCBhbmQgZmx1c2hlZCBhcHByb3ByaWF0ZWx5IHdoZW4g
-YnVmZmVycyBhcmUgYWNjZXNzZWQgYnkgDQpkaWZmZXJlbnQgcGFydGllcy4NCg0KTnVtYmVyIDEg
-aXMgZGV2aWNlIHNwZWNpZmljLCBwYXJ0IG9mIHRoZSBETUEtYnVmIGZyYW1ld29yayBhbmQgaGFu
-ZGxlZCANCmJ5IGRtYV9mZW5jZXMuIEFzIGZhciBhcyBJIGNhbiBzZWUgdGhhdCBwYXJ0IGlzIGFj
-dHVhbGx5IHF1aXRlIHdlbGwgDQpkZXNpZ25lZCBhbmQgSSBkb24ndCBzZWUgYW55IG9idmlvdXMg
-bmVlZCBmb3IgY2hhbmdlLg0KDQpOdW1iZXIgMiBpcyBwbGF0Zm9ybSBzcGVjaWZpYyBhbmQgSSBj
-b21wbGV0ZWx5IGFncmVlIHdpdGggdGhlIERNQS1hcGkgDQpmb2xrcyB0aGF0IHRoaXMgZG9lc24n
-dCBiZWxvbmcgaW50byBETUEtYnVmIGluIHRoZSBmaXJzdCBwbGFjZS4gVGhhdCdzIA0Kd2h5IEkg
-dGhpbmsgdGhlIGJlZ2luX2NwdV9hY2Nlc3MoKS9lbmRfY3B1X2FjY2VzcygpIGNhbGxiYWNrcyBh
-cmUgDQphY3R1YWxseSBhIGJpdCBtaXNwbGFjZWQuIFdlIHN0aWxsIGNhbiB1c2UgdGhvc2UgaW4g
-dGhlIGV4cG9ydGVyLCBidXQgdG8gDQptYWtlIGJldHRlciBidWZmZXIgcGxhY2VtZW50IGRlY2lz
-aW9ucywgYnV0IHNob3VsZCBub3QgaW52YWxpZGF0ZSBhbnkgDQpjYWNoZXMgd2hlbiB0aGV5IGFy
-ZSBjYWxsZWQuDQoNClRoZSBmbHVzaGluZyBhbmQgaW52YWxpZGF0aW9uIGZvciBwbGF0Zm9ybSBj
-YWNoZXMgc2hvdWxkIHJlYWxseSBiZSBpbiANCnRoZSBETUEtYnVmIGZyYW1ld29yayBhbmQgbm90
-IHRoZSBleHBvcnRlci4NCg0KU28gaW4gbXkgdGhpbmtpbmcgdGhlIGVudW1lcmF0aW9uIHlvdSBv
-dXRsaW5lZCBhYm92ZSBzaG91bGQgcmVhbGx5IGdvIA0KaW50byBzdHJ1Y3QgZGV2aWNlIGFuZCBl
-eHBsYWluaW5nIHRvIGV2ZXJ5Ym9keSB3aGF0IHRoZSBjb2hlcmVuY3kgDQpwcm9wZXJ0aWVzIG9m
-IERNQSBvcGVyYXRpb25zIG9mIHRoaXMgZGV2aWNlIGlzLg0KDQo+IEkgdGhpbmsgc3RhcnRpbmcg
-cmlnaHQgb3V0IHdpdGggZGVzaWduaW5nIGRtYS1hcGkgZXh0ZW5zaW9uIGlzIGEgZmV3DQo+IGJy
-aWRnZXMgdG9vIGZhci4gQm90aCBmcm9tIGEgImhvdyBkbyB3ZSBjb252aW5jZSB1cHN0cmVhbSIg
-cG92LCBidXQgbWF5YmUNCj4gZXZlbiBtb3JlIGZyb20gYSAiaG93IGRvIHdlIGZpZ3VyZSBvdXQg
-d2hhdCB3ZSBldmVuIG5lZWQiIHBvdi4NCg0KV2VsbCBJIHRvdGFsbHkgYWdyZWUgb24gdGhlICJo
-b3cgZG8gd2UgZmlndXJlIG91dCB3aGF0IHdlIGV2ZW4gbmVlZCIsIA0KYnV0IEkgZGlzYWdyZWUg
-YSBiaXQgb24gdGhhdCB3ZSBkb24ndCBrbm93IHdoYXQgRE1BLWFwaSBleHRlbnNpb24gd2UgbmVl
-ZC4NCg0KV2UgZG9uJ3QgaGF2ZSB0aGUgZnVsbCBwaWN0dXJlIHlldCwgYnV0IGFzIEkgYWxyZWFk
-eSBvdXRsaW5lZCBmcm9tIHRoZSANCkRNQS1hcGkgcG92IHdlIGhhdmUgdHdvIG1ham9yIHRoaW5n
-cyBvbiBvdXIgVE9ETyBsaXN0Og0KDQoxLiBTb21laG93IHJlbW92ZSB0aGUgc3RydWN0IHBhZ2Vz
-IGZyb20gdGhlIERNQS1idWYgKmltcG9ydGVyKiBBUEkuDQoNCiDCoMKgwqAgTXkgYmVzdCBzdWdn
-ZXN0aW9uIGF0IHRoZSBtb21lbnQgZm9yIHRoaXMgaXMgdG8gc3BsaXQgc2dfdGFibGVzIA0KaW50
-byB0d28gZGF0YSBzdHJ1Y3R1cmVzLCBvbmUgZm9yIHRoZSBzdHJ1Y3QgcGFnZXMgYW5kIG9uZSBm
-b3IgdGhlIERNQSANCmFkZHJlc3Nlcy4NCg0KIMKgwqDCoCBNYW5nbGluZyB0aGUgYWRkcmVzc2Vz
-IHRvIGVuc3VyZSB0aGF0IG5vIGltcG9ydGVyIG1lc3NlcyB3aXRoIHRoZSANCnN0cnVjdCBwYWdl
-cyB3YXMgYSBnb29kIHN0ZXAsIGJ1dCBpdCBhbHNvIGNyZWF0ZXMgcHJvYmxlbXMgd2hlbiANCmRt
-YV9zeW5jX3NnX2Zvcl9jcHUoKSBkbWFfc3luY19mb3JfZGV2aWNlKCkgYXJlIHN1cHBvc2VkIHRv
-IGJlIGNhbGxlZC4NCg0KMi4gQWRkIHNvbWUgZG1hX3N5bmNfc2dfYmV0d2Vlbl9kZXZpY2VzKEEs
-IEIuLi4uKS4NCg0KIMKgwqDCoCBBbmQgb24gdGhpcyBJIHRoaW5rIHdlIGFyZSBvbiB0aGUgc2Ft
-ZSBwYWdlIHRoYXQgd2UgYXJlIGdvaW5nIHRvIA0KbmVlZCB0aGlzLCBidXQgd2UgYXJlIGp1c3Qg
-bm90IGNsZWFyIG9uIHdobyBpcyBnb2luZyB0byB1c2UgaXQuDQoNClJlZ2FyZHMsDQpDaHJpc3Rp
-YW4uDQoNCj4NCj4+IFJlZ2FyZHMsDQo+PiBDaHJpc3RpYW4uDQo+Pg0KPj4NCj4+DQo+Pg0KPj4N
-Cj4+PiAtU2ltYQ0KPj4gX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18NCj4+IExpbmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlz
-dHMubGluYXJvLm9yZw0KPj4gVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8t
-bW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcNCg0KX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
-YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
-dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+On Tue, Feb 06, 2024 at 02:28:35PM +0100, Christian K=F6nig wrote:
+> Am 31.01.24 um 10:07 schrieb Daniel Vetter:
+> > On Tue, Jan 30, 2024 at 02:09:45PM +0100, Christian K=F6nig wrote:
+> > > Am 30.01.24 um 11:40 schrieb Daniel Vetter:
+> > > > On Tue, Jan 30, 2024 at 10:48:23AM +0100, Paul Cercueil wrote:
+> > > > > Le mardi 30 janvier 2024 =E0 10:23 +0100, Christian K=F6nig a =E9=
+crit=A0:
+> > > > > >   =A0I would say we start with the DMA-API by getting away from=
+ sg_tables
+> > > > > > to something cleaner and state oriented.
+> > > > > FYI I am already adding a 'dma_vec' object in my IIO DMABUF patch=
+set,
+> > > > > which is just a dead simple
+> > > > >=20
+> > > > > struct dma_vec {
+> > > > >     dma_addr_t addr;
+> > > > >     size_t len;
+> > > > > };
+> > > > >=20
+> > > > > (The rationale for introducing it in the IIO DMABUF patchset was =
+that
+> > > > > the "scatterlist" wouldn't allow me to change the transfer size.)
+> > > > >=20
+> > > > > So I believe a new "sg_table"-like could just be an array of stru=
+ct
+> > > > > dma_vec + flags.
+> > > > Yeah that's pretty much the proposal I've seen, split the sg table =
+into
+> > > > input data (struct page + len) and output data (which is the dma_ad=
+dr_t +
+> > > > len you have above).
+> > > I would extend that a bit and say we have an array with
+> > > dma_addr+power_of_two_order and a header structure with lower bit off=
+set and
+> > > some DMA transaction flags.
+> > >=20
+> > > But this is something which can be worked as an optimization later on=
+. For a
+> > > start this proposal here looks good to me as well.
+> > >=20
+> > > > The part I don't expect to ever happen, because it hasn't the past =
+20 or
+> > > > so years, is that the dma-api will give us information about what is
+> > > > needed to keep the buffers coherency between various devices and th=
+e cpu.
+> > > Well maybe that's what we are doing wrong.
+> > >=20
+> > > Instead of asking the dma-api about the necessary information we shou=
+ld give
+> > > the API the opportunity to work for us.
+> > >=20
+> > > In other words we don't need the information about buffer coherency w=
+hat we
+> > > need is that the API works for as and fulfills the requirements we ha=
+ve.
+> > >=20
+> > > So the question is really what should we propose to change on the DMA=
+-api
+> > > side to get this working as expected?
+> > So one thing I've been pondering, kinda picking up your point about CXL,
+> > is that we do make the coherency protocol more explicit by adding a
+> > coherency mode to dma_buf that the exporter sets. Some ideas for values
+> > this could have:
+> >=20
+> > - ATTOMIC_COHERENT: Fully cache coherent, including device/cpu atomis.
+> >    This would be for CXL. Non-CXL devices could still participate with =
+the
+> >    old model using explicit devices flushes, but must at comply with
+> >    CPU_COHERENT.
+> >=20
+> >    There's also the power9-only nvlink that would fit here, but I guess
+> >    going forward CXL (and cache-coherent integrated gpu) would really be
+> >    the only users of this flag.
+> >=20
+> >    Peer2peer would have the same rules, otherwise doesn't really make
+> >    sense. Also we might want to forbib non-CXL imports for these buffers
+> >    maybe even? Not sure on that.
+> >=20
+> > - CPU_COHERENT: device transactions do snoop cpu devices caches, but
+> >    devices might do their own caching which isn't snooped by the cpu and
+> >    needs explicit device-side invalidate/flushing. This means pcie
+> >    importers are not allowed to use pcie no-snoop transactions, intel i=
+gpu
+> >    wouldn't be allowed to use MOCS that do the same, similar for arm
+> >    integrated devices.
+> >=20
+> >    Importers can skip all explicit cache management apis like
+> >    dma_buf_begin/end_cpu_access, or the newly proposed
+> >    dma_buf_begin/end_device_access here.
+> >=20
+> >    We'd need to figure out what exactly this means for peer2peer
+> >    transactions, I have no idea whether the no-snoop flag even does
+> >    anything for those.
+> >=20
+> >    We might also want to split up CPU_COHERENT into CPU_COHERENT_WB and
+> >    CPU_WOHERENT_WC, so that importers know whether cpu reads are going =
+to
+> >    be crawling or not.
+> >=20
+> > - MEMORY_COHERENT: devices transactions do not snoop any caches, but
+> >    promise that all transactions are fully flushed to system memory. Any
+> >    devices transactions which do fill cpu caches must call the proposed
+> >    dma_buf_begin/end_device_access functions proposed here. Any cpu acc=
+ess
+> >    must be braketed by calls to dma_buf_begin/end_cpu_access.
+> >=20
+> >    If your device does fill cpu caches, then essentially you'd not be a=
+ble
+> >    to import such buffers. Not sure whether we need to put the
+> >    responsibility of checking that onto importers or exporters. Ideally
+> >    core dma-buf.c code would check this.
+> >=20
+> >    Also maybe the cpu WC mapping mode would actually need to be a sub-m=
+ode
+> >    for MEMORY_COHERENT, because all cpu wc achieves is to avoid the nee=
+d to
+> >    call dma_buf_begin/end_cpu_access, you would still need your devices=
+ to
+> >    be memory coherent. And if they're not, then you cannot use that
+> >    dma-buf.
+> >=20
+> >    Or maybe alternatively we need to guarantee that exporters which set
+> >    MEMORY_COHERENT implement dma_buf_begin/end_device_access to make th=
+ings
+> >    work for these cpu-coherent but not memory-coherent devices. This
+> >    becomes very tricky with device/arch/bus specific details I think.
+> >=20
+> > - DMA_API_COHERENT: The memory is allocated or mapped by the dma-api, a=
+nd
+> >    the exact coherency mode is not know. Importers _must_ braket all cpu
+> >    and device access with the respective dma_buf functions. This is
+> >    essentially the "we have no idea" default.
+> >=20
+> >    Note that exporters might export memory allocated with dma_map_alloc
+> >    with MEMORY_COHERENT or CPU_COHERENT if they know how the memory exa=
+ctly
+> >    works. E.g. for most arm soc gpu/display drivers we can assume that =
+the
+> >    dma-api gives us MEMORY_COHERENT or CPU_COHERENT_WC, and just use th=
+at.
+> >    Essentially this would make the current implicit assumptions explici=
+t.
+> >=20
+> >    udmabuf would need to set this, definitely if Paul's patches to add =
+the
+> >    explicit device flushes land.
+> >=20
+> > - DEFAULT_COHERENT: This would be the backwards compat legacy yolo
+> >    behvaior. I'm not sure whether we should alias that with
+> >    DMA_API_COHERENT or leave it as a special value to mark exporters wh=
+ich
+> >    haven't been updated for the much more explicit coherency handling y=
+et.
+> >=20
+> >    The specification for this coherency mode would be a flat out "who
+> >    knows, just don't break existing use-cases with actual users".
+> >    Essentially the only reason we'd have this would be to make sure we =
+can
+> >    avoid regressions of these existing use-cases, by keeping whatever
+> >    horrible heuristics we have in current exporters.
+> >=20
+> >    It would also allow us to convert exporters and importers on a case =
+by
+> >    case basis.
+> >=20
+> > Note that all these coherency modes are defined in terms of bus-sepecif=
+ic
+> > device access and in terms of dma_buf apis the importer must call or can
+> > skip. This way we'd avoid having to change the dma-api in a first step,
+> > and if this all works out properly we could then use the resulting dma-=
+api
+> > as a baseline to propose dma-api extensions.
+>=20
+> When I read this for the first time my initial impression was that the id=
+ea
+> mostly looked good, but while thinking about it more and more I came to t=
+he
+> conclusion that this would go into the wrong direction.
+>=20
+> Maybe I'm repeating myself, but I think we first of all have to talk a bit
+> about some aspects of coherency:
+>=20
+> 1. Intra device coherency. This means that intra devices caches are
+> invalidated before beginning an operation and flushed before signaling th=
+at
+> an operation finished.
+>=20
+> 2. Inter device and device to CPU coherency. This means that caches which
+> sit in between devices and between devices and the CPU need to be
+> invalidated and flushed appropriately when buffers are accessed by differ=
+ent
+> parties.
+>=20
+> Number 1 is device specific, part of the DMA-buf framework and handled by
+> dma_fences. As far as I can see that part is actually quite well designed
+> and I don't see any obvious need for change.
+>=20
+> Number 2 is platform specific and I completely agree with the DMA-api fol=
+ks
+> that this doesn't belong into DMA-buf in the first place. That's why I th=
+ink
+> the begin_cpu_access()/end_cpu_access() callbacks are actually a bit
+> misplaced. We still can use those in the exporter, but to make better buf=
+fer
+> placement decisions, but should not invalidate any caches when they are
+> called.
+
+I don't think there's cases where we can avoid the cache management in
+begin/end_cpu_access, because there are SoC out there with the following
+constraints:
+
+- Device access is not coherent with cpu caches, no snooping going on at
+  all. Device2device dma is fully coherent though (since there's no caches
+  to take care of at all).
+
+- Mapping as write-combined on the cpu is not possible. Not every platform
+  is reasonable and has something like pat with cache control in each pte.
+  Or they have, but in practice it's not useable.
+
+Which means your options are only a) no cpu access b) bracket cpu access
+with cache management. So I'm not sure what exactly you have in mind here,
+since people really don't like a) that's why we added that cpu access
+braketing stuff?
+
+Also what exactly would you do in begin/end_cpu_access instead of cache
+management? Note that you kinda need to call dma_buf_vmap (for kernel
+access) or dma_buf_mmap (for userspace) before you can call these, and any
+placement changes should be done in those functions and not in
+begin/end_cpu_access. Especially for dma_buf_vmap the buffer must be
+pinned, so you have no other choice. And for userspace you'd need fault
+handlers, you cannot rely on the begin/end ioct calls, because that would
+defacto make those into a pin/unpin ioctl, which defeats the point of
+having more dynamic memory management for these buffers.
+
+> The flushing and invalidation for platform caches should really be in the
+> DMA-buf framework and not the exporter.
+>=20
+> So in my thinking the enumeration you outlined above should really go into
+> struct device and explaining to everybody what the coherency properties of
+> DMA operations of this device is.
+
+So that's the part that I think dma-api folks really don't like. They
+don't want higher levels to know about cache management at all, so I don't
+see how we can make this happen.
+
+The other issue is that we have a ton of exporter which flaunt the dma-api
+rules for their platform/device, e.g. x86 is officially fully cache
+coherent. Except integrated gpu/camera isp are not, and for rendering you
+can select the coherency mode on a per-transaction level in the cs
+packets.
+
+So putting this into a struct device flags is not going to work I think
+for these two cases: for dma-api allocated/managed memory I don't
+think'll get it, and for stuff like i915-gem it's too strict, we need at
+least a per-buffer flag for this.
+
+> > I think starting right out with designing dma-api extension is a few
+> > bridges too far. Both from a "how do we convince upstream" pov, but may=
+be
+> > even more from a "how do we figure out what we even need" pov.
+>=20
+> Well I totally agree on the "how do we figure out what we even need", but=
+ I
+> disagree a bit on that we don't know what DMA-api extension we need.
+>=20
+> We don't have the full picture yet, but as I already outlined from the
+> DMA-api pov we have two major things on our TODO list:
+>=20
+> 1. Somehow remove the struct pages from the DMA-buf *importer* API.
+>=20
+> =A0=A0=A0 My best suggestion at the moment for this is to split sg_tables=
+ into two
+> data structures, one for the struct pages and one for the DMA addresses.
+>=20
+> =A0=A0=A0 Mangling the addresses to ensure that no importer messes with t=
+he struct
+> pages was a good step, but it also creates problems when
+> dma_sync_sg_for_cpu() dma_sync_for_device() are supposed to be called.
+
+Hm yeah we need to temporarily unmangle those around those calls. Since
+it's a debug only option this should't be a big deal.
+
+I agree that eventually we should aim towards splitting this properly, but
+I think as long as the dma-api itself isn't there yet, it doesn't make too
+much sense to charge ahead in dma-buf code.
+
+> 2. Add some dma_sync_sg_between_devices(A, B....).
+>=20
+> =A0=A0=A0 And on this I think we are on the same page that we are going t=
+o need
+> this, but we are just not clear on who is going to use it.
+
+Yeah I think this we might be able to eventually get added to dma-api. But
+I think that's only on the table once
+- we have this in dma-buf code (can be in dma-buf.c or in exporters, I'm
+  not extremely opionated about this).
+- we have real-world use-cases where fusing superflous caches management
+  operations with the existing dma_sync_sg_for_device/cpu actually matters
+- someone's willing to roll out the infrastructure work - altough a
+  default implementation that just calss dma_sync_sg_for_device/cpu in the
+  right order is probably good enough as fallback for most platforms.
+
+I think the other issue is that all this is multi-year projects with a lot
+of effort, and I think we need something that will work a lot sooner for
+Paul's use-case here.
+
+Cheers, Sima
+--=20
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
