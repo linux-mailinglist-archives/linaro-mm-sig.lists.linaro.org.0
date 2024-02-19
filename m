@@ -2,110 +2,197 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DC18A85AA78
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 Feb 2024 18:59:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0135A85AB63
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 Feb 2024 19:48:09 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 929F54009D
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 Feb 2024 17:59:23 +0000 (UTC)
-Received: from smtp.smtpout.orange.fr (smtp-14.smtpout.orange.fr [80.12.242.14])
-	by lists.linaro.org (Postfix) with ESMTPS id EC8543F3B9
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 19 Feb 2024 17:59:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D7815446D5
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 Feb 2024 18:48:07 +0000 (UTC)
+Received: from omta040.useast.a.cloudfilter.net (omta040.useast.a.cloudfilter.net [44.202.169.39])
+	by lists.linaro.org (Postfix) with ESMTPS id 2931F3F3BA
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 19 Feb 2024 18:47:48 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=wanadoo.fr header.s=t20230301 header.b="hL2FC/PY";
-	spf=pass (lists.linaro.org: domain of christophe.jaillet@wanadoo.fr designates 80.12.242.14 as permitted sender) smtp.mailfrom=christophe.jaillet@wanadoo.fr;
-	dmarc=pass (policy=quarantine) header.from=wanadoo.fr
-Received: from [192.168.1.18] ([92.140.202.140])
-	by smtp.orange.fr with ESMTPA
-	id c7uwr4K1Rb1Jlc7uwrZn6h; Mon, 19 Feb 2024 18:59:05 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wanadoo.fr;
-	s=t20230301; t=1708365545;
-	bh=ti6upGoRyyrC2hvsjOkpJVRvXntoJTVQ7/Zs/uqxjT4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=hL2FC/PYBaouzvlBBq79Hga/FRp5lg0G/W0pv0oEN7ZYTyC6Gf3gvHnHNw0Chyxy3
-	 FEBM012Ssb3ZtdercwRyvz8fiFGb/WOFilLBBKWlE//OA8lgUKJ9csKadViwxkI0ry
-	 t6h6RUTjQLA0vzgEG5S5pymbbZLTHLuX45NWMKnn7JTrIbTkZXPIGrjWBufil8a87Q
-	 Q3EbREOG9yH1CFM3FTepq/D7O8VcQnCYZiD+AsuA4vqGnDdep+v7gGh2yhnrYRnUUH
-	 bJSAvWeNGVO49Iznz8JoOuCSirJw5+4S/PA0MLr0oSlnvzzprX0Ji6NcET/oWbYYCw
-	 mFmzV1c/a833Q==
-X-ME-Helo: [192.168.1.18]
-X-ME-Auth: Y2hyaXN0b3BoZS5qYWlsbGV0QHdhbmFkb28uZnI=
-X-ME-Date: Mon, 19 Feb 2024 18:59:05 +0100
-X-ME-IP: 92.140.202.140
-Message-ID: <3fe4c327-b69b-464e-8e4e-005fa1813279@wanadoo.fr>
-Date: Mon, 19 Feb 2024 18:59:02 +0100
+	dkim=pass header.d=embeddedor.com header.s=default header.b=UuCzQEkK;
+	spf=pass (lists.linaro.org: domain of gustavo@embeddedor.com designates 44.202.169.39 as permitted sender) smtp.mailfrom=gustavo@embeddedor.com;
+	dmarc=none
+Received: from eig-obgw-5003a.ext.cloudfilter.net ([10.0.29.159])
+	by cmsmtp with ESMTPS
+	id c5itrEZTITHHuc8g8rt1uh; Mon, 19 Feb 2024 18:47:48 +0000
+Received: from gator4166.hostgator.com ([108.167.133.22])
+	by cmsmtp with ESMTPS
+	id c8g7r19dKoOa8c8g7reODp; Mon, 19 Feb 2024 18:47:47 +0000
+X-Authority-Analysis: v=2.4 cv=H7p4wPYi c=1 sm=1 tr=0 ts=65d3a253
+ a=1YbLdUo/zbTtOZ3uB5T3HA==:117 a=VhncohosazJxI00KdYJ/5A==:17
+ a=VSjF23E3Ok2ZiNtq:21 a=IkcTkHD0fZMA:10 a=k7vzHIieQBIA:10 a=wYkD_t78qR0A:10
+ a=VwQbUJbxAAAA:8 a=hpmp6n0Fncvi9LRvqokA:9 a=QEXdDO2ut3YA:10
+ a=AjGcO6oz07-iQ99wixmX:22
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=embeddedor.com; s=default; h=Content-Transfer-Encoding:Content-Type:
+	In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:Message-ID:Sender
+	:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+	Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+	List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=PsUWlBLUfZeSjk+Yv21JCfUUB/vLVf1BaKRuAmYHUeo=; b=UuCzQEkK7vHOFykbSc9v990Ogl
+	NAB8YOvszb6OOJidZ4Yp43lBZgqAoSUSYiLUnc5d3IMdxbWsGrR+bL4gmPSQ+dVgJyh8wD43KouWm
+	TpFRBhC7CmnaaW3u7rGihpPgM+gIxbJG60M21G81RHJqA8zb3Azvp9GmNgpYSkX+X9Ymz5eM0Eo7I
+	vCInVKdGqPPKyOKoL88Xm1F6w+ROJPDY6wq0nhNePvWxBthCnzSsQgH2184A6PsGwM0cJixX9y75N
+	ZWOTW1gUtkMr+uJvIdd3rQtxiY/iKnI67TDWBJAqtfC9POiBgzWT5+e98bmPcVhTQeQCtgwGgTcti
+	cHw5qIYQ==;
+Received: from [201.172.172.225] (port=57308 helo=[192.168.15.10])
+	by gator4166.hostgator.com with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+	(Exim 4.96.2)
+	(envelope-from <gustavo@embeddedor.com>)
+	id 1rc8g5-002Aa2-1q;
+	Mon, 19 Feb 2024 12:47:45 -0600
+Message-ID: <292b9fb0-5661-488b-a52a-d5e7dbb3dc45@embeddedor.com>
+Date: Mon, 19 Feb 2024 12:47:43 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Dan Carpenter <dan.carpenter@linaro.org>
+Content-Language: en-US
+To: Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+ keescook@chromium.org, Gerd Hoffmann <kraxel@redhat.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Daniel Vetter <daniel.vetter@ffwll.ch>
 References: <f75d0426a17b57dbddacd7da345c1c62a3dbb7ce.1708278363.git.christophe.jaillet@wanadoo.fr>
- <91d964c2-3d5a-4e96-a4db-e755455c5b5c@moroto.mountain>
-Content-Language: en-MW
-From: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
-In-Reply-To: <91d964c2-3d5a-4e96-a4db-e755455c5b5c@moroto.mountain>
-X-Rspamd-Queue-Id: EC8543F3B9
-X-Spamd-Bar: -------
-X-Spamd-Result: default: False [-7.97 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-2.98)[99.90%];
-	DMARC_POLICY_ALLOW(-0.50)[wanadoo.fr,quarantine];
-	R_DKIM_ALLOW(-0.20)[wanadoo.fr:s=t20230301];
-	R_SPF_ALLOW(-0.20)[+ip4:80.12.242.0/25];
-	ONCE_RECEIVED(0.10)[];
+From: "Gustavo A. R. Silva" <gustavo@embeddedor.com>
+In-Reply-To: <f75d0426a17b57dbddacd7da345c1c62a3dbb7ce.1708278363.git.christophe.jaillet@wanadoo.fr>
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - gator4166.hostgator.com
+X-AntiAbuse: Original Domain - lists.linaro.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - embeddedor.com
+X-BWhitelist: no
+X-Source-IP: 201.172.172.225
+X-Source-L: No
+X-Exim-ID: 1rc8g5-002Aa2-1q
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-Source-Sender: ([192.168.15.10]) [201.172.172.225]:57308
+X-Source-Auth: gustavo@embeddedor.com
+X-Email-Count: 1
+X-Org: HG=hgshared;ORG=hostgator;
+X-Source-Cap: Z3V6aWRpbmU7Z3V6aWRpbmU7Z2F0b3I0MTY2Lmhvc3RnYXRvci5jb20=
+X-Local-Domain: yes
+X-CMAE-Envelope: MS4xfM6lc3aliKAcGBeR44Z1k4Jp8A+2r5hQzLWachf+LNv0i6COuSE9IyoQa4QK/aBSqLR48m3wgga5LXac9IiyXfeTLM19IY/fYOs3ocv6/x6poKDVFEtY
+ GjUl59d2wIKInlTIgR6kVOxqwjEP3GnQb5AQbr5FlasTbnqtimXj+VIMwye4DtW9Wi0IqMyOchbGcHiRfZyEXMiFgV18GqUka8/oEzHpm++BjLHCWv6SGtiC
+X-Rspamd-Queue-Id: 2931F3F3BA
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.49 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	R_DKIM_ALLOW(-0.20)[embeddedor.com:s=default];
+	R_SPF_ALLOW(-0.20)[+ip4:44.202.169.32/29];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[80.12.242.14:from];
 	XM_UA_NO_VERSION(0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_FROM(0.00)[wanadoo.fr];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	TO_DN_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[wanadoo.fr:+];
-	DNSWL_BLOCKED(0.00)[92.140.202.140:received];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_ENVFROM(0.00)[wanadoo.fr];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:3215, ipnet:80.12.240.0/20, country:FR];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	RCVD_IN_DNSWL_NONE(0.00)[80.12.242.14:from]
+	RWL_MAILSPIKE_POSSIBLE(0.00)[44.202.169.39:from];
+	RCVD_TLS_ALL(0.00)[];
+	ASN(0.00)[asn:14618, ipnet:44.192.0.0/11, country:US];
+	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[wanadoo.fr,chromium.org,redhat.com,linaro.org,amd.com,ffwll.ch];
+	MID_RHS_MATCH_FROM(0.00)[];
+	HAS_X_ANTIABUSE(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	HAS_X_SOURCE(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DMARC_NA(0.00)[embeddedor.com];
+	DKIM_TRACE(0.00)[embeddedor.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: RLOJ6DEE2B3TLLOBNIEVE2A5CDQ2AOXX
-X-Message-ID-Hash: RLOJ6DEE2B3TLLOBNIEVE2A5CDQ2AOXX
-X-MailFrom: christophe.jaillet@wanadoo.fr
+Message-ID-Hash: CBBEI7UMIUC6223AKFJ2OGFDYKGUWYT4
+X-Message-ID-Hash: CBBEI7UMIUC6223AKFJ2OGFDYKGUWYT4
+X-MailFrom: gustavo@embeddedor.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: gustavo@embeddedor.com, keescook@chromium.org, Gerd Hoffmann <kraxel@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v2] udmabuf: Fix a potential (and unlikely) access to unallocated memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RLOJ6DEE2B3TLLOBNIEVE2A5CDQ2AOXX/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CBBEI7UMIUC6223AKFJ2OGFDYKGUWYT4/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-TGUgMTkvMDIvMjAyNCDDoCAwOTozNywgRGFuIENhcnBlbnRlciBhIMOpY3JpdMKgOg0KPiBPbiBT
-dW4sIEZlYiAxOCwgMjAyNCBhdCAwNjo0Njo0NFBNICswMTAwLCBDaHJpc3RvcGhlIEpBSUxMRVQg
-d3JvdGU6DQo+PiBJZiAnbGlzdF9saW1pdCcgaXMgc2V0IHRvIGEgdmVyeSBoaWdoIHZhbHVlLCAn
-bHNpemUnIGNvbXB1dGF0aW9uIGNvdWxkDQo+PiBvdmVyZmxvdyBpZiAnaGVhZC5jb3VudCcgaXMg
-YmlnIGVub3VnaC4NCj4+DQo+IA0KPiBUaGUgImxpc3RfbGltaXQiIGlzIHNldCB2aWEgbW9kdWxl
-IHBhcmFtZXRlciBzbyBpZiB5b3Ugc2V0IHRoYXQgaGlnaA0KPiBlbm91Z2ggdG8gbGVhZCB0byBh
-biBpbnRlZ2VyIG92ZXJmbG93IHRoZW4geW91IGtpbmQgb2YgZGVzZXJ2ZSB3aGF0DQo+IHlvdSBn
-ZXQuDQo+IA0KPiBUaGlzIHBhdGNoIGlzIG5pY2UgZm9yIGtlcm5lbCBoYXJkZW5pbmcgYW5kIG1h
-a2luZyB0aGUgY29kZSBlYXNpZXIgdG8NCj4gcmVhZC9hdWRpdCBidXQgdGhlIHJlYWwgd29ybGQg
-c2VjdXJpdHkgaW1wYWN0IGlzIG5lZ2xpZ2libGUuDQoNCkFncmVlZC4NCg0KVGhhdCBpcyB3aGF0
-IEkgbWVhbnQgYnkgImFuZCB1bmxpa2VseSIuDQpNYXliZSB0aGUgY29tbWl0IG1lc3NhZ2UgY291
-bGQgYmUgbW9yZSBleHBsaWNpdCBpZiBuZWVkZWQuDQoNCkxldCBtZSBrbm93IGlmIG9rIGFzLWlz
-IG9yIGlmIEkgc2hvdWxkIHRyeSB0byByZS13b3JkIHRoZSBkZXNjcmlwdGlvbi4NCg0KQ0oNCg0K
-PiANCj4gcmVnYXJkcywNCj4gZGFuIGNhcnBlbnRlcg0KPiANCj4gDQo+IA0KDQpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxp
-bmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUg
-c2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+
+
+On 2/18/24 11:46, Christophe JAILLET wrote:
+> If 'list_limit' is set to a very high value, 'lsize' computation could
+> overflow if 'head.count' is big enough.
+> 
+> In such a case, udmabuf_create() would access to memory beyond 'list'.
+> 
+> Use memdup_array_user() which checks for overflow.
+> 
+> While at it, include <linux/string.h>.
+> 
+> Fixes: fbb0de795078 ("Add udmabuf misc device")'
+
+I don't think this tag is needed in this case.
+
+Also, please, CC linux-hardening next time.
+
+> Signed-off-by: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+
+In any case, LGTM:
+
+Reviewed-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+
+Thanks!
+--
+Gustavo
+
+> ---
+> v2: - Use memdup_array_user()   [Kees Cook]
+>      - Use sizeof(*list)   [Gustavo A. R. Silva]
+>      - Add include <linux/string.h>
+> 
+> v1: https://lore.kernel.org/all/3e37f05c7593f1016f0a46de188b3357cbbd0c0b.1695060389.git.christophe.jaillet@wanadoo.fr/
+> 
+> Signed-off-by: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+> ---
+>   drivers/dma-buf/udmabuf.c | 6 +++---
+>   1 file changed, 3 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/dma-buf/udmabuf.c b/drivers/dma-buf/udmabuf.c
+> index c40645999648..5728948ea6f2 100644
+> --- a/drivers/dma-buf/udmabuf.c
+> +++ b/drivers/dma-buf/udmabuf.c
+> @@ -11,6 +11,7 @@
+>   #include <linux/module.h>
+>   #include <linux/shmem_fs.h>
+>   #include <linux/slab.h>
+> +#include <linux/string.h>
+>   #include <linux/udmabuf.h>
+>   #include <linux/vmalloc.h>
+>   #include <linux/iosys-map.h>
+> @@ -314,14 +315,13 @@ static long udmabuf_ioctl_create_list(struct file *filp, unsigned long arg)
+>   	struct udmabuf_create_list head;
+>   	struct udmabuf_create_item *list;
+>   	int ret = -EINVAL;
+> -	u32 lsize;
+>   
+>   	if (copy_from_user(&head, (void __user *)arg, sizeof(head)))
+>   		return -EFAULT;
+>   	if (head.count > list_limit)
+>   		return -EINVAL;
+> -	lsize = sizeof(struct udmabuf_create_item) * head.count;
+> -	list = memdup_user((void __user *)(arg + sizeof(head)), lsize);
+> +	list = memdup_array_user((void __user *)(arg + sizeof(head)),
+> +				 sizeof(*list), head.count);
+>   	if (IS_ERR(list))
+>   		return PTR_ERR(list);
+>   
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
