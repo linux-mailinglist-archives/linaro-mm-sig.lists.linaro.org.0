@@ -2,168 +2,107 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBF44860124
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Feb 2024 19:25:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id B5D1F86752F
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Feb 2024 13:39:27 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A62FF43D4B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 22 Feb 2024 18:25:24 +0000 (UTC)
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
-	by lists.linaro.org (Postfix) with ESMTPS id 661B03F1FD
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Feb 2024 18:25:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7366544354
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Feb 2024 12:39:26 +0000 (UTC)
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
+	by lists.linaro.org (Postfix) with ESMTPS id 5A77C40F54
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Feb 2024 12:39:18 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=cP9xeJZe;
-	spf=pass (lists.linaro.org: domain of groeck7@gmail.com designates 209.85.214.174 as permitted sender) smtp.mailfrom=groeck7@gmail.com;
-	dmarc=none
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-1dc09556599so601565ad.1
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 22 Feb 2024 10:25:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1708626308; x=1709231108; darn=lists.linaro.org;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=bj3IcFn8mnJgzD3CoUY6c78LqZOUjuMORbYEATmxZBU=;
-        b=cP9xeJZea0U6GkzscWDRqyQOitRoFf6QeweWqYWe8Pd2FeLVaPiqCkKNBDJWzb9qNN
-         Pya0ZCugfTMMPeiDov0Mk/ietnWAai0KAcloyD9URSftoWHC3gn4pRKwhtjpOWM+5MKd
-         wF93I3yfPRDOfI23347R0jf+TyzS5sMab8Tmtfp696ht9/lxb8tOHVU5qrtiA5xDuMci
-         15Lwvzmaqp14yIF/LOeO2nNbh61iPToYWeeZaccC9yuWqXVoxihzCFGjS2VOJxAhRk3S
-         sy0m2KxWCJYleu9bGN/8DDKxuBq7R+W++QDR3bJof2RBGTpFYJ61RbOsdZrEiZAAyCAT
-         ccMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1708626308; x=1709231108;
-        h=in-reply-to:content-disposition:mime-version:references:message-id
-         :subject:cc:to:from:date:sender:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=bj3IcFn8mnJgzD3CoUY6c78LqZOUjuMORbYEATmxZBU=;
-        b=kNygElgFbhfBkU6rdBKqMWtMiqbB442jjbUl34VUz8aoz6GUBWbgk2911pu1/GC3dm
-         skQX1NuKdGU3m1gC79RMyiU+cudxW9UQlKYvDR8ldz5Gx2LdxznINn2CZLY/hn4lHRAO
-         dKg6f1Y0uKG8MHHBVdeE+jpkZeohJ0EBJW0k08hn//qbo0YNQ2NqwmvWLALaR50lN8N4
-         SRLQhMAwK4L+2CQnrDVwoVq6F0dD2eJ8vPb6Q9vric9zTheHDu7N9RMM3xsx9iDndSng
-         msqOafv7cr6uLpfDwfqZ71viIVt7icYUZGwRB5vsZ9HCcbuuklG0Ly34lo96I3gXlKy+
-         Q4og==
-X-Forwarded-Encrypted: i=1; AJvYcCWE+K6fLlc+VaXB4rE3/AfzB54qz4aIh7JnxyPMs15M0IG8dqIx2GR2FiuQg9WTUZv4Y/cKH2u/dBreO2ASLdo7sXUo3Kgh/zRG0vkS+dQ=
-X-Gm-Message-State: AOJu0YwQTISw/YdtQwfXImKCXKs+Cxpdla9aQhmH60bvzu35Xk3mK8qL
-	M6LIbb+yoOKnXfGer0DAgD3ralZN2ZxBbB+q9/qRGAj7Wpi8liD9
-X-Google-Smtp-Source: AGHT+IHcoigpFbKIQ5fbALcZQ6Rz++MRYgKPcOOAhRgDC8V+XygUKmSTJuBfrizzNDsVEvMULKcBiQ==
-X-Received: by 2002:a17:902:e545:b0:1db:ed54:a726 with SMTP id n5-20020a170902e54500b001dbed54a726mr15517677plf.63.1708626308374;
-        Thu, 22 Feb 2024 10:25:08 -0800 (PST)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
-        by smtp.gmail.com with ESMTPSA id mi11-20020a170902fccb00b001da34166cd2sm10255199plb.180.2024.02.22.10.25.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 22 Feb 2024 10:25:07 -0800 (PST)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Thu, 22 Feb 2024 10:25:06 -0800
-From: Guenter Roeck <linux@roeck-us.net>
-To: Marco Pagani <marpagan@redhat.com>
-Message-ID: <e38512f3-626f-42ae-bb3b-3f631dfaed9c@roeck-us.net>
-References: <20231130171417.74162-1-marpagan@redhat.com>
- <a45b796d-5e04-4eac-b5ba-ea6bb3b6131b@roeck-us.net>
- <045bfb84-9833-442c-ac54-ed7a26451afa@redhat.com>
- <fb2ac929-6650-444e-8f24-c9b1562d2bb3@roeck-us.net>
- <ad03c582-28b9-40b2-9c7b-8372ed5a05c2@redhat.com>
+	dkim=pass header.d=collabora.com header.s=mail header.b=oG6Wk+Kz;
+	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.194 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com;
+	dmarc=pass (policy=quarantine) header.from=collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1708951157;
+	bh=jZDjZz16a7jYDqF/ga6VZUm7J/5zMDjmn/buH8/I2Ws=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=oG6Wk+Kzl1QHp140YXlMFVxLcC2trHNBIcOFA4v9jMBdMXKuFTeb/s36KUUqhaVsZ
+	 0Un+pP6SHNGUhSZKr5vc6qqh0nzmU/2Stk9q/8foCCWhYxpB3gTk5+fNR8xT3CukTM
+	 XAXPyUK/7ylpry+QkwCI5DuG285oeob87xOQ1rDXFNt1WeBdfCNyrmwsXCLAo1+aDa
+	 w625iJrgaMcBv8oxa/2tGmhkiWJOVmypyYsZsAE7LRRsYlJVBp6Pp9yEidqseWkZ90
+	 Nor5FqRkpjku/Fewqlng8Y9DtyvsWKlZ45bOKoCSGQJhESKN4M4FYoo2uYOd3taddm
+	 Rb1JZnRcUsW6w==
+Received: from [100.113.186.2] (cola.collaboradmins.com [195.201.22.229])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: kholk11)
+	by madrid.collaboradmins.com (Postfix) with ESMTPSA id 17C6A37803EE;
+	Mon, 26 Feb 2024 12:39:16 +0000 (UTC)
+Message-ID: <3354332e-7e9c-4caf-a38a-a7b26eba76cc@collabora.com>
+Date: Mon, 26 Feb 2024 13:39:15 +0100
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <ad03c582-28b9-40b2-9c7b-8372ed5a05c2@redhat.com>
-X-Rspamd-Queue-Id: 661B03F1FD
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.30 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	FORGED_SENDER(0.30)[linux@roeck-us.net,groeck7@gmail.com];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.214.174:from];
-	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	MIME_TRACE(0.00)[0:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[linux@roeck-us.net,groeck7@gmail.com];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,redhat.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	DMARC_NA(0.00)[roeck-us.net];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_DN_SOME(0.00)[]
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Shawn Sung <shawn.sung@mediatek.com>,
+ Chun-Kuang Hu <chunkuang.hu@kernel.org>
+References: <20240226085059.26850-1-shawn.sung@mediatek.com>
+ <20240226085059.26850-11-shawn.sung@mediatek.com>
+From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+In-Reply-To: <20240226085059.26850-11-shawn.sung@mediatek.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 6QDXTQ4SJMFAP3XWWZNNPNN2WRMH4RFH
-X-Message-ID-Hash: 6QDXTQ4SJMFAP3XWWZNNPNN2WRMH4RFH
-X-MailFrom: groeck7@gmail.com
+X-Rspamd-Queue-Id: 5A77C40F54
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.38 / 15.00];
+	BAYES_HAM(-2.99)[99.95%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[collabora.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.194];
+	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
+	ONCE_RECEIVED(0.10)[];
+	MIME_GOOD(-0.10)[text/plain];
+	XM_UA_NO_VERSION(0.01)[];
+	ARC_NA(0.00)[];
+	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
+	RCVD_TLS_ALL(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_ONE(0.00)[1];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FREEMAIL_CC(0.00)[pengutronix.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,lists.infradead.org,vger.kernel.org,lists.linaro.org,mediatek.corp-partner.google.com];
+	TAGGED_RCPT(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_TRACE(0.00)[collabora.com:+]
+Message-ID-Hash: WT6WRWKQ3RT6YJNAWUUMJZKOOVE5SVES
+X-Message-ID-Hash: WT6WRWKQ3RT6YJNAWUUMJZKOOVE5SVES
+X-MailFrom: angelogioacchino.delregno@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian Koenig <christian.koenig@amd.com>, Javier Martinez Canillas <javierm@redhat.com>, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: Philipp Zabel <p.zabel@pengutronix.de>, Daniel Vetter <daniel@ffwll.ch>, Matthias Brugger <matthias.bgg@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Hsiao Chien Sung <shawn.sung@mediatek.corp-partner.google.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5] drm/test: add a test suite for GEM objects backed by shmem
+Subject: [Linaro-mm-sig] Re: [PATCH 10/11] drm/mediatek: Rename mtk_ddp_comp functions
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6QDXTQ4SJMFAP3XWWZNNPNN2WRMH4RFH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WT6WRWKQ3RT6YJNAWUUMJZKOOVE5SVES/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-On Thu, Feb 22, 2024 at 05:33:48PM +0100, Marco Pagani wrote:
-> > 
-> > In this context, the TTM unit tests fail as well in qemu, with worse result:
-> > It seems there is some bad cleanup after a failed test case, causing list
-> > corruptions in the drm core and ultimately a crash. I don't know if this
-> > is also caused by the missing dma_mask initialization.
-> > 
+Il 26/02/24 09:50, Shawn Sung ha scritto:
+> From: Hsiao Chien Sung <shawn.sung@mediatek.corp-partner.google.com>
 > 
-> That's interesting. Which --arch argument are you using to run the
-> tests with QEMU?
+> Rename functions of mtk_ddp_comp:
+> - To align the naming rule
+> - To reduce the code size
+> 
+> Signed-off-by: Hsiao Chien Sung <shawn.sung@mediatek.corp-partner.google.com>
 
-Example (I am not sure if any of those parameters matters; it is just one
-of my tests):
+Reviewed-by: AngeloGiaocchino Del Regno <angelogioacchino.delregno@collabora.com>
 
-qemu-system-x86_64 -kernel arch/x86/boot/bzImage -M q35 -cpu IvyBridge \
-	-no-reboot -snapshot -smp 2 \
-	-device e1000,netdev=net0 -netdev user,id=net0 -m 512 \
-	-drive file=rootfs.ext2,format=raw,if=ide \
-	--append "earlycon=uart8250,io,0x3f8,9600n8 root=/dev/sda1 console=ttyS0" \
-	-d unimp,guest_errors -nographic -monitor none
 
-This results in:
-
-[ ... ]
-[    5.989496]     KTAP version 1
-[    5.989639]     # Subtest: ttm_device
-[    5.989711]     # module: ttm_device_test
-[    5.989760]     1..5
-[    6.002044]     ok 1 ttm_device_init_basic
-[    6.013557]     ok 2 ttm_device_init_multiple
-ILLOPC: ffffffffb8ac9350: 0f 0b
-[    6.022481]     ok 3 ttm_device_fini_basic
-[    6.026172] ------------[ cut here ]------------
-[    6.026315] WARNING: CPU: 1 PID: 1575 at drivers/gpu/drm/ttm/ttm_device.c:206 ttm_device_init+0x170/0x190
-...
-[    6.135016]         ok 3 Above the allocation limit
-[    6.138759] ------------[ cut here ]------------
-[    6.138925] WARNING: CPU: 1 PID: 1595 at kernel/dma/mapping.c:503 dma_alloc_attrs+0xf6/0x100
-...
-[    6.143850]     # ttm_pool_alloc_basic: ASSERTION FAILED at drivers/gpu/drm/ttm/tests/ttm_pool_test.c:162
-[    6.143850]     Expected err == 0, but
-[    6.143850]         err == -12 (0xfffffffffffffff4)
-[    6.148824]         not ok 4 One page, with coherent DMA mappings enabled
-
-From there things go downhill.
-
-[    6.152821] list_add corruption. prev->next should be next (ffffffffbbd53950), but was 0000000000000000. (prev=ffff8af1c38f9e20).
-
-and so on until the emulation crashes.
-
-Guenter
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
