@@ -2,49 +2,49 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id F2504867549
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Feb 2024 13:41:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id C440786754C
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Feb 2024 13:41:24 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0DFC84433C
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Feb 2024 12:41:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D818740D2C
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 26 Feb 2024 12:41:23 +0000 (UTC)
 Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
-	by lists.linaro.org (Postfix) with ESMTPS id F30ED4433C
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Feb 2024 12:39:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id F2038443A5
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 26 Feb 2024 12:39:24 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=Gikzga5N;
+	dkim=pass header.d=collabora.com header.s=mail header.b=DEFZ1HM7;
 	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.194 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com;
 	dmarc=pass (policy=quarantine) header.from=collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1708951163;
-	bh=leBMz78ecPcrLpo4jWp3OD2kzCaYPdWixO79WpUqSTM=;
+	s=mail; t=1708951164;
+	bh=IJlVIU07O9fLX3cymIc5k0g8Lxcz/CNKc3JeVD5/Ojc=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=Gikzga5Nt88vHmKjoR02aYiPPaAHIRYRQMo9buItMr0k0CQLXw0R1p7nC7BhBButD
-	 LsRc+BAhk3TlmKPkZFGSylmBpz59zUSg3eSF0MkgWANZLJizPexryHbslpF4nK2Gyy
-	 jAsBdWAPNjSy4sg3IrlEglDI+Y1p3dG16ow44t6gSkXumnxA8D4TeYq/yBbnxmfveX
-	 H8OOoZQUOg4uZgUBK+9kY8RrOdhZ+/ERUPiSwLxx4yZK/v3m5Iqg0v9RoSL+AF511u
-	 wA9raKJC59MDuOye2oSGEA+DXQMl5pu9x51arabwGJzW+XeLq5mUTl+g5N3HelrK9k
-	 YRS2BNoVv2PvA==
+	b=DEFZ1HM7x4+e9SmNiPfO+UoWp9syO9knHrUyp2BeC1aepXmQQawP4sHXyjHHjyp1n
+	 eWXlYD25UrSjt71NwLR8RA0yJpBK+j0NdIvZzs/nG9fV49CSSax7P+rxSzfZw38tuu
+	 Sofi0wOXTMPbIgkr8vG9K8TCXbjT4l3wFfBFqVGOb6jK8B6l0pjYzO2uDdSjUk03ZD
+	 muABdVjYdTBAyJvnoGfchrttABDY1rNUKagsxSD5y0l37wCCSSrzEF5sdpPH7bNZ4c
+	 HegyDX5PgH8zMXjr4EVDmB8CyaYX5s0rKfBHcR7fQ/10+cTi4AwWpY070UA5dwdCld
+	 dgfiQmjP6MCEg==
 Received: from [100.113.186.2] (cola.collaboradmins.com [195.201.22.229])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
 	(Authenticated sender: kholk11)
-	by madrid.collaboradmins.com (Postfix) with ESMTPSA id 0AE7F37803EE;
-	Mon, 26 Feb 2024 12:39:21 +0000 (UTC)
-Message-ID: <db96c6cb-2d7c-4a9e-8763-d2055da3a442@collabora.com>
-Date: Mon, 26 Feb 2024 13:39:21 +0100
+	by madrid.collaboradmins.com (Postfix) with ESMTPSA id 02F8637820C6;
+	Mon, 26 Feb 2024 12:39:22 +0000 (UTC)
+Message-ID: <89659b2c-5521-4328-86b0-1bcf967693ae@collabora.com>
+Date: Mon, 26 Feb 2024 13:39:22 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
 To: Shawn Sung <shawn.sung@mediatek.com>,
  Chun-Kuang Hu <chunkuang.hu@kernel.org>
 References: <20240226085059.26850-1-shawn.sung@mediatek.com>
- <20240226085059.26850-4-shawn.sung@mediatek.com>
+ <20240226085059.26850-3-shawn.sung@mediatek.com>
 From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
-In-Reply-To: <20240226085059.26850-4-shawn.sung@mediatek.com>
+In-Reply-To: <20240226085059.26850-3-shawn.sung@mediatek.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: F30ED4433C
+X-Rspamd-Queue-Id: F2038443A5
 X-Spamd-Bar: --
 X-Spamd-Result: default: False [-2.37 / 15.00];
 	BAYES_HAM(-2.98)[99.91%];
@@ -71,17 +71,17 @@ X-Spamd-Result: default: False [-2.37 / 15.00];
 	TO_DN_SOME(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	DKIM_TRACE(0.00)[collabora.com:+]
-Message-ID-Hash: RRJYP6XTJM4TLU2UD2C3M5CPDUPOKB4Y
-X-Message-ID-Hash: RRJYP6XTJM4TLU2UD2C3M5CPDUPOKB4Y
+Message-ID-Hash: ASHJIZBNYQ5NVCFRUGVDWPR6QKEGRPLW
+X-Message-ID-Hash: ASHJIZBNYQ5NVCFRUGVDWPR6QKEGRPLW
 X-MailFrom: angelogioacchino.delregno@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Philipp Zabel <p.zabel@pengutronix.de>, Daniel Vetter <daniel@ffwll.ch>, Matthias Brugger <matthias.bgg@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Hsiao Chien Sung <shawn.sung@mediatek.corp-partner.google.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 03/11] drm/mediatek: Rename "mtk_drm_plane" to "mtk_plane"
+Subject: [Linaro-mm-sig] Re: [PATCH 02/11] drm/mediatek: Rename "mtk_drm_ddp_comp" to "mtk_ddp_comp"
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RRJYP6XTJM4TLU2UD2C3M5CPDUPOKB4Y/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ASHJIZBNYQ5NVCFRUGVDWPR6QKEGRPLW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -94,13 +94,14 @@ Content-Transfer-Encoding: 7bit
 Il 26/02/24 09:50, Shawn Sung ha scritto:
 > From: Hsiao Chien Sung <shawn.sung@mediatek.corp-partner.google.com>
 > 
-> Rename all "mtk_drm_plane" to "mtk_plane":
+> Rename all "mtk_drm_ddp_comp" to "mtk_ddp_comp":
 > - To align the naming rule
 > - To reduce the code size
 > 
 > Signed-off-by: Hsiao Chien Sung <shawn.sung@mediatek.corp-partner.google.com>
 
 Reviewed-by: AngeloGiaocchino Del Regno <angelogioacchino.delregno@collabora.com>
+
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
