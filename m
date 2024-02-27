@@ -2,73 +2,74 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 87CDB868BC2
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Feb 2024 10:10:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6F86C868DA7
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Feb 2024 11:31:44 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9A0F143FDE
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Feb 2024 09:10:21 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
-	by lists.linaro.org (Postfix) with ESMTPS id 925833ED6D
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Feb 2024 09:10:13 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 812C03ED6D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Feb 2024 10:31:43 +0000 (UTC)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+	by lists.linaro.org (Postfix) with ESMTPS id C5FAA3ED6D
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Feb 2024 10:31:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=RseC0zai;
-	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.218.53 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org;
+	dkim=pass header.d=linaro.org header.s=google header.b=hBXFF5kv;
+	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.208.47 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org;
 	dmarc=pass (policy=none) header.from=linaro.org
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-a3d484a58f6so563705866b.3
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Feb 2024 01:10:13 -0800 (PST)
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-563cb3ba9daso4296394a12.3
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Feb 2024 02:31:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1709025012; x=1709629812; darn=lists.linaro.org;
+        d=linaro.org; s=google; t=1709029895; x=1709634695; darn=lists.linaro.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=4jfB+Qos/TbbfpQCwGnGmZ5LcQISfQmi0hGA4S6JfaA=;
-        b=RseC0zaixUXR4iopLwyyLj7B6pRBCYgexkgJKLknz4WP2QSkkrYd3zk3t73AV5KmaX
-         3kscKkhlrvJJgJw7FbpUVjkxYX4lJtb717Ycv2RVo4aE9L3awogFRfRNFB1VL/UbK4go
-         4FZuq2eLKNOhbflaVgTolC/lwifzppIpZ63qD1AzxIE/QNvHd4/dfIf5VAGyAfji1LnS
-         RKYm4pf+y0EdgnFDRiPcqenEWFxLaEZXcuHUUXYl066i3P7TN/cfonFSEaY2FQ3z88s6
-         94B/88R1QzoavF2TMzSJu7DbMchpDbBmRtGM7LSL7oxReJPadY+3m03sMQOCoUFU9fMm
-         VZsA==
+        bh=f4iudg19y7abzrO0HKBUX7Faev1tIapQqDvDX8vbZQo=;
+        b=hBXFF5kvxT+w8pycbFW0etlQiFAc/c1UrdocN5iat09WlB+9twfiWq0Jjfs69CfuuG
+         e62WE33nDamviB1MguOf6pLN0wf4l1PcchAHSig71tyXu85somVFLNc34y9ZwDwXOCEw
+         SpLlqLLBFEY5Ioqvbwk/yjl7hjchSSZNjw6pb36WCw4LaACuKWS1/x0XOpxvuzuTcmDt
+         /9vmPtaNqpEypeYBwXRwrKV+zYi40l+XEv3PU3zZoWibNI+ZMKKuUTA3TiBiPk3OAoYF
+         seLKM75fbnnBeHUuFW5e4LqHAetPu+c5LE3pmUrczQDMEYQXXk8FUYyIrsODRQ4U1qTb
+         t8Lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709025012; x=1709629812;
+        d=1e100.net; s=20230601; t=1709029895; x=1709634695;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=4jfB+Qos/TbbfpQCwGnGmZ5LcQISfQmi0hGA4S6JfaA=;
-        b=EGRhXgsNQ2kLuxNIEKwA9+CBoOuBBm4mj6MiJmRdGJrrrEhvyzQ7iVbV+H2GRL6VRs
-         oRn3uT5MLvfUy9yFKhuivGeRgIaT7z+cJNbReMqWfSBnQ3DTbMtQaxgKdvzvEjyyzz4L
-         +Yr19wkADClvgH4Zb9ZTTSWYgsifGkaFGn2Y77T3nmgAUmT8OlG45njTaHmhH3ODqfrq
-         2qRK/GQ3DzWfgwJUyQBwcMs8564TbkGcIEYMoT1O6poPmC9zk9soCag2ZUUk+e9sR6/j
-         a46abvyWiPTtBICKcf4qd2gTApiDxccgc7VoEjz9pdzWBgxsjSES8PuKibJsewAlfRHc
-         xtMg==
-X-Forwarded-Encrypted: i=1; AJvYcCXhr2jSEQpiKGxRNeEb4iMkYGpuwkmLPntEJrEy+IHeDF/ttzXqsPlNaEtwHV0tWK4nWws3my5/eGfP6tYzo21N6pipBWrJDy067w2U/kY=
-X-Gm-Message-State: AOJu0Yx2nOPjgqasT/WBckTfI4HQBrljkcBsqLBQYjmBf0lJrDaJwEhm
-	vQtSXcOCWZiuTB2uHFLmxTWrnMuHfaWqSu2nE1SdutWHAozoFfSpChiKxmangoXqDQ==
-X-Google-Smtp-Source: AGHT+IFjg6TUqGceaHtS0RDBUuFRFRIN3MDvCONyB7Q+VVzjJA9M7exXV6k2ArlnkjNyYmuFmHYeXQ==
-X-Received: by 2002:a17:906:3659:b0:a3f:29b:7c27 with SMTP id r25-20020a170906365900b00a3f029b7c27mr6080459ejb.4.1709025012635;
-        Tue, 27 Feb 2024 01:10:12 -0800 (PST)
+        bh=f4iudg19y7abzrO0HKBUX7Faev1tIapQqDvDX8vbZQo=;
+        b=N19JE2zRxX+JFsREkzATI8dh8HyCws7nTGwa9sshJxm5X7bpNQPmGJQugFmyL3OhxS
+         x9SCV08hmynJ5dHlSn2cjklJy46K5q7u23tu2SIsN6ea3BC9yoErqk4L0f5AASsHPPQ8
+         wq7a7lQQTzQ7M0m52M98Fpg2cgP6LNUlo0wuVHcg5hXZPQkZ8wE9dHIKucRFEufaWj41
+         jKo98RtAPP+5dUfdw5HATp/M6NjiioaV2uF5GvtDdO37zWfCVmuzc1qvq2vKtEaFZrL5
+         uC/eIhM3YnOIjNVOjJibN8hcBwF1Eo/j2GdHJpTaXe3VhswHWVzZPC68LxpgVtxDUDcg
+         4pNw==
+X-Forwarded-Encrypted: i=1; AJvYcCXv8r0HLEHTOd8ubqTnqgsKm0OfDQCRp6U4tiAF7oHIjekTF033JaGZk1dN6ZMTzfIbt7tHGvnLgQFYsqu4dsfiBDF54Xy/DiNPYsbO0Uc=
+X-Gm-Message-State: AOJu0YzXSDs89qEjnmwk65HbAc5Sz7TgF+ZgSG4P0++HccwpM0+F43wa
+	GLWnX21fmSCcWDVs0YfHW2K4KOCuJedsNTuiJoo6prHzanZI1lLVl17g2Eb73SN0Yw==
+X-Google-Smtp-Source: AGHT+IEEl8fKy5C7l5uepTiAwXSRMBRmCGJ06jeVF6eHUMlxJ3GqL+ZGbydOs4ZuhukC+mSJM7jiog==
+X-Received: by 2002:a05:6402:2059:b0:563:c54e:f1 with SMTP id bc25-20020a056402205900b00563c54e00f1mr6442198edb.2.1709029894862;
+        Tue, 27 Feb 2024 02:31:34 -0800 (PST)
 Received: from [192.168.1.20] ([178.197.222.116])
-        by smtp.gmail.com with ESMTPSA id e14-20020a170906374e00b00a431488d8efsm548118ejc.160.2024.02.27.01.10.10
+        by smtp.gmail.com with ESMTPSA id ev19-20020a056402541300b005661b5884adsm622854edb.27.2024.02.27.02.31.32
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 27 Feb 2024 01:10:12 -0800 (PST)
-Message-ID: <84f3033c-a844-477d-8007-67b8e22702ab@linaro.org>
-Date: Tue, 27 Feb 2024 10:10:09 +0100
+        Tue, 27 Feb 2024 02:31:34 -0800 (PST)
+Message-ID: <282ca3d6-b403-4378-8dc2-8e1d09fdf7c9@linaro.org>
+Date: Tue, 27 Feb 2024 11:31:32 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
 To: Alexandre Mergnat <amergnat@baylibre.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
  Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
  Rob Herring <robh+dt@kernel.org>,
  Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
  Conor Dooley <conor+dt@kernel.org>, Matthias Brugger
- <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Lee Jones <lee@kernel.org>, Flora Fu <flora.fu@mediatek.com>,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
+ <matthias.bgg@gmail.com>, Lee Jones <lee@kernel.org>,
+ Flora Fu <flora.fu@mediatek.com>, Jaroslav Kysela <perex@perex.cz>,
+ Takashi Iwai <tiwai@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>,
  =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>
 References: <20240226-audio-i350-v1-0-4fa1cea1667f@baylibre.com>
- <20240226-audio-i350-v1-8-4fa1cea1667f@baylibre.com>
+ <20240226-audio-i350-v1-2-4fa1cea1667f@baylibre.com>
+ <e15fdb18-d4de-495f-b90b-ba0e787cbef4@collabora.com>
+ <92b9e9ac-6265-4611-888d-ba74bb871be5@baylibre.com>
 From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
  xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
@@ -114,83 +115,68 @@ Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
  KQ06ztUMRrj8eVtpImjsWCd0bDWRaaR4vqhCHvAG9iWXZu4qh3ipie2Y0oSJygcZT7H3UZxq
  fyYKiqEmRuqsvv6dcbblD8ZLkz1EVZL6djImH5zc5x8qpVxlA0A0i23v5QvN00m6G9NFF0Le
  D2GYIS41Kv4Isx2dEFh+/Q==
-In-Reply-To: <20240226-audio-i350-v1-8-4fa1cea1667f@baylibre.com>
+In-Reply-To: <92b9e9ac-6265-4611-888d-ba74bb871be5@baylibre.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 925833ED6D
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.59 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+X-Rspamd-Queue-Id: C5FAA3ED6D
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.55 / 15.00];
+	BAYES_HAM(-2.06)[95.38%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.53:from];
 	XM_UA_NO_VERSION(0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,kernel.org,linaro.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
-	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[baylibre.com,collabora.com,gmail.com,kernel.org,linaro.org,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
 	DKIM_TRACE(0.00)[linaro.org:+];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	DWL_DNSWL_FAIL(0.00)[linaro.org:server fail];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[24];
-	DNSWL_BLOCKED(0.00)[178.197.222.116:received,209.85.218.53:from];
-	NEURAL_HAM(-0.00)[-1.000];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_RCPT(0.00)[dt];
 	MID_RHS_MATCH_FROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.47:from];
+	TAGGED_RCPT(0.00)[dt];
 	TO_DN_SOME(0.00)[]
-Message-ID-Hash: B6FQTZU44A7AS4SZZENI5CBCQFIU4YFF
-X-Message-ID-Hash: B6FQTZU44A7AS4SZZENI5CBCQFIU4YFF
+Message-ID-Hash: ZZ3O2OTQ7OIFIC32IJHAAZWP5VXA4OOR
+X-Message-ID-Hash: ZZ3O2OTQ7OIFIC32IJHAAZWP5VXA4OOR
 X-MailFrom: krzysztof.kozlowski@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 08/18] ASoC: mediatek: mt8365: Add DMIC DAI support
+Subject: [Linaro-mm-sig] Re: [PATCH 02/18] ASoC: dt-bindings: mediatek,mt8365-mt6357: Add audio sound card document
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/B6FQTZU44A7AS4SZZENI5CBCQFIU4YFF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZZ3O2OTQ7OIFIC32IJHAAZWP5VXA4OOR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On 26/02/2024 15:01, Alexandre Mergnat wrote:
-> Add Digital Micro Device Audio Interface support for MT8365 SoC.
-> 
-> Signed-off-by: Alexandre Mergnat <amergnat@baylibre.com>
-
-
-> +
-> +static int init_dmic_priv_data(struct mtk_base_afe *afe)
-> +{
-> +	struct mt8365_afe_private *afe_priv = afe->platform_priv;
-> +	struct mt8365_dmic_data *dmic_priv;
-> +	struct device_node *np = afe->dev->of_node;
-> +	unsigned int temps[4];
-> +	int ret;
-> +
-> +	dmic_priv = devm_kzalloc(afe->dev, sizeof(struct mt8365_dmic_data),
-> +				  GFP_KERNEL);
-
-You have very inconsistent style of coding. Some patches are done
-correctly, some repeast known issues. All over. This is sizeof(*). This
-comment (and all others) apply everywhere, just in case.
-
-Best regards,
-Krzysztof
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gMjcvMDIvMjAyNCAxMToyMywgQWxleGFuZHJlIE1lcmduYXQgd3JvdGU6DQo+Pj4gKw0KPj4+
+ICtleGFtcGxlczoNCj4+PiArwqAgLSB8DQo+Pj4gK8KgwqDCoCBzb3VuZCB7DQo+Pj4gK8KgwqDC
+oMKgwqDCoMKgIGNvbXBhdGlibGUgPSAibWVkaWF0ZWssbXQ4MzY1LW10NjM1NyI7DQo+Pj4gK8Kg
+wqDCoMKgwqDCoMKgIG1lZGlhdGVrLHBsYXRmb3JtID0gPCZhZmU+Ow0KPj4NCj4+IFBsZWFzZToN
+Cj4+DQo+PiBodHRwczovL2RvY3Mua2VybmVsLm9yZy9kZXZpY2V0cmVlL2JpbmRpbmdzL2R0cy1j
+b2Rpbmctc3R5bGUuaHRtbA0KPiANCj4gSXMgaXQgYWJvdXQgdGhlIHdyb25nIHBpbmN0cmwtbmFt
+ZXMgdGFiIGFsaWdubWVudCA/DQo+IEFsc28sIDJORCBJMlMgQkUgPT4gMk5EX0kyU19CRSA/DQo+
+IE90aGVyd2lzZSwgSSBkb24ndCBnZXQgaXQgc29ycnkuDQoNCkFsaWdubWVudCBvZiBjb250aW51
+ZWQgbGluZXMsIG9yZGVyIG9mIHByb3BlcnRpZXMuDQoNCkJlc3QgcmVnYXJkcywNCktyenlzenRv
+Zg0KDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5h
+cm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcK
+VG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3Rz
+LmxpbmFyby5vcmcK
