@@ -2,56 +2,56 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 523D7868BB3
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Feb 2024 10:08:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 87CDB868BC2
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Feb 2024 10:10:22 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5F9B33F472
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Feb 2024 09:08:24 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
-	by lists.linaro.org (Postfix) with ESMTPS id 6C44A3ED6D
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Feb 2024 09:08:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9A0F143FDE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Feb 2024 09:10:21 +0000 (UTC)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+	by lists.linaro.org (Postfix) with ESMTPS id 925833ED6D
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Feb 2024 09:10:13 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=izCLdLLp;
-	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.218.54 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org;
+	dkim=pass header.d=linaro.org header.s=google header.b=RseC0zai;
+	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.218.53 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org;
 	dmarc=pass (policy=none) header.from=linaro.org
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-a3f3d0d2787so402741166b.3
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Feb 2024 01:08:17 -0800 (PST)
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-a3d484a58f6so563705866b.3
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Feb 2024 01:10:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1709024896; x=1709629696; darn=lists.linaro.org;
+        d=linaro.org; s=google; t=1709025012; x=1709629812; darn=lists.linaro.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=M/XMlDT5Zncb31c4k3IQ8WBJzhTpe12p8N1wL4Pn258=;
-        b=izCLdLLpgwmr/oY/4YLZzE45W7gNimtqNqlJ+rqJn+27jVdzB/rq6hBrcD4BNw/bqp
-         CMVyabIj2IsnV80ccUW6l/GXkQ9LjoOjoqRIGsGtO18m0/AqkC1ACZhgfAyTjGgezd4X
-         XjihLg4atT9RWjv/1nyoe9ochkA2heJDTejIxGfAm91yPTN4CfgZF+/uY54SfqNXEm/5
-         kPwaUTHIStMhYwgbZ2PmUxeHBTnaDKm5C1X61TKX+SDlIPuukrkoCPlTzrMmo+pFW4f9
-         Dsxq07xaig7Xbsi+WgJG43kMJ3zYxqO8uR9hPj4saLGO6EbSuMou7PxKIgnoyGJKfeDS
-         T9Dw==
+        bh=4jfB+Qos/TbbfpQCwGnGmZ5LcQISfQmi0hGA4S6JfaA=;
+        b=RseC0zaixUXR4iopLwyyLj7B6pRBCYgexkgJKLknz4WP2QSkkrYd3zk3t73AV5KmaX
+         3kscKkhlrvJJgJw7FbpUVjkxYX4lJtb717Ycv2RVo4aE9L3awogFRfRNFB1VL/UbK4go
+         4FZuq2eLKNOhbflaVgTolC/lwifzppIpZ63qD1AzxIE/QNvHd4/dfIf5VAGyAfji1LnS
+         RKYm4pf+y0EdgnFDRiPcqenEWFxLaEZXcuHUUXYl066i3P7TN/cfonFSEaY2FQ3z88s6
+         94B/88R1QzoavF2TMzSJu7DbMchpDbBmRtGM7LSL7oxReJPadY+3m03sMQOCoUFU9fMm
+         VZsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709024896; x=1709629696;
+        d=1e100.net; s=20230601; t=1709025012; x=1709629812;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=M/XMlDT5Zncb31c4k3IQ8WBJzhTpe12p8N1wL4Pn258=;
-        b=I0AdaKCe3Lz6B1SIq7mvWrnp1b8InM5tZVaKJjUCJNnKcRY7n502jwakMNL+6/yezF
-         Cr3V9VmnOkDbKoDAGFeztYwoq+0EkACtWDhV0yReGD4RKLCsuV2WiteJGkTZ+tDrW5fp
-         zCsfUKQDOMFP7CcoQRFOr7dBYqdl4InnIBYMaMQBtUwyUP7dkEG4OQ4XmawqQTWPoCnN
-         SJ40UfduOk4CySEyqUEEwPKl0Q746U1t50w+a+tw9x+5iY+EIbeWqKEymSwnAB5aGIiV
-         rX2CrxAMEOLRmO43pVGUbfjyQy1AYk2IbauOqzbsXmo9DiV8AI8xTvqbO3hem3z0lPk0
-         e/ZA==
-X-Forwarded-Encrypted: i=1; AJvYcCWYF8uTtPvxmt1Zhtnah7/g0nh9249Hf9DfNsh/sDrw7xpFTd1i6c6DIPTqqHRGnnkX4fs+Ym/NbEz4q1jT09YyvA6qos0ma78M6Bicu4U=
-X-Gm-Message-State: AOJu0YxJSzbCn5R5G30LbEWRariR0z55de9HulkgMoIsZKKTgX61RzjW
-	wA7VHHICciMJwHMJgC+oC0dG/6W6u2p0DnQYrcHiZWdnJ2fomwGT7bqnYwlLiyCFXQ==
-X-Google-Smtp-Source: AGHT+IGqFBX1eyZzazauhmxoaCWVFLpVUbL5P8fO0kdYan0Z8+9zfK75kAvDOP1Jsczdq7H0Uzl+Fg==
-X-Received: by 2002:a17:906:a11a:b0:a3e:6862:dc78 with SMTP id t26-20020a170906a11a00b00a3e6862dc78mr5714509ejy.4.1709024896461;
-        Tue, 27 Feb 2024 01:08:16 -0800 (PST)
+        bh=4jfB+Qos/TbbfpQCwGnGmZ5LcQISfQmi0hGA4S6JfaA=;
+        b=EGRhXgsNQ2kLuxNIEKwA9+CBoOuBBm4mj6MiJmRdGJrrrEhvyzQ7iVbV+H2GRL6VRs
+         oRn3uT5MLvfUy9yFKhuivGeRgIaT7z+cJNbReMqWfSBnQ3DTbMtQaxgKdvzvEjyyzz4L
+         +Yr19wkADClvgH4Zb9ZTTSWYgsifGkaFGn2Y77T3nmgAUmT8OlG45njTaHmhH3ODqfrq
+         2qRK/GQ3DzWfgwJUyQBwcMs8564TbkGcIEYMoT1O6poPmC9zk9soCag2ZUUk+e9sR6/j
+         a46abvyWiPTtBICKcf4qd2gTApiDxccgc7VoEjz9pdzWBgxsjSES8PuKibJsewAlfRHc
+         xtMg==
+X-Forwarded-Encrypted: i=1; AJvYcCXhr2jSEQpiKGxRNeEb4iMkYGpuwkmLPntEJrEy+IHeDF/ttzXqsPlNaEtwHV0tWK4nWws3my5/eGfP6tYzo21N6pipBWrJDy067w2U/kY=
+X-Gm-Message-State: AOJu0Yx2nOPjgqasT/WBckTfI4HQBrljkcBsqLBQYjmBf0lJrDaJwEhm
+	vQtSXcOCWZiuTB2uHFLmxTWrnMuHfaWqSu2nE1SdutWHAozoFfSpChiKxmangoXqDQ==
+X-Google-Smtp-Source: AGHT+IFjg6TUqGceaHtS0RDBUuFRFRIN3MDvCONyB7Q+VVzjJA9M7exXV6k2ArlnkjNyYmuFmHYeXQ==
+X-Received: by 2002:a17:906:3659:b0:a3f:29b:7c27 with SMTP id r25-20020a170906365900b00a3f029b7c27mr6080459ejb.4.1709025012635;
+        Tue, 27 Feb 2024 01:10:12 -0800 (PST)
 Received: from [192.168.1.20] ([178.197.222.116])
-        by smtp.gmail.com with ESMTPSA id h19-20020a170906719300b00a3e92467f22sm547354ejk.163.2024.02.27.01.08.13
+        by smtp.gmail.com with ESMTPSA id e14-20020a170906374e00b00a431488d8efsm548118ejc.160.2024.02.27.01.10.10
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 27 Feb 2024 01:08:16 -0800 (PST)
-Message-ID: <eebc1521-4030-4f0b-a84c-c3ee18ec7da6@linaro.org>
-Date: Tue, 27 Feb 2024 10:08:12 +0100
+        Tue, 27 Feb 2024 01:10:12 -0800 (PST)
+Message-ID: <84f3033c-a844-477d-8007-67b8e22702ab@linaro.org>
+Date: Tue, 27 Feb 2024 10:10:09 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
@@ -68,7 +68,7 @@ To: Alexandre Mergnat <amergnat@baylibre.com>,
  =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>
 References: <20240226-audio-i350-v1-0-4fa1cea1667f@baylibre.com>
- <20240226-audio-i350-v1-3-4fa1cea1667f@baylibre.com>
+ <20240226-audio-i350-v1-8-4fa1cea1667f@baylibre.com>
 From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
  xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
@@ -114,19 +114,19 @@ Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
  KQ06ztUMRrj8eVtpImjsWCd0bDWRaaR4vqhCHvAG9iWXZu4qh3ipie2Y0oSJygcZT7H3UZxq
  fyYKiqEmRuqsvv6dcbblD8ZLkz1EVZL6djImH5zc5x8qpVxlA0A0i23v5QvN00m6G9NFF0Le
  D2GYIS41Kv4Isx2dEFh+/Q==
-In-Reply-To: <20240226-audio-i350-v1-3-4fa1cea1667f@baylibre.com>
+In-Reply-To: <20240226-audio-i350-v1-8-4fa1cea1667f@baylibre.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 6C44A3ED6D
+X-Rspamd-Queue-Id: 925833ED6D
 X-Spamd-Bar: --
 X-Spamd-Result: default: False [-2.59 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.54:from];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.53:from];
 	XM_UA_NO_VERSION(0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
@@ -140,23 +140,23 @@ X-Spamd-Result: default: False [-2.59 / 15.00];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[24];
-	DNSWL_BLOCKED(0.00)[209.85.218.54:from,178.197.222.116:received];
+	DNSWL_BLOCKED(0.00)[178.197.222.116:received,209.85.218.53:from];
 	NEURAL_HAM(-0.00)[-1.000];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TAGGED_RCPT(0.00)[dt];
 	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[]
-Message-ID-Hash: 2ZXQBJFHMXJREHRSRIX4VTBQ5KKMPLLF
-X-Message-ID-Hash: 2ZXQBJFHMXJREHRSRIX4VTBQ5KKMPLLF
+Message-ID-Hash: B6FQTZU44A7AS4SZZENI5CBCQFIU4YFF
+X-Message-ID-Hash: B6FQTZU44A7AS4SZZENI5CBCQFIU4YFF
 X-MailFrom: krzysztof.kozlowski@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 03/18] dt-bindings: mfd: mediatek: Add codec property for MT6357 PMIC
+Subject: [Linaro-mm-sig] Re: [PATCH 08/18] ASoC: mediatek: mt8365: Add DMIC DAI support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2ZXQBJFHMXJREHRSRIX4VTBQ5KKMPLLF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/B6FQTZU44A7AS4SZZENI5CBCQFIU4YFF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -167,44 +167,26 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
 On 26/02/2024 15:01, Alexandre Mergnat wrote:
-> Add the codec property along with the mt6357.c codec driver support.
-
-Describe the hardware, not the Linux drivers. There is no codec driver
-support in the bindings.
-
-https://elixir.bootlin.com/linux/v6.8-rc6/source/Documentation/devicetree/bindings/writing-bindings.rst#L21
-
+> Add Digital Micro Device Audio Interface support for MT8365 SoC.
 > 
 > Signed-off-by: Alexandre Mergnat <amergnat@baylibre.com>
-> ---
->  Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml | 11 +++++++++++
->  1 file changed, 11 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml b/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml
-> index 37423c2e0fdf..d25a78070744 100644
-> --- a/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml
-> +++ b/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml
-> @@ -37,6 +37,17 @@ properties:
->    "#interrupt-cells":
->      const: 2
->  
-> +  codec:
-> +    type: object
-> +    unevaluatedProperties: false
-> +    description:
-> +      MT6357 sound codec.
-> +    properties:
-> +      compatible:
-> +        const: mediatek,mt6357-sound
-> +    required:
-> +      - compatible
-
-No resources? Then no need for this node.
-
-We have it even documented (if my repeating every time is not enough)...
-https://elixir.bootlin.com/linux/v6.8-rc6/source/Documentation/devicetree/bindings/writing-bindings.rst#L30
 
 
+> +
+> +static int init_dmic_priv_data(struct mtk_base_afe *afe)
+> +{
+> +	struct mt8365_afe_private *afe_priv = afe->platform_priv;
+> +	struct mt8365_dmic_data *dmic_priv;
+> +	struct device_node *np = afe->dev->of_node;
+> +	unsigned int temps[4];
+> +	int ret;
+> +
+> +	dmic_priv = devm_kzalloc(afe->dev, sizeof(struct mt8365_dmic_data),
+> +				  GFP_KERNEL);
+
+You have very inconsistent style of coding. Some patches are done
+correctly, some repeast known issues. All over. This is sizeof(*). This
+comment (and all others) apply everywhere, just in case.
 
 Best regards,
 Krzysztof
