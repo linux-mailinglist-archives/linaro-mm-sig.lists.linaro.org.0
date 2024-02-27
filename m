@@ -2,56 +2,56 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DF1C7868B7C
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Feb 2024 10:02:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D0347868BA7
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Feb 2024 10:06:54 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id E32523ED6D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Feb 2024 09:02:12 +0000 (UTC)
-Received: from mail-ej1-f52.google.com (mail-ej1-f52.google.com [209.85.218.52])
-	by lists.linaro.org (Postfix) with ESMTPS id 8FEBA3ED6D
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Feb 2024 09:02:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id DBFFE447A6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 27 Feb 2024 09:06:53 +0000 (UTC)
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com [209.85.208.49])
+	by lists.linaro.org (Postfix) with ESMTPS id E00D83F472
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Feb 2024 09:06:45 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=c+5Iehdi;
-	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.218.52 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org;
+	dkim=pass header.d=linaro.org header.s=google header.b=FD7bnTre;
+	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.208.49 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org;
 	dmarc=pass (policy=none) header.from=linaro.org
-Received: by mail-ej1-f52.google.com with SMTP id a640c23a62f3a-a3e891b5e4eso481229266b.0
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Feb 2024 01:02:04 -0800 (PST)
+Received: by mail-ed1-f49.google.com with SMTP id 4fb4d7f45d1cf-565c6cf4819so3898476a12.1
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 27 Feb 2024 01:06:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1709024523; x=1709629323; darn=lists.linaro.org;
+        d=linaro.org; s=google; t=1709024805; x=1709629605; darn=lists.linaro.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=2UFRVzRGdKbrh6OpmSoCELk6m/tgkgNo+Ce19meRH6Q=;
-        b=c+5IehdiwHNaaYQu9FH4o1H6JBASH49tzOeyDq16LWO/pPAuI4/b2A4LubM41nsJdf
-         ALwaTNqNMoGxW9gM+DBE+z9HocIsHK5s9f6ivL+HgG/4u9jHjcl7NG8n+fUJL0OpTS4C
-         vkLfVm6lU37vUUylgQxMTjKe/UkTQ1Bj5au3CQuzJLzciFe8dCaHRO8QTaRPpOT7Htpp
-         VSqqtXmwSRLwe8//3ZIxoQb6UnasUa+fxpYMX+SXwDHkwnpkH8/YhnP2iZu9l5KwIsev
-         ayp86nHEvTBdMA7UwwRasXDw1DUW8xojl/ZEGD7lYStRaHopr7/omhhBXBEE387uBN8Y
-         PqBQ==
+        bh=aWMOyAMGj4BPUfVQH/f9CThvYEhtc8ZUIoj4aNclbDw=;
+        b=FD7bnTregw+I/ThvIbISCO3WA/vdbodkmc5CipX53yRxgsBZCC3x/cpDgoW9eFbLrg
+         daCLXuBp95Ss9dR+eijDuLjT/g8YEem0F32q8YUJ6MV5oZHSdH2++YwmebeCxZCdgin7
+         PenjsVEFRUoVcQTHmb5vXJhmsaCESQxso3yX8N/h4sGy+ZzHu4+rHkmAeoxnElL/2Z7F
+         3/KZc3hi9mgFaVCVsJFfw4lmmWqGhl6WNyz5opqy+F8ZQdlkQgOhyEliqHG6OHbX7fuu
+         Up27ebvTMO+5xivGjK0a31Qf7eU2UBUfIwmOIAdH8AD5ZFWTUssJbpDPKBg5EHXxJJXq
+         qeRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709024523; x=1709629323;
+        d=1e100.net; s=20230601; t=1709024805; x=1709629605;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=2UFRVzRGdKbrh6OpmSoCELk6m/tgkgNo+Ce19meRH6Q=;
-        b=hRIPgxEP+R2ooYnm9IXm+V2Be6MRqeuvHFlQj0Gv0anlwAr92+nxAHexsPxwKDJvoH
-         Ya2GNqhHEnrBoOWkdANn9d6y6Uzh7OS4DfcLo0uioqHugUbZhbhksZzVlNVnHGPKuWrK
-         Nt6XwPIJ2syaaoG6yQG9y8qi7h/YqsFlTHnykCLhj/C57DXOpdZKzTj0OJqwrBv38ONt
-         hhP8oUO8tU92WWL0oCzx6Z7/HZ21T8Qd25z0xseD+pn5QVVAU8YV3HTnMHi3yNKGtF4j
-         yVY7C+5lLOufgctyhInP1i/JlNbhswIvPxM+/y7ch2rmIvjePyeZrxTcAxh/xD9k1+mL
-         Uwjg==
-X-Forwarded-Encrypted: i=1; AJvYcCXSMdyGS8xCornBzY6J/VVJoWymhuNgF9No/YiGATGFPEwm54hhpKG6cZ3/190Afil0fKRUibSYgVjWpu29UrtIHcpFxGSr719GfK8kNX8=
-X-Gm-Message-State: AOJu0Yy27ijOW4kXAbCE/L30Fr6INZvM88YyJe4cWW5QjpPQwKlMazZI
-	6eoWCx3V3x5a1njRZVKeizCUx2gQOqKWlUl36Dko5zH+JvWtXxVu4LN+fqUGE1k2iQ==
-X-Google-Smtp-Source: AGHT+IGc2QWR0Rom1zSmTHDgmMau7w3Y2LbkBFSHyz26l01oceBcm30z5SU15vWVjJT25rM6B2UZ0w==
-X-Received: by 2002:a17:906:2e89:b0:a3f:5144:ada2 with SMTP id o9-20020a1709062e8900b00a3f5144ada2mr6800588eji.2.1709024523555;
-        Tue, 27 Feb 2024 01:02:03 -0800 (PST)
+        bh=aWMOyAMGj4BPUfVQH/f9CThvYEhtc8ZUIoj4aNclbDw=;
+        b=bu89of6iYLyBvQoXDgt7J9Z6O5SfTdyV8+5ZmGf5Fku+HLLoeXIeQjfoZ8fKssXBg7
+         WY9SFvc4Kt5rttX0/FvKQODnrG0y0mXDrodB6vdCWQL/OTKH0mVHCT3VuhcOXRx2O/8x
+         1rybfLPJX9sQejas/Opa0Ul5dQpJAI3Q8XH0inVgGGg/jc93yaoMafDpFhxWHAQMTc7M
+         fi82C2N5afb2iLdV9mWPEMKXPY5iSFDI3ir8OOnpA0QBLr+JklaBWdZ87RD9ruV0VDpD
+         O5XKOpyY8MHSZl21n2Ku6F4vEIAG9OvVcfx4ToopHe0w3FE9A8BCQ26RhkvWFVhrGAyX
+         +ixQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXb8zDvOdq8yjMZNB1ahh9u1Ym+LKYWnLxv8rZFaVKbIBdRwCxOJ+rN1HPwM69Wvd6ha+qq6Nt6upVWjGNqYOYvlrkvdtzBGk90HUBAPc0=
+X-Gm-Message-State: AOJu0YzUylNbJCDdFE4TztVCeyTSuCcpjR5C/WOX2EOEFtiF5z6mktID
+	kvFSD7Knm7/bk7M5JziaZ0XXDG/YWPUdiDCPH8mxPBbozNCis0bx6bpJm3e0vdJ8DA==
+X-Google-Smtp-Source: AGHT+IEovXgAKdcS8TSAMgvRMulbwgj3LkU/1bchkBdxalI2nz+zFL8jWTP4iUK9IOgaIRhW10dMuA==
+X-Received: by 2002:a17:906:4a4a:b0:a43:a1b5:66f with SMTP id a10-20020a1709064a4a00b00a43a1b5066fmr1249287ejv.10.1709024804807;
+        Tue, 27 Feb 2024 01:06:44 -0800 (PST)
 Received: from [192.168.1.20] ([178.197.222.116])
-        by smtp.gmail.com with ESMTPSA id s12-20020a17090699cc00b00a3e8c3fc3ffsm560002ejn.10.2024.02.27.01.01.57
+        by smtp.gmail.com with ESMTPSA id h19-20020a170906719300b00a3e92467f22sm547354ejk.163.2024.02.27.01.06.42
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 27 Feb 2024 01:02:03 -0800 (PST)
-Message-ID: <ce5f71a9-1b5f-4724-89db-dae2f64e8008@linaro.org>
-Date: Tue, 27 Feb 2024 10:01:55 +0100
+        Tue, 27 Feb 2024 01:06:44 -0800 (PST)
+Message-ID: <16739065-4187-4e51-b7f0-4a55de101744@linaro.org>
+Date: Tue, 27 Feb 2024 10:06:40 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
@@ -68,7 +68,7 @@ To: Alexandre Mergnat <amergnat@baylibre.com>,
  =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
  Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>
 References: <20240226-audio-i350-v1-0-4fa1cea1667f@baylibre.com>
- <20240226-audio-i350-v1-1-4fa1cea1667f@baylibre.com>
+ <20240226-audio-i350-v1-2-4fa1cea1667f@baylibre.com>
 From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
  xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
@@ -114,49 +114,50 @@ Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
  KQ06ztUMRrj8eVtpImjsWCd0bDWRaaR4vqhCHvAG9iWXZu4qh3ipie2Y0oSJygcZT7H3UZxq
  fyYKiqEmRuqsvv6dcbblD8ZLkz1EVZL6djImH5zc5x8qpVxlA0A0i23v5QvN00m6G9NFF0Le
  D2GYIS41Kv4Isx2dEFh+/Q==
-In-Reply-To: <20240226-audio-i350-v1-1-4fa1cea1667f@baylibre.com>
+In-Reply-To: <20240226-audio-i350-v1-2-4fa1cea1667f@baylibre.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 8FEBA3ED6D
+X-Rspamd-Queue-Id: E00D83F472
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.59 / 15.00];
+X-Spamd-Result: default: False [-2.49 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.52:from];
 	XM_UA_NO_VERSION(0.01)[];
 	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	ARC_NA(0.00)[];
 	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,kernel.org,linaro.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
+	RCPT_COUNT_TWELVE(0.00)[24];
 	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[linaro.org:+];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DNSWL_BLOCKED(0.00)[178.197.222.116:received];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[24];
-	DNSWL_BLOCKED(0.00)[209.85.218.52:from,178.197.222.116:received];
-	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_SOME(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_RCPT(0.00)[dt];
 	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[]
-Message-ID-Hash: PJYRHDIMHMX4SVOVK3T6XD24GE5N7ONK
-X-Message-ID-Hash: PJYRHDIMHMX4SVOVK3T6XD24GE5N7ONK
+	NEURAL_HAM(-0.00)[-1.000];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.49:from];
+	TAGGED_RCPT(0.00)[dt];
+	RCVD_IN_DNSWL_NONE(0.00)[209.85.208.49:from]
+Message-ID-Hash: 3RKUMTWEY3UAVUSP4ZP5ZECD6L56WOFQ
+X-Message-ID-Hash: 3RKUMTWEY3UAVUSP4ZP5ZECD6L56WOFQ
 X-MailFrom: krzysztof.kozlowski@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 01/18] ASoC: dt-bindings: mediatek,mt8365-afe: Add audio afe document
+Subject: [Linaro-mm-sig] Re: [PATCH 02/18] ASoC: dt-bindings: mediatek,mt8365-mt6357: Add audio sound card document
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PJYRHDIMHMX4SVOVK3T6XD24GE5N7ONK/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3RKUMTWEY3UAVUSP4ZP5ZECD6L56WOFQ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -167,192 +168,138 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
 On 26/02/2024 15:01, Alexandre Mergnat wrote:
-> Add MT8365 audio front-end bindings
+> Add soundcard bindings for the MT8365 SoC with the MT6357 audio codec.
 > 
 > Signed-off-by: Alexandre Mergnat <amergnat@baylibre.com>
 > ---
->  .../bindings/sound/mediatek,mt8365-afe.yaml        | 164 +++++++++++++++++++++
->  1 file changed, 164 insertions(+)
+>  .../bindings/sound/mediatek,mt8365-mt6357.yaml     | 127 +++++++++++++++++++++
+>  1 file changed, 127 insertions(+)
 > 
-> diff --git a/Documentation/devicetree/bindings/sound/mediatek,mt8365-afe.yaml b/Documentation/devicetree/bindings/sound/mediatek,mt8365-afe.yaml
+> diff --git a/Documentation/devicetree/bindings/sound/mediatek,mt8365-mt6357.yaml b/Documentation/devicetree/bindings/sound/mediatek,mt8365-mt6357.yaml
 > new file mode 100644
-> index 000000000000..1d7eb2532ad2
+> index 000000000000..f469611ec6b6
 > --- /dev/null
-> +++ b/Documentation/devicetree/bindings/sound/mediatek,mt8365-afe.yaml
-> @@ -0,0 +1,164 @@
+> +++ b/Documentation/devicetree/bindings/sound/mediatek,mt8365-mt6357.yaml
+> @@ -0,0 +1,127 @@
 > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
 > +%YAML 1.2
 > +---
-> +$id: http://devicetree.org/schemas/sound/mediatek,mt8365-afe.yaml#
+> +$id: http://devicetree.org/schemas/sound/mediatek,mt8365-mt6357.yaml#
 > +$schema: http://devicetree.org/meta-schemas/core.yaml#
 > +
-> +title: MediaTek AFE PCM controller for MT8365
+> +title: Mediatek MT8365 sound card with MT6357 sound codec.
+
+Drop full stop. This is title.
+
 > +
 > +maintainers:
 > +  - Alexandre Mergnat <amergnat@baylibre.com>
 > +
+> +description:
+> +  This binding describes the MT8365 sound card.
+
+Say something useful. There is no need to say that binding is a binding
+describing something. Or just drop it if this is obvious.
+
+
+> +
 > +properties:
 > +  compatible:
-> +    const: mediatek,mt8365-afe-pcm
+> +    const: mediatek,mt8365-mt6357
 > +
-> +  reg:
-> +    maxItems: 2
+> +  mediatek,hp-pull-down:
+> +    description:
+> +      Earphone driver positive output stage short to the
+> +      audio reference ground.
+> +      Default value is false.
 
-You must describe the items.
+That's obvious, isn't it? Drop.
+
+> +    type: boolean
+> +
+> +  mediatek,micbias0-microvolt:
+> +    description: |
+> +      Selects MIC Bias 0 output voltage.
+> +      [1.7v, 1.8v, 1.9v, 2.0v, 2.1v, 2.5v, 2.6v, 2.7v]
+> +    enum: [0, 1, 2, 3, 4, 5, 6, 7]
+
+0 is 0V, not 1.7! That's total mess. You use here microvolts. Look at
+property name.
 
 > +
-> +  interrupts:
-> +    maxItems: 1
+> +  mediatek,micbias1-microvolt:
+> +    description: |
+> +      Selects MIC Bias 1 output voltage.
+> +      [1.7v, 1.8v, 1.9v, 2.0v, 2.1v, 2.5v, 2.6v, 2.7v]
+> +    enum: [0, 1, 2, 3, 4, 5, 6, 7]
 > +
-> +  mediatek,topckgen:
+> +  mediatek,platform:
 > +    $ref: /schemas/types.yaml#/definitions/phandle
-> +    description: The phandle of the mediatek topckgen controller
-
-What for? Don't repeat the property name. Say something useful.
-
+> +    description: The phandle of MT8365 ASoC platform.
 > +
-> +  power-domains:
-> +    maxItems: 1
-> +
-> +  "#sound-dai-cells":
-> +    const: 0
-> +
-> +  clocks:
+> +  pinctrl-names:
+> +    minItems: 1
 > +    items:
-> +      - description: 26M clock
-> +      - description: mux for audio clock
-> +      - description: audio i2s0 mck
-> +      - description: audio i2s1 mck
-> +      - description: audio i2s2 mck
-> +      - description: audio i2s3 mck
-> +      - description: engen 1 clock
-> +      - description: engen 2 clock
-> +      - description: audio 1 clock
-> +      - description: audio 2 clock
-> +      - description: mux for i2s0
-> +      - description: mux for i2s1
-> +      - description: mux for i2s2
-> +      - description: mux for i2s3
-> +
-> +  clock-names:
-> +    items:
-> +      - const: top_clk26m_clk
-> +      - const: top_audio_sel
-> +      - const: audio_i2s0_m
-> +      - const: audio_i2s1_m
-> +      - const: audio_i2s2_m
-> +      - const: audio_i2s3_m
-> +      - const: engen1
-> +      - const: engen2
-> +      - const: aud1
-> +      - const: aud2
-> +      - const: i2s0_m_sel
-> +      - const: i2s1_m_sel
-> +      - const: i2s2_m_sel
-> +      - const: i2s3_m_sel
-> +
-> +  mediatek,i2s-shared-clock:
+> +      - const: aud_default
 
-Why do you need this property? Linux (and other systems) handle sharing
-clocks properly.
+Drop redundant parts. aud looks like block name.
 
+> +      - const: aud_dmic
+> +      - const: aud_miso_off
+> +      - const: aud_miso_on
+> +      - const: aud_mosi_off
+> +      - const: aud_mosi_on
+> +
+> +  vaud28-supply:
 > +    description:
-> +      i2s modules can share the same external clock pin.
-> +      If this property is not present the clock mode is separrate.
-
-Typo
-
-> +    type: boolean
+> +      2.8 volt supply for the audio codec
 > +
-> +  mediatek,dmic-iir-on:
+> +patternProperties:
+> +  "^dai-link-[0-9]+$":
+> +    type: object
 > +    description:
-> +      Boolean which specifies whether the DMIC IIR is enabled.
-> +      If this property is not present the IIR is disabled.
-
-"is enabled" or "enable it"?
-
-You described the desired Linux feature or behavior, not the actual
-hardware. The bindings are about the latter, so instead you need to
-rephrase the property and its description to match actual hardware
-capabilities/features/configuration etc.
-
-> +    type: boolean
+> +      Container for dai-link level properties and CODEC sub-nodes.
 > +
-> +  mediatek,dmic-irr-mode:
-> +    $ref: /schemas/types.yaml#/definitions/uint32
-> +    description:
-> +      Selects stop band of IIR DC-removal filter.
-> +      0 = Software programmable custom coeff loaded by the driver.
-
-Bindings are for hardware, not drivers. Why is this a property of board DTS?
-
-> +      1 = 5Hz if 48KHz mode.
-> +      2 = 10Hz if 48KHz mode.
-> +      3 = 25Hz if 48KHz mode.
-> +      4 = 50Hz if 48KHz mode.
-> +      5 = 65Hz if 48KHz mode.
-
-Use proper unit suffixes - hz.
-
-
-> +    enum:
-> +      - 0
-> +      - 1
-> +      - 2
-> +      - 3
-> +      - 4
-> +      - 5
+> +    properties:
+> +      codec:
+> +        type: object
+> +        description: Holds subnode which indicates codec dai.
 > +
-> +  mediatek,dmic-two-wire-mode:
-> +    description:
-> +      Boolean which turns on digital microphone for two wire mode.
-> +      If this property is not present the two wire mode is disabled.
-
-This looks like hardware property, but the naming looks like SW. Again
-you instruct what driver should do. Standard disclaimer:
-
-You described the desired Linux feature or behavior, not the actual
-hardware. The bindings are about the latter, so instead you need to
-rephrase the property and its description to match actual hardware
-capabilities/features/configuration etc.
-
-
-> +    type: boolean
+> +        properties:
+> +          sound-dai:
+> +            maxItems: 1
+> +            description: phandle of the codec DAI
 > +
+> +        additionalProperties: false
 > +
-
-Just one blank line.
-
-> +required:
-> +  - compatible
-> +  - reg
-> +  - interrupts
-> +  - power-domains
-> +  - mediatek,topckgen
-> +  - clocks
-> +  - clock-names
+> +      link-name:
+> +        description:
+> +          This property corresponds to the name of the BE dai-link to which
+> +          we are going to update parameters in this node.
+> +        items:
+> +          const: 2ND I2S BE
+> +
+> +      sound-dai:
+> +        maxItems: 1
+> +        description: phandle of the CPU DAI
+> +
+> +    additionalProperties: false
+> +
+> +    required:
+> +      - link-name
+> +      - sound-dai
 > +
 > +additionalProperties: false
+
+This goes after required: block. See example schema.
+
 > +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/clock/mediatek,mt8365-clk.h>
-> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
-> +    #include <dt-bindings/interrupt-controller/irq.h>
-> +    #include <dt-bindings/power/mediatek,mt8365-power.h>
+> +required:
+> +  - compatible
+> +  - mediatek,platform
+> +  - pinctrl-names
+> +  - vaud28-supply
 > +
-> +    soc {
-> +        #address-cells = <2>;
-> +        #size-cells = <2>;
-> +
-> +        afe@11220000 {
-
-What is AFE?
-
-https://devicetree-specification.readthedocs.io/en/latest/chapter2-devicetree-basics.html#generic-names-recommendation
-
-
-> +            compatible = "mediatek,mt8365-afe-pcm";
 
 
 Best regards,
