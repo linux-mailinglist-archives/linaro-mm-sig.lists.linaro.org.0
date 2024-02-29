@@ -2,56 +2,56 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC8D186C36C
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Feb 2024 09:27:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9483186C372
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Feb 2024 09:27:48 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BE62343F70
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Feb 2024 08:27:30 +0000 (UTC)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
-	by lists.linaro.org (Postfix) with ESMTPS id BF6063EB98
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Feb 2024 08:27:23 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A46CD43C9B
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Feb 2024 08:27:47 +0000 (UTC)
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com [209.85.218.46])
+	by lists.linaro.org (Postfix) with ESMTPS id C4FCB4043F
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Feb 2024 08:27:31 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=o+k+Qgwf;
-	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.218.53 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org;
+	dkim=pass header.d=linaro.org header.s=google header.b=kXiSwox+;
+	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.218.46 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org;
 	dmarc=pass (policy=none) header.from=linaro.org
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-a3e72ec566aso98057366b.2
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Feb 2024 00:27:23 -0800 (PST)
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-a3ee69976c9so110551066b.0
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Feb 2024 00:27:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1709195243; x=1709800043; darn=lists.linaro.org;
+        d=linaro.org; s=google; t=1709195251; x=1709800051; darn=lists.linaro.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :from:to:cc:subject:date:message-id:reply-to;
-        bh=+jC9NU+Sr0rM0Ox02DOM4ORkqse489i4dWP/gSCDCTs=;
-        b=o+k+Qgwf0Pvz7C0LRxsm7c9MoneNIrf2KPpRM4HZ+4Qp5liVXGhE2Lnkhi1tFQjGz/
-         hywC+IVQvB0hG1HerxYRNoNdvvOx9KXwAPaikq007nSi7fm0M/jJ7PoQfJzBbZdtrN4o
-         BCqPZv4T7kpx6aqs4Gdmxg/tS8Cm7pGu6ZiBecufG6wbMNyEgXE4I0Qq7Fib9hKv3AV/
-         bIBcYk62RkbP7l/blafYzl/0bWUJxloPszZ5YQlbrmV2rD81ENB2k5QVgjMYzHLhgw5s
-         lkNHGxIXH4ecNk4l8iHKBwDNx+iAIKu4Ddzfq2MZ30NqXswbpgRjT5rxHzYh6jE0YMD4
-         QpSg==
+        bh=rgnff8MGvBMD8EBe8P50qmhLYND/U/bzSrvV7E5aiFo=;
+        b=kXiSwox+dLZM4s/1tCqw1oSeMyGHH+W5n8ISi2fE0XWK/u4zyTa5HJjWmxdIn1fX3y
+         v05HelzGI6UhELt/HQvVFmdkj/sbnnK+oFZxe3wQe8YSDqgDmgEnm0KEuKYkakHWb4aX
+         Wt4vHD1UmPtfZ0yJP3dfKKs7owWafZOnnurpXKk0P5j2wWTh04WDPSrXgNMTSaixSy2L
+         GcNp3uWcEfal1N8btxZmZIPWyqlrU9BBJ6vci2gEI/tWWNY2uuWi96CfINB+izGqg7gZ
+         +aVFs++9M+j/tQuk/nusaRFj8s5k6tJPrd0MRQpq/6gEPCwWNmBkZt70nsDIo6VNrsLG
+         92gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1709195243; x=1709800043;
+        d=1e100.net; s=20230601; t=1709195251; x=1709800051;
         h=content-transfer-encoding:in-reply-to:autocrypt:from:references:cc
          :to:content-language:subject:user-agent:mime-version:date:message-id
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=+jC9NU+Sr0rM0Ox02DOM4ORkqse489i4dWP/gSCDCTs=;
-        b=ESEEGkpSA+BRIuLqRjkV/BTnzDBnDdRawaUavv/q7BhMRmRxI+5nmOQ/XQDhiDPinu
-         8jvLoeMaZoNQDD80tP+djcsaRWKhmqHTNRRUj289y1MajWy1YF1T8YSbXn3oSZ6XEVYQ
-         QZHNWE5o6+MMGKRZNufuYjpZmCDhxuaMgfWOyEjWMQJXTq3oXpIsUiodKFMa4EHX9VCQ
-         OzpQgRA+scjEpEqjYCCEGcH7NTAgiMiNzcLo/FwO4s2hs8T781b11eDnSDuK6t8VsHDq
-         T/m3/G1WVhi6T4i5TUsyJoZqOWks4YwsbHe4KZ0Awb5jyhTXOqonYsIfItT5hVIk5H+8
-         j3ng==
-X-Forwarded-Encrypted: i=1; AJvYcCX+jhuXLzpF6MtVgP9WqlcSptH8uKJIF6l1NSKr3uKTEvSynYrUSKr/bX2hxVmt9mf5Fl7AOQGeks4P6xF/r2gOv1XremDgDIfA8VOVTK8=
-X-Gm-Message-State: AOJu0YwpIalfMNQ5emxw7q/b2EyHkce2jycKAdyqyOXrE+54c8mF9QhS
-	O+HqTsJ229H/JhtPplhiRMbyg2jfB7hZkHqCIzQ6e0EupT16wCjWmXfdP4v7kKlqjQ==
-X-Google-Smtp-Source: AGHT+IHtFnTGokxus4yJA0VW8KJfoHKca5tzjEOBUp5rScvISxrFcHYTgLMG8YRVsaFj8MwttJR4fQ==
-X-Received: by 2002:a17:906:dd4:b0:a44:f88:323b with SMTP id p20-20020a1709060dd400b00a440f88323bmr967443eji.54.1709195242806;
-        Thu, 29 Feb 2024 00:27:22 -0800 (PST)
+        bh=rgnff8MGvBMD8EBe8P50qmhLYND/U/bzSrvV7E5aiFo=;
+        b=WmiXMygW+vFCC6B9Utm1hxxCfhGvN0R0uc+kT8O754o+6+B4lnYoDPdqrIb8SyaMo3
+         55qqUq+9SLFMk+3vwuRkepXIjntMPiGZq+7Izpwu12Wo0uJkk/Mi7XMiyZdHV+D/uGFV
+         SbvtwuNEG1qt8IFC+ECILg+U2b+H8vU2BZ1ut0nqtuyGksQIJ+CRzHn0kYUMTf19/FfV
+         Jy7CY9ROgMydqeMRHvxeI8UQtq/gE4Hy2uDz8J2YUTQrqOr727+JFvryp5Hbxsd2Jkkc
+         TAdWvy7KJdiqj6IofoPq0RZx6dIXZBjUjCidJKvTqpcPvcwC1Ye7HY2XtdI5EPIIdfN5
+         rUBw==
+X-Forwarded-Encrypted: i=1; AJvYcCU1pft7Nh3NxpDb6Go9+u7XkhJ3ZOU+/D0RWiyRZ0JIk/hnk9PahSY+jW88vkmICAwRdPGN8iHZ/UBDEz69oE5B88jFanOlUEkDg6vqkVQ=
+X-Gm-Message-State: AOJu0YySkNiuR2AV12EOHdusvg66dK/pIO6h1CUSrj3F5uy9qEq/qmNR
+	JFp83uyiaDUhugky7IB95kO1qL5mKmfTgf0hGFU1Fjn8fPLMRUGEBjhX+A9YcK0uSg==
+X-Google-Smtp-Source: AGHT+IGcBZwPTv20828ePbiFHjn6j5WHPedNHJ8vYa+BwrVvKeH88EAeB/GeP2y/LI5tX4vo9G5Qwg==
+X-Received: by 2002:a17:906:44d:b0:a3e:b523:90b with SMTP id e13-20020a170906044d00b00a3eb523090bmr960614eja.14.1709195250894;
+        Thu, 29 Feb 2024 00:27:30 -0800 (PST)
 Received: from [192.168.1.20] ([178.197.222.116])
-        by smtp.gmail.com with ESMTPSA id vg9-20020a170907d30900b00a4439b7756bsm434508ejc.6.2024.02.29.00.27.20
+        by smtp.gmail.com with ESMTPSA id vg9-20020a170907d30900b00a4439b7756bsm434508ejc.6.2024.02.29.00.27.28
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 29 Feb 2024 00:27:22 -0800 (PST)
-Message-ID: <23a99e13-fe45-4cb7-8e1c-f6c85d70becc@linaro.org>
-Date: Thu, 29 Feb 2024 09:27:20 +0100
+        Thu, 29 Feb 2024 00:27:30 -0800 (PST)
+Message-ID: <d5c23bd6-3732-477c-af54-7ee1657e390c@linaro.org>
+Date: Thu, 29 Feb 2024 09:27:28 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
@@ -63,7 +63,7 @@ To: "Jason-JH.Lin" <jason-jh.lin@mediatek.com>,
  AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
  Chun-Kuang Hu <chunkuang.hu@kernel.org>
 References: <20240229023522.15870-1-jason-jh.lin@mediatek.com>
- <20240229023522.15870-3-jason-jh.lin@mediatek.com>
+ <20240229023522.15870-2-jason-jh.lin@mediatek.com>
 From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
  xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
@@ -109,10 +109,10 @@ Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
  KQ06ztUMRrj8eVtpImjsWCd0bDWRaaR4vqhCHvAG9iWXZu4qh3ipie2Y0oSJygcZT7H3UZxq
  fyYKiqEmRuqsvv6dcbblD8ZLkz1EVZL6djImH5zc5x8qpVxlA0A0i23v5QvN00m6G9NFF0Le
  D2GYIS41Kv4Isx2dEFh+/Q==
-In-Reply-To: <20240229023522.15870-3-jason-jh.lin@mediatek.com>
+In-Reply-To: <20240229023522.15870-2-jason-jh.lin@mediatek.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: BF6063EB98
+X-Rspamd-Queue-Id: C4FCB4043F
 X-Spamd-Bar: ------
 X-Spamd-Result: default: False [-6.59 / 15.00];
 	REPLY(-4.00)[];
@@ -120,9 +120,9 @@ X-Spamd-Result: default: False [-6.59 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.53:from];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.46:from];
 	XM_UA_NO_VERSION(0.01)[];
 	ARC_NA(0.00)[];
 	FREEMAIL_TO(0.00)[mediatek.com,kernel.org,linaro.org,gmail.com,collabora.com];
@@ -141,17 +141,17 @@ X-Spamd-Result: default: False [-6.59 / 15.00];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TAGGED_RCPT(0.00)[dt];
 	TO_DN_SOME(0.00)[]
-Message-ID-Hash: VVAPBGHIYPNHIXEUL5VFWC4H6LXJVWOP
-X-Message-ID-Hash: VVAPBGHIYPNHIXEUL5VFWC4H6LXJVWOP
+Message-ID-Hash: 7FVZ7LUK5OTRHMHAFOZGUPZOPN6NQG3Q
+X-Message-ID-Hash: 7FVZ7LUK5OTRHMHAFOZGUPZOPN6NQG3Q
 X-MailFrom: krzysztof.kozlowski@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jason-ch Chen <jason-ch.chen@mediatek.com>, Johnson Wang <johnson.wang@mediatek.com>, Singo Chang <singo.chang@mediatek.com>, Nancy Lin <nancy.lin@mediatek.com>, Shawn Sung <shawn.sung@mediatek.com>, Project_Global_Chrome_Upstream_Group@mediatek.com, Fei Shao <fshao@chromium.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 2/3] dt-bindings: display: mediatek: gamma: Add support for MT8188
+Subject: [Linaro-mm-sig] Re: [PATCH 1/3] dt-bindings: display: mediatek: gamma: Change MT8195 to single enum group
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VVAPBGHIYPNHIXEUL5VFWC4H6LXJVWOP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7FVZ7LUK5OTRHMHAFOZGUPZOPN6NQG3Q/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -162,32 +162,16 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
 On 29/02/2024 03:35, Jason-JH.Lin wrote:
-> The gamma LUT setting of MT8188 and MT8195 are the same, so we create
-> a one of items for MT8188 to reuse the driver data settings of MT8195.
+> Since MT8195 gamma has multiple bank for 12 bits LUT and it is
+> different from any other SoC LUT setting.
+> 
+> So we move MT8195 compatible from the one of items to the
+> single enum group.
 > 
 > Signed-off-by: Jason-JH.Lin <jason-jh.lin@mediatek.com>
 > ---
->  .../devicetree/bindings/display/mediatek/mediatek,gamma.yaml  | 4 ++++
->  1 file changed, 4 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/display/mediatek/mediatek,gamma.yaml b/Documentation/devicetree/bindings/display/mediatek/mediatek,gamma.yaml
-> index 3e6cb8f48bcc..90c454eea06f 100644
-> --- a/Documentation/devicetree/bindings/display/mediatek/mediatek,gamma.yaml
-> +++ b/Documentation/devicetree/bindings/display/mediatek/mediatek,gamma.yaml
-> @@ -29,6 +29,10 @@ properties:
->            - enum:
->                - mediatek,mt6795-disp-gamma
->            - const: mediatek,mt8173-disp-gamma
-> +      - items:
-> +          - enum:
-> +              - mediatek,mt8188-disp-gamma
-> +          - const: mediatek,mt8195-disp-gamma
->        - items:
->            - enum:
->                - mediatek,mt8186-disp-gamma
 
-Please keep this ordered by fallback compatible, so your list with 8195
-fallback should go below the list here.
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 
 Best regards,
 Krzysztof
