@@ -2,107 +2,129 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 955F386C41C
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Feb 2024 09:48:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E368A86CBF7
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Feb 2024 15:49:22 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A9A2A40C97
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Feb 2024 08:48:26 +0000 (UTC)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
-	by lists.linaro.org (Postfix) with ESMTPS id E35FD40C97
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Feb 2024 08:48:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 03BD34402E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Feb 2024 14:49:22 +0000 (UTC)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+	by lists.linaro.org (Postfix) with ESMTPS id 65DFD3F472
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Feb 2024 14:48:53 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=QqUeHf2g;
-	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.194 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com;
-	dmarc=pass (policy=quarantine) header.from=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1709196486;
-	bh=9+dpCXx7x8UpSu3QuELJTExwI0UUO/emZ4rDeXtx924=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=QqUeHf2gm7ya25wnu6E/Surks4FtpIdhdpaTZtIqhLZqXWuCUT1rBSm4Fz3y7d51H
-	 qiPLYiz55uYSQgit4TpXAEG795vs9TecMRbNmJA6lBvIS6WuFj40bGj3PvTX/ENsH1
-	 3LkJ8YBut8oDlQjXc6MymbwST6AFCZbuQoBPhA1Q92Zz7BGQzIp4Cv0IbFW6JoGNNe
-	 o9QnxE9hcQ1JoySzCi4ROL5ssEd6l5UC6w+Ni3Kia6CrJWtqSiTMTmmSxkcD0I5+zX
-	 lL6i6Y+xIn0Tu+a2V0txcd6imogZVCvUX1jg1UssxaH5faNL9I4HFAj324mBBBjKMc
-	 KjzC8ZLfoDOcA==
-Received: from [100.113.186.2] (cola.collaboradmins.com [195.201.22.229])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: kholk11)
-	by madrid.collaboradmins.com (Postfix) with ESMTPSA id 39C3037810EF;
-	Thu, 29 Feb 2024 08:48:04 +0000 (UTC)
-Message-ID: <e1f772b3-cbe5-4d6b-b2cd-d6e10bd2121a@collabora.com>
-Date: Thu, 29 Feb 2024 09:48:04 +0100
+	dkim=pass header.d=mediatek.com header.s=dk header.b="J+3/eSbU";
+	spf=pass (lists.linaro.org: domain of jason-jh.lin@mediatek.com designates 210.61.82.184 as permitted sender) smtp.mailfrom=jason-jh.lin@mediatek.com;
+	dmarc=pass (policy=quarantine) header.from=mediatek.com
+X-UUID: a5027550d71111ee935d6952f98a51a9-20240229
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
+	h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From; bh=YDUB1R45Ja1nwbtgjCXo8zSwQLjgVdrkkmfZ6bu7GoU=;
+	b=J+3/eSbUeoXKccyIhkaSnKldhx9CcZfyYNtzBG0t6tYC3c+7rsTUHEICXI70zFHELoGN1b0l1EuhaOWjSIar7F70giHF94az1kP5jERP689rcRIvtBmVaqfQ8QcoB+s3yx7c/mkuReLhoe+T2+Yj/0J4dzbutgNZhYeThSbfMWk=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.37,REQID:112a96f9-84d3-4b6b-8219-523cd1fef6ee,IP:0,U
+	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+	release,TS:0
+X-CID-META: VersionHash:6f543d0,CLOUDID:c517f580-4f93-4875-95e7-8c66ea833d57,B
+	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
+	RL:1,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
+	SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR,TF_CID_SPAM_ULS
+X-UUID: a5027550d71111ee935d6952f98a51a9-20240229
+Received: from mtkmbs13n2.mediatek.inc [(172.21.101.108)] by mailgw02.mediatek.com
+	(envelope-from <jason-jh.lin@mediatek.com>)
+	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+	with ESMTP id 1723561320; Thu, 29 Feb 2024 22:48:47 +0800
+Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
+ mtkmbs11n2.mediatek.inc (172.21.101.187) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.26; Thu, 29 Feb 2024 22:48:46 +0800
+Received: from mtksdccf07.mediatek.inc (172.21.84.99) by
+ mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1118.26 via Frontend Transport; Thu, 29 Feb 2024 22:48:46 +0800
+From: Jason-JH.Lin <jason-jh.lin@mediatek.com>
+To: Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski
+	<krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>,
+	Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno
+	<angelogioacchino.delregno@collabora.com>, Chun-Kuang Hu
+	<chunkuang.hu@kernel.org>
+Date: Thu, 29 Feb 2024 22:48:41 +0800
+Message-ID: <20240229144844.1688-1-jason-jh.lin@mediatek.com>
+X-Mailer: git-send-email 2.18.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: "Jason-JH.Lin" <jason-jh.lin@mediatek.com>,
- Rob Herring <robh+dt@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Conor Dooley <conor+dt@kernel.org>, Matthias Brugger
- <matthias.bgg@gmail.com>, Chun-Kuang Hu <chunkuang.hu@kernel.org>
-References: <20240229023522.15870-1-jason-jh.lin@mediatek.com>
- <20240229023522.15870-4-jason-jh.lin@mediatek.com>
-From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
-In-Reply-To: <20240229023522.15870-4-jason-jh.lin@mediatek.com>
+X-MTK: N
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: E35FD40C97
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.39 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[99.99%];
+X-Rspamd-Queue-Id: 65DFD3F472
+X-Spamd-Bar: /
+X-Spamd-Result: default: False [0.80 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	HFILTER_HOSTNAME_UNKNOWN(2.50)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.194:c];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
-	ONCE_RECEIVED(0.10)[];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[mediatek.com,quarantine];
+	R_SPF_ALLOW(-0.20)[+ip4:210.61.82.184/32];
+	R_DKIM_ALLOW(-0.20)[mediatek.com:s=dk];
+	RWL_MAILSPIKE_VERYGOOD(-0.20)[210.61.82.184:from];
 	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[mediatek.com,kernel.org,linaro.org,gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_ALL(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	DNSWL_BLOCKED(0.00)[195.201.22.229:received,46.235.227.194:from];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:+];
-	NEURAL_HAM(-0.00)[-1.000];
 	TAGGED_RCPT(0.00)[dt];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[]
-Message-ID-Hash: EBR65P4ADXXSWNWG674JKPRROHEE37GY
-X-Message-ID-Hash: EBR65P4ADXXSWNWG674JKPRROHEE37GY
-X-MailFrom: angelogioacchino.delregno@collabora.com
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:3462, ipnet:210.61.0.0/16, country:TW];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	ARC_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[kernel.org,linaro.org,gmail.com,collabora.com];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	URIBL_BLOCKED(0.00)[mediatek.com:dkim];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	DKIM_TRACE(0.00)[mediatek.com:+]
+Message-ID-Hash: ULN7OROLB2X2KGQHNNVPRD67NQUVD33G
+X-Message-ID-Hash: ULN7OROLB2X2KGQHNNVPRD67NQUVD33G
+X-MailFrom: jason-jh.lin@mediatek.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jason-ch Chen <jason-ch.chen@mediatek.com>, Johnson Wang <johnson.wang@mediatek.com>, Singo Chang <singo.chang@mediatek.com>, Nancy Lin <nancy.lin@mediatek.com>, Shawn Sung <shawn.sung@mediatek.com>, Project_Global_Chrome_Upstream_Group@mediatek.com, Fei Shao <fshao@chromium.org>
+CC: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jason-ch Chen <jason-ch.chen@mediatek.com>, Johnson Wang <johnson.wang@mediatek.com>, "Jason-JH . Lin" <jason-jh.lin@mediatek.com>, Singo Chang <singo.chang@mediatek.com>, Nancy Lin <nancy.lin@mediatek.com>, Shawn Sung <shawn.sung@mediatek.com>, Project_Global_Chrome_Upstream_Group@mediatek.com, Fei Shao <fshao@chromium.org>, Jason-jh Lin <jason-jh.lin@mediatek.corp-partner.google.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 3/3] drm/mediatek: Add gamma support for MT8195
+Subject: [Linaro-mm-sig] [PATCH v2 0/3] Add GAMMA 12-bit LUT support for MT8188
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EBR65P4ADXXSWNWG674JKPRROHEE37GY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ULN7OROLB2X2KGQHNNVPRD67NQUVD33G/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Il 29/02/24 03:35, Jason-JH.Lin ha scritto:
-> Since MT8195 compatible is in the single enum group, we have to add its
-> compatible into mediatek-drm component binding table to ensure that
-> it can be bound as a ddp_comp.
-> 
+From: Jason-jh Lin <jason-jh.lin@mediatek.corp-partner.google.com>
 
-Reviewed-by: AngeloGioacchino Del Regno <angelogiaocchino.delregno@collabora.com>
+Since MT8195 supports GAMMA 12-bit LUT after the landing of [1] series,
+we can now add support for MT8188.
+
+[1] MediaTek DDP GAMMA - 12-bit LUT support
+- https://patchwork.kernel.org/project/linux-mediatek/list/?series=792516
+
+Change in v2:
+1. Keep MT8195 compatible in the group of MT8183.
+2. Move MT8195 compatible group to the end of items list.
+
+Jason-JH.Lin (3):
+  dt-bindings: display: mediatek: gamma: Change MT8195 to single enum
+    group
+  dt-bindings: display: mediatek: gamma: Add support for MT8188
+  drm/mediatek: Add gamma support for MT8195
+
+ .../devicetree/bindings/display/mediatek/mediatek,gamma.yaml | 5 +++++
+ drivers/gpu/drm/mediatek/mtk_drm_drv.c                       | 2 ++
+ 2 files changed, 7 insertions(+)
+
+-- 
+2.18.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
