@@ -2,140 +2,191 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F6458797EC
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 Mar 2024 16:47:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 75FD887AD00
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Mar 2024 18:23:38 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 551634479D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 12 Mar 2024 15:47:54 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	by lists.linaro.org (Postfix) with ESMTPS id CAA9043E4F
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 12 Mar 2024 15:47:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1C98F3F983
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 13 Mar 2024 17:23:37 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id ABAB343E8B
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 13 Mar 2024 17:23:27 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=XuV2fcF1;
-	spf=pass (lists.linaro.org: domain of fmartine@redhat.com designates 170.10.133.124 as permitted sender) smtp.mailfrom=fmartine@redhat.com;
-	dmarc=pass (policy=none) header.from=redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1710258466;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=C03ZzqydLhwftyx/8OV079lEb5JdweH7XCPi8d8sS0U=;
-	b=XuV2fcF119Kad+YeTvuVmJGIgT6GxZQW05egqI4dRsvYGKxBpoT/oq4LjtjOAIdnhRbrcI
-	+LQQmrxIMEO9avUkRyJ/QD2OwUFvbMST5go5S56Q0LwdYMgxFqNoeOMcLZ2Tfpsgwnas/q
-	T5QCVpRLi0npZ43aMPVooFe53XOxM3w=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-80-fBQgxhS6MTmPaoGzycm2qw-1; Tue, 12 Mar 2024 11:47:44 -0400
-X-MC-Unique: fBQgxhS6MTmPaoGzycm2qw-1
-Received: by mail-wr1-f72.google.com with SMTP id ffacd0b85a97d-33e8b535e27so1974442f8f.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 12 Mar 2024 08:47:44 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1710258464; x=1710863264;
-        h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
-         :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=C03ZzqydLhwftyx/8OV079lEb5JdweH7XCPi8d8sS0U=;
-        b=VLNYfZlvkUfSF3xYYIiAgnSeibTdhD2I8GKOJDIKaNuxOfA2PJtFTg8FqT5azKNcT5
-         akOGChjKAiEgqswTJvSGNaa3M7N36q4zAXPWdmp+HYnKaeQow0lDdCuHnTUv7P/NizH3
-         tG0NMW6aaqRt4hZPEJ4qk5cHI5UN/slHPa3kqz6vAvpliDK3Zw35lMKCs4u0lstxSO9Z
-         JRIR2e5Dh8g9JEKdPuW9tYufJ59NSAjTgNH5CN9Qg12sP/wN0NgNul8s3xUvZuiyT+9K
-         v6PlQAOdx0LKKnFQw0T1B0WMjvWRqvspYQIRsuBe/Pq9dYtesErmejZWEE0FBmhXbVKk
-         fs5A==
-X-Forwarded-Encrypted: i=1; AJvYcCVmSbtd3ZJmcOsqH7vGkEnGGX7s+wmU1UicJiIKfH8P4VhsnAPpLuPX6qJZZo07E9u4/xGV4MA2sAwvK2OzbDnLx+5zYzeCnz/YWWquN+Y=
-X-Gm-Message-State: AOJu0YyBoN3CetXXbkhoI28L3FFScjZkFGL2Vh0Ld89WeAdTMLSgVbZm
-	mKo/KIVnZcWumExMSDswHh1g/eGJnDJ5QSPQlinN+fO/ZDTlqTZ8cvp7JUqYNXy5RosMGw0fGc+
-	NHUu8wxFVXvveiNJKDlHtJNKRnGKrGFGxcpF+8qtMdnX56VYNTisRt5xYPFdZGVhJ
-X-Received: by 2002:a5d:5288:0:b0:33e:7ae7:accc with SMTP id c8-20020a5d5288000000b0033e7ae7acccmr5781980wrv.45.1710258463658;
-        Tue, 12 Mar 2024 08:47:43 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEDsApizg7abXDxnCPbaYlKdHgY8nGSh+z+TqlHOoR5D3BylQMjUqTJGZ6234DJDk41455U3g==
-X-Received: by 2002:a5d:5288:0:b0:33e:7ae7:accc with SMTP id c8-20020a5d5288000000b0033e7ae7acccmr5781967wrv.45.1710258463239;
-        Tue, 12 Mar 2024 08:47:43 -0700 (PDT)
-Received: from localhost (205.pool92-176-231.dynamic.orange.es. [92.176.231.205])
-        by smtp.gmail.com with ESMTPSA id p18-20020adf9d92000000b0033e17341ebesm9404825wre.117.2024.03.12.08.47.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 12 Mar 2024 08:47:42 -0700 (PDT)
-From: Javier Martinez Canillas <javierm@redhat.com>
-To: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>,
- maarten.lankhorst@linux.intel.com
-In-Reply-To: <871qh3k4bg.fsf@minerva.mail-host-address-is-not-set>
-References: <20230320015829.52988-1-jiapeng.chong@linux.alibaba.com>
- <871qh3k4bg.fsf@minerva.mail-host-address-is-not-set>
-Date: Tue, 12 Mar 2024 16:47:41 +0100
-Message-ID: <87wmq7310i.fsf@minerva.mail-host-address-is-not-set>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ias5kLdF;
+	spf=pass (lists.linaro.org: domain of broonie@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=broonie@kernel.org;
+	dmarc=pass (policy=none) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by dfw.source.kernel.org (Postfix) with ESMTP id 5600A61477;
+	Wed, 13 Mar 2024 17:23:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F2F2C433C7;
+	Wed, 13 Mar 2024 17:23:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1710350607;
+	bh=PAjE7BPOCrbybCWWbaLc6x+dJTUxbHq0aBWL3JN7HUI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=ias5kLdFpwbVTOnuFBiHfowtvPUTf/oQeYy8ydLpumuvXSWAV5hvswhDSaUXbFeuz
+	 eUu9fC0u60jN7riKiX4kTa7tqZAA6p+j9W7Rqk7esgtV/DK5AlXr0qshOjm/iTBLG8
+	 lPIlYKHkaCsCCcgVq4tlqGSpiNQy5+KVia6zOs3yfcSyYeUZMALoTqx6z2LOncLoVX
+	 +gH4xSWs4c7ATGhaBWq8OT7aALAKbpIKDRn+jx6UFLNIqTUVO9eweTyL4QbPiApksn
+	 aE8Q8tDD8/9THGnlBzvNB9Cb4UCBR9vyZ4gW8RLpIZ9sguYmL0JT3Uzhf2og6TmLoK
+	 kiO0XuPWMvZbg==
+Date: Wed, 13 Mar 2024 17:23:19 +0000
+From: Mark Brown <broonie@kernel.org>
+To: Alexandre Mergnat <amergnat@baylibre.com>
+Message-ID: <ff3d2db1-697b-42c6-a0f2-74276e9fc098@sirena.org.uk>
+References: <20240226-audio-i350-v1-0-4fa1cea1667f@baylibre.com>
+ <20240226-audio-i350-v1-12-4fa1cea1667f@baylibre.com>
+ <9891855d-2284-42e4-9d3a-35ba406540e8@sirena.org.uk>
+ <c441a132-b16b-4244-a712-8971c902d4d7@baylibre.com>
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
+In-Reply-To: <c441a132-b16b-4244-a712-8971c902d4d7@baylibre.com>
+X-Cookie: It's later than you think.
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: CAA9043E4F
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.90 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[redhat.com,none];
-	FORGED_SENDER(0.30)[javierm@redhat.com,fmartine@redhat.com];
-	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
-	R_SPF_ALLOW(-0.20)[+ip4:170.10.133.0/24];
-	RWL_MAILSPIKE_VERYGOOD(-0.20)[170.10.133.124:from];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:30031, ipnet:170.10.132.0/23, country:US];
-	MIME_TRACE(0.00)[0:+];
+X-Rspamd-Queue-Id: ABAB343E8B
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.60 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	URIBL_BLOCKED(0.00)[alibaba.com:email,us-smtp-delivery-124.mimecast.com:rdns,us-smtp-delivery-124.mimecast.com:helo];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_NEQ_ENVFROM(0.00)[javierm@redhat.com,fmartine@redhat.com];
-	FROM_HAS_DN(0.00)[];
 	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[dt];
+	FREEMAIL_CC(0.00)[gmail.com,kernel.org,linaro.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com,vger.kernel.org,lists.infradead.org,lists.freedesktop.org,lists.linaro.org,baylibre.com];
+	RCVD_COUNT_TWO(0.00)[2];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_COUNT_THREE(0.00)[3];
-	DKIM_TRACE(0.00)[redhat.com:+]
-Message-ID-Hash: BBC5GGALPN2N54P72QEXMRYJ4UUWRD2S
-X-Message-ID-Hash: BBC5GGALPN2N54P72QEXMRYJ4UUWRD2S
-X-MailFrom: fmartine@redhat.com
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[kernel.org:+]
+Message-ID-Hash: D6FEKKZORRXI7GZNF5VMGVHBK5EPRE7O
+X-Message-ID-Hash: D6FEKKZORRXI7GZNF5VMGVHBK5EPRE7O
+X-MailFrom: broonie@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>, tzimmermann@suse.de, Abaci Robot <abaci@linux.alibaba.com>, linux-kernel@vger.kernel.org, sumit.semwal@linaro.org, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org, christian.koenig@amd.com, linux-media@vger.kernel.org
+CC: Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Lee Jones <lee@kernel.org>, Flora Fu <flora.fu@mediatek.com>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nicolas Belin <nbelin@baylibre.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] drm/shmem-helper: Remove duplicate include
+Subject: [Linaro-mm-sig] Re: [PATCH 12/18] ASoC: codecs: mt6357: add MT6357 codec
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BBC5GGALPN2N54P72QEXMRYJ4UUWRD2S/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/D6FEKKZORRXI7GZNF5VMGVHBK5EPRE7O/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: multipart/mixed; boundary="===============2476225751761036561=="
+
+
+--===============2476225751761036561==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="bu1f4F19CTgWKqA0"
+Content-Disposition: inline
+
+
+--bu1f4F19CTgWKqA0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Mar 12, 2024 at 07:03:25PM +0100, Alexandre Mergnat wrote:
+> On 26/02/2024 17:09, Mark Brown wrote:
+
+> > > +	case MT6357_ZCD_CON2:
+> > > +		regmap_read(priv->regmap, MT6357_ZCD_CON2, &reg);
+> > > +		priv->ana_gain[ANALOG_VOLUME_HPOUTL] =3D
+> > > +			(reg & AUD_HPL_GAIN_MASK) >> AUD_HPL_GAIN_SFT;
+> > > +		priv->ana_gain[ANALOG_VOLUME_HPOUTR] =3D
+> > > +			(reg & AUD_HPR_GAIN_MASK) >> AUD_HPR_GAIN_SFT;
+> > > +		break;
+
+> > It would probably be less code and would definitely be clearer and
+> > simpler to just read the values when we need them rather than constatly
+> > keeping a cache separate to the register cache.
+
+> Actually you must save the values because the gain selected by the user w=
+ill
+> be override to do a ramp =3D> volume_ramp(.....):
+> - When you switch on the HP, you start from gain=3D-40db to final_gain
+> (selected by user).
+> - When you switch off the HP, you start from final_gain (selected by user)
+> to gain=3D-40db.
+
+You can just read the value back when you need to do a ramp?
+
+> Also, the microphone's gain change when it's enabled/disabled.
+
+I don't understand what this means?
+
+> > > +	/* ul channel swap */
+> > > +	SOC_SINGLE("UL LR Swap", MT6357_AFE_UL_DL_CON0, AFE_UL_LR_SWAP_SFT,=
+ 1, 0),
+
+> > On/off controls should end in Switch.
+
+> Sorry, I don't understand your comment. Can you reword it please ?
+
+See control-names.rst.  Run mixer-test on a card with this driver and
+fix all the issues it reports.
+
+> > > +static int hslo_mux_map_value[] =3D {
+> > > +	0x0, 0x1, 0x2, 0x3,
+> > > +};
+
+> > Why not just use a normal mux here, there's no missing values or
+> > reordering?  Similarly for other muxes.
+
+> I've dug into some other codecs and it's done like that, but I've probably
+> misunderstood something.
+
+> The only bad thing I see is enum is missing currently:
+>=20
+> enum {
+> 	PGA_MUX_OPEN =3D 0,
+> 	PGA_MUX_DACR,
+> 	PGA_MUX_PB,
+> 	PGA_MUX_TM,
+> 	PGA_MUX_MASK =3D 0x3,
+> };
+
+The whole thing with explicitly specfying the mapping is just completely
+redundant, you may as well remove it.
+
+--bu1f4F19CTgWKqA0
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmXx4QYACgkQJNaLcl1U
+h9Cq8gf/c3/T6nZpwn3qjvPt1GYUFUscyy2lTACU0mVHAjCBiaczv/OAoKQGmNpm
+Gg9Lnezruu41314zpVUvu/pl80roWJoCd/b7/VjOp9lawXWnWalXNeqcaTSYne31
+FUzdFe4a+quH9LDo5Nv9AzMnLBokld6ELApXMG/Uxmd5HJn+unU5euMCTH0p4jKs
+H9ptL1meZwotydv6+TTT2jEc8PSdLUr7EdHa6z9/6ih5st+RrHoLI8iCDa3lkOfR
+muwbG4CNh9PqrI00X86GUDvHTv5cZsIPeOoVLgBEA3ouIO5RgX1uWMNW6J779WIa
+3olA/hHBePVDGwV6qVQKVWyLY8klXw==
+=LtHz
+-----END PGP SIGNATURE-----
+
+--bu1f4F19CTgWKqA0--
+
+--===============2476225751761036561==
 Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-
-Javier Martinez Canillas <javierm@redhat.com> writes:
-
-> Jiapeng Chong <jiapeng.chong@linux.alibaba.com> writes:
->
->> ./drivers/gpu/drm/drm_gem_shmem_helper.c: linux/module.h is included more than once.
->>
->> Reported-by: Abaci Robot <abaci@linux.alibaba.com>
->> Link: https://bugzilla.openanolis.cn/show_bug.cgi?id=4567
->> Signed-off-by: Jiapeng Chong <jiapeng.chong@linux.alibaba.com>
->> ---
->
-> Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
->
-
-Pushed to drm-misc (drm-misc-next). Thanks!
-
--- 
-Best regards,
-
-Javier Martinez Canillas
-Core Platforms
-Red Hat
+Content-Disposition: inline
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============2476225751761036561==--
