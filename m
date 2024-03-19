@@ -2,119 +2,116 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7066587FC95
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 Mar 2024 12:11:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 700ED880816
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 20 Mar 2024 00:16:58 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 740043F326
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 Mar 2024 11:11:27 +0000 (UTC)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
-	by lists.linaro.org (Postfix) with ESMTPS id 843803F326
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Mar 2024 11:11:25 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 57F9045225
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 19 Mar 2024 23:16:57 +0000 (UTC)
+Received: from mail.ispras.ru (mail.ispras.ru [83.149.199.84])
+	by lists.linaro.org (Postfix) with ESMTPS id 60A1D45225
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 19 Mar 2024 23:16:55 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=rWyGfBz6;
-	dmarc=pass (policy=quarantine) header.from=collabora.com;
-	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.194 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1710846684;
-	bh=XLZQhDlAD4mGZyqkQQ7Cw1CYIVAv0BwYXJwNdutyW+w=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=rWyGfBz6jTgE+fURzrNGsS7ysMw8I5U/In6BKGLLjVfYalulyLenSkuyYURO6jXeZ
-	 Ld7G5G2xqGjDDkj0tftXN0xBgjbBSeXAKLoO05hHh9HfPFzQU1t2KNSgvEHUzzhqLr
-	 Fm/PNlzxa5SxE+zmy6MH/nwlZ83U+G6KkX8E6P+G6GrpdRcS9JYGVIRYqwStOAFKBA
-	 7+aut8iY5HF4hkfuqXDka3I7f3n9XyjIFIllrrgyR0WQUJn3F85Pss0Fi7g13iGucJ
-	 TV7dmVB03XNM/AsfUL7Gbs8qKCO4vYLSMxOFl1AvDy9ZLtsQmAKio+rTKHye/NFfuP
-	 EQbHcSbOo5V1Q==
-Received: from [100.113.186.2] (cola.collaboradmins.com [195.201.22.229])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: kholk11)
-	by madrid.collaboradmins.com (Postfix) with ESMTPSA id 6F7E7378149B;
-	Tue, 19 Mar 2024 11:11:23 +0000 (UTC)
-Message-ID: <4c2ffd1c-d059-4448-9b2d-142ea87d6bd8@collabora.com>
-Date: Tue, 19 Mar 2024 12:11:22 +0100
+	dkim=pass header.d=ispras.ru header.s=default header.b=CtbjiIZZ;
+	dmarc=pass (policy=none) header.from=ispras.ru;
+	spf=pass (lists.linaro.org: domain of p.sakharov@ispras.ru designates 83.149.199.84 as permitted sender) smtp.mailfrom=p.sakharov@ispras.ru
+Received: from localhost.localdomain (unknown [85.89.126.105])
+	by mail.ispras.ru (Postfix) with ESMTPSA id 87CB640ADFF1;
+	Tue, 19 Mar 2024 23:16:53 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.ispras.ru 87CB640ADFF1
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ispras.ru;
+	s=default; t=1710890213;
+	bh=bK361IhiE+XMAZTsxOEj0ZXg25Ch4uk2S2o4xZFwevs=;
+	h=From:To:Cc:Subject:Date:From;
+	b=CtbjiIZZOBd/GIX9iUGfUhyJyEejdhVoS+R3KZqQ1kwulOhDw75ifvkprBVahyjo9
+	 ySOicKeGkCeYiVlww9iC1LWARppBVUfG6iKNM33C4Y2Pgm40ivwWZP3RpQ6duQe6zp
+	 Tnqk22FtM4gyFlLElMgNzkvPkl0ckh4j4niFs0ps=
+From: Pavel Sakharov <p.sakharov@ispras.ru>
+To: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
+Date: Wed, 20 Mar 2024 04:15:23 +0500
+Message-ID: <20240319231527.1821372-1-p.sakharov@ispras.ru>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Shawn Sung <shawn.sung@mediatek.com>,
- Chun-Kuang Hu <chunkuang.hu@kernel.org>
-References: <20240319070257.6443-1-shawn.sung@mediatek.com>
- <20240319070257.6443-3-shawn.sung@mediatek.com>
-From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
-In-Reply-To: <20240319070257.6443-3-shawn.sung@mediatek.com>
-X-Rspamd-Queue-Id: 843803F326
+X-Rspamd-Queue-Id: 60A1D45225
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.39 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
-	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.194:c];
+X-Spamd-Result: default: False [-2.50 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[ispras.ru,none];
+	R_MISSING_CHARSET(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:83.149.199.84];
+	R_DKIM_ALLOW(-0.20)[ispras.ru:s=default];
 	MIME_GOOD(-0.10)[text/plain];
-	ONCE_RECEIVED(0.10)[];
-	XM_UA_NO_VERSION(0.01)[];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
-	RCVD_COUNT_ONE(0.00)[1];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_ALL(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[pengutronix.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,lists.infradead.org,vger.kernel.org,lists.linaro.org,mediatek.corp-partner.google.com];
-	TAGGED_RCPT(0.00)[];
-	FROM_HAS_DN(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ASN(0.00)[asn:3267, ipnet:83.149.192.0/18, country:RU];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
+	MIME_TRACE(0.00)[0:+];
+	DNSWL_BLOCKED(0.00)[83.149.199.84:from,85.89.126.105:received];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[10];
+	DKIM_TRACE(0.00)[ispras.ru:+];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:+]
+	RCVD_TLS_ALL(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 3S6SCTE46EE4SEG2P5MONBXWNB6CPKOY
-X-Message-ID-Hash: 3S6SCTE46EE4SEG2P5MONBXWNB6CPKOY
-X-MailFrom: angelogioacchino.delregno@collabora.com
+Message-ID-Hash: ONNJMHGEV2STWJEP44BYAUSBE5M6N7DI
+X-Message-ID-Hash: ONNJMHGEV2STWJEP44BYAUSBE5M6N7DI
+X-MailFrom: p.sakharov@ispras.ru
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Philipp Zabel <p.zabel@pengutronix.de>, Daniel Vetter <daniel@ffwll.ch>, Matthias Brugger <matthias.bgg@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Hsiao Chien Sung <shawn.sung@mediatek.corp-partner.google.com>
+CC: Pavel Sakharov <p.sakharov@ispras.ru>, Sumit Semwal <sumit.semwal@linaro.org>, Arvind Yadav <Arvind.Yadav@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, Fedor Pchelkin <pchelkin@ispras.ru>, lvc-project@linuxtesting.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2 02/14] drm/mediatek: Rename "mtk_drm_ddp_comp" to "mtk_ddp_comp"
+Subject: [Linaro-mm-sig] [PATCH] dma-buf: Fix NULL pointer dereference in sanitycheck()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3S6SCTE46EE4SEG2P5MONBXWNB6CPKOY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ONNJMHGEV2STWJEP44BYAUSBE5M6N7DI/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Il 19/03/24 08:02, Shawn Sung ha scritto:
-> From: Hsiao Chien Sung <shawn.sung@mediatek.corp-partner.google.com>
-> 
-> Rename all "mtk_drm_ddp_comp" to "mtk_ddp_comp":
-> - To align the naming rule
-> - To reduce the code size
-> 
-> Reviewed-by: AngeloGiaocchino Del Regno <angelogioacchino.delregno@collabora.com>
+If due to a memory allocation failure mock_chain() returns NULL, it is
+passed to dma_fence_enable_sw_signaling() resulting in NULL pointer
+dereference there.
 
-Shawn, I don't know if I typoed my own name (which is actually possible, since
-I write the tags by hand), or what actually happened to my Reviewed-by tags on
-the entire series.
+Call dma_fence_enable_sw_signaling() only if mock_chain() succeeds.
 
-Can you please fix the typo in the tag?
+Found by Linux Verification Center (linuxtesting.org) with SVACE.
 
-Reviewed-by: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+Fixes: d62c43a953ce ("dma-buf: Enable signaling on fence for selftests")
+Signed-off-by: Pavel Sakharov <p.sakharov@ispras.ru>
 
-Use this one, please.
+---
+ drivers/dma-buf/st-dma-fence-chain.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Thanks,
-Angelo
+diff --git a/drivers/dma-buf/st-dma-fence-chain.c b/drivers/dma-buf/st-dma-fence-chain.c
+index 9c2a0c082a76..ed4b323886e4 100644
+--- a/drivers/dma-buf/st-dma-fence-chain.c
++++ b/drivers/dma-buf/st-dma-fence-chain.c
+@@ -84,11 +84,11 @@ static int sanitycheck(void *arg)
+ 		return -ENOMEM;
 
+ 	chain = mock_chain(NULL, f, 1);
+-	if (!chain)
++	if (chain)
++		dma_fence_enable_sw_signaling(chain);
++	else
+ 		err = -ENOMEM;
 
-> Reviewed-by: CK Hu <ck.hu@mediatek.com>
-> Signed-off-by: Hsiao Chien Sung <shawn.sung@mediatek.corp-partner.google.com>
+-	dma_fence_enable_sw_signaling(chain);
+-
+ 	dma_fence_signal(f);
+ 	dma_fence_put(f);
+
+--
+2.44.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
