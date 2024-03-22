@@ -2,157 +2,143 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7E114886869
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 22 Mar 2024 09:46:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 97F85887492
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 22 Mar 2024 22:48:26 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 132833F94C
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 22 Mar 2024 08:46:38 +0000 (UTC)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
-	by lists.linaro.org (Postfix) with ESMTPS id 460653F94C
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 22 Mar 2024 08:46:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 57C133F94C
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 22 Mar 2024 21:48:25 +0000 (UTC)
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
+	by lists.linaro.org (Postfix) with ESMTPS id 091CB3F94C
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 22 Mar 2024 21:48:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b="jy/XB7tw";
-	dmarc=pass (policy=quarantine) header.from=collabora.com;
-	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.194 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1711097194;
-	bh=Gs2UAC9Hy8VFwByHDlNC06xdCiz4QDNtsopwA8NrO4Q=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=jy/XB7tw0FGS5tI0FcWpWhUzIrqIIeYInUM84WS16IpPsOCwNS4R96cgPgJzhUVRP
-	 Eepi17JezOVmbuiLp8Fo5BbSCnDCvXiKAqbunTeSngJxLdItvJYUkrYmITlEBD7ps3
-	 F4jlmQq41YUwav4f/MtGeRjSei/PyzDY7n7ADwI3IfGRczolHLEROndp7Qx5y2QuBp
-	 S6cPVl1uX0msVhBDSiIuDoagk225ecXPhX9509482xD1yeNasazvucrvYRIr56j6vl
-	 IWi9vY7VIbrrTD2Ws0ro9toDee2MVS91LpJ+Eu3ofSM7Q8jIyqwIiRTfC84vANaswp
-	 Vqx4X6Y/NL5cA==
-Received: from [100.113.186.2] (cola.collaboradmins.com [195.201.22.229])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: kholk11)
-	by madrid.collaboradmins.com (Postfix) with ESMTPSA id E90AF37809D1;
-	Fri, 22 Mar 2024 08:46:33 +0000 (UTC)
-Message-ID: <e1d5d349-c9e3-4af9-a9b6-d563027a5974@collabora.com>
-Date: Fri, 22 Mar 2024 09:46:33 +0100
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=Z9C6RkRJ;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (lists.linaro.org: domain of robdclark@gmail.com designates 209.85.214.176 as permitted sender) smtp.mailfrom=robdclark@gmail.com
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-1df01161b39so19636635ad.3
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 22 Mar 2024 14:48:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1711144102; x=1711748902; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=nQK5tb3Nw1ZoxZ8aMrSXrErJ9rtnHZb1a9z7kXmUAAI=;
+        b=Z9C6RkRJEg5kQ8qysQx54UOtw2E97TaE/Xn0WoUISJ7saRVx/pZDZJkr9r/B6BNx2M
+         cR/WG+TzjLgKbE6wvPlEL1ZYCJ1p6lX4HANwphRWmnghdrEwmkoG8fFH2D6zJvl6oCJr
+         Ryy3Fb3aHJNB1fuZr6WkrovWD28EJsfGNnsoAGi1RJpZtsPcI+qjlF73PD183rx7qx2a
+         Tds7u09EIRySIemvPpiK2bL39hB8zgkvZI3Am758sXRfNnWySsdlgsC9SYyYIl7cyNgR
+         y7SXAnhFT2yjARcO6vgiUqVD80XVrrKO9xMWog5EUY8Kluq96dITyHWp9Dm5/NpfjJs8
+         yMlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1711144102; x=1711748902;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=nQK5tb3Nw1ZoxZ8aMrSXrErJ9rtnHZb1a9z7kXmUAAI=;
+        b=DO37Wf8/s8dy7CYmtzZjl+p7ZsQ2n4wfgPI9eGx2LfuFTdK/aGJ4XQ7xPo5DqkzEcM
+         H8IYuMoPqANuMiwyNhTPRHpSPpN/D1W/RltUY0WjUBRqmpTA80119khHHokvLAc3wyRJ
+         S+KSpWChCeBgSNCOGHiexXUkrHTJSwOkl4AgsMGXmgwyNLbyKL9ypr8xLKZEov+/161E
+         JAYHLZZVIl5LoX85DrKGbhok79jXHmanZsGI3JtHgOZlk9DJT5vgYmqvTOeFsOhcvQg5
+         q/GPaevjFLo8B626sYZJUbPDYOvd5ziNJQbH4qDw0mqMH1OLm3YYKEMwa5Shv7GjBKIR
+         714w==
+X-Forwarded-Encrypted: i=1; AJvYcCUJYr8aSuPA/7P65asZl1N0n3f+nX3ODqTMyVnmK8VzKQ/7tS1oqxomiRjgz0rpw/of726/qAi1KQJXbaiI0UYtVC4S23/R0+xucKcJk2s=
+X-Gm-Message-State: AOJu0YyZld+qvuSW9/CHlg4SNkPsf09yJUN3OYKR8WQsfbAoCDW5NNkX
+	4zyhPDzpx6OTZZGYsb8QqFrLvHNj9OQ9ObC0dM818YxF7wUTXVfi
+X-Google-Smtp-Source: AGHT+IFu6vLzMaYsKuds4uUemNeUEL9Iv5gz6ZsPkXFYKeQTEq4g7nV6vk/JeeIFbxe7CJ53DpsPaA==
+X-Received: by 2002:a17:903:944:b0:1e0:84b5:d76 with SMTP id ma4-20020a170903094400b001e084b50d76mr1175359plb.52.1711144101986;
+        Fri, 22 Mar 2024 14:48:21 -0700 (PDT)
+Received: from localhost ([2a00:79e1:2e00:1301:e1c5:6354:b45d:8ffc])
+        by smtp.gmail.com with ESMTPSA id c5-20020a170902d48500b001dee4bd73e0sm226385plg.59.2024.03.22.14.48.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 22 Mar 2024 14:48:21 -0700 (PDT)
+From: Rob Clark <robdclark@gmail.com>
+To: dri-devel@lists.freedesktop.org
+Date: Fri, 22 Mar 2024 14:48:01 -0700
+Message-ID: <20240322214801.319975-1-robdclark@gmail.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Shawn Sung <shawn.sung@mediatek.com>,
- Chun-Kuang Hu <chunkuang.hu@kernel.org>
-References: <20240322012808.26234-1-shawn.sung@mediatek.com>
- <20240322012808.26234-4-shawn.sung@mediatek.com>
-From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
-Content-Language: en-US
-In-Reply-To: <20240322012808.26234-4-shawn.sung@mediatek.com>
-X-Rspamd-Queue-Id: 460653F94C
+X-Rspamd-Queue-Id: 091CB3F94C
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.39 / 15.00];
+X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.194];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MIME_GOOD(-0.10)[text/plain];
-	ONCE_RECEIVED(0.10)[];
-	XM_UA_NO_VERSION(0.01)[];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
-	RCVD_COUNT_ONE(0.00)[1];
-	TO_DN_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[chromium.org,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,emersion.fr,vger.kernel.org,lists.linaro.org];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_ALL(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[pengutronix.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,lists.infradead.org,vger.kernel.org,lists.linaro.org,mediatek.corp-partner.google.com];
-	TAGGED_RCPT(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	DNSWL_BLOCKED(0.00)[195.201.22.229:received];
+	ARC_NA(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:+]
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	DNSWL_BLOCKED(0.00)[209.85.214.176:from,2a00:79e1:2e00:1301:e1c5:6354:b45d:8ffc:received];
+	NEURAL_HAM(-0.00)[-1.000];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.214.176:from];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 6CCD3S2B5TO3KSDQUKDSOAAZSZJONWXD
-X-Message-ID-Hash: 6CCD3S2B5TO3KSDQUKDSOAAZSZJONWXD
-X-MailFrom: angelogioacchino.delregno@collabora.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Philipp Zabel <p.zabel@pengutronix.de>, Daniel Vetter <daniel@ffwll.ch>, Matthias Brugger <matthias.bgg@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linux-mediatek@lists.infradead.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Hsiao Chien Sung <shawn.sung@mediatek.corp-partner.google.com>
+Message-ID-Hash: BPBHPFAZH3Z3ZQ47BO7TVV46D4ELWPHV
+X-Message-ID-Hash: BPBHPFAZH3Z3ZQ47BO7TVV46D4ELWPHV
+X-MailFrom: robdclark@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Rob Clark <robdclark@chromium.org>, Dominik Behr <dbehr@chromium.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Simon Ser <contact@emersion.fr>, open list <linux-kernel@vger.kernel.org>, "open list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linux-media@vger.kernel.org>, "moderated list:DMA BUFFER SHARING FRAMEWORK:Keyword:bdma_?:buf|fence|resvb" <linaro-mm-sig@lists.linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 03/14] drm/mediatek: Rename "mtk_drm_plane" to "mtk_plane"
+Subject: [Linaro-mm-sig] [PATCH] drm/prime: Unbreak virtgpu dma-buf export
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6CCD3S2B5TO3KSDQUKDSOAAZSZJONWXD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BPBHPFAZH3Z3ZQ47BO7TVV46D4ELWPHV/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Il 22/03/24 02:27, Shawn Sung ha scritto:
-> From: Hsiao Chien Sung <shawn.sung@mediatek.corp-partner.google.com>
-> 
-> Rename all "mtk_drm_plane" to "mtk_plane":
-> - To align the naming rule
-> - To reduce the code size
-> 
-> Reviewed-by: AngeloGiaocchino Del Regno <angelogioacchino.delregno@collabora.com>
+From: Rob Clark <robdclark@chromium.org>
 
-Shawn - please - can you fix my typo'ed name also here and on all of the
-patches of this series?
+virtgpu "vram" GEM objects do not implement obj->get_sg_table().  But
+they also don't use drm_gem_map_dma_buf().  In fact they may not even
+have guest visible pages.  But it is perfectly fine to export and share
+with other virtual devices.
 
-Thanks.
+Reported-by: Dominik Behr <dbehr@chromium.org>
+Fixes: 207395da5a97 ("drm/prime: reject DMA-BUF attach when get_sg_table is missing")
+Signed-off-by: Rob Clark <robdclark@chromium.org>
+---
+ drivers/gpu/drm/drm_prime.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-> Reviewed-by: CK Hu <ck.hu@mediatek.com>
-> Signed-off-by: Hsiao Chien Sung <shawn.sung@mediatek.corp-partner.google.com>
-> ---
->   drivers/gpu/drm/mediatek/mtk_drm_plane.c | 6 +++---
->   drivers/gpu/drm/mediatek/mtk_drm_plane.h | 4 ++--
->   2 files changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/mediatek/mtk_drm_plane.c b/drivers/gpu/drm/mediatek/mtk_drm_plane.c
-> index cbdb70677d305..43137c46fc148 100644
-> --- a/drivers/gpu/drm/mediatek/mtk_drm_plane.c
-> +++ b/drivers/gpu/drm/mediatek/mtk_drm_plane.c
-> @@ -93,8 +93,8 @@ static bool mtk_plane_format_mod_supported(struct drm_plane *plane,
->   	return true;
->   }
->   
-> -static void mtk_drm_plane_destroy_state(struct drm_plane *plane,
-> -					struct drm_plane_state *state)
-> +static void mtk_plane_destroy_state(struct drm_plane *plane,
-> +				    struct drm_plane_state *state)
->   {
->   	__drm_atomic_helper_plane_destroy_state(state);
->   	kfree(to_mtk_plane_state(state));
-> @@ -241,7 +241,7 @@ static const struct drm_plane_funcs mtk_plane_funcs = {
->   	.destroy = drm_plane_cleanup,
->   	.reset = mtk_plane_reset,
->   	.atomic_duplicate_state = mtk_plane_duplicate_state,
-> -	.atomic_destroy_state = mtk_drm_plane_destroy_state,
-> +	.atomic_destroy_state = mtk_plane_destroy_state,
->   	.format_mod_supported = mtk_plane_format_mod_supported,
->   };
->   
-> diff --git a/drivers/gpu/drm/mediatek/mtk_drm_plane.h b/drivers/gpu/drm/mediatek/mtk_drm_plane.h
-> index 99aff7da0831d..231bb7aac9473 100644
-> --- a/drivers/gpu/drm/mediatek/mtk_drm_plane.h
-> +++ b/drivers/gpu/drm/mediatek/mtk_drm_plane.h
-> @@ -4,8 +4,8 @@
->    * Author: CK Hu <ck.hu@mediatek.com>
->    */
->   
-> -#ifndef _MTK_DRM_PLANE_H_
-> -#define _MTK_DRM_PLANE_H_
-> +#ifndef _MTK_PLANE_H_
-> +#define _MTK_PLANE_H_
->   
->   #include <drm/drm_crtc.h>
->   #include <linux/types.h>
-
+diff --git a/drivers/gpu/drm/drm_prime.c b/drivers/gpu/drm/drm_prime.c
+index 7352bde299d5..64dd6276e828 100644
+--- a/drivers/gpu/drm/drm_prime.c
++++ b/drivers/gpu/drm/drm_prime.c
+@@ -582,7 +582,12 @@ int drm_gem_map_attach(struct dma_buf *dma_buf,
+ {
+ 	struct drm_gem_object *obj = dma_buf->priv;
+ 
+-	if (!obj->funcs->get_sg_table)
++	/*
++	 * drm_gem_map_dma_buf() requires obj->get_sg_table(), but drivers
++	 * that implement their own ->map_dma_buf() do not.
++	 */
++	if ((dma_buf->ops->map_dma_buf == drm_gem_map_dma_buf) &&
++	    !obj->funcs->get_sg_table)
+ 		return -ENOSYS;
+ 
+ 	return drm_gem_pin(obj);
+-- 
+2.44.0
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
