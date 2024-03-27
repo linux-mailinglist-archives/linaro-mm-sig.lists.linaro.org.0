@@ -2,87 +2,71 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 660EF88EC7C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 Mar 2024 18:21:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F19A88EE83
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 Mar 2024 19:48:53 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BC0B73F37F
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 Mar 2024 17:21:32 +0000 (UTC)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
-	by lists.linaro.org (Postfix) with ESMTPS id AA4213F37F
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 27 Mar 2024 17:21:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 6E26740D0F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 27 Mar 2024 18:48:52 +0000 (UTC)
+Received: from aposti.net (aposti.net [89.234.176.197])
+	by lists.linaro.org (Postfix) with ESMTPS id 6BB3C3F359
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 27 Mar 2024 18:48:49 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ti.com header.s=ti-com-17Q1 header.b=hsP477k2;
-	dmarc=pass (policy=quarantine) header.from=ti.com;
-	spf=pass (lists.linaro.org: domain of afd@ti.com designates 198.47.19.141 as permitted sender) smtp.mailfrom=afd@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-	by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42RHLACs025629;
-	Wed, 27 Mar 2024 12:21:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-	s=ti-com-17Q1; t=1711560070;
-	bh=yjpJ3hsXQbeK1yHG6JzJa2XM1CgiXbMK7UCDuiQfnPg=;
-	h=Date:Subject:To:CC:References:From:In-Reply-To;
-	b=hsP477k2f1JXNp3Xy576HZSpHQXpIgYIqZ5Q2tpPgKGTgwMNFPFH9u7M9Hdxj2YH1
-	 LaLQyfT8J/g05GqD8fQuApdZcR+yxSBDgCXrKq9k77EVkzB0yZqbod1wRrYGpQoZ0b
-	 MqtyAVwpMuGXuTaOxJ9RsgsW8Ni3hFZT/XS4HnU8=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-	by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42RHLAGu009787
-	(version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-	Wed, 27 Mar 2024 12:21:10 -0500
-Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
- Mar 2024 12:21:10 -0500
-Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 27 Mar 2024 12:21:10 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
-	by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42RHL9Cb107382;
-	Wed, 27 Mar 2024 12:21:09 -0500
-Message-ID: <7f175cf2-0eb0-452f-b2db-881d8a9b215c@ti.com>
-Date: Wed, 27 Mar 2024 12:21:09 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Paul Cercueil <paul@crapouillou.net>, Jonathan Cameron <jic23@kernel.org>,
-        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-        Jonathan Corbet
-	<corbet@lwn.net>,
-        Lars-Peter Clausen <lars@metafoo.de>, Vinod Koul
-	<vkoul@kernel.org>,
-        Sumit Semwal <sumit.semwal@linaro.org>
+	dkim=pass header.d=crapouillou.net header.s=mail header.b=gI6xLEj+;
+	dmarc=pass (policy=none) header.from=crapouillou.net;
+	spf=pass (lists.linaro.org: domain of paul@crapouillou.net designates 89.234.176.197 as permitted sender) smtp.mailfrom=paul@crapouillou.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
+	s=mail; t=1711565328;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=q+VAflKSVpS/uc6+Go3aTZwY2NhcMu7ws4PPiZrId24=;
+	b=gI6xLEj+UsSUNTlkykQPWip0ilyapL3nf3XyTLl62CtIECVWNrv31dmBZjgpOnu1nf63xD
+	AdBBX/hxu3rh3NSGhnntdiLM8gcyfe2rPBK7J5j8gpydBut6vZHkWEkxiy/eB05EVAPK7B
+	b71O3LKauKpiqJhrXUPEmBx40nFG4bo=
+Message-ID: <5ea549035d25273df6e45849a8dcc1bde71723b1.camel@crapouillou.net>
+From: Paul Cercueil <paul@crapouillou.net>
+To: Andrew Davis <afd@ti.com>, Jonathan Cameron <jic23@kernel.org>,
+ Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Jonathan
+ Corbet <corbet@lwn.net>, Lars-Peter Clausen <lars@metafoo.de>, Vinod Koul
+ <vkoul@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>
+Date: Wed, 27 Mar 2024 19:48:45 +0100
+In-Reply-To: <7f175cf2-0eb0-452f-b2db-881d8a9b215c@ti.com>
 References: <20240310124836.31863-1-paul@crapouillou.net>
- <20240310124836.31863-4-paul@crapouillou.net>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20240310124836.31863-4-paul@crapouillou.net>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Rspamd-Queue-Id: AA4213F37F
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.99 / 15.00];
+	 <20240310124836.31863-4-paul@crapouillou.net>
+	 <7f175cf2-0eb0-452f-b2db-881d8a9b215c@ti.com>
+Autocrypt: addr=paul@crapouillou.net; prefer-encrypt=mutual;
+ keydata=mQENBF0KhcEBCADkfmrzdTOp/gFOMQX0QwKE2WgeCJiHPWkpEuPH81/HB2dpjPZNW03ZMLQfECbbaEkdbN4YnPfXgcc1uBe5mwOAPV1MBlaZcEt4M67iYQwSNrP7maPS3IaQJ18ES8JJ5Uf5UzFZaUawgH+oipYGW+v31cX6L3k+dGsPRM0Pyo0sQt52fsopNPZ9iag0iY7dGNuKenaEqkYNjwEgTtNz8dt6s3hMpHIKZFL3OhAGi88wF/21isv0zkF4J0wlf9gYUTEEY3Eulx80PTVqGIcHZzfavlWIdzhe+rxHTDGVwseR2Y1WjgFGQ2F+vXetAB8NEeygXee+i9nY5qt9c07m8mzjABEBAAG0JFBhdWwgQ2VyY3VlaWwgPHBhdWxAY3JhcG91aWxsb3UubmV0PokBTgQTAQoAOBYhBNdHYd8OeCBwpMuVxnPua9InSr1BBQJdCoXBAhsDBQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEHPua9InSr1BgvIH/0kLyrI3V0f33a6D3BJwc1grbygPVYGuC5l5eMnAI+rDmLR19E2yvibRpgUc87NmPEQPpbbtAZt8On/2WZoE5OIPdlId/AHNpdgAtGXo0ZX4LGeVPjxjdkbrKVHxbcdcnY+zzaFglpbVSvp76pxqgVg8PgxkAAeeJV+ET4t0823Gz2HzCL/6JZhvKAEtHVulOWoBh368SYdolp1TSfORWmHzvQiCCCA+j0cMkYVGzIQzEQhX7Urf9N/nhU5/SGLFEi9DcBfXoGzhyQyLXflhJtKm3XGB1K/pPulbKaPcKAl6rIDWPuFpHkSbmZ9r4KFlBwgAhlGy6nqP7O3u7q23hRW5AQ0EXQqFwQEIAMo+MgvYHsyjX3Ja4Oolg1Txzm8woj30ch2nACFCqaO0R/1kLj2VVeLrDyQUOlXx9PD6IQI4M8wy8m0sR4wV2p/g/paw7k65cjzYYLh+FdLNyO7IW
+	YXndJO+wDPi3aK/YKUYepqlP+QsmaHNYNdXEQDRKqNfJg8t0f5rfzp9ryxd1tCnbV+tG8VHQWiZXNqN7062DygSNXFUfQ0vZ3J2D4oAcIAEXTymRQ2+hr3Hf7I61KMHWeSkCvCG2decTYsHlw5Erix/jYWqVOtX0roOOLqWkqpQQJWtU+biWrAksmFmCp5fXIg1Nlg39v21xCXBGxJkxyTYuhdWyu1yDQ+LSIUAEQEAAYkBNgQYAQoAIBYhBNdHYd8OeCBwpMuVxnPua9InSr1BBQJdCoXBAhsMAAoJEHPua9InSr1B4wsH/Az767YCT0FSsMNt1jkkdLCBi7nY0GTW+PLP1a4zvVqFMo/vD6uz1ZflVTUAEvcTi3VHYZrlgjcxmcGu239oruqUS8Qy/xgZBp9KF0NTWQSl1iBfVbIU5VV1vHS6r77W5x0qXgfvAUWOH4gmN3MnF01SH2zMcLiaUGF+mcwl15rHbjnT3Nu2399aSE6cep86igfCAyFUOXjYEGlJy+c6UyT+DUylpjQg0nl8MlZ/7Whg2fAU9+FALIbQYQzGlT4c71SibR9T741jnegHhlmV4WXXUD6roFt54t0MSAFSVxzG8mLcSjR2cLUJ3NIPXixYUSEn3tQhfZj07xIIjWxAYZo=
+MIME-Version: 1.0
+X-Rspamd-Queue-Id: 6BB3C3F359
+X-Spamd-Bar: --------
+X-Spamd-Result: default: False [-8.00 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[ti.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[ti.com:s=ti-com-17Q1];
-	R_SPF_ALLOW(-0.20)[+ip4:198.47.19.0/24];
+	DMARC_POLICY_ALLOW(-0.50)[crapouillou.net,none];
+	R_SPF_ALLOW(-0.20)[+a];
+	R_DKIM_ALLOW(-0.20)[crapouillou.net:s=mail];
 	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	ASN(0.00)[asn:161, ipnet:198.47.19.0/24, country:US];
 	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:203432, ipnet:89.234.176.0/23, country:FR];
 	RCPT_COUNT_TWELVE(0.00)[16];
-	FROM_HAS_DN(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_ZERO(0.00)[0];
 	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_FIVE(0.00)[5];
-	FROM_EQ_ENVFROM(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[ti.com:+]
+	FROM_HAS_DN(0.00)[];
+	DWL_DNSWL_BLOCKED(0.00)[crapouillou.net:dkim];
+	FROM_EQ_ENVFROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.987];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[crapouillou.net:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: HZLDZEEBPMDPQREEJ26UQ4PC23NU4IBV
-X-Message-ID-Hash: HZLDZEEBPMDPQREEJ26UQ4PC23NU4IBV
-X-MailFrom: afd@ti.com
+Message-ID-Hash: 6NXMJATAHEFXST6JA5Y6UO2D2VM5K7OW
+X-Message-ID-Hash: 6NXMJATAHEFXST6JA5Y6UO2D2VM5K7OW
+X-MailFrom: paul@crapouillou.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Nuno Sa <nuno.sa@analog.com>, Michael Hennerich <michael.hennerich@analog.com>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-iio@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
@@ -90,784 +74,524 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v9 3/6] iio: core: Add new DMABUF interface infrastructure
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HZLDZEEBPMDPQREEJ26UQ4PC23NU4IBV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6NXMJATAHEFXST6JA5Y6UO2D2VM5K7OW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On 3/10/24 7:48 AM, Paul Cercueil wrote:
-> Add the necessary infrastructure to the IIO core to support a new
-> optional DMABUF based interface.
-> 
-> With this new interface, DMABUF objects (externally created) can be
-> attached to a IIO buffer, and subsequently used for data transfer.
-> 
-> A userspace application can then use this interface to share DMABUF
-> objects between several interfaces, allowing it to transfer data in a
-> zero-copy fashion, for instance between IIO and the USB stack.
-> 
-> The userspace application can also memory-map the DMABUF objects, and
-> access the sample data directly. The advantage of doing this vs. the
-> read() interface is that it avoids an extra copy of the data between the
-> kernel and userspace. This is particularly userful for high-speed
-> devices which produce several megabytes or even gigabytes of data per
-> second.
-> 
-> As part of the interface, 3 new IOCTLs have been added:
-> 
-> IIO_BUFFER_DMABUF_ATTACH_IOCTL(int fd):
->   Attach the DMABUF object identified by the given file descriptor to the
->   buffer.
-> 
-> IIO_BUFFER_DMABUF_DETACH_IOCTL(int fd):
->   Detach the DMABUF object identified by the given file descriptor from
->   the buffer. Note that closing the IIO buffer's file descriptor will
->   automatically detach all previously attached DMABUF objects.
-> 
-> IIO_BUFFER_DMABUF_ENQUEUE_IOCTL(struct iio_dmabuf *):
->   Request a data transfer to/from the given DMABUF object. Its file
->   descriptor, as well as the transfer size and flags are provided in the
->   "iio_dmabuf" structure.
-> 
-> These three IOCTLs have to be performed on the IIO buffer's file
-> descriptor, obtained using the IIO_BUFFER_GET_FD_IOCTL() ioctl.
-> 
-> Signed-off-by: Paul Cercueil <paul@crapouillou.net>
-> Signed-off-by: Nuno Sa <nuno.sa@analog.com>
-> 
-> ---
-> v2: Only allow the new IOCTLs on the buffer FD created with
->      IIO_BUFFER_GET_FD_IOCTL().
-> 
-> v3: - Get rid of the old IOCTLs. The IIO subsystem does not create or
->      manage DMABUFs anymore, and only attaches/detaches externally
->      created DMABUFs.
->      - Add IIO_BUFFER_DMABUF_CYCLIC to the supported flags.
-> 
-> v5: - Use dev_err() instead of pr_err()
->      - Inline to_iio_dma_fence()
->      - Add comment to explain why we unref twice when detaching dmabuf
->      - Remove TODO comment. It is actually safe to free the file's
->        private data even when transfers are still pending because it
->        won't be accessed.
->      - Fix documentation of new fields in struct iio_buffer_access_funcs
->      - iio_dma_resv_lock() does not need to be exported, make it static
-> 
-> v6: - Remove dead code in iio_dma_resv_lock()
->      - Fix non-block actually blocking
->      - Cache dma_buf_attachment instead of mapping/unmapping it for every
->        transfer
->      - Return -EINVAL instead of IIO_IOCTL_UNHANDLED for unknown ioctl
->      - Make .block_enqueue() callback take a dma_fence pointer, which
->        will be passed to iio_buffer_signal_dmabuf_done() instead of the
->        dma_buf_attachment; and remove the backpointer from the priv
->        structure to the dma_fence.
->      - Use dma_fence_begin/end_signalling in the dma_fence critical
->        sections
->      - Unref dma_fence and dma_buf_attachment in worker, because they
->        might try to lock the dma_resv, which would deadlock.
->      - Add buffer ops to lock/unlock the queue. This is motivated by the
->        fact that once the dma_fence has been installed, we cannot lock
->        anything anymore - so the queue must be locked before the
->        dma_fence is installed.
->      - Use 'long retl' variable to handle the return value of
->        dma_resv_wait_timeout()
->      - Protect dmabufs list access with a mutex
->      - Rework iio_buffer_find_attachment() to use the internal dmabufs
->        list, instead of messing with dmabufs private data.
->      - Add an atomically-increasing sequence number for fences
-> 
-> v8  - Fix swapped fence direction
->      - Simplify fence wait mechanism
->      - Remove "Buffer closed with active transfers" print, as it was dead
->        code
->      - Un-export iio_buffer_dmabuf_{get,put}. They are not used anywhere
->        else so they can even be static.
->      - Prevent attaching already-attached DMABUFs
-> 
-> v9: - Select DMA_SHARED_BUFFER in Kconfig
->      - Remove useless forward declaration of 'iio_dma_fence'
->      - Import DMA-BUF namespace
->      - Add missing __user tag to iio_buffer_detach_dmabuf() argument
-> ---
->   drivers/iio/Kconfig               |   1 +
->   drivers/iio/industrialio-buffer.c | 462 ++++++++++++++++++++++++++++++
->   include/linux/iio/buffer_impl.h   |  30 ++
->   include/uapi/linux/iio/buffer.h   |  22 ++
->   4 files changed, 515 insertions(+)
-> 
-> diff --git a/drivers/iio/Kconfig b/drivers/iio/Kconfig
-> index 9c351ffc7bed..661127aed2f9 100644
-> --- a/drivers/iio/Kconfig
-> +++ b/drivers/iio/Kconfig
-> @@ -14,6 +14,7 @@ if IIO
->   
->   config IIO_BUFFER
->   	bool "Enable buffer support within IIO"
-> +	select DMA_SHARED_BUFFER
->   	help
->   	  Provide core support for various buffer based data
->   	  acquisition methods.
-> diff --git a/drivers/iio/industrialio-buffer.c b/drivers/iio/industrialio-buffer.c
-> index b581a7e80566..a987654f82fc 100644
-> --- a/drivers/iio/industrialio-buffer.c
-> +++ b/drivers/iio/industrialio-buffer.c
-> @@ -9,14 +9,19 @@
->    * - Better memory allocation techniques?
->    * - Alternative access techniques?
->    */
-> +#include <linux/atomic.h>
->   #include <linux/anon_inodes.h>
->   #include <linux/kernel.h>
->   #include <linux/export.h>
->   #include <linux/device.h>
-> +#include <linux/dma-buf.h>
-> +#include <linux/dma-fence.h>
-> +#include <linux/dma-resv.h>
->   #include <linux/file.h>
->   #include <linux/fs.h>
->   #include <linux/cdev.h>
->   #include <linux/slab.h>
-> +#include <linux/mm.h>
->   #include <linux/poll.h>
->   #include <linux/sched/signal.h>
->   
-> @@ -28,6 +33,32 @@
->   #include <linux/iio/buffer.h>
->   #include <linux/iio/buffer_impl.h>
->   
-> +#define DMABUF_ENQUEUE_TIMEOUT_MS 5000
-> +
-> +MODULE_IMPORT_NS(DMA_BUF);
-> +
-> +struct iio_dmabuf_priv {
-> +	struct list_head entry;
-> +	struct kref ref;
-> +
-> +	struct iio_buffer *buffer;
-> +	struct iio_dma_buffer_block *block;
-> +
-> +	u64 context;
-> +	spinlock_t lock;
-> +
-> +	struct dma_buf_attachment *attach;
-> +	struct sg_table *sgt;
-> +	enum dma_data_direction dir;
-> +	atomic_t seqno;
-> +};
-> +
-> +struct iio_dma_fence {
-> +	struct dma_fence base;
-> +	struct iio_dmabuf_priv *priv;
-> +	struct work_struct work;
-> +};
-> +
->   static const char * const iio_endian_prefix[] = {
->   	[IIO_BE] = "be",
->   	[IIO_LE] = "le",
-> @@ -332,6 +363,8 @@ void iio_buffer_init(struct iio_buffer *buffer)
->   {
->   	INIT_LIST_HEAD(&buffer->demux_list);
->   	INIT_LIST_HEAD(&buffer->buffer_list);
-> +	INIT_LIST_HEAD(&buffer->dmabufs);
-> +	mutex_init(&buffer->dmabufs_mutex);
->   	init_waitqueue_head(&buffer->pollq);
->   	kref_init(&buffer->ref);
->   	if (!buffer->watermark)
-> @@ -1519,14 +1552,57 @@ static void iio_buffer_unregister_legacy_sysfs_groups(struct iio_dev *indio_dev)
->   	kfree(iio_dev_opaque->legacy_scan_el_group.attrs);
->   }
->   
-> +static void iio_buffer_dmabuf_release(struct kref *ref)
-> +{
-> +	struct iio_dmabuf_priv *priv = container_of(ref, struct iio_dmabuf_priv, ref);
-> +	struct dma_buf_attachment *attach = priv->attach;
-> +	struct iio_buffer *buffer = priv->buffer;
-> +	struct dma_buf *dmabuf = attach->dmabuf;
-> +
-> +	dma_resv_lock(dmabuf->resv, NULL);
-> +	dma_buf_unmap_attachment(attach, priv->sgt, priv->dir);
-> +	dma_resv_unlock(dmabuf->resv);
-> +
-> +	buffer->access->detach_dmabuf(buffer, priv->block);
-> +
-> +	dma_buf_detach(attach->dmabuf, attach);
-> +	dma_buf_put(dmabuf);
-> +	kfree(priv);
-> +}
-> +
-> +static void iio_buffer_dmabuf_get(struct dma_buf_attachment *attach)
-> +{
-> +	struct iio_dmabuf_priv *priv = attach->importer_priv;
-> +
-> +	kref_get(&priv->ref);
-> +}
-> +
-> +static void iio_buffer_dmabuf_put(struct dma_buf_attachment *attach)
-> +{
-> +	struct iio_dmabuf_priv *priv = attach->importer_priv;
-> +
-> +	kref_put(&priv->ref, iio_buffer_dmabuf_release);
-> +}
-> +
->   static int iio_buffer_chrdev_release(struct inode *inode, struct file *filep)
->   {
->   	struct iio_dev_buffer_pair *ib = filep->private_data;
->   	struct iio_dev *indio_dev = ib->indio_dev;
->   	struct iio_buffer *buffer = ib->buffer;
-> +	struct iio_dmabuf_priv *priv, *tmp;
->   
->   	wake_up(&buffer->pollq);
->   
-> +	mutex_lock(&buffer->dmabufs_mutex);
-> +
-> +	/* Close all attached DMABUFs */
-> +	list_for_each_entry_safe(priv, tmp, &buffer->dmabufs, entry) {
-> +		list_del_init(&priv->entry);
-> +		iio_buffer_dmabuf_put(priv->attach);
-> +	}
-> +
-> +	mutex_unlock(&buffer->dmabufs_mutex);
-> +
->   	kfree(ib);
->   	clear_bit(IIO_BUSY_BIT_POS, &buffer->flags);
->   	iio_device_put(indio_dev);
-> @@ -1534,11 +1610,396 @@ static int iio_buffer_chrdev_release(struct inode *inode, struct file *filep)
->   	return 0;
->   }
->   
-> +static int iio_dma_resv_lock(struct dma_buf *dmabuf, bool nonblock)
-> +{
-> +	if (!nonblock)
-> +		return dma_resv_lock_interruptible(dmabuf->resv, NULL);
-> +
-> +	if (!dma_resv_trylock(dmabuf->resv))
-> +		return -EBUSY;
-> +
-> +	return 0;
-> +}
-> +
-> +static struct dma_buf_attachment *
-> +iio_buffer_find_attachment(struct iio_dev_buffer_pair *ib,
-> +			   struct dma_buf *dmabuf, bool nonblock)
-> +{
-> +	struct device *dev = ib->indio_dev->dev.parent;
-> +	struct iio_buffer *buffer = ib->buffer;
-> +	struct dma_buf_attachment *attach = NULL;
-> +	struct iio_dmabuf_priv *priv;
-> +
-> +	mutex_lock(&buffer->dmabufs_mutex);
-> +
-> +	list_for_each_entry(priv, &buffer->dmabufs, entry) {
-> +		if (priv->attach->dev == dev
-> +		    && priv->attach->dmabuf == dmabuf) {
-> +			attach = priv->attach;
-> +			break;
-> +		}
-> +	}
-> +
-> +	if (attach)
-> +		iio_buffer_dmabuf_get(attach);
-> +
-> +	mutex_unlock(&buffer->dmabufs_mutex);
-> +
-> +	return attach ?: ERR_PTR(-EPERM);
-> +}
-> +
-> +static int iio_buffer_attach_dmabuf(struct iio_dev_buffer_pair *ib,
-> +				    int __user *user_fd, bool nonblock)
-> +{
-> +	struct iio_dev *indio_dev = ib->indio_dev;
-> +	struct iio_buffer *buffer = ib->buffer;
-> +	struct dma_buf_attachment *attach;
-> +	struct iio_dmabuf_priv *priv, *each;
-> +	struct dma_buf *dmabuf;
-> +	int err, fd;
-> +
-> +	if (!buffer->access->attach_dmabuf
-> +	    || !buffer->access->detach_dmabuf
-> +	    || !buffer->access->enqueue_dmabuf)
-> +		return -EPERM;
-> +
-> +	if (copy_from_user(&fd, user_fd, sizeof(fd)))
-> +		return -EFAULT;
-> +
-> +	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
-> +	if (!priv)
-> +		return -ENOMEM;
-> +
-> +	spin_lock_init(&priv->lock);
-> +	priv->context = dma_fence_context_alloc(1);
-> +
-> +	dmabuf = dma_buf_get(fd);
-> +	if (IS_ERR(dmabuf)) {
-> +		err = PTR_ERR(dmabuf);
-> +		goto err_free_priv;
-> +	}
-> +
-> +	attach = dma_buf_attach(dmabuf, indio_dev->dev.parent);
-> +	if (IS_ERR(attach)) {
-> +		err = PTR_ERR(attach);
-> +		goto err_dmabuf_put;
-> +	}
-> +
-> +	err = iio_dma_resv_lock(dmabuf, nonblock);
-> +	if (err)
-> +		goto err_dmabuf_detach;
-> +
-> +	priv->dir = buffer->direction == IIO_BUFFER_DIRECTION_IN
-> +		? DMA_FROM_DEVICE : DMA_TO_DEVICE;
-> +
-> +	priv->sgt = dma_buf_map_attachment(attach, priv->dir);
-
-Part of the fundamental design of DMABUF is the ability for all
-users of a buffer to attach to the buffer before any user maps that
-buffer. This allows an exporter to do constraint solving based
-on all the attached buffers at map time to select the best backing
-memory.
-
-I know none of the exporters do that right now, probably due to
-most of the importers doing what you do here: attach then immediately
-map. This prevents the split between attach and map from being useful.
-
-I'd recommend only doing the dma_buf_map_attachment() later when you
-use the buffer, maybe part of enqueue_dmabuf() step below. Then unmap()
-it after you are done with it, not only when detaching.
-
-As this change will not affect the UAPI (which only deals with
-"attach" ioctl), then this comment should not be seen as a blocker
-for taking this series. We should be able to make this change later,
-but just something to think about.
-
-Andrew
-
-> +	if (IS_ERR(priv->sgt)) {
-> +		err = PTR_ERR(priv->sgt);
-> +		dev_err(&indio_dev->dev, "Unable to map attachment: %d\n", err);
-> +		goto err_resv_unlock;
-> +	}
-> +
-> +	kref_init(&priv->ref);
-> +	priv->buffer = buffer;
-> +	priv->attach = attach;
-> +	attach->importer_priv = priv;
-> +
-> +	priv->block = buffer->access->attach_dmabuf(buffer, attach);
-> +	if (IS_ERR(priv->block)) {
-> +		err = PTR_ERR(priv->block);
-> +		goto err_dmabuf_unmap_attachment;
-> +	}
-> +
-> +	dma_resv_unlock(dmabuf->resv);
-> +
-> +	mutex_lock(&buffer->dmabufs_mutex);
-> +
-> +	/*
-> +	 * Check whether we already have an attachment for this driver/DMABUF
-> +	 * combo. If we do, refuse to attach.
-> +	 */
-> +	list_for_each_entry(each, &buffer->dmabufs, entry) {
-> +		if (each->attach->dev == indio_dev->dev.parent
-> +		    && each->attach->dmabuf == dmabuf) {
-> +			/*
-> +			 * We unlocked the reservation object, so going through
-> +			 * the cleanup code would mean re-locking it first.
-> +			 * At this stage it is simpler to free the attachment
-> +			 * using iio_buffer_dma_put().
-> +			 */
-> +			mutex_unlock(&buffer->dmabufs_mutex);
-> +			iio_buffer_dmabuf_put(attach);
-> +			return -EBUSY;
-> +		}
-> +	}
-> +
-> +	/* Otherwise, add the new attachment to our dmabufs list. */
-> +	list_add(&priv->entry, &buffer->dmabufs);
-> +	mutex_unlock(&buffer->dmabufs_mutex);
-> +
-> +	return 0;
-> +
-> +err_dmabuf_unmap_attachment:
-> +	dma_buf_unmap_attachment(attach, priv->sgt, priv->dir);
-> +err_resv_unlock:
-> +	dma_resv_unlock(dmabuf->resv);
-> +err_dmabuf_detach:
-> +	dma_buf_detach(dmabuf, attach);
-> +err_dmabuf_put:
-> +	dma_buf_put(dmabuf);
-> +err_free_priv:
-> +	kfree(priv);
-> +
-> +	return err;
-> +}
-> +
-> +static int iio_buffer_detach_dmabuf(struct iio_dev_buffer_pair *ib,
-> +				    int __user *user_req, bool nonblock)
-> +{
-> +	struct iio_buffer *buffer = ib->buffer;
-> +	struct iio_dev *indio_dev = ib->indio_dev;
-> +	struct iio_dmabuf_priv *priv;
-> +	struct dma_buf *dmabuf;
-> +	int dmabuf_fd, ret = -EPERM;
-> +
-> +	if (copy_from_user(&dmabuf_fd, user_req, sizeof(dmabuf_fd)))
-> +		return -EFAULT;
-> +
-> +	dmabuf = dma_buf_get(dmabuf_fd);
-> +	if (IS_ERR(dmabuf))
-> +		return PTR_ERR(dmabuf);
-> +
-> +	mutex_lock(&buffer->dmabufs_mutex);
-> +
-> +	list_for_each_entry(priv, &buffer->dmabufs, entry) {
-> +		if (priv->attach->dev == indio_dev->dev.parent
-> +		    && priv->attach->dmabuf == dmabuf) {
-> +			list_del(&priv->entry);
-> +
-> +			/* Unref the reference from iio_buffer_attach_dmabuf() */
-> +			iio_buffer_dmabuf_put(priv->attach);
-> +			ret = 0;
-> +			break;
-> +		}
-> +	}
-> +
-> +	mutex_unlock(&buffer->dmabufs_mutex);
-> +	dma_buf_put(dmabuf);
-> +
-> +	return ret;
-> +}
-> +
-> +static const char *
-> +iio_buffer_dma_fence_get_driver_name(struct dma_fence *fence)
-> +{
-> +	return "iio";
-> +}
-> +
-> +static void iio_buffer_dma_fence_release(struct dma_fence *fence)
-> +{
-> +	struct iio_dma_fence *iio_fence =
-> +		container_of(fence, struct iio_dma_fence, base);
-> +
-> +	kfree(iio_fence);
-> +}
-> +
-> +static const struct dma_fence_ops iio_buffer_dma_fence_ops = {
-> +	.get_driver_name	= iio_buffer_dma_fence_get_driver_name,
-> +	.get_timeline_name	= iio_buffer_dma_fence_get_driver_name,
-> +	.release		= iio_buffer_dma_fence_release,
-> +};
-> +
-> +static int iio_buffer_enqueue_dmabuf(struct iio_dev_buffer_pair *ib,
-> +				     struct iio_dmabuf __user *iio_dmabuf_req,
-> +				     bool nonblock)
-> +{
-> +	struct iio_buffer *buffer = ib->buffer;
-> +	struct iio_dmabuf iio_dmabuf;
-> +	struct dma_buf_attachment *attach;
-> +	struct iio_dmabuf_priv *priv;
-> +	struct iio_dma_fence *fence;
-> +	struct dma_buf *dmabuf;
-> +	unsigned long timeout;
-> +	bool cookie, cyclic, dma_to_ram;
-> +	long retl;
-> +	u32 seqno;
-> +	int ret;
-> +
-> +	if (copy_from_user(&iio_dmabuf, iio_dmabuf_req, sizeof(iio_dmabuf)))
-> +		return -EFAULT;
-> +
-> +	if (iio_dmabuf.flags & ~IIO_BUFFER_DMABUF_SUPPORTED_FLAGS)
-> +		return -EINVAL;
-> +
-> +	cyclic = iio_dmabuf.flags & IIO_BUFFER_DMABUF_CYCLIC;
-> +
-> +	/* Cyclic flag is only supported on output buffers */
-> +	if (cyclic && buffer->direction != IIO_BUFFER_DIRECTION_OUT)
-> +		return -EINVAL;
-> +
-> +	dmabuf = dma_buf_get(iio_dmabuf.fd);
-> +	if (IS_ERR(dmabuf))
-> +		return PTR_ERR(dmabuf);
-> +
-> +	if (!iio_dmabuf.bytes_used || iio_dmabuf.bytes_used > dmabuf->size) {
-> +		ret = -EINVAL;
-> +		goto err_dmabuf_put;
-> +	}
-> +
-> +	attach = iio_buffer_find_attachment(ib, dmabuf, nonblock);
-> +	if (IS_ERR(attach)) {
-> +		ret = PTR_ERR(attach);
-> +		goto err_dmabuf_put;
-> +	}
-> +
-> +	priv = attach->importer_priv;
-> +
-> +	fence = kmalloc(sizeof(*fence), GFP_KERNEL);
-> +	if (!fence) {
-> +		ret = -ENOMEM;
-> +		goto err_attachment_put;
-> +	}
-> +
-> +	fence->priv = priv;
-> +
-> +	seqno = atomic_add_return(1, &priv->seqno);
-> +
-> +	/*
-> +	 * The transfers are guaranteed to be processed in the order they are
-> +	 * enqueued, so we can use a simple incrementing sequence number for
-> +	 * the dma_fence.
-> +	 */
-> +	dma_fence_init(&fence->base, &iio_buffer_dma_fence_ops,
-> +		       &priv->lock, priv->context, seqno);
-> +
-> +	ret = iio_dma_resv_lock(dmabuf, nonblock);
-> +	if (ret)
-> +		goto err_fence_put;
-> +
-> +	timeout = nonblock ? 0 : msecs_to_jiffies(DMABUF_ENQUEUE_TIMEOUT_MS);
-> +	dma_to_ram = buffer->direction == IIO_BUFFER_DIRECTION_IN;
-> +
-> +	/* Make sure we don't have writers */
-> +	retl = dma_resv_wait_timeout(dmabuf->resv,
-> +				     dma_resv_usage_rw(dma_to_ram),
-> +				     true, timeout);
-> +	if (retl == 0)
-> +		retl = -EBUSY;
-> +	if (retl < 0) {
-> +		ret = (int)retl;
-> +		goto err_resv_unlock;
-> +	}
-> +
-> +	if (buffer->access->lock_queue)
-> +		buffer->access->lock_queue(buffer);
-> +
-> +	ret = dma_resv_reserve_fences(dmabuf->resv, 1);
-> +	if (ret)
-> +		goto err_queue_unlock;
-> +
-> +	dma_resv_add_fence(dmabuf->resv, &fence->base,
-> +			   dma_to_ram ? DMA_RESV_USAGE_WRITE : DMA_RESV_USAGE_READ);
-> +	dma_resv_unlock(dmabuf->resv);
-> +
-> +	cookie = dma_fence_begin_signalling();
-> +
-> +	ret = buffer->access->enqueue_dmabuf(buffer, priv->block, &fence->base,
-> +					     priv->sgt, iio_dmabuf.bytes_used,
-> +					     cyclic);
-> +	if (ret) {
-> +		/*
-> +		 * DMABUF enqueue failed, but we already added the fence.
-> +		 * Signal the error through the fence completion mechanism.
-> +		 */
-> +		iio_buffer_signal_dmabuf_done(&fence->base, ret);
-> +	}
-> +
-> +	if (buffer->access->unlock_queue)
-> +		buffer->access->unlock_queue(buffer);
-> +
-> +	dma_fence_end_signalling(cookie);
-> +	dma_buf_put(dmabuf);
-> +
-> +	return ret;
-> +
-> +err_queue_unlock:
-> +	if (buffer->access->unlock_queue)
-> +		buffer->access->unlock_queue(buffer);
-> +err_resv_unlock:
-> +	dma_resv_unlock(dmabuf->resv);
-> +err_fence_put:
-> +	dma_fence_put(&fence->base);
-> +err_attachment_put:
-> +	iio_buffer_dmabuf_put(attach);
-> +err_dmabuf_put:
-> +	dma_buf_put(dmabuf);
-> +
-> +	return ret;
-> +}
-> +
-> +static void iio_buffer_cleanup(struct work_struct *work)
-> +{
-> +	struct iio_dma_fence *fence =
-> +		container_of(work, struct iio_dma_fence, work);
-> +	struct iio_dmabuf_priv *priv = fence->priv;
-> +	struct dma_buf_attachment *attach = priv->attach;
-> +
-> +	dma_fence_put(&fence->base);
-> +	iio_buffer_dmabuf_put(attach);
-> +}
-> +
-> +void iio_buffer_signal_dmabuf_done(struct dma_fence *fence, int ret)
-> +{
-> +	struct iio_dma_fence *iio_fence =
-> +		container_of(fence, struct iio_dma_fence, base);
-> +	bool cookie = dma_fence_begin_signalling();
-> +
-> +	/*
-> +	 * Get a reference to the fence, so that it's not freed as soon as
-> +	 * it's signaled.
-> +	 */
-> +	dma_fence_get(fence);
-> +
-> +	fence->error = ret;
-> +	dma_fence_signal(fence);
-> +	dma_fence_end_signalling(cookie);
-> +
-> +	/*
-> +	 * The fence will be unref'd in iio_buffer_cleanup.
-> +	 * It can't be done here, as the unref functions might try to lock the
-> +	 * resv object, which can deadlock.
-> +	 */
-> +	INIT_WORK(&iio_fence->work, iio_buffer_cleanup);
-> +	schedule_work(&iio_fence->work);
-> +}
-> +EXPORT_SYMBOL_GPL(iio_buffer_signal_dmabuf_done);
-> +
-> +static long iio_buffer_chrdev_ioctl(struct file *filp,
-> +				    unsigned int cmd, unsigned long arg)
-> +{
-> +	struct iio_dev_buffer_pair *ib = filp->private_data;
-> +	void __user *_arg = (void __user *)arg;
-> +	bool nonblock = filp->f_flags & O_NONBLOCK;
-> +
-> +	switch (cmd) {
-> +	case IIO_BUFFER_DMABUF_ATTACH_IOCTL:
-> +		return iio_buffer_attach_dmabuf(ib, _arg, nonblock);
-> +	case IIO_BUFFER_DMABUF_DETACH_IOCTL:
-> +		return iio_buffer_detach_dmabuf(ib, _arg, nonblock);
-> +	case IIO_BUFFER_DMABUF_ENQUEUE_IOCTL:
-> +		return iio_buffer_enqueue_dmabuf(ib, _arg, nonblock);
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +}
-> +
->   static const struct file_operations iio_buffer_chrdev_fileops = {
->   	.owner = THIS_MODULE,
->   	.llseek = noop_llseek,
->   	.read = iio_buffer_read,
->   	.write = iio_buffer_write,
-> +	.unlocked_ioctl = iio_buffer_chrdev_ioctl,
-> +	.compat_ioctl = compat_ptr_ioctl,
->   	.poll = iio_buffer_poll,
->   	.release = iio_buffer_chrdev_release,
->   };
-> @@ -1953,6 +2414,7 @@ static void iio_buffer_release(struct kref *ref)
->   {
->   	struct iio_buffer *buffer = container_of(ref, struct iio_buffer, ref);
->   
-> +	mutex_destroy(&buffer->dmabufs_mutex);
->   	buffer->access->release(buffer);
->   }
->   
-> diff --git a/include/linux/iio/buffer_impl.h b/include/linux/iio/buffer_impl.h
-> index 89c3fd7c29ca..1a221c1d7736 100644
-> --- a/include/linux/iio/buffer_impl.h
-> +++ b/include/linux/iio/buffer_impl.h
-> @@ -9,8 +9,12 @@
->   #include <uapi/linux/iio/buffer.h>
->   #include <linux/iio/buffer.h>
->   
-> +struct dma_buf_attachment;
-> +struct dma_fence;
->   struct iio_dev;
-> +struct iio_dma_buffer_block;
->   struct iio_buffer;
-> +struct sg_table;
->   
->   /**
->    * INDIO_BUFFER_FLAG_FIXED_WATERMARK - Watermark level of the buffer can not be
-> @@ -39,6 +43,13 @@ struct iio_buffer;
->    *                      device stops sampling. Calles are balanced with @enable.
->    * @release:		called when the last reference to the buffer is dropped,
->    *			should free all resources allocated by the buffer.
-> + * @attach_dmabuf:	called from userspace via ioctl to attach one external
-> + *			DMABUF.
-> + * @detach_dmabuf:	called from userspace via ioctl to detach one previously
-> + *			attached DMABUF.
-> + * @enqueue_dmabuf:	called from userspace via ioctl to queue this DMABUF
-> + *			object to this buffer. Requires a valid DMABUF fd, that
-> + *			was previouly attached to this buffer.
->    * @modes:		Supported operating modes by this buffer type
->    * @flags:		A bitmask combination of INDIO_BUFFER_FLAG_*
->    *
-> @@ -68,6 +79,17 @@ struct iio_buffer_access_funcs {
->   
->   	void (*release)(struct iio_buffer *buffer);
->   
-> +	struct iio_dma_buffer_block * (*attach_dmabuf)(struct iio_buffer *buffer,
-> +						       struct dma_buf_attachment *attach);
-> +	void (*detach_dmabuf)(struct iio_buffer *buffer,
-> +			      struct iio_dma_buffer_block *block);
-> +	int (*enqueue_dmabuf)(struct iio_buffer *buffer,
-> +			      struct iio_dma_buffer_block *block,
-> +			      struct dma_fence *fence, struct sg_table *sgt,
-> +			      size_t size, bool cyclic);
-> +	void (*lock_queue)(struct iio_buffer *buffer);
-> +	void (*unlock_queue)(struct iio_buffer *buffer);
-> +
->   	unsigned int modes;
->   	unsigned int flags;
->   };
-> @@ -136,6 +158,12 @@ struct iio_buffer {
->   
->   	/* @ref: Reference count of the buffer. */
->   	struct kref ref;
-> +
-> +	/* @dmabufs: List of DMABUF attachments */
-> +	struct list_head dmabufs; /* P: dmabufs_mutex */
-> +
-> +	/* @dmabufs_mutex: Protects dmabufs */
-> +	struct mutex dmabufs_mutex;
->   };
->   
->   /**
-> @@ -159,6 +187,8 @@ void iio_buffer_init(struct iio_buffer *buffer);
->   struct iio_buffer *iio_buffer_get(struct iio_buffer *buffer);
->   void iio_buffer_put(struct iio_buffer *buffer);
->   
-> +void iio_buffer_signal_dmabuf_done(struct dma_fence *fence, int ret);
-> +
->   #else /* CONFIG_IIO_BUFFER */
->   
->   static inline void iio_buffer_get(struct iio_buffer *buffer) {}
-> diff --git a/include/uapi/linux/iio/buffer.h b/include/uapi/linux/iio/buffer.h
-> index 13939032b3f6..c666aa95e532 100644
-> --- a/include/uapi/linux/iio/buffer.h
-> +++ b/include/uapi/linux/iio/buffer.h
-> @@ -5,6 +5,28 @@
->   #ifndef _UAPI_IIO_BUFFER_H_
->   #define _UAPI_IIO_BUFFER_H_
->   
-> +#include <linux/types.h>
-> +
-> +/* Flags for iio_dmabuf.flags */
-> +#define IIO_BUFFER_DMABUF_CYCLIC		(1 << 0)
-> +#define IIO_BUFFER_DMABUF_SUPPORTED_FLAGS	0x00000001
-> +
-> +/**
-> + * struct iio_dmabuf - Descriptor for a single IIO DMABUF object
-> + * @fd:		file descriptor of the DMABUF object
-> + * @flags:	one or more IIO_BUFFER_DMABUF_* flags
-> + * @bytes_used:	number of bytes used in this DMABUF for the data transfer.
-> + *		Should generally be set to the DMABUF's size.
-> + */
-> +struct iio_dmabuf {
-> +	__u32 fd;
-> +	__u32 flags;
-> +	__u64 bytes_used;
-> +};
-> +
->   #define IIO_BUFFER_GET_FD_IOCTL			_IOWR('i', 0x91, int)
-> +#define IIO_BUFFER_DMABUF_ATTACH_IOCTL		_IOW('i', 0x92, int)
-> +#define IIO_BUFFER_DMABUF_DETACH_IOCTL		_IOW('i', 0x93, int)
-> +#define IIO_BUFFER_DMABUF_ENQUEUE_IOCTL		_IOW('i', 0x94, struct iio_dmabuf)
->   
->   #endif /* _UAPI_IIO_BUFFER_H_ */
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+SGkgQW5kcmV3LA0KDQpMZSBtZXJjcmVkaSAyNyBtYXJzIDIwMjQgw6AgMTI6MjEgLTA1MDAsIEFu
+ZHJldyBEYXZpcyBhIMOpY3JpdMKgOg0KPiBPbiAzLzEwLzI0IDc6NDggQU0sIFBhdWwgQ2VyY3Vl
+aWwgd3JvdGU6DQo+ID4gQWRkIHRoZSBuZWNlc3NhcnkgaW5mcmFzdHJ1Y3R1cmUgdG8gdGhlIElJ
+TyBjb3JlIHRvIHN1cHBvcnQgYSBuZXcNCj4gPiBvcHRpb25hbCBETUFCVUYgYmFzZWQgaW50ZXJm
+YWNlLg0KPiA+IA0KPiA+IFdpdGggdGhpcyBuZXcgaW50ZXJmYWNlLCBETUFCVUYgb2JqZWN0cyAo
+ZXh0ZXJuYWxseSBjcmVhdGVkKSBjYW4gYmUNCj4gPiBhdHRhY2hlZCB0byBhIElJTyBidWZmZXIs
+IGFuZCBzdWJzZXF1ZW50bHkgdXNlZCBmb3IgZGF0YSB0cmFuc2Zlci4NCj4gPiANCj4gPiBBIHVz
+ZXJzcGFjZSBhcHBsaWNhdGlvbiBjYW4gdGhlbiB1c2UgdGhpcyBpbnRlcmZhY2UgdG8gc2hhcmUg
+RE1BQlVGDQo+ID4gb2JqZWN0cyBiZXR3ZWVuIHNldmVyYWwgaW50ZXJmYWNlcywgYWxsb3dpbmcg
+aXQgdG8gdHJhbnNmZXIgZGF0YSBpbg0KPiA+IGENCj4gPiB6ZXJvLWNvcHkgZmFzaGlvbiwgZm9y
+IGluc3RhbmNlIGJldHdlZW4gSUlPIGFuZCB0aGUgVVNCIHN0YWNrLg0KPiA+IA0KPiA+IFRoZSB1
+c2Vyc3BhY2UgYXBwbGljYXRpb24gY2FuIGFsc28gbWVtb3J5LW1hcCB0aGUgRE1BQlVGIG9iamVj
+dHMsDQo+ID4gYW5kDQo+ID4gYWNjZXNzIHRoZSBzYW1wbGUgZGF0YSBkaXJlY3RseS4gVGhlIGFk
+dmFudGFnZSBvZiBkb2luZyB0aGlzIHZzLg0KPiA+IHRoZQ0KPiA+IHJlYWQoKSBpbnRlcmZhY2Ug
+aXMgdGhhdCBpdCBhdm9pZHMgYW4gZXh0cmEgY29weSBvZiB0aGUgZGF0YQ0KPiA+IGJldHdlZW4g
+dGhlDQo+ID4ga2VybmVsIGFuZCB1c2Vyc3BhY2UuIFRoaXMgaXMgcGFydGljdWxhcmx5IHVzZXJm
+dWwgZm9yIGhpZ2gtc3BlZWQNCj4gPiBkZXZpY2VzIHdoaWNoIHByb2R1Y2Ugc2V2ZXJhbCBtZWdh
+Ynl0ZXMgb3IgZXZlbiBnaWdhYnl0ZXMgb2YgZGF0YQ0KPiA+IHBlcg0KPiA+IHNlY29uZC4NCj4g
+PiANCj4gPiBBcyBwYXJ0IG9mIHRoZSBpbnRlcmZhY2UsIDMgbmV3IElPQ1RMcyBoYXZlIGJlZW4g
+YWRkZWQ6DQo+ID4gDQo+ID4gSUlPX0JVRkZFUl9ETUFCVUZfQVRUQUNIX0lPQ1RMKGludCBmZCk6
+DQo+ID4gwqAgQXR0YWNoIHRoZSBETUFCVUYgb2JqZWN0IGlkZW50aWZpZWQgYnkgdGhlIGdpdmVu
+IGZpbGUgZGVzY3JpcHRvcg0KPiA+IHRvIHRoZQ0KPiA+IMKgIGJ1ZmZlci4NCj4gPiANCj4gPiBJ
+SU9fQlVGRkVSX0RNQUJVRl9ERVRBQ0hfSU9DVEwoaW50IGZkKToNCj4gPiDCoCBEZXRhY2ggdGhl
+IERNQUJVRiBvYmplY3QgaWRlbnRpZmllZCBieSB0aGUgZ2l2ZW4gZmlsZSBkZXNjcmlwdG9yDQo+
+ID4gZnJvbQ0KPiA+IMKgIHRoZSBidWZmZXIuIE5vdGUgdGhhdCBjbG9zaW5nIHRoZSBJSU8gYnVm
+ZmVyJ3MgZmlsZSBkZXNjcmlwdG9yDQo+ID4gd2lsbA0KPiA+IMKgIGF1dG9tYXRpY2FsbHkgZGV0
+YWNoIGFsbCBwcmV2aW91c2x5IGF0dGFjaGVkIERNQUJVRiBvYmplY3RzLg0KPiA+IA0KPiA+IElJ
+T19CVUZGRVJfRE1BQlVGX0VOUVVFVUVfSU9DVEwoc3RydWN0IGlpb19kbWFidWYgKik6DQo+ID4g
+wqAgUmVxdWVzdCBhIGRhdGEgdHJhbnNmZXIgdG8vZnJvbSB0aGUgZ2l2ZW4gRE1BQlVGIG9iamVj
+dC4gSXRzIGZpbGUNCj4gPiDCoCBkZXNjcmlwdG9yLCBhcyB3ZWxsIGFzIHRoZSB0cmFuc2ZlciBz
+aXplIGFuZCBmbGFncyBhcmUgcHJvdmlkZWQNCj4gPiBpbiB0aGUNCj4gPiDCoCAiaWlvX2RtYWJ1
+ZiIgc3RydWN0dXJlLg0KPiA+IA0KPiA+IFRoZXNlIHRocmVlIElPQ1RMcyBoYXZlIHRvIGJlIHBl
+cmZvcm1lZCBvbiB0aGUgSUlPIGJ1ZmZlcidzIGZpbGUNCj4gPiBkZXNjcmlwdG9yLCBvYnRhaW5l
+ZCB1c2luZyB0aGUgSUlPX0JVRkZFUl9HRVRfRkRfSU9DVEwoKSBpb2N0bC4NCj4gPiANCj4gPiBT
+aWduZWQtb2ZmLWJ5OiBQYXVsIENlcmN1ZWlsIDxwYXVsQGNyYXBvdWlsbG91Lm5ldD4NCj4gPiBT
+aWduZWQtb2ZmLWJ5OiBOdW5vIFNhIDxudW5vLnNhQGFuYWxvZy5jb20+DQo+ID4gDQo+ID4gLS0t
+DQo+ID4gdjI6IE9ubHkgYWxsb3cgdGhlIG5ldyBJT0NUTHMgb24gdGhlIGJ1ZmZlciBGRCBjcmVh
+dGVkIHdpdGgNCj4gPiDCoMKgwqDCoCBJSU9fQlVGRkVSX0dFVF9GRF9JT0NUTCgpLg0KPiA+IA0K
+PiA+IHYzOiAtIEdldCByaWQgb2YgdGhlIG9sZCBJT0NUTHMuIFRoZSBJSU8gc3Vic3lzdGVtIGRv
+ZXMgbm90IGNyZWF0ZQ0KPiA+IG9yDQo+ID4gwqDCoMKgwqAgbWFuYWdlIERNQUJVRnMgYW55bW9y
+ZSwgYW5kIG9ubHkgYXR0YWNoZXMvZGV0YWNoZXMgZXh0ZXJuYWxseQ0KPiA+IMKgwqDCoMKgIGNy
+ZWF0ZWQgRE1BQlVGcy4NCj4gPiDCoMKgwqDCoCAtIEFkZCBJSU9fQlVGRkVSX0RNQUJVRl9DWUNM
+SUMgdG8gdGhlIHN1cHBvcnRlZCBmbGFncy4NCj4gPiANCj4gPiB2NTogLSBVc2UgZGV2X2Vycigp
+IGluc3RlYWQgb2YgcHJfZXJyKCkNCj4gPiDCoMKgwqDCoCAtIElubGluZSB0b19paW9fZG1hX2Zl
+bmNlKCkNCj4gPiDCoMKgwqDCoCAtIEFkZCBjb21tZW50IHRvIGV4cGxhaW4gd2h5IHdlIHVucmVm
+IHR3aWNlIHdoZW4gZGV0YWNoaW5nDQo+ID4gZG1hYnVmDQo+ID4gwqDCoMKgwqAgLSBSZW1vdmUg
+VE9ETyBjb21tZW50LiBJdCBpcyBhY3R1YWxseSBzYWZlIHRvIGZyZWUgdGhlIGZpbGUncw0KPiA+
+IMKgwqDCoMKgwqDCoCBwcml2YXRlIGRhdGEgZXZlbiB3aGVuIHRyYW5zZmVycyBhcmUgc3RpbGwg
+cGVuZGluZyBiZWNhdXNlDQo+ID4gaXQNCj4gPiDCoMKgwqDCoMKgwqAgd29uJ3QgYmUgYWNjZXNz
+ZWQuDQo+ID4gwqDCoMKgwqAgLSBGaXggZG9jdW1lbnRhdGlvbiBvZiBuZXcgZmllbGRzIGluIHN0
+cnVjdA0KPiA+IGlpb19idWZmZXJfYWNjZXNzX2Z1bmNzDQo+ID4gwqDCoMKgwqAgLSBpaW9fZG1h
+X3Jlc3ZfbG9jaygpIGRvZXMgbm90IG5lZWQgdG8gYmUgZXhwb3J0ZWQsIG1ha2UgaXQNCj4gPiBz
+dGF0aWMNCj4gPiANCj4gPiB2NjogLSBSZW1vdmUgZGVhZCBjb2RlIGluIGlpb19kbWFfcmVzdl9s
+b2NrKCkNCj4gPiDCoMKgwqDCoCAtIEZpeCBub24tYmxvY2sgYWN0dWFsbHkgYmxvY2tpbmcNCj4g
+PiDCoMKgwqDCoCAtIENhY2hlIGRtYV9idWZfYXR0YWNobWVudCBpbnN0ZWFkIG9mIG1hcHBpbmcv
+dW5tYXBwaW5nIGl0IGZvcg0KPiA+IGV2ZXJ5DQo+ID4gwqDCoMKgwqDCoMKgIHRyYW5zZmVyDQo+
+ID4gwqDCoMKgwqAgLSBSZXR1cm4gLUVJTlZBTCBpbnN0ZWFkIG9mIElJT19JT0NUTF9VTkhBTkRM
+RUQgZm9yIHVua25vd24NCj4gPiBpb2N0bA0KPiA+IMKgwqDCoMKgIC0gTWFrZSAuYmxvY2tfZW5x
+dWV1ZSgpIGNhbGxiYWNrIHRha2UgYSBkbWFfZmVuY2UgcG9pbnRlciwNCj4gPiB3aGljaA0KPiA+
+IMKgwqDCoMKgwqDCoCB3aWxsIGJlIHBhc3NlZCB0byBpaW9fYnVmZmVyX3NpZ25hbF9kbWFidWZf
+ZG9uZSgpIGluc3RlYWQgb2YNCj4gPiB0aGUNCj4gPiDCoMKgwqDCoMKgwqAgZG1hX2J1Zl9hdHRh
+Y2htZW50OyBhbmQgcmVtb3ZlIHRoZSBiYWNrcG9pbnRlciBmcm9tIHRoZSBwcml2DQo+ID4gwqDC
+oMKgwqDCoMKgIHN0cnVjdHVyZSB0byB0aGUgZG1hX2ZlbmNlLg0KPiA+IMKgwqDCoMKgIC0gVXNl
+IGRtYV9mZW5jZV9iZWdpbi9lbmRfc2lnbmFsbGluZyBpbiB0aGUgZG1hX2ZlbmNlIGNyaXRpY2Fs
+DQo+ID4gwqDCoMKgwqDCoMKgIHNlY3Rpb25zDQo+ID4gwqDCoMKgwqAgLSBVbnJlZiBkbWFfZmVu
+Y2UgYW5kIGRtYV9idWZfYXR0YWNobWVudCBpbiB3b3JrZXIsIGJlY2F1c2UNCj4gPiB0aGV5DQo+
+ID4gwqDCoMKgwqDCoMKgIG1pZ2h0IHRyeSB0byBsb2NrIHRoZSBkbWFfcmVzdiwgd2hpY2ggd291
+bGQgZGVhZGxvY2suDQo+ID4gwqDCoMKgwqAgLSBBZGQgYnVmZmVyIG9wcyB0byBsb2NrL3VubG9j
+ayB0aGUgcXVldWUuIFRoaXMgaXMgbW90aXZhdGVkDQo+ID4gYnkgdGhlDQo+ID4gwqDCoMKgwqDC
+oMKgIGZhY3QgdGhhdCBvbmNlIHRoZSBkbWFfZmVuY2UgaGFzIGJlZW4gaW5zdGFsbGVkLCB3ZSBj
+YW5ub3QNCj4gPiBsb2NrDQo+ID4gwqDCoMKgwqDCoMKgIGFueXRoaW5nIGFueW1vcmUgLSBzbyB0
+aGUgcXVldWUgbXVzdCBiZSBsb2NrZWQgYmVmb3JlIHRoZQ0KPiA+IMKgwqDCoMKgwqDCoCBkbWFf
+ZmVuY2UgaXMgaW5zdGFsbGVkLg0KPiA+IMKgwqDCoMKgIC0gVXNlICdsb25nIHJldGwnIHZhcmlh
+YmxlIHRvIGhhbmRsZSB0aGUgcmV0dXJuIHZhbHVlIG9mDQo+ID4gwqDCoMKgwqDCoMKgIGRtYV9y
+ZXN2X3dhaXRfdGltZW91dCgpDQo+ID4gwqDCoMKgwqAgLSBQcm90ZWN0IGRtYWJ1ZnMgbGlzdCBh
+Y2Nlc3Mgd2l0aCBhIG11dGV4DQo+ID4gwqDCoMKgwqAgLSBSZXdvcmsgaWlvX2J1ZmZlcl9maW5k
+X2F0dGFjaG1lbnQoKSB0byB1c2UgdGhlIGludGVybmFsDQo+ID4gZG1hYnVmcw0KPiA+IMKgwqDC
+oMKgwqDCoCBsaXN0LCBpbnN0ZWFkIG9mIG1lc3Npbmcgd2l0aCBkbWFidWZzIHByaXZhdGUgZGF0
+YS4NCj4gPiDCoMKgwqDCoCAtIEFkZCBhbiBhdG9taWNhbGx5LWluY3JlYXNpbmcgc2VxdWVuY2Ug
+bnVtYmVyIGZvciBmZW5jZXMNCj4gPiANCj4gPiB2OMKgIC0gRml4IHN3YXBwZWQgZmVuY2UgZGly
+ZWN0aW9uDQo+ID4gwqDCoMKgwqAgLSBTaW1wbGlmeSBmZW5jZSB3YWl0IG1lY2hhbmlzbQ0KPiA+
+IMKgwqDCoMKgIC0gUmVtb3ZlICJCdWZmZXIgY2xvc2VkIHdpdGggYWN0aXZlIHRyYW5zZmVycyIg
+cHJpbnQsIGFzIGl0DQo+ID4gd2FzIGRlYWQNCj4gPiDCoMKgwqDCoMKgwqAgY29kZQ0KPiA+IMKg
+wqDCoMKgIC0gVW4tZXhwb3J0IGlpb19idWZmZXJfZG1hYnVmX3tnZXQscHV0fS4gVGhleSBhcmUg
+bm90IHVzZWQNCj4gPiBhbnl3aGVyZQ0KPiA+IMKgwqDCoMKgwqDCoCBlbHNlIHNvIHRoZXkgY2Fu
+IGV2ZW4gYmUgc3RhdGljLg0KPiA+IMKgwqDCoMKgIC0gUHJldmVudCBhdHRhY2hpbmcgYWxyZWFk
+eS1hdHRhY2hlZCBETUFCVUZzDQo+ID4gDQo+ID4gdjk6IC0gU2VsZWN0IERNQV9TSEFSRURfQlVG
+RkVSIGluIEtjb25maWcNCj4gPiDCoMKgwqDCoCAtIFJlbW92ZSB1c2VsZXNzIGZvcndhcmQgZGVj
+bGFyYXRpb24gb2YgJ2lpb19kbWFfZmVuY2UnDQo+ID4gwqDCoMKgwqAgLSBJbXBvcnQgRE1BLUJV
+RiBuYW1lc3BhY2UNCj4gPiDCoMKgwqDCoCAtIEFkZCBtaXNzaW5nIF9fdXNlciB0YWcgdG8gaWlv
+X2J1ZmZlcl9kZXRhY2hfZG1hYnVmKCkNCj4gPiBhcmd1bWVudA0KPiA+IC0tLQ0KPiA+IMKgIGRy
+aXZlcnMvaWlvL0tjb25maWfCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgIHzCoMKgIDEgKw0K
+PiA+IMKgIGRyaXZlcnMvaWlvL2luZHVzdHJpYWxpby1idWZmZXIuYyB8IDQ2Mg0KPiA+ICsrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKw0KPiA+IMKgIGluY2x1ZGUvbGludXgvaWlvL2J1ZmZl
+cl9pbXBsLmjCoMKgIHzCoCAzMCArKw0KPiA+IMKgIGluY2x1ZGUvdWFwaS9saW51eC9paW8vYnVm
+ZmVyLmjCoMKgIHzCoCAyMiArKw0KPiA+IMKgIDQgZmlsZXMgY2hhbmdlZCwgNTE1IGluc2VydGlv
+bnMoKykNCj4gPiANCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9paW8vS2NvbmZpZyBiL2RyaXZl
+cnMvaWlvL0tjb25maWcNCj4gPiBpbmRleCA5YzM1MWZmYzdiZWQuLjY2MTEyN2FlZDJmOSAxMDA2
+NDQNCj4gPiAtLS0gYS9kcml2ZXJzL2lpby9LY29uZmlnDQo+ID4gKysrIGIvZHJpdmVycy9paW8v
+S2NvbmZpZw0KPiA+IEBAIC0xNCw2ICsxNCw3IEBAIGlmIElJTw0KPiA+IMKgIA0KPiA+IMKgIGNv
+bmZpZyBJSU9fQlVGRkVSDQo+ID4gwqDCoAlib29sICJFbmFibGUgYnVmZmVyIHN1cHBvcnQgd2l0
+aGluIElJTyINCj4gPiArCXNlbGVjdCBETUFfU0hBUkVEX0JVRkZFUg0KPiA+IMKgwqAJaGVscA0K
+PiA+IMKgwqAJwqAgUHJvdmlkZSBjb3JlIHN1cHBvcnQgZm9yIHZhcmlvdXMgYnVmZmVyIGJhc2Vk
+IGRhdGENCj4gPiDCoMKgCcKgIGFjcXVpc2l0aW9uIG1ldGhvZHMuDQo+ID4gZGlmZiAtLWdpdCBh
+L2RyaXZlcnMvaWlvL2luZHVzdHJpYWxpby1idWZmZXIuYw0KPiA+IGIvZHJpdmVycy9paW8vaW5k
+dXN0cmlhbGlvLWJ1ZmZlci5jDQo+ID4gaW5kZXggYjU4MWE3ZTgwNTY2Li5hOTg3NjU0ZjgyZmMg
+MTAwNjQ0DQo+ID4gLS0tIGEvZHJpdmVycy9paW8vaW5kdXN0cmlhbGlvLWJ1ZmZlci5jDQo+ID4g
+KysrIGIvZHJpdmVycy9paW8vaW5kdXN0cmlhbGlvLWJ1ZmZlci5jDQo+ID4gQEAgLTksMTQgKzks
+MTkgQEANCj4gPiDCoMKgICogLSBCZXR0ZXIgbWVtb3J5IGFsbG9jYXRpb24gdGVjaG5pcXVlcz8N
+Cj4gPiDCoMKgICogLSBBbHRlcm5hdGl2ZSBhY2Nlc3MgdGVjaG5pcXVlcz8NCj4gPiDCoMKgICov
+DQo+ID4gKyNpbmNsdWRlIDxsaW51eC9hdG9taWMuaD4NCj4gPiDCoCAjaW5jbHVkZSA8bGludXgv
+YW5vbl9pbm9kZXMuaD4NCj4gPiDCoCAjaW5jbHVkZSA8bGludXgva2VybmVsLmg+DQo+ID4gwqAg
+I2luY2x1ZGUgPGxpbnV4L2V4cG9ydC5oPg0KPiA+IMKgICNpbmNsdWRlIDxsaW51eC9kZXZpY2Uu
+aD4NCj4gPiArI2luY2x1ZGUgPGxpbnV4L2RtYS1idWYuaD4NCj4gPiArI2luY2x1ZGUgPGxpbnV4
+L2RtYS1mZW5jZS5oPg0KPiA+ICsjaW5jbHVkZSA8bGludXgvZG1hLXJlc3YuaD4NCj4gPiDCoCAj
+aW5jbHVkZSA8bGludXgvZmlsZS5oPg0KPiA+IMKgICNpbmNsdWRlIDxsaW51eC9mcy5oPg0KPiA+
+IMKgICNpbmNsdWRlIDxsaW51eC9jZGV2Lmg+DQo+ID4gwqAgI2luY2x1ZGUgPGxpbnV4L3NsYWIu
+aD4NCj4gPiArI2luY2x1ZGUgPGxpbnV4L21tLmg+DQo+ID4gwqAgI2luY2x1ZGUgPGxpbnV4L3Bv
+bGwuaD4NCj4gPiDCoCAjaW5jbHVkZSA8bGludXgvc2NoZWQvc2lnbmFsLmg+DQo+ID4gwqAgDQo+
+ID4gQEAgLTI4LDYgKzMzLDMyIEBADQo+ID4gwqAgI2luY2x1ZGUgPGxpbnV4L2lpby9idWZmZXIu
+aD4NCj4gPiDCoCAjaW5jbHVkZSA8bGludXgvaWlvL2J1ZmZlcl9pbXBsLmg+DQo+ID4gwqAgDQo+
+ID4gKyNkZWZpbmUgRE1BQlVGX0VOUVVFVUVfVElNRU9VVF9NUyA1MDAwDQo+ID4gKw0KPiA+ICtN
+T0RVTEVfSU1QT1JUX05TKERNQV9CVUYpOw0KPiA+ICsNCj4gPiArc3RydWN0IGlpb19kbWFidWZf
+cHJpdiB7DQo+ID4gKwlzdHJ1Y3QgbGlzdF9oZWFkIGVudHJ5Ow0KPiA+ICsJc3RydWN0IGtyZWYg
+cmVmOw0KPiA+ICsNCj4gPiArCXN0cnVjdCBpaW9fYnVmZmVyICpidWZmZXI7DQo+ID4gKwlzdHJ1
+Y3QgaWlvX2RtYV9idWZmZXJfYmxvY2sgKmJsb2NrOw0KPiA+ICsNCj4gPiArCXU2NCBjb250ZXh0
+Ow0KPiA+ICsJc3BpbmxvY2tfdCBsb2NrOw0KPiA+ICsNCj4gPiArCXN0cnVjdCBkbWFfYnVmX2F0
+dGFjaG1lbnQgKmF0dGFjaDsNCj4gPiArCXN0cnVjdCBzZ190YWJsZSAqc2d0Ow0KPiA+ICsJZW51
+bSBkbWFfZGF0YV9kaXJlY3Rpb24gZGlyOw0KPiA+ICsJYXRvbWljX3Qgc2Vxbm87DQo+ID4gK307
+DQo+ID4gKw0KPiA+ICtzdHJ1Y3QgaWlvX2RtYV9mZW5jZSB7DQo+ID4gKwlzdHJ1Y3QgZG1hX2Zl
+bmNlIGJhc2U7DQo+ID4gKwlzdHJ1Y3QgaWlvX2RtYWJ1Zl9wcml2ICpwcml2Ow0KPiA+ICsJc3Ry
+dWN0IHdvcmtfc3RydWN0IHdvcms7DQo+ID4gK307DQo+ID4gKw0KPiA+IMKgIHN0YXRpYyBjb25z
+dCBjaGFyICogY29uc3QgaWlvX2VuZGlhbl9wcmVmaXhbXSA9IHsNCj4gPiDCoMKgCVtJSU9fQkVd
+ID0gImJlIiwNCj4gPiDCoMKgCVtJSU9fTEVdID0gImxlIiwNCj4gPiBAQCAtMzMyLDYgKzM2Myw4
+IEBAIHZvaWQgaWlvX2J1ZmZlcl9pbml0KHN0cnVjdCBpaW9fYnVmZmVyICpidWZmZXIpDQo+ID4g
+wqAgew0KPiA+IMKgwqAJSU5JVF9MSVNUX0hFQUQoJmJ1ZmZlci0+ZGVtdXhfbGlzdCk7DQo+ID4g
+wqDCoAlJTklUX0xJU1RfSEVBRCgmYnVmZmVyLT5idWZmZXJfbGlzdCk7DQo+ID4gKwlJTklUX0xJ
+U1RfSEVBRCgmYnVmZmVyLT5kbWFidWZzKTsNCj4gPiArCW11dGV4X2luaXQoJmJ1ZmZlci0+ZG1h
+YnVmc19tdXRleCk7DQo+ID4gwqDCoAlpbml0X3dhaXRxdWV1ZV9oZWFkKCZidWZmZXItPnBvbGxx
+KTsNCj4gPiDCoMKgCWtyZWZfaW5pdCgmYnVmZmVyLT5yZWYpOw0KPiA+IMKgwqAJaWYgKCFidWZm
+ZXItPndhdGVybWFyaykNCj4gPiBAQCAtMTUxOSwxNCArMTU1Miw1NyBAQCBzdGF0aWMgdm9pZA0K
+PiA+IGlpb19idWZmZXJfdW5yZWdpc3Rlcl9sZWdhY3lfc3lzZnNfZ3JvdXBzKHN0cnVjdCBpaW9f
+ZGV2DQo+ID4gKmluZGlvX2RldikNCj4gPiDCoMKgCWtmcmVlKGlpb19kZXZfb3BhcXVlLT5sZWdh
+Y3lfc2Nhbl9lbF9ncm91cC5hdHRycyk7DQo+ID4gwqAgfQ0KPiA+IMKgIA0KPiA+ICtzdGF0aWMg
+dm9pZCBpaW9fYnVmZmVyX2RtYWJ1Zl9yZWxlYXNlKHN0cnVjdCBrcmVmICpyZWYpDQo+ID4gK3sN
+Cj4gPiArCXN0cnVjdCBpaW9fZG1hYnVmX3ByaXYgKnByaXYgPSBjb250YWluZXJfb2YocmVmLCBz
+dHJ1Y3QNCj4gPiBpaW9fZG1hYnVmX3ByaXYsIHJlZik7DQo+ID4gKwlzdHJ1Y3QgZG1hX2J1Zl9h
+dHRhY2htZW50ICphdHRhY2ggPSBwcml2LT5hdHRhY2g7DQo+ID4gKwlzdHJ1Y3QgaWlvX2J1ZmZl
+ciAqYnVmZmVyID0gcHJpdi0+YnVmZmVyOw0KPiA+ICsJc3RydWN0IGRtYV9idWYgKmRtYWJ1ZiA9
+IGF0dGFjaC0+ZG1hYnVmOw0KPiA+ICsNCj4gPiArCWRtYV9yZXN2X2xvY2soZG1hYnVmLT5yZXN2
+LCBOVUxMKTsNCj4gPiArCWRtYV9idWZfdW5tYXBfYXR0YWNobWVudChhdHRhY2gsIHByaXYtPnNn
+dCwgcHJpdi0+ZGlyKTsNCj4gPiArCWRtYV9yZXN2X3VubG9jayhkbWFidWYtPnJlc3YpOw0KPiA+
+ICsNCj4gPiArCWJ1ZmZlci0+YWNjZXNzLT5kZXRhY2hfZG1hYnVmKGJ1ZmZlciwgcHJpdi0+Ymxv
+Y2spOw0KPiA+ICsNCj4gPiArCWRtYV9idWZfZGV0YWNoKGF0dGFjaC0+ZG1hYnVmLCBhdHRhY2gp
+Ow0KPiA+ICsJZG1hX2J1Zl9wdXQoZG1hYnVmKTsNCj4gPiArCWtmcmVlKHByaXYpOw0KPiA+ICt9
+DQo+ID4gKw0KPiA+ICtzdGF0aWMgdm9pZCBpaW9fYnVmZmVyX2RtYWJ1Zl9nZXQoc3RydWN0IGRt
+YV9idWZfYXR0YWNobWVudA0KPiA+ICphdHRhY2gpDQo+ID4gK3sNCj4gPiArCXN0cnVjdCBpaW9f
+ZG1hYnVmX3ByaXYgKnByaXYgPSBhdHRhY2gtPmltcG9ydGVyX3ByaXY7DQo+ID4gKw0KPiA+ICsJ
+a3JlZl9nZXQoJnByaXYtPnJlZik7DQo+ID4gK30NCj4gPiArDQo+ID4gK3N0YXRpYyB2b2lkIGlp
+b19idWZmZXJfZG1hYnVmX3B1dChzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50DQo+ID4gKmF0dGFj
+aCkNCj4gPiArew0KPiA+ICsJc3RydWN0IGlpb19kbWFidWZfcHJpdiAqcHJpdiA9IGF0dGFjaC0+
+aW1wb3J0ZXJfcHJpdjsNCj4gPiArDQo+ID4gKwlrcmVmX3B1dCgmcHJpdi0+cmVmLCBpaW9fYnVm
+ZmVyX2RtYWJ1Zl9yZWxlYXNlKTsNCj4gPiArfQ0KPiA+ICsNCj4gPiDCoCBzdGF0aWMgaW50IGlp
+b19idWZmZXJfY2hyZGV2X3JlbGVhc2Uoc3RydWN0IGlub2RlICppbm9kZSwgc3RydWN0DQo+ID4g
+ZmlsZSAqZmlsZXApDQo+ID4gwqAgew0KPiA+IMKgwqAJc3RydWN0IGlpb19kZXZfYnVmZmVyX3Bh
+aXIgKmliID0gZmlsZXAtPnByaXZhdGVfZGF0YTsNCj4gPiDCoMKgCXN0cnVjdCBpaW9fZGV2ICpp
+bmRpb19kZXYgPSBpYi0+aW5kaW9fZGV2Ow0KPiA+IMKgwqAJc3RydWN0IGlpb19idWZmZXIgKmJ1
+ZmZlciA9IGliLT5idWZmZXI7DQo+ID4gKwlzdHJ1Y3QgaWlvX2RtYWJ1Zl9wcml2ICpwcml2LCAq
+dG1wOw0KPiA+IMKgIA0KPiA+IMKgwqAJd2FrZV91cCgmYnVmZmVyLT5wb2xscSk7DQo+ID4gwqAg
+DQo+ID4gKwltdXRleF9sb2NrKCZidWZmZXItPmRtYWJ1ZnNfbXV0ZXgpOw0KPiA+ICsNCj4gPiAr
+CS8qIENsb3NlIGFsbCBhdHRhY2hlZCBETUFCVUZzICovDQo+ID4gKwlsaXN0X2Zvcl9lYWNoX2Vu
+dHJ5X3NhZmUocHJpdiwgdG1wLCAmYnVmZmVyLT5kbWFidWZzLA0KPiA+IGVudHJ5KSB7DQo+ID4g
+KwkJbGlzdF9kZWxfaW5pdCgmcHJpdi0+ZW50cnkpOw0KPiA+ICsJCWlpb19idWZmZXJfZG1hYnVm
+X3B1dChwcml2LT5hdHRhY2gpOw0KPiA+ICsJfQ0KPiA+ICsNCj4gPiArCW11dGV4X3VubG9jaygm
+YnVmZmVyLT5kbWFidWZzX211dGV4KTsNCj4gPiArDQo+ID4gwqDCoAlrZnJlZShpYik7DQo+ID4g
+wqDCoAljbGVhcl9iaXQoSUlPX0JVU1lfQklUX1BPUywgJmJ1ZmZlci0+ZmxhZ3MpOw0KPiA+IMKg
+wqAJaWlvX2RldmljZV9wdXQoaW5kaW9fZGV2KTsNCj4gPiBAQCAtMTUzNCwxMSArMTYxMCwzOTYg
+QEAgc3RhdGljIGludA0KPiA+IGlpb19idWZmZXJfY2hyZGV2X3JlbGVhc2Uoc3RydWN0IGlub2Rl
+ICppbm9kZSwgc3RydWN0IGZpbGUgKmZpbGVwKQ0KPiA+IMKgwqAJcmV0dXJuIDA7DQo+ID4gwqAg
+fQ0KPiA+IMKgIA0KPiA+ICtzdGF0aWMgaW50IGlpb19kbWFfcmVzdl9sb2NrKHN0cnVjdCBkbWFf
+YnVmICpkbWFidWYsIGJvb2wNCj4gPiBub25ibG9jaykNCj4gPiArew0KPiA+ICsJaWYgKCFub25i
+bG9jaykNCj4gPiArCQlyZXR1cm4gZG1hX3Jlc3ZfbG9ja19pbnRlcnJ1cHRpYmxlKGRtYWJ1Zi0+
+cmVzdiwNCj4gPiBOVUxMKTsNCj4gPiArDQo+ID4gKwlpZiAoIWRtYV9yZXN2X3RyeWxvY2soZG1h
+YnVmLT5yZXN2KSkNCj4gPiArCQlyZXR1cm4gLUVCVVNZOw0KPiA+ICsNCj4gPiArCXJldHVybiAw
+Ow0KPiA+ICt9DQo+ID4gKw0KPiA+ICtzdGF0aWMgc3RydWN0IGRtYV9idWZfYXR0YWNobWVudCAq
+DQo+ID4gK2lpb19idWZmZXJfZmluZF9hdHRhY2htZW50KHN0cnVjdCBpaW9fZGV2X2J1ZmZlcl9w
+YWlyICppYiwNCj4gPiArCQkJwqDCoCBzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmLCBib29sIG5vbmJs
+b2NrKQ0KPiA+ICt7DQo+ID4gKwlzdHJ1Y3QgZGV2aWNlICpkZXYgPSBpYi0+aW5kaW9fZGV2LT5k
+ZXYucGFyZW50Ow0KPiA+ICsJc3RydWN0IGlpb19idWZmZXIgKmJ1ZmZlciA9IGliLT5idWZmZXI7
+DQo+ID4gKwlzdHJ1Y3QgZG1hX2J1Zl9hdHRhY2htZW50ICphdHRhY2ggPSBOVUxMOw0KPiA+ICsJ
+c3RydWN0IGlpb19kbWFidWZfcHJpdiAqcHJpdjsNCj4gPiArDQo+ID4gKwltdXRleF9sb2NrKCZi
+dWZmZXItPmRtYWJ1ZnNfbXV0ZXgpOw0KPiA+ICsNCj4gPiArCWxpc3RfZm9yX2VhY2hfZW50cnko
+cHJpdiwgJmJ1ZmZlci0+ZG1hYnVmcywgZW50cnkpIHsNCj4gPiArCQlpZiAocHJpdi0+YXR0YWNo
+LT5kZXYgPT0gZGV2DQo+ID4gKwkJwqDCoMKgICYmIHByaXYtPmF0dGFjaC0+ZG1hYnVmID09IGRt
+YWJ1Zikgew0KPiA+ICsJCQlhdHRhY2ggPSBwcml2LT5hdHRhY2g7DQo+ID4gKwkJCWJyZWFrOw0K
+PiA+ICsJCX0NCj4gPiArCX0NCj4gPiArDQo+ID4gKwlpZiAoYXR0YWNoKQ0KPiA+ICsJCWlpb19i
+dWZmZXJfZG1hYnVmX2dldChhdHRhY2gpOw0KPiA+ICsNCj4gPiArCW11dGV4X3VubG9jaygmYnVm
+ZmVyLT5kbWFidWZzX211dGV4KTsNCj4gPiArDQo+ID4gKwlyZXR1cm4gYXR0YWNoID86IEVSUl9Q
+VFIoLUVQRVJNKTsNCj4gPiArfQ0KPiA+ICsNCj4gPiArc3RhdGljIGludCBpaW9fYnVmZmVyX2F0
+dGFjaF9kbWFidWYoc3RydWN0IGlpb19kZXZfYnVmZmVyX3BhaXINCj4gPiAqaWIsDQo+ID4gKwkJ
+CQnCoMKgwqAgaW50IF9fdXNlciAqdXNlcl9mZCwgYm9vbA0KPiA+IG5vbmJsb2NrKQ0KPiA+ICt7
+DQo+ID4gKwlzdHJ1Y3QgaWlvX2RldiAqaW5kaW9fZGV2ID0gaWItPmluZGlvX2RldjsNCj4gPiAr
+CXN0cnVjdCBpaW9fYnVmZmVyICpidWZmZXIgPSBpYi0+YnVmZmVyOw0KPiA+ICsJc3RydWN0IGRt
+YV9idWZfYXR0YWNobWVudCAqYXR0YWNoOw0KPiA+ICsJc3RydWN0IGlpb19kbWFidWZfcHJpdiAq
+cHJpdiwgKmVhY2g7DQo+ID4gKwlzdHJ1Y3QgZG1hX2J1ZiAqZG1hYnVmOw0KPiA+ICsJaW50IGVy
+ciwgZmQ7DQo+ID4gKw0KPiA+ICsJaWYgKCFidWZmZXItPmFjY2Vzcy0+YXR0YWNoX2RtYWJ1Zg0K
+PiA+ICsJwqDCoMKgIHx8ICFidWZmZXItPmFjY2Vzcy0+ZGV0YWNoX2RtYWJ1Zg0KPiA+ICsJwqDC
+oMKgIHx8ICFidWZmZXItPmFjY2Vzcy0+ZW5xdWV1ZV9kbWFidWYpDQo+ID4gKwkJcmV0dXJuIC1F
+UEVSTTsNCj4gPiArDQo+ID4gKwlpZiAoY29weV9mcm9tX3VzZXIoJmZkLCB1c2VyX2ZkLCBzaXpl
+b2YoZmQpKSkNCj4gPiArCQlyZXR1cm4gLUVGQVVMVDsNCj4gPiArDQo+ID4gKwlwcml2ID0ga3ph
+bGxvYyhzaXplb2YoKnByaXYpLCBHRlBfS0VSTkVMKTsNCj4gPiArCWlmICghcHJpdikNCj4gPiAr
+CQlyZXR1cm4gLUVOT01FTTsNCj4gPiArDQo+ID4gKwlzcGluX2xvY2tfaW5pdCgmcHJpdi0+bG9j
+ayk7DQo+ID4gKwlwcml2LT5jb250ZXh0ID0gZG1hX2ZlbmNlX2NvbnRleHRfYWxsb2MoMSk7DQo+
+ID4gKw0KPiA+ICsJZG1hYnVmID0gZG1hX2J1Zl9nZXQoZmQpOw0KPiA+ICsJaWYgKElTX0VSUihk
+bWFidWYpKSB7DQo+ID4gKwkJZXJyID0gUFRSX0VSUihkbWFidWYpOw0KPiA+ICsJCWdvdG8gZXJy
+X2ZyZWVfcHJpdjsNCj4gPiArCX0NCj4gPiArDQo+ID4gKwlhdHRhY2ggPSBkbWFfYnVmX2F0dGFj
+aChkbWFidWYsIGluZGlvX2Rldi0+ZGV2LnBhcmVudCk7DQo+ID4gKwlpZiAoSVNfRVJSKGF0dGFj
+aCkpIHsNCj4gPiArCQllcnIgPSBQVFJfRVJSKGF0dGFjaCk7DQo+ID4gKwkJZ290byBlcnJfZG1h
+YnVmX3B1dDsNCj4gPiArCX0NCj4gPiArDQo+ID4gKwllcnIgPSBpaW9fZG1hX3Jlc3ZfbG9jayhk
+bWFidWYsIG5vbmJsb2NrKTsNCj4gPiArCWlmIChlcnIpDQo+ID4gKwkJZ290byBlcnJfZG1hYnVm
+X2RldGFjaDsNCj4gPiArDQo+ID4gKwlwcml2LT5kaXIgPSBidWZmZXItPmRpcmVjdGlvbiA9PSBJ
+SU9fQlVGRkVSX0RJUkVDVElPTl9JTg0KPiA+ICsJCT8gRE1BX0ZST01fREVWSUNFIDogRE1BX1RP
+X0RFVklDRTsNCj4gPiArDQo+ID4gKwlwcml2LT5zZ3QgPSBkbWFfYnVmX21hcF9hdHRhY2htZW50
+KGF0dGFjaCwgcHJpdi0+ZGlyKTsNCj4gDQo+IFBhcnQgb2YgdGhlIGZ1bmRhbWVudGFsIGRlc2ln
+biBvZiBETUFCVUYgaXMgdGhlIGFiaWxpdHkgZm9yIGFsbA0KPiB1c2VycyBvZiBhIGJ1ZmZlciB0
+byBhdHRhY2ggdG8gdGhlIGJ1ZmZlciBiZWZvcmUgYW55IHVzZXIgbWFwcyB0aGF0DQo+IGJ1ZmZl
+ci4gVGhpcyBhbGxvd3MgYW4gZXhwb3J0ZXIgdG8gZG8gY29uc3RyYWludCBzb2x2aW5nIGJhc2Vk
+DQo+IG9uIGFsbCB0aGUgYXR0YWNoZWQgYnVmZmVycyBhdCBtYXAgdGltZSB0byBzZWxlY3QgdGhl
+IGJlc3QgYmFja2luZw0KPiBtZW1vcnkuDQo+IA0KPiBJIGtub3cgbm9uZSBvZiB0aGUgZXhwb3J0
+ZXJzIGRvIHRoYXQgcmlnaHQgbm93LCBwcm9iYWJseSBkdWUgdG8NCj4gbW9zdCBvZiB0aGUgaW1w
+b3J0ZXJzIGRvaW5nIHdoYXQgeW91IGRvIGhlcmU6IGF0dGFjaCB0aGVuIGltbWVkaWF0ZWx5DQo+
+IG1hcC4gVGhpcyBwcmV2ZW50cyB0aGUgc3BsaXQgYmV0d2VlbiBhdHRhY2ggYW5kIG1hcCBmcm9t
+IGJlaW5nDQo+IHVzZWZ1bC4NCj4gDQo+IEknZCByZWNvbW1lbmQgb25seSBkb2luZyB0aGUgZG1h
+X2J1Zl9tYXBfYXR0YWNobWVudCgpIGxhdGVyIHdoZW4geW91DQo+IHVzZSB0aGUgYnVmZmVyLCBt
+YXliZSBwYXJ0IG9mIGVucXVldWVfZG1hYnVmKCkgc3RlcCBiZWxvdy4gVGhlbg0KPiB1bm1hcCgp
+DQo+IGl0IGFmdGVyIHlvdSBhcmUgZG9uZSB3aXRoIGl0LCBub3Qgb25seSB3aGVuIGRldGFjaGlu
+Zy4NCj4gDQo+IEFzIHRoaXMgY2hhbmdlIHdpbGwgbm90IGFmZmVjdCB0aGUgVUFQSSAod2hpY2gg
+b25seSBkZWFscyB3aXRoDQo+ICJhdHRhY2giIGlvY3RsKSwgdGhlbiB0aGlzIGNvbW1lbnQgc2hv
+dWxkIG5vdCBiZSBzZWVuIGFzIGEgYmxvY2tlcg0KPiBmb3IgdGFraW5nIHRoaXMgc2VyaWVzLiBX
+ZSBzaG91bGQgYmUgYWJsZSB0byBtYWtlIHRoaXMgY2hhbmdlIGxhdGVyLA0KPiBidXQganVzdCBz
+b21ldGhpbmcgdG8gdGhpbmsgYWJvdXQuDQoNCkJvdGggdGhlIGRtYS1oZWFwIGltcGxlbWVudGF0
+aW9ucyBhbmQgdWRtYWJ1ZiB3aWxsIHN5bmMvZmx1c2ggdGhlIENQVQ0KY2FjaGUgaW4gdGhlaXIg
+bWFwL3VubWFwIGNhbGxiYWNrcyAoYXMgdGhleSBjYWxsIGRtYV97dW59bWFwX3NndGFibGUoKQ0K
+d2l0aCBhdHRycyA9PSAwKS4gSW4gbXkgY2FzZSBub3Qgb25seSBpdCBpcyB1bm5lY2Vzc2FyeSwg
+aXQgYWxzbw0KZGVzdHJveXMgcGVyZm9ybWFuY2UsIGVzcGVjaWFsbHkgd2l0aCBiaWcgRE1BQlVG
+cyBiYWNrZWQgYnkgc21hbGwgcGFnZXMNCmFzIHRoZXknbGwgYmUgc3luYydkIG9uZSBieSBvbmUu
+DQoNCkZvciB0aGF0IHJlYXNvbiAoYXMgd2VsbCBhcyBjb252ZW5pZW5jZSkgSSdtIGNhY2hpbmcg
+dGhlIGF0dGFjaG1lbnQuDQoNCj4gQW5kcmV3DQoNCkNoZWVycywNCi1QYXVsDQoNCj4gDQo+ID4g
+KwlpZiAoSVNfRVJSKHByaXYtPnNndCkpIHsNCj4gPiArCQllcnIgPSBQVFJfRVJSKHByaXYtPnNn
+dCk7DQo+ID4gKwkJZGV2X2VycigmaW5kaW9fZGV2LT5kZXYsICJVbmFibGUgdG8gbWFwDQo+ID4g
+YXR0YWNobWVudDogJWRcbiIsIGVycik7DQo+ID4gKwkJZ290byBlcnJfcmVzdl91bmxvY2s7DQo+
+ID4gKwl9DQo+ID4gKw0KPiA+ICsJa3JlZl9pbml0KCZwcml2LT5yZWYpOw0KPiA+ICsJcHJpdi0+
+YnVmZmVyID0gYnVmZmVyOw0KPiA+ICsJcHJpdi0+YXR0YWNoID0gYXR0YWNoOw0KPiA+ICsJYXR0
+YWNoLT5pbXBvcnRlcl9wcml2ID0gcHJpdjsNCj4gPiArDQo+ID4gKwlwcml2LT5ibG9jayA9IGJ1
+ZmZlci0+YWNjZXNzLT5hdHRhY2hfZG1hYnVmKGJ1ZmZlciwNCj4gPiBhdHRhY2gpOw0KPiA+ICsJ
+aWYgKElTX0VSUihwcml2LT5ibG9jaykpIHsNCj4gPiArCQllcnIgPSBQVFJfRVJSKHByaXYtPmJs
+b2NrKTsNCj4gPiArCQlnb3RvIGVycl9kbWFidWZfdW5tYXBfYXR0YWNobWVudDsNCj4gPiArCX0N
+Cj4gPiArDQo+ID4gKwlkbWFfcmVzdl91bmxvY2soZG1hYnVmLT5yZXN2KTsNCj4gPiArDQo+ID4g
+KwltdXRleF9sb2NrKCZidWZmZXItPmRtYWJ1ZnNfbXV0ZXgpOw0KPiA+ICsNCj4gPiArCS8qDQo+
+ID4gKwkgKiBDaGVjayB3aGV0aGVyIHdlIGFscmVhZHkgaGF2ZSBhbiBhdHRhY2htZW50IGZvciB0
+aGlzDQo+ID4gZHJpdmVyL0RNQUJVRg0KPiA+ICsJICogY29tYm8uIElmIHdlIGRvLCByZWZ1c2Ug
+dG8gYXR0YWNoLg0KPiA+ICsJICovDQo+ID4gKwlsaXN0X2Zvcl9lYWNoX2VudHJ5KGVhY2gsICZi
+dWZmZXItPmRtYWJ1ZnMsIGVudHJ5KSB7DQo+ID4gKwkJaWYgKGVhY2gtPmF0dGFjaC0+ZGV2ID09
+IGluZGlvX2Rldi0+ZGV2LnBhcmVudA0KPiA+ICsJCcKgwqDCoCAmJiBlYWNoLT5hdHRhY2gtPmRt
+YWJ1ZiA9PSBkbWFidWYpIHsNCj4gPiArCQkJLyoNCj4gPiArCQkJICogV2UgdW5sb2NrZWQgdGhl
+IHJlc2VydmF0aW9uIG9iamVjdCwgc28NCj4gPiBnb2luZyB0aHJvdWdoDQo+ID4gKwkJCSAqIHRo
+ZSBjbGVhbnVwIGNvZGUgd291bGQgbWVhbiByZS1sb2NraW5nDQo+ID4gaXQgZmlyc3QuDQo+ID4g
+KwkJCSAqIEF0IHRoaXMgc3RhZ2UgaXQgaXMgc2ltcGxlciB0byBmcmVlIHRoZQ0KPiA+IGF0dGFj
+aG1lbnQNCj4gPiArCQkJICogdXNpbmcgaWlvX2J1ZmZlcl9kbWFfcHV0KCkuDQo+ID4gKwkJCSAq
+Lw0KPiA+ICsJCQltdXRleF91bmxvY2soJmJ1ZmZlci0+ZG1hYnVmc19tdXRleCk7DQo+ID4gKwkJ
+CWlpb19idWZmZXJfZG1hYnVmX3B1dChhdHRhY2gpOw0KPiA+ICsJCQlyZXR1cm4gLUVCVVNZOw0K
+PiA+ICsJCX0NCj4gPiArCX0NCj4gPiArDQo+ID4gKwkvKiBPdGhlcndpc2UsIGFkZCB0aGUgbmV3
+IGF0dGFjaG1lbnQgdG8gb3VyIGRtYWJ1ZnMgbGlzdC4NCj4gPiAqLw0KPiA+ICsJbGlzdF9hZGQo
+JnByaXYtPmVudHJ5LCAmYnVmZmVyLT5kbWFidWZzKTsNCj4gPiArCW11dGV4X3VubG9jaygmYnVm
+ZmVyLT5kbWFidWZzX211dGV4KTsNCj4gPiArDQo+ID4gKwlyZXR1cm4gMDsNCj4gPiArDQo+ID4g
+K2Vycl9kbWFidWZfdW5tYXBfYXR0YWNobWVudDoNCj4gPiArCWRtYV9idWZfdW5tYXBfYXR0YWNo
+bWVudChhdHRhY2gsIHByaXYtPnNndCwgcHJpdi0+ZGlyKTsNCj4gPiArZXJyX3Jlc3ZfdW5sb2Nr
+Og0KPiA+ICsJZG1hX3Jlc3ZfdW5sb2NrKGRtYWJ1Zi0+cmVzdik7DQo+ID4gK2Vycl9kbWFidWZf
+ZGV0YWNoOg0KPiA+ICsJZG1hX2J1Zl9kZXRhY2goZG1hYnVmLCBhdHRhY2gpOw0KPiA+ICtlcnJf
+ZG1hYnVmX3B1dDoNCj4gPiArCWRtYV9idWZfcHV0KGRtYWJ1Zik7DQo+ID4gK2Vycl9mcmVlX3By
+aXY6DQo+ID4gKwlrZnJlZShwcml2KTsNCj4gPiArDQo+ID4gKwlyZXR1cm4gZXJyOw0KPiA+ICt9
+DQo+ID4gKw0KPiA+ICtzdGF0aWMgaW50IGlpb19idWZmZXJfZGV0YWNoX2RtYWJ1ZihzdHJ1Y3Qg
+aWlvX2Rldl9idWZmZXJfcGFpcg0KPiA+ICppYiwNCj4gPiArCQkJCcKgwqDCoCBpbnQgX191c2Vy
+ICp1c2VyX3JlcSwgYm9vbA0KPiA+IG5vbmJsb2NrKQ0KPiA+ICt7DQo+ID4gKwlzdHJ1Y3QgaWlv
+X2J1ZmZlciAqYnVmZmVyID0gaWItPmJ1ZmZlcjsNCj4gPiArCXN0cnVjdCBpaW9fZGV2ICppbmRp
+b19kZXYgPSBpYi0+aW5kaW9fZGV2Ow0KPiA+ICsJc3RydWN0IGlpb19kbWFidWZfcHJpdiAqcHJp
+djsNCj4gPiArCXN0cnVjdCBkbWFfYnVmICpkbWFidWY7DQo+ID4gKwlpbnQgZG1hYnVmX2ZkLCBy
+ZXQgPSAtRVBFUk07DQo+ID4gKw0KPiA+ICsJaWYgKGNvcHlfZnJvbV91c2VyKCZkbWFidWZfZmQs
+IHVzZXJfcmVxLA0KPiA+IHNpemVvZihkbWFidWZfZmQpKSkNCj4gPiArCQlyZXR1cm4gLUVGQVVM
+VDsNCj4gPiArDQo+ID4gKwlkbWFidWYgPSBkbWFfYnVmX2dldChkbWFidWZfZmQpOw0KPiA+ICsJ
+aWYgKElTX0VSUihkbWFidWYpKQ0KPiA+ICsJCXJldHVybiBQVFJfRVJSKGRtYWJ1Zik7DQo+ID4g
+Kw0KPiA+ICsJbXV0ZXhfbG9jaygmYnVmZmVyLT5kbWFidWZzX211dGV4KTsNCj4gPiArDQo+ID4g
+KwlsaXN0X2Zvcl9lYWNoX2VudHJ5KHByaXYsICZidWZmZXItPmRtYWJ1ZnMsIGVudHJ5KSB7DQo+
+ID4gKwkJaWYgKHByaXYtPmF0dGFjaC0+ZGV2ID09IGluZGlvX2Rldi0+ZGV2LnBhcmVudA0KPiA+
+ICsJCcKgwqDCoCAmJiBwcml2LT5hdHRhY2gtPmRtYWJ1ZiA9PSBkbWFidWYpIHsNCj4gPiArCQkJ
+bGlzdF9kZWwoJnByaXYtPmVudHJ5KTsNCj4gPiArDQo+ID4gKwkJCS8qIFVucmVmIHRoZSByZWZl
+cmVuY2UgZnJvbQ0KPiA+IGlpb19idWZmZXJfYXR0YWNoX2RtYWJ1ZigpICovDQo+ID4gKwkJCWlp
+b19idWZmZXJfZG1hYnVmX3B1dChwcml2LT5hdHRhY2gpOw0KPiA+ICsJCQlyZXQgPSAwOw0KPiA+
+ICsJCQlicmVhazsNCj4gPiArCQl9DQo+ID4gKwl9DQo+ID4gKw0KPiA+ICsJbXV0ZXhfdW5sb2Nr
+KCZidWZmZXItPmRtYWJ1ZnNfbXV0ZXgpOw0KPiA+ICsJZG1hX2J1Zl9wdXQoZG1hYnVmKTsNCj4g
+PiArDQo+ID4gKwlyZXR1cm4gcmV0Ow0KPiA+ICt9DQo+ID4gKw0KPiA+ICtzdGF0aWMgY29uc3Qg
+Y2hhciAqDQo+ID4gK2lpb19idWZmZXJfZG1hX2ZlbmNlX2dldF9kcml2ZXJfbmFtZShzdHJ1Y3Qg
+ZG1hX2ZlbmNlICpmZW5jZSkNCj4gPiArew0KPiA+ICsJcmV0dXJuICJpaW8iOw0KPiA+ICt9DQo+
+ID4gKw0KPiA+ICtzdGF0aWMgdm9pZCBpaW9fYnVmZmVyX2RtYV9mZW5jZV9yZWxlYXNlKHN0cnVj
+dCBkbWFfZmVuY2UgKmZlbmNlKQ0KPiA+ICt7DQo+ID4gKwlzdHJ1Y3QgaWlvX2RtYV9mZW5jZSAq
+aWlvX2ZlbmNlID0NCj4gPiArCQljb250YWluZXJfb2YoZmVuY2UsIHN0cnVjdCBpaW9fZG1hX2Zl
+bmNlLCBiYXNlKTsNCj4gPiArDQo+ID4gKwlrZnJlZShpaW9fZmVuY2UpOw0KPiA+ICt9DQo+ID4g
+Kw0KPiA+ICtzdGF0aWMgY29uc3Qgc3RydWN0IGRtYV9mZW5jZV9vcHMgaWlvX2J1ZmZlcl9kbWFf
+ZmVuY2Vfb3BzID0gew0KPiA+ICsJLmdldF9kcml2ZXJfbmFtZQk9DQo+ID4gaWlvX2J1ZmZlcl9k
+bWFfZmVuY2VfZ2V0X2RyaXZlcl9uYW1lLA0KPiA+ICsJLmdldF90aW1lbGluZV9uYW1lCT0NCj4g
+PiBpaW9fYnVmZmVyX2RtYV9mZW5jZV9nZXRfZHJpdmVyX25hbWUsDQo+ID4gKwkucmVsZWFzZQkJ
+PSBpaW9fYnVmZmVyX2RtYV9mZW5jZV9yZWxlYXNlLA0KPiA+ICt9Ow0KPiA+ICsNCj4gPiArc3Rh
+dGljIGludCBpaW9fYnVmZmVyX2VucXVldWVfZG1hYnVmKHN0cnVjdCBpaW9fZGV2X2J1ZmZlcl9w
+YWlyDQo+ID4gKmliLA0KPiA+ICsJCQkJwqDCoMKgwqAgc3RydWN0IGlpb19kbWFidWYgX191c2Vy
+DQo+ID4gKmlpb19kbWFidWZfcmVxLA0KPiA+ICsJCQkJwqDCoMKgwqAgYm9vbCBub25ibG9jaykN
+Cj4gPiArew0KPiA+ICsJc3RydWN0IGlpb19idWZmZXIgKmJ1ZmZlciA9IGliLT5idWZmZXI7DQo+
+ID4gKwlzdHJ1Y3QgaWlvX2RtYWJ1ZiBpaW9fZG1hYnVmOw0KPiA+ICsJc3RydWN0IGRtYV9idWZf
+YXR0YWNobWVudCAqYXR0YWNoOw0KPiA+ICsJc3RydWN0IGlpb19kbWFidWZfcHJpdiAqcHJpdjsN
+Cj4gPiArCXN0cnVjdCBpaW9fZG1hX2ZlbmNlICpmZW5jZTsNCj4gPiArCXN0cnVjdCBkbWFfYnVm
+ICpkbWFidWY7DQo+ID4gKwl1bnNpZ25lZCBsb25nIHRpbWVvdXQ7DQo+ID4gKwlib29sIGNvb2tp
+ZSwgY3ljbGljLCBkbWFfdG9fcmFtOw0KPiA+ICsJbG9uZyByZXRsOw0KPiA+ICsJdTMyIHNlcW5v
+Ow0KPiA+ICsJaW50IHJldDsNCj4gPiArDQo+ID4gKwlpZiAoY29weV9mcm9tX3VzZXIoJmlpb19k
+bWFidWYsIGlpb19kbWFidWZfcmVxLA0KPiA+IHNpemVvZihpaW9fZG1hYnVmKSkpDQo+ID4gKwkJ
+cmV0dXJuIC1FRkFVTFQ7DQo+ID4gKw0KPiA+ICsJaWYgKGlpb19kbWFidWYuZmxhZ3MgJiB+SUlP
+X0JVRkZFUl9ETUFCVUZfU1VQUE9SVEVEX0ZMQUdTKQ0KPiA+ICsJCXJldHVybiAtRUlOVkFMOw0K
+PiA+ICsNCj4gPiArCWN5Y2xpYyA9IGlpb19kbWFidWYuZmxhZ3MgJiBJSU9fQlVGRkVSX0RNQUJV
+Rl9DWUNMSUM7DQo+ID4gKw0KPiA+ICsJLyogQ3ljbGljIGZsYWcgaXMgb25seSBzdXBwb3J0ZWQg
+b24gb3V0cHV0IGJ1ZmZlcnMgKi8NCj4gPiArCWlmIChjeWNsaWMgJiYgYnVmZmVyLT5kaXJlY3Rp
+b24gIT0NCj4gPiBJSU9fQlVGRkVSX0RJUkVDVElPTl9PVVQpDQo+ID4gKwkJcmV0dXJuIC1FSU5W
+QUw7DQo+ID4gKw0KPiA+ICsJZG1hYnVmID0gZG1hX2J1Zl9nZXQoaWlvX2RtYWJ1Zi5mZCk7DQo+
+ID4gKwlpZiAoSVNfRVJSKGRtYWJ1ZikpDQo+ID4gKwkJcmV0dXJuIFBUUl9FUlIoZG1hYnVmKTsN
+Cj4gPiArDQo+ID4gKwlpZiAoIWlpb19kbWFidWYuYnl0ZXNfdXNlZCB8fCBpaW9fZG1hYnVmLmJ5
+dGVzX3VzZWQgPg0KPiA+IGRtYWJ1Zi0+c2l6ZSkgew0KPiA+ICsJCXJldCA9IC1FSU5WQUw7DQo+
+ID4gKwkJZ290byBlcnJfZG1hYnVmX3B1dDsNCj4gPiArCX0NCj4gPiArDQo+ID4gKwlhdHRhY2gg
+PSBpaW9fYnVmZmVyX2ZpbmRfYXR0YWNobWVudChpYiwgZG1hYnVmLCBub25ibG9jayk7DQo+ID4g
+KwlpZiAoSVNfRVJSKGF0dGFjaCkpIHsNCj4gPiArCQlyZXQgPSBQVFJfRVJSKGF0dGFjaCk7DQo+
+ID4gKwkJZ290byBlcnJfZG1hYnVmX3B1dDsNCj4gPiArCX0NCj4gPiArDQo+ID4gKwlwcml2ID0g
+YXR0YWNoLT5pbXBvcnRlcl9wcml2Ow0KPiA+ICsNCj4gPiArCWZlbmNlID0ga21hbGxvYyhzaXpl
+b2YoKmZlbmNlKSwgR0ZQX0tFUk5FTCk7DQo+ID4gKwlpZiAoIWZlbmNlKSB7DQo+ID4gKwkJcmV0
+ID0gLUVOT01FTTsNCj4gPiArCQlnb3RvIGVycl9hdHRhY2htZW50X3B1dDsNCj4gPiArCX0NCj4g
+PiArDQo+ID4gKwlmZW5jZS0+cHJpdiA9IHByaXY7DQo+ID4gKw0KPiA+ICsJc2Vxbm8gPSBhdG9t
+aWNfYWRkX3JldHVybigxLCAmcHJpdi0+c2Vxbm8pOw0KPiA+ICsNCj4gPiArCS8qDQo+ID4gKwkg
+KiBUaGUgdHJhbnNmZXJzIGFyZSBndWFyYW50ZWVkIHRvIGJlIHByb2Nlc3NlZCBpbiB0aGUNCj4g
+PiBvcmRlciB0aGV5IGFyZQ0KPiA+ICsJICogZW5xdWV1ZWQsIHNvIHdlIGNhbiB1c2UgYSBzaW1w
+bGUgaW5jcmVtZW50aW5nIHNlcXVlbmNlDQo+ID4gbnVtYmVyIGZvcg0KPiA+ICsJICogdGhlIGRt
+YV9mZW5jZS4NCj4gPiArCSAqLw0KPiA+ICsJZG1hX2ZlbmNlX2luaXQoJmZlbmNlLT5iYXNlLCAm
+aWlvX2J1ZmZlcl9kbWFfZmVuY2Vfb3BzLA0KPiA+ICsJCcKgwqDCoMKgwqDCoCAmcHJpdi0+bG9j
+aywgcHJpdi0+Y29udGV4dCwgc2Vxbm8pOw0KPiA+ICsNCj4gPiArCXJldCA9IGlpb19kbWFfcmVz
+dl9sb2NrKGRtYWJ1Ziwgbm9uYmxvY2spOw0KPiA+ICsJaWYgKHJldCkNCj4gPiArCQlnb3RvIGVy
+cl9mZW5jZV9wdXQ7DQo+ID4gKw0KPiA+ICsJdGltZW91dCA9IG5vbmJsb2NrID8gMCA6DQo+ID4g
+bXNlY3NfdG9famlmZmllcyhETUFCVUZfRU5RVUVVRV9USU1FT1VUX01TKTsNCj4gPiArCWRtYV90
+b19yYW0gPSBidWZmZXItPmRpcmVjdGlvbiA9PSBJSU9fQlVGRkVSX0RJUkVDVElPTl9JTjsNCj4g
+PiArDQo+ID4gKwkvKiBNYWtlIHN1cmUgd2UgZG9uJ3QgaGF2ZSB3cml0ZXJzICovDQo+ID4gKwly
+ZXRsID0gZG1hX3Jlc3Zfd2FpdF90aW1lb3V0KGRtYWJ1Zi0+cmVzdiwNCj4gPiArCQkJCcKgwqDC
+oMKgDQo+ID4gZG1hX3Jlc3ZfdXNhZ2VfcncoZG1hX3RvX3JhbSksDQo+ID4gKwkJCQnCoMKgwqDC
+oCB0cnVlLCB0aW1lb3V0KTsNCj4gPiArCWlmIChyZXRsID09IDApDQo+ID4gKwkJcmV0bCA9IC1F
+QlVTWTsNCj4gPiArCWlmIChyZXRsIDwgMCkgew0KPiA+ICsJCXJldCA9IChpbnQpcmV0bDsNCj4g
+PiArCQlnb3RvIGVycl9yZXN2X3VubG9jazsNCj4gPiArCX0NCj4gPiArDQo+ID4gKwlpZiAoYnVm
+ZmVyLT5hY2Nlc3MtPmxvY2tfcXVldWUpDQo+ID4gKwkJYnVmZmVyLT5hY2Nlc3MtPmxvY2tfcXVl
+dWUoYnVmZmVyKTsNCj4gPiArDQo+ID4gKwlyZXQgPSBkbWFfcmVzdl9yZXNlcnZlX2ZlbmNlcyhk
+bWFidWYtPnJlc3YsIDEpOw0KPiA+ICsJaWYgKHJldCkNCj4gPiArCQlnb3RvIGVycl9xdWV1ZV91
+bmxvY2s7DQo+ID4gKw0KPiA+ICsJZG1hX3Jlc3ZfYWRkX2ZlbmNlKGRtYWJ1Zi0+cmVzdiwgJmZl
+bmNlLT5iYXNlLA0KPiA+ICsJCQnCoMKgIGRtYV90b19yYW0gPyBETUFfUkVTVl9VU0FHRV9XUklU
+RSA6DQo+ID4gRE1BX1JFU1ZfVVNBR0VfUkVBRCk7DQo+ID4gKwlkbWFfcmVzdl91bmxvY2soZG1h
+YnVmLT5yZXN2KTsNCj4gPiArDQo+ID4gKwljb29raWUgPSBkbWFfZmVuY2VfYmVnaW5fc2lnbmFs
+bGluZygpOw0KPiA+ICsNCj4gPiArCXJldCA9IGJ1ZmZlci0+YWNjZXNzLT5lbnF1ZXVlX2RtYWJ1
+ZihidWZmZXIsIHByaXYtPmJsb2NrLA0KPiA+ICZmZW5jZS0+YmFzZSwNCj4gPiArCQkJCQnCoMKg
+wqDCoCBwcml2LT5zZ3QsDQo+ID4gaWlvX2RtYWJ1Zi5ieXRlc191c2VkLA0KPiA+ICsJCQkJCcKg
+wqDCoMKgIGN5Y2xpYyk7DQo+ID4gKwlpZiAocmV0KSB7DQo+ID4gKwkJLyoNCj4gPiArCQkgKiBE
+TUFCVUYgZW5xdWV1ZSBmYWlsZWQsIGJ1dCB3ZSBhbHJlYWR5IGFkZGVkIHRoZQ0KPiA+IGZlbmNl
+Lg0KPiA+ICsJCSAqIFNpZ25hbCB0aGUgZXJyb3IgdGhyb3VnaCB0aGUgZmVuY2UgY29tcGxldGlv
+bg0KPiA+IG1lY2hhbmlzbS4NCj4gPiArCQkgKi8NCj4gPiArCQlpaW9fYnVmZmVyX3NpZ25hbF9k
+bWFidWZfZG9uZSgmZmVuY2UtPmJhc2UsIHJldCk7DQo+ID4gKwl9DQo+ID4gKw0KPiA+ICsJaWYg
+KGJ1ZmZlci0+YWNjZXNzLT51bmxvY2tfcXVldWUpDQo+ID4gKwkJYnVmZmVyLT5hY2Nlc3MtPnVu
+bG9ja19xdWV1ZShidWZmZXIpOw0KPiA+ICsNCj4gPiArCWRtYV9mZW5jZV9lbmRfc2lnbmFsbGlu
+Zyhjb29raWUpOw0KPiA+ICsJZG1hX2J1Zl9wdXQoZG1hYnVmKTsNCj4gPiArDQo+ID4gKwlyZXR1
+cm4gcmV0Ow0KPiA+ICsNCj4gPiArZXJyX3F1ZXVlX3VubG9jazoNCj4gPiArCWlmIChidWZmZXIt
+PmFjY2Vzcy0+dW5sb2NrX3F1ZXVlKQ0KPiA+ICsJCWJ1ZmZlci0+YWNjZXNzLT51bmxvY2tfcXVl
+dWUoYnVmZmVyKTsNCj4gPiArZXJyX3Jlc3ZfdW5sb2NrOg0KPiA+ICsJZG1hX3Jlc3ZfdW5sb2Nr
+KGRtYWJ1Zi0+cmVzdik7DQo+ID4gK2Vycl9mZW5jZV9wdXQ6DQo+ID4gKwlkbWFfZmVuY2VfcHV0
+KCZmZW5jZS0+YmFzZSk7DQo+ID4gK2Vycl9hdHRhY2htZW50X3B1dDoNCj4gPiArCWlpb19idWZm
+ZXJfZG1hYnVmX3B1dChhdHRhY2gpOw0KPiA+ICtlcnJfZG1hYnVmX3B1dDoNCj4gPiArCWRtYV9i
+dWZfcHV0KGRtYWJ1Zik7DQo+ID4gKw0KPiA+ICsJcmV0dXJuIHJldDsNCj4gPiArfQ0KPiA+ICsN
+Cj4gPiArc3RhdGljIHZvaWQgaWlvX2J1ZmZlcl9jbGVhbnVwKHN0cnVjdCB3b3JrX3N0cnVjdCAq
+d29yaykNCj4gPiArew0KPiA+ICsJc3RydWN0IGlpb19kbWFfZmVuY2UgKmZlbmNlID0NCj4gPiAr
+CQljb250YWluZXJfb2Yod29yaywgc3RydWN0IGlpb19kbWFfZmVuY2UsIHdvcmspOw0KPiA+ICsJ
+c3RydWN0IGlpb19kbWFidWZfcHJpdiAqcHJpdiA9IGZlbmNlLT5wcml2Ow0KPiA+ICsJc3RydWN0
+IGRtYV9idWZfYXR0YWNobWVudCAqYXR0YWNoID0gcHJpdi0+YXR0YWNoOw0KPiA+ICsNCj4gPiAr
+CWRtYV9mZW5jZV9wdXQoJmZlbmNlLT5iYXNlKTsNCj4gPiArCWlpb19idWZmZXJfZG1hYnVmX3B1
+dChhdHRhY2gpOw0KPiA+ICt9DQo+ID4gKw0KPiA+ICt2b2lkIGlpb19idWZmZXJfc2lnbmFsX2Rt
+YWJ1Zl9kb25lKHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlLCBpbnQNCj4gPiByZXQpDQo+ID4gK3sN
+Cj4gPiArCXN0cnVjdCBpaW9fZG1hX2ZlbmNlICppaW9fZmVuY2UgPQ0KPiA+ICsJCWNvbnRhaW5l
+cl9vZihmZW5jZSwgc3RydWN0IGlpb19kbWFfZmVuY2UsIGJhc2UpOw0KPiA+ICsJYm9vbCBjb29r
+aWUgPSBkbWFfZmVuY2VfYmVnaW5fc2lnbmFsbGluZygpOw0KPiA+ICsNCj4gPiArCS8qDQo+ID4g
+KwkgKiBHZXQgYSByZWZlcmVuY2UgdG8gdGhlIGZlbmNlLCBzbyB0aGF0IGl0J3Mgbm90IGZyZWVk
+IGFzDQo+ID4gc29vbiBhcw0KPiA+ICsJICogaXQncyBzaWduYWxlZC4NCj4gPiArCSAqLw0KPiA+
+ICsJZG1hX2ZlbmNlX2dldChmZW5jZSk7DQo+ID4gKw0KPiA+ICsJZmVuY2UtPmVycm9yID0gcmV0
+Ow0KPiA+ICsJZG1hX2ZlbmNlX3NpZ25hbChmZW5jZSk7DQo+ID4gKwlkbWFfZmVuY2VfZW5kX3Np
+Z25hbGxpbmcoY29va2llKTsNCj4gPiArDQo+ID4gKwkvKg0KPiA+ICsJICogVGhlIGZlbmNlIHdp
+bGwgYmUgdW5yZWYnZCBpbiBpaW9fYnVmZmVyX2NsZWFudXAuDQo+ID4gKwkgKiBJdCBjYW4ndCBi
+ZSBkb25lIGhlcmUsIGFzIHRoZSB1bnJlZiBmdW5jdGlvbnMgbWlnaHQgdHJ5DQo+ID4gdG8gbG9j
+ayB0aGUNCj4gPiArCSAqIHJlc3Ygb2JqZWN0LCB3aGljaCBjYW4gZGVhZGxvY2suDQo+ID4gKwkg
+Ki8NCj4gPiArCUlOSVRfV09SSygmaWlvX2ZlbmNlLT53b3JrLCBpaW9fYnVmZmVyX2NsZWFudXAp
+Ow0KPiA+ICsJc2NoZWR1bGVfd29yaygmaWlvX2ZlbmNlLT53b3JrKTsNCj4gPiArfQ0KPiA+ICtF
+WFBPUlRfU1lNQk9MX0dQTChpaW9fYnVmZmVyX3NpZ25hbF9kbWFidWZfZG9uZSk7DQo+ID4gKw0K
+PiA+ICtzdGF0aWMgbG9uZyBpaW9fYnVmZmVyX2NocmRldl9pb2N0bChzdHJ1Y3QgZmlsZSAqZmls
+cCwNCj4gPiArCQkJCcKgwqDCoCB1bnNpZ25lZCBpbnQgY21kLCB1bnNpZ25lZA0KPiA+IGxvbmcg
+YXJnKQ0KPiA+ICt7DQo+ID4gKwlzdHJ1Y3QgaWlvX2Rldl9idWZmZXJfcGFpciAqaWIgPSBmaWxw
+LT5wcml2YXRlX2RhdGE7DQo+ID4gKwl2b2lkIF9fdXNlciAqX2FyZyA9ICh2b2lkIF9fdXNlciAq
+KWFyZzsNCj4gPiArCWJvb2wgbm9uYmxvY2sgPSBmaWxwLT5mX2ZsYWdzICYgT19OT05CTE9DSzsN
+Cj4gPiArDQo+ID4gKwlzd2l0Y2ggKGNtZCkgew0KPiA+ICsJY2FzZSBJSU9fQlVGRkVSX0RNQUJV
+Rl9BVFRBQ0hfSU9DVEw6DQo+ID4gKwkJcmV0dXJuIGlpb19idWZmZXJfYXR0YWNoX2RtYWJ1Zihp
+YiwgX2FyZywNCj4gPiBub25ibG9jayk7DQo+ID4gKwljYXNlIElJT19CVUZGRVJfRE1BQlVGX0RF
+VEFDSF9JT0NUTDoNCj4gPiArCQlyZXR1cm4gaWlvX2J1ZmZlcl9kZXRhY2hfZG1hYnVmKGliLCBf
+YXJnLA0KPiA+IG5vbmJsb2NrKTsNCj4gPiArCWNhc2UgSUlPX0JVRkZFUl9ETUFCVUZfRU5RVUVV
+RV9JT0NUTDoNCj4gPiArCQlyZXR1cm4gaWlvX2J1ZmZlcl9lbnF1ZXVlX2RtYWJ1ZihpYiwgX2Fy
+ZywNCj4gPiBub25ibG9jayk7DQo+ID4gKwlkZWZhdWx0Og0KPiA+ICsJCXJldHVybiAtRUlOVkFM
+Ow0KPiA+ICsJfQ0KPiA+ICt9DQo+ID4gKw0KPiA+IMKgIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZmls
+ZV9vcGVyYXRpb25zIGlpb19idWZmZXJfY2hyZGV2X2ZpbGVvcHMgPSB7DQo+ID4gwqDCoAkub3du
+ZXIgPSBUSElTX01PRFVMRSwNCj4gPiDCoMKgCS5sbHNlZWsgPSBub29wX2xsc2VlaywNCj4gPiDC
+oMKgCS5yZWFkID0gaWlvX2J1ZmZlcl9yZWFkLA0KPiA+IMKgwqAJLndyaXRlID0gaWlvX2J1ZmZl
+cl93cml0ZSwNCj4gPiArCS51bmxvY2tlZF9pb2N0bCA9IGlpb19idWZmZXJfY2hyZGV2X2lvY3Rs
+LA0KPiA+ICsJLmNvbXBhdF9pb2N0bCA9IGNvbXBhdF9wdHJfaW9jdGwsDQo+ID4gwqDCoAkucG9s
+bCA9IGlpb19idWZmZXJfcG9sbCwNCj4gPiDCoMKgCS5yZWxlYXNlID0gaWlvX2J1ZmZlcl9jaHJk
+ZXZfcmVsZWFzZSwNCj4gPiDCoCB9Ow0KPiA+IEBAIC0xOTUzLDYgKzI0MTQsNyBAQCBzdGF0aWMg
+dm9pZCBpaW9fYnVmZmVyX3JlbGVhc2Uoc3RydWN0IGtyZWYNCj4gPiAqcmVmKQ0KPiA+IMKgIHsN
+Cj4gPiDCoMKgCXN0cnVjdCBpaW9fYnVmZmVyICpidWZmZXIgPSBjb250YWluZXJfb2YocmVmLCBz
+dHJ1Y3QNCj4gPiBpaW9fYnVmZmVyLCByZWYpOw0KPiA+IMKgIA0KPiA+ICsJbXV0ZXhfZGVzdHJv
+eSgmYnVmZmVyLT5kbWFidWZzX211dGV4KTsNCj4gPiDCoMKgCWJ1ZmZlci0+YWNjZXNzLT5yZWxl
+YXNlKGJ1ZmZlcik7DQo+ID4gwqAgfQ0KPiA+IMKgIA0KPiA+IGRpZmYgLS1naXQgYS9pbmNsdWRl
+L2xpbnV4L2lpby9idWZmZXJfaW1wbC5oDQo+ID4gYi9pbmNsdWRlL2xpbnV4L2lpby9idWZmZXJf
+aW1wbC5oDQo+ID4gaW5kZXggODljM2ZkN2MyOWNhLi4xYTIyMWMxZDc3MzYgMTAwNjQ0DQo+ID4g
+LS0tIGEvaW5jbHVkZS9saW51eC9paW8vYnVmZmVyX2ltcGwuaA0KPiA+ICsrKyBiL2luY2x1ZGUv
+bGludXgvaWlvL2J1ZmZlcl9pbXBsLmgNCj4gPiBAQCAtOSw4ICs5LDEyIEBADQo+ID4gwqAgI2lu
+Y2x1ZGUgPHVhcGkvbGludXgvaWlvL2J1ZmZlci5oPg0KPiA+IMKgICNpbmNsdWRlIDxsaW51eC9p
+aW8vYnVmZmVyLmg+DQo+ID4gwqAgDQo+ID4gK3N0cnVjdCBkbWFfYnVmX2F0dGFjaG1lbnQ7DQo+
+ID4gK3N0cnVjdCBkbWFfZmVuY2U7DQo+ID4gwqAgc3RydWN0IGlpb19kZXY7DQo+ID4gK3N0cnVj
+dCBpaW9fZG1hX2J1ZmZlcl9ibG9jazsNCj4gPiDCoCBzdHJ1Y3QgaWlvX2J1ZmZlcjsNCj4gPiAr
+c3RydWN0IHNnX3RhYmxlOw0KPiA+IMKgIA0KPiA+IMKgIC8qKg0KPiA+IMKgwqAgKiBJTkRJT19C
+VUZGRVJfRkxBR19GSVhFRF9XQVRFUk1BUksgLSBXYXRlcm1hcmsgbGV2ZWwgb2YgdGhlDQo+ID4g
+YnVmZmVyIGNhbiBub3QgYmUNCj4gPiBAQCAtMzksNiArNDMsMTMgQEAgc3RydWN0IGlpb19idWZm
+ZXI7DQo+ID4gwqDCoCAqwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IGRldmljZSBzdG9wcyBzYW1wbGluZy4gQ2FsbGVzIGFyZQ0KPiA+IGJhbGFuY2VkIHdpdGggQGVu
+YWJsZS4NCj4gPiDCoMKgICogQHJlbGVhc2U6CQljYWxsZWQgd2hlbiB0aGUgbGFzdCByZWZlcmVu
+Y2UgdG8gdGhlDQo+ID4gYnVmZmVyIGlzIGRyb3BwZWQsDQo+ID4gwqDCoCAqCQkJc2hvdWxkIGZy
+ZWUgYWxsIHJlc291cmNlcyBhbGxvY2F0ZWQgYnkgdGhlDQo+ID4gYnVmZmVyLg0KPiA+ICsgKiBA
+YXR0YWNoX2RtYWJ1ZjoJY2FsbGVkIGZyb20gdXNlcnNwYWNlIHZpYSBpb2N0bCB0byBhdHRhY2gN
+Cj4gPiBvbmUgZXh0ZXJuYWwNCj4gPiArICoJCQlETUFCVUYuDQo+ID4gKyAqIEBkZXRhY2hfZG1h
+YnVmOgljYWxsZWQgZnJvbSB1c2Vyc3BhY2UgdmlhIGlvY3RsIHRvIGRldGFjaA0KPiA+IG9uZSBw
+cmV2aW91c2x5DQo+ID4gKyAqCQkJYXR0YWNoZWQgRE1BQlVGLg0KPiA+ICsgKiBAZW5xdWV1ZV9k
+bWFidWY6CWNhbGxlZCBmcm9tIHVzZXJzcGFjZSB2aWEgaW9jdGwgdG8gcXVldWUNCj4gPiB0aGlz
+IERNQUJVRg0KPiA+ICsgKgkJCW9iamVjdCB0byB0aGlzIGJ1ZmZlci4gUmVxdWlyZXMgYSB2YWxp
+ZA0KPiA+IERNQUJVRiBmZCwgdGhhdA0KPiA+ICsgKgkJCXdhcyBwcmV2aW91bHkgYXR0YWNoZWQg
+dG8gdGhpcyBidWZmZXIuDQo+ID4gwqDCoCAqIEBtb2RlczoJCVN1cHBvcnRlZCBvcGVyYXRpbmcg
+bW9kZXMgYnkgdGhpcyBidWZmZXINCj4gPiB0eXBlDQo+ID4gwqDCoCAqIEBmbGFnczoJCUEgYml0
+bWFzayBjb21iaW5hdGlvbiBvZg0KPiA+IElORElPX0JVRkZFUl9GTEFHXyoNCj4gPiDCoMKgICoN
+Cj4gPiBAQCAtNjgsNiArNzksMTcgQEAgc3RydWN0IGlpb19idWZmZXJfYWNjZXNzX2Z1bmNzIHsN
+Cj4gPiDCoCANCj4gPiDCoMKgCXZvaWQgKCpyZWxlYXNlKShzdHJ1Y3QgaWlvX2J1ZmZlciAqYnVm
+ZmVyKTsNCj4gPiDCoCANCj4gPiArCXN0cnVjdCBpaW9fZG1hX2J1ZmZlcl9ibG9jayAqICgqYXR0
+YWNoX2RtYWJ1Zikoc3RydWN0DQo+ID4gaWlvX2J1ZmZlciAqYnVmZmVyLA0KPiA+ICsJCQkJCQnC
+oMKgwqDCoMKgwqAgc3RydWN0DQo+ID4gZG1hX2J1Zl9hdHRhY2htZW50ICphdHRhY2gpOw0KPiA+
+ICsJdm9pZCAoKmRldGFjaF9kbWFidWYpKHN0cnVjdCBpaW9fYnVmZmVyICpidWZmZXIsDQo+ID4g
+KwkJCcKgwqDCoMKgwqAgc3RydWN0IGlpb19kbWFfYnVmZmVyX2Jsb2NrICpibG9jayk7DQo+ID4g
+KwlpbnQgKCplbnF1ZXVlX2RtYWJ1Zikoc3RydWN0IGlpb19idWZmZXIgKmJ1ZmZlciwNCj4gPiAr
+CQkJwqDCoMKgwqDCoCBzdHJ1Y3QgaWlvX2RtYV9idWZmZXJfYmxvY2sgKmJsb2NrLA0KPiA+ICsJ
+CQnCoMKgwqDCoMKgIHN0cnVjdCBkbWFfZmVuY2UgKmZlbmNlLCBzdHJ1Y3QNCj4gPiBzZ190YWJs
+ZSAqc2d0LA0KPiA+ICsJCQnCoMKgwqDCoMKgIHNpemVfdCBzaXplLCBib29sIGN5Y2xpYyk7DQo+
+ID4gKwl2b2lkICgqbG9ja19xdWV1ZSkoc3RydWN0IGlpb19idWZmZXIgKmJ1ZmZlcik7DQo+ID4g
+Kwl2b2lkICgqdW5sb2NrX3F1ZXVlKShzdHJ1Y3QgaWlvX2J1ZmZlciAqYnVmZmVyKTsNCj4gPiAr
+DQo+ID4gwqDCoAl1bnNpZ25lZCBpbnQgbW9kZXM7DQo+ID4gwqDCoAl1bnNpZ25lZCBpbnQgZmxh
+Z3M7DQo+ID4gwqAgfTsNCj4gPiBAQCAtMTM2LDYgKzE1OCwxMiBAQCBzdHJ1Y3QgaWlvX2J1ZmZl
+ciB7DQo+ID4gwqAgDQo+ID4gwqDCoAkvKiBAcmVmOiBSZWZlcmVuY2UgY291bnQgb2YgdGhlIGJ1
+ZmZlci4gKi8NCj4gPiDCoMKgCXN0cnVjdCBrcmVmIHJlZjsNCj4gPiArDQo+ID4gKwkvKiBAZG1h
+YnVmczogTGlzdCBvZiBETUFCVUYgYXR0YWNobWVudHMgKi8NCj4gPiArCXN0cnVjdCBsaXN0X2hl
+YWQgZG1hYnVmczsgLyogUDogZG1hYnVmc19tdXRleCAqLw0KPiA+ICsNCj4gPiArCS8qIEBkbWFi
+dWZzX211dGV4OiBQcm90ZWN0cyBkbWFidWZzICovDQo+ID4gKwlzdHJ1Y3QgbXV0ZXggZG1hYnVm
+c19tdXRleDsNCj4gPiDCoCB9Ow0KPiA+IMKgIA0KPiA+IMKgIC8qKg0KPiA+IEBAIC0xNTksNiAr
+MTg3LDggQEAgdm9pZCBpaW9fYnVmZmVyX2luaXQoc3RydWN0IGlpb19idWZmZXINCj4gPiAqYnVm
+ZmVyKTsNCj4gPiDCoCBzdHJ1Y3QgaWlvX2J1ZmZlciAqaWlvX2J1ZmZlcl9nZXQoc3RydWN0IGlp
+b19idWZmZXIgKmJ1ZmZlcik7DQo+ID4gwqAgdm9pZCBpaW9fYnVmZmVyX3B1dChzdHJ1Y3QgaWlv
+X2J1ZmZlciAqYnVmZmVyKTsNCj4gPiDCoCANCj4gPiArdm9pZCBpaW9fYnVmZmVyX3NpZ25hbF9k
+bWFidWZfZG9uZShzdHJ1Y3QgZG1hX2ZlbmNlICpmZW5jZSwgaW50DQo+ID4gcmV0KTsNCj4gPiAr
+DQo+ID4gwqAgI2Vsc2UgLyogQ09ORklHX0lJT19CVUZGRVIgKi8NCj4gPiDCoCANCj4gPiDCoCBz
+dGF0aWMgaW5saW5lIHZvaWQgaWlvX2J1ZmZlcl9nZXQoc3RydWN0IGlpb19idWZmZXIgKmJ1ZmZl
+cikge30NCj4gPiBkaWZmIC0tZ2l0IGEvaW5jbHVkZS91YXBpL2xpbnV4L2lpby9idWZmZXIuaA0K
+PiA+IGIvaW5jbHVkZS91YXBpL2xpbnV4L2lpby9idWZmZXIuaA0KPiA+IGluZGV4IDEzOTM5MDMy
+YjNmNi4uYzY2NmFhOTVlNTMyIDEwMDY0NA0KPiA+IC0tLSBhL2luY2x1ZGUvdWFwaS9saW51eC9p
+aW8vYnVmZmVyLmgNCj4gPiArKysgYi9pbmNsdWRlL3VhcGkvbGludXgvaWlvL2J1ZmZlci5oDQo+
+ID4gQEAgLTUsNiArNSwyOCBAQA0KPiA+IMKgICNpZm5kZWYgX1VBUElfSUlPX0JVRkZFUl9IXw0K
+PiA+IMKgICNkZWZpbmUgX1VBUElfSUlPX0JVRkZFUl9IXw0KPiA+IMKgIA0KPiA+ICsjaW5jbHVk
+ZSA8bGludXgvdHlwZXMuaD4NCj4gPiArDQo+ID4gKy8qIEZsYWdzIGZvciBpaW9fZG1hYnVmLmZs
+YWdzICovDQo+ID4gKyNkZWZpbmUgSUlPX0JVRkZFUl9ETUFCVUZfQ1lDTElDCQkoMSA8PCAwKQ0K
+PiA+ICsjZGVmaW5lIElJT19CVUZGRVJfRE1BQlVGX1NVUFBPUlRFRF9GTEFHUwkweDAwMDAwMDAx
+DQo+ID4gKw0KPiA+ICsvKioNCj4gPiArICogc3RydWN0IGlpb19kbWFidWYgLSBEZXNjcmlwdG9y
+IGZvciBhIHNpbmdsZSBJSU8gRE1BQlVGIG9iamVjdA0KPiA+ICsgKiBAZmQ6CQlmaWxlIGRlc2Ny
+aXB0b3Igb2YgdGhlIERNQUJVRiBvYmplY3QNCj4gPiArICogQGZsYWdzOglvbmUgb3IgbW9yZSBJ
+SU9fQlVGRkVSX0RNQUJVRl8qIGZsYWdzDQo+ID4gKyAqIEBieXRlc191c2VkOgludW1iZXIgb2Yg
+Ynl0ZXMgdXNlZCBpbiB0aGlzIERNQUJVRiBmb3INCj4gPiB0aGUgZGF0YSB0cmFuc2Zlci4NCj4g
+PiArICoJCVNob3VsZCBnZW5lcmFsbHkgYmUgc2V0IHRvIHRoZSBETUFCVUYncyBzaXplLg0KPiA+
+ICsgKi8NCj4gPiArc3RydWN0IGlpb19kbWFidWYgew0KPiA+ICsJX191MzIgZmQ7DQo+ID4gKwlf
+X3UzMiBmbGFnczsNCj4gPiArCV9fdTY0IGJ5dGVzX3VzZWQ7DQo+ID4gK307DQo+ID4gKw0KPiA+
+IMKgICNkZWZpbmUgSUlPX0JVRkZFUl9HRVRfRkRfSU9DVEwJCQlfSU9XUignaScsDQo+ID4gMHg5
+MSwgaW50KQ0KPiA+ICsjZGVmaW5lIElJT19CVUZGRVJfRE1BQlVGX0FUVEFDSF9JT0NUTAkJX0lP
+VygnaScsIDB4OTIsDQo+ID4gaW50KQ0KPiA+ICsjZGVmaW5lIElJT19CVUZGRVJfRE1BQlVGX0RF
+VEFDSF9JT0NUTAkJX0lPVygnaScsIDB4OTMsDQo+ID4gaW50KQ0KPiA+ICsjZGVmaW5lIElJT19C
+VUZGRVJfRE1BQlVGX0VOUVVFVUVfSU9DVEwJCV9JT1coJ2knLA0KPiA+IDB4OTQsIHN0cnVjdCBp
+aW9fZG1hYnVmKQ0KPiA+IMKgIA0KPiA+IMKgICNlbmRpZiAvKiBfVUFQSV9JSU9fQlVGRkVSX0hf
+ICovDQoNCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxp
+bmFyby1tbS1zaWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9y
+ZwpUbyB1bnN1YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlz
+dHMubGluYXJvLm9yZwo=
