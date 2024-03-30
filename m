@@ -2,119 +2,128 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CF108927DB
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 30 Mar 2024 00:36:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id BFA18892C69
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 30 Mar 2024 19:28:45 +0100 (CET)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EE30243F41
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 29 Mar 2024 23:36:29 +0000 (UTC)
-Received: from mail-yb1-f175.google.com (mail-yb1-f175.google.com [209.85.219.175])
-	by lists.linaro.org (Postfix) with ESMTPS id 096CC43F41
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 29 Mar 2024 23:36:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 620DD40D48
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 30 Mar 2024 18:28:44 +0000 (UTC)
+Received: from pandora.armlinux.org.uk (pandora.armlinux.org.uk [78.32.30.218])
+	by lists.linaro.org (Postfix) with ESMTPS id 54A8140D48
+	for <linaro-mm-sig@lists.linaro.org>; Sat, 30 Mar 2024 18:28:42 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20230601 header.b=V9K6B7RZ;
-	dmarc=pass (policy=reject) header.from=google.com;
-	spf=pass (lists.linaro.org: domain of tjmercier@google.com designates 209.85.219.175 as permitted sender) smtp.mailfrom=tjmercier@google.com
-Received: by mail-yb1-f175.google.com with SMTP id 3f1490d57ef6-dc6cbe1ac75so1820019276.1
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 29 Mar 2024 16:36:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1711755387; x=1712360187; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=z3ws0GiqfaPCvaP9VcCCnewH75CZLc5KkLizkP97z2M=;
-        b=V9K6B7RZlt9H49O4kFLYeqmx4QGczAt0BCS2esXa1gdlYXxU6GNoE+H2NzAiWPEnn7
-         Nrx5wnHYEjs6TA1kpXzauvXYm9+TeLDtr8yMwydssJW4GYaGMB/hJNYgQEokbHyXq3/6
-         IcCh0oQv83eMupSon9tilHieTUx7iH7coGZJJI22zjmplLMlca18XUQ8jBfXXRV4cYbc
-         k9u6aoCPTY0dvCkg9N2bCodppICmN1IrE8mPV4BjpLLW0Bsjd7vPCOftHwfJwsQ8VeqH
-         dUf3STsADwafP9hQIFVMjAabHTTDQ+jmmgLrlXOaNGnPbL4ocLn19HJoWjXzJJCkiYuQ
-         rgMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1711755387; x=1712360187;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=z3ws0GiqfaPCvaP9VcCCnewH75CZLc5KkLizkP97z2M=;
-        b=ny2+NuA+PJCbxXjF9IGRTFdthm/Nc4DzAVxYZCXngJeRTGHsEJdt1K4YUSgxqcLsWj
-         pieFJxgpNy6OFdQs9JvNMiSaR8B7Q8d2XeDR/A0Wa47pM4wXoCVsqTWJVNVIkgt1gn5h
-         NNF4k4xHk8Wjgg8UNgBdOCJ0UR7+GmnUZQJ55cXs3d7AeXwsRhnoPowS8vYOJLvh9rPw
-         BUGZWdhXD2smA5joApzwOQhvllSP6rRPDEgIhb8OuYSmgt0hTtmdtLHTTB7IOuoE4CCh
-         azqnXt5ulCtdolMnuvGG8vdf79NbP9KWC0r6vF6icZOS08AIBghSFhrAnAq+5uOKEKfT
-         8zAw==
-X-Forwarded-Encrypted: i=1; AJvYcCVpAiOQ7jpF6LUX0i63VeFYrwYqnZD5AZdhV+TeDnOyWF2yR/vtnr1kOek7b1mpUBkOyOL9paxBiIttL3mBDsAPDpvWDtyTE36YguOA7eU=
-X-Gm-Message-State: AOJu0YxJsEzQRsyb2ngAHnVw5Fl7oU2iIJXL8fGvc4bqzkjuRjugpU4n
-	PvpsiaylDjD4JL5tLf7PLHah9KMePSu/ptzkmdlmzqzs+Sx6U4G3p70a/MbumgWzJ8GFSOD3jAu
-	Zalpstw+3YuDZ8Zvj920EjaNTvJU9mjOafyBf
-X-Google-Smtp-Source: AGHT+IGJk7NU8MrL8Rai4C8fdDlc24klJyWnbefpAnU4Fv6NNUTsRsocqC1LxHZ94PST37mhkloThVc9PuLt5FEG9B4=
-X-Received: by 2002:a25:f912:0:b0:dc7:494e:ff33 with SMTP id
- q18-20020a25f912000000b00dc7494eff33mr2512234ybe.7.1711755387188; Fri, 29 Mar
- 2024 16:36:27 -0700 (PDT)
+	dkim=pass header.d=armlinux.org.uk header.s=pandora-2019 header.b=BAnkdZ4A;
+	dmarc=pass (policy=none) header.from=armlinux.org.uk;
+	spf=none (lists.linaro.org: domain of "linux+linaro-mm-sig=lists.linaro.org@armlinux.org.uk" has no SPF policy when checking 78.32.30.218) smtp.mailfrom="linux+linaro-mm-sig=lists.linaro.org@armlinux.org.uk"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=armlinux.org.uk; s=pandora-2019; h=Sender:In-Reply-To:Content-Type:
+	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+	Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+	List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=eOnCxHAyWMBBmrA31QsaFBeo10V11qo0IeZKOpN/ZkM=; b=BAnkdZ4AFLsdBYGg9hDj/OEdIB
+	HObTuni4MRaU0PoKGPwlAtjY0tYlpgMLsFmzRL9YBoCKEH4/UCV1r6pmG2mzAY1aIiAV9Q+foy27C
+	boy059PfyozEJxNJqHg3sgu4C5/93MuWxmhCB1fjhjGh1VNCjAMBOant8uIDY71Hko6LEOMcxLo2P
+	KbP1AdeFuiUfyH+2LBbzXz8ISCUCipZd1annA3RPugiN3Ip/gLoLS9PLceY2K/4+VJUekek/WeVM4
+	UyW2Z62ifqdIt0MXXFnB86WFCTZCnunl8WR9zrxOb2rvUqRdZauSKtpT8SswQTMG0Q+DAMvpzZWq3
+	7iet8kkA==;
+Received: from shell.armlinux.org.uk ([fd8f:7570:feb6:1:5054:ff:fe00:4ec]:40144)
+	by pandora.armlinux.org.uk with esmtpsa  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+	(Exim 4.96)
+	(envelope-from <linux@armlinux.org.uk>)
+	id 1rqdR9-00036h-00;
+	Sat, 30 Mar 2024 18:28:15 +0000
+Received: from linux by shell.armlinux.org.uk with local (Exim 4.94.2)
+	(envelope-from <linux@shell.armlinux.org.uk>)
+	id 1rqdR4-0003rW-Hn; Sat, 30 Mar 2024 18:28:10 +0000
+Date: Sat, 30 Mar 2024 18:28:10 +0000
+From: "Russell King (Oracle)" <linux@armlinux.org.uk>
+To: Naveen Mamindlapalli <naveenm@marvell.com>
+Message-ID: <ZghZur10+3WvZnDu@shell.armlinux.org.uk>
+References: <20240223-am65-cpsw-xdp-basic-v5-0-bc1739170bc6@baylibre.com>
+ <20240223-am65-cpsw-xdp-basic-v5-1-bc1739170bc6@baylibre.com>
+ <SJ2PR18MB5635B9F20BB6CE1CC945F3B2A23B2@SJ2PR18MB5635.namprd18.prod.outlook.com>
 MIME-Version: 1.0
-References: <20240327022903.776-1-justinjiang@vivo.com>
-In-Reply-To: <20240327022903.776-1-justinjiang@vivo.com>
-From: "T.J. Mercier" <tjmercier@google.com>
-Date: Fri, 29 Mar 2024 16:36:15 -0700
-Message-ID: <CABdmKX1swVO1=6cs+CW_g2g4g7woB5-Ks1gBzCA+iLcvpLmkvQ@mail.gmail.com>
-To: Zhiguo Jiang <justinjiang@vivo.com>
-X-Rspamd-Queue-Id: 096CC43F41
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.99 / 15.00];
-	BAYES_HAM(-2.99)[99.96%];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+Content-Disposition: inline
+In-Reply-To: <SJ2PR18MB5635B9F20BB6CE1CC945F3B2A23B2@SJ2PR18MB5635.namprd18.prod.outlook.com>
+Sender: Russell King (Oracle) <linux@armlinux.org.uk>
+X-Rspamd-Queue-Id: 54A8140D48
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.90 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[armlinux.org.uk,none];
+	HFILTER_FROMHOST_NORESOLVE_MX(0.50)[dead.armlinux.org.uk];
+	R_DKIM_ALLOW(-0.20)[armlinux.org.uk:s=pandora-2019];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RWL_MAILSPIKE_GOOD(-0.10)[78.32.30.218:from];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_ONE(0.00)[1];
-	TO_DN_SOME(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.175:from];
-	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_CC(0.00)[baylibre.com,davemloft.net,google.com,kernel.org,redhat.com,iogearbox.net,gmail.com,linaro.org,amd.com,lunn.ch,marvell.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	TAGGED_FROM(0.00)[linaro-mm-sig=lists.linaro.org];
+	ARC_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	R_SPF_NA(0.00)[no SPF record];
+	DKIM_TRACE(0.00)[armlinux.org.uk:+];
 	MISSING_XM_UA(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[8];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	DKIM_TRACE(0.00)[google.com:+]
+	RCPT_COUNT_TWELVE(0.00)[21];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:8468, ipnet:78.32.0.0/15, country:GB];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: H3YSR33FJXAVVOLPT7I44X54V67Z2BV4
-X-Message-ID-Hash: H3YSR33FJXAVVOLPT7I44X54V67Z2BV4
-X-MailFrom: tjmercier@google.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Sumit Semwal <sumit.semwal@linaro.org>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, opensource.kernel@vivo.com
+Message-ID-Hash: YXLMD35MTETKN2MSCUNQRR6YDWIVGVXW
+X-Message-ID-Hash: YXLMD35MTETKN2MSCUNQRR6YDWIVGVXW
+X-MailFrom: linux+linaro-mm-sig=lists.linaro.org@armlinux.org.uk
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Julien Panis <jpanis@baylibre.com>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, Jesper Dangaard Brouer <hawk@kernel.org>, John Fastabend <john.fastabend@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Simon Horman <horms@kernel.org>, Andrew Lunn <andrew@lunn.ch>, Ratheesh Kannoth <rkannoth@marvell.com>, "netdev@vger.kernel.org" <netdev@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "bpf@vger.kernel.org" <bpf@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dmabuf: fix dmabuf file poll uaf issue
+Subject: [Linaro-mm-sig] Re: [PATCH net-next v5 1/3] net: ethernet: ti: Add accessors for struct k3_cppi_desc_pool members
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/H3YSR33FJXAVVOLPT7I44X54V67Z2BV4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YXLMD35MTETKN2MSCUNQRR6YDWIVGVXW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gVHVlLCBNYXIgMjYsIDIwMjQgYXQgNzoyOeKAr1BNIFpoaWd1byBKaWFuZyA8anVzdGluamlh
-bmdAdml2by5jb20+IHdyb3RlOg0KPg0KPiBUaGUgaXNzdWUgaXMgYSBVQUYgaXNzdWUgb2YgZG1h
-YnVmIGZpbGUgZmQuIFRocm9naHQgZGVidWdnaW5nLCB3ZSBmb3VuZA0KPiB0aGF0IHRoZSBkbWFi
-dWYgZmlsZSBmZCBpcyBhZGRlZCB0byB0aGUgZXBvbGwgZXZlbnQgbGlzdGVuZXIgbGlzdCwgYW5k
-DQo+IHdoZW4gaXQgaXMgcmVsZWFzZWQsIGl0IGlzIG5vdCByZW1vdmVkIGZyb20gdGhlIGVwb2xs
-IGxpc3QsIHdoaWNoIGxlYWRzDQo+IHRvIHRoZSBVQUYoVXNlLUFmdGVyLUZyZWUpIGlzc3VlLg0K
-Pg0KPiBUaGUgVUFGIGlzc3VlIGNhbiBiZSBzb2x2ZWQgYnkgY2hlY2tpbmcgZG1hYnVmIGZpbGUt
-PmZfY291bnQgdmFsdWUgYW5kDQo+IHNraXBwaW5nIHRoZSBwb2xsIG9wZXJhdGlvbiBmb3IgdGhl
-IGNsb3NlZCBkbWFidWYgZmlsZSBpbiB0aGUNCj4gZG1hX2J1Zl9wb2xsKCkuIFdlIGhhdmUgdGVz
-dGVkIHRoaXMgc29sdmVkIHBhdGNoIG11bHRpcGxlIHRpbWVzIGFuZA0KPiBoYXZlIG5vdCByZXBy
-b2R1Y2VkIHRoZSB1YWYgaXNzdWUuDQo+DQoNCkhpIFpoaWd1bywNCg0KV2hhdCBpcyB0aGUgbW9z
-dCByZWNlbnQga2VybmVsIHZlcnNpb24geW91J3ZlIHNlZW4gdGhlIGJ1ZyBvbj8NCg0KWW91IGFy
-ZSBjbG9zaW5nIHRoZSBkbWFidWYgZmQgZnJvbSBhbm90aGVyIHRocmVhZCB3aGlsZSBpdCBpcyBz
-dGlsbA0KcGFydCBvZiB0aGUgZXBvbGwgaW50ZXJlc3QgbGlzdD8NCg0KVGhhbmtzLA0KVC5KLg0K
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1t
-LXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVu
-c3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5h
-cm8ub3JnCg==
+On Thu, Mar 28, 2024 at 12:06:56PM +0000, Naveen Mamindlapalli wrote:
+> > diff --git a/drivers/net/ethernet/ti/k3-cppi-desc-pool.c b/drivers/net/ethernet/ti/k3-
+> > cppi-desc-pool.c
+> > index 05cc7aab1ec8..fe8203c05731 100644
+> > --- a/drivers/net/ethernet/ti/k3-cppi-desc-pool.c
+> > +++ b/drivers/net/ethernet/ti/k3-cppi-desc-pool.c
+> > @@ -132,5 +132,17 @@ size_t k3_cppi_desc_pool_avail(struct
+> > k3_cppi_desc_pool *pool)  }  EXPORT_SYMBOL_GPL(k3_cppi_desc_pool_avail);
+> > 
+> > +size_t k3_cppi_desc_pool_desc_size(struct k3_cppi_desc_pool *pool) {
+> > +	return pool->desc_size;
+> 
+> Don't you need to add NULL check on pool ptr since this function is exported?
+
+What bearing does exporting a function have on whether it should check
+for NULL?
+
+Given that this function returns size_t, it can't return an error
+number. So what value would it return if "pool" were NULL? It can
+only return a positive integer or zero.
+
+Also, the argument should be const as the function doesn't modify the
+contents of "pool".
+
+-- 
+RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
+FTTP is here! 80Mbps down 10Mbps up. Decent connectivity at last!
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
