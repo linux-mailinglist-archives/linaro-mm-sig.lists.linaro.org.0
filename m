@@ -2,243 +2,197 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB18589AF86
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  7 Apr 2024 10:19:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E82CB89B980
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  8 Apr 2024 09:58:44 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 557CA3F4E0
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  7 Apr 2024 08:19:08 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 891983F4E0
-	for <linaro-mm-sig@lists.linaro.org>; Sun,  7 Apr 2024 08:19:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CBCDA3F4E0
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  8 Apr 2024 07:58:43 +0000 (UTC)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com (mail-co1nam11on2125.outbound.protection.outlook.com [40.107.220.125])
+	by lists.linaro.org (Postfix) with ESMTPS id C9C663F4E0
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  8 Apr 2024 07:58:41 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=bQL45DWu;
-	dmarc=pass (policy=none) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of vkoul@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=vkoul@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 1FF9E60BB5;
-	Sun,  7 Apr 2024 08:19:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F29BC433F1;
-	Sun,  7 Apr 2024 08:19:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1712477945;
-	bh=e9UXYTAc5sFI75CK5XgqAQXmOoDPNUpaUP0KGJszuPQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=bQL45DWu0HxJomMb0clRFnENNm4bArAijal3EZ3qTPml9cdTdnQD/Jv+nZ6r4estn
-	 tdFm3p3nVi1vJ7RNY79r2A213/2M8AZsb3FfhENk6Agglm3lvLZmkpgMrH5L3HWAuU
-	 1mdfJp57B03c6ql4jqZ4OM6opBEQZTdC85Czud6bGKKwlGvmwv3roxGCrb88TvH02/
-	 TPIjgoqyRoHs4zvdtsgjgaUksKCcFJEmaIFG1lDVXc4m8ISrskkrOi2Hn/iIHyNQtI
-	 JNoPhQ3FBDp0yzYfHuEd/7iNzyF1QjxWLZZwhc+321A+Kax/Gni7nVcjqHjoPfQVAD
-	 +9J6be2H9OZHg==
-Date: Sun, 7 Apr 2024 13:49:00 +0530
-From: Vinod Koul <vkoul@kernel.org>
-To: Paul Cercueil <paul@crapouillou.net>
-Message-ID: <ZhJW9JEqN2wrejvC@matsya>
-References: <20240310124836.31863-1-paul@crapouillou.net>
- <20240310124836.31863-2-paul@crapouillou.net>
- <ZgUM1LFEWs3lwoAU@matsya>
- <599394c0220079b7b42dc732be817ca8a1eb4214.camel@crapouillou.net>
+	dkim=pass header.d=amd.com header.s=selector1 header.b=xomvOSOf;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.220.125 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=KT1opqsX2r8zAPEHjsbxUOlOsxsKGMz5+KHx3E0u+fXc/vANDRh8kd4z7smqMby8HireuD/l8Q5YcK8QOnFrDpEODjirw6wGB1h9rOCGHMcH31DuP2/NqlYMrDf8Tnd5hiAvSyNRcepcUY/07bMYjxUW8fx8TopLBuSrugwtbGz9bYtFQ9jInuesvesnoSCmO/DqCz6evw5APYbIghHvXbQOLm9HWM3rA0wGnvn5kNrkP3IQMdColPJbuxA0j2n6syHzsrDVzrp+9DUVMD2IGfvwqptD/8xneLXRZk/NG8g29ReBbC+Zr1+Lgfv432H/b5kf/MZyMFu7UUwYC1+pNQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fkcDmAPfup8CpG1p+PrBQyJXTMqX896i1J+H3Qzq5PE=;
+ b=erSh4tZ6JzNMQKM7FxWsH2P+75xaiRfbMVBZjioucGYGc03bi3i/q8Y76HAsTFEidP7ONECkhlQtfKSSHCgrK8ETW8OQiwDcv/RmpX2J/G346ZEm7sJ9tNLhB1SWMsyC3oGAbEgH6XossT2QzNFPxdkvlQAjucl+eCR90OYQfVX+y879zjzZwXSbiLYEw+Tki+YqT5gvLikXVQN2xbj3x3XyY+gf5ZFD1iVyo8B2NUjStLQNCsClTEY2Wq0EvNK/TIh5SGNveUJST84Rmom8iI1rxp43jWCqNLZV9RdbUc7/wQRzHOIN8JnZQ0DrU+s8B8jqXUp0K5P5aJilnLaXaA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fkcDmAPfup8CpG1p+PrBQyJXTMqX896i1J+H3Qzq5PE=;
+ b=xomvOSOfcXKgZ/8foWt+4W6VB6yCzY4vk4jbbmLVLDViL3Oc8cbtcw0gMx4+DPkCtOTf6P66TyuSMmUMq1ip4HvWz+HmgukiBwaW6O765tn08S7KFrj52sXLHJ7tHiT8MQhNVwgvR/2/7Q+rfdj6vlaxjBvSpAnDhed/GrihSuw=
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
+ by SA1PR12MB6824.namprd12.prod.outlook.com (2603:10b6:806:25f::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Mon, 8 Apr
+ 2024 07:58:39 +0000
+Received: from PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::f2b6:1034:76e8:f15a]) by PH7PR12MB5685.namprd12.prod.outlook.com
+ ([fe80::f2b6:1034:76e8:f15a%6]) with mapi id 15.20.7409.042; Mon, 8 Apr 2024
+ 07:58:39 +0000
+Message-ID: <9e6f1f52-db49-43bb-a0c2-b0ad12c28aa1@amd.com>
+Date: Mon, 8 Apr 2024 09:58:34 +0200
+User-Agent: Mozilla Thunderbird
+To: Rong Qianfeng <rongqianfeng@vivo.com>, Jianqun Xu
+ <jay.xu@rock-chips.com>, sumit.semwal@linaro.org
+References: <20211113062222.3743909-1-jay.xu@rock-chips.com>
+ <1da5cdf0-ccb8-3740-cf96-794c4d5b2eb4@amd.com>
+ <3175d41a-fc44-4741-91ac-005c8f21abb8@vivo.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <3175d41a-fc44-4741-91ac-005c8f21abb8@vivo.com>
+X-ClientProxiedBy: VI1P195CA0055.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:802:5a::44) To PH7PR12MB5685.namprd12.prod.outlook.com
+ (2603:10b6:510:13c::22)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <599394c0220079b7b42dc732be817ca8a1eb4214.camel@crapouillou.net>
-X-Rspamd-Queue-Id: 891983F4E0
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.50 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|SA1PR12MB6824:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 
+	lHS5s2dK5PiKysCxd8VIeA9i15oxR+Lzzc7QJrxG4hifCMOjgEx3LVGpyG55olbmVkAoZcqdmKQi/YmiGYl4P0A/z07W6kjn60N4XTZl6+B83OcspJ5Q946A3T8uw5lgscFjULOB7oHdWuHsJxsiE6BhV1XZKOosNhbLD7nneLuPbLxlmeAXWb2BlctdaadAE9NRLs75Vq2wCZitEpCyOsKR2wszmEm8qdfX/4E2rmptygE3hqA0BvLeqCdPTl1o5TwmUPGsqG6ABonvOriEvm+8f8+Fg5qjeDdHB713lFPSIpCrS2Z58c9kSTqPK1i8bwzXhklJn9jS3HfPpR3WHB573oFCKIv7ddnc/+kVGA4BGR3N7+kY5a/5HajQmJdptwfph8q1M52fYk/E4qJocNSTOsXWpTqo1+3D3Ov0otNwiEZY/semVqv53GvYHSb3ImQSsXWgoX5yj8HYR6kwHuVSWvSO3zhKX4E5XIDrsAYM9dfsbxKDjhDdO7OA+VV/LRURrQ5t26PV0xaZPNv91rLM7Qq+8h1bjqktnIWheqkrk/CmKbyuWpB0AfbZkcak15R5ze54tWhTk+JHJhbPYiLAY3gPYUQkTt1nsJThA2aJ4fIuseYUB/tOUCjJJM54UgwoOztW3U7HNTV3Rm7ByqM1ZwgDCXUR6qjZ4lC4y+s=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376005)(7416005)(1800799015)(366007);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?WlVIZWZ4V2JEZlVGTE9uY29aVGxIMjl5YUFyRXBNT3V2YUQrQWRMWDRUT3or?=
+ =?utf-8?B?NXBLYmx6V1V5Y2dwNFc3RE9Xa2ZBWGMrcW8wOWMwcU9lOWV6TE9uaDRkUmt2?=
+ =?utf-8?B?ZzluczNRNmZtYysvcy9MOEkxcGJLaGpiTEZmWFQ5RWRVVlJMLzdubzNuRlBi?=
+ =?utf-8?B?YVB5ald4WjFjTlZKaHBxRjgreUhxSUx4TXBlVXVhU1NjRUJJK3lCVTBLSFdr?=
+ =?utf-8?B?ZTlScFhpQWtPaDVlZlNYeVhXVGZBUjU5Yk9MVGVISFkrK3BLSUFTenF0ZExy?=
+ =?utf-8?B?NE16YnN6NEFPWUV3K1FCTVVZd3VIVnNpMUpoWVhTejc3MWlqbHNHS0s0dEY3?=
+ =?utf-8?B?Rnhzb2dpMTNDVHFWOEhJd1Y0OG95VmE3QVg5cmVkdU9MMlhZVkpNM0tVbG1x?=
+ =?utf-8?B?MDBpcXM1aW1JREZOSzRJZEhxV3BDSVNmdnJ4TEZVQ0MwVzFkWXA1SndEbS9E?=
+ =?utf-8?B?ZzEvRkVPaEdZQ1BISnBadWVPU2xxcTFyMlhxUEhNZVRTai9wQkY1MWxsRUpT?=
+ =?utf-8?B?MWxOR0pZaFNEbnJsdFhYMmsybDlxazdGK2luc04vaDlKQ1ZYWjhWdldiL1hB?=
+ =?utf-8?B?Z2xJRlI0OUI4czV6UFMxSUdwTFhUbnVsaDR3dno3MU8rS1VBOEp4QUVsY1Nz?=
+ =?utf-8?B?REJ6c1Fzd0Z6ZzJxdTNzcXlMWUNYTWpoZmVhWTJmcHk2cUp6b1hDdDFhR0Mv?=
+ =?utf-8?B?WDFmdlkyc3JwQTZjODZxVmEySUxzLzNDYmdHWHN4Y3BXdVlmeTc2NGlyQWRs?=
+ =?utf-8?B?aDVBaEhjUlFMUmRxa0U2QXB2NVZCdlNjbVZ5VlhGU3RrS0h6TjhzaHB3bWNk?=
+ =?utf-8?B?TVErbVZQUGZROEV6Mk40MHk3Zi8xenJLSFJOSVBOaW9ONkZaS2d2cnROKzBj?=
+ =?utf-8?B?MVBES1dpOUlJc082ck5qakIwRWtaTkN6K1pSSnFXN1B4SFdzS2J6SkdPZmxw?=
+ =?utf-8?B?eTlxbW5GS1hsTyt5WWk1dGRVOGwzL0tTb0F5TnB0SU5CK01vaktLUHNta2hn?=
+ =?utf-8?B?WFZTODFDZFE1cVMwMGtaKzBJYjVsUHJ5YU1laDlhbU5qRDhDbEtrVFNhcW9H?=
+ =?utf-8?B?RFhrM3lOd0RMZkpkZ2FYNVR5bUZNU1N2d3NFVU84Nmhqb013Wjc0TVRlY2pv?=
+ =?utf-8?B?VXJNaTM4M1BhcFhYV3lzVFo2WXdSdldQcjZ6Z1g2WGcwRU1YMGhkL0RJZUZn?=
+ =?utf-8?B?dG1JT0lWMzEydkNDUjNzczFVU0RZTkJhRVBsRmkreU9sSTY4VndJSThFcjJ5?=
+ =?utf-8?B?UEpCSFdtRnJObFVHdVFzekp3dXZaZEJvOXpOSEdvTkQ3RFR4VjI5YUc3QU12?=
+ =?utf-8?B?cG9jTEF3eWdoYUQ2dnpxTis1RnNZQXRrK3IvVHZsbm4yWW9xVU5hWjYvK3dh?=
+ =?utf-8?B?YmxZWVF3M3Q0ZnFXUU5RN0F2N3A3Um14ekl5SkI5MjZZUzg3UllsbnpFeE4z?=
+ =?utf-8?B?bFpCc21WYzBJL3dGZXRNSFFhRHFiL3U5ODliVGt1TmhmL1ppU0VYc1RySEEy?=
+ =?utf-8?B?NWhPS2tQeGJKWHdDNnVhbW9TM3RKazJUbFY4UzlzSXFzdXczelF3TFZKdWFQ?=
+ =?utf-8?B?c0M4Ymk1L3NFNjkxZmRtR202U0lGMWZvNmUxQ0FjbUJrMjVSbDJFbmRDaEc2?=
+ =?utf-8?B?bjZVektUMkJ4aFozUHJIMThycnBFQ29NdktES3oyejBYYTY1cDFuTlpsa2M3?=
+ =?utf-8?B?dGhDNVg2T3g0ckhKYjBDSTRxKzcvL1BiM0ZRKzBvQXJpaU5NZ2FVaVJ4YWY4?=
+ =?utf-8?B?aWtWb1haMkF3ZGFlTFFiSU1iekZQOENDUHVVN0k4NDF3NVE4Q0huRTZuUjVZ?=
+ =?utf-8?B?REhMQjJHenFmYzFCY0VWeEl3L1RjdVhXcFBpbmJsL0toOUtzUFFDM1huVXdM?=
+ =?utf-8?B?RGRaaW9tY3JKdFpTREhtSlJZc0hpQjFzSmx1bW9vU2VKbkxSQjB6cmJpSFZu?=
+ =?utf-8?B?RkJPaE10M3ZjaFVTVnY3NTZ5OS9Qd2RJcWhyZDFLRWhTMUFyTld2ZFdKR2h1?=
+ =?utf-8?B?U0k0WFlZZFQzajVVRGg2QzN5WHk5NEtOQis3ZkVNamtVT1pFM0g5MUVFUlpQ?=
+ =?utf-8?B?TnJyUWZVNjBjdFRGU0J0d1Vncy8xV2xyUkVaM1FDQlVOU2FQdkYvcDJGWmdF?=
+ =?utf-8?Q?3Yao3I+CBwlkIS22PSK64Qj7o?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b1d45e26-6daa-46b5-d02a-08dc57a1b346
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Apr 2024 07:58:39.3462
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LY9Pr9mjmc0UQFiFA6NAKx8aMRZTs5iZsbVtWTAWA2MwO0OGzMOor4A4l72wkGrO
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6824
+X-Rspamd-Queue-Id: C9C663F4E0
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.99 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	MISSING_XM_UA(0.00)[];
+	XM_UA_NO_VERSION(0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	ARC_NA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.220.125:from];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	NEURAL_HAM(-0.00)[-0.980];
 	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	RCVD_TLS_LAST(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[amd.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: QEITNZMWCSLVG2UYRKU45MGMHWR5Z7H4
-X-Message-ID-Hash: QEITNZMWCSLVG2UYRKU45MGMHWR5Z7H4
-X-MailFrom: vkoul@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jonathan Cameron <jic23@kernel.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Lars-Peter Clausen <lars@metafoo.de>, Sumit Semwal <sumit.semwal@linaro.org>, Nuno Sa <nuno.sa@analog.com>, Michael Hennerich <michael.hennerich@analog.com>, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-iio@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: 2O74E775C3KFTR6AO7BDIZ4DVPTGQOD7
+X-Message-ID-Hash: 2O74E775C3KFTR6AO7BDIZ4DVPTGQOD7
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: pekka.paalanen@collabora.com, jason@jlekstrand.net, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-rockchip@lists.infradead.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v9 1/6] dmaengine: Add API function dmaengine_prep_peripheral_dma_vec()
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: add DMA_BUF_IOCTL_SYNC_PARTIAL support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QEITNZMWCSLVG2UYRKU45MGMHWR5Z7H4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2O74E775C3KFTR6AO7BDIZ4DVPTGQOD7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-On 02-04-24, 13:31, Paul Cercueil wrote:
-> Hi Vinod,
->=20
-> Le jeudi 28 mars 2024 =E0 11:53 +0530, Vinod Koul a =E9crit=A0:
-> > On 10-03-24, 13:48, Paul Cercueil wrote:
-> > > This function can be used to initiate a scatter-gather DMA
-> > > transfer,
-> > > where the address and size of each segment is located in one entry
-> > > of
-> > > the dma_vec array.
-> > >=20
-> > > The major difference with dmaengine_prep_slave_sg() is that it
-> > > supports
-> > > specifying the lengths of each DMA transfer; as trying to override
-> > > the
-> > > length of the transfer with dmaengine_prep_slave_sg() is a very
-> > > tedious
-> > > process. The introduction of a new API function is also justified
-> > > by the
-> > > fact that scatterlists are on their way out.
-> > >=20
-> > > Note that dmaengine_prep_interleaved_dma() is not helpful either in
-> > > that
-> > > case, as it assumes that the address of each segment will be higher
-> > > than
-> > > the one of the previous segment, which we just cannot guarantee in
-> > > case
-> > > of a scatter-gather transfer.
-> > >=20
-> > > Signed-off-by: Paul Cercueil <paul@crapouillou.net>
-> > > Signed-off-by: Nuno Sa <nuno.sa@analog.com>
-> > >=20
-> > > ---
-> > > v3: New patch
-> > >=20
-> > > v5: Replace with function dmaengine_prep_slave_dma_vec(), and
-> > > struct
-> > > =A0=A0=A0 'dma_vec'.
-> > > =A0=A0=A0 Note that at some point we will need to support cyclic
-> > > transfers
-> > > =A0=A0=A0 using dmaengine_prep_slave_dma_vec(). Maybe with a new "fla=
-gs"
-> > > =A0=A0=A0 parameter to the function?
-> > >=20
-> > > v7:
-> > > =A0 - Renamed *device_prep_slave_dma_vec() ->
-> > > device_prep_peripheral_dma_vec();
-> > > =A0 - Added a new flag parameter to the function as agreed between
-> > > Paul
-> > > =A0=A0=A0 and Vinod. I renamed the first parameter to prep_flags as i=
-t's
-> > > supposed to
-> > > =A0=A0=A0 be used (I think) with enum dma_ctrl_flags. I'm not really =
-sure
-> > > how that API
-> > > =A0=A0=A0 can grow but I was thinking in just having a bool cyclic
-> > > parameter (as the
-> > > =A0=A0=A0 first intention of the flags is to support cyclic transfers)
-> > > but ended up
-> > > =A0=A0=A0 "respecting" the previously agreed approach.
-> > > ---
-> > > =A0include/linux/dmaengine.h | 27 +++++++++++++++++++++++++++
-> > > =A01 file changed, 27 insertions(+)
-> > >=20
-> > > diff --git a/include/linux/dmaengine.h b/include/linux/dmaengine.h
-> > > index 752dbde4cec1..856df8cd9a4e 100644
-> > > --- a/include/linux/dmaengine.h
-> > > +++ b/include/linux/dmaengine.h
-> > > @@ -160,6 +160,16 @@ struct dma_interleaved_template {
-> > > =A0	struct data_chunk sgl[];
-> > > =A0};
-> > > =A0
-> > > +/**
-> > > + * struct dma_vec - DMA vector
-> > > + * @addr: Bus address of the start of the vector
-> > > + * @len: Length in bytes of the DMA vector
-> > > + */
-> > > +struct dma_vec {
-> > > +	dma_addr_t addr;
-> > > +	size_t len;
-> > > +};
-> > > +
-> > > =A0/**
-> > > =A0 * enum dma_ctrl_flags - DMA flags to augment operation
-> > > preparation,
-> > > =A0 *=A0 control completion, and communicate status.
-> > > @@ -910,6 +920,10 @@ struct dma_device {
-> > > =A0	struct dma_async_tx_descriptor
-> > > *(*device_prep_dma_interrupt)(
-> > > =A0		struct dma_chan *chan, unsigned long flags);
-> > > =A0
-> > > +	struct dma_async_tx_descriptor
-> > > *(*device_prep_peripheral_dma_vec)(
-> > > +		struct dma_chan *chan, const struct dma_vec *vecs,
-> > > +		size_t nents, enum dma_transfer_direction
-> > > direction,
-> > > +		unsigned long prep_flags, unsigned long flags);
-> > > =A0	struct dma_async_tx_descriptor *(*device_prep_slave_sg)(
-> > > =A0		struct dma_chan *chan, struct scatterlist *sgl,
-> > > =A0		unsigned int sg_len, enum dma_transfer_direction
-> > > direction,
-> > > @@ -973,6 +987,19 @@ static inline struct dma_async_tx_descriptor
-> > > *dmaengine_prep_slave_single(
-> > > =A0						=A0 dir, flags,
-> > > NULL);
-> > > =A0}
-> > > =A0
-> > > +static inline struct dma_async_tx_descriptor
-> > > *dmaengine_prep_peripheral_dma_vec(
-> > > +	struct dma_chan *chan, const struct dma_vec *vecs, size_t
-> > > nents,
-> > > +	enum dma_transfer_direction dir, unsigned long prep_flags,
-> > > +	unsigned long flags)
-> > > +{
-> > > +	if (!chan || !chan->device || !chan->device-
-> > > >device_prep_peripheral_dma_vec)
-> > > +		return NULL;
-> > > +
-> > > +	return chan->device->device_prep_peripheral_dma_vec(chan,
-> > > vecs, nents,
-> > > +							=A0=A0=A0 dir,
-> > > prep_flags,
-> > > +							=A0=A0=A0
-> > > flags);
-> > > +}
-> >=20
-> > API looks good to me, thanks
-> > Few nits though:
-> > - Can we add kernel-doc for this new API please
-> > - Also update the documentation adding this new api
-> > - Lastly, we seem to have two flags, I know you have added a comment
-> > but
-> > =A0 I dont seem to recall the discussion (looked at old threads for
-> > clue
-> > =A0 as well), can you please remind me why we need both? And in your
-> > case,
-> > =A0 what is the intended usage of these flags, i would prefer single
-> > =A0 clean one...
-> >=20
->=20
-> The "prep_flags" is a mask of "enum dma_ctrl_flags".
->=20
-> The second "flags" was supposed to be specific to this function, and
-> was to future-proof the API as we eventually want to have a "cyclic"
-> flag, which would emulate a cyclic transfer by linking the SG hardware
-> descriptors accordingly.
->=20
-> However - I think we can already do that with DMA_PREP_REPEAT and
-> DMA_PREP_LOAD_EOT, right? So we can probably drop the second "flags".
+Am 07.04.24 um 09:50 schrieb Rong Qianfeng:
+> [SNIP]
+>> Am 13.11.21 um 07:22 schrieb Jianqun Xu:
+>>> Add DMA_BUF_IOCTL_SYNC_PARTIAL support for user to sync dma-buf with
+>>> offset and len.
+>>
+>> You have not given an use case for this so it is a bit hard to 
+>> review. And from the existing use cases I don't see why this should 
+>> be necessary.
+>>
+>> Even worse from the existing backend implementation I don't even see 
+>> how drivers should be able to fulfill this semantics.
+>>
+>> Please explain further,
+>> Christian.
+> Here is a practical case:
+> The user space can allocate a large chunk of dma-buf for 
+> self-management, used as a shared memory pool.
+> Small dma-buf can be allocated from this shared memory pool and 
+> released back to it after use, thus improving the speed of dma-buf 
+> allocation and release.
+> Additionally, custom functionalities such as memory statistics and 
+> boundary checking can be implemented in the user space.
+> Of course, the above-mentioned functionalities require the 
+> implementation of a partial cache sync interface.
 
-Yeah that could be done, we should add Documentation to clarify this
+Well that is obvious, but where is the code doing that?
 
---=20
-~Vinod
+You can't send out code without an actual user of it. That will 
+obviously be rejected.
+
+Regards,
+Christian.
+
+>
+> Thanks
+> Rong Qianfeng.
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
