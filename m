@@ -2,57 +2,57 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id EADDC89DF8B
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Apr 2024 17:46:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 723DD89DFAD
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Apr 2024 17:51:11 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C958D43C3E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Apr 2024 15:46:57 +0000 (UTC)
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
-	by lists.linaro.org (Postfix) with ESMTPS id E6AEB43C3E
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Apr 2024 15:46:54 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7A57043C3E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Apr 2024 15:51:10 +0000 (UTC)
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+	by lists.linaro.org (Postfix) with ESMTPS id 12DDA400E3
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Apr 2024 15:51:07 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=s1DLwmpP;
+	dkim=pass header.d=linaro.org header.s=google header.b=evTyQsEc;
 	dmarc=pass (policy=none) header.from=linaro.org;
-	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.128.42 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-416c1d64fc6so175425e9.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 09 Apr 2024 08:46:54 -0700 (PDT)
+	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.208.47 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-56e1bbdb362so7090724a12.1
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 09 Apr 2024 08:51:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1712677614; x=1713282414; darn=lists.linaro.org;
+        d=linaro.org; s=google; t=1712677866; x=1713282666; darn=lists.linaro.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=K6BgW7TKW7TJF3BVL0a/s0l7TG5JEGfNfhDuPjBIbTQ=;
-        b=s1DLwmpPIUxog3NKUu1xcbfr02tRCu3l1MFDdywhWRJ0FDYAhO5cEN94aeFIUZBdF9
-         UX0+I8vYg4SuIwZZJ2RkdqYnR3eWrJdkf1GdlOvDQE3oUSNwRI3zk81Nk9Ef+r6zmVMe
-         kGy6dA7hZiWKqp4QIp8Jxlb0Ct0uZoGLfzEfp33CNxQNCUBtIQnoObGwRLAkXGg6h8pi
-         7zIJV58Uv6gn0ZgGwv3OU/RAScsVdbgBkaHV2MQHL7BtRlM+uIm8FU5zkVZhy5xmj2vl
-         IPvtq3ELQulsN0j5/n0Q6kHG7MeQwJumACqu1PPmu35M7LVNPbPeBdqkGURFBaHOBI6N
-         +47Q==
+        bh=WAcVj2leURwW7GHrvYtyBl+mwjZPdduiH8yugxEIqH8=;
+        b=evTyQsEc5+NczeRqGY+KDH4f8EQ1N76WvhE9PJ5lEfxAnwW3ZP1RifLK3n5/9BuvUi
+         AQErxfzSOyCaQvwV84vqOdwSAlakum9Jy7DB2cm/yvUKbBCgUFY+GkKBAF9aOd1Z7MTc
+         J9wLFeh2GHRpnRQTud86ibjvqrYUcny3WmZkuzIU3ZxrW3/L6U4UxtxuQ78rMF+zuHN2
+         PmY8zgRowcXfMVSBqRxpGCMrrU68DoqC6AAyyS5Wf3X6wMj9hF+3jIIDHlgTpTYbAgHs
+         9PODjIZaTMCP5YiMjv0tl94dgqa5XVUnXoNWcfLo12Lsy4Q5teXx25nMBNSNpzGCJVk5
+         6P6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712677614; x=1713282414;
+        d=1e100.net; s=20230601; t=1712677866; x=1713282666;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=K6BgW7TKW7TJF3BVL0a/s0l7TG5JEGfNfhDuPjBIbTQ=;
-        b=MzJsm4OZ7DE+8YX5CwFrzp6I+rpxYX9plmeat+rnHVOnJShtCP+O1BiZDJwcEYemLc
-         b17gkS27TfhkrSh7clM5PCo0oXJc3gZSkAadCgqDbjE5svH+OEjTtZKZ++pyU7NNUip7
-         mhzMmfwH4pcb0M+YJ8RlffZvmsP2kiPJFzyCxkxvkO872PMu+RpUUbvl6ACFK8Q+oLEg
-         +RSxC8O3bfVYUzEZ1L0xzOVdqYXlMdzSIzvpoW0wuOwAVO70H7WNgX+xPasnxgNRXNc4
-         urpbtFRjnqk0rxHPQFV0qePSaoIHt3R4TymqYyDqq3BFL3xarxdvvdr5oqDZ3tqdHgag
-         0Bpg==
-X-Forwarded-Encrypted: i=1; AJvYcCVo9qJuCLQnGYyPCgTnTUeBmFdtSq+eywkp/31F9WL2kebYUc951+DGDI6pm+EIe7Izt3d8WXlBD5ZSqkPDeH9Miqow1hVBI8jRUNAiRRA=
-X-Gm-Message-State: AOJu0YzCRuWRq0FTa+kkMziaxFX2KNHj9VbbW/YcetttZB4/5hbY3QLP
-	5JiXPQqO4P6ni9oOuxGo022uucYO7HNjGMqBrzh4nuIRXGN5nVcQrXk+xbIGxSqkCg==
-X-Google-Smtp-Source: AGHT+IH7yLU9ymU3WSBUPIfLwxHfg1GJE0CJH8Nj4cDnB1ykPmPR7bTIlNdKgyMi2etLwEzgtU2KqQ==
-X-Received: by 2002:a05:600c:4e93:b0:416:950b:6aee with SMTP id f19-20020a05600c4e9300b00416950b6aeemr69127wmq.9.1712677613868;
-        Tue, 09 Apr 2024 08:46:53 -0700 (PDT)
+        bh=WAcVj2leURwW7GHrvYtyBl+mwjZPdduiH8yugxEIqH8=;
+        b=XpvyZofJyMRoeoF3YqUJKOGJpAnrpJ8gjJ2nSUO5j7LjHJM4FFLz8DVuXXO8YIFB9I
+         c34co6ZAjF8EKSSjL4axgJBO9UvMd2/ZHLFbhX/xRmlT4VXDSHrH/F03pTP6jWrathkt
+         PHZvnqYWHsrbdgQjWTi6y32KsrsaV90PNdcaAETmkQhqqlORoK+j41qZ1yeEV5stJ1tX
+         avZ3b5Kb5zygtF2XzvvH3tK00Mo4LvovzUM2qCP37CkV6rQeeeZKgZpzilxI/NeRIa73
+         XMxv8LZRoG5dSB/DAR5aDbHajw5g3pbceriXRvx2cHgGNdXc1sl2uiR3sv5V+GbYJdVb
+         lGpA==
+X-Forwarded-Encrypted: i=1; AJvYcCUxrC+X5BbYoGvnOI5Bg16GAsBp9UvNBHKbyGLlMwRcZMLs1VJM3Xf8AoQpuePAxEraLg7AS5+EyWgT2eImCK+uj8EujqvagYKNUh43/24=
+X-Gm-Message-State: AOJu0YyOngcPHKRKPMk5KfDJQfLVRXzzlGiurWlOxXOfkPcJZDA7zt2s
+	AxHit+tfep6XrWp8urCPjSPZ8JFpp7cfMd1KTwSrgEAB8P2FK0CRcKGitN6j0JOm8g==
+X-Google-Smtp-Source: AGHT+IH7zOuDOE8g3kAQ3c1Owo8pZbxi7R/DXadZH5wD0HvZ1cy01CVCWbe7vJXfSSifnlO4bAfWoA==
+X-Received: by 2002:a17:907:1c26:b0:a51:d605:49ea with SMTP id nc38-20020a1709071c2600b00a51d60549eamr5041474ejc.8.1712677865970;
+        Tue, 09 Apr 2024 08:51:05 -0700 (PDT)
 Received: from [192.168.1.20] ([178.197.223.16])
-        by smtp.gmail.com with ESMTPSA id a20-20020a05600c349400b00416b28651e1sm1896045wmq.36.2024.04.09.08.46.51
+        by smtp.gmail.com with ESMTPSA id qx3-20020a170906fcc300b00a4e26377bf1sm5908338ejb.175.2024.04.09.08.51.03
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 09 Apr 2024 08:46:53 -0700 (PDT)
-Message-ID: <e0b48da7-b33c-45e4-b3f3-a6d71bb0afe2@linaro.org>
-Date: Tue, 9 Apr 2024 17:46:51 +0200
+        Tue, 09 Apr 2024 08:51:05 -0700 (PDT)
+Message-ID: <cd49aa86-49b8-4a06-ba0c-8cacfa34eb3f@linaro.org>
+Date: Tue, 9 Apr 2024 17:51:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Alexandre Mergnat <amergnat@baylibre.com>,
@@ -69,7 +69,7 @@ To: Alexandre Mergnat <amergnat@baylibre.com>,
  Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
  Rob Herring <robh@kernel.org>
 References: <20240226-audio-i350-v3-0-16bb2c974c55@baylibre.com>
- <20240226-audio-i350-v3-1-16bb2c974c55@baylibre.com>
+ <20240226-audio-i350-v3-2-16bb2c974c55@baylibre.com>
 Content-Language: en-US
 From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
@@ -116,18 +116,18 @@ Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
  KQ06ztUMRrj8eVtpImjsWCd0bDWRaaR4vqhCHvAG9iWXZu4qh3ipie2Y0oSJygcZT7H3UZxq
  fyYKiqEmRuqsvv6dcbblD8ZLkz1EVZL6djImH5zc5x8qpVxlA0A0i23v5QvN00m6G9NFF0Le
  D2GYIS41Kv4Isx2dEFh+/Q==
-In-Reply-To: <20240226-audio-i350-v3-1-16bb2c974c55@baylibre.com>
-X-Rspamd-Queue-Id: E6AEB43C3E
+In-Reply-To: <20240226-audio-i350-v3-2-16bb2c974c55@baylibre.com>
+X-Rspamd-Queue-Id: 12DDA400E3
 X-Spamd-Bar: --
 X-Spamd-Result: default: False [-2.49 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+	BAYES_HAM(-3.00)[99.98%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	MIME_GOOD(-0.10)[text/plain];
 	XM_UA_NO_VERSION(0.01)[];
-	URIBL_BLOCKED(0.00)[linaro.org:dkim,baylibre.com:email,mail-wm1-f42.google.com:helo,mail-wm1-f42.google.com:rdns];
+	URIBL_BLOCKED(0.00)[linaro.org:dkim,baylibre.com:email];
 	FROM_HAS_DN(0.00)[];
 	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,kernel.org,linaro.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
 	RCVD_TLS_LAST(0.00)[];
@@ -143,22 +143,22 @@ X-Spamd-Result: default: False [-2.49 / 15.00];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.42:from];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.47:from];
 	TAGGED_RCPT(0.00)[dt];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: DLWBPMORD4LP22WGUCQSJV5XANXWIKD3
-X-Message-ID-Hash: DLWBPMORD4LP22WGUCQSJV5XANXWIKD3
+Message-ID-Hash: FT5T5GDRUQY6E7ZY22XQK2OXBKATFISJ
+X-Message-ID-Hash: FT5T5GDRUQY6E7ZY22XQK2OXBKATFISJ
 X-MailFrom: krzysztof.kozlowski@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 01/18] ASoC: dt-bindings: mediatek,mt8365-afe: Add audio afe document
+Subject: [Linaro-mm-sig] Re: [PATCH v3 02/18] ASoC: dt-bindings: mediatek,mt8365-mt6357: Add audio sound card document
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DLWBPMORD4LP22WGUCQSJV5XANXWIKD3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FT5T5GDRUQY6E7ZY22XQK2OXBKATFISJ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -168,110 +168,39 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 09/04/2024 15:41, Alexandre Mergnat wrote:
-> Add MT8365 audio front-end bindings
+On 09/04/2024 15:42, Alexandre Mergnat wrote:
+> Add soundcard bindings for the MT8365 SoC with the MT6357 audio codec.
 > 
 > Signed-off-by: Alexandre Mergnat <amergnat@baylibre.com>
-> ---
 
-> +properties:
-> +  compatible:
-> +    const: mediatek,mt8365-afe-pcm
-> +
-> +  reg:
-> +    maxItems: 1
-> +
-> +  "#sound-dai-cells":
-> +    const: 0
-> +
-> +  clocks:
-> +    items:
-> +      - description: 26M clock
-> +      - description: mux for audio clock
-> +      - description: audio i2s0 mck
-> +      - description: audio i2s1 mck
-> +      - description: audio i2s2 mck
-> +      - description: audio i2s3 mck
-> +      - description: engen 1 clock
-> +      - description: engen 2 clock
-> +      - description: audio 1 clock
-> +      - description: audio 2 clock
-> +      - description: mux for i2s0
-> +      - description: mux for i2s1
-> +      - description: mux for i2s2
-> +      - description: mux for i2s3
-> +
-> +  clock-names:
-> +    items:
-> +      - const: top_clk26m_clk
-> +      - const: top_audio_sel
-> +      - const: audio_i2s0_m
-> +      - const: audio_i2s1_m
-> +      - const: audio_i2s2_m
-> +      - const: audio_i2s3_m
-> +      - const: engen1
-> +      - const: engen2
-> +      - const: aud1
-> +      - const: aud2
-> +      - const: i2s0_m_sel
-> +      - const: i2s1_m_sel
-> +      - const: i2s2_m_sel
-> +      - const: i2s3_m_sel
-> +
-> +  interrupts:
-> +    maxItems: 1
-> +
-> +  power-domains:
-> +    maxItems: 1
-> +
-> +  mediatek,dmic-mode:
-> +    $ref: /schemas/types.yaml#/definitions/uint32
+
+> +patternProperties:
+> +  "^dai-link-[0-9]+$":
+> +    type: object
 > +    description:
-> +      Indicates how many data pins are used to transmit two channels of PDM
-> +      signal. 1 means two wires, 0 means one wire. Default value is 0.
-> +    enum:
-> +      - 0 # one wire
-> +      - 1 # two wires
+> +      Container for dai-link level properties and CODEC sub-nodes.
 > +
-> +  mediatek,topckgen:
-> +    $ref: /schemas/types.yaml#/definitions/phandle
-> +    description: The phandle of the mediatek topckgen controller
-
-Nothing improved, so again, so something which is not obvious. What is
-it used for? Why AFE needs topckgen for example?
-
+> +    properties:
+> +      codec:
+> +        type: object
+> +        description: Holds subnode which indicates codec dai.
 > +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - clocks
-> +  - clock-names
-> +  - interrupts
-> +  - power-domains
-> +  - mediatek,topckgen
+> +        properties:
+> +          sound-dai:
+> +            maxItems: 1
+> +            description: phandle of the codec DAI
 > +
-> +additionalProperties: false
+> +        additionalProperties: false
 > +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/clock/mediatek,mt8365-clk.h>
-> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
-> +    #include <dt-bindings/interrupt-controller/irq.h>
-> +    #include <dt-bindings/power/mediatek,mt8365-power.h>
-> +
-> +    soc {
-> +        #address-cells = <2>;
-> +        #size-cells = <2>;
-> +
-> +        afe@11220000 {
+> +      link-name:
+> +        description:
+> +          This property corresponds to the name of the BE dai-link to which
+> +          we are going to update parameters in this node.
+> +        items:
+> +          const: 2ND_I2S_BE
 
-Did you implement the comment or decided to keep afe?
-
-BTW, whatever "consistency" you have in mind, it does not really matter
-that much for that example. And for sure do not add incorrect code
-intentionally just to fix it in next patch.
-
-
+What is the type of link-name? Why is it fixed? How can you have here
+multiple dai links if all of them must have the same name?
 
 Best regards,
 Krzysztof
