@@ -2,57 +2,57 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 167BC89DFC2
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Apr 2024 17:55:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4934C89DFCC
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Apr 2024 17:56:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D635043C3E
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Apr 2024 15:55:49 +0000 (UTC)
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
-	by lists.linaro.org (Postfix) with ESMTPS id 9A22643C3E
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Apr 2024 15:55:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 47C5443C3E
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  9 Apr 2024 15:56:57 +0000 (UTC)
+Received: from mail-ed1-f50.google.com (mail-ed1-f50.google.com [209.85.208.50])
+	by lists.linaro.org (Postfix) with ESMTPS id 4E8D843C3E
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  9 Apr 2024 15:56:54 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b="Xq/eabg6";
+	dkim=pass header.d=linaro.org header.s=google header.b=gChbywk+;
 	dmarc=pass (policy=none) header.from=linaro.org;
-	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.218.42 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-a51a1c8d931so529261966b.0
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 09 Apr 2024 08:55:46 -0700 (PDT)
+	spf=pass (lists.linaro.org: domain of krzysztof.kozlowski@linaro.org designates 209.85.208.50 as permitted sender) smtp.mailfrom=krzysztof.kozlowski@linaro.org
+Received: by mail-ed1-f50.google.com with SMTP id 4fb4d7f45d1cf-56e48d0a632so5227922a12.2
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 09 Apr 2024 08:56:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1712678145; x=1713282945; darn=lists.linaro.org;
+        d=linaro.org; s=google; t=1712678213; x=1713283013; darn=lists.linaro.org;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to;
-        bh=4zDFe+SJOHdCWHBOFhw/wvJPaYDwCUjUbFRmrHFT7xI=;
-        b=Xq/eabg6zmoRWElfTUUPTT+5+ISl85rE2EwGvyDKQKrUVRO7BtzxJHpZhfl43szQAx
-         TMJkZD+5qBRqo8k8dkOBvggH+qaYcVtnWAXa9rUNicvgm4e/laT0XfneCg81WiE8lqWC
-         XxgZGDKWfAhmZsqyVnmucVgas3TSWWV+DKuNKPBZ9S4Ph6K+Egs3KGv7XPrZRJMoBwjT
-         36Km7A0GCMhga1gXZK6HV0cdSAm0YJP6D/K/qiDkME9gRNunjWkXzLU9fVdXV03YsiI0
-         NIWoUIxoe62LMmbjtTSUwCbaFsKM0K8cL7fkVWlc+6CZH2kWM3pQAgofD2iPeMd8qVXP
-         9ezg==
+        bh=cfusfqeFqRJ0WRDgA8cU5FKIiHVgUt/Pa1fP0UY4u98=;
+        b=gChbywk+lDhfehHOT7p9gPjTji5ZYCBQbnO65+jpiXLwjURXJxSF6GVArm5Bhv4jG4
+         KfjOwN7l+Ex6BHVWUr3jf/nrM8MB8exf+EPCsg5iTtxBZVt9mdfoKvIvfxx8/bTUB8it
+         DlU0wwfRNdjC0q4KDMmxWWJMxw8h4nxIiCjeGX1MNMgoaOakyGrElVqnkCnMCyo2UlRF
+         OEmwDRlVNHIqY84qBbSZuQw7fI/m2q/2qZRLwAfM0r+F2lRZRpY5A4l2oktydQwmvoY2
+         z/er7Amm6mOVTShgRqyGZTM20fsplZ+QBWsMPJ6OmMCaUh9UYmYtUlTIIWqHYUIBxJLs
+         EVzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1712678145; x=1713282945;
+        d=1e100.net; s=20230601; t=1712678213; x=1713283013;
         h=content-transfer-encoding:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=4zDFe+SJOHdCWHBOFhw/wvJPaYDwCUjUbFRmrHFT7xI=;
-        b=BzAHGdZqAv6cmvqQa+g+r+2E/f9VVemtAI4gU9bQsaoJZzOI0pjd8taRihPhPVgXOv
-         sbsc/sxQ0F1VvdrrnXhcCxsKfE4YNh2Z67k4zmMsR7552ciVj55G38ra/GZKwVUSLein
-         neRUMj4fZS9JsbJBTFiuFEdvx69olu+ntxJ0KBI2T9viwwvZcLVfxwZX4c07aGdfM+vz
-         DvM5il3GR6PEy+7BAcbcncmld3Zc0PBapVnsJGaMddYRP6tvmRVvtQZe8GKVYXS7zFGy
-         r8QDygFBM93AGCzljnI52zXemniMox8aioF67OTUOfRLlMfzuH81S7xYWoA0embr1QY8
-         QNzg==
-X-Forwarded-Encrypted: i=1; AJvYcCWYxAbPegBbyN606OTMsT1KKdBQLd/RIBPWgdbk6MjrehvQJ/GpCrbi6xFb/swviMWz1t52xCKGItkLYflLu0YXsiPy4Ae3IytAyNWdPZw=
-X-Gm-Message-State: AOJu0Yz4KT4RGOxi9bs4CrXE1dsAhE3shzvgj9kn7RaPORJXRsa0Cab+
-	RF6QtGwqIS9g+TT6u439lE9Bj4b2vUuTUCLJp9zhJF3xnwKIdkEldTqcod0HI2eJwQ==
-X-Google-Smtp-Source: AGHT+IENY+948bK5WfWlPqf5keCbB+LeNzCM68n0PMclNi34psfNLCR/L4zknT/HYkHYWQfMeiEAQw==
-X-Received: by 2002:a17:907:72c2:b0:a4e:2570:ff56 with SMTP id du2-20020a17090772c200b00a4e2570ff56mr10325798ejc.0.1712678145523;
-        Tue, 09 Apr 2024 08:55:45 -0700 (PDT)
+        bh=cfusfqeFqRJ0WRDgA8cU5FKIiHVgUt/Pa1fP0UY4u98=;
+        b=bDyNDHwkEYPQ13Z4d2/uBYcZ+oWGgPDD3iLJGuTq6nGxJOwGgowgV5JL7e4+JidbzH
+         0YJdeBVNsGlC0u06m9dpDMRMhx6R08Y1o2tp6mACKATflaAhlB6Mplc6IKQvLGn8IdEJ
+         GTJE5rcVfMdGNm8hqpuftwPeXLAe19JGh6/lRbhcEGi8VHLxPtCPGDoGRaJDemxrlYZ1
+         FzWftVrVf2pPeMhEj345Uv22HfhdN7rpg3g7A81BPs6pd/R2A/wpX+bdgXcOoD0HN0lI
+         mZLvJOCBy99Hbiqf27XdfTMziBr6CmJe2ctj8YeNLpW1zysN37V16Z2Cnd8uTU/qE5vq
+         Z2Uw==
+X-Forwarded-Encrypted: i=1; AJvYcCV8PyDN0ZPvGcvfeiHwqpvzHt7QR/TrhSDtS/2F7+qA36eILOEGoyRjCUNJ9jf0nwHxPrtZ5bfLrzQP7rnk0MHDC+iJQ9aeYl1P+NrZGec=
+X-Gm-Message-State: AOJu0Yx+nKMXXS8Fnjg5n0IXsj/kIv9ZpnM/OlpqpzF8Nh/IYjYvP2Lm
+	b2p89vdSaTGE3WugjciBnrSrmEE1LtkC56b+8IslPbBbYpxV846Y94Fg+IA8VFY35w==
+X-Google-Smtp-Source: AGHT+IGz69y5YQmJCMWOCwk0+ovCF0eMOPo7z36gohvpMfMsK6OkGCXH0pCxdYBz5kX6P2cbGycwTg==
+X-Received: by 2002:a17:907:1b17:b0:a51:da26:9062 with SMTP id mp23-20020a1709071b1700b00a51da269062mr5127083ejc.36.1712678213231;
+        Tue, 09 Apr 2024 08:56:53 -0700 (PDT)
 Received: from [192.168.1.20] ([178.197.223.16])
-        by smtp.gmail.com with ESMTPSA id j20-20020a170906255400b00a51cd604c4bsm3476656ejb.149.2024.04.09.08.55.43
+        by smtp.gmail.com with ESMTPSA id i3-20020a1709063c4300b00a51fa9f6d92sm809358ejg.38.2024.04.09.08.56.50
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 09 Apr 2024 08:55:45 -0700 (PDT)
-Message-ID: <481abafd-33af-44a6-8460-068b4a85d764@linaro.org>
-Date: Tue, 9 Apr 2024 17:55:42 +0200
+        Tue, 09 Apr 2024 08:56:52 -0700 (PDT)
+Message-ID: <812696d7-fa85-433a-8457-99754a10a8ef@linaro.org>
+Date: Tue, 9 Apr 2024 17:56:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Alexandre Mergnat <amergnat@baylibre.com>,
@@ -69,7 +69,7 @@ To: Alexandre Mergnat <amergnat@baylibre.com>,
  Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
  Rob Herring <robh@kernel.org>
 References: <20240226-audio-i350-v3-0-16bb2c974c55@baylibre.com>
- <20240226-audio-i350-v3-3-16bb2c974c55@baylibre.com>
+ <20240226-audio-i350-v3-4-16bb2c974c55@baylibre.com>
 Content-Language: en-US
 From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
@@ -116,26 +116,26 @@ Autocrypt: addr=krzysztof.kozlowski@linaro.org; keydata=
  KQ06ztUMRrj8eVtpImjsWCd0bDWRaaR4vqhCHvAG9iWXZu4qh3ipie2Y0oSJygcZT7H3UZxq
  fyYKiqEmRuqsvv6dcbblD8ZLkz1EVZL6djImH5zc5x8qpVxlA0A0i23v5QvN00m6G9NFF0Le
  D2GYIS41Kv4Isx2dEFh+/Q==
-In-Reply-To: <20240226-audio-i350-v3-3-16bb2c974c55@baylibre.com>
-X-Rspamd-Queue-Id: 9A22643C3E
+In-Reply-To: <20240226-audio-i350-v3-4-16bb2c974c55@baylibre.com>
+X-Rspamd-Queue-Id: 4E8D843C3E
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.59 / 15.00];
+X-Spamd-Result: default: False [-2.49 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.42:from];
 	XM_UA_NO_VERSION(0.01)[];
-	URIBL_BLOCKED(0.00)[linaro.org:dkim,devicetree.org:url];
-	RCVD_TLS_LAST(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,kernel.org,linaro.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
-	MIME_TRACE(0.00)[0:+];
+	URIBL_BLOCKED(0.00)[baylibre.com:email,linaro.org:dkim];
 	FROM_HAS_DN(0.00)[];
+	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,kernel.org,linaro.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
+	RCVD_TLS_LAST(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
 	DKIM_TRACE(0.00)[linaro.org:+];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
@@ -143,22 +143,22 @@ X-Spamd-Result: default: False [-2.59 / 15.00];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.50:from];
 	TAGGED_RCPT(0.00)[dt];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: XWRKJVX7JRBYOCVTTFL3KQAPUE3GS2XN
-X-Message-ID-Hash: XWRKJVX7JRBYOCVTTFL3KQAPUE3GS2XN
+Message-ID-Hash: M2RMZL24G36OTO7RSGB76JXI6YYBRINN
+X-Message-ID-Hash: M2RMZL24G36OTO7RSGB76JXI6YYBRINN
 X-MailFrom: krzysztof.kozlowski@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 03/18] ASoC: dt-bindings: mt6357: Add audio codec document
+Subject: [Linaro-mm-sig] Re: [PATCH v3 04/18] dt-bindings: mfd: mediatek: Add codec property for MT6357 PMIC
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XWRKJVX7JRBYOCVTTFL3KQAPUE3GS2XN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/M2RMZL24G36OTO7RSGB76JXI6YYBRINN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -169,100 +169,30 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
 On 09/04/2024 15:42, Alexandre Mergnat wrote:
-> Add MT8365 audio codec bindings to set required
+> Add the audio codec sub-device. This sub-device is used to set required
 > and optional voltage properties between the codec and the board.
-> The properties are:
-> - phandle of the requiered power supply.
-
-typo
-
-> - Setup of microphone bias voltage.
-> - Setup of the speaker pin pull-down.
 > 
 > Signed-off-by: Alexandre Mergnat <amergnat@baylibre.com>
 > ---
->  .../devicetree/bindings/sound/mt6357.yaml          | 54 ++++++++++++++++++++++
-
-Filename using compatible syntax, so missing vendor prefix.
-
->  1 file changed, 54 insertions(+)
+>  Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml | 5 +++++
+>  1 file changed, 5 insertions(+)
 > 
-> diff --git a/Documentation/devicetree/bindings/sound/mt6357.yaml b/Documentation/devicetree/bindings/sound/mt6357.yaml
-> new file mode 100644
-> index 000000000000..381cb71b959f
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/sound/mt6357.yaml
-> @@ -0,0 +1,54 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/sound/mt6357.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Mediatek MT6357 Codec
-> +
-> +maintainers:
-> +  - Alexandre Mergnat <amergnat@baylibre.com>
-> +
-> +description: |
+> diff --git a/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml b/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml
+> index 37423c2e0fdf..7c6a4a587b5f 100644
+> --- a/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml
+> +++ b/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml
+> @@ -37,6 +37,11 @@ properties:
+>    "#interrupt-cells":
+>      const: 2
+>  
+> +  codec:
+> +    type: object
+> +    $ref: /schemas/sound/mt6357.yaml
+> +    unevaluatedProperties: false
 
-Do not need '|' unless you need to preserve formatting.
+Just put the properties here, without the codec node.
 
-> +  This is the required and optional voltage properties for this subdevice.
-> +  The communication between MT6357 and SoC is through Mediatek PMIC wrapper.
-> +  For more detail, please visit Mediatek PMIC wrapper documentation.
-> +  Must be a child node of PMIC wrapper.
-
-Why?
-
-> +
-> +properties:
-> +
-
-Drop blank line
-
-> +  mediatek,hp-pull-down:
-> +    description:
-> +      Earphone driver positive output stage short to
-> +      the audio reference ground.
-> +    type: boolean
-> +
-> +  mediatek,micbias0-microvolt:
-> +    description: Selects MIC Bias 0 output voltage.
-> +    enum: [1700000, 1800000, 1900000, 2000000,
-> +           2100000, 2500000, 2600000, 2700000]
-> +    default: 1700000
-> +
-> +  mediatek,micbias1-microvolt:
-> +    description: Selects MIC Bias 1 output voltage.
-> +    enum: [1700000, 1800000, 1900000, 2000000,
-> +           2100000, 2500000, 2600000, 2700000]
-> +    default: 1700000
-> +
-> +  mediatek,vaud28-supply:
-> +    description: 2.8 volt supply phandle for the audio codec
-
-Supplies go without vendor prefixes.
-
-> +
-> +required:
-> +  - mediatek,vaud28-supply
-
-That's basically no-op schema. I do not understand what you are trying
-to achieve here.
-
-
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    codec {
-> +        mediatek,micbias0-microvolt = <1900000>;
-> +        mediatek,micbias1-microvolt = <1700000>;
-> +        mediatek,vaud28-supply = <&mt6357_vaud28_reg>;
-
-Sorry, this does not work. Change voltage to 1111111 and check the results.
+Also, your example is now incomplete.
 
 Best regards,
 Krzysztof
