@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 678A68B50EA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 29 Apr 2024 08:00:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0BA328B50F2
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 29 Apr 2024 08:03:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 75F1E4009E
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 29 Apr 2024 06:00:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 05A9D4412D
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 29 Apr 2024 06:03:45 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 938F64009E
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 29 Apr 2024 06:00:06 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 9F04B3F988
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 29 Apr 2024 06:03:34 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=THpp7M7K;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=dJbPcGfa;
 	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=krzk@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 2FBBB60BDB;
-	Mon, 29 Apr 2024 06:00:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F18DC113CD;
-	Mon, 29 Apr 2024 05:59:56 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id 4701660B9A;
+	Mon, 29 Apr 2024 06:03:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 997D1C113CD;
+	Mon, 29 Apr 2024 06:03:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1714370403;
-	bh=ugJQOPZ1kMTBi0aTLYRs6bL+WgoMwb9S2BmIZzdBd3U=;
+	s=k20201202; t=1714370613;
+	bh=CCQ14BOX8lYmY87/Bd32IyYzzmdAz5MRlMjIkZTvFTo=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=THpp7M7K8ImMQ2I9BGn7B4zp2wz/mnx7nV3T/CdrrQqxANpdGLK+gv7nPwf7H67QO
-	 lbzuJIOSFYmvERFTZo+5g48O+qg12IYtFAAabXqSM1yv4vG4RWtaTCVWPQlpF2g/0d
-	 kEsU0pkSdfRx4YKWFE/kmqWMXS072qxuU7x2+9fyFiWIJDiMv0bQ9SdHWMU082PBQX
-	 hJ8zq4cn6yoU+7qwl+WPNDPu+fjNUIJV/hIzbqGhoBcvtI3IYmLfpAqXMG8ztjBtd0
-	 ODj9S7KH/c5TCb1eFb78EuBRDPq4LnJ49z5QBjRpxfoSMGzbvoXCIEqLAfssEUdQRi
-	 2UgKpWhDer6nA==
-Message-ID: <dc18a843-c83b-4d83-a9b9-236fcd57abb2@kernel.org>
-Date: Mon, 29 Apr 2024 07:59:54 +0200
+	b=dJbPcGfaHhewkFjJoQ5Ul9JRgfxN9LXdJ1NiOvUSJzPnKCC1or24GesGYhyr05UlF
+	 u1z7Xwg4bJb21HgoUZLn0ta9tBDdBD/mhmioyGyUe7rvratwNqsRn+23VT6Ru0+FIf
+	 io9OF2vvuNEurSPjJeSyBHMPGyaLDpmU2he7hjMapejxHCKftk4kM6zOzXdSwsv6s/
+	 iqR1kfdA1sCIGHN2JAyxhQMNatrvx3Zk2iRalgNHNOD7VlU1XeIIo+VFeB7JGcum4U
+	 zoQVzurzSz3D9S3JfiJ4aALm32nR+N9CajQevnmvmPqQN3P+Z6FX/n3Ct2SU6BvfRo
+	 Cyyrr6ut4zT5g==
+Message-ID: <6d21da37-8be7-467c-8878-d57af0b0201b@kernel.org>
+Date: Mon, 29 Apr 2024 08:03:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Alexandre Mergnat <amergnat@baylibre.com>,
@@ -47,7 +47,7 @@ To: Alexandre Mergnat <amergnat@baylibre.com>,
  Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>
 References: <20240226-audio-i350-v4-0-082b22186d4c@baylibre.com>
- <20240226-audio-i350-v4-2-082b22186d4c@baylibre.com>
+ <20240226-audio-i350-v4-3-082b22186d4c@baylibre.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -93,14 +93,14 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  uZwJCLykjad45hsWcOGk3OcaAGQS6NDlfhM6O9aYNwGL6tGt/6BkRikNOs7VDEa4/HlbaSJo
  7FgndGw1kWmkeL6oQh7wBvYll2buKod4qYntmNKEicoHGU+x91Gcan8mCoqhJkbqrL7+nXG2
  5Q/GS5M9RFWS+nYyJh+c3OcfKqVcZQNANItt7+ULzdNJuhvTRRdC3g9hmCEuNSr+CLMdnRBY fv0=
-In-Reply-To: <20240226-audio-i350-v4-2-082b22186d4c@baylibre.com>
+In-Reply-To: <20240226-audio-i350-v4-3-082b22186d4c@baylibre.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 938F64009E
-X-Spamd-Bar: /
-X-Spamd-Result: default: False [0.29 / 15.00];
+X-Rspamd-Queue-Id: 9F04B3F988
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.39 / 15.00];
+	BAYES_HAM(-2.90)[99.55%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	BAYES_HAM(-0.22)[72.00%];
 	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
@@ -122,16 +122,16 @@ X-Spamd-Result: default: False [0.29 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: LQFP4W5GBU32UQPQDWJXNTNQK4HLV73C
-X-Message-ID-Hash: LQFP4W5GBU32UQPQDWJXNTNQK4HLV73C
+Message-ID-Hash: 4G7N3AQ4GA4ZZ73XIHJBGE76F2GAI77F
+X-Message-ID-Hash: 4G7N3AQ4GA4ZZ73XIHJBGE76F2GAI77F
 X-MailFrom: krzk@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 02/16] ASoC: dt-bindings: mediatek,mt8365-mt6357: Add audio sound card document
+Subject: [Linaro-mm-sig] Re: [PATCH v4 03/16] dt-bindings: mfd: mediatek: Add codec property for MT6357 PMIC
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LQFP4W5GBU32UQPQDWJXNTNQK4HLV73C/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/4G7N3AQ4GA4ZZ73XIHJBGE76F2GAI77F/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -142,24 +142,22 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
 On 26/04/2024 19:22, Alexandre Mergnat wrote:
-> +      link-name:
-> +        description: Indicates dai-link name and PCM stream name
-> +        enum:
-> +          - I2S_IN_BE
-> +          - I2S_OUT_BE
-> +          - PCM1_BE
-> +          - PDM1_BE
-> +          - PDM2_BE
-> +          - PDM3_BE
-> +          - PDM4_BE
-> +          - SPDIF_IN_BE
-> +          - SPDIF_OUT_BE
-> +          - TDM_IN_BE
-> +          - TDM_OUT_BE
+>    regulators:
+>      type: object
+>      $ref: /schemas/regulator/mediatek,mt6357-regulator.yaml
+> @@ -83,6 +111,12 @@ examples:
+>              interrupt-controller;
+>              #interrupt-cells = <2>;
+>  
+> +            audio-codec {
+> +                mediatek,micbias0-microvolt = <1700000>;
+> +                mediatek,micbias1-microvolt = <1700000>;
+> +                vaud28-supply = <&mt6357_vaud28_reg>;
 
-Feels like BE is redundant.
+And now you should see how odd it looks. Supplies are part of entire
+chip, not subblock, even if they supply dedicated domain within that chip.
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+That's why I asked to put it in the parent node.
 
 Best regards,
 Krzysztof
