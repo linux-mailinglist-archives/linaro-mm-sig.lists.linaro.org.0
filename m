@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F3188B50E1
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 29 Apr 2024 07:59:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 678A68B50EA
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 29 Apr 2024 08:00:17 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DC03144151
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 29 Apr 2024 05:59:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 75F1E4009E
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 29 Apr 2024 06:00:16 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 0CF353F023
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 29 Apr 2024 05:58:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 938F64009E
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 29 Apr 2024 06:00:06 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=bz0QCIQe;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=THpp7M7K;
 	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=krzk@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 935DF60C00;
-	Mon, 29 Apr 2024 05:58:54 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5238AC113CD;
-	Mon, 29 Apr 2024 05:58:46 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id 2FBBB60BDB;
+	Mon, 29 Apr 2024 06:00:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F18DC113CD;
+	Mon, 29 Apr 2024 05:59:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1714370334;
-	bh=VqF+KZoGkXM7Zgfjh924AdCno4ywq0HAuQkwF009/5I=;
+	s=k20201202; t=1714370403;
+	bh=ugJQOPZ1kMTBi0aTLYRs6bL+WgoMwb9S2BmIZzdBd3U=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=bz0QCIQew8CRF9V7mEsqp73oZZMwzUIExEspSmR3xUrKcEZ8jfbJGhIpLN1/Ha0go
-	 +UpQ7O1gwHzgjP6j8nSLYhzyOeTI4INjGcpwghqiiiEc7iAQ6yEolpa2QuuunQiXt8
-	 JPG3crg6OkU5d4nYMKh3qJP8Dd7rOclmH0ACe0nuvcoqpZ3VQJC65iWdQOY5C0S0tX
-	 v6yZRBP65zIuja445dktZE34z53WMnhPyf5BeS2ARHUleUX1lNE3Ggpvmuboso72j1
-	 TX5mphkIgzcU17vz+HrshdJxgENrL8kxHuCOHyDSmwOaU5na9uXj65VvHzd3jXfuqE
-	 HHn271sTUwsYA==
-Message-ID: <98e32bf9-dae1-4f75-b4dd-066756515cb3@kernel.org>
-Date: Mon, 29 Apr 2024 07:58:44 +0200
+	b=THpp7M7K8ImMQ2I9BGn7B4zp2wz/mnx7nV3T/CdrrQqxANpdGLK+gv7nPwf7H67QO
+	 lbzuJIOSFYmvERFTZo+5g48O+qg12IYtFAAabXqSM1yv4vG4RWtaTCVWPQlpF2g/0d
+	 kEsU0pkSdfRx4YKWFE/kmqWMXS072qxuU7x2+9fyFiWIJDiMv0bQ9SdHWMU082PBQX
+	 hJ8zq4cn6yoU+7qwl+WPNDPu+fjNUIJV/hIzbqGhoBcvtI3IYmLfpAqXMG8ztjBtd0
+	 ODj9S7KH/c5TCb1eFb78EuBRDPq4LnJ49z5QBjRpxfoSMGzbvoXCIEqLAfssEUdQRi
+	 2UgKpWhDer6nA==
+Message-ID: <dc18a843-c83b-4d83-a9b9-236fcd57abb2@kernel.org>
+Date: Mon, 29 Apr 2024 07:59:54 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Alexandre Mergnat <amergnat@baylibre.com>,
@@ -47,7 +47,7 @@ To: Alexandre Mergnat <amergnat@baylibre.com>,
  Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>
 References: <20240226-audio-i350-v4-0-082b22186d4c@baylibre.com>
- <20240226-audio-i350-v4-1-082b22186d4c@baylibre.com>
+ <20240226-audio-i350-v4-2-082b22186d4c@baylibre.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -93,46 +93,45 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  uZwJCLykjad45hsWcOGk3OcaAGQS6NDlfhM6O9aYNwGL6tGt/6BkRikNOs7VDEa4/HlbaSJo
  7FgndGw1kWmkeL6oQh7wBvYll2buKod4qYntmNKEicoHGU+x91Gcan8mCoqhJkbqrL7+nXG2
  5Q/GS5M9RFWS+nYyJh+c3OcfKqVcZQNANItt7+ULzdNJuhvTRRdC3g9hmCEuNSr+CLMdnRBY fv0=
-In-Reply-To: <20240226-audio-i350-v4-1-082b22186d4c@baylibre.com>
+In-Reply-To: <20240226-audio-i350-v4-2-082b22186d4c@baylibre.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 0CF353F023
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.49 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+X-Rspamd-Queue-Id: 938F64009E
+X-Spamd-Bar: /
+X-Spamd-Result: default: False [0.29 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
+	BAYES_HAM(-0.22)[72.00%];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
 	MIME_GOOD(-0.10)[text/plain];
 	XM_UA_NO_VERSION(0.01)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	TAGGED_RCPT(0.00)[dt];
-	MIME_TRACE(0.00)[0:+];
 	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,kernel.org,linaro.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
-	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_RCPT(0.00)[dt];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,kernel.org,linaro.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DNSWL_BLOCKED(0.00)[139.178.84.217:from,100.75.92.58:received];
 	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: YOLBWDPIHXFALF4O4RCN2PIRSRA4AHVR
-X-Message-ID-Hash: YOLBWDPIHXFALF4O4RCN2PIRSRA4AHVR
+Message-ID-Hash: LQFP4W5GBU32UQPQDWJXNTNQK4HLV73C
+X-Message-ID-Hash: LQFP4W5GBU32UQPQDWJXNTNQK4HLV73C
 X-MailFrom: krzk@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 01/16] ASoC: dt-bindings: mediatek,mt8365-afe: Add audio afe document
+Subject: [Linaro-mm-sig] Re: [PATCH v4 02/16] ASoC: dt-bindings: mediatek,mt8365-mt6357: Add audio sound card document
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YOLBWDPIHXFALF4O4RCN2PIRSRA4AHVR/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LQFP4W5GBU32UQPQDWJXNTNQK4HLV73C/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -143,10 +142,22 @@ Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
 On 26/04/2024 19:22, Alexandre Mergnat wrote:
-> Add MT8365 audio front-end bindings
-> 
-> Signed-off-by: Alexandre Mergnat <amergnat@baylibre.com>
-> ---
+> +      link-name:
+> +        description: Indicates dai-link name and PCM stream name
+> +        enum:
+> +          - I2S_IN_BE
+> +          - I2S_OUT_BE
+> +          - PCM1_BE
+> +          - PDM1_BE
+> +          - PDM2_BE
+> +          - PDM3_BE
+> +          - PDM4_BE
+> +          - SPDIF_IN_BE
+> +          - SPDIF_OUT_BE
+> +          - TDM_IN_BE
+> +          - TDM_OUT_BE
+
+Feels like BE is redundant.
 
 Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 
