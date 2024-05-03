@@ -2,106 +2,107 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1E0628BB305
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 May 2024 20:26:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CA0CA8BB3E0
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 May 2024 21:22:46 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EC69E401C4
-	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 May 2024 18:26:43 +0000 (UTC)
-Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com [209.85.210.176])
-	by lists.linaro.org (Postfix) with ESMTPS id 09989401C4
-	for <linaro-mm-sig@lists.linaro.org>; Fri,  3 May 2024 18:26:34 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id ADB3744800
+	for <lists+linaro-mm-sig@lfdr.de>; Fri,  3 May 2024 19:22:45 +0000 (UTC)
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
+	by lists.linaro.org (Postfix) with ESMTPS id A15F93F39D
+	for <linaro-mm-sig@lists.linaro.org>; Fri,  3 May 2024 19:22:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=chromium.org header.s=google header.b=RLdmzUr3;
-	spf=pass (lists.linaro.org: domain of keescook@chromium.org designates 209.85.210.176 as permitted sender) smtp.mailfrom=keescook@chromium.org;
+	dkim=pass header.d=chromium.org header.s=google header.b=eQ9JNciY;
+	spf=pass (lists.linaro.org: domain of keescook@chromium.org designates 209.85.210.179 as permitted sender) smtp.mailfrom=keescook@chromium.org;
 	dmarc=pass (policy=none) header.from=chromium.org
-Received: by mail-pf1-f176.google.com with SMTP id d2e1a72fcca58-6f4521ad6c0so27023b3a.0
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 03 May 2024 11:26:34 -0700 (PDT)
+Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-6edb76d83d0so67984b3a.0
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 03 May 2024 12:22:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1714760793; x=1715365593; darn=lists.linaro.org;
+        d=chromium.org; s=google; t=1714764155; x=1715368955; darn=lists.linaro.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=jqBoL43PMGyCqFXn3ehXdH+uWie7AbSm2FUzxDYORqI=;
-        b=RLdmzUr3DmAhfxDRAv/Ovsoif7NHlXb30UpwBb5jG2vH7L3+OzRFRNMwfyfaBsQuJN
-         0csqwCAXLIPxp3HeyzVACKj285BtyCp7hqJbD+G4j3sYPuvYtZ51tGx9E5joX1sbCEq8
-         aCHrOEUyhoJTGoaT6MptsC50Rqkln9wn6mJMk=
+        bh=wZE9sdMty9EFGzepC01irLfs4hOfSOdCceQaPVz49U0=;
+        b=eQ9JNciYNBOsyQl9ZCX6fbMKtSe+7BBaZIP2Zr5XVNwyha9jI+2B8nuop8t8kSoyHf
+         ohKcunRfUFxoTrDFJELVON1zpKUWMxZv9r6ey6lHCDaYyjLqu88wmcvcQKnUa2ql0PPg
+         4Jzj2PVqT/XHkmI6V5Cm6C5OwpMyz4s2HtrwI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714760793; x=1715365593;
+        d=1e100.net; s=20230601; t=1714764155; x=1715368955;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=jqBoL43PMGyCqFXn3ehXdH+uWie7AbSm2FUzxDYORqI=;
-        b=jmXLweU/DSmUZrAEoK+cPO9sc9F0zMK3gUOXbZ4BbOZXtehFXi/lLvgAnQQKS6IlDX
-         Es2FRHdkjU4O+KdBDagQ8cwoHTAS63zqJRC5R2l607wt38W7jsn+u+yuodhrcSBHW5rp
-         Y0JCWxl7zJgyvPAYtKuIXvr+SX5rYV+LCEAPxzwci8e81WaX2FvtClOmDXPLflA9JIfT
-         Wm+BNIOutrLas6aTT+AqrW9q6wdJADtveeE0Lc9HfGtUt8Ql2bXQkZcDCQ/eHXf/SGBL
-         2FuT1QzCYTwXk7F1x+T1KN0+Ngh7cUIaPsEruhgXL/f8ZlqBBwEv0rqVHIaNS7M73OiH
-         MgWw==
-X-Forwarded-Encrypted: i=1; AJvYcCWYD5C1v7aJbqVHn2wewRZjNKlow7FMN+VBUDfjhvrBQsZ4/2joe0agklJIr4ebQDtBmpqiub5zpZNftvZMdZK+n5/5h2OMv+wB/JzheU0=
-X-Gm-Message-State: AOJu0YwPVyz29pxL+OBM8wUQ4kzA9Z2dVfJKZ059HTMJEPSAWvt0m3cl
-	C9QUJYMyBKU3rInpG6xOTVqjMHR9Jn6jUOPj0Tf+SvqKNWO518I8leFNAX2+/Q==
-X-Google-Smtp-Source: AGHT+IGWOc/11Q1zIvnXaqaqAVGNo4zxAI/bv3cFFxYSIO/ngCUn47liMIMHwFEFiX6Gt/zTa/ffcw==
-X-Received: by 2002:a05:6a00:3d06:b0:6e7:20a7:9fc0 with SMTP id lo6-20020a056a003d0600b006e720a79fc0mr3768000pfb.34.1714760793183;
-        Fri, 03 May 2024 11:26:33 -0700 (PDT)
+        bh=wZE9sdMty9EFGzepC01irLfs4hOfSOdCceQaPVz49U0=;
+        b=w5EB6DHaN5aeIuv3A65q180ayTgMBLqUPIC5kW0em/A1fzIYg81hG7bZovUZ2kGy2h
+         CUXTc63VNYEAoMtQWV6WNPT6iQgJhAw+HSGn/+MTjiqCDE0clldt9GXrS8xLXVqQVrON
+         xZKpW7/k4Ajv1c3MgN4pmqjONKdcCVr/iJnqpYju1RXzzXvIWm1xjwx/XbAjXXgqpZpH
+         Wjc3Jcfg7bM37sa+I6p/RjC0Lw41mcSwBJIvoUkwzOTAOGnS33yqqV81fCqGJzrWdrSv
+         c+LM6FWq3QZUwM/YLb9u50hSzmbdQpXBfU8f6mFUvM0mSubkmyLm17VklP5BaaMNlp8N
+         szXg==
+X-Forwarded-Encrypted: i=1; AJvYcCV86MeywIknDOY6H8eju8py8IDZFLbWzLCK1SA2jZ6uvsmngwOsyGbTrS0xUiJx7cFrTUKC6ecEXe7zykmyyh4PYI3+F86REJiK1lqRtEc=
+X-Gm-Message-State: AOJu0Yw6GRlKHWownjpltMl6lRsWRyiHrvT9FQ7ewTw9Kb5y1/YiHxO+
+	YtLjXTdgt7eW+0Jgak9nOKQwjQWWrHtrIUZSwzKKD0g978MEUnVLXNkyfIky/A==
+X-Google-Smtp-Source: AGHT+IH/cnBf5AmDAraYkoF01FtIBT3d+Li+us/ROEA5peZIO3ZUwaNqrc+r9saLXIGgSIOvwv5RWw==
+X-Received: by 2002:a05:6a00:801:b0:6ed:21d5:fc2c with SMTP id m1-20020a056a00080100b006ed21d5fc2cmr4136967pfk.26.1714764154703;
+        Fri, 03 May 2024 12:22:34 -0700 (PDT)
 Received: from www.outflux.net ([198.0.35.241])
-        by smtp.gmail.com with ESMTPSA id gp9-20020a056a003b8900b006ea8cc9250bsm3361952pfb.44.2024.05.03.11.26.32
+        by smtp.gmail.com with ESMTPSA id y29-20020aa79e1d000000b006ed59172d2fsm3415250pfq.87.2024.05.03.12.22.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 03 May 2024 11:26:32 -0700 (PDT)
-Date: Fri, 3 May 2024 11:26:32 -0700
+        Fri, 03 May 2024 12:22:33 -0700 (PDT)
+Date: Fri, 3 May 2024 12:22:33 -0700
 From: Kees Cook <keescook@chromium.org>
-To: Bui Quang Minh <minhquangbui99@gmail.com>,
-	Al Viro <viro@zeniv.linux.org.uk>,
-	Christian Brauner <brauner@kernel.org>
-Message-ID: <202405031110.6F47982593@keescook>
+To: Jens Axboe <axboe@kernel.dk>
+Message-ID: <202405031207.9D62DA4973@keescook>
 References: <0000000000002d631f0615918f1e@google.com>
  <7c41cf3c-2a71-4dbb-8f34-0337890906fc@gmail.com>
+ <202405031110.6F47982593@keescook>
+ <64b51cc5-9f5b-4160-83f2-6d62175418a2@kernel.dk>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <7c41cf3c-2a71-4dbb-8f34-0337890906fc@gmail.com>
+In-Reply-To: <64b51cc5-9f5b-4160-83f2-6d62175418a2@kernel.dk>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 09989401C4
-X-Spamd-Bar: ++
-X-Spamd-Result: default: False [2.00 / 15.00];
+X-Rspamd-Queue-Id: A15F93F39D
+X-Spamd-Bar: +
+X-Spamd-Result: default: False [1.90 / 15.00];
 	MID_END_EQ_FROM_USER_PART(4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[chromium.org,none];
 	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[chromium.org:s=google];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[chromium.org:s=google];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.210.179:from];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[gmail.com,zeniv.linux.org.uk,kernel.org,syzkaller.appspotmail.com,vger.kernel.org,suse.cz,googlegroups.com,linaro.org,amd.com,lists.freedesktop.org,lists.linaro.org,labbott.name];
 	FROM_HAS_DN(0.00)[];
 	ARC_NA(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,zeniv.linux.org.uk,kernel.org];
-	RCPT_COUNT_TWELVE(0.00)[18];
+	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
 	MIME_TRACE(0.00)[0:+];
 	DKIM_TRACE(0.00)[chromium.org:+];
+	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	TO_DN_SOME(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[045b454ab35fd82a35fb];
+	TO_DN_SOME(0.00)[];
+	DNSWL_BLOCKED(0.00)[198.0.35.241:received,209.85.210.179:from];
 	DWL_DNSWL_BLOCKED(0.00)[chromium.org:dkim];
+	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.210.176:from];
+	TAGGED_RCPT(0.00)[045b454ab35fd82a35fb];
 	SUBJECT_HAS_QUESTION(0.00)[]
-X-Spam-Level: **
+X-Spam-Level: *
 X-Rspamd-Action: no action
-Message-ID-Hash: 3JS2HWP3MVASK2NAIE3P3N22UIWGCRYN
-X-Message-ID-Hash: 3JS2HWP3MVASK2NAIE3P3N22UIWGCRYN
+Message-ID-Hash: BPLIZVYOI5VZSN3ZLWXURPBV2NSHHJWC
+X-Message-ID-Hash: BPLIZVYOI5VZSN3ZLWXURPBV2NSHHJWC
 X-MailFrom: keescook@chromium.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: syzbot <syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com>, axboe@kernel.dk, brauner@kernel.org, io-uring@vger.kernel.org, jack@suse.cz, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com, viro@zeniv.linux.org.uk, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Laura Abbott <laura@labbott.name>
+CC: Bui Quang Minh <minhquangbui99@gmail.com>, Al Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, syzbot <syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com>, io-uring@vger.kernel.org, jack@suse.cz, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, syzkaller-bugs@googlegroups.com, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Laura Abbott <laura@labbott.name>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] get_file() unsafe under epoll (was Re: [syzbot] [fs?] [io-uring?] general protection fault in __ep_remove)
+Subject: [Linaro-mm-sig] Re: get_file() unsafe under epoll (was Re: [syzbot] [fs?] [io-uring?] general protection fault in __ep_remove)
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3JS2HWP3MVASK2NAIE3P3N22UIWGCRYN/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BPLIZVYOI5VZSN3ZLWXURPBV2NSHHJWC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -111,123 +112,64 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Fri, May 03, 2024 at 06:54:22PM +0700, Bui Quang Minh wrote:
-> [...]
-> Root cause:
-> AFAIK, eventpoll (epoll) does not increase the registered file's reference.
-> To ensure the safety, when the registered file is deallocated in __fput,
-> eventpoll_release is called to unregister the file from epoll. When calling
-> poll on epoll, epoll will loop through registered files and call vfs_poll on
-> these files. In the file's poll, file is guaranteed to be alive, however, as
-> epoll does not increase the registered file's reference, the file may be
-> dying
-> and it's not safe the get the file for later use. And dma_buf_poll violates
-> this. In the dma_buf_poll, it tries to get_file to use in the callback. This
-> leads to a race where the dmabuf->file can be fput twice.
+On Fri, May 03, 2024 at 12:49:11PM -0600, Jens Axboe wrote:
+> On 5/3/24 12:26 PM, Kees Cook wrote:
+> > Thanks for doing this analysis! I suspect at least a start of a fix
+> > would be this:
+> > 
+> > diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+> > index 8fe5aa67b167..15e8f74ee0f2 100644
+> > --- a/drivers/dma-buf/dma-buf.c
+> > +++ b/drivers/dma-buf/dma-buf.c
+> > @@ -267,9 +267,8 @@ static __poll_t dma_buf_poll(struct file *file, poll_table *poll)
+> >  
+> >  		if (events & EPOLLOUT) {
+> >  			/* Paired with fput in dma_buf_poll_cb */
+> > -			get_file(dmabuf->file);
+> > -
+> > -			if (!dma_buf_poll_add_cb(resv, true, dcb))
+> > +			if (!atomic_long_inc_not_zero(&dmabuf->file) &&
+> > +			    !dma_buf_poll_add_cb(resv, true, dcb))
+> >  				/* No callback queued, wake up any other waiters */
 > 
-> Here is the race occurs in the above proof-of-concept
+> Don't think this is sane at all. I'm assuming you meant:
 > 
-> close(dmabuf->file)
-> __fput_sync (f_count == 1, last ref)
-> f_count-- (f_count == 0 now)
-> __fput
->                                     epoll_wait
->                                     vfs_poll(dmabuf->file)
->                                     get_file(dmabuf->file)(f_count == 1)
-> eventpoll_release
-> dmabuf->file deallocation
->                                     fput(dmabuf->file) (f_count == 1)
->                                     f_count--
->                                     dmabuf->file deallocation
+> 	atomic_long_inc_not_zero(&dmabuf->file->f_count);
+
+Oops, yes, sorry. I was typed from memory instead of copy/paste.
+
+> but won't fly as you're not under RCU in the first place. And what
+> protects it from being long gone before you attempt this anyway? This is
+> sane way to attempt to fix it, it's completely opposite of what sane ref
+> handling should look like.
 > 
-> I am not familiar with the dma_buf so I don't know the proper fix for the
-> issue. About the rule that don't get the file for later use in poll callback
-> of
-> file, I wonder if it is there when only select/poll exist or just after
-> epoll
-> appears.
+> Not sure what the best fix is here, seems like dma-buf should hold an
+> actual reference to the file upfront rather than just stash a pointer
+> and then later _hope_ that it can just grab a reference. That seems
+> pretty horrible, and the real source of the issue.
+
+AFAICT, epoll just doesn't hold any references at all. It depends,
+I think, on eventpoll_release() (really eventpoll_release_file())
+synchronizing with epoll_wait() (but I don't see how this happens, and
+the race seems to be against ep_item_poll() ...?)
+
+I'm really confused about how eventpoll manages the lifetime of polled
+fds.
+
+> > Due to this issue I've proposed fixing get_file() to detect pathological states:
+> > https://lore.kernel.org/lkml/20240502222252.work.690-kees@kernel.org/
 > 
-> I hope the analysis helps us to fix the issue.
+> I don't think this would catch this case, as the memory could just be
+> garbage at this point.
 
-Thanks for doing this analysis! I suspect at least a start of a fix
-would be this:
+It catches it just fine! :) I tested it against the published PoC.
 
-diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-index 8fe5aa67b167..15e8f74ee0f2 100644
---- a/drivers/dma-buf/dma-buf.c
-+++ b/drivers/dma-buf/dma-buf.c
-@@ -267,9 +267,8 @@ static __poll_t dma_buf_poll(struct file *file, poll_table *poll)
- 
- 		if (events & EPOLLOUT) {
- 			/* Paired with fput in dma_buf_poll_cb */
--			get_file(dmabuf->file);
--
--			if (!dma_buf_poll_add_cb(resv, true, dcb))
-+			if (!atomic_long_inc_not_zero(&dmabuf->file) &&
-+			    !dma_buf_poll_add_cb(resv, true, dcb))
- 				/* No callback queued, wake up any other waiters */
- 				dma_buf_poll_cb(NULL, &dcb->cb);
- 			else
-@@ -290,9 +289,8 @@ static __poll_t dma_buf_poll(struct file *file, poll_table *poll)
- 
- 		if (events & EPOLLIN) {
- 			/* Paired with fput in dma_buf_poll_cb */
--			get_file(dmabuf->file);
--
--			if (!dma_buf_poll_add_cb(resv, false, dcb))
-+			if (!atomic_long_inc_not_zero(&dmabuf->file) &&
-+			    !dma_buf_poll_add_cb(resv, false, dcb))
- 				/* No callback queued, wake up any other waiters */
- 				dma_buf_poll_cb(NULL, &dcb->cb);
- 			else
-
-
-But this ends up leaving "active" non-zero, and at close time it runs
-into:
-
-        BUG_ON(dmabuf->cb_in.active || dmabuf->cb_out.active);
-
-But the bottom line is that get_file() is unsafe to use in some places,
-one of which appears to be in the poll handler. There are maybe some
-other fragile places too, like in drivers/gpu/drm/vmwgfx/ttm_object.c:
-
-static bool __must_check get_dma_buf_unless_doomed(struct dma_buf *dmabuf)
-{
-	return atomic_long_inc_not_zero(&dmabuf->file->f_count) != 0L;
-}
-
-Which I also note involves a dmabuf...
-
-Due to this issue I've proposed fixing get_file() to detect pathological states:
-https://lore.kernel.org/lkml/20240502222252.work.690-kees@kernel.org/
-
-But that has run into some push-back. I'm hoping that seeing this epoll
-example will help illustrate what needs fixing a little better.
-
-I think the best current proposal is to just WARN sooner instead of a
-full refcount_t implementation:
-
-
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 8dfd53b52744..e09107d0a3d6 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -1040,7 +1040,8 @@ struct file_handle {
- 
- static inline struct file *get_file(struct file *f)
- {
--	atomic_long_inc(&f->f_count);
-+	long prior = atomic_long_fetch_inc_relaxed(&f->f_count);
-+	WARN_ONCE(!prior, "struct file::f_count incremented from zero; use-after-free condition present!\n");
- 	return f;
- }
- 
-
-
-What's the right way to deal with the dmabuf situation? (And I suspect
-it applies to get_dma_buf_unless_doomed() as well...)
-
--Kees
+And for cases where further allocations have progressed far enough to
+corrupt the freed struct file and render the check pointless, nothing
+different has happened than what happens today. At least now we have a
+window to catch the situation across the time frame before it is both
+reallocated _and_ the contents at the f_count offset gets changed to
+non-zero.
 
 -- 
 Kees Cook
