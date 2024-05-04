@@ -2,101 +2,102 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DF698BBCD5
-	for <lists+linaro-mm-sig@lfdr.de>; Sat,  4 May 2024 17:40:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 39B018BBCEB
+	for <lists+linaro-mm-sig@lfdr.de>; Sat,  4 May 2024 17:54:19 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 62EC143D48
-	for <lists+linaro-mm-sig@lfdr.de>; Sat,  4 May 2024 15:40:54 +0000 (UTC)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
-	by lists.linaro.org (Postfix) with ESMTPS id C283D3F06F
-	for <linaro-mm-sig@lists.linaro.org>; Sat,  4 May 2024 15:40:43 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3E77E3F06F
+	for <lists+linaro-mm-sig@lfdr.de>; Sat,  4 May 2024 15:54:18 +0000 (UTC)
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 93F9F3F06F
+	for <linaro-mm-sig@lists.linaro.org>; Sat,  4 May 2024 15:54:06 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linux-foundation.org header.s=google header.b=fbv0zExB;
-	spf=pass (lists.linaro.org: domain of torvalds@linuxfoundation.org designates 209.85.218.54 as permitted sender) smtp.mailfrom=torvalds@linuxfoundation.org;
+	dkim=pass header.d=linux-foundation.org header.s=google header.b=ITYr8bXB;
+	spf=pass (lists.linaro.org: domain of torvalds@linuxfoundation.org designates 209.85.218.48 as permitted sender) smtp.mailfrom=torvalds@linuxfoundation.org;
 	dmarc=none
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-a59a64db066so126020066b.3
-        for <linaro-mm-sig@lists.linaro.org>; Sat, 04 May 2024 08:40:43 -0700 (PDT)
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-a59afce5a70so57119766b.3
+        for <linaro-mm-sig@lists.linaro.org>; Sat, 04 May 2024 08:54:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linux-foundation.org; s=google; t=1714837243; x=1715442043; darn=lists.linaro.org;
+        d=linux-foundation.org; s=google; t=1714838045; x=1715442845; darn=lists.linaro.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=PFxw8P3AYgeC7IB6rTn+68WOAU10n6cRPv/6X7o+SOY=;
-        b=fbv0zExBbFHkPmdg+vNA/ACQVTMLJPY4hDreGZHFJVX4bLAehyqEzjTfVg8Dj/9Fc4
-         FVXsyT5kORzNfCdp5SgedVyVfeJ57ejqyclCWiBCjim7xg4Ex3T8p2G7G1sGtw7PFQqv
-         EDUrhoQEEdz86XlPk4t/N3Y4bHSNFpXwkj7bI=
+        bh=kZo6ArVOf5NVi3NAdVYQGqHRs84wzKq7YB5CfjfJdNw=;
+        b=ITYr8bXBmbUcVzHfqfF3a9ppGl63Qp1uWGBje0ykfpk4FdMT9cDc2FkiF6nGmyOfdo
+         aUMehrzQZg75JIvMrdCgJ4sPJVI4GBaZLe4sxbN8yAEk/tDQ2dNbyYQ81NBmW8mu6Uqo
+         Lv0l0u+zaSjcvuzPLR4A4BKaCi8kU/H39GaDU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714837243; x=1715442043;
+        d=1e100.net; s=20230601; t=1714838045; x=1715442845;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=PFxw8P3AYgeC7IB6rTn+68WOAU10n6cRPv/6X7o+SOY=;
-        b=fKVQ9XDUDhA4A/DHBgj+s2BoB+yaMLOh7PKiiIIVa05zvAgXFCSj4wUetGefKf0+hy
-         ELUF+tIPUwz6j1toTlL2huGtaOj40ymUiWOsrMESsxGrM2APaPX0T7XPHyONL49JUlbS
-         GqJ1Ptw9vFegVWmzDYyzgtbydux1oacv+RVHdGwgVcKLozHjczd5Fkppvx8sNqctdMp0
-         juEb8yMUvxlBcQcFwRD92gaHCcFkZL59yM/hcSv1dh8+DisTYR1e6I21Gmq50VuJY1V6
-         OFxBXF2E4S05nMtoH0cPS18ixHRysfFG7DQ3H0V2qe+pfTELDlS6686oO2O+M5+RXeps
-         6vqg==
-X-Forwarded-Encrypted: i=1; AJvYcCWPYyWr4+1mqOU7boyPxQx4gtv/w1vQ5rbk/oNwMDLpuj0x3RzDR/y7xueoN4cySYgeaVbXpMxaVm7a3MTO4UqEhQlrKN0U7cEId6k05Dk=
-X-Gm-Message-State: AOJu0Ywfh85+1pwhJHJsmqba34h5JTgzkagNER/ncBV6hQhwfqeM76EW
-	h+RpdjFpkh2slya/SmcEshhE9syfSBG7KM71S/n2icYtD7/NZyDgMLGDZln3M/c8OjguGK3ODfA
-	74VwpIg==
-X-Google-Smtp-Source: AGHT+IHlqwNzCzph7YIkqOsws1ibGkKVvz9tJB+5LeCv61AKRDCJk02azkns8qwGlxwQd48Kwmy8EQ==
-X-Received: by 2002:a50:d659:0:b0:572:1625:ae99 with SMTP id c25-20020a50d659000000b005721625ae99mr3305932edj.31.1714837242826;
-        Sat, 04 May 2024 08:40:42 -0700 (PDT)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com. [209.85.218.54])
-        by smtp.gmail.com with ESMTPSA id i15-20020a0564020f0f00b005726dceb2easm3049838eda.20.2024.05.04.08.40.42
+        bh=kZo6ArVOf5NVi3NAdVYQGqHRs84wzKq7YB5CfjfJdNw=;
+        b=J1i008C7jr+klt2XSsmfA+PJG6w59y/y3ODjoZZnNG1sZvGLQ54YsR2SXiD5bCaN4n
+         GzFTgkPmLUlHLdRNVmt9Ygvb4UbeRLamgm7HCfkkrOCFtGtzxSN0QYRPX7WwbqvsZiut
+         znNeLK6pEQxwfoc0uIXhTfln+5u2U9gjrZbigbcx/fGSpC2VthbuyVRk2Ywnm2X/nwYx
+         O+LYrvGFn5Tqd5a0vTbSo/ZqqyvefOzIjW4Ri3qgGoCfdYkKhaS6HGQv7zKi26yiQfwe
+         HuEvwT7Q2RzHalFpU/5sC37JLI3+gIiZOSPG3MCiVBzdPBfnjcgACmRpElzEQrk4UKVW
+         PrmQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWHA5ndI/F2WDOq0QrSkDvbSPFm5kQWqkdo8pMfhHyzs8GD8hLCr006Gf7GR3IOdzYf41CX4DlsmEm66HGEREA8yqc2Nwq9dub5RxpDyxQ=
+X-Gm-Message-State: AOJu0YzK/ea0VX7TDvclawhCO9v3wTvh4sfHP5KX+QX9sGiY5fly4RxW
+	G4TduRQxHcIYgXKbLfiHJG3XUd3r6F6GvnynOsPsow/5RK3zpWT0DEMdZCQX27s0BE8pF8ltV2Z
+	Fm+0MnA==
+X-Google-Smtp-Source: AGHT+IFy1QsPCXoZ7wV+4UmDCn1EQQx+o2FW7A6WiU9OpUu6LJnr9ZLu6WS3dig71DE7tTjyQ9QIDw==
+X-Received: by 2002:a50:c31d:0:b0:56e:418:5559 with SMTP id a29-20020a50c31d000000b0056e04185559mr3767019edb.3.1714838045549;
+        Sat, 04 May 2024 08:54:05 -0700 (PDT)
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com. [209.85.218.42])
+        by smtp.gmail.com with ESMTPSA id fd14-20020a056402388e00b00572d7eec694sm1688730edb.16.2024.05.04.08.54.04
         for <linaro-mm-sig@lists.linaro.org>
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 04 May 2024 08:40:42 -0700 (PDT)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-a59a9d66a51so91468366b.2
-        for <linaro-mm-sig@lists.linaro.org>; Sat, 04 May 2024 08:40:42 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AJvYcCXkdUOFYpI8yNoSlC7txabqHwxcTcgMn8NT6lNcKVTCIfUGXc172Z4cC5Uspe0f/B5EfhRUpIVsFYMTfm/9DVbFrfVWNZxJVFjcOwMMVk4=
-X-Received: by 2002:a17:906:cf83:b0:a55:75f6:ce0f with SMTP id
- um3-20020a170906cf8300b00a5575f6ce0fmr3540131ejb.13.1714837242162; Sat, 04
- May 2024 08:40:42 -0700 (PDT)
+        Sat, 04 May 2024 08:54:04 -0700 (PDT)
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-a59a0e4b773so128276066b.2
+        for <linaro-mm-sig@lists.linaro.org>; Sat, 04 May 2024 08:54:04 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AJvYcCUpSajSWaCU3FcVMHmkAAaJm+/TEcIgMoEUaDpGyvpzlyPMaxkFcmi4gdBsYElbL6n13gyUnZKaL9eJ935c04Y9qi4kzWvGZV+OGPA9XsY=
+X-Received: by 2002:a17:906:a842:b0:a58:5ee1:db43 with SMTP id
+ dx2-20020a170906a84200b00a585ee1db43mr3389515ejb.23.1714838043724; Sat, 04
+ May 2024 08:54:03 -0700 (PDT)
 MIME-Version: 1.0
 References: <202405031110.6F47982593@keescook> <20240503211129.679762-2-torvalds@linux-foundation.org>
  <20240503212428.GY2118490@ZenIV> <CAHk-=wjpsTEkHgo1uev3xGJ2bQXYShaRf3GPEqDWNgUuKx0JFw@mail.gmail.com>
  <20240504-wohngebiet-restwert-6c3c94fddbdd@brauner> <CAHk-=wj_Fu1FkMFrjivQ=MGkwkKXZBuh0f4BEhcZHD5WCvHesw@mail.gmail.com>
-In-Reply-To: <CAHk-=wj_Fu1FkMFrjivQ=MGkwkKXZBuh0f4BEhcZHD5WCvHesw@mail.gmail.com>
+ <CAHk-=wirxPSQgRV1u7t4qS1t4ED7w7OeehdUSC-LYZXspqa49w@mail.gmail.com>
+In-Reply-To: <CAHk-=wirxPSQgRV1u7t4qS1t4ED7w7OeehdUSC-LYZXspqa49w@mail.gmail.com>
 From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Sat, 4 May 2024 08:40:25 -0700
-X-Gmail-Original-Message-ID: <CAHk-=wirxPSQgRV1u7t4qS1t4ED7w7OeehdUSC-LYZXspqa49w@mail.gmail.com>
-Message-ID: <CAHk-=wirxPSQgRV1u7t4qS1t4ED7w7OeehdUSC-LYZXspqa49w@mail.gmail.com>
+Date: Sat, 4 May 2024 08:53:47 -0700
+X-Gmail-Original-Message-ID: <CAHk-=whrSSNYVzTHNFDNGag_xcKuv=RaQUX8+n29kkic39DRuQ@mail.gmail.com>
+Message-ID: <CAHk-=whrSSNYVzTHNFDNGag_xcKuv=RaQUX8+n29kkic39DRuQ@mail.gmail.com>
 To: Christian Brauner <brauner@kernel.org>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: C283D3F06F
+X-Rspamd-Queue-Id: 93F9F3F06F
 X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.80 / 15.00];
+X-Spamd-Result: default: False [-1.70 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	FORGED_SENDER(0.30)[torvalds@linux-foundation.org,torvalds@linuxfoundation.org];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=google];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.54:from];
 	MIME_GOOD(-0.10)[text/plain];
+	URIBL_BLOCKED(0.00)[mail-ej1-f48.google.com:rdns,mail-ej1-f48.google.com:helo,linux-foundation.org:email,linux-foundation.org:dkim];
 	RCVD_TLS_LAST(0.00)[];
-	URIBL_BLOCKED(0.00)[linux-foundation.org:email,linux-foundation.org:dkim];
-	RCVD_COUNT_THREE(0.00)[3];
-	ARC_NA(0.00)[];
-	DMARC_NA(0.00)[linux-foundation.org];
-	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
+	DMARC_NA(0.00)[linux-foundation.org];
+	ARC_NA(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	MIME_TRACE(0.00)[0:+];
 	FREEMAIL_CC(0.00)[zeniv.linux.org.uk,chromium.org,kernel.dk,amd.com,lists.freedesktop.org,vger.kernel.org,suse.cz,labbott.name,lists.linaro.org,gmail.com,linaro.org,syzkaller.appspotmail.com,googlegroups.com];
 	DKIM_TRACE(0.00)[linux-foundation.org:+];
+	MISSING_XM_UA(0.00)[];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_NEQ_ENVFROM(0.00)[torvalds@linux-foundation.org,torvalds@linuxfoundation.org];
 	RCPT_COUNT_TWELVE(0.00)[17];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.48:from];
 	TAGGED_RCPT(0.00)[045b454ab35fd82a35fb];
-	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: RLP7EPM4IZUNQRPOODTWJG7GZC5QEJFV
-X-Message-ID-Hash: RLP7EPM4IZUNQRPOODTWJG7GZC5QEJFV
+Message-ID-Hash: L4F4V4FEIAC6WKOGEBOSYS4ZHCUW76TX
+X-Message-ID-Hash: L4F4V4FEIAC6WKOGEBOSYS4ZHCUW76TX
 X-MailFrom: torvalds@linuxfoundation.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: Al Viro <viro@zeniv.linux.org.uk>, keescook@chromium.org, axboe@kernel.dk, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, io-uring@vger.kernel.org, jack@suse.cz, laura@labbott.name, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, minhquangbui99@gmail.com, sumit.semwal@linaro.org, syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com, syzkaller-bugs@googlegroups.com
@@ -104,7 +105,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH] epoll: try to be a _bit_ better about file lifetimes
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RLP7EPM4IZUNQRPOODTWJG7GZC5QEJFV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/L4F4V4FEIAC6WKOGEBOSYS4ZHCUW76TX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -114,33 +115,31 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Sat, 4 May 2024 at 08:32, Linus Torvalds
+On Sat, 4 May 2024 at 08:40, Linus Torvalds
 <torvalds@linux-foundation.org> wrote:
 >
-> Now, during this TOTALLY INNOCENT sock_poll(), in another thread, the
-> file closing completes, eventpoll_release() finishes [..]
+> And maybe it's even *only* dma-buf that does that fget() in its
+> ->poll() function. Even *then* it's not a dma-buf.c bug.
 
-Actually, Al is right that ep_item_poll() should be holding the
-ep->mtx, so eventpoll_release() -> eventpoll_release_file_file() ->
-mutex_lock(&ep->mtx) should block and the file doesn't actually get
-released.
+They all do in the sense that they do
 
-So I guess the sock_poll() issue cannot happen. It does need some
-poll() function that does 'fget()', and believes that it works.
+  poll_wait
+    -> __pollwait
+     -> get_file (*boom*)
 
-But because the f_count has already gone down to zero, fget() doesn't
-work, and doesn't keep the file around, and you have the bug.
+but the boom is very small because the poll_wait() will be undone by
+poll_freewait(), and normally poll/select has held the file count
+elevated.
 
-The cases that do fget() in poll() are probably race, but they aren't
-buggy. epoll is buggy.
+Except for epoll. Which leaves those pollwait entries around until
+it's done - but again will be held up on the ep->mtx before it does
+so.
 
-So my example wasn't going to work, but the argument isn't really any
-different, it's just a much more limited case that breaks.
+So everybody does some f_count games, but possibly dma-buf is the only
+one that ends up expecting to hold on to the f_count for longer
+periods.
 
-And maybe it's even *only* dma-buf that does that fget() in its
-->poll() function. Even *then* it's not a dma-buf.c bug.
-
-               Linus
+             Linus
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
