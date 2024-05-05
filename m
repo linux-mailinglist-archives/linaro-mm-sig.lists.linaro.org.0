@@ -2,80 +2,87 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B7CD8BC2F6
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  5 May 2024 20:00:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F39A38BC354
+	for <lists+linaro-mm-sig@lfdr.de>; Sun,  5 May 2024 21:46:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 84B37447F5
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  5 May 2024 18:00:18 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 790C33F0A4
-	for <linaro-mm-sig@lists.linaro.org>; Sun,  5 May 2024 18:00:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CC5E24477B
+	for <lists+linaro-mm-sig@lfdr.de>; Sun,  5 May 2024 19:46:29 +0000 (UTC)
+Received: from zeniv.linux.org.uk (zeniv.linux.org.uk [62.89.141.173])
+	by lists.linaro.org (Postfix) with ESMTPS id C785340A7C
+	for <linaro-mm-sig@lists.linaro.org>; Sun,  5 May 2024 19:46:18 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linux-foundation.org header.s=korg header.b=CZtZ4Kss;
-	spf=pass (lists.linaro.org: domain of torvalds@linux-foundation.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=torvalds@linux-foundation.org;
-	dmarc=none
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 06CD360A0C;
-	Sun,  5 May 2024 18:00:04 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 563D9C113CC;
-	Sun,  5 May 2024 18:00:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
-	s=korg; t=1714932003;
-	bh=TsViQ/wYOfXwpC4HIbCA3YZAn4taAzdXrsvEgMW9B4A=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=CZtZ4Kss4M1ugKJ7mNWZqHBV202HqoMwtZlcRjCpwHl674Vss/9EoYPFiv6Kb4FeD
-	 tHC4/QlBc/TNWEyBH7IT/ScaeO/01P3qAeR+FGsapRFZT4Yn6EJc4pRu0BLRUe+fhe
-	 9HecR26VCfGEdlB9PzGLrIhnvWf+OU1PPMzCB+EE=
-From: Linus Torvalds <torvalds@linux-foundation.org>
-To: torvalds@linux-foundation.org
-Date: Sun,  5 May 2024 10:55:57 -0700
-Message-ID: <20240505175556.1213266-2-torvalds@linux-foundation.org>
-X-Mailer: git-send-email 2.44.0.330.g4d18c88175
-In-Reply-To: <CAHk-=wgMzzfPwKc=8yBdXwSkxoZMZroTCiLZTYESYD3BC_7rhQ@mail.gmail.com>
-References: <CAHk-=wgMzzfPwKc=8yBdXwSkxoZMZroTCiLZTYESYD3BC_7rhQ@mail.gmail.com>
+	dkim=pass header.d=linux.org.uk header.s=zeniv-20220401 header.b="WRqMcU/Z";
+	spf=none (lists.linaro.org: domain of viro@ftp.linux.org.uk has no SPF policy when checking 62.89.141.173) smtp.mailfrom=viro@ftp.linux.org.uk;
+	dmarc=pass (policy=none) header.from=zeniv.linux.org.uk
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
+	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=CR8HSnmd0wpNYx92D/iUJFVLON8rnjrI0Q5oSHnNFnM=; b=WRqMcU/ZGHTJPWmlNeLfcAzApr
+	RaTueuuX4UcawZAh6Js5j23MefBc0PwL5TSeboB94b+oL1d96HnFLOApzEMQVEGqnmZxdESFBaNTI
+	gRx9uhQrbDV624FRxrN2uwkjDUiob3b11Q3dQS554W0u4b+UDZ2p6h0mqcGpu0KuODkBE3wJFkYrM
+	Ccn0D4iIrdABSC8UQ6CYmaUJHFbMEVzW2eI8nZeDLQIvgBEdtrYLsDAd1QiS6AKOeAbO3cA3jKEtE
+	HFshm2HNHREdy6EkxPFF0mTgymJ16FhUnBVz1pVnHYdV6myF9x5Uw750zSbEqR1U+RqadTs4p7amr
+	uWFRmDTQ==;
+Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat Linux))
+	id 1s3hoB-00DGHE-1B;
+	Sun, 05 May 2024 19:46:03 +0000
+Date: Sun, 5 May 2024 20:46:03 +0100
+From: Al Viro <viro@zeniv.linux.org.uk>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Message-ID: <20240505194603.GH2118490@ZenIV>
+References: <202405031110.6F47982593@keescook>
+ <20240503211129.679762-2-torvalds@linux-foundation.org>
+ <20240503212428.GY2118490@ZenIV>
+ <CAHk-=wjpsTEkHgo1uev3xGJ2bQXYShaRf3GPEqDWNgUuKx0JFw@mail.gmail.com>
+ <20240504-wohngebiet-restwert-6c3c94fddbdd@brauner>
+ <CAHk-=wj_Fu1FkMFrjivQ=MGkwkKXZBuh0f4BEhcZHD5WCvHesw@mail.gmail.com>
+ <CAHk-=wirxPSQgRV1u7t4qS1t4ED7w7OeehdUSC-LYZXspqa49w@mail.gmail.com>
+ <CAHk-=whrSSNYVzTHNFDNGag_xcKuv=RaQUX8+n29kkic39DRuQ@mail.gmail.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAHk-=whrSSNYVzTHNFDNGag_xcKuv=RaQUX8+n29kkic39DRuQ@mail.gmail.com>
+Sender: Al Viro <viro@ftp.linux.org.uk>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 790C33F0A4
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.00 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
+X-Rspamd-Queue-Id: C785340A7C
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.40 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	DWL_DNSWL_MED(-2.00)[linux.org.uk:dkim];
 	SUSPICIOUS_RECIPS(1.50)[];
-	RCVD_DKIM_ARC_DNSWL_HI(-1.00)[];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	RCVD_IN_DNSWL_HI(-0.50)[139.178.84.217:from];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
-	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=korg];
+	DMARC_POLICY_ALLOW(-0.50)[zeniv.linux.org.uk,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	FORGED_SENDER(0.30)[viro@zeniv.linux.org.uk,viro@ftp.linux.org.uk];
+	R_DKIM_ALLOW(-0.20)[linux.org.uk:s=zeniv-20220401];
+	ONCE_RECEIVED(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
-	ARC_NA(0.00)[];
-	DMARC_NA(0.00)[linux-foundation.org];
+	ASN(0.00)[asn:8419, ipnet:62.89.128.0/19, country:GB];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_NONE(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[linux-foundation.org:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
 	TAGGED_RCPT(0.00)[045b454ab35fd82a35fb];
-	FREEMAIL_CC(0.00)[kernel.dk,kernel.org,amd.com,lists.freedesktop.org,vger.kernel.org,suse.cz,chromium.org,labbott.name,lists.linaro.org,gmail.com,linaro.org,syzkaller.appspotmail.com,googlegroups.com,zeniv.linux.org.uk];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	DNSWL_BLOCKED(0.00)[100.75.92.58:received];
-	FROM_HAS_DN(0.00)[]
+	R_SPF_NA(0.00)[no SPF record];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,chromium.org,kernel.dk,amd.com,lists.freedesktop.org,vger.kernel.org,suse.cz,labbott.name,lists.linaro.org,gmail.com,linaro.org,syzkaller.appspotmail.com,googlegroups.com];
+	MISSING_XM_UA(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[viro@zeniv.linux.org.uk,viro@ftp.linux.org.uk];
+	ARC_NA(0.00)[];
+	DKIM_TRACE(0.00)[linux.org.uk:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: 2QUBEOY4GX4YWHOYRC5NDODQCJN7TVU3
-X-Message-ID-Hash: 2QUBEOY4GX4YWHOYRC5NDODQCJN7TVU3
-X-MailFrom: torvalds@linux-foundation.org
+Message-ID-Hash: WI26NY3HB323JBE2ZFYIKBFDNVQW5SNA
+X-Message-ID-Hash: WI26NY3HB323JBE2ZFYIKBFDNVQW5SNA
+X-MailFrom: viro@ftp.linux.org.uk
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: axboe@kernel.dk, brauner@kernel.org, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, io-uring@vger.kernel.org, jack@suse.cz, keescook@chromium.org, laura@labbott.name, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, minhquangbui99@gmail.com, sumit.semwal@linaro.org, syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com, syzkaller-bugs@googlegroups.com, viro@zeniv.linux.org.uk
+CC: Christian Brauner <brauner@kernel.org>, keescook@chromium.org, axboe@kernel.dk, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, io-uring@vger.kernel.org, jack@suse.cz, laura@labbott.name, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, minhquangbui99@gmail.com, sumit.semwal@linaro.org, syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com, syzkaller-bugs@googlegroups.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v2] epoll: be better about file lifetimes
+Subject: [Linaro-mm-sig] Re: [PATCH] epoll: try to be a _bit_ better about file lifetimes
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2QUBEOY4GX4YWHOYRC5NDODQCJN7TVU3/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WI26NY3HB323JBE2ZFYIKBFDNVQW5SNA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -85,110 +92,73 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-epoll can call out to vfs_poll() with a file pointer that may race with
-the last 'fput()'. That would make f_count go down to zero, and while
-the ep->mtx locking means that the resulting file pointer tear-down will
-be blocked until the poll returns, it means that f_count is already
-dead, and any use of it won't actually get a reference to the file any
-more: it's dead regardless.
+On Sat, May 04, 2024 at 08:53:47AM -0700, Linus Torvalds wrote:
 
-Make sure we have a valid ref on the file pointer before we call down to
-vfs_poll() from the epoll routines.
+>   poll_wait
+>     -> __pollwait
+>      -> get_file (*boom*)
+> 
+> but the boom is very small because the poll_wait() will be undone by
+> poll_freewait(), and normally poll/select has held the file count
+> elevated.
 
-Link: https://lore.kernel.org/lkml/0000000000002d631f0615918f1e@google.com/
-Reported-by: syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com
-Reviewed-by: Jens Axboe <axboe@kernel.dk>
-Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
----
+Not quite.  It's not that poll_wait() calls __pollwait(); it calls
+whatever callback that caller of ->poll() has set for it.
 
-Changes since v1:
+__pollwait users (select(2) and poll(2), currently) must (and do) make
+sure that refcount is elevated; others (and epoll is not the only one)
+need to do whatever's right for their callbacks.
 
- - add Link, Reported-by, and Jens' reviewed-by. And sign off on it
-   because it looks fine to me and we have some testing now.
+I've no problem with having epoll grab a reference, but if we make that
+a universal requirement ->poll() instances can rely upon, we'd better
+verify that *all* vfs_poll() are OK.  And that ought to go into
+Documentation/filesystems/porting.rst ("callers of vfs_poll() must
+make sure that file is pinned; ->poll() instances may rely upon that,
+but they'd better be very careful about grabbing extra references themselves -
+it's acceptable for files on internal mounts, but *NOT* for anything on
+mountable filesystems.  Any instance that does it needs an explicit
+comment telling not to reuse that blindly." or something along those
+lines).
 
- - move epi_fget() closer to the user
+Excluding epoll, select/poll and callers that have just done fdget() and will
+do fdput() after vfs_poll(), we have this:
 
- - more comments about the background
+drivers/vhost/vhost.c:213:      mask = vfs_poll(file, &poll->table);
+	vhost_poll_start().  Might get interesting...  Calls working
+with vq->kick as file seem to rely upon vq->mutex, but I'll need to
+refresh my memories of that code to check if that's all we need - and
+then there's vhost_net_enable_vq(), which also needs an audit.
 
- - remove the rcu_read_lock(), with the comment explaining why it's not
-   needed
+fs/aio.c:1738:          mask = vfs_poll(req->file, &pt) & req->events;
+fs/aio.c:1932:  mask = vfs_poll(req->file, &apt.pt) & req->events;
+	aio_poll() and aio_poll_wake() resp.  req->file here is actually ->ki_filp
+	of iocb that contains work as iocb->req.work; it get dropped only in
+	iocb_destroy(), which also frees iocb.  Any call that might've run into
+	req->file not pinned is already in UAF land.
 
- - note about returning zero rather than something like EPOLLERR|POLLHUP
-   for a file that is going away
+io_uring/poll.c:303:                    req->cqe.res = vfs_poll(req->file, &pt) & req->apoll_events;
+io_uring/poll.c:622:    mask = vfs_poll(req->file, &ipt->pt) & poll->events;
+	Should have req->file pinned, but I'll need to RTFS a bit for
+details.  That, or ask Jens to confirm...
 
- fs/eventpoll.c | 42 +++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 41 insertions(+), 1 deletion(-)
-
-diff --git a/fs/eventpoll.c b/fs/eventpoll.c
-index 882b89edc52a..a3f0f868adc4 100644
---- a/fs/eventpoll.c
-+++ b/fs/eventpoll.c
-@@ -979,6 +979,37 @@ static __poll_t __ep_eventpoll_poll(struct file *file, poll_table *wait, int dep
- 	return res;
- }
- 
-+/*
-+ * The ffd.file pointer may be in the process of
-+ * being torn down due to being closed, but we
-+ * may not have finished eventpoll_release() yet.
-+ *
-+ * Normally, even with the atomic_long_inc_not_zero,
-+ * the file may have been free'd and then gotten
-+ * re-allocated to something else (since files are
-+ * not RCU-delayed, they are SLAB_TYPESAFE_BY_RCU).
-+ *
-+ * But for epoll, users hold the ep->mtx mutex, and
-+ * as such any file in the process of being free'd
-+ * will block in eventpoll_release_file() and thus
-+ * the underlying file allocation will not be free'd,
-+ * and the file re-use cannot happen.
-+ *
-+ * For the same reason we can avoid a rcu_read_lock()
-+ * around the operation - 'ffd.file' cannot go away
-+ * even if the refcount has reached zero (but we must
-+ * still not call out to ->poll() functions etc).
-+ */
-+static struct file *epi_fget(const struct epitem *epi)
-+{
-+	struct file *file;
-+
-+	file = epi->ffd.file;
-+	if (!atomic_long_inc_not_zero(&file->f_count))
-+		file = NULL;
-+	return file;
-+}
-+
- /*
-  * Differs from ep_eventpoll_poll() in that internal callers already have
-  * the ep->mtx so we need to start from depth=1, such that mutex_lock_nested()
-@@ -987,14 +1018,23 @@ static __poll_t __ep_eventpoll_poll(struct file *file, poll_table *wait, int dep
- static __poll_t ep_item_poll(const struct epitem *epi, poll_table *pt,
- 				 int depth)
- {
--	struct file *file = epi->ffd.file;
-+	struct file *file = epi_fget(epi);
- 	__poll_t res;
- 
-+	/*
-+	 * We could return EPOLLERR | EPOLLHUP or something,
-+	 * but let's treat this more as "file doesn't exist,
-+	 * poll didn't happen".
-+	 */
-+	if (!file)
-+		return 0;
-+
- 	pt->_key = epi->event.events;
- 	if (!is_file_epoll(file))
- 		res = vfs_poll(file, pt);
- 	else
- 		res = __ep_eventpoll_poll(file, pt, depth);
-+	fput(file);
- 	return res & epi->event.events;
- }
- 
--- 
-2.44.0.330.g4d18c88175
-
+net/9p/trans_fd.c:236:  ret = vfs_poll(ts->rd, pt);
+net/9p/trans_fd.c:238:          ret = (ret & ~EPOLLOUT) | (vfs_poll(ts->wr, pt) & ~EPOLLIN);
+	p9_fd_poll(); ->rd and ->wr are pinned and won't get dropped until
+p9_fd_close(), which frees ts immediately afterwards.  IOW, if we risk
+being called with ->rd or ->wr not pinned, we are in UAF land already.
+Incidentally, what the hell is this in p9_fd_open()?
+         * It's technically possible for userspace or concurrent mounts to
+         * modify this flag concurrently, which will likely result in a
+         * broken filesystem. However, just having bad flags here should
+         * not crash the kernel or cause any other sort of bug, so mark this
+         * particular data race as intentional so that tooling (like KCSAN)
+         * can allow it and detect further problems.
+         */
+Why not simply fix the race instead?  As in
+	spin_lock(&ts->rd->f_lock);
+        ts->rd->f_flags |= O_NONBLOCK;
+	spin_unlock(&ts->rd->f_lock);
+and similar for ts->wr?  Sigh...
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
