@@ -2,89 +2,111 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9DE88BC38A
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  5 May 2024 22:13:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 428688BC399
+	for <lists+linaro-mm-sig@lfdr.de>; Sun,  5 May 2024 22:17:21 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D9B3A447F4
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  5 May 2024 20:13:14 +0000 (UTC)
-Received: from zeniv.linux.org.uk (zeniv.linux.org.uk [62.89.141.173])
-	by lists.linaro.org (Postfix) with ESMTPS id 3CC5940D75
-	for <linaro-mm-sig@lists.linaro.org>; Sun,  5 May 2024 20:13:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5157D40D73
+	for <lists+linaro-mm-sig@lfdr.de>; Sun,  5 May 2024 20:17:20 +0000 (UTC)
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+	by lists.linaro.org (Postfix) with ESMTPS id 1E1B640D73
+	for <linaro-mm-sig@lists.linaro.org>; Sun,  5 May 2024 20:17:10 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linux.org.uk header.s=zeniv-20220401 header.b=CnaLgPQ6;
-	spf=none (lists.linaro.org: domain of viro@ftp.linux.org.uk has no SPF policy when checking 62.89.141.173) smtp.mailfrom=viro@ftp.linux.org.uk;
-	dmarc=pass (policy=none) header.from=zeniv.linux.org.uk
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=linux.org.uk; s=zeniv-20220401; h=Sender:In-Reply-To:Content-Type:
-	MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=FIBoGZquZ/VQe2BKe30XapKIaNM49ftHl1jJXnJm4k8=; b=CnaLgPQ6MmvvpktCsT6C2eJz3J
-	oqeWQSgZ0Dw3Z1EwSS6+OhHluY6tG92atgAY7KqTo8lvS0C4CTfQS+YJdqrXUmNiCcgIWA/qDCv4F
-	s39hw0eIJcULyRbooAxulMm+VWMPzYxFEtZRNKC6y8s03L9r9hOjO8MVk+OxNQxEtohB3mdEPcwq5
-	6/svRI0/B+7pstJPhzIp6uyDiT4G31Y96bNSnZYHdZOFYnk3S4Ug7be4CUKX33+ebiIFEa1lDFzTN
-	xhRECPgfGVbrmNkgd137h6fDVgyJHDe3j4aMst3q7MaunQnGbEO5wbFc8SEimuuHg5ZTrfxyAuqHm
-	6pSrN7Nw==;
-Received: from viro by zeniv.linux.org.uk with local (Exim 4.96 #2 (Red Hat Linux))
-	id 1s3iEA-00DH5K-0Z;
-	Sun, 05 May 2024 20:12:54 +0000
-Date: Sun, 5 May 2024 21:12:54 +0100
-From: Al Viro <viro@zeniv.linux.org.uk>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <20240505201254.GI2118490@ZenIV>
-References: <202405031110.6F47982593@keescook>
- <20240503211129.679762-2-torvalds@linux-foundation.org>
- <20240503212428.GY2118490@ZenIV>
- <CAHk-=wjpsTEkHgo1uev3xGJ2bQXYShaRf3GPEqDWNgUuKx0JFw@mail.gmail.com>
- <20240504-wohngebiet-restwert-6c3c94fddbdd@brauner>
- <CAHk-=wj_Fu1FkMFrjivQ=MGkwkKXZBuh0f4BEhcZHD5WCvHesw@mail.gmail.com>
- <CAHk-=wirxPSQgRV1u7t4qS1t4ED7w7OeehdUSC-LYZXspqa49w@mail.gmail.com>
- <20240505-gelehnt-anfahren-8250b487da2c@brauner>
- <CAHk-=wgMzzfPwKc=8yBdXwSkxoZMZroTCiLZTYESYD3BC_7rhQ@mail.gmail.com>
+	dkim=pass header.d=linux-foundation.org header.s=google header.b=JDwY5ZSb;
+	spf=pass (lists.linaro.org: domain of torvalds@linuxfoundation.org designates 209.85.218.42 as permitted sender) smtp.mailfrom=torvalds@linuxfoundation.org;
+	dmarc=none
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-a4702457ccbso288930166b.3
+        for <linaro-mm-sig@lists.linaro.org>; Sun, 05 May 2024 13:17:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linux-foundation.org; s=google; t=1714940229; x=1715545029; darn=lists.linaro.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=89jyKA3wApx9BQCfs5IiJWmwTiyjcjG5A1RQj5E06Fo=;
+        b=JDwY5ZSbFp5I9N0XYWe1eWrsB+32vGyiK97F/GWc3LhOQAniiArRRs028SN/W8wuAd
+         ZYwG/vHK3MOR4DEQXsUNNVpwTMp3SMMSDhOhbKShv0WRDbR3b/Dv63/B3PLtaWoIjRqy
+         FF1wXNJU5JzeUATG9QwfGXJBu6FVB7q766rsk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1714940229; x=1715545029;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=89jyKA3wApx9BQCfs5IiJWmwTiyjcjG5A1RQj5E06Fo=;
+        b=am6Xr5hlJN4Bgkfa6abHkLZj3i+MqMs0q4NwrSbWEzC+d73V2JO7z48IczPVXtT6uK
+         SJeYBfK3D1XLVujZEeUu2qnnUT+pe0cMmXAOUss7TTzIss9leSZTggUlI+sjinYHujPo
+         Z+dABxORUBzGqg5Ck7fz7SZagbnBacmT8I5Q6POI3AaQNPW+7bC9kn6B8BWch9O67eIK
+         ZqgBdyXTpzD3w9A8jAYv4LVbk+WveFzpqj6ckGikMLkjB/nufDjgpXYzdzji0sY5M87f
+         3d+12JixfjH3HNWPIAW/3dwnKcVyHWbp8CsC5RRD8rfeaKyjphfNp5brpg0L4MWRbhKN
+         J/Yw==
+X-Forwarded-Encrypted: i=1; AJvYcCUMROHPJhW0BU9K8JlN2Y2ME0PP0FA6VW1bXz0EiY+FMvCs6jBAkoRep6XsZgLpifYekQWzSYqoRfHTr/Sbxk7/ZJFq+5qKYg8uTzeEgeo=
+X-Gm-Message-State: AOJu0Yzv/1EdIV59/SMvvNZCp75Ry7hCDz0HXfo2NVZ58NUME/A8taRm
+	DX+BfXp0oV5hBbY0nu8FgQiLu4FdwRhEoBpBpYub0K/rGoRnkFijQQJBPMBXE8+3gzbXPK9XSHg
+	Qa0CVIw==
+X-Google-Smtp-Source: AGHT+IFsBPBGEaO0fIMNRpbwXtTsXdoEEkqRsyKH8TNX5loqrCFeNxc1qa1k8p0JoMRpsm4wPC0jkA==
+X-Received: by 2002:a50:9516:0:b0:572:4faf:ed67 with SMTP id u22-20020a509516000000b005724fafed67mr5069753eda.24.1714940228995;
+        Sun, 05 May 2024 13:17:08 -0700 (PDT)
+Received: from mail-ej1-f46.google.com (mail-ej1-f46.google.com. [209.85.218.46])
+        by smtp.gmail.com with ESMTPSA id fi24-20020a056402551800b005727dc26598sm4288441edb.13.2024.05.05.13.17.08
+        for <linaro-mm-sig@lists.linaro.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 05 May 2024 13:17:08 -0700 (PDT)
+Received: by mail-ej1-f46.google.com with SMTP id a640c23a62f3a-a59c448b44aso115166966b.2
+        for <linaro-mm-sig@lists.linaro.org>; Sun, 05 May 2024 13:17:08 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AJvYcCUZMhNvD8kXuempwduIEZJgUIHSAQkLh+yxxABZAgeL76z3c3NKTWqAYl3fjitcT2mL1mxu5aLd0g3b5BrMQ1I0iQO//ybCLXBjlGaCdmw=
+X-Received: by 2002:a17:906:7188:b0:a59:cd18:92f5 with SMTP id
+ h8-20020a170906718800b00a59cd1892f5mr599989ejk.11.1714940227970; Sun, 05 May
+ 2024 13:17:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAHk-=wgMzzfPwKc=8yBdXwSkxoZMZroTCiLZTYESYD3BC_7rhQ@mail.gmail.com>
-Sender: Al Viro <viro@ftp.linux.org.uk>
+References: <CAHk-=wgMzzfPwKc=8yBdXwSkxoZMZroTCiLZTYESYD3BC_7rhQ@mail.gmail.com>
+ <20240505175556.1213266-2-torvalds@linux-foundation.org> <12120faf79614fc1b9df272394a71550@AcuMS.aculab.com>
+In-Reply-To: <12120faf79614fc1b9df272394a71550@AcuMS.aculab.com>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Date: Sun, 5 May 2024 13:16:51 -0700
+X-Gmail-Original-Message-ID: <CAHk-=whxLdB_P=nW1bmVKn1m2jdcZRgkMksfvA722toFpT554w@mail.gmail.com>
+Message-ID: <CAHk-=whxLdB_P=nW1bmVKn1m2jdcZRgkMksfvA722toFpT554w@mail.gmail.com>
+To: David Laight <David.Laight@aculab.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 3CC5940D75
+X-Rspamd-Queue-Id: 1E1B640D73
 X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.40 / 15.00];
+X-Spamd-Result: default: False [-5.41 / 15.00];
 	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[99.99%];
+	BAYES_HAM(-2.61)[98.26%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[zeniv.linux.org.uk,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	FORGED_SENDER(0.30)[viro@zeniv.linux.org.uk,viro@ftp.linux.org.uk];
-	R_DKIM_ALLOW(-0.20)[linux.org.uk:s=zeniv-20220401];
+	FORGED_SENDER(0.30)[torvalds@linux-foundation.org,torvalds@linuxfoundation.org];
+	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	ONCE_RECEIVED(0.10)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[kernel.org,chromium.org,kernel.dk,amd.com,lists.freedesktop.org,vger.kernel.org,suse.cz,labbott.name,lists.linaro.org,gmail.com,linaro.org,syzkaller.appspotmail.com,googlegroups.com];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.42:from];
+	RCVD_COUNT_THREE(0.00)[3];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
 	ARC_NA(0.00)[];
+	DMARC_NA(0.00)[linux-foundation.org];
 	RCVD_TLS_LAST(0.00)[];
-	R_SPF_NA(0.00)[no SPF record];
-	DKIM_TRACE(0.00)[linux.org.uk:+];
-	MISSING_XM_UA(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[viro@zeniv.linux.org.uk,viro@ftp.linux.org.uk];
+	RCPT_COUNT_TWELVE(0.00)[18];
+	MIME_TRACE(0.00)[0:+];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[17];
-	DNSWL_BLOCKED(0.00)[62.89.141.173:from];
-	TAGGED_RCPT(0.00)[045b454ab35fd82a35fb];
+	FREEMAIL_CC(0.00)[kernel.dk,kernel.org,amd.com,lists.freedesktop.org,vger.kernel.org,suse.cz,chromium.org,labbott.name,lists.linaro.org,gmail.com,linaro.org,syzkaller.appspotmail.com,googlegroups.com,zeniv.linux.org.uk];
+	DNSWL_BLOCKED(0.00)[209.85.218.46:received];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[torvalds@linux-foundation.org,torvalds@linuxfoundation.org];
+	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_ONE(0.00)[1];
-	ASN(0.00)[asn:8419, ipnet:62.89.128.0/19, country:GB];
-	TO_DN_SOME(0.00)[]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DKIM_TRACE(0.00)[linux-foundation.org:+];
+	TAGGED_RCPT(0.00)[045b454ab35fd82a35fb];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_IN_DNSWL_NONE(0.00)[209.85.218.42:from]
 X-Rspamd-Action: no action
-Message-ID-Hash: DVI4J26SC5DOMFF2HNLZFSMF4RN67GV6
-X-Message-ID-Hash: DVI4J26SC5DOMFF2HNLZFSMF4RN67GV6
-X-MailFrom: viro@ftp.linux.org.uk
+Message-ID-Hash: OD7V2CGVUMSPUS6NIZSNAEP2PURRQWT5
+X-Message-ID-Hash: OD7V2CGVUMSPUS6NIZSNAEP2PURRQWT5
+X-MailFrom: torvalds@linuxfoundation.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Christian Brauner <brauner@kernel.org>, keescook@chromium.org, axboe@kernel.dk, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, io-uring@vger.kernel.org, jack@suse.cz, laura@labbott.name, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, minhquangbui99@gmail.com, sumit.semwal@linaro.org, syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com, syzkaller-bugs@googlegroups.com
+CC: "axboe@kernel.dk" <axboe@kernel.dk>, "brauner@kernel.org" <brauner@kernel.org>, "christian.koenig@amd.com" <christian.koenig@amd.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "io-uring@vger.kernel.org" <io-uring@vger.kernel.org>, "jack@suse.cz" <jack@suse.cz>, "keescook@chromium.org" <keescook@chromium.org>, "laura@labbott.name" <laura@labbott.name>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "minhquangbui99@gmail.com" <minhquangbui99@gmail.com>, "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com" <syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com>, "syzkaller-bugs@googlegroups.com" <syzkaller-bugs@googlegroups.com>, "viro@zeniv.linux.org.uk" <viro@zeniv.linux.org.uk>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] epoll: try to be a _bit_ better about file lifetimes
+Subject: [Linaro-mm-sig] Re: [PATCH v2] epoll: be better about file lifetimes
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DVI4J26SC5DOMFF2HNLZFSMF4RN67GV6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OD7V2CGVUMSPUS6NIZSNAEP2PURRQWT5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -94,53 +116,40 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Sun, May 05, 2024 at 09:46:05AM -0700, Linus Torvalds wrote:
+On Sun, 5 May 2024 at 13:02, David Laight <David.Laight@aculab.com> wrote:
+>
+> How much is the extra pair of atomics going to hurt performance?
+> IIRC a lot of work was done to (try to) make epoll lockless.
 
-> WHY?
-> 
-> Why cannot you and Al just admit that the problem is in epoll. Always
-> has been, always will be.
+If this makes people walk away from epoll, that would be absolutely
+*lovely*. Maybe they'd start using io_uring instead, which has had its
+problems, but is a lot more capable in the end.
 
-Nobody (well, nobody who'd ever read epoll) argues that epoll is not
-a problem.
+Yes, doing things right is likely more expensive than doing things
+wrong. Bugs are cheap. That doesn't make buggy code better.
 
-> The fact is, it's not dma-buf that is violating any rules.
+Epoll really isn't important enough to screw over the VFS subsystem over.
 
-Now, that is something I've a trouble with.  Use of get_file() in there
-actually looks rather fishy, regardless of epoll.
+I did point out elsewhere how this could be fixed by epoll() removing
+the ep items at a different point:
 
-At the very least it needs a comment discouraging other instances from
-blindly copying this.  A reference to struct file pins down more than
-driver-internal objects; if nothing else, it pins down a mount and
-if you don't have SB_NOUSER on file_inode(file)->i_sb->s_flags, it's
-really not a good idea.
+  https://lore.kernel.org/all/CAHk-=wj6XL9MGCd_nUzRj6SaKeN0TsyTTZDFpGdW34R+zMZaSg@mail.gmail.com/
 
-What's more, the reason for that get_file() is, AFAICS, that nodes
-we put into callback queue for fence(s) in question[*] are embedded
-into dmabuf and we don't want them gone before the callbacks have
-happened.  Which looks fishy - it would make more sense to cancel
-these callbacks and drop the fence(s) in question from ->release().
+so if somebody actually wants to fix up epoll properly, that would
+probably be great.
 
-I've no problem whatsoever with fs/eventpoll.c grabbing/dropping
-file reference around vfs_poll() calls.  And I don't believe that
-"try to grab" has any place in dma_buf_poll(); it's just that I'm not
-happy about get_file() call being there in the first place.
+In fact, that model would allow epoll() to just keep a proper refcount
+as an fd is added to the poll events, and would probably fix a lot of
+nastiness. Right now those ep items stay around for basically random
+amounts of time.
 
-Sure, the call of ->poll() can bloody well lead to references being
-grabbed - by the pollwait callback, which the caller of ->poll()
-is aware of.  It's ->poll() instance *itself* grabbing such references
-with vfs_poll() caller having no idea what's going on that has
-potential for being unpleasant.  And we can't constify 'file' argument
-of ->poll() because of poll_wait(), so it's hard to catch those who
-do that kind of thing; I've explicitly said so upthread, I believe.
+But maybe there are other ways to fix it. I don't think we have an
+actual eventpoll maintainer any more, but what I'm *not* willing to
+happen is eventpoll messing up other parts of the kernel. It was
+always a ugly performance hack, and was only acceptable as such. "ugly
+hack" is ok. "buggy ugly hack" is not.
 
-But similar calls of get_file() in ->poll() instances (again, not
-the ones that are made by pollwait callback) are something to
-watch out for and having the caller pin struct file does not solve
-the problem.
-
-[*] at most one per direction, and I've no idea whether there can be more
-than one signalling fence for given dmabuf) 
+              Linus
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
