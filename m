@@ -2,95 +2,95 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B8D68BCE57
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 May 2024 14:47:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2505A8BCF2F
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 May 2024 15:38:44 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 76DB044130
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 May 2024 12:47:39 +0000 (UTC)
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
-	by lists.linaro.org (Postfix) with ESMTPS id 3D15140074
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 May 2024 12:47:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2CF3344170
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  6 May 2024 13:38:43 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+	by lists.linaro.org (Postfix) with ESMTPS id 8145C3F346
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  6 May 2024 13:38:28 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b=USQzl+vt;
-	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.221.46) smtp.mailfrom=daniel@ffwll.ch;
+	dkim=pass header.d=ffwll.ch header.s=google header.b=ZL57ct9W;
+	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.128.52) smtp.mailfrom=daniel@ffwll.ch;
 	dmarc=none
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-346407b8c9aso628108f8f.0
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 06 May 2024 05:47:27 -0700 (PDT)
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-41c017ee8deso79495e9.2
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 06 May 2024 06:38:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google; t=1714999646; x=1715604446; darn=lists.linaro.org;
+        d=ffwll.ch; s=google; t=1715002707; x=1715607507; darn=lists.linaro.org;
         h=in-reply-to:content-disposition:mime-version:references
          :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=FzcPHN6WlIJ1C164IWBqCbC21dWtLB5dXSLGK/0dvq0=;
-        b=USQzl+vt4K3vWhLXf+NzztlaleUh/LGKjsPjSDZJhq6Y0fU/TGiukbuoATkSgZdoW3
-         Zo2zGWKjMAI09HaUXx/JMZW23a2aq/nlfBWkixNDn/ePlbYmDyrxwTQtnBorSKac3WmJ
-         IjjTck13EiRrfkrmSxKbxbHycctQpWOUaYYxg=
+        bh=05pEfdeTjP/gT4q1VDqtZ2Mm8b7W7bMEgQ0JTj2r+x4=;
+        b=ZL57ct9WolaIRAJ/GzN+E+Z/AqxFI6jy3+Hq8iu9d8yUAsqzgHIIOXLOWofoxBnR7k
+         BpSSe1PdUuforRP0lnKmMMtn055n6OkUpWFIndtBCJTyoaMlbhyekokiCVZtA5zXoiPT
+         /MIebm4ZsLEooyACoAPDkF7Q3CLLufbNChjkE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1714999646; x=1715604446;
+        d=1e100.net; s=20230601; t=1715002707; x=1715607507;
         h=in-reply-to:content-disposition:mime-version:references
          :mail-followup-to:message-id:subject:cc:to:from:date
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=FzcPHN6WlIJ1C164IWBqCbC21dWtLB5dXSLGK/0dvq0=;
-        b=PkijQk/sGKQ9YQsfZ8KfW4HiI6bQlzat9jflRP4awhVdwV+XM/WRXefQdskGqFRsQQ
-         kj99eXP0MrthJDhYz02g26avmqHcERyEnHJ7eynaiGdCQrPie3Kn8V6VNmmSPE1hrs02
-         mgCjh92rEgGgT0xeyLccq3tSFjPUaK7BjfLuQu4PEWtoLBM62sbzla7L7dnJDPhV85KZ
-         7EcYx+xf5v+jy4XBAEuqnuvLpKTHEuVdMuNyrkz2S786OFAD97Whj7QJt9O5hDDIEa0y
-         7jE1kxuWjlPsuYMRJT5x9E3Tk3nap/KbOUUn4A8Drzc0jSkGnsiEI2R3nzEJ+cO/62Zs
-         acHg==
-X-Forwarded-Encrypted: i=1; AJvYcCVTxMwl1z84eST50UxUcWzxri1LOyLgxcdnveXAiQw2Vyp1+HPx3vZ5qyXcYQnIBT0QWK5ivbN5OHwG3VJvyWbomFQhsWcc4JpLAmDVkLc=
-X-Gm-Message-State: AOJu0Yy83S83MSYbRGQY+Ul5hjCV9GEV8HG0o4LxUVHDNo4dKM3y43Kd
-	7AYO/d5Nx7A6j6daFmK0yVEqBvHhj8VTcE18hzemzVX8xYBUkIAYW745ggCfXTw=
-X-Google-Smtp-Source: AGHT+IEcjHlHcMPoNa6JKDX9W5QYo0xQvj2/BGYXVfuM3DvK3Nqva0gT+wcQ0vVg5ycmh5nDVF4Cvw==
-X-Received: by 2002:a05:600c:5118:b0:418:9941:ca28 with SMTP id o24-20020a05600c511800b004189941ca28mr7020552wms.2.1714999646201;
-        Mon, 06 May 2024 05:47:26 -0700 (PDT)
+        bh=05pEfdeTjP/gT4q1VDqtZ2Mm8b7W7bMEgQ0JTj2r+x4=;
+        b=GaAyAOcNvlvPRew4/Moe6w53m451ynstIL+nTObX+a/GUHws5Xz9mzKrvByM716sM4
+         ouyI9W913vLqWHIAzrLnmlbqrkxK3ICZUS/uTExepm2KdbjxY4sNQ8te8o0GjK4hN25N
+         KnaOdoOxGhSq3Vpy5szlgRcjKFcVEub0lVLyZty+0IKmRErcWwXpwuvtS4cwR+wdHWjl
+         c1VVS/U2GnTn1SAEMClQQrmsKpvp3GjLw1Uqgkbqe3Q5z6PMemZFurgxrERZMGA5ucgx
+         jqcjz+6e1lPU8+UO6/S8mBMb/Uo94q7LA4zXooh2iwhb1v5nqHdzOfx75UcYHnXX2Iah
+         EYsQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWAyM2o3ECTpBbwy57Jv+vy7PQg1JbPvre9/jn1ZBsImEvylL1HuAR9dohE5LXttUQzSWv+stMH1Mum232Z5y7jOAXncAFGgwODWD6Q018=
+X-Gm-Message-State: AOJu0YypH8him3ypiH1B9KyrkdwykS2ETbYzPqAx3/HcRcyY1hacaRPL
+	++alkd4yapQ1MA0iKMTQUGgwlkFGiHp36NEccggbSz343+bYkvVhwOyTHvZj4lY=
+X-Google-Smtp-Source: AGHT+IH7ayM64/spWVTg0bt9PNCN0djXyEwU/JmnpSrNT6A7B8ioiDdqWIOL0raGgmZcVRIsEpla+w==
+X-Received: by 2002:a05:600c:46cf:b0:41a:bb50:92bb with SMTP id q15-20020a05600c46cf00b0041abb5092bbmr7391993wmo.0.1715002707370;
+        Mon, 06 May 2024 06:38:27 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id p12-20020a05600c1d8c00b0041bcb898984sm16038937wms.31.2024.05.06.05.47.24
+        by smtp.gmail.com with ESMTPSA id z5-20020a05600c0a0500b0041bd85cd3f2sm16051523wmp.19.2024.05.06.06.38.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 May 2024 05:47:25 -0700 (PDT)
-Date: Mon, 6 May 2024 14:47:23 +0200
+        Mon, 06 May 2024 06:38:26 -0700 (PDT)
+Date: Mon, 6 May 2024 15:38:24 +0200
 From: Daniel Vetter <daniel@ffwll.ch>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Message-ID: <ZjjRWybmAmClMMI9@phenom.ffwll.local>
-Mail-Followup-To: Linus Torvalds <torvalds@linux-foundation.org>,
-	Al Viro <viro@zeniv.linux.org.uk>,
-	Christian Brauner <brauner@kernel.org>, keescook@chromium.org,
-	axboe@kernel.dk, christian.koenig@amd.com,
-	dri-devel@lists.freedesktop.org, io-uring@vger.kernel.org,
-	jack@suse.cz, laura@labbott.name, linaro-mm-sig@lists.linaro.org,
-	linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-media@vger.kernel.org, minhquangbui99@gmail.com,
-	sumit.semwal@linaro.org,
-	syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com,
-	syzkaller-bugs@googlegroups.com
-References: <20240503212428.GY2118490@ZenIV>
- <CAHk-=wjpsTEkHgo1uev3xGJ2bQXYShaRf3GPEqDWNgUuKx0JFw@mail.gmail.com>
- <20240504-wohngebiet-restwert-6c3c94fddbdd@brauner>
- <CAHk-=wj_Fu1FkMFrjivQ=MGkwkKXZBuh0f4BEhcZHD5WCvHesw@mail.gmail.com>
- <CAHk-=wirxPSQgRV1u7t4qS1t4ED7w7OeehdUSC-LYZXspqa49w@mail.gmail.com>
- <CAHk-=whrSSNYVzTHNFDNGag_xcKuv=RaQUX8+n29kkic39DRuQ@mail.gmail.com>
- <20240505194603.GH2118490@ZenIV>
- <CAHk-=wipanX2KYbWvO5=5Zv9O3r8kA-tqBid0g3mLTCt_wt8OA@mail.gmail.com>
- <20240505203052.GJ2118490@ZenIV>
- <CAHk-=whFg8-WyMbVUGW5c0baurGzqmRtzFLoU-gxtRXq2nVZ+w@mail.gmail.com>
+To: Maxime Ripard <mripard@redhat.com>
+Message-ID: <ZjjdUBYYKXJ1EPr5@phenom.ffwll.local>
+Mail-Followup-To: Maxime Ripard <mripard@redhat.com>,
+	Hans de Goede <hdegoede@redhat.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+	Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <jstultz@google.com>,
+	"T.J. Mercier" <tjmercier@google.com>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Lennart Poettering <mzxreary@0pointer.de>,
+	Robert Mader <robert.mader@collabora.com>,
+	Sebastien Bacher <sebastien.bacher@canonical.com>,
+	Linux Media Mailing List <linux-media@vger.kernel.org>,
+	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+	linaro-mm-sig@lists.linaro.org,
+	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Milan Zamazal <mzamazal@redhat.com>,
+	Andrey Konovalov <andrey.konovalov.ynk@gmail.com>
+References: <bb372250-e8b8-4458-bc99-dd8365b06991@redhat.com>
+ <20240506-dazzling-nippy-rhino-eabccd@houat>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAHk-=whFg8-WyMbVUGW5c0baurGzqmRtzFLoU-gxtRXq2nVZ+w@mail.gmail.com>
+In-Reply-To: <20240506-dazzling-nippy-rhino-eabccd@houat>
 X-Operating-System: Linux phenom 6.6.15-amd64 
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 3D15140074
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.80 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
+X-Rspamd-Queue-Id: 8145C3F346
+X-Spamd-Bar: /
+X-Spamd-Result: default: False [-0.80 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
+	SUBJECT_ENDS_QUESTION(1.00)[];
 	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
+	URIBL_BLOCKED(0.00)[ffwll.ch:url,ffwll.ch:dkim,dreamwidth.org:url,mail-wm1-f52.google.com:rdns,mail-wm1-f52.google.com:helo];
 	RCVD_TLS_LAST(0.00)[];
-	URIBL_BLOCKED(0.00)[ffwll.ch:url,ffwll.ch:dkim,linux.org.uk:email,mail-wr1-f46.google.com:rdns,mail-wr1-f46.google.com:helo];
 	R_SPF_NA(0.00)[no SPF record];
 	DMARC_NA(0.00)[ffwll.ch];
-	FREEMAIL_CC(0.00)[zeniv.linux.org.uk,kernel.org,chromium.org,kernel.dk,amd.com,lists.freedesktop.org,vger.kernel.org,suse.cz,labbott.name,lists.linaro.org,gmail.com,linaro.org,syzkaller.appspotmail.com,googlegroups.com];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[redhat.com,linaro.org,collabora.com,arm.com,google.com,amd.com,0pointer.de,canonical.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
 	ARC_NA(0.00)[];
 	DKIM_TRACE(0.00)[ffwll.ch:+];
 	MISSING_XM_UA(0.00)[];
@@ -101,23 +101,23 @@ X-Spamd-Result: default: False [-5.80 / 15.00];
 	FROM_HAS_DN(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[18];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_RCPT(0.00)[045b454ab35fd82a35fb];
+	TAGGED_RCPT(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.221.46:from];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.52:from];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: R6E3UKNYIJZBCN5ILJLSXDJK6L4EYL76
-X-Message-ID-Hash: R6E3UKNYIJZBCN5ILJLSXDJK6L4EYL76
+Message-ID-Hash: 3T5RGIEN6A6GQ4SPQTUZHWQORCI6E5GA
+X-Message-ID-Hash: 3T5RGIEN6A6GQ4SPQTUZHWQORCI6E5GA
 X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Al Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, keescook@chromium.org, axboe@kernel.dk, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, io-uring@vger.kernel.org, jack@suse.cz, laura@labbott.name, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, minhquangbui99@gmail.com, sumit.semwal@linaro.org, syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com, syzkaller-bugs@googlegroups.com
+CC: Hans de Goede <hdegoede@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Lennart Poettering <mzxreary@0pointer.de>, Robert Mader <robert.mader@collabora.com>, Sebastien Bacher <sebastien.bacher@canonical.com>, Linux Media Mailing List <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, linaro-mm-sig@lists.linaro.org, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Milan Zamazal <mzamazal@redhat.com>, Andrey Konovalov <andrey.konovalov.ynk@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] epoll: try to be a _bit_ better about file lifetimes
+Subject: [Linaro-mm-sig] Re: Safety of opening up /dev/dma_heap/* to physically present users (udev uaccess tag) ?
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/R6E3UKNYIJZBCN5ILJLSXDJK6L4EYL76/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3T5RGIEN6A6GQ4SPQTUZHWQORCI6E5GA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -127,92 +127,85 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Sun, May 05, 2024 at 01:53:48PM -0700, Linus Torvalds wrote:
-> On Sun, 5 May 2024 at 13:30, Al Viro <viro@zeniv.linux.org.uk> wrote:
-> >
-> > 0.      special-cased ->f_count rule for ->poll() is a wart and it's
-> > better to get rid of it.
-> >
-> > 1.      fs/eventpoll.c is a steaming pile of shit and I'd be glad to see
-> > git rm taken to it.  Short of that, by all means, let's grab reference
-> > in there around the call of vfs_poll() (see (0)).
+On Mon, May 06, 2024 at 02:05:12PM +0200, Maxime Ripard wrote:
+> Hi,
 > 
-> Agreed on 0/1.
+> On Mon, May 06, 2024 at 01:49:17PM GMT, Hans de Goede wrote:
+> > Hi dma-buf maintainers, et.al.,
+> > 
+> > Various people have been working on making complex/MIPI cameras work OOTB
+> > with mainline Linux kernels and an opensource userspace stack.
+> > 
+> > The generic solution adds a software ISP (for Debayering and 3A) to
+> > libcamera. Libcamera's API guarantees that buffers handed to applications
+> > using it are dma-bufs so that these can be passed to e.g. a video encoder.
+> > 
+> > In order to meet this API guarantee the libcamera software ISP allocates
+> > dma-bufs from userspace through one of the /dev/dma_heap/* heaps. For
+> > the Fedora COPR repo for the PoC of this:
+> > https://hansdegoede.dreamwidth.org/28153.html
 > 
-> > 2.      having ->poll() instances grab extra references to file passed
-> > to them is not something that should be encouraged; there's a plenty
-> > of potential problems, and "caller has it pinned, so we are fine with
-> > grabbing extra refs" is nowhere near enough to eliminate those.
+> For the record, we're also considering using them for ARM KMS devices,
+> so it would be better if the solution wasn't only considering v4l2
+> devices.
 > 
-> So it's not clear why you hate it so much, since those extra
-> references are totally normal in all the other VFS paths.
+> > I have added a simple udev rule to give physically present users access
+> > to the dma_heap-s:
+> > 
+> > KERNEL=="system", SUBSYSTEM=="dma_heap", TAG+="uaccess"
+> > 
+> > (and on Rasperry Pi devices any users in the video group get access)
+> > 
+> > This was just a quick fix for the PoC. Now that we are ready to move out
+> > of the PoC phase and start actually integrating this into distributions
+> > the question becomes if this is an acceptable solution; or if we need some
+> > other way to deal with this ?
+> > 
+> > Specifically the question is if this will have any negative security
+> > implications? I can certainly see this being used to do some sort of
+> > denial of service attack on the system (1). This is especially true for
+> > the cma heap which generally speaking is a limited resource.
 > 
-> I mean, they are perhaps not the *common* case, but we have a lot of
-> random get_file() calls sprinkled around in various places when you
-> end up passing a file descriptor off to some asynchronous operation
-> thing.
-> 
-> Yeah, I think most of them tend to be special operations (eg the tty
-> TIOCCONS ioctl to redirect the console), but it's not like vfs_ioctl()
-> is *that* different from vfs_poll. Different operation, not somehow
-> "one is more special than the other".
-> 
-> cachefiles and backing-file does it for regular IO, and drop it at IO
-> completion - not that different from what dma-buf does. It's in
-> ->read_iter() rather than ->poll(), but again: different operations,
-> but not "one of them is somehow fundamentally different".
-> 
-> > 3.      dma-buf uses of get_file() are probably safe (epoll shite aside),
-> > but they do look fishy.  That has nothing to do with epoll.
-> 
-> Now, what dma-buf basically seems to do is to avoid ref-counting its
-> own fundamental data structure, and replaces that by refcounting the
-> 'struct file' that *points* to it instead.
-> 
-> And it is a bit odd, but it actually makes some amount of sense,
-> because then what it passes around is that file pointer (and it allows
-> passing it around from user space *as* that file).
-> 
-> And honestly, if you look at why it then needs to add its refcount to
-> it all, it actually makes sense.  dma-bufs have this notion of
-> "fences" that are basically completion points for the asynchronous
-> DMA. Doing a "poll()" operation will add a note to the fence to get
-> that wakeup when it's done.
-> 
-> And yes, logically it takes a ref to the "struct dma_buf", but because
-> of how the lifetime of the dma_buf is associated with the lifetime of
-> the 'struct file', that then turns into taking a ref on the file.
-> 
-> Unusual? Yes. But not illogical. Not obviously broken. Tying the
-> lifetime of the dma_buf to the lifetime of a file that is passed along
-> makes _sense_ for that use.
-> 
-> I'm sure dma-bufs could add another level of refcounting on the
-> 'struct dma_buf' itself, and not make it be 1:1 with the file, but
-> it's not clear to me what the advantage would really be, or why it
-> would be wrong to re-use a refcount that is already there.
+> There's plenty of other ways to exhaust CMA, like allocating too much
+> KMS or v4l2 buffers. I'm not sure we should consider dma-heaps
+> differently than those if it's part of our threat model.
 
-So there is generally another refcount, because dma_buf is just the
-cross-driver interface to some kind of real underlying buffer object from
-the various graphics related subsystems we have.
+So generally for an arm soc where your display needs cma, your render node
+doesn't. And user applications only have access to the later, while only
+the compositor gets a kms fd through logind. At least in drm aside from
+vc4 there's really no render driver that just gives you access to cma and
+allows you to exhaust that, you need to be a compositor with drm master
+access to the display.
 
-And since it's a pure file based api thing that ceases to serve any
-function once the fd/file is gone we tied all the dma_buf refcounting to
-the refcount struct file already maintains. But the underlying buffer
-object can easily outlive the dma_buf, and over the lifetime of an
-underlying buffer object you might actually end up creating different
-dma_buf api wrappers for it (but at least in drm we guarantee there's at
-most one, hence why vmwgfx does the atomic_inc_unless_zero trick, which I
-don't particularly like and isn't really needed).
+Which means we're mostly protected against bad applications, and that's
+not a threat the "user physically sits in front of the machine accounts
+for", and which giving cma access to everyone would open up. And with
+flathub/snaps/... this is very much an issue.
 
-But we could add another refcount, it just means we have 3 of those then
-when only really 2 are needed.
+So you need more, either:
 
-Also maybe here two: dma_fence are bounded like other disk i/o (including
-the option of timeouts if things go very wrong), so it's very much not
-forever but at most a few seconds worst case (shit hw/driver excluded, as
-usual).
+- cgroups limits on dma-buf and dma-buf heaps. This has been bikeshedded
+  for years and is just not really moving.
+
+- An allocator service which checks whether you're allowed to allocate
+  these special buffers. Android does that through binder.
+
+Probably also some way to nuke applications that refuse to release buffers
+when they're no longer the right application. cgroups is a lot more
+convenient for that.
 -Sima
+
+> > But devices tagged for uaccess are only opened up to users who are 
+> > physcially present behind the machine and those can just hit
+> > the powerbutton, so I don't believe that any *on purpose* DOS is part of
+> > the thread model. 
+> 
+> How would that work for headless devices?
+> 
+> Maxime
+
+
+
 -- 
 Daniel Vetter
 Software Engineer, Intel Corporation
