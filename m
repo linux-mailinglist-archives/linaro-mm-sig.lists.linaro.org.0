@@ -2,81 +2,113 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42CE58BEC13
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 May 2024 21:00:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 06D618BEC43
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 May 2024 21:07:41 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 56216441A8
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 May 2024 19:00:18 +0000 (UTC)
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
-	by lists.linaro.org (Postfix) with ESMTPS id 6FB423F02C
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 May 2024 19:00:05 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0DB5944359
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 May 2024 19:07:40 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+	by lists.linaro.org (Postfix) with ESMTPS id 373193F02C
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 May 2024 19:07:30 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ideasonboard.com header.s=mail header.b=bTqPEHGC;
-	spf=pass (lists.linaro.org: domain of laurent.pinchart@ideasonboard.com designates 213.167.242.64 as permitted sender) smtp.mailfrom=laurent.pinchart@ideasonboard.com;
+	dkim=pass header.d=linux-foundation.org header.s=google header.b=bJS23eaK;
+	spf=pass (lists.linaro.org: domain of torvalds@linuxfoundation.org designates 209.85.218.47 as permitted sender) smtp.mailfrom=torvalds@linuxfoundation.org;
 	dmarc=none
-Received: from pendragon.ideasonboard.com (81-175-209-231.bb.dnainternet.fi [81.175.209.231])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 00003904;
-	Tue,  7 May 2024 20:59:59 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1715108400;
-	bh=GDwAYu/twxHFJyJubt68lvyNQC2ZvWpd20JmJtBYftw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=bTqPEHGCS1bKBi/ARZITdItVGikTTU7cM85mrkBdZnR/yGebvzebLe3WXMLdd3r92
-	 KXapBLFs6wt3UPe41WTJXLLmUPmGl9OMezFJcUg+gtSSl657qWRx6tXa2cPDeHkgBP
-	 G8DOhp7iaMGl1hoY4bFJxgCo8thY6sQ2DQsqePtc=
-Date: Tue, 7 May 2024 21:59:54 +0300
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Daniel Vetter <daniel@ffwll.ch>
-Message-ID: <20240507185954.GD20390@pendragon.ideasonboard.com>
-References: <bb372250-e8b8-4458-bc99-dd8365b06991@redhat.com>
- <20240506-dazzling-nippy-rhino-eabccd@houat>
- <ZjjdUBYYKXJ1EPr5@phenom.ffwll.local>
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-a599af16934so887773766b.1
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 07 May 2024 12:07:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linux-foundation.org; s=google; t=1715108849; x=1715713649; darn=lists.linaro.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=JwU1IWNzhlSP5EH9iyMHaFmRpSbbE8IFJCVgZMlAkcM=;
+        b=bJS23eaKKyKeeveTH8147mqo9cGbgCiQdjICCIHznl6posGZh43Az1hMUsGAMLMl/p
+         ixjU2SDbZgMVsGaRRkX1a0NU/eD+FuzI2mIW57otGITPtKHkxscRuj6sHlRH8kGJ5z7V
+         akMzVo7QOXkCuTkb6na4QnoyEuJE8/Mfx2Phg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1715108849; x=1715713649;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=JwU1IWNzhlSP5EH9iyMHaFmRpSbbE8IFJCVgZMlAkcM=;
+        b=tdG3YNLg9ug4nq1pcuVfu0MtfFbLNzZhwXBKmSwR/yyLle5C5XpTBTXUU16rQGIUtx
+         66wK4FGobmbaGnlMLwiit1EjG/OUwtyzyVfSzhpphd/dmjObowAhuiO7Wl8cliTSACgG
+         riLU7s9bZLzEuHiT5VGylhZn69k/UVD5xg0RPzpUpRUIge/gU3RqbRq6/hyW4BL+WZLa
+         5bUV40+6o0CmiI3kNbpIIqc4KiTslrRPdiEaYYAGKQtPR67yHHOxwdgMjfnVZ5O4DDU0
+         rQRGrzapBvn8VlDP7OnEg83HlMMx/wF3eySCw0R6uP+Wrl8+vAXDSa7eZSFG+zjxohEq
+         202g==
+X-Forwarded-Encrypted: i=1; AJvYcCVoiEfyVDWIFLNE6Lsiy5iRpM0edMpVykm5yyRaBixm2RJ99toU/MIi5B2gqYrBOwocsE4lWzhzcu5Y5rxsenI3q/5l68r/Jb/e7qN3GrU=
+X-Gm-Message-State: AOJu0YwN4iA8Z+oqmSRCc+LD2lfGub3fK/4OQrWaw680Jfg5D+M/44i3
+	RKm+PaOgkISGxCbxhfJGFVYE/nD0e0lwVdWPvYJjkHPeCl1SRpVHMGhyfysnaDJq2qJmLyiGl8r
+	uyr6/CA==
+X-Google-Smtp-Source: AGHT+IHKtZRYY/mU6Qq1lG0iwlc3eLcqAQbNTreHO4BIni1Q8kRZeK8+vlJWBVPmiW3PqAYK+8wcpQ==
+X-Received: by 2002:a17:906:f8c4:b0:a59:bf43:4e40 with SMTP id a640c23a62f3a-a59fb94a651mr22010066b.14.1715108848832;
+        Tue, 07 May 2024 12:07:28 -0700 (PDT)
+Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com. [209.85.218.44])
+        by smtp.gmail.com with ESMTPSA id oy17-20020a170907105100b00a599a5dec53sm5347655ejb.125.2024.05.07.12.07.27
+        for <linaro-mm-sig@lists.linaro.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 07 May 2024 12:07:27 -0700 (PDT)
+Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-a59b178b75bso630040966b.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 07 May 2024 12:07:27 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AJvYcCXGexIe5sYXuVTgBIpyJK72XvNFY2yW6pXfbOBmrrg2zPbH8PhVn3dpD7kdqEJV5Yr4qwHTSPMWz8yT2HX55JynJkfH0HcvYyb3Xg+BW3s=
+X-Received: by 2002:a17:906:1957:b0:a59:a977:a157 with SMTP id
+ a640c23a62f3a-a59fb9f209dmr23097766b.73.1715108847432; Tue, 07 May 2024
+ 12:07:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <ZjjdUBYYKXJ1EPr5@phenom.ffwll.local>
+References: <202405031110.6F47982593@keescook> <20240503211129.679762-2-torvalds@linux-foundation.org>
+ <20240503212428.GY2118490@ZenIV> <CAHk-=wjpsTEkHgo1uev3xGJ2bQXYShaRf3GPEqDWNgUuKx0JFw@mail.gmail.com>
+ <20240504-wohngebiet-restwert-6c3c94fddbdd@brauner> <CAHk-=wj_Fu1FkMFrjivQ=MGkwkKXZBuh0f4BEhcZHD5WCvHesw@mail.gmail.com>
+ <CAHk-=wj6XL9MGCd_nUzRj6SaKeN0TsyTTZDFpGdW34R+zMZaSg@mail.gmail.com>
+ <b1728d20-047c-4e28-8458-bf3206a1c97c@gmail.com> <ZjoKX4nmrRdevyxm@phenom.ffwll.local>
+ <CAHk-=wgh5S-7sCCqXBxGcXHZDhe4U8cuaXpVTjtXLej2si2f3g@mail.gmail.com> <CAKMK7uGzhAHHkWj0N33NB3OXMFtNHv7=h=P-bdtYkw=Ja9kwHw@mail.gmail.com>
+In-Reply-To: <CAKMK7uGzhAHHkWj0N33NB3OXMFtNHv7=h=P-bdtYkw=Ja9kwHw@mail.gmail.com>
+From: Linus Torvalds <torvalds@linux-foundation.org>
+Date: Tue, 7 May 2024 12:07:10 -0700
+X-Gmail-Original-Message-ID: <CAHk-=whFyOn4vp7+++MTOd1Y3wgVFxRoVdSuPmN1_b6q_Jjkxg@mail.gmail.com>
+Message-ID: <CAHk-=whFyOn4vp7+++MTOd1Y3wgVFxRoVdSuPmN1_b6q_Jjkxg@mail.gmail.com>
+To: Daniel Vetter <daniel@ffwll.ch>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 6FB423F02C
-X-Spamd-Bar: /
-X-Spamd-Result: default: False [-0.90 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+X-Rspamd-Queue-Id: 373193F02C
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.70 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	SUBJECT_ENDS_QUESTION(1.00)[];
-	R_SPF_ALLOW(-0.20)[+mx];
-	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
+	FORGED_SENDER(0.30)[torvalds@linux-foundation.org,torvalds@linuxfoundation.org];
+	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=google];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	ONCE_RECEIVED(0.10)[];
+	RCVD_TLS_LAST(0.00)[];
+	URIBL_BLOCKED(0.00)[mail-ej1-f47.google.com:rdns,mail-ej1-f47.google.com:helo,gitlab.freedesktop.org:url,linux-foundation.org:dkim,ffwll.ch:email];
+	RCVD_COUNT_THREE(0.00)[3];
 	ARC_NA(0.00)[];
+	DMARC_NA(0.00)[linux-foundation.org];
 	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[redhat.com,linaro.org,collabora.com,arm.com,google.com,amd.com,0pointer.de,canonical.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	URIBL_BLOCKED(0.00)[ideasonboard.com:dkim];
-	DMARC_NA(0.00)[ideasonboard.com];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[ideasonboard.com:+];
 	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
+	FREEMAIL_CC(0.00)[emersion.fr,collabora.com,gmail.com,kernel.org,zeniv.linux.org.uk,chromium.org,kernel.dk,amd.com,lists.freedesktop.org,vger.kernel.org,suse.cz,labbott.name,lists.linaro.org,linaro.org,syzkaller.appspotmail.com,googlegroups.com];
+	DKIM_TRACE(0.00)[linux-foundation.org:+];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
+	FROM_NEQ_ENVFROM(0.00)[torvalds@linux-foundation.org,torvalds@linuxfoundation.org];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	TAGGED_RCPT(0.00)[045b454ab35fd82a35fb];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	ASN(0.00)[asn:29169, ipnet:213.167.240.0/20, country:FR];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.47:from];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: EK2XGZNHZLQZZ2VRHMGXOAK6CMKK7Y2O
-X-Message-ID-Hash: EK2XGZNHZLQZZ2VRHMGXOAK6CMKK7Y2O
-X-MailFrom: laurent.pinchart@ideasonboard.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Maxime Ripard <mripard@redhat.com>, Hans de Goede <hdegoede@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Lennart Poettering <mzxreary@0pointer.de>, Robert Mader <robert.mader@collabora.com>, Sebastien Bacher <sebastien.bacher@canonical.com>, Linux Media Mailing List <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, linaro-mm-sig@lists.linaro.org, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Milan Zamazal <mzamazal@redhat.com>, Andrey Konovalov <andrey.konovalov.ynk@gmail.com>
+Message-ID-Hash: UIPX5Y4QR366XUYOWM2RXKI42SQIRCBC
+X-Message-ID-Hash: UIPX5Y4QR366XUYOWM2RXKI42SQIRCBC
+X-MailFrom: torvalds@linuxfoundation.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Simon Ser <contact@emersion.fr>, Pekka Paalanen <pekka.paalanen@collabora.com>, Christian Brauner <brauner@kernel.org>, Al Viro <viro@zeniv.linux.org.uk>, keescook@chromium.org, axboe@kernel.dk, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, io-uring@vger.kernel.org, jack@suse.cz, laura@labbott.name, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, minhquangbui99@gmail.com, sumit.semwal@linaro.org, syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com, syzkaller-bugs@googlegroups.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: Safety of opening up /dev/dma_heap/* to physically present users (udev uaccess tag) ?
+Subject: [Linaro-mm-sig] Re: [PATCH] epoll: try to be a _bit_ better about file lifetimes
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EK2XGZNHZLQZZ2VRHMGXOAK6CMKK7Y2O/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UIPX5Y4QR366XUYOWM2RXKI42SQIRCBC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -86,96 +118,34 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon, May 06, 2024 at 03:38:24PM +0200, Daniel Vetter wrote:
-> On Mon, May 06, 2024 at 02:05:12PM +0200, Maxime Ripard wrote:
-> > On Mon, May 06, 2024 at 01:49:17PM GMT, Hans de Goede wrote:
-> > > Hi dma-buf maintainers, et.al.,
-> > > 
-> > > Various people have been working on making complex/MIPI cameras work OOTB
-> > > with mainline Linux kernels and an opensource userspace stack.
-> > > 
-> > > The generic solution adds a software ISP (for Debayering and 3A) to
-> > > libcamera. Libcamera's API guarantees that buffers handed to applications
-> > > using it are dma-bufs so that these can be passed to e.g. a video encoder.
-> > > 
-> > > In order to meet this API guarantee the libcamera software ISP allocates
-> > > dma-bufs from userspace through one of the /dev/dma_heap/* heaps. For
-> > > the Fedora COPR repo for the PoC of this:
-> > > https://hansdegoede.dreamwidth.org/28153.html
-> > 
-> > For the record, we're also considering using them for ARM KMS devices,
-> > so it would be better if the solution wasn't only considering v4l2
-> > devices.
-> > 
-> > > I have added a simple udev rule to give physically present users access
-> > > to the dma_heap-s:
-> > > 
-> > > KERNEL=="system", SUBSYSTEM=="dma_heap", TAG+="uaccess"
-> > > 
-> > > (and on Rasperry Pi devices any users in the video group get access)
-> > > 
-> > > This was just a quick fix for the PoC. Now that we are ready to move out
-> > > of the PoC phase and start actually integrating this into distributions
-> > > the question becomes if this is an acceptable solution; or if we need some
-> > > other way to deal with this ?
-> > > 
-> > > Specifically the question is if this will have any negative security
-> > > implications? I can certainly see this being used to do some sort of
-> > > denial of service attack on the system (1). This is especially true for
-> > > the cma heap which generally speaking is a limited resource.
-> > 
-> > There's plenty of other ways to exhaust CMA, like allocating too much
-> > KMS or v4l2 buffers. I'm not sure we should consider dma-heaps
-> > differently than those if it's part of our threat model.
-> 
-> So generally for an arm soc where your display needs cma, your render node
-> doesn't. And user applications only have access to the later, while only
-> the compositor gets a kms fd through logind. At least in drm aside from
-> vc4 there's really no render driver that just gives you access to cma and
-> allows you to exhaust that, you need to be a compositor with drm master
-> access to the display.
-> 
-> Which means we're mostly protected against bad applications, and that's
-> not a threat the "user physically sits in front of the machine accounts
-> for", and which giving cma access to everyone would open up. And with
-> flathub/snaps/... this is very much an issue.
-> 
-> So you need more, either:
-> 
-> - cgroups limits on dma-buf and dma-buf heaps. This has been bikeshedded
->   for years and is just not really moving.
-> 
-> - An allocator service which checks whether you're allowed to allocate
->   these special buffers. Android does that through binder.
+On Tue, 7 May 2024 at 11:04, Daniel Vetter <daniel@ffwll.ch> wrote:
+>
+> On Tue, May 07, 2024 at 09:46:31AM -0700, Linus Torvalds wrote:
+>
+> > I'd be perfectly ok with adding a generic "FISAME" VFS level ioctl
+> > too, if this is possibly a more common thing. and not just DRM wants
+> > it.
+> >
+> > Would something like that work for you?
+>
+> Yes.
+>
+> Adding Simon and Pekka as two of the usual suspects for this kind of
+> stuff. Also example code (the int return value is just so that callers know
+> when kcmp isn't available, they all only care about equality):
+>
+> https://gitlab.freedesktop.org/mesa/mesa/-/blob/main/src/util/os_file.c#L239
 
-I would split the latter into a centralized frame buffer allocator
-library for userspace (James Jones' Unix device memory allocator comes
-to mind), providing dma-buf instances using whatever backend is
-available and suitable (DMA heaps would likely be one of them), and a
-safe way to make this allocator available to applications. Exposing it
-through some system services could be useful, but with proper tracking
-and accounting of memory allocated through DMA heaps (and DRM, and V4L2)
-we could possibly do with just a library.
+That example thing shows that we shouldn't make it a FISAME ioctl - we
+should make it a fcntl() instead, and it would just be a companion to
+F_DUPFD.
 
-What I really want is to move memory allocation for devices to a
-separate component, and make everything else a consumer of those
-buffers.
+Doesn't that strike everybody as a *much* cleaner interface? I think
+F_ISDUP would work very naturally indeed with F_DUPFD.
 
-> Probably also some way to nuke applications that refuse to release buffers
-> when they're no longer the right application. cgroups is a lot more
-> convenient for that.
-> 
-> > > But devices tagged for uaccess are only opened up to users who are 
-> > > physcially present behind the machine and those can just hit
-> > > the powerbutton, so I don't believe that any *on purpose* DOS is part of
-> > > the thread model. 
-> > 
-> > How would that work for headless devices?
+Yes? No?
 
--- 
-Regards,
-
-Laurent Pinchart
+                       Linus
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
