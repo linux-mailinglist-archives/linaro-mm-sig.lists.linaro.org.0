@@ -2,113 +2,105 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06D618BEC43
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 May 2024 21:07:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EFCE38BED6D
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 May 2024 22:00:05 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0DB5944359
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 May 2024 19:07:40 +0000 (UTC)
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
-	by lists.linaro.org (Postfix) with ESMTPS id 373193F02C
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 May 2024 19:07:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 09622447F6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 May 2024 20:00:05 +0000 (UTC)
+Received: from mail-yb1-f181.google.com (mail-yb1-f181.google.com [209.85.219.181])
+	by lists.linaro.org (Postfix) with ESMTPS id 8ACE73F02C
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 May 2024 19:59:53 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linux-foundation.org header.s=google header.b=bJS23eaK;
-	spf=pass (lists.linaro.org: domain of torvalds@linuxfoundation.org designates 209.85.218.47 as permitted sender) smtp.mailfrom=torvalds@linuxfoundation.org;
-	dmarc=none
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-a599af16934so887773766b.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 07 May 2024 12:07:30 -0700 (PDT)
+	dkim=pass header.d=linaro.org header.s=google header.b=JB2yhbqa;
+	spf=pass (lists.linaro.org: domain of dmitry.baryshkov@linaro.org designates 209.85.219.181 as permitted sender) smtp.mailfrom=dmitry.baryshkov@linaro.org;
+	dmarc=pass (policy=none) header.from=linaro.org
+Received: by mail-yb1-f181.google.com with SMTP id 3f1490d57ef6-de610800da0so3495301276.2
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 07 May 2024 12:59:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linux-foundation.org; s=google; t=1715108849; x=1715713649; darn=lists.linaro.org;
+        d=linaro.org; s=google; t=1715111993; x=1715716793; darn=lists.linaro.org;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=JwU1IWNzhlSP5EH9iyMHaFmRpSbbE8IFJCVgZMlAkcM=;
-        b=bJS23eaKKyKeeveTH8147mqo9cGbgCiQdjICCIHznl6posGZh43Az1hMUsGAMLMl/p
-         ixjU2SDbZgMVsGaRRkX1a0NU/eD+FuzI2mIW57otGITPtKHkxscRuj6sHlRH8kGJ5z7V
-         akMzVo7QOXkCuTkb6na4QnoyEuJE8/Mfx2Phg=
+        bh=9u4+z96HwXR809ZF1PkEWCwnBjus+4ZFL2JjXWvh/IY=;
+        b=JB2yhbqam0jF2lwM7i9ktMqFRpsgb5TkBI89/SWN9SvJQHrgQMp2O/IaZEWbLbub42
+         U5W/alz9WmaFJ3MuXI2bAKG8NHkJ/7yHMMS/b6i7WUBtnRMjfbdl6fP7I1cxn8hcMDes
+         XlyqAMWvr95SzzSHNfVHo8r2wW1IO32+/zlTcNeYGhMeNOii8S53vKUrystkGZzF6JSR
+         /y+kgifJcRhoLQD19hFdPCB6eD9OCOwFmyyWTK0szpZdnOOhKV7cVm9cLbduIbZUF29l
+         clx0RvodAKiLf1iQ6qxe7GI2+XfDg4S5zC4pcz1Vo4dh7/FX7/iMYhCVchIZFrGyrgG0
+         iKrQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715108849; x=1715713649;
+        d=1e100.net; s=20230601; t=1715111993; x=1715716793;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=JwU1IWNzhlSP5EH9iyMHaFmRpSbbE8IFJCVgZMlAkcM=;
-        b=tdG3YNLg9ug4nq1pcuVfu0MtfFbLNzZhwXBKmSwR/yyLle5C5XpTBTXUU16rQGIUtx
-         66wK4FGobmbaGnlMLwiit1EjG/OUwtyzyVfSzhpphd/dmjObowAhuiO7Wl8cliTSACgG
-         riLU7s9bZLzEuHiT5VGylhZn69k/UVD5xg0RPzpUpRUIge/gU3RqbRq6/hyW4BL+WZLa
-         5bUV40+6o0CmiI3kNbpIIqc4KiTslrRPdiEaYYAGKQtPR67yHHOxwdgMjfnVZ5O4DDU0
-         rQRGrzapBvn8VlDP7OnEg83HlMMx/wF3eySCw0R6uP+Wrl8+vAXDSa7eZSFG+zjxohEq
-         202g==
-X-Forwarded-Encrypted: i=1; AJvYcCVoiEfyVDWIFLNE6Lsiy5iRpM0edMpVykm5yyRaBixm2RJ99toU/MIi5B2gqYrBOwocsE4lWzhzcu5Y5rxsenI3q/5l68r/Jb/e7qN3GrU=
-X-Gm-Message-State: AOJu0YwN4iA8Z+oqmSRCc+LD2lfGub3fK/4OQrWaw680Jfg5D+M/44i3
-	RKm+PaOgkISGxCbxhfJGFVYE/nD0e0lwVdWPvYJjkHPeCl1SRpVHMGhyfysnaDJq2qJmLyiGl8r
-	uyr6/CA==
-X-Google-Smtp-Source: AGHT+IHKtZRYY/mU6Qq1lG0iwlc3eLcqAQbNTreHO4BIni1Q8kRZeK8+vlJWBVPmiW3PqAYK+8wcpQ==
-X-Received: by 2002:a17:906:f8c4:b0:a59:bf43:4e40 with SMTP id a640c23a62f3a-a59fb94a651mr22010066b.14.1715108848832;
-        Tue, 07 May 2024 12:07:28 -0700 (PDT)
-Received: from mail-ej1-f44.google.com (mail-ej1-f44.google.com. [209.85.218.44])
-        by smtp.gmail.com with ESMTPSA id oy17-20020a170907105100b00a599a5dec53sm5347655ejb.125.2024.05.07.12.07.27
-        for <linaro-mm-sig@lists.linaro.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 07 May 2024 12:07:27 -0700 (PDT)
-Received: by mail-ej1-f44.google.com with SMTP id a640c23a62f3a-a59b178b75bso630040966b.0
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 07 May 2024 12:07:27 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AJvYcCXGexIe5sYXuVTgBIpyJK72XvNFY2yW6pXfbOBmrrg2zPbH8PhVn3dpD7kdqEJV5Yr4qwHTSPMWz8yT2HX55JynJkfH0HcvYyb3Xg+BW3s=
-X-Received: by 2002:a17:906:1957:b0:a59:a977:a157 with SMTP id
- a640c23a62f3a-a59fb9f209dmr23097766b.73.1715108847432; Tue, 07 May 2024
- 12:07:27 -0700 (PDT)
+        bh=9u4+z96HwXR809ZF1PkEWCwnBjus+4ZFL2JjXWvh/IY=;
+        b=HMaEp0tlV98MSoae9ULKJzK1QA0E5Fulpj3IiB97i5LWgnRCiLMExs9LpYBsP4Z7KK
+         39iJiGNIlN2U/I4vdSAFr+9g62/3jQoJjxjGkjqcTm6SPEzarucSE5aN6xrgW4kE4v1m
+         MLfkJc8p3qxpZnn4SihpQb/s/yy8tIPaOIbu5Nw0wj/MGX+taCVueGMTLrEG8jvKaD4V
+         jD0fkp/Emcv6R7ymTARuNBO21Np20hziX5Fhzx02SqXuU2b9RNOX9FiNJieWMltt2Etm
+         1bMLVPx6gjNe9z28Y2th+jF0tvg8km4ULNZjQYM0sE/A46pwPsxhCHOq0zxcFHQ0t4/G
+         ztzQ==
+X-Forwarded-Encrypted: i=1; AJvYcCWzg+ntFs9X1kDYneCwDzloAtE2pudWel2a3dYkOiGmwT1TZ18gVFVEs/l6xtqPksIJ/Bdqwcx7FBhkq4Zz/zhy0NzQG3174AsRxcwz9XY=
+X-Gm-Message-State: AOJu0YyynH9/E5FhoJ1eJiO9rzRulezpvT+tMPpGlKPwRWK0+XyKUgeq
+	3R+87IKHU9j7MKMC3waKq3Y5YTCOjVTIBct2Ky25BvUti410JGHmuch4J96+eT/KgmemQ3iPNkM
+	dyzISL8107jlRlgn09uqmili1AXMKb0OabCGdnLjO
+X-Google-Smtp-Source: AGHT+IHOidTRxfaPcTyYfkMUG+K57a4v9CN0Di3Y62BasjAdrMLYfJVqOjaj2F7Xus+0Xcdfeto1KfCFGsurjzlI9PQ=
+X-Received: by 2002:a5b:881:0:b0:deb:b3da:b1ad with SMTP id
+ 3f1490d57ef6-debb9cf9739mr749935276.12.1715111993047; Tue, 07 May 2024
+ 12:59:53 -0700 (PDT)
 MIME-Version: 1.0
-References: <202405031110.6F47982593@keescook> <20240503211129.679762-2-torvalds@linux-foundation.org>
- <20240503212428.GY2118490@ZenIV> <CAHk-=wjpsTEkHgo1uev3xGJ2bQXYShaRf3GPEqDWNgUuKx0JFw@mail.gmail.com>
- <20240504-wohngebiet-restwert-6c3c94fddbdd@brauner> <CAHk-=wj_Fu1FkMFrjivQ=MGkwkKXZBuh0f4BEhcZHD5WCvHesw@mail.gmail.com>
- <CAHk-=wj6XL9MGCd_nUzRj6SaKeN0TsyTTZDFpGdW34R+zMZaSg@mail.gmail.com>
- <b1728d20-047c-4e28-8458-bf3206a1c97c@gmail.com> <ZjoKX4nmrRdevyxm@phenom.ffwll.local>
- <CAHk-=wgh5S-7sCCqXBxGcXHZDhe4U8cuaXpVTjtXLej2si2f3g@mail.gmail.com> <CAKMK7uGzhAHHkWj0N33NB3OXMFtNHv7=h=P-bdtYkw=Ja9kwHw@mail.gmail.com>
-In-Reply-To: <CAKMK7uGzhAHHkWj0N33NB3OXMFtNHv7=h=P-bdtYkw=Ja9kwHw@mail.gmail.com>
-From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Tue, 7 May 2024 12:07:10 -0700
-X-Gmail-Original-Message-ID: <CAHk-=whFyOn4vp7+++MTOd1Y3wgVFxRoVdSuPmN1_b6q_Jjkxg@mail.gmail.com>
-Message-ID: <CAHk-=whFyOn4vp7+++MTOd1Y3wgVFxRoVdSuPmN1_b6q_Jjkxg@mail.gmail.com>
-To: Daniel Vetter <daniel@ffwll.ch>
+References: <bb372250-e8b8-4458-bc99-dd8365b06991@redhat.com>
+ <ojduxo54lpcbfg2wfuhqhy7k3phncamtklh65z7gvttcwztmhk@zkifewcy4ovi>
+ <3c0c7e7e-1530-411b-b7a4-9f13e0ff1f9e@redhat.com> <e7ilwp3vc32xze3iu2ejgqlgz44codsktnvyiufjhuf2zxcnnf@tnwzgzoxvbg2>
+ <d2a512b2-e6b1-4675-b406-478074bbbe95@linaro.org> <CAA8EJpr4bJUQt2T63_FZ=KHGEm4vixfpk3pMV9naABEONJfMmQ@mail.gmail.com>
+ <20240507184049.GC20390@pendragon.ideasonboard.com>
+In-Reply-To: <20240507184049.GC20390@pendragon.ideasonboard.com>
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Date: Tue, 7 May 2024 22:59:42 +0300
+Message-ID: <CAA8EJpqLu5w7gnqtDyuDDQBd7AEROTd6LTYi8muzjToXmkKR3w@mail.gmail.com>
+To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 373193F02C
+X-Rspamd-Queue-Id: 8ACE73F02C
 X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.70 / 15.00];
+X-Spamd-Result: default: False [-5.50 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	FORGED_SENDER(0.30)[torvalds@linux-foundation.org,torvalds@linuxfoundation.org];
-	R_DKIM_ALLOW(-0.20)[linux-foundation.org:s=google];
+	SUBJECT_ENDS_QUESTION(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_TLS_LAST(0.00)[];
-	URIBL_BLOCKED(0.00)[mail-ej1-f47.google.com:rdns,mail-ej1-f47.google.com:helo,gitlab.freedesktop.org:url,linux-foundation.org:dkim,ffwll.ch:email];
-	RCVD_COUNT_THREE(0.00)[3];
-	ARC_NA(0.00)[];
-	DMARC_NA(0.00)[linux-foundation.org];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
 	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[linaro.org,redhat.com,collabora.com,arm.com,google.com,amd.com,0pointer.de,canonical.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
+	RCVD_TLS_LAST(0.00)[];
+	URIBL_BLOCKED(0.00)[linaro.org:dkim,x.org:url,ideasonboard.com:email];
+	ARC_NA(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[emersion.fr,collabora.com,gmail.com,kernel.org,zeniv.linux.org.uk,chromium.org,kernel.dk,amd.com,lists.freedesktop.org,vger.kernel.org,suse.cz,labbott.name,lists.linaro.org,linaro.org,syzkaller.appspotmail.com,googlegroups.com];
-	DKIM_TRACE(0.00)[linux-foundation.org:+];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[torvalds@linux-foundation.org,torvalds@linuxfoundation.org];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	TAGGED_RCPT(0.00)[045b454ab35fd82a35fb];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.47:from];
+	DKIM_TRACE(0.00)[linaro.org:+];
 	MISSING_XM_UA(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[19];
+	NEURAL_HAM(-0.00)[-1.000];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.219.181:from];
+	TAGGED_RCPT(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: UIPX5Y4QR366XUYOWM2RXKI42SQIRCBC
-X-Message-ID-Hash: UIPX5Y4QR366XUYOWM2RXKI42SQIRCBC
-X-MailFrom: torvalds@linuxfoundation.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Simon Ser <contact@emersion.fr>, Pekka Paalanen <pekka.paalanen@collabora.com>, Christian Brauner <brauner@kernel.org>, Al Viro <viro@zeniv.linux.org.uk>, keescook@chromium.org, axboe@kernel.dk, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, io-uring@vger.kernel.org, jack@suse.cz, laura@labbott.name, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, minhquangbui99@gmail.com, sumit.semwal@linaro.org, syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com, syzkaller-bugs@googlegroups.com
+Message-ID-Hash: ZVCKAPMJSB2G2XTCD6DGDRE7YMGARITN
+X-Message-ID-Hash: ZVCKAPMJSB2G2XTCD6DGDRE7YMGARITN
+X-MailFrom: dmitry.baryshkov@linaro.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Hans de Goede <hdegoede@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Lennart Poettering <mzxreary@0pointer.de>, Robert Mader <robert.mader@collabora.com>, Sebastien Bacher <sebastien.bacher@canonical.com>, Linux Media Mailing List <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, linaro-mm-sig@lists.linaro.org, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Milan Zamazal <mzamazal@redhat.com>, Maxime Ripard <mripard@redhat.com>, Andrey Konovalov <andrey.konovalov.ynk@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] epoll: try to be a _bit_ better about file lifetimes
+Subject: [Linaro-mm-sig] Re: Safety of opening up /dev/dma_heap/* to physically present users (udev uaccess tag) ?
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UIPX5Y4QR366XUYOWM2RXKI42SQIRCBC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZVCKAPMJSB2G2XTCD6DGDRE7YMGARITN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -118,34 +110,70 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Tue, 7 May 2024 at 11:04, Daniel Vetter <daniel@ffwll.ch> wrote:
+On Tue, 7 May 2024 at 21:40, Laurent Pinchart
+<laurent.pinchart@ideasonboard.com> wrote:
 >
-> On Tue, May 07, 2024 at 09:46:31AM -0700, Linus Torvalds wrote:
->
-> > I'd be perfectly ok with adding a generic "FISAME" VFS level ioctl
-> > too, if this is possibly a more common thing. and not just DRM wants
-> > it.
+> On Tue, May 07, 2024 at 06:19:18PM +0300, Dmitry Baryshkov wrote:
+> > On Tue, 7 May 2024 at 18:15, Bryan O'Donoghue wrote:
+> > > On 07/05/2024 16:09, Dmitry Baryshkov wrote:
+> > > > Ah, I see. Then why do you require the DMA-ble buffer at all? If you are
+> > > > providing data to VPU or DRM, then you should be able to get the buffer
+> > > > from the data-consuming device.
+> > >
+> > > Because we don't necessarily know what the consuming device is, if any.
+> > >
+> > > Could be VPU, could be Zoom/Hangouts via pipewire, could for argument
+> > > sake be GPU or DSP.
+> > >
+> > > Also if we introduce a dependency on another device to allocate the
+> > > output buffers - say always taking the output buffer from the GPU, then
+> > > we've added another dependency which is more difficult to guarantee
+> > > across different arches.
 > >
-> > Would something like that work for you?
+> > Yes. And it should be expected. It's a consumer who knows the
+> > restrictions on the buffer. As I wrote, Zoom/Hangouts should not
+> > require a DMA buffer at all.
 >
-> Yes.
+> Why not ? If you want to capture to a buffer that you then compose on
+> the screen without copying data, dma-buf is the way to go. That's the
+> Linux solution for buffer sharing.
+
+Yes. But it should be allocated by the DRM driver. As Sima wrote,
+there is no guarantee that the buffer allocated from dma-heaps is
+accessible to the GPU.
+
 >
-> Adding Simon and Pekka as two of the usual suspects for this kind of
-> stuff. Also example code (the int return value is just so that callers know
-> when kcmp isn't available, they all only care about equality):
+> > Applications should be able to allocate
+> > the buffer out of the generic memory.
 >
-> https://gitlab.freedesktop.org/mesa/mesa/-/blob/main/src/util/os_file.c#L239
+> If applications really want to copy data and degrade performance, they
+> are free to shoot themselves in the foot of course. Applications (or
+> compositors) need to support copying as a fallback in the worst case,
+> but all components should at least aim for the zero-copy case.
 
-That example thing shows that we shouldn't make it a FISAME ioctl - we
-should make it a fcntl() instead, and it would just be a companion to
-F_DUPFD.
+I'd say that they should aim for the optimal case. It might include
+both zero-copying access from another DMA master or simple software
+processing of some kind.
 
-Doesn't that strike everybody as a *much* cleaner interface? I think
-F_ISDUP would work very naturally indeed with F_DUPFD.
+> > GPUs might also have different
+> > requirements. Consider GPUs with VRAM. It might be beneficial to
+> > allocate a buffer out of VRAM rather than generic DMA mem.
+>
+> Absolutely. For that we need a centralized device memory allocator in
+> userspace. An effort was started by James Jones in 2016, see [1]. It has
+> unfortunately stalled. If I didn't have a camera framework to develop, I
+> would try to tackle that issue :-)
 
-Yes? No?
+I'll review the talk. However the fact that the effort has stalled
+most likely means that 'one fits them all' approach didn't really fly
+well. We have too many usecases.
 
-                       Linus
+>
+> [1] https://www.x.org/wiki/Events/XDC2016/Program/Unix_Device_Memory_Allocation.pdf
+
+-- 
+With best wishes
+Dmitry
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
