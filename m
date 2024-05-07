@@ -2,226 +2,260 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B65678BDF6D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 May 2024 12:10:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DDEE8BE07A
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 May 2024 12:58:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 947BF44785
-	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 May 2024 10:10:33 +0000 (UTC)
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com (mail-bn8nam04on2067.outbound.protection.outlook.com [40.107.100.67])
-	by lists.linaro.org (Postfix) with ESMTPS id 72E0A3EC0D
-	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 May 2024 10:10:22 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1C5BD40C4C
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  7 May 2024 10:58:29 +0000 (UTC)
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	by lists.linaro.org (Postfix) with ESMTPS id 61F913EC0D
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  7 May 2024 10:58:18 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=KVuCKvFI;
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.100.67 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mhj5hA7iY/x/mP5N5V7Njlh+AkiRaKFwPWBbmDMFaKOY1W6Vu2qrHW32knw+i1weCRlr0A6OpgLwXixjPB6e8kuGDXO9Ugdq4Dt2TpTVNn1C/TiC+KU21P1E7uV5oJzSkoow7Hfuc6gH4ETvtybM6L2dPTpe0Io5w+1C8idDUT1p2oKE59KziqP5PSKTcHRzmhuujC2VkXzPYLHQWQH72wV5eALHxA5sO/hyfqUTmmchfhlYCa2k2WVrn2nZBejn63ecHNhcL2K6KhO2QrBEJ0tD4Z0k7SwxRlwxzIbiTaUQQh0738CEwBRBgW86w0daVAD+tNibdilVBp2xtCXqEg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QlRLHdWEYeq286nTvaHkjbWHadntriI4JE8Oken86nA=;
- b=lKWhyzmeZKjdewcAKMLiziL/aZA13s0I3xFhAzf4CgAD9MFWhDxvOXCE4aW1/7EwuTY3CGJ5jDd2A3sGHYzxiBC5BB2Crmv3C6DLrnYP5+QlNZlayX829XE57o89dnIA11gUU8EYNlV+kzNmxm4fM1XBb5vTszVK18LEbEG1kpc/7DrK1f3bjGFw1izz/OUllnli9KBb8/H9vKoBMN23WMv0U+lD8KauZa9XP9xkqBuOenqkGD9qJaLmjhusZ/deA9Ue6rqKaNB1h/hYP9/apDvLdYD0mZNibDdBLG4QCER8sjrF9FHAM5DkybGokBvw1Z8MveBvzClROsRsRghw9g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QlRLHdWEYeq286nTvaHkjbWHadntriI4JE8Oken86nA=;
- b=KVuCKvFIZVASMGjWh8TbzOZE0oxX6UJJ7zHP4/UM3Mo4qxDpeCt0iiBKm4Bt4gW4FPegpjJ4CEKLozxJwyHCx7JLV63nqXpRh8gtxtzD8TdbsnhN44ST8UIMRCOL4SfdFdYfiWjBkCMTlMQcUx2ulHm3MevUMBYDZkxSzhI2vbI=
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by PH0PR12MB7485.namprd12.prod.outlook.com (2603:10b6:510:1e9::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7544.42; Tue, 7 May
- 2024 10:10:19 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::46fb:96f2:7667:7ca5]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::46fb:96f2:7667:7ca5%2]) with mapi id 15.20.7544.041; Tue, 7 May 2024
- 10:10:13 +0000
-Message-ID: <8915fcc1-d8f1-48c2-9e51-65159aaa5a3b@amd.com>
-Date: Tue, 7 May 2024 12:10:07 +0200
-User-Agent: Mozilla Thunderbird
-To: "T.J. Mercier" <tjmercier@google.com>,
- Charan Teja Kalla <quic_charante@quicinc.com>
-References: <20240327022903.776-1-justinjiang@vivo.com>
- <5cf29162-a29d-4af7-b68e-aac5c862d20e@amd.com>
- <cc7defae-60c1-4cc8-aee5-475d4460e574@vivo.com>
- <23375ba8-9558-4886-9c65-af9fe8e8e8b6@amd.com>
- <CABdmKX2Kf4ZmVzv3LGTz2GyP-9+rAtFY9hSAxdkrwK8mG0gDvQ@mail.gmail.com>
- <e55cad9b-a361-4d27-a351-f6a4f5b8b734@vivo.com>
- <40ac02bb-efe2-4f52-a4f2-7b56d9b93d2c@amd.com>
- <4fedd80c-d5b6-4478-bfd3-02d1ee1a26e5@vivo.com>
- <aab5ec51-fcff-44f2-a4f5-2979bd776a03@amd.com>
- <2ebca2fd-9465-4e64-b3cc-ffb88ef87800@vivo.com>
- <d4209754-5f26-422d-aca0-45cccbc44ad0@amd.com>
- <289b9ad6-58a3-aa39-48ae-a244fe108354@quicinc.com>
- <CABdmKX3Zu8LihAFjMuUHx4xzZoqgmY7OKdyVz-D26gM-LECn6A@mail.gmail.com>
- <8ca45837-cbed-28da-4a6f-0dcec8294f51@quicinc.com>
- <83605228-92ee-b666-d894-1c145af2e5ab@quicinc.com>
- <CABdmKX2MWU9-9YN46PXx-Jy-O9CHMv8hCkvArd7BbWUBs=GPnw@mail.gmail.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <CABdmKX2MWU9-9YN46PXx-Jy-O9CHMv8hCkvArd7BbWUBs=GPnw@mail.gmail.com>
-X-ClientProxiedBy: FR3P281CA0044.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:4a::7) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
+	dkim=pass header.d=ffwll.ch header.s=google header.b=cd3dPw5N;
+	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.128.50) smtp.mailfrom=daniel@ffwll.ch;
+	dmarc=none
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-41ecf80482bso2688575e9.1
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 07 May 2024 03:58:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ffwll.ch; s=google; t=1715079497; x=1715684297; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references
+         :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=ViRc7GAJZffBJpcUFJE5upGd7xOjgKlPDNKALV639RY=;
+        b=cd3dPw5NRjw40gTkpHaEoartA+US9ooZEg8nPCZ0ebvZrGKYmDr3kyiP3eCxOaerdQ
+         nmFFtBsWzQAvAXS2hje9Muv6qArHXoKrHo4Xk86dmtoJNgjcKwKSqrBVmiZwwc4G8RI8
+         6BAUS0ctDmFOwfzeO+3xUUpJBysx0+/Hi9H/8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1715079497; x=1715684297;
+        h=in-reply-to:content-disposition:mime-version:references
+         :mail-followup-to:message-id:subject:cc:to:from:date
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=ViRc7GAJZffBJpcUFJE5upGd7xOjgKlPDNKALV639RY=;
+        b=qyI2ItmFAGxCkK3LufoixHNOlOXUVAA3zi5IjAI1urQTzg6Tn2PxHh6tWh+HK/GvkM
+         eoN/ZaYBeclgTKSlQMrLDfVYrLWMM0FQu+tXTu3R8On0k/+ZZUNqHkKYYYOvVpRG1wg0
+         IaEsIVOT2nWkJLt+LxlYXER+t8Ms0PXnbkpjFQkZSap0cLu42gb81owmhd80D+nUAvXR
+         Rz/daSfIlapr01uTagrlGPURB0oa/T/tpoi8SSrisIEIRG+qwYCzOsACe32U+l5tWhV5
+         0t/T4cSDKNm3EqlN0FyjPjA5H0Z9kHEppoxq59f+wxkgPc6WD6NHX5MuD2cjsLy0B3gA
+         ICUA==
+X-Forwarded-Encrypted: i=1; AJvYcCVrckxPHj4fyaZKiheF9AIVMVskMX3dH+FZCL0pFRowCYo9m7P4LJFThfMOzREVT0B+FYphCKu/M+YI6pa3h5rupb9NrNifU8vFVxjTk88=
+X-Gm-Message-State: AOJu0YwRc6NIsCj/EBCU03tnbJQLf7OBjcNbL5lapndMJmEzNjujWnfc
+	gyNnoKQ/2DGtAVnT4v9VMw+GluftinyjH2JnpChrPwp9tJw/1wy3cON5Hvsysf8=
+X-Google-Smtp-Source: AGHT+IGmmpohUZWli41FI/bjCKJyuoxp80jtwfSXh1Ej1JbzBOZ7sdqvyBNDvL8g4N9bnXZUMYG4Hg==
+X-Received: by 2002:a05:600c:3b21:b0:419:f0a8:9801 with SMTP id m33-20020a05600c3b2100b00419f0a89801mr10223677wms.0.1715079497175;
+        Tue, 07 May 2024 03:58:17 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id j15-20020a05600c190f00b0041bf512f85bsm22775381wmq.14.2024.05.07.03.58.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 07 May 2024 03:58:16 -0700 (PDT)
+Date: Tue, 7 May 2024 12:58:14 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian Brauner <brauner@kernel.org>
+Message-ID: <ZjoJRs0Svrb9ELDu@phenom.ffwll.local>
+Mail-Followup-To: Christian Brauner <brauner@kernel.org>,
+	Linus Torvalds <torvalds@linux-foundation.org>,
+	Al Viro <viro@zeniv.linux.org.uk>, keescook@chromium.org,
+	axboe@kernel.dk, christian.koenig@amd.com,
+	dri-devel@lists.freedesktop.org, io-uring@vger.kernel.org,
+	jack@suse.cz, laura@labbott.name, linaro-mm-sig@lists.linaro.org,
+	linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org, minhquangbui99@gmail.com,
+	sumit.semwal@linaro.org,
+	syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com,
+	syzkaller-bugs@googlegroups.com
+References: <20240504-wohngebiet-restwert-6c3c94fddbdd@brauner>
+ <CAHk-=wj_Fu1FkMFrjivQ=MGkwkKXZBuh0f4BEhcZHD5WCvHesw@mail.gmail.com>
+ <CAHk-=wirxPSQgRV1u7t4qS1t4ED7w7OeehdUSC-LYZXspqa49w@mail.gmail.com>
+ <CAHk-=whrSSNYVzTHNFDNGag_xcKuv=RaQUX8+n29kkic39DRuQ@mail.gmail.com>
+ <20240505194603.GH2118490@ZenIV>
+ <CAHk-=wipanX2KYbWvO5=5Zv9O3r8kA-tqBid0g3mLTCt_wt8OA@mail.gmail.com>
+ <20240505203052.GJ2118490@ZenIV>
+ <CAHk-=whFg8-WyMbVUGW5c0baurGzqmRtzFLoU-gxtRXq2nVZ+w@mail.gmail.com>
+ <ZjjRWybmAmClMMI9@phenom.ffwll.local>
+ <20240506-zweisamkeit-zinsniveau-615a2e6d7c67@brauner>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|PH0PR12MB7485:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7a0800a4-c938-4a5a-a324-08dc6e7de2b4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|376005|366007|1800799015;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?dGoxSlN1NEh0SUhPVllxbk1TS1dTZERneE5PWjVxdkt4WUc5RTJXdHV5RGp1?=
- =?utf-8?B?aXFtbTBxaE9KeTN5Vlh3REJld1AzMnBQM2t6V2hLcW93aDlpeXhtSGpGVm1x?=
- =?utf-8?B?Ky8xN2poNlVpWDlYUFd0Q2hMQ2Foc3FDNG9RaEdLL3J0a00rQ3RxVWRCUUpL?=
- =?utf-8?B?REJiemFwM0lNd00wMzRmdytrVWxnZVdtd2xzWVdlYXJmWDB2cHN4b3dUdUsr?=
- =?utf-8?B?NEg0QWplZVBYZ05XcFVBV2ZNcmdRV2x1WjFjRFNZbUlGamhta21ibi9NSGU5?=
- =?utf-8?B?T3IyQjNJbmkzL2paNHZiVkRCOTlvT2JRbWROeG1tbVBMNCtBQzJ0NnZRSFV5?=
- =?utf-8?B?Z2h1azBscTBYWVdEbnVCMXhIdDh2TTZnSlVpS2NzVzFZdlNRa296TklBRks4?=
- =?utf-8?B?Sk15bFRZMGFsUUU0NzZPUWRocTloMXErdmJybGZ3a0hVeTNDQWw1aGRiR2RC?=
- =?utf-8?B?NFpCQkt2NTdHTWxnWURIcytQZERVQ1lvMGFSZnF1Sms5YlJGMjhqQ3JhcFdv?=
- =?utf-8?B?TkFhNkcvSmUrTkVPMzNya2xtT2ovbS9rRkpBSW8rRUMrT0Q4SXNzR3FSYVJy?=
- =?utf-8?B?Q0V2UlQ4Zmttd3ErclhOcWs3dmJlV2xlUjMwR3FldzhVQ1R6azZ6M2FVNVlF?=
- =?utf-8?B?cTdQK05oUUlBa2NoeCttQmZEaVNLMEhoa2VFWFl4aFRodGFCTHJjMEJldkZX?=
- =?utf-8?B?d1pUWlZWT0FVcFVqUXRrWkNSWXJKZXk4TGxHc29Wd3BRMVNOZEVuOTFEVGVk?=
- =?utf-8?B?QzBCTmxiRVh5SXVQRkxHdlFaNTMwQ2tjTDF1OE80QzcrZERSZWJDMk1FOFll?=
- =?utf-8?B?Y2FkbmlPUG9nNGdRUXVjZG9Kd2Zud1FxSGd2bjV2aFczTjVlSzIyRHU4aVJt?=
- =?utf-8?B?RWF3eHdOT1poK3dBTFhUVlhqKzMrMGg1VVNtMzlJMFRtRE5MSjRCbWFGdkl4?=
- =?utf-8?B?b2hKVnBxWWdya2hmZ0pMNnAxMm9UalZZYmQ1ZmFEL3ViWTViaXJ5bFNWdjA1?=
- =?utf-8?B?NnFqcWZjUkZwc2pRVzltc01rQ0NyMlhRdW83Z0srSWUrdzlPVjAxUE1oQWYz?=
- =?utf-8?B?NGRHbjN1aHVRMzhTcmkycVR4UFNOWGJHNCtlOFJ3KzdNMS91SXVPK3JYZDZL?=
- =?utf-8?B?TXRKL2tLTndlczhIVU1ueWZxMmVhRGpVak1oL0R6WXZOM0tXeGpWalN3NGNt?=
- =?utf-8?B?TjB0NkQxL1NNUDBDSjd3eGY1NVV1bTRxZkZkbElYV0RQUExTeFJuSjJhbTVU?=
- =?utf-8?B?ZHd4aVJBemlDVHZoZTNKeTZnUkhycHhhY3NMbGp2MlR3L1NMSUFYejZvMTlV?=
- =?utf-8?B?RENMRjRNOGN5VHZQVW0zQ0M0SDdDOXhaVkR5R1d6emYxNjNvcGVxbUd3c0hr?=
- =?utf-8?B?MWdWL0NKeGYwRlJvSmhVZ2RBWkx4bzNOaGV2WkNYV0NCM05vMFpHbW5CTEFh?=
- =?utf-8?B?S1lrZWYvcDlTaHBMV1F0N3B2ZmhNUFdTS3NGWTJnOU1kbkx5SGk3UXRLeVRj?=
- =?utf-8?B?SWNoUU1sSmhHRkNUcWpPWVhqQS8rUkFYYm5vRlJPQkd0cWcwUTNCdlhnaHRa?=
- =?utf-8?B?MXlEZU5IWUpYMU9MbEhGQzNhWCtQM2xtTFV4d09Lck1CcUc3RXV2R1NIa28v?=
- =?utf-8?Q?qy36Zn2hPRRWbhZggDkfu4+eJ0Llp9fmoa0RAG1H64l8=3D?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230031)(376005)(366007)(1800799015);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?Nm53ZWdiM2hITWJSQnJCeU1GYXg1SnVyV1hLaEFzbi95bkRXS001TzlCWFND?=
- =?utf-8?B?dHowS2g5SWg5Z2ExZUdaVm96Mzc3SDlCZm8yTlM0ckRFeU5uaGd3dXV6Q2FY?=
- =?utf-8?B?K1pyUmpiNXBXTFd6ZzNyVThjN0FKd1k0ZjdjQ25JRlc5WDVBb1QzOW1KY0Z6?=
- =?utf-8?B?U0NqcXVBQzB0L3pvbXBQakxlUmpmVmNwUWg4bXRXTWhvaktPY0Yzc2RGNjVx?=
- =?utf-8?B?dmZlV1d4YlFFbU1XU2F6aE4vcVJDcEhTeGNlV2lmKzVndkc0NDB1R2gxTFNR?=
- =?utf-8?B?VStaK3YrTlNxZnlxQzZqcnhYYXFyOWJoN2dORlNubXR2amJUd2ZEck1tZWs2?=
- =?utf-8?B?Q2ZnREY5OEhqVUdJYUxOYnNIdy9WQVc2YnhUaEliL21Gc0tzZzd5ZFdNTjhP?=
- =?utf-8?B?eFFKci9pd09YSmFiN3FNZ2ZHUW1vUEhteGJBRjV6c2p6c3R1MUlSYXh4SXNh?=
- =?utf-8?B?OTdGeUdTM2ZKSmx1WnI0YzVaYTkyL1B1UE9SNzRPQkZSUkd6RGFvQ01lYnFL?=
- =?utf-8?B?TlkyVTBxZ1pzenI0amZkV3g5bVNDOWl5THk2OTYvcEhyMDU1VHUxQ3FLVHYx?=
- =?utf-8?B?Nlk2ekNBbkM4UkdTS2dZT2Q4ZlZLZnBZdzUrY0Y2M2JGbEFpckdHKzh6OTJp?=
- =?utf-8?B?QUlCcmFIYVhRcWFic3lqeGcxS1dqRkhpVHNvTTN3Wm5FY1VuTms0Sy8zbjVm?=
- =?utf-8?B?TUZsbWlVQ3hjbzNxVnk3aitJclJHVW1GMitMRUEvaTNrRk0rMEtwU2p1d0xl?=
- =?utf-8?B?NHRCcCt6WFZkZGZ5TjBLQ3FmU2JPMGhoQjNhRXlOVVRPa1JlSnJrRzhCVGpR?=
- =?utf-8?B?Z05xT0tQdFVpTjROcDlRSTQxeitHeEFhTDU1eENnY01LYkw5c3FBczRkc3NE?=
- =?utf-8?B?SkNLem1reENqWld6b0p0N2cydGlvSE5xclNTWXBySzlKcTRFR3hKL1QvVkZH?=
- =?utf-8?B?S0hZTmM0ZzM5Q09BcU1JYUFpTEY2VEJuZlovTXNmejUwL0IyZ2JKRngxSlVk?=
- =?utf-8?B?bTFlWUNRU21rdzh0M281bFRHTVFIMndHb0t5SW5EYzgzaGxiZTAzd3YxcVo4?=
- =?utf-8?B?enFRVWxjMDVLTVpVTFh1bmtncllES2pOZW5ib1M1YlpKbmhUZTRBMHhrUTFY?=
- =?utf-8?B?dmFnMU5kdzJDUWFlOFpqTkkxQ1ZseDVvQjFaL3dmejFDZjczZHVmUzh4WlZJ?=
- =?utf-8?B?MEhUbnpya1k0OC9TWEpuVE5XNXc3T2FVbmh6RktJMm00d3k2MnN2V25hQnJ5?=
- =?utf-8?B?Q1pnZlJSa0plMXRJV1VqcTlUeHlwTU1MN1l2RjZnQVE4ZDNnQ0JxQ2NIOEth?=
- =?utf-8?B?bG5ESStOczdNa0dRMEJOY2FGNS9lOW5CcW12NjdPTXpzbHJuMm1NczVuZWV6?=
- =?utf-8?B?c3VIMmJVQXpWQ0dRWDVjYllMekw4MERQWHNLOHJjejYvcEp2aEhLVS83T1VD?=
- =?utf-8?B?czV2T2dpN0Vqbmo1b1BQRzRxTTZUSXcvUlB3WDNzVXlBL2JXYllteUVRL3VQ?=
- =?utf-8?B?V1NRQW9JR1hzSDB1cGdpYmZLTGhsdDFwYTMzSnJWL0pGRGFEZFM5RmNwZk42?=
- =?utf-8?B?RXNaUkhYLzk2Rm5nMDNOWUtZUWN2TWg4TFZ6VmlLeW84Q1lxS0w1RGN1SGVi?=
- =?utf-8?B?NVNVTERjRW1Ed09WdlFmaVBWQzVscVZsdWh2b3VKMVEySlArc25ZSFVCN21o?=
- =?utf-8?B?ZEhuVWhzQUpCUVFmWTVOalhOSXNrVTJVdUlaZDk0QzNhajNoWmo3Z1Uyd3dz?=
- =?utf-8?B?VGJSbkQ5V2dYc1h3Q3drWDd0RmxWLzRpaGQ2c1dUL0ZzNnlFeU1CcFlKT2Q4?=
- =?utf-8?B?SjBuRGJRS2xUUnhXZTNmTVBBQ3RzeW00STVQZUZPMmdUak1WREIzbndMSyt6?=
- =?utf-8?B?NVg5bndIYk1ZMS9mdDRkaVpwZCs0VlNOU0xjdnNNQ1kvemJwZmw0SDlHN1B6?=
- =?utf-8?B?T3hTLzltNGd2QkYySExvemFLTnRCYVh0Zngra2lsc0FhR1Bzcm1LK3kxakVl?=
- =?utf-8?B?L1Y1ZTNUSWREalJtZitGVDlsZ1pUYzEwcjVseVgzSVkzd0U3c2hpc0ZUTnRr?=
- =?utf-8?B?aEttcVNxMys3TVNkN3Z2a1YydE4vNmtGcHNQeGcrNWFSQVlER0dPZ1crd29k?=
- =?utf-8?Q?KzJ1dMTjBDGJjZDi8zhvsi9AE?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7a0800a4-c938-4a5a-a324-08dc6e7de2b4
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 May 2024 10:10:13.5565
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ekPxnk4+TbKm1ot4/t6MM3XiR5ehHyYThvvbcGVVAxFIpO8Qddja/0TjFHjSkRe5
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB7485
+Content-Disposition: inline
+In-Reply-To: <20240506-zweisamkeit-zinsniveau-615a2e6d7c67@brauner>
+X-Operating-System: Linux phenom 6.6.15-amd64 
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 72E0A3EC0D
-X-Spamd-Bar: --------
-X-Spamd-Result: default: False [-8.98 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-2.99)[99.97%];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+X-Rspamd-Queue-Id: 61F913EC0D
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.80 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.100.67:from];
+	R_SPF_NA(0.00)[no SPF record];
+	FREEMAIL_CC(0.00)[ffwll.ch,linux-foundation.org,zeniv.linux.org.uk,chromium.org,kernel.dk,amd.com,lists.freedesktop.org,vger.kernel.org,suse.cz,labbott.name,lists.linaro.org,gmail.com,linaro.org,syzkaller.appspotmail.com,googlegroups.com];
+	DKIM_TRACE(0.00)[ffwll.ch:+];
+	RCVD_TLS_LAST(0.00)[];
+	DMARC_NA(0.00)[ffwll.ch];
+	URIBL_BLOCKED(0.00)[mail-wm1-f50.google.com:rdns,mail-wm1-f50.google.com:helo,ffwll.ch:url,ffwll.ch:dkim];
 	MIME_TRACE(0.00)[0:+];
-	MID_RHS_MATCH_FROM(0.00)[];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
-	RCPT_COUNT_SEVEN(0.00)[9];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_DN_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	DNSWL_BLOCKED(0.00)[2603:10b6:510:13c::22:received,40.107.100.67:from];
-	DKIM_TRACE(0.00)[amd.com:+]
+	RCPT_COUNT_TWELVE(0.00)[19];
+	DNSWL_BLOCKED(0.00)[209.85.128.50:from];
+	NEURAL_HAM(-0.00)[-1.000];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.50:from];
+	TAGGED_RCPT(0.00)[045b454ab35fd82a35fb];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: XZUYHQTC266Z2RSZ6O22NO6JNL4FHDQC
-X-Message-ID-Hash: XZUYHQTC266Z2RSZ6O22NO6JNL4FHDQC
-X-MailFrom: Christian.Koenig@amd.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: zhiguojiang <justinjiang@vivo.com>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, opensource.kernel@vivo.com
+Message-ID-Hash: HHXTBTPW3EZXXIONHK7PKSGOYAXR3IJL
+X-Message-ID-Hash: HHXTBTPW3EZXXIONHK7PKSGOYAXR3IJL
+X-MailFrom: daniel@ffwll.ch
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Daniel Vetter <daniel@ffwll.ch>, Linus Torvalds <torvalds@linux-foundation.org>, Al Viro <viro@zeniv.linux.org.uk>, keescook@chromium.org, axboe@kernel.dk, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, io-uring@vger.kernel.org, jack@suse.cz, laura@labbott.name, linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, minhquangbui99@gmail.com, sumit.semwal@linaro.org, syzbot+045b454ab35fd82a35fb@syzkaller.appspotmail.com, syzkaller-bugs@googlegroups.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dmabuf: fix dmabuf file poll uaf issue
+Subject: [Linaro-mm-sig] Re: [PATCH] epoll: try to be a _bit_ better about file lifetimes
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XZUYHQTC266Z2RSZ6O22NO6JNL4FHDQC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HHXTBTPW3EZXXIONHK7PKSGOYAXR3IJL/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-QW0gMDYuMDUuMjQgdW0gMjE6MDQgc2NocmllYiBULkouIE1lcmNpZXI6DQo+IE9uIE1vbiwgTWF5
-IDYsIDIwMjQgYXQgMjozMOKAr0FNIENoYXJhbiBUZWphIEthbGxhDQo+IDxxdWljX2NoYXJhbnRl
-QHF1aWNpbmMuY29tPiB3cm90ZToNCj4+IEhpIFRKLA0KPj4NCj4+IFNlZW1zIEkgaGF2ZSBnb3Qg
-YW5zd2VycyBmcm9tIFsxXSwgd2hlcmUgaXQgaXMgYWdyZWVkIHVwb24gZXBvbGwoKSBpcw0KPj4g
-dGhlIHNvdXJjZSBvZiBpc3N1ZS4NCj4+DQo+PiBUaGFua3MgYSBsb3QgZm9yIHRoZSBkaXNjdXNz
-aW9uLg0KPj4NCj4+IFsxXSBodHRwczovL2xvcmUua2VybmVsLm9yZy9sa21sLzAwMDAwMDAwMDAw
-MDJkNjMxZjA2MTU5MThmMWVAZ29vZ2xlLmNvbS8NCj4+DQo+PiBUaGFua3MNCj4+IENoYXJhbg0K
-PiBPaCBtYW4sIHF1aXRlIGEgc2V0IG9mIHRocmVhZHMgb24gdGhpcyBvdmVyIHRoZSB3ZWVrZW5k
-LiBUaGFua3MgZm9yIHRoZSBsaW5rLg0KDQpZZWFoIGFuZCBpdCBhbHNvIGhhcyBzb21lIGludGVy
-ZXN0aW5nIHNpZGUgY29uY2x1c2lvbjogV2Ugc2hvdWxkIA0KcHJvYmFibHkgdGVsbCBwZW9wbGUg
-dG8gc3RvcCB1c2luZyBETUEtYnVmIHdpdGggZXBvbGwuDQoNClRoZSBiYWNrZ3JvdW5kIGlzIHRo
-YXQgdGhlIG11dGV4IGFwcHJvYWNoIGVwb2xsIHVzZXMgdG8gbWFrZSBmaWxlcyANCmRpc2FwcGVh
-ciBmcm9tIHRoZSBpbnRlcmVzdCBsaXN0IG9uIGNsb3NlIHJlc3VsdHMgaW4gdGhlIGZhY3QgdGhh
-dCBlYWNoIA0KZmlsZSBjYW4gb25seSBiZSBwYXJ0IG9mIGEgc2luZ2xlIGVwb2xsIGF0IGEgdGlt
-ZS4NCg0KTm93IHNpbmNlIERNQS1idWYgaXMgYnVpbGQgYXJvdW5kIHRoZSBpZGVhIHRoYXQgd2Ug
-c2hhcmUgdGhlIGJ1ZmZlciANCnJlcHJlc2VudGF0aW9uIGFzIGZpbGUgYmV0d2VlbiBwcm9jZXNz
-ZXMgaXQgbWVhbnMgdGhhdCBvbmx5IG9uZSBwcm9jZXNzIA0KYXQgYSB0aW1lIGNhbiB1c2UgZXBv
-bGwgd2l0aCBlYWNoIERNQS1idWYuDQoNClNvIGZvciBleGFtcGxlIGlmIGEgd2luZG93IG1hbmFn
-ZXIgdXNlcyBlcG9sbCBldmVyeXRoaW5nIGlzIGZpbmUuIElmIGEgDQpjbGllbnQgaXMgdXNpbmcg
-ZXBvbGwgZXZlcnl0aGluZyBpcyBmaW5lIGFzIHdlbGwuIEJ1dCBpZiAqYm90aCogdXNlIA0KZXBv
-bGwgYXQgdGhlIHNhbWUgdGltZSBpdCB3b24ndCB3b3JrLg0KDQpUaGlzIGNhbiBsZWFkIHRvIHJh
-dGhlciBmdW5ueSBhbmQgaGFyZCB0byBkZWJ1ZyBjb21iaW5hdGlvbnMgb2YgZmFpbHVyZXMgDQph
-bmQgSSB0aGluayB3ZSBuZWVkIHRvIGRvY3VtZW50IHRoaXMgbGltaXRhdGlvbiBhbmQgZXhwbGlj
-aXRseSBwb2ludCBpdCBvdXQuDQoNClJlZ2FyZHMsDQpDaHJpc3RpYW4uDQpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcg
-bGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2Vu
-ZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+On Mon, May 06, 2024 at 04:46:54PM +0200, Christian Brauner wrote:
+> On Mon, May 06, 2024 at 02:47:23PM +0200, Daniel Vetter wrote:
+> > On Sun, May 05, 2024 at 01:53:48PM -0700, Linus Torvalds wrote:
+> > > On Sun, 5 May 2024 at 13:30, Al Viro <viro@zeniv.linux.org.uk> wrote:
+> > > >
+> > > > 0.      special-cased ->f_count rule for ->poll() is a wart and it's
+> > > > better to get rid of it.
+> > > >
+> > > > 1.      fs/eventpoll.c is a steaming pile of shit and I'd be glad to see
+> > > > git rm taken to it.  Short of that, by all means, let's grab reference
+> > > > in there around the call of vfs_poll() (see (0)).
+> > > 
+> > > Agreed on 0/1.
+> > > 
+> > > > 2.      having ->poll() instances grab extra references to file passed
+> > > > to them is not something that should be encouraged; there's a plenty
+> > > > of potential problems, and "caller has it pinned, so we are fine with
+> > > > grabbing extra refs" is nowhere near enough to eliminate those.
+> > > 
+> > > So it's not clear why you hate it so much, since those extra
+> > > references are totally normal in all the other VFS paths.
+> > > 
+> > > I mean, they are perhaps not the *common* case, but we have a lot of
+> > > random get_file() calls sprinkled around in various places when you
+> > > end up passing a file descriptor off to some asynchronous operation
+> > > thing.
+> > > 
+> > > Yeah, I think most of them tend to be special operations (eg the tty
+> > > TIOCCONS ioctl to redirect the console), but it's not like vfs_ioctl()
+> > > is *that* different from vfs_poll. Different operation, not somehow
+> > > "one is more special than the other".
+> > > 
+> > > cachefiles and backing-file does it for regular IO, and drop it at IO
+> > > completion - not that different from what dma-buf does. It's in
+> > > ->read_iter() rather than ->poll(), but again: different operations,
+> > > but not "one of them is somehow fundamentally different".
+> > > 
+> > > > 3.      dma-buf uses of get_file() are probably safe (epoll shite aside),
+> > > > but they do look fishy.  That has nothing to do with epoll.
+> > > 
+> > > Now, what dma-buf basically seems to do is to avoid ref-counting its
+> > > own fundamental data structure, and replaces that by refcounting the
+> > > 'struct file' that *points* to it instead.
+> > > 
+> > > And it is a bit odd, but it actually makes some amount of sense,
+> > > because then what it passes around is that file pointer (and it allows
+> > > passing it around from user space *as* that file).
+> > > 
+> > > And honestly, if you look at why it then needs to add its refcount to
+> > > it all, it actually makes sense.  dma-bufs have this notion of
+> > > "fences" that are basically completion points for the asynchronous
+> > > DMA. Doing a "poll()" operation will add a note to the fence to get
+> > > that wakeup when it's done.
+> > > 
+> > > And yes, logically it takes a ref to the "struct dma_buf", but because
+> > > of how the lifetime of the dma_buf is associated with the lifetime of
+> > > the 'struct file', that then turns into taking a ref on the file.
+> > > 
+> > > Unusual? Yes. But not illogical. Not obviously broken. Tying the
+> > > lifetime of the dma_buf to the lifetime of a file that is passed along
+> > > makes _sense_ for that use.
+> > > 
+> > > I'm sure dma-bufs could add another level of refcounting on the
+> > > 'struct dma_buf' itself, and not make it be 1:1 with the file, but
+> > > it's not clear to me what the advantage would really be, or why it
+> > > would be wrong to re-use a refcount that is already there.
+> > 
+> > So there is generally another refcount, because dma_buf is just the
+> > cross-driver interface to some kind of real underlying buffer object from
+> > the various graphics related subsystems we have.
+> > 
+> > And since it's a pure file based api thing that ceases to serve any
+> > function once the fd/file is gone we tied all the dma_buf refcounting to
+> > the refcount struct file already maintains. But the underlying buffer
+> > object can easily outlive the dma_buf, and over the lifetime of an
+> > underlying buffer object you might actually end up creating different
+> > dma_buf api wrappers for it (but at least in drm we guarantee there's at
+> > most one, hence why vmwgfx does the atomic_inc_unless_zero trick, which I
+> > don't particularly like and isn't really needed).
+> > 
+> > But we could add another refcount, it just means we have 3 of those then
+> > when only really 2 are needed.
+> 
+> Fwiw, the TTM thing described upthread and in the other thread really
+> tries hard to work around the dma_buf == file lifetime choice by hooking
+> into the dma-buf specific release function so it can access the dmabuf
+> and then the file. All that seems like a pretty error prone thing to me.
+> So a separate refcount for dma_buf wouldn't be the worst as that would
+> allow that TTM thing to benefit and remove that nasty hacking into your
+> generic dma_buf ops. But maybe I'm the only one who sees it that way and
+> I'm certainly not familiar enough with dma-buf.
+
+So the tricky part is the uniqueness requirement drm has for buffer
+objects (and hence dma_buf wrappers), which together with the refcounting
+makes dma_buf quite tricky:
+
+- dma_buf needs to hold some reference onto the underlying object, or it
+  wont work
+
+- but you're not allowed to just create a new dma_buf every time someone
+  exports an underlying object to a dma_buf, because that would break the
+  uniqueness requirement. Which means the underlying object must also hold
+  some kind of reference to its dma_buf, if it exists. So that on buffer
+  export it can just increment the refcount for that and return it,
+  instead of creating a new one.
+
+Which would be a reference loop that never gets freed, so you need one of
+two tricks:
+
+- Either a weak reference, i.e. just a pointer plus
+  atomic_inc_unless_zero trickery like ttm does. Splitting that refcount
+  into more refcounts doesn't fundamentally solve the problem, it just
+  adds even more refcounts.
+
+- Or you do what all other drm drivers do in drm_prime.c do and careful
+  clean up the dma_buf re-export cache when the userspace references (but
+  not all kernel internal ones) disappear, to unbreak that reference loop.
+  This needs to be done with extreme care and took a lot of screaming to
+  get right, because if you have a race you might end up breaking the
+  uniqueness requirement and have two dma_buf floating around.
+
+So neither of these solutions really are simple, but I agree with you that
+the atomic_inc_unless_zero trickery is less simple. It's definitely not
+cool that it's done by digging around in struct file internals.
+-Sima
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
