@@ -2,111 +2,131 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DEECF8BF8C2
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 May 2024 10:38:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E49318BF8D8
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 May 2024 10:40:15 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DDDC640C76
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 May 2024 08:38:55 +0000 (UTC)
-Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com [209.85.222.175])
-	by lists.linaro.org (Postfix) with ESMTPS id 6A8793F02C
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 May 2024 08:38:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id F1AF843F5E
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  8 May 2024 08:40:14 +0000 (UTC)
+Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
+	by lists.linaro.org (Postfix) with ESMTPS id 258993F02C
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  8 May 2024 08:40:02 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=fooishbar-org.20230601.gappssmtp.com header.s=20230601 header.b=jHj2YRUu;
-	spf=none (lists.linaro.org: domain of daniel@fooishbar.org has no SPF policy when checking 209.85.222.175) smtp.mailfrom=daniel@fooishbar.org;
+	dkim=pass header.d=ffwll.ch header.s=google header.b=NYXZnwmT;
+	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.218.54) smtp.mailfrom=daniel@ffwll.ch;
 	dmarc=none
-Received: by mail-qk1-f175.google.com with SMTP id af79cd13be357-7928ec5308cso58252085a.1
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 08 May 2024 01:38:45 -0700 (PDT)
+Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-a599b74fd49so102108766b.2
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 08 May 2024 01:40:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fooishbar-org.20230601.gappssmtp.com; s=20230601; t=1715157525; x=1715762325; darn=lists.linaro.org;
-        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=V5spKHAJYycDPIb8qjonfW7CCAIoHcDr+o3JbjTG3F8=;
-        b=jHj2YRUudYUiG9Hz7wlTMiUiUaVu04dUo78ls3yK08CV6/Qlhxop0XHgay0tRgtTsi
-         0wanFgW/IYEll4mVoCI7/HbYAzRJh0KiJzlUemTb1DJ8ZHXJHLsdUphh8IAO2eDLc/nP
-         QDIckDqGZ91VSUxh96sk2e9k4Wk9q+Xxxt7xdBgLQOJmfGDK4hd3FzeAchD4ofR/bkDt
-         Ip22lLt5iqXEIwiA52EXPftgcEezHN0hvN7/Oyahruxj52K9ttip0TiiYkXP+rbga/l1
-         3cStkWzGKDJn6XFN3M2SMWWv8VBBQLZqMkPXwLg7uIQB3epiyiyaYj/qpxtbOEKAwC6i
-         ePeA==
+        d=ffwll.ch; s=google; t=1715157601; x=1715762401; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references
+         :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=TjDECsAq9W3dnXC6ANhg0GrZ6XSPEO0XVnHc2JQoQ80=;
+        b=NYXZnwmTEWxoRymK+QoE4TBGTqbFZ1p/oETCrOMDf17hQwi+JLOJBmFKRLPi+ELV9F
+         sZ98va7/UC1kKrh8KPyvdeRad884Wz+ejIQGWu1ngGWV5Gz7KfiX3lMB3QMikteikcOk
+         5cSG2uu9wO2UHVrlWYenXpCYzvmiX7BbF1Hmo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1715157525; x=1715762325;
-        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+        d=1e100.net; s=20230601; t=1715157601; x=1715762401;
+        h=in-reply-to:content-disposition:mime-version:references
+         :mail-followup-to:message-id:subject:cc:to:from:date
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=V5spKHAJYycDPIb8qjonfW7CCAIoHcDr+o3JbjTG3F8=;
-        b=ve53DnWs1+4cPUApxp3hcY8G36OhM/WMJMSCvVtJW5CvU4bmPWvWAaLvyHfGv70pbN
-         zlCGGblGnOu6jayizPqlhxCh5q0Bf8euYCpghIJ+rA/kWTLLn1dPgpVisFQNHzQWdYDM
-         Zc1HJoBCczEsRZvMBEBbHQvkoDJaw0ZoG5MPXpKlXoGulvCdftcXqCh2XuV+XIZrfrMp
-         MCni645mvTShMnxm8kkXn3r2VpMiFnTGgM/howkN9T4NVr9QL692x4FCIlxv8gOI22Iv
-         ojz2cu3/dyN/wRubYV2ca96Ge5Pgcl3Twwwo5RUJzhHdDB0YDrQ/B8aN8dcY/jIyMEtg
-         KcDQ==
-X-Forwarded-Encrypted: i=1; AJvYcCV4+zHh9fPLrfE5bn+ItX7ozYOe+ZJzpm2iZYMLLE1TI0gTT8o8O40YEE/zgHEWsTLfGx9QUZq1GNOkqBcJELC4vPgPo9AjvAUR7kcLUvk=
-X-Gm-Message-State: AOJu0YwdcfD65tDEOXlv4C7AHYjcNl0Xk1arWD9Kgnap+gXnPJCpE1+t
-	Wfc7yZmi8sPdLiSIbiPr3sVoRLWGTx87AcfpN479TRYmCoraSXaKL6EfNQ8oNsIu+9dM5zFi4n4
-	m5ElZ0zRsPzvPSRmFjG4IJiVkEy+4ACHO+1bGng==
-X-Google-Smtp-Source: AGHT+IGBmSz6eFLsDLHd1HFg7kcp7kmSokUNcM7b494MpO41SWF9RR8A0fpKHutyvvQMYFPwHGwiGt9z4eDnQ5YljZw=
-X-Received: by 2002:a05:620a:4593:b0:790:b14b:21b9 with SMTP id
- af79cd13be357-792a6481401mr809884385a.18.1715157525012; Wed, 08 May 2024
- 01:38:45 -0700 (PDT)
-MIME-Version: 1.0
-References: <bb372250-e8b8-4458-bc99-dd8365b06991@redhat.com>
- <20240506-dazzling-nippy-rhino-eabccd@houat> <ZjjdUBYYKXJ1EPr5@phenom.ffwll.local>
- <cbe5a743-d8be-4b0e-99c4-e804fbadc099@redhat.com> <ZjoNTw-TkPnnWLTG@phenom.ffwll.local>
- <CAPj87rN3uSZoHpWLSQqz1SW9YMZNj9fkoA_EDEE_bzv-Tw8tSw@mail.gmail.com> <Zjs42PGvilLlF0Cg@phenom.ffwll.local>
-In-Reply-To: <Zjs42PGvilLlF0Cg@phenom.ffwll.local>
-From: Daniel Stone <daniel@fooishbar.org>
-Date: Wed, 8 May 2024 09:38:33 +0100
-Message-ID: <CAPj87rN-wSbGSAoB8y3MXCS20_MAQvfpWSeUKYR6XzQ+Oh0FZA@mail.gmail.com>
-To: Daniel Stone <daniel@fooishbar.org>, Hans de Goede <hdegoede@redhat.com>,
-	Maxime Ripard <mripard@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>,
-	Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>,
-	John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>,
-	=?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
-	Lennart Poettering <mzxreary@0pointer.de>, Robert Mader <robert.mader@collabora.com>,
+        bh=TjDECsAq9W3dnXC6ANhg0GrZ6XSPEO0XVnHc2JQoQ80=;
+        b=QuNvTfLU3YSWP+IA34Y/llmYo9HxISdW/POY/mUQEb2uaNeLrvQ89mL0S2zrhD6Utq
+         aBgViFKiUNQzm4CYyPhqJkghC1rHQX6G45QxTjpTBwC+J+I4OsWUdldf/QFnQeGpjytY
+         l8vDNLYyxJQX5RM7UsRId+Ue37IlpgUxtx2DqZ6H+tCFQyYv7CbDX3Gl4hHe7jroAxGW
+         KqcRAgRS+hg821oUsqZFQq+gwu5B8wMI7FZ/7woGi2Icb9Lt06T5Tyzd12qBQ5pH9FOy
+         KhrfgFMszsoNeJgRB4Db4gIofqIEUTuAAX9BqDnTtuT86t49z9mNuAomdYchYHlUFKUn
+         LX/Q==
+X-Forwarded-Encrypted: i=1; AJvYcCWv71Dsb9x7/eXBFBoMPNVIj99m6DmwJXcNdKAmlauV/o00evvuvY0W5YhWGuswHCkA33TouMHPqGMNcaksuKltHk80au8I6ZYTa0MydAU=
+X-Gm-Message-State: AOJu0YxCiIy6M1RaIGnaUPuzeF3U//wVPViOSu8toyo+YS91sZyV9H6l
+	ruRhkhiqQUW/3N4+Zbt5mZNAlZuGAfjqH1jmUKREaYhgl8GvM2i4t8zSvSquEkY=
+X-Google-Smtp-Source: AGHT+IGPIAQ6Tm4FnC70hw3PFhT5mBH/5wt01YJzyWABi0B27GbCxWEn36XIAqIwrxHxasKk9JiZiw==
+X-Received: by 2002:a17:906:ccce:b0:a59:cf59:f7ff with SMTP id a640c23a62f3a-a59fb94f3c4mr140742766b.2.1715157601017;
+        Wed, 08 May 2024 01:40:01 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id bi11-20020a170907368b00b00a59f73fb086sm1155563ejc.196.2024.05.08.01.40.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 08 May 2024 01:40:00 -0700 (PDT)
+Date: Wed, 8 May 2024 10:39:58 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Message-ID: <Zjs6Xt_W0VsY8wJc@phenom.ffwll.local>
+Mail-Followup-To: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Hans de Goede <hdegoede@redhat.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+	Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <jstultz@google.com>,
+	"T.J. Mercier" <tjmercier@google.com>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Lennart Poettering <mzxreary@0pointer.de>,
+	Robert Mader <robert.mader@collabora.com>,
 	Sebastien Bacher <sebastien.bacher@canonical.com>,
 	Linux Media Mailing List <linux-media@vger.kernel.org>,
-	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, linaro-mm-sig@lists.linaro.org,
+	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+	linaro-mm-sig@lists.linaro.org,
 	Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-	"Bryan O'Donoghue" <bryan.odonoghue@linaro.org>, Milan Zamazal <mzamazal@redhat.com>,
+	Milan Zamazal <mzamazal@redhat.com>,
+	Maxime Ripard <mripard@redhat.com>,
 	Andrey Konovalov <andrey.konovalov.ynk@gmail.com>
+References: <bb372250-e8b8-4458-bc99-dd8365b06991@redhat.com>
+ <ojduxo54lpcbfg2wfuhqhy7k3phncamtklh65z7gvttcwztmhk@zkifewcy4ovi>
+ <3c0c7e7e-1530-411b-b7a4-9f13e0ff1f9e@redhat.com>
+ <e7ilwp3vc32xze3iu2ejgqlgz44codsktnvyiufjhuf2zxcnnf@tnwzgzoxvbg2>
+ <d2a512b2-e6b1-4675-b406-478074bbbe95@linaro.org>
+ <CAA8EJpr4bJUQt2T63_FZ=KHGEm4vixfpk3pMV9naABEONJfMmQ@mail.gmail.com>
+ <20240507184049.GC20390@pendragon.ideasonboard.com>
+ <CAA8EJpqLu5w7gnqtDyuDDQBd7AEROTd6LTYi8muzjToXmkKR3w@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAA8EJpqLu5w7gnqtDyuDDQBd7AEROTd6LTYi8muzjToXmkKR3w@mail.gmail.com>
+X-Operating-System: Linux phenom 6.6.15-amd64 
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 6A8793F02C
-X-Spamd-Bar: /
-X-Spamd-Result: default: False [-0.80 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+X-Rspamd-Queue-Id: 258993F02C
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.90 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	SUBJECT_ENDS_QUESTION(1.00)[];
-	R_DKIM_ALLOW(-0.20)[fooishbar-org.20230601.gappssmtp.com:s=20230601];
+	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.218.54:from];
 	MIME_GOOD(-0.10)[text/plain];
+	URIBL_BLOCKED(0.00)[ffwll.ch:url,ffwll.ch:dkim];
 	RCVD_TLS_LAST(0.00)[];
-	DMARC_NA(0.00)[fooishbar.org];
 	R_SPF_NA(0.00)[no SPF record];
-	FREEMAIL_TO(0.00)[fooishbar.org,redhat.com,linaro.org,collabora.com,arm.com,google.com,amd.com,0pointer.de,canonical.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
-	MIME_TRACE(0.00)[0:+];
-	DKIM_TRACE(0.00)[fooishbar-org.20230601.gappssmtp.com:+];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
 	ARC_NA(0.00)[];
+	DMARC_NA(0.00)[ffwll.ch];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[ideasonboard.com,linaro.org,redhat.com,collabora.com,arm.com,google.com,amd.com,0pointer.de,canonical.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
+	DKIM_TRACE(0.00)[ffwll.ch:+];
 	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_COUNT_TWO(0.00)[2];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
+	RCPT_COUNT_TWELVE(0.00)[20];
 	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	DWL_DNSWL_BLOCKED(0.00)[gappssmtp.com:dkim];
-	NEURAL_HAM(-0.00)[-1.000];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.222.175:from];
 	TAGGED_RCPT(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: UVIDLTRLY5VTDKHPZKBX2RTI4ZRFB6IP
-X-Message-ID-Hash: UVIDLTRLY5VTDKHPZKBX2RTI4ZRFB6IP
-X-MailFrom: daniel@fooishbar.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+Message-ID-Hash: 3GKYOOE6YG6BP2P5OUKLWYUDWYE4ENQH
+X-Message-ID-Hash: 3GKYOOE6YG6BP2P5OUKLWYUDWYE4ENQH
+X-MailFrom: daniel@ffwll.ch
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Hans de Goede <hdegoede@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Lennart Poettering <mzxreary@0pointer.de>, Robert Mader <robert.mader@collabora.com>, Sebastien Bacher <sebastien.bacher@canonical.com>, Linux Media Mailing List <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, linaro-mm-sig@lists.linaro.org, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Milan Zamazal <mzamazal@redhat.com>, Maxime Ripard <mripard@redhat.com>, Andrey Konovalov <andrey.konovalov.ynk@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: Safety of opening up /dev/dma_heap/* to physically present users (udev uaccess tag) ?
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UVIDLTRLY5VTDKHPZKBX2RTI4ZRFB6IP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3GKYOOE6YG6BP2P5OUKLWYUDWYE4ENQH/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -116,33 +136,82 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Wed, 8 May 2024 at 09:33, Daniel Vetter <daniel@ffwll.ch> wrote:
-> On Wed, May 08, 2024 at 06:46:53AM +0100, Daniel Stone wrote:
-> > That would have the unfortunate side effect of making sandboxed apps
-> > less efficient on some platforms, since they wouldn't be able to do
-> > direct scanout anymore ...
->
-> I was assuming that everyone goes through pipewire, and ideally that is
-> the only one that can even get at these special chardev.
->
-> If pipewire is only for sandboxed apps then yeah this aint great :-/
+On Tue, May 07, 2024 at 10:59:42PM +0300, Dmitry Baryshkov wrote:
+> On Tue, 7 May 2024 at 21:40, Laurent Pinchart
+> <laurent.pinchart@ideasonboard.com> wrote:
+> >
+> > On Tue, May 07, 2024 at 06:19:18PM +0300, Dmitry Baryshkov wrote:
+> > > On Tue, 7 May 2024 at 18:15, Bryan O'Donoghue wrote:
+> > > > On 07/05/2024 16:09, Dmitry Baryshkov wrote:
+> > > > > Ah, I see. Then why do you require the DMA-ble buffer at all? If you are
+> > > > > providing data to VPU or DRM, then you should be able to get the buffer
+> > > > > from the data-consuming device.
+> > > >
+> > > > Because we don't necessarily know what the consuming device is, if any.
+> > > >
+> > > > Could be VPU, could be Zoom/Hangouts via pipewire, could for argument
+> > > > sake be GPU or DSP.
+> > > >
+> > > > Also if we introduce a dependency on another device to allocate the
+> > > > output buffers - say always taking the output buffer from the GPU, then
+> > > > we've added another dependency which is more difficult to guarantee
+> > > > across different arches.
+> > >
+> > > Yes. And it should be expected. It's a consumer who knows the
+> > > restrictions on the buffer. As I wrote, Zoom/Hangouts should not
+> > > require a DMA buffer at all.
+> >
+> > Why not ? If you want to capture to a buffer that you then compose on
+> > the screen without copying data, dma-buf is the way to go. That's the
+> > Linux solution for buffer sharing.
+> 
+> Yes. But it should be allocated by the DRM driver. As Sima wrote,
+> there is no guarantee that the buffer allocated from dma-heaps is
+> accessible to the GPU.
+> 
+> >
+> > > Applications should be able to allocate
+> > > the buffer out of the generic memory.
+> >
+> > If applications really want to copy data and degrade performance, they
+> > are free to shoot themselves in the foot of course. Applications (or
+> > compositors) need to support copying as a fallback in the worst case,
+> > but all components should at least aim for the zero-copy case.
+> 
+> I'd say that they should aim for the optimal case. It might include
+> both zero-copying access from another DMA master or simple software
+> processing of some kind.
+> 
+> > > GPUs might also have different
+> > > requirements. Consider GPUs with VRAM. It might be beneficial to
+> > > allocate a buffer out of VRAM rather than generic DMA mem.
+> >
+> > Absolutely. For that we need a centralized device memory allocator in
+> > userspace. An effort was started by James Jones in 2016, see [1]. It has
+> > unfortunately stalled. If I didn't have a camera framework to develop, I
+> > would try to tackle that issue :-)
+> 
+> I'll review the talk. However the fact that the effort has stalled
+> most likely means that 'one fits them all' approach didn't really fly
+> well. We have too many usecases.
 
-No, PipeWire is fine, I mean graphical apps.
+I think there's two reasons:
 
-Right now, if your platform requires CMA for display, then the app
-needs access to the GPU render node and the display node too, in order
-to allocate buffers which the compositor can scan out directly. If it
-only has access to the render nodes and not the display node, it won't
-be able to allocate correctly, so its content will need a composition
-pass, i.e. performance penalty for sandboxing. But if it can allocate
-correctly, then hey, it can exhaust CMA just like heaps can.
+- It's a really hard problem with many aspects. Where you need to allocate
+  the buffer is just one of the myriad of issues a common allocator needs
+  to solve.
 
-Personally I think we'd be better off just allowing access and
-figuring out cgroups later. It's not like the OOM story is great
-generally, and hey, you can get there with just render nodes ...
+- Every linux-based os has their own solution for these, and the one that
+  suffers most has an entirely different one from everyone else: Android
+  uses binder services to allow apps to make these allocations, keep track
+  of them and make sure there's no abuse. And if there is, it can just
+  nuke the app.
 
-Cheers,
-Daniel
+Cheers, Sima
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
