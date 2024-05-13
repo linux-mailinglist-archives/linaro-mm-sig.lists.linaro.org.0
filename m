@@ -2,143 +2,139 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id E86F68C3D5A
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 May 2024 10:34:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9E6B68C4287
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 May 2024 15:51:42 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9EEB044801
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 May 2024 08:34:38 +0000 (UTC)
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
-	by lists.linaro.org (Postfix) with ESMTPS id 82137410C1
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 13 May 2024 08:34:27 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 633E644774
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 13 May 2024 13:51:41 +0000 (UTC)
+Received: from mail-4022.proton.ch (mail-4022.proton.ch [185.70.40.22])
+	by lists.linaro.org (Postfix) with ESMTPS id 9E59C3F443
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 13 May 2024 13:51:30 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ideasonboard.com header.s=mail header.b=XVgit3Hi;
-	spf=pass (lists.linaro.org: domain of laurent.pinchart@ideasonboard.com designates 213.167.242.64 as permitted sender) smtp.mailfrom=laurent.pinchart@ideasonboard.com;
-	dmarc=none
-Received: from pendragon.ideasonboard.com (81-175-209-231.bb.dnainternet.fi [81.175.209.231])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id C0B7A25B;
-	Mon, 13 May 2024 10:34:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1715589260;
-	bh=3+JpsjijNwVfhIgxFFClxLN3MWbkLfvCjawwwkKMzyc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=XVgit3HiXv0r/DEgZjewkKpcLVKH45rkn4krxw+Z/vm6ly+fsEJ+xG45xgXw3E8Fr
-	 dEcilM+p9aGwMzSv3GMRBLs+RS0wiKQf+P5ekg6WNiLW7Z3gh/BZePedompb19Xf1d
-	 kLq4vYcQp/hxlWdEeRkBzSdKbJYZms20li2q9TiU=
-Date: Mon, 13 May 2024 11:34:17 +0300
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Maxime Ripard <mripard@redhat.com>
-Message-ID: <20240513083417.GA18630@pendragon.ideasonboard.com>
-References: <bb372250-e8b8-4458-bc99-dd8365b06991@redhat.com>
- <ojduxo54lpcbfg2wfuhqhy7k3phncamtklh65z7gvttcwztmhk@zkifewcy4ovi>
- <3c0c7e7e-1530-411b-b7a4-9f13e0ff1f9e@redhat.com>
- <e7ilwp3vc32xze3iu2ejgqlgz44codsktnvyiufjhuf2zxcnnf@tnwzgzoxvbg2>
- <d2a512b2-e6b1-4675-b406-478074bbbe95@linaro.org>
- <Zjpmu_Xj6BPdkDPa@phenom.ffwll.local>
- <20240507183613.GB20390@pendragon.ideasonboard.com>
- <4f59a9d78662831123cc7e560218fa422e1c5eca.camel@collabora.com>
- <Zjs5eM-rRoh6WYYu@phenom.ffwll.local>
- <20240513-heretic-didactic-newt-1d6daf@penduick>
+	dkim=pass header.d=emersion.fr header.s=protonmail3 header.b=aWKGTxcY;
+	spf=pass (lists.linaro.org: domain of contact@emersion.fr designates 185.70.40.22 as permitted sender) smtp.mailfrom=contact@emersion.fr;
+	dmarc=pass (policy=none) header.from=emersion.fr
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=emersion.fr;
+	s=protonmail3; t=1715608289; x=1715867489;
+	bh=rCp4a/BDWi17CHMvgY5xOFl3QoPKRxwfeBuT/Fb98Nk=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=aWKGTxcY4wKQzfazyx23U28lrFiumZcz/zIWjprWPjlb+90HEZ3QinH0QcLZhB0w1
+	 AU+tYlAaAjNrUCRfki7nrcCXtQjCFzjBSva5vjijed5vbJr6GWsUQlPalvQJ5y97Rt
+	 hOddSllCePkYcy/13GUkJzkFK4K4f5X4V/AkRM+Oj/Fb5m4h9mGAeYfzGiElsKBUSS
+	 Ne2uofSfC78mYkVdNUrDxiZpK5IMOdrgD2qV6pT7wO7I5IoSJ2IVqiRfPQvcPeF5bg
+	 w4B9PkQd4Pt96uvhvTkfJt2RJUYEAKdGj4GKMpLuYSzLfAzHL6UWqPQV0ypt4Ie8yZ
+	 LS37it/d2kEgw==
+Date: Mon, 13 May 2024 13:51:23 +0000
+To: Daniel Vetter <daniel@ffwll.ch>
+From: Simon Ser <contact@emersion.fr>
+Message-ID: <IXDM2ci-eGvU9RQkT6a52vcV66vr8d0ywbDRFY8gBjjNuMyv8RDgdJS0PvvfnKuPR1fXINPUjOBkKx4vIcshSb2Y11xd3DjfDQ-Np8VIFgQ=@emersion.fr>
+In-Reply-To: <Zjue98r4ZgGbMN5K@phenom.ffwll.local>
+References: <bb372250-e8b8-4458-bc99-dd8365b06991@redhat.com> <20240506-dazzling-nippy-rhino-eabccd@houat> <ZjjdUBYYKXJ1EPr5@phenom.ffwll.local> <cbe5a743-d8be-4b0e-99c4-e804fbadc099@redhat.com> <ZjoNTw-TkPnnWLTG@phenom.ffwll.local> <CAPj87rN3uSZoHpWLSQqz1SW9YMZNj9fkoA_EDEE_bzv-Tw8tSw@mail.gmail.com> <Zjs42PGvilLlF0Cg@phenom.ffwll.local> <CAPj87rN-wSbGSAoB8y3MXCS20_MAQvfpWSeUKYR6XzQ+Oh0FZA@mail.gmail.com> <Zjue98r4ZgGbMN5K@phenom.ffwll.local>
+Feedback-ID: 1358184:user:proton
+X-Pm-Message-ID: d2a6e70754ffedf294a79e2c65504e513c8e9b24
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20240513-heretic-didactic-newt-1d6daf@penduick>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 82137410C1
-X-Spamd-Bar: /
-X-Spamd-Result: default: False [-0.90 / 15.00];
+X-Rspamd-Queue-Id: 9E59C3F443
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.70 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	SUBJECT_ENDS_QUESTION(1.00)[];
-	R_DKIM_ALLOW(-0.20)[ideasonboard.com:s=mail];
-	R_SPF_ALLOW(-0.20)[+mx];
+	DMARC_POLICY_ALLOW(-0.50)[emersion.fr,none];
+	R_SPF_ALLOW(-0.20)[+ip4:185.70.40.0/24];
+	R_DKIM_ALLOW(-0.20)[emersion.fr:s=protonmail3];
+	RWL_MAILSPIKE_VERYGOOD(-0.20)[185.70.40.22:from];
 	MIME_GOOD(-0.10)[text/plain];
-	ONCE_RECEIVED(0.10)[];
-	FREEMAIL_CC(0.00)[collabora.com,linaro.org,redhat.com,arm.com,google.com,amd.com,0pointer.de,canonical.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
-	RCVD_TLS_ALL(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	ARC_NA(0.00)[];
-	DMARC_NA(0.00)[ideasonboard.com];
-	MIME_TRACE(0.00)[0:+];
 	TO_DN_EQ_ADDR_SOME(0.00)[];
-	DKIM_TRACE(0.00)[ideasonboard.com:+];
+	ARC_NA(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	ASN(0.00)[asn:62371, ipnet:185.70.40.0/24, country:CH];
 	RCPT_COUNT_TWELVE(0.00)[20];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MIME_TRACE(0.00)[0:+];
 	TAGGED_RCPT(0.00)[];
-	ASN(0.00)[asn:29169, ipnet:213.167.240.0/20, country:FR];
-	TO_DN_SOME(0.00)[]
+	NEURAL_HAM(-0.00)[-1.000];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[fooishbar.org,redhat.com,linaro.org,collabora.com,arm.com,google.com,amd.com,0pointer.de,canonical.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,gmail.com];
+	RCVD_COUNT_ZERO(0.00)[0];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[emersion.fr:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: 34GSU7MJVYBDCDY4TF4YYQER6KCIX3DB
-X-Message-ID-Hash: 34GSU7MJVYBDCDY4TF4YYQER6KCIX3DB
-X-MailFrom: laurent.pinchart@ideasonboard.com
+Message-ID-Hash: UNJRDUZKJUFSFL3SQW77AL2E2LTGQUUY
+X-Message-ID-Hash: UNJRDUZKJUFSFL3SQW77AL2E2LTGQUUY
+X-MailFrom: contact@emersion.fr
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Nicolas Dufresne <nicolas.dufresne@collabora.com>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Hans de Goede <hdegoede@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Lennart Poettering <mzxreary@0pointer.de>, Robert Mader <robert.mader@collabora.com>, Sebastien Bacher <sebastien.bacher@canonical.com>, Linux Media Mailing List <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, linaro-mm-sig@lists.linaro.org, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Milan Zamazal <mzamazal@redhat.com>, Andrey Konovalov <andrey.konovalov.ynk@gmail.com>
+CC: Daniel Stone <daniel@fooishbar.org>, Hans de Goede <hdegoede@redhat.com>, Maxime Ripard <mripard@redhat.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, =?utf-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Lennart Poettering <mzxreary@0pointer.de>, Robert Mader <robert.mader@collabora.com>, Sebastien Bacher <sebastien.bacher@canonical.com>, Linux Media Mailing List <linux-media@vger.kernel.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, linaro-mm-sig@lists.linaro.org, Linux Kernel Mailing List <linux-kernel@vger.kernel.org>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Milan Zamazal <mzamazal@redhat.com>, Andrey Konovalov <andrey.konovalov.ynk@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: Safety of opening up /dev/dma_heap/* to physically present users (udev uaccess tag) ?
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/34GSU7MJVYBDCDY4TF4YYQER6KCIX3DB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UNJRDUZKJUFSFL3SQW77AL2E2LTGQUUY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gTW9uLCBNYXkgMTMsIDIwMjQgYXQgMTA6Mjk6MjJBTSArMDIwMCwgTWF4aW1lIFJpcGFyZCB3
-cm90ZToNCj4gT24gV2VkLCBNYXkgMDgsIDIwMjQgYXQgMTA6MzY6MDhBTSArMDIwMCwgRGFuaWVs
-IFZldHRlciB3cm90ZToNCj4gPiBPbiBUdWUsIE1heSAwNywgMjAyNCBhdCAwNDowNzozOVBNIC0w
-NDAwLCBOaWNvbGFzIER1ZnJlc25lIHdyb3RlOg0KPiA+ID4gSGksDQo+ID4gPiANCj4gPiA+IExl
-IG1hcmRpIDA3IG1haSAyMDI0IMOgIDIxOjM2ICswMzAwLCBMYXVyZW50IFBpbmNoYXJ0IGEgw6lj
-cml0wqA6DQo+ID4gPiA+IFNob3J0ZXIgdGVybSwgd2UgaGF2ZSBhIHByb2JsZW0gdG8gc29sdmUs
-IGFuZCB0aGUgYmVzdCBvcHRpb24gd2UgaGF2ZQ0KPiA+ID4gPiBmb3VuZCBzbyBmYXIgaXMgdG8g
-cmVseSBvbiBkbWEtYnVmIGhlYXBzIGFzIGEgYmFja2VuZCBmb3IgdGhlIGZyYW1lDQo+ID4gPiA+
-IGJ1ZmZlciBhbGxvY2F0cm8gaGVscGVyIGluIGxpYmNhbWVyYSBmb3IgdGhlIHVzZSBjYXNlIGRl
-c2NyaWJlZCBhYm92ZS4NCj4gPiA+ID4gVGhpcyB3b24ndCB3b3JrIGluIDEwMCUgb2YgdGhlIGNh
-c2VzLCBjbGVhcmx5LiBJdCdzIGEgc3RvcC1nYXAgbWVhc3VyZQ0KPiA+ID4gPiB1bnRpbCB3ZSBj
-YW4gZG8gYmV0dGVyLg0KPiA+ID4gDQo+ID4gPiBDb25zaWRlcmluZyB0aGUgc2VjdXJpdHkgY29u
-Y2VybmVkIHJhaXNlZCBvbiB0aGlzIHRocmVhZCB3aXRoIGRtYWJ1ZiBoZWFwDQo+ID4gPiBhbGxv
-Y2F0aW9uIG5vdCBiZSByZXN0cmljdGVkIGJ5IHF1b3RhcywgeW91J2QgZ2V0IHdoYXQgeW91IHdh
-bnQgcXVpY2tseSB3aXRoDQo+ID4gPiBtZW1mZCArIHVkbWFidWYgaW5zdGVhZCAod2hpY2ggaXMg
-YWNjb3VudGVkIGFscmVhZHkpLg0KPiA+ID4gDQo+ID4gPiBJdCB3YXMgcmFpc2VkIHRoYXQgZGlz
-dHJvIGRvbid0IGVuYWJsZSB1ZG1hYnVmLCBidXQgYXMgc3RhdGVkIHRoZXJlIGJ5IEhhbnMsIGlu
-DQo+ID4gPiBhbnkgY2FzZXMgZGlzdHJvIG5lZWRzIHRvIHRha2UgYWN0aW9uIHRvIG1ha2UgdGhl
-IHNvZnRJU1Agd29ya3MuIFRoaXMNCj4gPiA+IGFsdGVybmF0aXZlIGlzIGVhc3kgYW5kIGRvZXMg
-bm90IGludGVyZmVyZSBpbiBhbnl3YXkgd2l0aCB5b3VyIGZ1dHVyZSBwbGFuIG9yDQo+ID4gPiB0
-aGUgbGliY2FtZXJhIEFQSS4gWW91IGNvdWxkIGV2ZW4gaGF2ZSBib3RoIGRtYWJ1ZiBoZWFwIChm
-b3IgUmFzcGJpYW4pIGFuZCB0aGUNCj4gPiA+IHNhZmVyIG1lbWZkK3VkbWFidWYgZm9yIHRoZSBk
-aXN0cm8gd2l0aCBzZWN1cml0eSBjb25jZXJucy4NCj4gPiA+IA0KPiA+ID4gQW5kIGZvciB0aGUg
-bG9uZyB0ZXJtIHBsYW4sIHdlIGNhbiBjZXJ0YWlubHkgZ2V0IGNsb3NlciBieSBmaXhpbmcgdGhh
-dCBpc3N1ZQ0KPiA+ID4gd2l0aCBhY2NvdW50aW5nLiBUaGlzIGlzc3VlIGFsc28gYXBwbGllZCB0
-byB2NGwyIGlvLW9wcywgc28gaXQgd291bGQgYmUgbmljZSB0bw0KPiA+ID4gZmluZCBjb21tb24g
-c2V0IG9mIGhlbHBlcnMgdG8gZml4IHRoZXNlIGV4cG9ydGVycy4NCj4gPiANCj4gPiBZZWFoIGlm
-IHRoaXMgaXMganVzdCBmb3Igc29mdGlzcCwgdGhlbiBtZW1mZCArIHVkbWFidWYgaXMgYWxzbyB3
-aGF0IEkgd2FzDQo+ID4gYWJvdXQgdG8gc3VnZ2VzdC4gTm90IGp1c3QgYXMgYSBzdG9wZ2FwLCBi
-dXQgYXMgdGhlIHJlYWwgb2ZmaWNpYWwgdGhpbmcuDQo+ID4gDQo+ID4gdWRtYWJ1ZiBkb2VzIGtp
-bmRhIGFsbG93IHlvdSB0byBwaW4gbWVtb3J5LCBidXQgd2UgY2FuIGVhc2lseSBmaXggdGhhdCBi
-eQ0KPiA+IGFkZGluZyB0aGUgcmlnaHQgYWNjb3VudGluZyBhbmQgdGhlbiBlaXRoZXIgbGV0IG1s
-b2NrIHJsaW1pdHMgb3IgY2dyb3Vwcw0KPiA+IGtlcm5lbCBtZW1vcnkgbGltaXRzIGVuZm9yY2Ug
-Z29vZCBiZWhhdmlvci4NCj4gDQo+IEkgdGhpbmsgdGhlIG1haW4gZHJhd2JhY2sgd2l0aCBtZW1m
-ZCBpcyB0aGF0IGl0J2xsIGJlIGJyb2tlbiBmb3IgZGV2aWNlcw0KPiB3aXRob3V0IGFuIElPTU1V
-LCBhbmQgd2hpbGUgeW91IHNhaWQgdGhhdCBpdCdzIHVuY29tbW9uIGZvciBHUFVzLCBpdCdzDQo+
-IGRlZmluaXRlbHkgbm90IGZvciBjb2RlY3MgYW5kIGRpc3BsYXkgZW5naW5lcy4NCg0KSWYgdGhl
-IGFwcGxpY2F0aW9uIHdhbnRzIHRvIHNoYXJlIGJ1ZmZlcnMgYmV0d2VlbiB0aGUgY2FtZXJhIGFu
-ZCBhDQpkaXNwbGF5IGVuZ2luZSBvciBjb2RlYywgaXQgc2hvdWxkIGFyZ3VhYmx5IG5vdCB1c2Ug
-dGhlIGxpYmNhbWVyYQ0KRnJhbWVCdWZmZXJBbGxvY2F0b3IsIGJ1dCBhbGxvY2F0ZSB0aGUgYnVm
-ZmVycyBmcm9tIHRoZSBkaXNwbGF5IG9yIHRoZQ0KZW5jb2Rlci4gbWVtZmQgd291bGRuJ3QgYmUg
-dXNlZCBpbiB0aGF0IGNhc2UuDQoNCldlIG5lZWQgdG8gZWF0IG91ciBvd24gZG9nZm9vZCB0aG91
-Z2guIElmIHdlIHdhbnQgdG8gcHVzaCB0aGUNCnJlc3BvbnNpYmlsaXR5IGZvciBidWZmZXIgYWxs
-b2NhdGlvbiBpbiB0aGUgYnVmZmVyIHNoYXJpbmcgY2FzZSB0byB0aGUNCmFwcGxpY2F0aW9uLCB3
-ZSBuZWVkIHRvIG1vZGlmeSB0aGUgY2FtIGFwcGxpY2F0aW9uIHRvIGRvIHNvIHdoZW4gdXNpbmcN
-CnRoZSBLTVMgYmFja2VuZC4NCg0KLS0gDQpSZWdhcmRzLA0KDQpMYXVyZW50IFBpbmNoYXJ0DQpf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0t
-c2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5z
-dWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFy
-by5vcmcK
+On Wednesday, May 8th, 2024 at 17:49, Daniel Vetter <daniel@ffwll.ch> wrote:
+
+> On Wed, May 08, 2024 at 09:38:33AM +0100, Daniel Stone wrote:
+> 
+> > On Wed, 8 May 2024 at 09:33, Daniel Vetter daniel@ffwll.ch wrote:
+> > 
+> > > On Wed, May 08, 2024 at 06:46:53AM +0100, Daniel Stone wrote:
+> > > 
+> > > > That would have the unfortunate side effect of making sandboxed apps
+> > > > less efficient on some platforms, since they wouldn't be able to do
+> > > > direct scanout anymore ...
+> > > 
+> > > I was assuming that everyone goes through pipewire, and ideally that is
+> > > the only one that can even get at these special chardev.
+> > > 
+> > > If pipewire is only for sandboxed apps then yeah this aint great :-/
+> > 
+> > No, PipeWire is fine, I mean graphical apps.
+> > 
+> > Right now, if your platform requires CMA for display, then the app
+> > needs access to the GPU render node and the display node too, in order
+> > to allocate buffers which the compositor can scan out directly. If it
+> > only has access to the render nodes and not the display node, it won't
+> > be able to allocate correctly, so its content will need a composition
+> > pass, i.e. performance penalty for sandboxing. But if it can allocate
+> > correctly, then hey, it can exhaust CMA just like heaps can.
+> > 
+> > Personally I think we'd be better off just allowing access and
+> > figuring out cgroups later. It's not like the OOM story is great
+> > generally, and hey, you can get there with just render nodes ...
+> 
+> Imo the right fix is to ask the compositor to allocate the buffers in this
+> case, and then maybe have some kind of revoke/purge behaviour on these
+> buffers. Compositor has an actual idea of who's a candidate for direct
+> scanout after all, not the app. Or well at least force migrate the memory
+> from cma to shmem.
+> 
+> If you only whack cgroups on this issue you're still stuck in the world
+> where either all apps together can ddos the display or no one can
+> realistically direct scanout.
+> 
+> So yeah on the display side the problem isn't solved either, but we knew
+> that already.
+
+What makes scanout memory so special?
+
+The way I see it, any kind of memory will always be a limited resource:
+regular programs can exhaust system memory, as well as GPU VRAM, as well
+as scanout memory. I think we need to have ways to limit/control/arbiter
+the allocations regardless, and I don't think scanout memory should be a
+special case here.
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
