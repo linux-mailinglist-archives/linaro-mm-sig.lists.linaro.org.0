@@ -2,173 +2,148 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id E97A28C681F
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 May 2024 16:00:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A48708C6C4A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 May 2024 20:43:23 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 041244489F
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 May 2024 14:00:19 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id B14AD40074
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 15 May 2024 13:58:07 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A98E1447D4
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 May 2024 18:43:22 +0000 (UTC)
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+	by lists.linaro.org (Postfix) with ESMTPS id C80E43F624
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 15 May 2024 18:43:12 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=TwfJbMJr;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org;
-	dmarc=pass (policy=none) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 55F65614CC;
-	Wed, 15 May 2024 13:58:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AE3B1C2BD11;
-	Wed, 15 May 2024 13:58:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1715781487;
-	bh=N5UwfZ1hKMI6+ZrGSh9smBi+SvvW9VpZtds2AMuGHos=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=TwfJbMJr2eudO50gB4jtqCfWmhQ4amIjE1zaF6WRdIcpHwO5rxvJbZJuVPBjUSigc
-	 8TO0sFjBMWieujTeWTcuXI80s/WdCooRLCshP+Q/b0ITdjgasFFSNbNxExZovj+gwM
-	 MqxQyWjQ9L4GKUH5za52rqgOSxbjtXji1bS6WDBU09KLKF6xXnGxBua7W8KBwKwYTv
-	 kTyJG45a37w38lAwA6FHp1phbWKUmqeti4YPxDNtGMpGRIPOYhZd/GFlbyoIEyxavY
-	 r47jnKx51PjUmobjfH+JRFKkFOOn0ocJkOqbql9gO5OBozz9g9Hmqn6m9vT+dk6kVi
-	 oqdf60asXfERQ==
-From: Maxime Ripard <mripard@kernel.org>
-Date: Wed, 15 May 2024 15:57:03 +0200
+	dkim=pass header.d=google.com header.s=20230601 header.b=EKvVYdDe;
+	spf=pass (lists.linaro.org: domain of jstultz@google.com designates 209.85.128.46 as permitted sender) smtp.mailfrom=jstultz@google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-42012c85e61so302225e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 15 May 2024 11:43:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1715798592; x=1716403392; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=EYw08SuW0XGtCkslQ7Pr4vhaF6oLwiqfmnivOAxBqiQ=;
+        b=EKvVYdDeyuQsFvCE1qLfmkFDI+yyn678nXt2QstgDDzUx19BRFf103vGXR5gErnWje
+         Pb1jCMDVjq8NDb9WYrU3UDIWncWniJ8xXxi19o6OhVi32hgsIlBfuCL7nPL/8qReUBdU
+         VRhP4rjtVJJfsKrR9asZmxuzPK4QbmqvWjhkEttCnB85PTUaNwizrTHgNPDUsWnU3zSI
+         raesgsQZ3kikVLDv/vrLc11KAEGsa59mCYSdR+T/Kybrptu0IveWZJoCs3zs6s2pygGY
+         LILtqt51xkLGsGXf/uyId8jGbBlXesUcIgzOzov6RMsMipsxmmfEMX7kq5D9Q6OVTGvE
+         K1ew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1715798592; x=1716403392;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=EYw08SuW0XGtCkslQ7Pr4vhaF6oLwiqfmnivOAxBqiQ=;
+        b=GZV/O2g3/oFPylKqZQz8q1tupu6S5y2r+Nm/pykka/SC2VuW7uT/FRl0hBmENJC0kS
+         i/yMR4SO93O1dSivPcV0mXbRqzTY//w/7wxcjWtBJbRHhOhoWDlih/aKPdnFLLLqIlHC
+         oSyWcfJMGOTAEBrBgv8NvHSRAmegYd3nP1eMqqslEtZjSMP2qzjsYHJ0TkIOG3651BKj
+         Slde72ciOOPLBT8YAIkHAxnM6Ha1nnUIScQNDgKakYqKg5y/jNYM17QYYR3gfN3Zja+9
+         tjyJr/L/i85csVG1ynkF94bnakTzibCpN3zf4d1Ro5tfMgGHUWITAUtWCToKggM2nXpV
+         bAEw==
+X-Forwarded-Encrypted: i=1; AJvYcCUBiqmlK78R13KI7X+fqtqIsYAHzbVVtO/CoFW0Zlopy5yqRgYLXcTrOVOBHJ8QSB3++Q17nAb+pDhMZDmg0afXdEB3BEdF9V3m4awm2lk=
+X-Gm-Message-State: AOJu0Ywk7g44VLPOSuzGgE4JrMZup+h2l7TsSK/FiK1TBXXe933RVRXm
+	pgNa4+vLDcF4m3RW5FdZKeFjaTupwXiIqbzcvp/4rZxuIjx+FwDZLNPK+bJ8MhJwjWxB8gyOJER
+	9hoTnDpE9q47CjvllqIl2zyzBTi5/t2Ba1dY=
+X-Google-Smtp-Source: AGHT+IFXSyoRhWYZAyF4PDyMeovRDQKPGnBFuRGgfH4SBcREIVqL7zoHTwvnfnjWyp/GpdS9YamBKyr7G4+ZcxRuOuI=
+X-Received: by 2002:a05:600c:3d9a:b0:41f:a15d:2228 with SMTP id
+ 5b1f17b1804b1-4200ebea389mr9541355e9.0.1715798591515; Wed, 15 May 2024
+ 11:43:11 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <20240515-dma-buf-ecc-heap-v1-8-54cbbd049511@kernel.org>
 References: <20240515-dma-buf-ecc-heap-v1-0-54cbbd049511@kernel.org>
 In-Reply-To: <20240515-dma-buf-ecc-heap-v1-0-54cbbd049511@kernel.org>
-To: Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- Benjamin Gaignard <benjamin.gaignard@collabora.com>,
- Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
- "T.J. Mercier" <tjmercier@google.com>,
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2094; i=mripard@kernel.org;
- h=from:subject:message-id; bh=N5UwfZ1hKMI6+ZrGSh9smBi+SvvW9VpZtds2AMuGHos=;
- b=owGbwMvMwCmsHn9OcpHtvjLG02pJDGku+wOVf9vPYLP0PMqdtrWoJ7LZR7Lp+cNXh60Z5vbwa
- D3c2HqlYyoLgzAng6yYIssTmbDTy9sXVznYr/wBM4eVCWQIAxenAExkbh5jnYYCo0VUtc+Dd+uE
- 2daUX+142sf9ZzNr7g5joTNPPvPvWLjxoFSLysFas91tCT8vZjzoYaxmSWWJajqzSnUrN69XyMV
- 0Lukrn8/LlLqZ6FROnnTgt2SU9adC6ZaXZtJ3NbLWr572kQ0A
-X-Developer-Key: i=mripard@kernel.org; a=openpgp;
- fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
+From: John Stultz <jstultz@google.com>
+Date: Wed, 15 May 2024 11:42:58 -0700
+Message-ID: <CANDhNCoOKwtpstFE2VDcUvzdXUWkZ-Zx+fz6xrdPWTyciVXMXQ@mail.gmail.com>
+To: Maxime Ripard <mripard@kernel.org>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: B14AD40074
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.00 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217:c];
+X-Rspamd-Queue-Id: C80E43F624
+X-Spamd-Bar: -------
+X-Spamd-Result: default: False [-8.00 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[99.99%];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	ARC_NA(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_LAST(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.46:from];
+	MISSING_XM_UA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	FROM_EQ_ENVFROM(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: PY4YJQC356M3E2J2PK7X3Z2XFCXSWCON
-X-Message-ID-Hash: PY4YJQC356M3E2J2PK7X3Z2XFCXSWCON
-X-MailFrom: mripard@kernel.org
+Message-ID-Hash: 22WV7Z2TAFFLBH5NJSOFTUVG6B472CJA
+X-Message-ID-Hash: 22WV7Z2TAFFLBH5NJSOFTUVG6B472CJA
+X-MailFrom: jstultz@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Mattijs Korpershoek <mkorpershoek@baylibre.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Maxime Ripard <mripard@kernel.org>
+CC: Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, "T.J. Mercier" <tjmercier@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 8/8] dma-buf: heaps: carveout: Handle ECC flags
+Subject: [Linaro-mm-sig] Re: [PATCH 0/8] dma-buf: heaps: Support carved-out heaps and ECC related-flags
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PY4YJQC356M3E2J2PK7X3Z2XFCXSWCON/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/22WV7Z2TAFFLBH5NJSOFTUVG6B472CJA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Now that we have introduced ECC-related flags for the dma-heaps buffer
-allocations, let's honour these flags depending on the memory setup.
-
-Signed-off-by: Maxime Ripard <mripard@kernel.org>
----
- drivers/dma-buf/heaps/carveout_heap.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
-
-diff --git a/drivers/dma-buf/heaps/carveout_heap.c b/drivers/dma-buf/heaps/carveout_heap.c
-index 896ca67e6bd9..81b167785999 100644
---- a/drivers/dma-buf/heaps/carveout_heap.c
-+++ b/drivers/dma-buf/heaps/carveout_heap.c
-@@ -6,10 +6,11 @@
- #include <linux/of_reserved_mem.h>
- 
- struct carveout_heap_priv {
- 	struct dma_heap *heap;
- 	struct gen_pool *pool;
-+	bool ecc_enabled;
- };
- 
- struct carveout_heap_buffer_priv {
- 	struct mutex lock;
- 	struct list_head attachments;
-@@ -182,10 +183,16 @@ static struct dma_buf *carveout_heap_allocate(struct dma_heap *heap,
- 	struct dma_buf *buf;
- 	dma_addr_t daddr;
- 	void *buffer;
- 	int ret;
- 
-+	if (!heap_priv->ecc_enabled && (heap_flags & DMA_HEAP_FLAG_ECC_PROTECTED))
-+		return ERR_PTR(-EINVAL);
-+
-+	if (heap_priv->ecc_enabled && (heap_flags & DMA_HEAP_FLAG_ECC_UNPROTECTED))
-+		return ERR_PTR(-EINVAL);
-+
- 	buffer_priv = kzalloc(sizeof(*buffer_priv), GFP_KERNEL);
- 	if (!buffer_priv)
- 		return ERR_PTR(-ENOMEM);
- 
- 	INIT_LIST_HEAD(&buffer_priv->attachments);
-@@ -235,20 +242,29 @@ static int __init carveout_heap_setup(struct device_node *node)
- 	const struct reserved_mem *rmem;
- 	struct carveout_heap_priv *priv;
- 	struct dma_heap *heap;
- 	struct gen_pool *pool;
- 	void *base;
-+	u32 val = 0;
- 	int ret;
- 
- 	rmem = of_reserved_mem_lookup(node);
- 	if (!rmem)
- 		return -EINVAL;
- 
- 	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
- 	if (!priv)
- 		return -ENOMEM;
- 
-+	of_property_read_u32(node, "ecc-correction-bits", &val);
-+	if (val <= 0) {
-+		if (of_memory_get_ecc_correction_bits() > 0)
-+			priv->ecc_enabled = true;
-+	} else {
-+		priv->ecc_enabled = true;
-+	}
-+
- 	pool = gen_pool_create(PAGE_SHIFT, NUMA_NO_NODE);
- 	if (!pool) {
- 		ret = -ENOMEM;
- 		goto err_cleanup_heap;
- 	}
-
--- 
-2.44.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gV2VkLCBNYXkgMTUsIDIwMjQgYXQgNjo1N+KAr0FNIE1heGltZSBSaXBhcmQgPG1yaXBhcmRA
+a2VybmVsLm9yZz4gd3JvdGU6DQo+IFRoaXMgc2VyaWVzIGlzIHRoZSBmb2xsb3ctdXAgb2YgdGhl
+IGRpc2N1c3Npb24gdGhhdCBKb2huIGFuZCBJIGhhZCBhIGZldw0KPiBtb250aHMgYWdvIGhlcmU6
+DQo+DQo+IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2FsbC9DQU5EaE5DcXVKbjZiSDNLeEtmNjVC
+V2lUWUxWcVNkOTg5Mi14dEZESEhxcXlycm9DTVFAbWFpbC5nbWFpbC5jb20vDQo+DQo+IFRoZSBp
+bml0aWFsIHByb2JsZW0gd2Ugd2VyZSBkaXNjdXNzaW5nIHdhcyB0aGF0IEknbSBjdXJyZW50bHkg
+d29ya2luZyBvbg0KPiBhIHBsYXRmb3JtIHdoaWNoIGhhcyBhIG1lbW9yeSBsYXlvdXQgd2l0aCBF
+Q0MgZW5hYmxlZC4gSG93ZXZlciwgZW5hYmxpbmcNCj4gdGhlIEVDQyBoYXMgYSBudW1iZXIgb2Yg
+ZHJhd2JhY2tzIG9uIHRoYXQgcGxhdGZvcm06IGxvd2VyIHBlcmZvcm1hbmNlLA0KPiBpbmNyZWFz
+ZWQgbWVtb3J5IHVzYWdlLCBldGMuIFNvIGZvciB0aGluZ3MgbGlrZSBmcmFtZWJ1ZmZlcnMsIHRo
+ZQ0KPiB0cmFkZS1vZmYgaXNuJ3QgZ3JlYXQgYW5kIHRodXMgdGhlcmUncyBhIG1lbW9yeSByZWdp
+b24gd2l0aCBFQ0MgZGlzYWJsZWQNCj4gdG8gYWxsb2NhdGUgZnJvbSBmb3Igc3VjaCB1c2UgY2Fz
+ZXMuDQo+DQo+IEFmdGVyIGEgc3VnZ2VzdGlvbiBmcm9tIEpvaG4sIEkgY2hvc2UgdG8gc3RhcnQg
+dXNpbmcgaGVhcCBhbGxvY2F0aW9ucw0KPiBmbGFncyB0byBhbGxvdyBmb3IgdXNlcnNwYWNlIHRv
+IGFzayBmb3IgYSBwYXJ0aWN1bGFyIEVDQyBzZXR1cC4gVGhpcyBpcw0KPiB0aGVuIGJhY2tlZCBi
+eSBhIG5ldyBoZWFwIHR5cGUgdGhhdCBydW5zIGZyb20gcmVzZXJ2ZWQgbWVtb3J5IGNodW5rcw0K
+PiBmbGFnZ2VkIGFzIHN1Y2gsIGFuZCB0aGUgZXhpc3RpbmcgRFQgcHJvcGVydGllcyB0byBzcGVj
+aWZ5IHRoZSBFQ0MNCj4gcHJvcGVydGllcy4NCj4NCj4gV2UgY291bGQgYWxzbyBlYXNpbHkgZXh0
+ZW5kIHRoaXMgbWVjaGFuaXNtIHRvIHN1cHBvcnQgbW9yZSBmbGFncywgb3INCj4gdGhyb3VnaCBh
+IG5ldyBpb2N0bCB0byBkaXNjb3ZlciB3aGljaCBmbGFncyBhIGdpdmVuIGhlYXAgc3VwcG9ydHMu
+DQoNCkhleSEgVGhhbmtzIGZvciBzZW5kaW5nIHRoaXMgYWxvbmchIEknbSBlYWdlciB0byBzZWUg
+bW9yZSBoZWFwIHJlbGF0ZWQNCndvcmsgYmVpbmcgZG9uZSB1cHN0cmVhbS4NCg0KVGhlIG9ubHkg
+dGhpbmcgdGhhdCBtYWtlcyBtZSBhIGJpdCBoZXNpdGFudCwgaXMgdGhlIGludHJvZHVjdGlvbiBv
+Zg0KYWxsb2NhdGlvbiBmbGFncyAoYXMgb3Bwb3NlZCB0byBhIHVuaXF1ZWx5IHNwZWNpZmllZC9u
+YW1lZCAiZWNjIg0KaGVhcCkuDQoNCldlIGRpZCB0YWxrIGFib3V0IHRoaXMgZWFybGllciwgYW5k
+IG15IGVhcmxpZXIgcHJlc3MgdGhhdCBvbmx5IGlmIHRoZQ0KRUNDIGZsYWcgd2FzIGdlbmVyYWwg
+ZW5vdWdoIHRvIGFwcGx5IHRvIHRoZSBtYWpvcml0eSBvZiBoZWFwcyB0aGVuIGl0DQptYWtlcyBz
+ZW5zZSBhcyBhIGZsYWcsIGFuZCB5b3VyIHBhdGNoIGhlcmUgZG9lcyBhcHBseSBpdCB0byBhbGwg
+dGhlDQpoZWFwcy4gU28gSSBkb24ndCBoYXZlIGFuIG9iamVjdGlvbi4NCg0KQnV0IGl0IG1ha2Vz
+IG1lIGEgbGl0dGxlIG5lcnZvdXMgdG8gYWRkIGEgbmV3IGdlbmVyaWMgYWxsb2NhdGlvbiBmbGFn
+DQpmb3IgYSBmZWF0dXJlIG1vc3QgaGFyZHdhcmUgZG9lc24ndCBzdXBwb3J0ICh5ZXQsIGF0IGxl
+YXN0KS4gU28gaXQncw0KaGFyZCB0byB3ZWlnaCBob3cgY29tbW9uIHRoZSBhY3R1YWwgdXNhZ2Ug
+d2lsbCBiZSBhY3Jvc3MgYWxsIHRoZQ0KaGVhcHMuDQoNCkkgYXBvbG9naXplIGFzIG15IHdvcnJ5
+IGlzIG1vc3RseSBib3JuIG91dCBvZiBzZWVpbmcgdmVuZG9ycyByZWFsbHkNCnB1c2ggb3BhcXVl
+IGZlYXR1cmUgZmxhZ3MgaW4gdGhlaXIgb2xkIGlvbiBoZWFwcywgc28gaW4gcHJvdmlkaW5nIGEN
+CmZsYWdzIGFyZ3VtZW50LCBpdCB3YXMgbW9zdGx5IGludGVuZGVkIGFzIGFuIGVzY2FwZSBoYXRj
+aCBmb3INCm9idmlvdXNseSBjb21tb24gYXR0cmlidXRlcy4gU28gaGF2aW5nIHRoZSBmaXJzdCBi
+ZSBzb21ldGhpbmcgdGhhdA0Kc2VlbXMgcmVhc29uYWJsZSwgYnV0IGlzbid0IGFjdHVhbGx5IHRo
+YXQgY29tbW9uIG1ha2VzIG1lIGZyZXQgc29tZS4NCg0KU28gYWdhaW4sIG5vdCBhbiBvYmplY3Rp
+b24sIGp1c3Qgc29tZXRoaW5nIGZvciBmb2xrcyB0byBzdGV3IG9uIHRvDQptYWtlIHN1cmUgdGhp
+cyBpcyByZWFsbHkgdGhlIHJpZ2h0IGFwcHJvYWNoLg0KDQpBbm90aGVyIHRoaW5nIHRvIGRpc2N1
+c3MsIHRoYXQgSSBkaWRuJ3Qgc2VlIGluIHlvdXIgbWFpbDogRG8gd2UgaGF2ZQ0KYW4gb3Blbi1z
+b3VyY2UgdXNlciBvZiB0aGlzIG5ldyBmbGFnPw0KDQp0aGFua3MNCi1qb2huDQpfX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxp
+bmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUg
+c2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
