@@ -2,98 +2,90 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C6FD8C65BA
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 May 2024 13:26:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 493B18C6807
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 May 2024 15:58:51 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5C2AE441A4
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 May 2024 11:26:23 +0000 (UTC)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
-	by lists.linaro.org (Postfix) with ESMTPS id B432F441AD
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 15 May 2024 11:25:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 5C3DC40074
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 May 2024 13:58:50 +0000 (UTC)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+	by lists.linaro.org (Postfix) with ESMTPS id 786F540074
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 15 May 2024 13:57:52 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=mediatek.com header.s=dk header.b=XTraS+Ia;
-	spf=pass (lists.linaro.org: domain of yong.wu@mediatek.com designates 60.244.123.138 as permitted sender) smtp.mailfrom=yong.wu@mediatek.com;
-	dmarc=pass (policy=quarantine) header.from=mediatek.com
-X-UUID: d119445c12ad11efb92737409a0e9459-20240515
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
-	h=Content-Type:Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From; bh=pRII+MwEMjc7IBIb7T65bLDNnOYGy8L1r5/7E1ySfEk=;
-	b=XTraS+Ia6U18kmDn890Uqw9sPEXJ3+G4x6Z4OJ9YFg2lLlvgPEoe4++0PR+c03dyKyqhMYz+VY56NyruHhFskQFY42k1jFiHTACtCglSm/Ws38y9HGTZcz3mLa3px67WfHumiqlHs6HYMJq8Z8NBDsplHWxfc/o9ZcI+EkdHJSk=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.38,REQID:ffd7906c-23c2-49b4-90b3-c4a06efc92bb,IP:0,U
-	RL:0,TC:0,Content:-25,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTIO
-	N:release,TS:-25
-X-CID-META: VersionHash:82c5f88,CLOUDID:bb2ce383-4f93-4875-95e7-8c66ea833d57,B
-	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
-	RL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
-	SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0
-X-CID-BVR: 0
-X-CID-BAS: 0,_,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: d119445c12ad11efb92737409a0e9459-20240515
-Received: from mtkmbs11n2.mediatek.inc [(172.21.101.187)] by mailgw01.mediatek.com
-	(envelope-from <yong.wu@mediatek.com>)
-	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
-	with ESMTP id 75818985; Wed, 15 May 2024 19:25:21 +0800
-Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs11n1.mediatek.inc (172.21.101.185) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Wed, 15 May 2024 19:25:20 +0800
-Received: from mhfsdcap04.gcn.mediatek.inc (10.17.3.154) by
- mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Wed, 15 May 2024 19:25:19 +0800
-From: Yong Wu <yong.wu@mediatek.com>
-To: Rob Herring <robh+dt@kernel.org>, Matthias Brugger
-	<matthias.bgg@gmail.com>, <christian.koenig@amd.com>, Sumit Semwal
-	<sumit.semwal@linaro.org>, Andrew Morton <akpm@linux-foundation.org>
-Date: Wed, 15 May 2024 19:23:08 +0800
-Message-ID: <20240515112308.10171-10-yong.wu@mediatek.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240515112308.10171-1-yong.wu@mediatek.com>
-References: <20240515112308.10171-1-yong.wu@mediatek.com>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=efVBkvUH;
+	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 145.40.73.55 as permitted sender) smtp.mailfrom=mripard@kernel.org;
+	dmarc=pass (policy=none) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by sin.source.kernel.org (Postfix) with ESMTP id 4F677CE16B6;
+	Wed, 15 May 2024 13:57:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 029F0C116B1;
+	Wed, 15 May 2024 13:57:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1715781461;
+	bh=0Om0EsLkpFBVKkvz9olitc46qsiUdNn1/n5ZWkf37uM=;
+	h=From:Subject:Date:To:Cc:From;
+	b=efVBkvUHMwvEPS9v5viutvHv7Nwmm+sJx1bgg68pjDdL5tQOBfNrGoz42YlvUCiAj
+	 kn9/Q2v6QxgRiNb+6xYMD68qCd3reid6n/aqHUK1/+u2URPhCIsEV/12vnr3ycQvhH
+	 0X615sQhaDfm/PRn0AnpVG2lmlq4fRLOXY2gH6Yal52hYHSmyhf+K+pMjXbHKAP6/u
+	 CnZ59ZBD4F6zQ+ImRB82ZBpf4m/Is/rzzkq/FbSk/XwB7v0qyM3VAREipiMF3oxUIk
+	 hZJcPiSda5+9Wpt+dsWVmhoHvv5Ce8HWDlr5HjCVBPxAidyY1xdcYyuZosqcDBUqa5
+	 bW1opPrItcBIA==
+From: Maxime Ripard <mripard@kernel.org>
+Date: Wed, 15 May 2024 15:56:55 +0200
+Message-Id: <20240515-dma-buf-ecc-heap-v1-0-54cbbd049511@kernel.org>
 MIME-Version: 1.0
-X-MTK: N
+X-B4-Tracking: v=1; b=H4sIACe/RGYC/x3MQQqAIBBA0avIrBtIS6iuEi1Mx5pFJkoRhHdPW
+ r7F/y9kSkwZJvFCopszn6FCNgLsbsJGyK4aVKv6VkuN7jC4Xh7JWtzJRFSD6aR0yo49Qc1iIs/
+ Pv5yXUj7AlIV2YgAAAA==
+To: Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+ Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>,
+ "T.J. Mercier" <tjmercier@google.com>,
+ =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2381; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=0Om0EsLkpFBVKkvz9olitc46qsiUdNn1/n5ZWkf37uM=;
+ b=owGbwMvMwCmsHn9OcpHtvjLG02pJDGku+50Tp5XnH/PUiwzWiHWN5qhb6TVvj+JzU9WQlR+vH
+ hINFfXtmMrCIMzJICumyPJEJuz08vbFVQ72K3/AzGFlAhnCwMUpABO5OZWxzoZzzf/AWs7XRS8b
+ b2ve+P/28/yayTKc7TP4yu8EKcs9T/BblnA2Ni96fpTEgzBOSf0PjA0bdl68zBtx8n3vjmrdCjb
+ 5sNayFR9yDVdVeth++TrprFWp9qWS08IBj13Lo87oGvAt+QUA
+X-Developer-Key: i=mripard@kernel.org; a=openpgp;
+ fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: B432F441AD
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
-	REPLY(-4.00)[];
+X-Rspamd-Queue-Id: 786F540074
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	HFILTER_HOSTNAME_UNKNOWN(2.50)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[mediatek.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[mediatek.com:s=dk];
-	R_SPF_ALLOW(-0.20)[+ip4:60.244.123.128/27:c];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	R_SPF_ALLOW(-0.20)[+ip4:145.40.73.55:c];
 	MIME_GOOD(-0.10)[text/plain];
-	FREEMAIL_CC(0.00)[linaro.org,kernel.org,collabora.com,arm.com,google.com,mediatek.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.infradead.org,quicinc.com,ucw.cz,emersion.fr,gmail.com,infradead.org,deltatee.com,ffwll.ch];
-	RCVD_TLS_LAST(0.00)[];
-	ARC_NA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[33];
-	ASN(0.00)[asn:24154, ipnet:60.244.123.0/24, country:TW];
-	TAGGED_RCPT(0.00)[dt];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[kernel.org,gmail.com,amd.com,linaro.org,linux-foundation.org];
-	RCVD_COUNT_THREE(0.00)[3];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:54825, ipnet:145.40.73.0/24, country:US];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	ARC_NA(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[mediatek.com:+]
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_LAST(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: HFPESHLYBNBRO7XV5XM46LV2CC3NCLSD
-X-Message-ID-Hash: HFPESHLYBNBRO7XV5XM46LV2CC3NCLSD
-X-MailFrom: yong.wu@mediatek.com
+Message-ID-Hash: SGQXBEHFTXKOA7IDZ6CO2FTJYTL354FB
+X-Message-ID-Hash: SGQXBEHFTXKOA7IDZ6CO2FTJYTL354FB
+X-MailFrom: mripard@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, tjmercier@google.com, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Yong Wu <yong.wu@mediatek.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, Robin Murphy <robin.murphy@arm.com>, Vijayanand Jitta <quic_vjitta@quicinc.com>, Joakim Bech <joakim.bech@linaro.org>, Jeffrey Kardatzke <jkardatzke@google.com>, Pavel Machek <pavel@ucw.cz>, Simon Ser <contact@emersion.fr>, Pekka Paalanen <ppaalanen@gmail.com>, willy@infradead.org, Logan Gunthorpe <logang@deltatee.com>, Daniel Vetter <daniel@ffwll.ch>, jianjiao.zeng@mediatek.com, kuohong.wang@mediatek.com, youlin.pei@medi
- atek.com
+CC: Mattijs Korpershoek <mkorpershoek@baylibre.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Maxime Ripard <mripard@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v5 9/9] dma_buf: heaps: restricted_heap_mtk: Add a new CMA heap
+Subject: [Linaro-mm-sig] [PATCH 0/8] dma-buf: heaps: Support carved-out heaps and ECC related-flags
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HFPESHLYBNBRO7XV5XM46LV2CC3NCLSD/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/SGQXBEHFTXKOA7IDZ6CO2FTJYTL354FB/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -103,246 +95,65 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Create a new MediaTek CMA heap from the CMA reserved buffer.
+Hi,
 
-In this heap, When the first allocating buffer, use cma_alloc to prepare
-whole the CMA range, then send its range to TEE to protect and manage.
-For the later allocating, we just adds the cma_used_size.
+This series is the follow-up of the discussion that John and I had a few
+months ago here:
 
-When SVP done, cma_release will release the buffer, then kernel may
-reuse it.
+https://lore.kernel.org/all/CANDhNCquJn6bH3KxKf65BWiTYLVqSd9892-xtFDHHqqyrroCMQ@mail.gmail.com/
 
-For the "CMA" restricted heap, "struct cma *cma" is a common property,
-not just for MediaTek, so put it into "struct restricted_heap" instead of
-our private data.
+The initial problem we were discussing was that I'm currently working on
+a platform which has a memory layout with ECC enabled. However, enabling
+the ECC has a number of drawbacks on that platform: lower performance,
+increased memory usage, etc. So for things like framebuffers, the
+trade-off isn't great and thus there's a memory region with ECC disabled
+to allocate from for such use cases.
 
-Signed-off-by: Yong Wu <yong.wu@mediatek.com>
+After a suggestion from John, I chose to start using heap allocations
+flags to allow for userspace to ask for a particular ECC setup. This is
+then backed by a new heap type that runs from reserved memory chunks
+flagged as such, and the existing DT properties to specify the ECC
+properties.
+
+We could also easily extend this mechanism to support more flags, or
+through a new ioctl to discover which flags a given heap supports.
+
+I submitted a draft PR to the DT schema for the bindings used in this
+PR:
+https://github.com/devicetree-org/dt-schema/pull/138
+
+Let me know what you think,
+Maxime
+
+Signed-off-by: Maxime Ripard <mripard@kernel.org>
 ---
- drivers/dma-buf/heaps/Kconfig               |   2 +-
- drivers/dma-buf/heaps/restricted_heap.h     |   4 +
- drivers/dma-buf/heaps/restricted_heap_mtk.c | 121 +++++++++++++++++++-
- 3 files changed, 123 insertions(+), 4 deletions(-)
+Maxime Ripard (8):
+      dma-buf: heaps: Introduce a new heap for reserved memory
+      of: Add helper to retrieve ECC memory bits
+      dma-buf: heaps: Import uAPI header
+      dma-buf: heaps: Add ECC protection flags
+      dma-buf: heaps: system: Remove global variable
+      dma-buf: heaps: system: Handle ECC flags
+      dma-buf: heaps: cma: Handle ECC flags
+      dma-buf: heaps: carveout: Handle ECC flags
 
-diff --git a/drivers/dma-buf/heaps/Kconfig b/drivers/dma-buf/heaps/Kconfig
-index 84f748fb2856..58903bc62ac8 100644
---- a/drivers/dma-buf/heaps/Kconfig
-+++ b/drivers/dma-buf/heaps/Kconfig
-@@ -24,7 +24,7 @@ config DMABUF_HEAPS_RESTRICTED
- 
- config DMABUF_HEAPS_RESTRICTED_MTK
- 	bool "MediaTek DMA-BUF Restricted Heap"
--	depends on DMABUF_HEAPS_RESTRICTED && TEE=y
-+	depends on DMABUF_HEAPS_RESTRICTED && DMA_CMA && TEE=y
- 	help
- 	  Enable restricted dma-buf heaps for MediaTek platform. This heap is backed by
- 	  TEE client interfaces. If in doubt, say N.
-diff --git a/drivers/dma-buf/heaps/restricted_heap.h b/drivers/dma-buf/heaps/restricted_heap.h
-index 8cb9211093c5..7dec4b8a471b 100644
---- a/drivers/dma-buf/heaps/restricted_heap.h
-+++ b/drivers/dma-buf/heaps/restricted_heap.h
-@@ -23,6 +23,10 @@ struct restricted_heap {
- 
- 	const struct restricted_heap_ops *ops;
- 
-+	struct cma		*cma;
-+	unsigned long		cma_paddr;
-+	unsigned long		cma_size;
-+
- 	void			*priv_data;
- };
- 
-diff --git a/drivers/dma-buf/heaps/restricted_heap_mtk.c b/drivers/dma-buf/heaps/restricted_heap_mtk.c
-index e571eae719e0..6d8119828485 100644
---- a/drivers/dma-buf/heaps/restricted_heap_mtk.c
-+++ b/drivers/dma-buf/heaps/restricted_heap_mtk.c
-@@ -6,9 +6,11 @@
-  */
- #define pr_fmt(fmt)     "rheap_mtk: " fmt
- 
-+#include <linux/cma.h>
- #include <linux/dma-buf.h>
- #include <linux/err.h>
- #include <linux/module.h>
-+#include <linux/of_reserved_mem.h>
- #include <linux/slab.h>
- #include <linux/tee_drv.h>
- #include <linux/uuid.h>
-@@ -25,6 +27,13 @@ enum mtk_secure_mem_type {
- 	 * management is inside the TEE.
- 	 */
- 	MTK_SECURE_MEMORY_TYPE_CM_TZ	= 1,
-+	/*
-+	 * MediaTek dynamic chunk memory carved out from CMA.
-+	 * In normal case, the CMA could be used in kernel; When SVP start, we will
-+	 * allocate whole this CMA and pass whole the CMA PA and size into TEE to
-+	 * protect it, then the detail memory management also is inside the TEE.
-+	 */
-+	MTK_SECURE_MEMORY_TYPE_CM_CMA	= 2,
- };
- 
- /* This structure also is synchronized with tee, thus not use the phys_addr_t */
-@@ -40,7 +49,8 @@ enum mtk_secure_buffer_tee_cmd {
- 	 * [in]  value[0].a: The buffer size.
- 	 *       value[0].b: alignment.
- 	 * [in]  value[1].a: enum mtk_secure_mem_type.
--	 * [inout]
-+	 * [inout] [in]  value[2].a: pa base in cma case.
-+	 *               value[2].b: The buffer size in cma case.
- 	 *         [out] value[2].a: entry number of memory block.
- 	 *                           If this is 1, it means the memory is continuous.
- 	 *               value[2].b: buffer PA base.
-@@ -73,6 +83,9 @@ struct mtk_restricted_heap_data {
- 
- 	const enum mtk_secure_mem_type mem_type;
- 
-+	struct page		*cma_page;
-+	unsigned long		cma_used_size;
-+	struct mutex		lock; /* lock for cma_used_size */
- };
- 
- static int mtk_tee_ctx_match(struct tee_ioctl_version_data *ver, const void *data)
-@@ -173,6 +186,10 @@ static int mtk_tee_restrict_memory(struct restricted_heap *rheap, struct restric
- 	params[1].attr = TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INPUT;
- 	params[1].u.value.a = data->mem_type;
- 	params[2].attr = TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_INOUT;
-+	if (rheap->cma && data->mem_type == MTK_SECURE_MEMORY_TYPE_CM_CMA) {
-+		params[2].u.value.a = rheap->cma_paddr;
-+		params[2].u.value.b = rheap->cma_size;
-+	}
- 	params[3].attr = TEE_IOCTL_PARAM_ATTR_TYPE_VALUE_OUTPUT;
- 	ret = mtk_tee_service_call(data->tee_ctx, data->tee_session,
- 				   MTK_TZCMD_SECMEM_ZALLOC, params);
-@@ -265,6 +282,48 @@ mtk_restricted_memory_free(struct restricted_heap *rheap, struct restricted_buff
- {
- }
- 
-+static int mtk_restricted_memory_cma_allocate(struct restricted_heap *rheap,
-+					      struct restricted_buffer *buf)
-+{
-+	struct mtk_restricted_heap_data *data = rheap->priv_data;
-+	int ret = 0;
-+	/*
-+	 * Allocate CMA only when allocating buffer for the first time, and just
-+	 * increase cma_used_size at the other time, Actually the memory
-+	 * allocating is within the TEE.
-+	 */
-+	mutex_lock(&data->lock);
-+	if (!data->cma_used_size) {
-+		data->cma_page = cma_alloc(rheap->cma, rheap->cma_size >> PAGE_SHIFT,
-+					   get_order(PAGE_SIZE), false);
-+		if (!data->cma_page) {
-+			ret = -ENOMEM;
-+			goto out_unlock;
-+		}
-+	} else if (data->cma_used_size + buf->size > rheap->cma_size) {
-+		ret = -EINVAL;
-+		goto out_unlock;
-+	}
-+	data->cma_used_size += buf->size;
-+
-+out_unlock:
-+	mutex_unlock(&data->lock);
-+	return ret;
-+}
-+
-+static void mtk_restricted_memory_cma_free(struct restricted_heap *rheap,
-+					   struct restricted_buffer *buf)
-+{
-+	struct mtk_restricted_heap_data *data = rheap->priv_data;
-+
-+	mutex_lock(&data->lock);
-+	data->cma_used_size -= buf->size;
-+	if (!data->cma_used_size)
-+		cma_release(rheap->cma, data->cma_page,
-+			    rheap->cma_size >> PAGE_SHIFT);
-+	mutex_unlock(&data->lock);
-+}
-+
- static int mtk_restricted_heap_init(struct restricted_heap *rheap)
- {
- 	struct mtk_restricted_heap_data *data = rheap->priv_data;
-@@ -286,21 +345,77 @@ static struct mtk_restricted_heap_data mtk_restricted_heap_data = {
- 	.mem_type		= MTK_SECURE_MEMORY_TYPE_CM_TZ,
- };
- 
-+static const struct restricted_heap_ops mtk_restricted_heap_ops_cma = {
-+	.heap_init		= mtk_restricted_heap_init,
-+	.alloc			= mtk_restricted_memory_cma_allocate,
-+	.free			= mtk_restricted_memory_cma_free,
-+	.restrict_buf		= mtk_tee_restrict_memory,
-+	.unrestrict_buf		= mtk_tee_unrestrict_memory,
-+};
-+
-+static struct mtk_restricted_heap_data mtk_restricted_heap_data_cma = {
-+	.mem_type		= MTK_SECURE_MEMORY_TYPE_CM_CMA,
-+};
-+
- static struct restricted_heap mtk_restricted_heaps[] = {
- 	{
- 		.name		= "restricted_mtk_cm",
- 		.ops		= &mtk_restricted_heap_ops,
- 		.priv_data	= &mtk_restricted_heap_data,
- 	},
-+	{
-+		.name		= "restricted_mtk_cma",
-+		.ops		= &mtk_restricted_heap_ops_cma,
-+		.priv_data	= &mtk_restricted_heap_data_cma,
-+	},
- };
- 
-+static int __init mtk_restricted_cma_init(struct reserved_mem *rmem)
-+{
-+	struct restricted_heap *rheap = mtk_restricted_heaps, *rheap_cma = NULL;
-+	struct mtk_restricted_heap_data *data;
-+	struct cma *cma;
-+	int ret, i;
-+
-+	for (i = 0; i < ARRAY_SIZE(mtk_restricted_heaps); i++, rheap++) {
-+		data = rheap->priv_data;
-+		if (data->mem_type == MTK_SECURE_MEMORY_TYPE_CM_CMA) {
-+			rheap_cma = rheap;
-+			break;
-+		}
-+	}
-+	if (!rheap_cma)
-+		return -EINVAL;
-+
-+	ret = cma_init_reserved_mem(rmem->base, rmem->size, 0, rmem->name,
-+				    &cma);
-+	if (ret) {
-+		pr_err("%s: %s set up CMA fail. ret %d.\n", __func__, rmem->name, ret);
-+		return ret;
-+	}
-+
-+	rheap_cma->cma = cma;
-+	rheap_cma->cma_paddr = rmem->base;
-+	rheap_cma->cma_size = rmem->size;
-+	return 0;
-+}
-+
-+RESERVEDMEM_OF_DECLARE(restricted_cma, "mediatek,dynamic-restricted-region",
-+		       mtk_restricted_cma_init);
-+
- static int mtk_restricted_heap_initialize(void)
- {
- 	struct restricted_heap *rheap = mtk_restricted_heaps;
-+	struct mtk_restricted_heap_data *data;
- 	unsigned int i;
- 
--	for (i = 0; i < ARRAY_SIZE(mtk_restricted_heaps); i++, rheap++)
--		restricted_heap_add(rheap);
-+	for (i = 0; i < ARRAY_SIZE(mtk_restricted_heaps); i++, rheap++) {
-+		data = rheap->priv_data;
-+		if (data->mem_type == MTK_SECURE_MEMORY_TYPE_CM_CMA && !rheap->cma)
-+			continue;
-+		if (!restricted_heap_add(rheap))
-+			mutex_init(&data->lock);
-+	}
- 	return 0;
- }
- module_init(mtk_restricted_heap_initialize);
+ drivers/dma-buf/dma-heap.c            |   4 +
+ drivers/dma-buf/heaps/Kconfig         |   8 +
+ drivers/dma-buf/heaps/Makefile        |   1 +
+ drivers/dma-buf/heaps/carveout_heap.c | 330 ++++++++++++++++++++++++++++++++++
+ drivers/dma-buf/heaps/cma_heap.c      |  10 ++
+ drivers/dma-buf/heaps/system_heap.c   |  29 ++-
+ include/linux/dma-heap.h              |   2 +
+ include/linux/of.h                    |  25 +++
+ include/uapi/linux/dma-heap.h         |   5 +-
+ 9 files changed, 407 insertions(+), 7 deletions(-)
+---
+base-commit: a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6
+change-id: 20240515-dma-buf-ecc-heap-28a311d2c94e
+
+Best regards,
 -- 
-2.25.1
+Maxime Ripard <mripard@kernel.org>
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
