@@ -2,37 +2,37 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB01F8C6804
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 May 2024 15:58:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 800CD8C680C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 May 2024 15:59:11 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id EDD4D40074
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 May 2024 13:58:33 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8EE4744750
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 15 May 2024 13:59:10 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 28F3544843
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 15 May 2024 13:57:52 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 502864475C
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 15 May 2024 13:57:55 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=tOp4lR8X;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=QXu68TXf;
 	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=mripard@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id C501F614C8;
-	Wed, 15 May 2024 13:57:51 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 18B28C116B1;
-	Wed, 15 May 2024 13:57:50 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id EFC81614B0;
+	Wed, 15 May 2024 13:57:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4EF92C116B1;
+	Wed, 15 May 2024 13:57:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1715781471;
-	bh=WlatdzDn5ln9onnNggxk+fyl1HpLY51fWYKvzy2mHOg=;
+	s=k20201202; t=1715781474;
+	bh=3a1PkEj7cE+sch219RIbB9Jk0bMgUp62q1dLoyBXtNE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=tOp4lR8Xi9y7SXrlPN4RRDtbbEihJDZsXFsYuT50HqukD2dqQDCKdRN12/0+EMRKb
-	 4GxcHkEYYQwNTs55WBFKc3l8txKL7m7sWXy58yR6ih2EpH7fbVOpRIbmJzLB6y7L43
-	 z3tzAMtENCjfDLcFGgLMxefwVbI2x/Ra7oqPq5kA6UeMNjS2ontIRJ7DJYf23xlGTD
-	 xRqA61OBzd3oV7HWy8to7fJOtP3opiZ9MdMxQw1dt2zDLuA0DQztG0HIZC/g1962Us
-	 k5i+gtEJav11An/G8O6Hb/Kv3zajjRErguxEBm1vDSs9KJn7+vjtGWzAjdYB9tbZ1E
-	 XDf25KvPwtkxA==
+	b=QXu68TXftiz2lZOlszefjpiO6hArafdb17Coy3vmlIKkWX1OTyUhmaxRP9Gkg92cH
+	 htkRgOtHMIewMzwPQE9UXTJz7jkSgrRdaRpNs0HD7mkSCmw/NSbr2Me1iPuizOTvpX
+	 xjJWdWNZYkbmCExVJkX80T7at917TAo29YHxraWuxwC2hZpBJgWFRWj74MZU/a8K62
+	 QTjhcN9n27uj0cTaUj/VBMnC+dlSa1CYn1E21Pyj6lT5FL6CFXiVAOC/didMJdwlPG
+	 RBqhC1ZopZGwWC3mrWGmGpxAHYPFEWTByZ60XzEqdIDZGy3iq3Xe5j9uxQt4n+DeHT
+	 R9aKXFT8gVe5g==
 From: Maxime Ripard <mripard@kernel.org>
-Date: Wed, 15 May 2024 15:56:58 +0200
+Date: Wed, 15 May 2024 15:56:59 +0200
 MIME-Version: 1.0
-Message-Id: <20240515-dma-buf-ecc-heap-v1-3-54cbbd049511@kernel.org>
+Message-Id: <20240515-dma-buf-ecc-heap-v1-4-54cbbd049511@kernel.org>
 References: <20240515-dma-buf-ecc-heap-v1-0-54cbbd049511@kernel.org>
 In-Reply-To: <20240515-dma-buf-ecc-heap-v1-0-54cbbd049511@kernel.org>
 To: Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>,
@@ -42,16 +42,16 @@ To: Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>,
  "T.J. Mercier" <tjmercier@google.com>,
  =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=758; i=mripard@kernel.org;
- h=from:subject:message-id; bh=WlatdzDn5ln9onnNggxk+fyl1HpLY51fWYKvzy2mHOg=;
- b=owGbwMvMwCmsHn9OcpHtvjLG02pJDGku+/3e/CltXrZHt3vnu0l/DhuoJs0MtQxoT13VdKcst
- 2F5oU55x1QWBmFOBlkxRZYnMmGnl7cvrnKwX/kDZg4rE8gQBi5OAZjI9cmMDY8aVp+d+WfjezXZ
- BxK7Ww+09n27yvEt6mCamVPDJU9H0ef93XVdB32ttZZOu7j37cmVVxnrPdJ8JPqMt8d3xXZP5t7
- xT1xa/dZ8lb1mKvf895zO+z7ZtenGhg5hzzuPwsUUkhKear4GAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2044; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=3a1PkEj7cE+sch219RIbB9Jk0bMgUp62q1dLoyBXtNE=;
+ b=owGbwMvMwCmsHn9OcpHtvjLG02pJDGku+/2nKmw4Xr3PpCAtJ9HX6rfW47R9Dit2ez1IiU7p5
+ phpe8G3YyoLgzAng6yYIssTmbDTy9sXVznYr/wBM4eVCWQIAxenAEykhImxYfev3IBfD6+9YDuc
+ 2t2+614VF/dWOcUVfXc41n2rveHQrVlV4x7Qz73kL6f+39v2hZt6GRv+mvRsZot9yu0tP9m/82P
+ TvNeat1UCvjcpnVfI+cYVKSlxuihVdOniK7tfLn0moneHYxYA
 X-Developer-Key: i=mripard@kernel.org; a=openpgp;
  fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 28F3544843
+X-Rspamd-Queue-Id: 502864475C
 X-Spamd-Bar: ----
 X-Spamd-Result: default: False [-4.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
@@ -74,17 +74,17 @@ X-Spamd-Result: default: False [-4.00 / 15.00];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: YMFAFCM4C633YAVCJZOZMZTOMTQXJ67V
-X-Message-ID-Hash: YMFAFCM4C633YAVCJZOZMZTOMTQXJ67V
+Message-ID-Hash: NF6V3ZFFLRYAIK6QNW3QKYHI6KFDCE4S
+X-Message-ID-Hash: NF6V3ZFFLRYAIK6QNW3QKYHI6KFDCE4S
 X-MailFrom: mripard@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Mattijs Korpershoek <mkorpershoek@baylibre.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Maxime Ripard <mripard@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH 3/8] dma-buf: heaps: Import uAPI header
+Subject: [Linaro-mm-sig] [PATCH 4/8] dma-buf: heaps: Add ECC protection flags
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YMFAFCM4C633YAVCJZOZMZTOMTQXJ67V/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NF6V3ZFFLRYAIK6QNW3QKYHI6KFDCE4S/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -94,33 +94,59 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-The uAPI header has a bunch of constants and structures that might be
-handy in drivers.
+Some systems run with ECC enabled on the memory by default, but with
+some memory regions with ECC disabled to mitigate the downsides of
+enabling ECC (reduced performances, increased memory usage) for buffers
+that don't require it.
 
-Let's include the header in the driver-side dma-heap header.
+Let's create some allocation flags to ask for a particular ECC setup
+when allocate a dma-buf through a heap.
 
 Signed-off-by: Maxime Ripard <mripard@kernel.org>
 ---
- include/linux/dma-heap.h | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/dma-buf/dma-heap.c    | 4 ++++
+ include/uapi/linux/dma-heap.h | 5 +++--
+ 2 files changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/include/linux/dma-heap.h b/include/linux/dma-heap.h
-index 0c05561cad6e..e7cf110c5fdc 100644
---- a/include/linux/dma-heap.h
-+++ b/include/linux/dma-heap.h
-@@ -10,10 +10,12 @@
- #define _DMA_HEAPS_H
+diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
+index 84ae708fafe7..a96c1865b627 100644
+--- a/drivers/dma-buf/dma-heap.c
++++ b/drivers/dma-buf/dma-heap.c
+@@ -106,10 +106,14 @@ static long dma_heap_ioctl_allocate(struct file *file, void *data)
+ 		return -EINVAL;
  
- #include <linux/cdev.h>
- #include <linux/types.h>
+ 	if (heap_allocation->heap_flags & ~DMA_HEAP_VALID_HEAP_FLAGS)
+ 		return -EINVAL;
  
-+#include <uapi/linux/dma-heap.h>
++	if ((heap_allocation->heap_flags & DMA_HEAP_FLAG_ECC_PROTECTED) &&
++	    (heap_allocation->heap_flags & DMA_HEAP_FLAG_ECC_UNPROTECTED))
++		return -EINVAL;
 +
- struct dma_heap;
+ 	fd = dma_heap_buffer_alloc(heap, heap_allocation->len,
+ 				   heap_allocation->fd_flags,
+ 				   heap_allocation->heap_flags);
+ 	if (fd < 0)
+ 		return fd;
+diff --git a/include/uapi/linux/dma-heap.h b/include/uapi/linux/dma-heap.h
+index 6f84fa08e074..677b6355552d 100644
+--- a/include/uapi/linux/dma-heap.h
++++ b/include/uapi/linux/dma-heap.h
+@@ -16,12 +16,13 @@
+  */
+ 
+ /* Valid FD_FLAGS are O_CLOEXEC, O_RDONLY, O_WRONLY, O_RDWR */
+ #define DMA_HEAP_VALID_FD_FLAGS (O_CLOEXEC | O_ACCMODE)
+ 
+-/* Currently no heap flags */
+-#define DMA_HEAP_VALID_HEAP_FLAGS (0)
++#define DMA_HEAP_FLAG_ECC_PROTECTED	BIT(0)
++#define DMA_HEAP_FLAG_ECC_UNPROTECTED	BIT(1)
++#define DMA_HEAP_VALID_HEAP_FLAGS (DMA_HEAP_FLAG_ECC_PROTECTED | DMA_HEAP_FLAG_ECC_UNPROTECTED)
  
  /**
-  * struct dma_heap_ops - ops to operate on a given heap
-  * @allocate:		allocate dmabuf and return struct dma_buf ptr
+  * struct dma_heap_allocation_data - metadata passed from userspace for
+  *                                      allocations
+  * @len:		size of the allocation
 
 -- 
 2.44.0
