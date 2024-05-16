@@ -2,282 +2,150 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D22B8C76DC
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 May 2024 14:49:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id F091A8C7AB1
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 May 2024 18:52:01 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 835164475F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 May 2024 12:49:15 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
-	by lists.linaro.org (Postfix) with ESMTPS id 4CD753F624
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 16 May 2024 12:49:04 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 07ED244848
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 16 May 2024 16:52:01 +0000 (UTC)
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
+	by lists.linaro.org (Postfix) with ESMTPS id 539CD3F368
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 16 May 2024 16:51:50 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=Krhiy3u7;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.17 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1715863744; x=1747399744;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=/iRbkuVATe5k/WXAjHoSspHziFV+5t4MrNeTh/j+A4I=;
-  b=Krhiy3u7NDhRNUF5+TZmznYTQ7/H3cqF+ntZsLe+oFBXmJbawYU3cwFA
-   5YWYZ88ZnCHUuNimcxktOK6xC7jXnPLfhpEdv5z4Ilx6VpXIVeU406EnM
-   dw5WBp9n1MyocWycR5abJAoIBMcdsduAa3UNFpkeq9LFl8ue4x2TMBqoX
-   HYLVE5tACPXCi109/ee5blnVmP8r5OxSLdEHhzqHzHNWYDADYIUe00qJN
-   lvQnsqHCRsvRLvWhKI/FT9qeOO45VyrWNIezt65hK4SD2h10+ywak5bew
-   PDUOggkvzNW5lAltfnClKuClWTTmyPOhDhLZMQTvpkjRTzGu2mrxzzvzn
-   w==;
-X-CSE-ConnectionGUID: N2VcLI3VTba3afn8aPggmQ==
-X-CSE-MsgGUID: d9x2zsurQaaGgO9vV2vzGg==
-X-IronPort-AV: E=McAfee;i="6600,9927,11074"; a="11835145"
-X-IronPort-AV: E=Sophos;i="6.08,164,1712646000";
-   d="scan'208";a="11835145"
-Received: from orviesa003.jf.intel.com ([10.64.159.143])
-  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 May 2024 05:49:03 -0700
-X-CSE-ConnectionGUID: VGW6IyLTSF6Dv0zZz0FjKg==
-X-CSE-MsgGUID: h+5SZJRHSE2BXyiG3EgmAw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,164,1712646000";
-   d="scan'208";a="36150958"
-Received: from lkp-server01.sh.intel.com (HELO f8b243fe6e68) ([10.239.97.150])
-  by orviesa003.jf.intel.com with ESMTP; 16 May 2024 05:48:59 -0700
-Received: from kbuild by f8b243fe6e68 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1s7aXY-000EEo-1i;
-	Thu, 16 May 2024 12:48:56 +0000
-Date: Thu, 16 May 2024 20:48:15 +0800
-From: kernel test robot <lkp@intel.com>
-To: Maxime Ripard <mripard@kernel.org>, Rob Herring <robh@kernel.org>,
-	Saravana Kannan <saravanak@google.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
-	Brian Starkey <Brian.Starkey@arm.com>,
-	John Stultz <jstultz@google.com>,
-	"T.J. Mercier" <tjmercier@google.com>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <202405162048.CExrV8yy-lkp@intel.com>
-References: <20240515-dma-buf-ecc-heap-v1-7-54cbbd049511@kernel.org>
+	dkim=pass header.d=google.com header.s=20230601 header.b=Hxw4xWCi;
+	spf=pass (lists.linaro.org: domain of jstultz@google.com designates 209.85.128.54 as permitted sender) smtp.mailfrom=jstultz@google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-420107286ecso3255e9.0
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 16 May 2024 09:51:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1715878309; x=1716483109; darn=lists.linaro.org;
+        h=content-transfer-encoding:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=onRIPguZVTKnH89R9mkjKZKxwfRC8K+qmiRpCHzudec=;
+        b=Hxw4xWCi+Ku5wKuuddv0uBd+m7TiquFiP25Xid05sP8Z6Zd1L/7whq74+n1qJ1En+C
+         GKyXbbcSYlw790j4WboFY20z3quumxupjeg5cIrTtcntW+ZHIJ95FgE25uf/5O/PRO2K
+         j0E0o0ROMy3MBBfhph4wUG+VUNX+CW1n/zzGE4re2VKAJuny6fq0Ca0yYAW51M3sPpTE
+         hR92abO3226MjYESjemmOf/GhI+GO/r8TXf/4VICN9PngorIj3qzjbQLl3vvApicvnxn
+         S5eYxM5g2/anDbxe8mQhaw9ZNDVvi8djVvKKLh/y1afse/iML1AnIyT9aMUbc24IXF0t
+         0m+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1715878309; x=1716483109;
+        h=content-transfer-encoding:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=onRIPguZVTKnH89R9mkjKZKxwfRC8K+qmiRpCHzudec=;
+        b=F1uiP/WXhn3cnuORiuIqwylZx7ysmMZE70TOSW2Yj72FMqW5hj1cf1FmAMEizJunj8
+         zVfdkffRfUUnYu4C+/SlaWUnlTkdHW0W9YJleZGIXkLthPL1qGUOy/OcEckYgJmf3LcA
+         XoZQmE7tR2goWjQkqGRvR+5z93Zbl7EehbFohklnWXlSTPEXCmok1J5V2Hmvz2omyIlk
+         KjSOlZghSiSdKkoGhVFSFgxv2yDf/ZuAOtL4xN7qgp2Nf7tijIF2lOcXqckup77LoJoy
+         ROlxWuL5AQurEcrvTYP4guiz0mi34L09pkyn4OgsJHHrGMgBh3JAjJqX97GCfOFXEBlK
+         V+tw==
+X-Forwarded-Encrypted: i=1; AJvYcCVMwF5ohPwIgZVq8f/WW8Q3qfM5Mts3CAPBVwbONNo5SLHj2hv1OmHUDGYlvZlr/65S/QGHi/jR1M+RAJdrjXrt6Vo25d9PgEXNiWVh0sE=
+X-Gm-Message-State: AOJu0YyGVKwYNDY+x7F3VcNWn/I6y/7BRZ/8KQIEw6tLdhcMR0wS5B4B
+	ZPBmAR58ZPgOZZBVcGyyMIveEHPl8WkvjR23cwrM/aSkqrYVw5FgZVWL+vUEC2pAFQXhSVfsG4e
+	/l0exRvlGuc5Ybpr3vTCMSoq4RywzolER6aM=
+X-Google-Smtp-Source: AGHT+IEtjZ9BDFF4UXQQ+nrOQN0XGRAp0bc3xjYZiRXnK81siroeleNET7wr5DctMi1WpgetmZ17HV2nwiWezX0TGvA=
+X-Received: by 2002:a05:600c:34c2:b0:41b:e55c:8dca with SMTP id
+ 5b1f17b1804b1-4200f8c6eeamr11617495e9.7.1715878309151; Thu, 16 May 2024
+ 09:51:49 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20240515-dma-buf-ecc-heap-v1-7-54cbbd049511@kernel.org>
+References: <20240515-dma-buf-ecc-heap-v1-0-54cbbd049511@kernel.org>
+ <CANDhNCoOKwtpstFE2VDcUvzdXUWkZ-Zx+fz6xrdPWTyciVXMXQ@mail.gmail.com> <ZkXmWwmdPsqAo7VU@phenom.ffwll.local>
+In-Reply-To: <ZkXmWwmdPsqAo7VU@phenom.ffwll.local>
+From: John Stultz <jstultz@google.com>
+Date: Thu, 16 May 2024 09:51:35 -0700
+Message-ID: <CANDhNCo5hSC-sLwdkBi3e-Ja-MzdqcGGbn-4G3XNYwCzZUwscw@mail.gmail.com>
+To: John Stultz <jstultz@google.com>, Maxime Ripard <mripard@kernel.org>,
+	Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>,
+	"T.J. Mercier" <tjmercier@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+	Mattijs Korpershoek <mkorpershoek@baylibre.com>, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 4CD753F624
-X-Spamd-Bar: ----------
-X-Spamd-Result: default: False [-10.70 / 15.00];
-	REPLY(-4.00)[];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	RCVD_DKIM_ARC_DNSWL_MED(-0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	RCVD_IN_DNSWL_MED(-0.20)[192.198.163.17:from];
-	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
+X-Rspamd-Queue-Id: 539CD3F368
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-4.00 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	MISSING_XM_UA(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	TO_DN_SOME(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
 	ARC_NA(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_COUNT_ONE(0.00)[1];
 	NEURAL_HAM(-0.00)[-1.000];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCVD_TLS_LAST(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+]
+	FROM_HAS_DN(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.54:from];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	DKIM_TRACE(0.00)[google.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: Q2DCQZ37IMZOYVU2PSA6BJR5WQUTSULG
-X-Message-ID-Hash: Q2DCQZ37IMZOYVU2PSA6BJR5WQUTSULG
-X-MailFrom: lkp@intel.com
+Message-ID-Hash: FPTIFWNHPKTSWZZLTMIJRFEWYIEKN6TZ
+X-Message-ID-Hash: FPTIFWNHPKTSWZZLTMIJRFEWYIEKN6TZ
+X-MailFrom: jstultz@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, Mattijs Korpershoek <mkorpershoek@baylibre.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Maxime Ripard <mripard@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 7/8] dma-buf: heaps: cma: Handle ECC flags
+Subject: [Linaro-mm-sig] Re: [PATCH 0/8] dma-buf: heaps: Support carved-out heaps and ECC related-flags
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/Q2DCQZ37IMZOYVU2PSA6BJR5WQUTSULG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FPTIFWNHPKTSWZZLTMIJRFEWYIEKN6TZ/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi Maxime,
-
-kernel test robot noticed the following build errors:
-
-[auto build test ERROR on a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Maxime-Ripard/dma-buf-heaps-Introduce-a-new-heap-for-reserved-memory/20240515-215850
-base:   a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6
-patch link:    https://lore.kernel.org/r/20240515-dma-buf-ecc-heap-v1-7-54cbbd049511%40kernel.org
-patch subject: [PATCH 7/8] dma-buf: heaps: cma: Handle ECC flags
-config: mips-allmodconfig (https://download.01.org/0day-ci/archive/20240516/202405162048.CExrV8yy-lkp@intel.com/config)
-compiler: mips-linux-gcc (GCC) 13.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240516/202405162048.CExrV8yy-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202405162048.CExrV8yy-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   drivers/dma-buf/heaps/cma_heap.c: In function 'cma_heap_allocate':
-   drivers/dma-buf/heaps/cma_heap.c:293:24: warning: returning 'int' from a function with return type 'struct dma_buf *' makes pointer from integer without a cast [-Wint-conversion]
-     293 |                 return -EINVAL;
-         |                        ^
-   drivers/dma-buf/heaps/cma_heap.c:296:24: warning: returning 'int' from a function with return type 'struct dma_buf *' makes pointer from integer without a cast [-Wint-conversion]
-     296 |                 return -EINVAL;
-         |                        ^
-   drivers/dma-buf/heaps/cma_heap.c: In function '__add_cma_heap':
->> drivers/dma-buf/heaps/cma_heap.c:386:13: error: implicit declaration of function 'of_memory_get_ecc_correction_bits' [-Werror=implicit-function-declaration]
-     386 |         if (of_memory_get_ecc_correction_bits() > 0)
-         |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   cc1: some warnings being treated as errors
-
-
-vim +/of_memory_get_ecc_correction_bits +386 drivers/dma-buf/heaps/cma_heap.c
-
-   275	
-   276	static struct dma_buf *cma_heap_allocate(struct dma_heap *heap,
-   277						 unsigned long len,
-   278						 unsigned long fd_flags,
-   279						 unsigned long heap_flags)
-   280	{
-   281		struct cma_heap *cma_heap = dma_heap_get_drvdata(heap);
-   282		struct cma_heap_buffer *buffer;
-   283		DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
-   284		size_t size = PAGE_ALIGN(len);
-   285		pgoff_t pagecount = size >> PAGE_SHIFT;
-   286		unsigned long align = get_order(size);
-   287		struct page *cma_pages;
-   288		struct dma_buf *dmabuf;
-   289		int ret = -ENOMEM;
-   290		pgoff_t pg;
-   291	
-   292		if (!cma_heap->ecc_enabled && (heap_flags & DMA_HEAP_FLAG_ECC_PROTECTED))
- > 293			return -EINVAL;
-   294	
-   295		if (cma_heap->ecc_enabled && (heap_flags & DMA_HEAP_FLAG_ECC_UNPROTECTED))
-   296			return -EINVAL;
-   297	
-   298		buffer = kzalloc(sizeof(*buffer), GFP_KERNEL);
-   299		if (!buffer)
-   300			return ERR_PTR(-ENOMEM);
-   301	
-   302		INIT_LIST_HEAD(&buffer->attachments);
-   303		mutex_init(&buffer->lock);
-   304		buffer->len = size;
-   305	
-   306		if (align > CONFIG_CMA_ALIGNMENT)
-   307			align = CONFIG_CMA_ALIGNMENT;
-   308	
-   309		cma_pages = cma_alloc(cma_heap->cma, pagecount, align, false);
-   310		if (!cma_pages)
-   311			goto free_buffer;
-   312	
-   313		/* Clear the cma pages */
-   314		if (PageHighMem(cma_pages)) {
-   315			unsigned long nr_clear_pages = pagecount;
-   316			struct page *page = cma_pages;
-   317	
-   318			while (nr_clear_pages > 0) {
-   319				void *vaddr = kmap_atomic(page);
-   320	
-   321				memset(vaddr, 0, PAGE_SIZE);
-   322				kunmap_atomic(vaddr);
-   323				/*
-   324				 * Avoid wasting time zeroing memory if the process
-   325				 * has been killed by by SIGKILL
-   326				 */
-   327				if (fatal_signal_pending(current))
-   328					goto free_cma;
-   329				page++;
-   330				nr_clear_pages--;
-   331			}
-   332		} else {
-   333			memset(page_address(cma_pages), 0, size);
-   334		}
-   335	
-   336		buffer->pages = kmalloc_array(pagecount, sizeof(*buffer->pages), GFP_KERNEL);
-   337		if (!buffer->pages) {
-   338			ret = -ENOMEM;
-   339			goto free_cma;
-   340		}
-   341	
-   342		for (pg = 0; pg < pagecount; pg++)
-   343			buffer->pages[pg] = &cma_pages[pg];
-   344	
-   345		buffer->cma_pages = cma_pages;
-   346		buffer->heap = cma_heap;
-   347		buffer->pagecount = pagecount;
-   348	
-   349		/* create the dmabuf */
-   350		exp_info.exp_name = dma_heap_get_name(heap);
-   351		exp_info.ops = &cma_heap_buf_ops;
-   352		exp_info.size = buffer->len;
-   353		exp_info.flags = fd_flags;
-   354		exp_info.priv = buffer;
-   355		dmabuf = dma_buf_export(&exp_info);
-   356		if (IS_ERR(dmabuf)) {
-   357			ret = PTR_ERR(dmabuf);
-   358			goto free_pages;
-   359		}
-   360		return dmabuf;
-   361	
-   362	free_pages:
-   363		kfree(buffer->pages);
-   364	free_cma:
-   365		cma_release(cma_heap->cma, cma_pages, pagecount);
-   366	free_buffer:
-   367		kfree(buffer);
-   368	
-   369		return ERR_PTR(ret);
-   370	}
-   371	
-   372	static const struct dma_heap_ops cma_heap_ops = {
-   373		.allocate = cma_heap_allocate,
-   374	};
-   375	
-   376	static int __add_cma_heap(struct cma *cma, void *data)
-   377	{
-   378		struct cma_heap *cma_heap;
-   379		struct dma_heap_export_info exp_info;
-   380	
-   381		cma_heap = kzalloc(sizeof(*cma_heap), GFP_KERNEL);
-   382		if (!cma_heap)
-   383			return -ENOMEM;
-   384		cma_heap->cma = cma;
-   385	
- > 386		if (of_memory_get_ecc_correction_bits() > 0)
-   387			cma_heap->ecc_enabled = true;
-   388	
-   389		exp_info.name = cma_get_name(cma);
-   390		exp_info.ops = &cma_heap_ops;
-   391		exp_info.priv = cma_heap;
-   392	
-   393		cma_heap->heap = dma_heap_add(&exp_info);
-   394		if (IS_ERR(cma_heap->heap)) {
-   395			int ret = PTR_ERR(cma_heap->heap);
-   396	
-   397			kfree(cma_heap);
-   398			return ret;
-   399		}
-   400	
-   401		return 0;
-   402	}
-   403	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVGh1LCBNYXkgMTYsIDIwMjQgYXQgMzo1NuKAr0FNIERhbmllbCBWZXR0ZXIgPGRhbmllbEBm
+ZndsbC5jaD4gd3JvdGU6DQo+IE9uIFdlZCwgTWF5IDE1LCAyMDI0IGF0IDExOjQyOjU4QU0gLTA3
+MDAsIEpvaG4gU3R1bHR6IHdyb3RlOg0KPiA+IEJ1dCBpdCBtYWtlcyBtZSBhIGxpdHRsZSBuZXJ2
+b3VzIHRvIGFkZCBhIG5ldyBnZW5lcmljIGFsbG9jYXRpb24gZmxhZw0KPiA+IGZvciBhIGZlYXR1
+cmUgbW9zdCBoYXJkd2FyZSBkb2Vzbid0IHN1cHBvcnQgKHlldCwgYXQgbGVhc3QpLiBTbyBpdCdz
+DQo+ID4gaGFyZCB0byB3ZWlnaCBob3cgY29tbW9uIHRoZSBhY3R1YWwgdXNhZ2Ugd2lsbCBiZSBh
+Y3Jvc3MgYWxsIHRoZQ0KPiA+IGhlYXBzLg0KPiA+DQo+ID4gSSBhcG9sb2dpemUgYXMgbXkgd29y
+cnkgaXMgbW9zdGx5IGJvcm4gb3V0IG9mIHNlZWluZyB2ZW5kb3JzIHJlYWxseQ0KPiA+IHB1c2gg
+b3BhcXVlIGZlYXR1cmUgZmxhZ3MgaW4gdGhlaXIgb2xkIGlvbiBoZWFwcywgc28gaW4gcHJvdmlk
+aW5nIGENCj4gPiBmbGFncyBhcmd1bWVudCwgaXQgd2FzIG1vc3RseSBpbnRlbmRlZCBhcyBhbiBl
+c2NhcGUgaGF0Y2ggZm9yDQo+ID4gb2J2aW91c2x5IGNvbW1vbiBhdHRyaWJ1dGVzLiBTbyBoYXZp
+bmcgdGhlIGZpcnN0IGJlIHNvbWV0aGluZyB0aGF0DQo+ID4gc2VlbXMgcmVhc29uYWJsZSwgYnV0
+IGlzbid0IGFjdHVhbGx5IHRoYXQgY29tbW9uIG1ha2VzIG1lIGZyZXQgc29tZS4NCj4gPg0KPiA+
+IFNvIGFnYWluLCBub3QgYW4gb2JqZWN0aW9uLCBqdXN0IHNvbWV0aGluZyBmb3IgZm9sa3MgdG8g
+c3RldyBvbiB0bw0KPiA+IG1ha2Ugc3VyZSB0aGlzIGlzIHJlYWxseSB0aGUgcmlnaHQgYXBwcm9h
+Y2guDQo+DQo+IEFub3RoZXIgZ29vZCByZWFzb24gdG8gZ28gd2l0aCBmdWxsIGhlYXAgbmFtZXMg
+aW5zdGVhZCBvZiBvcGFxdWUgZmxhZ3Mgb24NCj4gZXhpc3RpbmcgaGVhcHMgaXMgdGhhdCB3aXRo
+IHRoZSBmb3JtZXIgd2UgY2FuIHVzZSBzeW1saW5rcyBpbiBzeXNmcyB0bw0KPiBzcGVjaWZ5IGhl
+YXBzLCB3aXRoIHRoZSBsYXR0ZXIgd2UgbmVlZCBhIG5ldyBpZGVhLiBXZSBoYXZlbid0IHlldCBn
+b3R0ZW4NCj4gYXJvdW5kIHRvIGltcGxlbWVudCB0aGlzIGFueXdoZXJlLCBidXQgaXQncyBiZWVu
+IGluIHRoZSBkbWEtYnVmL2hlYXAgdG9kbw0KPiBzaW5jZSBmb3JldmVyLCBhbmQgSSBsaWtlIGl0
+IGFzIGEgZGVzaWduIGFwcHJvYWNoLiBTbyB3b3VsZCBiZSBhIGdvb2QgaWRlYQ0KPiB0byBub3Qg
+dG9zcyBpdC4gV2l0aCB0aGF0IGRpc3BsYXkgd291bGQgaGF2ZSBzeW1saW5rcyB0byBjbWEtZWNj
+IGFuZCBjbWEsDQo+IGFuZCByZW5kZXJpbmcgbWF5YmUgY21hLWVjYywgc2htZW0sIGNtYSBoZWFw
+cyAoaW4gcHJpb3JpdHkgb3JkZXIpIGZvciBhDQo+IFNvQyB3aGVyZSB0aGUgZGlzcGxheSBuZWVk
+cyBjb250aWcgbWVtb3J5IGZvciBzY2Fub3V0Lg0KDQpTbyBpbmRlZWQgdGhhdCBpcyBhIGdvb2Qg
+cG9pbnQgdG8ga2VlcCBpbiBtaW5kLCBidXQgSSBhbHNvIHRoaW5rIGl0DQptaWdodCByZS1pbmZv
+cmNlIHRoZSBjaG9pY2Ugb2YgaGF2aW5nIEVDQyBhcyBhIGZsYWcgaGVyZS4NCg0KU2luY2UgbXkg
+dW5kZXJzdGFuZGluZyBvZiB0aGUgc3lzZnMgc3ltbGlua3MgdG8gaGVhcHMgaWRlYSBpcyBhYm91
+dA0KYmVpbmcgYWJsZSB0byBmaWd1cmUgb3V0IGEgY29tbW9uIGhlYXAgZnJvbSBhIGNvbGxlY3Rp
+b24gb2YgZGV2aWNlcywNCml0J3MgcmVhbGx5IGFib3V0IHRoZSBhYmlsaXR5IGZvciB0aGUgZHJp
+dmVyIHRvIGFjY2VzcyB0aGUgdHlwZSBvZg0KbWVtb3J5LiBJZiBFQ0MgaXMganVzdCBhbiBhdHRy
+aWJ1dGUgb2YgdGhlIHR5cGUgb2YgbWVtb3J5IChhcyBpbiB0aGlzDQpwYXRjaCBzZXJpZXMpLCBp
+dCBiZWluZyBvbiBvciBvZmYgd29uJ3QgbmVjZXNzYXJpbHkgYWZmZWN0DQpjb21wYXRpYmlsaXR5
+IG9mIHRoZSBidWZmZXIgd2l0aCB0aGUgZGV2aWNlLiAgU2ltaWxhcmx5ICJ1bmNhY2hlZCINCnNl
+ZW1zIG1vcmUgb2YgYW4gYXR0cmlidXRlIG9mIG1lbW9yeSB0eXBlIGFuZCBub3QgYSB0eXBlIGl0
+c2VsZi4NCkhhcmR3YXJlIHRoYXQgY2FuIGFjY2VzcyBub24tY29udGlndW91cyAic3lzdGVtIiBi
+dWZmZXJzIGNhbiBhY2Nlc3MNCnVuY2FjaGVkIHN5c3RlbSBidWZmZXJzLg0KDQp0aGFua3MNCi1q
+b2huDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5h
+cm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcK
+VG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3Rz
+LmxpbmFyby5vcmcK
