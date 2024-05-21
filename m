@@ -2,215 +2,179 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59B418CAD5A
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 May 2024 13:28:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D2538CADDE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 May 2024 14:06:38 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0841544889
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 May 2024 11:28:36 +0000 (UTC)
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
-	by lists.linaro.org (Postfix) with ESMTPS id 9E9153F4BA
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 May 2024 11:28:29 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 316293F952
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 21 May 2024 12:06:37 +0000 (UTC)
+Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+	by lists.linaro.org (Postfix) with ESMTPS id 8271E3F441
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 21 May 2024 12:06:25 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=kSy0RTCN;
-	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.128.49 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-420104e5336so19476715e9.1
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 21 May 2024 04:28:29 -0700 (PDT)
+	dkim=pass header.d=ffwll.ch header.s=google header.b=RWTHatQr;
+	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.208.42) smtp.mailfrom=daniel@ffwll.ch;
+	dmarc=none
+Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-574fd0306d0so1340712a12.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 21 May 2024 05:06:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1716290908; x=1716895708; darn=lists.linaro.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=QCvn53QZqHKbd8wXZQruum5PyX2Xyujq+z5EaypRXU8=;
-        b=kSy0RTCNPnZtIbZiE9/4Jm/M1pP3zqjXrxOq5wFwPCzHpIX3PRYprzPVarmRRKK/V2
-         WIGVtxtIpsmCSd9TFsE41vkfFkNn457DVn3PrnNcHnsEbSHB1zf5b5o92pC562H7aFcT
-         vurf4yfgrmdJNK+e//THGRrjbY+tGYlahYcVKBBivSjhLP4hGntr4vpauzkwtM1HFtrj
-         t1tLbHmpymfnQANb5VqSt1nW8zBRJe/VHWS8kJ9W9vLgzYmHa95rchw4Y+2swgfF7kD2
-         zPZi6WBJo6myGK7jnOSJ3iCCTVNN7fkdkz11kIB3UM7adUfsNFMdFmmhgrDlyYu6d3gB
-         ABKw==
+        d=ffwll.ch; s=google; t=1716293184; x=1716897984; darn=lists.linaro.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:mail-followup-to:message-id:subject:cc:to
+         :from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=mJYdzH0pAsynv7wKO0qk2byjZJ72J8K30m6YCIFuLT4=;
+        b=RWTHatQrPJv/SBSpeVpxu0eOTw1+Bi1aeK9h0Cjd0+GP16r+7/VG3tPa4FAnDQHCRm
+         js61VaGr273qfQmoCQWNnUoVJeJ86y9AK5iJRfBEid3yxxuKpVYcttWtvheJd79UY2+f
+         3JBS759bPyjiBpnsoaQP7ZIEkzqnsTzaaUhDo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1716290908; x=1716895708;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=QCvn53QZqHKbd8wXZQruum5PyX2Xyujq+z5EaypRXU8=;
-        b=vTD933190AYLdjJI32uYSJSjnuO5ulkshkQSwxE8cKuHB69OtsmrAZ7HpxdZvOXyCz
-         n4Cs5miaHt8RCl7OrwSjXVfWmINzT+B49Y6yeg/b4TsYEdbHfuE7W9QRlqO+qSHImaxA
-         8NsP4Z55zbiDQVj8lZRGZinxjWF95MKEUE7nzhBAcmgGzAmGJJZTWXODvqiRuIZRvHCi
-         GKubQFA6fIXrPd3rYKnXsf40qYHFTr03u42rMvpMvypgfMTZiSCV2P/X6YmeY0RrNT+T
-         3LDIrKMQadc0NVBXzkdplson86pGj21wBbeNzASmYPwaNqP0YXtWNyawzv3JJXAnqGzE
-         JfuA==
-X-Forwarded-Encrypted: i=1; AJvYcCVoBb0eTF5lPQ/TKTdz0wWXLj2fj3fmpsUZgdPiKBAqAQT6rs764BKyIAz00ZOxm04TzgfYLfGLmpvqQ4aJc5XfgjGdv4OsrC+Azba/84s=
-X-Gm-Message-State: AOJu0YwbuN7cnrzcvLKhb/j3f/DyJ69zoOrcnqBuD4+joF5YqidiNgn9
-	zNr+KQ2bzV4P7a/dOffzRjmrp1De1cjY+5zBS0w7xiY35QPpH17p
-X-Google-Smtp-Source: AGHT+IFpeGZ9iCxLuTlFb+Vd1m76hVZ2lgoagmtHznB8dVhlERYFGSRgpPrkzrTynhee6VbDMgb7Rw==
-X-Received: by 2002:a05:600c:4f49:b0:420:12df:1f7e with SMTP id 5b1f17b1804b1-420e19e46d4mr76021715e9.9.1716290908433;
-        Tue, 21 May 2024 04:28:28 -0700 (PDT)
-Received: from [10.254.108.81] (munvpn.amd.com. [165.204.72.6])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-41fccbe8f8asm460922885e9.10.2024.05.21.04.28.26
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 21 May 2024 04:28:27 -0700 (PDT)
-Message-ID: <473b5f9b-da6d-425b-93c0-5bb6bb49a9bc@gmail.com>
-Date: Tue, 21 May 2024 13:28:25 +0200
+        d=1e100.net; s=20230601; t=1716293184; x=1716897984;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:mail-followup-to:message-id:subject:cc:to
+         :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=mJYdzH0pAsynv7wKO0qk2byjZJ72J8K30m6YCIFuLT4=;
+        b=jd02RVeC1Qj2uuUxZEQ6G3rVa8cAIMsSiILD+w72Wapf2uR+UDugLPajouIgq2YLiD
+         2FSGNsTsabLLMRBOdMaPQSj0SFqsH2ghi54FqEqYNOmZEr/POkSojyAFi8x1DushP6Dk
+         QL4Km6N+9eBBrI6MEcVlbQX7Q9emp6UlXcalNUidVD9LwxqEgieIh6JavIxsL77w0GIU
+         5YH1d2ExRtTAC+53uFmf92E5Fy2bJfCPRRb2JhgrxFSQcuFjEQ+A9mXnHe6jjKe+Zgih
+         CzjBzMn/44Ze7VNBHW2ZgQbu1yrTCma3COiDSSFMBrVXsdLR9c9D3CivZ/rRYuflSIwz
+         Wl4g==
+X-Forwarded-Encrypted: i=1; AJvYcCUgrSkd/x05yC64zkO250vicXivcaaVWwrKojv/JABQGu2Hq6WiocTogwvpR6AoLihe+8NuUO5hGj7MYwA+RwT5Vf74xkEFrgvwm5/ozHw=
+X-Gm-Message-State: AOJu0YykWGRbxvWdENkXHko+NWdY3+s1MuLYGGW2NBAEApjwQY8c1htF
+	Sz1GWCuMVmTLvOGcnSYh+Qw+3wgemIWNWixBCI+Si5QxQi+xWsMTbn9SZDBjxRY=
+X-Google-Smtp-Source: AGHT+IGfWNF191WRUe0dOT+wxuFScDgLI5Opi7mIPWI0KL0XH3aj2MmoNzb6yDiPo3DHO/ZyoC6pQg==
+X-Received: by 2002:a17:906:3553:b0:a5a:893a:ad3d with SMTP id a640c23a62f3a-a5a893aae74mr1306089766b.7.1716293184252;
+        Tue, 21 May 2024 05:06:24 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a5a179c7d14sm1605454566b.130.2024.05.21.05.06.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 21 May 2024 05:06:21 -0700 (PDT)
+Date: Tue, 21 May 2024 14:06:19 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: John Stultz <jstultz@google.com>
+Message-ID: <ZkyOOwpM57HIiO3v@phenom.ffwll.local>
+Mail-Followup-To: John Stultz <jstultz@google.com>,
+	Maxime Ripard <mripard@kernel.org>, Rob Herring <robh@kernel.org>,
+	Saravana Kannan <saravanak@google.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+	Brian Starkey <Brian.Starkey@arm.com>,
+	"T.J. Mercier" <tjmercier@google.com>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org
+References: <20240515-dma-buf-ecc-heap-v1-0-54cbbd049511@kernel.org>
+ <CANDhNCoOKwtpstFE2VDcUvzdXUWkZ-Zx+fz6xrdPWTyciVXMXQ@mail.gmail.com>
+ <ZkXmWwmdPsqAo7VU@phenom.ffwll.local>
+ <CANDhNCo5hSC-sLwdkBi3e-Ja-MzdqcGGbn-4G3XNYwCzZUwscw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
- Sumit Semwal <sumit.semwal@linaro.org>, Gustavo Padovan
- <gustavo@padovan.org>, =?UTF-8?Q?Christian_K=C3=B6nig?=
- <christian.koenig@amd.com>, Kees Cook <keescook@chromium.org>,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>
-References: <d3204a5b4776553455c2cfb1def72f1dae0dba25.1716054403.git.christophe.jaillet@wanadoo.fr>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <d3204a5b4776553455c2cfb1def72f1dae0dba25.1716054403.git.christophe.jaillet@wanadoo.fr>
+Content-Disposition: inline
+In-Reply-To: <CANDhNCo5hSC-sLwdkBi3e-Ja-MzdqcGGbn-4G3XNYwCzZUwscw@mail.gmail.com>
+X-Operating-System: Linux phenom 6.8.9-amd64 
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 9E9153F4BA
+X-Rspamd-Queue-Id: 8271E3F441
 X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.99 / 15.00];
+X-Spamd-Result: default: False [-3.30 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
-	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[];
-	FREEMAIL_TO(0.00)[wanadoo.fr,linaro.org,padovan.org,amd.com,chromium.org,kernel.org];
-	TO_DN_SOME(0.00)[];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[12];
-	MIME_TRACE(0.00)[0:+];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.49:from];
-	FREEMAIL_ENVFROM(0.00)[gmail.com]
-Message-ID-Hash: EWQ3UFAJA5MOZ47U4H5X5DWYY32UTOAZ
-X-Message-ID-Hash: EWQ3UFAJA5MOZ47U4H5X5DWYY32UTOAZ
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-hardening@vger.kernel.org
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.42:from];
+	ARC_NA(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	MIME_TRACE(0.00)[0:+];
+	R_SPF_NA(0.00)[no SPF record];
+	DMARC_NA(0.00)[ffwll.ch];
+	NEURAL_HAM(-0.00)[-1.000];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[ffwll.ch:+]
+Message-ID-Hash: M4VY6ZGS3UGMOINDNNNIKOUNBWSIMSCR
+X-Message-ID-Hash: M4VY6ZGS3UGMOINDNNNIKOUNBWSIMSCR
+X-MailFrom: daniel@ffwll.ch
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Maxime Ripard <mripard@kernel.org>, Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf/fence-array: Add flex array to struct dma_fence_array
+Subject: [Linaro-mm-sig] Re: [PATCH 0/8] dma-buf: heaps: Support carved-out heaps and ECC related-flags
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EWQ3UFAJA5MOZ47U4H5X5DWYY32UTOAZ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/M4VY6ZGS3UGMOINDNNNIKOUNBWSIMSCR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Am 18.05.24 um 19:47 schrieb Christophe JAILLET:
-> This is an effort to get rid of all multiplications from allocation
-> functions in order to prevent integer overflows [1][2].
->
-> The "struct dma_fence_array" can be refactored to add a flex array in order
-> to have the "callback structures allocated behind the array" be more
-> explicit.
->
-> Do so:
->     - makes the code more readable and safer.
->     - allows using __counted_by() for additional checks
->     - avoids some pointer arithmetic in dma_fence_array_enable_signaling()
->
-> Link: https://www.kernel.org/doc/html/latest/process/deprecated.html#open-coded-arithmetic-in-allocator-arguments [1]
-> Link: https://github.com/KSPP/linux/issues/160 [2]
-> Signed-off-by: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
-> ---
-> Compile tested only.
->
-> Also, I don't think that 'cb' is a great name and the associated kernel-doc
-> description could certainly be improved.
-> Any proposal welcomed :)
-
-Ah, yes. That was also on my TODO list for a very long time.
-
-> ---
->   drivers/dma-buf/dma-fence-array.c | 10 ++++------
->   include/linux/dma-fence-array.h   |  3 +++
->   2 files changed, 7 insertions(+), 6 deletions(-)
->
-> diff --git a/drivers/dma-buf/dma-fence-array.c b/drivers/dma-buf/dma-fence-array.c
-> index 9b3ce8948351..9c55afaca607 100644
-> --- a/drivers/dma-buf/dma-fence-array.c
-> +++ b/drivers/dma-buf/dma-fence-array.c
-> @@ -70,7 +70,7 @@ static void dma_fence_array_cb_func(struct dma_fence *f,
->   static bool dma_fence_array_enable_signaling(struct dma_fence *fence)
->   {
->   	struct dma_fence_array *array = to_dma_fence_array(fence);
-> -	struct dma_fence_array_cb *cb = (void *)(&array[1]);
-> +	struct dma_fence_array_cb *cb = array->cb;
->   	unsigned i;
->   
->   	for (i = 0; i < array->num_fences; ++i) {
-> @@ -168,22 +168,20 @@ struct dma_fence_array *dma_fence_array_create(int num_fences,
->   					       bool signal_on_any)
->   {
->   	struct dma_fence_array *array;
-> -	size_t size = sizeof(*array);
->   
->   	WARN_ON(!num_fences || !fences);
->   
-> -	/* Allocate the callback structures behind the array. */
-> -	size += num_fences * sizeof(struct dma_fence_array_cb);
-> -	array = kzalloc(size, GFP_KERNEL);
-> +	array = kzalloc(struct_size(array, cb, num_fences), GFP_KERNEL);
->   	if (!array)
->   		return NULL;
->   
-> +	array->num_fences = num_fences;
-> +
->   	spin_lock_init(&array->lock);
->   	dma_fence_init(&array->base, &dma_fence_array_ops, &array->lock,
->   		       context, seqno);
->   	init_irq_work(&array->work, irq_dma_fence_array_work);
->   
-> -	array->num_fences = num_fences;
->   	atomic_set(&array->num_pending, signal_on_any ? 1 : num_fences);
->   	array->fences = fences;
->   
-> diff --git a/include/linux/dma-fence-array.h b/include/linux/dma-fence-array.h
-> index ec7f25def392..a793f9d5c73b 100644
-> --- a/include/linux/dma-fence-array.h
-> +++ b/include/linux/dma-fence-array.h
-> @@ -33,6 +33,7 @@ struct dma_fence_array_cb {
->    * @num_pending: fences in the array still pending
->    * @fences: array of the fences
->    * @work: internal irq_work function
-> + * @cb: array of callback helpers
->    */
->   struct dma_fence_array {
->   	struct dma_fence base;
-> @@ -43,6 +44,8 @@ struct dma_fence_array {
->   	struct dma_fence **fences;
->   
->   	struct irq_work work;
-> +
-> +	struct dma_fence_array_cb cb[] __counted_by(num_fences);
-
-Please name that callbacks, apart from that looks good to me.
-
-Regards,
-Christian.
-
-
->   };
->   
->   /**
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVGh1LCBNYXkgMTYsIDIwMjQgYXQgMDk6NTE6MzVBTSAtMDcwMCwgSm9obiBTdHVsdHogd3Jv
+dGU6DQo+IE9uIFRodSwgTWF5IDE2LCAyMDI0IGF0IDM6NTbigK9BTSBEYW5pZWwgVmV0dGVyIDxk
+YW5pZWxAZmZ3bGwuY2g+IHdyb3RlOg0KPiA+IE9uIFdlZCwgTWF5IDE1LCAyMDI0IGF0IDExOjQy
+OjU4QU0gLTA3MDAsIEpvaG4gU3R1bHR6IHdyb3RlOg0KPiA+ID4gQnV0IGl0IG1ha2VzIG1lIGEg
+bGl0dGxlIG5lcnZvdXMgdG8gYWRkIGEgbmV3IGdlbmVyaWMgYWxsb2NhdGlvbiBmbGFnDQo+ID4g
+PiBmb3IgYSBmZWF0dXJlIG1vc3QgaGFyZHdhcmUgZG9lc24ndCBzdXBwb3J0ICh5ZXQsIGF0IGxl
+YXN0KS4gU28gaXQncw0KPiA+ID4gaGFyZCB0byB3ZWlnaCBob3cgY29tbW9uIHRoZSBhY3R1YWwg
+dXNhZ2Ugd2lsbCBiZSBhY3Jvc3MgYWxsIHRoZQ0KPiA+ID4gaGVhcHMuDQo+ID4gPg0KPiA+ID4g
+SSBhcG9sb2dpemUgYXMgbXkgd29ycnkgaXMgbW9zdGx5IGJvcm4gb3V0IG9mIHNlZWluZyB2ZW5k
+b3JzIHJlYWxseQ0KPiA+ID4gcHVzaCBvcGFxdWUgZmVhdHVyZSBmbGFncyBpbiB0aGVpciBvbGQg
+aW9uIGhlYXBzLCBzbyBpbiBwcm92aWRpbmcgYQ0KPiA+ID4gZmxhZ3MgYXJndW1lbnQsIGl0IHdh
+cyBtb3N0bHkgaW50ZW5kZWQgYXMgYW4gZXNjYXBlIGhhdGNoIGZvcg0KPiA+ID4gb2J2aW91c2x5
+IGNvbW1vbiBhdHRyaWJ1dGVzLiBTbyBoYXZpbmcgdGhlIGZpcnN0IGJlIHNvbWV0aGluZyB0aGF0
+DQo+ID4gPiBzZWVtcyByZWFzb25hYmxlLCBidXQgaXNuJ3QgYWN0dWFsbHkgdGhhdCBjb21tb24g
+bWFrZXMgbWUgZnJldCBzb21lLg0KPiA+ID4NCj4gPiA+IFNvIGFnYWluLCBub3QgYW4gb2JqZWN0
+aW9uLCBqdXN0IHNvbWV0aGluZyBmb3IgZm9sa3MgdG8gc3RldyBvbiB0bw0KPiA+ID4gbWFrZSBz
+dXJlIHRoaXMgaXMgcmVhbGx5IHRoZSByaWdodCBhcHByb2FjaC4NCj4gPg0KPiA+IEFub3RoZXIg
+Z29vZCByZWFzb24gdG8gZ28gd2l0aCBmdWxsIGhlYXAgbmFtZXMgaW5zdGVhZCBvZiBvcGFxdWUg
+ZmxhZ3Mgb24NCj4gPiBleGlzdGluZyBoZWFwcyBpcyB0aGF0IHdpdGggdGhlIGZvcm1lciB3ZSBj
+YW4gdXNlIHN5bWxpbmtzIGluIHN5c2ZzIHRvDQo+ID4gc3BlY2lmeSBoZWFwcywgd2l0aCB0aGUg
+bGF0dGVyIHdlIG5lZWQgYSBuZXcgaWRlYS4gV2UgaGF2ZW4ndCB5ZXQgZ290dGVuDQo+ID4gYXJv
+dW5kIHRvIGltcGxlbWVudCB0aGlzIGFueXdoZXJlLCBidXQgaXQncyBiZWVuIGluIHRoZSBkbWEt
+YnVmL2hlYXAgdG9kbw0KPiA+IHNpbmNlIGZvcmV2ZXIsIGFuZCBJIGxpa2UgaXQgYXMgYSBkZXNp
+Z24gYXBwcm9hY2guIFNvIHdvdWxkIGJlIGEgZ29vZCBpZGVhDQo+ID4gdG8gbm90IHRvc3MgaXQu
+IFdpdGggdGhhdCBkaXNwbGF5IHdvdWxkIGhhdmUgc3ltbGlua3MgdG8gY21hLWVjYyBhbmQgY21h
+LA0KPiA+IGFuZCByZW5kZXJpbmcgbWF5YmUgY21hLWVjYywgc2htZW0sIGNtYSBoZWFwcyAoaW4g
+cHJpb3JpdHkgb3JkZXIpIGZvciBhDQo+ID4gU29DIHdoZXJlIHRoZSBkaXNwbGF5IG5lZWRzIGNv
+bnRpZyBtZW1vcnkgZm9yIHNjYW5vdXQuDQo+IA0KPiBTbyBpbmRlZWQgdGhhdCBpcyBhIGdvb2Qg
+cG9pbnQgdG8ga2VlcCBpbiBtaW5kLCBidXQgSSBhbHNvIHRoaW5rIGl0DQo+IG1pZ2h0IHJlLWlu
+Zm9yY2UgdGhlIGNob2ljZSBvZiBoYXZpbmcgRUNDIGFzIGEgZmxhZyBoZXJlLg0KPiANCj4gU2lu
+Y2UgbXkgdW5kZXJzdGFuZGluZyBvZiB0aGUgc3lzZnMgc3ltbGlua3MgdG8gaGVhcHMgaWRlYSBp
+cyBhYm91dA0KPiBiZWluZyBhYmxlIHRvIGZpZ3VyZSBvdXQgYSBjb21tb24gaGVhcCBmcm9tIGEg
+Y29sbGVjdGlvbiBvZiBkZXZpY2VzLA0KPiBpdCdzIHJlYWxseSBhYm91dCB0aGUgYWJpbGl0eSBm
+b3IgdGhlIGRyaXZlciB0byBhY2Nlc3MgdGhlIHR5cGUgb2YNCj4gbWVtb3J5LiBJZiBFQ0MgaXMg
+anVzdCBhbiBhdHRyaWJ1dGUgb2YgdGhlIHR5cGUgb2YgbWVtb3J5IChhcyBpbiB0aGlzDQo+IHBh
+dGNoIHNlcmllcyksIGl0IGJlaW5nIG9uIG9yIG9mZiB3b24ndCBuZWNlc3NhcmlseSBhZmZlY3QN
+Cj4gY29tcGF0aWJpbGl0eSBvZiB0aGUgYnVmZmVyIHdpdGggdGhlIGRldmljZS4gIFNpbWlsYXJs
+eSAidW5jYWNoZWQiDQo+IHNlZW1zIG1vcmUgb2YgYW4gYXR0cmlidXRlIG9mIG1lbW9yeSB0eXBl
+IGFuZCBub3QgYSB0eXBlIGl0c2VsZi4NCj4gSGFyZHdhcmUgdGhhdCBjYW4gYWNjZXNzIG5vbi1j
+b250aWd1b3VzICJzeXN0ZW0iIGJ1ZmZlcnMgY2FuIGFjY2Vzcw0KPiB1bmNhY2hlZCBzeXN0ZW0g
+YnVmZmVycy4NCg0KWWVhaCwgYnV0IGluIGdyYXBoaWNzIHRoZXJlJ3MgYSB3aWRlIGJhbmQgd2hl
+cmUgInNoaXQgcGVyZm9ybWFuY2UiIGlzDQpkZWZhY3RvICJub3QgdXNlYWJsZSAoYXMgaW50ZW5k
+ZWQgYXQgbGVhc3QpIi4NCg0KU28gaWYgd2UgbGltaXQgdGhlIHN5bWxpbmsgaWRlYSB0byBqdXN0
+IG1ha2luZyBzdXJlIHplcm8tY29weSBhY2Nlc3MgaXMNCnBvc3NpYmxlLCB0aGVuIHdlIG1pZ2h0
+IG5vdCBhY3R1YWxseSBzb2x2ZSB0aGUgcmVhbCB3b3JsZCBwcm9ibGVtIHdlIG5lZWQNCnRvIHNv
+bHZlLiBBbmQgc28gdGhlIHN5bWxpbmtzIGJlY29tZSBzb21ld2hhdCB1c2VsZXNzLCBhbmQgd2Ug
+bmVlZCB0bw0Kc29tZXdoZXJlIGVuY29kZSB3aGljaCBmbGFncyB5b3UgbmVlZCB0byB1c2Ugd2l0
+aCBlYWNoIHN5bWxpbmsuDQoNCkJ1dCBJIGFsc28gc2VlIHRoZSBhcmd1bWVudCB0aGF0IHRoZXJl
+J3MgYSBiaXQgYSBjb21iaW5hdG9yaWFsIGV4cGxvc2lvbg0KcG9zc2libGUuIFNvIEkgZ3Vlc3Mg
+dGhlIHF1ZXN0aW9uIGlzIHdoZXJlIHdlIHdhbnQgdG8gaGFuZGxlIGl0IC4uLg0KDQpBbHNvIHdv
+bmRlcmluZyB3aGV0aGVyIHdlIHNob3VsZCBnZXQgdGhlIHN5bWxpbmsvYWxsb2NhdG9yIGlkZWEg
+b2ZmIHRoZQ0KZ3JvdW5kIGZpcnN0LCBidXQgZ2l2ZW4gdGhhdCB0aGF0IGhhc24ndCBtb3ZlZCBp
+biBhIGRlY2FkZSBpdCBtaWdodCBiZSB0b28NCm11Y2guIEJ1dCB0aGVuIHRoZSBxdWVzdGlvbiBp
+cywgd2hhdCB1c2Vyc3BhY2UgYXJlIHdlIGdvaW5nIHRvIHVzZSBmb3IgYWxsDQp0aGVzZSBuZXcg
+aGVhcHMgKG9yIGhlYXBzIHdpdGggbmV3IGZsYWdzKT8NCg0KQ2hlZXJzLCBTaW1hDQoNCi0tIA0K
+RGFuaWVsIFZldHRlcg0KU29mdHdhcmUgRW5naW5lZXIsIEludGVsIENvcnBvcmF0aW9uDQpodHRw
+Oi8vYmxvZy5mZndsbC5jaA0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0
+cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNp
+Zy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
