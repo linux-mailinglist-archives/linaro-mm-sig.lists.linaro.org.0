@@ -2,157 +2,159 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6CC938CF235
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 26 May 2024 01:30:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7828F8CF9B0
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 May 2024 09:03:10 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 7F822447DC
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 25 May 2024 23:30:25 +0000 (UTC)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
-	by lists.linaro.org (Postfix) with ESMTPS id 9EF1A447C3
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 25 May 2024 23:29:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1A76344848
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 27 May 2024 07:03:09 +0000 (UTC)
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+	by lists.linaro.org (Postfix) with ESMTPS id A82543F38B
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 27 May 2024 07:02:58 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=mediatek.com header.s=dk header.b=M99oINRF;
-	spf=pass (lists.linaro.org: domain of jason-jh.lin@mediatek.com designates 60.244.123.138 as permitted sender) smtp.mailfrom=jason-jh.lin@mediatek.com;
-	dmarc=pass (policy=quarantine) header.from=mediatek.com
-X-UUID: a452f6a41aee11ef8c37dd7afa272265-20240526
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
-	h=Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:CC:To:From; bh=Tl2QN13jl/RXNBMTp3Wzf+yLZtDlERtwTZOrjciV6eA=;
-	b=M99oINRFyM9yICI92W0c3g6n6V1A4krihoJGlUgqEXeDep49dmgcE9n1oZdSF7slV+67OTq1Hzo5SoG2w3Y8tFGb+61GrInuRwDdVXQOg9FuaBddUB9hAd57M9EmgnceCRUxyVaPA20y/cAiL3zBCES2kUbGvg8pyLPIdOl9oNg=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.38,REQID:7915aedf-e663-40c8-a289-c5881c836dad,IP:0,U
-	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
-	release,TS:0
-X-CID-META: VersionHash:82c5f88,CLOUDID:e060cd43-4544-4d06-b2b2-d7e12813c598,B
-	ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0,EDM:-3,IP:nil,U
-	RL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES:1,
-	SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: a452f6a41aee11ef8c37dd7afa272265-20240526
-Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by mailgw01.mediatek.com
-	(envelope-from <jason-jh.lin@mediatek.com>)
-	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
-	with ESMTP id 1552233013; Sun, 26 May 2024 07:29:33 +0800
-Received: from mtkmbs13n1.mediatek.inc (172.21.101.193) by
- MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.26; Sun, 26 May 2024 07:29:31 +0800
-Received: from mtksdccf07.mediatek.inc (172.21.84.99) by
- mtkmbs13n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1118.26 via Frontend Transport; Sun, 26 May 2024 07:29:31 +0800
-From: Jason-JH.Lin <jason-jh.lin@mediatek.com>
-To: Chun-Kuang Hu <chunkuang.hu@kernel.org>, AngeloGioacchino Del Regno
-	<angelogioacchino.delregno@collabora.com>, Maxime Ripard <mripard@kernel.org>
-Date: Sun, 26 May 2024 07:29:28 +0800
-Message-ID: <20240525232928.5524-8-jason-jh.lin@mediatek.com>
-X-Mailer: git-send-email 2.18.0
-In-Reply-To: <20240525232928.5524-1-jason-jh.lin@mediatek.com>
-References: <20240525232928.5524-1-jason-jh.lin@mediatek.com>
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=NVSMDDOD;
+	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.221.48 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-3588cb76276so372919f8f.0
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 27 May 2024 00:02:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1716793378; x=1717398178; darn=lists.linaro.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=RhTDv/X2MzeaoxY9UlTupOqZ4dzoGfDZJ1jJv+dJqEs=;
+        b=NVSMDDODhqu3tkB5nI+uUTsHL1HIgx+LyMv37PTybtJws/GikeyIc9gGlIJKSSKXPS
+         JLUaMpEPTDZivdCVGm1bSq+gkKnhB6z65tSW+C+pWAwQVlpOkjhxOKo9ntRL8A7UobrR
+         gohWJTmcjXfshRK8yRS8IZamI9axw8YlGsFHpulh/VZ0ZK7wFQz2z2C9pynlerhylzPO
+         3TaLYy0D+ddU6GfmtxP4a6Pjy40zZRk60VkBOX2Uj1UYOuF319x5lWonmagQvdAxsFvD
+         qW+3lwl5IFIbwrwRWrLWuYR5O5lBrPdEzfxUfE0V7UjztdwdLlMS3pncv19tIF4ZJMxa
+         GvfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1716793378; x=1717398178;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=RhTDv/X2MzeaoxY9UlTupOqZ4dzoGfDZJ1jJv+dJqEs=;
+        b=j4KGErRK0Jf0PJ48Xc++HZYAi1JEGTIlO/u1Wycxm8/lcyVoluWFqMHzeowVAHHaf8
+         MtvQUzHBDZ5qLCy03wR14+HR6IWHHOaGeMif35MXEruhsgMu8ruQpVezak8IMhI0JWXK
+         pFwWPaecoLaXYJ/PzmMAqbFrOw4/e4dn/hGtlHZqBsbv2Yedkl+uur4Ga+llCCkehxJR
+         AL2fJ7kfQTFm6ylYtM9NbviT2N/Mems/pZAscIvys6IpWcBpQ4c/8SLtSNZgOMXA0bb+
+         UUfwBYnToS3P+L4u1CFVWWZt5Je169b/MIh2iOKxQegVej9Wi9halj0mnwUtOIQ3cbls
+         sNVA==
+X-Forwarded-Encrypted: i=1; AJvYcCXGKX6ghLqh+usgg9d06SnPqLi5qLFuYOgdli/vrQZUSMkpRGeq4Q+cqPCJtZRdA05cK1M76T8LQqTSvGCWRgH7xmpmzKISmHXnRV1a0qI=
+X-Gm-Message-State: AOJu0YwS7wlhQ6IqXIdzf2b5SbldEuTebwN+nfdnhEHOVS4GQjELoCPy
+	YKq9QyMBJ/kcklMcRUgPYxdK9rPnyehuL0s7hztF3IYk9yZHA6xg
+X-Google-Smtp-Source: AGHT+IFMEQcPgs6+ChlvQyh9qDP2U9NYMEM8C1RNoY8/vGGrII0iOFxxNC1K3BaB2DJMg89FFSCHqA==
+X-Received: by 2002:a5d:4d85:0:b0:354:ed11:a20a with SMTP id ffacd0b85a97d-354f75a0adbmr10598776f8f.29.1716793377308;
+        Mon, 27 May 2024 00:02:57 -0700 (PDT)
+Received: from [10.254.108.81] (munvpn.amd.com. [165.204.72.6])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3557a08aba8sm8089705f8f.42.2024.05.27.00.02.55
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 27 May 2024 00:02:56 -0700 (PDT)
+Message-ID: <0b04b587-77a4-4ac4-8b15-6cde0f0c5f5a@gmail.com>
+Date: Mon, 27 May 2024 09:02:54 +0200
 MIME-Version: 1.0
-X-TM-AS-Product-Ver: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-AS-Result: No-10--11.595200-8.000000
-X-TMASE-MatchedRID: XAa2d/45j8Tob/hVdrvnXjPDkSOzeDWW+eBf9ovw8I27eXIF2U7rKy+8
-	OxujShyxE/UmhJjBrzZC3mgca9yt8kttpN+KVVd9syNb+yeIRArvJY9pBzgg1P+RKQghHjkeBgH
-	mCxujQvyjmrD+IUq29hI7tf+6KnxtiBoFctaOhN8jRwcsjqWGAgrefVId6fzVCqIJhrrDy2/jZY
-	67L74Lw7o3/co+ykK6UFTYnego7LJccQ8eam5EfRRFJJyf5BJe3QfwsVk0UbtuRXh7bFKB7gRuY
-	qpRzYwt5tYzjYMxVNFdPwsV1FdNCbaRD1c+EJMdvuvB6gAgryg=
-X-TM-AS-User-Approved-Sender: No
-X-TM-AS-User-Blocked-Sender: No
-X-TMASE-Result: 10--11.595200-8.000000
-X-TMASE-Version: SMEX-14.0.0.3152-9.1.1006-23728.005
-X-TM-SNTS-SMTP: 
-	9AEA3DB8CB88483491FE005922C30F1CE0AE72AEC367029CE1464088C652F4422000:8
-X-MTK: N
+User-Agent: Mozilla Thunderbird
+To: Tetsuo Handa <penguin-kernel@I-love.SAKURA.ne.jp>,
+ syzbot <syzbot+a225ee3df7e7f9372dbe@syzkaller.appspotmail.com>,
+ syzkaller-bugs@googlegroups.com, Sumit Semwal <sumit.semwal@linaro.org>,
+ Gustavo Padovan <gustavo@padovan.org>,
+ Christian Konig <christian.koenig@amd.com>, Sean Paul
+ <seanpaul@chromium.org>, Chris Wilson <chris@chris-wilson.co.uk>
+References: <0000000000000946190610bf7bd5@google.com>
+ <c2e46020-aaa6-4e06-bf73-f05823f913f0@I-love.SAKURA.ne.jp>
+ <8980975d-87db-4d57-9e23-4fb7fbb62e7d@gmail.com>
+ <0204a827-ca88-4cb6-839b-f4a637bcbf71@I-love.SAKURA.ne.jp>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
+In-Reply-To: <0204a827-ca88-4cb6-839b-f4a637bcbf71@I-love.SAKURA.ne.jp>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Spam-Level: *
-X-Rspamd-Queue-Id: 9EF1A447C3
-X-Spamd-Bar: +
-X-Spamd-Result: default: False [1.00 / 15.00];
+X-Rspamd-Queue-Id: A82543F38B
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.49 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	HFILTER_HOSTNAME_UNKNOWN(2.50)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[mediatek.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:60.244.123.128/27:c];
-	R_DKIM_ALLOW(-0.20)[mediatek.com:s=dk];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	MIME_GOOD(-0.10)[text/plain];
-	TAGGED_RCPT(0.00)[];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[20];
-	ASN(0.00)[asn:24154, ipnet:60.244.123.0/24, country:TW];
+	XM_UA_NO_VERSION(0.01)[];
 	MIME_TRACE(0.00)[0:+];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_THREE(0.00)[3];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[gmail.com,ffwll.ch,vger.kernel.org,lists.infradead.org,lists.freedesktop.org,lists.linaro.org,mediatek.com,google.com];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	ARC_NA(0.00)[];
+	TAGGED_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	DNSWL_BLOCKED(0.00)[60.244.123.138:from];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[mediatek.com:+]
-Message-ID-Hash: NGG3S4N37RER7OR6IWWQXCIW3FA4QBBC
-X-Message-ID-Hash: NGG3S4N37RER7OR6IWWQXCIW3FA4QBBC
-X-MailFrom: jason-jh.lin@mediatek.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Daniel Vetter <daniel@ffwll.ch>, Matthias Brugger <matthias.bgg@gmail.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, Jason-ch Chen <jason-ch.chen@mediatek.com>, "Jason-JH . Lin" <jason-jh.lin@mediatek.com>, Singo Chang <singo.chang@mediatek.com>, Nancy Lin <nancy.lin@mediatek.com>, Shawn Sung <shawn.sung@mediatek.com>, Project_Global_Chrome_Upstream_Group@mediatek.com, Jeffrey Kardatzke <jkardatzke@google.com>
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[a225ee3df7e7f9372dbe];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.221.48:from];
+	FREEMAIL_ENVFROM(0.00)[gmail.com]
+Message-ID-Hash: 7OQK73UIDJMBFOXBKXTKKIOSTC6G5M4L
+X-Message-ID-Hash: 7OQK73UIDJMBFOXBKXTKKIOSTC6G5M4L
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, dri-devel@lists.freedesktop.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v6 7/7] drm/mediatek: Add cmdq_insert_backup_cookie before secure pkt finalize
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf/sw-sync: don't enable IRQ from sync_print_obj()
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NGG3S4N37RER7OR6IWWQXCIW3FA4QBBC/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/7OQK73UIDJMBFOXBKXTKKIOSTC6G5M4L/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-Add cmdq_insert_backup_cookie to append some commands before EOC:
-1. Get GCE HW thread execute count from the GCE HW register.
-2. Add 1 to the execute count and then store into a shared memory.
-3. Set a software event siganl as secure irq to GCE HW.
-
-Since the value of execute count + 1 is stored in a shared memory,
-CMDQ driver in the normal world can use it to handle task done in irq
-handler and CMDQ driver in the secure world will use it to schedule
-the task slot for each secure thread.
-
-Signed-off-by: Jason-JH.Lin <jason-jh.lin@mediatek.com>
-Signed-off-by: Hsiao Chien Sung <shawn.sung@mediatek.com>
----
- drivers/gpu/drm/mediatek/mtk_crtc.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/drivers/gpu/drm/mediatek/mtk_crtc.c b/drivers/gpu/drm/mediatek/mtk_crtc.c
-index 59f6263ae806..0df9bf695f65 100644
---- a/drivers/gpu/drm/mediatek/mtk_crtc.c
-+++ b/drivers/gpu/drm/mediatek/mtk_crtc.c
-@@ -178,6 +178,7 @@ void mtk_crtc_disable_secure_state(struct drm_crtc *crtc)
- 
- 	cmdq_sec_pkt_set_data(&mtk_crtc->sec_cmdq_handle, sec_scn);
- 
-+	cmdq_sec_insert_backup_cookie(&mtk_crtc->sec_cmdq_handle);
- 	cmdq_pkt_finalize(&mtk_crtc->sec_cmdq_handle);
- 	dma_sync_single_for_device(mtk_crtc->sec_cmdq_client.chan->mbox->dev,
- 				   mtk_crtc->sec_cmdq_handle.pa_base,
-@@ -795,6 +796,8 @@ static void mtk_crtc_update_config(struct mtk_crtc *mtk_crtc, bool needs_vblank)
- 		cmdq_pkt_clear_event(cmdq_handle, mtk_crtc->cmdq_event);
- 		cmdq_pkt_wfe(cmdq_handle, mtk_crtc->cmdq_event, false);
- 		mtk_crtc_ddp_config(crtc, cmdq_handle);
-+		if (cmdq_handle->sec_data)
-+			cmdq_sec_insert_backup_cookie(cmdq_handle);
- 		cmdq_pkt_finalize(cmdq_handle);
- 		dma_sync_single_for_device(cmdq_client.chan->mbox->dev,
- 					   cmdq_handle->pa_base,
--- 
-2.18.0
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+QW0gMjQuMDUuMjQgdW0gMTU6MjYgc2NocmllYiBUZXRzdW8gSGFuZGE6DQo+IE9uIDIwMjQvMDUv
+MDcgMjI6MDksIENocmlzdGlhbiBLw7ZuaWcgd3JvdGU6DQo+PiBBbSAwNS4wNS4yNCB1bSAxNjow
+OCBzY2hyaWViIFRldHN1byBIYW5kYToNCj4+PiBTaW5jZSBjb21taXQgYTZhYThmY2E0ZDc5ICgi
+ZG1hLWJ1Zi9zdy1zeW5jOiBSZWR1Y2UgaXJxc2F2ZS9pcnFyZXN0b3JlIGZyb20NCj4+PiBrbm93
+biBjb250ZXh0IikgYnkgZXJyb3IgcmVwbGFjZWQgc3Bpbl91bmxvY2tfaXJxcmVzdG9yZSgpIHdp
+dGgNCj4+PiBzcGluX3VubG9ja19pcnEoKSBmb3IgYm90aCBzeW5jX2RlYnVnZnNfc2hvdygpIGFu
+ZCBzeW5jX3ByaW50X29iaigpIGRlc3BpdGUNCj4+PiBzeW5jX3ByaW50X29iaigpIGlzIGNhbGxl
+ZCBmcm9tIHN5bmNfZGVidWdmc19zaG93KCksIGxvY2tkZXAgY29tcGxhaW5zDQo+Pj4gaW5jb25z
+aXN0ZW50IGxvY2sgc3RhdGUgd2FybmluZy4NCj4+Pg0KPj4+IFVzZSBwbGFpbiBzcGluX3tsb2Nr
+LHVubG9ja30oKSBmb3Igc3luY19wcmludF9vYmooKSwgZm9yDQo+Pj4gc3luY19kZWJ1Z2ZzX3No
+b3coKSBpcyBhbHJlYWR5IHVzaW5nIHNwaW5fe2xvY2ssdW5sb2NrfV9pcnEoKS4NCj4+Pg0KPj4+
+IFJlcG9ydGVkLWJ5OiBzeXpib3QgPHN5emJvdCthMjI1ZWUzZGY3ZTdmOTM3MmRiZUBzeXprYWxs
+ZXIuYXBwc3BvdG1haWwuY29tPg0KPj4+IENsb3NlczogaHR0cHM6Ly9zeXprYWxsZXIuYXBwc3Bv
+dC5jb20vYnVnP2V4dGlkPWEyMjVlZTNkZjdlN2Y5MzcyZGJlDQo+Pj4gRml4ZXM6IGE2YWE4ZmNh
+NGQ3OSAoImRtYS1idWYvc3ctc3luYzogUmVkdWNlIGlycXNhdmUvaXJxcmVzdG9yZSBmcm9tIGtu
+b3duIGNvbnRleHQiKQ0KPj4+IFNpZ25lZC1vZmYtYnk6IFRldHN1byBIYW5kYSA8cGVuZ3Vpbi1r
+ZXJuZWxASS1sb3ZlLlNBS1VSQS5uZS5qcD4NCj4+IFJldmlld2VkLWJ5OiBDaHJpc3RpYW4gS8O2
+bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQo+IFRoYW5rIHlvdS4gV2hvIGNhbiB0YWtl
+IHRoaXMgcGF0Y2g/DQoNCkkgcHVzaGVkIGl0IHRvIGRybS1taXNjLWZpeGVzLg0KDQpUaGFua3Ms
+DQpDaHJpc3RpYW4uDQoNCj4NCj4+PiAtLS0NCj4+PiAgwqAgZHJpdmVycy9kbWEtYnVmL3N5bmNf
+ZGVidWcuYyB8IDQgKystLQ0KPj4+ICDCoCAxIGZpbGUgY2hhbmdlZCwgMiBpbnNlcnRpb25zKCsp
+LCAyIGRlbGV0aW9ucygtKQ0KPj4+DQo+Pj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1hLWJ1Zi9z
+eW5jX2RlYnVnLmMgYi9kcml2ZXJzL2RtYS1idWYvc3luY19kZWJ1Zy5jDQo+Pj4gaW5kZXggMTAx
+Mzk0ZjE2OTMwLi4yMzdiY2UyMWQxZTcgMTAwNjQ0DQo+Pj4gLS0tIGEvZHJpdmVycy9kbWEtYnVm
+L3N5bmNfZGVidWcuYw0KPj4+ICsrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9zeW5jX2RlYnVnLmMNCj4+
+PiBAQCAtMTEwLDEyICsxMTAsMTIgQEAgc3RhdGljIHZvaWQgc3luY19wcmludF9vYmooc3RydWN0
+IHNlcV9maWxlICpzLCBzdHJ1Y3Qgc3luY190aW1lbGluZSAqb2JqKQ0KPj4+ICDCoCDCoMKgwqDC
+oMKgIHNlcV9wcmludGYocywgIiVzOiAlZFxuIiwgb2JqLT5uYW1lLCBvYmotPnZhbHVlKTsNCj4+
+PiAgwqAgLcKgwqDCoCBzcGluX2xvY2tfaXJxKCZvYmotPmxvY2spOw0KPj4+ICvCoMKgwqAgc3Bp
+bl9sb2NrKCZvYmotPmxvY2spOyAvKiBDYWxsZXIgYWxyZWFkeSBkaXNhYmxlZCBJUlEuICovDQo+
+Pj4gIMKgwqDCoMKgwqAgbGlzdF9mb3JfZWFjaChwb3MsICZvYmotPnB0X2xpc3QpIHsNCj4+PiAg
+wqDCoMKgwqDCoMKgwqDCoMKgIHN0cnVjdCBzeW5jX3B0ICpwdCA9IGNvbnRhaW5lcl9vZihwb3Ms
+IHN0cnVjdCBzeW5jX3B0LCBsaW5rKTsNCj4+PiAgwqDCoMKgwqDCoMKgwqDCoMKgIHN5bmNfcHJp
+bnRfZmVuY2UocywgJnB0LT5iYXNlLCBmYWxzZSk7DQo+Pj4gIMKgwqDCoMKgwqAgfQ0KPj4+IC3C
+oMKgwqAgc3Bpbl91bmxvY2tfaXJxKCZvYmotPmxvY2spOw0KPj4+ICvCoMKgwqAgc3Bpbl91bmxv
+Y2soJm9iai0+bG9jayk7DQo+Pj4gIMKgIH0NCj4+PiAgwqAgwqAgc3RhdGljIHZvaWQgc3luY19w
+cmludF9zeW5jX2ZpbGUoc3RydWN0IHNlcV9maWxlICpzLA0KDQpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAt
+LSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBl
+bWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
