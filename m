@@ -2,124 +2,156 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 050BF8D1892
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 28 May 2024 12:27:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 152198D1DC6
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 28 May 2024 15:58:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id AC52344854
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 28 May 2024 10:27:09 +0000 (UTC)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
-	by lists.linaro.org (Postfix) with ESMTPS id 48B0043FA1
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 28 May 2024 10:26:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D2C2443C43
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 28 May 2024 13:58:56 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+	by lists.linaro.org (Postfix) with ESMTPS id 854E840074
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 28 May 2024 13:58:45 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=qo0ABDpD;
-	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.194 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com;
-	dmarc=pass (policy=quarantine) header.from=collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1716892018;
-	bh=ShbB0egsqc+viF42q6rsRBuCb+8DgZ4kwsWT9hgU0u8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=qo0ABDpDeGyeb5AM6CvxMAHNti9En+O5JJ7JH2bf5Kz7yu4heP+HUSyNzNLBu9l4v
-	 r6G+r6Xjl5Q34vGGu+TXIib93qalmPg7v5r7lyS330vgVmLB7adu2KP8H+lX7rrfIu
-	 zJzxuXF37jfduvnRfRK/e8nQU1J25bdFgPMWSPOB7M3qUfMJFNBYvZoUeVe2eDL7OI
-	 IhiyY4tRqs1ePuvCQhmrTEcAjzVzMjtN3LeaZzlImY/eHCHvRfjLs4jdpNhm0HiC1L
-	 MeJYVO6vs3cdX8W6jVn4un+D6X7h+XF5EW/FG6J2SfjzNJDaYpsv4bglD9wNkfq/7P
-	 tdkzEA4zshBBg==
-Received: from [100.113.186.2] (cola.collaboradmins.com [195.201.22.229])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: kholk11)
-	by madrid.collaboradmins.com (Postfix) with ESMTPSA id D4030378215E;
-	Tue, 28 May 2024 10:26:56 +0000 (UTC)
-Message-ID: <430cf0a6-4d8c-4819-8a95-d436eb044eec@collabora.com>
-Date: Tue, 28 May 2024 12:26:56 +0200
+	dkim=pass header.d=redhat.com header.s=mimecast20190719 header.b=IjAW0mhU;
+	spf=pass (lists.linaro.org: domain of david@redhat.com designates 170.10.129.124 as permitted sender) smtp.mailfrom=david@redhat.com;
+	dmarc=pass (policy=none) header.from=redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1716904725;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=54PHYlJ0PDEnDWhop/PaR+jnOIH2PsxLKNR7Lww/RKs=;
+	b=IjAW0mhUIm8v96McZvUyS3MyiFTFq6Y8jo3kppl0PyisUBMZ1XK45z3VcORtP4fQISud2b
+	S8d9Qqo4coiL5UoVW7pHFyeq0xP7jM2y2n07LG0hjyG8kgP8KFxue3hicJ+yAPo/npZWDm
+	0N+zRHvSjuhbEXnhUCnVDz7D9D2Skr0=
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-247-1MbyGIqBPW6gPq7H9U-_xw-1; Tue, 28 May 2024 09:58:43 -0400
+X-MC-Unique: 1MbyGIqBPW6gPq7H9U-_xw-1
+Received: by mail-ej1-f72.google.com with SMTP id a640c23a62f3a-a6265d3cc76so59973266b.0
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 28 May 2024 06:58:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1716904718; x=1717509518;
+        h=content-transfer-encoding:in-reply-to:content-language:from
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=54PHYlJ0PDEnDWhop/PaR+jnOIH2PsxLKNR7Lww/RKs=;
+        b=LTf6WWLbzESsYuBt5yuimcGEYxiXAyBIFcJOzgXAjRb8X4IxbObHMCPf5NQx/ZqQYg
+         k40eakC69qveyg/G2dNDsSbgxzWDz4h8xiUB1Prz1cz71kFKVUNHhKYOCYcRk0mNy9Qp
+         GEmVJCwnrmFfxsxGHrsWmkSPcdQSwelOJrCxO+6GUMDEUBlVQN34r86sFyvJoPVq/jv5
+         PCDNa1tifResDa76o8p/DPt6nJLQyavolP55P2pynHRnWj7QGtLy9P3LpCdZ+HflC7Ue
+         Y00r8gDgD/tXxx4cWZmTHwFRKyMiUNdVq7pLHGOakt/9ChRe9PX1Jo2h7JtbuZPiAjSf
+         z1uw==
+X-Forwarded-Encrypted: i=1; AJvYcCX4MRKqCWl536rOpLlhEe3jBpkxdZtqID+SECaFwv2RtqJUk00WEi/e8feA8bBB5SO/lyp/xhBdeG42HRJ5j6dhhWZZsdAm0W/zcz7LlsE=
+X-Gm-Message-State: AOJu0YyWiwvbYy0L7jB5h7x7SvB9+CU6+K/MJoDL1OrC0ZfWPK+0vQHI
+	XB1kJMSFLss4eOMuhqqMhc3ifBoBQknTMZhvmbzIppAC92d/Dg5yPrPfD5/DmHj0Z7AHNzyMr9A
+	THOax2lAF2dbemZ8HzdKNTijUAvj+cyjJwnDiIWYb8QMO+xMNHHHmmy8n/pI9T8+J
+X-Received: by 2002:a17:906:bc42:b0:a62:3c94:3bd2 with SMTP id a640c23a62f3a-a6265011270mr904385166b.73.1716904718529;
+        Tue, 28 May 2024 06:58:38 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEQIR74emKom8ATw+snuAUy13d6llophtQiniGptcCuWj8oFnstnUM6NEvnixIbkTAxpA1/sA==
+X-Received: by 2002:a17:906:bc42:b0:a62:3c94:3bd2 with SMTP id a640c23a62f3a-a6265011270mr904382466b.73.1716904718020;
+        Tue, 28 May 2024 06:58:38 -0700 (PDT)
+Received: from ?IPV6:2003:d8:2f28:4600:d3a7:6c26:54cf:e01e? (p200300d82f284600d3a76c2654cfe01e.dip0.t-ipconnect.de. [2003:d8:2f28:4600:d3a7:6c26:54cf:e01e])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a626c818362sm617978566b.34.2024.05.28.06.58.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 28 May 2024 06:58:37 -0700 (PDT)
+Message-ID: <93ee4e04-bdc7-4ac6-b93b-b6cf1b3311af@redhat.com>
+Date: Tue, 28 May 2024 15:58:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: =?UTF-8?B?SmFzb24tSkggTGluICjmnpfnnb/npaUp?= <Jason-JH.Lin@mediatek.com>,
- "jassisinghbrar@gmail.com" <jassisinghbrar@gmail.com>,
- "matthias.bgg@gmail.com" <matthias.bgg@gmail.com>,
- "chunkuang.hu@kernel.org" <chunkuang.hu@kernel.org>,
- "robh+dt@kernel.org" <robh+dt@kernel.org>,
- "krzysztof.kozlowski+dt@linaro.org" <krzysztof.kozlowski+dt@linaro.org>,
- "conor+dt@kernel.org" <conor+dt@kernel.org>
-References: <20240124011459.12204-1-jason-jh.lin@mediatek.com>
- <20240124011459.12204-2-jason-jh.lin@mediatek.com>
- <f91d3ac1-0a7d-4ca2-bf0f-c5e471c2f6bb@collabora.com>
- <2a2a939c9cb56de0383ec3e42db9bcf8e8518775.camel@mediatek.com>
-From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+To: Arnd Bergmann <arnd@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Dave Airlie <airlied@redhat.com>, Vivek Kasireddy
+ <vivek.kasireddy@intel.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Andrew Morton <akpm@linux-foundation.org>
+References: <20240528133138.2237237-1-arnd@kernel.org>
+From: David Hildenbrand <david@redhat.com>
+In-Reply-To: <20240528133138.2237237-1-arnd@kernel.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Language: en-US
-In-Reply-To: <2a2a939c9cb56de0383ec3e42db9bcf8e8518775.camel@mediatek.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 48B0043FA1
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.33 / 15.00];
-	BAYES_HAM(-2.94)[99.73%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[collabora.com,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:46.235.227.194];
-	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
-	ONCE_RECEIVED(0.10)[];
+X-Rspamd-Queue-Id: 854E840074
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.19 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	DMARC_POLICY_ALLOW(-0.50)[redhat.com,none];
+	R_DKIM_ALLOW(-0.20)[redhat.com:s=mimecast20190719];
+	R_SPF_ALLOW(-0.20)[+ip4:170.10.129.0/24];
+	RWL_MAILSPIKE_VERYGOOD(-0.20)[170.10.129.124:from];
 	MIME_GOOD(-0.10)[text/plain];
 	XM_UA_NO_VERSION(0.01)[];
-	FREEMAIL_TO(0.00)[mediatek.com,gmail.com,kernel.org,linaro.org];
 	MIME_TRACE(0.00)[0:+];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	URIBL_BLOCKED(0.00)[mediatek.com:email,madrid.collaboradmins.com:helo,madrid.collaboradmins.com:rdns,microchip.com:email,collabora.com:dkim,collabora.com:email];
-	ARC_NA(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[collabora.com:+];
-	RCPT_COUNT_TWELVE(0.00)[21];
-	NEURAL_HAM(-0.00)[-1.000];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[12];
+	URIBL_BLOCKED(0.00)[arndb.de:email];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
-	RCVD_COUNT_ONE(0.00)[1];
-	ASN(0.00)[asn:44684, ipnet:46.235.224.0/21, country:GB];
-	TO_DN_SOME(0.00)[]
-Message-ID-Hash: VAIH53HMOR2GZBNJDZTTCHQA5FZNJD3S
-X-Message-ID-Hash: VAIH53HMOR2GZBNJDZTTCHQA5FZNJD3S
-X-MailFrom: angelogioacchino.delregno@collabora.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>, =?UTF-8?B?U2luZ28gQ2hhbmcgKOW8teiIiOWciyk=?= <Singo.Chang@mediatek.com>, =?UTF-8?B?Sm9obnNvbiBXYW5nICjnjovogZbpkasp?= <Johnson.Wang@mediatek.com>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, =?UTF-8?B?SmFzb24tY2ggQ2hlbiAo6Zmz5bu66LGqKQ==?= <Jason-ch.Chen@mediatek.com>, =?UTF-8?B?U2hhd24gU3VuZyAo5a6L5a2d6KyZKQ==?= <Shawn.Sung@mediatek.com>, =?UTF-8?B?TmFuY3kgTGluICjmnpfmrKPonqIp?= <Nancy.Lin@mediatek.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, Project_Global_Chrome_Upstream_Group <Project_Global_Chrome_Upstream_Group@mediatek.com>, "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, "fshao@chromium.org" <fshao@chromium.org>
+	ASN(0.00)[asn:30031, ipnet:170.10.128.0/23, country:US];
+	ARC_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[redhat.com:+]
+Message-ID-Hash: 6DU3DNXZ4SGISQP2VGSIETARYV7YKCDW
+X-Message-ID-Hash: 6DU3DNXZ4SGISQP2VGSIETARYV7YKCDW
+X-MailFrom: david@redhat.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Arnd Bergmann <arnd@arndb.de>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v4 1/3] dt-bindings: mailbox: Add mediatek,gce-props.yaml
+Subject: [Linaro-mm-sig] Re: [PATCH] udmabuf: add CONFIG_MMU dependency
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VAIH53HMOR2GZBNJDZTTCHQA5FZNJD3S/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6DU3DNXZ4SGISQP2VGSIETARYV7YKCDW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
+Content-Transfer-Encoding: 7bit
 
-SWwgMjYvMDUvMjQgMTc6MDQsIEphc29uLUpIIExpbiAo5p6X552/56WlKSBoYSBzY3JpdHRvOg0K
-PiBIaSBBbmdlbG8sIEphc3NpLA0KPiANCj4gQ291bGQgeW91IGhlbHAgbWUgYXBwbHkgdGhpcyBz
-ZXJpZXM/DQo+IFRoYW5rcyENCj4gDQoNClRoYXQncyBub3QgbWUsIGl0J3MgSmFzc2kgLSBncmVl
-biBsaWdodCBmcm9tIG1lLCBidHcuDQoNCkNoZWVycywNCkFuZ2Vsbw0KDQo+IFJlZ2FyZHMsDQo+
-IEphc29uLUpILkxpbg0KPiANCj4gT24gV2VkLCAyMDI0LTAxLTI0IGF0IDA5OjU3ICswMTAwLCBB
-bmdlbG9HaW9hY2NoaW5vIERlbCBSZWdubyB3cm90ZToNCj4+IElsIDI0LzAxLzI0IDAyOjE0LCBK
-YXNvbi1KSC5MaW4gaGEgc2NyaXR0bzoNCj4+PiBBZGQgbWVkaWF0ZWssZ2NlLXByb3BzLnlhbWwg
-Zm9yIGNvbW1vbiBHQ0UgcHJvcGVydGllcyB0aGF0IGlzIHVzZWQNCj4+PiBmb3INCj4+PiBib3Ro
-IG1haWxib3ggcHJvdmlkZXJzIGFuZCBjb25zdW1lcnMuIFdlIHBsYWNlIHRoZSBjb21tb24gcHJv
-cGVydHkNCj4+PiAibWVkaWF0ZWssZ2NlLWV2ZW50cyIgaW4gdGhpcyBiaW5kaW5nIGN1cnJlbnRs
-eS4NCj4+Pg0KPj4+IFRoZSBwcm9wZXJ0eSAibWVkaWF0ZWssZ2NlLWV2ZW50cyIgaXMgdXNlZCBm
-b3IgR0NFIGV2ZW50IElEDQo+Pj4gY29ycmVzcG9uZGluZw0KPj4+IHRvIGEgaGFyZHdhcmUgZXZl
-bnQgc2lnbmFsIHNlbnQgYnkgdGhlIGhhcmR3YXJlIG9yIGEgc29mdHdhcmUNCj4+PiBkcml2ZXIu
-DQo+Pj4gSWYgdGhlIG1haWxib3ggcHJvdmlkZXJzIG9yIGNvbnN1bWVycyB3YW50IHRvIG1hbmlw
-dWxhdGUgdGhlIHZhbHVlDQo+Pj4gb2YNCj4+PiB0aGUgZXZlbnQgSUQsIHRoZXkgbmVlZCB0byBr
-bm93IHRoZSBzcGVjaWZpYyBldmVudCBJRC4NCj4+Pg0KPj4+IFNpZ25lZC1vZmYtYnk6IEphc29u
-LUpILkxpbiA8amFzb24tamgubGluQG1lZGlhdGVrLmNvbT4NCj4+PiBSZXZpZXdlZC1ieTogQ29u
-b3IgRG9vbGV5IDxjb25vci5kb29sZXlAbWljcm9jaGlwLmNvbT4NCj4+DQo+PiBSZXZpZXdlZC1i
-eTogQW5nZWxvR2lvYWNjaGlubyBEZWwgUmVnbm8gPA0KPj4gYW5nZWxvZ2lvYWNjaGluby5kZWxy
-ZWdub0Bjb2xsYWJvcmEuY29tPg0KPj4NCj4gDQoNCg0KX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGlu
-YXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwg
-dG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+Am 28.05.24 um 15:31 schrieb Arnd Bergmann:
+> From: Arnd Bergmann <arnd@arndb.de>
+> 
+> There is no !CONFIG_MMU version of vmf_insert_pfn():
+> 
+> arm-linux-gnueabi-ld: drivers/dma-buf/udmabuf.o: in function `udmabuf_vm_fault':
+> udmabuf.c:(.text+0xaa): undefined reference to `vmf_insert_pfn'
+> 
+> Fixes: f7254e043ff1 ("udmabuf: use vmf_insert_pfn and VM_PFNMAP for handling mmap")
+> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+> ---
+>   drivers/dma-buf/Kconfig | 1 +
+>   1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/dma-buf/Kconfig b/drivers/dma-buf/Kconfig
+> index e4dc53a36428..b46eb8a552d7 100644
+> --- a/drivers/dma-buf/Kconfig
+> +++ b/drivers/dma-buf/Kconfig
+> @@ -35,6 +35,7 @@ config UDMABUF
+>   	default n
+>   	depends on DMA_SHARED_BUFFER
+>   	depends on MEMFD_CREATE || COMPILE_TEST
+> +	depends on MMU
+>   	help
+>   	  A driver to let userspace turn memfd regions into dma-bufs.
+>   	  Qemu can use this to create host dmabufs for guest framebuffers.
+
+Acked-by: David Hildenbrand <david@redhat.com>
+
+-- 
+Thanks,
+
+David / dhildenb
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
