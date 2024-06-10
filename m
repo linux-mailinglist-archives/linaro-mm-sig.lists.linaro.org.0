@@ -2,76 +2,99 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A01CF90156F
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  9 Jun 2024 11:59:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C06A39026F0
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Jun 2024 18:44:17 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 78D6244347
-	for <lists+linaro-mm-sig@lfdr.de>; Sun,  9 Jun 2024 09:59:54 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 0E39C4425A
-	for <linaro-mm-sig@lists.linaro.org>; Sun,  9 Jun 2024 09:59:37 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id B3C5F44785
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 10 Jun 2024 16:44:16 +0000 (UTC)
+Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+	by lists.linaro.org (Postfix) with ESMTPS id F34E34042C
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Jun 2024 16:44:04 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=SUsxWfKD;
-	spf=pass (lists.linaro.org: domain of jic23@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=jic23@kernel.org;
-	dmarc=pass (policy=none) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 87C3761E2D;
-	Sun,  9 Jun 2024 09:59:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A8389C2BD10;
-	Sun,  9 Jun 2024 09:59:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1717927176;
-	bh=ZTNgbFcLomcG6cpe2haGjWOTw7BlkgzB0g3ZWexUBPg=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=SUsxWfKDwq9uaDBZLEK9BO1+qDdiuCsJlTzwxXZUZzuY1WK9NlYBeiOT7909A+4bQ
-	 0QzRcgCBUPMCOGlp26CgYVY5HcN1KUJTpY6oRcoqr2Ti9I8GXv1fvbSEtYDmvIStvA
-	 u9QV3W4AGxsPvXV8LqptOQEFbzp79cNu/ZaR/3GjPKvoO0cK+0rnU8WyJJCFT02eS+
-	 rSKMLjfSd2BKtI1VE221Kg0oaFofgCQNznOvbHzgJjoRr3a5PLrG9uqGYy/zC9Rf4R
-	 X6Ch6wAd8uOaXMOt4YgPs9Xz3snZhuu0undsBf8oDtnyz7llZGasXvqnFZjPvbZJri
-	 xtcFMxxSpbOSg==
-Date: Sun, 9 Jun 2024 10:58:53 +0100
-From: Jonathan Cameron <jic23@kernel.org>
-To: Paul Cercueil <paul@crapouillou.net>
-Message-ID: <20240609105853.54d01475@jic23-huawei>
-In-Reply-To: <20240605110845.86740-1-paul@crapouillou.net>
-References: <20240605110845.86740-1-paul@crapouillou.net>
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.42; x86_64-pc-linux-gnu)
+	dkim=pass header.d=google.com header.s=20230601 header.b=mE3s8M7D;
+	spf=pass (lists.linaro.org: domain of cmllamas@google.com designates 209.85.216.44 as permitted sender) smtp.mailfrom=cmllamas@google.com;
+	dmarc=pass (policy=reject) header.from=google.com
+Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-2c2d25b5432so116766a91.2
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 10 Jun 2024 09:44:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20230601; t=1718037844; x=1718642644; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=ZWJrFt56Ba2XKaEKUnUCqUmu/jVW4Te91KO0JGqkT1U=;
+        b=mE3s8M7DpC6TU2DUR2hmXzMHjdLARkb/vEL5aN0FHzTO7DF/mY+L7UpCIpMu8A8/Yj
+         K8BHOprspJJhFomevtMUiRkvyZXvfRAQZn3yFHdXsvWuGh5kHdlA6xWBCvq6FxuVKePm
+         +DnixpDTtTcyvWBTN4XmyxRzjcpsZwcbEkCVBMwklPg38gPXZzqjsKwXSibeBuXiZ1gY
+         gqVZmuI1XegEAFEo1f8eVrx2RZIoqRxP4UrnEjlfDFaSTZ0lncU54fMYBp2HiEmibVJQ
+         tTQ2skeu9+nWFft+PQwaR7HjNVap8C0eM0vP0QEKcqbZ/i574ZLYPC5zgzZz7jSowQXs
+         Rhhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1718037844; x=1718642644;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=ZWJrFt56Ba2XKaEKUnUCqUmu/jVW4Te91KO0JGqkT1U=;
+        b=tZWNMcXrWjLa4y8v8OdK/diPkOLpvP4MzFQ55WnB2L6wpnbJ5mDvb3kMNiPjCm0u16
+         qQ9XD4ZL5MoSLi5ARJq9qQlAj1GazCbyhm85yDmDSQvutf7KM+4Cx43QVPOY8OpInh3V
+         x276+mukRW/mQDWZw3ZfF7hNo25DwdYOHKR+GreinEhFtarLll1cxAACdFbtVV1J7pj4
+         YnOik4sJS7ux8qxDPt/CicfeX2BHwBUz0sTnsptQHKfr8ZySELsrzZgT2Lbtb6g1qKoW
+         AVqvDN1cWl9H2ZSSw9lzMJajfdyDhqXCQmHvOkxrcQt7BcbzwpRVlKSWMXHKABtyOu1N
+         v0jg==
+X-Gm-Message-State: AOJu0YyDcfW9zISG04i/RQSytPHx5XrNxNCIw44RqDfC6UHlw2UTg/tr
+	2+BYWUL2jifKJfNkN6eYf7xF5XwlmxOhnjLQZY3LYz5ArN6WBgX4l65M7TT5xA==
+X-Google-Smtp-Source: AGHT+IFO/T7QbJyG6RfIGM4sbC0wUi2kSF81e1T/t2MsMvtblCbstqePphSLuWts4/pUFHivpG5mhw==
+X-Received: by 2002:a17:90b:1c8c:b0:2c2:3de7:20c0 with SMTP id 98e67ed59e1d1-2c2bcc4cd43mr8521758a91.37.1718037843726;
+        Mon, 10 Jun 2024 09:44:03 -0700 (PDT)
+Received: from google.com (226.75.127.34.bc.googleusercontent.com. [34.127.75.226])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-2c28066d57esm11358284a91.19.2024.06.10.09.44.02
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Jun 2024 09:44:03 -0700 (PDT)
+Date: Mon, 10 Jun 2024 16:43:59 +0000
+From: Carlos Llamas <cmllamas@google.com>
+To: Barry Song <21cnbao@gmail.com>
+Message-ID: <ZmctTwAuzkObaXLi@google.com>
+References: <20240606020213.49854-1-21cnbao@gmail.com>
 MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <20240606020213.49854-1-21cnbao@gmail.com>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 0E39C4425A
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.50 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_RHS_NOT_FQDN(0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217:c];
+X-Rspamd-Queue-Id: F34E34042C
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.10 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
+	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.216.44:from];
 	RCVD_TLS_LAST(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	MIME_TRACE(0.00)[0:+];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
 	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_TRACE(0.00)[kernel.org:+]
-Message-ID-Hash: 3AR2HG5WMTCK2YGNRI7U6JCON7A7JLAB
-X-Message-ID-Hash: 3AR2HG5WMTCK2YGNRI7U6JCON7A7JLAB
-X-MailFrom: jic23@kernel.org
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	TO_DN_SOME(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	DKIM_TRACE(0.00)[google.com:+]
+Message-ID-Hash: OFPAWOBYSLMZOKXAUWJOCQHZNJORHYQ7
+X-Message-ID-Hash: OFPAWOBYSLMZOKXAUWJOCQHZNJORHYQ7
+X-MailFrom: cmllamas@google.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Lars-Peter Clausen <lars@metafoo.de>, Vinod Koul <vkoul@kernel.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Nuno Sa <nuno.sa@analog.com>, linux-iio@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, sumit.semwal@linaro.org, Brian.Starkey@arm.com, benjamin.gaignard@collabora.com, christian.koenig@amd.com, dri-devel@lists.freedesktop.org, jstultz@google.com, linux-kernel@vger.kernel.org, tjmercier@google.com, v-songbaohua@oppo.com, hailong.liu@oppo.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v10 0/6] iio: new DMABUF based API v10
+Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf/heaps: Correct the types of fd_flags and heap_flags
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3AR2HG5WMTCK2YGNRI7U6JCON7A7JLAB/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OFPAWOBYSLMZOKXAUWJOCQHZNJORHYQ7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -81,76 +104,28 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Wed,  5 Jun 2024 13:08:39 +0200
-Paul Cercueil <paul@crapouillou.net> wrote:
+On Thu, Jun 06, 2024 at 02:02:13PM +1200, Barry Song wrote:
+> From: Barry Song <v-songbaohua@oppo.com>
+> 
+> dma_heap_allocation_data defines the UAPI as follows:
+> 
+>  struct dma_heap_allocation_data {
+>         __u64 len;
+>         __u32 fd;
+>         __u32 fd_flags;
+>         __u64 heap_flags;
+>  };
+> 
+> But dma heaps are casting both fd_flags and heap_flags into
+> unsigned long. This patch makes dma heaps - cma heap and
+> system heap have consistent types with UAPI.
+> 
+> Signed-off-by: Barry Song <v-songbaohua@oppo.com>
+> ---
 
-> Hi Jonathan,
-> 
-> Here is a revised (and hopefully final?) version of my DMABUF patchset.
+Looks good to me, thanks!
 
-Fingers crossed it's just docs changes for v11.
-
-So on to the details of how to merge this...
-For the DMAEngine maintainers:
-Given IIO changes dominate this series it makes sense for me to pick it up
-through IIO.
-
-Do you want an immutable branch with the first patch on it, or is this
-unlikely to cause merge conflicts with any other ongoing work in dmabuffer
-land?
-
-I'm fine either way and if I don't hear back on this will do an immutable
-branch and announce it when I apply v11 (I hope!)
-
-Jonathan
-
-> 
-> This v10 removes the extra "flags" parameter of
-> dmaengine_prep_peripheral_dma_vec(), and adds kernel doc to the function
-> as Vinod requested.
-> 
-> As Nuno upstreamed support for output buffers, I (slightly) modified
-> patch 5/6 and now output buffers are supported with the DMABUF API.
-> All I did was remove a "fail if output" check really.
-> 
-> This was based on next-20240605.
-> 
-> Changelog:
-> - [1/6]:
->   - Add kernel doc to dmaengine_prep_peripheral_dma_vec()
->   - Remove extra flags parameter
-> - [2/6]:
->   - Use the new function prototype (without the extra prep_flags).
-> - [5/6]:
->   - Remove extra flags parameter to dmaengine_prep_peripheral_dma_vec()
->   - Add support for TX transfers
-> 
-> Cheers,
-> -Paul
-> 
-> Paul Cercueil (6):
->   dmaengine: Add API function dmaengine_prep_peripheral_dma_vec()
->   dmaengine: dma-axi-dmac: Implement device_prep_peripheral_dma_vec
->   iio: core: Add new DMABUF interface infrastructure
->   iio: buffer-dma: Enable support for DMABUFs
->   iio: buffer-dmaengine: Support new DMABUF based userspace API
->   Documentation: iio: Document high-speed DMABUF based API
-> 
->  Documentation/iio/iio_dmabuf_api.rst          |  54 ++
->  Documentation/iio/index.rst                   |   1 +
->  drivers/dma/dma-axi-dmac.c                    |  40 ++
->  drivers/iio/Kconfig                           |   1 +
->  drivers/iio/buffer/industrialio-buffer-dma.c  | 180 ++++++-
->  .../buffer/industrialio-buffer-dmaengine.c    |  62 ++-
->  drivers/iio/industrialio-buffer.c             | 462 ++++++++++++++++++
->  include/linux/dmaengine.h                     |  33 ++
->  include/linux/iio/buffer-dma.h                |  31 ++
->  include/linux/iio/buffer_impl.h               |  30 ++
->  include/uapi/linux/iio/buffer.h               |  22 +
->  11 files changed, 896 insertions(+), 20 deletions(-)
->  create mode 100644 Documentation/iio/iio_dmabuf_api.rst
-> 
-
+Reviewed-by: Carlos Llamas <cmllamas@google.com>
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
