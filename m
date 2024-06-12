@@ -2,199 +2,281 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDA6390414D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 11 Jun 2024 18:29:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 928469058DC
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 12 Jun 2024 18:33:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8B09A453DB
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 11 Jun 2024 16:29:51 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 511F8400E1
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 12 Jun 2024 16:33:55 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id AB37B44327
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 11 Jun 2024 16:29:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 55A5F3F00E
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 12 Jun 2024 16:33:45 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=FIIKn4CC;
-	spf=pass (lists.linaro.org: domain of vkoul@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=vkoul@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="A/A94sjn";
+	spf=pass (lists.linaro.org: domain of conor@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=conor@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 3B77160F3C;
-	Tue, 11 Jun 2024 16:29:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6B1FAC2BD10;
-	Tue, 11 Jun 2024 16:29:39 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id E7E65614EA;
+	Wed, 12 Jun 2024 16:33:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB245C116B1;
+	Wed, 12 Jun 2024 16:33:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1718123379;
-	bh=hmGhqBlLYFKjIhkdShLu8DnQifC7QyeNbKPHY5y8jUc=;
+	s=k20201202; t=1718210024;
+	bh=MsFhjqz8K5lYmvWMxKf4C54DDbJX7oTJcO1G+HwBc7E=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=FIIKn4CCQGaVdHYyf4j/HaIkw2TwSecW2j/wp+EkhDZIy6PiDP3rvrF3fgKh8VwWu
-	 +hTHZNGc3TA+9G8fu+PS13SMciC+8ZBDklx/GJhc0srsrK/9ubw49cd9i9easUiDih
-	 9xKu+NkyyS9mq6YDF28OccQ32JdYD9702GmbX5JNAEzCLjn2QefsxANcToHDT/fTJa
-	 YdYYeukCn5x3gON6FoSGjqt5PJ3RFRwnWP0PrOynCuXgcoGBmnvd+5VLeEI1HRcMX9
-	 o21m1mBO3t9RDtfiooHphGJFN0d4eDmNbP5wOCsv3LS/ZuRigAB4E9CV63roVM6ZvR
-	 kpTXgLXRlaraQ==
-Date: Tue, 11 Jun 2024 21:59:36 +0530
-From: Vinod Koul <vkoul@kernel.org>
-To: Paul Cercueil <paul@crapouillou.net>
-Message-ID: <Zmh7cFgKSamZmT4c@matsya>
-References: <20240605110845.86740-1-paul@crapouillou.net>
- <20240605110845.86740-2-paul@crapouillou.net>
+	b=A/A94sjnqFJGlbWmyQihVESPvg0PkCzVg1I4nQ02bgdav01il2R4ztGU6aU1UtPu/
+	 Cs7+1wksCp1mR6a3UAo/RXqX6mAnbdQq/EM7sUMrYJITwL+5zYgHjMDVKfrHruUtAS
+	 RnKDLhiXr05X3ho1yjomQFzqaIygS4HZ7MG0bWdbCTUtytX3JebZ9DKFwtDhCSolWW
+	 1k42z7ipJMuR+qpDMWSijcqlC0NW3Asz1Nu/CewdfjZc/Zxnbo6V6TMnINfI7sBD6Z
+	 t8dFtbqr/dU/rB2CciVugp0ioOhNDk0/SW+HlKHKWiZeSic/siy3CXc6X/aAByuPHR
+	 KXtLiW/YqCk3A==
+Date: Wed, 12 Jun 2024 17:33:37 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Tomeu Vizoso <tomeu@tomeuvizoso.net>
+Message-ID: <20240612-thread-throng-a4a14ce0c6e8@spud>
+References: <20240612-6-10-rocket-v1-0-060e48eea250@tomeuvizoso.net>
+ <20240612-6-10-rocket-v1-3-060e48eea250@tomeuvizoso.net>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20240605110845.86740-2-paul@crapouillou.net>
+In-Reply-To: <20240612-6-10-rocket-v1-3-060e48eea250@tomeuvizoso.net>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: AB37B44327
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.50 / 15.00];
+X-Rspamd-Queue-Id: 55A5F3F00E
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.10 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	MID_RHS_NOT_FQDN(0.50)[];
+	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
+	MID_RHS_NOT_FQDN(0.50)[];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	ARC_NA(0.00)[];
-	URIBL_BLOCKED(0.00)[crapouillou.net:email,analog.com:email];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_LAST(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	TAGGED_RCPT(0.00)[dt];
+	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_CC(0.00)[8bytes.org,kernel.org,arm.com,sntech.de,tomeuvizoso.net,gmail.com,ffwll.ch,linux.intel.com,suse.de,pengutronix.de,linaro.org,amd.com,lists.linux.dev,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	URIBL_BLOCKED(0.00)[devicetree.org:url,dfw.source.kernel.org:helo,dfw.source.kernel.org:rdns,tomeuvizoso.net:email];
+	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
-Message-ID-Hash: A5XGMONB6H3KAAR3JIHV26NKYDXV4GZL
-X-Message-ID-Hash: A5XGMONB6H3KAAR3JIHV26NKYDXV4GZL
-X-MailFrom: vkoul@kernel.org
+Message-ID-Hash: VSSOP7YLX7LYL5IGHA4WPCJQIQOYXHN2
+X-Message-ID-Hash: VSSOP7YLX7LYL5IGHA4WPCJQIQOYXHN2
+X-MailFrom: conor@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Jonathan Cameron <jic23@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Nuno Sa <nuno.sa@analog.com>, linux-iio@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Heiko Stuebner <heiko@sntech.de>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Oded Gabbay <ogabbay@kernel.org>, Tomeu Vizoso <tomeu.vizoso@tomeuvizoso.net>, Daniel Vetter <daniel@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Philipp Zabel <p.zabel@pengutronix.de>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, iommu@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v10 1/6] dmaengine: Add API function dmaengine_prep_peripheral_dma_vec()
+Subject: [Linaro-mm-sig] Re: [PATCH 3/9] dt-bindings: mailbox: rockchip,rknn: Add bindings
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/A5XGMONB6H3KAAR3JIHV26NKYDXV4GZL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VSSOP7YLX7LYL5IGHA4WPCJQIQOYXHN2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: multipart/mixed; boundary="===============2963841520013471303=="
+
+
+--===============2963841520013471303==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="XO+bVuaSKPlkL0L7"
+Content-Disposition: inline
+
+
+--XO+bVuaSKPlkL0L7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Jun 12, 2024 at 03:52:56PM +0200, Tomeu Vizoso wrote:
+> Add the bindings for the Neural Processing Unit IP from Rockchip.
+>=20
+> Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
+> ---
+>  .../devicetree/bindings/npu/rockchip,rknn.yaml     | 123 +++++++++++++++=
+++++++
+>  1 file changed, 123 insertions(+)
+>=20
+> diff --git a/Documentation/devicetree/bindings/npu/rockchip,rknn.yaml b/D=
+ocumentation/devicetree/bindings/npu/rockchip,rknn.yaml
+> new file mode 100644
+> index 000000000000..570a4889c11c
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/npu/rockchip,rknn.yaml
+> @@ -0,0 +1,123 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/npu/rockchip,rknn.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Neural Processing Unit IP from Rockchip, based on NVIDIA's NVDLA
+> +
+> +maintainers:
+> +  - Tomeu Vizoso <tomeu@tomeuvizoso.net>
+> +
+> +description: |+
+
+The |+ chomping operator is not needed here.
+
+> +  Rockchip IP for accelerating inference of neural networks, based on NV=
+IDIA's open source NVDLA IP.
+> +
+> +properties:
+> +  compatible:
+> +    items:
+> +      - enum:
+> +          - rockchip,rk3588-rknn
+> +      - const: rockchip,rknn
+> +
+> +  reg:
+> +    description: Base registers for NPU cores
+> +    minItems: 1
+> +    maxItems: 20
+
+For all of these properties, you need to describe the individual items.
+
+> +
+> +  interrupts:
+> +    minItems: 1
+> +    maxItems: 20
+> +
+> +  interrupt-names:
+> +    minItems: 1
+> +    maxItems: 20
+> +
+> +  clocks:
+> +    minItems: 1
+> +    maxItems: 20
+> +
+> +  clock-names:
+> +    minItems: 1
+> +    maxItems: 20
+> +
+> +  assigned-clocks:
+> +    maxItems: 1
+> +
+> +  assigned-clock-rates:
+> +    maxItems: 1
+> +
+> +  resets:
+> +    minItems: 1
+> +    maxItems: 20
+> +
+> +  reset-names:
+> +    minItems: 1
+> +    maxItems: 20
+> +
+> +  power-domains:
+> +    minItems: 1
+> +    maxItems: 20
+> +
+> +  power-domain-names:
+> +    minItems: 1
+> +    maxItems: 20
+> +
+> +  iommus:
+> +    items:
+> +      - description: IOMMU for all cores
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - interrupts
+> +  - interrupt-names
+> +  - clocks
+> +  - clock-names
+> +  - assigned-clocks
+> +  - assigned-clock-rates
+> +  - resets
+> +  - reset-names
+> +  - power-domains
+> +  - power-domain-names
+> +  - iommus
+> +
+> +additionalProperties: false
+> +
+> +examples:
+> +  - |
+> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
+> +
+> +    bus {
+> +        #address-cells =3D <2>;
+> +        #size-cells =3D <2>;
+> +
+> +        rknn: npu@fdab0000 {
+
+Drop the label here, it's not used.
+
+> +          compatible =3D "rockchip,rk3588-rknn", "rockchip,rknn";
+> +          reg =3D <0x0 0xfdab0000 0x0 0x9000>,
+> +                <0x0 0xfdac0000 0x0 0x9000>,
+> +                <0x0 0xfdad0000 0x0 0x9000>;
+> +          interrupts =3D <GIC_SPI 110 IRQ_TYPE_LEVEL_HIGH 0>,
+> +                       <GIC_SPI 111 IRQ_TYPE_LEVEL_HIGH 0>,
+> +                       <GIC_SPI 112 IRQ_TYPE_LEVEL_HIGH 0>;
+> +          interrupt-names =3D "npu0_irq", "npu1_irq", "npu2_irq";
+> +          clocks =3D <&scmi_clk 0>, <&cru 1>,
+> +                   <&cru 2>, <&cru 3>,
+> +                   <&cru 4>, <&cru 5>,
+> +                   <&cru 6>, <&cru 7>;
+> +          clock-names =3D "clk_npu",
+> +                  "aclk0", "aclk1", "aclk2",
+> +                  "hclk0", "hclk1", "hclk2",
+> +                  "pclk";
+> +          assigned-clocks =3D <&scmi_clk 0>;
+> +          assigned-clock-rates =3D <200000000>;
+> +          resets =3D <&cru 0>, <&cru 1>, <&cru 2>,
+> +                   <&cru 3>, <&cru 4>, <&cru 5>;
+> +          reset-names =3D "srst_a0", "srst_a1", "srst_a2",
+> +                        "srst_h0", "srst_h1", "srst_h2";
+> +          power-domains =3D <&power 0>, <&power 1>, <&power 2>;
+> +          power-domain-names =3D "npu0", "npu1", "npu2";
+> +          iommus =3D <&rknpu_mmu>;
+
+> +          status =3D "disabled";
+
+A disabled example is useless.
+
+> +        };
+> +    };
+> +...
+>=20
+> --=20
+> 2.45.2
+>=20
+
+--XO+bVuaSKPlkL0L7
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZmnN4QAKCRB4tDGHoIJi
+0mrlAP9TxBQhVfDfgrJQbQo60aSn0bl4zIUbk97NiOySlHcMagD+P4zYal5XytkL
+kBIJ4zmFrRDcfCNFjF3XIqExV8y20gI=
+=Z+Wc
+-----END PGP SIGNATURE-----
+
+--XO+bVuaSKPlkL0L7--
+
+--===============2963841520013471303==
 Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On 05-06-24, 13:08, Paul Cercueil wrote:
-> This function can be used to initiate a scatter-gather DMA transfer,
-> where the address and size of each segment is located in one entry of
-> the dma_vec array.
-> 
-> The major difference with dmaengine_prep_slave_sg() is that it supports
-> specifying the lengths of each DMA transfer; as trying to override the
-> length of the transfer with dmaengine_prep_slave_sg() is a very tedious
-> process. The introduction of a new API function is also justified by the
-> fact that scatterlists are on their way out.
-> 
-> Note that dmaengine_prep_interleaved_dma() is not helpful either in that
-> case, as it assumes that the address of each segment will be higher than
-> the one of the previous segment, which we just cannot guarantee in case
-> of a scatter-gather transfer.
-
-This looks good to me, but is missing Documentation changes for this
-API, pls add that
-
-> 
-> Signed-off-by: Paul Cercueil <paul@crapouillou.net>
-> Signed-off-by: Nuno Sa <nuno.sa@analog.com>
-> 
-> ---
-> v3: New patch
-> 
-> v5: Replace with function dmaengine_prep_slave_dma_vec(), and struct
->     'dma_vec'.
->     Note that at some point we will need to support cyclic transfers
->     using dmaengine_prep_slave_dma_vec(). Maybe with a new "flags"
->     parameter to the function?
-> 
-> v7:
->   - Renamed *device_prep_slave_dma_vec() -> device_prep_peripheral_dma_vec();
->   - Added a new flag parameter to the function as agreed between Paul
->     and Vinod. I renamed the first parameter to prep_flags as it's supposed to
->     be used (I think) with enum dma_ctrl_flags. I'm not really sure how that API
->     can grow but I was thinking in just having a bool cyclic parameter (as the
->     first intention of the flags is to support cyclic transfers) but ended up
->     "respecting" the previously agreed approach.
-> 
-> v10:
->   - Add kernel doc to dmaengine_prep_peripheral_dma_vec()
->   - Remove extra flags parameter
-> ---
->  include/linux/dmaengine.h | 33 +++++++++++++++++++++++++++++++++
->  1 file changed, 33 insertions(+)
-> 
-> diff --git a/include/linux/dmaengine.h b/include/linux/dmaengine.h
-> index 752dbde4cec1..9fc03068cabc 100644
-> --- a/include/linux/dmaengine.h
-> +++ b/include/linux/dmaengine.h
-> @@ -160,6 +160,16 @@ struct dma_interleaved_template {
->  	struct data_chunk sgl[];
->  };
->  
-> +/**
-> + * struct dma_vec - DMA vector
-> + * @addr: Bus address of the start of the vector
-> + * @len: Length in bytes of the DMA vector
-> + */
-> +struct dma_vec {
-> +	dma_addr_t addr;
-> +	size_t len;
-> +};
-> +
->  /**
->   * enum dma_ctrl_flags - DMA flags to augment operation preparation,
->   *  control completion, and communicate status.
-> @@ -910,6 +920,10 @@ struct dma_device {
->  	struct dma_async_tx_descriptor *(*device_prep_dma_interrupt)(
->  		struct dma_chan *chan, unsigned long flags);
->  
-> +	struct dma_async_tx_descriptor *(*device_prep_peripheral_dma_vec)(
-> +		struct dma_chan *chan, const struct dma_vec *vecs,
-> +		size_t nents, enum dma_transfer_direction direction,
-> +		unsigned long flags);
->  	struct dma_async_tx_descriptor *(*device_prep_slave_sg)(
->  		struct dma_chan *chan, struct scatterlist *sgl,
->  		unsigned int sg_len, enum dma_transfer_direction direction,
-> @@ -973,6 +987,25 @@ static inline struct dma_async_tx_descriptor *dmaengine_prep_slave_single(
->  						  dir, flags, NULL);
->  }
->  
-> +/**
-> + * dmaengine_prep_peripheral_dma_vec() - Prepare a DMA scatter-gather descriptor
-> + * @chan: The channel to be used for this descriptor
-> + * @vecs: The array of DMA vectors that should be transferred
-> + * @nents: The number of DMA vectors in the array
-> + * @dir: Specifies the direction of the data transfer
-> + * @flags: DMA engine flags
-> + */
-> +static inline struct dma_async_tx_descriptor *dmaengine_prep_peripheral_dma_vec(
-> +	struct dma_chan *chan, const struct dma_vec *vecs, size_t nents,
-> +	enum dma_transfer_direction dir, unsigned long flags)
-> +{
-> +	if (!chan || !chan->device || !chan->device->device_prep_peripheral_dma_vec)
-> +		return NULL;
-> +
-> +	return chan->device->device_prep_peripheral_dma_vec(chan, vecs, nents,
-> +							    dir, flags);
-> +}
-> +
->  static inline struct dma_async_tx_descriptor *dmaengine_prep_slave_sg(
->  	struct dma_chan *chan, struct scatterlist *sgl,	unsigned int sg_len,
->  	enum dma_transfer_direction dir, unsigned long flags)
-> -- 
-> 2.43.0
-
--- 
-~Vinod
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============2963841520013471303==--
