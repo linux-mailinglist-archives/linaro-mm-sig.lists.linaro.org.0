@@ -2,50 +2,50 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8DD83906184
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 04:06:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C42169061C2
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 04:27:51 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 83478448B1
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 02:06:42 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
-	by lists.linaro.org (Postfix) with ESMTPS id 6114540B8E
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Jun 2024 02:06:31 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id CBBA640B8E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 02:27:50 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.18])
+	by lists.linaro.org (Postfix) with ESMTPS id F31F040B8E
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Jun 2024 02:27:40 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=bfFqKemz;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.18 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dkim=pass header.d=intel.com header.s=Intel header.b=mGKrUmA9;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.18 as permitted sender) smtp.mailfrom=lkp@intel.com;
 	dmarc=pass (policy=none) header.from=intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1718244392; x=1749780392;
+  t=1718245661; x=1749781661;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=8sFmvQ7Z83X7NLUoXzzUfw6X3sNAVrct6codoq1wV7Q=;
-  b=bfFqKemzSpHAwpWkAhhRA8u13LrcyIN0epm8S0ng3X3YLj8yfP0dVyaj
-   l/oK+E7hGplSxnnTN9ueEoKZbv0e2cPTxENTnEBpqbUMjEaRTVvDZ6vPi
-   Q5WgJSRCI0nZsWb0Src1dcdPRH1CDmfG0EWoDildHi/ygGZ83luZojsWH
-   oJ5akucmi2UaeuCMiJ/qjQ+cTFCIQV4I6AmdLfy38VdldaoqPqmXnVEtr
-   H2/gIYTju99qYJyuXj6cAEZJDqIp2F3VcqLiNooaKAxEeVAEMLZQEo4Tf
-   c7tO9zzwFEGSKkRgFtZ5LdeOe8yD/Xld2a0OAoPUeAu+f9W1W2SKY0kHa
-   g==;
-X-CSE-ConnectionGUID: orQ+ycv3QmCuKFfYHtpJ6Q==
-X-CSE-MsgGUID: ojuqzSNiQ9CwoHNMumF3Nw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11101"; a="15194302"
+  bh=Nh2RzwaSTxJgbNfHmt3JRc0uEjv3nRlrnUDcdTPlwq8=;
+  b=mGKrUmA9eoCgHZeUTycxqp17UihwPgxBrKfu5cxwIZqztQm6h4jLCN4z
+   vAHvlO0xqKg5zLbCSU2Q64Nv0dB/+6mjP84Kxo/SdmtvXQ5Ybgfr7pBTs
+   zr6rqab59WFkDc4s0JiWYzg+4j+99ZVpERQvbIiTie6bU6EhjfpINvFM5
+   lllOC0pYgoCmj/kiF+BgVArUjgpIhnwBZWac7rJRdY90uuO1FCJK5jBh3
+   hwq0Tm3Aw93hEjrCcCb4Q/L1fykOcRk7LU7Sl+4w8aGm9CTNx+OA6qaA2
+   3ulnfO+Xjrg17MH1f5gSTFJBfdFUP07RwrUkegSX/YSoDdCcFjeqgdjHx
+   w==;
+X-CSE-ConnectionGUID: Up3Nv1eGRfGoREjhHGFqxQ==
+X-CSE-MsgGUID: OUrg/Tl9TWSjdraVuTGTGg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11101"; a="14762599"
 X-IronPort-AV: E=Sophos;i="6.08,234,1712646000";
-   d="scan'208";a="15194302"
-Received: from fmviesa005.fm.intel.com ([10.60.135.145])
-  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Jun 2024 19:06:30 -0700
-X-CSE-ConnectionGUID: S0kNdoNXTeaDmFV2fIXYpQ==
-X-CSE-MsgGUID: 6aVpmYIvR1+lJTRSNmEW5g==
+   d="scan'208";a="14762599"
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+  by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Jun 2024 19:27:32 -0700
+X-CSE-ConnectionGUID: Hfsi00ypS3ujyFebs+qM4w==
+X-CSE-MsgGUID: ZXcO7e85TC+r/0EEzcI5Aw==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.08,234,1712646000";
-   d="scan'208";a="44427853"
+   d="scan'208";a="44371511"
 Received: from lkp-server01.sh.intel.com (HELO 628d7d8b9fc6) ([10.239.97.150])
-  by fmviesa005.fm.intel.com with ESMTP; 12 Jun 2024 19:06:24 -0700
+  by fmviesa003.fm.intel.com with ESMTP; 12 Jun 2024 19:27:26 -0700
 Received: from kbuild by 628d7d8b9fc6 with local (Exim 4.96)
 	(envelope-from <lkp@intel.com>)
-	id 1sHZr4-000270-15;
-	Thu, 13 Jun 2024 02:06:22 +0000
-Date: Thu, 13 Jun 2024 10:05:59 +0800
+	id 1sHaBP-00027m-2g;
+	Thu, 13 Jun 2024 02:27:23 +0000
+Date: Thu, 13 Jun 2024 10:27:17 +0800
 From: kernel test robot <lkp@intel.com>
 To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Joerg Roedel <joro@8bytes.org>,
 	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
@@ -61,14 +61,14 @@ To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Joerg Roedel <joro@8bytes.org>,
 	Philipp Zabel <p.zabel@pengutronix.de>,
 	Sumit Semwal <sumit.semwal@linaro.org>,
 	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <202406130901.oiofrkFe-lkp@intel.com>
+Message-ID: <202406131022.1JKNS7me-lkp@intel.com>
 References: <20240612-6-10-rocket-v1-6-060e48eea250@tomeuvizoso.net>
 MIME-Version: 1.0
 Content-Disposition: inline
 In-Reply-To: <20240612-6-10-rocket-v1-6-060e48eea250@tomeuvizoso.net>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 6114540B8E
+X-Rspamd-Queue-Id: F31F040B8E
 X-Spamd-Bar: ----
 X-Spamd-Result: default: False [-4.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
@@ -76,11 +76,11 @@ X-Spamd-Result: default: False [-4.50 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
+	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MIME_GOOD(-0.10)[text/plain];
 	RCPT_COUNT_TWELVE(0.00)[27];
-	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
+	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
 	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
 	MISSING_XM_UA(0.00)[];
@@ -94,8 +94,8 @@ X-Spamd-Result: default: False [-4.50 / 15.00];
 	RCVD_COUNT_THREE(0.00)[3];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[intel.com:+]
-Message-ID-Hash: HLKDHK3NBL6N4PSQD3EIG7BDDCIFIOOA
-X-Message-ID-Hash: HLKDHK3NBL6N4PSQD3EIG7BDDCIFIOOA
+Message-ID-Hash: ILG23S63G5YVLUEPT4PYCP66GVDMXRJK
+X-Message-ID-Hash: ILG23S63G5YVLUEPT4PYCP66GVDMXRJK
 X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
@@ -104,7 +104,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH 6/9] accel/rocket: Add a new driver for Rockchip's NPU
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HLKDHK3NBL6N4PSQD3EIG7BDDCIFIOOA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ILG23S63G5YVLUEPT4PYCP66GVDMXRJK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -124,48 +124,44 @@ url:    https://github.com/intel-lab-lkp/linux/commits/Tomeu-Vizoso/iommu-rockch
 base:   83a7eefedc9b56fe7bfeff13b6c7356688ffa670
 patch link:    https://lore.kernel.org/r/20240612-6-10-rocket-v1-6-060e48eea250%40tomeuvizoso.net
 patch subject: [PATCH 6/9] accel/rocket: Add a new driver for Rockchip's NPU
-config: loongarch-allmodconfig (https://download.01.org/0day-ci/archive/20240613/202406130901.oiofrkFe-lkp@intel.com/config)
-compiler: loongarch64-linux-gcc (GCC) 13.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240613/202406130901.oiofrkFe-lkp@intel.com/reproduce)
+config: s390-allyesconfig (https://download.01.org/0day-ci/archive/20240613/202406131022.1JKNS7me-lkp@intel.com/config)
+compiler: s390-linux-gcc (GCC) 13.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240613/202406131022.1JKNS7me-lkp@intel.com/reproduce)
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202406130901.oiofrkFe-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202406131022.1JKNS7me-lkp@intel.com/
 
 All errors (new ones prefixed by >>):
 
-   In file included from arch/loongarch/include/asm/processor.h:17,
-                    from arch/loongarch/include/asm/thread_info.h:15,
-                    from include/linux/thread_info.h:60,
-                    from include/asm-generic/current.h:6,
-                    from ./arch/loongarch/include/generated/asm/current.h:1,
-                    from include/linux/mutex.h:14,
-                    from include/linux/notifier.h:14,
-                    from include/linux/clk.h:14,
-                    from drivers/accel/rocket/rocket_core.c:6:
->> arch/loongarch/include/uapi/asm/ptrace.h:25:25: error: expected identifier before '(' token
-      25 | #define PC              (GPR_END + 2)
-         |                         ^
-   drivers/accel/rocket/rocket_registers.h:53:9: note: in expansion of macro 'PC'
-      53 |         PC = 0x00000100,
-         |         ^~
+   In file included from include/linux/clk.h:13,
+                    from drivers/accel/rocket/rocket_drv.c:4:
+>> drivers/accel/rocket/rocket_drv.c:213:31: error: 'rocket_pm_ops' undeclared here (not in a function); did you mean 'rocket_probe'?
+     213 |                 .pm = pm_ptr(&rocket_pm_ops),
+         |                               ^~~~~~~~~~~~~
+   include/linux/kernel.h:48:44: note: in definition of macro 'PTR_IF'
+      48 | #define PTR_IF(cond, ptr)       ((cond) ? (ptr) : NULL)
+         |                                            ^~~
+   drivers/accel/rocket/rocket_drv.c:213:23: note: in expansion of macro 'pm_ptr'
+     213 |                 .pm = pm_ptr(&rocket_pm_ops),
+         |                       ^~~~~~
 
 
-vim +25 arch/loongarch/include/uapi/asm/ptrace.h
+vim +213 drivers/accel/rocket/rocket_drv.c
 
-803b0fc5c3f2ba Huacai Chen 2022-05-31  16  
-803b0fc5c3f2ba Huacai Chen 2022-05-31  17  /*
-803b0fc5c3f2ba Huacai Chen 2022-05-31  18   * For PTRACE_{POKE,PEEK}USR. 0 - 31 are GPRs,
-803b0fc5c3f2ba Huacai Chen 2022-05-31  19   * 32 is syscall's original ARG0, 33 is PC, 34 is BADVADDR.
-803b0fc5c3f2ba Huacai Chen 2022-05-31  20   */
-803b0fc5c3f2ba Huacai Chen 2022-05-31  21  #define GPR_BASE	0
-803b0fc5c3f2ba Huacai Chen 2022-05-31  22  #define GPR_NUM		32
-803b0fc5c3f2ba Huacai Chen 2022-05-31  23  #define GPR_END		(GPR_BASE + GPR_NUM - 1)
-803b0fc5c3f2ba Huacai Chen 2022-05-31  24  #define ARG0		(GPR_END + 1)
-803b0fc5c3f2ba Huacai Chen 2022-05-31 @25  #define PC		(GPR_END + 2)
-803b0fc5c3f2ba Huacai Chen 2022-05-31  26  #define BADVADDR	(GPR_END + 3)
-803b0fc5c3f2ba Huacai Chen 2022-05-31  27  
+   207	
+   208	static struct platform_driver rocket_driver = {
+   209		.probe = rocket_probe,
+   210		.remove_new = rocket_remove,
+   211		.driver	 = {
+   212			.name = "rocket",
+ > 213			.pm = pm_ptr(&rocket_pm_ops),
+   214			.of_match_table = dt_match,
+   215		},
+   216	};
+   217	module_platform_driver(rocket_driver);
+   218	
 
 -- 
 0-DAY CI Kernel Test Service
