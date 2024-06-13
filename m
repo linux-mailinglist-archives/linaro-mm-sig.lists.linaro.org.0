@@ -2,281 +2,174 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 928469058DC
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 12 Jun 2024 18:33:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DD83906184
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 04:06:44 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 511F8400E1
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 12 Jun 2024 16:33:55 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 55A5F3F00E
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 12 Jun 2024 16:33:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 83478448B1
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 02:06:42 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
+	by lists.linaro.org (Postfix) with ESMTPS id 6114540B8E
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Jun 2024 02:06:31 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b="A/A94sjn";
-	spf=pass (lists.linaro.org: domain of conor@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=conor@kernel.org;
-	dmarc=pass (policy=none) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id E7E65614EA;
-	Wed, 12 Jun 2024 16:33:44 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB245C116B1;
-	Wed, 12 Jun 2024 16:33:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1718210024;
-	bh=MsFhjqz8K5lYmvWMxKf4C54DDbJX7oTJcO1G+HwBc7E=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=A/A94sjnqFJGlbWmyQihVESPvg0PkCzVg1I4nQ02bgdav01il2R4ztGU6aU1UtPu/
-	 Cs7+1wksCp1mR6a3UAo/RXqX6mAnbdQq/EM7sUMrYJITwL+5zYgHjMDVKfrHruUtAS
-	 RnKDLhiXr05X3ho1yjomQFzqaIygS4HZ7MG0bWdbCTUtytX3JebZ9DKFwtDhCSolWW
-	 1k42z7ipJMuR+qpDMWSijcqlC0NW3Asz1Nu/CewdfjZc/Zxnbo6V6TMnINfI7sBD6Z
-	 t8dFtbqr/dU/rB2CciVugp0ioOhNDk0/SW+HlKHKWiZeSic/siy3CXc6X/aAByuPHR
-	 KXtLiW/YqCk3A==
-Date: Wed, 12 Jun 2024 17:33:37 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Tomeu Vizoso <tomeu@tomeuvizoso.net>
-Message-ID: <20240612-thread-throng-a4a14ce0c6e8@spud>
-References: <20240612-6-10-rocket-v1-0-060e48eea250@tomeuvizoso.net>
- <20240612-6-10-rocket-v1-3-060e48eea250@tomeuvizoso.net>
+	dkim=pass header.d=intel.com header.s=Intel header.b=bfFqKemz;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.18 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1718244392; x=1749780392;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=8sFmvQ7Z83X7NLUoXzzUfw6X3sNAVrct6codoq1wV7Q=;
+  b=bfFqKemzSpHAwpWkAhhRA8u13LrcyIN0epm8S0ng3X3YLj8yfP0dVyaj
+   l/oK+E7hGplSxnnTN9ueEoKZbv0e2cPTxENTnEBpqbUMjEaRTVvDZ6vPi
+   Q5WgJSRCI0nZsWb0Src1dcdPRH1CDmfG0EWoDildHi/ygGZ83luZojsWH
+   oJ5akucmi2UaeuCMiJ/qjQ+cTFCIQV4I6AmdLfy38VdldaoqPqmXnVEtr
+   H2/gIYTju99qYJyuXj6cAEZJDqIp2F3VcqLiNooaKAxEeVAEMLZQEo4Tf
+   c7tO9zzwFEGSKkRgFtZ5LdeOe8yD/Xld2a0OAoPUeAu+f9W1W2SKY0kHa
+   g==;
+X-CSE-ConnectionGUID: orQ+ycv3QmCuKFfYHtpJ6Q==
+X-CSE-MsgGUID: ojuqzSNiQ9CwoHNMumF3Nw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11101"; a="15194302"
+X-IronPort-AV: E=Sophos;i="6.08,234,1712646000";
+   d="scan'208";a="15194302"
+Received: from fmviesa005.fm.intel.com ([10.60.135.145])
+  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Jun 2024 19:06:30 -0700
+X-CSE-ConnectionGUID: S0kNdoNXTeaDmFV2fIXYpQ==
+X-CSE-MsgGUID: 6aVpmYIvR1+lJTRSNmEW5g==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.08,234,1712646000";
+   d="scan'208";a="44427853"
+Received: from lkp-server01.sh.intel.com (HELO 628d7d8b9fc6) ([10.239.97.150])
+  by fmviesa005.fm.intel.com with ESMTP; 12 Jun 2024 19:06:24 -0700
+Received: from kbuild by 628d7d8b9fc6 with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1sHZr4-000270-15;
+	Thu, 13 Jun 2024 02:06:22 +0000
+Date: Thu, 13 Jun 2024 10:05:59 +0800
+From: kernel test robot <lkp@intel.com>
+To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Joerg Roedel <joro@8bytes.org>,
+	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
+	Heiko Stuebner <heiko@sntech.de>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Oded Gabbay <ogabbay@kernel.org>,
+	Tomeu Vizoso <tomeu.vizoso@tomeuvizoso.net>,
+	David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <202406130901.oiofrkFe-lkp@intel.com>
+References: <20240612-6-10-rocket-v1-6-060e48eea250@tomeuvizoso.net>
 MIME-Version: 1.0
-In-Reply-To: <20240612-6-10-rocket-v1-3-060e48eea250@tomeuvizoso.net>
+Content-Disposition: inline
+In-Reply-To: <20240612-6-10-rocket-v1-6-060e48eea250@tomeuvizoso.net>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 55A5F3F00E
+X-Rspamd-Queue-Id: 6114540B8E
 X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.10 / 15.00];
+X-Spamd-Result: default: False [-4.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	MIME_GOOD(-0.10)[text/plain];
+	RCPT_COUNT_TWELVE(0.00)[27];
+	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
+	MIME_TRACE(0.00)[0:+];
 	ARC_NA(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
 	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
 	TAGGED_RCPT(0.00)[dt];
+	FREEMAIL_TO(0.00)[tomeuvizoso.net,8bytes.org,kernel.org,arm.com,sntech.de,gmail.com,ffwll.ch,linux.intel.com,suse.de,pengutronix.de,linaro.org,amd.com];
 	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_CC(0.00)[8bytes.org,kernel.org,arm.com,sntech.de,tomeuvizoso.net,gmail.com,ffwll.ch,linux.intel.com,suse.de,pengutronix.de,linaro.org,amd.com,lists.linux.dev,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
-	URIBL_BLOCKED(0.00)[devicetree.org:url,dfw.source.kernel.org:helo,dfw.source.kernel.org:rdns,tomeuvizoso.net:email];
-	TO_DN_SOME(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
-Message-ID-Hash: VSSOP7YLX7LYL5IGHA4WPCJQIQOYXHN2
-X-Message-ID-Hash: VSSOP7YLX7LYL5IGHA4WPCJQIQOYXHN2
-X-MailFrom: conor@kernel.org
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+]
+Message-ID-Hash: HLKDHK3NBL6N4PSQD3EIG7BDDCIFIOOA
+X-Message-ID-Hash: HLKDHK3NBL6N4PSQD3EIG7BDDCIFIOOA
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Heiko Stuebner <heiko@sntech.de>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Oded Gabbay <ogabbay@kernel.org>, Tomeu Vizoso <tomeu.vizoso@tomeuvizoso.net>, Daniel Vetter <daniel@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Philipp Zabel <p.zabel@pengutronix.de>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, iommu@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: oe-kbuild-all@lists.linux.dev, iommu@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 3/9] dt-bindings: mailbox: rockchip,rknn: Add bindings
+Subject: [Linaro-mm-sig] Re: [PATCH 6/9] accel/rocket: Add a new driver for Rockchip's NPU
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VSSOP7YLX7LYL5IGHA4WPCJQIQOYXHN2/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HLKDHK3NBL6N4PSQD3EIG7BDDCIFIOOA/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============2963841520013471303=="
-
-
---===============2963841520013471303==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="XO+bVuaSKPlkL0L7"
-Content-Disposition: inline
-
-
---XO+bVuaSKPlkL0L7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Jun 12, 2024 at 03:52:56PM +0200, Tomeu Vizoso wrote:
-> Add the bindings for the Neural Processing Unit IP from Rockchip.
->=20
-> Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
-> ---
->  .../devicetree/bindings/npu/rockchip,rknn.yaml     | 123 +++++++++++++++=
-++++++
->  1 file changed, 123 insertions(+)
->=20
-> diff --git a/Documentation/devicetree/bindings/npu/rockchip,rknn.yaml b/D=
-ocumentation/devicetree/bindings/npu/rockchip,rknn.yaml
-> new file mode 100644
-> index 000000000000..570a4889c11c
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/npu/rockchip,rknn.yaml
-> @@ -0,0 +1,123 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/npu/rockchip,rknn.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Neural Processing Unit IP from Rockchip, based on NVIDIA's NVDLA
-> +
-> +maintainers:
-> +  - Tomeu Vizoso <tomeu@tomeuvizoso.net>
-> +
-> +description: |+
-
-The |+ chomping operator is not needed here.
-
-> +  Rockchip IP for accelerating inference of neural networks, based on NV=
-IDIA's open source NVDLA IP.
-> +
-> +properties:
-> +  compatible:
-> +    items:
-> +      - enum:
-> +          - rockchip,rk3588-rknn
-> +      - const: rockchip,rknn
-> +
-> +  reg:
-> +    description: Base registers for NPU cores
-> +    minItems: 1
-> +    maxItems: 20
-
-For all of these properties, you need to describe the individual items.
-
-> +
-> +  interrupts:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  interrupt-names:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  clocks:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  clock-names:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  assigned-clocks:
-> +    maxItems: 1
-> +
-> +  assigned-clock-rates:
-> +    maxItems: 1
-> +
-> +  resets:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  reset-names:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  power-domains:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  power-domain-names:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  iommus:
-> +    items:
-> +      - description: IOMMU for all cores
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - interrupts
-> +  - interrupt-names
-> +  - clocks
-> +  - clock-names
-> +  - assigned-clocks
-> +  - assigned-clock-rates
-> +  - resets
-> +  - reset-names
-> +  - power-domains
-> +  - power-domain-names
-> +  - iommus
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
-> +
-> +    bus {
-> +        #address-cells =3D <2>;
-> +        #size-cells =3D <2>;
-> +
-> +        rknn: npu@fdab0000 {
-
-Drop the label here, it's not used.
-
-> +          compatible =3D "rockchip,rk3588-rknn", "rockchip,rknn";
-> +          reg =3D <0x0 0xfdab0000 0x0 0x9000>,
-> +                <0x0 0xfdac0000 0x0 0x9000>,
-> +                <0x0 0xfdad0000 0x0 0x9000>;
-> +          interrupts =3D <GIC_SPI 110 IRQ_TYPE_LEVEL_HIGH 0>,
-> +                       <GIC_SPI 111 IRQ_TYPE_LEVEL_HIGH 0>,
-> +                       <GIC_SPI 112 IRQ_TYPE_LEVEL_HIGH 0>;
-> +          interrupt-names =3D "npu0_irq", "npu1_irq", "npu2_irq";
-> +          clocks =3D <&scmi_clk 0>, <&cru 1>,
-> +                   <&cru 2>, <&cru 3>,
-> +                   <&cru 4>, <&cru 5>,
-> +                   <&cru 6>, <&cru 7>;
-> +          clock-names =3D "clk_npu",
-> +                  "aclk0", "aclk1", "aclk2",
-> +                  "hclk0", "hclk1", "hclk2",
-> +                  "pclk";
-> +          assigned-clocks =3D <&scmi_clk 0>;
-> +          assigned-clock-rates =3D <200000000>;
-> +          resets =3D <&cru 0>, <&cru 1>, <&cru 2>,
-> +                   <&cru 3>, <&cru 4>, <&cru 5>;
-> +          reset-names =3D "srst_a0", "srst_a1", "srst_a2",
-> +                        "srst_h0", "srst_h1", "srst_h2";
-> +          power-domains =3D <&power 0>, <&power 1>, <&power 2>;
-> +          power-domain-names =3D "npu0", "npu1", "npu2";
-> +          iommus =3D <&rknpu_mmu>;
-
-> +          status =3D "disabled";
-
-A disabled example is useless.
-
-> +        };
-> +    };
-> +...
->=20
-> --=20
-> 2.45.2
->=20
-
---XO+bVuaSKPlkL0L7
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZmnN4QAKCRB4tDGHoIJi
-0mrlAP9TxBQhVfDfgrJQbQo60aSn0bl4zIUbk97NiOySlHcMagD+P4zYal5XytkL
-kBIJ4zmFrRDcfCNFjF3XIqExV8y20gI=
-=Z+Wc
------END PGP SIGNATURE-----
-
---XO+bVuaSKPlkL0L7--
-
---===============2963841520013471303==
 Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
+Hi Tomeu,
+
+kernel test robot noticed the following build errors:
+
+[auto build test ERROR on 83a7eefedc9b56fe7bfeff13b6c7356688ffa670]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Tomeu-Vizoso/iommu-rockchip-Add-compatible-for-rockchip-rk3588-iommu/20240612-215814
+base:   83a7eefedc9b56fe7bfeff13b6c7356688ffa670
+patch link:    https://lore.kernel.org/r/20240612-6-10-rocket-v1-6-060e48eea250%40tomeuvizoso.net
+patch subject: [PATCH 6/9] accel/rocket: Add a new driver for Rockchip's NPU
+config: loongarch-allmodconfig (https://download.01.org/0day-ci/archive/20240613/202406130901.oiofrkFe-lkp@intel.com/config)
+compiler: loongarch64-linux-gcc (GCC) 13.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240613/202406130901.oiofrkFe-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202406130901.oiofrkFe-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+   In file included from arch/loongarch/include/asm/processor.h:17,
+                    from arch/loongarch/include/asm/thread_info.h:15,
+                    from include/linux/thread_info.h:60,
+                    from include/asm-generic/current.h:6,
+                    from ./arch/loongarch/include/generated/asm/current.h:1,
+                    from include/linux/mutex.h:14,
+                    from include/linux/notifier.h:14,
+                    from include/linux/clk.h:14,
+                    from drivers/accel/rocket/rocket_core.c:6:
+>> arch/loongarch/include/uapi/asm/ptrace.h:25:25: error: expected identifier before '(' token
+      25 | #define PC              (GPR_END + 2)
+         |                         ^
+   drivers/accel/rocket/rocket_registers.h:53:9: note: in expansion of macro 'PC'
+      53 |         PC = 0x00000100,
+         |         ^~
+
+
+vim +25 arch/loongarch/include/uapi/asm/ptrace.h
+
+803b0fc5c3f2ba Huacai Chen 2022-05-31  16  
+803b0fc5c3f2ba Huacai Chen 2022-05-31  17  /*
+803b0fc5c3f2ba Huacai Chen 2022-05-31  18   * For PTRACE_{POKE,PEEK}USR. 0 - 31 are GPRs,
+803b0fc5c3f2ba Huacai Chen 2022-05-31  19   * 32 is syscall's original ARG0, 33 is PC, 34 is BADVADDR.
+803b0fc5c3f2ba Huacai Chen 2022-05-31  20   */
+803b0fc5c3f2ba Huacai Chen 2022-05-31  21  #define GPR_BASE	0
+803b0fc5c3f2ba Huacai Chen 2022-05-31  22  #define GPR_NUM		32
+803b0fc5c3f2ba Huacai Chen 2022-05-31  23  #define GPR_END		(GPR_BASE + GPR_NUM - 1)
+803b0fc5c3f2ba Huacai Chen 2022-05-31  24  #define ARG0		(GPR_END + 1)
+803b0fc5c3f2ba Huacai Chen 2022-05-31 @25  #define PC		(GPR_END + 2)
+803b0fc5c3f2ba Huacai Chen 2022-05-31  26  #define BADVADDR	(GPR_END + 3)
+803b0fc5c3f2ba Huacai Chen 2022-05-31  27  
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============2963841520013471303==--
