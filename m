@@ -2,50 +2,50 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07FFF906826
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 11:09:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 04406906A80
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 12:56:11 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 12391448FE
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 09:09:07 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
-	by lists.linaro.org (Postfix) with ESMTPS id 384E4448EB
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Jun 2024 09:08:55 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id D5542447DF
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 10:56:09 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
+	by lists.linaro.org (Postfix) with ESMTPS id 26590400E1
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Jun 2024 10:55:59 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b="QQASjc/4";
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.12 as permitted sender) smtp.mailfrom=lkp@intel.com;
+	dkim=pass header.d=intel.com header.s=Intel header.b=CqFn+x1w;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.9 as permitted sender) smtp.mailfrom=lkp@intel.com;
 	dmarc=pass (policy=none) header.from=intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1718269735; x=1749805735;
+  t=1718276159; x=1749812159;
   h=date:from:to:cc:subject:message-id:references:
    mime-version:in-reply-to;
-  bh=Nz4bq/RV/DLL86umhKgYai6V/Hg+Fl/30aSJdOT7Jbg=;
-  b=QQASjc/4RRM09Uau/GdpMrjfTJsYFayIF7RtHj/9vq7y9L6jVaSMojym
-   7EJYSLnD4OH9xpGYNAENo4dRARNNcC/+YB867hpFI9mSHeSrkV637h4Q0
-   9Da9j7noYeBpDCROoi7Ltn+xabdrm0c9Nf6sLejlVqnYcPSXAFiLfQ6zb
-   UiEJ85l6FnNo4Sjhq9kQgVSmMVs62D9jUkHnXJ1VDyplhHS/JEx7iZxjq
-   HrjP4Bh143Colk/84p7nPYmCItqMbJsxAFnTt5eKM++5aJLQSq00dDpq6
-   hPueK387CfY4TyuQutS/qoDL1TguZu90W27OZ54xsjwfyg3VwWW22L9UI
-   Q==;
-X-CSE-ConnectionGUID: HrNj/n6FSZ+3uae5tQV1sQ==
-X-CSE-MsgGUID: J0lgVNL4SrWAjxcQEDmhXw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11101"; a="26498694"
+  bh=6b8ovoJTtpRLHBC4ajzYK05o5vyr6KBXY3vrPVEqJ8Q=;
+  b=CqFn+x1wOCQ+MmZPdmbUXywU5A6mmHfaF+O9WYfsI2+lWkEbbejdE4OL
+   8LPnkcM3Erx5DXXiVUvXIaH+mebH4sGJuT1NLHHjo/1yutUpBuzgrMcnt
+   DTVPjsQcEy1kPcdTgXI73J889R5XIISGGK0t+gsqZk4XX9ulKAbX+9JBj
+   jRyus3siiIr9U1+Fq+15BruAf2rPgGpLXnj3wy0jkRXGI7AqY8Z958XR6
+   Erlq3TDvGqu1eCjMYcAbuHGG6kdgywaN8coCRtblWybEAvhht2V595Ccb
+   bbwrXkDPj3wBSx8KZLpQKH/LFIdcrB+1kq37+F5AW3PnFtxFwjhVXR7vY
+   w==;
+X-CSE-ConnectionGUID: ZxoERcXvQnKmoHvyhF10fA==
+X-CSE-MsgGUID: nx5FacOeTAeDGdaqURxiIw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11101"; a="37606722"
 X-IronPort-AV: E=Sophos;i="6.08,234,1712646000";
-   d="scan'208";a="26498694"
+   d="scan'208";a="37606722"
 Received: from orviesa004.jf.intel.com ([10.64.159.144])
-  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2024 02:08:54 -0700
-X-CSE-ConnectionGUID: GLT45S0sQR2HOiedp1pbaw==
-X-CSE-MsgGUID: EwMmexHPQzGx+7U88srY9A==
+  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2024 03:55:58 -0700
+X-CSE-ConnectionGUID: tnrO+fJUQeGyx0/k0IZjWg==
+X-CSE-MsgGUID: bKS/wAsASY+1gpvGdJC2ng==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.08,234,1712646000";
-   d="scan'208";a="45201966"
+   d="scan'208";a="45228251"
 Received: from lkp-server01.sh.intel.com (HELO 628d7d8b9fc6) ([10.239.97.150])
-  by orviesa004.jf.intel.com with ESMTP; 13 Jun 2024 02:08:48 -0700
+  by orviesa004.jf.intel.com with ESMTP; 13 Jun 2024 03:55:51 -0700
 Received: from kbuild by 628d7d8b9fc6 with local (Exim 4.96)
 	(envelope-from <lkp@intel.com>)
-	id 1sHgRp-0002Qs-1L;
-	Thu, 13 Jun 2024 09:08:45 +0000
-Date: Thu, 13 Jun 2024 17:08:09 +0800
+	id 1sHi7R-0002WE-0F;
+	Thu, 13 Jun 2024 10:55:49 +0000
+Date: Thu, 13 Jun 2024 18:55:08 +0800
 From: kernel test robot <lkp@intel.com>
 To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Joerg Roedel <joro@8bytes.org>,
 	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
@@ -61,14 +61,14 @@ To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Joerg Roedel <joro@8bytes.org>,
 	Philipp Zabel <p.zabel@pengutronix.de>,
 	Sumit Semwal <sumit.semwal@linaro.org>,
 	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <202406131640.WbBaRMbr-lkp@intel.com>
-References: <20240612-6-10-rocket-v1-8-060e48eea250@tomeuvizoso.net>
+Message-ID: <202406131802.9chtX0Ci-lkp@intel.com>
+References: <20240612-6-10-rocket-v1-6-060e48eea250@tomeuvizoso.net>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240612-6-10-rocket-v1-8-060e48eea250@tomeuvizoso.net>
+In-Reply-To: <20240612-6-10-rocket-v1-6-060e48eea250@tomeuvizoso.net>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 384E4448EB
+X-Rspamd-Queue-Id: 26590400E1
 X-Spamd-Bar: ----
 X-Spamd-Result: default: False [-4.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
@@ -76,35 +76,36 @@ X-Spamd-Result: default: False [-4.50 / 15.00];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
 	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
 	MIME_GOOD(-0.10)[text/plain];
-	RCPT_COUNT_TWELVE(0.00)[28];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ARC_NA(0.00)[];
 	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
 	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[29];
 	MISSING_XM_UA(0.00)[];
+	FREEMAIL_CC(0.00)[pgazz.com,gmail.com,lists.linux.dev,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
 	TAGGED_RCPT(0.00)[dt];
-	FREEMAIL_TO(0.00)[tomeuvizoso.net,8bytes.org,kernel.org,arm.com,sntech.de,gmail.com,ffwll.ch,linux.intel.com,suse.de,pengutronix.de,linaro.org,amd.com];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_COUNT_THREE(0.00)[3];
 	RCVD_TLS_LAST(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	FREEMAIL_TO(0.00)[tomeuvizoso.net,8bytes.org,kernel.org,arm.com,sntech.de,gmail.com,ffwll.ch,linux.intel.com,suse.de,pengutronix.de,linaro.org,amd.com];
+	TO_DN_SOME(0.00)[];
 	DKIM_TRACE(0.00)[intel.com:+]
-Message-ID-Hash: QRPCUUR64XDLRILJHVOVVF522MODGCKH
-X-Message-ID-Hash: QRPCUUR64XDLRILJHVOVVF522MODGCKH
+Message-ID-Hash: 5E3RSI3CBML447X624QWTU2E6UPVMIY6
+X-Message-ID-Hash: 5E3RSI3CBML447X624QWTU2E6UPVMIY6
 X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, iommu@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+CC: Paul Gazzillo <paul@pgazz.com>, Necip Fazil Yildiran <fazilyildiran@gmail.com>, oe-kbuild-all@lists.linux.dev, iommu@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 8/9] accel/rocket: Add job submission IOCTL
+Subject: [Linaro-mm-sig] Re: [PATCH 6/9] accel/rocket: Add a new driver for Rockchip's NPU
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QRPCUUR64XDLRILJHVOVVF522MODGCKH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5E3RSI3CBML447X624QWTU2E6UPVMIY6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -122,107 +123,22 @@ kernel test robot noticed the following build warnings:
 
 url:    https://github.com/intel-lab-lkp/linux/commits/Tomeu-Vizoso/iommu-rockchip-Add-compatible-for-rockchip-rk3588-iommu/20240612-215814
 base:   83a7eefedc9b56fe7bfeff13b6c7356688ffa670
-patch link:    https://lore.kernel.org/r/20240612-6-10-rocket-v1-8-060e48eea250%40tomeuvizoso.net
-patch subject: [PATCH 8/9] accel/rocket: Add job submission IOCTL
-config: hexagon-allmodconfig (https://download.01.org/0day-ci/archive/20240613/202406131640.WbBaRMbr-lkp@intel.com/config)
-compiler: clang version 19.0.0git (https://github.com/llvm/llvm-project 4403cdbaf01379de96f8d0d6ea4f51a085e37766)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240613/202406131640.WbBaRMbr-lkp@intel.com/reproduce)
+patch link:    https://lore.kernel.org/r/20240612-6-10-rocket-v1-6-060e48eea250%40tomeuvizoso.net
+patch subject: [PATCH 6/9] accel/rocket: Add a new driver for Rockchip's NPU
+config: arc-kismet-CONFIG_IOMMU_IO_PGTABLE_LPAE-CONFIG_DRM_ACCEL_ROCKET-0-0 (https://download.01.org/0day-ci/archive/20240613/202406131802.9chtX0Ci-lkp@intel.com/config)
+reproduce: (https://download.01.org/0day-ci/archive/20240613/202406131802.9chtX0Ci-lkp@intel.com/reproduce)
 
 If you fix the issue in a separate patch/commit (i.e. not just a new version of
 the same patch/commit), kindly add following tags
 | Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202406131640.WbBaRMbr-lkp@intel.com/
+| Closes: https://lore.kernel.org/oe-kbuild-all/202406131802.9chtX0Ci-lkp@intel.com/
 
-All warnings (new ones prefixed by >>):
-
-   In file included from drivers/accel/rocket/rocket_job.c:6:
-   In file included from include/drm/drm_file.h:39:
-   In file included from include/drm/drm_prime.h:37:
-   In file included from include/linux/scatterlist.h:8:
-   In file included from include/linux/mm.h:2253:
-   include/linux/vmstat.h:514:36: warning: arithmetic between different enumeration types ('enum node_stat_item' and 'enum lru_list') [-Wenum-enum-conversion]
-     514 |         return node_stat_name(NR_LRU_BASE + lru) + 3; // skip "nr_"
-         |                               ~~~~~~~~~~~ ^ ~~~
-   In file included from drivers/accel/rocket/rocket_job.c:6:
-   In file included from include/drm/drm_file.h:39:
-   In file included from include/drm/drm_prime.h:37:
-   In file included from include/linux/scatterlist.h:9:
-   In file included from arch/hexagon/include/asm/io.h:328:
-   include/asm-generic/io.h:548:31: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
-     548 |         val = __raw_readb(PCI_IOBASE + addr);
-         |                           ~~~~~~~~~~ ^
-   include/asm-generic/io.h:561:61: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
-     561 |         val = __le16_to_cpu((__le16 __force)__raw_readw(PCI_IOBASE + addr));
-         |                                                         ~~~~~~~~~~ ^
-   include/uapi/linux/byteorder/little_endian.h:37:51: note: expanded from macro '__le16_to_cpu'
-      37 | #define __le16_to_cpu(x) ((__force __u16)(__le16)(x))
-         |                                                   ^
-   In file included from drivers/accel/rocket/rocket_job.c:6:
-   In file included from include/drm/drm_file.h:39:
-   In file included from include/drm/drm_prime.h:37:
-   In file included from include/linux/scatterlist.h:9:
-   In file included from arch/hexagon/include/asm/io.h:328:
-   include/asm-generic/io.h:574:61: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
-     574 |         val = __le32_to_cpu((__le32 __force)__raw_readl(PCI_IOBASE + addr));
-         |                                                         ~~~~~~~~~~ ^
-   include/uapi/linux/byteorder/little_endian.h:35:51: note: expanded from macro '__le32_to_cpu'
-      35 | #define __le32_to_cpu(x) ((__force __u32)(__le32)(x))
-         |                                                   ^
-   In file included from drivers/accel/rocket/rocket_job.c:6:
-   In file included from include/drm/drm_file.h:39:
-   In file included from include/drm/drm_prime.h:37:
-   In file included from include/linux/scatterlist.h:9:
-   In file included from arch/hexagon/include/asm/io.h:328:
-   include/asm-generic/io.h:585:33: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
-     585 |         __raw_writeb(value, PCI_IOBASE + addr);
-         |                             ~~~~~~~~~~ ^
-   include/asm-generic/io.h:595:59: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
-     595 |         __raw_writew((u16 __force)cpu_to_le16(value), PCI_IOBASE + addr);
-         |                                                       ~~~~~~~~~~ ^
-   include/asm-generic/io.h:605:59: warning: performing pointer arithmetic on a null pointer has undefined behavior [-Wnull-pointer-arithmetic]
-     605 |         __raw_writel((u32 __force)cpu_to_le32(value), PCI_IOBASE + addr);
-         |                                                       ~~~~~~~~~~ ^
->> drivers/accel/rocket/rocket_job.c:353:11: warning: variable 'status' set but not used [-Wunused-but-set-variable]
-     353 |         uint32_t status, raw_status;
-         |                  ^
->> drivers/accel/rocket/rocket_job.c:353:19: warning: variable 'raw_status' set but not used [-Wunused-but-set-variable]
-     353 |         uint32_t status, raw_status;
-         |                          ^
-   drivers/accel/rocket/rocket_job.c:40:1: warning: unused function 'to_rocket_fence' [-Wunused-function]
-      40 | to_rocket_fence(struct dma_fence *fence)
-         | ^~~~~~~~~~~~~~~
-   10 warnings generated.
-
-Kconfig warnings: (for reference only)
+kismet warnings: (new ones prefixed by >>)
+>> kismet: WARNING: unmet direct dependencies detected for IOMMU_IO_PGTABLE_LPAE when selected by DRM_ACCEL_ROCKET
    WARNING: unmet direct dependencies detected for IOMMU_IO_PGTABLE_LPAE
-   Depends on [n]: IOMMU_SUPPORT [=y] && (ARM || ARM64 || COMPILE_TEST [=y]) && !GENERIC_ATOMIC64 [=y]
-   Selected by [m]:
-   - DRM_ACCEL_ROCKET [=m] && DRM [=m] && (ARM64 || COMPILE_TEST [=y]) && MMU [=y]
-
-
-vim +/status +353 drivers/accel/rocket/rocket_job.c
-
-   350	
-   351	static void rocket_job_handle_irq(struct rocket_core *core)
-   352	{
- > 353		uint32_t status, raw_status;
-   354	
-   355		pm_runtime_mark_last_busy(core->dev->dev);
-   356	
-   357		status = rocket_read(core, REG_PC_INTERRUPT_STATUS);
-   358		raw_status = rocket_read(core, REG_PC_INTERRUPT_RAW_STATUS);
-   359	
-   360		rocket_write(core, REG_PC_OPERATION_ENABLE, 0x0);
-   361		rocket_write(core, REG_PC_INTERRUPT_CLEAR, 0x1ffff);
-   362	
-   363		spin_lock(&core->job_lock);
-   364	
-   365		if (core->in_flight_job)
-   366			rocket_job_handle_done(core, core->in_flight_job);
-   367	
-   368		spin_unlock(&core->job_lock);
-   369	}
-   370	
+     Depends on [n]: IOMMU_SUPPORT [=y] && (ARM || ARM64 || COMPILE_TEST [=y]) && !GENERIC_ATOMIC64 [=y]
+     Selected by [y]:
+     - DRM_ACCEL_ROCKET [=y] && DRM [=y] && (ARM64 || COMPILE_TEST [=y]) && MMU [=y]
 
 -- 
 0-DAY CI Kernel Test Service
