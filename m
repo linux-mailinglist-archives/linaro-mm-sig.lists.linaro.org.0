@@ -2,110 +2,78 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04406906A80
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 12:56:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 279AD9079CA
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 19:27:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D5542447DF
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 10:56:09 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
-	by lists.linaro.org (Postfix) with ESMTPS id 26590400E1
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Jun 2024 10:55:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E1B6A40D49
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 17:27:28 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id 3C14640B1D
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Jun 2024 17:27:18 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=CqFn+x1w;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.9 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1718276159; x=1749812159;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=6b8ovoJTtpRLHBC4ajzYK05o5vyr6KBXY3vrPVEqJ8Q=;
-  b=CqFn+x1wOCQ+MmZPdmbUXywU5A6mmHfaF+O9WYfsI2+lWkEbbejdE4OL
-   8LPnkcM3Erx5DXXiVUvXIaH+mebH4sGJuT1NLHHjo/1yutUpBuzgrMcnt
-   DTVPjsQcEy1kPcdTgXI73J889R5XIISGGK0t+gsqZk4XX9ulKAbX+9JBj
-   jRyus3siiIr9U1+Fq+15BruAf2rPgGpLXnj3wy0jkRXGI7AqY8Z958XR6
-   Erlq3TDvGqu1eCjMYcAbuHGG6kdgywaN8coCRtblWybEAvhht2V595Ccb
-   bbwrXkDPj3wBSx8KZLpQKH/LFIdcrB+1kq37+F5AW3PnFtxFwjhVXR7vY
-   w==;
-X-CSE-ConnectionGUID: ZxoERcXvQnKmoHvyhF10fA==
-X-CSE-MsgGUID: nx5FacOeTAeDGdaqURxiIw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11101"; a="37606722"
-X-IronPort-AV: E=Sophos;i="6.08,234,1712646000";
-   d="scan'208";a="37606722"
-Received: from orviesa004.jf.intel.com ([10.64.159.144])
-  by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jun 2024 03:55:58 -0700
-X-CSE-ConnectionGUID: tnrO+fJUQeGyx0/k0IZjWg==
-X-CSE-MsgGUID: bKS/wAsASY+1gpvGdJC2ng==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,234,1712646000";
-   d="scan'208";a="45228251"
-Received: from lkp-server01.sh.intel.com (HELO 628d7d8b9fc6) ([10.239.97.150])
-  by orviesa004.jf.intel.com with ESMTP; 13 Jun 2024 03:55:51 -0700
-Received: from kbuild by 628d7d8b9fc6 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1sHi7R-0002WE-0F;
-	Thu, 13 Jun 2024 10:55:49 +0000
-Date: Thu, 13 Jun 2024 18:55:08 +0800
-From: kernel test robot <lkp@intel.com>
-To: Tomeu Vizoso <tomeu@tomeuvizoso.net>, Joerg Roedel <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
-	Heiko Stuebner <heiko@sntech.de>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Oded Gabbay <ogabbay@kernel.org>,
-	Tomeu Vizoso <tomeu.vizoso@tomeuvizoso.net>,
-	David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <202406131802.9chtX0Ci-lkp@intel.com>
-References: <20240612-6-10-rocket-v1-6-060e48eea250@tomeuvizoso.net>
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=Y+Bsy4LV;
+	spf=pass (lists.linaro.org: domain of robh@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=robh@kernel.org;
+	dmarc=pass (policy=none) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by dfw.source.kernel.org (Postfix) with ESMTP id A1BEF61C0A;
+	Thu, 13 Jun 2024 17:27:17 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2747AC2BBFC;
+	Thu, 13 Jun 2024 17:27:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1718299637;
+	bh=opDT7KR3b/7zSgo/k+eb6uhV3+Agy5mHhqWVAV0NPaE=;
+	h=Date:From:To:Cc:In-Reply-To:References:Subject:From;
+	b=Y+Bsy4LVeheYOVXZrOYJG5COt6xXLdymsCT0DX3EfwzBbiMh5HmUPu6UEHQQ/d9cb
+	 HWzh7yHQZBMwuOm6r0eYA7B/EpAwZkePtqoqInyKSHyoQzpGElhBZFQHBaGXK6UxXO
+	 auYJL3sL6o5d+cyPhTHz77sVqZjWl/LDbb7fPurAjAqOC07EdG5PrhjuTh47GUtDD8
+	 Gi1RhWgovtVdG39zJZX1X5KY3fGAjwb5ybaCQjNMHWSDswavq56ETkw2msQsItJI3K
+	 jaUiRIPeo8L1jONLDopd5pT0Gtg7CmvvDmQq6oSJIurYIUIb5JsWNn39LgDnneESAH
+	 6yfZypumrPUFQ==
+Date: Thu, 13 Jun 2024 11:27:15 -0600
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20240612-6-10-rocket-v1-6-060e48eea250@tomeuvizoso.net>
+From: "Rob Herring (Arm)" <robh@kernel.org>
+To: Tomeu Vizoso <tomeu@tomeuvizoso.net>
+In-Reply-To: <20240612-6-10-rocket-v1-0-060e48eea250@tomeuvizoso.net>
+References: <20240612-6-10-rocket-v1-0-060e48eea250@tomeuvizoso.net>
+Message-Id: <171829929988.2050064.4076911589675234408.robh@kernel.org>
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 26590400E1
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.50 / 15.00];
+X-Rspamd-Queue-Id: 3C14640B1D
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
-	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ARC_NA(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[29];
 	MISSING_XM_UA(0.00)[];
-	FREEMAIL_CC(0.00)[pgazz.com,gmail.com,lists.linux.dev,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	RCPT_COUNT_TWELVE(0.00)[25];
+	MIME_TRACE(0.00)[0:+];
 	TAGGED_RCPT(0.00)[dt];
-	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	FREEMAIL_TO(0.00)[tomeuvizoso.net,8bytes.org,kernel.org,arm.com,sntech.de,gmail.com,ffwll.ch,linux.intel.com,suse.de,pengutronix.de,linaro.org,amd.com];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[linux.intel.com,vger.kernel.org,kernel.org,tomeuvizoso.net,lists.linux.dev,gmail.com,pengutronix.de,suse.de,ffwll.ch,lists.infradead.org,lists.freedesktop.org,arm.com,8bytes.org,linaro.org,lists.linaro.org,sntech.de,amd.com];
 	TO_DN_SOME(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+]
-Message-ID-Hash: 5E3RSI3CBML447X624QWTU2E6UPVMIY6
-X-Message-ID-Hash: 5E3RSI3CBML447X624QWTU2E6UPVMIY6
-X-MailFrom: lkp@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Paul Gazzillo <paul@pgazz.com>, Necip Fazil Yildiran <fazilyildiran@gmail.com>, oe-kbuild-all@lists.linux.dev, iommu@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+]
+Message-ID-Hash: KTZOZXWBSILNJRGZZA533HYJGW4I6CUM
+X-Message-ID-Hash: KTZOZXWBSILNJRGZZA533HYJGW4I6CUM
+X-MailFrom: robh@kernel.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, linux-kernel@vger.kernel.org, Krzysztof Kozlowski <krzk+dt@kernel.org>, Tomeu Vizoso <tomeu.vizoso@tomeuvizoso.net>, iommu@lists.linux.dev, Philipp Zabel <p.zabel@pengutronix.de>, Thomas Zimmermann <tzimmermann@suse.de>, Conor Dooley <conor+dt@kernel.org>, Oded Gabbay <ogabbay@kernel.org>, Daniel Vetter <daniel@ffwll.ch>, linux-arm-kernel@lists.infradead.org, Maxime Ripard <mripard@kernel.org>, devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-rockchip@lists.infradead.org, Robin Murphy <robin.murphy@arm.com>, linux-media@vger.kernel.org, Joerg Roedel <joro@8bytes.org>, Sumit Semwal <sumit.semwal@linaro.org>, linaro-mm-sig@lists.linaro.org, Will Deacon <will@kernel.org>, Heiko Stuebner <heiko@sntech.de>, =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 6/9] accel/rocket: Add a new driver for Rockchip's NPU
+Subject: [Linaro-mm-sig] Re: [PATCH 0/9] New DRM accel driver for Rockchip's RKNN NPU
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5E3RSI3CBML447X624QWTU2E6UPVMIY6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KTZOZXWBSILNJRGZZA533HYJGW4I6CUM/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -115,34 +83,105 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi Tomeu,
 
-kernel test robot noticed the following build warnings:
+On Wed, 12 Jun 2024 15:52:53 +0200, Tomeu Vizoso wrote:
+> This series adds a new driver for the NPU that Rockchip includes in its
+> newer SoCs, developed by them on the NVDLA base.
+> 
+> In its current form, it supports the specific NPU in the RK3588 SoC.
+> 
+> The userspace driver is part of Mesa and an initial draft can be found at:
+> 
+> https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29698
+> 
+> Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
+> ---
+> Tomeu Vizoso (9):
+>       iommu/rockchip: Add compatible for rockchip,rk3588-iommu
+>       iommu/rockchip: Attach multiple power domains
+>       dt-bindings: mailbox: rockchip,rknn: Add bindings
+>       arm64: dts: rockchip: Add nodes for NPU and its MMU to rk3588s
+>       arm64: dts: rockchip: Enable the NPU on quartzpro64
+>       accel/rocket: Add a new driver for Rockchip's NPU
+>       accel/rocket: Add IOCTL for BO creation
+>       accel/rocket: Add job submission IOCTL
+>       accel/rocket: Add IOCTLs for synchronizing memory accesses
+> 
+>  .../devicetree/bindings/npu/rockchip,rknn.yaml     |  123 +
+>  MAINTAINERS                                        |    8 +
+>  .../arm64/boot/dts/rockchip/rk3588-quartzpro64.dts |    8 +
+>  arch/arm64/boot/dts/rockchip/rk3588s.dtsi          |   53 +
+>  drivers/accel/Kconfig                              |    1 +
+>  drivers/accel/Makefile                             |    1 +
+>  drivers/accel/rocket/Kconfig                       |   13 +
+>  drivers/accel/rocket/Makefile                      |   10 +
+>  drivers/accel/rocket/rocket_core.c                 |  155 +
+>  drivers/accel/rocket/rocket_core.h                 |   48 +
+>  drivers/accel/rocket/rocket_device.c               |   39 +
+>  drivers/accel/rocket/rocket_device.h               |   40 +
+>  drivers/accel/rocket/rocket_drv.c                  |  243 ++
+>  drivers/accel/rocket/rocket_drv.h                  |   16 +
+>  drivers/accel/rocket/rocket_gem.c                  |  136 +
+>  drivers/accel/rocket/rocket_gem.h                  |   33 +
+>  drivers/accel/rocket/rocket_job.c                  |  708 ++++
+>  drivers/accel/rocket/rocket_job.h                  |   49 +
+>  drivers/accel/rocket/rocket_registers.h            | 4449 ++++++++++++++++++++
+>  drivers/iommu/rockchip-iommu.c                     |   39 +
+>  include/uapi/drm/rocket_accel.h                    |  116 +
+>  21 files changed, 6288 insertions(+)
+> ---
+> base-commit: 83a7eefedc9b56fe7bfeff13b6c7356688ffa670
+> change-id: 20240612-6-10-rocket-9316defc14c7
+> 
+> Best regards,
+> --
+> Tomeu Vizoso <tomeu@tomeuvizoso.net>
+> 
+> 
+> 
 
-[auto build test WARNING on 83a7eefedc9b56fe7bfeff13b6c7356688ffa670]
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Tomeu-Vizoso/iommu-rockchip-Add-compatible-for-rockchip-rk3588-iommu/20240612-215814
-base:   83a7eefedc9b56fe7bfeff13b6c7356688ffa670
-patch link:    https://lore.kernel.org/r/20240612-6-10-rocket-v1-6-060e48eea250%40tomeuvizoso.net
-patch subject: [PATCH 6/9] accel/rocket: Add a new driver for Rockchip's NPU
-config: arc-kismet-CONFIG_IOMMU_IO_PGTABLE_LPAE-CONFIG_DRM_ACCEL_ROCKET-0-0 (https://download.01.org/0day-ci/archive/20240613/202406131802.9chtX0Ci-lkp@intel.com/config)
-reproduce: (https://download.01.org/0day-ci/archive/20240613/202406131802.9chtX0Ci-lkp@intel.com/reproduce)
+My bot found new DTB warnings on the .dts files added or changed in this
+series.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202406131802.9chtX0Ci-lkp@intel.com/
+Some warnings may be from an existing SoC .dtsi. Or perhaps the warnings
+are fixed by another series. Ultimately, it is up to the platform
+maintainer whether these warnings are acceptable or not. No need to reply
+unless the platform maintainer has comments.
 
-kismet warnings: (new ones prefixed by >>)
->> kismet: WARNING: unmet direct dependencies detected for IOMMU_IO_PGTABLE_LPAE when selected by DRM_ACCEL_ROCKET
-   WARNING: unmet direct dependencies detected for IOMMU_IO_PGTABLE_LPAE
-     Depends on [n]: IOMMU_SUPPORT [=y] && (ARM || ARM64 || COMPILE_TEST [=y]) && !GENERIC_ATOMIC64 [=y]
-     Selected by [y]:
-     - DRM_ACCEL_ROCKET [=y] && DRM [=y] && (ARM64 || COMPILE_TEST [=y]) && MMU [=y]
+If you already ran DT checks and didn't see these error(s), then
+make sure dt-schema is up to date:
 
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+  pip3 install dtschema --upgrade
+
+
+New warnings running 'make CHECK_DTBS=y rockchip/rk3588-quartzpro64.dtb' for 20240612-6-10-rocket-v1-0-060e48eea250@tomeuvizoso.net:
+
+arch/arm64/boot/dts/rockchip/rk3588-quartzpro64.dtb: iommu@fdab9000: compatible: 'oneOf' conditional failed, one must be fixed:
+	['rockchip,rk3588-iommu'] is too short
+	'rockchip,rk3588-iommu' is not one of ['rockchip,iommu', 'rockchip,rk3568-iommu']
+	from schema $id: http://devicetree.org/schemas/iommu/rockchip,iommu.yaml#
+arch/arm64/boot/dts/rockchip/rk3588-quartzpro64.dtb: iommu@fdab9000: reg: [[0, 4255879168, 0, 256], [0, 4255883264, 0, 256], [0, 4255948800, 0, 256], [0, 4256014336, 0, 256]] is too long
+	from schema $id: http://devicetree.org/schemas/iommu/rockchip,iommu.yaml#
+arch/arm64/boot/dts/rockchip/rk3588-quartzpro64.dtb: iommu@fdab9000: interrupts: [[0, 110, 4, 0], [0, 111, 4, 0], [0, 112, 4, 0]] is too long
+	from schema $id: http://devicetree.org/schemas/iommu/rockchip,iommu.yaml#
+arch/arm64/boot/dts/rockchip/rk3588-quartzpro64.dtb: iommu@fdab9000: clocks: [[28, 287], [28, 276], [28, 278], [28, 288], [28, 277], [28, 279]] is too long
+	from schema $id: http://devicetree.org/schemas/iommu/rockchip,iommu.yaml#
+arch/arm64/boot/dts/rockchip/rk3588-quartzpro64.dtb: iommu@fdab9000: clock-names:0: 'aclk' was expected
+	from schema $id: http://devicetree.org/schemas/iommu/rockchip,iommu.yaml#
+arch/arm64/boot/dts/rockchip/rk3588-quartzpro64.dtb: iommu@fdab9000: clock-names:1: 'iface' was expected
+	from schema $id: http://devicetree.org/schemas/iommu/rockchip,iommu.yaml#
+arch/arm64/boot/dts/rockchip/rk3588-quartzpro64.dtb: iommu@fdab9000: clock-names: ['aclk0', 'aclk1', 'aclk2', 'iface0', 'iface1', 'iface2'] is too long
+	from schema $id: http://devicetree.org/schemas/iommu/rockchip,iommu.yaml#
+arch/arm64/boot/dts/rockchip/rk3588-quartzpro64.dtb: iommu@fdab9000: power-domains: [[30, 9], [30, 10], [30, 11]] is too long
+	from schema $id: http://devicetree.org/schemas/iommu/rockchip,iommu.yaml#
+arch/arm64/boot/dts/rockchip/rk3588-quartzpro64.dtb: iommu@fdab9000: 'interrupt-names', 'power-domain-names' do not match any of the regexes: 'pinctrl-[0-9]+'
+	from schema $id: http://devicetree.org/schemas/iommu/rockchip,iommu.yaml#
+
+
+
+
+
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
