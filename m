@@ -2,258 +2,135 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFACD907C1B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 21:15:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id C2B0F90877E
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 14 Jun 2024 11:32:13 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 07F36447A5
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 13 Jun 2024 19:15:55 +0000 (UTC)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
-	by lists.linaro.org (Postfix) with ESMTPS id 55389410D1
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 13 Jun 2024 19:15:40 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4A73F400CE
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 14 Jun 2024 09:32:12 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id B1C28400CE
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 14 Jun 2024 09:32:02 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=gzUl1M7v;
-	spf=pass (lists.linaro.org: domain of robh@kernel.org designates 145.40.73.55 as permitted sender) smtp.mailfrom=robh@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=dowkx4Wl;
+	spf=pass (lists.linaro.org: domain of broonie@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=broonie@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sin.source.kernel.org (Postfix) with ESMTP id 0CAF8CE1D2A;
-	Thu, 13 Jun 2024 19:15:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 08D34C2BBFC;
-	Thu, 13 Jun 2024 19:15:37 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id 5BC9061EE5;
+	Fri, 14 Jun 2024 09:32:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75168C2BD10;
+	Fri, 14 Jun 2024 09:32:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1718306137;
-	bh=PxaAEnheuEVKucWpehjXgII5Lh2MtTO4KEUYjKFPDkw=;
+	s=k20201202; t=1718357522;
+	bh=vq/hKXj8k3TXQ6CBXyolStxtljiu0fDBYD/cq4bFmRs=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=gzUl1M7vQrd2T8fS4MvHteaVlR1Jg0QGhIBkzYQ8VNBg0lTX2rpjj0pAC/eLgQY/e
-	 6AQ8nRPOww0PlBfjVxVpfPv9MUz/a0mQzYdvhCAdVq8F4IuRuq8llzgQ03mjrSFBMp
-	 +5mY9eOtmwMrpRXlt0ZSoID0xDfxfeHSYywgaxLNGv6CeG735rEWHy6IGMeMIJIypf
-	 oxzJxsAAuj5LA/6v4XLmFfCiKZWRQQi9QIOcrOCZGCcOykdQ8kub+XLk8yPJGzfQuE
-	 hSFCbKTpsZMyLng1o5+VvInMLoNLXzvLGq8w3AV1ghg3gNmXN1ETemlf7jYNXWkpH6
-	 xNhP+d2XQzwLg==
-Date: Thu, 13 Jun 2024 13:15:35 -0600
-From: Rob Herring <robh@kernel.org>
-To: Tomeu Vizoso <tomeu@tomeuvizoso.net>
-Message-ID: <20240613191535.GA2319626-robh@kernel.org>
-References: <20240612-6-10-rocket-v1-0-060e48eea250@tomeuvizoso.net>
- <20240612-6-10-rocket-v1-3-060e48eea250@tomeuvizoso.net>
+	b=dowkx4Wli/K0fxQuXPa9Ov4p8jq4KCLXebXQhTLM5C+aiOubAYAqt6VKGvEfTd+is
+	 u1H5cT2n6PNIyOSwsRfQdqH8u3Ft3fyV9zHmquoyyb8BUFk+PERVN+tIV4ajqw8vsW
+	 7RY/uftugQcGLKrN6adOWRZRq7HYsGiNvsG/NHATdB9mbrBWreXhWtLEtiVV/8DM6O
+	 /vkRXKIZ9h/aVv+Tf83y0fRDuc/X49dFn9IxjzSMYU720OV2uuxRpCpBG/1DNhh+th
+	 z0C+Kh+7fItagFuiZgbzOIl7R01Bac1D8IAu15pqxJKVOASbc5i9MjozYRBusaqX82
+	 AGLEieEUdavxA==
+Date: Fri, 14 Jun 2024 10:31:58 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Alexandre Mergnat <amergnat@baylibre.com>
+Message-ID: <ZmwODkYov79VHznK@finisterre.sirena.org.uk>
+References: <20240226-audio-i350-v5-0-54827318b453@baylibre.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20240612-6-10-rocket-v1-3-060e48eea250@tomeuvizoso.net>
+In-Reply-To: <20240226-audio-i350-v5-0-54827318b453@baylibre.com>
+X-Cookie: Your love life will be... interesting.
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 55389410D1
-X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.50 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+X-Rspamd-Queue-Id: B1C28400CE
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.60 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	R_SPF_ALLOW(-0.20)[+ip4:145.40.73.55];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:145.40.73.0/24, country:US];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_RCPT(0.00)[dt];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_TLS_LAST(0.00)[];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[27];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[8bytes.org,kernel.org,arm.com,sntech.de,tomeuvizoso.net,gmail.com,ffwll.ch,linux.intel.com,suse.de,pengutronix.de,linaro.org,amd.com,lists.linux.dev,lists.infradead.org,vger.kernel.org,lists.freedesktop.org,lists.linaro.org];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	TAGGED_RCPT(0.00)[dt];
+	FREEMAIL_CC(0.00)[gmail.com,kernel.org,linaro.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com,vger.kernel.org,lists.infradead.org,lists.freedesktop.org,lists.linaro.org,baylibre.com];
 	RCVD_COUNT_TWO(0.00)[2];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	DKIM_TRACE(0.00)[kernel.org:+]
-Message-ID-Hash: EZNKKY43I3AF4VJDZSQKJY45HQ66FWGJ
-X-Message-ID-Hash: EZNKKY43I3AF4VJDZSQKJY45HQ66FWGJ
-X-MailFrom: robh@kernel.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, Heiko Stuebner <heiko@sntech.de>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Oded Gabbay <ogabbay@kernel.org>, Tomeu Vizoso <tomeu.vizoso@tomeuvizoso.net>, Daniel Vetter <daniel@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Philipp Zabel <p.zabel@pengutronix.de>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, iommu@lists.linux.dev, linux-arm-kernel@lists.infradead.org, linux-rockchip@lists.infradead.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: YRZVP4WVQ46KLOI3N6XVCE2HFOX2GGCO
+X-Message-ID-Hash: YRZVP4WVQ46KLOI3N6XVCE2HFOX2GGCO
+X-MailFrom: broonie@kernel.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Lee Jones <lee@kernel.org>, Flora Fu <flora.fu@mediatek.com>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, Nicolas Belin <nbelin@baylibre.
+ com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 3/9] dt-bindings: mailbox: rockchip,rknn: Add bindings
+Subject: [Linaro-mm-sig] Re: [PATCH RESEND v5 00/16] Add audio support for the MediaTek Genio 350-evk board
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EZNKKY43I3AF4VJDZSQKJY45HQ66FWGJ/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YRZVP4WVQ46KLOI3N6XVCE2HFOX2GGCO/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
+Content-Type: multipart/mixed; boundary="===============6652113739360630499=="
+
+
+--===============6652113739360630499==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="SeMD/ZPP93d62FnM"
+Content-Disposition: inline
+
+
+--SeMD/ZPP93d62FnM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On Fri, Jun 14, 2024 at 09:27:43AM +0200, Alexandre Mergnat wrote:
+> This serie aim to add the following audio support for the Genio 350-evk:
+> - Playback
+>   - 2ch Headset Jack (Earphone)
+>   - 1ch Line-out Jack (Speaker)
+>   - 8ch HDMI Tx
+
+I seem to remember you had review comments that needed addressing from
+AngeloGioacchino, why resend without addressing those?
+
+--SeMD/ZPP93d62FnM
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmZsDg4ACgkQJNaLcl1U
+h9AoDwf9Gw5El3fz0zRFzNFxxe/7UfRa8HACWErrPscsXGk4tslBOE3UwCx3bw4Q
+6VnbJ45siXspBD7/Zjhjhi9lvAZlz6ucKm2glWijqZHLg9xmSBrRyEDb2G98FWlI
+SMczNAxg5QXwBUnID0bua6y5ZOldZEAGl53t5KuXWRe0/Znwns2+gUpSt3MAoDp8
+rPfYqUv2whvlBzGYmg6XlbTskN/c/+qpODFdThrx57aGRjxRoVc82kAmN814Gbc/
+nqKrNhIYzQDYBwKB1cuDXatDavgYFA5FugzeuZ80Va5/ZiuMX7JLgMHeVGQJZrQq
+Jbv+xbpMJ+ow5S6rLO0D2CcOA91DsA==
+=TqJQ
+-----END PGP SIGNATURE-----
+
+--SeMD/ZPP93d62FnM--
+
+--===============6652113739360630499==
 Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Wed, Jun 12, 2024 at 03:52:56PM +0200, Tomeu Vizoso wrote:
-> Add the bindings for the Neural Processing Unit IP from Rockchip.
-
-Subject is wrong. Not a mailbox...
-
-> Signed-off-by: Tomeu Vizoso <tomeu@tomeuvizoso.net>
-> ---
->  .../devicetree/bindings/npu/rockchip,rknn.yaml     | 123 +++++++++++++++++++++
->  1 file changed, 123 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/npu/rockchip,rknn.yaml b/Documentation/devicetree/bindings/npu/rockchip,rknn.yaml
-> new file mode 100644
-> index 000000000000..570a4889c11c
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/npu/rockchip,rknn.yaml
-> @@ -0,0 +1,123 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/npu/rockchip,rknn.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Neural Processing Unit IP from Rockchip, based on NVIDIA's NVDLA
-> +
-> +maintainers:
-> +  - Tomeu Vizoso <tomeu@tomeuvizoso.net>
-> +
-> +description: |+
-> +  Rockchip IP for accelerating inference of neural networks, based on NVIDIA's open source NVDLA IP.
-
-Wrap at 80.
-
-> +
-> +properties:
-> +  compatible:
-> +    items:
-> +      - enum:
-> +          - rockchip,rk3588-rknn
-> +      - const: rockchip,rknn
-
-Is there any evidence this block is 'the same' on multiple chips?
-
-> +
-> +  reg:
-> +    description: Base registers for NPU cores
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  interrupts:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  interrupt-names:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  clocks:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  clock-names:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  assigned-clocks:
-> +    maxItems: 1
-> +
-> +  assigned-clock-rates:
-> +    maxItems: 1
-
-You don't need assigned-clocks in schemas.
-
-> +
-> +  resets:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  reset-names:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  power-domains:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  power-domain-names:
-> +    minItems: 1
-> +    maxItems: 20
-> +
-> +  iommus:
-> +    items:
-> +      - description: IOMMU for all cores
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - interrupts
-> +  - interrupt-names
-> +  - clocks
-> +  - clock-names
-> +  - assigned-clocks
-> +  - assigned-clock-rates
-
-And never should be required.
-
-> +  - resets
-> +  - reset-names
-> +  - power-domains
-> +  - power-domain-names
-> +  - iommus
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
-> +
-> +    bus {
-> +        #address-cells = <2>;
-> +        #size-cells = <2>;
-> +
-> +        rknn: npu@fdab0000 {
-> +          compatible = "rockchip,rk3588-rknn", "rockchip,rknn";
-> +          reg = <0x0 0xfdab0000 0x0 0x9000>,
-> +                <0x0 0xfdac0000 0x0 0x9000>,
-> +                <0x0 0xfdad0000 0x0 0x9000>;
-> +          interrupts = <GIC_SPI 110 IRQ_TYPE_LEVEL_HIGH 0>,
-> +                       <GIC_SPI 111 IRQ_TYPE_LEVEL_HIGH 0>,
-> +                       <GIC_SPI 112 IRQ_TYPE_LEVEL_HIGH 0>;
-> +          interrupt-names = "npu0_irq", "npu1_irq", "npu2_irq";
-
-'irq' is redundant. Names with the index are also kind of pointless
-unless they can be not contiguous.
-
-> +          clocks = <&scmi_clk 0>, <&cru 1>,
-> +                   <&cru 2>, <&cru 3>,
-> +                   <&cru 4>, <&cru 5>,
-> +                   <&cru 6>, <&cru 7>;
-> +          clock-names = "clk_npu",
-
-'clk_' is redundant.
-
-> +                  "aclk0", "aclk1", "aclk2",
-> +                  "hclk0", "hclk1", "hclk2",
-> +                  "pclk";
-
-Assuming 0, 1, 2 are cores and may vary, put all the fixed clocks first 
-and then better to do "aclk0", "hclk0", "aclk1", "hclk1",...
-
-> +          assigned-clocks = <&scmi_clk 0>;
-> +          assigned-clock-rates = <200000000>;
-> +          resets = <&cru 0>, <&cru 1>, <&cru 2>,
-> +                   <&cru 3>, <&cru 4>, <&cru 5>;
-> +          reset-names = "srst_a0", "srst_a1", "srst_a2",
-> +                        "srst_h0", "srst_h1", "srst_h2";
-
-And similar order here.
-
-> +          power-domains = <&power 0>, <&power 1>, <&power 2>;
-> +          power-domain-names = "npu0", "npu1", "npu2";
-> +          iommus = <&rknpu_mmu>;
-> +          status = "disabled";
-> +        };
-> +    };
-> +...
-> 
-> -- 
-> 2.45.2
-> 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============6652113739360630499==--
