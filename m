@@ -2,40 +2,40 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7DD890C5BA
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Jun 2024 12:03:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 83C7590C5BE
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Jun 2024 12:03:49 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id B6DB4447A5
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Jun 2024 10:03:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 94A59446DB
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 18 Jun 2024 10:03:48 +0000 (UTC)
 Received: from aposti.net (aposti.net [89.234.176.197])
-	by lists.linaro.org (Postfix) with ESMTPS id C51EB447AE
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Jun 2024 10:03:16 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 973B044783
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 18 Jun 2024 10:03:23 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=crapouillou.net header.s=mail header.b=JN3FcudL;
+	dkim=pass header.d=crapouillou.net header.s=mail header.b=EESD9ly6;
 	spf=pass (lists.linaro.org: domain of paul@crapouillou.net designates 89.234.176.197 as permitted sender) smtp.mailfrom=paul@crapouillou.net;
 	dmarc=pass (policy=none) header.from=crapouillou.net
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
-	s=mail; t=1718704990;
+	s=mail; t=1718704991;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=efgVLlNGDnopAmZBC5nh+wIIy52d8Py2hYi67rMzjJ0=;
-	b=JN3FcudLNq/SSIZoMe8ldPeJhBQkpEe4d137sMJZXq/IGqeyiGifshBpfXtoUHzkd9+GzA
-	NYbeTtTMPbu7nIepMZq8Kd54bZkAFaCDKOPYXJj3tj+GO9HnWdv5vAKQe5dTpnGr6kA1eW
-	hu3oi1UCURO5Tf7hpUZTlGoaMUghfT8=
+	bh=BSnpIY3MKSqN2Xbh+3dII8pUFm0HIfotCaLrSnzvqJo=;
+	b=EESD9ly6KffVvT5xygjvnxeUSTBwKbz3lDXiEicB05FxTvE3YwPBF2cW/VWpKcf56mpFS2
+	WS7w3nCkFgODPJThNYo13JRdprR5jAB5PWMO4frBnqfdMpTxdtNXf1A1WcqC6ts5XyTiBc
+	SrwH7P0xKSd0d3ebwe7UZePZ5tQdCOc=
 From: Paul Cercueil <paul@crapouillou.net>
 To: Jonathan Cameron <jic23@kernel.org>,
 	Lars-Peter Clausen <lars@metafoo.de>,
 	Vinod Koul <vkoul@kernel.org>,
 	Sumit Semwal <sumit.semwal@linaro.org>,
 	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>
-Date: Tue, 18 Jun 2024 12:02:56 +0200
-Message-ID: <20240618100302.72886-2-paul@crapouillou.net>
+Date: Tue, 18 Jun 2024 12:02:57 +0200
+Message-ID: <20240618100302.72886-3-paul@crapouillou.net>
 In-Reply-To: <20240618100302.72886-1-paul@crapouillou.net>
 References: <20240618100302.72886-1-paul@crapouillou.net>
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: C51EB447AE
+X-Rspamd-Queue-Id: 973B044783
 X-Spamd-Bar: ------
 X-Spamd-Result: default: False [-6.50 / 15.00];
 	REPLY(-4.00)[];
@@ -60,17 +60,17 @@ X-Spamd-Result: default: False [-6.50 / 15.00];
 	DKIM_TRACE(0.00)[crapouillou.net:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: XHW6IHIOTUFTSLO4XEYW4JTMNL3PPRYA
-X-Message-ID-Hash: XHW6IHIOTUFTSLO4XEYW4JTMNL3PPRYA
+Message-ID-Hash: A3IIQAAEUVTYCASPRT6AVGPV454DB5EK
+X-Message-ID-Hash: A3IIQAAEUVTYCASPRT6AVGPV454DB5EK
 X-MailFrom: paul@crapouillou.net
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Jonathan Corbet <corbet@lwn.net>, Nuno Sa <nuno.sa@analog.com>, linux-iio@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Paul Cercueil <paul@crapouillou.net>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH v11 1/7] dmaengine: Add API function dmaengine_prep_peripheral_dma_vec()
+Subject: [Linaro-mm-sig] [PATCH v11 2/7] dmaengine: dma-axi-dmac: Implement device_prep_peripheral_dma_vec
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XHW6IHIOTUFTSLO4XEYW4JTMNL3PPRYA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/A3IIQAAEUVTYCASPRT6AVGPV454DB5EK/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -80,20 +80,7 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-This function can be used to initiate a scatter-gather DMA transfer,
-where the address and size of each segment is located in one entry of
-the dma_vec array.
-
-The major difference with dmaengine_prep_slave_sg() is that it supports
-specifying the lengths of each DMA transfer; as trying to override the
-length of the transfer with dmaengine_prep_slave_sg() is a very tedious
-process. The introduction of a new API function is also justified by the
-fact that scatterlists are on their way out.
-
-Note that dmaengine_prep_interleaved_dma() is not helpful either in that
-case, as it assumes that the address of each segment will be higher than
-the one of the previous segment, which we just cannot guarantee in case
-of a scatter-gather transfer.
+Add implementation of the .device_prep_peripheral_dma_vec() callback.
 
 Signed-off-by: Paul Cercueil <paul@crapouillou.net>
 Co-developed-by: Nuno Sa <nuno.sa@analog.com>
@@ -102,86 +89,76 @@ Signed-off-by: Nuno Sa <nuno.sa@analog.com>
 ---
 v3: New patch
 
-v5: Replace with function dmaengine_prep_slave_dma_vec(), and struct
-    'dma_vec'.
-    Note that at some point we will need to support cyclic transfers
-    using dmaengine_prep_slave_dma_vec(). Maybe with a new "flags"
-    parameter to the function?
+v5: Implement .device_prep_slave_dma_vec() instead of v3's
+    .device_prep_slave_dma_array().
 
-v7:
-  - Renamed *device_prep_slave_dma_vec() -> device_prep_peripheral_dma_vec();
-  - Added a new flag parameter to the function as agreed between Paul
-    and Vinod. I renamed the first parameter to prep_flags as it's supposed to
-    be used (I think) with enum dma_ctrl_flags. I'm not really sure how that API
-    can grow but I was thinking in just having a bool cyclic parameter (as the
-    first intention of the flags is to support cyclic transfers) but ended up
-    "respecting" the previously agreed approach.
+v6: Use new prototype for axi_dmac_alloc_desc() as it changed upstream.
 
-v10:
-  - Add kernel doc to dmaengine_prep_peripheral_dma_vec()
-  - Remove extra flags parameter
+v7: Adapted patch for the changes made in patch 1.
+
+v10: Use the new function prototype (without the extra prep_flags).
 ---
- include/linux/dmaengine.h | 33 +++++++++++++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
+ drivers/dma/dma-axi-dmac.c | 40 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
 
-diff --git a/include/linux/dmaengine.h b/include/linux/dmaengine.h
-index 73537fddbb52..b137fdb56093 100644
---- a/include/linux/dmaengine.h
-+++ b/include/linux/dmaengine.h
-@@ -160,6 +160,16 @@ struct dma_interleaved_template {
- 	struct data_chunk sgl[];
- };
- 
-+/**
-+ * struct dma_vec - DMA vector
-+ * @addr: Bus address of the start of the vector
-+ * @len: Length in bytes of the DMA vector
-+ */
-+struct dma_vec {
-+	dma_addr_t addr;
-+	size_t len;
-+};
-+
- /**
-  * enum dma_ctrl_flags - DMA flags to augment operation preparation,
-  *  control completion, and communicate status.
-@@ -910,6 +920,10 @@ struct dma_device {
- 	struct dma_async_tx_descriptor *(*device_prep_dma_interrupt)(
- 		struct dma_chan *chan, unsigned long flags);
- 
-+	struct dma_async_tx_descriptor *(*device_prep_peripheral_dma_vec)(
-+		struct dma_chan *chan, const struct dma_vec *vecs,
-+		size_t nents, enum dma_transfer_direction direction,
-+		unsigned long flags);
- 	struct dma_async_tx_descriptor *(*device_prep_slave_sg)(
- 		struct dma_chan *chan, struct scatterlist *sgl,
- 		unsigned int sg_len, enum dma_transfer_direction direction,
-@@ -973,6 +987,25 @@ static inline struct dma_async_tx_descriptor *dmaengine_prep_slave_single(
- 						  dir, flags, NULL);
+diff --git a/drivers/dma/dma-axi-dmac.c b/drivers/dma/dma-axi-dmac.c
+index bdb752f11869..36943b0c6d60 100644
+--- a/drivers/dma/dma-axi-dmac.c
++++ b/drivers/dma/dma-axi-dmac.c
+@@ -620,6 +620,45 @@ static struct axi_dmac_sg *axi_dmac_fill_linear_sg(struct axi_dmac_chan *chan,
+ 	return sg;
  }
  
-+/**
-+ * dmaengine_prep_peripheral_dma_vec() - Prepare a DMA scatter-gather descriptor
-+ * @chan: The channel to be used for this descriptor
-+ * @vecs: The array of DMA vectors that should be transferred
-+ * @nents: The number of DMA vectors in the array
-+ * @dir: Specifies the direction of the data transfer
-+ * @flags: DMA engine flags
-+ */
-+static inline struct dma_async_tx_descriptor *dmaengine_prep_peripheral_dma_vec(
-+	struct dma_chan *chan, const struct dma_vec *vecs, size_t nents,
-+	enum dma_transfer_direction dir, unsigned long flags)
++static struct dma_async_tx_descriptor *
++axi_dmac_prep_peripheral_dma_vec(struct dma_chan *c, const struct dma_vec *vecs,
++				 size_t nb, enum dma_transfer_direction direction,
++				 unsigned long flags)
 +{
-+	if (!chan || !chan->device || !chan->device->device_prep_peripheral_dma_vec)
++	struct axi_dmac_chan *chan = to_axi_dmac_chan(c);
++	struct axi_dmac_desc *desc;
++	unsigned int num_sgs = 0;
++	struct axi_dmac_sg *dsg;
++	size_t i;
++
++	if (direction != chan->direction)
 +		return NULL;
 +
-+	return chan->device->device_prep_peripheral_dma_vec(chan, vecs, nents,
-+							    dir, flags);
++	for (i = 0; i < nb; i++)
++		num_sgs += DIV_ROUND_UP(vecs[i].len, chan->max_length);
++
++	desc = axi_dmac_alloc_desc(chan, num_sgs);
++	if (!desc)
++		return NULL;
++
++	dsg = desc->sg;
++
++	for (i = 0; i < nb; i++) {
++		if (!axi_dmac_check_addr(chan, vecs[i].addr) ||
++		    !axi_dmac_check_len(chan, vecs[i].len)) {
++			kfree(desc);
++			return NULL;
++		}
++
++		dsg = axi_dmac_fill_linear_sg(chan, direction, vecs[i].addr, 1,
++					      vecs[i].len, dsg);
++	}
++
++	desc->cyclic = false;
++
++	return vchan_tx_prep(&chan->vchan, &desc->vdesc, flags);
 +}
 +
- static inline struct dma_async_tx_descriptor *dmaengine_prep_slave_sg(
- 	struct dma_chan *chan, struct scatterlist *sgl,	unsigned int sg_len,
- 	enum dma_transfer_direction dir, unsigned long flags)
+ static struct dma_async_tx_descriptor *axi_dmac_prep_slave_sg(
+ 	struct dma_chan *c, struct scatterlist *sgl,
+ 	unsigned int sg_len, enum dma_transfer_direction direction,
+@@ -1061,6 +1100,7 @@ static int axi_dmac_probe(struct platform_device *pdev)
+ 	dma_dev->device_tx_status = dma_cookie_status;
+ 	dma_dev->device_issue_pending = axi_dmac_issue_pending;
+ 	dma_dev->device_prep_slave_sg = axi_dmac_prep_slave_sg;
++	dma_dev->device_prep_peripheral_dma_vec = axi_dmac_prep_peripheral_dma_vec;
+ 	dma_dev->device_prep_dma_cyclic = axi_dmac_prep_dma_cyclic;
+ 	dma_dev->device_prep_interleaved_dma = axi_dmac_prep_interleaved;
+ 	dma_dev->device_terminate_all = axi_dmac_terminate_all;
 -- 
 2.43.0
 
