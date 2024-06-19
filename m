@@ -2,37 +2,37 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6E39790E77E
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jun 2024 11:56:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id D41B890E785
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jun 2024 11:56:29 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 800AF44C7A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jun 2024 09:56:11 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E1BAB44C83
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jun 2024 09:56:28 +0000 (UTC)
 Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
-	by lists.linaro.org (Postfix) with ESMTPS id C639644914
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jun 2024 09:55:38 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id BFB0344C6A
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jun 2024 09:55:40 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=OmjRzAxW;
+	dkim=pass header.d=collabora.com header.s=mail header.b=4U1iitXc;
 	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.194 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com;
 	dmarc=pass (policy=quarantine) header.from=collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1718790937;
-	bh=k5zFRwWLqHmR3Bl9MBcDfo6tNRRQ8+Rc5ZUSSaZAaVs=;
+	s=mail; t=1718790939;
+	bh=8QGSAxGqICnLWou/+L9cSLfTKbqC10cxA2/R2kml4NY=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=OmjRzAxWaDVNOprhuzlY+xdhrt6tm3WxAPVAdp6Si4kMylbX283Lb3exN1kNK4Qgy
-	 /JRytY2OFABlBWew4u+HxUOmzKOiRf/8ErAS9WtxPIM6oFYxeko1v0DE5O/28lHgW+
-	 C/xP+zZFPxuadRnrpoVjIOFjbE+7rBcC/bA6NahUAwS+uHYgo4mq+vlSbepbERXw4u
-	 xKrSXuRUJ0s9UIoH5v6N3mDyo7Tq4HM6FV7wlvg5dNe0cwse5Oxus1rAwIWnjLElXb
-	 EhjFQKeUoOMGN3Qe2QuS44HwIAHbtYANa8pOUYCvspfGj66ql3ypCnepP77lolatFA
-	 4ZqO7q2uMEXkg==
+	b=4U1iitXcT54VVgOPURfpPAJlRUnl+Mu0calqzUgSc4HAoH0DDYbQWWumz20KyvBON
+	 WrVA0o6Jt+J/nRBEN5/4UrG4GVE+58+GN26GVI+sSbuHb3plsz2KbRGu3XDPHkmk4d
+	 9qjKMbQLinGy1pj9vByeTkdTGC3htSHi0b6G0voDtArQJBE932rF0dsJvrajvAe9YK
+	 f6v9dDNhpWoIUWSlrJVzTrxupXi5pCp7aLKPMqlaZ3YGcN8VnzGTi6Mx/UJAKnkv4a
+	 wXhK1QFxT4hMR3ac8i1u09mcBizCCq+5TGVaupwQId2CDlFJWWWH3yshdZ0JH1p3OR
+	 nELPCN848J/kA==
 Received: from [100.113.186.2] (cola.collaboradmins.com [195.201.22.229])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
 	(Authenticated sender: kholk11)
-	by madrid.collaboradmins.com (Postfix) with ESMTPSA id 555FE37821C3;
-	Wed, 19 Jun 2024 09:55:36 +0000 (UTC)
-Message-ID: <c6bbdd70-334b-429a-aa99-1df142550826@collabora.com>
-Date: Wed, 19 Jun 2024 11:55:34 +0200
+	by madrid.collaboradmins.com (Postfix) with ESMTPSA id 1CD9537821C7;
+	Wed, 19 Jun 2024 09:55:38 +0000 (UTC)
+Message-ID: <cef36b0a-eb50-43c2-9a28-252502fba99a@collabora.com>
+Date: Wed, 19 Jun 2024 11:55:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Alexandre Mergnat <amergnat@baylibre.com>,
@@ -47,11 +47,11 @@ To: Alexandre Mergnat <amergnat@baylibre.com>,
  Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>
 References: <20240226-audio-i350-v5-0-54827318b453@baylibre.com>
- <20240226-audio-i350-v5-6-54827318b453@baylibre.com>
+ <20240226-audio-i350-v5-5-54827318b453@baylibre.com>
 From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
 Content-Language: en-US
-In-Reply-To: <20240226-audio-i350-v5-6-54827318b453@baylibre.com>
-X-Rspamd-Queue-Id: C639644914
+In-Reply-To: <20240226-audio-i350-v5-5-54827318b453@baylibre.com>
+X-Rspamd-Queue-Id: BFB0344C6A
 X-Spamd-Bar: --
 X-Spamd-Result: default: False [-2.39 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
@@ -76,22 +76,22 @@ X-Spamd-Result: default: False [-2.39 / 15.00];
 	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,kernel.org,linaro.org,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	URIBL_BLOCKED(0.00)[baylibre.com:email,collabora.com:email,collabora.com:dkim];
+	URIBL_BLOCKED(0.00)[collabora.com:email,collabora.com:dkim,baylibre.com:email];
 	MID_RHS_MATCH_FROM(0.00)[];
 	DKIM_TRACE(0.00)[collabora.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: EU3S6VWFHKQ4BCUTYYZ4OLVRTSV7TI36
-X-Message-ID-Hash: EU3S6VWFHKQ4BCUTYYZ4OLVRTSV7TI36
+Message-ID-Hash: KVR4LA53PIGTP6IGM3255LCACVPXCIUU
+X-Message-ID-Hash: KVR4LA53PIGTP6IGM3255LCACVPXCIUU
 X-MailFrom: angelogioacchino.delregno@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RESEND v5 06/16] ASoC: mediatek: mt8365: Add I2S DAI support
+Subject: [Linaro-mm-sig] Re: [PATCH RESEND v5 05/16] ASoC: mediatek: mt8365: Add audio clock control support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/EU3S6VWFHKQ4BCUTYYZ4OLVRTSV7TI36/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/KVR4LA53PIGTP6IGM3255LCACVPXCIUU/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -102,7 +102,7 @@ Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
 Il 14/06/24 09:27, Alexandre Mergnat ha scritto:
-> Add I2S Device Audio Interface support for MT8365 SoC.
+> Add audio clock wrapper and audio tuner control.
 > 
 > Signed-off-by: Alexandre Mergnat <amergnat@baylibre.com>
 
