@@ -2,130 +2,157 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94ACE90EADC
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jun 2024 14:22:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E46DB90EAE4
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jun 2024 14:22:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9B6DB4413A
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jun 2024 12:22:00 +0000 (UTC)
-Received: from aposti.net (aposti.net [89.234.176.197])
-	by lists.linaro.org (Postfix) with ESMTPS id 4C6B640B8E
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jun 2024 12:21:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id F02CC4413A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jun 2024 12:22:29 +0000 (UTC)
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
+	by lists.linaro.org (Postfix) with ESMTPS id 2FE1740B8E
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jun 2024 12:22:27 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=crapouillou.net header.s=mail header.b=H5QlHj5b;
-	spf=pass (lists.linaro.org: domain of paul@crapouillou.net designates 89.234.176.197 as permitted sender) smtp.mailfrom=paul@crapouillou.net;
-	dmarc=pass (policy=none) header.from=crapouillou.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
-	s=mail; t=1718799717;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=FVGqOE3wiRlvOnwpW+plbu90wTtSXAmdw/o00wdPQQk=;
-	b=H5QlHj5b47jmWWPmYrEyBk2CLjfodSkuNO3iFqDQL3q9TAKryupn+V75JTiH8WmGI/eIFy
-	0Zjifr0r4dCWg3FWwIzaMp3bxyNBFP/hFECEP7HFZpj/jn85MK8NLAlzARSlcjHxvvWIqv
-	zj3xrSSMAXdnhmkQLs0rsmnmfWLPh7o=
-Message-ID: <15edbedcac80961ec9b7834041e54143657cd48b.camel@crapouillou.net>
-From: Paul Cercueil <paul@crapouillou.net>
-To: Markus Elfring <Markus.Elfring@web.de>, lkp@intel.com, Nuno
- =?ISO-8859-1?Q?S=E1?= <nuno.sa@analog.com>, linux-iio@vger.kernel.org,
- dmaengine@vger.kernel.org,  linux-media@vger.kernel.org,
- dri-devel@lists.freedesktop.org,  linaro-mm-sig@lists.linaro.org, Christian
- =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Jonathan Cameron
- <jic23@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>, Sumit Semwal
- <sumit.semwal@linaro.org>, Vinod Koul <vkoul@kernel.org>
-Date: Wed, 19 Jun 2024 14:21:55 +0200
-In-Reply-To: <41fa9904-28a8-46fa-bf2a-014875409b83@web.de>
-References: <202406191014.9JAzwRV6-lkp@intel.com>
-	 <a4dd1d73-5af3-4d3d-8c0f-92dc439fa119@web.de>
-	 <d452ecc4fc703a1f98aa4f243c6ded7fbfe54b0e.camel@crapouillou.net>
-	 <cbcfb64a-e5c2-41a7-8847-227d4f6872de@web.de>
-	 <e948cd137da8e4f97bfbf7ef68a5450476aeee0c.camel@crapouillou.net>
-	 <41fa9904-28a8-46fa-bf2a-014875409b83@web.de>
-Autocrypt: addr=paul@crapouillou.net; prefer-encrypt=mutual;
- keydata=mQENBF0KhcEBCADkfmrzdTOp/gFOMQX0QwKE2WgeCJiHPWkpEuPH81/HB2dpjPZNW03ZM
- LQfECbbaEkdbN4YnPfXgcc1uBe5mwOAPV1MBlaZcEt4M67iYQwSNrP7maPS3IaQJ18ES8JJ5Uf5Uz
- FZaUawgH+oipYGW+v31cX6L3k+dGsPRM0Pyo0sQt52fsopNPZ9iag0iY7dGNuKenaEqkYNjwEgTtN
- z8dt6s3hMpHIKZFL3OhAGi88wF/21isv0zkF4J0wlf9gYUTEEY3Eulx80PTVqGIcHZzfavlWIdzhe
- +rxHTDGVwseR2Y1WjgFGQ2F+vXetAB8NEeygXee+i9nY5qt9c07m8mzjABEBAAG0JFBhdWwgQ2VyY
- 3VlaWwgPHBhdWxAY3JhcG91aWxsb3UubmV0PokBTgQTAQoAOBYhBNdHYd8OeCBwpMuVxnPua9InSr
- 1BBQJdCoXBAhsDBQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEHPua9InSr1BgvIH/0kLyrI3V0f
- 33a6D3BJwc1grbygPVYGuC5l5eMnAI+rDmLR19E2yvibRpgUc87NmPEQPpbbtAZt8On/2WZoE5OIP
- dlId/AHNpdgAtGXo0ZX4LGeVPjxjdkbrKVHxbcdcnY+zzaFglpbVSvp76pxqgVg8PgxkAAeeJV+ET
- 4t0823Gz2HzCL/6JZhvKAEtHVulOWoBh368SYdolp1TSfORWmHzvQiCCCA+j0cMkYVGzIQzEQhX7U
- rf9N/nhU5/SGLFEi9DcBfXoGzhyQyLXflhJtKm3XGB1K/pPulbKaPcKAl6rIDWPuFpHkSbmZ9r4KF
- lBwgAhlGy6nqP7O3u7q23hRW5AQ0EXQqFwQEIAMo+MgvYHsyjX3Ja4Oolg1Txzm8woj30ch2nACFC
- qaO0R/1kLj2VVeLrDyQUOlXx9PD6IQI4M8wy8m0sR4wV2p/g/paw7k65cjzYYLh+FdLNyO7IWYXnd
- JO+wDPi3aK/YKUYepqlP+QsmaHNYNdXEQDRKqNfJg8t0f5rfzp9ryxd1tCnbV+tG8VHQWiZXNqN70
- 62DygSNXFUfQ0vZ3J2D4oAcIAEXTymRQ2+hr3Hf7I61KMHWeSkCvCG2decTYsHlw5Erix/jYWqVOt
- X0roOOLqWkqpQQJWtU+biWrAksmFmCp5fXIg1Nlg39v21xCXBGxJkxyTYuhdWyu1yDQ+LSIUAEQEA
- AYkBNgQYAQoAIBYhBNdHYd8OeCBwpMuVxnPua9InSr1BBQJdCoXBAhsMAAoJEHPua9InSr1B4wsH/
- Az767YCT0FSsMNt1jkkdLCBi7nY0GTW+PLP1a4zvVqFMo/vD6uz1ZflVTUAEvcTi3VHYZrlgjcxmc
- Gu239oruqUS8Qy/xgZBp9KF0NTWQSl1iBfVbIU5VV1vHS6r77W5x0qXgfvAUWOH4gmN3MnF01SH2z
- McLiaUGF+mcwl15rHbjnT3Nu2399aSE6cep86igfCAyFUOXjYEGlJy+c6UyT+DUylpjQg0nl8MlZ/
- 7Whg2fAU9+FALIbQYQzGlT4c71SibR9T741jnegHhlmV4WXXUD6roFt54t0MSAFSVxzG8mLcSjR2c
- LUJ3NIPXixYUSEn3tQhfZj07xIIjWxAYZo=
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=GoP2Vt4e;
+	spf=pass (lists.linaro.org: domain of bagasdotme@gmail.com designates 209.85.210.174 as permitted sender) smtp.mailfrom=bagasdotme@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-pf1-f174.google.com with SMTP id d2e1a72fcca58-705e9e193caso3374944b3a.2
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jun 2024 05:22:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1718799746; x=1719404546; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=V41/rcWKltI+WknTyeXP06R8W+cGdmxAwRdLK3VXRV4=;
+        b=GoP2Vt4eL2EpVCfB51nwusGHG4wv+K0ooyPerjeAYQJXA3Reh5FJU7f+j4mPRblyeH
+         7Ar4X9ArNNVxz7bPwK7zh2BWpNJGFc2JevB2pkmcqK47pcvbp3YTtDaaH0ooPQtpPBAt
+         e4uONCM+VAFUcKTH9DNnErwD3+qZHhhSV8GvWWwusvx4OmeNYxoHALDAk5p4R/x8BZ4E
+         CcNgtaNOuf/f6C1SMQl7tuqhMgR8dK/gRJ+DCX4FK0D72K3vyPPPU5F4tov8ph/dVi18
+         fYYvB/E9GBqIDUqwokEbuSRb5rZXtg7Syu87Brze2BLqwhUOH7piqKaHL/PsfjBCbU2a
+         uExA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1718799746; x=1719404546;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=V41/rcWKltI+WknTyeXP06R8W+cGdmxAwRdLK3VXRV4=;
+        b=MfERSswm4xZLdbKEH1Gr48tAgHSokIIJE9EazyZWwA68sHefhJ1qzYe01oGSN7IuGI
+         HAywE7ntQslajdh+dP+J3PAbB9P3i+YxCl7YM9Lg7H2u7S+eKP7bVcA+wmeeO/VGH2X5
+         Gufq93YPAg0P5apQ7S8JKO0hUrmdXs+4pLp4BrtK9m/X2E/h4AsByOga4Ctwa5xtDRaY
+         oPp35UtqoAaDsmvLwsWJbHeSFXve4GtFfkAK+R9+AAPbuqAIxZQ0iRjzOKuarpUXmYIH
+         4MUXqRGXKmVc+dQS9ShXdtwwXHeQio6i06jBiDaVWbmK2MQ0zdSTjqWqIaWhSPGLRzcO
+         PsSg==
+X-Forwarded-Encrypted: i=1; AJvYcCXDKjOJ9KirjQwrdWEnb2JMp9qgk2i2Thl671lMTHKLK9j6xxyEKJzBh0MIHjDSOxjH3sk8rPG8Rp8mdf8FwgAh50OTFNj51mS32lPF244=
+X-Gm-Message-State: AOJu0YycUkUUDimmFa+UnlC0bmJaDMW49uO2EqI+s8Humiepj2vySuSh
+	3wEm6kUveoeFTtX5PJ2k97nEyTnWp3bcKNhn4APMCH+CfiA9Uxbx
+X-Google-Smtp-Source: AGHT+IFNxwWmh0mB5nhspfwKH+64F9TJyMuzEuB30lqUIBugcJh/Gng9OTFsOUwuNaX9+aJTaOMbww==
+X-Received: by 2002:a62:bd10:0:b0:705:cade:1f40 with SMTP id d2e1a72fcca58-70629c3683emr2114067b3a.11.1718799746080;
+        Wed, 19 Jun 2024 05:22:26 -0700 (PDT)
+Received: from archie.me ([103.124.138.155])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-705cc929321sm10560319b3a.26.2024.06.19.05.22.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 19 Jun 2024 05:22:25 -0700 (PDT)
+Received: by archie.me (Postfix, from userid 1000)
+	id 015D5182522A8; Wed, 19 Jun 2024 19:22:22 +0700 (WIB)
+Date: Wed, 19 Jun 2024 19:22:22 +0700
+From: Bagas Sanjaya <bagasdotme@gmail.com>
+To: Paul Cercueil <paul@crapouillou.net>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Lars-Peter Clausen <lars@metafoo.de>, Vinod Koul <vkoul@kernel.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>
+Message-ID: <ZnLNfq3QvdwlVD1t@archie.me>
+References: <20240618100302.72886-1-paul@crapouillou.net>
+ <20240618100302.72886-7-paul@crapouillou.net>
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: 4C6B640B8E
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.90 / 15.00];
-	BAYES_HAM(-2.90)[99.58%];
-	DMARC_POLICY_ALLOW(-0.50)[crapouillou.net,none];
-	R_SPF_ALLOW(-0.20)[+a];
-	R_DKIM_ALLOW(-0.20)[crapouillou.net:s=mail];
-	MIME_GOOD(-0.10)[text/plain];
-	MISSING_XM_UA(0.00)[];
+In-Reply-To: <20240618100302.72886-7-paul@crapouillou.net>
+X-Rspamd-Queue-Id: 2FE1740B8E
+X-Spamd-Bar: ------
+X-Spamd-Result: default: False [-6.20 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	SIGNED_PGP(-2.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	RWL_MAILSPIKE_GOOD(-0.10)[209.85.210.174:from];
 	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:203432, ipnet:89.234.176.0/23, country:FR];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	RCVD_COUNT_ZERO(0.00)[0];
-	FREEMAIL_TO(0.00)[web.de,intel.com,analog.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,amd.com,kernel.org,metafoo.de,linaro.org];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	NEURAL_HAM(-0.00)[-0.999];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[crapouillou.net:+]
+	FROM_HAS_DN(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_COUNT_THREE(0.00)[3];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: RQJAXRHWM66YWD3CANUIQ2QDYWPFVMAE
-X-Message-ID-Hash: RQJAXRHWM66YWD3CANUIQ2QDYWPFVMAE
-X-MailFrom: paul@crapouillou.net
+Message-ID-Hash: VJV3K6OYAOOMRGB7LB2OOCELT6L4JU2H
+X-Message-ID-Hash: VJV3K6OYAOOMRGB7LB2OOCELT6L4JU2H
+X-MailFrom: bagasdotme@gmail.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, LKML <linux-kernel@vger.kernel.org>, linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>
+CC: Jonathan Corbet <corbet@lwn.net>, Nuno Sa <nuno.sa@analog.com>, linux-iio@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [v11 3/7] iio: core: Add new DMABUF interface infrastructure
+Subject: [Linaro-mm-sig] Re: [PATCH v11 6/7] Documentation: iio: Document high-speed DMABUF based API
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/RQJAXRHWM66YWD3CANUIQ2QDYWPFVMAE/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VJV3K6OYAOOMRGB7LB2OOCELT6L4JU2H/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2430782797107967259=="
 
-TGUgbWVyY3JlZGkgMTkganVpbiAyMDI0IMOgIDEzOjU2ICswMjAwLCBNYXJrdXMgRWxmcmluZyBh
-IMOpY3JpdMKgOg0KPiDigKYNCj4gPiBodHRwczovL2xvcmUua2VybmVsLm9yZy9saW51eC1paW8v
-MjE5YWJjNDNiNGZkZDRhMTNiMzA3ZWQyZWZhYTBlNjg2OWU2OGUzZi5jYW1lbEBnbWFpbC5jb20v
-VC8jZWVmZDM2MDA2OWM0MjYxYWVjOTYyMWZhZmRlMzA5MjQ3MDY1NzFjOTQNCj4gPiANCj4gPiAo
-YW5kIHJlc3BvbnNlcyBiZWxvdykNCj4gPiANCj4gPiBJdCdzIG1vcmUgbnVhbmNlZCB0aGFuIEkg
-cmVtZW1iZXJlZC4NCj4g4oCmDQo+IA0KPiANCj4gPiA+ICogV2lsbCB0aGUgZGVzaXJlIGdyb3cg
-Zm9yIGZ1cnRoZXIgY29sbGF0ZXJhbCBldm9sdXRpb24gYWNjb3JkaW5nDQo+ID4gPiB0bw0KPiA+
-ID4gwqAgYWZmZWN0ZWQgc29mdHdhcmUgY29tcG9uZW50cz8NCj4gPiANCj4gPiBOb3Qgc3VyZSB3
-aGF0IHlvdSBtZWFuIGJ5IHRoYXQuDQo+IA0KPiBBZHZhbmNlZCBwcm9ncmFtbWluZyBpbnRlcmZh
-Y2VzIHdlcmUgYWRkZWQgYSB3aGlsZSBhZ28uDQo+IA0KPiBFeGFtcGxlOg0KPiBodHRwczovL2Vs
-aXhpci5ib290bGluLmNvbS9saW51eC92Ni4xMC1yYzQvc291cmNlL2luY2x1ZGUvbGludXgvY2xl
-YW51cC5oI0w4DQo+IA0KPiBDb3JyZXNwb25kaW5nIGF0dGVtcHRzIGZvciBpbmNyZWFzaW5nIEFQ
-SSB1c2FnZSBuZWVkIHRvIGFkYXB0IHRvDQo+IHJlbWFpbmluZyBjaGFuZ2UgcmVsdWN0YW5jZSwN
-Cj4gZG9uJ3QgdGhleT8NCg0KU3VyZSwgSSBndWVzcy4NCg0KQnV0IHRoYXQgZG9lcyBub3QgY2hh
-bmdlIHRoZSBmYWN0IHRoYXQgSSBjYW5ub3QgdXNlIGNsZWFudXAuaCBtYWdpYyBpbg0KdGhpcyBw
-YXRjaHNldCwgeWV0LCBhcyB0aGUgcmVxdWlyZWQgY2hhbmdlcyB3b3VsZCBoYXZlIHRvIGJlIGRv
-bmUgaW4gYQ0Kc2VwYXJhdGUgb25lLg0KDQpDaGVlcnMsDQotUGF1bA0KX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxp
-c3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQg
-YW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+
+--===============2430782797107967259==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="wDBpEk9k3fDiQDP8"
+Content-Disposition: inline
+
+
+--wDBpEk9k3fDiQDP8
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Jun 18, 2024 at 12:03:01PM +0200, Paul Cercueil wrote:
+> +As part of this interface, three new IOCTLs have been added. These three
+> +IOCTLs have to be performed on the IIO buffer's file descriptor,
+> +obtained using the IIO_BUFFER_GET_FD_IOCTL() ioctl.
+"... which can be obtained using ..."
+
+--=20
+An old man doll... just what I always wanted! - Clara
+
+--wDBpEk9k3fDiQDP8
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYKAB0WIQSSYQ6Cy7oyFNCHrUH2uYlJVVFOowUCZnLNfgAKCRD2uYlJVVFO
+o4y6AQDgOsdarQ8+Hpt/RroNmGj88fc5ztC2ucDL+SFkBMD3egEA/jAq/vCNnHLV
+PeVNFq70Fcg7IPBxIcAc0QN08ILDOws=
+=7nF7
+-----END PGP SIGNATURE-----
+
+--wDBpEk9k3fDiQDP8--
+
+--===============2430782797107967259==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============2430782797107967259==--
