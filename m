@@ -2,37 +2,37 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 12FFE90E78F
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jun 2024 11:57:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7427C90E78A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jun 2024 11:56:48 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 20FDC43F04
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jun 2024 09:57:10 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8239844915
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 19 Jun 2024 09:56:47 +0000 (UTC)
 Received: from madrid.collaboradmins.com (madrid.collaboradmins.com [46.235.227.194])
-	by lists.linaro.org (Postfix) with ESMTPS id 6EADC44C82
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jun 2024 09:55:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 926C144914
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 19 Jun 2024 09:55:44 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=collabora.com header.s=mail header.b=RBCHa7Vh;
+	dkim=pass header.d=collabora.com header.s=mail header.b=NqEf3yl5;
 	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 46.235.227.194 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com;
 	dmarc=pass (policy=quarantine) header.from=collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
-	s=mail; t=1718790945;
-	bh=ccqhkRQ+dQDXGIwdq7jXyziveJY0PrkdcAxZPvyIbTo=;
+	s=mail; t=1718790943;
+	bh=8Fb5oLq+wj7onkMLOYYldQHhtPuVpDgA5L+9vUTFoUc=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=RBCHa7VhJYw8kadFFaI+Ln3q8ur+ATI4w25Yt2Gbdae+K2y3x4GuxKnx8rBmN1+v4
-	 dyxQASh9VmMXW6DpeFmKCkFEWGhLDQGGTPzpz0QYWVICqC5x8kc95koTD9690ZbCQP
-	 9KVKaH4Rj5zWmt5frlNGuEeZjzEgItA2O9ZXjeukYEKFwTP/XcspByJjeqmKPIzIct
-	 XAmfSS3NxCo2zFKtDo498Mco2RjrVDwEAknkzNiXug63KHFbWBSgORG57oGd44cboC
-	 r2OEVNEXL5A2HNNSVynqLImvhUt7aNzgUjvEvKXTO8nkt7iRuMRKADokA0a/Q3t0BI
-	 gDvZDSIQjSBYA==
+	b=NqEf3yl5Mez/C70kftx/epL79UnYIMK1Sorzh+2wYsAOzJT73u+d4gL443z4PN+hH
+	 69TRr5FYO1lJ01RL021soEJQJM0CH1LI2j/xwZAPmEEtPF3xdOiCb/NCaL15guWLtv
+	 K4e1cpESaw87RbulnDMyue+D75P2NqZzpKwd00o/h9POlLdS9IkB0N0ptLxTLJ4qBF
+	 hksf+ALzOiMVsrGNqeLsWZ00hqkuemZV0uK+A3pgV4mpf/X/ny+cQ3H6TWT3OxLUzL
+	 dggsQ3PFTAcHaoDVb/i33HPpadNWuc81jRxfpaAmk19FwItHMRcPnzS4YimGgzb9Ts
+	 jibMHxsUirvCw==
 Received: from [100.113.186.2] (cola.collaboradmins.com [195.201.22.229])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
 	(No client certificate requested)
 	(Authenticated sender: kholk11)
-	by madrid.collaboradmins.com (Postfix) with ESMTPSA id DB8F537821CD;
-	Wed, 19 Jun 2024 09:55:43 +0000 (UTC)
-Message-ID: <c5f7cd1f-e2a2-4055-8d0a-9da320ff591f@collabora.com>
-Date: Wed, 19 Jun 2024 11:55:39 +0200
+	by madrid.collaboradmins.com (Postfix) with ESMTPSA id 0EB5937821D1;
+	Wed, 19 Jun 2024 09:55:42 +0000 (UTC)
+Message-ID: <584857e3-a1b9-4dd2-9d3b-f4d76ccf1cbd@collabora.com>
+Date: Wed, 19 Jun 2024 11:55:41 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Alexandre Mergnat <amergnat@baylibre.com>,
@@ -47,11 +47,11 @@ To: Alexandre Mergnat <amergnat@baylibre.com>,
  Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>
 References: <20240226-audio-i350-v5-0-54827318b453@baylibre.com>
- <20240226-audio-i350-v5-2-54827318b453@baylibre.com>
+ <20240226-audio-i350-v5-1-54827318b453@baylibre.com>
 From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
 Content-Language: en-US
-In-Reply-To: <20240226-audio-i350-v5-2-54827318b453@baylibre.com>
-X-Rspamd-Queue-Id: 6EADC44C82
+In-Reply-To: <20240226-audio-i350-v5-1-54827318b453@baylibre.com>
+X-Rspamd-Queue-Id: 926C144914
 X-Spamd-Bar: --
 X-Spamd-Result: default: False [-2.39 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
@@ -76,22 +76,22 @@ X-Spamd-Result: default: False [-2.39 / 15.00];
 	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,kernel.org,linaro.org,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	URIBL_BLOCKED(0.00)[baylibre.com:email,linaro.org:email,collabora.com:email,collabora.com:dkim];
+	URIBL_BLOCKED(0.00)[linaro.org:email,baylibre.com:email,collabora.com:email,collabora.com:dkim];
 	MID_RHS_MATCH_FROM(0.00)[];
 	DKIM_TRACE(0.00)[collabora.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: LY3MCOWAPNF2DG2F5JNRIX6NFFP64U2T
-X-Message-ID-Hash: LY3MCOWAPNF2DG2F5JNRIX6NFFP64U2T
+Message-ID-Hash: O42C7D47RCSPHDCJZZ5WVBQHOH5MJS6A
+X-Message-ID-Hash: O42C7D47RCSPHDCJZZ5WVBQHOH5MJS6A
 X-MailFrom: angelogioacchino.delregno@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RESEND v5 02/16] ASoC: dt-bindings: mediatek,mt8365-mt6357: Add audio sound card document
+Subject: [Linaro-mm-sig] Re: [PATCH RESEND v5 01/16] ASoC: dt-bindings: mediatek,mt8365-afe: Add audio afe document
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LY3MCOWAPNF2DG2F5JNRIX6NFFP64U2T/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/O42C7D47RCSPHDCJZZ5WVBQHOH5MJS6A/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -102,13 +102,12 @@ Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
 Il 14/06/24 09:27, Alexandre Mergnat ha scritto:
-> Add soundcard bindings for the MT8365 SoC with the MT6357 audio codec.
+> Add MT8365 audio front-end bindings
 > 
 > Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 > Signed-off-by: Alexandre Mergnat <amergnat@baylibre.com>
 
 Reviewed-by: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
-
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
