@@ -2,250 +2,196 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id EF18D91866D
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Jun 2024 17:58:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3791B918DA6
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Jun 2024 19:56:53 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 9112C43C24
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Jun 2024 15:58:23 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
-	by lists.linaro.org (Postfix) with ESMTPS id 6E711410E4
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Jun 2024 15:58:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id F25A64413B
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Jun 2024 17:56:51 +0000 (UTC)
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
+	by lists.linaro.org (Postfix) with ESMTPS id CD45640E26
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Jun 2024 17:56:48 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b="YCR/xEuz";
-	spf=none (lists.linaro.org: domain of thomas.hellstrom@linux.intel.com has no SPF policy when checking 192.198.163.8) smtp.mailfrom=thomas.hellstrom@linux.intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1719417500; x=1750953500;
-  h=message-id:subject:from:to:cc:date:
-   content-transfer-encoding:mime-version;
-  bh=1Ei/aDwlPqm0q2PPM5IoaG9+AOOcu0HuRM30TS1gEVQ=;
-  b=YCR/xEuzlLaCHB8awnAtk3UEsHHKPIIgY6/2DPjOmqVeqllT8GR+52XP
-   EkXBr9uOddqR36VFupX6lSrjJwx5tCRDPlA1waBNtJwws7bAkmXACsKH+
-   xukpCWOeIWI7F7id6r2bPj8o899vLtIuoMhEI47vhrQooUFqoRpaJ2DAX
-   D8lLscSYNPjzv84p2S+u8xEk5RA1TQVSt6HQNlJplmQDnrmdpFcNnzMe6
-   MLbUHGxNySELN9a3LApc+wAW4RznZ3DDL7aUCemOohkp7aK9GsVIda01E
-   7MAULFDSSkvKY2vBsq/QhdoYNCDUND4nUm5mnZSPhXcApember0cmznbj
-   w==;
-X-CSE-ConnectionGUID: 2HB6cmftQqaRJB17lDw10A==
-X-CSE-MsgGUID: /XjmJn/eSs2ZHfck8cs1VA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11115"; a="34031796"
-X-IronPort-AV: E=Sophos;i="6.08,267,1712646000";
-   d="scan'208";a="34031796"
-Received: from fmviesa006.fm.intel.com ([10.60.135.146])
-  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Jun 2024 08:58:19 -0700
-X-CSE-ConnectionGUID: OrsogrgESo2HnGtmS4Wj5Q==
-X-CSE-MsgGUID: 1H8CJa+IRGKPsqhSeqA8hA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.08,267,1712646000";
-   d="scan'208";a="43858570"
-Received: from fpallare-mobl3.ger.corp.intel.com (HELO [10.245.245.44]) ([10.245.245.44])
-  by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 26 Jun 2024 08:58:18 -0700
-Message-ID: <40611e5ff8c32b99e7863293a0baac078f323d8f.camel@linux.intel.com>
-From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Dmitry
-	Osipenko <dmitry.osipenko@collabora.com>, dri-devel@lists.freedesktop.org,
-	intel-xe@lists.freedesktop.org
-Date: Wed, 26 Jun 2024 17:58:02 +0200
-Autocrypt: addr=thomas.hellstrom@linux.intel.com; prefer-encrypt=mutual;
- keydata=mDMEZaWU6xYJKwYBBAHaRw8BAQdAj/We1UBCIrAm9H5t5Z7+elYJowdlhiYE8zUXgxcFz360SFRob21hcyBIZWxsc3Ryw7ZtIChJbnRlbCBMaW51eCBlbWFpbCkgPHRob21hcy5oZWxsc3Ryb21AbGludXguaW50ZWwuY29tPoiTBBMWCgA7FiEEbJFDO8NaBua8diGTuBaTVQrGBr8FAmWllOsCGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgkQuBaTVQrGBr/yQAD/Z1B+Kzy2JTuIy9LsKfC9FJmt1K/4qgaVeZMIKCAxf2UBAJhmZ5jmkDIf6YghfINZlYq6ixyWnOkWMuSLmELwOsgPuDgEZaWU6xIKKwYBBAGXVQEFAQEHQF9v/LNGegctctMWGHvmV/6oKOWWf/vd4MeqoSYTxVBTAwEIB4h4BBgWCgAgFiEEbJFDO8NaBua8diGTuBaTVQrGBr8FAmWllOsCGwwACgkQuBaTVQrGBr/P2QD9Gts6Ee91w3SzOelNjsus/DcCTBb3fRugJoqcfxjKU0gBAKIFVMvVUGbhlEi6EFTZmBZ0QIZEIzOOVfkaIgWelFEH
-Organization: Intel Sweden AB, Registration Number: 556189-6027
-User-Agent: Evolution 3.50.4 (3.50.4-1.fc39) 
+	dkim=pass header.d=ffwll.ch header.s=google header.b=gIL+I5AX;
+	spf=none (lists.linaro.org: domain of daniel@ffwll.ch has no SPF policy when checking 209.85.208.178) smtp.mailfrom=daniel@ffwll.ch;
+	dmarc=none
+Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-2ec5f72f073so3811091fa.0
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Jun 2024 10:56:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ffwll.ch; s=google; t=1719424607; x=1720029407; darn=lists.linaro.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:mail-followup-to:message-id:subject:cc:to
+         :from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=9ZM4co7+zgQAd1qBwWCVAAvV8TVVgRW2ezKZ6IWngwg=;
+        b=gIL+I5AXo+i809lMVUvvzIjz+Q5m/09JkcMjxUAirCOfbm8WlLPemZ5/FdrLsbWMfo
+         2OaNBRHtQPlWOc8X60SG1zwpNyPeNIVa6nXCJXVvAF27LEm6rfregZZbGixYCTTdLn/3
+         0uHZl+7VBRIFwUwmlGnFbcgF6tOq3PpRw+05w=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1719424607; x=1720029407;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:mail-followup-to:message-id:subject:cc:to
+         :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=9ZM4co7+zgQAd1qBwWCVAAvV8TVVgRW2ezKZ6IWngwg=;
+        b=deuaEIqTHK4ibR/MkJ23SAYMe3DrDddSoKN89kiR1VMQLFPjDki2ovVqNqkvFW4mcF
+         9vET0Md/2K3AfvSYo52NhH5iv57T+xIehshEPByn4Rm9Sy4rKPgCFNTZ4fc01mvRDpP4
+         CcwPBLCpZ2giwy9kHJ33I2c/CePyfybVT4Y0PT6/Q0SHJiuWwPQTvVJefugVScp/aBRk
+         awnwdF+YA6yE2GFjMC9kvLbyDtqqtywtM5nvY5kRgXcrWXvKxi4HpsN1HXEbmsk9c9Ux
+         e5HgN0mMtaLPPkSySVOwF6WyGx7dRAjFU7AhLunlJqiFeZ/7LwmW/di7TdAkoWvhTll1
+         eCBg==
+X-Forwarded-Encrypted: i=1; AJvYcCUan/aALSjkHoV1keB9xDrZ71lT8bjR3aY1aqtOY7BM/gugtuG642DxR11BOnnvbfNHLAUfFtD0l82D/AaTq/SDUfgmQrYwVmCzf3hCHeg=
+X-Gm-Message-State: AOJu0YzdDLCMvi3Y1S6+Je7/6w0HjU3KCLzftq16l+qQiYCUMUJ4H2S1
+	xDZ0UG271Ah/lhilFOSk+78wDUn1pbbmOZR5ADfkuDMjDDksOBqgGwi2IH3dt2Q=
+X-Google-Smtp-Source: AGHT+IHpT050wLlCJMuYquS/RZZlwvPNrgj194MZbf2u4dKv3AnFWfObCpyKJAMPQnTOJYHQGnJJZA==
+X-Received: by 2002:a2e:9903:0:b0:2ec:4176:dcaf with SMTP id 38308e7fff4ca-2ec54ce1c2bmr76783881fa.3.1719424605371;
+        Wed, 26 Jun 2024 10:56:45 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-424c84245f0sm34437855e9.33.2024.06.26.10.56.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 26 Jun 2024 10:56:44 -0700 (PDT)
+Date: Wed, 26 Jun 2024 19:56:42 +0200
+From: Daniel Vetter <daniel@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <ZnxWWtdShekGSUif@phenom.ffwll.local>
+Mail-Followup-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Jason-JH Lin =?utf-8?B?KOael+edv+elpSk=?= <Jason-JH.Lin@mediatek.com>,
+	"matthias.bgg@gmail.com" <matthias.bgg@gmail.com>,
+	Yong Wu =?utf-8?B?KOWQtOWLhyk=?= <Yong.Wu@mediatek.com>,
+	"sumit.semwal@linaro.org" <sumit.semwal@linaro.org>,
+	"robh+dt@kernel.org" <robh+dt@kernel.org>,
+	"akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+	"mripard@kernel.org" <mripard@kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+	"linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>,
+	"jstultz@google.com" <jstultz@google.com>,
+	"linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>,
+	"linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+	Jianjiao Zeng =?utf-8?B?KOabvuWBpeWnoyk=?= <Jianjiao.Zeng@mediatek.com>,
+	"willy@infradead.org" <willy@infradead.org>,
+	Kuohong Wang =?utf-8?B?KOeOi+Wci+m0uyk=?= <kuohong.wang@mediatek.com>,
+	"quic_vjitta@quicinc.com" <quic_vjitta@quicinc.com>,
+	"pavel@ucw.cz" <pavel@ucw.cz>,
+	"robin.murphy@arm.com" <robin.murphy@arm.com>,
+	"contact@emersion.fr" <contact@emersion.fr>,
+	"logang@deltatee.com" <logang@deltatee.com>,
+	"jkardatzke@google.com" <jkardatzke@google.com>,
+	"conor+dt@kernel.org" <conor+dt@kernel.org>,
+	"Brian.Starkey@arm.com" <Brian.Starkey@arm.com>,
+	"benjamin.gaignard@collabora.com" <benjamin.gaignard@collabora.com>,
+	"tjmercier@google.com" <tjmercier@google.com>,
+	"krzysztof.kozlowski+dt@linaro.org" <krzysztof.kozlowski+dt@linaro.org>,
+	"dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
+	"linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>,
+	"joakim.bech@linaro.org" <joakim.bech@linaro.org>,
+	"ppaalanen@gmail.com" <ppaalanen@gmail.com>,
+	"angelogioacchino.delregno@collabora.com" <angelogioacchino.delregno@collabora.com>,
+	Youlin Pei =?utf-8?B?KOijtOWPi+aelyk=?= <youlin.pei@mediatek.com>
+References: <20240515112308.10171-1-yong.wu@mediatek.com>
+ <20240515112308.10171-3-yong.wu@mediatek.com>
+ <98721904-003d-4d0d-8cfe-1cecdd59ce01@amd.com>
+ <779ce30a657754ff945ebd32b66e1c644635e84d.camel@mediatek.com>
+ <cef8f87d-edab-41d8-8b95-f3fc39ad7f74@amd.com>
+ <1050c44512374031d1349b5dced228d0efc3fbde.camel@mediatek.com>
+ <3104b765-5666-44e4-8788-f1b1b296fe17@amd.com>
+ <98c11bad7f40bcc79ed7a2039ddb3a46f99908f5.camel@mediatek.com>
+ <75dc1136-7751-4772-9fa7-dd9124684cd2@amd.com>
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: 6E711410E4
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.97 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
-	R_MIXED_CHARSET(0.83)[subject];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+Content-Disposition: inline
+In-Reply-To: <75dc1136-7751-4772-9fa7-dd9124684cd2@amd.com>
+X-Operating-System: Linux phenom 6.8.9-amd64 
+X-Rspamd-Queue-Id: CD45640E26
+X-Spamd-Bar: -----
+X-Spamd-Result: default: False [-5.80 / 15.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[99.99%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	ARC_NA(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
-	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FREEMAIL_CC(0.00)[mediatek.com,gmail.com,linaro.org,kernel.org,linux-foundation.org,vger.kernel.org,lists.infradead.org,google.com,lists.linaro.org,infradead.org,quicinc.com,ucw.cz,arm.com,emersion.fr,deltatee.com,ffwll.ch,collabora.com,lists.freedesktop.org];
 	R_SPF_NA(0.00)[no SPF record];
-	RCPT_COUNT_FIVE(0.00)[5];
+	ARC_NA(0.00)[];
+	DMARC_NA(0.00)[ffwll.ch];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	DKIM_TRACE(0.00)[ffwll.ch:+];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[35];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_RCPT(0.00)[dt];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_LAST(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+]
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.178:from];
+	TO_DN_SOME(0.00)[]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: UY3D5FCN3VICLDXQVVZTSLUFYAMCCI2T
-X-Message-ID-Hash: UY3D5FCN3VICLDXQVVZTSLUFYAMCCI2T
-X-MailFrom: thomas.hellstrom@linux.intel.com
+Message-ID-Hash: HMVZHKIMFPOHZN4NFRF7QVNELHFAKEYW
+X-Message-ID-Hash: HMVZHKIMFPOHZN4NFRF7QVNELHFAKEYW
+X-MailFrom: daniel@ffwll.ch
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: linaro-mm-sig@lists.linaro.org
+CC: Jason-JH Lin =?utf-8?B?KOael+edv+elpSk=?= <Jason-JH.Lin@mediatek.com>, "matthias.bgg@gmail.com" <matthias.bgg@gmail.com>, Yong Wu =?utf-8?B?KOWQtOWLhyk=?= <Yong.Wu@mediatek.com>, "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "robh+dt@kernel.org" <robh+dt@kernel.org>, "akpm@linux-foundation.org" <akpm@linux-foundation.org>, "mripard@kernel.org" <mripard@kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>, "jstultz@google.com" <jstultz@google.com>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, Jianjiao Zeng =?utf-8?B?KOabvuWBpeWnoyk=?= <Jianjiao.Zeng@mediatek.com>, "willy@infradead.org" <willy@infradead.org>, Kuohong Wang =?utf-8?B?KOeOi+Wci+m0uyk=?= <kuohong.wang@mediatek.com>, "quic_vjitta@quicinc.com" <quic_vjitta@quicinc.com>, "pavel@uc
+ w.cz" <pavel@ucw.cz>, "robin.murphy@arm.com" <robin.murphy@arm.com>, "contact@emersion.fr" <contact@emersion.fr>, "logang@deltatee.com" <logang@deltatee.com>, "daniel@ffwll.ch" <daniel@ffwll.ch>, "jkardatzke@google.com" <jkardatzke@google.com>, "conor+dt@kernel.org" <conor+dt@kernel.org>, "Brian.Starkey@arm.com" <Brian.Starkey@arm.com>, "benjamin.gaignard@collabora.com" <benjamin.gaignard@collabora.com>, "tjmercier@google.com" <tjmercier@google.com>, "krzysztof.kozlowski+dt@linaro.org" <krzysztof.kozlowski+dt@linaro.org>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, "joakim.bech@linaro.org" <joakim.bech@linaro.org>, "ppaalanen@gmail.com" <ppaalanen@gmail.com>, "angelogioacchino.delregno@collabora.com" <angelogioacchino.delregno@collabora.com>, Youlin Pei =?utf-8?B?KOijtOWPi+aelyk=?= <youlin.pei@mediatek.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] dma_buf_detach lockdep splat
+Subject: [Linaro-mm-sig] Re: [PATCH v5 2/9] scatterlist: Add a flag for the restricted memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UY3D5FCN3VICLDXQVVZTSLUFYAMCCI2T/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HMVZHKIMFPOHZN4NFRF7QVNELHFAKEYW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi!
-
-I'm seeing the below lockdep splat 1) with the xe driver in an imported
-dma-buf object destruction path.
-
-It's not because we hold the dma_resv lock at that point, but rather
-because we hold *another* dma_resv lock at that point, and the dma_resv
-detach happens when the object is idle, in this case it was idle at the
-final put(), and dma_buf_detach() is called in the putting process.
-
-Holding another dma-buf lock might happen as part of
-drm_exec_unlock_all, or simply if the wider vm dma_resv was held at
-object put time, so it's not an uncommon pattern, even if the drm_exec
-instance can be fixed by putting all bos after unlocking them all.
-
-Two solutions coming to mind here:
-
-1) Provide a dma_buf_detach_locked()
-2) Have TTM always take the delayed delete path for imported dma-buf
-objects.
-
-I'd prefer 1) since I think the correct place to call this is in the
-TTM callback delete_mem_notify() where the bo is already locked, and I
-figure non-TTM gem backends may come to suffer from the same problem.
-
-Opinions, suggestions?
-
-[1]
-[   99.136161] ============================================
-[   99.136162] WARNING: possible recursive locking detected
-[   99.136163] 6.10.0-rc2+ #6 Tainted: G     U            
-[   99.136165] --------------------------------------------
-[   99.136166] glxgears:sh0/4675 is trying to acquire lock:
-[   99.136167] ffff9967dcdd91a8 (reservation_ww_class_mutex){+.+.}-
-{3:3}, at: dma_buf_detach+0x3b/0xf0
-[   99.136184] 
-               but task is already holding lock:
-[   99.136186] ffff9967d8c145a8 (reservation_ww_class_mutex){+.+.}-
-{3:3}, at: drm_exec_lock_obj+0x49/0x2b0 [drm_exec]
-[   99.136191] 
-               other info that might help us debug this:
-[   99.136192]  Possible unsafe locking scenario:
-
-[   99.136194]        CPU0
-[   99.136194]        ----
-[   99.136195]   lock(reservation_ww_class_mutex);
-[   99.136197]   lock(reservation_ww_class_mutex);
-[   99.136199] 
-                *** DEADLOCK ***
-
-[   99.136199]  May be due to missing lock nesting notation
-
-[   99.136200] 5 locks held by glxgears:sh0/4675:
-[   99.136202]  #0: ffff9967d8c104c8 (&xef->vm.lock){+.+.}-{3:3}, at:
-xe_file_close+0xde/0x1c0 [xe]
-[   99.136272]  #1: ffff9967d5bb7480 (&vm->lock){++++}-{3:3}, at:
-xe_vm_close_and_put+0x161/0x9b0 [xe]
-[   99.136350]  #2: ffff9967ef88a970 (&val->lock){.+.+}-{3:3}, at:
-xe_validation_ctx_init+0x6d/0x70 [xe]
-[   99.136440]  #3: ffffbd6a085577b8
-(reservation_ww_class_acquire){+.+.}-{0:0}, at:
-xe_vma_destroy_unlocked+0x7f/0xe0 [xe]
-[   99.136546]  #4: ffff9967d8c145a8
-(reservation_ww_class_mutex){+.+.}-{3:3}, at:
-drm_exec_lock_obj+0x49/0x2b0 [drm_exec]
-[   99.136552] 
-               stack backtrace:
-[   99.136553] CPU: 10 PID: 4675 Comm: glxgears:sh0 Tainted: G     U  
-6.10.0-rc2+ #6
-[   99.136555] Hardware name: ASUS System Product Name/PRIME B560M-A
-AC, BIOS 2001 02/01/2023
-[   99.136557] Call Trace:
-[   99.136558]  <TASK>
-[   99.136560]  dump_stack_lvl+0x77/0xb0
-[   99.136564]  __lock_acquire+0x1232/0x2160
-[   99.136569]  lock_acquire+0xcb/0x2d0
-[   99.136570]  ? dma_buf_detach+0x3b/0xf0
-[   99.136574]  ? __lock_acquire+0x417/0x2160
-[   99.136577]  __ww_mutex_lock.constprop.0+0xd0/0x13b0
-[   99.136580]  ? dma_buf_detach+0x3b/0xf0
-[   99.136584]  ? dma_buf_detach+0x3b/0xf0
-[   99.136588]  ? ww_mutex_lock+0x2b/0x90
-[   99.136590]  ww_mutex_lock+0x2b/0x90
-[   99.136592]  dma_buf_detach+0x3b/0xf0
-[   99.136595]  drm_prime_gem_destroy+0x2f/0x40 [drm]
-[   99.136638]  xe_ttm_bo_destroy+0x32/0x220 [xe]
-[   99.136734]  ? __mutex_unlock_slowpath+0x3a/0x290
-[   99.136738]  drm_exec_unlock_all+0xa1/0xd0 [drm_exec]
-[   99.136741]  drm_exec_fini+0x12/0xb0 [drm_exec]
-[   99.136743]  xe_validation_ctx_fini+0x15/0x40 [xe]
-[   99.136848]  xe_vma_destroy_unlocked+0xb1/0xe0 [xe]
-[   99.136954]  xe_vm_close_and_put+0x41a/0x9b0 [xe]
-[   99.137056]  ? xa_find+0xe3/0x1e0
-[   99.137060]  xe_file_close+0x10a/0x1c0 [xe]
-[   99.137157]  drm_file_free+0x22a/0x280 [drm]
-[   99.137193]  drm_release_noglobal+0x22/0x70 [drm]
-[   99.137227]  __fput+0xf1/0x2d0
-[   99.137231]  task_work_run+0x59/0x90
-[   99.137235]  do_exit+0x330/0xb40
-[   99.137238]  do_group_exit+0x36/0xa0
-[   99.137241]  get_signal+0xbd2/0xbe0
-[   99.137245]  arch_do_signal_or_restart+0x3e/0x240
-[   99.137249]  syscall_exit_to_user_mode+0x1e7/0x290
-[   99.137252]  do_syscall_64+0xa1/0x180
-[   99.137255]  ? _raw_spin_unlock+0x23/0x40
-[   99.137257]  ? look_up_lock_class+0x6f/0x120
-[   99.137261]  ? __lock_acquire+0x417/0x2160
-[   99.137264]  ? lock_acquire+0xcb/0x2d0
-[   99.137266]  ? __set_task_comm+0x28/0x1e0
-[   99.137268]  ? find_held_lock+0x2b/0x80
-[   99.137271]  ? __set_task_comm+0xe1/0x1e0
-[   99.137273]  ? lock_release+0xca/0x290
-[   99.137277]  ? __do_sys_prctl+0x245/0xab0
-[   99.137279]  ? lockdep_hardirqs_on_prepare+0xde/0x190
-[   99.137281]  ? syscall_exit_to_user_mode+0xb0/0x290
-[   99.137284]  ? do_syscall_64+0xa1/0x180
-[   99.137286]  ? cpuset_cpus_allowed+0x36/0x140
-[   99.137289]  ? find_held_lock+0x2b/0x80
-[   99.137291]  ? find_held_lock+0x2b/0x80
-[   99.137294]  ? __sched_setaffinity+0x78/0x240
-[   99.137297]  ? kfree+0xe2/0x310
-[   99.137301]  ? kfree+0x202/0x310
-[   99.137303]  ? __sched_setaffinity+0x78/0x240
-[   99.137305]  ? __x64_sys_sched_setaffinity+0x69/0xb0
-[   99.137307]  ? kfree+0xe2/0x310
-[   99.137310]  ? lockdep_hardirqs_on_prepare+0xde/0x190
-[   99.137312]  ? syscall_exit_to_user_mode+0xb0/0x290
-[   99.137315]  ? do_syscall_64+0xa1/0x180
-[   99.137317]  ? trace_hardirqs_off+0x4b/0xc0
-[   99.137321]  ? clear_bhb_loop+0x45/0xa0
-[   99.137325]  ? clear_bhb_loop+0x45/0xa0
-[   99.137327]  ? clear_bhb_loop+0x45/0xa0
-[   99.137330]  entry_SYSCALL_64_after_hwframe+0x76/0x7e
-[   99.137333] RIP: 0033:0x7fda70ee6169
-[   99.137351] Code: Unable to access opcode bytes at 0x7fda70ee613f.
-[   99.137352] RSP: 002b:00007fda5fdffc80 EFLAGS: 00000246 ORIG_RAX:
-00000000000000ca
-[   99.137354] RAX: fffffffffffffe00 RBX: 0000000000000000 RCX:
-00007fda70ee6169
-[   99.137356] RDX: 0000000000000000 RSI: 0000000000000189 RDI:
-0000564a96f45b30
-[   99.137358] RBP: 00007fda5fdffcb0 R08: 0000000000000000 R09:
-00000000ffffffff
-[   99.137359] R10: 0000000000000000 R11: 0000000000000246 R12:
-0000000000000000
-[   99.137360] R13: 0000000000000000 R14: 0000000000000000 R15:
-0000564a96f45b30
-[   99.137365]  </TASK>
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gV2VkLCBKdW4gMjYsIDIwMjQgYXQgMTI6NDk6MDJQTSArMDIwMCwgQ2hyaXN0aWFuIEvDtm5p
+ZyB3cm90ZToNCj4gQW0gMjYuMDYuMjQgdW0gMTA6MDUgc2NocmllYiBKYXNvbi1KSCBMaW4gKOae
+l+edv+elpSk6DQo+ID4gPiA+IEkgdGhpbmsgSSBoYXZlIHRoZSBzYW1lIHByb2JsZW0gYXMgdGhl
+IEVDQ19GTEFHIG1lbnRpb24gaW46DQo+ID4gPiA+ID4gPiBodHRwczovL2xvcmUua2VybmVsLm9y
+Zy9saW51eC1tZWRpYS8yMDI0MDUxNS1kbWEtYnVmLWVjYy1oZWFwLXYxLTAtNTRjYmJkMDQ5NTEx
+QGtlcm5lbC5vcmcvDQo+ID4gPiA+ID4gPiBJIHRoaW5rIGl0IHdvdWxkIGJlIGJldHRlciB0byBo
+YXZlIHRoZSB1c2VyIGNvbmZpZ3VyYWJsZSBwcml2YXRlDQo+ID4gPiA+IGluZm9ybWF0aW9uIGlu
+IGRtYS1idWYsIHNvIGFsbCB0aGUgZHJpdmVycyB3aG8gaGF2ZSB0aGUgc2FtZQ0KPiA+ID4gPiBy
+ZXF1aXJlbWVudCBjYW4gZ2V0IHRoZWlyIHByaXZhdGUgaW5mb3JtYXRpb24gZnJvbSBkbWEtYnVm
+IGRpcmVjdGx5DQo+ID4gPiA+IGFuZA0KPiA+ID4gPiBubyBuZWVkIHRvIGNoYW5nZSBvciBhZGQg
+dGhlIGludGVyZmFjZS4NCj4gPiA+ID4gPiA+IFdoYXQncyB5b3VyIG9waW5pb24gaW4gdGhpcyBw
+b2ludD8NCj4gPiA+ICA+IFdlbGwgb2YgaGFuZCBJIGRvbid0IHNlZSB0aGUgbmVlZCBmb3IgdGhh
+dC4NCj4gPiA+ID4gV2hhdCBoYXBwZW5zIGlmIHlvdSBnZXQgYSBub24tc2VjdXJlIGJ1ZmZlciBp
+bXBvcnRlZCBpbiB5b3VyIHNlY3VyZQ0KPiA+ID4gZGV2aWNlPw0KPiA+IA0KPiA+IFdlIHVzZSB0
+aGUgc2FtZSBtZWRpYXRlay1kcm0gZHJpdmVyIGZvciBzZWN1cmUgYW5kIG5vbi1zZWN1cmUgYnVm
+ZmVyLg0KPiA+IElmIG5vbi1zZWN1cmUgYnVmZmVyIGltcG9ydGVkIHRvIG1lZGlhdGVrLWRybSBk
+cml2ZXIsIGl0J3MgZ28gdG8gdGhlDQo+ID4gbm9ybWFsIGZsb3cgd2l0aCBub3JtYWwgaGFyZHdh
+cmUgc2V0dGluZ3MuDQo+ID4gDQo+ID4gV2UgdXNlIGRpZmZlcmVudCBjb25maWd1cmF0aW9ucyB0
+byBtYWtlIGhhcmR3YXJlIGhhdmUgZGlmZmVyZW50DQo+ID4gcGVybWlzc2lvbiB0byBhY2Nlc3Mg
+dGhlIGJ1ZmZlciBpdCBzaG91bGQgYWNjZXNzLg0KPiA+IA0KPiA+IFNvIGlmIHdlIGNhbid0IGdl
+dCB0aGUgaW5mb3JtYXRpb24gb2YgInRoZSBidWZmZXIgaXMgYWxsb2NhdGVkIGZyb20NCj4gPiBy
+ZXN0cmljdGVkX210a19jbWEiIHdoZW4gaW1wb3J0aW5nIHRoZSBidWZmZXIgaW50byB0aGUgZHJp
+dmVyLCB3ZSB3b24ndA0KPiA+IGJlIGFibGUgdG8gY29uZmlndXJlIHRoZSBoYXJkd2FyZSBjb3Jy
+ZWN0bHkuDQo+IA0KPiBXaHkgY2FuJ3QgeW91IGdldCB0aGlzIGluZm9ybWF0aW9uIGZyb20gdXNl
+cnNwYWNlPw0KDQpTYW1lIHJlYXNvbiBhbWQgYW5kIGk5MTUveGUgYWxzbyBwYXNzIHRoaXMgYXJv
+dW5kIGludGVybmFsbHkgaW4gdGhlDQprZXJuZWwsIGl0J3MganVzdCB0aGF0IGZvciB0aG9zZSBn
+cHVzIHRoZSByZW5kZXIgYW5kIGttcyBub2RlIGFyZSB0aGUgc2FtZQ0KZHJpdmVyIHNvIHRoaXMg
+aXMgZWFzeS4NCg0KQnV0IG9uIGFybSB5b3UgaGF2ZSBzcGxpdCBkZXNpZ25zIGV2ZXJ5d2hlcmUg
+YW5kIGRtYS1idWYgaW1wb3J0L2V4cG9ydCwgc28NCnNvbWV0aGluZyBlbHNlIGlzIG5lZWRlZC4g
+QW5kIG5laXRoZXIgY3VycmVudCBrbXMgdWFwaSBub3INCnByb3RvY29scy9leHRlbnNpb25zIGhh
+dmUgcHJvdmlzaW9ucyBmb3IgdGhpcyAoYWZhaWspIGJlY2F1c2UgaXQgd29ya3Mgb24NCnRoZSBi
+aWcgZ3B1cywgYW5kIG9uIGFuZHJvaWQgaXQncyBqdXN0IGhhY2tlZCB1cCB3aXRoIGJhY2tjaGFu
+bmVscy4NCg0KU28geWVhaCBlc3NlbnRpYWxseSBJIHRoaW5rIHdlIHByb2JhYmx5IG5lZWQgc29t
+ZXRoaW5nIGxpa2UgdGhpcywgYXMgbXVjaA0KYXMgaXQgc3Vja3MuIEkgc2VlIGl0IHNvbWV3aGF0
+IHNpbWlsYXIgdG8gaGFuZGxpbmcgcGNpcDJwZG1hIGxpbWl0YXRpb25zDQppbiB0aGUga2VybmVs
+IHRvby4NCg0KTm90IHN1cmUgd2hlcmUvaG93IGl0IHNob3VsZCBiZSBoYW5kbGVkIHRob3VnaCwg
+YW5kIG1heWJlIEkndmUgbWlzc2VkDQpzb21ldGhpbmcgYXJvdW5kIHByb3RvY29scywgaW4gd2hp
+Y2ggY2FzZSBJIGd1ZXNzIHdlIHNob3VsZCBhZGQgc29tZQ0Kc2VjdXJlIGJ1ZmZlciBmbGFncyB0
+byB0aGUgQURERkIyIGlvY3RsLg0KLVNpbWENCi0tIA0KRGFuaWVsIFZldHRlcg0KU29mdHdhcmUg
+RW5naW5lZXIsIEludGVsIENvcnBvcmF0aW9uDQpodHRwOi8vYmxvZy5mZndsbC5jaA0KX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBt
+YWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2Ny
+aWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3Jn
+Cg==
