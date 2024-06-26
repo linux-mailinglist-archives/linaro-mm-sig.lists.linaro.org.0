@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57FD191693D
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Jun 2024 15:44:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AF986917C11
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Jun 2024 11:12:59 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 4019144FBD
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 25 Jun 2024 13:44:16 +0000 (UTC)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
-	by lists.linaro.org (Postfix) with ESMTPS id 8D53844C65
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 25 Jun 2024 13:44:12 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 47B5443D1A
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 26 Jun 2024 09:12:58 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id F26AD43C4F
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 26 Jun 2024 09:12:54 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=ha33VICF;
-	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 145.40.73.55 as permitted sender) smtp.mailfrom=krzk@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=huIXkH71;
+	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=krzk@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sin.source.kernel.org (Postfix) with ESMTP id 4186CCE1A81;
-	Tue, 25 Jun 2024 13:44:10 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA04BC32786;
-	Tue, 25 Jun 2024 13:44:03 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id 83A1661883;
+	Wed, 26 Jun 2024 09:12:54 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F13DC2BD10;
+	Wed, 26 Jun 2024 09:12:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1719323049;
-	bh=qQWHcYlUDLhXU8vkBrdqxz/UtKXK1E/0XxX62Qh+A5c=;
+	s=k20201202; t=1719393174;
+	bh=qRy4tUMDP+Uxf64KBaFAJesy6ZVQGIcbefa8y1zH8ek=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=ha33VICFx8Cl6rQrGCxAALxVpGPzCRJMpS4FzY6a94Ws0zp+ey1rwAV/Hr65ShuAD
-	 G7qV7JNjQPDrKi/HgcO02Tkfl+XqQlhkbOxrDkZOTs88pA2Huw9TH+VVSZXShbKfky
-	 OTbtY7X3e99NXlY20Hu08LwMzFDBzF0rfoocpTqTyMWAa/8uNdqbKh6ub9VFhxBy4o
-	 +RvXHoY+bTvJq3HOgp+8GnK7bkarCXmuEI7PxztysV7edk1/sEJDe02WZZLVY9K+dV
-	 UWeUKIwKnrtKEn1TQXHiK434fS2FNmqHjv9+aA9SeCE9w+h6+UXsuNdpfsL3oOHn18
-	 YkxEQR0hPFA9w==
-Message-ID: <5c9ab5bf-95f2-4195-8797-335010223aac@kernel.org>
-Date: Tue, 25 Jun 2024 15:44:02 +0200
+	b=huIXkH714nccd7u6UXnSxPFS9BLjkaTQHRbRCF9MeeQ14XucSjFxV0+GqCqpXjBLy
+	 AsQE66jxo1OQf6K+JOAy6dDrGU/OVUefIdvVAk6jiqN+soAw6a7r3Xfgdl8mr93LJX
+	 1LrlU0agu6md+Ai+FuY6GUqh5+W9dif+iPid7UmWNI9Pyfb7nYo71Ml4W6/A2GzpEh
+	 JpcpplmIyUPpB99ejbKeyHv2zqiwMdh9f/dGrAReyBpGsi1nkL97+nSl3sq3uUlbGq
+	 NfTQFqch2s8HGRFGct0rrJhc5IeOcoH3aw1B59aI2y1ISHiTa1q5JePP69N3ezAaTI
+	 eOR55AOf+uMtQ==
+Message-ID: <5dad1ef4-4dc8-4f36-9150-fbe8b388a6d7@kernel.org>
+Date: Wed, 26 Jun 2024 11:12:43 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Alexandre Mergnat <amergnat@baylibre.com>,
@@ -51,6 +51,8 @@ References: <20240226-audio-i350-v6-0-f754ec1a7634@baylibre.com>
  <20240226-audio-i350-v6-3-f754ec1a7634@baylibre.com>
  <cd190d35-1658-43d8-9606-5e73257bbf3a@linaro.org>
  <95bab90f-b196-4e79-bb88-7fd534cca721@baylibre.com>
+ <5c9ab5bf-95f2-4195-8797-335010223aac@kernel.org>
+ <79811fff-4fdf-4121-9cea-6ed7e1329dad@baylibre.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -96,38 +98,37 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  uZwJCLykjad45hsWcOGk3OcaAGQS6NDlfhM6O9aYNwGL6tGt/6BkRikNOs7VDEa4/HlbaSJo
  7FgndGw1kWmkeL6oQh7wBvYll2buKod4qYntmNKEicoHGU+x91Gcan8mCoqhJkbqrL7+nXG2
  5Q/GS5M9RFWS+nYyJh+c3OcfKqVcZQNANItt7+ULzdNJuhvTRRdC3g9hmCEuNSr+CLMdnRBY fv0=
-In-Reply-To: <95bab90f-b196-4e79-bb88-7fd534cca721@baylibre.com>
-X-Rspamd-Queue-Id: 8D53844C65
+In-Reply-To: <79811fff-4fdf-4121-9cea-6ed7e1329dad@baylibre.com>
+X-Rspamd-Queue-Id: F26AD43C4F
 X-Spamd-Bar: --
 X-Spamd-Result: default: False [-2.49 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:145.40.73.55];
 	MIME_GOOD(-0.10)[text/plain];
 	XM_UA_NO_VERSION(0.01)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
 	RCPT_COUNT_TWELVE(0.00)[27];
-	TAGGED_RCPT(0.00)[dt];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:54825, ipnet:145.40.73.0/24, country:US];
-	FREEMAIL_TO(0.00)[baylibre.com,linaro.org,gmail.com,kernel.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
-	RCVD_TLS_LAST(0.00)[];
+	TAGGED_RCPT(0.00)[dt];
+	MID_RHS_MATCH_FROM(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	URIBL_BLOCKED(0.00)[sin.source.kernel.org:helo,sin.source.kernel.org:rdns,baylibre.com:email];
-	RCVD_COUNT_TWO(0.00)[2];
+	FREEMAIL_TO(0.00)[baylibre.com,linaro.org,gmail.com,kernel.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 3DJ7ESV2LCCW3UYKOWPPQJTL2WZKHIJH
-X-Message-ID-Hash: 3DJ7ESV2LCCW3UYKOWPPQJTL2WZKHIJH
+Message-ID-Hash: B4KVDGV5JIHIRIHTUFHGIXDWRK7KR26T
+X-Message-ID-Hash: B4KVDGV5JIHIRIHTUFHGIXDWRK7KR26T
 X-MailFrom: krzk@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
@@ -135,7 +136,7 @@ X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH v6 03/16] dt-bindings: mfd: mediatek: Add codec property for MT6357 PMIC
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3DJ7ESV2LCCW3UYKOWPPQJTL2WZKHIJH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/B4KVDGV5JIHIRIHTUFHGIXDWRK7KR26T/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -145,64 +146,83 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 25/06/2024 11:23, Alexandre Mergnat wrote:
+On 26/06/2024 10:30, Alexandre Mergnat wrote:
 > 
 > 
-> On 21/06/2024 17:00, Krzysztof Kozlowski wrote:
->> On 19/06/2024 16:46, Alexandre Mergnat wrote:
->>> Add the audio codec sub-device. This sub-device is used to set the
->>> optional voltage values according to the hardware.
->>> The properties are:
->>>    - Setup of microphone bias voltage.
->>>    - Setup of the speaker pin pull-down.
+> On 25/06/2024 15:44, Krzysztof Kozlowski wrote:
+>> On 25/06/2024 11:23, Alexandre Mergnat wrote:
 >>>
->>> Also, add the audio power supply property which is dedicated for
->>> the audio codec sub-device.
 >>>
->>> Signed-off-by: Alexandre Mergnat<amergnat@baylibre.com>
->>> ---
->>>   .../devicetree/bindings/mfd/mediatek,mt6357.yaml   | 33 ++++++++++++++++++++++
->>>   1 file changed, 33 insertions(+)
+>>> On 21/06/2024 17:00, Krzysztof Kozlowski wrote:
+>>>> On 19/06/2024 16:46, Alexandre Mergnat wrote:
+>>>>> Add the audio codec sub-device. This sub-device is used to set the
+>>>>> optional voltage values according to the hardware.
+>>>>> The properties are:
+>>>>>     - Setup of microphone bias voltage.
+>>>>>     - Setup of the speaker pin pull-down.
+>>>>>
+>>>>> Also, add the audio power supply property which is dedicated for
+>>>>> the audio codec sub-device.
+>>>>>
+>>>>> Signed-off-by: Alexandre Mergnat<amergnat@baylibre.com>
+>>>>> ---
+>>>>>    .../devicetree/bindings/mfd/mediatek,mt6357.yaml   | 33 ++++++++++++++++++++++
+>>>>>    1 file changed, 33 insertions(+)
+>>>>>
+>>>>> diff --git a/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml b/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml
+>>>>> index 37423c2e0fdf..d95307393e75 100644
+>>>>> --- a/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml
+>>>>> +++ b/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml
+>>>>> @@ -37,6 +37,32 @@ properties:
+>>>>>      "#interrupt-cells":
+>>>>>        const: 2
+>>>>>    
+>>>>> +  vaud28-supply:
+>>>>> +    description: 2.8 volt supply phandle for the audio codec
+>>>>> +
+>>>>> +  audio-codec:
+>>>>> +    type: object
+>>>> Still not much improved. You do not have any resources there, so these
+>>>> should go to the parent node.
 >>>
->>> diff --git a/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml b/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml
->>> index 37423c2e0fdf..d95307393e75 100644
->>> --- a/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml
->>> +++ b/Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml
->>> @@ -37,6 +37,32 @@ properties:
->>>     "#interrupt-cells":
->>>       const: 2
->>>   
->>> +  vaud28-supply:
->>> +    description: 2.8 volt supply phandle for the audio codec
->>> +
->>> +  audio-codec:
->>> +    type: object
->> Still not much improved. You do not have any resources there, so these
->> should go to the parent node.
+>>> Hi Krzysztof,
+>>>
+>>> vaud28-supply seems to be a mistake that I forward port.
+>>> In the V4, AFAII, your feedback [1] suggested me to move the vaud28-supply from the "audio-codec"
+>>> sub-node to the parent node, which for me is the "pmic" (mfd), because the property is considered as
+>>> power-supply.
+>>>
+>>>       pwrap {
+>>>           pmic {
+>>>               ...
+>>>               audio-codec {
+>>>                   ...
+>>>
+>>> Hardware side, vaud28-supply is the output of PMIC-regulator subsystem, and AVDD28 is the input of
+>>> PMIC-audio-codec subsystem. Then:
+>>> - The property name is wrong and must be change to AVDD28, which is a consumer (power input), not a
+>>> power-supply. => description: 2.8 volt power input for microphones (AU_VIN0, AU_VIN1, AU_VIN2)
+>>> - IMHO, move this property to the next parent (pwrap) isn't consistent. It should be moved back to
+>>> Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml (Done in the V4) into audio-codec
+>>> substystem, beside mediatek,micbias0-microvolt
+>>
+>> I don't understand why do we talk again about supply. My comment was not
+>> under the supply.
 > 
-> Hi Krzysztof,
+> Because your word are:
+> "
+> And now you should see how odd it looks. Supplies are part of entire
+> chip, not subblock, even if they supply dedicated domain within that chip.
 > 
-> vaud28-supply seems to be a mistake that I forward port.
-> In the V4, AFAII, your feedback [1] suggested me to move the vaud28-supply from the "audio-codec" 
-> sub-node to the parent node, which for me is the "pmic" (mfd), because the property is considered as 
-> power-supply.
+> That's why I asked to put it in the parent node.
+> "
 > 
->      pwrap {
->          pmic {
->              ...
->              audio-codec {
->                  ...
+> My bad, I forgot to link you the old message in my previous answer [1]
 > 
-> Hardware side, vaud28-supply is the output of PMIC-regulator subsystem, and AVDD28 is the input of 
-> PMIC-audio-codec subsystem. Then:
-> - The property name is wrong and must be change to AVDD28, which is a consumer (power input), not a 
-> power-supply. => description: 2.8 volt power input for microphones (AU_VIN0, AU_VIN1, AU_VIN2)
-> - IMHO, move this property to the next parent (pwrap) isn't consistent. It should be moved back to 
-> Documentation/devicetree/bindings/mfd/mediatek,mt6357.yaml (Done in the V4) into audio-codec 
-> substystem, beside mediatek,micbias0-microvolt
+> [1] https://lore.kernel.org/all/6d21da37-8be7-467c-8878-d57af0b0201b@kernel.org/#t
 
-I don't understand why do we talk again about supply. My comment was not
-under the supply.
+And you implemented this, so why do we talk again about it? It is
+already solved, isn't it? Since previous version?
 
 Best regards,
 Krzysztof
