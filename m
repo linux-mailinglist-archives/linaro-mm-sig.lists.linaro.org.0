@@ -2,325 +2,349 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF5E791C085
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Jun 2024 16:11:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16A2291C14D
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Jun 2024 16:42:43 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id BD30E44968
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Jun 2024 14:11:20 +0000 (UTC)
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
-	by lists.linaro.org (Postfix) with ESMTPS id 2F53343D15
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Jun 2024 14:11:17 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1F41943D15
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Jun 2024 14:42:42 +0000 (UTC)
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 2CA743F2F7
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Jun 2024 14:42:39 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=OiyjlzZt;
-	spf=pass (lists.linaro.org: domain of thierry.reding@gmail.com designates 209.85.128.54 as permitted sender) smtp.mailfrom=thierry.reding@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=ilHcdIkF;
+	spf=pass (lists.linaro.org: domain of thierry.reding@gmail.com designates 209.85.128.48 as permitted sender) smtp.mailfrom=thierry.reding@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-42574064b16so1812915e9.2
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Jun 2024 07:11:17 -0700 (PDT)
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-42562e4b5d1so5250355e9.1
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Jun 2024 07:42:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1719583876; x=1720188676; darn=lists.linaro.org;
+        d=gmail.com; s=20230601; t=1719585758; x=1720190558; darn=lists.linaro.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=ZxKiQR1WifW9R4T+o00BES3qwoMoa9ISf2D6Aafrxx8=;
-        b=OiyjlzZtM9ayqhqn7/p72URzNuFh8HVr0IWj0+gBS3LeBvtGj9DgkOCQNV7tJzhVZD
-         hZXqC4o2czxcm3nzHju4mv3cKzFX5/wU/1kp2LZ8twkKYz4082J286MnKG7kCDZJSkBc
-         yrjGGYrx4Edh1ntfOygt5tnBzVjASNB56WlO7QZulKjUcJSWAO0uOMWR3a7X5gBlwVgd
-         zGGNautJZ8FEoI6rKHDBo4hxNvDHbb+wE/yfPiVmAqV5apdIOy3mFrDOrR2xKTyMLsXI
-         XSrV+AJWEvx5pqsOgk0lsa1TEFz7juPXemYw+rrZswYZjdr3A7wKbK2XlVEY8fzLG7pI
-         yKFg==
+        bh=KBFsmcHiCQdWp2arl9na9xvwhRaKDOvXIf/Px5kpSzA=;
+        b=ilHcdIkFl16oxZ7llMePb8Ktz3UbakIjKedOvJgHiZA23z2q+rRXqyInw/1RvzUGZv
+         /lk5ybQxC5i+ub45y0J1aNpVCylutSfxBGY290W9hCg3RtSpW5u/4mpGLxi1gfdjCM7x
+         RgEz6lkqTlh7y+7LUZjFYvoyh+4yflhsRKI6X46rSVgXnJBGF0ieS/AOK5DHWahtAtVU
+         g0KdVSI94cQrigypS7op+VUqSbvHQXufVcm6FbgJaaCQzjdc1kc8HCVJvr/L+7Wuz1zF
+         d47eX2DuzNTs6z3X6c0zZ1LVu8smpHbkwvGxgENzhZdzRTeUnb2tgKdaHuf+uxnfydI7
+         C9rw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719583876; x=1720188676;
+        d=1e100.net; s=20230601; t=1719585758; x=1720190558;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=ZxKiQR1WifW9R4T+o00BES3qwoMoa9ISf2D6Aafrxx8=;
-        b=huzNTpOMTctbi5p3EPRnw41DPcVGui/sSqpBiqleB2xvnA3Be9upVBGN4U3diSqgzp
-         UAWmqwO8VKVqIivB5ZdIvHkzmNT4E0lhd4D2Agper2nyiwPhqvnG/Po7DxENUT01lEf8
-         1yJj2vwUwm5wYTLTS51g4MbL/mhXT3BS7z08T95gxwZJ5IgTGK3GFJJqgZn1Iwcjgs3E
-         QSXsZQciJ5lrZhE0c1wQohgTZJVLejVZjkDeBzLXNaNLlRHvF7D1MEo9O7FZ5NF68aNc
-         ISZFLuuKduFEPjjL2mIDWR1Kra0uKuvb1c57cEwRftzw2kzB1l824ab24bwTEM//kbuI
-         i7zQ==
-X-Forwarded-Encrypted: i=1; AJvYcCXY4rU4Dyk2v2r+kjD4W2gbwnIJOsokRDXqcQcX0RbWuaN7CHu7YEalcD/emWDoVpdzV6AxVnWAbPGzKYf94XTllQhTGe5wVTXe0uk01qo=
-X-Gm-Message-State: AOJu0YzopSAds+NwX2JGWw26vpXqnNcwipycgDDoGS+cg+X299D6CmyD
-	tr4smTJkLvfyusN3tKvU1Q4TvPXY1JmxKurMvMJOiPgap/2SPW1P
-X-Google-Smtp-Source: AGHT+IGbRNARcyszw7Fxct+HFR/l8/HkdbHi7l9tRcmptWJeUjqa7yMsnwT9j/blr6nU6pxbXF7nyA==
-X-Received: by 2002:a05:600c:4f09:b0:425:680b:a6a8 with SMTP id 5b1f17b1804b1-425680ba7camr36139395e9.15.1719583875564;
-        Fri, 28 Jun 2024 07:11:15 -0700 (PDT)
+        bh=KBFsmcHiCQdWp2arl9na9xvwhRaKDOvXIf/Px5kpSzA=;
+        b=SyWxJjIXymf/f1YkfB8ZfC0gZvZKu990c7qDmaCg2zqWXSfospSEty7ezlFbjqMYCu
+         +S+b6ic3hzhnUVCYCBqpbKGsCCdlR73k9NNWVe+BddO8A6DJAMZfcCbnu/tDXWbWGts6
+         lJs+Bvn/C9RTu0c5oBfU3dVaktUuGQQj1bNGESZO5qgFNhD2prayZjF36m84FJZbAxYd
+         gxJYzug6I4AJXokEAPOrMx2DBfRTVvRoz6X8yPiDOrDa0VoyVqW2SHQZd8b0824wKIrI
+         uYpQbrCPPr8MCJrN3Ggl8zrDyJgjLNjCAfijeLR4a+/YtthSIuGMg0uPJYZ8V8DZ1a+6
+         jXQw==
+X-Forwarded-Encrypted: i=1; AJvYcCUr4dZYtkr259sjmR5igvx7CqNv2f/qzyvvW4zi3oJfhrf5BYOoOk/AqHDsdTuCRoVHEq4XOFRB3ehp/B9c0A8mAKuel5GnLaKmVm9E394=
+X-Gm-Message-State: AOJu0YxLEh0wlAVMRFnJrgtfD4qoD0YwJNLwG/5c6xIVbYhip7kL0TYH
+	oWix9MGSXTUSCX9nIvsssLQzQDPZMDPp8G42EoR/3JBSNLIcujH/
+X-Google-Smtp-Source: AGHT+IHBlrmEBaunoFWrg+WEnqhg99HHDUXCnPXUbdV+Vvm2fSUOs/olkZcs/GcFE/mIMgC0rfREJA==
+X-Received: by 2002:a05:6000:1744:b0:362:b106:c5a2 with SMTP id ffacd0b85a97d-36752661f20mr2643122f8f.70.1719585757336;
+        Fri, 28 Jun 2024 07:42:37 -0700 (PDT)
 Received: from orome (p200300e41f162000f22f74fffe1f3a53.dip0.t-ipconnect.de. [2003:e4:1f16:2000:f22f:74ff:fe1f:3a53])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4256af55d0fsm36838285e9.19.2024.06.28.07.11.14
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3675a0e174bsm2524956f8f.63.2024.06.28.07.42.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 28 Jun 2024 07:11:15 -0700 (PDT)
-Date: Fri, 28 Jun 2024 16:11:13 +0200
+        Fri, 28 Jun 2024 07:42:36 -0700 (PDT)
+Date: Fri, 28 Jun 2024 16:42:35 +0200
 From: Thierry Reding <thierry.reding@gmail.com>
-To: "mripard@kernel.org" <mripard@kernel.org>
-Message-ID: <72dx7gqentafhwqnfjmosemm35vfl3blqrfiu5skm3cj33eqqu@vj7kmbllgehk>
-References: <1050c44512374031d1349b5dced228d0efc3fbde.camel@mediatek.com>
- <3104b765-5666-44e4-8788-f1b1b296fe17@amd.com>
- <98c11bad7f40bcc79ed7a2039ddb3a46f99908f5.camel@mediatek.com>
- <75dc1136-7751-4772-9fa7-dd9124684cd2@amd.com>
- <ZnxWWtdShekGSUif@phenom.ffwll.local>
- <ae73a0203d6acf2878c9e3ae2d7554816b9c66ad.camel@mediatek.com>
- <5739abdb-0234-412a-9f25-49219411bbc6@amd.com>
- <20240627-impetuous-aboriginal-cougar-cdcbbf@houat>
- <w3xcvakoytubud6dw4wxr6ntbe6uvfrldihnd26vai6uyyto6j@vcq7gizxolag>
- <20240628-hypnotic-kagu-of-hurricane-5fbc82@houat>
+To: Maxime Ripard <mripard@kernel.org>
+Message-ID: <3e37rhrcqogix5obsu2gq7jar7bcoamx4bbd376az5z3zdkwvm@jstirwdl5efm>
+References: <20240515-dma-buf-ecc-heap-v1-0-54cbbd049511@kernel.org>
+ <CANDhNCoOKwtpstFE2VDcUvzdXUWkZ-Zx+fz6xrdPWTyciVXMXQ@mail.gmail.com>
+ <ZkXmWwmdPsqAo7VU@phenom.ffwll.local>
+ <CANDhNCo5hSC-sLwdkBi3e-Ja-MzdqcGGbn-4G3XNYwCzZUwscw@mail.gmail.com>
+ <ZkyOOwpM57HIiO3v@phenom.ffwll.local>
+ <qy7aczeu6kumv5utemoevi7omp5ryq55zmgzxh5hrz5orf2osp@wypg66awof4n>
+ <20240628-resilient-resolute-rook-0fc531@houat>
 MIME-Version: 1.0
-In-Reply-To: <20240628-hypnotic-kagu-of-hurricane-5fbc82@houat>
-X-Rspamd-Queue-Id: 2F53343D15
-X-Spamd-Bar: --------
-X-Spamd-Result: default: False [-8.10 / 15.00];
+In-Reply-To: <20240628-resilient-resolute-rook-0fc531@houat>
+X-Rspamd-Queue-Id: 2CA743F2F7
+X-Spamd-Bar: ---------
+X-Spamd-Result: default: False [-9.60 / 15.00];
 	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.20)[multipart/signed,text/plain];
 	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	TAGGED_FROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[35];
-	RCVD_TLS_LAST(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
 	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	ARC_NA(0.00)[];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[amd.com,mediatek.com,ffwll.ch,quicinc.com,collabora.com,linaro.org,kernel.org,google.com,deltatee.com,lists.freedesktop.org,emersion.fr,gmail.com,lists.infradead.org,lists.linaro.org,infradead.org,ucw.cz,linux-foundation.org,arm.com,vger.kernel.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_FROM(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	NEURAL_HAM(-0.00)[-1.000];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.54:from];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	MISSING_XM_UA(0.00)[];
-	TAGGED_RCPT(0.00)[dt];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.48:from];
+	NEURAL_HAM(-0.00)[-1.000];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	FREEMAIL_ENVFROM(0.00)[gmail.com]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 466GR4X5CYU3WFDF7MTEGWBZ4CKBUNC7
-X-Message-ID-Hash: 466GR4X5CYU3WFDF7MTEGWBZ4CKBUNC7
+Message-ID-Hash: BXNKU6DZ2DJPOK2CUWNJE6QO65THFT2U
+X-Message-ID-Hash: BXNKU6DZ2DJPOK2CUWNJE6QO65THFT2U
 X-MailFrom: thierry.reding@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Jason-JH Lin =?utf-8?B?KOael+edv+elpSk=?= <Jason-JH.Lin@mediatek.com>, "daniel@ffwll.ch" <daniel@ffwll.ch>, "quic_vjitta@quicinc.com" <quic_vjitta@quicinc.com>, "angelogioacchino.delregno@collabora.com" <angelogioacchino.delregno@collabora.com>, "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "conor+dt@kernel.org" <conor+dt@kernel.org>, "jkardatzke@google.com" <jkardatzke@google.com>, "krzysztof.kozlowski+dt@linaro.org" <krzysztof.kozlowski+dt@linaro.org>, "joakim.bech@linaro.org" <joakim.bech@linaro.org>, Youlin Pei =?utf-8?B?KOijtOWPi+aelyk=?= <youlin.pei@mediatek.com>, "logang@deltatee.com" <logang@deltatee.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, Kuohong Wang =?utf-8?B?KOeOi+Wci+m0uyk=?= <kuohong.wang@mediatek.com>, Jianjiao Zeng =?utf-8?B?KOabvuWBpeWnoyk=?= <Jianjiao.Zeng@mediatek.com>, "contact@emersion.fr" <contact@emersion.fr>, "benjamin.gaignard@collabora.com" <benjamin.gaig
- nard@collabora.com>, "matthias.bgg@gmail.com" <matthias.bgg@gmail.com>, "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "willy@infradead.org" <willy@infradead.org>, "pavel@ucw.cz" <pavel@ucw.cz>, "akpm@linux-foundation.org" <akpm@linux-foundation.org>, "Brian.Starkey@arm.com" <Brian.Starkey@arm.com>, "robh+dt@kernel.org" <robh+dt@kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, "tjmercier@google.com" <tjmercier@google.com>, "jstultz@google.com" <jstultz@google.com>, "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, "robin.murphy@arm.com" <robin.murphy@arm.com>, Yong Wu =?utf-8?B?KOWQtOWLhyk=?= <Yong.Wu@mediatek.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "ppaalanen@gmail.com" <ppaalanen@gmail.com>
+CC: John Stultz <jstultz@google.com>, Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 2/9] scatterlist: Add a flag for the restricted memory
+Subject: [Linaro-mm-sig] Re: [PATCH 0/8] dma-buf: heaps: Support carved-out heaps and ECC related-flags
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/466GR4X5CYU3WFDF7MTEGWBZ4CKBUNC7/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BXNKU6DZ2DJPOK2CUWNJE6QO65THFT2U/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============8714490706231858813=="
+Content-Type: multipart/mixed; boundary="===============7450195533028700127=="
 
 
---===============8714490706231858813==
+--===============7450195533028700127==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="xr2rzsuy6pm7a5h3"
+	protocol="application/pgp-signature"; boundary="7qapu67rznvjb2hm"
 Content-Disposition: inline
 
 
---xr2rzsuy6pm7a5h3
+--7qapu67rznvjb2hm
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jun 28, 2024 at 03:21:51PM GMT, mripard@kernel.org wrote:
-> On Fri, Jun 28, 2024 at 01:47:01PM GMT, Thierry Reding wrote:
-> > On Thu, Jun 27, 2024 at 04:40:02PM GMT, mripard@kernel.org wrote:
-> > > On Thu, Jun 27, 2024 at 08:57:40AM GMT, Christian K=C3=B6nig wrote:
-> > > > Am 27.06.24 um 05:21 schrieb Jason-JH Lin (=E6=9E=97=E7=9D=BF=E7=A5=
-=A5):
-> > > > >=20
-> > > > > On Wed, 2024-06-26 at 19:56 +0200, Daniel Vetter wrote:
-> > > > > >   > External email : Please do not click links or open attachme=
-nts
-> > > > > until
-> > > > > > you have verified the sender or the content.
-> > > > > >  On Wed, Jun 26, 2024 at 12:49:02PM +0200, Christian K=C3=B6nig=
- wrote:
-> > > > > > > Am 26.06.24 um 10:05 schrieb Jason-JH Lin (=E6=9E=97=E7=9D=BF=
-=E7=A5=A5):
-> > > > > > > > > > I think I have the same problem as the ECC_FLAG mention=
- in:
-> > > > > > > > > > > > > https://lore.kernel.org/linux-media/20240515-dma-=
-buf-ecc-heap-v1-0-54cbbd049511@kernel.org/
-> > > > > > > > > > > > I think it would be better to have the user configu=
-rable
-> > > > > > private
-> > > > > > > > > > information in dma-buf, so all the drivers who have the=
- same
-> > > > > > > > > > requirement can get their private information from dma-=
-buf
-> > > > > > directly
-> > > > > > > > > > and
-> > > > > > > > > > no need to change or add the interface.
-> > > > > > > > > > > > What's your opinion in this point?
-> > > > > > > > >  > Well of hand I don't see the need for that.
-> > > > > > > > > > What happens if you get a non-secure buffer imported in=
- your
-> > > > > > secure
-> > > > > > > > > device?
-> > > > > > > > > > > We use the same mediatek-drm driver for secure and
-> > > > > non-secure
-> > > > > > buffer.
-> > > > > > > > If non-secure buffer imported to mediatek-drm driver, it's =
-go to
-> > > > > > the
-> > > > > > > > normal flow with normal hardware settings.
-> > > > > > > > > > > We use different configurations to make hardware have
-> > > > > different
-> > > > > > > > permission to access the buffer it should access.
-> > > > > > > > > > > So if we can't get the information of "the buffer is
-> > > > > allocated
-> > > > > > from
-> > > > > > > > restricted_mtk_cma" when importing the buffer into the driv=
-er, we
-> > > > > > won't
-> > > > > > > > be able to configure the hardware correctly.
-> > > > > > > > > Why can't you get this information from userspace?
-> > > > > > > Same reason amd and i915/xe also pass this around internally =
-in the
-> > > > > > kernel, it's just that for those gpus the render and kms node a=
-re the
-> > > > > > same
-> > > > > > driver so this is easy.
+On Fri, Jun 28, 2024 at 03:08:46PM GMT, Maxime Ripard wrote:
+> Hi,
+>=20
+> On Fri, Jun 28, 2024 at 01:29:17PM GMT, Thierry Reding wrote:
+> > On Tue, May 21, 2024 at 02:06:19PM GMT, Daniel Vetter wrote:
+> > > On Thu, May 16, 2024 at 09:51:35AM -0700, John Stultz wrote:
+> > > > On Thu, May 16, 2024 at 3:56=E2=80=AFAM Daniel Vetter <daniel@ffwll=
+=2Ech> wrote:
+> > > > > On Wed, May 15, 2024 at 11:42:58AM -0700, John Stultz wrote:
+> > > > > > But it makes me a little nervous to add a new generic allocatio=
+n flag
+> > > > > > for a feature most hardware doesn't support (yet, at least). So=
+ it's
+> > > > > > hard to weigh how common the actual usage will be across all the
+> > > > > > heaps.
 > > > > > >
-> > > >=20
-> > > > The reason I ask is that encryption here looks just like another pa=
-rameter
-> > > > for the buffer, e.g. like format, stride, tilling etc..
-> > > >=20
-> > > > So instead of this during buffer import:
-> > > >=20
-> > > > mtk_gem->secure =3D (!strncmp(attach->dmabuf->exp_name, "restricted=
-", 10));
-> > > > mtk_gem->dma_addr =3D sg_dma_address(sg->sgl);
-> > > > mtk_gem->size =3D attach->dmabuf->size;
-> > > > mtk_gem->sg =3D sg;
-> > > >=20
-> > > > You can trivially say during use hey this buffer is encrypted.
-> > > >=20
-> > > > At least that's my 10 mile high view, maybe I'm missing some extens=
-ive key
-> > > > exchange or something like that.
-> > >=20
-> > > That doesn't work in all cases, unfortunately.
-> > >=20
-> > > If you're doing secure video playback, the firmware is typically in
-> > > charge of the frame decryption/decoding, and you'd get dma-buf back t=
+> > > > > > I apologize as my worry is mostly born out of seeing vendors re=
+ally
+> > > > > > push opaque feature flags in their old ion heaps, so in providi=
+ng a
+> > > > > > flags argument, it was mostly intended as an escape hatch for
+> > > > > > obviously common attributes. So having the first be something t=
 hat
-> > > aren't accessible by the CPU (or at least, not at the execution level
-> > > Linux runs with).
+> > > > > > seems reasonable, but isn't actually that common makes me fret =
+some.
+> > > > > >
+> > > > > > So again, not an objection, just something for folks to stew on=
+ to
+> > > > > > make sure this is really the right approach.
+> > > > >
+> > > > > Another good reason to go with full heap names instead of opaque =
+flags on
+> > > > > existing heaps is that with the former we can use symlinks in sys=
+fs to
+> > > > > specify heaps, with the latter we need a new idea. We haven't yet=
+ gotten
+> > > > > around to implement this anywhere, but it's been in the dma-buf/h=
+eap todo
+> > > > > since forever, and I like it as a design approach. So would be a =
+good idea
+> > > > > to not toss it. With that display would have symlinks to cma-ecc =
+and cma,
+> > > > > and rendering maybe cma-ecc, shmem, cma heaps (in priority order)=
+ for a
+> > > > > SoC where the display needs contig memory for scanout.
+> > > >=20
+> > > > So indeed that is a good point to keep in mind, but I also think it
+> > > > might re-inforce the choice of having ECC as a flag here.
+> > > >=20
+> > > > Since my understanding of the sysfs symlinks to heaps idea is about
+> > > > being able to figure out a common heap from a collection of devices,
+> > > > it's really about the ability for the driver to access the type of
+> > > > memory. If ECC is just an attribute of the type of memory (as in th=
+is
+> > > > patch series), it being on or off won't necessarily affect
+> > > > compatibility of the buffer with the device.  Similarly "uncached"
+> > > > seems more of an attribute of memory type and not a type itself.
+> > > > Hardware that can access non-contiguous "system" buffers can access
+> > > > uncached system buffers.
+> > >=20
+> > > Yeah, but in graphics there's a wide band where "shit performance" is
+> > > defacto "not useable (as intended at least)".
+> > >=20
+> > > So if we limit the symlink idea to just making sure zero-copy access =
+is
+> > > possible, then we might not actually solve the real world problem we =
+need
+> > > to solve. And so the symlinks become somewhat useless, and we need to
+> > > somewhere encode which flags you need to use with each symlink.
+> > >=20
+> > > But I also see the argument that there's a bit a combinatorial explos=
+ion
+> > > possible. So I guess the question is where we want to handle it ...
 > >=20
-> > Can you clarify which firmware you're talking about? Is this secure
-> > firmware, or firmware running on the video decoding hardware?
+> > Sorry for jumping into this discussion so late. But are we really
+> > concerned about this combinatorial explosion in practice? It may be
+> > theoretically possible to create any combination of these, but do we
+> > expect more than a couple of heaps to exist in any given system?
 >=20
-> Secure firmware
-
-Ah... interesting. So you actually need to interop with that firmware in
-order to start decryption/decoding. That's quite different from how this
-works on Tegra. Well, maybe not entirely. For Tegra there is firmware
-that runs on the hardware decoder and which has access to the keys, so
-in that way I guess it's similar to your use-case, except the firmware
-runs on a different chip.
-
-> > > So nobody can map that buffer, and the firmware driver is the one who
-> > > knows that this buffer cannot be accessed by anyone. Putting this on =
-the
-> > > userspace to know would be pretty weird, and wouldn't solve the case
-> > > where the kernel would try to map it.
-> >=20
-> > Doesn't userspace need to know from the start whether it's trying to do
-> > secure playback or not?
+> I don't worry too much about the number of heaps available in a given
+> system, it would indeed be fairly low.
 >=20
-> It does, but it won't know the capabilities of the buffer it gets back
-> from the secure firmware.
-
-I think that's kind of the point. Does it really have to know the
-capabilities? Isn't it enough to know that it's got some sort of
-protected buffer back and then use it more or less blindly? I mean
-these are things that have to be tightly coupled no matter what, so
-how much point is there in trying to validate what you get?
-
-> > Typically this involves more than just the decoding part. You'd
-> > typically set up things like HDCP as part of the process, so userspace
-> > probably already does know that the buffers being passed around are
-> > protected.
-> >=20
-> > Also, the kernel shouldn't really be mapping these buffers unless
-> > explicitly told to. In most cases you also wouldn't want the kernel to
-> > map these kinds of buffers, right? Are there any specific cases where
-> > you expect the kernel to need to map these?
-> >=20
-> > I've been looking at this on the Tegra side recently and the way it
-> > works on these chips is that you basically get an opaque carveout region
-> > that has been locked down by secure firmware or early bootloaders, so
-> > only certain hardware blocks can access it. We can allocate from that
-> > carveout and then pass the buffers around.
+> My concern is about the semantics combinatorial explosion. So far, the
+> name has carried what semantics we were supposed to get from the buffer
+> we allocate from that heap.
 >=20
-> So you allocate both the input and output buffers (and from different
-> regions) from the application, and pass both to the secure firmware?
+> The more variations and concepts we'll have, the more heap names we'll
+> need, and with confusing names since we wouldn't be able to change the
+> names of the heaps we already have.
+
+What I was trying to say is that none of this matters if we make these
+names opaque. If these names are contextual for the given system it
+doesn't matter what the exact capabilities are. It only matters that
+their purpose is known and that's what applications will be interested
+in.
+
+> > Would it perhaps make more sense to let a platform override the heap
+> > name to make it more easily identifiable? Maybe this is a naive
+> > assumption, but aren't userspace applications and drivers not primarily
+> > interested in the "type" of heap rather than whatever specific flags
+> > have been set for it?
 >=20
-> Yeah, I guess that would work then.
+> I guess it depends on what you call the type of a heap. Where we
+> allocate the memory from, sure, an application won't care about that.
+> How the buffer behaves on the other end is definitely something
+> applications are going to be interested in though.
 
-It doesn't really matter who allocates the buffers. It could be the
-application allocating the scanout buffer from a DRM/KMS device and the
-input buffer from the multimedia decoder. Or it could be the application
-allocating both buffers from different DMA-BUF heaps. In the end it
-shouldn't really matter where they are coming from. It's effectively up
-to the application to pass the right buffers into the right IOCTLs.
+Most of these heaps will be very specific, I would assume. For example a
+heap that is meant to be protected for protected video decoding is both
+going to be created in such a way as to allow that use-case (i.e. it
+doesn't make sense for it to be uncached, for example) and it's also not
+going to be useful for any other use-case (i.e. there's no reason to use
+that heap for GPU jobs or networking, or whatever).
 
-> > It may be possible to use these protected carveout regions exclusively
-> > from the DRM/KMS driver and share them with multimedia engines via DMA-
-> > BUF, but I've also been looking into perhaps using DMA-BUF heaps to
-> > expose the carveout, which would make this a bit more flexible and allow
-> > either userspace to allocate the buffers or have multiple kernel drivers
-> > share the carveout via the DMA-BUF heap. Though the latter would require
-> > that there be in-kernel APIs for heaps, so not too sure about that yet.
+> And if we allow any platform to change a given heap name, then a generic
+> application won't be able to support that without some kind of
+> platform-specific configuration.
+
+We could still standardize on common use-cases so that applications
+would know what heaps to allocate from. But there's also no need to
+arbitrarily restrict this. For example there could be cases that are
+very specific to a particular platform and which just doesn't exist
+anywhere else. Platform designers could then still use this mechanism to
+define that very particular heap and have a very specialized userspace
+application use that heap for their purpose.
+
+> > For example, if an applications wants to use a protected buffer, the
+> > application doesn't (and shouldn't need to) care about whether the heap
+> > for that buffer supports ECC or is backed by CMA. All it really needs to
+> > know is that it's the system's "protected" heap.
 >=20
-> What would be the advantage of using a heap compared to having all these
-> devices in DT use the reserved-memory property and point to that
-> carveout? It should already work today.
+> I mean... "protected" very much means backed by CMA already, it's pretty
+> much the only thing we document, and we call it as such in Kconfig.
 
-You can't just have all of these point to a common reserved-memory node
-because there can be multiple concurrent users. You could have multiple
-protected streams running at the same time. DMA-BUF heaps allows us to
-expose a central provider for the protected memory so that allocations
-can be properly arbitrated.
+Well, CMA is really just an implementation detail, right? It doesn't
+make sense to advertise that to anything outside the kernel. Maybe it's
+an interesting fact that buffers allocated from these heaps will be
+physically contiguous? In the majority of cases that's probably not even
+something that matters because we get a DMA-BUF anyway and we can map
+that any way we want.
+
+Irrespective of that, physically contigous buffers could be allocated in
+any number of ways, CMA is just a convenient implementation of one such
+allocator.
+
+> But yeah, I agree that being backed by CMA is probably not what an
+> application cares about (and we even have might some discussions about
+> that), but if the ECC protection comes at a performance cost then it
+> will very much care about it. Or if it comes with caches enabled or not.
+
+True, no doubt about that. However, I'm saying there may be advantages
+in hiding all of this from applications. Let's say we're trying to
+implement video decoding. We can create a special "protected-video" heap
+that is specifically designed to allocate encrypted/protected scanout
+buffers from.
+
+When you design that system, you would most certainly not enable ECC
+protection on that heap because it leads to bad performance. You would
+also want to make sure that all of the buffers in that heap are cached
+and whatever other optimizations your chip may provide.
+
+Your application doesn't have to care about this, though, because it can
+simply look for a heap named "protected-video" and allocate buffers from
+it.
+
+> > This rather than try to represent every possible combination we
+> > basically make this a "configuration" issue. System designers need to
+> > settle on whatever combination of flags work for all the desired use-
+> > cases and then we expose that combination as a named heap.
+>=20
+> This just pushes the problem down to applications, and carry the flags
+> mentioned earlier in the heap name. So the same information, but harder
+> to process or discover for an application.
+
+Yes, this pushes the problem down to the application. But given the
+above I don't think it becomes at all hard to process. We may sacrifice
+some flexibility, but I'm arguing that it's flexibility that we don't
+need anyway.
+
+> > One problem that this doesn't solve is that we still don't have a way of
+> > retrieving these flags in drivers which may need them.
+>=20
+> I'm not sure drivers should actually need to allocate from heaps, but we
+> could do it just like I suggested we'd do it for applications: we add a
+> new function that allows to discover what a given heap capabilities are.
+> And then we just have to iterate and choose the best suited for our
+> needs.
+
+Yeah, that's an interesting option as well. I think contrary to
+userspace it makes more sense to work off of a set of flags at the
+kernel level.
+
+The obvious downside to this is that userspace now also needs driver-
+specific implementations for the allocation. Similar to the above it
+gives us a lot of flexibility at the cost of simplicity.
 
 Thierry
 
---xr2rzsuy6pm7a5h3
+--7qapu67rznvjb2hm
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmZ+xH4ACgkQ3SOs138+
-s6Ewkw/+OuesTDwI4fSJ/OgnfnSYV+09dFmZnKCi7T9XiPqeHlgY+7yQJEjWaSog
-9Kad7Sr83CNyrKHDePh/SHKyReazx+0HaT6abYiBlidEjZ7D74N6GoGMp3Kz6W23
-pctq1hflyNgDWkElJ0pVxfY7MwJoHURxaxDEgnLpWITye8AHU5mwP47H/XgdGBYq
-jd2ygGo/LZ3M8S48QlBayvRkrQC76OaAzG/u/TzJSNpMFZOQuU3Yh9m+t11VHr1g
-Gf9SYQDRk/Rd7pHqGGrQjHXPlKXz+sz51HpX8dj3j9xtupjHgOd8jWLfQKMU7AlA
-waDv9+KFWQd7L6u9fBpLAkT00toK9JvEW0/3bOZ/IOhZr5wLlPDkd91dwHbl94sz
-yawHtAEcFQDZktRqkiq3PWig4mFb12tlBWR1dPH/BiRQaghyw3FZ0LzmrmmoGowR
-Rd7ceZA+13m3e+XcoY6TYNFIuJNQP+OPrmPbzUaUxD/JEIfGBMlzVrZl/8Tx+0kV
-hiehAiVeC1uXPzllCHvoV8pYBpfFArXSTwrWg6P8QevwWOqOa/SJBfauBpvJB7Go
-gGCfcVEJXQ+VQrqgGo/5ked+5djU5Qwz5PEOxJ2+XH0n92rpXH1Ml4Mkv2Xlp0lk
-0Eftw28P6ER9Nkh82eV4TOpX6r0vhePu4x3bq4vDUWMmr6q+k40=
-=kVmy
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmZ+y9gACgkQ3SOs138+
+s6GCGw/+P7wCgBX8O+ejKciexhjU0MMJ/iq+fSjPjkyRxYfxOpiFtPIGD7svaXLI
+qlhjMB0FGJ4tU8EYfoWMJzWBcOv3qg33kql9RDenfEWfk7T/teX7LpqH6G1v1CdS
+ozZehvkdw1FyCmTvHT/xzMK3lmEFL58ID/fvs3n8jGOVbMlnxVNZ1tJ2EXSUNc10
+VQzzwOnW4Ur9J16f/WEnVhgDOAYYFPjkFpV5JLarPlcRDfpOf5qrwWo7kbOEwvCz
++YC/S2bPZsp3qpWYcbfnVN1DTjKIoKCyzJIWgzwA2Sjw71DvlO5UyZb2hYS/5I76
+lj02WxFbTgPGCwEC5g1BaXvviPjsjgXmu32Ap+KghWirxVkDG+8cCmkRrK7qZ3aw
+Mc0T//I4IKRig+EibTRZvCSTVlv9lJgl4swG9n5aytABxH5JV93qwhSdOUlWDkMq
+Xwe0fXwN5TGv+EbrAzf2EodXcCWN8AbasU7jffqFD7iFL7tEeuvF3qmLuOqaEl6w
+AsvsPKbQVxJkVzvJnSDfFZujJ/MVl+cB9S8YP2xpxk/dKcERRLS0uz22adi6C1Mo
+SCLVbhJOt7g3Js+mcbIptS+OK9krDGEVuWoUIQz12GtHR20ePDbAq/3ctFvnGvbI
+gUQR7wFr2r58TnJzkRD4TtJ4Ucg1aDDUSEgFt7nvSpBvCfP4HxM=
+=3/gW
 -----END PGP SIGNATURE-----
 
---xr2rzsuy6pm7a5h3--
+--7qapu67rznvjb2hm--
 
---===============8714490706231858813==
+--===============7450195533028700127==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -330,4 +354,4 @@ _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
 
---===============8714490706231858813==--
+--===============7450195533028700127==--
