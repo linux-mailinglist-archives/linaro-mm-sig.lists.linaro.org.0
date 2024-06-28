@@ -2,384 +2,258 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id D67E491BEAD
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Jun 2024 14:34:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 376DC91BEB6
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Jun 2024 14:38:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id DF9C444980
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Jun 2024 12:34:46 +0000 (UTC)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com (mail-bn8nam12on2048.outbound.protection.outlook.com [40.107.237.48])
-	by lists.linaro.org (Postfix) with ESMTPS id 0F5AD3EFCB
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Jun 2024 12:34:43 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 2BE944486D
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 28 Jun 2024 12:38:24 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+	by lists.linaro.org (Postfix) with ESMTPS id 23D1143D1C
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Jun 2024 12:38:22 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=amd.com header.s=selector1 header.b=NDrTBw+j;
-	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.237.48 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
-	dmarc=pass (policy=quarantine) header.from=amd.com;
-	arc=pass ("microsoft.com:s=arcselector9901:i=1")
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nYsLI3fT6mRHhE5qHXhUWGSk9qOELCsFEbIKk4Y52WUVvp0zfj1pFFy9BfRzf0JkLLZoleEoLH/dpXH3LWoHok1CPhGLOwJMo054Fngw/swytK+W5/sfg6pKW63LscxbFssNnqGHj3ONTTEKT3E3FtND7Gg4H4Hon42m6VEt+/8TP3M3beixaee15B8Fn5DVLRqMOqFJRvGDtkflICZsWMTqn+8+l7zaNA2Gy9yRegPOHBpPrS2hpzuvSyQVg9HoJsjWv8JscghWwiTzusFP5UOZo90UTaznOtLGT7iR30S1upZ7K5SE6SyXMhQEgAnoI6Vy+P/80NAo+feB8gJDZQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fnIMPV5794vh5rfsIRaBDvKj8of5k/C8mcaw8nA9VEk=;
- b=h/RZAGH5/exjQb3En2cA24PwvvVwsjzjOgs6iuTU48xkPlXXJeZgZilIvZjs+suGeu28wOKknjFAa81rgaehJtMcq6Da48ehBUuFoBd5m76/nrtK062zBLU2jmms0BS4G389dDOufj2ah3a3TabuqHngbLdVz5vGrMDXdgZOMJKkSV3z4qIfN/j1eAzeKCgNPyLFDwrc4VUOERXWgDTh3F4sDdE+yaOJ9rlYCYBuJ+iAgWBK7W8SA/h/w4m5BA6yGpUQ05WpMF6PAcCtEDTDPv4BLL2SLOKEXXM9DK4ISAlH9HSNqbQt9sdM/Bz9kJ54hNTNUoMs/kDVssFif1/nPg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fnIMPV5794vh5rfsIRaBDvKj8of5k/C8mcaw8nA9VEk=;
- b=NDrTBw+jGAXZLRqPka8ptWzO2dZsZ3Nk5WznN8jHGHWL+MDGQC6JWY/S/u4cSsJvv2PnH+DoLc+plffDoQGAw5cI+TNjHGEM+RTFMOUJEv4/Q5iN47Wzw0LTxE2fdskCVuCW0oYTH568xrD1kVMtHbI3E9OdQE0giLD0X7j3C7c=
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by PH7PR12MB7236.namprd12.prod.outlook.com (2603:10b6:510:207::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7698.32; Fri, 28 Jun
- 2024 12:34:38 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::46fb:96f2:7667:7ca5]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::46fb:96f2:7667:7ca5%5]) with mapi id 15.20.7698.025; Fri, 28 Jun 2024
- 12:34:38 +0000
-Message-ID: <c96f82e3-bbd6-407e-a71b-3a794a56585b@amd.com>
-Date: Fri, 28 Jun 2024 14:34:24 +0200
-User-Agent: Mozilla Thunderbird
-To: Thierry Reding <thierry.reding@gmail.com>,
- "mripard@kernel.org" <mripard@kernel.org>
-References: <779ce30a657754ff945ebd32b66e1c644635e84d.camel@mediatek.com>
- <cef8f87d-edab-41d8-8b95-f3fc39ad7f74@amd.com>
- <1050c44512374031d1349b5dced228d0efc3fbde.camel@mediatek.com>
- <3104b765-5666-44e4-8788-f1b1b296fe17@amd.com>
- <98c11bad7f40bcc79ed7a2039ddb3a46f99908f5.camel@mediatek.com>
- <75dc1136-7751-4772-9fa7-dd9124684cd2@amd.com>
- <ZnxWWtdShekGSUif@phenom.ffwll.local>
- <ae73a0203d6acf2878c9e3ae2d7554816b9c66ad.camel@mediatek.com>
- <5739abdb-0234-412a-9f25-49219411bbc6@amd.com>
- <20240627-impetuous-aboriginal-cougar-cdcbbf@houat>
- <w3xcvakoytubud6dw4wxr6ntbe6uvfrldihnd26vai6uyyto6j@vcq7gizxolag>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <w3xcvakoytubud6dw4wxr6ntbe6uvfrldihnd26vai6uyyto6j@vcq7gizxolag>
-X-ClientProxiedBy: FR0P281CA0184.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:ab::7) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=e27mKGPA;
+	spf=pass (lists.linaro.org: domain of thierry.reding@gmail.com designates 209.85.128.51 as permitted sender) smtp.mailfrom=thierry.reding@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4256eec963eso3541045e9.1
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 28 Jun 2024 05:38:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1719578301; x=1720183101; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=UkB9FJLP2us4SWIDZi7Xked72Jv5/nb/0qDRVeIMogM=;
+        b=e27mKGPAirEUtjinXR4qZwrBWpo04F8+Ic8LXwkCCGq9hdGxemIpbC9/4+bLpBGdG0
+         zJ+sJT6WEzn3hhscnXpISLnQL2tA5gN8NXQ1l2sOYdFxv+6bw+DhI0Tc7JiWafvsQ98+
+         2+nxmgileiUAGJHmM+VTGCAAbA9RfziLyYJHvrAQQQokOFRKHpCx96l8wnGvf9X2O7AA
+         FyWiuZFE/IQtCoT4CULQQfu84sWYqp/zotENE807ifruZR8f/LyI948AyBBQ9qyV1lFQ
+         D/bbhq9zdkIyG+s+koUnN73MfWHcpx53BaASUGP3atmz0qiNgYo98dBL5jWmq6OiNKN0
+         /8kw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1719578301; x=1720183101;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=UkB9FJLP2us4SWIDZi7Xked72Jv5/nb/0qDRVeIMogM=;
+        b=ddRXgPAzxViwTP3DsPzgceCexF1RZxVNHfrVR9SIIzpO7E4QzDVh9p6pGnP/4hkNbP
+         Nk2fMn2HHICI04ki89oEyIHfeKxeBV7caVmdfr3xgVN3Z131/29MPpbUxRV7UMv04fvs
+         Vn6tagZHsNJTy34dY0fCaVBXVaxtG/vFwQa61zbr14QtAS1DcDu0///b7zsRFyU72NCk
+         7BLd6lNmg4JM6O5JzBUEjd1VLNeHJAyIB4PP+2ULFzT5RkuvGGlQjKWQhW19EOM6qDh4
+         5IIsMZMCjKeGj8drMFmIrKWWmugJJWH+tAH8hxy4xbytHXShYaJ7Y9J/1s8kGnGWjVzi
+         M42w==
+X-Forwarded-Encrypted: i=1; AJvYcCXvpOIKxll2es6oRhw+4PURTNIY9Yj8fPhlAxTJ8Yd5gSOqEq2kim1766H0v0ozesa6qiXyhsdAaJAc+eF/4LClwetZfjgov+A8552NKLE=
+X-Gm-Message-State: AOJu0YyBW55DmvFsl8GJQSZhIi2lgb2N2J/kGM0GNwF0tHLeWzu2s724
+	MNyjtTCCmzlwVDLNtu1FlVJ+BZIEx0ttQpMx0qNw1dxPKZm5bgWZUC7CDw==
+X-Google-Smtp-Source: AGHT+IGKPig1mllBhdyoWDfOAICdvFqpjzxk+CF0oztCa+Z2hIe/+Ak7GWhb6YuhdCYfjXEa57wE4g==
+X-Received: by 2002:adf:fd4b:0:b0:367:2ae1:9c4d with SMTP id ffacd0b85a97d-3672ae19d30mr5464759f8f.29.1719578300608;
+        Fri, 28 Jun 2024 05:38:20 -0700 (PDT)
+Received: from orome (p200300e41f162000f22f74fffe1f3a53.dip0.t-ipconnect.de. [2003:e4:1f16:2000:f22f:74ff:fe1f:3a53])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3675a0fc4c9sm2197872f8f.86.2024.06.28.05.38.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 28 Jun 2024 05:38:20 -0700 (PDT)
+Date: Fri, 28 Jun 2024 14:38:18 +0200
+From: Thierry Reding <thierry.reding@gmail.com>
+To: Yong Wu <yong.wu@mediatek.com>
+Message-ID: <pmweipswfysn3sjwf7jphwcjkt36s5d2o5ox6e63btqiyj7taj@kti5j36ttfbc>
+References: <20240515112308.10171-1-yong.wu@mediatek.com>
+ <20240515112308.10171-8-yong.wu@mediatek.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|PH7PR12MB7236:EE_
-X-MS-Office365-Filtering-Correlation-Id: 984d3781-4dd9-49a0-d236-08dc976eacc6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|7416014|1800799024;
-X-Microsoft-Antispam-Message-Info: 
-	=?utf-8?B?dlNnNHN4alU5NVJ4VU1HcEl1TVJUNHpzUzdkSHdIWkNJL2xJZjd3R0ZlTGI0?=
- =?utf-8?B?ZjlLdkZtOHp4Mm50aHo3UWwxUE8vVHEvNVdldEk3dU9CMXpxYkZueTR2ZHR0?=
- =?utf-8?B?MDY3ZFZPTWRpV0NqOGROZDJFMzJFTUJiZUl4Z0FqeGZYa0RWODQvQ09vR0d6?=
- =?utf-8?B?Z01sUzBDcFc5Z1VSaE5yTEd2bVpveXZQYnhudmhabkpidTZvdVlhT0UzQVR5?=
- =?utf-8?B?cDB1VWFDZzg0eGJ2c01MaW11MFBCV1YvU0pUQWZKNStveGthR0hmaGtGQ28v?=
- =?utf-8?B?c2ZLYzdaZis5dkJHQnlRU2p3MnJQdGxab21vR0ZWbmZoTXhQY1h6SHlRM2Zj?=
- =?utf-8?B?UUxncVlPTUFzcEVUckZqU0NhSHhGazdFY2RYMjNVT2VzU1VjZUJxUTFCaENn?=
- =?utf-8?B?bThLQ25JVDFSWHk4Yk54ZTc3a3A3enJRbnhPdDZJeFVsNDVXanlWcWlYTTBm?=
- =?utf-8?B?V3o4MWpLNXFlSXFNR1ZtMGZ5Tk9qSi94ZDZuekFzYXQrNWh0NjRDYi9lN2tE?=
- =?utf-8?B?QS9PVUJwS3o3RTdHM09HdGk4aE5rcG1zdktHMExjZXc4QXJCbFJ0Zi9tLzNi?=
- =?utf-8?B?NDZXdStEY0dnVGtwZEdtc3dmVWExTWRUa0R6Z1pnaFQ2UFJob091MURabUlQ?=
- =?utf-8?B?V2E3N2NGdGRzZm5ITk94QTVuTVFSUFQ3YWszeFZHSXl0YksvUUVXdUhQbW1G?=
- =?utf-8?B?NGU3Z21Cdk9iVWdSZGpUZ0NwbWxLZzFDNy9yK0N4aUs5Vms3VzE0SkVmZWxJ?=
- =?utf-8?B?ZVBrellYSGJsSENmcER6aHdrdXBGV2t2MXlqbXNKSVFVd1NjMmJGcjNKbTFo?=
- =?utf-8?B?ZGsrYU9MZy83eGRRUmo1eWkrYi91ZWJka25kNUZEdnVSU3NCSVc4RDR1K0M2?=
- =?utf-8?B?TkZhb0d6OWtBZFJpZXdIR2JuYktxVkFtZmgxL0Vub1VuVVpkYXhPYXZzTzdh?=
- =?utf-8?B?MmlTVW0vaURTSTdQb2YvdG9iQmhFbnNPeXE1czR4OE51ckRGMlBpbXl2ZUNh?=
- =?utf-8?B?VUc0VENGMHZ6ZGpyS2pURlRJM3R0Wm1GNDB5VVFabmVDLzNwR09mOEpXeDBh?=
- =?utf-8?B?VklQMGpjdGE1Z2RSVzA0ZzVBQVVvSi9JMlRicm9jOU5iUi91QmJDdURKK3Ro?=
- =?utf-8?B?azZYSElSTzlQWmdoM25OTjJLUkQrVW9lU09tMFBoTmZPdTRNM3ZTTngzUVdp?=
- =?utf-8?B?NGtzbWJGVVpjS2Rsc2pCSks3ak95ZDZ1NE95NmJkbnU0cGowNy9EaEJ3cUNy?=
- =?utf-8?B?d0xZOTRmMzh1SlJNTGNKNEcxOUdZelhnWk1JdmdSM1haT2RIUjJSVWs0OG9n?=
- =?utf-8?B?cENKSWt6MjZsczAyRHQ3UlBxUDI0RUZYL0NwZGdCTUtvWW1yek1nR3lUZlo2?=
- =?utf-8?B?VGtUdTg3MVJlLzZNT1UxdmZ6dVNSY1lscmtUL1BYdlZjU05nTWxOV1ZTN0ZT?=
- =?utf-8?B?UDdEYkNwNWJ0NlBuUUlDUU9ha053RkFtK1lVTndhMG4wZ05XY3BUZktCZ0hU?=
- =?utf-8?B?bTU5aGM2Vy9wNjdOUkdOL2VTSzdZZk0yUEQ3N1hXVGY0cTl6YkZ5U0pJdlMw?=
- =?utf-8?B?d3NXQi91RXpTK2lHWjRJTVIwNjlNRldoeU43RWEwUDR3cXZnR1U4OTlmSFcw?=
- =?utf-8?B?bDZjczNwQXZmWGtUOFAxZSsrR09OSGhjK0dZMlJnZjZpSEdWT0RqQ1BrWVll?=
- =?utf-8?B?NGNnUmxJMFNHUFNZMzcrcTNLQThRejJzUllmS3BYUnZHUFFCUXVPRm02aU5k?=
- =?utf-8?B?TUZDaW1CaHI4amJxdmpQSEcyYjQ0VTJTeWdmK2VLekU4bEM3MlFkblhRTU92?=
- =?utf-8?B?dm54RGRSRWtaZUFoaVphZz09?=
-X-Forefront-Antispam-Report: 
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(7416014)(1800799024);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: 
-	=?utf-8?B?dWtCWE9kSUhENm1rbGRYNUU1eGFvSHNpdVc4RHoycHBPMGJRZGg5NjZBOG1W?=
- =?utf-8?B?OWo3MGpEcWx6ZXJ6SU5GYzlYRFdzdXREc2RtUUozTDB6aHNQdWJ0UER6Wit5?=
- =?utf-8?B?RGN5bGZKWGczUHFTeXV4VWZLdXdESy8wOWoxMkc2b29kOUc5ZjJWeDlQMi9E?=
- =?utf-8?B?TTBqSU53eEZPTFZab01uUUlRNjRxL29OcHlJQXlzYSs5bXFTbmg2dUo3ckRV?=
- =?utf-8?B?ZytTbHp2b0hnbkIxM2thUEppTWRCUEJLdjRmUkFxZWhuZHJwN3k4UlZOWGJ0?=
- =?utf-8?B?U1Y5dGVzRmQ2T0ZZbGhob0ZnT05YTFVWQkpXSlNNcWNHa3BnSDEreUg3QjBy?=
- =?utf-8?B?eW5RTDlPY251c25qamlXNldnKzQ3cU5tS0N5Y0NMSmJUU0lPc2ZMcnByT3M5?=
- =?utf-8?B?ODN6byt6TFROOWpCdGNxcEZVM01OMGtJdUozbWVYeFA0aUdwQlE4WHFxUGdN?=
- =?utf-8?B?bURDaDBPTnNmQ05zdk9FWlhrRjlLdVlHMGxmQ2ViZTVUUlRKQ1hlWXFTVExs?=
- =?utf-8?B?YlhDY3dsVjIyWWprZitKM1VsUEh1QXBuNXFpSGk3ZzZWR2xtU3lBMVRTaUUz?=
- =?utf-8?B?VDBJdFJmUGNUc1lPNlRZbytqU3BUOTJ5SXNGOFFPR2IwNTE1KzYrd25qd2lH?=
- =?utf-8?B?S1gvMlpWdGVrSU0vWTlDaDJXZ242YVd3Zkdyc3RWV1FxQkdsKy9HN3JuNlJm?=
- =?utf-8?B?bk1wVmJGVVRyeDBnQlJRRmtYSWZDVSsyd2VqRHVkUVU5M1JzU0ZtcW4zZ0hI?=
- =?utf-8?B?MVBid2QvSVYrTWdvcjNOeERiZTBQQnRPOEtSdllGUkxxYlBMbDQ2bDQwSklT?=
- =?utf-8?B?czlQMW0xUkk3elA4SWF6eXdyWnZvUEczUFR6b2xZbU5FZWVkWWVFU1pQM28r?=
- =?utf-8?B?bkprT2lxSkpmeG9pZ3FMbkh4QWNoZ2I3bTdVRmhDQ1h4S010dHFwckVoN0du?=
- =?utf-8?B?aDBWSFQrQzlQNlJMZVNmdXNtNk51YTFyZ3huTzlOTUVxOTZUeFpsWlM3bVRK?=
- =?utf-8?B?UGJ5YWtnM0E0V01mVmZNRER0bk10S2R6cWtEZGdJWUgzclUyazJMU1lZQ2Mw?=
- =?utf-8?B?VnJ5ZTZtYnhwVGFENlZFbThqcEFpV3pRK01KVFRLRVcrK1ZGMXl3dWZpS3hM?=
- =?utf-8?B?T212ejdBb1MweFNXZTNRcWwzQjkzekV6T0d6KzdNNUtiUFl2NmxxWkJKQ3NY?=
- =?utf-8?B?T3l3NzRQSmo5Q3VHejJVcEIrVXcyVEpnMUFDYW1Sb1RTc3lqWTFkUE5TL2Zi?=
- =?utf-8?B?M2ozem4rMm96clQyTjlxYWZZUVJXRTRqaWhaT2JMZmJBYlh3aGJoQjgwMm81?=
- =?utf-8?B?K1ZlV000VEtHMEVsY1h2bkVWZ040cE1scklNQ3RySjhtQVpTQVJnUFlpMHVl?=
- =?utf-8?B?MDNMYkxnTHpiSlJuSnAwbncwTmhxeHJ5VlVWcmEzZVpNSWFGNkJNM3BsRWgx?=
- =?utf-8?B?RFF6R1h5QW0vek1yeEY0L2tpb2tpZFc3QVlCbnRRd0ZRcCtiUHg0L1BHSFNa?=
- =?utf-8?B?bkhPdFBwblBiN3hGc09sTHhOaEZuNDJyc0h3MS83QjZnOVNTcGpudWQvWkx3?=
- =?utf-8?B?TEg0TCt0cGNic3ZvVzdRUDZKajJKeHRGNkswY2VzZHdzcENGRFNlMkY3d08w?=
- =?utf-8?B?SjFkeVV3NHVWS3NFQ2xCTU5weUREL01jWTJWdmEwcXIzMllrTVFkaDNpM1Z3?=
- =?utf-8?B?ZXd4ZlBXcDk2S0RBYkFiWUh4NUNCUDVPR0RnQUp6TXRBVkg0YzRONEhJSUJl?=
- =?utf-8?B?QnVpcGhWb1NQa2Jxc1FmeWNIZXBkTWgxa1RZZ1kwOEVZMnVGaDIrZXd4b05t?=
- =?utf-8?B?WVRJWUdCNWlQNm9uVEFTWTM3VmpKOTI3ZWFraTVkcGtzaTA2MUpCc0V4RE5Q?=
- =?utf-8?B?SEQ2dkVCMytCVXlTblBMU29uNVh5RVhKL2dYd1RkTnBNNStLM0pZc29SOXlr?=
- =?utf-8?B?Tnc0TnkxMDNjOXBXKzZ1NCs1TmZ3MkRUZGdIb1Z4ZU11RmljRHZaRDQ1VzhV?=
- =?utf-8?B?eExmNzhGTi9tNTRxY0JROENQTDBMeURab2xBRE9oNHFBWXprbjZnbFJUSHBi?=
- =?utf-8?B?SFhWcCtacXlNZGp3TXV0NUx2Q2RLRmVQYmV5NlFSM1lSUjZsY0ZnNFN6RmNS?=
- =?utf-8?Q?UXAKdOL9BAS8Dq6wB8AZrXH/x?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 984d3781-4dd9-49a0-d236-08dc976eacc6
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jun 2024 12:34:38.5563
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +OrYxYT2B80F0kF9ncD49XbXg72oA5F/CZ1A0W8coraGx0vDLCwDKCbgjEcKCfJS
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7236
-X-Rspamd-Queue-Id: 0F5AD3EFCB
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.49 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+In-Reply-To: <20240515112308.10171-8-yong.wu@mediatek.com>
+X-Rspamd-Queue-Id: 23D1143D1C
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.10 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SIGNED_PGP(-2.00)[];
 	SUSPICIOUS_RECIPS(1.50)[];
-	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
-	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
-	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
-	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
-	MIME_GOOD(-0.10)[multipart/alternative,text/plain];
-	XM_UA_NO_VERSION(0.01)[];
-	URIBL_BLOCKED(0.00)[NAM12-BN8-obe.outbound.protection.outlook.com:helo];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com,kernel.org];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	TAGGED_FROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[33];
+	URIBL_BLOCKED(0.00)[mediatek.com:email,mail-wm1-f51.google.com:helo,mail-wm1-f51.google.com:rdns];
 	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[mediatek.com,ffwll.ch,quicinc.com,collabora.com,linaro.org,kernel.org,google.com,deltatee.com,lists.freedesktop.org,emersion.fr,gmail.com,lists.infradead.org,lists.linaro.org,infradead.org,ucw.cz,linux-foundation.org,arm.com,vger.kernel.org];
-	DKIM_TRACE(0.00)[amd.com:+];
-	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_CC(0.00)[kernel.org,gmail.com,amd.com,linaro.org,linux-foundation.org,collabora.com,arm.com,google.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.infradead.org,quicinc.com,ucw.cz,emersion.fr,infradead.org,deltatee.com,ffwll.ch,mediatek.com];
+	DKIM_TRACE(0.00)[gmail.com:+];
+	MISSING_XM_UA(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[35];
+	FREEMAIL_FROM(0.00)[gmail.com];
 	NEURAL_HAM(-0.00)[-1.000];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.51:from];
 	TAGGED_RCPT(0.00)[dt];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.237.48:from];
-	TO_DN_SOME(0.00)[]
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_ENVFROM(0.00)[gmail.com]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: ISDXARQWXVXXI53TFP5FCX5EYYUA7R2K
-X-Message-ID-Hash: ISDXARQWXVXXI53TFP5FCX5EYYUA7R2K
-X-MailFrom: Christian.Koenig@amd.com
+Message-ID-Hash: OUUL6K5A7YLLYYXELH6RGT74TREM3G7E
+X-Message-ID-Hash: OUUL6K5A7YLLYYXELH6RGT74TREM3G7E
+X-MailFrom: thierry.reding@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: =?UTF-8?B?SmFzb24tSkggTGluICjmnpfnnb/npaUp?= <Jason-JH.Lin@mediatek.com>, "daniel@ffwll.ch" <daniel@ffwll.ch>, "quic_vjitta@quicinc.com" <quic_vjitta@quicinc.com>, "angelogioacchino.delregno@collabora.com" <angelogioacchino.delregno@collabora.com>, "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "conor+dt@kernel.org" <conor+dt@kernel.org>, "jkardatzke@google.com" <jkardatzke@google.com>, "krzysztof.kozlowski+dt@linaro.org" <krzysztof.kozlowski+dt@linaro.org>, "joakim.bech@linaro.org" <joakim.bech@linaro.org>, =?UTF-8?B?WW91bGluIFBlaSAo6KO05Y+L5p6XKQ==?= <youlin.pei@mediatek.com>, "logang@deltatee.com" <logang@deltatee.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, =?UTF-8?B?S3VvaG9uZyBXYW5nICjnjovlnIvptLsp?= <kuohong.wang@mediatek.com>, =?UTF-8?B?SmlhbmppYW8gWmVuZyAo5pu+5YGl5aejKQ==?= <Jianjiao.Zeng@mediatek.com>, "contact@emersion.fr" <contact@emersion.fr>, "benjamin.gaignard@collabora.com" <benjamin.gaignard@collabora.com>, "matthias.bgg@gmail.c
- om" <matthias.bgg@gmail.com>, "linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "willy@infradead.org" <willy@infradead.org>, "pavel@ucw.cz" <pavel@ucw.cz>, "akpm@linux-foundation.org" <akpm@linux-foundation.org>, "Brian.Starkey@arm.com" <Brian.Starkey@arm.com>, "robh+dt@kernel.org" <robh+dt@kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, "tjmercier@google.com" <tjmercier@google.com>, "jstultz@google.com" <jstultz@google.com>, "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, "robin.murphy@arm.com" <robin.murphy@arm.com>, =?UTF-8?B?WW9uZyBXdSAo5ZC05YuHKQ==?= <Yong.Wu@mediatek.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "ppaalanen@gmail.com" <ppaalanen@gmail.com>
+CC: Rob Herring <robh+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, christian.koenig@amd.com, Sumit Semwal <sumit.semwal@linaro.org>, Andrew Morton <akpm@linux-foundation.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, tjmercier@google.com, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, Robin Murphy <robin.murphy@arm.com>, Vijayanand Jitta <quic_vjitta@quicinc.com>, Joakim Bech <joakim.bech@linaro.org>, Jeffrey Kardatzke <jkardatzke@google.com>, Pavel Machek <pavel@ucw.cz>, Simon Ser <contact@emersion.fr>, Pekka Paalanen <ppaalanen@gmail.com>, willy@inf
+ radead.org, Logan Gunthorpe <logang@deltatee.com>, Daniel Vetter <daniel@ffwll.ch>, jianjiao.zeng@mediatek.com, kuohong.wang@mediatek.com, youlin.pei@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 2/9] scatterlist: Add a flag for the restricted memory
+Subject: [Linaro-mm-sig] Re: [PATCH v5 7/9] dma-buf: heaps: restricted_heap: Add MediaTek restricted heap and heap_init
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ISDXARQWXVXXI53TFP5FCX5EYYUA7R2K/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/OUUL6K5A7YLLYYXELH6RGT74TREM3G7E/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============2348993660110309748=="
+Content-Type: multipart/mixed; boundary="===============2994645067660432265=="
 
---===============2348993660110309748==
-Content-Type: multipart/alternative;
- boundary="------------C0aQmTwxioyLEo0IQomIMqEu"
-Content-Language: en-US
 
---------------C0aQmTwxioyLEo0IQomIMqEu
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+--===============2994645067660432265==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="5z4oex5oy2lm7v2z"
+Content-Disposition: inline
 
-Am 28.06.24 um 13:47 schrieb Thierry Reding:
-> [SNIP]
->>> The reason I ask is that encryption here looks just like another parameter
->>> for the buffer, e.g. like format, stride, tilling etc..
->>>
->>> So instead of this during buffer import:
->>>
->>> mtk_gem->secure = (!strncmp(attach->dmabuf->exp_name, "restricted", 10));
->>> mtk_gem->dma_addr = sg_dma_address(sg->sgl);
->>> mtk_gem->size = attach->dmabuf->size;
->>> mtk_gem->sg = sg;
->>>
->>> You can trivially say during use hey this buffer is encrypted.
->>>
->>> At least that's my 10 mile high view, maybe I'm missing some extensive key
->>> exchange or something like that.
->> That doesn't work in all cases, unfortunately.
->>
->> If you're doing secure video playback, the firmware is typically in
->> charge of the frame decryption/decoding, and you'd get dma-buf back that
->> aren't accessible by the CPU (or at least, not at the execution level
->> Linux runs with).
-> Can you clarify which firmware you're talking about? Is this secure
-> firmware, or firmware running on the video decoding hardware?
->
->> So nobody can map that buffer, and the firmware driver is the one who
->> knows that this buffer cannot be accessed by anyone. Putting this on the
->> userspace to know would be pretty weird, and wouldn't solve the case
->> where the kernel would try to map it.
-> Doesn't userspace need to know from the start whether it's trying to do
-> secure playback or not? Typically this involves more than just the
-> decoding part. You'd typically set up things like HDCP as part of the
-> process, so userspace probably already does know that the buffers being
-> passed around are protected.
->
-> Also, the kernel shouldn't really be mapping these buffers unless
-> explicitly told to. In most cases you also wouldn't want the kernel to
-> map these kinds of buffers, right? Are there any specific cases where
-> you expect the kernel to need to map these?
->
-> I've been looking at this on the Tegra side recently and the way it
-> works on these chips is that you basically get an opaque carveout region
-> that has been locked down by secure firmware or early bootloaders, so
-> only certain hardware blocks can access it. We can allocate from that
-> carveout and then pass the buffers around.
->
-> It may be possible to use these protected carveout regions exclusively
-> from the DRM/KMS driver and share them with multimedia engines via DMA-
-> BUF, but I've also been looking into perhaps using DMA-BUF heaps to
-> expose the carveout, which would make this a bit more flexible and allow
-> either userspace to allocate the buffers or have multiple kernel drivers
-> share the carveout via the DMA-BUF heap. Though the latter would require
-> that there be in-kernel APIs for heaps, so not too sure about that yet.
 
-Yeah as far as I can see that would be a perfectly valid use case for 
-DMA-Buf heaps.
+--5z4oex5oy2lm7v2z
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-One question here: How does the HDCP setup work on Tegra? From your 
-comment I guess you pass most of the information through userspace as well.
+On Wed, May 15, 2024 at 07:23:06PM GMT, Yong Wu wrote:
+> Add a MediaTek restricted heap which uses TEE service call to restrict
+> buffer. Currently this restricted heap is NULL, Prepare for the later
+> patch. Mainly there are two changes:
+> a) Add a heap_init ops since TEE probe late than restricted heap, thus
+>    initialize the heap when we require the buffer the first time.
+> b) Add a priv_data for each heap, like the special data used by MTK
+>    (such as "TEE session") can be placed in priv_data.
+>=20
+> Currently our heap depends on CMA which could only be bool, thus
+> depend on "TEE=3Dy".
+>=20
+> Signed-off-by: Yong Wu <yong.wu@mediatek.com>
+> ---
+>  drivers/dma-buf/heaps/Kconfig               |   7 ++
+>  drivers/dma-buf/heaps/Makefile              |   1 +
+>  drivers/dma-buf/heaps/restricted_heap.c     |  11 ++
+>  drivers/dma-buf/heaps/restricted_heap.h     |   2 +
+>  drivers/dma-buf/heaps/restricted_heap_mtk.c | 115 ++++++++++++++++++++
+>  5 files changed, 136 insertions(+)
+>  create mode 100644 drivers/dma-buf/heaps/restricted_heap_mtk.c
+>=20
+> diff --git a/drivers/dma-buf/heaps/Kconfig b/drivers/dma-buf/heaps/Kconfig
+> index e54506f480ea..84f748fb2856 100644
+> --- a/drivers/dma-buf/heaps/Kconfig
+> +++ b/drivers/dma-buf/heaps/Kconfig
+> @@ -21,3 +21,10 @@ config DMABUF_HEAPS_RESTRICTED
+>  	  heap is to manage buffers that are inaccessible to the kernel and use=
+r space.
+>  	  There may be several ways to restrict it, for example it may be encry=
+pted or
+>  	  protected by a TEE or hypervisor. If in doubt, say N.
+> +
+> +config DMABUF_HEAPS_RESTRICTED_MTK
+> +	bool "MediaTek DMA-BUF Restricted Heap"
+> +	depends on DMABUF_HEAPS_RESTRICTED && TEE=3Dy
+> +	help
+> +	  Enable restricted dma-buf heaps for MediaTek platform. This heap is b=
+acked by
+> +	  TEE client interfaces. If in doubt, say N.
+> diff --git a/drivers/dma-buf/heaps/Makefile b/drivers/dma-buf/heaps/Makef=
+ile
+> index a2437c1817e2..0028aa9d875f 100644
+> --- a/drivers/dma-buf/heaps/Makefile
+> +++ b/drivers/dma-buf/heaps/Makefile
+> @@ -1,4 +1,5 @@
+>  # SPDX-License-Identifier: GPL-2.0
+>  obj-$(CONFIG_DMABUF_HEAPS_CMA)		+=3D cma_heap.o
+>  obj-$(CONFIG_DMABUF_HEAPS_RESTRICTED)	+=3D restricted_heap.o
+> +obj-$(CONFIG_DMABUF_HEAPS_RESTRICTED_MTK)	+=3D restricted_heap_mtk.o
+>  obj-$(CONFIG_DMABUF_HEAPS_SYSTEM)	+=3D system_heap.o
+> diff --git a/drivers/dma-buf/heaps/restricted_heap.c b/drivers/dma-buf/he=
+aps/restricted_heap.c
+> index 4e45d46a6467..8bc8a5e3f969 100644
+> --- a/drivers/dma-buf/heaps/restricted_heap.c
+> +++ b/drivers/dma-buf/heaps/restricted_heap.c
+> @@ -151,11 +151,22 @@ restricted_heap_allocate(struct dma_heap *heap, uns=
+igned long size,
+>  			 unsigned long fd_flags, unsigned long heap_flags)
+>  {
+>  	struct restricted_heap *rheap =3D dma_heap_get_drvdata(heap);
+> +	const struct restricted_heap_ops *ops =3D rheap->ops;
+>  	struct restricted_buffer *restricted_buf;
+>  	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
+>  	struct dma_buf *dmabuf;
+>  	int ret;
+> =20
+> +	/*
+> +	 * In some implements, TEE is required to protect buffer. However TEE p=
+robe
+> +	 * may be late, Thus heap_init is performed when the first buffer is re=
+quested.
+> +	 */
+> +	if (ops->heap_init) {
+> +		ret =3D ops->heap_init(rheap);
+> +		if (ret)
+> +			return ERR_PTR(ret);
+> +	}
 
-Or is there any info inside the DMA-buf for this? In other words would 
-you also need to know if a buffer is then allocated from this special 
-carveout?
+I wonder if we should make this parameterized rather than the default.
+Perhaps we can add a "init_on_demand" (or whatever other name) flag to
+struct restricted_heap_ops and then call this from heap initialization
+if possible and defer initialization depending on the restricted heap
+provider?
 
-Thanks,
-Christian.
+> +
+>  	restricted_buf =3D kzalloc(sizeof(*restricted_buf), GFP_KERNEL);
+>  	if (!restricted_buf)
+>  		return ERR_PTR(-ENOMEM);
+> diff --git a/drivers/dma-buf/heaps/restricted_heap.h b/drivers/dma-buf/he=
+aps/restricted_heap.h
+> index 6d9599a4a34e..2a33a1c7a48b 100644
+> --- a/drivers/dma-buf/heaps/restricted_heap.h
+> +++ b/drivers/dma-buf/heaps/restricted_heap.h
+> @@ -19,6 +19,8 @@ struct restricted_heap {
+>  	const char		*name;
+> =20
+>  	const struct restricted_heap_ops *ops;
+> +
+> +	void			*priv_data;
 
-> Thierry
+Honestly, I would just get rid of any of this extra padding/indentation
+in these structures. There's really no benefit to this, except maybe if
+you *really* like things to be aligned, in which case the above is now
+probably worse than if you didn't try to align in the first place.
 
---------------C0aQmTwxioyLEo0IQomIMqEu
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Thierry
 
-<!DOCTYPE html><html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    Am 28.06.24 um 13:47 schrieb Thierry Reding:<br>
-    <blockquote type="cite" cite="mid:w3xcvakoytubud6dw4wxr6ntbe6uvfrldihnd26vai6uyyto6j@vcq7gizxolag">[SNIP]<span style="white-space: pre-wrap">
-</span>
-      <blockquote type="cite">
-        <blockquote type="cite">
-          <pre class="moz-quote-pre" wrap="">The reason I ask is that encryption here looks just like another parameter
-for the buffer, e.g. like format, stride, tilling etc..
+--5z4oex5oy2lm7v2z
+Content-Type: application/pgp-signature; name="signature.asc"
 
-So instead of this during buffer import:
+-----BEGIN PGP SIGNATURE-----
 
-mtk_gem-&gt;secure = (!strncmp(attach-&gt;dmabuf-&gt;exp_name, &quot;restricted&quot;, 10));
-mtk_gem-&gt;dma_addr = sg_dma_address(sg-&gt;sgl);
-mtk_gem-&gt;size = attach-&gt;dmabuf-&gt;size;
-mtk_gem-&gt;sg = sg;
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmZ+rroACgkQ3SOs138+
+s6EB/hAAlquMNwNzbko/vJ18thfHMMKEC/LnnxyK/L6hWo7sf3oV1B8fuUN/r+A5
+qzDZZmYdzjgCrR7bY/80cCOUVhJz1/y+eiQXSyBoG/5UM7SDPSSnRHCDYxGk8PUs
+6Tl7I1KmB994jWeX3qBUs8jM1EQym+2aYPevhR9E7bmKUfdGaaeBOwOv85Ku0rC9
+DhnQfteSJx9jRhnMzQE+ADzjqtnVhR4oSmfpugMPXV/WkVhJ81fMLDr6O3YAfFMy
+59NfXGreJN+yG/9FmuF6aIsesBcH8loA6UyM+RIv7eubHAZCCzAbXrHvdBg3neGN
+F2lRw/QN3PYdXAayYTDTw1619gN9oABCreu1TMJEPZmxypM8T89h17rSl06wUjxe
+tgFwkbvdsYQzpYBT54Jugie8+HCkQAxItrb2uFHI4zHKcg4OuvrlQP4ZLpA2qh4q
+2DK34GYRim44TCdKhL+R3LWAGVEIbzdnIUFt69k44rwj0qwTXaFofMQhDC/zS8Z6
+H1g4Ls4sNl7iPhnwfxtphdhvtw33ofgAqKtffPYlJKzSR+T08vOTENLDWIWf62NZ
+5R0I+LJ8DHBzZKprzeBkA7KL4mlctZKGEaf/d3G2cPoWBoCdBkRDOi+XTFtiVHKa
+kuNAR3Rsd/TbSDZYGcozLxD+mGBgZclxEO8kyHNENQR+xvetWiY=
+=oI/a
+-----END PGP SIGNATURE-----
 
-You can trivially say during use hey this buffer is encrypted.
+--5z4oex5oy2lm7v2z--
 
-At least that's my 10 mile high view, maybe I'm missing some extensive key
-exchange or something like that.
-</pre>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">
-That doesn't work in all cases, unfortunately.
-
-If you're doing secure video playback, the firmware is typically in
-charge of the frame decryption/decoding, and you'd get dma-buf back that
-aren't accessible by the CPU (or at least, not at the execution level
-Linux runs with).
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Can you clarify which firmware you're talking about? Is this secure
-firmware, or firmware running on the video decoding hardware?
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">So nobody can map that buffer, and the firmware driver is the one who
-knows that this buffer cannot be accessed by anyone. Putting this on the
-userspace to know would be pretty weird, and wouldn't solve the case
-where the kernel would try to map it.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Doesn't userspace need to know from the start whether it's trying to do
-secure playback or not? Typically this involves more than just the
-decoding part. You'd typically set up things like HDCP as part of the
-process, so userspace probably already does know that the buffers being
-passed around are protected.
-
-Also, the kernel shouldn't really be mapping these buffers unless
-explicitly told to. In most cases you also wouldn't want the kernel to
-map these kinds of buffers, right? Are there any specific cases where
-you expect the kernel to need to map these?
-
-I've been looking at this on the Tegra side recently and the way it
-works on these chips is that you basically get an opaque carveout region
-that has been locked down by secure firmware or early bootloaders, so
-only certain hardware blocks can access it. We can allocate from that
-carveout and then pass the buffers around.
-
-It may be possible to use these protected carveout regions exclusively
-from the DRM/KMS driver and share them with multimedia engines via DMA-
-BUF, but I've also been looking into perhaps using DMA-BUF heaps to
-expose the carveout, which would make this a bit more flexible and allow
-either userspace to allocate the buffers or have multiple kernel drivers
-share the carveout via the DMA-BUF heap. Though the latter would require
-that there be in-kernel APIs for heaps, so not too sure about that yet.</pre>
-    </blockquote>
-    <br>
-    Yeah as far as I can see that would be a perfectly valid use case
-    for DMA-Buf heaps.<br>
-    <br>
-    One question here: How does the HDCP setup work on Tegra? From your
-    comment I guess you pass most of the information through userspace
-    as well.<br>
-    <br>
-    Or is there any info inside the DMA-buf for this? In other words
-    would you also need to know if a buffer is then allocated from this
-    special carveout?<br>
-    <br>
-    Thanks,<br>
-    Christian.<br>
-    <br>
-    <blockquote type="cite" cite="mid:w3xcvakoytubud6dw4wxr6ntbe6uvfrldihnd26vai6uyyto6j@vcq7gizxolag">
-      <pre class="moz-quote-pre" wrap="">Thierry
-</pre>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------C0aQmTwxioyLEo0IQomIMqEu--
-
---===============2348993660110309748==
+--===============2994645067660432265==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -389,4 +263,4 @@ _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
 
---===============2348993660110309748==--
+--===============2994645067660432265==--
