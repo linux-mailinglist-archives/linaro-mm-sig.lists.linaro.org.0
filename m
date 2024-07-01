@@ -2,163 +2,157 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE2A291DA2B
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  1 Jul 2024 10:41:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2417691DAB1
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  1 Jul 2024 10:56:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 693FC43F4F
-	for <lists+linaro-mm-sig@lfdr.de>; Mon,  1 Jul 2024 08:41:12 +0000 (UTC)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
-	by lists.linaro.org (Postfix) with ESMTPS id 5A4153F2F7
-	for <linaro-mm-sig@lists.linaro.org>; Mon,  1 Jul 2024 08:41:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 05B503F3AB
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  1 Jul 2024 08:56:57 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+	by lists.linaro.org (Postfix) with ESMTPS id 20B0F3EF8D
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  1 Jul 2024 08:56:50 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=gd4lCcqd;
-	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.128.52 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
-	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-42574064b16so16214335e9.2
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 01 Jul 2024 01:41:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1719823268; x=1720428068; darn=lists.linaro.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :from:to:cc:subject:date:message-id:reply-to;
-        bh=AMt7mTb63MOoRef5KMAR+OLG9LjGQCs3Iv9eQzbOgVY=;
-        b=gd4lCcqdHtwQu6iquX0jqkPtuw9JB6rPgCo1GW+KskocsMVERzGYRQOxmI3FQa5bxM
-         qYGAASJ8fZhmPpQPF5/BHFZpk7K9USpxLgX5/hReFqRIMU7BOqNQQvh/qINWk3ZBlsGC
-         7uAv3DvcPQ6BzbREfpvj6+PY2AFNxVmSxrGSyaqqiOMkdMVjOseDfEkIGdz5iw/roF9X
-         hXIES28RouuFBNsl+i0GdFKx+BpwGs5KWgMkurzE89cbM4VqCavCO694o6RqXcTIaxiZ
-         YTGga3+nGU0jDsNd3A0TMCqRjzXi9Ba8Vr0SFUxTX8rnVx2oPfJu9G+NCJB7laXUHca2
-         cmDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1719823268; x=1720428068;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=AMt7mTb63MOoRef5KMAR+OLG9LjGQCs3Iv9eQzbOgVY=;
-        b=iwA1xF7TLFGCpfZo5f8rrNtKBo8hR27kimGDyyZr0hVao4RQpA712UjRCK+gTzp9Qf
-         Wi/9bCfV+AeAuISBIYD22oqpMNpSWKqsTkwqLZgJXjmqZrowJU8UgaUsVgN5I52iXGwT
-         EzgNGLJb/bNrIoZmhTuYxhJl3SrlLGUNzaoqnSI7b53sxkNJI1oLBfy35/XgtuLXnVPo
-         Hc6e6L7jPdC976KueJ2QM1SjLrhs7yaJY/s04slZw30AJTWAD/xqpF/qC4nSsZfTfCJF
-         WB9x/uoMDP0Php/x263gd8S7km87Csf2/aZvDvLFbOblf93HaOrT/5yfc9FFpVEq+mA0
-         FvBg==
-X-Forwarded-Encrypted: i=1; AJvYcCXsmckmrCTf0LOFhQ/ZK7Im5GW1mK5AyoktsPCVXEcwhaLutQtaCnk0StpraPrf/sPDdcIS3zpTg75DibnkFFiXl5WHxbyEDoi/BP6l5XI=
-X-Gm-Message-State: AOJu0YzQaRiLhw+rsCVnccHLeKgM6nTW91M/AS1j7FaJpFi6xNdQbm41
-	5IU1BInJPIdrFKcHwIBuvIfFcZy/n7bgX5JX1wYAsW0fCfdHmIE9
-X-Google-Smtp-Source: AGHT+IFVkP4vxt28218+k2V48TYQocy8Fz5i69HcPxCmln5LU4tWH1iaovbS/2p5BgnSrenoOSY/NQ==
-X-Received: by 2002:a05:600c:6a8d:b0:425:77b4:366d with SMTP id 5b1f17b1804b1-4257a02f3f6mr32722375e9.11.1719823267873;
-        Mon, 01 Jul 2024 01:41:07 -0700 (PDT)
-Received: from [10.254.108.81] (munvpn.amd.com. [165.204.72.6])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4256b09a94csm141988335e9.33.2024.07.01.01.41.05
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 01 Jul 2024 01:41:07 -0700 (PDT)
-Message-ID: <dbcd9a16-4e4b-42c8-ba7f-d6c1dfd9dccb@gmail.com>
-Date: Mon, 1 Jul 2024 10:41:04 +0200
+	dkim=pass header.d=intel.com header.s=Intel header.b=KwxLtoyk;
+	spf=none (lists.linaro.org: domain of thomas.hellstrom@linux.intel.com has no SPF policy when checking 192.198.163.9) smtp.mailfrom=thomas.hellstrom@linux.intel.com;
+	dmarc=pass (policy=none) header.from=intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1719824210; x=1751360210;
+  h=message-id:subject:from:to:cc:date:in-reply-to:
+   references:content-transfer-encoding:mime-version;
+  bh=2BjaeP94w46H7n1r91rRWwoo5EsLAWvmvbXZeXccQmY=;
+  b=KwxLtoykGkijQFKbG0EXoAWJ0AfgivuUIagssg3iTfH+c/PwuR4YKguD
+   trSU3ycI8C+gTc5fyzIs4k8kDppDp9akwkyuxs/iV3fh88yjAgeqNJIV7
+   kwe+geH/6YdKp7XVuuWOua6EmCY4T+jE05WYcNwH58LkKUUgrNKM3j0+e
+   Z/1+jYM7HZSMHiayBLJqv03D7lTFjeSMDaS0luY5vubL0FSoljZFBAY40
+   jASGTmw8JOBNsfFlt23MuBXn2HyQ1WES4V6j8TwFgYYooL+aCMH4wyNKY
+   DdsX2WHK2CCG3qV9F4u6Fg9NnDXXac1gtx2yGrDi7/NfTK6KJEZ8HQ+AV
+   A==;
+X-CSE-ConnectionGUID: uOF3QWdUT72WmApQmvjWcw==
+X-CSE-MsgGUID: OhyOkP+oRPqOVr6AWTeLFA==
+X-IronPort-AV: E=McAfee;i="6700,10204,11119"; a="27615958"
+X-IronPort-AV: E=Sophos;i="6.09,175,1716274800";
+   d="scan'208";a="27615958"
+Received: from fmviesa006.fm.intel.com ([10.60.135.146])
+  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Jul 2024 01:56:49 -0700
+X-CSE-ConnectionGUID: GXt4AAnkRE+jbLwAYf14Jw==
+X-CSE-MsgGUID: oiwCi+6pTtSSJPxeEC3Ngw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.09,175,1716274800";
+   d="scan'208";a="45278246"
+Received: from dneilan-mobl1.ger.corp.intel.com (HELO [10.245.244.49]) ([10.245.244.49])
+  by fmviesa006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 01 Jul 2024 01:56:47 -0700
+Message-ID: <91cc5e6edbfc09497d9313872af914494f9cb394.camel@linux.intel.com>
+From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
+To: Daniel Vetter <daniel@ffwll.ch>
+Date: Mon, 01 Jul 2024 10:56:34 +0200
+In-Reply-To: <Zn77penjAruTgLMM@phenom.ffwll.local>
+References: <40611e5ff8c32b99e7863293a0baac078f323d8f.camel@linux.intel.com>
+	 <Zn0c8l-yQih3j0NE@phenom.ffwll.local>
+	 <6bc17415f36c2a9c689010e1cf397fc75a8df55e.camel@linux.intel.com>
+	 <Zn77penjAruTgLMM@phenom.ffwll.local>
+Autocrypt: addr=thomas.hellstrom@linux.intel.com; prefer-encrypt=mutual;
+ keydata=mDMEZaWU6xYJKwYBBAHaRw8BAQdAj/We1UBCIrAm9H5t5Z7+elYJowdlhiYE8zUXgxcFz360SFRob21hcyBIZWxsc3Ryw7ZtIChJbnRlbCBMaW51eCBlbWFpbCkgPHRob21hcy5oZWxsc3Ryb21AbGludXguaW50ZWwuY29tPoiTBBMWCgA7FiEEbJFDO8NaBua8diGTuBaTVQrGBr8FAmWllOsCGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgkQuBaTVQrGBr/yQAD/Z1B+Kzy2JTuIy9LsKfC9FJmt1K/4qgaVeZMIKCAxf2UBAJhmZ5jmkDIf6YghfINZlYq6ixyWnOkWMuSLmELwOsgPuDgEZaWU6xIKKwYBBAGXVQEFAQEHQF9v/LNGegctctMWGHvmV/6oKOWWf/vd4MeqoSYTxVBTAwEIB4h4BBgWCgAgFiEEbJFDO8NaBua8diGTuBaTVQrGBr8FAmWllOsCGwwACgkQuBaTVQrGBr/P2QD9Gts6Ee91w3SzOelNjsus/DcCTBb3fRugJoqcfxjKU0gBAKIFVMvVUGbhlEi6EFTZmBZ0QIZEIzOOVfkaIgWelFEH
+Organization: Intel Sweden AB, Registration Number: 556189-6027
+User-Agent: Evolution 3.50.4 (3.50.4-1.fc39) 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Nicolas Dufresne <nicolas@ndufresne.ca>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- =?UTF-8?B?SmFzb24tSkggTGluICjmnpfnnb/npaUp?= <Jason-JH.Lin@mediatek.com>,
- "daniel@ffwll.ch" <daniel@ffwll.ch>
-References: <20240515112308.10171-1-yong.wu@mediatek.com>
- <20240515112308.10171-3-yong.wu@mediatek.com>
- <98721904-003d-4d0d-8cfe-1cecdd59ce01@amd.com>
- <779ce30a657754ff945ebd32b66e1c644635e84d.camel@mediatek.com>
- <cef8f87d-edab-41d8-8b95-f3fc39ad7f74@amd.com>
- <1050c44512374031d1349b5dced228d0efc3fbde.camel@mediatek.com>
- <3104b765-5666-44e4-8788-f1b1b296fe17@amd.com>
- <98c11bad7f40bcc79ed7a2039ddb3a46f99908f5.camel@mediatek.com>
- <75dc1136-7751-4772-9fa7-dd9124684cd2@amd.com>
- <ZnxWWtdShekGSUif@phenom.ffwll.local>
- <ae73a0203d6acf2878c9e3ae2d7554816b9c66ad.camel@mediatek.com>
- <5739abdb-0234-412a-9f25-49219411bbc6@amd.com>
- <183f2ae09c2dbcf687e69cd13a9d258fd24fd80c.camel@ndufresne.ca>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <183f2ae09c2dbcf687e69cd13a9d258fd24fd80c.camel@ndufresne.ca>
-X-Rspamd-Queue-Id: 5A4153F2F7
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.47 / 15.00];
-	BAYES_HAM(-2.98)[99.92%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+X-Rspamd-Queue-Id: 20B0F3EF8D
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.80 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
-	TAGGED_FROM(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[35];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[];
-	TO_DN_EQ_ADDR_SOME(0.00)[];
 	ARC_NA(0.00)[];
-	FREEMAIL_CC(0.00)[quicinc.com,collabora.com,linaro.org,kernel.org,google.com,mediatek.com,deltatee.com,lists.freedesktop.org,emersion.fr,gmail.com,lists.linaro.org,infradead.org,ucw.cz,linux-foundation.org,arm.com,vger.kernel.org,lists.infradead.org];
-	FROM_HAS_DN(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[dt];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.52:from];
-	FREEMAIL_ENVFROM(0.00)[gmail.com]
+	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
+	MIME_TRACE(0.00)[0:+];
+	HAS_ORG_HEADER(0.00)[];
+	TO_DN_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	R_SPF_NA(0.00)[no SPF record];
+	URIBL_BLOCKED(0.00)[intel.com:dkim];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[6];
+	RCVD_COUNT_TWO(0.00)[2];
+	RCVD_TLS_LAST(0.00)[];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: YAISHWVLW2BU5H57ZC5U7QUMNF4SZEMY
-X-Message-ID-Hash: YAISHWVLW2BU5H57ZC5U7QUMNF4SZEMY
-X-MailFrom: ckoenig.leichtzumerken@gmail.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: "quic_vjitta@quicinc.com" <quic_vjitta@quicinc.com>, "angelogioacchino.delregno@collabora.com" <angelogioacchino.delregno@collabora.com>, "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "conor+dt@kernel.org" <conor+dt@kernel.org>, "jkardatzke@google.com" <jkardatzke@google.com>, "krzysztof.kozlowski+dt@linaro.org" <krzysztof.kozlowski+dt@linaro.org>, "joakim.bech@linaro.org" <joakim.bech@linaro.org>, =?UTF-8?B?WW91bGluIFBlaSAo6KO05Y+L5p6XKQ==?= <youlin.pei@mediatek.com>, "logang@deltatee.com" <logang@deltatee.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, =?UTF-8?B?S3VvaG9uZyBXYW5nICjnjovlnIvptLsp?= <kuohong.wang@mediatek.com>, =?UTF-8?B?SmlhbmppYW8gWmVuZyAo5pu+5YGl5aejKQ==?= <Jianjiao.Zeng@mediatek.com>, "contact@emersion.fr" <contact@emersion.fr>, "benjamin.gaignard@collabora.com" <benjamin.gaignard@collabora.com>, "matthias.bgg@gmail.com" <matthias.bgg@gmail.com>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "willy@infrade
- ad.org" <willy@infradead.org>, "pavel@ucw.cz" <pavel@ucw.cz>, "akpm@linux-foundation.org" <akpm@linux-foundation.org>, "Brian.Starkey@arm.com" <Brian.Starkey@arm.com>, "robh+dt@kernel.org" <robh+dt@kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, "tjmercier@google.com" <tjmercier@google.com>, "jstultz@google.com" <jstultz@google.com>, "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, "mripard@kernel.org" <mripard@kernel.org>, "robin.murphy@arm.com" <robin.murphy@arm.com>, =?UTF-8?B?WW9uZyBXdSAo5ZC05YuHKQ==?= <Yong.Wu@mediatek.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "ppaalanen@gmail.com" <ppaalanen@gmail.com>
+Message-ID-Hash: VRVLBLC46X6L4BF2CZEODSCH7I6LXUIG
+X-Message-ID-Hash: VRVLBLC46X6L4BF2CZEODSCH7I6LXUIG
+X-MailFrom: thomas.hellstrom@linux.intel.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Dmitry Osipenko <dmitry.osipenko@collabora.com>, dri-devel@lists.freedesktop.org, intel-xe@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 2/9] scatterlist: Add a flag for the restricted memory
+Subject: [Linaro-mm-sig] Re: dma_buf_detach lockdep splat
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YAISHWVLW2BU5H57ZC5U7QUMNF4SZEMY/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VRVLBLC46X6L4BF2CZEODSCH7I6LXUIG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"; format="flowed"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Am 28.06.24 um 22:16 schrieb Nicolas Dufresne:
-> [SNIP]
->>>>> Why can't you get this information from userspace?
->>>> Same reason amd and i915/xe also pass this around internally in the
->>>> kernel, it's just that for those gpus the render and kms node are the
->>>> same
->>>> driver so this is easy.
->>>>
->> The reason I ask is that encryption here looks just like another
->> parameter for the buffer, e.g. like format, stride, tilling etc..
-> I'm mostly a reader of the thread here, but I'd like to avoid basic mistakes.
-> The buffer in question are "protected", meaning that the CPU HW does not have
-> access to the underlying pages (or zone in the case of Meditatek).
->
-> This is different from encrypted buffers, which don't need this level of
-> protection, as without the security key to decrypt them, their content is close
-> to random data.
-
-Thanks for that clarification, this difference was absolutely not obvious.
-
-In that case having a separate heap for this memory is indeed the 
-easiest approach.
-
-My question is still what would happen if the CPU tries to access this 
-protected buffer? Or does the CPU not even have an address to do that?
-
-Just out of curiosity, I mean the exporting heap should then somehow 
-reject any attempt to mmap() or vmap() the buffer content.
-
-Thanks,
-Christian.
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gRnJpLCAyMDI0LTA2LTI4IGF0IDIwOjA2ICswMjAwLCBEYW5pZWwgVmV0dGVyIHdyb3RlOg0K
+PiBPbiBUaHUsIEp1biAyNywgMjAyNCBhdCAwMjoxODo0NFBNICswMjAwLCBUaG9tYXMgSGVsbHN0
+csO2bSB3cm90ZToNCj4gPiBPbiBUaHUsIDIwMjQtMDYtMjcgYXQgMTA6MDQgKzAyMDAsIERhbmll
+bCBWZXR0ZXIgd3JvdGU6DQo+ID4gPiBPbiBXZWQsIEp1biAyNiwgMjAyNCBhdCAwNTo1ODowMlBN
+ICswMjAwLCBUaG9tYXMgSGVsbHN0csO2bSB3cm90ZToNCj4gPiA+ID4gSGkhDQo+ID4gPiA+IA0K
+PiA+ID4gPiBJJ20gc2VlaW5nIHRoZSBiZWxvdyBsb2NrZGVwIHNwbGF0IDEpIHdpdGggdGhlIHhl
+IGRyaXZlciBpbiBhbg0KPiA+ID4gPiBpbXBvcnRlZA0KPiA+ID4gPiBkbWEtYnVmIG9iamVjdCBk
+ZXN0cnVjdGlvbiBwYXRoLg0KPiA+ID4gPiANCj4gPiA+ID4gSXQncyBub3QgYmVjYXVzZSB3ZSBo
+b2xkIHRoZSBkbWFfcmVzdiBsb2NrIGF0IHRoYXQgcG9pbnQsIGJ1dA0KPiA+ID4gPiByYXRoZXIN
+Cj4gPiA+ID4gYmVjYXVzZSB3ZSBob2xkICphbm90aGVyKiBkbWFfcmVzdiBsb2NrIGF0IHRoYXQg
+cG9pbnQsIGFuZCB0aGUNCj4gPiA+ID4gZG1hX3Jlc3YNCj4gPiA+ID4gZGV0YWNoIGhhcHBlbnMg
+d2hlbiB0aGUgb2JqZWN0IGlzIGlkbGUsIGluIHRoaXMgY2FzZSBpdCB3YXMNCj4gPiA+ID4gaWRs
+ZSBhdA0KPiA+ID4gPiB0aGUNCj4gPiA+ID4gZmluYWwgcHV0KCksIGFuZCBkbWFfYnVmX2RldGFj
+aCgpIGlzIGNhbGxlZCBpbiB0aGUgcHV0dGluZw0KPiA+ID4gPiBwcm9jZXNzLg0KPiA+ID4gPiAN
+Cj4gPiA+ID4gSG9sZGluZyBhbm90aGVyIGRtYS1idWYgbG9jayBtaWdodCBoYXBwZW4gYXMgcGFy
+dCBvZg0KPiA+ID4gPiBkcm1fZXhlY191bmxvY2tfYWxsLCBvciBzaW1wbHkgaWYgdGhlIHdpZGVy
+IHZtIGRtYV9yZXN2IHdhcw0KPiA+ID4gPiBoZWxkIGF0DQo+ID4gPiA+IG9iamVjdCBwdXQgdGlt
+ZSwgc28gaXQncyBub3QgYW4gdW5jb21tb24gcGF0dGVybiwgZXZlbiBpZiB0aGUNCj4gPiA+ID4g
+ZHJtX2V4ZWMNCj4gPiA+ID4gaW5zdGFuY2UgY2FuIGJlIGZpeGVkIGJ5IHB1dHRpbmcgYWxsIGJv
+cyBhZnRlciB1bmxvY2tpbmcgdGhlbQ0KPiA+ID4gPiBhbGwuDQo+ID4gPiA+IA0KPiA+ID4gPiBU
+d28gc29sdXRpb25zIGNvbWluZyB0byBtaW5kIGhlcmU6DQo+ID4gPiA+IA0KPiA+ID4gPiAxKSBQ
+cm92aWRlIGEgZG1hX2J1Zl9kZXRhY2hfbG9ja2VkKCkNCj4gPiA+IA0KPiA+ID4gVGhpcyBzbWVs
+bHMgd2F5IHRvbyBtdWNoIGxpa2UgdGhlIGVuZGxlc3MgaGVhZGFjaGVzIHdlIGhhZCB3aXRoDQo+
+ID4gPiBkcm1fZ2VtX29iamVjdF9wdXRfbG9ja2VkIGFuZCBmcmllbmRzIGFnYWluc3QNCj4gPiA+
+IGRybV9kZXZpY2Uuc3RydWN0X211dGV4LiBPcg0KPiA+ID4gSSdtIG5vdCB1bmRlcnN0YW5kaW5n
+IHdoYXQgeW91J3JlIGRvaW5nLCBiZWNhdXNlIEknbSBwcmV0dHkgc3VyZQ0KPiA+ID4geW91DQo+
+ID4gPiBoYXZlDQo+ID4gPiB0byB0YWtlIHRoZSBkbWFfcmVzdiBsb2NrIG9uIGZpbmFsIHB1dCgp
+IG9mIGltcG9ydGVkIG9iamVjdHMuDQo+ID4gPiBCZWNhdXNlDQo+ID4gPiB0aGF0DQo+ID4gPiBm
+aW5hbCBwdXQoKSBpcyBvZiB0aGUgaW1wb3J0IHdyYXBwZXIsIHRoZSBleHBvcnRlciAoYW5kIG90
+aGVyDQo+ID4gPiBpbXBvcnRlcnMpDQo+ID4gPiBjYW4gc3RpbGwgZ2V0IGF0IHRoYXQgb2JqZWN0
+IGFuZCBzbyBkbWFfcmVzdl9sb2NrIGlzIHZlcnkgbXVjaA0KPiA+ID4gbmVlZGVkLg0KPiA+IA0K
+PiA+IFllYWgsIHRoZSBUVE0gZmluYWwgcHV0IGxvb2tzIGxpa2UNCj4gPiANCj4gPiBpZiAoIWRt
+YV9yZXN2X3RyeWxvY2soKSB8fCAhaWRsZSkNCj4gPiAJcXVldWVfd29yayhmaW5hbF9kaXN0cnVj
+dGlvbik7DQo+ID4gDQo+ID4gZG1hX3Jlc3ZfdW5sb2NrKCk7DQo+ID4gZG1hX2J1Zl9kZXRhY2go
+KTsgPC0tLSBsb2NrZGVwIHNwbGF0DQo+ID4gDQo+ID4gSGVyZSdzIHdoZXJlIGEgZG1hX2J1Zl9k
+ZXRhY2hfbG9ja2VkKCkgd291bGQndmUgbWFkZSBzZW5zZSBiZWZvcmUNCj4gPiB0aGUNCj4gPiBk
+bWFfcmVzdl91bmxvY2soKS4NCj4gPiANCj4gPiBCdXQgaWYgeW91IHRoaW5rIHRoaXMgd2lsbCBj
+YXVzZSBncmllZiwgSSdtIGNvbXBsZXRlbHkgZmluZSB3aXRoDQo+ID4gZml4aW5nIHRoaXMgaW4g
+VFRNIGJ5IGFsd2F5cyB0YWtpbmcgdGhlIGRlZmVycmluZyBwYXRoLg0KPiANCj4gT2ggSSBtaXN1
+bmRlcnN0b29kIHdoYXQgeW91J3ZlIG1lYW50LCBJIHRob3VnaHQgeW91IHdhbnQgdG8gZG8gYSBo
+dWdlDQo+IGV4ZXJjaXNlIGluIHBhc3NpbmcgdGhlICJkbyB3ZSBrbm93IHdlJ3JlIGxvY2tlZCIg
+ZmxhZyBhbGwgdGhlIHdheQ0KPiB0aHJvdWdoDQo+IGVudGlyZSBjYWxsY2hhaW5zIHRvIGV4cG9y
+dGVycy4NCj4gDQo+IElmIGl0J3MganVzdCBzbyB0aGF0IHRoZSBmYXN0cGF0aCBvZiBieXBhc3Np
+bmcgdGhlIHdvcmtlciBjYW4NCj4gZnVuY3Rpb24gZm9yDQo+IGltcG9ydGVkIGJ1ZmZlcnMsIHRo
+ZW4gSSB0aGluayB0aGF0J3MgZmluZS4gQXMgbG9uZyBhcyB3ZSBqdXN0IHB1bnQNCj4gdG8gdGhl
+DQo+IHdvcmtlciBpZiB3ZSBjYW4ndCBnZXQgdGhlIGxvY2suDQoNCk9LLCBUQkgsIHRoZSBkcml2
+ZXIgd291bGQgbmVlZCBhIGRybV9wcmltZV9nZW1fZGVzdHJveV9sb2NrZWQoKSBhcyB3ZWxsDQpz
+aW5jZSB0aGF0J3MgdGhlIGZ1bmN0aW9uIHRoYXQgY2FsbHMgZG1hX2J1Zl9kZXRhY2guIEJ1dCBU
+QkggSSB0aGluaw0KaXQncyB3b3J0aCBpdCBhbnl3YXkgc2luY2UgaWYgd2UganVzdCBtb2RpZnkg
+VFRNIHRvIGFsd2F5cyB0YWtlIHRoZQ0KZGVsYXllZCBkZXN0cnVjdGlvbiBwYXRoLCBJIGZpZ3Vy
+ZSBtdWNoIGNvZGUgd2lsbCBjb21lIHRvIGRlcGVuZCBvbiBpdA0KYW5kIGl0IHdpbGwgYmUgaW52
+YXNpdmUgdG8gdXBkYXRlLg0KDQpJJ2xsIHRha2UgYSBxdWljayBzdGFiIGEgdGhhdCB0byBzZWUg
+aG93IHVnbHkgaXQgYmVjb21lcy4NCg0KL1Rob21hcw0KDQoNCj4gLVNpbWENCg0KX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWls
+aW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJl
+IHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
