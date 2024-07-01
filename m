@@ -2,192 +2,163 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8FE2491D1B6
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 30 Jun 2024 15:05:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id BE2A291DA2B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  1 Jul 2024 10:41:13 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 550E544343
-	for <lists+linaro-mm-sig@lfdr.de>; Sun, 30 Jun 2024 13:05:25 +0000 (UTC)
-Received: from aposti.net (aposti.net [89.234.176.197])
-	by lists.linaro.org (Postfix) with ESMTPS id E8D3A3F04B
-	for <linaro-mm-sig@lists.linaro.org>; Sun, 30 Jun 2024 13:05:22 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 693FC43F4F
+	for <lists+linaro-mm-sig@lfdr.de>; Mon,  1 Jul 2024 08:41:12 +0000 (UTC)
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+	by lists.linaro.org (Postfix) with ESMTPS id 5A4153F2F7
+	for <linaro-mm-sig@lists.linaro.org>; Mon,  1 Jul 2024 08:41:09 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=crapouillou.net header.s=mail header.b=FSoqsoL5;
-	spf=pass (lists.linaro.org: domain of paul@crapouillou.net designates 89.234.176.197 as permitted sender) smtp.mailfrom=paul@crapouillou.net;
-	dmarc=pass (policy=none) header.from=crapouillou.net
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=crapouillou.net;
-	s=mail; t=1719752721;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=7flKg/QNYquWhmiQ3CkCK3NT/w6qxOOletHqy/Yo3UQ=;
-	b=FSoqsoL5uclvSY+A3/2nOau7ihMcNqU622fMXUMvNJkRlg647C2BlAFlaJL2Sl7+A8Oj7u
-	GH+deHaodaESbALRPqFphjhFYM4el/6WQEmBkA3mWkiNkYqwhbQY2gMH9AzkiD3NyEp3J8
-	lmv0afp8N1wRF9IXTK/3Od41AfffDgo=
-Date: Sun, 30 Jun 2024 15:05:17 +0200
-From: Paul Cercueil <paul@crapouillou.net>
-To: Jonathan Cameron <jic23@kernel.org>, Vinod Koul <vkoul@kernel.org>
-In-Reply-To: <20240630113203.719d1daf@jic23-huawei>
-References: <20240620122726.41232-1-paul@crapouillou.net> <171896438479.273533.11227587889239181030.b4-ty@kernel.org> <20240630113203.719d1daf@jic23-huawei>
-Message-ID: <50F70D50-5A6C-4C38-93ED-500008C4BB2D@crapouillou.net>
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=gd4lCcqd;
+	spf=pass (lists.linaro.org: domain of ckoenig.leichtzumerken@gmail.com designates 209.85.128.52 as permitted sender) smtp.mailfrom=ckoenig.leichtzumerken@gmail.com;
+	dmarc=pass (policy=none) header.from=gmail.com
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-42574064b16so16214335e9.2
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 01 Jul 2024 01:41:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1719823268; x=1720428068; darn=lists.linaro.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=AMt7mTb63MOoRef5KMAR+OLG9LjGQCs3Iv9eQzbOgVY=;
+        b=gd4lCcqdHtwQu6iquX0jqkPtuw9JB6rPgCo1GW+KskocsMVERzGYRQOxmI3FQa5bxM
+         qYGAASJ8fZhmPpQPF5/BHFZpk7K9USpxLgX5/hReFqRIMU7BOqNQQvh/qINWk3ZBlsGC
+         7uAv3DvcPQ6BzbREfpvj6+PY2AFNxVmSxrGSyaqqiOMkdMVjOseDfEkIGdz5iw/roF9X
+         hXIES28RouuFBNsl+i0GdFKx+BpwGs5KWgMkurzE89cbM4VqCavCO694o6RqXcTIaxiZ
+         YTGga3+nGU0jDsNd3A0TMCqRjzXi9Ba8Vr0SFUxTX8rnVx2oPfJu9G+NCJB7laXUHca2
+         cmDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1719823268; x=1720428068;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=AMt7mTb63MOoRef5KMAR+OLG9LjGQCs3Iv9eQzbOgVY=;
+        b=iwA1xF7TLFGCpfZo5f8rrNtKBo8hR27kimGDyyZr0hVao4RQpA712UjRCK+gTzp9Qf
+         Wi/9bCfV+AeAuISBIYD22oqpMNpSWKqsTkwqLZgJXjmqZrowJU8UgaUsVgN5I52iXGwT
+         EzgNGLJb/bNrIoZmhTuYxhJl3SrlLGUNzaoqnSI7b53sxkNJI1oLBfy35/XgtuLXnVPo
+         Hc6e6L7jPdC976KueJ2QM1SjLrhs7yaJY/s04slZw30AJTWAD/xqpF/qC4nSsZfTfCJF
+         WB9x/uoMDP0Php/x263gd8S7km87Csf2/aZvDvLFbOblf93HaOrT/5yfc9FFpVEq+mA0
+         FvBg==
+X-Forwarded-Encrypted: i=1; AJvYcCXsmckmrCTf0LOFhQ/ZK7Im5GW1mK5AyoktsPCVXEcwhaLutQtaCnk0StpraPrf/sPDdcIS3zpTg75DibnkFFiXl5WHxbyEDoi/BP6l5XI=
+X-Gm-Message-State: AOJu0YzQaRiLhw+rsCVnccHLeKgM6nTW91M/AS1j7FaJpFi6xNdQbm41
+	5IU1BInJPIdrFKcHwIBuvIfFcZy/n7bgX5JX1wYAsW0fCfdHmIE9
+X-Google-Smtp-Source: AGHT+IFVkP4vxt28218+k2V48TYQocy8Fz5i69HcPxCmln5LU4tWH1iaovbS/2p5BgnSrenoOSY/NQ==
+X-Received: by 2002:a05:600c:6a8d:b0:425:77b4:366d with SMTP id 5b1f17b1804b1-4257a02f3f6mr32722375e9.11.1719823267873;
+        Mon, 01 Jul 2024 01:41:07 -0700 (PDT)
+Received: from [10.254.108.81] (munvpn.amd.com. [165.204.72.6])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4256b09a94csm141988335e9.33.2024.07.01.01.41.05
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 01 Jul 2024 01:41:07 -0700 (PDT)
+Message-ID: <dbcd9a16-4e4b-42c8-ba7f-d6c1dfd9dccb@gmail.com>
+Date: Mon, 1 Jul 2024 10:41:04 +0200
 MIME-Version: 1.0
-X-Rspamd-Queue-Id: E8D3A3F04B
-X-Spamd-Bar: -------
-X-Spamd-Result: default: False [-8.00 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[99.99%];
-	DMARC_POLICY_ALLOW(-0.50)[crapouillou.net,none];
-	R_SPF_ALLOW(-0.20)[+a];
-	R_DKIM_ALLOW(-0.20)[crapouillou.net:s=mail];
-	MIME_GOOD(-0.10)[multipart/alternative,text/plain];
-	ASN(0.00)[asn:203432, ipnet:89.234.176.0/23, country:FR];
-	MISSING_XM_UA(0.00)[];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	MID_RHS_MATCH_FROM(0.00)[];
+User-Agent: Mozilla Thunderbird
+To: Nicolas Dufresne <nicolas@ndufresne.ca>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ =?UTF-8?B?SmFzb24tSkggTGluICjmnpfnnb/npaUp?= <Jason-JH.Lin@mediatek.com>,
+ "daniel@ffwll.ch" <daniel@ffwll.ch>
+References: <20240515112308.10171-1-yong.wu@mediatek.com>
+ <20240515112308.10171-3-yong.wu@mediatek.com>
+ <98721904-003d-4d0d-8cfe-1cecdd59ce01@amd.com>
+ <779ce30a657754ff945ebd32b66e1c644635e84d.camel@mediatek.com>
+ <cef8f87d-edab-41d8-8b95-f3fc39ad7f74@amd.com>
+ <1050c44512374031d1349b5dced228d0efc3fbde.camel@mediatek.com>
+ <3104b765-5666-44e4-8788-f1b1b296fe17@amd.com>
+ <98c11bad7f40bcc79ed7a2039ddb3a46f99908f5.camel@mediatek.com>
+ <75dc1136-7751-4772-9fa7-dd9124684cd2@amd.com>
+ <ZnxWWtdShekGSUif@phenom.ffwll.local>
+ <ae73a0203d6acf2878c9e3ae2d7554816b9c66ad.camel@mediatek.com>
+ <5739abdb-0234-412a-9f25-49219411bbc6@amd.com>
+ <183f2ae09c2dbcf687e69cd13a9d258fd24fd80c.camel@ndufresne.ca>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <ckoenig.leichtzumerken@gmail.com>
+In-Reply-To: <183f2ae09c2dbcf687e69cd13a9d258fd24fd80c.camel@ndufresne.ca>
+X-Rspamd-Queue-Id: 5A4153F2F7
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.47 / 15.00];
+	BAYES_HAM(-2.98)[99.92%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	MIME_GOOD(-0.10)[text/plain];
+	XM_UA_NO_VERSION(0.01)[];
+	TAGGED_FROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[35];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
+	TO_DN_EQ_ADDR_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	FREEMAIL_CC(0.00)[quicinc.com,collabora.com,linaro.org,kernel.org,google.com,mediatek.com,deltatee.com,lists.freedesktop.org,emersion.fr,gmail.com,lists.linaro.org,infradead.org,ucw.cz,linux-foundation.org,arm.com,vger.kernel.org,lists.infradead.org];
 	FROM_HAS_DN(0.00)[];
-	RCVD_COUNT_ZERO(0.00)[0];
-	FROM_EQ_ENVFROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[crapouillou.net:+]
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[dt];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.52:from];
+	FREEMAIL_ENVFROM(0.00)[gmail.com]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 2AKEWVQHUKNEPDJ7FMMVUUVGHI3O3WR6
-X-Message-ID-Hash: 2AKEWVQHUKNEPDJ7FMMVUUVGHI3O3WR6
-X-MailFrom: paul@crapouillou.net
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Lars-Peter Clausen <lars@metafoo.de>, Sumit Semwal <sumit.semwal@linaro.org>, =?ISO-8859-1?Q?Christian_K=F6nig?= <christian.koenig@amd.com>, Jonathan Corbet <corbet@lwn.net>, Nuno Sa <nuno.sa@analog.com>, linux-iio@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, dmaengine@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: YAISHWVLW2BU5H57ZC5U7QUMNF4SZEMY
+X-Message-ID-Hash: YAISHWVLW2BU5H57ZC5U7QUMNF4SZEMY
+X-MailFrom: ckoenig.leichtzumerken@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: "quic_vjitta@quicinc.com" <quic_vjitta@quicinc.com>, "angelogioacchino.delregno@collabora.com" <angelogioacchino.delregno@collabora.com>, "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>, "conor+dt@kernel.org" <conor+dt@kernel.org>, "jkardatzke@google.com" <jkardatzke@google.com>, "krzysztof.kozlowski+dt@linaro.org" <krzysztof.kozlowski+dt@linaro.org>, "joakim.bech@linaro.org" <joakim.bech@linaro.org>, =?UTF-8?B?WW91bGluIFBlaSAo6KO05Y+L5p6XKQ==?= <youlin.pei@mediatek.com>, "logang@deltatee.com" <logang@deltatee.com>, "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>, =?UTF-8?B?S3VvaG9uZyBXYW5nICjnjovlnIvptLsp?= <kuohong.wang@mediatek.com>, =?UTF-8?B?SmlhbmppYW8gWmVuZyAo5pu+5YGl5aejKQ==?= <Jianjiao.Zeng@mediatek.com>, "contact@emersion.fr" <contact@emersion.fr>, "benjamin.gaignard@collabora.com" <benjamin.gaignard@collabora.com>, "matthias.bgg@gmail.com" <matthias.bgg@gmail.com>, "linaro-mm-sig@lists.linaro.org" <linaro-mm-sig@lists.linaro.org>, "willy@infrade
+ ad.org" <willy@infradead.org>, "pavel@ucw.cz" <pavel@ucw.cz>, "akpm@linux-foundation.org" <akpm@linux-foundation.org>, "Brian.Starkey@arm.com" <Brian.Starkey@arm.com>, "robh+dt@kernel.org" <robh+dt@kernel.org>, "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, "tjmercier@google.com" <tjmercier@google.com>, "jstultz@google.com" <jstultz@google.com>, "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>, "mripard@kernel.org" <mripard@kernel.org>, "robin.murphy@arm.com" <robin.murphy@arm.com>, =?UTF-8?B?WW9uZyBXdSAo5ZC05YuHKQ==?= <Yong.Wu@mediatek.com>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "ppaalanen@gmail.com" <ppaalanen@gmail.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: (subset) [PATCH v12 0/7] iio: new DMABUF based API v12
+Subject: [Linaro-mm-sig] Re: [PATCH v5 2/9] scatterlist: Add a flag for the restricted memory
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2AKEWVQHUKNEPDJ7FMMVUUVGHI3O3WR6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YAISHWVLW2BU5H57ZC5U7QUMNF4SZEMY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============2084110689398283062=="
-
---===============2084110689398283062==
-Content-Type: multipart/alternative;
- boundary=----VAJBQRHLFT3S3EKYR34CF2DU55YI97
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-------VAJBQRHLFT3S3EKYR34CF2DU55YI97
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-
-Hi Jonathan,
-
-Fantastic news, thanks!
-
-Cheers,
--Paul
-
-
-
-Le 30 juin 2024 12:32:03 GMT+02:00, Jonathan Cameron <jic23@kernel=2Eorg> =
-a =C3=A9crit=C2=A0:
->On Fri, 21 Jun 2024 15:36:24 +0530
->Vinod Koul <vkoul@kernel=2Eorg> wrote:
+Am 28.06.24 um 22:16 schrieb Nicolas Dufresne:
+> [SNIP]
+>>>>> Why can't you get this information from userspace?
+>>>> Same reason amd and i915/xe also pass this around internally in the
+>>>> kernel, it's just that for those gpus the render and kms node are the
+>>>> same
+>>>> driver so this is easy.
+>>>>
+>> The reason I ask is that encryption here looks just like another
+>> parameter for the buffer, e.g. like format, stride, tilling etc..
+> I'm mostly a reader of the thread here, but I'd like to avoid basic mistakes.
+> The buffer in question are "protected", meaning that the CPU HW does not have
+> access to the underlying pages (or zone in the case of Meditatek).
 >
->> On Thu, 20 Jun 2024 14:27:19 +0200, Paul Cercueil wrote:
->> > Here's the v12 of my patchset that introduces DMABUF support to IIO=
-=2E
->> >=20
->> > Apart from a small documentation fix, it reverts to using
->> > mutex_lock/mutex_unlock in one particular place, which used cleanup
->> > GOTOs (which don't play well with scope-managed cleanups)=2E
->> >=20
->> > Changelog:
->> > - [3/7]:
->> >     - Revert to mutex_lock/mutex_unlock in iio_buffer_attach_dmabuf()=
-,
->> >       as it uses cleanup GOTOs
->> > - [6/7]:
->> >     - "obtained using=2E=2E=2E" -> "which can be obtained using=2E=2E=
-=2E"
->> >=20
->> > [=2E=2E=2E] =20
->>=20
->> Applied, thanks!
->>=20
->> [1/7] dmaengine: Add API function dmaengine_prep_peripheral_dma_vec()
->>       commit: 5878853fc9389e7d0988d4b465a415cf96fd14fa
->> [2/7] dmaengine: dma-axi-dmac: Implement device_prep_peripheral_dma_vec
->>       commit: 74609e5686701ed8e8adc3082d15f009e327286d
->> [7/7] Documentation: dmaengine: Document new dma_vec API
->>       commit: 380afccc2a55e8015adae4266e8beff96ab620be
->
->Merged Vinod's topic branch and applied, 3,4,5,6 to the togreg
->branch of iio=2Egit=2E  Thanks all for the hard work on this one=2E
->Great to finally get there!
->
->Jonathan
->
->p=2Es=2E Last few weeks were about some complexities in the IIO tree
->unrelated to this set=2E
->
->>=20
->> Best regards,
->
+> This is different from encrypted buffers, which don't need this level of
+> protection, as without the security key to decrypt them, their content is close
+> to random data.
 
-------VAJBQRHLFT3S3EKYR34CF2DU55YI97
-Content-Type: text/html;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Thanks for that clarification, this difference was absolutely not obvious.
 
-<html><head></head><body><div dir=3D"auto">Hi Jonathan,<br><br>Fantastic ne=
-ws, thanks!<br><br>Cheers,<br>-Paul<br><br></div><br><br><div class=3D"gmai=
-l_quote"><div dir=3D"auto">Le 30 juin 2024 12:32:03 GMT+02:00, Jonathan Cam=
-eron &lt;jic23@kernel=2Eorg&gt; a =C3=A9crit=C2=A0:</div><blockquote class=
-=3D"gmail_quote" style=3D"margin: 0pt 0pt 0pt 0=2E8ex; border-left: 1px sol=
-id rgb(204, 204, 204); padding-left: 1ex;">
-<pre class=3D"k9mail"><div dir=3D"auto">On Fri, 21 Jun 2024 15:36:24 +0530=
-<br>Vinod Koul &lt;vkoul@kernel=2Eorg&gt; wrote:<br><br></div><blockquote c=
-lass=3D"gmail_quote" style=3D"margin: 0pt 0pt 1ex 0=2E8ex; border-left: 1px=
- solid #729fcf; padding-left: 1ex;"><div dir=3D"auto">On Thu, 20 Jun 2024 1=
-4:27:19 +0200, Paul Cercueil wrote:<br></div><blockquote class=3D"gmail_quo=
-te" style=3D"margin: 0pt 0pt 1ex 0=2E8ex; border-left: 1px solid #ad7fa8; p=
-adding-left: 1ex;"><div dir=3D"auto">Here's the v12 of my patchset that int=
-roduces DMABUF support to IIO=2E<br><br>Apart from a small documentation fi=
-x, it reverts to using<br>mutex_lock/mutex_unlock in one particular place, =
-which used cleanup<br>GOTOs (which don't play well with scope-managed clean=
-ups)=2E<br><br>Changelog:<br>- [3/7]:<br>    - Revert to mutex_lock/mutex_u=
-nlock in iio_buffer_attach_dmabuf(),<br>      as it uses cleanup GOTOs<br>-=
- [6/7]:<br>    - "obtained using=2E=2E=2E" -&gt; "which can be obtained usi=
-ng=2E=2E=2E"<br><br>[=2E=2E=2E]  <br></div></blockquote><div dir=3D"auto"><=
-br>Applied, thanks!<br><br>[1/7] dmaengine: Add API function dmaengine_prep=
-_peripheral_dma_vec()<br>      commit: 5878853fc9389e7d0988d4b465a415cf96fd=
-14fa<br>[2/7] dmaengine: dma-axi-dmac: Implement device_prep_peripheral_dma=
-_vec<br>      commit: 74609e5686701ed8e8adc3082d15f009e327286d<br>[7/7] Doc=
-umentation: dmaengine: Document new dma_vec API<br>      commit: 380afccc2a=
-55e8015adae4266e8beff96ab620be<br></div></blockquote><div dir=3D"auto"><br>=
-Merged Vinod's topic branch and applied, 3,4,5,6 to the togreg<br>branch of=
- iio=2Egit=2E  Thanks all for the hard work on this one=2E<br>Great to fina=
-lly get there!<br><br>Jonathan<br><br>p=2Es=2E Last few weeks were about so=
-me complexities in the IIO tree<br>unrelated to this set=2E<br><br></div><b=
-lockquote class=3D"gmail_quote" style=3D"margin: 0pt 0pt 1ex 0=2E8ex; borde=
-r-left: 1px solid #729fcf; padding-left: 1ex;"><div dir=3D"auto"><br>Best r=
-egards,<br></div></blockquote><div dir=3D"auto"><br></div></pre></blockquot=
-e></div></body></html>
-------VAJBQRHLFT3S3EKYR34CF2DU55YI97--
+In that case having a separate heap for this memory is indeed the 
+easiest approach.
 
---===============2084110689398283062==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+My question is still what would happen if the CPU tries to access this 
+protected buffer? Or does the CPU not even have an address to do that?
 
+Just out of curiosity, I mean the exporting heap should then somehow 
+reject any attempt to mmap() or vmap() the buffer content.
+
+Thanks,
+Christian.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============2084110689398283062==--
