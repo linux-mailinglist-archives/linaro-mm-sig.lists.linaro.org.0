@@ -2,493 +2,239 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1812392D149
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jul 2024 14:10:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 934B092D1C1
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jul 2024 14:40:18 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 16E9C41252
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jul 2024 12:10:19 +0000 (UTC)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
-	by lists.linaro.org (Postfix) with ESMTPS id 64C933F39D
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 10 Jul 2024 12:10:15 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A068744796
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 10 Jul 2024 12:40:17 +0000 (UTC)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11on2080.outbound.protection.outlook.com [40.107.236.80])
+	by lists.linaro.org (Postfix) with ESMTPS id 5B38A3F4C3
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 10 Jul 2024 12:40:14 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=lkpzyrZM;
-	spf=pass (lists.linaro.org: domain of mripard@kernel.org designates 145.40.73.55 as permitted sender) smtp.mailfrom=mripard@kernel.org;
-	dmarc=pass (policy=none) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sin.source.kernel.org (Postfix) with ESMTP id E897FCE0D4E;
-	Wed, 10 Jul 2024 12:10:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEC93C32781;
-	Wed, 10 Jul 2024 12:10:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1720613412;
-	bh=3JRaWiuTKkV+VsGA4zTpqff/hAJLH/+QJuk9z9ikZWs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=lkpzyrZMl7CYYWQxQ5sAP+J0NE0w9LunDTPOKv1fzrsDVBEY3r5Cu2y5F5mM9uV6A
-	 tmdB+AX8JgsLH2nheJqGnk1qYCYVQYKzdFSjucaVvqnzODXFaKwq9bJ0Y2+01Z8Q2q
-	 uXhJgTwMKtDozKiiBwcH59tdhC4l7V5RS8x/OGMBbiUMgBqpN72PgM0dbZXVfj5dwB
-	 kdW9LRb3hEKrNPXW5uN618fOZjFa49XWJIias6aOOGAyr3EXG//Op3EV1gZ0gTpBth
-	 6cZttxaF0HC0tyHRX41bd/Dmai1Lf3jaGV36U/NngGPzSP/tggfQMvI5b3kRj3BHEO
-	 29zezjPpu0fsA==
-Date: Wed, 10 Jul 2024 14:10:09 +0200
-From: Maxime Ripard <mripard@kernel.org>
-To: Thierry Reding <thierry.reding@gmail.com>
-Message-ID: <20240710-cocky-lemon-seriema-86cccf@houat>
-References: <20240515-dma-buf-ecc-heap-v1-0-54cbbd049511@kernel.org>
- <CANDhNCoOKwtpstFE2VDcUvzdXUWkZ-Zx+fz6xrdPWTyciVXMXQ@mail.gmail.com>
- <ZkXmWwmdPsqAo7VU@phenom.ffwll.local>
- <CANDhNCo5hSC-sLwdkBi3e-Ja-MzdqcGGbn-4G3XNYwCzZUwscw@mail.gmail.com>
- <ZkyOOwpM57HIiO3v@phenom.ffwll.local>
- <qy7aczeu6kumv5utemoevi7omp5ryq55zmgzxh5hrz5orf2osp@wypg66awof4n>
- <20240628-resilient-resolute-rook-0fc531@houat>
- <3e37rhrcqogix5obsu2gq7jar7bcoamx4bbd376az5z3zdkwvm@jstirwdl5efm>
- <20240704-therapeutic-maroon-coucal-f61a63@houat>
- <wapv4gl2se34tq3isycb7bui5xi3x6kxjqtyz24qhjipnkbuqu@sv4w2crksuq5>
+	dkim=pass header.d=amd.com header.s=selector1 header.b=WKpldAj2;
+	spf=pass (lists.linaro.org: domain of Christian.Koenig@amd.com designates 40.107.236.80 as permitted sender) smtp.mailfrom=Christian.Koenig@amd.com;
+	dmarc=pass (policy=quarantine) header.from=amd.com;
+	arc=pass ("microsoft.com:s=arcselector9901:i=1")
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=PSZBeV7rJ2FcN+oeAlfUhXI3klCxDBngdiIFxmwwFyDvCIzkMNOSBWkS9Ll3hUhO4UOnS8JJ74LFbKKDg8KqPAahZrP6UDp20Mf1QON6wAz63DTaBkEcrdOVRtAphQp6yaki4pZSqqD/9zJY3O9ecS/BbGmqK+/cWGgOCdXZoVcZYtQ/8kf9n+9EnOASKgcskAAEJ/zakWqOTxAJkxND3RMmhURi5a+HqqX5YBvoJL5Y8Dzov8wsC3+hvE+rPo4YZVdtRkbDq/iz1c287rGGlo+Jnxy6pbcDLOf57QPDd0y0eu9VQTbY1lSoUXkrRYXcAeuL0JVDzIVbru2kNaC+zw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=S+tKHYOpa87rpMnKL8Ekyv5YF4kSCkXUs9ZxXK/CQx0=;
+ b=MFzSfyYO2NZIF5Ww1aQpWV4bVQV4pgRh5nhXaUgihSzrftTHw8EsyoJTkiAX9/NPw5HMSsL6s4x03O7boQricloOnNpzzrcTNZUi4NCSILng4Dk/g4SDCKAcve/lt6guQddQkxL66drgyqJBfqsQqbPIS1RzuSF78QqYEljdoeFW6KxWcnXBWY/IS1UeW4KZvDEZDnucSbBnizKBsnyIiKfZN+5BPpp9AC9YcmrQvUlTkF1thKFCa+6y62mPVzXOTXL0tvEIKe6EnPStVmsGlrFw1NYtGQeg4Q/wYa4gEphpNXeBPqUytpLczlleKrCB9j4bRQuZOevNOPof///1PA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=S+tKHYOpa87rpMnKL8Ekyv5YF4kSCkXUs9ZxXK/CQx0=;
+ b=WKpldAj25Ik736R9suBChss+JlNx3e94vcWiZUjh8+ZEHlby+Ag1YV/NLegOJpK4jdKh8xrfobkyRQ1XQVR2jqWlVGxxrl36li4ywmNXiZ/GVUED2/5rITFqHAMN8Q/A+sJhqBc2MkcfxMwPB59EJgVQSQ10vzlotx68twLlopk=
+Received: from SJ0PR12MB5673.namprd12.prod.outlook.com (2603:10b6:a03:42b::13)
+ by BL1PR12MB5994.namprd12.prod.outlook.com (2603:10b6:208:39a::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.36; Wed, 10 Jul
+ 2024 12:40:11 +0000
+Received: from SJ0PR12MB5673.namprd12.prod.outlook.com
+ ([fe80::ec7a:dd71:9d6c:3062]) by SJ0PR12MB5673.namprd12.prod.outlook.com
+ ([fe80::ec7a:dd71:9d6c:3062%3]) with mapi id 15.20.7741.027; Wed, 10 Jul 2024
+ 12:40:11 +0000
+Message-ID: <cf3ff1b9-2934-47bd-93c7-5ea55d10c82f@amd.com>
+Date: Wed, 10 Jul 2024 14:40:04 +0200
+User-Agent: Mozilla Thunderbird
+To: Daniel Vetter <daniel.vetter@ffwll.ch>
+References: <20240710093120.732208-1-daniel.vetter@ffwll.ch>
+ <03f7e2ad-fd5c-4da7-a14c-34c2c158c513@amd.com>
+ <CAKMK7uFvCr2qcHun06LC-ON3GBqj8=mCpPGHuAOh9BEyr60fiQ@mail.gmail.com>
+Content-Language: en-US
+From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
+In-Reply-To: <CAKMK7uFvCr2qcHun06LC-ON3GBqj8=mCpPGHuAOh9BEyr60fiQ@mail.gmail.com>
+X-ClientProxiedBy: FR0P281CA0220.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ac::15) To SJ0PR12MB5673.namprd12.prod.outlook.com
+ (2603:10b6:a03:42b::13)
 MIME-Version: 1.0
-In-Reply-To: <wapv4gl2se34tq3isycb7bui5xi3x6kxjqtyz24qhjipnkbuqu@sv4w2crksuq5>
-X-Rspamd-Queue-Id: 64C933F39D
-X-Spamd-Bar: ----
-X-Spamd-Result: default: False [-4.80 / 15.00];
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ0PR12MB5673:EE_|BL1PR12MB5994:EE_
+X-MS-Office365-Filtering-Correlation-Id: b41dac6c-d480-44f9-b034-08dca0dd7007
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|7416014|376014|366016;
+X-Microsoft-Antispam-Message-Info: 
+	=?utf-8?B?UVBJbWlCUys1dzhqOEFIdnhjU0VudDJYaXNTWUlBeElhaXFnTzNQNXJiaUly?=
+ =?utf-8?B?dXhUSUYvR3RSaThjLzBkUEZTSFpjWEgxODZTTzh3Q3lyREE3Q2JCU1JLNUEr?=
+ =?utf-8?B?Sm1oYzlROU1wMUtBTXB2WEZHSVlOdklVRU55ZVVYYkZBc1krYkttTkFoNk1h?=
+ =?utf-8?B?WnEzQmVQb01MdUJhZU95R29EbUNCenBLR2dySGlYcU9ONENjVndibXlYQlNi?=
+ =?utf-8?B?bUFaLzhYcVZsS1lka3RSNFlwNmZHbnBHZFZrQ1g3VU0xckh2S1c2eHBOWWxB?=
+ =?utf-8?B?aVdJZ0xGTUhFQ2QraWpXNDVZKy9zSzRCYzFzUTVFUGxDdlIxeTQ5azRkVHc0?=
+ =?utf-8?B?WW9pREhqcHp6WUJPeUZTaFM3YzZlUThoWnk0a0huS3MwRmtMUlBTektkQlJR?=
+ =?utf-8?B?T3B2bmRUS2tOMHIyNW8xTFlSbFd6RGdCWnExMlNqa2VhNkw5ZFEzZWdBNzVF?=
+ =?utf-8?B?VWxQVmwxZDZDK01FSTZubkVuRWVyY2s2aVZjMlFHaThlVjkzYURZZldUSWJV?=
+ =?utf-8?B?L2NKcHBvaFAvZlpZcVl3VUFjSUxNV3lyU3BxUi9JWVYrTG8vYzVPTmRFeVVQ?=
+ =?utf-8?B?QjdQT241cUtFNFdwTkszRUVCdEgrN1FZSStUaFRZaDdOa0ZYSy9uV3hjTk5j?=
+ =?utf-8?B?Qy84UXBncnEvSEczQlowSnhhWUR5bi93aU9jSkEwK3JhM29tVUJTdkN3eVU3?=
+ =?utf-8?B?NXU4cGdzRzR0aTdqMGJBMEFHQjFhZHdoNUpRY0tvYUd1R1I2bXp6K3BLOGsv?=
+ =?utf-8?B?cmtYR0tRbWVZMTRWMks0cjVjWWpCS1pEMTlBalMvenp6LzB2bHFWU3NwS2xp?=
+ =?utf-8?B?eFdLVVhFTW9JK1V2Z1NPdjJ2b2ZlR2xGSUNWblR2V2V4b0lRR2xRM2lCS3Zy?=
+ =?utf-8?B?WXZUMTd0WWozYkpmU0tTWFhzRWFDVGx6cldsdUxsVUY1cFhGU1kwVVEzZ21u?=
+ =?utf-8?B?cU11TnJ0WmxJN2p3WUJLejVRY2YzY1hma0FDajlKa0NxN2lUVVZERFpzenUz?=
+ =?utf-8?B?WlNLOVRoZ2FxckpYVllWa3Q1aEdxS0JLaElSVWJuOWZmMk4vaDNkZkowUnUz?=
+ =?utf-8?B?ZDJuNy9ZNHpvSENuSjBLRG52YSt0SUE3aUxyOHpoS0w1UE9qNERUWEpIWWJ3?=
+ =?utf-8?B?VXd6a2NyZkJjOFhBcko4QUVrT1hUZ0JHQzhhU205Y1U2SWdsUWxoeVNPbm9C?=
+ =?utf-8?B?a21YeSt6R1VWa1hweXk3N25QTTQwWDFxRElQcGZOWUVWMThqejQwcDI3UzJh?=
+ =?utf-8?B?ZG81SUowVUg2aXcxc3FIaWordnh5cU5nSGhQZ3hpQiswOHVIYk9zRFhTK1BP?=
+ =?utf-8?B?cDc4bWFrOEtBME9zVENqQ0JQM011aExnbVkwaG9zbHJFbDVVVlc1aWQyNFhi?=
+ =?utf-8?B?UWk3VWxzTDNSYXlReldzTWc2V1Jnb1d6NUZoZG9VOHJhWlpnekR3eG9la2N2?=
+ =?utf-8?B?UjdQUFV4eFQ2eS9xRWt3USt4WkNzaFg0dUFNem9iS21ZZXZyTlJpWXlheUdp?=
+ =?utf-8?B?dTR4Q2ZpZDM5Ti9aSjN2UXY1eUtxc09kbm5RYWY0WUJpZ0ZLSmk2UkR6TExY?=
+ =?utf-8?B?MDlPRHpNN3RxaDlFNytNRkRxbi9xSytrRXdOajlTU1JmUFU1SjVUcDJvZ2Fi?=
+ =?utf-8?B?cGpxZno4T2RXVEhQWlRNTzF6OGpBc0oxTlZnejFjcm1LdWRBZlpNVWlZVXdV?=
+ =?utf-8?B?ZStUS2g1elBYeFNZVmVteHkyWGlERkhFQ1NLYWMybVAyOUNoQ3FjY3h3Tld1?=
+ =?utf-8?Q?09aqy5BGNTpj6FubZ4=3D?=
+X-Forefront-Antispam-Report: 
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ0PR12MB5673.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: 
+	=?utf-8?B?RGxHbnNwdlRVamtpYnVKR1VGa3RVcUQxZWtOaWxWYWNraUY5aU5KbEZOWTR5?=
+ =?utf-8?B?TlI4bHVEYk1VOHRQTm5NTlVTVFFOMnM3R1I5a1dSNEQwOHlyemtFb2RiaU9k?=
+ =?utf-8?B?RXpIMEkrMDU4NlVwWHFJcXBpVS9Ca2hKc2JrWUtHODltQ01HTW9hVm0xRVJv?=
+ =?utf-8?B?TFZxNkZrRVVDK2s5aXNPcjVOa2Z5UStkRXZrRkhiaUlwNHNPaGNvYzJpcVRT?=
+ =?utf-8?B?cXVnM2swZDE2V3lpNHNjYWVSZ3FoTXVaVkhPUi9rNjlZb3cwSlZZZ3NJNTlB?=
+ =?utf-8?B?YUxZS2lzL1JkbnpnVSt6d3VHb01UQi8zWXVkak12TTZxNzRHZzNhUFpvVy9M?=
+ =?utf-8?B?UUEwbmNzd1BzM1lYenNOb05kaUpxajBWaGFTd2Ziajl4bHhFNXgwQUMrSVVq?=
+ =?utf-8?B?bnBZZFQ1MmNPcFQ1Y0RWS29KQStQOWU2Zm5jbXk2YWxaWVRSRmovNHBrM2lj?=
+ =?utf-8?B?WHZzcFVxNUYrNGtFS01uc2xFdGZHNUVpcUtVTE5BMm52N3NISUovWnkvdHp3?=
+ =?utf-8?B?em1KQkZGQ3RUVDh4Vzh5QlVkYmZrdFpOR3lkOFpXOGlDMHE0eDhMbVkrOFh2?=
+ =?utf-8?B?QndYei9JekNVQXBVYnVuT0pkNE1lRm1MMlFHbkMvcVAwaTNZa2NqbWFhTUZO?=
+ =?utf-8?B?QWN1S1FrcFZ6TWlmbENYVFBGWTREVWFpTTdrQXdpK21PcmZyaFJnYVlIQmI2?=
+ =?utf-8?B?S1c3dVc0OE4zcE8zalpEcktwOURrT2VGRFhpZHBGRlhSSXB6L2pPQ1V5blFT?=
+ =?utf-8?B?OWhmV210NUduL0FxRGZibkJBV2p3czhKc0dHNUxoSHo1MkxYcW8yeW5JWS9X?=
+ =?utf-8?B?dGErS0ViZ3pnclQwZ2ZxUkV2eVRhUWlUT3dvYUFlVEl6WkZoRElTOTFSWXdF?=
+ =?utf-8?B?RUgvWlYyMkM1dWVKd1h5ZldISGRiM1hUK0x1eGZqdk9WbVFFWmIyR2k0Qzk3?=
+ =?utf-8?B?QmRvSzNVL2J2Wk5HNWhpck93N3dnZmRpT2hGaHBjVG43Qk1SNGdMTlFZMWtr?=
+ =?utf-8?B?V0IvSTh6YmdRd0FqMDk0eER3YkpoRDRFQnV3MXdMOEcrMGgwZ0ZMakc5blJO?=
+ =?utf-8?B?bXJteFVVeUQ1b0Zmblg5TUluWWQwTmEwTzBMdkVXQUVrUUY5RVQrTFhQUnp6?=
+ =?utf-8?B?N1lWMHl3OVdZZFQxY0pEaDI3dWZRUUo0anNDdHdBTmFvV2lZRHNtbFJaQVhC?=
+ =?utf-8?B?S0RNRk1kcDErd2Y5RGRWMUZkbmViVDNCR1lhTC8yN0hWRmg1elowMnJPY3Vz?=
+ =?utf-8?B?R05uVzhnaU9RQlpKUFZ2NmlYdlhzVDBQa2x6RUx0cjc3OVBHdDJob00zSUxU?=
+ =?utf-8?B?dms1cWpHQ3c1bFZZUEdxU1RONURtRGduTUdGd0pqUmxoemdCQnFHZEhTT05S?=
+ =?utf-8?B?bnZPTGFzb21wR0hReHRqMHV5cTZSclBGZ2Y0cUVJNkd1YzlNSUl4Z2RJQjFJ?=
+ =?utf-8?B?RHl3aXlWTWJGZW9jN1p0NmNHSlVaZG9DenRuSzBjZnhoR1g4dVFZdnFHRDFH?=
+ =?utf-8?B?TG8veGJBTE92VUcrRWJzU2JJQ0tvV1g0NlVhMGlmNHBOZ2NnV2hTYXdNbjVi?=
+ =?utf-8?B?b3Q2TmVOaXovbUg4aDlQSUsreDZEN3FOL3dFN1NSNkVNQWZ2N01xRmtYbXBD?=
+ =?utf-8?B?QjBlbFdKbkwrYXptbDUrQ2lLb0Vmd3pzd2d4S0szR3hmQiszUVV1UW12enlJ?=
+ =?utf-8?B?V0RYNE96MmdmMVpFWmNYOHk3ZmJtdVdhcG5Wa3lCSzhhVWZJTjZFQzZPaEh4?=
+ =?utf-8?B?SDdLVmRtdkRiUzVGRnRwOThTQ0wyWXBZMGlmdnhiOVhIWmY3Wk9SOWhuelAz?=
+ =?utf-8?B?aVUzWitjUVRCZjhKUGsyTm0xaHdsUWdOSDROVEVoSHJmbHVkY3JZejhLWSsw?=
+ =?utf-8?B?clB2OUw4UEVhZlFpVXkrRFhhZ3I1SmllS0I2S0VWbThYQTFaQmxIMmZoUzJx?=
+ =?utf-8?B?aVBER3ZvRFVNSWU4UVdxMk1JZmc1eDh4azVLTGtHbFVGRFBiTTZCSVRiZVFv?=
+ =?utf-8?B?NklBQXVUc2Q5b0VDV25tTHpwZ3pTNmcxSjlEMXFuUkd0REhiOWQxbThWdlVD?=
+ =?utf-8?B?WWMyZFBwQUNpbXJvd1pUNWlKNm5HZGhJREpOTEZZK2V5anFIcGN0NUQyUlZR?=
+ =?utf-8?Q?ZCLQAFtLLX6Hx/5v2f+ZWMvvK?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b41dac6c-d480-44f9-b034-08dca0dd7007
+X-MS-Exchange-CrossTenant-AuthSource: SJ0PR12MB5673.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Jul 2024 12:40:11.1548
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: xQmWEJnFEdt4e2urs/82xb8z6ntgXI4M608HTCGhYnfIuTXiL0VUZblKRaYUvOOV
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5994
+X-Rspamd-Queue-Id: 5B38A3F4C3
+X-Spamd-Bar: --------
+X-Spamd-Result: default: False [-8.99 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_RHS_NOT_FQDN(0.50)[];
-	RCVD_DKIM_ARC_DNSWL_MED(-0.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:145.40.73.55];
-	RCVD_IN_DNSWL_MED(-0.20)[145.40.73.55:from];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	ARC_NA(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	MISSING_XM_UA(0.00)[];
+	ARC_ALLOW(-1.00)[microsoft.com:s=arcselector9901:i=1];
+	DMARC_POLICY_ALLOW(-0.50)[amd.com,quarantine];
+	R_DKIM_ALLOW(-0.20)[amd.com:s=selector1];
+	R_SPF_ALLOW(-0.20)[+ip4:40.107.0.0/16];
+	MIME_GOOD(-0.10)[text/plain];
+	XM_UA_NO_VERSION(0.01)[];
 	TO_DN_SOME(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DNSWL_BLOCKED(0.00)[100.75.92.58:received];
-	RCVD_COUNT_TWO(0.00)[2];
+	ASN(0.00)[asn:8075, ipnet:40.104.0.0/14, country:US];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[40.107.236.80:from];
+	MIME_TRACE(0.00)[0:+];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_IN_DNSWL_NONE(0.00)[40.107.236.80:from];
 	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DNSWL_BLOCKED(0.00)[2603:10b6:a03:42b::13:received];
 	NEURAL_HAM(-0.00)[-1.000];
-	TAGGED_RCPT(0.00)[];
-	DWL_DNSWL_BLOCKED(0.00)[kernel.org:dkim];
-	ASN(0.00)[asn:54825, ipnet:145.40.73.0/24, country:US];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	FROM_HAS_DN(0.00)[]
+	DKIM_TRACE(0.00)[amd.com:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: CRE37VTQSUK56QFKQBFKN7CB2PWAO7HO
-X-Message-ID-Hash: CRE37VTQSUK56QFKQBFKN7CB2PWAO7HO
-X-MailFrom: mripard@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: John Stultz <jstultz@google.com>, Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: XSDMTJNCLAYFZOH7UIM2KNYR6BEZQ3U6
+X-Message-ID-Hash: XSDMTJNCLAYFZOH7UIM2KNYR6BEZQ3U6
+X-MailFrom: Christian.Koenig@amd.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: DRI Development <dri-devel@lists.freedesktop.org>, LKML <linux-kernel@vger.kernel.org>, Intel Graphics Development <intel-gfx@lists.freedesktop.org>, Daniel Vetter <daniel.vetter@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 0/8] dma-buf: heaps: Support carved-out heaps and ECC related-flags
+Subject: [Linaro-mm-sig] Re: [PATCH 1/2] drm: Add might_fault to drm_modeset_lock priming
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/CRE37VTQSUK56QFKQBFKN7CB2PWAO7HO/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/XSDMTJNCLAYFZOH7UIM2KNYR6BEZQ3U6/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============6540267619788751349=="
+Content-Type: text/plain; charset="utf-8"; format="flowed"
+Content-Transfer-Encoding: base64
 
-
---===============6540267619788751349==
-Content-Type: multipart/signed; micalg=pgp-sha384;
-	protocol="application/pgp-signature"; boundary="fw2ggjlsionxpe6b"
-Content-Disposition: inline
-
-
---fw2ggjlsionxpe6b
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Fri, Jul 05, 2024 at 04:31:34PM GMT, Thierry Reding wrote:
-> On Thu, Jul 04, 2024 at 02:24:49PM GMT, Maxime Ripard wrote:
-> > On Fri, Jun 28, 2024 at 04:42:35PM GMT, Thierry Reding wrote:
-> > > On Fri, Jun 28, 2024 at 03:08:46PM GMT, Maxime Ripard wrote:
-> > > > Hi,
-> > > >=20
-> > > > On Fri, Jun 28, 2024 at 01:29:17PM GMT, Thierry Reding wrote:
-> > > > > On Tue, May 21, 2024 at 02:06:19PM GMT, Daniel Vetter wrote:
-> > > > > > On Thu, May 16, 2024 at 09:51:35AM -0700, John Stultz wrote:
-> > > > > > > On Thu, May 16, 2024 at 3:56=E2=80=AFAM Daniel Vetter <daniel=
-@ffwll.ch> wrote:
-> > > > > > > > On Wed, May 15, 2024 at 11:42:58AM -0700, John Stultz wrote:
-> > > > > > > > > But it makes me a little nervous to add a new generic all=
-ocation flag
-> > > > > > > > > for a feature most hardware doesn't support (yet, at leas=
-t). So it's
-> > > > > > > > > hard to weigh how common the actual usage will be across =
-all the
-> > > > > > > > > heaps.
-> > > > > > > > >
-> > > > > > > > > I apologize as my worry is mostly born out of seeing vend=
-ors really
-> > > > > > > > > push opaque feature flags in their old ion heaps, so in p=
-roviding a
-> > > > > > > > > flags argument, it was mostly intended as an escape hatch=
- for
-> > > > > > > > > obviously common attributes. So having the first be somet=
-hing that
-> > > > > > > > > seems reasonable, but isn't actually that common makes me=
- fret some.
-> > > > > > > > >
-> > > > > > > > > So again, not an objection, just something for folks to s=
-tew on to
-> > > > > > > > > make sure this is really the right approach.
-> > > > > > > >
-> > > > > > > > Another good reason to go with full heap names instead of o=
-paque flags on
-> > > > > > > > existing heaps is that with the former we can use symlinks =
-in sysfs to
-> > > > > > > > specify heaps, with the latter we need a new idea. We haven=
-'t yet gotten
-> > > > > > > > around to implement this anywhere, but it's been in the dma=
--buf/heap todo
-> > > > > > > > since forever, and I like it as a design approach. So would=
- be a good idea
-> > > > > > > > to not toss it. With that display would have symlinks to cm=
-a-ecc and cma,
-> > > > > > > > and rendering maybe cma-ecc, shmem, cma heaps (in priority =
-order) for a
-> > > > > > > > SoC where the display needs contig memory for scanout.
-> > > > > > >=20
-> > > > > > > So indeed that is a good point to keep in mind, but I also th=
-ink it
-> > > > > > > might re-inforce the choice of having ECC as a flag here.
-> > > > > > >=20
-> > > > > > > Since my understanding of the sysfs symlinks to heaps idea is=
- about
-> > > > > > > being able to figure out a common heap from a collection of d=
-evices,
-> > > > > > > it's really about the ability for the driver to access the ty=
-pe of
-> > > > > > > memory. If ECC is just an attribute of the type of memory (as=
- in this
-> > > > > > > patch series), it being on or off won't necessarily affect
-> > > > > > > compatibility of the buffer with the device.  Similarly "unca=
-ched"
-> > > > > > > seems more of an attribute of memory type and not a type itse=
-lf.
-> > > > > > > Hardware that can access non-contiguous "system" buffers can =
-access
-> > > > > > > uncached system buffers.
-> > > > > >=20
-> > > > > > Yeah, but in graphics there's a wide band where "shit performan=
-ce" is
-> > > > > > defacto "not useable (as intended at least)".
-> > > > > >=20
-> > > > > > So if we limit the symlink idea to just making sure zero-copy a=
-ccess is
-> > > > > > possible, then we might not actually solve the real world probl=
-em we need
-> > > > > > to solve. And so the symlinks become somewhat useless, and we n=
-eed to
-> > > > > > somewhere encode which flags you need to use with each symlink.
-> > > > > >=20
-> > > > > > But I also see the argument that there's a bit a combinatorial =
-explosion
-> > > > > > possible. So I guess the question is where we want to handle it=
- ...
-> > > > >=20
-> > > > > Sorry for jumping into this discussion so late. But are we really
-> > > > > concerned about this combinatorial explosion in practice? It may =
-be
-> > > > > theoretically possible to create any combination of these, but do=
- we
-> > > > > expect more than a couple of heaps to exist in any given system?
-> > > >=20
-> > > > I don't worry too much about the number of heaps available in a giv=
-en
-> > > > system, it would indeed be fairly low.
-> > > >=20
-> > > > My concern is about the semantics combinatorial explosion. So far, =
-the
-> > > > name has carried what semantics we were supposed to get from the bu=
-ffer
-> > > > we allocate from that heap.
-> > > >=20
-> > > > The more variations and concepts we'll have, the more heap names we=
-'ll
-> > > > need, and with confusing names since we wouldn't be able to change =
-the
-> > > > names of the heaps we already have.
-> > >=20
-> > > What I was trying to say is that none of this matters if we make these
-> > > names opaque. If these names are contextual for the given system it
-> > > doesn't matter what the exact capabilities are. It only matters that
-> > > their purpose is known and that's what applications will be interested
-> > > in.
-> >=20
-> > If the names are opaque, and we don't publish what the exact
-> > capabilities are, how can an application figure out which heap to use in
-> > the first place?
->=20
-> This would need to be based on conventions. The idea is to standardize
-> on a set of names for specific, well-known use-cases.
-
-How can undocumented, unenforced, conventions can work in practice?
-
-> > > > > Would it perhaps make more sense to let a platform override the h=
-eap
-> > > > > name to make it more easily identifiable? Maybe this is a naive
-> > > > > assumption, but aren't userspace applications and drivers not pri=
-marily
-> > > > > interested in the "type" of heap rather than whatever specific fl=
-ags
-> > > > > have been set for it?
-> > > >=20
-> > > > I guess it depends on what you call the type of a heap. Where we
-> > > > allocate the memory from, sure, an application won't care about tha=
-t.
-> > > > How the buffer behaves on the other end is definitely something
-> > > > applications are going to be interested in though.
-> > >=20
-> > > Most of these heaps will be very specific, I would assume.
-> >=20
-> > We don't have any specific heap upstream at the moment, only generic
-> > ones.
->=20
-> But we're trying to add more specific ones, right?
->=20
-> > > For example a heap that is meant to be protected for protected video
-> > > decoding is both going to be created in such a way as to allow that
-> > > use-case (i.e. it doesn't make sense for it to be uncached, for
-> > > example) and it's also not going to be useful for any other use-case
-> > > (i.e. there's no reason to use that heap for GPU jobs or networking,
-> > > or whatever).
-> >=20
-> > Right. But also, libcamera has started to use dma-heaps to allocate
-> > dma-capable buffers and do software processing on it before sending it
-> > to some hardware controller.
-> >=20
-> > Caches are critical here, and getting a non-cacheable buffer would be
-> > a clear regression.
->=20
-> I understand that. My point is that maybe we shouldn't try to design a
-> complex mechanism that allows full discoverability of everything that a
-> heap supports or is capable of. Instead if the camera has specific
-> requirements, it could look for a heap named "camera". Or if it can
-> share a heap with other multimedia devices, maybe call the heap
-> "multimedia".
-
-That kind of vague categorization is pointless though. Some criteria are
-about hardwar (ie, can the device access it in the first place?), so is
-purely about a particular context and policy and will change from one
-application to the other.
-
-A camera app using an ISP will not care about caches. A software
-rendering library will. A compositor will not want ECC. A safety
-component probably will.
-
-All of them are "multimedia".
-
-We *need* to be able to differentiate policy from hardware requirements.
-
-> The idea is that heaps for these use-cases are quite specific, so you
-> would likely not find an arbitrary number of processes try to use the
-> same heap.
-
-Some of them are specific, some of them aren't.
-
-> > How can it know which heap to allocate from on a given platform?
-> >=20
-> > Similarly with the ECC support we started that discussion with. ECC will
-> > introduce a significant performance cost. How can a generic application,
-> > such as a compositor, will know which heap to allocate from without:
-> >=20
-> > a) Trying to bundle up a list of heaps for each platform it might or
-> >    might not run
-> >=20
-> > b) and handling the name difference between BSPs and mainline.
->=20
-> Obviously some standardization of heap names is a requirement here,
-> otherwise such a proposal does indeed not make sense.
->=20
-> > If some hardware-specific applications / middleware want to take a
-> > shortcut and use the name, that's fine. But we need to find a way for
-> > generic applications to discover which heap is best suited for their
-> > needs without the name.
->=20
-> You can still have fairly generic names for heaps. If you want protected
-> content, you could try to use a standard "video-protected" heap. If you
-> need ECC protected memory, maybe you want to allocate from a heap named
-> "safety", or whatever.
-
-And if I need cacheable, physically contiguous, "multimedia" buffers from
-ECC protected memory?
-
-> > > > And if we allow any platform to change a given heap name, then a ge=
-neric
-> > > > application won't be able to support that without some kind of
-> > > > platform-specific configuration.
-> > >=20
-> > > We could still standardize on common use-cases so that applications
-> > > would know what heaps to allocate from. But there's also no need to
-> > > arbitrarily restrict this. For example there could be cases that are
-> > > very specific to a particular platform and which just doesn't exist
-> > > anywhere else. Platform designers could then still use this mechanism=
- to
-> > > define that very particular heap and have a very specialized userspace
-> > > application use that heap for their purpose.
-> >=20
-> > We could just add a different capabitily flag to make sure those would
-> > get ignored.
->=20
-> Sure you can do all of this with a myriad of flags. But again, I'm
-> trying to argue that we may not need this additional complexity. In a
-> typical system, how many heaps do you encounter? You may need a generic
-> one and then perhaps a handful specific ones? Or do you need more?
-
-It's not a matter of the number of heaps, but what they provide.
-
-> > > > > For example, if an applications wants to use a protected buffer, =
-the
-> > > > > application doesn't (and shouldn't need to) care about whether th=
-e heap
-> > > > > for that buffer supports ECC or is backed by CMA. All it really n=
-eeds to
-> > > > > know is that it's the system's "protected" heap.
-> > > >=20
-> > > > I mean... "protected" very much means backed by CMA already, it's p=
-retty
-> > > > much the only thing we document, and we call it as such in Kconfig.
-> > >=20
-> > > Well, CMA is really just an implementation detail, right? It doesn't
-> > > make sense to advertise that to anything outside the kernel. Maybe it=
-'s
-> > > an interesting fact that buffers allocated from these heaps will be
-> > > physically contiguous?
-> >=20
-> > CMA itself might be an implementation detail, but it's still right there
-> > in the name on ARM.
->=20
-> That doesn't mean we can do something more useful going forward (and
-> perhaps symlink for backwards-compatibility if needed).
->=20
-> > And being able to get physically contiguous buffers is critical on
-> > platforms without an IOMMU.
->=20
-> Again, I'm not trying to dispute the necessity of contiguous buffers.
-> I'm trying to say that contextual names can be a viable alternative to
-> full discoverability. If you want contiguous buffers, go call the heap
-> "contiguous" and it's quite clear what it means.
->=20
-> You can even hide details such as IOMMU availability from userspace that
-> way. On a system where an IOMMU is present, you could for example go and
-> use IOMMU-backed memory in a "contiguous" heap, while on a system
-> without an IOMMU the memory for the "contiguous" heap could come from
-> CMA.
-
-I can see the benefits from that, and it would be quite nice indeed.
-However, it still only addresses the "hardware" part of the requirements
-(ie, is it contiguous, accessible, etc.). It doesn't address
-applications having different requirements when it comes to what kind of
-attributes they'd like/need to get from the buffer.
-
-If one application in the system wants contiguous (using your definition
-just above) buffers without caches, and the other wants to have
-contiguous cacheable buffers, if we're only using the name we'd need to
-instantiate two heaps, from the same allocator, for what's essentially a
-mapping attribute.
-
-It's more complex for the kernel, more code to maintain, and more
-complex for applications too because they need to know about what a
-given name means for that particular context.
-
-> > > In the majority of cases that's probably not even something that
-> > > matters because we get a DMA-BUF anyway and we can map that any way we
-> > > want.
-> > >
-> > > Irrespective of that, physically contigous buffers could be allocated=
- in
-> > > any number of ways, CMA is just a convenient implementation of one su=
-ch
-> > > allocator.
-> > >=20
-> > > > But yeah, I agree that being backed by CMA is probably not what an
-> > > > application cares about (and we even have might some discussions ab=
-out
-> > > > that), but if the ECC protection comes at a performance cost then it
-> > > > will very much care about it. Or if it comes with caches enabled or=
- not.
-> > >=20
-> > > True, no doubt about that. However, I'm saying there may be advantages
-> > > in hiding all of this from applications. Let's say we're trying to
-> > > implement video decoding. We can create a special "protected-video" h=
-eap
-> > > that is specifically designed to allocate encrypted/protected scanout
-> > > buffers from.
-> > >=20
-> > > When you design that system, you would most certainly not enable ECC
-> > > protection on that heap because it leads to bad performance. You would
-> > > also want to make sure that all of the buffers in that heap are cached
-> > > and whatever other optimizations your chip may provide.
-> > >=20
-> > > Your application doesn't have to care about this, though, because it =
-can
-> > > simply look for a heap named "protected-video" and allocate buffers f=
-rom
-> > > it.
-> >=20
-> > I mean, I disagree. Or rather, in an environment where you have a system
-> > architect, and the application is targeted for a particular system only,
-> > and where "protected-video" means whatever the team decided in general,
-> > yeah, that works.
-> >=20
-> > So, in a BSP or Android, that works fine.
-> >=20
-> > On a mainline based system, with generic stacks like libcamera, it just
-> > doesn't fly anymore.
->=20
-> I'm not sure I know of a system that isn't architected. Even very
-> "generic" devices have a set of functionality that the manufacturer
-> wanted the device to provide.
->
-> Aren't generic stacks not also build to provide a specific function?
-> Again, libcamera could try to use a "camera" heap, or maybe it would fit
-> into that "multimedia" category.
->=20
-> For truly generic systems you typically don't need any of this, right? A
-> generic system like a PC usually gets by with just system memory and
-> maybe video RAM for some specific cases.
-
-Why wouldn't we need this for a truly generic system?
-
-With ARM laptops around the corner, pretty much the same SoC can be used
-in a tablet, in a car, or in a "generic system like a PC".
-
-Maxime
-
---fw2ggjlsionxpe6b
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iJUEABMJAB0WIQTkHFbLp4ejekA/qfgnX84Zoj2+dgUCZo56FgAKCRAnX84Zoj2+
-dmSpAYDellby1P6TKjGV1hDts+ZmkuCOtz2Rn+wWU7sCBG0bFjzvNC7BxXKDclix
-+fnoexcBgPXf794/pWDIFzNFj8SSm+UUbZuq7Arrt/y3vDQWhJCTL+mQ5Jc9M1c9
-mpDiZTXeiw==
-=JvJR
------END PGP SIGNATURE-----
-
---fw2ggjlsionxpe6b--
-
---===============6540267619788751349==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
-
---===============6540267619788751349==--
+QW0gMTAuMDcuMjQgdW0gMTM6NTggc2NocmllYiBEYW5pZWwgVmV0dGVyOg0KPiBPbiBXZWQsIDEw
+IEp1bCAyMDI0IGF0IDEzOjM5LCBDaHJpc3RpYW4gS8O2bmlnIDxjaHJpc3RpYW4ua29lbmlnQGFt
+ZC5jb20+IHdyb3RlOg0KPj4gQW0gMTAuMDcuMjQgdW0gMTE6MzEgc2NocmllYiBEYW5pZWwgVmV0
+dGVyOg0KPj4+IFdlIGFscmVhZHkgdGVhY2ggbG9ja2RlcCB0aGF0IGRtYV9yZXN2IG5lc3RzIHdp
+dGhpbiBkcm1fbW9kZXNldF9sb2NrLA0KPj4+IGJ1dCB0aGVyZSdzIGEgbG90IG1vcmU6IEFsbCBk
+cm0ga21zIGlvY3RsIHJlbHkgb24gYmVpbmcgYWJsZSB0bw0KPj4+IHB1dC9nZXRfdXNlciB3aGls
+ZSBob2xkaW5nIG1vZGVzZXQgbG9ja3MsIHNvIHdlIHJlYWxseSBuZWVkIGENCj4+PiBtaWdodF9m
+YXVsdCBpbiB0aGVyZSB0b28gdG8gY29tcGxldGUgdGhlIHBpY3R1cmUuIEFkZCBpdC4NCj4+IE1o
+bSwgbG9ja2RlcCBzaG91bGQgYmUgYWJsZSB0byBkZWR1Y2UgdGhhdCB3aGVuIHRoZXJlIG1pZ2h0
+IGJlIGZhdWx0cw0KPj4gdW5kZXIgdGhlIGRtYV9yZXN2IGxvY2sgdGhlcmUgbWlnaHQgYWxzbyBi
+ZSBmYXVsdHMgdW5kZXIgdGhlDQo+PiBkcm1fbW9kZXNldF9sb2NrLg0KPiBZb3UncmUgbm90IGFs
+bG93ZWQgdG8gdGFrZSBhIGZhdWx0IHVuZGVyIGRtYV9yZXN2LCBiZWNhdXNlIGRyaXZlcnMNCj4g
+bWlnaHQgbmVlZCB0byB0YWtlIHRoYXQgbG9jayB0byBoYW5kbGUgZmF1bHRzLiBTbyB1bmZvcnR1
+bmF0ZWx5IGluIG91cg0KPiBjb21iaW5lZCBsb2NrZGVwIHByaW1pbmcsIHRoZXJlIHJlYWxseSBz
+ZWVtcyB0byBiZSBubyBjaGFpbiB5ZXQgdGhhdA0KPiB0ZWFjaGVzIGFib3V0IGZhdWx0cyBwb3Nz
+aWJseSBoYXBwZW5pbmcgd2hpbGUgaG9sZGluZw0KPiBkcm1fbW9kZXNldF9sb2NrLg0KDQpBaCwg
+b2YgY291cnNlISBZb3UgYXJlIHJpZ2h0LCBpdCB3YXMganVzdCB0aGUgb3RoZXIgd2F5IGFyb3Vu
+ZC4NCg0KVGhhbmtzLA0KQ2hyaXN0aWFuLg0KDQo+IC1TaW1hDQo+DQo+Pj4gTW90aXZhdGVkIGJ5
+IGEgc3l6Ym90IHJlcG9ydCB0aGF0IGJsZXcgdXAgb24gYmNhY2hlZnMgZG9pbmcgYW4NCj4+PiB1
+bmNvbmRpdGlvbmFsIGNvbnNvbGVfbG9jayB3YXkgZGVlcCBpbiB0aGUgbG9ja2luZyBoaWVyYXJj
+aHksIGFuZA0KPj4+IGxvY2tkZXAgb25seSBub3RpY2luZyB0aGUgZGVwZW5jeSBsb29wIGluIGEg
+ZHJtIGlvY3RsIGluc3RlYWQgb2YgbXVjaA0KPj4+IGVhcmxpZXIuIFRoaXMgYW5ub3RhdGlvbiB3
+aWxsIG1ha2Ugc3VyZSBzdWNoIGlzc3VlcyBoYXZlIGEgbXVjaCBoYXJkZXINCj4+PiB0aW1lIGVz
+Y2FwaW5nLg0KPj4+DQo+Pj4gUmVmZXJlbmNlczogaHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvZHJp
+LWRldmVsLzAwMDAwMDAwMDAwMDczZGI4YjA2MWNkNDM0OTZAZ29vZ2xlLmNvbS8NCj4+PiBTaWdu
+ZWQtb2ZmLWJ5OiBEYW5pZWwgVmV0dGVyIDxkYW5pZWwudmV0dGVyQGludGVsLmNvbT4NCj4+PiBD
+YzogTWFhcnRlbiBMYW5raG9yc3QgPG1hYXJ0ZW4ubGFua2hvcnN0QGxpbnV4LmludGVsLmNvbT4N
+Cj4+PiBDYzogTWF4aW1lIFJpcGFyZCA8bXJpcGFyZEBrZXJuZWwub3JnPg0KPj4+IENjOiBUaG9t
+YXMgWmltbWVybWFubiA8dHppbW1lcm1hbm5Ac3VzZS5kZT4NCj4+PiBDYzogU3VtaXQgU2Vtd2Fs
+IDxzdW1pdC5zZW13YWxAbGluYXJvLm9yZz4NCj4+PiBDYzogIkNocmlzdGlhbiBLw7ZuaWciIDxj
+aHJpc3RpYW4ua29lbmlnQGFtZC5jb20+DQo+Pj4gQ2M6IGxpbnV4LW1lZGlhQHZnZXIua2VybmVs
+Lm9yZw0KPj4+IENjOiBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcNCj4+IE9uIHRoZSBv
+dGhlciBoYW5kIHBvaW50aW5nIGl0IG91dCBleHBsaWNpdGx5IGRvZXNuJ3QgaHVydHMgdXMgYXQg
+YWxsLCBzbw0KPj4gUmV2aWV3ZWQtYnk6IENocmlzdGlhbiBLw7ZuaWcgPGNocmlzdGlhbi5rb2Vu
+aWdAYW1kLmNvbT4uDQo+Pg0KPj4gUmVnYXJkcywNCj4+IENocmlzdGlhbi4NCj4+DQo+Pj4gLS0t
+DQo+Pj4gICAgZHJpdmVycy9ncHUvZHJtL2RybV9tb2RlX2NvbmZpZy5jIHwgMiArKw0KPj4+ICAg
+IDEgZmlsZSBjaGFuZ2VkLCAyIGluc2VydGlvbnMoKykNCj4+Pg0KPj4+IGRpZmYgLS1naXQgYS9k
+cml2ZXJzL2dwdS9kcm0vZHJtX21vZGVfY29uZmlnLmMgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX21v
+ZGVfY29uZmlnLmMNCj4+PiBpbmRleCA1Njg5NzIyNTgyMjIuLjM3ZDJlMGE0ZWY0YiAxMDA2NDQN
+Cj4+PiAtLS0gYS9kcml2ZXJzL2dwdS9kcm0vZHJtX21vZGVfY29uZmlnLmMNCj4+PiArKysgYi9k
+cml2ZXJzL2dwdS9kcm0vZHJtX21vZGVfY29uZmlnLmMNCj4+PiBAQCAtNDU2LDYgKzQ1Niw4IEBA
+IGludCBkcm1tX21vZGVfY29uZmlnX2luaXQoc3RydWN0IGRybV9kZXZpY2UgKmRldikNCj4+PiAg
+ICAgICAgICAgICAgICBpZiAocmV0ID09IC1FREVBRExLKQ0KPj4+ICAgICAgICAgICAgICAgICAg
+ICAgICAgcmV0ID0gZHJtX21vZGVzZXRfYmFja29mZigmbW9kZXNldF9jdHgpOw0KPj4+DQo+Pj4g
+KyAgICAgICAgICAgICBtaWdodF9mYXVsdCgpOw0KPj4+ICsNCj4+PiAgICAgICAgICAgICAgICB3
+d19hY3F1aXJlX2luaXQoJnJlc3ZfY3R4LCAmcmVzZXJ2YXRpb25fd3dfY2xhc3MpOw0KPj4+ICAg
+ICAgICAgICAgICAgIHJldCA9IGRtYV9yZXN2X2xvY2soJnJlc3YsICZyZXN2X2N0eCk7DQo+Pj4g
+ICAgICAgICAgICAgICAgaWYgKHJldCA9PSAtRURFQURMSykNCj4NCg0KX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxp
+c3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQg
+YW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
