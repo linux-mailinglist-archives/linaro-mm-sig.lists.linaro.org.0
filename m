@@ -2,59 +2,58 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5795A92E86F
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jul 2024 14:43:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 22F0092E876
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jul 2024 14:44:35 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 43EBD4111A
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jul 2024 12:43:32 +0000 (UTC)
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
-	by lists.linaro.org (Postfix) with ESMTPS id D8F4840BEB
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jul 2024 12:43:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 24F4E43B8D
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 11 Jul 2024 12:44:34 +0000 (UTC)
+Received: from mail-lj1-f169.google.com (mail-lj1-f169.google.com [209.85.208.169])
+	by lists.linaro.org (Postfix) with ESMTPS id E553B40BEB
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jul 2024 12:44:30 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=kV6bviKk;
-	spf=pass (lists.linaro.org: domain of thierry.reding@gmail.com designates 209.85.128.50 as permitted sender) smtp.mailfrom=thierry.reding@gmail.com;
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=gpGSt858;
+	spf=pass (lists.linaro.org: domain of thierry.reding@gmail.com designates 209.85.208.169 as permitted sender) smtp.mailfrom=thierry.reding@gmail.com;
 	dmarc=pass (policy=none) header.from=gmail.com
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-426685732dcso5528665e9.1
-        for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jul 2024 05:43:28 -0700 (PDT)
+Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-2eea8ea8bb0so14443631fa.1
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 11 Jul 2024 05:44:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1720701808; x=1721306608; darn=lists.linaro.org;
+        d=gmail.com; s=20230601; t=1720701870; x=1721306670; darn=lists.linaro.org;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=oH+Is4J632l8DAcipGnxrI6oeouA8yccS+XHcKkKcME=;
-        b=kV6bviKkU8CcOV1fBDSUT1PZpMLBuVHoK79WG8lpG5MWOFWLCAenvTT0bSBMMNC6I5
-         Eb5Y/vv0mWxC8tKKIJlPf6EWq1sPemjoKVzLAlmWJ3BLqJ88Wh2zDdbUldhswihzENXi
-         RIRGpwl6zQq5AfYjhf6S2CAprl20IwPm3Fi7SwnrrAl7vaAUs9GP296Xjq8HbVR9suNc
-         JhNluk2b+hG6wnjkmP5uiUtluJvin1hayidnNRzuP1EmiLoaRILkdBoAidNuq6WXLRBy
-         8sdmhj/SoonM/ul4nB4BaXf8wV4zAMZbcDQ4aByiSz0BXYRIxT8zwddqoEdD1IF1Oz6L
-         ZhWw==
+        bh=UHIQSML98l0ZiteQclaVKB3TmNkTxPKnEIkuCpbbQdk=;
+        b=gpGSt8581cJcfC4NWhvjuP4lgmfN2gIDwu0uy0+KUEG54w49Va2urrkq5XOpwqujFe
+         7DMOa/roLDDhdEZT85H1GAJ93WmWUDMYgyO2U+bPtX4qyYivsKQvLixIo+W1lTuMwYLW
+         v5eM9TySfRBLAH6+I9MXQMrIUYQFtYD9wDG/cVbdnMG8SMQarONKvT0+m01KQu3uj1sm
+         4fkWtaYDzcQYqExFA/Z7GAAKq7cSFC04hF6Vl48l5PsnxPwAcYtBLKyh9lP641Diegi1
+         Kzot3P2GEx/cU7Ocrr7JervjI0AJvCVBR8QI1OqPR7FC1cUCLIPzM392h1GDMRN3wDkS
+         yKwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1720701808; x=1721306608;
+        d=1e100.net; s=20230601; t=1720701870; x=1721306670;
         h=in-reply-to:content-disposition:mime-version:references:message-id
          :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to;
-        bh=oH+Is4J632l8DAcipGnxrI6oeouA8yccS+XHcKkKcME=;
-        b=wDeekcjyxLYUgqkRSVMci0oOtNe2vHOBNscTIKQDSun8D6Oytw1jzNxDON7kGUFFNG
-         S5KUISgOUH8QA3C5GBZDlmq54I60OeSl4QJeNWfE14ov8+0YRuAZ4RrBRC/NxUm/CHfk
-         i7RKHE2E8H+Q5pnAw/q//FyDi1us/22GR94RIVv/ZWbg5Oaq9lmhgneipLv++8BiE+fU
-         v7QNFEWMOjoSTsARf2DDMAg1XcaACzM3kZfp17nfSDi6mlIcxP48ItIDS/3sxm7xkHVv
-         yjZKbhdGRS5AhvYOc34Nd86LKbFee1wwxjH769DOZp9VnU0Oy8oQoIuHqZyIzoEJXQzT
-         5bKw==
-X-Forwarded-Encrypted: i=1; AJvYcCUUmKCGeJrKZEv41F8tnEFepCtHfX1JDwcjwFzZLNiHcgAaImj2S5kM7uFJkKwu5WShwXK0da34/h3Bufs6PEo/4msTMPO5wv8g+GiFpAQ=
-X-Gm-Message-State: AOJu0YyZR0PTCdVfqoAz/KUHZpzRETnvrtyQEvfhV7G5D4fDO54eTbXn
-	+6iDCCef8xK+In8DmWZ2f8bhOknZ5QxTaZ3T644VPlqDRr6dliwgIn5l6Q==
-X-Google-Smtp-Source: AGHT+IGVHmfSvJ/f4h46KSnX/FEag8vL58w1gWsMPGuW0wcLC1jnAqHuo/wMgdHmDdEsTbbuBRLNuw==
-X-Received: by 2002:a05:600c:2d06:b0:426:5e9f:a861 with SMTP id 5b1f17b1804b1-42670904d22mr48691435e9.41.1720701807053;
-        Thu, 11 Jul 2024 05:43:27 -0700 (PDT)
+        bh=UHIQSML98l0ZiteQclaVKB3TmNkTxPKnEIkuCpbbQdk=;
+        b=t5DaHU5kP39jy1eOQ5YrsTKiLXccs/4nOTfidED70hLOamBU1XhPOA5CBRO9BcDI0Z
+         C9k5v9a2on+I7D7m5jcR7ZII6u9wxnGF+7Kd761byLBrnOM84QqE4s17jHH20tsQEuoG
+         4H/P/6SB3iqzrOUg4XPplvRhfjibAbJeT9pzXn6cFrk+6LE3FJROeDNUC1X9kDbSTQLf
+         chmz2Ro/U8QRRZkFQlEd0MNam06LmBXIlvmbTuLgDDj3DGjJClIEqhC/1v8bqHKlxkDm
+         B76aCKED/W9jIHr604nVbTKBimanGO/V4KUxeVccSkQq1MMswkAjFJ1ju3h44weiRxT1
+         nbqw==
+X-Forwarded-Encrypted: i=1; AJvYcCURY0nLDK42k70cpEoOJfs8mlSm+G9ga9U8W/jKfjzPNpjAHa7uAp+DUCHstSDKuRxHqlIaxctNsx/2tPJkC6p+CvKppGeGn2Q0pFCHKy8=
+X-Gm-Message-State: AOJu0YylaCSr2xAosepPwfE1JBpPonROvOy4deciHIJsN46OWiJEAmVr
+	g5d85rtifyV3vVVHdVt6Ejf1OS1BIq75owG/WO/DrSOBvshpAB3J
+X-Google-Smtp-Source: AGHT+IHTdhWqzl6DXPtBTLulWR0yFzbtO2Y5fZehXnVZt9I/Jfq2/5EIqrqjJhw7ik9yJkJWbpwWbQ==
+X-Received: by 2002:a2e:a316:0:b0:2ec:5945:62e9 with SMTP id 38308e7fff4ca-2eeb316b47bmr64990731fa.32.1720701868870;
+        Thu, 11 Jul 2024 05:44:28 -0700 (PDT)
 Received: from orome (p200300e41f162000f22f74fffe1f3a53.dip0.t-ipconnect.de. [2003:e4:1f16:2000:f22f:74ff:fe1f:3a53])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-426e7638d1dsm98003315e9.25.2024.07.11.05.43.26
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4266f736304sm115556375e9.34.2024.07.11.05.44.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 11 Jul 2024 05:43:26 -0700 (PDT)
-Date: Thu, 11 Jul 2024 14:43:24 +0200
+        Thu, 11 Jul 2024 05:44:27 -0700 (PDT)
+Date: Thu, 11 Jul 2024 14:44:25 +0200
 From: Thierry Reding <thierry.reding@gmail.com>
-To: Maxime Ripard <mripard@kernel.org>
-Message-ID: <j7jp5jxpjn6h3flq6akkrvlelo2t4srsoogm2kvwnrhugpunhu@2rn27sbrlvfn>
-References: <CANDhNCoOKwtpstFE2VDcUvzdXUWkZ-Zx+fz6xrdPWTyciVXMXQ@mail.gmail.com>
- <ZkXmWwmdPsqAo7VU@phenom.ffwll.local>
+To: Christian =?utf-8?B?S8O2bmln?= <ckoenig.leichtzumerken@gmail.com>
+Message-ID: <dzfacxmcmru45ys7ef6gkxdwp5s5vekdrblnc5rhlllhtltsyt@zcs4xto6mfw7>
+References: <ZkXmWwmdPsqAo7VU@phenom.ffwll.local>
  <CANDhNCo5hSC-sLwdkBi3e-Ja-MzdqcGGbn-4G3XNYwCzZUwscw@mail.gmail.com>
  <ZkyOOwpM57HIiO3v@phenom.ffwll.local>
  <qy7aczeu6kumv5utemoevi7omp5ryq55zmgzxh5hrz5orf2osp@wypg66awof4n>
@@ -62,499 +61,304 @@ References: <CANDhNCoOKwtpstFE2VDcUvzdXUWkZ-Zx+fz6xrdPWTyciVXMXQ@mail.gmail.com>
  <3e37rhrcqogix5obsu2gq7jar7bcoamx4bbd376az5z3zdkwvm@jstirwdl5efm>
  <20240704-therapeutic-maroon-coucal-f61a63@houat>
  <wapv4gl2se34tq3isycb7bui5xi3x6kxjqtyz24qhjipnkbuqu@sv4w2crksuq5>
- <20240710-cocky-lemon-seriema-86cccf@houat>
+ <ZogSxHFPt8SpOa0w@phenom.ffwll.local>
+ <41859b82-fe75-451a-9e13-fec254bdaad5@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20240710-cocky-lemon-seriema-86cccf@houat>
-X-Rspamd-Queue-Id: D8F4840BEB
-X-Spamd-Bar: -----
-X-Spamd-Result: default: False [-5.60 / 15.00];
+In-Reply-To: <41859b82-fe75-451a-9e13-fec254bdaad5@gmail.com>
+X-Rspamd-Queue-Id: E553B40BEB
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.10 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
 	MID_RHS_NOT_FQDN(0.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	MIME_GOOD(-0.20)[multipart/signed,text/plain];
-	TO_DN_SOME(0.00)[];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
 	RCVD_TLS_LAST(0.00)[];
-	TAGGED_FROM(0.00)[];
-	ARC_NA(0.00)[];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	MIME_TRACE(0.00)[0:+,1:+,2:~];
-	RCPT_COUNT_TWELVE(0.00)[15];
-	FROM_HAS_DN(0.00)[];
-	MISSING_XM_UA(0.00)[];
 	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	TAGGED_FROM(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	FREEMAIL_TO(0.00)[gmail.com];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	TO_DN_SOME(0.00)[];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	ARC_NA(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DNSWL_BLOCKED(0.00)[209.85.128.50:from];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_EQ_ENVFROM(0.00)[];
-	DKIM_TRACE(0.00)[gmail.com:+];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.50:from];
+	RCVD_IN_DNSWL_NONE(0.00)[209.85.208.169:from];
 	NEURAL_HAM(-0.00)[-1.000];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.169:from];
+	MISSING_XM_UA(0.00)[];
+	TAGGED_RCPT(0.00)[];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	DWL_DNSWL_NONE(0.00)[gmail.com:dkim]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 2Y76W2DSZQVLW6L54XAHHPWX4SDVELGW
-X-Message-ID-Hash: 2Y76W2DSZQVLW6L54XAHHPWX4SDVELGW
+Message-ID-Hash: WUML6ZQJPTS3JYTG6JLCQGGQRBAIWT54
+X-Message-ID-Hash: WUML6ZQJPTS3JYTG6JLCQGGQRBAIWT54
 X-MailFrom: thierry.reding@gmail.com
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: John Stultz <jstultz@google.com>, Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: Maxime Ripard <mripard@kernel.org>, John Stultz <jstultz@google.com>, Rob Herring <robh@kernel.org>, Saravana Kannan <saravanak@google.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
 Subject: [Linaro-mm-sig] Re: [PATCH 0/8] dma-buf: heaps: Support carved-out heaps and ECC related-flags
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2Y76W2DSZQVLW6L54XAHHPWX4SDVELGW/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/WUML6ZQJPTS3JYTG6JLCQGGQRBAIWT54/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: multipart/mixed; boundary="===============6619039405123933312=="
+Content-Type: multipart/mixed; boundary="===============3520843155372879475=="
 
 
---===============6619039405123933312==
+--===============3520843155372879475==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="5cex3pakiksqmgg7"
+	protocol="application/pgp-signature"; boundary="td73epytrbw3q5zt"
 Content-Disposition: inline
 
 
---5cex3pakiksqmgg7
+--td73epytrbw3q5zt
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jul 10, 2024 at 02:10:09PM GMT, Maxime Ripard wrote:
-> On Fri, Jul 05, 2024 at 04:31:34PM GMT, Thierry Reding wrote:
-> > On Thu, Jul 04, 2024 at 02:24:49PM GMT, Maxime Ripard wrote:
-> > > On Fri, Jun 28, 2024 at 04:42:35PM GMT, Thierry Reding wrote:
-> > > > On Fri, Jun 28, 2024 at 03:08:46PM GMT, Maxime Ripard wrote:
-> > > > > Hi,
-> > > > >=20
-> > > > > On Fri, Jun 28, 2024 at 01:29:17PM GMT, Thierry Reding wrote:
-> > > > > > On Tue, May 21, 2024 at 02:06:19PM GMT, Daniel Vetter wrote:
-> > > > > > > On Thu, May 16, 2024 at 09:51:35AM -0700, John Stultz wrote:
-> > > > > > > > On Thu, May 16, 2024 at 3:56=E2=80=AFAM Daniel Vetter <dani=
-el@ffwll.ch> wrote:
-> > > > > > > > > On Wed, May 15, 2024 at 11:42:58AM -0700, John Stultz wro=
-te:
-> > > > > > > > > > But it makes me a little nervous to add a new generic a=
-llocation flag
-> > > > > > > > > > for a feature most hardware doesn't support (yet, at le=
-ast). So it's
-> > > > > > > > > > hard to weigh how common the actual usage will be acros=
-s all the
-> > > > > > > > > > heaps.
-> > > > > > > > > >
-> > > > > > > > > > I apologize as my worry is mostly born out of seeing ve=
-ndors really
-> > > > > > > > > > push opaque feature flags in their old ion heaps, so in=
- providing a
-> > > > > > > > > > flags argument, it was mostly intended as an escape hat=
-ch for
-> > > > > > > > > > obviously common attributes. So having the first be som=
-ething that
-> > > > > > > > > > seems reasonable, but isn't actually that common makes =
-me fret some.
-> > > > > > > > > >
-> > > > > > > > > > So again, not an objection, just something for folks to=
- stew on to
-> > > > > > > > > > make sure this is really the right approach.
-> > > > > > > > >
-> > > > > > > > > Another good reason to go with full heap names instead of=
- opaque flags on
-> > > > > > > > > existing heaps is that with the former we can use symlink=
-s in sysfs to
-> > > > > > > > > specify heaps, with the latter we need a new idea. We hav=
-en't yet gotten
-> > > > > > > > > around to implement this anywhere, but it's been in the d=
-ma-buf/heap todo
-> > > > > > > > > since forever, and I like it as a design approach. So wou=
-ld be a good idea
-> > > > > > > > > to not toss it. With that display would have symlinks to =
-cma-ecc and cma,
-> > > > > > > > > and rendering maybe cma-ecc, shmem, cma heaps (in priorit=
-y order) for a
-> > > > > > > > > SoC where the display needs contig memory for scanout.
-> > > > > > > >=20
-> > > > > > > > So indeed that is a good point to keep in mind, but I also =
-think it
-> > > > > > > > might re-inforce the choice of having ECC as a flag here.
-> > > > > > > >=20
-> > > > > > > > Since my understanding of the sysfs symlinks to heaps idea =
-is about
-> > > > > > > > being able to figure out a common heap from a collection of=
- devices,
-> > > > > > > > it's really about the ability for the driver to access the =
-type of
-> > > > > > > > memory. If ECC is just an attribute of the type of memory (=
-as in this
-> > > > > > > > patch series), it being on or off won't necessarily affect
-> > > > > > > > compatibility of the buffer with the device.  Similarly "un=
-cached"
-> > > > > > > > seems more of an attribute of memory type and not a type it=
-self.
-> > > > > > > > Hardware that can access non-contiguous "system" buffers ca=
-n access
-> > > > > > > > uncached system buffers.
-> > > > > > >=20
-> > > > > > > Yeah, but in graphics there's a wide band where "shit perform=
-ance" is
-> > > > > > > defacto "not useable (as intended at least)".
-> > > > > > >=20
-> > > > > > > So if we limit the symlink idea to just making sure zero-copy=
- access is
-> > > > > > > possible, then we might not actually solve the real world pro=
-blem we need
-> > > > > > > to solve. And so the symlinks become somewhat useless, and we=
- need to
-> > > > > > > somewhere encode which flags you need to use with each symlin=
-k.
-> > > > > > >=20
-> > > > > > > But I also see the argument that there's a bit a combinatoria=
-l explosion
-> > > > > > > possible. So I guess the question is where we want to handle =
-it ...
+On Mon, Jul 08, 2024 at 09:14:14AM GMT, Christian K=C3=B6nig wrote:
+> Am 05.07.24 um 17:35 schrieb Daniel Vetter:
+> > Just figured I'll jump in on one detail here.
+> >=20
+> > On Fri, Jul 05, 2024 at 04:31:34PM +0200, Thierry Reding wrote:
+> > > On Thu, Jul 04, 2024 at 02:24:49PM GMT, Maxime Ripard wrote:
+> > > > On Fri, Jun 28, 2024 at 04:42:35PM GMT, Thierry Reding wrote:
+> > > > > On Fri, Jun 28, 2024 at 03:08:46PM GMT, Maxime Ripard wrote:
+> > > > > > Hi,
 > > > > > >=20
-> > > > > > Sorry for jumping into this discussion so late. But are we real=
-ly
-> > > > > > concerned about this combinatorial explosion in practice? It ma=
-y be
-> > > > > > theoretically possible to create any combination of these, but =
-do we
-> > > > > > expect more than a couple of heaps to exist in any given system?
-> > > > >=20
-> > > > > I don't worry too much about the number of heaps available in a g=
-iven
-> > > > > system, it would indeed be fairly low.
-> > > > >=20
-> > > > > My concern is about the semantics combinatorial explosion. So far=
-, the
-> > > > > name has carried what semantics we were supposed to get from the =
-buffer
-> > > > > we allocate from that heap.
-> > > > >=20
-> > > > > The more variations and concepts we'll have, the more heap names =
-we'll
-> > > > > need, and with confusing names since we wouldn't be able to chang=
-e the
-> > > > > names of the heaps we already have.
-> > > >=20
-> > > > What I was trying to say is that none of this matters if we make th=
-ese
-> > > > names opaque. If these names are contextual for the given system it
-> > > > doesn't matter what the exact capabilities are. It only matters that
-> > > > their purpose is known and that's what applications will be interes=
-ted
-> > > > in.
+> > > > > > On Fri, Jun 28, 2024 at 01:29:17PM GMT, Thierry Reding wrote:
+> > > > > > > On Tue, May 21, 2024 at 02:06:19PM GMT, Daniel Vetter wrote:
+> > > > > > > > On Thu, May 16, 2024 at 09:51:35AM -0700, John Stultz wrote:
+> > > > > > > > > On Thu, May 16, 2024 at 3:56=E2=80=AFAM Daniel Vetter <da=
+niel@ffwll.ch> wrote:
+> > > > > > > > > > On Wed, May 15, 2024 at 11:42:58AM -0700, John Stultz w=
+rote:
+> > > > > > > > > > > But it makes me a little nervous to add a new generic=
+ allocation flag
+> > > > > > > > > > > for a feature most hardware doesn't support (yet, at =
+least). So it's
+> > > > > > > > > > > hard to weigh how common the actual usage will be acr=
+oss all the
+> > > > > > > > > > > heaps.
+> > > > > > > > > > >=20
+> > > > > > > > > > > I apologize as my worry is mostly born out of seeing =
+vendors really
+> > > > > > > > > > > push opaque feature flags in their old ion heaps, so =
+in providing a
+> > > > > > > > > > > flags argument, it was mostly intended as an escape h=
+atch for
+> > > > > > > > > > > obviously common attributes. So having the first be s=
+omething that
+> > > > > > > > > > > seems reasonable, but isn't actually that common make=
+s me fret some.
+> > > > > > > > > > >=20
+> > > > > > > > > > > So again, not an objection, just something for folks =
+to stew on to
+> > > > > > > > > > > make sure this is really the right approach.
+> > > > > > > > > > Another good reason to go with full heap names instead =
+of opaque flags on
+> > > > > > > > > > existing heaps is that with the former we can use symli=
+nks in sysfs to
+> > > > > > > > > > specify heaps, with the latter we need a new idea. We h=
+aven't yet gotten
+> > > > > > > > > > around to implement this anywhere, but it's been in the=
+ dma-buf/heap todo
+> > > > > > > > > > since forever, and I like it as a design approach. So w=
+ould be a good idea
+> > > > > > > > > > to not toss it. With that display would have symlinks t=
+o cma-ecc and cma,
+> > > > > > > > > > and rendering maybe cma-ecc, shmem, cma heaps (in prior=
+ity order) for a
+> > > > > > > > > > SoC where the display needs contig memory for scanout.
+> > > > > > > > > So indeed that is a good point to keep in mind, but I als=
+o think it
+> > > > > > > > > might re-inforce the choice of having ECC as a flag here.
+> > > > > > > > >=20
+> > > > > > > > > Since my understanding of the sysfs symlinks to heaps ide=
+a is about
+> > > > > > > > > being able to figure out a common heap from a collection =
+of devices,
+> > > > > > > > > it's really about the ability for the driver to access th=
+e type of
+> > > > > > > > > memory. If ECC is just an attribute of the type of memory=
+ (as in this
+> > > > > > > > > patch series), it being on or off won't necessarily affect
+> > > > > > > > > compatibility of the buffer with the device.  Similarly "=
+uncached"
+> > > > > > > > > seems more of an attribute of memory type and not a type =
+itself.
+> > > > > > > > > Hardware that can access non-contiguous "system" buffers =
+can access
+> > > > > > > > > uncached system buffers.
+> > > > > > > > Yeah, but in graphics there's a wide band where "shit perfo=
+rmance" is
+> > > > > > > > defacto "not useable (as intended at least)".
+> > > > > > > >=20
+> > > > > > > > So if we limit the symlink idea to just making sure zero-co=
+py access is
+> > > > > > > > possible, then we might not actually solve the real world p=
+roblem we need
+> > > > > > > > to solve. And so the symlinks become somewhat useless, and =
+we need to
+> > > > > > > > somewhere encode which flags you need to use with each syml=
+ink.
+> > > > > > > >=20
+> > > > > > > > But I also see the argument that there's a bit a combinator=
+ial explosion
+> > > > > > > > possible. So I guess the question is where we want to handl=
+e it ...
+> > > > > > > Sorry for jumping into this discussion so late. But are we re=
+ally
+> > > > > > > concerned about this combinatorial explosion in practice? It =
+may be
+> > > > > > > theoretically possible to create any combination of these, bu=
+t do we
+> > > > > > > expect more than a couple of heaps to exist in any given syst=
+em?
+> > > > > > I don't worry too much about the number of heaps available in a=
+ given
+> > > > > > system, it would indeed be fairly low.
+> > > > > >=20
+> > > > > > My concern is about the semantics combinatorial explosion. So f=
+ar, the
+> > > > > > name has carried what semantics we were supposed to get from th=
+e buffer
+> > > > > > we allocate from that heap.
+> > > > > >=20
+> > > > > > The more variations and concepts we'll have, the more heap name=
+s we'll
+> > > > > > need, and with confusing names since we wouldn't be able to cha=
+nge the
+> > > > > > names of the heaps we already have.
+> > > > > What I was trying to say is that none of this matters if we make =
+these
+> > > > > names opaque. If these names are contextual for the given system =
+it
+> > > > > doesn't matter what the exact capabilities are. It only matters t=
+hat
+> > > > > their purpose is known and that's what applications will be inter=
+ested
+> > > > > in.
+> > > > If the names are opaque, and we don't publish what the exact
+> > > > capabilities are, how can an application figure out which heap to u=
+se in
+> > > > the first place?
+> > > This would need to be based on conventions. The idea is to standardize
+> > > on a set of names for specific, well-known use-cases.
 > > >=20
-> > > If the names are opaque, and we don't publish what the exact
-> > > capabilities are, how can an application figure out which heap to use=
- in
-> > > the first place?
-> >=20
-> > This would need to be based on conventions. The idea is to standardize
-> > on a set of names for specific, well-known use-cases.
->=20
-> How can undocumented, unenforced, conventions can work in practice?
->=20
-> > > > > > Would it perhaps make more sense to let a platform override the=
- heap
-> > > > > > name to make it more easily identifiable? Maybe this is a naive
-> > > > > > assumption, but aren't userspace applications and drivers not p=
-rimarily
-> > > > > > interested in the "type" of heap rather than whatever specific =
-flags
-> > > > > > have been set for it?
-> > > > >=20
-> > > > > I guess it depends on what you call the type of a heap. Where we
-> > > > > allocate the memory from, sure, an application won't care about t=
-hat.
-> > > > > How the buffer behaves on the other end is definitely something
-> > > > > applications are going to be interested in though.
-> > > >=20
-> > > > Most of these heaps will be very specific, I would assume.
+> > > > > > > Would it perhaps make more sense to let a platform override t=
+he heap
+> > > > > > > name to make it more easily identifiable? Maybe this is a nai=
+ve
+> > > > > > > assumption, but aren't userspace applications and drivers not=
+ primarily
+> > > > > > > interested in the "type" of heap rather than whatever specifi=
+c flags
+> > > > > > > have been set for it?
+> > > > > > I guess it depends on what you call the type of a heap. Where we
+> > > > > > allocate the memory from, sure, an application won't care about=
+ that.
+> > > > > > How the buffer behaves on the other end is definitely something
+> > > > > > applications are going to be interested in though.
+> > > > > Most of these heaps will be very specific, I would assume.
+> > > > We don't have any specific heap upstream at the moment, only generic
+> > > > ones.
+> > > But we're trying to add more specific ones, right?
 > > >=20
-> > > We don't have any specific heap upstream at the moment, only generic
-> > > ones.
-> >=20
-> > But we're trying to add more specific ones, right?
-> >=20
-> > > > For example a heap that is meant to be protected for protected video
-> > > > decoding is both going to be created in such a way as to allow that
-> > > > use-case (i.e. it doesn't make sense for it to be uncached, for
-> > > > example) and it's also not going to be useful for any other use-case
-> > > > (i.e. there's no reason to use that heap for GPU jobs or networking,
-> > > > or whatever).
-> > >=20
-> > > Right. But also, libcamera has started to use dma-heaps to allocate
-> > > dma-capable buffers and do software processing on it before sending it
-> > > to some hardware controller.
-> > >=20
-> > > Caches are critical here, and getting a non-cacheable buffer would be
-> > > a clear regression.
-> >=20
-> > I understand that. My point is that maybe we shouldn't try to design a
-> > complex mechanism that allows full discoverability of everything that a
-> > heap supports or is capable of. Instead if the camera has specific
-> > requirements, it could look for a heap named "camera". Or if it can
-> > share a heap with other multimedia devices, maybe call the heap
-> > "multimedia".
->=20
-> That kind of vague categorization is pointless though. Some criteria are
-> about hardwar (ie, can the device access it in the first place?), so is
-> purely about a particular context and policy and will change from one
-> application to the other.
->=20
-> A camera app using an ISP will not care about caches. A software
-> rendering library will. A compositor will not want ECC. A safety
-> component probably will.
->=20
-> All of them are "multimedia".
->=20
-> We *need* to be able to differentiate policy from hardware requirements.
->=20
-> > The idea is that heaps for these use-cases are quite specific, so you
-> > would likely not find an arbitrary number of processes try to use the
-> > same heap.
->=20
-> Some of them are specific, some of them aren't.
->=20
-> > > How can it know which heap to allocate from on a given platform?
-> > >=20
-> > > Similarly with the ECC support we started that discussion with. ECC w=
-ill
-> > > introduce a significant performance cost. How can a generic applicati=
-on,
-> > > such as a compositor, will know which heap to allocate from without:
-> > >=20
-> > > a) Trying to bundle up a list of heaps for each platform it might or
-> > >    might not run
-> > >=20
-> > > b) and handling the name difference between BSPs and mainline.
-> >=20
-> > Obviously some standardization of heap names is a requirement here,
-> > otherwise such a proposal does indeed not make sense.
-> >=20
-> > > If some hardware-specific applications / middleware want to take a
-> > > shortcut and use the name, that's fine. But we need to find a way for
-> > > generic applications to discover which heap is best suited for their
-> > > needs without the name.
-> >=20
-> > You can still have fairly generic names for heaps. If you want protected
-> > content, you could try to use a standard "video-protected" heap. If you
-> > need ECC protected memory, maybe you want to allocate from a heap named
-> > "safety", or whatever.
->=20
-> And if I need cacheable, physically contiguous, "multimedia" buffers from
-> ECC protected memory?
->=20
-> > > > > And if we allow any platform to change a given heap name, then a =
-generic
-> > > > > application won't be able to support that without some kind of
-> > > > > platform-specific configuration.
-> > > >=20
-> > > > We could still standardize on common use-cases so that applications
-> > > > would know what heaps to allocate from. But there's also no need to
-> > > > arbitrarily restrict this. For example there could be cases that are
-> > > > very specific to a particular platform and which just doesn't exist
-> > > > anywhere else. Platform designers could then still use this mechani=
-sm to
-> > > > define that very particular heap and have a very specialized usersp=
-ace
-> > > > application use that heap for their purpose.
-> > >=20
-> > > We could just add a different capabitily flag to make sure those would
-> > > get ignored.
-> >=20
-> > Sure you can do all of this with a myriad of flags. But again, I'm
-> > trying to argue that we may not need this additional complexity. In a
-> > typical system, how many heaps do you encounter? You may need a generic
-> > one and then perhaps a handful specific ones? Or do you need more?
->=20
-> It's not a matter of the number of heaps, but what they provide.
->=20
-> > > > > > For example, if an applications wants to use a protected buffer=
-, the
-> > > > > > application doesn't (and shouldn't need to) care about whether =
-the heap
-> > > > > > for that buffer supports ECC or is backed by CMA. All it really=
- needs to
-> > > > > > know is that it's the system's "protected" heap.
-> > > > >=20
-> > > > > I mean... "protected" very much means backed by CMA already, it's=
- pretty
-> > > > > much the only thing we document, and we call it as such in Kconfi=
-g.
-> > > >=20
-> > > > Well, CMA is really just an implementation detail, right? It doesn't
-> > > > make sense to advertise that to anything outside the kernel. Maybe =
-it's
-> > > > an interesting fact that buffers allocated from these heaps will be
-> > > > physically contiguous?
-> > >=20
-> > > CMA itself might be an implementation detail, but it's still right th=
-ere
-> > > in the name on ARM.
-> >=20
-> > That doesn't mean we can do something more useful going forward (and
-> > perhaps symlink for backwards-compatibility if needed).
-> >=20
-> > > And being able to get physically contiguous buffers is critical on
-> > > platforms without an IOMMU.
-> >=20
-> > Again, I'm not trying to dispute the necessity of contiguous buffers.
-> > I'm trying to say that contextual names can be a viable alternative to
-> > full discoverability. If you want contiguous buffers, go call the heap
-> > "contiguous" and it's quite clear what it means.
-> >=20
-> > You can even hide details such as IOMMU availability from userspace that
-> > way. On a system where an IOMMU is present, you could for example go and
-> > use IOMMU-backed memory in a "contiguous" heap, while on a system
-> > without an IOMMU the memory for the "contiguous" heap could come from
-> > CMA.
->=20
-> I can see the benefits from that, and it would be quite nice indeed.
-> However, it still only addresses the "hardware" part of the requirements
-> (ie, is it contiguous, accessible, etc.). It doesn't address
-> applications having different requirements when it comes to what kind of
-> attributes they'd like/need to get from the buffer.
->=20
-> If one application in the system wants contiguous (using your definition
-> just above) buffers without caches, and the other wants to have
-> contiguous cacheable buffers, if we're only using the name we'd need to
-> instantiate two heaps, from the same allocator, for what's essentially a
-> mapping attribute.
->=20
-> It's more complex for the kernel, more code to maintain, and more
-> complex for applications too because they need to know about what a
-> given name means for that particular context.
->=20
-> > > > In the majority of cases that's probably not even something that
-> > > > matters because we get a DMA-BUF anyway and we can map that any way=
- we
-> > > > want.
-> > > >
-> > > > Irrespective of that, physically contigous buffers could be allocat=
-ed in
-> > > > any number of ways, CMA is just a convenient implementation of one =
-such
-> > > > allocator.
-> > > >=20
-> > > > > But yeah, I agree that being backed by CMA is probably not what an
-> > > > > application cares about (and we even have might some discussions =
-about
-> > > > > that), but if the ECC protection comes at a performance cost then=
+> > > > > For example a heap that is meant to be protected for protected vi=
+deo
+> > > > > decoding is both going to be created in such a way as to allow th=
+at
+> > > > > use-case (i.e. it doesn't make sense for it to be uncached, for
+> > > > > example) and it's also not going to be useful for any other use-c=
+ase
+> > > > > (i.e. there's no reason to use that heap for GPU jobs or networki=
+ng,
+> > > > > or whatever).
+> > > > Right. But also, libcamera has started to use dma-heaps to allocate
+> > > > dma-capable buffers and do software processing on it before sending=
  it
-> > > > > will very much care about it. Or if it comes with caches enabled =
-or not.
+> > > > to some hardware controller.
 > > > >=20
-> > > > True, no doubt about that. However, I'm saying there may be advanta=
-ges
-> > > > in hiding all of this from applications. Let's say we're trying to
-> > > > implement video decoding. We can create a special "protected-video"=
- heap
-> > > > that is specifically designed to allocate encrypted/protected scano=
-ut
-> > > > buffers from.
-> > > >=20
-> > > > When you design that system, you would most certainly not enable ECC
-> > > > protection on that heap because it leads to bad performance. You wo=
-uld
-> > > > also want to make sure that all of the buffers in that heap are cac=
-hed
-> > > > and whatever other optimizations your chip may provide.
-> > > >=20
-> > > > Your application doesn't have to care about this, though, because i=
-t can
-> > > > simply look for a heap named "protected-video" and allocate buffers=
- from
-> > > > it.
+> > > > Caches are critical here, and getting a non-cacheable buffer would =
+be
+> > > > a clear regression.
+> > > I understand that. My point is that maybe we shouldn't try to design a
+> > > complex mechanism that allows full discoverability of everything that=
+ a
+> > > heap supports or is capable of. Instead if the camera has specific
+> > > requirements, it could look for a heap named "camera". Or if it can
+> > > share a heap with other multimedia devices, maybe call the heap
+> > > "multimedia".
 > > >=20
-> > > I mean, I disagree. Or rather, in an environment where you have a sys=
-tem
-> > > architect, and the application is targeted for a particular system on=
-ly,
-> > > and where "protected-video" means whatever the team decided in genera=
-l,
-> > > yeah, that works.
-> > >=20
-> > > So, in a BSP or Android, that works fine.
-> > >=20
-> > > On a mainline based system, with generic stacks like libcamera, it ju=
-st
-> > > doesn't fly anymore.
+> > > The idea is that heaps for these use-cases are quite specific, so you
+> > > would likely not find an arbitrary number of processes try to use the
+> > > same heap.
+> > Yeah the idea to sort this out was to have symlinks in sysfs from the
+> > device to each heap. We could then have priorities for each such link, =
+so
+> > that applications can pick the "best" heap that will work with all
+> > devices. Or also special links for special use-cases, like for a
+> > display+render drm device you might want to have separate links for the
+> > display and the render-only use-case.
 > >=20
-> > I'm not sure I know of a system that isn't architected. Even very
-> > "generic" devices have a set of functionality that the manufacturer
-> > wanted the device to provide.
-> >
-> > Aren't generic stacks not also build to provide a specific function?
-> > Again, libcamera could try to use a "camera" heap, or maybe it would fit
-> > into that "multimedia" category.
+> > I think trying to encode this all into the name of a heap without linki=
+ng
+> > it to the device is not going to work well in general.
 > >=20
-> > For truly generic systems you typically don't need any of this, right? A
-> > generic system like a PC usually gets by with just system memory and
-> > maybe video RAM for some specific cases.
+> > We still have that entire "make sysfs symlinks work for dma-buf heaps" =
+on
+> > our todos, and that idea is almost as old as dma-buf itself :-/
 >=20
-> Why wouldn't we need this for a truly generic system?
+> I still have the draft patches for that lying around on my harddisk
+> somewhere with zero time to look into it.
+>=20
+> If anybody wants to pick it up feel free to ping me, but be aware that you
+> need to write more documentation than code.
 
-Because ARM systems really aren't that generic. That's why we need these
-special carveouts and such in the first place.
+I'm interested, so if you can dig those out that'd be a great reference.
 
-Once you start making an ARM system more generic (say, by adding things
-like PCI devices and such into the mix), then these specific cases tend
-to go away.
-
-Another way of saying this is that these carveouts are usually needed
-for some SoC-specific functionality, so they are inherently bound to
-that SoC and no longer generic.
-
-> With ARM laptops around the corner, pretty much the same SoC can be used
-> in a tablet, in a car, or in a "generic system like a PC".
-
-A "generic system like a PC" based on ARM would still be tied to the
-specific ARM SoC that's being used, so it's not generic in the same way
-that a PC is.
-
-Fundamentally the same SoC is going to need the same carveouts, whether
-it's used in a tablet, in a car or in a laptop. The carveout's use is
-tied to a particular function of the system. Anything that is not tied
-to a particular function is just plain old system memory, isn't it?
-
-Of course I may be completely ignorant of whatever it is that you have
-in mind, so maybe you can provide some concrete examples of where this
-isn't the case?
-
+Thanks,
 Thierry
 
---5cex3pakiksqmgg7
+--td73epytrbw3q5zt
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmaP02oACgkQ3SOs138+
-s6HtLhAAi/4SdKi5Hi9amFel2Q19Ro/dwZiOpJ+FwkK0RjLRUHKmNn/8yEI7hszz
-V/D5Qm3+8E8jzTP6Z4JTWySUPmCWqvrHNYzb/68KRQttlb9Mqw2ZFh2wv4MeLEdG
-qOLzxs/zE5f6bSgKCO0h7msJ6q2D8OxKS94I+to3O9fwcOqu1O2SOuPtuUEcGDn5
-fGcg9aieAADkrM2zTxbRQdPKgqcwpBXEYxi0SUrEAtnVFlKfhNdx7eB8AwlJjZ/z
-ugknAzvORLs64yF7m5BnVmQz39Ki0ABScEf2o0CwX9QquhsZthQGh/OPIejmBCgy
-0juKKkWaJ7F/OoAtr2be+spRvVuCkq3LN4cYxxxu1z3EJpbup19iODuEp9h7oZDz
-7eFSIzoW9dU5f0KB9thMUTWtWaiqUmrpDs6H/GpeMP4oImagranGElEozfNXmzio
-PhRDxnwNSNtwEEkuzpoBwRLCzWvSzsP0IntV7IxRolJZVqBv48wpPmvA2m8YnGdR
-MjrRk2qOXqTgF4BKBwO2jjyWWX9byTFSWQW8PkF/qe92PzOCCxuURZtVxbSt1zd7
-emmIOz0McfokXkOaRLoIEAvF0gQ/Ctr/f60pcxrO7kSrqmh43g6b516e4G2CEsma
-/RmcrCqK2pLVWYKMSpZC+Cimjs1544jboU3tENSgpGV3gu1/4lY=
-=5x79
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmaP06kACgkQ3SOs138+
+s6G0FA/9Hi0eeg8epQN/swA6h+F2HtoxmMZ0hVURKqRm1OZ/LOKlQcAJeXOqKRWU
+MT0vEpM8w4x7MbR7VUtAjP9/U2xyfHfcyGf0UZklTLwNzlyutaUw1Zme0b/5HI8c
+xziTMXV3uHkE8cNG72VSQ4PwLr6HhwFuGdAhXHZzK2M0szmLf+cwppwyIjtOYDGM
+szpgK9G119TuWgbz9o9LfPrVPp1sL0E2WhWRUazEHMpIuqme0W6ScIweNFmLq8hp
+6Q5xS4j9pUCizTKCzlWxazOdh70OcZg4kNzb12cuZET01yXJjr0SA98UQTJnMdla
+tZ4hfEZDSHIZDM4c4hNq4TkdiHYekXJhDAEO+DPO5ZgHelOalpgrcfXuH59W4kcg
+JnKHu4G7Ucej1fb27Oc5WgTXfSvh5Uz51xotCCm0nQp8Ek+SyK6DUeTaVDI21bYN
+Eu8gIsd8AkuU5meEfm/s5w8T2YIei/DF0RhwqrSvzik+3E+4ryES+qvubHPSGy9X
+D3hLAJswxUbu5QNatDbNJGGPvL3+mE9uOxcu4H+aUia5m7zmLQFx0PgIDv5i89QG
+B5alHoMbXkcgS/VY8JbEg3Pi1032p72Mk/KdVFEPVYI2XwWP0MPSuI1kkdTn5j0c
+tSLl1QnOxaN/cvhbOJg8wnNW6mD1O4XEeTOoHigS5amzANcuFno=
+=zsP8
 -----END PGP SIGNATURE-----
 
---5cex3pakiksqmgg7--
+--td73epytrbw3q5zt--
 
---===============6619039405123933312==
+--===============3520843155372879475==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -564,4 +368,4 @@ _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
 
---===============6619039405123933312==--
+--===============3520843155372879475==--
