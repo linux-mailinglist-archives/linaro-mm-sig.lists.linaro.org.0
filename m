@@ -2,79 +2,82 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 14E919310E6
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Jul 2024 11:11:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8ACD89311F8
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Jul 2024 12:08:57 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D394F440EC
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Jul 2024 09:11:48 +0000 (UTC)
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	by lists.linaro.org (Postfix) with ESMTPS id 3D88D3F4C3
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Jul 2024 09:11:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 7200641255
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Jul 2024 10:08:56 +0000 (UTC)
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+	by lists.linaro.org (Postfix) with ESMTPS id 38F1E3F0B5
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Jul 2024 10:08:53 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b=LQ1VIY0g;
-	spf=none (lists.linaro.org: domain of daniel.vetter@ffwll.ch has no SPF policy when checking 209.85.128.45) smtp.mailfrom=daniel.vetter@ffwll.ch;
+	dkim=pass header.d=ffwll.ch header.s=google header.b=SmJsL48v;
+	spf=none (lists.linaro.org: domain of daniel.vetter@ffwll.ch has no SPF policy when checking 209.85.128.51) smtp.mailfrom=daniel.vetter@ffwll.ch;
 	dmarc=none
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-426659ff58bso3437795e9.2
-        for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Jul 2024 02:11:46 -0700 (PDT)
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4266ea4e4bdso3495935e9.3
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Jul 2024 03:08:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google; t=1721034705; x=1721639505; darn=lists.linaro.org;
+        d=ffwll.ch; s=google; t=1721038132; x=1721642932; darn=lists.linaro.org;
         h=in-reply-to:content-transfer-encoding:content-disposition
          :mime-version:references:mail-followup-to:message-id:subject:cc:to
          :from:date:from:to:cc:subject:date:message-id:reply-to;
-        bh=G+6pOwi3seCrcstT5uiNqVYvXvwlNG9Cy3/8u9y4CSA=;
-        b=LQ1VIY0gcc8f4yDGnpjRNWW/X5csjwuL2qS0dg5o0cBE1lCVZZJOlsRfL/8YbMbXXj
-         by1FQ+nnXVfEJ2ZvbITWL4MJ+pQ3bXP1p380VQ47jknyYG7p4LPUNlXCuDyzIAg+8mdj
-         UQThPxenRqUFW3eLmZVLsk3UcsvSHXLwhhBxM=
+        bh=CR2Ia0FiVFedpG588AkdnSWlCXZ9egJLBsCqhnpjuT8=;
+        b=SmJsL48v55NpeUnaPi8sIqyayHe/SWd6VcMwdfjPUO/C4TqSzzKCKFUX9Pp9RUaMe3
+         mvxff58t1rFXaKYHvAUF7tPFjPjJ+sba6bT7f+aE/C8hYl7e6Ec2DqFGr7t6xFt9ZnZS
+         t0IvltuBtVIsRZXpZSPbqPqEwbt1ooWd1i6Dg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1721034705; x=1721639505;
+        d=1e100.net; s=20230601; t=1721038132; x=1721642932;
         h=in-reply-to:content-transfer-encoding:content-disposition
          :mime-version:references:mail-followup-to:message-id:subject:cc:to
          :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=G+6pOwi3seCrcstT5uiNqVYvXvwlNG9Cy3/8u9y4CSA=;
-        b=ARRjUJ1429qDsX/l8tIqESCRocLyrMBnCkfE4sJKtgvdo2QV6j0M0/Bl54aExX1uca
-         xB6E0E+mUeIpEoMconbodb29yDeYKWQvPwH4U9rXXIUKmHOdAr8Rlb61KkOMkyh3+m4m
-         /296Re+6tImUIVxazq9ha/Jd7zKA3VQy93x6nIym1dJAosIqitihlwkGbkXpCkLblAHN
-         pe9rFHr/hFpUURJFD44RqnRZZrimIXUwrpz4ZKd7UssSMdPCWJHyIUP8mHBMLrnEOtyR
-         Bqgqs+8nWhWeqL8u0SBI7t/7333pqjHxwPls8ZDSNmWJfnUBrEIstxcRV+znFaP4pU3U
-         uzIA==
-X-Forwarded-Encrypted: i=1; AJvYcCW65LfFmOpo2FbH2V3yc1RnNh1Z7eoxM23JohZq2aOMk+1MpnKmUA8rz23bEFFoIWWtQBxCiAwzDnu/CkCHBjhfbLBUsiJXbL8O3K7NbUY=
-X-Gm-Message-State: AOJu0Yy3/zNzoBAAVtCHRTreOdngKTGWo+HWWIBakTkRwHYgtfYWdpeA
-	tcno8vKBzB6Qk2CPGJNhoyRLUrBFX129cUSfJk1z/2qvvI4GO2m2/SyJzBAtX+s=
-X-Google-Smtp-Source: AGHT+IFYTZhdecBLuGhfy2YoC0IcF7v+QtOcL3AFjx7kn45U5QuCuMymxIE8w09nWQfN8K9CxA/MnA==
-X-Received: by 2002:a5d:6489:0:b0:367:9614:fdf7 with SMTP id ffacd0b85a97d-367f0545ecdmr6806665f8f.0.1721034705074;
-        Mon, 15 Jul 2024 02:11:45 -0700 (PDT)
+        bh=CR2Ia0FiVFedpG588AkdnSWlCXZ9egJLBsCqhnpjuT8=;
+        b=eVj2sAxJ75u5po78OwiNdu2CLeYgiHZQqU8clvCljx6q/5omYYXwNWWgCJbkEKU2BT
+         cCBgK3RQjRz6fUPCWfF5bAo9yEXTaRUejhFYrni3rs4XJ9PBsRroyiR+Y/1o+ET5Ej/y
+         LzJOQPVJhsxAkeYNU31DjnG1quT8vEWuS3r3F0YCSZYEY3gnYWw7s3CbEBmAT06H8zBC
+         rAH9r0xT09NFDWlmqoTHbM90toxJhRx/JZSNZ6Zz/5Z8uZk1W79BDxfZ95k4f9G4AnpT
+         orkvFo0TdTPLfpvI/pHMZO8fdPzNB+f5AfsFDjxFNdHYNG16gQZjzzV86YArW1Woh6sy
+         jvRA==
+X-Forwarded-Encrypted: i=1; AJvYcCXp34f4ISK1q2MrB0VQSPjObb4JbB/W+SNlru1cYmiL8e5e+FeLmNMQIkrZWF6myvCjv1F30lembHABuxNSxJuxHT7Frn+JX/4Lq1rwTvU=
+X-Gm-Message-State: AOJu0YzEO05VMGUXfxS5Li6W3e8PvbqN20rvka+MJPLJkO5sfpk3M0FN
+	zG/h99DhrXXI8mDoUDyU1A8D2RP3h9jfmbWmXu6ajiSg/AmpBKa4VRAhUyIyabQ=
+X-Google-Smtp-Source: AGHT+IHyT41V56P2D7gRVnHbsl6ebnID4kMa+VsHDxqWmcAkAFdIoHpQ9xgw+h4TlxD7k+VH6h7+vQ==
+X-Received: by 2002:a05:600c:3b8c:b0:426:4920:2846 with SMTP id 5b1f17b1804b1-4279834f1e5mr64390645e9.3.1721038132199;
+        Mon, 15 Jul 2024 03:08:52 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-3680dab3d4dsm5740295f8f.23.2024.07.15.02.11.44
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4279f23981fsm115958335e9.4.2024.07.15.03.08.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Jul 2024 02:11:44 -0700 (PDT)
-Date: Mon, 15 Jul 2024 11:11:42 +0200
+        Mon, 15 Jul 2024 03:08:51 -0700 (PDT)
+Date: Mon, 15 Jul 2024 12:08:49 +0200
 From: Daniel Vetter <daniel.vetter@ffwll.ch>
 To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <ZpTnzkdolpEwFbtu@phenom.ffwll.local>
+Message-ID: <ZpT1MeLxz2yLtDxu@phenom.ffwll.local>
 Mail-Followup-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	Huan Yang <link@vivo.com>, Sumit Semwal <sumit.semwal@linaro.org>,
-	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
-	Brian Starkey <Brian.Starkey@arm.com>,
-	John Stultz <jstultz@google.com>,
-	"T.J. Mercier" <tjmercier@google.com>, linux-media@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
-	linux-kernel@vger.kernel.org, opensource.kernel@vivo.com
-References: <20240711074221.459589-1-link@vivo.com>
- <20240711074221.459589-2-link@vivo.com>
- <5ccbe705-883c-4651-9e66-6b452c414c74@amd.com>
+	DRI Development <dri-devel@lists.freedesktop.org>,
+	LKML <linux-kernel@vger.kernel.org>,
+	Intel Graphics Development <intel-gfx@lists.freedesktop.org>,
+	Daniel Vetter <daniel.vetter@intel.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org,
+	linaro-mm-sig@lists.linaro.org
+References: <20240710093120.732208-1-daniel.vetter@ffwll.ch>
+ <03f7e2ad-fd5c-4da7-a14c-34c2c158c513@amd.com>
+ <CAKMK7uFvCr2qcHun06LC-ON3GBqj8=mCpPGHuAOh9BEyr60fiQ@mail.gmail.com>
+ <cf3ff1b9-2934-47bd-93c7-5ea55d10c82f@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <5ccbe705-883c-4651-9e66-6b452c414c74@amd.com>
+In-Reply-To: <cf3ff1b9-2934-47bd-93c7-5ea55d10c82f@amd.com>
 X-Operating-System: Linux phenom 6.9.7-amd64 
-X-Rspamd-Queue-Id: 3D88D3F4C3
+X-Rspamd-Queue-Id: 38F1E3F0B5
 X-Spamd-Bar: ---
 X-Spamd-Result: default: False [-3.30 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.45:from];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.51:from];
 	ARC_NA(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
@@ -93,16 +96,16 @@ X-Spamd-Result: default: False [-3.30 / 15.00];
 	DKIM_TRACE(0.00)[ffwll.ch:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: UILMT66KGFOWJPBAPQNJ2REHCAKI7ARP
-X-Message-ID-Hash: UILMT66KGFOWJPBAPQNJ2REHCAKI7ARP
+Message-ID-Hash: HLLZG4TYYQUV7QWWUEKFH5W3SXHRZUTY
+X-Message-ID-Hash: HLLZG4TYYQUV7QWWUEKFH5W3SXHRZUTY
 X-MailFrom: daniel.vetter@ffwll.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Huan Yang <link@vivo.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, opensource.kernel@vivo.com
+CC: DRI Development <dri-devel@lists.freedesktop.org>, LKML <linux-kernel@vger.kernel.org>, Intel Graphics Development <intel-gfx@lists.freedesktop.org>, Daniel Vetter <daniel.vetter@intel.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Sumit Semwal <sumit.semwal@linaro.org>, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/2] dma-buf: heaps: DMA_HEAP_IOCTL_ALLOC_READ_FILE framework
+Subject: [Linaro-mm-sig] Re: [PATCH 1/2] drm: Add might_fault to drm_modeset_lock priming
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UILMT66KGFOWJPBAPQNJ2REHCAKI7ARP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HLLZG4TYYQUV7QWWUEKFH5W3SXHRZUTY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -112,806 +115,81 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 11, 2024 at 11:00:02AM +0200, Christian K=F6nig wrote:
-> Am 11.07.24 um 09:42 schrieb Huan Yang:
-> > Some user may need load file into dma-buf, current
-> > way is:
-> >    1. allocate a dma-buf, get dma-buf fd
-> >    2. mmap dma-buf fd into vaddr
-> >    3. read(file_fd, vaddr, fsz)
-> > This is too heavy if fsz reached to GB.
+On Wed, Jul 10, 2024 at 02:40:04PM +0200, Christian K=F6nig wrote:
+> Am 10.07.24 um 13:58 schrieb Daniel Vetter:
+> > On Wed, 10 Jul 2024 at 13:39, Christian K=F6nig <christian.koenig@amd.c=
+om> wrote:
+> > > Am 10.07.24 um 11:31 schrieb Daniel Vetter:
+> > > > We already teach lockdep that dma_resv nests within drm_modeset_loc=
+k,
+> > > > but there's a lot more: All drm kms ioctl rely on being able to
+> > > > put/get_user while holding modeset locks, so we really need a
+> > > > might_fault in there too to complete the picture. Add it.
+> > > Mhm, lockdep should be able to deduce that when there might be faults
+> > > under the dma_resv lock there might also be faults under the
+> > > drm_modeset_lock.
+> > You're not allowed to take a fault under dma_resv, because drivers
+> > might need to take that lock to handle faults. So unfortunately in our
+> > combined lockdep priming, there really seems to be no chain yet that
+> > teaches about faults possibly happening while holding
+> > drm_modeset_lock.
 >=20
-> You need to describe a bit more why that is to heavy. I can only assume y=
-ou
-> need to save memory bandwidth and avoid the extra copy with the CPU.
->=20
-> > This patch implement a feature called DMA_HEAP_IOCTL_ALLOC_READ_FILE.
-> > User need to offer a file_fd which you want to load into dma-buf, then,
-> > it promise if you got a dma-buf fd, it will contains the file content.
->=20
-> Interesting idea, that has at least more potential than trying to enable
-> direct I/O on mmap()ed DMA-bufs.
->=20
-> The approach with the new IOCTL might not work because it is a very
-> specialized use case.
->=20
-> But IIRC there was a copy_file_range callback in the file_operations
-> structure you could use for that. I'm just not sure when and how that's u=
-sed
-> with the copy_file_range() system call.
+> Ah, of course! You are right, it was just the other way around.
 
-I'm not sure any of those help, because internally they're all still based
-on struct page (or maybe in the future on folios). And that's the thing
-dma-buf can't give you, at least without peaking behind the curtain.
-
-I think an entirely different option would be malloc+udmabuf. That
-essentially handles the impendence-mismatch between direct I/O and dma-buf
-on the dma-buf side. The downside is that it'll make the permanently
-pinned memory accounting and tracking issues even more apparent, but I
-guess eventually we do need to sort that one out.
-
-And since all the patches here are only for the pages system heap I'm
-guess udmabuf should work out for the use-case here? Worth a shot at
-least.
+Applied to drm-misc-next, thanks for your review.
 -Sima
 
 >=20
-> Regards,
+> Thanks,
 > Christian.
 >=20
+> > -Sima
 > >=20
-> > Notice, file_fd depends on user how to open this file. So, both buffer
-> > I/O and Direct I/O is supported.
+> > > > Motivated by a syzbot report that blew up on bcachefs doing an
+> > > > unconditional console_lock way deep in the locking hierarchy, and
+> > > > lockdep only noticing the depency loop in a drm ioctl instead of mu=
+ch
+> > > > earlier. This annotation will make sure such issues have a much har=
+der
+> > > > time escaping.
+> > > >=20
+> > > > References: https://lore.kernel.org/dri-devel/00000000000073db8b061=
+cd43496@google.com/
+> > > > Signed-off-by: Daniel Vetter <daniel.vetter@intel.com>
+> > > > Cc: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
+> > > > Cc: Maxime Ripard <mripard@kernel.org>
+> > > > Cc: Thomas Zimmermann <tzimmermann@suse.de>
+> > > > Cc: Sumit Semwal <sumit.semwal@linaro.org>
+> > > > Cc: "Christian K=F6nig" <christian.koenig@amd.com>
+> > > > Cc: linux-media@vger.kernel.org
+> > > > Cc: linaro-mm-sig@lists.linaro.org
+> > > On the other hand pointing it out explicitly doesn't hurts us at all,=
+ so
+> > > Reviewed-by: Christian K=F6nig <christian.koenig@amd.com>.
+> > >=20
+> > > Regards,
+> > > Christian.
+> > >=20
+> > > > ---
+> > > >    drivers/gpu/drm/drm_mode_config.c | 2 ++
+> > > >    1 file changed, 2 insertions(+)
+> > > >=20
+> > > > diff --git a/drivers/gpu/drm/drm_mode_config.c b/drivers/gpu/drm/dr=
+m_mode_config.c
+> > > > index 568972258222..37d2e0a4ef4b 100644
+> > > > --- a/drivers/gpu/drm/drm_mode_config.c
+> > > > +++ b/drivers/gpu/drm/drm_mode_config.c
+> > > > @@ -456,6 +456,8 @@ int drmm_mode_config_init(struct drm_device *de=
+v)
+> > > >                if (ret =3D=3D -EDEADLK)
+> > > >                        ret =3D drm_modeset_backoff(&modeset_ctx);
+> > > >=20
+> > > > +             might_fault();
+> > > > +
+> > > >                ww_acquire_init(&resv_ctx, &reservation_ww_class);
+> > > >                ret =3D dma_resv_lock(&resv, &resv_ctx);
+> > > >                if (ret =3D=3D -EDEADLK)
 > >=20
-> > Signed-off-by: Huan Yang <link@vivo.com>
-> > ---
-> >   drivers/dma-buf/dma-heap.c    | 525 +++++++++++++++++++++++++++++++++-
-> >   include/linux/dma-heap.h      |  57 +++-
-> >   include/uapi/linux/dma-heap.h |  32 +++
-> >   3 files changed, 611 insertions(+), 3 deletions(-)
-> >=20
-> > diff --git a/drivers/dma-buf/dma-heap.c b/drivers/dma-buf/dma-heap.c
-> > index 2298ca5e112e..abe17281adb8 100644
-> > --- a/drivers/dma-buf/dma-heap.c
-> > +++ b/drivers/dma-buf/dma-heap.c
-> > @@ -15,9 +15,11 @@
-> >   #include <linux/list.h>
-> >   #include <linux/slab.h>
-> >   #include <linux/nospec.h>
-> > +#include <linux/highmem.h>
-> >   #include <linux/uaccess.h>
-> >   #include <linux/syscalls.h>
-> >   #include <linux/dma-heap.h>
-> > +#include <linux/vmalloc.h>
-> >   #include <uapi/linux/dma-heap.h>
-> >   #define DEVNAME "dma_heap"
-> > @@ -43,12 +45,462 @@ struct dma_heap {
-> >   	struct cdev heap_cdev;
-> >   };
-> > +/**
-> > + * struct dma_heap_file - wrap the file, read task for dma_heap alloca=
-te use.
-> > + * @file:		file to read from.
-> > + *
-> > + * @cred:		kthread use, user cred copy to use for the read.
-> > + *
-> > + * @max_batch:		maximum batch size to read, if collect match batch,
-> > + *			trigger read, default 128MB, must below file size.
-> > + *
-> > + * @fsz:		file size.
-> > + *
-> > + * @direct:		use direct IO?
-> > + */
-> > +struct dma_heap_file {
-> > +	struct file *file;
-> > +	struct cred *cred;
-> > +	size_t max_batch;
-> > +	size_t fsz;
-> > +	bool direct;
-> > +};
-> > +
-> > +/**
-> > + * struct dma_heap_file_work - represents a dma_heap file read real wo=
-rk.
-> > + * @vaddr:		contigous virtual address alloc by vmap, file read need.
-> > + *
-> > + * @start_size:		file read start offset, same to @dma_heap_file_task->=
-roffset.
-> > + *
-> > + * @need_size:		file read need size, same to @dma_heap_file_task->rsiz=
-e.
-> > + *
-> > + * @heap_file:		file wrapper.
-> > + *
-> > + * @list:		child node of @dma_heap_file_control->works.
-> > + *
-> > + * @refp:		same @dma_heap_file_task->ref, if end of read, put ref.
-> > + *
-> > + * @failp:		if any work io failed, set it true, pointp @dma_heap_file_=
-task->fail.
-> > + */
-> > +struct dma_heap_file_work {
-> > +	void *vaddr;
-> > +	ssize_t start_size;
-> > +	ssize_t need_size;
-> > +	struct dma_heap_file *heap_file;
-> > +	struct list_head list;
-> > +	atomic_t *refp;
-> > +	bool *failp;
-> > +};
-> > +
-> > +/**
-> > + * struct dma_heap_file_task - represents a dma_heap file read process
-> > + * @ref:		current file work counter, if zero, allocate and read
-> > + *			done.
-> > + *
-> > + * @roffset:		last read offset, current prepared work' begin file
-> > + *			start offset.
-> > + *
-> > + * @rsize:		current allocated page size use to read, if reach rbatch,
-> > + *			trigger commit.
-> > + *
-> > + * @rbatch:		current prepared work's batch, below @dma_heap_file's
-> > + *			batch.
-> > + *
-> > + * @heap_file:		current dma_heap_file
-> > + *
-> > + * @parray:		used for vmap, size is @dma_heap_file's batch's number
-> > + *			pages.(this is maximum). Due to single thread file read,
-> > + *			one page array reuse each work prepare is OK.
-> > + *			Each index in parray is PAGE_SIZE.(vmap need)
-> > + *
-> > + * @pindex:		current allocated page filled in @parray's index.
-> > + *
-> > + * @fail:		any work failed when file read?
-> > + *
-> > + * dma_heap_file_task is the production of file read, will prepare eac=
-h work
-> > + * during allocate dma_buf pages, if match current batch, then trigger=
- commit
-> > + * and prepare next work. After all batch queued, user going on prepar=
-e dma_buf
-> > + * and so on, but before return dma_buf fd, need to wait file read end=
- and
-> > + * check read result.
-> > + */
-> > +struct dma_heap_file_task {
-> > +	atomic_t ref;
-> > +	size_t roffset;
-> > +	size_t rsize;
-> > +	size_t rbatch;
-> > +	struct dma_heap_file *heap_file;
-> > +	struct page **parray;
-> > +	unsigned int pindex;
-> > +	bool fail;
-> > +};
-> > +
-> > +/**
-> > + * struct dma_heap_file_control - global control of dma_heap file read.
-> > + * @works:		@dma_heap_file_work's list head.
-> > + *
-> > + * @lock:		only lock for @works.
-> > + *
-> > + * @threadwq:		wait queue for @work_thread, if commit work, @work_thre=
-ad
-> > + *			wakeup and read this work's file contains.
-> > + *
-> > + * @workwq:		used for main thread wait for file read end, if allocation
-> > + *			end before file read. @dma_heap_file_task ref effect this.
-> > + *
-> > + * @work_thread:	file read kthread. the dma_heap_file_task work's cons=
-umer.
-> > + *
-> > + * @heap_fwork_cachep:	@dma_heap_file_work's cachep, it's alloc/free f=
-requently.
-> > + *
-> > + * @nr_work:		global number of how many work committed.
-> > + */
-> > +struct dma_heap_file_control {
-> > +	struct list_head works;
-> > +	spinlock_t lock;
-> > +	wait_queue_head_t threadwq;
-> > +	wait_queue_head_t workwq;
-> > +	struct task_struct *work_thread;
-> > +	struct kmem_cache *heap_fwork_cachep;
-> > +	atomic_t nr_work;
-> > +};
-> > +
-> > +static struct dma_heap_file_control *heap_fctl;
-> >   static LIST_HEAD(heap_list);
-> >   static DEFINE_MUTEX(heap_list_lock);
-> >   static dev_t dma_heap_devt;
-> >   static struct class *dma_heap_class;
-> >   static DEFINE_XARRAY_ALLOC(dma_heap_minors);
-> > +/**
-> > + * map_pages_to_vaddr - map each scatter page into contiguous virtual =
-address.
-> > + * @heap_ftask:		prepared and need to commit's work.
-> > + *
-> > + * Cached pages need to trigger file read, this function map each scat=
-ter page
-> > + * into contiguous virtual address, so that file read can easy use.
-> > + * Now that we get vaddr page, cached pages can return to original use=
-r, so we
-> > + * will not effect dma-buf export even if file read not end.
-> > + */
-> > +static void *map_pages_to_vaddr(struct dma_heap_file_task *heap_ftask)
-> > +{
-> > +	return vmap(heap_ftask->parray, heap_ftask->pindex, VM_MAP,
-> > +		    PAGE_KERNEL);
-> > +}
-> > +
-> > +bool dma_heap_prepare_file_read(struct dma_heap_file_task *heap_ftask,
-> > +				struct page *page)
-> > +{
-> > +	struct page **array =3D heap_ftask->parray;
-> > +	int index =3D heap_ftask->pindex;
-> > +	int num =3D compound_nr(page), i;
-> > +	unsigned long sz =3D page_size(page);
-> > +
-> > +	heap_ftask->rsize +=3D sz;
-> > +	for (i =3D 0; i < num; ++i)
-> > +		array[index++] =3D &page[i];
-> > +	heap_ftask->pindex =3D index;
-> > +
-> > +	return heap_ftask->rsize >=3D heap_ftask->rbatch;
-> > +}
-> > +
-> > +static struct dma_heap_file_work *
-> > +init_file_work(struct dma_heap_file_task *heap_ftask)
-> > +{
-> > +	struct dma_heap_file_work *heap_fwork;
-> > +	struct dma_heap_file *heap_file =3D heap_ftask->heap_file;
-> > +
-> > +	if (READ_ONCE(heap_ftask->fail))
-> > +		return NULL;
-> > +
-> > +	heap_fwork =3D kmem_cache_alloc(heap_fctl->heap_fwork_cachep, GFP_KER=
-NEL);
-> > +	if (unlikely(!heap_fwork))
-> > +		return NULL;
-> > +
-> > +	heap_fwork->vaddr =3D map_pages_to_vaddr(heap_ftask);
-> > +	if (unlikely(!heap_fwork->vaddr)) {
-> > +		kmem_cache_free(heap_fctl->heap_fwork_cachep, heap_fwork);
-> > +		return NULL;
-> > +	}
-> > +
-> > +	heap_fwork->heap_file =3D heap_file;
-> > +	heap_fwork->start_size =3D heap_ftask->roffset;
-> > +	heap_fwork->need_size =3D heap_ftask->rsize;
-> > +	heap_fwork->refp =3D &heap_ftask->ref;
-> > +	heap_fwork->failp =3D &heap_ftask->fail;
-> > +	atomic_inc(&heap_ftask->ref);
-> > +	return heap_fwork;
-> > +}
-> > +
-> > +static void destroy_file_work(struct dma_heap_file_work *heap_fwork)
-> > +{
-> > +	vunmap(heap_fwork->vaddr);
-> > +	atomic_dec(heap_fwork->refp);
-> > +	wake_up(&heap_fctl->workwq);
-> > +
-> > +	kmem_cache_free(heap_fctl->heap_fwork_cachep, heap_fwork);
-> > +}
-> > +
-> > +int dma_heap_submit_file_read(struct dma_heap_file_task *heap_ftask)
-> > +{
-> > +	struct dma_heap_file_work *heap_fwork =3D init_file_work(heap_ftask);
-> > +	struct page *last =3D NULL;
-> > +	struct dma_heap_file *heap_file =3D heap_ftask->heap_file;
-> > +	size_t start =3D heap_ftask->roffset;
-> > +	struct file *file =3D heap_file->file;
-> > +	size_t fsz =3D heap_file->fsz;
-> > +
-> > +	if (unlikely(!heap_fwork))
-> > +		return -ENOMEM;
-> > +
-> > +	/**
-> > +	 * If file size is not page aligned, direct io can't process the tail.
-> > +	 * So, if reach to tail, remain the last page use buffer read.
-> > +	 */
-> > +	if (heap_file->direct && start + heap_ftask->rsize > fsz) {
-> > +		heap_fwork->need_size -=3D PAGE_SIZE;
-> > +		last =3D heap_ftask->parray[heap_ftask->pindex - 1];
-> > +	}
-> > +
-> > +	spin_lock(&heap_fctl->lock);
-> > +	list_add_tail(&heap_fwork->list, &heap_fctl->works);
-> > +	spin_unlock(&heap_fctl->lock);
-> > +	atomic_inc(&heap_fctl->nr_work);
-> > +
-> > +	wake_up(&heap_fctl->threadwq);
-> > +
-> > +	if (last) {
-> > +		char *buf, *pathp;
-> > +		ssize_t err;
-> > +		void *buffer;
-> > +
-> > +		buf =3D kmalloc(PATH_MAX, GFP_KERNEL);
-> > +		if (unlikely(!buf))
-> > +			return -ENOMEM;
-> > +
-> > +		start =3D PAGE_ALIGN_DOWN(fsz);
-> > +
-> > +		pathp =3D file_path(file, buf, PATH_MAX);
-> > +		if (IS_ERR(pathp)) {
-> > +			kfree(buf);
-> > +			return PTR_ERR(pathp);
-> > +		}
-> > +
-> > +		buffer =3D kmap_local_page(last); // use page's kaddr.
-> > +		err =3D kernel_read_file_from_path(pathp, start, &buffer,
-> > +						 fsz - start, &fsz,
-> > +						 READING_POLICY);
-> > +		kunmap_local(buffer);
-> > +		kfree(buf);
-> > +		if (err < 0) {
-> > +			pr_err("failed to use buffer kernel_read_file %s, err=3D%ld, [%ld, =
-%ld], f_sz=3D%ld\n",
-> > +			       pathp, err, start, fsz, fsz);
-> > +
-> > +			return err;
-> > +		}
-> > +	}
-> > +
-> > +	heap_ftask->roffset +=3D heap_ftask->rsize;
-> > +	heap_ftask->rsize =3D 0;
-> > +	heap_ftask->pindex =3D 0;
-> > +	heap_ftask->rbatch =3D min_t(size_t,
-> > +				   PAGE_ALIGN(fsz) - heap_ftask->roffset,
-> > +				   heap_ftask->rbatch);
-> > +	return 0;
-> > +}
-> > +
-> > +bool dma_heap_wait_for_file_read(struct dma_heap_file_task *heap_ftask)
-> > +{
-> > +	wait_event_freezable(heap_fctl->workwq,
-> > +			     atomic_read(&heap_ftask->ref) =3D=3D 0);
-> > +	return heap_ftask->fail;
-> > +}
-> > +
-> > +bool dma_heap_destroy_file_read(struct dma_heap_file_task *heap_ftask)
-> > +{
-> > +	bool fail;
-> > +
-> > +	dma_heap_wait_for_file_read(heap_ftask);
-> > +	fail =3D heap_ftask->fail;
-> > +	kvfree(heap_ftask->parray);
-> > +	kfree(heap_ftask);
-> > +	return fail;
-> > +}
-> > +
-> > +struct dma_heap_file_task *
-> > +dma_heap_declare_file_read(struct dma_heap_file *heap_file)
-> > +{
-> > +	struct dma_heap_file_task *heap_ftask =3D
-> > +		kzalloc(sizeof(*heap_ftask), GFP_KERNEL);
-> > +	if (unlikely(!heap_ftask))
-> > +		return NULL;
-> > +
-> > +	/**
-> > +	 * Batch is the maximum size which we prepare work will meet.
-> > +	 * So, direct alloc this number's page array is OK.
-> > +	 */
-> > +	heap_ftask->parray =3D kvmalloc_array(heap_file->max_batch >> PAGE_SH=
-IFT,
-> > +					    sizeof(struct page *), GFP_KERNEL);
-> > +	if (unlikely(!heap_ftask->parray))
-> > +		goto put;
-> > +
-> > +	heap_ftask->heap_file =3D heap_file;
-> > +	heap_ftask->rbatch =3D heap_file->max_batch;
-> > +	return heap_ftask;
-> > +put:
-> > +	kfree(heap_ftask);
-> > +	return NULL;
-> > +}
-> > +
-> > +static void __work_this_io(struct dma_heap_file_work *heap_fwork)
-> > +{
-> > +	struct dma_heap_file *heap_file =3D heap_fwork->heap_file;
-> > +	struct file *file =3D heap_file->file;
-> > +	ssize_t start =3D heap_fwork->start_size;
-> > +	ssize_t size =3D heap_fwork->need_size;
-> > +	void *buffer =3D heap_fwork->vaddr;
-> > +	const struct cred *old_cred;
-> > +	ssize_t err;
-> > +
-> > +	// use real task's cred to read this file.
-> > +	old_cred =3D override_creds(heap_file->cred);
-> > +	err =3D kernel_read_file(file, start, &buffer, size, &heap_file->fsz,
-> > +			       READING_POLICY);
-> > +	if (err < 0) {
-> > +		pr_err("use kernel_read_file, err=3D%ld, [%ld, %ld], f_sz=3D%ld\n",
-> > +		       err, start, (start + size), heap_file->fsz);
-> > +		WRITE_ONCE(*heap_fwork->failp, true);
-> > +	}
-> > +	// recovery to my cred.
-> > +	revert_creds(old_cred);
-> > +}
-> > +
-> > +static int dma_heap_file_control_thread(void *data)
-> > +{
-> > +	struct dma_heap_file_control *heap_fctl =3D
-> > +		(struct dma_heap_file_control *)data;
-> > +	struct dma_heap_file_work *worker, *tmp;
-> > +	int nr_work;
-> > +
-> > +	LIST_HEAD(pages);
-> > +	LIST_HEAD(workers);
-> > +
-> > +	while (true) {
-> > +		wait_event_freezable(heap_fctl->threadwq,
-> > +				     atomic_read(&heap_fctl->nr_work) > 0);
-> > +recheck:
-> > +		spin_lock(&heap_fctl->lock);
-> > +		list_splice_init(&heap_fctl->works, &workers);
-> > +		spin_unlock(&heap_fctl->lock);
-> > +
-> > +		if (unlikely(kthread_should_stop())) {
-> > +			list_for_each_entry_safe(worker, tmp, &workers, list) {
-> > +				list_del(&worker->list);
-> > +				destroy_file_work(worker);
-> > +			}
-> > +			break;
-> > +		}
-> > +
-> > +		nr_work =3D 0;
-> > +		list_for_each_entry_safe(worker, tmp, &workers, list) {
-> > +			++nr_work;
-> > +			list_del(&worker->list);
-> > +			__work_this_io(worker);
-> > +
-> > +			destroy_file_work(worker);
-> > +		}
-> > +		atomic_sub(nr_work, &heap_fctl->nr_work);
-> > +
-> > +		if (atomic_read(&heap_fctl->nr_work) > 0)
-> > +			goto recheck;
-> > +	}
-> > +	return 0;
-> > +}
-> > +
-> > +size_t dma_heap_file_size(struct dma_heap_file *heap_file)
-> > +{
-> > +	return heap_file->fsz;
-> > +}
-> > +
-> > +static int prepare_dma_heap_file(struct dma_heap_file *heap_file, int =
-file_fd,
-> > +				 size_t batch)
-> > +{
-> > +	struct file *file;
-> > +	size_t fsz;
-> > +	int ret;
-> > +
-> > +	file =3D fget(file_fd);
-> > +	if (!file)
-> > +		return -EINVAL;
-> > +
-> > +	fsz =3D i_size_read(file_inode(file));
-> > +	if (fsz < batch) {
-> > +		ret =3D -EINVAL;
-> > +		goto err;
-> > +	}
-> > +
-> > +	/**
-> > +	 * Selinux block our read, but actually we are reading the stand-in
-> > +	 * for this file.
-> > +	 * So save current's cred and when going to read, override mine, and
-> > +	 * end of read, revert.
-> > +	 */
-> > +	heap_file->cred =3D prepare_kernel_cred(current);
-> > +	if (unlikely(!heap_file->cred)) {
-> > +		ret =3D -ENOMEM;
-> > +		goto err;
-> > +	}
-> > +
-> > +	heap_file->file =3D file;
-> > +	heap_file->max_batch =3D batch;
-> > +	heap_file->fsz =3D fsz;
-> > +
-> > +	heap_file->direct =3D file->f_flags & O_DIRECT;
-> > +
-> > +#define DMA_HEAP_SUGGEST_DIRECT_IO_SIZE (1UL << 30)
-> > +	if (!heap_file->direct && fsz >=3D DMA_HEAP_SUGGEST_DIRECT_IO_SIZE)
-> > +		pr_warn("alloc read file better to use O_DIRECT to read larget file\=
-n");
-> > +
-> > +	return 0;
-> > +
-> > +err:
-> > +	fput(file);
-> > +	return ret;
-> > +}
-> > +
-> > +static void destroy_dma_heap_file(struct dma_heap_file *heap_file)
-> > +{
-> > +	fput(heap_file->file);
-> > +	put_cred(heap_file->cred);
-> > +}
-> > +
-> > +static int dma_heap_buffer_alloc_read_file(struct dma_heap *heap, int =
-file_fd,
-> > +					   size_t batch, unsigned int fd_flags,
-> > +					   unsigned int heap_flags)
-> > +{
-> > +	struct dma_buf *dmabuf;
-> > +	int fd;
-> > +	struct dma_heap_file heap_file;
-> > +
-> > +	fd =3D prepare_dma_heap_file(&heap_file, file_fd, batch);
-> > +	if (fd)
-> > +		goto error_file;
-> > +
-> > +	dmabuf =3D heap->ops->allocate_read_file(heap, &heap_file, fd_flags,
-> > +					       heap_flags);
-> > +	if (IS_ERR(dmabuf)) {
-> > +		fd =3D PTR_ERR(dmabuf);
-> > +		goto error;
-> > +	}
-> > +
-> > +	fd =3D dma_buf_fd(dmabuf, fd_flags);
-> > +	if (fd < 0) {
-> > +		dma_buf_put(dmabuf);
-> > +		/* just return, as put will call release and that will free */
-> > +	}
-> > +
-> > +error:
-> > +	destroy_dma_heap_file(&heap_file);
-> > +error_file:
-> > +	return fd;
-> > +}
-> > +
-> >   static int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
-> >   				 u32 fd_flags,
-> >   				 u64 heap_flags)
-> > @@ -93,6 +545,38 @@ static int dma_heap_open(struct inode *inode, struc=
-t file *file)
-> >   	return 0;
-> >   }
-> > +static long dma_heap_ioctl_allocate_read_file(struct file *file, void =
-*data)
-> > +{
-> > +	struct dma_heap_allocation_file_data *heap_allocation_file =3D data;
-> > +	struct dma_heap *heap =3D file->private_data;
-> > +	int fd;
-> > +
-> > +	if (heap_allocation_file->fd || !heap_allocation_file->file_fd)
-> > +		return -EINVAL;
-> > +
-> > +	if (heap_allocation_file->fd_flags & ~DMA_HEAP_VALID_FD_FLAGS)
-> > +		return -EINVAL;
-> > +
-> > +	if (heap_allocation_file->heap_flags & ~DMA_HEAP_VALID_HEAP_FLAGS)
-> > +		return -EINVAL;
-> > +
-> > +	if (!heap->ops->allocate_read_file)
-> > +		return -EINVAL;
-> > +
-> > +	fd =3D dma_heap_buffer_alloc_read_file(
-> > +		heap, heap_allocation_file->file_fd,
-> > +		heap_allocation_file->batch ?
-> > +			PAGE_ALIGN(heap_allocation_file->batch) :
-> > +			DEFAULT_ADI_BATCH,
-> > +		heap_allocation_file->fd_flags,
-> > +		heap_allocation_file->heap_flags);
-> > +	if (fd < 0)
-> > +		return fd;
-> > +
-> > +	heap_allocation_file->fd =3D fd;
-> > +	return 0;
-> > +}
-> > +
-> >   static long dma_heap_ioctl_allocate(struct file *file, void *data)
-> >   {
-> >   	struct dma_heap_allocation_data *heap_allocation =3D data;
-> > @@ -121,6 +605,7 @@ static long dma_heap_ioctl_allocate(struct file *fi=
-le, void *data)
-> >   static unsigned int dma_heap_ioctl_cmds[] =3D {
-> >   	DMA_HEAP_IOCTL_ALLOC,
-> > +	DMA_HEAP_IOCTL_ALLOC_AND_READ,
-> >   };
-> >   static long dma_heap_ioctl(struct file *file, unsigned int ucmd,
-> > @@ -170,6 +655,9 @@ static long dma_heap_ioctl(struct file *file, unsig=
-ned int ucmd,
-> >   	case DMA_HEAP_IOCTL_ALLOC:
-> >   		ret =3D dma_heap_ioctl_allocate(file, kdata);
-> >   		break;
-> > +	case DMA_HEAP_IOCTL_ALLOC_AND_READ:
-> > +		ret =3D dma_heap_ioctl_allocate_read_file(file, kdata);
-> > +		break;
-> >   	default:
-> >   		ret =3D -ENOTTY;
-> >   		goto err;
-> > @@ -316,11 +804,44 @@ static int dma_heap_init(void)
-> >   	dma_heap_class =3D class_create(DEVNAME);
-> >   	if (IS_ERR(dma_heap_class)) {
-> > -		unregister_chrdev_region(dma_heap_devt, NUM_HEAP_MINORS);
-> > -		return PTR_ERR(dma_heap_class);
-> > +		ret =3D PTR_ERR(dma_heap_class);
-> > +		goto fail_class;
-> >   	}
-> >   	dma_heap_class->devnode =3D dma_heap_devnode;
-> > +	heap_fctl =3D kzalloc(sizeof(*heap_fctl), GFP_KERNEL);
-> > +	if (unlikely(!heap_fctl)) {
-> > +		ret =3D  -ENOMEM;
-> > +		goto fail_alloc;
-> > +	}
-> > +
-> > +	INIT_LIST_HEAD(&heap_fctl->works);
-> > +	init_waitqueue_head(&heap_fctl->threadwq);
-> > +	init_waitqueue_head(&heap_fctl->workwq);
-> > +
-> > +	heap_fctl->work_thread =3D kthread_run(dma_heap_file_control_thread,
-> > +					     heap_fctl, "heap_fwork_t");
-> > +	if (IS_ERR(heap_fctl->work_thread)) {
-> > +		ret =3D -ENOMEM;
-> > +		goto fail_thread;
-> > +	}
-> > +
-> > +	heap_fctl->heap_fwork_cachep =3D KMEM_CACHE(dma_heap_file_work, 0);
-> > +	if (unlikely(!heap_fctl->heap_fwork_cachep)) {
-> > +		ret =3D -ENOMEM;
-> > +		goto fail_cache;
-> > +	}
-> > +
-> >   	return 0;
-> > +
-> > +fail_cache:
-> > +	kthread_stop(heap_fctl->work_thread);
-> > +fail_thread:
-> > +	kfree(heap_fctl);
-> > +fail_alloc:
-> > +	class_destroy(dma_heap_class);
-> > +fail_class:
-> > +	unregister_chrdev_region(dma_heap_devt, NUM_HEAP_MINORS);
-> > +	return ret;
-> >   }
-> >   subsys_initcall(dma_heap_init);
-> > diff --git a/include/linux/dma-heap.h b/include/linux/dma-heap.h
-> > index 064bad725061..9c25383f816c 100644
-> > --- a/include/linux/dma-heap.h
-> > +++ b/include/linux/dma-heap.h
-> > @@ -12,12 +12,17 @@
-> >   #include <linux/cdev.h>
-> >   #include <linux/types.h>
-> > +#define DEFAULT_ADI_BATCH (128 << 20)
-> > +
-> >   struct dma_heap;
-> > +struct dma_heap_file_task;
-> > +struct dma_heap_file;
-> >   /**
-> >    * struct dma_heap_ops - ops to operate on a given heap
-> >    * @allocate:		allocate dmabuf and return struct dma_buf ptr
-> > - *
-> > + * @allocate_read_file: allocate dmabuf and read file, then return str=
-uct
-> > + * dma_buf ptr.
-> >    * allocate returns dmabuf on success, ERR_PTR(-errno) on error.
-> >    */
-> >   struct dma_heap_ops {
-> > @@ -25,6 +30,11 @@ struct dma_heap_ops {
-> >   				    unsigned long len,
-> >   				    u32 fd_flags,
-> >   				    u64 heap_flags);
-> > +
-> > +	struct dma_buf *(*allocate_read_file)(struct dma_heap *heap,
-> > +					      struct dma_heap_file *heap_file,
-> > +					      u32 fd_flags,
-> > +					      u64 heap_flags);
-> >   };
-> >   /**
-> > @@ -65,4 +75,49 @@ const char *dma_heap_get_name(struct dma_heap *heap);
-> >    */
-> >   struct dma_heap *dma_heap_add(const struct dma_heap_export_info *exp_=
-info);
-> > +/**
-> > + * dma_heap_destroy_file_read - waits for a file read to complete then=
- destroy it
-> > + * Returns: true if the file read failed, false otherwise
-> > + */
-> > +bool dma_heap_destroy_file_read(struct dma_heap_file_task *heap_ftask);
-> > +
-> > +/**
-> > + * dma_heap_wait_for_file_read - waits for a file read to complete
-> > + * Returns: true if the file read failed, false otherwise
-> > + */
-> > +bool dma_heap_wait_for_file_read(struct dma_heap_file_task *heap_ftask=
-);
-> > +
-> > +/**
-> > + * dma_heap_alloc_file_read - Declare a task to read file when allocat=
-e pages.
-> > + * @heap_file:		target file to read
-> > + *
-> > + * Return NULL if failed, otherwise return a struct pointer.
-> > + */
-> > +struct dma_heap_file_task *
-> > +dma_heap_declare_file_read(struct dma_heap_file *heap_file);
-> > +
-> > +/**
-> > + * dma_heap_prepare_file_read - cache each allocated page until we mee=
-t this batch.
-> > + * @heap_ftask:		prepared and need to commit's work.
-> > + * @page:		current allocated page. don't care which order.
-> > + *
-> > + * Returns true if reach to batch, false so go on prepare.
-> > + */
-> > +bool dma_heap_prepare_file_read(struct dma_heap_file_task *heap_ftask,
-> > +				struct page *page);
-> > +
-> > +/**
-> > + * dma_heap_commit_file_read -  prepare collect enough memory, going t=
-o trigger IO
-> > + * @heap_ftask:			info that current IO needs
-> > + *
-> > + * This commit will also check if reach to tail read.
-> > + * For direct I/O submissions, it is necessary to pay attention to fil=
-e reads
-> > + * that are not page-aligned. For the unaligned portion of the read, b=
-uffer IO
-> > + * needs to be triggered.
-> > + * Returns:
-> > + *   0 if all right, -errno if something wrong
-> > + */
-> > +int dma_heap_submit_file_read(struct dma_heap_file_task *heap_ftask);
-> > +size_t dma_heap_file_size(struct dma_heap_file *heap_file);
-> > +
-> >   #endif /* _DMA_HEAPS_H */
-> > diff --git a/include/uapi/linux/dma-heap.h b/include/uapi/linux/dma-hea=
-p.h
-> > index a4cf716a49fa..8c20e8b74eed 100644
-> > --- a/include/uapi/linux/dma-heap.h
-> > +++ b/include/uapi/linux/dma-heap.h
-> > @@ -39,6 +39,27 @@ struct dma_heap_allocation_data {
-> >   	__u64 heap_flags;
-> >   };
-> > +/**
-> > + * struct dma_heap_allocation_file_data - metadata passed from userspa=
-ce for
-> > + *                                      allocations and read file
-> > + * @fd:			will be populated with a fd which provides the
-> > + *			handle to the allocated dma-buf
-> > + * @file_fd:		file descriptor to read from(suggested to use O_DIRECT o=
-pen file)
-> > + * @batch:		how many memory alloced then file read(bytes), default 128=
-MB
-> > + *			will auto aligned to PAGE_SIZE
-> > + * @fd_flags:		file descriptor flags used when allocating
-> > + * @heap_flags:		flags passed to heap
-> > + *
-> > + * Provided by userspace as an argument to the ioctl
-> > + */
-> > +struct dma_heap_allocation_file_data {
-> > +	__u32 fd;
-> > +	__u32 file_fd;
-> > +	__u32 batch;
-> > +	__u32 fd_flags;
-> > +	__u64 heap_flags;
-> > +};
-> > +
-> >   #define DMA_HEAP_IOC_MAGIC		'H'
-> >   /**
-> > @@ -50,4 +71,15 @@ struct dma_heap_allocation_data {
-> >   #define DMA_HEAP_IOCTL_ALLOC	_IOWR(DMA_HEAP_IOC_MAGIC, 0x0,\
-> >   				      struct dma_heap_allocation_data)
-> > +/**
-> > + * DOC: DMA_HEAP_IOCTL_ALLOC_AND_READ - allocate memory from pool and =
-both
-> > + *					read file when allocate memory.
-> > + *
-> > + * Takes a dma_heap_allocation_file_data struct and returns it with th=
-e fd field
-> > + * populated with the dmabuf handle of the allocation. When return, th=
-e dma-buf
-> > + * content is read from file.
-> > + */
-> > +#define DMA_HEAP_IOCTL_ALLOC_AND_READ \
-> > +	_IOWR(DMA_HEAP_IOC_MAGIC, 0x1, struct dma_heap_allocation_file_data)
-> > +
-> >   #endif /* _UAPI_LINUX_DMABUF_POOL_H */
 >=20
 
 --=20
