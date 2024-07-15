@@ -2,323 +2,151 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7FAEA930526
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 13 Jul 2024 12:34:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CE89493109E
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Jul 2024 10:52:33 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 229D442518
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 13 Jul 2024 10:34:24 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.17])
-	by lists.linaro.org (Postfix) with ESMTPS id 65BEA3F526
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 13 Jul 2024 10:34:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 71092447AD
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 15 Jul 2024 08:52:32 +0000 (UTC)
+Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com [209.85.208.175])
+	by lists.linaro.org (Postfix) with ESMTPS id BF4B34416B
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Jul 2024 08:52:29 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=OFHPqiXh;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.17 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1720866860; x=1752402860;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=ZFb3Vw+/NfiXNX3e2ZwVPTfffIk86eXoQUs0u1dLJKs=;
-  b=OFHPqiXhSYFDyKrNXT8l0azW0W16mKJPfOXik5LRPmQOqkbRo07EWr1u
-   rzG38pRpH1QMZ40Jd92bjRDO2iVsURH/96DHgio0FIr9Mnbm/7TTZst5Y
-   yyWkJM573yQu/qSGrOAgsa/ljAFoQQdFYRakantJrxza5/2d+yxLSYXw/
-   plezWfr+V4AkXOciFIAeAjnXAGxZ6NGOOSSyo8y46RQ3Ixjez/6DaqMRH
-   B6QWPlOXFd0Med5KSXeXYoGk2IWpS1FVVOOMp+bTnXb/CMFCxHUXItLRG
-   dUM99r4wZ6it2IPv9lHU/uGzboJUreX2NqMmg/EtITxH9mSdYLsl/0Gpj
-   Q==;
-X-CSE-ConnectionGUID: rnJsOLOtRguY1nvGY4ms9g==
-X-CSE-MsgGUID: Tb1ZyzxdR9abpnLkpYQVnQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11131"; a="18178411"
-X-IronPort-AV: E=Sophos;i="6.09,205,1716274800";
-   d="scan'208";a="18178411"
-Received: from fmviesa010.fm.intel.com ([10.60.135.150])
-  by fmvoesa111.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Jul 2024 03:34:19 -0700
-X-CSE-ConnectionGUID: qIFVPO+9TQemlVttxrk+UA==
-X-CSE-MsgGUID: 3bcbnXAwR3u/QiMgonZfZg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.09,205,1716274800";
-   d="scan'208";a="49231777"
-Received: from lkp-server01.sh.intel.com (HELO 68891e0c336b) ([10.239.97.150])
-  by fmviesa010.fm.intel.com with ESMTP; 13 Jul 2024 03:34:16 -0700
-Received: from kbuild by 68891e0c336b with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1sSa4z-000byp-1i;
-	Sat, 13 Jul 2024 10:34:13 +0000
-Date: Sat, 13 Jul 2024 18:33:23 +0800
-From: kernel test robot <lkp@intel.com>
-To: Huan Yang <link@vivo.com>, Sumit Semwal <sumit.semwal@linaro.org>,
+	dkim=pass header.d=ffwll.ch header.s=google header.b=Nqp6e9vH;
+	spf=none (lists.linaro.org: domain of daniel.vetter@ffwll.ch has no SPF policy when checking 209.85.208.175) smtp.mailfrom=daniel.vetter@ffwll.ch;
+	dmarc=none
+Received: by mail-lj1-f175.google.com with SMTP id 38308e7fff4ca-2ee9bca8675so5318011fa.3
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 15 Jul 2024 01:52:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ffwll.ch; s=google; t=1721033548; x=1721638348; darn=lists.linaro.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:mail-followup-to:message-id:subject:cc:to
+         :from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=zFtI2KoVZL8zpxDmxsiji21hGTTPGlau5bq5V67S++I=;
+        b=Nqp6e9vHnL5ghrjxnlo9lUQ45dGS/RPGHB0Mp6rJ1kwUovflZon+TkqQ+U6GwPDbEz
+         BJRi0/3XsSNjuKpTjpPmL3bjexPyfSLsGhudhR/jAR/sqhRn56EM1CaO2GRvlTXjoIj0
+         fJ7Pmu44Cwyh2y4hX/qJSLxC8IbY+jWBJ7LPg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1721033548; x=1721638348;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :mime-version:references:mail-followup-to:message-id:subject:cc:to
+         :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=zFtI2KoVZL8zpxDmxsiji21hGTTPGlau5bq5V67S++I=;
+        b=CDpb7s1TjBPCvWL6IY8+TbPtUF21Q4gf2Rdo2uJPYioU3n2ljsNLsK78r5LB4i4tpU
+         VVMPK6HrlnQkb6cDMOdoGW3aKMl18RXGneYbfsvTARweDMdVHCmzr8A2h5dhD/82hXb+
+         7hToYxBq/cbuDrbWObsqMhYJigIPCifQQtfUmxwFqt1fOFzOBG2Oe5i+pnA2ls0KWLCz
+         A+kNa0ki/GvE/8Pf/af8gmcvLaSpPIzdr+YI3Fw91vtxgXTrUtsI/iLXhauE9CU6Rj/E
+         OAPaYDcU5frr7hlkWqHAD91OqWOYnqMQoJC1U7RO8wuGRLIe9gSQQwrPH3U4ChNqRjrm
+         VYQQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXGuWlnGQZBFE+LQk8QOPLAQMFizWcVLUsyLMvurt6Z70D+cLoRfcLNlz1Kd56PKekRZiC0Sxwn12WEki9YXZpKbt7+RRcxeoXHM0Q3d5o=
+X-Gm-Message-State: AOJu0YxSXMb+VYLOGjpJUDks29hNS80uatcF4VU46cVRRSiTy7EFBb0x
+	dgbeNVELwhFq/Vny1Ycclv5NrUwWceIKYdhssY/LqcLYzi1wv2uEyzFbV89Y2pw=
+X-Google-Smtp-Source: AGHT+IHmjsFZ+qyY6qOuWBh0tmFYh3x5Sbnw2EXZYOBODf4NfNY2g4S0U+DdM2RcQHVCl5EcvZtu3w==
+X-Received: by 2002:a05:651c:198b:b0:2ee:91b7:860 with SMTP id 38308e7fff4ca-2eec98be531mr64924681fa.4.1721033546536;
+        Mon, 15 Jul 2024 01:52:26 -0700 (PDT)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4279f2cc306sm113442395e9.30.2024.07.15.01.52.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 15 Jul 2024 01:52:26 -0700 (PDT)
+Date: Mon, 15 Jul 2024 10:52:23 +0200
+From: Daniel Vetter <daniel.vetter@ffwll.ch>
+To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <ZpTjR-7dabdyREXS@phenom.ffwll.local>
+Mail-Followup-To: Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Lei Liu <liulei.rjpt@vivo.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
 	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
 	Brian Starkey <Brian.Starkey@arm.com>,
 	John Stultz <jstultz@google.com>,
 	"T.J. Mercier" <tjmercier@google.com>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@redhat.com>,
+	Matthew Wilcox <willy@infradead.org>,
+	Muhammad Usama Anjum <usama.anjum@collabora.com>,
+	Andrei Vagin <avagin@google.com>,
+	Ryan Roberts <ryan.roberts@arm.com>,
+	Kefeng Wang <wangkefeng.wang@huawei.com>,
 	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
-Message-ID: <202407131825.A44mFGu1-lkp@intel.com>
-References: <20240711074221.459589-2-link@vivo.com>
+	linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
+	linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+	"Vetter, Daniel" <daniel.vetter@intel.com>,
+	opensource.kernel@vivo.com
+References: <20240710135757.25786-1-liulei.rjpt@vivo.com>
+ <5e5ee5d3-8a57-478a-9ce7-b40cab60b67d@amd.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240711074221.459589-2-link@vivo.com>
-X-Rspamd-Queue-Id: 65BEA3F526
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.00 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
-	BAYES_HAM(-3.00)[100.00%];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+In-Reply-To: <5e5ee5d3-8a57-478a-9ce7-b40cab60b67d@amd.com>
+X-Operating-System: Linux phenom 6.9.7-amd64 
+X-Rspamd-Queue-Id: BF4B34416B
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.30 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.175:from];
 	ARC_NA(0.00)[];
 	MISSING_XM_UA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[15];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCPT_COUNT_TWELVE(0.00)[23];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
+	R_SPF_NA(0.00)[no SPF record];
+	DMARC_NA(0.00)[ffwll.ch];
 	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_THREE(0.00)[3];
+	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+]
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[ffwll.ch:+]
 X-Rspamd-Action: no action
 X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: DX2CIJK7G3UNUSUGV3SQZUXW5HLJAPXP
-X-Message-ID-Hash: DX2CIJK7G3UNUSUGV3SQZUXW5HLJAPXP
-X-MailFrom: lkp@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, opensource.kernel@vivo.com, Huan Yang <link@vivo.com>
+Message-ID-Hash: DZ2GX4DQ7JWUGVK4ZV4NZMJGWCLECZZ5
+X-Message-ID-Hash: DZ2GX4DQ7JWUGVK4ZV4NZMJGWCLECZZ5
+X-MailFrom: daniel.vetter@ffwll.ch
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Lei Liu <liulei.rjpt@vivo.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Andrew Morton <akpm@linux-foundation.org>, David Hildenbrand <david@redhat.com>, Matthew Wilcox <willy@infradead.org>, Muhammad Usama Anjum <usama.anjum@collabora.com>, Andrei Vagin <avagin@google.com>, Ryan Roberts <ryan.roberts@arm.com>, Kefeng Wang <wangkefeng.wang@huawei.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, Daniel Vetter <daniel@ffwll.ch>, "Vetter, Daniel" <daniel.vetter@intel.com>, opensource.kernel@vivo.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/2] dma-buf: heaps: DMA_HEAP_IOCTL_ALLOC_READ_FILE framework
+Subject: [Linaro-mm-sig] Re: [PATCH 0/2] Support direct I/O read and write for memory allocated by dmabuf
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DX2CIJK7G3UNUSUGV3SQZUXW5HLJAPXP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/DZ2GX4DQ7JWUGVK4ZV4NZMJGWCLECZZ5/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Huan,
+On Wed, Jul 10, 2024 at 04:14:18PM +0200, Christian K=F6nig wrote:
+> Am 10.07.24 um 15:57 schrieb Lei Liu:
+> > Use vm_insert_page to establish a mapping for the memory allocated
+> > by dmabuf, thus supporting direct I/O read and write; and fix the
+> > issue of incorrect memory statistics after mapping dmabuf memory.
+>=20
+> Well big NAK to that! Direct I/O is intentionally disabled on DMA-bufs.
+>=20
+> We already discussed enforcing that in the DMA-buf framework and this pat=
+ch
+> probably means that we should really do that.
 
-kernel test robot noticed the following build warnings:
+Last time I looked dma_mmap doesn't guarantee that the vma end sup with
+VM_SPECIAL, and that's pretty much the only reason why we can't enforce
+this. But we might be able to enforce this at least on some architectures,
+I didn't check for that ... if at least x86-64 and arm64 could have the
+check, that would be great. So might be worth it to re-audit this all.
 
-[auto build test WARNING on 523b23f0bee3014a7a752c9bb9f5c54f0eddae88]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Huan-Yang/dma-buf-heaps-DMA_HEAP_IOCTL_ALLOC_READ_FILE-framework/20240711-155902
-base:   523b23f0bee3014a7a752c9bb9f5c54f0eddae88
-patch link:    https://lore.kernel.org/r/20240711074221.459589-2-link%40vivo.com
-patch subject: [PATCH 1/2] dma-buf: heaps: DMA_HEAP_IOCTL_ALLOC_READ_FILE framework
-config: i386-buildonly-randconfig-002-20240713 (https://download.01.org/0day-ci/archive/20240713/202407131825.A44mFGu1-lkp@intel.com/config)
-compiler: clang version 18.1.5 (https://github.com/llvm/llvm-project 617a15a9eac96088ae5e9134248d8236e34b91b1)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240713/202407131825.A44mFGu1-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202407131825.A44mFGu1-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
->> drivers/dma-buf/dma-heap.c:293:18: warning: format specifies type 'long' but the argument has type 'ssize_t' (aka 'int') [-Wformat]
-     292 |                         pr_err("failed to use buffer kernel_read_file %s, err=%ld, [%ld, %ld], f_sz=%ld\n",
-         |                                                                               ~~~
-         |                                                                               %zd
-     293 |                                pathp, err, start, fsz, fsz);
-         |                                       ^~~
-   include/linux/printk.h:533:33: note: expanded from macro 'pr_err'
-     533 |         printk(KERN_ERR pr_fmt(fmt), ##__VA_ARGS__)
-         |                                ~~~     ^~~~~~~~~~~
-   include/linux/printk.h:490:60: note: expanded from macro 'printk'
-     490 | #define printk(fmt, ...) printk_index_wrap(_printk, fmt, ##__VA_ARGS__)
-         |                                                     ~~~    ^~~~~~~~~~~
-   include/linux/printk.h:462:19: note: expanded from macro 'printk_index_wrap'
-     462 |                 _p_func(_fmt, ##__VA_ARGS__);                           \
-         |                         ~~~~    ^~~~~~~~~~~
->> drivers/dma-buf/dma-heap.c:293:23: warning: format specifies type 'long' but the argument has type 'size_t' (aka 'unsigned int') [-Wformat]
-     292 |                         pr_err("failed to use buffer kernel_read_file %s, err=%ld, [%ld, %ld], f_sz=%ld\n",
-         |                                                                                     ~~~
-         |                                                                                     %zu
-     293 |                                pathp, err, start, fsz, fsz);
-         |                                            ^~~~~
-   include/linux/printk.h:533:33: note: expanded from macro 'pr_err'
-     533 |         printk(KERN_ERR pr_fmt(fmt), ##__VA_ARGS__)
-         |                                ~~~     ^~~~~~~~~~~
-   include/linux/printk.h:490:60: note: expanded from macro 'printk'
-     490 | #define printk(fmt, ...) printk_index_wrap(_printk, fmt, ##__VA_ARGS__)
-         |                                                     ~~~    ^~~~~~~~~~~
-   include/linux/printk.h:462:19: note: expanded from macro 'printk_index_wrap'
-     462 |                 _p_func(_fmt, ##__VA_ARGS__);                           \
-         |                         ~~~~    ^~~~~~~~~~~
-   drivers/dma-buf/dma-heap.c:293:30: warning: format specifies type 'long' but the argument has type 'size_t' (aka 'unsigned int') [-Wformat]
-     292 |                         pr_err("failed to use buffer kernel_read_file %s, err=%ld, [%ld, %ld], f_sz=%ld\n",
-         |                                                                                          ~~~
-         |                                                                                          %zu
-     293 |                                pathp, err, start, fsz, fsz);
-         |                                                   ^~~
-   include/linux/printk.h:533:33: note: expanded from macro 'pr_err'
-     533 |         printk(KERN_ERR pr_fmt(fmt), ##__VA_ARGS__)
-         |                                ~~~     ^~~~~~~~~~~
-   include/linux/printk.h:490:60: note: expanded from macro 'printk'
-     490 | #define printk(fmt, ...) printk_index_wrap(_printk, fmt, ##__VA_ARGS__)
-         |                                                     ~~~    ^~~~~~~~~~~
-   include/linux/printk.h:462:19: note: expanded from macro 'printk_index_wrap'
-     462 |                 _p_func(_fmt, ##__VA_ARGS__);                           \
-         |                         ~~~~    ^~~~~~~~~~~
-   drivers/dma-buf/dma-heap.c:293:35: warning: format specifies type 'long' but the argument has type 'size_t' (aka 'unsigned int') [-Wformat]
-     292 |                         pr_err("failed to use buffer kernel_read_file %s, err=%ld, [%ld, %ld], f_sz=%ld\n",
-         |                                                                                                     ~~~
-         |                                                                                                     %zu
-     293 |                                pathp, err, start, fsz, fsz);
-         |                                                        ^~~
-   include/linux/printk.h:533:33: note: expanded from macro 'pr_err'
-     533 |         printk(KERN_ERR pr_fmt(fmt), ##__VA_ARGS__)
-         |                                ~~~     ^~~~~~~~~~~
-   include/linux/printk.h:490:60: note: expanded from macro 'printk'
-     490 | #define printk(fmt, ...) printk_index_wrap(_printk, fmt, ##__VA_ARGS__)
-         |                                                     ~~~    ^~~~~~~~~~~
-   include/linux/printk.h:462:19: note: expanded from macro 'printk_index_wrap'
-     462 |                 _p_func(_fmt, ##__VA_ARGS__);                           \
-         |                         ~~~~    ^~~~~~~~~~~
-   drivers/dma-buf/dma-heap.c:367:10: warning: format specifies type 'long' but the argument has type 'ssize_t' (aka 'int') [-Wformat]
-     366 |                 pr_err("use kernel_read_file, err=%ld, [%ld, %ld], f_sz=%ld\n",
-         |                                                   ~~~
-         |                                                   %zd
-     367 |                        err, start, (start + size), heap_file->fsz);
-         |                        ^~~
-   include/linux/printk.h:533:33: note: expanded from macro 'pr_err'
-     533 |         printk(KERN_ERR pr_fmt(fmt), ##__VA_ARGS__)
-         |                                ~~~     ^~~~~~~~~~~
-   include/linux/printk.h:490:60: note: expanded from macro 'printk'
-     490 | #define printk(fmt, ...) printk_index_wrap(_printk, fmt, ##__VA_ARGS__)
-         |                                                     ~~~    ^~~~~~~~~~~
-   include/linux/printk.h:462:19: note: expanded from macro 'printk_index_wrap'
-     462 |                 _p_func(_fmt, ##__VA_ARGS__);                           \
-         |                         ~~~~    ^~~~~~~~~~~
-   drivers/dma-buf/dma-heap.c:367:15: warning: format specifies type 'long' but the argument has type 'ssize_t' (aka 'int') [-Wformat]
-     366 |                 pr_err("use kernel_read_file, err=%ld, [%ld, %ld], f_sz=%ld\n",
-         |                                                         ~~~
-         |                                                         %zd
-     367 |                        err, start, (start + size), heap_file->fsz);
-         |                             ^~~~~
-   include/linux/printk.h:533:33: note: expanded from macro 'pr_err'
-     533 |         printk(KERN_ERR pr_fmt(fmt), ##__VA_ARGS__)
-         |                                ~~~     ^~~~~~~~~~~
-   include/linux/printk.h:490:60: note: expanded from macro 'printk'
-     490 | #define printk(fmt, ...) printk_index_wrap(_printk, fmt, ##__VA_ARGS__)
-         |                                                     ~~~    ^~~~~~~~~~~
-   include/linux/printk.h:462:19: note: expanded from macro 'printk_index_wrap'
-     462 |                 _p_func(_fmt, ##__VA_ARGS__);                           \
-         |                         ~~~~    ^~~~~~~~~~~
-   drivers/dma-buf/dma-heap.c:367:22: warning: format specifies type 'long' but the argument has type 'ssize_t' (aka 'int') [-Wformat]
-     366 |                 pr_err("use kernel_read_file, err=%ld, [%ld, %ld], f_sz=%ld\n",
-         |                                                              ~~~
-         |                                                              %zd
-     367 |                        err, start, (start + size), heap_file->fsz);
-         |                                    ^~~~~~~~~~~~~~
-   include/linux/printk.h:533:33: note: expanded from macro 'pr_err'
-     533 |         printk(KERN_ERR pr_fmt(fmt), ##__VA_ARGS__)
-         |                                ~~~     ^~~~~~~~~~~
-   include/linux/printk.h:490:60: note: expanded from macro 'printk'
-     490 | #define printk(fmt, ...) printk_index_wrap(_printk, fmt, ##__VA_ARGS__)
-         |                                                     ~~~    ^~~~~~~~~~~
-   include/linux/printk.h:462:19: note: expanded from macro 'printk_index_wrap'
-     462 |                 _p_func(_fmt, ##__VA_ARGS__);                           \
-         |                         ~~~~    ^~~~~~~~~~~
-   drivers/dma-buf/dma-heap.c:367:38: warning: format specifies type 'long' but the argument has type 'size_t' (aka 'unsigned int') [-Wformat]
-     366 |                 pr_err("use kernel_read_file, err=%ld, [%ld, %ld], f_sz=%ld\n",
-         |                                                                         ~~~
-         |                                                                         %zu
-     367 |                        err, start, (start + size), heap_file->fsz);
-         |                                                    ^~~~~~~~~~~~~~
-   include/linux/printk.h:533:33: note: expanded from macro 'pr_err'
-     533 |         printk(KERN_ERR pr_fmt(fmt), ##__VA_ARGS__)
-         |                                ~~~     ^~~~~~~~~~~
-   include/linux/printk.h:490:60: note: expanded from macro 'printk'
-     490 | #define printk(fmt, ...) printk_index_wrap(_printk, fmt, ##__VA_ARGS__)
-
-
-vim +293 drivers/dma-buf/dma-heap.c
-
-   239	
-   240	int dma_heap_submit_file_read(struct dma_heap_file_task *heap_ftask)
-   241	{
-   242		struct dma_heap_file_work *heap_fwork = init_file_work(heap_ftask);
-   243		struct page *last = NULL;
-   244		struct dma_heap_file *heap_file = heap_ftask->heap_file;
-   245		size_t start = heap_ftask->roffset;
-   246		struct file *file = heap_file->file;
-   247		size_t fsz = heap_file->fsz;
-   248	
-   249		if (unlikely(!heap_fwork))
-   250			return -ENOMEM;
-   251	
-   252		/**
-   253		 * If file size is not page aligned, direct io can't process the tail.
-   254		 * So, if reach to tail, remain the last page use buffer read.
-   255		 */
-   256		if (heap_file->direct && start + heap_ftask->rsize > fsz) {
-   257			heap_fwork->need_size -= PAGE_SIZE;
-   258			last = heap_ftask->parray[heap_ftask->pindex - 1];
-   259		}
-   260	
-   261		spin_lock(&heap_fctl->lock);
-   262		list_add_tail(&heap_fwork->list, &heap_fctl->works);
-   263		spin_unlock(&heap_fctl->lock);
-   264		atomic_inc(&heap_fctl->nr_work);
-   265	
-   266		wake_up(&heap_fctl->threadwq);
-   267	
-   268		if (last) {
-   269			char *buf, *pathp;
-   270			ssize_t err;
-   271			void *buffer;
-   272	
-   273			buf = kmalloc(PATH_MAX, GFP_KERNEL);
-   274			if (unlikely(!buf))
-   275				return -ENOMEM;
-   276	
-   277			start = PAGE_ALIGN_DOWN(fsz);
-   278	
-   279			pathp = file_path(file, buf, PATH_MAX);
-   280			if (IS_ERR(pathp)) {
-   281				kfree(buf);
-   282				return PTR_ERR(pathp);
-   283			}
-   284	
-   285			buffer = kmap_local_page(last); // use page's kaddr.
-   286			err = kernel_read_file_from_path(pathp, start, &buffer,
-   287							 fsz - start, &fsz,
-   288							 READING_POLICY);
-   289			kunmap_local(buffer);
-   290			kfree(buf);
-   291			if (err < 0) {
-   292				pr_err("failed to use buffer kernel_read_file %s, err=%ld, [%ld, %ld], f_sz=%ld\n",
- > 293				       pathp, err, start, fsz, fsz);
-   294	
-   295				return err;
-   296			}
-   297		}
-   298	
-   299		heap_ftask->roffset += heap_ftask->rsize;
-   300		heap_ftask->rsize = 0;
-   301		heap_ftask->pindex = 0;
-   302		heap_ftask->rbatch = min_t(size_t,
-   303					   PAGE_ALIGN(fsz) - heap_ftask->roffset,
-   304					   heap_ftask->rbatch);
-   305		return 0;
-   306	}
-   307	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+I think all other dma-buf exporters/allocators do only create VM_SPECIAL
+vmas.
+-Sima
+--=20
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
