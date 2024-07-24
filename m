@@ -2,45 +2,52 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E280934C78
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Jul 2024 13:28:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 79E0793ADBE
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 Jul 2024 10:06:49 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 94A5744209
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 18 Jul 2024 11:28:01 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id C17473F3B3
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 18 Jul 2024 11:27:58 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1BB724102C
+	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 Jul 2024 08:06:48 +0000 (UTC)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+	by lists.linaro.org (Postfix) with ESMTPS id DC44840E10
+	for <linaro-mm-sig@lists.linaro.org>; Wed, 24 Jul 2024 08:06:30 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=PSLBthdI;
-	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=krzk@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=T2mKwvje;
+	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 145.40.73.55 as permitted sender) smtp.mailfrom=krzk@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 5F8DB61B46;
-	Thu, 18 Jul 2024 11:27:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 73BF0C4AF09;
-	Thu, 18 Jul 2024 11:27:54 +0000 (UTC)
+	by sin.source.kernel.org (Postfix) with ESMTP id 755F3CE0FAE;
+	Wed, 24 Jul 2024 08:06:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E6486C32782;
+	Wed, 24 Jul 2024 08:06:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1721302078;
-	bh=HoxUNH3rJHWxZTGHOWJYLSl2Dr3ygT83Mu7tovtsC+4=;
+	s=k20201202; t=1721808387;
+	bh=AKKM6ppMNxmC7UXJSSz3Ux9097zdWoX9DlJdSKA47D4=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=PSLBthdIJCYs6KFMs38FEeFgbBqeMQ7IARAiILyMrFfV+fJ1moSd5DyXfeMTswlxm
-	 2/6ArORaDNQWturwlBAftcgLaUt2sYzNv3vb2mUjuVxirJ+ngHwzn5bYFsDtvSNPsG
-	 1vYXrwDnyXktMzc94+/PII2bplXVQdBiBUndKykgu/qT1AsIxlxudVL5Ij2YY81WeJ
-	 otcfOpXcl8vx8TqLIPYNnEfAsTVqQFevovyrZiK+/MEBccvI6/DBtrl1JWB4uHI0zU
-	 xEBF/j4N5jbj0wvHBrM7GHxbRQYM/jA1e1KaFzRQaKSZSCWux7+lccO8fOVV3odCy0
-	 qKdx4WpaY8HeA==
-Message-ID: <09605d65-8a0e-4d28-be8e-a07bbdf376d6@kernel.org>
-Date: Thu, 18 Jul 2024 13:27:51 +0200
+	b=T2mKwvje3zz3Tu+q9/weTIFmMsr4waWW4t+NKBRQiPZd6QZucUTu2hjyLDyChR/EK
+	 XutvMGcA54ehmZslh+rwuxlKFSFQF4BPD6yKnZrejsEJwk/EVaDSZjJbBmTHIj13Km
+	 TawreHGT/6YVXpVSEem3JavFS0j6012pl+qKx1LB62owOFpWCwUeKniNG+JtclOYWb
+	 Q8EJYCs2otMvvQeu71KqPsGxWMexoVxYMuPU1RgRLBXo/KuFwq8IZi2G85Di4cVTAl
+	 tD0futDU6Y/0UVcaYkG55sg+0pjkd5MjhaFE3RfULjlWM6Mqqv4XxlLAWi29PsygKd
+	 Cv/j9peV3ENOA==
+Message-ID: <119c9a56-ada7-42b2-a0c4-93038950f325@kernel.org>
+Date: Wed, 24 Jul 2024 10:06:16 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: Amirreza Zarrabi <quic_azarrabi@quicinc.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konrad.dybcio@linaro.org>,
+To: Alexandre Mergnat <amergnat@baylibre.com>,
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ Rob Herring <robh+dt@kernel.org>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Conor Dooley <conor+dt@kernel.org>, Matthias Brugger
+ <matthias.bgg@gmail.com>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ Lee Jones <lee@kernel.org>, Flora Fu <flora.fu@mediatek.com>,
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
  Sumit Semwal <sumit.semwal@linaro.org>,
  =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- srinivas.kandagatla@linaro.org, bartosz.golaszewski@linaro.org
-References: <20240702-qcom-tee-object-and-ioctls-v1-0-633c3ddf57ee@quicinc.com>
- <20240702-qcom-tee-object-and-ioctls-v1-1-633c3ddf57ee@quicinc.com>
+ Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>
+References: <20240226-audio-i350-v7-0-6518d953a141@baylibre.com>
+ <20240226-audio-i350-v7-3-6518d953a141@baylibre.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -86,43 +93,43 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  uZwJCLykjad45hsWcOGk3OcaAGQS6NDlfhM6O9aYNwGL6tGt/6BkRikNOs7VDEa4/HlbaSJo
  7FgndGw1kWmkeL6oQh7wBvYll2buKod4qYntmNKEicoHGU+x91Gcan8mCoqhJkbqrL7+nXG2
  5Q/GS5M9RFWS+nYyJh+c3OcfKqVcZQNANItt7+ULzdNJuhvTRRdC3g9hmCEuNSr+CLMdnRBY fv0=
-In-Reply-To: <20240702-qcom-tee-object-and-ioctls-v1-1-633c3ddf57ee@quicinc.com>
-X-Rspamd-Queue-Id: C17473F3B3
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.99 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+In-Reply-To: <20240226-audio-i350-v7-3-6518d953a141@baylibre.com>
+X-Rspamd-Server: lists.linaro.org
+X-Rspamd-Queue-Id: DC44840E10
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.84 / 15.00];
+	BAYES_HAM(-2.34)[96.94%];
+	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217:c];
+	R_SPF_ALLOW(-0.20)[+ip4:145.40.73.55];
 	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
-	MIME_TRACE(0.00)[0:+];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	URIBL_BLOCKED(0.00)[dfw.source.kernel.org:helo,dfw.source.kernel.org:rdns];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ASN(0.00)[asn:54825, ipnet:145.40.73.0/24, country:US];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	TAGGED_RCPT(0.00)[dt];
+	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,kernel.org,linaro.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_LAST(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-X-Rspamd-Server: lists.linaro.org
-Message-ID-Hash: 6PUKVC2TLWOX3IRE7KBJRGFEQR6A22HM
-X-Message-ID-Hash: 6PUKVC2TLWOX3IRE7KBJRGFEQR6A22HM
+Message-ID-Hash: AFVHA27JWA6ITZV6EP7XBNLHHVKP64ZF
+X-Message-ID-Hash: AFVHA27JWA6ITZV6EP7XBNLHHVKP64ZF
 X-MailFrom: krzk@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+CC: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH RFC 1/3] firmware: qcom: implement object invoke support
+Subject: [Linaro-mm-sig] Re: [PATCH v7 03/16] dt-bindings: mfd: mediatek: Add codec property for MT6357 PMIC
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/6PUKVC2TLWOX3IRE7KBJRGFEQR6A22HM/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AFVHA27JWA6ITZV6EP7XBNLHHVKP64ZF/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -132,121 +139,19 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 03/07/2024 07:57, Amirreza Zarrabi wrote:
-> Qualcomm TEE hosts Trusted Applications and Services that run in the
-> secure world. Access to these resources is provided using object
-> capabilities. A TEE client with access to the capability can invoke
-> the object and request a service. Similarly, TEE can request a service
-> from nonsecure world with object capabilities that are exported to secure
-> world.
+On 22/07/2024 08:53, Alexandre Mergnat wrote:
+> Add the audio codec sub-device. This sub-device is used to set the
+> optional voltage values according to the hardware.
+> The properties are:
+>   - Setup of microphone bias voltage.
+>   - Setup of the speaker pin pull-down.
 > 
-> We provide qcom_tee_object which represents an object in both secure
-> and nonsecure world. TEE clients can invoke an instance of qcom_tee_object
-> to access TEE. TEE can issue a callback request to nonsecure world
-> by invoking an instance of qcom_tee_object in nonsecure world.
+> Also, add the audio power supply property which is dedicated for
+> the audio codec sub-device.
 > 
-> Any driver in nonsecure world that is interested to export a struct (or a
-> service object) to TEE, requires to embed an instance of qcom_tee_object in
-> the relevant struct and implements the dispatcher function which is called
-> when TEE invoked the service object.
-> 
-> We also provids simplified API which implements the Qualcomm TEE transport
-> protocol. The implementation is independent from any services that may
-> reside in nonsecure world.
-> 
-> Signed-off-by: Amirreza Zarrabi <quic_azarrabi@quicinc.com>
-> ---
->  drivers/firmware/qcom/Kconfig                      |   14 +
->  drivers/firmware/qcom/Makefile                     |    2 +
->  drivers/firmware/qcom/qcom_object_invoke/Makefile  |    4 +
->  drivers/firmware/qcom/qcom_object_invoke/async.c   |  142 +++
->  drivers/firmware/qcom/qcom_object_invoke/core.c    | 1139 ++++++++++++++++++++
->  drivers/firmware/qcom/qcom_object_invoke/core.h    |  186 ++++
->  .../qcom/qcom_object_invoke/qcom_scm_invoke.c      |   22 +
->  .../firmware/qcom/qcom_object_invoke/release_wq.c  |   90 ++
->  include/linux/firmware/qcom/qcom_object_invoke.h   |  233 ++++
->  9 files changed, 1832 insertions(+)
-> 
-> diff --git a/drivers/firmware/qcom/Kconfig b/drivers/firmware/qcom/Kconfig
-> index 7f6eb4174734..103ab82bae9f 100644
-> --- a/drivers/firmware/qcom/Kconfig
-> +++ b/drivers/firmware/qcom/Kconfig
-> @@ -84,4 +84,18 @@ config QCOM_QSEECOM_UEFISECAPP
->  	  Select Y here to provide access to EFI variables on the aforementioned
->  	  platforms.
->  
-> +config QCOM_OBJECT_INVOKE_CORE
+> Signed-off-by: Alexandre Mergnat <amergnat@baylibre.com>
 
-Let's avoid another rant from Linus and add here either proper defaults
-or dependencies.
-
-> +	bool "Secure TEE Communication Support"
-> +	help
-> +	  Various Qualcomm SoCs have a Trusted Execution Environment (TEE) running
-> +	  in the Trust Zone. This module provides an interface to that via the
-> +	  capability based object invocation, using SMC calls.
-> +
-> +	  OBJECT_INVOKE_CORE allows capability based secure communication between
-> +	  TEE and VMs. Using OBJECT_INVOKE_CORE, kernel can issue calls to TEE or
-> +	  TAs to request a service or exposes services to TEE and TAs. It implements
-> +	  the necessary marshaling of messages with TEE.
-> +
-> +	  Select Y here to provide access to TEE.
-> +
->  endmenu
-> diff --git a/drivers/firmware/qcom/Makefile b/drivers/firmware/qc
-
-
-...
-
-> +		} else {
-> +			/* TEE obtained the ownership of QCOM_TEE_OBJECT_TYPE_CB_OBJECT
-> +			 * input objects in 'u'. On further failure, TEE is responsible
-> +			 * to release them.
-> +			 */
-> +
-> +			oic->flags |= OIC_FLAG_QCOM_TEE;
-> +		}
-> +
-> +		/* Is it a callback request?! */
-> +		if (response_type != QCOM_TEE_RESULT_INBOUND_REQ_NEEDED) {
-> +			if (!*result) {
-> +				ret = update_args(u, oic);
-> +				if (ret) {
-> +					arg_for_each_output_object(i, u)
-> +						put_qcom_tee_object(u[i].o);
-> +				}
-> +			}
-> +
-> +			break;
-> +
-> +		} else {
-> +			oic->flags |= OIC_FLAG_BUSY;
-> +
-> +			/* Before dispatching the request, handle any pending async requests. */
-> +			__fetch__async_reqs(oic);
-> +
-> +			qcom_tee_object_invoke(oic, cb_msg);
-> +		}
-> +	}
-> +
-> +	__fetch__async_reqs(oic);
-> +
-> +out:
-> +	qcom_tee_object_invoke_ctx_uninit(oic);
-> +
-> +	return ret;
-> +}
-> +EXPORT_SYMBOL_GPL(qcom_tee_object_do_invoke);
-> +
-> +/* Primordial Object. */
-> +/* It is invoked by TEE for kernel services. */
-> +
-> +static struct qcom_tee_object *primordial_object = NULL_QCOM_TEE_OBJECT;
-> +static DEFINE_MUTEX(primordial_object_lock);
-
-Oh my... except that it looks like undocumented ABI, please avoid
-file-scope variables.
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 
 Best regards,
 Krzysztof
