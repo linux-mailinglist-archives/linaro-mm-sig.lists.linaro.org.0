@@ -2,134 +2,105 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79E0793ADBE
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 Jul 2024 10:06:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 614D293BB66
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jul 2024 06:09:52 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1BB724102C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 24 Jul 2024 08:06:48 +0000 (UTC)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
-	by lists.linaro.org (Postfix) with ESMTPS id DC44840E10
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 24 Jul 2024 08:06:30 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id EDD7F42540
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 25 Jul 2024 04:09:50 +0000 (UTC)
+Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com [209.85.208.181])
+	by lists.linaro.org (Postfix) with ESMTPS id 47E8142540
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 25 Jul 2024 04:09:34 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=T2mKwvje;
-	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 145.40.73.55 as permitted sender) smtp.mailfrom=krzk@kernel.org;
-	dmarc=pass (policy=none) header.from=kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sin.source.kernel.org (Postfix) with ESMTP id 755F3CE0FAE;
-	Wed, 24 Jul 2024 08:06:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E6486C32782;
-	Wed, 24 Jul 2024 08:06:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1721808387;
-	bh=AKKM6ppMNxmC7UXJSSz3Ux9097zdWoX9DlJdSKA47D4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=T2mKwvje3zz3Tu+q9/weTIFmMsr4waWW4t+NKBRQiPZd6QZucUTu2hjyLDyChR/EK
-	 XutvMGcA54ehmZslh+rwuxlKFSFQF4BPD6yKnZrejsEJwk/EVaDSZjJbBmTHIj13Km
-	 TawreHGT/6YVXpVSEem3JavFS0j6012pl+qKx1LB62owOFpWCwUeKniNG+JtclOYWb
-	 Q8EJYCs2otMvvQeu71KqPsGxWMexoVxYMuPU1RgRLBXo/KuFwq8IZi2G85Di4cVTAl
-	 tD0futDU6Y/0UVcaYkG55sg+0pjkd5MjhaFE3RfULjlWM6Mqqv4XxlLAWi29PsygKd
-	 Cv/j9peV3ENOA==
-Message-ID: <119c9a56-ada7-42b2-a0c4-93038950f325@kernel.org>
-Date: Wed, 24 Jul 2024 10:06:16 +0200
+	dkim=pass header.d=linaro.org header.s=google header.b=jZ012AFX;
+	spf=pass (lists.linaro.org: domain of dmitry.baryshkov@linaro.org designates 209.85.208.181 as permitted sender) smtp.mailfrom=dmitry.baryshkov@linaro.org;
+	dmarc=pass (policy=none) header.from=linaro.org
+Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-2ef7fef3ccfso5420321fa.3
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 24 Jul 2024 21:09:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1721880573; x=1722485373; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=2aLaJYQrt2Mrpa6ixTAmSx6t43lvxNvXrJytjXn2tsc=;
+        b=jZ012AFXF9sc2shbvc3pfdtMesoY4uOHcNwI2y1+cbUwll/1fhCJShEJh9giuiF1Ia
+         he1IDS4UWeS37JcTelY/iKngjEM9LdA6upjVQ3ARAWsTytpaPUnSFR7CzjcARoaSEKBu
+         DaHkoo+cPMEep5Tfsu5NWEEpkQp/ZpL30SGuHwMW7WyiDMp+xM3JtLiCrFVez6mks1xP
+         3MdmRyAhsQw1kVnmhZQDcA2zAXBk9N3VFPFLV72ZhXMLKYCQuqG+dAV5n5e5BPXSdZyD
+         jtSPRPt25U2alpmjSEJtCKlrt/MlAK8vqbkgnI/6y1SMdqRLfKx+iX/8FiRP4UNKrCv1
+         wfqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1721880573; x=1722485373;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=2aLaJYQrt2Mrpa6ixTAmSx6t43lvxNvXrJytjXn2tsc=;
+        b=n8KI/JNfiFNKJ9jGZa9RXt/qHWio4rhyh/xJqGFj0SADDkTzzH5tD/ywVCx5xVNK2e
+         WHzEncL+Fk9PNCT4xEwR6+o+JODn5Z1jnHyfwRToOXiD5EDN/SSnMfSK73ry/cs6kWkb
+         saoayt0tVJdLZW+awV4z/BQ4/KMOXCy4yEspG1uUfUp0nJCTEMcbCDfHTDUamDBFFg8V
+         56F2KM8YmupMsI/DvLHoLE08j1/Xxoa74ydrr1a1jMTGGtJQafsAwBUD69Mb8RFXJ2z/
+         nw0yl/psLIuQ4MXL2ybjKDMPVsXiHRKYj/6rMULqf2o8tz82rcCeHsjrAWfAfoa+ObQD
+         5qVQ==
+X-Forwarded-Encrypted: i=1; AJvYcCW3EYqnOroyHIP3gY6N9EF7SeAklT2poJ4lMgoCIDGwYVcjC78YURi7CLAK1Brd0JxXM3z0+ceGDbBzY6hilUCUSZT+Q0rzpiJZsbqJXac=
+X-Gm-Message-State: AOJu0Yw+M1ktKUG/6TMMIxuFIF+fwNWEjRXv0K7uHj7CU1dtMQnaix4/
+	OKO8pvl3xPKrvPEDrtbt6un+bNjBzeXM4+2pb7xaojKUqiIiuHqRl2dwT3DYJj/Yog==
+X-Google-Smtp-Source: AGHT+IHHSLqQht8+k7EY6AfB3rbMJpvFsWVF+UqzojkS4iXdaTdaP69THmV9umWbUpansa7zrf2raA==
+X-Received: by 2002:a05:651c:207:b0:2ef:22ad:77b5 with SMTP id 38308e7fff4ca-2f039cc448amr10613301fa.29.1721880572931;
+        Wed, 24 Jul 2024 21:09:32 -0700 (PDT)
+Received: from eriador.lumag.spb.ru (dzdbxzyyyyyyyyyyybrhy-3.rev.dnainternet.fi. [2001:14ba:a0c3:3a00::b8c])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-2f03cf55cfasm751491fa.65.2024.07.24.21.09.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 24 Jul 2024 21:09:32 -0700 (PDT)
+Date: Thu, 25 Jul 2024 07:09:30 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+To: Amirreza Zarrabi <quic_azarrabi@quicinc.com>
+Message-ID: <gtdr5s7yih7pjuhpfkjmlu2lflya4heiph4wi446rlbxduqlya@5xfix7dyocli>
+References: <20240702-qcom-tee-object-and-ioctls-v1-0-633c3ddf57ee@quicinc.com>
+ <20240702-qcom-tee-object-and-ioctls-v1-1-633c3ddf57ee@quicinc.com>
+ <ink4tq3wk2jkpybiisaudkun3g2x2drfogrdw43zdpi6yh2u5g@yrvrxzxsi46g>
+ <836dab13-9c59-4d87-a600-a0be6506deb2@quicinc.com>
+ <CAA8EJprp2veCaQq8GsYv4Mu1HQbx8nWv0XWtxcE4cu5kxkA16w@mail.gmail.com>
+ <f9e5ef49-754c-4d97-8186-634674151b2f@quicinc.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Alexandre Mergnat <amergnat@baylibre.com>,
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
- Rob Herring <robh+dt@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Conor Dooley <conor+dt@kernel.org>, Matthias Brugger
- <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Lee Jones <lee@kernel.org>, Flora Fu <flora.fu@mediatek.com>,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>
-References: <20240226-audio-i350-v7-0-6518d953a141@baylibre.com>
- <20240226-audio-i350-v7-3-6518d953a141@baylibre.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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 fv0=
-In-Reply-To: <20240226-audio-i350-v7-3-6518d953a141@baylibre.com>
+Content-Disposition: inline
+In-Reply-To: <f9e5ef49-754c-4d97-8186-634674151b2f@quicinc.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: DC44840E10
-X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.84 / 15.00];
-	BAYES_HAM(-2.34)[96.94%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:145.40.73.55];
+X-Rspamd-Queue-Id: 47E8142540
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-3.49 / 15.00];
+	BAYES_HAM(-2.99)[99.94%];
+	MID_RHS_NOT_FQDN(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MIME_GOOD(-0.10)[text/plain];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:54825, ipnet:145.40.73.0/24, country:US];
-	RCPT_COUNT_TWELVE(0.00)[26];
-	TAGGED_RCPT(0.00)[dt];
-	FREEMAIL_TO(0.00)[baylibre.com,gmail.com,kernel.org,linaro.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	TO_DN_SOME(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	MISSING_XM_UA(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.181:from];
+	RCPT_COUNT_SEVEN(0.00)[11];
+	NEURAL_HAM(-0.00)[-1.000];
 	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	URIBL_BLOCKED(0.00)[linaro.org:dkim];
 	RCVD_COUNT_TWO(0.00)[2];
-	MID_RHS_MATCH_FROM(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	DKIM_TRACE(0.00)[linaro.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: AFVHA27JWA6ITZV6EP7XBNLHHVKP64ZF
-X-Message-ID-Hash: AFVHA27JWA6ITZV6EP7XBNLHHVKP64ZF
-X-MailFrom: krzk@kernel.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: LAP5RLQ3BUF7AMOSZHNKBQIVEK5W3YXN
+X-Message-ID-Hash: LAP5RLQ3BUF7AMOSZHNKBQIVEK5W3YXN
+X-MailFrom: dmitry.baryshkov@linaro.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konrad.dybcio@linaro.org>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, srinivas.kandagatla@linaro.org, bartosz.golaszewski@linaro.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v7 03/16] dt-bindings: mfd: mediatek: Add codec property for MT6357 PMIC
+Subject: [Linaro-mm-sig] Re: [PATCH RFC 1/3] firmware: qcom: implement object invoke support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AFVHA27JWA6ITZV6EP7XBNLHHVKP64ZF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/LAP5RLQ3BUF7AMOSZHNKBQIVEK5W3YXN/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -139,23 +110,83 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 22/07/2024 08:53, Alexandre Mergnat wrote:
-> Add the audio codec sub-device. This sub-device is used to set the
-> optional voltage values according to the hardware.
-> The properties are:
->   - Setup of microphone bias voltage.
->   - Setup of the speaker pin pull-down.
+On Thu, Jul 25, 2024 at 01:19:07PM GMT, Amirreza Zarrabi wrote:
 > 
-> Also, add the audio power supply property which is dedicated for
-> the audio codec sub-device.
 > 
-> Signed-off-by: Alexandre Mergnat <amergnat@baylibre.com>
+> On 7/4/2024 5:34 PM, Dmitry Baryshkov wrote:
+> > On Thu, 4 Jul 2024 at 00:40, Amirreza Zarrabi <quic_azarrabi@quicinc.com> wrote:
+> >>
+> >>
+> >>
+> >> On 7/3/2024 10:13 PM, Dmitry Baryshkov wrote:
+> >>> On Tue, Jul 02, 2024 at 10:57:36PM GMT, Amirreza Zarrabi wrote:
+> >>>> Qualcomm TEE hosts Trusted Applications and Services that run in the
+> >>>> secure world. Access to these resources is provided using object
+> >>>> capabilities. A TEE client with access to the capability can invoke
+> >>>> the object and request a service. Similarly, TEE can request a service
+> >>>> from nonsecure world with object capabilities that are exported to secure
+> >>>> world.
+> >>>>
+> >>>> We provide qcom_tee_object which represents an object in both secure
+> >>>> and nonsecure world. TEE clients can invoke an instance of qcom_tee_object
+> >>>> to access TEE. TEE can issue a callback request to nonsecure world
+> >>>> by invoking an instance of qcom_tee_object in nonsecure world.
+> >>>
+> >>> Please see Documentation/process/submitting-patches.rst on how to write
+> >>> commit messages.
+> >>
+> >> Ack.
+> >>
+> >>>
+> >>>>
+> >>>> Any driver in nonsecure world that is interested to export a struct (or a
+> >>>> service object) to TEE, requires to embed an instance of qcom_tee_object in
+> >>>> the relevant struct and implements the dispatcher function which is called
+> >>>> when TEE invoked the service object.
+> >>>>
+> >>>> We also provids simplified API which implements the Qualcomm TEE transport
+> >>>> protocol. The implementation is independent from any services that may
+> >>>> reside in nonsecure world.
+> >>>
+> >>> "also" usually means that it should go to a separate commit.
+> >>
+> >> I will split this patch to multiple smaller ones.
+> >>
+> > 
+> > [...]
+> > 
+> >>>
+> >>>> +    } in, out;
+> >>>> +};
+> >>>> +
+> >>>> +int qcom_tee_object_do_invoke(struct qcom_tee_object_invoke_ctx *oic,
+> >>>> +    struct qcom_tee_object *object, unsigned long op, struct qcom_tee_arg u[], int *result);
+> >>>
+> >>> What's the difference between a result that gets returned by the
+> >>> function and the result that gets retuned via the pointer?
+> >>
+> >> The function result, is local to kernel, for instance memory allocation failure,
+> >> or failure to issue the smc call. The result in pointer, is the remote result,
+> >> for instance return value from TA, or the TEE itself.
+> >>
+> >> I'll use better name, e.g. 'remote_result'?
+> > 
+> > See how this is handled by other parties. For example, PSCI. If you
+> > have a standard set of return codes, translate them to -ESOMETHING in
+> > your framework and let everybody else see only the standard errors.
+> > 
+> > 
+> 
+> I can not hide this return value, they are TA dependent. The client to a TA
+> needs to see it, just knowing that something has failed is not enough in
+> case they need to do something based on that. I can not even translate them
+> as they are TA related so the range is unknown.
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+I'd say it a sad design. At least error values should be standard.
 
-Best regards,
-Krzysztof
-
+-- 
+With best wishes
+Dmitry
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
