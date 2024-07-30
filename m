@@ -2,83 +2,86 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93659940BDC
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jul 2024 10:40:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 94F35940C68
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jul 2024 10:56:58 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id A2932434D0
-	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jul 2024 08:40:02 +0000 (UTC)
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
-	by lists.linaro.org (Postfix) with ESMTPS id 3CF883F65C
-	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Jul 2024 08:39:43 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 8F6D74413C
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 30 Jul 2024 08:56:57 +0000 (UTC)
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+	by lists.linaro.org (Postfix) with ESMTPS id 39B9E3F4BA
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Jul 2024 08:56:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=ffwll.ch header.s=google header.b="G1//LkU/";
-	spf=none (lists.linaro.org: domain of daniel.vetter@ffwll.ch has no SPF policy when checking 209.85.128.44) smtp.mailfrom=daniel.vetter@ffwll.ch;
+	dkim=pass header.d=ffwll.ch header.s=google header.b=eGWlf1ar;
+	spf=none (lists.linaro.org: domain of daniel.vetter@ffwll.ch has no SPF policy when checking 209.85.221.49) smtp.mailfrom=daniel.vetter@ffwll.ch;
 	dmarc=none
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-42802e90140so498815e9.0
-        for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Jul 2024 01:39:43 -0700 (PDT)
+Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-3684c05f7afso480972f8f.2
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 30 Jul 2024 01:56:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google; t=1722328782; x=1722933582; darn=lists.linaro.org;
+        d=ffwll.ch; s=google; t=1722329794; x=1722934594; darn=lists.linaro.org;
         h=in-reply-to:content-disposition:mime-version:references
          :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
          :subject:date:message-id:reply-to;
-        bh=mMbXMLPxdHgp8aCQRIwbUSynHwaJsa3HFc5CrwRM3iA=;
-        b=G1//LkU/2zmo1H2Ey0z+z4zC5a/YbfBmQbLLHUkR4UHJ5y3iMxJZ8f9xyXYdIvxCUI
-         OJLjqScd4pxbzIsXF3884FRUqZ6xq7xYFXFEjlC2Q0yix+YB/ldl3U7CBandSZZJfszy
-         b1R2YKBOg2CiAXjfLtG98gORSsaHABz6cBwqI=
+        bh=WgtHQjzcSzhXJxDV9mdj343ETcHxolzhEYRr9t1Zx5Q=;
+        b=eGWlf1arMlcERoegcirTBGgSG7v88mY9WIkZzYu9NFh/s3AevDUH8cGHzuAfox3S78
+         4vhNUC6Dfb1t3W1uqVQ09LkE+RK8uQWvqP6ciA5LTxP9MrrWGyvSXFOnFJOu/gJSo8wm
+         6690KQL5pb0bwU+A4kZ50Q1SDX6ftCBvGzzWI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1722328782; x=1722933582;
+        d=1e100.net; s=20230601; t=1722329794; x=1722934594;
         h=in-reply-to:content-disposition:mime-version:references
          :mail-followup-to:message-id:subject:cc:to:from:date
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=mMbXMLPxdHgp8aCQRIwbUSynHwaJsa3HFc5CrwRM3iA=;
-        b=IrZoQlozXlcNUJEt/sBeCif/UMZAQhvTfhLvM0gEDHBoLnmOUcggdFhZRdWWAytKld
-         zLDp4flSZBQ88TLKwEN1w57DMa9iNGKBF7S0hQEVAt21Pnunysl5G4EbvIjBD99YK4+L
-         ErGiaI11QukGQBJCLiezxLo1kXEQfyi1CcXOUbal9a9TN1X3dgiY/9Hise+42ME1e7Ej
-         1fmfVDuYeB9XymxfR8+uOnh4/EysJR2m9AtP/k0Ip8KSXz8wUA3q+wy6II+ujqQwxyAm
-         AGwiaJciqGpAIrTLYKjTyH6SHeegOfW8i/e6O5WBttOKOHNwyBmswZ2kWwRsJYkt2DLT
-         h7RQ==
-X-Forwarded-Encrypted: i=1; AJvYcCVm+EKbxhK6ydooBARFQdTKD4zmSA6wM+vYDNjo0bgEsibiz+jonF2ZPzV6GDwhUd2Rpw3X6aUoejLlk/EN@lists.linaro.org
-X-Gm-Message-State: AOJu0YwR8EjXx7IR3rHg4EAEmWiW72H/3Ur1ApImCsgyu4rUomVmtQEg
-	gx40ry0bYZbQOfJ2yXtPERZ42DRAdhbCtFT3V6e8UXTp0FOEm7TeMS/1nDlY8NI=
-X-Google-Smtp-Source: AGHT+IGdFjY0cCQvq3hH977T/VIttQHVhMME0vlMsCLSRfvyDCHXoJ2M6IjFVm/zP4wBbIdXQrKJMQ==
-X-Received: by 2002:a05:600c:1387:b0:426:6fc0:5910 with SMTP id 5b1f17b1804b1-428054feb50mr74046665e9.1.1722328782058;
-        Tue, 30 Jul 2024 01:39:42 -0700 (PDT)
+        bh=WgtHQjzcSzhXJxDV9mdj343ETcHxolzhEYRr9t1Zx5Q=;
+        b=EKEucF0dDpUG9nC1EVcHK62NH8cZ1qf1lnR7dIXEky9KI3Am5l3nORImKK4G5pgJ0s
+         sD88G2USZCtZobq8Jk6f/2xEmuhg6eniG4kZ4XNVKFIZAISBqqtCVA6M5IjjljNuQ6eF
+         nA1XcyQX3274CMZb2gJmGFwK89vYrLO14DwqbNnbI8WZsBDoI0DwGziJpcRa76rS4am7
+         4tYn9z1yvkZArlgLPwGipNLSPFrdtxDbBQcGxJ/nHTGdOmRH4kr8TbkAESbPnCfIs6QT
+         MjLtTADuLutV7nf+IlmPnM6PocaKXuYvT4oaoFTceWJeAzq1KIQo1C+HXrVOA3+7KqQO
+         CKdg==
+X-Forwarded-Encrypted: i=1; AJvYcCVVlEetmtymJZ0JBA5sCtrrhEhwhqBMitVakqbkIOz2xr+aUP+DqdoM9ISxO/I0vr/GpOtcV+AU1yVpAVe6@lists.linaro.org
+X-Gm-Message-State: AOJu0Yw+QDNM+ko18pk8q5LZkgr2QGKP6ucbOM9BtDG0LTp4SGhA5fjH
+	XU2NIwjvdL/lMsqxroXZeB6FFMZHVS/UC6oVQkrBxa7v8sW+m9abE7hjorQ2mG0=
+X-Google-Smtp-Source: AGHT+IHIY4OWsp+8at+vnJLgPPIkNjmZcLBJITV+uKHf3I0BGxZGznhKnrOaDTRFuZSQOzI7tUwvqA==
+X-Received: by 2002:a5d:5f53:0:b0:368:aa2:2b4e with SMTP id ffacd0b85a97d-36b34d23accmr6470380f8f.4.1722329794226;
+        Tue, 30 Jul 2024 01:56:34 -0700 (PDT)
 Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4281a5d10acsm79712725e9.24.2024.07.30.01.39.41
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-36b367c028bsm14070438f8f.24.2024.07.30.01.56.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Jul 2024 01:39:41 -0700 (PDT)
-Date: Tue, 30 Jul 2024 10:39:39 +0200
+        Tue, 30 Jul 2024 01:56:33 -0700 (PDT)
+Date: Tue, 30 Jul 2024 10:56:31 +0200
 From: Daniel Vetter <daniel.vetter@ffwll.ch>
-To: Zenghui Yu <yuzenghui@huawei.com>
-Message-ID: <Zqimyx_jEi5ne6GB@phenom.ffwll.local>
-Mail-Followup-To: Zenghui Yu <yuzenghui@huawei.com>,
+To: Huan Yang <link@vivo.com>
+Message-ID: <Zqiqv7fomIp1IPS_@phenom.ffwll.local>
+Mail-Followup-To: Huan Yang <link@vivo.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+	Brian Starkey <Brian.Starkey@arm.com>,
+	John Stultz <jstultz@google.com>,
+	"T.J. Mercier" <tjmercier@google.com>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
 	linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org, linux-kselftest@vger.kernel.org,
-	linux-kernel@vger.kernel.org, sumit.semwal@linaro.org,
-	benjamin.gaignard@collabora.com, Brian.Starkey@arm.com,
-	jstultz@google.com, tjmercier@google.com, shuah@kernel.org,
-	wanghaibin.wang@huawei.com
-References: <20240729081202.937-1-yuzenghui@huawei.com>
+	linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org,
+	opensource.kernel@vivo.com
+References: <20240730075755.10941-1-link@vivo.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240729081202.937-1-yuzenghui@huawei.com>
+In-Reply-To: <20240730075755.10941-1-link@vivo.com>
 X-Operating-System: Linux phenom 6.9.7-amd64 
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 3CF883F65C
+X-Rspamd-Queue-Id: 39B9E3F4BA
 X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.30 / 15.00];
-	BAYES_HAM(-3.00)[100.00%];
+X-Spamd-Result: default: False [-3.28 / 15.00];
+	BAYES_HAM(-2.98)[99.92%];
 	R_DKIM_ALLOW(-0.20)[ffwll.ch:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.44:from];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.221.49:from];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	R_SPF_NA(0.00)[no SPF record];
 	ARC_NA(0.00)[];
 	MISSING_XM_UA(0.00)[];
 	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	RCPT_COUNT_TWELVE(0.00)[14];
+	RCPT_COUNT_TWELVE(0.00)[12];
 	MIME_TRACE(0.00)[0:+];
-	URIBL_BLOCKED(0.00)[huawei.com:email,arm.com:email];
+	URIBL_BLOCKED(0.00)[ffwll.ch:dkim,ffwll.ch:url];
 	DMARC_NA(0.00)[ffwll.ch];
 	NEURAL_HAM(-0.00)[-1.000];
 	FROM_EQ_ENVFROM(0.00)[];
@@ -90,16 +93,16 @@ X-Spamd-Result: default: False [-3.30 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	DKIM_TRACE(0.00)[ffwll.ch:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: HJDMFVRVRU6D4NZPZRI4BLX2F4UIUA5V
-X-Message-ID-Hash: HJDMFVRVRU6D4NZPZRI4BLX2F4UIUA5V
+Message-ID-Hash: ILVIQ3QE6YDQHJLCDKPDQZR4PE64FQS3
+X-Message-ID-Hash: ILVIQ3QE6YDQHJLCDKPDQZR4PE64FQS3
 X-MailFrom: daniel.vetter@ffwll.ch
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, shuah@kernel.org, wanghaibin.wang@huawei.com
+CC: Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T.J. Mercier" <tjmercier@google.com>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, opensource.kernel@vivo.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] MAINTAINERS: Add selftests to DMA-BUF HEAPS FRAMEWORK entry
+Subject: [Linaro-mm-sig] Re: [PATCH v2 0/5] Introduce DMA_HEAP_ALLOC_AND_READ_FILE heap flag
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HJDMFVRVRU6D4NZPZRI4BLX2F4UIUA5V/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ILVIQ3QE6YDQHJLCDKPDQZR4PE64FQS3/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -109,35 +112,23 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Mon, Jul 29, 2024 at 04:12:02PM +0800, Zenghui Yu wrote:
-> Include dmabuf-heaps selftests in the correct entry so that updates to it
-> can be sent to the right place.
-> 
-> Signed-off-by: Zenghui Yu <yuzenghui@huawei.com>
+On Tue, Jul 30, 2024 at 03:57:44PM +0800, Huan Yang wrote:
+> UDMA-BUF step:
+>   1. memfd_create
+>   2. open file(buffer/direct)
+>   3. udmabuf create
+>   4. mmap memfd
+>   5. read file into memfd vaddr
 
-Applied to drm-misc-next, thanks for your patch.
+Yeah this is really slow and the worst way to do it. You absolutely want
+to start _all_ the io before you start creating the dma-buf, ideally with
+everything running in parallel. But just starting the direct I/O with
+async and then creating the umdabuf should be a lot faster and avoid
+needlessly serialization operations.
+
+The other issue is that the mmap has some overhead, but might not be too
+bad.
 -Sima
-
-> ---
->  MAINTAINERS | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 42decde38320..b7f24c9fb0e2 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -6660,6 +6660,7 @@ F:	drivers/dma-buf/dma-heap.c
->  F:	drivers/dma-buf/heaps/*
->  F:	include/linux/dma-heap.h
->  F:	include/uapi/linux/dma-heap.h
-> +F:	tools/testing/selftests/dmabuf-heaps/
->  
->  DMC FREQUENCY DRIVER FOR SAMSUNG EXYNOS5422
->  M:	Lukasz Luba <lukasz.luba@arm.com>
-> -- 
-> 2.33.0
-> 
-
 -- 
 Daniel Vetter
 Software Engineer, Intel Corporation
