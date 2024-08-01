@@ -2,43 +2,43 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67882944AE4
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Aug 2024 14:06:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id ECB4F944AF5
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Aug 2024 14:08:11 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 77F3540F65
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Aug 2024 12:06:57 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 06DCA410EA
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Aug 2024 12:08:11 +0000 (UTC)
 Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
-	by lists.linaro.org (Postfix) with ESMTPS id AC6C644127
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  1 Aug 2024 12:05:49 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id BD6DF42B37
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  1 Aug 2024 12:06:06 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=cwCLvLdx;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=jV92yMrR;
 	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 145.40.73.55 as permitted sender) smtp.mailfrom=leon@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sin.source.kernel.org (Postfix) with ESMTP id 872C6CE193B;
-	Thu,  1 Aug 2024 12:05:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 326DEC32786;
-	Thu,  1 Aug 2024 12:05:45 +0000 (UTC)
+	by sin.source.kernel.org (Postfix) with ESMTP id 95B11CE1939;
+	Thu,  1 Aug 2024 12:06:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 36A51C32786;
+	Thu,  1 Aug 2024 12:06:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1722513946;
-	bh=Lrwpx2uyOMMd30miKkZzGs29UF0PiPnGLNhz0BxCTdY=;
+	s=k20201202; t=1722513963;
+	bh=HNVP9vMEpgCGw1ZvFBEVtXJyQ/wcj87OJIJ4nBHuuus=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=cwCLvLdxcKpwb7cQ70CLYC6NFRTEF+QAC/gzwzp4xw5PgesySI7OoWnQUVVb+R1rK
-	 ZwcCI0ocdUczf4Fmj8OpGqIbdDJ5saXfxCLVfeNWkYZO9jrSrZ/z2YdppZrmkGWaM9
-	 DX8eT8AXuBJjqIfTEbGqYVl9QT17vPHC1SQO0Qf7ajeF7javo7gLVsqFeD3w+nbUKW
-	 x+kFkd6LxG0b7WgGrlsTT0lMsgTQmFZlHVgIisqy3VXYMS7yMBclo2ZnJkfR9JgfzN
-	 q4EEKDj9qEEDtL6IYqmuDOdnpBcdIBW8Ax0XJzY9cCNxqbqrwuEsJkVbbGySuz5KRy
-	 /B1kEFuJPW2fQ==
+	b=jV92yMrRJw6sPhUT18QCfVFYgI1RwBqV25HBO64e2xwh/paz0J66h47xW0JYgU9e3
+	 0P0Dwq8v0yP6qJBSjpW54O5TSH8lQRWNXJkC6vlJrJmmIFmg+3XYGUsjSZR9riLwhE
+	 v5flOgNn7Oe3Xej/rJRzQhBF2rPBxVDCGDGbG65VignzqISgMwFaJr17LvQDzoXyUH
+	 BdtqqVAbBe2CF2URGnAp0I+xstnDIstNEKiieHnrUpRnJMX6N5zoCWyr46dhsmpuaJ
+	 r1LBK4qvwA8X3Y+/B0ZMNUjtTahPtRi747SISrdDBdMh5W9uMVkgZ894EXRr8cXCU4
+	 c5qoeuLTrXpXQ==
 From: Leon Romanovsky <leon@kernel.org>
 To: Jason Gunthorpe <jgg@nvidia.com>
-Date: Thu,  1 Aug 2024 15:05:14 +0300
-Message-ID: <a38270f2fe4a194868ca2312f4c1c760e51bcbff.1722512548.git.leon@kernel.org>
+Date: Thu,  1 Aug 2024 15:05:15 +0300
+Message-ID: <9a25b2fc02443f7c36c2d93499ae25252b6afd40.1722512548.git.leon@kernel.org>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <cover.1722512548.git.leon@kernel.org>
 References: <cover.1722512548.git.leon@kernel.org>
 MIME-Version: 1.0
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: AC6C644127
+X-Rspamd-Queue-Id: BD6DF42B37
 X-Spamd-Bar: --
 X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
@@ -63,17 +63,17 @@ X-Spamd-Result: default: False [-2.50 / 15.00];
 	URIBL_BLOCKED(0.00)[nvidia.com:email,sin.source.kernel.org:helo,sin.source.kernel.org:rdns];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: ZYLOXUKBZA554NGJVDCEJ4KA6VT75BO4
-X-Message-ID-Hash: ZYLOXUKBZA554NGJVDCEJ4KA6VT75BO4
+Message-ID-Hash: HRCQFADAYTSK7FXSGKRIHPGMFPYJXXY2
+X-Message-ID-Hash: HRCQFADAYTSK7FXSGKRIHPGMFPYJXXY2
 X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Yishai Hadas <yishaih@nvidia.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, linux-rdma@vger.kernel.org, Michael Margolin <mrgolin@amazon.com>, Mustafa Ismail <mustafa.ismail@intel.com>, netdev@vger.kernel.org, Saeed Mahameed <saeedm@nvidia.com>, Selvin Xavier <selvin.xavier@broadcom.com>, Sumit Semwal <sumit.semwal@linaro.org>, Tariq Toukan <tariqt@nvidia.com>, Tatyana Nikolova <tatyana.e.nikolova@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH rdma-next 5/8] RDMA/umem: Introduce an option to revoke DMABUF umem
+Subject: [Linaro-mm-sig] [PATCH rdma-next 6/8] RDMA: Pass uverbs_attr_bundle as part of '.reg_user_mr_dmabuf' API
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZYLOXUKBZA554NGJVDCEJ4KA6VT75BO4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HRCQFADAYTSK7FXSGKRIHPGMFPYJXXY2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -85,97 +85,154 @@ Content-Transfer-Encoding: 7bit
 
 From: Yishai Hadas <yishaih@nvidia.com>
 
-Introduce an option to revoke DMABUF umem.
+Pass uverbs_attr_bundle as part of '.reg_user_mr_dmabuf' API instead of
+udata.
 
-This option will retain the umem allocation while revoking its DMA
-mapping. Furthermore, any subsequent attempts to map the pages should
-fail once the umem has been revoked.
+This enables passing some new ioctl attributes to the drivers, as will
+be introduced in the next patches for mlx5 driver.
 
-This functionality will be utilized in the upcoming patches in the
-series, where we aim to delay umem deallocation until the mkey
-deregistration. However, we must unmap its pages immediately.
+Change the involved drivers accordingly.
 
 Signed-off-by: Yishai Hadas <yishaih@nvidia.com>
 Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
 ---
- drivers/infiniband/core/umem_dmabuf.c | 21 +++++++++++++++++++--
- include/rdma/ib_umem.h                |  3 +++
- 2 files changed, 22 insertions(+), 2 deletions(-)
+ drivers/infiniband/core/uverbs_std_types_mr.c | 2 +-
+ drivers/infiniband/hw/bnxt_re/ib_verbs.c      | 3 ++-
+ drivers/infiniband/hw/bnxt_re/ib_verbs.h      | 2 +-
+ drivers/infiniband/hw/efa/efa.h               | 2 +-
+ drivers/infiniband/hw/efa/efa_verbs.c         | 4 ++--
+ drivers/infiniband/hw/irdma/verbs.c           | 2 +-
+ drivers/infiniband/hw/mlx5/mlx5_ib.h          | 2 +-
+ drivers/infiniband/hw/mlx5/mr.c               | 2 +-
+ include/rdma/ib_verbs.h                       | 2 +-
+ 9 files changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/infiniband/core/umem_dmabuf.c b/drivers/infiniband/core/umem_dmabuf.c
-index 726a09786547..9fcd37761264 100644
---- a/drivers/infiniband/core/umem_dmabuf.c
-+++ b/drivers/infiniband/core/umem_dmabuf.c
-@@ -23,6 +23,9 @@ int ib_umem_dmabuf_map_pages(struct ib_umem_dmabuf *umem_dmabuf)
+diff --git a/drivers/infiniband/core/uverbs_std_types_mr.c b/drivers/infiniband/core/uverbs_std_types_mr.c
+index 03e1db5d1e8c..7ebc7bd3caae 100644
+--- a/drivers/infiniband/core/uverbs_std_types_mr.c
++++ b/drivers/infiniband/core/uverbs_std_types_mr.c
+@@ -239,7 +239,7 @@ static int UVERBS_HANDLER(UVERBS_METHOD_REG_DMABUF_MR)(
  
- 	dma_resv_assert_held(umem_dmabuf->attach->dmabuf->resv);
+ 	mr = pd->device->ops.reg_user_mr_dmabuf(pd, offset, length, iova, fd,
+ 						access_flags,
+-						&attrs->driver_udata);
++						attrs);
+ 	if (IS_ERR(mr))
+ 		return PTR_ERR(mr);
  
-+	if (umem_dmabuf->revoked)
-+		return -EINVAL;
-+
- 	if (umem_dmabuf->sgt)
- 		goto wait_fence;
+diff --git a/drivers/infiniband/hw/bnxt_re/ib_verbs.c b/drivers/infiniband/hw/bnxt_re/ib_verbs.c
+index 7c757351a016..43a68e7de02a 100644
+--- a/drivers/infiniband/hw/bnxt_re/ib_verbs.c
++++ b/drivers/infiniband/hw/bnxt_re/ib_verbs.c
+@@ -4122,7 +4122,8 @@ struct ib_mr *bnxt_re_reg_user_mr(struct ib_pd *ib_pd, u64 start, u64 length,
  
-@@ -242,15 +245,29 @@ struct ib_umem_dmabuf *ib_umem_dmabuf_get_pinned(struct ib_device *device,
- }
- EXPORT_SYMBOL(ib_umem_dmabuf_get_pinned);
- 
--void ib_umem_dmabuf_release(struct ib_umem_dmabuf *umem_dmabuf)
-+void ib_umem_dmabuf_revoke(struct ib_umem_dmabuf *umem_dmabuf)
+ struct ib_mr *bnxt_re_reg_user_mr_dmabuf(struct ib_pd *ib_pd, u64 start,
+ 					 u64 length, u64 virt_addr, int fd,
+-					 int mr_access_flags, struct ib_udata *udata)
++					 int mr_access_flags,
++					 struct uverbs_attr_bundle *attrs)
  {
- 	struct dma_buf *dmabuf = umem_dmabuf->attach->dmabuf;
+ 	struct bnxt_re_pd *pd = container_of(ib_pd, struct bnxt_re_pd, ib_pd);
+ 	struct bnxt_re_dev *rdev = pd->rdev;
+diff --git a/drivers/infiniband/hw/bnxt_re/ib_verbs.h b/drivers/infiniband/hw/bnxt_re/ib_verbs.h
+index e98cb1717338..3ddeda312376 100644
+--- a/drivers/infiniband/hw/bnxt_re/ib_verbs.h
++++ b/drivers/infiniband/hw/bnxt_re/ib_verbs.h
+@@ -242,7 +242,7 @@ struct ib_mr *bnxt_re_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
+ struct ib_mr *bnxt_re_reg_user_mr_dmabuf(struct ib_pd *ib_pd, u64 start,
+ 					 u64 length, u64 virt_addr,
+ 					 int fd, int mr_access_flags,
+-					 struct ib_udata *udata);
++					 struct uverbs_attr_bundle *attrs);
+ int bnxt_re_alloc_ucontext(struct ib_ucontext *ctx, struct ib_udata *udata);
+ void bnxt_re_dealloc_ucontext(struct ib_ucontext *context);
+ int bnxt_re_mmap(struct ib_ucontext *context, struct vm_area_struct *vma);
+diff --git a/drivers/infiniband/hw/efa/efa.h b/drivers/infiniband/hw/efa/efa.h
+index e580e087e9da..d7fc9d5eeefd 100644
+--- a/drivers/infiniband/hw/efa/efa.h
++++ b/drivers/infiniband/hw/efa/efa.h
+@@ -168,7 +168,7 @@ struct ib_mr *efa_reg_mr(struct ib_pd *ibpd, u64 start, u64 length,
+ struct ib_mr *efa_reg_user_mr_dmabuf(struct ib_pd *ibpd, u64 start,
+ 				     u64 length, u64 virt_addr,
+ 				     int fd, int access_flags,
+-				     struct ib_udata *udata);
++				     struct uverbs_attr_bundle *attrs);
+ int efa_dereg_mr(struct ib_mr *ibmr, struct ib_udata *udata);
+ int efa_get_port_immutable(struct ib_device *ibdev, u32 port_num,
+ 			   struct ib_port_immutable *immutable);
+diff --git a/drivers/infiniband/hw/efa/efa_verbs.c b/drivers/infiniband/hw/efa/efa_verbs.c
+index b1e0a1b7c59d..cc13415ff7e7 100644
+--- a/drivers/infiniband/hw/efa/efa_verbs.c
++++ b/drivers/infiniband/hw/efa/efa_verbs.c
+@@ -1684,14 +1684,14 @@ static int efa_register_mr(struct ib_pd *ibpd, struct efa_mr *mr, u64 start,
+ struct ib_mr *efa_reg_user_mr_dmabuf(struct ib_pd *ibpd, u64 start,
+ 				     u64 length, u64 virt_addr,
+ 				     int fd, int access_flags,
+-				     struct ib_udata *udata)
++				     struct uverbs_attr_bundle *attrs)
+ {
+ 	struct efa_dev *dev = to_edev(ibpd->device);
+ 	struct ib_umem_dmabuf *umem_dmabuf;
+ 	struct efa_mr *mr;
+ 	int err;
  
- 	dma_resv_lock(dmabuf->resv, NULL);
-+	if (umem_dmabuf->revoked)
-+		goto end;
- 	ib_umem_dmabuf_unmap_pages(umem_dmabuf);
--	if (umem_dmabuf->pinned)
-+	if (umem_dmabuf->pinned) {
- 		dma_buf_unpin(umem_dmabuf->attach);
-+		umem_dmabuf->pinned = 0;
-+	}
-+	umem_dmabuf->revoked = 1;
-+end:
- 	dma_resv_unlock(dmabuf->resv);
-+}
-+EXPORT_SYMBOL(ib_umem_dmabuf_revoke);
-+
-+void ib_umem_dmabuf_release(struct ib_umem_dmabuf *umem_dmabuf)
-+{
-+	struct dma_buf *dmabuf = umem_dmabuf->attach->dmabuf;
-+
-+	ib_umem_dmabuf_revoke(umem_dmabuf);
- 
- 	dma_buf_detach(dmabuf, umem_dmabuf->attach);
- 	dma_buf_put(dmabuf);
-diff --git a/include/rdma/ib_umem.h b/include/rdma/ib_umem.h
-index de05268ed632..7dc7b1cc71b5 100644
---- a/include/rdma/ib_umem.h
-+++ b/include/rdma/ib_umem.h
-@@ -38,6 +38,7 @@ struct ib_umem_dmabuf {
- 	unsigned long last_sg_trim;
- 	void *private;
- 	u8 pinned : 1;
-+	u8 revoked : 1;
- };
- 
- static inline struct ib_umem_dmabuf *to_ib_umem_dmabuf(struct ib_umem *umem)
-@@ -158,6 +159,7 @@ ib_umem_dmabuf_get_pinned_with_dma_device(struct ib_device *device,
- int ib_umem_dmabuf_map_pages(struct ib_umem_dmabuf *umem_dmabuf);
- void ib_umem_dmabuf_unmap_pages(struct ib_umem_dmabuf *umem_dmabuf);
- void ib_umem_dmabuf_release(struct ib_umem_dmabuf *umem_dmabuf);
-+void ib_umem_dmabuf_revoke(struct ib_umem_dmabuf *umem_dmabuf);
- 
- #else /* CONFIG_INFINIBAND_USER_MEM */
- 
-@@ -217,6 +219,7 @@ static inline int ib_umem_dmabuf_map_pages(struct ib_umem_dmabuf *umem_dmabuf)
- }
- static inline void ib_umem_dmabuf_unmap_pages(struct ib_umem_dmabuf *umem_dmabuf) { }
- static inline void ib_umem_dmabuf_release(struct ib_umem_dmabuf *umem_dmabuf) { }
-+static inline void ib_umem_dmabuf_revoke(struct ib_umem_dmabuf *umem_dmabuf) {}
- 
- #endif /* CONFIG_INFINIBAND_USER_MEM */
- #endif /* IB_UMEM_H */
+-	mr = efa_alloc_mr(ibpd, access_flags, udata);
++	mr = efa_alloc_mr(ibpd, access_flags, &attrs->driver_udata);
+ 	if (IS_ERR(mr)) {
+ 		err = PTR_ERR(mr);
+ 		goto err_out;
+diff --git a/drivers/infiniband/hw/irdma/verbs.c b/drivers/infiniband/hw/irdma/verbs.c
+index fc0ce35da14e..6a107decb704 100644
+--- a/drivers/infiniband/hw/irdma/verbs.c
++++ b/drivers/infiniband/hw/irdma/verbs.c
+@@ -3085,7 +3085,7 @@ static struct ib_mr *irdma_reg_user_mr(struct ib_pd *pd, u64 start, u64 len,
+ static struct ib_mr *irdma_reg_user_mr_dmabuf(struct ib_pd *pd, u64 start,
+ 					      u64 len, u64 virt,
+ 					      int fd, int access,
+-					      struct ib_udata *udata)
++					      struct uverbs_attr_bundle *attrs)
+ {
+ 	struct irdma_device *iwdev = to_iwdev(pd->device);
+ 	struct ib_umem_dmabuf *umem_dmabuf;
+diff --git a/drivers/infiniband/hw/mlx5/mlx5_ib.h b/drivers/infiniband/hw/mlx5/mlx5_ib.h
+index b2ebea173547..e915a62da49c 100644
+--- a/drivers/infiniband/hw/mlx5/mlx5_ib.h
++++ b/drivers/infiniband/hw/mlx5/mlx5_ib.h
+@@ -1354,7 +1354,7 @@ struct ib_mr *mlx5_ib_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
+ struct ib_mr *mlx5_ib_reg_user_mr_dmabuf(struct ib_pd *pd, u64 start,
+ 					 u64 length, u64 virt_addr,
+ 					 int fd, int access_flags,
+-					 struct ib_udata *udata);
++					 struct uverbs_attr_bundle *attrs);
+ int mlx5_ib_advise_mr(struct ib_pd *pd,
+ 		      enum ib_uverbs_advise_mr_advice advice,
+ 		      u32 flags,
+diff --git a/drivers/infiniband/hw/mlx5/mr.c b/drivers/infiniband/hw/mlx5/mr.c
+index 98bd8eaa393e..1dfd9124bdd1 100644
+--- a/drivers/infiniband/hw/mlx5/mr.c
++++ b/drivers/infiniband/hw/mlx5/mr.c
+@@ -1513,7 +1513,7 @@ static struct dma_buf_attach_ops mlx5_ib_dmabuf_attach_ops = {
+ struct ib_mr *mlx5_ib_reg_user_mr_dmabuf(struct ib_pd *pd, u64 offset,
+ 					 u64 length, u64 virt_addr,
+ 					 int fd, int access_flags,
+-					 struct ib_udata *udata)
++					 struct uverbs_attr_bundle *attrs)
+ {
+ 	struct mlx5_ib_dev *dev = to_mdev(pd->device);
+ 	struct mlx5_ib_mr *mr = NULL;
+diff --git a/include/rdma/ib_verbs.h b/include/rdma/ib_verbs.h
+index 6c5712ae559d..a1dcf812d787 100644
+--- a/include/rdma/ib_verbs.h
++++ b/include/rdma/ib_verbs.h
+@@ -2476,7 +2476,7 @@ struct ib_device_ops {
+ 	struct ib_mr *(*reg_user_mr_dmabuf)(struct ib_pd *pd, u64 offset,
+ 					    u64 length, u64 virt_addr, int fd,
+ 					    int mr_access_flags,
+-					    struct ib_udata *udata);
++					    struct uverbs_attr_bundle *attrs);
+ 	struct ib_mr *(*rereg_user_mr)(struct ib_mr *mr, int flags, u64 start,
+ 				       u64 length, u64 virt_addr,
+ 				       int mr_access_flags, struct ib_pd *pd,
 -- 
 2.45.2
 
