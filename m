@@ -2,54 +2,56 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 116C5944ACD
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Aug 2024 14:05:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B61C0944AD4
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Aug 2024 14:06:08 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 1EF684118B
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Aug 2024 12:05:51 +0000 (UTC)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
-	by lists.linaro.org (Postfix) with ESMTPS id 5905C40F65
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  1 Aug 2024 12:05:34 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C92CA410EA
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  1 Aug 2024 12:06:07 +0000 (UTC)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+	by lists.linaro.org (Postfix) with ESMTPS id 28966410EA
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  1 Aug 2024 12:05:35 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=bTvg8+OZ;
-	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 145.40.73.55 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=f8tlBfJo;
+	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=leon@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by sin.source.kernel.org (Postfix) with ESMTP id 4D58FCE18E6;
-	Thu,  1 Aug 2024 12:05:31 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23627C32786;
-	Thu,  1 Aug 2024 12:05:29 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id C012962857;
+	Thu,  1 Aug 2024 12:05:34 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16003C32786;
+	Thu,  1 Aug 2024 12:05:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1722513930;
-	bh=xrmm8vq48Turuhl+MYV5VwfRqiYgHDIYm72LgCbH1lU=;
-	h=From:To:Cc:Subject:Date:From;
-	b=bTvg8+OZJV69EIq4IxRBqp9dfc6y/u9kWm+xw9EFbJQjCtGm/UcFRMTsSiul0eqRA
-	 G1uDAZfhZ9TUmV4dy8tbbbxXhLFGDT9lrOc+bymDfNJGT+beG7sHBHtBQk0rOJW3zH
-	 yQTqXwxCvOn8I43hDhUDD2l+9gOqREEUYMHgZ2c7tkTViB+iu6RePr0NnnB27Annav
-	 +eP333ZCtfBXqo8qAegZ9RYVEm7YKemBWXwieFxVdf/xYmF2vWuSCSzvjkyvd6A+SY
-	 tIjsSrZg5VceoSgba2wOLQsmlPbHo1+s8lGZ6WajKsWqmWfHgl8Dp88597sOWlI8lk
-	 vC2KwTjZBx2lg==
+	s=k20201202; t=1722513934;
+	bh=yHsuGHxiLjgWyN5xswDwNMl+wTJR3b2GStP/fjg5kt4=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=f8tlBfJo2NqAZZS65pSrGZVWv9Qzy47YMB34cU0sxgOaihlTEZdZKqm2VEHPgGkDm
+	 YBtp5Ezayj34aO17JzWcQiD5bNmVM89D5Vgbz5cZ9uwEhjfAaIQU5b5OuUECtL9ApT
+	 wAtu1mg0zSnUHuEM9YvjVumzl2TjaxbdZKYycWliUZZ3YVm2ndz6zkklroAVWWFGKC
+	 q90fY+es675tl6BfcZEXSK7eu7fl0o5nzAw6ZFbNsAKMp0fFvFVZEcnD5eo0a6DErx
+	 3HH2Rp+5F2L+uEvv7OTpE6xyg/0UExPdXLn2TUoERC8loOHJ+SUz742M8AmjqjIKjX
+	 KNZEXveWw24yg==
 From: Leon Romanovsky <leon@kernel.org>
 To: Jason Gunthorpe <jgg@nvidia.com>
-Date: Thu,  1 Aug 2024 15:05:09 +0300
-Message-ID: <cover.1722512548.git.leon@kernel.org>
+Date: Thu,  1 Aug 2024 15:05:10 +0300
+Message-ID: <82da7f578a567909bb5858a64ba844fe4cc298fa.1722512548.git.leon@kernel.org>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <cover.1722512548.git.leon@kernel.org>
+References: <cover.1722512548.git.leon@kernel.org>
 MIME-Version: 1.0
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 5905C40F65
+X-Rspamd-Queue-Id: 28966410EA
 X-Spamd-Bar: --
 X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
 	MID_CONTAINS_FROM(1.00)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
 	R_MISSING_CHARSET(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:145.40.73.55];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217:c];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	MIME_GOOD(-0.10)[text/plain];
+	RCPT_COUNT_TWELVE(0.00)[15];
 	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[17];
 	MIME_TRACE(0.00)[0:+];
-	ASN(0.00)[asn:54825, ipnet:145.40.73.0/24, country:US];
+	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	FROM_HAS_DN(0.00)[];
@@ -58,20 +60,19 @@ X-Spamd-Result: default: False [-2.50 / 15.00];
 	FROM_EQ_ENVFROM(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
 	TO_DN_SOME(0.00)[];
-	URIBL_BLOCKED(0.00)[sin.source.kernel.org:helo,sin.source.kernel.org:rdns];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: 2LFI75CEULGM5SFGKJSTM2XNZML646PL
-X-Message-ID-Hash: 2LFI75CEULGM5SFGKJSTM2XNZML646PL
+Message-ID-Hash: FJRXR4WFB4LEH2C3FBLDDI6ZJQRUMFGW
+X-Message-ID-Hash: FJRXR4WFB4LEH2C3FBLDDI6ZJQRUMFGW
 X-MailFrom: leon@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Leon Romanovsky <leonro@nvidia.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-rdma@vger.kernel.org, Michael Margolin <mrgolin@amazon.com>, Mustafa Ismail <mustafa.ismail@intel.com>, netdev@vger.kernel.org, Saeed Mahameed <saeedm@nvidia.com>, Selvin Xavier <selvin.xavier@broadcom.com>, Sumit Semwal <sumit.semwal@linaro.org>, Tariq Toukan <tariqt@nvidia.com>, Tatyana Nikolova <tatyana.e.nikolova@intel.com>, Yishai Hadas <yishaih@nvidia.com>
+CC: Yishai Hadas <yishaih@nvidia.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-media@vger.kernel.org, linux-rdma@vger.kernel.org, Michael Margolin <mrgolin@amazon.com>, Mustafa Ismail <mustafa.ismail@intel.com>, netdev@vger.kernel.org, Saeed Mahameed <saeedm@nvidia.com>, Selvin Xavier <selvin.xavier@broadcom.com>, Sumit Semwal <sumit.semwal@linaro.org>, Tariq Toukan <tariqt@nvidia.com>, Tatyana Nikolova <tatyana.e.nikolova@intel.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [PATCH rdma-next 0/8] Introducing Multi-Path DMA Support for mlx5 RDMA Driver
+Subject: [Linaro-mm-sig] [PATCH mlx5-next 1/8] net/mlx5: Add IFC related stuff for data direct
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2LFI75CEULGM5SFGKJSTM2XNZML646PL/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FJRXR4WFB4LEH2C3FBLDDI6ZJQRUMFGW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -81,117 +82,127 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-From: Leon Romanovsky <leonro@nvidia.com>
+From: Yishai Hadas <yishaih@nvidia.com>
 
-From Yishai,
+Add IFC related stuff for data direct.
 
-Overview
---------
-This patch series aims to enable multi-path DMA support, allowing an
-mlx5 RDMA device to issue DMA commands through multiple paths. This
-feature is critical for improving performance and reaching line rate
-in certain environments where issuing PCI transactions over one path
-may be significantly faster than over another. These differences can
-arise from various PCI generations in the system or the specific system
-topology.
+Signed-off-by: Yishai Hadas <yishaih@nvidia.com>
+Signed-off-by: Leon Romanovsky <leonro@nvidia.com>
+---
+ include/linux/mlx5/mlx5_ifc.h | 51 +++++++++++++++++++++++++++++++----
+ 1 file changed, 46 insertions(+), 5 deletions(-)
 
-To achieve this functionality, we introduced a data direct DMA device
-that can serve the RDMA device by issuing DMA transactions on its behalf.
-
-The main key features and changes are described below.
-
-Multi-Path Discovery
---------------------
-API Implementation:
- * Introduced an API to discover multiple paths for a given mlx5 RDMA device.
-IOCTL Command: 
- * Added a new IOCTL command, MLX5_IB_METHOD_GET_DATA_DIRECT_SYSFS_PATH, to
-   the DEVICE object. When an affiliated Data-Direct/DMA device is present,
-   its sysfs path is returned.
-
-Feature Activation by mlx5 RDMA Application
--------------------------------------------
-UVERBS Extension:
- * Extended UVERBS_METHOD_REG_DMABUF_MR over UVERBS_OBJECT_MR to include
-   mlx5 extended flags.
-Access Flag: 
- * Introduced the MLX5_IB_UAPI_REG_DMABUF_ACCESS_DATA_DIRECT flag, allowing
-   applications to request the use of the affiliated DMA device for DMABUF
-   registration.
-
-Data-Direct/DMA Device
-----------------------
-New Driver:
- * Introduced a new driver to manage the new DMA PF device ID (0x2100).
-   Its registration/un-registration is handled as part of the mlx5_ib init/exit
-   flows, with mlx5 IB devices as its clients.
-Functionality: 
- * The driver does not interface directly with the firmware (no command interface,
-   no caps, etc.) but works over PCI to activate its DMA functionality. It serves
-   as the DMA device for efficiently accessing other PCI devices (e.g., GPU PF) and
-   reads its VUID over PCI to handle NICs registrations with the same VUID.
-
-mlx5 IB RDMA Device
----------------------------
-VUID Query: 
- * Reads its affiliated DMA PF VUID via the QUERY_VUID command with the data_direct
-   bit set.
-Driver Registration:
- * Registers with the DMA PF driver to be notified upon bind/unbind.
-Application Request Handling: 
- * Uses the DMA PF device upon application request as described above.
-
-DMABUF over Umem
-----------------
-Introduced an option to obtain a DMABUF UMEM using a different DMA
-device instead of the IB device, allowing the device to register over
-IOMMU with the expected DMA device for a given buffer registration.
-
-Further details are provided in the commit logs of the patches in this
-series.
-
-Thanks
-
-Yishai Hadas (8):
-  net/mlx5: Add IFC related stuff for data direct
-  RDMA/mlx5: Introduce the 'data direct' driver
-  RDMA/mlx5: Add the initialization flow to utilize the 'data direct'
-    device
-  RDMA/umem: Add support for creating pinned DMABUF umem with a given
-    dma device
-  RDMA/umem: Introduce an option to revoke DMABUF umem
-  RDMA: Pass uverbs_attr_bundle as part of '.reg_user_mr_dmabuf' API
-  RDMA/mlx5: Add support for DMABUF MR registrations with Data-direct
-  RDMA/mlx5: Introduce GET_DATA_DIRECT_SYSFS_PATH ioctl
-
- drivers/infiniband/core/umem_dmabuf.c         |  66 +++-
- drivers/infiniband/core/uverbs_std_types_mr.c |   2 +-
- drivers/infiniband/hw/bnxt_re/ib_verbs.c      |   3 +-
- drivers/infiniband/hw/bnxt_re/ib_verbs.h      |   2 +-
- drivers/infiniband/hw/efa/efa.h               |   2 +-
- drivers/infiniband/hw/efa/efa_verbs.c         |   4 +-
- drivers/infiniband/hw/irdma/verbs.c           |   2 +-
- drivers/infiniband/hw/mlx5/Makefile           |   1 +
- drivers/infiniband/hw/mlx5/cmd.c              |  21 ++
- drivers/infiniband/hw/mlx5/cmd.h              |   2 +
- drivers/infiniband/hw/mlx5/data_direct.c      | 227 +++++++++++++
- drivers/infiniband/hw/mlx5/data_direct.h      |  23 ++
- drivers/infiniband/hw/mlx5/main.c             | 125 +++++++
- drivers/infiniband/hw/mlx5/mlx5_ib.h          |  22 +-
- drivers/infiniband/hw/mlx5/mr.c               | 304 +++++++++++++++---
- drivers/infiniband/hw/mlx5/odp.c              |   5 +-
- drivers/infiniband/hw/mlx5/std_types.c        |  55 +++-
- drivers/infiniband/hw/mlx5/umr.c              |  93 ++++--
- drivers/infiniband/hw/mlx5/umr.h              |   1 +
- include/linux/mlx5/mlx5_ifc.h                 |  51 ++-
- include/rdma/ib_umem.h                        |  18 ++
- include/rdma/ib_verbs.h                       |   2 +-
- include/uapi/rdma/mlx5_user_ioctl_cmds.h      |   9 +
- include/uapi/rdma/mlx5_user_ioctl_verbs.h     |   4 +
- 24 files changed, 944 insertions(+), 100 deletions(-)
- create mode 100644 drivers/infiniband/hw/mlx5/data_direct.c
- create mode 100644 drivers/infiniband/hw/mlx5/data_direct.h
-
+diff --git a/include/linux/mlx5/mlx5_ifc.h b/include/linux/mlx5/mlx5_ifc.h
+index cab228cf51c6..970c9d8473ef 100644
+--- a/include/linux/mlx5/mlx5_ifc.h
++++ b/include/linux/mlx5/mlx5_ifc.h
+@@ -313,6 +313,7 @@ enum {
+ 	MLX5_CMD_OP_MODIFY_VHCA_STATE             = 0xb0e,
+ 	MLX5_CMD_OP_SYNC_CRYPTO                   = 0xb12,
+ 	MLX5_CMD_OP_ALLOW_OTHER_VHCA_ACCESS       = 0xb16,
++	MLX5_CMD_OPCODE_QUERY_VUID                = 0xb22,
+ 	MLX5_CMD_OP_MAX
+ };
+ 
+@@ -1885,7 +1886,8 @@ struct mlx5_ifc_cmd_hca_cap_bits {
+ 
+ 	u8         reserved_at_5a0[0x10];
+ 	u8         enhanced_cqe_compression[0x1];
+-	u8         reserved_at_5b1[0x2];
++	u8         reserved_at_5b1[0x1];
++	u8         crossing_vhca_mkey[0x1];
+ 	u8         log_max_dek[0x5];
+ 	u8         reserved_at_5b8[0x4];
+ 	u8         mini_cqe_resp_stride_index[0x1];
+@@ -1954,7 +1956,9 @@ struct mlx5_ifc_cmd_hca_cap_bits {
+ 	u8	   dynamic_msix_table_size[0xc];
+ 	u8	   reserved_at_740[0xc];
+ 	u8	   min_dynamic_vf_msix_table_size[0x4];
+-	u8	   reserved_at_750[0x4];
++	u8	   reserved_at_750[0x2];
++	u8	   data_direct[0x1];
++	u8	   reserved_at_753[0x1];
+ 	u8	   max_dynamic_vf_msix_table_size[0xc];
+ 
+ 	u8         reserved_at_760[0x3];
+@@ -1982,7 +1986,9 @@ struct mlx5_ifc_cmd_hca_cap_2_bits {
+ 	u8	   reserved_at_0[0x80];
+ 
+ 	u8         migratable[0x1];
+-	u8         reserved_at_81[0x1f];
++	u8         reserved_at_81[0x11];
++	u8         query_vuid[0x1];
++	u8         reserved_at_93[0xd];
+ 
+ 	u8	   max_reformat_insert_size[0x8];
+ 	u8	   max_reformat_insert_offset[0x8];
+@@ -4154,6 +4160,7 @@ enum {
+ 	MLX5_MKC_ACCESS_MODE_KSM   = 0x3,
+ 	MLX5_MKC_ACCESS_MODE_SW_ICM = 0x4,
+ 	MLX5_MKC_ACCESS_MODE_MEMIC = 0x5,
++	MLX5_MKC_ACCESS_MODE_CROSSING = 0x6,
+ };
+ 
+ struct mlx5_ifc_mkc_bits {
+@@ -4196,7 +4203,10 @@ struct mlx5_ifc_mkc_bits {
+ 
+ 	u8         bsf_octword_size[0x20];
+ 
+-	u8         reserved_at_120[0x80];
++	u8         reserved_at_120[0x60];
++
++	u8         crossing_target_vhca_id[0x10];
++	u8         reserved_at_190[0x10];
+ 
+ 	u8         translations_octword_size[0x20];
+ 
+@@ -5124,6 +5134,36 @@ struct mlx5_ifc_query_vport_state_out_bits {
+ 	u8         state[0x4];
+ };
+ 
++struct mlx5_ifc_array1024_auto_bits {
++	u8         array1024_auto[32][0x20];
++};
++
++struct mlx5_ifc_query_vuid_in_bits {
++	u8         opcode[0x10];
++	u8         uid[0x10];
++
++	u8         reserved_at_20[0x40];
++
++	u8         query_vfs_vuid[0x1];
++	u8         data_direct[0x1];
++	u8         reserved_at_62[0xe];
++	u8         vhca_id[0x10];
++};
++
++struct mlx5_ifc_query_vuid_out_bits {
++	u8        status[0x8];
++	u8        reserved_at_8[0x18];
++
++	u8        syndrome[0x20];
++
++	u8        reserved_at_40[0x1a0];
++
++	u8        reserved_at_1e0[0x10];
++	u8        num_of_entries[0x10];
++
++	struct mlx5_ifc_array1024_auto_bits vuid[];
++};
++
+ enum {
+ 	MLX5_VPORT_STATE_OP_MOD_VNIC_VPORT  = 0x0,
+ 	MLX5_VPORT_STATE_OP_MOD_ESW_VPORT   = 0x1,
+@@ -8989,7 +9029,8 @@ struct mlx5_ifc_create_mkey_in_bits {
+ 
+ 	u8         pg_access[0x1];
+ 	u8         mkey_umem_valid[0x1];
+-	u8         reserved_at_62[0x1e];
++	u8         data_direct[0x1];
++	u8         reserved_at_63[0x1d];
+ 
+ 	struct mlx5_ifc_mkc_bits memory_key_mkey_entry;
+ 
 -- 
 2.45.2
 
