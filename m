@@ -2,76 +2,126 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9291394B866
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  8 Aug 2024 09:59:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 444FE94E68B
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 12 Aug 2024 08:25:53 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5816C40F16
-	for <lists+linaro-mm-sig@lfdr.de>; Thu,  8 Aug 2024 07:59:42 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id E730541116
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 12 Aug 2024 06:25:51 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 958613F07D
-	for <linaro-mm-sig@lists.linaro.org>; Thu,  8 Aug 2024 07:59:20 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 20D3E40B91
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 12 Aug 2024 06:25:37 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=gT9XD+Dt;
-	spf=pass (lists.linaro.org: domain of leon@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=leon@kernel.org;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="AfSJ/p5K";
+	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=krzk@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 3BA09614FC;
-	Thu,  8 Aug 2024 07:59:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 619B1C32782;
-	Thu,  8 Aug 2024 07:59:19 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id A43CD60C03;
+	Mon, 12 Aug 2024 06:25:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A5659C32782;
+	Mon, 12 Aug 2024 06:25:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1723103959;
-	bh=gWg/r/1SvXDtl8mHhSTr6bVgnFi9se9px6nxtby4afo=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
-	b=gT9XD+DtkP2sOGMCsCMBMBcBc2edggYdxMyfaVr2HosFjVU+PB2Z7x/+FLZ90NvwW
-	 ZMa1th8LDVyiZiR7PyoYOdB7F3swfuRUlwbCjKo/hW8e8YGlwaE87mV7bwAdleV8Qr
-	 0+yYXVZzA12yJAmlgqMsMg2mmR1UBVI3bMlFLox8ruXSCymBXcYTh1w1h40Tz9Moz9
-	 Pu5H2OmErH1JmiHa3PL9bLSKd6c4goEzlEsYtBtIqVhaQ8L6258Sv+gfNKo/SEFudW
-	 g4SdnfX7HA4EHUG5JIjknF/SD7oNj365o30yZ6PONVw86hVIZZl7f+kHnDMfFyGgCO
-	 hJVMJtMo1jDOw==
-From: Leon Romanovsky <leon@kernel.org>
-To: Jason Gunthorpe <jgg@ziepe.ca>, Leon Romanovsky <leon@kernel.org>
-In-Reply-To: <cover.1722512548.git.leon@kernel.org>
-References: <cover.1722512548.git.leon@kernel.org>
-Message-Id: <172310395487.1779734.12051360068889087637.b4-ty@kernel.org>
-Date: Thu, 08 Aug 2024 10:59:14 +0300
+	s=k20201202; t=1723443936;
+	bh=YHSEiOS1N62k5+Um8mFVLXfCRMZAI0Qk2aVW3CqnsdQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=AfSJ/p5K7eM8m4SvS93WUiORGBnBJTVscDjUTJeDKs38oVbgk07sufeJ0VdP3lrJ8
+	 4+Gnpqw60RIDDHe2+FJOol1svc893jE04NSDCjt3Jz2/HKUodsphCbD0oFqZvFO6Tb
+	 ld2VvUoD+Neu29qVlLXvPP79x9QmFxESWZbroKyXPl2JQwceJ+/uqbSJbTuu6nzeak
+	 9duj9ISoTvbttYHrLZ/jsElkO89VWbWyHKF3mFm1FwIQEBDu9eSxnoRbTbPZzA3jAw
+	 MJx9+SCD9oSZWxHmQUuNxqtRtpNg1eMMO/sPB0npi3jkQQx3GUjSRrn+uAerkSJJj7
+	 RXAqQgrrmiNPA==
+Message-ID: <7a8b9bdf-f4df-4da0-83ca-157175817e99@kernel.org>
+Date: Mon, 12 Aug 2024 08:25:28 +0200
 MIME-Version: 1.0
-X-Mailer: b4 0.15-dev-37811
+User-Agent: Mozilla Thunderbird
+To: Hui-Ping Chen <hpchen0nvt@gmail.com>, miquel.raynal@bootlin.com,
+ richard@nod.at, vigneshr@ti.com, robh@kernel.org, krzk+dt@kernel.org,
+ conor+dt@kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com,
+ esben@geanix.com
+References: <20240812030045.20831-1-hpchen0nvt@gmail.com>
+ <20240812030045.20831-2-hpchen0nvt@gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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 fv0=
+In-Reply-To: <20240812030045.20831-2-hpchen0nvt@gmail.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 958613F07D
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-3.98 / 15.00];
-	BAYES_HAM(-2.98)[99.92%];
+X-Rspamd-Queue-Id: 20D3E40B91
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.50 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
 	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
+	TAGGED_RCPT(0.00)[dt];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	RCPT_COUNT_TWELVE(0.00)[18];
 	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_TO(0.00)[gmail.com,bootlin.com,nod.at,ti.com,kernel.org,linaro.org,amd.com,geanix.com];
 	MID_RHS_MATCH_FROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
 	FROM_EQ_ENVFROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	TO_DN_SOME(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	RCVD_TLS_LAST(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: I4BDBO4JJ5WHOLC6NZOEFV2JN6B4UFLG
-X-Message-ID-Hash: I4BDBO4JJ5WHOLC6NZOEFV2JN6B4UFLG
-X-MailFrom: leon@kernel.org
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-rdma@vger.kernel.org, Michael Margolin <mrgolin@amazon.com>, Mustafa Ismail <mustafa.ismail@intel.com>, netdev@vger.kernel.org, Saeed Mahameed <saeedm@nvidia.com>, Selvin Xavier <selvin.xavier@broadcom.com>, Sumit Semwal <sumit.semwal@linaro.org>, Tariq Toukan <tariqt@nvidia.com>, Tatyana Nikolova <tatyana.e.nikolova@intel.com>, Yishai Hadas <yishaih@nvidia.com>, Leon Romanovsky <leon@kernel.org>
+Message-ID-Hash: 2MTS4KWTXF4FXBPCVGBQAMPST4JUDHTW
+X-Message-ID-Hash: 2MTS4KWTXF4FXBPCVGBQAMPST4JUDHTW
+X-MailFrom: krzk@kernel.org
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: linux-arm-kernel@lists.infradead.org, linux-mtd@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: (subset) [PATCH rdma-next 0/8] Introducing Multi-Path DMA Support for mlx5 RDMA Driver
+Subject: [Linaro-mm-sig] Re: [PATCH 1/2] dt-bindings: mtd: nuvoton,ma35d1-nand: add new bindings
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/I4BDBO4JJ5WHOLC6NZOEFV2JN6B4UFLG/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/2MTS4KWTXF4FXBPCVGBQAMPST4JUDHTW/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -81,44 +131,147 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-
-On Thu, 01 Aug 2024 15:05:09 +0300, Leon Romanovsky wrote:
-> From: Leon Romanovsky <leonro@nvidia.com>
+On 12/08/2024 05:00, Hui-Ping Chen wrote:
+> Add dt-bindings for the Nuvoton MA35 SoC NAND Controller.
 > 
-> From Yishai,
+> Signed-off-by: Hui-Ping Chen <hpchen0nvt@gmail.com>
+> ---
+>  .../bindings/mtd/nuvoton,ma35d1-nand.yaml     | 97 +++++++++++++++++++
+>  1 file changed, 97 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/mtd/nuvoton,ma35d1-nand.yaml
 > 
-> Overview
-> --------
-> This patch series aims to enable multi-path DMA support, allowing an
-> mlx5 RDMA device to issue DMA commands through multiple paths. This
-> feature is critical for improving performance and reaching line rate
-> in certain environments where issuing PCI transactions over one path
-> may be significantly faster than over another. These differences can
-> arise from various PCI generations in the system or the specific system
-> topology.
-> 
-> [...]
+> diff --git a/Documentation/devicetree/bindings/mtd/nuvoton,ma35d1-nand.yaml b/Documentation/devicetree/bindings/mtd/nuvoton,ma35d1-nand.yaml
+> new file mode 100644
+> index 000000000000..988c43bc6e99
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/mtd/nuvoton,ma35d1-nand.yaml
+> @@ -0,0 +1,97 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/mtd/nuvoton,ma35d1-nand.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Nuvoton MA35D1 NAND Flash Interface (NFI) Controller
+> +
+> +allOf:
+> +  - $ref: nand-controller.yaml#
 
-Applied, thanks!
+allOf goes usually just before properties.
 
-[2/8] RDMA/mlx5: Introduce the 'data direct' driver
-      https://git.kernel.org/rdma/rdma/c/281658bd04e7b9
-[3/8] RDMA/mlx5: Add the initialization flow to utilize the 'data direct' device
-      https://git.kernel.org/rdma/rdma/c/302b01afc28b1e
-[4/8] RDMA/umem: Add support for creating pinned DMABUF umem with a given dma device
-      https://git.kernel.org/rdma/rdma/c/b047ecbd7672d2
-[5/8] RDMA/umem: Introduce an option to revoke DMABUF umem
-      https://git.kernel.org/rdma/rdma/c/bc9be75e01373c
-[6/8] RDMA: Pass uverbs_attr_bundle as part of '.reg_user_mr_dmabuf' API
-      https://git.kernel.org/rdma/rdma/c/83f44068da564d
-[7/8] RDMA/mlx5: Add support for DMABUF MR registrations with Data-direct
-      https://git.kernel.org/rdma/rdma/c/19ae08911f8be1
-[8/8] RDMA/mlx5: Introduce GET_DATA_DIRECT_SYSFS_PATH ioctl
-      https://git.kernel.org/rdma/rdma/c/d222b19c595f63
+> +
+> +maintainers:
+> +  - Hui-Ping Chen <hpchen0nvt@gmail.com>
+> +
+> +properties:
+> +  compatible:
+> +    enum:
+> +      - nuvoton,ma35d1-nand
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  interrupts:
+> +    maxItems: 1
+> +
+> +  clocks:
+> +    minItems: 1
+
+This cannot be min only. It's unconstrained. maxItems instead. There is
+no existing code like this so this should make you wonder...
+
+> +
+> +patternProperties:
+> +  "^nand@[a-f0-9]$":
+> +    type: object
+> +    $ref: raw-nand-chip.yaml
+> +    properties:
+> +      nand-ecc-mode:
+> +        const: hw
+
+No, drop the property. It does not make sense to have it const.
+Compatible defines it.
+
+> +
+> +      nand-ecc-step-size:
+> +        enum: [512, 1024]
+
+No defaults? So is this required?
+
+> +
+> +      nand-ecc-strength:
+> +        enum: [8, 12, 24]
+
+No defaults? So is this required?
+
+> +
+> +      nand-bus-width:
+> +        const: 8
+
+Drop property.
+
+> +
+> +    unevaluatedProperties: false
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - interrupts
+> +  - clocks
+> +
+> +unevaluatedProperties: false
+> +
+> +examples:
+> +  - |
+> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
+> +    #include <dt-bindings/clock/nuvoton,ma35d1-clk.h>
+> +
+> +    soc {
+> +        #address-cells = <2>;
+> +        #size-cells = <2>;
+> +
+> +        nand-controller@401A0000 {
+> +            compatible = "nuvoton,ma35d1-nand";
+> +            reg = <0x0 0x401A0000 0x0 0x1000>;
+> +            interrupts = <GIC_SPI 38 IRQ_TYPE_LEVEL_HIGH>;
+> +            clocks = <&clk NAND_GATE>;
+> +            #address-cells = <1>;
+> +            #size-cells = <0>;
+> +
+> +            nand@0 {
+> +                reg = <0>;
+> +
+> +                nand-on-flash-bbt;
+> +                nand-ecc-mode = "hw";
+
+Drop
+
+> +                nand-ecc-step-size = <512>;
+> +                nand-ecc-strength = <8>;
+> +                nand-bus-width = <8>;
+
+Drop
+
+> +
+> +                partitions {
+> +                    compatible = "fixed-partitions";
+> +                    #address-cells = <1>;
+> +                    #size-cells = <1>;
+> +
+> +                    uboot@0 {
+> +                        label = "nand-uboot";
+> +                        read-only;
+> +                        reg = <0x0 0x300000>;
+> +                    };
+> +                };
+> +            };
+> +        };
+> +    };
+> +
+> +...
 
 Best regards,
--- 
-Leon Romanovsky <leon@kernel.org>
+Krzysztof
 
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
