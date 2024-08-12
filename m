@@ -2,35 +2,35 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 17F3794E975
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 12 Aug 2024 11:12:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93B9194E980
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 12 Aug 2024 11:14:21 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id D4A8444ACA
-	for <lists+linaro-mm-sig@lfdr.de>; Mon, 12 Aug 2024 09:12:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9F9954252C
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 12 Aug 2024 09:14:20 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 89FE93F00C
-	for <linaro-mm-sig@lists.linaro.org>; Mon, 12 Aug 2024 09:12:28 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 59E3A4252C
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 12 Aug 2024 09:13:55 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=dwZiu2L2;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b="B/+5L8vN";
 	spf=pass (lists.linaro.org: domain of krzk@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=krzk@kernel.org;
 	dmarc=pass (policy=none) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 2B92C610D5;
-	Mon, 12 Aug 2024 09:12:28 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A6E3C32782;
-	Mon, 12 Aug 2024 09:12:22 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id 0614261090;
+	Mon, 12 Aug 2024 09:13:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8104C32782;
+	Mon, 12 Aug 2024 09:13:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1723453947;
-	bh=AHpXAkDP1WOYSED8knHUVOD/Zs18SE8A5sym1YavS1k=;
+	s=k20201202; t=1723454034;
+	bh=49cb+KN9og7h4py/ImFy9HdNnL09UTPkZvB/QwOgiKs=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=dwZiu2L2qrosCfyV3a2YbYsWIBs39ADt90UptUvF6G8dvCVqehKEfQmgsGLhkwELH
-	 lw9zshioXY1etWuw5E7/VCPvkKp9jnw+Ix0aYWrhngRvN9OPSYx17C/mwIRWQzKCty
-	 kqfDZ1XaDYLD2q/lxAOx6Pnx2H/uY4A+k6eAxkgcAuhO6Ss1efuKyRU/0Vgo6v1r+G
-	 XRJlsEU5em0E6Hoay9NgHr+weOXwawheAdvQiqIv/+NACdqU2EvThF0+bH9oVGDyxa
-	 u4vwqmHKac9maxVsKChRabkyomPHT5JHfGejOPbu9aLKemjMxmXIFAHGcOYYPP1Fql
-	 7xb60X6KYGiYw==
-Message-ID: <1f823600-68c4-418f-b2bf-6d5d64a1ee56@kernel.org>
-Date: Mon, 12 Aug 2024 11:12:19 +0200
+	b=B/+5L8vNZuErYIeftIT+43oZoJ1FE3n3CC4tQ02MrKWNjTCpfkbml+lvVrmYI8fH5
+	 nARsGbSOkZM4Ypn52YpXqpygbWG4LV8QsfD0LZnvHMVpqZ4nXuLwz8/SaF5QWTvM0u
+	 lb1twb1NkW1z1sdD6Lr0Beot0iSsANQ1tPdyqh+hPPk/M0boo4RVLI7DOVs4lfloup
+	 q2XDjoQCKlveMcgR46xhREUygMxnYufUpWJHbTHeh+GVhY9JyRj29q9Sod4ye2ojnh
+	 rkbIrauEYapoMl7+5PvdsTg1S5GCBIcUBIge2IJGcxIiIsTFFp3B1akk6FCSTDgLDu
+	 /rNLw1XXuT5Ow==
+Message-ID: <33ae3c93-81cb-491c-a5b3-239c7c413eb3@kernel.org>
+Date: Mon, 12 Aug 2024 11:13:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 To: Hui-Ping Chen <hpchen0nvt@gmail.com>, miquel.raynal@bootlin.com,
@@ -38,9 +38,9 @@ To: Hui-Ping Chen <hpchen0nvt@gmail.com>, miquel.raynal@bootlin.com,
  conor+dt@kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com,
  esben@geanix.com
 References: <20240812030045.20831-1-hpchen0nvt@gmail.com>
- <20240812030045.20831-2-hpchen0nvt@gmail.com>
- <7a8b9bdf-f4df-4da0-83ca-157175817e99@kernel.org>
- <203578df-11a6-425a-b2be-cc09dae62f8f@gmail.com>
+ <20240812030045.20831-3-hpchen0nvt@gmail.com>
+ <06d627d5-947c-4da4-826a-76033386b575@kernel.org>
+ <3b7b629e-0085-4821-932c-e89faad15c1a@gmail.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -86,16 +86,16 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  uZwJCLykjad45hsWcOGk3OcaAGQS6NDlfhM6O9aYNwGL6tGt/6BkRikNOs7VDEa4/HlbaSJo
  7FgndGw1kWmkeL6oQh7wBvYll2buKod4qYntmNKEicoHGU+x91Gcan8mCoqhJkbqrL7+nXG2
  5Q/GS5M9RFWS+nYyJh+c3OcfKqVcZQNANItt7+ULzdNJuhvTRRdC3g9hmCEuNSr+CLMdnRBY fv0=
-In-Reply-To: <203578df-11a6-425a-b2be-cc09dae62f8f@gmail.com>
+In-Reply-To: <3b7b629e-0085-4821-932c-e89faad15c1a@gmail.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 89FE93F00C
+X-Rspamd-Queue-Id: 59E3A4252C
 X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.40 / 15.00];
-	BAYES_HAM(-2.90)[99.56%];
+X-Spamd-Result: default: False [-2.41 / 15.00];
+	BAYES_HAM(-2.91)[99.63%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,none];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217:c];
 	MIME_GOOD(-0.10)[text/plain];
 	TAGGED_RCPT(0.00)[dt];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -114,16 +114,16 @@ X-Spamd-Result: default: False [-2.40 / 15.00];
 	RCVD_COUNT_TWO(0.00)[2];
 	DKIM_TRACE(0.00)[kernel.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: VMLB5P5QDPECRW4YZL7D6Q4O37WTBZ2Q
-X-Message-ID-Hash: VMLB5P5QDPECRW4YZL7D6Q4O37WTBZ2Q
+Message-ID-Hash: PM3ACY7VEMPOOYI5O4UMK7337HSTMGTG
+X-Message-ID-Hash: PM3ACY7VEMPOOYI5O4UMK7337HSTMGTG
 X-MailFrom: krzk@kernel.org
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
 CC: linux-arm-kernel@lists.infradead.org, linux-mtd@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH 1/2] dt-bindings: mtd: nuvoton,ma35d1-nand: add new bindings
+Subject: [Linaro-mm-sig] Re: [PATCH 2/2] mtd: rawnand: nuvoton: add new driver for the Nuvoton MA35 SoC
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/VMLB5P5QDPECRW4YZL7D6Q4O37WTBZ2Q/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/PM3ACY7VEMPOOYI5O4UMK7337HSTMGTG/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -133,30 +133,39 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On 12/08/2024 11:02, Hui-Ping Chen wrote:
-> 
-> 
+On 12/08/2024 11:10, Hui-Ping Chen wrote:
 >>> +
->>> +      nand-ecc-step-size:
->>> +        enum: [512, 1024]
->> No defaults? So is this required?
-> 
-> This is required, but I will also add a default.
-
-If this is required and should be in required: list. Default does not
-make sense then... it contradicts the point of being required.
-
-> 
-> 
-> 
+>>> +/* NAND-type Flash BCH Error Data Registers */
+>>> +#define MA35_NFI_REG_NANDECCED0	(0x960)
+>>> +#define MA35_NFI_REG_NANDECCED1	(0x964)
+>>> +#define MA35_NFI_REG_NANDECCED2	(0x968)
+>>> +#define MA35_NFI_REG_NANDECCED3	(0x96C)
+>>> +#define MA35_NFI_REG_NANDECCED4	(0x970)
+>>> +#define MA35_NFI_REG_NANDECCED5	(0x974)
 >>> +
->>> +      nand-ecc-strength:
->>> +        enum: [8, 12, 24]
->> No defaults? So is this required?
+>>> +/* NAND-type Flash Redundant Area Registers */
+>>> +#define MA35_NFI_REG_NANDRA0		(0xA00)
+>>> +#define MA35_NFI_REG_NANDRA1		(0xA04)
+>>> +
+>>> +#define SKIP_SPARE_BYTES	4
+>>> +
+>>> +/* BCH algorithm related constants and variables */
+>>> +enum {
+>>> +	eBCH_NONE = 0,
+>>> +	eBCH_T8,
+>>> +	eBCH_T12,
+>>> +	eBCH_T24,
+>>> +	eBCH_CNT
+>>> +} E_BCHALGORITHM;
+>>> +
+>>> +static const int g_i32BCHAlgoIdx[eBCH_CNT] = {BCH_T8, BCH_T8, BCH_T12, BCH_T24};
+>>> +static struct nand_ecclayout_user ma35_nand_oob;
+>> Why this is file-scope?
 > 
-> This is required, but I will also add a default.
+> I will remove the `static`.
 
-Ditto
+No, why this cannot be instance dependent? Quick looks says it could.
+And should.
 
 
 Best regards,
