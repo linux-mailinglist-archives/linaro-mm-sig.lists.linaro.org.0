@@ -2,98 +2,94 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7980E954982
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 16 Aug 2024 14:55:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DD5D9956921
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 Aug 2024 13:15:25 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 2D6833F48B
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 16 Aug 2024 12:55:18 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
-	by lists.linaro.org (Postfix) with ESMTPS id 532F83F48B
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 16 Aug 2024 12:54:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 93ABC41252
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 19 Aug 2024 11:15:24 +0000 (UTC)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
+	by lists.linaro.org (Postfix) with ESMTPS id 9BD983F3DE
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 19 Aug 2024 11:15:21 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=Wk9ns6OX;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 198.175.65.13 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1723812900; x=1755348900;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=OSCzB+p00nSVW/dHRk7hsNkN+RR7Pek+A4z85VZMYuU=;
-  b=Wk9ns6OXkrSYg+bW8dBhgr2+UzHjxzC+GYDE7DITPA5jPloaFyLjjrhw
-   a6TVn2w42axNDo5ehOX3i2W7txCtUIFeU39lKrJiokZ+1TwXwS4NIZkNt
-   TdBFbLl6v0xmxoTQ1d4JVXko3qGUKO8QYjKzdFM0uCfLgHen9PMW6MuRC
-   IEdLVKYTquXEu5FCWYIaFJdx3UsjX+42G023f/j9OXW2AcuVdgxbglMVY
-   2T7PYqYz78mA5bGrGtUqrBLKouezvQCAxNw8vO88t8lELkHj/rk1PsVJJ
-   AKA95FV1vvHnMaAZPiZFvNp+S1tLPeMUoBYG3yAJK79Ots7t2JdgdOU7E
-   w==;
-X-CSE-ConnectionGUID: 4JAJvUURQH6y8Oj3Xco5NQ==
-X-CSE-MsgGUID: vixRUhJRRciEm+ArYqXx1A==
-X-IronPort-AV: E=McAfee;i="6700,10204,11166"; a="33259268"
-X-IronPort-AV: E=Sophos;i="6.10,151,1719903600";
-   d="scan'208";a="33259268"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Aug 2024 05:54:58 -0700
-X-CSE-ConnectionGUID: QDVynEIoRQ270siWOnAKdw==
-X-CSE-MsgGUID: m3JGk3tFT6SARvoiCDI1VA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,151,1719903600";
-   d="scan'208";a="90440914"
-Received: from lkp-server01.sh.intel.com (HELO 9a732dc145d3) ([10.239.97.150])
-  by fmviesa001.fm.intel.com with ESMTP; 16 Aug 2024 05:54:54 -0700
-Received: from kbuild by 9a732dc145d3 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1sewTk-0006Qs-2B;
-	Fri, 16 Aug 2024 12:54:52 +0000
-Date: Fri, 16 Aug 2024 20:54:51 +0800
-From: kernel test robot <lkp@intel.com>
-To: Huan Yang <link@vivo.com>, Gerd Hoffmann <kraxel@redhat.com>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	dri-devel@lists.freedesktop.org, linux-media@vger.kernel.org,
-	linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
-Message-ID: <202408162012.cL9pnFSm-lkp@intel.com>
-References: <20240813090518.3252469-6-link@vivo.com>
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of k.kozlowski.k@gmail.com designates 209.85.128.44 as permitted sender) smtp.mailfrom=k.kozlowski.k@gmail.com;
+	dmarc=fail reason="SPF not aligned (relaxed), No valid DKIM" header.from=kernel.org (policy=none)
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4280ca0791bso34101795e9.1
+        for <linaro-mm-sig@lists.linaro.org>; Mon, 19 Aug 2024 04:15:21 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1724066120; x=1724670920;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=3xEnhR+BnZyqhep0tu1+6gKqzWhCmgeh7ON3eSgIapg=;
+        b=qtkD6ALkVz0eSYgsiPyPIjEEaJleMGjS/mSNeC33VBOaQFR9hvieal/u5ytrC2+ut/
+         +MYo4CPo+z+9djtjUOoSqd3kLUr6ouYEToTQBKOHm3WAeXUSCF0HPDp1l+QQJXxhM+1w
+         Vyfo7KUDHG/ShoS3j2/GwAHLHE9n5Upv0mRJPeQnrKtdniI5DH0aGEyUuwUrH4+Hgxma
+         a2/vw4W4FN7kTyj4vTpSpHJbRMFK4BJjNVjD4hs1CrXs+IpEt9WLE9ljzf0DJGOJQRE5
+         7CN80p5o9i24e8MNFLl2R2dYOF+N61VFECt7w3c1IsiYRCuclO/BeuR01k7sxnZ5uwXg
+         gayA==
+X-Forwarded-Encrypted: i=1; AJvYcCU0bUxznChBWlCAtBpmoxx7cRb9tL5a55DvUs9z5G3brvFXRg+oNlGjsrkO3hqSCJv9AV7IBOJaouVDopYz@lists.linaro.org
+X-Gm-Message-State: AOJu0YxLnQju0Nyqll2aWZIqWz8eQXsRyRHBM0jJimSxUFn2X061h568
+	SuhJ/r/C8gR7eTaUSgfa/KS+S7/TGJFsmIQl8LBxAAsbjD4F4wEw
+X-Google-Smtp-Source: AGHT+IH8/p+04BfrJXSaCxwKTnTJcsz63gHT8daKI2ZKAyHVF0aeARbyLjNtxUWoElROY9FmJQ+tBw==
+X-Received: by 2002:a05:600c:1c24:b0:427:9a8f:9717 with SMTP id 5b1f17b1804b1-429ed620183mr82675765e9.0.1724066120138;
+        Mon, 19 Aug 2024 04:15:20 -0700 (PDT)
+Received: from krzk-bin ([178.197.215.209])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-429ed784171sm105623845e9.38.2024.08.19.04.15.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 19 Aug 2024 04:15:19 -0700 (PDT)
+Date: Mon, 19 Aug 2024 13:15:16 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Hui-Ping Chen <hpchen0nvt@gmail.com>
+Message-ID: <l6t47glpxscvbr6rsq67alwpn6mcltjnxrnr3xs4qa3slqezrr@zp6a43hiwq7l>
+References: <20240819092037.110260-1-hpchen0nvt@gmail.com>
+ <20240819092037.110260-2-hpchen0nvt@gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240813090518.3252469-6-link@vivo.com>
+In-Reply-To: <20240819092037.110260-2-hpchen0nvt@gmail.com>
+X-Rspamd-Action: no action
+X-Spamd-Bar: /
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 532F83F48B
-X-Spamd-Bar: -------
-X-Spamd-Result: default: False [-8.00 / 15.00];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
+X-Rspamd-Queue-Id: 9BD983F3DE
+X-Spamd-Result: default: False [-0.90 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	DWL_DNSWL_MED(-2.00)[intel.com:dkim];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	SUSPICIOUS_RECIPS(1.50)[];
+	MID_RHS_NOT_FQDN(0.50)[];
+	FORGED_SENDER(0.30)[krzk@kernel.org,kkozlowskik@gmail.com];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
-	RCPT_COUNT_SEVEN(0.00)[11];
-	NEURAL_HAM(-0.00)[-1.000];
-	FROM_EQ_ENVFROM(0.00)[];
+	DMARC_POLICY_SOFTFAIL(0.10)[kernel.org : SPF not aligned (relaxed), No valid DKIM,none];
+	RCVD_TLS_LAST(0.00)[];
+	TAGGED_FROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
 	ARC_NA(0.00)[];
+	FREEMAIL_TO(0.00)[gmail.com];
+	RCPT_COUNT_TWELVE(0.00)[17];
+	MIME_TRACE(0.00)[0:+];
+	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
-	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+]
-X-Rspamd-Action: no action
-Message-ID-Hash: HKTHDDAXNKAQTRFO4QCUP2SZVSFHQACT
-X-Message-ID-Hash: HKTHDDAXNKAQTRFO4QCUP2SZVSFHQACT
-X-MailFrom: lkp@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, opensource.kernel@vivo.com, Huan Yang <link@vivo.com>
+	DNSWL_BLOCKED(0.00)[209.85.128.44:from,178.197.215.209:received];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_NEQ_ENVFROM(0.00)[krzk@kernel.org,kkozlowskik@gmail.com];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	R_DKIM_NA(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.44:from];
+	TAGGED_RCPT(0.00)[dt];
+	TO_DN_SOME(0.00)[]
+Message-ID-Hash: 3Y4JRP6RPLHFRZEX7DZZEBOCPDJMMTJX
+X-Message-ID-Hash: 3Y4JRP6RPLHFRZEX7DZZEBOCPDJMMTJX
+X-MailFrom: k.kozlowski.k@gmail.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: miquel.raynal@bootlin.com, richard@nod.at, vigneshr@ti.com, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com, esben@geanix.com, linux-arm-kernel@lists.infradead.org, linux-mtd@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 5/5] udmabuf: remove udmabuf_folio
+Subject: [Linaro-mm-sig] Re: [PATCH v2 1/2] dt-bindings: mtd: nuvoton,ma35d1-nand: add new bindings
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HKTHDDAXNKAQTRFO4QCUP2SZVSFHQACT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3Y4JRP6RPLHFRZEX7DZZEBOCPDJMMTJX/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -103,61 +99,21 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi Huan,
+On Mon, Aug 19, 2024 at 09:20:36AM +0000, Hui-Ping Chen wrote:
+> Add dt-bindings for the Nuvoton MA35 SoC NAND Controller.
+> 
+> Signed-off-by: Hui-Ping Chen <hpchen0nvt@gmail.com>
+> ---
+>  .../bindings/mtd/nuvoton,ma35d1-nand.yaml     | 93 +++++++++++++++++++
+>  1 file changed, 93 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/mtd/nuvoton,ma35d1-nand.yaml
+> 
 
-kernel test robot noticed the following build warnings:
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 
-[auto build test WARNING on 033a4691702cdca3a613256b0623b8eeacb4985e]
+Best regards,
+Krzysztof
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Huan-Yang/udmabuf-cancel-mmap-page-fault-direct-map-it/20240814-231504
-base:   033a4691702cdca3a613256b0623b8eeacb4985e
-patch link:    https://lore.kernel.org/r/20240813090518.3252469-6-link%40vivo.com
-patch subject: [PATCH v3 5/5] udmabuf: remove udmabuf_folio
-config: s390-allyesconfig (https://download.01.org/0day-ci/archive/20240816/202408162012.cL9pnFSm-lkp@intel.com/config)
-compiler: s390-linux-gcc (GCC) 14.1.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20240816/202408162012.cL9pnFSm-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202408162012.cL9pnFSm-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
->> drivers/dma-buf/udmabuf.c:175: warning: Function parameter or struct member 'ubuf' not described in 'unpin_all_folios'
-
-
-vim +175 drivers/dma-buf/udmabuf.c
-
-17a7ce20349045 Gurchetan Singh 2019-12-02  165  
-d934739404652b Huan Yang       2024-08-13  166  /**
-d934739404652b Huan Yang       2024-08-13  167   * unpin_all_folios:		unpin each folio we pinned in create
-d934739404652b Huan Yang       2024-08-13  168   * The udmabuf set all folio in folios and pinned it, but for large folio,
-d934739404652b Huan Yang       2024-08-13  169   * We may have only used a small portion of the physical in the folio.
-d934739404652b Huan Yang       2024-08-13  170   * we will repeatedly, sequentially set the folio into the array to ensure
-d934739404652b Huan Yang       2024-08-13  171   * that the offset can index the correct folio at the corresponding index.
-d934739404652b Huan Yang       2024-08-13  172   * Hence, we only need to unpin the first iterred folio.
-d934739404652b Huan Yang       2024-08-13  173   */
-d934739404652b Huan Yang       2024-08-13  174  static void unpin_all_folios(struct udmabuf *ubuf)
-c6a3194c05e7e6 Vivek Kasireddy 2024-06-23 @175  {
-d934739404652b Huan Yang       2024-08-13  176  	pgoff_t pg;
-d934739404652b Huan Yang       2024-08-13  177  	struct folio *last = NULL;
-c6a3194c05e7e6 Vivek Kasireddy 2024-06-23  178  
-d934739404652b Huan Yang       2024-08-13  179  	for (pg = 0; pg < ubuf->pagecount; pg++) {
-d934739404652b Huan Yang       2024-08-13  180  		struct folio *tmp = ubuf->folios[pg];
-c6a3194c05e7e6 Vivek Kasireddy 2024-06-23  181  
-d934739404652b Huan Yang       2024-08-13  182  		if (tmp == last)
-d934739404652b Huan Yang       2024-08-13  183  			continue;
-c6a3194c05e7e6 Vivek Kasireddy 2024-06-23  184  
-d934739404652b Huan Yang       2024-08-13  185  		last = tmp;
-d934739404652b Huan Yang       2024-08-13  186  		unpin_folio(tmp);
-d934739404652b Huan Yang       2024-08-13  187  	}
-c6a3194c05e7e6 Vivek Kasireddy 2024-06-23  188  }
-c6a3194c05e7e6 Vivek Kasireddy 2024-06-23  189  
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
