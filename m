@@ -2,132 +2,227 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 94CA59621B5
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 28 Aug 2024 09:48:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 86D58964126
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Aug 2024 12:18:03 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 6267D446A9
-	for <lists+linaro-mm-sig@lfdr.de>; Wed, 28 Aug 2024 07:48:54 +0000 (UTC)
-Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net [217.70.183.199])
-	by lists.linaro.org (Postfix) with ESMTPS id BF13140FE9
-	for <linaro-mm-sig@lists.linaro.org>; Wed, 28 Aug 2024 07:48:50 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1BFB844109
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 29 Aug 2024 10:18:02 +0000 (UTC)
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
+	by lists.linaro.org (Postfix) with ESMTPS id 0F3E73ED3C
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Aug 2024 10:17:57 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=bootlin.com header.s=gm1 header.b=m+IuM1tT;
-	spf=pass (lists.linaro.org: domain of miquel.raynal@bootlin.com designates 217.70.183.199 as permitted sender) smtp.mailfrom=miquel.raynal@bootlin.com;
-	dmarc=pass (policy=reject) header.from=bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 62B78FF808;
-	Wed, 28 Aug 2024 07:48:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
-	t=1724831329;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=y5zLZsHecvlr5wSYFNatvZpgULQ6Qmig03QDSQmQd4Y=;
-	b=m+IuM1tTx5x1LLw++vJv+fVKTLfoYsQe486sDQqOB4JvPo0i/JIlUYXEqpBcD7ew+lG8B5
-	ubnACfagbmX36TbQzavKFAA1nP2nJ5ZwxCZGhsqN7mUYMGwrGChsrNnlfh7Al2nn234Vw6
-	Qnc4toma/uSIkeZ1OdF1EdVuicT2P1hY9CIe8yxDpCuOR76KOtIv1DHColUWaqmuiJ3bIs
-	0GrAY77FOYA2mQdSs6dYdUZHwrkSlhieu3DRPo3qY2QJPwYsg1S8TfExbKa/a6fFAA4i+3
-	ZLDUWtxAjoEyXiq2awP9FrIKW+GiEySKt/VFt0QRGEtxj52f7nxEMphy/vnEPw==
-Date: Wed, 28 Aug 2024 09:48:46 +0200
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Hui-Ping Chen <hpchen0nvt@gmail.com>
-Message-ID: <20240828094846.166c7de6@xps-13>
-In-Reply-To: <fd0d73cf-6bce-4f7b-9513-5f434ab9ae00@gmail.com>
-References: <20240821071132.281018-1-hpchen0nvt@gmail.com>
-	<20240821071132.281018-2-hpchen0nvt@gmail.com>
-	<20240823182616.5a85e1ae@xps-13>
-	<fd0d73cf-6bce-4f7b-9513-5f434ab9ae00@gmail.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.41; x86_64-pc-linux-gnu)
+	dkim=pass header.d=linaro.org header.s=google header.b=gVs2n9D6;
+	spf=pass (lists.linaro.org: domain of dan.carpenter@linaro.org designates 209.85.128.53 as permitted sender) smtp.mailfrom=dan.carpenter@linaro.org;
+	dmarc=pass (policy=none) header.from=linaro.org
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-428e0d184b4so3995045e9.2
+        for <linaro-mm-sig@lists.linaro.org>; Thu, 29 Aug 2024 03:17:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1724926676; x=1725531476; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:message-id:subject:cc
+         :to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=cpJAK3u0wNHTYAsOsJ3G+ulHexNJQQgw5rassGX01aE=;
+        b=gVs2n9D6d80/Rl1bUsw3hlViapnsfYphszOfVXiFC2NDMv3REAFAG68IDSYJhZJuB6
+         VmbuiuEry4pkzaDwMrb9xS8mI/ZMQFCN0RzXvXc/OxZZHexuAj5TyExi3CsXcWZTkAbW
+         3tBwpFFOvc1wljWQ9Sf6wp+X4TGgrfZOsIblNf9dONdfOtTJMyiW/DiZ4kVnJkPUE532
+         pqyGDL+x2suMRmS3UPoIMlhjAi+/B6cQgSUKyoHbO8NPTmzOfkm26EJIeTkVSgzAiaLy
+         BrItCCMgyDprpJkXyv4LJZqbLZvOpV7Lsaerueh5rjLu3JnaTHwv5fXHBveVq6/ucV/q
+         Biuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1724926676; x=1725531476;
+        h=in-reply-to:content-disposition:mime-version:message-id:subject:cc
+         :to:from:date:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=cpJAK3u0wNHTYAsOsJ3G+ulHexNJQQgw5rassGX01aE=;
+        b=nwVCYLoG7OMTfhABV0+5S84ETkE00s7LQzWQPks5+7JRaeTAEWa5czWOpS4ArD1bXc
+         pcOPsHKKsAx1yPF1lldBu9QW2ExjT8MQ+VDVGvuDUbafSoLS5cSm/3kRdtir5E2eW8su
+         KgAPtSODpMDTLkzfw9cmngf/m06nFJqigOK9UHoizDFGZmTIa7RyFNnKQ+IprMmDwtb7
+         jbxGQ3oS9QE7Vyu30rF054LNsI/LW2Zvp+ZRpM7cv95btB8QgVHV1KrDV9pHaXRFG+Dl
+         l6u5QAgow1g03eEbCowIR3u07qnyEgJOTU4OJf4olR3vetoiq1tJrc8+d649NJy7Vun7
+         JScw==
+X-Forwarded-Encrypted: i=1; AJvYcCUEovwOkBq36XkxZ6kypoPjfEw0eR08EWnnZpg5MA/ZTJHk3W1BZfqOtz1PgBRLZJ1aNhBa89QRCadP/sxE@lists.linaro.org
+X-Gm-Message-State: AOJu0YzCDlkdX8x83gRNCSRTgc/u7vritPLj21jw3agEKUXG5j9VKjz1
+	fqNPlY/XCfpi9CwpcdRFV9DvQ0l9sn4dFdfSXQDnjOE6AXklQzvb1PLMn/eYl/AT3w==
+X-Google-Smtp-Source: AGHT+IHKHTDFnByEuQrhxWvf5SouAIMF+9fOY83uMUNMpx5WQn1PycSxrrZARYgdc1+Bu9avy5zAFw==
+X-Received: by 2002:a05:600c:4707:b0:426:5b21:97fa with SMTP id 5b1f17b1804b1-42bb27a102cmr18206875e9.29.1724926675727;
+        Thu, 29 Aug 2024 03:17:55 -0700 (PDT)
+Received: from localhost ([196.207.164.177])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-42ba6396700sm47212215e9.10.2024.08.29.03.17.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 29 Aug 2024 03:17:55 -0700 (PDT)
+Date: Thu, 29 Aug 2024 13:17:51 +0300
+From: Dan Carpenter <dan.carpenter@linaro.org>
+To: oe-kbuild@lists.linux.dev, Huan Yang <link@vivo.com>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+	Gerd Hoffmann <kraxel@redhat.com>, linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+	linux-kernel@vger.kernel.org
+Message-ID: <b9946356-3375-4817-92dd-baaf85802462@stanley.mountain>
 MIME-Version: 1.0
-X-GND-Sasl: miquel.raynal@bootlin.com
+Content-Disposition: inline
+In-Reply-To: <20240822084342.1574914-5-link@vivo.com>
 X-Rspamd-Action: no action
-X-Spamd-Bar: -
+X-Spamd-Bar: ----
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: BF13140FE9
-X-Spamd-Result: default: False [-2.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[bootlin.com,reject];
-	MID_RHS_NOT_FQDN(0.50)[];
-	R_SPF_ALLOW(-0.20)[+ip4:217.70.183.192/28];
-	R_DKIM_ALLOW(-0.20)[bootlin.com:s=gm1];
+X-Rspamd-Queue-Id: 0F3E73ED3C
+X-Spamd-Result: default: False [-4.00 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:29169, ipnet:217.70.176.0/20, country:FR];
-	RCPT_COUNT_TWELVE(0.00)[17];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_ONE(0.00)[1];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
-	HAS_ORG_HEADER(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	FREEMAIL_TO(0.00)[gmail.com];
-	TAGGED_RCPT(0.00)[dt];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[217.70.183.199:from];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[13];
+	FROM_HAS_DN(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.128.53:from];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_COUNT_TWO(0.00)[2];
+	RECEIVED_HELO_LOCALHOST(0.00)[];
 	TO_DN_SOME(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[bootlin.com:+]
-Message-ID-Hash: 3S4SJFEAYAPMGDA2GZLS43D54ZHZID5T
-X-Message-ID-Hash: 3S4SJFEAYAPMGDA2GZLS43D54ZHZID5T
-X-MailFrom: miquel.raynal@bootlin.com
+	DKIM_TRACE(0.00)[linaro.org:+]
+Message-ID-Hash: JGI5HEGVVSIZTAGHVEIEZP6ATFUAYDXT
+X-Message-ID-Hash: JGI5HEGVVSIZTAGHVEIEZP6ATFUAYDXT
+X-MailFrom: dan.carpenter@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: richard@nod.at, vigneshr@ti.com, robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org, sumit.semwal@linaro.org, christian.koenig@amd.com, esben@geanix.com, linux-arm-kernel@lists.infradead.org, linux-mtd@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+CC: lkp@intel.com, oe-kbuild-all@lists.linux.dev, opensource.kernel@vivo.com, Huan Yang <link@vivo.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v3 1/2] dt-bindings: mtd: nuvoton,ma35d1-nand: add new bindings
+Subject: [Linaro-mm-sig] Re: [PATCH v4 4/5] udmabuf: udmabuf_create codestyle cleanup
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/3S4SJFEAYAPMGDA2GZLS43D54ZHZID5T/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JGI5HEGVVSIZTAGHVEIEZP6ATFUAYDXT/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGkgSHVpLVBpbmcsDQoNCmhwY2hlbjBudnRAZ21haWwuY29tIHdyb3RlIG9uIFdlZCwgMjggQXVn
-IDIwMjQgMTA6NDc6MTcgKzA4MDA6DQoNCj4gRGVhciBNaXF1w6hsLA0KPiANCj4gVGhhbmsgeW91
-IGZvciB5b3VyIHJlcGx5Lg0KPiANCj4gDQo+IA0KPiBPbiAyMDI0LzgvMjQg5LiK5Y2IIDEyOjI2
-LCBNaXF1ZWwgUmF5bmFsIHdyb3RlOg0KPiA+IEhpLA0KPiA+DQo+ID4gaHBjaGVuMG52dEBnbWFp
-bC5jb20gd3JvdGUgb24gV2VkLCAyMSBBdWcgMjAyNCAwNzoxMTozMSArMDAwMDoNCj4gPiAgDQo+
-ID4+IEFkZCBkdC1iaW5kaW5ncyBmb3IgdGhlIE51dm90b24gTUEzNSBTb0MgTkFORCBDb250cm9s
-bGVyLg0KPiA+Pg0KPiA+PiBTaWduZWQtb2ZmLWJ5OiBIdWktUGluZyBDaGVuIDxocGNoZW4wbnZ0
-QGdtYWlsLmNvbT4NCj4gPj4gUmV2aWV3ZWQtYnk6IEtyenlzenRvZiBLb3psb3dza2kgPGtyenlz
-enRvZi5rb3psb3dza2lAbGluYXJvLm9yZz4NCj4gPj4gLS0tDQo+ID4+ICAgLi4uL2JpbmRpbmdz
-L210ZC9udXZvdG9uLG1hMzVkMS1uYW5kLnlhbWwgICAgIHwgOTMgKysrKysrKysrKysrKysrKysr
-Kw0KPiA+PiAgIDEgZmlsZSBjaGFuZ2VkLCA5MyBpbnNlcnRpb25zKCspDQo+ID4+ICAgY3JlYXRl
-IG1vZGUgMTAwNjQ0IERvY3VtZW50YXRpb24vZGV2aWNldHJlZS9iaW5kaW5ncy9tdGQvbnV2b3Rv
-bixtYTM1ZDEtbmFuZC55YW1sDQo+ID4+DQo+ID4+IGRpZmYgLS1naXQgYS9Eb2N1bWVudGF0aW9u
-L2RldmljZXRyZWUvYmluZGluZ3MvbXRkL251dm90b24sbWEzNWQxLW5hbmQueWFtbCBiL0RvY3Vt
-ZW50YXRpb24vZGV2aWNldHJlZS9iaW5kaW5ncy9tdGQvbnV2b3RvbixtYTM1ZDEtbmFuZC55YW1s
-DQo+ID4+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4+IGluZGV4IDAwMDAwMDAwMDAwMC4uMTUy
-Nzg0ZTczMjYzDQo+ID4+IC0tLSAvZGV2L251bGwNCj4gPj4gKysrIGIvRG9jdW1lbnRhdGlvbi9k
-ZXZpY2V0cmVlL2JpbmRpbmdzL210ZC9udXZvdG9uLG1hMzVkMS1uYW5kLnlhbWwNCj4gPj4gQEAg
-LTAsMCArMSw5MyBAQA0KPiA+PiArIyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogKEdQTC0yLjAt
-b25seSBPUiBCU0QtMi1DbGF1c2UpDQo+ID4+ICslWUFNTCAxLjINCj4gPj4gKy0tLQ0KPiA+PiAr
-JGlkOiBodHRwOi8vZGV2aWNldHJlZS5vcmcvc2NoZW1hcy9tdGQvbnV2b3RvbixtYTM1ZDEtbmFu
-ZC55YW1sIw0KPiA+PiArJHNjaGVtYTogaHR0cDovL2RldmljZXRyZWUub3JnL21ldGEtc2NoZW1h
-cy9jb3JlLnlhbWwjDQo+ID4+ICsNCj4gPj4gK3RpdGxlOiBOdXZvdG9uIE1BMzVEMSBOQU5EIEZs
-YXNoIEludGVyZmFjZSAoTkZJKSBDb250cm9sbGVyDQo+ID4+ICsNCj4gPj4gK21haW50YWluZXJz
-Og0KPiA+PiArICAtIEh1aS1QaW5nIENoZW4gPGhwY2hlbjBudnRAZ21haWwuY29tPg0KPiA+PiAr
-DQo+ID4+ICthbGxPZjoNCj4gPj4gKyAgLSAkcmVmOiBuYW5kLWNvbnRyb2xsZXIueWFtbCMNCj4g
-Pj4gKw0KPiA+PiArcHJvcGVydGllczoNCj4gPj4gKyAgY29tcGF0aWJsZToNCj4gPj4gKyAgICBl
-bnVtOg0KPiA+PiArICAgICAgLSBudXZvdG9uLG1hMzVkMS1uYW5kICANCj4gPiBDYW4gd2UgcGxl
-YXNlIHVzZSB0aGUgLW5hbmQtY29udHJvbGxlciBzdWZmaXguIEEgTkFORCBpcyBhIHRoZSBjb21t
-b24NCj4gPiBuYW1lIGZvciBhIGNoaXAgd2l0aCBzdG9yYWdlIGluc2lkZS4gWW91IGFyZSBkZXNj
-cmliaW5nIGEgaG9zdA0KPiA+IGNvbnRyb2xsZXIgdGhhdCBjYW4gYmUgY29ubmVjdGVkIHRvIGlu
-IG9yZGVyIHRvIHRhbGsgdG8gYSBOQU5ELiAgDQo+IA0KPiANCj4gT2theSwgSSB3aWxsIGNoYW5n
-ZSBpdCB0byBudXZvdG9uLG1hMzVkMS1uZmkuDQo+IA0KPiBCZWNhdXNlIGluIG91ciBwbGF0Zm9y
-bSwgaXQgaXMgdGhlIE5BTkQgRmxhc2ggSW50ZXJmYWNlLg0KDQpuZmkgaXMgbm90IGFuIGFjcm9u
-eW0gdGhhdCBpcyB1bmRlcnN0YW5kYWJsZSBieSBldmVyeW9uZS4gUGxlYXNlIHVzZQ0KLW5hbmQt
-Y29udHJvbGxlci4gRG9uJ3QgYmUgd29ycmllZCBieSB0aGUgc2l6ZSBvZiB0aGUgc3RyaW5nLg0K
-DQpZb3UgY2FuIHVzZSB0aGUgYWNyb255bSBhcyBwcmVmaXggZm9yIHlvdXIgTkFORCBjb250cm9s
-bGVyIGZ1bmN0aW9ucw0KdGhvdWdoLg0KDQpUaGFua3MsDQpNaXF1w6hsDQpfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcg
-bGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2Vu
-ZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+Hi Huan,
+
+kernel test robot noticed the following build warnings:
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Huan-Yang/udmabuf-direct-map-pfn-when-first-page-fault/20240826-105359
+base:   6a7917c89f219f09b1d88d09f376000914a52763
+patch link:    https://lore.kernel.org/r/20240822084342.1574914-5-link%40vivo.com
+patch subject: [PATCH v4 4/5] udmabuf: udmabuf_create codestyle cleanup
+config: x86_64-randconfig-161-20240829 (https://download.01.org/0day-ci/archive/20240829/202408291101.WAf552sW-lkp@intel.com/config)
+compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Reported-by: Dan Carpenter <dan.carpenter@linaro.org>
+| Closes: https://lore.kernel.org/r/202408291101.WAf552sW-lkp@intel.com/
+
+smatch warnings:
+drivers/dma-buf/udmabuf.c:467 udmabuf_create() error: double free of 'folios'
+
+vim +/folios +467 drivers/dma-buf/udmabuf.c
+
+c1bbed66899726 Gurchetan Singh 2019-12-02  396  static long udmabuf_create(struct miscdevice *device,
+c1bbed66899726 Gurchetan Singh 2019-12-02  397  			   struct udmabuf_create_list *head,
+c1bbed66899726 Gurchetan Singh 2019-12-02  398  			   struct udmabuf_create_item *list)
+fbb0de79507819 Gerd Hoffmann   2018-08-27  399  {
+fb2c508270085b Huan Yang       2024-08-22  400  	pgoff_t pgcnt = 0, pglimit, max_ipgcnt = 0;
+fb2c508270085b Huan Yang       2024-08-22  401  	long ret = -EINVAL;
+fbb0de79507819 Gerd Hoffmann   2018-08-27  402  	struct udmabuf *ubuf;
+fb2c508270085b Huan Yang       2024-08-22  403  	struct folio **folios = NULL;
+fb2c508270085b Huan Yang       2024-08-22  404  	u32 i, flags;
+fbb0de79507819 Gerd Hoffmann   2018-08-27  405  
+33f35429fc49c0 Gerd Hoffmann   2018-09-11  406  	ubuf = kzalloc(sizeof(*ubuf), GFP_KERNEL);
+fbb0de79507819 Gerd Hoffmann   2018-08-27  407  	if (!ubuf)
+fbb0de79507819 Gerd Hoffmann   2018-08-27  408  		return -ENOMEM;
+fbb0de79507819 Gerd Hoffmann   2018-08-27  409  
+c6a3194c05e7e6 Vivek Kasireddy 2024-06-23  410  	INIT_LIST_HEAD(&ubuf->unpin_list);
+dc4716d75154b3 Gerd Hoffmann   2018-09-11  411  	pglimit = (size_limit_mb * 1024 * 1024) >> PAGE_SHIFT;
+fbb0de79507819 Gerd Hoffmann   2018-08-27  412  	for (i = 0; i < head->count; i++) {
+fb2c508270085b Huan Yang       2024-08-22  413  		pgoff_t itempgcnt;
+fb2c508270085b Huan Yang       2024-08-22  414  
+fb2c508270085b Huan Yang       2024-08-22  415  		if (!PAGE_ALIGNED(list[i].offset))
+0d17455ca85ecb Gerd Hoffmann   2018-09-11  416  			goto err;
+fb2c508270085b Huan Yang       2024-08-22  417  		if (!PAGE_ALIGNED(list[i].size))
+0d17455ca85ecb Gerd Hoffmann   2018-09-11  418  			goto err;
+fb2c508270085b Huan Yang       2024-08-22  419  
+fb2c508270085b Huan Yang       2024-08-22  420  		itempgcnt = list[i].size >> PAGE_SHIFT;
+fb2c508270085b Huan Yang       2024-08-22  421  		pgcnt += itempgcnt;
+fb2c508270085b Huan Yang       2024-08-22  422  
+fb2c508270085b Huan Yang       2024-08-22  423  		if (pgcnt > pglimit)
+0d17455ca85ecb Gerd Hoffmann   2018-09-11  424  			goto err;
+fb2c508270085b Huan Yang       2024-08-22  425  
+fb2c508270085b Huan Yang       2024-08-22  426  		max_ipgcnt = max_t(unsigned long, itempgcnt, max_ipgcnt);
+fbb0de79507819 Gerd Hoffmann   2018-08-27  427  	}
+2b6dd600dd7257 Pavel Skripkin  2021-12-30  428  
+fb2c508270085b Huan Yang       2024-08-22  429  	if (!pgcnt)
+2b6dd600dd7257 Pavel Skripkin  2021-12-30  430  		goto err;
+2b6dd600dd7257 Pavel Skripkin  2021-12-30  431  
+fb2c508270085b Huan Yang       2024-08-22  432  	ubuf->folios = kvmalloc_array(pgcnt, sizeof(*ubuf->folios),
+fbb0de79507819 Gerd Hoffmann   2018-08-27  433  				      GFP_KERNEL);
+5e72b2b41a21e5 Vivek Kasireddy 2024-06-23  434  	if (!ubuf->folios) {
+fbb0de79507819 Gerd Hoffmann   2018-08-27  435  		ret = -ENOMEM;
+0d17455ca85ecb Gerd Hoffmann   2018-09-11  436  		goto err;
+fbb0de79507819 Gerd Hoffmann   2018-08-27  437  	}
+fb2c508270085b Huan Yang       2024-08-22  438  
+fb2c508270085b Huan Yang       2024-08-22  439  	ubuf->offsets = kvcalloc(pgcnt, sizeof(*ubuf->offsets), GFP_KERNEL);
+0c8b91ef5100ea Vivek Kasireddy 2024-06-23  440  	if (!ubuf->offsets) {
+0c8b91ef5100ea Vivek Kasireddy 2024-06-23  441  		ret = -ENOMEM;
+0c8b91ef5100ea Vivek Kasireddy 2024-06-23  442  		goto err;
+0c8b91ef5100ea Vivek Kasireddy 2024-06-23  443  	}
+fbb0de79507819 Gerd Hoffmann   2018-08-27  444  
+fb2c508270085b Huan Yang       2024-08-22  445  	folios = kvmalloc_array(max_ipgcnt, sizeof(*folios), GFP_KERNEL);
+c6a3194c05e7e6 Vivek Kasireddy 2024-06-23  446  	if (!folios) {
+c6a3194c05e7e6 Vivek Kasireddy 2024-06-23  447  		ret = -ENOMEM;
+c6a3194c05e7e6 Vivek Kasireddy 2024-06-23  448  		goto err;
+c6a3194c05e7e6 Vivek Kasireddy 2024-06-23  449  	}
+c6a3194c05e7e6 Vivek Kasireddy 2024-06-23  450  
+fb2c508270085b Huan Yang       2024-08-22  451  	for (i = 0; i < head->count; i++) {
+fb2c508270085b Huan Yang       2024-08-22  452  		ret = __udmabuf_pin_list_folios(&list[i], ubuf, folios);
+
+There is a kfree(folios) hidden inside this function.  It doesn't belong there.
+
+fb2c508270085b Huan Yang       2024-08-22  453  		if (ret)
+0d17455ca85ecb Gerd Hoffmann   2018-09-11  454  			goto err;
+c6a3194c05e7e6 Vivek Kasireddy 2024-06-23  455  	}
+452dc1b0221804 Huan Yang       2024-08-22  456  	kvfree(folios);
+                                                        ^^^^^^^^^^^^^^
+A second free
+
+fbb0de79507819 Gerd Hoffmann   2018-08-27  457  
+5e72b2b41a21e5 Vivek Kasireddy 2024-06-23  458  	flags = head->flags & UDMABUF_FLAGS_CLOEXEC ? O_CLOEXEC : 0;
+5e72b2b41a21e5 Vivek Kasireddy 2024-06-23  459  	ret = export_udmabuf(ubuf, device, flags);
+5e72b2b41a21e5 Vivek Kasireddy 2024-06-23  460  	if (ret < 0)
+0d17455ca85ecb Gerd Hoffmann   2018-09-11  461  		goto err;
+                                                                ^^^^^^^^
+
+fbb0de79507819 Gerd Hoffmann   2018-08-27  462  
+5e72b2b41a21e5 Vivek Kasireddy 2024-06-23  463  	return ret;
+fbb0de79507819 Gerd Hoffmann   2018-08-27  464  
+0d17455ca85ecb Gerd Hoffmann   2018-09-11  465  err:
+c6a3194c05e7e6 Vivek Kasireddy 2024-06-23  466  	unpin_all_folios(&ubuf->unpin_list);
+fb2c508270085b Huan Yang       2024-08-22 @467  	kvfree(folios);
+                                                        ^^^^^^^^^^^^^
+Double free
+
+452dc1b0221804 Huan Yang       2024-08-22  468  	kvfree(ubuf->offsets);
+452dc1b0221804 Huan Yang       2024-08-22  469  	kvfree(ubuf->folios);
+fbb0de79507819 Gerd Hoffmann   2018-08-27  470  	kfree(ubuf);
+fbb0de79507819 Gerd Hoffmann   2018-08-27  471  	return ret;
+fbb0de79507819 Gerd Hoffmann   2018-08-27  472  }
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
