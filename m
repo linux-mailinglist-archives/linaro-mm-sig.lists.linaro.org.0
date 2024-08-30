@@ -2,53 +2,54 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B1239657F0
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 30 Aug 2024 09:04:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B99E39657FA
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 30 Aug 2024 09:04:56 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 99A5A41126
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 30 Aug 2024 07:04:38 +0000 (UTC)
-Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
-	by lists.linaro.org (Postfix) with ESMTPS id AC78B3F49D
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 30 Aug 2024 07:04:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id C29324118C
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 30 Aug 2024 07:04:55 +0000 (UTC)
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+	by lists.linaro.org (Postfix) with ESMTPS id 6F039445FF
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 30 Aug 2024 07:04:38 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b="XeECK5/l";
-	spf=pass (lists.linaro.org: domain of jens.wiklander@linaro.org designates 209.85.208.51 as permitted sender) smtp.mailfrom=jens.wiklander@linaro.org;
+	dkim=pass header.d=linaro.org header.s=google header.b=bQdwKABp;
+	spf=pass (lists.linaro.org: domain of jens.wiklander@linaro.org designates 209.85.218.47 as permitted sender) smtp.mailfrom=jens.wiklander@linaro.org;
 	dmarc=pass (policy=none) header.from=linaro.org
-Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-5bec4fc82b0so4353211a12.1
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 30 Aug 2024 00:04:36 -0700 (PDT)
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-a83597ce5beso247182966b.1
+        for <linaro-mm-sig@lists.linaro.org>; Fri, 30 Aug 2024 00:04:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1725001476; x=1725606276; darn=lists.linaro.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to;
-        bh=NAqkPKV8FIclg2RIfEME8aNTCMBfxloXKZQVTM0jEG4=;
-        b=XeECK5/lhDZA3EHdRy0FynlWesSxMZvpOaOeICddPRdKbDXjtTL8I9ijoh3XW5QXcw
-         6xqknWVaAYYGSUgFKnQjLFTRJqjvvsoKJl5ZCFxo9I0RqO6W9iq0hZmq0RQeKXO1kXqk
-         hZ+PU8idLyKCFwDQpwNO9A0yqenvLOf36UZFFYtxvAIYS5KoxhZDSjfn3AtKsMhdZUXW
-         doEoe1OkSrS+0nO8x2h/HiJRkeAAqSqkvk1NKZ5zpHS97UtaNsXoOr/wQfx2m4A+ReTV
-         Vmgw+GXF+yQKz3kOawXt8NfAV/jf1Zu03frsbtA9w683DogxazBGW1z1SEoYV6p68rGB
-         9LnA==
+        d=linaro.org; s=google; t=1725001477; x=1725606277; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=MJjNgUGJenoBaIKVAgwwwsHux2S25WdElfpi6ReEk9U=;
+        b=bQdwKABpuXufWS0c+sL2ePPM/kDW0oEa3iEA1WKvcqQNm9vZylDN0r+U4dUB9L2LpF
+         Ea5pAhuipmVhDpOkbLVihh+Z0GN2cQwbWbLhGr7yu0HttfG99oaQ8zmv9+t9Sn82yf2z
+         BJUWIs1+mPosKCZl9IOH7PxXPJqu0RUmzHbS2HWlzJGiAjJUGvuTv24Orn19OApaTnpk
+         jt372Og9Uy1i8Uu3e3Ds9EK7klRa03yFJlwsueeaIGME90adYHfyV3eIIbmtHZu2uIQ8
+         P4Cl+eYAFIkrOtGxZ1sOjvDiS5IOTZ/6Z1+cijUsoBR6aJ0y9/vDs8FmaY03qtOlTwGy
+         lIzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725001476; x=1725606276;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=NAqkPKV8FIclg2RIfEME8aNTCMBfxloXKZQVTM0jEG4=;
-        b=mV/GTam+wddngyO7nTp2XK14XUohMoPqdYugkpPXblr6YSxxi2sSwRphILu851sO6K
-         gnwGILGxbQd72u7m1FzLqN07TbYrlA8BR2zelTDWt9q575LSByn/fVIDNGwbwuRkWRPj
-         lJMYbc2xRKJuwot2SMYcBFa+kPLqcvGj3GAQq4zvVbTm8YgqhbG2OBw7oNiOrMSE7jDu
-         UxPa8uQskUzvNas0iZ9i2gdYT2EMBDaUmLcOzzB1dp0oTn1VglAs1Y46bl1PUHxUujxG
-         WCsfIjJDubdwpFJpbz/zRlcyjthA57UVTq8UBCfsOMeBLd4T45Ot7do6ORm9FlMQ85hz
-         0lYg==
-X-Forwarded-Encrypted: i=1; AJvYcCXoXsodiLtgdKl124vA6ABWglei+45PA3lARsSQFsgt1YKFNlXudoKl3+17C5uUUduGXLkX1kH696SVk1Gy@lists.linaro.org
-X-Gm-Message-State: AOJu0YyL33uNddVwUZOCs6pFxC2kGpLjZTwVz7aqpZclLaJBJxOi5kAA
-	goRRVaWlSrwficF2E28sOsywdo9HCKcF8jb+BetHPByiOP372MGoCBikrJcuOaz6Zg==
-X-Google-Smtp-Source: AGHT+IFDgPRujvPs0pY58RBt0z0M4T/+m/fwfgJO35cZdR0pWvXLPvq+fQ5KKo/0SLFh8TiIvn9dYw==
-X-Received: by 2002:a17:907:6d25:b0:a86:94cd:97f0 with SMTP id a640c23a62f3a-a89a26bfcb7mr138897066b.19.1725001475410;
-        Fri, 30 Aug 2024 00:04:35 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1725001477; x=1725606277;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=MJjNgUGJenoBaIKVAgwwwsHux2S25WdElfpi6ReEk9U=;
+        b=lZsLfPQL98BiK6wxhTY6J/W1za+bNLQZk2h9PwnwabuCYaVos1Oi7cm3HyAO7uMDiE
+         VTNNdl1WXpGCwqTAuX2DDTrgSMgtZVEdV3cD2ek7DHf2pZuUNpZXMeSKShIq5io+cgxi
+         Cbw3cibVjr9xBMZjHBD2HP3jbUJffBTt3cnT3hGUp8+SlbRIDDqbqn025REmZQEhFpzH
+         M+3K6NpMdsLZ5uOOfevEb8mNlcOS386/iYagxtBzSMPmdRKlGDloRP9zuPGs2Ut+WesX
+         x+8+EltWhaJEEXUvOldaA4wmTXgS69ReZUCX/lszZC7RYkHzilFHw77H5TLTJ1rXKKy4
+         wqTA==
+X-Forwarded-Encrypted: i=1; AJvYcCXhGy7SIqxFFTuZTP0q4DvTeQppKIrIbb1poELdhG8AetjOo2O75mUN/qMnraM1IscEFDu7Y0qAT10o9bmZ@lists.linaro.org
+X-Gm-Message-State: AOJu0Yxvlzh8riGArQ+6MY1ERQkeODdIhwnb7x1xtg3IQC3l6jFbMzIj
+	Ub4izFyNrxzCb3sVoK5YJkOzNbblAOqA4DMiSZlZC75HlvHwqTOmkIUuXPIFecPO9A==
+X-Google-Smtp-Source: AGHT+IH87EkQZslfXd1cN/MuD1B1+tjpJHcDRiz/ebksiuYOXdKRtj8j5p8EyAgrD5jVzjEwQczjhA==
+X-Received: by 2002:a17:906:4788:b0:a7d:89ac:9539 with SMTP id a640c23a62f3a-a898231fe8emr528271266b.7.1725001477275;
+        Fri, 30 Aug 2024 00:04:37 -0700 (PDT)
 Received: from rayden.urgonet (h-217-31-164-171.A175.priv.bahnhof.se. [217.31.164.171])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a89892232c7sm178026866b.222.2024.08.30.00.04.33
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-a89892232c7sm178026866b.222.2024.08.30.00.04.35
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Aug 2024 00:04:34 -0700 (PDT)
+        Fri, 30 Aug 2024 00:04:36 -0700 (PDT)
 From: Jens Wiklander <jens.wiklander@linaro.org>
 To: linux-kernel@vger.kernel.org,
 	devicetree@vger.kernel.org,
@@ -58,51 +59,54 @@ To: linux-kernel@vger.kernel.org,
 	op-tee@lists.trustedfirmware.org,
 	linux-arm-kernel@lists.infradead.org,
 	linux-mediatek@lists.infradead.org
-Date: Fri, 30 Aug 2024 09:03:47 +0200
-Message-Id: <20240830070351.2855919-1-jens.wiklander@linaro.org>
+Date: Fri, 30 Aug 2024 09:03:48 +0200
+Message-Id: <20240830070351.2855919-2-jens.wiklander@linaro.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240830070351.2855919-1-jens.wiklander@linaro.org>
+References: <20240830070351.2855919-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
 X-Rspamd-Action: no action
-X-Spamd-Bar: -
+X-Spamd-Bar: -----
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: AC78B3F49D
-X-Spamd-Result: default: False [-1.00 / 15.00];
+X-Rspamd-Queue-Id: 6F039445FF
+X-Spamd-Result: default: False [-5.00 / 15.00];
+	REPLY(-4.00)[];
 	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
 	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
 	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17:c];
 	MIME_GOOD(-0.10)[text/plain];
-	TAGGED_RCPT(0.00)[dt];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.51:from];
 	ARC_NA(0.00)[];
 	RCPT_COUNT_TWELVE(0.00)[24];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	MIME_TRACE(0.00)[0:+];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[nxp.com,gmail.com,mediatek.com,linaro.org,collabora.com,arm.com,google.com,amd.com,kernel.org];
-	TO_DN_SOME(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[linaro.org:+]
-Message-ID-Hash: HKBS6PQVEPHBDKWVLRKCS3VF3Q7NINZ2
-X-Message-ID-Hash: HKBS6PQVEPHBDKWVLRKCS3VF3Q7NINZ2
+	FREEMAIL_CC(0.00)[nxp.com,gmail.com,mediatek.com,linaro.org,collabora.com,arm.com,google.com,amd.com,kernel.org];
+	DKIM_TRACE(0.00)[linaro.org:+];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_RCPT(0.00)[dt];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.47:from];
+	FROM_HAS_DN(0.00)[]
+Message-ID-Hash: BXLDMJZG7MJSEC3EODP6EHG64DOFK4FY
+X-Message-ID-Hash: BXLDMJZG7MJSEC3EODP6EHG64DOFK4FY
 X-MailFrom: jens.wiklander@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: Olivier Masse <olivier.masse@nxp.com>, Thierry Reding <thierry.reding@gmail.com>, Yong Wu <yong.wu@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Sumit Garg <sumit.garg@linaro.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Jens Wiklander <jens.wiklander@linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] [RFC PATCH 0/4] Linaro restricted heap
+Subject: [Linaro-mm-sig] [RFC PATCH 1/4] dma-buf: heaps: restricted_heap: add no_map attribute
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/HKBS6PQVEPHBDKWVLRKCS3VF3Q7NINZ2/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/BXLDMJZG7MJSEC3EODP6EHG64DOFK4FY/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -112,73 +116,86 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Hi,
+Add a no_map attribute to struct restricted_heap_attachment and struct
+restricted_heap to skip the call to dma_map_sgtable() if set. This
+avoids trying to map a dma-buf that doens't refer to memory accessible
+by the kernel.
 
-This patch set is based on top of Yong Wu's restricted heap patch set [1].
-It's also a continuation on Olivier's Add dma-buf secure-heap patch set [2].
+Signed-off-by: Jens Wiklander <jens.wiklander@linaro.org>
+---
+ drivers/dma-buf/heaps/restricted_heap.c | 17 +++++++++++++----
+ drivers/dma-buf/heaps/restricted_heap.h |  2 ++
+ 2 files changed, 15 insertions(+), 4 deletions(-)
 
-The Linaro restricted heap uses genalloc in the kernel to manage the heap
-carvout. This is a difference from the Mediatek restricted heap which
-relies on the secure world to manage the carveout.
-
-I've tried to adress the comments on [2], but [1] introduces changes so I'm
-afraid I've had to skip some comments.
-
-This can be tested on QEMU with the following steps:
-repo init -u https://github.com/jenswi-linaro/manifest.git -m qemu_v8.xml \
-        -b prototype/sdp-v1
-repo sync -j8
-cd build
-make toolchains -j4
-make all -j$(nproc)
-make run-only
-# login and at the prompt:
-xtest --sdp-basic
-
-https://optee.readthedocs.io/en/latest/building/prerequisites.html
-list dependencies needed to build the above.
-
-The tests are pretty basic, mostly checking that a Trusted Application in
-the secure world can access and manipulate the memory.
-
-Cheers,
-Jens
-
-[1] https://lore.kernel.org/dri-devel/20240515112308.10171-1-yong.wu@mediatek.com/
-[2] https://lore.kernel.org/lkml/20220805135330.970-1-olivier.masse@nxp.com/
-
-Changes since Olivier's post [2]:
-* Based on Yong Wu's post [1] where much of dma-buf handling is done in
-  the generic restricted heap
-* Simplifications and cleanup
-* New commit message for "dma-buf: heaps: add Linaro restricted dmabuf heap
-  support"
-* Replaced the word "secure" with "restricted" where applicable
-
-Etienne Carriere (1):
-  tee: new ioctl to a register tee_shm from a dmabuf file descriptor
-
-Jens Wiklander (2):
-  dma-buf: heaps: restricted_heap: add no_map attribute
-  dma-buf: heaps: add Linaro restricted dmabuf heap support
-
-Olivier Masse (1):
-  dt-bindings: reserved-memory: add linaro,restricted-heap
-
- .../linaro,restricted-heap.yaml               |  56 ++++++
- drivers/dma-buf/heaps/Kconfig                 |  10 ++
- drivers/dma-buf/heaps/Makefile                |   1 +
- drivers/dma-buf/heaps/restricted_heap.c       |  17 +-
- drivers/dma-buf/heaps/restricted_heap.h       |   2 +
- .../dma-buf/heaps/restricted_heap_linaro.c    | 165 ++++++++++++++++++
- drivers/tee/tee_core.c                        |  38 ++++
- drivers/tee/tee_shm.c                         | 104 ++++++++++-
- include/linux/tee_drv.h                       |  11 ++
- include/uapi/linux/tee.h                      |  29 +++
- 10 files changed, 426 insertions(+), 7 deletions(-)
- create mode 100644 Documentation/devicetree/bindings/reserved-memory/linaro,restricted-heap.yaml
- create mode 100644 drivers/dma-buf/heaps/restricted_heap_linaro.c
-
+diff --git a/drivers/dma-buf/heaps/restricted_heap.c b/drivers/dma-buf/heaps/restricted_heap.c
+index 8bc8a5e3f969..4bf28e3727ca 100644
+--- a/drivers/dma-buf/heaps/restricted_heap.c
++++ b/drivers/dma-buf/heaps/restricted_heap.c
+@@ -16,6 +16,7 @@
+ struct restricted_heap_attachment {
+ 	struct sg_table			*table;
+ 	struct device			*dev;
++	bool no_map;
+ };
+ 
+ static int
+@@ -54,6 +55,8 @@ restricted_heap_memory_free(struct restricted_heap *rheap, struct restricted_buf
+ static int restricted_heap_attach(struct dma_buf *dmabuf, struct dma_buf_attachment *attachment)
+ {
+ 	struct restricted_buffer *restricted_buf = dmabuf->priv;
++	struct dma_heap *heap = restricted_buf->heap;
++	struct restricted_heap *rheap = dma_heap_get_drvdata(heap);
+ 	struct restricted_heap_attachment *a;
+ 	struct sg_table *table;
+ 
+@@ -70,6 +73,7 @@ static int restricted_heap_attach(struct dma_buf *dmabuf, struct dma_buf_attachm
+ 	sg_dma_mark_restricted(table->sgl);
+ 	a->table = table;
+ 	a->dev = attachment->dev;
++	a->no_map = rheap->no_map;
+ 	attachment->priv = a;
+ 
+ 	return 0;
+@@ -92,9 +96,12 @@ restricted_heap_map_dma_buf(struct dma_buf_attachment *attachment,
+ 	struct sg_table *table = a->table;
+ 	int ret;
+ 
+-	ret = dma_map_sgtable(attachment->dev, table, direction, DMA_ATTR_SKIP_CPU_SYNC);
+-	if (ret)
+-		return ERR_PTR(ret);
++	if (!a->no_map) {
++		ret = dma_map_sgtable(attachment->dev, table, direction,
++				      DMA_ATTR_SKIP_CPU_SYNC);
++		if (ret)
++			return ERR_PTR(ret);
++	}
+ 	return table;
+ }
+ 
+@@ -106,7 +113,9 @@ restricted_heap_unmap_dma_buf(struct dma_buf_attachment *attachment, struct sg_t
+ 
+ 	WARN_ON(a->table != table);
+ 
+-	dma_unmap_sgtable(attachment->dev, table, direction, DMA_ATTR_SKIP_CPU_SYNC);
++	if (!a->no_map)
++		dma_unmap_sgtable(attachment->dev, table, direction,
++				  DMA_ATTR_SKIP_CPU_SYNC);
+ }
+ 
+ static int
+diff --git a/drivers/dma-buf/heaps/restricted_heap.h b/drivers/dma-buf/heaps/restricted_heap.h
+index 7dec4b8a471b..94cc0842f70d 100644
+--- a/drivers/dma-buf/heaps/restricted_heap.h
++++ b/drivers/dma-buf/heaps/restricted_heap.h
+@@ -27,6 +27,8 @@ struct restricted_heap {
+ 	unsigned long		cma_paddr;
+ 	unsigned long		cma_size;
+ 
++	bool			no_map;
++
+ 	void			*priv_data;
+ };
+ 
 -- 
 2.34.1
 
