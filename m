@@ -2,136 +2,145 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 74492966BF4
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 31 Aug 2024 00:00:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9383B96A521
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  3 Sep 2024 19:14:50 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 3BAB942533
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 30 Aug 2024 22:00:51 +0000 (UTC)
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
-	by lists.linaro.org (Postfix) with ESMTPS id C7ADE40F1F
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 30 Aug 2024 22:00:48 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id A2F3D40C37
+	for <lists+linaro-mm-sig@lfdr.de>; Tue,  3 Sep 2024 17:14:49 +0000 (UTC)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+	by lists.linaro.org (Postfix) with ESMTPS id F39373F3C2
+	for <linaro-mm-sig@lists.linaro.org>; Tue,  3 Sep 2024 17:14:46 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20230601 header.b=hT3nnnEH;
-	spf=pass (lists.linaro.org: domain of jstultz@google.com designates 209.85.167.41 as permitted sender) smtp.mailfrom=jstultz@google.com;
-	dmarc=pass (policy=reject) header.from=google.com
-Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5353d0b7463so4098682e87.3
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 30 Aug 2024 15:00:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1725055247; x=1725660047; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=tzW45B/KJymSGOyNF+ZzLXt4iw3UbCWPr9vwljHJip4=;
-        b=hT3nnnEH3OAcGsQmJJGlSpSWPJmTP7SawdfmVCTnvAQ0NTfw6lNOHTDw+cCgH0xHWR
-         N91DUS90dRPncJMrxI9xY2FxP/aLSK5gsgLZSY9lVxmCIjVsapnQnUtblGzFO1dd1/td
-         vP+6sE0EuAjBecpeszfftIfH42kQ/sZ9XHZT7RRgUKdkak9YFBLwhpZZsf5iyclhb5nQ
-         dFITBpe/rbvUQ63hEO+Pg4vqLYYqyJiBLuCEBALwLMSPm7j3x4VFoK8wARNPkVFdaB9F
-         QnzIMgAJix0eMdvE4R9N6b5RVoIBkb/OWmesI6rPpaxaSdokVB63URXnPWB3r3PxPEfY
-         EjAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1725055247; x=1725660047;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=tzW45B/KJymSGOyNF+ZzLXt4iw3UbCWPr9vwljHJip4=;
-        b=hK0ykFfUBF2WK7zYe0EG34SaaiPXme9VXshrqf5P5QPPCsyPul/tKt1FvWXiyokyn9
-         h1dRqj/i4rMmaKeruEY08WE4HmX4fYyzAxSmLmttBBcWJTMZZ62p/B6qfBsZHYKC4wBh
-         Mu1L1zCOqtEg11gWzRn+aJxRVy3/BGO7MVF5l3Na+59x+I3BqFaHyPsdWiSUnO6NH4Wp
-         sqU4KL8e7ND/OFUy233Zt51y+GD/SauXOhSJl6+czJ2L70KKVne3heX1q3PRaHeuNqcI
-         fTGHkqKmMIAdw59n0ewhdE8AAhzr9MrajZd5Fnn4C0r1x37ioqA9o3VWCb2waXoMcpaS
-         mLNQ==
-X-Forwarded-Encrypted: i=1; AJvYcCWkUG0dJ+TyrXsZxEBBpLKx7jmAKfL04iCa61rjsUysP/LWl140fPp59xYgO867YStubeqefipCFCSdIA4r@lists.linaro.org
-X-Gm-Message-State: AOJu0YwtAyttyl0pa5KMbSEHZggMGzJHAybQvWadYFZqSzjE/OEi1+Ho
-	jcZuHI7ZS0gA9uZVorePOVhTpPlHJatruaOnHQX6HQR9bBK5ieW9SYA+DL2jQJfAQaLJEXgBXJL
-	1SFOzwvEz08JdeQ8aOIhoH2NNGGkcZegKFaA=
-X-Google-Smtp-Source: AGHT+IFPQQvsxqmDS/76PwNqhHFuc4KN0lIvnnjTU83UXe1lfbOh5Vc0i6eo2lSA9HeuZxs7QXpK5BZptK0ZhUnEM6c=
-X-Received: by 2002:a05:6512:acb:b0:533:4505:5b2a with SMTP id
- 2adb3069b0e04-53546b4a8c9mr3000597e87.28.1725055246756; Fri, 30 Aug 2024
- 15:00:46 -0700 (PDT)
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=GuRAngMw;
+	spf=pass (lists.linaro.org: domain of broonie@kernel.org designates 147.75.193.91 as permitted sender) smtp.mailfrom=broonie@kernel.org;
+	dmarc=pass (policy=quarantine) header.from=kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+	by nyc.source.kernel.org (Postfix) with ESMTP id 4CF73A429C2;
+	Tue,  3 Sep 2024 17:14:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 238D9C4CEC4;
+	Tue,  3 Sep 2024 17:14:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1725383686;
+	bh=qW0RktGoVkbp3dbELJ0XnlGsWcBLW434fwCOzn74Vkc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=GuRAngMw4FtK7TyflROsYBV1lYCTKtUT1bir8ZZY8wNReUFtnfddZvBvkFwjVTRym
+	 b0Ao6qM8UI9rNBWicO+BMdEQMpNhOj1Rvbvou5lenbKL5r7AYzNMtp66G4GV83QiO4
+	 ySeux05NNkyQIkpAOs/iEeofWo4KInG6x3Kb53MbNhZYux9jHVNuAzD9w56B3eHRb1
+	 1wMjoqQy7sVJedE2hizsg2pd5hE7tb8i9AZ/dzRaIFxBNpWbiTBRKHnvhdoNgvgS8q
+	 +5FSuI3B0GX3tCbf6hjjFEbar8JPcn2SRQOGe3JJw7ivrMWZk+JHr9Gz0KhHSqDJcH
+	 b1fj3m/Ktu8gg==
+Date: Tue, 3 Sep 2024 18:14:38 +0100
+From: Mark Brown <broonie@kernel.org>
+To: amergnat@baylibre.com
+Message-ID: <c386c74c-9008-48ea-ad79-524eb85c370b@sirena.org.uk>
+References: <20240226-audio-i350-v7-0-6518d953a141@baylibre.com>
+ <20240226-audio-i350-v7-12-6518d953a141@baylibre.com>
 MIME-Version: 1.0
-References: <20240830192627.2546033-1-tjmercier@google.com>
-In-Reply-To: <20240830192627.2546033-1-tjmercier@google.com>
-From: John Stultz <jstultz@google.com>
-Date: Fri, 30 Aug 2024 15:00:34 -0700
-Message-ID: <CANDhNCryrqD08fv+Q2kRHya1Z_w_eL6cbAzGaZT8cAsUSG1iLA@mail.gmail.com>
-To: "T.J. Mercier" <tjmercier@google.com>
+In-Reply-To: <20240226-audio-i350-v7-12-6518d953a141@baylibre.com>
+X-Cookie: Please take note:
 X-Rspamd-Action: no action
-X-Spamd-Bar: --------
+X-Spamd-Bar: ----
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: C7ADE40F1F
-X-Spamd-Result: default: False [-8.00 / 15.00];
-	REPLY(-4.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_COUNT_ONE(0.00)[1];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	MIME_TRACE(0.00)[0:+];
+X-Rspamd-Queue-Id: F39373F3C2
+X-Spamd-Result: default: False [-4.60 / 15.00];
+	BAYES_HAM(-3.00)[99.99%];
+	SIGNED_PGP(-2.00)[];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
+	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	MIME_GOOD(-0.20)[multipart/signed,text/plain];
+	R_SPF_ALLOW(-0.20)[+ip4:147.75.193.91];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ARC_NA(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.41:from];
 	MISSING_XM_UA(0.00)[];
+	ASN(0.00)[asn:54825, ipnet:147.75.192.0/21, country:US];
+	RCPT_COUNT_TWELVE(0.00)[26];
+	MIME_TRACE(0.00)[0:+,1:+,2:~];
+	RCVD_IN_DNSWL_FAIL(0.00)[100.75.92.58:server fail];
+	TAGGED_RCPT(0.00)[dt];
+	FREEMAIL_CC(0.00)[gmail.com,kernel.org,linaro.org,collabora.com,mediatek.com,perex.cz,suse.com,amd.com,arm.com,vger.kernel.org,lists.infradead.org,lists.freedesktop.org,lists.linaro.org,baylibre.com];
+	DNSWL_BLOCKED(0.00)[147.75.193.91:from];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	RCVD_COUNT_TWO(0.00)[2];
 	NEURAL_HAM(-0.00)[-1.000];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+]
-Message-ID-Hash: V2E6VQMGYFE7VR2PEM2H5C6NTUZKUBXF
-X-Message-ID-Hash: V2E6VQMGYFE7VR2PEM2H5C6NTUZKUBXF
-X-MailFrom: jstultz@google.com
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[kernel.org:+]
+Message-ID-Hash: J4E3AIJ2LSICFCEHKVP7TOHMKQ3JVU24
+X-Message-ID-Hash: J4E3AIJ2LSICFCEHKVP7TOHMKQ3JVU24
+X-MailFrom: broonie@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, android-mm@google.com, Xingyu Jin <xingyuj@google.com>, stable@vger.kernel.org, John Stultz <john.stultz@linaro.org>, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org
+CC: Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, Conor Dooley <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Lee Jones <lee@kernel.org>, Flora Fu <flora.fu@mediatek.com>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>, Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Nicolas Belin <nbelin@baylibre.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH] dma-buf: heaps: Fix off-by-one in CMA heap fault handler
+Subject: [Linaro-mm-sig] Re: [PATCH v7 12/16] ASoC: codecs: add MT6357 support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/V2E6VQMGYFE7VR2PEM2H5C6NTUZKUBXF/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/J4E3AIJ2LSICFCEHKVP7TOHMKQ3JVU24/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: multipart/mixed; boundary="===============2609050465251771954=="
 
-T24gRnJpLCBBdWcgMzAsIDIwMjQgYXQgMTI6MjbigK9QTSBULkouIE1lcmNpZXIgPHRqbWVyY2ll
-ckBnb29nbGUuY29tPiB3cm90ZToNCj4NCj4gVW50aWwgVk1fRE9OVEVYUEFORCB3YXMgYWRkZWQg
-aW4gY29tbWl0IDFjMTkxNGQ2ZThjNiAoImRtYS1idWY6IGhlYXBzOg0KPiBEb24ndCB0cmFjayBD
-TUEgZG1hLWJ1ZiBwYWdlcyB1bmRlciBSc3NGaWxlIikgaXQgd2FzIHBvc3NpYmxlIHRvIG9idGFp
-bg0KPiBhIG1hcHBpbmcgbGFyZ2VyIHRoYW4gdGhlIGJ1ZmZlciBzaXplIHZpYSBtcmVtYXAgYW5k
-IGJ5cGFzcyB0aGUgb3ZlcmZsb3cNCj4gY2hlY2sgaW4gZG1hX2J1Zl9tbWFwX2ludGVybmFsLiBX
-aGVuIHVzaW5nIHN1Y2ggYSBtYXBwaW5nIHRvIGF0dGVtcHQgdG8NCj4gZmF1bHQgcGFzdCB0aGUg
-ZW5kIG9mIHRoZSBidWZmZXIsIHRoZSBDTUEgaGVhcCBmYXVsdCBoYW5kbGVyIGFsc28gY2hlY2tz
-DQo+IHRoZSBmYXVsdCBvZmZzZXQgYWdhaW5zdCB0aGUgYnVmZmVyIHNpemUsIGJ1dCBnZXRzIHRo
-ZSBib3VuZGFyeSB3cm9uZyBieQ0KPiAxLiBGaXggdGhlIGJvdW5kYXJ5IGNoZWNrIHNvIHRoYXQg
-d2UgZG9uJ3QgcmVhZCBvZmYgdGhlIGVuZCBvZiB0aGUgcGFnZXMNCj4gYXJyYXkgYW5kIGluc2Vy
-dCBhbiBhcmJpdHJhcnkgcGFnZSBpbiB0aGUgbWFwcGluZy4NCj4NCj4gUmVwb3J0ZWQtYnk6IFhp
-bmd5dSBKaW4gPHhpbmd5dWpAZ29vZ2xlLmNvbT4NCj4gRml4ZXM6IGE1ZDJkMjllMjRiZSAoImRt
-YS1idWY6IGhlYXBzOiBNb3ZlIGhlYXAtaGVscGVyIGxvZ2ljIGludG8gdGhlIGNtYV9oZWFwIGlt
-cGxlbWVudGF0aW9uIikNCj4gQ2M6IHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmcgIyBBcHBsaWNhYmxl
-ID49IDUuMTAuIE5lZWRzIGFkanVzdG1lbnRzIG9ubHkgZm9yIDUuMTAuDQo+IFNpZ25lZC1vZmYt
-Ynk6IFQuSi4gTWVyY2llciA8dGptZXJjaWVyQGdvb2dsZS5jb20+DQo+IC0tLQ0KPiAgZHJpdmVy
-cy9kbWEtYnVmL2hlYXBzL2NtYV9oZWFwLmMgfCAyICstDQo+ICAxIGZpbGUgY2hhbmdlZCwgMSBp
-bnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkNCj4NCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvZG1h
-LWJ1Zi9oZWFwcy9jbWFfaGVhcC5jIGIvZHJpdmVycy9kbWEtYnVmL2hlYXBzL2NtYV9oZWFwLmMN
-Cj4gaW5kZXggYzM4NDAwNGI5MThlLi45M2JlODhiODA1ZmUgMTAwNjQ0DQo+IC0tLSBhL2RyaXZl
-cnMvZG1hLWJ1Zi9oZWFwcy9jbWFfaGVhcC5jDQo+ICsrKyBiL2RyaXZlcnMvZG1hLWJ1Zi9oZWFw
-cy9jbWFfaGVhcC5jDQo+IEBAIC0xNjUsNyArMTY1LDcgQEAgc3RhdGljIHZtX2ZhdWx0X3QgY21h
-X2hlYXBfdm1fZmF1bHQoc3RydWN0IHZtX2ZhdWx0ICp2bWYpDQo+ICAgICAgICAgc3RydWN0IHZt
-X2FyZWFfc3RydWN0ICp2bWEgPSB2bWYtPnZtYTsNCj4gICAgICAgICBzdHJ1Y3QgY21hX2hlYXBf
-YnVmZmVyICpidWZmZXIgPSB2bWEtPnZtX3ByaXZhdGVfZGF0YTsNCj4NCj4gLSAgICAgICBpZiAo
-dm1mLT5wZ29mZiA+IGJ1ZmZlci0+cGFnZWNvdW50KQ0KPiArICAgICAgIGlmICh2bWYtPnBnb2Zm
-ID49IGJ1ZmZlci0+cGFnZWNvdW50KQ0KPiAgICAgICAgICAgICAgICAgcmV0dXJuIFZNX0ZBVUxU
-X1NJR0JVUzsNCg0KDQpUaGFua3MgZm9yIGZpeGluZyB0aGlzISAoQW5kIHRoYW5rcyB0byBYaW5n
-eXUgSmluIGZvciBjYXRjaGluZyBpdCEpDQoNCkFja2VkLWJ5OiBKb2huIFN0dWx0eiA8anN0dWx0
-ekBnb29nbGUuY29tPg0KDQp0aGFua3MNCi1qb2huDQpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5h
-cm8tbW0tc2lnQGxpc3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0
-byBsaW5hcm8tbW0tc2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+
+--===============2609050465251771954==
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="OMC7w3ub4Px9anag"
+Content-Disposition: inline
+
+
+--OMC7w3ub4Px9anag
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Jul 22, 2024 at 08:53:41AM +0200, amergnat@baylibre.com wrote:
+> From: Nicolas Belin <nbelin@baylibre.com>
+>=20
+> Add the support of MT6357 PMIC audio codec.
+
+This breaks the build:
+
+/build/stage/linux/sound/soc/codecs/mt6357.c: In function =E2=80=98mt6357_p=
+latform_driver_probe=E2=80=99:
+/build/stage/linux/sound/soc/codecs/mt6357.c:1824:55: error: too many argum=
+ents for format [-Werror=3Dformat-extra-args]
+ 1824 |                 return dev_err_probe(&pdev->dev, ret, "Failed to pa=
+rse dts\n", __func__);
+      |                                                       ^~~~~~~~~~~~~=
+~~~~~~~~~~
+cc1: all warnings being treated as errors
+
+--OMC7w3ub4Px9anag
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmbXQ/0ACgkQJNaLcl1U
+h9CpOQf/TZgfm5Me95NAaeAf3HC8+QtPbX8C2nII9zKTnbEfLCDi/g1gWoJoK6ge
+FBcp4NuLABoPKK/c0mXC0iSzZ8mjHoHX08LBYnh3Q+BZFvOy+6hXTs/cr6/RMtDR
+OQ7lNNGHEhH5YZvCMPrt+3p2BnWcLGvbreX+xIa1PfT91BvUGpEhxPMkPe/UQKkk
++sGgJdVgQRZgjtoaqZXWBsVYD2fUK6CJwb4w14Gm+BwFYwvrIj7Tq8FpnDdmUawg
+SYP7QBsvrhWdYaAOAfRi0cpusU8wgwSjvUOu2md93uMVLke+S0T+8dkw/tkPnJcS
+XvtVy+qXZ/rNyGhr44XT3XZmwXdOTw==
+=ZHfg
+-----END PGP SIGNATURE-----
+
+--OMC7w3ub4Px9anag--
+
+--===============2609050465251771954==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+
+--===============2609050465251771954==--
