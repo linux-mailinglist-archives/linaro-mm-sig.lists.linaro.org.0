@@ -2,33 +2,33 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9EC296B9F8
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Sep 2024 13:16:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8DF9D96B9FE
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Sep 2024 13:17:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id C67D941253
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Sep 2024 11:16:46 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9F4FE4008F
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Sep 2024 11:17:03 +0000 (UTC)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id BEFEA40B40
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 Sep 2024 11:16:44 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTPS id 76DB142526
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 Sep 2024 11:16:54 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=KjHlMtPn;
+	dkim=pass header.d=kernel.org header.s=k20201202 header.b=KRVtWdg9;
 	spf=pass (lists.linaro.org: domain of broonie@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=broonie@kernel.org;
 	dmarc=pass (policy=quarantine) header.from=kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id F13245C56F5;
-	Wed,  4 Sep 2024 11:16:40 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EC3A8C4CECC;
-	Wed,  4 Sep 2024 11:16:38 +0000 (UTC)
+	by dfw.source.kernel.org (Postfix) with ESMTP id A975C5C54AF;
+	Wed,  4 Sep 2024 11:16:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D711FC4CEC9;
+	Wed,  4 Sep 2024 11:16:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1725448604;
-	bh=jnoKCbmPcD1GmESgYWHnWAC+C8551B8aEwnlyDgxp3c=;
+	s=k20201202; t=1725448613;
+	bh=SFWQxwybbR05p/JSlu2vfeQxyFVILJVtOStppUEw+xw=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
-	b=KjHlMtPnOpovnTl90GfKpIuPGs+gwJYi/h9SpXSQSXUdkrLC8x059cyHOUCTVcQOD
-	 Eqr9oJu5zIZad+ON1Qmc3Db1zhARkcfmANz8S72acVTG2+sXIuoCP+UGzxD6lMqVxL
-	 A344eGn47au8ya+z4zXlx1unlRaMD2HS3bXc2HkfL0x0sLRhbFUWjvxrIfFFXtxORU
-	 4qAl+rFufzT6CVtExWQQ+WK9KnpnQZorBxF7zoVKjz+50bzQv32m+7xqpJef5BXpXq
-	 p0i1jr9DGm3zmP/+0sQ9VrwCcFGTJnLAvroMUo6N0mCMOO9W5uEmSP7bYwNYcVHMjW
-	 LgHv2DTwNjySA==
+	b=KRVtWdg9D4xhd/xX3u5CgZSN5Sm0NZWjAaFc8R5UIZOvKvw7KgThuvHywHeB3MdGE
+	 kgA2xop/P1gXyrNDSdt9rkNvIKmYiSEpIzrKdCqUSl1RczLm9zXv5zRl4J+FummyAt
+	 Xi8bvs1g+F47UlxXsHpphN5OeHmq6pxpp0RWjA95epvKzdjasyrp2JgHw8t8e3Nosp
+	 VBomlo31XSnwYb0Cem8rEVFMAlnnrfrfSCfiFncF8c/X9VoNBp67c3eqHtvOrCoNxj
+	 q2KL+vVp0YtBLxLoISr+raawo46JGCCLhCqUxMAaeLNlbLagNf7BrjjDV86zzRJKmH
+	 Fw24bheSYB6OQ==
 From: Mark Brown <broonie@kernel.org>
 To: Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh+dt@kernel.org>,
  Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
@@ -42,22 +42,22 @@ To: Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh+dt@kernel.org>,
  Catalin Marinas <catalin.marinas@arm.com>, Will Deacon <will@kernel.org>,
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
  Alexandre Mergnat <amergnat@baylibre.com>
-In-Reply-To: <20240226-audio-i350-v6-0-f754ec1a7634@baylibre.com>
-References: <20240226-audio-i350-v6-0-f754ec1a7634@baylibre.com>
-Message-Id: <172544859867.19172.9438630691561948517.b4-ty@kernel.org>
-Date: Wed, 04 Sep 2024 12:16:38 +0100
+In-Reply-To: <20240226-audio-i350-v7-0-6518d953a141@baylibre.com>
+References: <20240226-audio-i350-v7-0-6518d953a141@baylibre.com>
+Message-Id: <172544860860.19172.7052813450885034844.b4-ty@kernel.org>
+Date: Wed, 04 Sep 2024 12:16:48 +0100
 MIME-Version: 1.0
 X-Mailer: b4 0.15-dev-99b12
 X-Rspamd-Action: no action
 X-Spamd-Bar: --
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: BEFEA40B40
+X-Rspamd-Queue-Id: 76DB142526
 X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
 	SUSPICIOUS_RECIPS(1.50)[];
 	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
 	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
+	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217:c];
 	MIME_GOOD(-0.10)[text/plain];
 	TAGGED_RCPT(0.00)[dt];
 	RCVD_VIA_SMTP_AUTH(0.00)[];
@@ -75,17 +75,17 @@ X-Spamd-Result: default: False [-2.50 / 15.00];
 	RCVD_TLS_LAST(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
 	DKIM_TRACE(0.00)[kernel.org:+]
-Message-ID-Hash: W7UDQIJKP7EN7N74JR7FDRHWQKWZZPO4
-X-Message-ID-Hash: W7UDQIJKP7EN7N74JR7FDRHWQKWZZPO4
+Message-ID-Hash: ZOM6FOS6HVJU76XGKJLEQYJUE4KSFJF2
+X-Message-ID-Hash: ZOM6FOS6HVJU76XGKJLEQYJUE4KSFJF2
 X-MailFrom: broonie@kernel.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
 CC: linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>, Nicolas Belin <nbelin@baylibre.com>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: (subset) [PATCH v6 00/16] Add audio support for the MediaTek Genio 350-evk board
+Subject: [Linaro-mm-sig] Re: (subset) [PATCH v7 00/16] Add audio support for the MediaTek Genio 350-evk board
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/W7UDQIJKP7EN7N74JR7FDRHWQKWZZPO4/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ZOM6FOS6HVJU76XGKJLEQYJUE4KSFJF2/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -95,7 +95,7 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Wed, 19 Jun 2024 16:46:36 +0200, Alexandre Mergnat wrote:
+On Mon, 22 Jul 2024 08:53:29 +0200, Alexandre Mergnat wrote:
 > This serie aim to add the following audio support for the Genio 350-evk:
 > - Playback
 >   - 2ch Headset Jack (Earphone)
@@ -118,6 +118,8 @@ Thanks!
         commit: ceb3ca2876243e3ea02f78b3d488b1f2d734de49
 [02/16] ASoC: dt-bindings: mediatek,mt8365-mt6357: Add audio sound card document
         commit: 76d80dcdd55f70b28930edb97b96ee375e1cce5a
+[03/16] dt-bindings: mfd: mediatek: Add codec property for MT6357 PMIC
+        commit: 761cab667898d86c04867948f1b7aec1090be796
 [04/16] ASoC: mediatek: mt8365: Add common header
         commit: 38c7c9ddc74033406461d64e541bbc8268e77f73
 [05/16] ASoC: mediatek: mt8365: Add audio clock control support
