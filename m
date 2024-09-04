@@ -2,455 +2,428 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8468396C5AA
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Sep 2024 19:46:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 42E8496C6E0
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Sep 2024 20:55:22 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 8C48040EBF
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Sep 2024 17:46:44 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
-	by lists.linaro.org (Postfix) with ESMTPS id DEF903EF8D
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 Sep 2024 17:46:39 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 389D443C7D
+	for <lists+linaro-mm-sig@lfdr.de>; Wed,  4 Sep 2024 18:55:21 +0000 (UTC)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by lists.linaro.org (Postfix) with ESMTP id C9F3E4008F
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 Sep 2024 18:55:17 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=RQhWDfSN;
-	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.12 as permitted sender) smtp.mailfrom=lkp@intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1725472000; x=1757008000;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=g+aKd92QBiENZVDRm1kM4shr9AJRa9pBGs1fZNeJD5w=;
-  b=RQhWDfSN2ick7U8PBS+GfZhcxNEI8jyKEJzMKVdR19qbD8NEy3nelsp8
-   VpZzpilVIYPqqA5QzPk2oVBKMffIyxt235Q4XT05W6s0ciW52sn5/jWVx
-   zSqNbOwVYWbCCkuNpB9QY6xczt1MblHC6jFn+PC5xzeZCaIu9Kt0k/e8O
-   HRqW0YRNIxl6/+DRYVEt6qpMnfIKi7NrNwyL/jypXbZmsfBboFyub3COG
-   NNmPQ4yWkAXO03bRmF0AYG5EYy4pvHfuq0av6gcwjSmH2qdpbDySsyyza
-   RAyfRxlzpyxS7B9+sE/bkiW+5sFuH+Lep/+s4JGx09uG/PIDdE4TfK4rj
-   Q==;
-X-CSE-ConnectionGUID: J0kvlgLbQli2uJaVaG7O2A==
-X-CSE-MsgGUID: JxnWqX0QS4Cn7GF9ZQZezQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11185"; a="28036447"
-X-IronPort-AV: E=Sophos;i="6.10,202,1719903600";
-   d="scan'208";a="28036447"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
-  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Sep 2024 10:46:39 -0700
-X-CSE-ConnectionGUID: lVSsXXMjSSuLHn0Jyr1Niw==
-X-CSE-MsgGUID: fZP5cHQZSlWbd8z0Q+RmCg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,202,1719903600";
-   d="scan'208";a="69502604"
-Received: from lkp-server01.sh.intel.com (HELO 9c6b1c7d3b50) ([10.239.97.150])
-  by fmviesa003.fm.intel.com with ESMTP; 04 Sep 2024 10:46:34 -0700
-Received: from kbuild by 9c6b1c7d3b50 with local (Exim 4.96)
-	(envelope-from <lkp@intel.com>)
-	id 1slu5Q-0008PB-1o;
-	Wed, 04 Sep 2024 17:46:32 +0000
-Date: Thu, 5 Sep 2024 01:45:35 +0800
-From: kernel test robot <lkp@intel.com>
-To: =?iso-8859-1?Q?Adri=E1n?= Larumbe <adrian.larumbe@collabora.com>,
-	Boris Brezillon <bbrezillon@kernel.org>,
-	Steven Price <steven.price@arm.com>,
-	Liviu Dudau <liviu.dudau@arm.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
-	Sumit Semwal <sumit.semwal@linaro.org>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Message-ID: <202409050134.uxrIkhqc-lkp@intel.com>
-References: <20240903202541.430225-3-adrian.larumbe@collabora.com>
+	dkim=none;
+	spf=pass (lists.linaro.org: domain of liviu.dudau@arm.com designates 217.140.110.172 as permitted sender) smtp.mailfrom=liviu.dudau@arm.com;
+	dmarc=pass (policy=none) header.from=arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7E2421515
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 Sep 2024 11:55:43 -0700 (PDT)
+Received: from e110455-lin.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D1B213F73B
+	for <linaro-mm-sig@lists.linaro.org>; Wed,  4 Sep 2024 11:55:16 -0700 (PDT)
+Date: Wed, 4 Sep 2024 19:55:00 +0100
+From: Liviu Dudau <liviu.dudau@arm.com>
+To: =?utf-8?Q?Adri=C3=A1n?= Larumbe <adrian.larumbe@collabora.com>
+Message-ID: <ZtitBNgn1eHSE74z@e110455-lin.cambridge.arm.com>
+References: <20240903202541.430225-1-adrian.larumbe@collabora.com>
+ <20240903202541.430225-2-adrian.larumbe@collabora.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20240903202541.430225-3-adrian.larumbe@collabora.com>
+In-Reply-To: <20240903202541.430225-2-adrian.larumbe@collabora.com>
 X-Rspamd-Action: no action
-X-Spamd-Bar: ------
+X-Spamd-Bar: ---
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: DEF903EF8D
-X-Spamd-Result: default: False [-6.00 / 15.00];
+X-Rspamd-Queue-Id: C9F3E4008F
+X-Spamd-Result: default: False [-3.70 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	DMARC_POLICY_ALLOW(-0.50)[arm.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:217.140.96.0/20];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
-	MISSING_XM_UA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[18];
-	ARC_NA(0.00)[];
+	RCVD_NO_TLS_LAST(0.10)[];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_TO(0.00)[collabora.com,kernel.org,arm.com,linux.intel.com,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_THREE(0.00)[3];
+	ASN(0.00)[asn:28939, ipnet:217.140.110.0/24, country:GB];
+	ARC_NA(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[15];
+	MIME_TRACE(0.00)[0:+];
+	RCVD_COUNT_TWO(0.00)[2];
+	FREEMAIL_CC(0.00)[collabora.com,arm.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
 	TO_DN_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	FROM_HAS_DN(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
 	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[intel.com:+]
-Message-ID-Hash: YWZKYEGTALVVY3DOGVS2U6PASRLUX3Y6
-X-Message-ID-Hash: YWZKYEGTALVVY3DOGVS2U6PASRLUX3Y6
-X-MailFrom: lkp@intel.com
-X-Mailman-Rule-Hits: nonmember-moderation
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: oe-kbuild-all@lists.linux.dev, kernel@collabora.com, =?iso-8859-1?Q?Adri=E1n?= Larumbe <adrian.larumbe@collabora.com>, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	R_DKIM_NA(0.00)[]
+Message-ID-Hash: FVJOBMHCP7WAUZVCSW2BKHKBHAIVIAGR
+X-Message-ID-Hash: FVJOBMHCP7WAUZVCSW2BKHKBHAIVIAGR
+X-MailFrom: liviu.dudau@arm.com
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
+CC: Boris Brezillon <boris.brezillon@collabora.com>, Steven Price <steven.price@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Daniel Vetter <daniel@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, kernel@collabora.com, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v5 2/4] drm/panthor: add DRM fdinfo support
+Subject: [Linaro-mm-sig] Re: [PATCH v5 1/4] drm/panthor: introduce job cycle and timestamp accounting
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/YWZKYEGTALVVY3DOGVS2U6PASRLUX3Y6/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FVJOBMHCP7WAUZVCSW2BKHKBHAIVIAGR/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi Adri=E1n,
-
-kernel test robot noticed the following build warnings:
-
-[auto build test WARNING on drm-misc/drm-misc-next]
-[also build test WARNING on linus/master v6.11-rc6 next-20240904]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
-
-url:    https://github.com/intel-lab-lkp/linux/commits/Adri-n-Larumbe/drm-p=
-anthor-introduce-job-cycle-and-timestamp-accounting/20240904-042645
-base:   git://anongit.freedesktop.org/drm/drm-misc drm-misc-next
-patch link:    https://lore.kernel.org/r/20240903202541.430225-3-adrian.lar=
-umbe%40collabora.com
-patch subject: [PATCH v5 2/4] drm/panthor: add DRM fdinfo support
-config: x86_64-buildonly-randconfig-002-20240904 (https://download.01.org/0=
-day-ci/archive/20240905/202409050134.uxrIkhqc-lkp@intel.com/config)
-compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
-reproduce (this is a W=3D1 build): (https://download.01.org/0day-ci/archive=
-/20240905/202409050134.uxrIkhqc-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new versio=
-n of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202409050134.uxrIkhqc-lkp@i=
-ntel.com/
-
-All warnings (new ones prefixed by >>):
-
-   drivers/gpu/drm/panthor/panthor_sched.c:322: warning: Excess struct memb=
-er 'runnable' description in 'panthor_scheduler'
-   drivers/gpu/drm/panthor/panthor_sched.c:322: warning: Excess struct memb=
-er 'idle' description in 'panthor_scheduler'
-   drivers/gpu/drm/panthor/panthor_sched.c:322: warning: Excess struct memb=
-er 'waiting' description in 'panthor_scheduler'
-   drivers/gpu/drm/panthor/panthor_sched.c:322: warning: Excess struct memb=
-er 'has_ref' description in 'panthor_scheduler'
-   drivers/gpu/drm/panthor/panthor_sched.c:322: warning: Excess struct memb=
-er 'in_progress' description in 'panthor_scheduler'
-   drivers/gpu/drm/panthor/panthor_sched.c:322: warning: Excess struct memb=
-er 'stopped_groups' description in 'panthor_scheduler'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'mem' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'input' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'output' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'input_fw_va' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'output_fw_va' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'gpu_va' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'ref' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'gt' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'sync64' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'bo' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'offset' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'kmap' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'lock' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'id' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'seqno' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'last_fence' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'in_flight_jobs' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'slots' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'slot_count' description in 'panthor_queue'
-   drivers/gpu/drm/panthor/panthor_sched.c:494: warning: Excess struct memb=
-er 'profiling_seqno' description in 'panthor_queue'
->> drivers/gpu/drm/panthor/panthor_sched.c:689: warning: Excess struct memb=
-er 'data' description in 'panthor_group'
->> drivers/gpu/drm/panthor/panthor_sched.c:689: warning: Excess struct memb=
-er 'lock' description in 'panthor_group'
-   drivers/gpu/drm/panthor/panthor_sched.c:822: warning: Function parameter=
- or struct member 'profiling_slot' not described in 'panthor_job'
-   drivers/gpu/drm/panthor/panthor_sched.c:822: warning: Excess struct memb=
-er 'start' description in 'panthor_job'
-   drivers/gpu/drm/panthor/panthor_sched.c:822: warning: Excess struct memb=
-er 'size' description in 'panthor_job'
-   drivers/gpu/drm/panthor/panthor_sched.c:822: warning: Excess struct memb=
-er 'latest_flush' description in 'panthor_job'
-   drivers/gpu/drm/panthor/panthor_sched.c:822: warning: Excess struct memb=
-er 'start' description in 'panthor_job'
-   drivers/gpu/drm/panthor/panthor_sched.c:822: warning: Excess struct memb=
-er 'end' description in 'panthor_job'
-   drivers/gpu/drm/panthor/panthor_sched.c:822: warning: Excess struct memb=
-er 'profile_slot' description in 'panthor_job'
-   drivers/gpu/drm/panthor/panthor_sched.c:1745: warning: Function paramete=
-r or struct member 'ptdev' not described in 'panthor_sched_report_fw_events'
-   drivers/gpu/drm/panthor/panthor_sched.c:1745: warning: Function paramete=
-r or struct member 'events' not described in 'panthor_sched_report_fw_event=
-s'
-   drivers/gpu/drm/panthor/panthor_sched.c:2637: warning: Function paramete=
-r or struct member 'ptdev' not described in 'panthor_sched_report_mmu_fault'
-
-
-vim +689 drivers/gpu/drm/panthor/panthor_sched.c
-
-de85488138247d0 Boris Brezillon 2024-02-29  531 =20
-de85488138247d0 Boris Brezillon 2024-02-29  532  /**
-de85488138247d0 Boris Brezillon 2024-02-29  533   * struct panthor_group - =
-Scheduling group object
-de85488138247d0 Boris Brezillon 2024-02-29  534   */
-de85488138247d0 Boris Brezillon 2024-02-29  535  struct panthor_group {
-de85488138247d0 Boris Brezillon 2024-02-29  536  	/** @refcount: Reference =
-count */
-de85488138247d0 Boris Brezillon 2024-02-29  537  	struct kref refcount;
-de85488138247d0 Boris Brezillon 2024-02-29  538 =20
-de85488138247d0 Boris Brezillon 2024-02-29  539  	/** @ptdev: Device. */
-de85488138247d0 Boris Brezillon 2024-02-29  540  	struct panthor_device *pt=
-dev;
-de85488138247d0 Boris Brezillon 2024-02-29  541 =20
-de85488138247d0 Boris Brezillon 2024-02-29  542  	/** @vm: VM bound to the =
-group. */
-de85488138247d0 Boris Brezillon 2024-02-29  543  	struct panthor_vm *vm;
-de85488138247d0 Boris Brezillon 2024-02-29  544 =20
-de85488138247d0 Boris Brezillon 2024-02-29  545  	/** @compute_core_mask: M=
-ask of shader cores that can be used for compute jobs. */
-de85488138247d0 Boris Brezillon 2024-02-29  546  	u64 compute_core_mask;
-de85488138247d0 Boris Brezillon 2024-02-29  547 =20
-de85488138247d0 Boris Brezillon 2024-02-29  548  	/** @fragment_core_mask: =
-Mask of shader cores that can be used for fragment jobs. */
-de85488138247d0 Boris Brezillon 2024-02-29  549  	u64 fragment_core_mask;
-de85488138247d0 Boris Brezillon 2024-02-29  550 =20
-de85488138247d0 Boris Brezillon 2024-02-29  551  	/** @tiler_core_mask: Mas=
-k of tiler cores that can be used for tiler jobs. */
-de85488138247d0 Boris Brezillon 2024-02-29  552  	u64 tiler_core_mask;
-de85488138247d0 Boris Brezillon 2024-02-29  553 =20
-de85488138247d0 Boris Brezillon 2024-02-29  554  	/** @max_compute_cores: M=
-aximum number of shader cores used for compute jobs. */
-de85488138247d0 Boris Brezillon 2024-02-29  555  	u8 max_compute_cores;
-de85488138247d0 Boris Brezillon 2024-02-29  556 =20
-be7ffc821f5fc2e Liviu Dudau     2024-04-02  557  	/** @max_fragment_cores: =
-Maximum number of shader cores used for fragment jobs. */
-de85488138247d0 Boris Brezillon 2024-02-29  558  	u8 max_fragment_cores;
-de85488138247d0 Boris Brezillon 2024-02-29  559 =20
-de85488138247d0 Boris Brezillon 2024-02-29  560  	/** @max_tiler_cores: Max=
-imum number of tiler cores used for tiler jobs. */
-de85488138247d0 Boris Brezillon 2024-02-29  561  	u8 max_tiler_cores;
-de85488138247d0 Boris Brezillon 2024-02-29  562 =20
-de85488138247d0 Boris Brezillon 2024-02-29  563  	/** @priority: Group prio=
-rity (check panthor_csg_priority). */
-de85488138247d0 Boris Brezillon 2024-02-29  564  	u8 priority;
-de85488138247d0 Boris Brezillon 2024-02-29  565 =20
-de85488138247d0 Boris Brezillon 2024-02-29  566  	/** @blocked_queues: Bitm=
-ask reflecting the blocked queues. */
-de85488138247d0 Boris Brezillon 2024-02-29  567  	u32 blocked_queues;
-de85488138247d0 Boris Brezillon 2024-02-29  568 =20
-de85488138247d0 Boris Brezillon 2024-02-29  569  	/** @idle_queues: Bitmask=
- reflecting the idle queues. */
-de85488138247d0 Boris Brezillon 2024-02-29  570  	u32 idle_queues;
-de85488138247d0 Boris Brezillon 2024-02-29  571 =20
-de85488138247d0 Boris Brezillon 2024-02-29  572  	/** @fatal_lock: Lock use=
-d to protect access to fatal fields. */
-de85488138247d0 Boris Brezillon 2024-02-29  573  	spinlock_t fatal_lock;
-de85488138247d0 Boris Brezillon 2024-02-29  574 =20
-de85488138247d0 Boris Brezillon 2024-02-29  575  	/** @fatal_queues: Bitmas=
-k reflecting the queues that hit a fatal exception. */
-de85488138247d0 Boris Brezillon 2024-02-29  576  	u32 fatal_queues;
-de85488138247d0 Boris Brezillon 2024-02-29  577 =20
-de85488138247d0 Boris Brezillon 2024-02-29  578  	/** @tiler_oom: Mask of q=
-ueues that have a tiler OOM event to process. */
-de85488138247d0 Boris Brezillon 2024-02-29  579  	atomic_t tiler_oom;
-de85488138247d0 Boris Brezillon 2024-02-29  580 =20
-de85488138247d0 Boris Brezillon 2024-02-29  581  	/** @queue_count: Number =
-of queues in this group. */
-de85488138247d0 Boris Brezillon 2024-02-29  582  	u32 queue_count;
-de85488138247d0 Boris Brezillon 2024-02-29  583 =20
-de85488138247d0 Boris Brezillon 2024-02-29  584  	/** @queues: Queues owned=
- by this group. */
-de85488138247d0 Boris Brezillon 2024-02-29  585  	struct panthor_queue *que=
-ues[MAX_CS_PER_CSG];
-de85488138247d0 Boris Brezillon 2024-02-29  586 =20
-de85488138247d0 Boris Brezillon 2024-02-29  587  	/**
-de85488138247d0 Boris Brezillon 2024-02-29  588  	 * @csg_id: ID of the FW =
-group slot.
-de85488138247d0 Boris Brezillon 2024-02-29  589  	 *
-de85488138247d0 Boris Brezillon 2024-02-29  590  	 * -1 when the group is n=
-ot scheduled/active.
-de85488138247d0 Boris Brezillon 2024-02-29  591  	 */
-de85488138247d0 Boris Brezillon 2024-02-29  592  	int csg_id;
-de85488138247d0 Boris Brezillon 2024-02-29  593 =20
-de85488138247d0 Boris Brezillon 2024-02-29  594  	/**
-de85488138247d0 Boris Brezillon 2024-02-29  595  	 * @destroyed: True when =
-the group has been destroyed.
-de85488138247d0 Boris Brezillon 2024-02-29  596  	 *
-de85488138247d0 Boris Brezillon 2024-02-29  597  	 * If a group is destroye=
-d it becomes useless: no further jobs can be submitted
-de85488138247d0 Boris Brezillon 2024-02-29  598  	 * to its queues. We simp=
-ly wait for all references to be dropped so we can
-de85488138247d0 Boris Brezillon 2024-02-29  599  	 * release the group obje=
-ct.
-de85488138247d0 Boris Brezillon 2024-02-29  600  	 */
-de85488138247d0 Boris Brezillon 2024-02-29  601  	bool destroyed;
-de85488138247d0 Boris Brezillon 2024-02-29  602 =20
-de85488138247d0 Boris Brezillon 2024-02-29  603  	/**
-de85488138247d0 Boris Brezillon 2024-02-29  604  	 * @timedout: True when a=
- timeout occurred on any of the queues owned by
-de85488138247d0 Boris Brezillon 2024-02-29  605  	 * this group.
-de85488138247d0 Boris Brezillon 2024-02-29  606  	 *
-de85488138247d0 Boris Brezillon 2024-02-29  607  	 * Timeouts can be report=
-ed by drm_sched or by the FW. In any case, any
-de85488138247d0 Boris Brezillon 2024-02-29  608  	 * timeout situation is u=
-nrecoverable, and the group becomes useless.
-de85488138247d0 Boris Brezillon 2024-02-29  609  	 * We simply wait for all=
- references to be dropped so we can release the
-de85488138247d0 Boris Brezillon 2024-02-29  610  	 * group object.
-de85488138247d0 Boris Brezillon 2024-02-29  611  	 */
-de85488138247d0 Boris Brezillon 2024-02-29  612  	bool timedout;
-de85488138247d0 Boris Brezillon 2024-02-29  613 =20
-de85488138247d0 Boris Brezillon 2024-02-29  614  	/**
-de85488138247d0 Boris Brezillon 2024-02-29  615  	 * @syncobjs: Pool of per=
--queue synchronization objects.
-de85488138247d0 Boris Brezillon 2024-02-29  616  	 *
-de85488138247d0 Boris Brezillon 2024-02-29  617  	 * One sync object per qu=
-eue. The position of the sync object is
-de85488138247d0 Boris Brezillon 2024-02-29  618  	 * determined by the queu=
-e index.
-de85488138247d0 Boris Brezillon 2024-02-29  619  	 */
-de85488138247d0 Boris Brezillon 2024-02-29  620  	struct panthor_kernel_bo =
-*syncobjs;
-de85488138247d0 Boris Brezillon 2024-02-29  621 =20
-d7baaf2591f58fc Adri=E1n Larumbe  2024-09-03  622  	/** @fdinfo: Per-file t=
-otal cycle and timestamp values reference. */
-d7baaf2591f58fc Adri=E1n Larumbe  2024-09-03  623  	struct {
-d7baaf2591f58fc Adri=E1n Larumbe  2024-09-03  624  		/** @data: Pointer to =
-actual per-file sample data. */
-d7baaf2591f58fc Adri=E1n Larumbe  2024-09-03  625  		struct panthor_gpu_usa=
-ge *data;
-d7baaf2591f58fc Adri=E1n Larumbe  2024-09-03  626 =20
-d7baaf2591f58fc Adri=E1n Larumbe  2024-09-03  627  		/**
-d7baaf2591f58fc Adri=E1n Larumbe  2024-09-03  628  		 * @lock: Mutex to gov=
-ern concurrent access from drm file's fdinfo callback
-d7baaf2591f58fc Adri=E1n Larumbe  2024-09-03  629  		 * and job post-comple=
-tion processing function
-d7baaf2591f58fc Adri=E1n Larumbe  2024-09-03  630  		 */
-d7baaf2591f58fc Adri=E1n Larumbe  2024-09-03  631  		struct mutex lock;
-d7baaf2591f58fc Adri=E1n Larumbe  2024-09-03  632  	} fdinfo;
-d7baaf2591f58fc Adri=E1n Larumbe  2024-09-03  633 =20
-de85488138247d0 Boris Brezillon 2024-02-29  634  	/** @state: Group state. =
-*/
-de85488138247d0 Boris Brezillon 2024-02-29  635  	enum panthor_group_state =
-state;
-de85488138247d0 Boris Brezillon 2024-02-29  636 =20
-de85488138247d0 Boris Brezillon 2024-02-29  637  	/**
-de85488138247d0 Boris Brezillon 2024-02-29  638  	 * @suspend_buf: Suspend =
-buffer.
-de85488138247d0 Boris Brezillon 2024-02-29  639  	 *
-de85488138247d0 Boris Brezillon 2024-02-29  640  	 * Stores the state of th=
-e group and its queues when a group is suspended.
-de85488138247d0 Boris Brezillon 2024-02-29  641  	 * Used at resume time to=
- restore the group in its previous state.
-de85488138247d0 Boris Brezillon 2024-02-29  642  	 *
-de85488138247d0 Boris Brezillon 2024-02-29  643  	 * The size of the suspen=
-d buffer is exposed through the FW interface.
-de85488138247d0 Boris Brezillon 2024-02-29  644  	 */
-de85488138247d0 Boris Brezillon 2024-02-29  645  	struct panthor_kernel_bo =
-*suspend_buf;
-de85488138247d0 Boris Brezillon 2024-02-29  646 =20
-de85488138247d0 Boris Brezillon 2024-02-29  647  	/**
-de85488138247d0 Boris Brezillon 2024-02-29  648  	 * @protm_suspend_buf: Pr=
-otection mode suspend buffer.
-de85488138247d0 Boris Brezillon 2024-02-29  649  	 *
-de85488138247d0 Boris Brezillon 2024-02-29  650  	 * Stores the state of th=
-e group and its queues when a group that's in
-de85488138247d0 Boris Brezillon 2024-02-29  651  	 * protection mode is sus=
-pended.
-de85488138247d0 Boris Brezillon 2024-02-29  652  	 *
-de85488138247d0 Boris Brezillon 2024-02-29  653  	 * Used at resume time to=
- restore the group in its previous state.
-de85488138247d0 Boris Brezillon 2024-02-29  654  	 *
-de85488138247d0 Boris Brezillon 2024-02-29  655  	 * The size of the protec=
-tion mode suspend buffer is exposed through the
-de85488138247d0 Boris Brezillon 2024-02-29  656  	 * FW interface.
-de85488138247d0 Boris Brezillon 2024-02-29  657  	 */
-de85488138247d0 Boris Brezillon 2024-02-29  658  	struct panthor_kernel_bo =
-*protm_suspend_buf;
-de85488138247d0 Boris Brezillon 2024-02-29  659 =20
-de85488138247d0 Boris Brezillon 2024-02-29  660  	/** @sync_upd_work: Work =
-used to check/signal job fences. */
-de85488138247d0 Boris Brezillon 2024-02-29  661  	struct work_struct sync_u=
-pd_work;
-de85488138247d0 Boris Brezillon 2024-02-29  662 =20
-de85488138247d0 Boris Brezillon 2024-02-29  663  	/** @tiler_oom_work: Work=
- used to process tiler OOM events happening on this group. */
-de85488138247d0 Boris Brezillon 2024-02-29  664  	struct work_struct tiler_=
-oom_work;
-de85488138247d0 Boris Brezillon 2024-02-29  665 =20
-de85488138247d0 Boris Brezillon 2024-02-29  666  	/** @term_work: Work used=
- to finish the group termination procedure. */
-de85488138247d0 Boris Brezillon 2024-02-29  667  	struct work_struct term_w=
-ork;
-de85488138247d0 Boris Brezillon 2024-02-29  668 =20
-de85488138247d0 Boris Brezillon 2024-02-29  669  	/**
-de85488138247d0 Boris Brezillon 2024-02-29  670  	 * @release_work: Work us=
-ed to release group resources.
-de85488138247d0 Boris Brezillon 2024-02-29  671  	 *
-de85488138247d0 Boris Brezillon 2024-02-29  672  	 * We need to postpone th=
-e group release to avoid a deadlock when
-de85488138247d0 Boris Brezillon 2024-02-29  673  	 * the last ref is releas=
-ed in the tick work.
-de85488138247d0 Boris Brezillon 2024-02-29  674  	 */
-de85488138247d0 Boris Brezillon 2024-02-29  675  	struct work_struct releas=
-e_work;
-de85488138247d0 Boris Brezillon 2024-02-29  676 =20
-de85488138247d0 Boris Brezillon 2024-02-29  677  	/**
-de85488138247d0 Boris Brezillon 2024-02-29  678  	 * @run_node: Node used t=
-o insert the group in the
-de85488138247d0 Boris Brezillon 2024-02-29  679  	 * panthor_group::groups:=
-:{runnable,idle} and
-de85488138247d0 Boris Brezillon 2024-02-29  680  	 * panthor_group::reset.s=
-topped_groups lists.
-de85488138247d0 Boris Brezillon 2024-02-29  681  	 */
-de85488138247d0 Boris Brezillon 2024-02-29  682  	struct list_head run_node;
-de85488138247d0 Boris Brezillon 2024-02-29  683 =20
-de85488138247d0 Boris Brezillon 2024-02-29  684  	/**
-de85488138247d0 Boris Brezillon 2024-02-29  685  	 * @wait_node: Node used =
-to insert the group in the
-de85488138247d0 Boris Brezillon 2024-02-29  686  	 * panthor_group::groups:=
-:waiting list.
-de85488138247d0 Boris Brezillon 2024-02-29  687  	 */
-de85488138247d0 Boris Brezillon 2024-02-29  688  	struct list_head wait_nod=
-e;
-de85488138247d0 Boris Brezillon 2024-02-29 @689  };
-de85488138247d0 Boris Brezillon 2024-02-29  690 =20
-
---=20
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gVHVlLCBTZXAgMDMsIDIwMjQgYXQgMDk6MjU6MzVQTSArMDEwMCwgQWRyacOhbiBMYXJ1bWJl
+IHdyb3RlOg0KPiBFbmFibGUgY2FsY3VsYXRpb25zIG9mIGpvYiBzdWJtaXNzaW9uIHRpbWVzIGlu
+IGNsb2NrIGN5Y2xlcyBhbmQgd2FsbA0KPiB0aW1lLiBUaGlzIGlzIGRvbmUgYnkgZXhwYW5kaW5n
+IHRoZSBib2lsZXJwbGF0ZSBjb21tYW5kIHN0cmVhbSB3aGVuIHJ1bm5pbmcNCj4gYSBqb2IgdG8g
+aW5jbHVkZSBpbnN0cnVjdGlvbnMgdGhhdCBjb21wdXRlIHNhaWQgdGltZXMgcmlnaHQgYmVmb3Jl
+IGFuIGFmdGVyDQoNCnMvYW4vYW5kLw0KDQo+IGEgdXNlciBDUy4NCj4gDQo+IEEgc2VwYXJhdGUg
+a2VybmVsIEJPIGlzIGNyZWF0ZWQgcGVyIHF1ZXVlIHRvIHN0b3JlIHRob3NlIHZhbHVlcy4gSm9i
+cyBjYW4NCj4gYWNjZXNzIHRoZWlyIHNhbXBsZWQgZGF0YSB0aHJvdWdoIGEgc2xvdHMgYnVmZmVy
+LXNwZWNpZmljIGluZGV4IGRpZmZlcmVudA0KDQpzL3Nsb3RzL3Nsb3Qncy8gPw0KDQo+IGZyb20g
+dGhhdCBvZiB0aGUgcXVldWUncyByaW5nYnVmZmVyLiBUaGUgcmVhc29uIGZvciB0aGlzIGlzIHNh
+dmluZyBtZW1vcnkNCj4gb24gdGhlIHByb2ZpbGluZyBpbmZvcm1hdGlvbiBrZXJuZWwgQk8sIHNp
+bmNlIHRoZSBhbW91bnQgb2Ygc2ltdWx0YW5lb3VzDQo+IHByb2ZpbGVkIGpvYnMgd2UgY2FuIHdy
+aXRlIGludG8gdGhlIHF1ZXVlJ3MgcmluZ2J1ZmZlciBtaWdodCBiZSBtdWNoDQo+IHNtYWxsZXIg
+dGhhbiBmb3IgcmVndWxhciBqb2JzLCBhcyB0aGUgZm9ybWVyIHRha2UgbW9yZSBDU0YgaW5zdHJ1
+Y3Rpb25zLg0KPiANCj4gVGhpcyBjb21taXQgaXMgZG9uZSBpbiBwcmVwYXJhdGlvbiBmb3IgZW5h
+YmxpbmcgRFJNIGZkaW5mbyBzdXBwb3J0IGluIHRoZQ0KPiBQYW50aG9yIGRyaXZlciwgd2hpY2gg
+ZGVwZW5kcyBvbiB0aGUgbnVtYmVycyBjYWxjdWxhdGVkIGhlcmVpbi4NCj4gDQo+IEEgcHJvZmls
+ZSBtb2RlIG1hc2sgaGFzIGJlZW4gYWRkZWQgdGhhdCB3aWxsIGluIGEgZnV0dXJlIGNvbW1pdCBh
+bGxvdyBVTSB0bw0KPiB0b2dnbGUgcGVyZm9ybWFuY2UgbWV0cmljIHNhbXBsaW5nIGJlaGF2aW91
+ciwgd2hpY2ggaXMgZGlzYWJsZWQgYnkgZGVmYXVsdA0KPiB0byBzYXZlIHBvd2VyLiBXaGVuIGEg
+cmluZ2J1ZmZlciBDUyBpcyBjb25zdHJ1Y3RlZCwgdGltZXN0YW1wIGFuZCBjeWNsaW5nDQo+IHNh
+bXBsaW5nIGluc3RydWN0aW9ucyBhcmUgYWRkZWQgZGVwZW5kaW5nIG9uIHRoZSBlbmFibGVkIGZs
+YWdzIGluIHRoZQ0KPiBwcm9maWxpbmcgbWFzay4NCj4gDQo+IEEgaGVscGVyIHdhcyBwcm92aWRl
+ZCB0aGF0IGNhbGN1bGF0ZXMgdGhlIG51bWJlciBvZiBpbnN0cnVjdGlvbnMgZm9yIGENCj4gZ2l2
+ZW4gc2V0IG9mIGVuYWJsZW1lbnQgbWFzaywgYW5kIHRoZXNlIGFyZSBwYXNzZWQgYXMgdGhlIG51
+bWJlciBvZiBjcmVkaXRzDQo+IHdoZW4gaW5pdGlhbGlzaW5nIGEgRFJNIHNjaGVkdWxlciBqb2Iu
+DQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBBZHJpw6FuIExhcnVtYmUgPGFkcmlhbi5sYXJ1bWJlQGNv
+bGxhYm9yYS5jb20+DQo+IC0tLQ0KPiAgZHJpdmVycy9ncHUvZHJtL3BhbnRob3IvcGFudGhvcl9k
+ZXZpY2UuaCB8ICAyMiArKw0KPiAgZHJpdmVycy9ncHUvZHJtL3BhbnRob3IvcGFudGhvcl9zY2hl
+ZC5jICB8IDMyNyArKysrKysrKysrKysrKysrKysrKy0tLQ0KPiAgMiBmaWxlcyBjaGFuZ2VkLCAz
+MDUgaW5zZXJ0aW9ucygrKSwgNDQgZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvZHJp
+dmVycy9ncHUvZHJtL3BhbnRob3IvcGFudGhvcl9kZXZpY2UuaCBiL2RyaXZlcnMvZ3B1L2RybS9w
+YW50aG9yL3BhbnRob3JfZGV2aWNlLmgNCj4gaW5kZXggZTM4OGMwNDcyYmE3Li5hNDhlMzBkMGFm
+MzAgMTAwNjQ0DQo+IC0tLSBhL2RyaXZlcnMvZ3B1L2RybS9wYW50aG9yL3BhbnRob3JfZGV2aWNl
+LmgNCj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL3BhbnRob3IvcGFudGhvcl9kZXZpY2UuaA0KPiBA
+QCAtNjYsNiArNjYsMjUgQEAgc3RydWN0IHBhbnRob3JfaXJxIHsNCj4gIAlhdG9taWNfdCBzdXNw
+ZW5kZWQ7DQo+ICB9Ow0KPiAgDQo+ICsvKioNCj4gKyAqIGVudW0gcGFudGhvcl9kZXZpY2VfcHJv
+ZmlsaW5nX21vZGUgLSBQcm9maWxpbmcgc3RhdGUNCj4gKyAqLw0KPiArZW51bSBwYW50aG9yX2Rl
+dmljZV9wcm9maWxpbmdfZmxhZ3Mgew0KPiArCS8qKiBAUEFOVEhPUl9ERVZJQ0VfUFJPRklMSU5H
+X0RJU0FCTEVEOiBQcm9maWxpbmcgaXMgZGlzYWJsZWQuICovDQo+ICsJUEFOVEhPUl9ERVZJQ0Vf
+UFJPRklMSU5HX0RJU0FCTEVEID0gMCwNCj4gKw0KPiArCS8qKiBAUEFOVEhPUl9ERVZJQ0VfUFJP
+RklMSU5HX0NZQ0xFUzogU2FtcGxpbmcgam9iIGN5Y2xlcy4gKi8NCj4gKwlQQU5USE9SX0RFVklD
+RV9QUk9GSUxJTkdfQ1lDTEVTID0gQklUKDApLA0KPiArDQo+ICsJLyoqIEBQQU5USE9SX0RFVklD
+RV9QUk9GSUxJTkdfVElNRVNUQU1QOiBTYW1wbGluZyBqb2IgdGltZXN0YW1wLiAqLw0KPiArCVBB
+TlRIT1JfREVWSUNFX1BST0ZJTElOR19USU1FU1RBTVAgPSBCSVQoMSksDQo+ICsNCj4gKwkvKiog
+QFBBTlRIT1JfREVWSUNFX1BST0ZJTElOR19BTEw6IFNhbXBsaW5nIGV2ZXJ5dGhpbmcuICovDQo+
+ICsJUEFOVEhPUl9ERVZJQ0VfUFJPRklMSU5HX0FMTCA9DQo+ICsJUEFOVEhPUl9ERVZJQ0VfUFJP
+RklMSU5HX0NZQ0xFUyB8DQo+ICsJUEFOVEhPUl9ERVZJQ0VfUFJPRklMSU5HX1RJTUVTVEFNUCwN
+Cj4gK307DQo+ICsNCj4gIC8qKg0KPiAgICogc3RydWN0IHBhbnRob3JfZGV2aWNlIC0gUGFudGhv
+ciBkZXZpY2UNCj4gICAqLw0KPiBAQCAtMTYyLDYgKzE4MSw5IEBAIHN0cnVjdCBwYW50aG9yX2Rl
+dmljZSB7DQo+ICAJCSAqLw0KPiAgCQlzdHJ1Y3QgcGFnZSAqZHVtbXlfbGF0ZXN0X2ZsdXNoOw0K
+PiAgCX0gcG07DQo+ICsNCj4gKwkvKiogQHByb2ZpbGVfbWFzazogVXNlci1zZXQgcHJvZmlsaW5n
+IGZsYWdzIGZvciBqb2IgYWNjb3VudGluZy4gKi8NCj4gKwl1MzIgcHJvZmlsZV9tYXNrOw0KPiAg
+fTsNCj4gIA0KPiAgLyoqDQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vcGFudGhvci9w
+YW50aG9yX3NjaGVkLmMgYi9kcml2ZXJzL2dwdS9kcm0vcGFudGhvci9wYW50aG9yX3NjaGVkLmMN
+Cj4gaW5kZXggYzQyNmEzOTJiMDgxLi5iMDg3NjQ4YmY1OWEgMTAwNjQ0DQo+IC0tLSBhL2RyaXZl
+cnMvZ3B1L2RybS9wYW50aG9yL3BhbnRob3Jfc2NoZWQuYw0KPiArKysgYi9kcml2ZXJzL2dwdS9k
+cm0vcGFudGhvci9wYW50aG9yX3NjaGVkLmMNCj4gQEAgLTkzLDYgKzkzLDkgQEANCj4gICNkZWZp
+bmUgTUlOX0NTR1MJCQkJMw0KPiAgI2RlZmluZSBNQVhfQ1NHX1BSSU8JCQkJMHhmDQo+ICANCj4g
+KyNkZWZpbmUgTlVNX0lOU1RSU19QRVJfQ0FDSEVfTElORQkJKDY0IC8gc2l6ZW9mKHU2NCkpDQo+
+ICsjZGVmaW5lIE1BWF9JTlNUUlNfUEVSX0pPQgkJCTMyDQo+ICsNCj4gIHN0cnVjdCBwYW50aG9y
+X2dyb3VwOw0KPiAgDQo+ICAvKioNCj4gQEAgLTQ3Niw2ICs0NzksMTggQEAgc3RydWN0IHBhbnRo
+b3JfcXVldWUgew0KPiAgCQkgKi8NCj4gIAkJc3RydWN0IGxpc3RfaGVhZCBpbl9mbGlnaHRfam9i
+czsNCj4gIAl9IGZlbmNlX2N0eDsNCj4gKw0KPiArCS8qKiBAcHJvZmlsaW5nX2luZm86IEpvYiBw
+cm9maWxpbmcgZGF0YSBzbG90cyBhbmQgYWNjZXNzIGluZm9ybWF0aW9uLiAqLw0KPiArCXN0cnVj
+dCB7DQo+ICsJCS8qKiBAc2xvdHM6IEtlcm5lbCBCTyBob2xkaW5nIHRoZSBzbG90cy4gKi8NCj4g
+KwkJc3RydWN0IHBhbnRob3Jfa2VybmVsX2JvICpzbG90czsNCj4gKw0KPiArCQkvKiogQHNsb3Rf
+Y291bnQ6IE51bWJlciBvZiBqb2JzIHJpbmdidWZmZXIgY2FuIGhvbGQgYXQgb25jZS4gKi8NCj4g
+KwkJdTMyIHNsb3RfY291bnQ7DQo+ICsNCj4gKwkJLyoqIEBwcm9maWxpbmdfc2Vxbm86IEluZGV4
+IG9mIHRoZSBuZXh0IGF2YWlsYWJsZSBwcm9maWxpbmcgaW5mb3JtYXRpb24gc2xvdC4gKi8NCj4g
+KwkJdTMyIHByb2ZpbGluZ19zZXFubzsNCj4gKwl9IHByb2ZpbGluZ19pbmZvOw0KPiAgfTsNCj4g
+IA0KPiAgLyoqDQo+IEBAIC02NjEsNiArNjc2LDE4IEBAIHN0cnVjdCBwYW50aG9yX2dyb3VwIHsN
+Cj4gIAlzdHJ1Y3QgbGlzdF9oZWFkIHdhaXRfbm9kZTsNCj4gIH07DQo+ICANCj4gK3N0cnVjdCBw
+YW50aG9yX2pvYl9wcm9maWxpbmdfZGF0YSB7DQo+ICsJc3RydWN0IHsNCj4gKwkJdTY0IGJlZm9y
+ZTsNCj4gKwkJdTY0IGFmdGVyOw0KPiArCX0gY3ljbGVzOw0KPiArDQo+ICsJc3RydWN0IHsNCj4g
+KwkJdTY0IGJlZm9yZTsNCj4gKwkJdTY0IGFmdGVyOw0KPiArCX0gdGltZTsNCj4gK307DQo+ICsN
+Cj4gIC8qKg0KPiAgICogZ3JvdXBfcXVldWVfd29yaygpIC0gUXVldWUgYSBncm91cCB3b3JrDQo+
+ICAgKiBAZ3JvdXA6IEdyb3VwIHRvIHF1ZXVlIHRoZSB3b3JrIGZvci4NCj4gQEAgLTc3NCw2ICs4
+MDEsMTIgQEAgc3RydWN0IHBhbnRob3Jfam9iIHsNCj4gIA0KPiAgCS8qKiBAZG9uZV9mZW5jZTog
+RmVuY2Ugc2lnbmFsZWQgd2hlbiB0aGUgam9iIGlzIGZpbmlzaGVkIG9yIGNhbmNlbGxlZC4gKi8N
+Cj4gIAlzdHJ1Y3QgZG1hX2ZlbmNlICpkb25lX2ZlbmNlOw0KPiArDQo+ICsJLyoqIEBwcm9maWxl
+X21hc2s6IEN1cnJlbnQgZGV2aWNlIGpvYiBwcm9maWxpbmcgZW5hYmxlbWVudCBiaXRtYXNrLiAq
+Lw0KPiArCXUzMiBwcm9maWxlX21hc2s7DQo+ICsNCj4gKwkvKiogQHByb2ZpbGVfc2xvdDogSm9i
+IHByb2ZpbGluZyBpbmZvcm1hdGlvbiBpbmRleCBpbiB0aGUgcHJvZmlsaW5nIHNsb3RzIEJPLiAq
+Lw0KPiArCXUzMiBwcm9maWxpbmdfc2xvdDsNCj4gIH07DQo+ICANCj4gIHN0YXRpYyB2b2lkDQo+
+IEBAIC04MzgsNiArODcxLDcgQEAgc3RhdGljIHZvaWQgZ3JvdXBfZnJlZV9xdWV1ZShzdHJ1Y3Qg
+cGFudGhvcl9ncm91cCAqZ3JvdXAsIHN0cnVjdCBwYW50aG9yX3F1ZXVlICoNCj4gIA0KPiAgCXBh
+bnRob3Jfa2VybmVsX2JvX2Rlc3Ryb3kocXVldWUtPnJpbmdidWYpOw0KPiAgCXBhbnRob3Jfa2Vy
+bmVsX2JvX2Rlc3Ryb3kocXVldWUtPmlmYWNlLm1lbSk7DQo+ICsJcGFudGhvcl9rZXJuZWxfYm9f
+ZGVzdHJveShxdWV1ZS0+cHJvZmlsaW5nX2luZm8uc2xvdHMpOw0KPiAgDQo+ICAJLyogUmVsZWFz
+ZSB0aGUgbGFzdF9mZW5jZSB3ZSB3ZXJlIGhvbGRpbmcsIGlmIGFueS4gKi8NCj4gIAlkbWFfZmVu
+Y2VfcHV0KHF1ZXVlLT5mZW5jZV9jdHgubGFzdF9mZW5jZSk7DQo+IEBAIC0xOTgyLDggKzIwMTYs
+NiBAQCB0aWNrX2N0eF9pbml0KHN0cnVjdCBwYW50aG9yX3NjaGVkdWxlciAqc2NoZWQsDQo+ICAJ
+fQ0KPiAgfQ0KPiAgDQo+IC0jZGVmaW5lIE5VTV9JTlNUUlNfUEVSX1NMT1QJCTE2DQo+IC0NCj4g
+IHN0YXRpYyB2b2lkDQo+ICBncm91cF90ZXJtX3Bvc3RfcHJvY2Vzc2luZyhzdHJ1Y3QgcGFudGhv
+cl9ncm91cCAqZ3JvdXApDQo+ICB7DQo+IEBAIC0yODE1LDY1ICsyODQ3LDIxMSBAQCBzdGF0aWMg
+dm9pZCBncm91cF9zeW5jX3VwZF93b3JrKHN0cnVjdCB3b3JrX3N0cnVjdCAqd29yaykNCj4gIAln
+cm91cF9wdXQoZ3JvdXApOw0KPiAgfQ0KPiAgDQo+IC1zdGF0aWMgc3RydWN0IGRtYV9mZW5jZSAq
+DQo+IC1xdWV1ZV9ydW5fam9iKHN0cnVjdCBkcm1fc2NoZWRfam9iICpzY2hlZF9qb2IpDQo+ICtz
+dHJ1Y3QgcGFudGhvcl9qb2JfcmluZ2J1Zl9pbnN0cnMgew0KPiArCXU2NCBidWZmZXJbTUFYX0lO
+U1RSU19QRVJfSk9CXTsNCj4gKwl1MzIgY291bnQ7DQo+ICt9Ow0KPiArDQo+ICtzdHJ1Y3QgcGFu
+dGhvcl9qb2JfaW5zdHIgew0KPiArCXUzMiBwcm9maWxlX21hc2s7DQo+ICsJdTY0IGluc3RyOw0K
+PiArfTsNCj4gKw0KPiArI2RlZmluZSBKT0JfSU5TVFIoX19wcm9mLCBfX2luc3RyKSBcDQo+ICsJ
+eyBcDQo+ICsJCS5wcm9maWxlX21hc2sgPSBfX3Byb2YsIFwNCj4gKwkJLmluc3RyID0gX19pbnN0
+ciwgXA0KPiArCX0NCj4gKw0KPiArc3RhdGljIHZvaWQNCj4gK2NvcHlfaW5zdHJzX3RvX3Jpbmdi
+dWYoc3RydWN0IHBhbnRob3JfcXVldWUgKnF1ZXVlLA0KPiArCQkgICAgICAgc3RydWN0IHBhbnRo
+b3Jfam9iICpqb2IsDQo+ICsJCSAgICAgICBzdHJ1Y3QgcGFudGhvcl9qb2JfcmluZ2J1Zl9pbnN0
+cnMgKmluc3RycykNCj4gK3sNCj4gKwlzc2l6ZV90IHJpbmdidWZfc2l6ZSA9IHBhbnRob3Jfa2Vy
+bmVsX2JvX3NpemUocXVldWUtPnJpbmdidWYpOw0KPiArCXUzMiBzdGFydCA9IGpvYi0+cmluZ2J1
+Zi5zdGFydCAmIChyaW5nYnVmX3NpemUgLSAxKTsNCj4gKwlzc2l6ZV90IHNpemUsIHdyaXR0ZW47
+DQo+ICsNCj4gKwkvKg0KPiArCSAqIFdlIG5lZWQgdG8gd3JpdGUgYSB3aG9sZSBzbG90LCBpbmNs
+dWRpbmcgYW55IHRyYWlsaW5nIHplcm9lcw0KPiArCSAqIHRoYXQgbWF5IGNvbWUgYXQgdGhlIGVu
+ZCBvZiBpdC4gQWxzbywgYmVjYXVzZSBpbnN0cnMuYnVmZmVyIGhhZA0KDQpzL2hhZC9oYXMvDQoN
+Cj4gKwkgKiBiZWVuIHplcm8taW5pdGlhbGlzZWQsIHRoZXJlJ3Mgbm8gbmVlZCB0byBwYWQgaXQg
+d2l0aCAwJ3MNCj4gKwkgKi8NCj4gKwlpbnN0cnMtPmNvdW50ID0gQUxJR04oaW5zdHJzLT5jb3Vu
+dCwgTlVNX0lOU1RSU19QRVJfQ0FDSEVfTElORSk7DQo+ICsJc2l6ZSA9IGluc3Rycy0+Y291bnQg
+KiBzaXplb2YodTY0KTsNCj4gKwl3cml0dGVuID0gbWluKHJpbmdidWZfc2l6ZSAtIHN0YXJ0LCBz
+aXplKTsNCj4gKw0KPiArCW1lbWNweShxdWV1ZS0+cmluZ2J1Zi0+a21hcCArIHN0YXJ0LCBpbnN0
+cnMtPmJ1ZmZlciwgd3JpdHRlbik7DQo+ICsNCj4gKwlpZiAod3JpdHRlbiA8IHNpemUpDQo+ICsJ
+CW1lbWNweShxdWV1ZS0+cmluZ2J1Zi0+a21hcCwNCj4gKwkJICAgICAgICZpbnN0cnMtPmJ1ZmZl
+clsocmluZ2J1Zl9zaXplIC0gc3RhcnQpL3NpemVvZih1NjQpXSwNCj4gKwkJICAgICAgIHNpemUg
+LSB3cml0dGVuKTsNCj4gK30NCj4gKw0KPiArc3RydWN0IHBhbnRob3Jfam9iX2NzX3BhcmFtcyB7
+DQo+ICsJdTMyIHByb2ZpbGVfbWFzazsNCj4gKwl1NjQgYWRkcl9yZWc7IHU2NCB2YWxfcmVnOw0K
+PiArCXU2NCBjeWNsZV9yZWc7IHU2NCB0aW1lX3JlZzsNCj4gKwl1NjQgc3luY19hZGRyOyB1NjQg
+dGltZXNfYWRkcjsNCj4gKwl1NjQgY3Nfc3RhcnQ7IHU2NCBjc19zaXplOw0KPiArCXUzMiBsYXN0
+X2ZsdXNoOyB1MzIgd2FpdGFsbF9tYXNrOw0KPiArfTsNCj4gKw0KPiArc3RhdGljIHZvaWQNCj4g
+K2dldF9qb2JfY3NfcGFyYW1zKHN0cnVjdCBwYW50aG9yX2pvYiAqam9iLCBzdHJ1Y3QgcGFudGhv
+cl9qb2JfY3NfcGFyYW1zICpwYXJhbXMpDQo+ICB7DQo+IC0Jc3RydWN0IHBhbnRob3Jfam9iICpq
+b2IgPSBjb250YWluZXJfb2Yoc2NoZWRfam9iLCBzdHJ1Y3QgcGFudGhvcl9qb2IsIGJhc2UpOw0K
+PiAgCXN0cnVjdCBwYW50aG9yX2dyb3VwICpncm91cCA9IGpvYi0+Z3JvdXA7DQo+ICAJc3RydWN0
+IHBhbnRob3JfcXVldWUgKnF1ZXVlID0gZ3JvdXAtPnF1ZXVlc1tqb2ItPnF1ZXVlX2lkeF07DQo+
+ICAJc3RydWN0IHBhbnRob3JfZGV2aWNlICpwdGRldiA9IGdyb3VwLT5wdGRldjsNCj4gIAlzdHJ1
+Y3QgcGFudGhvcl9zY2hlZHVsZXIgKnNjaGVkID0gcHRkZXYtPnNjaGVkdWxlcjsNCj4gLQl1MzIg
+cmluZ2J1Zl9zaXplID0gcGFudGhvcl9rZXJuZWxfYm9fc2l6ZShxdWV1ZS0+cmluZ2J1Zik7DQo+
+IC0JdTMyIHJpbmdidWZfaW5zZXJ0ID0gcXVldWUtPmlmYWNlLmlucHV0LT5pbnNlcnQgJiAocmlu
+Z2J1Zl9zaXplIC0gMSk7DQo+IC0JdTY0IGFkZHJfcmVnID0gcHRkZXYtPmNzaWZfaW5mby5jc19y
+ZWdfY291bnQgLQ0KPiAtCQkgICAgICAgcHRkZXYtPmNzaWZfaW5mby51bnByZXNlcnZlZF9jc19y
+ZWdfY291bnQ7DQo+IC0JdTY0IHZhbF9yZWcgPSBhZGRyX3JlZyArIDI7DQo+IC0JdTY0IHN5bmNf
+YWRkciA9IHBhbnRob3Jfa2VybmVsX2JvX2dwdXZhKGdyb3VwLT5zeW5jb2JqcykgKw0KPiAtCQkJ
+am9iLT5xdWV1ZV9pZHggKiBzaXplb2Yoc3RydWN0IHBhbnRob3Jfc3luY29ial82NGIpOw0KPiAt
+CXUzMiB3YWl0YWxsX21hc2sgPSBHRU5NQVNLKHNjaGVkLT5zYl9zbG90X2NvdW50IC0gMSwgMCk7
+DQo+IC0Jc3RydWN0IGRtYV9mZW5jZSAqZG9uZV9mZW5jZTsNCj4gLQlpbnQgcmV0Ow0KPiAgDQo+
+IC0JdTY0IGNhbGxfaW5zdHJzW05VTV9JTlNUUlNfUEVSX1NMT1RdID0gew0KPiArCXBhcmFtcy0+
+YWRkcl9yZWcgPSBwdGRldi0+Y3NpZl9pbmZvLmNzX3JlZ19jb3VudCAtDQo+ICsJCQkgICBwdGRl
+di0+Y3NpZl9pbmZvLnVucHJlc2VydmVkX2NzX3JlZ19jb3VudDsNCj4gKwlwYXJhbXMtPnZhbF9y
+ZWcgPSBwYXJhbXMtPmFkZHJfcmVnICsgMjsNCj4gKwlwYXJhbXMtPmN5Y2xlX3JlZyA9IHBhcmFt
+cy0+YWRkcl9yZWc7DQo+ICsJcGFyYW1zLT50aW1lX3JlZyA9IHBhcmFtcy0+dmFsX3JlZzsNCj4g
+Kw0KPiArCXBhcmFtcy0+c3luY19hZGRyID0gcGFudGhvcl9rZXJuZWxfYm9fZ3B1dmEoZ3JvdXAt
+PnN5bmNvYmpzKSArDQo+ICsJCQkgICAgam9iLT5xdWV1ZV9pZHggKiBzaXplb2Yoc3RydWN0IHBh
+bnRob3Jfc3luY29ial82NGIpOw0KPiArCXBhcmFtcy0+dGltZXNfYWRkciA9IHBhbnRob3Jfa2Vy
+bmVsX2JvX2dwdXZhKHF1ZXVlLT5wcm9maWxpbmdfaW5mby5zbG90cykgKw0KPiArCQkJICAgICAo
+am9iLT5wcm9maWxpbmdfc2xvdCAqIHNpemVvZihzdHJ1Y3QgcGFudGhvcl9qb2JfcHJvZmlsaW5n
+X2RhdGEpKTsNCj4gKwlwYXJhbXMtPndhaXRhbGxfbWFzayA9IEdFTk1BU0soc2NoZWQtPnNiX3Ns
+b3RfY291bnQgLSAxLCAwKTsNCj4gKw0KPiArCXBhcmFtcy0+Y3Nfc3RhcnQgPSBqb2ItPmNhbGxf
+aW5mby5zdGFydDsNCj4gKwlwYXJhbXMtPmNzX3NpemUgPSBqb2ItPmNhbGxfaW5mby5zaXplOw0K
+PiArCXBhcmFtcy0+bGFzdF9mbHVzaCA9IGpvYi0+Y2FsbF9pbmZvLmxhdGVzdF9mbHVzaDsNCj4g
+Kw0KPiArCXBhcmFtcy0+cHJvZmlsZV9tYXNrID0gam9iLT5wcm9maWxlX21hc2s7DQo+ICt9DQo+
+ICsNCj4gK3N0YXRpYyB2b2lkDQo+ICtwcmVwYXJlX2pvYl9pbnN0cnMoY29uc3Qgc3RydWN0IHBh
+bnRob3Jfam9iX2NzX3BhcmFtcyAqcGFyYW1zLA0KPiArCQkgICBzdHJ1Y3QgcGFudGhvcl9qb2Jf
+cmluZ2J1Zl9pbnN0cnMgKmluc3RycykNCj4gK3sNCj4gKwljb25zdCBzdHJ1Y3QgcGFudGhvcl9q
+b2JfaW5zdHIgaW5zdHJfc2VxW10gPSB7DQo+ICAJCS8qIE1PVjMyIHJYKzIsIGNzLmxhdGVzdF9m
+bHVzaCAqLw0KPiAtCQkoMnVsbCA8PCA1NikgfCAodmFsX3JlZyA8PCA0OCkgfCBqb2ItPmNhbGxf
+aW5mby5sYXRlc3RfZmx1c2gsDQo+ICsJCUpPQl9JTlNUUihQQU5USE9SX0RFVklDRV9QUk9GSUxJ
+TkdfRElTQUJMRUQsDQo+ICsJCQkgICgydWxsIDw8IDU2KSB8IChwYXJhbXMtPnZhbF9yZWcgPDwg
+NDgpIHwgcGFyYW1zLT5sYXN0X2ZsdXNoKSwNCj4gIA0KPiAgCQkvKiBGTFVTSF9DQUNIRTIuY2xl
+YW5faW52X2FsbC5ub193YWl0LnNpZ25hbCgwKSByWCsyICovDQo+IC0JCSgzNnVsbCA8PCA1Nikg
+fCAoMHVsbCA8PCA0OCkgfCAodmFsX3JlZyA8PCA0MCkgfCAoMCA8PCAxNikgfCAweDIzMywNCj4g
+KwkJSk9CX0lOU1RSKFBBTlRIT1JfREVWSUNFX1BST0ZJTElOR19ESVNBQkxFRCwNCj4gKwkJCSAg
+KDM2dWxsIDw8IDU2KSB8ICgwdWxsIDw8IDQ4KSB8IChwYXJhbXMtPnZhbF9yZWcgPDwgNDApIHwg
+KDAgPDwgMTYpIHwgMHgyMzMpLA0KPiArDQo+ICsJCS8qIE1PVjQ4IHJYOnJYKzEsIGN5Y2xlc19v
+ZmZzZXQgKi8NCj4gKwkJSk9CX0lOU1RSKFBBTlRIT1JfREVWSUNFX1BST0ZJTElOR19DWUNMRVMs
+DQo+ICsJCQkgICgxdWxsIDw8IDU2KSB8IChwYXJhbXMtPmN5Y2xlX3JlZyA8PCA0OCkgfA0KPiAr
+CQkJICAocGFyYW1zLT50aW1lc19hZGRyICsNCj4gKwkJCSAgIG9mZnNldG9mKHN0cnVjdCBwYW50
+aG9yX2pvYl9wcm9maWxpbmdfZGF0YSwgY3ljbGVzLmJlZm9yZSkpKSwNCj4gKwkJLyogU1RPUkVf
+U1RBVEUgY3ljbGVzICovDQo+ICsJCUpPQl9JTlNUUihQQU5USE9SX0RFVklDRV9QUk9GSUxJTkdf
+Q1lDTEVTLA0KPiArCQkJICAoNDB1bGwgPDwgNTYpIHwgKHBhcmFtcy0+Y3ljbGVfcmVnIDw8IDQw
+KSB8ICgxbGwgPDwgMzIpKSwNCj4gKwkJLyogTU9WNDggclg6clgrMSwgdGltZV9vZmZzZXQgKi8N
+Cj4gKwkJSk9CX0lOU1RSKFBBTlRIT1JfREVWSUNFX1BST0ZJTElOR19USU1FU1RBTVAsDQo+ICsJ
+CQkgICgxdWxsIDw8IDU2KSB8IChwYXJhbXMtPnRpbWVfcmVnIDw8IDQ4KSB8DQo+ICsJCQkgIChw
+YXJhbXMtPnRpbWVzX2FkZHIgKw0KPiArCQkJICAgb2Zmc2V0b2Yoc3RydWN0IHBhbnRob3Jfam9i
+X3Byb2ZpbGluZ19kYXRhLCB0aW1lLmJlZm9yZSkpKSwNCj4gKwkJLyogU1RPUkVfU1RBVEUgdGlt
+ZXIgKi8NCj4gKwkJSk9CX0lOU1RSKFBBTlRIT1JfREVWSUNFX1BST0ZJTElOR19USU1FU1RBTVAs
+DQo+ICsJCQkgICg0MHVsbCA8PCA1NikgfCAocGFyYW1zLT50aW1lX3JlZyA8PCA0MCkgfCAoMGxs
+IDw8IDMyKSksDQo+ICANCj4gIAkJLyogTU9WNDggclg6clgrMSwgY3Muc3RhcnQgKi8NCj4gLQkJ
+KDF1bGwgPDwgNTYpIHwgKGFkZHJfcmVnIDw8IDQ4KSB8IGpvYi0+Y2FsbF9pbmZvLnN0YXJ0LA0K
+PiAtDQo+ICsJCUpPQl9JTlNUUihQQU5USE9SX0RFVklDRV9QUk9GSUxJTkdfRElTQUJMRUQsDQo+
+ICsJCQkgICgxdWxsIDw8IDU2KSB8IChwYXJhbXMtPmFkZHJfcmVnIDw8IDQ4KSB8IHBhcmFtcy0+
+Y3Nfc3RhcnQpLA0KPiAgCQkvKiBNT1YzMiByWCsyLCBjcy5zaXplICovDQo+IC0JCSgydWxsIDw8
+IDU2KSB8ICh2YWxfcmVnIDw8IDQ4KSB8IGpvYi0+Y2FsbF9pbmZvLnNpemUsDQo+IC0NCj4gKwkJ
+Sk9CX0lOU1RSKFBBTlRIT1JfREVWSUNFX1BST0ZJTElOR19ESVNBQkxFRCwNCj4gKwkJCSAgKDJ1
+bGwgPDwgNTYpIHwgKHBhcmFtcy0+dmFsX3JlZyA8PCA0OCkgfCBwYXJhbXMtPmNzX3NpemUpLA0K
+PiAgCQkvKiBXQUlUKDApID0+IHdhaXRzIGZvciBGTFVTSF9DQUNIRTIgaW5zdHJ1Y3Rpb24gKi8N
+Cj4gLQkJKDN1bGwgPDwgNTYpIHwgKDEgPDwgMTYpLA0KPiAtDQo+ICsJCUpPQl9JTlNUUihQQU5U
+SE9SX0RFVklDRV9QUk9GSUxJTkdfRElTQUJMRUQsICgzdWxsIDw8IDU2KSB8ICgxIDw8IDE2KSks
+DQo+ICAJCS8qIENBTEwgclg6clgrMSwgclgrMiAqLw0KPiAtCQkoMzJ1bGwgPDwgNTYpIHwgKGFk
+ZHJfcmVnIDw8IDQwKSB8ICh2YWxfcmVnIDw8IDMyKSwNCj4gKwkJSk9CX0lOU1RSKFBBTlRIT1Jf
+REVWSUNFX1BST0ZJTElOR19ESVNBQkxFRCwNCj4gKwkJCSAgKDMydWxsIDw8IDU2KSB8IChwYXJh
+bXMtPmFkZHJfcmVnIDw8IDQwKSB8IChwYXJhbXMtPnZhbF9yZWcgPDwgMzIpKSwNCj4gKw0KPiAr
+CQkvKiBNT1Y0OCByWDpyWCsxLCBjeWNsZXNfb2Zmc2V0ICovDQo+ICsJCUpPQl9JTlNUUihQQU5U
+SE9SX0RFVklDRV9QUk9GSUxJTkdfQ1lDTEVTLA0KPiArCQkJICAoMXVsbCA8PCA1NikgfCAocGFy
+YW1zLT5jeWNsZV9yZWcgPDwgNDgpIHwNCj4gKwkJCSAgKHBhcmFtcy0+dGltZXNfYWRkciArDQo+
+ICsJCQkgICBvZmZzZXRvZihzdHJ1Y3QgcGFudGhvcl9qb2JfcHJvZmlsaW5nX2RhdGEsIGN5Y2xl
+cy5hZnRlcikpKSwNCj4gKwkJLyogU1RPUkVfU1RBVEUgY3ljbGVzICovDQo+ICsJCUpPQl9JTlNU
+UihQQU5USE9SX0RFVklDRV9QUk9GSUxJTkdfQ1lDTEVTLA0KPiArCQkJICAoNDB1bGwgPDwgNTYp
+IHwgKHBhcmFtcy0+Y3ljbGVfcmVnIDw8IDQwKSB8ICgxbGwgPDwgMzIpKSwNCj4gKw0KPiArCQkv
+KiBNT1Y0OCByWDpyWCsxLCB0aW1lX29mZnNldCAqLw0KPiArCQlKT0JfSU5TVFIoUEFOVEhPUl9E
+RVZJQ0VfUFJPRklMSU5HX1RJTUVTVEFNUCwNCj4gKwkJCSAgKDF1bGwgPDwgNTYpIHwgKHBhcmFt
+cy0+dGltZV9yZWcgPDwgNDgpIHwNCj4gKwkJCSAgKHBhcmFtcy0+dGltZXNfYWRkciArDQo+ICsJ
+CQkgICBvZmZzZXRvZihzdHJ1Y3QgcGFudGhvcl9qb2JfcHJvZmlsaW5nX2RhdGEsIHRpbWUuYWZ0
+ZXIpKSksDQo+ICsJCS8qIFNUT1JFX1NUQVRFIHRpbWVyICovDQo+ICsJCUpPQl9JTlNUUihQQU5U
+SE9SX0RFVklDRV9QUk9GSUxJTkdfVElNRVNUQU1QLA0KPiArCQkJICAoNDB1bGwgPDwgNTYpIHwg
+KHBhcmFtcy0+dGltZV9yZWcgPDwgNDApIHwgKDBsbCA8PCAzMikpLA0KPiAgDQo+ICAJCS8qIE1P
+VjQ4IHJYOnJYKzEsIHN5bmNfYWRkciAqLw0KPiAtCQkoMXVsbCA8PCA1NikgfCAoYWRkcl9yZWcg
+PDwgNDgpIHwgc3luY19hZGRyLA0KPiAtDQo+ICsJCUpPQl9JTlNUUihQQU5USE9SX0RFVklDRV9Q
+Uk9GSUxJTkdfRElTQUJMRUQsDQo+ICsJCQkgICgxdWxsIDw8IDU2KSB8IChwYXJhbXMtPmFkZHJf
+cmVnIDw8IDQ4KSB8IHBhcmFtcy0+c3luY19hZGRyKSwNCj4gIAkJLyogTU9WNDggclgrMiwgIzEg
+Ki8NCj4gLQkJKDF1bGwgPDwgNTYpIHwgKHZhbF9yZWcgPDwgNDgpIHwgMSwNCj4gLQ0KPiArCQlK
+T0JfSU5TVFIoUEFOVEhPUl9ERVZJQ0VfUFJPRklMSU5HX0RJU0FCTEVELA0KPiArCQkJICAoMXVs
+bCA8PCA1NikgfCAocGFyYW1zLT52YWxfcmVnIDw8IDQ4KSB8IDEpLA0KPiAgCQkvKiBXQUlUKGFs
+bCkgKi8NCj4gLQkJKDN1bGwgPDwgNTYpIHwgKHdhaXRhbGxfbWFzayA8PCAxNiksDQo+IC0NCj4g
+KwkJSk9CX0lOU1RSKFBBTlRIT1JfREVWSUNFX1BST0ZJTElOR19ESVNBQkxFRCwNCj4gKwkJCSAg
+KDN1bGwgPDwgNTYpIHwgKHBhcmFtcy0+d2FpdGFsbF9tYXNrIDw8IDE2KSksDQo+ICAJCS8qIFNZ
+TkNfQURENjQuc3lzdGVtX3Njb3BlLnByb3BhZ2VfZXJyLm5vd2FpdCByWDpyWCsxLCByWCsyKi8N
+Cj4gLQkJKDUxdWxsIDw8IDU2KSB8ICgwdWxsIDw8IDQ4KSB8IChhZGRyX3JlZyA8PCA0MCkgfCAo
+dmFsX3JlZyA8PCAzMikgfCAoMCA8PCAxNikgfCAxLA0KPiAtDQo+ICsJCUpPQl9JTlNUUihQQU5U
+SE9SX0RFVklDRV9QUk9GSUxJTkdfRElTQUJMRUQsDQo+ICsJCQkgICg1MXVsbCA8PCA1NikgfCAo
+MHVsbCA8PCA0OCkgfCAocGFyYW1zLT5hZGRyX3JlZyA8PCA0MCkgfA0KPiArCQkJICAocGFyYW1z
+LT52YWxfcmVnIDw8IDMyKSB8ICgwIDw8IDE2KSB8IDEpLA0KPiAgCQkvKiBFUlJPUl9CQVJSSUVS
+LCBzbyB3ZSBjYW4gcmVjb3ZlciBmcm9tIGZhdWx0cyBhdCBqb2INCj4gIAkJICogYm91bmRhcmll
+cy4NCj4gIAkJICovDQo+IC0JCSg0N3VsbCA8PCA1NiksDQo+ICsJCUpPQl9JTlNUUihQQU5USE9S
+X0RFVklDRV9QUk9GSUxJTkdfRElTQUJMRUQsICg0N3VsbCA8PCA1NikpLA0KPiArCX07DQo+ICsJ
+dTMyIHBhZDsNCj4gKw0KPiArCS8qIE5FRUQgdG8gYmUgY2FjaGVsaW5lIGFsaWduZWQgdG8gcGxl
+YXNlIHRoZSBwcmVmZXRjaGVyLiAqLw0KPiArCXN0YXRpY19hc3NlcnQoc2l6ZW9mKGluc3Rycy0+
+YnVmZmVyKSAlIDY0ID09IDAsDQo+ICsJCSAgICAgICJwYW50aG9yX2pvYl9yaW5nYnVmX2luc3Ry
+czo6YnVmZmVyIGlzIG5vdCBhbGlnbmVkIG9uIGEgY2FjaGVsaW5lIik7DQo+ICsNCj4gKwkvKiBN
+YWtlIHN1cmUgd2UgaGF2ZSBlbm91Z2ggc3RvcmFnZSB0byBzdG9yZSB0aGUgd2hvbGUgc2VxdWVu
+Y2UuICovDQo+ICsJc3RhdGljX2Fzc2VydChBTElHTihBUlJBWV9TSVpFKGluc3RyX3NlcSksIE5V
+TV9JTlNUUlNfUEVSX0NBQ0hFX0xJTkUpIDw9DQo+ICsJCSAgICAgIEFSUkFZX1NJWkUoaW5zdHJz
+LT5idWZmZXIpLA0KPiArCQkgICAgICAiaW5zdHJfc2VxIHZzIHBhbnRob3Jfam9iX3JpbmdidWZf
+aW5zdHJzOjpidWZmZXIgc2l6ZSBtaXNtYXRjaCIpOw0KPiArDQo+ICsJZm9yICh1MzIgaSA9IDA7
+IGkgPCBBUlJBWV9TSVpFKGluc3RyX3NlcSk7IGkrKykgew0KPiArCQkvKiBJZiB0aGUgcHJvZmls
+ZSBtYXNrIG9mIHRoaXMgaW5zdHJ1Y3Rpb24gaXMgbm90IGVuYWJsZWQsIHNraXAgaXQuICovDQo+
+ICsJCWlmIChpbnN0cl9zZXFbaV0ucHJvZmlsZV9tYXNrICYmDQo+ICsJCSAgICAhKGluc3RyX3Nl
+cVtpXS5wcm9maWxlX21hc2sgJiBwYXJhbXMtPnByb2ZpbGVfbWFzaykpDQo+ICsJCQljb250aW51
+ZTsNCj4gKw0KPiArCQlpbnN0cnMtPmJ1ZmZlcltpbnN0cnMtPmNvdW50KytdID0gaW5zdHJfc2Vx
+W2ldLmluc3RyOw0KPiArCX0NCj4gKw0KPiArCXBhZCA9IEFMSUdOKGluc3Rycy0+Y291bnQsIE5V
+TV9JTlNUUlNfUEVSX0NBQ0hFX0xJTkUpOw0KPiArCW1lbXNldCgmaW5zdHJzLT5idWZmZXJbaW5z
+dHJzLT5jb3VudF0sIDAsDQo+ICsJICAgICAgIChwYWQgLSBpbnN0cnMtPmNvdW50KSAqIHNpemVv
+ZihpbnN0cnMtPmJ1ZmZlclswXSkpOw0KPiArCWluc3Rycy0+Y291bnQgPSBwYWQ7DQo+ICt9DQo+
+ICsNCj4gK3N0YXRpYyB1MzIgY2FsY19qb2JfY3JlZGl0cyh1MzIgcHJvZmlsZV9tYXNrKQ0KPiAr
+ew0KPiArCXN0cnVjdCBwYW50aG9yX2pvYl9yaW5nYnVmX2luc3RycyBpbnN0cnM7DQo+ICsJc3Ry
+dWN0IHBhbnRob3Jfam9iX2NzX3BhcmFtcyBwYXJhbXMgPSB7DQo+ICsJCS5wcm9maWxlX21hc2sg
+PSBwcm9maWxlX21hc2ssDQo+ICAJfTsNCj4gIA0KPiAtCS8qIE5lZWQgdG8gYmUgY2FjaGVsaW5l
+IGFsaWduZWQgdG8gcGxlYXNlIHRoZSBwcmVmZXRjaGVyLiAqLw0KPiAtCXN0YXRpY19hc3NlcnQo
+c2l6ZW9mKGNhbGxfaW5zdHJzKSAlIDY0ID09IDAsDQo+IC0JCSAgICAgICJjYWxsX2luc3RycyBp
+cyBub3QgYWxpZ25lZCBvbiBhIGNhY2hlbGluZSIpOw0KPiArCXByZXBhcmVfam9iX2luc3Rycygm
+cGFyYW1zLCAmaW5zdHJzKTsNCj4gKwlyZXR1cm4gaW5zdHJzLmNvdW50Ow0KPiArfQ0KPiArDQo+
+ICtzdGF0aWMgc3RydWN0IGRtYV9mZW5jZSAqDQo+ICtxdWV1ZV9ydW5fam9iKHN0cnVjdCBkcm1f
+c2NoZWRfam9iICpzY2hlZF9qb2IpDQo+ICt7DQo+ICsJc3RydWN0IHBhbnRob3Jfam9iICpqb2Ig
+PSBjb250YWluZXJfb2Yoc2NoZWRfam9iLCBzdHJ1Y3QgcGFudGhvcl9qb2IsIGJhc2UpOw0KPiAr
+CXN0cnVjdCBwYW50aG9yX2dyb3VwICpncm91cCA9IGpvYi0+Z3JvdXA7DQo+ICsJc3RydWN0IHBh
+bnRob3JfcXVldWUgKnF1ZXVlID0gZ3JvdXAtPnF1ZXVlc1tqb2ItPnF1ZXVlX2lkeF07DQo+ICsJ
+c3RydWN0IHBhbnRob3JfZGV2aWNlICpwdGRldiA9IGdyb3VwLT5wdGRldjsNCj4gKwlzdHJ1Y3Qg
+cGFudGhvcl9zY2hlZHVsZXIgKnNjaGVkID0gcHRkZXYtPnNjaGVkdWxlcjsNCj4gKwlzdHJ1Y3Qg
+cGFudGhvcl9qb2JfcmluZ2J1Zl9pbnN0cnMgaW5zdHJzOw0KPiArCXN0cnVjdCBwYW50aG9yX2pv
+Yl9jc19wYXJhbXMgY3NfcGFyYW1zOw0KPiArCXN0cnVjdCBkbWFfZmVuY2UgKmRvbmVfZmVuY2U7
+DQo+ICsJaW50IHJldDsNCj4gIA0KPiAgCS8qIFN0cmVhbSBzaXplIGlzIHplcm8sIG5vdGhpbmcg
+dG8gZG8gZXhjZXB0IG1ha2luZyBzdXJlIGFsbCBwcmV2aW91c2x5DQo+ICAJICogc3VibWl0dGVk
+IGpvYnMgYXJlIGRvbmUgYmVmb3JlIHdlIHNpZ25hbCB0aGUNCj4gQEAgLTI5MDAsMTcgKzMwNzgs
+MjMgQEAgcXVldWVfcnVuX2pvYihzdHJ1Y3QgZHJtX3NjaGVkX2pvYiAqc2NoZWRfam9iKQ0KPiAg
+CQkgICAgICAgcXVldWUtPmZlbmNlX2N0eC5pZCwNCj4gIAkJICAgICAgIGF0b21pYzY0X2luY19y
+ZXR1cm4oJnF1ZXVlLT5mZW5jZV9jdHguc2Vxbm8pKTsNCj4gIA0KPiAtCW1lbWNweShxdWV1ZS0+
+cmluZ2J1Zi0+a21hcCArIHJpbmdidWZfaW5zZXJ0LA0KPiAtCSAgICAgICBjYWxsX2luc3Rycywg
+c2l6ZW9mKGNhbGxfaW5zdHJzKSk7DQo+ICsJam9iLT5wcm9maWxpbmdfc2xvdCA9IHF1ZXVlLT5w
+cm9maWxpbmdfaW5mby5wcm9maWxpbmdfc2Vxbm8rKzsNCj4gKwlpZiAocXVldWUtPnByb2ZpbGlu
+Z19pbmZvLnByb2ZpbGluZ19zZXFubyA9PSBxdWV1ZS0+cHJvZmlsaW5nX2luZm8uc2xvdF9jb3Vu
+dCkNCj4gKwkJcXVldWUtPnByb2ZpbGluZ19pbmZvLnByb2ZpbGluZ19zZXFubyA9IDA7DQo+ICsN
+Cj4gKwlqb2ItPnJpbmdidWYuc3RhcnQgPSBxdWV1ZS0+aWZhY2UuaW5wdXQtPmluc2VydDsNCj4g
+Kw0KPiArCWdldF9qb2JfY3NfcGFyYW1zKGpvYiwgJmNzX3BhcmFtcyk7DQo+ICsJcHJlcGFyZV9q
+b2JfaW5zdHJzKCZjc19wYXJhbXMsICZpbnN0cnMpOw0KPiArCWNvcHlfaW5zdHJzX3RvX3Jpbmdi
+dWYocXVldWUsIGpvYiwgJmluc3Rycyk7DQo+ICsNCj4gKwlqb2ItPnJpbmdidWYuZW5kID0gam9i
+LT5yaW5nYnVmLnN0YXJ0ICsgKGluc3Rycy5jb3VudCAqIHNpemVvZih1NjQpKTsNCj4gIA0KPiAg
+CXBhbnRob3Jfam9iX2dldCgmam9iLT5iYXNlKTsNCj4gIAlzcGluX2xvY2soJnF1ZXVlLT5mZW5j
+ZV9jdHgubG9jayk7DQo+ICAJbGlzdF9hZGRfdGFpbCgmam9iLT5ub2RlLCAmcXVldWUtPmZlbmNl
+X2N0eC5pbl9mbGlnaHRfam9icyk7DQo+ICAJc3Bpbl91bmxvY2soJnF1ZXVlLT5mZW5jZV9jdHgu
+bG9jayk7DQo+ICANCj4gLQlqb2ItPnJpbmdidWYuc3RhcnQgPSBxdWV1ZS0+aWZhY2UuaW5wdXQt
+Pmluc2VydDsNCj4gLQlqb2ItPnJpbmdidWYuZW5kID0gam9iLT5yaW5nYnVmLnN0YXJ0ICsgc2l6
+ZW9mKGNhbGxfaW5zdHJzKTsNCj4gLQ0KPiAgCS8qIE1ha2Ugc3VyZSB0aGUgcmluZyBidWZmZXIg
+aXMgdXBkYXRlZCBiZWZvcmUgdGhlIElOU0VSVA0KPiAgCSAqIHJlZ2lzdGVyLg0KPiAgCSAqLw0K
+PiBAQCAtMzAwMyw2ICszMTg3LDI0IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgZHJtX3NjaGVkX2Jh
+Y2tlbmRfb3BzIHBhbnRob3JfcXVldWVfc2NoZWRfb3BzID0gew0KPiAgCS5mcmVlX2pvYiA9IHF1
+ZXVlX2ZyZWVfam9iLA0KPiAgfTsNCj4gIA0KPiArc3RhdGljIHUzMiBjYWxjX3Byb2ZpbGluZ19y
+aW5nYnVmX251bV9zbG90cyhzdHJ1Y3QgcGFudGhvcl9kZXZpY2UgKnB0ZGV2LA0KPiArCQkJCSAg
+ICAgICB1MzIgY3NfcmluZ2J1Zl9zaXplKQ0KPiArew0KPiArCXUzMiBtaW5fcHJvZmlsZWRfam9i
+X2luc3RycyA9IFUzMl9NQVg7DQo+ICsJdTMyIGxhc3RfZmxhZyA9IGZscyhQQU5USE9SX0RFVklD
+RV9QUk9GSUxJTkdfQUxMKTsNCj4gKw0KPiArCWZvciAodTMyIGkgPSAwOyBpIDwgbGFzdF9mbGFn
+OyBpKyspIHsNCj4gKwkJaWYgKEJJVChpKSAmIFBBTlRIT1JfREVWSUNFX1BST0ZJTElOR19BTEwp
+DQo+ICsJCQltaW5fcHJvZmlsZWRfam9iX2luc3RycyA9DQo+ICsJCQkJbWluKG1pbl9wcm9maWxl
+ZF9qb2JfaW5zdHJzLCBjYWxjX2pvYl9jcmVkaXRzKEJJVChpKSkpOw0KPiArCX0NCj4gKw0KPiAr
+CWRybV9XQVJOX09OKCZwdGRldi0+YmFzZSwNCj4gKwkJICAgICFJU19BTElHTkVEKG1pbl9wcm9m
+aWxlZF9qb2JfaW5zdHJzLCBOVU1fSU5TVFJTX1BFUl9DQUNIRV9MSU5FKSk7DQo+ICsNCj4gKwly
+ZXR1cm4gRElWX1JPVU5EX1VQKGNzX3JpbmdidWZfc2l6ZSwgbWluX3Byb2ZpbGVkX2pvYl9pbnN0
+cnMgKiBzaXplb2YodTY0KSk7DQo+ICt9DQo+ICsNCj4gIHN0YXRpYyBzdHJ1Y3QgcGFudGhvcl9x
+dWV1ZSAqDQo+ICBncm91cF9jcmVhdGVfcXVldWUoc3RydWN0IHBhbnRob3JfZ3JvdXAgKmdyb3Vw
+LA0KPiAgCQkgICBjb25zdCBzdHJ1Y3QgZHJtX3BhbnRob3JfcXVldWVfY3JlYXRlICphcmdzKQ0K
+PiBAQCAtMzA1Niw5ICszMjU4LDM4IEBAIGdyb3VwX2NyZWF0ZV9xdWV1ZShzdHJ1Y3QgcGFudGhv
+cl9ncm91cCAqZ3JvdXAsDQo+ICAJCWdvdG8gZXJyX2ZyZWVfcXVldWU7DQo+ICAJfQ0KPiAgDQo+
+ICsJcXVldWUtPnByb2ZpbGluZ19pbmZvLnNsb3RfY291bnQgPQ0KPiArCQljYWxjX3Byb2ZpbGlu
+Z19yaW5nYnVmX251bV9zbG90cyhncm91cC0+cHRkZXYsIGFyZ3MtPnJpbmdidWZfc2l6ZSk7DQo+
+ICsNCj4gKwlxdWV1ZS0+cHJvZmlsaW5nX2luZm8uc2xvdHMgPQ0KPiArCQlwYW50aG9yX2tlcm5l
+bF9ib19jcmVhdGUoZ3JvdXAtPnB0ZGV2LCBncm91cC0+dm0sDQo+ICsJCQkJCSBxdWV1ZS0+cHJv
+ZmlsaW5nX2luZm8uc2xvdF9jb3VudCAqDQo+ICsJCQkJCSBzaXplb2Yoc3RydWN0IHBhbnRob3Jf
+am9iX3Byb2ZpbGluZ19kYXRhKSwNCj4gKwkJCQkJIERSTV9QQU5USE9SX0JPX05PX01NQVAsDQo+
+ICsJCQkJCSBEUk1fUEFOVEhPUl9WTV9CSU5EX09QX01BUF9OT0VYRUMgfA0KPiArCQkJCQkgRFJN
+X1BBTlRIT1JfVk1fQklORF9PUF9NQVBfVU5DQUNIRUQsDQo+ICsJCQkJCSBQQU5USE9SX1ZNX0tF
+Uk5FTF9BVVRPX1ZBKTsNCj4gKw0KPiArCWlmIChJU19FUlIocXVldWUtPnByb2ZpbGluZ19pbmZv
+LnNsb3RzKSkgew0KPiArCQlyZXQgPSBQVFJfRVJSKHF1ZXVlLT5wcm9maWxpbmdfaW5mby5zbG90
+cyk7DQo+ICsJCWdvdG8gZXJyX2ZyZWVfcXVldWU7DQo+ICsJfQ0KPiArDQo+ICsJcmV0ID0gcGFu
+dGhvcl9rZXJuZWxfYm9fdm1hcChxdWV1ZS0+cHJvZmlsaW5nX2luZm8uc2xvdHMpOw0KPiArCWlm
+IChyZXQpDQo+ICsJCWdvdG8gZXJyX2ZyZWVfcXVldWU7DQo+ICsNCj4gKwltZW1zZXQocXVldWUt
+PnByb2ZpbGluZ19pbmZvLnNsb3RzLT5rbWFwLCAwLA0KPiArCSAgICAgICBxdWV1ZS0+cHJvZmls
+aW5nX2luZm8uc2xvdF9jb3VudCAqIHNpemVvZihzdHJ1Y3QgcGFudGhvcl9qb2JfcHJvZmlsaW5n
+X2RhdGEpKTsNCj4gKw0KPiArCS8qDQo+ICsJICogQ3JlZGl0IGxpbWl0IGFyZ3VtZW50IHRlbGxz
+IHVzIHRoZSB0b3RhbCBudW1iZXIgb2YgaW5zdHJ1Y3Rpb25zDQo+ICsJICogYWNyb3NzIGFsbCBD
+UyBzbG90cyBpbiB0aGUgcmluZ2J1ZmZlciwgd2l0aCBzb21lIGpvYnMgcmVxdWlyaW5nDQo+ICsJ
+ICogdHdpY2UgYXMgbWFueSBhcyBvdGhlcnMsIGRlcGVuZGluZyBvbiB0aGVpciBwcm9maWxpbmcg
+c3RhdHVzLg0KPiArCSAqLw0KPiAgCXJldCA9IGRybV9zY2hlZF9pbml0KCZxdWV1ZS0+c2NoZWR1
+bGVyLCAmcGFudGhvcl9xdWV1ZV9zY2hlZF9vcHMsDQo+ICAJCQkgICAgIGdyb3VwLT5wdGRldi0+
+c2NoZWR1bGVyLT53cSwgMSwNCj4gLQkJCSAgICAgYXJncy0+cmluZ2J1Zl9zaXplIC8gKE5VTV9J
+TlNUUlNfUEVSX1NMT1QgKiBzaXplb2YodTY0KSksDQo+ICsJCQkgICAgIGFyZ3MtPnJpbmdidWZf
+c2l6ZSAvIHNpemVvZih1NjQpLA0KPiAgCQkJICAgICAwLCBtc2Vjc190b19qaWZmaWVzKEpPQl9U
+SU1FT1VUX01TKSwNCj4gIAkJCSAgICAgZ3JvdXAtPnB0ZGV2LT5yZXNldC53cSwNCj4gIAkJCSAg
+ICAgTlVMTCwgInBhbnRob3ItcXVldWUiLCBncm91cC0+cHRkZXYtPmJhc2UuZGV2KTsNCj4gQEAg
+LTMzNTQsNiArMzU4NSw3IEBAIHBhbnRob3Jfam9iX2NyZWF0ZShzdHJ1Y3QgcGFudGhvcl9maWxl
+ICpwZmlsZSwNCj4gIHsNCj4gIAlzdHJ1Y3QgcGFudGhvcl9ncm91cF9wb29sICpncG9vbCA9IHBm
+aWxlLT5ncm91cHM7DQo+ICAJc3RydWN0IHBhbnRob3Jfam9iICpqb2I7DQo+ICsJdTMyIGNyZWRp
+dHM7DQo+ICAJaW50IHJldDsNCj4gIA0KPiAgCWlmIChxc3VibWl0LT5wYWQpDQo+IEBAIC0zNDA3
+LDkgKzM2MzksMTYgQEAgcGFudGhvcl9qb2JfY3JlYXRlKHN0cnVjdCBwYW50aG9yX2ZpbGUgKnBm
+aWxlLA0KPiAgCQl9DQo+ICAJfQ0KPiAgDQo+ICsJam9iLT5wcm9maWxlX21hc2sgPSBwZmlsZS0+
+cHRkZXYtPnByb2ZpbGVfbWFzazsNCj4gKwljcmVkaXRzID0gY2FsY19qb2JfY3JlZGl0cyhqb2It
+PnByb2ZpbGVfbWFzayk7DQo+ICsJaWYgKGNyZWRpdHMgPT0gMCkgew0KPiArCQlyZXQgPSAtRUlO
+VkFMOw0KPiArCQlnb3RvIGVycl9wdXRfam9iOw0KPiArCX0NCj4gKw0KPiAgCXJldCA9IGRybV9z
+Y2hlZF9qb2JfaW5pdCgmam9iLT5iYXNlLA0KPiAgCQkJCSAmam9iLT5ncm91cC0+cXVldWVzW2pv
+Yi0+cXVldWVfaWR4XS0+ZW50aXR5LA0KPiAtCQkJCSAxLCBqb2ItPmdyb3VwKTsNCj4gKwkJCQkg
+Y3JlZGl0cywgam9iLT5ncm91cCk7DQo+ICAJaWYgKHJldCkNCj4gIAkJZ290byBlcnJfcHV0X2pv
+YjsNCj4gIA0KPiAtLSANCj4gMi40Ni4wDQo+IA0KDQpSZXZpZXdlZC1ieTogTGl2aXUgRHVkYXUg
+PGxpdml1LmR1ZGF1QGFybS5jb20+DQoNCkJlc3QgcmVnYXJkcywNCkxpdml1DQoNCg0KLS0gDQo9
+PT09PT09PT09PT09PT09PT09PQ0KfCBJIHdvdWxkIGxpa2UgdG8gfA0KfCBmaXggdGhlIHdvcmxk
+LCAgfA0KfCBidXQgdGhleSdyZSBub3QgfA0KfCBnaXZpbmcgbWUgdGhlICAgfA0KIFwgc291cmNl
+IGNvZGUhICAvDQogIC0tLS0tLS0tLS0tLS0tLQ0KICAgIMKvXF8o44OEKV8vwq8NCl9fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1zaWcgbWFp
+bGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1YnNjcmli
+ZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJvLm9yZwo=
