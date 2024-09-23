@@ -2,197 +2,216 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7681F97D1F3
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 Sep 2024 09:46:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B73B97E608
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Sep 2024 08:33:51 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 245D94121C
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 20 Sep 2024 07:46:40 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.15])
-	by lists.linaro.org (Postfix) with ESMTPS id DF8D040F39
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 20 Sep 2024 07:46:36 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 0837F448B6
+	for <lists+linaro-mm-sig@lfdr.de>; Mon, 23 Sep 2024 06:33:50 +0000 (UTC)
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
+	by lists.linaro.org (Postfix) with ESMTPS id 77A7043C0E
+	for <linaro-mm-sig@lists.linaro.org>; Mon, 23 Sep 2024 06:33:33 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b=gNjDDKay;
-	spf=none (lists.linaro.org: domain of thomas.hellstrom@linux.intel.com has no SPF policy when checking 192.198.163.15) smtp.mailfrom=thomas.hellstrom@linux.intel.com;
-	dmarc=pass (policy=none) header.from=intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1726818397; x=1758354397;
-  h=message-id:subject:from:to:cc:date:in-reply-to:
-   references:content-transfer-encoding:mime-version;
-  bh=sh9MfekUbazKEajbVSy1ZCdAZiqR3S/QEcTbLqenAdA=;
-  b=gNjDDKay384YvSl3izCn65MRUwBb/C6UW7xTmdb7rQrzJqLppmjv2xVj
-   MUiqc7P+rBrhrp42FfNNmaFpOnUZ9CO8/cBYdF/LMtnZ5drSeA1aWBhge
-   eiy97YwmqSyvW5P4/zgyOcaSG3MNJANpFnG+RrFwf4Wcc3E40zXrl2wuG
-   XH1czyOjp/9HMHr3UJGbbYytAxULhuyJ17KfQqKjIIFXtcCxbAOxYLEqr
-   rRByjyWvkEt3Z/s8MO/hy/qHbLTNFHTffTq3LGT1zd534zx0uqijqpBe/
-   yaGAYne+Tx4N799m+l8IiHZyv3BREleOIbnNcrcPjEpkA/Q5GxNt9iAXq
-   g==;
-X-CSE-ConnectionGUID: dgGGvgGMRTaHdEcptwxC7Q==
-X-CSE-MsgGUID: patQfvXgScuXU2nEKk/rGg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11200"; a="25961483"
-X-IronPort-AV: E=Sophos;i="6.10,243,1719903600";
-   d="scan'208";a="25961483"
-Received: from fmviesa010.fm.intel.com ([10.60.135.150])
-  by fmvoesa109.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Sep 2024 00:46:36 -0700
-X-CSE-ConnectionGUID: 3sUMhZ/vSxuQWSRbBEh1yg==
-X-CSE-MsgGUID: Ge+iiJX/ROKrhVGt+YbvZQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.10,243,1719903600";
-   d="scan'208";a="70453949"
-Received: from oandoniu-mobl3.ger.corp.intel.com (HELO [10.245.245.0]) ([10.245.245.0])
-  by fmviesa010-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Sep 2024 00:46:34 -0700
-Message-ID: <3a31238d9477902b63499a5587e6c79bbfe293a0.camel@linux.intel.com>
-From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
-To: Christian =?ISO-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
-Date: Fri, 20 Sep 2024 09:46:31 +0200
-In-Reply-To: <b6808146-b798-45b6-b2b3-61d97825a85f@amd.com>
-References: <20230428125233.228353-1-thomas.hellstrom@linux.intel.com>
-	 <be9b192a-a125-6774-bb4f-8b9fb517ce0d@linux.intel.com>
-	 <ZrxYdIDdEJXRTFrn@phenom.ffwll.local>
-	 <0d406a89b1b63ebf53c5d0848843c72299c1ff75.camel@linux.intel.com>
-	 <a97c5f63053000b5fcfc14cb56c79c8ff976b4ad.camel@linux.intel.com>
-	 <b6808146-b798-45b6-b2b3-61d97825a85f@amd.com>
-Autocrypt: addr=thomas.hellstrom@linux.intel.com; prefer-encrypt=mutual;
- keydata=mDMEZaWU6xYJKwYBBAHaRw8BAQdAj/We1UBCIrAm9H5t5Z7+elYJowdlhiYE8zUXgxcFz360SFRob21hcyBIZWxsc3Ryw7ZtIChJbnRlbCBMaW51eCBlbWFpbCkgPHRob21hcy5oZWxsc3Ryb21AbGludXguaW50ZWwuY29tPoiTBBMWCgA7FiEEbJFDO8NaBua8diGTuBaTVQrGBr8FAmWllOsCGwMFCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AACgkQuBaTVQrGBr/yQAD/Z1B+Kzy2JTuIy9LsKfC9FJmt1K/4qgaVeZMIKCAxf2UBAJhmZ5jmkDIf6YghfINZlYq6ixyWnOkWMuSLmELwOsgPuDgEZaWU6xIKKwYBBAGXVQEFAQEHQF9v/LNGegctctMWGHvmV/6oKOWWf/vd4MeqoSYTxVBTAwEIB4h4BBgWCgAgFiEEbJFDO8NaBua8diGTuBaTVQrGBr8FAmWllOsCGwwACgkQuBaTVQrGBr/P2QD9Gts6Ee91w3SzOelNjsus/DcCTBb3fRugJoqcfxjKU0gBAKIFVMvVUGbhlEi6EFTZmBZ0QIZEIzOOVfkaIgWelFEH
-Organization: Intel Sweden AB, Registration Number: 556189-6027
-User-Agent: Evolution 3.50.4 (3.50.4-1.fc39) 
+	dkim=pass header.d=linaro.org header.s=google header.b="ON/wJWWG";
+	dmarc=pass (policy=none) header.from=linaro.org;
+	spf=pass (lists.linaro.org: domain of dmitry.baryshkov@linaro.org designates 209.85.167.48 as permitted sender) smtp.mailfrom=dmitry.baryshkov@linaro.org
+Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-5366fd6fdf1so4206177e87.0
+        for <linaro-mm-sig@lists.linaro.org>; Sun, 22 Sep 2024 23:33:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1727073212; x=1727678012; darn=lists.linaro.org;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+        bh=y5jTK+r41Ph8334euEi90MC38DwR8Kznsi20eXBe15E=;
+        b=ON/wJWWGZepaQt/qKLUftU10N8u14Ao2hmpOxq0EZOrSk3shq1MdnFPTAKaqIK97XS
+         NUExHQGG//w4ZkXVuigSj2UoNmxFO/FSd0mlXBLM+lzVE/jexvwbFM4JV8Zo2EGCApDA
+         MF1hlbTkM6KEsuyf5p135qVF821zmCHNWwPm15cXB1uCuap7pJ05rM+r8cgFN0Pw+/x3
+         LkOfzmxhslGk/TrUSrtQRd0q6L3ndcuhSjqQNM8gX5AgEzhpb+4F3F7nS1IuF6cADxC4
+         sESc1v6Jg0wVtnEtTL4EWiEz+eRH8nosAieeqNcs4V0DawfXQO95qta63yYW/sRBZcNC
+         oGIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1727073212; x=1727678012;
+        h=in-reply-to:content-disposition:mime-version:references:message-id
+         :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=y5jTK+r41Ph8334euEi90MC38DwR8Kznsi20eXBe15E=;
+        b=HC0oOqJ0tyyLigpW8DIzbV5Dmry+TpBtUPZUK/f7c0pi0m2BQV+UnxumhW1QgOG4ZN
+         YJvkuNlZ0U8LbVIyQO7rSpq2Yoz0gcTDcKdOBEgjFlEx8CzOQfPH+GHiqTKPl6MOmE9N
+         fD6WG9HjYBPsJXYCLKPABmO5P6iIjxrtNxi7G/yX+Q87RBrVtKee/aTmx8KeDGksld0X
+         VZWE+fsU11AJByVQxD9+aBoPObJVjkB2IFZuGqN2A0HFIC3nrQutaZg4ApwY8OTos+Y9
+         xmPwfDEfG54Vj6GESInH60kW6ONHTXnWvEFZPKd0MSWAqKlUClyIBke80qCJWh2VSjPG
+         jwSA==
+X-Forwarded-Encrypted: i=1; AJvYcCWtcCpMz/jsMpwXO/HwlCy1VuooOE7VheuNZnjeVhDw0ZPgLTEb9EpR9aDEdg5tc0QVZIPhfyl0FYZ18dMV@lists.linaro.org
+X-Gm-Message-State: AOJu0YxyK0p1nt6EEIy6w6lNtCeBzV9/KtNekyiumK/tS7o0MqrmuRtm
+	TfTsytGzDdPy07jKGbLAPTYTqprRkIwzl7Kw9f28PmtU/gnSYXlTEJZhMmJePlrmKQ==
+X-Google-Smtp-Source: AGHT+IF0SSg0hB/gqsdKj0/yr4GTl2yjAfBCnM5NlEWIac3bv4HTXek3j/tUDFkeNkN6x6DTtY/72Q==
+X-Received: by 2002:a05:6512:110c:b0:52e:be1f:bf7f with SMTP id 2adb3069b0e04-536ad1808d1mr4286439e87.27.1727073212004;
+        Sun, 22 Sep 2024 23:33:32 -0700 (PDT)
+Received: from eriador.lumag.spb.ru (2001-14ba-a0c3-3a00--7a1.rev.dnainternet.fi. [2001:14ba:a0c3:3a00::7a1])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-536870b4255sm3165429e87.259.2024.09.22.23.33.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 22 Sep 2024 23:33:31 -0700 (PDT)
+Date: Mon, 23 Sep 2024 09:33:29 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+To: Jens Wiklander <jens.wiklander@linaro.org>
+Message-ID: <dhxvyshwi4qmcmwceokhqey2ww4azjcs6qrpnkgivdj7tv5cke@r36srvvbof6q>
+References: <20240830070351.2855919-1-jens.wiklander@linaro.org>
 MIME-Version: 1.0
-X-Rspamd-Action: no action
-X-Spamd-Bar: ---
+Content-Disposition: inline
+In-Reply-To: <20240830070351.2855919-1-jens.wiklander@linaro.org>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: DF8D040F39
-X-Spamd-Result: default: False [-3.80 / 15.00];
+X-Rspamd-Queue-Id: 77A7043C0E
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.00 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	MID_RHS_NOT_FQDN(0.50)[];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MIME_GOOD(-0.10)[text/plain];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
 	ARC_NA(0.00)[];
-	R_SPF_NA(0.00)[no SPF record];
-	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
-	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	RCVD_TLS_LAST(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	RCPT_COUNT_FIVE(0.00)[6];
-	FROM_EQ_ENVFROM(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	MISSING_XM_UA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[24];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.48:from];
+	TAGGED_RCPT(0.00)[dt];
+	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.trustedfirmware.org,lists.infradead.org,nxp.com,gmail.com,mediatek.com,linaro.org,collabora.com,arm.com,google.com,amd.com,kernel.org];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	TO_DN_SOME(0.00)[];
 	RCVD_COUNT_TWO(0.00)[2];
-	DKIM_TRACE(0.00)[intel.com:+]
-Message-ID-Hash: AMNV3URFQWXKSZLVBYAJTTBSVPYLRILA
-X-Message-ID-Hash: AMNV3URFQWXKSZLVBYAJTTBSVPYLRILA
-X-MailFrom: thomas.hellstrom@linux.intel.com
+	DKIM_TRACE(0.00)[linaro.org:+]
+X-Rspamd-Action: no action
+Message-ID-Hash: FJPUJ3GEBGJVM7DT44OT2T63JU25GNRE
+X-Message-ID-Hash: FJPUJ3GEBGJVM7DT44OT2T63JU25GNRE
+X-MailFrom: dmitry.baryshkov@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: dri-devel@lists.freedesktop.org, Daniel Vetter <daniel@ffwll.ch>, linaro-mm-sig@lists.linaro.org, intel-gfx@lists.freedesktop.org, intel-xe@lists.freedesktop.org
+CC: linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, op-tee@lists.trustedfirmware.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, Olivier Masse <olivier.masse@nxp.com>, Thierry Reding <thierry.reding@gmail.com>, Yong Wu <yong.wu@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Sumit Garg <sumit.garg@linaro.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: RESEND Re: [RFC PATCH] dma-buf/dma-fence: Use a successful read_trylock() annotation for dma_fence_begin_signalling()
+Subject: [Linaro-mm-sig] Re: [RFC PATCH 0/4] Linaro restricted heap
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/AMNV3URFQWXKSZLVBYAJTTBSVPYLRILA/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/FJPUJ3GEBGJVM7DT44OT2T63JU25GNRE/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gV2VkLCAyMDI0LTA5LTE4IGF0IDE1OjE4ICswMjAwLCBDaHJpc3RpYW4gS8O2bmlnIHdyb3Rl
-Og0KPiBTb3JyeSwgc29tZWhvdyBjb21wbGV0ZWx5IG1pc3NlZCB0aGF0LiBGZWVsIGZyZWUgdG8g
-cHVzaCBpdCB0byANCj4gZHJtLW1pc2MtbmV4dC4NCj4gDQo+IENocmlzdGlhbi4NCg0KUHVzaGVk
-LCB0aGFua3MuDQovVGhvbWFzDQoNCg0KPiANCj4gQW0gMTguMDkuMjQgdW0gMTQ6MzQgc2Nocmll
-YiBUaG9tYXMgSGVsbHN0csO2bToNCj4gPiBDaHJpc3RpYW4sDQo+ID4gDQo+ID4gUGluZz8NCj4g
-PiANCj4gPiANCj4gPiBPbiBXZWQsIDIwMjQtMDgtMTQgYXQgMTA6MzcgKzAyMDAsIFRob21hcyBI
-ZWxsc3Ryw7ZtIHdyb3RlOg0KPiA+ID4gQ2hyaXN0aWFuLA0KPiA+ID4gDQo+ID4gPiBBY2sgdG8g
-bWVyZ2UgdGhpcyB0aHJvdWdoIGRybS1taXNjLW5leHQsIG9yIGRvIHlvdSB3YW50IHRvIHBpY2sN
-Cj4gPiA+IGl0IHVwDQo+ID4gPiBmb3IgZG1hLWJ1Zj8NCj4gPiA+IA0KPiA+ID4gVGhhbmtzLA0K
-PiA+ID4gVGhvbWFzDQo+ID4gPiANCj4gPiA+IA0KPiA+ID4gT24gV2VkLCAyMDI0LTA4LTE0IGF0
-IDA5OjEwICswMjAwLCBEYW5pZWwgVmV0dGVyIHdyb3RlOg0KPiA+ID4gPiBPbiBGcmksIE1heSAy
-NiwgMjAyMyBhdCAwMToxMToyOFBNICswMjAwLCBUaG9tYXMgSGVsbHN0csO2bQ0KPiA+ID4gPiB3
-cm90ZToNCj4gPiA+ID4gPiBEYW5pZWwsDQo+ID4gPiA+ID4gDQo+ID4gPiA+ID4gT24gNC8yOC8y
-MyAxNDo1MiwgVGhvbWFzIEhlbGxzdHLDtm0gd3JvdGU6DQo+ID4gPiA+ID4gPiBDb25kc2lkZXIg
-dGhlIGZvbGxvd2luZyBjYWxsIHNlcXVlbmNlOg0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiAv
-KiBVcHBlciBsYXllciAqLw0KPiA+ID4gPiA+ID4gZG1hX2ZlbmNlX2JlZ2luX3NpZ25hbGxpbmco
-KTsNCj4gPiA+ID4gPiA+IGxvY2sodGFpbnRlZF9zaGFyZWRfbG9jayk7DQo+ID4gPiA+ID4gPiAv
-KiBEcml2ZXIgY2FsbGJhY2sgKi8NCj4gPiA+ID4gPiA+IGRtYV9mZW5jZV9iZWdpbl9zaWduYWxs
-aW5nKCk7DQo+ID4gPiA+ID4gPiAuLi4NCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gVGhlIGRy
-aXZlciBtaWdodCBoZXJlIHVzZSBhIHV0aWxpdHkgdGhhdCBpcyBhbm5vdGF0ZWQgYXMNCj4gPiA+
-ID4gPiA+IGludGVuZGVkDQo+ID4gPiA+ID4gPiBmb3IgdGhlDQo+ID4gPiA+ID4gPiBkbWEtZmVu
-Y2Ugc2lnbmFsbGluZyBjcml0aWNhbCBwYXRoLiBOb3cgaWYgdGhlIHVwcGVyIGxheWVyDQo+ID4g
-PiA+ID4gPiBpc24ndA0KPiA+ID4gPiA+ID4gY29ycmVjdGx5DQo+ID4gPiA+ID4gPiBhbm5vdGF0
-ZWQgeWV0IGZvciB3aGF0ZXZlciByZWFzb24sIHJlc3VsdGluZyBpbg0KPiA+ID4gPiA+ID4gDQo+
-ID4gPiA+ID4gPiAvKiBVcHBlciBsYXllciAqLw0KPiA+ID4gPiA+ID4gbG9jayh0YWludGVkX3No
-YXJlZF9sb2NrKTsNCj4gPiA+ID4gPiA+IC8qIERyaXZlciBjYWxsYmFjayAqLw0KPiA+ID4gPiA+
-ID4gZG1hX2ZlbmNlX2JlZ2luX3NpZ25hbGxpbmcoKTsNCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+
-ID4gV2Ugd2lsbCByZWNlaXZlIGEgZmFsc2UgbG9ja2RlcCBsb2NraW5nIG9yZGVyIHZpb2xhdGlv
-bg0KPiA+ID4gPiA+ID4gbm90aWZpY2F0aW9uIGZyb20NCj4gPiA+ID4gPiA+IGRtYV9mZW5jZV9i
-ZWdpbl9zaWduYWxsaW5nKCkuIEhvd2V2ZXIgZW50ZXJpbmcgYSBkbWEtZmVuY2UNCj4gPiA+ID4g
-PiA+IHNpZ25hbGxpbmcNCj4gPiA+ID4gPiA+IGNyaXRpY2FsIHNlY3Rpb24gaXRzZWxmIGRvZXNu
-J3QgYmxvY2sgYW5kIGNvdWxkIG5vdCBjYXVzZSBhDQo+ID4gPiA+ID4gPiBkZWFkbG9jay4NCj4g
-PiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gU28gdXNlIGEgc3VjY2Vzc2Z1bCByZWFkX3RyeWxvY2so
-KSBhbm5vdGF0aW9uIGluc3RlYWQgZm9yDQo+ID4gPiA+ID4gPiBkbWFfZmVuY2VfYmVnaW5fc2ln
-bmFsbGluZygpLiBUaGF0IHdpbGwgbWFrZSBzdXJlIHRoYXQgdGhlDQo+ID4gPiA+ID4gPiBsb2Nr
-aW5nIG9yZGVyDQo+ID4gPiA+ID4gPiBpcyBjb3JyZWN0bHkgcmVnaXN0ZXJlZCBpbiB0aGUgZmly
-c3QgY2FzZSwgYW5kIGRvZXNuJ3QNCj4gPiA+ID4gPiA+IHJlZ2lzdGVyDQo+ID4gPiA+ID4gPiBh
-bnkNCj4gPiA+ID4gPiA+IGxvY2tpbmcgb3JkZXIgaW4gdGhlIHNlY29uZCBjYXNlLg0KPiA+ID4g
-PiA+ID4gDQo+ID4gPiA+ID4gPiBUaGUgYWx0ZXJuYXRpdmUgaXMgb2YgY291cnNlIHRvIG1ha2Ug
-c3VyZSB0aGF0IHRoZSAiVXBwZXINCj4gPiA+ID4gPiA+IGxheWVyIg0KPiA+ID4gPiA+ID4gaXMg
-YWx3YXlzDQo+ID4gPiA+ID4gPiBjb3JyZWN0bHkgYW5ub3RhdGVkLiBCdXQgZXhwZXJpZW5jZSBz
-aG93cyB0aGF0J3Mgbm90IGVhc2lseQ0KPiA+ID4gPiA+ID4gYWNoaWV2YWJsZQ0KPiA+ID4gPiA+
-ID4gaW4gYWxsIGNhc2VzLg0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiBTaWduZWQtb2ZmLWJ5
-OiBUaG9tYXMgSGVsbHN0csO2bQ0KPiA+ID4gPiA+ID4gPHRob21hcy5oZWxsc3Ryb21AbGludXgu
-aW50ZWwuY29tPg0KPiA+ID4gPiA+IFJlc3VycmVjdGluZyB0aGUgZGlzY3Vzc2lvbiBvbiB0aGlz
-IG9uZS4gSSBjYW4ndCBzZWUgYQ0KPiA+ID4gPiA+IHNpdHVhdGlvbg0KPiA+ID4gPiA+IHdoZXJl
-IHdlDQo+ID4gPiA+ID4gd291bGQgbWlzcyAqcmVsZXZhbnQqIGxvY2tpbmcNCj4gPiA+ID4gPiBv
-cmRlciB2aW9sYXRpb24gd2FybmluZ3Mgd2l0aCB0aGlzIHBhdGNoLiBPZmMgaWYgd2UgaGF2ZSBh
-DQo+ID4gPiA+ID4gc2NoZWR1bGVyDQo+ID4gPiA+ID4gYW5ub3RhdGlvbiBwYXRjaCB0aGF0IHdv
-dWxkIHdvcmsgZmluZSBhcyB3ZWxsLCBidXQgdGhlIGxhY2sNCj4gPiA+ID4gPiBvZg0KPiA+ID4g
-PiA+IGFubm90YXRpb24gaW4NCj4gPiA+ID4gPiB0aGUgc2NoZWR1bGVyIGNhbGxiYWNrcyBpcyBy
-ZWFsbHkgc3RhcnRpbmcgdG8gaHVydCB1cy4NCj4gPiA+ID4gWWVhaCB0aGlzIGlzIGp1c3QgYSBi
-aXQgdG9vIGJyYWluLW1lbHRpbmcgdG8gcmV2aWV3LCBidXQgSQ0KPiA+ID4gPiBjb25jdXINCj4g
-PiA+ID4gbm93Lg0KPiA+ID4gPiANCj4gPiA+ID4gUmV2aWV3ZWQtYnk6IERhbmllbCBWZXR0ZXIg
-PGRhbmllbC52ZXR0ZXJAZmZ3bGwuY2g+DQo+ID4gPiANCj4gPiA+IA0KPiA+ID4gDQo+ID4gPiAN
-Cj4gPiA+IA0KPiA+ID4gDQo+ID4gPiANCj4gPiA+IA0KPiA+ID4gDQo+ID4gPiA+IEkgdGhpbmsg
-d2hhdCB3b3VsZCBoZWxwIGlzIHNvbWUgbG9ja2RlcCBzZWxmdGVzdHMgdG8gY2hlY2sgdGhhdA0K
-PiA+ID4gPiB3ZQ0KPiA+ID4gPiBib3RoDQo+ID4gPiA+IGNhdGNoIHRoZSBzdHVmZiB3ZSB3YW50
-IHRvLCBhbmQgZG9uJ3QgaW5jdXIgZmFsc2UgcG9zaXRpdmVzLg0KPiA+ID4gPiBNYXliZQ0KPiA+
-ID4gPiB3aXRoIGENCj4gPiA+ID4gcGxlYSB0aGF0IGxvY2tkZXAgc2hvdWxkIGhhdmUgc29tZSBu
-YXRpdmUgZm9ybSBvZiBjcm9zcy1yZWxlYXNlDQo+ID4gPiA+IGFubm90YXRpb25zIC4uLg0KPiA+
-ID4gPiANCj4gPiA+ID4gQnV0IGRlZmluaXRlbHkgc2VwZXJhdGUgcGF0Y2ggc2V0LCBzaW5jZSBp
-dCBtaWdodCB0YWtlIGEgZmV3DQo+ID4gPiA+IHJvdW5kcw0KPiA+ID4gPiBvZg0KPiA+ID4gPiBy
-ZXZpZXcgYnkgbG9ja2RlcCBmb2xrcy4NCj4gPiA+ID4gLVNpbWENCj4gPiA+ID4gDQo+ID4gPiA+
-ID4gVGhhbmtzLA0KPiA+ID4gPiA+IA0KPiA+ID4gPiA+IFRob21hcw0KPiA+ID4gPiA+IA0KPiA+
-ID4gPiA+IA0KPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gLS0tDQo+ID4gPiA+ID4gPiDCoMKgIGRy
-aXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYyB8IDYgKysrLS0tDQo+ID4gPiA+ID4gPiDCoMKgIDEg
-ZmlsZSBjaGFuZ2VkLCAzIGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pDQo+ID4gPiA+ID4g
-PiANCj4gPiA+ID4gPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvZG1hLWZlbmNlLmMg
-Yi9kcml2ZXJzL2RtYS0NCj4gPiA+ID4gPiA+IGJ1Zi9kbWEtDQo+ID4gPiA+ID4gPiBmZW5jZS5j
-DQo+ID4gPiA+ID4gPiBpbmRleCBmMTc3YzU2MjY5YmIuLjE3ZjYzMjc2OGVmOSAxMDA2NDQNCj4g
-PiA+ID4gPiA+IC0tLSBhL2RyaXZlcnMvZG1hLWJ1Zi9kbWEtZmVuY2UuYw0KPiA+ID4gPiA+ID4g
-KysrIGIvZHJpdmVycy9kbWEtYnVmL2RtYS1mZW5jZS5jDQo+ID4gPiA+ID4gPiBAQCAtMzA4LDgg
-KzMwOCw4IEBAIGJvb2wgZG1hX2ZlbmNlX2JlZ2luX3NpZ25hbGxpbmcodm9pZCkNCj4gPiA+ID4g
-PiA+IMKgwqDCoAlpZiAoaW5fYXRvbWljKCkpDQo+ID4gPiA+ID4gPiDCoMKgwqAJCXJldHVybiB0
-cnVlOw0KPiA+ID4gPiA+ID4gLQkvKiAuLi4gYW5kIG5vbi1yZWN1cnNpdmUgcmVhZGxvY2sgKi8N
-Cj4gPiA+ID4gPiA+IC0JbG9ja19hY3F1aXJlKCZkbWFfZmVuY2VfbG9ja2RlcF9tYXAsIDAsIDAs
-IDEsIDEsDQo+ID4gPiA+ID4gPiBOVUxMLA0KPiA+ID4gPiA+ID4gX1JFVF9JUF8pOw0KPiA+ID4g
-PiA+ID4gKwkvKiAuLi4gYW5kIG5vbi1yZWN1cnNpdmUgc3VjY2Vzc2Z1bCByZWFkX3RyeWxvY2sN
-Cj4gPiA+ID4gPiA+ICovDQo+ID4gPiA+ID4gPiArCWxvY2tfYWNxdWlyZSgmZG1hX2ZlbmNlX2xv
-Y2tkZXBfbWFwLCAwLCAxLCAxLCAxLA0KPiA+ID4gPiA+ID4gTlVMTCwNCj4gPiA+ID4gPiA+IF9S
-RVRfSVBfKTsNCj4gPiA+ID4gPiA+IMKgwqDCoAlyZXR1cm4gZmFsc2U7DQo+ID4gPiA+ID4gPiDC
-oMKgIH0NCj4gPiA+ID4gPiA+IEBAIC0zNDAsNyArMzQwLDcgQEAgdm9pZCBfX2RtYV9mZW5jZV9t
-aWdodF93YWl0KHZvaWQpDQo+ID4gPiA+ID4gPiDCoMKgwqAJbG9ja19tYXBfYWNxdWlyZSgmZG1h
-X2ZlbmNlX2xvY2tkZXBfbWFwKTsNCj4gPiA+ID4gPiA+IMKgwqDCoAlsb2NrX21hcF9yZWxlYXNl
-KCZkbWFfZmVuY2VfbG9ja2RlcF9tYXApOw0KPiA+ID4gPiA+ID4gwqDCoMKgCWlmICh0bXApDQo+
-ID4gPiA+ID4gPiAtCQlsb2NrX2FjcXVpcmUoJmRtYV9mZW5jZV9sb2NrZGVwX21hcCwgMCwgMCwN
-Cj4gPiA+ID4gPiA+IDEsDQo+ID4gPiA+ID4gPiAxLA0KPiA+ID4gPiA+ID4gTlVMTCwgX1RISVNf
-SVBfKTsNCj4gPiA+ID4gPiA+ICsJCWxvY2tfYWNxdWlyZSgmZG1hX2ZlbmNlX2xvY2tkZXBfbWFw
-LCAwLCAxLA0KPiA+ID4gPiA+ID4gMSwNCj4gPiA+ID4gPiA+IDEsDQo+ID4gPiA+ID4gPiBOVUxM
-LCBfVEhJU19JUF8pOw0KPiA+ID4gPiA+ID4gwqDCoCB9DQo+ID4gPiA+ID4gPiDCoMKgICNlbmRp
-Zg0KPiANCg0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18K
-TGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3QgLS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8u
-b3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4gZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBs
-aXN0cy5saW5hcm8ub3JnCg==
+Hi,
+
+On Fri, Aug 30, 2024 at 09:03:47AM GMT, Jens Wiklander wrote:
+> Hi,
+> 
+> This patch set is based on top of Yong Wu's restricted heap patch set [1].
+> It's also a continuation on Olivier's Add dma-buf secure-heap patch set [2].
+> 
+> The Linaro restricted heap uses genalloc in the kernel to manage the heap
+> carvout. This is a difference from the Mediatek restricted heap which
+> relies on the secure world to manage the carveout.
+> 
+> I've tried to adress the comments on [2], but [1] introduces changes so I'm
+> afraid I've had to skip some comments.
+
+I know I have raised the same question during LPC (in connection to
+Qualcomm's dma-heap implementation). Is there any reason why we are
+using generic heaps instead of allocating the dma-bufs on the device
+side?
+
+In your case you already have TEE device, you can use it to allocate and
+export dma-bufs, which then get imported by the V4L and DRM drivers.
+
+I have a feeling (I might be completely wrong here) that by using
+generic dma-buf heaps we can easily end up in a situation when the
+userspace depends heavily on the actual platform being used (to map the
+platform to heap names). I think we should instead depend on the
+existing devices (e.g. if there is a TEE device, use an IOCTL to
+allocate secured DMA BUF from it, otherwise check for QTEE device,
+otherwise check for some other vendor device).
+
+The mental experiment to check if the API is correct is really simple:
+Can you use exactly the same rootfs on several devices without
+any additional tuning (e.g. your QEMU, HiKey, a Mediatek board, Qualcomm
+laptop, etc)?
+
+> 
+> This can be tested on QEMU with the following steps:
+> repo init -u https://github.com/jenswi-linaro/manifest.git -m qemu_v8.xml \
+>         -b prototype/sdp-v1
+> repo sync -j8
+> cd build
+> make toolchains -j4
+> make all -j$(nproc)
+> make run-only
+> # login and at the prompt:
+> xtest --sdp-basic
+> 
+> https://optee.readthedocs.io/en/latest/building/prerequisites.html
+> list dependencies needed to build the above.
+> 
+> The tests are pretty basic, mostly checking that a Trusted Application in
+> the secure world can access and manipulate the memory.
+
+- Can we test that the system doesn't crash badly if user provides
+  non-secured memory to the users which expect a secure buffer?
+
+- At the same time corresponding entities shouldn't decode data to the
+  buffers accessible to the rest of the sytem.
+
+> 
+> Cheers,
+> Jens
+> 
+> [1] https://lore.kernel.org/dri-devel/20240515112308.10171-1-yong.wu@mediatek.com/
+> [2] https://lore.kernel.org/lkml/20220805135330.970-1-olivier.masse@nxp.com/
+> 
+> Changes since Olivier's post [2]:
+> * Based on Yong Wu's post [1] where much of dma-buf handling is done in
+>   the generic restricted heap
+> * Simplifications and cleanup
+> * New commit message for "dma-buf: heaps: add Linaro restricted dmabuf heap
+>   support"
+> * Replaced the word "secure" with "restricted" where applicable
+> 
+> Etienne Carriere (1):
+>   tee: new ioctl to a register tee_shm from a dmabuf file descriptor
+> 
+> Jens Wiklander (2):
+>   dma-buf: heaps: restricted_heap: add no_map attribute
+>   dma-buf: heaps: add Linaro restricted dmabuf heap support
+> 
+> Olivier Masse (1):
+>   dt-bindings: reserved-memory: add linaro,restricted-heap
+> 
+>  .../linaro,restricted-heap.yaml               |  56 ++++++
+>  drivers/dma-buf/heaps/Kconfig                 |  10 ++
+>  drivers/dma-buf/heaps/Makefile                |   1 +
+>  drivers/dma-buf/heaps/restricted_heap.c       |  17 +-
+>  drivers/dma-buf/heaps/restricted_heap.h       |   2 +
+>  .../dma-buf/heaps/restricted_heap_linaro.c    | 165 ++++++++++++++++++
+>  drivers/tee/tee_core.c                        |  38 ++++
+>  drivers/tee/tee_shm.c                         | 104 ++++++++++-
+>  include/linux/tee_drv.h                       |  11 ++
+>  include/uapi/linux/tee.h                      |  29 +++
+>  10 files changed, 426 insertions(+), 7 deletions(-)
+>  create mode 100644 Documentation/devicetree/bindings/reserved-memory/linaro,restricted-heap.yaml
+>  create mode 100644 drivers/dma-buf/heaps/restricted_heap_linaro.c
+> 
+> -- 
+> 2.34.1
+> 
+
+-- 
+With best wishes
+Dmitry
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
