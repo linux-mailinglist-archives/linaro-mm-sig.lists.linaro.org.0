@@ -2,94 +2,97 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id AD5FA98D01C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Oct 2024 11:27:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A91AC98E9EB
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  3 Oct 2024 08:58:04 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 78F9344990
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  2 Oct 2024 09:27:23 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.16])
-	by lists.linaro.org (Postfix) with ESMTPS id 69FAE44037
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  2 Oct 2024 09:26:59 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 57A2544AEC
+	for <lists+linaro-mm-sig@lfdr.de>; Thu,  3 Oct 2024 06:58:03 +0000 (UTC)
+Received: from mail-ed1-f54.google.com (mail-ed1-f54.google.com [209.85.208.54])
+	by lists.linaro.org (Postfix) with ESMTPS id B703740BEB
+	for <linaro-mm-sig@lists.linaro.org>; Thu,  3 Oct 2024 06:57:46 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=intel.com header.s=Intel header.b="M/jfdI26";
-	dmarc=pass (policy=none) header.from=intel.com;
-	spf=pass (lists.linaro.org: domain of jani.nikula@intel.com designates 198.175.65.16 as permitted sender) smtp.mailfrom=jani.nikula@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1727861219; x=1759397219;
-  h=from:to:cc:subject:in-reply-to:references:date:
-   message-id:mime-version;
-  bh=x2Lea59cyav6s4rmBPsAfXbrLXjdvVugkrjeXsbGoM0=;
-  b=M/jfdI266yA4sL4Ta4ATC11UoctgXRoMlUqd2mjQvjORzptKVrDK1RMR
-   +OrqQiAAdVwxnbrjlQ9NNCb89LzyTyr+TpfHWuVmtdyqgZo5yhwLLxzbi
-   EIxjbvyX/08fiBiXeO1gGP8f7CQ9w+qXSviqPEmDNkctJcpeVcYSp5TLq
-   3jCbvzu1ZmB0t+1r8NRZ63mfICgTtGbays7nLbwV4ZkzmU3OpaH8uhw+H
-   rAE8UKia+qUr4IZEGh1/fo5yZRdHYJTjVGjNth+5EUbR0bp7/9WpkCwV4
-   1NPYe7GmXwjty/fTTZjUquHoKuqT7+5wBQ33jflydTo5zocBrN2UACdks
-   A==;
-X-CSE-ConnectionGUID: nvUEWVO7Q8ubE9Shhv3BrA==
-X-CSE-MsgGUID: AQ1LIqmGQ+2Rp0n+zuWEIg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11212"; a="27111941"
-X-IronPort-AV: E=Sophos;i="6.11,171,1725346800";
-   d="scan'208";a="27111941"
-Received: from fmviesa001.fm.intel.com ([10.60.135.141])
-  by orvoesa108.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Oct 2024 02:26:58 -0700
-X-CSE-ConnectionGUID: pQ2E3cIVQYGGnj+wNhQSJA==
-X-CSE-MsgGUID: XK7Z7LLWTPWKx/kgKAUymw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.11,171,1725346800";
-   d="scan'208";a="104744897"
-Received: from lbogdanm-mobl3.ger.corp.intel.com (HELO localhost) ([10.245.246.49])
-  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Oct 2024 02:26:53 -0700
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Boris Brezillon <boris.brezillon@collabora.com>, =?utf-8?Q?Adri=C3=A1n?=
- Larumbe
- <adrian.larumbe@collabora.com>
-In-Reply-To: <20241002105715.18ec024c@collabora.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20240923230912.2207320-1-adrian.larumbe@collabora.com>
- <20241002105715.18ec024c@collabora.com>
-Date: Wed, 02 Oct 2024 12:26:49 +0300
-Message-ID: <877caqvorq.fsf@intel.com>
+	dkim=pass header.d=linaro.org header.s=google header.b=PRHwl3JC;
+	dmarc=pass (policy=none) header.from=linaro.org;
+	spf=pass (lists.linaro.org: domain of sumit.semwal@linaro.org designates 209.85.208.54 as permitted sender) smtp.mailfrom=sumit.semwal@linaro.org
+Received: by mail-ed1-f54.google.com with SMTP id 4fb4d7f45d1cf-5c87853df28so704228a12.3
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 02 Oct 2024 23:57:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1727938666; x=1728543466; darn=lists.linaro.org;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:from:to:cc:subject:date:message-id:reply-to;
+        bh=JGecQKR7ZoIYH4vaHNJNV/6/ajVJtBZfvfEOkIG81WE=;
+        b=PRHwl3JCtOlWV1fi/rqjntf1nx0+tMROixZZ2JG7stYcS7Vda3HPfsx3YIQJmRNJvx
+         bqv3kTWSDsYQ1DKvr2I2BrnkOBmQEQf/gEbEyiSyT2E/8teuPGk2gwsyLMVXRcTTaAoX
+         eNW6DAmJo6NQBoliNqjiFWBSjoNp0EDp5gZmhvhQoMMS8i9HX1ukKeH4fRZ7iVJb4gES
+         qN8x6ipwmS5Fe1J4ucz/AkqN8vb0OTlnHJcn2aciOWGzxn4HBElDEEM5YElWZWRpfJet
+         Blajjwl1TX0HDHXqwHjbyh1fsJ1hUOR4ksfuR44BW2bOSxZcQY4EQvZpPgt71KMkhWYX
+         CG5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1727938666; x=1728543466;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=JGecQKR7ZoIYH4vaHNJNV/6/ajVJtBZfvfEOkIG81WE=;
+        b=AXRDIRZo1UludOXuiiQZJXxSfs6UH5nDrxl26lrdyg8v1itFjyCHy83p9YxAPNz9yG
+         Ssf9r81wsXoTEkva0GzdNp7Z6IASAhnW6rP1QsvDBZZk/YOhB6pCfpB3oihJym83++HO
+         2272W7SV9nhi1jtP0MOElWb1NoM4+mcwM+DTz76/I1dZNcymbGv5tQYVkETvSrWl2L5t
+         nlJHfXIVagTd/T9iNSGV9vu6a6/TjAGQ2HkWPEkyDRv9zrlyXeKJSukKfaqNrrlhOD5c
+         z3Sk2Opx3H/bJOj89V7hhkLcwO6ip3msxV2ESl+8JiPPjYu6lBscAQslPV4h1Mv0sm2C
+         loCA==
+X-Forwarded-Encrypted: i=1; AJvYcCURrZk0/VCVs5C9igYkX42LDXpCqlq1amnkmb7w5iLhR2a77x0UMkjfy8MSDS4HxdGAhba9QtLzzwdymqWX@lists.linaro.org
+X-Gm-Message-State: AOJu0YwZYGeX6Ox2chMOIGSFLrjFo3n4v/UtDx00ptL/cStiwfhtTfTN
+	vVuqk4sQuQ/TNsO7TPo8MIgi4DA5xI12clAIUYaYmHTZSF2FfDQMbo2DKKmTo880CrGO8zVErDH
+	zsKFct1+o/mR7J7qY1lbyUgWbCOVDALfFphlB/89+rSKsz6CEWsI=
+X-Google-Smtp-Source: AGHT+IH4QGNNGP1NJcTcHJDWHlXA92zW2AJIpIf/rMuRfbu+fTqO/rDiEJy3cDA2artuxJKreIShbOnY5J0XVGAbl6I=
+X-Received: by 2002:a05:6402:5108:b0:5c2:4cbe:ac1c with SMTP id
+ 4fb4d7f45d1cf-5c8b18eed8fmr3645435a12.4.1727938665602; Wed, 02 Oct 2024
+ 23:57:45 -0700 (PDT)
 MIME-Version: 1.0
+References: <20241001174611.12155-1-quic_pintu@quicinc.com>
+In-Reply-To: <20241001174611.12155-1-quic_pintu@quicinc.com>
+From: Sumit Semwal <sumit.semwal@linaro.org>
+Date: Thu, 3 Oct 2024 12:27:34 +0530
+Message-ID: <CAO_48GFPg=R4JaSZtgTKjh0TLKTrw24AF0nRMvFRXxwYCP28fg@mail.gmail.com>
+To: Pintu Kumar <quic_pintu@quicinc.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 69FAE44037
-X-Spamd-Bar: ------
-X-Spamd-Result: default: False [-6.70 / 15.00];
+X-Rspamd-Queue-Id: B703740BEB
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
-	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
-	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
-	FORGED_SENDER(0.30)[jani.nikula@linux.intel.com,jani.nikula@intel.com];
-	R_SPF_ALLOW(-0.20)[+ip4:198.175.65.0/26];
-	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MIME_GOOD(-0.10)[text/plain];
-	ASN(0.00)[asn:4983, ipnet:198.175.64.0/23, country:US];
-	MIME_TRACE(0.00)[0:+];
-	HAS_ORG_HEADER(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[16];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.54:from];
 	ARC_NA(0.00)[];
+	RCVD_COUNT_ONE(0.00)[1];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	TO_DN_SOME(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_RCPT(0.00)[];
+	RCPT_COUNT_SEVEN(0.00)[9];
 	NEURAL_HAM(-0.00)[-1.000];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[arm.com,linux.intel.com,kernel.org,suse.de,gmail.com,ffwll.ch,linaro.org,amd.com,collabora.com,lists.freedesktop.org,vger.kernel.org,lists.linaro.org];
+	FREEMAIL_CC(0.00)[amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,perches.com,linuxfoundation.org,gmail.com];
 	MISSING_XM_UA(0.00)[];
-	FROM_NEQ_ENVFROM(0.00)[jani.nikula@linux.intel.com,jani.nikula@intel.com];
-	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[intel.com:+]
+	DKIM_TRACE(0.00)[linaro.org:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: T7ZULHYD65DHT5Q4WEHZBEKONSRMNFDV
-X-Message-ID-Hash: T7ZULHYD65DHT5Q4WEHZBEKONSRMNFDV
-X-MailFrom: jani.nikula@intel.com
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, Christian =?utf-8?Q?K=C3=B6nig?= <christian.koenig@amd.com>, kernel@collabora.com, dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
+Message-ID-Hash: TD4TO757XNVZJ4MXBF3WPK4BYSHWOQ6U
+X-Message-ID-Hash: TD4TO757XNVZJ4MXBF3WPK4BYSHWOQ6U
+X-MailFrom: sumit.semwal@linaro.org
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: christian.koenig@amd.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, joe@perches.com, skhan@linuxfoundation.org, pintu.ping@gmail.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v8 0/5] Support fdinfo runtime and memory stats on Panthor
+Subject: [Linaro-mm-sig] Re: [PATCH 1/3] dma-buf: replace symbolic permission S_IRUGO with octal 0444
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/T7ZULHYD65DHT5Q4WEHZBEKONSRMNFDV/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TD4TO757XNVZJ4MXBF3WPK4BYSHWOQ6U/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
@@ -99,49 +102,93 @@ List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-On Wed, 02 Oct 2024, Boris Brezillon <boris.brezillon@collabora.com> wrote:
-> Queued to drm-misc-next after applying the few modifications I
-> mentioned. Also added Steve's ack (given on IRC) on the first patch.
+Hello Pintu,
 
-Can we have the drm-tip rebuild conflict resolution too, please?
-
-diff --cc drivers/gpu/drm/panthor/panthor_drv.c
-index c520f156e2d7,f9b93f84d611..000000000000
---- a/drivers/gpu/drm/panthor/panthor_drv.c
-+++ b/drivers/gpu/drm/panthor/panthor_drv.c
-@@@ -1383,7 -1476,7 +1476,11 @@@ static const struct file_operations pan
-        .read = drm_read,
-        .llseek = noop_llseek,
-        .mmap = panthor_mmap,
-++<<<<<<< HEAD
- +      .fop_flags = FOP_UNSIGNED_OFFSET,
-++=======
-+       .show_fdinfo = drm_show_fdinfo,
-++>>>>>>> drm-misc/drm-misc-next
-  };
-  
-  #ifdef CONFIG_DEBUG_FS
-
-
-
+On Tue, 1 Oct 2024 at 23:16, Pintu Kumar <quic_pintu@quicinc.com> wrote:
 >
->> 
->>  .../testing/sysfs-driver-panthor-profiling    |  10 +
->>  Documentation/gpu/panthor.rst                 |  46 +++
->>  drivers/gpu/drm/panthor/panthor_devfreq.c     |  18 +-
->>  drivers/gpu/drm/panthor/panthor_device.h      |  36 ++
->>  drivers/gpu/drm/panthor/panthor_drv.c         |  73 ++++
->>  drivers/gpu/drm/panthor/panthor_gem.c         |  12 +
->>  drivers/gpu/drm/panthor/panthor_sched.c       | 384 +++++++++++++++---
->>  drivers/gpu/drm/panthor/panthor_sched.h       |   2 +
->>  8 files changed, 531 insertions(+), 50 deletions(-)
->>  create mode 100644 Documentation/ABI/testing/sysfs-driver-panthor-profiling
->>  create mode 100644 Documentation/gpu/panthor.rst
->> 
+> Symbolic permissions are not preferred, instead use the octal.
+> Also, fix other warnings/errors as well for cleanup.
+>
+> WARNING: Block comments use * on subsequent lines
+> +       /* only support discovering the end of the buffer,
+> +          but also allow SEEK_SET to maintain the idiomatic
+>
+> WARNING: Block comments use a trailing */ on a separate line
+> +          SEEK_END(0), SEEK_CUR(0) pattern */
+>
+> WARNING: Block comments use a trailing */ on a separate line
+> +        * before passing the sgt back to the exporter. */
+>
+> ERROR: "foo * bar" should be "foo *bar"
+> +static struct sg_table * __map_dma_buf(struct dma_buf_attachment *attach,
+>
+> WARNING: Symbolic permissions 'S_IRUGO' are not preferred. Consider using octal permissions '0444'.
+> +       d = debugfs_create_file("bufinfo", S_IRUGO, dma_buf_debugfs_dir,
+>
+> total: 1 errors, 4 warnings, 1746 lines checked
+>
+> Signed-off-by: Pintu Kumar <quic_pintu@quicinc.com>
+
+Thanks for this patch - could you please also mention in the commit
+log how did you find this? It looks like you ran checkpatch, but it's
+not clear from the commit log.
+
+Since this patch does multiple things related to checkpatch warnings
+(change S_IRUGO to 0444, comments correction, function declaration
+correction), can I please ask you to change the commit title to also
+reflect that?
+> ---
+>  drivers/dma-buf/dma-buf.c | 12 +++++++-----
+>  1 file changed, 7 insertions(+), 5 deletions(-)
+>
+> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+> index 8892bc701a66..2e63d50e46d3 100644
+> --- a/drivers/dma-buf/dma-buf.c
+> +++ b/drivers/dma-buf/dma-buf.c
+> @@ -176,8 +176,9 @@ static loff_t dma_buf_llseek(struct file *file, loff_t offset, int whence)
+>         dmabuf = file->private_data;
+>
+>         /* only support discovering the end of the buffer,
+> -          but also allow SEEK_SET to maintain the idiomatic
+> -          SEEK_END(0), SEEK_CUR(0) pattern */
+> +        * but also allow SEEK_SET to maintain the idiomatic
+> +        * SEEK_END(0), SEEK_CUR(0) pattern.
+> +        */
+>         if (whence == SEEK_END)
+>                 base = dmabuf->size;
+>         else if (whence == SEEK_SET)
+> @@ -782,13 +783,14 @@ static void mangle_sg_table(struct sg_table *sg_table)
+>         /* To catch abuse of the underlying struct page by importers mix
+>          * up the bits, but take care to preserve the low SG_ bits to
+>          * not corrupt the sgt. The mixing is undone in __unmap_dma_buf
+> -        * before passing the sgt back to the exporter. */
+> +        * before passing the sgt back to the exporter.
+> +        */
+>         for_each_sgtable_sg(sg_table, sg, i)
+>                 sg->page_link ^= ~0xffUL;
+>  #endif
+>
+>  }
+> -static struct sg_table * __map_dma_buf(struct dma_buf_attachment *attach,
+> +static struct sg_table *__map_dma_buf(struct dma_buf_attachment *attach,
+>                                        enum dma_data_direction direction)
+>  {
+>         struct sg_table *sg_table;
+> @@ -1694,7 +1696,7 @@ static int dma_buf_init_debugfs(void)
+>
+>         dma_buf_debugfs_dir = d;
+>
+> -       d = debugfs_create_file("bufinfo", S_IRUGO, dma_buf_debugfs_dir,
+> +       d = debugfs_create_file("bufinfo", 0444, dma_buf_debugfs_dir,
+>                                 NULL, &dma_buf_debug_fops);
+>         if (IS_ERR(d)) {
+>                 pr_debug("dma_buf: debugfs: failed to create node bufinfo\n");
+> --
+> 2.17.1
 >
 
--- 
-Jani Nikula, Intel
+Best,
+Sumit.
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
