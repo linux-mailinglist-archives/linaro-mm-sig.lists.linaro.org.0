@@ -2,191 +2,187 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1FCC8997C74
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Oct 2024 07:33:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B751199869C
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Oct 2024 14:49:40 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 0EB3B44129
-	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Oct 2024 05:33:23 +0000 (UTC)
-Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
-	by lists.linaro.org (Postfix) with ESMTPS id A91CC3F33C
-	for <linaro-mm-sig@lists.linaro.org>; Thu, 10 Oct 2024 05:33:02 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 9065D4462F
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Oct 2024 12:49:39 +0000 (UTC)
+Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
+	by lists.linaro.org (Postfix) with ESMTPS id 6E95B3F33D
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 10 Oct 2024 12:49:21 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=gmail.com header.s=20230601 header.b=evxwPPD+;
-	dmarc=pass (policy=none) header.from=gmail.com;
-	spf=pass (lists.linaro.org: domain of pintu.ping@gmail.com designates 209.85.208.53 as permitted sender) smtp.mailfrom=pintu.ping@gmail.com
-Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-5c920611a86so596959a12.0
-        for <linaro-mm-sig@lists.linaro.org>; Wed, 09 Oct 2024 22:33:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20230601; t=1728538382; x=1729143182; darn=lists.linaro.org;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:from:to:cc:subject:date:message-id:reply-to;
-        bh=QLeJpOVnaXgVOcwq4oaCZwxfF9fcKYWEKk+MpXHkeY8=;
-        b=evxwPPD+rY8XJNnwyNe51svV/7enR5efyW2ghBgWhbzoQOOdkGgMcfRpuqZPZZ2b4F
-         HjdgIqwdvxSw0QR//18Sur9xrRhc7jh3O5NEaFVQ33AXcN6hQ+7ftel/7EmMpuABPh/7
-         pCdmmM0k46z01Xp7sQzk4G/NjVNF6BquxupdSiMocl10UkqwyoQicKB15DtwUyj+7Sgq
-         kyywf+ocXaekzgOVGImsN1qW+zRrqx5BtGFF4uhjdyI8MRrB4CGkJJSuoC9lRfsDMeK6
-         1D81ISYGSYxYwc1K/EYSGkee9znO9AvimjrL6mjwTuLD1wErSjVe53jg/Xx3acDu72ji
-         ZJBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728538382; x=1729143182;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=QLeJpOVnaXgVOcwq4oaCZwxfF9fcKYWEKk+MpXHkeY8=;
-        b=sp2R3BMm+NkvqnrK+FAr8Wn5EmbcFtRlVITj5p5MFXjOSz4arthSbBMxmnVv0WvP/S
-         BzwBfnzgm/l0dY7GSxGJDP0iHr8OwG341LVjl6f8MGJs0x1N/s9nQj0vOZ4VFdxhryGv
-         3OLYIJlxHIXdD+v5hVBpjVKZL9k2uxBBj4HZ/uEeOrL8RBVKg91nDAWDphm4y/b4ai57
-         fgIxlIPmLNpMf0f/kQi3fMQk8G5DgxtXRUmIiT18hLGqNsmLkoEAsRTtfz7kMSr3n1E7
-         wVI9uH5+EIjYJvv8cSUfWpA3fu1IhXqjLydw/WvvdrcBA3xI8pt0EUUgUpzbB76R0V/K
-         U3FA==
-X-Forwarded-Encrypted: i=1; AJvYcCXdA5DUQEZYTrSgeNfRjy9C4AMMwAFoZCgFsVSe3zVBNpd7Bimclh81X11zzRR++nSGx7p2lShcwagXp/a+@lists.linaro.org
-X-Gm-Message-State: AOJu0YzyFBXIis/CM6u2cjh8TXJjf6lANqm5st93a61qIjtULMxuuJ6k
-	QdEft/qNUW4w2k1Lv+e0f8ypJ7s3fnCNUi/elS5jD68I36I6uINUbh6dkl1UJR7CyiCcVRNgQrl
-	j6UFKxG0Y0j1R8vV53PV20wLV2nkdMZ9O
-X-Google-Smtp-Source: AGHT+IFKUAguzyenCV4qtybKuD6WYqAQunGFYP7vn3PFEiqqB3Gh6EmfqyQza8duyB9kIZpAVqXRPE6V5VjbtN4Lhzo=
-X-Received: by 2002:a05:6402:2116:b0:5c9:3451:498 with SMTP id
- 4fb4d7f45d1cf-5c9345105b7mr1039423a12.25.1728538381414; Wed, 09 Oct 2024
- 22:33:01 -0700 (PDT)
+	dkim=pass header.d=collabora.com header.s=mail header.b=oz1mEWob;
+	dmarc=pass (policy=none) header.from=collabora.com;
+	spf=pass (lists.linaro.org: domain of angelogioacchino.delregno@collabora.com designates 148.251.105.195 as permitted sender) smtp.mailfrom=angelogioacchino.delregno@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1728564560;
+	bh=peJCajT9JrXEyFW7QG0r6H6LQ1MBhLze2K+6buEL3xw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=oz1mEWob0bLo3tFj/UZ1xluxr6hYvEq4h1UspMdA6+l+A/m1HNWUQmfOSVlR6ttGy
+	 J3KCM9lroR2SFR+3TRZIFhBXmr9xEU+BNp7FZCwQQcI+dsB5AlPRSzna/Ke6ZrOZGT
+	 N1nSislJSTMtsj0d9UjBkvkWaaIdXhgSzWfQ2UGfmuWe6TWU0cmeJ3w7PI9K6JoOEh
+	 AqYzvkgywv4D4j1thdPHBA2OL8UlI1H0iXXsZGdhNxdxGuA2wGqRJL/l+Eaw4uCGTe
+	 U05rr0cvsUZk/TUARKVnMyn4W8DqOOwQ72WkeMgJ7KGAmAf3YVDlU3Yv37WOjhKHF9
+	 mN+/9pAZy5EFA==
+Received: from [192.168.1.100] (2-237-20-237.ip236.fastwebnet.it [2.237.20.237])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: kholk11)
+	by bali.collaboradmins.com (Postfix) with ESMTPSA id 7C6F217E35EA;
+	Thu, 10 Oct 2024 14:49:19 +0200 (CEST)
+Message-ID: <93234ce4-e831-41aa-9485-53997b5cacaf@collabora.com>
+Date: Thu, 10 Oct 2024 14:49:19 +0200
 MIME-Version: 1.0
-References: <20241005180955.6523-1-quic_pintu@quicinc.com>
-In-Reply-To: <20241005180955.6523-1-quic_pintu@quicinc.com>
-From: Pintu Agarwal <pintu.ping@gmail.com>
-Date: Thu, 10 Oct 2024 11:02:48 +0530
-Message-ID: <CAOuPNLjO6Kz0=1Nnb3REsttH=3bQoUx7D1dRQX9fjTf15hLRdQ@mail.gmail.com>
-To: Pintu Kumar <quic_pintu@quicinc.com>
+User-Agent: Mozilla Thunderbird
+To: Shu-hsiang Yang <Shu-hsiang.Yang@mediatek.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ Christian Konig <christian.koenig@amd.com>
+References: <20241009111551.27052-1-Shu-hsiang.Yang@mediatek.com>
+ <20241009111551.27052-5-Shu-hsiang.Yang@mediatek.com>
+From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+Content-Language: en-US
+In-Reply-To: <20241009111551.27052-5-Shu-hsiang.Yang@mediatek.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: A91CC3F33C
-X-Spamd-Bar: ---
-X-Spamd-Result: default: False [-4.00 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
-	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
-	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+X-Rspamd-Queue-Id: 6E95B3F33D
+X-Spamd-Bar: --
+X-Spamd-Result: default: False [-2.40 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[collabora.com,none];
+	R_DKIM_ALLOW(-0.20)[collabora.com:s=mail];
+	R_SPF_ALLOW(-0.20)[+ip4:148.251.105.195];
+	ONCE_RECEIVED(0.10)[];
 	MIME_GOOD(-0.10)[text/plain];
-	DKIM_TRACE(0.00)[gmail.com:+];
 	ARC_NA(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	MIME_TRACE(0.00)[0:+];
-	RCPT_COUNT_TWELVE(0.00)[13];
+	ASN(0.00)[asn:24940, ipnet:148.251.0.0/16, country:DE];
 	RCVD_COUNT_ONE(0.00)[1];
-	FREEMAIL_ENVFROM(0.00)[gmail.com];
-	FREEMAIL_FROM(0.00)[gmail.com];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.53:from];
-	MID_RHS_MATCH_FROMTLD(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[21];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	FREEMAIL_TO(0.00)[mediatek.com,kernel.org,gmail.com,linaro.org,amd.com];
+	MID_RHS_MATCH_FROM(0.00)[];
 	FROM_HAS_DN(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
+	TAGGED_RCPT(0.00)[dt];
+	FROM_EQ_ENVFROM(0.00)[];
+	NEURAL_HAM(-0.00)[-0.992];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	TAGGED_FROM(0.00)[];
-	RCVD_TLS_LAST(0.00)[];
-	TO_DN_SOME(0.00)[]
+	DKIM_TRACE(0.00)[collabora.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: 5CJU3JZSH73LTETAWKQRZ4VH3ZKZO2WT
-X-Message-ID-Hash: 5CJU3JZSH73LTETAWKQRZ4VH3ZKZO2WT
-X-MailFrom: pintu.ping@gmail.com
+Message-ID-Hash: NKDJB6H7PJHNT7RDQAA4N6EJHIMJZNQC
+X-Message-ID-Hash: NKDJB6H7PJHNT7RDQAA4N6EJHIMJZNQC
+X-MailFrom: angelogioacchino.delregno@collabora.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, tjmercier@google.com, christian.koenig@amd.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, joe@perches.com, skhan@linuxfoundation.org
+CC: linux-media@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Project_Global_Chrome_Upstream_Group@mediatek.com, yaya.chang@mediatek.com, teddy.chen@mediatek.com, hidenorik@chromium.org, yunkec@chromium.org, shun-yi.wang@mediatek.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: fix S_IRUGO to 0444, block comments, func declaration
+Subject: [Linaro-mm-sig] Re: [PATCH v1 04/10] media: platform: mediatek: add isp_7x cam-raw unit
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/5CJU3JZSH73LTETAWKQRZ4VH3ZKZO2WT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/NKDJB6H7PJHNT7RDQAA4N6EJHIMJZNQC/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="us-ascii"; format="flowed"
 Content-Transfer-Encoding: 7bit
 
-Hi,
-
-On Sat, 5 Oct 2024 at 23:40, Pintu Kumar <quic_pintu@quicinc.com> wrote:
->
-> These warnings/errors are reported by checkpatch.
-> Fix them with minor changes to make it clean.
-> No other functional changes.
->
-> WARNING: Block comments use * on subsequent lines
-> +       /* only support discovering the end of the buffer,
-> +          but also allow SEEK_SET to maintain the idiomatic
->
-> WARNING: Block comments use a trailing */ on a separate line
-> +          SEEK_END(0), SEEK_CUR(0) pattern */
->
-> WARNING: Block comments use a trailing */ on a separate line
-> +        * before passing the sgt back to the exporter. */
->
-> ERROR: "foo * bar" should be "foo *bar"
-> +static struct sg_table * __map_dma_buf(struct dma_buf_attachment *attach,
->
-> WARNING: Symbolic permissions 'S_IRUGO' are not preferred. Consider using octal permissions '0444'.
-> +       d = debugfs_create_file("bufinfo", S_IRUGO, dma_buf_debugfs_dir,
->
-> total: 1 errors, 4 warnings, 1746 lines checked
->
-> Signed-off-by: Pintu Kumar <quic_pintu@quicinc.com>
->
+Il 09/10/24 13:15, Shu-hsiang Yang ha scritto:
+> Introduces the ISP pipeline driver for the MediaTek ISP raw and yuv
+> modules. Key functionalities include data processing, V4L2 integration,
+> resource management, debug support, and various control operations.
+> Additionally, IRQ handling, platform device management, and MediaTek
+> ISP DMA format support are also included.
+> 
+> Signed-off-by: Shu-hsiang Yang <Shu-hsiang.Yang@mediatek.com>
 > ---
-> Changes in V1 suggested by Sumit Semwal:
-> Change commit title, and mention exact reason of fix in commit log.
-> V1: https://lore.kernel.org/all/CAOuPNLg1=YCUFXW-76A_gZm_PE1MFSugNvg3dEdkfujXV_5Zfw@mail.gmail.com/
-> ---
->  drivers/dma-buf/dma-buf.c | 12 +++++++-----
->  1 file changed, 7 insertions(+), 5 deletions(-)
->
-> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-> index 8892bc701a66..2e63d50e46d3 100644
-> --- a/drivers/dma-buf/dma-buf.c
-> +++ b/drivers/dma-buf/dma-buf.c
-> @@ -176,8 +176,9 @@ static loff_t dma_buf_llseek(struct file *file, loff_t offset, int whence)
->         dmabuf = file->private_data;
->
->         /* only support discovering the end of the buffer,
-> -          but also allow SEEK_SET to maintain the idiomatic
-> -          SEEK_END(0), SEEK_CUR(0) pattern */
-> +        * but also allow SEEK_SET to maintain the idiomatic
-> +        * SEEK_END(0), SEEK_CUR(0) pattern.
-> +        */
->         if (whence == SEEK_END)
->                 base = dmabuf->size;
->         else if (whence == SEEK_SET)
-> @@ -782,13 +783,14 @@ static void mangle_sg_table(struct sg_table *sg_table)
->         /* To catch abuse of the underlying struct page by importers mix
->          * up the bits, but take care to preserve the low SG_ bits to
->          * not corrupt the sgt. The mixing is undone in __unmap_dma_buf
-> -        * before passing the sgt back to the exporter. */
-> +        * before passing the sgt back to the exporter.
-> +        */
->         for_each_sgtable_sg(sg_table, sg, i)
->                 sg->page_link ^= ~0xffUL;
->  #endif
->
->  }
-> -static struct sg_table * __map_dma_buf(struct dma_buf_attachment *attach,
-> +static struct sg_table *__map_dma_buf(struct dma_buf_attachment *attach,
->                                        enum dma_data_direction direction)
->  {
->         struct sg_table *sg_table;
-> @@ -1694,7 +1696,7 @@ static int dma_buf_init_debugfs(void)
->
->         dma_buf_debugfs_dir = d;
->
-> -       d = debugfs_create_file("bufinfo", S_IRUGO, dma_buf_debugfs_dir,
-> +       d = debugfs_create_file("bufinfo", 0444, dma_buf_debugfs_dir,
->                                 NULL, &dma_buf_debug_fops);
->         if (IS_ERR(d)) {
->                 pr_debug("dma_buf: debugfs: failed to create node bufinfo\n");
-> --
+>   .../mediatek/isp/isp_7x/camsys/mtk_cam-raw.c  | 5359 +++++++++++++++++
+>   .../mediatek/isp/isp_7x/camsys/mtk_cam-raw.h  |  325 +
+>   .../isp/isp_7x/camsys/mtk_cam-raw_debug.c     |  403 ++
+>   .../isp/isp_7x/camsys/mtk_cam-raw_debug.h     |   39 +
+>   .../isp_7x/camsys/mtk_camera-v4l2-controls.h  |   65 +
+>   5 files changed, 6191 insertions(+)
+>   create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-raw.c
+>   create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-raw.h
+>   create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-raw_debug.c
+>   create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-raw_debug.h
+>   create mode 100644 drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_camera-v4l2-controls.h
+> 
+> diff --git a/drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-raw.c b/drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-raw.c
+> new file mode 100644
+> index 000000000000..c025f53c952d
+> --- /dev/null
+> +++ b/drivers/media/platform/mediatek/isp/isp_7x/camsys/mtk_cam-raw.c
+> @@ -0,0 +1,5359 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +//
+> +// Copyright (c) 2022 MediaTek Inc.
+> +
+> +#include <linux/clk.h>
+> +#include <linux/interrupt.h>
+> +#include <linux/iopoll.h>
+> +#include <linux/module.h>
+> +#include <linux/of.h>
+> +#include <linux/of_platform.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/pm_runtime.h>
+> +#include <linux/vmalloc.h>
+> +#include <linux/videodev2.h>
+> +#include <linux/suspend.h>
+> +#include <linux/rtc.h>
+> +
+> +#include <media/v4l2-device.h>
+> +#include <media/v4l2-event.h>
+> +#include <media/v4l2-ioctl.h>
+> +#include <media/v4l2-subdev.h>
+> +
+> +#include <soc/mediatek/smi.h>
+> +
+> +#include "mtk_cam.h"
+> +#include "mtk_cam-feature.h"
+> +#include "mtk_cam-raw.h"
+> +
+> +#include "mtk_cam-regs-mt8188.h"
+> +
+> +#include "mtk_cam-video.h"
+> +#include "mtk_cam-seninf-if.h"
+> +#include "mtk_camera-v4l2-controls.h"
+> +
+> +#include "mtk_cam-dmadbg.h"
+> +#include "mtk_cam-raw_debug.h"
+> +
+> +static unsigned int debug_raw;
+> +module_param(debug_raw, uint, 0644);
+> +MODULE_PARM_DESC(debug_raw, "activates debug info");
+> +
+> +static int debug_raw_num = -1;
+> +module_param(debug_raw_num, int, 0644);
+> +MODULE_PARM_DESC(debug_raw_num, "debug: num of used raw devices");
+> +
+> +static int debug_pixel_mode = -1;
+> +module_param(debug_pixel_mode, int, 0644);
+> +MODULE_PARM_DESC(debug_pixel_mode, "debug: pixel mode");
+> +
+> +static int debug_clk_idx = -1;
+> +module_param(debug_clk_idx, int, 0644);
+> +MODULE_PARM_DESC(debug_clk_idx, "debug: clk idx");
+> +
+> +static int debug_dump_fbc;
+> +module_param(debug_dump_fbc, int, 0644);
+> +MODULE_PARM_DESC(debug_dump_fbc, "debug: dump fbc");
+> +
+In addition to the first review that I gave you on patch [02/10]: please drop
+all those module parameters. If you want debug switches, use debugfs instead.
 
-Pushed V2 here. Any further comment on this ?
-
-Thanks,
-Pintu
+Regards,
+Angelo
 _______________________________________________
 Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
 To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
