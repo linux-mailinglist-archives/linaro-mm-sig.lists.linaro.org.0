@@ -2,318 +2,147 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4BEE399771C
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  9 Oct 2024 23:00:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2CD7E997C66
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Oct 2024 07:27:01 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 5B0E43F3DB
-	for <lists+linaro-mm-sig@lfdr.de>; Wed,  9 Oct 2024 21:00:26 +0000 (UTC)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
-	by lists.linaro.org (Postfix) with ESMTPS id 39E1D3F3DB
-	for <linaro-mm-sig@lists.linaro.org>; Wed,  9 Oct 2024 21:00:08 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 3AFA143C1E
+	for <lists+linaro-mm-sig@lfdr.de>; Thu, 10 Oct 2024 05:27:00 +0000 (UTC)
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
+	by lists.linaro.org (Postfix) with ESMTPS id 723553F33D
+	for <linaro-mm-sig@lists.linaro.org>; Thu, 10 Oct 2024 05:26:43 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=kernel.org header.s=k20201202 header.b=UL057BFp;
-	dmarc=pass (policy=quarantine) header.from=kernel.org;
-	spf=pass (lists.linaro.org: domain of robh@kernel.org designates 139.178.84.217 as permitted sender) smtp.mailfrom=robh@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
-	by dfw.source.kernel.org (Postfix) with ESMTP id 5EA215C5D52;
-	Wed,  9 Oct 2024 21:00:03 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23CD0C4CEC3;
-	Wed,  9 Oct 2024 21:00:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1728507607;
-	bh=5lbw1fw2F0YDO/Ghx0pIMUv4r43RfjdulBFeOF1eqBI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=UL057BFpi/mpH0RVD0VDU6ua6KJ7efybWqE6QHGA4RNfbdyyG2QhVejnrUHTyyhKd
-	 iPx8NwWcLmiy5zxXSqEe9WgKjzQrtvmwmSd7Necg62Hm/OCNLNDQBRSztwbzRd3ONy
-	 LcifS0XSvchrkkfeTsq2Jhem9s4wSz8itsuUyz9KlJj9pCExfRtY8KD31qtpqpC71k
-	 R0sApesTcTY4x/fSeCOIVdt2Q2HDEAc0rRV16/6235YmRIbTglf7qeQCfz3Sogn6aV
-	 BieWTl5TWrdVUsuRvUUdOWjiRtCiaikSD4F3lLyEuKSQre5o6EhihTCHRL2XLcrsiz
-	 j5I2ybnt/SKmA==
-Date: Wed, 9 Oct 2024 16:00:06 -0500
-From: Rob Herring <robh@kernel.org>
-To: Shu-hsiang Yang <Shu-hsiang.Yang@mediatek.com>
-Message-ID: <20241009210006.GA643988-robh@kernel.org>
-References: <20241009111551.27052-1-Shu-hsiang.Yang@mediatek.com>
- <20241009111551.27052-2-Shu-hsiang.Yang@mediatek.com>
+	dkim=pass header.d=gmail.com header.s=20230601 header.b=JvJghz9i;
+	dmarc=pass (policy=none) header.from=gmail.com;
+	spf=pass (lists.linaro.org: domain of pintu.ping@gmail.com designates 209.85.167.50 as permitted sender) smtp.mailfrom=pintu.ping@gmail.com
+Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-53995380bb3so554907e87.1
+        for <linaro-mm-sig@lists.linaro.org>; Wed, 09 Oct 2024 22:26:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1728538002; x=1729142802; darn=lists.linaro.org;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=I2OggcA+gxqqTXGi/3T5tDMn09O+q9SzuiOHvmMgRpY=;
+        b=JvJghz9ix6sqSZ+FeXnO3oaHQdOm8eXrloMLTlHqhsiOrzTraJzYGs51DGnHMaxayA
+         NHYDyqy9IJrcpEnC4TflxFvEBGyMUB6pxT5hAiyYdvPH4ldjhMzKvoj9RUGaMhCKv78i
+         KJ9b37QR/hL1Rf8/RJOSHBAdqyzo4aE0EitG3RJwQ9VWHGA922f1mD3dBm678jTOilts
+         eh9eqSOOFPbNumiCJQ47betn1rFq9+sRwMLZYHzXmTOfQecgHuLbm2G6r3UF4pdC9fZG
+         uqW9boGnEMLDPZxWb2mhh9WL3CEOzqaAUs65XgeETLmWzXAvp9Ss68tdj/y2BNPzaXYz
+         JF4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1728538002; x=1729142802;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to;
+        bh=I2OggcA+gxqqTXGi/3T5tDMn09O+q9SzuiOHvmMgRpY=;
+        b=RjpmDStKYuKMQDmqDefH2GcZcd9EdRO8cqoJemMrFGFAkmQgm77YtCMleBKpH3jH0s
+         vH+Io0Ssg1VEobB9qRen7kC+Lldpl3hrMCpdu8Jl3GZGevMO0rADG52SLGCajO9JKlx1
+         TO58nKve1SGmLccirwNcnWX/tYc/+AfTy9XYMAnQcx3BTKN5h6GDDmyLLIhggI8mlho3
+         S0I7LYCq7rQMIIhvU7mbwH7JRTDBuxnYithyo27PBbk2szZ240LwES02kyXixvNTrP3i
+         Ei2Ajh3N///P1LC3gBWduPgXnoF1DWnYkkZ7ahzUuXsCIdiQdUMp/i5uzeCW985sX53i
+         GdIg==
+X-Forwarded-Encrypted: i=1; AJvYcCU6Ef0ZC6/76EbgxpJDbCYiRa1xzsOo9rca9atRnCb9DonUyFZ6HNZ2iYtqdwGDI8jM7sNLFjD3uGZ/Ln82@lists.linaro.org
+X-Gm-Message-State: AOJu0YwsoRV/wT0CjNH/i1ORUwbkQcm+OLgwwg2wfokj3NC85iPcDm4N
+	8fcckhk35wevJob7BJOu//ljQ34qRlK2TRGUuCXsCVx8h8b3goJcCVaBVGKUQIxmCpbVzk3Ea+v
+	1crh80yxpg7cgIxBpAYT1Z1iD6n4=
+X-Google-Smtp-Source: AGHT+IEbIWNphp9CaxyIBmS6fFoevv90QzHYFfcACGBeoawWKdzJgDWeGYAJzuVQ4Yqa5/qKqf5ITwHfksRZcGmb+ws=
+X-Received: by 2002:a05:6512:4003:b0:539:88f7:d3c0 with SMTP id
+ 2adb3069b0e04-539c496ce04mr3124182e87.51.1728538001854; Wed, 09 Oct 2024
+ 22:26:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20241009111551.27052-2-Shu-hsiang.Yang@mediatek.com>
+References: <20241001175057.27172-1-quic_pintu@quicinc.com> <CABdmKX2xEn8QjObqR3VNb=RqMZVNBiNtkfYWm8h_3Xc8KMkdag@mail.gmail.com>
+In-Reply-To: <CABdmKX2xEn8QjObqR3VNb=RqMZVNBiNtkfYWm8h_3Xc8KMkdag@mail.gmail.com>
+From: Pintu Agarwal <pintu.ping@gmail.com>
+Date: Thu, 10 Oct 2024 10:56:29 +0530
+Message-ID: <CAOuPNLihBBQ0zviFsQ7Vqsde+yy3CGP5OJUkaZFA=1aZbj_NZg@mail.gmail.com>
+To: "T.J. Mercier" <tjmercier@google.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 39E1D3F3DB
-X-Spamd-Bar: -
-X-Spamd-Result: default: False [-1.50 / 15.00];
+X-Rspamd-Queue-Id: 723553F33D
+X-Spamd-Bar: ---
+X-Spamd-Result: default: False [-4.00 / 15.00];
 	BAYES_HAM(-3.00)[99.99%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MID_CONTAINS_FROM(1.00)[];
-	DMARC_POLICY_ALLOW(-0.50)[kernel.org,quarantine];
-	R_SPF_ALLOW(-0.20)[+ip4:139.178.84.217];
-	R_DKIM_ALLOW(-0.20)[kernel.org:s=k20201202];
+	DMARC_POLICY_ALLOW(-0.50)[gmail.com,none];
+	R_DKIM_ALLOW(-0.20)[gmail.com:s=20230601];
+	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
 	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
 	ARC_NA(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	ASN(0.00)[asn:54825, ipnet:139.178.80.0/21, country:US];
-	RCPT_COUNT_TWELVE(0.00)[21];
+	RCVD_COUNT_ONE(0.00)[1];
+	RCPT_COUNT_TWELVE(0.00)[13];
 	MIME_TRACE(0.00)[0:+];
-	TAGGED_RCPT(0.00)[dt];
-	NEURAL_HAM(-0.00)[-0.998];
-	RCVD_TLS_LAST(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,gmail.com,collabora.com,linaro.org,amd.com,vger.kernel.org,lists.infradead.org,lists.freedesktop.org,lists.linaro.org,mediatek.com,chromium.org];
+	FREEMAIL_ENVFROM(0.00)[gmail.com];
+	FREEMAIL_FROM(0.00)[gmail.com];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.167.50:from];
+	MID_RHS_MATCH_FROMTLD(0.00)[];
+	MISSING_XM_UA(0.00)[];
 	TO_DN_SOME(0.00)[];
 	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
+	FROM_HAS_DN(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
 	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DKIM_TRACE(0.00)[kernel.org:+]
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_FROM(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	DKIM_TRACE(0.00)[gmail.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: ABX7DL24JCIQAWCTPRNQIMMQ6W2L6PIT
-X-Message-ID-Hash: ABX7DL24JCIQAWCTPRNQIMMQ6W2L6PIT
-X-MailFrom: robh@kernel.org
-X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation; nonmember-moderation; administrivia; implicit-dest; max-recipients; max-size; news-moderation; no-subject; digests; suspicious-header
-CC: Mauro Carvalho Chehab <mchehab@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Sumit Semwal <sumit.semwal@linaro.org>, Christian Konig <christian.koenig@amd.com>, linux-media@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, Project_Global_Chrome_Upstream_Group@mediatek.com, yaya.chang@mediatek.com, teddy.chen@mediatek.com, hidenorik@chromium.org, yunkec@chromium.org, shun-yi.wang@mediatek.com
+Message-ID-Hash: JDUKVUVGQWE2CKSUY5I2N3EHWUTM6GY7
+X-Message-ID-Hash: JDUKVUVGQWE2CKSUY5I2N3EHWUTM6GY7
+X-MailFrom: pintu.ping@gmail.com
+X-Mailman-Rule-Hits: nonmember-moderation
+X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
+CC: Pintu Kumar <quic_pintu@quicinc.com>, sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, jstultz@google.com, christian.koenig@amd.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, joe@perches.com, skhan@linuxfoundation.org
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v1 01/10] dt-bindings: media: mediatek: add camsys device
+Subject: [Linaro-mm-sig] Re: [PATCH 2/3] dma-buf/heaps: replace kmap_atomic with kmap_local_page
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/ABX7DL24JCIQAWCTPRNQIMMQ6W2L6PIT/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JDUKVUVGQWE2CKSUY5I2N3EHWUTM6GY7/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Wed, Oct 09, 2024 at 07:15:42PM +0800, Shu-hsiang Yang wrote:
-> 1. Add camera isp7x module device document
-> 2. Add camera interface device document
-> 
-> Signed-off-by: Shu-hsiang Yang <Shu-hsiang.Yang@mediatek.com>
-> ---
->  .../media/mediatek/mediatek,cam-raw.yaml      | 169 ++++++++++++++++++
->  .../media/mediatek/mediatek,cam-yuv.yaml      | 148 +++++++++++++++
->  .../media/mediatek/mediatek,camisp.yaml       |  71 ++++++++
->  .../media/mediatek/mediatek,seninf-core.yaml  | 106 +++++++++++
->  .../media/mediatek/mediatek,seninf.yaml       |  88 +++++++++
->  5 files changed, 582 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/media/mediatek/mediatek,cam-raw.yaml
->  create mode 100644 Documentation/devicetree/bindings/media/mediatek/mediatek,cam-yuv.yaml
->  create mode 100644 Documentation/devicetree/bindings/media/mediatek/mediatek,camisp.yaml
->  create mode 100644 Documentation/devicetree/bindings/media/mediatek/mediatek,seninf-core.yaml
->  create mode 100644 Documentation/devicetree/bindings/media/mediatek/mediatek,seninf.yaml
-> 
-> diff --git a/Documentation/devicetree/bindings/media/mediatek/mediatek,cam-raw.yaml b/Documentation/devicetree/bindings/media/mediatek/mediatek,cam-raw.yaml
-> new file mode 100644
-> index 000000000000..c709e4bf0a18
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/media/mediatek/mediatek,cam-raw.yaml
-> @@ -0,0 +1,169 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +# Copyright (c) 2024 MediaTek Inc.
-> +
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/media/mediatek/mediatek,cam-raw.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: The cam-raw unit of MediaTek ISP system
-> +
-> +maintainers:
-> +  - Shu-hsiang Yang <shu-hsiang.yang@mediatek.com>
-> +  - Shun-yi Wang <shun-yi.wang@mediatek.com>
-> +  - Teddy Chen <teddy.chen@mediatek.com>
-> +
-> +description:
-> +  MediaTek cam-raw is the camera RAW processing unit in MediaTek SoC.
-> +
-> +properties:
-> +  compatible:
-> +    const: mediatek,cam-raw
-
-Compatibles should be SoC specific.
-
-> +
-> +  "#address-cells":
-> +    const: 2
-> +
-> +  "#size-cells":
-> +    const: 2
-
-Don't need these. You don't have any child nodes with addresses.
-
-> +
-> +  reg:
-> +    items:
-> +      minItems: 2
-> +      maxItems: 4
-
-Drop items.
-
-> +    minItems: 1
-> +    maxItems: 2
-
-You have to specify what each region is.
-
-Why does it vary? A h/w block either has register region or it doesn't.
-
-> +
-> +  reg-names:
-> +    minItems: 1
-> +    maxItems: 2
-
-You must define the names.
-
-> +
-> +  mediatek,cam-id:
-> +    description:
-> +      Describes the index of MediaTek cam-raw unit for ISP
-> +    $ref: /schemas/types.yaml#/definitions/uint32
-> +    enum: [0, 1, 2]
-
-No, we don't put module indices in DT.
-
-> +
-> +  mediatek,larbs:
-> +    description:
-> +      Describes MediaTek bus infrastructure unit for ISP system.
-> +      List of phandle to the local arbiters in the current SoCs.
-> +      Refer to bindings/memory-controllers/mediatek,smi-larb.yaml.
-> +    $ref: /schemas/types.yaml#/definitions/phandle-array
-> +    minItems: 1
-> +    maxItems: 32
-> +
-> +  interrupts:
-> +    minItems: 1
-> +
-> +  dma-ranges:
-> +    description:
-> +      Describes the address information of IOMMU mapping to memory.
-> +      Defines six fields for the MediaTek IOMMU extended iova, pa, and size.
-> +    minItems: 1
-> +
-> +  power-domains:
-> +    minItems: 1
-> +
-> +  clocks:
-> +    minItems: 4
-> +    maxItems: 16
-
-You have to define what the clocks are.
-
-> +
-> +  clock-names:
-> +    minItems: 4
-> +    maxItems: 16
-> +
-> +  assigned-clocks:
-> +    maxItems: 1
-> +
-> +  assigned-clock-parents:
-> +    maxItems: 1
-
-Drop. You don't need to document assigned-clocks.
-
-> +
-> +  iommus:
-> +    description:
-> +      Points to the respective IOMMU block with master port as argument, see
-> +      Documentation/devicetree/bindings/iommu/mediatek,iommu.yaml for details.
-> +      Ports are according to the HW.
-> +    minItems: 1
-> +    maxItems: 32
-> +
-> +required:
-> +  - compatible
-> +  - reg
-> +  - reg-names
-> +  - interrupts
-> +  - power-domains
-> +  - clocks
-> +  - clock-names
-> +  - iommus
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
-> +    #include <dt-bindings/interrupt-controller/irq.h>
-> +    #include <dt-bindings/power/mediatek,mt8188-power.h>
-> +    #include <dt-bindings/clock/mediatek,mt8188-clk.h>
-> +    #include <dt-bindings/memory/mediatek,mt8188-memory-port.h>
-> +
-> +    soc {
-> +      #address-cells = <2>;
-> +      #size-cells = <2>;
-> +
-> +      cam_raw_a@16030000 {
-> +        compatible = "mediatek,cam-raw";
-> +        reg = <0 0x16030000 0 0x8000>,
-> +              <0 0x16038000 0 0x8000>;
-> +        reg-names = "base", "inner_base";
-> +        mediatek,cam-id = <0>;
-> +        mediatek,larbs = <&larb16a>;
-> +        interrupts = <GIC_SPI 300 IRQ_TYPE_LEVEL_HIGH 0>;
-> +        #address-cells = <2>;
-> +        #size-cells = <2>;
-> +        dma-ranges = <0x2 0x0 0x0 0x40000000 0x1 0x0>;
-> +        power-domains = <&spm MT8188_POWER_DOMAIN_CAM_SUBA>;
-> +        clocks = <&camsys CLK_CAM_MAIN_CAM2MM0_GALS>,
-> +            <&camsys CLK_CAM_MAIN_CAM2MM1_GALS>,
-> +            <&camsys CLK_CAM_MAIN_CAM2SYS_GALS>,
-> +            <&camsys CLK_CAM_MAIN_CAM>,
-> +            <&camsys CLK_CAM_MAIN_CAMTG>,
-> +            <&camsys_rawa CLK_CAM_RAWA_LARBX>,
-> +            <&camsys_rawa CLK_CAM_RAWA_CAM>,
-> +            <&camsys_rawa CLK_CAM_RAWA_CAMTG>,
-> +            <&topckgen CLK_TOP_CAM>,
-> +            <&topckgen CLK_TOP_CAMTG>,
-> +            <&topckgen CLK_TOP_CAMTM>;
-> +        clock-names = "camsys_cam2mm0_cgpdn",
-> +            "camsys_cam2mm1_cgpdn",
-> +            "camsys_cam2sys_cgpdn",
-> +            "camsys_cam_cgpdn",
-> +            "camsys_camtg_cgpdn",
-> +            "camsys_rawa_larbx_cgpdn",
-> +            "camsys_rawa_cam_cgpdn",
-> +            "camsys_rawa_camtg_cgpdn",
-> +            "topckgen_top_cam",
-> +            "topckgen_top_camtg",
-> +            "topckgen_top_camtm";
-> +        assigned-clocks = <&topckgen CLK_TOP_CAM>;
-> +        assigned-clock-parents = <&topckgen CLK_TOP_UNIVPLL_D5>;
-> +        iommus = <&vpp_iommu M4U_PORT_L16A_IMGO_R1>,
-> +            <&vpp_iommu M4U_PORT_L16A_CQI_R1>,
-> +            <&vpp_iommu M4U_PORT_L16A_CQI_R2>,
-> +            <&vpp_iommu M4U_PORT_L16A_BPCI_R1>,
-> +            <&vpp_iommu M4U_PORT_L16A_LSCI_R1>,
-> +            <&vpp_iommu M4U_PORT_L16A_RAWI_R2>,
-> +            <&vpp_iommu M4U_PORT_L16A_RAWI_R3>,
-> +            <&vpp_iommu M4U_PORT_L16A_UFDI_R2>,
-> +            <&vpp_iommu M4U_PORT_L16A_UFDI_R3>,
-> +            <&vpp_iommu M4U_PORT_L16A_RAWI_R4>,
-> +            <&vpp_iommu M4U_PORT_L16A_RAWI_R5>,
-> +            <&vpp_iommu M4U_PORT_L16A_AAI_R1>,
-> +            <&vpp_iommu M4U_PORT_L16A_UFDI_R5>,
-> +            <&vpp_iommu M4U_PORT_L16A_FHO_R1>,
-> +            <&vpp_iommu M4U_PORT_L16A_AAO_R1>,
-> +            <&vpp_iommu M4U_PORT_L16A_TSFSO_R1>,
-> +            <&vpp_iommu M4U_PORT_L16A_FLKO_R1>;
-> +      };
-> +    };
-> +
-> +...
-> diff --git a/Documentation/devicetree/bindings/media/mediatek/mediatek,cam-yuv.yaml b/Documentation/devicetree/bindings/media/mediatek/mediatek,cam-yuv.yaml
-> new file mode 100644
-> index 000000000000..30dfd5e5ecb1
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/media/mediatek/mediatek,cam-yuv.yaml
-
-Similar comments on the rest.
-
-Rob
-
-_______________________________________________
-Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
-To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
+T24gV2VkLCAyIE9jdCAyMDI0IGF0IDAyOjU0LCBULkouIE1lcmNpZXIgPHRqbWVyY2llckBnb29n
+bGUuY29tPiB3cm90ZToNCj4NCj4gT24gVHVlLCBPY3QgMSwgMjAyNCBhdCA3OjUx4oCvUE0gUGlu
+dHUgS3VtYXIgPHF1aWNfcGludHVAcXVpY2luYy5jb20+IHdyb3RlOg0KPiA+DQo+ID4gVXNlIG9m
+IGttYXBfYXRvbWljL2t1bm1hcF9hdG9taWMgaXMgZGVwcmVjYXRlZCwgdXNlDQo+ID4ga21hcF9s
+b2NhbF9wYWdlL2t1bm1hcF9sb2NhbCBpbnN0ZWFkLg0KPiA+DQo+ID4gVGhpcyBpcyByZXBvcnRl
+ZCBieSBjaGVja3BhdGNoLg0KPiA+IEFsc28gZml4IHJlcGVhdGVkIHdvcmQgaXNzdWUuDQo+ID4N
+Cj4gPiBXQVJOSU5HOiBEZXByZWNhdGVkIHVzZSBvZiAna21hcF9hdG9taWMnLCBwcmVmZXIgJ2tt
+YXBfbG9jYWxfcGFnZScgaW5zdGVhZA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIHZvaWQg
+KnZhZGRyID0ga21hcF9hdG9taWMocGFnZSk7DQo+ID4NCj4gPiBXQVJOSU5HOiBEZXByZWNhdGVk
+IHVzZSBvZiAna3VubWFwX2F0b21pYycsIHByZWZlciAna3VubWFwX2xvY2FsJyBpbnN0ZWFkDQo+
+ID4gKyAgICAgICAgICAgICAgICAgICAgICAga3VubWFwX2F0b21pYyh2YWRkcik7DQo+ID4NCj4g
+PiBXQVJOSU5HOiBQb3NzaWJsZSByZXBlYXRlZCB3b3JkOiAnYnknDQo+ID4gKyAgICAgICAgICAg
+ICAgICAgICAgICAgICogaGFzIGJlZW4ga2lsbGVkIGJ5IGJ5IFNJR0tJTEwNCj4gPg0KPiA+IHRv
+dGFsOiAwIGVycm9ycywgMyB3YXJuaW5ncywgNDA1IGxpbmVzIGNoZWNrZWQNCj4gPg0KPiA+IFNp
+Z25lZC1vZmYtYnk6IFBpbnR1IEt1bWFyIDxxdWljX3BpbnR1QHF1aWNpbmMuY29tPg0KPg0KPiBS
+ZXZpZXdlZC1ieTogVC5KLiBNZXJjaWVyIDx0am1lcmNpZXJAZ29vZ2xlLmNvbT4NCj4NCj4gVGhl
+IEFuZHJvaWQga2VybmVscyBoYXZlIGJlZW4gZG9pbmcgdGhpcyBmb3Igb3ZlciBhIHllYXIsIHNv
+IHNob3VsZCBiZQ0KPiBwcmV0dHkgd2VsbCB0ZXN0ZWQgYXQgdGhpcyBwb2ludDoNCj4gaHR0cHM6
+Ly9yLmFuZHJvaWQuY29tL2Mva2VybmVsL2NvbW1vbi8rLzI1MDA4NDANCj4NClRoYW5rIHlvdSBU
+SiBmb3IgdGhlIHJldmlldy4NCkhvcGUgdGhpcyB3aWxsIGJlIHBpY2tlZCBzb29uLg0KDQo+ID4g
+LS0tDQo+ID4gIGRyaXZlcnMvZG1hLWJ1Zi9oZWFwcy9jbWFfaGVhcC5jIHwgNiArKystLS0NCj4g
+PiAgMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkNCj4gPg0K
+PiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL2RtYS1idWYvaGVhcHMvY21hX2hlYXAuYyBiL2RyaXZl
+cnMvZG1hLWJ1Zi9oZWFwcy9jbWFfaGVhcC5jDQo+ID4gaW5kZXggOTNiZTg4YjgwNWZlLi44YzU1
+NDMxY2MxNmMgMTAwNjQ0DQo+ID4gLS0tIGEvZHJpdmVycy9kbWEtYnVmL2hlYXBzL2NtYV9oZWFw
+LmMNCj4gPiArKysgYi9kcml2ZXJzL2RtYS1idWYvaGVhcHMvY21hX2hlYXAuYw0KPiA+IEBAIC0z
+MDksMTMgKzMwOSwxMyBAQCBzdGF0aWMgc3RydWN0IGRtYV9idWYgKmNtYV9oZWFwX2FsbG9jYXRl
+KHN0cnVjdCBkbWFfaGVhcCAqaGVhcCwNCj4gPiAgICAgICAgICAgICAgICAgc3RydWN0IHBhZ2Ug
+KnBhZ2UgPSBjbWFfcGFnZXM7DQo+ID4NCj4gPiAgICAgICAgICAgICAgICAgd2hpbGUgKG5yX2Ns
+ZWFyX3BhZ2VzID4gMCkgew0KPiA+IC0gICAgICAgICAgICAgICAgICAgICAgIHZvaWQgKnZhZGRy
+ID0ga21hcF9hdG9taWMocGFnZSk7DQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgdm9pZCAq
+dmFkZHIgPSBrbWFwX2xvY2FsX3BhZ2UocGFnZSk7DQo+ID4NCj4gPiAgICAgICAgICAgICAgICAg
+ICAgICAgICBtZW1zZXQodmFkZHIsIDAsIFBBR0VfU0laRSk7DQo+ID4gLSAgICAgICAgICAgICAg
+ICAgICAgICAga3VubWFwX2F0b21pYyh2YWRkcik7DQo+ID4gKyAgICAgICAgICAgICAgICAgICAg
+ICAga3VubWFwX2xvY2FsKHZhZGRyKTsNCg0KSG93ZXZlciwgSSByZWFsaXplZCBvbmUgbW9yZSB0
+aGluZy4NClRoaXMgY2FuIGJlIGVhc2lseSByZXBsYWNlZCBieToNCm1lbXNldF9wYWdlKHBhZ2Us
+IDAsIDAsIFBBR0VfU0laRSk7DQoNCkkgd2lsbCBwdXNoIHRoaXMgaW4gbmV3IHBhdGNoc2V0IG9u
+Y2UgdGhpcyBpcyBhdmFpbGFibGUgaW4gbGludXgtbmV4dC4NCg0KVGhhbmtzLA0KUGludHUNCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fCkxpbmFyby1tbS1z
+aWcgbWFpbGluZyBsaXN0IC0tIGxpbmFyby1tbS1zaWdAbGlzdHMubGluYXJvLm9yZwpUbyB1bnN1
+YnNjcmliZSBzZW5kIGFuIGVtYWlsIHRvIGxpbmFyby1tbS1zaWctbGVhdmVAbGlzdHMubGluYXJv
+Lm9yZwo=
