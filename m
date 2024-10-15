@@ -2,128 +2,197 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id C848499AFC9
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 12 Oct 2024 02:53:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9CFE099E398
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Oct 2024 12:18:06 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 84F0B446DB
-	for <lists+linaro-mm-sig@lfdr.de>; Sat, 12 Oct 2024 00:53:26 +0000 (UTC)
-Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
-	by lists.linaro.org (Postfix) with ESMTPS id A487D3F33B
-	for <linaro-mm-sig@lists.linaro.org>; Sat, 12 Oct 2024 00:53:09 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 4A5053F3DF
+	for <lists+linaro-mm-sig@lfdr.de>; Tue, 15 Oct 2024 10:18:05 +0000 (UTC)
+Received: from mail-ed1-f51.google.com (mail-ed1-f51.google.com [209.85.208.51])
+	by lists.linaro.org (Postfix) with ESMTPS id 1973A3F44F
+	for <linaro-mm-sig@lists.linaro.org>; Tue, 15 Oct 2024 10:17:34 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=google.com header.s=20230601 header.b=ceFuEyGJ;
-	dmarc=pass (policy=reject) header.from=google.com;
-	spf=pass (lists.linaro.org: domain of jstultz@google.com designates 209.85.218.48 as permitted sender) smtp.mailfrom=jstultz@google.com
-Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-a997736106fso330641466b.3
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 11 Oct 2024 17:53:09 -0700 (PDT)
+	dkim=pass header.d=linaro.org header.s=google header.b=ws+bFwuO;
+	dmarc=pass (policy=none) header.from=linaro.org;
+	spf=pass (lists.linaro.org: domain of jens.wiklander@linaro.org designates 209.85.208.51 as permitted sender) smtp.mailfrom=jens.wiklander@linaro.org
+Received: by mail-ed1-f51.google.com with SMTP id 4fb4d7f45d1cf-5c95a962c2bso4005899a12.2
+        for <linaro-mm-sig@lists.linaro.org>; Tue, 15 Oct 2024 03:17:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20230601; t=1728694388; x=1729299188; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=fX8qbIl6yI0pe7Z7Ey3xMlNXl8QKMUUNG2vGHvdrAqQ=;
-        b=ceFuEyGJCKZ4i1pOR2pt/A5ODWvjrIE0GZUPmIfNlFlaQqTJVTIugGKMe/CvUsBmvL
-         Ci8bI2ezuVYzVyyXVJ8bgjUdT2/O/Dyv+7M6DEJ/EVxtzi0BGODBIY77jfC5y5FIkwex
-         53hCjd03iM9LO6RU8eW7A8GjLskHUiQubkLRX4EAwZFrHLLdph7FgMk8M+zIpOEmDy3A
-         JSKesiCsV1b+FafQWjfilCRp7uco/NJslKMN6b0G1dDVocXbTiU1lX7WQoN9TOlAXer1
-         9HCiqtS2jOc3xGG1l00h1ejvpHJhDFa4rj/Jv0HoKsv7DfMQ89ym4a5hmyDCTaAd0HjP
-         tYHw==
+        d=linaro.org; s=google; t=1728987453; x=1729592253; darn=lists.linaro.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to;
+        bh=/vsiyFH7AdAG35W+mWfukPu7OxX/u28De0FB1ag7l3I=;
+        b=ws+bFwuOHA8F2jLV+D6N8ar7fN4t+Rrr5csCaOCuRmTwuI1wNTg3L34Fvost1dsH0U
+         Hi7TgT7CgNY/fYrs5LaE3Yrr7PMvHwNwAfoFFs0Dnt7jZIsW0RCuo2u/xITst08kZOrL
+         LnLatCdhk4p0Ky2Vnv43uelexOctjlzy7zkWJrTLHbiRO3ARx0Er+Ap/nlXZ8Erhgmlr
+         PInUM3gWnAuFnv9XCC9l+J9pqksoROJXEauL55XHpjctcImP5Sjmro75YUOla0xYvfbh
+         T/6JdogD1pKc83CfUhr249/Sh5z2tmdSn34qSUkZIhtSbzesadkzkfcqDjmO5i8e4sTN
+         Lh1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1728694388; x=1729299188;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=fX8qbIl6yI0pe7Z7Ey3xMlNXl8QKMUUNG2vGHvdrAqQ=;
-        b=rcM61we7W49RqWn5CZ/wvuRDQd9yTZfhs/O+ovlO3TvJyV51xbGzzpJqj745ZReJpK
-         cS8e3PKEuWiUX1pkq8fNXq9bxSvFkEDHLLtNenxKo4KoiM6/H3b7muKspbY/N7vVRCUB
-         CfJHNDLw52JV7W9Eq2A/NTxIcsDi0DO0uCrTi54IVN/4Pt6zhefTmb1CeqtZaclGnJak
-         dT3uHCXbRuHyuJkNG3LyWK3aqqLYZuxc+y+P7fA2Mdesmtly2f3D2sE0USQfJmsYYg1A
-         fmeUoqzrTClMrjwKu5DgDukJMxEg/ykUYGGVZDGgk7DcAynDF5r8WtrnqWcyVmhivUyt
-         9jVw==
-X-Forwarded-Encrypted: i=1; AJvYcCWZADSiOKy2iPaxo5dI+ccWJ6dagH5kD2rtPJv6sE9TlNI2M6awDfa+2eKcZ3vdhjtNTdq6PBqE2tyTedF1@lists.linaro.org
-X-Gm-Message-State: AOJu0YzxXMsUZfWlryfyILqFjISQn70sNExpvj5uyUNCbw2bSJujbOFA
-	o2f11rtc5yZtier7Yyi/UhBzXnZSL8HEvUgQyJHBLLzTnVJ+Y9/eBKQdUgzYSFKV5AdANyQuvB0
-	KI51WWZTRIIr7bZvDNzKRoWatuxvJTyMX6xo=
-X-Google-Smtp-Source: AGHT+IHcGOMyjbUnqPtl1UM87h3YL87dZ2gYOIUO6wGlw/CCJ1mjQPIwZZ9PoqGjsv+QiY4iVj7yxWbnA0AL382mrFA=
-X-Received: by 2002:a17:907:ea3:b0:a99:4e8c:e5c9 with SMTP id
- a640c23a62f3a-a99b937b7famr358020366b.20.1728694388307; Fri, 11 Oct 2024
- 17:53:08 -0700 (PDT)
+        d=1e100.net; s=20230601; t=1728987453; x=1729592253;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=/vsiyFH7AdAG35W+mWfukPu7OxX/u28De0FB1ag7l3I=;
+        b=WWSV149MDQ+Ki1cHlOXax8emkr3xKM6ce7bgLuuZbBsFkJHr/gtjtbWdHjarHQUiq+
+         QOg32Docgvorr1RYCz7w6Uf+nUTW7HDptH1UuwiwoLgHc+2oIfoVkZR7BCYb1eZFAw8d
+         AzhuxhBxUG/PtpnaSmhmT3I60jcwVcO1DRLSwspdVmY06HeXV7eDRbKFIxxI80wf5jOh
+         YBbgPYzEgLbWo9VZ6bq/pLh8F3t0ULotyPY9ccI6U4B5hAhRdZOgBmw3dY4XUbWcdj+d
+         2nSSnjMn3z7FAmHshNs1eEzwKIQRkD2NIMW4lPugAXpI99g/Iav84n2/ewuug3e/lsPg
+         upKQ==
+X-Forwarded-Encrypted: i=1; AJvYcCXzcnSJjaa9h7ixiB9mKCMa+t3vBAo+LBmoI4q+wQrke3bAOtG36/K0K+gImIiXrWm38fddcwTuc3iu00b0@lists.linaro.org
+X-Gm-Message-State: AOJu0Yxv1R3WPud7FBQceOIEgYa5vdgZCO4DD+9psNwNsDtEW+Uz6PQ8
+	5Dzwmrq/bQ0FXbIMw8U6syIGX1bpS8y8a3IaYkWdtHraBfta5+D+HLmeTb2cRPkGuw==
+X-Google-Smtp-Source: AGHT+IFoSBcZrkiChgB4pqL7tE0eZfJ4KXAE8/CROlLVwwwfJ7xMioU8E2x8rJrk0YsmPXDwWauSdg==
+X-Received: by 2002:a05:6402:43ce:b0:5c4:1320:e5a3 with SMTP id 4fb4d7f45d1cf-5c948cd8df1mr11041123a12.16.1728987452987;
+        Tue, 15 Oct 2024 03:17:32 -0700 (PDT)
+Received: from rayden.urgonet (h-217-31-164-171.A175.priv.bahnhof.se. [217.31.164.171])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-5c98d778b80sm519581a12.78.2024.10.15.03.17.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 15 Oct 2024 03:17:32 -0700 (PDT)
+From: Jens Wiklander <jens.wiklander@linaro.org>
+To: linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linaro-mm-sig@lists.linaro.org,
+	op-tee@lists.trustedfirmware.org,
+	linux-arm-kernel@lists.infradead.org
+Date: Tue, 15 Oct 2024 12:15:32 +0200
+Message-ID: <20241015101716.740829-1-jens.wiklander@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20241005180955.6523-1-quic_pintu@quicinc.com>
-In-Reply-To: <20241005180955.6523-1-quic_pintu@quicinc.com>
-From: John Stultz <jstultz@google.com>
-Date: Fri, 11 Oct 2024 17:52:56 -0700
-Message-ID: <CANDhNCpeJFn9NMQYwWT04x=HL2bUi71V6YpQG7Gg5PVVCbRfXw@mail.gmail.com>
-To: Pintu Kumar <quic_pintu@quicinc.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: A487D3F33B
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.50 / 15.00];
-	BAYES_HAM(-3.00)[99.99%];
+X-Rspamd-Queue-Id: 1973A3F44F
+X-Spamd-Bar: -
+X-Spamd-Result: default: False [-1.00 / 15.00];
+	BAYES_HAM(-3.00)[100.00%];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[google.com,reject];
-	R_DKIM_ALLOW(-0.20)[google.com:s=20230601];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
 	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
 	MIME_GOOD(-0.10)[text/plain];
 	ARC_NA(0.00)[];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	FROM_EQ_ENVFROM(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	RCVD_COUNT_ONE(0.00)[1];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[13];
-	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.218.48:from];
-	TAGGED_RCPT(0.00)[];
-	MISSING_XM_UA(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	FREEMAIL_CC(0.00)[linaro.org,collabora.com,arm.com,google.com,amd.com,vger.kernel.org,lists.freedesktop.org,lists.linaro.org,perches.com,linuxfoundation.org,gmail.com];
-	FROM_HAS_DN(0.00)[];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	NEURAL_HAM(-0.00)[-1.000];
+	RCPT_COUNT_TWELVE(0.00)[20];
 	RCVD_TLS_LAST(0.00)[];
-	DKIM_TRACE(0.00)[google.com:+]
+	MIME_TRACE(0.00)[0:+];
+	FREEMAIL_CC(0.00)[nxp.com,gmail.com,mediatek.com,linaro.org,collabora.com,arm.com,google.com,amd.com,qti.qualcomm.com];
+	URIBL_BLOCKED(0.00)[optee.readthedocs.io:url,mail-ed1-f51.google.com:helo,mail-ed1-f51.google.com:rdns,linaro.org:mid,linaro.org:dkim];
+	DKIM_TRACE(0.00)[linaro.org:+];
+	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
+	TAGGED_RCPT(0.00)[];
+	NEURAL_HAM(-0.00)[-1.000];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	RWL_MAILSPIKE_POSSIBLE(0.00)[209.85.208.51:from];
+	FROM_HAS_DN(0.00)[]
 X-Rspamd-Action: no action
-Message-ID-Hash: JROHYOTDE4BS2Z4JQERF26MWF2Z7HEZP
-X-Message-ID-Hash: JROHYOTDE4BS2Z4JQERF26MWF2Z7HEZP
-X-MailFrom: jstultz@google.com
+Message-ID-Hash: TOV53FIQZEZBCE355ZFOAAKHD763LB3X
+X-Message-ID-Hash: TOV53FIQZEZBCE355ZFOAAKHD763LB3X
+X-MailFrom: jens.wiklander@linaro.org
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: sumit.semwal@linaro.org, benjamin.gaignard@collabora.com, Brian.Starkey@arm.com, tjmercier@google.com, christian.koenig@amd.com, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, linux-kernel@vger.kernel.org, joe@perches.com, skhan@linuxfoundation.org, pintu.ping@gmail.com
+CC: Olivier Masse <olivier.masse@nxp.com>, Thierry Reding <thierry.reding@gmail.com>, Yong Wu <yong.wu@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>, Sumit Garg <sumit.garg@linaro.org>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, azarrabi@qti.qualcomm.com, Jens Wiklander <jens.wiklander@linaro.org>
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [PATCH v2] dma-buf: fix S_IRUGO to 0444, block comments, func declaration
+Subject: [Linaro-mm-sig] [RFC PATCH v2 0/2] TEE subsystem for restricted dma-buf allocations
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/JROHYOTDE4BS2Z4JQERF26MWF2Z7HEZP/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/TOV53FIQZEZBCE355ZFOAAKHD763LB3X/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-T24gU2F0LCBPY3QgNSwgMjAyNCBhdCAxMToxMOKAr0FNIFBpbnR1IEt1bWFyIDxxdWljX3BpbnR1
-QHF1aWNpbmMuY29tPiB3cm90ZToNCj4NCj4gVGhlc2Ugd2FybmluZ3MvZXJyb3JzIGFyZSByZXBv
-cnRlZCBieSBjaGVja3BhdGNoLg0KPiBGaXggdGhlbSB3aXRoIG1pbm9yIGNoYW5nZXMgdG8gbWFr
-ZSBpdCBjbGVhbi4NCj4gTm8gb3RoZXIgZnVuY3Rpb25hbCBjaGFuZ2VzLg0KPg0KPiBXQVJOSU5H
-OiBCbG9jayBjb21tZW50cyB1c2UgKiBvbiBzdWJzZXF1ZW50IGxpbmVzDQo+ICsgICAgICAgLyog
-b25seSBzdXBwb3J0IGRpc2NvdmVyaW5nIHRoZSBlbmQgb2YgdGhlIGJ1ZmZlciwNCj4gKyAgICAg
-ICAgICBidXQgYWxzbyBhbGxvdyBTRUVLX1NFVCB0byBtYWludGFpbiB0aGUgaWRpb21hdGljDQo+
-DQo+IFdBUk5JTkc6IEJsb2NrIGNvbW1lbnRzIHVzZSBhIHRyYWlsaW5nICovIG9uIGEgc2VwYXJh
-dGUgbGluZQ0KPiArICAgICAgICAgIFNFRUtfRU5EKDApLCBTRUVLX0NVUigwKSBwYXR0ZXJuICov
-DQo+DQo+IFdBUk5JTkc6IEJsb2NrIGNvbW1lbnRzIHVzZSBhIHRyYWlsaW5nICovIG9uIGEgc2Vw
-YXJhdGUgbGluZQ0KPiArICAgICAgICAqIGJlZm9yZSBwYXNzaW5nIHRoZSBzZ3QgYmFjayB0byB0
-aGUgZXhwb3J0ZXIuICovDQo+DQo+IEVSUk9SOiAiZm9vICogYmFyIiBzaG91bGQgYmUgImZvbyAq
-YmFyIg0KPiArc3RhdGljIHN0cnVjdCBzZ190YWJsZSAqIF9fbWFwX2RtYV9idWYoc3RydWN0IGRt
-YV9idWZfYXR0YWNobWVudCAqYXR0YWNoLA0KPg0KPiBXQVJOSU5HOiBTeW1ib2xpYyBwZXJtaXNz
-aW9ucyAnU19JUlVHTycgYXJlIG5vdCBwcmVmZXJyZWQuIENvbnNpZGVyIHVzaW5nIG9jdGFsIHBl
-cm1pc3Npb25zICcwNDQ0Jy4NCj4gKyAgICAgICBkID0gZGVidWdmc19jcmVhdGVfZmlsZSgiYnVm
-aW5mbyIsIFNfSVJVR08sIGRtYV9idWZfZGVidWdmc19kaXIsDQo+DQo+IHRvdGFsOiAxIGVycm9y
-cywgNCB3YXJuaW5ncywgMTc0NiBsaW5lcyBjaGVja2VkDQo+DQo+IFNpZ25lZC1vZmYtYnk6IFBp
-bnR1IEt1bWFyIDxxdWljX3BpbnR1QHF1aWNpbmMuY29tPg0KDQpMb29rcyBvayB0byBtZS4gVGhh
-bmtzIGZvciBzZW5kaW5nIHRoZXNlIGNsZWFudXBzIQ0KQWNrZWQtYnk6IEpvaG4gU3R1bHR6IDxq
-c3R1bHR6QGdvb2dsZS5jb20+DQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fXwpMaW5hcm8tbW0tc2lnIG1haWxpbmcgbGlzdCAtLSBsaW5hcm8tbW0tc2lnQGxp
-c3RzLmxpbmFyby5vcmcKVG8gdW5zdWJzY3JpYmUgc2VuZCBhbiBlbWFpbCB0byBsaW5hcm8tbW0t
-c2lnLWxlYXZlQGxpc3RzLmxpbmFyby5vcmcK
+Hi,
+
+This patch set allocates the restricted DMA-bufs via the TEE subsystem.
+This a complete rewrite compared to the previous patch set [1], and other
+earlier proposals [2] and [3] with a separate restricted heap.
+
+The TEE subsystem handles the DMA-buf allocations since it is the TEE
+(OP-TEE, AMD-TEE, TS-TEE, or a future QTEE) which sets up the restrictions
+for the memory used for the DMA-bufs.
+
+I've added a new IOCTL, TEE_IOC_RSTMEM_ALLOC, to allocate the restricted
+DMA-bufs. This new IOCTL reaches the backend TEE driver, allowing it to
+choose how to allocate the restricted physical memory.
+
+TEE_IOC_RSTMEM_ALLOC is quite similar to TEE_IOC_SHM_ALLOC so it's tempting
+to extend TEE_IOC_SHM_ALLOC with two new flags
+TEE_IOC_SHM_FLAG_SECURE_VIDEO and TEE_IOC_SHM_FLAG_SECURE_TRUSTED_UI for
+the same feature. However, it might be a bit confusing since
+TEE_IOC_SHM_ALLOC only returns an anonymous file descriptor, but
+TEE_IOC_SHM_FLAG_SECURE_VIDEO and TEE_IOC_SHM_FLAG_SECURE_TRUSTED_UI would
+return a DMA-buf file descriptor instead. What do others think?
+
+This can be tested on QEMU with the following steps:
+repo init -u https://github.com/jenswi-linaro/manifest.git -m qemu_v8.xml \
+        -b prototype/sdp-v2
+repo sync -j8
+cd build
+make toolchains -j4
+make all -j$(nproc)
+make run-only
+# login and at the prompt:
+xtest --sdp-basic
+
+https://optee.readthedocs.io/en/latest/building/prerequisites.html
+list dependencies needed to build the above.
+
+The tests are pretty basic, mostly checking that a Trusted Application in
+the secure world can access and manipulate the memory. There are also some
+negative tests for out of bounds buffers etc.
+
+Thanks,
+Jens
+
+[1] https://lore.kernel.org/lkml/20240830070351.2855919-1-jens.wiklander@linaro.org/
+[2] https://lore.kernel.org/dri-devel/20240515112308.10171-1-yong.wu@mediatek.com/
+[3] https://lore.kernel.org/lkml/20220805135330.970-1-olivier.masse@nxp.com/
+
+Changes since the V1 RFC:
+* Based on v6.11
+* Complete rewrite, replacing the restricted heap with TEE_IOC_RSTMEM_ALLOC
+
+Changes since Olivier's post [2]:
+* Based on Yong Wu's post [1] where much of dma-buf handling is done in
+  the generic restricted heap
+* Simplifications and cleanup
+* New commit message for "dma-buf: heaps: add Linaro restricted dmabuf heap
+  support"
+* Replaced the word "secure" with "restricted" where applicable
+
+Jens Wiklander (2):
+  tee: add restricted memory allocation
+  optee: support restricted memory allocation
+
+ drivers/tee/Makefile              |   1 +
+ drivers/tee/optee/core.c          |  21 ++++
+ drivers/tee/optee/optee_private.h |   6 +
+ drivers/tee/optee/optee_smc.h     |  35 ++++++
+ drivers/tee/optee/smc_abi.c       |  45 ++++++-
+ drivers/tee/tee_core.c            |  33 ++++-
+ drivers/tee/tee_private.h         |   2 +
+ drivers/tee/tee_rstmem.c          | 200 ++++++++++++++++++++++++++++++
+ drivers/tee/tee_shm.c             |   2 +
+ drivers/tee/tee_shm_pool.c        |  69 ++++++++++-
+ include/linux/tee_core.h          |   6 +
+ include/linux/tee_drv.h           |   9 ++
+ include/uapi/linux/tee.h          |  33 ++++-
+ 13 files changed, 455 insertions(+), 7 deletions(-)
+ create mode 100644 drivers/tee/tee_rstmem.c
+
+-- 
+2.43.0
+
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
