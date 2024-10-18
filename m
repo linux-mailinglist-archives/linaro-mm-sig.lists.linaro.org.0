@@ -2,303 +2,328 @@ Return-Path: <linaro-mm-sig-bounces+lists+linaro-mm-sig=lfdr.de@lists.linaro.org
 X-Original-To: lists+linaro-mm-sig@lfdr.de
 Delivered-To: lists+linaro-mm-sig@lfdr.de
 Received: from lists.linaro.org (lists.linaro.org [3.208.193.21])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AE9F9A42DF
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 18 Oct 2024 17:49:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 298319A4986
+	for <lists+linaro-mm-sig@lfdr.de>; Sat, 19 Oct 2024 00:12:30 +0200 (CEST)
 Received: from lists.linaro.org (localhost [127.0.0.1])
-	by lists.linaro.org (Postfix) with ESMTP id 318A543F7E
-	for <lists+linaro-mm-sig@lfdr.de>; Fri, 18 Oct 2024 15:49:02 +0000 (UTC)
-Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
-	by lists.linaro.org (Postfix) with ESMTPS id 88E0040C96
-	for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Oct 2024 15:48:45 +0000 (UTC)
+	by lists.linaro.org (Postfix) with ESMTP id 1D1054430F
+	for <lists+linaro-mm-sig@lfdr.de>; Fri, 18 Oct 2024 22:12:29 +0000 (UTC)
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.8])
+	by lists.linaro.org (Postfix) with ESMTPS id 4A5BE3F638
+	for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Oct 2024 22:12:13 +0000 (UTC)
 Authentication-Results: lists.linaro.org;
-	dkim=pass header.d=linaro.org header.s=google header.b=nITv6LiL;
-	dmarc=pass (policy=none) header.from=linaro.org;
-	spf=pass (lists.linaro.org: domain of jens.wiklander@linaro.org designates 209.85.160.51 as permitted sender) smtp.mailfrom=jens.wiklander@linaro.org
-Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-2887abeefbdso1156826fac.0
-        for <linaro-mm-sig@lists.linaro.org>; Fri, 18 Oct 2024 08:48:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1729266525; x=1729871325; darn=lists.linaro.org;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=s/oFf/kMLVlgJ0FFtDlxauZft7NM7jeJ0DH4Xii7VwQ=;
-        b=nITv6LiLvFR3VxXAdBgCR4TddH72rdJmGt+C52OsypYf0qX1iVXo5gdLCXapKEjXHr
-         RiDnM31jbIKbHZV+xmlVxcLNnSPsGjIPzF3h/Y/IABXsClFutl07NY4CDO+8oUDvDjs5
-         AMj6Q1e63nxo9TXyS2wUPWq8jV4WHSF5P0dhS2bGzFFEeKLCXD5XGgXLkw2+eIZ+jGwQ
-         RgRXrFUlaYzqXr984hIR2d0HwhyikTPdcQJn3hW6qDaIQhzu03xEXZB3IE3BiZ1gORPJ
-         ltB6TOt1ArwuwzRSe1PQ1iOzinFHz6sGRI6h8kM0FE7fJxnTW2BZ3H0/BTlWeQZi5IVS
-         dMCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20230601; t=1729266525; x=1729871325;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=s/oFf/kMLVlgJ0FFtDlxauZft7NM7jeJ0DH4Xii7VwQ=;
-        b=bPP+Q7DYUcGo/cx7mhHZTLgffOfD6cMUuK8JqTdpDlPjh7Uj+AM1wHUdHv88jFo+CS
-         nxbswz8I2vUxQ2z8W//B+7J9mPNjloygERkOwWJS0DFg3iYZVv820eUY4fY8cNNihYj7
-         2aKpLiUg84sMBZ8o1esgQDth7iUSJHNeSfDn7nD1aa0j+damZJ19LyfwJ4F4Ewelb8An
-         4LWle76Px2j0hdvVjbHVnahSbJugU44zQsdHdiXbDk3MgkZEITxfkgvE7gj7i06P4HV8
-         4uaz8iGMoScQmAPFBKLzwSfgN6oFKMKVBnbO0ETRkVfznUQ3glg2Nv1F/0OP21q1APpj
-         Ih6g==
-X-Forwarded-Encrypted: i=1; AJvYcCWI3elcAEfEXlL+oEpbAQdA6/eo1YTQ34Nt8sg9Xgwgaw0oHMMlUc4bnbT2GzObNSM7QHvCcNYKOTlirj1g@lists.linaro.org
-X-Gm-Message-State: AOJu0YxdUHNo1rcGMq0Uy41XMhK2mOGYpvqU2bjw08Oc/sLdPHxVp48K
-	qwsR6l0YHdvvSuxIUxXFz1Qf6TPTtcEfwVT5YBReXVLfgqugQtgCe6TaIKiVJ6hpVyRDdbFsMXy
-	S+sYTjq/O0Qx0Q05rk+qj7tXzRJlWSw+nGy37jye6
-X-Google-Smtp-Source: AGHT+IEGFX+TJ21o7W2TsN9T08DevU1B9RUQALluVGZL1MO/rIaqyu7XBSObbywSk2H6T0vDAWl7wSBFO1fraKyz1+A=
-X-Received: by 2002:a05:6870:80d4:b0:277:eb79:b4fb with SMTP id
- 586e51a60fabf-2892c2678a7mr2454837fac.1.1729266524858; Fri, 18 Oct 2024
- 08:48:44 -0700 (PDT)
+	dkim=pass header.d=intel.com header.s=Intel header.b=jozIQ8aZ;
+	dmarc=pass (policy=none) header.from=intel.com;
+	spf=pass (lists.linaro.org: domain of lkp@intel.com designates 192.198.163.8 as permitted sender) smtp.mailfrom=lkp@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1729289533; x=1760825533;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=0XtmqpLUZK6CHPnXpNrQPuV6yXOdGyf7OW4bxutI7VE=;
+  b=jozIQ8aZoN5kpyDiMdiw6JS3dm0H1fifdvNJY0jAi2jKfcnSf/AhkOI4
+   2E/lcOI5gDXVRPKlxrP14I49I5dcncsCoJJAXWOT129cEKoaTSc/F5sSn
+   IGJt9d9D3q9Qs5z45Mn+HvIa6EA9pODiQtGlUcn7fajFD0/aVpRLaVaQ3
+   CUzN4BeqmraZp2yCHw9g87j6DI38MmG8cyx/IfIS8e5WyoS0Cclmyr745
+   CqdT2OGXgW4bmTSiFbvLuwu+yxB35MacPki6bQraQ5GW3BPe3IV0O5o/6
+   kjYoW6o6eNpyBdpMjAEV4SgTega6uOVeNQtdno2LUnWOhwEcxGfEs8WPl
+   w==;
+X-CSE-ConnectionGUID: QKaB6LlyT+C34scru8S4DA==
+X-CSE-MsgGUID: gniS0cLRReWTrjaeHgU2ww==
+X-IronPort-AV: E=McAfee;i="6700,10204,11229"; a="46333462"
+X-IronPort-AV: E=Sophos;i="6.11,214,1725346800";
+   d="scan'208";a="46333462"
+Received: from orviesa002.jf.intel.com ([10.64.159.142])
+  by fmvoesa102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Oct 2024 15:12:12 -0700
+X-CSE-ConnectionGUID: 0kdYjyC2RhiYMqT/th150A==
+X-CSE-MsgGUID: rCCxcZiaT2GXWyrVSPCw/A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.11,214,1725346800";
+   d="scan'208";a="109813608"
+Received: from lkp-server01.sh.intel.com (HELO a48cf1aa22e8) ([10.239.97.150])
+  by orviesa002.jf.intel.com with ESMTP; 18 Oct 2024 15:12:06 -0700
+Received: from kbuild by a48cf1aa22e8 with local (Exim 4.96)
+	(envelope-from <lkp@intel.com>)
+	id 1t1vCV-000OM5-2U;
+	Fri, 18 Oct 2024 22:12:03 +0000
+Date: Sat, 19 Oct 2024 06:11:15 +0800
+From: kernel test robot <lkp@intel.com>
+To: Jyothi Kumar Seerapu <quic_jseerapu@quicinc.com>,
+	Vinod Koul <vkoul@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Andi Shyti <andi.shyti@kernel.org>,
+	Sumit Semwal <sumit.semwal@linaro.org>,
+	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>
+Message-ID: <202410190549.hGAfByqg-lkp@intel.com>
+References: <20241015120750.21217-6-quic_jseerapu@quicinc.com>
 MIME-Version: 1.0
-References: <20241015101716.740829-1-jens.wiklander@linaro.org>
- <20241015101716.740829-3-jens.wiklander@linaro.org> <CAFA6WYMFys_woiF3dzwaXjMy7Y-gTLgHE0PBZtEf6jH-mkc40g@mail.gmail.com>
-In-Reply-To: <CAFA6WYMFys_woiF3dzwaXjMy7Y-gTLgHE0PBZtEf6jH-mkc40g@mail.gmail.com>
-From: Jens Wiklander <jens.wiklander@linaro.org>
-Date: Fri, 18 Oct 2024 17:48:33 +0200
-Message-ID: <CAHUa44FtdQ8rVqu2PiQ2Ceje4wu92uO3xEYWZ18CmvuQTuoNqQ@mail.gmail.com>
-To: Sumit Garg <sumit.garg@linaro.org>
+Content-Disposition: inline
+In-Reply-To: <20241015120750.21217-6-quic_jseerapu@quicinc.com>
 X-Rspamd-Server: lists.linaro.org
-X-Rspamd-Queue-Id: 88E0040C96
-X-Spamd-Bar: --
-X-Spamd-Result: default: False [-2.60 / 15.00];
+X-Rspamd-Queue-Id: 4A5BE3F638
+X-Spamd-Bar: ----
+X-Spamd-Result: default: False [-4.50 / 15.00];
 	BAYES_HAM(-3.00)[100.00%];
+	WHITELIST_SPF_DKIM(-3.00)[intel.com:d:+,intel.com:s:+];
 	SUSPICIOUS_RECIPS(1.50)[];
-	DMARC_POLICY_ALLOW(-0.50)[linaro.org,none];
-	R_DKIM_ALLOW(-0.20)[linaro.org:s=google];
-	R_SPF_ALLOW(-0.20)[+ip4:209.85.128.0/17];
+	MID_CONTAINS_FROM(1.00)[];
+	DMARC_POLICY_ALLOW(-0.50)[intel.com,none];
+	R_SPF_ALLOW(-0.20)[+ip4:192.198.163.0/26];
+	R_DKIM_ALLOW(-0.20)[intel.com:s=Intel];
 	MIME_GOOD(-0.10)[text/plain];
-	RWL_MAILSPIKE_GOOD(-0.10)[209.85.160.51:from];
-	RCVD_TLS_LAST(0.00)[];
-	RCVD_COUNT_ONE(0.00)[1];
-	ASN(0.00)[asn:15169, ipnet:209.85.128.0/17, country:US];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[19];
-	PREVIOUSLY_DELIVERED(0.00)[linaro-mm-sig@lists.linaro.org];
-	FREEMAIL_CC(0.00)[vger.kernel.org,lists.freedesktop.org,lists.linaro.org,lists.trustedfirmware.org,lists.infradead.org,nxp.com,gmail.com,mediatek.com,linaro.org,collabora.com,arm.com,google.com,amd.com,qti.qualcomm.com];
-	FROM_HAS_DN(0.00)[];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
+	ASN(0.00)[asn:4983, ipnet:192.198.162.0/23, country:US];
 	MISSING_XM_UA(0.00)[];
-	NEURAL_HAM(-0.00)[-1.000];
-	DKIM_TRACE(0.00)[linaro.org:+]
+	MIME_TRACE(0.00)[0:+];
+	RCPT_COUNT_TWELVE(0.00)[23];
+	ARC_NA(0.00)[];
+	RCVD_TLS_LAST(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	TAGGED_RCPT(0.00)[dt];
+	RCVD_COUNT_THREE(0.00)[3];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	NEURAL_HAM(-0.00)[-0.999];
+	FROM_EQ_ENVFROM(0.00)[];
+	TO_DN_SOME(0.00)[];
+	DKIM_TRACE(0.00)[intel.com:+]
 X-Rspamd-Action: no action
-Message-ID-Hash: QLN7DNIKUWSEGA7ESNGIK5UFSV37FVEH
-X-Message-ID-Hash: QLN7DNIKUWSEGA7ESNGIK5UFSV37FVEH
-X-MailFrom: jens.wiklander@linaro.org
+Message-ID-Hash: UOPCLGJWF7R66ZDMRGR5ZRNDKBA2SPQS
+X-Message-ID-Hash: UOPCLGJWF7R66ZDMRGR5ZRNDKBA2SPQS
+X-MailFrom: lkp@intel.com
 X-Mailman-Rule-Hits: nonmember-moderation
 X-Mailman-Rule-Misses: dmarc-mitigation; no-senders; approved; emergency; loop; banned-address; member-moderation
-CC: linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, op-tee@lists.trustedfirmware.org, linux-arm-kernel@lists.infradead.org, Olivier Masse <olivier.masse@nxp.com>, Thierry Reding <thierry.reding@gmail.com>, Yong Wu <yong.wu@mediatek.com>, Sumit Semwal <sumit.semwal@linaro.org>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, "T . J . Mercier" <tjmercier@google.com>, =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, Matthias Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, azarrabi@qti.qualcomm.com
+CC: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev, cros-qcom-dts-watchers@chromium.org, linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org, quic_msavaliy@quicinc.com, quic_vtanuku@quicinc.com
 X-Mailman-Version: 3.3.5
 Precedence: list
-Subject: [Linaro-mm-sig] Re: [RFC PATCH v2 2/2] optee: support restricted memory allocation
+Subject: [Linaro-mm-sig] Re: [PATCH v1 5/5] i2c: i2c-qcom-geni: Add Block event interrupt support
 List-Id: "Unified memory management interest group." <linaro-mm-sig.lists.linaro.org>
-Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/QLN7DNIKUWSEGA7ESNGIK5UFSV37FVEH/>
+Archived-At: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/message/UOPCLGJWF7R66ZDMRGR5ZRNDKBA2SPQS/>
 List-Archive: <https://lists.linaro.org/archives/list/linaro-mm-sig@lists.linaro.org/>
 List-Help: <mailto:linaro-mm-sig-request@lists.linaro.org?subject=help>
 List-Owner: <mailto:linaro-mm-sig-owner@lists.linaro.org>
 List-Post: <mailto:linaro-mm-sig@lists.linaro.org>
 List-Subscribe: <mailto:linaro-mm-sig-join@lists.linaro.org>
 List-Unsubscribe: <mailto:linaro-mm-sig-leave@lists.linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-SGkgU3VtaXQsDQoNCk9uIFRodSwgT2N0IDE3LCAyMDI0IGF0IDE6MDDigK9QTSBTdW1pdCBHYXJn
-IDxzdW1pdC5nYXJnQGxpbmFyby5vcmc+IHdyb3RlOg0KPg0KPiBIaSBKZW5zLA0KPg0KPiBPbiBU
-dWUsIDE1IE9jdCAyMDI0IGF0IDE1OjQ3LCBKZW5zIFdpa2xhbmRlciA8amVucy53aWtsYW5kZXJA
-bGluYXJvLm9yZz4gd3JvdGU6DQo+ID4NCj4gPiBBZGQgc3VwcG9ydCBpbiB0aGUgT1AtVEVFIGJh
-Y2tlbmQgZHJpdmVyIGZvciByZXN0cmljdGVkIG1lbW9yeQ0KPiA+IGFsbG9jYXRpb24uIFRoZSBz
-dXBwb3J0IGlzIGxpbWl0ZWQgdG8gb25seSB0aGUgU01DIEFCSSBhbmQgZm9yIHNlY3VyZQ0KPiA+
-IHZpZGVvIGJ1ZmZlcnMuDQo+ID4NCj4gPiBPUC1URUUgaXMgcHJvYmVkIGZvciB0aGUgcmFuZ2Ug
-b2YgcmVzdHJpY3RlZCBwaHlzaWNhbCBtZW1vcnkgYW5kIGENCj4gPiBtZW1vcnkgcG9vbCBhbGxv
-Y2F0b3IgaXMgaW5pdGlhbGl6ZWQgaWYgT1AtVEVFIGhhdmUgc3VwcG9ydCBmb3Igc3VjaA0KPiA+
-IG1lbW9yeS4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IEplbnMgV2lrbGFuZGVyIDxqZW5zLndp
-a2xhbmRlckBsaW5hcm8ub3JnPg0KPiA+IC0tLQ0KPiA+ICBkcml2ZXJzL3RlZS9vcHRlZS9jb3Jl
-LmMgICAgICAgICAgfCAyMSArKysrKysrKysrKysrKysNCj4gPiAgZHJpdmVycy90ZWUvb3B0ZWUv
-b3B0ZWVfcHJpdmF0ZS5oIHwgIDYgKysrKysNCj4gPiAgZHJpdmVycy90ZWUvb3B0ZWUvb3B0ZWVf
-c21jLmggICAgIHwgMzUgKysrKysrKysrKysrKysrKysrKysrKysrDQo+ID4gIGRyaXZlcnMvdGVl
-L29wdGVlL3NtY19hYmkuYyAgICAgICB8IDQ1ICsrKysrKysrKysrKysrKysrKysrKysrKysrKyst
-LS0NCj4gPiAgNCBmaWxlcyBjaGFuZ2VkLCAxMDQgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMo
-LSkNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3RlZS9vcHRlZS9jb3JlLmMgYi9kcml2
-ZXJzL3RlZS9vcHRlZS9jb3JlLmMNCj4gPiBpbmRleCAzOWU2ODhkNGU5NzQuLmI2ZDVjYmM2NzI4
-ZCAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJzL3RlZS9vcHRlZS9jb3JlLmMNCj4gPiArKysgYi9k
-cml2ZXJzL3RlZS9vcHRlZS9jb3JlLmMNCj4gPiBAQCAtOTUsNiArOTUsMjUgQEAgdm9pZCBvcHRl
-ZV9yZWxlYXNlX3N1cHAoc3RydWN0IHRlZV9jb250ZXh0ICpjdHgpDQo+ID4gICAgICAgICBvcHRl
-ZV9zdXBwX3JlbGVhc2UoJm9wdGVlLT5zdXBwKTsNCj4gPiAgfQ0KPiA+DQo+ID4gK2ludCBvcHRl
-ZV9yc3RtZW1fYWxsb2Moc3RydWN0IHRlZV9jb250ZXh0ICpjdHgsIHN0cnVjdCB0ZWVfc2htICpz
-aG0sDQo+ID4gKyAgICAgICAgICAgICAgICAgICAgICB1MzIgZmxhZ3MsIHNpemVfdCBzaXplKQ0K
-PiA+ICt7DQo+ID4gKyAgICAgICBzdHJ1Y3Qgb3B0ZWUgKm9wdGVlID0gdGVlX2dldF9kcnZkYXRh
-KGN0eC0+dGVlZGV2KTsNCj4gPiArDQo+ID4gKyAgICAgICBpZiAoIW9wdGVlLT5zZHBfcG9vbCkN
-Cj4gPiArICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7DQo+ID4gKyAgICAgICBpZiAoZmxh
-Z3MgIT0gVEVFX0lPQ19GTEFHX1NFQ1VSRV9WSURFTykNCj4gPiArICAgICAgICAgICAgICAgcmV0
-dXJuIC1FSU5WQUw7DQo+ID4gKyAgICAgICByZXR1cm4gb3B0ZWUtPnNkcF9wb29sLT5vcHMtPmFs
-bG9jKG9wdGVlLT5zZHBfcG9vbCwgc2htLCBzaXplLCAwKTsNCj4gPiArfQ0KPiA+ICsNCj4gPiAr
-dm9pZCBvcHRlZV9yc3RtZW1fZnJlZShzdHJ1Y3QgdGVlX2NvbnRleHQgKmN0eCwgc3RydWN0IHRl
-ZV9zaG0gKnNobSkNCj4gPiArew0KPiA+ICsgICAgICAgc3RydWN0IG9wdGVlICpvcHRlZSA9IHRl
-ZV9nZXRfZHJ2ZGF0YShjdHgtPnRlZWRldik7DQo+ID4gKw0KPiA+ICsgICAgICAgb3B0ZWUtPnNk
-cF9wb29sLT5vcHMtPmZyZWUob3B0ZWUtPnNkcF9wb29sLCBzaG0pOw0KPiA+ICt9DQo+ID4gKw0K
-PiA+ICB2b2lkIG9wdGVlX3JlbW92ZV9jb21tb24oc3RydWN0IG9wdGVlICpvcHRlZSkNCj4gPiAg
-ew0KPiA+ICAgICAgICAgLyogVW5yZWdpc3RlciBPUC1URUUgc3BlY2lmaWMgY2xpZW50IGRldmlj
-ZXMgb24gVEVFIGJ1cyAqLw0KPiA+IEBAIC0xMTEsNiArMTMwLDggQEAgdm9pZCBvcHRlZV9yZW1v
-dmVfY29tbW9uKHN0cnVjdCBvcHRlZSAqb3B0ZWUpDQo+ID4gICAgICAgICB0ZWVfZGV2aWNlX3Vu
-cmVnaXN0ZXIob3B0ZWUtPnRlZWRldik7DQo+ID4NCj4gPiAgICAgICAgIHRlZV9zaG1fcG9vbF9m
-cmVlKG9wdGVlLT5wb29sKTsNCj4gPiArICAgICAgIGlmIChvcHRlZS0+c2RwX3Bvb2wpDQo+ID4g
-KyAgICAgICAgICAgICAgIG9wdGVlLT5zZHBfcG9vbC0+b3BzLT5kZXN0cm95X3Bvb2wob3B0ZWUt
-PnNkcF9wb29sKTsNCj4gPiAgICAgICAgIG9wdGVlX3N1cHBfdW5pbml0KCZvcHRlZS0+c3VwcCk7
-DQo+ID4gICAgICAgICBtdXRleF9kZXN0cm95KCZvcHRlZS0+Y2FsbF9xdWV1ZS5tdXRleCk7DQo+
-ID4gIH0NCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy90ZWUvb3B0ZWUvb3B0ZWVfcHJpdmF0ZS5o
-IGIvZHJpdmVycy90ZWUvb3B0ZWUvb3B0ZWVfcHJpdmF0ZS5oDQo+ID4gaW5kZXggNDI0ODk4Y2Rj
-NGU5Li4xZjZiMmNjOTkyYTkgMTAwNjQ0DQo+ID4gLS0tIGEvZHJpdmVycy90ZWUvb3B0ZWUvb3B0
-ZWVfcHJpdmF0ZS5oDQo+ID4gKysrIGIvZHJpdmVycy90ZWUvb3B0ZWUvb3B0ZWVfcHJpdmF0ZS5o
-DQo+ID4gQEAgLTIwMCw2ICsyMDAsNyBAQCBzdHJ1Y3Qgb3B0ZWVfb3BzIHsNCj4gPiAgICogQG5v
-dGlmOiAgICAgICAgICAgICBub3RpZmljYXRpb24gc3luY2hyb25pemF0aW9uIHN0cnVjdA0KPiA+
-ICAgKiBAc3VwcDogICAgICAgICAgICAgIHN1cHBsaWNhbnQgc3luY2hyb25pemF0aW9uIHN0cnVj
-dCBmb3IgUlBDIHRvIHN1cHBsaWNhbnQNCj4gPiAgICogQHBvb2w6ICAgICAgICAgICAgICBzaGFy
-ZWQgbWVtb3J5IHBvb2wNCj4gPiArICogQHNkcF9wb29sOiAgICAgICAgICByZXN0cmljdGVkIG1l
-bW9yeSBwb29sIGZvciBzZWN1cmUgZGF0YSBwYXRoDQo+ID4gICAqIEBycGNfcGFyYW1fY291bnQ6
-ICAgSWYgPiAwIG51bWJlciBvZiBSUEMgcGFyYW1ldGVycyB0byBtYWtlIHJvb20gZm9yDQo+ID4g
-ICAqIEBzY2FuX2J1c19kb25lICAgICAgZmxhZyBpZiBkZXZpY2UgcmVnaXN0YXRpb24gd2FzIGFs
-cmVhZHkgZG9uZS4NCj4gPiAgICogQHNjYW5fYnVzX3dvcmsgICAgICB3b3JrcSB0byBzY2FuIG9w
-dGVlIGJ1cyBhbmQgcmVnaXN0ZXIgb3B0ZWUgZHJpdmVycw0KPiA+IEBAIC0yMTgsNiArMjE5LDcg
-QEAgc3RydWN0IG9wdGVlIHsNCj4gPiAgICAgICAgIHN0cnVjdCBvcHRlZV9ub3RpZiBub3RpZjsN
-Cj4gPiAgICAgICAgIHN0cnVjdCBvcHRlZV9zdXBwIHN1cHA7DQo+ID4gICAgICAgICBzdHJ1Y3Qg
-dGVlX3NobV9wb29sICpwb29sOw0KPiA+ICsgICAgICAgc3RydWN0IHRlZV9zaG1fcG9vbCAqc2Rw
-X3Bvb2w7DQo+ID4gICAgICAgICB1bnNpZ25lZCBpbnQgcnBjX3BhcmFtX2NvdW50Ow0KPiA+ICAg
-ICAgICAgYm9vbCAgIHNjYW5fYnVzX2RvbmU7DQo+ID4gICAgICAgICBzdHJ1Y3Qgd29ya19zdHJ1
-Y3Qgc2Nhbl9idXNfd29yazsNCj4gPiBAQCAtMzQwLDYgKzM0MiwxMCBAQCB2b2lkIG9wdGVlX3Jw
-Y19jbWQoc3RydWN0IHRlZV9jb250ZXh0ICpjdHgsIHN0cnVjdCBvcHRlZSAqb3B0ZWUsDQo+ID4g
-IGludCBvcHRlZV9kb19ib3R0b21faGFsZihzdHJ1Y3QgdGVlX2NvbnRleHQgKmN0eCk7DQo+ID4g
-IGludCBvcHRlZV9zdG9wX2FzeW5jX25vdGlmKHN0cnVjdCB0ZWVfY29udGV4dCAqY3R4KTsNCj4g
-Pg0KPiA+ICtpbnQgb3B0ZWVfcnN0bWVtX2FsbG9jKHN0cnVjdCB0ZWVfY29udGV4dCAqY3R4LCBz
-dHJ1Y3QgdGVlX3NobSAqc2htLA0KPiA+ICsgICAgICAgICAgICAgICAgICAgICAgdTMyIGZsYWdz
-LCBzaXplX3Qgc2l6ZSk7DQo+ID4gK3ZvaWQgb3B0ZWVfcnN0bWVtX2ZyZWUoc3RydWN0IHRlZV9j
-b250ZXh0ICpjdHgsIHN0cnVjdCB0ZWVfc2htICpzaG0pOw0KPiA+ICsNCj4gPiAgLyoNCj4gPiAg
-ICogU21hbGwgaGVscGVycw0KPiA+ICAgKi8NCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy90ZWUv
-b3B0ZWUvb3B0ZWVfc21jLmggYi9kcml2ZXJzL3RlZS9vcHRlZS9vcHRlZV9zbWMuaA0KPiA+IGlu
-ZGV4IDdkOWZhNDI2NTA1Yi4uYzNiOGExYzIwNGFmIDEwMDY0NA0KPiA+IC0tLSBhL2RyaXZlcnMv
-dGVlL29wdGVlL29wdGVlX3NtYy5oDQo+ID4gKysrIGIvZHJpdmVycy90ZWUvb3B0ZWUvb3B0ZWVf
-c21jLmgNCj4gPiBAQCAtMjM0LDYgKzIzNCwzOSBAQCBzdHJ1Y3Qgb3B0ZWVfc21jX2dldF9zaG1f
-Y29uZmlnX3Jlc3VsdCB7DQo+ID4gICAgICAgICB1bnNpZ25lZCBsb25nIHNldHRpbmdzOw0KPiA+
-ICB9Ow0KPiA+DQo+ID4gKy8qDQo+ID4gKyAqIEdldCBTZWN1cmUgRGF0YSBQYXRoIG1lbW9yeSBj
-b25maWcNCj4gPiArICoNCj4gPiArICogUmV0dXJucyB0aGUgU2VjdXJlIERhdGEgUGF0aCBtZW1v
-cnkgY29uZmlnLg0KPiA+ICsgKg0KPiA+ICsgKiBDYWxsIHJlZ2lzdGVyIHVzYWdlOg0KPiA+ICsg
-KiBhMCAgIFNNQyBGdW5jdGlvbiBJRCwgT1BURUVfU01DX0dFVF9TRFBfQ09ORklHDQo+ID4gKyAq
-IGEyLTYgTm90IHVzZWQsIG11c3QgYmUgemVybw0KPiA+ICsgKiBhNyAgIEh5cGVydmlzb3IgQ2xp
-ZW50IElEIHJlZ2lzdGVyDQo+ID4gKyAqDQo+ID4gKyAqIEhhdmUgY29uZmlnIHJldHVybiByZWdp
-c3RlciB1c2FnZToNCj4gPiArICogYTAgICBPUFRFRV9TTUNfUkVUVVJOX09LDQo+ID4gKyAqIGEx
-ICAgUGh5c2ljYWwgYWRkcmVzcyBvZiBzdGFydCBvZiBTRFAgbWVtb3J5DQo+ID4gKyAqIGEyICAg
-U2l6ZSBvZiBTRFAgbWVtb3J5DQo+ID4gKyAqIGEzICAgTm90IHVzZWQNCj4gPiArICogYTQtNyBQ
-cmVzZXJ2ZWQNCj4gPiArICoNCj4gPiArICogTm90IGF2YWlsYWJsZSByZWdpc3RlciB1c2FnZToN
-Cj4gPiArICogYTAgICBPUFRFRV9TTUNfUkVUVVJOX0VOT1RBVkFJTA0KPiA+ICsgKiBhMS0zIE5v
-dCB1c2VkDQo+ID4gKyAqIGE0LTcgUHJlc2VydmVkDQo+ID4gKyAqLw0KPiA+ICsjZGVmaW5lIE9Q
-VEVFX1NNQ19GVU5DSURfR0VUX1NEUF9DT05GSUcgICAgICAgIDIwDQo+ID4gKyNkZWZpbmUgT1BU
-RUVfU01DX0dFVF9TRFBfQ09ORklHIFwNCj4gPiArICAgICAgIE9QVEVFX1NNQ19GQVNUX0NBTExf
-VkFMKE9QVEVFX1NNQ19GVU5DSURfR0VUX1NEUF9DT05GSUcpDQo+ID4gKw0KPiA+ICtzdHJ1Y3Qg
-b3B0ZWVfc21jX2dldF9zZHBfY29uZmlnX3Jlc3VsdCB7DQo+ID4gKyAgICAgICB1bnNpZ25lZCBs
-b25nIHN0YXR1czsNCj4gPiArICAgICAgIHVuc2lnbmVkIGxvbmcgc3RhcnQ7DQo+ID4gKyAgICAg
-ICB1bnNpZ25lZCBsb25nIHNpemU7DQo+ID4gKyAgICAgICB1bnNpZ25lZCBsb25nIGZsYWdzOw0K
-PiA+ICt9Ow0KPiA+ICsNCj4gPiAgLyoNCj4gPiAgICogRXhjaGFuZ2VzIGNhcGFiaWxpdGllcyBi
-ZXR3ZWVuIG5vcm1hbCB3b3JsZCBhbmQgc2VjdXJlIHdvcmxkDQo+ID4gICAqDQo+ID4gQEAgLTI3
-OCw2ICszMTEsOCBAQCBzdHJ1Y3Qgb3B0ZWVfc21jX2dldF9zaG1fY29uZmlnX3Jlc3VsdCB7DQo+
-ID4gICNkZWZpbmUgT1BURUVfU01DX1NFQ19DQVBfQVNZTkNfTk9USUYgICAgICAgICAgQklUKDUp
-DQo+ID4gIC8qIFNlY3VyZSB3b3JsZCBzdXBwb3J0cyBwcmUtYWxsb2NhdGluZyBSUEMgYXJnIHN0
-cnVjdCAqLw0KPiA+ICAjZGVmaW5lIE9QVEVFX1NNQ19TRUNfQ0FQX1JQQ19BUkcgICAgICAgICAg
-ICAgIEJJVCg2KQ0KPiA+ICsvKiBTZWN1cmUgd29ybGQgc3VwcG9ydHMgU2VjdXJlIERhdGEgUGF0
-aCAqLw0KPiA+ICsjZGVmaW5lIE9QVEVFX1NNQ19TRUNfQ0FQX1NEUCAgICAgICAgICAgICAgICAg
-IEJJVCg3KQ0KPiA+DQo+ID4gICNkZWZpbmUgT1BURUVfU01DX0ZVTkNJRF9FWENIQU5HRV9DQVBB
-QklMSVRJRVMgOQ0KPiA+ICAjZGVmaW5lIE9QVEVFX1NNQ19FWENIQU5HRV9DQVBBQklMSVRJRVMg
-XA0KPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3RlZS9vcHRlZS9zbWNfYWJpLmMgYi9kcml2ZXJz
-L3RlZS9vcHRlZS9zbWNfYWJpLmMNCj4gPiBpbmRleCA4NDQyODVkNGYwM2MuLjA1MDY4YzcwYzc5
-MSAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJzL3RlZS9vcHRlZS9zbWNfYWJpLmMNCj4gPiArKysg
-Yi9kcml2ZXJzL3RlZS9vcHRlZS9zbWNfYWJpLmMNCj4gPiBAQCAtMTE2NCw2ICsxMTY0LDggQEAg
-c3RhdGljIHZvaWQgb3B0ZWVfZ2V0X3ZlcnNpb24oc3RydWN0IHRlZV9kZXZpY2UgKnRlZWRldiwN
-Cj4gPiAgICAgICAgICAgICAgICAgdi5nZW5fY2FwcyB8PSBURUVfR0VOX0NBUF9SRUdfTUVNOw0K
-PiA+ICAgICAgICAgaWYgKG9wdGVlLT5zbWMuc2VjX2NhcHMgJiBPUFRFRV9TTUNfU0VDX0NBUF9N
-RU1SRUZfTlVMTCkNCj4gPiAgICAgICAgICAgICAgICAgdi5nZW5fY2FwcyB8PSBURUVfR0VOX0NB
-UF9NRU1SRUZfTlVMTDsNCj4gPiArICAgICAgIGlmIChvcHRlZS0+c2RwX3Bvb2wpDQo+ID4gKyAg
-ICAgICAgICAgICAgIHYuZ2VuX2NhcHMgfD0gVEVFX0dFTl9DQVBfUlNUTUVNOw0KPiA+ICAgICAg
-ICAgKnZlcnMgPSB2Ow0KPiA+ICB9DQo+ID4NCj4gPiBAQCAtMTE4Niw2ICsxMTg4LDggQEAgc3Rh
-dGljIGNvbnN0IHN0cnVjdCB0ZWVfZHJpdmVyX29wcyBvcHRlZV9jbG50X29wcyA9IHsNCj4gPiAg
-ICAgICAgIC5jYW5jZWxfcmVxID0gb3B0ZWVfY2FuY2VsX3JlcSwNCj4gPiAgICAgICAgIC5zaG1f
-cmVnaXN0ZXIgPSBvcHRlZV9zaG1fcmVnaXN0ZXIsDQo+ID4gICAgICAgICAuc2htX3VucmVnaXN0
-ZXIgPSBvcHRlZV9zaG1fdW5yZWdpc3RlciwNCj4gPiArICAgICAgIC5yc3RtZW1fYWxsb2MgPSBv
-cHRlZV9yc3RtZW1fYWxsb2MsDQo+ID4gKyAgICAgICAucnN0bWVtX2ZyZWUgPSBvcHRlZV9yc3Rt
-ZW1fZnJlZSwNCj4gPiAgfTsNCj4gPg0KPiA+ICBzdGF0aWMgY29uc3Qgc3RydWN0IHRlZV9kZXNj
-IG9wdGVlX2NsbnRfZGVzYyA9IHsNCj4gPiBAQCAtMTIwMiw2ICsxMjA2LDggQEAgc3RhdGljIGNv
-bnN0IHN0cnVjdCB0ZWVfZHJpdmVyX29wcyBvcHRlZV9zdXBwX29wcyA9IHsNCj4gPiAgICAgICAg
-IC5zdXBwX3NlbmQgPSBvcHRlZV9zdXBwX3NlbmQsDQo+ID4gICAgICAgICAuc2htX3JlZ2lzdGVy
-ID0gb3B0ZWVfc2htX3JlZ2lzdGVyX3N1cHAsDQo+ID4gICAgICAgICAuc2htX3VucmVnaXN0ZXIg
-PSBvcHRlZV9zaG1fdW5yZWdpc3Rlcl9zdXBwLA0KPiA+ICsgICAgICAgLnJzdG1lbV9hbGxvYyA9
-IG9wdGVlX3JzdG1lbV9hbGxvYywNCj4gPiArICAgICAgIC5yc3RtZW1fZnJlZSA9IG9wdGVlX3Jz
-dG1lbV9mcmVlLA0KPiA+ICB9Ow0KPiA+DQo+ID4gIHN0YXRpYyBjb25zdCBzdHJ1Y3QgdGVlX2Rl
-c2Mgb3B0ZWVfc3VwcF9kZXNjID0gew0KPiA+IEBAIC0xNTgyLDYgKzE1ODgsMzIgQEAgc3RhdGlj
-IGlubGluZSBpbnQgb3B0ZWVfbG9hZF9mdyhzdHJ1Y3QgcGxhdGZvcm1fZGV2aWNlICpwZGV2LA0K
-PiA+ICB9DQo+ID4gICNlbmRpZg0KPiA+DQo+ID4gK3N0YXRpYyBpbnQgb3B0ZWVfc2RwX3Bvb2xf
-aW5pdChzdHJ1Y3Qgb3B0ZWUgKm9wdGVlKQ0KPiA+ICt7DQo+ID4gKyAgICAgICBzdHJ1Y3QgdGVl
-X3NobV9wb29sICpwb29sOw0KPiA+ICsgICAgICAgdW5pb24gew0KPiA+ICsgICAgICAgICAgICAg
-ICBzdHJ1Y3QgYXJtX3NtY2NjX3JlcyBzbWNjYzsNCj4gPiArICAgICAgICAgICAgICAgc3RydWN0
-IG9wdGVlX3NtY19nZXRfc2RwX2NvbmZpZ19yZXN1bHQgcmVzdWx0Ow0KPiA+ICsgICAgICAgfSBy
-ZXM7DQo+ID4gKw0KPiA+ICsgICAgICAgaWYgKCEob3B0ZWUtPnNtYy5zZWNfY2FwcyAmIE9QVEVF
-X1NNQ19TRUNfQ0FQX1NEUCkpDQo+ID4gKyAgICAgICAgICAgICAgIHJldHVybiAwOw0KPiA+ICsN
-Cj4gPiArICAgICAgIG9wdGVlLT5zbWMuaW52b2tlX2ZuKE9QVEVFX1NNQ19HRVRfU0RQX0NPTkZJ
-RywgMCwgMCwgMCwgMCwgMCwgMCwgMCwNCj4gPiArICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICZyZXMuc21jY2MpOw0KPg0KPiBJTUhPLCB0byBwdXQgbW9yZSB3ZWlnaHQgb24gdGhpcyBwcm9w
-b3NhbCB3ZSBzaG91bGQgYWxzbyBpbmNsdWRlDQo+IGFsbG9jYXRpb24gZnJvbSB0aGUga2VybmVs
-IENNQSBwb29sIGFsb25nc2lkZSB0aGUgcmVzZXJ2ZWQgcmVzdHJpY3RlZA0KPiBtZW1vcnkgcG9v
-bC4gVGhlIGltcGxlbWVudGF0aW9uIHdvdWxkIGJlIHF1aXRlIHNpbWlsYXIgdG8gaG93IHdlDQo+
-IHN1cHBvcnQgZHluYW1pYyBTSE0gYmFzZWQgb24gcGxhdGZvcm0gc3BlY2lmaWMgY2FwYWJpbGl0
-eToNCj4gT1BURUVfU01DX1NFQ19DQVBfRFlOQU1JQ19TSE0uIFdlIGNhbiBoYXZlIGEgc2ltaWxh
-ciBjYXBhYmlsaXR5IGZvcg0KPiBkeW5hbWljIHJlc3RyaWN0ZWQgbWVtb3J5IGFzOiBPUFRFRV9T
-TUNfU0VDX0NBUF9EWU5BTUlDX1JTVE1FTS4NCj4NCj4gVGhlIG1ham9yIHJlYXNvbiB0byBzdXBw
-b3J0IGl0IGlzIHRvIGFsbG93IG1lZGlhdGVrIHVzZS1jYXNlIFsxXSBvZg0KPiByZXN0cmljdGlu
-ZyBtZW1vcnkgZHluYW1pY2FsbHkgd2hpY2ggZ2V0cyBhbGxvY2F0ZWQgZnJvbSB0aGUgQ01BIHBv
-b2wuDQo+IEFsdGhvdWdoLCBpdCB3b24ndCBiZSBzb21ldGhpbmcgdGhhdCB3ZSBjYW4gdGVzdCBv
-biBRZW11IGZyb20gYQ0KPiBoYXJkd2FyZSBlbmZvcmNlbWVudCBwZXJzcGVjdGl2ZSwgYXQgbGVh
-c3Qgd2UgY2FuIHRlc3QgaXQgb24gUWVtdQ0KPiBjb25jZXB0dWFsbHkuIFRob3VnaHRzPw0KDQpJ
-IGRvbid0IG1pbmQgYWRkaW5nIHRoYXQsIGJ1dCBJJ2QgYXBwcmVjaWF0ZSBzb21lIGhlbHAgZnJv
-bSBNZWRpYXRlay4NCkkgaGF2ZSBzb21ldGhpbmcgc2ltaWxhciBpbiBtaW5kIGZvciB0aGUgRkYt
-QSBBQkksIHdlIGNhbiB1c2UgdGhlDQpGRkFfTEVORCBBQkkgZm9yIGV4Y2x1c2l2ZSBhY2Nlc3Mg
-dG8gT1AtVEVFLiBCdXQgaXQgZG9lc24ndCBoYXZlIHRvDQpoYXBwZW4gYWxsIGluIG9uZSBwYXRj
-aCBzZXQuDQoNCkNoZWVycywNCkplbnMNCg0KPg0KPiBbMV0gaHR0cHM6Ly9sb3JlLmtlcm5lbC5v
-cmcvbGludXgtYXJtLWtlcm5lbC8yMDI0MDUxNTExMjMwOC4xMDE3MS05LXlvbmcud3VAbWVkaWF0
-ZWsuY29tLw0KPg0KPiAtU3VtaXQNCj4NCj4gPiArICAgICAgIGlmIChyZXMucmVzdWx0LnN0YXR1
-cyAhPSBPUFRFRV9TTUNfUkVUVVJOX09LKSB7DQo+ID4gKyAgICAgICAgICAgICAgIHByX2Vycigi
-U2VjdXJlIERhdGEgUGF0aCBzZXJ2aWNlIG5vdCBhdmFpbGFibGVcbiIpOw0KPiA+ICsgICAgICAg
-ICAgICAgICByZXR1cm4gMDsNCj4gPiArICAgICAgIH0NCj4gPiArDQo+ID4gKyAgICAgICBwb29s
-ID0gdGVlX3JzdG1lbV9nZW5fcG9vbF9hbGxvYyhyZXMucmVzdWx0LnN0YXJ0LCByZXMucmVzdWx0
-LnNpemUpOw0KPiA+ICsgICAgICAgaWYgKElTX0VSUihwb29sKSkNCj4gPiArICAgICAgICAgICAg
-ICAgcmV0dXJuIFBUUl9FUlIocG9vbCk7DQo+ID4gKyAgICAgICBvcHRlZS0+c2RwX3Bvb2wgPSBw
-b29sOw0KPiA+ICsNCj4gPiArICAgICAgIHJldHVybiAwOw0KPiA+ICt9DQo+ID4gKw0KPiA+ICBz
-dGF0aWMgaW50IG9wdGVlX3Byb2JlKHN0cnVjdCBwbGF0Zm9ybV9kZXZpY2UgKnBkZXYpDQo+ID4g
-IHsNCj4gPiAgICAgICAgIG9wdGVlX2ludm9rZV9mbiAqaW52b2tlX2ZuOw0KPiA+IEBAIC0xNjc3
-LDcgKzE3MDksNyBAQCBzdGF0aWMgaW50IG9wdGVlX3Byb2JlKHN0cnVjdCBwbGF0Zm9ybV9kZXZp
-Y2UgKnBkZXYpDQo+ID4gICAgICAgICBvcHRlZSA9IGt6YWxsb2Moc2l6ZW9mKCpvcHRlZSksIEdG
-UF9LRVJORUwpOw0KPiA+ICAgICAgICAgaWYgKCFvcHRlZSkgew0KPiA+ICAgICAgICAgICAgICAg
-ICByYyA9IC1FTk9NRU07DQo+ID4gLSAgICAgICAgICAgICAgIGdvdG8gZXJyX2ZyZWVfcG9vbDsN
-Cj4gPiArICAgICAgICAgICAgICAgZ290byBlcnJfZnJlZV9zaG1fcG9vbDsNCj4gPiAgICAgICAg
-IH0NCj4gPg0KPiA+ICAgICAgICAgb3B0ZWUtPm9wcyA9ICZvcHRlZV9vcHM7DQo+ID4gQEAgLTE2
-ODUsMTAgKzE3MTcsMTQgQEAgc3RhdGljIGludCBvcHRlZV9wcm9iZShzdHJ1Y3QgcGxhdGZvcm1f
-ZGV2aWNlICpwZGV2KQ0KPiA+ICAgICAgICAgb3B0ZWUtPnNtYy5zZWNfY2FwcyA9IHNlY19jYXBz
-Ow0KPiA+ICAgICAgICAgb3B0ZWUtPnJwY19wYXJhbV9jb3VudCA9IHJwY19wYXJhbV9jb3VudDsN
-Cj4gPg0KPiA+ICsgICAgICAgcmMgPSBvcHRlZV9zZHBfcG9vbF9pbml0KG9wdGVlKTsNCj4gPiAr
-ICAgICAgIGlmIChyYykNCj4gPiArICAgICAgICAgICAgICAgZ290byBlcnJfZnJlZV9vcHRlZTsN
-Cj4gPiArDQo+ID4gICAgICAgICB0ZWVkZXYgPSB0ZWVfZGV2aWNlX2FsbG9jKCZvcHRlZV9jbG50
-X2Rlc2MsIE5VTEwsIHBvb2wsIG9wdGVlKTsNCj4gPiAgICAgICAgIGlmIChJU19FUlIodGVlZGV2
-KSkgew0KPiA+ICAgICAgICAgICAgICAgICByYyA9IFBUUl9FUlIodGVlZGV2KTsNCj4gPiAtICAg
-ICAgICAgICAgICAgZ290byBlcnJfZnJlZV9vcHRlZTsNCj4gPiArICAgICAgICAgICAgICAgZ290
-byBlcnJfc2RwX3Bvb2xfdW5pbml0Ow0KPiA+ICAgICAgICAgfQ0KPiA+ICAgICAgICAgb3B0ZWUt
-PnRlZWRldiA9IHRlZWRldjsNCj4gPg0KPiA+IEBAIC0xNzg2LDkgKzE4MjIsMTIgQEAgc3RhdGlj
-IGludCBvcHRlZV9wcm9iZShzdHJ1Y3QgcGxhdGZvcm1fZGV2aWNlICpwZGV2KQ0KPiA+ICAgICAg
-ICAgdGVlX2RldmljZV91bnJlZ2lzdGVyKG9wdGVlLT5zdXBwX3RlZWRldik7DQo+ID4gIGVycl91
-bnJlZ190ZWVkZXY6DQo+ID4gICAgICAgICB0ZWVfZGV2aWNlX3VucmVnaXN0ZXIob3B0ZWUtPnRl
-ZWRldik7DQo+ID4gK2Vycl9zZHBfcG9vbF91bmluaXQ6DQo+ID4gKyAgICAgICBpZiAob3B0ZWUt
-PnNkcF9wb29sKQ0KPiA+ICsgICAgICAgICAgICAgICBvcHRlZS0+c2RwX3Bvb2wtPm9wcy0+ZGVz
-dHJveV9wb29sKG9wdGVlLT5zZHBfcG9vbCk7DQo+ID4gIGVycl9mcmVlX29wdGVlOg0KPiA+ICAg
-ICAgICAga2ZyZWUob3B0ZWUpOw0KPiA+IC1lcnJfZnJlZV9wb29sOg0KPiA+ICtlcnJfZnJlZV9z
-aG1fcG9vbDoNCj4gPiAgICAgICAgIHRlZV9zaG1fcG9vbF9mcmVlKHBvb2wpOw0KPiA+ICAgICAg
-ICAgaWYgKG1lbXJlbWFwZWRfc2htKQ0KPiA+ICAgICAgICAgICAgICAgICBtZW11bm1hcChtZW1y
-ZW1hcGVkX3NobSk7DQo+ID4gLS0NCj4gPiAyLjQzLjANCj4gPg0KX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX18KTGluYXJvLW1tLXNpZyBtYWlsaW5nIGxpc3Qg
-LS0gbGluYXJvLW1tLXNpZ0BsaXN0cy5saW5hcm8ub3JnClRvIHVuc3Vic2NyaWJlIHNlbmQgYW4g
-ZW1haWwgdG8gbGluYXJvLW1tLXNpZy1sZWF2ZUBsaXN0cy5saW5hcm8ub3JnCg==
+Hi Jyothi,
+
+kernel test robot noticed the following build errors:
+
+[auto build test ERROR on 55bcd2e0d04c1171d382badef1def1fd04ef66c5]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Jyothi-Kumar-Seerapu/dt-bindings-dmaengine-qcom-gpi-Add-additional-arg-to-dma-cell-property/20241015-202637
+base:   55bcd2e0d04c1171d382badef1def1fd04ef66c5
+patch link:    https://lore.kernel.org/r/20241015120750.21217-6-quic_jseerapu%40quicinc.com
+patch subject: [PATCH v1 5/5] i2c: i2c-qcom-geni: Add Block event interrupt support
+config: x86_64-allyesconfig (https://download.01.org/0day-ci/archive/20241019/202410190549.hGAfByqg-lkp@intel.com/config)
+compiler: clang version 18.1.8 (https://github.com/llvm/llvm-project 3b5b5c1ec4a3095ab096dd780e84d7ab81f3d7ff)
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20241019/202410190549.hGAfByqg-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202410190549.hGAfByqg-lkp@intel.com/
+
+All errors (new ones prefixed by >>):
+
+>> drivers/i2c/busses/i2c-qcom-geni.c:562:8: error: incompatible pointer to integer conversion passing 'dma_addr_t *' (aka 'unsigned long long *') to parameter of type 'dma_addr_t' (aka 'unsigned long long'); dereference with * [-Wint-conversion]
+     562 |                                    tx_multi_xfer->dma_addr[wr_idx], NULL, NULL);
+         |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         |                                    *
+   drivers/i2c/busses/i2c-qcom-geni.c:519:36: note: passing argument to parameter 'tx_addr' here
+     519 |                                void *tx_buf, dma_addr_t tx_addr,
+         |                                                         ^
+>> drivers/i2c/busses/i2c-qcom-geni.c:562:47: error: incompatible pointer to integer conversion passing 'void *' to parameter of type 'dma_addr_t' (aka 'unsigned long long') [-Wint-conversion]
+     562 |                                    tx_multi_xfer->dma_addr[wr_idx], NULL, NULL);
+         |                                                                           ^~~~
+   include/linux/stddef.h:8:14: note: expanded from macro 'NULL'
+       8 | #define NULL ((void *)0)
+         |              ^~~~~~~~~~~
+   drivers/i2c/busses/i2c-qcom-geni.c:520:36: note: passing argument to parameter 'rx_addr' here
+     520 |                                void *rx_buf, dma_addr_t rx_addr)
+         |                                                         ^
+>> drivers/i2c/busses/i2c-qcom-geni.c:586:7: error: incompatible pointer to integer conversion assigning to 'dma_addr_t' (aka 'unsigned long long') from 'dma_addr_t *' (aka 'unsigned long long *'); dereference with * [-Wint-conversion]
+     586 |         addr = gi2c_gpi_xfer->dma_addr[gi2c_gpi_xfer->buf_idx];
+         |              ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         |                *
+   3 errors generated.
+
+Kconfig warnings: (for reference only)
+   WARNING: unmet direct dependencies detected for OMAP2PLUS_MBOX
+   Depends on [n]: MAILBOX [=y] && (ARCH_OMAP2PLUS || ARCH_K3)
+   Selected by [y]:
+   - TI_K3_M4_REMOTEPROC [=y] && REMOTEPROC [=y] && (ARCH_K3 || COMPILE_TEST [=y])
+
+
+vim +562 drivers/i2c/busses/i2c-qcom-geni.c
+
+   532	
+   533	/**
+   534	 * gpi_i2c_multi_desc_unmap() - unmaps the buffers post multi message TX transfers
+   535	 * @dev: pointer to the corresponding dev node
+   536	 * @gi2c: i2c dev handle
+   537	 * @msgs: i2c messages array
+   538	 * @peripheral: pointer to the gpi_i2c_config
+   539	 */
+   540	static void gpi_i2c_multi_desc_unmap(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
+   541					     struct gpi_i2c_config *peripheral)
+   542	{
+   543		u32 msg_xfer_cnt, wr_idx = 0;
+   544		struct gpi_multi_xfer *tx_multi_xfer = &peripheral->multi_xfer;
+   545	
+   546		/*
+   547		 * In error case, need to unmap all messages based on the msg_idx_cnt.
+   548		 * Non-error case unmap all the processed messages.
+   549		 */
+   550		if (gi2c->err)
+   551			msg_xfer_cnt = tx_multi_xfer->msg_idx_cnt;
+   552		else
+   553			msg_xfer_cnt = tx_multi_xfer->irq_cnt * NUM_MSGS_PER_IRQ;
+   554	
+   555		/* Unmap the processed DMA buffers based on the received interrupt count */
+   556		for (; tx_multi_xfer->unmap_msg_cnt < msg_xfer_cnt; tx_multi_xfer->unmap_msg_cnt++) {
+   557			if (tx_multi_xfer->unmap_msg_cnt == gi2c->num_msgs)
+   558				break;
+   559			wr_idx = tx_multi_xfer->unmap_msg_cnt % QCOM_GPI_MAX_NUM_MSGS;
+   560			geni_i2c_gpi_unmap(gi2c, &msgs[tx_multi_xfer->unmap_msg_cnt],
+   561					   tx_multi_xfer->dma_buf[wr_idx],
+ > 562					   tx_multi_xfer->dma_addr[wr_idx], NULL, NULL);
+   563			tx_multi_xfer->freed_msg_cnt++;
+   564		}
+   565	}
+   566	
+   567	static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[], int cur_msg_idx,
+   568				struct dma_slave_config *config, dma_addr_t *dma_addr_p,
+   569				void **buf, unsigned int op, struct dma_chan *dma_chan)
+   570	{
+   571		struct gpi_i2c_config *peripheral;
+   572		unsigned int flags;
+   573		void *dma_buf;
+   574		dma_addr_t addr;
+   575		enum dma_data_direction map_dirn;
+   576		enum dma_transfer_direction dma_dirn;
+   577		struct dma_async_tx_descriptor *desc;
+   578		int ret;
+   579		struct gpi_multi_xfer *gi2c_gpi_xfer;
+   580		dma_cookie_t cookie;
+   581	
+   582		peripheral = config->peripheral_config;
+   583		gi2c_gpi_xfer = &peripheral->multi_xfer;
+   584		gi2c_gpi_xfer->msg_idx_cnt = cur_msg_idx;
+   585		dma_buf = gi2c_gpi_xfer->dma_buf[gi2c_gpi_xfer->buf_idx];
+ > 586		addr = gi2c_gpi_xfer->dma_addr[gi2c_gpi_xfer->buf_idx];
+   587	
+   588		dma_buf = i2c_get_dma_safe_msg_buf(&msgs[gi2c_gpi_xfer->msg_idx_cnt], 1);
+   589		if (!dma_buf) {
+   590			gi2c->err = -ENOMEM;
+   591			return -ENOMEM;
+   592		}
+   593	
+   594		if (op == I2C_WRITE)
+   595			map_dirn = DMA_TO_DEVICE;
+   596		else
+   597			map_dirn = DMA_FROM_DEVICE;
+   598	
+   599		addr = dma_map_single(gi2c->se.dev->parent,
+   600				      dma_buf, msgs[gi2c_gpi_xfer->msg_idx_cnt].len,
+   601				      map_dirn);
+   602		if (dma_mapping_error(gi2c->se.dev->parent, addr)) {
+   603			i2c_put_dma_safe_msg_buf(dma_buf, &msgs[gi2c_gpi_xfer->msg_idx_cnt],
+   604						 false);
+   605			gi2c->err = -ENOMEM;
+   606			return -ENOMEM;
+   607		}
+   608	
+   609		if (gi2c->is_tx_multi_xfer) {
+   610			if (((gi2c_gpi_xfer->msg_idx_cnt + 1) % NUM_MSGS_PER_IRQ))
+   611				peripheral->flags |= QCOM_GPI_BLOCK_EVENT_IRQ;
+   612			else
+   613				peripheral->flags &= ~QCOM_GPI_BLOCK_EVENT_IRQ;
+   614	
+   615			/* BEI bit to be cleared for last TRE */
+   616			if (gi2c_gpi_xfer->msg_idx_cnt == gi2c->num_msgs - 1)
+   617				peripheral->flags &= ~QCOM_GPI_BLOCK_EVENT_IRQ;
+   618		}
+   619	
+   620		/* set the length as message for rx txn */
+   621		peripheral->rx_len = msgs[gi2c_gpi_xfer->msg_idx_cnt].len;
+   622		peripheral->op = op;
+   623	
+   624		ret = dmaengine_slave_config(dma_chan, config);
+   625		if (ret) {
+   626			dev_err(gi2c->se.dev, "dma config error: %d for op:%d\n", ret, op);
+   627			goto err_config;
+   628		}
+   629	
+   630		peripheral->set_config = 0;
+   631		peripheral->multi_msg = true;
+   632		flags = DMA_PREP_INTERRUPT | DMA_CTRL_ACK;
+   633	
+   634		if (op == I2C_WRITE)
+   635			dma_dirn = DMA_MEM_TO_DEV;
+   636		else
+   637			dma_dirn = DMA_DEV_TO_MEM;
+   638	
+   639		desc = dmaengine_prep_slave_single(dma_chan, addr,
+   640						   msgs[gi2c_gpi_xfer->msg_idx_cnt].len,
+   641						   dma_dirn, flags);
+   642		if (!desc) {
+   643			dev_err(gi2c->se.dev, "prep_slave_sg failed\n");
+   644			gi2c->err = -EIO;
+   645			goto err_config;
+   646		}
+   647	
+   648		desc->callback_result = i2c_gpi_cb_result;
+   649		desc->callback_param = gi2c;
+   650	
+   651		if (!((msgs[cur_msg_idx].flags & I2C_M_RD) && op == I2C_WRITE)) {
+   652			gi2c_gpi_xfer->msg_idx_cnt++;
+   653			gi2c_gpi_xfer->buf_idx = (cur_msg_idx + 1) % QCOM_GPI_MAX_NUM_MSGS;
+   654		}
+   655		cookie = dmaengine_submit(desc);
+   656		if (dma_submit_error(cookie)) {
+   657			dev_err(gi2c->se.dev,
+   658				"%s: dmaengine_submit failed (%d)\n", __func__, cookie);
+   659			return -EINVAL;
+   660		}
+   661	
+   662		if (gi2c->is_tx_multi_xfer) {
+   663			dma_async_issue_pending(gi2c->tx_c);
+   664			if ((cur_msg_idx == (gi2c->num_msgs - 1)) ||
+   665			    (gi2c_gpi_xfer->msg_idx_cnt >=
+   666			     QCOM_GPI_MAX_NUM_MSGS + gi2c_gpi_xfer->freed_msg_cnt)) {
+   667				ret = gpi_multi_desc_process(gi2c->se.dev, gi2c_gpi_xfer,
+   668							     gi2c->num_msgs, XFER_TIMEOUT,
+   669							     &gi2c->done);
+   670				if (ret) {
+   671					dev_dbg(gi2c->se.dev,
+   672						"I2C multi write msg transfer timeout: %d\n",
+   673						ret);
+   674					gi2c->err = -ETIMEDOUT;
+   675					goto err_config;
+   676				}
+   677			}
+   678		} else {
+   679			/* Non multi descriptor message transfer */
+   680			*buf = dma_buf;
+   681			*dma_addr_p = addr;
+   682		}
+   683		return 0;
+   684	
+   685	err_config:
+   686		dma_unmap_single(gi2c->se.dev->parent, addr,
+   687				 msgs[cur_msg_idx].len, map_dirn);
+   688		i2c_put_dma_safe_msg_buf(dma_buf, &msgs[cur_msg_idx], false);
+   689		return ret;
+   690	}
+   691	
+
+-- 
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
+_______________________________________________
+Linaro-mm-sig mailing list -- linaro-mm-sig@lists.linaro.org
+To unsubscribe send an email to linaro-mm-sig-leave@lists.linaro.org
